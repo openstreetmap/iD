@@ -350,7 +350,6 @@
     },
     "help": {
         "title": "Pomoč",
-        "editing_saving": "# Urejanje & shranjevanje\n\nUrejevalnik je narejen predvsem za delo na spletu, trenutno do njega dostopate\npreko spletne strani.\n\n### Izbiranje objektov\n\nObjekte na zemljevidu, kot so cesta ali POI izberete tako, da kliknete nanje\nna zemljevidu. Izbrani objekt se bo poudaril, odprla se bo plošča z informacijami\no objektu in pokazal se bo nabor ukazov, ki jih lahko izvedete na objektu.\n\nZa izbiro večih objektov držite pritisnjeno tipko 'Shift'. Medtem lahko s klikom\nizberete na želene objekte ali pa z miško narišete kvadrat, v katerem so objekti.\nTako se bodo označili vsi objekti v kvadratu.\n\n### Shranjevanje sprememb\n\nVse spremembe - npr. urejene ceste, stavbe, mesta - so shranjene lokalno (na vaš računalnik),\ndokler jih ne shranite na strežnik. Ne skrbite, če med urejanjem naredite napako,\nsaj lahko spremembe razveljavite s klikom na gumb 'razveljavi', lahko pa jih tudi \nponoviteand s klikom na gumb 'ponovi'.\n\nKo končate z urejanjem skupine objektov, npr. dela mesta, in boste z urejanjem\nnadaljevali na drugem območju ali skupini objektov, kliknite 'Shrani'.Nato se bo\nprikazal povzetek vaših sprememb, urejevalnik pa bo tudi preveril in opozoril,\nče bo s spremembami karkoli narobe.\n\nČe bo vse v redu, lahko dodate kratek komentar o opravljenih spremembah\nin še enkrat kliknete 'Shrani' za pošiljanje sprememb na\n[OpenStreetMap.org](http://www.openstreetmap.org/), kjer jih bodo vsi ostali \nuporabniki videli in kasneje lahko tudi nadgrajevali oz. izboljšali.\n\nČe ne morete dokončati urejanja v enem zamahu, lahko pustite urejevalnik odprt\nin se vrnete (na isti računalnik in isti brskalnik) - urejevalnik vam bo ponudil\nobnovitev vseh opravljenih, toda ne še na strežnih poslanih sprememb.\n",
         "roads": "# Ceste\n\nS tem urejevalnikom lahko ceste ustvarjate, popravljate in jih brišete. Ceste so lahko vseh\ntipov: poti, avtoceste, kolovozi, kolesarske steze idr. - vsak pogosto prečkan del ceste\n\nnaj bi bil kartiran.\n\n### Izbiranje\n\nZa izbiranje ceste kliknite nanjo. Pokazal se bo obris ceste, ob njem pa\nmajhen meni z orodji in stranski meni z več informacijami o tej cesti.\n\n### Spreminjanje\n\nPogosto boste opazili ceste, ki se ne prekrivajo s sliko v ozadju,\nali z GPS sledjo. Te ceste lahko prilagodite tako, da so na pravilnem\nmestu.\n\nNajprej klinite na cesto, ki jo želite spremeniti. Cesta bo postala poudarjena in vzdolž\nnje se bodo prikazala vozlišča, ki jih lahko premaknete na pravo mesto. Če želite\ndodati nova vozlišča za bolj podroben potek ceste, dvokliknite na del ceste, ki\nše nima vozlišča, in pojavilo se bo novo vozlišče.\nČe se cesta dotika druge ceste, toda na zemljevidu ni pravilno povezana, \nlahko enega od njenih vozlišč premaknete na drugo cesto in ju tako\npovežete. Pravilno povezane ceste so pomembne za zemljevid\nin nujne za samodejno iskanje pot med različnimi kraji.\nS klikom na 'Premakni' ali s pritiskom tipke 'M' na tipkovnici lahko aktivirate orodje\nza premik celotne ceste naenkrat; premik je končan ob naslednjem kliku.\n### Odstranjevanje\nČe je potek ceste v celoti napačen - npr. ko cesta na satelitskem posnetku sploh ne obstaja\noz. še bolje, ko imate informacijo o tem iz prve roke - jo lahko izbrišete ter jo tako\nodstranite z zemljevida. Pri brisanju objektov bodite pozorni - \nkot pri ostalih načinih urejanja bodo posledice vidne vsakomur. Včasih so satelitski posnetki\nzastareli in morda zato kakšne ceste na njih še ni.\nCesto izbrišete tako, da najprej kliknete nanjo, nato pa kliknete na ikono za smetnjak ali\npa pritisnete tipko 'Izbriši'.\n\n### Creating\n\nSte opazili, da na zemljevidu manjka kakšna cesta? Za začetek risanja kliknite ikono 'Črta' \nlevo zgoraj v urejevalniku ali pa pritisnite tipko '2'.\nKliknite na zemljevid na začetek nove ceste. Če se cesta odcepi z že obstoječe ceste,\nzačnite s klikom na mesto, kjer se ločita.\nNato klikajte na točke vzdolž ceste v pravi smeri (glede na satelitske posnetke ali GPS)\nČe cesta, ki jo rišete, prečka drugo cesto, ju povežite s klikom na njuno križišče.\nKo končate, dvokliknite z miško ali na tipkovnici pritisnite tipko 'Return' ali 'Enter'.\n",
         "imagery": "# Slikovni posnetki\n\nZračne/satelitske fotografije so pomemben vir za kartiranje. Kombinacija letalskih\nposnetkov, satelitski posnetki in brezplačni viri so dostopni v\nurejevalniku v meniju 'Nastavitve ozadja' na desni.\nZa prikaz so prednastavljen [Bing Maps](http://www.bing.com/maps/) satelitski posnetki,\na ob premikanju in povečevanju zemljevida se bodo prikazali tudi ostali razpoložljivi viri.\nV nekaterih državah, kot so ZDA, Francija ali Danska, so za posamezna območja na voljo tudi posnetki\nz zelo veliko prostorsko ločljivostjo.\nPosnetki so zaradi napak na strani ponudnika včasih zamaknjeni glede na zemljevid.\nČe vidite, da je več cest zamaknjenih glede na posnetek v ozadju,\ncest ne premikajte. Namesto tega lahko prilagodite posnetek tako, da se prekriva z\nobstoječimi podatki na zemljevidu; to storite s klikom na 'Popravi lego' na dnu\nuporabniškega vmesnika 'Nastavitve ozadja'.\n",
         "addresses": "# Naslovi\n\nNaslovi so ena od najbolj uporabnih informacij za zemljevid.\n\nČeprav so naslovi pogosto predstavljeni kot deli ulic, so na OpenStreetMap\nzabeležni kot lastnost stavb in mest ob ulicah.\n\nNaslove lahko dodate točkovnim objektom in tudi obrisom stavb.\nNajboljši vir naslovov je lastna raziskava oz. zbiranje podatkov ali pa \nlastno znanje. Tako kot za ostale objekte tudi tu velja, da je kopiranje \nz ostalih tržnih virov, kot je Google Zemljevidi, strogo prepovedano.\n\n",
@@ -1179,7 +1178,7 @@
             },
             "aerialway/station": {
                 "name": "Postaja žičnice",
-                "terms": "Žičniška postaja,postaja gondole"
+                "terms": "žičniška postaja,postaja gondole"
             },
             "aerialway/t-bar": {
                 "name": "Sidra",
@@ -1187,7 +1186,7 @@
             },
             "aeroway": {
                 "name": "Letalstvo",
-                "terms": "Aeronavtika,letalski promet,poleti"
+                "terms": "aeronavtika,letalski promet,poleti"
             },
             "aeroway/aerodrome": {
                 "name": "Letališče",
@@ -1199,7 +1198,7 @@
             },
             "aeroway/gate": {
                 "name": "Vrata",
-                "terms": "Letališka vrata,vrata za na letalo"
+                "terms": "letališka vrata,vrata za na letalo"
             },
             "aeroway/hangar": {
                 "name": "Hangar",
@@ -1211,11 +1210,11 @@
             },
             "aeroway/runway": {
                 "name": "Vzletno-pristajalna steza",
-                "terms": "vzletišče, pristajališče, pista"
+                "terms": "vzletišče,pristajališče,pista"
             },
             "aeroway/taxiway": {
                 "name": "Vozna steza",
-                "terms": "Povezovalna steza"
+                "terms": "povezovalna steza"
             },
             "aeroway/terminal": {
                 "name": "Letališki terminal",
@@ -1223,11 +1222,11 @@
             },
             "amenity": {
                 "name": "Storitev",
-                "terms": "Usluge"
+                "terms": "usluge"
             },
             "amenity/arts_centre": {
                 "name": "Center umetnosti",
-                "terms": "Center kulture,središče kulture,umetnostno središče"
+                "terms": "center kulture,središče kulture,umetnostno središče"
             },
             "amenity/atm": {
                 "name": "Bankomat",
@@ -1267,7 +1266,7 @@
             },
             "amenity/bus_station": {
                 "name": "Avtobusna postaja",
-                "terms": "AP"
+                "terms": "ap"
             },
             "amenity/cafe": {
                 "name": "Kavarna",
@@ -1374,7 +1373,7 @@
             },
             "amenity/parking_entrance": {
                 "name": "Vzhod/izhod v parkirno hišo",
-                "terms": "Uvoz/izvoz iz parkirne hiše"
+                "terms": "uvoz/izvoz iz parkirne hiše"
             },
             "amenity/pharmacy": {
                 "name": "Lekarna",
@@ -1386,7 +1385,7 @@
             },
             "amenity/place_of_worship/buddhist": {
                 "name": "Budistični tempelj",
-                "terms": "Budistični center"
+                "terms": "budistični center"
             },
             "amenity/place_of_worship/christian": {
                 "name": "Cerkev",
@@ -1394,7 +1393,7 @@
             },
             "amenity/place_of_worship/jewish": {
                 "name": "Sinagoga",
-                "terms": "židovski verski objekt,  judovski verski objekt, judovska sinagoga, judaizem"
+                "terms": "židovski verski objekt, judovski verski objekt,judovska sinagoga,judaizem"
             },
             "amenity/place_of_worship/muslim": {
                 "name": "Mošeja",
@@ -1642,7 +1641,7 @@
             },
             "building/hut": {
                 "name": "Koča",
-                "terms": "dom, lovska koča"
+                "terms": "dom,lovska koča"
             },
             "building/industrial": {
                 "name": "Industrijska zgradba",
@@ -1654,7 +1653,7 @@
             },
             "building/residential": {
                 "name": "Stanovanjska stavba",
-                "terms": "hiša, blok,stanovanjski blok"
+                "terms": "hiša,blok,stanovanjski blok"
             },
             "building/retail": {
                 "name": "Trgovska stavba",
@@ -1725,7 +1724,7 @@
             },
             "craft/carpenter": {
                 "name": "Mizar",
-                "terms": "tesar, mizar"
+                "terms": "tesar,mizar"
             },
             "craft/carpet_layer": {
                 "name": "Preprogar",
@@ -1761,7 +1760,7 @@
             },
             "craft/hvac": {
                 "name": "KGH",
-                "terms": "centralne naprave za klimatizacijo, ogrevanje in hlajenje"
+                "terms": "centralne naprave za klimatizacijo,ogrevanje in hlajenje"
             },
             "craft/insulator": {
                 "name": "Izolacije",
@@ -1885,7 +1884,7 @@
             },
             "emergency/fire_hydrant": {
                 "name": "Požarni hidrant",
-                "terms": "hidrant, vodni hidrant"
+                "terms": "hidrant,vodni hidrant"
             },
             "emergency/phone": {
                 "name": "SOS telefon",
@@ -1894,14 +1893,6 @@
             "entrance": {
                 "name": "Vhod/Izhod",
                 "terms": "vstop/izstop"
-            },
-            "footway/crossing": {
-                "name": "Prehod za pešce",
-                "terms": "zebra"
-            },
-            "footway/crosswalk": {
-                "name": "Prehod za pešce",
-                "terms": "prehod,zebra"
             },
             "footway/sidewalk": {
                 "name": "Pločnik",
@@ -1955,14 +1946,6 @@
                 "name": "Avtobusno postajališče",
                 "terms": "avtobusna postaja"
             },
-            "highway/crossing": {
-                "name": "Prehod za pešce",
-                "terms": "zebra"
-            },
-            "highway/crosswalk": {
-                "name": "Prehod za pešce",
-                "terms": "Prehod,zebra"
-            },
             "highway/cycleway": {
                 "name": "Kolesarska steza",
                 "terms": "kolesarska pot,steza za kolesarje"
@@ -1981,7 +1964,7 @@
             },
             "highway/motorway": {
                 "name": "Avtocesta",
-                "terms": "AC"
+                "terms": "ac"
             },
             "highway/motorway_junction": {
                 "name": "Avtocestni priključek / Izvoz",
@@ -1994,10 +1977,6 @@
             "highway/path": {
                 "name": "Pot",
                 "terms": "steza,gaz"
-            },
-            "highway/pedestrian": {
-                "name": "Peš cona",
-                "terms": "pločnik,območje za pešce"
             },
             "highway/primary": {
                 "name": "Glavna cesta",
@@ -2117,7 +2096,7 @@
             },
             "historic/memorial": {
                 "name": "Spomenik",
-                "terms": "spominska plošča, obeležje"
+                "terms": "spominska plošča,obeležje"
             },
             "historic/monument": {
                 "name": "Spomenik",
@@ -2134,10 +2113,6 @@
             "historic/wayside_shrine": {
                 "name": "Kapelica",
                 "terms": "kapelica"
-            },
-            "landuse": {
-                "name": "Raba tal",
-                "terms": "dejanska raba tal,namembnost zemljišča"
             },
             "landuse/allotments": {
                 "name": "Vrtički",
@@ -2233,7 +2208,7 @@
             },
             "leisure/pitch": {
                 "name": "Športno igrišče",
-                "terms": "Športu namenjena površina"
+                "terms": "športu namenjena površina"
             },
             "leisure/pitch/american_football": {
                 "name": "Igrišče za ameriški nogomet",
@@ -2455,7 +2430,7 @@
             },
             "office/administrative": {
                 "name": "Upravna enota",
-                "terms": "Upravni urad,upravna pisarna"
+                "terms": "upravni urad,upravna pisarna"
             },
             "office/architect": {
                 "name": "Arhitekt",
@@ -2471,7 +2446,7 @@
             },
             "office/employment_agency": {
                 "name": "Agencija za zaposlovanje",
-                "terms": "Zavod za zaposlovanje,posredovanje dela"
+                "terms": "zavod za zaposlovanje,posredovanje dela"
             },
             "office/estate_agent": {
                 "name": "Nepremičninska agencija",
@@ -2491,7 +2466,7 @@
             },
             "office/it": {
                 "name": "Strokovnjak za informacijske tehnologije",
-                "terms": "IT strokovnjak,informacijski strokovnjak"
+                "terms": "it strokovnjak,informacijski strokovnjak"
             },
             "office/lawyer": {
                 "name": "Pravna pisarna",
@@ -2636,10 +2611,6 @@
             "railway/halt": {
                 "name": "Železniško postajališče",
                 "terms": "postaja brez perona in objektov"
-            },
-            "railway/level_crossing": {
-                "name": "Nivojsko križišče",
-                "terms": "andrejev križ,potni prehod"
             },
             "railway/monorail": {
                 "name": "Enotirna železnica",
@@ -2811,7 +2782,7 @@
             },
             "shop/hairdresser": {
                 "name": "Frizer",
-                "terms": "Frizerski salon"
+                "terms": "frizerski salon"
             },
             "shop/hardware": {
                 "name": "Železnina",
@@ -2928,7 +2899,7 @@
             },
             "shop/variety_store": {
                 "name": "Trgovina z mešanim blagom",
-                "terms": "Vse za _ _ _ €"
+                "terms": "vse za _ _ _ €"
             },
             "shop/video": {
                 "name": "Videoteka",
@@ -3004,7 +2975,7 @@
             },
             "tourism/zoo": {
                 "name": "Živalski vrt",
-                "terms": "ZOO"
+                "terms": "zoo"
             },
             "type/boundary": {
                 "name": "Meja",
@@ -3024,31 +2995,31 @@
             },
             "type/restriction/no_left_turn": {
                 "name": "Ni mogoče zaviti levo",
-                "terms": "Zavijanje levo ni dovoljeno"
+                "terms": "zavijanje levo ni dovoljeno"
             },
             "type/restriction/no_right_turn": {
                 "name": "Ni mogoče zaviti desno",
-                "terms": "Zavijanje desno ni dovoljeno"
+                "terms": "zavijanje desno ni dovoljeno"
             },
             "type/restriction/no_straight_on": {
                 "name": "Ni mogoče nadaljevati naravnost",
-                "terms": "Nadaljevanje naravnost ni dovoljen"
+                "terms": "nadaljevanje naravnost ni dovoljen"
             },
             "type/restriction/no_u_turn": {
                 "name": "Ni mogoče polkrožno obrniti",
-                "terms": "Polkrožno obračanje ni dovoljeno"
+                "terms": "polkrožno obračanje ni dovoljeno"
             },
             "type/restriction/only_left_turn": {
                 "name": "Možno je zaviti samo levo",
-                "terms": "Dovoljeno je zaviti samo levo."
+                "terms": "dovoljeno je zaviti samo levo."
             },
             "type/restriction/only_right_turn": {
                 "name": "Možno je zaviti samo desno",
-                "terms": "Dovoljeno je zaviti samo desn"
+                "terms": "dovoljeno je zaviti samo desn"
             },
             "type/restriction/only_straight_on": {
                 "name": "Možno je samo nadaljevati naravnost",
-                "terms": "Zavijanje ni dovoljeno."
+                "terms": "zavijanje ni dovoljeno."
             },
             "type/route": {
                 "name": "Proga",

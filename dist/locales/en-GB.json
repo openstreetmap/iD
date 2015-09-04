@@ -247,18 +247,18 @@
         },
         "presets": {
             "aerialway/gondola": {
-                "terms": "Dangleway"
+                "terms": "dangleway"
             },
             "amenity/arts_centre": {
                 "name": "Arts Centre"
             },
             "amenity/fuel": {
                 "name": "Petrol Station",
-                "terms": "gas, fuel, propane, diesel, lng, cng, biodiesel"
+                "terms": "gas,fuel,propane,diesel,lng,cng,biodiesel"
             },
             "amenity/post_box": {
                 "name": "Post Box",
-                "terms": "Mailbox"
+                "terms": "mailbox"
             },
             "amenity/ranger_station": {
                 "name": "Warden Station"
@@ -272,14 +272,8 @@
             "building/terrace": {
                 "name": "Terraced houses"
             },
-            "footway/crosswalk": {
-                "name": "Pedestrian Crossing"
-            },
             "highway/bridleway": {
                 "name": "Bridleway"
-            },
-            "highway/crosswalk": {
-                "name": "Zebra Crossing"
             },
             "leisure/pitch/baseball": {
                 "name": "Baseball"

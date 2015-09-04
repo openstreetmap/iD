@@ -69,7 +69,9 @@ iD.presets.Collection = function(collection) {
                     return a.preset;
                 });
 
-            // finds close matches to value in preset.terms
+            // finds close matches to value in preset.terms.
+            // preset.terms is made lowercase upon retrieval from
+            // Transifex
             var leventstein_terms = _.filter(searchable, function(a) {
                     return _.any(a.terms() || [], function(b) {
                         return iD.util.editDistance(value, b) + Math.min(value.length - b.length, 0) < 3;

@@ -1,7 +1,7 @@
 {
     "modes": {
         "add_area": {
-            "title": "Polygone",
+            "title": "Surface",
             "description": "Ajouter des parcs, des bâtiments, des lacs ou d'autres polygones à la carte.",
             "tail": "Cliquez sur la carte pour ajouter un polygone tel qu'un parc, un lac ou un bâtiment."
         },
@@ -323,7 +323,11 @@
         "custom_button": "Modifier le fond personnalisé",
         "custom_prompt": "Saisir un template d'URL de tuile. Les symboles sont {z}, {x}, {y} pour la structure Z/X/Y et {u} pour la balance des domaines.",
         "fix_misalignment": "Corriger l'alignement",
-        "reset": "réinitialiser"
+        "reset": "réinitialiser",
+        "minimap": {
+            "description": "Minicarte",
+            "tooltip": "Montre une carte de vue d'ensemble pour aider à localiser la zone actuellement affichée."
+        }
     },
     "map_data": {
         "title": "Données cartographiques",
@@ -494,7 +498,7 @@
     "help": {
         "title": "Aide",
         "help": "# Aide\n\nCeci est un éditeur pour [OpenStreetMap](http://www.openstreetmap.org/), la \ncarte du monde libre et éditable. Vous pouvez l'utiliser pour ajouter ou mettre à jour\nles données dans votre zone, et participer ainsi à la réalisation d'une carte du monde libre et à données ouvertes\nmeilleure pour tout le monde.\n\nLes modifications que vous réaliserez sur cette carte seront visibles par tous les utilisateurs d'\nOpenStreetMap.  Pour commencer à éditer, vous devez vous\n[connecter](https://www.openstreetmap.org/login).\n\nL'[éditeur iD](http://ideditor.com/) est un projet collaboratif dont le [code\nsource est disponible sur GitHub](https://github.com/openstreetmap/iD).\n",
-        "editing_saving": "# Éditer et sauvegarder⏎\n⏎\nCet éditeur est conçu principalement pour travailler en mode connecté, et vous l'accéder depuis un site Web en ce moment.⏎\n⏎\n### Sélectionner un élément de la carte⏎\n⏎\nPour sélection un élément de la carte, tel qu'une rue ou un point d'intérêt, cliquez sur ce dernier⏎\nsur la carte. Cette action mettra l'élément en surbrillance, et ouvrira le panneau latéral⏎\nqui affiche les propriétés de l'élément. Un menu apparaîtra également sur la carte,⏎\npermettant de poser des actions sur l'élément (telles que le déplacer, repositionner⏎\nses points constituants, etc).\n⏎\nPour sélectionner plusieurs éléments, appuyez sur la touche 'Majuscule'. Puis, cliquez⏎\nun à un sur les éléments à sélectionner. Alternativement, il est possible de dessinez un rectangle⏎\nsur la carte (toujours en appuyant sur 'Majuscule) pour effectuer la sélection multiple.⏎\nles points à sélectionner.⏎\n⏎\n### Enregistrer les modifications⏎\n⏎\nL'éditeur enregistre localement (sur votre ordinateur) toutes les modifications⏎\nque vous effectuez sur les éléments de la carte (les rues, les bâtiments, etc.).⏎\nCes modifications seront envoyées au serveur OpenStreetMap uniquement⏎\nlorsque vous appuierez sur \"Sauvegarder\".⏎\n⏎\nNe vous faites donc pas de souci si vous faites une erreur. Vous pouvez annuler⏎\ntout changement effectué en appuyant sur le bouton d'annulation (la flèche de demi-tour⏎\npointant vers la gauche).⏎\n⏎\nLorsque vous avez terminé un groupe de modifications - par exemple, vous avez⏎\ncomplété une partie de la ville et vous voulez en débuter une nouvelle,⏎\nil suffit d'appuyer sur le bouton \"Sauvegarder\". Vos changements ne seront pas⏎\nenvoyés immédiatement - vous avez l'occasion de réviser le travail effectué⏎\navant de confirmer les changements. ⏎\n⏎\nSi tout semble bon, entrez un commentaire décrivant vos changements⏎\n(par exemple: \"Ajout d'une boulangerie\" ou \"Ajout de commerces du quartier\"),⏎\npuis appuyez à nouveau sur le bouton 'Sauvegarder' (qui, cette fois-ci, apparaîtra\nen bleu dans le panneau latéral). Vos changements seront alors envoyés à⏎\n[OpenStreetMap.org](http://www.openstreetmap.org/), où il seront partagés et rendus⏎\nvisibles à tous les autres utilisateurs.\n⏎\nSi vous ne pouvez pas terminer vos changements en une seule séance, vous pouvez⏎\nfermer la fenêtre de l'éditeur. Vos changements seront enregistrés localement.⏎\nLorsque vous ouvrirez à nouveau l'éditeur, sur le même ordinateur et avec le même⏎\nnavigateur Web, l'éditeur vous proposera de récupérer le travail de la séance précédente.⏎\n",
+        "editing_saving": "# Édition & sauvegarde\n\nCet éditeur est conçu pour fonctionner de façon connecté et vous êtes \nactuellement en train de l'utiliser depuis un site web.\n\n### Sélection des éléments\n\nPour sélectionner un élément de la carte comme une route ou un point d’intérêt, \nil faut cliquer dessus sur la carte. Il sera alors mis en surbrillance et un \npanneau latéral s’ouvrira avec tous ses détails élément ainsi qu'un menu des \nactions disponibles pour cet élément.\n\nPour sélectionner plusieurs éléments, laisser appuyer sur la touche «Shift» du \nclavier. Pendant ce temps, vous pouvez au choix sélectionner les différents \néléments directement ou dessiner une zone rectangulaire à l'aide de la souris. \nLorsque le bouton de la souris est relâché, tous les objets à l'intérieur du \nrectangle seront sélectionnés.\n\n### Sauvegarde des modifications\n\nLorsque vous modifiez la carte (par exemple modification de routes, bâtiments \net places), ces changements sont conservés localement en attendant que vous \nles sauvegardiez sur le serveur. En cas d'erreur, il est possible d'annuler les \nchangements en cliquant sur le bouton idoine. De façon similaire il est possible\n de ré-appliquer un changement qui a été annulé.\n\nLorsque vous souhaitez sauvegarder sur le serveur vos changements, appuyer sur \nle bouton «Sauvegarder». La liste de vos modifications s'affichera alors, vous \npermettant de vérifier vos modifications. Par ailleurs, l'éditeur vous \npréviendra et conseillera si quelque chose semble incorrect.\n\nSi tout semble correct, vous pourrez alors écrire un commentaire du travail \neffectué (par exemple «Ajout d'une boulangerie») puis il faudra à nouveau \nappuyer sur le bouton «Sauvegarder» pour envoyer les changements sur \n[OpenStreetMap.org](http://www.openstreetmap.org/). Vos changements seront \nvisible par tous peu de temps après.\n\nSi vous ne pouvez pas terminer vos changements en une seule fois, vous pouvez \nfermer la fenêtre de l'éditeur. Vos changements seront enregistrés localement. \nLorsque vous ouvrirez à nouveau l'éditeur, sur le même ordinateur et avec le \nmême navigateur Web, l'éditeur vous proposera de récupérer le travail de la \nséance précédente.\n\n### Utilisation de l'éditeur\n\nUne liste des raccourcis claviers est disponible \n[ici](http://wiki.openstreetmap.org/wiki/ID/Shortcuts).\n",
         "roads": "# Routes\n\nVous pouvez créer, mettre à jour et supprimer des routes à l'aide de l'éditeur. Il peut s'agir de tous types de routes : chemins, autoroutes, pistes cyclables, et plus encore : toute voie régulièrement fréquentée peut être cartographiée.\n\n### Sélection\n\nCliquez sur une route pour la sélectionner. Elle sera alors surlignée et un menu 'outils' apparaîtra sur la carte, ainsi qu'une barre d'état affichant des informations supplémentaires.\n\n### Modification\n\nIl est fréquent que les routes ne soient pas bien alignées avec l'imagerie satellite ou avec les traces GPS. Vous pouvez ajuster et corriger la position des routes.\n\nCliquez d'abord sur la route à modifier. Elle est alors surlignée et des points de contrôle apparaissent qui permettent de corriger sa position. Pour ajouter des points de contrôle, double-cliquez sur un segment de la route sans nœuds.\n\nSi la route est connectée à une autre, mais que la connexion est incorrecte, vous pouvez déplacer un de ses points de contrôle sur la seconde route pour corriger la connexion. Des routes bien connectées sont essentielles pour la carte et pour fournir de bonnes informations d'itinéraire.\n\nVous pouvez également cliquer sur l'outil 'Déplacer' ou appuyer sur le raccourci `M` pour déplacer l'ensemble de la route en une fois, puis cliquer de nouveau une fois pour sauvegarder le déplacement.\n\n### Suppression\n\nSi une route est complètement fausse - c'est-à-dire qu'elle n'apparaît pas sur l'image satellite, et que dans l'idéal, vous avez confirmé qu'elle n'existe pas sur le terrain - vous pouvez la supprimer, ce qui l'enlèvera de la carte. Faites attention lorsque vous supprimez des éléments : comme n'importe quelle autre modification, le résultat sera visible par tout le monde sur la carte. Les photos aériennes sont souvent dépassées et la route est peut-être tout simplement récente.\n\nPour supprimer une route, sélectionnez-la en cliquant dessus, puis cliquez sur l'icône 'Poubelle' ou appuyez sur la touche 'Suppr'.\n\n### Création\n\nVous avez constaté qu'une route de votre connaissance manque à la carte ? Cliquez sur l'icône 'Ligne' en haut à gauche de l'éditeur ou appuyez sur le raccourci `2` pour dessiner une route. \n\nPour commencer le dessin, cliquez sur l'endroit où commence la route. Si elle commence à l'embranchement d'une autre route, commencez le dessin en cliquant à l'endroit de la connexion.\n\nCliquez ensuite régulièrement le long de la route pour ajouter des points, en utilisant l'imagerie satellite comme référence. Si la route que vous dessinez croise une autre route, connectez les deux en cliquant à l'endroit de l'intersection. Lorsque vous avez terminé le dessin, double-cliquez ou appuyez sur 'Entrée'.\n",
         "gps": "# GPS\n\nLa donnée GPS est la source la plus fiable de données pour OpenStreetMap. Cet éditeur\nsupporte les traces en local - fichiers `.gpx` sur votre ordinateur. Vous pouvez collecter\nce genre de trace GPS à l'aide de nombreuses applications pour smartphones ainsi qu'avec\ndu matériel GPS personnel.\n\nPour de la documentation sur la manière de faire un relevé GPS, lisez\n[Sur le terrain avec un GPS](http://learnosm.org/fr/beginner/using-gps/).\n\nPour utiliser un tracé GPX pour cartographier, effectuer un \"glissé-déposé\" du fichier GPX dans l'éditeur de cartes.\nS'il est reconnu, il sera ajouté à la carte comme une ligne violette en surbrillance.\nCliquez dans le menu \"Données de la carte\" sur le côté droit pour activer,\ndésactiver, ou zoomer dans ce nouveau calque GPX.\n\nLe tracé GPX n'est pas directement chargé vers OpenStreetMap - le meilleur moyen de\nl'utiliser est de dessiner sur la carte, en l'utilisant comme guide pour les nouveaux éléments que\nvous ajoutez, et aussi de le [charger dans OpenStreetMap](http://www.openstreetmap.org/trace/create) pour que les autres utilisateurs puissent s'en servir.\n",
         "imagery": "# Fond de carte⏎\n⏎\nLes photos aériennes sont une source importante pour cartographier. Une\ncompilation de photos prises d'avion, imageries satellites, et autres sources\nlibre d'utilisation sont disponibles dans l'éditeur dans le menu \"Configuration\ndu fond de carte\" à gauche.⏎\n⏎\nPar défaut, l'imagerie aérienne de [Bing Maps](http://www.bing.com/maps/)\nest utilisée dans l'éditeur, mais lorsque vous zoomez sur la carte, d'autres sources\nsont parfois disponibles dans certaines zones. Certains pays tels que la France, les\nÉtats-Unis ou le Danemark disposent d'images de très haute qualité sur certaines\nzones.⏎\n⏎\nCertaines images sont parfois décalées par rapport aux données, notamment\nà cause d'un mauvais calibrage. Si vous voyez de nombreux éléments tous décalés\npar rapport au fond de carte, ne déplacez pas immédiatement ces éléments. A la\nplace, vous pouvez ajuster le fond de carte afin qu'il soit aligné aux données en\ncliquant sur \"Corriger l'alignement\" en bas de l'interface de configuration du fond\nde carte.⏎\n",
@@ -597,6 +601,10 @@
                         "description": "Circulation interdite, sauf pour accéder aux zones desservies",
                         "title": "Interdit sauf riverains"
                     },
+                    "dismount": {
+                        "description": "Accès autorisé mais le cycliste-cavalier doit mettre pied à terre",
+                        "title": "Mettre pied à terre"
+                    },
                     "no": {
                         "description": "Accès interdit au public",
                         "title": "Interdit"
@@ -634,6 +642,7 @@
                 "label": "Adresse",
                 "placeholders": {
                     "city": "Ville",
+                    "conscriptionnumber": "123",
                     "country": "Pays",
                     "district": "District",
                     "hamlet": "Hameau",
@@ -692,6 +701,9 @@
                 "label": "Type"
             },
             "amenity": {
+                "label": "Type"
+            },
+            "area/highway": {
                 "label": "Type"
             },
             "artist": {
@@ -785,6 +797,44 @@
             },
             "cuisine": {
                 "label": "Cuisine"
+            },
+            "cycleway": {
+                "label": "Bandes cyclables",
+                "options": {
+                    "lane": {
+                        "description": "Une bande cyclable séparée du trafic automobile par une ligne peinte",
+                        "title": "Bande cyclable ordinaire"
+                    },
+                    "none": {
+                        "description": "Pas de bande cyclable",
+                        "title": "Aucun"
+                    },
+                    "opposite": {
+                        "description": "Une bande cyclable qui permet de se déplacer dans les deux sens dans une rue à sens unique",
+                        "title": "Bande cyclable à double sens"
+                    },
+                    "opposite_lane": {
+                        "description": "Une bande cyclable qui permet de se déplacer dans la direction opposée du trafic",
+                        "title": "Bande cyclable à contresens"
+                    },
+                    "share_busway": {
+                        "description": "Une bande cyclable partagée avec une voie de bus",
+                        "title": "Bande cyclable partagée avec les bus"
+                    },
+                    "shared_lane": {
+                        "description": "Une bande cyclable sans séparation avec le trafic automobile",
+                        "title": "Bande cyclable partagée"
+                    },
+                    "track": {
+                        "description": "Une voie cyclable séparée du trafic par une barrière physique",
+                        "title": "Piste cyclable"
+                    }
+                },
+                "placeholder": "Aucun",
+                "types": {
+                    "cycleway:left": "Côté gauche",
+                    "cycleway:right": "Côté droit"
+                }
             },
             "delivery": {
                 "label": "Livraison"
@@ -978,6 +1028,9 @@
             "length": {
                 "label": "Longueur (mètres)"
             },
+            "level": {
+                "label": "Niveau"
+            },
             "levels": {
                 "label": "Niveaux",
                 "placeholder": "2, 4, 6..."
@@ -1154,8 +1207,21 @@
             "recycling/glass": {
                 "label": "Accepte le verre"
             },
+            "recycling/glass_bottles": {
+                "label": "Accepte les bouteilles en verre"
+            },
             "recycling/paper": {
                 "label": "Accepte le papier"
+            },
+            "recycling/plastic": {
+                "label": "Accepte le plastique"
+            },
+            "recycling/type": {
+                "label": "Type de recyclage",
+                "options": {
+                    "centre": "Déchèterie",
+                    "container": "Conteneur de recyclage"
+                }
             },
             "ref": {
                 "label": "Référence"
@@ -1389,679 +1455,687 @@
         "presets": {
             "address": {
                 "name": "Adresse",
-                "terms": "Adresse"
+                "terms": "adresse"
             },
             "aerialway": {
                 "name": "Remontée mécanique",
-                "terms": "Remontée mécanique"
+                "terms": "remontée mécanique"
             },
             "aerialway/cable_car": {
                 "name": "Téléphérique",
-                "terms": "Télécabine,Téléphérique,Remontée mécanique"
+                "terms": "télécabine,téléphérique,remontée mécanique"
             },
             "aerialway/chair_lift": {
                 "name": "Télésiège",
-                "terms": "Télésiège,Remontée mécanique"
+                "terms": "télésiège,remontée mécanique"
             },
             "aerialway/gondola": {
                 "name": "Télécabine",
-                "terms": "Télécabine"
+                "terms": "télécabine"
             },
             "aerialway/magic_carpet": {
                 "name": "Bande transporteuse de personnes",
-                "terms": "Tapis roulant,Remontée mécanique"
+                "terms": "tapis roulant,remontée mécanique"
             },
             "aerialway/platter": {
                 "name": "Téléski",
-                "terms": "Remonte-pente, tire-fesses, téléski à enrouleurs, téléski à perches débrayables"
+                "terms": "remonte-pente,tire-fesses,téléski à enrouleurs,téléski à perches débrayables"
             },
             "aerialway/pylon": {
                 "name": "Pylône de remontée mécanique",
-                "terms": "Pylône de remontée mécanique"
+                "terms": "pylône de remontée mécanique"
             },
             "aerialway/rope_tow": {
                 "name": "Télécorde",
-                "terms": "Téléski, Tire-fesse, Télécorde"
+                "terms": "téléski,tire-fesse,télécorde"
             },
             "aerialway/station": {
                 "name": "Gare de remontée mécanique",
-                "terms": "Départ,Arrivée,Station"
+                "terms": "départ,arrivée,station"
             },
             "aerialway/t-bar": {
                 "name": "Téléski bi-place",
-                "terms": "Pioches,Remontée mécanique"
+                "terms": "pioches,remontée mécanique"
             },
             "aeroway": {
                 "name": "Aviation",
-                "terms": "Piste de décollage, Piste d'atterissage, Piste"
+                "terms": "piste de décollage,piste d'atterissage,piste"
             },
             "aeroway/aerodrome": {
                 "name": "Aéroport",
-                "terms": "Aéroport, Aérodrome, Altiport, Héliport"
+                "terms": "aéroport,aérodrome,altiport,héliport"
             },
             "aeroway/apron": {
                 "name": "Aire de stationnement",
-                "terms": "Aire de manoeuvre, tarmac"
+                "terms": "aire de manoeuvre,tarmac"
             },
             "aeroway/gate": {
                 "name": "Porte d'embarquement",
-                "terms": "Porte d'aéroport, Porte d'embarquement"
+                "terms": "porte d'aéroport,porte d'embarquement"
             },
             "aeroway/hangar": {
                 "name": "Hangar",
-                "terms": "Hangar"
+                "terms": "hangar"
             },
             "aeroway/helipad": {
                 "name": "Héliport",
-                "terms": "Hélipad, Héliport"
+                "terms": "hélipad,héliport"
             },
             "aeroway/runway": {
                 "name": "Piste d’atterrissage",
-                "terms": "Piste de décollage, Piste d'atterissage, Piste"
+                "terms": "piste de décollage,piste d'atterissage,piste"
             },
             "aeroway/taxiway": {
                 "name": "Taxiway",
-                "terms": "Voie de circulation"
+                "terms": "voie de circulation"
             },
             "aeroway/terminal": {
                 "name": "Terminal aéroportuaire",
-                "terms": "Terminal, Terminal Aéroportuaire"
+                "terms": "terminal,terminal aéroportuaire"
             },
             "amenity": {
                 "name": "Équipement",
-                "terms": "Commodité"
+                "terms": "commodité"
             },
             "amenity/arts_centre": {
                 "name": "Centre des arts",
-                "terms": "Centre artistique, Centre culturel"
+                "terms": "centre artistique,centre culturel"
             },
             "amenity/atm": {
                 "name": "Distributeur de billets",
-                "terms": "Distributeur de billets, guichet automatique, ATM"
+                "terms": "distributeur de billets,guichet automatique,atm"
             },
             "amenity/bank": {
                 "name": "Banque",
-                "terms": "Banque, Caisse populaire"
+                "terms": "banque,caisse populaire"
             },
             "amenity/bar": {
                 "name": "Bar",
-                "terms": "Bar"
+                "terms": "bar"
             },
             "amenity/bbq": {
                 "name": "Barbecue/Grill",
-                "terms": "bbq, barbecue, grill, grillades, mechoui, méchoui, "
+                "terms": "bbq,barbecue,grill,grillades,mechoui,méchoui,"
             },
             "amenity/bench": {
                 "name": "Banc",
-                "terms": "Banc public"
+                "terms": "banc public"
             },
             "amenity/bicycle_parking": {
                 "name": "Parc à vélos",
-                "terms": "Parking à vélo, Parking à bicyclette, Stationnement à vélo"
+                "terms": "parking à vélo,parking à bicyclette,stationnement à vélo"
             },
             "amenity/bicycle_rental": {
                 "name": "Location de vélos",
-                "terms": "Location de vélo, Location de bicyclette"
+                "terms": "location de vélo,location de bicyclette"
             },
             "amenity/bicycle_repair_station": {
                 "name": "Station de réparation de vélos",
-                "terms": "Borne de réparation de vélos,Point de réparation de vélos"
+                "terms": "borne de réparation de vélos,point de réparation de vélos"
             },
             "amenity/biergarten": {
                 "name": "Brasserie de plein air",
-                "terms": "Brasserie, bière, boissons alcolisées"
+                "terms": "brasserie,bière,boissons alcolisées"
             },
             "amenity/boat_rental": {
                 "name": "Location de bateau",
-                "terms": "Location de bateaux"
+                "terms": "location de bateaux"
             },
             "amenity/bureau_de_change": {
                 "name": "Échange de Devises",
-                "terms": "change, bureau de change, échange, devises, intermédiaire financier de change, banque de devises"
+                "terms": "change,bureau de change,échange,devises,intermédiaire financier de change,banque de devises"
             },
             "amenity/bus_station": {
                 "name": "Gare routière",
-                "terms": "Gare, Arrêt, Arrêt de bus"
+                "terms": "gare,arrêt,arrêt de bus"
             },
             "amenity/cafe": {
                 "name": "Café",
-                "terms": "Café"
+                "terms": "café"
             },
             "amenity/car_rental": {
                 "name": "Location de voiture",
-                "terms": "Location de voiture"
+                "terms": "location de voiture"
             },
             "amenity/car_sharing": {
                 "name": "Autopartage",
-                "terms": "Autopartage, partage de voitures"
+                "terms": "autopartage,partage de voitures"
             },
             "amenity/car_wash": {
                 "name": "Lavage de voiture, Lave auto",
-                "terms": "Lavage de voiture, lave auto"
+                "terms": "lavage de voiture,lave auto"
+            },
+            "amenity/casino": {
+                "name": "Casino",
+                "terms": "casino"
             },
             "amenity/charging_station": {
                 "name": "Borne de recharge",
-                "terms": "Station de recharge, Borne de recharge"
+                "terms": "station de recharge,borne de recharge"
             },
             "amenity/childcare": {
                 "name": "Nurserie/Garde d'enfants",
-                "terms": "Nurserie, Garde d'enfants"
+                "terms": "nurserie,garde d'enfants"
             },
             "amenity/cinema": {
                 "name": "Cinéma",
-                "terms": "Cinéma"
+                "terms": "cinéma"
             },
             "amenity/clinic": {
                 "name": "Clinique",
-                "terms": "Clinique"
+                "terms": "clinique"
             },
             "amenity/clock": {
                 "name": "Horloge",
-                "terms": "Horloge publique"
+                "terms": "horloge publique"
             },
             "amenity/college": {
                 "name": "Terrains d'établissement d'enseignement supérieur non universitaire",
-                "terms": "Terrains d'établissement d'enseignement supérieur non universitaire"
+                "terms": "terrains d'établissement d'enseignement supérieur non universitaire"
             },
             "amenity/community_centre": {
                 "name": "Salle des fêtes",
-                "terms": "Salle festive, Salle polyvalente, Centre communautaire => Canada"
+                "terms": "salle festive,salle polyvalente,centre communautaire => canada"
             },
             "amenity/compressed_air": {
                 "name": "Air comprimé",
-                "terms": "Air comprimé"
+                "terms": "air comprimé"
             },
             "amenity/courthouse": {
                 "name": "Tribunal",
-                "terms": "Palais de Justice, Tribunal"
+                "terms": "palais de justice,tribunal"
             },
             "amenity/dentist": {
                 "name": "Dentiste",
-                "terms": "Dentiste"
+                "terms": "dentiste"
             },
             "amenity/doctor": {
                 "name": "Médecin",
-                "terms": "Docteur, Médecin"
+                "terms": "docteur,médecin"
             },
             "amenity/dojo": {
                 "name": "Dojo",
-                "terms": "Académie d'arts martiaux"
+                "terms": "académie d'arts martiaux"
             },
             "amenity/drinking_water": {
                 "name": "Eau potable",
-                "terms": "Eau potable"
+                "terms": "eau potable"
             },
             "amenity/embassy": {
                 "name": "Ambassade",
-                "terms": "Ambassade"
+                "terms": "ambassade"
             },
             "amenity/fast_food": {
                 "name": "Restauration rapide",
-                "terms": "Fast Food, Restauration Rapide"
+                "terms": "fast food,restauration rapide"
             },
             "amenity/fire_station": {
                 "name": "Caserne de pompiers",
-                "terms": "Station de pompiers, Caserne de pompiers"
+                "terms": "station de pompiers,caserne de pompiers"
             },
             "amenity/fountain": {
                 "name": "Fontaine",
-                "terms": "Fontaine"
+                "terms": "fontaine"
             },
             "amenity/fuel": {
                 "name": "Station service",
-                "terms": "Station essence, Station service"
+                "terms": "station essence,station service"
             },
             "amenity/grave_yard": {
                 "name": "Cimetière",
-                "terms": "Cimetière"
+                "terms": "cimetière"
             },
             "amenity/grit_bin": {
                 "name": "Bac à sel",
-                "terms": "Bacs à sel de déneigement"
+                "terms": "bacs à sel de déneigement"
             },
             "amenity/hospital": {
                 "name": "Terrains d'hôpital",
-                "terms": "Terrains d'hôpital"
+                "terms": "terrains d'hôpital"
             },
             "amenity/kindergarten": {
                 "name": "Terrains d'école maternelle / jardin d'enfants",
-                "terms": "Terrains d'école maternelle / jardin d'enfants"
+                "terms": "terrains d'école maternelle / jardin d'enfants"
             },
             "amenity/library": {
                 "name": "Bibliothèque",
-                "terms": "Bibliothèque"
+                "terms": "bibliothèque"
             },
             "amenity/marketplace": {
                 "name": "Place de marché",
-                "terms": "Marché"
+                "terms": "marché"
             },
             "amenity/nightclub": {
                 "name": "Boîte de nuit",
-                "terms": "Boîte de nuit"
+                "terms": "boîte de nuit"
             },
             "amenity/parking": {
                 "name": "Parc de stationnement",
-                "terms": "Parc de stationnement, parking"
+                "terms": "parc de stationnement,parking"
             },
             "amenity/parking_entrance": {
                 "name": "Entrée/Sortie de parking",
-                "terms": "Entrée/Sortie de parking"
+                "terms": "entrée/sortie de parking"
             },
             "amenity/pharmacy": {
                 "name": "Pharmacie",
-                "terms": "Pharmacie"
+                "terms": "pharmacie"
             },
             "amenity/place_of_worship": {
                 "name": "Lieu de culte",
-                "terms": "Édifice religieux"
+                "terms": "édifice religieux"
             },
             "amenity/place_of_worship/buddhist": {
                 "name": "Temple boudhiste",
-                "terms": "Temple boudhiste"
+                "terms": "temple boudhiste"
             },
             "amenity/place_of_worship/christian": {
                 "name": "Église",
-                "terms": "Église"
+                "terms": "église"
             },
             "amenity/place_of_worship/jewish": {
                 "name": "Synagogue",
-                "terms": "Synagogue"
+                "terms": "synagogue"
             },
             "amenity/place_of_worship/muslim": {
                 "name": "Mosquée",
-                "terms": "Mosquée"
+                "terms": "mosquée"
             },
             "amenity/police": {
                 "name": "Poste de police",
-                "terms": "Police, Gendarmerie"
+                "terms": "police,gendarmerie"
             },
             "amenity/post_box": {
                 "name": "Boîte aux lettres",
-                "terms": "Boîte aux lettres"
+                "terms": "boîte aux lettres"
             },
             "amenity/post_office": {
                 "name": "Bureau de poste",
-                "terms": "Bureau de poste"
+                "terms": "bureau de poste"
             },
             "amenity/pub": {
                 "name": "Pub",
-                "terms": "Pub"
+                "terms": "pub"
             },
             "amenity/public_bookcase": {
                 "name": "Microbibliothèque",
-                "terms": "Bibliothèque en libre service, Micro-bibliothèque"
+                "terms": "bibliothèque en libre service,micro-bibliothèque"
             },
             "amenity/ranger_station": {
                 "name": "Services publics des parcs nationaux",
-                "terms": "Services publics des parcs nationaux"
+                "terms": "services publics des parcs nationaux"
             },
             "amenity/recycling": {
                 "name": "Recyclage",
-                "terms": "Recyclage"
+                "terms": "recyclage"
             },
             "amenity/register_office": {
                 "name": "Bureau d'état-civil",
-                "terms": "Bureau d'enregistrement"
+                "terms": "bureau d'enregistrement"
             },
             "amenity/restaurant": {
                 "name": "Restaurant",
-                "terms": "Restaurant"
+                "terms": "restaurant"
             },
             "amenity/sanitary_dump_station": {
                 "name": "Station de vidange sanitaire",
-                "terms": "Station de vidange, sanitaires, mobilehome ,camping, toilettes chimiques"
+                "terms": "station de vidange,sanitaires,mobilehome ,camping,toilettes chimiques"
             },
             "amenity/school": {
                 "name": "Terrains d'école primaire, collège, lycée,  Cycles primaires et secondaires",
-                "terms": "Terrains d'école primaire, collège, lycée,  Cycles primaires et secondaires"
+                "terms": "terrains d'école primaire,collège,lycée, cycles primaires et secondaires"
             },
             "amenity/shelter": {
                 "name": "Abri",
-                "terms": "Abri"
+                "terms": "abri"
             },
             "amenity/social_facility": {
                 "name": "Services sociaux",
-                "terms": "Assistance sociale"
+                "terms": "assistance sociale"
             },
             "amenity/social_facility/food_bank": {
                 "name": "Banque alimentaire",
-                "terms": "Banque alimentaire"
+                "terms": "banque alimentaire"
             },
             "amenity/social_facility/group_home": {
                 "name": "Résidence collective pour personnes âgées",
-                "terms": "Résidence collective pour personnes âgées"
+                "terms": "maison de retraite"
             },
             "amenity/social_facility/homeless_shelter": {
                 "name": "Foyer pour sans-abri",
-                "terms": "Foyer pour sans-abri"
+                "terms": "foyer pour sans-abri"
             },
             "amenity/studio": {
                 "name": "Studio",
-                "terms": "Studio,Studio de télévision,Plateau de télévision,Studio de radio,Studio d'enregistrement"
+                "terms": "studio,studio de télévision,plateau de télévision,studio de radio,studio d'enregistrement"
             },
             "amenity/swimming_pool": {
                 "name": "Piscine",
-                "terms": "Piscine"
+                "terms": "piscine"
             },
             "amenity/taxi": {
                 "name": "Station de taxi",
-                "terms": "Station de taxi"
+                "terms": "station de taxi"
             },
             "amenity/telephone": {
                 "name": "Téléphone",
-                "terms": "Téléphone"
+                "terms": "téléphone"
             },
             "amenity/theatre": {
                 "name": "Théâtre",
-                "terms": "Théâtre"
+                "terms": "théâtre"
             },
             "amenity/toilets": {
                 "name": "Toilettes publiques",
-                "terms": "Toilettes, WC"
+                "terms": "toilettes,wc"
             },
             "amenity/townhall": {
                 "name": "Mairie",
-                "terms": "Mairie"
+                "terms": "mairie"
             },
             "amenity/university": {
                 "name": "Terrains d'université",
-                "terms": "Campus universitaire"
+                "terms": "campus universitaire"
             },
             "amenity/vending_machine": {
                 "name": "Distributeur automatique",
-                "terms": "Distributeur automatique"
+                "terms": "distributeur automatique"
             },
             "amenity/veterinary": {
                 "name": "Vétérinaire",
-                "terms": "Vétérinaire"
+                "terms": "vétérinaire"
             },
             "amenity/waste_basket": {
                 "name": "Corbeille",
-                "terms": "Corbeille, Poubelle"
+                "terms": "corbeille,poubelle"
             },
             "area": {
                 "name": "Polygone",
-                "terms": "Zone, Aire"
+                "terms": "zone,aire"
+            },
+            "area/highway": {
+                "name": "Revêtement",
+                "terms": "revêtement"
             },
             "barrier": {
                 "name": "Barrière",
-                "terms": "Barrière"
+                "terms": "barrière"
             },
             "barrier/block": {
                 "name": "Bloc",
-                "terms": "Bloc de béton"
+                "terms": "bloc de béton"
             },
             "barrier/bollard": {
                 "name": "Poteau",
-                "terms": "Bollard, Potelet"
+                "terms": "bollard,potelet"
             },
             "barrier/cattle_grid": {
                 "name": "Grille à bétail",
-                "terms": "Barrière canadienne"
+                "terms": "barrière canadienne"
             },
             "barrier/city_wall": {
                 "name": "Mur d'enceinte",
-                "terms": "Remparts"
+                "terms": "remparts"
             },
             "barrier/cycle_barrier": {
                 "name": "Barrière à vélos",
-                "terms": "Chicane vélos, Barrière vélos"
+                "terms": "chicane vélos,barrière vélos"
             },
             "barrier/ditch": {
                 "name": "Fossé",
-                "terms": "Fossé"
+                "terms": "fossé"
             },
             "barrier/entrance": {
                 "name": "Ouverture",
-                "terms": "Entrée"
+                "terms": "entrée"
             },
             "barrier/fence": {
                 "name": "Clôture",
-                "terms": "Clôture"
+                "terms": "clôture"
             },
             "barrier/gate": {
                 "name": "Portail",
-                "terms": "Portail, Grille"
+                "terms": "portail,grille"
             },
             "barrier/hedge": {
                 "name": "Haie",
-                "terms": "Haie"
+                "terms": "haie"
             },
             "barrier/kissing_gate": {
                 "name": "Portillon à chicane mobile",
-                "terms": "Portillon à chicanes"
+                "terms": "portillon à chicanes"
             },
             "barrier/lift_gate": {
                 "name": "Barrière levante",
-                "terms": "Barrière relevable"
+                "terms": "barrière relevable"
             },
             "barrier/retaining_wall": {
                 "name": "Mur de soutènement",
-                "terms": "Restanque, faisse, rideau"
+                "terms": "restanque,faisse,rideau"
             },
             "barrier/stile": {
                 "name": "Échalier",
-                "terms": "Échalier"
+                "terms": "échalier"
             },
             "barrier/toll_booth": {
                 "name": "Péage",
-                "terms": "Péage"
+                "terms": "péage"
             },
             "barrier/wall": {
                 "name": "Mur",
-                "terms": "Mur"
+                "terms": "mur"
             },
             "boundary/administrative": {
                 "name": "Frontière administrative",
-                "terms": "Frontière administrative"
+                "terms": "frontière administrative"
             },
             "building": {
                 "name": "Bâtiment",
-                "terms": "Bâtiment, Construction"
+                "terms": "bâtiment,construction"
             },
             "building/apartments": {
                 "name": "Résidence",
-                "terms": "Appartements"
+                "terms": "appartements"
             },
             "building/barn": {
                 "name": "Grange",
-                "terms": "Hangar agricole"
+                "terms": "hangar agricole"
             },
             "building/bunker": {
                 "name": "Bunker",
-                "terms": "Casemate, Blockhaus, Bunker"
+                "terms": "casemate,blockhaus,bunker"
             },
             "building/cabin": {
                 "name": "Cabane",
-                "terms": "Cabane"
+                "terms": "cabane"
             },
             "building/cathedral": {
                 "name": "Cathédrale",
-                "terms": "Cathédrale"
+                "terms": "cathédrale"
             },
             "building/chapel": {
                 "name": "Chapelle",
-                "terms": "Chapelle"
+                "terms": "chapelle"
             },
             "building/church": {
                 "name": "Église",
-                "terms": "Église"
+                "terms": "église"
             },
             "building/college": {
                 "name": "Bâtiment d'établissement d'enseignement supérieur non universitaire",
-                "terms": "Bâtiment d'établissement d'enseignement supérieur non universitaire"
+                "terms": "bâtiment d'établissement d'enseignement supérieur non universitaire"
             },
             "building/commercial": {
                 "name": "Bâtiment d'affaires",
-                "terms": "Bâtiment d'affaires, bureaux, parc d'activités"
+                "terms": "bâtiment d'affaires,bureaux,parc d'activités"
             },
             "building/construction": {
                 "name": "Bâtiment en construction",
-                "terms": "Bâtiment en construction, Chantier"
+                "terms": "bâtiment en construction,chantier"
             },
             "building/detached": {
                 "name": "Maison individuelle",
-                "terms": "Maison non attenante"
+                "terms": "maison non attenante"
             },
             "building/dormitory": {
                 "name": "Résidence universitaire",
-                "terms": "Dortoir,Foyer"
+                "terms": "dortoir,foyer"
             },
             "building/entrance": {
                 "name": "Entrée/Sortie",
-                "terms": "Entrée/Sortie,Évacuation,Porte d'entrée"
+                "terms": "entrée/sortie,évacuation,porte d'entrée"
             },
             "building/garage": {
                 "name": "Garage",
-                "terms": "Garage"
+                "terms": "garage"
             },
             "building/garages": {
                 "name": "Garages",
-                "terms": "Garages, Parc de stationnement couvert"
+                "terms": "garages,parc de stationnement couvert"
             },
             "building/greenhouse": {
                 "name": "Serre",
-                "terms": "Serre"
+                "terms": "serre"
             },
             "building/hospital": {
                 "name": "Hôpital ",
-                "terms": "Hôpital, Clinique"
+                "terms": "hôpital,clinique"
             },
             "building/hotel": {
                 "name": "Hôtel",
-                "terms": "Hôtel"
+                "terms": "hôtel"
             },
             "building/house": {
                 "name": "Maison",
-                "terms": "Maison"
+                "terms": "maison"
             },
             "building/hut": {
                 "name": "Hutte",
-                "terms": "Hutte"
+                "terms": "hutte"
             },
             "building/industrial": {
                 "name": "Bâtiment industriel",
-                "terms": "Bâtiment industriel"
+                "terms": "bâtiment industriel"
             },
             "building/kindergarten": {
                 "name": "Bâtiment d'école maternelle / jardin d'enfants",
-                "terms": "Bâtiment d'école maternelle / jardin d'enfants"
+                "terms": "bâtiment d'école maternelle / jardin d'enfants"
             },
             "building/public": {
                 "name": "Établissement public",
-                "terms": "Bâtiment public"
+                "terms": "bâtiment public"
             },
             "building/residential": {
                 "name": "Bâtiment résidentiel",
-                "terms": "Bâtiment résidentiel"
+                "terms": "bâtiment résidentiel"
             },
             "building/retail": {
                 "name": "Bâtiment commercial",
-                "terms": "Bâtiment commercial"
+                "terms": "bâtiment commercial"
             },
             "building/roof": {
                 "name": "Toit",
-                "terms": "Voûte, Toit ouvert, Marché couvert"
+                "terms": "voûte,toit ouvert,marché couvert"
             },
             "building/school": {
                 "name": "Bâtiment d'école primaire, collège, lycée  Cycles primaires et secondaires",
-                "terms": "Bâtiment d'école primaire, collège, lycée  Cycles primaires et secondaires"
+                "terms": "bâtiment d'école primaire,collège,lycée  cycles primaires et secondaires"
             },
             "building/shed": {
                 "name": "Cabanon",
-                "terms": "Petit hangar, cabanon, resserre"
+                "terms": "petit hangar,cabanon,resserre"
             },
             "building/stable": {
                 "name": "Étable",
-                "terms": "Étable"
+                "terms": "étable"
             },
             "building/static_caravan": {
                 "name": "Mobilhome fixe",
-                "terms": "Mobilhome statique"
+                "terms": "mobilhome statique"
             },
             "building/terrace": {
                 "name": "Rangée de maisons",
-                "terms": "Maisons mitoyennes"
+                "terms": "maisons mitoyennes"
             },
             "building/train_station": {
                 "name": "Gare ferroviaire",
-                "terms": "Gare, Station, Arrêt"
+                "terms": "gare,station,arrêt"
             },
             "building/university": {
                 "name": "Université",
-                "terms": "Bâtiment d'université"
+                "terms": "bâtiment d'université"
             },
             "building/warehouse": {
                 "name": "Entrepôt",
-                "terms": "Entrepôt, magasin, abri, dépôt, docks, hangar"
+                "terms": "entrepôt,magasin,abri,dépôt,docks,hangar"
             },
             "craft": {
                 "name": "Artisanat",
-                "terms": "Artisanat"
+                "terms": "artisanat"
             },
             "craft/basket_maker": {
                 "name": "Vannier",
-                "terms": "Vannier"
+                "terms": "vannier"
             },
             "craft/beekeeper": {
                 "name": "Apiculteur",
-                "terms": "Miellerie"
+                "terms": "miellerie"
             },
             "craft/blacksmith": {
                 "name": "Forgeron",
-                "terms": "Forgeron"
+                "terms": "forgeron"
             },
             "craft/boatbuilder": {
                 "name": "Constructeur de bateaux",
-                "terms": "Constructeur de bâteaux"
+                "terms": "constructeur de bâteaux"
             },
             "craft/bookbinder": {
                 "name": "Relieur",
-                "terms": "Relieur"
+                "terms": "relieur"
             },
             "craft/brewery": {
                 "name": "Brasserie",
-                "terms": "Brasserie"
+                "terms": "brasserie"
             },
             "craft/carpenter": {
                 "name": "Charpentier",
-                "terms": "Charpentier"
+                "terms": "charpentier"
             },
             "craft/carpet_layer": {
                 "name": "Pose de moquette et revêtements",
-                "terms": "Pose de tapis"
+                "terms": "pose de tapis"
             },
             "craft/caterer": {
                 "name": "Traiteur",
-                "terms": "Restaurateur"
+                "terms": "restaurateur"
             },
             "craft/clockmaker": {
                 "name": "Horloger",
-                "terms": "Horloger, Horlogerie"
+                "terms": "horloger,horlogerie"
             },
             "craft/confectionery": {
                 "name": "Confiserie",
-                "terms": "Confiserie"
+                "terms": "confiserie"
             },
             "craft/dressmaker": {
                 "name": "Couturier",
-                "terms": "Couturier, Tailleur, Designer textile"
+                "terms": "couturier,tailleur,designer textile"
             },
             "craft/electrician": {
                 "name": "Electricien",
-                "terms": "Électricien"
+                "terms": "électricien"
             },
             "craft/gardener": {
                 "name": "Jardinier",
-                "terms": "Concepteur de jardins, Paysagiste"
+                "terms": "concepteur de jardins,paysagiste"
             },
             "craft/glaziery": {
                 "name": "Vitrerie",
-                "terms": "Vitrier"
+                "terms": "vitrier"
             },
             "craft/handicraft": {
                 "name": "Artisanat",
-                "terms": "Artisan"
+                "terms": "artisan"
             },
             "craft/hvac": {
                 "name": "CVC",
@@ -2069,591 +2143,611 @@
             },
             "craft/insulator": {
                 "name": "Technicien thermicien",
-                "terms": "Isolation thermique de bâtiments"
+                "terms": "isolation thermique de bâtiments"
             },
             "craft/jeweler": {
                 "name": "Bijoutier",
-                "terms": "Bijoutier"
+                "terms": "bijoutier"
             },
             "craft/key_cutter": {
                 "name": "Reproduction de clés",
-                "terms": "Reproduction de clés"
+                "terms": "reproduction de clés"
             },
             "craft/locksmith": {
                 "name": "Serrurier",
-                "terms": "Serrurier"
+                "terms": "serrurier"
             },
             "craft/metal_construction": {
                 "name": "Constructions métalliquess",
-                "terms": "Construction métallique"
+                "terms": "construction métallique"
             },
             "craft/optician": {
                 "name": "Opticien",
-                "terms": "Opticien"
+                "terms": "opticien"
             },
             "craft/painter": {
                 "name": "Peintre",
-                "terms": "Peintre"
+                "terms": "peintre"
             },
             "craft/photographer": {
                 "name": "Photographe",
-                "terms": "Photographe"
+                "terms": "photographe"
             },
             "craft/photographic_laboratory": {
                 "name": "Laboratoire photographique",
-                "terms": "Laboratoire photographique, Laboratoire de développement"
+                "terms": "laboratoire photographique,laboratoire de développement"
             },
             "craft/plasterer": {
                 "name": "Plâtrier",
-                "terms": "Gâcheur, Plafonneur"
+                "terms": "gâcheur,plafonneur"
             },
             "craft/plumber": {
                 "name": "Plombier",
-                "terms": "Plombier"
+                "terms": "plombier"
             },
             "craft/pottery": {
                 "name": "Potier",
-                "terms": "Potier"
+                "terms": "potier"
             },
             "craft/rigger": {
                 "name": "Gréeur",
-                "terms": "Gréeur"
+                "terms": "gréeur"
             },
             "craft/roofer": {
                 "name": "Couvreur",
-                "terms": "Couvreur"
+                "terms": "couvreur"
             },
             "craft/saddler": {
                 "name": "Sellier",
-                "terms": "Sellier harnacheur, Sellier garnisseur, Bourrelier"
+                "terms": "sellier harnacheur,sellier garnisseur,bourrelier"
             },
             "craft/sailmaker": {
                 "name": "Voilerie",
-                "terms": "Voilier"
+                "terms": "voilier"
             },
             "craft/sawmill": {
                 "name": "Scierie",
-                "terms": "Scierie"
+                "terms": "scierie"
             },
             "craft/scaffolder": {
                 "name": "Monteur d'échafaudages",
-                "terms": "Échafaudages"
+                "terms": "échafaudages"
             },
             "craft/sculpter": {
                 "name": "Sculpteur",
-                "terms": "Sculpteur"
+                "terms": "sculpteur"
             },
             "craft/shoemaker": {
                 "name": "Cordonnier",
-                "terms": "Bottier, Cordonnier"
+                "terms": "bottier,cordonnier"
             },
             "craft/stonemason": {
                 "name": "Tailleur de pierre",
-                "terms": "Tailleur de pierre"
+                "terms": "tailleur de pierre"
             },
             "craft/sweep": {
                 "name": "Ramoneur",
-                "terms": "Fumiste, Chauffagiste"
+                "terms": "fumiste,chauffagiste"
             },
             "craft/tailor": {
                 "name": "Tailleur",
-                "terms": "Habilleur, Giletier"
+                "terms": "habilleur,giletier"
             },
             "craft/tiler": {
                 "name": "Carreleur",
-                "terms": "Paveur, Dalleur"
+                "terms": "paveur,dalleur"
             },
             "craft/tinsmith": {
                 "name": "Ferblantier",
-                "terms": "Étameur, Rétameur"
+                "terms": "étameur,rétameur"
             },
             "craft/upholsterer": {
                 "name": "Tapissier",
-                "terms": "Garnisseur"
+                "terms": "garnisseur"
             },
             "craft/watchmaker": {
                 "name": "Horloger",
-                "terms": "Horloger"
+                "terms": "horloger"
             },
             "craft/window_construction": {
                 "name": "Construction de fenêtres",
-                "terms": "Fabrication de fenêtres"
+                "terms": "fabrication de fenêtres"
             },
             "craft/winery": {
                 "name": "Chai",
-                "terms": "Cellier, Cave à vins"
+                "terms": "cellier,cave à vins"
             },
             "embankment": {
                 "name": "Terre-plein",
-                "terms": "Digue,Surélévation"
+                "terms": "digue,surélévation"
             },
             "emergency/ambulance_station": {
                 "name": "Station d'ambulance",
-                "terms": "Station d'ambulance"
+                "terms": "station d'ambulance"
             },
             "emergency/fire_hydrant": {
                 "name": "Borne incendie",
-                "terms": "Borne incendie, borne-fontaine, borne fontaine, bouche d'incendie"
+                "terms": "borne incendie,borne-fontaine,borne fontaine,bouche d'incendie"
             },
             "emergency/phone": {
                 "name": "Téléphone d'urgence",
-                "terms": "Téléphone d'urgence"
+                "terms": "téléphone d'urgence"
             },
             "entrance": {
                 "name": "Entrée/Sortie",
-                "terms": "Entrée/Sortie,Évacuation,Porte d'entrée"
+                "terms": "entrée/sortie,évacuation,porte d'entrée"
             },
             "footway/crossing": {
                 "name": "Passage piéton ",
-                "terms": "Passage piéton"
+                "terms": "traversée de rue"
             },
             "footway/crosswalk": {
                 "name": "Passage piéton",
-                "terms": "Passage piéton, Zébra, Passage zébré"
+                "terms": "passage piéton,zébra,passage zébré"
             },
             "footway/sidewalk": {
                 "name": "Trottoir",
-                "terms": "Trottoir"
+                "terms": "trottoir"
             },
             "ford": {
                 "name": "Gué",
-                "terms": "Gué"
+                "terms": "gué"
             },
             "golf/bunker": {
                 "name": "Bunker",
-                "terms": "Bunker"
+                "terms": "bunker"
             },
             "golf/fairway": {
                 "name": "Fairway",
-                "terms": "Fairway"
+                "terms": "fairway"
             },
             "golf/green": {
                 "name": "Green",
-                "terms": "Green"
+                "terms": "green"
             },
             "golf/hole": {
                 "name": "Trou de golf",
-                "terms": "Trou de golf"
+                "terms": "trou de golf"
             },
             "golf/lateral_water_hazard": {
                 "name": "Obstacle d'eau latéral",
-                "terms": "Obstacle d'eau latéral"
+                "terms": "obstacle d'eau latéral"
             },
             "golf/rough": {
                 "name": "Hautes herbes (golf)",
-                "terms": "Hautes herbes (golf)"
+                "terms": "hautes herbes (golf)"
             },
             "golf/tee": {
                 "name": "Départ",
-                "terms": "Tertre de départ"
+                "terms": "tertre de départ"
             },
             "golf/water_hazard": {
                 "name": "Obstacle d'eau",
-                "terms": "Mare, Étang "
+                "terms": "mare,étang "
             },
             "highway": {
                 "name": "Route",
-                "terms": "Autoroute, Voie rapide"
+                "terms": "autoroute,voie rapide"
             },
             "highway/bridleway": {
                 "name": "Sentier équestre",
-                "terms": "Piste cavalière, Sentier à chevaux, Sentier pour chevaux"
+                "terms": "piste cavalière,sentier à chevaux,sentier pour chevaux"
             },
             "highway/bus_stop": {
                 "name": "Arrêt de bus",
-                "terms": "Arrêt de bus, Gare, Gare routière"
+                "terms": "arrêt de bus,gare,gare routière"
+            },
+            "highway/corridor": {
+                "name": "Couloir intérieur",
+                "terms": "corridor intérieur"
             },
             "highway/crossing": {
-                "name": "Passage piéton",
-                "terms": "Carrefour, Intersection"
+                "name": "Passage piéton ",
+                "terms": "passage piéton "
             },
             "highway/crosswalk": {
                 "name": "Passage piéton",
-                "terms": "Passage clouté"
+                "terms": "passage piéton,zébra,passage zébré"
             },
             "highway/cycleway": {
                 "name": "Voie cyclable",
-                "terms": "Piste cyclable"
+                "terms": "piste cyclable"
             },
             "highway/footway": {
                 "name": "Voie piétonne",
-                "terms": "Chemin piétonnier, Sentier"
+                "terms": "chemin piétonnier,sentier"
             },
             "highway/living_street": {
                 "name": "Zone de rencontre",
-                "terms": "Zone de rencontre"
+                "terms": "zone de rencontre"
             },
             "highway/mini_roundabout": {
                 "name": "Mini rond-point",
-                "terms": "Mini rond-point"
+                "terms": "mini rond-point"
             },
             "highway/motorway": {
                 "name": "Autoroute",
-                "terms": "Autoroute, Voie rapide"
+                "terms": "autoroute,voie rapide"
             },
             "highway/motorway_junction": {
                 "name": "Bretelle d'autoroute / Sortie",
-                "terms": "Échangeur, Échangeur Autoroutier,Croisement d'autoroutes,Intersection d'autoroutes,Bretelle d'autoroute,Bretelle de sortie"
+                "terms": "échangeur,échangeur autoroutier,croisement d'autoroutes,intersection d'autoroutes,bretelle d'autoroute,bretelle de sortie"
             },
             "highway/motorway_link": {
                 "name": "Bretelle d'autoroute",
-                "terms": "Bretelle d'autoroute"
+                "terms": "bretelle d'autoroute"
             },
             "highway/path": {
                 "name": "Chemin non carrossable",
-                "terms": "Chemin"
+                "terms": "chemin"
             },
             "highway/pedestrian": {
-                "name": "Piétonnier",
-                "terms": "Piéton"
+                "name": "Rue piétonne",
+                "terms": "rue piétonnisée,espace piétonnier"
             },
             "highway/primary": {
                 "name": "Route principale",
-                "terms": "Route principale"
+                "terms": "route principale"
             },
             "highway/primary_link": {
                 "name": "Voie d'accès à une route primaire",
-                "terms": "Bretelle d'accès à une route principale"
+                "terms": "bretelle d'accès à une route principale"
             },
             "highway/raceway": {
                 "name": "Piste de courses automobiles",
-                "terms": "Circuit automobile"
+                "terms": "circuit automobile"
             },
             "highway/residential": {
                 "name": "Route résidentielle",
-                "terms": "Route résidentielle"
+                "terms": "route résidentielle"
             },
             "highway/rest_area": {
                 "name": "Aire de repos",
-                "terms": "Aire de repos, Aire de service"
+                "terms": "aire de repos,aire de service"
             },
             "highway/road": {
                 "name": "Voie de type inconnu",
-                "terms": "Route inconnue"
+                "terms": "route inconnue"
             },
             "highway/secondary": {
                 "name": "Route secondaire",
-                "terms": "Route secondaire"
+                "terms": "route secondaire"
             },
             "highway/secondary_link": {
                 "name": "Voie d'accès à une route secondaire",
-                "terms": "Bretelle d'accès à une route secondaire"
+                "terms": "bretelle d'accès à une route secondaire"
             },
             "highway/service": {
                 "name": "Route d'accès",
-                "terms": "Route de service"
+                "terms": "route de service"
             },
             "highway/service/alley": {
                 "name": "Ruelle",
-                "terms": "Allée"
+                "terms": "allée"
             },
             "highway/service/drive-through": {
                 "name": "Drive In",
-                "terms": "Service au comptoir, Drive-in"
+                "terms": "service au comptoir,drive-in"
             },
             "highway/service/driveway": {
                 "name": "Allée",
-                "terms": "Allée"
+                "terms": "allée"
             },
             "highway/service/emergency_access": {
                 "name": "Accès d'urgence",
-                "terms": "Accès d'urgence"
+                "terms": "accès d'urgence"
             },
             "highway/service/parking_aisle": {
                 "name": "Allée de parking",
-                "terms": "Allée de parking, allée de stationnement"
+                "terms": "allée de parking,allée de stationnement"
             },
             "highway/services": {
                 "name": "Aire de service",
-                "terms": "Aire de service"
+                "terms": "aire de service"
             },
             "highway/steps": {
                 "name": "Escalier",
-                "terms": "Escaliers"
+                "terms": "escaliers"
             },
             "highway/stop": {
                 "name": "Panneau Stop",
-                "terms": "Arrêt"
+                "terms": "arrêt"
             },
             "highway/street_lamp": {
                 "name": "Lampadaire",
-                "terms": "Réverbère"
+                "terms": "réverbère"
             },
             "highway/tertiary": {
                 "name": "Route tertiaire",
-                "terms": "Route tertiaire"
+                "terms": "route tertiaire"
             },
             "highway/tertiary_link": {
                 "name": "Voie d'accès à une route tertiaire",
-                "terms": "Bretelle d'accès à une route tertiaire"
+                "terms": "bretelle d'accès à une route tertiaire"
             },
             "highway/track": {
                 "name": "Piste carrossable",
-                "terms": "Piste, Chemin carrossable"
+                "terms": "piste,chemin carrossable"
             },
             "highway/traffic_signals": {
                 "name": "Feux tricolores",
-                "terms": "Feux de circulation, Feux tricolores, Feux rouges"
+                "terms": "feux de circulation,feux tricolores,feux rouges"
             },
             "highway/trunk": {
                 "name": "Voie rapide",
-                "terms": "Voie rapide, voie express"
+                "terms": "voie rapide,voie express"
             },
             "highway/trunk_link": {
                 "name": "Voie d'accès à une voie rapide",
-                "terms": "Bretelle d'accès à une voie rapide ou voie express"
+                "terms": "bretelle d'accès à une voie rapide ou voie express"
             },
             "highway/turning_circle": {
                 "name": "Zone de manœuvre",
-                "terms": "Point de retournement"
+                "terms": "point de retournement"
             },
             "highway/unclassified": {
                 "name": "Route de desserte locale",
-                "terms": "Route inconnue"
+                "terms": "route inconnue"
             },
             "historic": {
                 "name": "Site historique",
-                "terms": "Site historique"
+                "terms": "site historique"
             },
             "historic/archaeological_site": {
                 "name": "Site archéologique",
-                "terms": "Site archéologique"
+                "terms": "site archéologique"
             },
             "historic/boundary_stone": {
                 "name": "Borne frontière",
-                "terms": "Borne frontière"
+                "terms": "borne frontière"
             },
             "historic/castle": {
                 "name": "Château",
-                "terms": "Château"
+                "terms": "château"
             },
             "historic/memorial": {
                 "name": "Mémorial",
-                "terms": "Mémorial, Monument aux morts, statue, buste, stèle, plaque"
+                "terms": "mémorial,monument aux morts,statue,buste,stèle,plaque"
             },
             "historic/monument": {
                 "name": "Monument commémoratif",
-                "terms": "Grand mémorial"
+                "terms": "grand mémorial"
             },
             "historic/ruins": {
                 "name": "Ruines",
-                "terms": "Ruines"
+                "terms": "ruines"
             },
             "historic/wayside_cross": {
                 "name": "Croix/Calvaire",
-                "terms": "Une croix au bord d'un chemin"
+                "terms": "une croix au bord d'un chemin"
             },
             "historic/wayside_shrine": {
                 "name": "Oratoire",
-                "terms": "Oratoire, Autel en bord de chemin"
+                "terms": "oratoire,autel en bord de chemin"
             },
             "junction": {
                 "name": "Jonction routière",
-                "terms": "Jonction routière, Jonction, Carrefour, Intersection routière,  Intersection"
+                "terms": "jonction routière,jonction,carrefour,intersection routière, intersection"
             },
             "landuse": {
-                "name": "Type de terrain",
-                "terms": "Utilisation du terrain"
+                "name": "Utilisation du sol",
+                "terms": "type d'utilisation du sol,terrain"
             },
             "landuse/allotments": {
                 "name": "Jardins familiaux",
-                "terms": "Jardins familiaux, eco-jardins, jardins communautaires, jardin communautaire"
+                "terms": "jardins familiaux,eco-jardins,jardins communautaires,jardin communautaire"
             },
             "landuse/basin": {
                 "name": "Bassin",
-                "terms": "Bassin"
+                "terms": "bassin"
             },
             "landuse/cemetery": {
                 "name": "Cimetière",
-                "terms": "Cimetière"
+                "terms": "cimetière"
             },
             "landuse/churchyard": {
                 "name": "Terrain entourant une église",
-                "terms": "Cimetière"
+                "terms": "cimetière"
             },
             "landuse/commercial": {
                 "name": "Zone Commerciale",
-                "terms": "Commerces"
+                "terms": "commerces"
             },
             "landuse/construction": {
                 "name": "Construction",
-                "terms": "Construction"
+                "terms": "construction"
             },
             "landuse/farm": {
                 "name": "Zone agricole",
-                "terms": "Terre agricole : cultures et élevage"
+                "terms": "terre agricole : cultures et élevage"
             },
             "landuse/farmland": {
                 "name": "Zone agricole",
-                "terms": "Terre agricole : cultures et élevage"
+                "terms": "terre agricole : cultures et élevage"
             },
             "landuse/farmyard": {
-                "name": "Exploitation agricole",
-                "terms": "Cour de ferme, ensemble des bâtiments d'une ferme"
+                "name": "Cour de ferme",
+                "terms": "exploitation agricole,cour de ferme,ensemble des bâtiments d'une ferme"
             },
             "landuse/forest": {
                 "name": "Forêt",
-                "terms": "Forêt"
+                "terms": "forêt"
             },
             "landuse/garages": {
                 "name": "Garages",
-                "terms": "Garages privés, boxes"
+                "terms": "garages privés,boxes"
             },
             "landuse/grass": {
                 "name": "Herbe",
-                "terms": "Herbe"
+                "terms": "herbe"
             },
             "landuse/industrial": {
                 "name": "Zone Industrielle",
-                "terms": "Usines"
+                "terms": "usines"
             },
             "landuse/landfill": {
                 "name": "Décharge",
-                "terms": "Centre d'enfouissement des déchets"
+                "terms": "centre d'enfouissement des déchets"
             },
             "landuse/meadow": {
                 "name": "Prairie",
-                "terms": "Prairie"
+                "terms": "prairie"
             },
             "landuse/military": {
                 "name": "Zone Militaire",
-                "terms": "Zone Militaire"
+                "terms": "zone militaire"
             },
             "landuse/orchard": {
                 "name": "Verger",
-                "terms": "Verger"
+                "terms": "verger"
+            },
+            "landuse/plant_nursery": {
+                "name": "Pépinière",
+                "terms": "pépinière"
             },
             "landuse/quarry": {
                 "name": "Carrière",
-                "terms": "Carrière"
+                "terms": "carrière"
             },
             "landuse/residential": {
                 "name": "Zone Résidentielle",
-                "terms": "Zone d’habitation"
+                "terms": "zone d’habitation"
             },
             "landuse/retail": {
                 "name": "Zone de vente au détail",
-                "terms": "Zone de magasins"
+                "terms": "zone de magasins"
             },
             "landuse/vineyard": {
                 "name": "Vigne",
-                "terms": "Vignes"
+                "terms": "vignes"
             },
             "leisure": {
                 "name": "Loisirs",
-                "terms": "Loisir"
+                "terms": "loisir"
+            },
+            "leisure/adult_gaming_centre": {
+                "name": "Jeux pour adultes",
+                "terms": "jeux pour adultes"
+            },
+            "leisure/bowling_alley": {
+                "name": "Boulodrome",
+                "terms": "jeux de boules"
             },
             "leisure/common": {
                 "name": "Terrain communal",
-                "terms": "Terrain communal, bien communal, bois communal, pré communal"
+                "terms": "terrain communal,bien communal,bois communal,pré communal"
             },
             "leisure/dog_park": {
                 "name": "Parc canin",
-                "terms": "Parc canin, parc à chiens"
+                "terms": "parc canin,parc à chiens"
             },
             "leisure/firepit": {
                 "name": "Foyer",
-                "terms": "Emplacement de feu de camp"
+                "terms": "emplacement de feu de camp"
             },
             "leisure/garden": {
                 "name": "Jardin",
-                "terms": "Jardin"
+                "terms": "jardin"
             },
             "leisure/golf_course": {
                 "name": "Parcours de golf",
-                "terms": "Golf, Terrain de golf, Parcours de golf"
+                "terms": "golf,terrain de golf,parcours de golf"
             },
             "leisure/ice_rink": {
                 "name": "Patinoire",
-                "terms": "Patinoire"
+                "terms": "patinoire"
             },
             "leisure/marina": {
                 "name": "Marina",
-                "terms": "Marina"
+                "terms": "marina"
             },
             "leisure/nature_reserve": {
                 "name": "Réserve naturelle",
-                "terms": "Zone protégée"
+                "terms": "zone protégée"
             },
             "leisure/park": {
                 "name": "Parc",
-                "terms": "Parc"
+                "terms": "parc"
             },
             "leisure/picnic_table": {
                 "name": "Table de pique-nique",
-                "terms": "Table de pique-nique"
+                "terms": "table de pique-nique"
             },
             "leisure/pitch": {
                 "name": "Terrain de sport",
-                "terms": "Terrain de sport"
+                "terms": "terrain de sport"
             },
             "leisure/pitch/american_football": {
                 "name": "Terrain de football américain",
-                "terms": "Terrain de football américain"
+                "terms": "terrain de football américain"
             },
             "leisure/pitch/baseball": {
                 "name": "Terrain de baseball",
-                "terms": "Terrain de base-ball"
+                "terms": "terrain de base-ball"
             },
             "leisure/pitch/basketball": {
                 "name": "Terrain de basketball",
-                "terms": "Terrain de basket, terrain de basketball"
+                "terms": "terrain de basket,terrain de basketball"
             },
             "leisure/pitch/skateboard": {
                 "name": "Planchodrome",
-                "terms": "Planchodrome, skate park"
+                "terms": "planchodrome,skate park"
             },
             "leisure/pitch/soccer": {
                 "name": "Terrain de football",
-                "terms": "Terrain de football, terrain de soccer"
+                "terms": "terrain de football,terrain de soccer"
             },
             "leisure/pitch/tennis": {
                 "name": "Court de tennis",
-                "terms": "Court de tennis, terrain de tennis"
+                "terms": "court de tennis,terrain de tennis"
             },
             "leisure/pitch/volleyball": {
                 "name": "Terrain de volleyball",
-                "terms": "Terrain de volleyball"
+                "terms": "terrain de volleyball"
             },
             "leisure/playground": {
                 "name": "Jeux pour enfants",
-                "terms": "Aire de Jeu, Cour de récréation"
+                "terms": "aire de jeu,cour de récréation"
             },
             "leisure/running_track": {
                 "name": "Piste de course à pied",
-                "terms": "Piste de course à pied"
+                "terms": "piste de course à pied"
             },
             "leisure/slipway": {
                 "name": "Plan incliné",
-                "terms": "Cale de lancement"
+                "terms": "cale de lancement"
             },
             "leisure/sports_center": {
                 "name": "Centre sportif / Salle de gymnastique",
-                "terms": "Centre sportif,Salle de sport,Gymnase,Terrain de sport,Piscine"
+                "terms": "centre sportif,salle de sport,gymnase,terrain de sport,piscine"
             },
             "leisure/stadium": {
                 "name": "Stade",
-                "terms": "Stade"
+                "terms": "stade"
             },
             "leisure/swimming_pool": {
                 "name": "Piscine",
-                "terms": "Piscine"
+                "terms": "piscine"
             },
             "leisure/track": {
                 "name": "Piste de course (sports non motorisés)",
-                "terms": "Piste de course (sports non motorisés)"
+                "terms": "piste de course (sports non motorisés)"
             },
             "line": {
                 "name": "Ligne",
-                "terms": "Ligne"
+                "terms": "ligne"
             },
             "man_made": {
                 "name": "Édifices",
-                "terms": "Créé par l'homme"
+                "terms": "créé par l'homme"
+            },
+            "man_made/adit": {
+                "name": "Entrée de mine",
+                "terms": "entrée de galerie de mine,entrée de galerie"
             },
             "man_made/breakwater": {
                 "name": "Brise-lames",
-                "terms": "Brise-lames"
+                "terms": "brise-lames"
             },
             "man_made/cutline": {
                 "name": "Ligne de coupe",
@@ -2661,1079 +2755,1091 @@
             },
             "man_made/embankment": {
                 "name": "Terre-plein",
-                "terms": "Digue,Surélévation"
+                "terms": "digue,surélévation"
             },
             "man_made/flagpole": {
                 "name": "Porte-drapeau",
-                "terms": "Hampe"
+                "terms": "hampe"
             },
             "man_made/lighthouse": {
                 "name": "Phare",
-                "terms": "Phare"
+                "terms": "phare"
             },
             "man_made/mast": {
                 "name": "Mât d'émission radio",
-                "terms": "Émetteur de téléphonie mobile, émetteur de téléphonie cellulaire, mât de transmission, pylône de transmission, tour haubanée, émetteur radio, émetteur de télévision, tour de télévision, tour de télédiffusion, ..."
+                "terms": "émetteur de téléphonie mobile,émetteur de téléphonie cellulaire,mât de transmission,pylône de transmission,tour haubanée,émetteur radio,émetteur de télévision,tour de télévision,tour de télédiffusion,..."
             },
             "man_made/observation": {
                 "name": "Tour d'observation",
-                "terms": "Tour d'observation, Mirador"
+                "terms": "tour d'observation,mirador"
             },
             "man_made/petroleum_well": {
                 "name": "Puits de pétrole",
-                "terms": "Puits de forage, derrick, chevalet de pompage, ..."
+                "terms": "puits de forage,derrick,chevalet de pompage,..."
             },
             "man_made/pier": {
                 "name": "Jetée",
-                "terms": "Quai"
+                "terms": "quai"
             },
             "man_made/pipeline": {
                 "name": "Pipeline",
-                "terms": "Pipeline, Gazoduc, Oleoduc"
+                "terms": "pipeline,gazoduc,oleoduc"
             },
             "man_made/silo": {
                 "name": "Silo",
-                "terms": "Réservoir, emplacement de stockage, ..."
+                "terms": "réservoir,emplacement de stockage,..."
             },
             "man_made/storage_tank": {
                 "name": "Réservoir de stockage",
-                "terms": "Silo de stockage"
+                "terms": "silo de stockage"
             },
             "man_made/survey_point": {
                 "name": "Poteau de triangulation",
-                "terms": "Borne géodésique, monument géodésique, repère géodésique"
+                "terms": "borne géodésique,monument géodésique,repère géodésique"
             },
             "man_made/tower": {
                 "name": "Tour",
-                "terms": "Tour"
+                "terms": "tour"
             },
             "man_made/wastewater_plant": {
                 "name": "Station d'épuration",
-                "terms": "Station d'épuration, Usine de traitement des eaux usées"
+                "terms": "station d'épuration,usine de traitement des eaux usées"
             },
             "man_made/water_tower": {
                 "name": "Château d'eau",
-                "terms": "Château d'eau"
+                "terms": "château d'eau"
             },
             "man_made/water_well": {
                 "name": "Puits",
-                "terms": "Puits"
+                "terms": "puits"
             },
             "man_made/water_works": {
                 "name": "Station de pompage d'eau potable",
-                "terms": "Station de pompage"
+                "terms": "station de pompage"
             },
             "military/airfield": {
                 "name": "Aérodrome",
-                "terms": "Terrain d'aviation,Aérodrome,Aéroport,Héliport"
+                "terms": "terrain d'aviation,aérodrome,aéroport,héliport"
             },
             "military/barracks": {
                 "name": "Caserne",
-                "terms": "Caserne"
+                "terms": "caserne"
             },
             "military/bunker": {
                 "name": "Bunker",
-                "terms": "casemate, blockhaus, bunker"
+                "terms": "casemate,blockhaus,bunker"
             },
             "military/range": {
                 "name": "Stand de tir",
-                "terms": "Champ de tir,Stand de tir"
+                "terms": "champ de tir,stand de tir"
             },
             "natural": {
                 "name": "Nature",
-                "terms": "Nature"
+                "terms": "nature"
             },
             "natural/bay": {
                 "name": "Baie",
-                "terms": "Baie"
+                "terms": "baie"
             },
             "natural/beach": {
                 "name": "Plage",
-                "terms": "Plage"
+                "terms": "plage"
             },
             "natural/cave_entrance": {
                 "name": "Entrée de caverne",
-                "terms": "Abri sous roche"
+                "terms": "abri sous roche"
             },
             "natural/cliff": {
                 "name": "Falaise",
-                "terms": "Falaise"
+                "terms": "falaise"
             },
             "natural/coastline": {
                 "name": "Ligne de côte",
-                "terms": "Ligne de côte"
+                "terms": "ligne de côte"
             },
             "natural/fell": {
                 "name": "Tunturi (type de montagne)",
-                "terms": "Tunturi, montagne, colline"
+                "terms": "tunturi,montagne,colline"
             },
             "natural/glacier": {
                 "name": "Glacier",
-                "terms": "Glacier"
+                "terms": "glacier"
             },
             "natural/grassland": {
                 "name": "Prairie",
-                "terms": "Prairie"
+                "terms": "prairie"
             },
             "natural/heath": {
                 "name": "Lande",
-                "terms": "Santé"
+                "terms": "santé"
             },
             "natural/peak": {
                 "name": "Sommet",
-                "terms": "Pic, Mont"
+                "terms": "pic,mont"
+            },
+            "natural/saddle": {
+                "name": "Col de montagne",
+                "terms": "passe"
             },
             "natural/scree": {
                 "name": "Pierrier",
-                "terms": "Pierrier, Éboulis"
+                "terms": "pierrier,éboulis"
             },
             "natural/scrub": {
                 "name": "Friche, garrigue, maquis",
-                "terms": "Broussailles"
+                "terms": "broussailles"
             },
             "natural/spring": {
                 "name": "Source",
-                "terms": "Source"
+                "terms": "source"
             },
             "natural/tree": {
                 "name": "Arbre",
-                "terms": "Arbre"
+                "terms": "arbre"
+            },
+            "natural/tree_row": {
+                "name": "Rangée d'arbres",
+                "terms": "rangée d'arbres,alignement d'arbres"
+            },
+            "natural/volcano": {
+                "name": "Volcan",
+                "terms": "volcan"
             },
             "natural/water": {
                 "name": "Eau",
-                "terms": "Eau"
+                "terms": "eau"
             },
             "natural/water/lake": {
                 "name": "Lac",
-                "terms": "Lac"
+                "terms": "lac"
             },
             "natural/water/pond": {
                 "name": "Étang",
-                "terms": "Étang, Mare"
+                "terms": "étang,mare"
             },
             "natural/water/reservoir": {
                 "name": "Bassin de retenue",
-                "terms": "Reservoir"
+                "terms": "reservoir"
             },
             "natural/wetland": {
                 "name": "Zone humide",
-                "terms": "Zone humide, Marais, Marécage"
+                "terms": "zone humide,marais,marécage"
             },
             "natural/wood": {
                 "name": "Bois",
-                "terms": "Bois"
+                "terms": "bois"
             },
             "office": {
                 "name": "Bureau",
-                "terms": "Bureau"
+                "terms": "bureau"
             },
             "office/accountant": {
                 "name": "Comptable",
-                "terms": "Comptable"
+                "terms": "comptable"
             },
             "office/administrative": {
                 "name": "Bureau administratif",
-                "terms": "Bureau administratif"
+                "terms": "bureau administratif"
             },
             "office/architect": {
                 "name": "Architecte",
-                "terms": "Architecte"
+                "terms": "architecte"
             },
             "office/company": {
                 "name": "Bureau d'entreprise",
-                "terms": "Bureau d'entreprise, Siège social"
+                "terms": "bureau d'entreprise,siège social"
             },
             "office/educational_institution": {
                 "name": "Établissement d'enseignement",
-                "terms": "Établissement d'enseignement"
+                "terms": "établissement d'enseignement"
             },
             "office/employment_agency": {
                 "name": "Agence pour l'emploi",
-                "terms": "Agence pour l'emploi"
+                "terms": "agence pour l'emploi"
             },
             "office/estate_agent": {
                 "name": "Agence immobilière",
-                "terms": "Agence immobilière"
+                "terms": "agence immobilière"
             },
             "office/financial": {
                 "name": "Établissement financier",
-                "terms": "Bureau financier"
+                "terms": "bureau financier"
             },
             "office/government": {
                 "name": "Établissement Public",
-                "terms": "Bureau du gouvernement"
+                "terms": "bureau du gouvernement"
             },
             "office/insurance": {
                 "name": "Agence d'assurance",
-                "terms": "Agence d'assurance"
+                "terms": "agence d'assurance"
             },
             "office/it": {
                 "name": "Bureau informatique",
-                "terms": "Bureau informatique"
+                "terms": "bureau informatique"
             },
             "office/lawyer": {
                 "name": "Cabinet d'avocats",
-                "terms": "Cabinet d'avocats"
+                "terms": "cabinet d'avocats"
             },
             "office/newspaper": {
                 "name": "Journal",
-                "terms": "Journal, Presse"
+                "terms": "journal,presse"
             },
             "office/ngo": {
                 "name": "ONG",
-                "terms": "ONG"
+                "terms": "ong"
             },
             "office/physician": {
                 "name": "Médecin",
-                "terms": "Médecin, Docteur"
+                "terms": "médecin,docteur"
             },
             "office/political_party": {
                 "name": "Parti politique",
-                "terms": "Parti politique"
+                "terms": "parti politique"
             },
             "office/research": {
                 "name": "Organisme de recherche",
-                "terms": "Centre de recherches"
+                "terms": "centre de recherches"
             },
             "office/telecommunication": {
                 "name": "Agence télécom",
-                "terms": "Agence télécom"
+                "terms": "agence télécom"
             },
             "office/therapist": {
                 "name": "Thérapeute",
-                "terms": "Thérapeute, Soigneur"
+                "terms": "thérapeute,soigneur"
             },
             "office/travel_agent": {
                 "name": "Agence de voyage",
-                "terms": "Agence de voyage"
+                "terms": "agence de voyage"
             },
             "piste": {
                 "name": "Piste de ski",
-                "terms": "Piste de ski"
+                "terms": "piste de ski"
             },
             "place": {
                 "name": "Toponymie",
-                "terms": "Lieu"
+                "terms": "lieu"
             },
             "place/city": {
                 "name": "Grande ville (>100.000 habitants)",
-                "terms": "Ville"
+                "terms": "ville"
             },
             "place/farm": {
                 "name": "Ferme isolée",
-                "terms": "Écart"
+                "terms": "écart"
             },
             "place/hamlet": {
                 "name": "Hameau (Moins de 100 habitants)",
-                "terms": "Hameau"
+                "terms": "hameau"
             },
             "place/island": {
                 "name": "Île",
-                "terms": "Île"
+                "terms": "île"
             },
             "place/isolated_dwelling": {
                 "name": "Lieu-dit habité (1 ou 2 habitations)",
-                "terms": "Habitation isolée"
+                "terms": "habitation isolée"
             },
             "place/locality": {
                 "name": "Lieu-dit (pas d'habitation)",
-                "terms": "Localité"
+                "terms": "localité"
             },
             "place/neighbourhood": {
                 "name": "Voisinage",
-                "terms": "Environs, Voisinage, Quartier"
+                "terms": "environs,voisinage,quartier"
             },
             "place/suburb": {
                 "name": "Quartier",
-                "terms": "Commune, Municipalité, District, Arrondissement, Bourough"
+                "terms": "commune,municipalité,district,arrondissement,bourough"
             },
             "place/town": {
                 "name": "Ville (10.000-100.000 habitants)",
-                "terms": "Ville"
+                "terms": "ville"
             },
             "place/village": {
                 "name": "Village (100 - 10 000 habitants)",
-                "terms": "Village"
+                "terms": "village"
             },
             "point": {
                 "name": "Point",
-                "terms": "Point"
+                "terms": "point"
             },
             "power": {
                 "name": "Énergie",
-                "terms": "Electricité"
+                "terms": "electricité"
             },
             "power/generator": {
                 "name": "Génératrice",
-                "terms": "Génératrice"
+                "terms": "génératrice"
             },
             "power/line": {
                 "name": "Câble aérien",
-                "terms": "Ligne électrique"
+                "terms": "ligne électrique"
             },
             "power/minor_line": {
                 "name": "Ligne électrique mineure",
-                "terms": "Ligne électrique mineure"
+                "terms": "ligne électrique mineure"
             },
             "power/pole": {
                 "name": "Poteau",
-                "terms": "Pylone électrique, Poteau éléctrique"
+                "terms": "pylone électrique,poteau éléctrique"
             },
             "power/sub_station": {
                 "name": "Transformateur",
-                "terms": "Sous-station"
+                "terms": "sous-station"
             },
             "power/substation": {
                 "name": "Sous-station",
-                "terms": "Sous-station électrique"
+                "terms": "sous-station électrique"
             },
             "power/tower": {
                 "name": "Pylône haute-tension ",
-                "terms": "Pylône haute-tension"
+                "terms": "pylône haute-tension"
             },
             "power/transformer": {
                 "name": "Transformateur",
-                "terms": "Transformateur"
+                "terms": "transformateur"
             },
             "public_transport/platform": {
                 "name": "Plateforme d'attente",
-                "terms": "Quai"
+                "terms": "quai"
             },
             "public_transport/stop_position": {
                 "name": "Position exacte d’arrêt du vehicule sur le « way » d’une route de transport en commun",
-                "terms": "Arrêt"
+                "terms": "arrêt"
             },
             "railway": {
                 "name": "Ferroviaire",
-                "terms": "Voie ferrée, Chemin de fer"
+                "terms": "voie ferrée,chemin de fer"
             },
             "railway/abandoned": {
                 "name": "Voie ferrée désaffectée",
-                "terms": "Voie ferrée abandonnée"
+                "terms": "voie ferrée abandonnée"
             },
             "railway/disused": {
                 "name": "Voie ferrée désaffectée",
-                "terms": "Voie ferrée non utilisée"
+                "terms": "voie ferrée non utilisée"
             },
             "railway/funicular": {
                 "name": "Funiculaire",
-                "terms": "Funiculaire"
+                "terms": "funiculaire"
             },
             "railway/halt": {
                 "name": "Halte ferroviaire",
-                "terms": "Arrêt ferroviaire, Arrêt"
+                "terms": "arrêt ferroviaire,arrêt"
             },
             "railway/level_crossing": {
-                "name": "Passage à niveau",
-                "terms": "Passage à niveau, traverse de chemin de fer"
+                "name": "Passage à niveau ",
+                "terms": "passage à niveau "
             },
             "railway/monorail": {
                 "name": "Monorail",
-                "terms": "Monorail"
+                "terms": "monorail"
             },
             "railway/narrow_gauge": {
                 "name": "Voie étroite",
-                "terms": "Voie ferrée étroite"
+                "terms": "voie ferrée étroite"
             },
             "railway/platform": {
                 "name": "Quai de gare ferroviaire",
-                "terms": "Quai de gare, Quai"
+                "terms": "quai de gare,quai"
             },
             "railway/rail": {
                 "name": "Voie ferrée",
-                "terms": "Rail"
+                "terms": "rail"
             },
             "railway/station": {
                 "name": "Gare ferroviaire",
-                "terms": "Gare ferroviaire, Gare, Arrêt"
+                "terms": "gare ferroviaire,gare,arrêt"
             },
             "railway/subway": {
                 "name": "Métro",
-                "terms": "Métro, Métropolitain"
+                "terms": "métro,métropolitain"
             },
             "railway/subway_entrance": {
                 "name": "Bouche de métro",
-                "terms": "Entrée de métro, Bouche de métro"
+                "terms": "entrée de métro,bouche de métro"
             },
             "railway/tram": {
                 "name": "Tramway",
-                "terms": "Tram, Tramway"
+                "terms": "tram,tramway"
             },
             "relation": {
                 "name": "Relation",
-                "terms": "Relation"
+                "terms": "relation"
             },
             "roundabout": {
                 "name": "Carrefour giratoire ",
-                "terms": "Rond-point"
+                "terms": "rond-point"
             },
             "route/ferry": {
                 "name": "Trajet de ferry",
-                "terms": "Ligne de Ferry"
+                "terms": "ligne de ferry"
             },
             "shop": {
                 "name": "Magasin",
-                "terms": "Magasin"
+                "terms": "magasin"
             },
             "shop/alcohol": {
                 "name": "Magasin de vente d'alcool",
-                "terms": "Cave, Caviste, Magasin de vin, Vins & Spiritueux"
+                "terms": "cave,caviste,magasin de vin,vins & spiritueux"
             },
             "shop/anime": {
                 "name": "Boutique d' \"animes\"",
-                "terms": "Vente de mangas, de CD et DVD, déguisements, accessoires"
+                "terms": "vente de mangas,de cd et dvd,déguisements,accessoires"
             },
             "shop/antiques": {
                 "name": "Antiquaire",
-                "terms": "Brocante"
+                "terms": "brocante"
             },
             "shop/art": {
                 "name": "Galerie d'art",
-                "terms": "Galerie d'art"
+                "terms": "galerie d'art"
             },
             "shop/baby_goods": {
                 "name": "Magasin de produits pour bébés",
-                "terms": "Magasin de puériculture"
+                "terms": "magasin de puériculture"
             },
             "shop/bag": {
                 "name": "Bagagerie",
-                "terms": "Vente de bagages"
+                "terms": "vente de bagages"
             },
             "shop/bakery": {
                 "name": "Boulangerie",
-                "terms": "Boulangerie"
+                "terms": "boulangerie"
             },
             "shop/bathroom_furnishing": {
                 "name": "Fournitures pour salles de bain",
-                "terms": "Fournitures pour salles de bain"
+                "terms": "fournitures pour salles de bain"
             },
             "shop/beauty": {
                 "name": "Salon de beauté",
-                "terms": "Salon de beauté, Institut de beauté"
+                "terms": "salon de beauté,institut de beauté"
             },
             "shop/bed": {
                 "name": "Magasin de literie",
-                "terms": "Vente de literie, Vente de matelas"
+                "terms": "vente de literie,vente de matelas"
             },
             "shop/beverages": {
                 "name": "Vente de boissons alcolisées",
-                "terms": "Magasin de vins et spiritueux"
+                "terms": "magasin de vins et spiritueux"
             },
             "shop/bicycle": {
                 "name": "Magasin de vélos",
-                "terms": "Magasin de vélo"
+                "terms": "magasin de vélo"
             },
             "shop/bookmaker": {
                 "name": "Bookmaker",
-                "terms": "Preneur de paris, Bookmaker"
+                "terms": "preneur de paris,bookmaker"
             },
             "shop/books": {
                 "name": "Librairie",
-                "terms": "Bouquiniste, Livres d'occasion"
+                "terms": "bouquiniste,livres d'occasion"
             },
             "shop/boutique": {
                 "name": "Petit magasin de mode",
-                "terms": "Petit magasin de mode"
+                "terms": "petit magasin de mode"
             },
             "shop/butcher": {
                 "name": "Boucher",
-                "terms": "Boucherie"
+                "terms": "boucherie"
             },
             "shop/candles": {
                 "name": "Magasin de bougies",
-                "terms": "Vente de bougies et d'accessoires"
+                "terms": "vente de bougies et d'accessoires"
             },
             "shop/car": {
                 "name": "Concessionnaire automobile",
-                "terms": "Concessionnaire"
+                "terms": "concessionnaire"
             },
             "shop/car_parts": {
                 "name": "Magasin de pièces automobiles",
-                "terms": "Magasin de pièces automobiles"
+                "terms": "magasin de pièces automobiles"
             },
             "shop/car_repair": {
                 "name": "Garage",
-                "terms": "Garage, atelier de mécanique automobile"
+                "terms": "garage,atelier de mécanique automobile"
             },
             "shop/carpet": {
                 "name": "Magasin de tapis",
-                "terms": "Magasin de tapis"
+                "terms": "magasin de tapis"
             },
             "shop/cheese": {
                 "name": "Fromager",
-                "terms": "Vente de fromages"
+                "terms": "vente de fromages"
             },
             "shop/chemist": {
                 "name": "Pharmacie",
-                "terms": "Pharmacie"
+                "terms": "pharmacie"
             },
             "shop/chocolate": {
                 "name": "Chocolatier",
-                "terms": "Vente de chocolats"
+                "terms": "vente de chocolats"
             },
             "shop/clothes": {
                 "name": "Magasin de vêtements",
-                "terms": "Magasin de vêtements"
+                "terms": "magasin de vêtements"
             },
             "shop/computer": {
                 "name": "Magasin d'informatique",
-                "terms": "Magasin d'informatique"
+                "terms": "magasin d'informatique"
             },
             "shop/confectionery": {
                 "name": "Confiserie",
-                "terms": "Confiserie"
+                "terms": "confiserie"
             },
             "shop/convenience": {
                 "name": "Petite épicerie du coin",
-                "terms": "Supérette, Petite épicerie du coin"
+                "terms": "supérette,petite épicerie du coin"
             },
             "shop/copyshop": {
                 "name": "Reprographie",
-                "terms": "Photocopies, Impression"
+                "terms": "photocopies,impression"
             },
             "shop/cosmetics": {
                 "name": "Parfumerie",
-                "terms": "Vente de cosmétiques"
+                "terms": "vente de cosmétiques"
             },
             "shop/craft": {
                 "name": "Magasin d'arts et loisirs créatifs",
-                "terms": "Magasin des Beaux-Arts, Magasin d'arts graphiques"
+                "terms": "magasin des beaux-arts,magasin d'arts graphiques"
             },
             "shop/curtain": {
                 "name": "Magasin de rideaux",
-                "terms": "Magasin de rideaux"
+                "terms": "magasin de rideaux"
             },
             "shop/dairy": {
                 "name": "Crèmerie",
-                "terms": "Crèmerie"
+                "terms": "crèmerie"
             },
             "shop/deli": {
                 "name": "Épicerie de luxe",
-                "terms": "Epicerie fine, Traiteur"
+                "terms": "epicerie fine,traiteur"
             },
             "shop/department_store": {
                 "name": "Grand magasin",
-                "terms": "Magasin à rayon, grand magasin, magasin par départements"
+                "terms": "magasin à rayon,grand magasin,magasin par départements"
             },
             "shop/doityourself": {
                 "name": "Magasin de bricolage",
-                "terms": "Magasin de bricolage"
+                "terms": "magasin de bricolage"
             },
             "shop/dry_cleaning": {
                 "name": "Pressing",
-                "terms": "Teinturerie, Blanchisserie"
+                "terms": "teinturerie,blanchisserie"
             },
             "shop/electronics": {
                 "name": "Magasin d'électronique et d'électroménager",
-                "terms": "Magasin d'électronique et d'électroménager"
+                "terms": "magasin d'électronique et d'électroménager"
             },
             "shop/erotic": {
                 "name": "Sex-shop",
-                "terms": "Sex-shop"
+                "terms": "sex-shop"
             },
             "shop/fabric": {
                 "name": "Magasin de tissus",
-                "terms": "Magasin de tissus"
+                "terms": "magasin de tissus"
             },
             "shop/farm": {
-                "name": "Étal de fruits et légumes",
-                "terms": "Étal de fruits et légumes"
+                "name": "Magasin de producteurs",
+                "terms": "étal de fruits et légumes,vente à la ferme,vente producteurs"
             },
             "shop/fashion": {
                 "name": "Boutique de mode",
-                "terms": "Boutique de mode"
+                "terms": "boutique de mode"
             },
             "shop/fishmonger": {
                 "name": "Poissonnerie",
-                "terms": "Poissonnerie"
+                "terms": "poissonnerie"
             },
             "shop/florist": {
                 "name": "Fleuriste",
-                "terms": "Fleuriste"
+                "terms": "fleuriste"
             },
             "shop/frame": {
                 "name": "Magasin d'encadrements",
-                "terms": "Vente de cadres"
+                "terms": "vente de cadres"
             },
             "shop/funeral_directors": {
                 "name": "Funérarium",
-                "terms": "Funérarium, Maison funéraire"
+                "terms": "funérarium,maison funéraire"
             },
             "shop/furnace": {
                 "name": "Chauffagiste",
-                "terms": "Vente de chaudières"
+                "terms": "vente de chaudières"
             },
             "shop/furniture": {
                 "name": "Magasin de meubles",
-                "terms": "Magasin de meubles"
+                "terms": "magasin de meubles"
             },
             "shop/garden_centre": {
                 "name": "Magasin spécialiste du jardin",
-                "terms": "Jardinerie, centre de jardinage"
+                "terms": "jardinerie,centre de jardinage"
             },
             "shop/gift": {
                 "name": "Boutique de cadeaux",
-                "terms": "Boutique de souvenirs"
+                "terms": "boutique de souvenirs"
             },
             "shop/greengrocer": {
                 "name": "Marchand de fruits et légumes",
-                "terms": "Fruiterie, Marchand de fruits et légumes, Maraicher, Maraîcher, Primeur"
+                "terms": "fruiterie,marchand de fruits et légumes,maraicher,maraîcher,primeur"
             },
             "shop/hairdresser": {
                 "name": "Salon de coiffure",
-                "terms": "Coiffeur"
+                "terms": "coiffeur"
             },
             "shop/hardware": {
                 "name": "Quincaillerie",
-                "terms": "Quincaillerie"
+                "terms": "quincaillerie"
             },
             "shop/hearing_aids": {
                 "name": "Audioprothésiste",
-                "terms": "Vente de prothèses auditives"
+                "terms": "vente de prothèses auditives"
             },
             "shop/herbalist": {
                 "name": "Herboristerie",
-                "terms": "Herboristerie"
+                "terms": "herboristerie"
             },
             "shop/hifi": {
                 "name": "Magasin de matériel hi-fi",
-                "terms": "Magasin d'appareils audio-visuel"
+                "terms": "magasin d'appareils audio-visuel"
             },
             "shop/houseware": {
                 "name": "Magasin d’articles ménagers",
-                "terms": "Vente d'articles de cuisine"
+                "terms": "vente d'articles de cuisine"
             },
             "shop/interior_decoration": {
                 "name": "Magasin de décoration d'intérieur",
-                "terms": "Magasin de décoration d'intérieur"
+                "terms": "magasin de décoration d'intérieur"
             },
             "shop/jewelry": {
                 "name": "Bijouterie",
-                "terms": "Bijoutier"
+                "terms": "bijoutier"
             },
             "shop/kiosk": {
                 "name": "Kiosque à journaux",
-                "terms": "Kiosque à journaux"
+                "terms": "kiosque à journaux"
             },
             "shop/kitchen": {
                 "name": "Magasin de cuisines",
-                "terms": "Vente de mobilier et accessoires de cuisine"
+                "terms": "vente de mobilier et accessoires de cuisine"
             },
             "shop/laundry": {
                 "name": "Laverie",
-                "terms": "Laverie"
+                "terms": "laverie"
             },
             "shop/leather": {
                 "name": "Boutique de vêtements en cuir",
-                "terms": "Boutique de vêtements en cuir"
+                "terms": "boutique de vêtements en cuir"
             },
             "shop/locksmith": {
                 "name": "Serrurier",
-                "terms": "Serrurier"
+                "terms": "serrurier"
             },
             "shop/lottery": {
                 "name": "Loterie",
-                "terms": "Vente de billets de loterie"
+                "terms": "vente de billets de loterie"
             },
             "shop/mall": {
                 "name": "Centre commercial",
-                "terms": "Centre d'achat"
+                "terms": "centre d'achat"
             },
             "shop/massage": {
                 "name": "Salon de massage",
-                "terms": "Salon de massage"
+                "terms": "salon de massage"
             },
             "shop/medical_supply": {
                 "name": "Magasin de matériel médical",
-                "terms": "Magasin de matériel médical"
+                "terms": "magasin de matériel médical"
             },
             "shop/mobile_phone": {
                 "name": "Magasin de téléphonie mobile",
-                "terms": "Vente de téléphone portable, magasin de téléphones portables"
+                "terms": "vente de téléphone portable,magasin de téléphones portables"
             },
             "shop/money_lender": {
                 "name": "Prêteur sur gages",
-                "terms": "Prêteur sur gages"
+                "terms": "prêteur sur gages"
             },
             "shop/motorcycle": {
                 "name": "Vendeur de motos",
-                "terms": "Vendeur de motos"
+                "terms": "vendeur de motos"
             },
             "shop/music": {
                 "name": "Vente d'instruments de musique",
-                "terms": "Magasin de musique"
+                "terms": "magasin de musique"
             },
             "shop/musical_instrument": {
                 "name": "Magasin d'instruments de musique",
-                "terms": "Magasin d'instruments de musique"
+                "terms": "magasin d'instruments de musique"
             },
             "shop/newsagent": {
                 "name": "Magasin de journaux",
-                "terms": "Vente de journaux, de magazines, Maison de la presse"
+                "terms": "vente de journaux,de magazines,maison de la presse"
             },
             "shop/optician": {
                 "name": "Opticien",
-                "terms": "Opticien"
+                "terms": "opticien"
             },
             "shop/organic": {
                 "name": "Magasin de produits biologiques",
-                "terms": "Vente de produits biologiques"
+                "terms": "vente de produits biologiques"
             },
             "shop/outdoor": {
                 "name": "Magasin de matériel de sports de plein air",
-                "terms": "Magasin de matériel de sports de plein air"
+                "terms": "magasin de matériel de sports de plein air"
             },
             "shop/paint": {
                 "name": "Magasin de peintures",
-                "terms": "Vente de peintures"
+                "terms": "vente de peintures"
             },
             "shop/pawnbroker": {
                 "name": "Prêteur sur gages",
-                "terms": "Mont-de-piété, Crédit municipal"
+                "terms": "mont-de-piété,crédit municipal"
             },
             "shop/pet": {
                 "name": "Animalerie",
-                "terms": "Animalerie"
+                "terms": "animalerie"
             },
             "shop/photo": {
                 "name": "Tirage de photos",
-                "terms": "Photographe, Tirage de photos"
+                "terms": "photographe,tirage de photos"
             },
             "shop/pyrotechnics": {
                 "name": "Magasin de feux d'artifice",
-                "terms": "Magasin de feux d'artifice"
+                "terms": "magasin de feux d'artifice"
             },
             "shop/radiotechnics": {
                 "name": "Magasin de composants électroniques et de radio ",
-                "terms": "Magasin de composants électroniques et de radio "
+                "terms": "magasin de composants électroniques et de radio "
             },
             "shop/religion": {
                 "name": "Magasin d'articles religieux",
-                "terms": "Boutique d'une église, d'un monastère"
+                "terms": "boutique d'une église,d'un monastère"
             },
             "shop/scuba_diving": {
                 "name": "Magasin d'équipement et d'articles de plongée sous-marine",
-                "terms": "Magasin d'équipement et d'articles de plongée sous-marine"
+                "terms": "magasin d'équipement et d'articles de plongée sous-marine"
             },
             "shop/seafood": {
                 "name": "Poissonnerie / Vente de fruits de mer",
-                "terms": "Vendeur de poissons, fruits de mer, écailler"
+                "terms": "vendeur de poissons,fruits de mer,écailler"
             },
             "shop/second_hand": {
                 "name": "Magasin caritatif",
-                "terms": "Magasin caritatif"
+                "terms": "magasin caritatif"
             },
             "shop/shoes": {
                 "name": "Magasin de chaussures",
-                "terms": "Magasin de chaussures"
+                "terms": "magasin de chaussures"
             },
             "shop/sports": {
                 "name": "Magasin d'équipement sportif",
-                "terms": "Magasin d'équipement sportif"
+                "terms": "magasin d'équipement sportif"
             },
             "shop/stationery": {
                 "name": "Papeterie",
-                "terms": "Papeterie"
+                "terms": "papeterie"
             },
             "shop/supermarket": {
                 "name": "Supermarché",
-                "terms": "Supermarché"
+                "terms": "supermarché"
             },
             "shop/tailor": {
                 "name": "Tailleur",
-                "terms": "Habilleur, Giletier"
+                "terms": "habilleur,giletier"
             },
             "shop/tattoo": {
                 "name": "Salon de tatouage",
-                "terms": "Salon de tatouage"
+                "terms": "salon de tatouage"
             },
             "shop/tea": {
                 "name": "Magasin de thés",
-                "terms": "Magasin de thés"
+                "terms": "magasin de thés"
             },
             "shop/ticket": {
                 "name": "Boutique de vente de billets",
-                "terms": "Boutique de vente de billets"
+                "terms": "boutique de vente de billets"
             },
             "shop/tobacco": {
                 "name": "Bureau de tabac",
-                "terms": "Buraliste"
+                "terms": "buraliste"
             },
             "shop/toys": {
                 "name": "Magasin de jouets",
-                "terms": "Magasin de jouets"
+                "terms": "magasin de jouets"
             },
             "shop/travel_agency": {
                 "name": "Agence de voyages",
-                "terms": "Agence de voyage"
+                "terms": "agence de voyage"
             },
             "shop/tyres": {
                 "name": "Magasin de pneus",
-                "terms": "Magasin de pneus"
+                "terms": "magasin de pneus"
             },
             "shop/vacant": {
                 "name": "Commerce désaffecté",
-                "terms": "Espace vacant, lot vacant"
+                "terms": "espace vacant,lot vacant"
             },
             "shop/vacuum_cleaner": {
                 "name": "Magasin d'électroménager de nettoyage",
-                "terms": "Vente de produits de nettoyage"
+                "terms": "vente de produits de nettoyage"
             },
             "shop/variety_store": {
                 "name": "Supérette, Petite épicerie du coin",
-                "terms": "Épicerie"
+                "terms": "épicerie"
             },
             "shop/video": {
                 "name": "Vidéo-club",
-                "terms": "Club vidéo"
+                "terms": "club vidéo"
             },
             "shop/video_games": {
                 "name": "Magasin de location et vente de jeux vidéo",
-                "terms": "Magasin de location et vente de jeux vidéo"
+                "terms": "magasin de location et vente de jeux vidéo"
             },
             "shop/water_sports": {
                 "name": "Vente d'équipements et d'articles pour sports nautiques",
-                "terms": "Vente d'équipements et d'articles pour sports nautiques"
+                "terms": "vente d'équipements et d'articles pour sports nautiques"
             },
             "shop/weapons": {
                 "name": "Armurerie",
-                "terms": "Armurerie"
+                "terms": "armurerie"
             },
             "shop/window_blind": {
                 "name": "Magasin de vente de stores",
-                "terms": "Magasin de vente de stores"
+                "terms": "magasin de vente de stores"
             },
             "shop/wine": {
                 "name": "Caviste",
-                "terms": "Caviste,  Bar à vins"
+                "terms": "caviste, bar à vins"
             },
             "tourism": {
                 "name": "Tourisme",
-                "terms": "Tourisme"
+                "terms": "tourisme"
             },
             "tourism/alpine_hut": {
                 "name": "Refuge de montagne",
-                "terms": "Refuge de montagne, cabane"
+                "terms": "refuge de montagne,cabane"
             },
             "tourism/artwork": {
                 "name": "Œuvre d'art",
-                "terms": "Œuvre d'art"
+                "terms": "œuvre d'art"
             },
             "tourism/attraction": {
                 "name": "Attraction touristique",
-                "terms": "Attraction touristique"
+                "terms": "attraction touristique"
             },
             "tourism/camp_site": {
                 "name": "Camping",
-                "terms": "Camping"
+                "terms": "camping"
             },
             "tourism/caravan_site": {
                 "name": "Aire pour caravanes",
-                "terms": "Aire pour caravanes"
+                "terms": "aire pour caravanes"
             },
             "tourism/chalet": {
                 "name": "Chalet",
-                "terms": "Chalet"
+                "terms": "chalet"
             },
             "tourism/guest_house": {
                 "name": "Chambre d'hôtes",
-                "terms": "Chambre d'hôtes, Gîte"
+                "terms": "chambre d'hôtes,gîte"
             },
             "tourism/hostel": {
                 "name": "Auberge de jeunesse",
-                "terms": "Auberge de jeunesse"
+                "terms": "auberge de jeunesse"
             },
             "tourism/hotel": {
                 "name": "Hôtel",
-                "terms": "Hôtel"
+                "terms": "hôtel"
             },
             "tourism/information": {
                 "name": "Informations",
-                "terms": "Informations,Renseignements,Office de tourisme,Panneau,Carte"
+                "terms": "informations,renseignements,office de tourisme,panneau,carte"
             },
             "tourism/motel": {
                 "name": "Motel",
-                "terms": "Motel"
+                "terms": "motel"
             },
             "tourism/museum": {
                 "name": "Musée",
-                "terms": "Musée"
+                "terms": "musée"
             },
             "tourism/picnic_site": {
                 "name": "Aire de pique-nique",
-                "terms": "Aire de pique-nique"
+                "terms": "aire de pique-nique"
             },
             "tourism/theme_park": {
                 "name": "Parc d'attraction",
-                "terms": "Parc à thème, parc d'attractions"
+                "terms": "parc à thème,parc d'attractions"
             },
             "tourism/viewpoint": {
                 "name": "Point de vue",
-                "terms": "Point de vue, observatoire, mirador"
+                "terms": "point de vue,observatoire,mirador"
             },
             "tourism/zoo": {
                 "name": "Zoo",
-                "terms": "Zoo"
+                "terms": "zoo"
             },
             "traffic_calming/bump": {
                 "name": "Ralentisseur",
-                "terms": "ralentisseur, casse-vitesse"
+                "terms": "ralentisseur,casse-vitesse"
             },
             "traffic_calming/hump": {
                 "name": "Ralentisseur dos d’âne (gendarme couché)",
-                "terms": "Dos d'âne"
+                "terms": "dos d'âne"
             },
             "traffic_calming/rumble_strip": {
                 "name": "Section de route à rainurage",
-                "terms": "Bande rugueuse"
+                "terms": "bande rugueuse"
             },
             "traffic_calming/table": {
                 "name": "Passage pour piétons surélévé",
-                "terms": "Passage piéton surélevé, Ralentisseur de type trapézoïdal"
+                "terms": "passage piéton surélevé,ralentisseur de type trapézoïdal"
             },
             "type/boundary": {
                 "name": "Frontière",
-                "terms": "Frontière"
+                "terms": "frontière"
             },
             "type/boundary/administrative": {
                 "name": "Frontière administrative",
-                "terms": "Frontières administratives, frontière administrative"
+                "terms": "frontières administratives,frontière administrative"
             },
             "type/multipolygon": {
                 "name": "Multipolygone",
-                "terms": "Multi-polygone"
+                "terms": "multi-polygone"
             },
             "type/restriction": {
                 "name": "Restriction",
-                "terms": "Restriction"
+                "terms": "restriction"
             },
             "type/restriction/no_left_turn": {
                 "name": "Interdiction de tourner à gauche ",
-                "terms": "Interdiction de tourner à gauche "
+                "terms": "interdiction de tourner à gauche "
             },
             "type/restriction/no_right_turn": {
                 "name": "Interdiction de tourner à droite",
-                "terms": "Interdiction de tourner à droite"
+                "terms": "interdiction de tourner à droite"
             },
             "type/restriction/no_straight_on": {
                 "name": "Interdiction d'aller tout droit",
-                "terms": "Interdiction d'aller tout droit"
+                "terms": "interdiction d'aller tout droit"
             },
             "type/restriction/no_u_turn": {
                 "name": "Demi-tour interdit",
-                "terms": "Demi-tour interdit"
+                "terms": "demi-tour interdit"
             },
             "type/restriction/only_left_turn": {
                 "name": "Obligation de tourner à gauche",
-                "terms": "Obligation de tourner à gauche"
+                "terms": "obligation de tourner à gauche"
             },
             "type/restriction/only_right_turn": {
                 "name": "Obligation de tourner à droite",
-                "terms": "Obligation de tourner à droite"
+                "terms": "obligation de tourner à droite"
             },
             "type/restriction/only_straight_on": {
                 "name": "Interdiction de bifurquer",
-                "terms": "Interdiction de bifurquer"
+                "terms": "interdiction de bifurquer"
             },
             "type/route": {
                 "name": "Route",
-                "terms": "Route, rue, chemin, sentier"
+                "terms": "route,rue,chemin,sentier"
             },
             "type/route/bicycle": {
                 "name": "Trajet cyclable",
-                "terms": "Piste cyclable"
+                "terms": "piste cyclable"
             },
             "type/route/bus": {
                 "name": "Trajet de bus",
-                "terms": "Trajet d'autobus"
+                "terms": "trajet d'autobus"
             },
             "type/route/detour": {
                 "name": "Déviation",
-                "terms": "Détour"
+                "terms": "détour"
             },
             "type/route/ferry": {
                 "name": "Trajet de ferry",
-                "terms": "Route de traversier, Ligne de ferry"
+                "terms": "route de traversier,ligne de ferry"
             },
             "type/route/foot": {
                 "name": "Trajet pédestre",
-                "terms": "Sentier"
+                "terms": "sentier"
             },
             "type/route/hiking": {
                 "name": "Sentier pédestre",
-                "terms": "Sentier pédestre"
+                "terms": "sentier pédestre"
             },
             "type/route/pipeline": {
                 "name": "Trajet de pipeline",
-                "terms": "Pipeline, gazoduc, oléoduc"
+                "terms": "pipeline,gazoduc,oléoduc"
             },
             "type/route/power": {
                 "name": "Ligne électrique",
-                "terms": "Ligne électrique"
+                "terms": "ligne électrique"
             },
             "type/route/road": {
                 "name": "Trajet routier",
-                "terms": "Route, rue, chemin, sentier"
+                "terms": "route,rue,chemin,sentier"
             },
             "type/route/train": {
                 "name": "Trajet ferroviaire",
-                "terms": "Voie ferrée, chemin de fer"
+                "terms": "voie ferrée,chemin de fer"
             },
             "type/route/tram": {
                 "name": "Trajet de tramway",
-                "terms": "Route de tramway"
+                "terms": "route de tramway"
             },
             "type/route_master": {
                 "name": "Route parente",
-                "terms": "Relation principale, route master"
+                "terms": "relation principale,route master"
             },
             "vertex": {
                 "name": "Autre",
-                "terms": "Autres"
+                "terms": "autres"
             },
             "waterway": {
                 "name": "Voie navigable",
-                "terms": "Voie d'eau, Cours d'eau"
+                "terms": "voie d'eau,cours d'eau"
             },
             "waterway/canal": {
                 "name": "Canal",
-                "terms": "Canal"
+                "terms": "canal"
             },
             "waterway/dam": {
                 "name": "Barrage",
-                "terms": "Barrage"
+                "terms": "barrage"
             },
             "waterway/ditch": {
                 "name": "Fossé",
-                "terms": "Fossé"
+                "terms": "fossé"
             },
             "waterway/drain": {
                 "name": "Canal d'évacuation d'eau pluviale",
-                "terms": "Drain"
+                "terms": "drain"
             },
             "waterway/fuel": {
                 "name": "Station-service marine",
-                "terms": "Station-service nautique, nautisme, bateaux, essence"
+                "terms": "station-service nautique,nautisme,bateaux,essence"
             },
             "waterway/river": {
                 "name": "Rivière",
-                "terms": "Rivière"
+                "terms": "rivière"
             },
             "waterway/riverbank": {
                 "name": "Berge",
-                "terms": "Berge"
+                "terms": "berge"
             },
             "waterway/sanitary_dump_station": {
                 "name": "Station de vidange sanitaire marine",
-                "terms": "Station de vidange sanitaire nautique"
+                "terms": "station de vidange sanitaire nautique"
             },
             "waterway/stream": {
                 "name": "Ruisseau",
-                "terms": "Ruisseau"
+                "terms": "ruisseau"
             },
             "waterway/weir": {
                 "name": "Seuil",
-                "terms": "Seuil"
+                "terms": "seuil"
             }
         }
     }

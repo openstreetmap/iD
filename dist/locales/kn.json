@@ -2,13 +2,17 @@
     "modes": {
         "add_area": {
             "title": "ಪ್ರದೇಶ",
-            "description": "ಉದ್ಯಾನವನಗಳು, ಕಟ್ಟಡಗಳು, ಸರೋವರಗಳು ಅಥವಾ ಇತರೆ ಪ್ರದೇಶಗಳನ್ನು ನಕ್ಷೆಯಲ್ಲಿ ಸೇರಿಸಿ."
+            "description": "ಉದ್ಯಾನವನಗಳು, ಕಟ್ಟಡಗಳು, ಸರೋವರಗಳು ಅಥವಾ ಇತರೆ ಪ್ರದೇಶಗಳನ್ನು ನಕ್ಷೆಯಲ್ಲಿ ಸೇರಿಸಿ.",
+            "tail": "ಪಾರ್ಕ್, ಕೆರೆ, ಅಥವಾ ಕಟ್ಟಡ ನಂತಹ ಪ್ರದೇಶವನ್ನು ಪ್ರಾರಂಭಿಸಲು ನಕ್ಷೆಯನ್ನು ಕ್ಲಿಕ್ ಮಾಡಿ."
         },
         "add_line": {
-            "title": "ರೇಖೆ"
+            "title": "ರೇಖೆ",
+            "description": "ಹೆದ್ದಾರಿಗಳು, ಬೀದಿಗಳು, ಪಾದಚಾರಿ ಮಾರ್ಗ, ಕಾಲುವೆಗಳು ಅಥವಾ ಇತರ ಸಾಲುಗಳನ್ನು ನಕ್ಷೆ‍ಗೆ ಸೇರಿಸಿ.",
+            "tail": "‍ರಸ್ತೆ, ದಾರಿ, ಅಥವಾ ಮಾರ್ಗ ಸೇರಿಸಲು ನಕ್ಷೆಯನ್ನು ಕ್ಲಿಕ್ ಮಾಡಿ."
         },
         "add_point": {
             "title": "ಬಿಂದು",
+            "description": "ಉದ್ಯಾನವನಗಳು, ಕಟ್ಟಡಗಳು, ಸರೋವರಗಳು ಅಥವಾ ಇತರೆ ಪ್ರದೇಶಗಳನ್ನು ನಕ್ಷೆಯಲ್ಲಿ ಸೇರಿಸಿ.",
             "tail": "ಬಿಂದುವನ್ನು ಸೇರಿಸಲು ನಕ್ಷೆಯ ಮೇಲಿ ಕ್ಲಿಕ್ಕಿಸಿ."
         },
         "browse": {
@@ -162,6 +166,14 @@
     },
     "contributors": {
         "list": "ಸಂಪಾದನೆಗಳು {ಬಳಕೆದಾರ ಮೂಲಕ}"
+    },
+    "infobox": {
+        "area": "‍ಪ್ರದೇಶ"
+    },
+    "geometry": {
+        "point": "ಬಿಂದು",
+        "line": "ರೇಖೆ",
+        "area": "ಪ್ರದೇಶ"
     },
     "geocoder": {
         "search": "ಪ್ರಪಂಚದಾದ್ಯಂತ ಹುಡುಕು......",
@@ -370,6 +382,7 @@
                 "label": "ವಿಳಾಸ",
                 "placeholders": {
                     "city": "ನಗರ",
+                    "conscriptionnumber": "123",
                     "country": "ದೇಶ",
                     "district": "ಜಿಲ್ಲೆ",
                     "hamlet": "ಕೊಪ್ಪಲು",
@@ -429,6 +442,9 @@
             },
             "amenity": {
                 "label": "ವಿಧ"
+            },
+            "area/highway": {
+                "label": "‍ವಿಧ"
             },
             "artist": {
                 "label": "ಕಲಾವಿದ"
@@ -687,6 +703,9 @@
             "length": {
                 "label": "ಉದ್ದ (ಮೀಟರ್)"
             },
+            "level": {
+                "label": "ಮಟ್ಟ"
+            },
             "levels": {
                 "label": "ಮಟ್ಟ",
                 "placeholder": "2, 4, 6..."
@@ -935,30 +954,30 @@
             },
             "aeroway/gate": {
                 "name": "ವಿಮಾನ ನಿಲ್ದಾಣ ಗೇಟ್",
-                "terms": "<translate with synonyms or related terms for 'Airport gate', separated by commas>"
+                "terms": "<translate with synonyms or related terms for 'airport gate',separated by commas>"
             },
             "aeroway/hangar": {
-                "terms": "<translate with synonyms or related terms for 'Hangar', separated by commas>"
+                "terms": "<translate with synonyms or related terms for 'hangar',separated by commas>"
             },
             "aeroway/helipad": {
-                "terms": "<translate with synonyms or related terms for 'Helipad', separated by commas>"
+                "terms": "<translate with synonyms or related terms for 'helipad',separated by commas>"
             },
             "aeroway/runway": {
                 "name": "ಓಡುದಾರಿ",
-                "terms": "<translate with synonyms or related terms for 'Runway', separated by commas>"
+                "terms": "<translate with synonyms or related terms for 'runway',separated by commas>"
             },
             "aeroway/taxiway": {
-                "terms": "<translate with synonyms or related terms for 'Taxiway', separated by commas>"
+                "terms": "<translate with synonyms or related terms for 'taxiway',separated by commas>"
             },
             "aeroway/terminal": {
-                "terms": "<translate with synonyms or related terms for 'Airport terminal', separated by commas>"
+                "terms": "<translate with synonyms or related terms for 'airport terminal',separated by commas>"
             },
             "amenity": {
                 "name": "ಸೌಕರ್ಯ",
-                "terms": "<translate with synonyms or related terms for 'Amenity', separated by commas>"
+                "terms": "<translate with synonyms or related terms for 'amenity',separated by commas>"
             },
             "amenity/arts_centre": {
-                "terms": "<translate with synonyms or related terms for 'Arts Center', separated by commas>"
+                "terms": "<translate with synonyms or related terms for 'arts center',separated by commas>"
             },
             "amenity/atm": {
                 "name": "ATM"
@@ -967,16 +986,16 @@
                 "name": "ಬ್ಯಾಂಕ್"
             },
             "amenity/bar": {
-                "terms": "<translate with synonyms or related terms for 'Bar', separated by commas>"
+                "terms": "<translate with synonyms or related terms for 'bar',separated by commas>"
             },
             "amenity/bbq": {
-                "terms": "<translate with synonyms or related terms for 'Barbecue/Grill', separated by commas>"
+                "terms": "<translate with synonyms or related terms for 'barbecue/grill',separated by commas>"
             },
             "amenity/bench": {
-                "terms": "<translate with synonyms or related terms for 'Bench', separated by commas>"
+                "terms": "<translate with synonyms or related terms for 'bench',separated by commas>"
             },
             "amenity/bicycle_parking": {
-                "terms": "<translate with synonyms or related terms for 'Bicycle Parking', separated by commas>"
+                "terms": "<translate with synonyms or related terms for 'bicycle parking',separated by commas>"
             },
             "amenity/cinema": {
                 "name": "ಸಿನಿಮಾ"

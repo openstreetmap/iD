@@ -115,9 +115,6 @@
             "highway/bus_stop": {
                 "name": "Ավտոբուսի կանգառ"
             },
-            "highway/crossing": {
-                "name": "Անցում (հետիոտնի)"
-            },
             "highway/steps": {
                 "name": "Աստիճաններ"
             }

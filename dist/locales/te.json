@@ -477,11 +477,11 @@
             },
             "amenity/place_of_worship/christian": {
                 "name": "చర్చి",
-                "terms": "చర్చి, చర్చ్"
+                "terms": "చర్చి,చర్చ్"
             },
             "amenity/place_of_worship/muslim": {
                 "name": "మసీదు",
-                "terms": "మసీదు, మాస్క్"
+                "terms": "మసీదు,మాస్క్"
             },
             "amenity/police": {
                 "name": "పోలీసు"

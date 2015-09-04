@@ -239,6 +239,7 @@
     "commit": {
         "title": "Išsaugoti pakeitimus",
         "description_placeholder": "Trumpas jūsų indėlio aprašymas",
+        "message_label": "Pakeitimo komentaras",
         "upload_explanation": "Jūsų įkeliami pakeitimai bus matomi visuose žemėlapiuose, naudojančiuose OpenStreetMap duomenis.",
         "upload_explanation_with_user": "Pakeitimai, kuriuos jūs įkeliate kaip naudotojas {user} bus matomi visuose žemėlapiuose, naudojančiuose OpenStreetMap duomenis.",
         "save": "Išsaugoti",
@@ -252,6 +253,26 @@
     "contributors": {
         "list": "Keitėjai {users}",
         "truncated_list": "Keitėjai {users} ir {count} kitų"
+    },
+    "infobox": {
+        "selected": "{n} pažymėta",
+        "geometry": "Geometrija",
+        "closed": "uždaryta",
+        "center": "Centras",
+        "perimeter": "Perimetras",
+        "length": "Ilgis",
+        "area": "Plotas",
+        "centroid": "Centroidas",
+        "location": "Vieta",
+        "metric": "Metrinė",
+        "imperial": "Imperinė"
+    },
+    "geometry": {
+        "point": "taškas",
+        "vertex": "viršūnė",
+        "line": "linija",
+        "area": "plotas",
+        "relation": "ryšys"
     },
     "geocoder": {
         "search": "Ieškoti visam pasaulyje...",
@@ -302,7 +323,11 @@
         "custom_button": "Redaguoti pasirinktiną foną",
         "custom_prompt": "Įveskite kaladėlių URL šabloną. Galimi ženklai yra {z}, {x}, {y} Z/X/Y schemai ir {u} quadtile schemai.",
         "fix_misalignment": "Taisyti poziciją",
-        "reset": "iš naujo"
+        "reset": "iš naujo",
+        "minimap": {
+            "description": "Minižemėlapis",
+            "tooltip": "Rodyti atitolintą žemėlapį, kad būtų lengviau rasti šiuo metu rodomą vietą."
+        }
     },
     "map_data": {
         "title": "Žemėlapio duomenys",
@@ -473,7 +498,6 @@
     "help": {
         "title": "Pagalba",
         "help": "# Help\n\nTai [OpenStreetMap](http://www.openstreetmap.org/), laisvo ir keičiamo pasaulio žemėlapio redaktorius. Šiuo redaktoriumi galite pridėti ir keisti duomenis savo vietovėje, taip visiems pagerindami atviro kodo ir atvirų duomenų pasaulio žemėlapį.\n\nPakeitimai, kuriuos darote šiame žemėlapyje bus matomi visiems, kas naudoja OpenStreetMap. Kad padarytumėte pakeitimą, jums reikia [prisijungti](https://www.openstreetmap.org/login).\n\n[iD redaktorius](http://ideditor.com/) - tai bendruomenės projektas, kurio [kodas atvirai prieinamas GitHub](https://github.com/openstreetmap/iD).\n",
-        "editing_saving": "# Keitimas ir įrašymas\n\nŠis redaktorius sukurtas visų pirma darbui prisijungus, todėl jūs jį paleidžiate per svetainę.\n\n### Objektų žymėjimas\n\nNorėdami pažymėti objektą, tokį kaip kelią ar lankytiną vietą, pažymėkite jį žemėlapyje. Taip pažymėtas objektus bus paryškintas ir bus atidaryta panelė su objekto informacija bei meniu veiksmų, kuriuos galite atlikti su pažymėtu objektu.\n\nNorėdami pažymėti kelis objektus, laikykite paspaudę klavišą „Shift“. Tada arba spauskite ant kitų objektų, kuriuos norite pažymėti, arba tempkite pele per žemėlapį, kad nupaišytumėte stačiakampį.\nTaip bus pažymėti visi taškai, esantys stačiakampio viduje.\n\n### Pakeitimų įrašymas\n\nKai padarote tarkim kelių, pastatų ar vietovių pakeitimų, jie saugomi vietoje tol, kol jūs neįrašote jų į serverį. Nesijaudinkite jei padarote klaidą, visada galite atstatyti pakeitimus su atstatymo mygtuku ir pakartotinai juos padaryti paspaudę pakartojimo mygtuką.\n\nSpauskite mygtuką „Įrašyti“, jei norite įrašyti grupę pakeitimų, pavyzdžiui jei baigėte vienos vietos pakeitimus ir dabar norėtumėte pradėti keisti kitoje vietoje. Galėsite peržiūrėti, ką padarėte, o redaktorius pateiks naudingus patarimus ar įspėjimus, jei kažkas atrodo ne visai teisingai.\n\nJei viskas gerai, galite įvesti trumpą komentarą, paaiškinantį jūsų pakeitimus ir tada vėl spausti „Įrašyti“, kad įkeltumėte pakeitimus į\n[OpenStreetMap.org](http://www.openstreetmap.org/), kur visi kiti naudotojai juos matys ir galės toliau tobulinti.\n\nJei negalite baigti savo pakeitimų vienu prisėdimu, galite palikti redaktoriaus langą ir grįžti vėliau (toje pačioje naršyklėje ir tame pačiame kompiuteryje), redaktorius jums pasiūlys tęsti jūsų darbą.\n",
         "roads": "# Keliai\n\nJūs galite kurti, taisyti ir naikinti kelius redaktoriaus pagalba. Keliai gali būti įvairių\ntipų: takai, vieškeliai, maršrutai, dviračių takai ir daug kitų, dažnai susikertančių,\njuos visus galima pažymėti.\n\n### Parinkimas\n\nNorėdami parinkti kelią - spauskite ant jo. Kelio kontūras bus paryškintas, taipogi\nbus rodomas mažas įrankių meniu ir šonine skiltimi, rodančia daugiau informacijos\napie kelią.\n\n### Keitimas\n\nDažnai pastebėsite kelius, kurių pozicija neatitinka fone esančios ortofotonuotraukos arba\njūsų GPS pėdsako. Galie pataisyti kelio poziciją, kad kelias būtų teisingoje vietoje.\n\nVisų pirma spauskite ant kelio, kurį norite keisti. Kelias bus paryškintas ir bus matomi\nkontroliniai taškai, kuriuos jūs galite pertempti į teisingesnes pozicijas. Jei norite pridėti\npapildomų kontrolinių taškų - du kartus spauskite ant kelio segmento, kuriame\ndar nėra taško - bus pridėtas naujas taškas.\n\nJei kelias jungiasi su kitu keliu, bet nėra teisingai sujungtas žemėlapyje, jūs galite\ntempti vieną iš kelio kontrolinių taškų ant kito kelio, kad juos sujungtumėte. Labai\nsvarbu teisingai sujungti kelius, nes tai naudojama maršrutizavimui.\n\nTaipogi galite naudoti įrankį „Perkelti“ arba spausti mygtuką „M“, jei norite perkelti\nvisą kelią iš karto, tada vėl spauskite „M“, kad patvirtintumėte perkėlimą.\n\n### Naikinimas\n\nJei kelias yra visiškai neteisingas - jūs matote, kad tokio kelio apskritai nėra ortofoto\nir jūs žinote, kad jo ir realybėje nėra - galite kelią ištrinti, kad jo nebeliktų žemėlapyje.\nNaikindami objektus būkite atidūs, kaip ir bet kuris kitas keitimas, naikinimas matomas\nvisiems naudotojams, o ortofotografijos dažnai būna pasenusios, tagi naujai\nnutiestas kelias gali būti tiesiog nematomas.\n\nKelią galite panaikinti pažymėję jį ir paspaudę šiukšlių dėžės piktogramą arba\npaspaudę mygtuką „Trinti“.\n\n### Kūrimas\n\nRadote vietą, kur turėtų būti kelias, bet jo nėra? Spauskite mygtuką „Linija“\narba klavišą „2“, kad pradėtumėte linijos piešimą.\n\nSpauskite žemėlapyje ant vietos, kur turi prasidėti jūsų kelias. Jeigu kelias atsišakoja\nnuo jau esamo kelio - pradėkite naujo kelio piešimą paspaudę ant atsišakojimo vietos.\n\nTada dėliokite kelio taškus taip, kad jo kontūras maksimaliai atitiktų realų kelią pagal\npalydovinę nuotrauką ar GPS pėdsakus. Jei jūsų piešiamas kelias kerta kitą kelią,\nsujunkite juos spaudžiant ties susikirtimo tašku. Kai baigsite braižyti, du kartus\nspauskite pele arba spauskite klaviatūros mygtuką „Enter“.\n",
         "gps": "# GPS\n\nGPS duomenys - patikimiausias duomenų šaltinis atvirame žemėlapyje. Šis redaktorius palaiko vietinius pėdsakus - „.gpx“ failus jūsų kompiuteryje. Jūs galite surinkti tokius GPS pėdsakus eile išmaniųjų telefonų aplikacijų arba asmenine GPS įranga.\n\nDaugiau informacijos apie tai, kaip daryti GPS apžiūrą rasite [Surveying with a GPS](http://learnosm.org/en/beginner/using-gps/).\n\nNorint panaudoti GPX pėdsaką žymėjimui, atitempkite GPX failą ant žemėlapio. Jei jis bus atpažintas - pamatysite jį žemėlapyje kaip ryškią purpurinę liniją. Spauskite dešinėje esantį meniu „Žemėlapio duomenys“, norėdami įjungti, išjungti ar priartinti šį naują GPX valdomą sluoksnį.\n\nGPX pėdsakas nekeliamas tiesiogiai į OpenStreetMap - geriausias naudojimo būdas - naudoti pėdsaką kaip orientyrą braižant naujus žemėlapio objektus. Vėliau pėdsaką patartina įkelti, kad jį galėtų naudoti kiti braižytojai [upload it to OpenStreetMap](http://www.openstreetmap.org/trace/create).\n",
         "imagery": "# Nuotraukos\n\nIš oro ar palydovo darytos nuotraukos - svarbus žemėlapio paišymo pagalbininkas.\nDešinėje esančiame meniu rasite įvairių nuotraukų, darytų iš lėktuvų, palydovų ar\nkombinuotų šaltinių.\n\nTik įjungus redaktorių bus automatiškai įjungtas [Bing Maps](http://www.bing.com/maps/)\npalydovinis sluoksnis, bet priklausomai nuo to, kurioje geografinėje vietoje\nredaguojate - bus rodomi ir kiti nuotraukų šaltiniai. Kai kurios šalys, tokios kaip\nJAV, Prancūzija, Danija ir Lietuva turi labai aukštos kokybės ir tikslumo\nortofotonuotraukas. Pavyzdžiui Lietuvoje reikėtų naudoti NŽT ORT10LT.\n\nNuotraukos kartais būna pasislinkusios nuo realios pozicijos dėl nuotraukų\ntiekėjo klaidų. Jei matote, kad daug kelių ar kitų objektų yra pasislinkę nuo\nnuotraukos, nepulkite jų tempti į „teisingas“ vietas. Vietoje to geriau pataisykite\nnuotraukos poziciją pagal esamus duomenis, paspaudę fono parinkčių apačioje\n„Taisyti lygiavimą“. NŽT ORT10LT lygiavimas yra teisingas visoje Lietuvos\nteritorijoje, taigi jo taisyti nereikia.\n",
@@ -576,6 +600,10 @@
                         "description": "Priėjimas leistinas tik atvykti į tikslą",
                         "title": "Tikslinis"
                     },
+                    "dismount": {
+                        "description": "Priėjimas leidžiamas, bet dviratininkas turi nulipti nuo dviračio",
+                        "title": "Nulipti"
+                    },
                     "no": {
                         "description": "Priėjimas draudžiamas plačiajai visuomenei",
                         "title": "Draudžiamas"
@@ -613,6 +641,7 @@
                 "label": "Adresas",
                 "placeholders": {
                     "city": "Miestas",
+                    "conscriptionnumber": "123",
                     "country": "Valstybė",
                     "district": "Rajonas",
                     "hamlet": "Viensėdis",
@@ -671,6 +700,9 @@
                 "label": "Tipas"
             },
             "amenity": {
+                "label": "Tipas"
+            },
+            "area/highway": {
                 "label": "Tipas"
             },
             "artist": {
@@ -744,6 +776,9 @@
             "construction": {
                 "label": "Tipas"
             },
+            "content": {
+                "label": "Turinys"
+            },
             "country": {
                 "label": "Šalis"
             },
@@ -761,6 +796,23 @@
             },
             "cuisine": {
                 "label": "Virtuvė"
+            },
+            "cycleway": {
+                "label": "Dviračių juostos",
+                "options": {
+                    "lane": {
+                        "description": "Dviračių juosta atskirta nuo automobilių eismo nubrėžta linija",
+                        "title": "Standartinė dviračių juosta"
+                    },
+                    "none": {
+                        "description": "Nėra dviračių juostos",
+                        "title": "Nėra"
+                    },
+                    "opposite": {
+                        "description": "Abiejų krypčių dviračių juosta vienpusėje gatvėje",
+                        "title": "Dviračių juostos kryptis prieš eismą"
+                    }
+                }
             },
             "delivery": {
                 "label": "Pristatymas"
@@ -1333,11 +1385,11 @@
             },
             "aerialway/gondola": {
                 "name": "Gondola",
-                "terms": "Gondola"
+                "terms": "gondola"
             },
             "aeroway/aerodrome": {
                 "name": "Oro uostas",
-                "terms": "Oro uostas"
+                "terms": "oro uostas"
             },
             "aeroway/gate": {
                 "name": "Oro uosto vartai",
@@ -1345,7 +1397,7 @@
             },
             "aeroway/hangar": {
                 "name": "Angaras",
-                "terms": "Angaras"
+                "terms": "angaras"
             },
             "aeroway/helipad": {
                 "name": "Sraigtasparnių aikštelė",
@@ -1357,30 +1409,30 @@
             },
             "aeroway/terminal": {
                 "name": "Oro uosto terminalas",
-                "terms": "Oro uostas,Terminalas"
+                "terms": "oro uostas,terminalas"
             },
             "amenity": {
                 "name": "Paslaugos"
             },
             "amenity/arts_centre": {
                 "name": "Menų centras",
-                "terms": "Menų centras,Meno centras"
+                "terms": "menų centras,meno centras"
             },
             "amenity/atm": {
                 "name": "Bankomatas",
-                "terms": "ATM,Bankomatas"
+                "terms": "atm,bankomatas"
             },
             "amenity/bank": {
                 "name": "Bankas",
-                "terms": "Bankas"
+                "terms": "bankas"
             },
             "amenity/bar": {
                 "name": "Baras",
-                "terms": "Baras,Aludė"
+                "terms": "baras,aludė"
             },
             "amenity/bench": {
                 "name": "Suolas",
-                "terms": "Suoliukas,Suolas"
+                "terms": "suoliukas,suolas"
             },
             "amenity/bicycle_parking": {
                 "name": "Dviračių stovėjimo aikštelė",
@@ -1408,7 +1460,7 @@
             },
             "amenity/cafe": {
                 "name": "Kavinė",
-                "terms": "Kavinė"
+                "terms": "kavinė"
             },
             "amenity/car_rental": {
                 "name": "Automobilių nuoma",
@@ -1427,22 +1479,22 @@
             },
             "amenity/cinema": {
                 "name": "Kino teatras",
-                "terms": "Kinas,Kinoteatras"
+                "terms": "kinas,kinoteatras"
             },
             "amenity/clinic": {
                 "name": "Klinika",
-                "terms": "Klinika"
+                "terms": "klinika"
             },
             "amenity/clock": {
                 "name": "Laikrodis",
-                "terms": "Laikrodis"
+                "terms": "laikrodis"
             },
             "amenity/college": {
                 "name": "Kolegijos kiemas"
             },
             "amenity/community_centre": {
                 "name": "Bendruomenės centras",
-                "terms": "Bendruomenės centras"
+                "terms": "bendruomenės centras"
             },
             "amenity/compressed_air": {
                 "name": "Suspaustas oras",
@@ -1450,7 +1502,7 @@
             },
             "amenity/courthouse": {
                 "name": "Teismo rūmai",
-                "terms": "Teismas,Teismo rūmai"
+                "terms": "teismas,teismo rūmai"
             },
             "amenity/dentist": {
                 "name": "Dantistas",
@@ -1462,11 +1514,11 @@
             },
             "amenity/drinking_water": {
                 "name": "Geriamas vanduo",
-                "terms": "Vanduo,Geriamas vanduo"
+                "terms": "vanduo,geriamas vanduo"
             },
             "amenity/embassy": {
                 "name": "Ambasada",
-                "terms": "Ambasada,Atstovybė"
+                "terms": "ambasada,atstovybė"
             },
             "amenity/fast_food": {
                 "name": "Greitas maistas",
@@ -1474,11 +1526,11 @@
             },
             "amenity/fire_station": {
                 "name": "Gaisrinė",
-                "terms": "Gaisrinė,Priešgaisrinė tarnyba"
+                "terms": "gaisrinė,priešgaisrinė tarnyba"
             },
             "amenity/fountain": {
                 "name": "Fontanas",
-                "terms": "Fontanas"
+                "terms": "fontanas"
             },
             "amenity/fuel": {
                 "name": "Degalinė",
@@ -1486,11 +1538,11 @@
             },
             "amenity/grave_yard": {
                 "name": "Kapinės prie bažnyčios",
-                "terms": "Kapinės,Kapai"
+                "terms": "kapinės,kapai"
             },
             "amenity/grit_bin": {
                 "name": "Smėlio dėžė",
-                "terms": "Smėlio dėžė"
+                "terms": "smėlio dėžė"
             },
             "amenity/hospital": {
                 "name": "Ligoninės kiemas"
@@ -1688,7 +1740,7 @@
             },
             "building/barn": {
                 "name": "Klėtis",
-                "terms": "Svirnas, Tvartas"
+                "terms": "svirnas,tvartas"
             },
             "building/bunker": {
                 "name": "Bunkeris"
@@ -1715,7 +1767,7 @@
             },
             "building/construction": {
                 "name": "Statomas pastatas",
-                "terms": "statomas pastatas, statybos"
+                "terms": "statomas pastatas,statybos"
             },
             "building/detached": {
                 "name": "Atskirtas namas"
@@ -1823,7 +1875,7 @@
             },
             "craft/brewery": {
                 "name": "Alaus darykla",
-                "terms": "Aludarė"
+                "terms": "aludarė"
             },
             "craft/carpenter": {
                 "name": "Dailidė",
@@ -1847,7 +1899,7 @@
             },
             "craft/gardener": {
                 "name": "Sodininkas",
-                "terms": "Daržininkas"
+                "terms": "daržininkas"
             },
             "craft/handicraft": {
                 "name": "Rankdarbių meistras"
@@ -1869,11 +1921,11 @@
             },
             "craft/optician": {
                 "name": "Optikas",
-                "terms": "Okulistas"
+                "terms": "okulistas"
             },
             "craft/painter": {
                 "name": "Tapytojas",
-                "terms": "Dažytojas,Dailininkas"
+                "terms": "dažytojas,dailininkas"
             },
             "craft/photographer": {
                 "name": "Fotografas",
@@ -1881,7 +1933,7 @@
             },
             "craft/photographic_laboratory": {
                 "name": "Fotografijos laboratorija",
-                "terms": "Fotografijos studija"
+                "terms": "fotografijos studija"
             },
             "craft/plumber": {
                 "name": "Santechnikas",
@@ -1889,7 +1941,7 @@
             },
             "craft/pottery": {
                 "name": "Keramikos amatininkas",
-                "terms": "Puodų amatininkas"
+                "terms": "puodų amatininkas"
             },
             "craft/roofer": {
                 "name": "Stogdengys",
@@ -1897,7 +1949,7 @@
             },
             "craft/saddler": {
                 "name": "Pakinkytojas",
-                "terms": "Pakinktininkas"
+                "terms": "pakinktininkas"
             },
             "craft/sawmill": {
                 "name": "Lentpjūvė",
@@ -1912,7 +1964,7 @@
             },
             "craft/shoemaker": {
                 "name": "Batsiuvys",
-                "terms": "Kurpius"
+                "terms": "kurpius"
             },
             "craft/stonemason": {
                 "name": "Mūrininkas",
@@ -1954,13 +2006,6 @@
                 "name": "Įėjimas/Išėjimas",
                 "terms": "įėjimas,išėjimas"
             },
-            "footway/crossing": {
-                "name": "Sankryža",
-                "terms": "sankryža,perėja"
-            },
-            "footway/crosswalk": {
-                "name": "Pėsčiųjų perėja"
-            },
             "footway/sidewalk": {
                 "name": "Šaligatvis",
                 "terms": "šaligatvis"
@@ -1985,14 +2030,6 @@
                 "name": "Autobuso stotelė",
                 "terms": "stotelė,autobusų stotelė,troleibusų stotelė"
             },
-            "highway/crossing": {
-                "name": "Sankryža",
-                "terms": "perėja,pervaža"
-            },
-            "highway/crosswalk": {
-                "name": "Pėsčiųjų perėja",
-                "terms": "perėja"
-            },
             "highway/cycleway": {
                 "name": "Dviračių takas",
                 "terms": "dviračių takas"
@@ -2016,10 +2053,6 @@
             "highway/path": {
                 "name": "Takas",
                 "terms": "takas"
-            },
-            "highway/pedestrian": {
-                "name": "Pėsčiųjų",
-                "terms": "pėsčiųjų"
             },
             "highway/primary": {
                 "name": "Pagrindinis kelias"
@@ -2130,10 +2163,6 @@
                 "name": "Jungtis",
                 "terms": "jungtis,sankryža"
             },
-            "landuse": {
-                "name": "Žemėnauda",
-                "terms": "žemėnauda"
-            },
             "landuse/allotments": {
                 "name": "Žemės sklypai",
                 "terms": "sodai,kolektyviniai sodai"
@@ -2163,8 +2192,8 @@
                 "terms": "dirbama žemė,žemdirbystė"
             },
             "landuse/farmyard": {
-                "name": "Sodyba",
-                "terms": "ūkio sodyba,ferma"
+                "name": "Ūkis",
+                "terms": "ūkis,ūkio sodyba,ferma"
             },
             "landuse/forest": {
                 "name": "Miškas",
@@ -2299,7 +2328,7 @@
             },
             "man_made": {
                 "name": "Žmogaus sukurtas",
-                "terms": "Žmogaus sukurtas"
+                "terms": "žmogaus sukurtas"
             },
             "man_made/cutline": {
                 "name": "Proskyna",
@@ -2440,7 +2469,7 @@
             },
             "office/educational_institution": {
                 "name": "Edukacinis institutas",
-                "terms": "Mokslo institutas,Mokslo įstaiga"
+                "terms": "mokslo institutas,mokslo įstaiga"
             },
             "office/employment_agency": {
                 "name": "Įdarbinimo agentūra"
@@ -2450,11 +2479,11 @@
             },
             "office/financial": {
                 "name": "Finansų biuras",
-                "terms": "Finansų tarnyba"
+                "terms": "finansų tarnyba"
             },
             "office/government": {
                 "name": "Vyriausybės biuras",
-                "terms": "Valdžios biuras"
+                "terms": "valdžios biuras"
             },
             "office/insurance": {
                 "name": "Draudimo įstaiga",
@@ -2473,7 +2502,7 @@
             },
             "office/physician": {
                 "name": "Gydytojas",
-                "terms": "Daktaras"
+                "terms": "daktaras"
             },
             "office/political_party": {
                 "name": "Politinė partija",
@@ -2488,7 +2517,7 @@
             },
             "office/therapist": {
                 "name": "Terapeutas",
-                "terms": "Gydytojas"
+                "terms": "gydytojas"
             },
             "office/travel_agent": {
                 "name": "Kelionių agentūra",
@@ -2519,7 +2548,7 @@
             },
             "place/neighbourhood": {
                 "name": "Kaiminystė",
-                "terms": "Apylinkė"
+                "terms": "apylinkė"
             },
             "place/suburb": {
                 "name": "Miestelis"
@@ -2589,14 +2618,11 @@
             },
             "railway/funicular": {
                 "name": "Keltuvas",
-                "terms": "Funikulierius"
+                "terms": "funikulierius"
             },
             "railway/halt": {
                 "name": "Geležinkelio stotelė",
                 "terms": "geležinkelio stotelė"
-            },
-            "railway/level_crossing": {
-                "name": "Vieno lygio susikirtimas"
             },
             "railway/monorail": {
                 "name": "Vienbėgis geležinkelis"
@@ -2868,7 +2894,7 @@
             },
             "shop/organic": {
                 "name": "Ekologiškų prekių parduotuvė",
-                "terms": "Organinių prekių parduotuvė"
+                "terms": "organinių prekių parduotuvė"
             },
             "shop/outdoor": {
                 "name": "Laisvalaikio parduotuvė"
@@ -2911,7 +2937,7 @@
             },
             "shop/supermarket": {
                 "name": "Prekybos centras",
-                "terms": "Prekybos centras"
+                "terms": "prekybos centras"
             },
             "shop/tattoo": {
                 "name": "Tatuiruočių salonas"
@@ -2924,15 +2950,15 @@
             },
             "shop/toys": {
                 "name": "Žaislų parduotuvė",
-                "terms": "Žaislai"
+                "terms": "žaislai"
             },
             "shop/travel_agency": {
                 "name": "Kelionių agentūra",
-                "terms": "Kelionių agentūra"
+                "terms": "kelionių agentūra"
             },
             "shop/tyres": {
                 "name": "Padangų parduotuvė",
-                "terms": "Padangos,Padangų parduotuvė"
+                "terms": "padangos,padangų parduotuvė"
             },
             "shop/vacant": {
                 "name": "Tuščia parduotuvė"
@@ -2945,11 +2971,11 @@
             },
             "shop/weapons": {
                 "name": "Ginklų parduotuvė",
-                "terms": "Ginklai,Ginklų parduotuvė"
+                "terms": "ginklai,ginklų parduotuvė"
             },
             "shop/wine": {
                 "name": "Vyno parduotuvė",
-                "terms": "Vyninė,Vyno parduotuvė"
+                "terms": "vyninė,vyno parduotuvė"
             },
             "tourism": {
                 "name": "Turizmas"
@@ -2972,25 +2998,25 @@
             },
             "tourism/guest_house": {
                 "name": "Svečių namai",
-                "terms": "Svečių namai"
+                "terms": "svečių namai"
             },
             "tourism/hostel": {
                 "name": "Viešbutis"
             },
             "tourism/hotel": {
                 "name": "Viešbutis",
-                "terms": "Viešbutis"
+                "terms": "viešbutis"
             },
             "tourism/information": {
                 "name": "Informacija",
-                "terms": "Informacija,Informacinis stendas"
+                "terms": "informacija,informacinis stendas"
             },
             "tourism/motel": {
                 "name": "Motelis"
             },
             "tourism/museum": {
                 "name": "Muziejus",
-                "terms": "Muziejus"
+                "terms": "muziejus"
             },
             "tourism/picnic_site": {
                 "name": "Pikniko stovyklavietė"
@@ -3006,59 +3032,59 @@
             },
             "type/boundary": {
                 "name": "Siena",
-                "terms": "Riba,Siena"
+                "terms": "riba,siena"
             },
             "type/boundary/administrative": {
                 "name": "Administracinė siena",
-                "terms": "Administracinė riba"
+                "terms": "administracinė riba"
             },
             "type/multipolygon": {
                 "name": "Multipoligonas",
-                "terms": "Multipoligonas"
+                "terms": "multipoligonas"
             },
             "type/restriction": {
                 "name": "Apribojimas",
-                "terms": "Apribojimas"
+                "terms": "apribojimas"
             },
             "type/restriction/no_left_turn": {
                 "name": "Jokio sukimo į kairę",
-                "terms": "Negalima į kairę"
+                "terms": "negalima į kairę"
             },
             "type/restriction/no_right_turn": {
                 "name": "Jokio sukimo į dešinę",
-                "terms": "Negalima į dešinę"
+                "terms": "negalima į dešinę"
             },
             "type/restriction/no_straight_on": {
                 "name": "Tik ne tiesiai",
-                "terms": "Tik ne tiesiai"
+                "terms": "tik ne tiesiai"
             },
             "type/restriction/no_u_turn": {
                 "name": "Jokio apsisukimo",
-                "terms": "Negalima apsisukti"
+                "terms": "negalima apsisukti"
             },
             "type/restriction/only_left_turn": {
                 "name": "Sukimas tik į kairę",
-                "terms": "Tik į kairę"
+                "terms": "tik į kairę"
             },
             "type/restriction/only_right_turn": {
                 "name": "Sukimas tik į dešinę",
-                "terms": "Tik į dešinę"
+                "terms": "tik į dešinę"
             },
             "type/restriction/only_straight_on": {
                 "name": "Jokių posūkių",
-                "terms": "Nėra posūkių"
+                "terms": "nėra posūkių"
             },
             "type/route": {
                 "name": "Maršrutas",
-                "terms": "Maršrutas"
+                "terms": "maršrutas"
             },
             "type/route/bicycle": {
                 "name": "Dviračių maršrutas",
-                "terms": "Dviračių maršrutas"
+                "terms": "dviračių maršrutas"
             },
             "type/route/bus": {
                 "name": "Autobusų maršrutas",
-                "terms": "Autobuso maršrutas"
+                "terms": "autobuso maršrutas"
             },
             "type/route/detour": {
                 "name": "Apvažiavimo maršrutas"
@@ -3089,38 +3115,38 @@
             },
             "vertex": {
                 "name": "Kita",
-                "terms": "Kita"
+                "terms": "kita"
             },
             "waterway": {
                 "name": "Vandens kelias"
             },
             "waterway/canal": {
                 "name": "Kanalas",
-                "terms": "Kanalas"
+                "terms": "kanalas"
             },
             "waterway/dam": {
                 "name": "Užtvanka",
-                "terms": "Užtvanka"
+                "terms": "užtvanka"
             },
             "waterway/ditch": {
                 "name": "Griovys",
-                "terms": "Griovys"
+                "terms": "griovys"
             },
             "waterway/drain": {
                 "name": "Vandens nuoteka",
-                "terms": "Nuotekos"
+                "terms": "nuotekos"
             },
             "waterway/river": {
                 "name": "Upė",
-                "terms": "Upė"
+                "terms": "upė"
             },
             "waterway/riverbank": {
                 "name": "Upės kraštas",
-                "terms": "Krantas,Upės krantas"
+                "terms": "krantas,upės krantas"
             },
             "waterway/stream": {
                 "name": "Upelis",
-                "terms": "Upelis,Upeliukas"
+                "terms": "upelis,upeliukas"
             },
             "waterway/weir": {
                 "name": "Užtvanka"

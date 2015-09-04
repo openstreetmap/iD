@@ -857,9 +857,6 @@
             "highway/bus_stop": {
                 "name": "公交车站"
             },
-            "highway/crossing": {
-                "name": "人行横道"
-            },
             "highway/cycleway": {
                 "name": "自行车道"
             },
@@ -880,9 +877,6 @@
             },
             "highway/path": {
                 "name": "路径"
-            },
-            "highway/pedestrian": {
-                "name": "行人专用路"
             },
             "highway/primary": {
                 "name": "主要道路"
@@ -973,9 +967,6 @@
             },
             "historic/wayside_shrine": {
                 "name": "路边神社"
-            },
-            "landuse": {
-                "name": "土地用途"
             },
             "landuse/allotments": {
                 "name": "社区花园"
@@ -1204,9 +1195,6 @@
             },
             "railway/disused": {
                 "name": "废弃的铁路"
-            },
-            "railway/level_crossing": {
-                "name": "平交路口"
             },
             "railway/monorail": {
                 "name": "单轨铁路"

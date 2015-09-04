@@ -323,7 +323,11 @@
         "custom_button": "Upraviť volitelné pozadie",
         "custom_prompt": "Zadajte URL pre vzor mapového podkladu. Platné znaky sú {z}, {x}, {y} pre Z/X/Y schému a {u} pre quadtile schému.",
         "fix_misalignment": "Oprav zarovnanie",
-        "reset": "vynulovať"
+        "reset": "vynulovať",
+        "minimap": {
+            "description": "Náhľad mapy",
+            "tooltip": "Zobraz odialenú mapu pre ľahšie lokalizovanie práve zobrazenej oblasti."
+        }
     },
     "map_data": {
         "title": "Mapové údaje",
@@ -494,7 +498,7 @@
     "help": {
         "title": "Pomoc",
         "help": "# Pomoc\n\nToto je editor pre [OpenStreetMap](http://www.openstreetmap.org/), slobodnú a upravovateľnú mapu sveta. Môžete ho používať na pridávanie a aktualizovanie údajov vo vašom okolí a vylepšiť tak mapu sveta s otvoreným kódom a dátami pre všetkých.\n\nÚpravy, ktoré v tejto mape spravíte, budú viditeľné pre každého, kto používa OpenStreetMap. Na to, aby ste mohli upravovať, sa budete musieť prihlásiť [prihlásiť](https://www.openstreetmap.org/login).\n\n[iD editor](http://ideditor.com/) je kolaboratívny projekt so [zdrojovým kódom dostupným na GitHub](https://github.com/openstreetmap/iD).\n",
-        "editing_saving": "# Upravovanie a ukladanie\n\nTento editor je primárne navrhnutý na prácu online, a aj práve teraz ho používate cez internetovú stránku.\n\n### Výber objektov\n\nPre výber objektu, ako napríklad cesta alebo bod záujmu, naň kliknite na mape. Týmto sa vybraný objekt zvýrazní, otvorí sa panel s jeho detajlami a zobrazí sa ponuka s úkonmi, ktoré môžete s objektom urobiť.\n\nViacero objektov je možné vybrať podržaním klávesu \"Shift\". Potom jednoducho kliknite na objekty, ktoré chcete vybrať, alebo pretiahnite po mape akoby ste chceli nakresliť obdĺžnik. Týmto sa zobrazí rám a vyberú sa všetky objekty, ktoré sa v ňom nachádzajú.\n\n### Ukladanie úprav\n\nKed urobíte zmeny ako úpravy ciest, budov a miest, tieto budú lokálne uložené, až pokiaľ ich neuložíte na server. Netrápte sa ak urobíte chybu. Zmeny môžete vrátit späť kliknutím na tlačítko vrátiť a zopakovať kliknutím na tlačitko zopakovať.\n\nKeď chcete ukončit sériu úprav, kliknite na \"Ulož\". Napríklad  ak ste dokončili časť mesta a chcete začať s inou časťou. Budete mať možnosť si prehliadnuť, čo ste urobili a editor poskytne užitočné návrhy a varovania ak niečo nie je so zmenami vporiadku.\n\nAk všetko vyzerá vporiadku, môžete vyplniť krátky komentár vysvetľujúci, čo ste urobili a kliknite znovu na \"Ulož\" pre odoslanie zmien na [OpenStreetMap.org](http://www.openstreetmap.org/), kde budú viditeľné pre ostatných používateľov a tak dostupné pre ďalšie vylepšenia.\n\nAk nemôžete dokončiť úpravy počas jedného sedenia, môžete zatvoriť okno prehliadača, vrátiť sa späť (na rovnakom prehliadači a počítači) a editor vám ponúkne obnoviť vašu prácu.\n",
+        "editing_saving": "# Upravovanie a ukladanie\n\nTento editor je primárne navrhnutý na prácu online, a aj práve teraz\nho používate cez internetovú stránku. \n\n### Výber objektov\n\nPre výber objektu, ako napríklad cesta alebo bod záujmu, naň kliknite\nna mape. Týmto sa vybraný objekt zvýrazní, otvorí sa panel s jeho\ndetajlami a zobrazí sa ponuka s úkonmi, ktoré môžete s objektom urobiť.\n\nViacero objektov je možné vybrať podržaním klávesu \"Shift\". Potom jednoducho\nkliknite na objekty, ktoré chcete vybrať, alebo pretiahnite po mape akoby ste \nchceli nakresliť obdĺžnik. Týmto sa zobrazí rám a vyberú sa všetky objekty, ktoré\nsa v ňom nachádzajú. \n\n### Ukladanie úprav\nKed urobíte zmeny ako úpravy ciest, budov a miest, tieto budú lokálne uložené,\naž pokiaľ ich neuložíte na server. Netrápte sa ak urobíte chybu. Zmeny môžete\nvrátit späť kliknutím na tlačítko vrátiť a zopakovať kliknutím na tlačitko zopakovať. \n\nKeď chcete ukončit sériu úprav, kliknite na \"Ulož\". Napríklad ak ste dokončili\nčasť mesta a chcete začať s inou časťou. Budete mať možnosť si prehliadnuť,\nčo ste urobili a editor poskytne užitočné návrhy a varovania ak niečo nie je so\nzmenami vporiadku.\n\nAk všetko vyzerá vporiadku, môžete vyplniť krátky komentár vysvetľujúci, čo ste\nurobili a kliknite znovu na \"Ulož\" pre odoslanie zmien \nna [OpenStreetMap.org](http://www.openstreetmap.org/), kde budú viditeľné\npre ostatných používateľov a tak dostupné pre ďalšie vylepšenia.\n\nAk nemôžete dokončiť úpravy počas jedného sedenia, môžete zatvoriť okno\nprehliadača, vrátiť sa späť (na rovnakom prehliadači a počítači) a editor vám\nponúkne obnoviť vašu prácu.\n\n### Používanie editora\n\nZoznam dostupných klávesových skratiek je dostupný [tu](http://wiki.openstreetmap.org/wiki/ID/Shortcuts).\n",
         "roads": "# Cesty\n\nS týmto editorom môžete cesty vytvoriť, opraviť alebo vymazať. Cesty môžu byť rôzneho druhu: chodníky, diaľnice, lesné cestičky, cyklochodníky a iné. Akýkoľvek často prechádzaný úsek by malo byť možné zmapovať.\n\n### Výber\n\nKliknite na cestu pre jej výber. Viditeľným by sa mal stať jej obrys spolu s malou ponukou nástrojov na mape a postranným panelom, ukazujúcim dodatočné informácie o ceste.\n\n### Úprava\n\nČasto krát uvidíte cesty, ktoré nie sú zarovnané so snímkami pod nimi alebo s GPS stopu. Tieto cesty môžete upraviť tak, aby boli na správnom mieste.\n\nNajskôr kliknite na cestu, ktorú chcete zmeniť. Týmto sa zvýrazní a po jej dĺžke sa ukážu kontrolné body, ktoré môžete pretiahnuť na lepšiu pozíciu. Ak chcete pridať nový kontrolný bod pre viac detailov, dva krát kliknite na časť cesty bez uzla a jeden bude pridaný.\n\nAk sa cesta spája s inou cestou, ale nie je správne spojená na mape, môžete pretiahnuť jeden z jej kontrolných bodov na druhú cestu, aby ste ich spojili. Spojenie ciest je dôležité pre mapu a nevyhnutné pre poskytovanie navigácie na cestách.\n\nMôžete tiež kliknúť na nástroj \"Presuň\" alebo stlačiť kláves \"M\" pre posunutie celej cesty naraz a potom kliknite znovu, aby ste uložili presun.\n\n### Vymazávanie\n\nAk je cesta úplne nesprávna - vidíte, že cesta neexistuje na satelitných snímkoch a najlepšie mate potvrdené zo samotného miesta, že tam cesta nie je - môžete ju vymazať, čím ju odstránite z mapy. Pri vymazávaní objektov buďte obozretný, rovnako ako pri iných úpravách sú výsledky viditeľné ostatnými a satelitné snímky sú často neaktuálne, takže cesta môže byť jednoducho novopostavená.\n\nCestu môžete vymazať, tak že na ňu kliknete čim ju vyberiete  a potom kliknete na ikonu smetného koša alebo stlačením klávesu \"Delete\".\n\n### Vytváranie\n\nZistili ste, že niekde by mala byť cesta ale ona tam nie je? Kliknite naľavo hore na ikonu \"Čiara\" alebo stlačte kláves \"2\" pre kreslenie čiary.\n\nAby ste začali kresliť, kliknite na začiatok cesty na mape. Ak cesta odbočuje z inej existujúcej cesty, začnite kliknútím na miesto, kde sa spájajú.\n\nPotom kliknite na body pozdĺž cesty tak, aby nasledovali správny smer podľa satelitných snímkov alebo GPS. Ak cesta, ktorú kreslíte, pretína ďalšiu cestu, spojte ich kliknutím v mieste križovatky. Keď ste hotový s skreslením, dva krát kliknite alebo stlačte kláves \"Enter\" na vašej klávesnici.\n",
         "gps": "# GPS\nGPS údaje sú najviac dôveryhodný zdroj dát pre OpenStreetMap. Tento editor podporuje stopy z lokálnych \".gpx\" súborov na vašom počítači. Tento typ GPS stôp môžete zachytiť pomocou rôznych aplikácií pre múdre telefóny ako aj GPS prístrojmi.\n\nPre informácie, ako robiť GPS prieskum, si prečítajte [Surveying with a GPS](http://learnosm.org/en/beginner/using-gps/).\n\nAby ste použili GPX trasu pre mapovanie, pretiahnite a pustite GPX súbor na mapový editor. Po rozpoznaní, bude pridaný na mapu ako jasná fialová čiara. Kliknite na ponuku \"Mapové údaje\" na ľavej strane pre zapnutie, vypnutie alebo priblíženie na túto novú GPX vrstvu.\n\nGPX trasa nie je priamo nahraná na OpenStreetMap. Najlepší spôsob ako ju využiť je, použiť ju ako predlohu pre zakreslovanie nových objektov a potom ju [nahrať na OpenStreetMap](http://www.openstreetmap.org/trace/create) pre ďalších uživateľov.\n \n",
         "imagery": "# Snímky povrchu\n\nLetecké snímky sú dôležitým zdrojom pre mapovanie. Kombinácia leteckých fotografií, satelitných snímok a voľne skompilovaných zdrojov je v editore dostupná vpravo pod ponukou \"Nastavenia pozadia\".\n\nŠtandardne je v editore predvolená satelitná vrstva z [Bing Maps](http://www.bing.com/maps/), ale ako posuniete a priblížite mapu na nové geografické miesta, dostupnými sa stanú nové zdroje. Niektoré krajiny ako Spojené Štáty, Francúzsko, a Dánsko majú pre niektoré oblasti dostupné veľmi kvalitné snímky.\n\nSnímky môžu byť niekedy posunuté voči mapovým dátam, kvôli chybe na strane poskytovateľa snímkov. Ak uvidíte veľa ciest posunutých voči pozadiu, neposúvajte ich hneď všetky, aby ste ich zarovnali s pozadím. Namiesto toho môžete upraviť snímky, aby odpovedali existujúcim dátam tým, že kliknete na \"Oprav zarovnanie\" naspodku Nastavenia pozadia.\n",
@@ -597,6 +601,10 @@
                         "description": "Vstup povolený iba dosiahnutie cieľa",
                         "title": "Prejazd zakázaný"
                     },
+                    "dismount": {
+                        "description": "Vstup povolený, ale jazdci musia zosadnúť",
+                        "title": "Zosadnutie z vozidla"
+                    },
                     "no": {
                         "description": "Verejnosti vstup zakázaný",
                         "title": "Zakázané"
@@ -634,6 +642,7 @@
                 "label": "Adresa",
                 "placeholders": {
                     "city": "Mesto",
+                    "conscriptionnumber": "123",
                     "country": "Štát",
                     "district": "Okres",
                     "hamlet": "Osada/Samota",
@@ -692,6 +701,9 @@
                 "label": "Typ"
             },
             "amenity": {
+                "label": "Typ"
+            },
+            "area/highway": {
                 "label": "Typ"
             },
             "artist": {
@@ -785,6 +797,44 @@
             },
             "cuisine": {
                 "label": "Druh jedla"
+            },
+            "cycleway": {
+                "label": "Cyklopruh",
+                "options": {
+                    "lane": {
+                        "description": "Pruh pre bicykle oddelený od ostatnej dopravy namaľovanou čiarou",
+                        "title": "Štandardný cyklopruh"
+                    },
+                    "none": {
+                        "description": "Bez cyklopruhu",
+                        "title": "Žiaden"
+                    },
+                    "opposite": {
+                        "description": "Cyklopruh na jednosmernej ceste, ktorý vedie do oboch smerov",
+                        "title": "Kontra cyklopruh"
+                    },
+                    "opposite_lane": {
+                        "description": "Cyklopruh, ktorý vedie v do protismeru",
+                        "title": "Protismerný cyklopruh"
+                    },
+                    "share_busway": {
+                        "description": "Cyklopruh zdieľaný s pruhom pre autobusy",
+                        "title": "Cyklopruh zdieľaný s autobusom"
+                    },
+                    "shared_lane": {
+                        "description": "Cyklopruh neodelený od zvyšku dopravy",
+                        "title": "Zdieľaný cyklopruh"
+                    },
+                    "track": {
+                        "description": "Cyklopruh oddelený od dopravy fyzickou bariérou",
+                        "title": "Cyklochodník"
+                    }
+                },
+                "placeholder": "žiaden",
+                "types": {
+                    "cycleway:left": "Ľavá strana",
+                    "cycleway:right": "Pravá strana"
+                }
             },
             "delivery": {
                 "label": "Zásobovnie"
@@ -978,6 +1028,9 @@
             "length": {
                 "label": "Dĺžka (metrov)"
             },
+            "level": {
+                "label": "Poschodie"
+            },
             "levels": {
                 "label": "Poschodia",
                 "placeholder": "2, 4, 6..."
@@ -1084,7 +1137,7 @@
                     "lane": "Postranné",
                     "multi-storey": "Viacúrovňové",
                     "sheds": "Šopy",
-                    "surface": "Povrch",
+                    "surface": "Povrchové",
                     "underground": "Podzemné"
                 }
             },
@@ -1154,8 +1207,21 @@
             "recycling/glass": {
                 "label": "Sklo"
             },
+            "recycling/glass_bottles": {
+                "label": "Hnedé sklo"
+            },
             "recycling/paper": {
                 "label": "Papier"
+            },
+            "recycling/plastic": {
+                "label": "Plasty"
+            },
+            "recycling/type": {
+                "label": "Typ recyklácie",
+                "options": {
+                    "centre": "Recyklačné centrum",
+                    "container": "Kontainer"
+                }
             },
             "ref": {
                 "label": "Referenčné čislo"
@@ -1389,7 +1455,7 @@
         "presets": {
             "address": {
                 "name": "Adresa",
-                "terms": "adresa,ŠPZ,SPZ,ulica"
+                "terms": "adresa,špz,spz,ulica"
             },
             "aerialway": {
                 "name": "Vzdušná doprava",
@@ -1429,23 +1495,23 @@
             },
             "aerialway/t-bar": {
                 "name": "Vlek s dvojmiestnou kotvou",
-                "terms": "T kotva,teckova kotva,téčková kotva"
+                "terms": "t kotva,teckova kotva,téčková kotva"
             },
             "aeroway": {
                 "name": "Letectvo",
-                "terms": "Letisko,pristávacia plocha,terminál,príletová hala,odbavovacia plocha"
+                "terms": "letisko,pristávacia plocha,terminál,príletová hala,odbavovacia plocha"
             },
             "aeroway/aerodrome": {
                 "name": "Letisko",
-                "terms": "Letisko,pristávacia plocha,terminál,príletová hala,odbavovacia plocha"
+                "terms": "letisko,pristávacia plocha,terminál,príletová hala,odbavovacia plocha"
             },
             "aeroway/apron": {
                 "name": "Odbavovacia plocha",
-                "terms": "Letisko,pristávacia plocha,terminál,príletová hala,odbavovacia plocha"
+                "terms": "letisko,pristávacia plocha,terminál,príletová hala,odbavovacia plocha"
             },
             "aeroway/gate": {
                 "name": "Letiskový východ",
-                "terms": "Letisko,pristávacia plocha,terminál,príletová hala,odbavovacia plocha"
+                "terms": "letisko,pristávacia plocha,terminál,príletová hala,odbavovacia plocha"
             },
             "aeroway/hangar": {
                 "name": "Hangár",
@@ -1457,11 +1523,11 @@
             },
             "aeroway/runway": {
                 "name": "Vzletová dráha",
-                "terms": "pristávacia dráha, vzletová dráha, pristávací pruh,pristavacia draha,vzletova draha, pristavaci pruh"
+                "terms": "pristávacia dráha,vzletová dráha,pristávací pruh,pristavacia draha,vzletova draha,pristavaci pruh"
             },
             "aeroway/taxiway": {
                 "name": "Rolovacia dráha",
-                "terms": "rolovanie, rolovacia draha, rolovacia dráha"
+                "terms": "rolovanie,rolovacia draha,rolovacia dráha"
             },
             "aeroway/terminal": {
                 "name": "Letiskový terminál",
@@ -1497,11 +1563,11 @@
             },
             "amenity/bicycle_parking": {
                 "name": "Stojan pre bicykle",
-                "terms": "stojan,stojan na bicykle,odstavna plocha, odstavná plocha"
+                "terms": "stojan,stojan na bicykle,odstavna plocha,odstavná plocha"
             },
             "amenity/bicycle_rental": {
                 "name": "Prenájom bicyklov",
-                "terms": "požičovňa bicyklov, pozicovna bicyklov,cyklopožičovňa,cyklopozicovna"
+                "terms": "požičovňa bicyklov,pozicovna bicyklov,cyklopožičovňa,cyklopozicovna"
             },
             "amenity/bicycle_repair_station": {
                 "name": "Stojan pre opravu bicyklov",
@@ -1513,11 +1579,11 @@
             },
             "amenity/boat_rental": {
                 "name": "Prenájom lodí",
-                "terms": "prenajom lodi,požičovňa lodí,pozicovna lodi,prenájom člnov,prenajom clnov,pozivocna clnov,požičovňa člnov, čln,cln,člny,clny,lode,skútre,skutre,vodné skútre,vodne skutre"
+                "terms": "prenajom lodi,požičovňa lodí,pozicovna lodi,prenájom člnov,prenajom clnov,pozivocna clnov,požičovňa člnov,čln,cln,člny,clny,lode,skútre,skutre,vodné skútre,vodne skutre"
             },
             "amenity/bureau_de_change": {
                 "name": "Zmenáreň",
-                "terms": "zmenaren,valuty,cudzia mena, výmena peňazí,vymena penazi"
+                "terms": "zmenaren,valuty,cudzia mena,výmena peňazí,vymena penazi"
             },
             "amenity/bus_station": {
                 "name": "Autobusová zastávka",
@@ -1539,6 +1605,10 @@
                 "name": "Autoumyváreň",
                 "terms": "umyváreň automobilov,umyváreň áut,autoumyváreň,autoumyvárka,umyvaren utomobilov,umyvaren aut,autoumyvaren,autoumyvarka"
             },
+            "amenity/casino": {
+                "name": "Kasíno",
+                "terms": "kasino,automaty,ruleta,poker,stavky,stávky"
+            },
             "amenity/charging_station": {
                 "name": "Nabíjacia stanica",
                 "terms": "nabijacia stanica,elektromobil,nabíjačka,nabijacka,"
@@ -1549,7 +1619,7 @@
             },
             "amenity/cinema": {
                 "name": "Kino",
-                "terms": "veľké plátno,film,pohyblivé obrázky,filmový dom,filmové divadlo,najbližšie kino,premietanie,multiplex,kultúrny dom,dom kutúry,3D kino,velke platno,pohyblivé obrazky,filmovy dom,filmove divadlo,najblizsie kino,kulturny dom,dom kultury"
+                "terms": "veľké plátno,film,pohyblivé obrázky,filmový dom,filmové divadlo,najbližšie kino,premietanie,multiplex,kultúrny dom,dom kutúry,3d kino,velke platno,pohyblivé obrazky,filmovy dom,filmove divadlo,najblizsie kino,kulturny dom,dom kultury"
             },
             "amenity/clinic": {
                 "name": "Klinika",
@@ -1589,7 +1659,7 @@
             },
             "amenity/drinking_water": {
                 "name": "Pitná voda",
-                "terms": "fontánka na pitie, voda na pitie,pitna voda,pitná voda,fontanka na pitie,voda na pitie"
+                "terms": "fontánka na pitie,voda na pitie,pitna voda,pitná voda,fontanka na pitie,voda na pitie"
             },
             "amenity/embassy": {
                 "name": "Veľvyslanectvo",
@@ -1597,7 +1667,7 @@
             },
             "amenity/fast_food": {
                 "name": "Rýchle občerstvenie",
-                "terms": "rychle obcerstvenie,rýchle občerstvenie,fastfood, fast food"
+                "terms": "rychle obcerstvenie,rýchle občerstvenie,fastfood,fast food"
             },
             "amenity/fire_station": {
                 "name": "Požiarna stanica",
@@ -1609,7 +1679,7 @@
             },
             "amenity/fuel": {
                 "name": "Čerpacia stanica",
-                "terms": "Pumpa,čerpacia stanica,cerpacia stanica,benzinka,benzínka"
+                "terms": "pumpa,čerpacia stanica,cerpacia stanica,benzinka,benzínka"
             },
             "amenity/grave_yard": {
                 "name": "Pohrebisko",
@@ -1629,7 +1699,7 @@
             },
             "amenity/library": {
                 "name": "Knižnica",
-                "terms": "Kniznica,biblioteka,bibliotéka,skriptáren,skriptaren"
+                "terms": "kniznica,biblioteka,bibliotéka,skriptáren,skriptaren"
             },
             "amenity/marketplace": {
                 "name": "Tržnica",
@@ -1653,7 +1723,7 @@
             },
             "amenity/place_of_worship": {
                 "name": "Náboženské miesto",
-                "terms": "kostol,kaplnka,chrám,katedrála,bazilika,dom Boží,dom modlitieb,misia,mešita,minaret,synagóga,dóm,svätostánok, oratórium,fara,diecéza,stupa,chram,dom bozi,mesita,synagoga,dom,svatostanok,oratorium,dieceza"
+                "terms": "kostol,kaplnka,chrám,katedrála,bazilika,dom boží,dom modlitieb,misia,mešita,minaret,synagóga,dóm,svätostánok,oratórium,fara,diecéza,stupa,chram,dom bozi,mesita,synagoga,dom,svatostanok,oratorium,dieceza"
             },
             "amenity/place_of_worship/buddhist": {
                 "name": "Budhistický chrám",
@@ -1661,11 +1731,11 @@
             },
             "amenity/place_of_worship/christian": {
                 "name": "Kostol",
-                "terms": "kresťanský,kostol,kaplnka,chrám,katedrála,bazilika,dom Boží,dom modlitieb,misia,dóm,svätostánok, oratórium,fara,diecéza,krestansky,katolícky,katolicky,evanielický,evanielicky,chram,katedrala,dom bozi,dom,svatostanok,oratorium,dieceza"
+                "terms": "kresťanský,kostol,kaplnka,chrám,katedrála,bazilika,dom boží,dom modlitieb,misia,dóm,svätostánok,oratórium,fara,diecéza,krestansky,katolícky,katolicky,evanielický,evanielicky,chram,katedrala,dom bozi,dom,svatostanok,oratorium,dieceza"
             },
             "amenity/place_of_worship/jewish": {
                 "name": "Synagóga",
-                "terms": "Židovský,synagóga,zidovsky,synagoga"
+                "terms": "židovský,synagóga,zidovsky,synagoga"
             },
             "amenity/place_of_worship/muslim": {
                 "name": "Mešita",
@@ -1681,7 +1751,7 @@
             },
             "amenity/post_office": {
                 "name": "Pošta",
-                "terms": "posta,Poštový úrad,postovy urad,slovenská pošta,slovenska posta"
+                "terms": "posta,poštový úrad,postovy urad,slovenská pošta,slovenska posta"
             },
             "amenity/pub": {
                 "name": "Krčma",
@@ -1693,11 +1763,11 @@
             },
             "amenity/ranger_station": {
                 "name": "Stanica horskej služby",
-                "terms": "stanica horskej sluzby,sprava narodneho parku, správa národného parku,narodny park,národný park"
+                "terms": "stanica horskej sluzby,sprava narodneho parku,správa národného parku,narodny park,národný park"
             },
             "amenity/recycling": {
                 "name": "Recyklácia",
-                "terms": "recyklacia, zber, recyklovanie"
+                "terms": "recyklacia,zber,recyklovanie"
             },
             "amenity/register_office": {
                 "name": "Matričný úrad",
@@ -1713,7 +1783,7 @@
             },
             "amenity/school": {
                 "name": "Školský areál",
-                "terms": "Skolsky areal,skola,druzina"
+                "terms": "skolsky areal,skola,druzina"
             },
             "amenity/shelter": {
                 "name": "Prístrešok",
@@ -1737,15 +1807,15 @@
             },
             "amenity/studio": {
                 "name": "Štúdio",
-                "terms": "Studio"
+                "terms": "studio"
             },
             "amenity/swimming_pool": {
                 "name": "Plaváreň",
-                "terms": "Plavaren,kúpalisko,kupalisko"
+                "terms": "plavaren,kúpalisko,kupalisko"
             },
             "amenity/taxi": {
                 "name": "Stanovisko taxíkov",
-                "terms": "taxík, taxislužba, taxi,taxik,taxisluzba,odvoz"
+                "terms": "taxík,taxislužba,taxi,taxik,taxisluzba,odvoz"
             },
             "amenity/telephone": {
                 "name": "Telefón",
@@ -1757,7 +1827,7 @@
             },
             "amenity/toilets": {
                 "name": "Toalety",
-                "terms": "záchod, záchody, toaleta, toalety, WC,zachod,zachody"
+                "terms": "záchod,záchody,toaleta,toalety,wc,zachod,zachody"
             },
             "amenity/townhall": {
                 "name": "Mestský úrad",
@@ -1765,7 +1835,7 @@
             },
             "amenity/university": {
                 "name": "Univerzita",
-                "terms": "Univerzita,vysoka skola, vysoká škola"
+                "terms": "univerzita,vysoka skola,vysoká škola"
             },
             "amenity/vending_machine": {
                 "name": "Automat",
@@ -1777,11 +1847,15 @@
             },
             "amenity/waste_basket": {
                 "name": "Odpadový kôš",
-                "terms": "kontajner,kôš,smeti,kos,odpad,odpadkovy kos, odpadkový kôš"
+                "terms": "kontajner,kôš,smeti,kos,odpad,odpadkovy kos,odpadkový kôš"
             },
             "area": {
                 "name": "Plocha",
                 "terms": "územie,uzemie"
+            },
+            "area/highway": {
+                "name": "Plocha cesty",
+                "terms": "plocha cesty,"
             },
             "barrier": {
                 "name": "Bariéra",
@@ -1797,15 +1871,15 @@
             },
             "barrier/cattle_grid": {
                 "name": "Mreža proti pohybu dobytka",
-                "terms": "Mreza proti pohybu dobytka,mreza,priekopa,kravy"
+                "terms": "mreza proti pohybu dobytka,mreza,priekopa,kravy"
             },
             "barrier/city_wall": {
                 "name": "Mestské opevnenie",
-                "terms": "Mestske opevnenie,hradby,hradba,fortifikácia,fortifikacia,múr,mur"
+                "terms": "mestske opevnenie,hradby,hradba,fortifikácia,fortifikacia,múr,mur"
             },
             "barrier/cycle_barrier": {
                 "name": "Zábrana pre cyklistov",
-                "terms": "Zabrana pre cyklistov,bicykel,bicykle,zatarasa,zátarasa"
+                "terms": "zabrana pre cyklistov,bicykel,bicykle,zatarasa,zátarasa"
             },
             "barrier/ditch": {
                 "name": "Priekopa",
@@ -1829,7 +1903,7 @@
             },
             "barrier/kissing_gate": {
                 "name": "Zábrana pre dobytok",
-                "terms": "Zabrana pre dobytok,kravy"
+                "terms": "zabrana pre dobytok,kravy"
             },
             "barrier/lift_gate": {
                 "name": "Rampa",
@@ -1837,7 +1911,7 @@
             },
             "barrier/retaining_wall": {
                 "name": "Podporná stena",
-                "terms": "Podporna stena,múr,mur,vyrovnávacia stena,vyrovnavacia stena"
+                "terms": "podporna stena,múr,mur,vyrovnávacia stena,vyrovnavacia stena"
             },
             "barrier/stile": {
                 "name": "Prielez",
@@ -1845,7 +1919,7 @@
             },
             "barrier/toll_booth": {
                 "name": "Výber mýta",
-                "terms": "Budka pre vyber myta,mytnica,vyber myta,Búdka pre výber mýta,mýto,myto,poplatok,vstupné,vstupne,kasa,pokladna,pokladňa"
+                "terms": "budka pre vyber myta,mytnica,vyber myta,búdka pre výber mýta,mýto,myto,poplatok,vstupné,vstupne,kasa,pokladna,pokladňa"
             },
             "barrier/wall": {
                 "name": "Múr",
@@ -1853,7 +1927,7 @@
             },
             "boundary/administrative": {
                 "name": "Hranica administratívneho územia",
-                "terms": "Hranica administrativneho uzemia,okres,kraj,župa,mesto,dedina,zupa"
+                "terms": "hranica administrativneho uzemia,okres,kraj,župa,mesto,dedina,zupa"
             },
             "building": {
                 "name": "Budova",
@@ -1861,7 +1935,7 @@
             },
             "building/apartments": {
                 "name": "Bytovka",
-                "terms": "Bytovka,obytna budova,panelak,panelák,vežiak,veziak,barak,barák,činžiak,cinziak,apartmany,apartmány"
+                "terms": "bytovka,obytna budova,panelak,panelák,vežiak,veziak,barak,barák,činžiak,cinziak,apartmany,apartmány"
             },
             "building/barn": {
                 "name": "Stodola",
@@ -1893,7 +1967,7 @@
             },
             "building/commercial": {
                 "name": "Komerčná budova",
-                "terms": "Obchody,firmy,firma,predaj,podnik,podniky,kancelarie,kancelárie"
+                "terms": "obchody,firmy,firma,predaj,podnik,podniky,kancelarie,kancelárie"
             },
             "building/construction": {
                 "name": "Budova vo výstavbe",
@@ -2193,11 +2267,11 @@
             },
             "emergency/fire_hydrant": {
                 "name": "Požiarny hydrant",
-                "terms": "poziarny hydrant,hydrant, zdroj vody,hadica,uzáver vod,uzaver vody"
+                "terms": "poziarny hydrant,hydrant,zdroj vody,hadica,uzáver vod,uzaver vody"
             },
             "emergency/phone": {
                 "name": "Núdzový telefón",
-                "terms": "nudzovy telefon,SOS,tiesňová linka,tiesnova linka,núdzový telefón.nudzovy telefon"
+                "terms": "nudzovy telefon,sos,tiesňová linka,tiesnova linka,núdzový telefón.nudzovy telefon"
             },
             "entrance": {
                 "name": "Vchod/východ",
@@ -2205,11 +2279,11 @@
             },
             "footway/crossing": {
                 "name": "Prechod",
-                "terms": "Prechod pre chodcov,zebra"
+                "terms": "prechod pre chodcov"
             },
             "footway/crosswalk": {
-                "name": "Prechod",
-                "terms": "prechod pre chodcov,zebra"
+                "name": "Prechod pre chodcov",
+                "terms": "zebra,prechod"
             },
             "footway/sidewalk": {
                 "name": "Chodník",
@@ -2221,15 +2295,15 @@
             },
             "golf/bunker": {
                 "name": "Piesková jama",
-                "terms": "pieskova jama, bunker, piesok, sand trap"
+                "terms": "pieskova jama,bunker,piesok,sand trap"
             },
             "golf/fairway": {
                 "name": "Dráha jamky",
-                "terms": "draha jamky, fairway"
+                "terms": "draha jamky,fairway"
             },
             "golf/green": {
                 "name": "Jamkovisko",
-                "terms": "green, putting green"
+                "terms": "green,putting green"
             },
             "golf/hole": {
                 "name": "Golfová jamka",
@@ -2237,11 +2311,11 @@
             },
             "golf/lateral_water_hazard": {
                 "name": "Pozdĺžna vodná prekážka",
-                "terms": "pozdlzna vodna prekazka, Lateral Water Hazard"
+                "terms": "pozdlzna vodna prekazka,lateral water hazard"
             },
             "golf/rough": {
                 "name": "Vysoká tráva",
-                "terms": "vysoka trava, rough"
+                "terms": "vysoka trava,rough"
             },
             "golf/tee": {
                 "name": "Začiatok odpaliska",
@@ -2249,7 +2323,7 @@
             },
             "golf/water_hazard": {
                 "name": "Vodná prekážka",
-                "terms": "vodna prekazka, water hazard"
+                "terms": "vodna prekazka,water hazard"
             },
             "highway": {
                 "name": "Cesta",
@@ -2257,19 +2331,23 @@
             },
             "highway/bridleway": {
                 "name": "Jazdecká trať",
-                "terms": "jazdecká cesta, chodník pre kone,jazdecká trasa,jazdecka cesta,chodnik pre kone,jazdecka trasa,jazdecka trat"
+                "terms": "jazdecká cesta,chodník pre kone,jazdecká trasa,jazdecka cesta,chodnik pre kone,jazdecka trasa,jazdecka trat"
             },
             "highway/bus_stop": {
                 "name": "Autobusová zastávka",
-                "terms": "Autobusova zastavka,nástupište,nastupiste,stanica"
+                "terms": "autobusova zastavka,nástupište,nastupiste,stanica"
+            },
+            "highway/corridor": {
+                "name": "Chodba v budove",
+                "terms": "chodba,hala"
             },
             "highway/crossing": {
-                "name": "Prechod pre chodcov",
-                "terms": "Prechod pre chodcov,zebra"
+                "name": "Prechod",
+                "terms": "prechod pre chodcov,zebra"
             },
             "highway/crosswalk": {
-                "name": "Prechod zec cestu",
-                "terms": "zebra,prechod pre chodcov"
+                "name": "Prechod pre chodcov",
+                "terms": "prechod,zebra"
             },
             "highway/cycleway": {
                 "name": "Cyklocesta",
@@ -2285,7 +2363,7 @@
             },
             "highway/mini_roundabout": {
                 "name": "Malý kruhový objazd",
-                "terms": "Maly kruhovy objazd,kruháč,kruhac,mini"
+                "terms": "maly kruhovy objazd,kruháč,kruhac,mini"
             },
             "highway/motorway": {
                 "name": "Diaľnica",
@@ -2297,7 +2375,7 @@
             },
             "highway/motorway_link": {
                 "name": "Diaľničný privádzač",
-                "terms": "Dialnicny privadzac,privadzac,privádzač,zjazd,vyjazd,výjazd,nájazd,najazd,pripojovací pruh,pripojovaci pruh"
+                "terms": "dialnicny privadzac,privadzac,privádzač,zjazd,vyjazd,výjazd,nájazd,najazd,pripojovací pruh,pripojovaci pruh"
             },
             "highway/path": {
                 "name": "Cestička",
@@ -2305,7 +2383,7 @@
             },
             "highway/pedestrian": {
                 "name": "Pešia zóna",
-                "terms": "pesia zona,chodci,pre chodcov"
+                "terms": "pesia zona,namestie,námestie"
             },
             "highway/primary": {
                 "name": "Cesta 1. triedy",
@@ -2313,7 +2391,7 @@
             },
             "highway/primary_link": {
                 "name": "Privádzač na cestu 1. triedy",
-                "terms": "Privadzac na cestu 1. triedy,privadzac,privádzač,zjazd,vyjazd,výjazd,nájazd,najazd,pripojovací pruh,pripojovaci pruh"
+                "terms": "privadzac na cestu 1. triedy,privadzac,privádzač,zjazd,vyjazd,výjazd,nájazd,najazd,pripojovací pruh,pripojovaci pruh"
             },
             "highway/raceway": {
                 "name": "Pretekárska strať",
@@ -2337,7 +2415,7 @@
             },
             "highway/secondary_link": {
                 "name": "Privádzač na cestu 2. triedy",
-                "terms": "Privadzac na cestu 2. triedy,Privádzač na cestu druhej triedy,Privadzac na cestu druhej triedy,zjazd,vyjazd,výjazd,nájazd,najazd,pripojovací pruh,pripojovaci pruh"
+                "terms": "privadzac na cestu 2. triedy,privádzač na cestu druhej triedy,privadzac na cestu druhej triedy,zjazd,vyjazd,výjazd,nájazd,najazd,pripojovací pruh,pripojovaci pruh"
             },
             "highway/service": {
                 "name": "Servisná cesta",
@@ -2345,11 +2423,11 @@
             },
             "highway/service/alley": {
                 "name": "Ulička medzi domami",
-                "terms": "Ulicka medzi domami,ulicka,priechod"
+                "terms": "ulicka medzi domami,ulicka,priechod"
             },
             "highway/service/drive-through": {
                 "name": "Obslúženie z auta",
-                "terms": "Obsluzenie z auta,obslúženie v aute,obsluzenie v aute,vjazd"
+                "terms": "obsluzenie z auta,obslúženie v aute,obsluzenie v aute,vjazd"
             },
             "highway/service/driveway": {
                 "name": "Príjazdová cesta",
@@ -2357,7 +2435,7 @@
             },
             "highway/service/emergency_access": {
                 "name": "Núdzový prístup",
-                "terms": "Nudzovy pristup,naliehavý,naliehavy,stav núzde,stav nudze"
+                "terms": "nudzovy pristup,naliehavý,naliehavy,stav núzde,stav nudze"
             },
             "highway/service/parking_aisle": {
                 "name": "Parkovacia ulička",
@@ -2381,7 +2459,7 @@
             },
             "highway/tertiary": {
                 "name": "Cesta 3. triedy",
-                "terms": "Cesta tretej triedy,hlavná cesta,hlavna cesta"
+                "terms": "cesta tretej triedy,hlavná cesta,hlavna cesta"
             },
             "highway/tertiary_link": {
                 "name": "Privádzač na cestu 3. triedy",
@@ -2397,7 +2475,7 @@
             },
             "highway/trunk": {
                 "name": "Rýchlostná cesta",
-                "terms": "rychlostna cesta, dialnica,diaľnica,hlavná cesta,hlavna cesta"
+                "terms": "rychlostna cesta,dialnica,diaľnica,hlavná cesta,hlavna cesta"
             },
             "highway/trunk_link": {
                 "name": "Privádzač rýchlostnej cesty",
@@ -2429,11 +2507,11 @@
             },
             "historic/memorial": {
                 "name": "Pamätník",
-                "terms": "Pamätihodnosť,pamatihodnost,pamatnik,pomnik,pamätník,pomník,snp,hrdina"
+                "terms": "pamätihodnosť,pamatihodnost,pamatnik,pomnik,pamätník,pomník,snp,hrdina"
             },
             "historic/monument": {
                 "name": "Pamätihodnosť",
-                "terms": "Pamätihodnosť,pamatihodnost,pamatnik,pomnik,pamätník,pomník,snp,hrdina"
+                "terms": "pamätihodnosť,pamatihodnost,pamatnik,pomnik,pamätník,pomník,snp,hrdina"
             },
             "historic/ruins": {
                 "name": "Ruiny",
@@ -2441,7 +2519,7 @@
             },
             "historic/wayside_cross": {
                 "name": "Prícestný kríž",
-                "terms": "Kresťanský,kríž pri ceste,krestansky,kriz pri ceste,kriz,Pricestny kriz,krucifix"
+                "terms": "kresťanský,kríž pri ceste,krestansky,kriz pri ceste,kriz,pricestny kriz,krucifix"
             },
             "historic/wayside_shrine": {
                 "name": "Prícestný svätostánok",
@@ -2453,7 +2531,7 @@
             },
             "landuse": {
                 "name": "Využitie územia",
-                "terms": "vyuzitie uzemia,využitie,zyuzitie,les,lúka,luka,hora,pole"
+                "terms": "vuzitie uzemia,vyuzitie pody,využitie pôdy,krajina"
             },
             "landuse/allotments": {
                 "name": "Záhradkárska osada",
@@ -2489,7 +2567,7 @@
             },
             "landuse/farmyard": {
                 "name": "Farma",
-                "terms": "Družstvo,druztvo,jrd,jzd,kravín,kravin,statok,gazdovstvo"
+                "terms": "družstvo,druztvo,jrd,jzd,kravín,kravin,statok,gazdovstvo"
             },
             "landuse/forest": {
                 "name": "Les",
@@ -2523,6 +2601,10 @@
                 "name": "Sad",
                 "terms": "sad,stromy,ovocie,ovocné stromy,ovocne stromy,ovocný sad,ovocny sad"
             },
+            "landuse/plant_nursery": {
+                "name": "Lesná škôlka",
+                "terms": "lesna skolka,stromy,stromčeky,stromceky,skolka,škôlka"
+            },
             "landuse/quarry": {
                 "name": "Kameňolom",
                 "terms": "kamenolom,lom,kamene,strk,kameňe,štrk"
@@ -2542,6 +2624,14 @@
             "leisure": {
                 "name": "Oddych",
                 "terms": "relax,volny cas,voľný čas"
+            },
+            "leisure/adult_gaming_centre": {
+                "name": "Výherné automaty",
+                "terms": "vyherne automaty,hracie automaty"
+            },
+            "leisure/bowling_alley": {
+                "name": "Bowlingová hala",
+                "terms": "bowlinkova hala,bowling,kúželky,kuzelky,bouling"
             },
             "leisure/common": {
                 "name": "Verejné priestranstvo",
@@ -2589,7 +2679,7 @@
             },
             "leisure/pitch/american_football": {
                 "name": "Ihrisko pre americký futbal",
-                "terms": "Ihrisko americkeho futbalu,americky futbal,americký futbal,rugby"
+                "terms": "ihrisko americkeho futbalu,americky futbal,americký futbal,rugby"
             },
             "leisure/pitch/baseball": {
                 "name": "Basebalové ihrisko",
@@ -2625,7 +2715,7 @@
             },
             "leisure/slipway": {
                 "name": "Spúšťanie lodí",
-                "terms": "Spustanie lodi,dok,lodenica,klzacka,kĺzačka"
+                "terms": "spustanie lodi,dok,lodenica,klzacka,kĺzačka"
             },
             "leisure/sports_center": {
                 "name": "Športové centrum",
@@ -2637,7 +2727,7 @@
             },
             "leisure/swimming_pool": {
                 "name": "Plaváreň",
-                "terms": "Plavaren,kúpalisko,kupalisko"
+                "terms": "plavaren,kúpalisko,kupalisko"
             },
             "leisure/track": {
                 "name": "Pretekárska dráha (nemotoristická)",
@@ -2650,6 +2740,10 @@
             "man_made": {
                 "name": "Ľudský výtvor",
                 "terms": "ludsky vytvor,artefakt,konštrukcia,konstrukcia,dielo,stavba,objekt,mechanizmus"
+            },
+            "man_made/adit": {
+                "name": "Štôlňa",
+                "terms": "stolna,štóla,stola,vchod,vchod do bane"
             },
             "man_made/breakwater": {
                 "name": "Vlnolam",
@@ -2783,6 +2877,10 @@
                 "name": "Vrchol",
                 "terms": "kopec,vrchol,vrch,štít,stit,hora"
             },
+            "natural/saddle": {
+                "name": "Sedlo",
+                "terms": "sedlo,horské sedlo,horske sedlo"
+            },
             "natural/scree": {
                 "name": "Suť",
                 "terms": "sut,sutina,kameň,kamen"
@@ -2798,6 +2896,14 @@
             "natural/tree": {
                 "name": "Strom",
                 "terms": "listnatý strom,listnaty strom,ihličnatý strom,ihlicnaty strom"
+            },
+            "natural/tree_row": {
+                "name": "Rad stromov",
+                "terms": "aleja,alej,stromoradie"
+            },
+            "natural/volcano": {
+                "name": "Sopka",
+                "terms": "sopka,vulkán,vulkan"
             },
             "natural/water": {
                 "name": "Voda",
@@ -2837,7 +2943,7 @@
             },
             "office/architect": {
                 "name": "Architekt",
-                "terms": "Architekti"
+                "terms": "architekti"
             },
             "office/company": {
                 "name": "Firma",
@@ -2869,7 +2975,7 @@
             },
             "office/it": {
                 "name": "IT služby",
-                "terms": "IT, it sluzby,pocitace,počítače"
+                "terms": "it,it sluzby,pocitace,počítače"
             },
             "office/lawyer": {
                 "name": "Právna kancelária",
@@ -2957,7 +3063,7 @@
             },
             "point": {
                 "name": "Bod",
-                "terms": "bod,POI,bod záujmu,bod zaujmu,zaujmovy bod,záujmový bod"
+                "terms": "bod,poi,bod záujmu,bod zaujmu,zaujmovy bod,záujmový bod"
             },
             "power": {
                 "name": "Elektrická energia",
@@ -2973,15 +3079,15 @@
             },
             "power/minor_line": {
                 "name": "Vedľajšie elektrické vedenie",
-                "terms": "vedlajsie elektricke vedenie,rozvod, elektrika"
+                "terms": "vedlajsie elektricke vedenie,rozvod,elektrika"
             },
             "power/pole": {
                 "name": "Elektrický stĺp",
-                "terms": "stlp elektrickeho vedenia,stožiar,stoziar,elektrický stĺp,elektricky stlp,Stĺp elektrického vedenia"
+                "terms": "stlp elektrickeho vedenia,stožiar,stoziar,elektrický stĺp,elektricky stlp,stĺp elektrického vedenia"
             },
             "power/sub_station": {
                 "name": "Rozvodná stanica",
-                "terms": "Rozvodna stanica,Rozvodná stanica,transformator"
+                "terms": "rozvodna stanica,rozvodná stanica,transformator"
             },
             "power/substation": {
                 "name": "Elektrická rozvodňa",
@@ -2993,7 +3099,7 @@
             },
             "power/transformer": {
                 "name": "Transformátor",
-                "terms": "Rozvodna stanica,Rozvodná stanica,transformator,trasformátor"
+                "terms": "rozvodna stanica,rozvodná stanica,transformator,trasformátor"
             },
             "public_transport/platform": {
                 "name": "Nástupište",
@@ -3025,7 +3131,7 @@
             },
             "railway/level_crossing": {
                 "name": "Železničné priecestie",
-                "terms": "priecestie,železničné priecestie,cesta cez železnicu,závory,cesta cez trať,kríženie,zeleznicne priecestie,cesta cez zeleznicu,zavory,cesta cez trat,krizenie"
+                "terms": "zeleznicne priecestie,zeleznicny prechod,železničný prechod"
             },
             "railway/monorail": {
                 "name": "Jednokoľajnicová dráha",
@@ -3065,7 +3171,7 @@
             },
             "roundabout": {
                 "name": "Kruhový objazd",
-                "terms": "kruhovy objazd, kruhac, kruháč, kruhová križovatka, kruhova krizovatka"
+                "terms": "kruhovy objazd,kruhac,kruháč,kruhová križovatka,kruhova krizovatka"
             },
             "route/ferry": {
                 "name": "Trajektová trasa",
@@ -3197,7 +3303,7 @@
             },
             "shop/craft": {
                 "name": "Obchod s umeleckými potrebami",
-                "terms": "Obchod s umeleckymi potrebami,umelecké potreby,umelecke potreby"
+                "terms": "obchod s umeleckymi potrebami,umelecké potreby,umelecke potreby"
             },
             "shop/curtain": {
                 "name": "Obchod so záclonami",
@@ -3237,7 +3343,7 @@
             },
             "shop/farm": {
                 "name": "Voľný predaj ovocia",
-                "terms": "Volny predaj ovocia,ovocie"
+                "terms": "volny predaj ovocia,ovocie"
             },
             "shop/fashion": {
                 "name": "Obchod s módnymi doplnkami",
@@ -3297,7 +3403,7 @@
             },
             "shop/hifi": {
                 "name": "Obchod s ozvučením",
-                "terms": "Obchod so zvukovymi systemami,hifi,hi-fi,zvuk,ozvučenie,ozvucenie,obchod s ozvucenim,Obchod so zvukovými systémami"
+                "terms": "obchod so zvukovymi systemami,hifi,hi-fi,zvuk,ozvučenie,ozvucenie,obchod s ozvucenim,obchod so zvukovými systémami"
             },
             "shop/houseware": {
                 "name": "Domáce potreby",
@@ -3321,7 +3427,7 @@
             },
             "shop/laundry": {
                 "name": "Čistiareň",
-                "terms": "cistiaren,Čistiareň odevov,Práčovňa,cistiaren odevov,pracovna"
+                "terms": "cistiaren,čistiareň odevov,práčovňa,cistiaren odevov,pracovna"
             },
             "shop/leather": {
                 "name": "Obchod s kožennými výrobkami",
@@ -3361,11 +3467,11 @@
             },
             "shop/music": {
                 "name": "Obchod s hudbou",
-                "terms": "hudba,hudobný obchod,hudobny obchod,CD,mp3"
+                "terms": "hudba,hudobný obchod,hudobny obchod,cd,mp3"
             },
             "shop/musical_instrument": {
                 "name": "Obchod s hudobnými nástrojmi",
-                "terms": "obchod s hudobnymi nastrojmi, hudobne nastroje,hudobné nástroje"
+                "terms": "obchod s hudobnymi nastrojmi,hudobne nastroje,hudobné nástroje"
             },
             "shop/newsagent": {
                 "name": "Obchod s novinami/časopismi",
@@ -3397,7 +3503,7 @@
             },
             "shop/photo": {
                 "name": "Obchod s fototechnikou",
-                "terms": "Fotoateliér,fotoatelier,fotostudio,fotoštúdio,fotografia"
+                "terms": "fotoateliér,fotoatelier,fotostudio,fotoštúdio,fotografia"
             },
             "shop/pyrotechnics": {
                 "name": "Obchod s pyrotechnikov",
@@ -3485,7 +3591,7 @@
             },
             "shop/video": {
                 "name": "Videopožičovňa",
-                "terms": "videopozicovna,DVD,CD,VHS,blue-ray,blueray,blue ray,video"
+                "terms": "videopozicovna,dvd,cd,vhs,blue-ray,blueray,blue ray,video"
             },
             "shop/video_games": {
                 "name": "Obchod s videohrami",
@@ -3561,7 +3667,7 @@
             },
             "tourism/picnic_site": {
                 "name": "Miesto pre piknik",
-                "terms": "piknik,opekanie,opekačka,BBQ,grilovanie"
+                "terms": "piknik,opekanie,opekačka,bbq,grilovanie"
             },
             "tourism/theme_park": {
                 "name": "Zábavný park",
@@ -3625,7 +3731,7 @@
             },
             "type/restriction/only_left_turn": {
                 "name": "Prikázaný smer jazdy vľavo",
-                "terms": "Prikazany smer jazdy vlavo"
+                "terms": "prikazany smer jazdy vlavo"
             },
             "type/restriction/only_right_turn": {
                 "name": "Prikázaný smer jazdy vpravo",
@@ -3645,7 +3751,7 @@
             },
             "type/route/bus": {
                 "name": "Autobusová trasa",
-                "terms": "Autobusova trasa,linka,spoj,trat,trať"
+                "terms": "autobusova trasa,linka,spoj,trat,trať"
             },
             "type/route/detour": {
                 "name": "Obchádzková trasa",
@@ -3653,7 +3759,7 @@
             },
             "type/route/ferry": {
                 "name": "Trajektová trasa",
-                "terms": "Trajektova trasa,trajekt,linka,linka trajektu"
+                "terms": "trajektova trasa,trajekt,linka,linka trajektu"
             },
             "type/route/foot": {
                 "name": "Turistická trasa",

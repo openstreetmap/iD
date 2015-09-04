@@ -694,7 +694,7 @@
             },
             "amenity/cinema": {
                 "name": "Fliek",
-                "terms": "Fliek, Inry, Movie, Silverdoek"
+                "terms": "fliek,inry,movie,silverdoek"
             },
             "amenity/courthouse": {
                 "name": "Hof"
@@ -855,9 +855,6 @@
             "highway/bus_stop": {
                 "name": "Busstop"
             },
-            "highway/crossing": {
-                "name": "Oorgang"
-            },
             "highway/cycleway": {
                 "name": "Fietsrypad"
             },
@@ -875,9 +872,6 @@
             },
             "highway/path": {
                 "name": "Paadjie"
-            },
-            "highway/pedestrian": {
-                "name": "Voetganger"
             },
             "highway/primary": {
                 "name": "Primere Pad"
@@ -951,9 +945,6 @@
             "historic/wayside_cross": {
                 "name": "Padteken"
             },
-            "landuse": {
-                "name": "Landsgebruik"
-            },
             "landuse/allotments": {
                 "name": "Toegewysde lappie grond"
             },
@@ -962,11 +953,11 @@
             },
             "landuse/cemetery": {
                 "name": "Begrafplaas",
-                "terms": "begrafplaas, kerkhof, dodeakker, godsakker"
+                "terms": "begrafplaas,kerkhof,dodeakker,godsakker"
             },
             "landuse/construction": {
                 "name": "Konstruksie",
-                "terms": "Konstruksie"
+                "terms": "konstruksie"
             },
             "landuse/farmyard": {
                 "name": "Plaaswerf",
@@ -974,23 +965,23 @@
             },
             "landuse/forest": {
                 "name": "Woud",
-                "terms": "Woud, Oerwoud, Bos"
+                "terms": "woud,oerwoud,bos"
             },
             "landuse/grass": {
                 "name": "Gras",
-                "terms": "Gras, weiveld"
+                "terms": "gras,weiveld"
             },
             "landuse/meadow": {
                 "name": "Weiveld",
-                "terms": "weiland, grasland, weiveld"
+                "terms": "weiland,grasland,weiveld"
             },
             "landuse/orchard": {
                 "name": "Boord",
-                "terms": "boord, vrugteboord"
+                "terms": "boord,vrugteboord"
             },
             "landuse/quarry": {
                 "name": "Kwarrie",
-                "terms": "steengroef, klipbreekgat, groef"
+                "terms": "steengroef,klipbreekgat,groef"
             },
             "landuse/vineyard": {
                 "name": "Druiweprieel",
@@ -1005,27 +996,27 @@
             },
             "leisure/garden": {
                 "name": "Tuin",
-                "terms": "Tuin, gedenktuin"
+                "terms": "tuin,gedenktuin"
             },
             "leisure/golf_course": {
                 "name": "Golfbaan",
-                "terms": "Golfbaan"
+                "terms": "golfbaan"
             },
             "leisure/marina": {
                 "name": "Vasmeerplek",
-                "terms": "marina, jaghawe, waterdorp"
+                "terms": "marina,jaghawe,waterdorp"
             },
             "leisure/park": {
                 "name": "Park",
-                "terms": "Park"
+                "terms": "park"
             },
             "leisure/pitch": {
                 "name": "Sport Veld",
-                "terms": "Sportveld"
+                "terms": "sportveld"
             },
             "leisure/pitch/american_football": {
                 "name": "Amerikaanse Voetbal Veld",
-                "terms": "Amerikaanse voetbalveld"
+                "terms": "amerikaanse voetbalveld"
             },
             "leisure/pitch/baseball": {
                 "name": "Bofpalveld",
@@ -1033,23 +1024,23 @@
             },
             "leisure/pitch/basketball": {
                 "name": "Basketbalbaan",
-                "terms": "Korfbalbaan"
+                "terms": "korfbalbaan"
             },
             "leisure/pitch/soccer": {
                 "name": "Sokkerveld",
-                "terms": "Sokkerveld"
+                "terms": "sokkerveld"
             },
             "leisure/pitch/tennis": {
                 "name": "Tennisbaan",
-                "terms": "Tennisbaan"
+                "terms": "tennisbaan"
             },
             "leisure/pitch/volleyball": {
                 "name": "Vlugbalbaan",
-                "terms": "Vlugbalbaan"
+                "terms": "vlugbalbaan"
             },
             "leisure/playground": {
                 "name": "Speelpark",
-                "terms": "Speelgrond, speelplek, terein"
+                "terms": "speelgrond,speelplek,terein"
             },
             "leisure/slipway": {
                 "name": "Inglipbaan",
@@ -1065,7 +1056,7 @@
             },
             "line": {
                 "name": "Lyn",
-                "terms": "Lyn"
+                "terms": "lyn"
             },
             "man_made": {
                 "name": "Mens gemaak"
@@ -1076,7 +1067,7 @@
             },
             "man_made/lighthouse": {
                 "name": "Ligtoring",
-                "terms": "Lugtoring"
+                "terms": "lugtoring"
             },
             "man_made/pier": {
                 "name": "Landingsplek",
@@ -1091,7 +1082,7 @@
             },
             "man_made/tower": {
                 "name": "Toring",
-                "terms": "Toring,paal"
+                "terms": "toring,paal"
             },
             "man_made/wastewater_plant": {
                 "name": "Rioolplaas",
@@ -1099,7 +1090,7 @@
             },
             "man_made/water_tower": {
                 "name": "Watertoring",
-                "terms": "Watertoring"
+                "terms": "watertoring"
             },
             "man_made/water_works": {
                 "name": "Waterwerke",
@@ -1144,7 +1135,7 @@
             },
             "natural/tree": {
                 "name": "Boom",
-                "terms": "Boom"
+                "terms": "boom"
             },
             "natural/water": {
                 "name": "Water",
@@ -1152,40 +1143,40 @@
             },
             "natural/water/lake": {
                 "name": "Meer",
-                "terms": "Meer"
+                "terms": "meer"
             },
             "natural/water/pond": {
                 "name": "Dammetjie"
             },
             "natural/water/reservoir": {
                 "name": "Reservoir",
-                "terms": "Reservoir"
+                "terms": "reservoir"
             },
             "natural/wetland": {
                 "name": "Vleiland"
             },
             "natural/wood": {
                 "name": "Woud",
-                "terms": "Woud"
+                "terms": "woud"
             },
             "office": {
                 "name": "Kantoor",
-                "terms": "Kantoor"
+                "terms": "kantoor"
             },
             "place": {
                 "name": "Plek",
-                "terms": "Plek"
+                "terms": "plek"
             },
             "place/city": {
                 "name": "Stad",
-                "terms": "Stad"
+                "terms": "stad"
             },
             "place/hamlet": {
                 "name": "Dorpie"
             },
             "place/island": {
                 "name": "Eiland",
-                "terms": "Eiland"
+                "terms": "eiland"
             },
             "place/isolated_dwelling": {
                 "name": "Afgeleë blyplek"
@@ -1195,34 +1186,34 @@
             },
             "place/town": {
                 "name": "Dorp",
-                "terms": "Dorp"
+                "terms": "dorp"
             },
             "place/village": {
                 "name": "Dorpie",
-                "terms": "Dorpie"
+                "terms": "dorpie"
             },
             "point": {
                 "name": "Punt"
             },
             "power": {
                 "name": "Krag",
-                "terms": "Krag"
+                "terms": "krag"
             },
             "power/line": {
                 "name": "Kraglyn",
-                "terms": "Kraglyn,kragdraad"
+                "terms": "kraglyn,kragdraad"
             },
             "power/pole": {
                 "name": "Kragpaal",
-                "terms": "Kragpaal"
+                "terms": "kragpaal"
             },
             "power/sub_station": {
                 "name": "Substasie",
-                "terms": "Substasie"
+                "terms": "substasie"
             },
             "power/tower": {
                 "name": "Hoogspanningstoring",
-                "terms": "Hoogspanningstoring"
+                "terms": "hoogspanningstoring"
             },
             "power/transformer": {
                 "name": "Transformator",
@@ -1230,16 +1221,13 @@
             },
             "railway": {
                 "name": "Spoorlyn",
-                "terms": "Spoorweg"
+                "terms": "spoorweg"
             },
             "railway/abandoned": {
                 "name": "Verlate spoorlyn"
             },
             "railway/disused": {
                 "name": "Ongebruikte spoorweg"
-            },
-            "railway/level_crossing": {
-                "name": "Spooroorgang"
             },
             "railway/monorail": {
                 "name": "Enkelspoorbaan"
