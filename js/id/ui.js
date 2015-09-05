@@ -61,6 +61,10 @@ iD.ui = function(context) {
             .call(iD.ui.Save(context));
 
         bar.append('div')
+            .attr('class', 'full-screen')
+            .call(iD.ui.FullScreen(context));
+
+        bar.append('div')
             .attr('class', 'spinner')
             .call(iD.ui.Spinner(context));
 

@@ -29,7 +29,6 @@ body {
 .id-container {
     height: 100%;
     width: 100%;
-    position: fixed;
     min-width: 768px;
 }
 
@@ -58,14 +57,12 @@ body {
 
 .spinner {
     opacity: .5;
+    float: right;
 }
 
 .spinner img {
-    position: absolute;
     height: 40px;
     width: 40px;
-    right: 10px;
-    top: 10px;
     border-radius: 4px;
     margin-right: 10px;
     background: black;
@@ -554,6 +551,9 @@ button.save.has-count .count::before {
 
 .icon.back.blue        { background-position: -420px -20px;}
 .icon.forward.blue     { background-position: -440px -20px;}
+
+.icon.full-screen              { background-position: -620px -20px;}
+.active .icon.full-screen      { background-position: -640px -20px;}
 
 button[disabled] .icon.alert      { background-position:   0 -40px;}
 button[disabled] .icon.add-point  { background-position: -20px -40px;}
@@ -1738,6 +1738,27 @@ img.wiki-image {
 
 .add-relation:hover {
     background: rgba(0,0,0,.8);
+}
+
+/* Fullscreen button */
+div.full-screen {
+    float: right;
+    width: 40px;
+    margin-right: 10px;
+}
+
+div.full-screen .tooltip {
+    min-width: 160px;
+}
+
+div.full-screen > button, div.full-screen > button.active {
+    width: 40px;
+    height: 40px;
+    background: transparent;
+}
+
+div.full-screen > button:hover {
+    background-color: rgba(0, 0, 0, .8);
 }
 
 /* Map Controls */
