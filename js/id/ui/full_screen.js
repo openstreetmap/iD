@@ -1,5 +1,7 @@
 iD.ui.FullScreen = function(context) {
-    var element = context.container().node(), button;
+    var element = context.container().node(),
+        keybinding = d3.keybinding('full-screen');
+        // button;
 
     function getFullScreenFn() {
         if (element.requestFullscreen) {
@@ -30,35 +32,42 @@ iD.ui.FullScreen = function(context) {
             document.msFullscreenElement;
     }
 
-    function is_supported() {
+    function isSupported() {
         return !!getFullScreenFn();
     }
 
     function fullScreen() {
         d3.event.preventDefault();
         if (!isFullScreen()) {
-            button.classed('active', true);
+            // button.classed('active', true);
             getFullScreenFn().apply(element);
         } else {
-            button.classed('active', false);
+            // button.classed('active', false);
             getExitFullScreenFn().apply(document);
         }
     }
 
-    return function(selection) {
-        if (!is_supported())
+    return function() { // selection) {
+        if (!isSupported())
             return;
 
-        var tooltip = bootstrap.tooltip()
-            .placement('left');
+        // var tooltip = bootstrap.tooltip()
+        //     .placement('left');
 
-        button = selection.append('button')
-            .attr('title', t('full_screen'))
-            .attr('tabindex', -1)
-            .on('click', fullScreen)
-            .call(tooltip);
+        // button = selection.append('button')
+        //     .attr('title', t('full_screen'))
+        //     .attr('tabindex', -1)
+        //     .on('click', fullScreen)
+        //     .call(tooltip);
 
-        button.append('span')
-            .attr('class', 'icon full-screen');
+        // button.append('span')
+        //     .attr('class', 'icon full-screen');
+
+        keybinding
+            .on(iD.ui.cmd('f11'), fullScreen)
+            .on(iD.ui.cmd('⌘⇧F'), fullScreen);
+
+        d3.select(document)
+            .call(keybinding);
     };
 };

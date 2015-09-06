@@ -430,7 +430,6 @@
             "help": "Another user changed some of the same map features you changed.\nClick on each item below for more details about the conflict, and choose whether to keep\nyour changes or the other user's changes.\n"
         }
     },
-    "full_screen": "Toggle Fullscreen",
     "merge_remote_changes": {
         "conflict": {
             "deleted": "This object has been deleted by {user}.",
@@ -485,6 +484,7 @@
         "out": "Zoom Out"
     },
     "cannot_zoom": "Cannot zoom out further in current mode.",
+    "full_screen": "Toggle Full Screen",
     "gpx": {
         "local_layer": "Local GPX file",
         "drag_drop": "Drag and drop a .gpx file on the page, or click the button to the right to browse",
