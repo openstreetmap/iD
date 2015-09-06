@@ -13,7 +13,7 @@
    width="800"
    height="560"
    id="svg12393"
-   inkscape:version="0.48.5 r10040"
+   inkscape:version="0.48.4 r9939"
    sodipodi:docname="sprite.svg">
   <sodipodi:namedview
      pagecolor="#ffffff"
@@ -28,11 +28,11 @@
      inkscape:window-height="856"
      id="namedview392"
      showgrid="true"
-     inkscape:zoom="1"
-     inkscape:cx="475.13394"
-     inkscape:cy="495.7147"
-     inkscape:window-x="276"
-     inkscape:window-y="71"
+     inkscape:zoom="16"
+     inkscape:cx="641.185"
+     inkscape:cy="531.10386"
+     inkscape:window-x="285"
+     inkscape:window-y="196"
      inkscape:window-maximized="0"
      inkscape:current-layer="svg12393"
      showguides="true"
@@ -2106,4 +2106,72 @@
      style="color:#000000;fill:#8cd05f;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
      inkscape:connector-curvature="0"
      sodipodi:nodetypes="cccccccccccccccccsscsscssccscccccccccccccccccccccccccccssssssssssssssscccccccccsccsssssssssssssss" />
+  <g
+     id="g3387"
+     transform="translate(642.0625,21.9785)"
+     style="fill:#ffffff">
+    <g
+       style="fill:#ffffff"
+       transform="scale(0.5,0.5)"
+       id="Layer_1" />
+    <g
+       style="fill:#ffffff"
+       transform="scale(0.5,0.5)"
+       id="fullscreen_x5F_exit_x5F_alt">
+      <g
+         style="fill:#ffffff"
+         id="g6">
+        <polygon
+           id="polygon8"
+           style="fill:#ffffff"
+           points="25.414,22.586 28,20 20,20 20,28 22.586,25.414 29.172,32 32,29.172 " />
+        <polygon
+           id="polygon10"
+           style="fill:#ffffff"
+           points="12,4 9.375,6.543 2.828,0 0,2.828 6.547,9.371 4,12 11.961,11.957 " />
+        <polygon
+           id="polygon12"
+           style="fill:#ffffff"
+           points="12,28 12,20 4,20 6.586,22.586 0,29.172 2.828,32 9.414,25.414 " />
+        <polygon
+           id="polygon14"
+           style="fill:#ffffff"
+           points="29.164,0 22.598,6.566 20,3.971 20,12 28.031,12 25.438,9.404 32,2.838 " />
+      </g>
+    </g>
+  </g>
+  <g
+     id="g3407"
+     transform="translate(622.082,22.043)"
+     style="fill:#ffffff">
+    <g
+       style="fill:#ffffff"
+       transform="scale(0.5,0.5)"
+       id="Layer_1-1" />
+    <g
+       style="fill:#ffffff"
+       transform="scale(0.5,0.5)"
+       id="fullscreen_x5F_alt">
+      <g
+         style="fill:#ffffff"
+         id="g6-8">
+        <polygon
+           id="polygon8-1"
+           style="fill:#ffffff"
+           points="20,22.828 26.586,29.414 24,32 32,32 32,24 29.414,26.586 22.828,20 " />
+        <polygon
+           id="polygon10-6"
+           style="fill:#ffffff"
+           points="12,9.172 5.414,2.586 8,0 0,0 0,8 2.586,5.414 9.172,12 " />
+        <polygon
+           id="polygon12-0"
+           style="fill:#ffffff"
+           points="22.828,12 29.414,5.414 32,8 32,0 24,0 26.586,2.586 20,9.172 " />
+        <polygon
+           id="polygon14-3"
+           style="fill:#ffffff"
+           points="2.586,26.586 0,24 0,32 8,32 5.414,29.414 12,22.828 9.172,20 " />
+      </g>
+    </g>
+  </g>
 </svg>
