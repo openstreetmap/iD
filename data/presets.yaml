@@ -62,16 +62,16 @@ en:
             # access=yes
             title: Allowed
         # access field placeholder
-        placeholder: Unknown
+        placeholder: Not Specified
         types:
-          access: General
+          access: All
           bicycle: Bicycles
           foot: Foot
           horse: Horses
           motor_vehicle: Motor Vehicles
       access_simple:
         # 'access=*'
-        label: Access
+        label: Allowed Access
         # access_simple field placeholder
         placeholder: 'yes'
       access_toilets:

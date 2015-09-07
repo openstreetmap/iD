@@ -593,9 +593,9 @@
         "fields": {
             "access": {
                 "label": "Allowed Access",
-                "placeholder": "Unknown",
+                "placeholder": "Not Specified",
                 "types": {
-                    "access": "General",
+                    "access": "All",
                     "foot": "Foot",
                     "motor_vehicle": "Motor Vehicles",
                     "bicycle": "Bicycles",
@@ -633,7 +633,7 @@
                 }
             },
             "access_simple": {
-                "label": "Access",
+                "label": "Allowed Access",
                 "placeholder": "yes"
             },
             "access_toilets": {
