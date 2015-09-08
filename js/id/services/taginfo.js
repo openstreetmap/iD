@@ -132,11 +132,11 @@ iD.taginfo = function() {
                 if (!docsFound) {
                     taginfo.docs(_.omit(parameters, 'value'), callback);
                 }
-            }
+            };
         }
 
         request(endpoint + path +
-            iD.util.qsString(parameters), debounce, decoratedCallback||callback);
+            iD.util.qsString(parameters), debounce, decoratedCallback || callback);
     };
 
     taginfo.endpoint = function(_) {
