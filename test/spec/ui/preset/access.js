@@ -94,12 +94,12 @@ describe('iD.ui.preset.access', function() {
         expect(selection.selectAll('#preset-input-access-bicycle').attr('placeholder')).to.equal('permissive');
     });
 
-    it('does not override a "no" placeholder with more specific access tag (#2213)', function() {
+    it('overrides a "no" placeholder with more specific access tag (#2763)', function() {
         var access = iD.ui.preset.access(field);
         selection.call(access);
 
         access.tags({highway: 'cycleway', access: 'destination'});
-        expect(selection.selectAll('#preset-input-access-motor_vehicle').attr('placeholder')).to.equal('no');
+        expect(selection.selectAll('#preset-input-access-motor_vehicle').attr('placeholder')).to.equal('destination');
     });
 
 });

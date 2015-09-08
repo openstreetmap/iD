@@ -12,10 +12,10 @@
         },
         "type": "access",
         "label": "Allowed Access",
-        "placeholder": "Unknown",
+        "placeholder": "Not Specified",
         "strings": {
             "types": {
-                "access": "General",
+                "access": "All",
                 "foot": "Foot",
                 "motor_vehicle": "Motor Vehicles",
                 "bicycle": "Bicycles",
@@ -56,7 +56,7 @@
     "access_simple": {
         "key": "access",
         "type": "combo",
-        "label": "Access",
+        "label": "Allowed Access",
         "placeholder": "yes",
         "options": [
             "permissive",

@@ -210,7 +210,7 @@ iD.Connection = function(useHttps) {
                     tag: _.map(tags, function(value, key) {
                         return { '@k': key, '@v': value };
                     }),
-                    '@version': 0.3,
+                    '@version': 0.6,
                     '@generator': 'iD'
                 }
             }
@@ -240,7 +240,7 @@ iD.Connection = function(useHttps) {
 
         return {
             osmChange: {
-                '@version': 0.3,
+                '@version': 0.6,
                 '@generator': 'iD',
                 'create': nest(changes.created.map(rep), ['node', 'way', 'relation']),
                 'modify': nest(changes.modified.map(rep), ['node', 'way', 'relation']),

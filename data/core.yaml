@@ -401,6 +401,7 @@ en:
     in: Zoom In
     out: Zoom Out
   cannot_zoom: "Cannot zoom out further in current mode."
+  full_screen: Toggle Full Screen
   gpx:
     local_layer: "Local GPX file"
     drag_drop: "Drag and drop a .gpx file on the page, or click the button to the right to browse"

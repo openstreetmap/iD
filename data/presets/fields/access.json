@@ -3,10 +3,10 @@
     "reference": {"key": "access"},
     "type": "access",
     "label": "Allowed Access",
-    "placeholder": "Unknown",
+    "placeholder": "Not Specified",
     "strings": {
         "types": {
-            "access": "General",
+            "access": "All",
             "foot": "Foot",
             "motor_vehicle": "Motor Vehicles",
             "bicycle": "Bicycles",

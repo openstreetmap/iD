@@ -54,10 +54,10 @@ iD.ui.preset.access = function(field) {
         if (type !== 'access') {
             options.unshift('yes');
             options.push('designated');
-        }
 
-        if (type === 'bicycle') {
-            options.push('dismount');
+            if (type === 'bicycle') {
+                options.push('dismount');
+            }
         }
 
         return options.map(function(option) {
@@ -178,14 +178,12 @@ iD.ui.preset.access = function(field) {
                 return tags.access ? tags.access : field.placeholder();
             });
 
-        items.selectAll('#preset-input-access-access')
-            .attr('placeholder', 'yes');
+        // items.selectAll('#preset-input-access-access')
+        //     .attr('placeholder', 'yes');
 
-        _.forEach(placeholders[tags.highway], function(value, key) {
-            items.selectAll('#preset-input-access-' + key)
-                .attr('placeholder', function() {
-                    return (tags.access && (value === 'yes' || value === 'designated')) ? tags.access : value;
-                });
+        _.forEach(placeholders[tags.highway], function(v, k) {
+            items.selectAll('#preset-input-access-' + k)
+                .attr('placeholder', function() { return (tags.access || v); });
         });
     };
 

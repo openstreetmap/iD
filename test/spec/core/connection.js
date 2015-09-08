@@ -195,7 +195,7 @@ describe('iD.Connection', function () {
 
             expect(jxon).to.eql({
                 osmChange: {
-                    '@version': 0.3,
+                    '@version': 0.6,
                     '@generator': 'iD',
                     'create': {},
                     'modify': {},
