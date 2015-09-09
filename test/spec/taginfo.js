@@ -104,5 +104,42 @@ describe("iD.taginfo", function() {
             expect(callback).to.have.been.calledWith(null,
                 [{"on_way":false,"lang":"en","on_area":true,"image":"File:Car park2.jpg"}]);
         });
+
+        it("falls back to key if the callback function returns false", function() {
+            var callback = sinon.spy(function(err, docs, softfail) {
+                if (!err && docs) {
+                    docs = (docs[0] && docs[0].lang === "en") ? docs[0] : false;
+                }
+
+                if (!docs || !docs.description) {
+                    if (!softfail) {
+                        return null;
+                    }
+                    return false;
+                }
+                return true;
+            });
+
+            taginfo.docs({key: "amenity", value: "some-non-existing-value"}, callback);
+
+            server.respondWith("GET", new RegExp("https://taginfo\\.openstreetmap\\.org/api/4/tag/wiki_page"),
+                [200, { "Content-Type": "application/json" }, '[]']);
+            server.respond();
+
+            server.respondWith("GET", new RegExp("https://taginfo\\.openstreetmap\\.org/api/4/tag/wiki_page"),
+                [200, { "Content-Type": "application/json" },
+                    '[{"on_way":false,"lang":"en","on_area":true,"image":"File:Car park2.jpg"}]']);
+            server.respond();
+
+            expect(query(server.requests[0].url)).to.eql(
+                {key: "amenity", value: "some-non-existing-value"});
+            expect(query(server.requests[1].url)).to.eql(
+                {key: "amenity"});
+            expect(callback.firstCall).calledWith(null, [], true);
+            expect(callback.firstCall.returnValue).to.eql(false);
+            expect(callback.secondCall.calledWith(null,
+                [{"on_way":false,"lang":"en","on_area":true,"image":"File:Car park2.jpg"}]));
+            expect(callback.secondCall.returnValue).to.eql(null);
+        });
     });
 });

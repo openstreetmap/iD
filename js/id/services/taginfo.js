@@ -122,8 +122,21 @@ iD.taginfo = function() {
         if (parameters.value) path = 'tag/wiki_pages?';
         else if (parameters.rtype) path = 'relation/wiki_pages?';
 
+        var decoratedCallback;
+        if (parameters.value) {
+            decoratedCallback = function(err, data) {
+                // The third argument to callback is the softfail flag, to
+                // make the callback function not show a message to the end
+                // user when no docs are found but just return false.
+                var docsFound = callback(err, data, true);
+                if (!docsFound) {
+                    taginfo.docs(_.omit(parameters, 'value'), callback);
+                }
+            };
+        }
+
         request(endpoint + path +
-            iD.util.qsString(parameters), debounce, callback);
+            iD.util.qsString(parameters), debounce, decoratedCallback || callback);
     };
 
     taginfo.endpoint = function(_) {

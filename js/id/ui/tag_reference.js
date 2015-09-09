@@ -33,7 +33,7 @@ iD.ui.TagReference = function(tag, context) {
     function load() {
         button.classed('tag-reference-loading', true);
 
-        context.taginfo().docs(tag, function(err, docs) {
+        context.taginfo().docs(tag, function(err, docs, softfail) {
             if (!err && docs) {
                 docs = findLocal(docs);
             }
@@ -41,9 +41,11 @@ iD.ui.TagReference = function(tag, context) {
             body.html('');
 
             if (!docs || !docs.description) {
-                body.append('p').text(t('inspector.no_documentation_key'));
-                show();
-                return;
+                if (!softfail) {
+                    body.append('p').text(t('inspector.no_documentation_key'));
+                    show();
+                }
+                return false;
             }
 
             if (docs.image && docs.image.thumb_url_prefix) {
@@ -71,6 +73,8 @@ iD.ui.TagReference = function(tag, context) {
 
             wikiLink.append('span')
                 .text(t('inspector.reference'));
+
+            return true;
         });
     }
 
