@@ -46,7 +46,7 @@ iD.presets.Preset = function(id, preset, fields) {
     };
 
     preset.terms = function() {
-        return preset.t('terms', {'default': ''}).toLowerCase().split(/\s*,+\s*/);
+        return preset.t('terms', {'default': ''}).toLowerCase().trim().split(/\s*,+\s*/);
     };
 
     preset.isFallback = function() {

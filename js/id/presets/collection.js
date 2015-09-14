@@ -31,6 +31,11 @@ iD.presets.Collection = function(collection) {
                     return a.suggestion === true;
                 });
 
+            function leading(a) {
+                var index = a.indexOf(value);
+                return index === 0 || a[index - 1] === ' ';
+            }
+
             // matches value to preset.name
             var leading_name = _.filter(searchable, function(a) {
                     return leading(a.name().toLowerCase());
@@ -50,10 +55,6 @@ iD.presets.Collection = function(collection) {
                     return _.any(_.without(_.values(a.tags || {}), '*'), leading);
                 });
 
-            function leading(a) {
-                var index = a.indexOf(value);
-                return index === 0 || a[index - 1] === ' ';
-            }
 
             // finds close matches to value in preset.name
             var levenstein_name = searchable.map(function(a) {
