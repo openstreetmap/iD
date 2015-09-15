@@ -366,7 +366,6 @@
         },
         "fields": {
             "access": {
-                "label": "প্রবেশ করা",
                 "options": {
                     "designated": {
                         "description": "কোন চিহ্ন বা স্থানীয় অাইন অনুযায়ী প্রবেশ অনুমোদিত।"
@@ -392,9 +391,7 @@
                         "title": "অনুমোদিত"
                     }
                 },
-                "placeholder": "অজানা",
                 "types": {
-                    "access": "সাধারণ",
                     "bicycle": "সাইকেল",
                     "foot": "পদচালন",
                     "horse": "ঘোড়া",
@@ -402,7 +399,6 @@
                 }
             },
             "access_simple": {
-                "label": "প্রবেশ করা",
                 "placeholder": "হ্যা"
             },
             "access_toilets": {
@@ -891,17 +887,11 @@
             "emergency/phone": {
                 "name": "অাপদকালীন দুরভাষ"
             },
-            "footway/crossing": {
-                "name": "ক্রসিং"
-            },
             "highway": {
                 "name": "রাজপথ"
             },
             "highway/bus_stop": {
                 "name": "বাস স্টপ"
-            },
-            "highway/crossing": {
-                "name": "ক্রসিং"
             },
             "highway/cycleway": {
                 "name": "সাইকেল-এর রাস্তা"
@@ -914,9 +904,6 @@
             },
             "highway/path": {
                 "name": "পথ"
-            },
-            "highway/pedestrian": {
-                "name": "পথচারী"
             },
             "highway/primary": {
                 "name": "প্রাথমিক রাস্তা"
@@ -965,9 +952,6 @@
             },
             "historic/ruins": {
                 "name": "ধ্বংসাবশেষ"
-            },
-            "landuse": {
-                "name": "ভূমি ব্যবহার"
             },
             "landuse/allotments": {
                 "name": "আবন্টন"
@@ -1154,9 +1138,6 @@
             },
             "railway/disused": {
                 "name": "অব্যবহৃত রেলপথ"
-            },
-            "railway/level_crossing": {
-                "name": "রেল ক্রসি"
             },
             "railway/monorail": {
                 "name": "মনোরেল"

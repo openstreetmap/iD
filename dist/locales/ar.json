@@ -380,7 +380,6 @@
         },
         "fields": {
             "access": {
-                "label": "الدخول",
                 "options": {
                     "designated": {
                         "description": "الدخول مصرح به وفقا للعلامات أو قوانين محلية مخصصة.",
@@ -407,9 +406,7 @@
                         "title": "مسموح"
                     }
                 },
-                "placeholder": "غير معروف",
                 "types": {
-                    "access": "عام",
                     "bicycle": "درجات هوائية",
                     "foot": "بالقدم",
                     "horse": "أحصنة",
@@ -417,7 +414,6 @@
                 }
             },
             "access_simple": {
-                "label": "الدخول",
                 "placeholder": "نعم"
             },
             "access_toilets": {
@@ -1087,10 +1083,6 @@
                 "name": "هاتف طوارئ",
                 "terms": "هاتف طوارئ"
             },
-            "footway/crossing": {
-                "name": "تقاطع",
-                "terms": "تقاطع, معبر"
-            },
             "footway/sidewalk": {
                 "name": "رصيف المشاة",
                 "terms": "رصيف, رصيف المشاة"
@@ -1106,10 +1098,6 @@
             "highway/bus_stop": {
                 "name": "محطة باص",
                 "terms": "موقف باصات, محطة باصات"
-            },
-            "highway/crossing": {
-                "name": "تقاطع",
-                "terms": "تقاطع"
             },
             "highway/cycleway": {
                 "name": "طريق دراجة هوائية",
@@ -1138,10 +1126,6 @@
             "highway/path": {
                 "name": "طريق",
                 "terms": "طريق , ممر , مسلك , درب"
-            },
-            "highway/pedestrian": {
-                "name": "مشاة",
-                "terms": "مشاة"
             },
             "highway/primary": {
                 "name": "طريق رئيسي",
@@ -1266,10 +1250,6 @@
             "historic/wayside_shrine": {
                 "name": "مقام نصراني على الطريق",
                 "terms": "مقام نصراني على الطريق"
-            },
-            "landuse": {
-                "name": "استخدام الارض",
-                "terms": "استخدام الأراضي, استخدام الأرض"
             },
             "landuse/allotments": {
                 "name": "مزارع مخصصة",
@@ -1690,10 +1670,6 @@
             "railway/halt": {
                 "name": "موقف سكة حديد",
                 "terms": "موقف إجباري خاص بسكك الحديد، موقف السكة الحديدية"
-            },
-            "railway/level_crossing": {
-                "name": "معبر سكة حديدية",
-                "terms": "معبر سكة حديدية, تقاطع سكة حديد"
             },
             "railway/monorail": {
                 "name": "سكة حديدة مفردة",

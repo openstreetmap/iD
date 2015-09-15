@@ -223,7 +223,7 @@
         "localized_translation_language": "Välj språk",
         "localized_translation_name": "Namn"
     },
-    "zoom_in_edit": "Zomma in för att redigera",
+    "zoom_in_edit": "Zooma in för att redigera",
     "logout": "logga ut",
     "loading_auth": "Ansluter till OpenStreetMap...",
     "report_a_bug": "rapportera ett fel",
@@ -323,7 +323,11 @@
         "custom_button": "Ändra anpassad bakgrund",
         "custom_prompt": "Ange en URL-mall för plattor. Giltiga symboler är  {z}, {x}, {y} för Z/X/Y-schema och {u} för quadtile-schema.",
         "fix_misalignment": "Justera bildplacering",
-        "reset": "ta bort"
+        "reset": "ta bort",
+        "minimap": {
+            "description": "Minikarta",
+            "tooltip": "Visar en utzoomad karta för att hjälpa dig att hitta i området som visas för tillfället."
+        }
     },
     "map_data": {
         "title": "Kartdata",
@@ -442,7 +446,7 @@
         "facebook": "Dela på Facebook",
         "twitter": "Dela på Twitter",
         "google": "Dela på Google+",
-        "help_html": "Dina ändringar bör synas på \"Standard\"-lagret innom några minuter. Andra lager, och vissa egenskaper kan ta längre tid. \n(<a href='https://help.openstreetmap.org/questions/4705/why-havent-my-changes-appeared-on-the-map' target='_blank'>detaljer</a>).\n"
+        "help_html": "Dina ändringar bör synas på \"Standard\"-lagret inom några minuter. Andra lager, och vissa egenskaper kan ta längre tid. \n(<a href='https://help.openstreetmap.org/questions/4705/why-havent-my-changes-appeared-on-the-map' target='_blank'>detaljer</a>).\n"
     },
     "confirm": {
         "okay": "Ok",
@@ -493,14 +497,14 @@
     },
     "help": {
         "title": "Hjälp",
-        "help": "# Hjälp\n\nDetta är en redigerare för [OpenStreetMap](http://www.openstreetmap.org/), \nen gratis och redigerbar karta över världen. Du kan använda den för att lägga till och ändra \ndata i ditt område, allt för att göra en världsomspännande karta baserad på \nöppen källkod och öppen data bättre för alla.\n\nRedigeringar du gör på kartan kommer att visas för alla som använder \nOpenStreetMap. För att göra en redigering måste du\n[log in](https://www.openstreetmap.org/login).\n\n[iD editor](http://ideditor.com/) är ett gemensammt projekt med [källkod \ntillgänglig på GitHub](https://github.com/openstreetmap/iD).\n",
-        "editing_saving": "# Redigera & spara\n\nDenna redigerare är designad att främst fungera online, och du använder den via en webbsida just nu.\n\n### Välj objekt\n\nFör att välja ett kartobjekt, t.ex. en väg eller en punkt, klicka på den på kartan. Detta kommer att markera det valda objektet, öppna en panel med detaljer om det, och visa en meny med saker du kan göra med det.\n\nFör att välja flera objekt, håll ner Skift-tangenten. Klicka sedan på objekten du vill välja eller dra på kartan för att rita en rektangel. Detta kommer att rita en ruta och markera punkterna inuti den.\n\n### Spara redigeringar\n\nNär du gör ändringar som att ändra på en väg, byggnad eller plats är detta sparat lokalt fram tills att du spara det på servern. Oroa dig inte om du gör ett misstag, du kan alltid ångra en ändring genom att klicka på Ånga-knappen och göra om din förändring genom att klicka på Gör om-knappen.\n\nKlicka på Spara för att slutföra en grupp att förändringar, t.ex. om du fullfört ett område i en stad och vill börja ändra i ett annat område. Du får möjlighet att granska vad du gjort och redigeraren ger dig hjälpsamma förslag och varningar om någon ändring inte verka korrekt.\n\nOm allt ser bra ut kan du ange en kort kommentar som förklarar vad du gjort och sedan klicka på Spara igen för att skicka iväg ändringarna till [OpenStreetMap.org](http://www.openstreetmap.org/) där de blir synliga för alla andra användare och tillgängliga för andra att bygga sina förbättringar på.\n\nOm du inte kan slutföra din ändring på en gång kan du lämna redigeringsfönstret öppet och komma tillbaka (i samma webbläsare på samma dator) och redigeringsprogrammet kommer att ge dig möjlighet att återställa ditt arbete.\n",
+        "help": "# Hjälp\n\nDetta är en redigerare för [OpenStreetMap](http://www.openstreetmap.org/), \nen gratis och redigerbar karta över världen. Du kan använda den för att lägga till och ändra \ndata i ditt område, allt för att göra en världsomspännande karta baserad på \nöppen källkod och öppen data bättre för alla.\n\nRedigeringar du gör på kartan kommer att visas för alla som använder \nOpenStreetMap. För att göra en redigering måste du\n[log in](https://www.openstreetmap.org/login).\n\n[iD editor](http://ideditor.com/) är ett gemensamt projekt med [källkod \ntillgänglig på GitHub](https://github.com/openstreetmap/iD).\n",
+        "editing_saving": "# Redigera & spara\n\nDenna redigerare är designad att främst fungera online, och du använder den via en webbsida just nu.\n\n### Välj objekt\n\nFör att välja ett kartobjekt, t.ex. en väg eller en punkt, klicka på den på kartan. Detta kommer att markera det valda objektet, öppna en panel med detaljer om det, och visa en meny med saker du kan göra med det.\n\nFör att välja flera objekt, håll ner Skift-tangenten. Klicka sedan på objekten du vill välja eller dra på kartan för att rita en rektangel. Detta kommer att rita en ruta och markera punkterna inuti den.\n\n### Spara redigeringar\n\nNär du gör ändringar som att ändra på en väg, byggnad eller plats är detta sparat lokalt fram tills att du spara det på servern. Oroa dig inte om du gör ett misstag, du kan alltid ångra en ändring genom att klicka på Ånga-knappen och göra om din förändring genom att klicka på Gör om-knappen. \n\nKlicka på Spara för att slutföra en grupp att förändringar, t.ex. om du fullfört ett område i en stad och vill börja ändra i ett annat område. Du får möjlighet att granska vad du gjort och redigeraren ger dig hjälpsamma förslag och varningar om någon ändring inte verka korrekt. \n\nOm allt ser bra ut kan du ange en kort kommentar som förklarar vad du gjort och sedan klicka på Spara igen för att skicka ändringarna till [OpenStreetMap.org](http://www.openstreetmap.org/) där de blir synliga för alla andra användare och tillgängliga för andra att jobba vidare med. \n\nOm du inte kan slutföra din ändring på en gång kan du lämna redigeringsfönstret öppet och komma tillbaka (i samma webbläsare på samma dator) och redigeringsprogrammet kommer att ge dig möjlighet att återuppta ditt arbete. \n\n### Använda redigeraren\n\nEn lista med tillgängliga kortkommandon hittas [här](http://wiki.openstreetmap.org/wiki/ID/Shortcuts).\n",
         "roads": "# Vägar\n\nDu kan skapa, fixa och ta bort vägar med denna redigerare. Vägar kan vara alla typer av: stigar, bilvägar, spår, cykelvägar m.m - alla välanvända segment ska mappas.\n\n### Markering\n\nKlicka på en väg för att välja den. En markering blir då synlig tillsammans med en liten verktygsmeny på kartan och ett sidofällt visar mer information om vägen.\n\n### Modifiering\n\nOfta ser du vägar som inte är justerade till bakgrundsbilden eller till ett GPS-spår. Du kan justera dessa vägar så att de är på korrekt plats.\n\nKlicka först på vägen du vill ändra. Detta kommer att markera den och visa kontrollpunkt längst den som du kan dra i för att justera den. Om du vill lägga till en ny kontrollpunkt för högre detaljrikedom, dubbelklicka på en del av vägen utan en punkt så kommer en kontrollpunkt läggas till.\n\nOm vägen är ansluten till en annan väg, men är inte det på kartan, kan du dra en av dess kontrollpunkt till den andra vägen för att koppla dem tillsammans. Att vägarna är kopplade till varandra är viktigt för kartan och avgörande för att kunna ge korrekta körinstruktioner.\n\nDu kan också klicka på verktyget 'Flytta' eller trycka på tangenten 'M' på tangentbordet för att flytta en hel väg på en gång, och sedan klicka igen för att spara flytten.\n\n### Borttagning\n\nOm hela vägen är helt fel - du kan se att den inte existerar på satellitbilderna och har helst bekräftat i verkligheten att den inte finns - kan du ta bort den, vilket tar bort den från kartan. Var försiktigt när du ta bort objekt - precis som vi all redigering kan alla se resultatet och satellitbilderna är oftast gamla, så vägen kan helt enkelt vara nybyggd.\n\nDu kan ta bort en väg genom att klicka på den för att markera den och sedan klicka på ikonen soptunna eller klicka på knappen 'Delete' på tangentbordet.\n\n### Skapa\n\nHittat någonstans att det borde finnas en väg där de inte finns en? Klicka på ikonen 'Linje'  högst upp till vänster i redigeringsfönstret eller klicka på knappen '2' på tangentbordet för att börja rita en linje.\n\nKlicka på början av vägen på kartan för att påbörja ritningen. Om vägen viker av från en existerande väg, starta genom att klicka där de ansluter till varandra. \n\nKlicka sedan på punkter längst vägen så att den följer vägens sträckning enligt satellitbilder eller GPS-spår. Om vägen du ritar korsar en annan väg, anslut dem tillsammans genom att klicka där de korsar. När du är klar med att rita in vägen, dubbelklicka eller tryck 'Enter' på tangentbordet.\n",
-        "gps": "# GPS\n\nGPS-data är den mest tillförlitliga källan för data till OpenStreetMap. Denna redigeraren stöder lokala spår - .gpx-filer på din lokala dator. Du kan samla in denna typ av GPS-spår med ett antal olika appar till din smartphone eller en GPS-enhet.\n\nFör information om du du gör en GPS-uppmätning, läs [Surveying with a GPS](http://learnosm.org/en/beginner/using-gps/).\n\nFör att använda ett GPX-spår för att kartlägga, dra och släpp GPX-filen på kartredigeraren. Om det accepteras kommer det att läggas till på kartan som en ljuslila linje. Klicka på menyn Kartdata till höger för att aktivera, avaktivera eller zooma in till detta nya GPX-skapade lager.\n\nGPX-spåret laddas inte direkt upp till OpenStreetMap - bästa sätet att använda det är att rita på kartan och använda det som en guide för att lägga till ny information, men också för att [ladda upp det till OpenStreetMap] (http://www.openstreetmap.org/trace/create) så att andra kan använda det. \n",
+        "gps": "# GPS\n\nInsamlade GPS-spår är en värdefull källan för data till OpenStreetMap. Denna redigeraren \nstöder lokala spår - .gpx-filer på din lokala dator. Du kan samla\nin denna typ av GPS-spår med ett antal olika appar till din smartphone eller en GPS-enhet. \n\nFör information om du du gör en GPS-uppmätning, läs\n[Mapping with a smartphone, GPS, or paper](http://learnosm.org/en/mobile-mapping/).\n\nFör att använda ett GPX-spår för att kartlägga, dra och släpp GPX-filen på kartredigeraren. \nOm den accepteras kommer det att läggas till på kartan som en ljuslila\nlinje. Klicka på menyn Kartdata till höger för att aktivera,\navaktivera eller zooma in till detta nya GPX-skapade lager.\n\nGPX-spåret laddas inte direkt upp till OpenStreetMap - bästa sätet att använda\ndet är att rita på kartan och använda det som en guide för att lägga till ny information, \nmen också för att [ladda upp det till OpenStreetMap] (http://www.openstreetmap.org/trace/create) \nså att andra kan använda det.\n",
         "imagery": "# Flygbilder\n\nFlygbilder är en viktig källa vid kartläggning. En kombination av bilder från flygplan, satelliter och andra fria källor finns tillgängliga i redigeraren i menyn 'Bakgrundsinställningar' till höger.\n\nNormalt visas ett satellitlager från  [Bing Maps](http://www.bing.com/maps/) i redigeraren, men när du förflytta dig runt och zooma till nya geografiska områden kommer nya källor bli tillgängliga. Vissa länder, som t.ex. USA, Frankrike och Danmark har bilder av väldigt hög kvalité tillgängliga för vissa områden. \n\nFlygbilderna är ibland förskjutna till kartan på grund av misstag från leverantören av flygbilder. Om du ser att många vägar är förskjutna i förhållande till flygfotot, flytta dem inte direkt för att matcha bakgrunden. Istället kan du justera flygfotot så att det matchar med existerande data genom att klicka 'Justera bildplacering' längst ner i menyn för Bakgrundsinställningar.\n",
         "addresses": "# Adresser\n\nAdresser är bland den mest användbara informationen på kartan.\n\nÄven om adresser normalt oftast är relaterade till segment av gatan är de i OpenStreetMap hanterade som attribut på byggnader och platser längst gatan.\n\nDu kan lägga till adressinformation både på platser kartlagda som byggnadskonturer och på platser kartlagda som enskilda punkter. \nDen bästa källan för adressinformation är från egen kunskap eller genom att besöka platsen - precis som för allt annat, att kopiera från kommersiella källor som Google Maps är strikt förbjudet.\n",
-        "inspector": "# Använda kontrollfunktionen\n\nUpplysningen är området området till vänster på sidan som låter dig ändra detaljerna för valt objekt.\n\n### Välj objekttyp\n\nEfter att du lagt till en punkt, linje eller område kan du välja vad för typ av objekt det är, t.ex. om det är en huvudväg eller bostadsgata, shoppingcenter eller café. \nDetaljverktyget visar knappar för vanliga objekttyper, och du kan söka efter andra typer i sökfönstret. \n\nKlicka på 'i' i högra nedre hörnet för en objekttyp för att lära dig mer om det. Klicka på en knapp för att välja typ.\n\n### Andra formulär och ändra taggar\n\nEfter att du valt en objekttyp, eller om du väljer ett objekt som redan har en typ associerad, kommer kontrollfunktionen visa fällt med detaljer om objekttypen som namn och adress. \n\nUnder fälten kan du klicka på ikoner för att lägga till andra detaljer, som t.ex.  [Wikipedia]-information (http://www.wikipedia.se/), handikappanpassning m.m.\n\nLängst ner i kontrollfunktionen, klicka på 'Fler taggar' för att lägga till ytterligare godtyckliga taggar till objektet.  [Taginfo](http://taginfo.openstreetmap.org/) är en bra resurs för att lära dig mer om populära tagg-kombinationer.\n\nÄndringar du gör i kontrollfunktionen dyker automatiskt upp på kartan. Du kan ångra dem när du vill genom att klicka på 'Ånga'-knappen.\n",
-        "buildings": "# Byggnader\n\nOpenStreetMap är världens största databas över byggnader. Du kan skapa\noch förbättra denna databas.\n\n### Markering\n\nDu kan markera en byggnad genom att klicka på dess kant. Detta kommer att markera \nbyggnaden och öppna en litet verktygsmeny och ett sidofält som visar mer information\nom byggnaden.\n\n### Modifiering\n\nIbland är byggnader felaktigt placerade eller har felaktiga taggar.\n\nFör att flytta en hel byggnad, markera den och klicka sedan på \"Flytta\"-verktyget. flytta\nmus för att flytta byggnaden, och klicka när den är korrekt placerad.\n\nFör att fixa den specifika formen av en byggnad, klicka och dra noderna som bildar\nramen till bättre platser.\n\n### Skapa\n\nEn av de viktigaste frågorna att tänka på vid tilläggning av byggnader till kartan är att\nOpenStreetMap registrerar byggnader både som form och punkt. Tumregeln\när att _kartlägga en byggnad som en form när möjligt_ och kartlägg företag, bostäder,\nfacilitet, och andra saker finns i byggandena som punkter placerade\ninuti byggnadernas ram.\n\nBörja rita en byggnad som en ram genom att klicka på knappen \"område\" högst upp till vänster\ngränssnittet, och avsluta det antingen genom att trycka på \"Retur\" på tangentbordet\neller genom att klicka på den första ritade noden för att stänga formen.\n\n### Radering\n\nOm en byggnad är helt fel – du kan se att den inte finns med i någon satellitbild\noch helst har bekräftat lokalt att det inte finns – kan du ta bort\nden, vilket tar bort det från kartan. Var försiktig när du tar bort objekt –\nlikt alla ändringar kommer resultatet ses av alla och satellitbilder\när ofta föråldrad, så byggnaden kan helt enkelt vara nybyggd.\n\nDu kan ta bort en byggnad genom att klicka på den för att markera den och sedan klicka på\nikonen papperskorg eller trycka på \"Delete\"-tangenten.\n",
+        "inspector": "# Använda objektredigeraren\n\nObjektredigeraren är området till vänster på sidan som låter dig \nändra detaljerna för valt objekt.\n\n ### Välj objekttyp\n\nEfter att du lagt till en punkt, linje eller område kan du välja vad för typ av objekt det\när, t.ex. om det är en huvudväg eller bostadsgata, shoppingcenter eller café.\nobjektredigeraren visar knappar för vanliga objekttyper, och du kan \nsöka efter andra typer i sökfönstret.\n\nKlicka på 'i' i nedre högra hörnet för en objekttyp för\natt läsa mer om det. Klicka på en knapp för att välja typ. \n\n ### Använda formulär och ändra taggar\n\nEfter att du valt en objekttyp, eller om du väljer ett objekt som redan\nhar en typ associerad, kommer objektredigeraren visa fällt med detaljer om objekttypen så som namn och adress.\n\nUnder fälten du ser kan du klicka på menyn 'Lägg till fällt\" för att lägga till\nandra detaljer, som t.ex. Wikipedia-länk, handikappanpassning m.m.\n\nLängst ner i objektredigeraren, klicka på 'Alla taggar' för att lägga till ytterligare godtyckliga\ntaggar till objektet. [Taginfo](http://taginfo.openstreetmap.org/) är en\nbra resurs för att lära dig mer om populära tagg-kombinationer.\n\nÄndringar du gör i objektredigeraren visas automatiskt på kartan.\nDu kan ångra dem när du vill genom att klicka på 'Ånga'-knappen. \n",
+        "buildings": "# Byggnader\n\nOpenStreetMap är världens största databas över byggnader. Du kan skapa\noch förbättra denna databas.\n\n### Markering\n\nDu kan markera en byggnad genom att klicka på dess kant. Detta kommer att markera \nbyggnaden och öppna en litet verktygsmeny och ett sidofält som visar mer information\nom byggnaden.\n\n### Modifiering\n\nIbland är byggnader felaktigt placerade eller har felaktiga taggar.\n\nFör att flytta en hel byggnad, markera den och klicka sedan på \"Flytta\"-verktyget. flytta\nmus för att flytta byggnaden, och klicka när den är korrekt placerad.\n\nFör att fixa den specifika formen av en byggnad, klicka och dra noderna som bildar\nramen till bättre platser.\n\n### Skapa\n\nEn av de viktigaste frågorna att tänka på vid tilläggning av byggnader till kartan är att\nOpenStreetMap registrerar byggnader både som form och punkt. Tumregeln\när att _kartlägga en byggnad som en form när möjligt_ och kartlägg företag, bostäder,\nfaciliteter, och andra saker finns i byggnaderna som punkter placerade\ninuti byggnadernas ram.\n\nBörja rita en byggnad som en ram genom att klicka på knappen \"område\" högst upp till vänster\ngränssnittet, och avsluta det antingen genom att trycka på \"Retur\" på tangentbordet\neller genom att klicka på den första ritade noden för att stänga formen.\n\n### Radering\n\nOm en byggnad är helt fel – du kan se att den inte finns med i någon satellitbild\noch helst har bekräftat lokalt att det inte finns – kan du ta bort\nden, vilket tar bort det från kartan. Var försiktig när du tar bort objekt –\nlikt alla ändringar kommer resultatet ses av alla och satellitbilder\när ofta föråldrad, så byggnaden kan helt enkelt vara nybyggd.\n\nDu kan ta bort en byggnad genom att klicka på den för att markera den och sedan klicka på\nikonen papperskorg eller trycka på \"Delete\"-tangenten.\n",
         "relations": "# Relationer\n\nEn relation är en speciell typ av egenskap i OpenStreetMap som gruppera ihop objekt. Två vanliga relationstyper är t.ex. *ruttrelation* som gruppera ihop sektioner av vägar som tillhör en specifik riksväg eller motorväg, och *multipolygoner* som gruppera ihop linjer som definiera en komplex yta (som t.ex. har flera delar eller hål i sig)\n\nObjekten i en relation kallas \n*medlemmar*. I sidopanelen kan du se vilka relationer ett objekt är medlem i, och klicka på en relation där för att välja den. När relationen är vald kan du se alla medlemmar listade i sidopanelen och markerade på kartan.\n\nFör det mesta kommer iD ta hand om relationerna automatiskt när du redigerar. Det viktigaste du måste veta om är att om du tar bort en sektion av en väg för att rita om den mer exakt, måste du se till att den nya sektionen är medlem i samma relation som originalet. \n\n## Redigera relationer\n\nOm du vill redigera relationer är här grunderna.\n\nFör att lägga till ett objekt till en relation, markera objektet och klicka på \"+\"-knappen i sektionen \"Alla relationer\" i sidopanelen, och välj sedan eller skriv namnet på relationen.\n\nFör att skapa en ny relation, markera första objektet som ska vara medlem i relationen, Klicka på \"+\"-knappen i sektionen \"Alla relationer\" och välj \"Ny relation...\"\n\nFör att ta bort ett objekt från en relation, markera objektet och klicka på soptunnan bredvid relationen du vill ta bort den från.\n\nDu kan skapa multipolygoner med hål i sig med verktyget \"sammanfoga\". Rita två ytor (inre och yttre), håll ner shift-knappen och klicka på var och en av dem för att markera dem båda, klicka sedan på knappen \"Sammanfoga\" (+).\n"
     },
     "intro": {
@@ -561,7 +565,7 @@
                 "name": "Golf"
             },
             "category-landuse": {
-                "name": "Landanvänding"
+                "name": "Landanvändning"
             },
             "category-path": {
                 "name": "Stig"
@@ -587,7 +591,7 @@
         },
         "fields": {
             "access": {
-                "label": "Tillgång",
+                "label": "Tillåten åtkomst",
                 "options": {
                     "designated": {
                         "description": "Åtkomst tillåten enligt skyltar eller specifika lokala lagar",
@@ -596,6 +600,10 @@
                     "destination": {
                         "description": "Åtkomst tillåten endast för att nå en destination",
                         "title": "Destination"
+                    },
+                    "dismount": {
+                        "description": "Åtkomst tillåten, men förare måste stiga av",
+                        "title": "Avstigning"
                     },
                     "no": {
                         "description": "Tillträde ej tillåten för allmänheten",
@@ -614,9 +622,7 @@
                         "title": "Tillåtna"
                     }
                 },
-                "placeholder": "Okänt",
                 "types": {
-                    "access": "Generell",
                     "bicycle": "Cyklar",
                     "foot": "Fotgängare",
                     "horse": "Hästar",
@@ -624,7 +630,6 @@
                 }
             },
             "access_simple": {
-                "label": "Tillgång",
                 "placeholder": "ja"
             },
             "access_toilets": {
@@ -634,6 +639,7 @@
                 "label": "Adress",
                 "placeholders": {
                     "city": "Stad",
+                    "conscriptionnumber": "123",
                     "country": "Land",
                     "district": "Distrikt",
                     "hamlet": "Småort",
@@ -692,6 +698,9 @@
                 "label": "Typ"
             },
             "amenity": {
+                "label": "Typ"
+            },
+            "area/highway": {
                 "label": "Typ"
             },
             "artist": {
@@ -786,6 +795,44 @@
             "cuisine": {
                 "label": "Typ av mat"
             },
+            "cycleway": {
+                "label": "Cykelfiler",
+                "options": {
+                    "lane": {
+                        "description": "Cykelfil separerad från motortrafik med en målad linje",
+                        "title": "Normal cykelfil"
+                    },
+                    "none": {
+                        "description": "Ingen cykelfil",
+                        "title": "Ingen"
+                    },
+                    "opposite": {
+                        "description": "Cykelfil som går i båda riktningarna på en enkelriktad gata",
+                        "title": "Dubbelriktad cykelfil"
+                    },
+                    "opposite_lane": {
+                        "description": "Cykelfil som går i motsatt riktning mot övrig trafik",
+                        "title": "Motriktad cykelfil"
+                    },
+                    "share_busway": {
+                        "description": "Cykelfil delad med bussfil",
+                        "title": "Cykelfil delad med buss"
+                    },
+                    "shared_lane": {
+                        "description": "Cykelfil utan separation från motortrafik",
+                        "title": "Delad cykelfil"
+                    },
+                    "track": {
+                        "description": "Cykelfil separerad från trafik med fysisk barriär ",
+                        "title": "Cykelspår"
+                    }
+                },
+                "placeholder": "Ingen",
+                "types": {
+                    "cycleway:left": "Vänster sida",
+                    "cycleway:right": "Höger sida"
+                }
+            },
             "delivery": {
                 "label": "Hemleverans"
             },
@@ -861,16 +908,16 @@
                 "label": "Säljer Gasol"
             },
             "fuel/octane_100": {
-                "label": "Säljer E100"
+                "label": "Säljer 100-oktanig bensin"
             },
             "fuel/octane_91": {
-                "label": "Säljer E91"
+                "label": "Säljer 91-oktanig bensin"
             },
             "fuel/octane_95": {
-                "label": "Säljer E95"
+                "label": "Säljer 95-oktanig bensin"
             },
             "fuel/octane_98": {
-                "label": "Säljer E98"
+                "label": "Säljer 98-oktanig bensin"
             },
             "gauge": {
                 "label": "Spårvidd"
@@ -963,6 +1010,15 @@
                     "semi_evergreen": "Delvist vintergröna"
                 }
             },
+            "leaf_cycle_singular": {
+                "label": "Lövcykel",
+                "options": {
+                    "deciduous": "Lövfällande",
+                    "evergreen": "Vintergrön",
+                    "semi_deciduous": "Delvist lövfällande",
+                    "semi_evergreen": "Delvist vintergrön"
+                }
+            },
             "leaf_type": {
                 "label": "Lövtyp",
                 "options": {
@@ -972,11 +1028,22 @@
                     "needleleaved": "Barr"
                 }
             },
+            "leaf_type_singular": {
+                "label": "Lövtyp",
+                "options": {
+                    "broadleaved": "Löv",
+                    "leafless": "Utan löv",
+                    "needleleaved": "Barr"
+                }
+            },
             "leisure": {
                 "label": "Typ"
             },
             "length": {
                 "label": "Längd (meter)"
+            },
+            "level": {
+                "label": "Våning"
             },
             "levels": {
                 "label": "Våningar",
@@ -1154,8 +1221,21 @@
             "recycling/glass": {
                 "label": "Accepterar glas"
             },
+            "recycling/glass_bottles": {
+                "label": "Accepterar glasflaskor"
+            },
             "recycling/paper": {
                 "label": "Accepterar papper"
+            },
+            "recycling/plastic": {
+                "label": "Accepterar plast"
+            },
+            "recycling/type": {
+                "label": "Återvinningstyp",
+                "options": {
+                    "centre": "Återvinningscentral",
+                    "container": "Container"
+                }
             },
             "ref": {
                 "label": "Referens"
@@ -1370,7 +1450,7 @@
                 "label": "Typ"
             },
             "website": {
-                "label": "Websida",
+                "label": "Webbsida",
                 "placeholder": "http://exempel.se/"
             },
             "wetland": {
@@ -1437,23 +1517,23 @@
             },
             "aeroway/aerodrome": {
                 "name": "Flygplats",
-                "terms": "flygplats, flygfält, flyghamn, aerodrom, landningsplats, lufthamn"
+                "terms": "flygplats, flygfält, flyghamn, aerodrom, landningsplats, lufthamn, flygplan"
             },
             "aeroway/apron": {
                 "name": "Parkering av flygplan (Apron)",
-                "terms": "Flygplansparkering, flygplansplatta, flygplattsplatta, flygparkering, parkering av flygplan, parkering av plan, apron"
+                "terms": "Flygplansparkering, flygplansplatta, flygplatsplatta, flygparkering, parkering av flygplan, parkering av plan, apron"
             },
             "aeroway/gate": {
                 "name": "Gate",
-                "terms": "Gate, flyggate, flygplattsgate"
+                "terms": "Gate, flyggate, flygplatsgate"
             },
             "aeroway/hangar": {
                 "name": "Hangar",
-                "terms": "Hangar, garage för flygplan, flygplanshall, flygverkstad, flygplangarage, flyggarage"
+                "terms": "Hangar, garage för flygplan, flygplanshall, flygverkstad, flygplansgarage, flyggarage"
             },
             "aeroway/helipad": {
                 "name": "Helikopterplatta",
-                "terms": "Helipad, Helikopterplatta"
+                "terms": "Helipad, Helikopterplatta, helikopter"
             },
             "aeroway/runway": {
                 "name": "Start- och landningsbana",
@@ -1477,19 +1557,19 @@
             },
             "amenity/atm": {
                 "name": "Uttagsautomat",
-                "terms": "uttagsautomat, bankomat, minuten, atm, otto"
+                "terms": "uttagsautomat, bankomat, minuten, atm, otto, pengar, kontanter"
             },
             "amenity/bank": {
                 "name": "Bank",
-                "terms": "Bank, kreditinrättning, penninginrättning, penninganstalt, kassa, bankkontor, banklokal, låneinstitut"
+                "terms": "Bank, kreditinrättning, penninginrättning, penninganstalt, kassa, bankkontor, banklokal, låneinstitut, insättning, fonder, investering, besparing, bankvalv"
             },
             "amenity/bar": {
                 "name": "Bar",
-                "terms": "Bar, krog, servering, matställe, pub, cocktailsalong, saloon"
+                "terms": "Bar, krog, servering, matställe, pub, cocktailsalong, saloon, öl, sprit"
             },
             "amenity/bbq": {
                 "name": "Grillplats/Grill",
-                "terms": "Grill, Barbecue, eldplats, eldstad, grillplats, grillning, eldning"
+                "terms": "Grill, Barbecue, eldplats, eldstad, grillplats, grillning, eldning, bbq"
             },
             "amenity/bench": {
                 "name": "Bänk",
@@ -1497,11 +1577,11 @@
             },
             "amenity/bicycle_parking": {
                 "name": "Cykelparkering",
-                "terms": "Cykelparkering, ställplats, cykelställ, Parkering"
+                "terms": "Cykelparkering, ställplats, cykelställ, Parkering, cykel"
             },
             "amenity/bicycle_rental": {
                 "name": "Cykeluthyrning",
-                "terms": "Cykeluthyrning, cykellån, cykelleasing, lånecykel, hyrcykel"
+                "terms": "Cykeluthyrning, cykellån, cykelleasing, lånecykel, hyrcykel, cykel"
             },
             "amenity/bicycle_repair_station": {
                 "name": "Station för cykelreparation ",
@@ -1509,7 +1589,7 @@
             },
             "amenity/biergarten": {
                 "name": "Ölträdgård",
-                "terms": "ölträdgård, Biergarten, uteservering,ölcafé, utecafé, trädgårdspub"
+                "terms": "ölträdgård, Biergarten, uteservering,ölcafé, utecafé, trädgårdspub, öl, sprit"
             },
             "amenity/boat_rental": {
                 "name": "Båtuthyrning",
@@ -1517,7 +1597,7 @@
             },
             "amenity/bureau_de_change": {
                 "name": "Växlingskontor",
-                "terms": "Växlingskontor, växling, valuta, pengar, pengaväxling, resecheckar "
+                "terms": "Växlingskontor, växling, valuta, pengar, pengaväxling, resecheckar, pengaväxlare"
             },
             "amenity/bus_station": {
                 "name": "Busstation",
@@ -1525,7 +1605,7 @@
             },
             "amenity/cafe": {
                 "name": "Café",
-                "terms": "kaffeservering, kaffestuga, kafeteria, cafeteria, servering, konditori, kondis, fik"
+                "terms": "kaffeservering, kaffestuga, kafeteria, cafeteria, servering, konditori, kondis, fik, kaffe, te"
             },
             "amenity/car_rental": {
                 "name": "Biluthyrning",
@@ -1539,6 +1619,10 @@
                 "name": "Biltvätt",
                 "terms": "Biltvätt, portaltvätt, tvättgata, biltvättanläggning, tvätt-tunnel"
             },
+            "amenity/casino": {
+                "name": "Kasino",
+                "terms": "Casino, kasino, spelhus, spelhåla, spelrum, spelsalong, hasardspel, spelklubb, kortspel, spel, roulette, Tärning, poker, blackjack"
+            },
             "amenity/charging_station": {
                 "name": "Laddstation",
                 "terms": "Laddstation, elbil, snabbladdning, el, eluttag"
@@ -1549,11 +1633,11 @@
             },
             "amenity/cinema": {
                 "name": "Biograf",
-                "terms": "Bio, Biograf, Biografteater"
+                "terms": "Bio, Biograf, Biografteater, film, drive-in, bioduk"
             },
             "amenity/clinic": {
                 "name": "Vårdcentral",
-                "terms": "Klinik, vårdcentral, primärvård, distriktsläkare, distriktssköterska, sjukhus"
+                "terms": "Klinik, vårdcentral, primärvård, distriktsläkare, distriktssköterska, sjukhus, läkare, doktor, sjukvård"
             },
             "amenity/clock": {
                 "name": "Klocka",
@@ -1577,27 +1661,27 @@
             },
             "amenity/dentist": {
                 "name": "Tandläkare",
-                "terms": "Tandläkare, tanddoktor, odontolog, tandhygienist, "
+                "terms": "Tandläkare, tanddoktor, odontolog, tandhygienist, tänder, tandborstning, tand, tandhygien"
             },
             "amenity/doctor": {
                 "name": "Doktor",
-                "terms": "Doktor, vårdcentral, sjukhus, klinik, vårdinrättning, läkare"
+                "terms": "Doktor, vårdcentral, sjukhus, klinik, vårdinrättning, läkare, läkare, doktor, sjukvårdare, sjukvård"
             },
             "amenity/dojo": {
                 "name": "Dojo / Akademi för kampsport",
-                "terms": "Dojo, kampsport, träningslokal, budo, japansk konst, japan, kampkonst"
+                "terms": "Dojo, kampsport, träningslokal, budo, japansk konst, japan, kampkonst, dojang"
             },
             "amenity/drinking_water": {
                 "name": "Dricksvatten ",
-                "terms": "Dricksvatten, källa, vatten"
+                "terms": "Dricksvatten, källa, vatten, fontän"
             },
             "amenity/embassy": {
-                "name": "Embassad",
+                "name": "Ambassad",
                 "terms": "ambassad, diplomatisk beskickning, beskickning, legation, utlandsrepresentation"
             },
             "amenity/fast_food": {
                 "name": "Snabbmat",
-                "terms": "Snabbmat, skräpmat, gatuköksmat, bukfylla, junk-food, gatukök"
+                "terms": "Snabbmat, skräpmat, gatuköksmat, bukfylla, junk-food, gatukök, restaurang"
             },
             "amenity/fire_station": {
                 "name": "Brandstation",
@@ -1609,7 +1693,7 @@
             },
             "amenity/fuel": {
                 "name": "Bensinstation",
-                "terms": "Bensinstation, tapp, mack, bränsle, tankstation"
+                "terms": "Bensinstation, tapp, mack, bränsle, tankstation, bensin, diesel, disel, propan"
             },
             "amenity/grave_yard": {
                 "name": "Kyrkogård",
@@ -1617,27 +1701,27 @@
             },
             "amenity/grit_bin": {
                 "name": "Sandkista",
-                "terms": "Sandlåda, sandkista, sandbehållare, halkbekämpning, halka"
+                "terms": "Sandlåda, sandkista, sandbehållare, halkbekämpning, halka, sand, salt"
             },
             "amenity/hospital": {
                 "name": "Sjukhusområde",
-                "terms": "Sjukhusområde, lasarett, sjukhus"
+                "terms": "Sjukhusområde, lasarett, sjukhus, klinik, läkare, läkarmottagning, sjukvård, sjukstuga, vårdhem, sjuk, kirurgi"
             },
             "amenity/kindergarten": {
                 "name": "Förskoleområde",
-                "terms": "Förskola, dagis, daghem, lekskola, kindergarten, lekis, lekplats"
+                "terms": "Förskola, dagis, daghem, lekskola, kindergarten, lekis, lekplats, "
             },
             "amenity/library": {
                 "name": "Bibliotek",
-                "terms": "Bibliotek, boksamling, bokskatt, bokrum, läsesal, bibbla"
+                "terms": "Bibliotek, boksamling, bokskatt, bokrum, läsesal, bibbla, bok, böcker"
             },
             "amenity/marketplace": {
-                "name": "Maknadsplats",
+                "name": "Marknadsplats",
                 "terms": "Saluhall, torg, marknad, salutorg"
             },
             "amenity/nightclub": {
                 "name": "Nattklubb",
-                "terms": "Nattklubb, disko, diskotek, klubb, nöjeslokal, dansställe, bar"
+                "terms": "Nattklubb, disko, diskotek, klubb, nöjeslokal, dansställe, bar, disco, dans, dansklubb"
             },
             "amenity/parking": {
                 "name": "Bilparkering",
@@ -1649,19 +1733,19 @@
             },
             "amenity/pharmacy": {
                 "name": "Läkemedel",
-                "terms": "Läkemedel, apotek,  läkemedelsaffär, farmaceut, droghandel"
+                "terms": "Läkemedel, apotek,  läkemedelsaffär, farmaceut, droghandel, drog, medicin"
             },
             "amenity/place_of_worship": {
                 "name": "Plats för tillbedjan",
-                "terms": "Kyrka, tempel, moské, synagoga, gudshus, kyrkobyggnad, kapell, bönehus, böneplats, missionshus, dom, katedral, tabernakel, helgedom, gudstjänstlokal,tro, religion, helgedom, tillbedjan, predikan"
+                "terms": "Kyrka, tempel, moské, synagoga, gudshus, kyrkobyggnad, kapell, bönehus, böneplats, missionshus, dom, katedral, tabernakel, helgedom, gudstjänstlokal,tro, religion, helgedom, tillbedjan, predikan, gud, guds hus, bönehus, helgedom, synagoga, tempel, moske"
             },
             "amenity/place_of_worship/buddhist": {
                 "name": "Buddhisttempel",
-                "terms": "Buddhism, tempel, Buddha"
+                "terms": "Buddhism, tempel, Buddha, kloster, tempel, dojo"
             },
             "amenity/place_of_worship/christian": {
                 "name": "Kyrka",
-                "terms": "Kyrka, tempel, gudshus, kyrkobyggnad, kapell, bönehus, böneplats, missionshus, dom, katedral, helgedom, gudstjänstlokal,tro, religion, helgedom, kristen, kristendom, församling, tillbedjan, predikan"
+                "terms": "Kyrka, tempel, gudshus, kyrkobyggnad, kapell, bönehus, böneplats, missionshus, dom, katedral, helgedom, gudstjänstlokal,tro, religion, helgedom, kristen, kristendom, församling, tillbedjan, predikan, katedral, kor, kapell, guds hus, gud, bönehus, socken, helgedom, tempel"
             },
             "amenity/place_of_worship/jewish": {
                 "name": "Synagoga",
@@ -1673,31 +1757,31 @@
             },
             "amenity/police": {
                 "name": "Polis",
-                "terms": "Polis, ordningsmakt, polisväsende, polismyndighet, polismakt; polisstation, snut, konstapel, poliskonstapel, polisman, pass, "
+                "terms": "Polis, ordningsmakt, polisväsende, polismyndighet, polismakt, polisstation, snut, konstapel, poliskonstapel, polisman, pass, kriminalare, lag"
             },
             "amenity/post_box": {
                 "name": "Postlåda",
-                "terms": "Brevlåda, postlåda, brevinkast"
+                "terms": "Brevlåda, postlåda, brevinkast, brev, post"
             },
             "amenity/post_office": {
                 "name": "Postkontor",
-                "terms": "Postkontor, post, posten, postverk, postväsende, brev, paket, försändelser, postgång"
+                "terms": "Postkontor, post, posten, postverk, postväsende, brev, paket, försändelser, postgång, kort, frimärke,"
             },
             "amenity/pub": {
                 "name": "Pub",
-                "terms": "Pub, bar, ölservering, ölstuga, krog, nattklubb"
+                "terms": "Pub, bar, ölservering, ölstuga, krog, nattklubb, öl, sprit"
             },
             "amenity/public_bookcase": {
                 "name": "Offentlig bokhylla",
-                "terms": "Offentlig bokhylla, publik bokhylla, begagnade böcker, låneböcker, bokdelning"
+                "terms": "Offentlig bokhylla, publik bokhylla, begagnade böcker, låneböcker, bokdelning, bibliotek, bokbyte"
             },
             "amenity/ranger_station": {
                 "name": "Friluftsanläggningen",
-                "terms": "Friluftsanläggningen, friluftsområde, park, friluftsliv, infocenter, informationscenter "
+                "terms": "Friluftsanläggningen, friluftsområde, park, friluftsliv, infocenter, informationscenter, besökscenter"
             },
             "amenity/recycling": {
                 "name": "Återvinning",
-                "terms": "återvinning, återbruk, återvinningsstation, sopstation "
+                "terms": "återvinning, återbruk, återvinningsstation, sopstation, burkar, flaskor, skrot, skräp"
             },
             "amenity/register_office": {
                 "name": "Registreringsbyrå",
@@ -1705,18 +1789,19 @@
             },
             "amenity/restaurant": {
                 "name": "Restaurang",
-                "terms": "Restaurang, matservering, matställe, servering, restauration, näringsställe, grillbar, bar, krog, värdshus, pub, bodega, brasserie, rotisseri, pizzeria, kafé, cafeteria, sylta"
+                "terms": "Restaurang, matservering, matställe, servering, restauration, näringsställe, grillbar, bar, krog, värdshus, pub, bodega, brasserie, rotisseri, pizzeria, kafé, cafeteria, sylta, café. matsal, kaffe, lunch"
             },
             "amenity/sanitary_dump_station": {
-                "name": "Latrintömning"
+                "name": "Latrintömning",
+                "terms": "Latrintömning, sanitet, campingplats, torrtoalett, toalettömning, Campingtoalett, gråvatten, tömningsplats"
             },
             "amenity/school": {
                 "name": "Skolområde",
-                "terms": "Skolgård, skolområde, Campus, universitetsområde, högskoleområde, universitet, högskola"
+                "terms": "Skolgård, skolområde, Campus, universitetsområde, högskoleområde, universitet, högskola, grundskola, mellanstadium, lågstadium, högstadium, gymnasium"
             },
             "amenity/shelter": {
                 "name": "Skydd",
-                "terms": "Skydd, tak över huvudet, hydda, vindskydd, koja, väntkur, grotta, väderskydd"
+                "terms": "Skydd, tak över huvudet, hydda, vindskydd, koja, väntkur, grotta, väderskydd, lusthus, picknick"
             },
             "amenity/social_facility": {
                 "name": "Social inrättning",
@@ -1728,7 +1813,7 @@
             },
             "amenity/social_facility/group_home": {
                 "name": "Gruppboende",
-                "terms": "Gruppboende, grupphem, kollektiv, hjälparbete, välgörenhetsorganisationer, välgörenhet"
+                "terms": "Gruppboende, grupphem, kollektiv, hjälparbete, välgörenhetsorganisationer, välgörenhet, gammal, ålderdomshem"
             },
             "amenity/social_facility/homeless_shelter": {
                 "name": "Härbärge",
@@ -1736,7 +1821,7 @@
             },
             "amenity/studio": {
                 "name": "Studio",
-                "terms": "Studio, inspelningslokal, utsändningslokal, filmstudio, radiostudio, TV-studio, TV, radio"
+                "terms": "Studio, inspelningslokal, utsändningslokal, filmstudio, radiostudio, TV-studio, TV, radio, inspelning, radio, television, filminspelning"
             },
             "amenity/swimming_pool": {
                 "name": "Simbassäng",
@@ -1744,7 +1829,7 @@
             },
             "amenity/taxi": {
                 "name": "Taxihållplats",
-                "terms": "Taxihållplats, taxificka, taxistation"
+                "terms": "Taxihållplats, taxificka, taxistation, taxi"
             },
             "amenity/telephone": {
                 "name": "Telefon",
@@ -1752,15 +1837,15 @@
             },
             "amenity/theatre": {
                 "name": "Teater",
-                "terms": "föreställning, teaterföreställning, drama, skådespel, pjäs; skådeplats, skådebana, scen "
+                "terms": "föreställning, teaterföreställning, drama, skådespel, pjäs, skådeplats, skådebana, scen, teater, musikal"
             },
             "amenity/toilets": {
                 "name": "Toaletter",
-                "terms": "Toalett, klosett, vattenklosett, wc, avträde, toa, dass, utedass, bajamaja, torrklosett, hemlighus, klo, mugg, bekvämlighetsinrättning, skithus, Baja-Maja"
+                "terms": "Toalett, klosett, vattenklosett, wc, avträde, toa, dass, utedass, bajamaja, torrklosett, hemlighus, klo, mugg, bekvämlighetsinrättning, skithus, Baja-Maja, badrum, latrin, vattentoalett"
             },
             "amenity/townhall": {
                 "name": "Kommunhus",
-                "terms": "Stadshus, förvaltning, myndighet, ämbetsverk, representation, fullmäktige, riksdag, parlament, kommunalhus, samlingsplats, folkets hus, samlingslokal,"
+                "terms": "Stadshus, förvaltning, myndighet, ämbetsverk, representation, fullmäktige, riksdag, parlament, kommunalhus, samlingsplats, folkets hus, samlingslokal, by, stad, kommunstyrelse, domstolsbyggnad, kommun"
             },
             "amenity/university": {
                 "name": "Universitetsområde",
@@ -1768,19 +1853,23 @@
             },
             "amenity/vending_machine": {
                 "name": "Varuautomat",
-                "terms": "Varuautomat, varumaskin, godisautomat, tuggummiautomater"
+                "terms": "Varuautomat, varumaskin, godisautomat, tuggummiautomater, godisautomat, läsk, biljett, biljetter, biljettautomat, läskautomat, mellanmål"
             },
             "amenity/veterinary": {
                 "name": "Veterinär ",
-                "terms": "Veterinär, djurläkare, djurdoktor"
+                "terms": "Veterinär, djurläkare, djurdoktor, djurklinik, djursjukhus"
             },
             "amenity/waste_basket": {
                 "name": "Soptunna",
-                "terms": "Soptunna, papperskorg, sopkärl, papperskärl, skräpkorg, avfallskorg"
+                "terms": "Soptunna, papperskorg, sopkärl, papperskärl, skräpkorg, avfallskorg, skräp, sopor"
             },
             "area": {
                 "name": "Yta",
                 "terms": "Yta, areal, område, plan, utrymme, fällt, mark"
+            },
+            "area/highway": {
+                "name": "Vägbeläggning",
+                "terms": "Vägyta, vägplan, köryta, promenatyta, torg"
             },
             "barrier": {
                 "name": "Barriär",
@@ -1888,7 +1977,7 @@
             },
             "building/college": {
                 "name": "Gymnasiebyggnad",
-                "terms": "Gymnasie, gymnasium, gymnasiebyggnad"
+                "terms": "Gymnasie, gymnasium, gymnasiebyggnad, universitet"
             },
             "building/commercial": {
                 "name": "Kommersiell byggnad",
@@ -1944,7 +2033,7 @@
             },
             "building/kindergarten": {
                 "name": "Förskolebyggnad",
-                "terms": "Förskola, dagis, daghem, lekskola, kindergarten, lekis,  förskolebyggnad, dagisbyggnad, dagishus, förskolehus"
+                "terms": "Förskola, dagis, daghem, lekskola, kindergarten, lekis,  förskolebyggnad, dagisbyggnad, dagishus, förskolehus, barnomsorg"
             },
             "building/public": {
                 "name": "Publik byggnad",
@@ -1964,7 +2053,7 @@
             },
             "building/school": {
                 "name": "Skolbyggnad",
-                "terms": "Skolbyggnad, skola, läroanstalt, undervisningsanstalt, lärosäte, grundskola, gymnasium, folkhögskola, läroverk, skolhus, skolväsen, undervisning, utbildning"
+                "terms": "Skolbyggnad, skola, läroanstalt, undervisningsanstalt, lärosäte, grundskola, gymnasium, folkhögskola, läroverk, skolhus, skolväsen, undervisning, utbildning, mellanstadium, lågstadium, högstadium, komvux"
             },
             "building/shed": {
                 "name": "Skjul",
@@ -2016,7 +2105,7 @@
             },
             "craft/bookbinder": {
                 "name": "Bokbindare",
-                "terms": "Bokbindare, bokbindning, bok, böcker, bindning, bokbinderi"
+                "terms": "Bokbindare, bokbindning, bok, böcker, bindning, bokbinderi, bokreparatör"
             },
             "craft/brewery": {
                 "name": "Bryggeri",
@@ -2040,23 +2129,23 @@
             },
             "craft/confectionery": {
                 "name": "Konditori",
-                "terms": "Fik, Kafé"
+                "terms": "Fik, Kafé, sötsaker, kakor, bullar, godis"
             },
             "craft/dressmaker": {
                 "name": "Sömmerska",
-                "terms": "Sömmerska, skräddare, Dressmaker, Klädsömmare, sömmnad, sy, kvinnokläder, kläder, klädtillverkning, klänning"
+                "terms": "Sömmerska, skräddare, Dressmaker, Klädsömmare, sömnad, sy, kvinnokläder, kläder, klädtillverkning, klänning"
             },
             "craft/electrician": {
                 "name": "Elektriker",
-                "terms": "Elektriker, elmontör, elreparatör, montör, el, elmontör, starkströmsmontör, systembyggare"
+                "terms": "Elektriker, elmontör, elreparatör, montör, el, elmontör, starkströmsmontör, systembyggare, kabeldragning, elkraft"
             },
             "craft/gardener": {
                 "name": "Trädgårdsmästare",
-                "terms": "Trädgårdsmästare, trädgård, handelsträdgård"
+                "terms": "Trädgårdsmästare, trädgård, handelsträdgård, landskapsarkitekt"
             },
             "craft/glaziery": {
                 "name": "Glasmästare",
-                "terms": "glasblåsare, fönster, solskydd, glaskonst, glas"
+                "terms": "glasblåsare, fönster, solskydd, glaskonst, glas, målat glas"
             },
             "craft/handicraft": {
                 "name": "Hantverk",
@@ -2064,7 +2153,7 @@
             },
             "craft/hvac": {
                 "name": "VVS",
-                "terms": "VVS, rörmokare, värme, ventilation, sanitet, avlopp, vatten, vattenförsörjning, styrsystem, övervakningssystem, inomhusklimat, energiförsörjning, tryckluft, gas, sprinkler, uppvärmning, installationsteknik, kyla, luftkonditionering, air condition"
+                "terms": "VVS, rörmokare, värme, ventilation, sanitet, avlopp, vatten, vattenförsörjning, styrsystem, övervakningssystem, inomhusklimat, energiförsörjning, tryckluft, gas, sprinkler, uppvärmning, installationsteknik, kyla, luftkonditionering, air condition, ventilation"
             },
             "craft/insulator": {
                 "name": "Isolering",
@@ -2083,7 +2172,7 @@
                 "terms": "Låssmed, lås, nyckel, nycklar, låscylinder, låscylindrar, motorlås, passagesystem, larmsystem, vapenskåp, säkerhetsdörr, dyrk"
             },
             "craft/metal_construction": {
-                "name": "Metalarbete",
+                "name": "Metallarbete",
                 "terms": "Metallarbete, metallarbetare,  kallbearbetning, metallindustri, svets, svetsare, svetsning "
             },
             "craft/optician": {
@@ -2156,7 +2245,7 @@
             },
             "craft/tailor": {
                 "name": "Skräddare",
-                "terms": "Skräddare, kläder"
+                "terms": "Skräddare, kläder, kostym, klänning"
             },
             "craft/tiler": {
                 "name": "Plattläggare",
@@ -2176,7 +2265,7 @@
             },
             "craft/window_construction": {
                 "name": "Fönstertillverkare",
-                "terms": "Fönstertillverkare, dörrtillverkare, fönsterinstallatör, dörrinstallatör, dörr, dörrar, fönster, fönsterleverantör, dörrleverantör, fönstermontör, dörrmontör"
+                "terms": "Fönstertillverkare, dörrtillverkare, fönsterinstallatör, dörrinstallatör, dörr, dörrar, fönster, fönsterleverantör, dörrleverantör, fönstermontör, dörrmontör, glas"
             },
             "craft/winery": {
                 "name": "Vinfabrik",
@@ -2188,7 +2277,7 @@
             },
             "emergency/ambulance_station": {
                 "name": "Ambulansstation",
-                "terms": "Ambulansstation, räddningstjänst, ambulans"
+                "terms": "Ambulansstation, räddningstjänst, ambulans, räddning"
             },
             "emergency/fire_hydrant": {
                 "name": "Brandpost",
@@ -2203,12 +2292,12 @@
                 "terms": "Ingång, utgång, entré, dörr, huvudentré "
             },
             "footway/crossing": {
-                "name": "Korsning",
-                "terms": "Korsning, övergångsställe, övergång, passage, vad, gångpassage"
+                "name": "Vägpassage",
+                "terms": "Vägövergång, övergångsställe, vägpassage, gångvägspassage, gångpassage"
             },
             "footway/crosswalk": {
-                "name": "Övergångsställe",
-                "terms": "Övergångsställe, gångpassage"
+                "name": "Övergångsställe för gående",
+                "terms": "Övergångsställe för gående, övergångsställe, Vägövergång, vägpassage, gångvägspassage, gångpassage"
             },
             "footway/sidewalk": {
                 "name": "Trottoar",
@@ -2256,27 +2345,31 @@
             },
             "highway/bridleway": {
                 "name": "Ridväg",
-                "terms": "Ridväg, ridstig, häst, rida, ridning"
+                "terms": "Ridväg, ridstig, häst, rida, ridning, ryttare, "
             },
             "highway/bus_stop": {
                 "name": "Busshållplats",
                 "terms": "Busstopp, busshållplats, buss, hållplats, anhalt, station, busstation, "
             },
+            "highway/corridor": {
+                "name": "Korridor inomhus",
+                "terms": "Korridor inomhus, inomhuskorridor, korridor, inomhus, gång,förbindelsegång, gångpassage"
+            },
             "highway/crossing": {
-                "name": "Korsning",
-                "terms": "Korsning, kryss, mot, plankorsning"
+                "name": "Vägkorsning",
+                "terms": "Korsning, kryss, vägkors, kors, vägskäl, gatukorsning, plankorsning, vägpassage"
             },
             "highway/crosswalk": {
-                "name": "Övergångsställe",
-                "terms": "Övergångsställe, gångpassage"
+                "name": "Övergångsställe för gående",
+                "terms": "Övergångsställe för gående, övergångsställe, Vägövergång, vägpassage, gångvägspassage, gångpassage"
             },
             "highway/cycleway": {
                 "name": "Cykelväg",
-                "terms": "cykelväg, cykelled, gc-väg, gång- och cykelväg"
+                "terms": "cykelväg, cykelled, gc-väg, gång- och cykelväg, cykel"
             },
             "highway/footway": {
                 "name": "Gångväg",
-                "terms": "gångväg, gc-väg, gång- och cykelväg, stig"
+                "terms": "gångväg, gc-väg, gång- och cykelväg, stig, vandring, vandra, löparbana, motionsspår, promenad"
             },
             "highway/living_street": {
                 "name": "Gångfartsområde",
@@ -2300,11 +2393,11 @@
             },
             "highway/path": {
                 "name": "Stig",
-                "terms": "Stig, gång, led, spår, gångväg, vandringsled"
+                "terms": "Stig, gång, led, spår, gångväg, vandringsled, vandra, vandring, promenad, löparbana, motionsspår"
             },
             "highway/pedestrian": {
                 "name": "Gågata",
-                "terms": "Gångbana, gående, fotgängare"
+                "terms": "Gågata, gångbana, gående, fotgängare, gånggata, affärsgata, shoppinggata"
             },
             "highway/primary": {
                 "name": "Primär väg",
@@ -2316,7 +2409,7 @@
             },
             "highway/raceway": {
                 "name": "Motorracerbana",
-                "terms": " racerbana, motorracerbana, motorbana, tävlingsbana, motortävling, rally, rallybana, kappkörning, gokart, go-kart, tävlingsbana"
+                "terms": "racerbana, motorracerbana, motorbana, tävlingsbana, motortävling, rally, rallybana, kappkörning, gokart, go-kart, tävlingsbana"
             },
             "highway/residential": {
                 "name": "Bostadsgata",
@@ -2356,7 +2449,7 @@
             },
             "highway/service/emergency_access": {
                 "name": "Utryckningsfordon",
-                "terms": "Utryckningsfordon, Räddningsväg, brandväg"
+                "terms": "Utryckningsfordon, Räddningsväg, brandväg, brandbil, ambulans, polis, brandkår"
             },
             "highway/service/parking_aisle": {
                 "name": "Parkeringsväg",
@@ -2368,7 +2461,7 @@
             },
             "highway/steps": {
                 "name": "Trappa",
-                "terms": "Trappa, trapp, rulltrappa, trappsteg"
+                "terms": "Trappa, trapp, rulltrappa, trappsteg, trappor, trappuppgång, trappnedgång"
             },
             "highway/stop": {
                 "name": "Stoppskylt",
@@ -2376,7 +2469,7 @@
             },
             "highway/street_lamp": {
                 "name": "Gatlampa ",
-                "terms": "Gatlampa, Gatubelysning, lampa, belysning, lyktstolpe"
+                "terms": "Gatlampa, Gatubelysning, lampa, belysning, lyktstolpe, gatuljus"
             },
             "highway/tertiary": {
                 "name": "Tertiär väg",
@@ -2388,11 +2481,11 @@
             },
             "highway/track": {
                 "name": "Bruksväg",
-                "terms": "Bruksväg, traktorväg, skogsväg, åkerväg, virkesväg, timmerväg, traktor, skogsmaskin, åker, timmer, jordbruk"
+                "terms": "Bruksväg, traktorväg, skogsväg, åkerväg, virkesväg, timmerväg, traktor, skogsmaskin, åker, timmer, jordbruk, brandväg, brandgata"
             },
             "highway/traffic_signals": {
                 "name": "Trafiksignaler",
-                "terms": "Trafikljus, trafiksignal, stoppljus, signalljus"
+                "terms": "Trafikljus, trafiksignal, stoppljus, signalljus, ljus, stoppljus, trafikljus"
             },
             "highway/trunk": {
                 "name": "Huvudväg",
@@ -2440,7 +2533,7 @@
             },
             "historic/wayside_cross": {
                 "name": "Kors vid väg",
-                "terms": "Vägkors, kors vid väg, krucifix, pilgim"
+                "terms": "Vägkors, kors vid väg, krucifix, pilgrim"
             },
             "historic/wayside_shrine": {
                 "name": "Helgedom vid väg",
@@ -2452,7 +2545,7 @@
             },
             "landuse": {
                 "name": "Markanvändning",
-                "terms": "Markanvändning, Översiktsplan"
+                "terms": "Markanvändning, landanvändning, användningsområde"
             },
             "landuse/allotments": {
                 "name": "Kolonilotter",
@@ -2522,6 +2615,10 @@
                 "name": "Fruktodling",
                 "terms": "Fruktodling, fruktträdgård, fruktträd, äppelträd"
             },
+            "landuse/plant_nursery": {
+                "name": "Plantskola",
+                "terms": "Plantskola, handelsträdgård "
+            },
             "landuse/quarry": {
                 "name": "Stenbrott/Sandtag",
                 "terms": "täkt, gruva, utgrävning, stenbrott, sand, stenbrytning, sten, sandtäckt, sandtag"
@@ -2542,9 +2639,17 @@
                 "name": "Fritid",
                 "terms": "Nöje, fritid, ledighet, förströelse, tidsfördriv"
             },
+            "leisure/adult_gaming_centre": {
+                "name": "Center för vuxenspel",
+                "terms": "Center för vuxenspel, vuxenspel, spelmaskiner, spel, spelmaskin, flipperspel, flipper"
+            },
+            "leisure/bowling_alley": {
+                "name": "Bowlinghall",
+                "terms": "Bowlingbana, bowlinghall, bowling, kägelsport, kägelspel"
+            },
             "leisure/common": {
                 "name": "Allmänning",
-                "terms": "Allmänning, allmän mark, fritt tillträde"
+                "terms": "Allmänning, allmän mark, fritt tillträde, öppet område"
             },
             "leisure/dog_park": {
                 "name": "Hundpark",
@@ -2552,7 +2657,7 @@
             },
             "leisure/firepit": {
                 "name": "Eldstad",
-                "terms": "Eldstad, eldgrop, lägerplats, lägereld, brasa, grill, grillplats, grillning, eldning"
+                "terms": "Eldstad, eldgrop, lägerplats, lägereld, brasa, grill, grillplats, grillning, eldning, campingbrasa"
             },
             "leisure/garden": {
                 "name": "Trädgård",
@@ -2564,11 +2669,11 @@
             },
             "leisure/ice_rink": {
                 "name": "Skridskobana ",
-                "terms": "Skridskobana, ishall, ishockey, ishockeybana, isrink, konstisbana, isbana, skridsko, skridskohall, ishockeyhall"
+                "terms": "Skridskobana, ishall, ishockey, ishockeybana, isrink, konstisbana, isbana, skridsko, skridskohall, ishockeyhall, hockey, skridskoåkning, curling"
             },
             "leisure/marina": {
                 "name": "Marina",
-                "terms": "Marina, småbårtshamn, hamn, småbåt, segelbåt, yacht, fritidsbåt, gästhamn"
+                "terms": "Marina, småbåtshamn, hamn, småbåt, segelbåt, yacht, fritidsbåt, gästhamn, båt"
             },
             "leisure/nature_reserve": {
                 "name": "Naturreservat",
@@ -2576,15 +2681,15 @@
             },
             "leisure/park": {
                 "name": "Park",
-                "terms": "rekreationsområde, friluftsområde, trädgård, plantering, grönområde, lund, stadsoas, oas "
+                "terms": "rekreationsområde, friluftsområde, trädgård, plantering, grönområde, lund, stadsoas, oas, esplanad, skog, park, gräs, gräsmatta, äng, lekplats, nöjesträdgård, plaza, skogsmark"
             },
             "leisure/picnic_table": {
                 "name": "Picknickbord",
-                "terms": "Picknickbord, bord, Picknick, matbord, utflyktsbord, utebord"
+                "terms": "Picknickbord, bord, Picknick, matbord, utflyktsbord, utebord, bänk"
             },
             "leisure/pitch": {
                 "name": "Idrottsplats",
-                "terms": "Idrottsplats,  idrottsplan, plan,  idrottsanläggning, arena, stadion, sportplats"
+                "terms": "Idrottsplats,  idrottsplan, plan,  idrottsanläggning, arena, stadion, sportplats, fällt"
             },
             "leisure/pitch/american_football": {
                 "name": "Plan för amerikansk fotboll",
@@ -2616,7 +2721,7 @@
             },
             "leisure/playground": {
                 "name": "Lekplats",
-                "terms": "Lekplats, lekområde, lekpark"
+                "terms": "Lekplats, lekområde, lekpark, klätterställning, gunga"
             },
             "leisure/running_track": {
                 "name": "Kapplöpningsbana",
@@ -2624,7 +2729,7 @@
             },
             "leisure/slipway": {
                 "name": "Stapelbädd",
-                "terms": "Stapelbädd, Sjösättningsplats, staplar, varv, docka, fartygsdocka, torrdocka, båtramp"
+                "terms": "Stapelbädd, Sjösättningsplats, staplar, varv, docka, fartygsdocka, torrdocka, båtramp, sjösättning, båtramp"
             },
             "leisure/sports_center": {
                 "name": "Sportcenter / Gym",
@@ -2650,6 +2755,10 @@
                 "name": "Människoskapad",
                 "terms": "Människoskapat, konstgjort, onaturlig, syntetisk, artificiell"
             },
+            "man_made/adit": {
+                "name": "Horisontell gruvgång (Stoll)",
+                "terms": "stoll, gruva, gruvgång, horisontell gruvgång, gruvgång, gruvingång, gruvhål, dagort, sidoort, Stollen, lichtloch"
+            },
             "man_made/breakwater": {
                 "name": "Vågbrytare",
                 "terms": "Vågbrytare, pir, hamnarm, vågskydd, fördämning, hamnpir"
@@ -2670,9 +2779,17 @@
                 "name": "Fyr",
                 "terms": "Fyr, fyrtorn, fyrskepp"
             },
+            "man_made/mast": {
+                "name": "Radiomast",
+                "terms": "radiomast, mast, antenn, mobilmast, mobilantenn, radioantenn, sändartorn, mobiltelefon, radiomast, TV-torn, radiosändning"
+            },
             "man_made/observation": {
                 "name": "Utkikstorn",
-                "terms": "Utkikstorn, utsiktstorn, observationstorn, utsiktspost, observationspost"
+                "terms": "Utkikstorn, utsiktstorn, observationstorn, utsiktspost, observationspost, brandtorn"
+            },
+            "man_made/petroleum_well": {
+                "name": "Oljeborr",
+                "terms": "Oljeborr, olja, petroleum, Oljeborrning, oljetorn, oljepump"
             },
             "man_made/pier": {
                 "name": "Pir",
@@ -2681,6 +2798,14 @@
             "man_made/pipeline": {
                 "name": "Pipeline",
                 "terms": "Pipeline, rörledning, ledning, oljeledning, avloppsledning, vattenledning"
+            },
+            "man_made/silo": {
+                "name": "Silo",
+                "terms": "Silo, spannmålslagring, spannmål, spannmålssilo, fodersilo"
+            },
+            "man_made/storage_tank": {
+                "name": "Lagringstank",
+                "terms": "Lagringstank, tank, reservoar, vattentorn, cistern"
             },
             "man_made/survey_point": {
                 "name": "Trianguleringspunkt",
@@ -2692,7 +2817,7 @@
             },
             "man_made/wastewater_plant": {
                 "name": "Avloppsreningsverk",
-                "terms": "Avloppsreningsverk, reningsverk, avloppsverk"
+                "terms": "Avloppsreningsverk, reningsverk, avloppsverk, avlopp, vattenreningsverk, vattenrening"
             },
             "man_made/water_tower": {
                 "name": "Vattentorn",
@@ -2712,7 +2837,7 @@
             },
             "military/barracks": {
                 "name": "Baracker",
-                "terms": "Baracker, barack, militärbarack, inkvartering, förläggning, kersern "
+                "terms": "Baracker, barack, militärbarack, inkvartering, förläggning, kasern "
             },
             "military/bunker": {
                 "name": "Bunker",
@@ -2744,15 +2869,15 @@
             },
             "natural/coastline": {
                 "name": "Kustlinje",
-                "terms": "kustlinje, kustremsa, kust, hav, ö, strand"
+                "terms": "kustlinje, kustremsa, kust, hav, ö, strand, kust"
             },
             "natural/fell": {
                 "name": "Fjäll",
-                "terms": "Fjäll, trädgräns, högfjäll, fjällanskap"
+                "terms": "Fjäll, trädgräns, högfjäll, fjällandskap"
             },
             "natural/glacier": {
-                "name": "Glassiär",
-                "terms": "Glassiär, landis, ismassa, jökel, gletscher"
+                "name": "Glaciär",
+                "terms": "Glaciär, landis, ismassa, jökel, gletscher"
             },
             "natural/grassland": {
                 "name": "Grässlätt",
@@ -2764,11 +2889,15 @@
             },
             "natural/peak": {
                 "name": "Bergstopp",
-                "terms": "Bergstopp, berg, alp, hjässa, kalott, klack, klint, klätt"
+                "terms": "Bergstopp, berg, alp, hjässa, kalott, klack, klint, klätt, kulle, höjdpunkt, höjd, topp"
+            },
+            "natural/saddle": {
+                "name": "Bergskam",
+                "terms": "Bergskam, bergskrön, bergskrön, berg, dal, dalgång"
             },
             "natural/scree": {
                 "name": "Stensamling",
-                "terms": "Stensamling, röse, Taluskon, stenras, stenanhopning"
+                "terms": "Stensamling, röse, Taluskon, stenras, stenanhopning, lösa block, block"
             },
             "natural/scrub": {
                 "name": "busksnår",
@@ -2780,7 +2909,15 @@
             },
             "natural/tree": {
                 "name": "Träd",
-                "terms": "träd, trä, trädstam, stam; barrträd, lövträd, gran, ek, björk, stock"
+                "terms": "träd,trä,trädstam,stam,barrträd,lövträd,gran,ek,björk,stock"
+            },
+            "natural/tree_row": {
+                "name": "Träallé",
+                "terms": "Träallé, allé, trädrad, aveny, esplanad, boulevard, trädkantad väg, lövgång"
+            },
+            "natural/volcano": {
+                "name": "Vulkan",
+                "terms": "Vulkan, berg, krater, vulkankrater, lava, magma, "
             },
             "natural/water": {
                 "name": "Vatten",
@@ -2792,7 +2929,7 @@
             },
             "natural/water/pond": {
                 "name": "Tjärn",
-                "terms": "damm, tjärn, göl "
+                "terms": "damm, tjärn, göl, liten sjö, kvarndamm, tjärn"
             },
             "natural/water/reservoir": {
                 "name": "Reservoar",
@@ -2804,7 +2941,7 @@
             },
             "natural/wood": {
                 "name": "Skog (utan skogsbruk)",
-                "terms": "skog, Urskog, djungel, bush, regnskog, vildmark"
+                "terms": "skog, Urskog, djungel, bush, regnskog, vildmark, träd"
             },
             "office": {
                 "name": "Kontor",
@@ -2832,7 +2969,7 @@
             },
             "office/employment_agency": {
                 "name": "Arbetsförmedling",
-                "terms": "Arbetsförmedling, arbetsförmedlingen, arbetslös, arbetssökande, förmedling"
+                "terms": "Arbetsförmedling, arbetsförmedlingen, arbetslös, arbetssökande, förmedling, jobb"
             },
             "office/estate_agent": {
                 "name": "Mäklare/bostadsförmedling",
@@ -2852,7 +2989,7 @@
             },
             "office/it": {
                 "name": "IT-kontor",
-                "terms": "IT-kontor, datorföretag, dataföretag, IT-företag, informationsteknologi, dotcomföretag, IT-kunsult, datakonsult, datorkonsult, helpdesk"
+                "terms": "IT-kontor, datorföretag, dataföretag, IT-företag, informationsteknologi, dotcomföretag, IT-konsult, datakonsult, datorkonsult, helpdesk"
             },
             "office/lawyer": {
                 "name": "Advokatkontor",
@@ -2864,7 +3001,7 @@
             },
             "office/ngo": {
                 "name": "Icke-statlig organisation",
-                "terms": "Icke-statlig organisation, organisation, hjälporganisation, fackförening, ideell förening, ideell, förening, icke-kommersiel, frivilligorganisation, frivillig, intresseorganisation"
+                "terms": "Icke-statlig organisation, organisation, hjälporganisation, fackförening, ideell förening, ideell, förening, icke-kommersiell, frivilligorganisation, frivillig, intresseorganisation"
             },
             "office/physician": {
                 "name": "Läkare",
@@ -2892,7 +3029,7 @@
             },
             "piste": {
                 "name": "Pist/skidspår",
-                "terms": "Pist, skidspår, skidbacke, slalombacke, skidbana, utförsåkning, längdskidåkning, längdskidspår"
+                "terms": "Pist, skidspår, skidbacke, slalombacke, skidbana, utförsåkning, längdskidåkning, längdskidspår, skidor, skida, pulka, snowboard, utförsåkning, skoter"
             },
             "place": {
                 "name": "Plats",
@@ -2902,13 +3039,17 @@
                 "name": "Större stad",
                 "terms": "Större stad, stad, storstad, metropol, världsstad, huvudstad"
             },
+            "place/farm": {
+                "name": "Gård",
+                "terms": "gård, jordbruk, lantgård, farm, bondgård, lantbruk, lantegendom"
+            },
             "place/hamlet": {
                 "name": "By",
                 "terms": "By, småort, gårdssamling, gårdar, litet samhälle"
             },
             "place/island": {
                 "name": "Ö",
-                "terms": "ö, holme, skär, kobbe, klippa, rev, atoll"
+                "terms": "ö, holme, skär, kobbe, klippa, rev, atoll, skärgård, rev"
             },
             "place/isolated_dwelling": {
                 "name": "Isolerad boplats",
@@ -2996,15 +3137,15 @@
             },
             "railway/funicular": {
                 "name": "Bergbana ",
-                "terms": "Bergbana"
+                "terms": "Bergbana, linbana"
             },
             "railway/halt": {
                 "name": "Mindre järnvägshållplats",
                 "terms": "Mindre järnvägshållplats, hållplats, järnvägshållplats, avstigningsplats, påstigningsplats, tågstopp"
             },
             "railway/level_crossing": {
-                "name": "Plankorsning",
-                "terms": "Korsning, järnvägskorsning, kryss, vägkors, kors, vägkors, vägskäl, gatukorsning, plankorsning"
+                "name": "Järnvägskorsning",
+                "terms": "Järnvägskorsning, järnvägsövergång, järnvägspassage, spårpassage, tågövergång, tågkorsning"
             },
             "railway/monorail": {
                 "name": "Monorail",
@@ -3024,7 +3165,7 @@
             },
             "railway/station": {
                 "name": "Järnvägsstation",
-                "terms": "Järnvägsstation, station, central, centralstation"
+                "terms": "Järnvägsstation, station, central, centralstation, tåg, tågstation"
             },
             "railway/subway": {
                 "name": "Tunnelbana",
@@ -3056,7 +3197,7 @@
             },
             "shop/alcohol": {
                 "name": "Vin-och-spritaffär",
-                "terms": "Vinaffär, spritaffär, vin- och sprit, vin- och spritaffär, systemet, systembolaget, bolaget"
+                "terms": "Vinaffär, spritaffär, vin- och sprit, vin- och spritaffär, systemet, systembolaget, bolaget, alkohol, öl, vin, sprit"
             },
             "shop/anime": {
                 "name": "Anime-affär",
@@ -3076,7 +3217,7 @@
             },
             "shop/bag": {
                 "name": "Väskaffär",
-                "terms": "Väskaffär, väskor, resväskor, bagage, bagageväskor, handväskor"
+                "terms": "Väskaffär, väskor, resväskor, bagage, bagageväskor, handväskor, handväska, plånbok"
             },
             "shop/bakery": {
                 "name": "Bageri",
@@ -3088,7 +3229,7 @@
             },
             "shop/beauty": {
                 "name": "Skönhetssalong",
-                "terms": "Skönhetssalong, skönhet, skönhetsbehandlingar, nagelsalong, solarium, shiatsu, massage, spa, hälsoanläggning, kuranstalt, kurort, kosmetik, smink"
+                "terms": "Skönhetssalong, skönhet, skönhetsbehandlingar, nagelsalong, solarium, shiatsu, massage, spa, hälsoanläggning, kuranstalt, kurort, kosmetik, smink, naglar, salong"
             },
             "shop/bed": {
                 "name": "Sängaffär",
@@ -3116,7 +3257,7 @@
             },
             "shop/butcher": {
                 "name": "Slaktare",
-                "terms": "Slaktare, kött, köttaffär, köttstyckare; charkuterist, charkuterihandlare, styckare, chark"
+                "terms": "slaktare,kött,köttaffär,köttstyckare,charkuterist,charkuterihandlare,styckare,chark"
             },
             "shop/candles": {
                 "name": "Ljusaffär",
@@ -3128,15 +3269,15 @@
             },
             "shop/car_parts": {
                 "name": "Biltillbehör",
-                "terms": "Bildelar, biltillbehör, reservdelar, bilreservdelar"
+                "terms": "Bildelar, biltillbehör, reservdelar, bilreservdelar, motor"
             },
             "shop/car_repair": {
                 "name": "Bilverkstad",
-                "terms": "Bilverkstad, verkstad, bilreparatör"
+                "terms": "Bilverkstad, verkstad, bilreparatör, motor"
             },
             "shop/carpet": {
                 "name": "Mattaffär",
-                "terms": "Mattaffär, mattor"
+                "terms": "Mattaffär, mattor, matta"
             },
             "shop/cheese": {
                 "name": "Ostaffär",
@@ -3156,7 +3297,7 @@
             },
             "shop/computer": {
                 "name": "Datorbutik",
-                "terms": "Datorbutik, datoraffär, data, dator, datorer, datorhårdvara, datorprogram, datortförsäljning "
+                "terms": "Datorbutik, datoraffär, data, dator, datorer, datorhårdvara, datorprogram, datorförsäljning"
             },
             "shop/confectionery": {
                 "name": "Godisaffär",
@@ -3164,7 +3305,7 @@
             },
             "shop/convenience": {
                 "name": "Närbutik",
-                "terms": "Närbutik, kvartersbutik, livsmedelbutik, livsmedel, mataffär"
+                "terms": "Närbutik, kvartersbutik, livsmedelsbutik, livsmedel, mataffär"
             },
             "shop/copyshop": {
                 "name": "Tryckeri",
@@ -3180,15 +3321,15 @@
             },
             "shop/curtain": {
                 "name": "Gardinaffär",
-                "terms": "Gardinaffär, gardiner, draperier"
+                "terms": "Gardinaffär, gardiner, draperier, drapera, fönster"
             },
             "shop/dairy": {
                 "name": "Mejeriaffär",
-                "terms": "Mejeriaffär, mejeri, mjölk, mjölkaffär"
+                "terms": "Mejeriaffär, mejeri, mjölk, mjölkaffär, ägg, ost"
             },
             "shop/deli": {
                 "name": "Delikatessaffär",
-                "terms": "Delikatessaffär, delikatess, delikatesser, finmat"
+                "terms": "Delikatessaffär, delikatess, delikatesser, finmat, lunch, kött, smörgås"
             },
             "shop/department_store": {
                 "name": "Varuhus",
@@ -3204,7 +3345,7 @@
             },
             "shop/electronics": {
                 "name": "Elektronikbutik",
-                "terms": "Elektronikbutik, hemelektronik, TV, radio, dator, datorer, kylskåp, spisar, vitvaror, tvättmaskin, torktumlare, hushållsapparater, kablar, batterier"
+                "terms": "Elektronikbutik, hemelektronik, TV, radio, dator, datorer, kylskåp, spisar, vitvaror, tvättmaskin, torktumlare, hushållsapparater, kablar, batterier, apparater, ljud"
             },
             "shop/erotic": {
                 "name": "Sexshop",
@@ -3212,7 +3353,7 @@
             },
             "shop/fabric": {
                 "name": "Tygaffär",
-                "terms": "Tygaffär, tyger, tyg, sömnad"
+                "terms": "Tygaffär, tyger, tyg, sömnad, sy"
             },
             "shop/farm": {
                 "name": "Gårdsbutik",
@@ -3236,19 +3377,19 @@
             },
             "shop/funeral_directors": {
                 "name": "Begravningsbyrå",
-                "terms": "begravningsbyrå, begravningsceremoni, begravning, bodelning, jordfästning, gravsättning, kremering"
+                "terms": "begravningsbyrå, begravningsceremoni, begravning, bodelning, jordfästning, gravsättning, kremering, begravningsentreprenör, gravsten, gravstenar"
             },
             "shop/furnace": {
                 "name": "Värmepannor",
-                "terms": "Värmepannor, pannor, uppvärmning, ugnar, värmesystem, ugn, kakelugn, kamin"
+                "terms": "Värmepannor, pannor, uppvärmning, ugnar, värmesystem, ugn, kakelugn, kamin, spis"
             },
             "shop/furniture": {
                 "name": "Möbelaffär",
-                "terms": "Möbelaffär, möbelgrossist, möbelvaruhus, inredning"
+                "terms": "Möbelaffär, möbelgrossist, möbelvaruhus, inredning, stolar, soffor, soffa, stol, bord, hylla"
             },
             "shop/garden_centre": {
                 "name": "Trädgårdscenter",
-                "terms": "Trädgårdscenter, plantskola, blommor, blomkrukor, krukväxter, buskar, träd, trädgårdsväxter, trädgård, trädgårdsverktyg, planteringsjord, jord"
+                "terms": "Trädgårdscenter, plantskola, blommor, blomkrukor, krukväxter, buskar, träd, trädgårdsväxter, trädgård, trädgårdsverktyg, planteringsjord, jord, landskap, kompost, jord"
             },
             "shop/gift": {
                 "name": "Presentbutik",
@@ -3276,11 +3417,11 @@
             },
             "shop/hifi": {
                 "name": "HiFi-butik",
-                "terms": "HIFI-butik, hifi, ljud, ljudåtergivning, förstärkare, högtalare, ljudanläggning, audio, stereo, stereoanläggning"
+                "terms": "HIFI-butik, hifi, ljud, ljudåtergivning, förstärkare, högtalare, ljudanläggning, audio, stereo, stereoanläggning, video"
             },
             "shop/houseware": {
                 "name": "Husgeråd",
-                "terms": "husgeråd, köksredskap, bestick, porslin, prydnadsföremål"
+                "terms": "husgeråd, köksredskap, bestick, porslin, prydnadsföremål, hem, hushåll"
             },
             "shop/interior_decoration": {
                 "name": "Inredningsaffär",
@@ -3288,7 +3429,7 @@
             },
             "shop/jewelry": {
                 "name": "Juvelerare",
-                "terms": "Juvelare, smycken, halsband, ring, ringar, örhänge, örhängen, klocka, klockor, guld, silver"
+                "terms": "Juvelerare, smycken, halsband, ring, ringar, örhänge, örhängen, klocka, klockor, guld, silver, diamant, pärla, pärlor"
             },
             "shop/kiosk": {
                 "name": "Kiosk",
@@ -3308,7 +3449,7 @@
             },
             "shop/locksmith": {
                 "name": "Låssmed",
-                "terms": "Låssmed, nyckeltillverkning, nyckelkopiering, nyckel, lås, låsinstallation, dyrkning"
+                "terms": "Låssmed, nyckeltillverkning, nyckelkopiering, nyckel, lås, låsinstallation, dyrkning, Låsdyrkning "
             },
             "shop/lottery": {
                 "name": "Lotteri",
@@ -3340,7 +3481,7 @@
             },
             "shop/music": {
                 "name": "Musikaffär",
-                "terms": "Musikaffär, musikbutik, CD-affär, CD, kasset, vinyl, LP, skivaffär , skivbutik"
+                "terms": "Musikaffär, musikbutik, CD-affär, CD, kassett, vinyl, LP, skivaffär , skivbutik"
             },
             "shop/musical_instrument": {
                 "name": "Musikinstrument",
@@ -3352,7 +3493,7 @@
             },
             "shop/optician": {
                 "name": "Optiker",
-                "terms": "Optiker, synundersökning, glasögon, linser"
+                "terms": "Optiker, synundersökning, glasögon, linser, ögon"
             },
             "shop/organic": {
                 "name": "Ekologiska livsmedel",
@@ -3368,15 +3509,15 @@
             },
             "shop/pawnbroker": {
                 "name": "Pantbank",
-                "terms": "pantbank, pantbanken, \tpantbelåning,\tpantlånekontor, varubelåning, pant"
+                "terms": "pantbank, pantbanken, pantbelåning, pantlånekontor, varubelåning, pant"
             },
             "shop/pet": {
                 "name": "Djurbutik",
-                "terms": "Djuraffär, djur, husdjur, hund, hundar, katt, katter, djurmat, djurtillbehör, djurburar, akvarium"
+                "terms": "Djuraffär, djur, husdjur, hund, hundar, katt, katter, djurmat, djurtillbehör, djurburar, akvarium, hund, fisk"
             },
             "shop/photo": {
                 "name": "Fotoaffär ",
-                "terms": "fotoaffär, bild, foto, video, fotografi, fotoredigering, framkallning, ram, kameratillbehör, kamera, kameror, filmkamera, fotokamera, konvertering"
+                "terms": "fotoaffär, bild, foto, video, fotografi, fotoredigering, framkallning, ram, kameratillbehör, kamera, kameror, filmkamera, fotokamera, konvertering, film"
             },
             "shop/pyrotechnics": {
                 "name": "Fyrverkerier",
@@ -3412,15 +3553,15 @@
             },
             "shop/stationery": {
                 "name": "Pappershandel",
-                "terms": "pappersvaror , pappershandel, papper, anteckningsböcker, grattiskort, kuvert, pennor, Kontorsmaterial "
+                "terms": "pappersvaror , pappershandel, papper, anteckningsböcker, grattiskort, kuvert, pennor, Kontorsmaterial, kort, papper"
             },
             "shop/supermarket": {
                 "name": "Snabbköp",
-                "terms": "självbetjäningsbutik, självköp, supermarket, snabbköp, dagligvarubutik, affär, mataffär"
+                "terms": "självbetjäningsbutik, självköp, supermarket, snabbköp, dagligvarubutik, affär, mataffär, livsmedel, livsmedelsbutik, mat"
             },
             "shop/tailor": {
                 "name": "Skräddare",
-                "terms": "Skräddare, kläder"
+                "terms": "Skräddare, kläder, kostym, klänning"
             },
             "shop/tattoo": {
                 "name": "Tatueringsstudio",
@@ -3476,7 +3617,7 @@
             },
             "shop/weapons": {
                 "name": "Vapenaffär",
-                "terms": "Vapenaffär, vapen, ammunition, jakt, skjutvapen"
+                "terms": "Vapenaffär, vapen, ammunition, jakt, skjutvapen, kniv, knivar, pistol"
             },
             "shop/window_blind": {
                 "name": "Persienner",
@@ -3496,7 +3637,7 @@
             },
             "tourism/artwork": {
                 "name": "Publik konst",
-                "terms": "Konst, publik konst, gatukonst, offentlig konst"
+                "terms": "Konst, publik konst, gatukonst, offentlig konst, väggmålning, målning, skulptur, staty"
             },
             "tourism/attraction": {
                 "name": "Turistattraktion",
@@ -3516,7 +3657,7 @@
             },
             "tourism/guest_house": {
                 "name": "Gästhus",
-                "terms": "Gästhus, vandrarhem, övernattningsställe, logi, pensionat , Bed & Breakfast."
+                "terms": "Gästhus, vandrarhem, övernattningsställe, logi, pensionat, Bed & Breakfast, B&D"
             },
             "tourism/hostel": {
                 "name": "Vandrarhem",
@@ -3536,11 +3677,11 @@
             },
             "tourism/museum": {
                 "name": "Museum",
-                "terms": "museum, samling, konstsamling, museibyggnad, vetenskap, historia, historik, historia, konst, arkeologi"
+                "terms": "museum, samling, konstsamling, museibyggnad, vetenskap, historia, historik, historia, konst, arkeologi, utställning, galleri"
             },
             "tourism/picnic_site": {
                 "name": "Picknickplats",
-                "terms": "Picknickplats, rastplats, picknick, utflykt"
+                "terms": "Picknickplats, rastplats, picknick, utflykt, camping, campingplats"
             },
             "tourism/theme_park": {
                 "name": "Nöjespark",
@@ -3690,6 +3831,10 @@
                 "name": "Dränering",
                 "terms": "dränering, avrinning, dagvatten, dagvattenavrinning "
             },
+            "waterway/fuel": {
+                "name": "Sjömack",
+                "terms": "Sjömack, båtmack, bränslestation, tankstation båtbensninmack, båtmensinstation"
+            },
             "waterway/river": {
                 "name": "Flod",
                 "terms": "Å, flod, älv, fors, ström, jokk, vattendrag"
@@ -3698,9 +3843,13 @@
                 "name": "Flodbank",
                 "terms": "flodstrand, åstrand, flodbank, "
             },
+            "waterway/sanitary_dump_station": {
+                "name": "Marin latrintömning",
+                "terms": "Marin latrintömning, latrintömning, båttömnig, båtlatrin, sanitet, båtsanitet, toalettömning, campingtoalett, gråvatten, tömningsplats, gråvattentömning, Båt, Vattenfarkoster, sanitära, Dumpstation, utpumpning, Pumpa ut, Elsan, CDP, CTDP, kemisk toalett"
+            },
             "waterway/stream": {
                 "name": "Bäck",
-                "terms": "vattendrag, bäck, dike"
+                "terms": "vattendrag, bäck, dike, biflöde, flöde, ström, flod, flöde, rännil, biflod"
             },
             "waterway/weir": {
                 "name": "Damm",

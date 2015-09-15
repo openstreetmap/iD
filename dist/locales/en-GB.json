@@ -272,14 +272,8 @@
             "building/terrace": {
                 "name": "Terraced houses"
             },
-            "footway/crosswalk": {
-                "name": "Pedestrian Crossing"
-            },
             "highway/bridleway": {
                 "name": "Bridleway"
-            },
-            "highway/crosswalk": {
-                "name": "Zebra Crossing"
             },
             "leisure/pitch/baseball": {
                 "name": "Baseball"

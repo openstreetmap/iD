@@ -41,6 +41,7 @@
             }
         },
         "continue": {
+            "key": "A",
             "title": "Daŭrigu",
             "description": "Daŭrigu tiun linion.",
             "not_eligible": "Neniu linio povas esti daŭrigita tien.",
@@ -65,6 +66,7 @@
                 "line": "Faru ĉi linio cirkuli.",
                 "area": "Faru ĉi areon cirkuli."
             },
+            "key": "O",
             "annotation": {
                 "line": "Farita cirkulero de linio.",
                 "area": "Farita cirkulero de areo."
@@ -75,9 +77,14 @@
             "description": {
                 "line": "Kvadrata la anguloj de ĉi tiu linio.",
                 "area": "Kvadrata la anguloj de ĉi tiu areo."
-            }
+            },
+            "key": "S"
+        },
+        "straighten": {
+            "key": "S"
         },
         "delete": {
+            "title": "Forigi",
             "annotation": {
                 "point": "Forigita punkton.",
                 "line": "Forigita linion."
@@ -153,11 +160,20 @@
     },
     "presets": {
         "categories": {
+            "category-building": {
+                "name": "Konstruaĵo"
+            },
             "category-golf": {
                 "name": "Golfo"
             },
             "category-path": {
                 "name": "Vojo"
+            },
+            "category-rail": {
+                "name": "Relo"
+            },
+            "category-restriction": {
+                "name": "Restrikto"
             },
             "category-water-area": {
                 "name": "Akvo"
@@ -169,27 +185,49 @@
         "fields": {
             "access": {
                 "options": {
+                    "designated": {
+                        "description": "Aliro rajtis laŭ signoj aŭ specifaj lokaj leĝoj",
+                        "title": "Nomita"
+                    },
+                    "destination": {
+                        "description": " Aliro rajtis nur al atingi cellokon ",
+                        "title": "Celloko"
+                    },
+                    "dismount": {
+                        "description": "Aliro rajtis sed rajdanto dev elseliĝ",
+                        "title": "Elseliĝ"
+                    },
                     "no": {
+                        "description": "Aliro ne rajtita al la publiko",
                         "title": "Malpermesita"
+                    },
+                    "permissive": {
+                        "description": "Aliro rajtis ĝis tiam, kiam la posedanto revok la permeso"
                     },
                     "yes": {
                         "title": "Permesita"
                     }
                 },
-                "placeholder": "Nekonata",
                 "types": {
                     "bicycle": "Bicikloj",
-                    "horse": "Ĉevaloj"
+                    "foot": "Piedo",
+                    "horse": "Ĉevaloj",
+                    "motor_vehicle": "Aŭtomobiloj"
                 }
             },
             "access_simple": {
                 "placeholder": "jes"
             },
+            "access_toilets": {
+                "label": "Aliro"
+            },
             "address": {
                 "label": "Adreso",
                 "placeholders": {
                     "city": "Urbo",
+                    "conscriptionnumber": "123",
                     "country": "Lando",
+                    "district": "Distrikto",
                     "housenumber": "123",
                     "province": "Provinco",
                     "street": "Strato"
@@ -301,6 +339,12 @@
                 "options": {
                     "bridge": "Ponto"
                 }
+            },
+            "trail_visibility": {
+                "placeholder": "Bonega, Bona, Malbona..."
+            },
+            "website": {
+                "placeholder": "http://example.com/"
             }
         },
         "presets": {

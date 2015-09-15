@@ -279,7 +279,6 @@
     "presets": {
         "fields": {
             "access": {
-                "label": "Piekļuve",
                 "options": {
                     "designated": {
                         "description": "Piekļuve atļauta atbilstoši zīmēm vai speciāliem vietējiem likumiem",
@@ -305,7 +304,6 @@
                     }
                 },
                 "types": {
-                    "access": "Vispārīgs",
                     "bicycle": "Velosipēdi",
                     "foot": "Kājām",
                     "horse": "Zirgi",
@@ -721,9 +719,6 @@
             },
             "historic/ruins": {
                 "name": "Pilsdrupas"
-            },
-            "landuse": {
-                "name": "Zemes pielietojums"
             },
             "landuse/basin": {
                 "name": "Baseins"

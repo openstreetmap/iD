@@ -239,6 +239,7 @@
     "commit": {
         "title": "Módosítások Mentése",
         "description_placeholder": "A közreműködésed rövid összefoglalója",
+        "message_label": "Módosításcsomag megjegyzés",
         "upload_explanation": "Az általad feltöltött változtatások minden OpenStreetMapet használó térképen láthatóak lesznek.",
         "upload_explanation_with_user": "Az általad {user} néven feltöltött változtatások minden OpenStreetMapet használó térképen láthatóak lesznek.",
         "save": "Mentés",
@@ -252,6 +253,26 @@
     "contributors": {
         "list": "Szerkesztette {users}",
         "truncated_list": "Szerkesztette {users} és {count} másik szerkesztő"
+    },
+    "infobox": {
+        "selected": "{n} kiválasztott",
+        "geometry": "Geometria",
+        "closed": "zárt",
+        "center": "Középpont",
+        "perimeter": "Kerület",
+        "length": "Hossz",
+        "area": "Terület",
+        "centroid": "Súlypont ",
+        "location": "Pozíció",
+        "metric": "Metrikus",
+        "imperial": "Angol birodalmi mértékegység"
+    },
+    "geometry": {
+        "point": "pont",
+        "vertex": "csúcspont",
+        "line": "vonal",
+        "area": "terület",
+        "relation": "kapcsolat"
     },
     "geocoder": {
         "search": "Keresés a világban…",
@@ -302,7 +323,11 @@
         "custom_button": "Egyedi háttér szerkesztése",
         "custom_prompt": "Adj meg egy csempe URL sablont. Érvényes tokenek: {z}, {x}, {y} a Z/X/Y rendszerű URL-ekhez és {u} a kvadratikusakhoz.",
         "fix_misalignment": "Eltolódás korrigálása",
-        "reset": "visszavonás"
+        "reset": "visszavonás",
+        "minimap": {
+            "description": "Minitérkép",
+            "tooltip": "Áttekintő térkép mutatása a megjelenített terület meghatározásához."
+        }
     },
     "map_data": {
         "title": "Térképadatok",
@@ -409,6 +434,8 @@
         "conflict": {
             "deleted": "Ezt az objektumot törölte {user}.",
             "location": "Ezt az objektumot te és {user} is áthelyezte.",
+            "nodelist": "Az adott pontok egyszerre kerültek módosításra általad és {user} - által.",
+            "memberlist": "A kapcsolat elemei egyszerre kerültek módosításra általad és {user} által.",
             "tags": "Te megváltoztattad a(z) <b>{tag}</b> címkét erre: \"{local}\", {user} pedig erre: \"{remote}\"."
         }
     },
@@ -470,12 +497,11 @@
     },
     "help": {
         "title": "Súgó",
-        "editing_saving": "# Szerkesztés és Mentés\n\nA szerkesztőt elsődlegesen online munkára tervezték és te jelenleg\negy weblapon éred el.\n\n### Elemek kiválasztása\n\nEgy térképelem, mint út vagy érdekes hely kiválasztásához kattints rá a térképen.\nEttől a kiválasztott elem kiemelődik és megnyílik egy panel az adataival,\nés egy menüvel, ami mutatja, miket tudsz az elemmel csinálni.\n\nTöbb elemet a 'Shift' gomb nyomva tartása közbeni kattintással, vagy\nhúzással tudsz kiválasztani. A húzással kijelölöd a bekeretezett részen lévő\nösszes elemet, lehetővé téve, hogy egyszerre több mindent változtass.\n\n### Szerkesztések mentése\n\nAmikor utakat, épületeket, helyeket szerkesztesz, ezek a változások\nhelyileg lesznek tárolva, amíg nem mented őket a szerverre. Ne aggódj, ha \nelrontasz valamit - vissza tudod vonni a változtatásaidat a visszavonás gombra\nkattintva, a mégis gombra kattintva pedig a korábban visszavont változtatásaidat\nállíthatod vissza.\n\nKattints a 'Mentés' gombra, ha végeztél egy terület szerkesztésével - például,\nha befejezted egy város részletének szerkesztését és egy másik területet szeretnél\nszerkeszteni. Lehetőséged lesz visszanézni, hogy mit csináltál. A szerkesztő hasznos\ntanácsokat biztosít és figyelmeztet ha valami nem tűnik megfelelőnek  a változtatásaiddal.\n\nHa minden rendben van, beírhatsz egy rövid ismertetést a szerkesztéseiddel kapcsolatban\nés újból a 'Mentés' gombra kattintva közzéteheted a változtatásaidat és az információkat\nvelük kapcsolatban az [OpenStreetMap.org](http://www.openstreetmap.org/) webhelyen,\nahol az összes felhasználónak láthatóak és elérhetőek lesznek, hogy azokra építhessenek,\nfejleszthessék azokat.\n\nHa nem tudod befejezni a szerkesztéseidet egyszerre, elhagyhatod a szerkesztő ablakot, mert\namikor visszatérsz (ugyanazzal a böngészővel és számítógéppel), a szerkesztő fel fogja ajánlani,\nhogy visszaállítsa-e a korábbi munkádat.\n",
+        "help": "# Súgó\n\nEz egy szerkesztő az [OpenStreetMap](http://www.openstreetmap.org/)-hoz, a szabadon szerkeszthető és felhasználható világtérképhez. A környezetedről tölthetsz fel, vagy frissíthetsz adatokat, ezáltal mindenki számára jobbá téve egy ingyenes térképet.\n\nAmit ezen a térképen alkotsz, mindenki számára látható lesz, aki használja az OpenStreetMap-ot. A szerkesztéshez [be kell jelentkezned]\n(https://www.openstreetmap.org/login)\n\nAz [iD szerkesztő](http://ideditor.com/) egy együttműködésen alapuló projekt, a [GitHub-on elérhető forráskóddal](https://github.com/openstreetmap/iD), aminek a fordításába és fejlesztésébe te is besegíthetsz.\n",
+        "editing_saving": "# Szerkesztés és Mentés \n\nA szerkesztőt elsődlegesen online munkára tervezték és te jelenleg egy weblapon éred el. \n\n### Elemek kiválasztása \n\nEgy térképelem, mint út vagy érdekes hely kiválasztásához kattints rá a térképen. Ettől a kiválasztott elem kiemelődik és megnyílik egy panel az adataival, és egy menüvel, ami mutatja, miket tudsz az elemmel csinálni. Több elemet a 'Shift' gomb nyomva tartása közbeni kattintással, vagy húzással tudsz kiválasztani. A húzással kijelölöd a bekeretezett részen lévő összes elemet, lehetővé téve, hogy egyszerre több mindent változtass. \n\n### Szerkesztések mentése \n\nAmikor utakat, épületeket, helyeket szerkesztesz, ezek a változások helyileg lesznek tárolva, amíg nem mented őket a szerverre. Ne aggódj, ha elrontasz valamit - vissza tudod vonni a változtatásaidat a visszavonás gombra kattintva, a mégis gombra kattintva pedig a korábban visszavont változtatásaidat állíthatod vissza. \n\nKattints a 'Mentés' gombra, ha végeztél egy terület szerkesztésével - például, ha befejezted egy város részletének szerkesztését és egy másik területet szeretnél szerkeszteni. Lehetőséged lesz visszanézni, hogy mit csináltál. A szerkesztő hasznos tanácsokat biztosít és figyelmeztet ha valami nem tűnik megfelelőnek a változtatásaiddal. \n\nHa minden rendben van, beírhatsz egy rövid ismertetést a szerkesztéseiddel kapcsolatban és újból a 'Mentés' gombra kattintva közzéteheted a változtatásaidat és az információkat velük kapcsolatban az [OpenStreetMap.org](http://www.openstreetmap.org/) webhelyen, ahol az összes felhasználónak láthatóak és elérhetőek lesznek, hogy azokra építhessenek, fejleszthessék azokat. \n\nHa nem tudod befejezni a szerkesztéseidet egyszerre, elhagyhatod a szerkesztő ablakot, mert amikor visszatérsz (ugyanazzal a böngészővel és számítógéppel), a szerkesztő fel fogja ajánlani, hogy visszaállítsa-e a korábbi munkádat.\n\n### Szerkesztő használata\n\nA szerkesztést megkönnyítő gyorsbillentyűket [itt](http://wiki.openstreetmap.org/wiki/Hu:iD/Shortcuts) találhatod meg.\n",
         "roads": "# Utak\n\nA szerkesztőprogrammal tudsz utakat létrehozni, javítani és törölni. Az utak \nsokfélék lehetnek: ösvények, közutak, kerékpárutak, stb. – minden gyakran \nkeresztezett szakaszt térképezni kell.\n\n### Kiválasztás\n\nÚt kiválasztásához kattints rá. Meg fog jelenni kiemelve, mellette egy kis eszköztár \nmenüvel és egy oldalsávval, ami további információkat mutat az útról.\n\n### Módosítás\n\nGyakran láthatod, hogy az út nincs a mögötte lévő légifelvételhez, vagy GPS \nnyomvonalhoz igazítva. Ha megbizonyosodtál arról, hogy nem a légifelvétel téved, \nhelyreigazíthatod az utakat.\n\nElőször is kattints a módosítandó útra. Ettől kiemelődik az út és megjelennek a\nkezelőpontjai, amiket mozgatni tudsz a megfelelő helyre. Ha új kezelőpontot \nszeretnél hozzáadni, hogy részletesebb utat kapj, kattints duplán az útnak egy \nolyan részére, ahol még nincs pont.\n\nHa egy út egy másik útba csatlakozik, de a térképen nincsenek összekapcsolva, \nhúzd az egyik út kezelőpontját a másik útra, és össze fognak kapcsolódni. \nAz utak megfelelő összekapcsolása a térképen nagyon fontos, útvonaltervezéshez \nlétfontosságú.\n\nHasználhatod a 'Mozgatás' eszközt is, vagy megnyomhatod az 'M' gyorsbillentyűt, ha az \naz egész utat szeretnéd mozgatni. Mozgatás után kattintással rögzítheted az új helyén.\n\n### Törlés\n\nHa egy út teljesen hibás – ha azt látod, hogy egyáltalán nincs rajta a légifelvételen, \nés biztos vagy benne, hogy nem is létezik –, törölheted, amivel eltávolítod a térképről. \nLegyél óvatos elemek törlésekor, akárcsak bármilyen más szerkesztésnél, a mindenki \náltal látható eredmény és a légifelvétel gyakran elavult, lehet, hogy az utat nemrég építették.\n\nAz út törléséhez előbb válaszd ki, majd kattints a kuka ikonra, vagy nyomd meg a Delete \nbillentyűt.\n\n### Létrehozás\n\nTaláltál egy utat, ami még nincs rajta a térképen? Kattints a bal felső eszköztár 'Vonal' \nikonjára vagy nyomd meg a '2'-es billentyűt és kezdd el rajzolni a vonalat.\n\nA rajzolás megkezdéséhez kattints a térképen az út elejére. Ha az út \negy másik meglévő útból ágazik ki, arra a helyre kattints, ahol csatlakoznak.\n\nEzután kattintással hozz létre pontokat a műholdkép vagy GPS nyomvonal alapján, \nhogy a vonal az út középvonalát kövesse. Ha az utad keresztez egy másik utat, kapcsold \nössze őket a metszéspontjukra kattintva. Ha kész vagy a rajzolással, kattints duplán, \nvagy nyomj a billentyűzeten egy 'Enter'-t.\n",
-        "gps": "# GPS\n\nA GPS adatok az OpenStreetMap adatainak legmegbízhatóbb forrásai. Ez a\nszerkesztő támogatja a helyi nyomvonalakat - a helyi számítógépen lévő\n„.gpx” fájlokat. Az ilyen fajta GPS nyomvonalakat begyűjtheti számos\nokostelefon alkalmazással, valamint személyes GPS hardverrel.\n\nHa információt szeretne arról, hogy hogyan végezhet GPS felmérést, olvassa\nel [felmérés GPS eszközzel](http://learnosm.org/en/beginner/using-gps/) tájékoztatót.\n\nA GPX nyomvonal térképezéshez való használatához fogja meg és ejtse a GPX\nfájlt a térképszerkesztőre. Ha sikerült felismerni, akkor világos lila\nvonallal lesz hozzáadva a térképhez. Kattintson a jobb oldalon lévő\n„Térképadatok” menüre ennek az új GPX-alapú rétegnek az engedélyezéshez,\nletiltáshoz vagy a nagyításhoz.\n\nA GPX nyomvonal nem kerül közvetlenül feltöltésre az OpenStreetMap\nadatbázisba - a használatának legjobb módja a térképre rajzolás. Használja\nútmutatóként új elemek hozzáadásához, és [töltse fel az OpenStreetMap](http://www.openstreetmap.org/trace/create)\nadatbázisába, hogy más felhasználók is használhassák.\n",
         "imagery": "# Légifelvétel\n\nA légifelvétel a térképezés egyik fontos forrása. A repülőgépes ortofotók, műholdképek és szabadon összeállított források kombinációja rendelkezésre áll a szerkesztőben a bal oldali menü 'Háttérbeállítások' gombjára kattintva.\n\nAlapértelmezésként a [Bing Maps](http://www.bing.com/maps/) műholdkép réteg jelenik meg a szerkesztőben, de ahogy új helyekre görgeted a térképet, új források jelennek meg. Néhány országban, mint az Egyesül Államok, Franciaország, vagy Dánia nagyon jó minőségű légifelvételek érhetőek el egyes területeken.\n\nA légifelvételek gyakran el vannak csúszva a valósághoz képest, a légifelvétel szolgáltatók hibájából. Ha látsz egy csomó utat eltolódva a háttértől, ne húzd őket rögtön a háttérképhez. Ehelyett igazítsd úgy a háttérképet, hogy a meglévő adatok illeszkedjenek rá. Ehhez kattints a Háttérbeállítások menü 'Elcsúszás korrigálása' gombjára.\n",
         "addresses": "# Lakcímek\n\nA lakcímek a térkép egyik leghasznosabb információi.\n\nHabár a címeket gyakran az utca részeként ábrázolják, az OpenStreetMap\naz utca mentén levő házak és helyek tulajdonságaiként tárolja őket.\n\nCím információkat adhatsz épület körvonalként felrajzolt helyekhez, vagy\nönálló pontokhoz. A címadatok javasolt forrása a helyszíni felmérés, vagy\nszemélyes ismeretek. Mint minden más adatnál, a kereskedelmi források\n(mint Google Maps) másolása szigorúan tilos.\n",
-        "inspector": "# A címkeszerkesztő használata\n\nA címkeszerkesztő az ablak jobb oldalán jelenik meg, amikor egy elemet \nkiválasztasz, lehetővé téve a részleteinek szerkesztését.\n\n### Elemtípus kiválasztása\n\nMiután létrehoztál egy pontot, vonalat, vagy területet, ki tudod választani, hogy \naz elem milyen típusú, például közút, lakóút, szupermarket, vagy egy kávézó.\nA címkeszerkesztő gombokat jelenít meg a leggyakoribb elemtípussal, a többi \ntípust pedig a keresődobozba írva tudod megtalálni.\n\nKattints az 'i'-re az elemtípus gomb jobb sarkában, hogy többet tudj meg róla. \nA típus kiválasztásához kattints rá.\n\n### Űrlapok használata és a címkék szerkesztése\n\nMiután választottál egy elemtípust, vagy kiválasztottál egy típussal rendelkező \nelemet, a címkeszerkesztő megjelenít egy űrlapot az elem részletes adataival, \nmint a neve, vagy címe.\n\nA mezők alatt egy ikonsort láthatsz, amivel egyéb részleteket adhatsz meg, \npéldául [Wikipédia](http://www.wikipedia.org/) hivatkozás, kerekesszékes \nmegközelíthetőséget, stb.\n\nA címkeszerkesztő legalján találsz egy 'Összes címke' gombot, amivel bármilyen \ntetszőleges címkét megadhatsz. A [Taginfo](http://taginfo.openstreetmap.org/) \negy jó forrás, ha többet akarsz megtudni a népszerű címkekombinációkról.\n\nA címkeszerkesztőben végzett változtatások automatikusan alkalmazva \nlesznek a térképen. Bármikor visszavonhatod őket a 'Visszavonás' gombbal.\n\n",
         "buildings": "# Épületek\n\nAz OpenStreetMap a világ legnagyobb épület adatbázisa. Te is bővítheted és \nfejlesztheted ezt az adatbázist.\n\n### Kiválasztás\n\nÉpületet a körvonalára kattintva tudsz kiválasztani. Ez kiemeli az épületet és megnyitja az eszközmenüt és a további információkat mutató oldalsávot.\n\n### Módosítás\n\nAz épületek gyakran pontatlan helyen vannak, vagy pontatlan a címkézésük.\n\nEgy egész épület mozgatásához kattints a 'Mozgatás' eszközre. Mozgasd az \negeret az épület eltolásához, és kattints, ha jó helyre került.\n\nAz épület egyedi alakjának javításához kattints a korvonalának pontjaira és \nhúzd őket jó helyre.\n\n### Létrehozás\n\nAz épületek létrehozása körüli egyik fő kérdés, hogy az OpenStreetMap \naz épületeket alakzatként és pontként is tudja tárolni. Az ökölszabály, hogy \n_az épületet alakzatként kell térképezni, hacsak lehet_ és a cégeket, lakásokat, \nszolgáltatásokat és egyéb a házon belül működő dolgokat a ház körvonalán belüli \npontként kell térképezni.\n\nKezd az épület alakzatként rajzolását a 'Terület' gombra kattintva a bal felső \neszköztáron. Befejezni az 'Enter' billentyűvel, vagy a terület első pontjára kattintva \ntudod, bezárva az alakzatot.\n\n### Törlés\n\nHa egy épület teljesen hibás – például azt látod, hogy nincs rajta a műholdképen és \nbiztos vagy benne, hogy nem létezik – törölheted, ezzel eltávolítva a térképről.\n\nHa egy épület teljesen hibás – ha azt látod, hogy egyáltalán nincs rajta a légifelvételen, \nés biztos vagy benne, hogy nem is létezik –, törölheted, ezzel eltávolítva a térképről.\nLegyél óvatos elemek törlésekor, akárcsak bármilyen más szerkesztésnél, a mindenki \náltal látható eredmény és a légifelvétel gyakran elavult, lehet, hogy a ház egyszerűen új építésű.\n\n\nHáz törléséhez előbb válaszd ki, majd kattints a kuka ikonra, vagy nyomd meg a Delete \nbillentyűt.\n",
         "relations": "# Kapcsolatok\n\nA kapcsolat az OpenStreetMap egyik speciális típusú eleme, amely más\nelemeket csoportosít egymáshoz. Például a kapcsolatok két gyakori típusa\naz *útkapcsolatok*, amely egy adott autópályához vagy autóúthoz tartozó\nút szakaszait csoportosítja, és a *multipoligonok*, amelyek egy komplex\nterületet (több darabból állót vagy lyukat tartalmazót - akárcsak egy\nfánk) meghatározó vonalakat csoportosítanak egymáshoz.\n\nAz elemek csoportját a kapcsolatban *tagoknak* hívják. Az oldalsávon\nláthatja, hogy mely kapcsolatok az elem tagjai, és egy kapcsolatra\nkattintva kijelölheti azt. Ha egy kapcsolat ki van jelölve, akkor láthatóvá\nválik annak összes tagja az oldalsávon felsorolva és a térképen kiemelve.\n\nA legtöbb rész esetében az iD automatikusan gondoskodik a kapcsolatok\nkarbantartásáról, miközben ön szerkeszt. A legfontosabb dolog, amit tudnia\nkell, hogy ha törli egy út szakaszát, hogy pontosabban újrarajzolja, akkor\nmeg kell győződnie arról, hogy az új szakasz ugyanannak a kapcsolatnak a\ntagja, mint az eredeti.\n\n## Kapcsolatok szerkesztése\n\nHa kapcsolatokat szeretne szerkeszteni, itt találja az alapokat.\n\nEgy kapcsolathoz való elem hozzáadásához jelölje ki az elemet, kattintson\na „+” gombra az oldalsáv „Összes kapcsolat” szakaszában, és válassza ki\nvagy gépelje be a kapcsolat nevét.\n\nEgy új kapcsolat létrehozásához válassza ki az első elemet, amely a tagja\nlesz annak, kattintson a „+” gombra az „Összes kapcsolat” szakaszban, és\nválassza az „Új kapcsolat…” menüpontot.\n\nEgy elem kapcsolatból való eltávolításához jelölje ki az elemet, és\nkattintson a kuka gombra azon kapcsolat mellett, amelyből el szeretné\ntávolítani.\n\nLétrehozhat lyukakkal rendelkező multipoligonokat az „Egyesítés” eszköz\nhasználatával. Rajzoljon két területet (belső és külső), tartsa nyomva a\nShift billentyűt, és kattintson egyesével rájuk mindkettő kijelöléséhez,\nmajd kattintson az „Egyesítés” (+) gombra.\n"
     },
@@ -563,7 +589,6 @@
         },
         "fields": {
             "access": {
-                "label": "Behajtás",
                 "options": {
                     "designated": {
                         "description": "Behajtást engedélyező tábla, vagy helyi jogszabály",
@@ -590,9 +615,7 @@
                         "title": "Engedélyezett"
                     }
                 },
-                "placeholder": "Ismeretlen",
                 "types": {
-                    "access": "Általános",
                     "bicycle": "Kerékpár",
                     "foot": "Gyalog",
                     "horse": "Ló",
@@ -600,7 +623,6 @@
                 }
             },
             "access_simple": {
-                "label": "Behajtás",
                 "placeholder": "igen"
             },
             "access_toilets": {
@@ -610,6 +632,7 @@
                 "label": "Cím",
                 "placeholders": {
                     "city": "város",
+                    "conscriptionnumber": "123",
                     "country": "Ország",
                     "district": "Kerület",
                     "hamlet": "Falucska",
@@ -740,6 +763,9 @@
             },
             "construction": {
                 "label": "típus"
+            },
+            "content": {
+                "label": "Tartalom"
             },
             "country": {
                 "label": "Ország"
@@ -2147,14 +2173,6 @@
                 "name": "Bejárat/Kijárat",
                 "terms": "Bejárat/Kijárat"
             },
-            "footway/crossing": {
-                "name": "Kereszteződés",
-                "terms": "Kereszteződés"
-            },
-            "footway/crosswalk": {
-                "name": "Zebra - gyalogátkelőhely",
-                "terms": "Zebra - gyalogátkelőhely"
-            },
             "footway/sidewalk": {
                 "name": "Járda",
                 "terms": "Járda"
@@ -2207,14 +2225,6 @@
                 "name": "Buszmegálló",
                 "terms": "Buszmegálló"
             },
-            "highway/crossing": {
-                "name": "Gyalogátkelő",
-                "terms": "Gyalogátkelőhely, Zebra"
-            },
-            "highway/crosswalk": {
-                "name": "Zebra - gyalogátkelőhely",
-                "terms": "gyalogos utátjáró"
-            },
             "highway/cycleway": {
                 "name": "Kerékpárút",
                 "terms": "Bicikliút"
@@ -2246,10 +2256,6 @@
             "highway/path": {
                 "name": "Ösvény",
                 "terms": "Ösvény"
-            },
-            "highway/pedestrian": {
-                "name": "Gyalogos",
-                "terms": "Gyalogos"
             },
             "highway/primary": {
                 "name": "Főút",
@@ -2394,10 +2400,6 @@
             "junction": {
                 "name": "Elágazás",
                 "terms": "Elágazás, útkereszteződés, csomópont"
-            },
-            "landuse": {
-                "name": "Területfunkció",
-                "terms": "Területhasználat"
             },
             "landuse/allotments": {
                 "name": "Kertek",
@@ -2947,10 +2949,6 @@
                 "name": "Vasúti megállóhely",
                 "terms": "Vasúti megállóhely, Vasúti megálló"
             },
-            "railway/level_crossing": {
-                "name": "Szintbeli kereszteződés",
-                "terms": "Szintbeli kereszteződés"
-            },
             "railway/monorail": {
                 "name": "Egysínű vasút",
                 "terms": " nyeregvasút, mágnesvasút "
@@ -3208,8 +3206,8 @@
                 "terms": "hajszobrász, frizérozó, frizuraszerviz, hajvágás, borbély, hajszalon , mesterfodrász, hajegyenesítés,haj,bajusz"
             },
             "shop/hardware": {
-                "name": "Háztartási felszerelés bolt",
-                "terms": "Háztartási bolt"
+                "name": "Barkácsbolt",
+                "terms": "Villanyszerelési szaküzlet"
             },
             "shop/hearing_aids": {
                 "name": "Hallókészülék bolt",

@@ -1,7 +1,7 @@
 {
     "modes": {
         "add_area": {
-            "title": "Polygone",
+            "title": "Surface",
             "description": "Ajouter des parcs, des bâtiments, des lacs ou d'autres polygones à la carte.",
             "tail": "Cliquez sur la carte pour ajouter un polygone tel qu'un parc, un lac ou un bâtiment."
         },
@@ -323,7 +323,11 @@
         "custom_button": "Modifier le fond personnalisé",
         "custom_prompt": "Saisir un template d'URL de tuile. Les symboles sont {z}, {x}, {y} pour la structure Z/X/Y et {u} pour la balance des domaines.",
         "fix_misalignment": "Corriger l'alignement",
-        "reset": "réinitialiser"
+        "reset": "réinitialiser",
+        "minimap": {
+            "description": "Minicarte",
+            "tooltip": "Montre une carte de vue d'ensemble pour aider à localiser la zone actuellement affichée."
+        }
     },
     "map_data": {
         "title": "Données cartographiques",
@@ -480,6 +484,7 @@
         "out": "Dézoomer"
     },
     "cannot_zoom": "Impossible de zoomer plus en arrière dans ce mode.",
+    "full_screen": "Basculer en plein écran",
     "gpx": {
         "local_layer": "Fichier GPX personnel",
         "drag_drop": "Glisser et déposer un fichier .gpx sur la page, ou cliquez sur le bouton droit pour rechercher",
@@ -494,12 +499,10 @@
     "help": {
         "title": "Aide",
         "help": "# Aide\n\nCeci est un éditeur pour [OpenStreetMap](http://www.openstreetmap.org/), la \ncarte du monde libre et éditable. Vous pouvez l'utiliser pour ajouter ou mettre à jour\nles données dans votre zone, et participer ainsi à la réalisation d'une carte du monde libre et à données ouvertes\nmeilleure pour tout le monde.\n\nLes modifications que vous réaliserez sur cette carte seront visibles par tous les utilisateurs d'\nOpenStreetMap.  Pour commencer à éditer, vous devez vous\n[connecter](https://www.openstreetmap.org/login).\n\nL'[éditeur iD](http://ideditor.com/) est un projet collaboratif dont le [code\nsource est disponible sur GitHub](https://github.com/openstreetmap/iD).\n",
-        "editing_saving": "# Éditer et sauvegarder⏎\n⏎\nCet éditeur est conçu principalement pour travailler en mode connecté, et vous l'accéder depuis un site Web en ce moment.⏎\n⏎\n### Sélectionner un élément de la carte⏎\n⏎\nPour sélection un élément de la carte, tel qu'une rue ou un point d'intérêt, cliquez sur ce dernier⏎\nsur la carte. Cette action mettra l'élément en surbrillance, et ouvrira le panneau latéral⏎\nqui affiche les propriétés de l'élément. Un menu apparaîtra également sur la carte,⏎\npermettant de poser des actions sur l'élément (telles que le déplacer, repositionner⏎\nses points constituants, etc).\n⏎\nPour sélectionner plusieurs éléments, appuyez sur la touche 'Majuscule'. Puis, cliquez⏎\nun à un sur les éléments à sélectionner. Alternativement, il est possible de dessinez un rectangle⏎\nsur la carte (toujours en appuyant sur 'Majuscule) pour effectuer la sélection multiple.⏎\nles points à sélectionner.⏎\n⏎\n### Enregistrer les modifications⏎\n⏎\nL'éditeur enregistre localement (sur votre ordinateur) toutes les modifications⏎\nque vous effectuez sur les éléments de la carte (les rues, les bâtiments, etc.).⏎\nCes modifications seront envoyées au serveur OpenStreetMap uniquement⏎\nlorsque vous appuierez sur \"Sauvegarder\".⏎\n⏎\nNe vous faites donc pas de souci si vous faites une erreur. Vous pouvez annuler⏎\ntout changement effectué en appuyant sur le bouton d'annulation (la flèche de demi-tour⏎\npointant vers la gauche).⏎\n⏎\nLorsque vous avez terminé un groupe de modifications - par exemple, vous avez⏎\ncomplété une partie de la ville et vous voulez en débuter une nouvelle,⏎\nil suffit d'appuyer sur le bouton \"Sauvegarder\". Vos changements ne seront pas⏎\nenvoyés immédiatement - vous avez l'occasion de réviser le travail effectué⏎\navant de confirmer les changements. ⏎\n⏎\nSi tout semble bon, entrez un commentaire décrivant vos changements⏎\n(par exemple: \"Ajout d'une boulangerie\" ou \"Ajout de commerces du quartier\"),⏎\npuis appuyez à nouveau sur le bouton 'Sauvegarder' (qui, cette fois-ci, apparaîtra\nen bleu dans le panneau latéral). Vos changements seront alors envoyés à⏎\n[OpenStreetMap.org](http://www.openstreetmap.org/), où il seront partagés et rendus⏎\nvisibles à tous les autres utilisateurs.\n⏎\nSi vous ne pouvez pas terminer vos changements en une seule séance, vous pouvez⏎\nfermer la fenêtre de l'éditeur. Vos changements seront enregistrés localement.⏎\nLorsque vous ouvrirez à nouveau l'éditeur, sur le même ordinateur et avec le même⏎\nnavigateur Web, l'éditeur vous proposera de récupérer le travail de la séance précédente.⏎\n",
+        "editing_saving": "# Édition & sauvegarde\n\nCet éditeur est conçu pour fonctionner de façon connecté et vous êtes \nactuellement en train de l'utiliser depuis un site web.\n\n### Sélection des éléments\n\nPour sélectionner un élément de la carte comme une route ou un point d’intérêt, \nil faut cliquer dessus sur la carte. Il sera alors mis en surbrillance et un \npanneau latéral s’ouvrira avec tous ses détails élément ainsi qu'un menu des \nactions disponibles pour cet élément.\n\nPour sélectionner plusieurs éléments, laisser appuyer sur la touche «Shift» du \nclavier. Pendant ce temps, vous pouvez au choix sélectionner les différents \néléments directement ou dessiner une zone rectangulaire à l'aide de la souris. \nLorsque le bouton de la souris est relâché, tous les objets à l'intérieur du \nrectangle seront sélectionnés.\n\n### Sauvegarde des modifications\n\nLorsque vous modifiez la carte (par exemple modification de routes, bâtiments \net places), ces changements sont conservés localement en attendant que vous \nles sauvegardiez sur le serveur. En cas d'erreur, il est possible d'annuler les \nchangements en cliquant sur le bouton idoine. De façon similaire il est possible\n de ré-appliquer un changement qui a été annulé.\n\nLorsque vous souhaitez sauvegarder sur le serveur vos changements, appuyer sur \nle bouton «Sauvegarder». La liste de vos modifications s'affichera alors, vous \npermettant de vérifier vos modifications. Par ailleurs, l'éditeur vous \npréviendra et conseillera si quelque chose semble incorrect.\n\nSi tout semble correct, vous pourrez alors écrire un commentaire du travail \neffectué (par exemple «Ajout d'une boulangerie») puis il faudra à nouveau \nappuyer sur le bouton «Sauvegarder» pour envoyer les changements sur \n[OpenStreetMap.org](http://www.openstreetmap.org/). Vos changements seront \nvisible par tous peu de temps après.\n\nSi vous ne pouvez pas terminer vos changements en une seule fois, vous pouvez \nfermer la fenêtre de l'éditeur. Vos changements seront enregistrés localement. \nLorsque vous ouvrirez à nouveau l'éditeur, sur le même ordinateur et avec le \nmême navigateur Web, l'éditeur vous proposera de récupérer le travail de la \nséance précédente.\n\n### Utilisation de l'éditeur\n\nUne liste des raccourcis claviers est disponible \n[ici](http://wiki.openstreetmap.org/wiki/ID/Shortcuts).\n",
         "roads": "# Routes\n\nVous pouvez créer, mettre à jour et supprimer des routes à l'aide de l'éditeur. Il peut s'agir de tous types de routes : chemins, autoroutes, pistes cyclables, et plus encore : toute voie régulièrement fréquentée peut être cartographiée.\n\n### Sélection\n\nCliquez sur une route pour la sélectionner. Elle sera alors surlignée et un menu 'outils' apparaîtra sur la carte, ainsi qu'une barre d'état affichant des informations supplémentaires.\n\n### Modification\n\nIl est fréquent que les routes ne soient pas bien alignées avec l'imagerie satellite ou avec les traces GPS. Vous pouvez ajuster et corriger la position des routes.\n\nCliquez d'abord sur la route à modifier. Elle est alors surlignée et des points de contrôle apparaissent qui permettent de corriger sa position. Pour ajouter des points de contrôle, double-cliquez sur un segment de la route sans nœuds.\n\nSi la route est connectée à une autre, mais que la connexion est incorrecte, vous pouvez déplacer un de ses points de contrôle sur la seconde route pour corriger la connexion. Des routes bien connectées sont essentielles pour la carte et pour fournir de bonnes informations d'itinéraire.\n\nVous pouvez également cliquer sur l'outil 'Déplacer' ou appuyer sur le raccourci `M` pour déplacer l'ensemble de la route en une fois, puis cliquer de nouveau une fois pour sauvegarder le déplacement.\n\n### Suppression\n\nSi une route est complètement fausse - c'est-à-dire qu'elle n'apparaît pas sur l'image satellite, et que dans l'idéal, vous avez confirmé qu'elle n'existe pas sur le terrain - vous pouvez la supprimer, ce qui l'enlèvera de la carte. Faites attention lorsque vous supprimez des éléments : comme n'importe quelle autre modification, le résultat sera visible par tout le monde sur la carte. Les photos aériennes sont souvent dépassées et la route est peut-être tout simplement récente.\n\nPour supprimer une route, sélectionnez-la en cliquant dessus, puis cliquez sur l'icône 'Poubelle' ou appuyez sur la touche 'Suppr'.\n\n### Création\n\nVous avez constaté qu'une route de votre connaissance manque à la carte ? Cliquez sur l'icône 'Ligne' en haut à gauche de l'éditeur ou appuyez sur le raccourci `2` pour dessiner une route. \n\nPour commencer le dessin, cliquez sur l'endroit où commence la route. Si elle commence à l'embranchement d'une autre route, commencez le dessin en cliquant à l'endroit de la connexion.\n\nCliquez ensuite régulièrement le long de la route pour ajouter des points, en utilisant l'imagerie satellite comme référence. Si la route que vous dessinez croise une autre route, connectez les deux en cliquant à l'endroit de l'intersection. Lorsque vous avez terminé le dessin, double-cliquez ou appuyez sur 'Entrée'.\n",
-        "gps": "# GPS\n\nLa donnée GPS est la source la plus fiable de données pour OpenStreetMap. Cet éditeur\nsupporte les traces en local - fichiers `.gpx` sur votre ordinateur. Vous pouvez collecter\nce genre de trace GPS à l'aide de nombreuses applications pour smartphones ainsi qu'avec\ndu matériel GPS personnel.\n\nPour de la documentation sur la manière de faire un relevé GPS, lisez\n[Sur le terrain avec un GPS](http://learnosm.org/fr/beginner/using-gps/).\n\nPour utiliser un tracé GPX pour cartographier, effectuer un \"glissé-déposé\" du fichier GPX dans l'éditeur de cartes.\nS'il est reconnu, il sera ajouté à la carte comme une ligne violette en surbrillance.\nCliquez dans le menu \"Données de la carte\" sur le côté droit pour activer,\ndésactiver, ou zoomer dans ce nouveau calque GPX.\n\nLe tracé GPX n'est pas directement chargé vers OpenStreetMap - le meilleur moyen de\nl'utiliser est de dessiner sur la carte, en l'utilisant comme guide pour les nouveaux éléments que\nvous ajoutez, et aussi de le [charger dans OpenStreetMap](http://www.openstreetmap.org/trace/create) pour que les autres utilisateurs puissent s'en servir.\n",
         "imagery": "# Fond de carte⏎\n⏎\nLes photos aériennes sont une source importante pour cartographier. Une\ncompilation de photos prises d'avion, imageries satellites, et autres sources\nlibre d'utilisation sont disponibles dans l'éditeur dans le menu \"Configuration\ndu fond de carte\" à gauche.⏎\n⏎\nPar défaut, l'imagerie aérienne de [Bing Maps](http://www.bing.com/maps/)\nest utilisée dans l'éditeur, mais lorsque vous zoomez sur la carte, d'autres sources\nsont parfois disponibles dans certaines zones. Certains pays tels que la France, les\nÉtats-Unis ou le Danemark disposent d'images de très haute qualité sur certaines\nzones.⏎\n⏎\nCertaines images sont parfois décalées par rapport aux données, notamment\nà cause d'un mauvais calibrage. Si vous voyez de nombreux éléments tous décalés\npar rapport au fond de carte, ne déplacez pas immédiatement ces éléments. A la\nplace, vous pouvez ajuster le fond de carte afin qu'il soit aligné aux données en\ncliquant sur \"Corriger l'alignement\" en bas de l'interface de configuration du fond\nde carte.⏎\n",
         "addresses": "# Adresses\n\nLes adresses sont parmis les informations les plus utiles pour la carte.\n\nAlors que les adresses sont souvent représentées comme faisant partie des rues, dans OpenStreetMap, les adresses sont enregistrées comme attributs des bâtiments le long des rues.\n\nVous pouvez ajouter une adresse sur les éléments modélisés avec un polygone\net sur ceux modélisés avec des points. La meilleure source de données afin\nde cartographier les adresses reste le relevé sur le terrain ou les connaissances personnelles, car comme pour tous les autres éléments, la copie de données à partir de contenu non libre de droits comme Google Maps est strictement interdite.\n",
-        "inspector": "# Utilisation de l'inspecteur⏎\n⏎\nL'inspecteur est l'élément de l'interface utilisateur qui apparaît à droite de la page quand un élément est sélectionné. Il permet de mettre à jour les détails concernant l'élément sélectionné.⏎\n⏎\n### Sélectionner un type d'élément⏎\n⏎\nAprès ajout d'un point, d'une ligne ou d'un polygone, vous pouvez indiquer de quel type d'élément il s'agit : une route principale ou résidentielle, un supermarché, un café... L'inspecteur affiche des boutons pour les éléments les plus communs, et vous pouvez trouver les autres à l'aide du formulaire de recherche.⏎\n⏎\nCliquez sur 'i' dans le coin en bas à droite des boutons pour en savoir plus sur l'élément dont il s'agit. Cliquez sur le bouton pour choisir cet élément.⏎\n⏎\n### Utiliser les formulaires et les tags⏎\n⏎\nAprès avoir choisi le type d'élément, ou lorsque vous sélectionnez un élément dont la nature est déjà indiquée, l'inspecteur affiche des champs comprenant des détails sur l'élément concerné - adresse, nom, etc.⏎\n⏎\nEn-dessous des champs, vous pouvez cliquer sur les icônes pour ajouter des détails supplémentaires, comme des informations issues de [Wikipedia](http://www.wikipedia.org/), des renseignements sur l'accès handicapé, ou plus encore.⏎\n⏎\nEn bas de l'inspecteur, cliquez sur 'attributs supplémentaires' pour ajouter des attributs arbitraires à l'élément. [Taginfo](http://taginfo.openstreetmap.org/) est une excellente ressource pour en savoir plus sur les combinaisons d'attributs les plus fréquentes.⏎\n⏎\nLes changements que vous effectuez dans l'inspecteur sont immédiatement visibles sur la carte. Vous pouvez les annulez dès que vous le souhaitez en cliquant sur 'annuler'. ⏎\n⏎\n",
         "buildings": "# Bâtiments\n\nOpenStreetMap est la plus grande base de données au monde sur le bâti.\nVous pouvez améliorer cette base de données.\n\n### Sélection\n\nVous pouvez sélectionner un bâtiment en cliquant sur son contour. Le bâtiment\nsera ainsi surligné, une boîte à outils apparaîtra, ainsi qu'un panneau contenant\nles informations sur le bâtiment.\n\n### Correction\n\nParfois, un bâtiment est mal placé ou possède des informations incorrectes.\n\nPour déplacer un bâtiment dans son intégralité, sélectionnez-le, puis cliquez\nsur l'outil \"Déplacer\". Déplacez ensuite la souris, puis cliquez lorsque le\nbâtiment est placé correctement.\n\nPour corriger la forme d'un bâtiment, glissez-déposez les points du contour\ndu bâtiment.\n\n### Création\n\nL'une des problématiques concernant les bâtiments est qu'ils peuvent être\nreprésentés à la fois par un point ou par un polygone. La règle d'or est de\n_dessiner les bâtiments avec des polygone dès que c'est possible_, et de\ncartographier les entreprises, équipements, adresses, et tout ce qui ne\ndépend pas directement de la construction comme des points placés\nau sein de la forme du bâtiment.\n\nDessinez un bâtiment en cliquant sur le bouton \"Polygone\" en haut à gauche\nde l'interface, ajoutez des points en cliquant sur la carte et terminez la forme\nen cliquant sur le premier point, ou en appuyant sur la touche \"Entrée\" de\nvotre clavier.\n\n### Suppression\n\nSi un bâtiment dessiné est inexistant (par exemple s'il n'existe pas sur l'image\nsatellite et que vous avez vérifié sur place que ce n'était pas une construction\nrécente), vous pouvez le supprimer. Attention avant de supprimer un élément ;\ntout le monde peut constater que vous l'avez supprimé, et il peut s'agir d'un\nélément plus récent que l'image satellite.\n\nVous pouvez supprimer un bâtiment en le sélectionnant, puis en cliquant sur\nl'icône représentant une poubelle, ou en appuyant sur la touche \"Suppr\" de\nvotre clavier.\n",
         "relations": "# Relations⏎\n⏎\nUne relation est un élément spécial dans OpenStreetMap qui permet de regrouper ensemble d'autre éléments\nPar exemple, les deux plus courants types de relations sont *route relations*,\nqui regroupe des sections de route qui appartiennent à une autoroute, \net *multipolygons*, qui regroupe plusieurs lignes qui définissent\nune zone complexe (une avec plusieurs pièces ou trous à l’intérieur comme un donut).⏎\n⏎\nLe groupe d'éléments dans une relation sont appelés *members*. Dans le menu de côté, vous pouvez\nvoir dans quelles relations l'élément appartient, et sélectionner une des relations pour voir.\nLorsque la relation est sélectionnée, vous pouvez voir tous\nles membres listés dans le menu de côté et la mettre en sur-impression sur la carte.⏎\n⏎\nPour la plus part, iD veillera à maintenir les relations automatiquement\npendant que vous éditez. La chose la plus importe que vous devez savoir est que si vous effacez une\nsection de route pour la rendre plus précise, vous devez vous assurer que \nla nouvelle section est un membre des même relations que l'originale.⏎\n⏎\n## Modifier des Relations⏎\n⏎\nSi vous voulez modifier des relations, voici les bases.⏎\n⏎\nPour apporter une information à une relation, sélectionnez l'élément, appuyez sur le bouton \"+\" dans la\nsection \"All relations\" du menu du côté, et sélectionnez ou saisissez le nom de la relation.⏎\n⏎\nPour créer une nouvelle relation, sélectionnez le premier élément qui doit en être membre,\nappuyez sur le bouton \"+\" dans le section \"All relations\", et sélectionner \"New relation...\".\n⏎\nPour retirer un élément d'une relation, sélectionnez l’élément et appuyez sur le symbole de la corbeille.\nbutton next de la relation si vous souhaitez la supprimer.⏎\n⏎\nVous pouvez créer des multipolygons avec des trous en utilisant l'outil \"Merge\". Dessinez deux polygones (inner\net outer), maintenez la touche Shift/Majuscule et appuyez sur chacune d'elles pour les sélectionner, et après\nappuyez le bouton \"Merge\" (+) .⏎\n"
     },
@@ -587,7 +590,7 @@
         },
         "fields": {
             "access": {
-                "label": "Accès",
+                "label": "Accès autorisé",
                 "options": {
                     "designated": {
                         "description": "Accès autorisé par des panneaux ou par une réglementation locale",
@@ -596,6 +599,10 @@
                     "destination": {
                         "description": "Circulation interdite, sauf pour accéder aux zones desservies",
                         "title": "Interdit sauf riverains"
+                    },
+                    "dismount": {
+                        "description": "Accès autorisé mais le cycliste-cavalier doit mettre pied à terre",
+                        "title": "Mettre pied à terre"
                     },
                     "no": {
                         "description": "Accès interdit au public",
@@ -614,9 +621,9 @@
                         "title": "Autorisé"
                     }
                 },
-                "placeholder": "Inconnu",
+                "placeholder": "Non spécifié",
                 "types": {
-                    "access": "Général",
+                    "access": "Tous",
                     "bicycle": "Vélos",
                     "foot": "À pied",
                     "horse": "Cavaliers",
@@ -624,7 +631,7 @@
                 }
             },
             "access_simple": {
-                "label": "Accès",
+                "label": "Accès autorisé",
                 "placeholder": "oui"
             },
             "access_toilets": {
@@ -634,6 +641,7 @@
                 "label": "Adresse",
                 "placeholders": {
                     "city": "Ville",
+                    "conscriptionnumber": "123",
                     "country": "Pays",
                     "district": "District",
                     "hamlet": "Hameau",
@@ -692,6 +700,9 @@
                 "label": "Type"
             },
             "amenity": {
+                "label": "Type"
+            },
+            "area/highway": {
                 "label": "Type"
             },
             "artist": {
@@ -785,6 +796,44 @@
             },
             "cuisine": {
                 "label": "Cuisine"
+            },
+            "cycleway": {
+                "label": "Bandes cyclables",
+                "options": {
+                    "lane": {
+                        "description": "Une bande cyclable séparée du trafic automobile par une ligne peinte",
+                        "title": "Bande cyclable ordinaire"
+                    },
+                    "none": {
+                        "description": "Pas de bande cyclable",
+                        "title": "Aucun"
+                    },
+                    "opposite": {
+                        "description": "Une bande cyclable qui permet de se déplacer dans les deux sens dans une rue à sens unique",
+                        "title": "Bande cyclable à double sens"
+                    },
+                    "opposite_lane": {
+                        "description": "Une bande cyclable qui permet de se déplacer dans la direction opposée du trafic",
+                        "title": "Bande cyclable à contresens"
+                    },
+                    "share_busway": {
+                        "description": "Une bande cyclable partagée avec une voie de bus",
+                        "title": "Bande cyclable partagée avec les bus"
+                    },
+                    "shared_lane": {
+                        "description": "Une bande cyclable sans séparation avec le trafic automobile",
+                        "title": "Bande cyclable partagée"
+                    },
+                    "track": {
+                        "description": "Une voie cyclable séparée du trafic par une barrière physique",
+                        "title": "Piste cyclable"
+                    }
+                },
+                "placeholder": "Aucun",
+                "types": {
+                    "cycleway:left": "Côté gauche",
+                    "cycleway:right": "Côté droit"
+                }
             },
             "delivery": {
                 "label": "Livraison"
@@ -963,6 +1012,15 @@
                     "semi_evergreen": "Semi-Sempervirent"
                 }
             },
+            "leaf_cycle_singular": {
+                "label": "Cycle de vie des feuilles",
+                "options": {
+                    "deciduous": "Caduac",
+                    "evergreen": "à feuilles persistantes",
+                    "semi_deciduous": "semi-caduque",
+                    "semi_evergreen": "semi-persistant"
+                }
+            },
             "leaf_type": {
                 "label": "Type de feuille",
                 "options": {
@@ -972,11 +1030,22 @@
                     "needleleaved": "Arbres à aiguilles"
                 }
             },
+            "leaf_type_singular": {
+                "label": "Type de feuilles",
+                "options": {
+                    "broadleaved": "Feuilles",
+                    "leafless": "Sans feuilles",
+                    "needleleaved": "Aiguilles"
+                }
+            },
             "leisure": {
                 "label": "Type"
             },
             "length": {
                 "label": "Longueur (mètres)"
+            },
+            "level": {
+                "label": "Niveau"
             },
             "levels": {
                 "label": "Niveaux",
@@ -1154,8 +1223,21 @@
             "recycling/glass": {
                 "label": "Accepte le verre"
             },
+            "recycling/glass_bottles": {
+                "label": "Accepte les bouteilles en verre"
+            },
             "recycling/paper": {
                 "label": "Accepte le papier"
+            },
+            "recycling/plastic": {
+                "label": "Accepte le plastique"
+            },
+            "recycling/type": {
+                "label": "Type de recyclage",
+                "options": {
+                    "centre": "Déchèterie",
+                    "container": "Conteneur de recyclage"
+                }
             },
             "ref": {
                 "label": "Référence"
@@ -1539,6 +1621,10 @@
                 "name": "Lavage de voiture, Lave auto",
                 "terms": "Lavage de voiture, lave auto"
             },
+            "amenity/casino": {
+                "name": "Casino",
+                "terms": "Casino"
+            },
             "amenity/charging_station": {
                 "name": "Borne de recharge",
                 "terms": "Station de recharge, Borne de recharge"
@@ -1697,7 +1783,7 @@
             },
             "amenity/recycling": {
                 "name": "Recyclage",
-                "terms": "Recyclage"
+                "terms": "déchèterie,déchetterie"
             },
             "amenity/register_office": {
                 "name": "Bureau d'état-civil",
@@ -1729,7 +1815,7 @@
             },
             "amenity/social_facility/group_home": {
                 "name": "Résidence collective pour personnes âgées",
-                "terms": "Résidence collective pour personnes âgées"
+                "terms": "Maison de retraite"
             },
             "amenity/social_facility/homeless_shelter": {
                 "name": "Foyer pour sans-abri",
@@ -1782,6 +1868,10 @@
             "area": {
                 "name": "Polygone",
                 "terms": "Zone, Aire"
+            },
+            "area/highway": {
+                "name": "Revêtement",
+                "terms": "Revêtement"
             },
             "barrier": {
                 "name": "Barrière",
@@ -2205,7 +2295,7 @@
             },
             "footway/crossing": {
                 "name": "Passage piéton ",
-                "terms": "Passage piéton"
+                "terms": "Traversée de rue"
             },
             "footway/crosswalk": {
                 "name": "Passage piéton",
@@ -2263,13 +2353,17 @@
                 "name": "Arrêt de bus",
                 "terms": "Arrêt de bus, Gare, Gare routière"
             },
+            "highway/corridor": {
+                "name": "Couloir intérieur",
+                "terms": "Corridor intérieur"
+            },
             "highway/crossing": {
-                "name": "Passage piéton",
-                "terms": "Carrefour, Intersection"
+                "name": "Passage piéton ",
+                "terms": "Passage piéton "
             },
             "highway/crosswalk": {
                 "name": "Passage piéton",
-                "terms": "Passage clouté"
+                "terms": "Passage piéton, Zébra, Passage zébré"
             },
             "highway/cycleway": {
                 "name": "Voie cyclable",
@@ -2304,8 +2398,8 @@
                 "terms": "Chemin"
             },
             "highway/pedestrian": {
-                "name": "Piétonnier",
-                "terms": "Piéton"
+                "name": "Rue piétonne",
+                "terms": "Rue piétonnisée,Espace piétonnier"
             },
             "highway/primary": {
                 "name": "Route principale",
@@ -2452,8 +2546,8 @@
                 "terms": "Jonction routière, Jonction, Carrefour, Intersection routière,  Intersection"
             },
             "landuse": {
-                "name": "Type de terrain",
-                "terms": "Utilisation du terrain"
+                "name": "Utilisation du sol",
+                "terms": "Type d'utilisation du sol, terrain"
             },
             "landuse/allotments": {
                 "name": "Jardins familiaux",
@@ -2488,8 +2582,8 @@
                 "terms": "Terre agricole : cultures et élevage"
             },
             "landuse/farmyard": {
-                "name": "Exploitation agricole",
-                "terms": "Cour de ferme, ensemble des bâtiments d'une ferme"
+                "name": "Cour de ferme",
+                "terms": "exploitation agricole,cour de ferme,ensemble des bâtiments d'une ferme"
             },
             "landuse/forest": {
                 "name": "Forêt",
@@ -2523,6 +2617,10 @@
                 "name": "Verger",
                 "terms": "Verger"
             },
+            "landuse/plant_nursery": {
+                "name": "Pépinière",
+                "terms": "Pépinière"
+            },
             "landuse/quarry": {
                 "name": "Carrière",
                 "terms": "Carrière"
@@ -2542,6 +2640,14 @@
             "leisure": {
                 "name": "Loisirs",
                 "terms": "Loisir"
+            },
+            "leisure/adult_gaming_centre": {
+                "name": "Jeux pour adultes",
+                "terms": "Jeux pour adultes"
+            },
+            "leisure/bowling_alley": {
+                "name": "Boulodrome",
+                "terms": "Jeux de boules"
             },
             "leisure/common": {
                 "name": "Terrain communal",
@@ -2650,6 +2756,10 @@
             "man_made": {
                 "name": "Édifices",
                 "terms": "Créé par l'homme"
+            },
+            "man_made/adit": {
+                "name": "Entrée de mine",
+                "terms": "Entrée de galerie de mine,Entrée de galerie"
             },
             "man_made/breakwater": {
                 "name": "Brise-lames",
@@ -2783,6 +2893,10 @@
                 "name": "Sommet",
                 "terms": "Pic, Mont"
             },
+            "natural/saddle": {
+                "name": "Col de montagne",
+                "terms": "Passe"
+            },
             "natural/scree": {
                 "name": "Pierrier",
                 "terms": "Pierrier, Éboulis"
@@ -2798,6 +2912,14 @@
             "natural/tree": {
                 "name": "Arbre",
                 "terms": "Arbre"
+            },
+            "natural/tree_row": {
+                "name": "Rangée d'arbres",
+                "terms": "Rangée d'arbres,Alignement d'arbres"
+            },
+            "natural/volcano": {
+                "name": "Volcan",
+                "terms": "Volcan"
             },
             "natural/water": {
                 "name": "Eau",
@@ -3024,8 +3146,8 @@
                 "terms": "Arrêt ferroviaire, Arrêt"
             },
             "railway/level_crossing": {
-                "name": "Passage à niveau",
-                "terms": "Passage à niveau, traverse de chemin de fer"
+                "name": "Passage à niveau ",
+                "terms": "Passage à niveau "
             },
             "railway/monorail": {
                 "name": "Monorail",
@@ -3236,8 +3358,8 @@
                 "terms": "Magasin de tissus"
             },
             "shop/farm": {
-                "name": "Étal de fruits et légumes",
-                "terms": "Étal de fruits et légumes"
+                "name": "Magasin de producteurs",
+                "terms": "Étal de fruits et légumes,Vente à la ferme,Vente producteurs"
             },
             "shop/fashion": {
                 "name": "Boutique de mode",

@@ -375,7 +375,6 @@
         },
         "fields": {
             "access": {
-                "label": "Πρόσβαση",
                 "options": {
                     "designated": {
                         "description": "Η πρόσβαση επιτρέπεται βάσει πινακίδων ή συγκεκριμένων τοπικών νόμων",
@@ -402,9 +401,7 @@
                         "title": "Επιτρέπεται"
                     }
                 },
-                "placeholder": "Άγνωστο",
                 "types": {
-                    "access": "Γενική",
                     "bicycle": "Ποδήλατα",
                     "foot": "Πεζοί",
                     "horse": "Άλογα",
@@ -412,7 +409,6 @@
                 }
             },
             "access_simple": {
-                "label": "Πρόσβαση",
                 "placeholder": "ναι"
             },
             "access_toilets": {
@@ -1320,9 +1316,6 @@
             "entrance": {
                 "name": "Είσοδος/Έξοδος"
             },
-            "footway/crossing": {
-                "name": "Διασταύρωση"
-            },
             "ford": {
                 "name": "Κοιτόστρωση"
             },
@@ -1337,10 +1330,6 @@
             "highway/bus_stop": {
                 "name": "Στάση Λεωφορείων",
                 "terms": "Στάση λεοφωρίου"
-            },
-            "highway/crossing": {
-                "name": "Διασταύρωση",
-                "terms": "Διάβαση"
             },
             "highway/cycleway": {
                 "name": "Ποδηλατόδρομος",
@@ -1368,10 +1357,6 @@
             "highway/path": {
                 "name": "Μονοπάτι",
                 "terms": "Διαδρομή, μονοπάτι"
-            },
-            "highway/pedestrian": {
-                "name": "Πεζόδρομος",
-                "terms": "Πεζόδρομος, Περιοχή μόνο για πεζούς"
             },
             "highway/primary": {
                 "name": "Πρωτεύων Δρόμος",
@@ -1467,10 +1452,6 @@
             "historic/wayside_shrine": {
                 "name": "Εικονοστάσιο",
                 "terms": "Εικονοστάσιο, Εικόνισμα"
-            },
-            "landuse": {
-                "name": "Χρήση γης",
-                "terms": "Χρήση γης"
             },
             "landuse/basin": {
                 "name": "Κανάλι Αποστράγγισης",
@@ -1810,10 +1791,6 @@
             },
             "railway/disused": {
                 "name": "Σιδηροτροχιά εκτός Χρήσης"
-            },
-            "railway/level_crossing": {
-                "name": "Ισόπεδη διάβαση",
-                "terms": "Ισόπεδη διάβαση"
             },
             "railway/platform": {
                 "name": "Σιδηροδρομική Αποβάθρα",

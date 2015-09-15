@@ -350,11 +350,9 @@
     },
     "help": {
         "title": "Pomoč",
-        "editing_saving": "# Urejanje & shranjevanje\n\nUrejevalnik je narejen predvsem za delo na spletu, trenutno do njega dostopate\npreko spletne strani.\n\n### Izbiranje objektov\n\nObjekte na zemljevidu, kot so cesta ali POI izberete tako, da kliknete nanje\nna zemljevidu. Izbrani objekt se bo poudaril, odprla se bo plošča z informacijami\no objektu in pokazal se bo nabor ukazov, ki jih lahko izvedete na objektu.\n\nZa izbiro večih objektov držite pritisnjeno tipko 'Shift'. Medtem lahko s klikom\nizberete na želene objekte ali pa z miško narišete kvadrat, v katerem so objekti.\nTako se bodo označili vsi objekti v kvadratu.\n\n### Shranjevanje sprememb\n\nVse spremembe - npr. urejene ceste, stavbe, mesta - so shranjene lokalno (na vaš računalnik),\ndokler jih ne shranite na strežnik. Ne skrbite, če med urejanjem naredite napako,\nsaj lahko spremembe razveljavite s klikom na gumb 'razveljavi', lahko pa jih tudi \nponoviteand s klikom na gumb 'ponovi'.\n\nKo končate z urejanjem skupine objektov, npr. dela mesta, in boste z urejanjem\nnadaljevali na drugem območju ali skupini objektov, kliknite 'Shrani'.Nato se bo\nprikazal povzetek vaših sprememb, urejevalnik pa bo tudi preveril in opozoril,\nče bo s spremembami karkoli narobe.\n\nČe bo vse v redu, lahko dodate kratek komentar o opravljenih spremembah\nin še enkrat kliknete 'Shrani' za pošiljanje sprememb na\n[OpenStreetMap.org](http://www.openstreetmap.org/), kjer jih bodo vsi ostali \nuporabniki videli in kasneje lahko tudi nadgrajevali oz. izboljšali.\n\nČe ne morete dokončati urejanja v enem zamahu, lahko pustite urejevalnik odprt\nin se vrnete (na isti računalnik in isti brskalnik) - urejevalnik vam bo ponudil\nobnovitev vseh opravljenih, toda ne še na strežnih poslanih sprememb.\n",
         "roads": "# Ceste\n\nS tem urejevalnikom lahko ceste ustvarjate, popravljate in jih brišete. Ceste so lahko vseh\ntipov: poti, avtoceste, kolovozi, kolesarske steze idr. - vsak pogosto prečkan del ceste\n\nnaj bi bil kartiran.\n\n### Izbiranje\n\nZa izbiranje ceste kliknite nanjo. Pokazal se bo obris ceste, ob njem pa\nmajhen meni z orodji in stranski meni z več informacijami o tej cesti.\n\n### Spreminjanje\n\nPogosto boste opazili ceste, ki se ne prekrivajo s sliko v ozadju,\nali z GPS sledjo. Te ceste lahko prilagodite tako, da so na pravilnem\nmestu.\n\nNajprej klinite na cesto, ki jo želite spremeniti. Cesta bo postala poudarjena in vzdolž\nnje se bodo prikazala vozlišča, ki jih lahko premaknete na pravo mesto. Če želite\ndodati nova vozlišča za bolj podroben potek ceste, dvokliknite na del ceste, ki\nše nima vozlišča, in pojavilo se bo novo vozlišče.\nČe se cesta dotika druge ceste, toda na zemljevidu ni pravilno povezana, \nlahko enega od njenih vozlišč premaknete na drugo cesto in ju tako\npovežete. Pravilno povezane ceste so pomembne za zemljevid\nin nujne za samodejno iskanje pot med različnimi kraji.\nS klikom na 'Premakni' ali s pritiskom tipke 'M' na tipkovnici lahko aktivirate orodje\nza premik celotne ceste naenkrat; premik je končan ob naslednjem kliku.\n### Odstranjevanje\nČe je potek ceste v celoti napačen - npr. ko cesta na satelitskem posnetku sploh ne obstaja\noz. še bolje, ko imate informacijo o tem iz prve roke - jo lahko izbrišete ter jo tako\nodstranite z zemljevida. Pri brisanju objektov bodite pozorni - \nkot pri ostalih načinih urejanja bodo posledice vidne vsakomur. Včasih so satelitski posnetki\nzastareli in morda zato kakšne ceste na njih še ni.\nCesto izbrišete tako, da najprej kliknete nanjo, nato pa kliknete na ikono za smetnjak ali\npa pritisnete tipko 'Izbriši'.\n\n### Creating\n\nSte opazili, da na zemljevidu manjka kakšna cesta? Za začetek risanja kliknite ikono 'Črta' \nlevo zgoraj v urejevalniku ali pa pritisnite tipko '2'.\nKliknite na zemljevid na začetek nove ceste. Če se cesta odcepi z že obstoječe ceste,\nzačnite s klikom na mesto, kjer se ločita.\nNato klikajte na točke vzdolž ceste v pravi smeri (glede na satelitske posnetke ali GPS)\nČe cesta, ki jo rišete, prečka drugo cesto, ju povežite s klikom na njuno križišče.\nKo končate, dvokliknite z miško ali na tipkovnici pritisnite tipko 'Return' ali 'Enter'.\n",
         "imagery": "# Slikovni posnetki\n\nZračne/satelitske fotografije so pomemben vir za kartiranje. Kombinacija letalskih\nposnetkov, satelitski posnetki in brezplačni viri so dostopni v\nurejevalniku v meniju 'Nastavitve ozadja' na desni.\nZa prikaz so prednastavljen [Bing Maps](http://www.bing.com/maps/) satelitski posnetki,\na ob premikanju in povečevanju zemljevida se bodo prikazali tudi ostali razpoložljivi viri.\nV nekaterih državah, kot so ZDA, Francija ali Danska, so za posamezna območja na voljo tudi posnetki\nz zelo veliko prostorsko ločljivostjo.\nPosnetki so zaradi napak na strani ponudnika včasih zamaknjeni glede na zemljevid.\nČe vidite, da je več cest zamaknjenih glede na posnetek v ozadju,\ncest ne premikajte. Namesto tega lahko prilagodite posnetek tako, da se prekriva z\nobstoječimi podatki na zemljevidu; to storite s klikom na 'Popravi lego' na dnu\nuporabniškega vmesnika 'Nastavitve ozadja'.\n",
         "addresses": "# Naslovi\n\nNaslovi so ena od najbolj uporabnih informacij za zemljevid.\n\nČeprav so naslovi pogosto predstavljeni kot deli ulic, so na OpenStreetMap\nzabeležni kot lastnost stavb in mest ob ulicah.\n\nNaslove lahko dodate točkovnim objektom in tudi obrisom stavb.\nNajboljši vir naslovov je lastna raziskava oz. zbiranje podatkov ali pa \nlastno znanje. Tako kot za ostale objekte tudi tu velja, da je kopiranje \nz ostalih tržnih virov, kot je Google Zemljevidi, strogo prepovedano.\n\n",
-        "inspector": "# Uporaba nadzornika\n\nNadzornik je meni v levem delu strani in omogoča\nurejanje podrobnosti (oznak) o izbranem objektu.\n\n### Izbira tipa objekta\n\nPotem, ko na zemljevid dodate točko, črto ali mnogokotnik, lahko izberete tip objekta,\nnpr. ali gre za avtocesto ali stanovanjsko ulico, veleblagovnico ali bar.\nNadzornik prikaže najbolj pogoste tipe, ki ustrezajo vrsti objekta, ostale tipe pa lahko\nnajdete s pomočjo iskalnega polja.\n\nZa več informacij o posameznem tipu objekta lahko kliknite 'i' v desnem spodnjem \nkotu gumba za izbiro tipa objekta. Kliknite gumb za izbiro tipa.\n\n### Uporaba obrazcev in urejanje oznak\n\nPotem, ko izberete tip objekta ali ko označite objekt, ki že ima določen tip,\nse bodo v nadzorniku prikazala polja s podrobnostmi (oznakami)\no objektu, kot sta npr. ime in naslov.\n\nPod samodejno prikazanimi oznakami lahko s klikom na ikono dodate nove oznake,\nnpr. povezavo na [Wikipedia](http://www.wikipedia.org/), dostopnost za invalidske vozičke ipd.\n\nNa dnu nadzornika lahko s klikom na 'Dodadne oznake' objektu dodajate nove oznake.\n[Taginfo](http://taginfo.openstreetmap.org/) je bogat vir informacij o najbolj\npogosto uporabljanih oznak in njihovih kombinacijah.\n\nVse v nadzorniku opravljene spremembe se samodejno dodajo na zemljevid.\nSpremembe lahko razveljavite s klikom na gumb 'Razveljavi'.\n",
         "buildings": "# Stavbe\n\nOpenStreetMap je največja svetovna zbirka stavb; lahko jo soustvarjate in izboljšujete.\n\n### Izbiranje\n\nStavbo lahko izberete s klikom na njen obris. Stavba se bo poudarila,\nprikazala pa se bosta majhen meni z orodji in stransko polje z več informacijami\no stavbi.\n\n### Spreminjanje\n\nVčasih so stavbe na napačnem mestu ali pa imajo vnešene napačne oznake.\n\nZa premik celotne stavbe jo najprej izberite, nato pa kliknite na orodje 'Move'. \nPremaknite miško za premik stavbe, s ponovnim klikom se premikanje konča.\n\nZa popravilo določenega dela stavbe kliknite in vlecite vozlišče, dokler\nne bo oblika pravilna.\n\n### Ustvarjanje\n\nEna od glavnih značilnosti dodajanja novih stavb na zemljevid je,  da\nOpenStreetMap beleži stavbe tako kot obliko kot tudi kot točko. Priporočamo, da\nse _stavbe predstavijo kot mnogokotniki, kadar je le to mogoče_, medtem ko se \npodjetja, domovi, ustanove in vse ostalo, kar se dogaja v stavbah, beleži kot točke,\nki jih umestimo znotraj mnogokotnika stavbe.\n\nZa začetek risanja stavbe na levo strani urejevalnika kliknite gumb 'Mnogokotnik',\nrisanje pa lahko končate s pritiskom tipke 'Return' ali pa s klikom na prvo vozlišče\nte stavbe.\n\n### Odstranjevanje\n\nČe je stavba prikazana popolnoma napačno - če se je npr. ni na satelitskem posnetku oz.\\imate informacije o tem iz prve roke - jo lahko odstranite z zemljevida.\nPri brisanju objektov bodite pozorni - \nkot pri ostalih načinih urejanja bodo posledice vidne vsakomur.\nVčasih so satelitski posnetki\nzastareli in morda zato kakšne stavbe na njih še ni.\n\nStavbo lahko odstanite tako, da jo s klikom izberete, nato pa kliknete\nikono smetnjak ali pritisnete tipko 'Delete'.\n",
         "relations": "# Povezave\n\nPovezava je posebna vrsta objekta na OpenStreetMap, ki ostale objekte povezuje v skupine. \nNa primer: dva pogosta tipa povezav sta *cestne povezave*,\nki povezuje vse odseke cest, ki pripadajo določeni prometnici\n(npr. avtocesti, regionalni cesti), in *več mnogokotnikov*; ti v skupino povezujejo\nveč črt, ki definirajo kompleksno območje (npr. na več delov razkosano območje,\nobmočja z vrzelmi).\n\nSkupina objektov v povezavi so *člani* povezave. V stranski vrstici lahko vidite,\nčlan katerih povezav je vsak objekt, s klikom na povezavo pa jo izberete.\nKo je povezava izbrana, bodo v stranski vrstici prikazani vsi njeni člani,\nhkrati pa bodo tudi poudarjeni na zemljevidu.\n\nV večini primerov bo za vzdrževanje povezav samodejno poskrbel iD že med urejanjem.\nBodite pa pozorni predvsem med brisanjem delov cest, ki jih boste na novo narisali -\nte morate nato dodati v isto skupino, kot so bili pred brisanjem.\n\n## Urejanje povezav\n\nSpodaj so navedene osnove za urejanje povezav.\n\nZa dodajanje objekta v povezavo, izberite objekt in kliknite gumb \\+\\ v odseku \n\\All relations\\ stranske vrstice, nato pa izberite ali natipkajte ime povezave.\n\nZa ustvarjanje nove povezave najprej izberite objekt, ki bo njen član,\nnato klinite gumb \\+\\ v odseku \\All relations\\ nato pa izberite \new relation...\\.\n\nZa odstranitev objekta iz povezave najprej izberite objekt, nato pa kliknite na ikono\nsmetnjaka ob povezavi, iz katere želite objekt odstraniti.\n\nVeč mnogokotnikov z vrzelmi lahko ustvarite z orodjem \\Merge\\. Narišite dve območji (zunanjo\nin notranje), nato pa držite pritisnjeno tipko Shift in kliknite na obe območji, da ju izberete.\nNa koncu kliknite še gumb \\Merge\\ (+).\n\n"
     },
@@ -441,7 +439,6 @@
         },
         "fields": {
             "access": {
-                "label": "Dostop",
                 "options": {
                     "designated": {
                         "description": "Dostop je dovoljen v skladu z znaki ali posebnimi krajevnimi zakoni",
@@ -468,9 +465,7 @@
                         "title": "Dovoljeno"
                     }
                 },
-                "placeholder": "Neznano",
                 "types": {
-                    "access": "Splošno",
                     "bicycle": "Kolesarji",
                     "foot": "Peš",
                     "horse": "Konji",
@@ -478,7 +473,6 @@
                 }
             },
             "access_simple": {
-                "label": "Dostop",
                 "placeholder": "da"
             },
             "access_toilets": {
@@ -1895,14 +1889,6 @@
                 "name": "Vhod/Izhod",
                 "terms": "vstop/izstop"
             },
-            "footway/crossing": {
-                "name": "Prehod za pešce",
-                "terms": "zebra"
-            },
-            "footway/crosswalk": {
-                "name": "Prehod za pešce",
-                "terms": "prehod,zebra"
-            },
             "footway/sidewalk": {
                 "name": "Pločnik",
                 "terms": "pločnik"
@@ -1955,14 +1941,6 @@
                 "name": "Avtobusno postajališče",
                 "terms": "avtobusna postaja"
             },
-            "highway/crossing": {
-                "name": "Prehod za pešce",
-                "terms": "zebra"
-            },
-            "highway/crosswalk": {
-                "name": "Prehod za pešce",
-                "terms": "Prehod,zebra"
-            },
             "highway/cycleway": {
                 "name": "Kolesarska steza",
                 "terms": "kolesarska pot,steza za kolesarje"
@@ -1994,10 +1972,6 @@
             "highway/path": {
                 "name": "Pot",
                 "terms": "steza,gaz"
-            },
-            "highway/pedestrian": {
-                "name": "Peš cona",
-                "terms": "pločnik,območje za pešce"
             },
             "highway/primary": {
                 "name": "Glavna cesta",
@@ -2134,10 +2108,6 @@
             "historic/wayside_shrine": {
                 "name": "Kapelica",
                 "terms": "kapelica"
-            },
-            "landuse": {
-                "name": "Raba tal",
-                "terms": "dejanska raba tal,namembnost zemljišča"
             },
             "landuse/allotments": {
                 "name": "Vrtički",
@@ -2636,10 +2606,6 @@
             "railway/halt": {
                 "name": "Železniško postajališče",
                 "terms": "postaja brez perona in objektov"
-            },
-            "railway/level_crossing": {
-                "name": "Nivojsko križišče",
-                "terms": "andrejev križ,potni prehod"
             },
             "railway/monorail": {
                 "name": "Enotirna železnica",

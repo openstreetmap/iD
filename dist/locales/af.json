@@ -294,7 +294,6 @@
         },
         "fields": {
             "access": {
-                "label": "Toegang",
                 "options": {
                     "designated": {
                         "description": "Voorgeskrewe toegang",
@@ -319,9 +318,7 @@
                         "title": "Toegelaat"
                     }
                 },
-                "placeholder": "Onbekend",
                 "types": {
-                    "access": "Algemene",
                     "bicycle": "Fietse",
                     "foot": "Voet",
                     "horse": "Perde",
@@ -329,7 +326,6 @@
                 }
             },
             "access_simple": {
-                "label": "Toegang",
                 "placeholder": "ja"
             },
             "address": {
@@ -855,9 +851,6 @@
             "highway/bus_stop": {
                 "name": "Busstop"
             },
-            "highway/crossing": {
-                "name": "Oorgang"
-            },
             "highway/cycleway": {
                 "name": "Fietsrypad"
             },
@@ -875,9 +868,6 @@
             },
             "highway/path": {
                 "name": "Paadjie"
-            },
-            "highway/pedestrian": {
-                "name": "Voetganger"
             },
             "highway/primary": {
                 "name": "Primere Pad"
@@ -950,9 +940,6 @@
             },
             "historic/wayside_cross": {
                 "name": "Padteken"
-            },
-            "landuse": {
-                "name": "Landsgebruik"
             },
             "landuse/allotments": {
                 "name": "Toegewysde lappie grond"
@@ -1237,9 +1224,6 @@
             },
             "railway/disused": {
                 "name": "Ongebruikte spoorweg"
-            },
-            "railway/level_crossing": {
-                "name": "Spooroorgang"
             },
             "railway/monorail": {
                 "name": "Enkelspoorbaan"

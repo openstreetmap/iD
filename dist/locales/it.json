@@ -323,7 +323,11 @@
         "custom_button": "Modifica sfondo personalizzato",
         "custom_prompt": "Inserisci l'URL dello schema dei tasselli. Valori validi sono {z}, {x}, {y} per lo schema Z/X/Y e {u} per lo schema QuadTile.",
         "fix_misalignment": "Allinea",
-        "reset": "reset"
+        "reset": "reset",
+        "minimap": {
+            "description": "Minimappa",
+            "tooltip": "Mostra una mappa più vasta per localizzare meglio l'area corrente."
+        }
     },
     "map_data": {
         "title": "Dati mappa",
@@ -480,6 +484,7 @@
         "out": "Riduci"
     },
     "cannot_zoom": "Impossibile fare zooCannot zoom out further in current mode.",
+    "full_screen": "Passa a schermo intero",
     "gpx": {
         "local_layer": "File GPX locale",
         "drag_drop": "Trascina e rilascia un file .gpx sulla pagina o clicca il bottone a destra per sceglierne uno",
@@ -494,12 +499,12 @@
     "help": {
         "title": "Aiuto",
         "help": "# Aiuto\n\nQuesto è un editor per [OpenStreetMap](http://www.openstreetmap.org/), la\nmappa del mondo gratuita e modificabile. Puoi usarlo per aggiungere ed aggiornare\ndati nella tua area, creando una mappa del mondo open-source e open-data\nmigliore per tutti.\n\nLe modifiche che fai a questa mappa saranno visibili a chiunque usa\nOpenStreetMap. Per fare una modifica, avrai bisogno di [accedere](https://www.openstreetmap.org/login).\n\n[iD editor](http://ideditor.com/) è un progetto collaborativo il cui [codice\nsorgente è disponibile su GitHub](https://github.com/openstreetmap/iD).\n",
-        "editing_saving": "# Modifica & salvataggio\n\nQuesto editor è stato pensato per funzionare principalmente online\ned anche in questo momento lo stai utilizzando tramite browser web.\n\n### Selezione degli Elementi\n\nPer selezionare un elemento della mappa, come ad esempio una strada o\nun punto di interesse, clicca su di esso sulla mappa. Questo farà in modo\nche l'elemento selezionato venga evidenziato, che si apra un pannello con\ni dettagli e che si apra un menu di azioni che è possibile fare con l'elemento\nstesso.\n\nPer selezionare più elementi tenendo premuto il tasto 'Maiusc' clicca su ogni\nelemento o trascina il mouse disegnando un riquadro sulla mappa. Questo\nfarà sì che tutti gli elementi all'interno del riquadro vengano selezionati\nconsentendo di compiere azioni su più elementi in una volta sola.\n\n### Salvataggio delle modifiche\n\nQuando si fanno dei cambiamenti, come modifiche alle strade, agli edifici e\nai luoghi, queste vengono memorizzate localmente fino a che non si effettua\nil salvataggio sul server. Non preoccuparti se fai un errore, puoi annullare\nla modifica premento il tasto 'Annulla' e rieffettuare la modifica cliccando\nsul tasto 'Ripeti'.\n\nSe ad esempio hai completato un'area della città e vuoi iniziare un'altra\narea clicca su 'Salva' e porre fine ad un gruppo di modifiche. Avrai comunque\nla possibilità di revisionare ciò che hai modificato inoltre l'editor fornirà\nsuggerimenti e avvertimenti se qualcosa nelle tue modifiche non sembra\nandare bene.\n\nSe tutto è a posto puoi aggiungere un piccolo commento per spiegare la\nmodifica effettuata e cliccare su 'Salva' di nuovo per caricare le modifiche su\n[OpenStreetMap.org](http://www.openstreetmap.org/), dove saranno visibili\na tutti gli utenti e disponibili agli altri per consentire di costruirci sopra o\nmigliorarle ulteriormente.\n\nSe non riesci a finire le modifiche in una seduta, puoi abbandonare la\nfinestra dell'editor e tornarci più tardi (utilizzando lo stesso browser e lo\nstesso computer): l'editor ti offrirà infatti la possibiltà di recuperare il tuo lavoro.\n",
+        "editing_saving": "# Modifica & salvataggio\n\nQuesto editor è stato pensato per funzionare principalmente online ed\nanche in questo momento lo stai utilizzando tramite browser web.\n\n### Selezione degli Elementi\n\nPer selezionare un elemento della mappa, come ad esempio una\nstrada o un punto di interesse, clicca su di esso sulla mappa. Questo\nfarà in modo che l'elemento selezionato venga evidenziato, che si apra\nun pannello con i dettagli e che si apra un menu di azioni che è\npossibile fare con l'elemento stesso.\n\nPer selezionare più elementi tenendo premuto il tasto 'Maiusc'; clicca\nsu ogni elemento o trascina il mouse disegnando un riquadro sulla\nmappa. Questo farà sì che tutti gli elementi all'interno del riquadro\nvengano selezionati consentendo di compiere azioni su più elementi\nin una volta sola.\n\n### Salvataggio delle modifiche\n\nQuando si fanno dei cambiamenti, come modifiche alle strade, agli\nedifici e ai luoghi, questi vengono memorizzati localmente fino a che\nnon si effettua il salvataggio sul server. Non preoccuparti se fai un\nerrore, puoi annullare la modifica premendo il tasto 'Annulla' e\nrieffettuare la modifica cliccando sul tasto 'Ripeti'.\n\nSe ad esempio hai completato un'area della città e vuoi iniziare un'altra\narea clicca su 'Salva' e porre fine ad un gruppo di modifiche. Avrai\ncomunque la possibilità di revisionare ciò che hai modificato inoltre\nl'editor fornirà suggerimenti e avvertimenti se qualcosa nelle tue\nmodifiche non sembra andare bene.\n\nSe tutto è a posto puoi aggiungere un piccolo commento per spiegare\nla modifica effettuata e cliccare su 'Salva' di nuovo per caricare le\nmodifiche su [OpenStreetMap.org](http://www.openstreetmap.org/),\ndove saranno visibili a tutti gli utenti e disponibili agli altri per\nconsentire di costruirci sopra o migliorarle ulteriormente.\n\nSe non riesci a finire le modifiche in una seduta, puoi abbandonare la\nfinestra dell'editor e tornarci più tardi (utilizzando lo stesso browser e lo\nstesso computer): l'editor ti offrirà infatti la possibiltà di recuperare il tuo\nlavoro.\n\n### Utilizzo dell'editor\n\n[Qui](http://wiki.openstreetmap.org/wiki/ID/Shortcuts) puoi trovare una lista delle scorciatoie disponibili.\n",
         "roads": "# Strade\n\nE' possibile creare, aggiustare ed eliminare le strade con questo editor. Le strade possono essere di tutti i tipi: percorsi, autostrade, cammini, piste ciclabili o altro. E' possibile mappare ogni segmento calpestabile.\n\n### Selezione\n\nCliccare su una strada per selezionarla. Verranno visualizzati un contorno e un piccolo menu strumenti sulla mappa oltre ad una barra laterale che mostra informazioni dettagliate sulla strada.\n\n### Modifica\n\nVi capiterà spesso di vedere strade non combacianti con le immagini sullo sfondo o con il tracciato GPS. E' possibile allineare queste strada in modo che si trovino nella giusta posizione.\n\nPer prima cosa cliccare sulla strada che si vuole modificare. Questo farà in modo che la strada venga evidenziata e che vengano visualizzati i punti di controllo lungo di essa che possono essere spostati in luoghi più consoni. Se si vuole aggiungere nuovi punti di controllo per aggiungere maggiori dettagli, basta fare doppio clic su parte della strada senza nodi.\n\nSe la strada è connessa ad un'altra strada ma non è ben connessa sulla mappa, è possibile spostare uno di questi punti di controllo sull'altra strada in modo da unirli. E' importante per la mappa che le strade siano correttamente connesse  anche per garantire giuste indicazioni di guida.\n\nE' possibile cliccare sullo strumento 'Sposta' o premere il tasto rapido `M` per muovere l'intera strada in una volta sola. Cliccare nuovamente per memorizzare lo spostamento.\n\n### Eliminizione\n\nSe la strada è completamente sbagliata, ovvero non compare sulle immagini satellitari e non viene rilevata nella realtà, è possibile eliminarla eliminandola dalla mappa. Attenzione ad effettuare questa operazione di eliminazione poiché, come per ogni altra modifica, i risultati vengono visti da tutti. Considera che le immagini satellitari sono spesso vecchie quindi è possibile che la strada sia stata costruita solo di recente.\n\nE' possibile eliminare una strada cliccando prima su di essa per selezionarla e poi sull'icona cestino o premendo il tasto 'Canc' della tastiera.\n\n### Creazione\n\nHai notato che in un punto della mappa dovrebbe esserci una strada ma non c'è ? Clicca sull'incona 'Linea' in alto a sinistra nell'editor o premi il tasto `2` per iniziare a disegnare una linea.\n\nCliccare sull'inizio della strada sulla mappa per iniziare a disegnarla. Se la strada  è unita ad una strada già esistente, iniziare cliccando nel punto dove sono connesse.\n\nQuindi cliccare i nuovi punti lungo la strada in modo che segua il percorso giusto dettato dall'immagine satellitare o dai dati del GPS. Se la strada che stai disegnando attraversa un'altra strada, collegala cliccando sul punto di intersezione. Quando hai finito di disegnare fai doppio clic o premi 'Invio' o 'Enter' sulla tua tastiera.\n",
-        "gps": "# GPS\n\nI dati provenienti dal GPS sono la sorgente dati più fidata per OpenStreetMap.\nQuesto editor supporta i tracciati locali - i file `.gpx` che si trovano sul tuo\ncomputer.  È possibile raccogliere questo tipo di tracciati GPS con un gran\nnumero di applicazioni per smartphone o tramite dispositivi GPS personali.\n\nPer informazioni su come effettuare un rilevamento GPS è possibile leggere\n[Rilevamenti con un GPS](http://learnosm.org/en/beginner/using-gps/).\n\nPer utilizzare un tracciato GPX al fine di effettuare una mappatura, trascina il\nfile GPX sull'editor di mappe. Se viene riconosciuto verrà aggiunto alla mappa\ned evidenziato tramite una linea violetta. Cliccare sul menu 'Dati mappa' che si trova sulla sinitra per abilitare, disabilitare o zoomare il livello creato dal file GPX.\n\nIl tracciato GPX non viene caricato direttamente su OpenStreetMap - il modo\nmigliore di utilizzarlo è quello di disegnare sulla mappa usando il tracciato\ncome guida per i nuovi elementi che vuoi aggiungere e [caricarlo comunque\nsu OpenStreetMap](http://www.openstreetmap.org/trace/create) per renderlo\npoi disponibile agli altri utenti.\n",
+        "gps": "# GPS\n\nLe tracce provenienti dal GPS sono una sorgente dati fidata per OpenStreetMap. Questo editor\nsupporta i tracciati locali - i file `.gpx` che si trovano sul tuo computer. È possibile raccogliere\nquesto tipo di tracciati GPS con un gran numero di applicazioni per smartphone\no tramite dispositivi GPS personali.\n\nPer informazioni su come effettuare un rilevamento GPS è possibile\nleggere [Mappare con uno smartphone, un GPS o una cartina](http://learnosm.org/en/mobile-mapping/).\n\nPer utilizzare un tracciato GPX al fine di effettuare una mappatura,\ntrascina il file GPX sull'editor di mappe. Se viene riconosciuto verrà\naggiunto alla mappa ed evidenziato tramite una linea violetta. Clicca\nsul menu 'Dati mappa' che si trova sulla sinistra per abilitare,\ndisabilitare o zoomare il livello creato dal file GPX.\n\nIl tracciato GPX non viene caricato direttamente su OpenStreetMap - il\nmodo migliore di utilizzarlo è quello di disegnare sulla mappa usando il\ntracciato come guida per i nuovi elementi che vuoi aggiungere e\n[caricarlo comunque su OpenStreetMap](http://www.openstreetmap.org/trace/create) per renderlo poi\ndisponibile agli altri utenti.\n",
         "imagery": "# Immagini\n\nLe immagini aeree sono un'importante risorsa per la mappatura. Una\ncombinazione di foto aeree, immagini satellitari e risorse liberamente\ncompilate sono disponibili nell'editor nel menu 'Impostazioni dello sfondo'\nsulla destra.\n\nLe immagini predefinite presentate nell'editor sono quelle satellitari di\n[Bing Maps](http://www.bing.com/maps/), ma spostando o ingrandendo\nla mappa in specifiche aree geografiche potranno essere disponibili più\nrisorse. Alcune nazioni, come Stati Uniti, Francia e Danimarca, hanno a\ndisposizione, per alcune aree, immagini ad alta definizione.\n\nLe immagini sono a volte disallineate rispetto ai dati della mappa a causa\ndi errori da parte di chi le fornisce. Se vedi numerose strade spostate\nrispetto alle immagini di sfondo non correggerle tutte subito per farle\nnuovamente combaciare. Puoi invece aggiustare l'allineamento delle immagini\nsullo sfondo in modo da ri-allinearle con i dati esistenti cliccando su\n'Allinea' in fondo al menu.\n",
         "addresses": "# Indirizzi stradali\n\nGli indirizzi sono tra le informazioni più utili per una mappa.\n\nNonostante gli indirizzi siano spesso rappresentati come parte delle strade, in OpenStreetMap\nvengono memorizzati come attributi degli edifici e dei luoghi lungo le strade.\n\nPotrai aggiungere informazioni sull'indirizzo a dei luoghi mappati come contorni di edificio\ncosì come a quelli mappati come singoli punti. La sorgente ottimale dei dati degli indirizzi\nè un rilevamento per strada o la conoscenza personale dato che copiare da sorgenti\ncommerciali come ad es. Google Maps è severamente vietato.\n",
-        "inspector": "# Utilizzo dell'inspector\n\nL'inspector è quell'elemento dell'interfaccia utente sulla parte sinistra della pagina che appare quando viene selezionata una funzionalità e che consente di modificarne i dettagli.\n\n### Selezione di un tipo di funzionalità\n\nDopo che è stato aggiunto un punto, una linea o un'area, è possibile scegliere quale tipo di caratteristica abbia, come ad esempio se si tratta di una strada principale o una strada residenziale, di un supermarket o di un caffè.\nL'inspector visualizzerà i pulsanti per le caratteristiche più comuni e sarà possibile trovarne altre semplicemente digitando la caratteristica voluta nella casella di ricerca.\n\nFare clic sulla 'i' che si trova nell'angolo in basso a destra del pulsante per saperne di più. Fare clic su un pulsante per scegliere quel tipo.\n\n### Utilizzo di Form e di Tag di modifica\n\nDopo aver scelto un tipo di caratteristica o quando si è selezionato una caratteristica per la quale è già stato assegnato un tipo, l'inspector mostrerà i campi con i dettagli come ad esempio il nome e l'indirizzo.\n\nAl di sotto dei campi è possibile fare clic sulle icone per aggiungere ulteriori dettagli come ad es. informazioni [Wikipedia](http://www.wikipedia.org/), accesso consentito alle carrozzine, e altro.\n\nSotto l'inspector è possibile fare clic su 'Tag aggiuntivi' per aggiungere arbitrariamente altri tag all'elemento. [Taginfo](http://taginfo.openstreetmap.org/) è una buona risorsa per imparare qualcosa sulle combinazioni di tag più comuni.\n\nLe modifiche effettuate nell'inspector vengono applicate automaticamente alla mappa.\nE' possibile annullarle in ogni momento cliccando semplicemente sul pulsante 'Ripristina'.\n",
+        "inspector": "# Utilizzo dell'inspector\n\nL'inspector è quell'elemento dell'interfaccia utente sulla parte sinistra\ndella pagina che consente di modificare i dettagli dell'elemento\nselezionato.\n\n### Selezione di un tipo di elemento\n\nDopo che è stato aggiunto un punto, una linea o un'area, è possibile\nscegliere quale tipo di caratteristica abbia, come ad esempio se si\ntratta di una strada principale o una strada residenziale, di un\nsupermarket o di un caffè. L'inspector visualizzerà i pulsanti per le\ncaratteristiche più comuni e sarà possibile trovarne altre\nsemplicemente digitando la caratteristica voluta nella casella di ricerca.\n\nFai clic sulla 'i' che si trova nell'angolo in basso a destra del pulsante\nper saperne di più. Fai clic su un pulsante per scegliere quel tipo.\n\n### Utilizzo di Form e di Tag di modifica\n\nDopo aver scelto un tipo di elemento o quando si è selezionato un\nelemento per il quale è già stato assegnato un tipo, l'inspector\nmostrerà i campi con i dettagli come ad esempio il nome e l'indirizzo.\n\nAl di sotto dei campi è possibile fare clic sulle icone per aggiungere\nulteriori dettagli come ad es. link a Wikipedia, accesso\nconsentito alle carrozzine, e altro.\n\nSotto l'inspector è possibile fare clic su 'Tag aggiuntivi' per aggiungere\narbitrariamente altri tag all'elemento. [Taginfo](http://taginfo.openstreetmap.org/) è una buona risorsa\nper imparare qualcosa sulle combinazioni di tag più comuni.\n\nLe modifiche effettuate nell'inspector vengono applicate\nautomaticamente alla mappa. E' possibile annullarle in ogni momento\ncliccando semplicemente sul pulsante 'Ripristina'.\n",
         "buildings": "# Edifici\n\nOpenStreetMap è il più grande database online di edifici. Puoi creare e migliorare questo database.\n\n### Selezione\n\nPuoi selezionare un edificio cliccando sul suo bordo. Ciò evidenzierà l'edificio e aprirà un piccolo menu degli strumenti ed una barra laterale contenente ulteriori informazioni sull'edificio.\n\n### Modifica\n\nTalvolta gli edifici sono posizionati in maniera errata o hanno tag incorretti.\n\nPer spostare un edificio, selezionalo, quindi clicca sullo strumento 'Sposta'. Sposta il mouse per traslare l'edificio, clicca nuovamente quando è nel posto giusto.\n\nPer migliorare la forma di un edificio, clicca e sposta i nodi che formano il suo contorno in una posizione corretta.\n\n### Creazione\n\nUna delle principali diatribe sulla aggiunta degli edifici alla mappa riguarda il fatto che OpenStreetMap permette di creare edifici come aree o come singoli punti. La regola generale in questi casi è di _mappare un edificio come un'area quando possibile_, e di mappare compagnie, case, amenità e altri oggetti che operano nell'edificio come punti all'interno della forma dell'edificio.\n\nInizia a disegnare un edificio come una forma cliccando sul pulsante 'Area' nella parte alta a sinistra dell'interfaccia, e termina premendo 'Invio' sulla tastiera o cliccando sul primo nodo che hai disegnato per chiudere la forma.\n\n### Eliminazione\n\nSe un edificio è completamente sbagliato - non è presente nelle immagini satellitari e possibilmente hai controllato di persona che esso non esista davvero - puoi eliminarlo, in modo da toglierlo dalla mappa. Sii cauto quando elimini un elemento - come ogni modifica, i risultati sono visibili a tutti e le immagini satellitari sono spesso datate, perciò l'edificio potrebbe essere stato costruito nel frattempo.\n\nPuoi eliminare un edificio cliccandoci sopra per selezionarlo, quindi cliccando sull'icona del cestino o premendo il tasto 'Canc' sulla tastiera.\n",
         "relations": "# Relazioni\n\nUna relazione è un particolare elemento di OpenStreetMap che raggruppa altri\nelementi. Per esempio due tipi comuni di relazione sono le *relazioni percorso*,\nche raggruppano pezzi di strada che appartengono alla stessa via o autostrada,\ne i *multipoligoni*, che raggruppano diverse linee componenti aree complesse\n(un'area con più pezzi o con dei buchi in essa come una ciambella).\n\nGli elementi di una relazione sono chiamati *membri*. Nella barra laterale puoi\nvedere di quale relazione un elemento è membro e cliccare sulla relazione per\nselezionarla. Quando una relazione viene selezionata puoi vedere l'elenco di\ntutti i suoi membri nella barra laterale e gli stessi selezionati nella mappa.\n\nNella maggior parte dei casi iD si occuperà delle relazioni automaticamente\ndurante la modifica. Controlla solo che quando cancelli un elemento per\nridisegnarlo più accuratamente, il nuovo elemento sia un membro della stessa\nrelazione dell'originale.\n\n## Modificare le Relazioni\n\nSe vuoi modificare le relazioni, ecco le basi.\n\nPer aggiungere un elemento ad una relazione seleziona l'elemento, clicca il\ntasto \"+\" nella sezione \"Tutte le relazioni\" della barra laterale e quindi seleziona\nla relazione o digita il suo nome.\n\nPer creare una nuova relazione seleziona il primo elemento che diventerà\nmembro, clicca il tasto \"+\" nella sezione \"Tutte le relazioni\" della barra laterale\ne seleziona \"Nuova relazione...\".\n\nPer rimuovere un elemento da una relazione seleziona l'elemento e clicca sul\ncestino vicino alla relazione da cui vuoi rimuoverlo.\n\nPuoi creare dei multipoligoni con dei buchi usando lo strumento \"Unisci\".\nDisegna due aree (quella esterna e quella interna), tenendo premuto il tasto\nMaiusc della tastiera clicca su ognuno di loro per selezionarli entrambi e quindi\nclicca sul tasto \"Unisci\" (+).\n"
     },
@@ -587,7 +592,7 @@
         },
         "fields": {
             "access": {
-                "label": "Accesso",
+                "label": "Permesso d'accesso",
                 "options": {
                     "designated": {
                         "description": "Accesso consentito stando ai cartelli stradali od alle norme locali",
@@ -596,6 +601,10 @@
                     "destination": {
                         "description": "Accesso consentito solo se la destinazione coincide con l'elemento stesso",
                         "title": "Destinazione"
+                    },
+                    "dismount": {
+                        "description": "Accesso consentito, ma si deve scendere dal veicolo",
+                        "title": "Scendere dal veicolo"
                     },
                     "no": {
                         "description": "Accesso consentito ai soli autorizzati",
@@ -614,9 +623,9 @@
                         "title": "Permesso"
                     }
                 },
-                "placeholder": "Sconosciuto",
+                "placeholder": "Non specificato",
                 "types": {
-                    "access": "Generale",
+                    "access": "Chiunque",
                     "bicycle": "Biciclette",
                     "foot": "A piedi",
                     "horse": "Cavalli",
@@ -624,7 +633,7 @@
                 }
             },
             "access_simple": {
-                "label": "Accesso",
+                "label": "Accesso consentito",
                 "placeholder": "sì"
             },
             "access_toilets": {
@@ -634,6 +643,7 @@
                 "label": "Indirizzo",
                 "placeholders": {
                     "city": "Città",
+                    "conscriptionnumber": "123",
                     "country": "Nazione",
                     "district": "Distretto",
                     "hamlet": "Località",
@@ -692,6 +702,9 @@
                 "label": "Tipo"
             },
             "amenity": {
+                "label": "Tipo"
+            },
+            "area/highway": {
                 "label": "Tipo"
             },
             "artist": {
@@ -785,6 +798,44 @@
             },
             "cuisine": {
                 "label": "Cucina"
+            },
+            "cycleway": {
+                "label": "Corsie Ciclabili",
+                "options": {
+                    "lane": {
+                        "description": "Una corsia ciclabile separata dal traffico motorizzato da una linea disegnata",
+                        "title": "Corsia ciclabile standard"
+                    },
+                    "none": {
+                        "description": "Nessuna corsia ciclabile",
+                        "title": "Non presente"
+                    },
+                    "opposite": {
+                        "description": "Una corsia ciclabile che corre in entrambe le direzioni in una via a senso unico",
+                        "title": "Corsia ciclabile in senso unico"
+                    },
+                    "opposite_lane": {
+                        "description": "Una corsia ciclabile che corre in senso opposto a quello del traffico",
+                        "title": "Corsia ciclabile contromano"
+                    },
+                    "share_busway": {
+                        "description": "Una corsia ciclabile condivisa con un corsia per autobus",
+                        "title": "Corsia ciclabile condivisa con autobus"
+                    },
+                    "shared_lane": {
+                        "description": "Una corsia ciclabile non separata dal traffico motorizzato",
+                        "title": "Corsia ciclabile condivisa"
+                    },
+                    "track": {
+                        "description": "Una corsia ciclabile separata dal traffico motorizzato da una barriera fisica",
+                        "title": "Pista ciclabile"
+                    }
+                },
+                "placeholder": "Non presente",
+                "types": {
+                    "cycleway:left": "Lato sinistro",
+                    "cycleway:right": "Lato destro"
+                }
             },
             "delivery": {
                 "label": "Consegna"
@@ -963,6 +1014,15 @@
                     "semi_evergreen": "Semi-sempreverde"
                 }
             },
+            "leaf_cycle_singular": {
+                "label": "Fogliame",
+                "options": {
+                    "deciduous": "Deciduo",
+                    "evergreen": "Sempreverde",
+                    "semi_deciduous": "Semi-deciduo",
+                    "semi_evergreen": "Semi-sempreverde"
+                }
+            },
             "leaf_type": {
                 "label": "Tipo di foglia",
                 "options": {
@@ -972,11 +1032,22 @@
                     "needleleaved": "Aghifoglia"
                 }
             },
+            "leaf_type_singular": {
+                "label": "Tipo di foglia",
+                "options": {
+                    "broadleaved": "Latifoglia",
+                    "leafless": "Senza foglie",
+                    "needleleaved": "Aghifoglia"
+                }
+            },
             "leisure": {
                 "label": "Tipo"
             },
             "length": {
                 "label": "Lunghezza (Metri)"
+            },
+            "level": {
+                "label": "Livello"
             },
             "levels": {
                 "label": "Piani",
@@ -1154,8 +1225,21 @@
             "recycling/glass": {
                 "label": "Accetta Vetro"
             },
+            "recycling/glass_bottles": {
+                "label": "Bottiglie di vetro"
+            },
             "recycling/paper": {
                 "label": "Accetta Carta"
+            },
+            "recycling/plastic": {
+                "label": "Plastica"
+            },
+            "recycling/type": {
+                "label": "Tipo di raccolta",
+                "options": {
+                    "centre": "Stazione ecologica",
+                    "container": "Contenitore"
+                }
             },
             "ref": {
                 "label": "Riferimento"
@@ -1218,6 +1302,7 @@
             "service_rail": {
                 "label": "Tipo di servizio",
                 "options": {
+                    "crossover": "Scambio",
                     "spur": "Accesso",
                     "yard": "Smistamento"
                 }
@@ -1537,6 +1622,10 @@
                 "name": "Autolavaggio",
                 "terms": "Autolavaggio"
             },
+            "amenity/casino": {
+                "name": "Casinò",
+                "terms": "gioco d'azzardo,sala da gioco,bisca"
+            },
             "amenity/charging_station": {
                 "name": "Stazione di ricarica",
                 "terms": "stazione di ricarica,ricarica"
@@ -1774,6 +1863,10 @@
             "area": {
                 "name": "Area",
                 "terms": "Area"
+            },
+            "area/highway": {
+                "name": "Superificie stradale",
+                "terms": "superficie,manto stradale,materiale"
             },
             "barrier": {
                 "name": "Barriera",
@@ -2135,11 +2228,11 @@
                 "terms": "entrata,uscita,emergenza,accesso,porta,portone,ingresso"
             },
             "footway/crossing": {
-                "name": "Attraversamento",
+                "name": "Attraversamento pedonale",
                 "terms": "attraversamento pedonale,strisce pedonali,attraversamento,dosso"
             },
             "footway/crosswalk": {
-                "name": "Attraversamento pedonale",
+                "name": "Strisce pedonali",
                 "terms": "strisce pedonali,attraversamento"
             },
             "footway/sidewalk": {
@@ -2192,12 +2285,16 @@
                 "name": "Fermata dell'autobus",
                 "terms": "Fermata Autobus"
             },
+            "highway/corridor": {
+                "name": "Corridoio interno",
+                "terms": "corridoio"
+            },
             "highway/crossing": {
-                "name": "Attraversamento",
+                "name": "Attraversamento stradale",
                 "terms": "attraversamento pedonale,strisce pedonali,attraversamento,dosso"
             },
             "highway/crosswalk": {
-                "name": "Attraversamento pedonale",
+                "name": "Strisce pedonali",
                 "terms": "strisce pedonali,attraversamento"
             },
             "highway/cycleway": {
@@ -2381,8 +2478,8 @@
                 "terms": "svincolo,uscita"
             },
             "landuse": {
-                "name": "Uso del suolo",
-                "terms": "Utilizzo del suolo"
+                "name": "Utilizzi del terreno",
+                "terms": "uso del suolo,suolo,terreno,uso,utilizzo,destinazione"
             },
             "landuse/allotments": {
                 "name": "Orti in concessione",
@@ -2452,6 +2549,10 @@
                 "name": "Frutteto",
                 "terms": "Frutteto"
             },
+            "landuse/plant_nursery": {
+                "name": "Vivaio",
+                "terms": "vivaio,fiorista,rimboschimento,serra"
+            },
             "landuse/quarry": {
                 "name": "Cava",
                 "terms": "Cava"
@@ -2472,6 +2573,14 @@
                 "name": "Svago",
                 "terms": "Svago"
             },
+            "leisure/adult_gaming_centre": {
+                "name": "Sala da gioco",
+                "terms": "gioco d'azzardo,casinò,bisca"
+            },
+            "leisure/bowling_alley": {
+                "name": "Sala da Bowling",
+                "terms": "sala,bowling,birilli"
+            },
             "leisure/common": {
                 "name": "Luogo pubblico",
                 "terms": "beni comuni,comune,pubblico,spazio pubblico,spazio comune,libero accesso"
@@ -2487,6 +2596,10 @@
             "leisure/golf_course": {
                 "name": "Campo da Golf",
                 "terms": "Campo da golf"
+            },
+            "leisure/ice_rink": {
+                "name": "Pista di Ghiaccio",
+                "terms": "pista di pattinaggio su ghiaccio, campo da hockey su ghiaccio"
             },
             "leisure/marina": {
                 "name": "Marina",
@@ -2571,6 +2684,10 @@
             "man_made": {
                 "name": "Costruzioni civili",
                 "terms": "Artificiale"
+            },
+            "man_made/adit": {
+                "name": "Cunicolo",
+                "terms": "adito,miniera,ingresso"
             },
             "man_made/breakwater": {
                 "name": "Frangiflutti",
@@ -2703,6 +2820,10 @@
                 "name": "Picco",
                 "terms": "culmine,guglia,alpe,apice,cresta,sommità,cima,cocuzzolo,collina,monte,montagna,pinnacolo,estremità,vertice,vetta,piz"
             },
+            "natural/saddle": {
+                "name": "Sella",
+                "terms": "passo,valico,sella,forcella"
+            },
             "natural/scree": {
                 "name": "Ghiaione",
                 "terms": "ghiaione,frana,scarica,ghiaia,sassi,pietraia,sassaia,pietre"
@@ -2718,6 +2839,14 @@
             "natural/tree": {
                 "name": "Albero",
                 "terms": "Albero"
+            },
+            "natural/tree_row": {
+                "name": "Filare di alberi",
+                "terms": "alberi,filare"
+            },
+            "natural/volcano": {
+                "name": "Vulcano",
+                "terms": "vulcano,stromboli"
             },
             "natural/water": {
                 "name": "Specchio d'acqua",
@@ -2805,6 +2934,9 @@
             "office/political_party": {
                 "name": "Sede di partito",
                 "terms": "circolo,partito,politica,sezione"
+            },
+            "office/research": {
+                "name": "Istituto di Ricerca"
             },
             "office/telecommunication": {
                 "name": "Ufficio di telecomunicazioni",
@@ -3003,6 +3135,9 @@
                 "name": "Panificio",
                 "terms": "Panificio"
             },
+            "shop/bathroom_furnishing": {
+                "name": "Negozio di Prodotti per Bagno"
+            },
             "shop/beauty": {
                 "name": "Negozio di articoli di bellezza",
                 "terms": "Salone di bellezza"
@@ -3072,6 +3207,9 @@
                 "name": "Negozio di informatica",
                 "terms": "Negozio di computer"
             },
+            "shop/confectionery": {
+                "name": "Negozio di Dolciumi"
+            },
             "shop/convenience": {
                 "name": "Minimarket",
                 "terms": "Drogheria"
@@ -3109,9 +3247,16 @@
                 "name": "Negozio erotico",
                 "terms": "Sexy shop"
             },
+            "shop/fabric": {
+                "name": "Negozio di Tessuti",
+                "terms": "Merceria,Negozio di Stoffe,Stoffe e Tessuti"
+            },
             "shop/farm": {
                 "name": "Banchetto Alimentari Freschi",
                 "terms": "negozio agricolo,banchetto agricolo,banchetto"
+            },
+            "shop/fashion": {
+                "name": "Negozio di moda"
             },
             "shop/fishmonger": {
                 "name": "Pescivendolo",
@@ -3149,6 +3294,9 @@
                 "name": "Ferramenta",
                 "terms": "Negozio di Ferramenta"
             },
+            "shop/herbalist": {
+                "name": "Erboristeria"
+            },
             "shop/hifi": {
                 "name": "Negozio Hifi",
                 "terms": "Negozio Hi-Fi"
@@ -3161,9 +3309,18 @@
                 "name": "Gioielliere",
                 "terms": "Gioielleria"
             },
+            "shop/kiosk": {
+                "name": "Edicola"
+            },
+            "shop/kitchen": {
+                "name": "Negozio di cucine"
+            },
             "shop/laundry": {
                 "name": "Lavanderia",
                 "terms": "Lavanderia"
+            },
+            "shop/leather": {
+                "name": "Pelletteria"
             },
             "shop/locksmith": {
                 "name": "Fabbro",
@@ -3177,9 +3334,15 @@
                 "name": "Centro commerciale",
                 "terms": " Centro commerciale "
             },
+            "shop/massage": {
+                "name": "Centro Massaggi"
+            },
             "shop/mobile_phone": {
                 "name": "Negozio di telefonia mobile",
                 "terms": "Negozio di Cellulari"
+            },
+            "shop/money_lender": {
+                "name": "Agenzia Prestito"
             },
             "shop/motorcycle": {
                 "name": "Concessionario di motociclette",
@@ -3189,9 +3352,18 @@
                 "name": "Negozio di musica",
                 "terms": "Negozio di nusica"
             },
+            "shop/musical_instrument": {
+                "name": "Negozio di Strumenti Musicali"
+            },
+            "shop/newsagent": {
+                "name": "Edicola"
+            },
             "shop/optician": {
                 "name": "Ottico",
                 "terms": "Ottico"
+            },
+            "shop/organic": {
+                "name": "Negozio di Prodotti Biologici"
             },
             "shop/pawnbroker": {
                 "name": "Banco dei pegni"
@@ -3203,6 +3375,15 @@
             "shop/photo": {
                 "name": "Fotografo",
                 "terms": "fotografia,fotografico,fotografo,foto,diapositive,rullini,macchine fotografiche"
+            },
+            "shop/pyrotechnics": {
+                "name": "Negozio di Fuochi d'Artificio"
+            },
+            "shop/radiotechnics": {
+                "name": "Negozio di elettronica"
+            },
+            "shop/religion": {
+                "name": "Negozio Religioso"
             },
             "shop/seafood": {
                 "name": "Pescheria",
@@ -3228,6 +3409,15 @@
                 "name": "Sartoria",
                 "terms": "sarto,vestiti,abiti"
             },
+            "shop/tattoo": {
+                "name": "Studio per Tatuaggi"
+            },
+            "shop/tea": {
+                "name": "Negozio di Tè"
+            },
+            "shop/ticket": {
+                "name": "Rivenditore di Biglietti"
+            },
             "shop/tobacco": {
                 "name": "Tabacchino",
                 "terms": "Tabaccheria"
@@ -3248,6 +3438,9 @@
                 "name": "Negozio vuoto",
                 "terms": "Negozio vuoto"
             },
+            "shop/vacuum_cleaner": {
+                "name": "Negozio di Aspirapolveri"
+            },
             "shop/variety_store": {
                 "name": "Negozio a Prezzo Fisso",
                 "terms": "Articoli a basso costo (\"tutto a ...\")"
@@ -3256,8 +3449,14 @@
                 "name": "Videoteca",
                 "terms": "Videoteca"
             },
+            "shop/video_games": {
+                "name": "Negozio di Videogiochi"
+            },
             "shop/weapons": {
                 "name": "Armeria"
+            },
+            "shop/window_blind": {
+                "name": "Negozio di tapparelle e serrande"
             },
             "shop/wine": {
                 "name": "Enoteca",
@@ -3330,6 +3529,12 @@
             "tourism/zoo": {
                 "name": "Zoo",
                 "terms": "Zoo"
+            },
+            "traffic_calming/bump": {
+                "name": "Dosso Artificiale"
+            },
+            "traffic_calming/table": {
+                "name": "Attraversamento Pedonale Sopraelevato"
             },
             "type/boundary": {
                 "name": "Confine",

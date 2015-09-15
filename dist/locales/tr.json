@@ -239,6 +239,25 @@
         "list": "{users} tarafından yapılan katkılar",
         "truncated_list": "{users} ve {count} başkası eliyle yapılan katkılar"
     },
+    "infobox": {
+        "selected": "{n} seçilmiş",
+        "geometry": "Geometri",
+        "closed": "kapalı",
+        "center": "Merkez",
+        "perimeter": "Çevre",
+        "length": "Uzunluk",
+        "area": "Alan",
+        "centroid": "Sentroid",
+        "location": "Konum",
+        "metric": "Metrik",
+        "imperial": "İmparatorluk"
+    },
+    "geometry": {
+        "point": "nokta",
+        "line": "çizgi",
+        "area": "alan",
+        "relation": "ilişki"
+    },
     "geocoder": {
         "search": "Dünya haritasında ara...",
         "no_results_visible": "Harita alanının görünüşünde sonuçbulunamadı",
@@ -268,11 +287,16 @@
         "incomplete": "<indirilmedi>",
         "feature_list": "Özellik ara",
         "edit": "Özelliği düzenle",
+        "check": {
+            "yes": "Evet",
+            "no": "Hayır"
+        },
         "none": "Hiç",
         "node": "Düğüm",
         "way": "Yön",
         "relation": "İlişki",
-        "location": "Konum"
+        "location": "Konum",
+        "add_fields": "Alan ekle:"
     },
     "background": {
         "title": "Arkaplan",
@@ -294,10 +318,14 @@
     },
     "feature": {
         "points": {
-            "description": "Noktalar"
+            "description": "Noktalar",
+            "tooltip": "İlgi Çekici Nokta (POI)"
         },
         "major_roads": {
             "tooltip": "Karayolu, Sokak, vb."
+        },
+        "paths": {
+            "description": "Patikalar"
         },
         "buildings": {
             "description": "Binalar",
@@ -308,7 +336,8 @@
             "tooltip": "Ormanlar, Tarım arazisi, Parklar, Yerleşim, Ticari, vb."
         },
         "boundaries": {
-            "description": "Sınırlar"
+            "description": "Sınırlar",
+            "tooltip": "İdari Sınırları"
         },
         "water": {
             "tooltip": "Nehirler, Göller, Havuzlar, Havzalar, vb."
@@ -319,6 +348,9 @@
         },
         "power": {
             "tooltip": "Enerji Nakil Hatları, Enerji Santralleri, Trafolar, vb."
+        },
+        "past_future": {
+            "tooltip": "Öneri, Yapım Aşamasında, Terk Edilmiş, Yıkılmış v.b."
         },
         "others": {
             "tooltip": "Geriye Kalanlar"
@@ -343,9 +375,22 @@
         "title": "Kaydet",
         "help": "Diğer kullanıcıların yaptığınız değişiklikleri görmesi için OpenStreetMap'e kaydediniz.",
         "no_changes": "Kaydedilecek bir değişiklik yok",
+        "error": "Kaydederken bir hata oluşturuldu",
         "unknown_error_details": "Lütfen internete bağlı olduğunuzdan emin olun.",
         "uploading": "Değişiklikleriniz OpenStreetMap'e gönderiliyor.",
-        "unsaved_changes": "Kaydedilmemiş değişiklikleriniz var"
+        "unsaved_changes": "Kaydedilmemiş değişiklikleriniz var",
+        "conflict": {
+            "header": "Çakışan düzeltmeleri çöz",
+            "count": "Çakışma {num} (toplam: {total})",
+            "previous": "< Önceki",
+            "next": "Sonraki >",
+            "keep_local": "Benimki dursun",
+            "keep_remote": "Diğerinin ki kullan",
+            "restore": "Geri getir",
+            "delete": "Silinmiş Kalsın",
+            "download_changes": "veya kendin düzeltmeleri indir",
+            "done": "Bütün çakışmaları düzenlendi!"
+        }
     },
     "success": {
         "edited_osm": "Düzenlenmiş OSM!",
@@ -357,7 +402,8 @@
         "help_html": "Yaptığın değişikliklerin bir kaç dakika içinde \"Ölçünlü ya da başka deyişle standart\" katmanda görülebilmesi gerek. Öteki katmanlar, ve özellikler, daha çok süre alabilir\n(<a href='https://help.openstreetmap.org/questions/4705/why-havent-my-changes-appeared-on-the-map' target='_blank'>ayrıntılar</a>).\n"
     },
     "confirm": {
-        "okay": "Tamam"
+        "okay": "Tamam",
+        "cancel": "İptal"
     },
     "splash": {
         "welcome": "OpenStreetMap Editörü iD'ye hoşgeldiniz",
@@ -485,7 +531,6 @@
         },
         "fields": {
             "access": {
-                "label": "Ulaşım",
                 "options": {
                     "designated": {
                         "description": "Giriş, imlere ya da yerel yasalara göre olurlanmış",
@@ -512,9 +557,7 @@
                         "title": "Serbest"
                     }
                 },
-                "placeholder": "Bilinmeyen",
                 "types": {
-                    "access": "Genel",
                     "bicycle": "Bisikletler",
                     "foot": "Yürüyerek",
                     "horse": "Atlar",
@@ -522,7 +565,6 @@
                 }
             },
             "access_simple": {
-                "label": "Giriş",
                 "placeholder": "evet"
             },
             "access_toilets": {
@@ -533,6 +575,7 @@
                 "placeholders": {
                     "city": "Şehir",
                     "country": "Ülke",
+                    "district": "İlçe",
                     "hamlet": "Küçük köy",
                     "housename": "Ev adı",
                     "housenumber": "123",
@@ -540,7 +583,8 @@
                     "postcode": "Posta kodu",
                     "province": "İl",
                     "state": "Uçbeylik",
-                    "street": "Sokak"
+                    "street": "Sokak",
+                    "suburb": "Şehiriçi mahalle"
                 }
             },
             "admin_level": {
@@ -589,6 +633,9 @@
             "amenity": {
                 "label": "Tip"
             },
+            "artist": {
+                "label": "Sanatçı"
+            },
             "artwork_type": {
                 "label": "Tip"
             },
@@ -604,6 +651,9 @@
             "boundary": {
                 "label": "Tip"
             },
+            "brand": {
+                "label": "Marka"
+            },
             "building": {
                 "label": "Bina"
             },
@@ -615,10 +665,30 @@
                 "placeholder": "50, 100, 200..."
             },
             "cardinal_direction": {
-                "label": "Yön"
+                "label": "Yön",
+                "options": {
+                    "E": "Doğu",
+                    "ENE": "Doğu-kuzeydoğu",
+                    "ESE": "Doğu-güneydoğu",
+                    "N": "Kuzey",
+                    "NE": "Kuzeydoğu",
+                    "NNE": "Kuzey-kuzeydoğu",
+                    "NNW": "Kuzey-kuzeybatı",
+                    "NW": "Kuzeybatı",
+                    "S": "Güney",
+                    "SE": "Güneydoğu",
+                    "SSE": "Güney-güneydoğu",
+                    "SSW": "Güney-güneybatı",
+                    "SW": "Güneybatı",
+                    "W": "Batı",
+                    "WNW": "Batı-kuzeybatı",
+                    "WSW": "Batı-güneybatı"
+                }
             },
             "clock_direction": {
+                "label": "Yön",
                 "options": {
+                    "anticlockwise": "Saat Yönünün Tersine",
                     "clockwise": "Saat Yönünde"
                 }
             },
@@ -628,17 +698,33 @@
             "construction": {
                 "label": "Tip"
             },
+            "content": {
+                "label": "İçerik"
+            },
             "country": {
                 "label": "Ülke"
             },
+            "covered": {
+                "label": "Kapalı"
+            },
             "craft": {
                 "label": "Tip"
+            },
+            "crop": {
+                "label": "Tarim ürünü"
             },
             "crossing": {
                 "label": "Tip"
             },
             "cuisine": {
                 "label": "Mutfak"
+            },
+            "cycleway": {
+                "label": "Bisiklet Yolları",
+                "types": {
+                    "cycleway:left": "Sol tarafta",
+                    "cycleway:right": "Sağ tarafta"
+                }
             },
             "denomination": {
                 "label": "Sınıf"
@@ -671,10 +757,25 @@
                 "label": "Ücret"
             },
             "fire_hydrant/type": {
-                "label": "Tip"
+                "label": "Tip",
+                "options": {
+                    "underground": "Yeraltı",
+                    "wall": "Duvar"
+                }
             },
             "fixme": {
                 "label": "Bunu Düzelt"
+            },
+            "fuel": {
+                "label": "Benzin İstasyonu"
+            },
+            "gender": {
+                "label": "Cinsiyet",
+                "options": {
+                    "female": "Kadın",
+                    "male": "Erkek"
+                },
+                "placeholder": "Bilinmiyor"
             },
             "generator/source": {
                 "label": "Kaynak"
@@ -694,6 +795,18 @@
             },
             "hoops": {
                 "placeholder": "1, 2, 4..."
+            },
+            "iata": {
+                "label": "IATA"
+            },
+            "icao": {
+                "label": "ICAO"
+            },
+            "incline_steps": {
+                "options": {
+                    "down": "Aşağı",
+                    "up": "Yukarı"
+                }
             },
             "information": {
                 "label": "Tip"
@@ -721,8 +834,14 @@
             "layer": {
                 "label": "Katman"
             },
+            "leaf_type": {
+                "label": "Yaprak Türü"
+            },
             "leisure": {
                 "label": "Tip"
+            },
+            "length": {
+                "label": "Uzunluk (metre)"
             },
             "levels": {
                 "label": "Bölümler",
@@ -745,7 +864,8 @@
                 "placeholder": "0, 1, 2, 3..."
             },
             "name": {
-                "label": "İsim"
+                "label": "İsim",
+                "placeholder": "Genel adı (eğer varsa)"
             },
             "natural": {
                 "label": "Doğal"
@@ -760,10 +880,18 @@
                 "label": "Tip"
             },
             "oneway": {
-                "label": "Tek Yön"
+                "label": "Tek Yön",
+                "options": {
+                    "no": "Hayır",
+                    "yes": "Evet"
+                }
             },
             "oneway_yes": {
-                "label": "Tek Yön"
+                "label": "Tek Yön",
+                "options": {
+                    "no": "Hayır",
+                    "yes": "Evet"
+                }
             },
             "opening_hours": {
                 "label": "Saatler"
@@ -775,7 +903,11 @@
                 "placeholder": "3, 4, 5..."
             },
             "parking": {
-                "label": "Tür"
+                "label": "Tür",
+                "options": {
+                    "surface": "Yüzey",
+                    "underground": "Yeraltı"
+                }
             },
             "phone": {
                 "label": "Telefon",
@@ -785,10 +917,16 @@
                 "label": "Zorluk"
             },
             "piste/type": {
-                "label": "Tip"
+                "label": "Tip",
+                "options": {
+                    "playground": "Çocuk Parkı"
+                }
             },
             "place": {
                 "label": "Tip"
+            },
+            "population": {
+                "label": "Nüfus"
             },
             "power": {
                 "label": "Tip"
@@ -805,11 +943,28 @@
             "religion": {
                 "label": "Dini"
             },
+            "restrictions": {
+                "label": "Dönüş Kısıtlamaları"
+            },
             "route": {
                 "label": "Tip"
             },
+            "seasonal": {
+                "label": "Mevsimsel"
+            },
             "service": {
                 "label": "Tip"
+            },
+            "service/bicycle/chain_tool": {
+                "options": {
+                    "no": "Hayır",
+                    "yes": "Evet"
+                }
+            },
+            "service/bicycle/pump": {
+                "options": {
+                    "no": "Hayır"
+                }
             },
             "shelter": {
                 "label": "Barınak"
@@ -826,10 +981,18 @@
             "sport": {
                 "label": "Spor"
             },
+            "sport_ice": {
+                "label": "Spor"
+            },
+            "sport_racing": {
+                "label": "Spor"
+            },
             "structure": {
                 "label": "Yapı",
                 "options": {
                     "bridge": "Köprü",
+                    "embankment": "Set",
+                    "ford": "Akarsu Geçişi Yeri",
                     "tunnel": "Tünel"
                 },
                 "placeholder": "Bilinmeyen"
@@ -840,9 +1003,16 @@
             "surface": {
                 "label": "Yüzey"
             },
+            "takeaway": {
+                "options": {
+                    "no": "Hayır",
+                    "yes": "Evet"
+                }
+            },
             "toilets/disposal": {
                 "options": {
-                    "bucket": "Kova"
+                    "bucket": "Kova",
+                    "pitlatrine": "Hela"
                 }
             },
             "tourism": {
@@ -850,6 +1020,9 @@
             },
             "trail_visibility": {
                 "placeholder": "Olağanüstü, İyi, Kötü"
+            },
+            "trees": {
+                "label": "Ağaçlar"
             },
             "tunnel": {
                 "label": "Tünel"
@@ -870,6 +1043,9 @@
             "wheelchair": {
                 "label": "Tekerlekli Sandalye Erişimi"
             },
+            "width": {
+                "label": "Genişlik (metre)"
+            },
             "wikipedia": {
                 "label": "Vikipedi"
             }
@@ -877,6 +1053,15 @@
         "presets": {
             "address": {
                 "name": "Adres"
+            },
+            "aerialway": {
+                "name": "Teleferik Yolu"
+            },
+            "aerialway/station": {
+                "name": "Teleferik İstasyonu"
+            },
+            "aeroway": {
+                "name": "Hava Yolu"
             },
             "aeroway/aerodrome": {
                 "name": "Havaalanı"
@@ -888,7 +1073,10 @@
                 "name": "Havalimanı Terminali"
             },
             "amenity": {
-                "name": "Dinlenme tesisi"
+                "name": "Tesis"
+            },
+            "amenity/arts_centre": {
+                "name": "Sanat Merkezi"
             },
             "amenity/atm": {
                 "name": "ATM"
@@ -899,6 +1087,9 @@
             "amenity/bar": {
                 "name": "Bar"
             },
+            "amenity/bbq": {
+                "name": "Mangal"
+            },
             "amenity/bench": {
                 "name": "Bank"
             },
@@ -908,8 +1099,17 @@
             "amenity/bicycle_rental": {
                 "name": "Bisiklet Kiralama"
             },
+            "amenity/bicycle_repair_station": {
+                "name": "Bisiklet Tamiri"
+            },
             "amenity/boat_rental": {
                 "name": "Bot Kiralama"
+            },
+            "amenity/bureau_de_change": {
+                "name": "Döviz Bürosu"
+            },
+            "amenity/bus_station": {
+                "name": "Otogar"
             },
             "amenity/cafe": {
                 "name": "Kafe"
@@ -922,6 +1122,9 @@
             },
             "amenity/car_wash": {
                 "name": "Araç Yıkama"
+            },
+            "amenity/childcare": {
+                "name": "Çocuk Bakımı"
             },
             "amenity/cinema": {
                 "name": "Sinema"
@@ -962,11 +1165,17 @@
             "amenity/hospital": {
                 "name": "Hastane Bölgesi"
             },
+            "amenity/kindergarten": {
+                "name": "Kreş Sahası"
+            },
             "amenity/library": {
                 "name": "Kütüphane"
             },
             "amenity/marketplace": {
                 "name": "Pazar Yeri"
+            },
+            "amenity/nightclub": {
+                "name": "Gece Kulübü"
             },
             "amenity/parking": {
                 "name": "Otopark"
@@ -1025,6 +1234,9 @@
             "amenity/swimming_pool": {
                 "name": "Yüzme Havuzu"
             },
+            "amenity/taxi": {
+                "name": "Taksi Durağı"
+            },
             "amenity/telephone": {
                 "name": "Telefon"
             },
@@ -1039,6 +1251,12 @@
             },
             "amenity/university": {
                 "name": "Yerleşke"
+            },
+            "amenity/veterinary": {
+                "name": "Veteriner"
+            },
+            "amenity/waste_basket": {
+                "name": "Çöp Kutusu"
             },
             "area": {
                 "name": "Alan"
@@ -1067,6 +1285,9 @@
             "barrier/gate": {
                 "name": "Kapı"
             },
+            "barrier/hedge": {
+                "name": "Çit"
+            },
             "barrier/stile": {
                 "name": "Çit basamağı"
             },
@@ -1076,17 +1297,35 @@
             "barrier/wall": {
                 "name": "Duvar"
             },
+            "boundary/administrative": {
+                "name": "İdari Sınırı"
+            },
             "building": {
                 "name": "Bina"
             },
             "building/apartments": {
                 "name": "Apartmanlar"
             },
+            "building/barn": {
+                "name": "Samanlık"
+            },
+            "building/bunker": {
+                "name": "Barınak"
+            },
+            "building/cabin": {
+                "name": "Kabin"
+            },
             "building/cathedral": {
                 "name": "Katedral"
             },
+            "building/chapel": {
+                "name": "Şapel"
+            },
             "building/church": {
                 "name": "Kilise"
+            },
+            "building/college": {
+                "name": "Kolej Binası"
             },
             "building/commercial": {
                 "name": "Ticari Bina"
@@ -1106,6 +1345,12 @@
             "building/garage": {
                 "name": "Garaj"
             },
+            "building/garages": {
+                "name": "Garaj"
+            },
+            "building/greenhouse": {
+                "name": "Sera"
+            },
             "building/hospital": {
                 "name": "Hastane Binası"
             },
@@ -1120,6 +1365,9 @@
             },
             "building/industrial": {
                 "name": "Endüstriyel Bina"
+            },
+            "building/kindergarten": {
+                "name": "Kreş Binası"
             },
             "building/public": {
                 "name": "Kamu Binası"
@@ -1145,17 +1393,29 @@
             "building/warehouse": {
                 "name": "Depo"
             },
+            "craft": {
+                "name": "Zanaat"
+            },
             "craft/beekeeper": {
                 "name": "Arıcı"
             },
             "craft/blacksmith": {
                 "name": "Demirci"
             },
+            "craft/boatbuilder": {
+                "name": "Tersane"
+            },
+            "craft/brewery": {
+                "name": "Bira Fabrikası"
+            },
             "craft/carpenter": {
                 "name": "Marangoz"
             },
             "craft/clockmaker": {
                 "name": "Saatçi"
+            },
+            "craft/confectionery": {
+                "name": "Pastane"
             },
             "craft/dressmaker": {
                 "name": "Terzi"
@@ -1165,6 +1425,12 @@
             },
             "craft/gardener": {
                 "name": "Bahçıvan"
+            },
+            "craft/handicraft": {
+                "name": "El Sanatı"
+            },
+            "craft/hvac": {
+                "name": "Isı & Soğutma"
             },
             "craft/jeweler": {
                 "name": "Kuyumcu"
@@ -1187,8 +1453,14 @@
             "craft/plumber": {
                 "name": "Tesisatçı"
             },
+            "craft/pottery": {
+                "name": "Çömklekçi Atölyesi"
+            },
             "craft/roofer": {
                 "name": "Çatı Tamircisi"
+            },
+            "craft/sawmill": {
+                "name": "Kereste Fabrikası"
             },
             "craft/sculpter": {
                 "name": "Heykeltraş"
@@ -1208,11 +1480,20 @@
             "craft/tiler": {
                 "name": "Çinici/Fayansçı"
             },
+            "craft/tinsmith": {
+                "name": "Tenekeci"
+            },
             "craft/upholsterer": {
                 "name": "Döşemeci"
             },
             "craft/watchmaker": {
                 "name": "Saatçi"
+            },
+            "craft/winery": {
+                "name": "Şarap Fabrikası"
+            },
+            "embankment": {
+                "name": "Set"
             },
             "emergency/ambulance_station": {
                 "name": "Cankurtaran Durağı"
@@ -1223,23 +1504,20 @@
             "entrance": {
                 "name": "Giriş/Çıkış"
             },
-            "footway/crosswalk": {
-                "name": "Yaya Geçidi"
-            },
             "footway/sidewalk": {
                 "name": "Kaldırım"
+            },
+            "ford": {
+                "name": "Akarsu Geçişi Yeri"
             },
             "highway": {
                 "name": "Otoyol"
             },
+            "highway/bridleway": {
+                "name": "At Yürüyüş Yolu"
+            },
             "highway/bus_stop": {
                 "name": "Otobüs Durağı"
-            },
-            "highway/crossing": {
-                "name": "Geçit"
-            },
-            "highway/crosswalk": {
-                "name": "Yaya Geçidi"
             },
             "highway/cycleway": {
                 "name": "Bisiklet Yolu"
@@ -1247,11 +1525,17 @@
             "highway/footway": {
                 "name": "Yaya Yolu"
             },
+            "highway/living_street": {
+                "name": "Sokak"
+            },
             "highway/mini_roundabout": {
                 "name": "Küçük Dönerkavşak"
             },
             "highway/motorway": {
                 "name": "Otoyol"
+            },
+            "highway/motorway_junction": {
+                "name": "Otoyol Sapağı"
             },
             "highway/motorway_link": {
                 "name": "Araç Yolu Bağlantısı"
@@ -1260,7 +1544,7 @@
                 "name": "Patika"
             },
             "highway/pedestrian": {
-                "name": "Yaya"
+                "name": "Yaya Yolu"
             },
             "highway/primary": {
                 "name": "Devlet Yolu"
@@ -1289,11 +1573,17 @@
             "highway/service": {
                 "name": "Servis Yolu"
             },
+            "highway/service/alley": {
+                "name": "İki tarafı ağaçlı yol"
+            },
             "highway/service/drive-through": {
                 "name": "Sür-Al"
             },
             "highway/service/driveway": {
                 "name": "Özel Yol"
+            },
+            "highway/services": {
+                "name": "Servis Alanı"
             },
             "highway/steps": {
                 "name": "Adım"
@@ -1315,6 +1605,9 @@
             },
             "highway/trunk": {
                 "name": "Bölünmüş Anayol"
+            },
+            "highway/turning_circle": {
+                "name": "Dönüş Dairesi"
             },
             "highway/unclassified": {
                 "name": "Sınıflandırılmamış Yol"
@@ -1340,6 +1633,9 @@
             "historic/ruins": {
                 "name": "Harabeler"
             },
+            "junction": {
+                "name": "Yol Ayrımı"
+            },
             "landuse/allotments": {
                 "name": "Bostanlar"
             },
@@ -1349,8 +1645,17 @@
             "landuse/cemetery": {
                 "name": "Mezarlık"
             },
+            "landuse/commercial": {
+                "name": "Ticari Alan"
+            },
             "landuse/construction": {
                 "name": "İnşaat"
+            },
+            "landuse/farm": {
+                "name": "Tarım Alanı"
+            },
+            "landuse/farmland": {
+                "name": "Tarım Alanı"
             },
             "landuse/farmyard": {
                 "name": "Çiftlik avlusu"
@@ -1358,8 +1663,14 @@
             "landuse/forest": {
                 "name": "Orman"
             },
+            "landuse/garages": {
+                "name": "Garaj"
+            },
             "landuse/grass": {
                 "name": "Yeşil Alan"
+            },
+            "landuse/industrial": {
+                "name": "Sanayi Alanı"
             },
             "landuse/landfill": {
                 "name": "Çöplük"
@@ -1367,11 +1678,20 @@
             "landuse/meadow": {
                 "name": "Çayır"
             },
+            "landuse/military": {
+                "name": "Askeri Alan"
+            },
             "landuse/orchard": {
                 "name": "Meyve Bahçesi"
             },
             "landuse/quarry": {
                 "name": "Ocak"
+            },
+            "landuse/residential": {
+                "name": "Yerleşim Alanı"
+            },
+            "landuse/retail": {
+                "name": "Esnaf Bölgesi"
             },
             "landuse/vineyard": {
                 "name": "Bağ"
@@ -1394,8 +1714,14 @@
             "leisure/marina": {
                 "name": "Marina"
             },
+            "leisure/nature_reserve": {
+                "name": "Tabiat Parkı"
+            },
             "leisure/park": {
                 "name": "Park"
+            },
+            "leisure/picnic_table": {
+                "name": "Piknik Masası"
             },
             "leisure/pitch": {
                 "name": "Spor Sahası"
@@ -1421,6 +1747,9 @@
             "leisure/slipway": {
                 "name": "Kızak yolu"
             },
+            "leisure/sports_center": {
+                "name": "Spor Merkezi"
+            },
             "leisure/stadium": {
                 "name": "Stadyum"
             },
@@ -1433,8 +1762,26 @@
             "man_made": {
                 "name": "İnsan Yapımı"
             },
+            "man_made/cutline": {
+                "name": "Yangın Kesme Hattı"
+            },
+            "man_made/embankment": {
+                "name": "Set"
+            },
+            "man_made/flagpole": {
+                "name": "Bayrak"
+            },
             "man_made/lighthouse": {
                 "name": "Deniz Feneri"
+            },
+            "man_made/mast": {
+                "name": "Komünikasyon Direği"
+            },
+            "man_made/observation": {
+                "name": "Gözetleme Kulesi"
+            },
+            "man_made/petroleum_well": {
+                "name": "Petrol Kuyusu"
             },
             "man_made/pier": {
                 "name": "Rıhtım"
@@ -1451,6 +1798,12 @@
             "man_made/water_tower": {
                 "name": "Su Kulesi"
             },
+            "military/barracks": {
+                "name": "Baraka"
+            },
+            "military/bunker": {
+                "name": "Barınak"
+            },
             "natural": {
                 "name": "Doğal"
             },
@@ -1460,11 +1813,17 @@
             "natural/beach": {
                 "name": "Plaj"
             },
+            "natural/cave_entrance": {
+                "name": "Mağara Girişi"
+            },
             "natural/cliff": {
                 "name": "Uçurum"
             },
             "natural/coastline": {
                 "name": "Sahil Yolu"
+            },
+            "natural/fell": {
+                "name": "Kır"
             },
             "natural/glacier": {
                 "name": "Buzul"
@@ -1478,6 +1837,9 @@
             "natural/peak": {
                 "name": "Tepe / zirve"
             },
+            "natural/scree": {
+                "name": "Kayşat"
+            },
             "natural/scrub": {
                 "name": "Çalılık"
             },
@@ -1486,6 +1848,9 @@
             },
             "natural/tree": {
                 "name": "Ağaç"
+            },
+            "natural/volcano": {
+                "name": "Yanardağ"
             },
             "natural/water": {
                 "name": "Su"
@@ -1508,8 +1873,20 @@
             "office": {
                 "name": "Ofis"
             },
+            "office/accountant": {
+                "name": "Muhasebeci"
+            },
+            "office/administrative": {
+                "name": "İdari Ofis"
+            },
+            "office/architect": {
+                "name": "Mimar"
+            },
             "office/company": {
                 "name": "Şirket Ofisi"
+            },
+            "office/educational_institution": {
+                "name": "Eğitimsel Kurumu"
             },
             "office/estate_agent": {
                 "name": "Gayrimenkul Ofisi"
@@ -1526,8 +1903,17 @@
             "office/lawyer": {
                 "name": "Hukuk Bürosu"
             },
+            "office/newspaper": {
+                "name": "Gazete"
+            },
+            "office/physician": {
+                "name": "Hekim"
+            },
             "office/political_party": {
                 "name": "Siyasi Parti"
+            },
+            "office/telecommunication": {
+                "name": "Telekom Bürosu"
             },
             "office/travel_agent": {
                 "name": "Seyahat Acentesi"
@@ -1537,6 +1923,9 @@
             },
             "place/city": {
                 "name": "Şehir"
+            },
+            "place/farm": {
+                "name": "Çiftlik"
             },
             "place/hamlet": {
                 "name": "Mezra"
@@ -1562,17 +1951,38 @@
             "power": {
                 "name": "Güç"
             },
+            "power/generator": {
+                "name": "Jenerator"
+            },
             "power/line": {
                 "name": "Güç Hattı"
             },
             "power/sub_station": {
                 "name": "Ara istasyon"
             },
+            "power/substation": {
+                "name": "Trafo"
+            },
+            "power/tower": {
+                "name": "Yüksek Gerilim Direği"
+            },
+            "power/transformer": {
+                "name": "Transformatör"
+            },
+            "public_transport/platform": {
+                "name": "Peron"
+            },
             "railway": {
                 "name": "Demiryolu"
             },
-            "railway/level_crossing": {
-                "name": "Demiryolu Geçidi"
+            "railway/abandoned": {
+                "name": "Terk Edilmiş Demiryolu"
+            },
+            "railway/disused": {
+                "name": "Kullanılmayan Demiryolu"
+            },
+            "railway/halt": {
+                "name": "Demiryolu Durağı"
             },
             "railway/platform": {
                 "name": "Demiryolu Platformu"
@@ -1592,11 +2002,23 @@
             "railway/tram": {
                 "name": "Tramvay"
             },
+            "relation": {
+                "name": "İlişki"
+            },
+            "roundabout": {
+                "name": "Dönel Kavşak"
+            },
             "route/ferry": {
                 "name": "Feribot Güzergahı"
             },
             "shop": {
                 "name": "Dükkan"
+            },
+            "shop/antiques": {
+                "name": "Antika Dükkanı"
+            },
+            "shop/art": {
+                "name": "Sanat Galerisi"
             },
             "shop/bakery": {
                 "name": "Fırın"
@@ -1647,6 +2069,9 @@
             "shop/convenience": {
                 "name": "Bakkal"
             },
+            "shop/cosmetics": {
+                "name": "Kozmetik Dükkanı"
+            },
             "shop/electronics": {
                 "name": "Elektronik Mağazası"
             },
@@ -1668,11 +2093,26 @@
             "shop/hardware": {
                 "name": "Donanım Mağazası"
             },
+            "shop/houseware": {
+                "name": "Ev Eşyaları Mağazası"
+            },
+            "shop/interior_decoration": {
+                "name": "İç Dekorasyon Mağazası"
+            },
             "shop/jewelry": {
                 "name": "Kuyumcu"
             },
+            "shop/kitchen": {
+                "name": "Beyaz Eşya Mağazası"
+            },
             "shop/laundry": {
                 "name": "Çamaşır Yıkama"
+            },
+            "shop/leather": {
+                "name": "Deri Dükkanı"
+            },
+            "shop/locksmith": {
+                "name": "Anahtarcı"
             },
             "shop/lottery": {
                 "name": "Loto Bayi"
@@ -1683,14 +2123,26 @@
             "shop/mobile_phone": {
                 "name": "Cep Telefonu Mağazası"
             },
+            "shop/money_lender": {
+                "name": "Tefeci"
+            },
+            "shop/musical_instrument": {
+                "name": "Çalgı Mağazası"
+            },
             "shop/optician": {
                 "name": "Optik"
+            },
+            "shop/organic": {
+                "name": "Organik Ürünleri Dükkanı"
             },
             "shop/shoes": {
                 "name": "Ayakkabı Mağazası"
             },
             "shop/supermarket": {
                 "name": "Süpermarket"
+            },
+            "shop/tailor": {
+                "name": "Terzi"
             },
             "shop/toys": {
                 "name": "Oyuncakçı"
@@ -1749,8 +2201,17 @@
             "type/boundary": {
                 "name": "Sınır"
             },
+            "type/boundary/administrative": {
+                "name": "İdari Sınırı"
+            },
             "type/restriction": {
                 "name": "Kısıtlama"
+            },
+            "type/restriction/no_left_turn": {
+                "name": "Sola Dönmek Yasak"
+            },
+            "type/restriction/no_right_turn": {
+                "name": "Sağa Dönmek Yasak"
             },
             "type/route": {
                 "name": "Güzergah"

@@ -239,6 +239,7 @@
     "commit": {
         "title": "Išsaugoti pakeitimus",
         "description_placeholder": "Trumpas jūsų indėlio aprašymas",
+        "message_label": "Pakeitimo komentaras",
         "upload_explanation": "Jūsų įkeliami pakeitimai bus matomi visuose žemėlapiuose, naudojančiuose OpenStreetMap duomenis.",
         "upload_explanation_with_user": "Pakeitimai, kuriuos jūs įkeliate kaip naudotojas {user} bus matomi visuose žemėlapiuose, naudojančiuose OpenStreetMap duomenis.",
         "save": "Išsaugoti",
@@ -252,6 +253,26 @@
     "contributors": {
         "list": "Keitėjai {users}",
         "truncated_list": "Keitėjai {users} ir {count} kitų"
+    },
+    "infobox": {
+        "selected": "{n} pažymėta",
+        "geometry": "Geometrija",
+        "closed": "uždaryta",
+        "center": "Centras",
+        "perimeter": "Perimetras",
+        "length": "Ilgis",
+        "area": "Plotas",
+        "centroid": "Centroidas",
+        "location": "Vieta",
+        "metric": "Metrinė",
+        "imperial": "Imperinė"
+    },
+    "geometry": {
+        "point": "taškas",
+        "vertex": "viršūnė",
+        "line": "linija",
+        "area": "plotas",
+        "relation": "ryšys"
     },
     "geocoder": {
         "search": "Ieškoti visam pasaulyje...",
@@ -302,7 +323,11 @@
         "custom_button": "Redaguoti pasirinktiną foną",
         "custom_prompt": "Įveskite kaladėlių URL šabloną. Galimi ženklai yra {z}, {x}, {y} Z/X/Y schemai ir {u} quadtile schemai.",
         "fix_misalignment": "Taisyti poziciją",
-        "reset": "iš naujo"
+        "reset": "iš naujo",
+        "minimap": {
+            "description": "Minižemėlapis",
+            "tooltip": "Rodyti atitolintą žemėlapį, kad būtų lengviau rasti šiuo metu rodomą vietą."
+        }
     },
     "map_data": {
         "title": "Žemėlapio duomenys",
@@ -473,12 +498,10 @@
     "help": {
         "title": "Pagalba",
         "help": "# Help\n\nTai [OpenStreetMap](http://www.openstreetmap.org/), laisvo ir keičiamo pasaulio žemėlapio redaktorius. Šiuo redaktoriumi galite pridėti ir keisti duomenis savo vietovėje, taip visiems pagerindami atviro kodo ir atvirų duomenų pasaulio žemėlapį.\n\nPakeitimai, kuriuos darote šiame žemėlapyje bus matomi visiems, kas naudoja OpenStreetMap. Kad padarytumėte pakeitimą, jums reikia [prisijungti](https://www.openstreetmap.org/login).\n\n[iD redaktorius](http://ideditor.com/) - tai bendruomenės projektas, kurio [kodas atvirai prieinamas GitHub](https://github.com/openstreetmap/iD).\n",
-        "editing_saving": "# Keitimas ir įrašymas\n\nŠis redaktorius sukurtas visų pirma darbui prisijungus, todėl jūs jį paleidžiate per svetainę.\n\n### Objektų žymėjimas\n\nNorėdami pažymėti objektą, tokį kaip kelią ar lankytiną vietą, pažymėkite jį žemėlapyje. Taip pažymėtas objektus bus paryškintas ir bus atidaryta panelė su objekto informacija bei meniu veiksmų, kuriuos galite atlikti su pažymėtu objektu.\n\nNorėdami pažymėti kelis objektus, laikykite paspaudę klavišą „Shift“. Tada arba spauskite ant kitų objektų, kuriuos norite pažymėti, arba tempkite pele per žemėlapį, kad nupaišytumėte stačiakampį.\nTaip bus pažymėti visi taškai, esantys stačiakampio viduje.\n\n### Pakeitimų įrašymas\n\nKai padarote tarkim kelių, pastatų ar vietovių pakeitimų, jie saugomi vietoje tol, kol jūs neįrašote jų į serverį. Nesijaudinkite jei padarote klaidą, visada galite atstatyti pakeitimus su atstatymo mygtuku ir pakartotinai juos padaryti paspaudę pakartojimo mygtuką.\n\nSpauskite mygtuką „Įrašyti“, jei norite įrašyti grupę pakeitimų, pavyzdžiui jei baigėte vienos vietos pakeitimus ir dabar norėtumėte pradėti keisti kitoje vietoje. Galėsite peržiūrėti, ką padarėte, o redaktorius pateiks naudingus patarimus ar įspėjimus, jei kažkas atrodo ne visai teisingai.\n\nJei viskas gerai, galite įvesti trumpą komentarą, paaiškinantį jūsų pakeitimus ir tada vėl spausti „Įrašyti“, kad įkeltumėte pakeitimus į\n[OpenStreetMap.org](http://www.openstreetmap.org/), kur visi kiti naudotojai juos matys ir galės toliau tobulinti.\n\nJei negalite baigti savo pakeitimų vienu prisėdimu, galite palikti redaktoriaus langą ir grįžti vėliau (toje pačioje naršyklėje ir tame pačiame kompiuteryje), redaktorius jums pasiūlys tęsti jūsų darbą.\n",
         "roads": "# Keliai\n\nJūs galite kurti, taisyti ir naikinti kelius redaktoriaus pagalba. Keliai gali būti įvairių\ntipų: takai, vieškeliai, maršrutai, dviračių takai ir daug kitų, dažnai susikertančių,\njuos visus galima pažymėti.\n\n### Parinkimas\n\nNorėdami parinkti kelią - spauskite ant jo. Kelio kontūras bus paryškintas, taipogi\nbus rodomas mažas įrankių meniu ir šonine skiltimi, rodančia daugiau informacijos\napie kelią.\n\n### Keitimas\n\nDažnai pastebėsite kelius, kurių pozicija neatitinka fone esančios ortofotonuotraukos arba\njūsų GPS pėdsako. Galie pataisyti kelio poziciją, kad kelias būtų teisingoje vietoje.\n\nVisų pirma spauskite ant kelio, kurį norite keisti. Kelias bus paryškintas ir bus matomi\nkontroliniai taškai, kuriuos jūs galite pertempti į teisingesnes pozicijas. Jei norite pridėti\npapildomų kontrolinių taškų - du kartus spauskite ant kelio segmento, kuriame\ndar nėra taško - bus pridėtas naujas taškas.\n\nJei kelias jungiasi su kitu keliu, bet nėra teisingai sujungtas žemėlapyje, jūs galite\ntempti vieną iš kelio kontrolinių taškų ant kito kelio, kad juos sujungtumėte. Labai\nsvarbu teisingai sujungti kelius, nes tai naudojama maršrutizavimui.\n\nTaipogi galite naudoti įrankį „Perkelti“ arba spausti mygtuką „M“, jei norite perkelti\nvisą kelią iš karto, tada vėl spauskite „M“, kad patvirtintumėte perkėlimą.\n\n### Naikinimas\n\nJei kelias yra visiškai neteisingas - jūs matote, kad tokio kelio apskritai nėra ortofoto\nir jūs žinote, kad jo ir realybėje nėra - galite kelią ištrinti, kad jo nebeliktų žemėlapyje.\nNaikindami objektus būkite atidūs, kaip ir bet kuris kitas keitimas, naikinimas matomas\nvisiems naudotojams, o ortofotografijos dažnai būna pasenusios, tagi naujai\nnutiestas kelias gali būti tiesiog nematomas.\n\nKelią galite panaikinti pažymėję jį ir paspaudę šiukšlių dėžės piktogramą arba\npaspaudę mygtuką „Trinti“.\n\n### Kūrimas\n\nRadote vietą, kur turėtų būti kelias, bet jo nėra? Spauskite mygtuką „Linija“\narba klavišą „2“, kad pradėtumėte linijos piešimą.\n\nSpauskite žemėlapyje ant vietos, kur turi prasidėti jūsų kelias. Jeigu kelias atsišakoja\nnuo jau esamo kelio - pradėkite naujo kelio piešimą paspaudę ant atsišakojimo vietos.\n\nTada dėliokite kelio taškus taip, kad jo kontūras maksimaliai atitiktų realų kelią pagal\npalydovinę nuotrauką ar GPS pėdsakus. Jei jūsų piešiamas kelias kerta kitą kelią,\nsujunkite juos spaudžiant ties susikirtimo tašku. Kai baigsite braižyti, du kartus\nspauskite pele arba spauskite klaviatūros mygtuką „Enter“.\n",
-        "gps": "# GPS\n\nGPS duomenys - patikimiausias duomenų šaltinis atvirame žemėlapyje. Šis redaktorius palaiko vietinius pėdsakus - „.gpx“ failus jūsų kompiuteryje. Jūs galite surinkti tokius GPS pėdsakus eile išmaniųjų telefonų aplikacijų arba asmenine GPS įranga.\n\nDaugiau informacijos apie tai, kaip daryti GPS apžiūrą rasite [Surveying with a GPS](http://learnosm.org/en/beginner/using-gps/).\n\nNorint panaudoti GPX pėdsaką žymėjimui, atitempkite GPX failą ant žemėlapio. Jei jis bus atpažintas - pamatysite jį žemėlapyje kaip ryškią purpurinę liniją. Spauskite dešinėje esantį meniu „Žemėlapio duomenys“, norėdami įjungti, išjungti ar priartinti šį naują GPX valdomą sluoksnį.\n\nGPX pėdsakas nekeliamas tiesiogiai į OpenStreetMap - geriausias naudojimo būdas - naudoti pėdsaką kaip orientyrą braižant naujus žemėlapio objektus. Vėliau pėdsaką patartina įkelti, kad jį galėtų naudoti kiti braižytojai [upload it to OpenStreetMap](http://www.openstreetmap.org/trace/create).\n",
         "imagery": "# Nuotraukos\n\nIš oro ar palydovo darytos nuotraukos - svarbus žemėlapio paišymo pagalbininkas.\nDešinėje esančiame meniu rasite įvairių nuotraukų, darytų iš lėktuvų, palydovų ar\nkombinuotų šaltinių.\n\nTik įjungus redaktorių bus automatiškai įjungtas [Bing Maps](http://www.bing.com/maps/)\npalydovinis sluoksnis, bet priklausomai nuo to, kurioje geografinėje vietoje\nredaguojate - bus rodomi ir kiti nuotraukų šaltiniai. Kai kurios šalys, tokios kaip\nJAV, Prancūzija, Danija ir Lietuva turi labai aukštos kokybės ir tikslumo\nortofotonuotraukas. Pavyzdžiui Lietuvoje reikėtų naudoti NŽT ORT10LT.\n\nNuotraukos kartais būna pasislinkusios nuo realios pozicijos dėl nuotraukų\ntiekėjo klaidų. Jei matote, kad daug kelių ar kitų objektų yra pasislinkę nuo\nnuotraukos, nepulkite jų tempti į „teisingas“ vietas. Vietoje to geriau pataisykite\nnuotraukos poziciją pagal esamus duomenis, paspaudę fono parinkčių apačioje\n„Taisyti lygiavimą“. NŽT ORT10LT lygiavimas yra teisingas visoje Lietuvos\nteritorijoje, taigi jo taisyti nereikia.\n",
         "addresses": "# Adresai\n\nAdresų informacija - viena naudingiausių žemėlapyje.\n\nOpenStreetMap adresai dažniausiai įrašomi kaip pastatų arba lankytinų vietų\natributai.\n\nJūs galite pridėti adreso informaciją vietoms, pažymėtoms kaip pastatų\nkontūrai bei pavieniams taškams. Geriausias adreso informacijos šaltinis\nyra vietinė apžiūra arba asmeninės žinios - kaip ir su bet kuriais kitais\nobjektais, naudoti šaltinius, tokius kaip Google Maps, maps.lt, Registrų Centras\nir pan. yra griežtai draudžiama.\n",
-        "inspector": "# Inspektoriaus naudojimas\n\nInspekatorius - tai puslapio kairėje esanti dalis, kurioje jūs galite keisti pažymėto objekto detales.\n\n### Objekto tipo parinkimas\n\nPo to, kai jūs pridedate tašką, liniją ar plotą, jūs galite pasirinkti kokio tipo tai objektas, pavyzdžiui ar tai yra greitkelis ar kelias, prekybos centras ar kavinė. Inspektorius rodys mygtukus populiariausiems objektų tipams, o kitus galite rasti įrašydami raktažodžius į paieškos lauką.\n\nSpauskite „i“ objekto tipo mygtuko dešinėje apatinėje pusėje, jei norite sužinoti daugiau. Spauskite mygtuką, jei norite parinkti tipą.\n\n### Formų naudojimas ir žymų keitimas\n\nPo to, kai jūs parenkate objekto tipą, arba kai parinkote objektą, kurio tipas jau buvo nurodytas, inspektorius rodys laukus su objekto informacija, tokia kaip pavadinimas ir adresas.\n\nPo šiais laukais jūs galite spausti piktogramas, kad pridėtumėte kitas detales, tokias kaip [Wikipedijos](http://www.wikipedia.org/) informaciją, prieinamumą vėžymėlyje ir pan.\n\nInspektoriaus apačioje spauskite „Papildomo žymos“, kad pridėtumėte prie objekto bet kokias kitas žymas. [Taginfo](http://taginfo.openstreetmap.org/) - puikus resursas, kurio pagalba galite sužinoti daugiau apie kitas populiarias žymų kombinacijas.\n\nPakeitimai, kuriuos darote inspektoriuje automatiškai pritaikomi žemėlapiui. Bet kuriuo metu galite atstatyti pakeitimus spausdami mygtuką „atstatyti“.\n",
+        "inspector": "# Inspektoriaus naudojimas\n\nInspektorius - tai kairėje puslapio pusėje esanti skiltis, leidžianti jums keisti pažymėto objekto savybes.\n\n### Objekto tipo parinkimas\n\nPridėję tašką, liniją ar plotą, jūs galite parinkti, kokio tipo tai objektas. Pavyzdžiui ar tai greitkelis ar gyvenamasis kelias, parduotuvė ar kavinė. Inspektorius rodys mygtukus populiariausiems objektų tipams, o kitus tipus rasite rašydami paieškos lauke tai, ko norite.\n\nSpauskite objekto tipo mygtuko dešinėje apačioje esantį mygtuką „i“, kad sužinotumėte daugiau. Spauskite patį mygtuką, kad parinktumėte tipą.\n\n### Formų naudojimas ir žymų keitimas\n\nParinkus objekto tipą arba pažymėjus objektą, kurio tipas jau parinktas, inspektorius rodys objekto tipo laukus, tokius kaip pavadinimas ir adresas.\n\nPo šių laukų galite spausti iškrentantį sąrašą „Pridėti lauką“, kad pridėtumėte kitą informaciją, tokia kaip nuorodą į wikipediją, prieigą neįgaliesiems ir pan.\n\nInspektoriaus apačioje galite spausti „Papildomos žhmos“, kad pridėtumėte bet kokias norimas kitas žymas. [Taginfo](http://taginfo.openstreetmap.org/) yra puiki vieta, kur galima sužinoti apie populiarias žymų kombinacijas.\n\nInspektoriuje padaryti pakeitimai automatiškai pritaikomi žemėlapiui. Pakeitimus galite atstatyti bet kokiu metu paspaudę mygtuką „Atšaukti“.\n",
         "buildings": "# Pastatai\n\nOpenStreetMap - tai didžiausia pasaulyje pastatų duomenų bazė. Jūs galite\nkurti ir tobulinti šią duomenų bazę.\n\n### Parinkimas\n\nPastatą parinkti galit paspaudę ant jo kontūro. Tai paryškins pastatą ir atvers\nmažą įrankių meniu bei šoninę skiltį su papildoma informacija apie pastatą.\n\n### Keitimas\n\nKartais pastatai būna nupiešti neteisingoje vietoje arba turi neteisingas žymas.\n\nNorėdami perkelti visą pastatą, pažymėkite jį, parinkite įrankį „Perkelti“.\nPerkelkite pastatą pelės pagalba ir spauskite, kai vieta yra teisinga.\n\nNorėdami patvarkyti pastato formą, spauskite ir tempkite pastato kontūro\ntaškus į teisingas vietas.\n\n### Kūrimas\n\nVienas pagrindinių klausimų apie pastatų registravimą žemėlapyje yra tai,\nkad OpenStreetMap pastatai registruojami ir kaip plotai, ir kaip taškai.\nBendra taisyklė yra žymėti pastatus plotais, jei tik tai įmanoma. Įmones ar\nlankytinas vietas, kurios veikia pastatuose, žymėti kaip taškus, esančius\npastato ploto viduje.\n\nPradėkite pastato braižyma parinkdami mygtuką „Plotas“ viršutinėje\nsąsajos dalyje. Pastato braižymą baikite spausdami „Enter“ arba paspaudę\nant pirmo pastato formos taško.\n\n### Naikinimas\n\nJei pastatas yra visiškai neteisingas - jūs aiškiai matote, kad pastato nėra\npalydovinėje nuotraukoje ar gal net patikrinote jo nebuvimą realiu apsilankymu\nvietoje - galite panaikinti pastatą iš žemėlapio. Naikindami objektus būkite\natidūs, kaip ir bet kuris kitas pakeitimas, šis bus matomas visiems naudotojams,\no palydovinės nuotraukos dažnai būna pasenusios, taigi gali būti, kad pastatas\ntiesiog yra naujai pastatytas, todėl ir nesimato nuotraukoje.\n\nPastatą panaikinti galite jį pažymėję ir paspaudę šiukšlinės piktogramą arba\nmygtuką „Trinti/Delete“.\n",
         "relations": "# Ryšiai\n\nRyšys - tai specialus OpenStreetMap objekto tipas, kuris grupuoja kelis objektus. Pavyzdžiui du populiarūs ryšių tipai yra *maršruto ryšys*, kuris grupuoja kelis skirtingus to paties greitkelio gabalus, ir *multipoligonai*, kurie grupuoja kelias linijas, apibrėžiančias sudėtingą plotą (tokį, kuris turi kelis gabalus arba skyles kaip riestainyje).\n\nObjektai ryšyje vadinami „nariais“. Šoninėje juostoje galite matyti, kuriems ryšiams priklauso objektas. Ten pat galite pažymėti ryšį. Pažymėjus ryšį galėsite matyti visus jo narius šoninėje juostoje bei paryškintus žemėlapyje.\n\nDažniausiai iD pasirūpins ir sutvarkys ryšius automatiškai, tol kol jūs keisite kitus objektus. Pagrindinis dalykas, kurį turėtumėte atsiminti yra tai, kad jei panaikinate kelio dalį, kad nupaišytumėte ją tiksliau iš naujo, būtinai turite naujai nupieštą dalį įtraukti į tą patį ryšį, į kurį buvo įtraukta ir pradinė dalis.\n\n## Ryšių keitimas\n\nJei norite keisti ryšius, štai pagrindiniai dalykai, kuriuos turite žinoti.\n\nNorėdami pridėti objektą prie ryšio, pažymėkite objektą, spauskite mygtuką „+“ šoninės juostos dalyje „Visi ryšiai“ ir tada parinkite arba įrašykite ryšio pavadinimą.\n\nNorėdami sukurti naują ryšį, pažymėkite pirmą objektą, kuris turėtų būti narys, spauskite mygtuką „+“ sekcijoje „Visi ryšiai“ ir tada parinkite „Naujas ryšys...“.\n\nNorėdami išimti objektą iš ryšio, parinkite objektą ir spauskite šiukšlių dėžės mygtuką šalia ryšio, iš kurio norite objektą išmesti.\n\nGalite sukurti multipoligonus su skylėmis naudodami mygtuką „Sulieti“. Nubrėžkite du plotus (vidinį ir išorinį), laikykite Shift mygtuką ir spauskite ant abiejų plotų, tada spauskite mygtuką „Sulieti“ (+).\n"
     },
@@ -566,7 +589,6 @@
         },
         "fields": {
             "access": {
-                "label": "Prieiga",
                 "options": {
                     "designated": {
                         "description": "Priėjimas galimas remiantis ženklais ir savitais vietos įstatymais",
@@ -575,6 +597,10 @@
                     "destination": {
                         "description": "Priėjimas leistinas tik atvykti į tikslą",
                         "title": "Tikslinis"
+                    },
+                    "dismount": {
+                        "description": "Priėjimas leidžiamas, bet dviratininkas turi nulipti nuo dviračio",
+                        "title": "Nulipti"
                     },
                     "no": {
                         "description": "Priėjimas draudžiamas plačiajai visuomenei",
@@ -593,9 +619,7 @@
                         "title": "Leidžiamas"
                     }
                 },
-                "placeholder": "Nežinoma",
                 "types": {
-                    "access": "Bendra",
                     "bicycle": "Dviračiai",
                     "foot": "Pėstieji",
                     "horse": "Arkliai",
@@ -603,7 +627,6 @@
                 }
             },
             "access_simple": {
-                "label": "Prieiga",
                 "placeholder": "taip"
             },
             "access_toilets": {
@@ -613,6 +636,7 @@
                 "label": "Adresas",
                 "placeholders": {
                     "city": "Miestas",
+                    "conscriptionnumber": "123",
                     "country": "Valstybė",
                     "district": "Rajonas",
                     "hamlet": "Viensėdis",
@@ -671,6 +695,9 @@
                 "label": "Tipas"
             },
             "amenity": {
+                "label": "Tipas"
+            },
+            "area/highway": {
                 "label": "Tipas"
             },
             "artist": {
@@ -744,6 +771,9 @@
             "construction": {
                 "label": "Tipas"
             },
+            "content": {
+                "label": "Turinys"
+            },
             "country": {
                 "label": "Šalis"
             },
@@ -761,6 +791,23 @@
             },
             "cuisine": {
                 "label": "Virtuvė"
+            },
+            "cycleway": {
+                "label": "Dviračių juostos",
+                "options": {
+                    "lane": {
+                        "description": "Dviračių juosta atskirta nuo automobilių eismo nubrėžta linija",
+                        "title": "Standartinė dviračių juosta"
+                    },
+                    "none": {
+                        "description": "Nėra dviračių juostos",
+                        "title": "Nėra"
+                    },
+                    "opposite": {
+                        "description": "Abiejų krypčių dviračių juosta vienpusėje gatvėje",
+                        "title": "Dviračių juostos kryptis prieš eismą"
+                    }
+                }
             },
             "delivery": {
                 "label": "Pristatymas"
@@ -1954,13 +2001,6 @@
                 "name": "Įėjimas/Išėjimas",
                 "terms": "įėjimas,išėjimas"
             },
-            "footway/crossing": {
-                "name": "Sankryža",
-                "terms": "sankryža,perėja"
-            },
-            "footway/crosswalk": {
-                "name": "Pėsčiųjų perėja"
-            },
             "footway/sidewalk": {
                 "name": "Šaligatvis",
                 "terms": "šaligatvis"
@@ -1985,14 +2025,6 @@
                 "name": "Autobuso stotelė",
                 "terms": "stotelė,autobusų stotelė,troleibusų stotelė"
             },
-            "highway/crossing": {
-                "name": "Sankryža",
-                "terms": "perėja,pervaža"
-            },
-            "highway/crosswalk": {
-                "name": "Pėsčiųjų perėja",
-                "terms": "perėja"
-            },
             "highway/cycleway": {
                 "name": "Dviračių takas",
                 "terms": "dviračių takas"
@@ -2016,10 +2048,6 @@
             "highway/path": {
                 "name": "Takas",
                 "terms": "takas"
-            },
-            "highway/pedestrian": {
-                "name": "Pėsčiųjų",
-                "terms": "pėsčiųjų"
             },
             "highway/primary": {
                 "name": "Pagrindinis kelias"
@@ -2130,10 +2158,6 @@
                 "name": "Jungtis",
                 "terms": "jungtis,sankryža"
             },
-            "landuse": {
-                "name": "Žemėnauda",
-                "terms": "žemėnauda"
-            },
             "landuse/allotments": {
                 "name": "Žemės sklypai",
                 "terms": "sodai,kolektyviniai sodai"
@@ -2163,8 +2187,8 @@
                 "terms": "dirbama žemė,žemdirbystė"
             },
             "landuse/farmyard": {
-                "name": "Sodyba",
-                "terms": "ūkio sodyba,ferma"
+                "name": "Ūkis",
+                "terms": "ūkis,ūkio sodyba,ferma"
             },
             "landuse/forest": {
                 "name": "Miškas",
@@ -2594,9 +2618,6 @@
             "railway/halt": {
                 "name": "Geležinkelio stotelė",
                 "terms": "geležinkelio stotelė"
-            },
-            "railway/level_crossing": {
-                "name": "Vieno lygio susikirtimas"
             },
             "railway/monorail": {
                 "name": "Vienbėgis geležinkelis"

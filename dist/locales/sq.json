@@ -1,0 +1,487 @@
+{
+    "modes": {
+        "add_area": {
+            "title": "Sipërfaqe",
+            "description": "Shtoni parqe, ndërtesa, liqene, ose sipërfaqe të tjera në hartë.",
+            "tail": "Klikoni në hartë për të filluar vizatimin e një sipërfaqje të re, si p.sh. park, liqen, ose ndërtesë."
+        },
+        "add_line": {
+            "title": "Vijë",
+            "description": "Shtoni autostrada, rrugë, rrugë këmbësorësh, kanale, ose vija të tjera në hartë.",
+            "tail": "Klikoni në hartë për të filluar vizatimin e një rruge, rrugice, ose linje."
+        },
+        "add_point": {
+            "title": "Pikë",
+            "description": "Shtoni restorante, monumente, kuti postare, ose pika të tjera në hartë.",
+            "tail": "Klikoni në hartë për të shtuar një pikë."
+        },
+        "browse": {
+            "title": "Shfleto",
+            "description": "Sposto dhe zmadho hartën."
+        },
+        "draw_area": {
+            "tail": "Klikoni për të shtuar nyje në këtë sipërfaqe. Klikoni nyjen e parë për të mbaruar sipërfaqen."
+        },
+        "draw_line": {
+            "tail": "Klikoni për të shtuar më shumë nyje në vijë. Klikoni në viza të tjera për tu lidhur me 'to, dhe klikoni dy herë për të përfunduar vijën."
+        }
+    },
+    "operations": {
+        "add": {
+            "annotation": {
+                "point": "U shtua një pikë.",
+                "vertex": "U shtua një nyjë në një linjë.",
+                "relation": "U shtua një lidhje."
+            }
+        },
+        "start": {
+            "annotation": {
+                "line": "U fillua një vijë.",
+                "area": "U fillua një sipërfaqe."
+            }
+        },
+        "continue": {
+            "key": "A",
+            "title": "Vazhdo",
+            "description": "Zgjato vijën.",
+            "not_eligible": "Këtu s'mund të zgjatet vija.",
+            "multiple": "Këtu mund të zgjaten disa vija. Për të zgjedhur një vijë, shtypni butonin shift dhe klikoni në 'të.",
+            "annotation": {
+                "line": "U zgjat një vijë.",
+                "area": "U zgjerua një sipërfaqe."
+            }
+        },
+        "cancel_draw": {
+            "annotation": "U anullua vizatimi."
+        },
+        "change_role": {
+            "annotation": "U ndrua roli i një anëtar lidhjes."
+        },
+        "change_tags": {
+            "annotation": "U ndruan etiketët."
+        },
+        "circularize": {
+            "description": {
+                "line": "Bëj këtë vijë rrethore.",
+                "area": "Bëj këte sipërfaqe rrethore."
+            },
+            "key": "O",
+            "annotation": {
+                "line": "Një vijë u bë rrethore.",
+                "area": "Një sipërfaqe u bë rrethore."
+            },
+            "not_closed": "Kjo nuk mund bëhet rrethore sepse nuk është lak.",
+            "too_large": "Kjo nuk mund bëhet rrethore sepse nuk ështe mjaftueshmërisht e dukshme.",
+            "connected_to_hidden": "Kjo nuk mund bëhet rrethore sepse është lidhur me një tipar të fshehur."
+        },
+        "orthogonalize": {
+            "title": "Katror",
+            "description": {
+                "line": "Bëj qoshet e vijës katror.",
+                "area": "Bëj qoshet e sipërfaqes katror."
+            },
+            "key": "S",
+            "annotation": {
+                "line": "Qoshet e vijës u bën katror.",
+                "area": "Qoshet e sipërfaqes u bën katror."
+            },
+            "not_squarish": "Kjo nuk mund bëhet katror sepse nuk i ngjan një katror.",
+            "too_large": "Kjo nuk mund bëhet katror sepse nuk ështe mjaftueshmërisht e dukshme.",
+            "connected_to_hidden": "Kjo nuk mund bëhet katror sepse është lidhur me një tipar të fshehur."
+        },
+        "straighten": {
+            "title": "Drejto",
+            "description": "Drejtoni këtë vijë.",
+            "key": "S",
+            "annotation": "U drejtua një vijë.",
+            "too_bendy": "Kjo nuk mund të drejtohet sepse kthehet shumë.",
+            "connected_to_hidden": "Kjo vijë nuk mund drejtohet sepse është lidhur me një tipar të fshehur."
+        },
+        "delete": {
+            "title": "Fshij",
+            "description": "Fshij objektin përgjithmonë.",
+            "annotation": {
+                "point": "U fshi një pik.",
+                "vertex": "U fshi një nyjë nga një linjë.",
+                "line": "U fshi një vijë.",
+                "area": "U fshi një sipërfaqe.",
+                "relation": "U fshi një lidhje.",
+                "multiple": "U fshin {n} objekta."
+            },
+            "incomplete_relation": "Ky tipar nuk mund të fshihet sepse nuk është shkarkuar plotësisht.",
+            "part_of_relation": "Ky tipar nuk mund të fshihet sepse mer pjesë në një lidhje më të madhë. Njerë duhet ta heqësh nga lidhja.",
+            "connected_to_hidden": "Kjo nuk mund të fshihet sepse është lidhur me një tipar të fshehur."
+        },
+        "connect": {
+            "annotation": {
+                "point": "U lidh një linjë me një pik.",
+                "vertex": "U lidh një linjë me një tjetër.",
+                "line": "U lidh një linjë me një vijë.",
+                "area": "U lidh një linjë me një sipërfaqe."
+            }
+        },
+        "disconnect": {
+            "title": "Shqit",
+            "description": "Shqit këto vijë/sipërfaqe nga njëri tjetri.",
+            "key": "D",
+            "annotation": "U shqitën vijë/sipërfaqe.",
+            "not_connected": "Këtu nuk ka aq vijë/sipërfaqe për tu shqitur.",
+            "connected_to_hidden": "Kjo nuk mund të shqitet sepse është lidhur me një tipar të fshehur."
+        },
+        "merge": {
+            "title": "Bashko",
+            "description": "Bashko këto vijë.",
+            "key": "C",
+            "annotation": "U bashkuan {n} vijë.",
+            "not_eligible": "Këto tipare nuk mund të bashkohen.",
+            "not_adjacent": "Këto vijë nuk mund të bashkohen sepse nuk janë të lidhur.",
+            "restriction": "Këto vijë nuk mund të bashkohen sepse të paktën njëra ështe anëtar i një lidhje \"{relation}\".",
+            "incomplete_relation": "Këto tipare nuk mund të bashkohen sepse të paktën një nuk është shkarkuar plotësisht."
+        },
+        "move": {
+            "title": "Lëviz",
+            "description": "Lëvizni këtë në një vend tjeter.",
+            "key": "M",
+            "annotation": {
+                "point": "U lëviz një pik.",
+                "vertex": "U lëviz një njyë në një linjë.",
+                "line": "U lëviz një vijë.",
+                "area": "U lëviz një sipërfaqe.",
+                "multiple": "U lëvizën disa objekte."
+            },
+            "incomplete_relation": "Ky tipar nuk mund të lëvizet sepse nuk është shkarkuar plotësisht.",
+            "too_large": "Kjo nuk mund të lëvizet sepse nuk ështe mjaftueshmërisht e dukshme.",
+            "connected_to_hidden": "Kjo nuk mund të lëvizet sepse është lidhur me një tipar të fshehur."
+        },
+        "rotate": {
+            "title": "Rotullo",
+            "description": "Rotullo këtë objekt rreth pikën e qendrës të saj.",
+            "key": "R",
+            "annotation": {
+                "line": "U rotullua një vijë.",
+                "area": "U rotullua një sipërfaqe."
+            },
+            "too_large": "Kjo nuk mund të rotullohet sepse nuk është mjaftueshmërisht e dukshme.",
+            "connected_to_hidden": "Kjo nuk mund të rotullohet është lidhur me një tipar të fshehur."
+        },
+        "reverse": {
+            "title": "Kthej mbrapsht",
+            "description": "Bëj këte vijë të shkoj në drejtimin e kundërt.",
+            "key": "V",
+            "annotation": "Një vijë u këthu mbrapsht."
+        },
+        "split": {
+            "title": "Nda",
+            "description": {
+                "line": "Nda këtë vijë në dy ke kjo nyjë.",
+                "area": "Nda kufirin e kësaj sipërfaqë në dy.",
+                "multiple": "Nda vijët/kufijtë e sipërfaqeve ke kjo nyjë në dy."
+            },
+            "key": "X",
+            "annotation": {
+                "line": "U nda një vijë.",
+                "area": "U nda një kufi sipërfaqe.",
+                "multiple": "U ndan {n} vijë/kufitë sipërfaqeve."
+            },
+            "not_eligible": "Vijë nuk mund të ndahen në fillim osë në fund.",
+            "multiple_ways": "Këtu ka shume linja për ti ndarë.",
+            "connected_to_hidden": "Kjo nuk mund të ndahet sepse është lidhur me një tipar të fshehur."
+        },
+        "restriction": {
+            "help": {
+                "select": "Klikoni për të zgjedhur një segment rrugor.",
+                "toggle_on": "Klikoni për të shtuar një kufizim \"{restriction}\".",
+                "toggle_off": "Klikoni për të hequr kufizimin \"{restriction}\"."
+            },
+            "annotation": {
+                "create": "U shtu një kufizim kthesësh.",
+                "delete": "U fshi një kufizim kthesësh."
+            }
+        }
+    },
+    "undo": {
+        "tooltip": "Zhbëj: {action}",
+        "nothing": "Asgjë për të zhbëj."
+    },
+    "redo": {
+        "tooltip": "Ribëj: {action}",
+        "nothing": "Asgjë për të ribëj."
+    },
+    "browser_notice": "Ky redaktor punon në Firefox, Chrome, Safari, Opera, dhe Internet Explorer 9+. Ju lutemi përmirësoni shfletuesin ose redaktoni hartën me Potlatch 2.",
+    "translate": {
+        "translate": "Përkthe",
+        "localized_translation_label": "Emri shumëgjuhësh",
+        "localized_translation_language": "Zgjidhni gdjuhën",
+        "localized_translation_name": "Emër"
+    },
+    "zoom_in_edit": "Zmadhoni për të redaktuar",
+    "logout": "dil",
+    "loading_auth": "Lidh me OpenStreetMap...",
+    "report_a_bug": "Raporto një bug",
+    "feature_info": {
+        "hidden_warning": "{count} tipare të fshehura",
+        "hidden_details": "Këto tipare janë aktualisht të fshehura: {details}"
+    },
+    "status": {
+        "error": "Pa mundësi të lidhet me API-n.",
+        "offline": "API-ja është jashtë linje. Ju lutemi provoni të redaktoni më von.",
+        "readonly": "API-ja është vetëm për lexim. Duhet prisni për të kryer ndryshimet."
+    },
+    "commit": {
+        "title": "Kryej Ndryshimet",
+        "description_placeholder": "Përmbledhja e redaktimeve",
+        "upload_explanation": "Redaktimet qe ju ngarkoni do jen të dukshëm në të gjithë hartat që përdorin të dhëna OpenStreetMap.",
+        "upload_explanation_with_user": "Redaktimet qe ju ngarkoni si {user} do jen të dukshëm në të gjithë hartat që përdorin të dhëna OpenStreetMap.",
+        "save": "Ruaj",
+        "cancel": "Anullo",
+        "changes": "{count} Ndryshime",
+        "warnings": "Paralajmërime",
+        "modified": "Modifikuar",
+        "deleted": "Fshirë",
+        "created": "Krijuar"
+    },
+    "contributors": {
+        "list": "Redaktime nga {users}",
+        "truncated_list": "Redaktime nga {users} dhe {count} të tjerë"
+    },
+    "infobox": {
+        "selected": "{n} të zgjedhur",
+        "geometry": "Gjeometria",
+        "closed": "i mbyllur",
+        "center": "Qendra",
+        "perimeter": "Perimetri",
+        "length": "Gjatësia",
+        "area": "Sipërfaqja",
+        "centroid": "Centroida",
+        "location": "Vendndodhja",
+        "metric": "Metrik",
+        "imperial": "Perandorak"
+    },
+    "geometry": {
+        "point": "pik",
+        "vertex": "tepe",
+        "line": "vijë",
+        "area": "sipërfaqe",
+        "relation": "lidhje"
+    },
+    "geocoder": {
+        "search": "Kërkoni të gjithë botën...",
+        "no_results_visible": "Nuk ka rezultate në zonën e dukshme të hartës",
+        "no_results_worldwide": "Nuk u gjetën rezultate"
+    },
+    "geolocate": {
+        "title": "Shfaq Vendndodhjen Time"
+    },
+    "inspector": {
+        "no_documentation_combination": "Nuk ka dokumentim disponueshëm për këtë kombinin etiketave",
+        "no_documentation_key": "Nuk ka dokumentim disponueshëm për këte çelës",
+        "show_more": "Paraqit më tepër",
+        "view_on_osm": "Shiko në openstreetmap.org",
+        "all_tags": "Të gjithë etiketat",
+        "all_members": "Të gjithë anëtarët",
+        "all_relations": "Të gjithë lidhjet",
+        "new_relation": "Lidhje të re...",
+        "role": "Rol",
+        "choose": "Zgjidhni llojën e tiparit",
+        "results": "{n} rezultate për {search}",
+        "reference": "Shiko në OpenStreetMap Wiki",
+        "back_tooltip": "Ndrysho tiparin",
+        "remove": "Hiq",
+        "search": "Kërko",
+        "multiselect": "Zgjidh artikuj",
+        "unknown": "I panjohur",
+        "feature_list": "Kërko tiparet",
+        "edit": "Redakto tiparin",
+        "check": {
+            "yes": "Po",
+            "no": "Jo"
+        },
+        "none": "Asnjë",
+        "node": "Nyjë",
+        "way": "Linjë",
+        "relation": "Lidhje",
+        "location": "Vendosje",
+        "add_fields": "Shtoni fushë:"
+    },
+    "background": {
+        "title": "Sfond",
+        "description": "Parametrat e sfondit",
+        "percent_brightness": "{opacity}% duksmëri",
+        "none": "Asnjë",
+        "custom": "E personalizuar",
+        "custom_button": "Redakto sfondin të personalizuar",
+        "custom_prompt": "Shtypni një shabllon URL pllakëve. Argumentet vlefshme janë {z}, {x}, {y} për skemë Z/X/Y dhe {u} për skemë quadtile.",
+        "fix_misalignment": "Rregullo radhitjen",
+        "reset": "Rikthe vlerat",
+        "minimap": {
+            "description": "Minihartë",
+            "tooltip": "Shfaq një hartë të zvogluar për të treguar vendosjen e zonës të dukshme."
+        }
+    },
+    "presets": {
+        "categories": {
+            "category-building": {
+                "name": "Ndërtesë"
+            },
+            "category-golf": {
+                "name": "Golf"
+            },
+            "category-road": {
+                "name": "Rrugë"
+            },
+            "category-water-area": {
+                "name": "Ujë"
+            },
+            "category-water-line": {
+                "name": "Ujë"
+            }
+        },
+        "fields": {
+            "access": {
+                "options": {
+                    "no": {
+                        "title": "I Ndaluar"
+                    },
+                    "private": {
+                        "title": "Privat"
+                    },
+                    "yes": {
+                        "title": "I Lejuar"
+                    }
+                },
+                "types": {
+                    "bicycle": "Biçikleta",
+                    "foot": "Këmbë",
+                    "horse": "Kuaj"
+                }
+            },
+            "access_simple": {
+                "placeholder": "po"
+            },
+            "address": {
+                "label": "Adresa",
+                "placeholders": {
+                    "city": "Qyteti",
+                    "conscriptionnumber": "123",
+                    "country": "Vendi",
+                    "postcode": "Kodi Postar",
+                    "province": "Provinca",
+                    "state": "Shteti"
+                }
+            },
+            "aerialway/capacity": {
+                "placeholder": "500, 2500, 5000..."
+            },
+            "aerialway/duration": {
+                "placeholder": "1, 2, 3..."
+            },
+            "aerialway/occupancy": {
+                "placeholder": "2, 4, 8..."
+            },
+            "atm": {
+                "label": "Bankomat"
+            },
+            "bench": {
+                "label": "Stol"
+            },
+            "capacity": {
+                "label": "Kapaciteti",
+                "placeholder": "50, 100, 200..."
+            },
+            "cardinal_direction": {
+                "label": "Drejtimi",
+                "options": {
+                    "E": "Lindje",
+                    "ENE": "Lindje-verilindje",
+                    "ESE": "Lindje-juglindje",
+                    "N": "Veri",
+                    "NE": "Verilindje",
+                    "NNE": "Veri-verilindje",
+                    "NNW": "Veri-veriperëndim",
+                    "NW": "Variperëndim",
+                    "S": "Jug",
+                    "SE": "Juglindje",
+                    "SSE": "Jug-juglindje",
+                    "SSW": "Jug-jugperëndim",
+                    "SW": "Jugperëndim",
+                    "W": "Perëndim",
+                    "WNW": "Perëndim-veriperëndim",
+                    "WSW": "Perëndim-jugperëndim"
+                }
+            },
+            "clock_direction": {
+                "label": "Drejtimi",
+                "options": {
+                    "anticlockwise": "Rotullimi antiorar",
+                    "clockwise": "Rotullimi orar"
+                }
+            },
+            "country": {
+                "label": "Vendi"
+            },
+            "cycleway": {
+                "label": "Korsi Biçikletash",
+                "options": {
+                    "lane": {
+                        "description": "Korsi biçikletash ndarë nga trafiku makinave me një vijë",
+                        "title": "Korsi biçikletash e zakonshme"
+                    },
+                    "none": {
+                        "description": "Pa korsi biçikletash",
+                        "title": "Asnjë"
+                    },
+                    "opposite": {
+                        "description": "Korsi biçikletash dydrejtimshe në një rrugë njëdrejtimshe"
+                    },
+                    "opposite_lane": {
+                        "description": "Korsi biçikletash ne drejtim të kundërt me trafikun",
+                        "title": "Korsi biçikletash në drejtim të kundërt"
+                    },
+                    "share_busway": {
+                        "description": "Korsi e përbashkët për biçikleta dhe autobuzë",
+                        "title": "Korsi biçikletash dhe autobuzësh"
+                    },
+                    "shared_lane": {
+                        "description": "Korsi biçikletash e pandarë nga trafiku makinave",
+                        "title": "Korsi biçikletash e përbashkët"
+                    },
+                    "track": {
+                        "description": "Korsi biçikletash ndarë nga trafiku me një pengesë fizike",
+                        "title": "Rrugë biçikletash"
+                    }
+                },
+                "types": {
+                    "cycleway:left": "Anën e majtë",
+                    "cycleway:right": "Anën e djathtë"
+                }
+            },
+            "gender": {
+                "label": "Gjinja",
+                "options": {
+                    "female": "Femër",
+                    "male": "Mashkull"
+                }
+            },
+            "internet_access": {
+                "options": {
+                    "wlan": "Wifi",
+                    "yes": "Po"
+                }
+            }
+        },
+        "presets": {
+            "power/transformer": {
+                "name": "Transformator"
+            },
+            "railway": {
+                "name": "Hekurudhë"
+            },
+            "railway/abandoned": {
+                "name": "Hekurudhë E Braktisur"
+            },
+            "shop/jewelry": {
+                "name": "Argjendar"
+            }
+        }
+    }
+}

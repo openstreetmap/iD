@@ -258,9 +258,6 @@
     },
     "presets": {
         "fields": {
-            "access": {
-                "label": "Acces"
-            },
             "address": {
                 "label": "Adresă",
                 "placeholders": {
@@ -490,9 +487,6 @@
             },
             "highway/bus_stop": {
                 "name": "Stație de autobuz"
-            },
-            "highway/crossing": {
-                "name": "Trecere"
             },
             "highway/cycleway": {
                 "name": "Pistă biciclete"

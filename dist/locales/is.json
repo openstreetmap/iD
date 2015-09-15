@@ -463,7 +463,6 @@
         },
         "fields": {
             "access": {
-                "label": "Aðgangur",
                 "options": {
                     "designated": {
                         "description": "Aðgangur heimill sökum skilta eða reglna",
@@ -490,9 +489,7 @@
                         "title": "Leyft"
                     }
                 },
-                "placeholder": "Óþekkt",
                 "types": {
-                    "access": "Almennt",
                     "bicycle": "Hjól",
                     "foot": "Fótgangandi",
                     "horse": "Hestar",
@@ -500,7 +497,6 @@
                 }
             },
             "access_simple": {
-                "label": "Aðgangur",
                 "placeholder": "já"
             },
             "access_toilets": {
@@ -1268,9 +1264,6 @@
             "highway/bus_stop": {
                 "name": "Stoppistöð"
             },
-            "highway/crossing": {
-                "name": "Þverun"
-            },
             "highway/cycleway": {
                 "name": "Hjólastígur"
             },
@@ -1291,9 +1284,6 @@
             },
             "highway/path": {
                 "name": "Stígur"
-            },
-            "highway/pedestrian": {
-                "name": "Fótgangandi"
             },
             "highway/primary": {
                 "name": "Stofnbraut"
@@ -1391,9 +1381,6 @@
             },
             "historic/wayside_shrine": {
                 "name": "Tilbeiðsluskríni"
-            },
-            "landuse": {
-                "name": "Landnotkun"
             },
             "landuse/allotments": {
                 "name": "Ræktunargarðar"
@@ -1673,9 +1660,6 @@
             },
             "railway/funicular": {
                 "name": "Toglest"
-            },
-            "railway/level_crossing": {
-                "name": "Jöfn vegamót"
             },
             "railway/monorail": {
                 "name": "Monorail"
