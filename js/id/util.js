@@ -40,7 +40,8 @@ iD.util.displayType = function(id) {
 
 iD.util.stringQs = function(str) {
     return str.split('&').reduce(function(obj, pair){
-        var parts = pair.split('=');
+        var i = pair.indexOf('=');
+        var parts = i === -1 ? pair :[pair.slice(0, i), pair.slice(i + 1)];
         if (parts.length === 2) {
             obj[parts[0]] = (null === parts[1]) ? '' : decodeURIComponent(parts[1]);
         }
