@@ -595,6 +595,10 @@
         },
         {
             "key": "building",
+            "value": "semidetached_house"
+        },
+        {
+            "key": "building",
             "value": "shed"
         },
         {

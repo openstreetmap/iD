@@ -11,5 +11,12 @@
     "tags": {
         "building": "detached"
     },
-    "name": "Detached Home"
+    "terms": [
+        "home",
+        "single",
+        "family",
+        "residence",
+        "dwelling"
+    ],
+    "name": "Detached House"
 }

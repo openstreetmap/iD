@@ -2376,7 +2376,14 @@
         "tags": {
             "building": "detached"
         },
-        "name": "Detached Home"
+        "terms": [
+            "home",
+            "single",
+            "family",
+            "residence",
+            "dwelling"
+        ],
+        "name": "Detached House"
     },
     "building/dormitory": {
         "icon": "building",
@@ -2492,6 +2499,12 @@
         "tags": {
             "building": "house"
         },
+        "terms": [
+            "home",
+            "family",
+            "residence",
+            "dwelling"
+        ],
         "name": "House"
     },
     "building/hut": {
@@ -2620,6 +2633,30 @@
         },
         "name": "School Building"
     },
+    "building/semidetached_house": {
+        "icon": "building",
+        "fields": [
+            "address",
+            "levels"
+        ],
+        "geometry": [
+            "point",
+            "area"
+        ],
+        "tags": {
+            "building": "semidetached_house"
+        },
+        "terms": [
+            "home",
+            "double",
+            "duplex",
+            "twin",
+            "family",
+            "residence",
+            "dwelling"
+        ],
+        "name": "Semi-Detached Houses"
+    },
     "building/shed": {
         "icon": "building",
         "fields": [
@@ -2678,6 +2715,14 @@
         "tags": {
             "building": "terrace"
         },
+        "terms": [
+            "home",
+            "terrace",
+            "brownstone",
+            "family",
+            "residence",
+            "dwelling"
+        ],
         "name": "Row Houses"
     },
     "building/train_station": {

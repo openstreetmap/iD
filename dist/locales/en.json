@@ -1992,8 +1992,8 @@
                 "terms": ""
             },
             "building/detached": {
-                "name": "Detached Home",
-                "terms": ""
+                "name": "Detached House",
+                "terms": "home,single,family,residence,dwelling"
             },
             "building/dormitory": {
                 "name": "Dormitory",
@@ -2025,7 +2025,7 @@
             },
             "building/house": {
                 "name": "House",
-                "terms": ""
+                "terms": "home,family,residence,dwelling"
             },
             "building/hut": {
                 "name": "Hut",
@@ -2059,6 +2059,10 @@
                 "name": "School Building",
                 "terms": "academy,elementary school,middle school,high school"
             },
+            "building/semidetached_house": {
+                "name": "Semi-Detached Houses",
+                "terms": "home,double,duplex,twin,family,residence,dwelling"
+            },
             "building/shed": {
                 "name": "Shed",
                 "terms": ""
@@ -2073,7 +2077,7 @@
             },
             "building/terrace": {
                 "name": "Row Houses",
-                "terms": ""
+                "terms": "home,terrace,brownstone,family,residence,dwelling"
             },
             "building/train_station": {
                 "name": "Train Station",

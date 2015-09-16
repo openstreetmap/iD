@@ -9,13 +9,16 @@
         "area"
     ],
     "tags": {
-        "building": "house"
+        "building": "semidetached_house"
     },
     "terms": [
         "home",
+        "double",
+        "duplex",
+        "twin",
         "family",
         "residence",
         "dwelling"
     ],
-    "name": "House"
+    "name": "Semi-Detached Houses"
 }

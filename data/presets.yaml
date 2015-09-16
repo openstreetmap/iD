@@ -1655,8 +1655,9 @@ en:
         terms: "<translate with synonyms or related terms for 'Building Under Construction', separated by commas>"
       building/detached:
         # building=detached
-        name: Detached Home
-        terms: "<translate with synonyms or related terms for 'Detached Home', separated by commas>"
+        name: Detached House
+        # 'terms: home,single,family,residence,dwelling'
+        terms: "<translate with synonyms or related terms for 'Detached House', separated by commas>"
       building/dormitory:
         # building=dormitory
         name: Dormitory
@@ -1688,6 +1689,7 @@ en:
       building/house:
         # building=house
         name: House
+        # 'terms: home,family,residence,dwelling'
         terms: "<translate with synonyms or related terms for 'House', separated by commas>"
       building/hut:
         # building=hut
@@ -1723,6 +1725,11 @@ en:
         name: School Building
         # 'terms: academy,elementary school,middle school,high school'
         terms: "<translate with synonyms or related terms for 'School Building', separated by commas>"
+      building/semidetached_house:
+        # building=semidetached_house
+        name: Semi-Detached Houses
+        # 'terms: home,double,duplex,twin,family,residence,dwelling'
+        terms: "<translate with synonyms or related terms for 'Semi-Detached Houses', separated by commas>"
       building/shed:
         # building=shed
         name: Shed
@@ -1738,6 +1745,7 @@ en:
       building/terrace:
         # building=terrace
         name: Row Houses
+        # 'terms: home,terrace,brownstone,family,residence,dwelling'
         terms: "<translate with synonyms or related terms for 'Row Houses', separated by commas>"
       building/train_station:
         # building=train_station
