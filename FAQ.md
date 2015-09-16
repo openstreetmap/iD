@@ -2,6 +2,20 @@
 
 Two syllables: "eye dee".
 
+## How can I help translate iD into another language or fix a mistranslation?
+
+Please see [CONTRIBUTING.md](https://github.com/openstreetmap/iD/blob/master/CONTRIBUTING.md#translating)
+
+## How can I report an issue with background imagery?
+
+To report an issue with missing or cloudy imagery:
+* _For Mapbox Satellite layer:_ Use [this imagery request tool](https://www.mapbox.com/labs/request) to zoom to the location with the issue and draw a box around it.
+* _For Bing Satellite layer:_ Open the location in [Bing Maps](https://www.bing.com/maps) and click the "Report a problem" link on the sidebar.
+
+iD's list of available background imagery sources come from the [editor-imagery-index](https://github.com/osmlab/editor-imagery-index)
+project.  If you know of a more recent imagery source that is licensed for this use,
+please open a request there with the link and license details.
+
 ## Why not use canvas rather than SVG?
 
 Using canvas rather than SVG would require implementing a scenegraph, hit-testing,
