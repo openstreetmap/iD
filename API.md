@@ -16,9 +16,9 @@ in the hash portion of the URL:
   [imagery list](https://github.com/openstreetmap/iD/blob/master/data/imagery.json),
   or a custom tile URL. A custom URL is specified in the format `custom:<url>`,
   where the URL can contain the standard tile URL placeholders `{x}`, `{y}` and
-  `{z}`, `{ty}` for flipped TMS-style Y coordinates, and `{switch:a,b,c}` for
+  `{z}`/`{zoom}`, `{ty}` for flipped TMS-style Y coordinates, and `{switch:a,b,c}` for
   DNS multiplexing. Example:
-  `background=custom:http://{switch:a,b,c}.tiles.mapbox.com/v3/examples.map-4l7djmvo/{z}/{x}/{y}.png`
+  `background=custom:http://{switch:a,b,c}.tiles.mapbox.com/v4/examples.map-4l7djmvo/{z}/{x}/{y}.png`
 * `comment` - Prefills the changeset comment box, for use when integrating iD with
   external task management or quality assurance tools. Example:
   `comment=CAR%20crisis%2C%20refugee%20areas%20in%20Cameroon%20%23hotosm-task-592`.
