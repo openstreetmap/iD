@@ -1727,9 +1727,9 @@ en:
         terms: "<translate with synonyms or related terms for 'School Building', separated by commas>"
       building/semidetached_house:
         # building=semidetached_house
-        name: Semi-Detached Houses
+        name: Semi-Detached House
         # 'terms: home,double,duplex,twin,family,residence,dwelling'
-        terms: "<translate with synonyms or related terms for 'Semi-Detached Houses', separated by commas>"
+        terms: "<translate with synonyms or related terms for 'Semi-Detached House', separated by commas>"
       building/shed:
         # building=shed
         name: Shed

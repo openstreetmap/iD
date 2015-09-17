@@ -2060,7 +2060,7 @@
                 "terms": "academy,elementary school,middle school,high school"
             },
             "building/semidetached_house": {
-                "name": "Semi-Detached Houses",
+                "name": "Semi-Detached House",
                 "terms": "home,double,duplex,twin,family,residence,dwelling"
             },
             "building/shed": {
