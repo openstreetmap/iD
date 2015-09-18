@@ -209,11 +209,11 @@ iD.ui.preset.localized = function(field, context) {
 
         input.value(tags[field.key] || '');
 
-        var postfixed = [];
-        for (var i in tags) {
-            var m = i.match(new RegExp(field.key + ':([a-zA-Z_-]+)$'));
-            if (m && m[1]) {
-                postfixed.push({ lang: m[1], value: tags[i]});
+        var postfixed = [], k, m;
+        for (k in tags) {
+            m = k.match(/^(.*):([a-zA-Z_-]+)$/);
+            if (m && m[1] === field.key && m[2]) {
+                postfixed.push({ lang: m[2], value: tags[k] });
             }
         }
 

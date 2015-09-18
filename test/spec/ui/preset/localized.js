@@ -89,6 +89,15 @@ describe('iD.ui.preset.localized', function() {
         happen.once(selection.selectAll('.localized-lang').node(), {type: 'change'});
     });
 
+    it("ignores similar keys like `old_name`", function() {
+        var localized = iD.ui.preset.localized(field, {});
+        selection.call(localized);
+        localized.tags({'old_name:de': 'Value'});
+
+        expect(selection.selectAll('.localized-lang').empty()).to.be.ok;
+        expect(selection.selectAll('.localized-value').empty()).to.be.ok;
+    });
+
     it("removes the tag when the language is emptied", function() {
         var localized = iD.ui.preset.localized(field, {});
         selection.call(localized);
