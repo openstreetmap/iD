@@ -2556,8 +2556,8 @@
                 "terms": ""
             },
             "landuse/allotments": {
-                "name": "Allotments",
-                "terms": ""
+                "name": "Community Garden",
+                "terms": "allotment,garden"
             },
             "landuse/basin": {
                 "name": "Basin",

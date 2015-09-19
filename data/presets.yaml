@@ -2267,8 +2267,9 @@ en:
         terms: "<translate with synonyms or related terms for 'Land Use', separated by commas>"
       landuse/allotments:
         # landuse=allotments
-        name: Allotments
-        terms: "<translate with synonyms or related terms for 'Allotments', separated by commas>"
+        name: Community Garden
+        # 'terms: allotment,garden'
+        terms: "<translate with synonyms or related terms for 'Community Garden', separated by commas>"
       landuse/basin:
         # landuse=basin
         name: Basin
