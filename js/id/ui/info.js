@@ -13,6 +13,19 @@ iD.ui.Info = function(context) {
             return r / 12.56637 * 510065621724000;
         }
 
+        function toLineString(feature) {
+            if (feature.type === 'LineString') return feature;
+
+            var result = { type: 'LineString', coordinates: [] };
+            if (feature.type === 'Polygon') {
+                result.coordinates = feature.coordinates[0];
+            } else if (feature.type === 'MultiPolygon') {
+                result.coordinates = feature.coordinates[0][0];
+            }
+
+            return result;
+        }
+
         function displayLength(m) {
             var d = m * (imperial ? 3.28084 : 1),
                 p, unit;
@@ -85,7 +98,7 @@ iD.ui.Info = function(context) {
             if (hidden()) return;
 
             var resolver = context.graph(),
-                selected = context.selectedIDs(),
+                selected = _.filter(context.selectedIDs(), function(e) { return context.hasEntity(e); }),
                 singular = selected.length === 1 ? selected[0] : null,
                 extent = iD.geo.Extent(),
                 entity;
@@ -121,9 +134,7 @@ iD.ui.Info = function(context) {
             if (geometry === 'line' || geometry === 'area') {
                 var closed = (entity.type === 'relation') || (entity.isClosed() && !entity.isDegenerate()),
                     feature = entity.asGeoJSON(resolver),
-                    lineFeature = (feature.type === 'LineString') ? feature :
-                        { type: 'LineString', coordinates: feature.coordinates[0] },
-                    length = radiansToMeters(d3.geo.length(lineFeature)),
+                    length = radiansToMeters(d3.geo.length(toLineString(feature))),
                     lengthLabel = t('infobox.' + (closed ? 'perimeter' : 'length')),
                     centroid = d3.geo.centroid(feature);
 
