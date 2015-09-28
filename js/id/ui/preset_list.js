@@ -154,6 +154,8 @@ iD.ui.PresetList = function(context) {
         }
 
         item.choose = function() {
+            if (!box || !sublist) return;
+
             if (shown) {
                 shown = false;
                 box.transition()
