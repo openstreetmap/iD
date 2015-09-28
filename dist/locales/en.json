@@ -1423,6 +1423,9 @@
                     "grade5": "Soft: soil/sand/grass"
                 }
             },
+            "traffic_signals": {
+                "label": "Type"
+            },
             "trail_visibility": {
                 "label": "Trail Visibility",
                 "placeholder": "Excellent, Good, Bad...",

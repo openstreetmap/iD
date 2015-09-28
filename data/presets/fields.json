@@ -1344,6 +1344,12 @@
             }
         }
     },
+    "traffic_signals": {
+        "key": "traffic_signals",
+        "type": "combo",
+        "label": "Type",
+        "default": "signal"
+    },
     "trail_visibility": {
         "key": "trail_visibility",
         "type": "combo",

@@ -1012,6 +1012,9 @@ en:
           grade5: 'Soft: soil/sand/grass'
         # tracktype field placeholder
         placeholder: 'Solid, Mostly Solid, Soft...'
+      traffic_signals:
+        # 'traffic_signals=*'
+        label: Type
       trail_visibility:
         # 'trail_visibility=*'
         label: Trail Visibility

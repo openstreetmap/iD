@@ -5,6 +5,9 @@
     "tags": {
         "highway": "traffic_signals"
     },
+    "fields": [
+        "traffic_signals"
+    ],
     "terms": [
         "light",
         "stoplight",
