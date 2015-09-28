@@ -148,7 +148,12 @@ iD.modes.Select = function(context, selectedIDs) {
 
         function ret() {
             if (!context.inIntro()) {
-                context.enter(iD.modes.Browse(context));
+                // only accept changes if focused on a non-search input field.. #2912, #2380
+                var el = document.activeElement,
+                    tagName = el && el.tagName.toLowerCase();
+                if (tagName === 'input' && el.type !== 'search') {
+                    context.enter(iD.modes.Browse(context));
+                }
             }
         }
 
