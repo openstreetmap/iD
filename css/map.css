@@ -239,17 +239,23 @@ path.fill.tag-leisure-park {
     background-color: rgba(140, 208, 95, 0.3);
 }
 
+path.stroke.tag-amenity-swimming_pool,
+path.stroke.tag-leisure-swimming_pool,
 path.stroke.tag-natural-water,
 path.stroke.tag-landuse-basin,
 path.stroke.tag-landuse-reservoir {
     stroke: rgb(119, 211, 222);
 }
+path.fill.tag-amenity-swimming_pool,
+path.fill.tag-leisure-swimming_pool,
 path.fill.tag-landuse-basin,
 path.fill.tag-landuse-reservoir,
 path.fill.tag-natural-water {
     stroke: rgba(119, 211, 222, 0.3);
     fill: rgba(119, 211, 222, 0.3);
 }
+.preset-icon-fill-area.tag-amenity-swimming_pool,
+.preset-icon-fill-area.tag-leisure-swimming_pool,
 .preset-icon-fill-area.tag-landuse-basin,
 .preset-icon-fill-area.tag-landuse-reservoir,
 .preset-icon-fill-area.tag-natural-water {
