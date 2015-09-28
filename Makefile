@@ -127,6 +127,10 @@ suggestions:
 	npm install name-suggestion-index@git://github.com/osmlab/name-suggestion-index.git
 	cp node_modules/name-suggestion-index/name-suggestions.json data/name-suggestions.json
 
+wikipedias:
+	npm install wmf-sitematrix@git://github.com/osmlab/wmf-sitematrix.git
+	cp node_modules/wmf-sitematrix/wikipedia.min.json data/wikipedia.json
+
 SPRITE = inkscape --export-area-page
 
 dist/img/line-presets.png: svg/line-presets.svg

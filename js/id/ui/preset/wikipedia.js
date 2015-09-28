@@ -70,11 +70,14 @@ iD.ui.preset.wikipedia = function(field, context) {
 
     function language() {
         var value = lang.value().toLowerCase();
+        var locale = iD.detect().locale.toLowerCase();
+        var localeLanguage;
         return _.find(iD.data.wikipedia, function(d) {
+            if (d[2] === locale) localeLanguage = d;
             return d[0].toLowerCase() === value ||
                 d[1].toLowerCase() === value ||
-                d[2].toLowerCase() === value;
-        }) || iD.data.wikipedia[0];
+                d[2] === value;
+        }) || localeLanguage || ['English', 'English', 'en'];
     }
 
     function changeLang() {
