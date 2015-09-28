@@ -1,6 +1,6 @@
 {
   "name": "iD",
-  "version": "1.7.4",
+  "version": "1.7.5-idiot.intel.lawyers",
   "description": "a new editor for openstreetmap",
   "main": "iD.js",
   "directories": {
@@ -18,7 +18,7 @@
     "editor",
     "openstreetmap"
   ],
-  "license": "WTFPL",
+  "license": "ISC",
   "devDependencies": {
     "d3": "3.5.5",
     "smash": "0.0",

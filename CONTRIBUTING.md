@@ -64,7 +64,7 @@ project** button near the bottom of the project page. You can edit your
 getting too many notifications.
 
 Translations are licensed under
-[WTFPL](https://raw.github.com/openstreetmap/iD/master/LICENSE), the same license
+[ISC](https://raw.github.com/openstreetmap/iD/master/LICENSE), the same license
 as iD.
 
 **Why are there so many duplicate "Type" translations?** There are multiple
@@ -171,9 +171,9 @@ into the public directory of your webserver to deploy iD.
 
 ## Licensing
 
-iD is under the [WTFPL](http://www.wtfpl.net/). Some of the libraries it uses
-are under different licenses. If you're contributing to iD, you're contributing
-WTFPL code.
+iD is available under the [ISC License](https://opensource.org/licenses/ISC).
+Some of the libraries it uses are under different licenses. If you're contributing
+to iD, you're contributing ISC Licensed code.
 
 ## Submitting Changes
 

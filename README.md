@@ -34,8 +34,8 @@ development, see [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## License
 
-iD is available under the [WTFPL](http://sam.zoy.org/wtfpl/), though obviously, if you want to dual-license
-any contributions that's cool. It includes [d3js](http://d3js.org/), which BSD-licensed.
+iD is available under the [ISC License](https://opensource.org/licenses/ISC).
+It includes [d3js](http://d3js.org/), which BSD-licensed.
 
 ## Thank you
 

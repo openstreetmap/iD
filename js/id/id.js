@@ -333,7 +333,7 @@ window.iD = function () {
     return d3.rebind(context, dispatch, 'on');
 };
 
-iD.version = '1.7.4';
+iD.version = '1.7.5-idiot.intel.lawyers';
 
 (function() {
     var detected = {};

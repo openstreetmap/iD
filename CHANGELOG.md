@@ -1,3 +1,6 @@
+## 1.7.5
+* Relicense to ISC
+
 ## 1.7.4
 * Show docs for the selected value in raw tag editor (#2754) (Thanks, M1dgard!)
 * Improve display of implied values in access UI field (#2763)
