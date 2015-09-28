@@ -1354,6 +1354,10 @@ en:
         # amenity=marketplace
         name: Marketplace
         terms: "<translate with synonyms or related terms for 'Marketplace', separated by commas>"
+      amenity/motorcycle_parking:
+        # amenity=motorcycle_parking
+        name: Motorcycle Parking
+        terms: "<translate with synonyms or related terms for 'Motorcycle Parking', separated by commas>"
       amenity/nightclub:
         # amenity=nightclub
         name: Nightclub

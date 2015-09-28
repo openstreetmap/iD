@@ -1723,6 +1723,10 @@
                 "name": "Marketplace",
                 "terms": ""
             },
+            "amenity/motorcycle_parking": {
+                "name": "Motorcycle Parking",
+                "terms": ""
+            },
             "amenity/nightclub": {
                 "name": "Nightclub",
                 "terms": "disco*,night club,dancing,dance club"

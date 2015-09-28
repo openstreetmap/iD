@@ -262,6 +262,10 @@
         },
         {
             "key": "amenity",
+            "value": "motorcycle_parking"
+        },
+        {
+            "key": "amenity",
             "value": "nightclub"
         },
         {

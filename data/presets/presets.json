@@ -1134,6 +1134,24 @@
         },
         "name": "Marketplace"
     },
+    "amenity/motorcycle_parking": {
+        "icon": "scooter",
+        "fields": [
+            "capacity",
+            "operator",
+            "covered",
+            "access_simple"
+        ],
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "tags": {
+            "amenity": "motorcycle_parking"
+        },
+        "name": "Motorcycle Parking"
+    },
     "amenity/nightclub": {
         "icon": "bar",
         "fields": [

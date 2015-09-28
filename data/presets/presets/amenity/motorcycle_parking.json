@@ -1,0 +1,18 @@
+{
+    "icon": "scooter",
+    "fields": [
+        "capacity",
+        "operator",
+        "covered",
+        "access_simple"
+    ],
+    "geometry": [
+        "point",
+        "vertex",
+        "area"
+    ],
+    "tags": {
+        "amenity": "motorcycle_parking"
+    },
+    "name": "Motorcycle Parking"
+}
