@@ -2259,6 +2259,7 @@ div.full-screen > button:hover {
     right:0;
     bottom:0;
     border-radius: 0;
+    pointer-events: none;
 }
 
 #attrib {
@@ -2267,7 +2268,6 @@ div.full-screen > button:hover {
     margin-bottom: 5px;
     float: left;
     clear: both;
-    pointer-events: none;
 }
 
 #attrib * { pointer-events: all; }
@@ -2300,6 +2300,7 @@ div.full-screen > button:hover {
     width: 100%;
     float: left;
     clear: both;
+    pointer-events: all;
 }
 
 #scale-block {
