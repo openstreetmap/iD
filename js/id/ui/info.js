@@ -121,7 +121,9 @@ iD.ui.Info = function(context) {
             if (geometry === 'line' || geometry === 'area') {
                 var closed = (entity.type === 'relation') || (entity.isClosed() && !entity.isDegenerate()),
                     feature = entity.asGeoJSON(resolver),
-                    length = radiansToMeters(d3.geo.length(feature)),
+                    lineFeature = (feature.type === 'LineString') ? feature :
+                        { type: 'LineString', coordinates: feature.coordinates[0] },
+                    length = radiansToMeters(d3.geo.length(lineFeature)),
                     lengthLabel = t('infobox.' + (closed ? 'perimeter' : 'length')),
                     centroid = d3.geo.centroid(feature);
 
