@@ -25,11 +25,11 @@ describe("iD.taginfo", function() {
             server.respond();
 
             expect(query(server.requests[0].url)).to.eql(
-                {query: "ame", page: "1", rp: "10", sortname: "count_all", sortorder: "desc"});
+                {query: "amen", page: "1", rp: "10", sortname: "count_all", sortorder: "desc"});
             expect(callback).to.have.been.calledWith(null, [{"value":"amenity"}]);
         });
 
-        it("filters only popular nodes", function() {
+        it("filters only popular keys", function() {
             var callback = sinon.spy();
             taginfo.keys({query: "amen"}, callback);
 
@@ -42,7 +42,7 @@ describe("iD.taginfo", function() {
             expect(callback).to.have.been.calledWith(null, [{"value":"amenity"}]);
         });
 
-        it("filters only popular nodes with an entity type filter", function() {
+        it("filters only popular keys with an entity type filter", function() {
             var callback = sinon.spy();
 
             taginfo.keys({query: "amen", filter: "nodes"}, callback);
