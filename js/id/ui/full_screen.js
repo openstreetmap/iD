@@ -64,7 +64,7 @@ iD.ui.FullScreen = function(context) {
         //     .attr('class', 'icon full-screen');
 
         keybinding
-            .on(iD.ui.cmd('f11'), fullScreen)
+            .on('f11', fullScreen)
             .on(iD.ui.cmd('⌘⇧F'), fullScreen);
 
         d3.select(document)
