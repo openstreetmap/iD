@@ -1,6 +1,6 @@
 iD.behavior.Draw = function(context) {
     var event = d3.dispatch('move', 'click', 'clickWay',
-        'clickNode', 'undo', 'cancel', 'finish'),
+            'clickNode', 'undo', 'cancel', 'finish'),
         keybinding = d3.keybinding('draw'),
         hover = iD.behavior.Hover(context)
             .altDisables(true)
@@ -18,7 +18,7 @@ iD.behavior.Draw = function(context) {
     function mousedown() {
 
         function point() {
-            var p = element.node().parentNode;
+            var p = context.container().node();
             return touchId !== null ? d3.touches(p).filter(function(p) {
                 return p.identifier === touchId;
             })[0] : d3.mouse(p);
@@ -26,17 +26,20 @@ iD.behavior.Draw = function(context) {
 
         var element = d3.select(this),
             touchId = d3.event.touches ? d3.event.changedTouches[0].identifier : null,
-            time = +new Date(),
-            pos = point();
+            t1 = +new Date(),
+            p1 = point();
 
         element.on('mousemove.draw', null);
 
         d3.select(window).on('mouseup.draw', function() {
-            element.on('mousemove.draw', mousemove);
-            if (iD.geo.euclideanDistance(pos, point()) < closeTolerance ||
-                (iD.geo.euclideanDistance(pos, point()) < tolerance &&
-                (+new Date() - time) < 500)) {
+            var t2 = +new Date(),
+                p2 = point(),
+                dist = iD.geo.euclideanDistance(p1, p2);
 
+            element.on('mousemove.draw', mousemove);
+            d3.select(window).on('mouseup.draw', null);
+
+            if (dist < closeTolerance || (dist < tolerance && (t2 - t1) < 500)) {
                 // Prevent a quick second click
                 d3.select(window).on('click.draw-block', function() {
                     d3.event.stopPropagation();
