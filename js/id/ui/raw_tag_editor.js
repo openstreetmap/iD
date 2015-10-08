@@ -85,7 +85,12 @@ iD.ui.RawTagEditor = function(context) {
         $items.order();
 
         $items.each(function(tag) {
-            var reference = iD.ui.TagReference({key: tag.key, value: tag.value}, context);
+            var isRelation = (context.entity(id).type === 'relation'),
+                reference;
+            if (isRelation && tag.key === 'type')
+                reference = iD.ui.TagReference({rtype: tag.value}, context);
+            else
+                reference = iD.ui.TagReference({key: tag.key, value: tag.value}, context);
 
             if (state === 'hover') {
                 reference.showing(false);
