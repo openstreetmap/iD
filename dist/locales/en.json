@@ -2858,8 +2858,28 @@
                 "name": "Bunker",
                 "terms": ""
             },
+            "military/checkpoint": {
+                "name": "Checkpoint",
+                "terms": ""
+            },
+            "military/danger_area": {
+                "name": "Danger Area",
+                "terms": ""
+            },
+            "military/naval_base": {
+                "name": "Naval Base",
+                "terms": ""
+            },
+            "military/obstacle_course": {
+                "name": "Obstacle Course",
+                "terms": ""
+            },
             "military/range": {
                 "name": "Military Range",
+                "terms": ""
+            },
+            "military/training_area": {
+                "name": "Training area",
                 "terms": ""
             },
             "natural": {

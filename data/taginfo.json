@@ -1380,7 +1380,27 @@
         },
         {
             "key": "military",
+            "value": "checkpoint"
+        },
+        {
+            "key": "military",
+            "value": "danger_area"
+        },
+        {
+            "key": "military",
+            "value": "naval_base"
+        },
+        {
+            "key": "military",
+            "value": "obstacle_course"
+        },
+        {
+            "key": "military",
             "value": "range"
+        },
+        {
+            "key": "military",
+            "value": "training_area"
         },
         {
             "key": "natural"

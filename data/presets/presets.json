@@ -5925,6 +5925,54 @@
         },
         "name": "Bunker"
     },
+    "military/checkpoint": {
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "terms": [],
+        "tags": {
+            "military": "checkpoint"
+        },
+        "name": "Checkpoint"
+    },
+    "military/danger_area": {
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "terms": [],
+        "tags": {
+            "military": "danger_area"
+        },
+        "name": "Danger Area"
+    },
+    "military/naval_base": {
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "terms": [],
+        "tags": {
+            "military": "naval_base"
+        },
+        "name": "Naval Base"
+    },
+    "military/obstacle_course": {
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "terms": [],
+        "tags": {
+            "military": "obstacle_course"
+        },
+        "name": "Obstacle Course"
+    },
     "military/range": {
         "geometry": [
             "point",
@@ -5936,6 +5984,18 @@
             "military": "range"
         },
         "name": "Military Range"
+    },
+    "military/training_area": {
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "terms": [],
+        "tags": {
+            "military": "training_area"
+        },
+        "name": "Training area"
     },
     "natural": {
         "fields": [

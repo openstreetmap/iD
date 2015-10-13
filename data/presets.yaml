@@ -2591,10 +2591,30 @@ en:
         # military=bunker
         name: Bunker
         terms: "<translate with synonyms or related terms for 'Bunker', separated by commas>"
+      military/checkpoint:
+        # military=checkpoint
+        name: Checkpoint
+        terms: "<translate with synonyms or related terms for 'Checkpoint', separated by commas>"
+      military/danger_area:
+        # military=danger_area
+        name: Danger Area
+        terms: "<translate with synonyms or related terms for 'Danger Area', separated by commas>"
+      military/naval_base:
+        # military=naval_base
+        name: Naval Base
+        terms: "<translate with synonyms or related terms for 'Naval Base', separated by commas>"
+      military/obstacle_course:
+        # military=obstacle_course
+        name: Obstacle Course
+        terms: "<translate with synonyms or related terms for 'Obstacle Course', separated by commas>"
       military/range:
         # military=range
         name: Military Range
         terms: "<translate with synonyms or related terms for 'Military Range', separated by commas>"
+      military/training_area:
+        # military=training_area
+        name: Training area
+        terms: "<translate with synonyms or related terms for 'Training area', separated by commas>"
       natural:
         # 'natural=*'
         name: Natural
