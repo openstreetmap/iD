@@ -86,11 +86,11 @@ describe("iD.geo.joinWays", function() {
                 iD.Node({id: 'b'}),
                 iD.Node({id: 'c'}),
                 iD.Way({id: '-', nodes: ['a', 'b']}),
-                iD.Way({id: '=', nodes: ['c', 'b'], tags: {'lanes:forward': 2}})
+                iD.Way({id: '=', nodes: ['c', 'b'], tags: {'oneway': 'yes', 'lanes:forward': 2}})
             ]);
 
         var result = iD.geo.joinWays([graph.entity('-'), graph.entity('=')], graph);
-        expect(result[0][1].tags).to.eql({'lanes:backward': 2});
+        expect(result[0][1].tags).to.eql({'oneway': '-1', 'lanes:backward': 2});
     });
 
     it("ignores non-way members", function() {
