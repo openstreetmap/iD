@@ -132,11 +132,11 @@ describe("d3.combobox", function() {
         expect(input.property('selectionEnd')).to.equal(3);
     });
 
-    it("preserves the case of the input portion of the value", function() {
+    it("does not preserve the case of the input portion of the value", function() {
         input.call(combobox.data(data));
         input.node().focus();
         simulateKeypress('B');
-        expect(input.property('value')).to.equal('Bar');
+        expect(input.property('value')).to.equal('bar');
         expect(input.property('selectionStart')).to.equal(1);
         expect(input.property('selectionEnd')).to.equal(3);
     });

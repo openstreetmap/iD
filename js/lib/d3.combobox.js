@@ -187,7 +187,7 @@ d3.combobox = function() {
 
             for (var i = 0; i < suggestions.length; i++) {
                 if (suggestions[i].value.toLowerCase().indexOf(v.toLowerCase()) === 0) {
-                    var completion = v + suggestions[i].value.substr(v.length);
+                    var completion = suggestions[i].value;
                     idx = i;
                     input.property('value', completion);
                     input.node().setSelectionRange(v.length, completion.length);
