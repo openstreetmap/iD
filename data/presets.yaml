@@ -2442,6 +2442,14 @@ en:
         # 'leisure=pitch, sport=basketball'
         name: Basketball Court
         terms: "<translate with synonyms or related terms for 'Basketball Court', separated by commas>"
+      leisure/pitch/rugby_league:
+        # 'leisure=pitch, sport=rugby_league'
+        name: Rugby League Field
+        terms: "<translate with synonyms or related terms for 'Rugby League Field', separated by commas>"
+      leisure/pitch/rugby_union:
+        # 'leisure=pitch, sport=rugby_union'
+        name: Rugby Union Field
+        terms: "<translate with synonyms or related terms for 'Rugby Union Field', separated by commas>"
       leisure/pitch/skateboard:
         # 'leisure=pitch, sport=skateboard'
         name: Skate Park

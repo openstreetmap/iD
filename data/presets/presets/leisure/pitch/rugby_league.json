@@ -1,0 +1,17 @@
+{
+    "icon": "america-football",
+    "fields": [
+        "surface",
+        "lit"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "leisure": "pitch",
+        "sport": "rugby_league"
+    },
+    "terms": [],
+    "name": "Rugby League Field"
+}
