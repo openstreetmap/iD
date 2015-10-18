@@ -57,7 +57,9 @@ iD.actions.Join = function(ids) {
             return 'not_adjacent';
 
         var nodeIds = _.pluck(joined[0].nodes, 'id').slice(1, -1),
-            relation;
+            relation,
+            tags = {},
+            conflicting = false;
 
         joined[0].forEach(function(way) {
             var parents = graph.parentRelations(way);
@@ -65,10 +67,21 @@ iD.actions.Join = function(ids) {
                 if (parent.isRestriction() && parent.members.some(function(m) { return nodeIds.indexOf(m.id) >= 0; }))
                     relation = parent;
             });
+
+            for (var k in way.tags) {
+                if (!(k in tags)) {
+                    tags[k] = way.tags[k];
+                } else if (tags[k] && iD.interestingTag(k) && tags[k] !== way.tags[k]) {
+                    conflicting = true;
+                }
+            }
         });
 
         if (relation)
             return 'restriction';
+
+        if (conflicting)
+            return 'conflicting_tags';
     };
 
     return action;

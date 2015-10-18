@@ -194,6 +194,54 @@ describe("iD.actions.Join", function () {
 
             expect(iD.actions.Join(['-', '=']).disabled(graph)).not.to.be.ok;
         });
+
+        it("returns 'conflicting_tags' for two entities that have conflicting tags", function () {
+            var graph = iD.Graph([
+                iD.Node({id: 'a'}),
+                iD.Node({id: 'b'}),
+                iD.Node({id: 'c'}),
+                iD.Way({id: '-', nodes: ['a', 'b'], tags: {highway: 'primary'}}),
+                iD.Way({id: '=', nodes: ['b', 'c'], tags: {highway: 'secondary'}})
+            ]);
+
+            expect(iD.actions.Join(['-', '=']).disabled(graph)).to.equal('conflicting_tags');
+        });
+
+        it("takes tag reversals into account when calculating conflicts", function () {
+            var graph = iD.Graph([
+                iD.Node({id: 'a'}),
+                iD.Node({id: 'b'}),
+                iD.Node({id: 'c'}),
+                iD.Way({id: '-', nodes: ['a', 'b'], tags: {'oneway': 'yes'}}),
+                iD.Way({id: '=', nodes: ['c', 'b'], tags: {'oneway': '-1'}})
+            ]);
+
+            expect(iD.actions.Join(['-', '=']).disabled(graph)).not.to.be.ok;
+        });
+
+        it("returns falsy for exceptions to tag conflicts: missing tag", function () {
+            var graph = iD.Graph([
+                iD.Node({id: 'a'}),
+                iD.Node({id: 'b'}),
+                iD.Node({id: 'c'}),
+                iD.Way({id: '-', nodes: ['a', 'b'], tags: {highway: 'primary'}}),
+                iD.Way({id: '=', nodes: ['b', 'c'], tags: {}})
+            ]);
+
+            expect(iD.actions.Join(['-', '=']).disabled(graph)).not.to.be.ok;
+        });
+
+        it("returns falsy for exceptions to tag conflicts: uninteresting tag", function () {
+            var graph = iD.Graph([
+                iD.Node({id: 'a'}),
+                iD.Node({id: 'b'}),
+                iD.Node({id: 'c'}),
+                iD.Way({id: '-', nodes: ['a', 'b'], tags: {'tiger:cfcc': 'A41'}}),
+                iD.Way({id: '=', nodes: ['b', 'c'], tags: {'tiger:cfcc': 'A42'}})
+            ]);
+
+            expect(iD.actions.Join(['-', '=']).disabled(graph)).not.to.be.ok;
+        });
     });
 
     it("joins a --> b ==> c", function () {

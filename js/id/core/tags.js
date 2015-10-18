@@ -29,3 +29,12 @@ iD.oneWayTags = {
         'stream': true
     }
 };
+
+iD.interestingTag = function (key) {
+    return key !== 'attribution' &&
+        key !== 'created_by' &&
+        key !== 'source' &&
+        key !== 'odbl' &&
+        key.indexOf('tiger:') !== 0;
+
+};
