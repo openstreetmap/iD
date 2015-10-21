@@ -1,0 +1,12 @@
+{
+    "geometry": [
+        "point",
+        "vertex",
+        "area"
+    ],
+    "terms": [],
+    "tags": {
+        "military": "naval_base"
+    },
+    "name": "Naval Base"
+}
