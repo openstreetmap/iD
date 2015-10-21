@@ -29,7 +29,7 @@
       http://wiki.openstreetmap.org/wiki/Route#Members
       http://josm.openstreetmap.de/browser/josm/trunk/src/org/openstreetmap/josm/corrector/ReverseWayTagCorrector.java
  */
-iD.actions.Reverse = function(wayId) {
+iD.actions.Reverse = function(wayId, options) {
     var replacements = [
             [/:right$/, ':left'], [/:left$/, ':right'],
             [/:forward$/, ':backward'], [/:backward$/, ':forward']
@@ -59,6 +59,8 @@ iD.actions.Reverse = function(wayId) {
             return value.replace(numeric, function(_, sign) { return sign === '-' ? '' : '-'; });
         } else if (key === 'incline' || key === 'direction') {
             return {up: 'down', down: 'up'}[value] || value;
+        } else if (options && options.reverseOneway && key === 'oneway') {
+            return {yes: '-1', '1': '-1', '-1': 'yes'}[value] || value;
         } else {
             return {left: 'right', right: 'left'}[value] || value;
         }

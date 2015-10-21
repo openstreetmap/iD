@@ -23,6 +23,24 @@ describe("iD.actions.Reverse", function () {
         expect(graph.entity(way.id).tags).to.eql({'oneway': 'yes'});
     });
 
+    it("reverses oneway tags if reverseOneway: true is provided", function () {
+        var graph = iD.Graph([
+                iD.Way({id: 'yes', tags: {oneway: 'yes'}}),
+                iD.Way({id: 'no', tags: {oneway: 'no'}}),
+                iD.Way({id: '1', tags: {oneway: '1'}}),
+                iD.Way({id: '-1', tags: {oneway: '-1'}})
+            ]);
+
+        expect(iD.actions.Reverse('yes', {reverseOneway: true})(graph)
+            .entity('yes').tags).to.eql({oneway: '-1'});
+        expect(iD.actions.Reverse('no', {reverseOneway: true})(graph)
+            .entity('no').tags).to.eql({oneway: 'no'});
+        expect(iD.actions.Reverse('1', {reverseOneway: true})(graph)
+            .entity('1').tags).to.eql({oneway: '-1'});
+        expect(iD.actions.Reverse('-1', {reverseOneway: true})(graph)
+            .entity('-1').tags).to.eql({oneway: 'yes'});
+    });
+
     it("transforms *:right=* ⟺ *:left=*", function () {
         var way = iD.Way({tags: {'cycleway:right': 'lane'}}),
             graph = iD.Graph([way]);

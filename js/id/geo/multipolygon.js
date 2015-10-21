@@ -81,7 +81,7 @@ iD.geo.joinWays = function(array, graph) {
     }
 
     function reverse(member) {
-        return member.tags ? iD.actions.Reverse(member.id)(graph).entity(member.id) : member;
+        return member.tags ? iD.actions.Reverse(member.id, {reverseOneway: true})(graph).entity(member.id) : member;
     }
 
     while (array.length) {
