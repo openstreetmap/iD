@@ -28,6 +28,10 @@ iD.actions.RestrictTurn = function(turn, projection, restrictionId) {
             via  = graph.entity(turn.via.node),
             to   = graph.entity(turn.to.way);
 
+        function isClosingNode(way, nodeId) {
+            return nodeId === way.first() && nodeId === way.last();
+        }
+
         function split(toOrFrom) {
             var newID = toOrFrom.newID || iD.Way().id;
             graph = iD.actions.Split(via.id, [newID])
@@ -43,12 +47,12 @@ iD.actions.RestrictTurn = function(turn, projection, restrictionId) {
             }
         }
 
-        if (!from.affix(via.id)) {
+        if (!from.affix(via.id) || isClosingNode(from, via.id)) {
             if (turn.from.node === turn.to.node) {
                 // U-turn
                 from = to = split(turn.from)[0];
             } else if (turn.from.way === turn.to.way) {
-                // Straight-on
+                // Straight-on or circular
                 var s = split(turn.from);
                 from = s[0];
                 to   = s[1];
@@ -58,7 +62,7 @@ iD.actions.RestrictTurn = function(turn, projection, restrictionId) {
             }
         }
 
-        if (!to.affix(via.id)) {
+        if (!to.affix(via.id) || isClosingNode(to, via.id)) {
             to = split(turn.to)[0];
         }
 

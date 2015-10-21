@@ -8,7 +8,7 @@ describe("iD.geo.Intersection", function() {
                 iD.Way({id: '=', nodes: ['u', '*']}),
                 iD.Way({id: '-', nodes: ['*', 'w']})
             ]);
-            expect(iD.geo.Intersection(graph, '*').highways).to.eql([]);
+            expect(iD.geo.Intersection(graph, '*').ways).to.eql([]);
         });
 
         it("excludes degenerate highways", function() {
@@ -18,7 +18,17 @@ describe("iD.geo.Intersection", function() {
                 iD.Way({id: '=', nodes: ['u', '*'], tags: {highway: 'residential'}}),
                 iD.Way({id: '-', nodes: ['*'], tags: {highway: 'residential'}})
             ]);
-            expect(_.pluck(iD.geo.Intersection(graph, '*').highways, 'id')).to.eql(['=']);
+            expect(_.pluck(iD.geo.Intersection(graph, '*').ways, 'id')).to.eql(['=']);
+        });
+
+        it("excludes coincident highways", function() {
+            var graph = iD.Graph([
+                iD.Node({id: 'u'}),
+                iD.Node({id: '*'}),
+                iD.Way({id: '=', nodes: ['u', '*'], tags: {highway: 'residential'}}),
+                iD.Way({id: '-', nodes: ['u', '*'], tags: {highway: 'residential'}})
+            ]);
+            expect(iD.geo.Intersection(graph, '*').ways).to.eql([]);
         });
 
         it('includes line highways', function() {
@@ -29,7 +39,7 @@ describe("iD.geo.Intersection", function() {
                 iD.Way({id: '=', nodes: ['u', '*'], tags: {highway: 'residential'}}),
                 iD.Way({id: '-', nodes: ['*', 'w']})
             ]);
-            expect(_.pluck(iD.geo.Intersection(graph, '*').highways, 'id')).to.eql(['=']);
+            expect(_.pluck(iD.geo.Intersection(graph, '*').ways, 'id')).to.eql(['=']);
         });
 
         it('excludes area highways', function() {
@@ -39,7 +49,7 @@ describe("iD.geo.Intersection", function() {
                 iD.Node({id: 'w'}),
                 iD.Way({id: '=', nodes: ['u', '*', 'w'], tags: {highway: 'pedestrian', area: 'yes'}})
             ]);
-            expect(iD.geo.Intersection(graph, '*').highways).to.eql([]);
+            expect(iD.geo.Intersection(graph, '*').ways).to.eql([]);
         });
 
         it('auto-splits highways at the intersection', function() {
@@ -49,7 +59,7 @@ describe("iD.geo.Intersection", function() {
                 iD.Node({id: 'w'}),
                 iD.Way({id: '=', nodes: ['u', '*', 'w'], tags: {highway: 'residential'}})
             ]);
-            expect(_.pluck(iD.geo.Intersection(graph, '*').highways, 'id')).to.eql(['=-a', '=-b']);
+            expect(_.pluck(iD.geo.Intersection(graph, '*').ways, 'id')).to.eql(['=-a', '=-b']);
         });
     });
 
@@ -372,5 +382,200 @@ describe("iD.geo.Intersection", function() {
                 u: true
             });
         });
+
+        it("permits turns to a circular way", function() {
+            //
+            //  b -- c
+            //  |    |
+            //  a -- * === u
+            //
+            var graph = iD.Graph([
+                    iD.Node({id: 'a'}),
+                    iD.Node({id: 'b'}),
+                    iD.Node({id: 'c'}),
+                    iD.Node({id: '*'}),
+                    iD.Node({id: 'u'}),
+                    iD.Way({id: '-', nodes: ['*', 'a', 'b', 'c', '*'], tags: {highway: 'residential'}}),
+                    iD.Way({id: '=', nodes: ['*', 'u'], tags: {highway: 'residential'}})
+                ]),
+                turns = iD.geo.Intersection(graph, '*').turns('u');
+
+            expect(turns.length).to.eql(3);
+            expect(turns[0]).to.eql({
+                from: {node: 'u', way: '='},
+                via:  {node: '*'},
+                to:   {node: 'a', way: '-'}
+            });
+            expect(turns[1]).to.eql({
+                from: {node: 'u', way: '='},
+                via:  {node: '*'},
+                to:   {node: 'c', way: '-'}
+            });
+            expect(turns[2]).to.eql({
+                from: {node: 'u', way: '='},
+                via:  {node: '*'},
+                to:   {node: 'u', way: '='},
+                u: true
+            });
+        });
+
+        it("permits turns from a circular way", function() {
+            //
+            //  b -- c
+            //  |    |
+            //  a -- * === u
+            //
+            var graph = iD.Graph([
+                    iD.Node({id: 'a'}),
+                    iD.Node({id: 'b'}),
+                    iD.Node({id: 'c'}),
+                    iD.Node({id: '*'}),
+                    iD.Node({id: 'u'}),
+                    iD.Way({id: '-', nodes: ['*', 'a', 'b', 'c', '*'], tags: {highway: 'residential'}}),
+                    iD.Way({id: '=', nodes: ['*', 'u'], tags: {highway: 'residential'}})
+                ]),
+                turns = iD.geo.Intersection(graph, '*').turns('a');
+
+            expect(turns.length).to.eql(3);
+            expect(turns[0]).to.eql({
+                from: {node: 'a', way: '-'},
+                via:  {node: '*'},
+                to:   {node: 'c', way: '-'}
+            });
+            expect(turns[1]).to.eql({
+                from: {node: 'a', way: '-'},
+                via:  {node: '*'},
+                to:   {node: 'u', way: '='}
+            });
+            expect(turns[2]).to.eql({
+                from: {node: 'a', way: '-'},
+                via:  {node: '*'},
+                to:   {node: 'a', way: '-'},
+                u: true
+            });
+        });
+
+        it("permits turns to a oneway circular way", function() {
+            //
+            //  b -- c
+            //  |    |
+            //  a -- * === u
+            //
+            var graph = iD.Graph([
+                    iD.Node({id: 'a'}),
+                    iD.Node({id: 'b'}),
+                    iD.Node({id: 'c'}),
+                    iD.Node({id: '*'}),
+                    iD.Node({id: 'u'}),
+                    iD.Way({id: '-', nodes: ['*', 'a', 'b', 'c', '*'], tags: {highway: 'residential', oneway: 'yes'}}),
+                    iD.Way({id: '=', nodes: ['*', 'u'], tags: {highway: 'residential'}})
+                ]),
+                turns = iD.geo.Intersection(graph, '*').turns('u');
+
+            expect(turns.length).to.eql(2);
+            expect(turns[0]).to.eql({
+                from: {node: 'u', way: '='},
+                via:  {node: '*'},
+                to:   {node: 'a', way: '-'}
+            });
+            expect(turns[1]).to.eql({
+                from: {node: 'u', way: '='},
+                via:  {node: '*'},
+                to:   {node: 'u', way: '='},
+                u: true
+            });
+        });
+
+        it("permits turns to a reverse oneway circular way", function() {
+            //
+            //  b -- c
+            //  |    |
+            //  a -- * === u
+            //
+            var graph = iD.Graph([
+                    iD.Node({id: 'a'}),
+                    iD.Node({id: 'b'}),
+                    iD.Node({id: 'c'}),
+                    iD.Node({id: '*'}),
+                    iD.Node({id: 'u'}),
+                    iD.Way({id: '-', nodes: ['*', 'a', 'b', 'c', '*'], tags: {highway: 'residential', oneway: '-1'}}),
+                    iD.Way({id: '=', nodes: ['*', 'u'], tags: {highway: 'residential'}})
+                ]),
+                turns = iD.geo.Intersection(graph, '*').turns('u');
+
+            expect(turns.length).to.eql(2);
+            expect(turns[0]).to.eql({
+                from: {node: 'u', way: '='},
+                via:  {node: '*'},
+                to:   {node: 'c', way: '-'}
+            });
+            expect(turns[1]).to.eql({
+                from: {node: 'u', way: '='},
+                via:  {node: '*'},
+                to:   {node: 'u', way: '='},
+                u: true
+            });
+        });
+
+        it("permits turns from a oneway circular way", function() {
+            //
+            //  b -- c
+            //  |    |
+            //  a -- * === u
+            //
+            var graph = iD.Graph([
+                    iD.Node({id: 'a'}),
+                    iD.Node({id: 'b'}),
+                    iD.Node({id: 'c'}),
+                    iD.Node({id: '*'}),
+                    iD.Node({id: 'u'}),
+                    iD.Way({id: '-', nodes: ['*', 'a', 'b', 'c', '*'], tags: {highway: 'residential', oneway: 'yes'}}),
+                    iD.Way({id: '=', nodes: ['*', 'u'], tags: {highway: 'residential'}})
+                ]),
+                turns = iD.geo.Intersection(graph, '*').turns('c');
+
+            expect(turns.length).to.eql(2);
+            expect(turns[0]).to.eql({
+                from: {node: 'c', way: '-'},
+                via:  {node: '*'},
+                to:   {node: 'a', way: '-'}
+            });
+            expect(turns[1]).to.eql({
+                from: {node: 'c', way: '-'},
+                via:  {node: '*'},
+                to:   {node: 'u', way: '='}
+            });
+        });
+
+        it("permits turns from a reverse oneway circular way", function() {
+            //
+            //  b -- c
+            //  |    |
+            //  a -- * === u
+            //
+            var graph = iD.Graph([
+                    iD.Node({id: 'a'}),
+                    iD.Node({id: 'b'}),
+                    iD.Node({id: 'c'}),
+                    iD.Node({id: '*'}),
+                    iD.Node({id: 'u'}),
+                    iD.Way({id: '-', nodes: ['*', 'a', 'b', 'c', '*'], tags: {highway: 'residential', oneway: '-1'}}),
+                    iD.Way({id: '=', nodes: ['*', 'u'], tags: {highway: 'residential'}})
+                ]),
+                turns = iD.geo.Intersection(graph, '*').turns('a');
+
+            expect(turns.length).to.eql(2);
+            expect(turns[0]).to.eql({
+                from: {node: 'a', way: '-'},
+                via:  {node: '*'},
+                to:   {node: 'c', way: '-'}
+            });
+            expect(turns[1]).to.eql({
+                from: {node: 'a', way: '-'},
+                via:  {node: '*'},
+                to:   {node: 'u', way: '='}
+            });
+        });
+
     });
 });

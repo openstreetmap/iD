@@ -43,7 +43,7 @@ iD.ui.preset.restrictions = function(field, context) {
 
         surface
             .call(vertices, graph, [vertex], filter, extent, z)
-            .call(lines, graph, intersection.highways, filter)
+            .call(lines, graph, intersection.ways, filter)
             .call(turns, graph, intersection.turns(fromNodeID));
 
         surface
@@ -57,7 +57,7 @@ iD.ui.preset.restrictions = function(field, context) {
 
         if (fromNodeID) {
             surface
-                .selectAll('.' + _.find(intersection.highways, function(way) { return way.contains(fromNodeID); }).id)
+                .selectAll('.' + intersection.highways[fromNodeID].id)
                 .classed('selected', true);
         }
 
@@ -72,7 +72,7 @@ iD.ui.preset.restrictions = function(field, context) {
         function click() {
             var datum = d3.event.target.__data__;
             if (datum instanceof iD.Entity) {
-                fromNodeID = datum.nodes[(datum.first() === vertexID) ? 1 : datum.nodes.length - 2];
+                fromNodeID = intersection.adjacentNodeId(datum.id);
                 render();
             } else if (datum instanceof iD.geo.Turn) {
                 if (datum.restriction) {

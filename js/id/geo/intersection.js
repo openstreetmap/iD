@@ -6,43 +6,82 @@ iD.geo.Turn = function(turn) {
 
 iD.geo.Intersection = function(graph, vertexId) {
     var vertex = graph.entity(vertexId),
-        highways = [];
+        parentWays = graph.parentWays(vertex),
+        coincident = [],
+        highways = {};
+
+    function addHighway(way, adjacentNodeId) {
+        if (highways[adjacentNodeId]) {
+            coincident.push(adjacentNodeId);
+        } else {
+            highways[adjacentNodeId] = way;
+        }
+    }
 
     // Pre-split ways that would need to be split in
     // order to add a restriction. The real split will
     // happen when the restriction is added.
-    graph.parentWays(vertex).forEach(function(way) {
+    parentWays.forEach(function(way) {
         if (!way.tags.highway || way.isArea() || way.isDegenerate())
             return;
 
-        if (way.affix(vertexId)) {
-            highways.push(way);
+        var isFirst = (vertexId === way.first()),
+            isLast = (vertexId === way.last()),
+            isAffix = (isFirst || isLast),
+            isClosingNode = (isFirst && isLast);
+
+        if (isAffix && !isClosingNode) {
+            var index = (isFirst ? 1 : way.nodes.length - 2);
+            addHighway(way, way.nodes[index]);
+
         } else {
-            var idx = _.indexOf(way.nodes, vertex.id, 1),
-                wayA = iD.Way({id: way.id + '-a', tags: way.tags, nodes: way.nodes.slice(0, idx + 1)}),
-                wayB = iD.Way({id: way.id + '-b', tags: way.tags, nodes: way.nodes.slice(idx)});
-
-            graph = graph.replace(wayA);
-            graph = graph.replace(wayB);
-
-            highways.push(wayA);
-            highways.push(wayB);
+            var splitIndex, wayA, wayB, indexA, indexB;
+            if (isClosingNode) {
+                splitIndex = Math.ceil(way.nodes.length / 2);  // split at midpoint
+                wayA = iD.Way({id: way.id + '-a', tags: way.tags, nodes: way.nodes.slice(0, splitIndex)});
+                wayB = iD.Way({id: way.id + '-b', tags: way.tags, nodes: way.nodes.slice(splitIndex)});
+                indexA = 1;
+                indexB = way.nodes.length - 2;
+            } else {
+                splitIndex = _.indexOf(way.nodes, vertex.id, 1);  // split at vertexid
+                wayA = iD.Way({id: way.id + '-a', tags: way.tags, nodes: way.nodes.slice(0, splitIndex + 1)});
+                wayB = iD.Way({id: way.id + '-b', tags: way.tags, nodes: way.nodes.slice(splitIndex)});
+                indexA = splitIndex - 1;
+                indexB = splitIndex + 1;
+            }
+            graph = graph.replace(wayA).replace(wayB);
+            addHighway(wayA, way.nodes[indexA]);
+            addHighway(wayB, way.nodes[indexB]);
         }
     });
 
+    // remove any ways from this intersection that are coincident
+    // (i.e. any adjacent node used by more than one intersecting way)
+    coincident.forEach(function (n) {
+        delete highways[n];
+    });
+
+
     var intersection = {
         highways: highways,
+        ways: _.values(highways),
         graph: graph
     };
 
-    intersection.turns = function(fromNodeID) {
-        if (!fromNodeID)
+    intersection.adjacentNodeId = function(fromWayId) {
+        return _.find(_.keys(highways), function(k) {
+            return highways[k].id === fromWayId;
+        });
+    };
+
+    intersection.turns = function(fromNodeId) {
+        var start = highways[fromNodeId];
+        if (!start)
             return [];
 
-        var way = _.find(highways, function(way) { return way.contains(fromNodeID); });
-        if (way.first() === vertex.id && way.tags.oneway === 'yes')
+        if (start.first() === vertex.id && start.tags.oneway === 'yes')
             return [];
-        if (way.last() === vertex.id && way.tags.oneway === '-1')
+        if (start.last() === vertex.id && start.tags.oneway === '-1')
             return [];
 
         function withRestriction(turn) {
@@ -71,39 +110,44 @@ iD.geo.Intersection = function(graph, vertexId) {
         }
 
         var from = {
-                node: way.nodes[way.first() === vertex.id ? 1 : way.nodes.length - 2],
-                way: way.id.split(/-(a|b)/)[0]
+                node: fromNodeId,
+                way: start.id.split(/-(a|b)/)[0]
             },
-            via = {node: vertex.id},
+            via = { node: vertex.id },
             turns = [];
 
-        highways.forEach(function(parent) {
-            if (parent === way)
+        _.each(highways, function(end, adjacentNodeId) {
+            if (end === start)
                 return;
 
-            var index = parent.nodes.indexOf(vertex.id);
-
             // backward
-            if (parent.first() !== vertex.id && parent.tags.oneway !== 'yes') {
+            if (end.first() !== vertex.id && end.tags.oneway !== 'yes') {
                 turns.push(withRestriction({
                     from: from,
                     via: via,
-                    to: {node: parent.nodes[index - 1], way: parent.id.split(/-(a|b)/)[0]}
+                    to: {
+                        node: adjacentNodeId,
+                        way: end.id.split(/-(a|b)/)[0]
+                    }
                 }));
             }
 
             // forward
-            if (parent.last() !== vertex.id && parent.tags.oneway !== '-1') {
+            if (end.last() !== vertex.id && end.tags.oneway !== '-1') {
                 turns.push(withRestriction({
                     from: from,
                     via: via,
-                    to: {node: parent.nodes[index + 1], way: parent.id.split(/-(a|b)/)[0]}
+                    to: {
+                        node: adjacentNodeId,
+                        way: end.id.split(/-(a|b)/)[0]
+                    }
                 }));
             }
+
         });
 
         // U-turn
-        if (way.tags.oneway !== 'yes' && way.tags.oneway !== '-1') {
+        if (start.tags.oneway !== 'yes' && start.tags.oneway !== '-1') {
             turns.push(withRestriction({
                 from: from,
                 via: via,
