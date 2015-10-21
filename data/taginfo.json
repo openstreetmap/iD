@@ -1245,6 +1245,14 @@
         },
         {
             "key": "sport",
+            "value": "rugby_league"
+        },
+        {
+            "key": "sport",
+            "value": "rugby_union"
+        },
+        {
+            "key": "sport",
             "value": "skateboard"
         },
         {

@@ -2705,6 +2705,14 @@
                 "name": "Terrain de basketball",
                 "terms": "Terrain de basket, terrain de basketball"
             },
+            "leisure/pitch/rugby_league": {
+                "name": "Terrain de rugby à XV",
+                "terms": "Rugby,Terrain de rugby,"
+            },
+            "leisure/pitch/rugby_union": {
+                "name": "Terrain de rugby à XIII",
+                "terms": ""
+            },
             "leisure/pitch/skateboard": {
                 "name": "Planchodrome",
                 "terms": "Planchodrome, skate park"

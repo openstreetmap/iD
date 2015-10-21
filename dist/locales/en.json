@@ -2719,6 +2719,14 @@
                 "name": "Basketball Court",
                 "terms": ""
             },
+            "leisure/pitch/rugby_league": {
+                "name": "Rugby League Field",
+                "terms": ""
+            },
+            "leisure/pitch/rugby_union": {
+                "name": "Rugby Union Field",
+                "terms": ""
+            },
             "leisure/pitch/skateboard": {
                 "name": "Skate Park",
                 "terms": ""
