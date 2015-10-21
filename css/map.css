@@ -489,30 +489,30 @@ path.stroke.tag-highway {
 path.stroke.tag-highway-motorway,
 path.stroke.tag-highway-motorway_link,
 path.stroke.tag-motorway {
-    stroke:#58a9ed;
+    stroke:#CF2081;
 }
 
 path.casing.tag-highway-motorway,
 path.casing.tag-highway-motorway_link,
 path.casing.tag-motorway {
-    stroke:#2c5476;
+    stroke:#70372f;
 }
 
 path.stroke.tag-highway-trunk,
 path.stroke.tag-highway-trunk_link,
 path.stroke.tag-trunk {
-    stroke:#8cd05f;
+    stroke:#DD2F22;
 }
 path.casing.tag-highway-trunk,
 path.casing.tag-highway-trunk_link,
 path.casing.tag-trunk {
-    stroke:#46682f;
+    stroke:#70372f;
 }
 
 path.stroke.tag-highway-primary,
 path.stroke.tag-highway-primary_link,
 path.stroke.tag-primary {
-    stroke:#e06d5f;
+    stroke:#F99806;
 }
 path.casing.tag-highway-primary,
 path.casing.tag-highway-primary_link,
@@ -523,22 +523,78 @@ path.casing.tag-primary {
 path.stroke.tag-highway-secondary,
 path.stroke.tag-highway-secondary_link,
 path.stroke.tag-secondary {
-    stroke:#eab056;
+    stroke:#F3F312;
 }
 path.casing.tag-highway-secondary,
 path.casing.tag-highway-secondary_link,
 path.casing.tag-secondary {
-    stroke:#75582b;
+    stroke:#70372f;
 }
 
 path.stroke.tag-highway-tertiary,
 path.stroke.tag-highway-tertiary_link,
 path.stroke.tag-tertiary {
-    stroke:#ffff7e;
+    stroke:#FFF9B3;
 }
 path.casing.tag-highway-tertiary,
 path.casing.tag-highway-tertiary_link,
 path.casing.tag-tertiary {
+    stroke:#70372f;
+}
+
+.legacy-carto path.stroke.tag-highway-motorway,
+.legacy-carto path.stroke.tag-highway-motorway_link,
+.legacy-carto path.stroke.tag-motorway {
+    stroke:#58a9ed;
+}
+
+.legacy-carto path.casing.tag-highway-motorway,
+.legacy-carto path.casing.tag-highway-motorway_link,
+.legacy-carto path.casing.tag-motorway {
+    stroke:#2c5476;
+}
+
+.legacy-carto path.stroke.tag-highway-trunk,
+.legacy-carto path.stroke.tag-highway-trunk_link,
+.legacy-carto path.stroke.tag-trunk {
+    stroke:#8cd05f;
+}
+.legacy-carto path.casing.tag-highway-trunk,
+.legacy-carto path.casing.tag-highway-trunk_link,
+.legacy-carto path.casing.tag-trunk {
+    stroke:#46682f;
+}
+
+.legacy-carto path.stroke.tag-highway-primary,
+.legacy-carto path.stroke.tag-highway-primary_link,
+.legacy-carto path.stroke.tag-primary {
+    stroke:#e06d5f;
+}
+.legacy-carto path.casing.tag-highway-primary,
+.legacy-carto path.casing.tag-highway-primary_link,
+.legacy-carto path.casing.tag-primary {
+    stroke:#70372f;
+}
+
+.legacy-carto path.stroke.tag-highway-secondary,
+.legacy-carto path.stroke.tag-highway-secondary_link,
+.legacy-carto path.stroke.tag-secondary {
+    stroke:#eab056;
+}
+.legacy-carto path.casing.tag-highway-secondary,
+.legacy-carto path.casing.tag-highway-secondary_link,
+.legacy-carto path.casing.tag-secondary {
+    stroke:#75582b;
+}
+
+.legacy-carto path.stroke.tag-highway-tertiary,
+.legacy-carto path.stroke.tag-highway-tertiary_link,
+.legacy-carto path.stroke.tag-tertiary {
+    stroke:#ffff7e;
+}
+.legacy-carto path.casing.tag-highway-tertiary,
+.legacy-carto path.casing.tag-highway-tertiary_link,
+.legacy-carto path.casing.tag-tertiary {
     stroke:#7f7f3f;
 }
 
