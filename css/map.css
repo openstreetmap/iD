@@ -287,8 +287,7 @@ path.fill.tag-landuse-residential {
 }
 .preset-icon-fill-area.tag-landuse-residential {
     border-color: rgb(196, 189, 25);
-    background: none;
-    box-shadow: inset 0 0 0 5px rgba(196, 189, 25, 0.3);
+    background: rgba(196, 189, 25, 0.3);
 }
 
 path.stroke.tag-landuse-retail,
@@ -303,8 +302,7 @@ path.fill.tag-landuse-commercial {
 .preset-icon-fill-area.tag-landuse-retail,
 .preset-icon-fill-area.tag-landuse-commercial {
     border-color: rgb(214, 136, 26);
-    background: none;
-    box-shadow: inset 0 0 0 5px rgba(214, 136, 26, 0.3);
+    background-color: rgba(214, 136, 26, 0.3);
 }
 
 path.stroke.tag-landuse-industrial {
@@ -316,8 +314,7 @@ path.fill.tag-landuse-industrial {
 }
 .preset-icon-fill-area.tag-landuse-industrial {
     border-color: rgb(228, 164, 245);
-    background: none;
-    box-shadow: inset 0 0 0 5px rgba(228, 164, 245, 0.3);
+    background-color: rgba(228, 164, 245, 0.3);
 }
 
 path.stroke.tag-landuse-quarry {
