@@ -115,9 +115,6 @@
             "Shell Express": {
                 "count": 131
             },
-            "Hess": {
-                "count": 127
-            },
             "Flying V": {
                 "count": 129
             },
@@ -897,8 +894,8 @@
             "Робин Сдобин": {
                 "count": 82
             },
-            "Baskin Robbins": {
-                "count": 74
+            "Baskin-Robbins": {
+                "count": 57
             },
             "ケンタッキーフライドチキン": {
                 "count": 164,
@@ -2447,8 +2444,8 @@
             "Second Cup": {
                 "count": 193
             },
-            "Dunkin Donuts": {
-                "count": 428,
+            "Dunkin' Donuts": {
+                "count": 1596,
                 "tags": {
                     "cuisine": "donut"
                 }
@@ -3870,7 +3867,7 @@
             "OBI": {
                 "count": 422
             },
-            "Lowes": {
+            "Lowe's": {
                 "count": 1152
             },
             "Wickes": {
