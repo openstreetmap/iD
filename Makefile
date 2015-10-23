@@ -6,8 +6,7 @@ all: \
 	dist/iD.css \
 	dist/iD.js \
 	dist/iD.min.js \
-	dist/img/line-presets.png \
-	dist/img/relation-presets.png
+	dist/img/iD-sprite.svg
 
 MAKI_TARGETS = \
 	css/feature-icons.css \
@@ -27,6 +26,8 @@ $(MAKI_SOURCES): node_modules/.install
 dist/img/maki-sprite.png: node_modules/maki/www/images/maki-sprite.png
 	cp $< $@
 
+dist/img/iD-sprite.svg: svg/iD-sprite.svg
+	cp $< $@
 
 BUILDJS_TARGETS = \
 	data/presets/categories.json \
@@ -130,14 +131,6 @@ suggestions:
 wikipedias:
 	npm install wmf-sitematrix@git://github.com/osmlab/wmf-sitematrix.git
 	cp node_modules/wmf-sitematrix/wikipedia.min.json data/wikipedia.json
-
-SPRITE = inkscape --export-area-page
-
-dist/img/line-presets.png: svg/line-presets.svg
-	if [ `which inkscape` ]; then $(SPRITE) --export-png=$@ $<; else echo "Inkscape is not installed"; fi;
-
-dist/img/relation-presets.png: svg/relation-presets.svg
-	if [ `which inkscape` ]; then $(SPRITE) --export-png=$@ $<; else echo "Inkscape is not installed"; fi;
 
 D3_FILES = \
 	node_modules/d3/src/start.js \

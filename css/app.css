@@ -485,10 +485,10 @@ button.save.has-count .count::before {
   vertical-align:top;
   width:20px;
   height:20px;
-  background:transparent url(img/sprite.svg) no-repeat 0 0;
+  background:transparent url(img/iD-sprite.svg) no-repeat 0 0;
   text-indent:-9999px;
   overflow:hidden;
-  }
+}
 
 .icon-pre-text {
     margin-right: 3px;
@@ -515,28 +515,34 @@ button.save.has-count .count::before {
 .icon.apply      { background-position: -120px 0;}
 .icon.save       { background-position: -140px 0;}
 .icon.close      { background-position: -160px 0;}
-.icon.delete     { background-position: -180px 0;}
-.icon.remove     { background-position: -200px 0;}
+
+.icon.out-link   { background-position: -200px 0;}
 .icon.inspect    { background-position: -220px 0;}
+.icon.zoom-in,
 .icon.plus       { background-position: -240px 0;}
-.icon.search     { background-position: -280px 0;}
+.icon.zoom-out,
+.icon.minus      { background-position: -260px 0;}
+.icon.search,
 .icon.geocode    { background-position: -280px 0;}
 .icon.layers     { background-position: -300px 0;}
 .icon.avatar     { background-position: -320px 0;}
 .icon.nearby     { background-position: -340px 0;}
 .icon.geolocate  { background-position: -360px 0;}
-.icon.warning    { background-position: -380px 0;}
-.icon.bug        { background-position: -400px 0;}
-.icon.back       { background-position: -420px 0;}
-.icon.forward    { background-position: -440px 0;}
-.icon.help       { background-position: -460px 0;}
-.icon.relation    { background-position: -520px 0;}
-.icon.relation.route         { background-position: -540px 0;}
-.icon.relation.multipolygon  { background-position: -560px 0;}
-.icon.vertex     { background-position: -580px 0;}
-.icon.data       { background-position: -600px 0;}
 
-.icon.inspect.light    { background-position: -220px -20px;}
+.icon.bug        { background-position: -400px 0;}
+.icon.translate  { background-position: -420px 0;}
+
+.icon.help       { background-position: -460px 0;}
+.icon.data       { background-position: -480px 0;}
+.icon.full-screen              { background-position: -500px 0;}
+.active .icon.full-screen      { background-position: -520px 0;}
+
+.icon.delete     { background-position: 0 -140px; }
+
+
+.icon.zoom-in-invert { background-position: -240px 0; }
+
+/*.icon.inspect.light    { background-position: -220px -20px;}
 .icon.plus.light       { background-position: -240px -20px;}
 .icon.zoom-in          { background-position: -240px -20px;}
 .icon.zoom-out         { background-position: -260px -20px;}
@@ -548,12 +554,6 @@ button.save.has-count .count::before {
 .icon.bug.light        { background-position: -400px -20px;}
 .icon.help.light       { background-position: -460px -20px;}
 .icon.data.light       { background-position: -600px -20px;}
-
-.icon.back.blue        { background-position: -420px -20px;}
-.icon.forward.blue     { background-position: -440px -20px;}
-
-.icon.full-screen              { background-position: -620px -20px;}
-.active .icon.full-screen      { background-position: -640px -20px;}
 
 button[disabled] .icon.alert      { background-position:   0 -40px;}
 button[disabled] .icon.add-point  { background-position: -20px -40px;}
@@ -583,26 +583,12 @@ button[disabled] .icon.data       { background-position: -600px -40px;}
 .icon.area.created   { background-position: -520px -100px;}
 
 .icon.point.modified  { background-position: -22px 0; }
-
+*/
 .icon.modified { opacity: .5; }
 
-/* Out link is special */
-
-.icon.out-link   { height: 14px; width: 14px; background-position: -500px 0;}
+/*.icon.out-link   { height: 14px; width: 14px; background-position: -500px 0;}
 a:hover .icon.out-link   { background-position: -500px -14px;}
-
-.icon.plus-dark    { background-position: -240px -40px;}
-
-/* Universal preset icons */
-
-.icon.source     { background-position:   0 -200px;}
-.icon.address    { background-position: -20px -200px;}
-.icon.telephone  { background-position: -40px -200px;}
-.icon.website    { background-position: -60px -200px;}
-.icon.elevation  { background-position: -80px -200px;}
-.icon.wikipedia  { background-position: -100px -200px;}
-.icon.note       { background-position: -120px -200px;}
-.icon.wheelchair { background-position: -140px -200px;}
+*/
 
 /* ToolBar / Persistent UI Elements
 ------------------------------------------------------- */
@@ -986,7 +972,7 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
     height: 45px;
     width: 45px;
     position: absolute;
-    background:transparent url(img/sprite.svg) no-repeat 0 -80px;
+    background:transparent url(img/iD-sprite.svg) no-repeat 0 -80px;
 }
 
 /* preset form basics */
@@ -2486,7 +2472,7 @@ div.full-screen > button:hover {
     max-width: 100px;
     margin: auto;
     margin-bottom: 10px;
-    background:transparent url(img/sprite.svg) no-repeat 0 -220px;
+    background:transparent url(img/iD-sprite.svg) no-repeat 0 -220px;
 }
 
 .modal-actions :first-child {
@@ -2708,10 +2694,6 @@ div.full-screen > button:hover {
 .notice .zoom-to .icon {
     margin-top:10px;
     margin-right:10px;
-}
-
-.icon.zoom-in-invert {
-    background-position: -240px -40px;
 }
 
 /* Tooltips
@@ -3077,7 +3059,7 @@ div.full-screen > button:hover {
     content: "";
     height: 80px;
     width: 200px;
-    background:transparent url(img/sprite.svg) no-repeat 0 -320px;
+    background:transparent url(img/iD-sprite.svg) no-repeat 0 -320px;
 }
 
 .intro-areas-add .tooltip-inner::before {
@@ -3097,6 +3079,6 @@ div.full-screen > button:hover {
 .huge-modal-button .illustration {
     height: 100px;
     width: 100px;
-    background: rgba(0, 0, 0, 0) url(img/sprite.svg) no-repeat -400px -220px;
+    background: rgba(0, 0, 0, 0) url(img/iD-sprite.svg) no-repeat -400px -220px;
     margin: auto;
 }

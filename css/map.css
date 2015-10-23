@@ -22,13 +22,9 @@ img.tile-removing {
 }
 
 /* base styles */
-path {
-    fill: none;
-}
-
-use {
-    pointer-events: none;
-}
+path { fill: none; }
+#defs path { fill: inherit; }
+use { pointer-events: none; }
 
 g.point .shadow,
 g.vertex .shadow,

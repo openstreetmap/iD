@@ -14,7 +14,18 @@ iD.svg.Defs = function(context) {
         };
     }
 
-    function SpriteDefinition(id, href, data) {
+    function SVGSpriteDefinition(id, href, data) {
+        return function(defs) {
+            d3.xml(href, 'image/svg+xml', function(err, svg) {
+                if (err) return;
+                defs.node().appendChild(
+                    d3.select(svg.documentElement).attr('id', id).node()
+                );
+            });
+        };
+    }
+
+    function ImageSpriteDefinition(id, href, data) {
         return function(defs) {
             defs.append('image')
                 .attr('id', id)
@@ -33,6 +44,7 @@ iD.svg.Defs = function(context) {
     return function (selection) {
         var defs = selection.append('defs');
 
+        // marker
         defs.append('marker')
             .attr({
                 id: 'oneway-marker',
@@ -46,6 +58,7 @@ iD.svg.Defs = function(context) {
             .append('path')
             .attr('d', 'M 5 3 L 0 3 L 0 2 L 5 2 L 5 0 L 10 2.5 L 5 5 z');
 
+        // patterns
         var patterns = defs.selectAll('pattern')
             .data([
                 // pattern name, pattern image name
@@ -91,6 +104,7 @@ iD.svg.Defs = function(context) {
                 return context.imagePath('pattern/' + d[1] + '.png');
             });
 
+        // clip paths
         defs.selectAll()
             .data([12, 18, 20, 32, 45])
             .enter().append('clipPath')
@@ -107,6 +121,7 @@ iD.svg.Defs = function(context) {
                 return d;
             });
 
+        // maki
         var maki = [];
         _.forEach(iD.data.featureIcons, function (dimensions, name) {
             if (dimensions['12'] && dimensions['18'] && dimensions['24']) {
@@ -116,12 +131,12 @@ iD.svg.Defs = function(context) {
             }
         });
 
-        defs.call(SpriteDefinition(
-            'sprite',
-            context.imagePath('sprite.svg'),
+        defs.call(SVGSpriteDefinition(
+            'iD-sprite',
+            context.imagePath('iD-sprite.svg'),
             d3.entries(iD.data.operations)));
 
-        defs.call(SpriteDefinition(
+        defs.call(ImageSpriteDefinition(
             'maki-sprite',
             context.imagePath('maki-sprite.png'),
             maki));
