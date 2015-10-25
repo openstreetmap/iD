@@ -2908,21 +2908,26 @@ div.full-screen > button:hover {
     stroke-opacity: 0.5;
 }
 
-.radial-menu-item {
+.radial-menu-item circle {
     fill: white;
 }
 
-.radial-menu-item:hover {
-    fill: #ececec;
+.radial-menu-item circle:active,
+.radial-menu-item circle:hover {
+    fill: #eaeaea;
 }
 
-.radial-menu-item:active {
-    fill: #ececec;
-}
-
-.radial-menu-item.disabled {
+.radial-menu-item.disabled circle {
     cursor: auto;
     fill: rgba(255,255,255,.5);
+}
+
+.radial-menu-item.enabled use {
+    fill: #222;
+}
+
+.radial-menu-item.disabled use {
+    fill: rgba(32,32,32,.5);
 }
 
 .lasso-box {
