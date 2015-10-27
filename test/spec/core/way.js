@@ -41,7 +41,7 @@ describe('iD.Way', function() {
             var a = iD.Node({id: 'a'}),
                 b = iD.Node({id: 'b'}),
                 c = iD.Node({id: 'c'}),
-                w1 = iD.Entity({id: 'w1', nodes: ['a','b','c','a']}),
+                w1 = iD.Way({id: 'w1', nodes: ['a','b','c','a']}),
                 graph = iD.Graph([a, b, c, w1]),
                 result = w1.copy(),
                 w2 = result[0];
@@ -54,7 +54,7 @@ describe('iD.Way', function() {
             var a = iD.Node({id: 'a'}),
                 b = iD.Node({id: 'b'}),
                 c = iD.Node({id: 'c'}),
-                w1 = iD.Entity({id: 'w1', nodes: ['a','b','c','a']}),
+                w1 = iD.Way({id: 'w1', nodes: ['a','b','c','a']}),
                 graph = iD.Graph([a, b, c, w1]),
                 result = w1.copy(true, graph),
                 w2 = result[0];
