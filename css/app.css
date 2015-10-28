@@ -2904,6 +2904,7 @@ div.full-screen > button:hover {
 }
 
 .radial-menu-background {
+    fill: none;
     stroke: black;
     stroke-opacity: 0.5;
 }

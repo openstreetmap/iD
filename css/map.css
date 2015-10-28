@@ -24,13 +24,11 @@ img.tile-removing {
 /* allow overrideable fill for svg sprite icons */
 #defs path { fill: inherit; }
 
-path { fill: none; }
+/*path { fill: none; }*/
 use { pointer-events: none; }
 
 /* base styles */
-g.line path, g.area path {
-    fill: none;
-}
+.layer path { fill: none; }
 
 g.point .shadow,
 g.vertex .shadow,
