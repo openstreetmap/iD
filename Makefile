@@ -26,8 +26,8 @@ $(MAKI_SOURCES): node_modules/.install
 dist/img/maki-sprite.png: node_modules/maki/www/images/maki-sprite.png
 	cp $< $@
 
-dist/img/iD-sprite.svg: svg/iD-sprite.svg
-	cp $< $@
+dist/img/iD-sprite.svg: svg/iD-sprite.svg svg/iD-sprite.json
+	node svg/spriteify.js --svg svg/iD-sprite.svg --json svg/iD-sprite.json > dist/img/iD-sprite.svg
 
 BUILDJS_TARGETS = \
 	data/presets/categories.json \

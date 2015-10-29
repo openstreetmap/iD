@@ -3,32 +3,118 @@
 'use strict';
 
 var argv = require('minimist')(process.argv.slice(2));
-var fs = require('fs');
-var XmlStream = require('xml-stream');
-var status = 0;
-
 if (argv.help || argv.h || !argv.svg || !argv.json) {
     return help();
 }
 
-var stream = fs.createReadStream(argv.svg);
+var fs = require('fs');
 var json = JSON.parse(fs.readFileSync(argv.json));
-var svg = new XmlStream(stream);
+var _ = require('../js/lib/lodash.js');
+var path = require('path');
+var xml2js = require('xml2js');
 
-svg.preserve('id', true);
-svg.collect('subitem');
-svg.on('endElement: id', function(item) {
-  console.log(item);
+xmlToJs(argv.svg, function (err, obj) {
+    if (err) throw (err);
+    jsToXml(obj, function (err) {
+        if (err) console.log(err);
+    });
 });
 
-process.exit(status);
+function xmlToJs(filename, cb) {
+    // var filepath = path.normalize(path.join(__dirname, filename));
+    fs.readFile(filename, 'utf8', function (err, xmlStr) {
+        if (err) throw (err);
+
+        var opts = {
+                explicitArray: true,
+                explicitCharkey: true,
+                explicitChildren: true,
+                preserveChildrenOrder: true,
+                normalize: true,
+                attrkey: '#attr',
+                childkey: '#child',
+                charkey: '#char'
+            },
+            parser = new xml2js.Parser(opts);
+
+        parser.parseString(xmlStr, function (err, obj) {
+            // console.log(JSON.stringify(obj, null, 2));
+            cb(err, obj);
+        });
+    });
+}
+
+
+function jsToXml(obj, cb) {
+    var json = transform(obj.svg);
+    var builder = require('xmlbuilder');
+    var doc = builder.create('svg',
+        { version: '1.0', encoding: 'UTF-8' },
+        { pubID: '-//W3C//DTD SVG 1.1//EN', sysID: 'http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd'}
+    );
+
+    doc = build(doc, json);
+    process.stdout.write(doc.end({ pretty: true }), 'utf8', cb);
+}
+
+
+function transform(source) {
+    var target = {};
+    target['#name'] = source['#name'];
+
+    if (source['#char'] !== undefined) {
+        target['#char'] = source['#char'];
+    }
+    if (source['#attr'] !== undefined) {
+        var id = source['#attr'].id,
+            replace = (id && json[id] !== undefined) ? json[id] : {};
+
+        target['#attr'] = _.merge(source['#attr'], replace);
+        if (replace.viewBox !== undefined) {
+            target['#name'] = 'symbol';
+        }
+
+    }
+    if (source['#child'] !== undefined && source['#child'].constructor === Array) {
+        target['#child'] = [];
+        for (var i = 0; i < source['#child'].length; i++) {
+            target['#child'].push(transform(source['#child'][i]));
+        }
+    }
+
+    return target;
+}
+
+
+function build(doc, source) {
+    if (source['#name']) {
+        var isRoot = (source['#name'] === 'svg');
+
+        if (!isRoot) {
+            doc = doc.ele(source['#name']);
+        }
+        if (source['#attr']) {
+            doc = doc.att(source['#attr']);
+        }
+        if (source['#char']) {
+            doc = doc.txt(source['#char']);
+        }
+        if (source['#child'] && source['#child'].constructor === Array) {
+            for (var i = 0; i < source['#child'].length; i++) {
+                doc = build(doc, source['#child'][i]);
+            }
+        }
+        if (!isRoot) {
+            doc = doc.up();
+        }
+    }
+    return doc;
+}
+
 
 function help() {
     console.log('usage:');
     console.log('  spriteify --svg source.svg --json source.json > destination.svg');
     console.log('');
 }
-
-
-
 
