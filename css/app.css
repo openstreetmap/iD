@@ -866,10 +866,32 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
     margin: auto;
 }
 
+.preset-icon-fill-area {
+    cursor: inherit;
+    height: 39px;
+    width: 39px;
+    margin: auto;
+    position: absolute;
+    left: 10px;
+    top: 10px;
+}
+
+.preset-icon-frame {
+    position: absolute;
+    top: 7px;
+    left: 7px;
+    margin: auto;
+}
+
 .preset-icon-line,
 .preset-icon-relation {
     top: 0;
     left: 0;
+}
+
+.preset-icon-frame .icon {
+    width: 45px;
+    height: 45px;
 }
 
 .preset-list-button .label {
@@ -949,27 +971,6 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
     margin-top: -10px;
 }
 
-/* Preset icon colors */
-
-.preset-icon-fill-area {
-    cursor: inherit;
-    height: 39px;
-    width: 39px;
-    margin: auto;
-    position: absolute;
-    left: 10px;
-    top: 10px;
-}
-
-.preset-icon-fill-area:after {
-    content: '';
-    left: -4px;
-    top: -4px;
-    height: 45px;
-    width: 45px;
-    position: absolute;
-    background:transparent url(img/iD-sprite.svg) no-repeat 0 -80px;
-}
 
 /* preset form basics */
 

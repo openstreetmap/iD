@@ -23,6 +23,18 @@ iD.ui.PresetIcon = function() {
             return s;
         });
 
+        var $frame = selection.selectAll('.preset-icon-frame')
+            .data([0]);
+
+        $frame.enter()
+            .append('div')
+            .call(iD.svg.Icon('#preset-icon-frame'));
+
+        $frame.attr('class', function() {
+            return 'preset-icon-frame ' + (geom === 'area' ? '' : 'hide');
+        });
+
+
         var $icon = selection.selectAll('.preset-icon')
             .data([0]);
 
