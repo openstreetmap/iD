@@ -38,22 +38,16 @@ iD.ui.PresetIcon = function() {
         var $icon = selection.selectAll('.preset-icon')
             .data([0]);
 
-        $icon.enter().append('div');
+        $icon.enter()
+            .append('div')
+            .attr('class', 'preset-icon')
+            .call(iD.svg.Icon(''));
 
-        $icon.attr('class', function() {
-            var icon = p.icon || (geom === 'line' ? 'other-line' : 'marker-stroked'),
-                klass = 'feature-' + icon + ' preset-icon';
-
-            var featureicon = iD.data.featureIcons[icon];
-            if (featureicon && featureicon[geom]) {
-                klass += ' preset-icon-' + geom;
-            } else if (icon === 'multipolygon') {
-                // Special case (geometry === 'area')
-                klass += ' preset-icon-relation';
-            }
-
-            return klass;
-        });
+        $icon.selectAll('use')
+            .attr('href', function() {
+                var icon = p.icon || (geom === 'line' ? 'other-line' : 'marker-stroked');
+                return '#' + icon;
+            });
     }
 
     presetIcon.preset = function(_) {
