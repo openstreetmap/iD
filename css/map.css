@@ -21,10 +21,6 @@ img.tile-removing {
     opacity: 0;
 }
 
-/* allow overrideable fill for svg sprite icons */
-#defs path { fill: inherit; }
-
-/*path { fill: none; }*/
 use { pointer-events: none; }
 
 /* base styles */

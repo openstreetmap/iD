@@ -2910,12 +2910,12 @@ div.full-screen > button:hover {
 }
 
 .radial-menu-item circle {
-    fill: white;
+    fill: #eee;
 }
 
 .radial-menu-item circle:active,
 .radial-menu-item circle:hover {
-    fill: #eaeaea;
+    fill: #fff;
 }
 
 .radial-menu-item.disabled circle {
@@ -2923,12 +2923,14 @@ div.full-screen > button:hover {
     fill: rgba(255,255,255,.5);
 }
 
-.radial-menu-item.enabled use {
+.radial-menu-item use {
     fill: #222;
+    color: #79f;
 }
 
 .radial-menu-item.disabled use {
     fill: rgba(32,32,32,.5);
+    color: rgba(40,40,40,.5);
 }
 
 .lasso-box {

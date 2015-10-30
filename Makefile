@@ -13,8 +13,6 @@ MAKI_TARGETS = \
 	data/feature-icons.json
 
 MAKI_SOURCES = \
-	data/line-icons.json \
-	data/relation-icons.json \
 	node_modules/maki/www/maki-sprite.json \
 	dist/img/maki-sprite.png
 

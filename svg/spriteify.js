@@ -10,7 +10,6 @@ if (argv.help || argv.h || !argv.svg || !argv.json) {
 var fs = require('fs');
 var json = JSON.parse(fs.readFileSync(argv.json));
 var _ = require('../js/lib/lodash.js');
-var path = require('path');
 var xml2js = require('xml2js');
 
 xmlToJs(argv.svg, function (err, obj) {
@@ -21,7 +20,6 @@ xmlToJs(argv.svg, function (err, obj) {
 });
 
 function xmlToJs(filename, cb) {
-    // var filepath = path.normalize(path.join(__dirname, filename));
     fs.readFile(filename, 'utf8', function (err, xmlStr) {
         if (err) throw (err);
 
@@ -38,7 +36,6 @@ function xmlToJs(filename, cb) {
             parser = new xml2js.Parser(opts);
 
         parser.parseString(xmlStr, function (err, obj) {
-            // console.log(JSON.stringify(obj, null, 2));
             cb(err, obj);
         });
     });
