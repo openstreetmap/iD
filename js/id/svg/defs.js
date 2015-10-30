@@ -14,7 +14,7 @@ iD.svg.Defs = function(context) {
         };
     }
 
-    function SVGSpriteDefinition(id, href, data) {
+    function SVGSpriteDefinition(id, href) {
         return function(defs) {
             d3.xml(href, 'image/svg+xml', function(err, svg) {
                 if (err) return;
@@ -133,8 +133,7 @@ iD.svg.Defs = function(context) {
 
         defs.call(SVGSpriteDefinition(
             'iD-sprite',
-            context.imagePath('iD-sprite.svg'),
-            d3.entries(iD.data.operations)));
+            context.imagePath('iD-sprite.svg')));
 
         defs.call(ImageSpriteDefinition(
             'maki-sprite',

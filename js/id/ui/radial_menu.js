@@ -60,8 +60,8 @@ iD.ui.RadialMenu = function(context, operations) {
             .on('mouseout', mouseout);
 
         button.append('use')
-            .attr('width', '20px')
-            .attr('height', '20px')
+            .attr('width', '20')
+            .attr('height', '20')
             .attr('xlink:href', function(d) { return '#operation-' + d.id; });
 
         tooltip = d3.select(document.body)

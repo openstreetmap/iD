@@ -121,12 +121,12 @@
     "restriction":              { "viewBox": "480 260 60 60" },
     "multipolygon":             { "viewBox": "540 260 60 60" },
 
-    "turn-yes":                 { "viewBox": "200 320 44 24" },
-    "turn-no":                  { "viewBox": "244 320 44 24" },
-    "turn-only":                { "viewBox": "288 320 44 24" },
-    "turn-yes-u":               { "viewBox": "200 344 32 32" },
-    "turn-no-u":                { "viewBox": "232 344 32 32" },
-    "turn-only-u":              { "viewBox": "264 344 32 32 "},
+    "turn-yes":                 { "viewBox": "200 320 44 24", "x": "-22", "y": "-12" },
+    "turn-no":                  { "viewBox": "244 320 44 24", "x": "-22", "y": "-12" },
+    "turn-only":                { "viewBox": "288 320 44 24", "x": "-22", "y": "-12" },
+    "turn-yes-u":               { "viewBox": "200 344 32 32", "x": "-16", "y": "-16" },
+    "turn-no-u":                { "viewBox": "232 344 32 32", "x": "-16", "y": "-16" },
+    "turn-only-u":              { "viewBox": "264 344 32 32", "x": "-16", "y": "-16" },
 
     "preset-icon-frame":        { "viewBox": "340 320 45 45" },
 
