@@ -481,13 +481,9 @@ button.save.has-count .count::before {
 /* Icons */
 
 .icon {
-  display:inline-block;
-  vertical-align:top;
-  width:20px;
-  height:20px;
-  background:transparent url(img/iD-sprite.svg) no-repeat 0 0;
-  text-indent:-9999px;
-  overflow:hidden;
+  vertical-align: top;
+  width: 20px;
+  height: 20px;
 }
 
 .icon-pre-text {
@@ -2293,12 +2289,13 @@ div.full-screen > button:hover {
     display: table-cell;
     vertical-align: bottom;
     width: 250px;
-    height: 30px;
+    max-height: 30px;
     float: left;
     clear: left;
 }
 
 #info-block {
+    max-height: 30px;
     float: right;
     clear: right;
 }
