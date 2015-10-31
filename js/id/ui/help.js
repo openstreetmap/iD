@@ -104,11 +104,9 @@ iD.ui.Help = function(context) {
             button = selection.append('button')
                 .attr('tabindex', -1)
                 .on('click', toggle)
+                .call(iD.svg.Icon('#icon-help', 'icon-light'))
                 .call(tooltip),
             shown = false;
-
-        button.append('span')
-            .attr('class', 'icon help light');
 
 
         var toc = pane.append('ul')

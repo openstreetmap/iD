@@ -72,12 +72,13 @@ iD.ui.Commit = function(context) {
             .on('mouseout', mouseout)
             .on('click', warningClick);
 
-        warningLi.append('span')
-            .attr('class', 'alert icon icon-pre-text');
+        warningLi
+            .call(iD.svg.Icon('#icon-alert', 'icon-pre-text'));
 
-        warningLi.append('strong').text(function(d) {
-            return d.message;
-        });
+        warningLi
+            .append('strong').text(function(d) {
+                return d.message;
+            });
 
         warningLi.filter(function(d) { return d.tooltip; })
             .call(bootstrap.tooltip()

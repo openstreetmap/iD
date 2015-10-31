@@ -186,12 +186,9 @@ iD.ui.Background = function(context) {
             button = selection.append('button')
                 .attr('tabindex', -1)
                 .on('click', toggle)
+                .call(iD.svg.Icon('#icon-layers', 'icon-light'))
                 .call(tooltip),
             shown = false;
-
-        button.append('span')
-            .attr('class', 'icon layers light');
-
 
         var opa = content.append('div')
                 .attr('class', 'opacity-options-wrapper');
@@ -230,8 +227,7 @@ iD.ui.Background = function(context) {
                 .title(t('background.custom_button'))
                 .placement('left'))
             .on('click', editCustom)
-            .append('span')
-            .attr('class', 'icon geocode');
+            .call(iD.svg.Icon('#icon-search'));
 
         var label = custom.append('label');
 
@@ -299,15 +295,14 @@ iD.ui.Background = function(context) {
             .attr('class', function(d) { return d[0] + ' nudge'; })
             .on('mousedown', clickNudge);
 
-        var resetButton = nudgeContainer.append('button')
+        var resetButton = nudgeContainer
+            .append('button')
             .attr('class', 'reset disabled')
             .on('click', function () {
                 context.background().offset([0, 0]);
                 resetButton.classed('disabled', true);
-            });
-
-        resetButton.append('div')
-            .attr('class', 'icon undo');
+            })
+            .call(iD.svg.Icon('#icon-undo'));
 
         context.map()
             .on('move.background-update', _.debounce(update, 1000));

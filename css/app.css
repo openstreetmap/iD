@@ -486,8 +486,19 @@ button.save.has-count .count::before {
   height: 20px;
 }
 
+.icon-out-link {
+  vertical-align: text-top;
+  width: 14px;
+  height: 14px;
+  margin: 0px 3px;
+}
+
 .icon-pre-text {
     margin-right: 3px;
+}
+
+.icon-light {
+    color: #fff;
 }
 
 .user-icon {
@@ -499,77 +510,24 @@ button.save.has-count .count::before {
 }
 
 /* Definitions for every icon */
-.icon.alert     { background-position:   0 0;}
 .icon.point,
 .icon.add-point  { background-position: -20px 0;}
 .icon.line,
 .icon.add-line   { background-position: -40px 0;}
 .icon.area,
 .icon.add-area   { background-position: -60px 0;}
-.icon.undo       { background-position: -80px 0;}
-.icon.redo       { background-position: -100px 0;}
 .icon.apply      { background-position: -120px 0;}
 .icon.save       { background-position: -140px 0;}
 .icon.close      { background-position: -160px 0;}
 
-.icon.out-link   { background-position: -200px 0;}
 .icon.inspect    { background-position: -220px 0;}
 .icon.zoom-in,
 .icon.plus       { background-position: -240px 0;}
 .icon.zoom-out,
 .icon.minus      { background-position: -260px 0;}
-.icon.search,
-.icon.geocode    { background-position: -280px 0;}
-.icon.layers     { background-position: -300px 0;}
-.icon.avatar     { background-position: -320px 0;}
-.icon.nearby     { background-position: -340px 0;}
-.icon.geolocate  { background-position: -360px 0;}
-
-.icon.bug        { background-position: -400px 0;}
-.icon.translate  { background-position: -420px 0;}
-
-.icon.help       { background-position: -460px 0;}
-.icon.data       { background-position: -480px 0;}
-.icon.full-screen              { background-position: -500px 0;}
-.active .icon.full-screen      { background-position: -520px 0;}
-
 .icon.delete     { background-position: 0 -140px; }
 
-
-.icon.zoom-in-invert { background-position: -240px 0; }
-
-/*.icon.inspect.light    { background-position: -220px -20px;}
-.icon.plus.light       { background-position: -240px -20px;}
-.icon.zoom-in          { background-position: -240px -20px;}
-.icon.zoom-out         { background-position: -260px -20px;}
-.icon.geocode.light    { background-position: -280px -20px;}
-.icon.layers.light     { background-position: -300px -20px;}
-.icon.avatar.light     { background-position: -320px -20px;}
-.icon.nearby.light     { background-position: -340px -20px;}
-.icon.geolocate.light  { background-position: -360px -20px;}
-.icon.bug.light        { background-position: -400px -20px;}
-.icon.help.light       { background-position: -460px -20px;}
-.icon.data.light       { background-position: -600px -20px;}
-
-button[disabled] .icon.alert      { background-position:   0 -40px;}
-button[disabled] .icon.add-point  { background-position: -20px -40px;}
-button[disabled] .icon.add-line   { background-position: -40px -40px;}
-button[disabled] .icon.add-area   { background-position: -60px -40px;}
-button.disabled  .icon.undo       { background-position: -80px -40px;}
-button.disabled  .icon.redo       { background-position: -100px -40px;}
-button[disabled] .apply.icon      { background-position: -120px -40px;}
-button[disabled] .close.icon      { background-position: -160px -40px;}
-button[disabled] .delete.icon     { background-position: -180px -40px;}
-button[disabled] .icon.remove     { background-position: -200px -40px;}
-button[disabled] .icon.inspect    { background-position: -220px -40px;}
-button[disabled] .icon.zoom-in    { background-position: -240px -40px;}
-button[disabled] .icon.zoom-out   { background-position: -260px -40px;}
-button[disabled] .icon.geocode    { background-position: -280px -40px;}
-button[disabled] .icon.layers     { background-position: -300px -40px;}
-button[disabled] .icon.avatar     { background-position: -320px -40px;}
-button[disabled] .icon.nearby     { background-position: -340px -40px;}
-button[disabled] .icon.data       { background-position: -600px -40px;}
-
+/*
 .icon.point.deleted  { background-position: -480px -80px;}
 .icon.line.deleted   { background-position: -500px -80px;}
 .icon.area.deleted   { background-position: -520px -80px;}
@@ -579,11 +537,7 @@ button[disabled] .icon.data       { background-position: -600px -40px;}
 .icon.area.created   { background-position: -520px -100px;}
 
 .icon.point.modified  { background-position: -22px 0; }
-*/
 .icon.modified { opacity: .5; }
-
-/*.icon.out-link   { height: 14px; width: 14px; background-position: -500px 0;}
-a:hover .icon.out-link   { background-position: -500px -14px;}
 */
 
 /* ToolBar / Persistent UI Elements
@@ -635,6 +589,12 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
     position: absolute;
     right: 0;
     top: 0;
+}
+
+.preset-choose {
+    font-size: 16px;
+    line-height: 1.25;
+    font-weight: bold;
 }
 
 .modal > button {
@@ -925,6 +885,10 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
     background: #fafafa;
 }
 
+.preset-list-item button.tag-reference-button:hover {
+    background: #f1f1f1;
+}
+
 .preset-list-item button.tag-reference-button .icon {
     opacity: .5;
 }
@@ -1049,7 +1013,10 @@ a:hover .icon.out-link   { background-position: -500px -14px;}
     width: 10%;
     height: 100%;
     border-radius: 0;
-    background: #fafafa;
+    background: #f6f6f6;
+}
+.form-label button:hover {
+    background: #f1f1f1;
 }
 
 .form-label .modified-icon,

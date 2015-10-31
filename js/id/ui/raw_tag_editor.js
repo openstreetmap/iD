@@ -40,11 +40,10 @@ iD.ui.RawTagEditor = function(context) {
         var $newTag = $wrap.selectAll('.add-tag')
             .data([0]);
 
-        var $enter = $newTag.enter().append('button')
-            .attr('class', 'add-tag');
-
-        $enter.append('span')
-            .attr('class', 'icon plus light');
+        $newTag.enter()
+            .append('button')
+            .attr('class', 'add-tag')
+            .call(iD.svg.Icon('#icon-plus', 'icon-light'));
 
         $newTag.on('click', addTag);
 
@@ -53,7 +52,7 @@ iD.ui.RawTagEditor = function(context) {
 
         // Enter
 
-        $enter = $items.enter().append('li')
+        var $enter = $items.enter().append('li')
             .attr('class', 'tag-row cf');
 
         $enter.append('div')
@@ -73,8 +72,10 @@ iD.ui.RawTagEditor = function(context) {
         $enter.append('button')
             .attr('tabindex', -1)
             .attr('class', 'remove minor')
-            .append('span')
-            .attr('class', 'icon delete');
+            .call(iD.svg.Icon('#operation-delete'))
+            .select('use')
+            .attr('x', 10)
+            .attr('y', 10);
 
         if (context.taginfo()) {
             $enter.each(bindTypeahead);

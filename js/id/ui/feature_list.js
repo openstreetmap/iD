@@ -30,8 +30,8 @@ iD.ui.FeatureList = function(context) {
             .on('keypress', keypress)
             .on('input', inputevent);
 
-        searchWrap.append('span')
-            .attr('class', 'icon search');
+        searchWrap
+            .call(iD.svg.Icon('#icon-search', 'icon-pre-text'));
 
         var listWrap = selection.append('div')
             .attr('class', 'inspector-body');
@@ -138,10 +138,8 @@ iD.ui.FeatureList = function(context) {
                 .data([0])
                 .enter().append('button')
                 .property('disabled', true)
-                .attr('class', 'no-results-item');
-
-            resultsIndicator.append('span')
-                .attr('class', 'icon alert');
+                .attr('class', 'no-results-item')
+                .call(iD.svg.Icon('#icon-alert', 'icon-pre-text'));
 
             resultsIndicator.append('span')
                 .attr('class', 'entity-name');

@@ -70,18 +70,16 @@ iD.MapillaryLayer = function (context) {
         enter.append('button')
             .on('click', hide)
             .append('div')
-            .attr('class', 'icon close');
+            .call(iD.svg.Icon('#icon-close'));
 
         enter.append('img');
 
-        var link = enter.append('a')
+        enter
+            .append('a')
             .attr('class', 'link')
-            .attr('target', '_blank');
-
-        link.append('span')
-            .attr('class', 'icon icon-pre-text out-link');
-
-        link.append('span')
+            .attr('target', '_blank')
+            .call(iD.svg.Icon('#icon-out-link', null, 'icon-out-link'))
+            .append('span')
             .text(t('mapillary.view_on_mapillary'));
 
         if (!enable) {

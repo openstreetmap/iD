@@ -63,15 +63,12 @@ iD.ui.TagReference = function(tag, context) {
                 .append('p')
                 .text(docs.description);
 
-            var wikiLink = body
+            body
                 .append('a')
                 .attr('target', '_blank')
-                .attr('href', 'http://wiki.openstreetmap.org/wiki/' + docs.title);
-
-            wikiLink.append('span')
-                .attr('class','icon icon-pre-text out-link');
-
-            wikiLink.append('span')
+                .attr('href', 'http://wiki.openstreetmap.org/wiki/' + docs.title)
+                .call(iD.svg.Icon('#icon-out-link', null, 'icon-out-link'))
+                .append('span')
                 .text(t('inspector.reference'));
 
             return true;
@@ -105,12 +102,11 @@ iD.ui.TagReference = function(tag, context) {
         button = selection.selectAll('.tag-reference-button')
             .data([0]);
 
-        var enter = button.enter().append('button')
+        button.enter()
+            .append('button')
+            .attr('class', 'tag-reference-button')
             .attr('tabindex', -1)
-            .attr('class', 'tag-reference-button');
-
-        enter.append('span')
-            .attr('class', 'icon inspect');
+            .call(iD.svg.Icon('#icon-inspect'));
 
         button.on('click', function () {
             d3.event.stopPropagation();

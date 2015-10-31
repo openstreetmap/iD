@@ -101,8 +101,10 @@ iD.ui.RawMemberEditor = function(context) {
                 .attr('tabindex', -1)
                 .attr('class', 'remove button-input-action member-delete minor')
                 .on('click', deleteMember)
-                .append('span')
-                .attr('class', 'icon delete');
+                .call(iD.svg.Icon('#operation-delete'))
+                .select('use')
+                .attr('x', 10)
+                .attr('y', 10);
 
             $items.exit()
                 .remove();

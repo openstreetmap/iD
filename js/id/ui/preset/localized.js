@@ -29,13 +29,13 @@ iD.ui.preset.localized = function(field, context) {
         var translateButton = selection.selectAll('.localized-add')
             .data([0]);
 
-        translateButton.enter().append('button')
+        translateButton.enter()
+            .append('button')
             .attr('class', 'button-input-action localized-add minor')
+            .call(iD.svg.Icon('#icon-plus'))
             .call(bootstrap.tooltip()
                 .title(t('translate.translate'))
-                .placement('left'))
-            .append('span')
-            .attr('class', 'icon plus');
+                .placement('left'));
 
         translateButton
             .on('click', addBlank);
@@ -141,7 +141,10 @@ iD.ui.preset.localized = function(field, context) {
                             .style('max-height','0px')
                             .remove();
                     })
-                    .append('span').attr('class', 'icon delete');
+                    .call(iD.svg.Icon('#operation-delete'))
+                    .select('use')
+                    .attr('x', 10)
+                    .attr('y', 10);
 
                 wrap.append('input')
                     .attr('class', 'localized-lang')

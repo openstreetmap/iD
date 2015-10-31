@@ -16,14 +16,12 @@ iD.ui.Geolocate = function(map) {
     return function(selection) {
         if (!navigator.geolocation) return;
 
-        var button = selection.append('button')
+        selection.append('button')
             .attr('tabindex', -1)
             .attr('title', t('geolocate.title'))
             .on('click', click)
+            .call(iD.svg.Icon('#icon-geolocate', 'icon-light'))
             .call(bootstrap.tooltip()
                 .placement('left'));
-
-         button.append('span')
-             .attr('class', 'icon geolocate light');
     };
 };
