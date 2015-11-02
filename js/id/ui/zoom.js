@@ -50,7 +50,7 @@ iD.ui.Zoom = function(context) {
 
         button.each(function(d) {
             d3.select(this)
-                .call(iD.svg.Icon('#icon-' + d.icon, 'icon-light'));
+                .call(iD.svg.Icon('#icon-' + d.icon, 'light'));
         });
 
         var keybinding = d3.keybinding('zoom');

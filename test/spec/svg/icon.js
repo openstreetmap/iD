@@ -11,11 +11,9 @@ describe("iD.svg.Icon", function () {
         expect(selection.select('use').attr('xlink:href')).to.eql('#icon-bug');
     });
 
-    it("creates a classed SVG icon", function () {
-        selection.call(iD.svg.Icon('#icon-bug', 'icon-light'));
-        expect(selection.select('svg')).to.be.classed('icon');
-        expect(selection.select('use').attr('xlink:href')).to.eql('#icon-bug');
-        expect(selection.select('use')).to.be.classed('icon-light');
+    it("classes the 'svg' and 'use' elements", function () {
+        selection.call(iD.svg.Icon('#icon-bug', 'svg-class', 'use-class'));
+        expect(selection.select('svg')).to.be.classed('icon svg-class');
+        expect(selection.select('use')).to.be.classed('use-class');
     });
-
 });

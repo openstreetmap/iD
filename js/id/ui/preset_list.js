@@ -86,7 +86,7 @@ iD.ui.PresetList = function(context) {
             .on('input', inputevent);
 
         searchWrap
-            .call(iD.svg.Icon('#icon-search', 'icon-pre-text'));
+            .call(iD.svg.Icon('#icon-search', 'pre-text'));
 
         if (autofocus) {
             search.node().focus();

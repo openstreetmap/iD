@@ -78,7 +78,7 @@ iD.MapillaryLayer = function (context) {
             .append('a')
             .attr('class', 'link')
             .attr('target', '_blank')
-            .call(iD.svg.Icon('#icon-out-link', null, 'icon-out-link'))
+            .call(iD.svg.Icon('#icon-out-link', 'inline'))
             .append('span')
             .text(t('mapillary.view_on_mapillary'));
 

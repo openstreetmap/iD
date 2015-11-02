@@ -104,7 +104,7 @@ iD.ui.Help = function(context) {
             button = selection.append('button')
                 .attr('tabindex', -1)
                 .on('click', toggle)
-                .call(iD.svg.Icon('#icon-help', 'icon-light'))
+                .call(iD.svg.Icon('#icon-help', 'light'))
                 .call(tooltip),
             shown = false;
 

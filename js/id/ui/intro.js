@@ -73,20 +73,24 @@ iD.ui.intro = function(context) {
             .attr('class', 'joined')
             .selectAll('button.step');
 
-        var entered = buttonwrap.data(steps)
-            .enter().append('button')
-                .attr('class', 'step')
-                .on('click', enter);
+        var entered = buttonwrap
+            .data(steps)
+            .enter()
+            .append('button')
+            .attr('class', 'step')
+            .on('click', enter);
 
-        entered.append('div').attr('class','icon icon-pre-text apply');
-        entered.append('label').text(function(d) { return t(d.title); });
+        entered
+            .call(iD.svg.Icon('#icon-apply', 'pre-text'));
+
+        entered
+            .append('label')
+            .text(function(d) { return t(d.title); });
+
         enter(steps[0]);
 
         function enter (newStep) {
-
-            if (step) {
-                step.exit();
-            }
+            if (step) { step.exit(); }
 
             context.enter(iD.modes.Browse(context));
 

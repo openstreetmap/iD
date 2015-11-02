@@ -43,7 +43,7 @@ iD.ui.RawTagEditor = function(context) {
         $newTag.enter()
             .append('button')
             .attr('class', 'add-tag')
-            .call(iD.svg.Icon('#icon-plus', 'icon-light'));
+            .call(iD.svg.Icon('#icon-plus', 'light'));
 
         $newTag.on('click', addTag);
 

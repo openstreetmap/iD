@@ -186,7 +186,7 @@ iD.ui.Background = function(context) {
             button = selection.append('button')
                 .attr('tabindex', -1)
                 .on('click', toggle)
-                .call(iD.svg.Icon('#icon-layers', 'icon-light'))
+                .call(iD.svg.Icon('#icon-layers', 'light'))
                 .call(tooltip),
             shown = false;
 

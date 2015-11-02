@@ -189,7 +189,7 @@ iD.ui.RawMembershipEditor = function(context) {
             $add.enter()
                 .append('button')
                 .attr('class', 'add-relation')
-                .call(iD.svg.Icon('#icon-plus', 'icon-light'));
+                .call(iD.svg.Icon('#icon-plus', 'light'));
 
             $wrap.selectAll('.add-relation')
                 .on('click', function() {

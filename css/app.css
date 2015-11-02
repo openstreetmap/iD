@@ -481,24 +481,36 @@ button.save.has-count .count::before {
 /* Icons */
 
 .icon {
-  vertical-align: top;
-  width: 20px;
-  height: 20px;
+    vertical-align: top;
+    width: 20px;
+    height: 20px;
 }
 
-.icon-out-link {
-  vertical-align: text-top;
-  width: 14px;
-  height: 14px;
-  margin: 0px 3px;
+.icon.inline {
+    vertical-align: text-top;
+    width: 14px;
+    height: 14px;
+    margin: 0px 3px;
 }
 
-.icon-pre-text {
+.icon.pre-text {
     margin-right: 3px;
 }
 
-.icon-light {
+.icon.light {
     color: #fff;
+}
+
+.icon.created {
+    color: #00ca07;
+}
+
+.icon.modified {
+    color: #666;
+}
+
+.icon.deleted {
+    color: #ea0000;
 }
 
 .user-icon {
@@ -509,36 +521,6 @@ button.save.has-count .count::before {
     border-radius: 3px;
 }
 
-/* Definitions for every icon */
-.icon.point,
-.icon.add-point  { background-position: -20px 0;}
-.icon.line,
-.icon.add-line   { background-position: -40px 0;}
-.icon.area,
-.icon.add-area   { background-position: -60px 0;}
-.icon.apply      { background-position: -120px 0;}
-.icon.save       { background-position: -140px 0;}
-.icon.close      { background-position: -160px 0;}
-
-.icon.inspect    { background-position: -220px 0;}
-.icon.zoom-in,
-.icon.plus       { background-position: -240px 0;}
-.icon.zoom-out,
-.icon.minus      { background-position: -260px 0;}
-.icon.delete     { background-position: 0 -140px; }
-
-/*
-.icon.point.deleted  { background-position: -480px -80px;}
-.icon.line.deleted   { background-position: -500px -80px;}
-.icon.area.deleted   { background-position: -520px -80px;}
-
-.icon.point.created  { background-position: -480px -100px;}
-.icon.line.created   { background-position: -500px -100px;}
-.icon.area.created   { background-position: -520px -100px;}
-
-.icon.point.modified  { background-position: -22px 0; }
-.icon.modified { opacity: .5; }
-*/
 
 /* ToolBar / Persistent UI Elements
 ------------------------------------------------------- */
@@ -2427,7 +2409,7 @@ div.full-screen > button:hover {
 }
 
 .modal-actions button:before,
-.save-success a.button:before,
+.save-success a.button.osm:before,
 .walkthrough a:before {
     display: block;
     content: '';
@@ -2436,7 +2418,7 @@ div.full-screen > button:hover {
     max-width: 100px;
     margin: auto;
     margin-bottom: 10px;
-    background:transparent url(img/iD-sprite.svg) no-repeat 0 -220px;
+    background:transparent url(img/iD-sprite.svg) no-repeat -200px -460px;
 }
 
 .modal-actions :first-child {
@@ -2451,11 +2433,11 @@ div.full-screen > button:hover {
 ------------------------------------------------------- */
 
 .modal-actions .restore:before {
-    background-position: -600px -220px;
+    background-position: -500px -460px;
 }
 
 .modal-actions .reset:before {
-    background-position: -700px -220px;
+    background-position: -600px -460px;
 }
 
 /* Success Modal
@@ -2469,28 +2451,18 @@ div.full-screen > button:hover {
     padding-top: 15px;
 }
 
-.save-success .button.social {
-    height: 80px;
+.save-success a.button.social {
+    height: auto;
 }
 
-.save-success .button.social:before {
-    height: 50px;
+.save-success .icon.social {
+    height: 80px;
+    width: 80px;
+    color: #7092FF;
 }
 
 .save-success .button.osm:before {
-    background-position: 0px -220px;
-}
-
-.save-success .button.twitter:before {
-    background-position: -100px -245px;
-}
-
-.save-success .button.facebook:before {
-    background-position: -200px -245px;
-}
-
-.save-success .button.google:before {
-    background-position: -300px -245px;
+    background-position: -200px -460px;
 }
 
 /* Splash Modal
@@ -2498,11 +2470,11 @@ div.full-screen > button:hover {
 
 .modal-actions .walkthrough:before,
 .walkthrough a:before {
-    background-position: -400px -220px;
+    background-position: -300px -460px;
 }
 
 .modal-actions .start:before {
-    background-position: -500px -220px;
+    background-position: -400px -460px;
 }
 
 /* Commit Modal
@@ -2909,7 +2881,6 @@ div.full-screen > button:hover {
 ------------------------------------------------------- */
 
 @media only screen and (max-width: 840px) {
-    #bar .icon.icon-pre-text { margin-right: 0;}
     /* override hide for save button */
     #bar .save .label { display: block;}
 }
@@ -3051,6 +3022,6 @@ div.full-screen > button:hover {
 .huge-modal-button .illustration {
     height: 100px;
     width: 100px;
-    background: rgba(0, 0, 0, 0) url(img/iD-sprite.svg) no-repeat -400px -220px;
+    background: rgba(0, 0, 0, 0) url(img/iD-sprite.svg) no-repeat -300px -460px;
     margin: auto;
 }

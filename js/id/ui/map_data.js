@@ -168,7 +168,7 @@ iD.ui.MapData = function(context) {
             button = selection.append('button')
                 .attr('tabindex', -1)
                 .on('click', togglePanel)
-                .call(iD.svg.Icon('#icon-data', 'icon-light'))
+                .call(iD.svg.Icon('#icon-data', 'light'))
                 .call(tooltip),
             shown = false;
 

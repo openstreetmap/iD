@@ -8,7 +8,7 @@ iD.ui.Notice = function(context) {
             .on('click', function() { context.map().zoom(context.minEditableZoom()); });
 
         button
-            .call(iD.svg.Icon('#icon-plus', 'icon-pre-text'))
+            .call(iD.svg.Icon('#icon-plus', 'pre-text'))
             .append('span')
             .attr('class', 'label')
             .text(t('zoom_in_edit'));

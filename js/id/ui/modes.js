@@ -37,7 +37,7 @@ iD.ui.Modes = function(context) {
 
         buttons.each(function(d) {
             d3.select(this)
-                .call(iD.svg.Icon('#icon-' + d.button, 'icon-pre-text'));
+                .call(iD.svg.Icon('#icon-' + d.button, 'pre-text'));
         });
 
         buttons.append('span')

@@ -20,7 +20,7 @@ iD.ui.Geolocate = function(map) {
             .attr('tabindex', -1)
             .attr('title', t('geolocate.title'))
             .on('click', click)
-            .call(iD.svg.Icon('#icon-geolocate', 'icon-light'))
+            .call(iD.svg.Icon('#icon-geolocate', 'light'))
             .call(bootstrap.tooltip()
                 .placement('left'));
     };

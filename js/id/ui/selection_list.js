@@ -36,12 +36,9 @@ iD.ui.SelectionList = function(context, selectedIDs) {
                 .on('click', selectEntity);
 
             // Enter
-
             var label = enter.append('div')
-                .attr('class', 'label');
-
-            label.append('span')
-                .attr('class', 'icon icon-pre-text');
+                .attr('class', 'label')
+                .call(iD.svg.Icon('', 'pre-text'));
 
             label.append('span')
                 .attr('class', 'entity-type');
@@ -50,9 +47,11 @@ iD.ui.SelectionList = function(context, selectedIDs) {
                 .attr('class', 'entity-name');
 
             // Update
-
-            items.selectAll('.icon')
-                .attr('class', function(entity) { return context.geometry(entity.id) + ' icon icon-pre-text'; });
+            items.selectAll('use')
+                .attr('href', function() {
+                    var entity = this.parentElement.parentElement.__data__;
+                    return '#icon-' + context.geometry(entity.id);
+                });
 
             items.selectAll('.entity-type')
                 .text(function(entity) { return context.presets().match(entity, context.graph()).name(); });
@@ -61,7 +60,6 @@ iD.ui.SelectionList = function(context, selectedIDs) {
                 .text(function(entity) { return iD.util.displayName(entity); });
 
             // Exit
-
             items.exit()
                 .remove();
         }

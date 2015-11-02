@@ -13,7 +13,7 @@ iD.ui.ViewOnOSM = function(context) {
             .append('a')
             .attr('class', 'view-on-osm')
             .attr('target', '_blank')
-            .call(iD.svg.Icon('#icon-out-link', null, 'icon-out-link'))
+            .call(iD.svg.Icon('#icon-out-link', 'inline'))
             .append('span')
             .text(t('inspector.view_on_osm'));
 
