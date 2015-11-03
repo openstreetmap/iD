@@ -119,8 +119,9 @@ iD.svg.Vertices = function(projection, context) {
         enter.filter(function(d) { return icon(d); })
             .append('use')
             .attr('transform', 'translate(-6, -6)')
-            .attr('clip-path', 'url(#clip-square-12)')
-            .attr('xlink:href', function(d) { return '#maki-' + icon(d) + '-12'; });
+            .attr('xlink:href', function(d) { return '#' + icon(d) + '-12'; })
+            .attr('width', '12px')
+            .attr('height', '12px');
 
         // Vertices with tags get a fill.
         enter.filter(function(d) { return d.hasInterestingTags(); })

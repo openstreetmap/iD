@@ -4,7 +4,7 @@ iD.svg.Icon = function(name, svgklass, useklass) {
             .data([0])
             .enter()
             .append('svg')
-            .attr('class', 'icon ' + svgklass)
+            .attr('class', 'icon ' + (svgklass || ''))
             .append('use')
             .attr('xlink:href', name)
             .attr('class', useklass);

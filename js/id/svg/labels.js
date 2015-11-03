@@ -161,19 +161,18 @@ iD.svg.Labels = function(projection, context) {
     }
 
     function drawAreaIcons(group, entities, filter, classes, labels) {
-
         var icons = group.selectAll('use')
             .filter(filter)
             .data(entities, iD.Entity.key);
 
         icons.enter()
             .append('use')
-            .attr('clip-path', 'url(#clip-square-18)')
-            .attr('class', 'icon');
+            .attr('width', '18px')
+            .attr('height', '18px');
 
         icons.attr('transform', get(labels, 'transform'))
             .attr('xlink:href', function(d) {
-                return '#maki-' + context.presets().match(d, context.graph()).icon + '-18';
+                return '#' + context.presets().match(d, context.graph()).icon + '-18';
             });
 
 

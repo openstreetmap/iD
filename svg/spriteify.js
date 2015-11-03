@@ -3,12 +3,12 @@
 'use strict';
 
 var argv = require('minimist')(process.argv.slice(2));
-if (argv.help || argv.h || !argv.svg || !argv.json) {
+if (argv.help || argv.h || !argv.svg) {
     return help();
 }
 
 var fs = require('fs');
-var json = JSON.parse(fs.readFileSync(argv.json));
+var json = (argv.json ? JSON.parse(fs.readFileSync(argv.json)) : {});
 var _ = require('../js/lib/lodash.js');
 var xml2js = require('xml2js');
 
@@ -43,14 +43,14 @@ function xmlToJs(filename, cb) {
 
 
 function jsToXml(obj, cb) {
-    var json = transform(obj.svg);
+    var src = transform(obj.svg);
     var builder = require('xmlbuilder');
     var doc = builder.create('svg',
         { version: '1.0', encoding: 'UTF-8' },
         { pubID: '-//W3C//DTD SVG 1.1//EN', sysID: 'http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd'}
     );
 
-    doc = build(doc, json);
+    doc = build(doc, src);
     process.stdout.write(doc.end({ pretty: true }), 'utf8', cb);
 }
 
@@ -101,7 +101,14 @@ function build(doc, source) {
                 doc = build(doc, source['#child'][i]);
             }
         }
-        if (!isRoot) {
+
+        if (isRoot) {
+            doc = doc.att({
+                'version': "1.1",
+                'xmlns': "http://www.w3.org/2000/svg",
+                'xmlns:xlink': "http://www.w3.org/1999/xlink"
+            });
+        } else {
             doc = doc.up();
         }
     }

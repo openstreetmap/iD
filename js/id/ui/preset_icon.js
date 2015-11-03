@@ -8,7 +8,9 @@ iD.ui.PresetIcon = function() {
     function setup() {
         var selection = d3.select(this),
             p = preset.apply(this, arguments),
-            geom = geometry.apply(this, arguments);
+            geom = geometry.apply(this, arguments),
+            icon = p.icon || (geom === 'line' ? 'other-line' : 'marker-stroked'),
+            isMaki = iD.data.featureIcons.hasOwnProperty(icon + '-24');
 
         var $fill = selection.selectAll('.preset-icon-fill')
             .data([0]);
@@ -43,11 +45,12 @@ iD.ui.PresetIcon = function() {
             .attr('class', 'preset-icon')
             .call(iD.svg.Icon(''));
 
+        $icon
+            .classed('preset-icon-60', !isMaki)
+            .classed('preset-icon-32', isMaki);
+
         $icon.selectAll('use')
-            .attr('href', function() {
-                var icon = p.icon || (geom === 'line' ? 'other-line' : 'marker-stroked');
-                return '#' + icon;
-            });
+            .attr('href', function() { return '#' + icon + (isMaki ? '-24' : ''); });
     }
 
     presetIcon.preset = function(_) {

@@ -35,9 +35,10 @@ iD.svg.Points = function(projection, context) {
             .call(markerPath, 'stroke');
 
         group.append('use')
-            .attr('class', 'icon')
             .attr('transform', 'translate(-6, -20)')
-            .attr('clip-path', 'url(#clip-square-12)');
+            .attr('class', 'icon')
+            .attr('width', '12px')
+            .attr('height', '12px');
 
         groups.attr('transform', iD.svg.PointTransform(projection))
             .call(iD.svg.TagClasses());
@@ -49,7 +50,7 @@ iD.svg.Points = function(projection, context) {
         groups.select('.icon')
             .attr('xlink:href', function(entity) {
                 var preset = context.presets().match(entity, context.graph());
-                return preset.icon ? '#maki-' + preset.icon + '-12' : '';
+                return preset.icon ? '#' + preset.icon + '-12' : '';
             });
 
         groups.exit()

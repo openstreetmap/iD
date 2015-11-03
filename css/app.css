@@ -801,17 +801,10 @@ button.save.has-count .count::before {
     background: #ececec;
 }
 
-.preset-icon {
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    margin: auto;
-}
-
 .preset-icon-fill-area {
     cursor: inherit;
-    height: 39px;
-    width: 39px;
+    height: 40px;
+    width: 40px;
     margin: auto;
     position: absolute;
     left: 10px;
@@ -822,17 +815,38 @@ button.save.has-count .count::before {
     position: absolute;
     top: 7px;
     left: 7px;
+    height: 42px;
+    width: 42px;
     margin: auto;
 }
 
-.preset-icon .icon {
+.preset-icon-frame .icon {
+    width: 46px;
+    height: 46px;
+}
+
+.preset-icon-60 {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    margin: auto;
+}
+
+.preset-icon-60 .icon {
     width: 60px;
     height: 60px;
 }
 
-.preset-icon-frame .icon {
-    width: 45px;
-    height: 45px;
+.preset-icon-32 {
+    position: absolute;
+    top: 14px;
+    left: 14px;
+    margin: auto;
+}
+
+.preset-icon-32 .icon {
+    width: 32px;
+    height: 32px;
 }
 
 .preset-list-button .label {
