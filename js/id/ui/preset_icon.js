@@ -50,7 +50,10 @@ iD.ui.PresetIcon = function() {
             .classed('preset-icon-32', isMaki);
 
         $icon.selectAll('use')
-            .attr('href', function() { return '#' + icon + (isMaki ? '-24' : ''); });
+            .attr('href', function() {
+                // workaround: maki parking-24 broken?
+                return '#' + icon + (isMaki ? ( icon === 'parking' ? '-18' : '-24') : '');
+            });
     }
 
     presetIcon.preset = function(_) {

@@ -840,7 +840,7 @@ button.save.has-count .count::before {
 .preset-icon-32 {
     position: absolute;
     top: 14px;
-    left: 14px;
+    left: 13px;   /* Maki icons off center? */
     margin: auto;
 }
 
