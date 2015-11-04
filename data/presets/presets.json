@@ -3773,6 +3773,7 @@
         "name": "Pedestrian Crosswalk"
     },
     "footway/sidewalk": {
+        "icon": "highway-footway",
         "fields": [
             "surface",
             "lit",
@@ -5781,7 +5782,7 @@
         "name": "Pier"
     },
     "man_made/pipeline": {
-        "icon": "pipeline",
+        "icon": "pipeline-line",
         "fields": [
             "location",
             "operator"
@@ -7372,7 +7373,7 @@
         "searchable": false
     },
     "route/ferry": {
-        "icon": "ferry",
+        "icon": "ferry-line",
         "geometry": [
             "line"
         ],
