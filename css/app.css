@@ -2259,7 +2259,6 @@ div.full-screen > button:hover {
 
 #info-block {
     max-height: 30px;
-    float: right;
     clear: right;
 }
 
@@ -2286,6 +2285,7 @@ div.full-screen > button:hover {
     text-align: right;
     margin-right: 10px;
     clear: right;
+    overflow: hidden;
 }
 
 #about-list li {
