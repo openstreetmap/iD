@@ -72,10 +72,7 @@ iD.ui.RawTagEditor = function(context) {
         $enter.append('button')
             .attr('tabindex', -1)
             .attr('class', 'remove minor')
-            .call(iD.svg.Icon('#operation-delete'))
-            .select('use')
-            .attr('x', 10)
-            .attr('y', 10);
+            .call(iD.svg.Icon('#operation-delete'));
 
         if (context.taginfo()) {
             $enter.each(bindTypeahead);

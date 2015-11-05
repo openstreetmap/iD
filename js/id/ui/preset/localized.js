@@ -141,10 +141,7 @@ iD.ui.preset.localized = function(field, context) {
                             .style('max-height','0px')
                             .remove();
                     })
-                    .call(iD.svg.Icon('#operation-delete'))
-                    .select('use')
-                    .attr('x', 10)
-                    .attr('y', 10);
+                    .call(iD.svg.Icon('#operation-delete'));
 
                 wrap.append('input')
                     .attr('class', 'localized-lang')

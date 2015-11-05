@@ -113,10 +113,7 @@ iD.ui.preset = function(context) {
 
         wrap.append('button')
             .attr('class', 'remove-icon')
-            .call(iD.svg.Icon('#operation-delete'))
-            .select('use')
-            .attr('x', 10)
-            .attr('y', 10);
+            .call(iD.svg.Icon('#operation-delete'));
 
         wrap.append('button')
             .attr('class', 'modified-icon')

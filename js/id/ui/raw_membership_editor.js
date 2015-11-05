@@ -135,10 +135,7 @@ iD.ui.RawMembershipEditor = function(context) {
                 .attr('tabindex', -1)
                 .attr('class', 'remove button-input-action member-delete minor')
                 .on('click', deleteMembership)
-                .call(iD.svg.Icon('#operation-delete'))
-                .select('use')
-                .attr('x', 10)
-                .attr('y', 10);
+                .call(iD.svg.Icon('#operation-delete'));
 
             $items.exit()
                 .remove();
@@ -173,10 +170,7 @@ iD.ui.RawMembershipEditor = function(context) {
                     .attr('tabindex', -1)
                     .attr('class', 'remove button-input-action member-delete minor')
                     .on('click', deleteMembership)
-                    .call(iD.svg.Icon('#operation-delete'))
-                    .select('use')
-                    .attr('x', 10)
-                    .attr('y', 10);
+                    .call(iD.svg.Icon('#operation-delete'));
 
             } else {
                 $list.selectAll('.member-row-new')

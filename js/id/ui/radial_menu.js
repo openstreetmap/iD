@@ -60,6 +60,7 @@ iD.ui.RadialMenu = function(context, operations) {
             .on('mouseout', mouseout);
 
         button.append('use')
+            .attr('transform', 'translate(-10,-10)')
             .attr('width', '20')
             .attr('height', '20')
             .attr('xlink:href', function(d) { return '#operation-' + d.id; });
