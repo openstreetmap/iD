@@ -25,7 +25,7 @@ use { pointer-events: none; }
 
 /* base styles */
 .layer path { fill: none; }
-.layer use path { fill: inherit; }  /* FF svg icons */
+.layer use path { fill: #333; }  /* FF svg icons */
 
 g.point .shadow,
 g.vertex .shadow,
