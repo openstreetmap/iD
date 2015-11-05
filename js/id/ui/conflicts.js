@@ -11,8 +11,7 @@ iD.ui.Conflicts = function(context) {
             .append('button')
             .attr('class', 'fr')
             .on('click', function() { dispatch.cancel(); })
-            .append('span')
-            .attr('class', 'icon close');
+            .call(iD.svg.Icon('#icon-close'));
 
         header
             .append('h3')

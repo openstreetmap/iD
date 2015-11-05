@@ -72,12 +72,13 @@ iD.ui.Commit = function(context) {
             .on('mouseout', mouseout)
             .on('click', warningClick);
 
-        warningLi.append('span')
-            .attr('class', 'alert icon icon-pre-text');
+        warningLi
+            .call(iD.svg.Icon('#icon-alert', 'pre-text'));
 
-        warningLi.append('strong').text(function(d) {
-            return d.message;
-        });
+        warningLi
+            .append('strong').text(function(d) {
+                return d.message;
+            });
 
         warningLi.filter(function(d) { return d.tooltip; })
             .call(bootstrap.tooltip()
@@ -102,7 +103,7 @@ iD.ui.Commit = function(context) {
             if (user.image_url) {
                 userLink.append('img')
                     .attr('src', user.image_url)
-                    .attr('class', 'icon icon-pre-text user-icon');
+                    .attr('class', 'icon pre-text user-icon');
             }
 
             userLink.append('a')
@@ -165,10 +166,10 @@ iD.ui.Commit = function(context) {
             .on('mouseout', mouseout)
             .on('click', zoomToEntity);
 
-        li.append('span')
-            .attr('class', function(d) {
-                return d.entity.geometry(d.graph) + ' ' + d.changeType + ' icon icon-pre-text';
-            });
+        li.each(function(d) {
+            d3.select(this)
+                .call(iD.svg.Icon('#icon-' + d.entity.geometry(d.graph), 'pre-text ' + d.changeType));
+        });
 
         li.append('span')
             .attr('class', 'change-type')

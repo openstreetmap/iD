@@ -1,4 +1,5 @@
 {
+    "icon": "highway-footway",
     "fields": [
         "surface",
         "lit",

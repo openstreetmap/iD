@@ -24,7 +24,7 @@
     "smash": "0.0",
     "lodash-cli": "3.9.3",
     "uglify-js": "~2.4.16",
-    "maki": "0.4.5",
+    "maki": "0.5.0",
     "eslint": "~1.2.1",
     "mocha": "~1.21.5",
     "mocha-phantomjs": "~3.5.3",
@@ -37,7 +37,11 @@
     "request": "~2.16.2",
     "jsonschema": "~0.3.2",
     "editor-imagery-index": "git://github.com/osmlab/editor-imagery-index.git#gh-pages",
-    "name-suggestion-index": "0.0.1"
+    "name-suggestion-index": "0.0.1",
+    "minimist": "~1.2.0",
+    "xml2js": "~0.4.13",
+    "xmlbuilder": "~3.1.0",
+    "svg-sprite": "~1.2.12"
   },
   "engines": {
     "node": ">=0.10.0"

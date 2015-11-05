@@ -30,8 +30,8 @@ iD.ui.FeatureList = function(context) {
             .on('keypress', keypress)
             .on('input', inputevent);
 
-        searchWrap.append('span')
-            .attr('class', 'icon search');
+        searchWrap
+            .call(iD.svg.Icon('#icon-search', 'pre-text'));
 
         var listWrap = selection.append('div')
             .attr('class', 'inspector-body');
@@ -138,10 +138,8 @@ iD.ui.FeatureList = function(context) {
                 .data([0])
                 .enter().append('button')
                 .property('disabled', true)
-                .attr('class', 'no-results-item');
-
-            resultsIndicator.append('span')
-                .attr('class', 'icon alert');
+                .attr('class', 'no-results-item')
+                .call(iD.svg.Icon('#icon-alert', 'pre-text'));
 
             resultsIndicator.append('span')
                 .attr('class', 'entity-name');
@@ -173,17 +171,21 @@ iD.ui.FeatureList = function(context) {
             var items = list.selectAll('.feature-list-item')
                 .data(results, function(d) { return d.id; });
 
-            var enter = items.enter().insert('button', '.geocode-item')
+            var enter = items.enter()
+                .insert('button', '.geocode-item')
                 .attr('class', 'feature-list-item')
                 .on('mouseover', mouseover)
                 .on('mouseout', mouseout)
                 .on('click', click);
 
-            var label = enter.append('div')
+            var label = enter
+                .append('div')
                 .attr('class', 'label');
 
-            label.append('span')
-                .attr('class', function(d) { return d.geometry + ' icon icon-pre-text'; });
+            label.each(function(d) {
+                d3.select(this)
+                    .call(iD.svg.Icon('#icon-' + d.geometry, 'pre-text'));
+            });
 
             label.append('span')
                 .attr('class', 'entity-type')

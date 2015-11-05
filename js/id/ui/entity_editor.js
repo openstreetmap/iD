@@ -24,8 +24,7 @@ iD.ui.EntityEditor = function(context) {
 
         $enter.append('button')
             .attr('class', 'fr preset-close')
-            .append('span')
-            .attr('class', 'icon close');
+            .call(iD.svg.Icon('#icon-close'));
 
         $enter.append('h3');
 

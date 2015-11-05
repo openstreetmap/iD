@@ -126,17 +126,25 @@ iD.ui = function(context) {
             .attr('href', 'http://github.com/openstreetmap/iD')
             .text(iD.version);
 
-        var bugReport = aboutList.append('li')
-            .append('a')
+        var issueLinks = aboutList.append('li');
+
+        issueLinks.append('a')
             .attr('target', '_blank')
             .attr('tabindex', -1)
-            .attr('href', 'https://github.com/openstreetmap/iD/issues');
-
-        bugReport.append('span')
-            .attr('class','icon bug light');
-
-        bugReport.call(bootstrap.tooltip()
+            .attr('href', 'https://github.com/openstreetmap/iD/issues')
+            .call(iD.svg.Icon('#icon-bug', 'light'))
+            .call(bootstrap.tooltip()
                 .title(t('report_a_bug'))
+                .placement('top')
+            );
+
+        issueLinks.append('a')
+            .attr('target', '_blank')
+            .attr('tabindex', -1)
+            .attr('href', 'https://github.com/openstreetmap/iD/blob/master/CONTRIBUTING.md#translating')
+            .call(iD.svg.Icon('#icon-translate', 'light'))
+            .call(bootstrap.tooltip()
+                .title(t('help_translate'))
                 .placement('top')
             );
 

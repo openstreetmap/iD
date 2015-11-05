@@ -7,10 +7,9 @@ iD.ui.Notice = function(context) {
             .attr('class', 'zoom-to notice')
             .on('click', function() { context.map().zoom(context.minEditableZoom()); });
 
-        button.append('span')
-            .attr('class', 'icon zoom-in-invert');
-
-        button.append('span')
+        button
+            .call(iD.svg.Icon('#icon-plus', 'pre-text'))
+            .append('span')
             .attr('class', 'label')
             .text(t('zoom_in_edit'));
 

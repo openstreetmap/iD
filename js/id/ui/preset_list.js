@@ -21,15 +21,14 @@ iD.ui.PresetList = function(context) {
                 .attr('class', 'preset-choose')
                 .on('click', function() { event.choose(currentPreset); })
                 .append('span')
-                .attr('class', 'icon forward');
+                .html('&#9658;');
         } else {
             messagewrap.append('button')
                 .attr('class', 'close')
                 .on('click', function() {
                     context.enter(iD.modes.Browse(context));
                 })
-                .append('span')
-                .attr('class', 'icon close');
+                .call(iD.svg.Icon('#icon-close'));
         }
 
         function keydown() {
@@ -86,8 +85,8 @@ iD.ui.PresetList = function(context) {
             .on('keypress', keypress)
             .on('input', inputevent);
 
-        searchWrap.append('span')
-            .attr('class', 'icon search');
+        searchWrap
+            .call(iD.svg.Icon('#icon-search', 'pre-text'));
 
         if (autofocus) {
             search.node().focus();

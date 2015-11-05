@@ -1,11 +1,13 @@
 iD.ui.Zoom = function(context) {
     var zooms = [{
         id: 'zoom-in',
+        icon: 'plus',
         title: t('zoom.in'),
         action: context.zoomIn,
         key: '+'
     }, {
         id: 'zoom-out',
+        icon: 'minus',
         title: t('zoom.out'),
         action: context.zoomOut,
         key: '-'
@@ -46,8 +48,10 @@ iD.ui.Zoom = function(context) {
                     return iD.ui.tooltipHtml(d.title, d.key);
                 }));
 
-        button.append('span')
-            .attr('class', function(d) { return d.id + ' icon'; });
+        button.each(function(d) {
+            d3.select(this)
+                .call(iD.svg.Icon('#icon-' + d.icon, 'light'));
+        });
 
         var keybinding = d3.keybinding('zoom');
 

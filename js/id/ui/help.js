@@ -77,8 +77,7 @@ iD.ui.Help = function(context) {
                     .on('click', function() {
                         clickHelp(docs[i - 1], i - 1);
                     });
-                prevLink.append('span').attr('class', 'icon back blue');
-                prevLink.append('span').html(docs[i - 1].title);
+                prevLink.append('span').html('&#9668; ' + docs[i - 1].title);
             }
             if (i < docs.length - 1) {
                 var nextLink = nav.append('a')
@@ -86,8 +85,7 @@ iD.ui.Help = function(context) {
                     .on('click', function() {
                         clickHelp(docs[i + 1], i + 1);
                     });
-                nextLink.append('span').html(docs[i + 1].title);
-                nextLink.append('span').attr('class', 'icon forward blue');
+                nextLink.append('span').html(docs[i + 1].title + ' &#9658;');
             }
         }
 
@@ -106,11 +104,9 @@ iD.ui.Help = function(context) {
             button = selection.append('button')
                 .attr('tabindex', -1)
                 .on('click', toggle)
+                .call(iD.svg.Icon('#icon-help', 'light'))
                 .call(tooltip),
             shown = false;
-
-        button.append('span')
-            .attr('class', 'icon help light');
 
 
         var toc = pane.append('ul')

@@ -12,8 +12,7 @@ iD.ui.Contributors = function(context) {
             subset = u.slice(0, u.length > limit ? limit - 1 : limit);
 
         selection.html('')
-            .append('span')
-            .attr('class', 'icon nearby light icon-pre-text');
+            .call(iD.svg.Icon('#icon-nearby', 'pre-text light'));
 
         var userList = d3.select(document.createElement('span'));
 

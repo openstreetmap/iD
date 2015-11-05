@@ -28,11 +28,11 @@ iD.ui.Account = function(context) {
             // Add thumbnail or dont
             if (details.image_url) {
                 userLink.append('img')
-                    .attr('class', 'icon icon-pre-text user-icon')
+                    .attr('class', 'icon pre-text user-icon')
                     .attr('src', details.image_url);
             } else {
-                userLink.append('span')
-                    .attr('class', 'icon avatar light icon-pre-text');
+                userLink
+                    .call(iD.svg.Icon('#icon-avatar', 'pre-text light'));
             }
 
             // Add user name

@@ -168,11 +168,9 @@ iD.ui.MapData = function(context) {
             button = selection.append('button')
                 .attr('tabindex', -1)
                 .on('click', togglePanel)
+                .call(iD.svg.Icon('#icon-data', 'light'))
                 .call(tooltip),
             shown = false;
-
-        button.append('span')
-            .attr('class', 'icon data light');
 
         content.append('h4')
             .text(t('map_data.title'));
@@ -229,8 +227,7 @@ iD.ui.MapData = function(context) {
                 d3.event.stopPropagation();
                 context.background().zoomToGpxLayer();
             })
-            .append('span')
-            .attr('class', 'icon geolocate');
+            .call(iD.svg.Icon('#icon-search'));
 
         gpxLayerItem.append('button')
             .attr('class', 'layer-browse')
@@ -245,8 +242,7 @@ iD.ui.MapData = function(context) {
                     })
                     .node().click();
             })
-            .append('span')
-            .attr('class', 'icon geocode');
+            .call(iD.svg.Icon('#icon-geolocate'));
 
         label = gpxLayerItem.append('label')
             .call(bootstrap.tooltip()

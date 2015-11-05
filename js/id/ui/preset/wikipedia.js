@@ -64,8 +64,7 @@ iD.ui.preset.wikipedia = function(field, context) {
         link.enter().append('a')
             .attr('class', 'wiki-link button-input-action minor')
             .attr('target', '_blank')
-            .append('span')
-            .attr('class', 'icon out-link');
+            .call(iD.svg.Icon('#icon-out-link', 'inline'));
     }
 
     function language() {
