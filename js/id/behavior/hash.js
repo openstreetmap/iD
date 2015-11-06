@@ -40,6 +40,7 @@ iD.behavior.Hash = function(context) {
     };
 
     function update() {
+        if (context.inIntro()) return;
         var s1 = formatter(context.map());
         if (s0 !== s1) location.replace(s0 = s1); // don't recenter the map!
     }
