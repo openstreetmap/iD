@@ -8,6 +8,7 @@
         "access_simple",
         "supervised",
         "park_ride",
+        "surface",
         "address"
     ],
     "geometry": [
