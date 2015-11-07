@@ -217,7 +217,6 @@
     "zoom_in_edit": "Zmadhoni për të redaktuar",
     "logout": "dil",
     "loading_auth": "Lidh me OpenStreetMap...",
-    "report_a_bug": "Raporto një bug",
     "feature_info": {
         "hidden_warning": "{count} tipare të fshehura",
         "hidden_details": "Këto tipare janë aktualisht të fshehura: {details}"
@@ -467,6 +466,9 @@
                     "wlan": "Wifi",
                     "yes": "Po"
                 }
+            },
+            "piste/difficulty": {
+                "label": "Vështersia"
             }
         },
         "presets": {

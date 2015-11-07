@@ -143,7 +143,8 @@
             "not_eligible": "Esses elementos não podem ser mesclados.",
             "not_adjacent": "Essas linhas não podem ser mescladas porque não estão conectadas.",
             "restriction": "Estas linhas não podem ser mescladas porque pelo menos uma delas é membro da relação \"{relation}\".",
-            "incomplete_relation": "Estes elementos não podem ser mesclados porque pelo menos um deles não foi transferido completamente."
+            "incomplete_relation": "Estes elementos não podem ser mesclados porque pelo menos um deles não foi transferido completamente.",
+            "conflicting_tags": "Essas linhas não podem ser mescladas porque algumas de suas etiquetas têm valores conflitantes."
         },
         "move": {
             "title": "Mover",
@@ -226,7 +227,6 @@
     "zoom_in_edit": "Aproxime para editar o mapa.",
     "logout": "sair",
     "loading_auth": "Conectando ao OpenStreetMap...",
-    "report_a_bug": "Reportar um bug",
     "feature_info": {
         "hidden_warning": "{count} elemento(s) oculto(s)",
         "hidden_details": "Estes elementos estão atualmente ocultos: {details}"
@@ -623,7 +623,9 @@
                         "title": "Público"
                     }
                 },
+                "placeholder": "Não Especificado",
                 "types": {
+                    "access": "Todos",
                     "bicycle": "Bicicletas",
                     "foot": "Pedestres",
                     "horse": "Cavalos",
@@ -631,6 +633,7 @@
                 }
             },
             "access_simple": {
+                "label": "Acesso permitido",
                 "placeholder": "sim"
             },
             "access_toilets": {
@@ -1420,6 +1423,9 @@
                 },
                 "placeholder": "Rígida, Parcialmente Rígida, Macia..."
             },
+            "traffic_signals": {
+                "label": "Tipo"
+            },
             "trail_visibility": {
                 "label": "Visibilidade da Trilha",
                 "options": {
@@ -1621,7 +1627,8 @@
                 "terms": "Lavagem de Veículos, Lava jato"
             },
             "amenity/casino": {
-                "name": "Cassino"
+                "name": "Cassino",
+                "terms": "Cassino"
             },
             "amenity/charging_station": {
                 "name": "Eletroposto",
@@ -1719,6 +1726,10 @@
                 "name": "Mercado municipal",
                 "terms": "Feira"
             },
+            "amenity/motorcycle_parking": {
+                "name": "Estacionamento de motos",
+                "terms": "Estacionamento de motocicletas, estacionamento de motos, estacionamento"
+            },
             "amenity/nightclub": {
                 "name": "Boate",
                 "terms": "Discoteca, Boate, Casa Noturna"
@@ -1792,7 +1803,8 @@
                 "terms": "Restaurante"
             },
             "amenity/sanitary_dump_station": {
-                "name": "Ponto de Descarga de Dejetos (para trailers)"
+                "name": "Ponto de Descarga de Dejetos (para trailers)",
+                "terms": "Depósito de Toaletes de Trailers"
             },
             "amenity/school": {
                 "name": "Escola",
@@ -1867,7 +1879,8 @@
                 "terms": "Área"
             },
             "area/highway": {
-                "name": "Superfície da estrada"
+                "name": "Superfície da estrada",
+                "terms": "Superfície rodoviária"
             },
             "barrier": {
                 "name": "Barreira",
@@ -1987,7 +2000,7 @@
             },
             "building/detached": {
                 "name": "Casa Separada",
-                "terms": "Casa Separada"
+                "terms": "Moradia Isolada, Casa Isolada"
             },
             "building/dormitory": {
                 "name": "Dormitório",
@@ -2052,6 +2065,10 @@
             "building/school": {
                 "name": "Edifício da Escola",
                 "terms": "Edifício Escolar"
+            },
+            "building/semidetached_house": {
+                "name": "Casa Geminada",
+                "terms": "Casa irmanada"
             },
             "building/shed": {
                 "name": "Cabana",
@@ -2290,10 +2307,12 @@
                 "terms": "Entrada/Saída"
             },
             "footway/crossing": {
-                "name": "Travessia em Rua"
+                "name": "Travessia em Rua",
+                "terms": "Faixa de cruzamento"
             },
             "footway/crosswalk": {
-                "name": "Travessia de Pedestres"
+                "name": "Travessia de Pedestres",
+                "terms": "Faixa de Pedestres"
             },
             "footway/sidewalk": {
                 "name": "Calçada",
@@ -2348,13 +2367,16 @@
                 "terms": "Ponto de Ônibus, Parada de Ônibus"
             },
             "highway/corridor": {
-                "name": "Corredor Interno"
+                "name": "Corredor Interno",
+                "terms": "Corredor interno, corredor interior, corredor coberto"
             },
             "highway/crossing": {
-                "name": "Travessia em Rua"
+                "name": "Travessia em Rua",
+                "terms": "Faixa de cruzamento"
             },
             "highway/crosswalk": {
-                "name": "Travessia de Pedestres"
+                "name": "Travessia de Pedestres",
+                "terms": "Faixa de Pedestres"
             },
             "highway/cycleway": {
                 "name": "Ciclovia",
@@ -2389,7 +2411,8 @@
                 "terms": "Caminho Informal"
             },
             "highway/pedestrian": {
-                "name": "Calçadão"
+                "name": "Calçadão",
+                "terms": "Rua de Pedestres, Calçadão, Rua Fechada"
             },
             "highway/primary": {
                 "name": "Via Primária",
@@ -2536,11 +2559,12 @@
                 "terms": "Encruzilhada, junção"
             },
             "landuse": {
-                "name": "Uso da terra"
+                "name": "Uso da terra",
+                "terms": "Uso do Solo, Ocupação da Terra, Ordenamento Territorial, Exploração da Terra, Utilização da Terra"
             },
             "landuse/allotments": {
-                "name": "Horta Urbana",
-                "terms": "Horta Urbana"
+                "name": "Jardim Comunitário",
+                "terms": "Horta comunitária"
             },
             "landuse/basin": {
                 "name": "Bacia",
@@ -2607,7 +2631,8 @@
                 "terms": "Pomar"
             },
             "landuse/plant_nursery": {
-                "name": "Viveiro de Plantas"
+                "name": "Viveiro de Plantas",
+                "terms": "Berçário de Plantas"
             },
             "landuse/quarry": {
                 "name": "Pedreira",
@@ -2633,7 +2658,8 @@
                 "name": "Centro de Jogos para Adultos"
             },
             "leisure/bowling_alley": {
-                "name": "Pista de Boliche"
+                "name": "Pista de Boliche",
+                "terms": "Boliche"
             },
             "leisure/common": {
                 "name": "Área Comunitária",
@@ -2690,6 +2716,12 @@
             "leisure/pitch/basketball": {
                 "name": "Quadra de Basquetebol",
                 "terms": "Quadra de Basquete"
+            },
+            "leisure/pitch/rugby_league": {
+                "name": "Campo de rugby league"
+            },
+            "leisure/pitch/rugby_union": {
+                "name": "Campo de rugby union"
             },
             "leisure/pitch/skateboard": {
                 "name": "Pista de Skate",
@@ -2830,9 +2862,29 @@
                 "name": "Casamata",
                 "terms": "casamata, bunker, fortificação"
             },
+            "military/checkpoint": {
+                "name": "Posto de controle de segurança",
+                "terms": "Checkpoint, Ponto de Verificação"
+            },
+            "military/danger_area": {
+                "name": "Área Perigosa",
+                "terms": "Área de Perigo, Perigo"
+            },
+            "military/naval_base": {
+                "name": "Base Naval",
+                "terms": "Base da Marinha"
+            },
+            "military/obstacle_course": {
+                "name": "Percurso de obstáculos",
+                "terms": "Pista de obstáculos"
+            },
             "military/range": {
                 "name": "Estande de Tiro Militar",
                 "terms": "tiro, estande"
+            },
+            "military/training_area": {
+                "name": "Área de treinamento",
+                "terms": "Área de treino, CT, Campo de treinamento"
             },
             "natural": {
                 "name": "Natural",
@@ -2899,10 +2951,12 @@
                 "terms": "Árvore"
             },
             "natural/tree_row": {
-                "name": "Fileira de árvores"
+                "name": "Fileira de árvores",
+                "terms": "Fileira de árvores"
             },
             "natural/volcano": {
-                "name": "Vulcão"
+                "name": "Vulcão",
+                "terms": "Vulcão, área vulcânica, vulcânico"
             },
             "natural/water": {
                 "name": "Água",
@@ -3129,7 +3183,8 @@
                 "terms": "Estação de Parada na Ferrovia, Estação Simples, Estação Sem Facilidades"
             },
             "railway/level_crossing": {
-                "name": "Travessia em Ferrovia"
+                "name": "Travessia em Ferrovia",
+                "terms": "Cruzamento férreo"
             },
             "railway/monorail": {
                 "name": "Monotrilho",
@@ -3765,7 +3820,7 @@
             },
             "type/route/hiking": {
                 "name": "Rota de Caminhada",
-                "terms": "Rota de Trekking, "
+                "terms": "Rota de Trekking"
             },
             "type/route/pipeline": {
                 "name": "Rota de Tubulação",

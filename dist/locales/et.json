@@ -208,7 +208,6 @@
     "zoom_in_edit": "Muutmiseks suurenda sisse",
     "logout": "Logi välja",
     "loading_auth": "OpenStreetMap'iga ühendamine...",
-    "report_a_bug": "teata veast",
     "commit": {
         "title": "Salvesta muudatused",
         "description_placeholder": "Muudatuste lühikirjeldus",
@@ -979,9 +978,6 @@
             },
             "building/construction": {
                 "name": "Ehitusjärgus hoone"
-            },
-            "building/detached": {
-                "name": "Eramu"
             },
             "building/dormitory": {
                 "name": "Ühiselamu"

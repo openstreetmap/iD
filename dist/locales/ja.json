@@ -226,7 +226,6 @@
     "zoom_in_edit": "編集するには地図を拡大してください",
     "logout": "ログアウト",
     "loading_auth": "OpenStreetMapへ接続中...",
-    "report_a_bug": "バグ報告",
     "feature_info": {
         "hidden_warning": "非表示の地物{count}件",
         "hidden_details": "現在非表示の地物: {details}"
@@ -624,7 +623,7 @@
                     "bicycle": "自転車",
                     "foot": "歩行者",
                     "horse": "乗馬",
-                    "motor_vehicle": "オートバイ"
+                    "motor_vehicle": "動力付き車輌全般"
                 }
             },
             "access_simple": {
@@ -1717,6 +1716,10 @@
                 "name": "市場",
                 "terms": "市場,マーケット,朝市,マルシェ"
             },
+            "amenity/motorcycle_parking": {
+                "name": "オートバイの駐車場",
+                "terms": "バイクの駐車場,二輪駐車場,二輪駐輪場"
+            },
             "amenity/nightclub": {
                 "name": "ナイトクラブ",
                 "terms": "ナイトクラブ"
@@ -1984,10 +1987,6 @@
             "building/construction": {
                 "name": "建設中の建物",
                 "terms": "建設中の建物"
-            },
-            "building/detached": {
-                "name": "一戸建て住宅",
-                "terms": "一戸建て住宅"
             },
             "building/dormitory": {
                 "name": "寮",
@@ -2383,7 +2382,7 @@
             },
             "highway/motorway_junction": {
                 "name": "自動車道のIC/JCT",
-                "terms": "自動車道のIC/JCT,インターチェンジ,ジャンクション"
+                "terms": "自動車道のIC/JCT,インターチェンジ,ジャンクション,IC,JCT"
             },
             "highway/motorway_link": {
                 "name": "自動車専用道路の接続路",
@@ -2544,10 +2543,6 @@
             "landuse": {
                 "name": "土地利用",
                 "terms": "土地利用"
-            },
-            "landuse/allotments": {
-                "name": "市民農園",
-                "terms": "市民農園, 市民菜園, クラインガルテン"
             },
             "landuse/basin": {
                 "name": "遊水地",
@@ -2719,7 +2714,7 @@
             },
             "leisure/playground": {
                 "name": "児童公園",
-                "terms": "児童公園, 遊び場"
+                "terms": "児童公園, 遊び場, 児童遊園, 公園"
             },
             "leisure/running_track": {
                 "name": "トラック（周回走路）",

@@ -152,7 +152,6 @@
     },
     "logout": "logg ut",
     "loading_auth": "Kobler til OpenStreetMap...",
-    "report_a_bug": "meld en programvarefeil",
     "commit": {
         "title": "Lagre endringer",
         "description_placeholder": "Kort beskrivelse av dine bidrag",
@@ -882,9 +881,6 @@
             },
             "historic/ruins": {
                 "name": "Ruiner"
-            },
-            "landuse/allotments": {
-                "name": "Kolonihage"
             },
             "landuse/cemetery": {
                 "name": "Kirkegård"

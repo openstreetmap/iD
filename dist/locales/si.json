@@ -222,7 +222,6 @@
     "zoom_in_edit": "සංස්කරණය කිරීම සදහා සමීප කරන්න ",
     "logout": "ඉවත් වන්න ",
     "loading_auth": "OpenStreetMap වෙත සම්බන්ද වෙමින්...",
-    "report_a_bug": "දෝෂයක් වාර්තා කිරීම සදහා",
     "feature_info": {
         "hidden_warning": "සෙගවුන ලක්ෂණ {count} ක්",
         "hidden_details": " {details} : මෙම ලක්ෂණ මේ අවස්ථාවේදී සැගව පවතී"

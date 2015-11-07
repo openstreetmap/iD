@@ -143,7 +143,8 @@
             "not_eligible": "Ces éléments ne peuvent pas être fusionnés.",
             "not_adjacent": "Ces lignes ne peuvent pas être fusionnées car elles ne sont pas connectées.",
             "restriction": "Ces lignes ne peuvent pas être fusionnées car au moins l'une d'entre elles est membre d'une relation \"{relation}\".",
-            "incomplete_relation": "Ces éléments ne peuvent pas être fusionnés parce qu'au moins l'un d'entre eux n'a pas été complètement téléchargé."
+            "incomplete_relation": "Ces éléments ne peuvent pas être fusionnés parce qu'au moins l'un d'entre eux n'a pas été complètement téléchargé.",
+            "conflicting_tags": "Ces lignes ne peuvent pas être fusionnées car certains de leur tags ont des valeurs contradictoires."
         },
         "move": {
             "title": "Déplacer",
@@ -226,7 +227,8 @@
     "zoom_in_edit": "Zoomer pour Modifier",
     "logout": "Déconnexion",
     "loading_auth": "Connexion à OpenStreetMap...",
-    "report_a_bug": "Signaler un bug",
+    "report_a_bug": "Rapporter un bug",
+    "help_translate": "Aider à traduire",
     "feature_info": {
         "hidden_warning": "{count} éléments cachés",
         "hidden_details": "Ces éléments sont en ce moment cachés: {details}"
@@ -501,8 +503,10 @@
         "help": "# Aide\n\nCeci est un éditeur pour [OpenStreetMap](http://www.openstreetmap.org/), la \ncarte du monde libre et éditable. Vous pouvez l'utiliser pour ajouter ou mettre à jour\nles données dans votre zone, et participer ainsi à la réalisation d'une carte du monde libre et à données ouvertes\nmeilleure pour tout le monde.\n\nLes modifications que vous réaliserez sur cette carte seront visibles par tous les utilisateurs d'\nOpenStreetMap.  Pour commencer à éditer, vous devez vous\n[connecter](https://www.openstreetmap.org/login).\n\nL'[éditeur iD](http://ideditor.com/) est un projet collaboratif dont le [code\nsource est disponible sur GitHub](https://github.com/openstreetmap/iD).\n",
         "editing_saving": "# Édition & sauvegarde\n\nCet éditeur est conçu pour fonctionner de façon connecté et vous êtes \nactuellement en train de l'utiliser depuis un site web.\n\n### Sélection des éléments\n\nPour sélectionner un élément de la carte comme une route ou un point d’intérêt, \nil faut cliquer dessus sur la carte. Il sera alors mis en surbrillance et un \npanneau latéral s’ouvrira avec tous ses détails élément ainsi qu'un menu des \nactions disponibles pour cet élément.\n\nPour sélectionner plusieurs éléments, laisser appuyer sur la touche «Shift» du \nclavier. Pendant ce temps, vous pouvez au choix sélectionner les différents \néléments directement ou dessiner une zone rectangulaire à l'aide de la souris. \nLorsque le bouton de la souris est relâché, tous les objets à l'intérieur du \nrectangle seront sélectionnés.\n\n### Sauvegarde des modifications\n\nLorsque vous modifiez la carte (par exemple modification de routes, bâtiments \net places), ces changements sont conservés localement en attendant que vous \nles sauvegardiez sur le serveur. En cas d'erreur, il est possible d'annuler les \nchangements en cliquant sur le bouton idoine. De façon similaire il est possible\n de ré-appliquer un changement qui a été annulé.\n\nLorsque vous souhaitez sauvegarder sur le serveur vos changements, appuyer sur \nle bouton «Sauvegarder». La liste de vos modifications s'affichera alors, vous \npermettant de vérifier vos modifications. Par ailleurs, l'éditeur vous \npréviendra et conseillera si quelque chose semble incorrect.\n\nSi tout semble correct, vous pourrez alors écrire un commentaire du travail \neffectué (par exemple «Ajout d'une boulangerie») puis il faudra à nouveau \nappuyer sur le bouton «Sauvegarder» pour envoyer les changements sur \n[OpenStreetMap.org](http://www.openstreetmap.org/). Vos changements seront \nvisible par tous peu de temps après.\n\nSi vous ne pouvez pas terminer vos changements en une seule fois, vous pouvez \nfermer la fenêtre de l'éditeur. Vos changements seront enregistrés localement. \nLorsque vous ouvrirez à nouveau l'éditeur, sur le même ordinateur et avec le \nmême navigateur Web, l'éditeur vous proposera de récupérer le travail de la \nséance précédente.\n\n### Utilisation de l'éditeur\n\nUne liste des raccourcis claviers est disponible \n[ici](http://wiki.openstreetmap.org/wiki/ID/Shortcuts).\n",
         "roads": "# Routes\n\nVous pouvez créer, mettre à jour et supprimer des routes à l'aide de l'éditeur. Il peut s'agir de tous types de routes : chemins, autoroutes, pistes cyclables, et plus encore : toute voie régulièrement fréquentée peut être cartographiée.\n\n### Sélection\n\nCliquez sur une route pour la sélectionner. Elle sera alors surlignée et un menu 'outils' apparaîtra sur la carte, ainsi qu'une barre d'état affichant des informations supplémentaires.\n\n### Modification\n\nIl est fréquent que les routes ne soient pas bien alignées avec l'imagerie satellite ou avec les traces GPS. Vous pouvez ajuster et corriger la position des routes.\n\nCliquez d'abord sur la route à modifier. Elle est alors surlignée et des points de contrôle apparaissent qui permettent de corriger sa position. Pour ajouter des points de contrôle, double-cliquez sur un segment de la route sans nœuds.\n\nSi la route est connectée à une autre, mais que la connexion est incorrecte, vous pouvez déplacer un de ses points de contrôle sur la seconde route pour corriger la connexion. Des routes bien connectées sont essentielles pour la carte et pour fournir de bonnes informations d'itinéraire.\n\nVous pouvez également cliquer sur l'outil 'Déplacer' ou appuyer sur le raccourci `M` pour déplacer l'ensemble de la route en une fois, puis cliquer de nouveau une fois pour sauvegarder le déplacement.\n\n### Suppression\n\nSi une route est complètement fausse - c'est-à-dire qu'elle n'apparaît pas sur l'image satellite, et que dans l'idéal, vous avez confirmé qu'elle n'existe pas sur le terrain - vous pouvez la supprimer, ce qui l'enlèvera de la carte. Faites attention lorsque vous supprimez des éléments : comme n'importe quelle autre modification, le résultat sera visible par tout le monde sur la carte. Les photos aériennes sont souvent dépassées et la route est peut-être tout simplement récente.\n\nPour supprimer une route, sélectionnez-la en cliquant dessus, puis cliquez sur l'icône 'Poubelle' ou appuyez sur la touche 'Suppr'.\n\n### Création\n\nVous avez constaté qu'une route de votre connaissance manque à la carte ? Cliquez sur l'icône 'Ligne' en haut à gauche de l'éditeur ou appuyez sur le raccourci `2` pour dessiner une route. \n\nPour commencer le dessin, cliquez sur l'endroit où commence la route. Si elle commence à l'embranchement d'une autre route, commencez le dessin en cliquant à l'endroit de la connexion.\n\nCliquez ensuite régulièrement le long de la route pour ajouter des points, en utilisant l'imagerie satellite comme référence. Si la route que vous dessinez croise une autre route, connectez les deux en cliquant à l'endroit de l'intersection. Lorsque vous avez terminé le dessin, double-cliquez ou appuyez sur 'Entrée'.\n",
+        "gps": "# GPS \n\nLe GPS est la source la plus fiable de données pour OpenStreetMap. Cet éditeur \nsupporte les traces en local - fichiers `.gpx` sur votre ordinateur. Vous pouvez collecter \nce genre de trace GPS à l'aide de nombreuses applications pour smartphones ainsi \nqu'avec du matériel GPS personnel. \n\nPour savoir comment effectuer un relevé GPS, lisez \n[Sur le terrain avec un GPS](http://learnosm.org/fr/beginner/using-gps/). \n\nPour utiliser un tracé GPX pour cartographier, effectuer un \"glissé-déposé\" du \nfichier GPX dans l'éditeur de cartes. S'il est reconnu, une ligne violette en \nsurbrillance apparaîtra sur la carte. Cliquez dans le menu \"Données de la carte\"\nsur le côté droit pour activer, désactiver, ou zoomer dans ce nouveau calque GPX. \n\nLe tracé GPX n'est pas directement envoyé sur OpenStreetMap - le meilleur moyen de\nl'utiliser est de dessiner sur la carte, en l'utilisant comme guide pour les \nnouveaux éléments que vous ajoutez, et aussi de le \n[charger dans OpenStreetMap](http://www.openstreetmap.org/trace/create) pour que\nles autres utilisateurs puissent s'en servir. \n",
         "imagery": "# Fond de carte⏎\n⏎\nLes photos aériennes sont une source importante pour cartographier. Une\ncompilation de photos prises d'avion, imageries satellites, et autres sources\nlibre d'utilisation sont disponibles dans l'éditeur dans le menu \"Configuration\ndu fond de carte\" à gauche.⏎\n⏎\nPar défaut, l'imagerie aérienne de [Bing Maps](http://www.bing.com/maps/)\nest utilisée dans l'éditeur, mais lorsque vous zoomez sur la carte, d'autres sources\nsont parfois disponibles dans certaines zones. Certains pays tels que la France, les\nÉtats-Unis ou le Danemark disposent d'images de très haute qualité sur certaines\nzones.⏎\n⏎\nCertaines images sont parfois décalées par rapport aux données, notamment\nà cause d'un mauvais calibrage. Si vous voyez de nombreux éléments tous décalés\npar rapport au fond de carte, ne déplacez pas immédiatement ces éléments. A la\nplace, vous pouvez ajuster le fond de carte afin qu'il soit aligné aux données en\ncliquant sur \"Corriger l'alignement\" en bas de l'interface de configuration du fond\nde carte.⏎\n",
         "addresses": "# Adresses\n\nLes adresses sont parmis les informations les plus utiles pour la carte.\n\nAlors que les adresses sont souvent représentées comme faisant partie des rues, dans OpenStreetMap, les adresses sont enregistrées comme attributs des bâtiments le long des rues.\n\nVous pouvez ajouter une adresse sur les éléments modélisés avec un polygone\net sur ceux modélisés avec des points. La meilleure source de données afin\nde cartographier les adresses reste le relevé sur le terrain ou les connaissances personnelles, car comme pour tous les autres éléments, la copie de données à partir de contenu non libre de droits comme Google Maps est strictement interdite.\n",
+        "inspector": "# Utilisation de l'inspecteur \n\nL'inspecteur est l'élément de l'interface utilisateur qui apparaît à droite de \nla page quand un élément est sélectionné. \n\nIl permet de mettre à jour les détails concernant l'élément sélectionné.\n\n### Sélectionner un type d'élément\n\nAprès ajout d'un point, d'une ligne ou d'un polygone, vous pouvez indiquer de \nquel type d'élément il s'agit : une route principale ou résidentielle, un \nsupermarché, un café... L'inspecteur affiche des boutons pour les éléments les \nplus communs, et vous pouvez trouver les autres à l'aide du formulaire de recherche. \n\nCliquez sur 'i' dans le coin en bas à droite des boutons pour en savoir plus sur\n l'élément dont il s'agit. Cliquez sur le bouton pour choisir cet élément.  \n\n### Utiliser les formulaires et les tags  \n\nAprès avoir choisi le type d'élément, ou lorsque vous sélectionnez un élément \ndont la nature est déjà indiquée, l'inspecteur affiche des champs comprenant des \ndétails sur l'élément concerné - adresse, nom, etc. \n\nEn-dessous des champs, vous pouvez cliquer sur les icônes pour ajouter des \ndétails supplémentaires, comme des informations issues de [Wikipedia](http://www.wikipedia.org/), \ndes renseignements sur l'accès handicapé, ou plus encore.  \n\nEn bas de l'inspecteur, cliquez sur 'Attributs Supplémentaires' pour ajouter des \nattributs arbitraires à l'élément. [Taginfo](http://taginfo.openstreetmap.org/) est \nune excellente ressource pour en savoir plus sur les combinaisons d'attributs les \nplus fréquentes. \n\nLes changements que vous effectuez dans l'inspecteur sont immédiatement visibles \nsur la carte. Vous pouvez les annulez dès que vous le souhaitez en cliquant sur 'annuler'.  \n",
         "buildings": "# Bâtiments\n\nOpenStreetMap est la plus grande base de données au monde sur le bâti.\nVous pouvez améliorer cette base de données.\n\n### Sélection\n\nVous pouvez sélectionner un bâtiment en cliquant sur son contour. Le bâtiment\nsera ainsi surligné, une boîte à outils apparaîtra, ainsi qu'un panneau contenant\nles informations sur le bâtiment.\n\n### Correction\n\nParfois, un bâtiment est mal placé ou possède des informations incorrectes.\n\nPour déplacer un bâtiment dans son intégralité, sélectionnez-le, puis cliquez\nsur l'outil \"Déplacer\". Déplacez ensuite la souris, puis cliquez lorsque le\nbâtiment est placé correctement.\n\nPour corriger la forme d'un bâtiment, glissez-déposez les points du contour\ndu bâtiment.\n\n### Création\n\nL'une des problématiques concernant les bâtiments est qu'ils peuvent être\nreprésentés à la fois par un point ou par un polygone. La règle d'or est de\n_dessiner les bâtiments avec des polygone dès que c'est possible_, et de\ncartographier les entreprises, équipements, adresses, et tout ce qui ne\ndépend pas directement de la construction comme des points placés\nau sein de la forme du bâtiment.\n\nDessinez un bâtiment en cliquant sur le bouton \"Polygone\" en haut à gauche\nde l'interface, ajoutez des points en cliquant sur la carte et terminez la forme\nen cliquant sur le premier point, ou en appuyant sur la touche \"Entrée\" de\nvotre clavier.\n\n### Suppression\n\nSi un bâtiment dessiné est inexistant (par exemple s'il n'existe pas sur l'image\nsatellite et que vous avez vérifié sur place que ce n'était pas une construction\nrécente), vous pouvez le supprimer. Attention avant de supprimer un élément ;\ntout le monde peut constater que vous l'avez supprimé, et il peut s'agir d'un\nélément plus récent que l'image satellite.\n\nVous pouvez supprimer un bâtiment en le sélectionnant, puis en cliquant sur\nl'icône représentant une poubelle, ou en appuyant sur la touche \"Suppr\" de\nvotre clavier.\n",
         "relations": "# Relations⏎\n⏎\nUne relation est un élément spécial dans OpenStreetMap qui permet de regrouper ensemble d'autre éléments\nPar exemple, les deux plus courants types de relations sont *route relations*,\nqui regroupe des sections de route qui appartiennent à une autoroute, \net *multipolygons*, qui regroupe plusieurs lignes qui définissent\nune zone complexe (une avec plusieurs pièces ou trous à l’intérieur comme un donut).⏎\n⏎\nLe groupe d'éléments dans une relation sont appelés *members*. Dans le menu de côté, vous pouvez\nvoir dans quelles relations l'élément appartient, et sélectionner une des relations pour voir.\nLorsque la relation est sélectionnée, vous pouvez voir tous\nles membres listés dans le menu de côté et la mettre en sur-impression sur la carte.⏎\n⏎\nPour la plus part, iD veillera à maintenir les relations automatiquement\npendant que vous éditez. La chose la plus importe que vous devez savoir est que si vous effacez une\nsection de route pour la rendre plus précise, vous devez vous assurer que \nla nouvelle section est un membre des même relations que l'originale.⏎\n⏎\n## Modifier des Relations⏎\n⏎\nSi vous voulez modifier des relations, voici les bases.⏎\n⏎\nPour apporter une information à une relation, sélectionnez l'élément, appuyez sur le bouton \"+\" dans la\nsection \"All relations\" du menu du côté, et sélectionnez ou saisissez le nom de la relation.⏎\n⏎\nPour créer une nouvelle relation, sélectionnez le premier élément qui doit en être membre,\nappuyez sur le bouton \"+\" dans le section \"All relations\", et sélectionner \"New relation...\".\n⏎\nPour retirer un élément d'une relation, sélectionnez l’élément et appuyez sur le symbole de la corbeille.\nbutton next de la relation si vous souhaitez la supprimer.⏎\n⏎\nVous pouvez créer des multipolygons avec des trous en utilisant l'outil \"Merge\". Dessinez deux polygones (inner\net outer), maintenez la touche Shift/Majuscule et appuyez sur chacune d'elles pour les sélectionner, et après\nappuyez le bouton \"Merge\" (+) .⏎\n"
     },
@@ -579,7 +583,7 @@
                 "name": "Route"
             },
             "category-route": {
-                "name": "Route"
+                "name": "Itinéraire"
             },
             "category-water-area": {
                 "name": "Eau"
@@ -901,10 +905,10 @@
                 "label": "Vente de diesel"
             },
             "fuel/e10": {
-                "label": "Vend du E10"
+                "label": "Vente de E10"
             },
             "fuel/e85": {
-                "label": "Vends du E85"
+                "label": "Vente de E85"
             },
             "fuel/lpg": {
                 "label": "Vente de gaz propane"
@@ -996,7 +1000,7 @@
                 "label": "Type"
             },
             "lanes": {
-                "label": "Lignes",
+                "label": "Voies",
                 "placeholder": "1, 2, 3..."
             },
             "layer": {
@@ -1048,7 +1052,7 @@
                 "label": "Niveau"
             },
             "levels": {
-                "label": "Niveaux",
+                "label": "Étages",
                 "placeholder": "2, 4, 6..."
             },
             "lit": {
@@ -1092,7 +1096,7 @@
                 "label": "Difficulté VTT en montée",
                 "options": {
                     "0": "0: Inclinaison <10% , sol consistent, pas d'obstacles",
-                    "1": "1: Inclinaison < 15%, sol consistant, quelques menus obstacles",
+                    "1": "1: Inclinaison < 15%, sol consistant, quelques petits obstacles",
                     "2": "2: Inclinaison <20%, surface stable, pierres/racines",
                     "3": "3: Inclinaison <25%, différents types de terrains, pierres/branches",
                     "4": "4: Inclinaison <30%, conditions difficiles, rochers/branches",
@@ -1151,7 +1155,7 @@
                     "carports": "Abris de voiture",
                     "garage_boxes": "Boxes de garage",
                     "lane": "Route",
-                    "multi-storey": "Multiples niveaux",
+                    "multi-storey": "Multiples étages",
                     "sheds": "Cabanes",
                     "surface": "Surface",
                     "underground": "Souterrain"
@@ -1421,6 +1425,9 @@
                 },
                 "placeholder": "Dur, Majoritairement Dur, Mou..."
             },
+            "traffic_signals": {
+                "label": "Type"
+            },
             "trail_visibility": {
                 "label": "Visibilité du sentier",
                 "options": {
@@ -1453,7 +1460,7 @@
             },
             "website": {
                 "label": "Site internet",
-                "placeholder": "http://example.com"
+                "placeholder": "http://exemple.fr"
             },
             "wetland": {
                 "label": "Type"
@@ -1578,8 +1585,8 @@
                 "terms": "Banc public"
             },
             "amenity/bicycle_parking": {
-                "name": "Parc à vélos",
-                "terms": "Parking à vélo, Parking à bicyclette, Stationnement à vélo"
+                "name": "Parking à vélos",
+                "terms": "Parc à vélos,Parking à vélo, Parking à bicyclette, Stationnement à vélo"
             },
             "amenity/bicycle_rental": {
                 "name": "Location de vélos",
@@ -1618,7 +1625,7 @@
                 "terms": "Autopartage, partage de voitures"
             },
             "amenity/car_wash": {
-                "name": "Lavage de voiture, Lave auto",
+                "name": "Lavage de voiture",
                 "terms": "Lavage de voiture, lave auto"
             },
             "amenity/casino": {
@@ -1651,7 +1658,7 @@
             },
             "amenity/community_centre": {
                 "name": "Salle des fêtes",
-                "terms": "Salle festive, Salle polyvalente, Centre communautaire => Canada"
+                "terms": "Salle festive, Salle polyvalente, Centre communautaire"
             },
             "amenity/compressed_air": {
                 "name": "Air comprimé",
@@ -1659,7 +1666,7 @@
             },
             "amenity/courthouse": {
                 "name": "Tribunal",
-                "terms": "Palais de Justice, Tribunal"
+                "terms": "Palais de Justice"
             },
             "amenity/dentist": {
                 "name": "Dentiste",
@@ -1711,7 +1718,7 @@
             },
             "amenity/kindergarten": {
                 "name": "Terrains d'école maternelle / jardin d'enfants",
-                "terms": "Terrains d'école maternelle / jardin d'enfants"
+                "terms": "Crèche,Halte-garderie,Jardin d'enfants,École maternelle,École enfantine"
             },
             "amenity/library": {
                 "name": "Bibliothèque",
@@ -1721,13 +1728,17 @@
                 "name": "Place de marché",
                 "terms": "Marché"
             },
+            "amenity/motorcycle_parking": {
+                "name": "Parking pour motos",
+                "terms": "Parc à motos,Stationnement motos"
+            },
             "amenity/nightclub": {
                 "name": "Boîte de nuit",
                 "terms": "Boîte de nuit"
             },
             "amenity/parking": {
-                "name": "Parc de stationnement",
-                "terms": "Parc de stationnement, parking"
+                "name": "Parking",
+                "terms": "Parc de stationnement"
             },
             "amenity/parking_entrance": {
                 "name": "Entrée/Sortie de parking",
@@ -1847,7 +1858,7 @@
             },
             "amenity/townhall": {
                 "name": "Mairie",
-                "terms": "Mairie"
+                "terms": "Mairie,Hôtel de ville,Maison commune"
             },
             "amenity/university": {
                 "name": "Terrains d'université",
@@ -1991,7 +2002,7 @@
             },
             "building/detached": {
                 "name": "Maison individuelle",
-                "terms": "Maison non attenante"
+                "terms": "Maison indépendante"
             },
             "building/dormitory": {
                 "name": "Résidence universitaire",
@@ -2035,7 +2046,7 @@
             },
             "building/kindergarten": {
                 "name": "Bâtiment d'école maternelle / jardin d'enfants",
-                "terms": "Bâtiment d'école maternelle / jardin d'enfants"
+                "terms": "Crèche,Halte-garderie,Jardin d'enfants,École maternelle,École enfantine"
             },
             "building/public": {
                 "name": "Établissement public",
@@ -2056,6 +2067,10 @@
             "building/school": {
                 "name": "Bâtiment d'école primaire, collège, lycée  Cycles primaires et secondaires",
                 "terms": "Bâtiment d'école primaire, collège, lycée  Cycles primaires et secondaires"
+            },
+            "building/semidetached_house": {
+                "name": "maison mitoyenne",
+                "terms": "maison jumelée"
             },
             "building/shed": {
                 "name": "Cabanon",
@@ -2399,7 +2414,7 @@
             },
             "highway/pedestrian": {
                 "name": "Rue piétonne",
-                "terms": "Rue piétonnisée,Espace piétonnier"
+                "terms": "Rue piétonnière,Espace piétonnier,Place piétonne,Rue piétonne"
             },
             "highway/primary": {
                 "name": "Route principale",
@@ -2551,7 +2566,7 @@
             },
             "landuse/allotments": {
                 "name": "Jardins familiaux",
-                "terms": "Jardins familiaux, eco-jardins, jardins communautaires, jardin communautaire"
+                "terms": "Jardins familiaux"
             },
             "landuse/basin": {
                 "name": "Bassin",
@@ -2646,8 +2661,8 @@
                 "terms": "Jeux pour adultes"
             },
             "leisure/bowling_alley": {
-                "name": "Boulodrome",
-                "terms": "Jeux de boules"
+                "name": "Bowling",
+                "terms": "Jeux de boules,Jeu de quilles,Quilles"
             },
             "leisure/common": {
                 "name": "Terrain communal",
@@ -2702,19 +2717,19 @@
                 "terms": "Terrain de base-ball"
             },
             "leisure/pitch/basketball": {
-                "name": "Terrain de basketball",
+                "name": "Terrain de basket",
                 "terms": "Terrain de basket, terrain de basketball"
             },
             "leisure/pitch/rugby_league": {
-                "name": "Terrain de rugby à XV",
-                "terms": "Rugby,Terrain de rugby,"
+                "name": "Terrain de rugby à XIII",
+                "terms": "Rugby"
             },
             "leisure/pitch/rugby_union": {
-                "name": "Terrain de rugby à XIII",
-                "terms": ""
+                "name": "Terrain de Rugby à XV",
+                "terms": "Rugby"
             },
             "leisure/pitch/skateboard": {
-                "name": "Planchodrome",
+                "name": "Skatepark",
                 "terms": "Planchodrome, skate park"
             },
             "leisure/pitch/soccer": {
@@ -2739,7 +2754,7 @@
             },
             "leisure/slipway": {
                 "name": "Plan incliné",
-                "terms": "Cale de lancement"
+                "terms": "Cale de lancement, Cale, Cale de mise à l'eau"
             },
             "leisure/sports_center": {
                 "name": "Centre sportif / Salle de gymnastique",
@@ -2853,9 +2868,29 @@
                 "name": "Bunker",
                 "terms": "casemate, blockhaus, bunker"
             },
+            "military/checkpoint": {
+                "name": "Poste de contrôle militaire",
+                "terms": "Poste-frontière, Point de contrôle, Poste de contrôle,Militaire"
+            },
+            "military/danger_area": {
+                "name": "Zone militaire dangeureuse",
+                "terms": "Zone dangereuse, Région dangereuse, Dangereuse, Danger,Militaire"
+            },
+            "military/naval_base": {
+                "name": "Base navale",
+                "terms": "Base Navale, Base militaire, Marine, Port maritime"
+            },
+            "military/obstacle_course": {
+                "name": "Parcours du combattant",
+                "terms": "Parcours du combattant, Course, Obstacles"
+            },
             "military/range": {
                 "name": "Stand de tir",
                 "terms": "Champ de tir,Stand de tir"
+            },
+            "military/training_area": {
+                "name": "Zone d'entraînement militaire",
+                "terms": "Zone d'entraînement"
             },
             "natural": {
                 "name": "Nature",
@@ -2895,7 +2930,7 @@
             },
             "natural/heath": {
                 "name": "Lande",
-                "terms": "Santé"
+                "terms": "Bruyère"
             },
             "natural/peak": {
                 "name": "Sommet",
@@ -3042,8 +3077,8 @@
                 "terms": "Piste de ski"
             },
             "place": {
-                "name": "Toponymie",
-                "terms": "Lieu"
+                "name": "Lieu",
+                "terms": "Toponymie,Place"
             },
             "place/city": {
                 "name": "Grande ville (>100.000 habitants)",
@@ -3714,8 +3749,8 @@
                 "terms": "Dos d'âne"
             },
             "traffic_calming/rumble_strip": {
-                "name": "Section de route à rainurage",
-                "terms": "Bande rugueuse"
+                "name": "Bande rugueuse",
+                "terms": "Section de route à rainurage"
             },
             "traffic_calming/table": {
                 "name": "Passage pour piétons surélévé",

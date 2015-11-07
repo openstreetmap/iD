@@ -150,7 +150,6 @@
     "browser_notice": "Hierdie program is bruikbaar in Firefox, Chrome, Safair, Opera en Internet Explorer 9 en later weergawes. Gradeer asseblief jou webbrowser op of gebruik Potlatch 2 om die kaart te verander.",
     "logout": "voetsek",
     "loading_auth": "Maak kontak met OpenStreetMap...",
-    "report_a_bug": "Raporteer 'n probleem",
     "status": {
         "error": "Kan nie aan die API koppel nie.",
         "offline": "Die API is aflyn, probeer asseblief later weer.",
@@ -940,9 +939,6 @@
             },
             "historic/wayside_cross": {
                 "name": "Padteken"
-            },
-            "landuse/allotments": {
-                "name": "Toegewysde lappie grond"
             },
             "landuse/basin": {
                 "name": "Laagte"

@@ -199,7 +199,6 @@
     "zoom_in_edit": "Uvećajte da bi ste uređivali.",
     "logout": "Odjavite se",
     "loading_auth": "Povezivanje na OpenStreetMap...",
-    "report_a_bug": "Prijavite grešku",
     "status": {
         "error": "Nemoguće povezati na API.",
         "offline": "API nije na mreži. Molimo pokušajte uređivati kasnije.",
@@ -1455,10 +1454,6 @@
             "historic/wayside_shrine": {
                 "name": "Hram pored puta",
                 "terms": "znamenje kraj puta,kapelica"
-            },
-            "landuse/allotments": {
-                "name": "Parcele",
-                "terms": "parcele,zemlja za vrtlarstvo"
             },
             "landuse/basin": {
                 "name": "Sliv",

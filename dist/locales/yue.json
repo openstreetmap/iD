@@ -199,7 +199,6 @@
     "zoom_in_edit": "放大去改",
     "logout": "簽走",
     "loading_auth": "駁上去公家街圖⋯⋯",
-    "report_a_bug": "報告有錯",
     "status": {
         "error": "駁唔通程式接口。",
         "offline": "程式接口收工。遲啲再改啦。",
@@ -1381,10 +1380,6 @@
             "historic/wayside_shrine": {
                 "name": "路邊神祠",
                 "terms": "Wayside Shrine,路邊神社,路邊神祠"
-            },
-            "landuse/allotments": {
-                "name": "菜地",
-                "terms": "Allotments,社區花園,菜地"
             },
             "landuse/basin": {
                 "name": "盆地",

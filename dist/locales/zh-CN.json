@@ -226,7 +226,6 @@
     "zoom_in_edit": "放大地图以编辑",
     "logout": "退出",
     "loading_auth": "正在连接OpenStreetMap...",
-    "report_a_bug": "报告漏洞",
     "feature_info": {
         "hidden_warning": "{count}个隐藏特征",
         "hidden_details": "以下要素目前被隐藏：{details}"
@@ -623,7 +622,9 @@
                         "title": "允许的"
                     }
                 },
+                "placeholder": "未指定",
                 "types": {
+                    "access": "全部",
                     "bicycle": "自行车",
                     "foot": "步行",
                     "horse": "马匹",
@@ -1689,6 +1690,9 @@
                 "name": "市场",
                 "terms": "市场,菜市场"
             },
+            "amenity/motorcycle_parking": {
+                "name": "摩托车停车场"
+            },
             "amenity/nightclub": {
                 "name": "夜总会",
                 "terms": "夜店,夜总会"
@@ -1936,9 +1940,6 @@
             },
             "building/construction": {
                 "name": "在建建筑"
-            },
-            "building/detached": {
-                "name": "连体屋"
             },
             "building/dormitory": {
                 "name": "宿舍"
@@ -2395,10 +2396,6 @@
             "junction": {
                 "name": "交叉口",
                 "terms": "交通枢纽,路口"
-            },
-            "landuse/allotments": {
-                "name": "菜地",
-                "terms": "菜地,社区花园"
             },
             "landuse/basin": {
                 "name": "水池",

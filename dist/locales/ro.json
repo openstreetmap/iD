@@ -24,7 +24,8 @@
         "add": {
             "annotation": {
                 "point": "Am adăugat un punct.",
-                "vertex": "Am adăugat un nod la o cale"
+                "vertex": "Am adăugat un nod la o cale",
+                "relation": "Am adăugat o relație."
             }
         },
         "start": {
@@ -36,6 +37,8 @@
         "continue": {
             "key": "A",
             "title": "Continuă",
+            "description": "Continuă linia",
+            "not_eligible": "Nicio linie nu poate fi continuată aici",
             "annotation": {
                 "line": "Am continuat o linie.",
                 "area": "Am continuat o suprafață. "
@@ -48,6 +51,10 @@
             "annotation": "Tag-uri schimbate."
         },
         "circularize": {
+            "description": {
+                "line": "Fă această linie circulară.",
+                "area": "Fă această suprafață circulară."
+            },
             "key": "O",
             "annotation": {
                 "line": "Am făcut linia circulară.",
@@ -58,10 +65,12 @@
             "key": "S"
         },
         "straighten": {
+            "title": "Întărește ",
             "key": "S"
         },
         "delete": {
-            "title": "Sterge",
+            "title": "Șterge",
+            "description": "Șterge obiectul definitiv.",
             "annotation": {
                 "point": "Șterge un punct.",
                 "vertex": "Șterge un nod dintr-o cale.",
@@ -70,6 +79,12 @@
                 "relation": "Șterge o relație.",
                 "multiple": "Am șters {n} obiecte."
             }
+        },
+        "add_member": {
+            "annotation": "Am adăugat un membru dintr-o relație."
+        },
+        "delete_member": {
+            "annotation": "Am șters un membru dintr-o relație."
         },
         "connect": {
             "annotation": {
@@ -135,18 +150,42 @@
     },
     "logout": "logout",
     "loading_auth": "Conectare la OpenStreetMap..",
+    "feature_info": {
+        "hidden_warning": "{count} funcționalități ascunse"
+    },
     "commit": {
         "title": "Salveaza modificarile",
         "description_placeholder": "O scurtă descriere a contribuției tale.",
         "save": "Salveaza",
         "cancel": "Renunță",
+        "changes": "{count} Modificări",
         "warnings": "Atenționări",
         "modified": "Modificat",
         "deleted": "Șters",
         "created": "Creat"
     },
     "contributors": {
-        "list": "Editări făcute de {user}"
+        "list": "Editări făcute de {user}",
+        "truncated_list": "Editat de {users} si alți {count} de editori"
+    },
+    "infobox": {
+        "selected": "{n} selectate",
+        "geometry": "Geometrie",
+        "closed": "închis ",
+        "center": "Centru",
+        "perimeter": "Perimetru",
+        "length": "Lungime",
+        "area": "Suprafață",
+        "location": "Locație ",
+        "metric": "Metric",
+        "imperial": "Imperial"
+    },
+    "geometry": {
+        "point": "punct",
+        "vertex": "vertex",
+        "line": "linie",
+        "area": "suprafață",
+        "relation": "relație "
     },
     "geocoder": {
         "no_results_worldwide": "Nu s-a găsit nici un rezultat"
@@ -161,12 +200,18 @@
         "view_on_osm": "Vezi pe openstreetmap.org",
         "all_members": "Toți membrii",
         "all_relations": "Toate relațiile",
+        "new_relation": "Relație nouă",
         "role": "Rol",
         "results": "{n} rezultate pentru {search}",
         "back_tooltip": "Schimbă trăsătură",
         "remove": "Şterge",
         "search": "Caută",
         "unknown": "Necunoscut",
+        "check": {
+            "yes": "Da",
+            "no": "Nu"
+        },
+        "node": "Nod",
         "location": "Locație"
     },
     "background": {
@@ -175,13 +220,28 @@
         "percent_brightness": "{opacity}% luminozitate",
         "reset": "resetează"
     },
+    "map_data": {
+        "map_features": "Funcționalitățile Hărții"
+    },
     "feature": {
         "points": {
             "description": "Puncte",
             "tooltip": "Puncte de interes"
         },
+        "major_roads": {
+            "description": "Drumuri principale",
+            "tooltip": "Autostrazi, Strazi, etc"
+        },
+        "minor_roads": {
+            "description": "Drumuri secundare"
+        },
+        "paths": {
+            "description": "Poteci",
+            "tooltip": "Trotuare, Poteci, Piste de biciclete, etc"
+        },
         "buildings": {
-            "description": "Clădiri"
+            "description": "Clădiri",
+            "tooltip": "Clădiri, Adăposturi, Garaje, etc."
         }
     },
     "restore": {
@@ -219,6 +279,7 @@
         "used_with": "folosit cu {type}"
     },
     "validations": {
+        "untagged_point": "Punct neetichetat",
         "untagged_line": "Linie fară tag-uri (cuvinte cheie)",
         "untagged_area": "Suprafața fară tag-uri",
         "many_deletions": "Șteregi {n} obiecte. Ești sigur(ă) ? Le vei șterge de pe harta pe care toată lumea o vede pe opensteetmap.org. ",
@@ -237,6 +298,7 @@
     },
     "intro": {
         "navigation": {
+            "title": "Navigare",
             "select": "Trăsăturile hărții sunt reprezentate in trei moduri: folosind puncte, linii sau suprafețe. Toate trăsăturile pot fi selectate apăsând pe ele. **Apasă pe un punct pentru al selecta.** ",
             "header": "Antetul ne arată tipul trăsaturii.",
             "pane": "Când o trăsătura este selectată, editorul este afișat. Antelul ne arată tipul trăsăturii și panoul principal, atributele trăsăturii, precum numele sau adresa.**Inchide editorul de trăsături folosind butonul de inchidere din colțul dreapta sus.**"
@@ -245,6 +307,7 @@
             "title": "Puncte"
         },
         "areas": {
+            "title": "Suprafețe",
             "search": "**Caută {name}.**"
         },
         "lines": {
@@ -253,6 +316,7 @@
         },
         "startediting": {
             "title": "Începe editarea",
+            "save": "Nu uita să salvezi periodic modificările. ",
             "start": "Începe cartografierea!"
         }
     },

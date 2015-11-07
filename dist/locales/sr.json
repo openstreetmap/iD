@@ -199,7 +199,6 @@
     "zoom_in_edit": "Увећајте да бисте уређивали",
     "logout": "одјава",
     "loading_auth": "Повезивање са Опенстритмап...",
-    "report_a_bug": "пријави грешку",
     "status": {
         "error": "Није могуће повезати се АПИ-јем.",
         "offline": "АПИ је ван мреже. Молимо вас покушајте уређивање касније.",
@@ -1259,9 +1258,6 @@
             "building/construction": {
                 "name": "Зграда у изградњи"
             },
-            "building/detached": {
-                "name": "Породична кућа"
-            },
             "building/dormitory": {
                 "name": "Студентски дом"
             },
@@ -1562,9 +1558,6 @@
             },
             "historic/wayside_shrine": {
                 "name": "Храм поред пута"
-            },
-            "landuse/allotments": {
-                "name": "Парцеле"
             },
             "landuse/basin": {
                 "name": "Слив"

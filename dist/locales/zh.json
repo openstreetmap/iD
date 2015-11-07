@@ -175,7 +175,6 @@
     "zoom_in_edit": "放大编辑",
     "logout": "退出",
     "loading_auth": "连接OpenStreetMap...",
-    "report_a_bug": "报告bug",
     "status": {
         "error": "无法连接到API。",
         "offline": "API是离线的。请稍后尝试编辑。",
@@ -964,9 +963,6 @@
             },
             "historic/wayside_shrine": {
                 "name": "路边神社"
-            },
-            "landuse/allotments": {
-                "name": "社区花园"
             },
             "landuse/basin": {
                 "name": "水池"

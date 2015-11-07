@@ -226,7 +226,6 @@
     "zoom_in_edit": "Fai zoom para editar.",
     "logout": "saír",
     "loading_auth": "Conectando con OpenStreetMap...",
-    "report_a_bug": "informar dun erro",
     "feature_info": {
         "hidden_warning": "{count} elementos agochados",
         "hidden_details": "Estes elementos agora están agochados: {details} "
@@ -1328,9 +1327,6 @@
             },
             "historic/wayside_shrine": {
                 "name": "Peto de ánimas"
-            },
-            "landuse/allotments": {
-                "name": "Horta urbana"
             },
             "landuse/basin": {
                 "name": "Cunca"

@@ -52,7 +52,7 @@
             }
         },
         "cancel_draw": {
-            "annotation": "Tekenen afgebroken."
+            "annotation": "Tekenen afgebroken"
         },
         "change_role": {
             "annotation": "Rol van relatielid gewijzigd."
@@ -142,8 +142,9 @@
             "annotation": "{n} lijnen samengevoegd.",
             "not_eligible": "Deze objecten kunnen niet worden samengevoegd.",
             "not_adjacent": "Deze lijnen kunnen niet samengevoegd worden omdat ze niet verbonden zijn.",
-            "restriction": "De lijnen kunnen niet samengevoegd worden, omdat minstens één ervan onderdeel uitmaakt van een \"{relation}\"-relatie.",
-            "incomplete_relation": "Deze objecten kunnen niet samengevoegd worden omdat minstens één ervan niet volledig gedownload is."
+            "restriction": "De lijnen kunnen niet samengevoegd worden omdat minstens één ervan onderdeel uitmaakt van een \"{relation}\"-relatie.",
+            "incomplete_relation": "Deze objecten kunnen niet samengevoegd worden omdat minstens één ervan niet volledig gedownload is.",
+            "conflicting_tags": "De lijnen kunnen niet samengevoegd worden omdat sommige van hun tags conflicteren."
         },
         "move": {
             "title": "Verschuif",
@@ -226,7 +227,6 @@
     "zoom_in_edit": "Zoom in om aan te passen",
     "logout": "Afmelden",
     "loading_auth": "Aan het verbinden met OpenStreetMap …",
-    "report_a_bug": "Softwareprobleem melden",
     "feature_info": {
         "hidden_warning": "{count} verborgen objecten",
         "hidden_details": "Deze objecten zijn momenteel verborgen: {details}"
@@ -592,7 +592,7 @@
         },
         "fields": {
             "access": {
-                "label": "Gebruik toegelaten voor:",
+                "label": "Gebruik toegelaten voor",
                 "options": {
                     "designated": {
                         "description": "Toegang toegestaan volgens bebording of specifieke, plaatselijke verordeningen",
@@ -633,7 +633,7 @@
                 }
             },
             "access_simple": {
-                "label": "Wettelijke toegangsbeperkingen",
+                "label": "Gebruik toegelaten voor",
                 "placeholder": "ja"
             },
             "access_toilets": {
@@ -1423,6 +1423,9 @@
                 },
                 "placeholder": "Vast, Voornamelijk Vast, Los …"
             },
+            "traffic_signals": {
+                "label": "Type"
+            },
             "trail_visibility": {
                 "label": "Zichtbaarheid van de weg",
                 "options": {
@@ -1710,6 +1713,10 @@
                 "name": "Marktplaats",
                 "terms": "groenten, vis, groentemarkt"
             },
+            "amenity/motorcycle_parking": {
+                "name": "Motorfietsparking",
+                "terms": "motorparking,motoparking,motostalling,motorstalling,motorfietsparking,motoren,moto's,parking voor motoren,parking voor moto's,parking voor motorfietsen"
+            },
             "amenity/nightclub": {
                 "name": "Nachtclub",
                 "terms": "dancing, bar, uitgaan, disco"
@@ -1853,8 +1860,8 @@
                 "terms": "afvalbak, vuilnisbak"
             },
             "area": {
-                "name": "Gebied",
-                "terms": "vlak"
+                "name": "Vlak",
+                "terms": "gebied,anders,overige,iets anders,algemeen"
             },
             "area/highway": {
                 "name": "Wegdek",
@@ -1971,8 +1978,8 @@
                 "terms": "constructie, werken, onaf"
             },
             "building/detached": {
-                "name": "Alleenstaand Huis",
-                "terms": "villa, woning"
+                "name": "Alleenstaand huis",
+                "terms": "villa,woning"
             },
             "building/dormitory": {
                 "name": "Studentenflats",
@@ -2035,6 +2042,9 @@
             "building/school": {
                 "name": "Schoolgebouw",
                 "terms": "school, onderwijs, secundair onderwijs, lager onderwijs, basisschool, middelbaar, voortgezet onderwijs"
+            },
+            "building/semidetached_house": {
+                "name": "NIET GEBRUIKEN - Koppelwoninghelft"
             },
             "building/shed": {
                 "name": "Schuurtje",
@@ -2471,7 +2481,8 @@
                 "terms": "landindeling,doel"
             },
             "landuse/allotments": {
-                "name": "Volkstuinen"
+                "name": "Volkstuin",
+                "terms": "tuin,moestuin,aparte tuin"
             },
             "landuse/basin": {
                 "name": "Waterbekken"
@@ -2528,7 +2539,8 @@
                 "terms": "wei, weide"
             },
             "landuse/military": {
-                "name": "Militair gebied"
+                "name": "Militair gebied",
+                "terms": "legerkazerne,kazerne,kwartier,landmacht,marinebasis,luchtmacht"
             },
             "landuse/orchard": {
                 "name": "Boomgaard",
@@ -2609,6 +2621,14 @@
             "leisure/pitch/basketball": {
                 "name": "Basketbalveld"
             },
+            "leisure/pitch/rugby_league": {
+                "name": "Rugby League-veld",
+                "terms": "rugby,american football,football"
+            },
+            "leisure/pitch/rugby_union": {
+                "name": "Rugby Union-veld",
+                "terms": "rugby,american football,football"
+            },
             "leisure/pitch/skateboard": {
                 "name": "Skatepark"
             },
@@ -2650,7 +2670,8 @@
                 "terms": "atletiekbaan, stadion, stadium, hardlopen, hordenloop, fietsen, parcours"
             },
             "line": {
-                "name": "Lijn"
+                "name": "Lijn",
+                "terms": "anders,overige,iets anders,algemeen"
             },
             "man_made": {
                 "name": "Aangelegd"
@@ -2733,9 +2754,29 @@
                 "name": "Bunker",
                 "terms": "bunker"
             },
+            "military/checkpoint": {
+                "name": "Checkpoint",
+                "terms": "grenscontrole,militair gebied,leger,paramilitiar gebied,controlepunt,douane"
+            },
+            "military/danger_area": {
+                "name": "Militaire ontruimingszone",
+                "terms": "exclusiezone,gevarenzone,gevaar,leger,verboden"
+            },
+            "military/naval_base": {
+                "name": "Marinebasis",
+                "terms": "leger,vloot"
+            },
+            "military/obstacle_course": {
+                "name": "Militair hindernissenparcours",
+                "terms": "oefenterrein,leger"
+            },
             "military/range": {
-                "name": "Legerterrein",
-                "terms": "legerterrein"
+                "name": "Militair schietterrein",
+                "terms": "leger,oefenplaats"
+            },
+            "military/training_area": {
+                "name": "Militair oefenterrein",
+                "terms": "leger,hindernissenparcours,training,opleiding"
             },
             "natural": {
                 "name": "Natuurlijk"
@@ -2791,7 +2832,8 @@
                 "terms": "rij bomen,laan"
             },
             "natural/volcano": {
-                "name": "Vulkaan"
+                "name": "Vulkaan",
+                "terms": "vulkaan,caldera,krater"
             },
             "natural/water": {
                 "name": "Water"
@@ -2872,10 +2914,12 @@
                 "name": "Onderzoekskantoor"
             },
             "office/telecommunication": {
-                "name": "Telecomkantoor"
+                "name": "Telecomkantoor",
+                "terms": "belwinkel"
             },
             "office/therapist": {
-                "name": "Therapeut"
+                "name": "Therapeut",
+                "terms": "behandelaar,kliniek"
             },
             "office/travel_agent": {
                 "name": "Reisbureau"
@@ -2885,10 +2929,12 @@
                 "terms": "skipiste"
             },
             "place": {
-                "name": "Plaats"
+                "name": "Plaats",
+                "terms": "plaats,gemeente,stad"
             },
             "place/city": {
-                "name": "Stad"
+                "name": "Stad",
+                "terms": "plaats,gemeente,stad"
             },
             "place/farm": {
                 "name": "Boerderij",
@@ -2908,19 +2954,24 @@
                 "name": "Veldnaam"
             },
             "place/neighbourhood": {
-                "name": "Buurt"
+                "name": "Buurt",
+                "terms": "buurt,wijk"
             },
             "place/suburb": {
-                "name": "Stadsdeel"
+                "name": "Stadsdeel",
+                "terms": "stadsdeel,buurt,wijk"
             },
             "place/town": {
-                "name": "Plaats"
+                "name": "Plaats",
+                "terms": "stad,plaats,gemeente"
             },
             "place/village": {
-                "name": "Dorp"
+                "name": "Dorp",
+                "terms": "dorp,gehucht,woonkern,kern,buurt,buurtschap,vlek,kerkdorp,oort,gemeente"
             },
             "point": {
-                "name": "Punt"
+                "name": "Punt",
+                "terms": "anders,overige,iets anders,algemeen"
             },
             "power": {
                 "name": "Stroomvoorziening",
@@ -2979,7 +3030,8 @@
                 "terms": "kabelbaan,teleferiek,funiculaire"
             },
             "railway/halt": {
-                "name": "Treinhalte"
+                "name": "Treinhalte",
+                "terms": "treinhalte,strainstation,treinstop,stop,halte,station"
             },
             "railway/level_crossing": {
                 "name": "Spoorwegovergang",
@@ -3067,7 +3119,8 @@
                 "name": "Bed-/Matrassenwinkel"
             },
             "shop/beverages": {
-                "name": "Drankenwinkel"
+                "name": "Drankenwinkel",
+                "terms": "drankenhandel,bierhuis,drankenhuis,drankhandel,wijnhandel,drankenwinkel,slijterij"
             },
             "shop/bicycle": {
                 "name": "Fietswinkel",
@@ -3144,7 +3197,8 @@
                 "name": "Zuivelwinkel"
             },
             "shop/deli": {
-                "name": "Delicatessenwinkel"
+                "name": "Delicatessenwinkel",
+                "terms": "delicatesse,speciaalzaak,delicatessenwinkel,delicatessen,winkel"
             },
             "shop/department_store": {
                 "name": "Warenhuis"
@@ -3198,7 +3252,8 @@
                 "name": "Woonwarenhuis"
             },
             "shop/garden_centre": {
-                "name": "Tuincentrum"
+                "name": "Tuincentrum",
+                "terms": "tuincentrum,bloemist,kas,kassen"
             },
             "shop/gift": {
                 "name": "Cadeauwinkel"
@@ -3396,7 +3451,8 @@
                 "name": "Watersport-/Zwemwinkel"
             },
             "shop/weapons": {
-                "name": "wapen winkel"
+                "name": "wapen winkel",
+                "terms": "wapenwinkel"
             },
             "shop/window_blind": {
                 "name": "Jaloeziewinkel",
@@ -3412,7 +3468,8 @@
                 "name": "Berghut"
             },
             "tourism/artwork": {
-                "name": "Kunstwerk"
+                "name": "Kunstwerk",
+                "terms": "kunst,object,kunstobject"
             },
             "tourism/attraction": {
                 "name": "Toeristische attractie"
@@ -3425,7 +3482,8 @@
                 "name": "Terrein voor kampeerwagens"
             },
             "tourism/chalet": {
-                "name": "Chalet"
+                "name": "Chalet",
+                "terms": "chalet,vakantiehuis,vakantiehuisje,huisje,bungalow"
             },
             "tourism/guest_house": {
                 "name": "Pension",
@@ -3439,7 +3497,8 @@
                 "terms": "hotel"
             },
             "tourism/information": {
-                "name": "Informatie"
+                "name": "Informatie",
+                "terms": "i,info,vvv"
             },
             "tourism/motel": {
                 "name": "Motel"
@@ -3449,7 +3508,8 @@
                 "terms": "museum"
             },
             "tourism/picnic_site": {
-                "name": "Picknickplek"
+                "name": "Picknickplek",
+                "terms": "park"
             },
             "tourism/theme_park": {
                 "name": "Themapark"

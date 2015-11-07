@@ -226,7 +226,8 @@
     "zoom_in_edit": "Lähennä karttaa ennen muokkaamista",
     "logout": "kirjaudu ulos",
     "loading_auth": "Yhdistetään OpenStreetMap-palveluun...",
-    "report_a_bug": "ilmoita ongelmasta",
+    "report_a_bug": "Ilmoita ongelmasta",
+    "help_translate": "Auta kääntämisessä",
     "feature_info": {
         "hidden_warning": "{count} piilotettua karttakohdetta",
         "hidden_details": "Nämä ominaisuudet ovat nykyisin piilotettu: {details}"
@@ -238,12 +239,12 @@
     },
     "commit": {
         "title": "Tallenna muutokset",
-        "description_placeholder": "Kuvaile lyhyesti karttaan tehtyjä muutoksia",
+        "description_placeholder": "Kuvaile lyhyesti karttaan tehtyjä muutoksia. Kirjoita muokkausten kohdemaan paikallisella kielellä (esimerkiksi Suomessa suomeksi tai ruotsiksi) tai englanniksi.",
         "message_label": "Muutossarjan kommentti",
-        "upload_explanation": "Palvelimelle lähetettävät muutokset tulevat pian näkyviin kaikkiin OpenStreetMap-kartta-aineistoa käyttäviin palveluihin.",
-        "upload_explanation_with_user": "Palvelimelle lähetetään muutokset käyttäjätunnisteella {user}. Muutokset tulevat pian näkyviin kaikkiin OpenStreetMap-kartta-aineistoa käyttäviin palveluihin.",
+        "upload_explanation": "Palvelimelle tallennettavat muutokset tulevat pian näkyviin kaikkiin OpenStreetMap-kartta-aineistoa käyttäviin palveluihin.",
+        "upload_explanation_with_user": "Muutokset tallennetaan palvelimelle käyttäjätunnisteella {user}. Muutokset tulevat pian näkyviin kaikkiin OpenStreetMap-kartta-aineistoa käyttäviin palveluihin.",
         "save": "Tallenna",
-        "cancel": "Peru",
+        "cancel": "Takaisin muokkaamaan",
         "changes": "{count} muutosta",
         "warnings": "Varoitukset",
         "modified": "Muokattu",
@@ -258,13 +259,20 @@
         "selected": "{n} valittu",
         "geometry": "Geometria",
         "closed": "suljettu",
+        "center": "Keskus",
+        "perimeter": "Kehä",
         "length": "Pituus",
         "area": "Alue",
+        "centroid": "Keskusalue",
         "location": "Sijainti",
         "metric": "Metrinen järjestelmä",
         "imperial": "Brittiläinen järjestelmä"
     },
     "geometry": {
+        "point": "piste",
+        "vertex": "keskipiste",
+        "line": "viiva",
+        "area": "alue",
         "relation": "relaatio"
     },
     "geocoder": {
@@ -318,7 +326,8 @@
         "fix_misalignment": "Korjaa ilmakuvavirhe",
         "reset": "palauta",
         "minimap": {
-            "description": "Pienoiskartta"
+            "description": "Pienoiskartta",
+            "tooltip": "Näytä pienoiskartta laajemmalta alueelta nykyisen muokkausnäkymän sijainnin havainnollistamiseksi."
         }
     },
     "map_data": {
@@ -490,9 +499,12 @@
     "help": {
         "title": "Ohje",
         "help": "# Ohje\n\nTämä on ohjelma vapaasti muokattavan \n[OpenStreetMap](http://www.openstreetmap.org/)-kartan\nmuokkaamiseen. Voit käyttää sitä vapaasti alueesi muokkaamiseen ja osallistua ihmisten tekemän \nmaailmankartan luomiseen.\n\nKarttaan tehtävät muutokset ovat näkyvillä kaikille OpenStreetMapin käyttäjille.\nKartan muokkaaminen edellyttää ilmaista [OpenStreetMap-käyttäjätiliä](https://www.openstreetmap.org/login).\n\n[iD-muokkausohjelma](http://ideditor.com/) on yhteistyöprojekti, jonka\n[lähdekoodi on saatavilla GitHubista](https://github.com/openstreetmap/iD).\n\n\n",
+        "editing_saving": "# Muokkaaminen ja tallentaminen \n\nTätä muokkausohjelmaa tulisi ensisijaisesti käyttää toimivalla Internet-yhteydellä, kuten nyt verkkoselaimella. \n\n### Karttakohteiden valitseminen \n\nValitse karttakohde, kuten tie tai ravintola napsauttamalla sitä kerran kartalla. Tällöin karttakohde korostetaan ja vasemmalle avautuu kohteen muokkausnäkymä. \n\nValitse useita karttakohteita kerralla napsauttamalla niitä ja pitämällä Shiht-näppäin pohjassa tai vetämällä kartalle valintaikkuna. Kaikki valintaikkunan sisällä olevat kohteet valitaan. \n\n### Muokkausten tallentaminen \n\nKartalle tehtävät muutokset tallennetaan väliaikaisesti tietokoneelle, kunnes ne siirretään palvelimelle. Älä pelkää virheiden tekemistä - muutoksen voi perua napsauttamalla Kumoa ja tuoda takaisin napsauttamalla Tee uudelleen. \n\nTallenna kaikki karttaan tehdyt muutokset napsauttamalla \"Tallenna\": muista toimia näin säännöllisesti. Karttalaadun varmistamiseksi iD tarkistaa muutokset tyypillisten huolimattomuusvirheiden varalta ja varoittaa, jos osa muutoksista edellyttää toimenpiteitä ennen tallennusta. \n\nJos huomautettavaa ei ole, lisää pieni kommentti tehdyistä muutoksista ja tallenna muutokset palvelimelle napsauttamalla jälleen \"Tallenna\". Muutokset tulevat näkyviin [OpenStreetMap.orgiin](http://www.openstreetmap.org/), jossa ne ovat kaikkien käyttäjien nähtävissä ja tarkasteltavissa. Jos muutokset meinaavat jäädä kesken etkä halua vielä tallentaa niitä, voit sulkea selainikkunan. Seuraavalla kerralla iD-muokkain mahdollistaa viime kerran muokkausten palauttamisten.\n\n### Pikanäppäimet\n\nLuettelo käytössä olevista pikanäppäimistä [löytyy OSM-Wikistä](http://wiki.openstreetmap.org/wiki/ID/Shortcuts).\n",
         "roads": "# Tiet\n\nTällä muokkausohjelmalla voi lisätä, muokata ja poistaa teitä. Tie-sanalla\ntarkoitetaan kaikkia väyliä, kuten moottoriteitä, latuja, polkuja, pyöräteitä\nja monia muita.\n\n### Valitseminen\n\nValitse tie kartalta napsauttamalla sitä. Tien ulkoreuna korostuu, sen viereen\navautuu pikatoimintopalkki ja sivupalkkiin ilmestyy tien kohdemuokkain.\n\n### Siirtäminen ja muotoileminen\n\nKartalta voi löytää usein teitä, jotka eivät täsmää taustalla olevan ilmakuvan\ntai GPS-jäljen kanssa. Tällaiset tiet tulisi siirtää nopeasti oikealle paikalleen.\n\nAloita napsauttamalla siirrettävää tietä. Tien ulkoreunat korostuvat ja sen\nviivapisteet korostuvat. Tien muotoa voi muuttaa vetämällä viivapisteitä\nuusiin paikkoihin. Uuden viivapisteen voi luoda kaksoisnapsauttamalla\nmitä tahansa tien kohtaa, jossa ei jo ole viivapistettä.\n\nJos oikeassa maailmassa on kahden tien risteys, mutta ne eivät risteä\nkartalla, vedä joku viivapiste toiseen tiehen, jolloin niiden välille tulee\nristeys. Ei riitä, että tiet vain näyttävät risteävän kartalla, vaan niillä tulee\nolla yhteinen viivapiste. Tämä on erityisen tärkeää navigaattoreiden\nreititysohjelmistojen toimivuuden vuoksi.\n\nSiirrä koko tietä kerralla pikatoimintopalkin Siirrä-toiminnolla tai painamalla\nnäppäimistöstä M-näppäintä. Siirrä tie uudelle paikalleen ja lukitse siirto\nnapsauttamalla.\n\n### Poistaminen\n\nJos tie on täysin virheellinen - se esimerkiksi puuttuu satelliittikuvasta\nkokonaan tai se ei varmasti ole enää olemassa - se tulee poistaa\nkartalta. Mieti tarkkaan ennen karttakohteiden poistamispäätöstä -\nmuutos näkyy kartalla kaikille ja lisäksi satelliittikuvat ovat usein\nvanhentuneita, joten tie on jo voitu ehtiä rakentaa uudelleen.\n\nPoista tie valitsemalla se ja napsauttamalla sitten roskakorin\nkuvaketta tai napsauttamalla näppäimistön Delete-näppäintä.\n\n### Luominen\n\nPuuttuuko tie kartalta? Aloita tien piirtäminen napsauttamalla yläpalkista\nViiva tai paina pikanäppäintä `2` näppäimistöstä.\n\nNapsauta seuraavaksi tien lähtöpistettä. Jos tie lähtee jo kartalla olevan tien\nristeyksestä, napsauta risteyskohtaa.\n\nJatka napsauttelemalla tielle viivapisteitä säännöllisin välimatkoin\nseuraamalla ilmakuvaa tai GPS-jälkeä. Jos tie risteää jonkun muun tien kanssa, muodosta risteys napsauttamalla risteyskohtaa ja jatka taas normaaliin tapaan. Lopeta piirtäminen ja viimeistele tie\nkaksoisnapsauttamalla tai painamalla Enter-näppäintä. Peru tien piirtäminen ja poista tie painamalla näppäimistön askelpalautinta.\n",
+        "gps": "# GPS \n\nGPS-mittaukset ovat tärkein OpenStreetMapin aineiston lähde. \nTämä muokkausohjelma tukee omalta tietokoneeltasi ladattavia `.gpx`-tiedostoja. \nGPS-mittauksia voi tehdä useilla älypuhelinsovelluksilla ja tietysti myös erillisillä \nGPS-mittalaitteilla. \n\nLisätietoja GPS-mittausten tekemisestä on sivuilla [Mapping with a smartphone, GPS, or paper](http://learnosm.org/en/mobile-mapping/) (Karttatietojen kerääminen älypuhelimella, GPS-laitteella tai paperille) ja [Aloittelijan opas](http://wiki.openstreetmap.org/wiki/Fi:Beginners_Guide_1.1). \n\nKäytä GPX-tiedostoa kartoittamisen apuna vetämällä ja pudottamalla tiedosto kartanmuokkausohjelmaan. Jos se toimii, GPS-jälki ilmestyy karttapohjalle kirkkaanviolettina viivana. Piilota, näytä uudelleen tai muuta tämän GPX-tason lähennystasoa Karttatiedot-valikosta oikeasta reunasta. \n\nTällä tavalla kartoittamisen apuna käytettyä GPX-tiedostoa ei tallenneta OpenStreetMapiin - tiedosto tulee hyödynnettyä parhaiten tallentamalla tiedosto myös muiden [karttakehittäjien käyttöön](http://www.openstreetmap.org/trace/create).\n",
         "imagery": "# Ilmakuvat\n\nIlmakuvat ovat tärkeä kartoittamisen apuväline. Lentokuvien,\nsatelliittikuvien ja vapaasti koottujen materiaalien kokoelma on\nkäytettävissä Taustan asetukset -valikosta oikean reunan sivupalkista.\n\nOletuksena taustalla näytetään [Bing-karttojen](http://www.bing.com/maps/) satelliittikuvat,\nmutta karttaa lähentämällä vaihtoehtoja tulee lisää.\nJoissakin maissa, kuten Suomessa, Ranskassa ja Tanskassa\non saatavilla korkealaatuisia lentokoneesta kuvattuja ilmakuvia.\n\nIlmakuva voi näyttää virheelliseltä palveluntarjoajan sivuston\nvirheen vuoksi. Jos tiestön sijainti heittää ilmakuvasta, älä ala heti\nsiirtämään niitä vastaamaan taustakuvaa, vaan siirrä ilmakuvataustaa\nvastaamaan tiestöä asetuksella \"Korjaa ilmakuvavirhe\"\nTaustan asetusten alaosassa.\n",
         "addresses": "# Osoitteet\n\nOsoitteet ovat yksi tärkeimmistä kartalla olevasta tiedosta.\n\nSen lisäksi että osoitetiedot ovat myös katujen nimiä,\nOpenStreetMapissa ne ovat olennaisia myös rakennusten\nja muiden kadunvarsikohteiden tiedoissa.\n\nOsoitetietoja voi katujen lisäksi lisätä rakennuksien ulkoreunoille\nja paikkapisteille. Paras osoitetietojen lähde on jalkautuminen tai\noma paikallistuntemus. Kuten kaikessa muussakin muokkaamisessa,\ntietojen kopioiminen kaupallisista lähteistä kuten Google Kartoista\non ehdottomasti kielletty.\n",
+        "inspector": "# Kohdemuokkaimen käyttö \n\nKohdemuokkain on näytön vasemmassa reunassa oleva osio, jolla muutetaan valitun kohteen ominaisuuksia.\n\n### Kohteen tyypin valitseminen \n\nPisteen, viivan tai alueen lisäämisen jälkeen valitaan, millainen kohde on kyseessä - kuten kahvila, moottoritie, joki tai leikkipuisto. Kohdemuokkain näyttää heti pikapainikkeet suosituimmille kohteille. Jos kohde ei näy listalla, hae paikkaa hakusanalla ja valitse se sitten luettelosta. Haku ymmärtää myös synonyymit ja paikkaan liittyviä sanoja, joten kokeile sitä rohkeasti. \n\nTarkastele kohdetyypin lisätietoja tarkemmin napsauttamalla i-kirjainta sen oikeassa reunassa. Valitse kohdetyyppi muokattavalle kohteelle napsauttamalla sitä hakutuloslistassa. \n\n### Kohteen tagien muokkaaminen \n\nKun kohdetyyppi on valittu, kohdemuokkain näyttää tietokenttiä, joilla voidaan kuvailla kohteen ominaisuuksia, kuten nimi ja osoite. \n\nKenttäjoukon alapuolella pudotusvalikko, josta löytyy lisätietokenttiä, kuten [Wikipedia-sivu](http://fi.wikipedia.org/), esteettömyystiedot ja paljon muuta.\n\nKohdemuokkaimen alaosassa on Kaikki tagit -kohta, jossa voi lisätä kohteelle mitä tahansa tageja eli ominaisuustietoja. [Taginfosta](http://taginfo.openstreetmap.org/) löytää lisätietoja erilaisista tageista ja niiden käyttömahdollisuuksista.\n\nKohdemuokkaimella tehtävät muutokset päivittyvät muokkauskartalle automaattisesti. Muutoksen voi kuitenkin aina perua napsauttamalla Kumoa-painiketta.\n",
         "buildings": "# Rakennukset\n\nOpenStreetMap sisältää maailman laajimman rakennustietokannan.\nVoit osallistua tämän tietokannan luomiseen ja kehittämiseen.\n\n### Valitseminen\n\nValitse rakennus napsauttamalla sen seinää. Rakennus korostuu,\nrakennuksen viereen tulee pikatoiminto palkki ja rakennuksen\nmuokkausnäkymä avautuu.\n\n### Muokkaaminen\n\nJoskus rakennukset ovat väärin sijoitettuja tai niiden tiedot ovat virheellisiä.\n\nSiirrä rakennusta valitsemalla se ja napsauttamalla Muokkaa. Liikuta\nrakennusta hiirellä ja aseta se uudelle paikalleen napsauttamalla.\n\nMuuta rakennuksen muotoa napsauttamalla ja vetämällä\nsen rajojen pisteitä oikeille kohdille.\n\n### Piirtäminen\n\nYksi yleisimmistä rakennusten piirtämiseen liittyvistä kysymyksistä on se,\nettä OpenStreetMapissa rakennus voidaan piirtää tai merkitä vain pisteellä.\nNyrkkisääntö on, että rakennusten ulkomuodot tulisi aina pyrkiä piirtämään\nmahdollisimman tarkasti ja sijoittaa mahdolliset sisällä toimivat yritykset paikkapisteinä sen sisään.\n\nAloita rakennuksen piirtäminen napsauttamalla yläpalkista Alue.\nPeruuta piirtäminen painamalla näppäimistön askelpalautinta.\nViimeistele rakennus sulkemalla se napsauttamalla lähtöpistettä uudelleen.\n\n### Poistaminen\n\nJos rakennus on täysin virheellinen - se esimerkiksi puuttuu satelliittikuvasta\nkokonaan tai se ei varmasti ole enää olemassa - se tulee poistaa\nkartalta. Mieti tarkkaan ennen karttakohteiden poistamispäätöstä -\nmuutos näkyy kartalla kaikille ja lisäksi satelliittikuvat ovat usein\nvanhentuneita, joten rakennus on jo voitu ehtiä rakentaa uudelleen.\n\nPoista rakennus valitsemalla se ja napsauttamalla sitten roskakorin\nkuvaketta tai napsauttamalla näppäimistön Delete-näppäintä.\n",
         "relations": "# Suhteet\n\nSuhde on erityistyyppinen OpenStreetMap-ominaisuus, joka ryhmittää yhteen muita\nominaisuuksia. Esimerkiksi kaksi yleistä suhdetyyppiä ovat *route relations*,\njotka ryhmittävät yhteen tienosat, jotka kuuluvat tiettyyn moottoritiehen tai\npäätiehen, ja *multipolygons*, jotka ryhmittävät yhteen useita viivoja, jotka määrittävät\nmutkikkaita alueita (sellaisia, joissa on useita kappaleita tai reikiä, kuten donitsissa).\n\nOminaisryhmää suhteessa kutsutaan *members*. Sivupalkissa voit nähdä\nminkä suhteiden jäsenenä ominaisuus on, ja napsauttaa suhdetta siellä\nsen valitsemiseksi. Kun suhde on valittu, voit nähdä kaikki sen jäsenet\nlueteltuina sivupalkissa ja korostettuna kartalla.\n\nEnimmäkseen iD huolehtii suhteiden ylläpidosta automaattisesti muokkauksen\naikana. Tärkein seikka, josta sinun pitäisi olla tietoinen, on että jos poistat\ntienpätkän piirtääksesi sen tarkempaa, sinun pitäisi varmistua, että uusi pätkä on\nsaman suhteen jäsen kuin alkuperäinen.\n\n## Suhteiden muokkaus\n\nJos haluat muokata suhteita, tässä ovat perusasiat.\n\nOminaisuuden lisäämiseksi suhteeseen, valitse ominaisuus, napsauta ”+”-painiketta\nsivupalkin ”All relations”-kappaleessa, ja valitse tai kirjoita suhteen nimi.\n\nUuden suhteen luomisesksi valitse ensin ominaisuus, jonka pitäisi olla jäsen,\nnapsauta ”+”-painiketta ”All relations”-kappaleessa ja valitse ”New relation...”.\n\nOminaisuuden poistamiseksi suhteesta valitse ominaisuus ja napsauta\nroskakoripainiketta sen suhteen vieressä, josta haluat sen poistaa.\n\nVoit luoda monikulmioita rei'illä käyttäen ”Merge”-työkalua. Piirrä kaksi aluetta (sisempi\nja ulompi), pidä Vaihto-näppäin alhaalla ja napsauta niistä kumpaakin molempien\nvalitsemiseksi, ja napsauta sitten ”Merge” (+)-painiketta.\n"
     },
@@ -611,7 +623,9 @@
                         "title": "Sallittu"
                     }
                 },
+                "placeholder": "Ei määritelty",
                 "types": {
+                    "access": "Kaikki",
                     "bicycle": "Pyöräily",
                     "foot": "Kävely",
                     "horse": "Hevoset",
@@ -619,6 +633,7 @@
                 }
             },
             "access_simple": {
+                "label": "Sallittu käyttäjäryhmä",
                 "placeholder": "kyllä"
             },
             "access_toilets": {
@@ -999,6 +1014,9 @@
             "length": {
                 "label": "Pituus (metreinä)"
             },
+            "level": {
+                "label": "Kerros"
+            },
             "levels": {
                 "label": "Kerroslukumäärä",
                 "placeholder": "2, 4, 6..."
@@ -1172,8 +1190,14 @@
             "recycling/glass": {
                 "label": "Lasinkeräys"
             },
+            "recycling/glass_bottles": {
+                "label": "Lasipullojenkeräys"
+            },
             "recycling/paper": {
                 "label": "Paperinkeräys"
+            },
+            "recycling/plastic": {
+                "label": "Muovinkeräys"
             },
             "recycling/type": {
                 "label": "Kierrätyksen tyyppi",
@@ -1674,6 +1698,9 @@
                 "name": "Kierrätyspiste",
                 "terms": "kierrättäminen, kierrätys, lajittelu, uudelleenkäyttö, uudelleenkäyttäminen, ympäristö, lajittelupiste, lajitteluasema, jäte, jätteet, roskat, roska, roskikset, roskis, säiliö, roskasäiliö"
             },
+            "amenity/register_office": {
+                "name": "Maistraatti"
+            },
             "amenity/restaurant": {
                 "name": "Ravintola",
                 "terms": "Ravintola, Ruokaravintola, Bistro, Krouvi, Pizzeria, Ruokala"
@@ -1739,6 +1766,9 @@
             },
             "area": {
                 "name": "Alue"
+            },
+            "area/highway": {
+                "name": "Tien päällyste"
             },
             "barrier": {
                 "name": "Muuri"
@@ -1881,6 +1911,9 @@
             },
             "building/school": {
                 "name": "Koulurakennus"
+            },
+            "building/semidetached_house": {
+                "name": "Paritalo"
             },
             "building/shed": {
                 "name": "Vaja",
@@ -2279,9 +2312,6 @@
             "landuse": {
                 "name": "Maankäyttö"
             },
-            "landuse/allotments": {
-                "name": "Siirtolapuutarha"
-            },
             "landuse/basin": {
                 "name": "Vesiallas"
             },
@@ -2405,7 +2435,7 @@
                 "terms": "leikkipuisto, leikkipaikka, leikki, leikkiä, lapsipuisto, leikkipiste"
             },
             "leisure/running_track": {
-                "name": "Juoksupolku",
+                "name": "Juoksureitti",
                 "terms": "juoksu, juokseminen, polku, rata, reitti, juoksupolku, juoksurata, juoksureitti, liikunta, urheilu, kuntoilu, yleisurheilu"
             },
             "leisure/slipway": {
@@ -2533,6 +2563,10 @@
             "natural/peak": {
                 "name": "Vuorenhuippu",
                 "terms": "Huippu, Vuorenhuippu, Korkein kohta, Vuoren huippu"
+            },
+            "natural/saddle": {
+                "name": "Sola",
+                "terms": "kanjoni, rinne"
             },
             "natural/scree": {
                 "name": "Louhikko",
@@ -2850,7 +2884,8 @@
                 "name": "Suklaapuoti"
             },
             "shop/clothes": {
-                "name": "Vaatekauppa"
+                "name": "Vaatekauppa",
+                "terms": "vaate, muoti, vaatetus, vaatteet, pukeutuminen, pukea, pukeutua, hm, h&m, hennes, mauritz, dressmann, lindex, kappahl, carlings, bikbok, bik bok, seppälä, aleksi13, aleksi 13,  cubus, ginatricot, gina, tricot, halonen, mango, zara, kauppa, liike, yritys, putiikki, myymälä, vaateliike, vaateyritys, vaatemyymälä"
             },
             "shop/computer": {
                 "name": "Tietokoneliike"
@@ -3259,7 +3294,8 @@
                 "name": "Joentörmä"
             },
             "waterway/sanitary_dump_station": {
-                "name": "Satama-WC:n tyhjennystekniikka"
+                "name": "Veneiden jäteveden tyhjennyspiste",
+                "terms": "jätevesi, WC, satama, vene, veneily, lika, likavesi, vesi, viemäri, viemärivesi, jäte, jätteet, tyhjentää, tyhjennys, poisto, poistaa, tyhjentäminen"
             },
             "waterway/stream": {
                 "name": "Puro"

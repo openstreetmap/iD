@@ -143,7 +143,8 @@
             "not_eligible": "Không thể gộp các đối tượng này.",
             "not_adjacent": "Không thể gộp các đường kẻ không nối liền với nhau.",
             "restriction": "Không thể gộp các đường kẻ này vì ít nhất một trong những đường kẻ trực thuộc quan hệ “{relation}”.",
-            "incomplete_relation": "Không thể gộp vì một trong số đối tượng này chưa được tải về hoàn toàn."
+            "incomplete_relation": "Không thể gộp vì một trong số đối tượng này chưa được tải về hoàn toàn.",
+            "conflicting_tags": "Không thể gộp các đường kẻ này vì một số thẻ có giá trị xung đột."
         },
         "move": {
             "title": "Di chuyển",
@@ -226,7 +227,8 @@
     "zoom_in_edit": "Phong to để Sửa đổi",
     "logout": "đăng xuất",
     "loading_auth": "Đang kết nối với OpenStreetMap…",
-    "report_a_bug": "báo cáo lỗi",
+    "report_a_bug": "Báo cáo lỗi",
+    "help_translate": "Hợp tác biên dịch",
     "feature_info": {
         "hidden_warning": "{count} đối tượng ẩn",
         "hidden_details": "Các đối tượng này đang ẩn: {details}"
@@ -1423,6 +1425,9 @@
                 },
                 "placeholder": "Rất chắc, Khá Chắc, Mềm…"
             },
+            "traffic_signals": {
+                "label": "Kiểu"
+            },
             "trail_visibility": {
                 "label": "Tầm nhìn trên Đường mòn",
                 "options": {
@@ -1722,6 +1727,10 @@
             "amenity/marketplace": {
                 "name": "Chợ phiên",
                 "terms": "chợ phiên, chợ trời, chợ xổm, chợ, cho phien, cho troi, cho xom, cho"
+            },
+            "amenity/motorcycle_parking": {
+                "name": "Chỗ Đậu Xe máy",
+                "terms": "chỗ đậu xe máy, đậu xe máy, chỗ đậu mô-tô, chỗ đậu mô tô, đậu mô-tô, chỗ đậu mô tô, chỗ đậu xe hai bánh, đậu xe hai bánh, chỗ đậu xe ba bánh, đậu xe ba bánh, cho dau xe may, dau xe may, cho dau mo-to, cho dau mo to, dau mo-to, dau mo to, cho dau xe hai banh, dau xe hai banh, cho dau xe ba banh, dau xe ba banh"
             },
             "amenity/nightclub": {
                 "name": "Câu lạc bộ Giải trí",
@@ -2058,6 +2067,10 @@
             "building/school": {
                 "name": "Nhà Trường",
                 "terms": "nhà trường, trường học, học viện, nha truong, truong học, hoc vien"
+            },
+            "building/semidetached_house": {
+                "name": "Nhà Bán tách biệt",
+                "terms": "nhà bán tách biệt, nhà bán biệt lập, nha ban tach biet, nha ban biet lap"
             },
             "building/shed": {
                 "name": "Lán",
@@ -2553,7 +2566,7 @@
             },
             "landuse/allotments": {
                 "name": "Khu Vườn Gia đình",
-                "terms": "khu vườn gia đình, khu vuon gia dinh"
+                "terms": "khu vườn gia đình, khu vườn cộng đồng, khu vuon gia dinh, khu vuon cong dong"
             },
             "landuse/basin": {
                 "name": "Lưu vực",
@@ -2707,6 +2720,14 @@
                 "name": "Sân Bóng rổ",
                 "terms": "sân bóng rổ, san bong ro"
             },
+            "leisure/pitch/rugby_league": {
+                "name": "Sân cỏ Bóng bầu dục Liên đoàn",
+                "terms": "sân cỏ bóng bầu dục liên đoàn, sân cỏ banh bầu dục liên đoàn, sân cỏ bóng rugby league, sân cỏ banh rugby league, san co bong bau duc lien doan, san co banh bau duc lien doan, san co bong rugby league, san co banh rugby league"
+            },
+            "leisure/pitch/rugby_union": {
+                "name": "Sân cỏ Bóng bầu dục Liên minh",
+                "terms": "sân cỏ bóng bầu dục liên minh, sân cỏ banh bầu dục liên minh, sân cỏ bóng rugby union, sân cỏ banh rugby union, san co bong bau duc lien minh, san co banh bau duc lien minh, san co bong rugby union, san co banh rugby union"
+            },
             "leisure/pitch/skateboard": {
                 "name": "Công viên Trượt ván",
                 "terms": "công viên trượt ván, sân trượt ván, công viên trượt patin, sân trượt patin, cong vien truot van, san truot van, cong vien truot patin, san truot patin"
@@ -2847,9 +2868,29 @@
                 "name": "Boong ke",
                 "terms": "boong ke, boong-ke, boongke"
             },
+            "military/checkpoint": {
+                "name": "Trạm Kiểm soát",
+                "terms": "trạm kiểm soát, tram kiem soat"
+            },
+            "military/danger_area": {
+                "name": "Khu vực Nguy hiểm",
+                "terms": "khu vực nguy hiểm, vùng nguy hiểm, khu vuc nguy hiem, vung nguy hiem"
+            },
+            "military/naval_base": {
+                "name": "Căn cứ Hải quân",
+                "terms": "căn cứ hải quân, can cu hai quan"
+            },
+            "military/obstacle_course": {
+                "name": "Đường Chạy vượt Chướng ngại vật",
+                "terms": "đường chạy vượt chướng ngại vật, duong chay vuot chuong ngai vat"
+            },
             "military/range": {
                 "name": "Tầm đạn",
                 "terms": "tầm đạn, tầm súng, tam dan, tam sung"
+            },
+            "military/training_area": {
+                "name": "Khu Tập luyện",
+                "terms": "khu tập luyện, khu luyện tập, khu tap luyen, khu luyen tap"
             },
             "natural": {
                 "name": "Thiên nhiên",

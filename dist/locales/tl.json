@@ -215,7 +215,6 @@
     "zoom_in_edit": "Mag-zoom-in para makapag-edit",
     "logout": "Mag-logout",
     "loading_auth": "Kumokonekta sa OpenStreetMap ...",
-    "report_a_bug": "I-ulat ang bug",
     "status": {
         "error": "Hindi maka-konekta sa API.",
         "offline": "Kasalukuyang offline ang API. Subukang mag-edit muli sa ibang pagkakataon.",

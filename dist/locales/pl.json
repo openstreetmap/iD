@@ -226,7 +226,6 @@
     "zoom_in_edit": "Powiększ, aby edytować",
     "logout": "wyloguj",
     "loading_auth": "Łączenie z OpenStreetMap...",
-    "report_a_bug": "zgłoś błąd",
     "feature_info": {
         "hidden_warning": "{count} ukrytych obiektów",
         "hidden_details": "Te obiekty są obecnie ukryte: {details}"
@@ -1837,9 +1836,6 @@
                 "name": "Budynek w budowie",
                 "terms": "Budowa"
             },
-            "building/detached": {
-                "name": "Dom wolnostojący"
-            },
             "building/dormitory": {
                 "name": "Akademik",
                 "terms": "Akademik, bursa, internat"
@@ -2282,10 +2278,6 @@
             },
             "landuse": {
                 "name": "Zagospodarowanie terenu"
-            },
-            "landuse/allotments": {
-                "name": "Ogródki działkowe",
-                "terms": "działki,ogródki,ogródek"
             },
             "landuse/basin": {
                 "name": "Zbiornik wodny",

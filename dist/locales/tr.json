@@ -217,7 +217,6 @@
     "zoom_in_edit": "Güncellemek/değiştirmek için görüntüyü yakınlaştır.",
     "logout": "Çıkış",
     "loading_auth": "OpenStreetMap'e bağlanıyor...",
-    "report_a_bug": "Hata rapor et",
     "status": {
         "error": "APIya bağlanılamıyor.",
         "offline": "API kapalı. Daha sonra yeniden dene.",
@@ -1333,9 +1332,6 @@
             "building/construction": {
                 "name": "Yapı İnşaat Aşamasında"
             },
-            "building/detached": {
-                "name": "Ayrık Ev"
-            },
             "building/dormitory": {
                 "name": "Yurt"
             },
@@ -1635,9 +1631,6 @@
             },
             "junction": {
                 "name": "Yol Ayrımı"
-            },
-            "landuse/allotments": {
-                "name": "Bostanlar"
             },
             "landuse/basin": {
                 "name": "Havza"

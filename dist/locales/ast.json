@@ -226,7 +226,6 @@
     "zoom_in_edit": "Averar pa editar",
     "logout": "zarrar sesión",
     "loading_auth": "Coneutando con OpenStreetMap...",
-    "report_a_bug": "informar d'un fallu",
     "feature_info": {
         "hidden_warning": "{count} carauterístiques tapecíes",
         "hidden_details": "Anguaño estes carauterístiques tán tapecíes: {details}"
@@ -1850,9 +1849,6 @@
                 "name": "Edificiu en construcción",
                 "terms": "Obra, Arreglu"
             },
-            "building/detached": {
-                "name": "Vivienda aisllada"
-            },
             "building/dormitory": {
                 "name": "Residencia"
             },
@@ -2289,9 +2285,6 @@
             },
             "historic/wayside_shrine": {
                 "name": "Capiella"
-            },
-            "landuse/allotments": {
-                "name": "Güertes recreatives"
             },
             "landuse/basin": {
                 "name": "Acumulación d'agües"

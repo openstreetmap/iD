@@ -143,7 +143,8 @@
             "not_eligible": "Aquestes característiques no poden ser fusionades.",
             "not_adjacent": "Aquestes línies no poden ser com fusionades ja que no estan connectades.",
             "restriction": "Aquestes línies no poden ser fusionades perquè com a mínim una d'elles és membre de la relació \"{relation}\"",
-            "incomplete_relation": "Aquestes característiques no poden ser fusionades perquè com a mínim una d'elles no s'ha descarregat del tot."
+            "incomplete_relation": "Aquestes característiques no poden ser fusionades perquè com a mínim una d'elles no s'ha descarregat del tot.",
+            "conflicting_tags": "Aquestes línies no poden ser fusionades ja que algunes de les seves etiquetes tenen valors conflictius."
         },
         "move": {
             "title": "Moure",
@@ -226,7 +227,8 @@
     "zoom_in_edit": "Apropeu-vos més per editar",
     "logout": "Tancar la sessió",
     "loading_auth": "Connectant a OpenStreetMap...",
-    "report_a_bug": "Reportar un error",
+    "report_a_bug": "Informa d'un error",
+    "help_translate": "Ajuda a traduir-lo",
     "feature_info": {
         "hidden_warning": "{count} característiques ocultes",
         "hidden_details": "S'han ocultat aquestes característiques: {details}"
@@ -1423,6 +1425,9 @@
                 },
                 "placeholder": "Sòlid, majoritàriament sòlid, tou..."
             },
+            "traffic_signals": {
+                "label": "Tipus"
+            },
             "trail_visibility": {
                 "label": "Visibilitat del camí",
                 "options": {
@@ -1693,6 +1698,9 @@
                 "name": "Mercat",
                 "terms": "Mercat, Mercat veïnal, Mercat de carrer"
             },
+            "amenity/motorcycle_parking": {
+                "name": "Aparcament per a motocicletes"
+            },
             "amenity/nightclub": {
                 "name": "Club nocturn"
             },
@@ -1938,8 +1946,7 @@
                 "name": "Edifici en construcció"
             },
             "building/detached": {
-                "name": "Xalet unifamiliar",
-                "terms": "casa aïllada, casa d'urbanització, xalet, chalet, xalets, chalets, casa i jardí, casa amb jardí"
+                "name": "Casa a quatre vents"
             },
             "building/dormitory": {
                 "name": "Edifici d'habitacions"
@@ -1996,6 +2003,9 @@
             "building/school": {
                 "name": "Edifici escolar",
                 "terms": "Escola, Gimnàs, Poliesportiu, Aulari, Seminaris, Pati, Esbarjo, Aules, Despatxos, Tallers, Ateliers, Aules d'informàtica, Classes, Classe, Sala de música, Corredors, Corredor, Pasillo, Pasillos, Passadís, Passadissos, Sala de professors, Recepció"
+            },
+            "building/semidetached_house": {
+                "name": "Casa adossada"
             },
             "building/shed": {
                 "name": "Traster"
@@ -2413,8 +2423,7 @@
                 "name": "Ús de la terra"
             },
             "landuse/allotments": {
-                "name": "Horts",
-                "terms": "Assignació"
+                "name": "Jardí comunitari"
             },
             "landuse/basin": {
                 "name": "Bassa",
@@ -2550,6 +2559,12 @@
                 "name": "Pista de bàsquet",
                 "terms": "Pista de bàsquet, Pavelló de bàsquet"
             },
+            "leisure/pitch/rugby_league": {
+                "name": "Camp de la lliga de Rugbi"
+            },
+            "leisure/pitch/rugby_union": {
+                "name": "Camp de la Unió de Rugbi"
+            },
             "leisure/pitch/skateboard": {
                 "name": "Parc per a skates"
             },
@@ -2674,8 +2689,23 @@
             "military/bunker": {
                 "name": "Búnquer"
             },
+            "military/checkpoint": {
+                "name": "Punt de control"
+            },
+            "military/danger_area": {
+                "name": "Àrea de perill"
+            },
+            "military/naval_base": {
+                "name": "Base Naval"
+            },
+            "military/obstacle_course": {
+                "name": "Cursa d'obstacles"
+            },
             "military/range": {
                 "name": "Terreny per a usos militars"
+            },
+            "military/training_area": {
+                "name": "Àrea d'entrenament"
             },
             "natural": {
                 "name": "Natural"

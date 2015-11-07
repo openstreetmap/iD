@@ -217,7 +217,6 @@
     "zoom_in_edit": "Za urejanje približaj pogled",
     "logout": "odjava",
     "loading_auth": "Povezovanje z OpenStreetMap...",
-    "report_a_bug": "prijavi napako",
     "status": {
         "error": "Ne morem se povezati na API.",
         "offline": "API je offline. Prosimo, poskusite urejati kasneje.",
@@ -1598,10 +1597,6 @@
                 "name": "Stavba v izgradnji",
                 "terms": "stavba v gradnji"
             },
-            "building/detached": {
-                "name": "Enodružinska hiša",
-                "terms": "samostojna hiša"
-            },
             "building/dormitory": {
                 "name": "Študentski/dijaški dom",
                 "terms": "študentski dom,dijaški dom"
@@ -2108,10 +2103,6 @@
             "historic/wayside_shrine": {
                 "name": "Kapelica",
                 "terms": "kapelica"
-            },
-            "landuse/allotments": {
-                "name": "Vrtički",
-                "terms": "vrtci,vrtovi"
             },
             "landuse/basin": {
                 "name": "Čistilni bazen",

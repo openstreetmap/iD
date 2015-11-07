@@ -194,7 +194,6 @@
     "zoom_in_edit": "كبّر للتحرير",
     "logout": "تسجيل خروج",
     "loading_auth": "اﻹتصال ب OpenStreetMap جاري ....",
-    "report_a_bug": "بلّغ عن علة",
     "status": {
         "error": "تعذر اﻹتصال مع واجهة التطبيق البرمجية.",
         "offline": "حالة API غير متصلة. الرجاء محاولة التحرير لاحقا."
@@ -1250,10 +1249,6 @@
             "historic/wayside_shrine": {
                 "name": "مقام نصراني على الطريق",
                 "terms": "مقام نصراني على الطريق"
-            },
-            "landuse/allotments": {
-                "name": "مزارع مخصصة",
-                "terms": "مزارع مخصصة"
             },
             "landuse/basin": {
                 "name": "حوض",

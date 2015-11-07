@@ -114,7 +114,7 @@
             "connected_to_hidden": "這個沒辦法刪除，因為與其他隱藏的圖徵相連"
         },
         "add_member": {
-            "annotation": "給關係添加了一成員。"
+            "annotation": "給關係增加了一成員。"
         },
         "delete_member": {
             "annotation": "從關係移除了一成員。"
@@ -143,7 +143,8 @@
             "not_eligible": "不能合併這些物件。",
             "not_adjacent": "這些線段並不連接，不能合併。",
             "restriction": "這些線段不能合併，因為其中最少有一條線段是\"{relation}\" 關係的成員。",
-            "incomplete_relation": "這些物件不能合併，因為其中最少有一件未有完全下載。"
+            "incomplete_relation": "這些物件不能合併，因為其中最少有一件未有完全下載。",
+            "conflicting_tags": "這些線段並不能合併，因為它們的標籤並不一樣。"
         },
         "move": {
             "title": "移動",
@@ -226,7 +227,8 @@
     "zoom_in_edit": "放大以開始編輯",
     "logout": "登出",
     "loading_auth": "正在連接 OpenStreetMap...",
-    "report_a_bug": "回報編輯器問題",
+    "report_a_bug": "回報錯誤",
+    "help_translate": "協助翻譯",
     "feature_info": {
         "hidden_warning": "{count} 隱藏的圖徵",
         "hidden_details": "這些圖徵現在被隱藏.: {details}"
@@ -317,7 +319,7 @@
     "background": {
         "title": "背景",
         "description": "背景圖像設定",
-        "percent_brightness": "{opacity}%的光度",
+        "percent_brightness": "{opacity}%的亮度",
         "none": "無",
         "custom": "客製化",
         "custom_button": "編輯自訂的背景",
@@ -1423,6 +1425,9 @@
                 },
                 "placeholder": "堅硬地面、硬物鋪面、軟鋪面"
             },
+            "traffic_signals": {
+                "label": "號誌種類"
+            },
             "trail_visibility": {
                 "label": "路徑可見度",
                 "options": {
@@ -1723,6 +1728,10 @@
                 "name": "市場",
                 "terms": "市集,傳統市場,marketplace"
             },
+            "amenity/motorcycle_parking": {
+                "name": "機車停車場",
+                "terms": "機車停車場,速克達停車場,摩托車停車場"
+            },
             "amenity/nightclub": {
                 "name": "夜總會",
                 "terms": "夜店"
@@ -1992,8 +2001,8 @@
                 "terms": "大樓施工建造"
             },
             "building/detached": {
-                "name": "獨立式住宅",
-                "terms": "獨立式家屋,獨立式房子"
+                "name": "獨立式房屋",
+                "terms": "獨立式住宅,獨立式房子"
             },
             "building/dormitory": {
                 "name": "宿舍",
@@ -2058,6 +2067,10 @@
             "building/school": {
                 "name": "中小學建築物",
                 "terms": "學校建物,學校建築,小學建築,中學建築"
+            },
+            "building/semidetached_house": {
+                "name": "半獨立式房屋",
+                "terms": "半獨立式住宅,半獨立式房子"
             },
             "building/shed": {
                 "name": "小屋",
@@ -2553,7 +2566,7 @@
             },
             "landuse/allotments": {
                 "name": "社區農園",
-                "terms": "社區田圃,城市農園,社區園圃"
+                "terms": "社區田圃,城市農園,社區園圃,社區農地"
             },
             "landuse/basin": {
                 "name": "水池",
@@ -2707,6 +2720,14 @@
                 "name": "籃球場",
                 "terms": "籃球場,球場"
             },
+            "leisure/pitch/rugby_league": {
+                "name": "聯盟式橄欖球",
+                "terms": "聯盟式橄欖球"
+            },
+            "leisure/pitch/rugby_union": {
+                "name": "聯合式橄欖球",
+                "terms": "聯合式橄欖球"
+            },
             "leisure/pitch/skateboard": {
                 "name": "滑板公園",
                 "terms": "滑板場,極限公園,極限運動公園"
@@ -2847,9 +2868,29 @@
                 "name": "碉堡",
                 "terms": "地堡"
             },
+            "military/checkpoint": {
+                "name": "崗哨",
+                "terms": "軍事崗哨,哨點"
+            },
+            "military/danger_area": {
+                "name": "危險區",
+                "terms": "危險地區,危險區域"
+            },
+            "military/naval_base": {
+                "name": "海軍基地",
+                "terms": "軍港"
+            },
+            "military/obstacle_course": {
+                "name": "障礙物",
+                "terms": "障礙物"
+            },
             "military/range": {
                 "name": "軍事靶場",
                 "terms": "靶場"
+            },
+            "military/training_area": {
+                "name": "訓練場地",
+                "terms": "教練場"
             },
             "natural": {
                 "name": "自然景觀",

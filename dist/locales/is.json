@@ -205,7 +205,6 @@
     "zoom_in_edit": "Þysja inn til að breyta",
     "logout": "útskrá",
     "loading_auth": "Tengist við OpenStreetMap...",
-    "report_a_bug": "tilkynna villu",
     "status": {
         "error": "Get ekki tengst við API.",
         "offline": "API er ekki tiltækur. Vinsamlegast reyndu að breyta aftur síðar.",
@@ -1128,9 +1127,6 @@
             "building/construction": {
                 "name": "Á byggingarstigi"
             },
-            "building/detached": {
-                "name": "Raðhús"
-            },
             "building/dormitory": {
                 "name": "Heimavist"
             },
@@ -1381,9 +1377,6 @@
             },
             "historic/wayside_shrine": {
                 "name": "Tilbeiðsluskríni"
-            },
-            "landuse/allotments": {
-                "name": "Ræktunargarðar"
             },
             "landuse/basin": {
                 "name": "Lægð"

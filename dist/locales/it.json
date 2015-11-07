@@ -143,7 +143,8 @@
             "not_eligible": "Questi elementi non possono essere uniti.",
             "not_adjacent": "Queste linee non possono essere unite perché non sono connesse.",
             "restriction": "Queste linee non possono essere unite perché almeno una è membro di una relazione \"{relation}\".",
-            "incomplete_relation": "Questi elementi non posso essere uniti perché almeno uno di loro non è stato completamente scaricato."
+            "incomplete_relation": "Questi elementi non posso essere uniti perché almeno uno di loro non è stato completamente scaricato.",
+            "conflicting_tags": "Queste linee non possono essere unite perché alcuni dei loro tag sono in conflitto tra loro."
         },
         "move": {
             "title": "Muovi",
@@ -226,7 +227,6 @@
     "zoom_in_edit": "Ingrandisci per modificare",
     "logout": "esci",
     "loading_auth": "Connettendomi ad OpenStreetMap...",
-    "report_a_bug": "segnala un bug",
     "feature_info": {
         "hidden_warning": "{count} elementi nascosti",
         "hidden_details": "Questi sono gli elementi attualmente nascosti: {details}"
@@ -1718,6 +1718,10 @@
                 "name": "Mercato",
                 "terms": "Mercato"
             },
+            "amenity/motorcycle_parking": {
+                "name": "Parcheggio moto",
+                "terms": "parcheggio scooter,moto,scooter"
+            },
             "amenity/nightclub": {
                 "name": "Discoteca",
                 "terms": "discoteca,night,locale notturno,balera"
@@ -1984,8 +1988,8 @@
                 "terms": "cantiere,struttura,in costruzione"
             },
             "building/detached": {
-                "name": "Casa autonoma",
-                "terms": "casa autonoma"
+                "name": "Casa indipendente",
+                "terms": "abitazione indipendente,indipendente"
             },
             "building/dormitory": {
                 "name": "Dormitorio",
@@ -2049,6 +2053,10 @@
             "building/school": {
                 "name": "Edificio scolastico",
                 "terms": "accademia,alma mater,lavagna,collegio,dipartimento,disciplina,classe,facoltà,aula,istituto,istituzione,riformatorio,scuola,edificio scolastico,seminario,università"
+            },
+            "building/semidetached_house": {
+                "name": "Casa semi indipendente",
+                "terms": "semi-indipendente,semiindipendente,semindipendente, abitazione semi indipendente"
             },
             "building/shed": {
                 "name": "Capanno",
@@ -2483,7 +2491,7 @@
             },
             "landuse/allotments": {
                 "name": "Orti in concessione",
-                "terms": "Area pubblica concessa ai cittadini per la realizzazione di orti"
+                "terms": "orti,orto,pubblico,concessione,comune,giardino,lotto"
             },
             "landuse/basin": {
                 "name": "Bacino",
@@ -2773,8 +2781,20 @@
                 "name": "Bunker",
                 "terms": "bunker,casamatta"
             },
+            "military/checkpoint": {
+                "name": "Posto di controllo",
+                "terms": "checkpoint,check point,posto di blocco"
+            },
+            "military/naval_base": {
+                "name": "Base navale",
+                "terms": "base,navi,marina,marina militare"
+            },
             "military/range": {
                 "name": "Poligono di tiro militare"
+            },
+            "military/training_area": {
+                "name": "Area di addestramento",
+                "terms": "campo di addestramento,addestramento"
             },
             "natural": {
                 "name": "Naturale",

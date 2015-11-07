@@ -226,7 +226,6 @@
     "zoom_in_edit": "Aproxime para Editar",
     "logout": "Encerrar sessão",
     "loading_auth": "A estabelecer a ligação ao OpenStreetMap...",
-    "report_a_bug": "Reportar um erro",
     "feature_info": {
         "hidden_warning": "{count} elementos escondidos",
         "hidden_details": "Estes elementos estão neste momento ocultados: {details}"
@@ -619,7 +618,9 @@
                         "title": "Permitido"
                     }
                 },
+                "placeholder": "Não especificado",
                 "types": {
+                    "access": "A todos",
                     "bicycle": "Bicicletas",
                     "foot": "Peões",
                     "horse": "Animais",
@@ -627,6 +628,7 @@
                 }
             },
             "access_simple": {
+                "label": "Acesso permitido",
                 "placeholder": "sim"
             },
             "access_toilets": {
@@ -1376,7 +1378,7 @@
                 "label": "Vigiado"
             },
             "surface": {
-                "label": "Tipo de Superfície "
+                "label": "Tipo de superfície "
             },
             "tactile_paving": {
                 "label": "Pavimentação Táctil"
@@ -1406,7 +1408,7 @@
                 "label": "Tipo de torre"
             },
             "tracktype": {
-                "label": "Qualidade da Superfície ",
+                "label": "Qualidade da superfície ",
                 "options": {
                     "grade1": "1 - Sólida: pavimentada ou com material fortemente compactado",
                     "grade2": "2 - Sobretudo sólida: cascalho ou pedras misturadas com algum material macio",
@@ -1415,6 +1417,9 @@
                     "grade5": "5 - Macia: Terra, erva ou areia"
                 },
                 "placeholder": "Sólido, Intermédio, Macio..."
+            },
+            "traffic_signals": {
+                "label": "Tipo"
             },
             "trail_visibility": {
                 "label": "Visibilidade",
@@ -1617,7 +1622,8 @@
                 "terms": "Lavagem, Lavagem Automática, Mangueira, Limpeza"
             },
             "amenity/casino": {
-                "name": "Casino"
+                "name": "Casino",
+                "terms": "Casino"
             },
             "amenity/charging_station": {
                 "name": "Posto de Carregamento para Veículos Elétricos",
@@ -1715,6 +1721,10 @@
                 "name": "Mercado / Feira",
                 "terms": "Bazar, Minimercado"
             },
+            "amenity/motorcycle_parking": {
+                "name": "Parque de Motas",
+                "terms": "Motorcycle Parking, Motas"
+            },
             "amenity/nightclub": {
                 "name": "Clube Nocturno",
                 "terms": "Nightclub, Discoteca"
@@ -1788,7 +1798,8 @@
                 "terms": "Bar, Cafetaria, Café, Cantina, Almoço, Jantar, Cozinha, Restaurante, Pizzaria, Culinária, Gastronomia, Restauração"
             },
             "amenity/sanitary_dump_station": {
-                "name": "Escoamento sanitário de autocaravana"
+                "name": "Escoamento sanitário de autocaravana",
+                "terms": "RV Toilet Disposal"
             },
             "amenity/school": {
                 "name": "Escola",
@@ -1863,7 +1874,7 @@
                 "terms": "Espaço, Extensão, Zona"
             },
             "area/highway": {
-                "name": "Superfície da Estrada"
+                "name": "Área de Estrada"
             },
             "barrier": {
                 "name": "Barreira",
@@ -1982,8 +1993,7 @@
                 "terms": "Building Under Construction, Edifício sob Construção"
             },
             "building/detached": {
-                "name": "Casa Isolada",
-                "terms": "Detached Home, Cabana, Bangaló, Villa, Mansão"
+                "name": "Casa Isolada"
             },
             "building/dormitory": {
                 "name": "Dormitório",
@@ -2048,6 +2058,9 @@
             "building/school": {
                 "name": "Edifício Escolar",
                 "terms": "School Building, Pavilhão Escolar"
+            },
+            "building/semidetached_house": {
+                "name": "Casa Semi-isolada"
             },
             "building/shed": {
                 "name": "Barracão",
@@ -2536,8 +2549,7 @@
                 "name": "Uso do Solo"
             },
             "landuse/allotments": {
-                "name": "Hortas",
-                "terms": "Horta Comunitária, Horta Urbana"
+                "name": "Horta / Jardin Comunitário"
             },
             "landuse/basin": {
                 "name": "Bacia Hidrográfica",
@@ -2826,9 +2838,21 @@
                 "name": "Bunker",
                 "terms": "Bunker"
             },
+            "military/danger_area": {
+                "name": "Área de Perigo"
+            },
+            "military/naval_base": {
+                "name": "Base Naval"
+            },
+            "military/obstacle_course": {
+                "name": "Pista de Obstáculos "
+            },
             "military/range": {
                 "name": "Pista de Tiro",
                 "terms": "Military Range"
+            },
+            "military/training_area": {
+                "name": "Área de Treinos"
             },
             "natural": {
                 "name": "Natural",

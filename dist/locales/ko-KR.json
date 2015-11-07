@@ -212,9 +212,6 @@
             "historic/monument": {
                 "name": "산"
             },
-            "landuse/allotments": {
-                "name": "텃밭"
-            },
             "landuse/basin": {
                 "name": "온천"
             },

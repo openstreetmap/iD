@@ -275,6 +275,9 @@
             "highway/bridleway": {
                 "name": "Bridleway"
             },
+            "landuse/allotments": {
+                "name": "Allotments"
+            },
             "leisure/pitch/baseball": {
                 "name": "Baseball"
             },

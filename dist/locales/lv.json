@@ -157,7 +157,6 @@
     "zoom_in_edit": "Pietuvināt, lai labotu",
     "logout": "atslēgties",
     "loading_auth": "Savienojas ar OpenStreetMap...",
-    "report_a_bug": "ziņot par kļūdu",
     "status": {
         "error": "Nevarēja savienoties ar API."
     },

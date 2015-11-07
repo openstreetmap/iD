@@ -204,7 +204,6 @@
     "zoom_in_edit": "بزرگنمایی برای ویرایش",
     "logout": "خروج",
     "loading_auth": "در حال اتصال به OpenStreetMap...",
-    "report_a_bug": "گزارش یک باگ",
     "status": {
         "error": "اتصال به API ممکن نیست.",
         "offline": "API آفلاین است. لطفا ویرایش را بعدا مجدد انجام دهید.",
@@ -1654,9 +1653,6 @@
             },
             "historic/wayside_shrine": {
                 "name": "آرامگاه کنار جاده"
-            },
-            "landuse/allotments": {
-                "name": "بخش پرورش گل و سبزیجات"
             },
             "landuse/basin": {
                 "name": "حوزه رودخانه"

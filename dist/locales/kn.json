@@ -168,7 +168,14 @@
         "list": "ಸಂಪಾದನೆಗಳು {ಬಳಕೆದಾರ ಮೂಲಕ}"
     },
     "infobox": {
-        "area": "‍ಪ್ರದೇಶ"
+        "geometry": "‍",
+        "closed": "‍ಮುಚ್ಚಿದ",
+        "center": "ಮಧ್ಯ",
+        "perimeter": "‍ಪರಿಧಿ",
+        "length": "ಉದ್ದ",
+        "area": "‍ಪ್ರದೇಶ",
+        "centroid": "‍ಮಧ್ಯಬಿಂದು",
+        "location": "‍ಸ್ಥಳ"
     },
     "geometry": {
         "point": "ಬಿಂದು",
@@ -183,6 +190,7 @@
         "title": "ನನ್ನ ಸ್ಥಳವನ್ನು ತೋರಿಸಿ"
     },
     "inspector": {
+        "show_more": "‍ಇನ್ನೂ ತೋರಿಸು",
         "role": "ಪಾತ್ರ",
         "back_tooltip": "ಲಕ್ಷಣವನ್ನು ಬದಲಿಸು",
         "remove": "ತೆಗೆದುಹಾಕು",
@@ -340,12 +348,16 @@
         },
         "fields": {
             "access": {
+                "label": "ಅನುಮತಿಸಲಾದ ಪ್ರವೇಶ",
                 "options": {
                     "designated": {
                         "title": "ನಿಯೋಜಿತ"
                     },
                     "destination": {
                         "title": "ತಲಪುದಾಣ"
+                    },
+                    "dismount": {
+                        "title": "ಬೇರ್ಪಡಿಸು"
                     },
                     "no": {
                         "description": "ಸಾರ್ವಜನಿಕ ಪ್ರವೇಶಕ್ಕೆ ಅನುಮತಿ ಇಲ್ಲ",
@@ -361,7 +373,9 @@
                         "title": "ಅನುಮತಿಸು"
                     }
                 },
+                "placeholder": "‍ನಿರ್ದಿಷ್ಟ‍‍ಪಡಿಸಿಲ್ಲ",
                 "types": {
+                    "access": "‍ಎಲ್ಲಾ",
                     "bicycle": "ಸೈಕಲ್",
                     "foot": "ಕಾಲು",
                     "horse": "ಕುದುರೆ",
@@ -369,6 +383,7 @@
                 }
             },
             "access_simple": {
+                "label": "ಅನುಮತಿಸಲಾದ ಪ್ರವೇಶ‍",
                 "placeholder": "ಹೌದು"
             },
             "access_toilets": {
@@ -510,6 +525,9 @@
             "construction": {
                 "label": "ವಿಧ"
             },
+            "content": {
+                "label": "‍"
+            },
             "country": {
                 "label": "ದೇಶ"
             },
@@ -527,6 +545,18 @@
             },
             "cuisine": {
                 "label": "ಪಾಕಪದ್ಧತಿ"
+            },
+            "cycleway": {
+                "options": {
+                    "none": {
+                        "title": "‍‍ಯಾವುದೂ ಇಲ್ಲದ"
+                    }
+                },
+                "placeholder": "‍‍ಯಾವುದೂ ಇಲ್ಲದ",
+                "types": {
+                    "cycleway:left": "‍ಎಡಗಡೆ",
+                    "cycleway:right": "ಬಲಗಡೆ"
+                }
             },
             "delivery": {
                 "label": "ವಿತರಣೆ"
@@ -659,6 +689,7 @@
                 "label": "ಅಂತರ್ಜಾಲ ಸಂಪರ್ಕ",
                 "options": {
                     "no": "ಇಲ್ಲ",
+                    "terminal": "‍ನಿಲ್ದಾಣ",
                     "wired": "ತಂತಿಯುಕ್ತ",
                     "wlan": "ವೈಫೈ",
                     "yes": "ಹೌದು"
@@ -679,9 +710,17 @@
             },
             "leaf_cycle": {
                 "options": {
+                    "deciduous": "‍ಪತನಶೀಲ",
+                    "evergreen": "‍ಹಚ್ಚ ಹಸಿರಾದ",
                     "mixed": "ಮಿಶ್ರಿತ",
                     "semi_deciduous": "ಅರೆ-ಪತನಶೀಲ",
                     "semi_evergreen": "ಅರೆ ಹರಿದ್ವರ್ಣ"
+                }
+            },
+            "leaf_cycle_singular": {
+                "options": {
+                    "deciduous": "‍ಪತನಶೀಲ‍",
+                    "evergreen": "‍‍‍ಹಚ್ಚ ಹಸಿರಾದ"
                 }
             },
             "leaf_type": {
@@ -691,6 +730,12 @@
                     "leafless": "ಎಲೆಯಿಲ್ಲದ",
                     "mixed": "ಮಿಶ್ರಿತ",
                     "needleleaved": "ಚುಪಾದ ಎಲೆ"
+                }
+            },
+            "leaf_type_singular": {
+                "label": "‍ಎಲೆಯ ವಿಧ",
+                "options": {
+                    "needleleaved": "‍ಚೂಪಾದ ಎಲೆಗಳು"
                 }
             },
             "leisure": {
@@ -723,6 +768,7 @@
                 "placeholder": "0, 1, 2, 3..."
             },
             "mtb/scale/imba": {
+                "label": "‍",
                 "options": {
                     "0": "ಅತಿ ಸುಲಭ (ಬಿಳಿಯ ವರ್ತುಲ)",
                     "1": "ಸುಲ್ಕಭ(ಹಸಿರು ವರ್ತುಲ)",
@@ -733,6 +779,7 @@
                 "placeholder": "ಸುಲಭ, ಸಾಧಾರಣ, ಕಷ್ಟ ... "
             },
             "mtb/scale/uphill": {
+                "label": "‍",
                 "placeholder": "0, 1, 2, 3..."
             },
             "name": {
@@ -785,7 +832,8 @@
                 "options": {
                     "multi-storey": "ಬಹುಮಟ್ಟದ",
                     "sheds": "ತಂಗುದಾಣ",
-                    "surface": "ಮೇಲ್ಮೈ"
+                    "surface": "ಮೇಲ್ಮೈ",
+                    "underground": "‍‍‍"
                 }
             },
             "phone": {
@@ -825,6 +873,9 @@
             },
             "power": {
                 "label": "ವಿಧ"
+            },
+            "power_supply": {
+                "label": "‍ವಿದ್ಯುತ್ ಸರಬರಾಜು"
             },
             "railway": {
                 "label": "ವಿಧ"
@@ -875,7 +926,10 @@
                 "label": "ವಿಧ"
             },
             "smoking": {
-                "label": "ಧೂಮಪಾನ"
+                "label": "ಧೂಮಪಾನ",
+                "options": {
+                    "no": "‍ಎಲ್ಲಿಯೂ ಧೂಮಪಾನ ಮಾಡುವಂತಿಲ್ಲ"
+                }
             },
             "source": {
                 "label": "ಮೂಲ"
@@ -890,9 +944,11 @@
                 "label": "ಕ್ರೀಡೆ"
             },
             "structure": {
+                "label": "‍‍ರಚನೆ",
                 "options": {
                     "bridge": "ಸೇತುವೆ",
                     "embankment": "ಏರಿ",
+                    "ford": "‍ಕಾಲ್ಗಡ",
                     "tunnel": "ಸುರಂಗ"
                 },
                 "placeholder": "ತಿಳಿಯದ"
@@ -912,8 +968,17 @@
                     "yes": "ಹೌದು"
                 }
             },
+            "toilets/disposal": {
+                "options": {
+                    "chemical": "‍ರಾಸಾಯನಿಕ",
+                    "flush": "‍‍"
+                }
+            },
             "tourism": {
                 "label": "ವಿಧ"
+            },
+            "traffic_signals": {
+                "label": "‍‍ವಿಧ"
             },
             "trail_visibility": {
                 "placeholder": "ಅತ್ಯುತ್ತಮ, ಉತ್ತಮ, ಕಳಪೆ"
@@ -1001,6 +1066,9 @@
             },
             "building/school": {
                 "name": "ಶಾಲಾ ಕಟ್ಟಡ"
+            },
+            "ford": {
+                "name": "‍ಕಾಲ್ಗಡ"
             },
             "highway/bus_stop": {
                 "name": "ಬಸ್ ನಿಲ್ದಾಣ"

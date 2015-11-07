@@ -200,7 +200,6 @@
     "zoom_in_edit": "Приближаване за редакция",
     "logout": "изход",
     "loading_auth": "Свързване с OpenStreetMap...",
-    "report_a_bug": "докладвайте за бъг",
     "status": {
         "error": "Не може да се свърже с API-то.",
         "offline": "API-то е офлайн. Моля опитайте да редактирате по-късно.",
@@ -1041,9 +1040,6 @@
             },
             "historic/wayside_shrine": {
                 "name": "Крайпътен параклис"
-            },
-            "landuse/allotments": {
-                "name": "Земи за лично ползване"
             },
             "landuse/basin": {
                 "name": "Басейн"

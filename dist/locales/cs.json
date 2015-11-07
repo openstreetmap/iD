@@ -143,7 +143,8 @@
             "not_eligible": "Objekty nelze spojit v jeden.",
             "not_adjacent": "Tyto čáry nelze spojit v jednu, protože nekončí v jednom bodě.",
             "restriction": "Tyto čáry není možné spojit, protože aspoň jedna z nich je členem relace \"{relation}\".",
-            "incomplete_relation": "Tyto objekty nelze spojit, protože jsou stažené jen částečně."
+            "incomplete_relation": "Tyto objekty nelze spojit, protože jsou stažené jen částečně.",
+            "conflicting_tags": "Tyto čáry nelze spojit, protože u některých z vlastností (tagů) mají neslučitelné hodnoty."
         },
         "move": {
             "title": "Posunout",
@@ -226,7 +227,8 @@
     "zoom_in_edit": "Pro editaci přibližte mapu",
     "logout": "odhlásit",
     "loading_auth": "Připojuji se na OpenStreetMap...",
-    "report_a_bug": "ohlásit chybu",
+    "report_a_bug": "Nahlásit chybu",
+    "help_translate": "Pomoct s překladem",
     "feature_info": {
         "hidden_warning": "{count} skrytých objektů",
         "hidden_details": "Tyto objekty jsou právě skryté: {details}"
@@ -620,7 +622,9 @@
                         "title": "Povolen"
                     }
                 },
+                "placeholder": "Není známo",
                 "types": {
+                    "access": "Všem",
                     "bicycle": "Jízdní kola",
                     "foot": "Pěší",
                     "horse": "Koně",
@@ -628,6 +632,7 @@
                 }
             },
             "access_simple": {
+                "label": "Povolený vstup/vjezd",
                 "placeholder": "ano"
             },
             "access_toilets": {
@@ -1417,6 +1422,9 @@
                 },
                 "placeholder": "Pevný, převážně pevný, měkký povrch"
             },
+            "traffic_signals": {
+                "label": "Typ"
+            },
             "trail_visibility": {
                 "label": "Viditelnost pěšiny",
                 "options": {
@@ -1716,6 +1724,10 @@
             "amenity/marketplace": {
                 "name": "Trhoviště",
                 "terms": "tržiště,trh"
+            },
+            "amenity/motorcycle_parking": {
+                "name": "Parkování pro motorky",
+                "terms": "parking,parkování,garáž,motorka,motocykl"
             },
             "amenity/nightclub": {
                 "name": "Diskotéka",
@@ -2052,6 +2064,10 @@
             "building/school": {
                 "name": "Budova školy",
                 "terms": "škola,základní škola,střední škola,obecná škola,gymnázium,gymnasium,střední odborná škola,učiliště,odborné učiliště,střední odborné učiliště,školní,školský"
+            },
+            "building/semidetached_house": {
+                "name": "Polovina dvojdomku",
+                "terms": "dvojdomek,půldomek,dvojdům,půldům,polovina"
             },
             "building/shed": {
                 "name": "Kůlna",
@@ -2701,6 +2717,14 @@
                 "name": "Basketbalové hřiště",
                 "terms": "basketbalové hřiště,basketbal"
             },
+            "leisure/pitch/rugby_league": {
+                "name": "Hřiště pro třináctkové ragby (rugby league)",
+                "terms": "ragby,rugby,rugby league,třináctka,třináctkové ragby"
+            },
+            "leisure/pitch/rugby_union": {
+                "name": "Hřiště pro patnáctkové ragby (rugby union)",
+                "terms": "ragby,rugby,rugby union,patnáctka,patnáctkové ragby"
+            },
             "leisure/pitch/skateboard": {
                 "name": "Skatepark",
                 "terms": "skatepark,skate park,skateboard,bmx,inline,brusle"
@@ -2841,9 +2865,29 @@
                 "name": "Opevnění",
                 "terms": "bunkr,opevnění,fortifikace,šance,řopík"
             },
+            "military/checkpoint": {
+                "name": "Vojenská kontrola",
+                "terms": "checkpoint,kontrola,stanoviště"
+            },
+            "military/danger_area": {
+                "name": "Nebezpečná oblast",
+                "terms": "nebezpečí,nebezpečná oblast,vstup zakázán,zákaz vstupu,vojenská oblast"
+            },
+            "military/naval_base": {
+                "name": "Vojenská námořní základna",
+                "terms": "vojenská základna,námořní základna"
+            },
+            "military/obstacle_course": {
+                "name": "Vojenská překážková dráha",
+                "terms": "překážková dráha,opičí dráha"
+            },
             "military/range": {
                 "name": "Vojenská střelnice",
                 "terms": "střelnice,vojenská střelnice"
+            },
+            "military/training_area": {
+                "name": "Vojenský výcvikový prostor",
+                "terms": "vojenský,výcvikový,prostor,újezd"
             },
             "natural": {
                 "name": "Přírodní objekt",

@@ -143,7 +143,8 @@
             "not_eligible": "Tieto objekty nemôžu byť zlúčené.",
             "not_adjacent": "Tieto čiary nemožno zlúčiť, pretože nie sú prepojené.",
             "restriction": "Tieto čiary nemôžu byť zlúčené, pretože aspoň jedna z nich je členom relácie \"{relation}\".",
-            "incomplete_relation": "Tieto objekty nemôžu byť zlúčené, pretože aspoň jeden z nich nebol úplne stiahnutý."
+            "incomplete_relation": "Tieto objekty nemôžu byť zlúčené, pretože aspoň jeden z nich nebol úplne stiahnutý.",
+            "conflicting_tags": "Tieto čiary nemôžu byt zlúčené, pretože niektoré ich označenia majú konfliktné hodnoty."
         },
         "move": {
             "title": "Presuň",
@@ -226,7 +227,8 @@
     "zoom_in_edit": "Priblíž mapu pre editovanie",
     "logout": "odhlásiť",
     "loading_auth": "Pripájam na OpenStreetMap...",
-    "report_a_bug": "nahlásiť chybu",
+    "report_a_bug": "Nahlásiť chybu",
+    "help_translate": "Pomoc s prekladom",
     "feature_info": {
         "hidden_warning": "{count} skrytých objektov",
         "hidden_details": "Tieto objekty sú skryté: {details}"
@@ -484,6 +486,7 @@
         "out": "Oddiaľ"
     },
     "cannot_zoom": "V tomto móde nemožno viac oddialiť.",
+    "full_screen": "Prepni na plnú obrazovku",
     "gpx": {
         "local_layer": "Lokálny GPX súbor",
         "drag_drop": "Pretiahnite a pustite .gpx súbor na stránku, alebo ckliknite na tlačítko napravo pre výber",
@@ -622,7 +625,9 @@
                         "title": "Povolené"
                     }
                 },
+                "placeholder": "Nešpecifikované",
                 "types": {
+                    "access": "Všetko",
                     "bicycle": "Bicykle",
                     "foot": "Chodci",
                     "horse": "Kone",
@@ -630,6 +635,7 @@
                 }
             },
             "access_simple": {
+                "label": "Povolený vstup",
                 "placeholder": "áno"
             },
             "access_toilets": {
@@ -1419,6 +1425,9 @@
                 },
                 "placeholder": "Pevná, väčšinou pevná, mäkká..."
             },
+            "traffic_signals": {
+                "label": "Typ"
+            },
             "trail_visibility": {
                 "label": "Viditeľnosť trasy",
                 "options": {
@@ -1719,6 +1728,10 @@
                 "name": "Tržnica",
                 "terms": "trznica,trhovisko,burza,bazár,bazar,trhy,trh"
             },
+            "amenity/motorcycle_parking": {
+                "name": "Parkovanie pre motocykle",
+                "terms": "parkovisko,motorky,stojan,stojan pre motorky,moped,babeta,parkovanie pre motorky"
+            },
             "amenity/nightclub": {
                 "name": "Nočný klub",
                 "terms": "nocny klub"
@@ -1988,7 +2001,7 @@
                 "terms": "budova vo vystavbe,stavba,stavenisko"
             },
             "building/detached": {
-                "name": "Samostatný dom",
+                "name": "Samostantný dom",
                 "terms": "samostatny dom"
             },
             "building/dormitory": {
@@ -2054,6 +2067,10 @@
             "building/school": {
                 "name": "Školská budova",
                 "terms": "skolska budova,skola,škola"
+            },
+            "building/semidetached_house": {
+                "name": "Dvojdom",
+                "terms": "polovica dvojdomu"
             },
             "building/shed": {
                 "name": "Šopa",
@@ -2548,8 +2565,8 @@
                 "terms": "vuzitie uzemia, vyuzitie pody, využitie pôdy, krajina"
             },
             "landuse/allotments": {
-                "name": "Záhradkárska osada",
-                "terms": "zahradkarska osada,zahradky,záhradky,zahrady,záhrady,kolonia,kolónia"
+                "name": "Komunitná záhrada",
+                "terms": "komunitna zahrada,pestovatelska plocha,poestvateľská plocha"
             },
             "landuse/basin": {
                 "name": "Zadržiavacia nádrž",
@@ -2703,6 +2720,14 @@
                 "name": "Basketbalové ihrisko",
                 "terms": "basketbalove ihrisko,basketbal,basket,streetbal"
             },
+            "leisure/pitch/rugby_league": {
+                "name": "Ihrisko ragby league",
+                "terms": "rugby league"
+            },
+            "leisure/pitch/rugby_union": {
+                "name": "Ihrisko ragby union",
+                "terms": "rugby union"
+            },
             "leisure/pitch/skateboard": {
                 "name": "Skateboardový park",
                 "terms": "skateboadovy park,skejtbordovy,skatebordovy,park"
@@ -2843,9 +2868,29 @@
                 "name": "Bunker",
                 "terms": "opevnenie,vojenské opevnenie,vojenske opevnenie"
             },
+            "military/checkpoint": {
+                "name": "Kontrolné stanovište",
+                "terms": "kontrolne stanoviste,vojenske stanoviste,vojenské stanovište,vojenska kontrola,vojenská kontrola"
+            },
+            "military/danger_area": {
+                "name": "Nebezpečná zóna",
+                "terms": "bezpecna zona,zakazana zona,zakázaná zóna,nebezpecenstvo,nebezpečenstvo"
+            },
+            "military/naval_base": {
+                "name": "Námorná základňa",
+                "terms": "namorna zakladna,ponorkova zakladna,ponorková základňa,ponorky,lode"
+            },
+            "military/obstacle_course": {
+                "name": "Prekážková dráha",
+                "terms": "cvičisko s prekážkami,cvicisko s prekazkami,prekazkova draha,prekážková dráha,vojenské cvicisko,vojenské cvičisko"
+            },
             "military/range": {
                 "name": "Vojenská strelnica",
                 "terms": "vojenska strelnica,cvičisko,cvicisko"
+            },
+            "military/training_area": {
+                "name": "Cvičisko",
+                "terms": "cvicisko,vojenske cvicisko,vojenské cvičisko "
             },
             "natural": {
                 "name": "Prírodné",

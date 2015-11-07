@@ -143,7 +143,8 @@
             "not_eligible": "Disse elementer kan ikke fusioneres.",
             "not_adjacent": "Disse linjer kan ikke fusioneres fordi de ikke er knyttet sammen.",
             "restriction": "Disse linjer kan ikke flettes sammen, da mindst en af disse er medlem af  \"{relation}\"-relation.",
-            "incomplete_relation": "Disse kortegenskaber kan ikke fusioneres, da de ikke er blevet downloadet helt."
+            "incomplete_relation": "Disse kortegenskaber kan ikke fusioneres, da de ikke er blevet downloadet helt.",
+            "conflicting_tags": "Disse linjer kan ikke fusioneres pga nogle af tags har konflikt værdier."
         },
         "move": {
             "title": "Flyt",
@@ -226,7 +227,8 @@
     "zoom_in_edit": "Zoom ind for at redigere",
     "logout": "log ud",
     "loading_auth": "Forbinder til OpenStreetMap...",
-    "report_a_bug": "rapporter en fejl",
+    "report_a_bug": "Rapporterer en fejl",
+    "help_translate": "Hjælp med at oversætte",
     "feature_info": {
         "hidden_warning": "{count} skjulte objekter",
         "hidden_details": "Disse objekter er for øjeblikket skjulte: {details}"
@@ -1423,6 +1425,9 @@
                 },
                 "placeholder": "Fast, overvejende fast, blød …"
             },
+            "traffic_signals": {
+                "label": "Type"
+            },
             "trail_visibility": {
                 "label": "Synlighed af spor",
                 "options": {
@@ -1723,6 +1728,10 @@
                 "name": "Markedsplads",
                 "terms": "Markedsplads"
             },
+            "amenity/motorcycle_parking": {
+                "name": "Motorcykelparkering",
+                "terms": "Motorcykelparkering"
+            },
             "amenity/nightclub": {
                 "name": "Natklub",
                 "terms": "Natklub, Natclub"
@@ -1993,7 +2002,7 @@
             },
             "building/detached": {
                 "name": "Parcelhus",
-                "terms": "Parcelhus"
+                "terms": "Parcelhus, Familieparcelhus"
             },
             "building/dormitory": {
                 "name": " Kollegie",
@@ -2058,6 +2067,10 @@
             "building/school": {
                 "name": "Skolebygning",
                 "terms": "Skolebygning"
+            },
+            "building/semidetached_house": {
+                "name": "Rækkehus",
+                "terms": "Rækkehus"
             },
             "building/shed": {
                 "name": "Skur",
@@ -2552,8 +2565,8 @@
                 "terms": "Arealanvendelse"
             },
             "landuse/allotments": {
-                "name": "Kolonihaver",
-                "terms": "Kolonihaver, Haveforeninger, Nyttehaver"
+                "name": "Kolonihave",
+                "terms": "kolonihaveområde, kolonihave, "
             },
             "landuse/basin": {
                 "name": "Basin",
@@ -2707,6 +2720,14 @@
                 "name": "Basketballbane",
                 "terms": "Basketballbane"
             },
+            "leisure/pitch/rugby_league": {
+                "name": "Rugby station",
+                "terms": "Rugby station"
+            },
+            "leisure/pitch/rugby_union": {
+                "name": "Rugby bane",
+                "terms": "Rugby bane"
+            },
             "leisure/pitch/skateboard": {
                 "name": "Skateboardpark",
                 "terms": "Skateboardpark, skateboardplads, skate board"
@@ -2847,9 +2868,29 @@
                 "name": "Bunker",
                 "terms": "Bunker, Beskyttelsesrum"
             },
+            "military/checkpoint": {
+                "name": "Militært checkpoint",
+                "terms": "Militært chechpoint, Militæradgangsunkt"
+            },
+            "military/danger_area": {
+                "name": "Farligt militærtområde",
+                "terms": "Farligt militærtområde"
+            },
+            "military/naval_base": {
+                "name": "Flådebase",
+                "terms": "Flådebase, Flådestation"
+            },
+            "military/obstacle_course": {
+                "name": "Forhindringsbane",
+                "terms": "Forhindringsbane, Militærforhindringsbane"
+            },
             "military/range": {
                 "name": "Skydebane",
                 "terms": "Skydebane, Skydeplads, Militærskydebane"
+            },
+            "military/training_area": {
+                "name": "Militærttræningsområde",
+                "terms": "Militærttræningsområde"
             },
             "natural": {
                 "name": "Naturlig",
