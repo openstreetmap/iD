@@ -3,7 +3,7 @@ iD.MapillaryImageLayer = function (context) {
         urlSearch = 'https://a.mapillary.com/v2/search/s/geojson',
         urlImage = 'http://mapillary.com/map/im/',
         urlThumb = 'https://d1cuyjsrcm0gby.cloudfront.net/',
-        clientId = 'NzNRM2otQkR2SHJzaXJmNmdQWVQ0dzoxNjQ3MDY4ZTUxY2QzNGI2',
+        clientId = 'NzNRM2otQkR2SHJzaXJmNmdQWVQ0dzo1ZWYyMmYwNjdmNDdlNmVi',
         enable = false,
         currentImage,
         svg, div, request;
