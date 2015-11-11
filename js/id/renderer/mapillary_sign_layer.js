@@ -16,19 +16,19 @@ iD.MapillarySignLayer = function (context) {
             _.each(d, function(value, key){
                 signs[key] = signs[value];
             });
-        })
+        });
     };
-    d3.json(traffico_path+"string-maps/de-map.json", function (error, data) {
+    d3.json(traffico_path+'string-maps/de-map.json', function (error, data) {
         if (error) return;
         signs_defs.eu = data;
         add_mappings(signs_defs.eu, traffico_path + 'mapillary-mappings/eu.json');
     });
 
     _.each(['au', 'br', 'ca', 'us'], function (el) {
-        d3.json(traffico_path + "/string-maps/" + el + "-map.json", function (error, data) {
+        d3.json(traffico_path + '/string-maps/' + el + '-map.json', function (error, data) {
             if (error) return;
             signs_defs[el] = data;
-            add_mappings(signs_defs[el], traffico_path + "mapillary-mappings/"+el+".json");
+            add_mappings(signs_defs[el], traffico_path + 'mapillary-mappings/'+el+'.json');
         });
 
     });
@@ -136,9 +136,9 @@ iD.MapillarySignLayer = function (context) {
                         var detectionPackage = d.signs[0].package;
                         var type = d.signs[0].type;
                         var country = detectionPackage.split('_')[1];
-                        if (country == 'eu') {
+                        if (country === 'eu') {
                             type = type.replace(/^warning/, 'danger');
-                            type = type.replace(/ --v1 /, '')
+                            type = type.replace(/ --v1 /, '');
                         }
                         return signs_defs[country][type];
                     });
