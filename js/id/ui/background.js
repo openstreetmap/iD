@@ -8,7 +8,8 @@ iD.ui.Background = function(context) {
             ['bottom', [0, 1]]],
         opacityDefault = (context.storage('background-opacity') !== null) ?
             (+context.storage('background-opacity')) : 1.0,
-        customTemplate = context.storage('background-custom-template') || '';
+        customTemplate = context.storage('background-custom-template') || '',
+        latestBg = [context.background().baseLayerSource(), null];
 
     // Can be 0 from <1.3.0 use or due to issue #1923.
     if (opacityDefault === 0) opacityDefault = 1.0;
@@ -44,13 +45,21 @@ iD.ui.Background = function(context) {
                 return context.background().showsLayer(d);
             }
 
+            function bgswitch(d) {
+                return latestBg[1] === d;
+            }
+
             content.selectAll('.layer, .custom_layer')
                 .classed('active', active)
+                .classed('switch', bgswitch)
                 .selectAll('input')
                 .property('checked', active);
         }
 
         function clickSetSource(d) {
+            latestBg[1] = latestBg[0];
+            latestBg[0] = d;
+
             d3.event.preventDefault();
             context.background().baseLayerSource(d);
             selectLayer();
@@ -154,6 +163,20 @@ iD.ui.Background = function(context) {
             if (d3.event) d3.event.preventDefault();
             tooltip.hide(button);
             setVisible(!button.classed('active'));
+        }
+
+        function interchangeBg() {
+            var d = latestBg[1];
+            if (d == null) {
+                toggle();
+                return;
+            }
+
+            latestBg[1] = latestBg[0];
+            latestBg[0] = d;
+
+            context.background().baseLayerSource(d);
+            selectLayer();
         }
 
         function setVisible(show) {
@@ -323,6 +346,7 @@ iD.ui.Background = function(context) {
 
         var keybinding = d3.keybinding('background')
             .on(key, toggle)
+            .on('I', interchangeBg)
             .on('F', hide)
             .on('H', hide);
 

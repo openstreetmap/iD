@@ -1808,6 +1808,10 @@ div.full-screen > button:hover {
     background: #E8EBFF;
 }
 
+.layer-list li.switch {
+    background: #fffce8;
+}
+
 .layer-list label {
     display: block;
     padding: 5px 10px;
