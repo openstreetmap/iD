@@ -10,18 +10,14 @@ all: \
 
 
 MAKI_SOURCES = node_modules/maki/src/*.svg
-MAKI_SPRITE = svg/maki-sprite.src.svg
 
 $(MAKI_SOURCES): node_modules/.install
 
-$(MAKI_SPRITE): $(MAKI_SOURCES) Makefile
-	svg-sprite --symbol --symbol-inline --symbol-dest . --symbol-sprite $(MAKI_SPRITE) $(MAKI_SOURCES)
+dist/img/maki-sprite.svg: $(MAKI_SOURCES) Makefile
+	svg-sprite --symbol --symbol-dest . --symbol-sprite $@ $(MAKI_SOURCES)
 
 data/feature-icons.json: $(MAKI_SOURCES)
 	cp -f node_modules/maki/www/maki-sprite.json $@
-
-dist/img/maki-sprite.svg: $(MAKI_SPRITE) $(MAKI_SOURCES)
-	node svg/spriteify.js --svg $(MAKI_SPRITE) > $@
 
 dist/img/iD-sprite.svg: svg/iD-sprite.src.svg svg/iD-sprite.json
 	node svg/spriteify.js --svg svg/iD-sprite.src.svg --json svg/iD-sprite.json > $@
@@ -114,7 +110,7 @@ node_modules/.install: package.json
 	npm install && touch node_modules/.install
 
 clean:
-	rm -f $(BUILDJS_TARGETS) $(MAKI_SPRITE) data/feature-icons.json dist/iD*.js dist/iD.css dist/img/*.svg
+	rm -f $(BUILDJS_TARGETS) data/feature-icons.json dist/iD*.js dist/iD.css dist/img/*.svg
 
 translations:
 	node data/update_locales
