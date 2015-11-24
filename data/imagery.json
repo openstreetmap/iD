@@ -2625,6 +2625,660 @@
         "terms_text": "Ortofoto public domain ÚHUL, year 2000"
     },
     {
+        "name": "FR-BAN",
+        "type": "tms",
+        "description": "French address registry or Base Adresses Nationale",
+        "template": "http://{switch:a,b,c}.layers.openstreetmap.fr/bano/{zoom}/{x}/{y}.png",
+        "scaleExtent": [
+            12,
+            20
+        ],
+        "polygon": [
+            [
+                [
+                    8.3247852,
+                    49.0891892
+                ],
+                [
+                    6.1566882,
+                    49.6167369
+                ],
+                [
+                    4.8666714,
+                    50.2126152
+                ],
+                [
+                    2.4937064,
+                    51.1761675
+                ],
+                [
+                    1.3121526,
+                    50.9324682
+                ],
+                [
+                    1.2659981,
+                    50.1877492
+                ],
+                [
+                    0.1121369,
+                    49.8258592
+                ],
+                [
+                    -0.3494075,
+                    49.4312336
+                ],
+                [
+                    -1.0232625,
+                    49.4852345
+                ],
+                [
+                    -1.3278818,
+                    49.7901162
+                ],
+                [
+                    -2.1032765,
+                    49.7901162
+                ],
+                [
+                    -1.6232703,
+                    48.7420657
+                ],
+                [
+                    -3.1002126,
+                    48.9728514
+                ],
+                [
+                    -5.1125465,
+                    48.6811558
+                ],
+                [
+                    -5.3525496,
+                    48.4367783
+                ],
+                [
+                    -4.5984193,
+                    47.7194959
+                ],
+                [
+                    -2.555398,
+                    47.0232784
+                ],
+                [
+                    -2.4738077,
+                    46.6638823
+                ],
+                [
+                    -1.6676954,
+                    46.1055717
+                ],
+                [
+                    -1.334807,
+                    45.5141125
+                ],
+                [
+                    -1.4914604,
+                    44.1627003
+                ],
+                [
+                    -1.9940567,
+                    43.3708146
+                ],
+                [
+                    -0.956228,
+                    42.7364747
+                ],
+                [
+                    2.2029487,
+                    42.2841894
+                ],
+                [
+                    3.2342502,
+                    42.5444129
+                ],
+                [
+                    3.2407774,
+                    43.1140543
+                ],
+                [
+                    4.0436261,
+                    43.3280964
+                ],
+                [
+                    6.4325902,
+                    42.808345
+                ],
+                [
+                    7.6270723,
+                    43.5934102
+                ],
+                [
+                    7.8163619,
+                    44.1720643
+                ],
+                [
+                    7.0396221,
+                    44.41967
+                ],
+                [
+                    7.268075,
+                    45.4958141
+                ],
+                [
+                    7.1244761,
+                    46.2140775
+                ],
+                [
+                    6.5631347,
+                    46.771283
+                ],
+                [
+                    7.6571492,
+                    47.59128
+                ],
+                [
+                    7.6527839,
+                    47.5941813
+                ],
+                [
+                    7.6224698,
+                    47.5776739
+                ],
+                [
+                    7.6047297,
+                    47.578221
+                ],
+                [
+                    7.5877054,
+                    47.5901532
+                ],
+                [
+                    7.521558,
+                    47.65161
+                ],
+                [
+                    7.503992,
+                    47.70235
+                ],
+                [
+                    7.520958,
+                    47.77685
+                ],
+                [
+                    7.557124,
+                    47.84839
+                ],
+                [
+                    7.549463,
+                    47.879205
+                ],
+                [
+                    7.574615,
+                    47.93028
+                ],
+                [
+                    7.613179,
+                    47.96804
+                ],
+                [
+                    7.611904,
+                    47.9871
+                ],
+                [
+                    7.5612401,
+                    48.0383618
+                ],
+                [
+                    7.574915,
+                    48.1258
+                ],
+                [
+                    7.595338,
+                    48.15977
+                ],
+                [
+                    7.633047,
+                    48.19717
+                ],
+                [
+                    7.662748,
+                    48.22473
+                ],
+                [
+                    7.684659,
+                    48.30305
+                ],
+                [
+                    7.763463,
+                    48.49158
+                ],
+                [
+                    7.8004602,
+                    48.5125977
+                ],
+                [
+                    7.799582,
+                    48.5878
+                ],
+                [
+                    7.834088,
+                    48.64439
+                ],
+                [
+                    7.9121073,
+                    48.6889897
+                ],
+                [
+                    7.9672295,
+                    48.7571585
+                ],
+                [
+                    8.020692,
+                    48.78879
+                ],
+                [
+                    8.043024,
+                    48.7956
+                ],
+                [
+                    8.0864658,
+                    48.8130551
+                ],
+                [
+                    8.1364418,
+                    48.8978239
+                ],
+                [
+                    8.1970586,
+                    48.96021
+                ],
+                [
+                    8.2816129,
+                    48.9948995
+                ],
+                [
+                    8.2996723,
+                    49.025966
+                ],
+                [
+                    8.3124269,
+                    49.0599642
+                ],
+                [
+                    8.3247852,
+                    49.0891892
+                ]
+            ],
+            [
+                [
+                    9.3609615,
+                    43.1345098
+                ],
+                [
+                    8.4393174,
+                    42.48439
+                ],
+                [
+                    8.4836272,
+                    41.8175373
+                ],
+                [
+                    8.8469677,
+                    41.3768281
+                ],
+                [
+                    9.2058772,
+                    41.3136241
+                ],
+                [
+                    9.48946,
+                    41.5461776
+                ],
+                [
+                    9.6356823,
+                    42.1994563
+                ],
+                [
+                    9.6046655,
+                    42.901254
+                ],
+                [
+                    9.3609615,
+                    43.1345098
+                ]
+            ]
+        ],
+        "terms_url": "https://wiki.openstreetmap.org/wiki/WikiProject_France/WikiProject_Base_Adresses_Nationale_Ouverte_(BANO)",
+        "terms_text": "Tiles © cquest@Openstreetmap France, data © OpenStreetMap contributors, ODBL",
+        "id": "FR-BAN"
+    },
+    {
+        "name": "FR-Cadastre",
+        "type": "tms",
+        "description": "French land registry",
+        "template": "http://tms.cadastre.openstreetmap.fr/*/tout/{z}/{x}/{y}.png",
+        "scaleExtent": [
+            12,
+            20
+        ],
+        "polygon": [
+            [
+                [
+                    8.3247852,
+                    49.0891892
+                ],
+                [
+                    6.1566882,
+                    49.6167369
+                ],
+                [
+                    4.8666714,
+                    50.2126152
+                ],
+                [
+                    2.4937064,
+                    51.1761675
+                ],
+                [
+                    1.3121526,
+                    50.9324682
+                ],
+                [
+                    1.2659981,
+                    50.1877492
+                ],
+                [
+                    0.1121369,
+                    49.8258592
+                ],
+                [
+                    -0.3494075,
+                    49.4312336
+                ],
+                [
+                    -1.0232625,
+                    49.4852345
+                ],
+                [
+                    -1.3278818,
+                    49.7901162
+                ],
+                [
+                    -2.1032765,
+                    49.7901162
+                ],
+                [
+                    -1.6232703,
+                    48.7420657
+                ],
+                [
+                    -3.1002126,
+                    48.9728514
+                ],
+                [
+                    -5.1125465,
+                    48.6811558
+                ],
+                [
+                    -5.3525496,
+                    48.4367783
+                ],
+                [
+                    -4.5984193,
+                    47.7194959
+                ],
+                [
+                    -2.555398,
+                    47.0232784
+                ],
+                [
+                    -2.4738077,
+                    46.6638823
+                ],
+                [
+                    -1.6676954,
+                    46.1055717
+                ],
+                [
+                    -1.334807,
+                    45.5141125
+                ],
+                [
+                    -1.4914604,
+                    44.1627003
+                ],
+                [
+                    -1.9940567,
+                    43.3708146
+                ],
+                [
+                    -0.956228,
+                    42.7364747
+                ],
+                [
+                    2.2029487,
+                    42.2841894
+                ],
+                [
+                    3.2342502,
+                    42.5444129
+                ],
+                [
+                    3.2407774,
+                    43.1140543
+                ],
+                [
+                    4.0436261,
+                    43.3280964
+                ],
+                [
+                    6.4325902,
+                    42.808345
+                ],
+                [
+                    7.6270723,
+                    43.5934102
+                ],
+                [
+                    7.8163619,
+                    44.1720643
+                ],
+                [
+                    7.0396221,
+                    44.41967
+                ],
+                [
+                    7.268075,
+                    45.4958141
+                ],
+                [
+                    7.1244761,
+                    46.2140775
+                ],
+                [
+                    6.5631347,
+                    46.771283
+                ],
+                [
+                    7.6571492,
+                    47.59128
+                ],
+                [
+                    7.6527839,
+                    47.5941813
+                ],
+                [
+                    7.6224698,
+                    47.5776739
+                ],
+                [
+                    7.6047297,
+                    47.578221
+                ],
+                [
+                    7.5877054,
+                    47.5901532
+                ],
+                [
+                    7.521558,
+                    47.65161
+                ],
+                [
+                    7.503992,
+                    47.70235
+                ],
+                [
+                    7.520958,
+                    47.77685
+                ],
+                [
+                    7.557124,
+                    47.84839
+                ],
+                [
+                    7.549463,
+                    47.879205
+                ],
+                [
+                    7.574615,
+                    47.93028
+                ],
+                [
+                    7.613179,
+                    47.96804
+                ],
+                [
+                    7.611904,
+                    47.9871
+                ],
+                [
+                    7.5612401,
+                    48.0383618
+                ],
+                [
+                    7.574915,
+                    48.1258
+                ],
+                [
+                    7.595338,
+                    48.15977
+                ],
+                [
+                    7.633047,
+                    48.19717
+                ],
+                [
+                    7.662748,
+                    48.22473
+                ],
+                [
+                    7.684659,
+                    48.30305
+                ],
+                [
+                    7.763463,
+                    48.49158
+                ],
+                [
+                    7.8004602,
+                    48.5125977
+                ],
+                [
+                    7.799582,
+                    48.5878
+                ],
+                [
+                    7.834088,
+                    48.64439
+                ],
+                [
+                    7.9121073,
+                    48.6889897
+                ],
+                [
+                    7.9672295,
+                    48.7571585
+                ],
+                [
+                    8.020692,
+                    48.78879
+                ],
+                [
+                    8.043024,
+                    48.7956
+                ],
+                [
+                    8.0864658,
+                    48.8130551
+                ],
+                [
+                    8.1364418,
+                    48.8978239
+                ],
+                [
+                    8.1970586,
+                    48.96021
+                ],
+                [
+                    8.2816129,
+                    48.9948995
+                ],
+                [
+                    8.2996723,
+                    49.025966
+                ],
+                [
+                    8.3124269,
+                    49.0599642
+                ],
+                [
+                    8.3247852,
+                    49.0891892
+                ]
+            ],
+            [
+                [
+                    9.3609615,
+                    43.1345098
+                ],
+                [
+                    8.4393174,
+                    42.48439
+                ],
+                [
+                    8.4836272,
+                    41.8175373
+                ],
+                [
+                    8.8469677,
+                    41.3768281
+                ],
+                [
+                    9.2058772,
+                    41.3136241
+                ],
+                [
+                    9.48946,
+                    41.5461776
+                ],
+                [
+                    9.6356823,
+                    42.1994563
+                ],
+                [
+                    9.6046655,
+                    42.901254
+                ],
+                [
+                    9.3609615,
+                    43.1345098
+                ]
+            ]
+        ],
+        "terms_url": "http://wiki.openstreetmap.org/wiki/WikiProject_Cadastre_Fran%C3%A7ais/Conditions_d%27utilisation",
+        "terms_text": "cadastre-dgi-fr source : Direction Générale des Impôts - Cadastre. Mise à jour : 2015",
+        "id": "FR-Cadastre"
+    },
+    {
         "name": "Freemap.sk Car",
         "type": "tms",
         "template": "http://t{switch:1,2,3,4}.freemap.sk/A/{zoom}/{x}/{y}.jpeg",
@@ -7366,7 +8020,8 @@
                 ]
             ]
         ],
-        "terms_text": "Copyright © Główny Urząd Geodezji i Kartografii."
+        "terms_text": "Copyright © Główny Urząd Geodezji i Kartografii.",
+        "best": true
     },
     {
         "name": "IBGE Mapa de Setores Rurais",
@@ -11699,7 +12354,8 @@
             ]
         ],
         "terms_url": "http://interspect.hu/",
-        "terms_text": "Interspect Kft."
+        "terms_text": "Interspect Kft.",
+        "best": true
     },
     {
         "name": "Ireland Bartholomew Quarter-Inch 1940",
@@ -13884,7 +14540,8 @@
                 ]
             ]
         ],
-        "terms_text": "AGIS OF2014"
+        "terms_text": "AGIS OF2014",
+        "best": true
     },
     {
         "name": "Kanton Solothurn 25cm (SOGIS 2011-2014)",
@@ -16298,7 +16955,8 @@
         ],
         "terms_url": "http://www.act.public.lu/fr/actualites/2014/02/ortho2014/",
         "terms_text": "Administration du Cadastre et de la Topographie",
-        "id": "lu.geoportail.inspire.ortho2010"
+        "id": "lu.geoportail.inspire.ortho2010",
+        "best": true
     },
     {
         "name": "Luxembourg Inspire Ortho 2013",
@@ -17218,7 +17876,8 @@
         ],
         "terms_url": "http://www.act.public.lu/fr/actualites/2014/02/ortho2014/",
         "terms_text": "Administration du Cadastre et de la Topographie",
-        "id": "lu.geoportail.inspire.ortho2013"
+        "id": "lu.geoportail.inspire.ortho2013",
+        "best": true
     },
     {
         "name": "Mapbox Satellite",
@@ -20224,6 +20883,76 @@
         "terms_text": "National Library of Scotland Historic Maps"
     },
     {
+        "name": "NLS - OS 25-inch (Scotland), 1892-1905",
+        "type": "tms",
+        "template": "http://geo.nls.uk/mapdata2/os/25_inch/scotland_1/{zoom}/{x}/{y}.png",
+        "scaleExtent": [
+            0,
+            18
+        ],
+        "polygon": [
+            [
+                [
+                    -9.25,
+                    54.43
+                ],
+                [
+                    -9.25,
+                    61.12
+                ],
+                [
+                    0.22,
+                    61.12
+                ],
+                [
+                    0.22,
+                    54.43
+                ],
+                [
+                    -9.25,
+                    54.43
+                ]
+            ]
+        ],
+        "terms_url": "http://geo.nls.uk/maps/",
+        "terms_text": "National Library of Scotland Historic Maps"
+    },
+    {
+        "name": "NLS - OS 6-inch County Series, 1888-1913",
+        "type": "tms",
+        "template": "http://geo.nls.uk/mapdata3/os/6_inch_gb_1900/{zoom}/{x}/{y}.png",
+        "scaleExtent": [
+            0,
+            17
+        ],
+        "polygon": [
+            [
+                [
+                    -9,
+                    49.8
+                ],
+                [
+                    -9,
+                    61.1
+                ],
+                [
+                    1.9,
+                    61.1
+                ],
+                [
+                    1.9,
+                    49.8
+                ],
+                [
+                    -9,
+                    49.8
+                ]
+            ]
+        ],
+        "terms_url": "http://geo.nls.uk/maps/",
+        "terms_text": "National Library of Scotland Historic Maps"
+    },
+    {
         "name": "NLS - OS 6-inch Scotland 1842-82",
         "type": "tms",
         "template": "http://geo.nls.uk/maps/os/six_inch/{zoom}/{x}/{-y}.png",
@@ -21846,6 +22575,41 @@
                 [
                     -1.7112191,
                     59.5041365
+                ]
+            ]
+        ],
+        "terms_url": "http://geo.nls.uk/maps/",
+        "terms_text": "National Library of Scotland Historic Maps"
+    },
+    {
+        "name": "NLS - OS 6-inch Scotland, 1842-82",
+        "type": "tms",
+        "template": "http://geo.nls.uk/maps/os/six_inch/{zoom}/{x}/{-y}.png",
+        "scaleExtent": [
+            0,
+            16
+        ],
+        "polygon": [
+            [
+                [
+                    -7.8,
+                    54.62
+                ],
+                [
+                    -7.8,
+                    60.9
+                ],
+                [
+                    -0.63,
+                    60.9
+                ],
+                [
+                    -0.63,
+                    54.62
+                ],
+                [
+                    -7.8,
+                    54.62
                 ]
             ]
         ],
@@ -24249,7 +25013,7 @@
         "name": "OS Town Plans, Edinburgh 1849-1851 (NLS)",
         "type": "tms",
         "description": "Detailed town plan of Edinburgh 1849-1851, courtesy of National Library of Scotland.",
-        "template": "http://geo.nls.uk/maps/towns/edinburgh1849/{zoom}/{x}/{-y}.png",
+        "template": "http://geo.nls.uk/maps/towns/edinburgh1849/{zoom}/{x}/{y}.png",
         "scaleExtent": [
             13,
             20
@@ -25364,6 +26128,38 @@
         ],
         "terms_url": "http://maps.nls.uk/townplans/oban.html",
         "terms_text": "National Library of Scotland - Oban 1867-1868"
+    },
+    {
+        "name": "OS Town Plans, Paisley 1858 (NLS)",
+        "type": "tms",
+        "description": "Detailed town plan of Paisley 1858, courtesy of National Library of Scotland.",
+        "template": "http://geo.nls.uk/maps/towns/paisley/{zoom}/{x}/{-y}.png",
+        "scaleExtent": [
+            13,
+            20
+        ],
+        "polygon": [
+            [
+                [
+                    -4.45144945,
+                    55.85448259
+                ],
+                [
+                    -4.4036847,
+                    55.85420972
+                ],
+                [
+                    -4.40371385,
+                    55.83065193
+                ],
+                [
+                    -4.4514497,
+                    55.83092507
+                ]
+            ]
+        ],
+        "terms_url": "http://maps.nls.uk/townplans/paisley.html",
+        "terms_text": "National Library of Scotland - Paisley 1858"
     },
     {
         "name": "OS Town Plans, Peebles 1856 (NLS)",
@@ -28101,7 +28897,8 @@
                     -32.8507302
                 ]
             ]
-        ]
+        ],
+        "best": true
     },
     {
         "name": "South Tyrol Orthofoto 2011",
@@ -28221,7 +29018,8 @@
                 ]
             ]
         ],
-        "terms_text": "Stadt Zürich Luftbild 2011"
+        "terms_text": "Stadt Zürich Luftbild 2011",
+        "best": true
     },
     {
         "name": "Stevns (Denmark)",
@@ -35886,7 +36684,8 @@
                     48.692975
                 ]
             ]
-        ]
+        ],
+        "best": true
     },
     {
         "name": "Vejmidte (Denmark)",
