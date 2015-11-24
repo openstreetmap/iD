@@ -29444,6 +29444,18 @@
         "terms_text": "ToulouseMetropole"
     },
     {
+      "name": "Tours - Orthophotos 2013",
+      "type": "tms",
+      "template": "http://wms.openstreetmap.fr/tms/1.0.0/tours_2013/{zoom}/{x}/{y}",
+        "scaleExtent": [
+            0,
+            22
+        ],
+        "terms_url": "http://wiki.openstreetmap.org/wiki/Tours/Orthophoto",
+        "terms_text": "Orthophoto Tour(s)plus 2013"
+
+    },
+    {
         "name": "Tours - Orthophotos 2008-2010",
         "type": "tms",
         "template": "http://wms.openstreetmap.fr/tms/1.0.0/tours/{zoom}/{x}/{y}",
