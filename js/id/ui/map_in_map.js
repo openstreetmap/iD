@@ -4,9 +4,9 @@ iD.ui.MapInMap = function(context) {
     function map_in_map(selection) {
 
         var backgroundLayer = iD.TileLayer(),
+            overlayLayers = {},
             dispatch = d3.dispatch('change'),
             gpxLayer = iD.GpxLayer(context, dispatch),
-            overlayLayer = iD.TileLayer(),
             projection = iD.geo.RawMercator(),
             zoom = d3.behavior.zoom()
                 .scaleExtent([ztok(0.5), ztok(24)])
@@ -159,37 +159,39 @@ iD.ui.MapInMap = function(context) {
                 .call(backgroundLayer);
 
             // redraw overlay
-            var overlaySources = context.background().overlayLayerSources(),
-                hasOverlay = false;
-
+            var overlaySources = context.background().overlayLayerSources();
+            var activeOverlayLayers = [];
             for (var i = 0; i < overlaySources.length; i++) {
                 if (overlaySources[i].validZoom(zMini)) {
-                    overlayLayer
+                    if (!overlayLayers[i]) overlayLayers[i] = iD.TileLayer();
+                    activeOverlayLayers.push(overlayLayers[i]
                         .source(overlaySources[i])
                         .projection(projection)
-                        .dimensions(dMini);
-
-                    hasOverlay = true;
-                    break;
+                        .dimensions(dMini));
                 }
             }
 
             var overlay = tiles
                 .selectAll('.map-in-map-overlay')
-                .data(hasOverlay ? [0] : []);
+                .data([0]);
 
             overlay.enter()
                 .append('div')
                 .attr('class', 'map-in-map-overlay');
 
-            overlay.exit()
+            var overlays = overlay
+                .selectAll('div')
+                .data(activeOverlayLayers, function(d) { return d.source().name(); });
+
+            overlays.enter().append('div');
+            overlays.each(function(layer) {
+                d3.select(this).call(layer);
+            });
+
+            overlays.exit()
                 .remove();
 
-            if (hasOverlay) {
-                overlay
-                    .call(overlayLayer);
-            }
-
+            // redraw gpx overlay
             gpxLayer
                 .projection(projection);
 
