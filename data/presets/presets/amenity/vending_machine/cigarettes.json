@@ -1,0 +1,17 @@
+{
+    "fields": [
+        "vending",
+        "operator"
+    ],
+    "geometry": [
+        "point"
+    ],
+    "terms": [
+        "cigarette"
+    ],
+    "tags": {
+        "amenity": "vending_machine",
+        "vending": "cigarettes"
+    },
+    "name": "Cigarette Vending Machine"
+}
