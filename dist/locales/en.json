@@ -1980,15 +1980,15 @@
                 "terms": ""
             },
             "building/cathedral": {
-                "name": "Cathedral",
+                "name": "Cathedral Building",
                 "terms": ""
             },
             "building/chapel": {
-                "name": "Chapel",
+                "name": "Chapel Building",
                 "terms": ""
             },
             "building/church": {
-                "name": "Church",
+                "name": "Church Building",
                 "terms": ""
             },
             "building/college": {

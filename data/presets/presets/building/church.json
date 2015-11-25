@@ -5,11 +5,10 @@
         "levels"
     ],
     "geometry": [
-        "point",
         "area"
     ],
     "tags": {
         "building": "church"
     },
-    "name": "Church"
+    "name": "Church Building"
 }

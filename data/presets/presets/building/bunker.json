@@ -4,7 +4,6 @@
         "levels"
     ],
     "geometry": [
-        "point",
         "area"
     ],
     "tags": {

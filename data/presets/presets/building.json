@@ -6,6 +6,7 @@
         "address"
     ],
     "geometry": [
+        "point",
         "area"
     ],
     "tags": {

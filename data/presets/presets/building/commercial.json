@@ -6,7 +6,6 @@
         "smoking"
     ],
     "geometry": [
-        "point",
         "area"
     ],
     "tags": {

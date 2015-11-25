@@ -1640,16 +1640,16 @@ en:
         terms: "<translate with synonyms or related terms for 'Cabin', separated by commas>"
       building/cathedral:
         # building=cathedral
-        name: Cathedral
-        terms: "<translate with synonyms or related terms for 'Cathedral', separated by commas>"
+        name: Cathedral Building
+        terms: "<translate with synonyms or related terms for 'Cathedral Building', separated by commas>"
       building/chapel:
         # building=chapel
-        name: Chapel
-        terms: "<translate with synonyms or related terms for 'Chapel', separated by commas>"
+        name: Chapel Building
+        terms: "<translate with synonyms or related terms for 'Chapel Building', separated by commas>"
       building/church:
         # building=church
-        name: Church
-        terms: "<translate with synonyms or related terms for 'Church', separated by commas>"
+        name: Church Building
+        terms: "<translate with synonyms or related terms for 'Church Building', separated by commas>"
       building/college:
         # building=college
         name: College Building

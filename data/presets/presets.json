@@ -2220,6 +2220,7 @@
             "address"
         ],
         "geometry": [
+            "point",
             "area"
         ],
         "tags": {
@@ -2235,7 +2236,6 @@
             "levels"
         ],
         "geometry": [
-            "point",
             "area"
         ],
         "tags": {
@@ -2250,7 +2250,6 @@
             "levels"
         ],
         "geometry": [
-            "point",
             "area"
         ],
         "tags": {
@@ -2264,7 +2263,6 @@
             "levels"
         ],
         "geometry": [
-            "point",
             "area"
         ],
         "tags": {
@@ -2280,7 +2278,6 @@
             "levels"
         ],
         "geometry": [
-            "point",
             "area"
         ],
         "tags": {
@@ -2295,13 +2292,12 @@
             "levels"
         ],
         "geometry": [
-            "point",
             "area"
         ],
         "tags": {
             "building": "cathedral"
         },
-        "name": "Cathedral"
+        "name": "Cathedral Building"
     },
     "building/chapel": {
         "icon": "place-of-worship",
@@ -2310,13 +2306,12 @@
             "levels"
         ],
         "geometry": [
-            "point",
             "area"
         ],
         "tags": {
             "building": "chapel"
         },
-        "name": "Chapel"
+        "name": "Chapel Building"
     },
     "building/church": {
         "icon": "place-of-worship",
@@ -2325,13 +2320,12 @@
             "levels"
         ],
         "geometry": [
-            "point",
             "area"
         ],
         "tags": {
             "building": "church"
         },
-        "name": "Church"
+        "name": "Church Building"
     },
     "building/college": {
         "icon": "building",
@@ -2340,7 +2334,6 @@
             "levels"
         ],
         "geometry": [
-            "point",
             "area"
         ],
         "terms": [
@@ -2359,7 +2352,6 @@
             "smoking"
         ],
         "geometry": [
-            "point",
             "area"
         ],
         "tags": {
@@ -2374,7 +2366,6 @@
             "levels"
         ],
         "geometry": [
-            "point",
             "area"
         ],
         "tags": {
@@ -2389,7 +2380,6 @@
             "levels"
         ],
         "geometry": [
-            "point",
             "area"
         ],
         "tags": {
@@ -2412,7 +2402,6 @@
             "smoking"
         ],
         "geometry": [
-            "point",
             "area"
         ],
         "tags": {
@@ -2436,7 +2425,6 @@
             "capacity"
         ],
         "geometry": [
-            "point",
             "area"
         ],
         "tags": {
@@ -2451,7 +2439,6 @@
             "capacity"
         ],
         "geometry": [
-            "point",
             "area"
         ],
         "tags": {
@@ -2466,7 +2453,6 @@
             "levels"
         ],
         "geometry": [
-            "point",
             "area"
         ],
         "tags": {
@@ -2481,7 +2467,6 @@
             "levels"
         ],
         "geometry": [
-            "point",
             "area"
         ],
         "tags": {
@@ -2497,7 +2482,6 @@
             "smoking"
         ],
         "geometry": [
-            "point",
             "area"
         ],
         "tags": {
@@ -2512,7 +2496,6 @@
             "levels"
         ],
         "geometry": [
-            "point",
             "area"
         ],
         "tags": {
@@ -2528,7 +2511,6 @@
     },
     "building/hut": {
         "geometry": [
-            "point",
             "area"
         ],
         "tags": {
@@ -2543,7 +2525,6 @@
             "levels"
         ],
         "geometry": [
-            "point",
             "area"
         ],
         "tags": {
@@ -2558,7 +2539,6 @@
             "levels"
         ],
         "geometry": [
-            "point",
             "area"
         ],
         "terms": [
@@ -2578,7 +2558,6 @@
             "smoking"
         ],
         "geometry": [
-            "point",
             "area"
         ],
         "tags": {
@@ -2593,7 +2572,6 @@
             "levels"
         ],
         "geometry": [
-            "point",
             "area"
         ],
         "tags": {
@@ -2609,7 +2587,6 @@
             "smoking"
         ],
         "geometry": [
-            "point",
             "area"
         ],
         "tags": {
@@ -2623,7 +2600,6 @@
             "address"
         ],
         "geometry": [
-            "point",
             "area"
         ],
         "tags": {
@@ -2638,7 +2614,6 @@
             "levels"
         ],
         "geometry": [
-            "point",
             "area"
         ],
         "terms": [
@@ -2659,7 +2634,6 @@
             "levels"
         ],
         "geometry": [
-            "point",
             "area"
         ],
         "tags": {
@@ -2683,7 +2657,6 @@
             "levels"
         ],
         "geometry": [
-            "point",
             "area"
         ],
         "tags": {
@@ -2698,7 +2671,6 @@
             "levels"
         ],
         "geometry": [
-            "point",
             "area"
         ],
         "tags": {
@@ -2713,7 +2685,6 @@
             "levels"
         ],
         "geometry": [
-            "point",
             "area"
         ],
         "tags": {
@@ -2728,7 +2699,6 @@
             "levels"
         ],
         "geometry": [
-            "point",
             "area"
         ],
         "tags": {
@@ -2768,7 +2738,6 @@
             "levels"
         ],
         "geometry": [
-            "point",
             "area"
         ],
         "terms": [
@@ -2786,7 +2755,6 @@
             "levels"
         ],
         "geometry": [
-            "point",
             "area"
         ],
         "tags": {
