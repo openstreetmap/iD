@@ -172,7 +172,8 @@ iD.svg.Labels = function(projection, context) {
 
         icons.attr('transform', get(labels, 'transform'))
             .attr('xlink:href', function(d) {
-                return '#' + context.presets().match(d, context.graph()).icon + '-18';
+                var icon = context.presets().match(d, context.graph()).icon;
+                return '#' + icon + (icon === 'hairdresser' ? '-24': '-18');    // workaround: maki hairdresser-18 broken?
             });
 
 
