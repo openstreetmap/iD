@@ -1,4 +1,5 @@
 {
+    "icon": "warehouse",
     "fields": [
         "capacity"
     ],
@@ -8,6 +9,6 @@
     "tags": {
         "building": "garage"
     },
-    "name": "Garage",
-    "icon": "warehouse"
+    "matchScore": 0.5,
+    "name": "Garage"
 }

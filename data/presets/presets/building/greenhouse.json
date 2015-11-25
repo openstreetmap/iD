@@ -10,5 +10,6 @@
     "tags": {
         "building": "greenhouse"
     },
+    "matchScore": 0.5,
     "name": "Greenhouse"
 }

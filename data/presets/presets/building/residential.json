@@ -10,5 +10,6 @@
     "tags": {
         "building": "residential"
     },
+    "matchScore": 0.5,
     "name": "Residential Building"
 }

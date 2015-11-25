@@ -10,5 +10,6 @@
     "tags": {
         "building": "barn"
     },
+    "matchScore": 0.5,
     "name": "Barn"
 }

@@ -1,5 +1,5 @@
 {
-    "icon": "building",
+    "icon": "warehouse",
     "fields": [
         "address",
         "levels"
@@ -10,5 +10,6 @@
     "tags": {
         "building": "warehouse"
     },
+    "matchScore": 0.5,
     "name": "Warehouse"
 }

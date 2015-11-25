@@ -11,5 +11,6 @@
     "tags": {
         "building": "hotel"
     },
+    "matchScore": 0.5,
     "name": "Hotel Building"
 }

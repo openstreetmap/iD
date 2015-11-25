@@ -10,5 +10,6 @@
     "tags": {
         "building": "construction"
     },
+    "matchScore": 0.5,
     "name": "Building Under Construction"
 }

@@ -12,6 +12,7 @@
     "tags": {
         "building": "*"
     },
+    "matchScore": 0.4,
     "terms": [],
     "name": "Building"
 }

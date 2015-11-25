@@ -9,6 +9,7 @@
     "tags": {
         "building": "bunker"
     },
+    "matchScore": 0.5,
     "name": "Bunker",
     "searchable": false
 }

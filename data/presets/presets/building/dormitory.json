@@ -11,5 +11,6 @@
     "tags": {
         "building": "dormitory"
     },
+    "matchScore": 0.5,
     "name": "Dormitory"
 }

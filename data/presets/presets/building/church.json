@@ -10,5 +10,6 @@
     "tags": {
         "building": "church"
     },
+    "matchScore": 0.5,
     "name": "Church Building"
 }

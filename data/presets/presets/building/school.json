@@ -16,5 +16,6 @@
     "tags": {
         "building": "school"
     },
+    "matchScore": 0.5,
     "name": "School Building"
 }

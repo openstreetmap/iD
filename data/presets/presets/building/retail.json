@@ -11,5 +11,6 @@
     "tags": {
         "building": "retail"
     },
+    "matchScore": 0.5,
     "name": "Retail Building"
 }

@@ -16,5 +16,6 @@
         "residence",
         "dwelling"
     ],
+    "matchScore": 0.5,
     "name": "House"
 }

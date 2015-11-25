@@ -12,6 +12,7 @@
     "tags": {
         "building": "train_station"
     },
+    "matchScore": 0.5,
     "name": "Train Station",
     "searchable":false
 }

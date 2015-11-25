@@ -10,5 +10,6 @@
     "tags": {
         "building": "hospital"
     },
+    "matchScore": 0.5,
     "name": "Hospital Building"
 }
