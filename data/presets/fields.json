@@ -577,6 +577,11 @@
         "label": "Handicap",
         "placeholder": "1-18"
     },
+    "handrail": {
+        "key": "handrail",
+        "type": "check",
+        "label": "Handrail"
+    },
     "highway": {
         "key": "highway",
         "type": "typeCombo",

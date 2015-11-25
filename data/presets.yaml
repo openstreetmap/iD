@@ -425,6 +425,9 @@ en:
         label: Handicap
         # handicap field placeholder
         placeholder: 1-18
+      handrail:
+        # 'handrail=*'
+        label: Handrail
       highway:
         # 'highway=*'
         label: Type

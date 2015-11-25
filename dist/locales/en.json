@@ -954,6 +954,9 @@
                 "label": "Handicap",
                 "placeholder": "1-18"
             },
+            "handrail": {
+                "label": "Handrail"
+            },
             "highway": {
                 "label": "Type"
             },

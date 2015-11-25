@@ -4,7 +4,7 @@
         "lit",
         "width",
         "incline_steps",
-        "access"
+        "handrail"
     ],
     "icon": "highway-steps",
     "geometry": [
