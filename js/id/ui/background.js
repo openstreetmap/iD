@@ -15,6 +15,14 @@ iD.ui.Background = function(context) {
 
     function background(selection) {
 
+        function sortSources(a, b) {
+            return a.best() ? -1
+                : b.best() ? 1
+                : a.id === 'none' ? 1
+                : b.id === 'none' ? -1
+                : d3.ascending(a, b);
+        }
+
         function setOpacity(d) {
             var bg = context.container().selectAll('.background-layer')
                 .transition()
@@ -79,7 +87,8 @@ iD.ui.Background = function(context) {
                 .filter(filter);
 
             var layerLinks = layerList.selectAll('li.layer')
-                .data(sources, function(d) { return d.name(); });
+                .data(sources, function(d) { return d.name(); })
+                .sort(sortSources);
 
             var enter = layerLinks.enter()
                 .insert('li', '.custom_layer')
@@ -120,7 +129,6 @@ iD.ui.Background = function(context) {
         }
 
         function clickNudge(d) {
-
             var timeout = window.setTimeout(function() {
                     interval = window.setInterval(nudge, 100);
                 }, 500),

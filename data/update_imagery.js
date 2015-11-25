@@ -98,7 +98,7 @@ sources.forEach(function(source) {
         im.terms_html = attribution.html;
     }
 
-    ['id', 'default', 'overlay'].forEach(function(a) {
+    ['id', 'default', 'overlay', 'best'].forEach(function(a) {
         if (source[a]) {
             im[a] = source[a];
         }
