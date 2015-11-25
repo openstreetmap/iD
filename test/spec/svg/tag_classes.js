@@ -82,6 +82,85 @@ describe("iD.svg.TagClasses", function () {
         expect(selection.attr('class')).to.equal(null);
     });
 
+    it('adds tag-unpaved for highway=track with no surface tagging', function() {
+        selection
+            .datum(iD.Entity({tags: {highway: 'track'}}))
+            .call(iD.svg.TagClasses());
+        expect(selection).to.be.classed('tag-unpaved');
+    });
+
+    it('does not add tag-unpaved for highway=track with explicit paved surface tagging', function() {
+        selection
+            .datum(iD.Entity({tags: {highway: 'track', surface: 'asphalt'}}))
+            .call(iD.svg.TagClasses());
+        expect(selection).not.to.be.classed('tag-unpaved');
+
+        selection
+            .datum(iD.Entity({tags: {highway: 'track', tracktype: 'grade1'}}))
+            .call(iD.svg.TagClasses());
+        expect(selection).not.to.be.classed('tag-unpaved');
+    });
+
+    it('adds tag-unpaved for highway=track with explicit unpaved surface tagging', function() {
+        selection
+            .datum(iD.Entity({tags: {highway: 'track', surface: 'dirt'}}))
+            .call(iD.svg.TagClasses());
+        expect(selection).to.be.classed('tag-unpaved');
+
+        selection
+            .datum(iD.Entity({tags: {highway: 'track', tracktype: 'grade3'}}))
+            .call(iD.svg.TagClasses());
+        expect(selection).to.be.classed('tag-unpaved');
+    });
+
+    it('does not add tag-unpaved for other highway types with no surface tagging', function() {
+        selection
+            .datum(iD.Entity({tags: {highway: 'tertiary'}}))
+            .call(iD.svg.TagClasses());
+        expect(selection).not.to.be.classed('tag-unpaved');
+
+        selection
+            .datum(iD.Entity({tags: {highway: 'foo'}}))
+            .call(iD.svg.TagClasses());
+        expect(selection).not.to.be.classed('tag-unpaved');
+    });
+
+    it('does not add tag-unpaved for other highway types with explicit paved surface tagging', function() {
+        selection
+            .datum(iD.Entity({tags: {highway: 'tertiary', surface: 'asphalt'}}))
+            .call(iD.svg.TagClasses());
+        expect(selection).not.to.be.classed('tag-unpaved');
+
+        selection
+            .datum(iD.Entity({tags: {highway: 'foo', tracktype: 'grade1'}}))
+            .call(iD.svg.TagClasses());
+        expect(selection).not.to.be.classed('tag-unpaved');
+    });
+
+    it('adds tag-unpaved for other highway types with explicit unpaved surface tagging', function() {
+        selection
+            .datum(iD.Entity({tags: {highway: 'tertiary', surface: 'dirt'}}))
+            .call(iD.svg.TagClasses());
+        expect(selection).to.be.classed('tag-unpaved');
+
+        selection
+            .datum(iD.Entity({tags: {highway: 'foo', tracktype: 'grade3'}}))
+            .call(iD.svg.TagClasses());
+        expect(selection).to.be.classed('tag-unpaved');
+    });
+
+    it('does not add tag-unpaved for non-highways', function() {
+        selection
+            .datum(iD.Entity({tags: {railway: 'abandoned', surface: 'gravel'}}))
+            .call(iD.svg.TagClasses());
+        expect(selection).not.to.be.classed('tag-unpaved');
+
+        selection
+            .datum(iD.Entity({tags: {amenity: 'parking', surface: 'dirt'}}))
+            .call(iD.svg.TagClasses());
+        expect(selection).not.to.be.classed('tag-unpaved');
+    });
+
     it('adds tags based on the result of the `tags` accessor', function() {
         selection
             .datum(iD.Entity())

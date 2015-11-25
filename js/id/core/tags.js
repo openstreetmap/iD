@@ -30,6 +30,17 @@ iD.oneWayTags = {
     }
 };
 
+iD.pavedTags = {
+    'surface': {
+        'paved': true,
+        'asphalt': true,
+        'concrete': true
+    },
+    'tracktype': {
+        'grade1': true
+    }
+};
+
 iD.interestingTag = function (key) {
     return key !== 'attribution' &&
         key !== 'created_by' &&

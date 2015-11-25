@@ -79,6 +79,21 @@ iD.svg.TagClasses = function() {
                 classes += ' tag-' + k + ' tag-' + k + '-' + v;
             }
 
+            // For highways, look for surface tagging..
+            if (primary === 'highway') {
+                var paved = (t.highway !== 'track');
+                for (k in t) {
+                    v = t[k];
+                    if (k in iD.pavedTags) {
+                        paved = !!iD.pavedTags[k][v];
+                        break;
+                    }
+                }
+                if (!paved) {
+                    classes += ' tag-unpaved';
+                }
+            }
+
             classes = classes.trim();
 
             if (classes !== value) {
