@@ -341,10 +341,17 @@ iD.version = '1.8.0';
     var ua = navigator.userAgent,
         m = null;
 
-    m = ua.match(/Trident\/.*rv:([0-9]{1,}[\.0-9]{0,})/i);   // IE11+
+    m = ua.match(/(edge)\/?\s*(\.?\d+(\.\d+)*)/i);   // Edge
     if (m !== null) {
-        detected.browser = 'msie';
-        detected.version = m[1];
+        detected.browser = m[1];
+        detected.version = m[2];
+    }
+    if (!detected.browser) {
+        m = ua.match(/Trident\/.*rv:([0-9]{1,}[\.0-9]{0,})/i);   // IE11
+        if (m !== null) {
+            detected.browser = 'msie';
+            detected.version = m[1];
+        }
     }
     if (!detected.browser) {
         m = ua.match(/(opr)\/?\s*(\.?\d+(\.\d+)*)/i);   // Opera 15+
@@ -373,9 +380,9 @@ iD.version = '1.8.0';
     if (detected.browser.toLowerCase() === 'msie') {
         detected.ie = true;
         detected.browser = 'Internet Explorer';
-        detected.support = parseFloat(detected.version) > 9;
+        detected.support = parseFloat(detected.version) >= 11;
     } else {
-        detected.ie = false
+        detected.ie = false;
         detected.support = true;
     }
 
