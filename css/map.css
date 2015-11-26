@@ -24,7 +24,7 @@ img.tile-removing {
 use { pointer-events: none; }
 
 /* base styles */
-.layer path { fill: none; }
+.layer path:not(.oneway) { fill: none; }
 .layer use path { fill: #333; }  /* FF svg icons */
 
 g.point .shadow,
@@ -1288,11 +1288,6 @@ text {
 
 .oneway .textpath.tag-waterway {
     fill: #002F35;
-}
-
-marker#oneway-marker path {
-    fill:#000;
-    opacity: .5;
 }
 
 path.oneway {

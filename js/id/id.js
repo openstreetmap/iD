@@ -371,9 +371,11 @@ iD.version = '1.8.0';
     detected.version = detected.version.split(/\W/).slice(0,2).join('.');
 
     if (detected.browser.toLowerCase() === 'msie') {
+        detected.ie = true;
         detected.browser = 'Internet Explorer';
         detected.support = parseFloat(detected.version) > 9;
     } else {
+        detected.ie = false
         detected.support = true;
     }
 
