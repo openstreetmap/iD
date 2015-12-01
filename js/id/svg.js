@@ -1,10 +1,4 @@
 iD.svg = {
-    RoundProjection: function(projection) {
-        return function(d) {
-            return iD.geo.roundCoords(projection(d));
-        };
-    },
-
     PointTransform: function(projection) {
         return function(entity) {
             // http://jsperf.com/short-array-join
@@ -13,19 +7,12 @@ iD.svg = {
         };
     },
 
-    Round: function () {
-        return d3.geo.transform({
-            point: function(x, y) { return this.stream.point(Math.floor(x), Math.floor(y)); }
-        });
-    },
-
     Path: function(projection, graph, polygon) {
         var cache = {},
-            round = iD.svg.Round().stream,
             clip = d3.geo.clipExtent().extent(projection.clipExtent()).stream,
             project = projection.stream,
             path = d3.geo.path()
-                .projection({stream: function(output) { return polygon ? project(round(output)) : project(clip(round(output))); }});
+                .projection({stream: function(output) { return polygon ? project(output) : project(clip(output)); }});
 
         return function(entity) {
             if (entity.id in cache) {
