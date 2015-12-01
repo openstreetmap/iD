@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="X-UA-Compatible" content="IE=9; IE=8; IE=7; IE=EDGE" />
         <meta charset='utf-8'>
         <title>iD</title>
         <link rel='stylesheet' href='iD.css'>
@@ -36,8 +35,8 @@
             a.src=document.location.protocol+"//dnn506yrbagrg.cloudfront.net/pages/scripts/0013/6714.js?"+Math.floor(new Date().getTime()/3600000);
             a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
 
-            if (typeof iD == 'undefined') {
-                document.getElementById('id-container').innerHTML = 'Sorry, Internet Explorer is not currently supported. Please use Potlatch 2 to edit the map.';
+            if (typeof iD == 'undefined' || !iD.detect().support) {
+                document.getElementById('id-container').innerHTML = 'Sorry, your browser is not currently supported. Please use Potlatch 2 to edit the map.';
                 document.getElementById('id-container').className = 'unsupported';
             } else {
                 var id = iD()
