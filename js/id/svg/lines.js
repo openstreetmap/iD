@@ -117,6 +117,10 @@ iD.svg.Lines = function(projection) {
         oneways
             .attr('d', function(d) { return d.d; });
 
+        if (iD.detect().ie) {
+            oneways.each(function() { this.parentNode.insertBefore(this, this); });
+        }
+
         oneways.exit()
             .remove();
 

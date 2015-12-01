@@ -27,10 +27,15 @@ iD.svg.Defs = function(context) {
                 refX: 5,
                 markerWidth: 2,
                 markerHeight: 2,
+                markerUnits: 'strokeWidth',
                 orient: 'auto'
             })
             .append('path')
-            .attr('d', 'M 5 3 L 0 3 L 0 2 L 5 2 L 5 0 L 10 2.5 L 5 5 z');
+            .attr('class', 'oneway')
+            .attr('d', 'M 5 3 L 0 3 L 0 2 L 5 2 L 5 0 L 10 2.5 L 5 5 z')
+            .attr('stroke', 'none')
+            .attr('fill', '#000')
+            .attr('opacity', '0.5');
 
         // patterns
         var patterns = defs.selectAll('pattern')

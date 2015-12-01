@@ -206,6 +206,10 @@ table.tags, table.tags td, table.tags th {
     padding: 4px;
 }
 
+::-ms-clear {
+   display: none;
+}
+
 /* Grid
 ------------------------------------------------------- */
 
