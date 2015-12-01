@@ -9,7 +9,8 @@ iD.svg.TagClasses = function() {
             'razed', 'demolished', 'obliterated'
         ],
         secondaries = [
-            'oneway', 'bridge', 'tunnel', 'embankment', 'cutting', 'barrier'
+            'oneway', 'bridge', 'tunnel', 'embankment', 'cutting', 'barrier',
+            'surface', 'tracktype'
         ],
         tagClassRe = /^tag-/,
         tags = function(entity) { return entity.tags; };
