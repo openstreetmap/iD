@@ -33,35 +33,35 @@ describe("iD.svg.TagClasses", function () {
         expect(selection.attr('class')).to.equal('tag-highway tag-highway-primary');
     });
 
-    it('adds ephemeral status tag when status in primary value (`railway=abandoned`)', function() {
+    it('adds status tag when status in primary value (`railway=abandoned`)', function() {
         selection
             .datum(iD.Entity({tags: {railway: 'abandoned'}}))
             .call(iD.svg.TagClasses());
-        expect(selection.attr('class')).to.equal('tag-railway tag-ephemeral');
+        expect(selection.attr('class')).to.equal('tag-railway tag-status tag-status-abandoned');
     });
 
-    it('adds ephemeral status tag when status in key and value matches "yes" (railway=rail + abandoned=yes)', function() {
+    it('adds status tag when status in key and value matches "yes" (railway=rail + abandoned=yes)', function() {
         selection
             .datum(iD.Entity({tags: {railway: 'rail', abandoned: 'yes'}}))
             .call(iD.svg.TagClasses());
-        expect(selection.attr('class')).to.equal('tag-railway tag-railway-rail tag-ephemeral');
+        expect(selection.attr('class')).to.equal('tag-railway tag-railway-rail tag-status tag-status-abandoned');
     });
 
-    it('adds ephemeral status tag when status in key and value matches primary (railway=rail + abandoned=railway)', function() {
+    it('adds status tag when status in key and value matches primary (railway=rail + abandoned=railway)', function() {
         selection
             .datum(iD.Entity({tags: {railway: 'rail', abandoned: 'railway'}}))
             .call(iD.svg.TagClasses());
-        expect(selection.attr('class')).to.equal('tag-railway tag-railway-rail tag-ephemeral');
+        expect(selection.attr('class')).to.equal('tag-railway tag-railway-rail tag-status tag-status-abandoned');
     });
 
-    it('adds primary and ephemeral status tag when status in key and no primary (abandoned=railway)', function() {
+    it('adds primary and status tag when status in key and no primary (abandoned=railway)', function() {
         selection
             .datum(iD.Entity({tags: {abandoned: 'railway'}}))
             .call(iD.svg.TagClasses());
-        expect(selection.attr('class')).to.equal('tag-railway tag-ephemeral');
+        expect(selection.attr('class')).to.equal('tag-railway tag-status tag-status-abandoned');
     });
 
-    it('does not add ephemeral status tag for different primary tag (highway=path + abandoned=railway)', function() {
+    it('does not add status tag for different primary tag (highway=path + abandoned=railway)', function() {
         selection
             .datum(iD.Entity({tags: {highway: 'path', abandoned: 'railway'}}))
             .call(iD.svg.TagClasses());

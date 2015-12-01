@@ -346,10 +346,10 @@ path.fill.tag-landuse-landfill {
 .pattern-color-construction {
     fill: rgba(196, 189, 25, 0.2);
 }
-path.stroke.tag-landuse.tag-ephemeral {
+path.stroke.tag-landuse.tag-status {
     stroke: rgb(196, 189, 25);
 }
-.preset-icon-fill-area.tag-landuse.tag-ephemeral {
+.preset-icon-fill-area.tag-landuse.tag-status {
     border-color: rgb(196, 189, 25);
     background-color: rgba(196, 189, 25, 0.2);
 }
@@ -1228,7 +1228,7 @@ path.shadow.tag-cutting {
 }
 
 
-/* surface - unpaved */
+/* Surface - unpaved */
 path.casing.tag-unpaved {
     stroke: #eaeaea;
     stroke-linecap: butt;
@@ -1247,15 +1247,14 @@ path.casing.tag-bridge.tag-unpaved {
 }
 
 
-
-/* Ephemeral */
-path.stroke.tag-ephemeral,
-path.casing.tag-ephemeral {
+/* Status (e.g. construction, proposed, abandoned) */
+path.stroke.tag-status,
+path.casing.tag-status {
     stroke-linecap: butt;
     stroke-dasharray: 7, 3;
 }
-.low-zoom path.stroke.tag-ephemeral,
-.low-zoom path.casing.tag-ephemeral {
+.low-zoom path.stroke.tag-status,
+.low-zoom path.casing.tag-status {
     stroke-dasharray: 5, 2;
 }
 

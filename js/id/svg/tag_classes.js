@@ -45,7 +45,7 @@ iD.svg.TagClasses = function() {
                 break;
             }
 
-            // add at most one ephemeral status tag, only if relates to primary tag..
+            // add at most one status tag, only if relates to primary tag..
             if (!status) {
                 for (i = 0; i < statuses.length; i++) {
                     k = statuses[i];
@@ -68,7 +68,7 @@ iD.svg.TagClasses = function() {
             }
 
             if (status) {
-                classes += ' tag-ephemeral';
+                classes += ' tag-status tag-status-' + status;
             }
 
             // add any secondary (structure) tags
