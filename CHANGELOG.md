@@ -1,3 +1,13 @@
+## 1.8.1
+* Fix tag help lookup (#2844)
+* Support Internet Explorer 11 and Edge browsers (#2571)
+* New road styling for bumpy/unpaved roads (#2564, #2750, #2847)
+* Disambiguate building/office presets (#2793, #2799)
+* Add handrail field to steps preset (#2815)
+* Choose "best" imagery by default (#2826)
+* Fix language detection when `navigator.languages` is empty (#2838) (thanks @jleedev)
+* Support multiple overlays and fix alignment of minimap (#2813) (thanks @brianreavis)
+
 ## 1.8.0
 * Don't update the urlhash during the walkthrough (#1795)
 * Add surface type to parking preset (#2816)
