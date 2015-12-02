@@ -1471,15 +1471,6 @@
                 "name": "Αποθήκη αγροκτήματος",
                 "terms": "Σιταποθήκη, Αχυρώνας"
             },
-            "building/cathedral": {
-                "name": "Καθεδρικός"
-            },
-            "building/chapel": {
-                "name": "Παρεκλήσι"
-            },
-            "building/church": {
-                "name": "Εκκλησία"
-            },
             "building/commercial": {
                 "name": "Εμπορικό Κτίριο",
                 "terms": "Εμπορικό Κτήριο, Επαγγελματικό κτήριο"

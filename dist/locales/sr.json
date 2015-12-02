@@ -1243,15 +1243,6 @@
             "building/cabin": {
                 "name": "Брвнара"
             },
-            "building/cathedral": {
-                "name": "Катедрала"
-            },
-            "building/chapel": {
-                "name": "Капела"
-            },
-            "building/church": {
-                "name": "Црква"
-            },
             "building/commercial": {
                 "name": "Пословна зграда"
             },

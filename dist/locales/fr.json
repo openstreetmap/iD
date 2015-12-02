@@ -216,7 +216,7 @@
         "tooltip": "Recréer: {action}",
         "nothing": "Rien à refaire."
     },
-    "tooltip_keyhint": "Raccourci:",
+    "tooltip_keyhint": "Raccourci :",
     "browser_notice": "Les navigateurs supportés par cet éditeur sont : Firefox, Chrome, Safari, Opera et Internet Explorer (version 9 et supérieures). Pour éditer la carte, veuillez mettre à jour votre navigateur ou utiliser Potlatch 2.",
     "translate": {
         "translate": "Traduire",
@@ -350,7 +350,7 @@
         },
         "minor_roads": {
             "description": "Routes secondaires",
-            "tooltip": "Voies de service, Allées de stationnement, Pistes, etc."
+            "tooltip": "Voies de service, Allées de stationnement, Chemins, etc."
         },
         "paths": {
             "description": "Chemins",
@@ -954,6 +954,9 @@
                 "label": "Handicap",
                 "placeholder": "1-18"
             },
+            "handrail": {
+                "label": "Rampe - à main"
+            },
             "highway": {
                 "label": "Type"
             },
@@ -1415,7 +1418,7 @@
                 "label": "Type de tour"
             },
             "tracktype": {
-                "label": "Type de piste",
+                "label": "Type de voie",
                 "options": {
                     "grade1": "Dur : pavé ou surface très compacte",
                     "grade2": "Majoritairement dur : gravier/pierre avec quelque matériaux mous mélangés dedans",
@@ -1522,7 +1525,7 @@
             },
             "aeroway": {
                 "name": "Aviation",
-                "terms": "Piste de décollage, Piste d'atterissage, Piste"
+                "terms": "Piste de décollage, Piste d'atterrissage, Piste"
             },
             "aeroway/aerodrome": {
                 "name": "Aéroport",
@@ -1977,15 +1980,15 @@
                 "terms": "Cabane"
             },
             "building/cathedral": {
-                "name": "Cathédrale",
+                "name": "Cathédrale - bâtiment",
                 "terms": "Cathédrale"
             },
             "building/chapel": {
-                "name": "Chapelle",
+                "name": "Chapelle - bâtiment",
                 "terms": "Chapelle"
             },
             "building/church": {
-                "name": "Église",
+                "name": "Église - bâtiment",
                 "terms": "Église"
             },
             "building/college": {
@@ -2497,8 +2500,8 @@
                 "terms": "Bretelle d'accès à une route tertiaire"
             },
             "highway/track": {
-                "name": "Piste carrossable",
-                "terms": "Piste, Chemin carrossable"
+                "name": "Chemin carrossable",
+                "terms": "Piste, Piste carrossable"
             },
             "highway/traffic_signals": {
                 "name": "Feux tricolores",

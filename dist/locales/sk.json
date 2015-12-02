@@ -1976,18 +1976,6 @@
                 "name": "Chata",
                 "terms": "zrub,drevenica"
             },
-            "building/cathedral": {
-                "name": "Katedrála",
-                "terms": "katedrala,kostol,chrám,chram,dom,dóm"
-            },
-            "building/chapel": {
-                "name": "Kaplnka",
-                "terms": "kaplnka,kostol"
-            },
-            "building/church": {
-                "name": "Kostol",
-                "terms": "kostol,dom,dóm,chrám,chram,bozi dom,boží dom"
-            },
             "building/college": {
                 "name": "Budova vysokej školy",
                 "terms": "budova vysokej skoly,vysoka skola,vysoká škola"

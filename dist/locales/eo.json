@@ -348,9 +348,6 @@
             }
         },
         "presets": {
-            "building/church": {
-                "name": "Eklezio"
-            },
             "building/house": {
                 "name": "Domo"
             }

@@ -1193,15 +1193,6 @@
             "building": {
                 "name": "Edificio"
             },
-            "building/cathedral": {
-                "name": "Catedral"
-            },
-            "building/chapel": {
-                "name": "Capela"
-            },
-            "building/church": {
-                "name": "Igrexa"
-            },
             "building/construction": {
                 "name": "Edificio en construcción"
             },

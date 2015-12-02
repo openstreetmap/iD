@@ -947,6 +947,9 @@
                 "label": "Handicap",
                 "placeholder": "1-18"
             },
+            "handrail": {
+                "label": "Corrimão"
+            },
             "highway": {
                 "label": "Tipo"
             },
@@ -1969,16 +1972,13 @@
                 "terms": "Cabin, Praia, Campo, Cabana "
             },
             "building/cathedral": {
-                "name": "Catedral",
-                "terms": "Cathedral"
+                "name": "Edifício de Catedral"
             },
             "building/chapel": {
-                "name": "Capela",
-                "terms": "Chapel"
+                "name": "Edifício de Capela"
             },
             "building/church": {
-                "name": "Igreja",
-                "terms": "Church"
+                "name": "Edifício de Igreja"
             },
             "building/college": {
                 "name": "Edifíco Colegial ",
@@ -2837,6 +2837,9 @@
             "military/bunker": {
                 "name": "Bunker",
                 "terms": "Bunker"
+            },
+            "military/checkpoint": {
+                "name": "Posto de Segurança"
             },
             "military/danger_area": {
                 "name": "Área de Perigo"

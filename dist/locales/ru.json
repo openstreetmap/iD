@@ -31,7 +31,7 @@
             "annotation": {
                 "point": "Добавлена точка.",
                 "vertex": "В линию добавлена точка.",
-                "relation": "Добавлено отношение."
+                "relation": "Добавлена связь."
             }
         },
         "start": {
@@ -227,6 +227,8 @@
     "zoom_in_edit": "Приблизьте для редактирования",
     "logout": "выйти",
     "loading_auth": "Подключаюсь к OpenStreetMap...",
+    "report_a_bug": "Сообщить об ошибке",
+    "help_translate": "Помочь перевести",
     "feature_info": {
         "hidden_warning": "{count} скрытый объект",
         "hidden_details": "Эти объекты сейчас скрыты: {details}"
@@ -776,7 +778,7 @@
                 "label": "Расписание проверки"
             },
             "construction": {
-                "label": "Тип строящейся дороги"
+                "label": "Тип"
             },
             "content": {
                 "label": "Содержимое"
@@ -1967,18 +1969,6 @@
             },
             "building/cabin": {
                 "terms": "хижина, халупа, лачуга, хибара"
-            },
-            "building/cathedral": {
-                "name": "Собор",
-                "terms": "Собор, Храм"
-            },
-            "building/chapel": {
-                "name": "Капелла",
-                "terms": "Капела, церковь, храм"
-            },
-            "building/church": {
-                "name": "Церковь, Храм",
-                "terms": "Церковь, Храм"
             },
             "building/college": {
                 "name": "Здание колледжа",

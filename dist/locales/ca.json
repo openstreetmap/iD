@@ -1926,15 +1926,6 @@
             "building/cabin": {
                 "name": "Cabana"
             },
-            "building/cathedral": {
-                "name": "Catedral"
-            },
-            "building/chapel": {
-                "name": "Capella"
-            },
-            "building/church": {
-                "name": "Església"
-            },
             "building/college": {
                 "name": "Edifici d'escola professional"
             },

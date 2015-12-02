@@ -327,7 +327,7 @@
         "fix_misalignment": "校準",
         "reset": "重設",
         "minimap": {
-            "description": "縮小地圖",
+            "description": "小地圖",
             "tooltip": "顯示縮小的地圖幫助你確認所在區域的位置"
         }
     },
@@ -953,6 +953,9 @@
             "handicap": {
                 "label": "差點",
                 "placeholder": "1-18"
+            },
+            "handrail": {
+                "label": "扶手"
             },
             "highway": {
                 "label": "種類"
@@ -1610,7 +1613,7 @@
             },
             "amenity/bus_station": {
                 "name": "公車轉運站",
-                "terms": "客運站"
+                "terms": "客運站,轉運站"
             },
             "amenity/cafe": {
                 "name": "咖啡廳",
@@ -1634,7 +1637,7 @@
             },
             "amenity/charging_station": {
                 "name": "充電站",
-                "terms": "充電站"
+                "terms": "充電站, 電池交換站"
             },
             "amenity/childcare": {
                 "name": "托兒所/托嬰處",
@@ -1658,7 +1661,7 @@
             },
             "amenity/community_centre": {
                 "name": "社區中心",
-                "terms": "社區發展協會,里活動中心,村活動中心"
+                "terms": "社區發展協會,里活動中心,村活動中心,市民活動中心"
             },
             "amenity/compressed_air": {
                 "name": "壓縮空氣",
@@ -1870,7 +1873,7 @@
             },
             "amenity/veterinary": {
                 "name": "獸醫院",
-                "terms": "獸醫診所"
+                "terms": "獸醫診所, 動物醫院"
             },
             "amenity/waste_basket": {
                 "name": "垃圾筒",
@@ -1977,15 +1980,15 @@
                 "terms": "小屋,船艙"
             },
             "building/cathedral": {
-                "name": "大教堂",
+                "name": "大教堂建築",
                 "terms": "大教堂"
             },
             "building/chapel": {
-                "name": "小聖堂",
+                "name": "小聖堂建築",
                 "terms": "小聖堂"
             },
             "building/church": {
-                "name": "教堂",
+                "name": "教堂建築",
                 "terms": "教堂"
             },
             "building/college": {
@@ -2366,7 +2369,7 @@
             },
             "highway/bus_stop": {
                 "name": "公車站",
-                "terms": "公共汽車站"
+                "terms": "公共汽車站,站牌,公車站牌,公車停靠站,巴士站,巴士站牌,巴士停靠站"
             },
             "highway/corridor": {
                 "name": "室內走廊",
@@ -2522,7 +2525,7 @@
             },
             "historic": {
                 "name": "歷史景點",
-                "terms": "歷史景點"
+                "terms": "歷史景點, 古蹟"
             },
             "historic/archaeological_site": {
                 "name": "考古地點",
@@ -2566,7 +2569,7 @@
             },
             "landuse/allotments": {
                 "name": "社區農園",
-                "terms": "社區田圃,城市農園,社區園圃,社區農地"
+                "terms": "社區田圃,城市農園,社區園圃,社區農地,都市農園"
             },
             "landuse/basin": {
                 "name": "水池",
@@ -2757,7 +2760,7 @@
                 "terms": "船架滑道"
             },
             "leisure/sports_center": {
-                "name": "體肓中心/健身室",
+                "name": "體育中心/健身室",
                 "terms": "體育中心/健身房"
             },
             "leisure/stadium": {
@@ -2814,7 +2817,7 @@
             },
             "man_made/petroleum_well": {
                 "name": "油井",
-                "terms": "基地台,無線通訊基地臺,無線通訊基地台"
+                "terms": "油井"
             },
             "man_made/pier": {
                 "name": "碼頭",
@@ -2829,12 +2832,12 @@
                 "terms": "地窖,筒倉"
             },
             "man_made/storage_tank": {
-                "name": "儲油槽,",
+                "name": "儲油槽",
                 "terms": "存放槽,油罐,儲罐,儲水槽,儲汽槽"
             },
             "man_made/survey_point": {
                 "name": "測量點",
-                "terms": "三角點,土地測量點"
+                "terms": "三角點,土地測量點,控制點"
             },
             "man_made/tower": {
                 "name": "塔",
@@ -2842,7 +2845,7 @@
             },
             "man_made/wastewater_plant": {
                 "name": "污水處理廠",
-                "terms": "污水處理廠,"
+                "terms": "污水處理廠,水資源回收中心"
             },
             "man_made/water_tower": {
                 "name": "水塔",
@@ -3018,7 +3021,7 @@
             },
             "office/estate_agent": {
                 "name": "房地產仲介",
-                "terms": "地產代理"
+                "terms": "地產代理,房仲,不動產仲介"
             },
             "office/financial": {
                 "name": "金融機構辦公室",
@@ -3030,7 +3033,7 @@
             },
             "office/insurance": {
                 "name": "保險公司辦公室",
-                "terms": "保險公司"
+                "terms": "保險公司,人壽公司"
             },
             "office/it": {
                 "name": "資訊科技公司辦公室",
@@ -3278,7 +3281,7 @@
             },
             "shop/bed": {
                 "name": "床具/寐具店",
-                "terms": "床具/寐具店"
+                "terms": "床具店,寐具店,寢具店"
             },
             "shop/beverages": {
                 "name": "飲品店",
@@ -3333,8 +3336,8 @@
                 "terms": "藥妝店"
             },
             "shop/chocolate": {
-                "name": "巧克利店",
-                "terms": "巧克利商店"
+                "name": "巧克力店",
+                "terms": "巧克力商店"
             },
             "shop/clothes": {
                 "name": "服飾店",
@@ -3362,7 +3365,7 @@
             },
             "shop/craft": {
                 "name": "工藝品店",
-                "terms": "工藝品店,工藝品商店,手工藝店"
+                "terms": "工藝品店,工藝品商店,手工藝店,手作工坊"
             },
             "shop/curtain": {
                 "name": "窗廉店",
@@ -3402,7 +3405,7 @@
             },
             "shop/farm": {
                 "name": "產地直銷店",
-                "terms": "農場直賣店,農場直銷店"
+                "terms": "農場直賣店,農場直銷店,特產店"
             },
             "shop/fashion": {
                 "name": "時尚店",
@@ -3418,7 +3421,7 @@
             },
             "shop/frame": {
                 "name": "表框店",
-                "terms": "表框店"
+                "terms": "表框店, 裱框店"
             },
             "shop/funeral_directors": {
                 "name": "殯儀館",
@@ -3574,7 +3577,7 @@
             },
             "shop/religion": {
                 "name": "宗教用品店",
-                "terms": "宗教用品商店,金紙店"
+                "terms": "宗教用品商店, 金紙店, 香鋪"
             },
             "shop/scuba_diving": {
                 "name": "潛水用品店",
@@ -3810,7 +3813,7 @@
             },
             "type/route/bus": {
                 "name": "公車路線",
-                "terms": "公共汽車路線,客運路線"
+                "terms": "公共汽車路線,客運路線,巴士路線"
             },
             "type/route/detour": {
                 "name": "繞道路線",

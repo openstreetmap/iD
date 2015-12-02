@@ -2,338 +2,515 @@
     "modes": {
         "add_area": {
             "title": "範圍",
-            "description": "地圖度，加園、屋宇、湖或者其他範圍入去。",
-            "tail": "要畫範圍，好似公園、湖、屋宇咁。撳地圖先，再去畫。"
+            "description": "新增公園、建築物、湖或其他範圍至地圖。",
+            "tail": "於地圖上按一下開始繪畫範圍，例如公園、湖或建築物。"
         },
         "add_line": {
             "title": "綫",
-            "description": "地圖度，加公路、街、行人徑、水道或者其他綫。",
-            "tail": "地圖度撳一下，畫路、徑、或者路綫。"
+            "description": "新增公路、街道、行人路、水道或其他綫至地圖。",
+            "tail": "於地圖上按一下開始繪畫道路、路徑或者路綫。"
         },
         "add_point": {
-            "title": "處",
-            "description": "地圖上加酒樓、紀念碑、郵筒或者其他處。",
-            "tail": "撳地圖加處"
+            "title": "點",
+            "description": "新增餐廳、紀念碑、郵筒或其他點至地圖。",
+            "tail": "於地圖上按一下新增點。"
         },
         "browse": {
-            "title": "周圍睇",
-            "description": "地圖四圍移，放大縮細睇。"
+            "title": "瀏覽",
+            "description": "平移和縮放地圖。"
         },
         "draw_area": {
-            "tail": "撳下加節入落範圍。撳第一節去完成範圍。"
+            "tail": "按一下加節至你的範圍，按第一節完成繪畫範圍。"
         },
         "draw_line": {
-            "tail": "撳一下去加多幾節落條綫。掹其他綫，駁去佢哋度，同快撳兩下，完咗條綫。"
+            "tail": "按一下新增一節至綫。按其他的綫以連接它們，按兩下可完成編輯綫。"
         }
     },
     "operations": {
         "add": {
             "annotation": {
-                "point": "處加咗",
-                "vertex": "道度加節",
-                "relation": "關聯加咗。"
+                "point": "已新增一點。",
+                "vertex": "已新增節至路上。",
+                "relation": "已新增關係。"
             }
         },
         "start": {
             "annotation": {
-                "line": "綫起咗。",
-                "area": "範圍起咗。"
+                "line": "開始了畫綫。",
+                "area": "開始了繪畫範圍。"
             }
         },
         "continue": {
             "key": "A",
-            "title": "繼續",
-            "description": "續條綫。",
-            "not_eligible": "爾度無綫可以可續。",
-            "multiple": "爾度幾條綫可繼續。揀一條綫，咁住Shift掣，撳住佢揀佢。",
+            "title": "伸延",
+            "description": "伸延這條綫。",
+            "not_eligible": "綫不可從這裡伸延。",
+            "multiple": "數條綫可從這裡伸延。要選擇一條綫，可按著Shift鍵和用滑鼠按一下該條綫。",
             "annotation": {
-                "line": "綫續咗。",
-                "area": "範圍續咗。"
+                "line": "綫已伸延。",
+                "area": "範圍已伸延。"
             }
         },
         "cancel_draw": {
-            "annotation": "唔畫。"
+            "annotation": "已取消繪畫。"
         },
         "change_role": {
-            "annotation": "改咗關聯成員嘅作用。"
+            "annotation": "已更改關係構件的作用。"
         },
         "change_tags": {
-            "annotation": "籤改咗。"
+            "annotation": "已更改標籤。"
         },
         "circularize": {
-            "title": "整圓",
+            "title": "圓形化",
             "description": {
-                "line": "整圓條綫",
-                "area": "整圓範圍"
+                "line": "將這條綫變為圓形。",
+                "area": "將這個範圍變為圓形。"
             },
             "key": "O",
             "annotation": {
-                "line": "整圓條綫。",
-                "area": "整圓範圍。"
+                "line": "將一條綫變為圓形。",
+                "area": "將一個範圍變為圓形。"
             },
-            "not_closed": "無得整圓，根本唔係圈。"
+            "not_closed": "未能將這個變為圓形因為它未成為一圈。",
+            "too_large": "未能將這個轉為圓形因為它不是被完全看得到。",
+            "connected_to_hidden": "未能將這個轉為圓形因為它連接著一個隱藏的特徵。"
         },
         "orthogonalize": {
-            "title": "整方",
+            "title": "方形化",
             "description": {
-                "line": "整方個綫角",
-                "area": "整方範圍角"
+                "line": "將這條綫的角方形化。",
+                "area": "將這個範圍的角方形化。"
             },
             "key": "S",
             "annotation": {
-                "line": "整方咗綫角。",
-                "area": "整方咗範圍角。"
+                "line": "已將這條綫的角方形化。",
+                "area": "已將這個範圍的角方形化。"
             },
-            "not_squarish": "佢太唔似方，整唔到方。"
+            "not_squarish": "未能將這個方形化因為它不似方形。",
+            "too_large": "未能將這個方形化因為它不是被完全看得到。",
+            "connected_to_hidden": "未能將這個方形化因為它連接著一個隱藏的特徵。"
         },
         "straighten": {
             "title": "拉直",
-            "description": "拉直條綫",
+            "description": "拉直這條綫。",
             "key": "S",
-            "annotation": "條綫拉直咗。",
-            "too_bendy": "條綫太彎，拉直唔到。"
+            "annotation": "已拉直一條綫。",
+            "too_bendy": "未能將這個拉直因為它轉太多彎。",
+            "connected_to_hidden": "未能將這條綫拉直因為它連接著一個隱藏的特徵。"
         },
         "delete": {
-            "title": "刪",
+            "title": "刪除",
+            "description": "永久刪除物件。",
             "annotation": {
-                "point": "刪咗處。",
-                "vertex": "道度刪咗節。",
-                "line": "刪咗綫。",
-                "area": "刪咗範圍。",
-                "relation": "刪咗關聯。",
-                "multiple": "刪咗物體{n}個。"
+                "point": "已刪除一點。",
+                "vertex": "已刪除路徑上的一個節。",
+                "line": "已刪除一條綫。",
+                "area": "已刪除一個範圍。",
+                "relation": "已刪除一個關係。",
+                "multiple": "已刪除 {n} 個物件。"
             },
-            "incomplete_relation": "此地貌無得刪走，皆因佢未傳晒落來。"
+            "incomplete_relation": "此特徵未能刪除，因為它尚未完全下載。",
+            "part_of_relation": "這個特徵不能刪除，因為它是大型關係的其中一部分。你必須先從關係中移除。",
+            "connected_to_hidden": "未能將這個刪除因為它連接著一個隱藏的特徵。"
         },
         "add_member": {
-            "annotation": "加咗成員入關聯。"
+            "annotation": "已新增一個構件至關係。"
         },
         "delete_member": {
-            "annotation": "拎走咗關聯成員。"
+            "annotation": "已將構件從關係移除。"
         },
         "connect": {
             "annotation": {
-                "point": "駁咗道去嗰處。",
-                "vertex": "駁咗道去其他。",
-                "line": "駁咗道去綫。",
-                "area": "駁咗道去範圍。"
+                "point": "已連接路徑到一個點。",
+                "vertex": "已連接路徑到另一路徑。",
+                "line": "已連接路徑到一條綫。",
+                "area": "已連接路徑到一個範圍。"
             }
         },
         "disconnect": {
-            "title": "掹開",
-            "description": "此綫或者範圍等，全部掹開。",
+            "title": "斷開",
+            "description": "將這些綫／範圍互相斷開。",
             "key": "D",
-            "annotation": "綫或範圍，經已掹開咗。",
-            "not_connected": "爾度唔够綫或者範圍去掹開。"
+            "annotation": "已斷開的綫／範圍。",
+            "not_connected": "這裡未有足夠的綫／範圍可斷開。",
+            "connected_to_hidden": "未能將這個斷開因為它連接著一個隱藏的特徵。"
         },
         "merge": {
-            "title": "併",
-            "description": "併埋爾啲綫。",
+            "title": "合併",
+            "description": "合併這些綫。",
             "key": "C",
-            "annotation": "併咗綫{n}條。 ",
-            "not_eligible": "爾啲地貌，無得併埋。",
-            "not_adjacent": "爾啲綫無得掹開，根本無駁埋。",
-            "restriction": "爾啲綫併唔到，當中至少一個，屬於{relation}關聯。"
+            "annotation": "已合位{n}條綫。 ",
+            "not_eligible": "不能合併這些特徵。",
+            "not_adjacent": "未能將這些綫合併因為它們並沒有連接在一起。",
+            "restriction": "未能將這條綫合併因為最少一條是 \"{relation}\" 關係的構件。",
+            "incomplete_relation": "這些特徵不能合併因為最少一個尚未完全下載。",
+            "conflicting_tags": "未能將這些綫合併因為它們當中有些標籤的數值有衝突。"
         },
         "move": {
-            "title": "搬",
-            "description": "搬爾個去另第度。",
+            "title": "移動",
+            "description": "移動這個至另一位置。",
             "key": "M",
             "annotation": {
-                "point": "搬一點",
-                "vertex": "道度搬咗節。",
-                "line": "搬咗條綫。",
-                "area": "搬咗範圍。",
-                "multiple": "搬物體幾個。"
+                "point": "已移動一個點。",
+                "vertex": "已移動路徑上的一個節。",
+                "line": "已移動一條綫。",
+                "area": "已移動一個範圍。",
+                "multiple": "已移動多個物件。"
             },
-            "incomplete_relation": "此地貌無得搬，皆因佢未傳晒落來。"
+            "incomplete_relation": "此特徵未能移動，因為它尚未完全下載。",
+            "too_large": "未能將這個移除因為它不是被完全看得到。",
+            "connected_to_hidden": "未能移動這個因為它連接著一個隱藏的特徵。"
         },
         "rotate": {
-            "title": "擰轉",
-            "description": "圍住中心點，擰轉爾個物體。",
+            "title": "旋轉",
+            "description": "依物件中心旋轉。",
             "key": "R",
             "annotation": {
-                "line": "條綫擰轉咗。",
-                "area": "範圍擰轉咗。"
-            }
+                "line": "已旋轉一條綫。",
+                "area": "已旋轉一個範圍。"
+            },
+            "too_large": "未能將這個旋轉因為它不是被完全看得到。",
+            "connected_to_hidden": "未能旋轉這個因為它連接著一個隱藏的特徵。"
         },
         "reverse": {
-            "title": "倒向。",
-            "description": "整到修綫方向相反。",
+            "title": "反轉",
+            "description": "使這條綫的方向反轉。",
             "key": "V",
-            "annotation": "條綫方向倒咗轉。"
+            "annotation": "已反轉一條綫。"
         },
         "split": {
-            "title": "斬開",
+            "title": "分割",
             "description": {
-                "line": "爾節度，斬綫爲二。",
-                "area": "斬界，一分爲二。",
-                "multiple": "爾節度，斬綫或範圍界綫，一分爲二。"
+                "line": "將這條綫分為兩個節。",
+                "area": "將這個範圍的邊界一分為二。",
+                "multiple": "在這個節將這個綫/範圍的邊界一分為二。"
             },
             "key": "X",
             "annotation": {
-                "line": "斬開條綫。",
-                "area": "斬開範圍界綫。",
-                "multiple": "斬開綫或範圍界綫{n}條。"
+                "line": "分割一條綫。",
+                "area": "分割一個範圍邊界。",
+                "multiple": "分割{n}條綫/範圍邊界。"
             },
-            "not_eligible": "綫無得喺頭尾度斬。",
-            "multiple_ways": "爾處太多綫，無得斬開。"
+            "not_eligible": "綫不能於頭或尾分割。",
+            "multiple_ways": "這裡有太多綫要分割。",
+            "connected_to_hidden": "未能分割這個因為它連接著一個隱藏的特徵。"
+        },
+        "restriction": {
+            "help": {
+                "select": "於地圖上按一下選擇一段道路。",
+                "toggle": "按一下改變轉彎限制",
+                "toggle_on": "按一下新增\"{restriction}\"限制。",
+                "toggle_off": "按一下移除\"{restriction}\"限制。"
+            },
+            "annotation": {
+                "create": "已新增轉彎限制",
+                "delete": "已刪除轉彎限制"
+            }
         }
     },
     "undo": {
         "tooltip": "還原：{action}",
-        "nothing": "無嘢好還原"
+        "nothing": "沒有可還原的動作。"
     },
     "redo": {
-        "tooltip": "重做：{action}",
-        "nothing": "無嘢好重做"
+        "tooltip": "重做: {action}",
+        "nothing": "沒有可重做的動作。"
     },
-    "tooltip_keyhint": "快掣",
-    "browser_notice": "爾個編輯，只用於Firefox、Chrome、Safari、Opera以及Internet Explorer 版本九或以上。唔該換新瀏覽器，或者用Potlach2去改地圖。",
+    "tooltip_keyhint": "快速鍵:",
+    "browser_notice": "這個編輯器，只支援Firefox、Chrome、Safari、Opera以及Internet Explorer 9或以上。請更新你的瀏覽器或者用Potlach2去編輯地圖。",
     "translate": {
-        "translate": "繙",
-        "localized_translation_label": "話名",
-        "localized_translation_language": "揀話",
-        "localized_translation_name": "名"
+        "translate": "翻譯",
+        "localized_translation_label": "多種語言名稱",
+        "localized_translation_language": "選擇語言",
+        "localized_translation_name": "名稱"
     },
-    "zoom_in_edit": "放大去改",
-    "logout": "簽走",
-    "loading_auth": "駁上去公家街圖⋯⋯",
+    "zoom_in_edit": "放大以編輯",
+    "logout": "登出",
+    "loading_auth": "正在連接 OpenStreetMap...",
+    "report_a_bug": "報告錯誤",
+    "help_translate": "協助翻譯",
+    "feature_info": {
+        "hidden_warning": "{count} 項隱藏特徵",
+        "hidden_details": "這些特徵正被隱藏: {details}"
+    },
     "status": {
-        "error": "駁唔通程式接口。",
-        "offline": "程式接口收工。遲啲再改啦。",
-        "readonly": "程式接口，只讀不寫。你要等下先記到你修改。"
+        "error": "未能連接至應用程式介面。",
+        "offline": "應用程式介面現在離線。請稍後再編輯。",
+        "readonly": "應用程式介面處於唯讀模式。如要儲存變更需要稍等。"
     },
     "commit": {
-        "title": "記低修改",
-        "description_placeholder": "簡述你爾則稿件",
-        "upload_explanation": "你嘅修改，傳咗上去公家街圖。凢用公家街圖資料，地圖都會見到。",
-        "upload_explanation_with_user": "你以{user}名義，修改傳咗上去公家街圖。凢用公家街圖資料，地圖都會見到。",
+        "title": "儲存變更",
+        "description_placeholder": "簡述你的貢獻",
+        "message_label": "編輯變動留言",
+        "upload_explanation": "你上載的變更會出現在其他使用 OpenStreetMap 資料的地圖。",
+        "upload_explanation_with_user": "你以{user}的名字上載的變更會出現在其他使用 OpenStreetMap 資料的地圖。",
         "save": "記",
         "cancel": "唔記",
+        "changes": "{count} 項變更",
         "warnings": "警告",
-        "modified": "改咗",
-        "deleted": "刪咗",
-        "created": "開咗"
+        "modified": "已修改",
+        "deleted": "已刪除",
+        "created": "已建立"
     },
     "contributors": {
-        "list": "有{users}修改",
-        "truncated_list": "有{users}同另外{count}人修改"
+        "list": "由{users}編輯",
+        "truncated_list": "由 {users} 和另外 {count} 人編輯"
+    },
+    "infobox": {
+        "selected": "已選 {n} 項",
+        "geometry": "幾何",
+        "closed": "已關閉",
+        "center": "中心",
+        "perimeter": "周界",
+        "length": "長度",
+        "area": "範圍",
+        "centroid": "形心",
+        "location": "位置",
+        "metric": "十進制",
+        "imperial": "英制"
+    },
+    "geometry": {
+        "point": "點",
+        "vertex": "頂點",
+        "line": "綫",
+        "area": "範圍",
+        "relation": "關係"
     },
     "geocoder": {
-        "search": "搵天下各地⋯⋯",
-        "no_results_visible": "圖內可見之處，都搵唔到",
-        "no_results_worldwide": "無嘢搵到"
+        "search": "搜尋全世界...",
+        "no_results_visible": "地圖內可見範圍都沒有結果",
+        "no_results_worldwide": "找不到搜尋結果"
     },
     "geolocate": {
-        "title": "標出我喺邊"
+        "title": "顯示我的位置"
     },
     "inspector": {
-        "no_documentation_combination": "爾組籤，未有文件解",
-        "no_documentation_key": "爾個圖例，未有文件解。",
-        "show_more": "睇多啲",
-        "view_on_osm": "入公家街圖睇",
-        "all_tags": "所有籤",
-        "all_members": "所有成員",
-        "all_relations": "所有關聯",
-        "new_relation": "開新關聯⋯⋯",
+        "no_documentation_combination": "沒有這個標籤組合的相關文件",
+        "no_documentation_key": "沒有這個鍵值的相關文件",
+        "show_more": "顯示更多",
+        "view_on_osm": "在 openstreetmap.org 中檢視",
+        "all_tags": "所有標籤",
+        "all_members": "所有構件",
+        "all_relations": "所有關係",
+        "new_relation": "建立新關係⋯⋯",
         "role": "作用",
-        "choose": "揀地貌",
-        "results": "{search}搵出{n}項",
-        "reference": "入公家街圖百科睇",
-        "back_tooltip": "轉地貌",
-        "remove": "移走",
-        "search": "搵",
-        "multiselect": "揀咗嘅項目",
+        "choose": "選擇特徵種類",
+        "results": "{search}的{n}個結果",
+        "reference": "在 OpenStreetMap Wiki 中檢閱",
+        "back_tooltip": "變更特徵",
+        "remove": "移除",
+        "search": "搜尋",
+        "multiselect": "已選擇的物件",
         "unknown": "未知",
-        "incomplete": "<無傳落來>",
-        "feature_list": "搵地貌",
-        "edit": "改地貌",
-        "none": "無"
+        "incomplete": "<未下載>",
+        "feature_list": "搜尋特徵",
+        "edit": "編輯特徵",
+        "check": {
+            "yes": "是",
+            "no": "否"
+        },
+        "none": "無",
+        "node": "節",
+        "way": "路徑",
+        "relation": "關係",
+        "location": "位置",
+        "add_fields": "新增資料"
     },
     "background": {
         "title": "背景",
         "description": "背景設定",
-        "percent_brightness": "{opacity}% 光",
+        "percent_brightness": "{opacity}% 亮度",
         "none": "無",
         "custom": "自訂",
+        "custom_button": "編輯自訂背景",
+        "custom_prompt": "輪入區塊範本的網址。有效的標記是以 {z}, {x}, {y} 作為 Z/X/Y 標記系統 Z/X/Y scheme 和 {u} 作為四分位數標記系統 quadtile scheme。",
         "fix_misalignment": "校正對位誤差",
-        "reset": "重設"
+        "reset": "重設",
+        "minimap": {
+            "description": "小地圖",
+            "tooltip": "顯示縮小地圖以確定現在被顯示範圍的位置"
+        }
+    },
+    "map_data": {
+        "title": "地圖資料",
+        "description": "地圖資料",
+        "data_layers": "資料圖層",
+        "fill_area": "填滿範圍",
+        "map_features": "地圖特徵",
+        "autohidden": "由於太多東西出現在螢幕上，這些特徵已被自動隱藏。你可以放大來編輯它們。"
+    },
+    "feature": {
+        "points": {
+            "description": "點",
+            "tooltip": "興趣點"
+        },
+        "major_roads": {
+            "description": "主要道路",
+            "tooltip": "公路、街道等等"
+        },
+        "minor_roads": {
+            "description": "次級道路",
+            "tooltip": "支路、停車場通道、小徑等等"
+        },
+        "paths": {
+            "description": "徑",
+            "tooltip": "行人路、步行徑、單車徑等等"
+        },
+        "buildings": {
+            "description": "建築物",
+            "tooltip": "建築物、涼亭、車房等等"
+        },
+        "landuse": {
+            "description": "用地特徵",
+            "tooltip": "森林、農地、公園、住宅區、商業區等等"
+        },
+        "boundaries": {
+            "description": "邊界",
+            "tooltip": "行政邊界"
+        },
+        "water": {
+            "description": "水特徵",
+            "tooltip": "河流、湖泊、池塘、流域等等"
+        },
+        "rail": {
+            "description": "鐵路特徵",
+            "tooltip": "鐵路"
+        },
+        "power": {
+            "description": "電力特徵",
+            "tooltip": "電線、發電廠、變電站等等"
+        },
+        "past_future": {
+            "description": "過去／將來",
+            "tooltip": "已建議、建築中、已廢棄、已拆毀等等"
+        },
+        "others": {
+            "description": "其他",
+            "tooltip": "其他東西"
+        }
+    },
+    "area_fill": {
+        "wireframe": {
+            "description": "不填滿 (以線條顯示)",
+            "tooltip": "啟用框線模式，很容易就看到背景影像。"
+        },
+        "partial": {
+            "description": "部分填滿",
+            "tooltip": "只有範圍邊界內側會被填滿。(適合地圖繪畫新手)"
+        },
+        "full": {
+            "description": "全部填滿",
+            "tooltip": "整個範圍會被填滿。"
+        }
     },
     "restore": {
-        "heading": "你有修改未記妥",
-        "description": "要唔要囘復上次未記妥之修改？",
-        "restore": "囘復",
-        "reset": "重新開始"
+        "heading": "你有未儲存的變更",
+        "description": "你想恢復上一次編輯時尚未儲存的變更嗎？",
+        "restore": "恢復",
+        "reset": "重設"
     },
     "save": {
-        "title": "記低",
-        "help": "修改放上公家街圖，等其他用者都睇到。",
-        "no_changes": "無修改可記",
-        "uploading": "修改傳上公家街圖。",
-        "unsaved_changes": "你有修改未記妥"
+        "title": "儲存",
+        "help": "儲存變更至OpenStreetMap，讓其他用戶都看得到。",
+        "no_changes": "沒有變更需要儲存。",
+        "error": "儲存時發生錯誤",
+        "status_code": "伺服器提供的狀態碼{code}",
+        "unknown_error_details": "請確保你已連接至互聯網。",
+        "uploading": "正在上傳變更到OpenStreetMap。",
+        "unsaved_changes": "你有未儲存的變更",
+        "conflict": {
+            "header": "解決有衝突的編輯項目",
+            "count": " {total}個衝突中的第{num}個",
+            "previous": "< 上一個",
+            "next": "下一個 >",
+            "keep_local": "保留我的",
+            "keep_remote": "使用其他人的",
+            "restore": "復原",
+            "delete": "放棄資料",
+            "download_changes": "或者下載你的變更。",
+            "done": "所有衝突已解決！",
+            "help": "另一用戶已變更了一些你變更過的地圖特徵。\n按一下下面的每一個項目以了解有關衝突並決定是否需要保留\n你的變更或者是其他用戶的變更。\n"
+        }
+    },
+    "merge_remote_changes": {
+        "conflict": {
+            "deleted": "這物件已被{user}刪除。",
+            "location": "這物件被你和{user}移動過。",
+            "nodelist": "這些節被你和{user}變更過。",
+            "memberlist": "關係構件已被你和{user}改變了。",
+            "tags": "你變更了{tag}標籤為\"{local}\"，而{user}變更為\"{remote}\"。"
+        }
     },
     "success": {
-        "edited_osm": "改掂公家街圖！",
-        "just_edited": "你啱啱改咗公家街圖！",
-        "view_on_osm": "入公家街圖睇",
-        "facebook": "放上Facebook",
-        "twitter": "放上Twitter",
-        "google": "放上Google+",
-        "help_html": "你所改嘅，幾分鐘後會送到普通層。其他層，或者某啲地貌，要用多啲時間。\n(<a href='https://help.openstreetmap.org/questions/4705/why-havent-my-changes-appeared-on-the-map' target='_blank'>詳解</a>)。\n"
+        "edited_osm": "已編輯了OSM！",
+        "just_edited": "你剛剛編輯了OpenStreetMap！",
+        "view_on_osm": "於OSM上顯示",
+        "facebook": "分享至 Facebook",
+        "twitter": "分享至 Twitter",
+        "google": "分享至 Google+",
+        "help_html": "你的變更會在幾分鐘後出現在標準圖層。其他圖層或某些特徵可能需要多些時間\n(<a href='https://help.openstreetmap.org/questions/4705/why-havent-my-changes-appeared-on-the-map' target='_blank'>詳細資料</a>)。\n"
     },
     "confirm": {
-        "okay": "得"
+        "okay": "確定",
+        "cancel": "取消"
     },
     "splash": {
-        "welcome": "歡迎來到艾第公家街圖造圖。",
-        "text": "艾第爾件架生，易用之時，亦功用多多，用來投稿修改去，世界至好，任用嘅世界地圖片。現時版本係{version}。想多啲資料，睇下 {website}同埋去{github}報告出錯。",
-        "walkthrough": "開始逐步解釋",
-        "start": "卽改"
+        "welcome": "歡迎使用iD OpenStreetMap編輯器",
+        "text": "iD是一個易用但功能強大的工具以便你可在世界上最好的免費地圖中作出貢獻。這個是版本{version}。你可在{website}得到更多資料和在{github}報告錯誤。",
+        "walkthrough": "開始新手教學",
+        "start": "立即編輯"
     },
     "source_switch": {
-        "live": "運行之中",
-        "lose_changes": "你未有修改未記妥。轉地圖電腦，就會無咗修改。你真係要轉地圖電腦？",
-        "dev": "製作之中"
+        "live": "實況模式",
+        "lose_changes": "你有尚未儲存的變更。切換地圖伺服器將放棄它們。你確定要切換伺服器嗎？",
+        "dev": "開發模式"
     },
     "tag_reference": {
         "description": "描述",
-        "on_wiki": "喺公家街圖百科度嘅{tag}",
-        "used_with": "同{type}一齊用"
+        "on_wiki": "在wiki.osm.org上的 {tag}",
+        "used_with": "與{type}一起用"
     },
     "validations": {
-        "untagged_point": "未有籤嘅點",
-        "untagged_line": "冇籤嘅綫",
-        "untagged_area": "冇籤嘅範圍",
-        "many_deletions": "你要刪走物件{n}個。你真係想咁做？咁人人用開嘅公家街圖入便，都會刪走埋。",
-        "tag_suggests_area": "{tag}籤話條綫係範圍，實情佢唔係。",
-        "deprecated_tags": "廢籤：{tags}"
+        "untagged_point": "未有標籤的點",
+        "untagged_line": "未有標籤的綫",
+        "untagged_area": "未有標籤的範圍",
+        "many_deletions": "你正在刪除 {n} 個物件。你確定要這樣做嗎？這樣就會將人人在openstreetmap.org 地圖內看到的物件刪除了。",
+        "tag_suggests_area": "{tag}標籤建議綫應為範圍，但這不是一個範圍。",
+        "untagged_point_tooltip": "選擇一個特徵種類來形容這個點是甚麼。",
+        "untagged_line_tooltip": "選擇一個特徵種類來形容這條綫是甚麼。",
+        "untagged_area_tooltip": "選擇一個特徵種類來形容這個範圍是甚麼。",
+        "deprecated_tags": "已棄用的標籤: {tags}"
     },
     "zoom": {
         "in": "放大",
         "out": "縮細"
     },
-    "cannot_zoom": "今下模式，無得再縮。",
+    "cannot_zoom": "在這個模式下不能再縮小。",
+    "full_screen": "切換全螢幕",
     "gpx": {
-        "local_layer": "本地 GPX 檔案",
-        "drag_drop": "拉個 .gpx檔案入來爾版。或者，撳右邊粒掣揀檔案。",
-        "zoom": "校到GPX路徑大細",
-        "browse": "望下有乜 .gpx 檔案"
+        "local_layer": "本機 GPX 檔案",
+        "drag_drop": "拖移 .gpx檔案到本頁或者按右側按鈕瀏覽。",
+        "zoom": "放大至 GPX 軌跡",
+        "browse": "開啟 .gpx 檔案"
+    },
+    "mapillary": {
+        "tooltip": "來自Mapillary的街道層相片",
+        "title": "相片覆蓋 (Mapillary)",
+        "view_on_mapillary": "在Mapillary上觀看這影像"
     },
     "help": {
-        "title": "指南",
-        "roads": "# 路\n\n用個程式，你開得，整得，刪得啲路。路有幾種，徑、公路、山徑、單車徑等等，乜嘢相交一段都要畫面出來。\n\n### 揀\n\n撳一下條路，就揀到。個外形會見得明顯，亦有架生仔選單，外加邊註欄有多啲路嘅資料。\n\n### 改\n\n你耐不耐見到條路，同背景相，或全球定位系統行縱，並唔一致。你要調較到佢哋啱位。\n\n首先撳一下，你想改嗰條路。咁條路就會特別顯眼，同埋有一點點畀你畀拉到啱位。若你想加多幾點，更加仔細，就喺條路上面，無節嘅地方，快撳兩下，咁就會開多一節。\n\n若然條路要駁去其他路，之但係無駁妥，咁你就拖住一點，拉到其他路，整到聯埋。地圖來講，駁通啲路係咁緊要，同埋駕車搵路亦必須。\n\n你亦可以用【搬】爾個架生，或撳快掣【M】，一次過搬成條路，再撳多下，就記好搬動。\n\n### 刪\n\n若成條路都唔啱，你亦要望下衞星相，以及最好親身確認，佢真係唔喺度，你就可以刪咗佢，卽係由地圖度搬走。小心啲刪走地貌，同其他改法一樣，有時地貌係人人都見到，但係衞星相過晒時，新路未必見。\n\n你刪條路，就撳佢一下，揀咗佢。跟住撳垃圾筒公仔，或者撳快掣【Delete】。\n\n### 開新\n\n要搵地方，緊係要有條路，係咪？去程式左上角，咁住【綫】個公仔，或者撳快掣【2】，就開始畫綫。\n\n地圖度，撳住路頭個位開始畫。若然條路由原路分出，就由原路上面路口位，撳一下開始。\n\n撳嘅點，應該人係跟實條路，跟䘙星相，或跟全球定位系統行蹤。若果你條路，會橫過另一條，你就喺路口位，撳落另一條路上，就起咗個交叉點。你要畫完，就快撳兩下。又或者咁鍵盤【Return】或【Enter】掣。\n",
-        "imagery": "# 相\n\n航空相係地圖要源。佢哋飛機飛過，衞星望落等組合。網上有任用來源，可供使用。就喺右邊，【背景設定】之內。\n\n程式預先已有 [兵地圖](http://www.bing.com/maps/) 䘙星相層。你放大縮細去某啲地方，就有其他可用。某幾國，如美國、法國、丹麥等，國內某啲地方，有極精細嘅相。\n\n相有時同地圖資料有差距，爾個係供相者出錯。若你睇到多多路與背景移咗位，就唔好郁住。將啲相校好個位，同地圖資料吻合。要咁做，就去背景設定，撳【校正對位誤差】校好咗先。\n",
-        "addresses": "# 地埗\n\n地埗，對地圖好有用嘅資料。\n\n雖則地埗通常係街嘅一部份，不過喺公家街圖入面，會記爲沿街屋宇及地方屬性。\n\n你可以加地埗落地方，畫成屋宇界圖，亦可以畫成單處。最好來源，就係視身街一轉，或者靠個人知識。之但係，同其他地貌一樣，禁止抄其他商用來源，包括谷歌地圖。\n",
-        "buildings": "# 屋宇\n\n公家街圖有屋宇資料庫，全球至大。你可以幫手添啲，亦可改善資料。\n\n### 揀\n\n你要揀屋宇，咁邊佢條邊就得。間屋宇會顯眼啲，亦會有架生仔選單，同埋邊註欄講屋宇多啲資料。\n\n### 改\n\n有陣時屋宇放唔啱，又或者放錯籤。\n\n要搬成間屋宇，揀佢先，跟手用【搬】架生。郁滑鼠就移屋宇，搬啱就咁撳一下。\n\n想改屋宇個形，邊度撳一節，拖住一節到啱位爲止。\n\n### 開新\n\n時時有人問，加新屋宇落地圖，而公家街圖又可以係點，又可以加形，咁邊個好啲呢？原則就係，_用得形就用形_，以及屋宇個形內，加公司、屋企、方便設施同其他種種，喺屋宇內有嘅嘢。\n\n畫新屋宇個形，喺左上面撳【範圍】掣，畫完就撳鍵盤【Return】掣，或者撳返去第一節，咁個形就埋口。\n\n### 刪\n\n若成間屋宇都唔啱，你亦要望下衞星相，以及最好親身確認，佢真係唔喺度，你就可以刪咗佢，卽係由地圖度搬走。小心啲刪走地貌，同其他改法一樣，有時地貌係人人都見到，但係衞星相過晒時，新屋宇未必見。\n\n你要刪咗間屋宇，就撳佢揀佢。然後撳垃圾筒公你，或者撳【Delete】掣。\n",
-        "relations": "# 關聯\n\n公家街圖入面，關聯係特別地貌，夾埋其他地貌做一組。例如，有兩種至常見。一係*途徑關聯*，佢係路段組成，路屬高速公路同公路。另一係*幾多邊形*，佢將唔同綫結合，定個複雜嘅範圍，好似範圍分開幾個，或者有洞好似沙翁。\n\n關聯之中，一組地貌就係*成員*。邊註欄度，你睇到地貌，佢做邊啲關聯成員。撳落關聯，就跳入關聯。一揀咗關聯，邊註欄列晒成員，地圖佢哋亦會特別顯眼。\n\n多數情形，你改嘢時，艾弟都會自動保持關聯。你要留意，你刪走一段，想畫得準確一啲，你要確保新段，都留喺原有關聯之中。\n\n## 改關聯\n\n你改關聯，爾度講基本嘢。\n\n加地貌落關聯，㨂地貌。邊註欄入面，【所有關係】度撳【+】掣，揀或打關聯名。\n\n開新關聯，㨂首個成員地貌，【所有關係】度撳【+】掣，揀【新關聯⋯⋯】。\n\n由關聯度拎走地貌，揀地貌，喺唔要嘅關聯側邊，撳垃圾桶公仔。\n\n你砌多幾多邊形開窿，可以用【併】架生。畫出兩個範圍，內同外，鍵盤撳實【Shift】掣，兩個各撳一下，揀晒佢哋，然後撳【併】掣。\n"
+        "title": "說明",
+        "help": "# 說明\n\n這是[OpenStreetMap]的編輯器 (http://www.openstreetmap.org/)，\n免費而且可以編輯的世界地圖。你可以用來新增和更新\n在你附近的資料，令這個開放源碼和開放資料的地圖\n變得更好。\n你在這地圖裡所作的變更會令其他使用OpenStreetMap的人看得到。\n如要編輯，你需要[登入] (https://www.openstreetmap.org/login)。\n\n [iD 編輯器](http://ideditor.com/)是一個共同合作計劃，[原始碼可在GitHub找到](https://github.com/openstreetmap/iD)。\n",
+        "editing_saving": "# 編輯和儲存\n\n這個編輯器主要是靠網上運作而你正在\n經網頁使用它。\n\n### 選擇特徵\n\n要選擇特徵一個地圖特徵，例如道路或興趣點，\n可以在地圖上按它一下。 這樣就可以突出標示你選擇的特徵並開啟有關\n的詳細面板和顯示你可做的動作的選單。\n\n要選擇多個特徵，按著'Shift'鍵，然後\n用滑鼠按你想選擇的特徵或者在地圖上拖曳畫出長方形，\n所有在長方形內的點就會被選。\n\n### 儲存編輯\n\n當你作了變更，例如編輯道路、建築物和地方，\n它們就會儲在你的裝置直至你把它們儲存在伺服器內。如果有錯\n亦不用擔心 - 你可以按還原鍵還原你的變更和重做鍵再做過你的變更。\n\n按 '儲存' 就可儲存一組的編輯 - 例如你已完成\n一個鎮的範圍和希望開始一個新的範圍。你亦有機會\n去復審你做過甚麼，而如果有些不太正確的編輯，\n編輯器還會提供有用的建議和警告。\n\n如果沒有問題，你就可以輸入一些短句解釋一下你所作的變更。\n然後按'儲存'就可將變更上傳到\n[OpenStreetMap.org](http://www.openstreetmap.org/), 其他使用者\n就會看得到和使其他人建立和作出改進。\n\n如果你不可以一次過完成你的編輯，你可以離開編輯器\n視窗並再次回來(使用同一個瀏覽器和電腦)，\n編輯器就會復原你的工作。editor application will offer to restore your work.\n\n### 使用編輯器\n\n鍵盤快捷鍵列表可以在\n[這裡](http://wiki.openstreetmap.org/wiki/ID/Shortcuts)找到。\n",
+        "gps": "# GPS\n\nGPS 追蹤是OpenStreetMap 的寶貴資料來源。這個編輯器\n支援你電腦內的 `.gpx` 檔案。使用智能電話的\n一些應用程式或個人GPS更體就可以搜集得到\n這類的GPS軌跡。\n\n要知道如何運用GPS測量，\n請參閱[用智能電話、GPS或紙繪地圖](http://learnosm.org/en/mobile-mapping/)。\n\n要使用GPX的軌跡繪畫地圖，拖放GPX檔案到編輯器上。\n如辨認得到，它就會於地圖上新增為鮮紫色的綫。\n按'地圖資料'選單右側就可顯示、\n隱藏或縮放這個新的GPX圖層。\n\nGPX軌跡不會直接上載至 OpenStreetMap - 最好的用法\n就要用來繪畫新的地圖、協助你新增特徵、\n或者用來[上載至OpenStreetMap](http://www.openstreetmap.org/trace/create)\n供其他使用者使用。\n",
+        "inspector": "# 使用檢視面版\n\n檢視面版位於畫面左側，\n你可用它編輯你選擇的特徵的詳細資料。\n\n### 選擇一個特徵種類\n\n當你新增了一個點、綫或範圍，你可以揀選它所屬的特徵，\n例如它是公路或住宅道路、起級市場或咖啡室。\n檢視面版會顯示常用的特徵種類按鈕，而你亦可\n利用尋找列搜尋其他的特徵。\n\n按一下在特徵種類按鈕右下角的 'i' ，\n就可知更多有關資訊。按一下按鈕就可選擇那個種類。\n\n### 使用表格和編輯標籤\n\n在你選擇了特徵種類後或者該特徵已有預設種類，\n檢視面版就會顯示一些相應的欄位，\n例如名稱和地址。\n\n在欄位下，你可以按一下 '新增欄位' 選單去新增\n其他資料，例如維基百科全書的連結、輪椅通道等等。\n\n於檢視面版的下方，按 '附加標籤' 就可以新增\n任意的標籤到那個物件。[Taginfo](http://taginfo.openstreetmap.org/) 可以\n提供大量有關常用標籤的組合。\n\n你在檢視面版所作的變更都會自動套用到地圖。\n你可以按 '復原' 按鈕在復原它們。\n"
     },
     "intro": {
         "navigation": {
-            "title": "周圍望",
-            "drag": "大地圖度，公家街圖資料，放喺背景之上。你想周圍望，就拖住，推上落，推左右，就好似普通網上地圖咁。**拖住地圖**",
-            "select": "圖上地貌，有三種方法表示，處、綫同範圍。所有地貌，都以一撳就揀。**撳處去揀。**",
-            "header": "頂頭指明地貌。",
+            "title": "導航",
+            "drag": "主要地圖顯示OpenStreetMap資料在背面之上。你可以透過拖曳與捲動來導覽，就像任何其他網絡地圖。**拖曳地圖！**",
+            "select": "地圖特徵以三種方法表示：點、綫或範圍。所有特徵均可點選。**按一下點去選擇它。**",
+            "header": "頁頭顯示特徵種類。",
             "pane": "一揀地貌，地貌器就出。頂頭話我哋知乜嘢地貌，主要顯示地貌屬性，如名同地址。**閂地貌器，就撳右上閂埋個掣。**"
         },
         "points": {
@@ -351,6 +528,7 @@
         },
         "areas": {
             "title": "範圍",
+            "add": "範圍是用作顯示特徵的邊界，例如湖泊、建築物和住宅區。亦可用來更細緻地標示很多平常是點的特徵。 **按一下範圍鍵來新增範圍。**",
             "corner": "要畫範圍，就用節來勾出邊界，包住範圍。**擺開始一節，喺遊樂場一角。**",
             "place": "畫範圍，就要擺多啲節。要完成範圍，就欽返頭嗰節。**畫個範圍畀遊樂場。**",
             "search": "**搵【{name}】。**",
@@ -379,10 +557,10 @@
     "presets": {
         "categories": {
             "category-building": {
-                "name": "屋宇"
+                "name": "建築物"
             },
             "category-golf": {
-                "name": "哥夫球"
+                "name": "高爾夫球"
             },
             "category-landuse": {
                 "name": "用地"
@@ -392,6 +570,9 @@
             },
             "category-rail": {
                 "name": "軌道"
+            },
+            "category-restriction": {
+                "name": "限制"
             },
             "category-road": {
                 "name": "路"
@@ -408,6 +589,7 @@
         },
         "fields": {
             "access": {
+                "label": "允許通過",
                 "options": {
                     "designated": {
                         "description": "通行與否，按法例或路牌指定",
@@ -417,13 +599,17 @@
                         "description": "限往目的地",
                         "title": "目的地"
                     },
+                    "dismount": {
+                        "description": "允許通過但騎單車者需要下車",
+                        "title": "下車"
+                    },
                     "no": {
                         "description": "公眾不通",
                         "title": "禁入"
                     },
                     "permissive": {
                         "description": "可通，直至地主唔畀。",
-                        "title": "放任"
+                        "title": "自由通過"
                     },
                     "private": {
                         "description": "要地主批准",
@@ -434,28 +620,89 @@
                         "title": "准許"
                     }
                 },
+                "placeholder": "未指明",
                 "types": {
+                    "access": "所有",
                     "bicycle": "單車",
-                    "foot": "行",
+                    "foot": "步行",
                     "horse": "馬",
                     "motor_vehicle": "車"
                 }
             },
+            "access_simple": {
+                "label": "允許通過",
+                "placeholder": "是"
+            },
+            "access_toilets": {
+                "label": "通過"
+            },
             "address": {
-                "label": "地埗",
+                "label": "地址",
                 "placeholders": {
-                    "city": "城",
-                    "street": "街"
+                    "city": "城市",
+                    "conscriptionnumber": "123",
+                    "country": "國家",
+                    "district": "地區",
+                    "hamlet": "村落",
+                    "housename": "房名",
+                    "housenumber": "123",
+                    "place": "地方",
+                    "postcode": "郵遞區號",
+                    "province": "省",
+                    "state": "州",
+                    "street": "街",
+                    "subdistrict": "分區",
+                    "suburb": "市郊"
                 }
             },
             "admin_level": {
                 "label": "行政層次"
+            },
+            "aerialway": {
+                "label": "種類"
+            },
+            "aerialway/access": {
+                "label": "通過",
+                "options": {
+                    "both": "進入及離開",
+                    "entry": "進入",
+                    "exit": "出口"
+                }
+            },
+            "aerialway/bubble": {
+                "label": "車廂"
+            },
+            "aerialway/capacity": {
+                "label": "載客量 (每小時)",
+                "placeholder": "500, 2500, 5000..."
+            },
+            "aerialway/duration": {
+                "label": "車程 (分鐘)",
+                "placeholder": "1, 2, 3..."
+            },
+            "aerialway/heating": {
+                "label": "暖氣"
+            },
+            "aerialway/occupancy": {
+                "label": "車廂載客量",
+                "placeholder": "2, 4, 8..."
+            },
+            "aerialway/summer/access": {
+                "label": "開放 (夏天)",
+                "options": {
+                    "both": "進入及離開",
+                    "entry": "進入",
+                    "exit": "出口"
+                }
             },
             "aeroway": {
                 "label": "類"
             },
             "amenity": {
                 "label": "類"
+            },
+            "area/highway": {
+                "label": "種類"
             },
             "artist": {
                 "label": "藝人"
@@ -472,11 +719,17 @@
             "barrier": {
                 "label": "類"
             },
+            "bench": {
+                "label": "長椅"
+            },
             "bicycle_parking": {
                 "label": "類"
             },
             "boundary": {
                 "label": "類"
+            },
+            "brand": {
+                "label": "品牌"
             },
             "building": {
                 "label": "屋宇"
@@ -489,7 +742,25 @@
                 "placeholder": "50, 100, 200..."
             },
             "cardinal_direction": {
-                "label": "方向"
+                "label": "方向",
+                "options": {
+                    "E": "東",
+                    "ENE": "東北偏東",
+                    "ESE": "東南偏東",
+                    "N": "北",
+                    "NE": "東北",
+                    "NNE": "東北偏北",
+                    "NNW": "西北偏北",
+                    "NW": "西北",
+                    "S": "南",
+                    "SE": "東南",
+                    "SSE": "東南偏南",
+                    "SSW": "西南偏南",
+                    "SW": "西南",
+                    "W": "西",
+                    "WNW": "西北偏西",
+                    "WSW": "西南偏西"
+                }
             },
             "clock_direction": {
                 "label": "方向",
@@ -504,17 +775,66 @@
             "construction": {
                 "label": "類"
             },
+            "content": {
+                "label": "內容"
+            },
             "country": {
                 "label": "國"
             },
             "covered": {
                 "label": "有蓋"
             },
+            "craft": {
+                "label": "種類"
+            },
+            "crop": {
+                "label": "裁剪"
+            },
             "crossing": {
                 "label": "類"
             },
             "cuisine": {
                 "label": "菜系"
+            },
+            "cycleway": {
+                "label": "單車徑",
+                "options": {
+                    "lane": {
+                        "description": "單車徑與行車道由地上的綫分開",
+                        "title": "標準單車徑"
+                    },
+                    "none": {
+                        "description": "沒有單車徑",
+                        "title": "無"
+                    },
+                    "opposite": {
+                        "description": "單程路提供雙程行車單車徑",
+                        "title": "雙向行駛單車徑"
+                    },
+                    "opposite_lane": {
+                        "description": "與行車方向相反的單車徑"
+                    },
+                    "share_busway": {
+                        "description": "與巴士綫共享的單車徑",
+                        "title": "與巴士綫共用的單車徑"
+                    },
+                    "shared_lane": {
+                        "description": "沒有與行車道分開的單車徑",
+                        "title": "共用單車徑"
+                    },
+                    "track": {
+                        "description": "單車徑與行車道由障礙物分開",
+                        "title": "單車徑"
+                    }
+                },
+                "placeholder": "沒有",
+                "types": {
+                    "cycleway:left": "左側",
+                    "cycleway:right": "右側"
+                }
+            },
+            "delivery": {
+                "label": "外賣"
             },
             "denomination": {
                 "label": "派"
@@ -525,6 +845,19 @@
             "description": {
                 "label": "描述"
             },
+            "drive_through": {
+                "label": "免下車"
+            },
+            "electrified": {
+                "label": "電氣化",
+                "options": {
+                    "contact_line": "電纜",
+                    "no": "否",
+                    "rail": "已通電路軌",
+                    "yes": "是 (未指定)"
+                },
+                "placeholder": "電纜、已通電路軌…"
+            },
             "elevation": {
                 "label": "海拔"
             },
@@ -534,6 +867,9 @@
             "entrance": {
                 "label": "類"
             },
+            "except": {
+                "label": "例外"
+            },
             "fax": {
                 "label": "傳真",
                 "placeholder": "+852 12345678"
@@ -542,10 +878,58 @@
                 "label": "費用"
             },
             "fire_hydrant/type": {
-                "label": "類"
+                "label": "類",
+                "options": {
+                    "pillar": "柱狀/地上",
+                    "pond": "池塘",
+                    "underground": "地下",
+                    "wall": "牆上"
+                }
             },
             "fixme": {
                 "label": "整好我"
+            },
+            "fuel": {
+                "label": "燃料"
+            },
+            "fuel/biodiesel": {
+                "label": "售賣生物柴油"
+            },
+            "fuel/diesel": {
+                "label": "售賣柴油"
+            },
+            "fuel/e10": {
+                "label": "售賣E10"
+            },
+            "fuel/e85": {
+                "label": "售賣E85"
+            },
+            "fuel/lpg": {
+                "label": "售賣丙烷"
+            },
+            "fuel/octane_100": {
+                "label": "售賣賽車汽油"
+            },
+            "fuel/octane_91": {
+                "label": "售賣一般汽油"
+            },
+            "fuel/octane_95": {
+                "label": "售賣中級汽油"
+            },
+            "fuel/octane_98": {
+                "label": "售賣頂級汽油"
+            },
+            "gauge": {
+                "label": "軌距"
+            },
+            "gender": {
+                "label": "性別",
+                "options": {
+                    "female": "女",
+                    "male": "男",
+                    "unisex": "單性"
+                },
+                "placeholder": "未知"
             },
             "generator/method": {
                 "label": "方法"
@@ -564,11 +948,17 @@
                 "label": "差點",
                 "placeholder": "1-18"
             },
+            "handrail": {
+                "label": "扶手"
+            },
             "highway": {
                 "label": "類"
             },
             "historic": {
                 "label": "類"
+            },
+            "hoops": {
+                "placeholder": "1, 2, 4..."
             },
             "iata": {
                 "label": "萬國航空運輸協會（IATA）"
@@ -579,16 +969,27 @@
             "incline": {
                 "label": "斜"
             },
+            "incline_steps": {
+                "options": {
+                    "down": "落",
+                    "up": "上"
+                }
+            },
             "information": {
                 "label": "類"
             },
             "internet_access": {
                 "label": "用到互聯網",
                 "options": {
+                    "no": "否",
                     "terminal": "終端機",
                     "wired": "揷綫上網",
-                    "wlan": "無綫上網"
+                    "wlan": "無綫上網",
+                    "yes": "有"
                 }
+            },
+            "lamp_type": {
+                "label": "種類"
             },
             "landuse": {
                 "label": "類"
@@ -620,6 +1021,33 @@
                 "label": "限速",
                 "placeholder": "40, 50, 60..."
             },
+            "mtb/scale": {
+                "label": "越野單車徑難度",
+                "options": {
+                    "0": "0: 碎石/ 硬土、沒有障礙物、大弧度",
+                    "1": "1: 有些鬆散的地面、小型障礙物、大弧度",
+                    "2": "2: 較多鬆散的地面、大型障礙物、簡單急彎",
+                    "3": "3: 濕滑地面、大型障礙物、狹窄急彎",
+                    "4": "4: 鬆散的地面或大圓石、危險急彎",
+                    "5": "5: 十分困難、石灘、滑坡",
+                    "6": "6: 非精湛越野單車者不可騎越"
+                },
+                "placeholder": "0, 1, 2, 3..."
+            },
+            "mtb/scale/imba": {
+                "label": "國際越野單車協會路徑難度",
+                "options": {
+                    "0": "最容易 (白圓圈)",
+                    "1": "容易 (綠圓圈)",
+                    "2": "中等 (藍正方)",
+                    "3": "困難 (黑鑽石)",
+                    "4": "極度困難 (雙黑鑽石)"
+                },
+                "placeholder": "容易、中等、困難 …"
+            },
+            "mtb/scale/uphill": {
+                "placeholder": "0, 1, 2, 3..."
+            },
             "name": {
                 "label": "名",
                 "placeholder": "常用名（若有）"
@@ -637,10 +1065,18 @@
                 "label": "類"
             },
             "oneway": {
-                "label": "單程"
+                "label": "單程",
+                "options": {
+                    "no": "否",
+                    "yes": "有"
+                }
             },
             "oneway_yes": {
-                "label": "單程"
+                "label": "單程",
+                "options": {
+                    "no": "否",
+                    "yes": "有"
+                }
             },
             "opening_hours": {
                 "label": "時間"
@@ -656,20 +1092,70 @@
                 "label": "泊車轉乖"
             },
             "parking": {
-                "label": "類"
+                "label": "類",
+                "options": {
+                    "multi-storey": "多層",
+                    "sheds": "有蓋",
+                    "surface": "地面",
+                    "underground": "地下"
+                }
             },
             "phone": {
                 "label": "電話",
                 "placeholder": "+852 12345678"
             },
+            "piste/difficulty": {
+                "label": "難度",
+                "options": {
+                    "advanced": "進階 (黑鑽)",
+                    "easy": "容易 (綠圓圈)",
+                    "expert": "專家 (雙黑鑽)",
+                    "extreme": "極困難 (需要攀登工具)"
+                }
+            },
+            "piste/grooming": {
+                "options": {
+                    "mogul": "花式"
+                }
+            },
+            "piste/type": {
+                "label": "種類"
+            },
             "place": {
                 "label": "類"
+            },
+            "population": {
+                "label": "人口"
             },
             "power": {
                 "label": "類"
             },
             "railway": {
                 "label": "類"
+            },
+            "recycling/cans": {
+                "label": "可收金屬罐"
+            },
+            "recycling/clothes": {
+                "label": "可收衣物"
+            },
+            "recycling/glass": {
+                "label": "可收玻璃"
+            },
+            "recycling/glass_bottles": {
+                "label": "可收玻璃瓶"
+            },
+            "recycling/paper": {
+                "label": "可收廢紙"
+            },
+            "recycling/plastic": {
+                "label": "可收塑膠"
+            },
+            "recycling/type": {
+                "label": "回收種類",
+                "options": {
+                    "centre": "回收中心"
+                }
             },
             "ref": {
                 "label": "參攷"
@@ -683,23 +1169,66 @@
             "restriction": {
                 "label": "類"
             },
+            "restrictions": {
+                "label": "轉彎限制"
+            },
             "route": {
                 "label": "類"
             },
             "route_master": {
                 "label": "類"
             },
+            "sac_scale": {
+                "label": "遠足難度"
+            },
+            "seasonal": {
+                "label": "季節性"
+            },
             "service": {
                 "label": "類"
+            },
+            "service/bicycle/chain_tool": {
+                "options": {
+                    "no": "否",
+                    "yes": "有"
+                }
+            },
+            "service/bicycle/pump": {
+                "label": "泵氣設備",
+                "options": {
+                    "no": "否",
+                    "yes": "有"
+                }
+            },
+            "service_rail": {
+                "options": {
+                    "crossover": "渡線",
+                    "siding": "側線",
+                    "spur": "支線",
+                    "yard": "貨場"
+                }
             },
             "shelter": {
                 "label": "有天遮"
             },
             "shelter_type": {
-                "label": "類"
+                "label": "種類"
             },
             "shop": {
-                "label": "類"
+                "label": "種類"
+            },
+            "smoking": {
+                "options": {
+                    "isolated": "於實質上隔開的吸煙區",
+                    "no": "任何地方都不可吸煙",
+                    "outside": "可於室外吸煙",
+                    "separated": "無有隔開的吸煙區",
+                    "yes": "所有地方均可吸煙"
+                },
+                "placeholder": "禁止、隔開、可以"
+            },
+            "smoothness": {
+                "label": "順滑度"
             },
             "source": {
                 "label": "來源"
@@ -707,21 +1236,46 @@
             "sport": {
                 "label": "運動"
             },
+            "sport_ice": {
+                "label": "運動"
+            },
+            "sport_racing": {
+                "label": "運動"
+            },
             "structure": {
                 "label": "結構",
                 "options": {
-                    "bridge": "橋",
+                    "bridge": "橋樑",
                     "cutting": "開山",
                     "embankment": "基堤",
+                    "ford": "淺灘",
                     "tunnel": "隧道"
                 },
                 "placeholder": "未知"
             },
+            "studio_type": {
+                "label": "種類"
+            },
+            "substation": {
+                "label": "種類"
+            },
             "supervised": {
-                "label": "有人睇"
+                "label": "受監察"
             },
             "surface": {
                 "label": "表面"
+            },
+            "tactile_paving": {
+                "label": "盲人引路徑"
+            },
+            "takeaway": {
+                "label": "外賣",
+                "options": {
+                    "no": "不可",
+                    "only": "只可外賣",
+                    "yes": "可以"
+                },
+                "placeholder": "可以、不可、只可外賣…"
             },
             "toilets/disposal": {
                 "label": "棄置"
@@ -732,11 +1286,20 @@
             "towertype": {
                 "label": "塔類"
             },
+            "traffic_signals": {
+                "label": "訊號種類"
+            },
             "trail_visibility": {
-                "label": "徑明顯度"
+                "label": "路徑可見度"
+            },
+            "trees": {
+                "label": "樹"
+            },
+            "tunnel": {
+                "label": "隧道"
             },
             "vending": {
-                "label": "貨類"
+                "label": "貨品種類"
             },
             "water": {
                 "label": "類"
@@ -754,14 +1317,21 @@
             "wheelchair": {
                 "label": "可通輪椅"
             },
+            "width": {
+                "label": "濶度(米)"
+            },
             "wikipedia": {
                 "label": "維基百科全書"
             }
         },
         "presets": {
             "address": {
-                "name": "地埗",
+                "name": "地址",
                 "terms": "Address,地址,地埗,址"
+            },
+            "aerialway": {
+                "name": "纜車路線",
+                "terms": "吊車、纜車、索道"
             },
             "aeroway": {
                 "name": "航空設施",
@@ -850,6 +1420,10 @@
             "amenity/car_wash": {
                 "name": "洗車舖",
                 "terms": "Car Wash,洗車,洗車店,洗車舖"
+            },
+            "amenity/casino": {
+                "name": "賭場",
+                "terms": "賭場"
             },
             "amenity/cinema": {
                 "name": "電影戲院",
@@ -983,6 +1557,10 @@
                 "name": "售賣機",
                 "terms": "Vending Machine,售賣機,自勳動賣機"
             },
+            "amenity/veterinary": {
+                "name": "獸醫",
+                "terms": "獸醫, 動物醫生"
+            },
             "amenity/waste_basket": {
                 "name": "垃圾桶",
                 "terms": "Waste Basket,垃圾桶,垃圾箱,廢物箱"
@@ -1114,6 +1692,9 @@
             "footway/sidewalk": {
                 "name": "行人路",
                 "terms": "Sidewalk,行人路"
+            },
+            "ford": {
+                "name": "淺灘"
             },
             "golf/bunker": {
                 "name": "沙坑",
@@ -1355,6 +1936,10 @@
                 "name": "消閒",
                 "terms": "Leisure,休閑場所,休閒設施,消閒"
             },
+            "leisure/bowling_alley": {
+                "name": "保齡球場",
+                "terms": "保齡球場"
+            },
             "leisure/common": {
                 "name": "公地",
                 "terms": "Common,公共用地,公地"
@@ -1419,6 +2004,10 @@
                 "name": "船排",
                 "terms": "Slipway,船排,船架滑道,船臺"
             },
+            "leisure/sports_center": {
+                "name": "體育中心 / 健身室",
+                "terms": "體育中心, 健身室, 健身中心, 健身房"
+            },
             "leisure/stadium": {
                 "name": "大體育館",
                 "terms": "Stadium,大體育館,體育,體育場"
@@ -1434,6 +2023,10 @@
             "man_made": {
                 "name": "人造",
                 "terms": "Man Made,人造,人造構築,人造物"
+            },
+            "man_made/adit": {
+                "name": "礦坑口",
+                "terms": "礦坑口, 礦洞口"
             },
             "man_made/breakwater": {
                 "name": "防波堤",
@@ -1455,9 +2048,17 @@
                 "name": "燈塔",
                 "terms": "Lighthouse,燈塔"
             },
+            "man_made/mast": {
+                "name": "無線電杆",
+                "terms": "無線電杆, 天線杆"
+            },
             "man_made/observation": {
                 "name": "瞭望臺",
                 "terms": "Observation Tower,瞭望塔,瞭望臺"
+            },
+            "man_made/petroleum_well": {
+                "name": "油井",
+                "terms": "油井"
             },
             "man_made/pier": {
                 "name": "埗頭",
@@ -1466,6 +2067,14 @@
             "man_made/pipeline": {
                 "name": "水管",
                 "terms": "Pipeline,水管,管道"
+            },
+            "man_made/silo": {
+                "name": "筒倉",
+                "terms": "筒倉, 直立式儲存倉"
+            },
+            "man_made/storage_tank": {
+                "name": "貯存箱",
+                "terms": "貯存缸, 儲存缸, 貯油缸, 貯水箱, 儲油缸, 儲水箱"
             },
             "man_made/survey_point": {
                 "name": "測量點",
@@ -1483,6 +2092,10 @@
                 "name": "水塔",
                 "terms": "Water Tower,水塔"
             },
+            "man_made/water_well": {
+                "name": "水井",
+                "terms": "水井, 井"
+            },
             "man_made/water_works": {
                 "name": "供水廠",
                 "terms": "Water Works,供水廠,水務設施"
@@ -1499,9 +2112,29 @@
                 "name": "地堡",
                 "terms": "Bunker,地堡,暗堡"
             },
+            "military/checkpoint": {
+                "name": "檢查站",
+                "terms": "檢查站, 檢查點"
+            },
+            "military/danger_area": {
+                "name": "危險區",
+                "terms": "危險地區, 危險區域, 危險範圍"
+            },
+            "military/naval_base": {
+                "name": "海軍基地",
+                "terms": "海軍基地"
+            },
+            "military/obstacle_course": {
+                "name": "越障訓練場",
+                "terms": "越障訓練場"
+            },
             "military/range": {
                 "name": "操炮區",
                 "terms": "Military Range,操炮區,軍事範圍"
+            },
+            "military/training_area": {
+                "name": "訓練場地",
+                "terms": "訓練場, 練習場地, 練習場"
             },
             "natural": {
                 "name": "天然",
@@ -1514,6 +2147,10 @@
             "natural/beach": {
                 "name": "灘",
                 "terms": "Beach,沙灘,海灘,灘"
+            },
+            "natural/cave_entrance": {
+                "name": "洞穴入口",
+                "terms": "洞穴入口"
             },
             "natural/cliff": {
                 "name": "崖",
@@ -1543,6 +2180,10 @@
                 "name": "峯",
                 "terms": "Peak,山峰,山頂,峯"
             },
+            "natural/saddle": {
+                "name": "山鞍",
+                "terms": "山鞍"
+            },
             "natural/scree": {
                 "name": "碎石坡",
                 "terms": "Scree,碎石坡"
@@ -1558,6 +2199,14 @@
             "natural/tree": {
                 "name": "樹",
                 "terms": "Tree,木,樹"
+            },
+            "natural/tree_row": {
+                "name": "樹排",
+                "terms": "樹行"
+            },
+            "natural/volcano": {
+                "name": "火山",
+                "terms": "火山"
             },
             "natural/water": {
                 "name": "水",
@@ -1667,6 +2316,10 @@
                 "name": "旅行社",
                 "terms": "Travel Agency,旅行社"
             },
+            "piste": {
+                "name": "滑雪道",
+                "terms": "滑雪道"
+            },
             "place": {
                 "name": "地",
                 "terms": "Place,地,地方,地點"
@@ -1674,6 +2327,10 @@
             "place/city": {
                 "name": "城",
                 "terms": "City,城,城市"
+            },
+            "place/farm": {
+                "name": "農場",
+                "terms": "農場, 農田, 農莊"
             },
             "place/hamlet": {
                 "name": "村仔",
@@ -1690,6 +2347,14 @@
             "place/locality": {
                 "name": "地方",
                 "terms": "Locality,地方,地點,地點（無人定居）"
+            },
+            "place/neighbourhood": {
+                "name": "近鄰",
+                "terms": "近鄰"
+            },
+            "place/suburb": {
+                "name": "自治鎮",
+                "terms": "自治鎮, 自治市鎮"
             },
             "place/town": {
                 "name": "鎮",
@@ -1727,6 +2392,10 @@
                 "name": "配電站",
                 "terms": "Substation,變電站,配電站"
             },
+            "power/substation": {
+                "name": "變壓站",
+                "terms": "變壓站, 配電站, 電力分站"
+            },
             "power/tower": {
                 "name": "高壓電塔",
                 "terms": "High-Voltage Tower,高壓輸電塔,高壓電塔"
@@ -1755,13 +2424,25 @@
                 "name": "停用鐵路",
                 "terms": "Disused Railway,停用鐵路,廢棄的鐵路"
             },
+            "railway/funicular": {
+                "name": "纜索鐵道",
+                "terms": "纜索鐵道, 索道, 纜車"
+            },
             "railway/halt": {
                 "name": "火車細站",
                 "terms": "Railway Halt,小火車站,火車站仔,火車細站"
             },
+            "railway/level_crossing": {
+                "name": "鐵路交滙處",
+                "terms": "鐵路平交道, 鐵道平交道, 平交道, 交滙處, 交匯處"
+            },
             "railway/monorail": {
                 "name": "單軌",
                 "terms": "Monorail,單軌,單軌鐵路,單軌電車"
+            },
+            "railway/narrow_gauge": {
+                "name": "窄軌鐵路",
+                "terms": "窄軌鐵路, 窄軌鐵道"
             },
             "railway/platform": {
                 "name": "月臺",
@@ -1791,6 +2472,10 @@
                 "name": "關係",
                 "terms": "Relation,關係,關系"
             },
+            "roundabout": {
+                "name": "廻旋處",
+                "terms": "廻旋處, 圓環"
+            },
             "route/ferry": {
                 "name": "航綫",
                 "terms": "Ferry Route,渡輪航線,航綫,航線"
@@ -1803,6 +2488,26 @@
                 "name": "酒莊",
                 "terms": "Liquor Store,酒店,酒莊,酒類商店"
             },
+            "shop/anime": {
+                "name": "動漫店",
+                "terms": "動漫店"
+            },
+            "shop/antiques": {
+                "name": "古董店",
+                "terms": "古董店, 古玩店"
+            },
+            "shop/art": {
+                "name": "畫廊",
+                "terms": "畫廊"
+            },
+            "shop/baby_goods": {
+                "name": "嬰兒用品店",
+                "terms": "嬰兒用品店, BB用品店"
+            },
+            "shop/bag": {
+                "name": "袋/行李店",
+                "terms": "行李店, 袋店"
+            },
             "shop/bakery": {
                 "name": "麪飽舖同餅家",
                 "terms": "Bakery,餅家,餅店,餅舖,麪包舖,麪飽店,麪飽舖,麵包店,麵包舖,麵飽店"
@@ -1810,6 +2515,10 @@
             "shop/beauty": {
                 "name": "美容院",
                 "terms": "Beauty Shop,指甲美容,理容院,美妝店,美容店,美容院,護膚中心"
+            },
+            "shop/bed": {
+                "name": "寢具/床褥店",
+                "terms": "寢具店, 床褥店, 床墊店, 床具店, 寢室用品店, 床上用品店, 睡房用品店"
             },
             "shop/beverages": {
                 "name": "飲品舖",
@@ -1819,6 +2528,10 @@
                 "name": "單車舖",
                 "terms": "Bicycle Shop,單車店,單車舖,自行車店"
             },
+            "shop/books": {
+                "name": "書店",
+                "terms": "書局"
+            },
             "shop/boutique": {
                 "name": "時裝店",
                 "terms": "Boutique,時裝店,服飾店,精品店"
@@ -1826,6 +2539,10 @@
             "shop/butcher": {
                 "name": "肉舖",
                 "terms": "Butcher,肉舖,肉販,肉鋪"
+            },
+            "shop/candles": {
+                "name": "蠟燭店",
+                "terms": "蠟燭店"
             },
             "shop/car": {
                 "name": "車行",
@@ -1839,9 +2556,21 @@
                 "name": "車房",
                 "terms": "Car Repair Shop,汽車修理店,汽車維修店,車房"
             },
+            "shop/carpet": {
+                "name": "地毯店",
+                "terms": "地氈店"
+            },
+            "shop/cheese": {
+                "name": "芝士店",
+                "terms": "芝士店, 起司店"
+            },
             "shop/chemist": {
                 "name": "註冊藥房",
                 "terms": "Chemist,藥房,藥行,註冊藥房"
+            },
+            "shop/chocolate": {
+                "name": "朱古力店",
+                "terms": "巧克力店"
             },
             "shop/clothes": {
                 "name": "衫舖",
@@ -1851,9 +2580,21 @@
                 "name": "電腦舖",
                 "terms": "Computer Store,電腦店,電腦舖"
             },
+            "shop/confectionery": {
+                "name": "糖果店",
+                "terms": "糖店"
+            },
             "shop/convenience": {
                 "name": "便利店",
                 "terms": "Convenience Store,便利店"
+            },
+            "shop/copyshop": {
+                "name": "影印店",
+                "terms": "影印店"
+            },
+            "shop/cosmetics": {
+                "name": "化妝品店",
+                "terms": "化妝品店"
             },
             "shop/deli": {
                 "name": "食肆",

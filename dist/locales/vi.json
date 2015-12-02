@@ -954,6 +954,9 @@
                 "label": "Điểm chấp",
                 "placeholder": "1–18"
             },
+            "handrail": {
+                "label": "Lan can"
+            },
             "highway": {
                 "label": "Kiểu"
             },

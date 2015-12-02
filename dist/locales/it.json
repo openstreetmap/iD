@@ -227,6 +227,8 @@
     "zoom_in_edit": "Ingrandisci per modificare",
     "logout": "esci",
     "loading_auth": "Connettendomi ad OpenStreetMap...",
+    "report_a_bug": "Segnala un bug",
+    "help_translate": "Aiuta nelle traduzioni",
     "feature_info": {
         "hidden_warning": "{count} elementi nascosti",
         "hidden_details": "Questi sono gli elementi attualmente nascosti: {details}"
@@ -952,6 +954,9 @@
                 "label": "Handicap",
                 "placeholder": "1-18"
             },
+            "handrail": {
+                "label": "Corrimano"
+            },
             "highway": {
                 "label": "Tipo"
             },
@@ -1421,6 +1426,9 @@
                     "grade5": "Morbido: erba, sabbia o terreno"
                 },
                 "placeholder": "Solido, Soprattutto Solido, Morbido..."
+            },
+            "traffic_signals": {
+                "label": "Tipo"
             },
             "trail_visibility": {
                 "label": "Visibilità del Tracciato",
@@ -1965,15 +1973,15 @@
                 "terms": "capanna,attrezzi,rimessa,ripostiglio,basso servizio"
             },
             "building/cathedral": {
-                "name": "Cattedrale",
+                "name": "Cattedrale (edificio)",
                 "terms": "cattedrale,chiesa,monumento,religioso"
             },
             "building/chapel": {
-                "name": "Cappella",
+                "name": "Cappella (edificio)",
                 "terms": "chiesetta,capellina"
             },
             "building/church": {
-                "name": "Chiesa",
+                "name": "Chiesa (edificio)",
                 "terms": "cristiano,abbazia,basilica,cattedrale,presbiterio,cappella,chiesa,casa di Dio,luogo di preghiera,luogo di culto,missione,oratorio,parrocchia,sacello,edicola votiva,tabernacolo,tempio"
             },
             "building/college": {
@@ -2144,6 +2152,9 @@
                 "name": "Gioielliere",
                 "terms": "gioielli,bigiotteria,orafo,gioielleria"
             },
+            "craft/key_cutter": {
+                "name": "Duplicazione di chiavi"
+            },
             "craft/locksmith": {
                 "name": "Fabbro",
                 "terms": "fabbro,ferraio,ferro battuto,officina"
@@ -2165,6 +2176,9 @@
             },
             "craft/plumber": {
                 "name": "Idraulico"
+            },
+            "craft/pottery": {
+                "name": "Negozio di ceramica"
             },
             "craft/saddler": {
                 "name": "Sellaio"
@@ -2641,6 +2655,12 @@
                 "name": "Campo da basket",
                 "terms": "Campo da pallacanestro"
             },
+            "leisure/pitch/rugby_league": {
+                "name": "Campo di rugby a 13"
+            },
+            "leisure/pitch/rugby_union": {
+                "name": "Campo di rugby"
+            },
             "leisure/pitch/skateboard": {
                 "name": "Skate Park",
                 "terms": "skate park,skateboard,pista"
@@ -2785,9 +2805,15 @@
                 "name": "Posto di controllo",
                 "terms": "checkpoint,check point,posto di blocco"
             },
+            "military/danger_area": {
+                "name": "Area pericolosa"
+            },
             "military/naval_base": {
                 "name": "Base navale",
                 "terms": "base,navi,marina,marina militare"
+            },
+            "military/obstacle_course": {
+                "name": "Percorso ad ostacoli"
             },
             "military/range": {
                 "name": "Poligono di tiro militare"
@@ -3151,6 +3177,9 @@
                 "name": "Negozio di opere d'arte",
                 "terms": "opere d'arte,quadri,sculture,galleria"
             },
+            "shop/bag": {
+                "name": "Negozio di borse e valigie"
+            },
             "shop/bakery": {
                 "name": "Panificio",
                 "terms": "Panificio"
@@ -3242,6 +3271,9 @@
             },
             "shop/curtain": {
                 "name": "Negozio di tende"
+            },
+            "shop/dairy": {
+                "name": "Negozio di latticini"
             },
             "shop/deli": {
                 "name": "Gastronomia",
@@ -3385,6 +3417,9 @@
             "shop/organic": {
                 "name": "Negozio di Prodotti Biologici"
             },
+            "shop/paint": {
+                "name": "Negozio di vernici"
+            },
             "shop/pawnbroker": {
                 "name": "Banco dei pegni"
             },
@@ -3404,6 +3439,9 @@
             },
             "shop/religion": {
                 "name": "Negozio Religioso"
+            },
+            "shop/scuba_diving": {
+                "name": "Negozio di attrezzatura per subacquei"
             },
             "shop/seafood": {
                 "name": "Pescheria",

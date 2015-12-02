@@ -954,6 +954,9 @@
                 "label": "Handicap",
                 "placeholder": "1-18"
             },
+            "handrail": {
+                "label": "Pasamanos"
+            },
             "highway": {
                 "label": "Tipo"
             },
@@ -1977,16 +1980,16 @@
                 "terms": "cabina, camarote"
             },
             "building/cathedral": {
-                "name": "Catedral",
-                "terms": "basílica, iglesia, catedral"
+                "name": "Edificio catedral",
+                "terms": "catedral, iglesia"
             },
             "building/chapel": {
-                "name": "Capilla",
-                "terms": "Capilla"
+                "name": "Edificio capilla",
+                "terms": "capilla, iglesia"
             },
             "building/church": {
-                "name": "Iglesia",
-                "terms": "templo, capilla, colegiata, parroquia, santuario, ermita, oratorio, iglesia"
+                "name": "Edificio iglesia",
+                "terms": "iglesia, templo"
             },
             "building/college": {
                 "name": "Edificio instituto",

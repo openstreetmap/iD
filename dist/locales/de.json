@@ -954,6 +954,9 @@
                 "label": "Handicap",
                 "placeholder": "1-18"
             },
+            "handrail": {
+                "label": "Geländer"
+            },
             "highway": {
                 "label": "Typ"
             },
@@ -1977,16 +1980,16 @@
                 "terms": "Hütte, Wochenendhaus"
             },
             "building/cathedral": {
-                "name": "Kathedrale",
-                "terms": "Kathedrale, Dom"
+                "name": "Dombau",
+                "terms": "Dombau, Dom, Kathedralenbau, Kathedrale, Münster"
             },
             "building/chapel": {
-                "name": "Kapelle (Sakralbau)",
-                "terms": "Kapelle"
+                "name": "Kapellenbau",
+                "terms": "Kapellenbau, Kapelle, Betsaal, Filialkirche, Gotteshaus"
             },
             "building/church": {
-                "name": "Kirche",
-                "terms": "Kirche"
+                "name": "Kirchengebäude",
+                "terms": "Kirchengebäude, Gotteshaus, Kirche"
             },
             "building/college": {
                 "name": "Hochschulgebäude",

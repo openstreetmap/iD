@@ -226,6 +226,8 @@
     "zoom_in_edit": "Powiększ, aby edytować",
     "logout": "wyloguj",
     "loading_auth": "Łączenie z OpenStreetMap...",
+    "report_a_bug": "Zgłoś błąd",
+    "help_translate": "Pomóż tłumaczyć",
     "feature_info": {
         "hidden_warning": "{count} ukrytych obiektów",
         "hidden_details": "Te obiekty są obecnie ukryte: {details}"
@@ -479,6 +481,7 @@
         "out": "Oddal"
     },
     "cannot_zoom": "Nie można bardziej oddalić widoku w obecnym trybie.",
+    "full_screen": "Tryb pełnoekranowy",
     "gpx": {
         "local_layer": "Lokalny plik GPX",
         "drag_drop": "Przeciągnij i upuść plik .gpx na stronę lub kliknij przycisk po prawej by go wybrać",
@@ -583,6 +586,7 @@
         },
         "fields": {
             "access": {
+                "label": "Dozwolony wstęp",
                 "options": {
                     "designated": {
                         "description": "Dostęp jest dozwolony na podstawie znaków lub określonych przepisów lokalnych",
@@ -610,6 +614,7 @@
                     }
                 },
                 "types": {
+                    "access": "Wszyscy",
                     "bicycle": "Rowery",
                     "foot": "Piesi",
                     "horse": "Konie",
@@ -617,6 +622,7 @@
                 }
             },
             "access_simple": {
+                "label": "Dozwolony wstęp",
                 "placeholder": "tak"
             },
             "access_toilets": {
@@ -626,6 +632,7 @@
                 "label": "Adres",
                 "placeholders": {
                     "city": "Miasto",
+                    "conscriptionnumber": "123",
                     "country": "Kraj",
                     "district": "Dystrykt",
                     "hamlet": "Przysiółek",
@@ -788,6 +795,9 @@
                     "none": {
                         "description": "Brak pasa rowerowego",
                         "title": "Brak"
+                    },
+                    "opposite": {
+                        "title": "Kontrapas"
                     },
                     "share_busway": {
                         "description": "Pas rowerowy dzielony z buspasem",
@@ -1532,7 +1542,8 @@
                 "name": "Dom kultury"
             },
             "amenity/compressed_air": {
-                "name": "Kompresor"
+                "name": "Kompresor",
+                "terms": "kompresor"
             },
             "amenity/courthouse": {
                 "name": "Sąd",
@@ -1594,6 +1605,9 @@
             "amenity/marketplace": {
                 "name": "Targowisko",
                 "terms": "targowisko,targ,rynek,giełda"
+            },
+            "amenity/motorcycle_parking": {
+                "name": "Parking dla motocyklów"
             },
             "amenity/nightclub": {
                 "name": "Klub nocny",
@@ -1812,18 +1826,6 @@
             },
             "building/cabin": {
                 "name": "Chata"
-            },
-            "building/cathedral": {
-                "name": "Katedra",
-                "terms": "Katedra, "
-            },
-            "building/chapel": {
-                "name": "Kaplica",
-                "terms": "Kaplica, "
-            },
-            "building/church": {
-                "name": "Kościół",
-                "terms": "Kościół, "
             },
             "building/college": {
                 "name": "Budynek uczelni"

@@ -1112,15 +1112,6 @@
                 "name": "Sumarhús",
                 "terms": "Sumarbústaður, kofi"
             },
-            "building/cathedral": {
-                "name": "Dómkirkja"
-            },
-            "building/chapel": {
-                "name": "Kapella"
-            },
-            "building/church": {
-                "name": "Kirkja"
-            },
             "building/commercial": {
                 "name": "Atvinnuhúsnæði"
             },

@@ -1624,15 +1624,6 @@
             "building/cabin": {
                 "name": "Kabin"
             },
-            "building/cathedral": {
-                "name": "Katedral"
-            },
-            "building/chapel": {
-                "name": "Kapel"
-            },
-            "building/church": {
-                "name": "Gereja"
-            },
             "building/college": {
                 "name": "Bangunan Kampus"
             },

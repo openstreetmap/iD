@@ -1577,18 +1577,6 @@
                 "name": "Koča",
                 "terms": "kabina,brunarica"
             },
-            "building/cathedral": {
-                "name": "Katedrala",
-                "terms": "stolnica"
-            },
-            "building/chapel": {
-                "name": "Kapela",
-                "terms": "kapelica,znamenje"
-            },
-            "building/church": {
-                "name": "Cerkev",
-                "terms": "cerkvena stavba,božja hiša"
-            },
             "building/commercial": {
                 "name": "Poslovna stavba",
                 "terms": "pisarne"

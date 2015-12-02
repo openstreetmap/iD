@@ -954,6 +954,9 @@
                 "label": "Handikap",
                 "placeholder": "1-18"
             },
+            "handrail": {
+                "label": "Gelænder"
+            },
             "highway": {
                 "label": "Type"
             },
@@ -1977,16 +1980,16 @@
                 "terms": "Hytte"
             },
             "building/cathedral": {
-                "name": "Katedral",
-                "terms": "Katedral, Domkirke"
+                "name": "Katedralbygning",
+                "terms": "Katedralbygning"
             },
             "building/chapel": {
-                "name": "Kapel",
-                "terms": "Kapel"
+                "name": "Kapelbygning",
+                "terms": "Kapelbygning"
             },
             "building/church": {
-                "name": "Kirke",
-                "terms": "Kirke"
+                "name": "Kirkebygning",
+                "terms": "Kirkebygning"
             },
             "building/college": {
                 "name": "Universitetsbygning",

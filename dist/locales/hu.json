@@ -1966,18 +1966,6 @@
                 "name": "Faház",
                 "terms": "Faház"
             },
-            "building/cathedral": {
-                "name": "Katedrális",
-                "terms": "Katedrális, Székesegyház"
-            },
-            "building/chapel": {
-                "name": "Kápolna",
-                "terms": "Kápolna, Imaház"
-            },
-            "building/church": {
-                "name": "Templomépület",
-                "terms": "Templom, Plébánia, Imaház"
-            },
             "building/college": {
                 "name": "Főiskola",
                 "terms": "Főiskolai  felsőoktatási  intézmény"
@@ -2697,6 +2685,12 @@
                 "name": "Kosárlabdapálya",
                 "terms": "Kosárlabdapálya"
             },
+            "leisure/pitch/rugby_league": {
+                "name": "Rögbi Liga Pálya"
+            },
+            "leisure/pitch/rugby_union": {
+                "name": "Rögbi Egyesült Pálya"
+            },
             "leisure/pitch/skateboard": {
                 "name": "Gördeszkapark",
                 "terms": "Gördeszkapark"
@@ -2832,9 +2826,24 @@
                 "name": "Katonai bunker",
                 "terms": "Bunker"
             },
+            "military/checkpoint": {
+                "name": "Ellenőrzőpont"
+            },
+            "military/danger_area": {
+                "name": "Veszélyes Terület"
+            },
+            "military/naval_base": {
+                "name": "Haditengerészeti Bázis"
+            },
+            "military/obstacle_course": {
+                "name": "Akadálypálya"
+            },
             "military/range": {
                 "name": "Katonai lőtér",
                 "terms": "Katonai terület"
+            },
+            "military/training_area": {
+                "name": "Kiképzési terület"
             },
             "natural": {
                 "name": "Természet",

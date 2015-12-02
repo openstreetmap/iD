@@ -1245,15 +1245,6 @@
             "building/cabin": {
                 "name": "کابین"
             },
-            "building/cathedral": {
-                "name": "کلیسای بزرگ"
-            },
-            "building/chapel": {
-                "name": "کلیسای کوچک"
-            },
-            "building/church": {
-                "name": "کلیسا"
-            },
             "building/commercial": {
                 "name": "ساختمان ارتباطی",
                 "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'ساختمان ارتباطی'، با کاما جدا میشوند>"

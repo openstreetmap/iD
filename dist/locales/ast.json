@@ -1830,15 +1830,6 @@
             "building/cabin": {
                 "name": "Cabaña"
             },
-            "building/cathedral": {
-                "name": "Catedral"
-            },
-            "building/chapel": {
-                "name": "Capiella"
-            },
-            "building/church": {
-                "name": "Ilesia"
-            },
             "building/college": {
                 "name": "Edificiu de colexu universitariu"
             },

@@ -227,6 +227,8 @@
     "zoom_in_edit": "Необхідно збільшити масштаб, щоб редагувати",
     "logout": "вийти",
     "loading_auth": "З’єднання з OpenStreetMap…",
+    "report_a_bug": "Повідомити про помилку",
+    "help_translate": "Допомогти перекласти",
     "feature_info": {
         "hidden_warning": "приховано об’єктів - {count} ",
         "hidden_details": "Ці об’єкти є прихованими: {details}"
@@ -951,6 +953,9 @@
             "handicap": {
                 "label": "Гандікап",
                 "placeholder": "1-18"
+            },
+            "handrail": {
+                "label": "Перила"
             },
             "highway": {
                 "label": "Тип"
@@ -1976,15 +1981,15 @@
             },
             "building/cathedral": {
                 "name": "Собор",
-                "terms": "Cathedral, cjjh, собор"
+                "terms": "храм,собор,молитва,служба"
             },
             "building/chapel": {
                 "name": "Каплиця",
-                "terms": "Chapel, rfgkbwz, каплиця"
+                "terms": "каплиця,служба,молитовня"
             },
             "building/church": {
                 "name": "Церква",
-                "terms": "Church, wthrdf, церква"
+                "terms": "церква,молитва"
             },
             "building/college": {
                 "name": "Коледж",

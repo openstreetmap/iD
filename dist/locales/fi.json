@@ -242,7 +242,7 @@
         "description_placeholder": "Kuvaile lyhyesti karttaan tehtyjä muutoksia. Kirjoita muokkausten kohdemaan paikallisella kielellä (esimerkiksi Suomessa suomeksi tai ruotsiksi) tai englanniksi.",
         "message_label": "Muutossarjan kommentti",
         "upload_explanation": "Palvelimelle tallennettavat muutokset tulevat pian näkyviin kaikkiin OpenStreetMap-kartta-aineistoa käyttäviin palveluihin.",
-        "upload_explanation_with_user": "Muutokset tallennetaan palvelimelle käyttäjätunnisteella {user}. Muutokset tulevat pian näkyviin kaikkiin OpenStreetMap-kartta-aineistoa käyttäviin palveluihin.",
+        "upload_explanation_with_user": "Muutokset tallennetaan palvelimelle käyttäjätunnisteella {user} ja tulevat pian näkyviin kaikkiin OpenStreetMap-kartta-aineistoa käyttäviin palveluihin.",
         "save": "Tallenna",
         "cancel": "Takaisin muokkaamaan",
         "changes": "{count} muutosta",
@@ -412,7 +412,7 @@
         "title": "Tallenna",
         "help": "Tallenna muutokset OpenStreetMapiin kaikkien käyttöön.",
         "no_changes": "Ei tallennettavia muutoksia.",
-        "error": "Tallenntamisen aikana ilmenneet virheet",
+        "error": "Tallentamisen aikana ilmenneet virheet",
         "status_code": "Palvelimen virhekoodi {code}",
         "unknown_error_details": "Varmista, että Internet-yhteys on käytössä.",
         "uploading": "Tallennetaan muutoksia OpenStreetMapiin...",
@@ -434,9 +434,9 @@
     "merge_remote_changes": {
         "conflict": {
             "deleted": "{user} on poistanut tämän karttakohteen.",
-            "location": "Sekä sinä että {user} ovat siirtäneet tätä karttakohdetta.",
-            "nodelist": "Sekä sinä että {user} ovat muuttaneet pisteitä.",
-            "memberlist": "Sekä sinä että {user} ovat muuttaneet relaation jäseniä."
+            "location": "Sekä sinä että {user} olette siirtäneet tätä karttakohdetta.",
+            "nodelist": "Sekä sinä että {user} olette muuttaneet pistetietoja.",
+            "memberlist": "Sekä sinä että {user} olette muuttaneet relaation jäseniä."
         }
     },
     "success": {
@@ -1664,8 +1664,8 @@
                 "name": "Buddhalaistemppeli"
             },
             "amenity/place_of_worship/christian": {
-                "name": "Kirkko",
-                "terms": "Kirkko, Pyhäkkö, Rukoushuone, Stupa, Tsasouna, Moskeija, Temppeli"
+                "name": "Kristillinen rukoilupaikka",
+                "terms": "Kirkko, Pyhäkkö, pyhättö, Rukoushuone, Stupa, Tsasouna, Moskeija, Temppeli"
             },
             "amenity/place_of_worship/jewish": {
                 "name": "Synagoga",
@@ -1836,15 +1836,6 @@
             },
             "building/bunker": {
                 "name": "Bunkkeri"
-            },
-            "building/cathedral": {
-                "name": "Katedraali"
-            },
-            "building/chapel": {
-                "name": "Kappeli"
-            },
-            "building/church": {
-                "name": "Kirkko"
             },
             "building/college": {
                 "name": "Korkeakoulurakennus (college)"

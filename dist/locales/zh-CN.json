@@ -1923,14 +1923,6 @@
             "building/cabin": {
                 "name": "小木屋"
             },
-            "building/cathedral": {
-                "name": "主教座堂",
-                "terms": "教堂,大教堂"
-            },
-            "building/church": {
-                "name": "宗教场所",
-                "terms": "礼拜堂"
-            },
             "building/college": {
                 "name": "大专院校建筑"
             },

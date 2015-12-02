@@ -954,6 +954,9 @@
                 "label": "Handikapp",
                 "placeholder": "1-18"
             },
+            "handrail": {
+                "label": "Ledstång"
+            },
             "highway": {
                 "label": "Typ"
             },
@@ -1977,16 +1980,16 @@
                 "terms": "Stuga, hus, torp, koja, kåk, fritidshus, sommarstuga, landställe"
             },
             "building/cathedral": {
-                "name": "Katedral/domkyrka",
-                "terms": "Katedral, domkyrka, biskop, kyrka"
+                "name": "Katedral",
+                "terms": "Katedral, domkyrka, biskop, dom, biskopskyrka, kyrka, Huvudkyrka, stiftskyrka"
             },
             "building/chapel": {
                 "name": "Kapell",
-                "terms": "Kapell, kyrkobyggnad, kyrka, bönhus, gudstjänstlokal, kyrkorum, andaktsrum "
+                "terms": "Kapell, kyrkobyggnad, sidokapell, Kranskapell, gudstjänstlokal, korkapell, slottskapell, begravningskapell, gravkapell, dopkapell, andaktsrum, annexkyrka, bönhus, bönehus, kyrkorum"
             },
             "building/church": {
-                "name": "Kyrka",
-                "terms": "Kyrka, kyrkobyggnad, gudshus, tempel, kapell, bönehus, böneplats, missionshus, gudstjänstlokal"
+                "name": "Kyrkobyggnad",
+                "terms": "Kyrka, kyrkobyggnad, kyrkbyggnad, kyrksal, andaktssal, missionshus, gudstjänst, gudstjänstslokal, andaktslokal, gudshus"
             },
             "building/college": {
                 "name": "Gymnasiebyggnad",

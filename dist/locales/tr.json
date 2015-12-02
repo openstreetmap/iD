@@ -556,6 +556,7 @@
                         "title": "Serbest"
                     }
                 },
+                "placeholder": "Tüm",
                 "types": {
                     "bicycle": "Bisikletler",
                     "foot": "Yürüyerek",
@@ -630,6 +631,9 @@
                 "label": "Tip"
             },
             "amenity": {
+                "label": "Tip"
+            },
+            "area/highway": {
                 "label": "Tip"
             },
             "artist": {
@@ -915,6 +919,11 @@
             "piste/difficulty": {
                 "label": "Zorluk"
             },
+            "piste/grooming": {
+                "options": {
+                    "classic": "Klasik"
+                }
+            },
             "piste/type": {
                 "label": "Tip",
                 "options": {
@@ -942,10 +951,16 @@
             "religion": {
                 "label": "Dini"
             },
+            "restriction": {
+                "label": "Tip"
+            },
             "restrictions": {
                 "label": "Dönüş Kısıtlamaları"
             },
             "route": {
+                "label": "Tip"
+            },
+            "route_master": {
                 "label": "Tip"
             },
             "seasonal": {
@@ -967,6 +982,9 @@
             },
             "shelter": {
                 "label": "Barınak"
+            },
+            "shelter_type": {
+                "label": "Tip"
             },
             "shop": {
                 "label": "Tip"
@@ -996,6 +1014,12 @@
                 },
                 "placeholder": "Bilinmeyen"
             },
+            "studio_type": {
+                "label": "Tip"
+            },
+            "substation": {
+                "label": "Tip"
+            },
             "supervised": {
                 "label": "Gözetimli"
             },
@@ -1015,6 +1039,9 @@
                 }
             },
             "tourism": {
+                "label": "Tip"
+            },
+            "traffic_signals": {
                 "label": "Tip"
             },
             "trail_visibility": {
@@ -1314,14 +1341,8 @@
             "building/cabin": {
                 "name": "Kabin"
             },
-            "building/cathedral": {
-                "name": "Katedral"
-            },
-            "building/chapel": {
-                "name": "Şapel"
-            },
             "building/church": {
-                "name": "Kilise"
+                "name": "Kilise Binası"
             },
             "building/college": {
                 "name": "Kolej Binası"
@@ -1436,6 +1457,9 @@
             },
             "craft/locksmith": {
                 "name": "Çilingir"
+            },
+            "craft/metal_construction": {
+                "name": "Metal Yapı"
             },
             "craft/optician": {
                 "name": "Gözlükçü"

@@ -951,6 +951,9 @@
                 "label": "Handicap",
                 "placeholder": "1-18"
             },
+            "handrail": {
+                "label": "Zábradlí"
+            },
             "highway": {
                 "label": "Typ"
             },
@@ -1225,13 +1228,13 @@
                 "label": "Sklo"
             },
             "recycling/glass_bottles": {
-                "label": "Pro skleněné láhve"
+                "label": "Skleněné láhve"
             },
             "recycling/paper": {
                 "label": "Papír"
             },
             "recycling/plastic": {
-                "label": "Pro plast"
+                "label": "Plast"
             },
             "recycling/type": {
                 "label": "Typ recyklačního místa",
@@ -1974,16 +1977,16 @@
                 "terms": "chata,chalupa,srub,roubenka,chatrč,roubená stavba,dřevěná stavba"
             },
             "building/cathedral": {
-                "name": "Katedrála",
-                "terms": "katedrála,kostel,biskup,diecéze"
+                "name": "Budova katedrály",
+                "terms": "katedrála,kostel,diecéze,biskup"
             },
             "building/chapel": {
-                "name": "Kaple",
-                "terms": "kaple,kaplička,baptisterium,karner,modlitebna,kostel"
+                "name": "Budova kaple",
+                "terms": "kaple,kaplička,modlitebna,kostel"
             },
             "building/church": {
                 "name": "Budova kostela",
-                "terms": "kostel,chrám,bazilika,rotunda,megakostel"
+                "terms": "kostel,chrám,kostelík,katedrála"
             },
             "building/college": {
                 "name": "Budova vyšší odborné školy/college",

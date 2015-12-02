@@ -227,6 +227,8 @@
     "zoom_in_edit": "Zoom in om aan te passen",
     "logout": "Afmelden",
     "loading_auth": "Aan het verbinden met OpenStreetMap …",
+    "report_a_bug": "Meld een bug",
+    "help_translate": "Help vertalen",
     "feature_info": {
         "hidden_warning": "{count} verborgen objecten",
         "hidden_details": "Deze objecten zijn momenteel verborgen: {details}"
@@ -951,6 +953,9 @@
             "handicap": {
                 "label": "Handicap",
                 "placeholder": "1-18"
+            },
+            "handrail": {
+                "label": "Trapleuning"
             },
             "highway": {
                 "label": "Type"
@@ -1955,16 +1960,13 @@
                 "terms": "hut, blokhut, cabine, hout, balken, boomstammen"
             },
             "building/cathedral": {
-                "name": "Kathedraal",
-                "terms": "kerk, christendom, bisschop"
+                "name": "Kathedraalgebouw"
             },
             "building/chapel": {
-                "name": "Kapel",
-                "terms": "kapelletje"
+                "name": "Kapelgebouw"
             },
             "building/church": {
-                "name": "Kerk",
-                "terms": "christendom, godshuis"
+                "name": "Kerkgebouw"
             },
             "building/college": {
                 "name": "Gebouw van Beroepsschool",
