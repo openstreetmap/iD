@@ -57,14 +57,18 @@ elements we use in order to implement a particular visual style.
 ### Geometric classes
 
 In addition to the OSM element vocabulary of nodes, ways, and relations, iD has
-established a related geometric vocabulary consisting of points, vertices, lines,
-and areas.
+established a related geometric vocabulary consisting of points, vertices, midpoints,
+lines, and areas.
 
 A **point** is a node that is not a member of any way. Elements representing points
 have a `.point` class. Since a point is always a node, they also have a `.node` class.
 
 A **vertex** is a node that is a member of one or more ways. Elements representing
 points have `.vertex` and `.node` classes.
+
+A **midpoint** is a virtual point drawn midway between two vertices along a way.
+Midpoints indicate the direction that the way, but can also be selected and dragged
+to create a new point along the way.  Midpoints are classed with a `.midpoint` class.
 
 A **line** is a way that is not an area. Elements representing lines have a `.line`
 class. Since a line is also a way, they also have a `.way` class.
@@ -73,12 +77,38 @@ An **area** is a way that is circular, has certain tags, or lacks certain other
 tags (see `iD.Way#isArea` for the exact definition). Elements representing areas
 have `.area` and `.way` classes.
 
+
 ### Tag classes
 
-Elements also receive classes according to certain of the key-value tags that are
+Elements also receive classes according to certain of the OSM key-value tags that are
 assigned to them.
 
-TODO: elaborate.
+Tag classes are prefixed with `tag-` (see [`iD.svg.TagClasses`](https://github.com/openstreetmap/iD/blob/master/js/id/svg/tag_classes.js) for details).
+
+#### Primary
+
+An element may be classed with at most one primary tag class based on its main OSM
+key -- "building", "highway", "railway", "waterway", etc.
+(e.g. `.tag-highway .tag-highway-residential`).
+
+#### Secondary
+
+An element may be classed with one or more secondary tag classes based on other
+interesting OSM keys -- "bridge", "tunnel", "barrier", "surface", etc.
+(e.g. `.tag-bridge .tag-bridge-yes`).
+
+#### Status
+
+An element may be classed with at most one status tag.  Status tagging in OSM can
+be either key or value based, but iD attempts to detect most common lifecycle tagging
+schemes -- "construction", "proposed", "abandoned", "disused", etc.
+(e.g. `.tag-status .tag-status-construction`).
+
+#### Unpaved Surfaces (highways only)
+
+Most vehicular highways in OSM are assumed to have a smooth paved surface. A highway
+element may receive the special tag class `.tag-unpaved` if it contains certain OSM tags
+indicating a bumpy surface.
 
 ### Special classes
 
@@ -91,7 +121,7 @@ Elements comprising the entity currently under the cursor shall have the `.hover
 of several elements, only one of which can be `:hover`ed.)
 
 Elements that are currently active (being clicked or dragged) shall have the `.active`
-class. (TODO)
+class.
 
 Elements that are currently selected shall have the `.selected` class.
 
