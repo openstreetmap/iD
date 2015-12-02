@@ -5,11 +5,11 @@ iD.ui.TagReference = function(tag, context) {
         loaded,
         showing;
 
-    function findLocal(docs) {
+    function findLocal(data) {
         var locale = iD.detect().locale.toLowerCase(),
             localized;
 
-        localized = _.find(docs, function(d) {
+        localized = _.find(data, function(d) {
             return d.lang.toLowerCase() === locale;
         });
         if (localized) return localized;
@@ -18,34 +18,37 @@ iD.ui.TagReference = function(tag, context) {
         // 'en' if the language is 'en-US'
         if (locale.indexOf('-') !== -1) {
             var first = locale.split('-')[0];
-            localized = _.find(docs, function(d) {
+            localized = _.find(data, function(d) {
                 return d.lang.toLowerCase() === first;
             });
             if (localized) return localized;
         }
 
         // finally fall back to english
-        return _.find(docs, function(d) {
+        return _.find(data, function(d) {
             return d.lang.toLowerCase() === 'en';
         });
     }
 
-    function load() {
+    function load(param) {
         button.classed('tag-reference-loading', true);
 
-        context.taginfo().docs(tag, function(err, docs, softfail) {
-            if (!err && docs) {
-                docs = findLocal(docs);
+        context.taginfo().docs(param, function show(err, data) {
+            var docs;
+            if (!err && data) {
+                docs = findLocal(data);
             }
 
             body.html('');
 
             if (!docs || !docs.description) {
-                if (!softfail) {
+                if (param.hasOwnProperty('value')) {
+                    load(_.omit(param, 'value'));   // retry with key only
+                } else {
                     body.append('p').text(t('inspector.no_documentation_key'));
-                    show();
+                    done();
                 }
-                return false;
+                return;
             }
 
             if (docs.image && docs.image.thumb_url_prefix) {
@@ -53,10 +56,10 @@ iD.ui.TagReference = function(tag, context) {
                     .append('img')
                     .attr('class', 'wiki-image')
                     .attr('src', docs.image.thumb_url_prefix + '100' + docs.image.thumb_url_suffix)
-                    .on('load', function() { show(); })
-                    .on('error', function() { d3.select(this).remove(); show(); });
+                    .on('load', function() { done(); })
+                    .on('error', function() { d3.select(this).remove(); done(); });
             } else {
-                show();
+                done();
             }
 
             body
@@ -70,12 +73,10 @@ iD.ui.TagReference = function(tag, context) {
                 .call(iD.svg.Icon('#icon-out-link', 'inline'))
                 .append('span')
                 .text(t('inspector.reference'));
-
-            return true;
         });
     }
 
-    function show() {
+    function done() {
         loaded = true;
 
         button.classed('tag-reference-loading', false);
@@ -114,10 +115,10 @@ iD.ui.TagReference = function(tag, context) {
             if (showing) {
                 hide();
             } else if (loaded) {
-                show();
+                done();
             } else {
                 if (context.taginfo()) {
-                    load();
+                    load(tag);
                 }
             }
         });
