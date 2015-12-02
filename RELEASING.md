@@ -12,6 +12,7 @@ TODO: turn this into a script.
 
 - [ ] `make translations`
 - [ ] `make imagery`
+- [ ] `make suggestions`
 - [ ] Update `CHANGELOG.md`
 - [ ] Update version number in `id.js`, `package.json`
 - [ ] `git checkout release && git reset --hard master`
