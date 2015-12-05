@@ -307,8 +307,12 @@ iD.modes.Save = function(context) {
     };
 
     mode.enter = function() {
-        context.connection().authenticate(function() {
-            context.ui().sidebar.show(ui);
+        context.connection().authenticate(function(err) {
+            if (err) {
+                cancel();
+            } else {
+                context.ui().sidebar.show(ui);
+            }
         });
     };
 
