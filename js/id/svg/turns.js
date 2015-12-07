@@ -28,6 +28,7 @@ iD.svg.Turns = function(projection) {
             .attr('height', '24');
 
         nEnter.append('use')
+            .attr('transform', 'translate(-22, -12)')
             .attr('width', '44')
             .attr('height', '24');
 
@@ -38,6 +39,7 @@ iD.svg.Turns = function(projection) {
             .attr('r', '16');
 
         uEnter.append('use')
+            .attr('transform', 'translate(-16, -16)')
             .attr('width', '32')
             .attr('height', '32');
 

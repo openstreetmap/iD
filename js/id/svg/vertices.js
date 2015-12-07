@@ -70,7 +70,7 @@ iD.svg.Vertices = function(projection, context) {
             return icons[entity.id];
         }
 
-        function classCircle(klass) {
+        function setClass(klass) {
             return function(entity) {
                 this.setAttribute('class', 'node vertex ' + klass + ' ' + entity.id);
             };
@@ -110,10 +110,10 @@ iD.svg.Vertices = function(projection, context) {
             .attr('class', function(d) { return 'node vertex ' + klass + ' ' + d.id; });
 
         enter.append('circle')
-            .each(classCircle('shadow'));
+            .each(setClass('shadow'));
 
         enter.append('circle')
-            .each(classCircle('stroke'));
+            .each(setClass('stroke'));
 
         // Vertices with icons get a `use`.
         enter.filter(function(d) { return icon(d); })
@@ -121,12 +121,13 @@ iD.svg.Vertices = function(projection, context) {
             .attr('transform', 'translate(-6, -6)')
             .attr('xlink:href', function(d) { return '#' + icon(d) + '-12'; })
             .attr('width', '12px')
-            .attr('height', '12px');
+            .attr('height', '12px')
+            .each(setClass('icon'));
 
         // Vertices with tags get a fill.
         enter.filter(function(d) { return d.hasInterestingTags(); })
             .append('circle')
-            .each(classCircle('fill'));
+            .each(setClass('fill'));
 
         groups
             .attr('transform', iD.svg.PointTransform(projection))
