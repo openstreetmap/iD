@@ -849,7 +849,7 @@
         "name": "Courthouse"
     },
     "amenity/dentist": {
-        "icon": "hospital",
+        "icon": "dentist",
         "fields": [
             "address",
             "building_area",

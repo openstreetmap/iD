@@ -12,6 +12,8 @@ iD.ui.PresetIcon = function() {
             icon = p.icon || (geom === 'line' ? 'other-line' : 'marker-stroked'),
             maki = iD.data.featureIcons.hasOwnProperty(icon + '-24');
 
+        if (icon === 'dentist') maki = true;  // workaround for dentist icon missing in `maki-sprite.json`
+
         function tag_classes(p) {
             var s = '';
             for (var i in p.tags) {
