@@ -107,14 +107,14 @@ en:
       connected_to_hidden: This can't be disconnected because it is connected to a hidden feature.
     merge:
       title: Merge
-      description: Merge these lines.
+      description: Merge these features.
       key: C
-      annotation: "Merged {n} lines."
+      annotation: "Merged {n} features."
       not_eligible: These features can't be merged.
-      not_adjacent: These lines can't be merged because they aren't connected.
-      restriction: These lines can't be merged because at least one is a member of a "{relation}" relation.
+      not_adjacent: These features can't be merged because they aren't connected.
+      restriction: These features can't be merged because at least one is a member of a "{relation}" relation.
       incomplete_relation: These features can't be merged because at least one hasn't been fully downloaded.
-      conflicting_tags: These lines can't be merged because some of their tags have conflicting values.
+      conflicting_tags: These features can't be merged because some of their tags have conflicting values.
     move:
       title: Move
       description: Move this to a different location.
