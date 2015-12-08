@@ -454,10 +454,6 @@ path.fill.tag-amenity-parking {
     background-color: rgba(170, 170, 170, 0.3);
 }
 
-path.fill.tag-place,
-path.fill.tag-boundary {
-    fill: none;
-}
 
 /* highway areas */
 
@@ -1072,6 +1068,17 @@ path.stroke.tag-waterway-ditch {
 path.casing.tag-waterway-ditch {
     stroke: #6591ff;
     stroke-width: 3;
+}
+path.area.stroke.tag-waterway-fuel {
+    stroke: white;
+    stroke-width: 1;
+}
+path.area.casing.tag-waterway-fuel {
+    stroke: none;
+}
+path.area.fill.tag-waterway-fuel {
+    stroke: rgba(255, 255, 255, 0.3);
+    fill: rgba(255, 255, 255, 0.3);
 }
 
 
