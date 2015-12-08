@@ -1,0 +1,6 @@
+{
+    "key": "maxstay",
+    "type": "combo",
+    "placeholder": "30 minutes, 1 hour, 2 hours...",
+    "label": "Max Stay"
+}

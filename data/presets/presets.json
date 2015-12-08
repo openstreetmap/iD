@@ -1186,6 +1186,7 @@
             "supervised",
             "park_ride",
             "surface",
+            "maxstay",
             "address"
         ],
         "geometry": [
