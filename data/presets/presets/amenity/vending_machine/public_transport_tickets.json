@@ -1,0 +1,21 @@
+{
+    "fields": [
+        "operator"
+    ],
+    "geometry": [
+        "point"
+    ],
+    "terms": [
+        "bus",
+        "train",
+        "ferry",
+        "rail",
+        "ticket",
+        "transportation"
+    ],
+    "tags": {
+        "amenity": "vending_machine",
+        "vending": "public_transport_tickets"
+    },
+    "name": "Transit Ticket Vending Machine"
+}

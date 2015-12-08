@@ -1,18 +1,21 @@
 {
     "fields": [
-        "vending",
         "operator"
     ],
     "geometry": [
         "point"
     ],
     "terms": [
-        "sweet",
-        "soda"
+        "candy",
+        "gum",
+        "chip",
+        "pretzel",
+        "cookie",
+        "cracker"
     ],
     "tags": {
         "amenity": "vending_machine",
         "vending": "sweets"
     },
-    "name": "Sweets Vending Machine"
+    "name": "Snack Vending Machine"
 }

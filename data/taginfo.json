@@ -397,6 +397,42 @@
             "value": "university"
         },
         {
+            "key": "vending",
+            "value": "cigarettes"
+        },
+        {
+            "key": "vending",
+            "value": "condoms"
+        },
+        {
+            "key": "vending",
+            "value": "drinks"
+        },
+        {
+            "key": "vending",
+            "value": "excrement_bags"
+        },
+        {
+            "key": "vending",
+            "value": "news_papers"
+        },
+        {
+            "key": "vending",
+            "value": "parcel_pickup;parcel_mail_in"
+        },
+        {
+            "key": "vending",
+            "value": "parking_tickets"
+        },
+        {
+            "key": "vending",
+            "value": "public_transport_tickets"
+        },
+        {
+            "key": "vending",
+            "value": "sweets"
+        },
+        {
             "key": "amenity",
             "value": "vending_machine"
         },

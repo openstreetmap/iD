@@ -1,6 +1,5 @@
 {
     "fields": [
-        "vending",
         "operator"
     ],
     "geometry": [
@@ -15,5 +14,5 @@
         "amenity": "vending_machine",
         "vending": "parcel_pickup;parcel_mail_in"
     },
-    "name": "Parcel Pickup/Parcel Dropoff"
+    "name": "Parcel Pickup/Dropoff Vending Machine"
 }

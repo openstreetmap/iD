@@ -1,6 +1,5 @@
 {
     "fields": [
-        "vending",
         "operator"
     ],
     "geometry": [
@@ -8,6 +7,8 @@
     ],
     "terms": [
         "excrement bags",
+        "poop",
+        "dog",
         "animal"
     ],
     "tags": {

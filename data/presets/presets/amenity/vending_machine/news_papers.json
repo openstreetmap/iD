@@ -1,6 +1,5 @@
 {
     "fields": [
-        "vending",
         "operator"
     ],
     "geometry": [

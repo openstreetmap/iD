@@ -1871,9 +1871,45 @@
                 "name": "University Grounds",
                 "terms": "college"
             },
-            "amenity/vending_machine": {
+            "amenity/vending_machine/cigarettes": {
+                "name": "Cigarette Vending Machine",
+                "terms": "cigarette"
+            },
+            "amenity/vending_machine/condoms": {
+                "name": "Condom Vending Machine",
+                "terms": "condom"
+            },
+            "amenity/vending_machine/drinks": {
+                "name": "Drink Vending Machine",
+                "terms": "drink,soda,beverage,juice,pop"
+            },
+            "amenity/vending_machine/excrement_bags": {
+                "name": "Excrement Bag Vending Machine",
+                "terms": "excrement bags,poop,dog,animal"
+            },
+            "amenity/vending_machine/news_papers": {
+                "name": "Newspaper Vending Machine",
+                "terms": "newspaper"
+            },
+            "amenity/vending_machine/parcel_pickup_dropoff": {
+                "name": "Parcel Pickup/Dropoff Vending Machine",
+                "terms": "parcel,mail,pickup"
+            },
+            "amenity/vending_machine/parking_tickets": {
+                "name": "Parking Ticket Vending Machine",
+                "terms": "parking,ticket"
+            },
+            "amenity/vending_machine/public_transport_tickets": {
+                "name": "Transit Ticket Vending Machine",
+                "terms": "bus,train,ferry,rail,ticket,transportation"
+            },
+            "amenity/vending_machine/sweets": {
+                "name": "Snack Vending Machine",
+                "terms": "candy,gum,chip,pretzel,cookie,cracker"
+            },
+            "amenity/vending_machine/vending_machine": {
                 "name": "Vending Machine",
-                "terms": "snack,soda,ticket"
+                "terms": ""
             },
             "amenity/veterinary": {
                 "name": "Veterinary",
