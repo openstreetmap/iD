@@ -995,7 +995,6 @@
         "fields": [
             "operator",
             "address",
-            "building_area",
             "opening_hours"
         ],
         "geometry": [
@@ -10202,7 +10201,6 @@
         "fields": [
             "operator",
             "address",
-            "building_area",
             "opening_hours"
         ],
         "geometry": [
@@ -10354,7 +10352,6 @@
         "fields": [
             "operator",
             "address",
-            "building_area",
             "opening_hours"
         ],
         "suggestion": true
@@ -10373,7 +10370,6 @@
         "fields": [
             "operator",
             "address",
-            "building_area",
             "opening_hours"
         ],
         "suggestion": true
@@ -10392,7 +10388,6 @@
         "fields": [
             "operator",
             "address",
-            "building_area",
             "opening_hours"
         ],
         "suggestion": true
@@ -10411,7 +10406,6 @@
         "fields": [
             "operator",
             "address",
-            "building_area",
             "opening_hours"
         ],
         "suggestion": true
@@ -10430,7 +10424,6 @@
         "fields": [
             "operator",
             "address",
-            "building_area",
             "opening_hours"
         ],
         "suggestion": true
@@ -10449,7 +10442,6 @@
         "fields": [
             "operator",
             "address",
-            "building_area",
             "opening_hours"
         ],
         "suggestion": true
@@ -10468,7 +10460,6 @@
         "fields": [
             "operator",
             "address",
-            "building_area",
             "opening_hours"
         ],
         "suggestion": true
@@ -10487,7 +10478,6 @@
         "fields": [
             "operator",
             "address",
-            "building_area",
             "opening_hours"
         ],
         "suggestion": true
@@ -10506,7 +10496,6 @@
         "fields": [
             "operator",
             "address",
-            "building_area",
             "opening_hours"
         ],
         "suggestion": true
@@ -10525,7 +10514,6 @@
         "fields": [
             "operator",
             "address",
-            "building_area",
             "opening_hours"
         ],
         "suggestion": true
@@ -10544,7 +10532,6 @@
         "fields": [
             "operator",
             "address",
-            "building_area",
             "opening_hours"
         ],
         "suggestion": true
@@ -10563,7 +10550,6 @@
         "fields": [
             "operator",
             "address",
-            "building_area",
             "opening_hours"
         ],
         "suggestion": true
@@ -10582,7 +10568,6 @@
         "fields": [
             "operator",
             "address",
-            "building_area",
             "opening_hours"
         ],
         "suggestion": true
@@ -10601,7 +10586,6 @@
         "fields": [
             "operator",
             "address",
-            "building_area",
             "opening_hours"
         ],
         "suggestion": true
@@ -10620,7 +10604,6 @@
         "fields": [
             "operator",
             "address",
-            "building_area",
             "opening_hours"
         ],
         "suggestion": true
@@ -10639,7 +10622,6 @@
         "fields": [
             "operator",
             "address",
-            "building_area",
             "opening_hours"
         ],
         "suggestion": true
@@ -10658,7 +10640,6 @@
         "fields": [
             "operator",
             "address",
-            "building_area",
             "opening_hours"
         ],
         "suggestion": true
@@ -10677,7 +10658,6 @@
         "fields": [
             "operator",
             "address",
-            "building_area",
             "opening_hours"
         ],
         "suggestion": true
@@ -10696,7 +10676,6 @@
         "fields": [
             "operator",
             "address",
-            "building_area",
             "opening_hours"
         ],
         "suggestion": true
@@ -10715,7 +10694,6 @@
         "fields": [
             "operator",
             "address",
-            "building_area",
             "opening_hours"
         ],
         "suggestion": true
@@ -10734,7 +10712,6 @@
         "fields": [
             "operator",
             "address",
-            "building_area",
             "opening_hours"
         ],
         "suggestion": true
@@ -10753,7 +10730,6 @@
         "fields": [
             "operator",
             "address",
-            "building_area",
             "opening_hours"
         ],
         "suggestion": true
@@ -10772,7 +10748,6 @@
         "fields": [
             "operator",
             "address",
-            "building_area",
             "opening_hours"
         ],
         "suggestion": true
@@ -10791,7 +10766,6 @@
         "fields": [
             "operator",
             "address",
-            "building_area",
             "opening_hours"
         ],
         "suggestion": true
@@ -10810,7 +10784,6 @@
         "fields": [
             "operator",
             "address",
-            "building_area",
             "opening_hours"
         ],
         "suggestion": true
@@ -10829,7 +10802,6 @@
         "fields": [
             "operator",
             "address",
-            "building_area",
             "opening_hours"
         ],
         "suggestion": true
@@ -10848,7 +10820,6 @@
         "fields": [
             "operator",
             "address",
-            "building_area",
             "opening_hours"
         ],
         "suggestion": true
@@ -10867,7 +10838,6 @@
         "fields": [
             "operator",
             "address",
-            "building_area",
             "opening_hours"
         ],
         "suggestion": true
@@ -10886,7 +10856,6 @@
         "fields": [
             "operator",
             "address",
-            "building_area",
             "opening_hours"
         ],
         "suggestion": true
@@ -10905,7 +10874,6 @@
         "fields": [
             "operator",
             "address",
-            "building_area",
             "opening_hours"
         ],
         "suggestion": true
@@ -10924,7 +10892,6 @@
         "fields": [
             "operator",
             "address",
-            "building_area",
             "opening_hours"
         ],
         "suggestion": true
@@ -10943,7 +10910,6 @@
         "fields": [
             "operator",
             "address",
-            "building_area",
             "opening_hours"
         ],
         "suggestion": true
@@ -10962,7 +10928,6 @@
         "fields": [
             "operator",
             "address",
-            "building_area",
             "opening_hours"
         ],
         "suggestion": true
@@ -10981,7 +10946,6 @@
         "fields": [
             "operator",
             "address",
-            "building_area",
             "opening_hours"
         ],
         "suggestion": true
@@ -11000,7 +10964,6 @@
         "fields": [
             "operator",
             "address",
-            "building_area",
             "opening_hours"
         ],
         "suggestion": true
@@ -11019,7 +10982,6 @@
         "fields": [
             "operator",
             "address",
-            "building_area",
             "opening_hours"
         ],
         "suggestion": true
@@ -11038,7 +11000,6 @@
         "fields": [
             "operator",
             "address",
-            "building_area",
             "opening_hours"
         ],
         "suggestion": true
@@ -11057,7 +11018,6 @@
         "fields": [
             "operator",
             "address",
-            "building_area",
             "opening_hours"
         ],
         "suggestion": true
@@ -11076,7 +11036,6 @@
         "fields": [
             "operator",
             "address",
-            "building_area",
             "opening_hours"
         ],
         "suggestion": true
@@ -11095,7 +11054,6 @@
         "fields": [
             "operator",
             "address",
-            "building_area",
             "opening_hours"
         ],
         "suggestion": true
@@ -11114,7 +11072,6 @@
         "fields": [
             "operator",
             "address",
-            "building_area",
             "opening_hours"
         ],
         "suggestion": true
@@ -11133,7 +11090,6 @@
         "fields": [
             "operator",
             "address",
-            "building_area",
             "opening_hours"
         ],
         "suggestion": true
@@ -11152,7 +11108,6 @@
         "fields": [
             "operator",
             "address",
-            "building_area",
             "opening_hours"
         ],
         "suggestion": true
@@ -11171,7 +11126,6 @@
         "fields": [
             "operator",
             "address",
-            "building_area",
             "opening_hours"
         ],
         "suggestion": true
@@ -11190,7 +11144,6 @@
         "fields": [
             "operator",
             "address",
-            "building_area",
             "opening_hours"
         ],
         "suggestion": true
@@ -11209,7 +11162,6 @@
         "fields": [
             "operator",
             "address",
-            "building_area",
             "opening_hours"
         ],
         "suggestion": true
@@ -11228,7 +11180,6 @@
         "fields": [
             "operator",
             "address",
-            "building_area",
             "opening_hours"
         ],
         "suggestion": true
@@ -11247,7 +11198,6 @@
         "fields": [
             "operator",
             "address",
-            "building_area",
             "opening_hours"
         ],
         "suggestion": true
@@ -11266,7 +11216,6 @@
         "fields": [
             "operator",
             "address",
-            "building_area",
             "opening_hours"
         ],
         "suggestion": true
@@ -11285,7 +11234,6 @@
         "fields": [
             "operator",
             "address",
-            "building_area",
             "opening_hours"
         ],
         "suggestion": true
@@ -11304,7 +11252,6 @@
         "fields": [
             "operator",
             "address",
-            "building_area",
             "opening_hours"
         ],
         "suggestion": true
@@ -11323,7 +11270,6 @@
         "fields": [
             "operator",
             "address",
-            "building_area",
             "opening_hours"
         ],
         "suggestion": true
@@ -11342,7 +11288,6 @@
         "fields": [
             "operator",
             "address",
-            "building_area",
             "opening_hours"
         ],
         "suggestion": true
@@ -11361,7 +11306,6 @@
         "fields": [
             "operator",
             "address",
-            "building_area",
             "opening_hours"
         ],
         "suggestion": true
@@ -11380,7 +11324,6 @@
         "fields": [
             "operator",
             "address",
-            "building_area",
             "opening_hours"
         ],
         "suggestion": true
@@ -11399,7 +11342,6 @@
         "fields": [
             "operator",
             "address",
-            "building_area",
             "opening_hours"
         ],
         "suggestion": true
@@ -11418,7 +11360,6 @@
         "fields": [
             "operator",
             "address",
-            "building_area",
             "opening_hours"
         ],
         "suggestion": true
@@ -11437,7 +11378,6 @@
         "fields": [
             "operator",
             "address",
-            "building_area",
             "opening_hours"
         ],
         "suggestion": true
@@ -11456,7 +11396,6 @@
         "fields": [
             "operator",
             "address",
-            "building_area",
             "opening_hours"
         ],
         "suggestion": true
@@ -11475,7 +11414,6 @@
         "fields": [
             "operator",
             "address",
-            "building_area",
             "opening_hours"
         ],
         "suggestion": true
@@ -11494,7 +11432,6 @@
         "fields": [
             "operator",
             "address",
-            "building_area",
             "opening_hours"
         ],
         "suggestion": true
@@ -11513,7 +11450,6 @@
         "fields": [
             "operator",
             "address",
-            "building_area",
             "opening_hours"
         ],
         "suggestion": true
@@ -11532,7 +11468,6 @@
         "fields": [
             "operator",
             "address",
-            "building_area",
             "opening_hours"
         ],
         "suggestion": true
@@ -11551,7 +11486,6 @@
         "fields": [
             "operator",
             "address",
-            "building_area",
             "opening_hours"
         ],
         "suggestion": true
@@ -11570,7 +11504,6 @@
         "fields": [
             "operator",
             "address",
-            "building_area",
             "opening_hours"
         ],
         "suggestion": true
@@ -11589,7 +11522,6 @@
         "fields": [
             "operator",
             "address",
-            "building_area",
             "opening_hours"
         ],
         "suggestion": true
@@ -11608,7 +11540,6 @@
         "fields": [
             "operator",
             "address",
-            "building_area",
             "opening_hours"
         ],
         "suggestion": true
@@ -11627,7 +11558,6 @@
         "fields": [
             "operator",
             "address",
-            "building_area",
             "opening_hours"
         ],
         "suggestion": true
@@ -11646,7 +11576,6 @@
         "fields": [
             "operator",
             "address",
-            "building_area",
             "opening_hours"
         ],
         "suggestion": true
@@ -11665,7 +11594,6 @@
         "fields": [
             "operator",
             "address",
-            "building_area",
             "opening_hours"
         ],
         "suggestion": true
@@ -11684,7 +11612,6 @@
         "fields": [
             "operator",
             "address",
-            "building_area",
             "opening_hours"
         ],
         "suggestion": true
@@ -11703,7 +11630,6 @@
         "fields": [
             "operator",
             "address",
-            "building_area",
             "opening_hours"
         ],
         "suggestion": true
@@ -11722,7 +11648,6 @@
         "fields": [
             "operator",
             "address",
-            "building_area",
             "opening_hours"
         ],
         "suggestion": true
@@ -11741,7 +11666,6 @@
         "fields": [
             "operator",
             "address",
-            "building_area",
             "opening_hours"
         ],
         "suggestion": true
@@ -11760,7 +11684,6 @@
         "fields": [
             "operator",
             "address",
-            "building_area",
             "opening_hours"
         ],
         "suggestion": true
@@ -11779,7 +11702,6 @@
         "fields": [
             "operator",
             "address",
-            "building_area",
             "opening_hours"
         ],
         "suggestion": true
@@ -11798,7 +11720,6 @@
         "fields": [
             "operator",
             "address",
-            "building_area",
             "opening_hours"
         ],
         "suggestion": true
@@ -11817,7 +11738,6 @@
         "fields": [
             "operator",
             "address",
-            "building_area",
             "opening_hours"
         ],
         "suggestion": true
@@ -11836,7 +11756,6 @@
         "fields": [
             "operator",
             "address",
-            "building_area",
             "opening_hours"
         ],
         "suggestion": true
@@ -11855,7 +11774,6 @@
         "fields": [
             "operator",
             "address",
-            "building_area",
             "opening_hours"
         ],
         "suggestion": true
@@ -11874,7 +11792,6 @@
         "fields": [
             "operator",
             "address",
-            "building_area",
             "opening_hours"
         ],
         "suggestion": true
@@ -11893,7 +11810,6 @@
         "fields": [
             "operator",
             "address",
-            "building_area",
             "opening_hours"
         ],
         "suggestion": true
@@ -11912,7 +11828,6 @@
         "fields": [
             "operator",
             "address",
-            "building_area",
             "opening_hours"
         ],
         "suggestion": true
@@ -11931,7 +11846,6 @@
         "fields": [
             "operator",
             "address",
-            "building_area",
             "opening_hours"
         ],
         "suggestion": true
@@ -11950,7 +11864,6 @@
         "fields": [
             "operator",
             "address",
-            "building_area",
             "opening_hours"
         ],
         "suggestion": true
@@ -11969,7 +11882,6 @@
         "fields": [
             "operator",
             "address",
-            "building_area",
             "opening_hours"
         ],
         "suggestion": true
@@ -11988,7 +11900,6 @@
         "fields": [
             "operator",
             "address",
-            "building_area",
             "opening_hours"
         ],
         "suggestion": true
@@ -12007,7 +11918,6 @@
         "fields": [
             "operator",
             "address",
-            "building_area",
             "opening_hours"
         ],
         "suggestion": true
@@ -12026,7 +11936,6 @@
         "fields": [
             "operator",
             "address",
-            "building_area",
             "opening_hours"
         ],
         "suggestion": true
@@ -12045,7 +11954,6 @@
         "fields": [
             "operator",
             "address",
-            "building_area",
             "opening_hours"
         ],
         "suggestion": true
@@ -12064,7 +11972,6 @@
         "fields": [
             "operator",
             "address",
-            "building_area",
             "opening_hours"
         ],
         "suggestion": true
@@ -12083,7 +11990,6 @@
         "fields": [
             "operator",
             "address",
-            "building_area",
             "opening_hours"
         ],
         "suggestion": true
@@ -12102,7 +12008,6 @@
         "fields": [
             "operator",
             "address",
-            "building_area",
             "opening_hours"
         ],
         "suggestion": true
@@ -12121,7 +12026,6 @@
         "fields": [
             "operator",
             "address",
-            "building_area",
             "opening_hours"
         ],
         "suggestion": true
@@ -12140,7 +12044,6 @@
         "fields": [
             "operator",
             "address",
-            "building_area",
             "opening_hours"
         ],
         "suggestion": true
@@ -12159,7 +12062,6 @@
         "fields": [
             "operator",
             "address",
-            "building_area",
             "opening_hours"
         ],
         "suggestion": true
@@ -12178,7 +12080,6 @@
         "fields": [
             "operator",
             "address",
-            "building_area",
             "opening_hours"
         ],
         "suggestion": true
@@ -12197,7 +12098,6 @@
         "fields": [
             "operator",
             "address",
-            "building_area",
             "opening_hours"
         ],
         "suggestion": true
@@ -12216,7 +12116,6 @@
         "fields": [
             "operator",
             "address",
-            "building_area",
             "opening_hours"
         ],
         "suggestion": true
@@ -12235,7 +12134,6 @@
         "fields": [
             "operator",
             "address",
-            "building_area",
             "opening_hours"
         ],
         "suggestion": true
@@ -12254,7 +12152,6 @@
         "fields": [
             "operator",
             "address",
-            "building_area",
             "opening_hours"
         ],
         "suggestion": true
@@ -12273,7 +12170,6 @@
         "fields": [
             "operator",
             "address",
-            "building_area",
             "opening_hours"
         ],
         "suggestion": true
@@ -12292,7 +12188,6 @@
         "fields": [
             "operator",
             "address",
-            "building_area",
             "opening_hours"
         ],
         "suggestion": true
@@ -12311,7 +12206,6 @@
         "fields": [
             "operator",
             "address",
-            "building_area",
             "opening_hours"
         ],
         "suggestion": true
@@ -12330,7 +12224,6 @@
         "fields": [
             "operator",
             "address",
-            "building_area",
             "opening_hours"
         ],
         "suggestion": true
@@ -12349,7 +12242,6 @@
         "fields": [
             "operator",
             "address",
-            "building_area",
             "opening_hours"
         ],
         "suggestion": true
@@ -12368,7 +12260,6 @@
         "fields": [
             "operator",
             "address",
-            "building_area",
             "opening_hours"
         ],
         "suggestion": true
@@ -12387,7 +12278,6 @@
         "fields": [
             "operator",
             "address",
-            "building_area",
             "opening_hours"
         ],
         "suggestion": true
@@ -12406,7 +12296,6 @@
         "fields": [
             "operator",
             "address",
-            "building_area",
             "opening_hours"
         ],
         "suggestion": true
@@ -12425,7 +12314,6 @@
         "fields": [
             "operator",
             "address",
-            "building_area",
             "opening_hours"
         ],
         "suggestion": true
@@ -12444,7 +12332,6 @@
         "fields": [
             "operator",
             "address",
-            "building_area",
             "opening_hours"
         ],
         "suggestion": true
@@ -12463,7 +12350,6 @@
         "fields": [
             "operator",
             "address",
-            "building_area",
             "opening_hours"
         ],
         "suggestion": true
@@ -12482,7 +12368,6 @@
         "fields": [
             "operator",
             "address",
-            "building_area",
             "opening_hours"
         ],
         "suggestion": true
@@ -12501,7 +12386,6 @@
         "fields": [
             "operator",
             "address",
-            "building_area",
             "opening_hours"
         ],
         "suggestion": true
@@ -12520,7 +12404,6 @@
         "fields": [
             "operator",
             "address",
-            "building_area",
             "opening_hours"
         ],
         "suggestion": true
@@ -12539,7 +12422,6 @@
         "fields": [
             "operator",
             "address",
-            "building_area",
             "opening_hours"
         ],
         "suggestion": true
@@ -12558,7 +12440,6 @@
         "fields": [
             "operator",
             "address",
-            "building_area",
             "opening_hours"
         ],
         "suggestion": true
@@ -12577,7 +12458,6 @@
         "fields": [
             "operator",
             "address",
-            "building_area",
             "opening_hours"
         ],
         "suggestion": true
@@ -12596,7 +12476,6 @@
         "fields": [
             "operator",
             "address",
-            "building_area",
             "opening_hours"
         ],
         "suggestion": true
@@ -12615,7 +12494,6 @@
         "fields": [
             "operator",
             "address",
-            "building_area",
             "opening_hours"
         ],
         "suggestion": true
@@ -12634,7 +12512,6 @@
         "fields": [
             "operator",
             "address",
-            "building_area",
             "opening_hours"
         ],
         "suggestion": true
@@ -12653,7 +12530,6 @@
         "fields": [
             "operator",
             "address",
-            "building_area",
             "opening_hours"
         ],
         "suggestion": true
@@ -12672,7 +12548,6 @@
         "fields": [
             "operator",
             "address",
-            "building_area",
             "opening_hours"
         ],
         "suggestion": true
@@ -12691,7 +12566,6 @@
         "fields": [
             "operator",
             "address",
-            "building_area",
             "opening_hours"
         ],
         "suggestion": true
@@ -12710,7 +12584,6 @@
         "fields": [
             "operator",
             "address",
-            "building_area",
             "opening_hours"
         ],
         "suggestion": true
@@ -12729,7 +12602,6 @@
         "fields": [
             "operator",
             "address",
-            "building_area",
             "opening_hours"
         ],
         "suggestion": true
@@ -12748,7 +12620,6 @@
         "fields": [
             "operator",
             "address",
-            "building_area",
             "opening_hours"
         ],
         "suggestion": true
@@ -12767,7 +12638,6 @@
         "fields": [
             "operator",
             "address",
-            "building_area",
             "opening_hours"
         ],
         "suggestion": true
@@ -12786,7 +12656,6 @@
         "fields": [
             "operator",
             "address",
-            "building_area",
             "opening_hours"
         ],
         "suggestion": true
@@ -12805,7 +12674,6 @@
         "fields": [
             "operator",
             "address",
-            "building_area",
             "opening_hours"
         ],
         "suggestion": true
@@ -12824,7 +12692,6 @@
         "fields": [
             "operator",
             "address",
-            "building_area",
             "opening_hours"
         ],
         "suggestion": true
@@ -12843,7 +12710,6 @@
         "fields": [
             "operator",
             "address",
-            "building_area",
             "opening_hours"
         ],
         "suggestion": true
@@ -12862,7 +12728,6 @@
         "fields": [
             "operator",
             "address",
-            "building_area",
             "opening_hours"
         ],
         "suggestion": true
@@ -12881,7 +12746,6 @@
         "fields": [
             "operator",
             "address",
-            "building_area",
             "opening_hours"
         ],
         "suggestion": true
@@ -12900,7 +12764,6 @@
         "fields": [
             "operator",
             "address",
-            "building_area",
             "opening_hours"
         ],
         "suggestion": true
@@ -12919,7 +12782,6 @@
         "fields": [
             "operator",
             "address",
-            "building_area",
             "opening_hours"
         ],
         "suggestion": true
@@ -12938,7 +12800,6 @@
         "fields": [
             "operator",
             "address",
-            "building_area",
             "opening_hours"
         ],
         "suggestion": true
@@ -12957,7 +12818,6 @@
         "fields": [
             "operator",
             "address",
-            "building_area",
             "opening_hours"
         ],
         "suggestion": true
@@ -12976,7 +12836,6 @@
         "fields": [
             "operator",
             "address",
-            "building_area",
             "opening_hours"
         ],
         "suggestion": true
@@ -12996,7 +12855,6 @@
         "fields": [
             "operator",
             "address",
-            "building_area",
             "opening_hours"
         ],
         "suggestion": true
@@ -13015,7 +12873,6 @@
         "fields": [
             "operator",
             "address",
-            "building_area",
             "opening_hours"
         ],
         "suggestion": true
@@ -13034,7 +12891,6 @@
         "fields": [
             "operator",
             "address",
-            "building_area",
             "opening_hours"
         ],
         "suggestion": true
@@ -13053,7 +12909,6 @@
         "fields": [
             "operator",
             "address",
-            "building_area",
             "opening_hours"
         ],
         "suggestion": true
@@ -13072,7 +12927,6 @@
         "fields": [
             "operator",
             "address",
-            "building_area",
             "opening_hours"
         ],
         "suggestion": true
@@ -13091,7 +12945,6 @@
         "fields": [
             "operator",
             "address",
-            "building_area",
             "opening_hours"
         ],
         "suggestion": true
@@ -13110,7 +12963,6 @@
         "fields": [
             "operator",
             "address",
-            "building_area",
             "opening_hours"
         ],
         "suggestion": true
@@ -13129,7 +12981,6 @@
         "fields": [
             "operator",
             "address",
-            "building_area",
             "opening_hours"
         ],
         "suggestion": true
@@ -13148,7 +12999,6 @@
         "fields": [
             "operator",
             "address",
-            "building_area",
             "opening_hours"
         ],
         "suggestion": true
@@ -13167,7 +13017,6 @@
         "fields": [
             "operator",
             "address",
-            "building_area",
             "opening_hours"
         ],
         "suggestion": true
@@ -13186,7 +13035,6 @@
         "fields": [
             "operator",
             "address",
-            "building_area",
             "opening_hours"
         ],
         "suggestion": true
@@ -13205,7 +13053,6 @@
         "fields": [
             "operator",
             "address",
-            "building_area",
             "opening_hours"
         ],
         "suggestion": true
@@ -13224,7 +13071,6 @@
         "fields": [
             "operator",
             "address",
-            "building_area",
             "opening_hours"
         ],
         "suggestion": true
@@ -13243,7 +13089,6 @@
         "fields": [
             "operator",
             "address",
-            "building_area",
             "opening_hours"
         ],
         "suggestion": true
@@ -13262,7 +13107,6 @@
         "fields": [
             "operator",
             "address",
-            "building_area",
             "opening_hours"
         ],
         "suggestion": true
@@ -13281,7 +13125,6 @@
         "fields": [
             "operator",
             "address",
-            "building_area",
             "opening_hours"
         ],
         "suggestion": true
@@ -13300,7 +13143,6 @@
         "fields": [
             "operator",
             "address",
-            "building_area",
             "opening_hours"
         ],
         "suggestion": true
@@ -13319,7 +13161,6 @@
         "fields": [
             "operator",
             "address",
-            "building_area",
             "opening_hours"
         ],
         "suggestion": true
@@ -13338,7 +13179,6 @@
         "fields": [
             "operator",
             "address",
-            "building_area",
             "opening_hours"
         ],
         "suggestion": true
@@ -13357,7 +13197,6 @@
         "fields": [
             "operator",
             "address",
-            "building_area",
             "opening_hours"
         ],
         "suggestion": true
@@ -13376,7 +13215,6 @@
         "fields": [
             "operator",
             "address",
-            "building_area",
             "opening_hours"
         ],
         "suggestion": true
@@ -13395,7 +13233,6 @@
         "fields": [
             "operator",
             "address",
-            "building_area",
             "opening_hours"
         ],
         "suggestion": true
@@ -13414,7 +13251,6 @@
         "fields": [
             "operator",
             "address",
-            "building_area",
             "opening_hours"
         ],
         "suggestion": true
@@ -13433,7 +13269,6 @@
         "fields": [
             "operator",
             "address",
-            "building_area",
             "opening_hours"
         ],
         "suggestion": true
@@ -13452,7 +13287,6 @@
         "fields": [
             "operator",
             "address",
-            "building_area",
             "opening_hours"
         ],
         "suggestion": true
@@ -13471,7 +13305,6 @@
         "fields": [
             "operator",
             "address",
-            "building_area",
             "opening_hours"
         ],
         "suggestion": true
@@ -13490,7 +13323,6 @@
         "fields": [
             "operator",
             "address",
-            "building_area",
             "opening_hours"
         ],
         "suggestion": true
@@ -13509,7 +13341,6 @@
         "fields": [
             "operator",
             "address",
-            "building_area",
             "opening_hours"
         ],
         "suggestion": true
@@ -13528,7 +13359,6 @@
         "fields": [
             "operator",
             "address",
-            "building_area",
             "opening_hours"
         ],
         "suggestion": true
@@ -13547,7 +13377,6 @@
         "fields": [
             "operator",
             "address",
-            "building_area",
             "opening_hours"
         ],
         "suggestion": true
