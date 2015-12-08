@@ -7,12 +7,11 @@
         "point"
     ],
     "terms": [
-        "snack",
-        "soda",
-        "ticket"
+        "condom"
     ],
     "tags": {
-        "amenity": "vending_machine"
+        "amenity": "vending_machine",
+        "vending": "condoms"
     },
-    "name": "Vending Machine"
+    "name": "Condom Vending Machine"
 }

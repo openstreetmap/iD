@@ -1,0 +1,17 @@
+{
+    "fields": [
+        "vending",
+        "operator"
+    ],
+    "geometry": [
+        "point"
+    ],
+    "terms": [
+        "drink"
+    ],
+    "tags": {
+        "amenity": "vending_machine",
+        "vending": "drinks"
+    },
+    "name": "Drinks Vending Machine"
+}
