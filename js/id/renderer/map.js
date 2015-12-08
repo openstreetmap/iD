@@ -2,7 +2,6 @@ iD.Map = function(context) {
     var dimensions = [1, 1],
         dispatch = d3.dispatch('move', 'drawn'),
         projection = context.projection,
-        roundedProjection = iD.svg.RoundProjection(projection),
         zoom = d3.behavior.zoom()
             .translate(projection.translate())
             .scale(projection.scale() * 2 * Math.PI)
@@ -12,11 +11,11 @@ iD.Map = function(context) {
         transformStart,
         transformed = false,
         minzoom = 0,
-        points = iD.svg.Points(roundedProjection, context),
-        vertices = iD.svg.Vertices(roundedProjection, context),
+        points = iD.svg.Points(projection, context),
+        vertices = iD.svg.Vertices(projection, context),
         lines = iD.svg.Lines(projection),
         areas = iD.svg.Areas(projection),
-        midpoints = iD.svg.Midpoints(roundedProjection, context),
+        midpoints = iD.svg.Midpoints(projection, context),
         labels = iD.svg.Labels(projection, context),
         supersurface, surface,
         mouse,
@@ -169,8 +168,8 @@ iD.Map = function(context) {
             .scale(d3.event.scale / (2 * Math.PI));
 
         var scale = d3.event.scale / transformStart[0],
-            tX = Math.round((d3.event.translate[0] / scale - transformStart[1][0]) * scale),
-            tY = Math.round((d3.event.translate[1] / scale - transformStart[1][1]) * scale);
+            tX = (d3.event.translate[0] / scale - transformStart[1][0]) * scale,
+            tY = (d3.event.translate[1] / scale - transformStart[1][1]) * scale;
 
         transformed = true;
         iD.util.setTransform(supersurface, tX, tY, scale);
@@ -187,7 +186,6 @@ iD.Map = function(context) {
     }
 
     function redraw(difference, extent) {
-
         if (!surface) return;
 
         clearTimeout(timeoutId);

@@ -50,8 +50,8 @@ iD.ui.MapInMap = function(context) {
             zDiff = zMain - zMini;
 
             var scale = kCurr / kLast,
-                tX = Math.round((tCurr[0] / scale - tLast[0]) * scale),
-                tY = Math.round((tCurr[1] / scale - tLast[1]) * scale);
+                tX = (tCurr[0] / scale - tLast[0]) * scale,
+                tY = (tCurr[1] / scale - tLast[1]) * scale;
 
             iD.util.setTransform(tiles, tX, tY, scale);
             iD.util.setTransform(svg, 0, 0, scale);
