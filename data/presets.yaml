@@ -566,8 +566,6 @@ en:
       maxstay:
         # 'maxstay=*'
         label: Max Stay
-        # maxstay field placeholder
-        placeholder: '30 minutes, 1 hour, 2 hours...'
       mtb/scale:
         # 'mtb:scale=*'
         label: Mountain Biking Difficulty

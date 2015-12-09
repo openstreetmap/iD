@@ -1,6 +1,19 @@
 {
     "key": "maxstay",
     "type": "combo",
-    "placeholder": "30 minutes, 1 hour, 2 hours...",
-    "label": "Max Stay"
+    "label": "Max Stay",
+    "options": [
+        "15 min",
+        "30 min",
+        "45 min",
+        "1 hr",
+        "1.5 hr",
+        "2 hr",
+        "2.5 hr",
+        "3 hr",
+        "4 hr",
+        "1 day",
+        "2 day"
+    ],
+    "snake_case": false
 }
