@@ -70,23 +70,27 @@
             "required": true
         },
         "label": {
-            "description": "English label for the form",
+            "description": "English label for the field caption",
             "type": "string",
             "required": true
         },
         "geometry": {
+            "description": "If specified, only show the field for this kind of geometry",
             "type": "string"
         },
         "default": {
+            "description": "The default value for this field",
             "type": "string"
         },
         "options": {
+            "description": "List of untranslatable string suggestions (combo type fields)",
             "type": "array",
             "items": {
                 "type": "string"
             }
         },
         "universal": {
+            "description": "If true, this field will appear in the Add Field list for all presets",
             "type": "boolean",
             "default": false
         },
@@ -94,10 +98,17 @@
             "type": "string"
         },
         "placeholder": {
+            "description": "Placeholder text for this field",
             "type": "string"
         },
         "strings": {
+            "description": "Translatable strings options (combo type fields)",
             "type": "object"
+        },
+        "snake_case": {
+            "description": "If true, replace spaces with underscores in the tag value (combo type fields)",
+            "type": "boolean",
+            "default": true
         }
     },
     "additionalProperties": false
