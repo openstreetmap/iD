@@ -9,6 +9,8 @@ iD.ui.intro = function(context) {
         // Save current map state
         var history = context.history().toJSON(),
             hash = window.location.hash,
+            center = context.map().center(),
+            zoom = context.map().zoom(),
             background = context.background().baseLayerSource(),
             opacity = d3.select('.background-layer').style('opacity'),
             loadedTiles = context.connection().loadedTiles(),
@@ -62,6 +64,7 @@ iD.ui.intro = function(context) {
             context.history().reset().merge(d3.values(baseEntities));
             context.background().baseLayerSource(background);
             if (history) context.history().fromJSON(history, false);
+            context.map().centerZoom(center, zoom);
             window.location.replace(hash);
             context.inIntro(false);
             d3.select('#bar button.save').on('click', save);
