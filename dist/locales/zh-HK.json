@@ -726,10 +726,10 @@
                 "label": "品牌"
             },
             "building": {
-                "label": "屋宇"
+                "label": "建築物"
             },
             "building_area": {
-                "label": "屋宇"
+                "label": "建築物"
             },
             "capacity": {
                 "label": "容納",
@@ -776,7 +776,7 @@
                 "label": "國"
             },
             "covered": {
-                "label": "有蓋"
+                "label": "被遮蓋"
             },
             "craft": {
                 "label": "種類"
@@ -998,6 +998,9 @@
             "leisure": {
                 "label": "類"
             },
+            "level": {
+                "label": "圖層"
+            },
             "levels": {
                 "label": "樓",
                 "placeholder": "2, 4, 6..."
@@ -1062,28 +1065,29 @@
                 "label": "單程",
                 "options": {
                     "no": "否",
-                    "yes": "有"
+                    "undefined": "假設為否",
+                    "yes": "是"
                 }
             },
             "oneway_yes": {
                 "label": "單程",
                 "options": {
                     "no": "否",
-                    "yes": "有"
+                    "yes": "是"
                 }
             },
             "opening_hours": {
                 "label": "時間"
             },
             "operator": {
-                "label": "承辦商"
+                "label": "營辦商"
             },
             "par": {
                 "label": "標準桿",
                 "placeholder": "3, 4, 5..."
             },
             "park_ride": {
-                "label": "泊車轉乖"
+                "label": "泊車轉乘"
             },
             "parking": {
                 "label": "類",
@@ -1184,6 +1188,7 @@
             "service/bicycle/chain_tool": {
                 "options": {
                     "no": "否",
+                    "undefined": "假設為沒有",
                     "yes": "有"
                 }
             },
@@ -1191,6 +1196,7 @@
                 "label": "泵氣設備",
                 "options": {
                     "no": "否",
+                    "undefined": "假設為沒有",
                     "yes": "有"
                 }
             },
@@ -1203,7 +1209,7 @@
                 }
             },
             "shelter": {
-                "label": "有天遮"
+                "label": "有蓋"
             },
             "shelter_type": {
                 "label": "種類"
@@ -1216,7 +1222,7 @@
                     "isolated": "於實質上隔開的吸煙區",
                     "no": "任何地方都不可吸煙",
                     "outside": "可於室外吸煙",
-                    "separated": "無有隔開的吸煙區",
+                    "separated": "沒有隔開的吸煙區",
                     "yes": "所有地方均可吸煙"
                 },
                 "placeholder": "禁止、隔開、可以"
@@ -1408,8 +1414,8 @@
                 "terms": "Car Rental,汽車租賃,汽車租賃處,租車,租車店,租車舖"
             },
             "amenity/car_sharing": {
-                "name": "共用車處",
-                "terms": "Car Sharing,公用車處,共用車,共用車處,汽車共享站"
+                "name": "汽車共享站",
+                "terms": "Car Sharing,共用車,共用車處,汽車共享站"
             },
             "amenity/car_wash": {
                 "name": "洗車舖",
@@ -1426,6 +1432,10 @@
             "amenity/courthouse": {
                 "name": "法庭",
                 "terms": "Courthouse,法庭,法院,臬署,裁判署"
+            },
+            "amenity/doctor": {
+                "name": "醫生",
+                "terms": "醫生, 中醫, 西醫"
             },
             "amenity/drinking_water": {
                 "name": "飲水處",
@@ -1455,6 +1465,14 @@
                 "name": "墳地",
                 "terms": "Graveyard,墓地,墳地,墳場"
             },
+            "amenity/hospital": {
+                "name": "醫院範圍",
+                "terms": "醫院"
+            },
+            "amenity/kindergarten": {
+                "name": "學前照顧/幼稚園範圍",
+                "terms": "幼兒園,幼稚園用地,幼稚園"
+            },
             "amenity/library": {
                 "name": "圖書館",
                 "terms": "Library,圖書館,拉記"
@@ -1472,8 +1490,8 @@
                 "terms": "Pharmacy,葯局,葯店,葯房,葯舖,藥局,藥店,藥房,藥舖"
             },
             "amenity/place_of_worship": {
-                "name": "拜神之所",
-                "terms": "Place of Worship,Worship,宗教祟拜場所,宗教禮拜處,崇拜處,拜神之所,禮拜場所"
+                "name": "祟拜場所",
+                "terms": "Place of Worship,Worship,宗教祟拜場所,宗教禮拜處,崇拜處,拜神之所,禮拜場所,廟,教堂,寺廟,清真寺,禮拜堂"
             },
             "amenity/place_of_worship/buddhist": {
                 "name": "佛寺",
@@ -1518,6 +1536,10 @@
             "amenity/restaurant": {
                 "name": "餐廳",
                 "terms": "Restaurant,茶樓,酒家,酒樓,飯店,飯館,餐廳,餐館"
+            },
+            "amenity/school": {
+                "name": "學校範圍",
+                "terms": "學校,中學,小學,學校用地,學校範圍,國際學校"
             },
             "amenity/shelter": {
                 "name": "天遮或亭",
@@ -1584,8 +1606,8 @@
                 "terms": "Cycle Barrier,單車減速欄,單車矮欄"
             },
             "barrier/ditch": {
-                "name": "溝",
-                "terms": "Ditch,溝"
+                "name": "溝渠",
+                "terms": "Ditch,溝,溝渠,明溝"
             },
             "barrier/entrance": {
                 "name": "入口",
@@ -1632,7 +1654,7 @@
                 "terms": "Administrative Boundary,行政區域界線,行政區界,行政界,行政界線,行政邊界"
             },
             "building": {
-                "name": "屋宇",
+                "name": "建築物",
                 "terms": "Building,屋宇,建築物"
             },
             "building/apartments": {
@@ -1647,6 +1669,10 @@
                 "name": "車庫",
                 "terms": "Garage,車庫"
             },
+            "building/hospital": {
+                "name": "醫院建築物",
+                "terms": "醫院, 醫院大樓"
+            },
             "building/house": {
                 "name": "屋",
                 "terms": "House,屋,房屋,洋房"
@@ -1659,9 +1685,17 @@
                 "name": "工業樓宇",
                 "terms": "Industrial Building,工業建築物,工業樓宇"
             },
+            "building/kindergarten": {
+                "name": "學前照顧/幼稚園建築物",
+                "terms": "幼兒園校舍,幼稚園校舍"
+            },
             "building/residential": {
                 "name": "住宅樓宇",
                 "terms": "Residential Building,住宅建築物,住宅樓宇"
+            },
+            "building/school": {
+                "name": "校舍",
+                "terms": "學校建築物,小學建築物,中學建築物"
             },
             "embankment": {
                 "name": "基堤",
@@ -1723,8 +1757,8 @@
                 "terms": "Highway,公路"
             },
             "highway/bridleway": {
-                "name": "馬徑",
-                "terms": "Bridle Path,馬徑,馬道"
+                "name": "馬道",
+                "terms": "Bridle Path,馬徑,馬道,策騎徑"
             },
             "highway/bus_stop": {
                 "name": "巴士站",
@@ -1758,6 +1792,10 @@
                 "name": "徑",
                 "terms": "Path,徑,路徑"
             },
+            "highway/pedestrian": {
+                "name": "行人專用區",
+                "terms": "行人區, 行人專用"
+            },
             "highway/primary": {
                 "name": "大路",
                 "terms": "Primary Road,主要道路,大路"
@@ -1769,6 +1807,10 @@
             "highway/residential": {
                 "name": "住宅路",
                 "terms": "Residential Road,住宅區道路,住宅路"
+            },
+            "highway/rest_area": {
+                "name": "公路休憩區",
+                "terms": "公路休息站, 公路休息區"
             },
             "highway/road": {
                 "name": "未明路",
@@ -1806,8 +1848,12 @@
                 "name": "泊車通道",
                 "terms": "Parking Aisle,停車場通道,泊車通道"
             },
+            "highway/services": {
+                "name": "公路服務區",
+                "terms": "公路服務區"
+            },
             "highway/steps": {
-                "name": "梯",
+                "name": "樓梯",
                 "terms": "Steps,梯,樓梯,石階,階梯"
             },
             "highway/stop": {
@@ -1890,25 +1936,45 @@
                 "name": "墳場",
                 "terms": "Cemetery,墓地,墳場"
             },
+            "landuse/commercial": {
+                "name": "商業區",
+                "terms": "商業區"
+            },
             "landuse/construction": {
                 "name": "地盤",
                 "terms": "Construction,地盤,建築工程,建築物"
             },
+            "landuse/farm": {
+                "name": "農地",
+                "terms": "農田, 稻田, 田, 耕地"
+            },
+            "landuse/farmland": {
+                "name": "農地",
+                "terms": "農田, 稻田, 田, 耕地"
+            },
             "landuse/farmyard": {
-                "name": "地堂",
-                "terms": "Farmyard,地堂,農莊"
+                "name": "農莊",
+                "terms": "Farmyard,農莊, 農場"
             },
             "landuse/forest": {
-                "name": "森",
+                "name": "森林",
                 "terms": "Forest,森,森林"
             },
             "landuse/grass": {
                 "name": "草地",
                 "terms": "Grass,草地"
             },
+            "landuse/industrial": {
+                "name": "工業區",
+                "terms": "工業區, 工業村, 工業邨"
+            },
             "landuse/meadow": {
                 "name": "牧地",
                 "terms": "Meadow,牧地,牧場"
+            },
+            "landuse/military": {
+                "name": "軍事區",
+                "terms": "軍營"
             },
             "landuse/orchard": {
                 "name": "菓園",
@@ -1917,6 +1983,14 @@
             "landuse/quarry": {
                 "name": "石塘",
                 "terms": "Quarry,石塘,石礦場,礦場"
+            },
+            "landuse/residential": {
+                "name": "住宅區",
+                "terms": "住宅用地, 住宅地"
+            },
+            "landuse/retail": {
+                "name": "零售區",
+                "terms": "零售區域, 販賣區, 銷售區"
             },
             "landuse/vineyard": {
                 "name": "葡萄園",
@@ -1951,7 +2025,7 @@
                 "terms": "Marina,碼頭,遊艇碼頭"
             },
             "leisure/park": {
-                "name": "園",
+                "name": "公園",
                 "terms": "Park,公園,園"
             },
             "leisure/pitch": {
@@ -2076,7 +2150,7 @@
             },
             "man_made/wastewater_plant": {
                 "name": "廢水廠",
-                "terms": "Wastewater Plant,廢水廠,汙水處理廠,污水處理廠"
+                "terms": "Wastewater Plant,廢水廠,污水處理廠"
             },
             "man_made/water_tower": {
                 "name": "水塔",
@@ -2367,11 +2441,11 @@
                 "terms": "Power Generator,發電機"
             },
             "power/line": {
-                "name": "供電綫",
+                "name": "電纜",
                 "terms": "Power Line,供電綫,供電線,電線"
             },
             "power/minor_line": {
-                "name": "細供電綫",
+                "name": "次要電纜",
                 "terms": "Minor Power Line,小供電線,細供電綫"
             },
             "power/pole": {
@@ -2395,19 +2469,19 @@
                 "terms": "Transformer,火牛房,變電所"
             },
             "public_transport/platform": {
-                "name": "站頭",
-                "terms": "Platform,平臺,站頭"
+                "name": "月台",
+                "terms": "Platform,月台,月臺"
             },
             "public_transport/stop_position": {
-                "name": "街中站",
-                "terms": "Stop Position,停止位置,街中站"
+                "name": "停車位置",
+                "terms": "Stop Position,停止位置"
             },
             "railway": {
                 "name": "鐵路",
                 "terms": "Railway,鐵路"
             },
             "railway/abandoned": {
-                "name": "廢鐵路",
+                "name": "廢置鐵路",
                 "terms": "Abandoned Railway,廢棄的鐵路,廢鐵路,鐵路路線跡"
             },
             "railway/disused": {
@@ -2447,12 +2521,12 @@
                 "terms": "Railway Station,火車站,鐵路站"
             },
             "railway/subway": {
-                "name": "地下鐵路",
-                "terms": "MTR,Mass Transit Railway,Subway,地下鐵,地下鐵路,地鐵"
+                "name": "地下鐵",
+                "terms": "MTR,Mass Transit Railway,Subway,地下鐵,地下鐵路,地鐵,捷運"
             },
             "railway/subway_entrance": {
-                "name": "地下鐵路入口",
-                "terms": "Subway Entrance,地下鐵路入口,地鐵入口,地鐵口"
+                "name": "地鐵入口",
+                "terms": "Subway Entrance,地下鐵路入口,地鐵入口,地鐵口,捷運入口"
             },
             "railway/tram": {
                 "name": "電車",
@@ -2642,6 +2716,10 @@
                 "name": "音響舖",
                 "terms": "Hifi Store,音響店,音響舖"
             },
+            "shop/interior_decoration": {
+                "name": "室內設計店",
+                "terms": "室內設計店"
+            },
             "shop/jewelry": {
                 "name": "珠寶金行",
                 "terms": "Jeweler,珠寶店,珠寶舖,珠寶金行,首飾店,首飾舖"
@@ -2655,8 +2733,8 @@
                 "terms": "Locksmith,鎖匠,鎖匠鋪,開鎖佬"
             },
             "shop/mall": {
-                "name": "大商場",
-                "terms": "Mall,商場,大商場"
+                "name": "購物中心",
+                "terms": "Mall,商場,購物中心"
             },
             "shop/mobile_phone": {
                 "name": "電話舖",
@@ -2669,6 +2747,10 @@
             "shop/music": {
                 "name": "唱片舖",
                 "terms": "Music Store,唱片舖,音樂店"
+            },
+            "shop/musical_instrument": {
+                "name": "樂器店",
+                "terms": "樂器行,樂器店"
             },
             "shop/optician": {
                 "name": "眼鏡鋪",
@@ -2875,12 +2957,12 @@
                 "terms": "Dam,堤壩,壩,水壩"
             },
             "waterway/ditch": {
-                "name": "溝",
-                "terms": "Ditch,渠,溝,溝渠"
+                "name": "溝渠",
+                "terms": "Ditch,溝,溝渠,明溝"
             },
             "waterway/drain": {
                 "name": "排水道",
-                "terms": "Drain,下水道,排水道,渠,溝"
+                "terms": "Drain,下水道,排水道,渠,排水渠,排水管,污水渠"
             },
             "waterway/river": {
                 "name": "江",
@@ -2891,8 +2973,8 @@
                 "terms": "Riverbank,江岸,河堤,河床,河牀"
             },
             "waterway/stream": {
-                "name": "涌",
-                "terms": "Stream,小河,小溪,涌,溪,溪流"
+                "name": "溪流",
+                "terms": "Stream,小河,小溪,涌,溪,溪流, 河溪,溪澗"
             },
             "waterway/weir": {
                 "name": "堰",
