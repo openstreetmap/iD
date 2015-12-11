@@ -137,14 +137,9 @@
         },
         "merge": {
             "title": "Объединить",
-            "description": "Объединить эти линии.",
             "key": "C",
-            "annotation": "Объединены {n} линий.",
             "not_eligible": "Эти объекты нельзя склеить.",
-            "not_adjacent": "Эти линии не склеить, потому что они не соединены.",
-            "restriction": "Эти линии не склеить, потому что как минимум одна из них находится в отношении \"{relation}\"",
-            "incomplete_relation": "Эти объекты нельзя объединить, потому что как минимум один из них не был загружен целиком.",
-            "conflicting_tags": "Эти линии не склеить, потому что какие-то из их тегов содержат несовместимые значения."
+            "incomplete_relation": "Эти объекты нельзя объединить, потому что как минимум один из них не был загружен целиком."
         },
         "move": {
             "title": "Сместить",
@@ -217,7 +212,7 @@
         "nothing": "Повторять нечего."
     },
     "tooltip_keyhint": "Горячая клавиша:",
-    "browser_notice": "Этот редактор работает в браузерах Firefox, Chrome, Safari, Opera и Internet Explorer версии 9 и выше. Пожалуйста, обновите свой браузер или воспользуйтесь редактором Potlatch 2.",
+    "browser_notice": "Этот редактор поддерживает Firefox, Chrome, Safari, Opera, и Internet Explorer 11 или выше. Пожалуйста, обновите свой браузер или используйте Potlach 2 для редактирования карты.",
     "translate": {
         "translate": "Перевести",
         "localized_translation_label": "Многоязычное  название",
@@ -1860,9 +1855,26 @@
                 "name": "Территория университета",
                 "terms": "университет, колледж, вуз"
             },
-            "amenity/vending_machine": {
-                "name": "Торговый Автомат",
-                "terms": "Торговый автомат, автомат, торгомат"
+            "amenity/vending_machine/cigarettes": {
+                "name": "Автомат по продаже сигарет."
+            },
+            "amenity/vending_machine/condoms": {
+                "name": "Автомат по продаже презервативов."
+            },
+            "amenity/vending_machine/drinks": {
+                "name": "Автомат по продаже напитков"
+            },
+            "amenity/vending_machine/excrement_bags": {
+                "name": "Автомат по продаже мешков для экскрементов"
+            },
+            "amenity/vending_machine/news_papers": {
+                "name": "Автомат по продаже газет"
+            },
+            "amenity/vending_machine/parking_tickets": {
+                "name": "Автомат по продаже парковочных билетов"
+            },
+            "amenity/vending_machine/sweets": {
+                "name": "Автомат по продаже батончиков"
             },
             "amenity/veterinary": {
                 "name": "Ветеринар",
@@ -2576,7 +2588,7 @@
                 "terms": "ферма, сельхоз, совхоз"
             },
             "landuse/forest": {
-                "name": "Лес / деревья",
+                "name": "Обслуживаемый лес / деревья.",
                 "terms": "лес, лесной массив"
             },
             "landuse/garages": {

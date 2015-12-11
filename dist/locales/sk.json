@@ -137,14 +137,9 @@
         },
         "merge": {
             "title": "Zlúč",
-            "description": "Zlúč tieto čiary.",
             "key": "C",
-            "annotation": "Zlúčenie {n} čiar.",
             "not_eligible": "Tieto objekty nemôžu byť zlúčené.",
-            "not_adjacent": "Tieto čiary nemožno zlúčiť, pretože nie sú prepojené.",
-            "restriction": "Tieto čiary nemôžu byť zlúčené, pretože aspoň jedna z nich je členom relácie \"{relation}\".",
-            "incomplete_relation": "Tieto objekty nemôžu byť zlúčené, pretože aspoň jeden z nich nebol úplne stiahnutý.",
-            "conflicting_tags": "Tieto čiary nemôžu byt zlúčené, pretože niektoré ich označenia majú konfliktné hodnoty."
+            "incomplete_relation": "Tieto objekty nemôžu byť zlúčené, pretože aspoň jeden z nich nebol úplne stiahnutý."
         },
         "move": {
             "title": "Presuň",
@@ -217,7 +212,7 @@
         "nothing": "Nič na zopakovanie."
     },
     "tooltip_keyhint": "Skratka:",
-    "browser_notice": "Tento editor je podporovaný v prehliadačoch Firefox, Chrome, Safari, Opera, a Internet Explorer 9 a vyšší. Prosím aktualizujte svoj prehliadač alebo použite  Potlatch 2 na editovanie mapy.",
+    "browser_notice": "Tento editor je podporovaný v prehliadačoch Firefox, Chrome, Safari, Opera a Internet Explorer 11 a vyžší. Aktualizujte prosím svoj prehliadač alebo použite Potlach 2.",
     "translate": {
         "translate": "Prelož",
         "localized_translation_label": "Viacjazyčný názov",
@@ -953,6 +948,9 @@
             "handicap": {
                 "label": "Handicap",
                 "placeholder": "1-18"
+            },
+            "handrail": {
+                "label": "Zábradlie"
             },
             "highway": {
                 "label": "Typ"
@@ -1864,10 +1862,6 @@
                 "name": "Univerzita",
                 "terms": "Univerzita,vysoka skola, vysoká škola"
             },
-            "amenity/vending_machine": {
-                "name": "Automat",
-                "terms": "automat na kávu,automat na kavu,kava,nápojový utomat,napojovy automat"
-            },
             "amenity/veterinary": {
                 "name": "Veterinár",
                 "terms": "veterinar"
@@ -1975,6 +1969,18 @@
             "building/cabin": {
                 "name": "Chata",
                 "terms": "zrub,drevenica"
+            },
+            "building/cathedral": {
+                "name": "Budova katedrály",
+                "terms": "budova katedraly,katedrala,kostol,dom,dóm,katedrála"
+            },
+            "building/chapel": {
+                "name": "Budova kaplnky",
+                "terms": "kaplnka,kostol"
+            },
+            "building/church": {
+                "name": "Budova kostola",
+                "terms": "kostol,kaplnka,chram,chrám"
             },
             "building/college": {
                 "name": "Budova vysokej školy",

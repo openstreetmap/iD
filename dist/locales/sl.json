@@ -131,12 +131,8 @@
         },
         "merge": {
             "title": "Združeno.",
-            "description": "Združi te črte.",
             "key": "C",
-            "annotation": "Združeno {n} črt.",
             "not_eligible": "Teh objektov ni mogoče združiti.",
-            "not_adjacent": "Teh črt ni mogoče združiti, ker se ne povezujejo.",
-            "restriction": "Teh črt ni mogoče združiti, ker je vsaj ena vključena v povezavo \\{relation}\\.",
             "incomplete_relation": "Teh objektov ni mogoče združiti, ker vsaj en ni bil v celoti naložen."
         },
         "move": {
@@ -207,7 +203,6 @@
         "nothing": "Nič za ponovitev."
     },
     "tooltip_keyhint": "Bližnjica:",
-    "browser_notice": "Urejevalnik podpirajo Firefox, Chrome, Safari, Opera, in Internet Explorer 9 oz. novejši. Prosimo, da za urejanje zemljevida nadgradite brskalnik ali uporabite Potlatch 2.",
     "translate": {
         "translate": "Prevedi",
         "localized_translation_label": "Večjezično ime",
@@ -1468,10 +1463,6 @@
             "amenity/townhall": {
                 "name": "Mestna hiša",
                 "terms": "magistrat,rotovž"
-            },
-            "amenity/vending_machine": {
-                "name": "Prodajni avtomat",
-                "terms": "avtomat,kavomat,mlekomat"
             },
             "amenity/veterinary": {
                 "name": "Veterinar",

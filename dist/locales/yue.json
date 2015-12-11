@@ -128,12 +128,8 @@
         },
         "merge": {
             "title": "併",
-            "description": "併埋爾啲綫。",
             "key": "C",
-            "annotation": "併咗綫{n}條。 ",
-            "not_eligible": "爾啲地貌，無得併埋。",
-            "not_adjacent": "爾啲綫無得掹開，根本無駁埋。",
-            "restriction": "爾啲綫併唔到，當中至少一個，屬於{relation}關聯。"
+            "not_eligible": "爾啲地貌，無得併埋。"
         },
         "move": {
             "title": "搬",
@@ -189,7 +185,6 @@
         "nothing": "無嘢好重做"
     },
     "tooltip_keyhint": "快掣",
-    "browser_notice": "爾個編輯，只用於Firefox、Chrome、Safari、Opera以及Internet Explorer 版本九或以上。唔該換新瀏覽器，或者用Potlach2去改地圖。",
     "translate": {
         "translate": "繙",
         "localized_translation_label": "話名",
@@ -1040,10 +1035,6 @@
             "amenity/townhall": {
                 "name": "大會堂",
                 "terms": "Town Hall,大會堂,市政府,市政廳"
-            },
-            "amenity/vending_machine": {
-                "name": "售賣機",
-                "terms": "Vending Machine,售賣機,自勳動賣機"
             },
             "amenity/waste_basket": {
                 "name": "垃圾桶",

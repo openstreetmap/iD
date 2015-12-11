@@ -128,12 +128,8 @@
         },
         "merge": {
             "title": "Спој",
-            "description": "Спојите ове путање.",
             "key": "C",
-            "annotation": "Спојено {n} путања.",
-            "not_eligible": "Ови објекти се не могу спојити.",
-            "not_adjacent": "Ове линије се не могу спојити, јер нису повезане.",
-            "restriction": "Ове линије не могу да се споје јер је бар једна члан \"{relation}\" односа."
+            "not_eligible": "Ови објекти се не могу спојити."
         },
         "move": {
             "title": "Премести",
@@ -189,7 +185,6 @@
         "nothing": "Ништа за поновити."
     },
     "tooltip_keyhint": "Пречица:",
-    "browser_notice": "Овај уређивач је подржан у Фирефоксу, Хрому, Сафарију, Опери и Интернет екплореру 9 и новијим. Надоградите прегледач или користите Потлач 2 како бисте уређивали мапу.",
     "translate": {
         "translate": "Преведи",
         "localized_translation_label": "Вишејезички назив",
@@ -199,6 +194,11 @@
     "zoom_in_edit": "Увећајте да бисте уређивали",
     "logout": "одјава",
     "loading_auth": "Повезивање са Опенстритмап...",
+    "report_a_bug": "Пријавите проблем",
+    "help_translate": "Помозите у превођењу",
+    "feature_info": {
+        "hidden_warning": "{count} сакривених одлика"
+    },
     "status": {
         "error": "Није могуће повезати се АПИ-јем.",
         "offline": "АПИ је ван мреже. Молимо вас покушајте уређивање касније.",
@@ -219,6 +219,22 @@
     "contributors": {
         "list": "Измене од стране {users}",
         "truncated_list": "Измене од стране {users} и још {count} других"
+    },
+    "infobox": {
+        "selected": "{n} изабрано",
+        "geometry": "Геометрија",
+        "closed": "затворено",
+        "center": "Центар",
+        "perimeter": "Опсег",
+        "length": "Дужина",
+        "area": "Површина"
+    },
+    "geometry": {
+        "point": "тачка",
+        "vertex": "чвор",
+        "line": "линија",
+        "area": "површина",
+        "relation": "однос"
     },
     "geocoder": {
         "search": "Претрага широм света",
@@ -249,6 +265,10 @@
         "incomplete": "<није преузето>",
         "feature_list": "Могућности претраге",
         "edit": "Уредите објекат",
+        "check": {
+            "yes": "Да",
+            "no": "Не"
+        },
         "none": "Ниједан",
         "node": "Чвор",
         "way": "Пут",
@@ -264,6 +284,18 @@
         "fix_misalignment": "Поправи поравнање",
         "reset": "ресетовање"
     },
+    "feature": {
+        "paths": {
+            "description": "Путање"
+        },
+        "buildings": {
+            "description": "Зграде"
+        },
+        "others": {
+            "description": "Остало",
+            "tooltip": "Све остало"
+        }
+    },
     "restore": {
         "heading": "Имате несачуване измене",
         "description": "Да ли желите да се повратити несачуване измене од претходног уређивања?",
@@ -275,7 +307,15 @@
         "help": "Сачувајте измене на Опенстреетмапу, што их чини видљивим за друге кориснике.",
         "no_changes": "Нема измена које треба сачувати.",
         "uploading": "Учитавања измена на Опенстреетмап.",
-        "unsaved_changes": "Имате несачуваних измена"
+        "unsaved_changes": "Имате несачуваних измена",
+        "conflict": {
+            "keep_local": "Задржи моје",
+            "keep_remote": "Користи њихово",
+            "restore": "Поврати",
+            "delete": "Остави обрисано",
+            "download_changes": "Или преузми своје измене.",
+            "done": "Сви конфликти су разрешени!"
+        }
     },
     "success": {
         "edited_osm": "Уреди ОСМ!",
@@ -416,6 +456,7 @@
         },
         "fields": {
             "access": {
+                "label": "Дозвољен приступ",
                 "options": {
                     "designated": {
                         "description": "Приступ дозвољен само према знацима или одређеним локалним законима",
@@ -443,6 +484,7 @@
                     }
                 },
                 "types": {
+                    "access": "Све",
                     "bicycle": "За бицикле",
                     "foot": "Пешке",
                     "horse": "За коње",
@@ -450,6 +492,7 @@
                 }
             },
             "access_simple": {
+                "label": "Дозвољен приступ",
                 "placeholder": "да"
             },
             "access_toilets": {
@@ -459,12 +502,14 @@
                 "label": "Адреса",
                 "placeholders": {
                     "city": "Град",
+                    "conscriptionnumber": "123",
                     "country": "Држава",
                     "district": "Округ",
                     "hamlet": "Засеок",
                     "housename": "Назив куће",
                     "housenumber": "123",
                     "place": "Место",
+                    "postcode": "Поштански број",
                     "province": "Провинција",
                     "state": "Савезна држава",
                     "street": "Улица",
@@ -512,6 +557,9 @@
             "amenity": {
                 "label": "Врста"
             },
+            "area/highway": {
+                "label": "Врста"
+            },
             "artist": {
                 "label": "Уметник"
             },
@@ -526,6 +574,9 @@
             },
             "barrier": {
                 "label": "Врста"
+            },
+            "bench": {
+                "label": "Клупа"
             },
             "bicycle_parking": {
                 "label": "Врста"
@@ -577,8 +628,14 @@
             "construction": {
                 "label": "Врста"
             },
+            "content": {
+                "label": "Садржај"
+            },
             "country": {
                 "label": "Земља"
+            },
+            "craft": {
+                "label": "Врста"
             },
             "crop": {
                 "label": "Усев"
@@ -588,6 +645,18 @@
             },
             "cuisine": {
                 "label": "Кухиња"
+            },
+            "cycleway": {
+                "label": "Стазе за бицикле",
+                "options": {
+                    "lane": {
+                        "description": "Стаза за бицикле означена бојом",
+                        "title": "Стандардна стаза за бицикле"
+                    },
+                    "none": {
+                        "description": "Без стазе за бицикле"
+                    }
+                }
             },
             "denomination": {
                 "label": "Вероисповест"
@@ -798,6 +867,7 @@
                 "options": {
                     "multi-storey": "Вишеспратни",
                     "sheds": "Наткривени",
+                    "surface": "Подлога",
                     "underground": "Подземни"
                 }
             },
@@ -865,6 +935,18 @@
             "service": {
                 "label": "Врста"
             },
+            "service/bicycle/chain_tool": {
+                "options": {
+                    "no": "Не",
+                    "yes": "Да"
+                }
+            },
+            "service/bicycle/pump": {
+                "options": {
+                    "no": "Не",
+                    "yes": "Да"
+                }
+            },
             "shelter": {
                 "label": "Склониште"
             },
@@ -903,11 +985,20 @@
             "studio_type": {
                 "label": "Врста"
             },
+            "substation": {
+                "label": "Врста"
+            },
             "supervised": {
                 "label": "Под надзором"
             },
             "surface": {
                 "label": "Површина"
+            },
+            "takeaway": {
+                "options": {
+                    "no": "Не",
+                    "yes": "Да"
+                }
             },
             "toilets/disposal": {
                 "label": "Одлагање отпада"
@@ -917,6 +1008,9 @@
             },
             "towertype": {
                 "label": "Врста торња"
+            },
+            "traffic_signals": {
+                "label": "Врста"
             },
             "trail_visibility": {
                 "label": "Видљивост стазе",
@@ -1164,9 +1258,6 @@
             },
             "amenity/townhall": {
                 "name": "Градска кућа"
-            },
-            "amenity/vending_machine": {
-                "name": "Аутомат"
             },
             "amenity/waste_basket": {
                 "name": "Корпа за отпатке"
@@ -1970,11 +2061,23 @@
             "shop/hardware": {
                 "name": "Гвожђара"
             },
+            "shop/herbalist": {
+                "name": "Травар"
+            },
             "shop/hifi": {
                 "name": "Музичка опрема"
             },
+            "shop/houseware": {
+                "name": "Позамантерија"
+            },
+            "shop/interior_decoration": {
+                "name": "Унутрашња декорација"
+            },
             "shop/jewelry": {
                 "name": "Златар"
+            },
+            "shop/kitchen": {
+                "name": "Кухињски дизајн"
             },
             "shop/laundry": {
                 "name": "Перионица"
@@ -1988,6 +2091,12 @@
             "shop/mall": {
                 "name": "Тржни центар"
             },
+            "shop/massage": {
+                "name": "Масажа"
+            },
+            "shop/medical_supply": {
+                "name": "Медицинска опрема"
+            },
             "shop/mobile_phone": {
                 "name": "Продавница мобилних телефона"
             },
@@ -1997,8 +2106,17 @@
             "shop/music": {
                 "name": "Музичка продавница"
             },
+            "shop/musical_instrument": {
+                "name": "Музички инструменти"
+            },
+            "shop/newsagent": {
+                "name": "Дневне новине/часописи"
+            },
             "shop/optician": {
                 "name": "Оптичар"
+            },
+            "shop/organic": {
+                "name": "Органски производи"
             },
             "shop/pet": {
                 "name": "Продавница кућних љубимаца"

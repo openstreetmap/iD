@@ -137,14 +137,9 @@
         },
         "merge": {
             "title": "Sujungti",
-            "description": "Sujungti šias linijas.",
             "key": "C",
-            "annotation": "Sujungtos {n} linijos.",
             "not_eligible": "Šie geoobjektai negali būti sulieti.",
-            "not_adjacent": "Šios linijos negali būti sulietos, nes jos nesusijungia.",
-            "restriction": "Šių linijų negalima sulieti, nes bent viena iš jų yra ryšio „{relation}“ narė.",
-            "incomplete_relation": "Šie objektai negali būti sujungti, nes ne visi pilnai atsiųsti.",
-            "conflicting_tags": "Negalima sulieti šių linijų, nes kai kurios žymos turi konfliktuojančias reikšmes."
+            "incomplete_relation": "Šie objektai negali būti sujungti, nes ne visi pilnai atsiųsti."
         },
         "move": {
             "title": "Perkelti",
@@ -217,7 +212,6 @@
         "nothing": "Nėra ką pakartoti."
     },
     "tooltip_keyhint": "Kombinacija:",
-    "browser_notice": "Šis redaktorius palaikomas Firefox, Chrome, Safari, Opera ir Internet Explorer 9 ir naujesnėse naršyklėse. Prašome atnaujinti jūsų naršyklę arba žemėlapio redagavimui naudoti Potlatch 2.",
     "translate": {
         "translate": "Versti",
         "localized_translation_label": "Daugiakalbis pavadinimas",
@@ -1714,9 +1708,6 @@
             "amenity/university": {
                 "name": "Universiteto kiemas",
                 "terms": "universiteto teritorija"
-            },
-            "amenity/vending_machine": {
-                "name": "Prekių automatas"
             },
             "amenity/veterinary": {
                 "name": "Veterinarija",

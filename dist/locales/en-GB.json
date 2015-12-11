@@ -131,12 +131,8 @@
         },
         "merge": {
             "title": "Merge",
-            "description": "Merge these lines.",
             "key": "C",
-            "annotation": "Merged {n} lines.",
             "not_eligible": "These features can't be merged.",
-            "not_adjacent": "These lines can't be merged because they aren't connected.",
-            "restriction": "These lines can't be merged because at least one is a member of a \"{relation}\" relation.",
             "incomplete_relation": "These features can't be merged because at least one hasn't been fully downloaded."
         },
         "move": {
@@ -207,7 +203,6 @@
         "nothing": "Nothing to redo."
     },
     "tooltip_keyhint": "Shortcut:",
-    "browser_notice": "This editor is supported in Firefox, Chrome, Safari, Opera, and Internet Explorer 9 and above. Please upgrade your browser or use Potlatch 2 to edit the map.",
     "translate": {
         "translate": "Translate"
     },

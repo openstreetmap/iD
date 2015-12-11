@@ -108,11 +108,8 @@
         },
         "merge": {
             "title": "合并",
-            "description": "合并这些线。",
             "key": "C",
-            "annotation": "合并{n}条线。",
-            "not_eligible": "这些要素不能被合并。",
-            "not_adjacent": "这些线段并不连接，不能合并。"
+            "not_eligible": "这些要素不能被合并。"
         },
         "move": {
             "title": "移动",
@@ -165,7 +162,6 @@
         "nothing": "没有可重做的。"
     },
     "tooltip_keyhint": "快捷方式",
-    "browser_notice": "该编辑器支持Firefox、Chrome、Safari、Opera和Internet Explorer9及以上的浏览器。请升级您的浏览器或者使用Potlatch 2来编辑地图。",
     "translate": {
         "translate": "翻译",
         "localized_translation_label": "多种语言名称",

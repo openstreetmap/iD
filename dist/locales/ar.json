@@ -1,22 +1,22 @@
 {
     "modes": {
         "add_area": {
-            "title": "المساحة",
-            "description": "أضف مواقف أو مباني أو بحيرات أو مناطق أخرى إلى الخارطة.",
-            "tail": "انقر على الخارطة للبدء في رسم منطقة مثل حديقة أو بحيرة أو مبنى."
+            "title": "مساحة",
+            "description": "أضف حدائق أو مباني أو بحيرات أو مساحات أخرى إلى الخريطة.",
+            "tail": "انقر على الخريطة للبدء في رسم مساحة مثل حديقة أو بحيرة أو مبنى."
         },
         "add_line": {
             "title": "خط",
-            "description": "أضف طرق سريعة، شوارع، معابر للمشاة، قنوات أو خطوط أخرى للخارطة.",
-            "tail": "اضغط على الخارطة للبدء في رسم طريق أو مسار أو تحويلة"
+            "description": "أضف طرق سريعة أو شوارع أو معابر للمشاة أو قنوات أو خطوط أخرى للخريطة.",
+            "tail": "اضغط على الخريطة للبدء في رسم طريق أو مسار أو تحويلة."
         },
         "add_point": {
             "title": "نقطة",
-            "description": "أضف مطاعم، نُصب تذكارية، مكاتب بريد أو نقاط أخري إلى الخارطة.",
-            "tail": "اضغط على الخارطة ﻹضافة نقطة. "
+            "description": "أضف مطاعم أو نُصب تذكارية أو صناديق بريد أو نقاط أخري إلى الخارطة.",
+            "tail": "اضغط على الخريطة ﻹضافة نقطة. "
         },
         "browse": {
-            "title": "عرض",
+            "title": "تصفح",
             "description": "حرك و حجّم الخريطة"
         },
         "draw_area": {
@@ -29,30 +29,30 @@
     "operations": {
         "add": {
             "annotation": {
-                "point": "أضف نقطة",
+                "point": "أضفت نقطة.",
                 "vertex": "أضفت عقدة إلى طريق.",
                 "relation": "أضفت علاقة."
             }
         },
         "start": {
             "annotation": {
-                "line": "بدأ خطّ",
+                "line": "بدأت خطا.",
                 "area": "بدأت منطقة."
             }
         },
         "continue": {
-            "key": "A",
-            "title": "استمر",
-            "description": "مواصلة هذا الخط.",
-            "not_eligible": "لا يوجد خط يمكن تكملته هنا.",
-            "multiple": "يمكن أن تستمر عدة أسطر هنا. لاختيار خط، اضغط على مفتاح Shift ثم انقر عليه لتحديده.",
+            "key": "م",
+            "title": "إكمال",
+            "description": "إكمال هذا الخط.",
+            "not_eligible": "لا يوجد خط يمكن إكماله هنا.",
+            "multiple": "يمكن إكمال عدة خطوط هنا. لاختيار خط، اضغط على مفتاح Shift ثم انقر عليه لتحديده.",
             "annotation": {
-                "line": "استمر في الخط",
-                "area": "استمر في مساحة"
+                "line": "إكمال خط.",
+                "area": "إكمال مساحة."
             }
         },
         "cancel_draw": {
-            "annotation": "إلغاء الرسم"
+            "annotation": "إلغاء الرسم."
         },
         "change_tags": {
             "annotation": "غير الوسوم"
@@ -61,7 +61,7 @@
             "title": "تدوير",
             "description": {
                 "line": "اجعل هذا الخط دائري.",
-                "area": "إجعل هذه المنطقة دائرية."
+                "area": "إجعل هذه المساحة دائرية."
             },
             "key": "O",
             "annotation": {
@@ -124,12 +124,8 @@
         },
         "merge": {
             "title": "دمج",
-            "description": "ادمج هذه الخطوط",
             "key": "C",
-            "annotation": "ادمج {n} خطوط",
             "not_eligible": "هذه المميزات لا يمكن دمجها",
-            "not_adjacent": "لا يمكن دمج هذه الخطوط لأنها غير متصلة.",
-            "restriction": "لا يمكن دمج هذه الخطوط بسبب أن أحدها على الأقل لديه علاقة بـ \"{relation}\"",
             "incomplete_relation": "لا يمكن دمج هذه المميزات لأن واحد منها على الأقل لم يتم تحميله بالكامل."
         },
         "move": {
@@ -184,7 +180,6 @@
         "nothing": "لا يوجد شيء للإعادة"
     },
     "tooltip_keyhint": "اﻹختصار:",
-    "browser_notice": "هذا المحرر يدعم Firefox و Chrome وSafari وOpera و  Internet Explorer 9 وما فوق. الرجاء ترقية متصفحك أو استخدم Potlatch 2 لتحرير الخريطة. ",
     "translate": {
         "translate": "ترّجم",
         "localized_translation_label": "اسم متعدد اللغات",
@@ -211,6 +206,9 @@
     "contributors": {
         "list": "حرر بواسطة{users}",
         "truncated_list": "حرر بواسطة{users} و {count} آخرون"
+    },
+    "infobox": {
+        "area": "مساحة"
     },
     "geocoder": {
         "search": "إبحث في جميع أنحاء العالم ...",
@@ -379,6 +377,7 @@
         },
         "fields": {
             "access": {
+                "label": "الدخول مسموح",
                 "options": {
                     "designated": {
                         "description": "الدخول مصرح به وفقا للعلامات أو قوانين محلية مخصصة.",
@@ -405,14 +404,17 @@
                         "title": "مسموح"
                     }
                 },
+                "placeholder": "غير محدد",
                 "types": {
-                    "bicycle": "درجات هوائية",
+                    "access": "الكل",
+                    "bicycle": "دراجات هوائية",
                     "foot": "بالقدم",
                     "horse": "أحصنة",
                     "motor_vehicle": "مركبات"
                 }
             },
             "access_simple": {
+                "label": "الدخول مسموح",
                 "placeholder": "نعم"
             },
             "access_toilets": {
@@ -454,6 +456,9 @@
             "amenity": {
                 "label": "النوع"
             },
+            "area/highway": {
+                "label": "النوع"
+            },
             "artist": {
                 "label": "فنان"
             },
@@ -486,7 +491,7 @@
                 "placeholder": "50, 100, 200..."
             },
             "cardinal_direction": {
-                "label": "اتجاه"
+                "label": "الاتجاه"
             },
             "clock_direction": {
                 "label": "الاتجاه",
@@ -503,6 +508,9 @@
             },
             "country": {
                 "label": "دولة"
+            },
+            "craft": {
+                "label": "النوع"
             },
             "crossing": {
                 "label": "النوع"
@@ -565,6 +573,9 @@
             "incline": {
                 "label": "انحدار"
             },
+            "information": {
+                "label": "النوع"
+            },
             "internet_access": {
                 "label": "إنترنت",
                 "options": {
@@ -572,6 +583,9 @@
                     "wired": "سلكي",
                     "wlan": "واي فاي"
                 }
+            },
+            "lamp_type": {
+                "label": "النوع"
             },
             "landuse": {
                 "label": "النوع"
@@ -641,6 +655,9 @@
                 "label": "هاتف",
                 "placeholder": "+31 42 123 4567"
             },
+            "piste/type": {
+                "label": "النوع"
+            },
             "place": {
                 "label": "النوع"
             },
@@ -696,6 +713,12 @@
                 },
                 "placeholder": "غير معروف"
             },
+            "studio_type": {
+                "label": "النوع"
+            },
+            "substation": {
+                "label": "النوع"
+            },
             "supervised": {
                 "label": "مراقب"
             },
@@ -710,6 +733,9 @@
             },
             "towertype": {
                 "label": "نوع البرج"
+            },
+            "traffic_signals": {
+                "label": "النوع"
             },
             "trail_visibility": {
                 "label": "وضوحية الطريق"
@@ -810,9 +836,17 @@
                 "name": "تأجير دراجات",
                 "terms": "محل استئجار دراجات هوائية"
             },
+            "amenity/bicycle_repair_station": {
+                "name": "محطة إصلاح دراجات هوائية",
+                "terms": "دراجات هوائية, دراجات"
+            },
             "amenity/boat_rental": {
                 "name": "محل استئجار قوارب",
                 "terms": "تأجير القوارب، ساحة الزوارق، تأجير زوارق"
+            },
+            "amenity/bus_station": {
+                "name": "محطة أتوبيس",
+                "terms": "محطة أتوبيس, محطة باص, محطة حافلة"
             },
             "amenity/cafe": {
                 "name": "مقهى",
@@ -829,6 +863,10 @@
             "amenity/car_wash": {
                 "name": "غسيل سيارات",
                 "terms": "غسيل السيارات"
+            },
+            "amenity/charging_station": {
+                "name": "محطة شحن",
+                "terms": "محطة شحن"
             },
             "amenity/cinema": {
                 "name": "سينما",
@@ -851,7 +889,7 @@
                 "terms": "مأكولات السريعة"
             },
             "amenity/fire_station": {
-                "name": "محطة إطفاء",
+                "name": "محطة إطفاء حريق",
                 "terms": "محطة إطفاء"
             },
             "amenity/fountain": {
@@ -859,8 +897,8 @@
                 "terms": "نافورة"
             },
             "amenity/fuel": {
-                "name": "محطة غاز",
-                "terms": "محطة بترول"
+                "name": "محطة وقود",
+                "terms": "محطة بترول, محطة غاز"
             },
             "amenity/grave_yard": {
                 "name": "مقبرة",
@@ -953,10 +991,6 @@
             "amenity/townhall": {
                 "name": "قاعة البلدة",
                 "terms": "قاعة البلدة"
-            },
-            "amenity/vending_machine": {
-                "name": "آلة بيع",
-                "terms": "آلة بيع، نقطة بيع"
             },
             "amenity/waste_basket": {
                 "name": "سلة مهملات",
@@ -1072,7 +1106,7 @@
             },
             "emergency/ambulance_station": {
                 "name": "محطة إسعاف",
-                "terms": "محطة إسعاف"
+                "terms": "محطة إسعاف, محطة اسعاف"
             },
             "emergency/fire_hydrant": {
                 "name": "خرطوم مطافئ",
@@ -2057,6 +2091,10 @@
             "waterway/drain": {
                 "name": "مصرف مياه",
                 "terms": "مصرف مياه"
+            },
+            "waterway/fuel": {
+                "name": "محطة وقود بحري",
+                "terms": "وقود بحري"
             },
             "waterway/river": {
                 "name": "نهر",

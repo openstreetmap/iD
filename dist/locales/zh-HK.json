@@ -137,14 +137,9 @@
         },
         "merge": {
             "title": "合併",
-            "description": "合併這些綫。",
             "key": "C",
-            "annotation": "已合位{n}條綫。 ",
             "not_eligible": "不能合併這些特徵。",
-            "not_adjacent": "未能將這些綫合併因為它們並沒有連接在一起。",
-            "restriction": "未能將這條綫合併因為最少一條是 \"{relation}\" 關係的構件。",
-            "incomplete_relation": "這些特徵不能合併因為最少一個尚未完全下載。",
-            "conflicting_tags": "未能將這些綫合併因為它們當中有些標籤的數值有衝突。"
+            "incomplete_relation": "這些特徵不能合併因為最少一個尚未完全下載。"
         },
         "move": {
             "title": "移動",
@@ -217,7 +212,6 @@
         "nothing": "沒有可重做的動作。"
     },
     "tooltip_keyhint": "快速鍵:",
-    "browser_notice": "這個編輯器，只支援Firefox、Chrome、Safari、Opera以及Internet Explorer 9或以上。請更新你的瀏覽器或者用Potlach2去編輯地圖。",
     "translate": {
         "translate": "翻譯",
         "localized_translation_label": "多種語言名稱",
@@ -1552,10 +1546,6 @@
             "amenity/townhall": {
                 "name": "大會堂",
                 "terms": "Town Hall,大會堂,市政府,市政廳"
-            },
-            "amenity/vending_machine": {
-                "name": "售賣機",
-                "terms": "Vending Machine,售賣機,自勳動賣機"
             },
             "amenity/veterinary": {
                 "name": "獸醫",

@@ -137,14 +137,9 @@
         },
         "merge": {
             "title": "Voeg samen",
-            "description": "Voeg deze lijnen samen.",
             "key": "C",
-            "annotation": "{n} lijnen samengevoegd.",
             "not_eligible": "Deze objecten kunnen niet worden samengevoegd.",
-            "not_adjacent": "Deze lijnen kunnen niet samengevoegd worden omdat ze niet verbonden zijn.",
-            "restriction": "De lijnen kunnen niet samengevoegd worden omdat minstens één ervan onderdeel uitmaakt van een \"{relation}\"-relatie.",
-            "incomplete_relation": "Deze objecten kunnen niet samengevoegd worden omdat minstens één ervan niet volledig gedownload is.",
-            "conflicting_tags": "De lijnen kunnen niet samengevoegd worden omdat sommige van hun tags conflicteren."
+            "incomplete_relation": "Deze objecten kunnen niet samengevoegd worden omdat minstens één ervan niet volledig gedownload is."
         },
         "move": {
             "title": "Verschuif",
@@ -217,7 +212,6 @@
         "nothing": "Niets om opnieuw te doen."
     },
     "tooltip_keyhint": "Sneltoets:",
-    "browser_notice": "Deze editor werkt in Firefox, Chrome, Safari, Opera en Internet Explorer 9 en hoger. Download een nieuwere versie van je browser of gebruik Potlatch 2 om de kaart aan te passen.",
     "translate": {
         "translate": "Vertaal",
         "localized_translation_label": "Naam in meerdere talen",
@@ -1851,10 +1845,6 @@
             "amenity/university": {
                 "name": "Campus van Universiteit of Hogeschool",
                 "terms": "universiteit, hogeschool, onderwijs, hoger onderwijs"
-            },
-            "amenity/vending_machine": {
-                "name": "Automaat",
-                "terms": "verkoopautomaat"
             },
             "amenity/veterinary": {
                 "name": "Dierenarts",

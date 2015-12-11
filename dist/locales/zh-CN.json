@@ -137,12 +137,8 @@
         },
         "merge": {
             "title": "合并",
-            "description": "合并这些线。",
             "key": "C",
-            "annotation": "合并{n}条线。",
             "not_eligible": "这些特征不可以合并。",
-            "not_adjacent": "这些线段并不连接，不能合并。",
-            "restriction": "这些线段不能合并，因为其中最少有一条线段是\"{relation}\"关系的成员。",
             "incomplete_relation": "此要素暂未下载完成，无法合并。"
         },
         "move": {
@@ -216,7 +212,6 @@
         "nothing": "没有可以重做的操作。"
     },
     "tooltip_keyhint": "快捷键：",
-    "browser_notice": "该编辑器仅支持Firefox、Chrome、Safari、Opera和Internet Explorer 9及更高版本。请升级你的浏览器或使用Potlatch 2编辑地图。",
     "translate": {
         "translate": "翻译",
         "localized_translation_label": "多语言名称",
@@ -1812,10 +1807,6 @@
             },
             "amenity/university": {
                 "name": "大学校园"
-            },
-            "amenity/vending_machine": {
-                "name": "售卖机",
-                "terms": "售卖机"
             },
             "amenity/veterinary": {
                 "name": "兽医",

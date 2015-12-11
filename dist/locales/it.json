@@ -137,14 +137,14 @@
         },
         "merge": {
             "title": "Unisci",
-            "description": "Unisci queste linee.",
+            "description": "Unisci questi elementi.",
             "key": "C",
-            "annotation": "Unite {n} linee.",
+            "annotation": "Uniti {n} elementi.",
             "not_eligible": "Questi elementi non possono essere uniti.",
-            "not_adjacent": "Queste linee non possono essere unite perché non sono connesse.",
-            "restriction": "Queste linee non possono essere unite perché almeno una è membro di una relazione \"{relation}\".",
+            "not_adjacent": "Questi elementi non possono essere uniti perché non sono connessi.",
+            "restriction": "Questi elementi non possono essere uniti perché almeno uno è membro di una relazione \"{relation}\".",
             "incomplete_relation": "Questi elementi non posso essere uniti perché almeno uno di loro non è stato completamente scaricato.",
-            "conflicting_tags": "Queste linee non possono essere unite perché alcuni dei loro tag sono in conflitto tra loro."
+            "conflicting_tags": "Questi elementi non possono essere uniti perché alcuni dei loro tag sono in conflitto tra loro."
         },
         "move": {
             "title": "Muovi",
@@ -217,7 +217,7 @@
         "nothing": "Niente da rifare."
     },
     "tooltip_keyhint": "Scorciatoia da tastiera:",
-    "browser_notice": "Questo editor è supportato in Firefox, Chrome, Safari, Opera, e Internet Explorer 9 e superiori. Aggiorna il tuo browser o usa Potlatch 2 per modificare la mappa.",
+    "browser_notice": "Questo editor è supportato in Firefox, Chrome, Safari, Opera e Internet Explorer 11 e superiori. Aggiorna il tuo browser o usa Potlatch 2 per modificare la mappa.",
     "translate": {
         "translate": "Traduci",
         "localized_translation_label": "Nome multilingua",
@@ -562,7 +562,7 @@
     "presets": {
         "categories": {
             "category-building": {
-                "name": "Edifici"
+                "name": "Edificio"
             },
             "category-golf": {
                 "name": "Golf"
@@ -571,7 +571,7 @@
                 "name": "Utilizzi del terreno"
             },
             "category-path": {
-                "name": "Sentiero"
+                "name": "Percorso"
             },
             "category-rail": {
                 "name": "Ferrovia"
@@ -1070,6 +1070,9 @@
             "maxspeed": {
                 "label": "Limite di velocità",
                 "placeholder": "40, 50, 60..."
+            },
+            "maxstay": {
+                "label": "Limite orario"
             },
             "mtb/scale": {
                 "label": "Difficoltà Mountain Bike",
@@ -1860,7 +1863,43 @@
             "amenity/university": {
                 "name": "Area universitaria"
             },
-            "amenity/vending_machine": {
+            "amenity/vending_machine/cigarettes": {
+                "name": "Distributore automatico di sigarette",
+                "terms": "distributore automatico,macchinetta,sigarette,tabacco,cartine,accendini"
+            },
+            "amenity/vending_machine/condoms": {
+                "name": "Distributore automatico di preservativi",
+                "terms": "distributore automatico,macchinetta,preservativi"
+            },
+            "amenity/vending_machine/drinks": {
+                "name": "Distributore automatico di bevande",
+                "terms": "distributore automatico,macchinetta,bevande,bottiglie,bottigliette"
+            },
+            "amenity/vending_machine/excrement_bags": {
+                "name": "Distributore automatico di sacchetti per escrementi",
+                "terms": "distributore automatico,macchinetta,cacca,cane"
+            },
+            "amenity/vending_machine/news_papers": {
+                "name": "Distributore automatico di giornali",
+                "terms": "distributore automatico,macchinetta,gioranli,riviste,quotidiani"
+            },
+            "amenity/vending_machine/parcel_pickup_dropoff": {
+                "name": "Distributore postale automatico",
+                "terms": "distributore automatico,macchinetta,posta,pacchi"
+            },
+            "amenity/vending_machine/parking_tickets": {
+                "name": "Distributore automatico di ticket per parcheggio",
+                "terms": "distributore automatico,macchinetta,parcheggio,ticket,biglietto"
+            },
+            "amenity/vending_machine/public_transport_tickets": {
+                "name": "Distributore automatico di biglietti per trasporto pubblico",
+                "terms": "distributore automatico,macchinetta,biglietti,bus,metro,tram"
+            },
+            "amenity/vending_machine/sweets": {
+                "name": "Distributore automatico di snack",
+                "terms": "distributore automatico,macchinetta,snack,cibo"
+            },
+            "amenity/vending_machine/vending_machine": {
                 "name": "Distributore automatico",
                 "terms": "distributore automatico,macchinetta"
             },

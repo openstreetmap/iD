@@ -137,14 +137,14 @@
         },
         "merge": {
             "title": "Spojit",
-            "description": "Spojit tyto čáry.",
+            "description": "Spojit tyto objekty.",
             "key": "C",
-            "annotation": "Čáry spojeny (celkem {n}).",
+            "annotation": "{n} objektů spojeno.",
             "not_eligible": "Objekty nelze spojit v jeden.",
-            "not_adjacent": "Tyto čáry nelze spojit v jednu, protože nekončí v jednom bodě.",
-            "restriction": "Tyto čáry není možné spojit, protože aspoň jedna z nich je členem relace \"{relation}\".",
+            "not_adjacent": "Objekty nelze spojit v jeden, protože na sebe nejsou napojené.",
+            "restriction": "Objekty nelze spojit, protože aspoň jeden z nich je členem relace \"{relation}\".",
             "incomplete_relation": "Tyto objekty nelze spojit, protože jsou stažené jen částečně.",
-            "conflicting_tags": "Tyto čáry nelze spojit, protože u některých z vlastností (tagů) mají neslučitelné hodnoty."
+            "conflicting_tags": "Objekty nelze spojit, protože některé z jejich vlastností kolidují."
         },
         "move": {
             "title": "Posunout",
@@ -217,7 +217,7 @@
         "nothing": "Není co znovu provádět."
     },
     "tooltip_keyhint": "Zkratka:",
-    "browser_notice": "Tento editor funguje ve Firefoxu, Chrome, Safari, Opeře a Internet Exploreru od verze 9. Musíte tedy aktualizovat na novější verzi prohlížeče nebo použijte editor Potlatch 2.",
+    "browser_notice": "Tento editor funguje ve Firefoxu, Chrome, Safari, Opeře a Internet Exploreru 11 a výše. Prosím buď aktualizujte svůj browser nebo použijte Potlach 2 či JOSM.",
     "translate": {
         "translate": "Přeložit",
         "localized_translation_label": "Mezinárodní název",
@@ -1068,6 +1068,9 @@
                 "label": "Povolená rychlost",
                 "placeholder": "40, 50, 60..."
             },
+            "maxstay": {
+                "label": "Povoleno zůstat max."
+            },
             "mtb/scale": {
                 "label": "Klasifikace obtížnosti pro MTB",
                 "options": {
@@ -1864,7 +1867,43 @@
                 "name": "Prostor vysoké školy",
                 "terms": "vysoká škola,univerzita,universita,vysoké učení"
             },
-            "amenity/vending_machine": {
+            "amenity/vending_machine/cigarettes": {
+                "name": "Automat na cigarety",
+                "terms": "automat,cigarety,prodejní automat"
+            },
+            "amenity/vending_machine/condoms": {
+                "name": "Automat na kondomy",
+                "terms": "automat,prodejní automat,kondom,prezervativ"
+            },
+            "amenity/vending_machine/drinks": {
+                "name": "Automat na nápoje",
+                "terms": "automat,prodejní automat,nápoj,nápoje,pití,plechovky,lahve,limonáda,kafe,káva,pivo"
+            },
+            "amenity/vending_machine/excrement_bags": {
+                "name": "Automat na pytlíky na exkrementy",
+                "terms": "automat,prodejní automat,pytlík,pes,psí exkrementy,psí hovna,exkrement,hovno,hovínko"
+            },
+            "amenity/vending_machine/news_papers": {
+                "name": "Automat na noviny",
+                "terms": "automat,prodejní automat,noviny,časopisy"
+            },
+            "amenity/vending_machine/parcel_pickup_dropoff": {
+                "name": "Automat na výdej/uložení balíků",
+                "terms": "automat,balíkomat,pošta,balík,balíček"
+            },
+            "amenity/vending_machine/parking_tickets": {
+                "name": "Parkovací automat",
+                "terms": "automat,prodejní automat,parkování,parking"
+            },
+            "amenity/vending_machine/public_transport_tickets": {
+                "name": "Automat na jízdenky",
+                "terms": "automat,prodejní automat,jízdenky,lístky,jízdenka,lístek,MHD,metro,vlak,tramvaj,šalina,autobus,trolejbus"
+            },
+            "amenity/vending_machine/sweets": {
+                "name": "Automat na drobné občerstvení",
+                "terms": "automat,prodejní automat,spirálový automat,jídlo,potraviny,sušenky,bagety"
+            },
+            "amenity/vending_machine/vending_machine": {
                 "name": "Prodejní automat",
                 "terms": "automat,prodejní automat"
             },

@@ -137,12 +137,8 @@
         },
         "merge": {
             "title": "Gabung",
-            "description": "Gabungkan garis-garis ini.",
             "key": "C",
-            "annotation": "Menggabungkan {n} garis.",
             "not_eligible": "Fitur-fitur ini tidak bisa digabung.",
-            "not_adjacent": "Garis-garis ini tidak bisa digabung karena mereka tidak terhubung.",
-            "restriction": "Garis ini tidak bisa digabung karena salah satu dari garis ini merupakan anggota dari sebuah \"{relation\"} relasi.",
             "incomplete_relation": "Fitur ini tidak bisa digabungkan karena belum sepenuhnya terunduh."
         },
         "move": {
@@ -216,7 +212,6 @@
         "nothing": "Tak ada yang bisa dibalikkan."
     },
     "tooltip_keyhint": "Pintasan:",
-    "browser_notice": "Penyunting ini bisa digunakan di Firefox, Chrome, Safari, Opera, dan Internet Explorer 9 dan versi yang lebih tinggi. Silakan perbarui peramban Anda atau gunakan Potlatch 2 untuk menyunting peta.",
     "translate": {
         "translate": "Terjemahkan",
         "localized_translation_label": "Nama multibahasa",
@@ -1553,9 +1548,6 @@
             "amenity/university": {
                 "name": "Lingkungan Universitas",
                 "terms": "Universitas, Kampus"
-            },
-            "amenity/vending_machine": {
-                "name": "Mesin Minuman"
             },
             "amenity/veterinary": {
                 "name": "Dokter Hewan"

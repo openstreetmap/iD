@@ -137,14 +137,9 @@
         },
         "merge": {
             "title": "結合",
-            "description": "複数のラインを結合",
             "key": "C",
-            "annotation": "{n} 本のラインを結合",
             "not_eligible": "地物情報がマージできません",
-            "not_adjacent": "ラインをマージするには、ラインが結合している必要があります。",
-            "restriction": "\"{relation}\" リレーションに所属しているラインが含まれているため、マージすることができません。",
-            "incomplete_relation": "地物全体がダウンロードされていないため、マージさせることができません。",
-            "conflicting_tags": "競合する値が含まれているため、ラインをマージできません。"
+            "incomplete_relation": "地物全体がダウンロードされていないため、マージさせることができません。"
         },
         "move": {
             "title": "移動",
@@ -217,7 +212,7 @@
         "nothing": "やり直した変更点がありません"
     },
     "tooltip_keyhint": "ショートカット",
-    "browser_notice": "このエディタは Firefox, Chrome, Safari, Opera, および Internet Explorer 9 以上をサポートしています。ブラウザのバージョンを更新するか、Potlatch 2を使用して編集してください",
+    "browser_notice": "このエディタは Firefox、Chrome、Safari、OperaそしてInternet Explorer 11以降で動作します。地図を編集するには、ブラウザをアップデートするか、Potlatch 2を利用してください。",
     "translate": {
         "translate": "翻訳",
         "localized_translation_label": "多言語名称",
@@ -1071,6 +1066,9 @@
                 "label": "最高速度",
                 "placeholder": "40, 50, 60..."
             },
+            "maxstay": {
+                "label": "最大利用時間"
+            },
             "mtb/scale": {
                 "label": "マウンテンバイク難易度",
                 "options": {
@@ -1867,10 +1865,6 @@
                 "name": "大学の敷地",
                 "terms": "大学の敷地, キャンパス"
             },
-            "amenity/vending_machine": {
-                "name": "自動販売機",
-                "terms": "自動販売機, 自販機"
-            },
             "amenity/veterinary": {
                 "name": "獣医",
                 "terms": "獣医, ペット医"
@@ -2004,7 +1998,8 @@
                 "terms": "建設中の建物"
             },
             "building/detached": {
-                "name": "一戸建て住宅"
+                "name": "一戸建て住宅",
+                "terms": "滞在時間"
             },
             "building/dormitory": {
                 "name": "寮",
@@ -2069,6 +2064,10 @@
             "building/school": {
                 "name": "校舎",
                 "terms": "校舎, 学校の建物"
+            },
+            "building/semidetached_house": {
+                "name": "セミデタッチドハウス",
+                "terms": "セミデタッチドハウス, 二世帯住宅"
             },
             "building/shed": {
                 "name": "格納庫",
@@ -2722,6 +2721,10 @@
                 "name": "ラグビーリーグ場",
                 "terms": "ラグビー場, ラグビー, リーグ"
             },
+            "leisure/pitch/rugby_union": {
+                "name": "ラグビー場",
+                "terms": "ラグビーユニオン場"
+            },
             "leisure/pitch/skateboard": {
                 "name": "スケートパーク",
                 "terms": "スケートパーク"
@@ -2866,12 +2869,21 @@
                 "name": "チェックポイント",
                 "terms": "チェックポイント"
             },
+            "military/danger_area": {
+                "name": "危険区域",
+                "terms": "危険区域"
+            },
             "military/naval_base": {
-                "name": "海軍基地"
+                "name": "海軍基地",
+                "terms": "海軍基地"
             },
             "military/range": {
                 "name": "軍事演習場",
                 "terms": "軍事演習場"
+            },
+            "military/training_area": {
+                "name": "練習場",
+                "terms": "練習場, トレーニングエリア, 訓練場"
             },
             "natural": {
                 "name": "自然",
@@ -3366,7 +3378,8 @@
                 "terms": "日曜大工用品店, 工具店, DIYショップ, ホームセンター"
             },
             "shop/dry_cleaning": {
-                "name": "クリーニング店"
+                "name": "クリーニング店",
+                "terms": "クリーニング, ドライクリーニング店"
             },
             "shop/electronics": {
                 "name": "家電販売店",
@@ -3385,7 +3398,8 @@
                 "terms": "農産物直売所"
             },
             "shop/fashion": {
-                "name": "ファッション店"
+                "name": "ファッション店",
+                "terms": "洋品店, ファッション, 衣類, 衣服, 服, 店"
             },
             "shop/fishmonger": {
                 "name": "魚屋",
@@ -3402,6 +3416,10 @@
             "shop/funeral_directors": {
                 "name": "葬儀社",
                 "terms": "葬儀屋, 葬儀業"
+            },
+            "shop/furnace": {
+                "name": "釜戸屋",
+                "terms": "かまど, 釜戸, 竈, 竃, 炉"
             },
             "shop/furniture": {
                 "name": "家具店",
@@ -3454,7 +3472,8 @@
                 "terms": "キオスク,　ニューススタンド"
             },
             "shop/kitchen": {
-                "name": "キッチンデザイン店"
+                "name": "キッチンデザイン店",
+                "terms": "台所, キッチン, デザイン, design, Kitchen"
             },
             "shop/laundry": {
                 "name": "洗濯屋・コインランドリー",
@@ -3505,7 +3524,8 @@
                 "terms": "楽器店"
             },
             "shop/newsagent": {
-                "name": "新聞・雑誌店"
+                "name": "新聞・雑誌店",
+                "terms": "新聞, 雑誌, マガジン, ニュース, スタンド"
             },
             "shop/optician": {
                 "name": "メガネ",
@@ -3707,16 +3727,20 @@
                 "terms": "動物園"
             },
             "traffic_calming/bump": {
-                "name": "減速帯"
+                "name": "スピードバンプ",
+                "terms": "スピードバンプ"
             },
             "traffic_calming/hump": {
-                "name": "ハンプ"
+                "name": "スピードハンプ",
+                "terms": "スピードハンプ"
             },
             "traffic_calming/rumble_strip": {
-                "name": "ランブルストリップ"
+                "name": "ランブルストリップ",
+                "terms": "ランブルストリップ"
             },
             "traffic_calming/table": {
-                "name": "横断歩道橋"
+                "name": "歩道橋",
+                "terms": "歩道橋, 横断歩道橋"
             },
             "type/boundary": {
                 "name": "境界",
@@ -3803,8 +3827,8 @@
                 "terms": "道路ルート"
             },
             "type/route/train": {
-                "name": "鉄道ルート",
-                "terms": "鉄道ルート"
+                "name": "列車ルート",
+                "terms": "列車ルート, 運行系統"
             },
             "type/route/tram": {
                 "name": "路面電車系統",
@@ -3851,7 +3875,8 @@
                 "terms": "河岸"
             },
             "waterway/sanitary_dump_station": {
-                "name": "マリントイレ処分"
+                "name": "海上汚物廃棄所",
+                "terms": "海上汚物廃棄所"
             },
             "waterway/stream": {
                 "name": "小川",

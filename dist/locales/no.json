@@ -98,9 +98,7 @@
         },
         "merge": {
             "title": "Knytt sammen",
-            "description": "Knytt disse linjene sammen.",
             "key": "C",
-            "annotation": "Knyttet {n} linjer sammen.",
             "incomplete_relation": "Disse funksjonene kan ikke bli knyttet sammen fordi hvertfall én av dem er ikke ferdig nedlastet."
         },
         "move": {
@@ -144,7 +142,6 @@
         "tooltip": "Omgjør: {action}",
         "nothing": "Ingen ting å gjøre tilbake."
     },
-    "browser_notice": "Denne editor er støttet i Firefox, Chrome, Safari, Opera og Internet Explorer 9 og høyere. Vennligst oppgrader din nettleser eller bruk Potlatch 2 for å redigere kartet.",
     "translate": {
         "translate": "Oversett",
         "localized_translation_language": "Velg språk",

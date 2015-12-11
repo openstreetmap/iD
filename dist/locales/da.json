@@ -137,14 +137,14 @@
         },
         "merge": {
             "title": "Fusioner",
-            "description": "Fusioner disse linjer.",
+            "description": "Fusioner disse kortobjekter.",
             "key": "C",
-            "annotation": "Fusionerede {n} linjer.",
+            "annotation": "Fusionerede {n} objekter.",
             "not_eligible": "Disse elementer kan ikke fusioneres.",
-            "not_adjacent": "Disse linjer kan ikke fusioneres fordi de ikke er knyttet sammen.",
-            "restriction": "Disse linjer kan ikke flettes sammen, da mindst en af disse er medlem af  \"{relation}\"-relation.",
+            "not_adjacent": "Disse objekter kan ikke fusioneres da de ikke er forbundet.",
+            "restriction": "Disse objekter kan ikke fusioneres da en af dem er medlem af   \"{relation}\" relationen.",
             "incomplete_relation": "Disse kortegenskaber kan ikke fusioneres, da de ikke er blevet downloadet helt.",
-            "conflicting_tags": "Disse linjer kan ikke fusioneres pga nogle af tags har konflikt værdier."
+            "conflicting_tags": "Disse objekter kan ikke fusioneres pga nogle af deres tags har konflikt i deres værdier."
         },
         "move": {
             "title": "Flyt",
@@ -217,7 +217,7 @@
         "nothing": "Intet at gendanne."
     },
     "tooltip_keyhint": "Genvejstast:",
-    "browser_notice": "Dette værktøj er understøttet i Firefox, Chrome, Safari, Opera og Internet Explorer 9 og højere. Opgrader din browser eller benyt Potlatch 2 for at redigere kortet.",
+    "browser_notice": "Dette redigeringsværktøj er understøttet af Firefox, Chrome, Safari, Opera og Internet Explorer 11 og højere. Opgrader din browser eller brug Potlatch 2 for at redigere.",
     "translate": {
         "translate": "Oversæt",
         "localized_translation_label": "Flersproget navn",
@@ -1071,6 +1071,9 @@
                 "label": "Hastighedsbegrænsning",
                 "placeholder": "40, 50, 60..."
             },
+            "maxstay": {
+                "label": "Max tid"
+            },
             "mtb/scale": {
                 "label": "Sværhedsgrad for mountainbike",
                 "options": {
@@ -1867,7 +1870,43 @@
                 "name": "Universitetsområde",
                 "terms": "Universitetsområde"
             },
-            "amenity/vending_machine": {
+            "amenity/vending_machine/cigarettes": {
+                "name": "Cigaretautomat",
+                "terms": "Cigaretautomat, Tobakautomat"
+            },
+            "amenity/vending_machine/condoms": {
+                "name": "Kondomautomat",
+                "terms": "Kondomautomat"
+            },
+            "amenity/vending_machine/drinks": {
+                "name": "Drikkeautomat",
+                "terms": "Drikkeautomat, Sodavandsautomat"
+            },
+            "amenity/vending_machine/excrement_bags": {
+                "name": "Hundelorteposeautomat",
+                "terms": "Hundelorteposeautomat"
+            },
+            "amenity/vending_machine/news_papers": {
+                "name": "Avisautomat",
+                "terms": "Avisautomat"
+            },
+            "amenity/vending_machine/parcel_pickup_dropoff": {
+                "name": "Pakkepostautomat",
+                "terms": "Pakkepostautomat"
+            },
+            "amenity/vending_machine/parking_tickets": {
+                "name": "Parkeringsbilletautomat",
+                "terms": "Parkeringsbilletautomat"
+            },
+            "amenity/vending_machine/public_transport_tickets": {
+                "name": "Billetautomat",
+                "terms": "Billetautomat, Rejsebilletautomat"
+            },
+            "amenity/vending_machine/sweets": {
+                "name": "Snackautomat",
+                "terms": "Snackautomat, Slikautomat"
+            },
+            "amenity/vending_machine/vending_machine": {
                 "name": "Automat",
                 "terms": "Automat"
             },

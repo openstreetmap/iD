@@ -128,12 +128,8 @@
         },
         "merge": {
             "title": "Spojite",
-            "description": "Stopiti ove linije.",
             "key": "C",
-            "annotation": "Spojeno linija: {n}.",
-            "not_eligible": "Ove značajke ne mogu biti spojene.",
-            "not_adjacent": "Ove linije ne mogu biti spojene u jednu zato što nisu povezane.",
-            "restriction": "Ove linije ne mogu biti spojene u jednu zato što je bar jedna član \"{relation}\" relacije."
+            "not_eligible": "Ove značajke ne mogu biti spojene."
         },
         "move": {
             "title": "Pomaknite",
@@ -189,7 +185,6 @@
         "nothing": "Ništa za vratiti."
     },
     "tooltip_keyhint": "Prečica:",
-    "browser_notice": "Ovaj uređivač je podržan u preglednicima interneta: Firefox, Chrome, Safari, Opera, i Internet Explorer 9 i iznad. Molimo nadogradite Vaš browser ili koristite Potlach 2 da uređujete kartu.",
     "translate": {
         "translate": "Prevesti",
         "localized_translation_label": "Višejezični naziv",
@@ -1037,10 +1032,6 @@
             "amenity/townhall": {
                 "name": "Gradska vijećnica",
                 "terms": "gradska vijećnica,vijećnica"
-            },
-            "amenity/vending_machine": {
-                "name": "Automat",
-                "terms": "automat,automat za prodaju pića,automat sa pićem,automat sa slatkišima"
             },
             "amenity/waste_basket": {
                 "name": "Kanta za otpatke",

@@ -128,12 +128,8 @@
         },
         "merge": {
             "title": "Sameina",
-            "description": "Sameina þessar línur.",
             "key": "C",
-            "annotation": "Sameinaði {n} línur.",
-            "not_eligible": "Það er ekki hægt að samfella þessa hluti.",
-            "not_adjacent": "Ekki er hægt að samfella þessar línur því að þær tengjast ekki hvor annari.",
-            "restriction": "Ekki er hægt að sameina þessar línur því að önnur þeirra er hluti af \"{relation}\" venslunum."
+            "not_eligible": "Það er ekki hægt að samfella þessa hluti."
         },
         "move": {
             "title": "Færa",
@@ -195,7 +191,6 @@
         "nothing": "Ekkert til að endurtaka."
     },
     "tooltip_keyhint": "Flýtival:",
-    "browser_notice": "Þessi ritill er studdur af Firefox, Chrome, Safari, Opera og Internet Explorer 9 og betri. Vinsamlegast uppfærðu vafrann þinn eða notaðu Potlatch 2 til að breyta kortinu.",
     "translate": {
         "translate": "Þýða",
         "localized_translation_label": "Margtyngt nafn",

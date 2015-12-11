@@ -137,14 +137,14 @@
         },
         "merge": {
             "title": "Spoji",
-            "description": "Spoji ove linije.",
+            "description": "Spoji ove značajke.",
             "key": "C",
-            "annotation": "Spojeno {n} linija.",
+            "annotation": "{n} značajki je spojeno.",
             "not_eligible": "Ova svojstva se ne mogu spojiti.",
-            "not_adjacent": "Ove se linije ne mogu stopiti u jednu jer nisu spojene.",
-            "restriction": "Ove se linije ne mogu spojiti jer je barem jedna član \"{relation}\" relacije.",
+            "not_adjacent": "Ove značajke se ne mogu spojiti jer nisu povezane.",
+            "restriction": "Ove značajke se ne mogu spojiti jer je barem jedna dio \"{relation}\" relacije.",
             "incomplete_relation": "Ove se značajke ne mogu spojiti jer bar jedna od njih nije potpuno preuzeta s Interneta.",
-            "conflicting_tags": "Ove linije se ne mogu spojiti jer neke njihove oznake imaju konfliktne vrijednosti."
+            "conflicting_tags": "Ove značajke se ne mogu spojiti jer se neke njihove oznake ne podudaraju."
         },
         "move": {
             "title": "Premjesti",
@@ -217,7 +217,7 @@
         "nothing": "Nema ništa za ponoviti."
     },
     "tooltip_keyhint": "Kratica:",
-    "browser_notice": "Ovaj uređivač je podržan u preglednicima: Firefox, Chrome, Safari, Opera i Internet Explorer 9 ili novijim. Molimo nadogradite svoj preglednik ili koristite Potlatch 2 za uređivanje karte.",
+    "browser_notice": "Ovaj uređivač je podržan u Firefoxu, Chromeu, Safariju, Operi i Internet Exploreru 11 ili novijoj verziji. Molim nadogradi svoj internet preglednik ili koristi Potlatch 2 program za uređivanje karte.",
     "translate": {
         "translate": "Prevedi",
         "localized_translation_label": "Višejezični naziv",
@@ -1753,10 +1753,6 @@
             },
             "amenity/university": {
                 "name": "Fakultetsko zemljište"
-            },
-            "amenity/vending_machine": {
-                "name": "Automat za prodaju",
-                "terms": "aparat za prodaju sokova,aparat za prodaju slatkiša,aparat za prodaju,aparat za kupovinu,prodajni aparat,automat za prodaju,automat za kupovinu,prodajni automat,automat za kavu"
             },
             "amenity/veterinary": {
                 "name": "Veterinar"

@@ -91,11 +91,8 @@
         },
         "merge": {
             "title": "Smelt saam",
-            "description": "Smelt die lyne saam.",
             "key": "C",
-            "annotation": "{n} lyne saamgesmelt.",
-            "not_eligible": "Hierdie items kan nie saamgesmelt word nie.",
-            "not_adjacent": "Hierdie lyne kan nie saamgesmelt word nie, want hulle is nie verbind nie."
+            "not_eligible": "Hierdie items kan nie saamgesmelt word nie."
         },
         "move": {
             "title": "Skuif",
@@ -147,7 +144,6 @@
     "redo": {
         "nothing": "Niks om weer te doen nie."
     },
-    "browser_notice": "Hierdie program is bruikbaar in Firefox, Chrome, Safair, Opera en Internet Explorer 9 en later weergawes. Gradeer asseblief jou webbrowser op of gebruik Potlatch 2 om die kaart te verander.",
     "logout": "voetsek",
     "loading_auth": "Maak kontak met OpenStreetMap...",
     "status": {

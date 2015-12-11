@@ -137,12 +137,8 @@
         },
         "merge": {
             "title": "Entemecer",
-            "description": "Entemecer eses llinies.",
             "key": "C",
-            "annotation": "Entemecies {n} llinies.",
             "not_eligible": "Eses carauterístiques nun puen amestase",
-            "not_adjacent": "Eses llinies nun puen amestase porque nun tán coneutaes.",
-            "restriction": "Eses llinies nun puen amestase porque polo menos una ye miembru d'una rellación «{relation}».",
             "incomplete_relation": "Estes carauterístiques nun puen entemecese porque polo menos una nun se descargó completamente."
         },
         "move": {
@@ -216,7 +212,6 @@
         "nothing": "Ren pa refacer."
     },
     "tooltip_keyhint": "Atayu:",
-    "browser_notice": "Esti editor tien sofitu en Firefox, Chrome, Safari, Opera, ya Internet Explorer 9 y superior. Anueve'l so navegador o use Potlatch 2 pa editar el mapa.",
     "translate": {
         "translate": "Traducir",
         "localized_translation_label": "Nome multillingüe",
@@ -1742,10 +1737,6 @@
             "amenity/university": {
                 "name": "Campus universitariu",
                 "terms": "terrén universitariu, "
-            },
-            "amenity/vending_machine": {
-                "name": "Máquina de venta automática",
-                "terms": "Máquina,Autoventa"
             },
             "amenity/veterinary": {
                 "name": "Veterinariu",

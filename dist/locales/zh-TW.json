@@ -137,14 +137,14 @@
         },
         "merge": {
             "title": "合併",
-            "description": "合併這些線段。",
+            "description": "合併這些特徵",
             "key": "C",
-            "annotation": "合併了 {n} 條線段。",
+            "annotation": "合併 {n} 個特徵",
             "not_eligible": "不能合併這些物件。",
-            "not_adjacent": "這些線段並不連接，不能合併。",
-            "restriction": "這些線段不能合併，因為其中最少有一條線段是\"{relation}\" 關係的成員。",
+            "not_adjacent": "這些特徵並不能合併，因為它們並不相連。",
+            "restriction": "這些特徵並不能合併，因為其中一個是關聯 \"{relation}\" 成員。",
             "incomplete_relation": "這些物件不能合併，因為其中最少有一件未有完全下載。",
-            "conflicting_tags": "這些線段並不能合併，因為它們的標籤並不一樣。"
+            "conflicting_tags": "這些特徵並不能合儀，因為它們有彼此衝突的標籤。"
         },
         "move": {
             "title": "移動",
@@ -217,7 +217,7 @@
         "nothing": "沒有動作可以重做。"
     },
     "tooltip_keyhint": "快速鍵",
-    "browser_notice": "這編輯器支援Firefox、Chrome、Safari、Opera及Internet Explorer 9或以上。請先把你的瀏覽器升級或使用Potlatch 2來編輯地圖。",
+    "browser_notice": "iD 編輯器支援 Firefox、Chrome、Safari、Opera 和 Internet Explorer 11 以上的版本。請升級你的瀏覽器或是使用 Potlatch 2 來編輯地圖。",
     "translate": {
         "translate": "翻譯",
         "localized_translation_label": "多語言名稱",
@@ -1071,6 +1071,9 @@
                 "label": "速度限制",
                 "placeholder": "40, 50, 60..."
             },
+            "maxstay": {
+                "label": "可停留時間"
+            },
             "mtb/scale": {
                 "label": "越越單車難度",
                 "options": {
@@ -1867,7 +1870,43 @@
                 "name": "大學範圍",
                 "terms": "大學,大專,大學用地"
             },
-            "amenity/vending_machine": {
+            "amenity/vending_machine/cigarettes": {
+                "name": "香煙販賣機",
+                "terms": "香煙自動販賣機,販賣機"
+            },
+            "amenity/vending_machine/condoms": {
+                "name": "保險套販賣機",
+                "terms": "保險套自動販賣機,販賣機"
+            },
+            "amenity/vending_machine/drinks": {
+                "name": "飲料販賣機",
+                "terms": "飲料自動販賣機,販賣機"
+            },
+            "amenity/vending_machine/excrement_bags": {
+                "name": "糞便袋販賣機",
+                "terms": "糞便袋自動販賣機,販賣機"
+            },
+            "amenity/vending_machine/news_papers": {
+                "name": "報紙販賣機",
+                "terms": "新聞紙販賣機,報紙自動販賣機,販賣機"
+            },
+            "amenity/vending_machine/parcel_pickup_dropoff": {
+                "name": "包裹分揀/寄物販賣機",
+                "terms": "包裹分揀/寄物自動販賣機,販賣機"
+            },
+            "amenity/vending_machine/parking_tickets": {
+                "name": "停車場繳費機",
+                "terms": "停車場自動繳費機,停車場收費機,販賣機"
+            },
+            "amenity/vending_machine/public_transport_tickets": {
+                "name": "車票販賣機",
+                "terms": "車票自動販賣機,交通票券販賣機"
+            },
+            "amenity/vending_machine/sweets": {
+                "name": "零食販賣機",
+                "terms": "點心販賣機,販 賣機"
+            },
+            "amenity/vending_machine/vending_machine": {
                 "name": "自動販賣機",
                 "terms": "販賣機"
             },

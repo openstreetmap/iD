@@ -137,14 +137,9 @@
         },
         "merge": {
             "title": "병합",
-            "description": "이 선을 병합합니다.",
             "key": "C",
-            "annotation": "선 {n}개를 병합했습니다.",
             "not_eligible": "이 지물은 병합할 수 없습니다.",
-            "not_adjacent": "이 선은 연결되어 있지 않기 때문에 병합할 수 없습니다.",
-            "restriction": "이 선은 적어도 하나가 \"{relation}\" 관계의 구성원이기 때문에 병합할 수 없습니다.",
-            "incomplete_relation": "이 지물은 완전히 다운로드되어 있지 않기 때문에 병합할 수 없습니다.",
-            "conflicting_tags": "이 선은 이들의 태그의 일부가 충돌하는 값이기 때문에 병합할 수 없습니다."
+            "incomplete_relation": "이 지물은 완전히 다운로드되어 있지 않기 때문에 병합할 수 없습니다."
         },
         "move": {
             "title": "이동",
@@ -217,7 +212,6 @@
         "nothing": "다시 실행할 것이 없습니다."
     },
     "tooltip_keyhint": "바로가기:",
-    "browser_notice": "이 편집기는 파이어폭스, 크롬, 사파리, 오페라와 인터넷 익스플로러 9 이상을 지원합니다. 지도를 편집하려면 사용하고 있는 브라우저를 업그레이드하거나 Potlatch 2를 사용하세요.",
     "translate": {
         "translate": "번역",
         "localized_translation_label": "다언어 이름",
@@ -1662,9 +1656,6 @@
             },
             "amenity/university": {
                 "name": "대학교 부지"
-            },
-            "amenity/vending_machine": {
-                "name": "자동 판매기"
             },
             "amenity/waste_basket": {
                 "name": "쓰레기통"

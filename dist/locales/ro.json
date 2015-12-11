@@ -102,9 +102,7 @@
         },
         "merge": {
             "title": "Unește",
-            "description": "Unește aceste linii.",
-            "key": "C",
-            "annotation": "Am unit {n} linii."
+            "key": "C"
         },
         "move": {
             "title": "Mută",
@@ -142,7 +140,6 @@
         }
     },
     "tooltip_keyhint": "Scurtătură:",
-    "browser_notice": "Acest editor este compatibil cu Firefox, Chrome, Safari, Opera și Internet Explorer 9 sau o versiune ulterioară . Te rugăm să iți actualizezi navigatorul de internet sau folosește Potlach 2 să editezi harta.",
     "translate": {
         "translate": "Traduce",
         "localized_translation_language": "Alege limba",

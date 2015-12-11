@@ -137,14 +137,14 @@
         },
         "merge": {
             "title": "Gộp",
-            "description": "Gộp các đường kẻ này.",
+            "description": "Gộp các đối tượng này.",
             "key": "G",
-            "annotation": "gộp {n} đường kẻ",
+            "annotation": "gộp {n} đối tượng",
             "not_eligible": "Không thể gộp các đối tượng này.",
-            "not_adjacent": "Không thể gộp các đường kẻ không nối liền với nhau.",
-            "restriction": "Không thể gộp các đường kẻ này vì ít nhất một trong những đường kẻ trực thuộc quan hệ “{relation}”.",
+            "not_adjacent": "Không thể gộp các đối tượng không nối liền với nhau.",
+            "restriction": "Không thể gộp các đối tượng này vì ít nhất một trong những đối tượng trực thuộc quan hệ “{relation}”.",
             "incomplete_relation": "Không thể gộp vì một trong số đối tượng này chưa được tải về hoàn toàn.",
-            "conflicting_tags": "Không thể gộp các đường kẻ này vì một số thẻ có giá trị xung đột."
+            "conflicting_tags": "Không thể gộp các đối tượng này vì một số thẻ có giá trị xung đột."
         },
         "move": {
             "title": "Di chuyển",
@@ -217,7 +217,7 @@
         "nothing": "Không có gì để làm lại."
     },
     "tooltip_keyhint": "Phím tắt:",
-    "browser_notice": "Chường trình vẽ bản đồ này chạy tốt trong Firefox, Chrome, Safari, Opera, và Internet Explorer 9 trở lên. Xin vui lòng nâng cấp trình duyệt của bạn hoặc dùng Potlach 2 để biên tập bản đồ.",
+    "browser_notice": "Chường trình vẽ bản đồ này chạy tốt trong Firefox, Chrome, Safari, Opera, và Internet Explorer 11 trở lên. Xin vui lòng nâng cấp trình duyệt của bạn hoặc dùng Potlach 2 để biên tập bản đồ.",
     "translate": {
         "translate": "Biên dịch",
         "localized_translation_label": "Tên đa ngôn ngữ",
@@ -1071,6 +1071,9 @@
                 "label": "Tốc độ Tối đa",
                 "placeholder": "40, 50, 60…"
             },
+            "maxstay": {
+                "label": "Thời gian Ở Tối đa"
+            },
             "mtb/scale": {
                 "label": "Độ hiểm trở Đạp xe Leo núi",
                 "options": {
@@ -1867,9 +1870,45 @@
                 "name": "Sân trường Đại học",
                 "terms": "sân trường đại học, sân viện đại học, sân trường cao đẳng, trường đại học, viện đại học, trường cao đẳng, ĐH, CĐ, san truong dai hoc, san vien dai hoc, san truong cao dang, truong dai hoc, vien dai hoc, truong cao dang"
             },
-            "amenity/vending_machine": {
-                "name": "Máy bán hàng",
-                "terms": "máy bán hàng, máy bán hàng tự động, máy bán nước uống, máy bán đồ ăn, máy bán kẹo, máy bán dao cạo, máy bán tem, quán ăn tự động, may ban hang, may ban hang tu dong, may ban nuoc uong, may ban do an, may ban keo, may ban dao cao, may ban tem, quan an tu dong"
+            "amenity/vending_machine/cigarettes": {
+                "name": "Máy Bán Thuốc lá",
+                "terms": "máy bán thuốc lá, may ban thuoc la"
+            },
+            "amenity/vending_machine/condoms": {
+                "name": "Máy Bán Bao Cao su",
+                "terms": "máy bán bao cao su, máy phát bao cao su, máy bán bao dương vật, máy phát bao dương vật, máy bán túi cao su, máy phát túi cao su, máy bán ca pốt, máy phát ca pốt, máy bán ca-pốt, máy phát ca-pốt, may ban bao cao su, may phat bao cao su, may ban bao duong vat, may phat bao duong vat, may ban tui cao su, may phat tui cao su, may ban ca pot, may phat ca pot, may ban ca-pot, may phat ca-pot"
+            },
+            "amenity/vending_machine/drinks": {
+                "name": "Máy Bán Nước uống",
+                "terms": "máy bán nước uống, may ban nuoc uong"
+            },
+            "amenity/vending_machine/excrement_bags": {
+                "name": "Máy Phát Bao Cứt Chó",
+                "terms": "máy phát bao cứt chó, may phat bao cut cho"
+            },
+            "amenity/vending_machine/news_papers": {
+                "name": "Máy Bán Báo",
+                "terms": "máy bán báo, máy bán tạp chí, máy bán tờ báo, may ban bao, may ban tap chi, may ban to bao"
+            },
+            "amenity/vending_machine/parcel_pickup_dropoff": {
+                "name": "Máy Nhận/Gửi Bưu kiện",
+                "terms": "máy nhận bưu kiện, máy gửi bưu kiện, máy gởi bưu kiện, máy nhận gói, máy gửi gói, máy gởi gói, may nhan buu kien, may gui buu kien, may goi buu kien, may nhan goi, may gui goi, may goi goi"
+            },
+            "amenity/vending_machine/parking_tickets": {
+                "name": "Máy Bán Vé Đậu xe",
+                "terms": "máy bán vé đậu xe, máy bán vé đỗ xe, may ban ve dau xe, may ban ve do xe"
+            },
+            "amenity/vending_machine/public_transport_tickets": {
+                "name": "Máy Bán Vé Phương tiện Công cộng",
+                "terms": "máy bán vé, máy bán vé phương tiện công cộng, máy bán vé xe buýt, máy bán vé xe điện, máy bán vé xe lửa, may ban ve, may ban ve phuong tien cong cong, may ban ve xe buyt, may ban ve xe dien, may ban ve xe lua"
+            },
+            "amenity/vending_machine/sweets": {
+                "name": "Máy Bán Kẹo",
+                "terms": "máy bán kẹo, may ban keo"
+            },
+            "amenity/vending_machine/vending_machine": {
+                "name": "Máy Bán Hàng",
+                "terms": "máy bán hàng, máy bán hàng tự động, máy bán đồ ăn, máy bán dao cạo, máy bán tem, quán ăn tự động, may ban hang, may ban hang tu dong, may ban do an, may ban dao cao, may ban tem, quan an tu dong"
             },
             "amenity/veterinary": {
                 "name": "Thú y",

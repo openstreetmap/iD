@@ -137,14 +137,9 @@
         },
         "merge": {
             "title": "Mesclar",
-            "description": "Mesclar estas linhas.",
             "key": "C",
-            "annotation": "Mesclou {n} linhas.",
             "not_eligible": "Esses elementos não podem ser mesclados.",
-            "not_adjacent": "Essas linhas não podem ser mescladas porque não estão conectadas.",
-            "restriction": "Estas linhas não podem ser mescladas porque pelo menos uma delas é membro da relação \"{relation}\".",
-            "incomplete_relation": "Estes elementos não podem ser mesclados porque pelo menos um deles não foi transferido completamente.",
-            "conflicting_tags": "Essas linhas não podem ser mescladas porque algumas de suas etiquetas têm valores conflitantes."
+            "incomplete_relation": "Estes elementos não podem ser mesclados porque pelo menos um deles não foi transferido completamente."
         },
         "move": {
             "title": "Mover",
@@ -217,7 +212,6 @@
         "nothing": "Nada para refazer."
     },
     "tooltip_keyhint": "Atalho:",
-    "browser_notice": "Este editor é suportado no Firefox, Chrome, Safari, Opera e Internet Explorer 9 ou superior. Por favor atualize seu navegador ou use o Potlatch 2 para editar o mapa.",
     "translate": {
         "translate": "Traduzir",
         "localized_translation_label": "Nome multilíngue",
@@ -242,8 +236,8 @@
         "title": "Salvar Alterações",
         "description_placeholder": "Descrição curta e clara de suas contribuições",
         "message_label": "Comentário para o conjunto de alterações",
-        "upload_explanation": "As alterações que você enviar ficarão visíveis em todos os mapas que usam dados do OpenStreetMap.",
-        "upload_explanation_with_user": "As alterações que você enviar como {user} estarão visíveis em todos os mapas que usam os dados do OpenStreetMap.",
+        "upload_explanation": "As alterações que você enviar ficarão visíveis em todos os mapas que usam dados do OpenStreetMap. Atenção: NÃO é permitido copiar nomes de ruas do Google Maps, Bing, mapas impressos ou quaisquer fontes que possuam copyright.",
+        "upload_explanation_with_user": "As alterações que você enviar como {user} estarão visíveis em todos os mapas que usam os dados do OpenStreetMap.<br><br>\n<b>Atenção:</b> NÃO é permitido copiar nomes de ruas do Google Maps, Bing, mapas impressos ou quaisquer fontes que possuam copyright.",
         "save": "Salvar",
         "cancel": "Cancelar",
         "changes": "{count} mudanças",
@@ -456,7 +450,7 @@
     },
     "splash": {
         "welcome": "Bem vindo ao editor iD do OpenStreetMap",
-        "text": "iD é uma ferramenta amigável, porém poderosa, para contribuir no melhor mapa livre do mundo. Esta é a versão {version}. Para mais informações, consulte {website} e reporte bugs no {github}.",
+        "text": "iD é uma ferramenta amigável, porém poderosa, para contribuir no melhor mapa livre do mundo. Esta é a versão {version}. Para mais informações, consulte {website} e reporte bugs no {github}.<br><br>\n<strong>Atenção:</strong> NÃO é permitido copiar nomes de ruas do Google Maps, Bing, mapas impressos ou quaisquer fontes que possuam copyright.",
         "walkthrough": "Comece o Passo a Passo",
         "start": "Editar Agora"
     },
@@ -1863,10 +1857,6 @@
             "amenity/university": {
                 "name": "Área Universitária",
                 "terms": "Área de Universidade, Faculdade, Área de Faculdade, Centro Universitário"
-            },
-            "amenity/vending_machine": {
-                "name": "Máquina de Venda",
-                "terms": "Totem de vendas, Máquina de Venda Automática"
             },
             "amenity/veterinary": {
                 "name": "Veterinário",

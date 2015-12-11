@@ -131,12 +131,8 @@
         },
         "merge": {
             "title": "Birleştir",
-            "description": "Bu çizgileri birleştir.",
             "key": "C",
-            "annotation": "{n} adet çizgi birleştirildi.",
             "not_eligible": "Bu kısımlar birleştirilemez.",
-            "not_adjacent": "Bu çizgiler birleştirilemez çünkü bağlı değiller.",
-            "restriction": "Bu çizgiler birleştirilemez çünkü içlerinden en az biri bir \"{relation}\" ilişkinin üyesi.",
             "incomplete_relation": "Bu özellikler birleştirilemez çünkü içlerinden en az biri henüz bütünüyle indirilmedi."
         },
         "move": {
@@ -207,7 +203,6 @@
         "nothing": "Tekrar yapılacak birşey yok."
     },
     "tooltip_keyhint": "Kısayol:",
-    "browser_notice": "Bu editör sadece Firefox, Chrome, Safari, Opera ile Internet Explorer 9 ve üstü tarayıcılarda çalışmaktadır. Lütfen tarayınıcı güncelleyin ya da Potlatch 2'yi kullanarak haritada güncelleme yapınız.",
     "translate": {
         "translate": "Çevir",
         "localized_translation_label": "Çokdilli adı",

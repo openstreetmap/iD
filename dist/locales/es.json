@@ -137,14 +137,14 @@
         },
         "merge": {
             "title": "Combinar",
-            "description": "Combinar líneas.",
+            "description": "Combinar estos elementos.",
             "key": "C",
-            "annotation": "{n} líneas combinadas.",
+            "annotation": "{n} elementos combinados.",
             "not_eligible": "Estos elementos no pueden ser combinados.",
-            "not_adjacent": "Estas líneas no pueden ser combinadas porque no están conectadas.",
-            "restriction": "Estas líneas no se pueden combinar porque al menos una es miembro de una relación de \"{relation}\".",
+            "not_adjacent": "Estos elementos no pueden ser combinados porque no están conectados.",
+            "restriction": "Estos elementos no se pueden combinar porque al menos uno es miembro de una relación de \"{relation}\".",
             "incomplete_relation": "Estos elementos no pueden ser combinados porque al menos uno no ha sido descargado por completo.",
-            "conflicting_tags": "Estas líneas no pueden ser combinadas porque algunas de sus etiquetas tienen conflictos en sus valores."
+            "conflicting_tags": "Estos elementos no pueden ser combinados porque algunas de sus etiquetas tienen conflictos en sus valores."
         },
         "move": {
             "title": "Mover",
@@ -217,7 +217,7 @@
         "nothing": "Nada que rehacer"
     },
     "tooltip_keyhint": "Acceso directo:",
-    "browser_notice": "Este editor soporta Firefox, Chrome, Safari, Opera e Internet Explorer 9 o superior. Por favor, actualice su navegador o utilice Potlatch 2 para editar el mapa.",
+    "browser_notice": "Este editor es compatible con Firefox, Chrome, Safari, Opera e Internet Explorer 11 y superiores. Actualice su navegador o use Potlatch 2 para editar el mapa.",
     "translate": {
         "translate": "Traducir",
         "localized_translation_label": "Nombre multilingüe",
@@ -235,7 +235,7 @@
     },
     "status": {
         "error": "No se puede conectar con la API.",
-        "offline": "La API está desconectada. Por favor, intente editar más atarde.",
+        "offline": "La API está desconectada. Intente editar más tarde.",
         "readonly": "El API está en modo de sólo lectura. Tendrá que esperar para guardar los cambios."
     },
     "commit": {
@@ -1071,6 +1071,9 @@
                 "label": "Límite de velocidad",
                 "placeholder": "40, 50, 60..."
             },
+            "maxstay": {
+                "label": "Estadía máxima"
+            },
             "mtb/scale": {
                 "label": "Dificultad de bicicleta de montaña",
                 "options": {
@@ -1867,9 +1870,45 @@
                 "name": "Terreno de universidad",
                 "terms": "universidad, campus, colegio mayor, facultad, terreno, área, suelo"
             },
-            "amenity/vending_machine": {
+            "amenity/vending_machine/cigarettes": {
+                "name": "Máquina expendedora de cigarrillos",
+                "terms": "tabaco, cigarro, cigarrillo, pucho, expendedor"
+            },
+            "amenity/vending_machine/condoms": {
+                "name": "Máquina expendedora de condones",
+                "terms": "condones, condón, profiláctico, preservativo, expendedor"
+            },
+            "amenity/vending_machine/drinks": {
+                "name": "Máquina expendedora de bebidas",
+                "terms": "bebida, gaseosa, refresco, expendedor"
+            },
+            "amenity/vending_machine/excrement_bags": {
+                "name": "Máquina expendedora de bolsa para excrementos",
+                "terms": "excremento, caca, bolsa, expendedor"
+            },
+            "amenity/vending_machine/news_papers": {
+                "name": "Máquina expendedora de periódicos",
+                "terms": "periódico, diario, semanario, revista, expendedor"
+            },
+            "amenity/vending_machine/parcel_pickup_dropoff": {
+                "name": "Máquina expendedora recoger/dejar paquetes",
+                "terms": "paquete, encomienda, entrega, recojo, expendedor"
+            },
+            "amenity/vending_machine/parking_tickets": {
+                "name": "Máquina expendedora de boletos de aparcamiento",
+                "terms": "ticket, boleto, recibo, coche, carro, auto, automóvil, vehículo, aparcamiento, parking, aparcadero, estacionamiento, garaje, parqueadero, parqueo, expendedor"
+            },
+            "amenity/vending_machine/public_transport_tickets": {
+                "name": "Máquina expendedora del boleto de transporte",
+                "terms": "ticket, boleto, recibo, transporte público, autobús, bus, colectivo, micro, guagua, expendedor"
+            },
+            "amenity/vending_machine/sweets": {
+                "name": "Máquina expendedora de snacks",
+                "terms": "snack, bocadillo, refrigerio, botanas, expendedor"
+            },
+            "amenity/vending_machine/vending_machine": {
                 "name": "Máquina expendedora",
-                "terms": "máquina expendedora, máquina autoventa, vending"
+                "terms": "máquina, expendedor, automático"
             },
             "amenity/veterinary": {
                 "name": "Veterinario",
@@ -2369,7 +2408,7 @@
             },
             "highway/bus_stop": {
                 "name": "Parada de autobús",
-                "terms": "parada, bus, autobús, marquesina, autobus, autobús, bus, buses, colectivo, micro, guagua"
+                "terms": "parada, marquesina, autobús, bus, colectivo, micro, guagua"
             },
             "highway/corridor": {
                 "name": "Pasillo interior",
@@ -3621,7 +3660,7 @@
             },
             "shop/ticket": {
                 "name": "Venta de boletos",
-                "terms": "Venta de tickets, billete, entrada, boleto, venta de entradas"
+                "terms": "ticket, boleto, billete, entrada, venta"
             },
             "shop/tobacco": {
                 "name": "Estanco",

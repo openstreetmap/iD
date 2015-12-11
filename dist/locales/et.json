@@ -137,12 +137,8 @@
         },
         "merge": {
             "title": "Ühenda",
-            "description": "Ühenda need jooned.",
             "key": "C",
-            "annotation": "{n} joont ühendatud.",
             "not_eligible": "Neid objekte ei saa ühendada.",
-            "not_adjacent": "Neid jooni ei saa ühendada kuna need ei ole üksteisega seotud.",
-            "restriction": "Neid jooni ei saa ühendada, kuna vähemalt üks neist on \"{relation}\" relatsiooni osa.",
             "incomplete_relation": "Neid objekte ei saa ühendada, kuna vähemalt üks neist ei ole täielikult laetud."
         },
         "move": {
@@ -198,7 +194,6 @@
         "nothing": "Pole midagi uuesti teha."
     },
     "tooltip_keyhint": "Kiirvalik:",
-    "browser_notice": "See redaktor on toetatud järgnevates veebilehitsejates: Firefox, Chrome, Safari, Opera, ja Internet Explorer 9 ning uuemates. Palun uuenda oma veebilehitsejat või kasuta Potlatch 2'te kaardi muutmiseks.",
     "translate": {
         "translate": "Tõlgi",
         "localized_translation_label": "Mitmekeelne nimi",

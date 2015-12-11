@@ -137,12 +137,8 @@
         },
         "merge": {
             "title": "Unir.",
-            "description": "Unir estas liñas.",
             "key": "C",
-            "annotation": "{n} liñas unidas.",
             "not_eligible": "Estes elementos non se poden unir",
-            "not_adjacent": "Estas liñas non se poden unir porque non están conectadas.",
-            "restriction": "Estas liñas non poden unirse porque cando menos unha é un membro dunha relación \"{relation}\".",
             "incomplete_relation": "Estes elementos non se poden unir porque cando menos un deles non se descargou completamente."
         },
         "move": {
@@ -216,7 +212,6 @@
         "nothing": "Nada para refacer"
     },
     "tooltip_keyhint": "Atallo:",
-    "browser_notice": "Este editor está soportado en Firefox, Chrome, Safari, Opera e Internet Explorer 9 e superiores. Por favor, actualiza o teu navegador ou utiliza Potlatch 2 para editar o mapa.",
     "translate": {
         "translate": "Traducir",
         "localized_translation_label": "Nome multilingüe",
@@ -1140,9 +1135,6 @@
             },
             "amenity/university": {
                 "name": "Universidade"
-            },
-            "amenity/vending_machine": {
-                "name": "Máquina expendedora"
             },
             "amenity/veterinary": {
                 "name": "Veterinario"

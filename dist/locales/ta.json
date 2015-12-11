@@ -58,7 +58,6 @@
         },
         "merge": {
             "title": "இணை",
-            "description": "இந்த கோடுகளை இணை",
             "key": "C"
         },
         "move": {

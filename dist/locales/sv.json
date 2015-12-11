@@ -137,14 +137,14 @@
         },
         "merge": {
             "title": "Sammanfoga",
-            "description": "Sammanfoga dessa linjer.",
+            "description": "Sammanfoga dessa objekt.",
             "key": "C",
-            "annotation": "Sammanfogade {n} linjer.",
+            "annotation": "Sammanfoga {n} objekt.",
             "not_eligible": "Dessa objekt kan inte slås samman.",
-            "not_adjacent": "Dessa linjer kan inte slås ihop då dem inte är ihopsatta.",
-            "restriction": "Dessa linjer kan inte slås samman då minst en av dem tillhör relationen \"{relation}\".",
+            "not_adjacent": "Dessa objekt kan inte sammanfogas då de inte är kopplade till varandra.",
+            "restriction": "Dessa objekt kan inte sammanfogas då minst en av dem tillhör relationen \"{relation}\".",
             "incomplete_relation": "Dessa objekt kan inte sammanfogas då åtminstone ett inte hämtats fullständigt.",
-            "conflicting_tags": "Dessa linjer kan inte sammanfogas då några av dess taggar har motstridiga värden."
+            "conflicting_tags": "Dessa objekt kan inte sammanfogas då några av dess taggar har motstridiga värden."
         },
         "move": {
             "title": "Flytta",
@@ -217,7 +217,7 @@
         "nothing": "Inget att upprepa."
     },
     "tooltip_keyhint": "Genväg:",
-    "browser_notice": "Denna redigerare funkar i Firefox, Chrome, Safari, Opera och Internet Explorer 9 eller högre. Uppgradera din webbläsare eller använd Potlatch 2 för att redigera kartan.",
+    "browser_notice": "Redigeraren stöds i Firefox, Chrome, Safari, Opera samt Internet Explorer 11 och högre. Uppgradera din webbläsare eller använd Potlatch 2 för att redigera kartan.",
     "translate": {
         "translate": "Översätt",
         "localized_translation_label": "Flerspråkigt namn",
@@ -1071,6 +1071,9 @@
                 "label": "Hastighetsbegränsning",
                 "placeholder": "50, 70, 90..."
             },
+            "maxstay": {
+                "label": "Maxtid"
+            },
             "mtb/scale": {
                 "label": "Mountainbike-svårighet",
                 "options": {
@@ -1867,7 +1870,43 @@
                 "name": "Universitetsområde",
                 "terms": "Universitet, universitetsområde, högskola, högskoleområde, college,\nakademi, universitetsbyggnad, lärosäte"
             },
-            "amenity/vending_machine": {
+            "amenity/vending_machine/cigarettes": {
+                "name": "Cigarettautomat",
+                "terms": "Cigarettautomat, cigaretter, snusautomat, tobaksautomat"
+            },
+            "amenity/vending_machine/condoms": {
+                "name": "Kondomautomat",
+                "terms": "Kondomautomat, kondomomat, kondomer"
+            },
+            "amenity/vending_machine/drinks": {
+                "name": "Dryckesautomat ",
+                "terms": "dryckesautomat, dryckautomat, drickautomat, läskautomat, kaffemaskin, kaffeautomat"
+            },
+            "amenity/vending_machine/excrement_bags": {
+                "name": "Bajspåsar",
+                "terms": "Bajspåsar, hundbajspåsar, hundpåsar, hundbajs, hundskit, skitpåse"
+            },
+            "amenity/vending_machine/news_papers": {
+                "name": "Tidningsautomat, tidningsutlämning, tidningsdistribution, tidningslåda",
+                "terms": "Tidningsautomat, "
+            },
+            "amenity/vending_machine/parcel_pickup_dropoff": {
+                "name": "Automat för ut- och inlämning av paket",
+                "terms": "Paketutlämning, paketinlämning, paketautomat"
+            },
+            "amenity/vending_machine/parking_tickets": {
+                "name": "Parkeringsautomat",
+                "terms": "Parkeringsautomat, parkometer, parkeringsur, parkeringsavgift"
+            },
+            "amenity/vending_machine/public_transport_tickets": {
+                "name": "Biljettautomat",
+                "terms": "Biljettautomat, tågbiljett, tågbiljetter, bussbiljett, bussbiljetter"
+            },
+            "amenity/vending_machine/sweets": {
+                "name": "Godisautomat",
+                "terms": "godisautomat, tuggummiautomater, godisautomat, mellanmål, tuggummi"
+            },
+            "amenity/vending_machine/vending_machine": {
                 "name": "Varuautomat",
                 "terms": "Varuautomat, varumaskin, godisautomat, tuggummiautomater, godisautomat, läsk, biljett, biljetter, biljettautomat, läskautomat, mellanmål"
             },

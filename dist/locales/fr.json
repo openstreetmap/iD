@@ -137,14 +137,14 @@
         },
         "merge": {
             "title": "Fusionner",
-            "description": "Fusionne ces lignes.",
+            "description": "Fusionner ces éléments",
             "key": "C",
-            "annotation": "Fusionne les {n} lignes.",
+            "annotation": "{n} éléments fusionnés",
             "not_eligible": "Ces éléments ne peuvent pas être fusionnés.",
-            "not_adjacent": "Ces lignes ne peuvent pas être fusionnées car elles ne sont pas connectées.",
-            "restriction": "Ces lignes ne peuvent pas être fusionnées car au moins l'une d'entre elles est membre d'une relation \"{relation}\".",
+            "not_adjacent": "Ces éléments ne peuvent être fusionnés car ils ne sont pas connectés.",
+            "restriction": "Ces éléments ne peuvent être fusionnés car au moins l'un d'entre eux est membre de la relation \"{relation}\".",
             "incomplete_relation": "Ces éléments ne peuvent pas être fusionnés parce qu'au moins l'un d'entre eux n'a pas été complètement téléchargé.",
-            "conflicting_tags": "Ces lignes ne peuvent pas être fusionnées car certains de leur tags ont des valeurs contradictoires."
+            "conflicting_tags": "Ces éléments ne peuvent être fusionnés car certains de leurs tags ont des valeurs conflictuelles."
         },
         "move": {
             "title": "Déplacer",
@@ -217,7 +217,7 @@
         "nothing": "Rien à refaire."
     },
     "tooltip_keyhint": "Raccourci :",
-    "browser_notice": "Les navigateurs supportés par cet éditeur sont : Firefox, Chrome, Safari, Opera et Internet Explorer (version 9 et supérieures). Pour éditer la carte, veuillez mettre à jour votre navigateur ou utiliser Potlatch 2.",
+    "browser_notice": "Cet éditeur est supporté sous Firefox, Chrome, safari, Opera, et Internet  Explorer 11 et supérieur. Veuillez s'il vous plaît mettre à jour votre navigateur ou utiliser Potlach 2 pour éditer la carte.",
     "translate": {
         "translate": "Traduire",
         "localized_translation_label": "Nom multi-langues",
@@ -1071,6 +1071,9 @@
                 "label": "Vitesse maximale autorisée",
                 "placeholder": "50, 70, 90..."
             },
+            "maxstay": {
+                "label": "Durée maximale"
+            },
             "mtb/scale": {
                 "label": "Difficulté VTT",
                 "options": {
@@ -1867,7 +1870,43 @@
                 "name": "Terrains d'université",
                 "terms": "Campus universitaire"
             },
-            "amenity/vending_machine": {
+            "amenity/vending_machine/cigarettes": {
+                "name": "Distributeur de cigarettes",
+                "terms": "Distributeur de cigarettes"
+            },
+            "amenity/vending_machine/condoms": {
+                "name": "Distributeur de préservatifs",
+                "terms": "Distributeur de préservatifs"
+            },
+            "amenity/vending_machine/drinks": {
+                "name": "Distributeur de boissons",
+                "terms": "Distributeur de boissons"
+            },
+            "amenity/vending_machine/excrement_bags": {
+                "name": "Distributeur de sacs pour les excréments d'animaux ",
+                "terms": "Distributeur de sacs pour les excréments d'animaux "
+            },
+            "amenity/vending_machine/news_papers": {
+                "name": "Distributeur de journaux",
+                "terms": "Distributeur de journaux"
+            },
+            "amenity/vending_machine/parcel_pickup_dropoff": {
+                "name": "Dépôt ou retrait de colis",
+                "terms": "Dépôt ou retrait de colis"
+            },
+            "amenity/vending_machine/parking_tickets": {
+                "name": "Distributeur de tickets de parking",
+                "terms": "Distributeur de tickets de parking"
+            },
+            "amenity/vending_machine/public_transport_tickets": {
+                "name": "Distributeur de tickets de transit",
+                "terms": "Distributeur de tickets de transit"
+            },
+            "amenity/vending_machine/sweets": {
+                "name": "Distributeur de snacks",
+                "terms": "Distributeur de snacks"
+            },
+            "amenity/vending_machine/vending_machine": {
                 "name": "Distributeur automatique",
                 "terms": "Distributeur automatique"
             },

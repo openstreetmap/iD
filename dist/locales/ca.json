@@ -137,14 +137,14 @@
         },
         "merge": {
             "title": "Fusionar",
-            "description": "Fusioneu aquestes línies.",
+            "description": "Fusionar aquestes característiques",
             "key": "C",
-            "annotation": "Heu fusionat {n} línies.",
+            "annotation": "S'han fusionat {n} característiques.",
             "not_eligible": "Aquestes característiques no poden ser fusionades.",
-            "not_adjacent": "Aquestes línies no poden ser com fusionades ja que no estan connectades.",
-            "restriction": "Aquestes línies no poden ser fusionades perquè com a mínim una d'elles és membre de la relació \"{relation}\"",
+            "not_adjacent": "Aquestes característiques no poden ser fusionades ja que no estan connectades.",
+            "restriction": "Aquestes característiques no poden ser fusionades ja que com a mínim una d'elles és membre de la relació \"{relation}\".",
             "incomplete_relation": "Aquestes característiques no poden ser fusionades perquè com a mínim una d'elles no s'ha descarregat del tot.",
-            "conflicting_tags": "Aquestes línies no poden ser fusionades ja que algunes de les seves etiquetes tenen valors conflictius."
+            "conflicting_tags": "Aquestes característiques no poden ser fusionades ja que algunes de les seves etiquetes tenen valors en conflicte."
         },
         "move": {
             "title": "Moure",
@@ -217,7 +217,7 @@
         "nothing": "Res a refer."
     },
     "tooltip_keyhint": "Drecera:",
-    "browser_notice": "Aquest editor és compatible amb Firefox, Chrome, Safari, Opera i Internet Explorer 9 o superior.\nSi us plau actualitzeu el vostre navegador o bé feu servir Potlach 2 per editar el mapa.",
+    "browser_notice": "Aquest editor és compatible a Firefox, Chrome, Safari, Opera i Internet Explorer 11 i superior. Actualitzeu el vostre navegador o bé feu ús del Potlatch 2 per tal d'editar el mapa.",
     "translate": {
         "translate": "Traduïu",
         "localized_translation_label": "Nom multilingüe",
@@ -954,6 +954,9 @@
                 "label": "Handicap",
                 "placeholder": "1-18"
             },
+            "handrail": {
+                "label": "Barana"
+            },
             "highway": {
                 "label": "Tipus"
             },
@@ -1067,6 +1070,9 @@
             "maxspeed": {
                 "label": "Límit de velocitat",
                 "placeholder": "40, 50, 60..."
+            },
+            "maxstay": {
+                "label": "Estada màxima"
             },
             "mtb/scale": {
                 "label": "Dificultat per a bicicletes de muntanya",
@@ -1820,8 +1826,35 @@
             "amenity/university": {
                 "name": "Campus universitari"
             },
-            "amenity/vending_machine": {
-                "name": "Màquina de vending"
+            "amenity/vending_machine/cigarettes": {
+                "name": "Màquina de tabac"
+            },
+            "amenity/vending_machine/condoms": {
+                "name": "Expenedor de preservatius"
+            },
+            "amenity/vending_machine/drinks": {
+                "name": "Màquina de vènding de begudes"
+            },
+            "amenity/vending_machine/excrement_bags": {
+                "name": "Equipament de residus canins"
+            },
+            "amenity/vending_machine/news_papers": {
+                "name": "Màquina expenedora de diaris"
+            },
+            "amenity/vending_machine/parcel_pickup_dropoff": {
+                "name": "Màquina de recollida/enviament de paqueteria"
+            },
+            "amenity/vending_machine/parking_tickets": {
+                "name": "Màquina de cobrament de tiquet d'aparcament"
+            },
+            "amenity/vending_machine/public_transport_tickets": {
+                "name": "Màquina de venda de títols de transport públic"
+            },
+            "amenity/vending_machine/sweets": {
+                "name": "Màquina de vènding de comestibles"
+            },
+            "amenity/vending_machine/vending_machine": {
+                "name": "Màquina de vènding"
             },
             "amenity/veterinary": {
                 "name": "Veterinari"
@@ -1925,6 +1958,15 @@
             },
             "building/cabin": {
                 "name": "Cabana"
+            },
+            "building/cathedral": {
+                "name": "Edifici Catedralici"
+            },
+            "building/chapel": {
+                "name": "Edifici de capella"
+            },
+            "building/church": {
+                "name": "Edifici d'església"
             },
             "building/college": {
                 "name": "Edifici d'escola professional"

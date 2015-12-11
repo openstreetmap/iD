@@ -137,12 +137,8 @@
         },
         "merge": {
             "title": "Combinar",
-            "description": "Combinar linhas.",
             "key": "C",
-            "annotation": "{n} linhas combinadas.",
             "not_eligible": "Estes elementos não podem ser unidos.",
-            "not_adjacent": "Estas linhas não podem ser unidas porque não estão ligadas num ponto comum a ambas.",
-            "restriction": "Estas linhas não podem ser unidas porque pelo menos uma delas faz parte de uma relação \"{relation}\".",
             "incomplete_relation": "Estes elementos não podem ser unidos porque pelo menos um deles não está completamente descarregado no mapa."
         },
         "move": {
@@ -216,7 +212,6 @@
         "nothing": "Nada a refazer."
     },
     "tooltip_keyhint": "Atalho:",
-    "browser_notice": "Este editor suporta Firefox, Chrome, Safari, Opera e Internet Explorer 9 ou superior. Por favor atualize o seu navegador de internet ou utilize Potlatch 2 para editar o mapa.",
     "translate": {
         "translate": "Traduzir",
         "localized_translation_label": "Nome noutras línguas",
@@ -1859,10 +1854,6 @@
             "amenity/university": {
                 "name": "Universidade",
                 "terms": "University Grounds, Universidade, Faculdade, Instituto, Politécnico"
-            },
-            "amenity/vending_machine": {
-                "name": "Máquina de Vendas Automática",
-                "terms": "Vending Machine, Máquina Automática de Vendas"
             },
             "amenity/veterinary": {
                 "name": "Veterinário",

@@ -137,12 +137,8 @@
         },
         "merge": {
             "title": "Scal",
-            "description": "Scal te linie.",
             "key": "C",
-            "annotation": "Scalono {n} linii.",
             "not_eligible": "Te obiekty nie mogą zostać scalone.",
-            "not_adjacent": "Tych linii nie da się scalić, gdyż nie są połączone.",
-            "restriction": "Te linie nie mogą zostać połączone, ponieważ przynajmniej jedna z nich jest członkiem relacji \"{relation}\".",
             "incomplete_relation": "Tego obiektu nie można scalić, ponieważ przynajmniej jeden z nich nie został w pełni pobrany."
         },
         "move": {
@@ -216,7 +212,6 @@
         "nothing": "Nie ma nic do powtórzenia."
     },
     "tooltip_keyhint": "Skrót:",
-    "browser_notice": "Ten edytor działa w Firefoksie, Chrome, Safari, Operze oraz Internet Explorerze 9 i wyższych. Zaktualizuj swoją przeglądarkę lub użyj Potlatch 2 aby edytować mapę.",
     "translate": {
         "translate": "Przetłumacz",
         "localized_translation_label": "Wielojęzyczna nazwa",
@@ -1719,10 +1714,6 @@
             },
             "amenity/university": {
                 "name": "Teren uniwersytetu"
-            },
-            "amenity/vending_machine": {
-                "name": "Automat sprzedający",
-                "terms": "automat do sprzedaży"
             },
             "amenity/veterinary": {
                 "name": "Weterynarz",
