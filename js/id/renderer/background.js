@@ -251,7 +251,7 @@ iD.Background = function(context) {
         backgroundSources.unshift(iD.BackgroundSource.None());
 
         if (!chosen && extent) {
-            best = this.sources(extent).find(function(s) { return s.best(); });
+            best = _.find(this.sources(extent), function(s) { return s.best(); });
         }
 
         if (chosen && chosen.indexOf('custom:') === 0) {
