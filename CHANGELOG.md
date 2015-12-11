@@ -1,3 +1,6 @@
+## 1.8.3
+* Replace nonstandard Array `find` with `_.find` for IE11 (#2871)
+
 ## 1.8.2
 * Better save and restore map state when entering walkthrough
 * Add maxstay field for amenity=parking preset (#2851)
