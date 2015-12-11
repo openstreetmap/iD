@@ -1,3 +1,12 @@
+## 1.8.2
+* Better save and restore map state when entering walkthrough
+* Add maxstay field for amenity=parking preset (#2851)
+* Add presets for popular vending machines (#2827, thanks @henningvs)
+* Fix turn restriction rendering under Firefox (#2860)
+* Handle situation when user closes oauth dialog window (#2858)
+* Don't set `building=yes` for `amenity=fuel` preset (#2857)
+* Eliminate rounding causing jumpiness and loss of precision (#2849)
+
 ## 1.8.1
 * Fix tag help lookup (#2844)
 * Support Internet Explorer 11 and Edge browsers (#2571)

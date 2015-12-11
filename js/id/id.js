@@ -333,7 +333,7 @@ window.iD = function () {
     return d3.rebind(context, dispatch, 'on');
 };
 
-iD.version = '1.8.1';
+iD.version = '1.8.2';
 
 (function() {
     var detected = {};
