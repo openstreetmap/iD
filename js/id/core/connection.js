@@ -286,7 +286,8 @@ iD.Connection = function(useHttps) {
                     window.setTimeout(function() { callback(null, changeset_id); }, 2500);
                     oauth.xhr({
                         method: 'PUT',
-                        path: '/api/0.6/changeset/' + changeset_id + '/close'
+                        path: '/api/0.6/changeset/' + changeset_id + '/close',
+                        options: { header: { 'Content-Type': 'text/xml' } },
                     }, d3.functor(true));
                 });
             });
