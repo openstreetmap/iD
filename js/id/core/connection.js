@@ -287,7 +287,7 @@ iD.Connection = function(useHttps) {
                     oauth.xhr({
                         method: 'PUT',
                         path: '/api/0.6/changeset/' + changeset_id + '/close',
-                        options: { header: { 'Content-Type': 'text/xml' } },
+                        options: { header: { 'Content-Type': 'text/xml' } }
                     }, d3.functor(true));
                 });
             });
