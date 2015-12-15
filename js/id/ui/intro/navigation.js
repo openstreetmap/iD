@@ -1,5 +1,4 @@
 iD.ui.intro.navigation = function(context, reveal) {
-
     var event = d3.dispatch('done'),
         timeouts = [];
 
@@ -22,7 +21,6 @@ iD.ui.intro.navigation = function(context, reveal) {
      */
 
     step.enter = function() {
-
         var rect = context.surfaceRect(),
             map = {
                 left: rect.left + 10,
@@ -64,11 +62,11 @@ iD.ui.intro.navigation = function(context, reveal) {
             context.on('enter.intro', null);
             context.map().on('move.intro', null);
             set(function() {
-                reveal('.entity-editor-pane', t('intro.navigation.pane'));
+                reveal('.entity-editor-pane',
+                    t('intro.navigation.pane', { button: iD.ui.intro.icon('#icon-close', 'pre-text') }));
                 context.on('exit.intro', event.done);
             }, 700);
         }
-
     };
 
     step.exit = function() {

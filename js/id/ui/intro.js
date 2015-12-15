@@ -1,9 +1,7 @@
 iD.ui.intro = function(context) {
-
     var step;
 
     function intro(selection) {
-
         context.enter(iD.modes.Browse(context));
 
         // Save current map state
@@ -131,4 +129,9 @@ iD.ui.intro.pad = function(box, padding, context) {
         width: (box.width || 0) + 2 * padding,
         height: (box.width || 0) + 2 * padding
     };
+};
+
+iD.ui.intro.icon = function(name, svgklass) {
+    return '<svg class="icon ' + (svgklass || '') + '">' +
+        '<use xlink:href="' + name + '"></use></svg>';
 };

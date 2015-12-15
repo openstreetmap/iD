@@ -1,5 +1,4 @@
 iD.ui.intro.line = function(context, reveal) {
-
     var event = d3.dispatch('done'),
         timeouts = [];
 
@@ -12,14 +11,15 @@ iD.ui.intro.line = function(context, reveal) {
     }
 
     step.enter = function() {
-
         var centroid = [-85.62830, 41.95699];
         var midpoint = [-85.62975395449628, 41.95787501510204];
         var start = [-85.6297754121684, 41.95805253325314];
         var intersection = [-85.62974496187628, 41.95742515554585];
 
         context.map().centerZoom(start, 18);
-        reveal('button.add-line', t('intro.lines.add'), {tooltipClass: 'intro-lines-add'});
+        reveal('button.add-line',
+            t('intro.lines.add', { button: iD.ui.intro.icon('#icon-line', 'pre-text') }),
+            { tooltipClass: 'intro-lines-add' });
 
         context.on('enter.intro', addLine);
 
@@ -124,7 +124,8 @@ iD.ui.intro.line = function(context, reveal) {
         }
 
         function roadDetails() {
-            reveal('.pane', t('intro.lines.describe'));
+            reveal('.pane',
+                t('intro.lines.describe', { button: iD.ui.intro.icon('#icon-apply', 'pre-text') }));
             context.on('exit.intro', event.done);
         }
 

@@ -1,5 +1,4 @@
 iD.ui.intro.startEditing = function(context, reveal) {
-
     var event = d3.dispatch('done', 'startEditing'),
         modal,
         timeouts = [];
@@ -13,7 +12,6 @@ iD.ui.intro.startEditing = function(context, reveal) {
     }
 
     step.enter = function() {
-
         reveal('.map-control.help-control', t('intro.startediting.help'));
 
         timeout(function() {
@@ -46,7 +44,6 @@ iD.ui.intro.startEditing = function(context, reveal) {
                     .text(t('intro.startediting.start'));
 
             event.startEditing();
-
         }, 7500);
     };
 

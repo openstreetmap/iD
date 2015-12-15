@@ -1,5 +1,4 @@
 iD.ui.intro.point = function(context, reveal) {
-
     var event = d3.dispatch('done'),
         timeouts = [];
 
@@ -12,9 +11,10 @@ iD.ui.intro.point = function(context, reveal) {
     }
 
     step.enter = function() {
-
         context.map().centerZoom([-85.63279, 41.94394], 19);
-        reveal('button.add-point', t('intro.points.add'), {tooltipClass: 'intro-points-add'});
+        reveal('button.add-point',
+            t('intro.points.add', { button: iD.ui.intro.icon('#icon-point', 'pre-text') }),
+            { tooltipClass: 'intro-points-add' });
 
         var corner = [-85.632481,41.944094];
 
@@ -31,7 +31,6 @@ iD.ui.intro.point = function(context, reveal) {
                 pointBox = iD.ui.intro.pad(corner, 150, context);
                 reveal(pointBox, t('intro.points.place'), {duration: 0});
             });
-
         }
 
         function enterSelect(mode) {
@@ -70,7 +69,8 @@ iD.ui.intro.point = function(context, reveal) {
         function closeEditor() {
             d3.select('.preset-search-input').on('keydown.intro', null);
             context.history().on('change.intro', null);
-            reveal('.entity-editor-pane', t('intro.points.close'));
+            reveal('.entity-editor-pane',
+                t('intro.points.close', { button: iD.ui.intro.icon('#icon-apply', 'pre-text') }));
         }
 
         function selectPoint() {
@@ -93,7 +93,8 @@ iD.ui.intro.point = function(context, reveal) {
             context.on('enter.intro', null);
 
             setTimeout(function() {
-                reveal('.entity-editor-pane', t('intro.points.fixname'));
+                reveal('.entity-editor-pane',
+                    t('intro.points.fixname', { button: iD.ui.intro.icon('#icon-apply', 'pre-text') }));
                 context.on('exit.intro', deletePoint);
             }, 500);
         }
@@ -122,7 +123,8 @@ iD.ui.intro.point = function(context, reveal) {
             setTimeout(function() {
                 var node = d3.select('.radial-menu-item-delete').node();
                 var pointBox = iD.ui.intro.pad(node.getBoundingClientRect(), 50, context);
-                reveal(pointBox, t('intro.points.delete'));
+                reveal(pointBox,
+                    t('intro.points.delete', { button: iD.ui.intro.icon('#operation-delete', 'pre-text') }));
             }, 300);
         }
 
