@@ -1,6 +1,8 @@
 iD.ui.EntityEditor = function(context) {
     var event = d3.dispatch('choose'),
         state = 'select',
+        modified = false,
+        base,
         id,
         preset,
         reference;
@@ -24,7 +26,7 @@ iD.ui.EntityEditor = function(context) {
 
         $enter.append('button')
             .attr('class', 'fr preset-close')
-            .call(iD.svg.Icon('#icon-close'));
+            .call(iD.svg.Icon(modified ? '#icon-apply' : '#icon-close'));
 
         $enter.append('h3');
 
@@ -121,9 +123,15 @@ iD.ui.EntityEditor = function(context) {
 
         function historyChanged() {
             if (state === 'hide') return;
+
             var entity = context.hasEntity(id);
             if (!entity) return;
+
             entityEditor.preset(context.presets().match(entity, context.graph()));
+
+            var head = context.history().difference();
+            entityEditor.modified(base && !_.isEqual(base.changes(), head.changes()));
+
             entityEditor(selection);
         }
 
@@ -186,6 +194,13 @@ iD.ui.EntityEditor = function(context) {
         }
     }
 
+    entityEditor.modified = function(_) {
+        if (!arguments.length) return modified;
+        modified = _;
+        d3.selectAll('button.preset-close use')
+            .attr('xlink:href', (modified ? '#icon-apply' : '#icon-close'));
+    };
+
     entityEditor.state = function(_) {
         if (!arguments.length) return state;
         state = _;
@@ -196,6 +211,8 @@ iD.ui.EntityEditor = function(context) {
         if (!arguments.length) return id;
         id = _;
         entityEditor.preset(context.presets().match(context.entity(id), context.graph()));
+        entityEditor.modified(false);
+        base = context.history().difference();
         return entityEditor;
     };
 
