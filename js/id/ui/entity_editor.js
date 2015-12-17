@@ -25,6 +25,11 @@ iD.ui.EntityEditor = function(context) {
             .attr('class', 'header fillL cf');
 
         $enter.append('button')
+            .attr('class', 'fl preset-reset preset-choose')
+            .append('span')
+            .html('&#9668;');
+
+        $enter.append('button')
             .attr('class', 'fr preset-close')
             .call(iD.svg.Icon(modified ? '#icon-apply' : '#icon-close'));
 
