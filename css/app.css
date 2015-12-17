@@ -555,7 +555,7 @@ button.save.has-count .count::before {
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
-    padding: 20px;
+    padding: 20px 20px 20px 40px;
 }
 
 .header button,
@@ -571,9 +571,16 @@ button.save.has-count .count::before {
     height: 100%;
 }
 
-.preset-list-pane .header button {
+.entity-editor-pane .header button.preset-close,
+.preset-list-pane .header button.preset-choose {
     position: absolute;
     right: 0;
+    top: 0;
+}
+
+.entity-editor-pane .header button.preset-choose {
+    position: absolute;
+    left: 0;
     top: 0;
 }
 

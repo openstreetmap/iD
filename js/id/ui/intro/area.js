@@ -1,5 +1,4 @@
 iD.ui.intro.area = function(context, reveal) {
-
     var event = d3.dispatch('done'),
         timeout;
 
@@ -8,11 +7,12 @@ iD.ui.intro.area = function(context, reveal) {
     };
 
     step.enter = function() {
-
         var playground = [-85.63552, 41.94159],
             corner = [-85.63565411045074, 41.9417715536927];
         context.map().centerZoom(playground, 19);
-        reveal('button.add-area', t('intro.areas.add'), {tooltipClass: 'intro-areas-add'});
+        reveal('button.add-area',
+            t('intro.areas.add', { button: iD.ui.intro.icon('#icon-area', 'pre-text') }),
+            { tooltipClass: 'intro-areas-add' });
 
         context.on('enter.intro', addArea);
 
@@ -52,7 +52,9 @@ iD.ui.intro.area = function(context, reveal) {
             context.on('enter.intro', null);
 
             timeout = setTimeout(function() {
-                reveal('.preset-search-input', t('intro.areas.search', {name: context.presets().item('leisure/playground').name()}));
+                reveal('.preset-search-input',
+                    t('intro.areas.search',
+                    { name: context.presets().item('leisure/playground').name() }));
                 d3.select('.preset-search-input').on('keyup.intro', keySearch);
             }, 500);
         }
@@ -67,7 +69,8 @@ iD.ui.intro.area = function(context, reveal) {
         }
 
         function selectedPreset() {
-            reveal('.pane', t('intro.areas.describe'));
+            reveal('.pane',
+                t('intro.areas.describe', { button: iD.ui.intro.icon('#icon-apply', 'pre-text') }));
             context.on('exit.intro', event.done);
         }
     };

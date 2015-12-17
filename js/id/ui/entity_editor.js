@@ -1,6 +1,9 @@
 iD.ui.EntityEditor = function(context) {
-    var event = d3.dispatch('choose'),
+    var dispatch = d3.dispatch('choose'),
         state = 'select',
+        coalesceChanges = false,
+        modified = false,
+        base,
         id,
         preset,
         reference;
@@ -18,18 +21,21 @@ iD.ui.EntityEditor = function(context) {
             .data([0]);
 
         // Enter
-
         var $enter = $header.enter().append('div')
             .attr('class', 'header fillL cf');
 
         $enter.append('button')
+            .attr('class', 'fl preset-reset preset-choose')
+            .append('span')
+            .html('&#9668;');
+
+        $enter.append('button')
             .attr('class', 'fr preset-close')
-            .call(iD.svg.Icon('#icon-close'));
+            .call(iD.svg.Icon(modified ? '#icon-apply' : '#icon-close'));
 
         $enter.append('h3');
 
         // Update
-
         $header.select('h3')
             .text(t('inspector.edit'));
 
@@ -42,7 +48,6 @@ iD.ui.EntityEditor = function(context) {
             .data([0]);
 
         // Enter
-
         $enter = $body.enter().append('div')
             .attr('class', 'inspector-body');
 
@@ -78,11 +83,10 @@ iD.ui.EntityEditor = function(context) {
 
         selection.selectAll('.preset-reset')
             .on('click', function() {
-                event.choose(preset);
+                dispatch.choose(preset);
             });
 
         // Update
-
         $body.select('.preset-list-item button')
             .call(iD.ui.PresetIcon()
                 .geometry(context.geometry(id))
@@ -121,9 +125,15 @@ iD.ui.EntityEditor = function(context) {
 
         function historyChanged() {
             if (state === 'hide') return;
+
             var entity = context.hasEntity(id);
             if (!entity) return;
+
             entityEditor.preset(context.presets().match(entity, context.graph()));
+
+            var head = context.history().difference();
+            entityEditor.modified(base && !_.isEqual(base.changes(), head.changes()));
+
             entityEditor(selection);
         }
 
@@ -175,16 +185,30 @@ iD.ui.EntityEditor = function(context) {
         return out;
     }
 
-    function changeTags(changed) {
+    // Tag changes that fire on input can all get coalesced into a single
+    // history operation when the user leaves the field.  #2342
+    function changeTags(changed, onInput) {
         var entity = context.entity(id),
+            annotation = t('operations.change_tags.annotation'),
             tags = clean(_.extend({}, entity.tags, changed));
 
         if (!_.isEqual(entity.tags, tags)) {
-            context.perform(
-                iD.actions.ChangeTags(id, tags),
-                t('operations.change_tags.annotation'));
+            if (coalesceChanges) {
+                context.overwrite(iD.actions.ChangeTags(id, tags), annotation);
+            } else {
+                context.perform(iD.actions.ChangeTags(id, tags), annotation);
+            }
         }
+
+        coalesceChanges = !!onInput;
     }
+
+    entityEditor.modified = function(_) {
+        if (!arguments.length) return modified;
+        modified = _;
+        d3.selectAll('button.preset-close use')
+            .attr('xlink:href', (modified ? '#icon-apply' : '#icon-close'));
+    };
 
     entityEditor.state = function(_) {
         if (!arguments.length) return state;
@@ -196,6 +220,9 @@ iD.ui.EntityEditor = function(context) {
         if (!arguments.length) return id;
         id = _;
         entityEditor.preset(context.presets().match(context.entity(id), context.graph()));
+        entityEditor.modified(false);
+        base = context.history().difference();
+        coalesceChanges = false;
         return entityEditor;
     };
 
@@ -209,5 +236,5 @@ iD.ui.EntityEditor = function(context) {
         return entityEditor;
     };
 
-    return d3.rebind(entityEditor, event, 'on');
+    return d3.rebind(entityEditor, dispatch, 'on');
 };

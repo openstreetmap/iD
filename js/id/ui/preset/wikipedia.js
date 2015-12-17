@@ -1,11 +1,9 @@
 iD.ui.preset.wikipedia = function(field, context) {
-
-    var event = d3.dispatch('change'),
+    var dispatch = d3.dispatch('change'),
         wikipedia = iD.wikipedia(),
         link, entity, lang, title;
 
     function i(selection) {
-
         var langcombo = d3.combobox()
             .fetcher(function(value, cb) {
                 var v = value.toLowerCase();
@@ -109,7 +107,7 @@ iD.ui.preset.wikipedia = function(field, context) {
 
         var t = {};
         t[field.key] = value ? language()[2] + ':' + value : undefined;
-        event.change(t);
+        dispatch.change(t);
     }
 
     i.tags = function(tags) {
@@ -148,5 +146,5 @@ iD.ui.preset.wikipedia = function(field, context) {
         title.node().focus();
     };
 
-    return d3.rebind(i, event, 'on');
+    return d3.rebind(i, dispatch, 'on');
 };

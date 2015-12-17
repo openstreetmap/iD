@@ -1,6 +1,6 @@
 iD.ui.preset.check =
 iD.ui.preset.defaultcheck = function(field) {
-    var event = d3.dispatch('change'),
+    var dispatch = d3.dispatch('change'),
         options = field.strings && field.strings.options,
         values = [],
         texts = [],
@@ -53,7 +53,7 @@ iD.ui.preset.defaultcheck = function(field) {
             .on('click', function() {
                 var t = {};
                 t[field.key] = values[(values.indexOf(value) + 1) % values.length];
-                event.change(t);
+                dispatch.change(t);
                 d3.event.stopPropagation();
             });
 
@@ -78,5 +78,5 @@ iD.ui.preset.defaultcheck = function(field) {
         box.node().focus();
     };
 
-    return d3.rebind(check, event, 'on');
+    return d3.rebind(check, dispatch, 'on');
 };

@@ -1,9 +1,7 @@
 iD.ui.intro = function(context) {
-
     var step;
 
     function intro(selection) {
-
         context.enter(iD.modes.Browse(context));
 
         // Save current map state
@@ -17,6 +15,9 @@ iD.ui.intro = function(context) {
             baseEntities = context.history().graph().base().entities,
             introGraph;
 
+        // Block saving
+        context.inIntro(true);
+
         // Load semi-real data used in intro
         context.connection().toggle(false).flush();
         context.history().reset();
@@ -27,12 +28,6 @@ iD.ui.intro = function(context) {
         }
         context.history().merge(d3.values(iD.Graph().load(introGraph).entities));
         context.background().bing();
-
-        // Block saving
-        var savebutton = d3.select('#bar button.save'),
-            save = savebutton.on('click');
-        savebutton.on('click', null);
-        context.inIntro(true);
 
         d3.select('.background-layer').style('opacity', 1);
 
@@ -67,7 +62,6 @@ iD.ui.intro = function(context) {
             context.map().centerZoom(center, zoom);
             window.location.replace(hash);
             context.inIntro(false);
-            d3.select('#bar button.save').on('click', save);
         });
 
         var navwrap = selection.append('div').attr('class', 'intro-nav-wrap fillD');
@@ -135,4 +129,9 @@ iD.ui.intro.pad = function(box, padding, context) {
         width: (box.width || 0) + 2 * padding,
         height: (box.width || 0) + 2 * padding
     };
+};
+
+iD.ui.intro.icon = function(name, svgklass) {
+    return '<svg class="icon ' + (svgklass || '') + '">' +
+        '<use xlink:href="' + name + '"></use></svg>';
 };

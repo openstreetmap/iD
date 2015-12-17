@@ -1,6 +1,5 @@
 iD.ui.preset.maxspeed = function(field, context) {
-
-    var event = d3.dispatch('change'),
+    var dispatch = d3.dispatch('change'),
         entity,
         imperial,
         unitInput,
@@ -81,7 +80,7 @@ iD.ui.preset.maxspeed = function(field, context) {
             tag[field.key] = value + ' mph';
         }
 
-        event.change(tag);
+        dispatch.change(tag);
     }
 
     maxspeed.tags = function(tags) {
@@ -107,5 +106,5 @@ iD.ui.preset.maxspeed = function(field, context) {
         entity = _;
     };
 
-    return d3.rebind(maxspeed, event, 'on');
+    return d3.rebind(maxspeed, dispatch, 'on');
 };

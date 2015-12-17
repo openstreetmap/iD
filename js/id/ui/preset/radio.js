@@ -1,6 +1,5 @@
 iD.ui.preset.radio = function(field) {
-
-    var event = d3.dispatch('change'),
+    var dispatch = d3.dispatch('change'),
         labels, radios, placeholder;
 
     function radio(selection) {
@@ -46,7 +45,7 @@ iD.ui.preset.radio = function(field) {
                 t[d] = active ? 'yes' : undefined;
             }
         });
-        event.change(t);
+        dispatch.change(t);
     }
 
     radio.tags = function(tags) {
@@ -72,5 +71,5 @@ iD.ui.preset.radio = function(field) {
         radios.node().focus();
     };
 
-    return d3.rebind(radio, event, 'on');
+    return d3.rebind(radio, dispatch, 'on');
 };
