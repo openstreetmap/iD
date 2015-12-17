@@ -145,6 +145,10 @@ iD.modes.Select = function(context, selectedIDs) {
             }
         }
 
+        function ret() {
+            context.enter(iD.modes.Browse(context));
+        }
+
 
         behaviors.forEach(function(behavior) {
             context.install(behavior);
@@ -157,7 +161,8 @@ iD.modes.Select = function(context, selectedIDs) {
         operations.unshift(iD.operations.Delete(selectedIDs, context));
 
         keybinding
-            .on('⎋', function() { context.enter(iD.modes.Browse(context)); }, true)
+            .on('⎋', ret, true)
+            .on('↩', ret, true)
             .on('space', toggleMenu);
 
         operations.forEach(function(operation) {
