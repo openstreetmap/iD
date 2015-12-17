@@ -726,7 +726,7 @@ en:
       "wrong_preset": "You didn't select the Residential road type. **Click here to choose again**"
     startediting:
       title: "Start Editing"
-      help: "More documentation and this walkthrough are available here."
+      help: "You can replay this walkthrough or view more documentation by clicking the {button} Help button."
       save: "Don't forget to regularly save your changes!"
       start: "Start mapping!"
 

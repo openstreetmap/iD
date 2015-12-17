@@ -12,15 +12,16 @@ iD.ui.intro.startEditing = function(context, reveal) {
     }
 
     step.enter = function() {
-        reveal('.map-control.help-control', t('intro.startediting.help'));
+        reveal('.map-control.help-control',
+            t('intro.startediting.help', { button: iD.ui.intro.icon('#icon-help', 'pre-text') }));
 
         timeout(function() {
             reveal('#bar button.save', t('intro.startediting.save'));
-        }, 3500);
+        }, 5000);
 
         timeout(function() {
             reveal('#surface');
-        }, 7000);
+        }, 10000);
 
         timeout(function() {
             modal = iD.ui.modal(context.container());
@@ -35,7 +36,7 @@ iD.ui.intro.startEditing = function(context, reveal) {
                     .append('button')
                         .attr('class', 'modal-section huge-modal-button')
                         .on('click', function() {
-                                modal.remove();
+                            modal.remove();
                         });
 
                 startbutton.append('div')
@@ -44,7 +45,7 @@ iD.ui.intro.startEditing = function(context, reveal) {
                     .text(t('intro.startediting.start'));
 
             event.startEditing();
-        }, 7500);
+        }, 10500);
     };
 
     step.exit = function() {
