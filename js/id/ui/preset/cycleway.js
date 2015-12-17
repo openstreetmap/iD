@@ -1,5 +1,5 @@
 iD.ui.preset.cycleway = function(field) {
-    var event = d3.dispatch('change'),
+    var dispatch = d3.dispatch('change'),
         items;
 
     function cycleway(selection) {
@@ -67,7 +67,7 @@ iD.ui.preset.cycleway = function(field) {
             };
         }
 
-        event.change(tag);
+        dispatch.change(tag);
     }
 
     cycleway.options = function() {
@@ -96,5 +96,5 @@ iD.ui.preset.cycleway = function(field) {
             .node().focus();
     };
 
-    return d3.rebind(cycleway, event, 'on');
+    return d3.rebind(cycleway, dispatch, 'on');
 };

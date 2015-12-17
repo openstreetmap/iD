@@ -1,6 +1,6 @@
 iD.ui.preset.combo =
 iD.ui.preset.typeCombo = function(field, context) {
-    var event = d3.dispatch('change'),
+    var dispatch = d3.dispatch('change'),
         optstrings = field.strings && field.strings.options,
         optarray = field.options,
         snake_case = (field.snake_case || (field.snake_case === undefined)),
@@ -98,7 +98,7 @@ iD.ui.preset.typeCombo = function(field, context) {
 
         var t = {};
         t[field.key] = value || undefined;
-        event.change(t);
+        dispatch.change(t);
     }
 
     combo.tags = function(tags) {
@@ -119,5 +119,5 @@ iD.ui.preset.typeCombo = function(field, context) {
         input.node().focus();
     };
 
-    return d3.rebind(combo, event, 'on');
+    return d3.rebind(combo, dispatch, 'on');
 };

@@ -4,7 +4,7 @@ iD.ui.preset.tel =
 iD.ui.preset.email =
 iD.ui.preset.url = function(field) {
 
-    var event = d3.dispatch('change'),
+    var dispatch = d3.dispatch('change'),
         input;
 
     function i(selection) {
@@ -17,8 +17,9 @@ iD.ui.preset.url = function(field) {
             .attr('placeholder', field.placeholder() || t('inspector.unknown'));
 
         input
-            .on('blur', change)
-            .on('change', change);
+            .on('input', change(true))
+            .on('blur', change())
+            .on('change', change());
 
         if (field.type === 'number') {
             input.attr('type', 'text');
@@ -42,15 +43,17 @@ iD.ui.preset.url = function(field) {
                     d3.event.preventDefault();
                     var num = parseInt(input.node().value || 0, 10);
                     if (!isNaN(num)) input.node().value = num + d;
-                    change();
+                    change()();
                 });
         }
     }
 
-    function change() {
-        var t = {};
-        t[field.key] = input.value() || undefined;
-        event.change(t);
+    function change(onInput) {
+        return function() {
+            var t = {};
+            t[field.key] = input.value() || undefined;
+            dispatch.change(t, onInput);
+        };
     }
 
     i.tags = function(tags) {
@@ -61,5 +64,5 @@ iD.ui.preset.url = function(field) {
         input.node().focus();
     };
 
-    return d3.rebind(i, event, 'on');
+    return d3.rebind(i, dispatch, 'on');
 };

@@ -1,5 +1,5 @@
 iD.ui.preset.restrictions = function(field, context) {
-    var event = d3.dispatch('change'),
+    var dispatch = d3.dispatch('change'),
         vertexID,
         fromNodeID;
 
@@ -136,5 +136,5 @@ iD.ui.preset.restrictions = function(field, context) {
     restrictions.tags = function() {};
     restrictions.focus = function() {};
 
-    return d3.rebind(restrictions, event, 'on');
+    return d3.rebind(restrictions, dispatch, 'on');
 };

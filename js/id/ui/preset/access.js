@@ -1,5 +1,5 @@
 iD.ui.preset.access = function(field) {
-    var event = d3.dispatch('change'),
+    var dispatch = d3.dispatch('change'),
         items;
 
     function access(selection) {
@@ -45,7 +45,7 @@ iD.ui.preset.access = function(field) {
     function change(d) {
         var tag = {};
         tag[d] = d3.select(this).value() || undefined;
-        event.change(tag);
+        dispatch.change(tag);
     }
 
     access.options = function(type) {
@@ -192,5 +192,5 @@ iD.ui.preset.access = function(field) {
             .node().focus();
     };
 
-    return d3.rebind(access, event, 'on');
+    return d3.rebind(access, dispatch, 'on');
 };

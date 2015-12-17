@@ -1,6 +1,5 @@
 iD.ui.preset.localized = function(field, context) {
-
-    var event = d3.dispatch('change'),
+    var dispatch = d3.dispatch('change', 'input'),
         wikipedia = iD.wikipedia(),
         input, localizedInputs, wikiTitles,
         entity;
@@ -23,8 +22,9 @@ iD.ui.preset.localized = function(field, context) {
         }
 
         input
-            .on('blur', change)
-            .on('change', change);
+            .on('input', change(true))
+            .on('blur', change())
+            .on('change', change());
 
         var translateButton = selection.selectAll('.localized-add')
             .data([0]);
@@ -54,10 +54,12 @@ iD.ui.preset.localized = function(field, context) {
         localizedInputs.call(render, data);
     }
 
-    function change() {
-        var t = {};
-        t[field.key] = d3.select(this).value() || undefined;
-        event.change(t);
+    function change(onInput) {
+        return function() {
+            var t = {};
+            t[field.key] = d3.select(this).value() || undefined;
+            dispatch.change(t, onInput);
+        };
     }
 
     function key(lang) { return field.key + ':' + lang; }
@@ -87,14 +89,14 @@ iD.ui.preset.localized = function(field, context) {
         }
 
         d.lang = lang;
-        event.change(t);
+        dispatch.change(t);
     }
 
     function changeValue(d) {
         if (!d.lang) return;
         var t = {};
         t[key(d.lang)] = d3.select(this).value() || undefined;
-        event.change(t);
+        dispatch.change(t);
     }
 
     function fetcher(value, cb) {
@@ -132,7 +134,7 @@ iD.ui.preset.localized = function(field, context) {
                         d3.event.preventDefault();
                         var t = {};
                         t[key(d.lang)] = undefined;
-                        event.change(t);
+                        dispatch.change(t);
                         d3.select(this.parentNode.parentNode)
                             .style('top','0')
                             .style('max-height','240px')
@@ -195,7 +197,6 @@ iD.ui.preset.localized = function(field, context) {
     }
 
     i.tags = function(tags) {
-
         // Fetch translations from wikipedia
         if (tags.wikipedia && !wikiTitles) {
             wikiTitles = {};
@@ -228,5 +229,5 @@ iD.ui.preset.localized = function(field, context) {
         entity = _;
     };
 
-    return d3.rebind(i, event, 'on');
+    return d3.rebind(i, dispatch, 'on');
 };
