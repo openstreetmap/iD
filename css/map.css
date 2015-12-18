@@ -43,12 +43,6 @@ path.shadow {
     pointer-events: stroke;
 }
 
-.shadow {
-    -webkit-transition: 200ms;
-       -moz-transition: 200ms;
-            transition: 200ms;
-}
-
 /* points */
 
 g.point .stroke {
