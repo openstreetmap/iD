@@ -58,6 +58,13 @@ iD.taginfo = function() {
         };
     }
 
+    // sort keys with ':' lower than keys without ':'
+    function sortKeys(a, b) {
+        return (a.key.indexOf(':') === -1 && b.key.indexOf(':') !== -1) ? -1
+            : (a.key.indexOf(':') !== -1 && b.key.indexOf(':') === -1) ? 1
+            : 0;
+    }
+
     var debounced = _.debounce(d3.json, 100, true);
 
     function request(url, debounce, callback) {
@@ -86,7 +93,7 @@ iD.taginfo = function() {
                 page: 1
             }, parameters)), debounce, function(err, d) {
                 if (err) return callback(err);
-                callback(null, d.data.filter(popularKeys(parameters)).map(valKey));
+                callback(null, d.data.filter(popularKeys(parameters)).sort(sortKeys).map(valKey));
             });
     };
 

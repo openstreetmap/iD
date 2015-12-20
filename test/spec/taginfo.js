@@ -55,6 +55,20 @@ describe("iD.taginfo", function() {
 
             expect(callback).to.have.been.calledWith(null, [{"value":"amenity"}]);
         });
+
+        it("sorts keys with ':' below keys without ':'", function() {
+            var callback = sinon.spy();
+
+            taginfo.keys({query: "ref"}, callback);
+
+            server.respondWith("GET", new RegExp("https://taginfo.openstreetmap.org/api/4/keys/all"),
+                [200, { "Content-Type": "application/json" },
+                    '{"data":[{"key":"ref:bag","count_all":9790586,"count_all_fraction":0.0028},\
+                              {"key":"ref","count_all":7933528,"count_all_fraction":0.0023}]}']);
+            server.respond();
+
+            expect(callback).to.have.been.calledWith(null, [{"value":"ref"},{"value":"ref:bag"}]);
+        });
     });
 
     describe("#values", function() {
