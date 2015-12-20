@@ -39,8 +39,15 @@ iD.ui.FeatureList = function(context) {
         var list = listWrap.append('div')
             .attr('class', 'feature-list cf');
 
+        context
+            .on('exit.feature-list', clearSearch);
         context.map()
             .on('drawn.feature-list', mapDrawn);
+
+        function clearSearch() {
+            search.property('value', '');
+            drawList();
+        }
 
         function mapDrawn(e) {
             if (e.full) {
