@@ -1680,7 +1680,7 @@
                 "name": "Dentist",
                 "terms": "tooth,teeth"
             },
-            "amenity/doctor": {
+            "amenity/doctors": {
                 "name": "Doctor",
                 "terms": "medic*"
             },

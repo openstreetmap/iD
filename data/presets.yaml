@@ -1298,7 +1298,7 @@ en:
         name: Dentist
         # 'terms: tooth,teeth'
         terms: "<translate with synonyms or related terms for 'Dentist', separated by commas>"
-      amenity/doctor:
+      amenity/doctors:
         # amenity=doctors
         name: Doctor
         # 'terms: medic*'

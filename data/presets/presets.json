@@ -868,7 +868,7 @@
         },
         "name": "Dentist"
     },
-    "amenity/doctor": {
+    "amenity/doctors": {
         "icon": "hospital",
         "fields": [
             "address",
