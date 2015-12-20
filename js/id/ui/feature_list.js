@@ -223,7 +223,7 @@ iD.ui.FeatureList = function(context) {
                 context.map().centerZoom([d.location[1], d.location[0]], 20);
             }
             else if (d.entity) {
-                context.enter(iD.modes.Select(context, [d.entity.id]));
+                context.enter(iD.modes.Select(context, [d.entity.id]).suppressMenu(true));
             } else {
                 context.zoomToEntity(d.id);
             }
