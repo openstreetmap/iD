@@ -10,15 +10,10 @@ iD.ui.intro.navigation = function(context, reveal) {
         timeouts.push(window.setTimeout(f, t));
     }
 
-    /*
-     * Steps:
-     * Drag map
-     * Select poi
-     * Show editor header
-     * Show editor pane
-     * Select road
-     * Show header
-     */
+    function eventCancel() {
+        d3.event.stopPropagation();
+        d3.event.preventDefault();
+    }
 
     step.enter = function() {
         var rect = context.surfaceRect(),
@@ -64,16 +59,48 @@ iD.ui.intro.navigation = function(context, reveal) {
             set(function() {
                 reveal('.entity-editor-pane',
                     t('intro.navigation.pane', { button: iD.ui.intro.icon('#icon-close', 'pre-text') }));
-                context.on('exit.intro', event.done);
+                context.on('exit.intro', streetSearch);
             }, 700);
+        }
+
+        function streetSearch() {
+            context.on('exit.intro', null);
+            reveal('.search-header input', t('intro.navigation.search'));
+            d3.select('.search-header input').on('keyup.intro', searchResult);
+        }
+
+        function searchResult() {
+            var first = d3.select('.feature-list-item:nth-child(0n+2)'),  // skip No Results item
+                firstName = first.select('.entity-name');
+
+            if (!firstName.empty() && firstName.text() === 'Spring Street') {
+                reveal(first.node(), t('intro.navigation.choose'));
+                context.on('exit.intro', selectedStreet);
+                d3.select('.search-header input')
+                    .on('keydown.intro', eventCancel, true)
+                    .on('keyup.intro', null);
+            }
+        }
+
+        function selectedStreet() {
+            var springSt = [-85.63585099140167, 41.942506848938926];
+            context.map().center(springSt);
+            context.on('exit.intro', event.done);
+            set(function() {
+                reveal('.entity-editor-pane',
+                    t('intro.navigation.chosen', { button: iD.ui.intro.icon('#icon-close', 'pre-text') }));
+            }, 400);
         }
     };
 
     step.exit = function() {
+        timeouts.forEach(window.clearTimeout);
         context.map().on('move.intro', null);
         context.on('enter.intro', null);
         context.on('exit.intro', null);
-        timeouts.forEach(window.clearTimeout);
+        d3.select('.search-header input')
+            .on('keydown.intro', null)
+            .on('keyup.intro', null);
     };
 
     return d3.rebind(step, event, 'on');

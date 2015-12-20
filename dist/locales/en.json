@@ -515,8 +515,10 @@
             "title": "Navigation",
             "drag": "The main map area shows OpenStreetMap data on top of a background. You can navigate by dragging and scrolling, just like any web map. **Drag the map!**",
             "select": "Map features are represented three ways: using points, lines or areas. All features can be selected by clicking on them. **Click on the point to select it.**",
-            "header": "The header shows us the feature type.",
-            "pane": "When a feature is selected, the feature editor is displayed. The header shows us the feature type and the main pane shows the feature's attributes, such as its name and address. **Close the feature editor by pressing the {button} button in the top right.**"
+            "pane": "When a feature is selected, the feature editor is displayed. The header shows us the feature type and the main pane shows the feature's attributes, such as its name and address. **Close the feature editor by pressing the {button} button in the top right.**",
+            "search": "You can also search for features in the current view, or worldwide. **Search for Spring Street**",
+            "choose": "**Choose Spring Street from the list to select it.**",
+            "chosen": "Spring Street is now selected. **Close the feature editor by pressing the {button} button.**"
         },
         "points": {
             "title": "Points",
