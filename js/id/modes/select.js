@@ -27,7 +27,7 @@ iD.modes.Select = function(context, selectedIDs) {
 
     function singular() {
         if (selectedIDs.length === 1) {
-            return context.entity(selectedIDs[0]);
+            return context.hasEntity(selectedIDs[0]);
         }
     }
 
