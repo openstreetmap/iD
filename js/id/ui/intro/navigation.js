@@ -65,16 +65,18 @@ iD.ui.intro.navigation = function(context, reveal) {
 
         function streetSearch() {
             context.on('exit.intro', null);
-            reveal('.search-header input', t('intro.navigation.search'));
+            reveal('.search-header input',
+                t('intro.navigation.search', { name: t('intro.graph.spring_st') }));
             d3.select('.search-header input').on('keyup.intro', searchResult);
         }
 
         function searchResult() {
             var first = d3.select('.feature-list-item:nth-child(0n+2)'),  // skip No Results item
-                firstName = first.select('.entity-name');
+                firstName = first.select('.entity-name'),
+                name = t('intro.graph.spring_st');
 
-            if (!firstName.empty() && firstName.text() === 'Spring Street') {
-                reveal(first.node(), t('intro.navigation.choose'));
+            if (!firstName.empty() && firstName.text() === name) {
+                reveal(first.node(), t('intro.navigation.choose', { name: name }));
                 context.on('exit.intro', selectedStreet);
                 d3.select('.search-header input')
                     .on('keydown.intro', eventCancel, true)
@@ -88,7 +90,10 @@ iD.ui.intro.navigation = function(context, reveal) {
             context.on('exit.intro', event.done);
             set(function() {
                 reveal('.entity-editor-pane',
-                    t('intro.navigation.chosen', { button: iD.ui.intro.icon('#icon-close', 'pre-text') }));
+                    t('intro.navigation.chosen', {
+                        name: t('intro.graph.spring_st'),
+                        button: iD.ui.intro.icon('#icon-close', 'pre-text')
+                    }));
             }, 400);
         }
     };

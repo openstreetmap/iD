@@ -511,14 +511,44 @@
         "relations": "# Relations\n\nA relation is a special type of feature in OpenStreetMap that groups together\nother features. For example, two common types of relations are *route relations*,\nwhich group together sections of road that belong to a specific freeway or\nhighway, and *multipolygons*, which group together several lines that define\na complex area (one with several pieces or holes in it like a donut).\n\nThe group of features in a relation are called *members*. In the sidebar, you can\nsee which relations a feature is a member of, and click on a relation there\nto select the it. When the relation is selected, you can see all of its\nmembers listed in the sidebar and highlighted on the map.\n\nFor the most part, iD will take care of maintaining relations automatically\nwhile you edit. The main thing you should be aware of is that if you delete a\nsection of road to redraw it more accurately, you should make sure that the\nnew section is a member of the same relations as the original.\n\n## Editing Relations\n\nIf you want to edit relations, here are the basics.\n\nTo add a feature to a relation, select the feature, click the \"+\" button in the\n\"All relations\" section of the sidebar, and select or type the name of the relation.\n\nTo create a new relation, select the first feature that should be a member,\nclick the \"+\" button in the \"All relations\" section, and select \"New relation...\".\n\nTo remove a feature from a relation, select the feature and click the trash\nbutton next to the relation you want to remove it from.\n\nYou can create multipolygons with holes using the \"Merge\" tool. Draw two areas (inner\nand outer), hold the Shift key and click on each of them to select them both, and then\nclick the \"Merge\" (+) button.\n"
     },
     "intro": {
+        "graph": {
+            "city_hall": "Three Rivers City Hall",
+            "fire_department": "Three Rivers Fire Department",
+            "memory_isle_park": "Memory Isle Park",
+            "riverwalk_trail": "Riverwalk Trail",
+            "w_michigan_ave": "West Michigan Avenue",
+            "e_michigan_ave": "East Michigan Avenue",
+            "spring_st": "Spring Street",
+            "scidmore_park": "Scidmore Park",
+            "petting_zoo": "Scidmore Park Petting Zoo",
+            "n_andrews_st": "North Andrews Street",
+            "s_andrews_st": "South Andrews Street",
+            "n_constantine_st": "North Constantine Street",
+            "s_constantine_st": "South Constantine Street",
+            "rocky_river": "Rocky River",
+            "railroad_dr": "Railroad Drive",
+            "conrail_rr": "Conrail Railroad",
+            "st_joseph_river": "Saint Joseph River",
+            "n_main_st": "North Main Street",
+            "s_main_st": "South Main Street",
+            "water_st": "Water Street",
+            "foster_st": "Foster Street",
+            "portage_river": "Portage River",
+            "flower_st": "Flower Street",
+            "elm_st": "Elm Street",
+            "walnut_st": "Walnut Street",
+            "morris_ave": "Morris Avenue",
+            "east_st": "East Street",
+            "portage_ave": "Portage Avenue"
+        },
         "navigation": {
             "title": "Navigation",
             "drag": "The main map area shows OpenStreetMap data on top of a background. You can navigate by dragging and scrolling, just like any web map. **Drag the map!**",
             "select": "Map features are represented three ways: using points, lines or areas. All features can be selected by clicking on them. **Click on the point to select it.**",
             "pane": "When a feature is selected, the feature editor is displayed. The header shows us the feature type and the main pane shows the feature's attributes, such as its name and address. **Close the feature editor by pressing the {button} button in the top right.**",
-            "search": "You can also search for features in the current view, or worldwide. **Search for Spring Street**",
-            "choose": "**Choose Spring Street from the list to select it.**",
-            "chosen": "Spring Street is now selected. **Close the feature editor by pressing the {button} button.**"
+            "search": "You can also search for features in the current view, or worldwide. **Search for '{name}'**",
+            "choose": "**Choose {name} from the list to select it.**",
+            "chosen": "Great! {name} is now selected. **Close the feature editor by pressing the {button} button.**"
         },
         "points": {
             "title": "Points",
@@ -546,12 +576,12 @@
             "title": "Lines",
             "add": "Lines are used to represent features such as roads, railroads, and rivers. **Click the {button} Line button to add a new line.**",
             "start": "**Start the line by clicking on the end of the road.**",
-            "intersect": "Click to add more nodes to the line. You can drag the map while drawing if necessary. Roads, and many other types of lines, are part of a larger network. It is important for these lines to be connected properly in order for routing applications to work. **Click on Flower Street, to create an intersection connecting the two lines.**",
+            "intersect": "Click to add more nodes to the line. You can drag the map while drawing if necessary. Roads, and many other types of lines, are part of a larger network. It is important for these lines to be connected properly in order for routing applications to work. **Click on {name} to create an intersection connecting the two lines.**",
             "finish": "Lines can be finished by clicking on the last node again. **Finish drawing the road.**",
             "road": "**Select Road from the list**",
             "residential": "There are different types of roads, the most common of which is Residential. **Choose the Residential road type**",
             "describe": "**Name the road, then click the {button} button to close the feature editor.**",
-            "restart": "The road needs to intersect Flower Street.",
+            "restart": "The road needs to intersect {name}.",
             "wrong_preset": "You didn't select the Residential road type. **Click here to choose again**"
         },
         "startediting": {

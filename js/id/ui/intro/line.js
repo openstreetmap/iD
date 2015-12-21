@@ -45,12 +45,12 @@ iD.ui.intro.line = function(context, reveal) {
 
             var padding = 300 * Math.pow(2, context.map().zoom() - 19);
             var pointBox = iD.ui.intro.pad(midpoint, padding, context);
-            reveal(pointBox, t('intro.lines.intersect'));
+            reveal(pointBox, t('intro.lines.intersect', {name: t('intro.graph.flower_st')}));
 
             context.map().on('move.intro', function() {
                 padding = 300 * Math.pow(2, context.map().zoom() - 19);
                 pointBox = iD.ui.intro.pad(midpoint, padding, context);
-                reveal(pointBox, t('intro.lines.intersect'), {duration: 0});
+                reveal(pointBox, t('intro.lines.intersect', {name: t('intro.graph.flower_st')}), {duration: 0});
             });
         }
 
@@ -58,7 +58,7 @@ iD.ui.intro.line = function(context, reveal) {
         function retry(mode) {
             if (mode.id !== 'select') return;
             var pointBox = iD.ui.intro.pad(intersection, 30, context);
-            reveal(pointBox, t('intro.lines.restart'));
+            reveal(pointBox, t('intro.lines.restart', {name: t('intro.graph.flower_st')}));
             timeout(function() {
                 context.replace(iD.actions.DeleteMultiple(mode.selectedIDs()));
                 step.exit();

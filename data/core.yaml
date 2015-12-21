@@ -687,14 +687,43 @@ en:
       and outer), hold the Shift key and click on each of them to select them both, and then
       click the "Merge" (+) button.
   intro:
+    graph:
+      city_hall: Three Rivers City Hall
+      fire_department: Three Rivers Fire Department
+      memory_isle_park: Memory Isle Park
+      riverwalk_trail: Riverwalk Trail
+      w_michigan_ave: West Michigan Avenue
+      e_michigan_ave: East Michigan Avenue
+      spring_st: Spring Street
+      scidmore_park: Scidmore Park
+      petting_zoo: Scidmore Park Petting Zoo
+      n_andrews_st: North Andrews Street
+      s_andrews_st: South Andrews Street
+      n_constantine_st: North Constantine Street
+      s_constantine_st: South Constantine Street
+      rocky_river: Rocky River
+      railroad_dr: Railroad Drive
+      conrail_rr: Conrail Railroad
+      st_joseph_river: Saint Joseph River
+      n_main_st: North Main Street
+      s_main_st: South Main Street
+      water_st: Water Street
+      foster_st: Foster Street
+      portage_river: Portage River
+      flower_st: Flower Street
+      elm_st: Elm Street
+      walnut_st: Walnut Street
+      morris_ave: Morris Avenue
+      east_st: East Street
+      portage_ave: Portage Avenue
     navigation:
       title: "Navigation"
       drag: "The main map area shows OpenStreetMap data on top of a background. You can navigate by dragging and scrolling, just like any web map. **Drag the map!**"
       select: "Map features are represented three ways: using points, lines or areas. All features can be selected by clicking on them. **Click on the point to select it.**"
       pane: "When a feature is selected, the feature editor is displayed. The header shows us the feature type and the main pane shows the feature's attributes, such as its name and address. **Close the feature editor by pressing the {button} button in the top right.**"
-      search: "You can also search for features in the current view, or worldwide. **Search for Spring Street**"
-      choose: "**Choose Spring Street from the list to select it.**"
-      chosen: "Spring Street is now selected. **Close the feature editor by pressing the {button} button.**"
+      search: "You can also search for features in the current view, or worldwide. **Search for '{name}'**"
+      choose: "**Choose {name} from the list to select it.**"
+      chosen: "Great! {name} is now selected. **Close the feature editor by pressing the {button} button.**"
     points:
       title: "Points"
       add: "Points can be used to represent features such as shops, restaurants, and monuments. They mark a specific location, and describe what's there. **Click the {button} Point button to add a new point.**"
@@ -719,12 +748,12 @@ en:
       title: "Lines"
       add: "Lines are used to represent features such as roads, railroads, and rivers. **Click the {button} Line button to add a new line.**"
       start: "**Start the line by clicking on the end of the road.**"
-      intersect: "Click to add more nodes to the line. You can drag the map while drawing if necessary. Roads, and many other types of lines, are part of a larger network. It is important for these lines to be connected properly in order for routing applications to work. **Click on Flower Street, to create an intersection connecting the two lines.**"
+      intersect: "Click to add more nodes to the line. You can drag the map while drawing if necessary. Roads, and many other types of lines, are part of a larger network. It is important for these lines to be connected properly in order for routing applications to work. **Click on {name} to create an intersection connecting the two lines.**"
       finish: "Lines can be finished by clicking on the last node again. **Finish drawing the road.**"
       road: "**Select Road from the list**"
       residential: "There are different types of roads, the most common of which is Residential. **Choose the Residential road type**"
       describe: "**Name the road, then click the {button} button to close the feature editor.**"
-      restart: "The road needs to intersect Flower Street."
+      restart: "The road needs to intersect {name}."
       "wrong_preset": "You didn't select the Residential road type. **Click here to choose again**"
     startediting:
       title: "Start Editing"
