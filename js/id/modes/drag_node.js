@@ -186,6 +186,7 @@ iD.modes.DragNode = function(context) {
     };
 
     mode.exit = function() {
+        context.ui().sidebar.hover.cancel();
         context.uninstall(hover);
         context.uninstall(edit);
 
