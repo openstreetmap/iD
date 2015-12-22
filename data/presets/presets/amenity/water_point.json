@@ -1,0 +1,11 @@
+{
+    "geometry": [
+        "area",
+        "vertex",
+        "point"
+    ],
+    "tags": {
+        "amenity": "water_point"
+    },
+    "name": "RV Drinking Water"
+}
