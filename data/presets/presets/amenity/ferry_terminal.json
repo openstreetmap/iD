@@ -1,4 +1,7 @@
 {
+    "fields":[
+       "operator"
+    ],
     "geometry": [
         "point",
         "vertex",
