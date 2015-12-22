@@ -1,4 +1,7 @@
 {
+    "fields":[
+        "operator"
+    ],
     "geometry": [
         "area",
         "vertex",
