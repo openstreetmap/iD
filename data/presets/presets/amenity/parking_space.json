@@ -1,0 +1,15 @@
+{
+    "fields": [
+        "capacity"
+    ],
+    "geometry": [
+        "point",
+        "vertex",
+        "area"
+    ],
+    "terms": [],
+    "tags": {
+        "amenity": "parking_space"
+    },
+    "name": "Parking Space"
+}
