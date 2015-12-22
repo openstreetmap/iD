@@ -1,0 +1,11 @@
+{
+    "geometry": [
+        "area",
+        "vertex",
+        "point"
+    ],
+    "tags": {
+        "waterway": "boatyard"
+    },
+    "name": "Boatyard"
+}
