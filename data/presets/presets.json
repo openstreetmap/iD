@@ -963,6 +963,21 @@
         ],
         "name": "Fast Food"
     },
+    "amenity/ferry_terminal": {
+        "fields": [
+            "operator"
+        ],
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "terms": [],
+        "tags": {
+            "amenity": "ferry_terminal"
+        },
+        "name": "Ferry Terminal"
+    },
     "amenity/fire_station": {
         "icon": "fire-station",
         "fields": [
@@ -1077,6 +1092,18 @@
             "amenity": "hospital"
         },
         "name": "Hospital Grounds"
+    },
+    "amenity/hunting_stand": {
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "terms": [],
+        "tags": {
+            "amenity": "hunting_stand"
+        },
+        "name": "Hunting Stand"
     },
     "amenity/kindergarten": {
         "icon": "school",
@@ -1213,6 +1240,21 @@
             "amenity": "parking_entrance"
         },
         "name": "Parking Garage Entrance/Exit"
+    },
+    "amenity/parking_space": {
+        "fields": [
+            "capacity"
+        ],
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "terms": [],
+        "tags": {
+            "amenity": "parking_space"
+        },
+        "name": "Parking Space"
     },
     "amenity/pharmacy": {
         "icon": "pharmacy",
@@ -2140,6 +2182,17 @@
             "garbage"
         ],
         "name": "Waste Basket"
+    },
+    "amenity/water_point": {
+        "geometry": [
+            "area",
+            "vertex",
+            "point"
+        ],
+        "tags": {
+            "amenity": "water_point"
+        },
+        "name": "RV Drinking Water"
     },
     "area": {
         "name": "Area",
@@ -10305,6 +10358,20 @@
         "searchable": false,
         "name": "Waterway"
     },
+    "waterway/boatyard": {
+        "fields": [
+            "operator"
+        ],
+        "geometry": [
+            "area",
+            "vertex",
+            "point"
+        ],
+        "tags": {
+            "waterway": "boatyard"
+        },
+        "name": "Boatyard"
+    },
     "waterway/canal": {
         "icon": "waterway-canal",
         "fields": [
@@ -10343,6 +10410,17 @@
             "waterway": "ditch"
         },
         "name": "Ditch"
+    },
+    "waterway/dock": {
+        "geometry": [
+            "area",
+            "vertex",
+            "point"
+        ],
+        "tags": {
+            "waterway": "dock"
+        },
+        "name": "Dock"
     },
     "waterway/drain": {
         "icon": "waterway-stream",
@@ -10487,6 +10565,17 @@
             "waterway": "stream"
         },
         "name": "Stream"
+    },
+    "waterway/water_point": {
+        "geometry": [
+            "area",
+            "vertex",
+            "point"
+        ],
+        "tags": {
+            "waterway": "water_point"
+        },
+        "name": "Marine Drinking Water"
     },
     "waterway/weir": {
         "icon": "dam",

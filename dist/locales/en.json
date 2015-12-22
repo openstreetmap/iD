@@ -1730,6 +1730,10 @@
                 "name": "Fast Food",
                 "terms": "restaurant"
             },
+            "amenity/ferry_terminal": {
+                "name": "Ferry Terminal",
+                "terms": ""
+            },
             "amenity/fire_station": {
                 "name": "Fire Station",
                 "terms": ""
@@ -1753,6 +1757,10 @@
             "amenity/hospital": {
                 "name": "Hospital Grounds",
                 "terms": "clinic,doctor,emergency room,health service,hospice,infirmary,institution,nursing home,sanatorium,sanitarium,sick,surgery,ward"
+            },
+            "amenity/hunting_stand": {
+                "name": "Hunting Stand",
+                "terms": ""
             },
             "amenity/kindergarten": {
                 "name": "Preschool/Kindergarten Grounds",
@@ -1780,6 +1788,10 @@
             },
             "amenity/parking_entrance": {
                 "name": "Parking Garage Entrance/Exit",
+                "terms": ""
+            },
+            "amenity/parking_space": {
+                "name": "Parking Space",
                 "terms": ""
             },
             "amenity/pharmacy": {
@@ -1949,6 +1961,10 @@
             "amenity/waste_basket": {
                 "name": "Waste Basket",
                 "terms": "rubbish,litter,trash,garbage"
+            },
+            "amenity/water_point": {
+                "name": "RV Drinking Water",
+                "terms": ""
             },
             "area": {
                 "name": "Area",
@@ -3934,6 +3950,10 @@
                 "name": "Waterway",
                 "terms": ""
             },
+            "waterway/boatyard": {
+                "name": "Boatyard",
+                "terms": ""
+            },
             "waterway/canal": {
                 "name": "Canal",
                 "terms": ""
@@ -3944,6 +3964,10 @@
             },
             "waterway/ditch": {
                 "name": "Ditch",
+                "terms": ""
+            },
+            "waterway/dock": {
+                "name": "Dock",
                 "terms": ""
             },
             "waterway/drain": {
@@ -3969,6 +3993,10 @@
             "waterway/stream": {
                 "name": "Stream",
                 "terms": "beck,branch,brook,burn,course,creek,current,drift,flood,flow,freshet,race,rill,rindle,rivulet,run,runnel,rush,spate,spritz,surge,tide,torrent,tributary,watercourse"
+            },
+            "waterway/water_point": {
+                "name": "Marine Drinking Water",
+                "terms": ""
             },
             "waterway/weir": {
                 "name": "Weir",

@@ -226,6 +226,10 @@
         },
         {
             "key": "amenity",
+            "value": "ferry_terminal"
+        },
+        {
+            "key": "amenity",
             "value": "fire_station"
         },
         {
@@ -247,6 +251,10 @@
         {
             "key": "amenity",
             "value": "hospital"
+        },
+        {
+            "key": "amenity",
+            "value": "hunting_stand"
         },
         {
             "key": "amenity",
@@ -275,6 +283,10 @@
         {
             "key": "amenity",
             "value": "parking_entrance"
+        },
+        {
+            "key": "amenity",
+            "value": "parking_space"
         },
         {
             "key": "amenity",
@@ -443,6 +455,10 @@
         {
             "key": "amenity",
             "value": "waste_basket"
+        },
+        {
+            "key": "amenity",
+            "value": "water_point"
         },
         {
             "key": "area",
@@ -2395,6 +2411,10 @@
         },
         {
             "key": "waterway",
+            "value": "boatyard"
+        },
+        {
+            "key": "waterway",
             "value": "canal"
         },
         {
@@ -2404,6 +2424,10 @@
         {
             "key": "waterway",
             "value": "ditch"
+        },
+        {
+            "key": "waterway",
+            "value": "dock"
         },
         {
             "key": "waterway",
@@ -2428,6 +2452,10 @@
         {
             "key": "waterway",
             "value": "stream"
+        },
+        {
+            "key": "waterway",
+            "value": "water_point"
         },
         {
             "key": "waterway",
