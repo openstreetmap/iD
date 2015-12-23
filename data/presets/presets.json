@@ -519,12 +519,15 @@
             "area"
         ],
         "terms": [
-            "bike"
+            "bike",
+            "repair",
+            "chain",
+            "pump"
         ],
         "tags": {
             "amenity": "bicycle_repair_station"
         },
-        "name": "Bicycle Repair Station"
+        "name": "Bicycle Repair Tool Stand"
     },
     "amenity/biergarten": {
         "icon": "beer",
@@ -7780,6 +7783,10 @@
         "geometry": [
             "point",
             "area"
+        ],
+        "terms": [
+            "bike",
+            "repair"
         ],
         "tags": {
             "shop": "bicycle"

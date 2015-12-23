@@ -1208,9 +1208,9 @@ en:
         terms: "<translate with synonyms or related terms for 'Bicycle Rental', separated by commas>"
       amenity/bicycle_repair_station:
         # amenity=bicycle_repair_station
-        name: Bicycle Repair Station
-        # 'terms: bike'
-        terms: "<translate with synonyms or related terms for 'Bicycle Repair Station', separated by commas>"
+        name: Bicycle Repair Tool Stand
+        # 'terms: bike,repair,chain,pump'
+        terms: "<translate with synonyms or related terms for 'Bicycle Repair Tool Stand', separated by commas>"
       amenity/biergarten:
         # amenity=biergarten
         name: Beer Garden
@@ -3090,6 +3090,7 @@ en:
       shop/bicycle:
         # shop=bicycle
         name: Bicycle Shop
+        # 'terms: bike,repair'
         terms: "<translate with synonyms or related terms for 'Bicycle Shop', separated by commas>"
       shop/bookmaker:
         # shop=bookmaker
