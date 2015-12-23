@@ -74,6 +74,8 @@ iD.behavior.Hash = function(context) {
     }
 
     hash.off = function() {
+        throttledUpdate.cancel();
+
         context.map()
             .on('move.hash', null);
 
