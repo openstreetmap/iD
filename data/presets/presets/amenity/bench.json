@@ -7,6 +7,9 @@
         "vertex",
         "line"
     ],
+    "terms": [
+        "seat"
+    ],
     "tags": {
         "amenity": "bench"
     },

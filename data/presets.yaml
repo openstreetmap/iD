@@ -1195,6 +1195,7 @@ en:
       amenity/bench:
         # amenity=bench
         name: Bench
+        # 'terms: seat'
         terms: "<translate with synonyms or related terms for 'Bench', separated by commas>"
       amenity/bicycle_parking:
         # amenity=bicycle_parking
@@ -1232,7 +1233,7 @@ en:
       amenity/cafe:
         # amenity=cafe
         name: Cafe
-        # 'terms: coffee,tea'
+        # 'terms: bistro,coffee,tea'
         terms: "<translate with synonyms or related terms for 'Cafe', separated by commas>"
       amenity/car_rental:
         # amenity=car_rental
@@ -1333,7 +1334,7 @@ en:
       amenity/fuel:
         # amenity=fuel
         name: Gas Station
-        # 'terms: petrol,fuel,propane,diesel,lng,cng,biodiesel'
+        # 'terms: petrol,fuel,gasoline,propane,diesel,lng,cng,biodiesel'
         terms: "<translate with synonyms or related terms for 'Gas Station', separated by commas>"
       amenity/grave_yard:
         # amenity=grave_yard
@@ -1583,7 +1584,7 @@ en:
       amenity/waste_basket:
         # amenity=waste_basket
         name: Waste Basket
-        # 'terms: rubbish,litter,trash,garbage'
+        # 'terms: bin,rubbish,litter,trash,garbage'
         terms: "<translate with synonyms or related terms for 'Waste Basket', separated by commas>"
       area:
         # area=yes

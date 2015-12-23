@@ -456,6 +456,9 @@
             "vertex",
             "line"
         ],
+        "terms": [
+            "seat"
+        ],
         "tags": {
             "amenity": "bench"
         },
@@ -612,6 +615,7 @@
             "area"
         ],
         "terms": [
+            "bistro",
             "coffee",
             "tea"
         ],
@@ -1007,6 +1011,7 @@
         "terms": [
             "petrol",
             "fuel",
+            "gasoline",
             "propane",
             "diesel",
             "lng",
@@ -2137,6 +2142,7 @@
             "amenity": "waste_basket"
         },
         "terms": [
+            "bin",
             "rubbish",
             "litter",
             "trash",

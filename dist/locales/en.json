@@ -1620,7 +1620,7 @@
             },
             "amenity/bench": {
                 "name": "Bench",
-                "terms": ""
+                "terms": "seat"
             },
             "amenity/bicycle_parking": {
                 "name": "Bicycle Parking",
@@ -1652,7 +1652,7 @@
             },
             "amenity/cafe": {
                 "name": "Cafe",
-                "terms": "coffee,tea"
+                "terms": "bistro,coffee,tea"
             },
             "amenity/car_rental": {
                 "name": "Car Rental",
@@ -1740,7 +1740,7 @@
             },
             "amenity/fuel": {
                 "name": "Gas Station",
-                "terms": "petrol,fuel,propane,diesel,lng,cng,biodiesel"
+                "terms": "petrol,fuel,gasoline,propane,diesel,lng,cng,biodiesel"
             },
             "amenity/grave_yard": {
                 "name": "Graveyard",
@@ -1948,7 +1948,7 @@
             },
             "amenity/waste_basket": {
                 "name": "Waste Basket",
-                "terms": "rubbish,litter,trash,garbage"
+                "terms": "bin,rubbish,litter,trash,garbage"
             },
             "area": {
                 "name": "Area",
