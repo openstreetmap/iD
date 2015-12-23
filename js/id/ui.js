@@ -176,7 +176,7 @@ iD.ui = function(context) {
         function pan(d) {
             return function() {
                 d3.event.preventDefault();
-                context.pan(d);
+                if (!context.inIntro()) context.pan(d);
             };
         }
 

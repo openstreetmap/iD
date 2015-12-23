@@ -19,6 +19,7 @@ iD.behavior.Paste = function(context) {
 
     function doPaste() {
         d3.event.preventDefault();
+        if (context.inIntro()) return;
 
         var mouse = context.mouse(),
             projection = context.projection,
