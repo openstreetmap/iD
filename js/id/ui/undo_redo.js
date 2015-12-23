@@ -2,12 +2,12 @@ iD.ui.UndoRedo = function(context) {
     var commands = [{
         id: 'undo',
         cmd: iD.ui.cmd('⌘Z'),
-        action: function() { if (!saving()) context.undo(); },
+        action: function() { if (!(context.inIntro() || saving())) context.undo(); },
         annotation: function() { return context.history().undoAnnotation(); }
     }, {
         id: 'redo',
         cmd: iD.ui.cmd('⌘⇧Z'),
-        action: function() { if (!saving()) context.redo(); },
+        action: function() {if (!(context.inIntro() || saving())) context.redo(); },
         annotation: function() { return context.history().redoAnnotation(); }
     }];
 

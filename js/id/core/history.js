@@ -352,6 +352,7 @@ iD.History = function(context) {
         },
 
         clearSaved: function() {
+            context.debouncedSave.cancel();
             if (lock.locked()) context.storage(getKey('saved_history'), null);
             return history;
         },

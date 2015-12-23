@@ -81,14 +81,12 @@ iD.Graph.prototype = {
     },
 
     childNodes: function(entity) {
-        if (this._childNodes[entity.id])
-            return this._childNodes[entity.id];
+        if (this._childNodes[entity.id]) return this._childNodes[entity.id];
+        if (!entity.nodes) return [];
 
         var nodes = [];
-        if (entity.nodes) {
-            for (var i = 0; i < entity.nodes.length; i++) {
-                nodes[i] = this.entity(entity.nodes[i]);
-            }
+        for (var i = 0; i < entity.nodes.length; i++) {
+            nodes[i] = this.entity(entity.nodes[i]);
         }
 
         if (iD.debug) Object.freeze(nodes);

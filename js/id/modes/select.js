@@ -147,7 +147,9 @@ iD.modes.Select = function(context, selectedIDs) {
         }
 
         function ret() {
-            context.enter(iD.modes.Browse(context));
+            if (!context.inIntro()) {
+                context.enter(iD.modes.Browse(context));
+            }
         }
 
 
@@ -169,7 +171,7 @@ iD.modes.Select = function(context, selectedIDs) {
         operations.forEach(function(operation) {
             operation.keys.forEach(function(key) {
                 keybinding.on(key, function() {
-                    if (!operation.disabled()) {
+                    if (!(context.inIntro() || operation.disabled())) {
                         operation();
                     }
                 });

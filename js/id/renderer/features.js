@@ -378,7 +378,7 @@ iD.Features = function(context) {
             childNodes = [resolver.entity(entity.edge[0]), resolver.entity(entity.edge[1])];
             connections = [];
         } else {
-            childNodes = resolver.childNodes(entity);
+            childNodes = entity.nodes ? resolver.childNodes(entity) : [];
             connections = features.getParents(entity, resolver, entity.geometry(resolver));
         }
 

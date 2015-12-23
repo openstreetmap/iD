@@ -15,22 +15,22 @@ iD.ui.Zoom = function(context) {
 
     function zoomIn() {
         d3.event.preventDefault();
-        context.zoomIn();
+        if (!context.inIntro()) context.zoomIn();
     }
 
     function zoomOut() {
         d3.event.preventDefault();
-        context.zoomOut();
+        if (!context.inIntro()) context.zoomOut();
     }
 
     function zoomInFurther() {
         d3.event.preventDefault();
-        context.zoomInFurther();
+        if (!context.inIntro()) context.zoomInFurther();
     }
 
     function zoomOutFurther() {
         d3.event.preventDefault();
-        context.zoomOutFurther();
+        if (!context.inIntro()) context.zoomOutFurther();
     }
 
 

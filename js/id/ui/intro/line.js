@@ -10,6 +10,11 @@ iD.ui.intro.line = function(context, reveal) {
         timeouts.push(window.setTimeout(f, t));
     }
 
+    function eventCancel() {
+        d3.event.stopPropagation();
+        d3.event.preventDefault();
+    }
+
     step.enter = function() {
         var centroid = [-85.62830, 41.95699];
         var midpoint = [-85.62975395449628, 41.95787501510204];
@@ -57,10 +62,13 @@ iD.ui.intro.line = function(context, reveal) {
         // ended line before creating intersection
         function retry(mode) {
             if (mode.id !== 'select') return;
-            var pointBox = iD.ui.intro.pad(intersection, 30, context);
+            var pointBox = iD.ui.intro.pad(intersection, 30, context),
+                ids = mode.selectedIDs();
             reveal(pointBox, t('intro.lines.restart', {name: t('intro.graph.flower_st')}));
+            d3.select(window).on('mousedown.intro', eventCancel, true);
+
             timeout(function() {
-                context.replace(iD.actions.DeleteMultiple(mode.selectedIDs()));
+                context.replace(iD.actions.DeleteMultiple(ids));
                 step.exit();
                 step.enter();
             }, 3000);
@@ -132,6 +140,7 @@ iD.ui.intro.line = function(context, reveal) {
     };
 
     step.exit = function() {
+        d3.select(window).on('mousedown.intro', null, true);
         d3.select('#curtain').style('pointer-events', 'none');
         timeouts.forEach(window.clearTimeout);
         context.on('enter.intro', null);

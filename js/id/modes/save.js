@@ -12,8 +12,14 @@ iD.modes.Save = function(context) {
             return _.uniq(_.reduce(ids, function(result, id) {
                 var e = graph.entity(id);
                 if (e.type === 'way') {
-                    var cn = graph.childNodes(e);
-                    result.push.apply(result, _.pluck(_.filter(cn, 'version'), 'id'));
+                    try {
+                        var cn = graph.childNodes(e);
+                        result.push.apply(result, _.pluck(_.filter(cn, 'version'), 'id'));
+                    } catch(err) {
+                        /* eslint-disable no-console */
+                        if (typeof console !== 'undefined') console.error(err);
+                        /* eslint-enable no-console */
+                    }
                 }
                 return result;
             }, _.clone(ids)));

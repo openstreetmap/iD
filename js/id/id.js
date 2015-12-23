@@ -153,6 +153,7 @@ window.iD = function () {
     };
 
     context.flush = function() {
+        context.debouncedSave.cancel();
         connection.flush();
         features.reset();
         history.reset();
@@ -161,11 +162,11 @@ window.iD = function () {
 
     // Debounce save, since it's a synchronous localStorage write,
     // and history changes can happen frequently (e.g. when dragging).
-    var debouncedSave = _.debounce(context.save, 350);
+    context.debouncedSave = _.debounce(context.save, 350);
     function withDebouncedSave(fn) {
         return function() {
             var result = fn.apply(history, arguments);
-            debouncedSave();
+            context.debouncedSave();
             return result;
         };
     }
