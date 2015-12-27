@@ -48,12 +48,12 @@
         "name": "Path",
         "icon": "category-path",
         "members": [
-            "highway/pedestrian",
             "highway/footway",
-            "highway/cycleway",
-            "highway/bridleway",
             "highway/path",
-            "highway/steps"
+            "highway/cycleway",
+            "highway/steps",
+            "highway/pedestrian",
+            "highway/bridleway"
         ]
     },
     "category-rail": {
@@ -90,20 +90,20 @@
         "icon": "category-roads",
         "members": [
             "highway/residential",
-            "highway/motorway",
-            "highway/trunk",
-            "highway/primary",
-            "highway/secondary",
-            "highway/tertiary",
             "highway/service",
+            "highway/track",
+            "highway/unclassified",
+            "highway/tertiary",
+            "highway/secondary",
+            "highway/primary",
+            "highway/trunk",
+            "highway/motorway",
             "highway/motorway_link",
+            "highway/road",
             "highway/trunk_link",
             "highway/primary_link",
             "highway/secondary_link",
-            "highway/tertiary_link",
-            "highway/unclassified",
-            "highway/track",
-            "highway/road"
+            "highway/tertiary_link"
         ]
     },
     "category-route": {
@@ -112,15 +112,14 @@
         "icon": "route",
         "members": [
             "type/route/road",
+            "type/route/bus",
+            "type/route/hiking",
             "type/route/bicycle",
             "type/route/foot",
-            "type/route/hiking",
-            "type/route/bus",
-            "type/route/train",
-            "type/route/tram",
             "type/route/ferry",
             "type/route/power",
-            "type/route/pipeline",
+            "type/route/train",
+            "type/route/tram",
             "type/route/detour",
             "type/route_master",
             "type/route"
@@ -131,8 +130,8 @@
         "name": "Water",
         "icon": "water",
         "members": [
-            "natural/water/lake",
             "natural/water/pond",
+            "natural/water/lake",
             "natural/water/reservoir",
             "natural/water"
         ]
