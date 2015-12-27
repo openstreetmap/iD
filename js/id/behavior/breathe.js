@@ -92,7 +92,7 @@ iD.behavior.Breathe = function() {
         }, 200);
     };
 
-    breathe.off = function(surface) {
+    breathe.off = function() {
         done = true;
         d3.timer.flush();
         selected
