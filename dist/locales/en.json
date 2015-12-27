@@ -883,6 +883,9 @@
             "description": {
                 "label": "Description"
             },
+            "dock": {
+                "label": "Type"
+            },
             "drive_through": {
                 "label": "Drive-Through"
             },
