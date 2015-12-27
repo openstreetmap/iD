@@ -1969,6 +1969,10 @@
                 "name": "RV Drinking Water",
                 "terms": ""
             },
+            "amenity/water_point": {
+                "name": "RV Drinking Water",
+                "terms": ""
+            },
             "area": {
                 "name": "Area",
                 "terms": ""
