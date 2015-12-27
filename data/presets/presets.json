@@ -971,8 +971,12 @@
         "name": "Fast Food"
     },
     "amenity/ferry_terminal": {
+        "icon": "ferry",
         "fields": [
-            "operator"
+            "network",
+            "operator",
+            "address",
+            "building_area"
         ],
         "geometry": [
             "point",
@@ -2193,6 +2197,7 @@
         "name": "Waste Basket"
     },
     "amenity/water_point": {
+        "icon": "water",
         "geometry": [
             "area",
             "vertex",
@@ -10372,6 +10377,7 @@
         "name": "Waterway"
     },
     "waterway/boatyard": {
+        "icon": "harbor",
         "fields": [
             "operator"
         ],
@@ -10425,6 +10431,11 @@
         "name": "Ditch"
     },
     "waterway/dock": {
+        "icon": "harbor",
+        "fields": [
+            "dock",
+            "operator"
+        ],
         "geometry": [
             "area",
             "vertex",
@@ -10580,6 +10591,7 @@
         "name": "Stream"
     },
     "waterway/water_point": {
+        "icon": "water",
         "geometry": [
             "area",
             "vertex",

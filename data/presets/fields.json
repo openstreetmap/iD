@@ -408,6 +408,11 @@
         "type": "textarea",
         "label": "Description"
     },
+    "dock": {
+        "key": "dock",
+        "type": "combo",
+        "label": "Type"
+    },
     "drive_through": {
         "key": "drive_through",
         "type": "check",

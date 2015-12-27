@@ -1,6 +1,10 @@
 {
-    "fields":[
-       "operator"
+    "icon": "ferry",
+    "fields": [
+        "network",
+        "operator",
+        "address",
+        "building_area"
     ],
     "geometry": [
         "point",

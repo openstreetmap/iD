@@ -309,6 +309,9 @@ en:
       description:
         # 'description=*'
         label: Description
+      dock:
+        # 'dock=*'
+        label: Type
       drive_through:
         # 'drive_through=*'
         label: Drive-Through
