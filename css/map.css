@@ -1064,13 +1064,20 @@ path.casing.tag-waterway-ditch {
     stroke: #6591ff;
     stroke-width: 3;
 }
+
+path.area.stroke.tag-waterway-dock,
+path.area.stroke.tag-waterway-boatyard,
 path.area.stroke.tag-waterway-fuel {
     stroke: white;
     stroke-width: 1;
 }
+path.area.casing.tag-waterway-dock,
+path.area.casing.tag-waterway-boatyard,
 path.area.casing.tag-waterway-fuel {
     stroke: none;
 }
+path.area.fill.tag-waterway-dock,
+path.area.fill.tag-waterway-boatyard,
 path.area.fill.tag-waterway-fuel {
     stroke: rgba(255, 255, 255, 0.3);
     fill: rgba(255, 255, 255, 0.3);
