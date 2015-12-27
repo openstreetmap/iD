@@ -893,6 +893,14 @@ path.stroke.tag-highway-footway {
     stroke: #ae8681;
 }
 
+.preset-icon .icon.highway-footway.tag-crossing {
+    color: #444;
+}
+path.stroke.tag-highway-footway.tag-crossing {
+    stroke: #444;
+    stroke-dasharray: 6, 4;
+}
+
 .preset-icon .icon.tag-route-bicycle,
 .preset-icon .icon.highway-cycleway {
     color: #58a9ed;
