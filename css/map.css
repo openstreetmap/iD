@@ -785,7 +785,8 @@ path.casing.tag-living_street {
     stroke:#fff;
 }
 
-.preset-icon .icon.highway-pedestrian {
+.preset-icon .icon.highway-footway.tag-highway-corridor,
+.preset-icon .icon.highway-footway.tag-highway-pedestrian {
     color: #8cd05f;
     fill: #fff;
 }
