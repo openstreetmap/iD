@@ -1,0 +1,6 @@
+{
+    "key": "diaper",
+    "type": "combo",
+    "label": "Diaper changing available",
+    "options": ["yes", "no", "room", "1", "2", "3", "4", "5"]
+}
