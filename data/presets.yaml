@@ -309,6 +309,9 @@ en:
       description:
         # 'description=*'
         label: Description
+      diaper:
+        # 'diaper=*'
+        label: Diaper Changing Available
       dock:
         # 'dock=*'
         label: Type

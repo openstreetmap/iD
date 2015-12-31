@@ -1912,7 +1912,8 @@
             "building_area",
             "access_toilets",
             "gender",
-            "fee"
+            "fee",
+            "diaper"
         ],
         "geometry": [
             "point",

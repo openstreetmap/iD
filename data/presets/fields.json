@@ -408,6 +408,21 @@
         "type": "textarea",
         "label": "Description"
     },
+    "diaper": {
+        "key": "diaper",
+        "type": "combo",
+        "label": "Diaper Changing Available",
+        "options": [
+            "yes",
+            "no",
+            "room",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5"
+        ]
+    },
     "dock": {
         "key": "dock",
         "type": "combo",

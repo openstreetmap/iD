@@ -883,6 +883,9 @@
             "description": {
                 "label": "Description"
             },
+            "diaper": {
+                "label": "Diaper Changing Available"
+            },
             "dock": {
                 "label": "Type"
             },
