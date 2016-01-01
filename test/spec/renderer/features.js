@@ -429,7 +429,44 @@ describe('iD.Features', function() {
             expect(features.isHidden(a, graph, geometry)).to.be.true;
         });
 
-        it('hides child ways on a hidden multipolygon relation', function() {
+        it('hides child "others" (e.g. untagged or barrier) ways on a hidden multipolygon relation', function() {
+            var a = iD.Node({id: 'a', version: 1}),
+                b = iD.Node({id: 'b', version: 1}),
+                c = iD.Node({id: 'c', version: 1}),
+                d = iD.Node({id: 'd', version: 1}),
+                e = iD.Node({id: 'e', version: 1}),
+                f = iD.Node({id: 'f', version: 1}),
+                g = iD.Node({id: 'g', version: 1}),
+                h = iD.Node({id: 'h', version: 1}),
+                i = iD.Node({id: 'i', version: 1}),
+                outer = iD.Way({id: 'outer', nodes: [a.id, b.id, c.id, a.id], tags: {area: 'yes', natural: 'wood'}, version: 1}),
+                inner1 = iD.Way({id: 'inner1', nodes: [d.id, e.id, f.id, d.id], tags: {barrier: 'fence'}, version: 1}),
+                inner2 = iD.Way({id: 'inner2', nodes: [g.id, h.id, i.id, g.id], version: 1}),
+                r = iD.Relation({
+                    id: 'r',
+                    tags: {type: 'multipolygon'},
+                    members: [
+                        {id: outer.id, role: 'outer', type: 'way'},
+                        {id: inner1.id, role: 'inner', type: 'way'},
+                        {id: inner2.id, role: 'inner', type: 'way'}
+                    ],
+                    version: 1
+                }),
+                graph = iD.Graph([a, b, c, d, e, f, g, h, i, outer, inner1, inner2, r]),
+                geometry1 = inner1.geometry(graph),
+                geometry2 = inner2.geometry(graph),
+                all = _.values(graph.base().entities);
+
+            features.disable('landuse');
+            features.gatherStats(all, graph, dimensions);
+
+            expect(features.isHiddenChild(inner1, graph, geometry1)).to.be.true;
+            expect(features.isHiddenChild(inner2, graph, geometry2)).to.be.true;
+            expect(features.isHidden(inner1, graph, geometry1)).to.be.true;
+            expect(features.isHidden(inner2, graph, geometry2)).to.be.true;
+        });
+
+        it('does not hide child "non-others" (e.g. highway) ways on a hidden multipolygon relation', function() {
             var a = iD.Node({id: 'a', version: 1}),
                 b = iD.Node({id: 'b', version: 1}),
                 c = iD.Node({id: 'c', version: 1}),
@@ -437,7 +474,7 @@ describe('iD.Features', function() {
                 e = iD.Node({id: 'e', version: 1}),
                 f = iD.Node({id: 'f', version: 1}),
                 outer = iD.Way({id: 'outer', nodes: [a.id, b.id, c.id, a.id], tags: {area: 'yes', natural: 'wood'}, version: 1}),
-                inner = iD.Way({id: 'inner', nodes: [d.id, e.id, f.id, d.id], version: 1}),
+                inner = iD.Way({id: 'inner', nodes: [d.id, e.id, f.id, d.id], tags: {highway: 'residential'}, version: 1}),
                 r = iD.Relation({
                     id: 'r',
                     tags: {type: 'multipolygon'},
@@ -454,8 +491,8 @@ describe('iD.Features', function() {
             features.disable('landuse');
             features.gatherStats(all, graph, dimensions);
 
-            expect(features.isHiddenChild(inner, graph, geometry)).to.be.true;
-            expect(features.isHidden(inner, graph, geometry)).to.be.true;
+            expect(features.isHiddenChild(inner, graph, geometry)).to.be.false;
+            expect(features.isHidden(inner, graph, geometry)).to.be.false;
         });
 
         it('hides only versioned entities', function() {
