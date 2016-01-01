@@ -279,39 +279,42 @@ iD.Features = function(context) {
     };
 
     features.getMatches = function(entity, resolver, geometry) {
-        var ent = iD.Entity.key(entity);
+        if (geometry === 'vertex' || geometry === 'relation') return {};
+
+        var ent = iD.Entity.key(entity),
+            matches = {},
+            hasMatch = false;
 
         if (!_cache[ent]) {
             _cache[ent] = {};
         }
         if (!_cache[ent].matches) {
-            var matches = {},
-                hasMatch = false;
-
-            if (!(geometry === 'vertex' || geometry === 'relation')) {
+            if (_.isEmpty(entity.tags)) {
+                matches.others = true;
+            }
+            else {
                 for (var i = 0; i < _keys.length; i++) {
-
                     if (_keys[i] === 'others') {
                         if (hasMatch) continue;
 
-                        // If the entity is a way that has not matched any other
-                        // feature type, see if it has a parent relation, and if so,
-                        // match whatever feature types the parent has matched.
-                        // (The way is a member of a multipolygon.)
-                        //
-                        // IMPORTANT:
-                        // For this to work, getMatches must be called on relations before ways.
-                        //
-                        if (entity.type === 'way') {
-                            var parents = features.getParents(entity, resolver, geometry);
-                            if (parents.length === 1) {
-                                var pkey = iD.Entity.key(parents[0]);
-                                if (_cache[pkey] && _cache[pkey].matches) {
-                                    matches = _.clone(_cache[pkey].matches);
-                                    continue;
-                                }
-                            }
-                        }
+                        // // If the entity is a way that has not matched any other
+                        // // feature type, see if it has a parent relation, and if so,
+                        // // match whatever feature types the parent has matched.
+                        // // (The way is a member of a multipolygon.)
+                        // //
+                        // // IMPORTANT:
+                        // // For this to work, getMatches must be called on relations before ways.
+                        // //
+                        // if (entity.type === 'way') {
+                        //     var parents = features.getParents(entity, resolver, geometry);
+                        //     if (parents.length === 1) {
+                        //         var pkey = iD.Entity.key(parents[0]);
+                        //         if (_cache[pkey] && _cache[pkey].matches) {
+                        //             matches = _.clone(_cache[pkey].matches);
+                        //             continue;
+                        //         }
+                        //     }
+                        // }
                     }
 
                     if (_features[_keys[i]].filter(entity, resolver, geometry)) {
@@ -321,6 +324,7 @@ iD.Features = function(context) {
             }
             _cache[ent].matches = matches;
         }
+
         return _cache[ent].matches;
     };
 
