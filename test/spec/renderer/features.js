@@ -137,13 +137,17 @@ describe('iD.Features', function() {
             iD.Way({id: 'industrial', tags: {area: 'yes', landuse: 'industrial'}, version: 1}),
             iD.Way({id: 'parkinglot', tags: {area: 'yes', amenity: 'parking', parking: 'surface'}, version: 1}),
 
-            // Landuse with hole
-            iD.Way({id: 'inner', version: 1}),
+            // Landuse Multipolygon
             iD.Way({id: 'outer', version: 1}),
+            iD.Way({id: 'inner1', version: 1}),
+            iD.Way({id: 'inner2', tags: {barrier: 'fence'}, version: 1}),
+            iD.Way({id: 'inner3', tags: {highway: 'residential'}, version: 1}),
             iD.Relation({id: 'retail', tags: {landuse: 'retail', type: 'multipolygon'},
                     members: [
                         {id: 'outer', role: 'outer', type: 'way'},
-                        {id: 'inner', role: 'inner', type: 'way'}
+                        {id: 'inner1', role: 'inner', type: 'way'},
+                        {id: 'inner2', role: 'inner', type: 'way'},
+                        {id: 'inner3', role: 'inner', type: 'way'}
                     ],
                     version: 1
                 }),
@@ -234,7 +238,7 @@ describe('iD.Features', function() {
             doMatch([
                 'motorway', 'motorway_link', 'trunk', 'trunk_link',
                 'primary', 'primary_link', 'secondary', 'secondary_link',
-                'tertiary', 'tertiary_link', 'residential'
+                'tertiary', 'tertiary_link', 'residential', 'inner3'
             ]);
 
             dontMatch([
@@ -301,13 +305,15 @@ describe('iD.Features', function() {
 
             doMatch([
                 'forest', 'scrub', 'industrial', 'parkinglot', 'building_no',
-                'rail_landuse', 'landuse_construction', 'retail', 'inner', 'outer'
+                'rail_landuse', 'landuse_construction', 'retail',
+                'outer', 'inner1', 'inner2'  // non-interesting members of landuse multipolygon
             ]);
 
             dontMatch([
                 'point_bar', 'motorway', 'service', 'path', 'building_yes',
                 'boundary', 'water', 'railway', 'power_line',
-                'motorway_construction', 'fence'
+                'motorway_construction', 'fence',
+                'inner3'   // member of landuse multipolygon, but tagged as highway
             ]);
         });
 
@@ -407,7 +413,7 @@ describe('iD.Features', function() {
             dontMatch([
                 'point_bar', 'motorway', 'service', 'path', 'building_yes',
                 'forest', 'boundary', 'water', 'railway', 'power_line',
-                'motorway_construction', 'retail', 'inner', 'outer'
+                'motorway_construction', 'retail', 'outer', 'inner1', 'inner2', 'inner3'
             ]);
         });
     });
@@ -426,73 +432,37 @@ describe('iD.Features', function() {
             features.gatherStats(all, graph, dimensions);
 
             expect(features.isHiddenChild(a, graph, geometry)).to.be.true;
+            expect(features.isHiddenChild(b, graph, geometry)).to.be.true;
             expect(features.isHidden(a, graph, geometry)).to.be.true;
+            expect(features.isHidden(b, graph, geometry)).to.be.true;
         });
 
-        it('hides child "others" (e.g. untagged or barrier) ways on a hidden multipolygon relation', function() {
-            var a = iD.Node({id: 'a', version: 1}),
-                b = iD.Node({id: 'b', version: 1}),
-                c = iD.Node({id: 'c', version: 1}),
-                d = iD.Node({id: 'd', version: 1}),
-                e = iD.Node({id: 'e', version: 1}),
-                f = iD.Node({id: 'f', version: 1}),
-                g = iD.Node({id: 'g', version: 1}),
-                h = iD.Node({id: 'h', version: 1}),
-                i = iD.Node({id: 'i', version: 1}),
-                outer = iD.Way({id: 'outer', nodes: [a.id, b.id, c.id, a.id], tags: {area: 'yes', natural: 'wood'}, version: 1}),
-                inner1 = iD.Way({id: 'inner1', nodes: [d.id, e.id, f.id, d.id], tags: {barrier: 'fence'}, version: 1}),
-                inner2 = iD.Way({id: 'inner2', nodes: [g.id, h.id, i.id, g.id], version: 1}),
+        it('hides uninteresting (e.g. untagged or "other") member ways on a hidden multipolygon relation', function() {
+            var outer = iD.Way({id: 'outer', tags: {area: 'yes', natural: 'wood'}, version: 1}),
+                inner1 = iD.Way({id: 'inner1', tags: {barrier: 'fence'}, version: 1}),
+                inner2 = iD.Way({id: 'inner2', version: 1}),
+                inner3 = iD.Way({id: 'inner3', tags: {highway: 'residential'}, version: 1}),
                 r = iD.Relation({
                     id: 'r',
                     tags: {type: 'multipolygon'},
                     members: [
                         {id: outer.id, role: 'outer', type: 'way'},
                         {id: inner1.id, role: 'inner', type: 'way'},
-                        {id: inner2.id, role: 'inner', type: 'way'}
+                        {id: inner2.id, role: 'inner', type: 'way'},
+                        {id: inner3.id, role: 'inner', type: 'way'}
                     ],
                     version: 1
                 }),
-                graph = iD.Graph([a, b, c, d, e, f, g, h, i, outer, inner1, inner2, r]),
-                geometry1 = inner1.geometry(graph),
-                geometry2 = inner2.geometry(graph),
+                graph = iD.Graph([outer, inner1, inner2, inner3, r]),
                 all = _.values(graph.base().entities);
 
             features.disable('landuse');
             features.gatherStats(all, graph, dimensions);
 
-            expect(features.isHiddenChild(inner1, graph, geometry1)).to.be.true;
-            expect(features.isHiddenChild(inner2, graph, geometry2)).to.be.true;
-            expect(features.isHidden(inner1, graph, geometry1)).to.be.true;
-            expect(features.isHidden(inner2, graph, geometry2)).to.be.true;
-        });
-
-        it('does not hide child "non-others" (e.g. highway) ways on a hidden multipolygon relation', function() {
-            var a = iD.Node({id: 'a', version: 1}),
-                b = iD.Node({id: 'b', version: 1}),
-                c = iD.Node({id: 'c', version: 1}),
-                d = iD.Node({id: 'd', version: 1}),
-                e = iD.Node({id: 'e', version: 1}),
-                f = iD.Node({id: 'f', version: 1}),
-                outer = iD.Way({id: 'outer', nodes: [a.id, b.id, c.id, a.id], tags: {area: 'yes', natural: 'wood'}, version: 1}),
-                inner = iD.Way({id: 'inner', nodes: [d.id, e.id, f.id, d.id], tags: {highway: 'residential'}, version: 1}),
-                r = iD.Relation({
-                    id: 'r',
-                    tags: {type: 'multipolygon'},
-                    members: [
-                        {id: outer.id, role: 'outer', type: 'way'},
-                        {id: inner.id, role: 'inner', type: 'way'}
-                    ],
-                    version: 1
-                }),
-                graph = iD.Graph([a, b, c, d, e, f, outer, inner, r]),
-                geometry = inner.geometry(graph),
-                all = _.values(graph.base().entities);
-
-            features.disable('landuse');
-            features.gatherStats(all, graph, dimensions);
-
-            expect(features.isHiddenChild(inner, graph, geometry)).to.be.false;
-            expect(features.isHidden(inner, graph, geometry)).to.be.false;
+            expect(features.isHidden(outer, graph, outer.geometry(graph))).to.be.true;     // #2548
+            expect(features.isHidden(inner1, graph, inner1.geometry(graph))).to.be.true;   // #2548
+            expect(features.isHidden(inner2, graph, inner2.geometry(graph))).to.be.true;   // #2548
+            expect(features.isHidden(inner3, graph, inner3.geometry(graph))).to.be.false;  // #2887
         });
 
         it('hides only versioned entities', function() {
@@ -515,7 +485,7 @@ describe('iD.Features', function() {
                 maxPoints = 200,
                 all, hidden, autoHidden, i, msg;
 
-            for(i = 0; i < maxPoints; i++) {
+            for (i = 0; i < maxPoints; i++) {
                 graph.rebase([iD.Node({version: 1})], [graph]);
             }
 
@@ -546,7 +516,7 @@ describe('iD.Features', function() {
                 dimensions = [2000, 1000],
                 all, hidden, autoHidden, i, msg;
 
-            for(i = 0; i < maxPoints; i++) {
+            for (i = 0; i < maxPoints; i++) {
                 graph.rebase([iD.Node({version: 1})], [graph]);
             }
 
