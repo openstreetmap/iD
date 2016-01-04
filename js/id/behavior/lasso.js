@@ -1,7 +1,6 @@
 iD.behavior.Lasso = function(context) {
 
     var behavior = function(selection) {
-
         var mouse = null,
             lasso;
 
@@ -35,21 +34,22 @@ iD.behavior.Lasso = function(context) {
         }
 
         function mouseup() {
-
             selection
                 .on('mousemove.lasso', null)
                 .on('mouseup.lasso', null);
 
             if (!lasso) return;
 
-            var extent = iD.geo.Extent(
+            var graph = context.graph(),
+                extent = iD.geo.Extent(
                 normalize(context.projection.invert(lasso.a()),
                 context.projection.invert(lasso.b())));
 
             lasso.close();
 
-            var selected = context.intersects(extent).filter(function (entity) {
-                return entity.type === 'node';
+            var selected = context.intersects(extent).filter(function(entity) {
+                return entity.type === 'node' &&
+                    !context.features().isHidden(entity, graph, entity.geometry(graph));
             });
 
             if (selected.length) {
