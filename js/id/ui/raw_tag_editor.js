@@ -114,6 +114,7 @@ iD.ui.RawTagEditor = function(context) {
             .on('click', removeTag);
 
         $items.exit()
+            .each(unbind)
             .remove();
 
         function pushMore() {
@@ -163,6 +164,16 @@ iD.ui.RawTagEditor = function(context) {
                         if (!err) callback(sort(value, data));
                     });
                 }));
+        }
+
+        function unbind() {
+            var row = d3.select(this);
+
+            row.selectAll('input.key')
+                .call(d3.combobox.off);
+
+            row.selectAll('input.value')
+                .call(d3.combobox.off);
         }
 
         function keyChange(d) {
