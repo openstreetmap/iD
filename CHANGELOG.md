@@ -1,3 +1,41 @@
+## 1.8.4
+* Block UI, disable draws while fetching missing childnodes when user restores saved work
+* Add iD.Map#redrawEnable to enable/disable redraws
+* Don't select filtered hidden vertices with the lasso
+* Adjust matching rules for multipolygon members (#2887)
+* Add Diaper Changing field to amenity toilets (#2890, thanks @morray)
+* Add rendering for tag-crossing pedestrian crosswalks
+* Fix rendering of highway=pedestrian, highway=crossing preset icon
+* Waterway presets - dock, boatyard, water point (#2863, thanks @arunasank)
+* Amenity presets - hunting stand, parking space, ferry terminal (#2883, thanks @arunasank)
+* More search terms for several amenity presets (#2880)
+* Disambiguate shop=bicycle and amenity=bicycle_repair_station presets (#2845)
+* Cancel debounced history saves in flush() and clearSaved()
+* Cancel throttled hash updates in hash.off()
+* Several fixes for "Entity Not Found" errors (#2736)
+* Don't call childNodes unless necessary (avoid extra _childNodes caching)
+* Clear search results pane when changing modes
+* Center map on feature when selecting feature from search results
+* Suppress radial menu when selecting feature from search results
+* Rename doctor.json -> doctors.json (#2869)
+* Add Breathe behavior for colorblind-friendly interpolated select halos (#1814)
+* Many usability improvements to entity editor sidebar:
+  * In Taginfo results sort keys with ':' below keys without ':' (#2376)
+  * Add back button for feature type reselection (#2453)
+  * Return should accept input and return to browse mode (#2380)
+  * Enable save as soon as user starts typing (#2342)
+  * Change feature editor close X to check mark (#2384)
+* Many improvements to the intro walkthrough:
+  * Prevent most keyboard shortcuts during walkthrough
+  * Prevent user from editing during pause before restarting failed task
+  * Shrink introGraph (#1336)
+  * Localize some of the features in the walkthrough (#2881)
+  * Add search task to walkthrough (#2363)
+  * Add button images to walkthrough text (#2404)
+  * Better save blocking in intro (#1795)
+  * Display Help button in walkthrough, stay on it longer (#2364)
+* Set 'Content-Type': 'text/xml' when closing changeset (fix for IE auth warning) (#2874)
+
 ## 1.8.3
 * Replace nonstandard Array `find` with `_.find` for IE11 (#2871)
 
