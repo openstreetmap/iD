@@ -8,6 +8,7 @@ iD.Map = function(context) {
             .scaleExtent([1024, 256 * Math.pow(2, 24)])
             .on('zoom', zoomPan),
         dblclickEnabled = true,
+        redrawEnabled = true,
         transformStart,
         transformed = false,
         minzoom = 0,
@@ -186,7 +187,7 @@ iD.Map = function(context) {
     }
 
     function redraw(difference, extent) {
-        if (!surface) return;
+        if (!surface || !redrawEnabled) return;
 
         clearTimeout(timeoutId);
 
@@ -252,6 +253,12 @@ iD.Map = function(context) {
     map.dblclickEnable = function(_) {
         if (!arguments.length) return dblclickEnabled;
         dblclickEnabled = _;
+        return map;
+    };
+
+    map.redrawEnable = function(_) {
+        if (!arguments.length) return redrawEnabled;
+        redrawEnabled = _;
         return map;
     };
 
