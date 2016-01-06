@@ -504,47 +504,30 @@
         "navigation": {
             "title": "Navigacija",
             "drag": "Pagrindinė žemėlapio sritis rodo OpenStreetMap duomenis virš fono. Galite keisti poziciją tempiant pele arba naudojant pelės ratuką - kaip ir bet kuriame kitame tinklo žemėlapyje. **Pastumkite žemėlapį!**",
-            "select": "Žemėlapio geoobjektai būna trijų tipų: taškai, linijos ir plotai. Visi geoobjektai gali būti pažymėti juos paspaudus. **Spauskite tašką, kad jį pažymėtumėte.**",
-            "header": "Antraštė rodo geoobjekto tipą.",
-            "pane": "Parinkus geoobjektą rodomas redaktorius. Antraštėje rodomas geoobjekto tipas, o pagrindinėje skiltyje matomi geoobjekto atributai, tokie kaip pavadinimas ir adresas. **Uždarykite geoobjekto redaktorių mygtuku „uždaryti“, esančiu viršutiniame dešiniame kampe.**"
+            "select": "Žemėlapio geoobjektai būna trijų tipų: taškai, linijos ir plotai. Visi geoobjektai gali būti pažymėti juos paspaudus. **Spauskite tašką, kad jį pažymėtumėte.**"
         },
         "points": {
             "title": "Taškai",
-            "add": "Taškai gali būti naudojami vaizduoti tokius objektus kaip parduotuvės, restoranai ar paminklai. Jie žymi konkrečią vietą ir aprašo, kas ten yra. **Spauskite mygtuką „Taškas“, kad pridėtumėte tašką.**",
-            "place": "Taškas gali būti pažymėtas paspaudus ant žemėlapio. **Padėkite tašką ant pastato.**",
             "search": "Yra daug skirtingų objektų, kurie gali būti vaizduojami taškais. Jūsų ką tik pridėtas taškas yra kavinė. **Ieškokite '{name}'**",
             "choose": "**Sąraše parinkite Kavinę.**",
-            "describe": "Taškas dabar pažymėtas kaip kavinė. Naudodami geoobjektų redaktorių mes galima pridėti daugiau informacijos. **Pridėkite pavadinimą**",
-            "close": "Objektų redaktorių galima uždaryti mygtuku „X“. **Uždarykite objektų redaktorių**",
-            "reselect": "Dažnai taškai jau bus nupiešti, bet informacija bus nepilna arba joje bus klaidų. Mes galima keisti ir jau esamus taškus. **Pažymėkite jūsų ką tik sukurtą tašką.**",
-            "fixname": "**Pakeiskite pavadinimą ir uždarykite objektų redaktorių.**",
-            "reselect_delete": "Visi žemėlapio objektai gali būti panaikinti. **Spauskite ant jūsų sukurto taško.**",
-            "delete": "Meniu aplink tašką rasite veiksmus, kuriuos galite atlikti su pažymėtu objektu, įskaitant ir panaikinimą. **Panaikinkite tašką.**"
+            "describe": "Taškas dabar pažymėtas kaip kavinė. Naudodami geoobjektų redaktorių mes galima pridėti daugiau informacijos. **Pridėkite pavadinimą**"
         },
         "areas": {
             "title": "Plotai",
-            "add": "Poligonai gali būti naudojami atvaizduoti ribas tokių objektų kaip ežerai, pastatai ir gyvenamosios teritorijos. Taip pat jie gali būti naudojami norint detalizuoti daugelį objektų, kuriuos paprastai žymime taškais. **Spauskite mygtuką \"Poligonas\", kad pridėtumėte naują plotą.**",
-            "corner": "Plotai paišomi dėliojant taškus, nurodančius ploto kontūrą. **Sukurkite pradinį tašką viename iš žaidimų aikštelės kampų.**",
             "place": "Nupieškite plotą pridėdami daugiau taškų. Baikite ploto braižymą pažymėję pradinį tašką. **Nubraižykite žaidimų aikštelės plotą.**",
             "search": "**Ieškoti '{name}'.**",
-            "choose": "**Sąraše parinkite žaidimų aikštelę.**",
-            "describe": "**Pridėkite pavadinimą ir uždarykite objektų redaktorių**"
+            "choose": "**Sąraše parinkite žaidimų aikštelę.**"
         },
         "lines": {
             "title": "Linijos",
-            "add": "Linijos gali būti naudojamos atvaizduoti tokius objektus kaip keliai, geležinkeliai ir upės. **Spauskite mygtuką \"Linija\", kad pridėtumėte liniją.**",
             "start": "**Pradėkite linijos braižymą spausdami ant kelio pabaigos.**",
-            "intersect": "Spauskite, kad pridėtumėte prie linijos daugiau taškų. Braižymo metu, jei reikia, galite pastumti žemėlapi. Keliai bei daug kitų linijų tipų paprastai yra dalis didelio tinklo. Labai svarbu, kad šios linijos būtų teisingai sujungtos, kad veiktų maršrutizavimas. **Spauskite ant Flower Street, kad sukurtumėte susikirtimą tarp dviejų linijų.**",
             "finish": "Linijos braižymas gali būti baigiamas antrą kartą paspaudus ant paskutiniojo taško. **Baikite kelio braižymą.**",
             "road": "**Sąraše parinkite kelią**",
             "residential": "Yra įvairių kelių tipų, dažniausiai pasitaikantis - „Residential“. **Parinkite kelio tipą „Residential“**",
-            "describe": "**Įveskite kelio pavadinimą ir užverkite objektų redaktorių.**",
-            "restart": "Kelias turi susikirsti su Flower Street.",
             "wrong_preset": "Neparinkote gyvenamosios gatvės tipo. **Spauskite čia ir parinkite iš naujo**"
         },
         "startediting": {
             "title": "Pradėti redagavimą",
-            "help": "Išsamesnę dokumentaciją ir šią pažingsninę demonstraciją rasite čia.",
             "save": "Nepamirškite periodiškai įrašyti savo pakeitimų!",
             "start": "Pradėkite žymėjimą!"
         }
@@ -1484,10 +1467,6 @@
                 "name": "Dviračių nuoma",
                 "terms": "dviračių nuoma"
             },
-            "amenity/bicycle_repair_station": {
-                "name": "Dviračių remonto stotis",
-                "terms": "dviračių remontas"
-            },
             "amenity/boat_rental": {
                 "name": "Laivų nuoma",
                 "terms": "laivų nuoma,valčių nuoma"
@@ -1552,10 +1531,6 @@
             "amenity/dentist": {
                 "name": "Dantistas",
                 "terms": "odontologas,dantistas,stomatologas"
-            },
-            "amenity/doctor": {
-                "name": "Daktaras",
-                "terms": "daktaras,gydytojas,medikas"
             },
             "amenity/drinking_water": {
                 "name": "Geriamas vanduo",

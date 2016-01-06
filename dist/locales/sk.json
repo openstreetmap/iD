@@ -137,9 +137,14 @@
         },
         "merge": {
             "title": "Zlúč",
+            "description": "Zlúč tieto objety.",
             "key": "C",
+            "annotation": "Zlúč {n} objektov.",
             "not_eligible": "Tieto objekty nemôžu byť zlúčené.",
-            "incomplete_relation": "Tieto objekty nemôžu byť zlúčené, pretože aspoň jeden z nich nebol úplne stiahnutý."
+            "not_adjacent": "Tieto objekty nemôžu byť zlúčené, pretože nie sú spojené.",
+            "restriction": "Tieto objekty nemôžu byť zlúčené, pretože aspoň jeden je členom relácie \"{relation}\".",
+            "incomplete_relation": "Tieto objekty nemôžu byť zlúčené, pretože aspoň jeden z nich nebol úplne stiahnutý.",
+            "conflicting_tags": "Tieto objekty nemôžu byť zlúčené, pretože niktoré ich označenia majú odporujúce si hodnoty."
         },
         "move": {
             "title": "Presuň",
@@ -509,47 +514,30 @@
         "navigation": {
             "title": "Navigácia",
             "drag": "Hlavná plocha s mapou zobrazuje nad pozadím údaje z OpenStreetMap. Presúvať sa môžete ťahaním za mapu alebo koliečkom myši rovnako, ako u iných webových máp. **Potiahnite za mapu!**",
-            "select": "Objekty na mape sú reprezentované tromi spôsobmi: pomocou bodov, čiar alebo plôch. Každý objekt môžete vybrať tým, že naň kliknete. **Kliknite na bod, aby ste ho vybrali.**",
-            "header": "Hlavička nám ukazuje typ objektu.",
-            "pane": "Keď je objekt vybraný, zobrazí sa editor objektu. Hlavička nám ukazuje typ objektu a hlavný panel zobrazuje vlastnosti objektu, ako sú jeho meno a adresa. **Zatvorte editor objektu pomocou tlačítka vpravo hore.**"
+            "select": "Objekty na mape sú reprezentované tromi spôsobmi: pomocou bodov, čiar alebo plôch. Každý objekt môžete vybrať tým, že naň kliknete. **Kliknite na bod, aby ste ho vybrali.**"
         },
         "points": {
             "title": "Body",
-            "add": "Body môžu byť použité na znázorňovanie objektov ako sú obchody, reštaurácie a pamätihodnosťi. Označujú špecifickú polohu a popisujú čo sa tam nachádza. **Kliknite na tlačítko Bod a pridajte nový bod.**",
-            "place": "Bod môžete umiestniť kliknutím na mapu. **Umiestnite bod na vrch budovy.**",
             "search": "Body môžu znázorňovať veľa rôznych objektov. Bod, ktorý ste práve pridali, je Kaviareň. **Vyhľadajte \"{name}\"**",
             "choose": "**Vyberte Kaviareň zo zoznamu.**",
-            "describe": "Bod je teraz označený ako kaviareň. S použitím editora objektu môžeme pridať viac informácií o objekte. **Pridajte názov**",
-            "close": "Editor objektu sa zatvára pomocou zatváracieho tlačítka. **Zatvorte editor objektu**",
-            "reselect": "Body už často krát existujú, ale obsahujú chyby alebo nekompletné informácie. Existujúce body môžeme upravovať. **Zvoľte bod, ktorý ste práve vytvorili.**",
-            "fixname": "**Zmeňte meno a zavrite editor objektu.**",
-            "reselect_delete": "Všetky objekty na mape môžu byť vymazané. **Kliknite na bod, ktorý ste vytvorili.**",
-            "delete": "Ponuka okolo bodu obsahuje operácie, ktoré s ním môžete uskutočniť, vrátane vymazania. **Vymažte bod.**"
+            "describe": "Bod je teraz označený ako kaviareň. S použitím editora objektu môžeme pridať viac informácií o objekte. **Pridajte názov**"
         },
         "areas": {
             "title": "Plochy",
-            "add": "Plochy slúžia na zobrazenie hraníc jazier, budov a obytných oblastí. Môžu byť taktiež použité pre podrobnejšie zmapovanie mnohých objektov, ktoré by ste normálne mapovali ako bod. ** Kliknite na tlačítko Plocha a pridajte novú oblasť. **",
-            "corner": "Plochy sú zakreslované umiestňovaním uzlov, ktoré označujú hranicu plochy. **Umiestnite počiatočný uzol na jeden z rohov ihriska.**",
             "place": "Nakreslite plochu umiestnením ďalších uzlov.  Plochu dokončíte kliknutím na počiatočný uzol. **Nakreslite plochu pre ihrisko.**",
             "search": "**Vyhľadajte \"{name}\".**",
-            "choose": "**Vyberte ihrisko zo zoznamu.**",
-            "describe": "**Vyplňte názov a zatvorte editor objektu**"
+            "choose": "**Vyberte ihrisko zo zoznamu.**"
         },
         "lines": {
             "title": "Čiary",
-            "add": "Čiary sú používané na znázorňovanie objektov ako cesty, železnice a rieky. **Kliknite na tlačítko Čiara a pridajte novú čiaru.**",
             "start": "**Začnite kresliť čiaru kliknutím na koniec cesty.**",
-            "intersect": "Kliknite pre pridanie ďalších uzlov ku čiare. Ak je to nutné, potiahnite za mapu pre posun. Cesty a mnoho ďalších typov čiar sú súčasťou veľkej siete. Aby aplikácie pre navigáciu pracovali správne, je dôležité, aby boli tieto čiary správne prepojené. **Kliknite na ulicu Flower Street a vytvorte tak križovatku spájajúcu obe čiary.**",
             "finish": "Čiary sa dajú ukončiť opätovným kliknutím na posledný uzol. **Dokončite kreslenie cesty.**",
             "road": "**Vyberte cestu zo zoznamu**",
             "residential": "Poznáme cesty rôznych typov. Najviac častý z nich je Obytná ulica. **Vyberte typ: Obytná ulica**",
-            "describe": "**Pomenujte cestu a zatvorte editor objektu.**",
-            "restart": "Cesta musí pretínať ulicu Flower Street.",
             "wrong_preset": "Nezvolili ste typ Ubytná ulica. **Kliknite sem pre opätovný výber**"
         },
         "startediting": {
             "title": "Začať upravovať",
-            "help": "Ďalšia dokumentácia a táto prehliadka sú dostupné tu.",
             "save": "Nezabudnite pravidelne ukladať vaše zmeny!",
             "start": "Začnite mapovať!"
         }
@@ -846,6 +834,12 @@
             "description": {
                 "label": "Popis"
             },
+            "diaper": {
+                "label": "Obsahuje miesto na výmenu plienok"
+            },
+            "dock": {
+                "label": "Typ"
+            },
             "drive_through": {
                 "label": "Obslúženie z auta"
             },
@@ -1065,6 +1059,9 @@
             "maxspeed": {
                 "label": "Povolená rýchlosť",
                 "placeholder": "40, 50, 60..."
+            },
+            "maxstay": {
+                "label": "Maximálna dĺžka parkovania"
             },
             "mtb/scale": {
                 "label": "Obtiažnosť pre horské bicykle",
@@ -1591,8 +1588,8 @@
                 "terms": "požičovňa bicyklov, pozicovna bicyklov,cyklopožičovňa,cyklopozicovna"
             },
             "amenity/bicycle_repair_station": {
-                "name": "Stojan pre opravu bicyklov",
-                "terms": "stojan,oprava,bicykle,bicykel,reťaz,retaz,pumpa,hustilka,vzduch,koleso,kolesá,kolesa"
+                "name": "Stojan s náradím na opravu bicyklov",
+                "terms": "stojan s naradim na opravu bicyklov,bicykel,oprava,naradie,náradie"
             },
             "amenity/biergarten": {
                 "name": "Záhradná piváreň",
@@ -1670,9 +1667,9 @@
                 "name": "Zubár",
                 "terms": "zubar,stomatológia,stomatologia"
             },
-            "amenity/doctor": {
-                "name": "Lekár",
-                "terms": "lekar,doktor,ordinácia,ordinacia"
+            "amenity/doctors": {
+                "name": "Doktor",
+                "terms": "lekar,lekár"
             },
             "amenity/dojo": {
                 "name": "Škola bojových umení",
@@ -1689,6 +1686,10 @@
             "amenity/fast_food": {
                 "name": "Rýchle občerstvenie",
                 "terms": "rychle obcerstvenie,rýchle občerstvenie,fastfood, fast food"
+            },
+            "amenity/ferry_terminal": {
+                "name": "Stanica trajektu",
+                "terms": "trajekt,kompa,lod,autotrajekt"
             },
             "amenity/fire_station": {
                 "name": "Požiarna stanica",
@@ -1713,6 +1714,10 @@
             "amenity/hospital": {
                 "name": "Nemocničný areál",
                 "terms": "nemocnicny areal,nemocnica,poliklinika"
+            },
+            "amenity/hunting_stand": {
+                "name": "Poľovnícka postriežka",
+                "terms": "polovnicka postriezka,úkryt,ukryt,skrýša,skrysa"
             },
             "amenity/kindergarten": {
                 "name": "Detská škôlka",
@@ -1741,6 +1746,10 @@
             "amenity/parking_entrance": {
                 "name": "Vhod/východ do garáže",
                 "terms": "vchod/vychod do garaze,vchod,vychod,garáž,garaz,parkovanie"
+            },
+            "amenity/parking_space": {
+                "name": "Parkovacie miesto",
+                "terms": "parkovisko,miesto na parkovanie"
             },
             "amenity/pharmacy": {
                 "name": "Lekáreň",
@@ -1862,6 +1871,46 @@
                 "name": "Univerzita",
                 "terms": "Univerzita,vysoka skola, vysoká škola"
             },
+            "amenity/vending_machine/cigarettes": {
+                "name": "Automat na cigarety",
+                "terms": "cigarety"
+            },
+            "amenity/vending_machine/condoms": {
+                "name": "Automat na kondómy",
+                "terms": "automat na kondomy,kondóm,kondom"
+            },
+            "amenity/vending_machine/drinks": {
+                "name": "Automat na nápoje",
+                "terms": "automat na napoje,napoj,nápoj"
+            },
+            "amenity/vending_machine/excrement_bags": {
+                "name": "Automat na sáčky pre výkaly",
+                "terms": "automat na sacky pre vykaly"
+            },
+            "amenity/vending_machine/news_papers": {
+                "name": "Automat na noviny",
+                "terms": "noviny,casopisy,časopisy"
+            },
+            "amenity/vending_machine/parcel_pickup_dropoff": {
+                "name": "Automat na odosielanie/príjem balíkov",
+                "terms": "automat na dodsielanie/prijem balikov,baliky,balíky"
+            },
+            "amenity/vending_machine/parking_tickets": {
+                "name": "Automat na parkovacie lístky",
+                "terms": "automat na parkovacie listky"
+            },
+            "amenity/vending_machine/public_transport_tickets": {
+                "name": "Automat na lístky pre tranzitnú dopravu",
+                "terms": "automat na listky pre tranzitnu dopravu"
+            },
+            "amenity/vending_machine/sweets": {
+                "name": "Automat na sladkosti",
+                "terms": "jedlo,tyčinky,tycinky"
+            },
+            "amenity/vending_machine/vending_machine": {
+                "name": "Automat",
+                "terms": "výdajný automat,vydajny automat"
+            },
             "amenity/veterinary": {
                 "name": "Veterinár",
                 "terms": "veterinar"
@@ -1869,6 +1918,10 @@
             "amenity/waste_basket": {
                 "name": "Odpadový kôš",
                 "terms": "kontajner,kôš,smeti,kos,odpad,odpadkovy kos, odpadkový kôš"
+            },
+            "amenity/water_point": {
+                "name": "Pitná voda pre karavany",
+                "terms": "pitna voda pre karavany"
             },
             "area": {
                 "name": "Plocha",
@@ -3228,7 +3281,7 @@
             },
             "route/ferry": {
                 "name": "Trajektová trasa",
-                "terms": "trajektova trasa,trasa trajektu,trajekt,linka"
+                "terms": "trajektova trasa,trasa trajektu,trajekt,linka,trasa kompy,kompa"
             },
             "shop": {
                 "name": "Obchod",
@@ -3812,7 +3865,7 @@
             },
             "type/route/ferry": {
                 "name": "Trajektová trasa",
-                "terms": "Trajektova trasa,trajekt,linka,linka trajektu"
+                "terms": "Trajektova trasa,trajekt,linka,linka trajektu,trasa kompy"
             },
             "type/route/foot": {
                 "name": "Turistická trasa",
@@ -3854,6 +3907,10 @@
                 "name": "Vodná cesta",
                 "terms": "vodna cesta,trasa,voda,tok,rieka"
             },
+            "waterway/boatyard": {
+                "name": "Lodenica",
+                "terms": "lodenica,oprava lodí,oprava lodi"
+            },
             "waterway/canal": {
                 "name": "Kanál",
                 "terms": "kanal"
@@ -3865,6 +3922,10 @@
             "waterway/ditch": {
                 "name": "Priekopa",
                 "terms": "priekopa,jarok,jama,garat,kanál,kanal,stoka"
+            },
+            "waterway/dock": {
+                "name": "Dok",
+                "terms": "oprava lodí,oprava lodi"
             },
             "waterway/drain": {
                 "name": "Odvodňovací kanál",
@@ -3889,6 +3950,10 @@
             "waterway/stream": {
                 "name": "Potok",
                 "terms": "potok,potôčik,bystrina,riečka,kanál,potocik,riecka,kanal,pstruha"
+            },
+            "waterway/water_point": {
+                "name": "Pitná voda pre lode",
+                "terms": "pitna voda pre lode"
             },
             "waterway/weir": {
                 "name": "Hrádza",

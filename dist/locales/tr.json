@@ -72,7 +72,8 @@
                 "area": "Alanı daireleştirin."
             },
             "not_closed": "Bu daireleştirilemez çünkü döngü içerisinde değil.",
-            "too_large": "Bu yuvarlaklaştırılamaz çünkü yeterli bölümü görülebilir değil. "
+            "too_large": "Bu yuvarlaklaştırılamaz çünkü yeterli bölümü görülebilir değil. ",
+            "connected_to_hidden": "Bu nesne gizli bir nesneye bağlı olduğu için daireleştirilemez."
         },
         "orthogonalize": {
             "title": "Kare",
@@ -86,14 +87,16 @@
                 "area": "Alanın köşeleri doğrultuldu."
             },
             "not_squarish": "Bu kareleştirilemez çünkü karemsi değil. ",
-            "too_large": "Bu kareleştirilemez çünkü yeterli bölümü görülebilir değil. "
+            "too_large": "Bu kareleştirilemez çünkü yeterli bölümü görülebilir değil. ",
+            "connected_to_hidden": "Bu, gizli bir nesneye bağlı olduğu için kare haline getirilemez."
         },
         "straighten": {
             "title": "Düzleştir",
             "description": "Bu çizgiyi düzleştir.",
             "key": "S",
             "annotation": "Bir çizgi düzleştirildi.",
-            "too_bendy": "Bu düzleştirilemez çünkü çok eğimli. "
+            "too_bendy": "Bu düzleştirilemez çünkü çok eğimli. ",
+            "connected_to_hidden": "Bu çizgi gizli bir nesneye bağlı olduğu için düzleştirilemez."
         },
         "delete": {
             "title": "Sil",
@@ -106,7 +109,8 @@
                 "relation": "Bir ilişki silindi.",
                 "multiple": "{n} adet obje silindi."
             },
-            "incomplete_relation": "Bu özellik silinemez çünkü henüz bütünüyle indirilmedi. "
+            "incomplete_relation": "Bu özellik silinemez çünkü henüz bütünüyle indirilmedi. ",
+            "part_of_relation": "Bu nesne daha büyük bir ilişkinin parçası olduğu için silinemez . Nesneyi silmek için önce ilişkiden çıkarın."
         },
         "add_member": {
             "annotation": "İlişkiye bir üye eklendi."
@@ -131,7 +135,9 @@
         },
         "merge": {
             "title": "Birleştir",
+            "description": "Bu nesneleri birleştir.",
             "key": "C",
+            "annotation": "Birleştirilen nesneler {n}.",
             "not_eligible": "Bu kısımlar birleştirilemez.",
             "incomplete_relation": "Bu özellikler birleştirilemez çünkü içlerinden en az biri henüz bütünüyle indirilmedi."
         },
@@ -212,6 +218,7 @@
     "zoom_in_edit": "Güncellemek/değiştirmek için görüntüyü yakınlaştır.",
     "logout": "Çıkış",
     "loading_auth": "OpenStreetMap'e bağlanıyor...",
+    "report_a_bug": "Hata bildir.",
     "status": {
         "error": "APIya bağlanılamıyor.",
         "offline": "API kapalı. Daha sonra yeniden dene.",
@@ -447,45 +454,30 @@
         "navigation": {
             "title": "Navigasyon",
             "drag": "Ana harita alanı OpenStreetMap verisini arka plan olarak size sunmaktadır. Diğer harita uygulamalarında olduğu gibi sürekleyip yaklaş/uzaklaş ile haritada dolaşabilirsiniz. **Haritayı sürükleyin!** ",
-            "select": "Harita nesneleri üç farklı şekilde gösterilir : noktalar, çizgiler ve alanlar. Tüm nesneler üzerine tıklanarak seçilebilir. **Bir nokta üzerine tıklayarak seçiniz.**",
-            "header": "Başlık bize nesne tipini göstermektedir.",
-            "pane": "Bir nesne seçildiği zaman, nesne editörü görünür hale gelir. Başlık kısmı bize nesnenin tipini, ana panel ise nesnenin adı ya da adresi gibi özelliklerini gösterir. **Nesne editörünü sağ üst köşesindeki kapat butonu yardımıyla kapatınız.**"
+            "select": "Harita nesneleri üç farklı şekilde gösterilir : noktalar, çizgiler ve alanlar. Tüm nesneler üzerine tıklanarak seçilebilir. **Bir nokta üzerine tıklayarak seçiniz.**"
         },
         "points": {
             "title": "Noktalar",
-            "add": "Noktalar dükkanları, restoranları ya da anıtları göstermek için kullanılabilir. Bunlar bir lokasyonu işaretler ve orada ne olduğunu tarif eder. **Nokta butonuna tıklayarak yeni bir nokta ekleyiniz.**",
-            "place": "Bir noktayı haritaya tıklayarak yerleştirebilirsiniz. **Bir binanın üstüne noktayı yerleştiriniz.**",
             "search": "Noktalarla gösterilebilecek çok farklı özellikler var. Şimdi eklediğin nokta bir kafe. **'{name}' ara**",
             "choose": "**Listeden kafeyi seç.**",
-            "describe": "Nokta artık kafe olarak işaretlendi. Nesne editörü ile nesneye daha fazla bilgi ekleyebiliriz. **Bir ad ekleyiniz**",
-            "close": "Nesne editörü kapat butonuna tıklayarak kapanabilir. **Nesne editörünü kapatınız**",
-            "reselect": "Bazen noktalar bulunmaktadır fakat hataları ya da eksiklikleri bulunmaktadır. Bunları düzenleyebiliriz. **Oluşturduğunuz noktayı seçiniz.**",
-            "fixname": "**Adı değiştirin ve editörü kapatınız.**",
-            "reselect_delete": "Harita üstündeki tüm nesneler silinebilir. **Oluşturduğunuz noktaya tıklayınız.**",
-            "delete": "Nokta çevresindeki menü ile farklı operasyonlar gerçekleştirilebilir, silme de bunlardan birisidir. **Noktayı siliniz.**"
+            "describe": "Nokta artık kafe olarak işaretlendi. Nesne editörü ile nesneye daha fazla bilgi ekleyebiliriz. **Bir ad ekleyiniz**"
         },
         "areas": {
             "title": "Alanlar",
-            "corner": "Alanlar alan sınırlarını belirleyen noktaların konulması ile çizilirler. **Test alanında bir alanın köşe noktasına tıklayarak çizime başlayın.**",
             "place": "Alanı daha fazla nokta ekleyerek çiziniz. Başladığınız noktaya tıklayarak alan çizimini bitiriniz. **Test alanı için bir alan çiziniz.**",
             "search": "**'{name}' ara.**",
-            "choose": "**Listeden Oyunalanı seç.**",
-            "describe": "**Bir ad ekleyerek editörü kapatınız**"
+            "choose": "**Listeden Oyunalanı seç.**"
         },
         "lines": {
             "title": "Çizgiler",
-            "add": "Çizgiler, yollar, demiryolları ve ırmaklar gibi özellikler için kullanılır.  **Yeni bir çizgi eklemek için çizgi düğmesine tıklayın.**",
             "start": "**Çizimi başlatmak için yolun sonuna tıklayınız.**",
             "finish": "Çizgiler, son düğüme bir kez daha tıklanarak bitirilebilir. **Yolu çizmeyi bitirin.**",
             "road": "**Yolu listeden seç**",
             "residential": "Çok farklı tiplerde yollar bulunmaktadır, en yaygın olanı Şehir İçi olanlardır. **Şehir için yol tipini şeçiniz**",
-            "describe": "**Yola adını verin ve editörü kapatın.**",
-            "restart": "Bu yolun \"Flower Street\" -sokağı- ile kesişmesi gerekiyor.",
             "wrong_preset": "Yerleşim yeri yolu türünü seçmedin. **Yeniden seçmek için buraya tıkla**"
         },
         "startediting": {
             "title": "Düzenlemeye Başla",
-            "help": "Daha fazla dökümantasyon ve örnek burada mevcut.",
             "save": "Belli aralıklarla değişikliklerinizi kaydetmeyi unutmayınız!",
             "start": "Haritalamaya başla!"
         }
@@ -1120,9 +1112,6 @@
             "amenity/bicycle_rental": {
                 "name": "Bisiklet Kiralama"
             },
-            "amenity/bicycle_repair_station": {
-                "name": "Bisiklet Tamiri"
-            },
             "amenity/boat_rental": {
                 "name": "Bot Kiralama"
             },
@@ -1161,9 +1150,6 @@
             },
             "amenity/dentist": {
                 "name": "Dişçi"
-            },
-            "amenity/doctor": {
-                "name": "Doktor"
             },
             "amenity/drinking_water": {
                 "name": "İçme Suyu"

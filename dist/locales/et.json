@@ -467,7 +467,6 @@
         },
         "points": {
             "title": "Punktid",
-            "add": "Punkte saab kasutada objektide nagu kauplused, restoranid ja monumendid esitamiseks. Punktid märgistavad konkreetse koha ja kirjeldavad, mis seal asub. **Uue punkti lisamiseks kliki nupul Punkt.** ",
             "choose": "**Vali nimekirjast kohvik**"
         },
         "areas": {
@@ -842,9 +841,6 @@
             },
             "amenity/dentist": {
                 "name": "Hambaarst"
-            },
-            "amenity/doctor": {
-                "name": "Arst"
             },
             "amenity/drinking_water": {
                 "name": "Joogivesi"

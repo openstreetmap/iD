@@ -234,31 +234,16 @@
     "intro": {
         "navigation": {
             "drag": "Die hoofkaartarea toon OpenStreetMap data aan op 'n agtergrond. Jy kan navigeer deur te trek en te sleep net soos met enige ander web gebaseerde kaart. **Probeer dit nou!**",
-            "select": "Kaart eienskappe word verteenwoordig op drie maniere: punte, lyne en areas. All eienskappe kan uitgekies word deur daarop te klick. **Klick op 'n punt om dit uit te kies.**",
-            "header": "Die opskrif wys ons die eienskap tipe.",
-            "pane": "Die itemkieslys word vertoon sodra jy 'n item op die kaart kies. Die opskrif dui die itemtipe aan en die hoofpaneel dui die item se eienskappe aan soos 'n naam en adres. **Om die itemkieslys toe te maak druk die knoppie regs bo.**"
+            "select": "Kaart eienskappe word verteenwoordig op drie maniere: punte, lyne en areas. All eienskappe kan uitgekies word deur daarop te klick. **Klick op 'n punt om dit uit te kies.**"
         },
         "points": {
-            "add": "Punte kan gebruik word om winkels, restaurante, monemente en soortgelyke plekke aan te dui. Dit merk 'n spesifieke punt en beskryf wat daar gevind kan word. **Druk op die Punt knoppe om  'n nuwe punt by te voeg.**",
-            "place": "Die punt kan op die kaart geplaas word deur daarop te klick. **Sit die punt bo-op die gebou.**",
-            "describe": "Die punt is nou gemerk as 'n kafee. Gebruik die eienskapslys om meer inligting by te sit. **Sit 'n naam by**",
-            "close": "Die eienskapslys kan toegemaak word deur op die toemaak knoppie te klick. **Maak die eienskapslys toe**",
-            "reselect": "Baie kere gaan 'n punt klaar bestaan, maar met foute of onvolledig. Jy kan bestaande punte verander. **Kies die punt wat jy nou net gemaak het.**",
-            "fixname": "**Verander die naam en maak die eienskapslys toe.**",
-            "reselect_delete": "Alle eienskappe op die kaart kan verwyder word. **Klick op die punt wat jy nou net gemaak het. **",
-            "delete": "Wanneer jy op 'n punt druk verskyn verskillende opsies, soos verwyder die punt. **Verwyder die punt.**"
-        },
-        "areas": {
-            "describe": "**Sit 'n naam by en maak die eienskappe lys toe**"
+            "describe": "Die punt is nou gemerk as 'n kafee. Gebruik die eienskapslys om meer inligting by te sit. **Sit 'n naam by**"
         },
         "lines": {
             "start": "** Begin die lyn deur op die einde van die pad te klick.**",
-            "residential": "Daar is verskillende tipes paaie, die mees algemeenste is 'n residensieel pad. ** Kies die Residentieele Pad tipe**",
-            "describe": "**Gee die pad 'n naam en maak die eienskappe lys toe.**",
-            "restart": "Die pad moet Flower Straat Kruis."
+            "residential": "Daar is verskillende tipes paaie, die mees algemeenste is 'n residensieel pad. ** Kies die Residentieele Pad tipe**"
         },
         "startediting": {
-            "help": "Meer dokumentasie en hierdie deurloop is beskikbaar hier.",
             "save": "Moenie vergeet om gereeld verandering te bêre nie!",
             "start": "Begin die kaart teken!"
         }

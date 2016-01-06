@@ -489,7 +489,7 @@
     "full_screen": "Vollbild umschalten",
     "gpx": {
         "local_layer": "Lokale GPX-Datei",
-        "drag_drop": "Ziehe eine GPX-Datei per Drag & Drop auf die Seite oder klicke den Knopf rechts, um eine GPX-Datei zu laden",
+        "drag_drop": "Ziehe eine GPX-Datei per Drag & Drop auf die Seite oder klicke den Knopf rechts, um eine GPX-Datei zu suchen",
         "zoom": "Zur GPX-Spur zoomen",
         "browse": "Eine GPX-Datei laden"
     },
@@ -511,50 +511,82 @@
         "relations": "# Relationen\n\nEine Relation ist ein besonderes Element in OpenStreetMap, welches andere Elemente zusammenfasst. Es gibt zwei gängige Arten von Relationen: *Routen* fassen Abschnitte eines Weges zu einer Autobahn (oder zu einem anderen Weg) zusammen. *Multipolygone* fassen mehrere Flächen zu einer komplexen Fläche zusammen, dabei kann auch eine Fläche ein Loch in einer anderen Fläche (wie der Innenhof in einem Gebäude oder die Lichtung im Wald) beschreiben.\n\nDie Elemente in einer Relation werden *Mitglieder* genannt. In der Seitenleiste kannst Du sehen, in welchen Relationen ein Element enthalten ist. Durch Klick auf eine Relation werden alle Elemente der Relation in der Seitenleisten aufgezeigt und auf der Karte markiert.\n\nNormalerweise kümmert sich iD während der Bearbeitung automatisch um die Pflege der Relationen. Wenn Du einen Abschnitt eines Weges löschst, um ihn genauer neu zu zeichnen, solltest Du sicherstellen, dass der neuen Abschnitt Mitglied in den gleichen Relationen wie das Original wird.\n\n## Bearbeiten von Relationen\n\nUm ein Element einer Relation hinzuzufügen, wähle das zukünftige Mitglied aus und klicke in der Seitenleiste auf die Schaltfläche „+“ im Abschnitt „Alle Relationen“. Du kannst dann die Relation auswählen oder den Namen der Relation eintippen.\n\nUm eine neue Relation erstellen, wähle das erste zukünftige Mitglied aus und klicke in der Seitenleiste auf die Schaltfläche „+“ im Abschnitt „Alle Relationen“ und wähle „Neue Relation …“.\n\nUm ein Element aus einer Relation zu entfernen, wähle das Mitglied aus und klicke auf den Papierkorb neben der Relation, aus der Du es entfernen willst.\n\nDu kannst Multipolygone mit Löchern mit dem „Vereinigen“-Werkzeug erstellen. Zeichne zwei Bereiche (den äußeren und den inneren Bereich) und klicke auf den äußeren Bereich. Dann halte die Umschalttaste gedrückt und klicke auf den inneren Bereich und klicke dann auf „Vereinigen“ (+).\n"
     },
     "intro": {
+        "graph": {
+            "city_hall": "Rheinstadt Rathaus",
+            "fire_department": "Rheinstadt Feuerwehr",
+            "memory_isle_park": "Augartenpark",
+            "riverwalk_trail": "Uferpromenade",
+            "w_michigan_ave": "Goethestraße",
+            "e_michigan_ave": "Schillerstraße",
+            "spring_st": "Lindenstraße",
+            "scidmore_park": "Stadtgarten",
+            "petting_zoo": "Stadtgarten Zoo",
+            "n_andrews_st": "Bergstraße",
+            "s_andrews_st": "Ringstraße",
+            "n_constantine_st": "Waldstraße",
+            "s_constantine_st": "Gartenstraße",
+            "rocky_river": "Rhein",
+            "railroad_dr": "Bahnhofstraße",
+            "conrail_rr": "Schloßgartenbahn",
+            "st_joseph_river": "Albfluss",
+            "n_main_st": "Hauptstraße",
+            "s_main_st": "Dorfstraße",
+            "water_st": "Bachstraße",
+            "foster_st": "Mozartstraße",
+            "portage_river": "Industriestraße",
+            "flower_st": "Blumenstraße",
+            "elm_st": "Kruegerstraße",
+            "walnut_st": "Eichenweg",
+            "morris_ave": "Messiasstraße",
+            "east_st": "Poststraße",
+            "portage_ave": "Furtstraße"
+        },
         "navigation": {
             "title": "Navigation",
             "drag": "Die Karte zeigt OpenStreetMap-Daten auf einem Hintergrund. Du kannst sie wie jede andere Karte im Internet durch Ziehen und Scrollen bewegen. **Verschiebe die Karte.**",
             "select": "Kartenobjekte werden auf drei verschiedenen Weisen repräsentiert: als Punkte, Linien oder Flächen. Alle Objekte können durch Klicken ausgewählt werden. **Klicke auf einen Punkt, um ihn auszuwählen.**",
-            "header": "Die Kopfzeile zeigt den Typ des Objektes.",
-            "pane": "Wird ein Objekt ausgewählt, wird der Objekteditor angezeigt. Die Kopfzeile zeigt den Typ des Objektes an. Im Hauptfenster werden die Eigenschaften des Objektes angezeigt, wie etwa sein Name und seine Adresse.\n**Schließe den Eigenschaftseditor mit dem Schließen-Knopf rechts oben.**"
+            "pane": "Wenn ein Objekt ausgewählt ist wird der Objekteditor angezeigt. Der Kopf zeigt den Objekttype und darunter werden die Objektattribute angezeigt wie Name und Adresse. **Du kannst den Objektojekteditor schließn indem Du den {button} Knopf oben rechts drückst.**",
+            "search": "Du kannst in der aktuellen Ansicht nach Objekten suchen, oder auch weltweit. **suche '{name}'**",
+            "choose": "**Klicke {name} aus der Liste zum auswählen.**",
+            "chosen": "Super! {name} ist jetzt ausgewählt. **Schließe den Objekteditor durch klicken des {button} Knopf.**"
         },
         "points": {
             "title": "Punkte",
-            "add": "Punkte können verwendet werden, um Objekte wie Läden, Restaurants oder Denkmäler darzustellen. Sie markieren einen bestimmten Standort und beschreiben, was sich dort befindet. **Klicke den Punkt-Knopf an, um einen neuen Punkt hinzuzufügen.**",
-            "place": "Punkte können durch Klicken auf die Karte platziert werden. **Platziere einen Punkt auf dem Gebäude.**",
+            "add": "Punkte werden benutzt um Objekte wie Shops, Restaurants oder Denkmäler zu mappen. Sie zeigen einen spezifischen Ort und beschreiben was dort ist. **Klick auf den {button} Punkt-Knopf um einen neuen Punkt hinzuzufügen.**",
+            "place": "Der Punkt kann nur durch Klicken in der Karten plaziert werden. **Klicke in die Karte um den neuen Punkt auf das Gebäude zu plazieren.**",
             "search": "Es gibt viele verschiedene Objekte, die ein Punkt repräsentieren kann. Der Punkt, den du gerade hinzugefügt hast, ist ein Café. **Suche nach '{name}'.**",
             "choose": "**Wähle „Café“ aus der Liste aus.**",
             "describe": "Der Knoten wurde nun als Café markiert. Mit dem Objekteditor können weitere Informationen über das Objekt erfasst werden. **Füge einen Namen hinzu.**",
-            "close": "Der Objekteditor kann mithilfe des Schließen-Knopfes beendet werden. **Schließe den Objekteditor.**",
-            "reselect": "Oftmals existieren Knoten bereits, haben aber falsche oder unvollständige Eigenschaften. Wir können vorhandene Knoten bearbeiten. **Wähle den Punkt aus, den du gerade erstellt hast.**",
-            "fixname": "**Ändere den Namen und schließe den Objekteditor.**",
-            "reselect_delete": "Alle Sachen auf der Karte können gelöscht werden. **Klicke auf den von dir erzeugten Punkt.**",
-            "delete": "Das Menü um den Knoten herum beinhaltet Werkzeuge, um diesen zu bearbeiten. So kann man ihn unter anderem auch löschen. **Lösche den Knoten.**"
+            "close": "Der Objekteditor merkt sich alle Deine Änderungen automatisch. Wenn Du ein Objekt änderst wird der Schließen-Knopf zu einem Häckchen. **Klicke den {button} Knopf um den Objekteditor zu schließen.**",
+            "reselect": "Punkte gibt es oft schon, aber die haben Fehler oder sind unvollständig. Du kannst bestehenden Punkte editieren. **Selektieren auf den Punkt den Du gerade erzeugt hast durch Klicken.**",
+            "fixname": "**Ändere den Namen, dann klicke den {button} Knopf um den Objekteditor zu schließen.**",
+            "reselect_delete": "Alle Objekte auf der Karte können gelöscht werden. **Selektiere den erzeugt Punkt durch Anklicken.**",
+            "delete": "Das Menu um den Punkt zeigt Vorgänge die mit dem Punkt durchgeführt werden können, das beinhaltet auch löschen. **Klicke auf den {button} Knopf um den Punkt zu löschen.**"
         },
         "areas": {
             "title": "Flächen",
-            "add": "Flächen werden verwendet, um Grenzen von Objekten wie Seen, Gebäuden oder Wohngebieten zu erfassen. Sie können auch benutzt werden, um viele Objekte, die normalerweise als Punkte erfasst werden, detaillierter zu erfassen. **Klicke auf den Knopf „Fläche“, um eine neue Fläche hinzuzufügen.**",
-            "corner": "Flächen werden gezeichnet, indem man Punkte platziert, die den Umriss der Fläche repräsentieren. **Setze den Startpunkt auf eine Ecke des Spielplatzes.**",
+            "add": "Flächen werden benutzt um Grenzen von Objekten wie Seen, Gebäude oder Wohngebiete zu zeigen. Sie können auch benutzt werden um Objekte die normalerweise als Punkte gezeichnet werden genauer zu zeichnen. **Klicke den {button} Flächen-Knopf um eine neuen Fläche zu erzeugen.**",
+            "corner": "Flächen werden gezeichnet indem Punkte an der Grenze gesetzt werden. **Klicke um den Startpunkt auf einen der Ecke des Spielplatzes zu setzen.**",
             "place": "Zeichne eine Fläche, indem du weitere Punkte hinzufügst. Beende die Fläche, indem du auf den Startpunkt klickst. **Zeichne eine Fläche für den Spielplatz.**",
             "search": "**Suche nach '{name}'.**",
             "choose": "**Wähle Spielplatz aus der Liste aus.**",
-            "describe": "**Füge einen Namen hinzu und schließe den Objekteditor.**"
+            "describe": "**Gib einen Namen ein, dann klicke den {button} Knopf um den Objekteditor zu schließen.**"
         },
         "lines": {
             "title": "Linien",
-            "add": "Linien werden verwendet, um Objekte wie Straßen, Bahngleise und Flüsse zu erzeugen. **Klicke auf den Linien-Knopf, um eine neue Linie zu zeichnen.**",
+            "add": "Linien werden benutzt um Objekte wie Straßen, Eisenbahnschienen oder Flüsse abzubilden. **Klicke den {button} Linien-Knopf um eine neue Linien einzufügen.**",
             "start": "**Beginne die Linie, indem du auf das Ende der Straße klickst.**",
-            "intersect": "Klicke, um mehr Punkte zu einer Linie hinzuzufügen. Du kannst während des Zeichnens die Karte verschieben. Straßen und andere Wege sind Teil eines großen Netzwerkes und müssen ordnungsgemäß miteinander verbunden sein, um sie für Routenführung nutzen zu können. **Klicke auf die „Flower Street“, um eine Kreuzung zu erzeugen und beide Linien zu verbinden.**",
+            "intersect": "Klicke um Punkte zur Linien hinzuzufügen. Du kannst die Karte während des Zeichnens schieben, wenn Du willst. Straßen und viele andere Arten von Linien sind Teil eines großen Netzwerks. Es ist wichtig, dass diese Linien richtig verbunden sind damit Routing-Anwendung funktionieren. **Klicke auf {name} um die beiden Linien mit einer Kreuzung zu verbinden.**",
             "finish": "Linien können vollendet werden, indem man den letzten Punkt erneut anklickt **Beende das Zeichnen der Straße.**",
             "road": "**Wähle Straße aus der Liste aus.**",
             "residential": "Es gibt verschiedene Straßenarten, die häufigste ist die Wohngebietsstraße. **Wähle die Wohngebietsstraße.**",
-            "describe": "**Benenne die Straße und schließe den Objekteditor.**",
-            "restart": "Die Straße muss die „Flower Street“ schneiden.",
+            "describe": "**Benenne die Straße, dann klicke den {button} Knopf um den Objekteditor zu schließen.**",
+            "restart": "Diese Straße soll {name} kreuzen.",
             "wrong_preset": "Du hast nicht die Wohngebietsstraße ausgewählt. **Klicke hier, um es erneut zu versuchen.**"
         },
         "startediting": {
             "title": "Mit der Bearbeitung anfangen",
-            "help": "Mehr Dokumentation und diese Einführung findest du hier.",
+            "help": "Du kannst diese Anleitung nochmals anzeigen oder mehr Dokumentation über den {button} Hilfe-Knopf erreichen.",
             "save": "Vergiss nicht, regelmäßig zu speichern!",
             "start": "Fange an zu mappen!"
         }
@@ -850,6 +882,12 @@
             },
             "description": {
                 "label": "Beschreibung"
+            },
+            "diaper": {
+                "label": "Windelwechseln möglich"
+            },
+            "dock": {
+                "label": "Typ"
             },
             "drive_through": {
                 "label": "Durchfahrtslokal"
@@ -1599,8 +1637,8 @@
                 "terms": "Fahrrad-Verleih"
             },
             "amenity/bicycle_repair_station": {
-                "name": "Fahrradreparaturstation",
-                "terms": "Fahrradreparaturstation, Fahrradreparaturbox"
+                "name": "Fahrradreperatur-Werkzeugkasten",
+                "terms": "Fahrradreperatur-Werkzeugkasten, Fahrradreperatur-Werkzeug-Standplatz"
             },
             "amenity/biergarten": {
                 "name": "Biergarten",
@@ -1678,9 +1716,9 @@
                 "name": "Zahnarzt",
                 "terms": "Zahnarzt, Dentist, Stomatologe"
             },
-            "amenity/doctor": {
+            "amenity/doctors": {
                 "name": "Arzt",
-                "terms": "Arzt, Mediziner, Doktor"
+                "terms": "Arzt, Ärztin, Mediziner, Medizinerin"
             },
             "amenity/dojo": {
                 "name": "Kampfsportstudio",
@@ -1697,6 +1735,10 @@
             "amenity/fast_food": {
                 "name": "Schnellimbiss",
                 "terms": "Fast Food, Imbiss"
+            },
+            "amenity/ferry_terminal": {
+                "name": "Fährhafen",
+                "terms": "Fährhafen"
             },
             "amenity/fire_station": {
                 "name": "Feuerwehr",
@@ -1721,6 +1763,10 @@
             "amenity/hospital": {
                 "name": "Krankenhausgelände",
                 "terms": "Krankenhaus, Klinik, Klinikgelände, Hospital"
+            },
+            "amenity/hunting_stand": {
+                "name": "Hochstand",
+                "terms": "Hochstand, Jagdhochstand, Jagdunterstand"
             },
             "amenity/kindergarten": {
                 "name": "Kindergarten",
@@ -1749,6 +1795,10 @@
             "amenity/parking_entrance": {
                 "name": "Garageneinfahrt/-ausfahrt",
                 "terms": "Parkgaragen-Einfahrt/Ausfahrt, Garageneinfahrt/-ausfahrt, Garagenzufahrt/-abfahrt"
+            },
+            "amenity/parking_space": {
+                "name": "Parkplatz",
+                "terms": "Parkplatz, Parkbox, Parklücke, Parkfeld, Stellplatz, Autoabstellplatz, Abstellplatz"
             },
             "amenity/pharmacy": {
                 "name": "Apotheke",
@@ -1917,6 +1967,10 @@
             "amenity/waste_basket": {
                 "name": "Abfalleimer",
                 "terms": "Abfalleimer,Abfallkübel,Abfallbehälter,Mistkübel,Mülleimer"
+            },
+            "amenity/water_point": {
+                "name": "Camping-Trinkwasser",
+                "terms": "Trinkwasserreserve, Frischwasserreserve"
             },
             "area": {
                 "name": "Fläche",
@@ -3902,6 +3956,10 @@
                 "name": "Wasserweg",
                 "terms": "Wasserweg"
             },
+            "waterway/boatyard": {
+                "name": "Werft",
+                "terms": "Werft, Bootswerft"
+            },
             "waterway/canal": {
                 "name": "Kanal",
                 "terms": "Kanal"
@@ -3913,6 +3971,10 @@
             "waterway/ditch": {
                 "name": "Graben",
                 "terms": "Entwässerungsgraben"
+            },
+            "waterway/dock": {
+                "name": "Dock",
+                "terms": "Dock, Trockendock, Hafenbecken, Kai, Ampfer"
             },
             "waterway/drain": {
                 "name": "Ablauf",
@@ -3937,6 +3999,10 @@
             "waterway/stream": {
                 "name": "Bach",
                 "terms": "Bach"
+            },
+            "waterway/water_point": {
+                "name": "Marine Frischwasser",
+                "terms": "Frischwasser, Trinkwasser"
             },
             "waterway/weir": {
                 "name": "Wehr",

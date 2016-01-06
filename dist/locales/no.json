@@ -669,9 +669,6 @@
             "amenity/clock": {
                 "name": "Klokke"
             },
-            "amenity/doctor": {
-                "name": "Doktor"
-            },
             "amenity/drinking_water": {
                 "name": "Drikkevann"
             },

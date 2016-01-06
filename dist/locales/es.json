@@ -501,7 +501,7 @@
     "help": {
         "title": "Ayuda",
         "help": "# Ayuda\n\nEste es un editor para [OpenStreetMap](http://www.openstreetmap.org/), el\nmapa libre y editable del mundo. Se puede utilizar para agregar y actualizar\ndatos en su área, haciendo el mapa de fuente abierto y de datos abiertos del mundo\nmejor para todos.\n\nLas ediciones que realice en este mapa serán visible a todos los que usen\nOpenStreetMap. Con el fin de hacer una edición, tendrá que\n[Iniciar sesión](https://www.openstreetmap.org/login).\n\n\nEl [editor iD](http://ideditor.com/) es un proyecto colaborativo con [código\nfuente disponible en GitHub](https://github.com/openstreetmap/iD).\n",
-        "editing_saving": "# Editar y guardar\n\nEste editor está diseñado para trabajar en línea principalmente, y en estos\nmomentos esta accediendo a través de un sitio web.\n\n### Seleccionar elementos\n\nPara seleccionar un elemento del mapa, como una carretera o un punto de\ninterés, haga clic sobre el en el mapa. Esto resaltará el elemento seleccionado,\nabriendo un panel con sus detalles, y mostrará un menú de cosas que puedes\nhacer con ese elemento.\n\nPara seleccionar múltiples elementos, mantenga pulsada la tecla 'Mayús'. Luego\nhaga clic en los elementos que desea seleccionar o arrastre en el mapa para\ndibujar un rectángulo. Esto dibujará una caja y seleccionará todos los puntos\ndentro de ella.\n\n### Guardar ediciones\n\nCuando haga cambios como editar carreteras, edificios o lugares, estos se\nalmacenan localmente en su ordenador hasta que los guarde en el servidor.\nNo se preocupe si comete un error - puede deshacer los cambios haciendo\nclic en el botón 'Deshacer', y rehacerlos haciendo clic en el botón 'Rehacer'.\n\nHaga clic en 'Guardar' para finalizar un grupo de ediciones - por ejemplo, si ha\ncompletado una zona de la ciudad y quisiera empezar en un área nueva. Tendrá\nla oportunidad de revisar lo que ha hecho, y el editor proporciona avisos y\nsugerencias útiles si algo parece no ser correcto en los cambios.\n\nSi ve que todo es correcto, puede escribir un breve comentario explicando el\ncambio que ha hecho, y haga clic en 'Guardar' de nuevo para registrar los\ncambios en [OpenStreetMap.org](http://www.openstreetmap.org/), donde serán\nvisibles para todos los demás usuarios y estarán disponible para que otros\npuedan seguir construyendo y mejorando el mapa.\n\nSi no puede terminar sus ediciones en una sola sesión, puede dejar la ventana\ndel editor y volver más tarde (al mismo navegador y ordenador), y el editor le\npermitirá retomar su trabajo.\n\n### Uso del editor\n\nUna lista de métodos abreviados de teclado disponibles puede encontrarse [aquí](http://wiki.openstreetmap.org/wiki/ID/Shortcuts).\n",
+        "editing_saving": "# Editar y guardar\n\nEste editor está diseñado para trabajar en línea principalmente, y en estos\nmomentos esta accediendo a través de un sitio web.\n\n### Seleccionar elementos\n\nPara seleccionar un elemento del mapa, como una carretera o un punto de\ninterés, haga clic sobre el en el mapa. Esto resaltará el elemento seleccionado,\nabriendo un panel con sus detalles, y mostrará un menú de cosas que puede\nhacer con ese elemento.\n\nPara seleccionar múltiples elementos, mantenga pulsada la tecla 'Mayús'. Luego\nhaga clic en los elementos que desea seleccionar o arrastre en el mapa para\ndibujar un rectángulo. Esto dibujará una caja y seleccionará todos los puntos\ndentro de ella.\n\n### Guardar ediciones\n\nCuando haga cambios como editar carreteras, edificios o lugares, estos se\nalmacenan localmente en su ordenador hasta que los guarde en el servidor.\nNo se preocupe si comete un error - puede deshacer los cambios haciendo\nclic en el botón 'Deshacer', y rehacerlos haciendo clic en el botón 'Rehacer'.\n\nHaga clic en 'Guardar' para finalizar un grupo de ediciones - por ejemplo, si ha\ncompletado una zona de la ciudad y quisiera empezar en un área nueva. Tendrá\nla oportunidad de revisar lo que ha hecho, y el editor proporciona avisos y\nsugerencias útiles si algo parece no ser correcto en los cambios.\n\nSi ve que todo es correcto, puede escribir un breve comentario explicando el\ncambio que ha hecho, y haga clic en 'Guardar' de nuevo para registrar los\ncambios en [OpenStreetMap.org](http://www.openstreetmap.org/), donde serán\nvisibles para todos los demás usuarios y estarán disponible para que otros\npuedan seguir construyendo y mejorando el mapa.\n\nSi no puede terminar sus ediciones en una sola sesión, puede dejar la ventana\ndel editor y volver más tarde (al mismo navegador y ordenador), y el editor le\npermitirá retomar su trabajo.\n\n### Uso del editor\n\nUna lista de métodos abreviados de teclado disponibles puede encontrarse [aquí](http://wiki.openstreetmap.org/wiki/ID/Shortcuts).\n",
         "roads": "# Carreteras\n\nPuede crear, corregir y borrar carreteras con este editor. Las vías pueden ser de todas las clases: caminos, carreteras, senderos, ciclovías, etc. A cualquier línea dibujada en el mapa se le debe indicar el tipo de elemento lineal que es.\n\n### Seleccionar\n\nHaga clic sobre una vía para seleccionarla. Verá sobre ella como se visualiza su esquema, formada por nodos y segmentos, junto con un menú de herramientas que aparece sobre el mapa y una barra lateral que muestra más información sobre la vía.\n\n### Modificar\n\nA menudo verá viales que no están alineados correctamente con la imagen aérea de fondo o con la traza GPS. Puede ajustar esas vías para situarlas en el lugar exacto.\n\nPrimero haga clic sobre la vía que desea cambiar. Esto la resaltará y mostrará los nodos o puntos de control a lo largo de la vía que la forman. A continuación simplemente arrastre esos puntos a la posición correcta. Si desea añadir nuevos puntos de control para dibujar la carretera con mayor detalle haga doble clic sobre la parte de la vía donde quiere añadir el nuevo nodo y este será creado en la vía. \n\nSi la vía conecta con otra carretera o camino pero esta conexión no aparece correctamente en el mapa puede arrastrar uno de los puntos de la vía hasta la otra carretera y se unirá automáticamente a ella mediante un nodo común. Es muy importante tener las carreteras conectadas en el mapa, ya que es esencial para proporcionar instrucciones correctas para la conducción si queremos que la cartografía se útil, por ejemplo, para los navegadores GPS.\n\n### Eliminar\n\nSi un camino es totalmente incorrecto -ha observado que no aparece en las imágenes de satélite y de manera ideal lo ha confirmado en campo- puede eliminarlo, lo cual lo borrará del mapa. Sea precavido al eliminar elementos del mapa. Como cualquier otra edición que haga este cambio será visto por todo el mundo y las imágenes de satélite a menudo no están actualizadas, por lo que una carretera que no existe en ellas pero sí en el mapa simplemente puede aparecer porque es de reciente construcción y otro usuario la ha añadido. \n\n### Crear\n\n¿Ha encontrado un lugar donde debería existir una carretera pero no aparece? Haga clic con el ratón sobre el icono 'Línea' situado en la parte superior izquierda del editor o simplemente presione la tecla '2'  de su teclado que es el acceso rápido para comenzar a dibujar una línea. \n\nHaga clic sobre el mapa en el inicio de la carretera para comenzar a dibujar. Si la vía se ramifica a partir de una carretera ya existente empiece haciendo clic sobre el lugar donde ambas conectan.\n\nHaga clic en puntos a lo largo de la vía para definir el trazado correcto de la carretera. La densidad de puntos dependerá de la complejidad del recorrido, por lo que es aconsejable dibujar desde un nivel de zoom apropiado. Si la vía que está dibujando atraviesa otra carretera conéctela con esta haciendo clic sobre el punto de intersección. Una vez haya terminado el dibujo haga doble clic con el ratón o presiones la tecla 'Return' o 'Intro' de su teclado para finalizar.\n",
         "gps": "# GPS\n\nLas trazas de GPS recogidas son una valiosa fuente de datos para OpenStreetMap. Este\neditor soporta trazas locales - archivos `.gpx` en su equipo local. Usted puede obtener\neste tipo de traza GPS con una serie de aplicaciones de smartphone, como también con\nhardware GPS personal.\n\nPara más información sobre cómo realizar un relevamiento GPS, lea\n[Mapear con un smartphone, GPS, o papel](http://learnosm.org/es/mobile-mapping/).\n\nPara utilizar una traza GPX para mapear, arrastre y suelte el archivo GPX en el editor\nde mapa. Si este es reconocido, se añadirá al mapa como una línea púrpura brillante.\nHaga clic en el menú 'Datos del mapa' en el lado derecho para activar,\ndesactivar o acercar a esta nueva capa alimentada por GPX.\n\nLa traza GPX no se carga directamente a OpenStreetMap - la mejor manera de\nutilizarlo es dibujar en el mapa, usándolo como guía para las nuevos elementos que\nagregue, y también [subirlo a OpenStreetMap](http://www.openstreetmap.org/trace/create)\npara que otros usuarios lo utilicen.\n",
         "imagery": "# imágenes\n\nLas imágenes aéreas son un importante recurso para el trazado de mapas. Una combinación\nde vuelos aéreos, vistas de satélite, y compilaciones de fuentes gratuitas están disponibles\nen el editor bajo el menú 'Ajustes del fondo' a la derecha.\n\nDe forma predeterminada se presenta la capa de satélite de [Bing Maps](http://www.bing.com/maps/) en el editor, pero mientras se mueve y acerca el mapa a nuevas áreas\ngeográficas, nuevas fuentes estarán disponibles. Algunos países, como los Estados\nUnidos, Francia, y Dinamarca poseen imágenes de muy alta calidad disponible\npara algunas áreas.\n\nLas imágenes a veces están desplazadas de los datos del mapa por un error en el\nproveedor de imágenes. Si observa muchos caminos desplazados del fondo,\nno los mueva inmediatamente para emparejarlos. En su lugar puede ajustar\nla imagen para que coincida con los datos existentes haciendo clic\nen 'Corregir alineación' en la opción 'Ajustes del fondo'.\n",
@@ -511,50 +511,82 @@
         "relations": "# Relaciones\n\nUna relación es un tipo especial de elemento en OpenStreetMap que permite agrupar  diferentes elementos juntos. Por ejemplo, existen dos tipos muy comunes de relaciones en OSM:\n\n- Por un lado están las * relaciones de ruta*, que agrupan a tramos de carreteras que juntos pertenecen a una autopista y poseen una denominación común (ej: Autopista del Cantábrico).  \n\n- Por otro lado podemos encontrar los *multipolígonos*, que agrupan a varias áreas que definen superficies complejas (polígonos donuts, parcelas aisladas pero que forman en su conjunto una única propiedad, etc.)\n\nEl grupo de elementos en una relación reciben el nombre de *miembros*. En el panel lateral podrá ver de que relaciones forma parte un elemento, y haciendo clic sobre una de las relaciones lo seleccionará. Así mismo, si selecciona una relación podrá ver una lista con todos los miembros que la componen en el panel lateral y todos ellos se resaltarán en el mapa.\n\nEn su mayor parte, el editor ID se encargará de mantener las relaciones de manera automática a medida que se edita. Lo principal que debe tener en cuenta es que si elimina una sección de carretera para redibujarla de manera más precisa deberá asegurarse de que la nueva sección es un miembro de la misma relación como lo fue la sección original.\n\n## Editando relaciones\n\nSi deseas editar relaciones aquí encontrará los conceptos básicos.\n\nPara añadir un elemento a una relación seleccione aquel, haga clic en el botón \"+\" que encontrará en la sección \"Todas las relaciones\" de panel lateral y seleccione el nombre y tipo de relación.\n\nPara crear una nueva relación seleccione el primer elemento que compondrá la relación, haga clic en el botón \"+\" que encontrará en el apartado \"Todas las relaciones\" del panel lateral y seleccione \"Nueva  relación...\".\n \nPara eliminar un elemento de una relación selecciones aquel y haga clic en el botón con el icono de cubo de basura próximo a la relación de la que queremos eliminarlo.\n\nPuede crear multipolígonos con agujeros (donut) usando la herramienta \"Unir\". Dibuje dos áreas (una que delimite el interior del donut y otra el exterior), mantenga pulsada la tecla Mayúsculas y haga clic con el ratón en uno de ellos para seleccionarlos. A continuación pulse el botón \"Unir\" (+).\n\n"
     },
     "intro": {
+        "graph": {
+            "city_hall": "Ayuntamiento de Three Rivers",
+            "fire_department": "Bomberos de Three Rivers",
+            "memory_isle_park": "Parque Memory Isle",
+            "riverwalk_trail": "Sendero de Riverwalk",
+            "w_michigan_ave": "Avenida West Michigan",
+            "e_michigan_ave": "Avenida East Michigan",
+            "spring_st": "Calle Spring",
+            "scidmore_park": "Parque Scidmore",
+            "petting_zoo": "Zoológico de animales del Parque Scidmore",
+            "n_andrews_st": "Calle North Andrews",
+            "s_andrews_st": "Calle South Andrews",
+            "n_constantine_st": "Calle North Constantine",
+            "s_constantine_st": "Calle South Constantine",
+            "rocky_river": "Río Rocky",
+            "railroad_dr": "Ferrocarril Drive",
+            "conrail_rr": "Ferrocarril Conrail",
+            "st_joseph_river": "Río Saint Joseph",
+            "n_main_st": "Calle principal North",
+            "s_main_st": "Calle principal South",
+            "water_st": "Calle Water",
+            "foster_st": "Calle Foster",
+            "portage_river": "Río Portage",
+            "flower_st": "Calle Flower",
+            "elm_st": "Calle Elm",
+            "walnut_st": "Calle Walnut",
+            "morris_ave": "Avenida Morris",
+            "east_st": "Calle East",
+            "portage_ave": "Avenida Portage"
+        },
         "navigation": {
             "title": "Navegación",
             "drag": "El área de mapa principal muestra datos de OpenStreetMap sobre un fondo. Puede navegar arrastrando y desplazándose como en cualquier mapa web. **¡Arrastre el mapa!** ",
             "select": "Los elementos del mapa son representados de tres formas: usando puntos, líneas o áreas. Todos los elementos pueden ser seleccionados haciendo clic en ellos. **Haga clic en el punto para seleccionarlo.**",
-            "header": "El encabezado nos muestra el tipo de elemento.",
-            "pane": "Cuando un elemento es seleccionado se muestra el editor de elementos. El encabezado nos indica el tipo de elemento y el panel principal enseña los atributos del elemento, como su nombre y dirección. **Cierre el editor de elementos con el botón 'X' arriba a la derecha.**"
+            "pane": "Cuando se selecciona un elemento, se muestra el editor de elementos. La cabecera nos muestra el tipo de elemento y el panel principal muestra los atributos del elemento, como su nombre y dirección. **Cierre el editor de elementos pulsando el botón {button} en la parte superior derecha.**",
+            "search": "También puede buscar elementos en la vista actual, o en todo el mundo. **Buscar '{name}'**",
+            "choose": "**Seleccione {name} de la lista para seleccionarlo.**",
+            "chosen": "¡Excelente! {name} quedó seleccionado. **Cierre el editor de elementos pulsando el botón {button}.**"
         },
         "points": {
             "title": "Puntos",
-            "add": "Los puntos pueden ser utilizados para representar elementos como tiendas, restaurantes y monumentos. Ellos marcan una ubicación especifica, y describen que hay ahí. **Haga clic en el botón Punto para agregar uno nuevo**",
-            "place": "El punto puede ser ubicado haciendo clic en el mapa. **Sitúe el punto sobre el edificio.**",
+            "add": "Los puntos pueden ser usados ​​para representar los elementos tales como tiendas, restaurantes y monumentos. Marcan una ubicación específica, y describen lo que hay. **Haga clic en el botón {button} Punto para agregar un nuevo punto.**",
+            "place": "El punto se puede colocar haciendo clic en el mapa. **Haga clic en el mapa para colocar el nuevo punto en la parte superior del edificio.**",
             "search": "Existen muchos elementos diferentes que pueden ser representadas por puntos. El punto que acaba de añadir es una Cafetería. ** Busque por '{name}' **",
             "choose": "**Elija 'Cafetería' de la lista.**",
             "describe": "El punto ahora está marcado como cafetería. Utilizando el editor de elementos, podemos agregar más información sobre este. **Añada un nombre**",
-            "close": "El editor de elementos se puede cerrar haciendo clic en el botón 'X' de la esquina superior derecha. **Cierre el editor de elementos**",
-            "reselect": "A menudo los puntos ya existirán, pero tendrán errores o estarán incompletos. Podemos editar puntos ya presentes en el mapa. **Seleccione el punto que acaba de crear.**",
-            "fixname": "**Cambie el nombre y cierre el editor de elementos.**",
-            "reselect_delete": "Todos los elementos en el mapa pueden ser eliminados. **Haga clic en el punto que creó.**",
-            "delete": "El menú alrededor del punto contiene operaciones que pueden ser aplicadas a esta, incluyendo eliminar. **Elimine el punto.**"
+            "close": "El editor de elementos recordará todos los cambios automáticamente. Cuando se cambia un elemento, el botón de cierre va a cambiar a una marca de verificación. **Haga clic en el botón {button} para cerrar el editor de elementos**",
+            "reselect": "A menudo los puntos ya existen, pero tienen errores o estan incompletos. Podemos editar puntos existentes. **Haga clic para seleccionar el punto que acaba de crear.**",
+            "fixname": "**Cambie el nombre, haga clic en el botón {button} para cerrar el editor de elementos.**",
+            "reselect_delete": "Todas los elementos en el mapa se pueden eliminar. **Haga clic para seleccionar el punto que ha creado.**",
+            "delete": "El menú alrededor del punto contiene las operaciones que se pueden realizar en el, inclusive eliminar. **Haga clic en el botón {button} para eliminar el punto.**"
         },
         "areas": {
             "title": "Áreas",
-            "add": "Las áreas son utilizadas para mostrar los límites de elementos como lagos, edificios y zonas residenciales. Estas también pueden ser utilizadas para mapear con más detalle los diversos elementos que pondría normalmente en el mapa como puntos. ** Haga clic en el botón «área» para añadir una nueva área.**",
-            "corner": "Las áreas son dibujadas ubicando nodos que marcan los límites del área. **Sitúe el nodo inicial en una de las esquinas de la zona de juegos.**",
+            "add": "Las áreas se utilizan para mostrar los límites de los elementos tales como lagos, edificios y zonas residenciales. También pueden ser utilizadas para mapear con más detalle muchos elementos que normalmente se mapean como puntos. **Haga clic en el botón {button} Área para agregar una nueva área.**",
+            "corner": "Las áreas se dibujan mediante la colocación de los nodos que marcan el límite del área. **Haga clic para colocar un nodo inicial en una de las esquinas de la zona de juegos.**",
             "place": "Dibuje el área ubicando más nodos. Termine el área haciendo clic en el punto inicial. **Dibuje un área para la zona de juegos.**",
             "search": "**Busque por '{name}'.**",
             "choose": "**Elija «zona de juegos» de la lista.**",
-            "describe": "**De un nombre y cierre el editor de elementos**"
+            "describe": "**Añada un nombre, a continuación, haga clic en el botón {button} para cerrar el editor de elementos**"
         },
         "lines": {
             "title": "Líneas",
-            "add": "Las líneas son utilizadas para representar elementos como vías, líneas férreas y ríos. **Haga clic en el botón «línea» para agregar una nueva línea.**",
+            "add": "Las líneas se utilizan para representar elementos tales como carreteras, ferrocarriles y ríos. **Haga clic en el botón {button} Línea para añadir una nueva línea.**",
             "start": "**Comience la línea haciendo clic al final de la vía.**",
-            "intersect": "Haga clic para añadir más nodos a la línea. Puede arrastrar el mapa mientras dibuja si fuese necesario. Las vías, y muchos otros tipos de líneas, son parte de una red más grande. Es importante que estas líneas estén conectadas apropiadamente para que las aplicaciones de navegación funcionen correctamente. **Haga clic en «Flower Street» para crear una intersección conectando las dos líneas.**",
+            "intersect": "Haga clic para agregar más nodos a la línea. Puede arrastrar el mapa mientras dibuja si es necesario. Carreteras, y muchos otros tipos de líneas, son parte de una red mayor. Es importante que estas líneas se conecten correctamente para que las aplicaciones de ruteo puedan funcionar. **Haga clic en {name} para crear una intersección que conecte las dos líneas.**",
             "finish": "Puede terminar las líneas haciendo clic nuevamente en el ultimo nodo. **Termine de dibujar la vía.**",
             "road": "**Seleccione la «vía» de la lista**",
             "residential": "Existen diferentes tipos de vías, la más común es «residencial». **Elija el tipo de vía «residencial»**",
-            "describe": "**De un nombre a la vía y cierre el editor de elementos.**",
-            "restart": "La vía tiene que intersectar con Flower Street.",
+            "describe": "**Escriba el nombre del camino, a continuación, haga clic en el botón {button} para cerrar el editor de elementos.**",
+            "restart": "El camino tiene que cruzarse con {name}.",
             "wrong_preset": "No ha seleccionado el tipo de vía «residencial». **Haga clic aquí para elegir de nuevo**"
         },
         "startediting": {
             "title": "Empezar a editar",
-            "help": "Más documentación y este recorrido están disponibles aquí.",
+            "help": "Puede repetir este tutorial o descubrir más documentación haciendo clic en el botón {button} Ayuda.",
             "save": "¡No olvide guardar sus cambios regularmente!",
             "start": "¡Comience a mapear!"
         }
@@ -850,6 +882,12 @@
             },
             "description": {
                 "label": "Descripción"
+            },
+            "diaper": {
+                "label": "Cambiador de pañales disponible"
+            },
+            "dock": {
+                "label": "Tipo"
             },
             "drive_through": {
                 "label": "Ventanilla de autoservicio"
@@ -1599,8 +1637,8 @@
                 "terms": "alquiler, renta, préstamo, flete, bici, bicicleta"
             },
             "amenity/bicycle_repair_station": {
-                "name": "Estación pública de reparación de bicicletas",
-                "terms": "bicicletería, reparación, estación, taller, pública, bicicleta, bici"
+                "name": "Puesto de reparación de bicicletas",
+                "terms": "reparación, estación, puesto, bicicletería, taller, bicicleta, bici, cadena, bomba, inflador"
             },
             "amenity/biergarten": {
                 "name": "Bar al aire libre",
@@ -1678,9 +1716,9 @@
                 "name": "Dentista",
                 "terms": "dentista, odontólogo"
             },
-            "amenity/doctor": {
-                "name": "Consultorio médico",
-                "terms": "médico, médica, doctor, curador, curandero, consultorio"
+            "amenity/doctors": {
+                "name": "Doctor",
+                "terms": "médico, galeno, consultorio"
             },
             "amenity/dojo": {
                 "name": "Academia de artes marciales",
@@ -1697,6 +1735,10 @@
             "amenity/fast_food": {
                 "name": "Comida rápida",
                 "terms": "comida rápida,platos preparados"
+            },
+            "amenity/ferry_terminal": {
+                "name": "Terminal de ferry",
+                "terms": "ferry, ferri, transbordador, chalana, catamarán, lancha, pontón, terminal, estación"
             },
             "amenity/fire_station": {
                 "name": "Estación de bomberos",
@@ -1721,6 +1763,10 @@
             "amenity/hospital": {
                 "name": "Terreno de hospital",
                 "terms": "Recinto hospitalario, hospital, clínica, terreno, área, suelo"
+            },
+            "amenity/hunting_stand": {
+                "name": "Puesto de caza",
+                "terms": "caza, puesto, caseta"
             },
             "amenity/kindergarten": {
                 "name": "Terreno de preescolar/Jardín de infancia",
@@ -1749,6 +1795,10 @@
             "amenity/parking_entrance": {
                 "name": "Entrada/Salida del estacionamiento",
                 "terms": "Entrada/Salida del aparcamiento, coche, carro, auto, automóvil, vehículo, aparcamiento, parking, aparcadero, estacionamiento, garaje, parqueadero, parqueo"
+            },
+            "amenity/parking_space": {
+                "name": "Zona de aparcamiento",
+                "terms": "aparcamiento, estacionamiento, lugar, zona, área, plaza"
             },
             "amenity/pharmacy": {
                 "name": "Farmacia",
@@ -1847,7 +1897,7 @@
                 "terms": "piscina,estanque,pileta"
             },
             "amenity/taxi": {
-                "name": "Parada de taxis",
+                "name": "Parada de taxi",
                 "terms": "taxi, parada"
             },
             "amenity/telephone": {
@@ -1917,6 +1967,10 @@
             "amenity/waste_basket": {
                 "name": "Cesto ",
                 "terms": "papelera, papelero, cubo, contenedor, basura, papeles, deshecho, tacho"
+            },
+            "amenity/water_point": {
+                "name": "Agua potable para casa rodante",
+                "terms": "casa rodante, autocaravana, motorhome, camper, agua potable"
             },
             "area": {
                 "name": "Área",
@@ -3444,7 +3498,7 @@
             },
             "shop/farm": {
                 "name": "Tienda de productos agrícolas",
-                "terms": "granja, agrícola, productos agrícolas, productos de granja"
+                "terms": "granja, agrícola, productos, puesto, caseta"
             },
             "shop/fashion": {
                 "name": "Tienda de moda",
@@ -3902,6 +3956,10 @@
                 "name": "Vía fluvial",
                 "terms": "cauce, acueducto, fluvial, agua, vía navegable, vía fluvial, vía marítima"
             },
+            "waterway/boatyard": {
+                "name": "Astillero",
+                "terms": "astillero, varadero, bote, lancha, embarcación"
+            },
             "waterway/canal": {
                 "name": "Canal",
                 "terms": "canaleta, canaleja, canalón, canalizo, cauce, canal, canales"
@@ -3913,6 +3971,10 @@
             "waterway/ditch": {
                 "name": "Acequia",
                 "terms": "zanja, zanjas, acequia, foso, cuneta, hoyo"
+            },
+            "waterway/dock": {
+                "name": "Dársena",
+                "terms": "dársena, carga, barco, bote, lancha, embarcación"
             },
             "waterway/drain": {
                 "name": "Desagüe",
@@ -3937,6 +3999,10 @@
             "waterway/stream": {
                 "name": "Arroyo / Riachuelo",
                 "terms": "torrente, riachuelo, arroyuelo, regato, reguero, torrentera, rivera, corriente, afluente, arroyo, arroyos, flujo, flujos, corrientes, chorro, cauce"
+            },
+            "waterway/water_point": {
+                "name": "Agua potable de mar",
+                "terms": "agua potable, agua marina, marino, mar"
             },
             "waterway/weir": {
                 "name": "Represa",

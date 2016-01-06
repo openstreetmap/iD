@@ -327,46 +327,30 @@
         "navigation": {
             "title": "Navigacija",
             "drag": "Glavno područje karte pokazuje podatke karte OpenStreetMap iznad pozadine. Možete upravljati povlačenjem i skrolanjem kao u bilo kojoj drugoj web aplikaciji. **Povuci kartu!**",
-            "select": "Značajke karte su predstavljene na tri načina: korištenjem tačaka, linija ili područja. Sve značajke mogu biti odabrane klikom na iste. **Kliknite na tačku da je odaberete.**",
-            "header": "Zaglavlje nam pokazuje vrstu značajke.",
-            "pane": "Kada je značajka odabrana, uređivač značajki biva prikazan. Zaglavlje nam pokazuje vrstu značajke i glavni panel nam pokazuje osobine značajke, kao što su njen naziv i adresa. **Zatvorite uređivač značajki sa dugmetom za zatvaranje koje se nalazi u gornjem desnom uglu.**"
+            "select": "Značajke karte su predstavljene na tri načina: korištenjem tačaka, linija ili područja. Sve značajke mogu biti odabrane klikom na iste. **Kliknite na tačku da je odaberete.**"
         },
         "points": {
             "title": "Tačke",
-            "add": "Tačke mogu biti korištene da predstave značajke kao što su prodavnice, restorani i spomenici. One označavaju specifičnu lokaciu i opisuju šta je tamo.  **Kliknite na dugme 'Tačka' da dodate novu tačku.**",
-            "place": "Tačka može biti postavljena klikom na kartu. **Postavite tačku na vrh građevine.**",
             "search": "Postoji mnogo različitih značajki koje mogu biti predstavljene tačkama. Tačka koju ste upravo dodali je kafe. **Tražiti '{name}' **",
             "choose": "**Izaberite kafe sa liste.**",
-            "describe": "Ova tačka je sada označena kao kafe. Korištenjem uređivača značajki, možemo dodati više informacija o značajki. **Dodati naziv**",
-            "close": "Uređivač značajki može biti zatvoren klikom na dugme za zatvaranje. **zatvorite uređivač značajki**",
-            "reselect": "Često će tačke već postojati, ali će imati greške ili neće biti kompletne. Možemo uređivati postojeće tačke. **Odaberite tačku koju ste upravo napravili.**",
-            "fixname": "**Promijenite naziv i zatvorite uređivač značajki.**",
-            "reselect_delete": "Sve značajke na karti mogu biti izbrisane. **Kliknite na tačku koju ste napravili.**",
-            "delete": "meni oko tačke sadrži operacije koje mogu biti izvršene na istoj, uključujući brisanje. **Obrisati tačku.**"
+            "describe": "Ova tačka je sada označena kao kafe. Korištenjem uređivača značajki, možemo dodati više informacija o značajki. **Dodati naziv**"
         },
         "areas": {
             "title": "Područja",
-            "corner": "Područja se crtaju postavljanjem čvorova koji označavaju granicu područja. **Postavite početni čvor na uglovima igrališta.**",
             "place": "Nacrtati područje postavljanjem više čvorova. Završiti područje klikom na početni čvor. **Nacrtati područje za igralište.**",
             "search": "**Tražiti '{name}'.**",
-            "choose": "**Izaberite igralište sa liste.**",
-            "describe": "**Dodajte naziv, i zatvorite uređivač značajki.**"
+            "choose": "**Izaberite igralište sa liste.**"
         },
         "lines": {
             "title": "Linije",
-            "add": "Linije se koriste da predstave značajke kao što su putevi, željezničke pruge i rijeke. **Kliknite na dugme 'Linija' da dodate novu liniju.**",
             "start": "**Započnite liniju klikom na kraj puta.**",
-            "intersect": "Kliknite da dodate više čvorova liniji. Možete povlačiti kartu dok crtate ukoliko je potrebno. Putevi, i mnogo drugih vrsta linija su dio veće mreže. Važno je da se ove linije povežu pravilno da bi aplikacije za routing radile.  **Kliknite na neku ulicu da napravite presjek koji povezuje dvije linije.**",
             "finish": "Linije mogu biti završene ponovnim klikom na posljednji čvor. **Završite crtanje ceste.**",
             "road": "**Izaberite cestu sa liste**",
             "residential": "Postoje različite vrste puteva, od kojih su najčešće rezidencijalne ceste. **Odaberite vrstu 'rezidencijalna cesta'**",
-            "describe": "**Dajte naziv cesti i zatvorite uređivač značajki.**",
-            "restart": "Put treba da se križa sa ulicom 'Flower Street'.",
             "wrong_preset": "Niste odabrali rezidencijalnu vrstu ceste. **Kliknite ovdje da opet odaberete**"
         },
         "startediting": {
             "title": "Počnite uređivati",
-            "help": "Više dokumentacije i ovo uputstvo su dostupni ovdje.",
             "save": "Ne zaboravite da često spašavate Vaše promjene!",
             "start": "Počnite uređivati kartu!"
         }
@@ -905,10 +889,6 @@
             "amenity/dentist": {
                 "name": "Zubar",
                 "terms": "zubar,stomatolog"
-            },
-            "amenity/doctor": {
-                "name": "Doktor",
-                "terms": "doktor,ljekar"
             },
             "amenity/drinking_water": {
                 "name": "Voda za piće",

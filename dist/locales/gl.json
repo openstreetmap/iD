@@ -495,47 +495,30 @@
         "navigation": {
             "title": "Navegación",
             "drag": "A área principal do mapa mostra os datos de OpenStreetMap sobre un fondo. Podes navegar polo mapa arrastrando e desprazándote, igual que calquera mapa de internet. **Arrastra o mapa!**",
-            "select": "Os elementos do mapa represéntanse de tres formas: usando puntos, liñas ou áreas. Calquera elemento se pode seleccionar facendo clic nel. **Fai clic no punto para seleccionalo.**",
-            "header": "Na cabeceira móstrase o tipo de elemento.",
-            "pane": "Cando un elemento é seleccionado, móstrase o editor de elementos. A cabeceira mostra o tipo de elemento e o panel principal mostra os atributos do elemento como, por exemplo, o seu nome e o seu enderezo. **Pecha o editor de elementos co botón de cerre da parte superior dereita.**"
+            "select": "Os elementos do mapa represéntanse de tres formas: usando puntos, liñas ou áreas. Calquera elemento se pode seleccionar facendo clic nel. **Fai clic no punto para seleccionalo.**"
         },
         "points": {
             "title": "Puntos",
-            "add": "Os puntos pódense usar para representar elementos tales como tendas, restaurantes e monumentos. Marcan unha localización específica, describindo o que hai aí. **Fai clic no botón \"Punto\" para engadir un novo punto.**",
-            "place": "O punto pódese situar facendo clic no mapa. **Sitúa o punto sobre o edificio.**",
             "search": "Hai moitos elementos distintos que poden ser representados mediante puntos. O punto que acabas de engadir é unha Cafetería. **Busca por '{name}'**",
             "choose": "**Escolle Cafetería na lista.**",
-            "describe": "Agora o punto está marcado como unha cafetería. Utilizando o editor de elementos, podemos engadir máis información acerca do elemento. **Engade un nome.**",
-            "close": "O editor de elementos pódese cerrar facendo clic no botón de cerrar. **Cerra o editor de elementos.**",
-            "reselect": "Haberá veces que os puntos xa existan pero que teñan erros ou estean incompletos. Podemos editar puntos existentes. **Selecciona o punto que acabas de crear.**",
-            "fixname": "**Cámbialle o nome e cerra o editor de elementos.**",
-            "reselect_delete": "Calquera elemento do mapa se pode eliminar. **Fai clic no punto que creaches.**",
-            "delete": "O menú que aparece arredor do punto contén operacións que se lle poden aplicar, incluindo a opción de borrar. **Borra o punto.**"
+            "describe": "Agora o punto está marcado como unha cafetería. Utilizando o editor de elementos, podemos engadir máis información acerca do elemento. **Engade un nome.**"
         },
         "areas": {
             "title": "Áreas",
-            "add": "As áreas utilízanse para mostrar os límites de elementos tales como lagos, edificios ou áreas residenciais. Tamén poden ser usados para cartografar máis detalladamente moitos dos elementos que normalmente se cartografarían como puntos. **Fai clic no botón \"Área\" para engadir unha nova área.**",
-            "corner": "As áreas debúxanse colocando vértices que marquen os límites da área. **Sitúa o vértice inicial nunha das esquinas do parque infantil.**",
             "place": "Debuxa a área situando máis vértices. Finaliza a área facendo clic no vértice inicial. **Debuxa unha área para o parque infantil.**",
             "search": "**Busca por '{name}'.**",
-            "choose": "**Elixe Parque Infantil na lista.**",
-            "describe": "**Engade un nome, e pecha o editor de elementos.**"
+            "choose": "**Elixe Parque Infantil na lista.**"
         },
         "lines": {
             "title": "Liñas",
-            "add": "As liñas úsanse para representar elementos tales como estradas, vías do tren ou ríos. **Fai clic no botón \"Liña\" para engadir unha nova liña.**",
             "start": "**Inicia a liña facendo clic no final da estrada.**",
-            "intersect": "Fai clic para engadir máis vértices á liña. Se é necesario, podes arrastrar o mapa mentras debuxas. As estradas, igual que moitos outros tipos de liñas, forman parte de unha rede máis grande. É importante que estas liñas estean conectadas correctamente para que as aplicacións de enrutamento poidan funcionar. **Fai clic na rúa Flower Street para crear unha intersección conectando as dúas liñas.**",
             "finish": "As liñas pódense finalizar facendo clic outra vez no último vértice. **Finaliza a estrada.**",
             "road": "**Selecciona \"Estrada\" na lista.**",
             "residential": "Hai diferentes tipos de estradas. A máis común delas é a rúa urbana. **Escolle o tipo de estrada \"Rúa urbana\".**",
-            "describe": "**Ponlle nome á estrada e cerra o editor de elementos.**",
-            "restart": "A estrada debe intersectar coa rúa Flower Street.",
             "wrong_preset": "Non seleccionaches o tipo de rúa urbana. **Fai clic aquí para volver a escoller.**"
         },
         "startediting": {
             "title": "Comezar a editar",
-            "help": "Máis documentación e este titorial están dispoñibles aquí.",
             "save": "Non te esquezas de gardar regularmente os teus cambios!",
             "start": "Comeza a cartografiar!"
         }
@@ -1035,9 +1018,6 @@
             },
             "amenity/dentist": {
                 "name": "Dentista"
-            },
-            "amenity/doctor": {
-                "name": "Consulta médica"
             },
             "amenity/drinking_water": {
                 "name": "Fonte"

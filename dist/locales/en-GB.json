@@ -72,7 +72,8 @@
                 "area": "Made an area circular."
             },
             "not_closed": "This can't be made circular because it's not a loop.",
-            "too_large": "This can't be made circular because not enough of it is currently visible."
+            "too_large": "This can't be made circular because not enough of it is currently visible.",
+            "connected_to_hidden": "This can't be made circular because it is connected to a hidden feature."
         },
         "orthogonalize": {
             "title": "Square",
@@ -86,14 +87,16 @@
                 "area": "Squared the corners of an area."
             },
             "not_squarish": "This can't be made square because it is not squarish.",
-            "too_large": "This can't be made square because not enough of it is currently visible."
+            "too_large": "This can't be made square because not enough of it is currently visible.",
+            "connected_to_hidden": "This can't be made square because it is connected to a hidden feature."
         },
         "straighten": {
             "title": "Straighten",
             "description": "Straighten this line.",
             "key": "S",
             "annotation": "Straightened a line.",
-            "too_bendy": "This can't be straightened because it bends too much."
+            "too_bendy": "This can't be straightened because it bends too much.",
+            "connected_to_hidden": "This line can't be straightened because it is connected to a hidden feature."
         },
         "delete": {
             "title": "Delete",
@@ -106,7 +109,9 @@
                 "relation": "Deleted a relation.",
                 "multiple": "Deleted {n} objects."
             },
-            "incomplete_relation": "This feature can't be deleted because it hasn't been fully downloaded."
+            "incomplete_relation": "This feature can't be deleted because it hasn't been fully downloaded.",
+            "part_of_relation": "This feature can't be deleted because it's part of a larger relation. You must remove it from the relation first.",
+            "connected_to_hidden": "This can't be deleted because it is connected to a hidden feature."
         },
         "add_member": {
             "annotation": "Added a member to a relation."
@@ -127,13 +132,19 @@
             "description": "Disconnect these lines/areas from each other.",
             "key": "D",
             "annotation": "Disconnected lines/areas.",
-            "not_connected": "There aren't enough lines/areas here to disconnect."
+            "not_connected": "There aren't enough lines/areas here to disconnect.",
+            "connected_to_hidden": "This can't be disconnected because it is connected to a hidden feature."
         },
         "merge": {
             "title": "Merge",
+            "description": "Merge these features.",
             "key": "C",
+            "annotation": "Merged {n} features.",
             "not_eligible": "These features can't be merged.",
-            "incomplete_relation": "These features can't be merged because at least one hasn't been fully downloaded."
+            "not_adjacent": "These features can't be merged because they aren't connected.",
+            "restriction": "These features can't be merged because at least one is a member of a \"{relation}\" relation.",
+            "incomplete_relation": "These features can't be merged because at least one hasn't been fully downloaded.",
+            "conflicting_tags": "These features can't be merged because some of their tags have conflicting values."
         },
         "move": {
             "title": "Move",
@@ -147,7 +158,8 @@
                 "multiple": "Moved multiple objects."
             },
             "incomplete_relation": "This feature can't be moved because it hasn't been fully downloaded.",
-            "too_large": "This can't be moved because not enough of it is currently visible."
+            "too_large": "This can't be moved because not enough of it is currently visible.",
+            "connected_to_hidden": "This can't be moved because it is connected to a hidden feature."
         },
         "rotate": {
             "title": "Rotate",
@@ -157,7 +169,8 @@
                 "line": "Rotated a line.",
                 "area": "Rotated an area."
             },
-            "too_large": "This can't be rotated because not enough of it is currently visible."
+            "too_large": "This can't be rotated because not enough of it is currently visible.",
+            "connected_to_hidden": "This can't be rotated because it is connected to a hidden feature."
         },
         "reverse": {
             "title": "Reverse",
@@ -179,7 +192,8 @@
                 "multiple": "Split {n} lines/area boundaries."
             },
             "not_eligible": "Lines can't be split at their beginning or end.",
-            "multiple_ways": "There are too many lines here to split."
+            "multiple_ways": "There are too many lines here to split.",
+            "connected_to_hidden": "This can't be split because it is connected to a hidden feature."
         },
         "restriction": {
             "help": {
@@ -203,6 +217,7 @@
         "nothing": "Nothing to redo."
     },
     "tooltip_keyhint": "Shortcut:",
+    "browser_notice": "This editor is supported in Firefox, Chrome, Safari, Opera, and Internet Explorer 11 and above. Please upgrade your browser or use Potlatch 2 to edit the map.",
     "translate": {
         "translate": "Translate"
     },
@@ -216,11 +231,6 @@
     "gpx": {
         "drag_drop": "Drag and drop a .gpx file on the page, or click the button to the right to browse",
         "browse": "Browse for a .gpx file"
-    },
-    "intro": {
-        "lines": {
-            "add": "Lines are used to represent features such as roads, railways and rivers. **Click the Line button to add a new line.**"
-        }
     },
     "presets": {
         "fields": {

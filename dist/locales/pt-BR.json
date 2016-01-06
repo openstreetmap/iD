@@ -137,9 +137,14 @@
         },
         "merge": {
             "title": "Mesclar",
+            "description": "Mesclar estes elementos.",
             "key": "C",
+            "annotation": "Mesclar {n} elementos.",
             "not_eligible": "Esses elementos não podem ser mesclados.",
-            "incomplete_relation": "Estes elementos não podem ser mesclados porque pelo menos um deles não foi transferido completamente."
+            "not_adjacent": "Estes elementos não podem ser mesclados porque eles não estão conectados.",
+            "restriction": "Estes elementos não podem ser mesclados porque pelo menos um deles é membro de uma relação \"{relation}\".",
+            "incomplete_relation": "Estes elementos não podem ser mesclados porque pelo menos um deles não foi transferido completamente.",
+            "conflicting_tags": "Estes elementos não podem ser mesclados porque algumas de suas etiquetas têm valores conflitantes."
         },
         "move": {
             "title": "Mover",
@@ -212,6 +217,7 @@
         "nothing": "Nada para refazer."
     },
     "tooltip_keyhint": "Atalho:",
+    "browser_notice": "Este editor é suportado no Firefox, Chrome, Safari, Opera, e Internet Explorer 11 ou mais recente.  Favor atualizar seu navegador ou usar o Potlatch 2 para editar o mapa. ",
     "translate": {
         "translate": "Traduzir",
         "localized_translation_label": "Nome multilíngue",
@@ -509,46 +515,30 @@
             "title": "Navegação",
             "drag": "A área principal do mapa mostra os dados do OpenStreetMap sobre um fundo (uma imagem aérea, normalmente). Você pode navegar arrastando ou usando a roda do mouse, do mesmo jeito que em qualquer mapa online. **Arraste o mapa!**",
             "select": "Os elementos do mapa são representados de três formas: pontos, linhas ou áreas. Todos os elementos podem ser selecionados clicando neles. **Clique no ponto e selecione-o.**",
-            "header": "O cabeçalho nos mostra qual é o tipo do elemento.",
-            "pane": "Quando um elemento é selecionado, o editor de elementos é mostrado. O cabeçalho nos mostra o tipo do elemento e o painel principal mostra os atributos do elemento, tais como seu nome e endereço. **Feche o editor de elemento com o botão de fechar no canto superior direito.**"
+            "pane": "Quando uma feição é selecionada, o editor de feições é exibido. O cabeçalho nos mostra o tipo de feição e o painel principal exibe os atributos da feição, como nome e endereço. **Feche o editor de feições pressionando o botão {button} no canto superior direito."
         },
         "points": {
             "title": "Pontos",
-            "add": "Pontos podem ser usados para representar coisas como lojas, restaurantes e monumentos. Eles marcam uma posição específica e descrevem o que há nela. **Clique no botão Ponto para adicionar um novo ponto.**",
-            "place": "Clicando no mapa criamos um ponto nele. **Coloque o ponto no topo do prédio.**",
             "search": "Existem muitos elementos diferentes que podem ser representados por pontos. O ponto que você acabou de adicionar é uma Cafeteria. **Procure por '{name}'**",
             "choose": "**Escolha \"Cafeteria\" na lista.**",
-            "describe": "O ponto agora está marcado como uma cafeteria. Usando o editor de elemento, podemos adicionar mais informações sobre ele. **Adicione um nome**",
-            "close": "O editor de elementos pode ser fechado clicando no botão de fechar. **Feche o editor de elementos.**",
-            "reselect": "Frequentemente um dado ponto pode já existir, mas ter erros ou estar incompleto. Podemos editar pontos já existentes. **Selecione o ponto que você acabou de criar.**",
-            "fixname": "**Altere o nome da cafeteria e feche o editor de elementos.**",
-            "reselect_delete": "Todos os elementos do mapa podem ser excluídos. **Clique no ponto que você criou.**",
-            "delete": "O menu em volta do ponto contém operações que podem ser realizadas sobre ele, incluindo removê-lo. **Exclua o ponto.**"
+            "describe": "O ponto agora está marcado como uma cafeteria. Usando o editor de elemento, podemos adicionar mais informações sobre ele. **Adicione um nome**"
         },
         "areas": {
             "title": "Áreas",
-            "add": "Áreas são usadas para mostrar os limites de recursos, como lagos, edifícios e áreas residenciais. Elas também podem ser usadas ​​para o mapeamento mais detalhado de muitos recursos que você normalmente mapearia como pontos. **Clique no botão Área para adicionar uma nova área.**",
-            "corner": "Para desenhar as áreas, colocamos os pontos que formam a sua borda. **Coloque o primeiro ponto num dos cantos do parquinho.**",
             "place": "Coloque mais pontos para desenhar o resto da área. Para terminar, complete a área clicando de novo no primeiro ponto. **Desenhar a área do parquinho.**",
             "search": "**Procurar por '{name}'.**",
-            "choose": "**Escolha o item \"Parque infantil\" da lista.**",
-            "describe": "**Adicione um nome e feche o editor de elemento.**"
+            "choose": "**Escolha o item \"Parque infantil\" da lista.**"
         },
         "lines": {
             "title": "Linhas",
-            "add": "As linhas são usadas para representar coisas como estradas, ferrovias e rios. **Clique no botão Linha para adicionar uma nova linha.**",
             "start": "**Comece a desenhar a linha clicando no final da estrada.**",
-            "intersect": "Clique para adicionar mais pontos à linha. Você pode arrastar o mapa enquanto desenha, se for necessário. Estradas, e muitos outros tipos de linhas, são partes de uma rede maior. É importante que essas linhas estejam conectadas corretamente para que as aplicações de roteamento funcionem bem. **Clique na Flower Street para criar uma interseção que conecta as duas linhas.**",
             "finish": "Para indicar o final da criação de uma linha, clique novamente no seu último ponto. **Termine de criar a rua.**",
             "road": "**Selecione \"Estrada\" na lista**",
             "residential": "Há vários tipos diferentes de estrada, o mais comum entre elas é a via residencial. **Escolha o tipo Via Residencial.**",
-            "describe": "**Coloque o nome da rua e feche o editor de elementos.**",
-            "restart": "A rua precisa ter um ponto de interseção com a Flower Street.",
             "wrong_preset": "Você não selecionou o tipo de via Residencial. **Clique aqui para escolher novamente**"
         },
         "startediting": {
             "title": "Começar a editar",
-            "help": "Mais documentação e este tutorial estão disponíveis aqui.",
             "save": "Não esqueça de salvar suas alterações regularmente!",
             "start": "Começar a mapear!"
         }
@@ -948,6 +938,9 @@
                 "label": "Acessível a deficientes",
                 "placeholder": "1-18"
             },
+            "handrail": {
+                "label": "Corrimão"
+            },
             "highway": {
                 "label": "Tipo"
             },
@@ -1061,6 +1054,9 @@
             "maxspeed": {
                 "label": "Limite de Velocidade",
                 "placeholder": "40, 50, 60..."
+            },
+            "maxstay": {
+                "label": "Permanência máxima"
             },
             "mtb/scale": {
                 "label": "Dificuldade para Mountain Biking",
@@ -1586,10 +1582,6 @@
                 "name": "Estação de Bicicletas Públicas",
                 "terms": "Estação de Bicicletas Públicas, Compartilhamento de Bicicletas"
             },
-            "amenity/bicycle_repair_station": {
-                "name": "Estação de Conserto de Bicicletas",
-                "terms": "Estação de Conserto de Bicicletas, Estação de Reparo de Bicicletas"
-            },
             "amenity/biergarten": {
                 "name": "Biergarten",
                 "terms": "Biergarten, Cervejaria ao Ar Livre"
@@ -1665,10 +1657,6 @@
             "amenity/dentist": {
                 "name": "Dentista",
                 "terms": "Dentista, Odontologista"
-            },
-            "amenity/doctor": {
-                "name": "Médico",
-                "terms": "Doutor, Médico, Clínica, Saúde"
             },
             "amenity/dojo": {
                 "name": "Academia de Artes Marciais",
@@ -1858,6 +1846,24 @@
                 "name": "Área Universitária",
                 "terms": "Área de Universidade, Faculdade, Área de Faculdade, Centro Universitário"
             },
+            "amenity/vending_machine/cigarettes": {
+                "name": "Máquina de Venda de Cigarros"
+            },
+            "amenity/vending_machine/condoms": {
+                "name": "Máquina de Venda de Preservativos"
+            },
+            "amenity/vending_machine/drinks": {
+                "name": "Máquina de Venda de Bebidas"
+            },
+            "amenity/vending_machine/news_papers": {
+                "name": "Máquina de Venda de Jornal"
+            },
+            "amenity/vending_machine/sweets": {
+                "name": "Máquina de Venda de Lanches"
+            },
+            "amenity/vending_machine/vending_machine": {
+                "name": "Máquina de Venda"
+            },
             "amenity/veterinary": {
                 "name": "Veterinário",
                 "terms": "Veterinário, Médico veterinário, pet, animal de estimação, animais"
@@ -1965,6 +1971,15 @@
             "building/cabin": {
                 "name": "Cabine",
                 "terms": "Cabine"
+            },
+            "building/cathedral": {
+                "name": "Catedral"
+            },
+            "building/chapel": {
+                "name": "Capela"
+            },
+            "building/church": {
+                "name": "Igreja"
             },
             "building/college": {
                 "name": "Edifício de Escola Técnica",

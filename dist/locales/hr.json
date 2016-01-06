@@ -514,47 +514,30 @@
         "navigation": {
             "title": "Navigacija",
             "drag": "Glavno područje karte prikazuje OpenStreetMap podatke iznad pozadine. Možeš mijenjati pogled povlačeći i pomičući, kao na svakoj drugoj web karti. **Pomakni prikaz karte.**",
-            "select": "Značajke karte su prikazane na tri načina: koristeći točke, linije ili područja. Sve značajke mogu se odabrati klikom na njih. **Klikni na točku kako bi ju odabrao/la.**",
-            "header": "Zaglavlje nam pokazuje tip svojstva.",
-            "pane": "Kada je značajka odabrana, prikazan je uređivač svojstava. Zaglavlje prikazuje tip značajke, a glavni prozor prikazuje njegova svojstva npr. naziv i adresu. **Zatvori uređivač svojstava gumbom X u gornjem desnom kutu.**"
+            "select": "Značajke karte su prikazane na tri načina: koristeći točke, linije ili područja. Sve značajke mogu se odabrati klikom na njih. **Klikni na točku kako bi ju odabrao/la.**"
         },
         "points": {
             "title": "Točke",
-            "add": "Točke se koriste za predstavljanje značajki kao što su trgovine, restorani i spomenici. One označavaju specifičnu lokaciju i opisuju što je ondje. **Klikni na gumb 'Točka' za dodavanje nove točke.**",
-            "place": "Točka se može postaviti klikom na kartu. **Postavi točku na vrh zgrade.**",
             "search": "Postoje mnoge različite značajke koje mogu biti prikazane točkom. Točka koju si upravo dodao/la je kafić. **Pretraži '{name}'.**",
             "choose": "**Odaberi 'Kafić' sa liste.**",
-            "describe": "Točka je sada označena kao kafić. Koristeći uređivač svojstava, možemo dodati više informacija o toj značajki. **Dodaj ime kafiću.**",
-            "close": "Uređivač svojstava može se zatvoriti klikom na gumb X. **Zatvori uređivač svojstava.**",
-            "reselect": "Često će točke već postojati, ali mogu biti pogrešne ili nedovršene. Možemo urediti postojeće točke. **Odaberi točku koju si upravo kreirao/la.**",
-            "fixname": "**Promijeni ime i zatvori uređivač svojstava.**",
-            "reselect_delete": "Sva svojstva na karti se mogu obrisati. **Klikni na točku koji si stvorio/la.**",
-            "delete": "Izbornik oko točke sadrži operacije koje se mogu izvršiti nad njom, uključujući brisanje. **Obriši točku.**"
+            "describe": "Točka je sada označena kao kafić. Koristeći uređivač svojstava, možemo dodati više informacija o toj značajki. **Dodaj ime kafiću.**"
         },
         "areas": {
             "title": "Područja",
-            "add": "Područja se koriste za prikaz granica značajki poput jezera, zgrada i naseljenih područja. Također se mogu koristiti za detaljnije kartiranje mnogih značajki koje se inače prikazuju točkama. **Klikni na gumb 'Područje' za dodavanje novog područja.**",
-            "corner": "Područja se crtaju postavljanjem točaka koje označavaju granicu područja. **Postavi početnu točku na jedan rub igrališta.**",
             "place": "Nacrtaj područje dodavanjem više točaka. Završi područje tako da klikneš na početnu točku. **Nacrtaj područje igrališta.**",
             "search": "**Pretraži za '{name}'.**",
-            "choose": "**Odaberi igralište sa liste.**",
-            "describe": "**Dodaj ime i zatvori uređivač svojstava.**"
+            "choose": "**Odaberi igralište sa liste.**"
         },
         "lines": {
             "title": "Linije",
-            "add": "Linije se koriste za predstavljanje značajki kao što su npr. ceste, željeznice i rijeke. **Klikni na gumb 'Linija' za dodavanje nove linije.**",
             "start": "**Započni liniju tako da klikneš na kraj ceste.**",
-            "intersect": "Klikni za dodavanje više točaka linije. Možeš pomicati pogled na kartu dok crtaš ako je potrebno. Ceste i mnoge druge vrste linija su dio veće mreže. Važno je da su sve linije pravilno spojene kako bi softveri za određivanje rute ispravno funkcionirali. **Klikni na 'Flower Street' za stvaranje raskrižja povezujući dvije linije.**",
             "finish": "Linije se mogu završiti tako da ponovno kliknete na posljednju točku. **Završi crtanje ceste.**",
             "road": "**Odaberi Prometnica sa liste.**",
             "residential": "Postoje različite vrste cesta, najčešća je Ulica. **Odaberi tip 'Ulica'.**",
-            "describe": "**Dodaj naziv ulice i zatvori uređivač svojstava.**",
-            "restart": "Cesta treba presijecati Flower Street.",
             "wrong_preset": "Nisi označio/la cestu koja predstavlja ulicu. **Klikni ovdje za ponovni odabir**"
         },
         "startediting": {
             "title": "Započni uređivanje",
-            "help": "Više dokumentacije i ovaj prohod su dostupni ovdje.",
             "save": "Ne zaboravi redovno spremiti tvoje promjene!",
             "start": "Počni mapirati!"
         }
@@ -1530,9 +1513,6 @@
                 "name": "Najam bicikla",
                 "terms": "rentanje bicikala,rentanje bicikla,iznajmljivanje bicikala,iznajmljivanje bicikla,najam bicikala,najam bicikla,rent a bike"
             },
-            "amenity/bicycle_repair_station": {
-                "name": "Bicikl servis"
-            },
             "amenity/boat_rental": {
                 "name": "Najam brodova",
                 "terms": "rentanje brodova,rentanje broda,iznajmljivanje brodova,iznajmljivanje broda,najam brodova,najam broda,rentanje čamaca,rentanje čamca,iznajmljivanje čamaca,iznajmljivanje čamca,najam čamaca,najam čamca,rent a boat"
@@ -1595,9 +1575,6 @@
             },
             "amenity/dentist": {
                 "name": "Zubar"
-            },
-            "amenity/doctor": {
-                "name": "Doktor"
             },
             "amenity/dojo": {
                 "name": "Škola borilačkih vještina"
@@ -2490,7 +2467,8 @@
                 "terms": "planinski vrh,vrh,sljeme,vrhunac,šiljak,najviša točka"
             },
             "natural/saddle": {
-                "name": "Prijevoj"
+                "name": "Sedlo",
+                "terms": "prijevoj"
             },
             "natural/scree": {
                 "name": "Sitno kamenje na strmini",

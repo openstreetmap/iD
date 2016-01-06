@@ -296,9 +296,7 @@
     "intro": {
         "navigation": {
             "title": "Navigare",
-            "select": "Trăsăturile hărții sunt reprezentate in trei moduri: folosind puncte, linii sau suprafețe. Toate trăsăturile pot fi selectate apăsând pe ele. **Apasă pe un punct pentru al selecta.** ",
-            "header": "Antetul ne arată tipul trăsaturii.",
-            "pane": "Când o trăsătura este selectată, editorul este afișat. Antelul ne arată tipul trăsăturii și panoul principal, atributele trăsăturii, precum numele sau adresa.**Inchide editorul de trăsături folosind butonul de inchidere din colțul dreapta sus.**"
+            "select": "Trăsăturile hărții sunt reprezentate in trei moduri: folosind puncte, linii sau suprafețe. Toate trăsăturile pot fi selectate apăsând pe ele. **Apasă pe un punct pentru al selecta.** "
         },
         "points": {
             "title": "Puncte"

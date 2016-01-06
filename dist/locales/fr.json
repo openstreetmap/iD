@@ -511,50 +511,78 @@
         "relations": "# Relations⏎\n⏎\nUne relation est un élément spécial dans OpenStreetMap qui permet de regrouper ensemble d'autre éléments\nPar exemple, les deux plus courants types de relations sont *route relations*,\nqui regroupe des sections de route qui appartiennent à une autoroute, \net *multipolygons*, qui regroupe plusieurs lignes qui définissent\nune zone complexe (une avec plusieurs pièces ou trous à l’intérieur comme un donut).⏎\n⏎\nLe groupe d'éléments dans une relation sont appelés *members*. Dans le menu de côté, vous pouvez\nvoir dans quelles relations l'élément appartient, et sélectionner une des relations pour voir.\nLorsque la relation est sélectionnée, vous pouvez voir tous\nles membres listés dans le menu de côté et la mettre en sur-impression sur la carte.⏎\n⏎\nPour la plus part, iD veillera à maintenir les relations automatiquement\npendant que vous éditez. La chose la plus importe que vous devez savoir est que si vous effacez une\nsection de route pour la rendre plus précise, vous devez vous assurer que \nla nouvelle section est un membre des même relations que l'originale.⏎\n⏎\n## Modifier des Relations⏎\n⏎\nSi vous voulez modifier des relations, voici les bases.⏎\n⏎\nPour apporter une information à une relation, sélectionnez l'élément, appuyez sur le bouton \"+\" dans la\nsection \"All relations\" du menu du côté, et sélectionnez ou saisissez le nom de la relation.⏎\n⏎\nPour créer une nouvelle relation, sélectionnez le premier élément qui doit en être membre,\nappuyez sur le bouton \"+\" dans le section \"All relations\", et sélectionner \"New relation...\".\n⏎\nPour retirer un élément d'une relation, sélectionnez l’élément et appuyez sur le symbole de la corbeille.\nbutton next de la relation si vous souhaitez la supprimer.⏎\n⏎\nVous pouvez créer des multipolygons avec des trous en utilisant l'outil \"Merge\". Dessinez deux polygones (inner\net outer), maintenez la touche Shift/Majuscule et appuyez sur chacune d'elles pour les sélectionner, et après\nappuyez le bouton \"Merge\" (+) .⏎\n"
     },
     "intro": {
+        "graph": {
+            "city_hall": "Mairie",
+            "fire_department": "Caserne de pompiers",
+            "memory_isle_park": "Parc Paumier",
+            "riverwalk_trail": "Sentier fleuri",
+            "w_michigan_ave": "Avenue des lilas",
+            "e_michigan_ave": "Avenue George Sand",
+            "spring_st": "Rue Curie",
+            "scidmore_park": "Parc Fleurette",
+            "petting_zoo": "Zoo",
+            "n_andrews_st": "Rue Robespierre",
+            "s_andrews_st": "Rue de la Liberté",
+            "n_constantine_st": "Rue de la Fraternité",
+            "s_constantine_st": "Rue de l'Egalité",
+            "rocky_river": "Le boulan",
+            "railroad_dr": "Allée ferrée",
+            "conrail_rr": "Chemin de fer",
+            "st_joseph_river": "La margoune",
+            "n_main_st": "Rue de la République",
+            "s_main_st": "Rue de la République",
+            "water_st": "Rue froide",
+            "foster_st": "Rue Victor Hugo",
+            "portage_river": "Le chil",
+            "flower_st": "Rue des pains",
+            "elm_st": "Rue Jules Verne",
+            "walnut_st": "Rue Simone de Beauvoir",
+            "morris_ave": "Avenue Simone Veil",
+            "east_st": "Rue du Japon",
+            "portage_ave": "Avenue de la paix"
+        },
         "navigation": {
             "title": "Navigation",
             "drag": "La vue principale montre les données OpenStreetMap par dessus un fond de carte. Vous pouvez naviguer au sein de la vue en faisant du cliquer-glisser, ou avec les barres de navigation, comme n'importe quelle carte sur Internet. **Faites glisser la carte !**",
             "select": "Les éléments cartographiques sont de trois types : les points, les lignes et les polygones. Chaque élément peut être sélectionné en cliquant dessus. **Cliquez sur le point pour le sélectionner.**",
-            "header": "L'entête nous montre le type d'élément.",
-            "pane": "Lorsqu'un élément est sélectionné, l'éditeur d'éléments est affiché. L'entête nous indique le type d'élément et le panneau principal nous montre les attributs de l'élément, tels que son nom et son adresse. **Fermez l'éditeur d'éléments en cliquant sur le bouton de fermeture en haut à droite.**"
+            "pane": "Lorsqu'un élément est sélectionné, l'éditeur d'éléments est affiché. L'entête nous indique que le type d'élément et le panneau principal nous montre les attributs de l'élément, tels que son nom et son adresse. **Fermez l'éditeur d'éléments en cliquant sur le {button} bouton de fermeture en haut à droite.**",
+            "search": "Vous pouvez aussi rechercher des éléments pour la vue courante, ou le monde entier. **Recherchez '{name}'**",
+            "choose": "** Choisissez {name} depuis la liste pour le selectionner. ** ",
+            "chosen": "Super ! {name} est sélectionné. **Fermer l'éditeur d'élément en cliquant sur le bouton {button}.**"
         },
         "points": {
             "title": "Points",
-            "add": "Des points peuvent être utilisés pour représenter des éléments comme des magasins, restaurants ou monuments. Ils indiquent une position précise et décrivent ce qu'il y a à cet endroit. **Cliquez sur le bouton \"Point\" pour ajouter un point.**",
-            "place": "Le point peut être placé en cliquant sur la carte. **Placer le point sur le dessus du bâtiment.**",
+            "add": "Les points sont utilisés pour représenter des éléments tels que des magasins, des restaurants ou des monuments. Ils indiquent une position précise, et décrivent ce qui s'y trouve. **Clickez sur le {button} bouton Point pour ajouter un nouveau point.**",
+            "place": "Le point peut être placé en cliquant sur la carte. **Cliquez sur la carte pour positionner le nouveau point sur le bâtiment.**",
             "search": "De nombreux éléments peuvent être représentés par des points. Le point que vous venez d'ajouter est un café. \n**Cherchez '{name}'**",
             "choose": "**Choisi Café dans la liste.**",
             "describe": "Le point est désormais marqué comme étant un café. Nous pouvons ajouter davantage d'informations grâce à l'éditeur d'élément. **Ajoutez un nom au café.**",
-            "close": "L'éditeur d'éléments peut être fermé en cliquant sur le bouton de fermeture. **Fermez l'éditeur d'éléments.**",
-            "reselect": "Souvent, des points existent déjà, mais contiennent des erreurs ou sont incomplets. Vous pouvez éditer des points déjà existants. **Sélectionnez le point que vous venez de créer.*",
-            "fixname": "**Modifier le nom et fermez l'éditeur d'éléments.**",
-            "reselect_delete": "Tous les éléments de la carte peuvent être supprimés. **Cliquez sur le point que vous venez de créer.**",
-            "delete": "Le menu autour du point contient des opérations que vous pouvez lui appliquer, notamment sa suppression. **Supprimez le point.**"
+            "close": "L'éditeur d'élément enregistre automatiquement tous vos changements. Quand vous éditez une caractéristique, the bouton fermer se transforme en coche. **Cliquez sur le {button} bouton pour fermer l'éditeur d'élément.\"",
+            "reselect": "En général, les points existent déjà, mais sont incomplets ou contiennent des erreurs. Il est possible de modifier un point existant. **Cliquez pour sélectionner le point que vous venez de créer.**",
+            "fixname": "**Changez le nom, puis cliquez sur le {button} bouton pour fermer l'éditeur d'élément.**",
+            "reselect_delete": "Toutes les caractéristiques de la carte peuvent être supprimées. **Cliquez pour sélectionnez le point que vous avez créé**",
+            "delete": "Le menu autour du point affiche les opérations disponibles sur ce point, dont la suppression. **Cliquez sur le {button} bouton pour effacer le point.**"
         },
         "areas": {
             "title": "Polygone",
-            "add": "Les polygones sont utilisés pour montrer les frontières d'éléments comme des lacs, des bâtiments, et des zones résidentielles. Ils peuvent être également utilisés pour une cartographie plus détaillée de beaucoup d'éléments que vous pourriez normalement cartographier comme des points. **Cliquez sur le bouton Polygone pour ajouter un nouveau polygone.**",
-            "corner": "Les polygones sont dessinés en plaçant des nœuds l'un après l'autre. **Ajoutez un premier nœud sur un coin de l'aire de jeu.**",
             "place": "Dessinez le polygone en ajoutant des nœuds. Terminez le polygone en cliquant sur le nœud de départ. **Dessinez un polygone pour l'aire de jeu.**",
             "search": "**Rechercher '{name}'.**",
             "choose": "**Choisi Terrain de jeu dans la liste.**",
-            "describe": "**Ajouter un nom, et fermez l'éditeur d'éléments.**"
+            "describe": "**Ajoutez un nom et ensuite cliquez sur le bouton {button} pour fermer l'éditeur d'éléments**"
         },
         "lines": {
             "title": "Lignes",
-            "add": "Les lignes sont utilisées pour représenter des éléments tels que des routes, des voies ferrées ou des rivières. **Cliquer sur le bouton Ligne pour ajouter une nouvelle ligne.**",
             "start": "**Commencez la ligne en cliquant sur l'extrémité de la route.**",
-            "intersect": "Cliquez pour ajouter des nœuds à la ligne.Si nécessaire, Vous pouvez déplacer la carte pendant le dessin. Les routes, comme d'autres types de lignes, font partie d'un réseau plus large : il est important que ces lignes soient correctement connectées afin que les applications de \"routing\" fonctionnent. **Cliquez sur Flower Street pour créer une intersection qui connecte les deux lignes.**",
             "finish": "Les lignes peuvent être terminées en cliquant une seconde fois sur le dernier nœud. **Terminez le dessin de la route**",
             "road": "**Choisi Rue dans la liste**",
             "residential": "Il y a différent types de routes, le plus commun est \"Résidentielle\" (Residential). **Sélectionnez le type \"Résidentielle\".**",
-            "describe": "**Donnez un nom à la rue et fermez l'éditeur d'éléments.**",
-            "restart": "La route nécessite d'être interconnectée avec Flower Street.",
+            "describe": "**Donnez un nom à la route, puis cliquez sur le {button} bouton pour fermer l'éditeur d'élément.**",
+            "restart": "La route doit couper {name}.",
             "wrong_preset": "Vous n'avez pas sélectionné de type de rue résidentielle. **Cliquez ici pour rechoisir** "
         },
         "startediting": {
             "title": "Commencer à éditer",
-            "help": "Ce tutoriel et d'autres informations sont disponibles ici.",
+            "help": "Vous pouvez rejouer cette démonstration ou accéder à plus de documentation en cliquant sur le {button} bouton Aide.",
             "save": "N'oubliez pas de sauver régulièrement vos modifications !",
             "start": "Commencer à cartographier !"
         }
@@ -850,6 +878,9 @@
             },
             "description": {
                 "label": "Description"
+            },
+            "dock": {
+                "label": "Type"
             },
             "drive_through": {
                 "label": "Point-retrait"
@@ -1599,8 +1630,8 @@
                 "terms": "Location de vélo, Location de bicyclette"
             },
             "amenity/bicycle_repair_station": {
-                "name": "Station de réparation de vélos",
-                "terms": "Borne de réparation de vélos,Point de réparation de vélos"
+                "name": "Stand D'outils De Réparation De Vélos",
+                "terms": "Magasin de vélos , Atelier De Réparation De Vélos"
             },
             "amenity/biergarten": {
                 "name": "Brasserie de plein air",
@@ -1678,7 +1709,7 @@
                 "name": "Dentiste",
                 "terms": "Dentiste"
             },
-            "amenity/doctor": {
+            "amenity/doctors": {
                 "name": "Médecin",
                 "terms": "Docteur, Médecin"
             },
@@ -1697,6 +1728,9 @@
             "amenity/fast_food": {
                 "name": "Restauration rapide",
                 "terms": "Fast Food, Restauration Rapide"
+            },
+            "amenity/ferry_terminal": {
+                "name": "Terminal ferry"
             },
             "amenity/fire_station": {
                 "name": "Caserne de pompiers",
@@ -1749,6 +1783,9 @@
             "amenity/parking_entrance": {
                 "name": "Entrée/Sortie de parking",
                 "terms": "Entrée/Sortie de parking"
+            },
+            "amenity/parking_space": {
+                "name": "Place de parking"
             },
             "amenity/pharmacy": {
                 "name": "Pharmacie",

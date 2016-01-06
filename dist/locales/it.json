@@ -511,50 +511,82 @@
         "relations": "# Relazioni\n\nUna relazione è un particolare elemento di OpenStreetMap che raggruppa altri\nelementi. Per esempio due tipi comuni di relazione sono le *relazioni percorso*,\nche raggruppano pezzi di strada che appartengono alla stessa via o autostrada,\ne i *multipoligoni*, che raggruppano diverse linee componenti aree complesse\n(un'area con più pezzi o con dei buchi in essa come una ciambella).\n\nGli elementi di una relazione sono chiamati *membri*. Nella barra laterale puoi\nvedere di quale relazione un elemento è membro e cliccare sulla relazione per\nselezionarla. Quando una relazione viene selezionata puoi vedere l'elenco di\ntutti i suoi membri nella barra laterale e gli stessi selezionati nella mappa.\n\nNella maggior parte dei casi iD si occuperà delle relazioni automaticamente\ndurante la modifica. Controlla solo che quando cancelli un elemento per\nridisegnarlo più accuratamente, il nuovo elemento sia un membro della stessa\nrelazione dell'originale.\n\n## Modificare le Relazioni\n\nSe vuoi modificare le relazioni, ecco le basi.\n\nPer aggiungere un elemento ad una relazione seleziona l'elemento, clicca il\ntasto \"+\" nella sezione \"Tutte le relazioni\" della barra laterale e quindi seleziona\nla relazione o digita il suo nome.\n\nPer creare una nuova relazione seleziona il primo elemento che diventerà\nmembro, clicca il tasto \"+\" nella sezione \"Tutte le relazioni\" della barra laterale\ne seleziona \"Nuova relazione...\".\n\nPer rimuovere un elemento da una relazione seleziona l'elemento e clicca sul\ncestino vicino alla relazione da cui vuoi rimuoverlo.\n\nPuoi creare dei multipoligoni con dei buchi usando lo strumento \"Unisci\".\nDisegna due aree (quella esterna e quella interna), tenendo premuto il tasto\nMaiusc della tastiera clicca su ognuno di loro per selezionarli entrambi e quindi\nclicca sul tasto \"Unisci\" (+).\n"
     },
     "intro": {
+        "graph": {
+            "city_hall": "Municipio di Fontechiara",
+            "fire_department": "Vigili del Fuoco di Fontechiara",
+            "memory_isle_park": "Parco della Memoria",
+            "riverwalk_trail": "Sentiero natura",
+            "w_michigan_ave": "Viale Timavo",
+            "e_michigan_ave": "Viale Piave",
+            "spring_st": "Via Roma",
+            "scidmore_park": "Parco Antonio Verdi",
+            "petting_zoo": "Zoo del parco Antonio Verdi",
+            "n_andrews_st": "Via Gasometro Nord",
+            "s_andrews_st": "Via Gasometro Sud",
+            "n_constantine_st": "Via Giuseppe Garibaldi",
+            "s_constantine_st": "Via Anita Garibaldi",
+            "rocky_river": "Fiume Grassella",
+            "railroad_dr": "Strada della ferrovia",
+            "conrail_rr": "Ferrovia Roma-Milano",
+            "st_joseph_river": "Fiume Ternaro",
+            "n_main_st": "Via Monte Bianco",
+            "s_main_st": "Via Monte Rosa",
+            "water_st": "Via dell'acqua",
+            "foster_st": "Via Corta",
+            "portage_river": "Fiume Medonte",
+            "flower_st": "Via del fiore",
+            "elm_st": "Via del fosso",
+            "walnut_st": "Via della noce",
+            "morris_ave": "Viale Etna",
+            "east_st": "Via Ferdinando Magellano",
+            "portage_ave": "Viale Maiella"
+        },
         "navigation": {
             "title": "Navigazione",
             "drag": "L'area della mappa principale mostra i dati OpenStreetMap su di uno sfondo. Puoi navigare trascinanndo e scorrendo, proprio come in ogni mappa web. **Trascina la mappa!**",
             "select": "Gli elementi della mappa sono rappresentai in tre modi: usando punti, linee o aree. Tutti gli elementi possono essere selezionati cliccando su di essi. **Clicca sul punto per selezionarlo.**",
-            "header": "L'intestazione mostra il tipo di elemento.",
-            "pane": "Quando un elemento è selezionato viene mostrato l'editor dell'elemento. L'intestazione mostra il tipo di elemento a il pannello principale mostra gli attributi dell'elemento, come il nome e l'indirizzo. **Chiudi l'editor dell'elemento con il pulsante chiudi in alto a destra.**"
+            "pane": "Quando un elemento è selezionato viene mostrato l'editor dell'elemento. L'intestazione mostra il tipo di elemento e il pannello principale mostra gli attributi dell'elemento, come il nome e l'indirizzo. **Chiudi l'editor dell'elemento con il pulsante {button} in alto a destra.**",
+            "search": "Nella schermata attuale si possono anche cercare elementi della mappa o del mondo intero. **Cerca '{name}'**",
+            "choose": "**Scegli {name} dalla lista per selezionarla.**",
+            "chosen": "Bene! Ora {name} è selezionata. **Chiudi l'editor dell'elemento premendo il pulsante {button}.**"
         },
         "points": {
             "title": "Punti",
-            "add": "I punti possono essere usati per rappresentare elementi come negozi, ristoranti e monumenti. Indicano un luogo specifico e descrivono cos'è. **Clicca il bottone Punto per aggiungere un nuovo punto.**",
-            "place": "Il punto può essere piazzato cliccando sulla mappa. **Piazza il punto sull'edificio.**",
+            "add": "I punti possono essere usati per rappresentare elementi come negozi, ristoranti e monumenti. Indicano un luogo specifico e descrivono cos'è. **Clicca il pulsante Punto {button} per aggiungere un nuovo punto.**",
+            "place": "Il punto può essere piazzato cliccando sulla mappa. **Clicca la mappa per piazzare il nuovo punto sull'edificio.**",
             "search": "Ci sono diversi elementi che possono essere rappresentati da punti. Il punto che hai appena aggiunto è un Caffè. **Cerca '{name}'**",
-            "choose": "**Scegli un Caffè dalla lista.**",
+            "choose": "**Scegli Caffè dalla lista.**",
             "describe": "Ora il punto è marcato come Caffè. Usando l'editor dell'elemento possiamo aggiungere più informazioni sull'elemento stesso. **Aggiungi un nome**",
-            "close": "L'editor dell'elemento può essere chiuso cliccando sul pulsante chiudi. **Chiudi l'editor dell'elemento**",
-            "reselect": "Spesso esistono già dei punti, ma contengono errori o sono incompleti. I punti esistenti si possono modificare. **Seleziona il punto che hai appena creato.**",
-            "fixname": "**Cambia il nome e chiudi l'editor dell'elemento.**",
-            "reselect_delete": "Tutti gli elementi sulla mappa possono essere cancellati. **Clicca sul punto che hai creato.**",
-            "delete": "Il menu attorno al punto contiene le operazioni che possono essere fatte su di esso, inclusa la cancellazione. **Cancella il punto.**"
+            "close": "L'editor dell'elemento mantiene automaticamente in memoria tutti i cambiamenti effettuati. Quando si modifica un elemento il pulsante di chiusura diventa un segno di spunta. **Clicca il pulsante {button} per chiudere l'editor dell'elemento**",
+            "reselect": "Spesso esistono già dei punti, ma contengono errori o sono incompleti. I punti esistenti si possono modificare. **Clicca per selezionare il punto che hai appena creato.**",
+            "fixname": "**Cambia il nome quindi clicca il pulsante {button} per chiudere l'editor dell'elemento.**",
+            "reselect_delete": "Tutti gli elementi sulla mappa possono essere cancellati. **Clicca per selezionare il punto che hai creato.**",
+            "delete": "Il menu attorno al punto contiene le operazioni che possono essere fatte su di esso, inclusa la cancellazione. **Clicca sul pulsante {button} per cancellare il punto.**"
         },
         "areas": {
             "title": "Aree",
-            "add": "Le aree sono utilizzate per indicare i contorni degli elementi come ad esempio i laghi, gli edifici e le aree residenziali. Possono anche essere utilizzate per rappresentare in modo più dettagliato elementi che normalmente vengono mappati come punti. **Clicca il pulsante Area per aggiungere una nuova area.**",
-            "corner": "Le aree devono essere disegnate posizionando i punti che segnano il confine dell'area. **Posizionare il punto di partenza a uno degli angoli del parchetto.**",
+            "add": "Le aree sono utilizzate per indicare i contorni degli elementi come ad esempio i laghi, gli edifici e le aree residenziali. Possono anche essere utilizzate per rappresentare in modo più dettagliato elementi che normalmente vengono mappati come punti. **Clicca il pulsante Area {button} per aggiungere una nuova area.**",
+            "corner": "Le aree devono essere disegnate posizionando i punti che segnano il confine dell'area. **Clicca per posizionare il punto di partenza su di uno degli angoli del parchetto.**",
             "place": "Disegna l'area posizionando più punti. Terminare l'area cliccando sul punto di partenza. **Disegnare un'area per il parchetto.**",
             "search": "**Cerca per '{name}'.**",
-            "choose": "**Scegli un Parco giochi dalla lista.**",
-            "describe": "**Aggiungi un nome e chiudi l'editor dell'elemento**"
+            "choose": "**Scegli Parco giochi dalla lista.**",
+            "describe": "**Aggiungi un nome e clicca il pulsante {button} per chiudere l'editor dell'elemento**"
         },
         "lines": {
             "title": "Linee",
-            "add": "Le linee sono usate per rappresentare elementi come strade, ferrovie e fiumi. **Clicca il bottone Linea per aggiungere una nuova linea.**",
+            "add": "Le linee sono usate per rappresentare elementi come strade, ferrovie e fiumi. **Clicca il bottone Linea {button} per aggiungere una nuova linea.**",
             "start": "**Inizia la linea cliccando sulla fine della strada.**",
-            "intersect": "Clicca per aggiungere altri nodi alla linea. Puoi trascinare la mappa mentre disegni, se necessario. Le strade, e molti altri tipi di linea, fanno parte di una rete più larga. È importante che queste linee siano connesse correttamente perché le applicazioni che creano itinerari funzionino. **Clicca su Flower Street per creare un'intersezione che collega le due linee.**",
+            "intersect": "Clicca per aggiungere altri nodi alla linea. Puoi trascinare la mappa mentre disegni, se necessario. Le strade, e molti altri tipi di linea, fanno parte di una rete più larga. È importante che queste linee siano connesse correttamente perché le applicazioni che creano itinerari funzionino. **Clicca su {name} per creare un'intersezione che collega le due linee.**",
             "finish": "Le linee possono essere terminate cliccando sull'ultimo nodo una seconda volta. **Terminare il disegno della strada.**",
             "road": "**Scegli Strada dalla lista**",
             "residential": "Ci sono diversi tipi di strade, il più comune dei quali è Residenziale. **Scegli il tipo di strada Residenziale**",
-            "describe": "**Dai un nome alla strada e chiudi l'editor dell'elemento.**",
-            "restart": "La strada deve intersecare Flower Street",
+            "describe": "**Dai un nome alla strada e clicca sul pulsante {button} per chiudere l'editor dell'elemento.**",
+            "restart": "La strada deve intersecare {name}.",
             "wrong_preset": "Non hai selezionato il tipo di strada Residenziale. **Clicca qua per scegliere nuovamente**"
         },
         "startediting": {
             "title": "Inizia a Modificare",
-            "help": "Più informazioni su questa guida sono disponibili qui.",
+            "help": "Puoi ripetere questa guida o vedere la documentazione cliccando sul pulsante Aiuto {button}.",
             "save": "Non dimenticare di salvare periodicamente le tue modifiche!",
             "start": "Inizia a mappare!"
         }
@@ -850,6 +882,12 @@
             },
             "description": {
                 "label": "Descrizione"
+            },
+            "diaper": {
+                "label": "Fasciatoio"
+            },
+            "dock": {
+                "label": "Tipologia"
             },
             "drive_through": {
                 "label": "Drive-through"
@@ -1673,9 +1711,9 @@
                 "name": "Dentista",
                 "terms": "dentista,odontoiatra,odontotecnico"
             },
-            "amenity/doctor": {
+            "amenity/doctors": {
                 "name": "Medico di base",
-                "terms": "dottore,medico,studio medico"
+                "terms": "dottore,medico,studio medico,ambulatorio"
             },
             "amenity/dojo": {
                 "name": "Dojo/Accademia di arti marziali",
@@ -1692,6 +1730,10 @@
             "amenity/fast_food": {
                 "name": "Fast Food",
                 "terms": "Fast Food"
+            },
+            "amenity/ferry_terminal": {
+                "name": "Terminal traghetti",
+                "terms": "traghetto,traghetti,imbarco,stazione marittima"
             },
             "amenity/fire_station": {
                 "name": "Caserma dei pompieri",
@@ -1716,6 +1758,10 @@
             "amenity/hospital": {
                 "name": "Area Ospedaliera",
                 "terms": "ospedale,clinica,pronto soccorso,servizio sanitario,salute,hospice,ospizio,infermeria,istituzione,casa di cura,casa di riposo,sanatorio,ambulatorio,chirurgia,reparto"
+            },
+            "amenity/hunting_stand": {
+                "name": "Postazione da caccia",
+                "terms": "capanno,caccia,postazione"
             },
             "amenity/kindergarten": {
                 "name": "Area della Scuola dell'infanzia",
@@ -1744,6 +1790,10 @@
             "amenity/parking_entrance": {
                 "name": "Entrata/Uscita Garage",
                 "terms": "garage,posto auto,posteggio,parcheggio"
+            },
+            "amenity/parking_space": {
+                "name": "Stallo",
+                "terms": "posto auto"
             },
             "amenity/pharmacy": {
                 "name": "Farmacia",
@@ -1910,6 +1960,10 @@
             "amenity/waste_basket": {
                 "name": "Cestino della spazzatura",
                 "terms": "sacchetto della spazzatura,cestino della spazzatura,cassonetto della spazzatura,cassonetto,cestino"
+            },
+            "amenity/water_point": {
+                "name": "Acqua potabile per camper",
+                "terms": "colonnina,acqua,camper,caravan"
             },
             "area": {
                 "name": "Area",
@@ -2198,6 +2252,9 @@
                 "name": "Fabbro",
                 "terms": "fabbro,ferraio,ferro battuto,officina"
             },
+            "craft/metal_construction": {
+                "name": "Costruzione di metallo"
+            },
             "craft/optician": {
                 "name": "Ottico",
                 "terms": "ottica,occhiali"
@@ -2212,6 +2269,9 @@
             "craft/photographic_laboratory": {
                 "name": "Laboratorio Fotografico",
                 "terms": "laboratorio,foto,fotografia,stampe"
+            },
+            "craft/plasterer": {
+                "name": "Intonacatore"
             },
             "craft/plumber": {
                 "name": "Idraulico"
@@ -2976,6 +3036,9 @@
             "office/company": {
                 "name": "Ufficio aziendale"
             },
+            "office/educational_institution": {
+                "name": "Istituto d'Istruzione"
+            },
             "office/employment_agency": {
                 "name": "Agenzia per l'impiego",
                 "terms": "interinale,impiego,lavoro,ufficio per l'impiego,ufficio interinale"
@@ -3307,6 +3370,9 @@
             },
             "shop/cosmetics": {
                 "name": "Negozio di cosmetici"
+            },
+            "shop/craft": {
+                "name": "Negozio di arti e mestieri"
             },
             "shop/curtain": {
                 "name": "Negozio di tende"
@@ -3737,6 +3803,10 @@
                 "name": "Corso d'acqua",
                 "terms": " Corso d’acqua "
             },
+            "waterway/boatyard": {
+                "name": "Cantiere navale per barche",
+                "terms": "darsena,cantiere,bache"
+            },
             "waterway/canal": {
                 "name": "Canale",
                 "terms": "Canale"
@@ -3748,6 +3818,10 @@
             "waterway/ditch": {
                 "name": "Fossato",
                 "terms": "Fosso"
+            },
+            "waterway/dock": {
+                "name": "Darsena",
+                "terms": "cantiere"
             },
             "waterway/drain": {
                 "name": "Canale di scolo",
@@ -3772,6 +3846,10 @@
             "waterway/stream": {
                 "name": "Torrente",
                 "terms": "fiumiciattolo,ramo,ruscello,corso,torrente,corrente,deriva,flusso,rivolo,rigagnolo"
+            },
+            "waterway/water_point": {
+                "name": "Acqua potabile per barche",
+                "terms": "colonnina,acqua,barca,nave"
             },
             "waterway/weir": {
                 "name": "Sbarramento",

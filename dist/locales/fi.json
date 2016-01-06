@@ -505,50 +505,81 @@
         "relations": "# Suhteet\n\nSuhde on erityistyyppinen OpenStreetMap-ominaisuus, joka ryhmittää yhteen muita\nominaisuuksia. Esimerkiksi kaksi yleistä suhdetyyppiä ovat *route relations*,\njotka ryhmittävät yhteen tienosat, jotka kuuluvat tiettyyn moottoritiehen tai\npäätiehen, ja *multipolygons*, jotka ryhmittävät yhteen useita viivoja, jotka määrittävät\nmutkikkaita alueita (sellaisia, joissa on useita kappaleita tai reikiä, kuten donitsissa).\n\nOminaisryhmää suhteessa kutsutaan *members*. Sivupalkissa voit nähdä\nminkä suhteiden jäsenenä ominaisuus on, ja napsauttaa suhdetta siellä\nsen valitsemiseksi. Kun suhde on valittu, voit nähdä kaikki sen jäsenet\nlueteltuina sivupalkissa ja korostettuna kartalla.\n\nEnimmäkseen iD huolehtii suhteiden ylläpidosta automaattisesti muokkauksen\naikana. Tärkein seikka, josta sinun pitäisi olla tietoinen, on että jos poistat\ntienpätkän piirtääksesi sen tarkempaa, sinun pitäisi varmistua, että uusi pätkä on\nsaman suhteen jäsen kuin alkuperäinen.\n\n## Suhteiden muokkaus\n\nJos haluat muokata suhteita, tässä ovat perusasiat.\n\nOminaisuuden lisäämiseksi suhteeseen, valitse ominaisuus, napsauta ”+”-painiketta\nsivupalkin ”All relations”-kappaleessa, ja valitse tai kirjoita suhteen nimi.\n\nUuden suhteen luomisesksi valitse ensin ominaisuus, jonka pitäisi olla jäsen,\nnapsauta ”+”-painiketta ”All relations”-kappaleessa ja valitse ”New relation...”.\n\nOminaisuuden poistamiseksi suhteesta valitse ominaisuus ja napsauta\nroskakoripainiketta sen suhteen vieressä, josta haluat sen poistaa.\n\nVoit luoda monikulmioita rei'illä käyttäen ”Merge”-työkalua. Piirrä kaksi aluetta (sisempi\nja ulompi), pidä Vaihto-näppäin alhaalla ja napsauta niistä kumpaakin molempien\nvalitsemiseksi, ja napsauta sitten ”Merge” (+)-painiketta.\n"
     },
     "intro": {
+        "graph": {
+            "city_hall": "Jokilaakson kaupungintalo",
+            "fire_department": "Jokilaakson paloasema",
+            "memory_isle_park": "Patsaspuisto",
+            "riverwalk_trail": "Joenrannanpolku",
+            "w_michigan_ave": "Läntinen valtaväylä",
+            "e_michigan_ave": "Itäinen valtaväylä",
+            "spring_st": "Jokilaakson puistokatu",
+            "scidmore_park": "Aurinkopuisto",
+            "petting_zoo": "Aurinkopuiston eläintarha",
+            "n_andrews_st": "Pohjoinen kauppakatu",
+            "s_andrews_st": "Eteläinen kauppakatu",
+            "n_constantine_st": "Pohjoinen kauppakatu",
+            "s_constantine_st": "Eteläinen kauppakatu",
+            "rocky_river": "Pyhäpuro",
+            "railroad_dr": "Rautatienkatu",
+            "conrail_rr": "Pohjoisrata",
+            "st_joseph_river": "Pyhäjoki",
+            "n_main_st": "Pohjoinen pääkatu",
+            "s_main_st": "Eteläinen pääkatu",
+            "water_st": "Jokikatu",
+            "foster_st": "Autotie",
+            "portage_river": "Sorsajoki",
+            "flower_st": "Paratiisitie",
+            "elm_st": "Hyvinvoinninkatu",
+            "walnut_st": "Onnelanraitti",
+            "morris_ave": "Ilokaari",
+            "east_st": "Aurinkorinne",
+            "portage_ave": "Sorsakatu"
+        },
         "navigation": {
             "title": "Liikkuminen",
             "drag": "Kartalla näkyy OpenStreetMapiin piirretyt kohteet taustakuvan päällä. Liiku kartalla siirtämällä, loitontamalla ja lähentämällä kuten millä tahansa verkkosivukartalla. **Vedä karttaa!**",
             "select": "Karttakohteita on kolmenlaisia: pisteitä, viivoja ja alueita. Pisteet voivat olla viiva- tai paikkapisteitä. Kaikki nämä kohteet valitaan muokattaviksi napsauttamalla niitä. **Valitse tämä paikkapiste napsauttamalla sitä.**",
-            "header": "Otsikko kertoo karttakohteen tyypin.",
-            "pane": "Kun jokin karttakohde valitaan napsauttamalla sitä, vasempaan reunaan ilmestyy muokkaustoiminnot. Näkymän otsikko kertoo karttakohteen tyypin. Alapuolella ovat karttakohteen ominaisuudet, kuten nimi tai osoite. **Sulje muokkausnäkymä napsauttamalla rastia oikeasta yläkulmasta.**"
+            "pane": "Kun jokin karttakohde valitaan napsauttamalla sitä, vasempaan reunaan ilmestyy muokkaustoiminnot. Näkymän otsikko kertoo karttakohteen tyypin. Alapuolella ovat karttakohteen ominaisuudet, kuten nimi tai osoite. **Sulje muokkausnäkymä napsauttamalla {button}-painiketta oikeasta yläkulmasta.**",
+            "search": "Ominaisuuksia voi myös hakea nykyisestä näkymästä tai maailmanlaajuisesti. **Etsi kohdetta \"{name}\"**",
+            "choose": "**Valitse kohde napsauttamalla listalta {name}.**",
+            "chosen": "Hienoa! {name} on nyt valittu. **Sulje muokkausnäkymä napsauttamalla {button}-painiketta oikeasta yläkulmasta.**"
         },
         "points": {
             "title": "Paikkapisteet",
-            "add": "Paikkapisteitä voidaan käyttää kauppojen, ravintoloiden, muistomerkkien ja muiden vastaavien pienten kohteiden merkitsemiseen. Niillä ilmoitetaan vain pieni, hieman epämääräinenkin sijainti. **Lisää uusi paikkapiste napsauttamalla Paikkapiste.**",
-            "place": "Lisää paikkapiste kartalle napsauttamalla kartalta kohtaa, jossa se on. **Lisää paikkapiste rakennuksen päälle.**",
-            "search": "Pisteillä voidaan esittää monia erilaisia ominaisuuksia. Lisäämäsi piste on Kahvila. **Hae '{name}'**",
-            "choose": "**Valitse Kahvila listalta.**",
-            "describe": "Paikkapiste on nyt merkitty kahvilaksi. Lisää paikkapistelle lisätietoja muokkausnäkymässä. **Lisää paikan nimi**",
-            "close": "Muokkausnäkymä suljetaan napsauttamalla rastia oikeasta yläkulmasta. **Sulje muokkausnäkymä**",
+            "add": "Paikkapisteitä voidaan käyttää kauppojen, ravintoloiden, muistomerkkien ja muiden vastaavien pienten kohteiden merkitsemiseen. Niillä merkitään pieniä kohteita, joiden sijainti on hyvin tarkka. **Lisää uusi paikkapiste napsauttamalla {button} Paikkapiste.**",
+            "place": "Lisää paikkapiste kartalle napsauttamalla kartalta kohtaa, jossa se sijaitsee. **Lisää paikkapiste rakennuksen päälle.**",
+            "search": "Pisteillä voidaan esittää monia erilaisia ominaisuuksia. Lisäämäsi piste on kahvila. **Hae \"{name}\"**",
+            "choose": "**Valitse kahvila listalta.**",
+            "describe": "Paikkapiste on nyt merkitty kahvilaksi. Lisää paikkapisteelle lisätietoja muokkausnäkymässä. **Lisää paikan nimi**",
+            "close": "Muokkausohjelma muistaa kaikki muutokset automaattisesti. **Sulje muokkausnäkymä napsauttamalla {button}-painiketta oikeasta yläkulmasta.**",
             "reselect": "Useimmat paikat on jo merkitty kartalle, mutta niiden tiedoissa voi olla puutteita. Niitä voidaan lisätä jälkikäteen. **Valitse äsken luotu karttapiste.**",
-            "fixname": "**Vaihda paikkapisteen nimi ja sulje muokkausnäkymä.**",
+            "fixname": "**Vaihda kohteen nimi ja sulje sitten muokkausnäkymä napsauttamalla {button}-painiketta oikeasta yläkulmasta.**",
             "reselect_delete": "Kaikki karttakohteet voidaan poistaa. **Napsauta äsken luotua karttapistettä.**",
-            "delete": "Karttapisteen ympärille avautuva valikko sisältää karttakohteeseen liittyviä toimintoja, kuten kohteen poistamisen. **Poista paikkapiste.**"
+            "delete": "Karttapisteen ympärille avautuvassa valikossa on karttakohteeseen liittyviä toimintoja, kuten kohteen poistaminen. **Poista paikkapiste napsauttamalla {button}-painiketta.**"
         },
         "areas": {
             "title": "Alueet",
-            "add": "Alueet ovat tarkempia kuin pelkät viivat tai paikkapisteet. Ne soveltuvat esimerkiksi järvien, rakennusten ja asuinalueiden merkitsemiseen. **Luo uusi alue napsauttamalla Alue-painiketta.**",
+            "add": "Alueet ovat tarkempia kuin pelkät viivat tai paikkapisteet. Ne soveltuvat esimerkiksi järvien, rakennusten ja asuinalueiden merkitsemiseen. **Luo uusi alue napsauttamalla {button} Alue-painiketta.**",
             "corner": "Alueet piirretään sijoittamalla (viiva)pisteitä sen reunoille eli \"aitaamalla\" piirrettävä alue. **Aloita alueen piirtäminen napsauttamalla leikkipuiston nurkkaa.**",
             "place": "Piirrä alue napsauttamalla lisää viivapisteitä. Viimeistele alue napsauttamalla aloituspistettä uudelleen, jolloin alue sulkeutuu. **Piirrä leikkipuisto.**",
-            "search": "**Hae '{name}'.**",
+            "search": "**Hae \"{name}\".**",
             "choose": "**Valitse Leikkipuisto listasta.**",
-            "describe": "**Lisää leikkipuistolle nimi ja sulje sitten muokkausnäkymä.**"
+            "describe": "**Lisää leikkipuistolle nimi ja sulje sitten muokkausnäkymä napsauttamalla {button}-painiketta oikeasta yläkulmasta.**"
         },
         "lines": {
             "title": "Viivat",
-            "add": "Viivoja käytetään muun muassa teiden, jokien ja rautateiden piirtämiseen. **Lisää uusi viiva napsauttamalla Viiva.**",
+            "add": "Viivoja käytetään muun muassa teiden, jokien ja rautateiden piirtämiseen. **Lisää uusi viiva napsauttamalla {button} Viiva.**",
             "start": "**Aloita viiva napsauttamalla tien loppupistettä.**",
-            "intersect": "Lisää pisteitä viivaan napsauttamalla karttaa. Karttaa voi liikuttaa vetämällä viivan piirtämisen aikana. Tiet ja monet muutkin viivat ovat osa isompaa kokonaisuutta. Reitityksen takia on tärkeää, että tiet on yhdistetty toisiinsa oikein. **Luo kahden kadun risteys napsauttamalla Flower Streetiä.**",
-            "finish": "Viimeistele viiva kaksoisnapsauttamalla viimeisen viivapisteen kohdalla. **Lopeta viivan piirtäminen.**",
+            "intersect": "Lisää pisteitä viivaan napsauttamalla karttaa. Karttaa voi liikuttaa vetämällä viivan piirtämisen aikana. Tiet ja monet muutkin viivat ovat osa isompaa kokonaisuutta. Reitityksen takia on tärkeää, että tiet on yhdistetty toisiinsa oikein. **Luo kahden kadun risteys napsauttamalla {name}tä.**",
+            "finish": "Viimeistele viiva kaksoisnapsauttamalla viimeisen viivapisteen kohdalla. **Lopeta viivan piirtäminen napsauttamalla viimeistä pistettä uudelleen.**",
             "road": "**Valitse Tie listalta.**",
-            "residential": "Tiet luokitellaan niiden suuruden mukaan eri ryhmiin, yleisin niistä on asuinaluetie. **Valitse tietyypiksi Asuinaluetie**",
-            "describe": "**Nimeä tie ja sulje muokkausnäkymä.**",
-            "restart": "Tee kadulle risteys Flower Streetin kanssa.",
-            "wrong_preset": "Et valinnut Asuinkatu-tietyyppiä. **Kokeile uudelleen napsauttamalla tätä**"
+            "residential": "Tiet luokitellaan niiden koon mukaan eri ryhmiin, yleisin niistä on asuinaluetie. **Valitse tietyypiksi Asuinaluetie**",
+            "describe": "**Nimeä tie ja sulje sitten muokkausnäkymä napsauttamalla {button}-painiketta oikeasta yläkulmasta.**",
+            "wrong_preset": "Et valinnut Asuinalue-tietyyppiä. **Kokeile uudelleen napsauttamalla tätä**"
         },
         "startediting": {
             "title": "Aloita kartanmuokkaus!",
-            "help": "Lisäohjeita ja tämä aloitusopas löytyvät täältä.",
+            "help": "Lisäohjeita ja tämä aloitusopas löytyvät aina napsauttamalla {button} Ohje-painiketta",
             "save": "Muista tallentaa muutokset säännöllisesti!",
             "start": "Aloita kartanmuokkaus!"
         }
@@ -933,6 +964,9 @@
                 "label": "Tasoitussuositus (HCP)",
                 "placeholder": "1-18"
             },
+            "handrail": {
+                "label": "Käsikaide"
+            },
             "highway": {
                 "label": "Tyyppi"
             },
@@ -1133,13 +1167,13 @@
             "piste/difficulty": {
                 "label": "Haastavuus",
                 "options": {
-                    "advanced": "Keskivaikea (punainen timantti)",
-                    "easy": "Erittäin helppo (vihreä ympyrä)",
-                    "expert": "Vaikea (musta timantti)",
+                    "advanced": "Vaikea (musta)",
+                    "easy": "Helppo (sininen)",
+                    "expert": "Äärimmäisen vaikea (kaksoismusta/oranssi)",
                     "extreme": "Extreme (edellyttää kiipeilyvarusteet)",
                     "freeride": "Merkitsemätön (off-rinne)",
-                    "intermediate": "Helppo (sininen neliö)",
-                    "novice": "Vasta-alkaja (ohjeellinen)"
+                    "intermediate": "Keskivaikea (punainen)",
+                    "novice": "Erittäin helppo (vihreä)"
                 },
                 "placeholder": "Helppo, keskivaikea, vaikea..."
             },
@@ -1525,10 +1559,6 @@
                 "name": "Pyörävuokraamo",
                 "terms": "pyörävuokraamo, kaupunkipyörä, pyöränvuokraus, pyörän vuokraus, polkupyörävuokraamo, polkupyörän vuokraus, polkupyöränvuokraus, polkupyörä, pyörä"
             },
-            "amenity/bicycle_repair_station": {
-                "name": "Pyöränhuoltopiste",
-                "terms": "polkupyörä, pyörä, pyöräily, polkupyöräily, huolto, pyörän, polkupyörän, pyöräilyhuolto, pyörähuolto, pikahuolto, korjaus, pyöräkorjaus, pyöränkorjaus, pyöränhuolto, rengaspaine, rengaspaineet, renkaanpaine, renkaanpaineet, ilma, ilmanpumppaus, ilmantäyttö, paineistus"
-            },
             "amenity/biergarten": {
                 "name": "Ulkoilmaolutravintola",
                 "terms": "ravintola, olut, terassi, juoma, juomaterassi, juottola, juomala, alkoholi, juominen, olutterassi"
@@ -1593,9 +1623,6 @@
             "amenity/dentist": {
                 "name": "Hammaslääkäriasema",
                 "terms": "hammaslääkäri, klinikka, hammasklinikka, hammas, hampaat, hammashoito, suuhygienia, suuhygienisti, sairaala, terveyskeskus, terveys, lääkäri, sairaus, suuterveys, suu"
-            },
-            "amenity/doctor": {
-                "name": "lääkäri"
             },
             "amenity/drinking_water": {
                 "name": "Juomavesi"

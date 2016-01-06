@@ -511,47 +511,30 @@
         "navigation": {
             "title": "Navigace",
             "drag": "Hlavní část stránky, tedy mapa, zobrazuje data z OpenStreetMap a pod nimi pozadí. Po mapě se můžete pohybovat uchopením mapy myší a skrolováním, podobně jako po jakékoli jiné mapě na internetu. **Uchopte mapu!**",
-            "select": "Mapa se skládá z objektů tří typů: uzlů, čar a ploch. Můžete zvolit libovolný objekt tak, že na něj kliknete. **Klikněte na uzel.**",
-            "header": "Titulek ukazuje typ objektu.",
-            "pane": "Když je objekt zvolen, zobrazí se nástroj pro editaci jeho vlastností. Titulek ukazuje typ objektu a hlavní panel zobrazuje vlastnosti objektu, jako jeho název či adresu. **Zavřete editor vlastností kliknutím na tlačítko vpravo nahoře.**"
+            "select": "Mapa se skládá z objektů tří typů: uzlů, čar a ploch. Můžete zvolit libovolný objekt tak, že na něj kliknete. **Klikněte na uzel.**"
         },
         "points": {
             "title": "Uzly",
-            "add": "Reálné objekty jako obchody, hospody nebo rozcestníky můžete do mapy zanést pomocí uzlů. Uzly označují konkrétní bod, kde se něco nachází. **Klikněte na tlačítko Uzel a přidejte tak nový uzel.**",
-            "place": "Uzel zanesete do mapy kliknutím. **Umístěte uzel do budovy.**",
             "search": "Pomocí uzlů lze zachytit spoustu různých reálných objektů. Řekněme, že vámi přidávaný bod je kavárna. **Dejte hledat '{name}'.**",
             "choose": "**V seznamu zvolte Kavárnu.**",
-            "describe": "Uzel je nyní označený jako kavárna. Pomocí editoru vlastností můžete přidat více detailů o objektu. **Přidejte jméno.**",
-            "close": "Editor vlastností lze zavřít kliknutím na tlačítko. **Zavřete editor vlastností.**",
-            "reselect": "Někdy není třeba uzel přidávat, protože už existuje, ale je špatně nebo nekompletně popsaný. Existující uzly můžete editovat. **Zvolte uzel, který jste před chvilkou vytvořil/a.**",
-            "fixname": "**Změňte název a zavřete editor vlastností.**",
-            "reselect_delete": "Libovolný objekt na mapě lze smazat. **Klikněte na uzel, který jste před chvilkou vytvořil/a.**",
-            "delete": "Kolem uzlu se zobrazí nabídka operací, které je možné s uzlem provést, včetně smazání. **Smažte uzel.**"
+            "describe": "Uzel je nyní označený jako kavárna. Pomocí editoru vlastností můžete přidat více detailů o objektu. **Přidejte jméno.**"
         },
         "areas": {
             "title": "Plochy",
-            "add": "Reálné objekty jako vodní plochy, budovy nebo osídlené oblasti lze reprezentovat pomocí plochy, která opisuje jeho hranici. Plochou můžete podrobněji zachytit také objekty, které byste jinak mohli zmapovat i uzlem. **Klikněte na tlačítko Plocha a přidejte tak novou plochu.**",
-            "corner": "Plochu nakreslíte tak, že postupně nanášíte jeden uzel za druhým podél hranice plochy. **Umístěte první uzel na jeden z rohů hřiště.**",
             "place": "Plochu zakreslíte tak, že přidáte další uzly. Kreslení zakončíte kliknutím na počáteční uzel. **Nakreslete plochu hřiště.**",
             "search": "**Dejte hledat '{name}'.**",
-            "choose": "**V seznamu zvolte Hřiště.**",
-            "describe": "**Přidejte název a zavřete editor vlastností.**"
+            "choose": "**V seznamu zvolte Hřiště.**"
         },
         "lines": {
             "title": "Čáry",
-            "add": "Silnice, železnice nebo řeky lze v mapě zachytit pomocí lomených čar. **Klikněte na tlačítko Čára.**",
             "start": "**Čáru začněte kliknutím na jeden konec silnice.**",
-            "intersect": "Klikáním přidáte další a další uzly k čáře. Mapu si můžete během kreslení posouvat. Silnice a další druhy čar jsou obvykle součástí širší sítě. V takovém případě je důležité, aby čáry byly vzájemně propojeny, aby správně fungovaly navigační aplikace. **Klikněte na čáru na Flower Street - vytvoříte tak křižovatku obou cest.**",
             "finish": "Kreslení čáry ukončíte tak, že kliknete na znovu na poslední uzel. **Ukončete kreslení ulice.**",
             "road": "**V seznamu zvolte Silnici.**",
             "residential": "Existuje několik druhů silnic, nejběžnější je silnice s obytnými domy čili ulice. **Vyberte Ulici.**",
-            "describe": "**Pojmenujte ulici a zavřete editor vlastností.**",
-            "restart": "Je třeba, aby ulice protínala Flower Street.",
             "wrong_preset": "Je nutné zvolit Ulici. **Klikněte zde a vyberte ještě jednou**"
         },
         "startediting": {
             "title": "Začít s editací",
-            "help": "Další dokumentaci a také tuto prohlídku naleznete zde.",
             "save": "Nezapomeňte pravidelně ukládat své úpravy!",
             "start": "Začít mapovat!"
         }
@@ -847,6 +830,9 @@
             },
             "description": {
                 "label": "Popis"
+            },
+            "dock": {
+                "label": "Typ"
             },
             "drive_through": {
                 "label": "Obsluha z/do auta"
@@ -1675,9 +1661,9 @@
                 "name": "Zubař",
                 "terms": "zubař,dentista,zubařská ordinace,ordinace"
             },
-            "amenity/doctor": {
+            "amenity/doctors": {
                 "name": "Lékař",
-                "terms": "lékař,doktor,praktický lékař,ordinace,medik"
+                "terms": "lékař,doktor,ordinace,lékařská ordinace,praktický lékař,praktický doktor"
             },
             "amenity/dojo": {
                 "name": "Škola bojových umění",
@@ -1694,6 +1680,10 @@
             "amenity/fast_food": {
                 "name": "Rychlé občerstvení",
                 "terms": "rychlé občerstvení"
+            },
+            "amenity/ferry_terminal": {
+                "name": "Přístaviště trajektu či přívozu",
+                "terms": "trajekt,přívoz,ferry,terminál,přístav,přístaviště,kotviště,stanice"
             },
             "amenity/fire_station": {
                 "name": "Hasiči",
@@ -1718,6 +1708,10 @@
             "amenity/hospital": {
                 "name": "Prostor nemocnice",
                 "terms": "nemocnice,klinika,špitál,středisko,hospic,LDN,sanatorium,nemocniční,lazaret,ambulance,poliklinika,pohotovost"
+            },
+            "amenity/hunting_stand": {
+                "name": "Posed",
+                "terms": "posed,pozorovatelna,kazatelna"
             },
             "amenity/kindergarten": {
                 "name": "Prostor školky/jeslí",
@@ -1746,6 +1740,10 @@
             "amenity/parking_entrance": {
                 "name": "Vjezd do/výjezd z garáží",
                 "terms": "parkoviště,parking,parkování,stání,garáž,garáže,vjezd,výjezd"
+            },
+            "amenity/parking_space": {
+                "name": "Parkovací místo",
+                "terms": "místo k parkování,parkoviště"
             },
             "amenity/pharmacy": {
                 "name": "Lékárna",
@@ -1914,6 +1912,10 @@
             "amenity/waste_basket": {
                 "name": "Odpadkový koš",
                 "terms": "popelnice,kontejner,odpadkový koš,odpadky"
+            },
+            "amenity/water_point": {
+                "name": "Pitná voda pro karavany",
+                "terms": "pitná voda,karavan,obytný vůz"
             },
             "area": {
                 "name": "Plocha",
@@ -3899,6 +3901,10 @@
                 "name": "Vodní tok",
                 "terms": "vodní tok,řeka,potok,kanál,tok"
             },
+            "waterway/boatyard": {
+                "name": "Loděnice",
+                "terms": "loděnice,dok,suchý dok,doky,suché doky"
+            },
             "waterway/canal": {
                 "name": "Vodní kanál",
                 "terms": "vodní kanál,kanál,přivaděč,náhon,průplav,závlaha"
@@ -3910,6 +3916,10 @@
             "waterway/ditch": {
                 "name": "Příkop / strouha",
                 "terms": "příkop, strouha, škarpa"
+            },
+            "waterway/dock": {
+                "name": "Doky",
+                "terms": "doky,výroba lodí,oprava lodí,údržba lodí,loděnice"
             },
             "waterway/drain": {
                 "name": "Odvodňovací strouha",
@@ -3934,6 +3944,10 @@
             "waterway/stream": {
                 "name": "Potok",
                 "terms": "potok,potůček,strouha,tok,říčka,přítok,koryto,řeka,proud,vír,odtok,příliv,odliv"
+            },
+            "waterway/water_point": {
+                "name": "Pitná voda pro lodě",
+                "terms": "pitná voda,lodě"
             },
             "waterway/weir": {
                 "name": "Jez",

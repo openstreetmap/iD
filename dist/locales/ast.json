@@ -482,18 +482,13 @@
         "navigation": {
             "title": "Navegacion",
             "drag": "L'área principal del mapa presenta los datos d'OpenStreetMap enriba d'un fondu. Pue navegar arrastrando y moviendo, igual que cualquier mapa web. **¡Arrastre'l mapa!**",
-            "select": "Les carauterístiques del mapa representense de trés maneres: usando puntos, llinies o árees. Toles carauterístiques puen seleicionase calcando nelles. **Calque nel puntu pa selicionalu.**",
-            "header": "La testera amuesanos el tipu de carauterística.",
-            "pane": "Al seleicionar una carauterística, s'amuesa l'editor de carauterístiques. La testera amuesa el tipu de carauterística ya'l panel principal amuesa los atributos de la carauterística, como'l so nome y direición. **Zarre l'editor de carauterístiques col botón zarrar d'arriba a la drecha.**"
+            "select": "Les carauterístiques del mapa representense de trés maneres: usando puntos, llinies o árees. Toles carauterístiques puen seleicionase calcando nelles. **Calque nel puntu pa selicionalu.**"
         },
         "points": {
             "title": "Puntos",
-            "add": "Los puntos puen usase pa representar carauterístiques como tiendes, restaurantes y monumentos. Marquen un llugar específicu, y describen lo qu'hai ellí. **Calque nel botón Puntu p'amestar un puntu nuevu.**",
-            "place": "El puntu pue ponese faciendo clic nel mapa. **Pon el puntu enriba del edificiu.**",
             "search": "Hai munches carauterístiques distintes que puen representase con puntos. El puntu que vienes d'amestar ye un Café. **Busca '{name}'**",
             "choose": "**Escueyi Café la llista.**",
-            "describe": "Agora ta marcáu el puntu como un café. Usando'l editor de carauterístiques, podemos amestar más información de la carauterística. **Amiesta un nome**",
-            "close": "L'editor de carauterístiques pue zarrase calcando nel botón zarrar. **Zarra l'editor de carauterístiques**"
+            "describe": "Agora ta marcáu el puntu como un café. Usando'l editor de carauterístiques, podemos amestar más información de la carauterística. **Amiesta un nome**"
         },
         "areas": {
             "title": "Árees",
@@ -1493,10 +1488,6 @@
             "amenity/bicycle_rental": {
                 "name": " Alquiler de bicicletes"
             },
-            "amenity/bicycle_repair_station": {
-                "name": "Taller de bicicletes",
-                "terms": "Reparación de bicis"
-            },
             "amenity/biergarten": {
                 "name": "Cervecería al aire llibre",
                 "terms": "Biergarten"
@@ -1563,10 +1554,6 @@
             "amenity/dentist": {
                 "name": "Dentista",
                 "terms": "Estomatólogu,Clínica dental"
-            },
-            "amenity/doctor": {
-                "name": "Doctor",
-                "terms": "Médicu,Especialista"
             },
             "amenity/dojo": {
                 "name": "Dojo / Academia d'artes marciales",

@@ -137,9 +137,14 @@
         },
         "merge": {
             "title": "Voeg samen",
+            "description": "Voeg deze objecten samen.",
             "key": "C",
-            "not_eligible": "Deze objecten kunnen niet worden samengevoegd.",
-            "incomplete_relation": "Deze objecten kunnen niet samengevoegd worden omdat minstens één ervan niet volledig gedownload is."
+            "annotation": "{n} objecten samengevoegd.",
+            "not_eligible": "Deze objecten kunnen niet samengevoegd worden.",
+            "not_adjacent": "Deze objecten kunnen niet samengevoegd worden omdat ze niet verbonden zijn.",
+            "restriction": "Deze objecten kunnen niet samengevoegd worden omdat minstens één ervan lid is van een \"{relation}\"-relatie.",
+            "incomplete_relation": "Deze objecten kunnen niet samengevoegd worden omdat minstens één ervan niet volledig gedownload is.",
+            "conflicting_tags": "Deze objecten kunnen niet samengevoegd worden omdat sommige van hun tags conflicteren."
         },
         "move": {
             "title": "Verschuif",
@@ -212,6 +217,7 @@
         "nothing": "Niets om opnieuw te doen."
     },
     "tooltip_keyhint": "Sneltoets:",
+    "browser_notice": "Deze editor werkt in Firefox, Chrome, Safari, Opera en Internet Explorer 11 en hoger. Download een nieuwere versie van je browser of gebruik Potlatch 2 om de kaart aan te passen.",
     "translate": {
         "translate": "Vertaal",
         "localized_translation_label": "Naam in meerdere talen",
@@ -505,50 +511,82 @@
         "relations": "# Relaties\n\nEen relatie is een speciaal type object in OpenStreetMap dat andere objecten groepeert. Twee vaakvoorkomende types relaties zijn bijvoorbeeld de *routerelatie*, die delen van een weg die tot eenzelfde snelweg behoren groepeert, en *multipolygonen*, die verschillende lijnen groeperen die samen een complex vlak definiëren (een van verschillende delen met gaten erin, zoals bij een donut).\n\nDe groep van elementen in een relatie heten *leden*. In de zijbalk kan je zien van welke relaties een element lid is, en daar op een relatie klikken om die te selecteren. Wanneer de relatie is geselecteerd, kan je al haar leden in een lijst in de zijbalk zien, en worden ze gehighlight op de kaart.\n\niD zal meestal relaties automatisch voor je in orde houden terwijl je bewerkt. Het belangrijkste waar je moet aan denken is dat als je een deel van een weg verwijdert om het nauwkeuriger opnieuw te tekenen, het nieuwe stuk weg lid moet zijn van dezelfde relaties als het oude.\n\n## Relaties Bewerken\n\nAls je relaties wilt bewerken, zijn hier de basisvaardigheden.\n\nOm een object aan een relatie toe te voegen, selecteer het object, klik op de \"+\"-knop in het \"Alle relaties\"-gedeelte van de zijbalk en selecteer of typ de naam van de relatie.\n\nOm een nieuwe relatie te maken, selecteer je het eerste object dat er deel van uit moet maken, klik je op de \"+\"-knop in het \"Alle relaties\"-gedeelte en kies je \"Nieuwe relatie …\"\n\nOm een object van een relatie te verwijderen, selecteer je dat object en klik je op de vuilnisbakknop naast de relatie waaruit je het object wil verwijderen.\n\nJe kan multipolygonen met gaten maken door het \"Samenvoegen\"-gereedschap te gebruken. Teken twee vlakken (de binnenkant en de buitenkant), hou de Shift-toets ingedrukt en klik achtereenvolgens op hen allemaal om ze te selecteren. Klik dan op de \"Samenvoegen\"-knop (+).\n"
     },
     "intro": {
+        "graph": {
+            "city_hall": "Stadhuis van Verweggistan",
+            "fire_department": "Brandweer van Verweggistan",
+            "memory_isle_park": "Achtmeipark",
+            "riverwalk_trail": "Rivierbloesempad",
+            "w_michigan_ave": "Evendijk West",
+            "e_michigan_ave": "Evendijk Oost",
+            "spring_st": "Lentestraat",
+            "scidmore_park": "Maximapark",
+            "petting_zoo": "Maximapark",
+            "n_andrews_st": "Cartografiestraat",
+            "s_andrews_st": "Cartografiestraat",
+            "n_constantine_st": "Einderstraat",
+            "s_constantine_st": "Einderstraat",
+            "rocky_river": "Rotsrivier",
+            "railroad_dr": "Spoorwegstraat",
+            "conrail_rr": " ",
+            "st_joseph_river": "Kleine Dommel",
+            "n_main_st": "Kerkstraat",
+            "s_main_st": "Kerkstraat",
+            "water_st": "Waterstraat",
+            "foster_st": "Weeshuisstraat",
+            "portage_river": "Muinkschelde",
+            "flower_st": "Bloemstraat",
+            "elm_st": "Elmstraat",
+            "walnut_st": "Walnootstraat",
+            "morris_ave": "Einsteinstraat",
+            "east_st": "Oosterstraat",
+            "portage_ave": "Muinkkaai"
+        },
         "navigation": {
             "title": "Navigatie",
             "drag": "De grote kaart toont de OpenStreetMap-gegevens bovenop een achtergrond. Je kan navigeren door te slepen en te schuiven, net zoals iedere online kaart. **Versleep de kaart!**",
             "select": "Kaartobjecten worden op drie manieren weergegeven: door punten, lijnen of vlakken. Alle objecten kunnen worden geselecteerd door erop te klikken. **Klik op de punt om 'm te selecteren.**",
-            "header": "De titel toont ons het objecttype.",
-            "pane": "Als een object wordt geselecteerd, wordt de objectenbewerker getoond. De titel toont ons het objecttype en het hoofdscherm toont eigenschappen van het object, zoals de naam en het adres. **Sluit de objectenbewerker met de sluitknop rechtsboven.**"
+            "pane": "Als een object wordt geselecteerd, wordt de objectbewerker getoond. De titel toont ons het objecttype en het hoofdscherm toont eigenschappen van het object, zoals de naam en het adres. **Sluit de objectenbewerker met de {button}-knop rechtsboven.**",
+            "search": "Je kan ook zoeken naar objecten op het scherm, of wereldwijd. **Zoek naar '{name}'**",
+            "choose": "**Kies {name} uit de lijst om het te selecteren.**",
+            "chosen": "Fantastisch! {name} is nu geselecteerd. **Sluit de objectbewerker door op de {button}-knop te klikken.**"
         },
         "points": {
             "title": "Punten",
-            "add": "Punten kunnen worden gebruikt om objecten zoals winkels, restaurants en monumenten weer te geven. Ze geven een specifieke locatie aan en beschrijven wat daar is. **Klik op de Punt-knop om een nieuw punt toe te voegen.**",
-            "place": "Het punt kan worden geplaatst door op de kaart te klikken. **Plaats het punt bovenop het gebouw.**",
+            "add": "Punten kunnen worden gebruikt om objecten zoals winkels, restaurants en monumenten weer te geven. Ze geven een specifieke locatie aan en beschrijven wat daar is. **Klik op de {button}-knop om een nieuw punt toe te voegen.**",
+            "place": "Het punt kan worden geplaatst door op de kaart te klikken. **Klik op de kaart om het punt bovenop het gebouw te plaatsen.**",
             "search": "Er zijn veel verschillende objecten die door een punt kunnen worden weergegeven. Het punt dat je zojuist hebt toegevoegd is een Cafetaria. **Zoek naar '{name}'**",
             "choose": "**Selecteer 'Cafetaria' uit de lijst.**",
             "describe": "Het punt wordt nu aangeduid als een cafetaria. Door de objectbewerker te gebruiken kunnen we meer informatie over een object toevoegen. **Voeg een naam toe**",
-            "close": "De objectbewerker kan worden gesloten door op de sluitknop te klikken. **Sluit de objectbewerker**",
+            "close": "De objectbewerker onthoudt al je aanpassingen. Als je een object aanpast, verandert de sluitknop in een vinkje. **Klik de {button}-knop om de objectbewerker te sluiten**",
             "reselect": "Vaak zullen er al wel punten staan, maar bevatten ze fouten of zijn ze onvolledig. We kunnen bestaande punten aanpassen. **Selecteer het punt dat je zojuist hebt aangemaakt.**",
-            "fixname": "**Wijzig de naam en sluit de objectbewerker.**",
-            "reselect_delete": "Alle objecten in de kaart kunnen worden verwijderd. **Klik op het punt dat je hebt aangemaakt.**",
-            "delete": "Het menu rond het punt bevat handelingen die je erop kunt uitvoeren, waaronder verwijderen. **Verwijder het punt.**"
+            "fixname": "**Verander de naam en sluit de objectbewerker met de {button}-knop.**",
+            "reselect_delete": "Alle objecten in de kaart kunnen worden verwijderd. **Klik op het punt dat je hebt aangemaakt om het te selecteren.**",
+            "delete": "Het menu rond het punt bevat handelingen die je erop kunt uitvoeren, waaronder verwijderen. **Verwijder het punt met de {button}-knop.**"
         },
         "areas": {
             "title": "Vlakken",
-            "add": "Vlakken worden gebruikt om de grenzen van de objecten, zoals meren, gebouwen en woonwijken te tonen. Ze kunnen ook worden gebruikt voor het in kaart brengen van meer gedetailleerde objecten die je normaal als punten in kaart zou brengen. **Klik op de knop Vlak om een nieuw vlak toe te voegen.**",
-            "corner": "Vlakken worden getekend door punten te plaatsen die de grens van een vlak markeren. **Plaats het startpunt op een van de hoeken van de speeltuin.**",
+            "add": "Vlakken worden gebruikt om de grenzen van de objecten, zoals meren, gebouwen en woonwijken te tonen. Ze kunnen ook worden gebruikt voor het meer gedetailleerd in kaart brengen van objecten die je anders als punten zou toevoegen. **Klik op de {button}-knop om een nieuw vlak toe te voegen.**",
+            "corner": "Vlakken worden getekend door punten te tekenen op de grens ervan. **Klik om een beginpunt te plaatsen op een van de hoeken van de speeltuin.**",
             "place": "Teken het vlak door meer knooppunten te plaatsen. Beëindig het vlak door op het eerste knooppunt te klikken. **Teken een vlak voor de speeltuin.**",
             "search": "**Zoek naar '{name}'.**",
             "choose": "**Selecteer Speeltuin uit de lijst.**",
-            "describe": "**Voeg een naam toe en sluit de objectbewerker**"
+            "describe": "**Voeg een naam toe, klik dan op de {button}-knop om de objectbewerker te sluiten.**"
         },
         "lines": {
             "title": "Lijnen",
-            "add": "Lijnen worden gebruikt om objecten zoals wegen, spoorlijnen en rivieren weer te geven. **Klik op de Lijn-knop om een nieuwe lijn toe te voegen.**",
+            "add": "Lijnen worden gebruikt om objecten zoals wegen, spoorwegen en rivieren voor te stellen. **Klik op de {button}-knop om een nieuwe lijn toe te voegen.**",
             "start": "**Begin de lijn door te klikken op een uiteinde van de weg.**",
-            "intersect": "Klik om meer knooppunten aan de lijn toe te voegen. Je kan de kaart verslepen tijdens het tekenen als dat nodig is. Wegen en veel andere lijnen zijn onderdeel van een groter netwerk. Het is belangrijk dat deze lijnen correct aan elkaar zijn verbonden, zodat je een route kan laten berekenen. **Klik op 'Flower Street' om een kruising te maken waar de twee lijnen worden verbonden.**",
+            "intersect": "Klik om meer punten toe te voegen aan de lijn. Je kan de kaart verslepen als dat nodig is. Wegen, en veel andere soorten lijnen, maken deel uit van een groter netwerk. Het is belangrijk dat deze lijnen goed met elkaar verbonden zijn opdat navigatiesoftware kan werken. **Klik op {name} om een kruispunt te maken tussen de twee lijnen.**",
             "finish": "Lijnen kunnen worden beëindigd door nogmaals op het laatste knooppunt te klikken. **Beëindig het tekenen van de weg.**",
             "road": "**Selecteer 'Weg' uit de lijst**",
             "residential": "Er zijn verschillende soorten wegen, het meest voorkomende type is 'Straat'. **Kies het wegtype 'Straat'**",
-            "describe": "**Geef de weg een naam en sluit de objectbewerker.**",
-            "restart": "De weg moet 'Flower Street' kruisen.",
+            "describe": "**Geef de weg een naam, klik dan op de {button}-knop om de objectbewerker te sluiten.**",
+            "restart": "De weg moet een kruispunt hebben met {name}.",
             "wrong_preset": "Je hebt niet het wegtype 'Straat' geselecteerd. **Klik hier om opnieuw te kiezen**"
         },
         "startediting": {
             "title": "Begin met aanpassen",
-            "help": "Meer documentatie en deze rondleiding zijn hier beschikbaar.",
+            "help": "Je kan deze rondleiding en meer documentatie vinden door op de {button}-knop te klikken.",
             "save": "Vergeet niet om je aanpassingen regelmatig op te slaan!",
             "start": "Karteer de wereld!"
         }
@@ -845,6 +883,12 @@
             "description": {
                 "label": "Omschrijving"
             },
+            "diaper": {
+                "label": "Luierverschoning mogelijk"
+            },
+            "dock": {
+                "label": "Type"
+            },
             "drive_through": {
                 "label": "Drive-Through"
             },
@@ -1065,6 +1109,9 @@
                 "label": "Snelheidsbeperking",
                 "placeholder": "40, 50, 60 …"
             },
+            "maxstay": {
+                "label": "Maximale verblijftijd"
+            },
             "mtb/scale": {
                 "label": "Mountain Bike Moeilijkheidsgraad",
                 "options": {
@@ -1193,7 +1240,7 @@
                     "hike": "Wandelen",
                     "ice_skate": "IJsschaatsen",
                     "nordic": "Nordic",
-                    "playground": "Speelplaats",
+                    "playground": "Speeltuin",
                     "skitour": "Skitour",
                     "sled": "Kleine slee",
                     "sleigh": "Slee getrokken door dieren",
@@ -1581,8 +1628,8 @@
                 "terms": "huren, fietsen"
             },
             "amenity/bicycle_repair_station": {
-                "name": "Fietsherstelpunt",
-                "terms": "fietsonderhoud, onderhoud, banden, fietsbanden, fietspomp, fietsherstelstation, fietsenmaker"
+                "name": "Openbare fietsgereedschappen",
+                "terms": "fietsherstelplaats"
             },
             "amenity/biergarten": {
                 "name": "Biergarten",
@@ -1660,7 +1707,7 @@
                 "name": "Tandarts",
                 "terms": "tandheelkundige, mond, tanden"
             },
-            "amenity/doctor": {
+            "amenity/doctors": {
                 "name": "Dokter",
                 "terms": "arts, geneesheer, huisarts"
             },
@@ -1677,6 +1724,10 @@
             "amenity/fast_food": {
                 "name": "Fastfoodrestaurant",
                 "terms": "hamburgers, frieten, pizza"
+            },
+            "amenity/ferry_terminal": {
+                "name": "Veerbootterminal",
+                "terms": "ferryterminal,veerpontterminal,pontterminal,aanmeren,dok"
             },
             "amenity/fire_station": {
                 "name": "Brandweerkazerne"
@@ -1727,6 +1778,9 @@
             "amenity/parking_entrance": {
                 "name": "Ingang/Uitgang van Parkingcomplex",
                 "terms": "inrit, uitrit"
+            },
+            "amenity/parking_space": {
+                "name": "Parkeerplaats"
             },
             "amenity/pharmacy": {
                 "name": "Apotheek",
@@ -1840,11 +1894,46 @@
             },
             "amenity/townhall": {
                 "name": "Gemeentehuis",
-                "terms": "stadhuis, gemeentekantoor, stadsbestuur, burgemeester"
+                "terms": "stadhuis,gemeentekantoor,stadsbestuur,burgemeester"
             },
             "amenity/university": {
                 "name": "Campus van Universiteit of Hogeschool",
                 "terms": "universiteit, hogeschool, onderwijs, hoger onderwijs"
+            },
+            "amenity/vending_machine/condoms": {
+                "name": "Condoomautomaat",
+                "terms": "automaat"
+            },
+            "amenity/vending_machine/drinks": {
+                "name": "Drankautomaat",
+                "terms": "drinken,waterautomaat,automaat"
+            },
+            "amenity/vending_machine/excrement_bags": {
+                "name": "Strontzakjesautomaat",
+                "terms": "poepzakjesautomaat,hondenstrontzakjesautomaat,hondenpoepzakjesautomaat,dierenstront,automaat"
+            },
+            "amenity/vending_machine/news_papers": {
+                "name": "krantenautomaat",
+                "terms": "automaat"
+            },
+            "amenity/vending_machine/parcel_pickup_dropoff": {
+                "name": "Pakketautomaat",
+                "terms": "postautomaat,pakjesautomaat,leveringsautomaat,pakketjesautomaat,automaat"
+            },
+            "amenity/vending_machine/parking_tickets": {
+                "name": "Parkeerticketautomaat",
+                "terms": "ticketautomaat,automaat"
+            },
+            "amenity/vending_machine/public_transport_tickets": {
+                "name": "Automaat voor tickets voor openbaar vervoer",
+                "terms": "openbaarvervoerticketsautomaat,ticketautomaat,automaat"
+            },
+            "amenity/vending_machine/sweets": {
+                "name": "Snackautomaat",
+                "terms": "etenautomaat,automaat"
+            },
+            "amenity/vending_machine/vending_machine": {
+                "name": "Automaat"
             },
             "amenity/veterinary": {
                 "name": "Dierenarts",
@@ -1853,6 +1942,10 @@
             "amenity/waste_basket": {
                 "name": "Prullenbak",
                 "terms": "afvalbak, vuilnisbak"
+            },
+            "amenity/water_point": {
+                "name": "Waterpunt voor kampeerauto's",
+                "terms": "drinkwatertank,watertank,waterpunt voor campers"
             },
             "area": {
                 "name": "Vlak",
@@ -2636,8 +2729,8 @@
                 "name": "Volleybalveld"
             },
             "leisure/playground": {
-                "name": "Speelplaats",
-                "terms": "speeltuin, speelterrein"
+                "name": "Speeltuin",
+                "terms": "speelplaats,speelterrein"
             },
             "leisure/running_track": {
                 "name": "Looppiste",
@@ -2971,7 +3064,7 @@
             },
             "power/generator": {
                 "name": "Elektriciteitsgenerator",
-                "terms": "stroom, elektriciteit, energieopwekking, windmolen, zonnepaneel, elektriciteitscentrale, energiecentrale, kerncentrale"
+                "terms": "stroom, elektriciteit, energieopwekking, windmolen, windturbine, zonnepaneel, elektriciteitscentrale, energiecentrale, kerncentrale"
             },
             "power/line": {
                 "name": "Elektriciteitsleiding",
@@ -3608,6 +3701,10 @@
             "waterway": {
                 "name": "Waterweg"
             },
+            "waterway/boatyard": {
+                "name": "Scheepswerf",
+                "terms": "bootwerf,scheepsherstellingen,bootherstellingen,droogdok,bouwdok"
+            },
             "waterway/canal": {
                 "name": "Kanaal"
             },
@@ -3618,6 +3715,9 @@
             "waterway/ditch": {
                 "name": "Greppel",
                 "terms": "sloot,gracht"
+            },
+            "waterway/dock": {
+                "name": "Dok"
             },
             "waterway/drain": {
                 "name": "Sloot",
@@ -3642,6 +3742,10 @@
             "waterway/stream": {
                 "name": "Beek",
                 "terms": "stroom,rivier"
+            },
+            "waterway/water_point": {
+                "name": "Waterpunt voor boten",
+                "terms": "drinkwatertank,watertank"
             },
             "waterway/weir": {
                 "name": "Stuw",

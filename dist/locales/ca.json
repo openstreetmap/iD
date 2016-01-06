@@ -515,46 +515,43 @@
             "title": "Navegació",
             "drag": "L'àrea del mapa principal us mostra les dades de l'OpenStreetMap a sobre d'un fons. Podeu navegar-hi arrossegant el ratolí, igual que tots els mapes virtuals. **Arrossegueu el mapa!**",
             "select": "Les característiques del mapa són representades de tres maneres diferents: utilitzant punts, línies o bé àrees. Totes les característiques poden ser seleccionades clicant-hi a sobre. **Cliqueu el punt per seleccionar-lo.**",
-            "header": "L'encapçalament ens mostra el tipus de característica.",
-            "pane": "Quan es selecciona una característica, es desplega l'editor. L'encapçalament us mostra el tipus de característica i el tauler principal mostra els atributs de la característica, com ara el seu nom o l'adreça. **Tanqueu l'editor de la característica clicant a la creu que es troba al capdamunt a la dreta.**"
+            "pane": "Quan es selecciona una característica, es desplega l'editor. L'encapçalament us mostra el tipus de característica i el tauler principal mostra els atributs de la característica, com ara el seu nom o l'adreça. **Tanqueu l'editor de la característica clicant al botó {button} que es troba al capdamunt a la dreta.**"
         },
         "points": {
             "title": "Punts",
-            "add": "Els punts es poden fer servir per representar característiques del mapa com ara botigues, restaurants i monuments. Marquen una ubicació específica i descriuen el que es troba allà. **Cliqueu el botó del punt per afegir un nou punt.**",
-            "place": "El punt pot ser col·locat clicant al mapa. **Col·loqueu el punt a sobre de l'edifici.**",
+            "add": "Els punts es poden fer servir per representar característiques com ara botigues, restaurants i monuments. Marquen una ubicació específica i descriuen el que es troba allà. **Cliqueu el botó del punt {button} per afegir un nou punt.**",
+            "place": "El punt pot ser col·locat clicant al mapa. **Cliqueu al mapa per col·locar el nou punt a sobre de l'edifici.**",
             "search": "Hi ha moltes característiques que es poden representar amb punts. El punt que heu afegit és un cafè . **Cerqueu «{name}»**",
             "choose": "**Escolliu \"Cafè\" de la llista.**",
             "describe": "El punt està marcat com un cafè. Utilitzant l'editor de característica, podem afegir més informació sobre la característica. **Afegiu un nom**",
-            "close": "L'editor de característica pot ser tancat clicant a la creu. **Tanqueu l'editor de característica**",
-            "reselect": "Molts cops els punts ja existiran, però pot ser que tinguin errors o bé estiguin incomplets. Podeu editar els punts existents. **Seleccioneu el punt que acabeu de crear.**",
-            "fixname": "**Canvieu el nom i tanqueu l'editor de característica.**",
-            "reselect_delete": "Totes les característiques del mapa poden ser eliminades. **Cliqueu al punt que has creat.**",
-            "delete": "El menú que es mostra al voltant del punt conté operacions que se li poden aplicar, incloent la eliminació. **Elimineu el punt.**"
+            "close": "L'editor de característica recordarà tots els canvis automàticament. Quan canvieu alguna característica, el botó de tancament es convertirà en botó de confirmació **Cliqueu el botó {button} per tancar l'editor de característica**",
+            "reselect": "Molts cops els punts ja existiran, però pot ser que tinguin errors o bé estiguin incomplets. Podeu editar els punts existents. **Feu clic per seleccionar el punt que acabeu de crear.**",
+            "fixname": "**Canvieu el nom i llavors cliqueu el botó {button} per tancar l'editor de característica.**",
+            "reselect_delete": "Totes les característiques del mapa poden ser eliminades. **Clica per seleccionar el punt que has creat.**",
+            "delete": "El menú que es mostra al voltant del punt conté operacions que se li poden aplicar, incloent la eliminació. **Cliqueu el botó {button} per eliminar el punt.**"
         },
         "areas": {
             "title": "Àrees",
-            "add": "Les àrees s'usen per mostrar els límits de característiques com ara llacs, edificis i àrees residencials. També es poden fer servir per cartografiar més al detall moltes característiques que potser s'inclourien com a punts. **Cliqueu al botó Àrea per afegir-ne una**",
-            "corner": "Les àrees es dibuixen col·locant nodes que marquen els límits de l'àrea. **Col·loqueu el node inicial en una de les cantonades del parc.**",
+            "add": "Les àrees s'usen per mostrar els límits de característiques com ara llacs, edificis i àrees residencials. També es poden fer servir per cartografiar més al detall moltes característiques que potser s'inclourien com a punts. **Cliqueu al botó d'Àrea {button}  per afegir-ne una**",
+            "corner": "Les àrees es dibuixen col·locant nodes que marquen els límits de l'àrea. **Cliqueu per col·locar el node inicial en una de les cantonades del parc.**",
             "place": "Dibuixeu l'àrea col·locant més nodes. Acabeu l'àrea clicant al node inicial. **Dibuixeu\nuna àrea per al parc.**",
             "search": "**Cerqueu «{name}»**",
             "choose": "**Escolliu \"Zona de jocs infantils\" de la llista.**",
-            "describe": "**Afegiu un nom, i tanqueu l'editor de característica**"
+            "describe": "**Afegiu un nom, i llavors cliqueu al botó {button} per tancar l'editor de característica**"
         },
         "lines": {
             "title": "Línies",
-            "add": "Les línies acostumen a representar característiques com ara carreteres, vies de tren o rius. **Cliqueu el botó línia per afegir una nova línia**",
+            "add": "Les línies acostumen a representar característiques com ara carreteres, vies de tren o rius. **Cliqueu el botó de Línia {button} per afegir una nova línia**",
             "start": "**Comenceu a dibuixar la línia clicant al final de la carretera.**",
-            "intersect": "Cliqueu al mapa per afegir més nodes a la línia. Podeu arrossegar el mapa mentre dibuixeu si és necessari. Les carreteres i molts altres tipus de línies, són part d'una xarxa més gran. És molt important connectar aquestes línies a d'altres per tal que les aplicacions navegador funcionin. **Cliqueu a Flower Street per crear una intersecció que connecti aquestes dues línies.**",
             "finish": "Les línies poden ser acabades clicant al últim node una altra vegada. **Acabeu el dibuix de la carretera.**",
             "road": "**Escolliu Carretera de la llista**",
             "residential": "Hi ha molts tipus de carreteres, les més comunes són els carrers. **Escolliu el carrer**",
-            "describe": "**Poseu nom al carrer i tanqueu l'editor de característica.**",
-            "restart": "El carrer necessita unir-se a Flower Street. ",
+            "describe": "**Poseu nom al carrer i cliqueu el botó {button} per tancar l'editor de característica.**",
             "wrong_preset": "No heu seleccionat el Carrer. **Cliqueu aquí per seleccionar-lo de nou**"
         },
         "startediting": {
             "title": "Comenceu a editar",
-            "help": "Més documentació i aquest tutorial estan disponibles aquí.",
+            "help": "Podeu tornar a fer aquest tutorial o veure més documentació clicant al botó d'ajuda {button}.",
             "save": "No oblideu que els canvis s'han de desar regularment!",
             "start": "Comenceu a editar el mapa!"
         }
@@ -1586,9 +1583,6 @@
                 "name": "Lloguer de bicicletes",
                 "terms": "Lloguer de bicicletes, Servei de lloguer de bicicletes"
             },
-            "amenity/bicycle_repair_station": {
-                "name": "Punt de reparació de bicicletes"
-            },
             "amenity/biergarten": {
                 "name": "Biergarten"
             },
@@ -1652,7 +1646,7 @@
             "amenity/dentist": {
                 "name": "Dentista"
             },
-            "amenity/doctor": {
+            "amenity/doctors": {
                 "name": "Doctor"
             },
             "amenity/dojo": {

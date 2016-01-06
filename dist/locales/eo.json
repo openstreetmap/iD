@@ -143,8 +143,7 @@
         },
         "areas": {
             "title": "Areoj",
-            "choose": "**Rifo Korto de la listo.**",
-            "describe": "**Aldoni nomo, kaj fermi la redaktilon trajto **"
+            "choose": "**Rifo Korto de la listo.**"
         },
         "lines": {
             "title": "Linioj",
@@ -153,7 +152,6 @@
         },
         "startediting": {
             "title": "Komenco Redaktado",
-            "help": "Pli dokumentado kaj tiu walkthrough estas havebla ĉi tie.",
             "save": "Ne forgesu regule savu viajn ŝanĝojn!",
             "start": "Starti surĵeto!"
         }

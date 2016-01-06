@@ -501,47 +501,30 @@
         "navigation": {
             "title": "Nawigacja",
             "drag": "Główny obszar mapy pokazuje dane OpenStreetMap na tle podkładu. Możesz poruszać się po niej, przeciągając i przewijając tak jak po każdej mapie internetowej. **Przeciągnij mapę!**",
-            "select": "Obiekty na mapie reprezentowane są przez punkty, linie i obszary. Wszystkie mogą zostać zaznaczone przez kliknięcie na nich. **Kliknij na punkcie, aby go zaznaczyć.**",
-            "header": "Nagłówek pokazuje nam rodzaj obiektu.",
-            "pane": "Gdy wybierany jest obiekt, wyświetlany zostaje edytor. Nagłówek pokazuje nam typ obiektu, a główna część jego atrybuty, takie jak nazwa czy adres. **Zamknij edytor obiektów używając przycisku zamykania w prawym górnym rogu.**"
+            "select": "Obiekty na mapie reprezentowane są przez punkty, linie i obszary. Wszystkie mogą zostać zaznaczone przez kliknięcie na nich. **Kliknij na punkcie, aby go zaznaczyć.**"
         },
         "points": {
             "title": "Punkty",
-            "add": "Punkty mogą być używane do reprezentowania obiektów, takich jak sklepy, restauracje czy pomniki. Zaznaczają one konkretną lokalizację i opisują co się tam znajduje. **Kliknij na przycisk Punkt, aby dodać nowy punkt.**",
-            "place": "Punkt może zostać umieszczony przez kliknięcie na mapę. **Umieść punkt na budynku.**",
             "search": "Istnieje wiele różnych obiektów, które mogą być reprezentowane za pomocą punktów. Dodany przed chwilą punkt jest kawiarnią. **Wyszukaj '{name}'**",
             "choose": "**Wybierz kawiarnię z listy.**",
-            "describe": "Punkt jest teraz oznaczony jako kawiarnia. Używając edytora, możemy dodać więcej informacji o obiekcie. **Dodaj nazwę**",
-            "close": "Edytor obiektów może zostać ukryty przez kliknięcie przycisku zamykania. **Zamknij edytor obiektów**",
-            "reselect": "Punkty często już istnieją, ale zawierają błędy lub są niekompletne. Możemy modyfikować istniejące punkty. **Wybierz punkt, który właśnie utworzyłeś.**",
-            "fixname": "**Zmień nazwę i zamknij edytor obiektów.**",
-            "reselect_delete": "Wszystkie obiekty na mapie mogą zostać usunięte. **Kliknij na punkt, który utworzyłeś.**",
-            "delete": "Menu wokół punktu zawiera operacje, które można na nim wykonać, włącznie z usunięciem go. **Usuń punkt.**"
+            "describe": "Punkt jest teraz oznaczony jako kawiarnia. Używając edytora, możemy dodać więcej informacji o obiekcie. **Dodaj nazwę**"
         },
         "areas": {
             "title": "Obszary",
-            "add": "Obszary służą do wyznaczanie granic dla takich obiektów jak jeziora, budynki, czy osiedla mieszkaniowe. Mogą również zostać użyte do mapowania wielu obiektów, które normalnie przedstawiane są za pomocą punktów. **Kliknij na przycisk Obszar, aby dodać nowy obszar.**",
-            "corner": "Obszary są rysowane przez stawianie punktów oznaczających granicę obszaru. **Umieść punkt początkowy w jednym z rogów placu zabaw.**",
             "place": "Narysuj obszar, umieszczając kolejne punkty. Zakończ go, klikając na początkowy punkt. **Narysuj obszar placu zabaw.**",
             "search": "**Wyszukaj '{name}'.**",
-            "choose": "**Wybierz plac zabaw z listy.**",
-            "describe": "**Dodaj nazwę i zamknij edytor obiektów**"
+            "choose": "**Wybierz plac zabaw z listy.**"
         },
         "lines": {
             "title": "Linie",
-            "add": "Linie są używane do reprezentowania obiektów takich jak drogi, tory czy rzeki. **Naciśnij przycisk Linia, aby dodać nową linię.**",
             "start": "**Zacznij linię klikając na koniec drogi.**",
-            "intersect": "Kliknij, aby dodać więcej punktów do linii. W razie potrzeby możesz przeciągać mapę podczas rysowania. Drogi i wiele innych typów linii są częścią większej sieci. Ważne jest ich prawidłowe połączenie, aby programy do wyznaczania tras działały poprawnie. **Kliknij na Flower Street, aby dodać skrzyżowanie łączące dwie linie.**",
             "finish": "Linie można zakończyć przez ponowne kliknięcie ostatniego punktu. **Zakończ rysowanie drogi.**",
             "road": "**Wybierz drogę z listy**",
             "residential": "Istnieje wiele rodzajów dróg, spośród których najpopularniejsze są drogi lokalne. **Wybierz typ drogi Lokalna**",
-            "describe": "**Nazwij drogę i zamknij edytor obiektów.**",
-            "restart": "Droga musi się skrzyżować z Flower Street.",
             "wrong_preset": "Nie zaznaczyłeś drogi typu lokalnego. **Kliknij tutaj aby wybrać ponownie**"
         },
         "startediting": {
             "title": "Rozpocznij edytowanie",
-            "help": "Więcej dokumentacji oraz ten samouczek są dostępne tutaj.",
             "save": "Nie zapomnij o regularnym zapisywaniu swoich zmian!",
             "start": "Zacznij mapować!"
         }
@@ -1477,9 +1460,6 @@
                 "name": "Wypożyczalnia rowerów",
                 "terms": "wypożyczalnia"
             },
-            "amenity/bicycle_repair_station": {
-                "name": "Punkt naprawy rowerów"
-            },
             "amenity/biergarten": {
                 "name": "Ogródek piwny"
             },
@@ -1547,10 +1527,6 @@
             "amenity/dentist": {
                 "name": "Dentysta",
                 "terms": "stomatolog, gabinet stomatologiczny"
-            },
-            "amenity/doctor": {
-                "name": "Gabinet lub przychodnia lekarska",
-                "terms": "lekarz, doktor, medyk, uzdrowiciel, nzoz, zoz, spzoz, gabinet lekarski"
             },
             "amenity/dojo": {
                 "name": "Dojo/szkoła sztuk walki"
