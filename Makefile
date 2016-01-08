@@ -1,4 +1,5 @@
 # See the README for installation instructions.
+PATH := $(PATH):node_modules/.bin
 
 all: \
 	$(BUILDJS_TARGETS) \
