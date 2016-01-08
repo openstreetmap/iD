@@ -13,8 +13,8 @@ MAKI_SOURCES = node_modules/maki/src/*.svg
 
 $(MAKI_SOURCES): node_modules/.install
 
-dist/img/maki-sprite.svg: $(MAKI_SOURCES) Makefile
-	svg-sprite --symbol --symbol-dest . --symbol-sprite $@ $(MAKI_SOURCES)
+dist/img/maki-sprite.svg: $(MAKI_SOURCES) Makefile node_modules/.bin/svg-sprite
+	node_modules/.bin/svg-sprite --symbol --symbol-dest . --symbol-sprite $@ $(MAKI_SOURCES)
 
 data/feature-icons.json: $(MAKI_SOURCES)
 	cp -f node_modules/maki/www/maki-sprite.json $@
