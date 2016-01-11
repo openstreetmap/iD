@@ -126,14 +126,12 @@ iD.ui.EntityEditor = function(context) {
         function historyChanged() {
             if (state === 'hide') return;
 
-            var entity = context.hasEntity(id);
+            var entity = context.hasEntity(id),
+                graph = context.graph();
             if (!entity) return;
 
-            entityEditor.preset(context.presets().match(entity, context.graph()));
-
-            var head = context.history().difference();
-            entityEditor.modified(base && !_.isEqual(base.changes(), head.changes()));
-
+            entityEditor.preset(context.presets().match(entity, graph));
+            entityEditor.modified(base !== graph);
             entityEditor(selection);
         }
 
@@ -219,9 +217,9 @@ iD.ui.EntityEditor = function(context) {
     entityEditor.entityID = function(_) {
         if (!arguments.length) return id;
         id = _;
-        entityEditor.preset(context.presets().match(context.entity(id), context.graph()));
+        base = context.graph();
+        entityEditor.preset(context.presets().match(context.entity(id), base));
         entityEditor.modified(false);
-        base = context.history().difference();
         coalesceChanges = false;
         return entityEditor;
     };
