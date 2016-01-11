@@ -8,7 +8,7 @@
     "test": "test"
   },
   "scripts": {
-    "test": "eslint js/id && mocha-phantomjs test/index.html --ssl-protocol=any --ignore-ssl-errors=true  && make && mocha-phantomjs test/index_packaged.html --ssl-protocol=any --ignore-ssl-errors=true"
+    "test": "eslint js/id && mocha-phantomjs test/index.html --ssl-protocol=tlsv1 && make && mocha-phantomjs test/index_packaged.html --ssl-protocol=tlsv1"
   },
   "repository": {
     "type": "git",
