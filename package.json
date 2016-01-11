@@ -37,7 +37,7 @@
     "request": "~2.16.2",
     "jsonschema": "~0.3.2",
     "editor-imagery-index": "git://github.com/osmlab/editor-imagery-index.git#gh-pages",
-    "name-suggestion-index": "0.1.0",
+    "name-suggestion-index": "0.1.1",
     "minimist": "~1.2.0",
     "xml2js": "~0.4.13",
     "xmlbuilder": "~4.2.0",
