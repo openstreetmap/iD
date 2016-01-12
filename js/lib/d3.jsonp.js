@@ -1,3 +1,8 @@
+// Send a jsonp request with a url and callback
+// You can specify a arbitrary callback name, or just use a literal '{callback}' which would generate a random name
+// ?callback=d3.jsonp.customname  customname can be any identifier
+// ?callback={callback} => ?callback=d3.jsonp.xxx  xxx is a 15 length random string
+
 d3.jsonp = function (url, callback) {
   function rand() {
     var chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz',

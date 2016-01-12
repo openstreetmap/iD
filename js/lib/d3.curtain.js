@@ -1,4 +1,8 @@
-// Tooltips and svg mask used to highlight certain features
+// tooltips and svg mask used to highlight certain features
+// use curtain(selection) to init, the selection is used to involve the shadow and tooltip
+// use curtain.remove() to destroy
+// use curtain.cut(datum, duration) to draw the highlight area, the data format of datum is same as node.getBoundingClientRect()
+// use curtain.reveal(box, text, tooltipclass, duration) to hightlight and show a tooltip, markdown bold text is supported
 d3.curtain = function() {
 
     var event = d3.dispatch(),

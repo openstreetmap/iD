@@ -1,3 +1,7 @@
+// convert KML and GPX to GeoJSON
+// use toGeoJSON.kml(doc) to convert a KML doc to GeoJSON
+// use toGeoJSON.gpx(doc) to convert a GPX doc to GeoJSON
+// https://github.com/mapbox/togeojson
 toGeoJSON = (function() {
     'use strict';
 

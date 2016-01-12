@@ -1,5 +1,10 @@
 window.locale = { _current: 'en' };
 
+// set the current locale
+// return the current locale of no arguments applied
+// set the current locale to _ if locale[_] exists
+// set the current locale to first substr before '-' in _(_sub) if locale[_sub] exists
+// if all above fails, just return the whole locale
 locale.current = function(_) {
     if (!arguments.length) return locale._current;
     if (locale[_] !== undefined) locale._current = _;
@@ -7,6 +12,11 @@ locale.current = function(_) {
     return locale;
 };
 
+// get the locale value
+// step 1: return the locale value of s in loc if exists, replace the {key} with the correlative value in o
+// step 2: set the loc to 'en', retry step 1
+// step 3: return the value of 'default' in o
+// step 4: return an error message
 function t(s, o, loc) {
     loc = loc || locale._current;
 

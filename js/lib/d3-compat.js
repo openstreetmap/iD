@@ -1,3 +1,4 @@
+// support dom 3 event mouseenter/mouseleave
 (function() {
 
   // get a reference to the d3.selection prototype,

@@ -1,3 +1,13 @@
+// a stylable combobox replace original select element
+// initialize with a textinput, the textinput is used to obtain the selected data
+// the textinput is also used to trigger a completer, you can disable this feature by make it readonly
+// when making a select, the textinput trigger a change event and the combobox dispatch a custom "accept" event with the data from selected option
+// mouse click and press "tab" could make change
+// use combox(input) to init
+// use combox.off(input) to destroy
+// use combox.minItems(_) to set the minimum options to show  
+// use combox.data(_) to set data
+// use combox.fetcher(_) to get more control about data
 d3.combobox = function() {
     var event = d3.dispatch('accept'),
         data = [],
