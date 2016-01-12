@@ -1,3 +1,12 @@
+// a tooltip component to replace the raw title attribute
+// use tooltip(selection) to init
+// use tooltip.title(_) to set title
+// use tooltip.html(_) to allow html-format title
+// use tooltip.placement(_) to set the position of tooltip, which may be top, right, bottom, left
+// use tooltip.show(selection) to show the tooltip
+// use tooltip.hide(selection) to hide the tooltip
+// use tooltip.toggle(selection) to toggle the visiblity of tooltip
+// use tooltip.destroy(selection) to destroy
 (function(exports) {
 
   var bootstrap = (typeof exports.bootstrap === "object") ?

@@ -1,3 +1,8 @@
+// a textinput autocompeter
+// press "enter" to select a option to fill, the component will dispatch a custom "accept" event, and the textinput will trigger a change event
+// use typeahead(input) to init
+// use typeahead.data(_) to provide a function for fetching data
+// use typeahead.autohighlight(_) to allow selecting a option automatically when blurs
 d3.typeahead = function() {
     var event = d3.dispatch('accept'),
         autohighlight = false,

@@ -1,3 +1,11 @@
+// var myObject = JXON.build(doc);
+// we got our javascript object! try: alert(JSON.stringify(myObject));
+
+// var newDoc = JXON.unbuild(myObject);
+// we got our Document instance! try: alert((new XMLSerializer()).serializeToString(newDoc));
+
+// var newDocStr = JXON.stringify(myObject);
+// we got our serialize string! try: alert(newDocStr);
 var JXON = new (function () {
   var
     sValueProp = "keyValue", sAttributesProp = "keyAttributes", sAttrPref = "@", /* you can customize these values */
@@ -134,8 +142,3 @@ var JXON = new (function () {
     return (new XMLSerializer()).serializeToString(JXON.unbuild(oObjTree));
   };
 })();
-// var myObject = JXON.build(doc);
-// we got our javascript object! try: alert(JSON.stringify(myObject));
-
-// var newDoc = JXON.unbuild(myObject);
-// we got our Document instance! try: alert((new XMLSerializer()).serializeToString(newDoc));
