@@ -49,7 +49,7 @@ iD.ui.SelectionList = function(context, selectedIDs) {
             // Update
             items.selectAll('use')
                 .attr('href', function() {
-                    var entity = this.parentElement.parentElement.__data__;
+                    var entity = this.parentNode.parentNode.__data__;
                     return '#icon-' + context.geometry(entity.id);
                 });
 
