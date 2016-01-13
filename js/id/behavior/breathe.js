@@ -2,7 +2,7 @@ iD.behavior.Breathe = function() {
     var duration = 800,
         selector = '.selected.shadow, .selected .shadow',
         selected = d3.select(null),
-        classed = [],
+        classed = '',
         params = {},
         done;
 
@@ -53,7 +53,7 @@ iD.behavior.Breathe = function() {
     function run(surface, fromTo) {
         var toFrom = (fromTo === 'from' ? 'to': 'from'),
             currSelected = surface.selectAll(selector),
-            currClassed = Array.prototype.slice.call(surface.node().classList),
+            currClassed = surface.attr('class'),
             n = 0;
 
         if (done || currSelected.empty()) {
@@ -61,9 +61,9 @@ iD.behavior.Breathe = function() {
             return;
         }
 
-        if (!_.isEqual(currSelected, selected) || !_.isEqual(currClassed, classed)) {
+        if (!_.isEqual(currSelected, selected) || currClassed !== classed) {
             selected.call(reset);
-            classed = _.clone(currClassed);
+            classed = currClassed;
             selected = currSelected.call(calcAnimationParams);
         }
 
