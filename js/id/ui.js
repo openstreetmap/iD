@@ -49,8 +49,12 @@ iD.ui = function(context) {
             .attr('class', 'limiter');
 
         limiter.append('div')
+            .attr('class', 'button-wrap col3')
+            .call(iD.ui.ZoomInToEdit(context));
+
+        limiter.append('div')
             .attr('class', 'button-wrap joined col3')
-            .call(iD.ui.Modes(context), limiter);
+            .call(iD.ui.Modes(context));
 
         limiter.append('div')
             .attr('class', 'button-wrap joined col1')
