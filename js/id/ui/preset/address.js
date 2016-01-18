@@ -97,16 +97,17 @@ iD.ui.preset.address = function(field, context) {
     function address(selection) {
         isInitialized = false;
 
-        selection.selectAll('.preset-input-wrap')
-            .remove();
-
-        var center = entity.extent(context.graph()).center(),
-            addressFormat;
+        wrap = selection.selectAll('.preset-input-wrap')
+            .data([0]);
 
         // Enter
 
-        wrap = selection.append('div')
+        wrap.enter()
+            .append('div')
             .attr('class', 'preset-input-wrap');
+
+        var center = entity.extent(context.graph()).center(),
+            addressFormat;
 
         iD.countryCode().search(center, function (err, countryCode) {
             addressFormat = _.find(iD.data.addressFormats, function (a) {
