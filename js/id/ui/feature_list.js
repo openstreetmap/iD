@@ -228,8 +228,7 @@ iD.ui.FeatureList = function(context) {
             d3.event.preventDefault();
             if (d.location) {
                 context.map().centerZoom([d.location[1], d.location[0]], 20);
-            }
-            else if (d.entity) {
+            } else if (d.entity) {
                 if (d.entity.type === 'node') {
                     context.map().center(d.entity.loc);
                 } else if (d.entity.type === 'way') {
@@ -240,6 +239,7 @@ iD.ui.FeatureList = function(context) {
                 context.enter(iD.modes.Select(context, [d.entity.id]).suppressMenu(true));
             } else {
                 context.zoomToEntity(d.id);
+                context.focusedID(d.id);
             }
         }
 
