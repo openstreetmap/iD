@@ -402,7 +402,7 @@ iD.Features = function(context) {
     features.isHidden = function(entity, resolver, geometry) {
         if (!_hidden.length) return false;
         if (!entity.version) return false;
-        if (features.isFocusedFeature(entity)) return false;
+        if (features.isFocusedFeature(entity, resolver, geometry)) return false;
 
         var fn = (geometry === 'vertex' ? features.isHiddenChild : features.isHiddenFeature);
         return fn(entity, resolver, geometry);
@@ -421,8 +421,20 @@ iD.Features = function(context) {
         return result;
     };
 
-    features.isFocusedFeature = function(entity) {
-        return entity.id === context.focusedID() && _features.focused && _features.focused.enabled;
+    features.isFocusedFeature = function(entity, resolver, geometry) {
+        var focusedID = context.focusedID();
+
+        if (!_features.focused || !_features.focused.enabled) return false;
+        if (entity.id === focusedID) return true;
+
+        var parents = features.getParents(entity, resolver, geometry);
+        for (var i = 0; i < parents.length; i++) {
+            if (parents[i].id === focusedID) {
+                return true;
+            }
+        }
+
+        return false;
     };
 
     return d3.rebind(features, dispatch, 'on');
