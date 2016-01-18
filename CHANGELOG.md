@@ -1,3 +1,7 @@
+## 1.8.5
+* Fix address field to not lose focus while typing (#2903, #2320)
+* Bugfixes for Internet Explorer (classList #2909, parentElement #2910)
+
 ## 1.8.4
 * Block UI, disable draws while fetching missing childnodes when user restores saved work
 * Add iD.Map#redrawEnable to enable/disable redraws
