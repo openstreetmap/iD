@@ -1604,6 +1604,11 @@ en:
         name: Waste Basket
         # 'terms: bin,rubbish,litter,trash,garbage'
         terms: "<translate with synonyms or related terms for 'Waste Basket', separated by commas>"
+      amenity/waste_disposal:
+        # amenity=waste_disposal
+        name: Garbage Dumpster
+        # 'terms: rubbish,litter,trash'
+        terms: "<translate with synonyms or related terms for 'Garbage Dumpster', separated by commas>"
       amenity/water_point:
         # amenity=water_point
         name: RV Drinking Water
@@ -2586,6 +2591,10 @@ en:
         # man_made=breakwater
         name: Breakwater
         terms: "<translate with synonyms or related terms for 'Breakwater', separated by commas>"
+      man_made/chimney:
+        # man_made=chimney
+        name: Chimney
+        terms: "<translate with synonyms or related terms for 'Chimney', separated by commas>"
       man_made/cutline:
         # man_made=cutline
         name: Cut line
@@ -2598,6 +2607,15 @@ en:
         # man_made=flagpole
         name: Flagpole
         terms: "<translate with synonyms or related terms for 'Flagpole', separated by commas>"
+      man_made/gasometer:
+        # man_made=gasometer
+        name: Gasometer
+        # 'terms: gas holder'
+        terms: "<translate with synonyms or related terms for 'Gasometer', separated by commas>"
+      man_made/groyne:
+        # man_made=groyne
+        name: Groyne
+        terms: "<translate with synonyms or related terms for 'Groyne', separated by commas>"
       man_made/lighthouse:
         # man_made=lighthouse
         name: Lighthouse
@@ -2635,6 +2653,10 @@ en:
         name: Storage Tank
         # 'terms: water,oil,gas,petrol'
         terms: "<translate with synonyms or related terms for 'Storage Tank', separated by commas>"
+      man_made/surveillance:
+        # man_made=surveillance
+        name: Surveillance
+        terms: "<translate with synonyms or related terms for 'Surveillance', separated by commas>"
       man_made/survey_point:
         # man_made=survey_point
         name: Survey Point
@@ -2660,6 +2682,11 @@ en:
         # man_made=water_works
         name: Water Works
         terms: "<translate with synonyms or related terms for 'Water Works', separated by commas>"
+      man_made/works:
+        # man_made=works
+        name: Works
+        # 'terms: car assembly plant,aluminium processing plant,brewery,furniture manufacture factory,oil refinery,platic recycling'
+        terms: "<translate with synonyms or related terms for 'Works', separated by commas>"
       military/airfield:
         # military=airfield
         name: Airfield

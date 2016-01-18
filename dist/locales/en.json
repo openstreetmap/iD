@@ -1968,6 +1968,10 @@
                 "name": "Waste Basket",
                 "terms": "bin,rubbish,litter,trash,garbage"
             },
+            "amenity/waste_disposal": {
+                "name": "Garbage Dumpster",
+                "terms": "rubbish,litter,trash"
+            },
             "amenity/water_point": {
                 "name": "RV Drinking Water",
                 "terms": ""
@@ -2884,6 +2888,10 @@
                 "name": "Breakwater",
                 "terms": ""
             },
+            "man_made/chimney": {
+                "name": "Chimney",
+                "terms": ""
+            },
             "man_made/cutline": {
                 "name": "Cut line",
                 "terms": ""
@@ -2894,6 +2902,14 @@
             },
             "man_made/flagpole": {
                 "name": "Flagpole",
+                "terms": ""
+            },
+            "man_made/gasometer": {
+                "name": "Gasometer",
+                "terms": "gas holder"
+            },
+            "man_made/groyne": {
+                "name": "Groyne",
                 "terms": ""
             },
             "man_made/lighthouse": {
@@ -2928,6 +2944,10 @@
                 "name": "Storage Tank",
                 "terms": "water,oil,gas,petrol"
             },
+            "man_made/surveillance": {
+                "name": "Surveillance",
+                "terms": ""
+            },
             "man_made/survey_point": {
                 "name": "Survey Point",
                 "terms": ""
@@ -2951,6 +2971,10 @@
             "man_made/water_works": {
                 "name": "Water Works",
                 "terms": ""
+            },
+            "man_made/works": {
+                "name": "Works",
+                "terms": "car assembly plant,aluminium processing plant,brewery,furniture manufacture factory,oil refinery,platic recycling"
             },
             "military/airfield": {
                 "name": "Airfield",

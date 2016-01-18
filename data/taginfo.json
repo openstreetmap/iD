@@ -458,6 +458,10 @@
         },
         {
             "key": "amenity",
+            "value": "waste_disposal"
+        },
+        {
+            "key": "amenity",
             "value": "water_point"
         },
         {
@@ -1360,6 +1364,10 @@
         },
         {
             "key": "man_made",
+            "value": "chimney"
+        },
+        {
+            "key": "man_made",
             "value": "cutline"
         },
         {
@@ -1369,6 +1377,14 @@
         {
             "key": "man_made",
             "value": "flagpole"
+        },
+        {
+            "key": "man_made",
+            "value": "gasometer"
+        },
+        {
+            "key": "man_made",
+            "value": "groyne"
         },
         {
             "key": "man_made",
@@ -1404,6 +1420,10 @@
         },
         {
             "key": "man_made",
+            "value": "surveillance"
+        },
+        {
+            "key": "man_made",
             "value": "survey_point"
         },
         {
@@ -1425,6 +1445,10 @@
         {
             "key": "man_made",
             "value": "water_works"
+        },
+        {
+            "key": "man_made",
+            "value": "works"
         },
         {
             "key": "military",
