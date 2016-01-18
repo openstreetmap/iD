@@ -2,7 +2,7 @@
     "modes": {
         "add_area": {
             "title": "面",
-            "description": "添加公园、建筑物、湖或其它面状要素到地图上。",
+            "description": "添加公园、建筑物、湖或其它面到地图上。",
             "tail": "在地图上单击开始绘制面状要素，如公园、湖泊或建筑物。"
         },
         "add_line": {
@@ -511,30 +511,77 @@
         "relations": "# 关系\n\n关系是 OpenStreetMap 中用于组合其它特征的特殊要素类型。比如，两个基本关系类型*路径关系*和*复合多边形*，它们分别用于组合同一条公路或高速公路的不同部分和一个复杂区域(分成多块或像油炸圈饼一样中间有个洞)的多条线条。\n\n关系中包含的要素称为*成员*。在侧边栏中，您可以看到成员所属的关系，并点击选中它。选中某个关系后，您就能看到它的所有成员在侧边栏被全部列出并在地图上被高亮显示。\n\n在大多数时候，iD 会在您编辑的时候自动处理关系。您主要注意的是当您删除道路的某个部分并重绘它时，请确保新的部分还是原来的关系中的一员。\n\n## 编辑关系\n\n如果您想要编辑关系，这里是一些基本技巧。\n\n要向关系中添加要素，选择该要素，点击侧边栏「所有关系」中的「+」按钮，并选择或输入关系的名称。\n\n要创建一个新的关系，选中要作为成员的第一个特征，点击「所有关系」中的「+」按钮，并选择「新建关系...」。\n\n要从一个关系中移除要素，选择要素并点击您要从中移除的关系旁边的垃圾箱按钮。\n\n您可以使用「合并」工具创建有洞的复合多边形。绘制两个区域(内部和外部)，按住 Shift 键并点击各个多边形来选中它们，然后点击「合并」(+)按钮。\n"
     },
     "intro": {
+        "graph": {
+            "city_hall": "三里屯市政厅",
+            "fire_department": "三里屯消防站",
+            "memory_isle_park": "北海公园",
+            "riverwalk_trail": "河滨小道",
+            "w_michigan_ave": "南京西路",
+            "e_michigan_ave": "南京东路",
+            "spring_st": "解放路",
+            "scidmore_park": "中山公园",
+            "petting_zoo": "野生动物园",
+            "n_andrews_st": "北五环",
+            "s_andrews_st": "南五环",
+            "n_constantine_st": "北光明路",
+            "s_constantine_st": "南光明路",
+            "rocky_river": "李家沟",
+            "railroad_dr": "铁道线",
+            "conrail_rr": "大秦铁路",
+            "st_joseph_river": "吴淞江",
+            "n_main_st": "北二环",
+            "s_main_st": "南二环",
+            "water_st": "水岸路",
+            "foster_st": "跃进街",
+            "portage_river": "货运河",
+            "flower_st": "幸福街",
+            "elm_st": "江榆路",
+            "walnut_st": "江松路",
+            "morris_ave": "世纪大道",
+            "east_st": "东街",
+            "portage_ave": "货运大道"
+        },
         "navigation": {
             "title": "导航",
             "drag": "主地图区域在背景上展示了 OpenStreetMap 数据。您可以像在其它网络地图一样通过拖动和滚动来移动。**拖动地图！**",
             "select": "地图要素有三种表示方法：点、线、面。所有要素都可以通过点击选择。**单击该点来选定它。**",
-            "pane": "当选定一个地理特征时，特征编辑器将出现。其抬头展示特征类型，主窗格展示特征的属性，如名称和地址。**单击特征编辑器右上角的 {button} 按钮来关闭特征编辑器。**"
+            "pane": "当选定一个地理特征时，特征编辑器将出现。其抬头展示特征类型，主窗格展示特征的属性，如名称和地址。**单击特征编辑器右上角的 {button} 按钮来关闭特征编辑器。**",
+            "search": "你也可以搜索目前视野上或世界的地理特征。**搜索'{name}'**",
+            "choose": "**在列表中选择{name}。**",
+            "chosen": "好！{name}已经被选中了。**按下{button}来关闭地理特征编辑器。**"
         },
         "points": {
             "title": "点",
+            "add": "点可以用来表示某些地理特征，比如商店、餐厅和纪念碑。它们标定了一个特定的位置，并且描述了那里有什么。**按下{button}按钮来增加一个新点。**",
+            "place": "可以用点击地图的方式来放置点。**点击地图，把新点放置在这座建筑的上面。**",
             "search": "很多不同的物体可以用点来代表。您刚刚新增加的点是一间咖啡厅。**搜索'{name}'**",
             "choose": "**在列表中选择咖啡馆。**",
-            "describe": "这个点已经标记为咖啡馆了。使用特征编辑器，我们可以添加更多关于特征的信息。**添加名称**"
+            "describe": "这个点已经标记为咖啡馆了。使用特征编辑器，我们可以添加更多关于特征的信息。**添加名称**",
+            "close": "地理特征编辑器会自动记下你所有的改动。当你改动一个地理特征时，关闭按钮会变成对勾。**按下{button}按钮来关闭编辑器**",
+            "reselect": "有些点已经存在，但是信息有错误或不完整。我们可以编辑已经存在的点。**点击那个你刚刚创建的点。**",
+            "fixname": "**改变它的名字，然后点击{button}按钮来关闭编辑器。**",
+            "reselect_delete": "所有在地图上的特征都能被删除。**点击那个你刚刚创建的点。**",
+            "delete": "在点周围的菜单包含在该点可执行的操作，包括删除。**点击{button}按钮来删除点。**"
         },
         "areas": {
             "title": "面状要素",
+            "add": "面可以用来表示特征的界限，像是湖、建筑物或住宅区。也就是说可以让原本只是个兴趣点的特征呈现更多细节。 **按{button}按钮新建面。**",
+            "corner": "通过将节点放到面的边界上，可绘制面。 **将起始节点置于游乐场的其中一角。**",
             "place": "放置更多节点可绘制面要素。点击开始节点即可完成绘制。**在沙盒绘制一个面。**",
             "search": "**搜索'{name}'。**",
-            "choose": "**在列表中选择儿童游乐场。**"
+            "choose": "**在列表中选择儿童游乐场。**",
+            "describe": "**添加名称，然后按{button}按钮来关闭特征编辑器**"
         },
         "lines": {
             "title": "线",
+            "add": "线用于代表诸如道路、铁路和河流的特征。**单击{button}按钮添加新线。**",
             "start": "**点击道路末端，以开始绘制线段。 **",
+            "intersect": "点击向线添加更多节点。必要时您可以在绘制时拖动地图。道路和许多其它类型的线都是一个更大的网络的组成部分，因此正确连接这些线以便导航应用使用是十分重要的。**点击{name}创建连接两条线的交叉点。**",
             "finish": "再次点击最后一个节点可结束绘制线。**完成道路的绘制。**",
             "road": "**在列表中选择道路**",
             "residential": "道路有不同种类，最常见的为住宅区道路。 **选择住宅区道路**",
+            "describe": "**给道路命名，然后按{button}按钮关闭特征编辑器。**",
+            "restart": "这个道路需要和{name}相交。",
             "wrong_preset": "你没有选择住宅道路类型。 **点击这里重新选择**"
         },
         "startediting": {
@@ -620,6 +667,7 @@
                 }
             },
             "access_simple": {
+                "label": "通行限制",
                 "placeholder": "是"
             },
             "access_toilets": {
@@ -764,6 +812,9 @@
             "construction": {
                 "label": "类型"
             },
+            "content": {
+                "label": "内容"
+            },
             "country": {
                 "label": "国家"
             },
@@ -831,6 +882,12 @@
             },
             "description": {
                 "label": "说明"
+            },
+            "diaper": {
+                "label": "有尿布台"
+            },
+            "dock": {
+                "label": "类型"
             },
             "drive_through": {
                 "label": "免下车"
@@ -934,6 +991,9 @@
             "handicap": {
                 "label": "手工店",
                 "placeholder": "1-18"
+            },
+            "handrail": {
+                "label": "扶手"
             },
             "highway": {
                 "label": "类型"
@@ -1048,6 +1108,9 @@
             "maxspeed": {
                 "label": "速度限制",
                 "placeholder": "40, 50, 60..."
+            },
+            "maxstay": {
+                "label": "可停留时间"
             },
             "mtb/scale": {
                 "label": "登山車难度",
@@ -1406,6 +1469,9 @@
                 },
                 "placeholder": "坚硬地面，硬物铺面，软铺面"
             },
+            "traffic_signals": {
+                "label": "类型"
+            },
             "trail_visibility": {
                 "label": "路径可见度",
                 "options": {
@@ -1478,9 +1544,15 @@
                 "name": "魔毯电梯",
                 "terms": "魔毯,传送带式电梯"
             },
+            "aerialway/platter": {
+                "name": "吊盘"
+            },
             "aerialway/pylon": {
                 "name": "缆车塔",
                 "terms": "缆车塔"
+            },
+            "aerialway/rope_tow": {
+                "name": "牵绳"
             },
             "aerialway/station": {
                 "name": "缆车站",
@@ -1532,7 +1604,7 @@
             },
             "amenity/atm": {
                 "name": "ATM",
-                "terms": "ATM,提款机,自动提款机"
+                "terms": "ATM,提款机,自动提款机,自动取款机"
             },
             "amenity/bank": {
                 "name": "银行",
@@ -1585,7 +1657,8 @@
                 "terms": "洗车店,洗车"
             },
             "amenity/casino": {
-                "name": "赌场"
+                "name": "赌场",
+                "terms": "赌场"
             },
             "amenity/charging_station": {
                 "name": "充电站",
@@ -1626,8 +1699,8 @@
                 "terms": "牙医,牙"
             },
             "amenity/dojo": {
-                "name": "Dojo /武术学院",
-                "terms": "Dojo /武术学院"
+                "name": "道场/武术学院",
+                "terms": "道场,武术学院"
             },
             "amenity/drinking_water": {
                 "name": "饮水处",
@@ -1683,7 +1756,12 @@
                 "terms": "停车"
             },
             "amenity/parking_entrance": {
-                "name": "停车场入口/出口"
+                "name": "停车场入口/出口",
+                "terms": "停车场出入口"
+            },
+            "amenity/parking_space": {
+                "name": "停车空间",
+                "terms": "停车空间,停车场地"
             },
             "amenity/pharmacy": {
                 "name": "药店",
@@ -1793,6 +1871,22 @@
             },
             "amenity/university": {
                 "name": "大学校园"
+            },
+            "amenity/vending_machine/cigarettes": {
+                "name": "香烟售货机",
+                "terms": "香烟售货机,香烟贩卖机"
+            },
+            "amenity/vending_machine/condoms": {
+                "name": "避孕套售货机",
+                "terms": "避孕套售货机,避孕套贩卖机"
+            },
+            "amenity/vending_machine/drinks": {
+                "name": "饮料售货机",
+                "terms": "饮料售货机,饮品售货机,饮品贩卖机"
+            },
+            "amenity/vending_machine/news_papers": {
+                "name": "报纸售货机",
+                "terms": "报纸售货机,报纸贩卖机"
             },
             "amenity/veterinary": {
                 "name": "兽医",
@@ -2366,6 +2460,10 @@
                 "name": "交叉口",
                 "terms": "交通枢纽,路口"
             },
+            "landuse": {
+                "name": "土地用途",
+                "terms": "土地用途,土地使用"
+            },
             "landuse/basin": {
                 "name": "水池",
                 "terms": "水池"
@@ -2386,7 +2484,12 @@
                 "terms": "建筑物"
             },
             "landuse/farm": {
-                "name": "农田"
+                "name": "农田",
+                "terms": "农田,农场"
+            },
+            "landuse/farmland": {
+                "name": "农田",
+                "terms": "农田,农场"
             },
             "landuse/farmyard": {
                 "name": "农庄",
@@ -2469,7 +2572,8 @@
                 "terms": "码头"
             },
             "leisure/nature_reserve": {
-                "name": "自然保护区"
+                "name": "自然保护区",
+                "terms": "自然保护区"
             },
             "leisure/park": {
                 "name": "公园",
@@ -2569,6 +2673,10 @@
                 "name": "瞭望塔",
                 "terms": "瞭望塔"
             },
+            "man_made/petroleum_well": {
+                "name": "油井",
+                "terms": "油井"
+            },
             "man_made/pier": {
                 "name": "码头",
                 "terms": "码头"
@@ -2612,6 +2720,10 @@
             "military/bunker": {
                 "name": "地堡",
                 "terms": "地堡,暗堡"
+            },
+            "military/danger_area": {
+                "name": "危险区域",
+                "terms": "危险区域,危险地区"
             },
             "military/range": {
                 "name": "军事靶场",
@@ -3006,7 +3118,8 @@
                 "terms": "肉铺"
             },
             "shop/candles": {
-                "name": "蜡烛店"
+                "name": "蜡烛店",
+                "terms": "蜡烛专卖店"
             },
             "shop/car": {
                 "name": "汽车店",
@@ -3021,17 +3134,20 @@
                 "terms": "汽车修理店"
             },
             "shop/carpet": {
-                "name": "地毯店"
+                "name": "地毯店",
+                "terms": "地毯店,毯店"
             },
             "shop/cheese": {
-                "name": "奶酪店"
+                "name": "奶酪店",
+                "terms": "奶酪店,奶酪专卖店"
             },
             "shop/chemist": {
                 "name": "日化用品店",
                 "terms": "药房"
             },
             "shop/chocolate": {
-                "name": "巧克力店"
+                "name": "巧克力店",
+                "terms": "巧克力店,巧克力专卖店"
             },
             "shop/clothes": {
                 "name": "服装店",
@@ -3042,7 +3158,8 @@
                 "terms": "电脑店"
             },
             "shop/confectionery": {
-                "name": "糖果店"
+                "name": "糖果店",
+                "terms": "糖果店,糖果屋"
             },
             "shop/convenience": {
                 "name": "便利店",
@@ -3078,7 +3195,8 @@
                 "terms": "DIY商店"
             },
             "shop/dry_cleaning": {
-                "name": "干洗店"
+                "name": "干洗店",
+                "terms": "干洗店"
             },
             "shop/electronics": {
                 "name": "电器店",
@@ -3092,7 +3210,8 @@
                 "terms": "农场"
             },
             "shop/fashion": {
-                "name": "服装店"
+                "name": "服装店",
+                "terms": "服装店,潮流服饰店"
             },
             "shop/fishmonger": {
                 "name": "海产店",
@@ -3129,6 +3248,10 @@
                 "name": "五金店",
                 "terms": "五金店"
             },
+            "shop/herbalist": {
+                "name": "中医",
+                "terms": "中医"
+            },
             "shop/hifi": {
                 "name": "音响店",
                 "terms": "音响店"
@@ -3146,25 +3269,36 @@
                 "terms": "洗衣店"
             },
             "shop/leather": {
-                "name": "皮具店"
+                "name": "皮具店",
+                "terms": "皮具店"
             },
             "shop/locksmith": {
                 "name": "锁匠铺",
                 "terms": "锁匠铺"
             },
             "shop/lottery": {
-                "name": "彩票店"
+                "name": "彩票店",
+                "terms": "彩票店,彩票购买点"
             },
             "shop/mall": {
                 "name": "商场",
                 "terms": "商场"
             },
             "shop/massage": {
-                "name": "按摩店"
+                "name": "按摩店",
+                "terms": "按摩店"
+            },
+            "shop/medical_supply": {
+                "name": "医疗用品店",
+                "terms": "医疗用品店,医护用品店"
             },
             "shop/mobile_phone": {
                 "name": "手机店",
                 "terms": "手机店"
+            },
+            "shop/money_lender": {
+                "name": "放贷人",
+                "terms": "放贷人,放贷者"
             },
             "shop/motorcycle": {
                 "name": "摩托车店",
@@ -3175,7 +3309,8 @@
                 "terms": "音乐店"
             },
             "shop/musical_instrument": {
-                "name": "乐器店"
+                "name": "乐器店",
+                "terms": "乐器店,音乐用品店"
             },
             "shop/newsagent": {
                 "name": "报摊"
@@ -3183,6 +3318,14 @@
             "shop/optician": {
                 "name": "眼镜店",
                 "terms": "眼镜店"
+            },
+            "shop/organic": {
+                "name": "有机产品店",
+                "terms": "有机产品店"
+            },
+            "shop/outdoor": {
+                "name": "户外用品店",
+                "terms": "户外用品店,销售户外活动用品的商店"
             },
             "shop/pet": {
                 "name": "宠物店",
@@ -3216,6 +3359,10 @@
             },
             "shop/tailor": {
                 "name": "裁缝"
+            },
+            "shop/tea": {
+                "name": "茶叶商店",
+                "terms": "茶叶商店,茶店"
             },
             "shop/tobacco": {
                 "name": "烟草店"
@@ -3251,8 +3398,8 @@
                 "name": "武器店"
             },
             "shop/wine": {
-                "name": "酒店",
-                "terms": "酒店,酒楼,酒坊"
+                "name": "酒品商店",
+                "terms": "酒品商店,酒店,酒楼,酒坊"
             },
             "tourism": {
                 "name": "旅行",
@@ -3437,6 +3584,9 @@
             "waterway/ditch": {
                 "name": "水沟",
                 "terms": "沟,沟渠,涧"
+            },
+            "waterway/dock": {
+                "name": "码头"
             },
             "waterway/drain": {
                 "name": "渠",

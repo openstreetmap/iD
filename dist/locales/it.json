@@ -1961,6 +1961,10 @@
                 "name": "Cestino della spazzatura",
                 "terms": "sacchetto della spazzatura,cestino della spazzatura,cassonetto della spazzatura,cassonetto,cestino"
             },
+            "amenity/waste_disposal": {
+                "name": "Cassonetto del pattume",
+                "terms": "cassonetto,cestino,pattume"
+            },
             "amenity/water_point": {
                 "name": "Acqua potabile per camper",
                 "terms": "colonnina,acqua,camper,caravan"
@@ -2820,6 +2824,10 @@
                 "name": "Frangiflutti",
                 "terms": "Frangifrutti"
             },
+            "man_made/chimney": {
+                "name": "Ciminiera",
+                "terms": "torre,camino"
+            },
             "man_made/cutline": {
                 "name": "Linea di demarcazione",
                 "terms": "Linea di taglio"
@@ -2831,6 +2839,14 @@
             "man_made/flagpole": {
                 "name": "Pennone",
                 "terms": "asta,alzabandiera,bandiera"
+            },
+            "man_made/gasometer": {
+                "name": "Gasometro",
+                "terms": "gazometro"
+            },
+            "man_made/groyne": {
+                "name": "Pennello",
+                "terms": "briglia,pennelli"
             },
             "man_made/lighthouse": {
                 "name": "Faro",
@@ -2864,6 +2880,10 @@
                 "name": "Cisterna",
                 "terms": "silos,cisterna,botte,contenitore"
             },
+            "man_made/surveillance": {
+                "name": "Sorveglianza",
+                "terms": "telecamera,vigilanza"
+            },
             "man_made/survey_point": {
                 "name": "Punto geodetico",
                 "terms": "Punto geodetico o altra stazione fissa"
@@ -2887,6 +2907,10 @@
             "man_made/water_works": {
                 "name": "Impianto Idrico",
                 "terms": " Impianto idrico "
+            },
+            "man_made/works": {
+                "name": "Fabbrica",
+                "terms": "industria,manifattura,officina,opificio,stabilimento,laboratorio"
             },
             "military/airfield": {
                 "name": "Campo d'aviazione",

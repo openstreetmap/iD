@@ -565,6 +565,8 @@
         },
         "areas": {
             "title": "Polygone",
+            "add": "Les zones sont utilisées pour montrer les forntières d'éleme,ts comme des lacs, batiments et des zones résidentielles. Elles peuvent aussi être utilisées pour cartographier plus en détail des élements que l'on peut cartographier comme des points. **Cliquer sur le {button} zone pour ajouter une nouvelle zone. ",
+            "corner": "Dessinez la zone en positionnant les noeuds qui forment la frontière de la zone. **Cliquer sur l'un des coins du terrain de jeux pour démarrer.  ",
             "place": "Dessinez le polygone en ajoutant des nœuds. Terminez le polygone en cliquant sur le nœud de départ. **Dessinez un polygone pour l'aire de jeu.**",
             "search": "**Rechercher '{name}'.**",
             "choose": "**Choisi Terrain de jeu dans la liste.**",
@@ -572,7 +574,9 @@
         },
         "lines": {
             "title": "Lignes",
+            "add": "Les lignes sont utilisées pour représenter des éléments tels que des routes, chemins de fer ou rivières. **Cliquer sur le {button} Line pour ajouter une nouvelle ligne.",
             "start": "**Commencez la ligne en cliquant sur l'extrémité de la route.**",
+            "intersect": "Cliquez pour ajouter plus de noeuds à la ligne. Il est possible de déplacer la carte pendant le traçage. Les routes et les autres types de ligne font partie d'un plus grand réseau. Il est important que les lignes soient correctement connectées pour permettre aux applications de fonctionner. **Cliquer sur {name} pour créer une intersection connectant les deux lignes. ",
             "finish": "Les lignes peuvent être terminées en cliquant une seconde fois sur le dernier nœud. **Terminez le dessin de la route**",
             "road": "**Choisi Rue dans la liste**",
             "residential": "Il y a différent types de routes, le plus commun est \"Résidentielle\" (Residential). **Sélectionnez le type \"Résidentielle\".**",
@@ -878,6 +882,9 @@
             },
             "description": {
                 "label": "Description"
+            },
+            "diaper": {
+                "label": "Table à langer disponible"
             },
             "dock": {
                 "label": "Type"
@@ -1730,7 +1737,8 @@
                 "terms": "Fast Food, Restauration Rapide"
             },
             "amenity/ferry_terminal": {
-                "name": "Terminal ferry"
+                "name": "Terminal ferry",
+                "terms": "Terminal des ferries, Gare maritime"
             },
             "amenity/fire_station": {
                 "name": "Caserne de pompiers",
@@ -1755,6 +1763,10 @@
             "amenity/hospital": {
                 "name": "Terrains d'hôpital",
                 "terms": "Terrains d'hôpital"
+            },
+            "amenity/hunting_stand": {
+                "name": "Mirador",
+                "terms": "Mirador"
             },
             "amenity/kindergarten": {
                 "name": "Terrains d'école maternelle / jardin d'enfants",
@@ -1785,7 +1797,8 @@
                 "terms": "Entrée/Sortie de parking"
             },
             "amenity/parking_space": {
-                "name": "Place de parking"
+                "name": "Place de parking",
+                "terms": "Parking, Zone de stationnement"
             },
             "amenity/pharmacy": {
                 "name": "Pharmacie",
@@ -1954,6 +1967,10 @@
             "amenity/waste_basket": {
                 "name": "Corbeille",
                 "terms": "Corbeille, Poubelle"
+            },
+            "amenity/water_point": {
+                "name": "Eau potable",
+                "terms": "Eau potable"
             },
             "area": {
                 "name": "Polygone",
@@ -3939,6 +3956,10 @@
                 "name": "Voie navigable",
                 "terms": "Voie d'eau, Cours d'eau"
             },
+            "waterway/boatyard": {
+                "name": "Chantier naval",
+                "terms": "Chantier naval, Chantier maritime"
+            },
             "waterway/canal": {
                 "name": "Canal",
                 "terms": "Canal"
@@ -3950,6 +3971,10 @@
             "waterway/ditch": {
                 "name": "Fossé",
                 "terms": "Fossé"
+            },
+            "waterway/dock": {
+                "name": "Quai",
+                "terms": "Quai, Dock"
             },
             "waterway/drain": {
                 "name": "Canal d'évacuation d'eau pluviale",
@@ -3974,6 +3999,10 @@
             "waterway/stream": {
                 "name": "Ruisseau",
                 "terms": "Ruisseau"
+            },
+            "waterway/water_point": {
+                "name": "Eau potable",
+                "terms": "Eau potable"
             },
             "waterway/weir": {
                 "name": "Seuil",

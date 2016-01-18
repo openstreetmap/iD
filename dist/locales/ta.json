@@ -20,6 +20,12 @@
         }
     },
     "operations": {
+        "add": {
+            "annotation": {
+                "point": "ஒரு புள்ளி சேர்க்கப்பட்டது.",
+                "vertex": "ஒரு வழியில் ஒரு முனை சேர்க்கப்பட்டது."
+            }
+        },
         "start": {
             "annotation": {
                 "line": "வரி தொடங்கியது",
@@ -28,6 +34,7 @@
         },
         "continue": {
             "key": "A",
+            "title": "ஒரு உறவு சேர்க்கப்பட்டது.",
             "annotation": {
                 "line": "வரி தொ ங்கியது"
             }
@@ -122,11 +129,28 @@
             },
             "category-road": {
                 "name": "சாலை"
+            },
+            "category-route": {
+                "name": "வழி"
+            },
+            "category-water-area": {
+                "name": "நீர்"
+            },
+            "category-water-line": {
+                "name": "நீர்"
             }
         },
         "fields": {
             "access": {
+                "label": "அனுமதிக்கப்பட்ட அணுகல்",
                 "options": {
+                    "destination": {
+                        "title": "Destination"
+                    },
+                    "no": {
+                        "description": "பொதுமக்களுக்கு அணுகல் அனுமதி இல்லை",
+                        "title": "தடை செய்யப்பட்ட"
+                    },
                     "private": {
                         "title": "தனியார்"
                     },
@@ -137,6 +161,9 @@
                 "types": {
                     "horse": "குதிரைகள்"
                 }
+            },
+            "access_simple": {
+                "label": "அனுமதிக்கப்பட்ட அணுகல்"
             },
             "address": {
                 "label": "முகவரி",
@@ -683,6 +710,9 @@
             },
             "type/boundary": {
                 "name": "எல்லை"
+            },
+            "type/route": {
+                "name": "வழி"
             },
             "type/route/bus": {
                 "name": "பேருந்து தடம்"

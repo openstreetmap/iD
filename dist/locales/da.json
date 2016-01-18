@@ -1968,6 +1968,10 @@
                 "name": "Skraldespand",
                 "terms": "<oversæt med synonymer eller beslægtet termer for 'Skraldespand', adskilt med kommaer>"
             },
+            "amenity/waste_disposal": {
+                "name": "Skraldespand",
+                "terms": "Skraldespand"
+            },
             "amenity/water_point": {
                 "name": "Genbrugsvand",
                 "terms": "Genbrugsvand"
@@ -2884,6 +2888,10 @@
                 "name": "Bølgebryder",
                 "terms": "Bølgebryder"
             },
+            "man_made/chimney": {
+                "name": "Skorsten",
+                "terms": "Skorsten"
+            },
             "man_made/cutline": {
                 "name": "Skærelinje",
                 "terms": "Skærelinje"
@@ -2895,6 +2903,14 @@
             "man_made/flagpole": {
                 "name": "Flagstang",
                 "terms": "Flagstang"
+            },
+            "man_made/gasometer": {
+                "name": "Gasværk",
+                "terms": "Gasværk, Gasometer"
+            },
+            "man_made/groyne": {
+                "name": "Høfde",
+                "terms": "Høfde"
             },
             "man_made/lighthouse": {
                 "name": "Fyr (navigation)",
@@ -2928,6 +2944,10 @@
                 "name": "Lagertank",
                 "terms": "Lagertank"
             },
+            "man_made/surveillance": {
+                "name": "Overvågning",
+                "terms": "Overvågning"
+            },
             "man_made/survey_point": {
                 "name": "Geografisk fixpunkt",
                 "terms": "Geografisk fixpunkt"
@@ -2951,6 +2971,10 @@
             "man_made/water_works": {
                 "name": "Vandforsyning",
                 "terms": "Vandforsyning, Vandværk"
+            },
+            "man_made/works": {
+                "name": "Fabrik",
+                "terms": "Fabrik, Produktionsvirksomhed"
             },
             "military/airfield": {
                 "name": "Flyveplads",

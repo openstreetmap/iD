@@ -1968,6 +1968,10 @@
                 "name": "Cesto ",
                 "terms": "papelera, papelero, cubo, contenedor, basura, papeles, deshecho, tacho"
             },
+            "amenity/waste_disposal": {
+                "name": "Contenedor de residuos",
+                "terms": "residuo, basura, desperdicio, contenedor, depósito, basurero"
+            },
             "amenity/water_point": {
                 "name": "Agua potable para casa rodante",
                 "terms": "casa rodante, autocaravana, motorhome, camper, agua potable"
@@ -2874,7 +2878,7 @@
             },
             "man_made": {
                 "name": "Estructura artificial creada por el hombre",
-                "terms": "estructura, artificial, hecho por el hombre, creado por el hombre"
+                "terms": "estructura, construcción, artificial, hecho, creado, construido, hombre"
             },
             "man_made/adit": {
                 "name": "Socavón",
@@ -2883,6 +2887,10 @@
             "man_made/breakwater": {
                 "name": "Rompeolas",
                 "terms": "cortaolas, rompeolas, malecón"
+            },
+            "man_made/chimney": {
+                "name": "Chimenea",
+                "terms": "chimenea, fogón, fuego"
             },
             "man_made/cutline": {
                 "name": "Línea de corte forestal",
@@ -2895,6 +2903,14 @@
             "man_made/flagpole": {
                 "name": "Asta de bandera",
                 "terms": "mástil, mastil, asta de bandera, astabandera"
+            },
+            "man_made/gasometer": {
+                "name": "Gasómetro",
+                "terms": "gasómetro, gas, depósito, contenedor, tanque"
+            },
+            "man_made/groyne": {
+                "name": "Escollera",
+                "terms": "escollera, rompeola, espigón, espolón, erosión, playa"
             },
             "man_made/lighthouse": {
                 "name": "Faro",
@@ -2928,6 +2944,10 @@
                 "name": "Tanque de almacenamiento",
                 "terms": "tanque, depósito, deposito, almacenamiento, líquido, gas, petróleo"
             },
+            "man_made/surveillance": {
+                "name": "Vigilancia",
+                "terms": "vigilancia, observación, supervisión, cámara, control, seguridad, cctv"
+            },
             "man_made/survey_point": {
                 "name": "Punto geodésico",
                 "terms": "vértice geodésico, punto geodésico"
@@ -2951,6 +2971,10 @@
             "man_made/water_works": {
                 "name": "Obras hidráulicas",
                 "terms": "obras hidráulicas, obras hidraulicas, obra Hidráulica, obras sanitarias, obras hídricas, infraestructura hidráulica"
+            },
+            "man_made/works": {
+                "name": "Fábrica",
+                "terms": "fábrica, factoría, manofactura, industria, taller, emsamblaje"
             },
             "military/airfield": {
                 "name": "Base aérea militar",

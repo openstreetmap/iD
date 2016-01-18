@@ -219,14 +219,92 @@
     "tooltip_keyhint": "Shortcut:",
     "browser_notice": "This editor is supported in Firefox, Chrome, Safari, Opera, and Internet Explorer 11 and above. Please upgrade your browser or use Potlatch 2 to edit the map.",
     "translate": {
-        "translate": "Translate"
+        "translate": "Translate",
+        "localized_translation_label": "Multilingual name",
+        "localized_translation_language": "Choose language",
+        "localized_translation_name": "Name"
     },
     "zoom_in_edit": "Zoom in to Edit",
+    "logout": "logout",
+    "loading_auth": "Connecting to OpenStreetMap...",
+    "report_a_bug": "Report a bug",
+    "help_translate": "Help translate",
+    "feature_info": {
+        "hidden_warning": "{count} hidden features",
+        "hidden_details": "These features are currently hidden: {details}"
+    },
+    "status": {
+        "error": "Unable to connect to API.",
+        "offline": "The API is offline. Please try editing later.",
+        "readonly": "The API is read-only. You will need to wait to save your changes."
+    },
+    "commit": {
+        "title": "Save Changes",
+        "description_placeholder": "Brief description of your contributions",
+        "message_label": "Changeset comment",
+        "upload_explanation": "The changes you upload will be visible on all maps that use OpenStreetMap data.",
+        "upload_explanation_with_user": "The changes you upload as {user} will be visible on all maps that use OpenStreetMap data.",
+        "save": "Save",
+        "cancel": "Cancel",
+        "changes": "{count} Changes",
+        "warnings": "Warnings",
+        "modified": "Modified",
+        "deleted": "Deleted",
+        "created": "Created"
+    },
+    "contributors": {
+        "list": "Edits by {users}",
+        "truncated_list": "Edits by {users} and {count} others"
+    },
+    "infobox": {
+        "selected": "{n} selected",
+        "geometry": "Geometry",
+        "closed": "closed",
+        "center": "Centre",
+        "perimeter": "Perimeter",
+        "length": "Length",
+        "area": "Area",
+        "centroid": "Centroid",
+        "location": "Location",
+        "metric": "Metric",
+        "imperial": "Imperial"
+    },
+    "geometry": {
+        "point": "point",
+        "vertex": "vertex",
+        "line": "line",
+        "area": "area",
+        "relation": "relation"
+    },
+    "geocoder": {
+        "search": "Search worldwide...",
+        "no_results_visible": "No results in visible map area",
+        "no_results_worldwide": "No results found"
+    },
+    "geolocate": {
+        "title": "Show My Location"
+    },
     "inspector": {
-        "none": "None"
+        "no_documentation_combination": "There is no documentation available for this tag combination",
+        "no_documentation_key": "There is no documentation available for this key",
+        "show_more": "Show More",
+        "view_on_osm": "View on openstreetmap.org",
+        "all_tags": "All tags",
+        "all_members": "All members",
+        "all_relations": "All relations",
+        "new_relation": "New relation...",
+        "role": "Role",
+        "none": "None",
+        "location": "Location"
     },
     "background": {
         "fix_misalignment": "Fix alignment"
+    },
+    "save": {
+        "title": "Save"
+    },
+    "confirm": {
+        "cancel": "Cancel"
     },
     "gpx": {
         "drag_drop": "Drag and drop a .gpx file on the page, or click the button to the right to browse",
@@ -242,6 +320,12 @@
             },
             "lit": {
                 "label": "Street Lighting"
+            },
+            "location": {
+                "label": "Location"
+            },
+            "name": {
+                "label": "Name"
             },
             "phone": {
                 "placeholder": "+44 207 123456"
@@ -270,6 +354,9 @@
             },
             "amenity/theatre": {
                 "name": "Theatre"
+            },
+            "area": {
+                "name": "Area"
             },
             "building/static_caravan": {
                 "name": "Static Caravan"

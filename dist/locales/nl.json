@@ -1752,6 +1752,9 @@
                 "name": "Ziekenhuisgebied",
                 "terms": "ziekenhuis, hospitaal, ziekenhuisgrond, hospitaalgrond, ziekenhuisgebied, hospitaalgebied, kliniek"
             },
+            "amenity/hunting_stand": {
+                "name": "Jachthut"
+            },
             "amenity/kindergarten": {
                 "name": "Gebied van Crèche/Kleuterschool"
             },
@@ -1900,6 +1903,9 @@
                 "name": "Campus van Universiteit of Hogeschool",
                 "terms": "universiteit, hogeschool, onderwijs, hoger onderwijs"
             },
+            "amenity/vending_machine/cigarettes": {
+                "name": "Sigarettenautomaat"
+            },
             "amenity/vending_machine/condoms": {
                 "name": "Condoomautomaat",
                 "terms": "automaat"
@@ -1943,6 +1949,10 @@
                 "name": "Prullenbak",
                 "terms": "afvalbak, vuilnisbak"
             },
+            "amenity/waste_disposal": {
+                "name": "Kleine afvalcontainer",
+                "terms": "restafval,milieustraat,vuilbak"
+            },
             "amenity/water_point": {
                 "name": "Waterpunt voor kampeerauto's",
                 "terms": "drinkwatertank,watertank,waterpunt voor campers"
@@ -1960,7 +1970,8 @@
                 "terms": "grens, afscheiding, afsluiting, scheiding"
             },
             "barrier/block": {
-                "name": "Blok"
+                "name": "Blok",
+                "terms": "wegversperring"
             },
             "barrier/bollard": {
                 "name": "Paaltjes",
@@ -2767,6 +2778,9 @@
             "man_made/breakwater": {
                 "name": "Golfbreker"
             },
+            "man_made/chimney": {
+                "name": "Industriële schoorsteen"
+            },
             "man_made/cutline": {
                 "name": "Scheidingslijn"
             },
@@ -2777,6 +2791,14 @@
             "man_made/flagpole": {
                 "name": "Vlaggemast",
                 "terms": "vlaggemast"
+            },
+            "man_made/gasometer": {
+                "name": "Gashouder",
+                "terms": "voorraadtank,gastank,gasopslagtank,oude gastank"
+            },
+            "man_made/groyne": {
+                "name": "Strandhoofd",
+                "terms": "golfbreker"
             },
             "man_made/lighthouse": {
                 "name": "Vuurtoren",
@@ -3717,7 +3739,8 @@
                 "terms": "sloot,gracht"
             },
             "waterway/dock": {
-                "name": "Dok"
+                "name": "Dok",
+                "terms": "Kade, Haven, Dok"
             },
             "waterway/drain": {
                 "name": "Sloot",

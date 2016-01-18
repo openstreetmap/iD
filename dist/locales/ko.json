@@ -613,7 +613,7 @@
                     "bicycle": "자전거",
                     "foot": "도보",
                     "horse": "말",
-                    "motor_vehicle": "모터 비클"
+                    "motor_vehicle": "자동차"
                 }
             },
             "access_simple": {
@@ -819,6 +819,9 @@
             "description": {
                 "label": "설명"
             },
+            "dock": {
+                "label": "종류"
+            },
             "drive_through": {
                 "label": "드라이브 스루"
             },
@@ -921,6 +924,9 @@
             "handicap": {
                 "label": "장애",
                 "placeholder": "1-18"
+            },
+            "handrail": {
+                "label": "난간"
             },
             "highway": {
                 "label": "유형"

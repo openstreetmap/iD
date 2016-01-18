@@ -197,7 +197,7 @@
         },
         "restriction": {
             "help": {
-                "select": "Klicke, um ein Straßensegment auszuwählen.",
+                "select": "Klicke, um ein Wegsegment auszuwählen.",
                 "toggle": "Klicke, um die Abbiegeeinschränkung umzudrehen.",
                 "toggle_on": "Klicke, um eine „{restriction}“-Einschränkung hinzuzufügen.",
                 "toggle_off": "Klicke, um die „{restriction}“-Einschränkung zu löschen."
@@ -217,7 +217,7 @@
         "nothing": "Nichts zum Wiederherstellen."
     },
     "tooltip_keyhint": "Tastenkürzel:",
-    "browser_notice": "Dieser Editor unterstützt Firefox, Chrome, Safari, Opera und Internet Explorer 11 und höher. Bitte Deinen Browser upgraden oder die Karte mit Potlatch 2 bearbeiten.",
+    "browser_notice": "Dieser Editor unterstützt Firefox, Chrome, Safari, Opera und Internet Explorer 11 und höher. Bitte deinen Browser upgraden oder die Karte mit Potlatch 2 bearbeiten.",
     "translate": {
         "translate": "Übersetzen",
         "localized_translation_label": "Mehrsprachiger Name",
@@ -415,7 +415,7 @@
         "no_changes": "Keine zu speichernden Änderungen.",
         "error": "Beim Speichern sind Fehler aufgetreten",
         "status_code": "Server hat folgenden Status zurückgegeben: {code}",
-        "unknown_error_details": "Bitte stelle sicher, dass Dein Gerät mit dem Internet verbunden ist.",
+        "unknown_error_details": "Bitte stelle sicher, dass dein Gerät mit dem Internet verbunden ist.",
         "uploading": "Änderungen werden zu OpenStreetMap hochgeladen.",
         "unsaved_changes": "Ungesicherte Änderungen vorhanden",
         "conflict": {
@@ -429,15 +429,15 @@
             "delete": "Gelöscht lassen",
             "download_changes": "Oder die eigenen Änderungen herunterladen.",
             "done": "Alle Konflikte aufgelöst!",
-            "help": "Ein anderer Nutzer hat einige derselben Kartenelemente wie Du bearbeitet.\nWähle jeden der Einträge unterhalb für weitere Konfliktdetails aus und entscheide\ndann, ob Deine Version oder die des anderen Nutzern behalten werden soll.\n"
+            "help": "Ein anderer Nutzer hat einige derselben Kartenelemente wie du bearbeitet.\nWähle jeden der Einträge unterhalb für weitere Konfliktdetails aus und entscheide\ndann, ob Deine Version oder die des anderen Nutzern behalten werden soll.\n"
         }
     },
     "merge_remote_changes": {
         "conflict": {
             "deleted": "Dieses Objekt wurde von {user} gelöscht.",
-            "location": "Dieses Objekt wurde von {user} und Dir verschoben.",
+            "location": "Dieses Objekt wurde von {user} und dir verschoben.",
             "nodelist": "Knoten wurden von {user} und Dir geändert.",
-            "memberlist": "Relationsmitglieder wurden von {user} und Dir geändert.",
+            "memberlist": "Relationsmitglieder wurden von {user} und dir geändert.",
             "tags": "Du hast das Merkmal <b>{tag}</b> in „{local}“ geändert und {user} hat es in „{remote}“ geändert."
         }
     },
@@ -501,14 +501,14 @@
     "help": {
         "title": "Hilfe",
         "help": "#Hilfe\n\nDies ist ein Editor für [OpenStreetMap](http://www.openstreetmap.org/), der freien und editierbaren Weltkarte. Du kannst ihn verwenden, um Daten in deiner Umgebung hinzuzufügen oder zu verändern und so diese Karte mit freien Quellen und freien Daten für jeden verbessern.\n\nDeine Veränderungen werden für alle Nutzer von OpenStreetMap sichtbar. Um Veränderungen vornehmen zu können, musst du [einloggen](https://www.openstreetmap.org/login).\n\nDer [iD Editor](http://ideditor.com/) ist ein Gemeinschaftsprojekt, dessen [Quellcode auf GitHub](https://github.com/openstreetmap/iD) verfügbar ist.\n",
-        "editing_saving": "# Bearbeiten & Speichern\n\nDieser Editor wurde entworfen, um online zu arbeiten und du verwendest ihn gerade auf diese Webseite.\n### Objekte auswählen\n\nUm ein Kartenobjekt wie eine Straße oder ein Sonderziel (POI) auszuwählen, klicke auf der Karte darauf. Dadurch wird das Objekt hervorgehoben und ein Bedienfeld mit Details und Möglichkeiten zur Veränderung angezeigt.\n\nMehrere Objekte kannst du auswählen, indem du die Umschalttaste (Shift) drückst und die Objekte einzeln anklickst oder klickst und einen Rahmen darum ziehst. So können mehrere Objekte gleichzeitig ausgewählt werden.\n\n### Speichern der Änderungen\n\nWenn du Änderungen an einer Straße, einem Gebäude oder einem Platz vorgenommen hast, sind diese lokal gespeichert, bis du sie auf dem Server speicherst. Keine Sorge, falls du einen Fehler machen solltest: Du kannst Änderungen jederzeit über den Rückgängig-Knopf rückgängig machen oder über den Wiederherstellen-Knopf noch einmal ausführen.\n\nKlicke auf „Speichern“, um eine Gruppe von Änderungen zu speichern. Zum Beispiel, wenn du in einem Stadtteil fertig bist und in einer neuen Gegend weiter arbeiten willst. Du bekommst dann die Möglichkeit, noch einmal zu überprüfen, was du gerade getan hast und der Editor zeigt dir nützliche Hinweise oder mögliche Fehler, wenn etwas nicht in Ordnung zu sein scheint.\n\nWenn alles gut aussieht, solltest du einen kurzen Kommentar schreiben, der erklärt, was du gemacht hast. Drücke nun nochmals „Speichern“, um die Änderungen auf [OpenStreetMap.org](http://www.openstreetmap.org/) zu speichern, damit sie für alle anderen Benutzer sichtbar wird und diese darauf aufbauen können.\n\nWenn du es zeitlich nicht schaffst, kannst du das Editor-Fenster einfach schließen. Wenn du die Seite wieder aufrufst (mit dem gleichen Rechner und Browser) wird dir angeboten, die letzte Sitzung wiederherzustellen.\n\n### Benutzung des Editors\n\nEine Liste der verfügbaren Tastaturkürzel gibt es [hier](http://wiki.openstreetmap.org/wiki/ID/Shortcuts).\n",
-        "roads": "# Straßen\n\nMit dem Editor kannst du Wege erstellen, verändern und löschen. Wege können alles mögliche sein, zum Beispiel Pfade, Straßen, Schienen, Fahrradwege und anderes.\n\n### Auswählen\n\nKlicke auf einen Weg, um ihn auszuwählen. Er sollte nun hervorgehoben werden. Außerdem erscheint ein kleines Werkzeugmenü und eine Seitenleiste mit den Eigenschaften des Weges.\n\n### Modifizieren\n\nOft sieht man, dass Wege nicht mit dem Luftbild oder einer GPS-Spur übereinstimmen. Du kannst den Weg aber so anpassen, dass er an der richtigen Stelle ist. Beachte jedoch, dass Luftbilder einen Versatz aufweisen können.\n\nAls Erstes wählst du einen Weg aus. Dieser wird nun hervorgehoben und es werden die Knoten des Weges angezeigt. Diese kannst du verschieben, bis sie an der richtigen Stelle sind. Wenn du neue Knoten hinzufügen möchtest, klicke doppelt zwischen den Knoten auf die Linie und es wird ein neuer Punkt erzeugt.\n\nWenn zwei Wege in Wirklichkeit mit einander verbunden sind, aber auf der Karte nicht, kannst du sie verbinden, indem du einen Knoten des einen Weges auf den anderen Weg ziehst. Dass Wege verbunden sind, ist wichtig für die Karte und essentiell für die Nutzung von Routenführung.\n\nDu kannst auch das „Bewegen“-Werkzeug nutzen oder „M“ drücken, um den kompletten Weg zu verschieben. Beende die Aktion mit einem Klick.\n\n### Löschen\n\nWenn du weißt, dass ein Weg nicht existiert, kannst du ihn löschen, um ihn von der Karte zu entfernen. Sei beim Löschen von Objekten - wie immer beim Bearbeiten vorsichtig, da die Ergebnisse von jedem gesehen werden können und Luftbilder oft veraltet sind. Das heißt, dass ein Weg, der im Luftbild nicht zu sehen ist, vielleicht einfach neu gebaut wurde.\n\nDu kannst Wege löschen, indem du sie anklickst und das Mülltonnensymbol auswählst oder die „Entfernen“-Taste drückst.\n\n### Erstellen\n\nDu kennst einen Weg, der nicht eingezeichnet ist? Dann klicke auf das „Linien“-Symbol oben links im Editor oder drücke die Taste „2“ und beginne mit dem Zeichnen einer Linie.\n\nKlicke dort hin, wo die Straße anfängt. Sollte sie von einer bereits existierenden Straße abzweigen, klicke an der entsprechenden Stelle auf diese Straße.\n\nZeichne nun den Weg, indem du Punkte anhand der Luftaufnahme oder der GPS-Spur entlang des Weges setzt. Sollte der Weg einen anderen kreuzen, klicke auf den Kreuzungspunkt, um beide Wege zu verbinden. Wenn du mit dem Zeichnen fertig bist, klicke doppelt oder drücke „Enter“ auf der Tastatur, um den Weg abzuschließen.\n",
-        "gps": "# GPS\n\nGesammelte GPS-Daten sind eine wertvolle Quelle für OpenStreetMap. Dieser Editor unterstützt lokale GPS-Tracks — „.gpx“-Dateien auf deinem Computer. Du kannst diese GPS-Tracks mit Hilfe diverser Smartphone-Apps oder anderen GPS-Geräten aufnehmen. \nFür Informationen über das Sammeln von GPS-Daten kannst du dir folgende Anleitung durchlesen: [Kartierung mit Smartphone, GPS oder Papier](http://learnosm.org/de/mobile-mapping/)\nUm einen GPX-Track fürs Mapping zu verwenden, ziehe ihn einfach in den Karteneditor. Wenn er erkannt wurde, wird der Track als hell-lila Linie auf der Karte dargestellt.\nKlicke auf das „Kartendaten“-Menu rechts, um die neue Ebene mit dem Track zu aktivieren/deaktivieren oder zoome zum Gebiet des Tracks. Der GPX-Track wird nicht automatisch direkt zu OpenStreetMap hochgeladen.\nAm besten verwendest du ihn als Grundlage um neue Objekte zu zeichnen. Möchtest du den GPX-Track jedem zugänglich machen, kannst du ihn [nach OpenStreetMap hochladen] (http://www.openstreetmap.org/trace/create).\n",
-        "imagery": "# Bildmaterial\n\nLuftbilder sind eine wichtige Quelle für das Kartografieren. Eine Kombination aus Luftbildern von Flugzeugen, Satellitenbilder und freien Quellen sind im Editor über das „Hintergrundeinstellungen“-Menü auf der linken Seite verfügbar.\n\nAls Standard ist die [Bing-Maps](http://www.bing.com/maps/)-Satelliten-Ebene ausgewählt. Je nach angezeigter Gegend werden Dir verschiedene andere Quellen angezeigt. In einigen Länder wie den USA, Frankreich, Deutschland und Dänemark stehen zum Teil sehr hochauflösende Luftbilder zur Verfügung.\n\nLuftbilder sind manchmal durch Fehler der Luftbild-Anbieter verschoben. Wenn du feststellst, dass viele Straßen gegenüber dem Hintergrund verschoben sind, dann verschiebe nicht die Straßen sondern das Luftbild, bis sie übereinstimmen. Um das Luftbild zu korrigieren, klicke auf „Fehlerhafte Ausrichtung korrigieren“ unten in den Hintergrundeinstellungen.\n",
+        "editing_saving": "# Bearbeiten & Speichern\n\nDieser Editor wurde entworfen, um online zu arbeiten und du verwendest ihn gerade auf diese Webseite.\n### Objekte auswählen\n\nUm ein Kartenobjekt wie einen Weg oder ein Sonderziel (POI) auszuwählen, klicke auf der Karte darauf. Dadurch wird das Objekt hervorgehoben und ein Bedienfeld mit Details und Möglichkeiten zur Veränderung angezeigt.\n\nMehrere Objekte kannst du auswählen, indem du die Umschalttaste (Shift) drückst und die Objekte einzeln anklickst oder klickst und einen Rahmen darum ziehst. So können mehrere Objekte gleichzeitig ausgewählt werden.\n\n### Speichern der Änderungen\n\nWenn du Änderungen an einem Weg, einem Gebäude oder einem Platz vorgenommen hast, sind diese lokal gespeichert, bis du sie auf dem Server speicherst. Mach dir keine Sorge wegen Fehler: du kannst Änderungen jederzeit über den Rückgängig-Knopf rückgängig machen oder über den Wiederherstellen-Knopf noch einmal ausführen.\n\nKlicke auf „Speichern“, um eine Gruppe von Änderungen zu speichern. Zum Beispiel, wenn du in einem Stadtteil fertig bist und in einer neuen Gegend weiter arbeiten willst. Du bekommst dann die Möglichkeit, noch einmal zu überprüfen, was du gerade getan hast und der Editor zeigt dir nützliche Hinweise oder mögliche Fehler, wenn etwas nicht in Ordnung zu sein scheint.\n\nWenn alles gut aussieht, solltest du einen kurzen Kommentar schreiben, der erklärt, was du gemacht hast. Drücke nun nochmals „Speichern“, um die Änderungen auf [OpenStreetMap.org](http://www.openstreetmap.org/) zu speichern, damit sie für alle anderen Benutzer sichtbar wird und diese darauf aufbauen können.\n\nWenn du mit der Bearbeitung nicht fertig wirst, kannst du das Editor-Fenster einfach schließen. Wenn du die Seite wieder aufrufst (mit dem gleichen Rechner und Browser) wird dir angeboten, die letzte Sitzung wiederherzustellen.\n\n### Benutzung des Editors\n\nEine Liste der verfügbaren Tastaturkürzel gibt es [hier](http://wiki.openstreetmap.org/wiki/ID/Shortcuts).\n",
+        "roads": "# Wege\n\nMit dem Editor kannst du Wege erstellen, verbessern und löschen. Wege können alles mögliche sein, zum Beispiel Pfade, Straßen, Schienen, Fahrradwege und anderes.\n\n### Auswählen\n\nKlicke auf einen Weg, um ihn auszuwählen. Er sollte nun hervorgehoben werden. Außerdem erscheint ein kleines Werkzeugmenü und eine Seitenleiste mit den Eigenschaften des Weges.\n\n### Modifizieren\n\nOft sieht man, dass Wege nicht mit dem Luftbild oder einer GPS-Spur übereinstimmen. Du kannst den Weg aber so anpassen, dass er an der richtigen Stelle ist. Beachte jedoch, dass Luftbilder einen Versatz aufweisen können.\n\nZuerst klickst du auf den Weg den du ändern willst. Dieser wird nun hervorgehoben und es werden die Knoten des Weges angezeigt. Diese kannst du verschieben, bis sie an der richtigen Stelle sind. Wenn du neue Knoten hinzufügen möchtest, klicke doppelt zwischen den Knoten auf die Linie und es wird ein neuer Punkt erzeugt.\n\nWenn zwei Wege in Wirklichkeit mit einander verbunden sind, aber auf der Karte nicht, kannst du sie verbinden, indem du einen Knoten des einen Weges auf den anderen Weg ziehst. Dass Wege verbunden sind, ist wichtig für die Karte und essentiell für die Nutzung von Routenführung.\n\nDu kannst auch das „Bewegen“-Werkzeug nutzen oder „M“ drücken, um den kompletten Weg zu verschieben. Beende die Aktion mit einem Klick.\n\n### Löschen\n\nWenn du weißt, dass ein Weg nicht existiert, kannst du ihn löschen, um ihn von der Karte zu entfernen. Sei beim Löschen von Objekten - wie immer beim Bearbeiten vorsichtig, da die Ergebnisse von jedem gesehen werden können und Luftbilder oft veraltet sind. Das heißt, dass ein Weg, der im Luftbild nicht zu sehen ist, vielleicht einfach neu gebaut wurde.\n\nDu kannst Wege löschen, indem du sie anklickst und das Papierkorbsymbol auswählst oder die „Entfernen“-Taste drückst.\n\n### Erstellen\n\nDu kennst einen Weg, der nicht eingezeichnet ist? Dann klicke auf das „Linien“-Symbol oben links im Editor oder drücke die Taste „2“ und beginne mit dem Zeichnen einer Linie.\n\nKlicke dort hin, wo die Straße anfängt. Sollte sie von einer bereits existierenden Straße abzweigen, klicke an der entsprechenden Stelle auf diese Straße.\n\nZeichne nun den Weg, indem du Punkte anhand der Luftaufnahme oder der GPS-Spur entlang des Weges setzt. Sollte der Weg einen anderen kreuzen, klicke auf den Kreuzungspunkt, um beide Wege zu verbinden. Wenn du mit dem Zeichnen fertig bist, klicke doppelt oder drücke „Enter“ auf der Tastatur, um den Weg abzuschließen.\n",
+        "gps": "# GPS\n\nGesammelte GPS-Tracks sind eine wertvolle Datenquelle für OpenStreetMap. Dieser Editor unterstützt lokale GPS-Tracks - `.gpx`-Dateien auf deinem Computer. Du kannst diese GPS-Tracks mit Hilfe bestimmter Smartphone-APPs oder GPS-Geräten aufnehmen.\n\nFür Informationen über das Sammeln von GPS-Daten kannst du dir folgende Anleitung durchlesen: [Kartierung mit Smartphone, GPS oder Papier](http://learnosm.org/de/mobile-mapping/)\n\nUm einen GPS-Track fürs Mapping zu verwenden, ziehe ihn einfach in den Karteneditor. Wenn er erkannt wurde, wird der Track als hell-lila Linie auf der Karte dargestellt.\nKlicke auf das „Kartendaten“-Menu rechts, um die neue Ebene mit dem Track zu aktivieren/deaktivieren oder zoome zum Gebiet des Tracks.\n\nDer GPX-Track wird nicht automatisch direkt zu OpenStreetMap hochgeladen. Am besten verwendest du ihn als Grundlage um neue Objekte zu zeichnen. Möchtest du den GPX-Track jedem zugänglich machen, kannst du ihn [nach OpenStreetMap hochladen](http://www.openstreetmap.org/trace/create)\n",
+        "imagery": "# Bildmaterial\n\nLuftbilder sind eine wichtige Quelle für das Kartografieren. Eine Kombination aus Luftbildern von Flugzeugen, Satellitenbilder und freien Quellen sind im Editor über das „Hintergrundeinstellungen“-Menü auf der linken Seite verfügbar.\n\nAls Standard ist die [Bing-Maps](http://www.bing.com/maps/)-Satelliten-Ebene ausgewählt. Je nach angezeigter Gegend werden dir verschiedene andere Quellen angezeigt. In einigen Länder wie den USA, Frankreich, Deutschland und Dänemark stehen zum Teil sehr hochauflösende Luftbilder zur Verfügung.\n\nLuftbilder sind manchmal durch Fehler der Luftbild-Anbieter verschoben. Wenn du feststellst, dass viele Wege gegenüber dem Hintergrund verschoben sind, dann verschiebe nicht die Straßen sondern das Luftbild, bis sie übereinstimmen. Um das Luftbild zu korrigieren, klicke auf „Fehlerhafte Ausrichtung korrigieren“ unten in den Hintergrundeinstellungen.\n",
         "addresses": "# Adressen\n\nAdressen sind eine der wichtigsten Informationen einer Karte.\n\nObwohl Adressen oft als Teil einer Straße repräsentiert werden, werden sie in OpenStreetMap als Eigenschaften von Gebäuden oder Objekten neben der Straße eingetragen.\n\nDu kannst Adressinformationen sowohl zu Flächen, die als Gebäudegrundriss gezeichnet sind, als auch zu einzelnen Punkten hinzufügen. Die beste Quelle für Adressen ist eigenes Wissen oder eine Erhebung vor Ort. Wie bei allen anderen Objekten ist die Nutzung kommerzieller Quellen wie Google Maps strikt verboten.\n",
-        "inspector": "# Den Inspektor verwenden\n\nDer Inspektor ist das Bedienelement links im Editor und erlaubt Dir die Details des ausgewählten Objekts zu bearbeiten. \n\n### Eine Eigenschaft auswählen\n\nNachdem du einen Punkt, eine Linie oder eine Fläche hinzugefügt hast kannst du auswählen, welchen Typ das Objekt hat – ob es eine Autobahn oder eine Wohnstraße, ein Supermarkt oder ein Café ist. Der Inspektor zeigt Knöpfe für die am häufigsten verwendeten Eigenschaften an. Andere Eigenschaften findest du, indem du im Suchfeld eingibst, wonach du suchst. Klicke auf den Knopf „i“ in der unteren rechten Ecke bei einem Objekt-Typ, um mehr darüber zu erfahren. \n\n### Vorlagen verwenden und Tags editieren\n\nNachdem du ein Objekt mit einer Eigenschaft versehen oder ausgewählt hast, zeigt der Inspektor Felder mit Details zu der Eigenschaft an wie Name und Adresse. Unter diesen Feldern kannst du das \"Feld hinzufügen\"-Dropdown anklicken, um weitere Details hinzuzufügen wie zum Beispiel einen [Wikipedia](http://www.wikipedia.org/)-Link, Zugänglichkeit für Rollstühle und anderes. \nGanz unten im Inspektor kannst du auf „Weitere Merkmale“ klicken, um das Objekt mit beliebigen anderen Eigenschaften zu versehen. [Taginfo](http://taginfo.openstreetmap.org/) ist eine gute Quelle, um oft genutzte Kombinationen von Eigenschaften zu finden. Änderungen die du im Inspektor vornimmst, werden automatisch auf die ausgewählten Objekte angewendet. Durch Klicken auf den Knopf „Rückgängig“ kannst du sie rückgängig machen. \n\n### Den Inspektor schließen.\n",
+        "inspector": "# Den Inspektor verwenden\n\nDer Inspektor ist das Bedienelement links im Editor und erlaubt dir die Details des ausgewählten Objekts zu bearbeiten. \n\n### Eine Eigenschaft auswählen\n\nNachdem du einen Punkt, eine Linie oder eine Fläche hinzugefügt hast kannst du auswählen, welchen Typ das Objekt hat – ob es eine Autobahn oder eine Wohnstraße, ein Supermarkt oder ein Café ist. Der Inspektor zeigt Knöpfe für die am häufigsten verwendeten Eigenschaften an. Andere Eigenschaften findest du, indem du im Suchfeld eingibst, wonach du suchst. Klicke auf den Knopf „i“ in der unteren rechten Ecke bei einem Objekt-Typ, um mehr darüber zu erfahren. \n\n### Vorlagen verwenden und Tags editieren\n\nNachdem du ein Objekt mit einer Eigenschaft versehen oder ausgewählt hast, zeigt der Inspektor Felder mit Details zu der Eigenschaft an wie Name und Adresse. Unter diesen Feldern kannst du das \"Feld hinzufügen\"-Dropdown anklicken, um weitere Details hinzuzufügen wie zum Beispiel einen [Wikipedia](http://www.wikipedia.org/)-Link, Zugänglichkeit für Rollstühle und anderes. \nGanz unten im Inspektor kannst du auf „Weitere Merkmale“ klicken, um das Objekt mit beliebigen anderen Eigenschaften zu versehen. [Taginfo](http://taginfo.openstreetmap.org/) ist eine gute Quelle, um oft genutzte Kombinationen von Eigenschaften zu finden. Änderungen die du im Inspektor vornimmst, werden automatisch auf die ausgewählten Objekte angewendet. Durch Klicken auf den Knopf „Rückgängig“ kannst du sie rückgängig machen. \n\n### Den Inspektor schließen.\n",
         "buildings": "# Gebäude\n\nOpenStreetMap ist die weltgrößte Datenbank für Gebäude und du kannst helfen, sie weiter zu verbessern.\n\n### Auswahl\n\nDu kannst ein Gebäude auswählen, indem du auf dessen Umrisslinie klickst. Der Umriss wird nun hervorgehoben. Außerdem wird ein Werkzeugmenü und eine Seitenleiste eingeblendet, die Informationen zum Gebäude zeigt.\n\n### Bearbeitung\n\nManchmal sind Gebäude falsch platziert oder haben falsche Eigenschaften.\n\nUm ein Gebäude komplett zu verschieben wähle es aus und klicke auf das „Bewegen“-Werkzeug. Verschiebe nun das Gebäude mit der Maus und klicke einmal, wenn es an der richtigen Stelle ist.\n\nUm den Gebäudeumriss zu korrigieren, klicke und ziehe die Umrissknoten, bis sie an der richtigen Stelle sind.\n\n### Erstellen\n\nEine oft gestellte Frage bezieht sich auf das Erstellen von Gebäuden als Gebäudefläche und/oder als Punkt. Hier gilt, wann immer es möglich ist, sollte das Gebäude als Fläche eingetragen werden. Firmen, Geschäfte und ähnliches werden zusätzlich als Punkte innerhalb des Gebäudeumrisses angelegt.\n\nUm ein Gebäude als Fläche zu zeichnen, klicke auf den Knopf „Fläche“ oben links und vollende das Gebäude, indem du entweder die „Enter“-Taste drückst, oder auf den ersten Knoten klickst.\n\n### Löschen\n\nWenn du siehst und weißt, dass ein Gebäude nicht existiert – zum Beispiel, weil du vor Ort warst – kannst du es löschen und es wird von der Karte entfernt. Sei vorsichtig beim Löschen von Objekten, das Ergebnis kann, wie bei jeder anderen Veränderung, von allen gesehen werden. Außerdem sind Satellitenbilder oft veraltet und ein Gebäude könnte einfach neu gebaut sein.\n\nDu kannst ein Gebäude löschen, indem du es auswählst und auf das Papierkorbsymbol klickst oder die „Entfernen“-Taste betätigst.\n",
-        "relations": "# Relationen\n\nEine Relation ist ein besonderes Element in OpenStreetMap, welches andere Elemente zusammenfasst. Es gibt zwei gängige Arten von Relationen: *Routen* fassen Abschnitte eines Weges zu einer Autobahn (oder zu einem anderen Weg) zusammen. *Multipolygone* fassen mehrere Flächen zu einer komplexen Fläche zusammen, dabei kann auch eine Fläche ein Loch in einer anderen Fläche (wie der Innenhof in einem Gebäude oder die Lichtung im Wald) beschreiben.\n\nDie Elemente in einer Relation werden *Mitglieder* genannt. In der Seitenleiste kannst Du sehen, in welchen Relationen ein Element enthalten ist. Durch Klick auf eine Relation werden alle Elemente der Relation in der Seitenleisten aufgezeigt und auf der Karte markiert.\n\nNormalerweise kümmert sich iD während der Bearbeitung automatisch um die Pflege der Relationen. Wenn Du einen Abschnitt eines Weges löschst, um ihn genauer neu zu zeichnen, solltest Du sicherstellen, dass der neuen Abschnitt Mitglied in den gleichen Relationen wie das Original wird.\n\n## Bearbeiten von Relationen\n\nUm ein Element einer Relation hinzuzufügen, wähle das zukünftige Mitglied aus und klicke in der Seitenleiste auf die Schaltfläche „+“ im Abschnitt „Alle Relationen“. Du kannst dann die Relation auswählen oder den Namen der Relation eintippen.\n\nUm eine neue Relation erstellen, wähle das erste zukünftige Mitglied aus und klicke in der Seitenleiste auf die Schaltfläche „+“ im Abschnitt „Alle Relationen“ und wähle „Neue Relation …“.\n\nUm ein Element aus einer Relation zu entfernen, wähle das Mitglied aus und klicke auf den Papierkorb neben der Relation, aus der Du es entfernen willst.\n\nDu kannst Multipolygone mit Löchern mit dem „Vereinigen“-Werkzeug erstellen. Zeichne zwei Bereiche (den äußeren und den inneren Bereich) und klicke auf den äußeren Bereich. Dann halte die Umschalttaste gedrückt und klicke auf den inneren Bereich und klicke dann auf „Vereinigen“ (+).\n"
+        "relations": "# Relationen\n\nEine Relation ist ein besonderes Element in OpenStreetMap, welches andere Elemente zusammenfasst. Es gibt zwei gängige Arten von Relationen: *Routen* fassen Abschnitte eines Weges zu einer Autobahn (oder zu einem anderen Weg) zusammen. *Multipolygone* fassen mehrere Flächen zu einer komplexen Fläche zusammen, dabei kann auch eine Fläche ein Loch in einer anderen Fläche (wie der Innenhof in einem Gebäude oder die Lichtung im Wald) beschreiben.\n\nDie Elemente in einer Relation werden *Mitglieder* genannt. In der Seitenleiste kannst du sehen, in welchen Relationen ein Element enthalten ist. Durch Klick auf eine Relation werden alle Elemente der Relation in der Seitenleisten aufgezeigt und auf der Karte markiert.\n\nNormalerweise kümmert sich iD während der Bearbeitung automatisch um die Pflege der Relationen. Wenn du einen Abschnitt eines Weges löschst, um ihn genauer neu zu zeichnen, solltest du sicherstellen, dass der neuen Abschnitt Mitglied in den gleichen Relationen wie das Original wird.\n\n## Bearbeiten von Relationen\n\nUm ein Element einer Relation hinzuzufügen, wähle das zukünftige Mitglied aus und klicke in der Seitenleiste auf die Schaltfläche „+“ im Abschnitt „Alle Relationen“. du kannst dann die Relation auswählen oder den Namen der Relation eintippen.\n\nUm eine neue Relation erstellen, wähle das erste zukünftige Mitglied aus und klicke in der Seitenleiste auf die Schaltfläche „+“ im Abschnitt „Alle Relationen“ und wähle „Neue Relation …“.\n\nUm ein Element aus einer Relation zu entfernen, wähle das Mitglied aus und klicke auf den Papierkorb neben der Relation, aus der du es entfernen willst.\n\nDu kannst Multipolygone mit Löchern mit dem „Vereinigen“-Werkzeug erstellen. Zeichne zwei Bereiche (den äußeren und den inneren Bereich) und klicke auf den äußeren Bereich. Dann halte die Umschalttaste gedrückt und klicke auf den inneren Bereich und klicke dann auf „Vereinigen“ (+).\n"
     },
     "intro": {
         "graph": {
@@ -543,43 +543,43 @@
         },
         "navigation": {
             "title": "Navigation",
-            "drag": "Die Karte zeigt OpenStreetMap-Daten auf einem Hintergrund. Du kannst sie wie jede andere Karte im Internet durch Ziehen und Scrollen bewegen. **Verschiebe die Karte.**",
-            "select": "Kartenobjekte werden auf drei verschiedenen Weisen repräsentiert: als Punkte, Linien oder Flächen. Alle Objekte können durch Klicken ausgewählt werden. **Klicke auf einen Punkt, um ihn auszuwählen.**",
-            "pane": "Wenn ein Objekt ausgewählt ist wird der Objekteditor angezeigt. Der Kopf zeigt den Objekttype und darunter werden die Objektattribute angezeigt wie Name und Adresse. **Du kannst den Objektojekteditor schließn indem Du den {button} Knopf oben rechts drückst.**",
+            "drag": "Die Karte zeigt OpenStreetMap-Daten auf einem Hintergrund. Du kannst sie wie jede andere Karte im Internet durch Ziehen und Scrollen bewegen. **Verschiebe die Karte!**",
+            "select": "Kartenobjekte werden auf drei verschiedenen Arten repräsentiert: als Punkte, Linien oder Flächen. Alle Objekte können durch Klicken ausgewählt werden. **Klicke auf den Punkt, um ihn auszuwählen.**",
+            "pane": "Wenn ein Objekt ausgewählt ist wird der Objekteditor angezeigt. Der Kopf zeigt den Objekttype und darunter werden die Objektattribute wie Name und Adresse angezeigt . **Schließe den Objekteditor indem du den {button} Knopf oben rechts drückst.**",
             "search": "Du kannst in der aktuellen Ansicht nach Objekten suchen, oder auch weltweit. **suche '{name}'**",
             "choose": "**Klicke {name} aus der Liste zum auswählen.**",
             "chosen": "Super! {name} ist jetzt ausgewählt. **Schließe den Objekteditor durch klicken des {button} Knopf.**"
         },
         "points": {
             "title": "Punkte",
-            "add": "Punkte werden benutzt um Objekte wie Shops, Restaurants oder Denkmäler zu mappen. Sie zeigen einen spezifischen Ort und beschreiben was dort ist. **Klick auf den {button} Punkt-Knopf um einen neuen Punkt hinzuzufügen.**",
-            "place": "Der Punkt kann nur durch Klicken in der Karten plaziert werden. **Klicke in die Karte um den neuen Punkt auf das Gebäude zu plazieren.**",
+            "add": "Punkte werden benutzt um Objekte wie Shops, Restaurants oder Denkmäler zu mappen. Sie zeigen einen Ort und beschreiben was dort ist. **Klick auf den {button} Punkt-Knopf um einen neuen Punkt hinzuzufügen.**",
+            "place": "Der Punkt kann durch Klicken in der Karten platziert werden. **Klicke in die Karte um den neuen Punkt auf das Gebäude zu platzieren.**",
             "search": "Es gibt viele verschiedene Objekte, die ein Punkt repräsentieren kann. Der Punkt, den du gerade hinzugefügt hast, ist ein Café. **Suche nach '{name}'.**",
-            "choose": "**Wähle „Café“ aus der Liste aus.**",
+            "choose": "**Wähle Café aus der Liste.**",
             "describe": "Der Knoten wurde nun als Café markiert. Mit dem Objekteditor können weitere Informationen über das Objekt erfasst werden. **Füge einen Namen hinzu.**",
-            "close": "Der Objekteditor merkt sich alle Deine Änderungen automatisch. Wenn Du ein Objekt änderst wird der Schließen-Knopf zu einem Häckchen. **Klicke den {button} Knopf um den Objekteditor zu schließen.**",
-            "reselect": "Punkte gibt es oft schon, aber die haben Fehler oder sind unvollständig. Du kannst bestehenden Punkte editieren. **Selektieren auf den Punkt den Du gerade erzeugt hast durch Klicken.**",
+            "close": "Der Objekteditor merkt sich alle deine Änderungen automatisch. Wenn du ein Objekt änderst wird der Schließen-Knopf zu einem Häckchen. **Klicke den {button} Knopf um den Objekteditor zu schließen.**",
+            "reselect": "Punkte gibt es oft schon, haben aber Fehler oder sind unvollständig. Du kannst bestehende Punkte editieren. **Selektiere den Punkt den du gerade erzeugt hast durch Anklicken.**",
             "fixname": "**Ändere den Namen, dann klicke den {button} Knopf um den Objekteditor zu schließen.**",
-            "reselect_delete": "Alle Objekte auf der Karte können gelöscht werden. **Selektiere den erzeugt Punkt durch Anklicken.**",
+            "reselect_delete": "Alle Objekte auf der Karte können gelöscht werden. **Selektiere den von dir erzeugten Punkt durch Anklicken.**",
             "delete": "Das Menu um den Punkt zeigt Vorgänge die mit dem Punkt durchgeführt werden können, das beinhaltet auch löschen. **Klicke auf den {button} Knopf um den Punkt zu löschen.**"
         },
         "areas": {
             "title": "Flächen",
-            "add": "Flächen werden benutzt um Grenzen von Objekten wie Seen, Gebäude oder Wohngebiete zu zeigen. Sie können auch benutzt werden um Objekte die normalerweise als Punkte gezeichnet werden genauer zu zeichnen. **Klicke den {button} Flächen-Knopf um eine neuen Fläche zu erzeugen.**",
-            "corner": "Flächen werden gezeichnet indem Punkte an der Grenze gesetzt werden. **Klicke um den Startpunkt auf einen der Ecke des Spielplatzes zu setzen.**",
-            "place": "Zeichne eine Fläche, indem du weitere Punkte hinzufügst. Beende die Fläche, indem du auf den Startpunkt klickst. **Zeichne eine Fläche für den Spielplatz.**",
+            "add": "Flächen werden benutzt um Grenzen von Objekten wie Seen, Gebäuden oder Wohngebieten zu zeigen. Sie können auch benutzt werden um Objekte die normalerweise als Punkte gezeichnet werden genauer zu zeichnen. **Klicke den {button} Flächen-Knopf um eine neuen Fläche zu erzeugen.**",
+            "corner": "Flächen werden gezeichnet indem Punkte an der Grenze gesetzt werden. **Klicke um den Startpunkt auf eine Ecke des Spielplatzes zu setzen.**",
+            "place": "Zeichne die Fläche, indem du weitere Punkte hinzufügst. Beende die Fläche, indem du auf den Startpunkt klickst. **Zeichne die Fläche für den Spielplatz.**",
             "search": "**Suche nach '{name}'.**",
             "choose": "**Wähle Spielplatz aus der Liste aus.**",
             "describe": "**Gib einen Namen ein, dann klicke den {button} Knopf um den Objekteditor zu schließen.**"
         },
         "lines": {
             "title": "Linien",
-            "add": "Linien werden benutzt um Objekte wie Straßen, Eisenbahnschienen oder Flüsse abzubilden. **Klicke den {button} Linien-Knopf um eine neue Linien einzufügen.**",
+            "add": "Linien werden benutzt um Objekte wie Wege, Schienenwege oder Flüsse abzubilden. **Klicke den {button} Linien-Knopf um eine neue Linien einzufügen.**",
             "start": "**Beginne die Linie, indem du auf das Ende der Straße klickst.**",
-            "intersect": "Klicke um Punkte zur Linien hinzuzufügen. Du kannst die Karte während des Zeichnens schieben, wenn Du willst. Straßen und viele andere Arten von Linien sind Teil eines großen Netzwerks. Es ist wichtig, dass diese Linien richtig verbunden sind damit Routing-Anwendung funktionieren. **Klicke auf {name} um die beiden Linien mit einer Kreuzung zu verbinden.**",
-            "finish": "Linien können vollendet werden, indem man den letzten Punkt erneut anklickt **Beende das Zeichnen der Straße.**",
+            "intersect": "Klicke um Punkte zur Linien hinzuzufügen. Du kannst die Karte während des Zeichnens schieben, wenn du willst. Straßen und viele andere Arten von Linien sind Teil eines großen Netzwerks. Es ist wichtig, dass diese Linien richtig verbunden sind damit Routing-Anwendung funktionieren. **Klicke auf {name} um die beiden Linien mit einer Kreuzung zu verbinden.**",
+            "finish": "Du kannst Linien abschließen, indem du den letzten Punkt nochmals anklickst. **Beende das Zeichnen der Straße.**",
             "road": "**Wähle Straße aus der Liste aus.**",
-            "residential": "Es gibt verschiedene Straßenarten, die häufigste ist die Wohngebietsstraße. **Wähle die Wohngebietsstraße.**",
+            "residential": "Es gibt verschiedene Straßentypen, die häufigste ist die Wohngebietsstraße. **Wähle die Wohngebietsstraße.**",
             "describe": "**Benenne die Straße, dann klicke den {button} Knopf um den Objekteditor zu schließen.**",
             "restart": "Diese Straße soll {name} kreuzen.",
             "wrong_preset": "Du hast nicht die Wohngebietsstraße ausgewählt. **Klicke hier, um es erneut zu versuchen.**"
@@ -1797,7 +1797,7 @@
                 "terms": "Parkgaragen-Einfahrt/Ausfahrt, Garageneinfahrt/-ausfahrt, Garagenzufahrt/-abfahrt"
             },
             "amenity/parking_space": {
-                "name": "Parkplatz",
+                "name": "Stellplatz",
                 "terms": "Parkplatz, Parkbox, Parklücke, Parkfeld, Stellplatz, Autoabstellplatz, Abstellplatz"
             },
             "amenity/pharmacy": {
@@ -1967,6 +1967,10 @@
             "amenity/waste_basket": {
                 "name": "Abfalleimer",
                 "terms": "Abfalleimer,Abfallkübel,Abfallbehälter,Mistkübel,Mülleimer"
+            },
+            "amenity/waste_disposal": {
+                "name": "Müllcontainer",
+                "terms": "Müllcontainer, Müllkübel, Abfallcontainer, Abfallkübel"
             },
             "amenity/water_point": {
                 "name": "Camping-Trinkwasser",
@@ -2884,6 +2888,10 @@
                 "name": "Wellenbrecher",
                 "terms": "Wellenbrecher, Buhnen"
             },
+            "man_made/chimney": {
+                "name": "Schornstein",
+                "terms": "Schornstein, Kamin"
+            },
             "man_made/cutline": {
                 "name": "Schneise",
                 "terms": "Schneise, Durchhau, Lücke, Bewuchsunterbrechung"
@@ -2895,6 +2903,14 @@
             "man_made/flagpole": {
                 "name": "Fahnenstange",
                 "terms": "Fahne"
+            },
+            "man_made/gasometer": {
+                "name": "Gasometer",
+                "terms": "Gasometer, Gaslagertank"
+            },
+            "man_made/groyne": {
+                "name": "Wellenbrecher",
+                "terms": "Wellenbrecher, Buhne, Kribbe"
             },
             "man_made/lighthouse": {
                 "name": "Leuchtturm",
@@ -2928,6 +2944,10 @@
                 "name": "Aufbewahrungstank für Flüssigkeiten",
                 "terms": "Lagertank, Speichertank, Vorratstank"
             },
+            "man_made/surveillance": {
+                "name": "Überwachungskamera",
+                "terms": "Überwachungskamera, Überwachungseinrichtung"
+            },
             "man_made/survey_point": {
                 "name": "Vermessungspunkt",
                 "terms": "Trigonometrischer Punkt, Geodätischer Festpunkt"
@@ -2951,6 +2971,10 @@
             "man_made/water_works": {
                 "name": "Wasserwerk",
                 "terms": "Wasserwerk"
+            },
+            "man_made/works": {
+                "name": "Fabrik",
+                "terms": "Fabrik, Werk, Betrieb, Werksanlage, Industrieproduktion "
             },
             "military/airfield": {
                 "name": "Militärflugplatz",

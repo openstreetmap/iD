@@ -536,7 +536,7 @@
             "portage_ave": "Sorsakatu"
         },
         "navigation": {
-            "title": "Liikkuminen",
+            "title": "Käyttöliittymä",
             "drag": "Kartalla näkyy OpenStreetMapiin piirretyt kohteet taustakuvan päällä. Liiku kartalla siirtämällä, loitontamalla ja lähentämällä kuten millä tahansa verkkosivukartalla. **Vedä karttaa!**",
             "select": "Karttakohteita on kolmenlaisia: pisteitä, viivoja ja alueita. Pisteet voivat olla viiva- tai paikkapisteitä. Kaikki nämä kohteet valitaan muokattaviksi napsauttamalla niitä. **Valitse tämä paikkapiste napsauttamalla sitä.**",
             "pane": "Kun jokin karttakohde valitaan napsauttamalla sitä, vasempaan reunaan ilmestyy muokkaustoiminnot. Näkymän otsikko kertoo karttakohteen tyypin. Alapuolella ovat karttakohteen ominaisuudet, kuten nimi tai osoite. **Sulje muokkausnäkymä napsauttamalla {button}-painiketta oikeasta yläkulmasta.**",
@@ -2637,7 +2637,7 @@
                 "name": "Yritystoimisto"
             },
             "office/educational_institution": {
-                "name": "Oppilatos",
+                "name": "Oppilaitos",
                 "terms": "koulu, alakoulu, ala-aste, yläaste, yläkoulu, lukio, yhteislukio, keskikoulu, koulutus, opiskelu, oppilaitos, yliopisto"
             },
             "office/employment_agency": {
@@ -2664,6 +2664,10 @@
             "office/lawyer": {
                 "name": "Lakitoimisto",
                 "terms": "asianajotoimisto, asianajajatoimisto, asianajo, asianajaja, lakimies, juristi, toimisto, lakiasia, lakiasiaintoimisto"
+            },
+            "office/newspaper": {
+                "name": "Toimitus",
+                "terms": "sanomalehti, sanomalehden, lehti, lehden, aikakauslehti, aikakauslehden, tv, tv-toimitus, media, mediatalo, sanomatalo, lehtitoimitus, toimisto"
             },
             "office/ngo": {
                 "name": "Kansalaisjärjestö",

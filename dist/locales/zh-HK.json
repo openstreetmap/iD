@@ -1968,6 +1968,10 @@
                 "name": "垃圾桶",
                 "terms": "Waste Basket,垃圾桶,垃圾箱,廢物箱"
             },
+            "amenity/waste_disposal": {
+                "name": "大型垃圾箱",
+                "terms": "大型垃圾筒,大型回收箱"
+            },
             "amenity/water_point": {
                 "name": "露營車飲用水",
                 "terms": "旅行車飲用水"
@@ -2884,6 +2888,10 @@
                 "name": "防波堤",
                 "terms": "Breakwater,防波堤"
             },
+            "man_made/chimney": {
+                "name": "煙囱",
+                "terms": "煙囱,煙筒"
+            },
             "man_made/cutline": {
                 "name": "分割綫",
                 "terms": "Cut line,分割綫,分界線,山林分界線"
@@ -2895,6 +2903,14 @@
             "man_made/flagpole": {
                 "name": "旗杆",
                 "terms": "Flagpole,旗杆,旗竿"
+            },
+            "man_made/gasometer": {
+                "name": "煤氣鼓",
+                "terms": "氣鼓,石油氣鼓"
+            },
+            "man_made/groyne": {
+                "name": "防波堤",
+                "terms": "防波堤,防波板"
             },
             "man_made/lighthouse": {
                 "name": "燈塔",
@@ -2928,6 +2944,10 @@
                 "name": "貯存箱",
                 "terms": "貯存缸, 儲存缸, 貯油缸, 貯水箱, 儲油缸, 儲水箱"
             },
+            "man_made/surveillance": {
+                "name": "監視系統",
+                "terms": "監察系統,閉路電視,保安系統"
+            },
             "man_made/survey_point": {
                 "name": "測量點",
                 "terms": "Survey Point,測量點"
@@ -2951,6 +2971,10 @@
             "man_made/water_works": {
                 "name": "濾水廠",
                 "terms": "Water Works,供水廠,水務設施,淨水廠"
+            },
+            "man_made/works": {
+                "name": "工廠",
+                "terms": "工廠"
             },
             "military/airfield": {
                 "name": "軍用機場",
