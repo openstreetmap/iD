@@ -25,7 +25,7 @@ function rp(f) {
 }
 
 function stringify(o) {
-    return JSON.stringify(o, null, 4);
+    return JSON.stringify(o);
 }
 
 function validate(file, instance, schema) {
