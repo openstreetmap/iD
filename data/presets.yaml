@@ -2685,7 +2685,7 @@ en:
       man_made/works:
         # man_made=works
         name: Works
-        # 'terms: car assembly plant,aluminium processing plant,brewery,furniture manufacture factory,oil refinery,platic recycling'
+        # 'terms: car assembly plant,aluminium processing plant,brewery,furniture manufacture factory,oil refinery,plastic recycling'
         terms: "<translate with synonyms or related terms for 'Works', separated by commas>"
       military/airfield:
         # military=airfield
