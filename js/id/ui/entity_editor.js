@@ -161,8 +161,7 @@ iD.ui.EntityEditor = function(context) {
             // clean website-like tags
             if (k.indexOf('website') !== -1 || cleaned.indexOf('http') === 0) {
                 cleaned = cleaned
-                    .replace(/[\u200B-\u200F\uFEFF]/g, '')  // strip LRM and other zero width chars
-                    .replace(/[^\w\+\-\.\/\?\[\]\(\)~!@#$%&*',:;=]/g, encodeURIComponent);
+                    .replace(/[\u200B-\u200F\uFEFF]/g, '');  // strip LRM and other zero width chars
 
             // clean email-like tags
             } else if (k.indexOf('email') !== -1) {
