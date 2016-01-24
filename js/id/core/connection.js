@@ -322,6 +322,23 @@ iD.Connection = function(useHttps) {
         oauth.xhr({ method: 'GET', path: '/api/0.6/user/details' }, done);
     };
 
+    connection.userChangesets = function(callback) {
+        connection.userDetails(function(err, user) {
+            if (err) return callback(err);
+
+            function done(changesets) {
+                callback(undefined, Array.prototype.map.call(changesets.getElementsByTagName('changeset'),
+                    function (changeset) {
+                        return { tags: getTags(changeset) };
+                    }));
+            }
+
+            d3.xml(url + '/api/0.6/changesets?user=' + user.id).get()
+                .on('load', done)
+                .on('error', callback);
+        });
+    };
+
     connection.status = function(callback) {
         function done(capabilities) {
             var apiStatus = capabilities.getElementsByTagName('status');
