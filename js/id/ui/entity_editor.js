@@ -158,16 +158,13 @@ iD.ui.EntityEditor = function(context) {
             // The code below is not intended to validate websites and emails.
             // It is only intended to prevent obvious copy-paste errors. (#2323)
 
-            // clean website-like tags
-            if (k.indexOf('website') !== -1 || cleaned.indexOf('http') === 0) {
+            // clean website- and email-like tags
+            if (k.indexOf('website') !== -1 ||
+                k.indexOf('email') !== -1 ||
+                cleaned.indexOf('http') === 0) {
                 cleaned = cleaned
                     .replace(/[\u200B-\u200F\uFEFF]/g, '');  // strip LRM and other zero width chars
 
-            // clean email-like tags
-            } else if (k.indexOf('email') !== -1) {
-                cleaned = cleaned
-                    .replace(/[\u200B-\u200F\uFEFF]/g, '')  // strip LRM and other zero width chars
-                    .replace(/[^\w\+\-\.\/\?\|~!@#$%^&*'`{};=]/g, '');  // note: ';' allowed as OSM delimiter
             }
 
             return cleaned;
