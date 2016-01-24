@@ -51,7 +51,6 @@ dist/iD.js: \
 	js/lib/d3.one.js \
 	js/lib/d3.dimensions.js \
 	js/lib/d3.trigger.js \
-	js/lib/d3.typeahead.js \
 	js/lib/d3.curtain.js \
 	js/lib/d3.value.js \
 	js/lib/diff3.js \
