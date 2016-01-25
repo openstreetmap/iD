@@ -38,16 +38,35 @@ iD.ui.Commit = function(context) {
             .attr('placeholder', t('commit.description_placeholder'))
             .attr('maxlength', 255)
             .property('value', context.storage('comment') || '')
-            .on('input.save', function() {
-                d3.selectAll('.save-section .save-button')
-                    .attr('disabled', (this.value.length ? null : true));
-            })
+            .on('input.save', enableDisableSaveButton)
+            .on('change.save', enableDisableSaveButton)
             .on('blur.save', function() {
                 context.storage('comment', this.value);
             });
 
+        function enableDisableSaveButton() {
+            d3.selectAll('.save-section .save-button')
+                .attr('disabled', (this.value.length ? null : true));
+        }
+
         commentField.node().select();
 
+        context.connection().userChangesets(function (err, changesets) {
+            if (err) return;
+
+            var comments = [];
+
+            for (var i = 0; i < changesets.length; i++) {
+                if (changesets[i].tags.comment) {
+                    comments.push({
+                        title: changesets[i].tags.comment,
+                        value: changesets[i].tags.comment
+                    });
+                }
+            }
+
+            commentField.call(d3.combobox().data(comments));
+        });
 
         // Warnings
         var warnings = body.selectAll('div.warning-section')
