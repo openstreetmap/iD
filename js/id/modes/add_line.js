@@ -14,7 +14,7 @@ iD.modes.AddLine = function(context) {
         .on('startFromNode', startFromNode);
 
     function start(loc) {
-        var graph = context.graph(),
+        var baseGraph = context.graph(),
             node = iD.Node({loc: loc}),
             way = iD.Way();
 
@@ -23,11 +23,11 @@ iD.modes.AddLine = function(context) {
             iD.actions.AddEntity(way),
             iD.actions.AddVertex(way.id, node.id));
 
-        context.enter(iD.modes.DrawLine(context, way.id, graph));
+        context.enter(iD.modes.DrawLine(context, way.id, baseGraph));
     }
 
     function startFromWay(loc, edge) {
-        var graph = context.graph(),
+        var baseGraph = context.graph(),
             node = iD.Node({loc: loc}),
             way = iD.Way();
 
@@ -37,17 +37,18 @@ iD.modes.AddLine = function(context) {
             iD.actions.AddVertex(way.id, node.id),
             iD.actions.AddMidpoint({ loc: loc, edge: edge }, node));
 
-        context.enter(iD.modes.DrawLine(context, way.id, graph));
+        context.enter(iD.modes.DrawLine(context, way.id, baseGraph));
     }
 
     function startFromNode(node) {
-        var way = iD.Way();
+        var baseGraph = context.graph(),
+            way = iD.Way();
 
         context.perform(
             iD.actions.AddEntity(way),
             iD.actions.AddVertex(way.id, node.id));
 
-        context.enter(iD.modes.DrawLine(context, way.id, context.graph()));
+        context.enter(iD.modes.DrawLine(context, way.id, baseGraph));
     }
 
     mode.enter = function() {
