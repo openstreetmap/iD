@@ -68,6 +68,17 @@ iD.ui.Commit = function(context) {
             commentField.call(d3.combobox().data(comments));
         });
 
+        var changeSetInfo = commentSection.append('div')
+            .attr('class', 'changeset-info');
+
+        changeSetInfo.append('a')
+          .attr('target', '_blank')
+          .attr('tabindex', -1)
+          .call(iD.svg.Icon('#icon-out-link', 'inline'))
+          .attr('href', t('commit.about_changeset_comments_link'))
+          .append('span')
+          .text(t('commit.about_changeset_comments'));
+
         // Warnings
         var warnings = body.selectAll('div.warning-section')
             .data([context.history().validate(changes)])
