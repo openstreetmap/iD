@@ -14,7 +14,8 @@
         "water"
     ],
     "tags": {
-        "leisure": "swimming_pool"
+      "leisure":"sports_centre",
+      "sport":"swimming"
     },
-    "name": "Swimming Pool"
+    "name": "Swimming Pool Facility"
 }

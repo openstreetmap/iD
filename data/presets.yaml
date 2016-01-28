@@ -2558,11 +2558,16 @@ en:
         name: Slipway
         # 'terms: boat launch,boat ramp'
         terms: "<translate with synonyms or related terms for 'Slipway', separated by commas>"
-      leisure/sports_center:
+      leisure/sports_centre:
         # leisure=sports_centre
         name: Sports Center / Gym
         # 'terms: gym'
         terms: "<translate with synonyms or related terms for 'Sports Center / Gym', separated by commas>"
+      leisure/sports_centre/swimming:
+        # 'leisure=sports_centre, sport=swimming'
+        name: Swimming Pool Facility
+        # 'terms: dive,water'
+        terms: "<translate with synonyms or related terms for 'Swimming Pool Facility', separated by commas>"
       leisure/stadium:
         # leisure=stadium
         name: Stadium
@@ -2570,11 +2575,17 @@ en:
       leisure/swimming_pool:
         # leisure=swimming_pool
         name: Swimming Pool
+        # 'terms: dive,water'
         terms: "<translate with synonyms or related terms for 'Swimming Pool', separated by commas>"
       leisure/track:
         # leisure=track
         name: Racetrack (non-Motorsport)
         terms: "<translate with synonyms or related terms for 'Racetrack (non-Motorsport)', separated by commas>"
+      leisure/water_park:
+        # leisure=water_park
+        name: Water Park
+        # 'terms: swim,pool,dive'
+        terms: "<translate with synonyms or related terms for 'Water Park', separated by commas>"
       line:
         name: Line
         terms: "<translate with synonyms or related terms for 'Line', separated by commas>"
