@@ -203,6 +203,8 @@ en:
     modified: Modified
     deleted: Deleted
     created: Created
+    about_changeset_comments: About changeset comments
+    about_changeset_comments_link: //wiki.openstreetmap.org/wiki/Good_changeset_comments
   contributors:
     list: "Edits by {users}"
     truncated_list: "Edits by {users} and {count} others"
@@ -760,4 +762,3 @@ en:
       help: "You can replay this walkthrough or view more documentation by clicking the {button} Help button."
       save: "Don't forget to regularly save your changes!"
       start: "Start mapping!"
-
