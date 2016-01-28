@@ -2567,6 +2567,10 @@ en:
         # leisure=stadium
         name: Stadium
         terms: "<translate with synonyms or related terms for 'Stadium', separated by commas>"
+      leisure/swimming_facility:
+        # 'leisure=sports_centre, sport=swimming'
+        name: Swimming Pool Facility
+        terms: "<translate with synonyms or related terms for 'Swimming Pool Facility', separated by commas>"
       leisure/swimming_pool:
         # leisure=swimming_pool
         name: Swimming Pool
