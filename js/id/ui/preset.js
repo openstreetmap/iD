@@ -60,6 +60,18 @@ iD.ui.preset = function(context) {
     }
 
     function presets(selection) {
+        selection.call(iD.ui.Disclosure()
+            .title(t('inspector.all_fields'))
+            .expanded(context.storage('preset_fields.expanded') !== 'false')
+            .on('toggled', toggled)
+            .content(content));
+
+        function toggled(expanded) {
+            context.storage('preset_fields.expanded', expanded);
+        }
+    }
+
+    function content(selection) {
         if (!fields) {
             var entity = context.entity(id),
                 geometry = context.geometry(id);

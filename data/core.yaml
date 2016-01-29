@@ -235,6 +235,7 @@ en:
     no_documentation_key: There is no documentation available for this key
     show_more: Show More
     view_on_osm: View on openstreetmap.org
+    all_fields: All fields
     all_tags: All tags
     all_members: All members
     all_relations: All relations

@@ -946,6 +946,11 @@ button.save.has-count .count::before {
 
 .inspector-preset {
     overflow: hidden;
+    padding-bottom: 10px;
+}
+
+.inspector-preset a.hide-toggle {
+    margin: 0 20px 10px 20px;
 }
 
 .inspector-preset .preset-form {
@@ -954,24 +959,9 @@ button.save.has-count .count::before {
     border-radius: 8px;
 }
 
-.entity-editor-pane .preset-list-item::after {
-    content: "";
-    position: absolute;
-    height: 0;
-    width: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    margin: auto;
-    border: solid rgba(0, 0, 0, 0);
-    border-width: 10px;
-    border-bottom-color: #ececec;
-}
-
 .entity-editor-pane .preset-list-item .preset-list-button-wrap {
     margin-bottom: 0;
 }
-
 
 .form-field {
     margin-bottom: 10px;
