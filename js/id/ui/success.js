@@ -23,6 +23,15 @@ iD.ui.Success = function(context) {
         body.append('p')
             .html(t('success.help_html'));
 
+        body.append('a')
+            .attr('class', 'details')
+            .attr('target', '_blank')
+            .attr('tabindex', -1)
+            .call(iD.svg.Icon('#icon-out-link', 'inline'))
+            .attr('href', t('success.help_link_url'))
+            .append('span')
+            .text(t('success.help_link_text'));
+
         var changesetURL = context.connection().changesetURL(changeset.id);
 
         body.append('a')
