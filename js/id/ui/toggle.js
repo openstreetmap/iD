@@ -10,7 +10,9 @@ iD.ui.Toggle = function(show, callback) {
             .transition()
             .style('opacity', show ? 1 : 0)
             .each('end', function() {
-                d3.select(this).classed('hide', !show);
+                d3.select(this)
+                    .classed('hide', !show)
+                    .style('opacity', null);
                 if (callback) callback.apply(this);
             });
     };
