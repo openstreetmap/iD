@@ -48,12 +48,22 @@ describe('iD.presets.Preset', function() {
 
     describe("isFallback", function() {
         it("returns true if preset has no tags", function() {
-            var preset = iD.presets.Preset("area", {tags: {}});
+            var preset = iD.presets.Preset("point", {tags: {}});
             expect(preset.isFallback()).to.equal(true);
         });
 
-        it("returns false if preset has tags", function() {
-            var preset = iD.presets.Preset("area", {tags: {building: 'yes'}});
+        it("returns true if preset has a single 'area' tag", function() {
+            var preset = iD.presets.Preset("area", {tags: {area: 'yes'}});
+            expect(preset.isFallback()).to.equal(true);
+        });
+
+        it("returns false if preset has a single non-'area' tag", function() {
+            var preset = iD.presets.Preset("building", {tags: {building: 'yes'}});
+            expect(preset.isFallback()).to.equal(false);
+        });
+
+        it("returns false if preset has multiple tags", function() {
+            var preset = iD.presets.Preset("building", {tags: {area: 'yes', building: 'yes'}});
             expect(preset.isFallback()).to.equal(false);
         });
     });
