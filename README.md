@@ -17,14 +17,23 @@
 * [Translate!](https://github.com/openstreetmap/iD/blob/master/CONTRIBUTING.md#translating)
 
 [![translation chart](https://www.transifex.com/projects/p/id-editor/chart/image_png)](https://github.com/openstreetmap/iD/blob/master/CONTRIBUTING.md#translating)
+
+## Prerequisites
+
+* [Node.js](http://nodejs.org/) version 0.10.0 or newer
+* Command line development tools (`make`, `git`, and a compiler) for your platform
+  * Ubuntu: `sudo apt-get install build-essential git`
+  * Mac OS X: Install Xcode and run `xcode-select --install` from a command line
+
 ## Installation
 
-To run the current development version, fork this project, run `make`, and serve it locally.
-If you have Python handy, just `cd` into the project root directory and run
+To run the current development version of iD on your own computer:
 
-     python -m SimpleHTTPServer
-
-Or, with a Mac, you can enable Web Sharing and clone iD into your website directory.
+1. Create a local `git clone` of the project, then `cd` into the project folder
+2. Run `npm install`
+3. Run `make`
+4. Start a local web server, e.g. `python -m SimpleHTTPServer`
+5. Open `http://localhost:8000/` in a web browser
 
 Come on in, the water's lovely. More help? Ping tmcw, jfire, or bhousel on IRC
 (`irc.oftc.net`, in `#iD` or `#osm-dev` or `#osm`) or on the OSM mailing lists.

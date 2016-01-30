@@ -153,13 +153,12 @@ feel free to use newer features wisely.
 
 ## Tests
 
-Test your code and make sure it passes. Our testing harness requires [node.js](http://nodejs.org/)
-and a few modules:
+Test your code and make sure it passes.
 
-1. [Install node.js](http://nodejs.org/) version 0.10.0 or later - 'Install' will download a package for your OS
-2. Go to the directory where you have checked out `iD`
-3. Run `npm install`
-4. Run `npm test` to see whether your tests pass or fail.
+1. Go to the directory where you have checked out `iD`
+2. run `npm install`
+3. run `make`
+4. run `npm test` to see whether your tests pass or fail.
 
 ## Building / Installing
 
