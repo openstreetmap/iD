@@ -86,7 +86,7 @@ iD.svg.Lines = function(projection) {
         lines
             .sort(waystack)
             .attr('d', getPath)
-            .call(iD.svg.TagClasses().tags(iD.svg.MultipolygonMemberTags(graph)));
+            .call(iD.svg.TagClasses().tags(iD.svg.RelationMemberTags(graph)));
 
         lines.exit()
             .remove();
