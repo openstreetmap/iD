@@ -3,7 +3,8 @@
     "fields": [
         "access_simple",
         "operator",
-        "address"
+        "address",
+        "building"
     ],
     "geometry": [
         "point",
