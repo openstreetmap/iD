@@ -13,7 +13,7 @@ MAKI_SOURCES = node_modules/maki/src/*.svg
 
 $(MAKI_SOURCES): node_modules/.install
 
-dist/img/maki-sprite.svg: $(MAKI_SOURCES) Makefile node_modules/.bin/svg-sprite
+dist/img/maki-sprite.svg: $(MAKI_SOURCES) Makefile
 	node_modules/.bin/svg-sprite --symbol --symbol-dest . --symbol-sprite $@ $(MAKI_SOURCES)
 
 data/feature-icons.json: $(MAKI_SOURCES)
@@ -106,7 +106,8 @@ dist/iD.css: css/*.css
 	cat css/reset.css css/map.css css/app.css > $@
 
 node_modules/.install: package.json
-	npm install && touch node_modules/.install
+	npm install
+	touch node_modules/.install
 
 clean:
 	rm -f $(BUILDJS_TARGETS) data/feature-icons.json dist/iD*.js dist/iD.css dist/img/*.svg
@@ -115,7 +116,8 @@ translations:
 	node data/update_locales
 
 imagery:
-	npm install editor-imagery-index@git://github.com/osmlab/editor-imagery-index.git#gh-pages && node data/update_imagery
+	npm install editor-imagery-index@git://github.com/osmlab/editor-imagery-index.git#gh-pages
+	node data/update_imagery
 
 suggestions:
 	npm install name-suggestion-index@git://github.com/osmlab/name-suggestion-index.git

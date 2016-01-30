@@ -8,8 +8,6 @@
 
 ### Make release
 
-TODO: turn this into a script.
-
 - [ ] `make translations`
 - [ ] `make imagery`
 - [ ] `make suggestions`
@@ -17,7 +15,8 @@ TODO: turn this into a script.
 - [ ] Update version number in `id.js`, `package.json`
 - [ ] `git checkout release && git reset --hard master`
 - [ ] `make`
-- [ ] `git add -f dist/*.css dist/*.js dist/img/*.svg && git commit -m 'Check in build'`
+- [ ] `git add -f dist/*.css dist/*.js dist/img/*.svg dist/locales/*.json`
+- [ ] `git commit -m 'Check in build'`
 - [ ] `git tag vA.B.C`
 - [ ] `git push origin -f release vA.B.C`
 
