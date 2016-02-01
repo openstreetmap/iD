@@ -38,10 +38,10 @@ asyncMap(resources, getResource, function(err, locales) {
     for (var i in locale) {
         if (i === 'en' || _.isEmpty(locale[i])) continue;
         codes.push(i);
-        fs.writeFileSync(outdir + i + '.json', JSON.stringify(locale[i], null, 1));
+        fs.writeFileSync(outdir + i + '.json', JSON.stringify(locale[i], null, 4));
     }
 
-    fs.writeFileSync('data/locales.json', JSON.stringify(codes, null, 1));
+    fs.writeFileSync('data/locales.json', JSON.stringify(codes, null, 4));
 });
 
 function getResource(resource, callback) {

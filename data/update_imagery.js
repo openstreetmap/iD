@@ -102,4 +102,4 @@ imagery.sort(function(a, b) {
     return a.name.localeCompare(b.name);
 });
 
-fs.writeFileSync('data/imagery.json', JSON.stringify(imagery, null, 1));
+fs.writeFileSync('data/imagery.json', JSON.stringify(imagery, null, 4));
