@@ -176,7 +176,8 @@
         "length": "ಉದ್ದ",
         "area": "‍ಪ್ರದೇಶ",
         "centroid": "‍ಮಧ್ಯಬಿಂದು",
-        "location": "‍ಸ್ಥಳ"
+        "location": "‍ಸ್ಥಳ",
+        "metric": "ಮೆಟ್ರಿಕ್"
     },
     "geometry": {
         "point": "ಬಿಂದು",

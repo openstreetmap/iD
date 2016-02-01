@@ -447,8 +447,7 @@
         "view_on_osm": "在 OSM 上查看",
         "facebook": "分享到Facebook",
         "twitter": "分享到 Twitter",
-        "google": "分享到 Google+",
-        "help_html": "你的更新应该在几分钟后出现在“标准”图层上。其他图层和某些功能，可能需要更长的时间\n(<a href='https://help.openstreetmap.org/questions/4705/why-havent-my-changes-appeared-on-the-map' target='_blank'>详情</a>).\n"
+        "google": "分享到 Google+"
     },
     "confirm": {
         "okay": "确定",
@@ -1608,7 +1607,7 @@
             },
             "amenity/bank": {
                 "name": "银行",
-                "terms": "银行"
+                "terms": "银行,储蓄银行"
             },
             "amenity/bar": {
                 "name": "酒吧",
@@ -1634,11 +1633,12 @@
                 "terms": "船舶租赁处"
             },
             "amenity/bureau_de_change": {
-                "name": "货币兑换"
+                "name": "货币兑换",
+                "terms": "货币兑换"
             },
             "amenity/bus_station": {
-                "name": "汽车站",
-                "terms": "公交车起讫站,公交枢纽,公交场站"
+                "name": "公交站",
+                "terms": "公交车起讫站,公交枢纽,公交场站,公交车站"
             },
             "amenity/cafe": {
                 "name": "咖啡馆",
@@ -1681,7 +1681,8 @@
                 "terms": "时钟,钟表,钟"
             },
             "amenity/college": {
-                "name": "大专院校校园"
+                "name": "大专院校校园",
+                "terms": "大专校园"
             },
             "amenity/community_centre": {
                 "name": "社区活动中心",
@@ -1697,6 +1698,10 @@
             "amenity/dentist": {
                 "name": "牙科",
                 "terms": "牙医,牙"
+            },
+            "amenity/doctors": {
+                "name": "医生",
+                "terms": "医生,医护人员"
             },
             "amenity/dojo": {
                 "name": "道场/武术学院",
@@ -1731,7 +1736,8 @@
                 "terms": "墓地,坟地"
             },
             "amenity/hospital": {
-                "name": "医院"
+                "name": "医院",
+                "terms": "医院场地"
             },
             "amenity/kindergarten": {
                 "name": "学前班/幼儿园用地"
@@ -1745,7 +1751,8 @@
                 "terms": "市场,菜市场"
             },
             "amenity/motorcycle_parking": {
-                "name": "摩托车停车场"
+                "name": "摩托车停车场",
+                "terms": "摩托车场"
             },
             "amenity/nightclub": {
                 "name": "夜总会",
@@ -1804,7 +1811,8 @@
                 "terms": "酒馆"
             },
             "amenity/public_bookcase": {
-                "name": "公共书架"
+                "name": "公共书架",
+                "terms": "公共书架,公共书籍"
             },
             "amenity/ranger_station": {
                 "name": "野郊访客处",
@@ -1815,14 +1823,16 @@
                 "terms": "回收,循环利用,再造"
             },
             "amenity/register_office": {
-                "name": "民政登记处"
+                "name": "民政登记处",
+                "terms": "登记处,民政处"
             },
             "amenity/restaurant": {
                 "name": "餐馆",
                 "terms": "餐馆,餐厅,饭店,酒楼,酒家,茶楼,美食"
             },
             "amenity/school": {
-                "name": "学校"
+                "name": "学校",
+                "terms": "学校场地"
             },
             "amenity/shelter": {
                 "name": "亭",
@@ -1832,7 +1842,8 @@
                 "name": "社会服务设施"
             },
             "amenity/social_facility/food_bank": {
-                "name": "食品银行"
+                "name": "食品银行",
+                "terms": "食物银行"
             },
             "amenity/social_facility/group_home": {
                 "name": "敬老院",
@@ -1870,7 +1881,8 @@
                 "terms": "市政府,市政厅,大会堂"
             },
             "amenity/university": {
-                "name": "大学校园"
+                "name": "大学校园",
+                "terms": "大学校园,大学场地"
             },
             "amenity/vending_machine/cigarettes": {
                 "name": "香烟售货机",
@@ -1887,6 +1899,14 @@
             "amenity/vending_machine/news_papers": {
                 "name": "报纸售货机",
                 "terms": "报纸售货机,报纸贩卖机"
+            },
+            "amenity/vending_machine/sweets": {
+                "name": "零食售货机",
+                "terms": "零食贩卖机"
+            },
+            "amenity/vending_machine/vending_machine": {
+                "name": "售货机",
+                "terms": "贩卖机"
             },
             "amenity/veterinary": {
                 "name": "兽医",
@@ -1969,7 +1989,7 @@
             },
             "barrier/wall": {
                 "name": "墙",
-                "terms": "收费站"
+                "terms": "墙,墙壁"
             },
             "boundary/administrative": {
                 "name": "行政区域界线",
@@ -2005,7 +2025,8 @@
                 "name": "在建建筑"
             },
             "building/dormitory": {
-                "name": "宿舍"
+                "name": "宿舍",
+                "terms": "宿舍,寝室"
             },
             "building/entrance": {
                 "name": "入口/出口",
@@ -2016,7 +2037,8 @@
                 "terms": "车库"
             },
             "building/garages": {
-                "name": "车库(连排)"
+                "name": "车库(连排)",
+                "terms": "连排车库"
             },
             "building/greenhouse": {
                 "name": "温室",
@@ -2026,7 +2048,8 @@
                 "name": "医院大楼"
             },
             "building/hotel": {
-                "name": "宾馆楼"
+                "name": "宾馆楼",
+                "terms": "宾馆建筑"
             },
             "building/house": {
                 "name": "房屋",
@@ -2041,21 +2064,22 @@
                 "terms": "工业建筑物"
             },
             "building/kindergarten": {
-                "name": "学前班/幼儿园建筑"
+                "name": "学前班/幼儿园建筑",
+                "terms": "学前班建筑,幼儿园建筑"
             },
             "building/public": {
                 "name": "公共建筑"
             },
             "building/residential": {
                 "name": "住宅建筑物",
-                "terms": "住宅建筑物"
+                "terms": "住宅建筑物,住宅建筑"
             },
             "building/retail": {
                 "name": "商业建筑"
             },
             "building/roof": {
                 "name": "楼顶",
-                "terms": "楼顶,房顶"
+                "terms": "楼顶,房顶,屋顶"
             },
             "building/school": {
                 "name": "学校建筑",
@@ -2133,16 +2157,19 @@
                 "name": "切割钥匙（配匙）"
             },
             "craft/locksmith": {
-                "name": "锁匠"
+                "name": "锁匠",
+                "terms": "锁匠,开锁师"
             },
             "craft/metal_construction": {
-                "name": "金属结构建筑"
+                "name": "金属结构建筑",
+                "terms": "金属建筑,金属建筑物"
             },
             "craft/optician": {
                 "name": "眼镜店"
             },
             "craft/painter": {
-                "name": "油漆匠"
+                "name": "油漆匠",
+                "terms": "粉刷匠"
             },
             "craft/photographer": {
                 "name": "照相店",
@@ -2416,10 +2443,6 @@
                 "name": "环岛",
                 "terms": "环岛"
             },
-            "highway/unclassified": {
-                "name": "未分级的道路",
-                "terms": "未分级的道路"
-            },
             "historic": {
                 "name": "历史遗迹",
                 "terms": "历史遗迹,史迹"
@@ -2625,10 +2648,6 @@
             "leisure/slipway": {
                 "name": "船台",
                 "terms": "船台"
-            },
-            "leisure/sports_center": {
-                "name": "体育中心/健身中心",
-                "terms": "体育中心,健身中心"
             },
             "leisure/stadium": {
                 "name": "体育场",

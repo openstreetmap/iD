@@ -915,9 +915,6 @@
             "highway/turning_circle": {
                 "name": "环岛"
             },
-            "highway/unclassified": {
-                "name": "未分级的道路"
-            },
             "historic": {
                 "name": "历史遗迹"
             },

@@ -399,8 +399,7 @@
         "view_on_osm": "OSM üzerinde gör",
         "facebook": "Facebook'da Paylaş",
         "twitter": "Twitter'da Paylaş",
-        "google": "Google+'da Paylaş",
-        "help_html": "Yaptığın değişikliklerin bir kaç dakika içinde \"Ölçünlü ya da başka deyişle standart\" katmanda görülebilmesi gerek. Öteki katmanlar, ve özellikler, daha çok süre alabilir\n(<a href='https://help.openstreetmap.org/questions/4705/why-havent-my-changes-appeared-on-the-map' target='_blank'>ayrıntılar</a>).\n"
+        "google": "Google+'da Paylaş"
     },
     "confirm": {
         "okay": "Tamam",
@@ -1610,9 +1609,6 @@
             "highway/turning_circle": {
                 "name": "Dönüş Dairesi"
             },
-            "highway/unclassified": {
-                "name": "Sınıflandırılmamış Yol"
-            },
             "historic": {
                 "name": "Tarihi Site"
             },
@@ -1744,9 +1740,6 @@
             },
             "leisure/slipway": {
                 "name": "Kızak yolu"
-            },
-            "leisure/sports_center": {
-                "name": "Spor Merkezi"
             },
             "leisure/stadium": {
                 "name": "Stadyum"

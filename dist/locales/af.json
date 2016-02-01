@@ -894,9 +894,6 @@
             "highway/turning_circle": {
                 "name": "Draai Sirkel"
             },
-            "highway/unclassified": {
-                "name": "Ongeklassifiseerde Pad"
-            },
             "historic": {
                 "name": "Historiese Plek"
             },

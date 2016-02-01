@@ -367,8 +367,7 @@
         "view_on_osm": "عرض على OSM",
         "facebook": "شارك على فيس بوك",
         "twitter": "شارك على تويتر",
-        "google": "شارك على جوجل بلس",
-        "help_html": "ينبغي أن تظهر التغييرات التي قمت بها في الطبقة \"القياسية\" خلال بضع دقائق.\nقد تأخذ الطبقات الأخرى وقتا أطول (<a href='https://help.openstreetmap.org/questions/4705/why-havent-my-changes-appeared-on-the-map' target='_blank'>التفاصيل</a>).\n"
+        "google": "شارك على جوجل بلس"
     },
     "confirm": {
         "okay": "حسنًا",
@@ -1535,10 +1534,6 @@
                 "name": "دائرة رجوع",
                 "terms": "دائرة رجوع"
             },
-            "highway/unclassified": {
-                "name": "طريق غير مصنف",
-                "terms": "شارع غير مصنف"
-            },
             "historic": {
                 "name": "موقع تاريخي",
                 "terms": "موقع تأريخي"
@@ -1718,9 +1713,6 @@
             "leisure/slipway": {
                 "name": "مزلقة سفن",
                 "terms": "مزلقة سفن"
-            },
-            "leisure/sports_center": {
-                "name": "مركز رياضي / نادي رياضي"
             },
             "leisure/stadium": {
                 "name": "مدرج رياضي",

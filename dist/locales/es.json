@@ -250,7 +250,9 @@
         "warnings": "Avisos",
         "modified": "Modificado",
         "deleted": "Eliminado",
-        "created": "Creado"
+        "created": "Creado",
+        "about_changeset_comments": "Acerca de los comentarios del conjuntos de cambios",
+        "about_changeset_comments_link": "//wiki.openstreetmap.org/wiki/ES:Good_changeset_comments"
     },
     "contributors": {
         "list": "Ediciones de {users}",
@@ -289,6 +291,7 @@
         "no_documentation_key": "No hay documentación disponible para esta etiqueta",
         "show_more": "Ver más",
         "view_on_osm": "Ver en openstreetmap.org",
+        "all_fields": "Todos los campos",
         "all_tags": "Todas las etiquetas",
         "all_members": "Todos los miembros",
         "all_relations": "Todas las relaciones",
@@ -448,7 +451,9 @@
         "facebook": "Compartir en Facebook",
         "twitter": "Compartir en Twitter",
         "google": "Compartir en Google+",
-        "help_html": "Los cambios deben aparecer en la capa «Estándar» en pocos minutos. Otras capas, y ciertos elementos, podrían tomar más tiempo\n(<a href='https://help.openstreetmap.org/questions/4705/why-havent-my-changes-appeared-on-the-map' target='_blank'>ver detalles</a>).\n"
+        "help_html": "Los cambios deberían aparecer en la capa \"estándar\" en unos pocos minutos. Otras capas, y ciertas características, pueden llevar más tiempo.",
+        "help_link_text": "Detalles",
+        "help_link_url": "https://wiki.openstreetmap.org/wiki/ES:FAQ#Acabo_de_hacer_algunos_cambios_en_el_mapa._.C2.BFC.C3.B3mo_puedo_ver_mis_modificaciones.3F"
     },
     "confirm": {
         "okay": "De acuerdo",
@@ -2617,8 +2622,8 @@
                 "terms": "círculo de giro, cul de sac"
             },
             "highway/unclassified": {
-                "name": "Carretera sin clasificación",
-                "terms": "Carretera sin clasificación, Carretera sin clasificar"
+                "name": "Carretera menor",
+                "terms": "carretera, camino, menor, no clasificado, sin clasificación"
             },
             "historic": {
                 "name": "Lugar histórico",
@@ -2856,9 +2861,13 @@
                 "name": "Rampa para botes",
                 "terms": "Grada, rampa, rampa para botes"
             },
-            "leisure/sports_center": {
-                "name": "Polideportivo / Gimnasio",
-                "terms": "centro deportivo, club deportivo, club atlético, gimnasio, recinto deportivo, polideportivo"
+            "leisure/sports_centre": {
+                "name": "Instalación deportiva / Gimnasio",
+                "terms": "Centro de deportes, Deportes, Gimnasio, Instalación Deportiva"
+            },
+            "leisure/sports_centre/swimming": {
+                "name": "Natatorio",
+                "terms": "Natatorio, piscina, pileta, alberca"
             },
             "leisure/stadium": {
                 "name": "Estadio",
@@ -2871,6 +2880,10 @@
             "leisure/track": {
                 "name": "Pista de carreras (no motorizado)",
                 "terms": "pista, hipódromo"
+            },
+            "leisure/water_park": {
+                "name": "Parque acuático",
+                "terms": "Parque acuático, parque de agua"
             },
             "line": {
                 "name": "Línea",
@@ -3861,12 +3874,12 @@
                 "terms": "zoo, zoológico "
             },
             "traffic_calming/bump": {
-                "name": "Badén corto",
-                "terms": "badén, guardia tumbado, lomo de burro, lomo de toro, resalto, resalte, tope, rompemuelle, túmulo, calmado de tráfico"
+                "name": "Reductor de velocidad corto",
+                "terms": "badén, guardia tumbado, lomo de burro, lomo de toro, resalto, resalte, tope, rompemuelle, túmulo, calmado de tráfico, reductor de velocidad"
             },
             "traffic_calming/hump": {
-                "name": "Badén largo",
-                "terms": "badén, guardia tumbado, lomo de burro, lomo de toro, resalto, resalte, tope, rompemuelle, túmulo"
+                "name": "Reductor de velocidad largo",
+                "terms": "badén, guardia tumbado, lomo de burro, lomo de toro, resalto, resalte, tope, rompemuelle, túmulo, calmado de tráfico, reductor de velocidad"
             },
             "traffic_calming/rumble_strip": {
                 "name": "Banda sonora reductora de velocidad",

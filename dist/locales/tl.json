@@ -305,8 +305,7 @@
         "view_on_osm": "Tingnan sa OSM",
         "facebook": "I-share sa Facebook",
         "twitter": "I-share sa Twitter",
-        "google": "I-share sa Google+",
-        "help_html": "Ang iyong nagawang mga pagbabago ay lilitaw sa \"Standard\" layer sa loob ng ilang minuto. Para sa iba pang mga layer at ang ilang mga tampok, maaaring mas matagal kaysa ilang minuto\n(<a href ='https://help.openstreetmap.org/questions/4705/why-havent-my-changes-appeared-on-the-map' target='_blank '>basahin ang detalye dito</ a>).\n"
+        "google": "I-share sa Google+"
     },
     "confirm": {
         "okay": "Okay"

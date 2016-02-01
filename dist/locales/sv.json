@@ -250,7 +250,9 @@
         "warnings": "Varningar",
         "modified": "Ändrat",
         "deleted": "Borttaget",
-        "created": "Skapat"
+        "created": "Skapat",
+        "about_changeset_comments": "Om ändringskommentarer",
+        "about_changeset_comments_link": "//wiki.openstreetmap.org/wiki/Good_changeset_comments"
     },
     "contributors": {
         "list": "Ändrad av {users}",
@@ -289,6 +291,7 @@
         "no_documentation_key": "Det finns ingen dokumentation för denna nyckel.",
         "show_more": "Visa mer",
         "view_on_osm": "Visa på openstreetmap.org",
+        "all_fields": "Alla egenskaper",
         "all_tags": "Alla taggar",
         "all_members": "Alla medlemmar",
         "all_relations": "Alla relationer",
@@ -448,7 +451,9 @@
         "facebook": "Dela på Facebook",
         "twitter": "Dela på Twitter",
         "google": "Dela på Google+",
-        "help_html": "Dina ändringar bör synas på \"Standard\"-lagret inom några minuter. Andra lager, och vissa egenskaper kan ta längre tid. \n(<a href='https://help.openstreetmap.org/questions/4705/why-havent-my-changes-appeared-on-the-map' target='_blank'>detaljer</a>).\n"
+        "help_html": "Dina ändringar borde synas i standardvyn om några minuter. Andra vyer och vissa objekttyper kan ta lite längre tid.",
+        "help_link_text": "Detaljer",
+        "help_link_url": "https://wiki.openstreetmap.org/wiki/FAQ#I_have_just_made_some_changes_to_the_map._How_do_I_get_to_see_my_changes.3F"
     },
     "confirm": {
         "okay": "Ok",
@@ -1797,8 +1802,8 @@
                 "terms": "garage, parkeringshus, infart, utfart"
             },
             "amenity/parking_space": {
-                "name": "Enskild parkeringsplats",
-                "terms": "Enskild parkeringsplats, parkeringsyta, parkeringsficka, handikapsparkering, handikapsficka"
+                "name": "Parkeringsruta",
+                "terms": "Enskild parkeringsplats, parkeringsyta, parkeringsficka, handikapsparkering, handikapsficka, Parkeringsruta"
             },
             "amenity/pharmacy": {
                 "name": "Läkemedel",
@@ -2856,9 +2861,9 @@
                 "name": "Stapelbädd",
                 "terms": "Stapelbädd, Sjösättningsplats, staplar, varv, docka, fartygsdocka, torrdocka, båtramp, sjösättning, båtramp"
             },
-            "leisure/sports_center": {
+            "leisure/sports_centre": {
                 "name": "Sportcenter / Gym",
-                "terms": "Sportcenter, gym,  sportanläggning, idrottshall, träning"
+                "terms": "Sportcenter, gym, idrottsanläggning, idrottsplats, sportpalats, simhall, motion, träningsanläggning, idrottshall, träning, sporthall, idrottsplan"
             },
             "leisure/stadium": {
                 "name": "Stadium",

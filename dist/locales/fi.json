@@ -58,7 +58,7 @@
             "annotation": "Relaation osapuolen rooli muutettiin."
         },
         "change_tags": {
-            "annotation": "Tagit vaihdettu."
+            "annotation": "Ominaisuustietoja vaihdettu."
         },
         "circularize": {
             "title": "Pyöristä",
@@ -280,11 +280,12 @@
         "title": "Näytä oma sijaintini"
     },
     "inspector": {
-        "no_documentation_combination": "Tälle tagille ei löydy käyttöohjeita tai -suosituksia",
+        "no_documentation_combination": "Tälle ominaisuustiedolle ei löydy käyttöohjeita tai -suosituksia.",
         "no_documentation_key": "Tälle avaimelle ei löydy käyttöohjeita tai -suosituksia",
         "show_more": "Näytä lisää",
         "view_on_osm": "Näytä openstreetmap.org-sivustolla",
-        "all_tags": "Kaikki tagit",
+        "all_fields": "Kaikki kentät",
+        "all_tags": "Kaikki ominaisuustiedot",
         "all_members": "Kaikki osapuolet",
         "all_relations": "Kaikki relaatiot",
         "new_relation": "Uusi relaatio...",
@@ -441,8 +442,7 @@
         "view_on_osm": "Näytä OSM-kartalla",
         "facebook": "Jaa Facebookissa",
         "twitter": "Jaa Twitterissä",
-        "google": "Jaa Google+-palvelussa",
-        "help_html": "Karttaan tehdyt muutokset ilmestyvät perinteiseen karttanäkymään muutaman minuutin kuluessa. Tiettyjen ominaisuuksien ilmestyminen kartalle ja muutokset tiettyihin karttanäkymiin voivat viedä kauemmin\n(<a href='https://help.openstreetmap.org/questions/4705/why-havent-my-changes-appeared-on-the-map' target='_blank'>lisätietoja</a>).\n"
+        "google": "Jaa Google+-palvelussa"
     },
     "confirm": {
         "okay": "OK",
@@ -465,15 +465,15 @@
         "used_with": "käytetään tyypin {type} kanssa"
     },
     "validations": {
-        "untagged_point": "Piste ilman tageja",
-        "untagged_line": "Viiva ilman tageja",
-        "untagged_area": "Alue ilman tageja",
+        "untagged_point": "Ominaisuustiedoton piste",
+        "untagged_line": "Ominaisuustiedoton viiva",
+        "untagged_area": "Ominaisuustiedoton alue",
         "many_deletions": "Haluatko varmasti poistaa {n} kohdetta? Kohteet poistetaan kaikkien näkyviltä OpenStreetMap-palvelussa.",
-        "tag_suggests_area": "Tagin {tag} mukaan viiva on alue, vaikka se ei sitä ole.",
+        "tag_suggests_area": "Ominaisuustiedon {tag} mukaan viiva on alue, vaikka se ei sitä ole.",
         "untagged_point_tooltip": "Valitse ominaisuustyyppi, joka kuvaa tämän pisteen tarkoitusta.",
         "untagged_line_tooltip": "Valitse ominaisuustyyppi, joka kuvaa tämän viivan tarkoitusta.",
         "untagged_area_tooltip": "Valitse ominaisuustyyppi, joka kuvaa tämän alueen tarkoitusta.",
-        "deprecated_tags": "Vanhentuneet tagit: {tags}"
+        "deprecated_tags": "Vanhentuneet ominaisuustiedot: {tags}"
     },
     "zoom": {
         "in": "Lähennä",
@@ -500,7 +500,7 @@
         "gps": "# GPS \n\nGPS-mittaukset ovat tärkein OpenStreetMapin aineiston lähde. \nTämä muokkausohjelma tukee omalta tietokoneeltasi ladattavia `.gpx`-tiedostoja. \nGPS-mittauksia voi tehdä useilla älypuhelinsovelluksilla ja tietysti myös erillisillä \nGPS-mittalaitteilla. \n\nLisätietoja GPS-mittausten tekemisestä on sivuilla [Mapping with a smartphone, GPS, or paper](http://learnosm.org/en/mobile-mapping/) (Karttatietojen kerääminen älypuhelimella, GPS-laitteella tai paperille) ja [Aloittelijan opas](http://wiki.openstreetmap.org/wiki/Fi:Beginners_Guide_1.1). \n\nKäytä GPX-tiedostoa kartoittamisen apuna vetämällä ja pudottamalla tiedosto kartanmuokkausohjelmaan. Jos se toimii, GPS-jälki ilmestyy karttapohjalle kirkkaanviolettina viivana. Piilota, näytä uudelleen tai muuta tämän GPX-tason lähennystasoa Karttatiedot-valikosta oikeasta reunasta. \n\nTällä tavalla kartoittamisen apuna käytettyä GPX-tiedostoa ei tallenneta OpenStreetMapiin - tiedosto tulee hyödynnettyä parhaiten tallentamalla tiedosto myös muiden [karttakehittäjien käyttöön](http://www.openstreetmap.org/trace/create).\n",
         "imagery": "# Ilmakuvat\n\nIlmakuvat ovat tärkeä kartoittamisen apuväline. Lentokuvien,\nsatelliittikuvien ja vapaasti koottujen materiaalien kokoelma on\nkäytettävissä Taustan asetukset -valikosta oikean reunan sivupalkista.\n\nOletuksena taustalla näytetään [Bing-karttojen](http://www.bing.com/maps/) satelliittikuvat,\nmutta karttaa lähentämällä vaihtoehtoja tulee lisää.\nJoissakin maissa, kuten Suomessa, Ranskassa ja Tanskassa\non saatavilla korkealaatuisia lentokoneesta kuvattuja ilmakuvia.\n\nIlmakuva voi näyttää virheelliseltä palveluntarjoajan sivuston\nvirheen vuoksi. Jos tiestön sijainti heittää ilmakuvasta, älä ala heti\nsiirtämään niitä vastaamaan taustakuvaa, vaan siirrä ilmakuvataustaa\nvastaamaan tiestöä asetuksella \"Korjaa ilmakuvavirhe\"\nTaustan asetusten alaosassa.\n",
         "addresses": "# Osoitteet\n\nOsoitteet ovat yksi tärkeimmistä kartalla olevasta tiedosta.\n\nSen lisäksi että osoitetiedot ovat myös katujen nimiä,\nOpenStreetMapissa ne ovat olennaisia myös rakennusten\nja muiden kadunvarsikohteiden tiedoissa.\n\nOsoitetietoja voi katujen lisäksi lisätä rakennuksien ulkoreunoille\nja paikkapisteille. Paras osoitetietojen lähde on jalkautuminen tai\noma paikallistuntemus. Kuten kaikessa muussakin muokkaamisessa,\ntietojen kopioiminen kaupallisista lähteistä kuten Google Kartoista\non ehdottomasti kielletty.\n",
-        "inspector": "# Kohdemuokkaimen käyttö \n\nKohdemuokkain on näytön vasemmassa reunassa oleva osio, jolla muutetaan valitun kohteen ominaisuuksia.\n\n### Kohteen tyypin valitseminen \n\nPisteen, viivan tai alueen lisäämisen jälkeen valitaan, millainen kohde on kyseessä - kuten kahvila, moottoritie, joki tai leikkipuisto. Kohdemuokkain näyttää heti pikapainikkeet suosituimmille kohteille. Jos kohde ei näy listalla, hae paikkaa hakusanalla ja valitse se sitten luettelosta. Haku ymmärtää myös synonyymit ja paikkaan liittyviä sanoja, joten kokeile sitä rohkeasti. \n\nTarkastele kohdetyypin lisätietoja tarkemmin napsauttamalla i-kirjainta sen oikeassa reunassa. Valitse kohdetyyppi muokattavalle kohteelle napsauttamalla sitä hakutuloslistassa. \n\n### Kohteen tagien muokkaaminen \n\nKun kohdetyyppi on valittu, kohdemuokkain näyttää tietokenttiä, joilla voidaan kuvailla kohteen ominaisuuksia, kuten nimi ja osoite. \n\nKenttäjoukon alapuolella pudotusvalikko, josta löytyy lisätietokenttiä, kuten [Wikipedia-sivu](http://fi.wikipedia.org/), esteettömyystiedot ja paljon muuta.\n\nKohdemuokkaimen alaosassa on Kaikki tagit -kohta, jossa voi lisätä kohteelle mitä tahansa tageja eli ominaisuustietoja. [Taginfosta](http://taginfo.openstreetmap.org/) löytää lisätietoja erilaisista tageista ja niiden käyttömahdollisuuksista.\n\nKohdemuokkaimella tehtävät muutokset päivittyvät muokkauskartalle automaattisesti. Muutoksen voi kuitenkin aina perua napsauttamalla Kumoa-painiketta.\n",
+        "inspector": "# Kohdemuokkaimen käyttö \n\nKohdemuokkain on näytön vasemmassa reunassa oleva osio, jolla muutetaan valitun kohteen ominaisuuksia.\n\n### Kohteen tyypin valitseminen \n\nPisteen, viivan tai alueen lisäämisen jälkeen valitaan, millainen kohde on kyseessä - kuten kahvila, moottoritie, joki tai leikkipuisto. Kohdemuokkain näyttää heti pikapainikkeet suosituimmille kohteille. Jos kohde ei näy listalla, hae paikkaa hakusanalla ja valitse se sitten luettelosta. Haku ymmärtää myös synonyymit ja paikkaan liittyviä sanoja, joten kokeile sitä rohkeasti. \n\nTarkastele kohdetyypin lisätietoja tarkemmin napsauttamalla i-kirjainta sen oikeassa reunassa. Valitse kohdetyyppi muokattavalle kohteelle napsauttamalla sitä hakutuloslistassa. \n\n### Kohteen ominaisuustietojen muokkaaminen \n\nKun kohdetyyppi on valittu, kohdemuokkain näyttää tietokenttiä, joilla voidaan kuvailla kohteen ominaisuuksia, kuten nimi ja osoite. \n\nKenttäjoukon alapuolella pudotusvalikko, josta löytyy lisätietokenttiä, kuten [Wikipedia-sivu](http://fi.wikipedia.org/), esteettömyystiedot ja paljon muuta.\n\nKohdemuokkaimen alaosassa on Kaikki ominaisuustiedot -kohta, jossa voi lisätä kohteelle mitä tahansa tageja eli ominaisuustietoja. [Taginfosta](http://taginfo.openstreetmap.org/) löytää lisätietoja erilaisista tageista ja niiden käyttömahdollisuuksista.\n\nKohdemuokkaimella tehtävät muutokset päivittyvät muokkauskartalle automaattisesti. Muutoksen voi kuitenkin aina perua napsauttamalla Kumoa-painiketta.\n",
         "buildings": "# Rakennukset\n\nOpenStreetMap sisältää maailman laajimman rakennustietokannan.\nVoit osallistua tämän tietokannan luomiseen ja kehittämiseen.\n\n### Valitseminen\n\nValitse rakennus napsauttamalla sen seinää. Rakennus korostuu,\nrakennuksen viereen tulee pikatoiminto palkki ja rakennuksen\nmuokkausnäkymä avautuu.\n\n### Muokkaaminen\n\nJoskus rakennukset ovat väärin sijoitettuja tai niiden tiedot ovat virheellisiä.\n\nSiirrä rakennusta valitsemalla se ja napsauttamalla Muokkaa. Liikuta\nrakennusta hiirellä ja aseta se uudelle paikalleen napsauttamalla.\n\nMuuta rakennuksen muotoa napsauttamalla ja vetämällä\nsen rajojen pisteitä oikeille kohdille.\n\n### Piirtäminen\n\nYksi yleisimmistä rakennusten piirtämiseen liittyvistä kysymyksistä on se,\nettä OpenStreetMapissa rakennus voidaan piirtää tai merkitä vain pisteellä.\nNyrkkisääntö on, että rakennusten ulkomuodot tulisi aina pyrkiä piirtämään\nmahdollisimman tarkasti ja sijoittaa mahdolliset sisällä toimivat yritykset paikkapisteinä sen sisään.\n\nAloita rakennuksen piirtäminen napsauttamalla yläpalkista Alue.\nPeruuta piirtäminen painamalla näppäimistön askelpalautinta.\nViimeistele rakennus sulkemalla se napsauttamalla lähtöpistettä uudelleen.\n\n### Poistaminen\n\nJos rakennus on täysin virheellinen - se esimerkiksi puuttuu satelliittikuvasta\nkokonaan tai se ei varmasti ole enää olemassa - se tulee poistaa\nkartalta. Mieti tarkkaan ennen karttakohteiden poistamispäätöstä -\nmuutos näkyy kartalla kaikille ja lisäksi satelliittikuvat ovat usein\nvanhentuneita, joten rakennus on jo voitu ehtiä rakentaa uudelleen.\n\nPoista rakennus valitsemalla se ja napsauttamalla sitten roskakorin\nkuvaketta tai napsauttamalla näppäimistön Delete-näppäintä.\n",
         "relations": "# Suhteet\n\nSuhde on erityistyyppinen OpenStreetMap-ominaisuus, joka ryhmittää yhteen muita\nominaisuuksia. Esimerkiksi kaksi yleistä suhdetyyppiä ovat *route relations*,\njotka ryhmittävät yhteen tienosat, jotka kuuluvat tiettyyn moottoritiehen tai\npäätiehen, ja *multipolygons*, jotka ryhmittävät yhteen useita viivoja, jotka määrittävät\nmutkikkaita alueita (sellaisia, joissa on useita kappaleita tai reikiä, kuten donitsissa).\n\nOminaisryhmää suhteessa kutsutaan *members*. Sivupalkissa voit nähdä\nminkä suhteiden jäsenenä ominaisuus on, ja napsauttaa suhdetta siellä\nsen valitsemiseksi. Kun suhde on valittu, voit nähdä kaikki sen jäsenet\nlueteltuina sivupalkissa ja korostettuna kartalla.\n\nEnimmäkseen iD huolehtii suhteiden ylläpidosta automaattisesti muokkauksen\naikana. Tärkein seikka, josta sinun pitäisi olla tietoinen, on että jos poistat\ntienpätkän piirtääksesi sen tarkempaa, sinun pitäisi varmistua, että uusi pätkä on\nsaman suhteen jäsen kuin alkuperäinen.\n\n## Suhteiden muokkaus\n\nJos haluat muokata suhteita, tässä ovat perusasiat.\n\nOminaisuuden lisäämiseksi suhteeseen, valitse ominaisuus, napsauta ”+”-painiketta\nsivupalkin ”All relations”-kappaleessa, ja valitse tai kirjoita suhteen nimi.\n\nUuden suhteen luomisesksi valitse ensin ominaisuus, jonka pitäisi olla jäsen,\nnapsauta ”+”-painiketta ”All relations”-kappaleessa ja valitse ”New relation...”.\n\nOminaisuuden poistamiseksi suhteesta valitse ominaisuus ja napsauta\nroskakoripainiketta sen suhteen vieressä, josta haluat sen poistaa.\n\nVoit luoda monikulmioita rei'illä käyttäen ”Merge”-työkalua. Piirrä kaksi aluetta (sisempi\nja ulompi), pidä Vaihto-näppäin alhaalla ja napsauta niistä kumpaakin molempien\nvalitsemiseksi, ja napsauta sitten ”Merge” (+)-painiketta.\n"
     },
@@ -1559,6 +1559,10 @@
                 "name": "Pyörävuokraamo",
                 "terms": "pyörävuokraamo, kaupunkipyörä, pyöränvuokraus, pyörän vuokraus, polkupyörävuokraamo, polkupyörän vuokraus, polkupyöränvuokraus, polkupyörä, pyörä"
             },
+            "amenity/bicycle_repair_station": {
+                "name": "Polkupyörän huoltoteline",
+                "terms": "teline, pidike, huolto, pyörä, polkupyörä, pyörän, polkupyörän"
+            },
             "amenity/biergarten": {
                 "name": "Ulkoilmaolutravintola",
                 "terms": "ravintola, olut, terassi, juoma, juomaterassi, juottola, juomala, alkoholi, juominen, olutterassi"
@@ -1612,6 +1616,9 @@
             "amenity/clock": {
                 "name": "Kello"
             },
+            "amenity/college": {
+                "name": "Korkeakoulualue (college)"
+            },
             "amenity/compressed_air": {
                 "name": "Ilmanpainepiste",
                 "terms": "renkaat, auto, autoilu, rengas, täyttö, paineilma, ilmantäyttö, kompressori"
@@ -1623,6 +1630,9 @@
             "amenity/dentist": {
                 "name": "Hammaslääkäriasema",
                 "terms": "hammaslääkäri, klinikka, hammasklinikka, hammas, hampaat, hammashoito, suuhygienia, suuhygienisti, sairaala, terveyskeskus, terveys, lääkäri, sairaus, suuterveys, suu"
+            },
+            "amenity/doctors": {
+                "name": "Yksityinen lääkäri"
             },
             "amenity/drinking_water": {
                 "name": "Juomavesi"
@@ -1666,6 +1676,9 @@
             },
             "amenity/marketplace": {
                 "name": "Tori"
+            },
+            "amenity/motorcycle_parking": {
+                "name": "Moottoripyöräpysäköinti"
             },
             "amenity/nightclub": {
                 "name": "Yökerho"
@@ -1753,8 +1766,8 @@
                 "name": "Studio"
             },
             "amenity/swimming_pool": {
-                "name": "Uima-allas",
-                "terms": "uimahalli, uintikeskus, uimastadion, uima-allas, uinti, uiminen"
+                "name": "Uimahalli tai -allas",
+                "terms": "uimahalli, uintikeskus, uimastadion, uima-allas, uinti, uiminen, maauimala, julkinen, ulkoilma, ulkoilma-allas, ulkoallas"
             },
             "amenity/taxi": {
                 "name": "Taksitolppa",
@@ -1779,12 +1792,36 @@
             "amenity/university": {
                 "name": "Yliopistoalue"
             },
+            "amenity/vending_machine/cigarettes": {
+                "name": "Tupakka-automaatti",
+                "terms": "tupakka, tupakointi, savu, polttaminen, polttaa, rööki, automaatti"
+            },
+            "amenity/vending_machine/condoms": {
+                "name": "Kondomiautomaatti",
+                "terms": "ehkäisy, kondomi, automaatti"
+            },
+            "amenity/vending_machine/parking_tickets": {
+                "name": "Pysäköintimaksuautomaatti",
+                "terms": "parkkiautomaatti, automaatti, maksu, maksaa, maksaminen, pysäköinti, parkki, parkkimaksu, pysäköintimaksu"
+            },
+            "amenity/vending_machine/public_transport_tickets": {
+                "name": "Joukkoliikenteen lippuautomaatti",
+                "terms": "lippu, automaatti, bussilippu, junalippu, metrolippu, myynti, myyntiautomaatti, joukkoliikenne, julkinen, liikenne"
+            },
+            "amenity/vending_machine/sweets": {
+                "name": "Välipala-automaatti",
+                "terms": "snack, välipala, patukka, karkki, automaatti, syötävää, syömistä"
+            },
             "amenity/veterinary": {
                 "name": "Eläinlääkäri"
             },
             "amenity/waste_basket": {
                 "name": "Roskakori",
                 "terms": "roska-astia, roskis, roskapönttö, jäte-astia, kierrätyspiste, kierrätyslaatikko, roska, kierrätys, jäte, jätteet"
+            },
+            "amenity/water_point": {
+                "name": "Asuntoauton vesipiste",
+                "terms": "vesi, vettä, veden, vedentäyttö, täyttö, täyttäminen, asuntoauto, asuntovaunu, karavaanari, otto, vedenotto"
             },
             "area": {
                 "name": "Alue"
@@ -1876,7 +1913,8 @@
                 "name": "Asuntola"
             },
             "building/entrance": {
-                "name": "Sisään- tai uloskäynti"
+                "name": "Sisään- tai uloskäynti",
+                "terms": "ovi, portti, sisään, ulos, sisäänkäynti, uloskäynti"
             },
             "building/garage": {
                 "name": "Autotalli",
@@ -2029,7 +2067,7 @@
                 "name": "Maalari"
             },
             "craft/photographer": {
-                "name": "valokuvaaja"
+                "name": "Valokuvaaja"
             },
             "craft/photographic_laboratory": {
                 "name": "Valokuvausliike",
@@ -2042,7 +2080,7 @@
                 "name": "Putkimies"
             },
             "craft/pottery": {
-                "name": "savenvalimo"
+                "name": "Savenvalamo"
             },
             "craft/rigger": {
                 "name": "nosturi"
@@ -2115,7 +2153,8 @@
                 "terms": "hätänumero, hätäpuhelin, hätätilanne, poikkeuspuhelin, hätäkeskus, hätäilmoitus"
             },
             "entrance": {
-                "name": "Sisään- tai uloskäynti"
+                "name": "Sisään- tai uloskäynti",
+                "terms": "ovi, portti, sisään, ulos, sisäänkäynti, uloskäynti"
             },
             "footway/crossing": {
                 "name": "Suojatieväylä"
@@ -2288,9 +2327,6 @@
                 "name": "Kääntymispaikka",
                 "terms": "kääntymispaikka, kääntöpaikka, U-käännös, kääntöympyrä, kääntymisympyrä, U-käännöksen tekopaikka"
             },
-            "highway/unclassified": {
-                "name": "Luokittelematon tie"
-            },
             "historic": {
                 "name": "Historiallinen paikka"
             },
@@ -2365,6 +2401,9 @@
             },
             "landuse/orchard": {
                 "name": "Hedelmätarha"
+            },
+            "landuse/plant_nursery": {
+                "name": "Taimitarha"
             },
             "landuse/quarry": {
                 "name": "Louhos"
@@ -2455,15 +2494,12 @@
                 "name": "Veneramppi",
                 "terms": "veneramppi, vesillelaskupaikka, veneenlaskupaikka, vene, järveenlaskupaikka, järviramppi"
             },
-            "leisure/sports_center": {
-                "name": "Urheilukeskus/kuntosali",
-                "terms": "urheilu, urheilukenttä, kenttä, urheilusali, sali, kuntoilu, kunto, kuntosali, urheilukeskus, urheilualue, sisäpelihalli, sisähalli, sisäliikunta, halli"
-            },
             "leisure/stadium": {
                 "name": "Stadion"
             },
             "leisure/swimming_pool": {
-                "name": "Uima-allas"
+                "name": "Uimahalli tai -allas",
+                "terms": "uimahalli, uintikeskus, uimastadion, uima-allas, uinti, uiminen, maauimala, julkinen, ulkoilma, ulkoilma-allas, ulkoallas"
             },
             "leisure/track": {
                 "name": "Kilparata (ei moottoriurheilu)"
@@ -2477,6 +2513,9 @@
             "man_made/breakwater": {
                 "name": "Aallonmurtaja"
             },
+            "man_made/chimney": {
+                "name": "Savupiippu"
+            },
             "man_made/cutline": {
                 "name": "Leikkaa viiva"
             },
@@ -2487,6 +2526,10 @@
             "man_made/flagpole": {
                 "name": "Lipputanko",
                 "terms": "lippu, liputus, salko, lippusalko, tanko, tolppa, lipputolppa, liputuspäivä, liputtaa"
+            },
+            "man_made/groyne": {
+                "name": "Rantavalli",
+                "terms": "suojapato"
             },
             "man_made/lighthouse": {
                 "name": "Majakka"
@@ -2537,6 +2580,10 @@
             },
             "military/bunker": {
                 "name": "Bunkkeri"
+            },
+            "military/checkpoint": {
+                "name": "Tarkistuspiste",
+                "terms": "turvallisuus, turvatarkastus, checkpoint, check, point, henkilöllisyys, tarkastus, tarkistus"
             },
             "military/range": {
                 "name": "Sotilasalue",
@@ -2780,7 +2827,8 @@
                 "name": "Käyttämätön rautatie"
             },
             "railway/funicular": {
-                "name": "funikulaari"
+                "name": "Kiskoköysirata",
+                "terms": "funikulaari, köysihissi, gondoli, gondolihissi, hissi, rata, hissirata, köysirata"
             },
             "railway/halt": {
                 "name": "Seisake",
@@ -2944,7 +2992,8 @@
                 "name": "Elektroniikkamyymälä"
             },
             "shop/erotic": {
-                "name": "Erotiikkamyymälä"
+                "name": "Erotiikkamyymälä",
+                "terms": "seksi, seksilelu, lelu, aikuinen, aikuisten, K18, porno, erotiikka, eroottinen, kauppa, liike, myymälä, putiikki"
             },
             "shop/fabric": {
                 "name": "Rakennusliike"
@@ -3078,7 +3127,8 @@
                 "name": "Kenkäkauppa"
             },
             "shop/sports": {
-                "name": "Urheiluliike"
+                "name": "Urheiluliike",
+                "terms": "urheilu, kauppa, liike, putiikki, myymälä, urheilukauppa, urheilumyymälä, liikunta"
             },
             "shop/stationery": {
                 "name": "Toimistotarvikekauppa"
@@ -3087,7 +3137,7 @@
                 "name": "Supermarket"
             },
             "shop/tailor": {
-                "name": "räätäli"
+                "name": "Räätäliliike"
             },
             "shop/tattoo": {
                 "name": "Tatuointisalonki"
@@ -3161,7 +3211,7 @@
                 "name": "Leirintäalue"
             },
             "tourism/caravan_site": {
-                "name": "Asuntoautopysäköintialue"
+                "name": "Asuntoautopysäköinti"
             },
             "tourism/chalet": {
                 "name": "Chalet-huoneisto"
@@ -3297,6 +3347,10 @@
             "waterway/ditch": {
                 "name": "Oja"
             },
+            "waterway/dock": {
+                "name": "Telakka",
+                "terms": "laiva, laivanrakennus, laivateollisuus, teollisuus, rakentaminen, kuivatelakka, laivatelakka"
+            },
             "waterway/drain": {
                 "name": "Viemäri"
             },
@@ -3316,6 +3370,10 @@
             },
             "waterway/stream": {
                 "name": "Puro"
+            },
+            "waterway/water_point": {
+                "name": "Veneen vesipiste",
+                "terms": "vesi, vettä, veden, vedentäyttö, täyttö, täyttäminen, vene, laiva, veneily, purjevene, moottorivene"
             },
             "waterway/weir": {
                 "name": "Pato"

@@ -250,7 +250,9 @@
         "warnings": "Advarsler",
         "modified": "Ændret",
         "deleted": "Slettet",
-        "created": "Oprettet"
+        "created": "Oprettet",
+        "about_changeset_comments": "Vedr. ændringssætskommentarer",
+        "about_changeset_comments_link": "http://wiki.openstreetmap.org/wiki/Good_changeset_comments"
     },
     "contributors": {
         "list": "Redigeringer af {users}",
@@ -289,6 +291,7 @@
         "no_documentation_key": "Der er ingen tilgængelig dokumentation for denne nøgle",
         "show_more": "Vis mere",
         "view_on_osm": "Se på openstreetmap.org",
+        "all_fields": "Alle felter",
         "all_tags": "Alle tags",
         "all_members": "Alle medlemmer",
         "all_relations": "Alle relationer",
@@ -448,7 +451,9 @@
         "facebook": "Del på Facebook",
         "twitter": "Del på Twitter",
         "google": "Del på Google+",
-        "help_html": "Dine ændringer skulle blive synlige i \"Standard\"-laget om få minutter. Andre lag og visse specielle objekter kan tage længere tid\n(<a href='https://help.openstreetmap.org/questions/4705/why-havent-my-changes-appeared-on-the-map'>mere information</a>).\n"
+        "help_html": "Dine ændringer vil komme frem i \"Standard\" kortlaget om få minutter. Andre kortlag  med bestemte objekter vil tage længere tid.",
+        "help_link_text": "Detaljer",
+        "help_link_url": "https://wiki.openstreetmap.org/wiki/FAQ#I_have_just_made_some_changes_to_the_map._How_do_I_get_to_see_my_changes.3F"
     },
     "confirm": {
         "okay": "Okay",
@@ -2618,7 +2623,7 @@
             },
             "highway/unclassified": {
                 "name": "Mindre vej",
-                "terms": "Ukendt vejtype"
+                "terms": "Mindre vej"
             },
             "historic": {
                 "name": "Historisk sted",
@@ -2856,9 +2861,13 @@
                 "name": "Bådrampe",
                 "terms": "Bådrampe, Skibsrampe"
             },
-            "leisure/sports_center": {
-                "name": "Sportscenter/Gymnastik",
-                "terms": "Sportscenter/Gymnastik"
+            "leisure/sports_centre": {
+                "name": "Sportscenter / Gymnastik",
+                "terms": "Sportscenter / Gymnastik"
+            },
+            "leisure/sports_centre/swimming": {
+                "name": "Swimmingpool",
+                "terms": "Swimmingpool, Svømmepool"
             },
             "leisure/stadium": {
                 "name": "Stadion",
@@ -2871,6 +2880,10 @@
             "leisure/track": {
                 "name": "Racebane (ej motorspor)",
                 "terms": "Racebane (ej motorspor)"
+            },
+            "leisure/water_park": {
+                "name": "Vandland",
+                "terms": "Vandland, Badeland"
             },
             "line": {
                 "name": "Linje",

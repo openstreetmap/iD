@@ -250,7 +250,9 @@
         "warnings": "Upozorenja",
         "modified": "Promijenjeno",
         "deleted": "Obrisano",
-        "created": "Stvoreno"
+        "created": "Stvoreno",
+        "about_changeset_comments": "O komentarima promjena",
+        "about_changeset_comments_link": "//wiki.openstreetmap.org/wiki/Good_changeset_comments"
     },
     "contributors": {
         "list": "Uređivali {users}",
@@ -289,6 +291,7 @@
         "no_documentation_key": "Ne postoji dokumentacija za ovaj ključ.",
         "show_more": "Prikaži više",
         "view_on_osm": "Pogledaj na openstreetmap.org",
+        "all_fields": "Sva polja",
         "all_tags": "Sve oznake",
         "all_members": "Svi članovi",
         "all_relations": "Sve relacije",
@@ -448,7 +451,9 @@
         "facebook": "Podijeli na mreži Facebook",
         "twitter": "Podijeli na mreži Twitter",
         "google": "Podijeli na mreži Google+",
-        "help_html": "Tvoje promjene bi se trebale pojaviti u sloju \"Standard\" kroz par minuta. Za druge slojeve i određena svojstva trebati će više vremena.\n(<a href='https://help.openstreetmap.org/questions/4705/why-havent-my-changes-appeared-on-the-map' target='_blank'>detalji</a>).\n"
+        "help_html": "Tvoje promjene bi se trebale pojaviti u sloju \"Standard\" kroz par minuta. Za druge slojeve i određena svojstva trebati će više vremena.",
+        "help_link_text": "Detalji",
+        "help_link_url": "https://wiki.openstreetmap.org/wiki/FAQ#I_have_just_made_some_changes_to_the_map._How_do_I_get_to_see_my_changes.3F"
     },
     "confirm": {
         "okay": "Ok",
@@ -511,35 +516,84 @@
         "relations": "# Relacije\n\nRelacija je poseban oblik značajki na OpenStreetMap karti koja grupira druge\nznačajke. Na primjer, dvije često korištene relacije su *cestovne relacije*, koje\nmeđusobno grupiraju dijelove cesta koje zajedno pripadaju državnoj ili\nžupanijskoj cesti i *multipoligoni*, koji međusobno grupiraju nekoliko linija\nkoje definiraju složena područja (koja se sastoje od  više područja ili ona koja\nimaju rupu u sebi poput krafne).\n\nSkupine značajki u relaciji se nazivaju *članovi*. U bočnom oknu možeš vidjeti\nkojim sve relacijama značajka pripada i tamo kliknuti na relaciju kako bi ju\nodabrao/la. Kada je relacija odabrana možeš vidjeti sve njezine članove koji su\noznačeni na karti i izlistani u bočnom oknu.\n\niD će uglavnom automatski održavati relacije dok ti uređuješ kartu. Glavna\nstvar koje moraš biti svjestan/na je da ako obrišeš dio ceste da ju nacrtaš\npreciznije, trebaš provjeriti da je i novi dio član istih relacija kao i originalni\ndio.\n\n## Uređivanje relacija\n\nAko želiš uređivati relacije, ovdje su navedene osnove.\n\nZa dodavanje značajke nekoj relaciji, označi značajku, klikni tipku \"+\" u odjeljku\n\"Sve relacije\" na dnu bočnog okna i odaberi ili upiši ime relacije.\n\nZa stvaranje nove relacije, odaberi prvu značajku koja bi trebala biti član,\nzatim klikni tipku \"+\" u odjeljku \"Sve relacije\" i odaberi \"Nova relacija...\".\n\nZa odstranjivanje značajke iz relacije, odaberi značajku i klikni ikonu kante za\nsmeće pokraj relacije iz koje ju želiš ukloniti.\n\nMožeš stvarati višestruke poligone - multipoligone sa rupama pomoću alata\n\"Spoji\". Nacrtaj dva područja (unutarnje i vanjsko), drži tipku Shift i klikni na\noba područja kako bi ih selektirao/la i zatim klikni na tipku \"Spoji\" (+).\n"
     },
     "intro": {
+        "graph": {
+            "city_hall": "Gradska vijećnica",
+            "fire_department": "Vatrogasni dom",
+            "memory_isle_park": "Gradski park",
+            "riverwalk_trail": "Šetalište",
+            "w_michigan_ave": "Jesenska avenija",
+            "e_michigan_ave": "Proljetna avenija",
+            "spring_st": "Anina ulica ",
+            "scidmore_park": "Park prijateljstva",
+            "petting_zoo": "Dječji zoološki vrt",
+            "n_andrews_st": "Mažuranićeva ulica",
+            "s_andrews_st": "Držićeva ulica",
+            "n_constantine_st": "Marulićeva ulica",
+            "s_constantine_st": "Držićeva ulica",
+            "rocky_river": "Rijeka Mura",
+            "railroad_dr": "Željeznička ulica",
+            "conrail_rr": "Željeznička pruga",
+            "st_joseph_river": "Rijeka Sava",
+            "n_main_st": "Sjeverna cesta",
+            "s_main_st": "Južna cesta",
+            "water_st": "Ulica voća",
+            "foster_st": "Dječja ulica",
+            "portage_river": "Rijeka Drava",
+            "flower_st": "Ulica cvijeća",
+            "elm_st": "Ulica brijestova",
+            "walnut_st": "Ulica oraha",
+            "morris_ave": "Zimska avenija",
+            "east_st": "Istočna ulica",
+            "portage_ave": "Ljetna avenija"
+        },
         "navigation": {
             "title": "Navigacija",
             "drag": "Glavno područje karte prikazuje OpenStreetMap podatke iznad pozadine. Možeš mijenjati pogled povlačeći i pomičući, kao na svakoj drugoj web karti. **Pomakni prikaz karte.**",
-            "select": "Značajke karte su prikazane na tri načina: koristeći točke, linije ili područja. Sve značajke mogu se odabrati klikom na njih. **Klikni na točku kako bi ju odabrao/la.**"
+            "select": "Značajke karte su prikazane na tri načina: koristeći točke, linije ili područja. Sve značajke mogu se odabrati klikom na njih. **Klikni na točku kako bi ju odabrao/la.**",
+            "pane": "Kada je značajka odabrana, prikazan je uređivač svojstava. Zaglavlje prikazuje tip značajke, a glavni prozor prikazuje njegova svojstva npr. naziv i adresu. **Zatvori uređivač svojstava klikom na gumb {button} gore desno.**",
+            "search": "Također možeš potražiti značajke koje se nalaze u trenutnom pogledu ili koje se nalaze bilo gdje na svijetu. **Potraži '{name}'** ",
+            "choose": "**Odaberi {name} s liste da ga selektiraš.**",
+            "chosen": "Odlično! {name} je sada selektirano. **Zatvori uređivač svojstava pritiskom na {button} gumb.**"
         },
         "points": {
             "title": "Točke",
+            "add": "Točke se koriste za predstavljanje značajki kao što su trgovine, restorani i spomenici. One označavaju specifičnu lokaciju i opisuju što je ondje. **Klikni na gumb {button} Točka za dodavanje nove točke.**",
+            "place": "Točka se može postaviti klikom na kartu. **Klikni na kartu za postavljanje nove točke na vrh zgrade.**",
             "search": "Postoje mnoge različite značajke koje mogu biti prikazane točkom. Točka koju si upravo dodao/la je kafić. **Pretraži '{name}'.**",
             "choose": "**Odaberi 'Kafić' sa liste.**",
-            "describe": "Točka je sada označena kao kafić. Koristeći uređivač svojstava, možemo dodati više informacija o toj značajki. **Dodaj ime kafiću.**"
+            "describe": "Točka je sada označena kao kafić. Koristeći uređivač svojstava, možemo dodati više informacija o toj značajki. **Dodaj ime kafiću.**",
+            "close": "Uređivač svojstava će automatski spremiti sve tvoje promjene. Kada napraviš promjenu, gumb za zatvaranje će se promijeniti u kvačicu. **Klikni {button} gumb za zatvaranje uređivača svojstava.**",
+            "reselect": "Često će točke već postojati, ali mogu biti pogrešne ili nedovršene. Možemo urediti postojeće točke. **Klikni za selektiranje točke koju si upravo kreirao/la.**",
+            "fixname": "**Promijeni ime, a zatim klikni {button} gumb za zatvaranje uređivača.**",
+            "reselect_delete": "Sva svojstva na karti se mogu obrisati. **Klikni za selektiranje točke koji si stvorio/la.**",
+            "delete": "Izbornik oko točke sadrži operacije koje se mogu izvršiti nad njom, uključujući brisanje. **Klikni na {button} gumb za brisanje točke.**"
         },
         "areas": {
             "title": "Područja",
+            "add": "Područja se koriste za prikaz granica značajki poput jezera, zgrada i naseljenih područja. Također se mogu koristiti za detaljnije kartiranje mnogih značajki koje se inače prikazuju točkama. **Klikni na gumb {button} Područje za dodavanje novog područja.**",
+            "corner": "Područja se crtaju postavljanjem točaka koje označavaju granicu područja. **Klikni za postavljanje početne točke na jedan ugao igrališta.**",
             "place": "Nacrtaj područje dodavanjem više točaka. Završi područje tako da klikneš na početnu točku. **Nacrtaj područje igrališta.**",
             "search": "**Pretraži za '{name}'.**",
-            "choose": "**Odaberi igralište sa liste.**"
+            "choose": "**Odaberi igralište sa liste.**",
+            "describe": "**Dodaj ime, a zatim klikni {button} gumb za zatvaranje uređivača.**"
         },
         "lines": {
             "title": "Linije",
+            "add": "Linije se koriste za predstavljanje značajki kao što su npr. ceste, željeznice i rijeke. **Klikni na {button} Linije za dodavanje nove linije.**",
             "start": "**Započni liniju tako da klikneš na kraj ceste.**",
+            "intersect": "Klikni za dodavanje više točaka linije. Možeš pomicati pogled na kartu dok crtaš ako je potrebno. Ceste i mnoge druge vrste linija su dio veće mreže. Važno je da su sve linije pravilno spojene kako bi softveri za određivanje rute ispravno funkcionirali. **Klikni na {name} za stvaranje raskrižja povezujući dvije linije.**",
             "finish": "Linije se mogu završiti tako da ponovno kliknete na posljednju točku. **Završi crtanje ceste.**",
             "road": "**Odaberi Prometnica sa liste.**",
             "residential": "Postoje različite vrste cesta, najčešća je Ulica. **Odaberi tip 'Ulica'.**",
+            "describe": "**Dodaj naziv ulice i klikni {button} gumb za zatvaranje uređivača.**",
+            "restart": "Cesta treba presijecati {name}.",
             "wrong_preset": "Nisi označio/la cestu koja predstavlja ulicu. **Klikni ovdje za ponovni odabir**"
         },
         "startediting": {
             "title": "Započni uređivanje",
+            "help": "Možeš ponoviti prohod ispočetka ili potražiti više dokumentacije klikom na gumb {button} Pomoć.",
             "save": "Ne zaboravi redovno spremiti tvoje promjene!",
-            "start": "Počni mapirati!"
+            "start": "Počni kartirati!"
         }
     },
     "presets": {
@@ -2176,9 +2230,6 @@
             "highway/turning_circle": {
                 "name": "Površina na kraju ceste za polukružno okretanje"
             },
-            "highway/unclassified": {
-                "name": "Nerazvrstana cesta"
-            },
             "historic": {
                 "name": "Povijesno područje"
             },
@@ -2340,9 +2391,6 @@
             "leisure/slipway": {
                 "name": "Navoz za brodove",
                 "terms": "istezalište"
-            },
-            "leisure/sports_center": {
-                "name": "Sportski centar"
             },
             "leisure/stadium": {
                 "name": "Stadion",

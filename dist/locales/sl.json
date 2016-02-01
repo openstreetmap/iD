@@ -298,8 +298,7 @@
         "view_on_osm": "Ogled na OSM",
         "facebook": "Deli na Facebook-u",
         "twitter": "Deli na Twitter-ju",
-        "google": "Deli na Google+",
-        "help_html": "Your changes should appear in the \\Standard\\ layer in a few minutes. Other layers, and certain features, may take longer\n(<a href='https://help.openstreetmap.org/questions/4705/why-havent-my-changes-appeared-on-the-map' target='_blank'>details</a>).\n"
+        "google": "Deli na Google+"
     },
     "confirm": {
         "okay": "Potrdi"
@@ -2023,10 +2022,6 @@
                 "name": "Obračališče",
                 "terms": "obračalni krog"
             },
-            "highway/unclassified": {
-                "name": "Ostali tipi cest",
-                "terms": "drugi tipi cest"
-            },
             "historic": {
                 "name": "Zgodovinska znamenitost",
                 "terms": "zgodovinsko najdišče"
@@ -2193,10 +2188,6 @@
             "leisure/slipway": {
                 "name": "Rampa",
                 "terms": "rampa za vodna plovila"
-            },
-            "leisure/sports_center": {
-                "name": "Športni center",
-                "terms": "športna dvorana,telovadnica,stadion"
             },
             "leisure/stadium": {
                 "name": "Stadion",

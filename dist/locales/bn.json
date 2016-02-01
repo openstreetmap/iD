@@ -925,9 +925,6 @@
             "highway/trunk": {
                 "name": "ট্রাঙ্ক রোড"
             },
-            "highway/unclassified": {
-                "name": "শ্রেণীবিহীন রাস্তা"
-            },
             "historic": {
                 "name": "ঐতিহাসিক জায়গা"
             },

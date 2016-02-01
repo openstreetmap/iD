@@ -250,7 +250,9 @@
         "warnings": "警告",
         "modified": "已修改",
         "deleted": "已刪除",
-        "created": "已建立"
+        "created": "已建立",
+        "about_changeset_comments": "關於編輯變動",
+        "about_changeset_comments_link": "//wiki.openstreetmap.org/wiki/Good_changeset_comments"
     },
     "contributors": {
         "list": "正顯示 {users} 的編輯",
@@ -289,6 +291,7 @@
         "no_documentation_key": "這個鍵值沒有可用的說明",
         "show_more": "顯示更多",
         "view_on_osm": "在 openstreetmap.org 中檢視",
+        "all_fields": "全部欄位",
         "all_tags": "所有標籤",
         "all_members": "所有成員",
         "all_relations": "所有關係",
@@ -448,7 +451,9 @@
         "facebook": "分享至 Facebook",
         "twitter": "分享至 Twitter",
         "google": "分享至 Google+",
-        "help_html": "您的修改應會在數分鐘內在「標準」圖層中出現。其他圖層和某些物件則可能會花較長時間。\n（<a href='https://help.openstreetmap.org/questions/4705/why-havent-my-changes-appeared-on-the-map' target='_blank'>詳細資料</a>）。\n"
+        "help_html": "你編輯的變動應該過幾分會出現在\"標準圖層\"。其他圖層和特定圖徵，則需要久一點。",
+        "help_link_text": "詳細資料",
+        "help_link_url": "https://wiki.openstreetmap.org/wiki/FAQ#I_have_just_made_some_changes_to_the_map._How_do_I_get_to_see_my_changes.3F"
     },
     "confirm": {
         "okay": "確定",
@@ -1968,6 +1973,10 @@
                 "name": "垃圾筒",
                 "terms": "廢物箱,垃圾箱"
             },
+            "amenity/waste_disposal": {
+                "name": "垃圾場",
+                "terms": "垃圾集中處,垃圾放置點"
+            },
             "amenity/water_point": {
                 "name": "送水車",
                 "terms": "運水車"
@@ -2613,8 +2622,8 @@
                 "terms": "回轉圈"
             },
             "highway/unclassified": {
-                "name": "未分類的道路",
-                "terms": "未分類的道路"
+                "name": "非主要道路",
+                "terms": "非主要道路"
             },
             "historic": {
                 "name": "歷史景點",
@@ -2852,9 +2861,13 @@
                 "name": "船架滑道",
                 "terms": "船架滑道"
             },
-            "leisure/sports_center": {
-                "name": "體育中心/健身室",
-                "terms": "體育中心/健身房"
+            "leisure/sports_centre": {
+                "name": "健身中心 / 健身房",
+                "terms": "健身中心 / 健身房,重訓室"
+            },
+            "leisure/sports_centre/swimming": {
+                "name": "游泳池附屬設施",
+                "terms": "游泳池設施,游池附屬設施,游池設施"
             },
             "leisure/stadium": {
                 "name": "體育場",
@@ -2867,6 +2880,10 @@
             "leisure/track": {
                 "name": "操場(非摩托賽道)",
                 "terms": "賽道(非摩托賽道)"
+            },
+            "leisure/water_park": {
+                "name": "水上樂園",
+                "terms": "水上公園"
             },
             "line": {
                 "name": "線",
@@ -2884,6 +2901,10 @@
                 "name": "防波堤",
                 "terms": "防波堤"
             },
+            "man_made/chimney": {
+                "name": "煙囪",
+                "terms": "煙筒"
+            },
             "man_made/cutline": {
                 "name": "山林分界線",
                 "terms": "山林分界線"
@@ -2895,6 +2916,14 @@
             "man_made/flagpole": {
                 "name": "旗桿",
                 "terms": "旗桿"
+            },
+            "man_made/gasometer": {
+                "name": "煤氣鼓",
+                "terms": "煤氣筒"
+            },
+            "man_made/groyne": {
+                "name": "堤防",
+                "terms": "河堤,海堤"
             },
             "man_made/lighthouse": {
                 "name": "燈塔",
@@ -2928,6 +2957,10 @@
                 "name": "儲油槽",
                 "terms": "存放槽,油罐,儲罐,儲水槽,儲汽槽"
             },
+            "man_made/surveillance": {
+                "name": "監視器",
+                "terms": "監視錄影器"
+            },
             "man_made/survey_point": {
                 "name": "測量點",
                 "terms": "三角點,土地測量點,控制點"
@@ -2951,6 +2984,10 @@
             "man_made/water_works": {
                 "name": "淨水廠",
                 "terms": "水務設施"
+            },
+            "man_made/works": {
+                "name": "工廠",
+                "terms": "工廠"
             },
             "military/airfield": {
                 "name": "軍用機場",

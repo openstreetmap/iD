@@ -858,9 +858,6 @@
             "highway/traffic_signals": {
                 "name": "Trafikklys"
             },
-            "highway/unclassified": {
-                "name": "Uklassifisert vei"
-            },
             "historic": {
                 "name": "Historisk sted"
             },

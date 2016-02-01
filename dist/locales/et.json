@@ -410,8 +410,7 @@
         "view_on_osm": "Vaata OSM lehel",
         "facebook": "Jaga Facebook-is",
         "twitter": "Jaga Twitteris",
-        "google": "Jaga Google+-is",
-        "help_html": "Sinu muudatused peaks \"Standard\" kihile ilmuma mõne minuti pärast. Teiste kihtidega ja teatud objektidega võib kauem aega minna, \n(<a href='https://help.openstreetmap.org/questions/4705/why-havent-my-changes-appeared-on-the-map' target='_blank'>vaata lisaks</a>).\n"
+        "google": "Jaga Google+-is"
     },
     "confirm": {
         "okay": "Korras",
@@ -1168,10 +1167,6 @@
             },
             "highway/turning_circle": {
                 "name": "Ümberpööramiskoht"
-            },
-            "highway/unclassified": {
-                "name": "Olulise tähtsusega kohalik tee",
-                "terms": "Unclassified Road, Klassifitseerimata tee"
             },
             "historic": {
                 "name": "Ajalooline koht"

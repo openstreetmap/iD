@@ -250,7 +250,9 @@
         "warnings": "Warnungen",
         "modified": "Verändert",
         "deleted": "Gelöscht",
-        "created": "Erstellt"
+        "created": "Erstellt",
+        "about_changeset_comments": "Über Changeset Kommentare",
+        "about_changeset_comments_link": "http://wiki.openstreetmap.org/wiki/DE:Good_changeset_comments"
     },
     "contributors": {
         "list": "Bearbeitet von {users}",
@@ -289,6 +291,7 @@
         "no_documentation_key": "Für dieses Schlüsselwort ist keine Dokumentation verfügbar.",
         "show_more": "Mehr zeigen",
         "view_on_osm": "Auf openstreetmap.org ansehen",
+        "all_fields": "Alle Felder",
         "all_tags": "Alle Eigenschaften",
         "all_members": "Alle Mitglieder",
         "all_relations": "Alle Relationen",
@@ -448,7 +451,9 @@
         "facebook": "Auf Facebook teilen",
         "twitter": "Auf Twitter teilen",
         "google": "Auf Google+ teilen",
-        "help_html": "Die Änderungen sollte in der „Standard“-Ebene in wenigen Minuten sichtbar sein. Andere Ebenen und spezielle Features können länger dauern\n(<a href='https://help.openstreetmap.org/questions/10636/warum-werden-meine-anderungen-nicht-angezeigt' target='_blank'>Mehr Informationen</a>).\n"
+        "help_html": "Deine Änderungen sollten im \"Standard\"-Layout in wenigen Minuten erscheinen. Andere Layer und bestimmte Objekte können länger dauern.",
+        "help_link_text": "Details",
+        "help_link_url": "https://wiki.openstreetmap.org/wiki/DE:FAQ#Wann_werden_meine_.C3.84nderungen_auf_den_Karten_gezeigt.3F"
     },
     "confirm": {
         "okay": "OK",
@@ -2618,7 +2623,7 @@
             },
             "highway/unclassified": {
                 "name": "Nebenstraße",
-                "terms": "Unklassifizierte Straße"
+                "terms": "Nebenstraße, niederrangige Straße"
             },
             "historic": {
                 "name": "Historische Stätte",
@@ -2856,9 +2861,13 @@
                 "name": "Slipanlage",
                 "terms": "Gleitbahn, Rampe"
             },
-            "leisure/sports_center": {
-                "name": "Sportzentrum",
-                "terms": "Fitnessstudio, Sportstudio, Trainingszentrum, Aerobicstudio, Sporthalle"
+            "leisure/sports_centre": {
+                "name": "Turnhalle / Fitnessstudio",
+                "terms": "Turnhalle, Finessstudio, Turnsaal"
+            },
+            "leisure/sports_centre/swimming": {
+                "name": "Badeanstalt",
+                "terms": "Badeanstalt, Schwimmbad, Hallenbad"
             },
             "leisure/stadium": {
                 "name": "Stadion",
@@ -2871,6 +2880,10 @@
             "leisure/track": {
                 "name": "Rennbahn (nicht-Motorsport)",
                 "terms": "Rennbahn (Nicht Motorsport),Rennstrecke (Nicht Motorsport)"
+            },
+            "leisure/water_park": {
+                "name": "Erlebnisbad",
+                "terms": "Erlebnisbad, Badeparadies, Freizeitpark, Wasserpark"
             },
             "line": {
                 "name": "Linie",

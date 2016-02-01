@@ -690,9 +690,6 @@
             "highway/turning_circle": {
                 "name": "Apgriešanās riņķis"
             },
-            "highway/unclassified": {
-                "name": "Neklasificēts ceļš"
-            },
             "historic": {
                 "name": "Vēsturiska vieta"
             },

@@ -330,8 +330,7 @@
         "view_on_osm": "Преглед на OSM",
         "facebook": "Подели на Фејсбуку",
         "twitter": "Подели на Твитеру",
-        "google": "Подели на Гугл+",
-        "help_html": "Ваше измене би требало да се појаве у „стандардном“ слоју за неколико минута. За остале слојеви, и још неке могућности, може потрајати дуже (<a href='https://help.openstreetmap.org/questions/4705/why-havent-my-changes-appeared-on-the-map' target='_blank'>детаљи</a>).\n"
+        "google": "Подели на Гугл+"
     },
     "confirm": {
         "okay": "У реду",
@@ -1798,9 +1797,6 @@
             "highway/turning_circle": {
                 "name": "Окретница"
             },
-            "highway/unclassified": {
-                "name": "Некатегорисани пут"
-            },
             "historic": {
                 "name": "Историјско место"
             },
@@ -1938,9 +1934,6 @@
             },
             "leisure/slipway": {
                 "name": "Навоз"
-            },
-            "leisure/sports_center": {
-                "name": "Спортски центар / Теретана"
             },
             "leisure/stadium": {
                 "name": "Стадион"

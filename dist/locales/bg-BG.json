@@ -991,9 +991,6 @@
             "highway/turning_circle": {
                 "name": "Място за обръщане"
             },
-            "highway/unclassified": {
-                "name": "Некласифициран път"
-            },
             "historic": {
                 "name": "Място с историческо значение"
             },

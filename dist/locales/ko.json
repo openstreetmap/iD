@@ -446,8 +446,7 @@
         "view_on_osm": "OSM에서 보기",
         "facebook": "페이스북에 공유",
         "twitter": "트위터에 공유",
-        "google": "Google+에 공유",
-        "help_html": "바뀐 내용은 몇 분이 되면 \"표준\" 레이어에 나타나야 합니다. 다른 레이어와 특정 지물은, 더 오래 걸릴 수 있습니다.\n(<a href='https://help.openstreetmap.org/questions/4705/why-havent-my-changes-appeared-on-the-map' target='_blank'>자세한 정보</a>)\n"
+        "google": "Google+에 공유"
     },
     "confirm": {
         "okay": "확인",
@@ -2000,9 +1999,6 @@
             "highway/turning_circle": {
                 "name": "원 돌기"
             },
-            "highway/unclassified": {
-                "name": "분류하지 않은 도로"
-            },
             "historic": {
                 "name": "사적지"
             },
@@ -2162,9 +2158,6 @@
             },
             "leisure/slipway": {
                 "name": "슬립 웨이"
-            },
-            "leisure/sports_center": {
-                "name": "스포츠 센터 / 체육관"
             },
             "leisure/stadium": {
                 "name": "경기장"

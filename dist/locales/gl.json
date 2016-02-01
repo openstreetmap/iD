@@ -438,8 +438,7 @@
         "view_on_osm": "Ver en OSM",
         "facebook": "Compartir no Facebook",
         "twitter": "Compartir no Twitter",
-        "google": "Compartir no Google+",
-        "help_html": "Os teus cambios deberían aparecer na capa \"Estándar\" nuns minutos. Outras capas, e determinados elementos, poden tardar máis tempo (<a href='https://help.openstreetmap.org/questions/4705/why-havent-my-changes-appeared-on-the-map' target='_blank'>detalles</a>).\n"
+        "google": "Compartir no Google+"
     },
     "confirm": {
         "okay": "Aceptar",
@@ -1259,9 +1258,6 @@
             },
             "highway/turning_circle": {
                 "name": "Círculo de xiro"
-            },
-            "highway/unclassified": {
-                "name": "Vía sen clasificación"
             },
             "historic": {
                 "name": "Lugar histórico"

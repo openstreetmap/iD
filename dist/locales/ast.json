@@ -2224,9 +2224,6 @@
             "highway/turning_circle": {
                 "name": "Vuelta en cai ensin salida"
             },
-            "highway/unclassified": {
-                "name": "Carretera fuera de clasificación"
-            },
             "historic": {
                 "name": "Sitiu históricu"
             },
@@ -2385,9 +2382,6 @@
             },
             "leisure/slipway": {
                 "name": "Rampla de botadura"
-            },
-            "leisure/sports_center": {
-                "name": "Centru deportivu/Ximnasiu"
             },
             "leisure/stadium": {
                 "name": "Estadiu"

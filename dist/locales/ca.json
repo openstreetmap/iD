@@ -447,8 +447,7 @@
         "view_on_osm": "Mostra-ho a OSM",
         "facebook": "Compartiu-ho a Facebook",
         "twitter": "Compartiu-ho al Twitter",
-        "google": "Compartiu-ho a Google+",
-        "help_html": "Els canvis haurien d'aparèixer a la capa \"Estàndard\" en pocs minuts. Altres capes i algunes característiques, poden trigar més temps.\n(<a href='https://help.openstreetmap.org/questions/4705/why-havent-my-changes-appeared-on-the-map'>detalls</a>).\n"
+        "google": "Compartiu-ho a Google+"
     },
     "confirm": {
         "okay": "D'acord",
@@ -511,6 +510,20 @@
         "relations": "# Relacions\n\nUna relació és un tipus especial de característica a l'OpenStreetMap que reuneix altres característiques. Per exemple, dos tipus comuns de relacions són les *relacions de ruta*,\nque reuneixen seccions de carreteres que pertanyen a una autovia o autopista en concret, i els *multipolígons*, que reuneixen diferents línies que defineixen una àrea complexa (amb vàris segments o amb forats, com un donut).\n\nEl grup de característiques en una relació s'anomena *els membres*. A la barra lateral, podeu veure a quines relacions n'és membre una característica, i clicar una relació des d'un membre per seleccionar-la i entrar-hi. Quan seleccioneu i entreu a la relació, podeu veure tots els seus membres llistats a la barra lateral i subratllats al mapa .\n\nLa majoria de vegades, l'iD s'encarregarà de mantenir les relacions automàticament\nmentre editeu. L'única cosa que heu de procurar és de reconnectar la relació si esborreu algun tram de l'original, és a dir si esborreu un tram d'una relació per refer-lo amb més precisió, heu d'incloure el nou tram a la relació, igual que ho era el tram original.\n\n## Edició de les relacions\n\nSi el que voleu és editar relacions, aquí hi han les pautes bàsiques.\n\nPer afegir una característica a una relació, seleccioneu la característica, cliqueu el botó \"+\" a la secció \"Totes les relacions\" de la barra lateral, i seleccioneu o escriviu el nom de la relació.\n\nPer crear una nova relació, seleccioneu la primera característica que n'hauria de ser membre, cliqueu el botó \"+\" a la secció \"Totes les relacions\", i seleccioneu \"Nova relació...\".\n\nPer eliminar una característica d'una relació, seleccioneu la característica i cliqueu el botó de la paperera que es troba al costat de la relació que voleu eliminar.\n\nPodeu crear multipolígons amb forats utilitzant l'eina \"Fusionar\". Dibuixeu dues àrees (la interior i la exterior), mantingueu premuda la tecla Shift i cliqueu a les dues àrees per seleccionar-les alhora, llavors cliqueu el botó \"Fusiona\" (+).\n"
     },
     "intro": {
+        "graph": {
+            "city_hall": "Ajuntament d'Aigüesavall",
+            "fire_department": "Parc de Bombers d'Aigüesavall",
+            "memory_isle_park": "Parc de la paraula viva",
+            "riverwalk_trail": "Camí de l'estany",
+            "w_michigan_ave": "Avinguda Catalunya",
+            "e_michigan_ave": "Carretera de les Nacions Unides",
+            "spring_st": "Carrer Barcelona",
+            "scidmore_park": "Parc de la Pau",
+            "petting_zoo": "Zoològic del parc de la pau",
+            "rocky_river": "Riera d'Aigüesavall",
+            "railroad_dr": "Carrer del Ferrocarril",
+            "conrail_rr": "FGC Llobregat - Anoia"
+        },
         "navigation": {
             "title": "Navegació",
             "drag": "L'àrea del mapa principal us mostra les dades de l'OpenStreetMap a sobre d'un fons. Podeu navegar-hi arrossegant el ratolí, igual que tots els mapes virtuals. **Arrossegueu el mapa!**",
@@ -847,6 +860,9 @@
             },
             "description": {
                 "label": "Descripció"
+            },
+            "dock": {
+                "label": "Tipus"
             },
             "drive_through": {
                 "label": "Via dins una propietat."
@@ -1583,6 +1599,9 @@
                 "name": "Lloguer de bicicletes",
                 "terms": "Lloguer de bicicletes, Servei de lloguer de bicicletes"
             },
+            "amenity/bicycle_repair_station": {
+                "name": "Lloc de reparació de Bicicletes"
+            },
             "amenity/biergarten": {
                 "name": "Biergarten"
             },
@@ -1664,6 +1683,9 @@
                 "name": "Local de menjar ràpid",
                 "terms": "Menjar ràpid, servei de menjar ràpid, restaurant de menjar ràpid, Local de menjar ràpid"
             },
+            "amenity/ferry_terminal": {
+                "name": "Terminal de Ferry"
+            },
             "amenity/fire_station": {
                 "name": "Parc de bombers",
                 "terms": "Caserna de bombers, Base de Bombers, Estació de Bombers"
@@ -1686,6 +1708,9 @@
             "amenity/hospital": {
                 "name": "Hospital",
                 "terms": "Hospital, centre hospitalari, policlínica, clínica, CAP, Centre d'atenció primària, Centre de salut, Centre, Atenció, Primària, Centre d'Atenció Primària."
+            },
+            "amenity/hunting_stand": {
+                "name": "Punt de caça"
             },
             "amenity/kindergarten": {
                 "name": "Centre preescolar"
@@ -1710,6 +1735,9 @@
             },
             "amenity/parking_entrance": {
                 "name": "Entrada de Garatge/Sortida"
+            },
+            "amenity/parking_space": {
+                "name": "Espai d'aparcament"
             },
             "amenity/pharmacy": {
                 "name": "Farmàcia",
@@ -1856,6 +1884,9 @@
             "amenity/waste_basket": {
                 "name": "Paperera",
                 "terms": "Paperera, Basura, Paperera pública, Contenidor, deixalles, brossa"
+            },
+            "amenity/waste_disposal": {
+                "name": "Contenidor d'escombraries"
             },
             "area": {
                 "name": "Àrea",
@@ -2404,8 +2435,7 @@
                 "terms": "Girar 180 graus, Canviar de sentit"
             },
             "highway/unclassified": {
-                "name": "Altres carreteres",
-                "terms": "Carretera municipal"
+                "name": "Carretera local"
             },
             "historic": {
                 "name": "Lloc històric",
@@ -2619,9 +2649,6 @@
                 "name": "Pendent per a embarcacions",
                 "terms": "Varador"
             },
-            "leisure/sports_center": {
-                "name": "Centre d'esports / Gimnàs"
-            },
             "leisure/stadium": {
                 "name": "Estadi",
                 "terms": "Estadi,Camp"
@@ -2648,6 +2675,9 @@
                 "name": "trencaonades",
                 "terms": "Escullera,Espigó,Espatller"
             },
+            "man_made/chimney": {
+                "name": "Xemeneia"
+            },
             "man_made/cutline": {
                 "name": "Línia de tall",
                 "terms": "Línia de tall"
@@ -2657,6 +2687,12 @@
             },
             "man_made/flagpole": {
                 "name": "Màstil"
+            },
+            "man_made/gasometer": {
+                "name": "Gasòmetre"
+            },
+            "man_made/groyne": {
+                "name": "Dic"
             },
             "man_made/lighthouse": {
                 "name": "Far",
@@ -2685,6 +2721,9 @@
             "man_made/storage_tank": {
                 "name": "Dipòsit d'emmagatzematge"
             },
+            "man_made/surveillance": {
+                "name": "Vigilància"
+            },
             "man_made/survey_point": {
                 "name": "Punt referencial",
                 "terms": "Punt de salvació,Punt de salvament,Punt d'evacuació"
@@ -2706,6 +2745,9 @@
             },
             "man_made/water_works": {
                 "name": "Planta potabilitzadora"
+            },
+            "man_made/works": {
+                "name": "Obres"
             },
             "military/airfield": {
                 "name": "Aeròdrom militar"
@@ -3546,6 +3588,9 @@
                 "name": "Via aqüífera",
                 "terms": "Curs fluvial"
             },
+            "waterway/boatyard": {
+                "name": "Dic sec"
+            },
             "waterway/canal": {
                 "name": "Canal ",
                 "terms": "Canal, Sèquia, Séquia"
@@ -3557,6 +3602,9 @@
             "waterway/ditch": {
                 "name": "Séquia",
                 "terms": "Séquia, Sèquia, Rara, Canal, Aigua, Via aqüífera, Torrent, Conducció d'aigua, Aqüífer, Rierol"
+            },
+            "waterway/dock": {
+                "name": "Embarcador"
             },
             "waterway/drain": {
                 "name": "Torrent",
@@ -3579,6 +3627,9 @@
             "waterway/stream": {
                 "name": "Rierol",
                 "terms": "Séquia, rierol, Fil d'aigua, Rajolí, Riuet, Ramal, Reguer, Segla, Canal, Rec, Regueró, Sequiola, Sequió, Cavim."
+            },
+            "waterway/water_point": {
+                "name": "Aigua marina potable"
             },
             "waterway/weir": {
                 "name": "Assut"

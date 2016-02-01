@@ -250,7 +250,9 @@
         "warnings": "警告",
         "modified": "已修改",
         "deleted": "已刪除",
-        "created": "已建立"
+        "created": "已建立",
+        "about_changeset_comments": "有關變動留言",
+        "about_changeset_comments_link": "//wiki.openstreetmap.org/wiki/Good_changeset_comments"
     },
     "contributors": {
         "list": "由{users}編輯",
@@ -289,6 +291,7 @@
         "no_documentation_key": "沒有這個鍵值的相關文件",
         "show_more": "顯示更多",
         "view_on_osm": "在 openstreetmap.org 中檢視",
+        "all_fields": "所有資料",
         "all_tags": "所有標籤",
         "all_members": "所有構件",
         "all_relations": "所有關係",
@@ -448,7 +451,9 @@
         "facebook": "分享至 Facebook",
         "twitter": "分享至 Twitter",
         "google": "分享至 Google+",
-        "help_html": "你的變更會在幾分鐘後出現在標準圖層。其他圖層或某些特徵可能需要多些時間\n(<a href='https://help.openstreetmap.org/questions/4705/why-havent-my-changes-appeared-on-the-map' target='_blank'>詳細資料</a>)。\n"
+        "help_html": "你的變更會在幾分鐘後出現在標準圖層。其他圖層或某些特徵可能需要多些時間。",
+        "help_link_text": "詳細資料",
+        "help_link_url": "https://wiki.openstreetmap.org/wiki/FAQ#I_have_just_made_some_changes_to_the_map._How_do_I_get_to_see_my_changes.3F"
     },
     "confirm": {
         "okay": "確定",
@@ -2609,7 +2614,7 @@
                 "terms": "Trunk Road,幹線道路,幹路,幹道"
             },
             "highway/trunk_link": {
-                "name": "幹線\t連接路",
+                "name": "幹線連接路",
                 "terms": "Trunk Link,幹線道路匝道,幹道連接路,幹道駁路"
             },
             "highway/turning_circle": {
@@ -2617,8 +2622,8 @@
                 "terms": "Turning Circle,回轉圈,迴車場,迴車圓環,車輛迴轉處,車輛迴旋處"
             },
             "highway/unclassified": {
-                "name": "未分類的道路",
-                "terms": "Unclassified Road,未分級的道路,未分類的道路,未歸類之路"
+                "name": "次級道路",
+                "terms": "小路,小規模道路"
             },
             "historic": {
                 "name": "歷史遺跡",
@@ -2856,9 +2861,13 @@
                 "name": "船台",
                 "terms": "Slipway,船排,船架滑道,船臺,滑道,滑台"
             },
-            "leisure/sports_center": {
+            "leisure/sports_centre": {
                 "name": "體育中心 / 健身室",
                 "terms": "體育中心, 健身室, 健身中心, 健身房"
+            },
+            "leisure/sports_centre/swimming": {
+                "name": "游泳池設施",
+                "terms": "游泳池設施,游水池設施"
             },
             "leisure/stadium": {
                 "name": "體育館",
@@ -2871,6 +2880,10 @@
             "leisure/track": {
                 "name": "賽道(非小型賽車)",
                 "terms": "賽道(非小型賽車)"
+            },
+            "leisure/water_park": {
+                "name": "水上樂園",
+                "terms": "水上樂園"
             },
             "line": {
                 "name": "綫",

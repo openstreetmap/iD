@@ -439,8 +439,7 @@
         "view_on_osm": "Lihat di OSM",
         "facebook": "Bagikan di Facebook",
         "twitter": "Bagikan di Twitter",
-        "google": "Bagikan di Google+",
-        "help_html": "Perubahan yang anda buat seharusnya akan muncul di layer \"Standar\" dalam beberapa menit. Layer lain dan fitur tertentu, mungkin akan membutuhkan waktu lama\n(<a href='https://help.openstreetmap.org/questions/4705/why-havent-my-changes-appeared-on-the-map' target='_blank'>Penjelasan lebih lanjut</a>).\n"
+        "google": "Bagikan di Google+"
     },
     "confirm": {
         "okay": "Baiklah",
@@ -1944,10 +1943,6 @@
                 "name": "Putaran",
                 "terms": "Putar Balik"
             },
-            "highway/unclassified": {
-                "name": "Jalan Tak Diklasifikasi",
-                "terms": "Jalan Tanpa Jenis"
-            },
             "historic": {
                 "name": "Situs Bersejarah",
                 "terms": "Situs Sejarah"
@@ -2154,9 +2149,6 @@
             },
             "leisure/running_track": {
                 "name": "Lintasan Lari"
-            },
-            "leisure/sports_center": {
-                "name": "Pusat Olahraga / Gym"
             },
             "leisure/stadium": {
                 "name": "Stadion",

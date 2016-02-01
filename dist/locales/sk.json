@@ -447,8 +447,7 @@
         "view_on_osm": "Zobraz na OSM",
         "facebook": "Zdieľaj na Facebooku",
         "twitter": "Zdieľaj na Twitteri",
-        "google": "Zdieľaj na Google+",
-        "help_html": "Vaše zmeny by sa mali objaviť na \"Základnej\" vrstve v priebehu niekoľkých minút. Ostatným vrstvám a niektorým objektom to môže trvať dlhšie\n(<a href='https://help.openstreetmap.org/questions/4705/why-havent-my-changes-appeared-on-the-map' target='_blank'>detaily</a>).\n"
+        "google": "Zdieľaj na Google+"
     },
     "confirm": {
         "okay": "OK",
@@ -2563,10 +2562,6 @@
                 "name": "Otáčací kruh",
                 "terms": "otacaci kruh,kruh,otoc,otoč"
             },
-            "highway/unclassified": {
-                "name": "Neklasifikovaná cesta",
-                "terms": "neklasifikovana cesta"
-            },
             "historic": {
                 "name": "Historické miesto",
                 "terms": "historicke miesto,hrad,pevnosť,pevnost,kaštieľ,kastiel,zámok,zamok,rujna,hradisko,archeologické miesto,archeologicke miesto"
@@ -2802,10 +2797,6 @@
             "leisure/slipway": {
                 "name": "Spúšťanie lodí",
                 "terms": "Spustanie lodi,dok,lodenica,klzacka,kĺzačka"
-            },
-            "leisure/sports_center": {
-                "name": "Športové centrum",
-                "terms": "sportove centrum,fitko,fitness centrum,posilňovňa,posilnovna,posilovna,polovňa"
             },
             "leisure/stadium": {
                 "name": "Štadión",

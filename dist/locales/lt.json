@@ -439,8 +439,7 @@
         "view_on_osm": "Žiūrėti OSM žemėlapyje",
         "facebook": "Pasidalinti Facebook'e",
         "twitter": "Pasidalinti Twitter'yje",
-        "google": "Pasidalinti Google+",
-        "help_html": "Jūsų pakeitimai turėtų pasirodyti „Standartiniame“ sluoksnyje po kelių minučių. Kiti sluoksniai ar konkretūs objektai gali pasirodyti vėliau\n(<a href='https://help.openstreetmap.org/questions/4705/why-havent-my-changes-appeared-on-the-map' target='_blank'>daugiau informacijos</a>).\n"
+        "google": "Pasidalinti Google+"
     },
     "confirm": {
         "okay": "Gerai",
@@ -2143,10 +2142,6 @@
             "highway/turning_circle": {
                 "name": "Apsisukimo žiedas"
             },
-            "highway/unclassified": {
-                "name": "Neklasifikuotas kelias",
-                "terms": "neklasifikuotas kelias"
-            },
             "historic": {
                 "name": "Istorinė vietovė",
                 "terms": "istorinė vieta"
@@ -2340,9 +2335,6 @@
             "leisure/running_track": {
                 "name": "Bėgimo takelis",
                 "terms": "bėgimo takelis"
-            },
-            "leisure/sports_center": {
-                "name": "Sportas centras / Treniruoklių salė"
             },
             "leisure/stadium": {
                 "name": "Stadionas",

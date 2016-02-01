@@ -447,8 +447,7 @@
         "view_on_osm": "Ver no OSM",
         "facebook": "Compartilhar no Facebook",
         "twitter": "Compartilhar no Twitter",
-        "google": "Compartilhar Google+",
-        "help_html": "Suas mudanças devem aparecer na camada \"Padrão\" do OSM em poucos minutos. Outras camadas e certos elementos podem demorar mais\n(<a href='https://help.openstreetmap.org/questions/4705/why-havent-my-changes-appeared-on-the-map' target='_blank'>detalhes</a>).\n"
+        "google": "Compartilhar Google+"
     },
     "confirm": {
         "okay": "O.K.",
@@ -515,16 +514,27 @@
             "title": "Navegação",
             "drag": "A área principal do mapa mostra os dados do OpenStreetMap sobre um fundo (uma imagem aérea, normalmente). Você pode navegar arrastando ou usando a roda do mouse, do mesmo jeito que em qualquer mapa online. **Arraste o mapa!**",
             "select": "Os elementos do mapa são representados de três formas: pontos, linhas ou áreas. Todos os elementos podem ser selecionados clicando neles. **Clique no ponto e selecione-o.**",
-            "pane": "Quando uma feição é selecionada, o editor de feições é exibido. O cabeçalho nos mostra o tipo de feição e o painel principal exibe os atributos da feição, como nome e endereço. **Feche o editor de feições pressionando o botão {button} no canto superior direito."
+            "pane": "Quando uma feição é selecionada, o editor de feições é exibido. O cabeçalho nos mostra o tipo de feição e o painel principal exibe os atributos da feição, como nome e endereço. **Feche o editor de feições pressionando o botão {button} no canto superior direito.",
+            "search": "Você também pode procurar por funcionalidades na vista atual, ou pelo mundo todo. **Procurar por '{name}'**",
+            "choose": "**Escolha {name} da lista para selecioná-lo.**",
+            "chosen": "Ótimo! {name} agora está selecionado. **Feche o editor de características pressionando o botão {button}.**"
         },
         "points": {
             "title": "Pontos",
+            "add": "Pontos podem ser usados para representar elementos como lojas, restaurantes e monumentos. Eles marcam uma localização específica, e descrevem o que há lá. **Clique no {button} botão de Ponto para adicionar um novo ponto.**",
+            "place": "O ponto pode ser posicionado clicando-se no mapa. **Clique no mapa para posicionar o novo ponto em cima do edifício.**",
             "search": "Existem muitos elementos diferentes que podem ser representados por pontos. O ponto que você acabou de adicionar é uma Cafeteria. **Procure por '{name}'**",
             "choose": "**Escolha \"Cafeteria\" na lista.**",
-            "describe": "O ponto agora está marcado como uma cafeteria. Usando o editor de elemento, podemos adicionar mais informações sobre ele. **Adicione um nome**"
+            "describe": "O ponto agora está marcado como uma cafeteria. Usando o editor de elemento, podemos adicionar mais informações sobre ele. **Adicione um nome**",
+            "close": "O editor de elementos irá recordar automaticamente todas as suas modificações. Quando você muda um elemento, o botão fechar irá mudar para um sinal de verificação. **Clique no botão {button} para fechar o editor de elementos**",
+            "reselect": "Frequentemente pontos já irão existir, mas contendo enganos ou estando incompletos. Nós podemos editar pontos existentes. **Clique para selecionar o ponto que você acabou de criar.**",
+            "fixname": "**Mude o nome, depois clique no botão {button} para fechar o editor de elementos.**",
+            "reselect_delete": "Todos os elementos no mapa podem ser apagados. **Clique para selecionar o ponto que você criou.**",
+            "delete": "O menu em volta do ponto contém funções que podem ser utilizadas nele, incluindo apagar. **Clique no botão {button} para apagar o ponto.**"
         },
         "areas": {
             "title": "Áreas",
+            "add": "Áreas são usadas para mostrar os limites dos elementos como lagos, edifícios e áreas residenciais. Elas também podem ser usadas para o mapeamento mais detalhado de muitos elementos que você normalmente mapearia como pontos. **Clique no botão Área {button} para adicionar uma nova área.**",
             "place": "Coloque mais pontos para desenhar o resto da área. Para terminar, complete a área clicando de novo no primeiro ponto. **Desenhar a área do parquinho.**",
             "search": "**Procurar por '{name}'.**",
             "choose": "**Escolha o item \"Parque infantil\" da lista.**"
@@ -834,6 +844,12 @@
             },
             "description": {
                 "label": "Descrição"
+            },
+            "diaper": {
+                "label": "Troca de Fraldas Disponível"
+            },
+            "dock": {
+                "label": "Tipo"
             },
             "drive_through": {
                 "label": "Drive-Thru"
@@ -2509,10 +2525,6 @@
                 "name": "Balão de Retorno",
                 "terms": "Balão de Retorno"
             },
-            "highway/unclassified": {
-                "name": "Via Não Classificada",
-                "terms": "Via Sem Classificação"
-            },
             "historic": {
                 "name": "Local Histórico",
                 "terms": "Lugar Histórico"
@@ -2745,10 +2757,6 @@
             "leisure/slipway": {
                 "name": "Rampa Náutica",
                 "terms": "Rampa Náutica"
-            },
-            "leisure/sports_center": {
-                "name": "Centro Esportivo / Academia",
-                "terms": "Ginásio de Esportes, Ginásio Poliesportivo, Academia, Esportes"
             },
             "leisure/stadium": {
                 "name": "Estádio",

@@ -250,7 +250,9 @@
         "warnings": "Cảnh báo",
         "modified": "Đã Thay đổi",
         "deleted": "Đã Xóa",
-        "created": "Đã Tạo"
+        "created": "Đã Tạo",
+        "about_changeset_comments": "Nên tóm lược sửa đổi như thế nào?",
+        "about_changeset_comments_link": "//wiki.openstreetmap.org/wiki/Good_changeset_comments?setlang=vi"
     },
     "contributors": {
         "list": "Đóng góp bởi {users}",
@@ -289,6 +291,7 @@
         "no_documentation_key": "Không có tài liệu về chìa khóa này",
         "show_more": "Xem thêm",
         "view_on_osm": "Xem tại openstreetmap.org",
+        "all_fields": "Các chi tiết thường gặp",
         "all_tags": "Tất cả các thẻ",
         "all_members": "Tất cả các thành viên",
         "all_relations": "Tất cả các quan hệ",
@@ -448,7 +451,9 @@
         "facebook": "Chia sẻ trên Facebook",
         "twitter": "Chia sẻ trên Twitter",
         "google": "Chia sẻ trên Google+",
-        "help_html": "Các thay đổi của bạn sẽ xuất hiện trên lớp “Chuẩn” trong vòng vài phút. Một số lớp và tính năng khác có thể được cập nhật chậm hơn \n(<a href='https://help.openstreetmap.org/questions/4705/why-havent-my-changes-appeared-on-the-map' target='_blank'>chi tiết</a>).\n"
+        "help_html": "Các thay đổi của bạn sẽ xuất hiện trên lớp “Chuẩn” trong vòng vài phút. Một số lớp và tính năng khác có thể được cập nhật chậm hơn.",
+        "help_link_text": "Chi tiết",
+        "help_link_url": "https://wiki.openstreetmap.org/wiki/Vi:FAQ?setlang=vi#T.C3.B4i_v.E1.BB.ABa_thay_.C4.91.E1.BB.95i_b.E1.BA.A3n_.C4.91.E1.BB.93._L.C3.A0m_sao_xem_.C4.91.C6.B0.E1.BB.A3c_c.C3.A1c_thay_.C4.91.E1.BB.95i_c.E1.BB.A7a_t.C3.B4i.3F"
     },
     "confirm": {
         "okay": "OK",
@@ -1968,6 +1973,10 @@
                 "name": "Thùng rác",
                 "terms": "thùng rác, sọt rác, thung rac, sot rac"
             },
+            "amenity/waste_disposal": {
+                "name": "Thùng Rác Lớn",
+                "terms": "thùng rác lớn, thùng rác công nghiệp, thung rac lon, thung rac cong nghiep"
+            },
             "amenity/water_point": {
                 "name": "Vòi Nước uống dành cho Nhà lưu động",
                 "terms": "vòi nước uống dành cho nhà lưu động, máy nước uống dành cho nhà lưu động, trạm nước uống dành cho nhà lưu động, voi nuoc uong danh cho nha luu dong, may nuoc uong danh cho nha luu dong, tram nuoc uong danh cho nha luu dong"
@@ -2852,9 +2861,13 @@
                 "name": "Đường Trượt tàu",
                 "terms": "đường trượt tàu, duong truot tau"
             },
-            "leisure/sports_center": {
+            "leisure/sports_centre": {
                 "name": "Trung tâm Thể dục Thể thao",
-                "terms": "trung tâm thể thao, trung tâm thể dục, tòa nhà thể thao, toà nhà thể thao, tòa nhà thể dục, toà nhà thể dục, trung tâm bơi lội, trung tâm spa, trung tâm thể dục, sân vận động trong nhà, SVĐ trong nhà, trung tam the thao, trung tam theo duc, toa nha the thao, toa nha the duc, trung tam boi loi, trung tam spa, trung tam the duc, san van dong trong nha, svd trong nha"
+                "terms": "trung tâm thể thao, trung tâm thể dục, tòa nhà thể thao, toà nhà thể thao, tòa nhà thể dục, toà nhà thể dục, trung tâm thể dục, sân vận động trong nhà, SVĐ trong nhà, trung tam the thao, trung tam theo duc, toa nha the thao, toa nha the duc, trung tam the duc, san van dong trong nha, svd trong nha"
+            },
+            "leisure/sports_centre/swimming": {
+                "name": "Trung tâm Bơi lội",
+                "terms": "trung tâm bơi lội, trung tâm spa, trung tam boi loi, trung tam spa"
             },
             "leisure/stadium": {
                 "name": "Sân vận động",
@@ -2867,6 +2880,10 @@
             "leisure/track": {
                 "name": "Đường Đua (Không phải Ô tô)",
                 "terms": "đường đua, trường đua, đường đua ngựa, đường đua xe đạp, duong dua, truong dua, duong dua ngua, duong dua xe dap"
+            },
+            "leisure/water_park": {
+                "name": "Công viên Nước",
+                "terms": "công viên nước, công viên chơi nước, cong vien nuoc, cong vien choi nuoc"
             },
             "line": {
                 "name": "Đường kẻ",
@@ -2884,6 +2901,10 @@
                 "name": "Đê Chắn Sóng",
                 "terms": "đê chắn sóng, de chan song"
             },
+            "man_made/chimney": {
+                "name": "Ống khói",
+                "terms": "ống khói, lò sưởi, ong khoi, lo suoi"
+            },
             "man_made/cutline": {
                 "name": "Vành đai Chặt cây",
                 "terms": "vành đai chặt cây, hàng cây chặt, vanh dai chat cay, hang cay chat"
@@ -2895,6 +2916,14 @@
             "man_made/flagpole": {
                 "name": "Cột cờ",
                 "terms": "cột cờ, kỳ đài, kì đài, cot co, ky dai, ki dai"
+            },
+            "man_made/gasometer": {
+                "name": "Bể Khí",
+                "terms": "bể khí, bể chứa khí, bể đựng khí, thùng chứa khí, thùng đựng khí, be khi, be chua khi, be dung khi, thung chua khi, thung dung khi"
+            },
+            "man_made/groyne": {
+                "name": "Đê Chắn Sóng",
+                "terms": "đê chắn sóng, đập chắn sóng, êpi, ê-pi, đê biển, de chan song, dap chan song, epi, e-pi"
             },
             "man_made/lighthouse": {
                 "name": "Hải đăng",
@@ -2928,6 +2957,10 @@
                 "name": "Thùng Chứa",
                 "terms": "thùng chứa, bể chứa, bình chứa, xi-téc, xi-tẹc, bể nước, thung chua, be chua, binh chua, xi-tec, be nuoc"
             },
+            "man_made/surveillance": {
+                "name": "Camera Giám sát",
+                "terms": "camera giám sát, máy ảnh giám sát, giám sát, camera giam sat, may anh giam sat, giám sát"
+            },
             "man_made/survey_point": {
                 "name": "Điểm Khảo sát",
                 "terms": "điểm khảo sát, diem khao sat"
@@ -2951,6 +2984,10 @@
             "man_made/water_works": {
                 "name": "Nhà máy Nước",
                 "terms": "nhà máy nước, nha may nuoc"
+            },
+            "man_made/works": {
+                "name": "Nhà máy",
+                "terms": "nhà máy, hãng, xưởng, nha may, hang, xuong"
             },
             "military/airfield": {
                 "name": "Căn cứ Không quân",

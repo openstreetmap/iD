@@ -447,8 +447,7 @@
         "view_on_osm": "詳細情報確認",
         "facebook": "Facebookでシェア",
         "twitter": "Twitterでシェア",
-        "google": "Google+でシェア",
-        "help_html": "あなたが投稿した内容は数分で\"標準\"レイヤーに反映されます。その他のレイヤーへの適用や、記述した地物によっては反映にさらに時間がかかる場合があります。\n(<a href='https://help.openstreetmap.org/questions/4705/why-havent-my-changes-appeared-on-the-map'>詳細</a>)\n"
+        "google": "Google+でシェア"
     },
     "confirm": {
         "okay": "OK",
@@ -2580,10 +2579,6 @@
                 "name": "転回場",
                 "terms": "転回場, 車回し"
             },
-            "highway/unclassified": {
-                "name": "一般道（2車線未満）",
-                "terms": "一般道（2車線未満）"
-            },
             "historic": {
                 "name": "史跡",
                 "terms": "史跡, 歴史的建造物"
@@ -2819,10 +2814,6 @@
             "leisure/slipway": {
                 "name": "進水路",
                 "terms": "進水路, スリップウェイ"
-            },
-            "leisure/sports_center": {
-                "name": "スポーツセンター／ジム",
-                "terms": "スポーツセンター, ジム, フィットネスクラブ"
             },
             "leisure/stadium": {
                 "name": "スタジアム",

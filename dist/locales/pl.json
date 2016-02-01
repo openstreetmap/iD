@@ -437,8 +437,7 @@
         "view_on_osm": "Zobacz na OSM",
         "facebook": "Podziel się na Facebooku",
         "twitter": "Podziel się na Twitterze",
-        "google": "Podziel się na Google+",
-        "help_html": "Twoje zmiany powinny się pojawić w przeciągu kilku minut na standardowej warstwie mapy. Odświeżenie innych warstw może potrwać nieco dłużej (<a href='https://help.openstreetmap.org/questions/4705/why-havent-my-changes-appeared-on-the-map'>szczegóły</a>).\n"
+        "google": "Podziel się na Google+"
     },
     "confirm": {
         "okay": "Okej",
@@ -609,7 +608,7 @@
             "address": {
                 "label": "Adres",
                 "placeholders": {
-                    "city": "Miasto",
+                    "city": "Miasto (nie poczta)",
                     "conscriptionnumber": "123",
                     "country": "Kraj",
                     "district": "Dystrykt",
@@ -1602,6 +1601,9 @@
             "amenity/parking_entrance": {
                 "name": "Wjazd/wyjazd z parkingu/garażu"
             },
+            "amenity/parking_space": {
+                "name": "Miejsce parkingowe (pojedyncze)"
+            },
             "amenity/pharmacy": {
                 "name": "Apteka",
                 "terms": "apteka,leki"
@@ -1703,6 +1705,18 @@
             "amenity/university": {
                 "name": "Teren uczelni wyższej",
                 "terms": "teren uniwersytetu,teren akademii,teren politechniki"
+            },
+            "amenity/vending_machine/condoms": {
+                "name": "Automat z prezerwatywami"
+            },
+            "amenity/vending_machine/drinks": {
+                "name": "Automat z napojami"
+            },
+            "amenity/vending_machine/news_papers": {
+                "name": "Automat z gazetami"
+            },
+            "amenity/vending_machine/sweets": {
+                "name": "Automat z przekąskami"
             },
             "amenity/veterinary": {
                 "name": "Weterynarz",
@@ -2096,6 +2110,12 @@
                 "name": "Przystanek autobusowy",
                 "terms": "przystanek,stacja,postój"
             },
+            "highway/corridor": {
+                "name": "Korytarz (w budynku)"
+            },
+            "highway/crossing": {
+                "name": "Przejście dla pieszych"
+            },
             "highway/crosswalk": {
                 "name": "Przejście dla pieszych"
             },
@@ -2225,10 +2245,6 @@
                 "name": "Miejsce do zawracania",
                 "terms": "miejsce,zawracania,zawracanie"
             },
-            "highway/unclassified": {
-                "name": "Droga czwartorzędna",
-                "terms": "droga,czwartorzędna"
-            },
             "historic": {
                 "name": "Miejsce historyczne",
                 "terms": "miejsce,historyczne,historia,zwiedzanie"
@@ -2270,6 +2286,9 @@
             },
             "landuse": {
                 "name": "Zagospodarowanie terenu"
+            },
+            "landuse/allotments": {
+                "name": "Ogródki działkowe"
             },
             "landuse/basin": {
                 "name": "Zbiornik wodny",
@@ -2421,9 +2440,6 @@
                 "name": "Pochylnia okrętowa",
                 "terms": "pochylnia"
             },
-            "leisure/sports_center": {
-                "name": "Centrum sportowe"
-            },
             "leisure/stadium": {
                 "name": "Stadion",
                 "terms": "stadion"
@@ -2457,6 +2473,9 @@
             "man_made/flagpole": {
                 "name": "Maszt flagowy"
             },
+            "man_made/groyne": {
+                "name": "Ostroga brzegowa"
+            },
             "man_made/lighthouse": {
                 "name": "Latarnia morska",
                 "terms": "latarnia"
@@ -2465,12 +2484,18 @@
                 "name": "Wieża obserwacyjna",
                 "terms": "wieża obserwacyjna"
             },
+            "man_made/petroleum_well": {
+                "name": "Szyb naftowy"
+            },
             "man_made/pier": {
                 "name": "Molo",
                 "terms": "pomost"
             },
             "man_made/pipeline": {
                 "name": "Rurociąg"
+            },
+            "man_made/silo": {
+                "name": "Silos"
             },
             "man_made/survey_point": {
                 "name": "Punkt geodezyjny"
@@ -2502,6 +2527,9 @@
             },
             "military/bunker": {
                 "name": "Bunkier"
+            },
+            "military/checkpoint": {
+                "name": "Wojskowy punkt kontrolny"
             },
             "military/range": {
                 "name": "Poligon wojskowy"
@@ -2740,7 +2768,8 @@
                 "name": "Wieża wysokiego napięcia"
             },
             "power/transformer": {
-                "name": "Transformator"
+                "name": "Transformator",
+                "terms": "transformator"
             },
             "public_transport/platform": {
                 "name": "Miejsce oczekiwania"
@@ -2774,10 +2803,12 @@
                 "terms": "Kolej jednoszynowa"
             },
             "railway/narrow_gauge": {
-                "name": "Linia kolejowa wąskotorowa"
+                "name": "Linia kolejowa wąskotorowa",
+                "terms": "kolej wąskotorowa"
             },
             "railway/platform": {
-                "name": "Peron kolejowy"
+                "name": "Peron kolejowy",
+                "terms": "peron kolejowy"
             },
             "railway/rail": {
                 "name": "Tor"
@@ -2843,7 +2874,8 @@
                 "terms": "kosmetyczka, wizaż"
             },
             "shop/bed": {
-                "name": "Sklep z łóżkami/materacami"
+                "name": "Sklep z łóżkami/materacami",
+                "terms": "materace"
             },
             "shop/beverages": {
                 "name": "Sklep z napojami"
@@ -2887,7 +2919,8 @@
                 "terms": "wykładzina"
             },
             "shop/cheese": {
-                "name": "Sklep z serami"
+                "name": "Sklep z serami",
+                "terms": "sery"
             },
             "shop/chemist": {
                 "name": "Drogeria",
@@ -2910,14 +2943,15 @@
             },
             "shop/convenience": {
                 "name": "Sklep ogólnospożywczy",
-                "terms": "mały sklep, sklepik osiedlowy,spożywczak,żabka,freshmarket"
+                "terms": "mały sklep, sklepik osiedlowy,spożywczak,żabka,freshmarket, sklep osiedlowy, sklep spożywczy"
             },
             "shop/copyshop": {
                 "name": "Punkt ksero",
                 "terms": "kopiowanie"
             },
             "shop/cosmetics": {
-                "name": "Sklep z kosmetykami"
+                "name": "Sklep z kosmetykami",
+                "terms": "kosmetyki,drogeria"
             },
             "shop/curtain": {
                 "name": "Sklep z zasłonami"
@@ -2930,7 +2964,8 @@
                 "name": "Delikatesy"
             },
             "shop/department_store": {
-                "name": "Dom towarowy"
+                "name": "Dom towarowy",
+                "terms": "dom towarowy,dom handlowy"
             },
             "shop/doityourself": {
                 "name": "Sklep dla majsterkowiczów",
@@ -2980,7 +3015,8 @@
                 "terms": "sklep meblowy,meble"
             },
             "shop/garden_centre": {
-                "name": "Centrum ogrodnicze"
+                "name": "Centrum ogrodnicze",
+                "terms": "ogrodniczy"
             },
             "shop/gift": {
                 "name": "Sklep z pamiątkami",
@@ -3009,7 +3045,7 @@
             },
             "shop/houseware": {
                 "name": "Sklep z małymi artykułami gospodarstwa domowego",
-                "terms": "sztućce, garnki, artykuły kuchenne"
+                "terms": "sztućce, garnki, artykuły kuchenne, małe agd"
             },
             "shop/interior_decoration": {
                 "name": "Sklep z dekoracją wnętrz"
@@ -3095,7 +3131,8 @@
                 "name": "sklep fotograficzny"
             },
             "shop/pyrotechnics": {
-                "name": "Sklep z ogniami sztucznymi"
+                "name": "Sklep z ogniami sztucznymi",
+                "terms": "fajerwerki"
             },
             "shop/religion": {
                 "name": "Sklep z dewocjonaliami"
@@ -3104,14 +3141,16 @@
                 "name": "Sklep nurkowy"
             },
             "shop/seafood": {
-                "name": "Sklep z owocami morza"
+                "name": "Sklep z owocami morza",
+                "terms": "ryby"
             },
             "shop/second_hand": {
                 "name": "Sklep z rzeczami używanymi",
                 "terms": "second hand, komis"
             },
             "shop/shoes": {
-                "name": "Sklep obuwniczy"
+                "name": "Sklep obuwniczy",
+                "terms": "buty,obuwie"
             },
             "shop/sports": {
                 "name": "Sklep sportowy"
@@ -3149,7 +3188,8 @@
                 "terms": "Biuro podróży, "
             },
             "shop/tyres": {
-                "name": "Sklep z oponami"
+                "name": "Sklep z oponami",
+                "terms": "wulkanizator,wulkanizacja,opony"
             },
             "shop/vacant": {
                 "name": "Pusty lokal sklepowy"
@@ -3173,7 +3213,7 @@
                 "name": "Sklep z żaluzjami/roletami"
             },
             "shop/wine": {
-                "name": "Winiarnia",
+                "name": "Sklep z winami",
                 "terms": "Winiarnia"
             },
             "tourism": {
@@ -3328,7 +3368,8 @@
                 "name": "Trasa pociągów"
             },
             "type/route/tram": {
-                "name": "Trasa tramwajowa"
+                "name": "Trasa tramwajowa",
+                "terms": "linia tramwajowa,trasa tramwajowa"
             },
             "type/route_master": {
                 "name": "Trasa główna"

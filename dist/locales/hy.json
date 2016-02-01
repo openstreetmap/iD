@@ -445,8 +445,7 @@
         "view_on_osm": "Դիտել ՕՍՄ֊ում։",
         "facebook": "Տարածել Ֆեյսբուքում",
         "twitter": "Տարածել Թուիթերում",
-        "google": "Տարածել Գուգլ+֊ում",
-        "help_html": "Փոփոխութիւններդ պէտք է յայտնուել «Ստանդարտ» շերտում մի քանի րոպէից։ Այլ շերտերը, եւ որոշակի յատկութիւնները կարող է աւելի երկար տեւեն։\n(<a href='https://help.openstreetmap.org/questions/4705/why-havent-my-changes-appeared-on-the-map' target='_blank'>details</a>).\n"
+        "google": "Տարածել Գուգլ+֊ում"
     },
     "confirm": {
         "okay": "Լաւ",

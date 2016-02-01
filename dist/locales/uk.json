@@ -447,8 +447,7 @@
         "view_on_osm": "Подивитись в OSM",
         "facebook": "Поділитись у Facebook",
         "twitter": "Поділитись у Twitter",
-        "google": "Поділитись у Google+",
-        "help_html": "Ваші зміни повинні з’явитись в «Стандартному» шарі за кілька хвилин. \nЗміни інших шарів та об’єктів можуть відбуватись довше (<a href='https://help.openstreetmap.org/questions/4705/why-havent-my-changes-appeared-on-the-map' target='_blank'>докладніше англійською</a>).\n"
+        "google": "Поділитись у Google+"
     },
     "confirm": {
         "okay": "Готово",
@@ -1968,6 +1967,10 @@
                 "name": "Бак для сміття",
                 "terms": "Waste Basket, fr lkz cvsnnz, кошик для сміття, сміття"
             },
+            "amenity/waste_disposal": {
+                "name": "Контейнер для сміття",
+                "terms": "контейнер,сміття,відходи,комунальні служби,вивіз сміття"
+            },
             "amenity/water_point": {
                 "name": "Заправка питною водою",
                 "terms": "вода,заправка,потяг,кемпінг,табір"
@@ -2613,8 +2616,8 @@
                 "terms": "Turning Circle, vscwt lkz hjdjhjne, місце для розвороту"
             },
             "highway/unclassified": {
-                "name": "Не має класифікації",
-                "terms": "Unclassified Road, ytvf rkfcbasrfws, немає класифікації"
+                "name": "Некласифікована дорога",
+                "terms": "дорога,некласифікована,сільска,промислова,загальна"
             },
             "historic": {
                 "name": "Історичні місця",
@@ -2852,10 +2855,6 @@
                 "name": "Стапель",
                 "terms": "Slipway, cnfgtkm, стапель"
             },
-            "leisure/sports_center": {
-                "name": "Спортивний центр / Спортзал",
-                "terms": "тренажери, зал, спортивний центр, спорт"
-            },
             "leisure/stadium": {
                 "name": "Стадіон",
                 "terms": "Stadium, cnflsjy, стадіон"
@@ -2884,6 +2883,10 @@
                 "name": "Хвилеріз",
                 "terms": "Breakwater, dbkthsp, хвилеріз"
             },
+            "man_made/chimney": {
+                "name": "Димохід",
+                "terms": "труба,дим,димохід,викиди"
+            },
             "man_made/cutline": {
                 "name": "Просіка",
                 "terms": "Cut line, ghjcsrf, просіка"
@@ -2895,6 +2898,14 @@
             "man_made/flagpole": {
                 "name": "Флагшток",
                 "terms": "флагшток"
+            },
+            "man_made/gasometer": {
+                "name": "Газгольдер",
+                "terms": "газгольдер,резервуар"
+            },
+            "man_made/groyne": {
+                "name": "Хвилеріз",
+                "terms": "хвилі,споруда,захист,пляж,бухта"
             },
             "man_made/lighthouse": {
                 "name": "Маяк",
@@ -2928,6 +2939,10 @@
                 "name": "Резервуар",
                 "terms": "water,oil,gas,petrol,вода,нафта,газ,бензин"
             },
+            "man_made/surveillance": {
+                "name": "Камера відео-спостереження",
+                "terms": "камера,спостереження,швидкість"
+            },
             "man_made/survey_point": {
                 "name": "Геодезичний пункт",
                 "terms": "Survey Point, utjltpbxybq geyrn, місце спостереження"
@@ -2951,6 +2966,10 @@
             "man_made/water_works": {
                 "name": "Водозабір",
                 "terms": "Water Works, djljpfsh, водозабір"
+            },
+            "man_made/works": {
+                "name": "Завод",
+                "terms": "завод,підприємство,фабрика,виробництво"
             },
             "military/airfield": {
                 "name": "Аеродром",

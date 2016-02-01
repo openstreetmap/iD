@@ -250,7 +250,9 @@
         "warnings": "Waarschuwingen",
         "modified": "Aangepast",
         "deleted": "Verwijderd",
-        "created": "Aangemaakt"
+        "created": "Aangemaakt",
+        "about_changeset_comments": "Over opmerking bij wijzigingen",
+        "about_changeset_comments_link": "//wiki.openstreetmap.org/wiki/NL:Good_changeset_comments"
     },
     "contributors": {
         "list": "Aanpassingen door {users}",
@@ -289,6 +291,7 @@
         "no_documentation_key": "Er is geen documentatie beschikbaar voor deze categorie",
         "show_more": "Toon Meer",
         "view_on_osm": "Toon op openstreetmap.org",
+        "all_fields": "Alle velden",
         "all_tags": "Alle tags",
         "all_members": "Alle leden",
         "all_relations": "Alle relaties",
@@ -448,7 +451,9 @@
         "facebook": "Deel op Facebook",
         "twitter": "Deel op Twitter",
         "google": "Deel op Google+",
-        "help_html": "Je wijzigingen zouden binnen enkele minuten zichtbaar moeten zijn in de \n\"Standaard\"-laag. Andere lagen, en sommige kenmerken, kunnen langer duren\n(<a href='https://help.openstreetmap.org/questions/4705/why-havent-my-changes-appeared-on-the-map' target='_blank'>meer informatie hierover, in het Engels</a>).\n"
+        "help_html": "Je wijzigingen zouden binnen enkele minuten zichtbaar moeten zijn in de \"Standaard\"-laag. Andere lagen, en sommige kenmerken, kunnen langer duren.",
+        "help_link_text": "Meer hierover, in het Engels",
+        "help_link_url": "https://wiki.openstreetmap.org/wiki/FAQ#I_have_just_made_some_changes_to_the_map._How_do_I_get_to_see_my_changes.3F"
     },
     "confirm": {
         "okay": "OK",
@@ -2538,7 +2543,8 @@
                 "name": "Keerplein"
             },
             "highway/unclassified": {
-                "name": "Ongeclassificeerde weg"
+                "name": "Kleine weg",
+                "terms": "ongeclassificeerde weg,niet-geclassificeerde weg"
             },
             "historic": {
                 "name": "Geschiedskundige plaats"
@@ -2750,9 +2756,13 @@
             "leisure/slipway": {
                 "name": "Botenhelling"
             },
-            "leisure/sports_center": {
-                "name": "Sportcentrum / Sportschool / Fitnesscentrum",
-                "terms": "fitness, fitnesscentrum, sportschool, gym"
+            "leisure/sports_centre": {
+                "name": "Sportcentrum / Fitnesscentrum",
+                "terms": "sportschool"
+            },
+            "leisure/sports_centre/swimming": {
+                "name": "Zwembadfaciliteit",
+                "terms": "zwemmen,waterbad,duiken"
             },
             "leisure/stadium": {
                 "name": "Stadion"
@@ -2764,6 +2774,10 @@
             "leisure/track": {
                 "name": "Racepiste (niet voor Gemotoriseerde Voertuigen)",
                 "terms": "atletiekbaan, stadion, stadium, hardlopen, hordenloop, fietsen, parcours"
+            },
+            "leisure/water_park": {
+                "name": "Waterpretpark",
+                "terms": "subtropisch zwembad,zwembad,duiken,zwemmen"
             },
             "line": {
                 "name": "Lijn",
@@ -2831,6 +2845,10 @@
                 "name": "Opslagtank",
                 "terms": "olietank,silo"
             },
+            "man_made/surveillance": {
+                "name": "Bewaking",
+                "terms": "bewakingscamera,cctv"
+            },
             "man_made/survey_point": {
                 "name": "Landmeetkundig referentiepunt"
             },
@@ -2849,6 +2867,10 @@
             },
             "man_made/water_works": {
                 "name": "Waterwinstation"
+            },
+            "man_made/works": {
+                "name": "Fabriek",
+                "terms": "fabricagefaciliteit,autofabriek,aluminiumverwerking,meubelfabriek,olieraffinaderij,plasticrecyclage"
             },
             "military/airfield": {
                 "name": "Vliegveld",

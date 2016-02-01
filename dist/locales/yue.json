@@ -278,8 +278,7 @@
         "view_on_osm": "入公家街圖睇",
         "facebook": "放上Facebook",
         "twitter": "放上Twitter",
-        "google": "放上Google+",
-        "help_html": "你所改嘅，幾分鐘後會送到普通層。其他層，或者某啲地貌，要用多啲時間。\n(<a href='https://help.openstreetmap.org/questions/4705/why-havent-my-changes-appeared-on-the-map' target='_blank'>詳解</a>)。\n"
+        "google": "放上Google+"
     },
     "confirm": {
         "okay": "得"
@@ -1315,10 +1314,6 @@
             "highway/turning_circle": {
                 "name": "迴旋處",
                 "terms": "Turning Circle,回轉圈,廻旋處,環島,迴旋處"
-            },
-            "highway/unclassified": {
-                "name": "未歸類之路",
-                "terms": "Unclassified Road,未分級的道路,未分類的道路,未歸類之路"
             },
             "historic": {
                 "name": "史蹟",

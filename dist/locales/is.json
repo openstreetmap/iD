@@ -1315,9 +1315,6 @@
             "highway/turning_circle": {
                 "name": "Beygjuhringur"
             },
-            "highway/unclassified": {
-                "name": "Óflokkuð gata"
-            },
             "historic": {
                 "name": "Sögulegur staður"
             },
@@ -1431,9 +1428,6 @@
             },
             "leisure/slipway": {
                 "name": "Dráttarbraut"
-            },
-            "leisure/sports_center": {
-                "name": "Íþróttamiðstöð / heilsurækt"
             },
             "leisure/stadium": {
                 "name": "Leikvangur"

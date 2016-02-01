@@ -250,7 +250,9 @@
         "warnings": "Varování",
         "modified": "Upraveno",
         "deleted": "Smazáno",
-        "created": "Vytvořeno"
+        "created": "Vytvořeno",
+        "about_changeset_comments": "Více o komentářích ke změnám (anglicky)",
+        "about_changeset_comments_link": "//wiki.openstreetmap.org/wiki/Good_changeset_comments"
     },
     "contributors": {
         "list": "Přispěli {users}",
@@ -289,6 +291,7 @@
         "no_documentation_key": "K tomuto klíči není k dispozici dokumentace",
         "show_more": "Zobrazit víc",
         "view_on_osm": "Zobrazit na openstreetmap.org",
+        "all_fields": "Všechna pole",
         "all_tags": "Všechny vlastnosti",
         "all_members": "Všechny prvky",
         "all_relations": "Všechny relace",
@@ -448,7 +451,9 @@
         "facebook": "Sdílet na Facebooku",
         "twitter": "Sdílet na Twitteru",
         "google": "Sdílet na Google+",
-        "help_html": "Vaše úpravy by se obvykle měly objevit na \"Standardní\" vrstvě během několika minut. U některých objektů a ostatních vrstev to může trvat déle⏎\n(<a href='https://help.openstreetmap.org/questions/4705/why-havent-my-changes-appeared-on-the-map' target='_blank'>detaily anglicky</a>).⏎\n"
+        "help_html": "Vaše úpravy by se obvykle měly objevit na \"Standardní\" vrstvě během několika minut. U rozsáhlejších objektů a ostatních vrstev to může trvat déle.",
+        "help_link_text": "Více",
+        "help_link_url": "https://wiki.openstreetmap.org/wiki/Cs:FAQ#Zrovna_jsem_ud.C4.9Blal_n.C4.9Bjak.C3.A9_zm.C4.9Bny_v_map.C4.9B._Jak_uvid.C3.ADm_sv.C3.A9_zm.C4.9Bny.3F"
     },
     "confirm": {
         "okay": "OK",
@@ -1968,6 +1973,10 @@
                 "name": "Odpadkový koš",
                 "terms": "popelnice,kontejner,odpadkový koš,odpadky"
             },
+            "amenity/waste_disposal": {
+                "name": "Kontejner na směsný odpad",
+                "terms": "kontejner,popelnice,odpad,odpadky"
+            },
             "amenity/water_point": {
                 "name": "Pitná voda pro karavany",
                 "terms": "pitná voda,karavan,obytný vůz"
@@ -2614,7 +2623,7 @@
             },
             "highway/unclassified": {
                 "name": "Silnice bez klasifikace",
-                "terms": "silnice bez klasifikace"
+                "terms": "silnice bez klasifikace,neklasifikovaná silnice,místní komunikace"
             },
             "historic": {
                 "name": "Památné místo",
@@ -2852,9 +2861,13 @@
                 "name": "Vodní skluz",
                 "terms": "spouštění lodi,dok,loděnice,skluz v loděnici,skluzavka"
             },
-            "leisure/sports_center": {
-                "name": "Sportovní centrum / Posilovna",
-                "terms": "sportovní centrum,sportovní areál,sportoviště,posilovna"
+            "leisure/sports_centre": {
+                "name": "Sportovní centrum",
+                "terms": "sportovní centrum,sport,fitness"
+            },
+            "leisure/sports_centre/swimming": {
+                "name": "Areál plaveckého bazénu",
+                "terms": "bazén,plavecký bazén,koupaliště,plavání"
             },
             "leisure/stadium": {
                 "name": "Stadion",
@@ -2867,6 +2880,10 @@
             "leisure/track": {
                 "name": "Závodní dráha (ne motoristická)",
                 "terms": "závodní dráha,sportovní dráha,běžecká dráha,cyklodráha,cyklistická dráha,dostihová dráha,dostihy"
+            },
+            "leisure/water_park": {
+                "name": "Akvapark",
+                "terms": "akvapark,aquapark,vodní zábavní park,bazén,koupaliště,tobogán"
             },
             "line": {
                 "name": "Cesta",
@@ -2884,6 +2901,10 @@
                 "name": "Vlnolam",
                 "terms": "pobřežní hráz,násep,kameny,molo,zábrana"
             },
+            "man_made/chimney": {
+                "name": "Komín",
+                "terms": "komín"
+            },
             "man_made/cutline": {
                 "name": "Průsek",
                 "terms": "lesní průsek,holina"
@@ -2895,6 +2916,14 @@
             "man_made/flagpole": {
                 "name": "Vlajka",
                 "terms": "prapor,vlajka,stožár,vlajkový stožár"
+            },
+            "man_made/gasometer": {
+                "name": "Plynojem",
+                "terms": "plynojem,zásobník na plyn,kontejner na plyn"
+            },
+            "man_made/groyne": {
+                "name": "Krátká pobřežní hráz",
+                "terms": "pobřežní hráz,vlnolam,groyne"
             },
             "man_made/lighthouse": {
                 "name": "Maják",
@@ -2928,6 +2957,10 @@
                 "name": "Zásobník",
                 "terms": "zásobník,nádrž"
             },
+            "man_made/surveillance": {
+                "name": "Ostraha, kamera",
+                "terms": "kamera,bezpečtnostní kamera,dohled,ostraha"
+            },
             "man_made/survey_point": {
                 "name": "Triangulační bod",
                 "terms": "triangulační bod,nivelizační bod,nivelace,referenční bod"
@@ -2951,6 +2984,10 @@
             "man_made/water_works": {
                 "name": "Vodárna",
                 "terms": "vodárna,úpravna vody"
+            },
+            "man_made/works": {
+                "name": "Továrna",
+                "terms": "továrna,automobilka,ocelárna,železárna,hliníkárna,pivovar,rafinérie,zpracování,průmysl,recyklace,manufaktura"
             },
             "military/airfield": {
                 "name": "Vojenské letiště",
