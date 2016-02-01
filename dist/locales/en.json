@@ -3736,6 +3736,10 @@
                 "name": "Stationery Store",
                 "terms": "card,paper"
             },
+            "shop/storage_rental": {
+                "name": "Storage Rental",
+                "terms": ""
+            },
             "shop/supermarket": {
                 "name": "Supermarket",
                 "terms": "grocery,store,shop"

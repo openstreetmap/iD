@@ -2189,6 +2189,10 @@
         },
         {
             "key": "shop",
+            "value": "storage_rental"
+        },
+        {
+            "key": "shop",
             "value": "supermarket"
         },
         {

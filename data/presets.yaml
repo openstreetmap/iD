@@ -3498,6 +3498,10 @@ en:
         name: Stationery Store
         # 'terms: card,paper'
         terms: "<translate with synonyms or related terms for 'Stationery Store', separated by commas>"
+      shop/storage_rental:
+        # shop=storage_rental
+        name: Storage Rental
+        terms: "<translate with synonyms or related terms for 'Storage Rental', separated by commas>"
       shop/supermarket:
         # shop=supermarket
         name: Supermarket
