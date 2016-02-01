@@ -1,0 +1,13 @@
+{
+    "geometry": [
+        "relation"
+    ],
+    "tags": {
+        "type": "site"
+    },
+    "name": "Site",
+    "icon": "relation",
+    "fields": [
+        "site"
+    ]
+}
