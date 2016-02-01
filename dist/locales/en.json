@@ -1368,6 +1368,9 @@
             "shop": {
                 "label": "Type"
             },
+            "site": {
+                "label": "Type"
+            },
             "sloped_curb": {
                 "label": "Sloped Curb"
             },
@@ -3983,6 +3986,10 @@
             },
             "type/route_master": {
                 "name": "Route Master",
+                "terms": ""
+            },
+            "type/site": {
+                "name": "Site",
                 "terms": ""
             },
             "vertex": {

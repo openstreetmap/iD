@@ -1190,6 +1190,11 @@
         "type": "typeCombo",
         "label": "Type"
     },
+    "site": {
+        "key": "site",
+        "type": "combo",
+        "label": "Type"
+    },
     "sloped_curb": {
         "key": "sloped_curb",
         "type": "combo",

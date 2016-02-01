@@ -887,6 +887,9 @@ en:
       shop:
         # 'shop=*'
         label: Type
+      site:
+        # 'site=*'
+        label: Type
       sloped_curb:
         # 'sloped_curb=*'
         label: Sloped Curb
@@ -3761,6 +3764,10 @@ en:
         # type=route_master
         name: Route Master
         terms: "<translate with synonyms or related terms for 'Route Master', separated by commas>"
+      type/site:
+        # type=site
+        name: Site
+        terms: "<translate with synonyms or related terms for 'Site', separated by commas>"
       vertex:
         name: Other
         terms: "<translate with synonyms or related terms for 'Other', separated by commas>"

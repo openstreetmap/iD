@@ -10475,6 +10475,19 @@
             "network"
         ]
     },
+    "type/site": {
+        "geometry": [
+            "relation"
+        ],
+        "tags": {
+            "type": "site"
+        },
+        "name": "Site",
+        "icon": "relation",
+        "fields": [
+            "site"
+        ]
+    },
     "vertex": {
         "name": "Other",
         "tags": {},
