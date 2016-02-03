@@ -1759,6 +1759,10 @@ div.full-screen > button:hover {
     border: 1px solid #CCC;
 }
 
+.imagery-faq {
+  margin-bottom: 10px;
+}
+
 .background-control .adjustments button:last-child {
     border: 0;
 }
@@ -1803,6 +1807,20 @@ div.full-screen > button:hover {
 
 .layer-list li.active {
     background: #E8EBFF;
+}
+
+.layer-list li.best > div {
+    display: inline-block;
+    height: 100%;
+    width: 10%;
+    padding: 5px 0;
+    float: right;
+}
+
+.layer-list li.best > div > span {
+    display: block;
+    overflow: hidden;
+    white-space: nowrap;
 }
 
 .layer-list label {

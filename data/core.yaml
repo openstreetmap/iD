@@ -268,10 +268,13 @@ en:
     description: Background settings
     percent_brightness: "{opacity}% brightness"
     none: None
+    best_imagery: Best known imagery source
     custom: Custom
     custom_button: Edit custom background
     custom_prompt: "Enter a tile URL template. Valid tokens are {z}, {x}, {y} for Z/X/Y scheme and {u} for quadtile scheme."
     fix_misalignment: Fix alignment
+    imagery_source_faq: Where does this imagery come from?
+    imagery_source_faq_link: https://github.com/openstreetmap/iD/blob/master/FAQ.md#how-can-i-report-an-issue-with-background-imagery
     reset: reset
     minimap:
       description: Minimap
