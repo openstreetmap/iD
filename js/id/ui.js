@@ -123,7 +123,7 @@ iD.ui = function(context) {
             .append('a')
             .attr('target', '_blank')
             .attr('tabindex', -1)
-            .attr('href', 'http://github.com/openstreetmap/iD')
+            .attr('href', 'https://github.com/openstreetmap/iD')
             .text(iD.version);
 
         var issueLinks = aboutList.append('li');

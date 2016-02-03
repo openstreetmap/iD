@@ -16,7 +16,7 @@ iD.MapillaryLayer = function (context) {
             .attr('src', 'https://d1cuyjsrcm0gby.cloudfront.net/' + image.key + '/thumb-320.jpg');
 
         div.selectAll('a')
-            .attr('href', 'http://mapillary.com/map/im/' + image.key);
+            .attr('href', 'https://www.mapillary.com/map/im/' + image.key);
     }
 
     function hide() {

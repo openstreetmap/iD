@@ -117,7 +117,7 @@ iD.BackgroundSource.Bing = function(data, dispatch) {
     };
 
     bing.logo = 'bing_maps.png';
-    bing.terms_url = 'http://opengeodata.org/microsoft-imagery-details';
+    bing.terms_url = 'https://blog.openstreetmap.org/2010/11/30/microsoft-imagery-details';
 
     return bing;
 };
