@@ -92,13 +92,22 @@ iD.ui.Background = function(context) {
 
             var enter = layerLinks.enter()
                 .insert('li', '.custom_layer')
-                .attr('class', 'layer');
+                .attr('class', 'layer')
+                .classed('best', function(d) { return d.best(); });
 
             // only set tooltips for layers with tooltips
             enter.filter(function(d) { return d.description; })
                 .call(bootstrap.tooltip()
                     .title(function(d) { return d.description; })
                     .placement('top'));
+
+            enter.filter(function(d) { return d.best(); })
+                .append('div')
+                .call(bootstrap.tooltip()
+                    .title(t('background.best_imagery'))
+                    .placement('left'))
+                .append('span')
+                .html('&nbsp;&#9733;');
 
             var label = enter.append('label');
 
@@ -252,6 +261,16 @@ iD.ui.Background = function(context) {
 
         label.append('span')
             .text(t('background.custom'));
+
+        content.append('div')
+          .attr('class', 'imagery-faq')
+          .append('a')
+          .attr('target', '_blank')
+          .attr('tabindex', -1)
+          .call(iD.svg.Icon('#icon-out-link', 'inline'))
+          .attr('href', t('background.imagery_source_faq_link'))
+          .append('span')
+          .text(t('background.imagery_source_faq'));
 
         var overlayList = content.append('ul')
             .attr('class', 'layer-list');
