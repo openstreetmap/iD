@@ -245,7 +245,7 @@ iD.ui.FeatureList = function(context) {
 
         function geocode() {
             var searchVal = encodeURIComponent(search.property('value'));
-            d3.json('http://nominatim.openstreetmap.org/search/' + searchVal + '?limit=10&format=json', function(err, resp) {
+            d3.json('https://nominatim.openstreetmap.org/search/' + searchVal + '?limit=10&format=json', function(err, resp) {
                 geocodeResults = resp || [];
                 drawList();
             });
