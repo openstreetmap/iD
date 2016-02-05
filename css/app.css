@@ -1809,18 +1809,16 @@ div.full-screen > button:hover {
     background: #E8EBFF;
 }
 
-.layer-list li.best > div {
+.layer-list li.best > div.best {
     display: inline-block;
-    height: 100%;
-    width: 10%;
-    padding: 5px 0;
+    padding: 5px;
     float: right;
 }
 
-.layer-list li.best > div > span {
-    display: block;
-    overflow: hidden;
-    white-space: nowrap;
+/* make sure tooltip fits in map-control panel */
+/* if too wide, placement will be wrong the first time it displays */
+.layer-list li.best .tooltip-inner {
+    max-width: 160px;
 }
 
 .layer-list label {

@@ -103,11 +103,12 @@ iD.ui.Background = function(context) {
 
             enter.filter(function(d) { return d.best(); })
                 .append('div')
+                .attr('class', 'best')
                 .call(bootstrap.tooltip()
                     .title(t('background.best_imagery'))
                     .placement('left'))
                 .append('span')
-                .html('&nbsp;&#9733;');
+                .html('&#9733;');
 
             var label = enter.append('label');
 
