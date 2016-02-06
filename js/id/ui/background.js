@@ -269,7 +269,7 @@ iD.ui.Background = function(context) {
           .attr('target', '_blank')
           .attr('tabindex', -1)
           .call(iD.svg.Icon('#icon-out-link', 'inline'))
-          .attr('href', t('background.imagery_source_faq_link'))
+          .attr('href', 'https://github.com/openstreetmap/iD/blob/master/FAQ.md#how-can-i-report-an-issue-with-background-imagery')
           .append('span')
           .text(t('background.imagery_source_faq'));
 
