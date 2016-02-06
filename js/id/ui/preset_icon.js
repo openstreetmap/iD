@@ -55,7 +55,7 @@ iD.ui.PresetIcon = function() {
             .call(iD.svg.Icon(''));
 
         $icon
-            .attr('class', 'preset-icon preset-icon-' + (maki ? '32' : '60'));
+            .attr('class', 'preset-icon preset-icon-' + (maki ? '32' : (geom === 'area' ? '44' : '60')));
 
         $icon.selectAll('svg')
             .attr('class', function() {

@@ -848,6 +848,18 @@ button.save.has-count .count::before {
     height: 60px;
 }
 
+.preset-icon-44 {
+    position: absolute;
+    top: 9px;
+    left: 8px;
+    margin: auto;
+}
+
+.preset-icon-44 .icon {
+    width: 44px;
+    height: 44px;
+}
+
 .preset-icon-32 {
     position: absolute;
     top: 14px;
