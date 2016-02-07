@@ -146,14 +146,9 @@ iD.modes.Select = function(context, selectedIDs) {
             }
         }
 
-        function ret() {
+        function esc() {
             if (!context.inIntro()) {
-                // only accept changes if focused on a non-search input field.. #2912, #2380
-                var el = document.activeElement,
-                    tagName = el && el.tagName.toLowerCase();
-                if (tagName === 'input' && el.type !== 'search') {
-                    context.enter(iD.modes.Browse(context));
-                }
+                context.enter(iD.modes.Browse(context));
             }
         }
 
@@ -169,8 +164,7 @@ iD.modes.Select = function(context, selectedIDs) {
         operations.unshift(iD.operations.Delete(selectedIDs, context));
 
         keybinding
-            .on('⎋', ret, true)
-            .on('↩', ret, true)
+            .on('⎋', esc, true)
             .on('space', toggleMenu);
 
         operations.forEach(function(operation) {

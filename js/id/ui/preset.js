@@ -157,6 +157,12 @@ iD.ui.preset = function(context) {
 
                 d3.select(this)
                     .call(field.input)
+                    .selectAll('input')
+                    .on('keydown', function() {
+                        if (d3.event.keyCode === 13) {  // enter
+                            context.enter(iD.modes.Browse(context));
+                        }
+                    })
                     .call(reference.body)
                     .select('.form-label-button-wrap')
                     .call(reference.button);
