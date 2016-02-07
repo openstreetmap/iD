@@ -1,4 +1,4 @@
-iD.modes.Move = function(context, entityIDs) {
+iD.modes.Move = function(context, entityIDs, baseGraph) {
     var mode = {
         id: 'move',
         button: 'browse'
@@ -64,8 +64,13 @@ iD.modes.Move = function(context, entityIDs) {
     }
 
     function cancel() {
-        context.pop();
-        context.enter(iD.modes.Select(context, entityIDs).suppressMenu(true));
+        if (baseGraph) {
+            while (context.graph() !== baseGraph) context.pop();
+            context.enter(iD.modes.Browse(context));
+        } else {
+            context.pop();
+            context.enter(iD.modes.Select(context, entityIDs).suppressMenu(true));
+        }
         stopNudge();
     }
 

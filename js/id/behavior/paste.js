@@ -21,7 +21,8 @@ iD.behavior.Paste = function(context) {
         d3.event.preventDefault();
         if (context.inIntro()) return;
 
-        var mouse = context.mouse(),
+        var baseGraph = context.graph(),
+            mouse = context.mouse(),
             projection = context.projection,
             viewport = iD.geo.Extent(projection.clipExtent()).polygon();
 
@@ -61,7 +62,7 @@ iD.behavior.Paste = function(context) {
             delta = [ mouse[0] - center[0], mouse[1] - center[1] ];
 
         context.perform(iD.actions.Move(newIDs, delta, projection));
-        context.enter(iD.modes.Move(context, newIDs));
+        context.enter(iD.modes.Move(context, newIDs, baseGraph));
     }
 
     function paste() {
