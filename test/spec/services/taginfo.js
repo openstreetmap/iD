@@ -1,9 +1,9 @@
-describe("iD.taginfo", function() {
+describe("iD.services.taginfo", function() {
     var server, taginfo;
 
     beforeEach(function() {
         server = sinon.fakeServer.create();
-        taginfo = iD.taginfo();
+        taginfo = iD.services.taginfo();
     });
 
     afterEach(function() {

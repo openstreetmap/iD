@@ -1,4 +1,4 @@
-iD.taginfo = function() {
+iD.services.taginfo = function() {
     var taginfo = {},
         endpoint = 'https://taginfo.openstreetmap.org/api/4/',
         tag_sorts = {
@@ -14,11 +14,6 @@ iD.taginfo = function() {
             line: 'ways'
         };
 
-    if (!iD.taginfo.cache) {
-        iD.taginfo.cache = {};
-    }
-
-    var cache = iD.taginfo.cache;
 
     function sets(parameters, n, o) {
         if (parameters.geometry && o[parameters.geometry]) {
@@ -68,6 +63,8 @@ iD.taginfo = function() {
     var debounced = _.debounce(d3.json, 100, true);
 
     function request(url, debounce, callback) {
+        var cache = iD.services.taginfo.cache;
+
         if (cache[url]) {
             callback(null, cache[url]);
         } else if (debounce) {
@@ -131,6 +128,16 @@ iD.taginfo = function() {
         endpoint = _;
         return taginfo;
     };
+
+    taginfo.reset = function() {
+        iD.services.taginfo.cache = {};
+        return taginfo;
+    };
+
+
+    if (!iD.services.taginfo.cache) {
+        taginfo.reset();
+    }
 
     return taginfo;
 };
