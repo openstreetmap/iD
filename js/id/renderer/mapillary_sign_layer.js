@@ -9,7 +9,7 @@ iD.MapillarySignLayer = function(context) {
         currentImage, svg, image_preview_div, request;
 
     _.each(['au', 'br', 'ca', 'de', 'us'], function(el) {
-        d3.json('css/traffico-release-0.1.26/string-maps/' + el + '-map.json', function(err, data) {
+        d3.json(context.assetPath() + 'traffico/string-maps/' + el + '-map.json', function(err, data) {
             if (err) return;
             if (el === 'de') el = 'eu';
             signs_defs[el] = data;
