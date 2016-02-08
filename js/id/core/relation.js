@@ -20,31 +20,19 @@ _.extend(iD.Relation.prototype, {
     type: 'relation',
     members: [],
 
-    copy: function(deep, resolver, replacements) {
-        var copy = iD.Entity.prototype.copy.call(this);
-        if (!deep || !resolver || !this.isComplete(resolver)) {
-            return copy;
-        }
+    copy: function(resolver, copies) {
+        if (copies[this.id])
+            return copies[this.id];
 
-        var members = [],
-            i, oldmember, oldid, newid, children;
+        var copy = iD.Entity.prototype.copy.call(this, resolver, copies);
 
-        replacements = replacements || {};
-        replacements[this.id] = copy[0].id;
+        var members = this.members.map(function(member) {
+            return _.extend({}, member, {id: resolver.entity(member.id).copy(resolver, copies).id});
+        });
 
-        for (i = 0; i < this.members.length; i++) {
-            oldmember = this.members[i];
-            oldid = oldmember.id;
-            newid = replacements[oldid];
-            if (!newid) {
-                children = resolver.entity(oldid).copy(true, resolver, replacements);
-                newid = replacements[oldid] = children[0].id;
-                copy = copy.concat(children);
-            }
-            members.push({id: newid, type: oldmember.type, role: oldmember.role});
-        }
+        copy = copy.update({members: members});
+        copies[this.id] = copy;
 
-        copy[0] = copy[0].update({members: members});
         return copy;
     },
 

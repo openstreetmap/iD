@@ -28,47 +28,54 @@ describe('iD.Way', function() {
 
     describe("#copy", function () {
         it("returns a new Way", function () {
-            var w1 = iD.Way({id: 'w1'}),
-                result = w1.copy(),
-                w2 = result[0];
+            var w = iD.Way({id: 'w'}),
+                result = w.copy(null, {});
 
-            expect(result).to.have.length(1);
-            expect(w2).to.be.an.instanceof(iD.Way);
-            expect(w1).not.to.equal(w2);
+            expect(result).to.be.an.instanceof(iD.Way);
+            expect(result).not.to.equal(w);
         });
 
-        it("keeps same nodes when deep = false", function () {
-            var a = iD.Node({id: 'a'}),
-                b = iD.Node({id: 'b'}),
-                c = iD.Node({id: 'c'}),
-                w1 = iD.Way({id: 'w1', nodes: ['a','b','c','a']}),
-                graph = iD.Graph([a, b, c, w1]),
-                result = w1.copy(),
-                w2 = result[0];
-
-            expect(result).to.have.length(1);
-            expect(w1.nodes).to.deep.equal(w2.nodes);
+        it("adds the new Way to input object", function () {
+            var w = iD.Way({id: 'w'}),
+                copies = {},
+                result = w.copy(null, copies);
+            expect(Object.keys(copies)).to.have.length(1);
+            expect(copies.w).to.equal(result);
         });
 
-        it("makes new nodes when deep = true", function () {
+        it("returns an existing copy in input object", function () {
+            var w = iD.Way({id: 'w'}),
+                copies = {},
+                result1 = w.copy(null, copies),
+                result2 = w.copy(null, copies);
+            expect(Object.keys(copies)).to.have.length(1);
+            expect(result1).to.equal(result2);
+        });
+
+        it("deep copies nodes", function () {
             var a = iD.Node({id: 'a'}),
                 b = iD.Node({id: 'b'}),
-                c = iD.Node({id: 'c'}),
-                w1 = iD.Way({id: 'w1', nodes: ['a','b','c','a']}),
-                graph = iD.Graph([a, b, c, w1]),
-                result = w1.copy(true, graph),
-                w2 = result[0];
+                w = iD.Way({id: 'w', nodes: ['a', 'b']}),
+                graph = iD.Graph([a, b, w]),
+                copies = {},
+                result = w.copy(graph, copies);
 
-            expect(result).to.have.length(4);
-            expect(result[0]).to.be.an.instanceof(iD.Way);
-            expect(result[1]).to.be.an.instanceof(iD.Node);
-            expect(result[2]).to.be.an.instanceof(iD.Node);
-            expect(result[3]).to.be.an.instanceof(iD.Node);
+            expect(Object.keys(copies)).to.have.length(3);
+            expect(copies.a).to.be.an.instanceof(iD.Node);
+            expect(copies.b).to.be.an.instanceof(iD.Node);
+            expect(copies.a).not.to.equal(w.nodes[0]);
+            expect(copies.b).not.to.equal(w.nodes[1]);
+            expect(result.nodes).to.deep.eql([copies.a.id, copies.b.id]);
+        });
 
-            expect(w2.nodes[0]).not.to.equal(w1.nodes[0]);
-            expect(w2.nodes[1]).not.to.equal(w1.nodes[1]);
-            expect(w2.nodes[2]).not.to.equal(w1.nodes[2]);
-            expect(w2.nodes[3]).to.equal(w2.nodes[0]);
+        it("creates only one copy of shared nodes", function () {
+            var a = iD.Node({id: 'a'}),
+                w = iD.Way({id: 'w', nodes: ['a', 'a']}),
+                graph = iD.Graph([a, w]),
+                copies = {},
+                result = w.copy(graph, copies);
+
+            expect(result.nodes[0]).to.equal(result.nodes[1]);
         });
     });
 

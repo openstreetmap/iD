@@ -28,48 +28,47 @@ describe('iD.Relation', function () {
 
     describe("#copy", function () {
         it("returns a new Relation", function () {
-            var r1 = iD.Relation({id: 'r1'}),
-                result = r1.copy(),
-                r2 = result[0];
+            var r = iD.Relation({id: 'r'}),
+                result = r.copy(null, {});
 
-            expect(result).to.have.length(1);
-            expect(r2).to.be.an.instanceof(iD.Relation);
-            expect(r1).not.to.equal(r2);
+            expect(result).to.be.an.instanceof(iD.Relation);
+            expect(result).not.to.equal(r);
         });
 
-        it("keeps same members when deep = false", function () {
+        it("adds the new Relation to input object", function () {
+            var r = iD.Relation({id: 'r'}),
+                copies = {},
+                result = r.copy(null, copies);
+            expect(Object.keys(copies)).to.have.length(1);
+            expect(copies.r).to.equal(result);
+        });
+
+        it("returns an existing copy in input object", function () {
+            var r = iD.Relation({id: 'r'}),
+                copies = {},
+                result1 = r.copy(null, copies),
+                result2 = r.copy(null, copies);
+            expect(Object.keys(copies)).to.have.length(1);
+            expect(result1).to.equal(result2);
+        });
+
+        it("deep copies members", function () {
             var a = iD.Node({id: 'a'}),
                 b = iD.Node({id: 'b'}),
                 c = iD.Node({id: 'c'}),
-                w1 = iD.Way({id: 'w1', nodes: ['a','b','c','a']}),
-                r1 = iD.Relation({id: 'r1', members: [{id: 'w1', role: 'outer'}]}),
-                graph = iD.Graph([a, b, c, w1, r1]),
-                result = r1.copy(),
-                r1_copy = result[0];
+                w = iD.Way({id: 'w', nodes: ['a','b','c','a']}),
+                r = iD.Relation({id: 'r', members: [{id: 'w', role: 'outer'}]}),
+                graph = iD.Graph([a, b, c, w, r]),
+                copies = {}
+                result = r.copy(graph, copies);
 
-            expect(result).to.have.length(1);
-            expect(r1.members).to.deep.equal(r1_copy.members);
-        });
-
-        it("makes new members when deep = true", function () {
-            var a = iD.Node({id: 'a'}),
-                b = iD.Node({id: 'b'}),
-                c = iD.Node({id: 'c'}),
-                w1 = iD.Way({id: 'w1', nodes: ['a','b','c','a']}),
-                r1 = iD.Relation({id: 'r1', members: [{id: 'w1', role: 'outer'}]}),
-                graph = iD.Graph([a, b, c, w1, r1]),
-                result = r1.copy(true, graph),
-                r1_copy = result[0];
-
-            expect(result).to.have.length(5);
-            expect(result[0]).to.be.an.instanceof(iD.Relation);
-            expect(result[1]).to.be.an.instanceof(iD.Way);
-            expect(result[2]).to.be.an.instanceof(iD.Node);
-            expect(result[3]).to.be.an.instanceof(iD.Node);
-            expect(result[4]).to.be.an.instanceof(iD.Node);
-
-            expect(r1_copy.members[0].id).not.to.equal(r1.members[0].id);
-            expect(r1_copy.members[0].role).to.equal(r1.members[0].role);
+            expect(Object.keys(copies)).to.have.length(5);
+            expect(copies.w).to.be.an.instanceof(iD.Way);
+            expect(copies.a).to.be.an.instanceof(iD.Node);
+            expect(copies.b).to.be.an.instanceof(iD.Node);
+            expect(copies.c).to.be.an.instanceof(iD.Node);
+            expect(result.members[0].id).not.to.equal(r.members[0].id);
+            expect(result.members[0].role).to.equal(r.members[0].role);
         });
 
         it("deep copies non-tree relation graphs without duplicating children", function () {
@@ -77,48 +76,39 @@ describe('iD.Relation', function () {
                 r1 = iD.Relation({id: 'r1', members: [{id: 'r2'}, {id: 'w'}]}),
                 r2 = iD.Relation({id: 'r2', members: [{id: 'w'}]}),
                 graph = iD.Graph([w, r1, r2]),
-                result = r1.copy(true, graph),
-                r1_copy = result[0],
-                r2_copy = result[1],
-                w_copy = result[2];
+                copies = {};
+            r1.copy(graph, copies);
 
-            expect(result).to.have.length(3);
-            expect(r1_copy).to.be.an.instanceof(iD.Relation);
-            expect(r2_copy).to.be.an.instanceof(iD.Relation);
-            expect(w_copy).to.be.an.instanceof(iD.Way);
-
-            expect(r1_copy.members[0].id).to.equal(r2_copy.id);
-            expect(r1_copy.members[1].id).to.equal(r2_copy.members[0].id);
+            expect(Object.keys(copies)).to.have.length(3);
+            expect(copies.r1).to.be.an.instanceof(iD.Relation);
+            expect(copies.r2).to.be.an.instanceof(iD.Relation);
+            expect(copies.w).to.be.an.instanceof(iD.Way);
+            expect(copies.r1.members[0].id).to.equal(copies.r2.id);
+            expect(copies.r1.members[1].id).to.equal(copies.w.id);
+            expect(copies.r2.members[0].id).to.equal(copies.w.id);
         });
 
-        it("deep copies cyclical relation graphs without issue"); //, function () {
-        //     var r1 = iD.Relation({id: 'r1', members: [{id: 'r2'}]}),
-        //         r2 = iD.Relation({id: 'r2', members: [{id: 'r1'}]}),
-        //         graph = iD.Graph([r1, r2]),
-        //         result = r1.copy(true, graph),
-        //         r1_copy = result[0],
-        //         r2_copy = result[1];
+        it("deep copies cyclical relation graphs without issue", function () {
+            var r1 = iD.Relation({id: 'r1', members: [{id: 'r2'}]}),
+                r2 = iD.Relation({id: 'r2', members: [{id: 'r1'}]}),
+                graph = iD.Graph([r1, r2]),
+                copies = {};
+            r1.copy(graph, copies);
 
-        //     expect(result).to.have.length(2);
-        //     expect(r1_copy).to.be.an.instanceof(iD.Relation);
-        //     expect(r2_copy).to.be.an.instanceof(iD.Relation);
+            expect(Object.keys(copies)).to.have.length(2);
+            expect(copies.r1.members[0].id).to.equal(copies.r2.id);
+            expect(copies.r2.members[0].id).to.equal(copies.r1.id);
+        });
 
-        //     var msg = 'r1_copy = ' + JSON.stringify(r1_copy) +
-        //               'r2_copy = ' + JSON.stringify(r2_copy);
-        //     expect(r1_copy.members[0].id).to.equal(r2_copy.id, msg);
-        //     expect(r2_copy.members[0].id).to.equal(r1_copy.id, msg);
-        // });
+        it("deep copies self-referencing relations without issue", function () {
+            var r = iD.Relation({id: 'r', members: [{id: 'r'}]}),
+                graph = iD.Graph([r]),
+                copies = {};
+            r.copy(graph, copies);
 
-        it("deep copies self-refrencing relations without issue"); //, function () {
-        //     var r1 = iD.Relation({id: 'r1', members: [{id: 'r1'}]}),
-        //         graph = iD.Graph([r1]),
-        //         result = r1.copy(true, graph),
-        //         r1_copy = result[0];
-
-        //     expect(result).to.have.length(1);
-        //     expect(r1_copy).to.be.an.instanceof(iD.Relation);
-        //     expect(r1_copy.members[0].id).to.equal(r1_copy.id);
-        // });
+            expect(Object.keys(copies)).to.have.length(1);
+            expect(copies.r.members[0].id).to.equal(copies.r.id);
+         });
     });
 
     describe("#extent", function () {
