@@ -1,8 +1,13 @@
-iD.MapillaryImageLayer = function (context) {
-    var mapillary = iD.services.mapillary(),
+iD.MapillaryImageLayer = function(context) {
+    var mapillary = iD.services.mapillary()
+            .on('loadedImages.imageLayer', imagesLoaded),
+        imageData = rbush(),
+        urlImage = 'http://mapillary.com/map/im/',
+        urlThumb = 'https://d1cuyjsrcm0gby.cloudfront.net/',
         enable = false,
         currentImage,
-        svg, div, request;
+        svg, thumbnail;
+
 
     function show(image) {
         svg.selectAll('g')
@@ -10,13 +15,13 @@ iD.MapillaryImageLayer = function (context) {
                 return currentImage && d.key === currentImage.key;
             });
 
-        div.classed('hidden', false)
+        thumbnail.classed('hidden', false)
             .classed('temp', image !== currentImage);
 
-        div.selectAll('img')
+        thumbnail.selectAll('img')
             .attr('src', urlThumb + image.key + '/thumb-320.jpg');
 
-        div.selectAll('a')
+        thumbnail.selectAll('a')
             .attr('href', urlImage + image.key);
     }
 
@@ -26,7 +31,7 @@ iD.MapillaryImageLayer = function (context) {
         svg.selectAll('g')
             .classed('selected', false);
 
-        div.classed('hidden', true);
+        thumbnail.classed('hidden', true);
     }
 
     function transform(d) {
@@ -35,21 +40,29 @@ iD.MapillaryImageLayer = function (context) {
         return t;
     }
 
-    function render(err, data) {
-        if (err) return;
+    function imagesLoaded(data) {
+        var images = [],
+            sequence, loc;
 
-        var images = [];
         for (var i = 0; i < data.features.length; i++) {
-            var sequence = data.features[i];
+            sequence = data.features[i];
             for (var j = 0; j < sequence.geometry.coordinates.length; j++) {
-                images.push({
+                loc = sequence.geometry.coordinates[j];
+                images.push([loc[0], loc[1], loc[0], loc[1], {
                     key: sequence.properties.keys[j],
                     ca: sequence.properties.cas[j],
                     loc: sequence.geometry.coordinates[j]
-                });
-                if (images.length >= 1000) break;
+                }]);
             }
         }
+
+        imageData.load(images);
+    }
+
+    function render() {
+        var images = imageData
+                .search(context.map().extent().rectangle())
+                .map(function(d) { return d[4]; });
 
         var g = svg.selectAll('g')
             .data(images, function(d) { return d.key; });
@@ -72,6 +85,7 @@ iD.MapillaryImageLayer = function (context) {
         g.exit()
             .remove();
     }
+
 
     function layer(selection) {
         svg = selection.selectAll('svg')
@@ -100,49 +114,36 @@ iD.MapillaryImageLayer = function (context) {
 
         svg.style('display', enable ? 'block' : 'none');
 
-        div = context.container().selectAll('.mapillary-image')
+        thumbnail = context.container().selectAll('.mapillary-image')
             .data([0]);
 
-        var enter = div.enter().append('div')
+        var enter = thumbnail.enter().append('div')
             .attr('class', 'mapillary-image');
 
         enter.append('button')
             .on('click', hide)
             .append('div')
-            .call(iD.svg.Icon('#icon-close'));
+            .attr('class', 'icon close');
 
         enter.append('img');
 
-        enter
-            .append('a')
+        var link = enter.append('a')
             .attr('class', 'link')
-            .attr('target', '_blank')
-            .call(iD.svg.Icon('#icon-out-link', 'inline'))
-            .append('span')
+            .attr('target', '_blank');
+
+        link.append('span')
+            .attr('class', 'icon icon-pre-text out-link');
+
+        link.append('span')
             .text(t('mapillary_images.view_on_mapillary'));
 
         if (!enable) {
             hide();
-
-            svg.selectAll('g')
-                .remove();
-
-            return;
+            svg.selectAll('g').remove();
+        } else {
+            render();
+            mapillary.loadImages(context.projection, svg.dimensions());
         }
-
-        // Update existing images while waiting for new ones to load.
-        svg.selectAll('g')
-            .attr('transform', transform);
-
-        var extent = context.map().extent();
-
-        if (request)
-            request.abort();
-
-        request = d3.json(urlSearch + '?client_id=' + clientId + '&min_lat=' +
-            extent[0][1] + '&max_lat=' + extent[1][1] + '&min_lon=' +
-            extent[0][0] + '&max_lon=' + extent[1][0] + '&max_results=100&geojson=true',
-            );
     }
 
     layer.enable = function(_) {
