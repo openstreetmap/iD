@@ -64,6 +64,27 @@ iD.actions.Disconnect = function(nodeId, newNodeId) {
         var connections = action.connections(graph);
         if (connections.length === 0 || (wayIds && wayIds.length !== connections.length))
             return 'not_connected';
+
+        var parentWays = graph.parentWays(graph.entity(nodeId)),
+            seenRelationIds = {},
+            sharedRelation;
+
+        parentWays.forEach(function(way) {
+            if (wayIds && wayIds.indexOf(way.id) === -1)
+                return;
+
+            var relations = graph.parentRelations(way);
+            relations.forEach(function(relation) {
+                if (relation.id in seenRelationIds) {
+                    sharedRelation = relation;
+                } else {
+                    seenRelationIds[relation.id] = true;
+                }
+            });
+        });
+
+        if (sharedRelation)
+            return 'relation';
     };
 
     action.limitWays = function(_) {

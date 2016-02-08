@@ -133,7 +133,8 @@
             "key": "D",
             "annotation": "Disconnected lines/areas.",
             "not_connected": "There aren't enough lines/areas here to disconnect.",
-            "connected_to_hidden": "This can't be disconnected because it is connected to a hidden feature."
+            "connected_to_hidden": "This can't be disconnected because it is connected to a hidden feature.",
+            "relation": "This can't be disconnected because it connects members of a relation."
         },
         "merge": {
             "title": "Merge",
