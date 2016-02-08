@@ -38,25 +38,43 @@ describe('iD.Entity', function () {
 
     describe("#copy", function () {
         it("returns a new Entity", function () {
-            var a = iD.Entity(),
-                result = a.copy();
-            expect(result).to.have.length(1);
-            expect(result[0]).to.be.an.instanceof(iD.Entity);
-            expect(a).not.to.equal(result[0]);
+            var n = iD.Entity({id: 'n'}),
+                result = n.copy(null, {});
+            expect(result).to.be.an.instanceof(iD.Entity);
+            expect(result).not.to.equal(n);
+        });
+
+        it("adds the new Entity to input object", function () {
+            var n = iD.Entity({id: 'n'}),
+                copies = {},
+                result = n.copy(null, copies);
+            expect(Object.keys(copies)).to.have.length(1);
+            expect(copies.n).to.equal(result);
+        });
+
+        it("returns an existing copy in input object", function () {
+            var n = iD.Entity({id: 'n'}),
+                copies = {},
+                result1 = n.copy(null, copies),
+                result2 = n.copy(null, copies);
+            expect(Object.keys(copies)).to.have.length(1);
+            expect(result1).to.equal(result2);
         });
 
         it("resets 'id', 'user', and 'version' properties", function () {
-            var a = iD.Entity({id: 'n1234', version: 10, user: 'bot-mode'}),
-                b = a.copy()[0];
-            expect(b.isNew()).to.be.ok;
-            expect(b.version).to.be.undefined;
-            expect(b.user).to.be.undefined;
+            var n = iD.Entity({id: 'n', version: 10, user: 'user'}),
+                copies = {};
+            n.copy(null, copies);
+            expect(copies.n.isNew()).to.be.ok;
+            expect(copies.n.version).to.be.undefined;
+            expect(copies.n.user).to.be.undefined;
         });
 
         it("copies tags", function () {
-            var a = iD.Entity({id: 'n1234', version: 10, user: 'test', tags: {foo: 'foo'}}),
-                b = a.copy()[0];
-            expect(b.tags).to.deep.equal(a.tags);
+            var n = iD.Entity({id: 'n', tags: {foo: 'foo'}}),
+                copies = {};
+            n.copy(null, copies);
+            expect(copies.n.tags).to.equal(n.tags);
         });
     });
 
