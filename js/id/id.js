@@ -157,6 +157,10 @@ window.iD = function () {
         connection.flush();
         features.reset();
         history.reset();
+        _.each(iD.services, function(service) {
+            var reset = service().reset;
+            if (reset) reset();
+        });
         return context;
     };
 

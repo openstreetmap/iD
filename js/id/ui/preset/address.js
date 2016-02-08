@@ -109,7 +109,7 @@ iD.ui.preset.address = function(field, context) {
         var center = entity.extent(context.graph()).center(),
             addressFormat;
 
-        iD.services.nominatum().countryCode(center, function (err, countryCode) {
+        iD.services.nominatim().countryCode(center, function (err, countryCode) {
             addressFormat = _.find(iD.data.addressFormats, function (a) {
                 return a && a.countryCodes && _.contains(a.countryCodes, countryCode);
             }) || _.first(iD.data.addressFormats);
