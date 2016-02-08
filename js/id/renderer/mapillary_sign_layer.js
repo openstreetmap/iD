@@ -1,6 +1,5 @@
 iD.MapillarySignLayer = function(context) {
-    var roundedProjection = iD.svg.RoundProjection(context.projection),
-        urlSearch = 'https://a.mapillary.com/v2/search/im/geojson/or',
+    var urlSearch = 'https://a.mapillary.com/v2/search/im/geojson/or',
         urlImage = 'http://mapillary.com/map/im/',
         urlThumb = 'https://d1cuyjsrcm0gby.cloudfront.net/',
         clientId = 'NzNRM2otQkR2SHJzaXJmNmdQWVQ0dzo1ZWYyMmYwNjdmNDdlNmVi',
@@ -150,7 +149,7 @@ iD.MapillarySignLayer = function(context) {
                     });
 
                 foreignObjects
-                    .attr('transform', iD.svg.PointTransform(roundedProjection));
+                    .attr('transform', iD.svg.PointTransform(context.projection));
 
                 foreignObjects.exit()
                     .remove();

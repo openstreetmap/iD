@@ -1,6 +1,5 @@
 iD.MapillaryImageLayer = function (context) {
-    var roundedProjection = iD.svg.RoundProjection(context.projection),
-        urlSearch = 'https://a.mapillary.com/v2/search/s/geojson',
+    var urlSearch = 'https://a.mapillary.com/v2/search/s/geojson',
         urlImage = 'https://www.mapillary.com/map/im/',
         urlThumb = 'https://d1cuyjsrcm0gby.cloudfront.net/',
         clientId = 'NzNRM2otQkR2SHJzaXJmNmdQWVQ0dzo1ZWYyMmYwNjdmNDdlNmVi',
@@ -34,7 +33,7 @@ iD.MapillaryImageLayer = function (context) {
     }
 
     function transform(d) {
-        var t = iD.svg.PointTransform(roundedProjection)(d);
+        var t = iD.svg.PointTransform(context.projection)(d);
         if (d.ca) t += ' rotate(' + Math.floor(d.ca) + ',0,0)';
         return t;
     }
