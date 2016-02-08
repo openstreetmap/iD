@@ -5,12 +5,15 @@ iD.MapillarySignLayer = function(context) {
         clientId = 'NzNRM2otQkR2SHJzaXJmNmdQWVQ0dzo1ZWYyMmYwNjdmNDdlNmVi',
         enable = false,
         initiated = false,
-        currentImage,
-        svg, image_preview_div, request, signs_defs;
+        signs_defs = {},
+        currentImage, svg, image_preview_div, request;
 
-    request = d3.json('css/traffico-release-0.1.5/global-patched.json', function(error, data) {
-        if (error) return;
-        signs_defs = data;
+    _.each(['au', 'br', 'ca', 'de', 'us'], function(el) {
+        d3.json('css/traffico-release-0.1.26/string-maps/' + el + '-map.json', function(err, data) {
+            if (err) return;
+            if (el === 'de') el = 'eu';
+            signs_defs[el] = data;
+        });
     });
 
     function show(image) {
@@ -111,7 +114,10 @@ iD.MapillarySignLayer = function(context) {
                     .attr('class', 'icon-sign')
                     .append('xhtml:body')
                     .html(function(d) {
-                        var sign_html = signs_defs[d.signs[0].type];
+                        var detectionPackage = d.signs[0].package,
+                            type = d.signs[0].type,
+                            country= detectionPackage.split('_')[1],
+                            sign_html = signs_defs[country][type];
                         return sign_html;
                     });
 
