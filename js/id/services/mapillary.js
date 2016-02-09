@@ -1,7 +1,7 @@
 iD.services.mapillary  = function() {
     var mapillary = {},
-        dispatch = d3.dispatch('loadedImages', 'loadedSigns', 'loadedThumbnail'),
-        endpoint = 'https://a.mapillary.com/v2/',
+        dispatch = d3.dispatch('loadedImages', 'loadedSigns'),
+        apibase = 'https://a.mapillary.com/v2/',
         urlImage = 'https://www.mapillary.com/map/im/',
         urlThumb = 'https://d1cuyjsrcm0gby.cloudfront.net/',
         clientId = 'NzNRM2otQkR2SHJzaXJmNmdQWVQ0dzo1ZWYyMmYwNjdmNDdlNmVi',
@@ -79,15 +79,64 @@ iD.services.mapillary  = function() {
 
     mapillary.loadImages = function(projection, dimensions) {
         var cache = iD.services.mapillary.cache,
-            url = endpoint + 'search/s/geojson?';
+            url = apibase + 'search/s/geojson?';
         loadTiles(cache.images, url, projection, dimensions);
     };
 
     mapillary.loadSigns = function(projection, dimensions) {
         var cache = iD.services.mapillary.cache,
-            url = endpoint + 'search/im/geojson/or?';
+            url = apibase + 'search/im/geojson/or?';
         loadTiles(cache.signs, url, projection, dimensions);
     };
+
+    mapillary.showThumbnail = function(selection, image) {
+        if (!(image && image.key)) return;
+
+        var thumbnail = selection.selectAll('.mapillary-image')
+            .data([0]);
+
+        /* Enter */
+
+        var enter = thumbnail.enter().append('div')
+            .attr('class', 'mapillary-image');
+
+        enter.append('button')
+            .on('click', mapillary.hideThumbnail)
+            .append('div')
+            .call(iD.svg.Icon('#icon-close'));
+
+        enter.append('img');
+
+        var link = enter
+            .append('a')
+            .attr('class', 'link')
+            .attr('target', '_blank')
+            .call(iD.svg.Icon('#icon-out-link', 'inline'))
+            .append('span')
+            .text(t('mapillary.view_on_mapillary'));
+
+        /* Update */
+
+        thumbnail
+            .transition()
+            .duration(200)
+            .style('opacity', 1);
+
+        thumbnail.selectAll('img')
+            .attr('src', urlThumb + image.key + '/thumb-320.jpg');
+
+        thumbnail.selectAll('a')
+            .attr('href', urlImage + image.key);
+
+    };
+
+    mapillary.hideThumbnail = function(selection) {
+        selection.selectAll('.mapillary-image')
+            .transition()
+            .duration(200)
+            .style('opacity', 0)
+            .remove();
+    }
 
     mapillary.reset = function() {
         var cache = iD.services.mapillary.cache;

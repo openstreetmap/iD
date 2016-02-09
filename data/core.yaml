@@ -417,10 +417,10 @@ en:
   mapillary_images:
     tooltip: "Street-level photos from Mapillary"
     title: "Photo Overlay (Mapillary)"
-    view_on_mapillary: "View this image on Mapillary"
   mapillary_signs:
     tooltip: "Traffic signs from Mapillary"
     title: "Traffic Sign Overlay (Mapillary)"
+  mapillary:
     view_on_mapillary: "View this image on Mapillary"
   help:
     title: "Help"
