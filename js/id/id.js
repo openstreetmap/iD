@@ -145,7 +145,7 @@ window.iD = function () {
         history.reset();
         _.each(iD.services, function(service) {
             var reset = service().reset;
-            if (reset) reset();
+            if (reset) reset(context);
         });
         return context;
     };

@@ -7,6 +7,18 @@ iD.services.mapillary  = function() {
         clientId = 'NzNRM2otQkR2SHJzaXJmNmdQWVQ0dzo1ZWYyMmYwNjdmNDdlNmVi',
         tileZoom = 17;
 
+    function loadSignDefs(context) {
+        if (!iD.services.mapillary.sign_defs) {
+            iD.services.mapillary.sign_defs = {};
+            _.each(['au', 'br', 'ca', 'de', 'us'], function(region) {
+                d3.json(context.assetPath() + 'traffico/string-maps/' + region + '-map.json', function(err, data) {
+                    if (err) return;
+                    if (region === 'de') region = 'eu';
+                    iD.services.mapillary.sign_defs[region] = data;
+                });
+            });
+        }
+    }
 
     function abortRequest(i) {
         i.abort();
@@ -51,7 +63,7 @@ iD.services.mapillary  = function() {
 
         tiles.forEach(function(tile) {
             var id = tile.id,
-                extent = tile.extent;
+                rect = tile.extent.rectangle();
 
             if (which.loaded[id] || which.inflight[id]) return;
 
@@ -59,10 +71,10 @@ iD.services.mapillary  = function() {
                 iD.util.qsString({
                     geojson: 'true',
                     client_id: clientId,
-                    min_lat: extent[0][1],
-                    max_lat: extent[1][1],
-                    min_lon: extent[0][0],
-                    max_lon: extent[1][0]
+                    min_lon: rect[0],
+                    min_lat: rect[1],
+                    max_lon: rect[2],
+                    max_lat: rect[3]
                 }), function(err, data) {
                     which.loaded[id] = true;
                     delete which.inflight[id];
@@ -83,10 +95,21 @@ iD.services.mapillary  = function() {
         loadTiles(cache.images, url, projection, dimensions);
     };
 
-    mapillary.loadSigns = function(projection, dimensions) {
+    mapillary.loadSigns = function(context, projection, dimensions) {
         var cache = iD.services.mapillary.cache,
             url = apibase + 'search/im/geojson/or?';
+
+        loadSignDefs(context);
         loadTiles(cache.signs, url, projection, dimensions);
+    };
+
+    mapillary.signHTML = function(d) {
+        if (!iD.services.mapillary.sign_defs) return;
+
+        var detectionPackage = d.signs[0].package,
+            type = d.signs[0].type,
+            country = detectionPackage.split('_')[1];
+        return iD.services.mapillary.sign_defs[country][type];
     };
 
     mapillary.showThumbnail = function(selection, image) {
@@ -95,28 +118,25 @@ iD.services.mapillary  = function() {
         var thumbnail = selection.selectAll('.mapillary-image')
             .data([0]);
 
-        /* Enter */
-
+        // Enter
         var enter = thumbnail.enter().append('div')
             .attr('class', 'mapillary-image');
 
         enter.append('button')
-            .on('click', mapillary.hideThumbnail)
+            .on('click', function () { mapillary.hideThumbnail(selection) })
             .append('div')
             .call(iD.svg.Icon('#icon-close'));
 
         enter.append('img');
 
-        var link = enter
-            .append('a')
+        enter.append('a')
             .attr('class', 'link')
             .attr('target', '_blank')
             .call(iD.svg.Icon('#icon-out-link', 'inline'))
             .append('span')
             .text(t('mapillary.view_on_mapillary'));
 
-        /* Update */
-
+        // Update
         thumbnail
             .transition()
             .duration(200)
@@ -136,7 +156,7 @@ iD.services.mapillary  = function() {
             .duration(200)
             .style('opacity', 0)
             .remove();
-    }
+    };
 
     mapillary.reset = function() {
         var cache = iD.services.mapillary.cache;

@@ -1,7 +1,7 @@
 iD.MapillaryImageLayer = function(context) {
     var mapillary = iD.services.mapillary(),
         rtree = rbush(),
-        enable = false,
+        enabled = false,
         selectedImage,
         layer;
 
@@ -40,7 +40,7 @@ iD.MapillaryImageLayer = function(context) {
                 images.push([loc[0], loc[1], loc[0], loc[1], {
                     key: sequence.properties.keys[j],
                     ca: sequence.properties.cas[j],
-                    loc: sequence.geometry.coordinates[j]
+                    loc: loc
                 }]);
             }
         }
@@ -56,6 +56,7 @@ iD.MapillaryImageLayer = function(context) {
         var g = layer.selectAll('g')
             .data(images, function(d) { return d.key; });
 
+        // Enter
         var enter = g.enter().append('g')
             .attr('class', 'image');
 
@@ -69,6 +70,7 @@ iD.MapillaryImageLayer = function(context) {
             .attr('dy', '0')
             .attr('r', '6');
 
+        // Update
         g.attr('transform', transform);
 
         g.exit()
@@ -80,7 +82,7 @@ iD.MapillaryImageLayer = function(context) {
         layer = selection.selectAll('svg')
             .data([0]);
 
-        /* Enter */
+        // Enter
         layer.enter()
             .append('svg')
             .on('click', function() {
@@ -104,13 +106,16 @@ iD.MapillaryImageLayer = function(context) {
             });
 
 
-        /* Update */
+        // Update
         layer
-            .style('display', enable ? 'block' : 'none');
+            .style('display', enabled ? 'block' : 'none');
 
-        if (!enable) {
+        if (!enabled) {
             hide();
             layer.selectAll('g')
+                .transition()
+                .duration(200)
+                .style('opacity', 0)
                 .remove();
         } else {
             update();
@@ -119,8 +124,8 @@ iD.MapillaryImageLayer = function(context) {
     }
 
     render.enable = function(_) {
-        if (!arguments.length) return enable;
-        enable = _;
+        if (!arguments.length) return enabled;
+        enabled = _;
         return render;
     };
 

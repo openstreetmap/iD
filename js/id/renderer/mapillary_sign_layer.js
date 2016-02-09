@@ -1,182 +1,133 @@
 iD.MapillarySignLayer = function(context) {
-    var urlSearch = 'https://a.mapillary.com/v2/search/im/geojson/or',
-        urlImage = 'http://mapillary.com/map/im/',
-        urlThumb = 'https://d1cuyjsrcm0gby.cloudfront.net/',
-        clientId = 'NzNRM2otQkR2SHJzaXJmNmdQWVQ0dzo1ZWYyMmYwNjdmNDdlNmVi',
-        enable = false,
-        initiated = false,
-        signs_defs = {},
-        currentImage, svg, image_preview_div, request;
+    var mapillary = iD.services.mapillary(),
+        rtree = rbush(),
+        enabled = false,
+        selectedImage,
+        layer;
 
-    _.each(['au', 'br', 'ca', 'de', 'us'], function(el) {
-        d3.json(context.assetPath() + 'traffico/string-maps/' + el + '-map.json', function(err, data) {
-            if (err) return;
-            if (el === 'de') el = 'eu';
-            signs_defs[el] = data;
-        });
-    });
 
     function show(image) {
-        svg.selectAll('.icon-sign')
+        layer.selectAll('.icon-sign')
             .classed('selected', function(d) {
-                return currentImage && d.key === currentImage.key;
+                return selectedImage && d.key === selectedImage.key;
             });
 
-        image_preview_div.classed('hidden', false)
-            .classed('temp', image !== currentImage);
-
-        image_preview_div.selectAll('img')
-            .attr('src', urlThumb + image.key + '/thumb-320.jpg');
-
-        image_preview_div.selectAll('a')
-            .attr('href', urlImage + image.key);
+        mapillary.showThumbnail(context.container(), image);
     }
 
     function hide() {
-        currentImage = undefined;
-        svg.selectAll('.icon-sign')
+        selectedImage = undefined;
+        layer.selectAll('.icon-sign')
             .classed('selected', false);
-        image_preview_div.classed('hidden', true);
+
+        mapillary.hideThumbnail(context.container());
     }
 
-    function render(selection) {
-        svg = selection.selectAll('svg')
-            .data([0]);
+    function signsLoaded(data) {
+        var signs = [],
+            sign, loc;
 
-        svg.enter().append('svg');
-
-        svg.style('display', enable ? 'block' : 'none');
-
-        image_preview_div = context.container().selectAll('.mapillary-image')
-            .data([0]);
-
-        var enter = image_preview_div.enter().append('div')
-            .attr('class', 'mapillary-image');
-
-        enter.append('button')
-            .on('click', hide)
-            .append('div')
-            .attr('class', 'icon close');
-
-        enter.append('img');
-
-        var link = enter.append('a')
-            .attr('class', 'link')
-            .attr('target', '_blank');
-
-        link.append('span')
-            .attr('class', 'icon icon-pre-text out-link');
-
-        link.append('span')
-            .text(t('mapillary_signs.view_on_mapillary'));
-
-        if (!enable) {
-            hide();
-
-            svg.selectAll('.icon-sign')
-                .remove();
-
-            return;
+        for (var i = 0; i < data.features.length; i++) {
+            sign = data.features[i];
+            loc = sign.geometry.coordinates;
+            signs.push([loc[0], loc[1], loc[0], loc[1], {
+                key: sign.properties.key,
+                signs: sign.properties.rects,
+                loc: loc
+            }]);
         }
 
-        // hack
-        svg.selectAll('.icon-sign')
-            .remove();
-
-        var extent = context.map().extent();
-
-        if (request)
-            request.abort();
-
-        request = d3.json(urlSearch + '?client_id=' + clientId + '&min_lat=' +
-            extent[0][1] + '&max_lat=' + extent[1][1] + '&min_lon=' +
-            extent[0][0] + '&max_lon=' + extent[1][0] + '&limit=100&geojson=true',
-            function(error, data) {
-                if (error) return;
-                var images = [];
-
-                for (var i = 0; i < data.features.length; i++) {
-                    var trafficsign = data.features[i];
-                    images.push({
-                        key: trafficsign.properties.key,
-                        loc: trafficsign.geometry.coordinates,
-                        signs: trafficsign.properties.rects
-                    });
-                    if (images.length >= 1000) break;
-                }
-
-                var foreignObjects = svg.selectAll('foreignObject')
-                    .data(images, function(d) { return d.key; });
-
-                var enter = foreignObjects.enter();
-
-                enter.append('foreignObject')
-                    .attr('class', 'icon-sign')
-                    .append('xhtml:body')
-                    .html(function(d) {
-                        var detectionPackage = d.signs[0].package,
-                            type = d.signs[0].type,
-                            country= detectionPackage.split('_')[1],
-                            sign_html = signs_defs[country][type];
-                        return sign_html;
-                    });
-
-                foreignObjects
-                    .on('click', function(data) {
-                        if (!data) {
-                            d3.event.preventDefault();
-                            return;
-                        }
-                        var image = data;
-                        if (currentImage === image) {
-                            hide();
-                        } else {
-                            currentImage = image;
-                            show(image);
-                        }
-                    })
-                    .on('mouseover', function(data) {
-                        if (!data) {
-                            d3.event.preventDefault();
-                            return;
-                        }
-                        show(data);
-                    })
-                    .on('mouseout', function(data) {
-                        if (!data) {
-                            d3.event.preventDefault();
-                            return;
-                        }
-                        if (currentImage) {
-                            show(currentImage);
-                        } else {
-                            hide();
-                        }
-                    });
-
-                foreignObjects
-                    .attr('transform', iD.svg.PointTransform(context.projection));
-
-                foreignObjects.exit()
-                    .remove();
-
-                if(!initiated) {
-                    initiated = true;
-                }
-            });
+        rtree.load(signs);
     }
 
+
+    function update() {
+        var signs = rtree
+                .search(context.map().extent().rectangle())
+                .map(function(d) { return d[4]; });
+
+        var signGroups = layer.selectAll('.mapillary-sign')
+            .data(signs, function(d) { return d.key; });
+
+        // Enter
+        var enter = signGroups.enter()
+            .append('g')
+            .attr('class', 'mapillary-sign')
+            .attr('transform', 'translate(-15, -15)')
+            .append('foreignObject')
+            .attr('class', 'icon-sign')
+            .append('xhtml:body')
+            .html(mapillary.signHTML);
+
+        enter
+            .on('click', function(d) {
+                if (d === selectedImage) {
+                    hide();
+                } else {
+                    selectedImage = d;
+                    show(d);
+                }
+            })
+            .on('mouseover', show)
+            .on('mouseout', function() {
+                if (selectedImage) {
+                    show(selectedImage);
+                } else {
+                    hide();
+                }
+            });
+
+        // Update
+        signGroups
+            .select('.icon-sign')
+            .attr('transform', iD.svg.PointTransform(context.projection));
+
+        signGroups.exit()
+            .remove();
+    }
+
+
+    function render(selection) {
+        layer = selection.selectAll('svg')
+            .data([0]);
+
+        // Enter
+        layer.enter()
+            .append('svg');
+
+        // Update
+        layer
+            .style('display', enabled ? 'block' : 'none');
+
+        if (!enabled) {
+            hide();
+            layer.selectAll('.mapillary-sign')
+                .transition()
+                .duration(200)
+                .style('opacity', 0)
+                .remove();
+        } else {
+            update();
+            mapillary.loadSigns(context, context.projection, layer.dimensions());
+        }
+    }
+
+
     render.enable = function(_) {
-        if (!arguments.length) return enable;
-        enable = _;
+        if (!arguments.length) return enabled;
+        enabled = _;
         return render;
     };
 
     render.dimensions = function(_) {
-        if (!arguments.length) return svg.dimensions();
-        svg.dimensions(_);
+        if (!arguments.length) return layer.dimensions();
+        layer.dimensions(_);
         return render;
     };
+
+
+    mapillary
+        .on('loadedSigns', signsLoaded);
 
     return render;
 };
