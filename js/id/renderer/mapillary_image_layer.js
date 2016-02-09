@@ -1,26 +1,49 @@
 iD.MapillaryImageLayer = function(context) {
     var mapillary = iD.services.mapillary(),
+        debouncedRedraw = _.debounce(function () { context.pan([0,0]); }, 1000),
         rtree = rbush(),
         enabled = false,
-        selectedImage,
         layer;
 
 
-    function show(image) {
+    function showThumbnail(imageKey) {
+        var thumb = mapillary.selectedThumbnail();
         layer.selectAll('g')
-            .classed('selected', function(d) {
-                return selectedImage && d.key === selectedImage.key;
-            });
+            .classed('selected', function(d) { return d.key === thumb; });
 
-        mapillary.showThumbnail(context.container(), image);
+        mapillary.showThumbnail(context.container(), imageKey);
     }
 
-    function hide() {
-        selectedImage = undefined;
+    function hideThumbnail() {
         layer.selectAll('g')
             .classed('selected', false);
 
         mapillary.hideThumbnail(context.container());
+    }
+
+    function showLayer() {
+        layer
+            .style('display', 'block')
+            .style('opacity', 0)
+            .transition()
+            .duration(500)
+            .style('opacity', 1)
+            .each('end', debouncedRedraw);
+    }
+
+    function hideLayer() {
+        debouncedRedraw.cancel();
+        hideThumbnail();
+        layer
+            .transition()
+            .duration(500)
+            .style('opacity', 0)
+            .each('end', function() {
+                layer
+                    .style('display', 'none')
+                    .selectAll('g')
+                    .remove();
+            });
     }
 
     function transform(d) {
@@ -30,34 +53,36 @@ iD.MapillaryImageLayer = function(context) {
     }
 
     function imagesLoaded(data) {
+        if (!data.features.length) return;
+
         var images = [],
-            sequence, loc;
+            image, loc;
 
         for (var i = 0; i < data.features.length; i++) {
-            sequence = data.features[i];
-            for (var j = 0; j < sequence.geometry.coordinates.length; j++) {
-                loc = sequence.geometry.coordinates[j];
-                images.push([loc[0], loc[1], loc[0], loc[1], {
-                    key: sequence.properties.keys[j],
-                    ca: sequence.properties.cas[j],
-                    loc: loc
-                }]);
-            }
+            image = data.features[i];
+            loc = image.geometry.coordinates;
+            images.push([loc[0], loc[1], loc[0], loc[1], {
+                key: image.properties.key,
+                ca: image.properties.ca,
+                loc: loc
+            }]);
         }
 
         rtree.load(images);
+        debouncedRedraw();
     }
 
-    function update() {
-        var images = rtree
+    function drawMarkers() {
+        var data = rtree
                 .search(context.map().extent().rectangle())
                 .map(function(d) { return d[4]; });
 
-        var g = layer.selectAll('g')
-            .data(images, function(d) { return d.key; });
+        var markers = layer.selectAll('g')
+            .data(data, function(d) { return d.key; });
 
         // Enter
-        var enter = g.enter().append('g')
+        var enter = markers.enter()
+            .append('g')
             .attr('class', 'image');
 
         enter.append('path')
@@ -71,9 +96,11 @@ iD.MapillaryImageLayer = function(context) {
             .attr('r', '6');
 
         // Update
-        g.attr('transform', transform);
+        markers
+            .attr('transform', transform);
 
-        g.exit()
+        // Exit
+        markers.exit()
             .remove();
     }
 
@@ -85,40 +112,30 @@ iD.MapillaryImageLayer = function(context) {
         // Enter
         layer.enter()
             .append('svg')
-            .on('click', function() {
-                var image = d3.event.target.__data__;
-                if (selectedImage === image) {
-                    hide();
+            .style('display', enabled ? 'block' : 'none')
+            .on('click', function() {   // deselect/select
+                var imageKey = d3.event.target.__data__.key;
+                if (imageKey === mapillary.selectedThumbnail()) {
+                    hideThumbnail();
                 } else {
-                    selectedImage = image;
-                    show(image);
+                    mapillary.selectedThumbnail(imageKey);
+                    showThumbnail(imageKey);
                 }
             })
             .on('mouseover', function() {
-                show(d3.event.target.__data__);
+                showThumbnail(d3.event.target.__data__.key);
             })
             .on('mouseout', function() {
-                if (selectedImage) {
-                    show(selectedImage);
+                var thumb = mapillary.selectedThumbnail();
+                if (thumb) {
+                    showThumbnail(thumb);
                 } else {
-                    hide();
+                    hideThumbnail();
                 }
             });
 
-
-        // Update
-        layer
-            .style('display', enabled ? 'block' : 'none');
-
-        if (!enabled) {
-            hide();
-            layer.selectAll('g')
-                .transition()
-                .duration(200)
-                .style('opacity', 0)
-                .remove();
-        } else {
-            update();
+        if (enabled) {
+            drawMarkers();
             mapillary.loadImages(context.projection, layer.dimensions());
         }
     }
@@ -126,6 +143,11 @@ iD.MapillaryImageLayer = function(context) {
     render.enable = function(_) {
         if (!arguments.length) return enabled;
         enabled = _;
+        if (enabled) {
+            showLayer();
+        } else {
+            hideLayer();
+        }
         return render;
     };
 

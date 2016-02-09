@@ -1,29 +1,54 @@
 iD.MapillarySignLayer = function(context) {
     var mapillary = iD.services.mapillary(),
+        debouncedRedraw = _.debounce(function () { context.pan([0,0]); }, 1000),
         rtree = rbush(),
         enabled = false,
-        selectedImage,
         layer;
 
 
-    function show(image) {
+    function showThumbnail(imageKey) {
+        var thumb = mapillary.selectedThumbnail();
         layer.selectAll('.icon-sign')
-            .classed('selected', function(d) {
-                return selectedImage && d.key === selectedImage.key;
-            });
+            .classed('selected', function(d) { return d.key === thumb; });
 
-        mapillary.showThumbnail(context.container(), image);
+        mapillary.showThumbnail(context.container(), imageKey);
     }
 
-    function hide() {
-        selectedImage = undefined;
+    function hideThumbnail() {
         layer.selectAll('.icon-sign')
             .classed('selected', false);
 
         mapillary.hideThumbnail(context.container());
     }
 
+    function showLayer() {
+        layer
+            .style('display', 'block')
+            .style('opacity', 0)
+            .transition()
+            .duration(500)
+            .style('opacity', 1)
+            .each('end', debouncedRedraw);
+    }
+
+    function hideLayer() {
+        debouncedRedraw.cancel();
+        hideThumbnail();
+        layer
+            .transition()
+            .duration(500)
+            .style('opacity', 0)
+            .each('end', function() {
+                layer
+                    .style('display', 'none')
+                    .selectAll('.icon-sign')
+                    .remove();
+            });
+    }
+
     function signsLoaded(data) {
+        if (!data.features.length) return;
+
         var signs = [],
             sign, loc;
 
@@ -38,84 +63,78 @@ iD.MapillarySignLayer = function(context) {
         }
 
         rtree.load(signs);
+        debouncedRedraw();
     }
 
+    function drawSigns() {
+        var data = rtree
+            .search(context.map().extent().rectangle())
+            .map(function(d) { return d[4]; });
 
-    function update() {
-        var signs = rtree
-                .search(context.map().extent().rectangle())
-                .map(function(d) { return d[4]; });
-
-        var signGroups = layer.selectAll('.mapillary-sign')
-            .data(signs, function(d) { return d.key; });
+        var signs = layer.select('.mapillary-sign-offset')
+            .selectAll('.icon-sign')
+            .data(data, function(d) { return d.key; });
 
         // Enter
-        var enter = signGroups.enter()
-            .append('g')
-            .attr('class', 'mapillary-sign')
-            .attr('transform', 'translate(-15, -15)')
+        signs.enter()
             .append('foreignObject')
             .attr('class', 'icon-sign')
             .append('xhtml:body')
-            .html(mapillary.signHTML);
-
-        enter
-            .on('click', function(d) {
-                if (d === selectedImage) {
-                    hide();
+            .html(mapillary.signHTML)
+            .on('click', function(d) {   // deselect/select
+                if (d.key === mapillary.selectedThumbnail()) {
+                    hideThumbnail();
                 } else {
-                    selectedImage = d;
-                    show(d);
+                    mapillary.selectedThumbnail(d.key);
+                    showThumbnail(d.key);
                 }
             })
-            .on('mouseover', show)
+            .on('mouseover', function(d) {
+                showThumbnail(d.key);
+            })
             .on('mouseout', function() {
-                if (selectedImage) {
-                    show(selectedImage);
+                var thumb = mapillary.selectedThumbnail();
+                if (thumb) {
+                    showThumbnail(thumb);
                 } else {
-                    hide();
+                    hideThumbnail();
                 }
             });
 
         // Update
-        signGroups
-            .select('.icon-sign')
+        signs
             .attr('transform', iD.svg.PointTransform(context.projection));
 
-        signGroups.exit()
+        // Exit
+        signs.exit()
             .remove();
     }
-
 
     function render(selection) {
         layer = selection.selectAll('svg')
             .data([0]);
 
-        // Enter
         layer.enter()
-            .append('svg');
+            .append('svg')
+            .style('display', enabled ? 'block' : 'none')
+            .append('g')
+            .attr('class', 'mapillary-sign-offset')
+            .attr('transform', 'translate(-15, -15)');  // center signs on loc
 
-        // Update
-        layer
-            .style('display', enabled ? 'block' : 'none');
-
-        if (!enabled) {
-            hide();
-            layer.selectAll('.mapillary-sign')
-                .transition()
-                .duration(200)
-                .style('opacity', 0)
-                .remove();
-        } else {
-            update();
+        if (enabled) {
+            drawSigns();
             mapillary.loadSigns(context, context.projection, layer.dimensions());
         }
     }
 
-
     render.enable = function(_) {
         if (!arguments.length) return enabled;
         enabled = _;
+        if (enabled) {
+            showLayer();
+        } else {
+            hideLayer();
+        }
         return render;
     };
 
