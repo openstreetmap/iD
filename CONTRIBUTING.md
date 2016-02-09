@@ -155,6 +155,9 @@ feel free to use newer features wisely.
 
 Test your code and make sure it passes.
 
+First ensure you have a `phantomjs` binary, version 2.0 or later, available on your `$PATH`. On a Mac,
+you can install this via homebrew with `brew install phantomjs`. Then:
+
 1. Go to the directory where you have checked out `iD`
 2. run `npm install`
 3. run `make`

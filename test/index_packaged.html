@@ -16,6 +16,12 @@
     <script src="../node_modules/happen/src/happen.js"></script>
     <script src="lib/bind-shim.js"></script>
 
+    <script>
+    if (typeof initMochaPhantomJS === 'function') {
+        initMochaPhantomJS()
+    }
+    </script>
+
     <!-- include source files here... -->
     <script src='../dist/iD.js'></script>
     <script src='../dist/presets.js'></script>
@@ -120,7 +126,7 @@
     <script src="spec/id.js"></script>
 
     <script>
-        (window.mochaPhantomJS || window.mocha).run();
+        window.mocha.run();
     </script>
 </body>
 </html>
