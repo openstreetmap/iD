@@ -23,7 +23,7 @@ iD.MapillarySignLayer = function(context) {
     }
 
     function showLayer() {
-        layer.style('display', 'block')
+        layer.style('display', 'block');
         debouncedRedraw();
     }
 
@@ -64,11 +64,17 @@ iD.MapillarySignLayer = function(context) {
             .data(data, function(d) { return d.key; });
 
         // Enter
-        signs.enter()
+        var enter = signs.enter()
             .append('foreignObject')
             .attr('class', 'icon-sign')
+            .attr('width', '32px')      // for Firefox
+            .attr('height', '32px');    // for Firefox
+
+        enter
             .append('xhtml:body')
-            .html(mapillary.signHTML)
+            .html(mapillary.signHTML);
+
+        enter
             .on('click', function(d) {   // deselect/select
                 if (d.key === mapillary.selectedThumbnail()) {
                     hideThumbnail();
@@ -107,7 +113,7 @@ iD.MapillarySignLayer = function(context) {
             .style('display', enabled ? 'block' : 'none')
             .append('g')
             .attr('class', 'mapillary-sign-offset')
-            .attr('transform', 'translate(-15, -15)');  // center signs on loc
+            .attr('transform', 'translate(-16, -16)');  // center signs on loc
 
         if (enabled) {
             drawSigns();

@@ -1560,28 +1560,28 @@ text.gpx {
     pointer-events: none;
 }
 
-.layer-mapillary-signs body {
-    min-width: 30px;
+.layer-mapillary-signs .icon-sign body {
+    min-width: 20px;
+    height: 28px;
+    width: 28px;
+    border: 2px solid transparent;
     pointer-events: visible;
     cursor: pointer; /* Opera */
     cursor: url(img/cursor-select-mapillary.png) 6 1, pointer; /* FF */
+    z-index: 70;
 }
 
-.layer-mapillary-signs .icon-sign {
-    height: 32px;
-    width: 32px;
-    border: 2px solid transparent;
-}
-
-.layer-mapillary-signs .icon-sign:hover {
+.layer-mapillary-signs .icon-sign:hover body {
     border: 2px solid rgba(255,198,0,0.8);
-}
+    z-index: 80;
+ }
 
-.layer-mapillary-signs .icon-sign.selected {
+.layer-mapillary-signs .icon-sign.selected body {
     border: 2px solid rgba(255,0,0,0.8);
-}
+    z-index: 80;
+ }
 
-.layer-mapillary-signs .t {
+.layer-mapillary-signs .icon-sign .t {
     font-size: 28px;
     z-index: 70;
     position: absolute;
