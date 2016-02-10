@@ -1520,33 +1520,36 @@ text.gpx {
     pointer-events: none;
 }
 
-.layer-mapillary-images g {
+.layer-mapillary-images .viewfield-group {
     pointer-events: visible;
     cursor: pointer; /* Opera */
     cursor: url(img/cursor-select-mapillary.png) 6 1, pointer; /* FF */
 }
 
-.layer-mapillary-images g * {
+.layer-mapillary-images .viewfield-group * {
     stroke-width: 1;
     stroke: #444;
     fill: #ffc600;
+    z-index: 50;
 }
 
-.layer-mapillary-images g:hover * {
+.layer-mapillary-images .viewfield-group:hover * {
     stroke-width: 1;
     stroke: #333;
     fill: #ff9900;
+    z-index: 60;
 }
 
-.layer-mapillary-images g.selected  * {
+.layer-mapillary-images .viewfield-group.selected  * {
     stroke-width: 2;
     stroke: #222;
     fill: #ff5800;
+    z-index: 60;
 }
 
-.layer-mapillary-images g:hover path.viewfield,
-.layer-mapillary-images g.selected path.viewfield,
-.layer-mapillary-images g path.viewfield {
+.layer-mapillary-images .viewfield-group:hover path.viewfield,
+.layer-mapillary-images .viewfield-group.selected path.viewfield,
+.layer-mapillary-images .viewfield-group path.viewfield {
     stroke-width: 0;
     fill-opacity: 0.6;
 }
@@ -1565,23 +1568,28 @@ text.gpx {
 }
 
 .layer-mapillary-signs .icon-sign {
-    height: 30px;
-    width: 30px;
+    height: 32px;
+    width: 32px;
+    border: 2px solid transparent;
 }
 
-.layer-mapillary-signs body:hover {
-    border: 1px solid red;
+.layer-mapillary-signs .icon-sign:hover {
+    border: 2px solid rgba(255,198,0,0.8);
 }
 
 .layer-mapillary-signs .icon-sign.selected {
-    stroke-width: 4;
-    border: 1px solid yellow;
+    border: 2px solid rgba(255,0,0,0.8);
 }
 
 .layer-mapillary-signs .t {
     font-size: 28px;
-    z-index: 100;
+    z-index: 70;
     position: absolute;
+}
+
+.layer-mapillary-signs .icon-sign:hover .t,
+.layer-mapillary-signs .icon-sign.selected .t {
+    z-index: 80;
 }
 
 /* Modes */
