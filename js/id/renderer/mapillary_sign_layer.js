@@ -8,42 +8,30 @@ iD.MapillarySignLayer = function(context) {
 
     function showThumbnail(imageKey) {
         var thumb = mapillary.selectedThumbnail();
-        layer.selectAll('.icon-sign')
+
+        d3.selectAll('.layer-mapillary-images .viewfield-group, .layer-mapillary-signs .icon-sign')
             .classed('selected', function(d) { return d.key === thumb; });
 
         mapillary.showThumbnail(context.container(), imageKey);
     }
 
     function hideThumbnail() {
-        layer.selectAll('.icon-sign')
+        d3.selectAll('.layer-mapillary-images .viewfield-group, .layer-mapillary-signs .icon-sign')
             .classed('selected', false);
 
         mapillary.hideThumbnail(context.container());
     }
 
     function showLayer() {
-        layer
-            .style('display', 'block')
-            .style('opacity', 0)
-            .transition()
-            .duration(500)
-            .style('opacity', 1)
-            .each('end', debouncedRedraw);
+        layer.style('display', 'block')
+        debouncedRedraw();
     }
 
     function hideLayer() {
         debouncedRedraw.cancel();
         hideThumbnail();
-        layer
-            .transition()
-            .duration(500)
-            .style('opacity', 0)
-            .each('end', function() {
-                layer
-                    .style('display', 'none')
-                    .selectAll('.icon-sign')
-                    .remove();
-            });
+        layer.selectAll('.icon-sign').remove();
+        layer.style('display', 'none');
     }
 
     function signsLoaded(data) {

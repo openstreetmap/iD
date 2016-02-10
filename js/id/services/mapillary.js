@@ -1,12 +1,12 @@
-iD.services.mapillary  = function() {
+iD.services.mapillary = function() {
     var mapillary = {},
         dispatch = d3.dispatch('loadedImages', 'loadedSigns'),
         apibase = 'https://a.mapillary.com/v2/',
         urlImage = 'https://www.mapillary.com/map/im/',
         urlThumb = 'https://d1cuyjsrcm0gby.cloudfront.net/',
         clientId = 'NzNRM2otQkR2SHJzaXJmNmdQWVQ0dzo1ZWYyMmYwNjdmNDdlNmVi',
-        tileZoom = 14,
-        selectedThumbnail;
+        maxResults = 1000,
+        tileZoom = 14;
 
 
     function loadSignDefs(context) {
@@ -54,8 +54,7 @@ iD.services.mapillary  = function() {
 
 
     function loadTiles(which, url, projection, dimensions) {
-        var cache = iD.services.mapillary.cache,
-            tiles = getTiles(projection, dimensions);
+        var tiles = getTiles(projection, dimensions);
 
         _.filter(which.inflight, function(v, k) {
             var wanted = _.find(tiles, function(tile) { return k === tile.id; });
@@ -64,34 +63,43 @@ iD.services.mapillary  = function() {
         }).map(abortRequest);
 
         tiles.forEach(function(tile) {
-            var id = tile.id,
-                rect = tile.extent.rectangle();
-
-            if (which.loaded[id] || which.inflight[id]) return;
-
-            var what = (which === cache.images ? 'images' : 'signs');
-            console.log('requesting ' + what + ' tile ' + id);
-
-            which.inflight[id] = d3.json(url +
-                iD.util.qsString({
-                    geojson: 'true',
-                    client_id: clientId,
-                    min_lon: rect[0],
-                    min_lat: rect[1],
-                    max_lon: rect[2],
-                    max_lat: rect[3]
-                }), function(err, data) {
-                    which.loaded[id] = true;
-                    delete which.inflight[id];
-                    if (err) return;
-
-                    if (which === cache.images)
-                        dispatch.loadedImages(data);
-                    else if (which === cache.signs)
-                        dispatch.loadedSigns(data);
-                }
-            );
+            loadTilePage(which, url, tile, 0);
         });
+    }
+
+    function loadTilePage(which, url, tile, page) {
+        var cache = iD.services.mapillary.cache,
+            id = tile.id + ',' + String(page),
+            rect = tile.extent.rectangle();
+
+        if (which.loaded[id] || which.inflight[id]) return;
+
+        which.inflight[id] = d3.json(url +
+            iD.util.qsString({
+                geojson: 'true',
+                limit: maxResults,
+                page: page,
+                client_id: clientId,
+                min_lon: rect[0],
+                min_lat: rect[1],
+                max_lon: rect[2],
+                max_lat: rect[3]
+            }), function(err, data) {
+                which.loaded[id] = true;
+                delete which.inflight[id];
+                if (err) return;
+
+                if (which === cache.images) {
+                    dispatch.loadedImages(data);
+                } else if (which === cache.signs) {
+                    dispatch.loadedSigns(data);
+                }
+
+                if (data.features.length === maxResults) {
+                    loadTilePage(which, url, tile, ++page);
+                }
+            }
+        );
     }
 
     mapillary.loadImages = function(projection, dimensions) {
@@ -158,7 +166,7 @@ iD.services.mapillary  = function() {
     };
 
     mapillary.hideThumbnail = function(selection) {
-        selectedThumbnail = null;
+        iD.services.mapillary.thumb = null;
         selection.selectAll('.mapillary-image')
             .transition()
             .duration(200)
@@ -167,8 +175,8 @@ iD.services.mapillary  = function() {
     };
 
     mapillary.selectedThumbnail = function(imageKey) {
-        if (!arguments.length) return selectedThumbnail;
-        selectedThumbnail = imageKey;
+        if (!arguments.length) return iD.services.mapillary.thumb;
+        iD.services.mapillary.thumb = imageKey;
     };
 
     mapillary.reset = function() {
@@ -183,6 +191,8 @@ iD.services.mapillary  = function() {
             images: { inflight: {}, loaded: {}, rbush: rbush() },
             signs:  { inflight: {}, loaded: {}, rbush: rbush() }
         };
+
+        iD.services.mapillary.thumb = null;
 
         return mapillary;
     };

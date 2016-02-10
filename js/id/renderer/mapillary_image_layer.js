@@ -8,14 +8,15 @@ iD.MapillaryImageLayer = function(context) {
 
     function showThumbnail(imageKey) {
         var thumb = mapillary.selectedThumbnail();
-        layer.selectAll('g')
+
+        d3.selectAll('.layer-mapillary-images .viewfield-group, .layer-mapillary-signs .icon-sign')
             .classed('selected', function(d) { return d.key === thumb; });
 
         mapillary.showThumbnail(context.container(), imageKey);
     }
 
     function hideThumbnail() {
-        layer.selectAll('g')
+        d3.selectAll('.layer-mapillary-images .viewfield-group, .layer-mapillary-signs .icon-sign')
             .classed('selected', false);
 
         mapillary.hideThumbnail(context.container());
@@ -41,7 +42,7 @@ iD.MapillaryImageLayer = function(context) {
             .each('end', function() {
                 layer
                     .style('display', 'none')
-                    .selectAll('g')
+                    .selectAll('.viewfield-group')
                     .remove();
             });
     }
@@ -74,16 +75,16 @@ iD.MapillaryImageLayer = function(context) {
 
     function drawMarkers() {
         var data = rtree
-                .search(context.map().extent().rectangle())
-                .map(function(d) { return d[4]; });
+            .search(context.map().extent().rectangle())
+            .map(function(d) { return d[4]; });
 
-        var markers = layer.selectAll('g')
+        var markers = layer.selectAll('.viewfield-group')
             .data(data, function(d) { return d.key; });
 
         // Enter
         var enter = markers.enter()
             .append('g')
-            .attr('class', 'image');
+            .attr('class', 'viewfield-group');
 
         enter.append('path')
             .attr('class', 'viewfield')
