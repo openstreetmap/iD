@@ -1,8 +1,8 @@
 iD.MapillaryImageLayer = function(context) {
     var mapillary = iD.services.mapillary(),
         debouncedRedraw = _.debounce(function () { context.pan([0,0]); }, 1000),
-        rtree = rbush(),
         enabled = false,
+        minZoom = 12,
         layer;
 
 
@@ -23,8 +23,8 @@ iD.MapillaryImageLayer = function(context) {
     }
 
     function showLayer() {
+        editOn();
         layer
-            .style('display', 'block')
             .style('opacity', 0)
             .transition()
             .duration(500)
@@ -39,12 +39,16 @@ iD.MapillaryImageLayer = function(context) {
             .transition()
             .duration(500)
             .style('opacity', 0)
-            .each('end', function() {
-                layer
-                    .style('display', 'none')
-                    .selectAll('.viewfield-group')
-                    .remove();
-            });
+            .each('end', editOff);
+    }
+
+    function editOn() {
+        layer.style('display', 'block');
+    }
+
+    function editOff() {
+        layer.selectAll('.viewfield-group').remove();
+        layer.style('display', 'none');
     }
 
     function transform(d) {
@@ -53,30 +57,8 @@ iD.MapillaryImageLayer = function(context) {
         return t;
     }
 
-    function imagesLoaded(data) {
-        if (!data.features.length) return;
-
-        var images = [],
-            image, loc;
-
-        for (var i = 0; i < data.features.length; i++) {
-            image = data.features[i];
-            loc = image.geometry.coordinates;
-            images.push([loc[0], loc[1], loc[0], loc[1], {
-                key: image.properties.key,
-                ca: image.properties.ca,
-                loc: loc
-            }]);
-        }
-
-        rtree.load(images);
-        debouncedRedraw();
-    }
-
     function drawMarkers() {
-        var data = rtree
-            .search(context.map().extent().rectangle())
-            .map(function(d) { return d[4]; });
+        var data = mapillary.images(context.map().extent());
 
         var markers = layer.selectAll('.viewfield-group')
             .data(data, function(d) { return d.key; });
@@ -104,7 +86,6 @@ iD.MapillaryImageLayer = function(context) {
         markers.exit()
             .remove();
     }
-
 
     function render(selection) {
         layer = selection.selectAll('svg')
@@ -137,8 +118,13 @@ iD.MapillaryImageLayer = function(context) {
             });
 
         if (enabled) {
-            drawMarkers();
-            mapillary.loadImages(context.projection, layer.dimensions());
+            if (~~context.map().zoom() < minZoom) {
+                editOff();
+            } else {
+                editOn();
+                drawMarkers();
+                mapillary.loadImages(context.projection, layer.dimensions());
+            }
         }
     }
 
@@ -161,7 +147,7 @@ iD.MapillaryImageLayer = function(context) {
 
 
     mapillary
-        .on('loadedImages', imagesLoaded);
+        .on('loadedImages', debouncedRedraw);
 
     return render;
 };

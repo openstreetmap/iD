@@ -1,8 +1,8 @@
 iD.MapillarySignLayer = function(context) {
     var mapillary = iD.services.mapillary(),
         debouncedRedraw = _.debounce(function () { context.pan([0,0]); }, 1000),
-        rtree = rbush(),
         enabled = false,
+        minZoom = 12,
         layer;
 
 
@@ -23,41 +23,27 @@ iD.MapillarySignLayer = function(context) {
     }
 
     function showLayer() {
-        layer.style('display', 'block');
+        editOn();
         debouncedRedraw();
     }
 
     function hideLayer() {
         debouncedRedraw.cancel();
         hideThumbnail();
+        editOff();
+    }
+
+    function editOn() {
+        layer.style('display', 'block');
+    }
+
+    function editOff() {
         layer.selectAll('.icon-sign').remove();
         layer.style('display', 'none');
     }
 
-    function signsLoaded(data) {
-        if (!data.features.length) return;
-
-        var signs = [],
-            sign, loc;
-
-        for (var i = 0; i < data.features.length; i++) {
-            sign = data.features[i];
-            loc = sign.geometry.coordinates;
-            signs.push([loc[0], loc[1], loc[0], loc[1], {
-                key: sign.properties.key,
-                signs: sign.properties.rects,
-                loc: loc
-            }]);
-        }
-
-        rtree.load(signs);
-        debouncedRedraw();
-    }
-
     function drawSigns() {
-        var data = rtree
-            .search(context.map().extent().rectangle())
-            .map(function(d) { return d[4]; });
+        var data = mapillary.signs(context.map().extent());
 
         var signs = layer.select('.mapillary-sign-offset')
             .selectAll('.icon-sign')
@@ -117,8 +103,13 @@ iD.MapillarySignLayer = function(context) {
             .attr('transform', 'translate(-16, -16)');  // center signs on loc
 
         if (enabled) {
-            drawSigns();
-            mapillary.loadSigns(context, context.projection, layer.dimensions());
+            if (~~context.map().zoom() < minZoom) {
+                hideLayer();
+            } else {
+                layer.style('display', 'block');
+                drawSigns();
+                mapillary.loadSigns(context, context.projection, layer.dimensions());
+            }
         }
     }
 
@@ -141,7 +132,7 @@ iD.MapillarySignLayer = function(context) {
 
 
     mapillary
-        .on('loadedSigns', signsLoaded);
+        .on('loadedSigns', debouncedRedraw);
 
     return render;
 };

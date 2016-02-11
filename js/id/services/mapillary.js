@@ -57,7 +57,7 @@ iD.services.mapillary = function() {
         var tiles = getTiles(projection, dimensions);
 
         _.filter(which.inflight, function(v, k) {
-            var wanted = _.find(tiles, function(tile) { return k === tile.id; });
+            var wanted = _.find(tiles, function(tile) { return k === (tile.id + ',0'); });
             if (!wanted) delete which.inflight[k];
             return !wanted;
         }).map(abortRequest);
@@ -68,13 +68,13 @@ iD.services.mapillary = function() {
     }
 
     function loadTilePage(which, url, tile, page) {
-        var cache = iD.services.mapillary.cache,
+        var cache = iD.services.mapillary.cache[which],
             id = tile.id + ',' + String(page),
             rect = tile.extent.rectangle();
 
-        if (which.loaded[id] || which.inflight[id]) return;
+        if (cache.loaded[id] || cache.inflight[id]) return;
 
-        which.inflight[id] = d3.json(url +
+        cache.inflight[id] = d3.json(url +
             iD.util.qsString({
                 geojson: 'true',
                 limit: maxResults,
@@ -85,15 +85,27 @@ iD.services.mapillary = function() {
                 max_lon: rect[2],
                 max_lat: rect[3]
             }), function(err, data) {
-                which.loaded[id] = true;
-                delete which.inflight[id];
-                if (err) return;
+                cache.loaded[id] = true;
+                delete cache.inflight[id];
+                if (err || !data.features || !data.features.length) return;
 
-                if (which === cache.images) {
-                    dispatch.loadedImages(data);
-                } else if (which === cache.signs) {
-                    dispatch.loadedSigns(data);
+                var features = [],
+                    feature, loc, d;
+
+                for (var i = 0; i < data.features.length; i++) {
+                    feature = data.features[i];
+                    loc = feature.geometry.coordinates;
+                    d = { key: feature.properties.key, loc: loc };
+                    if (which === 'images') d.ca = feature.properties.ca;
+                    if (which === 'signs') d.signs = feature.properties.rects;
+
+                    features.push([loc[0], loc[1], loc[0], loc[1], d]);
                 }
+
+                cache.rtree.load(features);
+
+                if (which === 'images') dispatch.loadedImages();
+                if (which === 'signs') dispatch.loadedSigns();
 
                 if (data.features.length === maxResults) {
                     loadTilePage(which, url, tile, ++page);
@@ -103,17 +115,26 @@ iD.services.mapillary = function() {
     }
 
     mapillary.loadImages = function(projection, dimensions) {
-        var cache = iD.services.mapillary.cache,
-            url = apibase + 'search/im/geojson?';
-        loadTiles(cache.images, url, projection, dimensions);
+        var url = apibase + 'search/im/geojson?';
+        loadTiles('images', url, projection, dimensions);
     };
 
     mapillary.loadSigns = function(context, projection, dimensions) {
-        var cache = iD.services.mapillary.cache,
-            url = apibase + 'search/im/geojson/or?';
-
+        var url = apibase + 'search/im/geojson/or?';
         loadSignDefs(context);
-        loadTiles(cache.signs, url, projection, dimensions);
+        loadTiles('signs', url, projection, dimensions);
+    };
+
+    mapillary.images = function(extent) {
+        return iD.services.mapillary.cache.images.rtree
+            .search(extent.rectangle())
+            .map(function(d) { return d[4]; });
+    };
+
+    mapillary.signs = function(extent) {
+        return iD.services.mapillary.cache.signs.rtree
+            .search(extent.rectangle())
+            .map(function(d) { return d[4]; });
     };
 
     mapillary.signHTML = function(d) {
@@ -188,8 +209,8 @@ iD.services.mapillary = function() {
         }
 
         iD.services.mapillary.cache = {
-            images: { inflight: {}, loaded: {}, rbush: rbush() },
-            signs:  { inflight: {}, loaded: {}, rbush: rbush() }
+            images: { inflight: {}, loaded: {}, rtree: rbush() },
+            signs:  { inflight: {}, loaded: {}, rtree: rbush() }
         };
 
         iD.services.mapillary.thumb = null;
@@ -204,4 +225,3 @@ iD.services.mapillary = function() {
 
     return d3.rebind(mapillary, dispatch, 'on');
 };
-
