@@ -80,6 +80,7 @@ iD.MapillarySignLayer = function(context) {
                     hideThumbnail();
                 } else {
                     mapillary.selectedThumbnail(d.key);
+                    context.map().centerEase(d.loc);
                     showThumbnail(d.key);
                 }
             })

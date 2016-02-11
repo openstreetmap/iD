@@ -115,12 +115,13 @@ iD.MapillaryImageLayer = function(context) {
             .append('svg')
             .style('display', enabled ? 'block' : 'none')
             .on('click', function() {   // deselect/select
-                var imageKey = d3.event.target.__data__.key;
-                if (imageKey === mapillary.selectedThumbnail()) {
+                var image = d3.event.target.__data__;
+                if (image.key === mapillary.selectedThumbnail()) {
                     hideThumbnail();
                 } else {
-                    mapillary.selectedThumbnail(imageKey);
-                    showThumbnail(imageKey);
+                    mapillary.selectedThumbnail(image.key);
+                    context.map().centerEase(image.loc);
+                    showThumbnail(image.key);
                 }
             })
             .on('mouseover', function() {
