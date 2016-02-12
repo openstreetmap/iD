@@ -1,6 +1,6 @@
 {
     "geometry": "line",
-    "name": "Path",
+    "name": "Path Features",
     "icon": "category-path",
     "members": [
         "highway/pedestrian",
