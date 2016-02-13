@@ -125,16 +125,48 @@ iD.services.mapillary = function() {
         loadTiles('signs', url, projection, dimensions);
     };
 
-    mapillary.images = function(extent) {
-        return iD.services.mapillary.cache.images.rtree
-            .search(extent.rectangle())
-            .map(function(d) { return d[4]; });
+
+    // partition viewport into `psize` x `psize` regions
+    function partitionViewport(psize, context) {
+        psize = psize || 16;
+        var projection = context.projection,
+            dimensions = context.map().dimensions(),
+            cols = d3.range(0, dimensions[0], psize),
+            rows = d3.range(0, dimensions[1], psize),
+            partitions = [];
+
+        rows.forEach(function(y) {
+            cols.forEach(function(x) {
+                var min = [x, y + psize],
+                    max = [x + psize, y];
+                partitions.push(
+                    iD.geo.Extent(projection.invert(min), projection.invert(max)));
+            });
+        });
+
+        return partitions;
+    }
+
+    // no more than `limit` results per partition.
+    function searchLimited(psize, limit, context, rtree) {
+        limit = limit || 3;
+
+        var partitions = partitionViewport(psize, context);
+        return _.flatten(_.compact(_.map(partitions, function(extent) {
+            return rtree.search(extent.rectangle())
+                .slice(0, limit)
+                .map(function(d) { return d[4]; });
+        })));
+    }
+
+    mapillary.images = function(context) {
+        var psize = 16, limit = 3;
+        return searchLimited(psize, limit, context, iD.services.mapillary.cache.images.rtree);
     };
 
-    mapillary.signs = function(extent) {
-        return iD.services.mapillary.cache.signs.rtree
-            .search(extent.rectangle())
-            .map(function(d) { return d[4]; });
+    mapillary.signs = function(context) {
+        var psize = 32, limit = 3;
+        return searchLimited(psize, limit, context, iD.services.mapillary.cache.signs.rtree);
     };
 
     mapillary.signHTML = function(d) {
