@@ -295,6 +295,8 @@ ul li { list-style: none;}
 
 .fl { float: left;}
 .fr { float: right;}
+.al { left: 0; }
+.ar { right: 0; }
 
 div.hide,
 form.hide,
@@ -655,7 +657,6 @@ button.save.has-count .count::before {
 
 .mapillary-image {
     position: absolute;
-    right: 0;
     bottom: 30px;
     width: 330px;
     height: 250px;
@@ -669,7 +670,6 @@ button.save.has-count .count::before {
     height: auto;
     background-color: rgba(0,0,0,.5);
     bottom: 0;
-    right: 0;
     padding: 5px 10px;
 }
 

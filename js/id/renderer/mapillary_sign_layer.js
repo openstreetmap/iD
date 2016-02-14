@@ -6,20 +6,25 @@ iD.MapillarySignLayer = function(context) {
         layer;
 
 
-    function showThumbnail(imageKey) {
-        var thumb = mapillary.selectedThumbnail();
+    function showThumbnail(image) {
+        var thumb = mapillary.selectedThumbnail(),
+            posX = context.projection(image.loc)[0],
+            width = layer.dimensions()[0],
+            position = (posX < width / 2) ? 'right' : 'left';
 
-        d3.selectAll('.layer-mapillary-images .viewfield-group, .layer-mapillary-signs .icon-sign')
-            .classed('selected', function(d) { return d.key === thumb; });
+        if (thumb) {
+            d3.selectAll('.layer-mapillary-images .viewfield-group, .layer-mapillary-signs .icon-sign')
+                .classed('selected', function(d) { return d.key === thumb.key; });
+        }
 
-        mapillary.showThumbnail(context.container(), imageKey);
+        mapillary.showThumbnail(image.key, position);
     }
 
     function hideThumbnail() {
         d3.selectAll('.layer-mapillary-images .viewfield-group, .layer-mapillary-signs .icon-sign')
             .classed('selected', false);
 
-        mapillary.hideThumbnail(context.container());
+        mapillary.hideThumbnail();
     }
 
     function showLayer() {
@@ -62,17 +67,16 @@ iD.MapillarySignLayer = function(context) {
 
         enter
             .on('click', function(d) {   // deselect/select
-                if (d.key === mapillary.selectedThumbnail()) {
+                var thumb = mapillary.selectedThumbnail();
+                if (thumb && thumb.key === d.key) {
                     hideThumbnail();
                 } else {
-                    mapillary.selectedThumbnail(d.key);
+                    mapillary.selectedThumbnail(d);
                     context.map().centerEase(d.loc);
-                    showThumbnail(d.key);
+                    showThumbnail(d);
                 }
             })
-            .on('mouseover', function(d) {
-                showThumbnail(d.key);
-            })
+            .on('mouseover', showThumbnail)
             .on('mouseout', function() {
                 var thumb = mapillary.selectedThumbnail();
                 if (thumb) {

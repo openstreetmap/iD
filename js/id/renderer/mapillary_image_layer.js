@@ -6,20 +6,25 @@ iD.MapillaryImageLayer = function(context) {
         layer;
 
 
-    function showThumbnail(imageKey) {
-        var thumb = mapillary.selectedThumbnail();
+    function showThumbnail(image) {
+        var thumb = mapillary.selectedThumbnail(),
+            posX = context.projection(image.loc)[0],
+            width = layer.dimensions()[0],
+            position = (posX < width / 2) ? 'right' : 'left';
 
-        d3.selectAll('.layer-mapillary-images .viewfield-group, .layer-mapillary-signs .icon-sign')
-            .classed('selected', function(d) { return d.key === thumb; });
+        if (thumb) {
+            d3.selectAll('.layer-mapillary-images .viewfield-group, .layer-mapillary-signs .icon-sign')
+                .classed('selected', function(d) { return d.key === thumb.key; });
+        }
 
-        mapillary.showThumbnail(context.container(), imageKey);
+        mapillary.showThumbnail(image.key, position);
     }
 
     function hideThumbnail() {
         d3.selectAll('.layer-mapillary-images .viewfield-group, .layer-mapillary-signs .icon-sign')
             .classed('selected', false);
 
-        mapillary.hideThumbnail(context.container());
+        mapillary.hideThumbnail();
     }
 
     function showLayer() {
@@ -96,17 +101,18 @@ iD.MapillaryImageLayer = function(context) {
             .append('svg')
             .style('display', enabled ? 'block' : 'none')
             .on('click', function() {   // deselect/select
-                var image = d3.event.target.__data__;
-                if (image.key === mapillary.selectedThumbnail()) {
+                var d = d3.event.target.__data__,
+                    thumb = mapillary.selectedThumbnail();
+                if (thumb && thumb.key === d.key) {
                     hideThumbnail();
                 } else {
-                    mapillary.selectedThumbnail(image.key);
-                    context.map().centerEase(image.loc);
-                    showThumbnail(image.key);
+                    mapillary.selectedThumbnail(d);
+                    context.map().centerEase(d.loc);
+                    showThumbnail(d);
                 }
             })
             .on('mouseover', function() {
-                showThumbnail(d3.event.target.__data__.key);
+                showThumbnail(d3.event.target.__data__);
             })
             .on('mouseout', function() {
                 var thumb = mapillary.selectedThumbnail();
