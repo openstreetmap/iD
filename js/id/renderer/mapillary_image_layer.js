@@ -1,12 +1,23 @@
 iD.MapillaryImageLayer = function(context) {
-    var mapillary = iD.services.mapillary(),
-        debouncedRedraw = _.debounce(function () { context.pan([0,0]); }, 1000),
+    var debouncedRedraw = _.debounce(function () { context.pan([0,0]); }, 1000),
         enabled = false,
         minZoom = 12,
-        layer;
+        layer = d3.select(null),
+        _mapillary;
 
+    function getMapillary() {
+        if (iD.services.mapillary && !_mapillary) {
+            _mapillary = iD.services.mapillary().on('loadedImages', debouncedRedraw);
+        } else if (!iD.services.mapillary && _mapillary) {
+            _mapillary = null;
+        }
+        return _mapillary;
+    }
 
     function showThumbnail(image) {
+        var mapillary = getMapillary();
+        if (!mapillary) return;
+
         var thumb = mapillary.selectedThumbnail(),
             posX = context.projection(image.loc)[0],
             width = layer.dimensions()[0],
@@ -24,7 +35,10 @@ iD.MapillaryImageLayer = function(context) {
         d3.selectAll('.layer-mapillary-images .viewfield-group, .layer-mapillary-signs .icon-sign')
             .classed('selected', false);
 
-        mapillary.hideThumbnail();
+        var mapillary = getMapillary();
+        if (mapillary) {
+            mapillary.hideThumbnail();
+        }
     }
 
     function showLayer() {
@@ -63,7 +77,8 @@ iD.MapillaryImageLayer = function(context) {
     }
 
     function drawMarkers() {
-        var data = mapillary.images(context);
+        var mapillary = getMapillary(),
+            data = (mapillary ? mapillary.images(context) : []);
 
         var markers = layer.selectAll('.viewfield-group')
             .data(data, function(d) { return d.key; });
@@ -83,24 +98,28 @@ iD.MapillaryImageLayer = function(context) {
             .attr('dy', '0')
             .attr('r', '6');
 
-        // Update
-        markers
-            .attr('transform', transform);
-
         // Exit
         markers.exit()
             .remove();
+
+        // Update
+        markers
+            .attr('transform', transform);
     }
 
     function render(selection) {
-        layer = selection.selectAll('svg')
-            .data([0]);
+        var mapillary = getMapillary();
 
-        // Enter
+        layer = selection.selectAll('svg')
+            .data(mapillary ? [0] : []);
+
         layer.enter()
             .append('svg')
             .style('display', enabled ? 'block' : 'none')
+            .dimensions(context.map().dimensions())
             .on('click', function() {   // deselect/select
+                var mapillary = getMapillary();
+                if (!mapillary) return;
                 var d = d3.event.target.__data__,
                     thumb = mapillary.selectedThumbnail();
                 if (thumb && thumb.key === d.key) {
@@ -112,9 +131,13 @@ iD.MapillaryImageLayer = function(context) {
                 }
             })
             .on('mouseover', function() {
+                var mapillary = getMapillary();
+                if (!mapillary) return;
                 showThumbnail(d3.event.target.__data__);
             })
             .on('mouseout', function() {
+                var mapillary = getMapillary();
+                if (!mapillary) return;
                 var thumb = mapillary.selectedThumbnail();
                 if (thumb) {
                     showThumbnail(thumb);
@@ -123,13 +146,16 @@ iD.MapillaryImageLayer = function(context) {
                 }
             });
 
+        layer.exit()
+            .remove();
+
         if (enabled) {
-            if (~~context.map().zoom() < minZoom) {
-                editOff();
-            } else {
+            if (mapillary && ~~context.map().zoom() >= minZoom) {
                 editOn();
                 drawMarkers();
                 mapillary.loadImages(context.projection, layer.dimensions());
+            } else {
+                editOff();
             }
         }
     }
@@ -146,14 +172,11 @@ iD.MapillaryImageLayer = function(context) {
     };
 
     render.dimensions = function(_) {
+        if (layer.empty()) return null;
         if (!arguments.length) return layer.dimensions();
         layer.dimensions(_);
         return render;
     };
-
-
-    mapillary
-        .on('loadedImages', debouncedRedraw);
 
     return render;
 };

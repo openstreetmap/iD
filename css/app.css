@@ -1797,6 +1797,10 @@ div.full-screen > button:hover {
     color: #7092FF;
 }
 
+.layer-list:empty {
+    display: none;
+}
+
 .layer-list > li:first-child {
     border-radius: 3px 3px 0 0;
 }

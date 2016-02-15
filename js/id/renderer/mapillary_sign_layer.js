@@ -1,12 +1,23 @@
 iD.MapillarySignLayer = function(context) {
-    var mapillary = iD.services.mapillary(),
-        debouncedRedraw = _.debounce(function () { context.pan([0,0]); }, 1000),
+    var debouncedRedraw = _.debounce(function () { context.pan([0,0]); }, 1000),
         enabled = false,
         minZoom = 12,
-        layer;
+        layer = d3.select(null),
+        _mapillary;
 
+    function getMapillary() {
+        if (iD.services.mapillary && !_mapillary) {
+            _mapillary = iD.services.mapillary().on('loadedSigns', debouncedRedraw);
+        } else if (!iD.services.mapillary && _mapillary) {
+            _mapillary = null;
+        }
+        return _mapillary;
+    }
 
     function showThumbnail(image) {
+        var mapillary = getMapillary();
+        if (!mapillary) return;
+
         var thumb = mapillary.selectedThumbnail(),
             posX = context.projection(image.loc)[0],
             width = layer.dimensions()[0],
@@ -24,7 +35,10 @@ iD.MapillarySignLayer = function(context) {
         d3.selectAll('.layer-mapillary-images .viewfield-group, .layer-mapillary-signs .icon-sign')
             .classed('selected', false);
 
-        mapillary.hideThumbnail();
+        var mapillary = getMapillary();
+        if (mapillary) {
+            mapillary.hideThumbnail();
+        }
     }
 
     function showLayer() {
@@ -48,7 +62,8 @@ iD.MapillarySignLayer = function(context) {
     }
 
     function drawSigns() {
-        var data = mapillary.signs(context);
+        var mapillary = getMapillary(),
+            data = (mapillary ? mapillary.signs(context) : []);
 
         var signs = layer.select('.mapillary-sign-offset')
             .selectAll('.icon-sign')
@@ -67,6 +82,8 @@ iD.MapillarySignLayer = function(context) {
 
         enter
             .on('click', function(d) {   // deselect/select
+                var mapillary = getMapillary();
+                if (!mapillary) return;
                 var thumb = mapillary.selectedThumbnail();
                 if (thumb && thumb.key === d.key) {
                     hideThumbnail();
@@ -78,6 +95,8 @@ iD.MapillarySignLayer = function(context) {
             })
             .on('mouseover', showThumbnail)
             .on('mouseout', function() {
+                var mapillary = getMapillary();
+                if (!mapillary) return;
                 var thumb = mapillary.selectedThumbnail();
                 if (thumb) {
                     showThumbnail(thumb);
@@ -86,33 +105,39 @@ iD.MapillarySignLayer = function(context) {
                 }
             });
 
-        // Update
-        signs
-            .attr('transform', iD.svg.PointTransform(context.projection));
-
         // Exit
         signs.exit()
             .remove();
+
+        // Update
+        signs
+            .attr('transform', iD.svg.PointTransform(context.projection));
     }
 
     function render(selection) {
+        var mapillary = getMapillary();
+
         layer = selection.selectAll('svg')
-            .data([0]);
+            .data(mapillary ? [0] : []);
 
         layer.enter()
             .append('svg')
             .style('display', enabled ? 'block' : 'none')
+            .dimensions(context.map().dimensions())
             .append('g')
             .attr('class', 'mapillary-sign-offset')
             .attr('transform', 'translate(-16, -16)');  // center signs on loc
 
+        layer.exit()
+            .remove();
+
         if (enabled) {
-            if (~~context.map().zoom() < minZoom) {
-                hideLayer();
-            } else {
-                layer.style('display', 'block');
+            if (mapillary && ~~context.map().zoom() >= minZoom) {
+                editOn();
                 drawSigns();
                 mapillary.loadSigns(context, context.projection, layer.dimensions());
+            } else {
+                editOff();
             }
         }
     }
@@ -129,14 +154,11 @@ iD.MapillarySignLayer = function(context) {
     };
 
     render.dimensions = function(_) {
+        if (layer.empty()) return null;
         if (!arguments.length) return layer.dimensions();
         layer.dimensions(_);
         return render;
     };
-
-
-    mapillary
-        .on('loadedSigns', debouncedRedraw);
 
     return render;
 };

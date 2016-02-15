@@ -169,6 +169,11 @@ iD.services.mapillary = function() {
         return searchLimited(psize, limit, context, iD.services.mapillary.cache.signs.rtree);
     };
 
+    mapillary.signsSupported = function() {
+        var detected = iD.detect();
+        return (!(detected.ie || detected.browser.toLowerCase() === 'safari'));
+    };
+
     mapillary.signHTML = function(d) {
         if (!iD.services.mapillary.sign_defs) return;
 
@@ -179,7 +184,7 @@ iD.services.mapillary = function() {
     };
 
     mapillary.showThumbnail = function(imageKey, position) {
-        if (!imageKey) return
+        if (!imageKey) return;
 
         var positionClass = {
             'ar': (position !== 'left'),
@@ -228,7 +233,9 @@ iD.services.mapillary = function() {
     };
 
     mapillary.hideThumbnail = function() {
-        iD.services.mapillary.thumb = null;
+        if (iD.services.mapillary) {
+            iD.services.mapillary.thumb = null;
+        }
         d3.select('#content').selectAll('.mapillary-image')
             .transition()
             .duration(200)
@@ -237,6 +244,7 @@ iD.services.mapillary = function() {
     };
 
     mapillary.selectedThumbnail = function(d) {
+        if (!iD.services.mapillary) return null;
         if (!arguments.length) return iD.services.mapillary.thumb;
         iD.services.mapillary.thumb = d;
     };

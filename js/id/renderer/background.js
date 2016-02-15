@@ -4,8 +4,8 @@ iD.Background = function(context) {
             .projection(context.projection),
         gpxLayer = iD.GpxLayer(context, dispatch)
             .projection(context.projection),
-        mapillaryImageLayer = iD.MapillaryImageLayer(context),
-        mapillarySignLayer = iD.MapillarySignLayer(context),
+        mapillaryImageLayer,
+        mapillarySignLayer,
         overlayLayers = [];
 
     var backgroundSources;
@@ -86,21 +86,43 @@ iD.Background = function(context) {
 
         gpx.call(gpxLayer);
 
+
+        var mapillary = iD.services.mapillary,
+            supportsMapillaryImages = !!mapillary,
+            supportsMapillarySigns = !!mapillary && mapillary().signsSupported();
+
         var mapillaryImages = selection.selectAll('.layer-mapillary-images')
-            .data([0]);
+            .data(supportsMapillaryImages ? [0] : []);
 
         mapillaryImages.enter().insert('div')
             .attr('class', 'layer-layer layer-mapillary-images');
 
-        mapillaryImages.call(mapillaryImageLayer);
+        if (supportsMapillaryImages) {
+            if (!mapillaryImageLayer) { mapillaryImageLayer = iD.MapillaryImageLayer(context); }
+            mapillaryImages.call(mapillaryImageLayer);
+        } else {
+            mapillaryImageLayer = null;
+        }
+
+        mapillaryImages.exit()
+            .remove();
+
 
         var mapillarySigns = selection.selectAll('.layer-mapillary-signs')
-            .data([0]);
+            .data(supportsMapillarySigns ? [0] : []);
 
         mapillarySigns.enter().insert('div')
             .attr('class', 'layer-layer layer-mapillary-signs');
 
-        mapillarySigns.call(mapillarySignLayer);
+        if (supportsMapillarySigns) {
+            if (!mapillarySignLayer) { mapillarySignLayer = iD.MapillarySignLayer(context); }
+            mapillarySigns.call(mapillarySignLayer);
+        } else {
+            mapillarySignLayer = null;
+        }
+
+        mapillarySigns.exit()
+            .remove();
     }
 
     background.sources = function(extent) {
@@ -112,8 +134,8 @@ iD.Background = function(context) {
     background.dimensions = function(_) {
         baseLayer.dimensions(_);
         gpxLayer.dimensions(_);
-        mapillaryImageLayer.dimensions(_);
-        mapillarySignLayer.dimensions(_);
+        if (mapillaryImageLayer) mapillaryImageLayer.dimensions(_);
+        if (mapillarySignLayer) mapillarySignLayer.dimensions(_);
 
         overlayLayers.forEach(function(layer) {
             layer.dimensions(_);
@@ -183,22 +205,25 @@ iD.Background = function(context) {
     };
 
     background.showsMapillaryImageLayer = function() {
-        return mapillaryImageLayer.enable();
+        return mapillaryImageLayer && mapillaryImageLayer.enable();
     };
 
     background.showsMapillarySignLayer = function() {
-        return mapillarySignLayer.enable();
+        return mapillarySignLayer && mapillarySignLayer.enable();
     };
 
     background.toggleMapillaryImageLayer = function() {
+        if (!mapillaryImageLayer) return;
         mapillaryImageLayer.enable(!mapillaryImageLayer.enable());
         dispatch.change();
     };
 
     background.toggleMapillarySignLayer = function() {
+        if (!mapillarySignLayer) return;
         mapillarySignLayer.enable(!mapillarySignLayer.enable());
         dispatch.change();
     };
+
     background.showsLayer = function(d) {
         return d === baseLayer.source() ||
             (d.id === 'custom' && baseLayer.source().id === 'custom') ||
