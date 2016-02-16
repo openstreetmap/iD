@@ -63,7 +63,7 @@ iD.MapillarySignLayer = function(context) {
 
     function drawSigns() {
         var mapillary = getMapillary(),
-            data = (mapillary ? mapillary.signs(context) : []);
+            data = (mapillary ? mapillary.signs(context.projection, layer.dimensions()) : []);
 
         var signs = layer.select('.mapillary-sign-offset')
             .selectAll('.icon-sign')

@@ -127,11 +127,9 @@ iD.services.mapillary = function() {
 
 
     // partition viewport into `psize` x `psize` regions
-    function partitionViewport(psize, context) {
+    function partitionViewport(psize, projection, dimensions) {
         psize = psize || 16;
-        var projection = context.projection,
-            dimensions = context.map().dimensions(),
-            cols = d3.range(0, dimensions[0], psize),
+        var cols = d3.range(0, dimensions[0], psize),
             rows = d3.range(0, dimensions[1], psize),
             partitions = [];
 
@@ -148,10 +146,10 @@ iD.services.mapillary = function() {
     }
 
     // no more than `limit` results per partition.
-    function searchLimited(psize, limit, context, rtree) {
+    function searchLimited(psize, limit, projection, dimensions, rtree) {
         limit = limit || 3;
 
-        var partitions = partitionViewport(psize, context);
+        var partitions = partitionViewport(psize, projection, dimensions);
         return _.flatten(_.compact(_.map(partitions, function(extent) {
             return rtree.search(extent.rectangle())
                 .slice(0, limit)
@@ -159,14 +157,14 @@ iD.services.mapillary = function() {
         })));
     }
 
-    mapillary.images = function(context) {
+    mapillary.images = function(projection, dimensions) {
         var psize = 16, limit = 3;
-        return searchLimited(psize, limit, context, iD.services.mapillary.cache.images.rtree);
+        return searchLimited(psize, limit, projection, dimensions, iD.services.mapillary.cache.images.rtree);
     };
 
-    mapillary.signs = function(context) {
+    mapillary.signs = function(projection, dimensions) {
         var psize = 32, limit = 3;
-        return searchLimited(psize, limit, context, iD.services.mapillary.cache.signs.rtree);
+        return searchLimited(psize, limit, projection, dimensions, iD.services.mapillary.cache.signs.rtree);
     };
 
     mapillary.signsSupported = function() {

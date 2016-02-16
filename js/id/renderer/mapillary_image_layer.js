@@ -78,7 +78,7 @@ iD.MapillaryImageLayer = function(context) {
 
     function drawMarkers() {
         var mapillary = getMapillary(),
-            data = (mapillary ? mapillary.images(context) : []);
+            data = (mapillary ? mapillary.images(context.projection, layer.dimensions()) : []);
 
         var markers = layer.selectAll('.viewfield-group')
             .data(data, function(d) { return d.key; });
