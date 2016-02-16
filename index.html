@@ -6,6 +6,7 @@
         <link rel='stylesheet' href='css/reset.css'>
         <link rel='stylesheet' href='css/map.css'>
         <link rel='stylesheet' href='css/app.css'>
+        <link rel='stylesheet' href='dist/traffico/stylesheets/traffico.css'>
 
         <!-- mobile devices -->
         <meta name='viewport' content='initial-scale=1.0 maximum-scale=1.0'>
@@ -39,7 +40,9 @@
         <script src='js/id/util/session_mutex.js'></script>
         <script src='js/id/util/suggest_names.js'></script>
 
-        <script src='js/id/services/countrycode.js'></script>
+        <script src='js/id/services.js'></script>
+        <script src='js/id/services/mapillary.js'></script>
+        <script src='js/id/services/nominatim.js'></script>
         <script src='js/id/services/taginfo.js'></script>
         <script src='js/id/services/wikipedia.js'></script>
 
@@ -57,7 +60,8 @@
         <script src='js/id/renderer/gpx_layer.js'></script>
         <script src='js/id/renderer/tile_layer.js'></script>
         <script src='js/id/renderer/map.js'></script>
-        <script src='js/id/renderer/mapillary_layer.js'></script>
+        <script src='js/id/renderer/mapillary_image_layer.js'></script>
+        <script src='js/id/renderer/mapillary_sign_layer.js'></script>
 
         <script src="js/id/svg.js"></script>
         <script src="js/id/svg/areas.js"></script>
@@ -249,7 +253,7 @@
                 id = iD()
                     .presets(iD.data.presets)
                     .imagery(iD.data.imagery)
-                    .taginfo(iD.taginfo())
+                    .taginfo(iD.services.taginfo())
                     .assetPath('dist/');
 
                 d3.select('#id-container')

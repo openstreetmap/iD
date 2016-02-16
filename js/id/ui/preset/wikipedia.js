@@ -1,6 +1,6 @@
 iD.ui.preset.wikipedia = function(field, context) {
     var dispatch = d3.dispatch('change'),
-        wikipedia = iD.wikipedia(),
+        wikipedia = iD.services.wikipedia(),
         link, entity, lang, title;
 
     function i(selection) {

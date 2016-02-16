@@ -2,17 +2,8 @@ iD.Tree = function(head) {
     var rtree = rbush(),
         rectangles = {};
 
-    function extentRectangle(extent) {
-        return [
-            extent[0][0],
-            extent[0][1],
-            extent[1][0],
-            extent[1][1]
-        ];
-    }
-
     function entityRectangle(entity) {
-        var rect = extentRectangle(entity.extent(head));
+        var rect = entity.extent(head).rectangle();
         rect.id = entity.id;
         rectangles[entity.id] = rect;
         return rect;
@@ -90,7 +81,7 @@ iD.Tree = function(head) {
             rtree.load(_.map(insertions, entityRectangle));
         }
 
-        return rtree.search(extentRectangle(extent)).map(function(rect) {
+        return rtree.search(extent.rectangle()).map(function(rect) {
             return head.entity(rect.id);
         });
     };

@@ -1,4 +1,4 @@
-iD.wikipedia  = function() {
+iD.services.wikipedia = function() {
     var wiki = {},
         endpoint = 'https://en.wikipedia.org/w/api.php?';
 

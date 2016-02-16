@@ -1,10 +1,11 @@
 /*
- (c) 2013, Vladimir Agafonkin
+ (c) 2015, Vladimir Agafonkin
  RBush, a JavaScript library for high-performance 2D spatial indexing of points and rectangles.
  https://github.com/mourner/rbush
 */
 
-(function () { 'use strict';
+(function () {
+'use strict';
 
 function rbush(maxEntries, format) {
 
@@ -55,6 +56,33 @@ rbush.prototype = {
         }
 
         return result;
+    },
+
+    collides: function (bbox) {
+
+        var node = this.data,
+            toBBox = this.toBBox;
+
+        if (!intersects(bbox, node.bbox)) return false;
+
+        var nodesToSearch = [],
+            i, len, child, childBBox;
+
+        while (node) {
+            for (i = 0, len = node.children.length; i < len; i++) {
+
+                child = node.children[i];
+                childBBox = node.leaf ? toBBox(child) : child.bbox;
+
+                if (intersects(bbox, childBBox)) {
+                    if (node.leaf || contains(bbox, childBBox)) return true;
+                    nodesToSearch.push(child);
+                }
+            }
+            node = nodesToSearch.pop();
+        }
+
+        return false;
     },
 
     load: function (data) {
@@ -180,13 +208,14 @@ rbush.prototype = {
         return result;
     },
 
-    _build: function (items, left, right, level, height) {
+    _build: function (items, left, right, height) {
 
         var N = right - left + 1,
             M = this._maxEntries,
             node;
 
         if (N <= M) {
+            // reached leaf level; return leaf
             node = {
                 children: items.slice(left, right + 1),
                 height: 1,
@@ -197,7 +226,7 @@ rbush.prototype = {
             return node;
         }
 
-        if (!level) {
+        if (!height) {
             // target height of the bulk-loaded tree
             height = Math.ceil(Math.log(N) / Math.log(M));
 
@@ -205,31 +234,33 @@ rbush.prototype = {
             M = Math.ceil(N / Math.pow(M, height - 1));
         }
 
-        // TODO eliminate recursion?
-
         node = {
             children: [],
             height: height,
-            bbox: null
+            bbox: null,
+            leaf: false
         };
+
+        // split the items into M mostly square tiles
 
         var N2 = Math.ceil(N / M),
             N1 = N2 * Math.ceil(Math.sqrt(M)),
-            i, j, right2, childNode;
+            i, j, right2, right3;
 
-        // split the items into M mostly square tiles
+        multiSelect(items, left, right, N1, this.compareMinX);
+
         for (i = left; i <= right; i += N1) {
 
-            if (i + N1 <= right) partitionSort(items, i, right, i + N1, this.compareMinX);
             right2 = Math.min(i + N1 - 1, right);
+
+            multiSelect(items, i, right2, N2, this.compareMinY);
 
             for (j = i; j <= right2; j += N2) {
 
-                if (j + N2 <= right2) partitionSort(items, j, right2, j + N2, this.compareMinY);
+                right3 = Math.min(j + N2 - 1, right2);
 
                 // pack each entry recursively
-                childNode = this._build(items, j, Math.min(j + N2 - 1, right2), level + 1, height - 1);
-                node.children.push(childNode);
+                node.children.push(this._build(items, j, right3, height - 1));
             }
         }
 
@@ -309,9 +340,13 @@ rbush.prototype = {
 
         this._chooseSplitAxis(node, m, M);
 
+        var splitIndex = this._chooseSplitIndex(node, m, M);
+
         var newNode = {
-            children: node.children.splice(this._chooseSplitIndex(node, m, M)),
-            height: node.height
+            children: node.children.splice(splitIndex, node.children.length - splitIndex),
+            height: node.height,
+            bbox: null,
+            leaf: false
         };
 
         if (node.leaf) newNode.leaf = true;
@@ -327,7 +362,9 @@ rbush.prototype = {
         // split root node
         this.data = {
             children: [node, newNode],
-            height: node.height + 1
+            height: node.height + 1,
+            bbox: null,
+            leaf: false
         };
         calcBBox(this.data, this.toBBox);
     },
@@ -442,6 +479,7 @@ rbush.prototype = {
     }
 };
 
+
 // calculate node's bbox from bboxes of its children
 function calcBBox(node, toBBox) {
     node.bbox = distBBox(node, 0, node.children.length, toBBox);
@@ -458,7 +496,6 @@ function distBBox(node, k, p, toBBox) {
 
     return bbox;
 }
-
 
 function empty() { return [Infinity, Infinity, -Infinity, -Infinity]; }
 
@@ -481,7 +518,7 @@ function enlargedArea(a, b) {
            (Math.max(b[3], a[3]) - Math.min(b[1], a[1]));
 }
 
-function intersectionArea (a, b) {
+function intersectionArea(a, b) {
     var minX = Math.max(a[0], b[0]),
         minY = Math.max(a[1], b[1]),
         maxX = Math.min(a[2], b[2]),
@@ -498,44 +535,74 @@ function contains(a, b) {
            b[3] <= a[3];
 }
 
-function intersects (a, b) {
+function intersects(a, b) {
     return b[0] <= a[2] &&
            b[1] <= a[3] &&
            b[2] >= a[0] &&
            b[3] >= a[1];
 }
 
+// sort an array so that items come in groups of n unsorted items, with groups sorted between each other;
+// combines selection algorithm with binary divide & conquer approach
 
-function partitionSort(arr, left, right, k, compare) {
-    var pivot;
+function multiSelect(arr, left, right, n, compare) {
+    var stack = [left, right],
+        mid;
 
-    while (true) {
-        pivot = Math.floor((left + right) / 2);
-        pivot = partition(arr, left, right, pivot, compare);
+    while (stack.length) {
+        right = stack.pop();
+        left = stack.pop();
 
-        if (k === pivot) break;
-        else if (k < pivot) right = pivot - 1;
-        else left = pivot + 1;
+        if (right - left <= n) continue;
+
+        mid = left + Math.ceil((right - left) / n / 2) * n;
+        select(arr, left, right, mid, compare);
+
+        stack.push(left, mid, mid, right);
     }
-
-    partition(arr, left, right, k, compare);
 }
 
-function partition(arr, left, right, pivot, compare) {
-    var k = left,
-        value = arr[pivot];
+// Floyd-Rivest selection algorithm:
+// sort an array between left and right (inclusive) so that the smallest k elements come first (unordered)
+function select(arr, left, right, k, compare) {
+    var n, i, z, s, sd, newLeft, newRight, t, j;
 
-    swap(arr, pivot, right);
-
-    for (var i = left; i < right; i++) {
-        if (compare(arr[i], value) < 0) {
-            swap(arr, k, i);
-            k++;
+    while (right > left) {
+        if (right - left > 600) {
+            n = right - left + 1;
+            i = k - left + 1;
+            z = Math.log(n);
+            s = 0.5 * Math.exp(2 * z / 3);
+            sd = 0.5 * Math.sqrt(z * s * (n - s) / n) * (i - n / 2 < 0 ? -1 : 1);
+            newLeft = Math.max(left, Math.floor(k - i * s / n + sd));
+            newRight = Math.min(right, Math.floor(k + (n - i) * s / n + sd));
+            select(arr, newLeft, newRight, k, compare);
         }
-    }
-    swap(arr, right, k);
 
-    return k;
+        t = arr[k];
+        i = left;
+        j = right;
+
+        swap(arr, left, k);
+        if (compare(arr[right], t) > 0) swap(arr, left, right);
+
+        while (i < j) {
+            swap(arr, i, j);
+            i++;
+            j--;
+            while (compare(arr[i], t) < 0) i++;
+            while (compare(arr[j], t) > 0) j--;
+        }
+
+        if (compare(arr[left], t) === 0) swap(arr, left, j);
+        else {
+            j++;
+            swap(arr, j, right);
+        }
+
+        if (j <= k) left = j + 1;
+        if (k <= j) right = j - 1;
+    }
 }
 
 function swap(arr, i, j) {
@@ -546,7 +613,7 @@ function swap(arr, i, j) {
 
 
 // export as AMD/CommonJS module or global variable
-if (typeof define === 'function' && define.amd) define(function() { return rbush; });
+if (typeof define === 'function' && define.amd) define('rbush', function () { return rbush; });
 else if (typeof module !== 'undefined') module.exports = rbush;
 else if (typeof self !== 'undefined') self.rbush = rbush;
 else window.rbush = rbush;

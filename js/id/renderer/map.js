@@ -37,6 +37,10 @@ iD.Map = function(context) {
         supersurface = selection.append('div')
             .attr('id', 'supersurface');
 
+        // Mapillary streetsigns require supersurface transform to have
+        // a value in order to do correct foreignObject positioning in Chrome
+        iD.util.setTransform(supersurface, 0, 0);
+
         // Need a wrapper div because Opera can't cope with an absolutely positioned
         // SVG element: http://bl.ocks.org/jfirebaugh/6fbfbd922552bf776c16
         var dataLayer = supersurface.append('div')

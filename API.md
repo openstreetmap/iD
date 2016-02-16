@@ -137,7 +137,7 @@ iD can use external presets exclusively or along with the default OpenStreetMap 
 
 var iD = iD()
   .presets(customPresets)
-  .taginfo(iD.taginfo())
+  .taginfo(iD.services.taginfo())
   .imagery(iD.data.imagery);
 
 ```
@@ -152,7 +152,7 @@ Just like Presets, Imagery can be configured using the `iD().imagery` accessor.
 
 var iD = iD()
   .presets(customPresets)
-  .taginfo(iD.taginfo())
+  .taginfo(iD.services.taginfo())
   .imagery(customImagery);
 
 ```
@@ -168,7 +168,7 @@ The Imagery object should follow the structure defined by [editor-imagery-index]
 
 var iD = iD()
   .presets(customPresets)
-  .taginfo(iD.taginfo().endpoint('url'))
+  .taginfo(iD.services.taginfo().endpoint('url'))
   .imagery(customImagery);
 
 ```
