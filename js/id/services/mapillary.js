@@ -9,6 +9,16 @@ iD.services.mapillary = function() {
         tileZoom = 14;
 
 
+    function loadSignStyles(context) {
+        d3.select('head').selectAll('#traffico')
+            .data([0])
+            .enter()
+            .append('link')
+            .attr('id', 'traffico')
+            .attr('rel', 'stylesheet')
+            .attr('href', context.assetPath() + 'traffico/stylesheets/traffico.css');
+    }
+
     function loadSignDefs(context) {
         if (!iD.services.mapillary.sign_defs) {
             iD.services.mapillary.sign_defs = {};
@@ -121,6 +131,7 @@ iD.services.mapillary = function() {
 
     mapillary.loadSigns = function(context, projection, dimensions) {
         var url = apibase + 'search/im/geojson/or?';
+        loadSignStyles(context);
         loadSignDefs(context);
         loadTiles('signs', url, projection, dimensions);
     };

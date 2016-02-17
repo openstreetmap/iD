@@ -3,7 +3,7 @@ describe('iD.services.mapillary', function() {
         context, server, mapillary;
 
     beforeEach(function() {
-        context = iD();
+        context = iD().assetPath('../dist/');
         context.projection.scale(667544.214430109);  // z14
 
         server = sinon.fakeServer.create();
