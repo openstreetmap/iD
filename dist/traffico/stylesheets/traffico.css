@@ -1,0 +1,465 @@
+/*
+  Icon Font: traffico
+*/
+
+@font-face {
+  font-family: "traffico";
+  src: url("../fonts/traffico_d596ae6150aa5c55ac14b1e060efc523.eot");
+  src: url("../fonts/traffico_d596ae6150aa5c55ac14b1e060efc523.eot?#iefix") format("embedded-opentype"),
+       url("../fonts/traffico_d596ae6150aa5c55ac14b1e060efc523.woff") format("woff"),
+       url("../fonts/traffico_d596ae6150aa5c55ac14b1e060efc523.ttf") format("truetype"),
+       url("../fonts/traffico_d596ae6150aa5c55ac14b1e060efc523.svg#traffico") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  @font-face {
+    font-family: "traffico";
+    src: url("../fonts/traffico_d596ae6150aa5c55ac14b1e060efc523.svg#traffico") format("svg");
+  }
+}
+
+[data-icon]:before { content: attr(data-icon); }
+
+[data-icon]:before,
+.t-DE-arrow-up:before,
+.t-US-arrow-oneway:before,
+.t-US-arrow-up:before,
+.t-added-lane:before,
+.t-added-lane-entering-roadway:before,
+.t-airplane:before,
+.t-arrow-l:before,
+.t-arrow-oneway:before,
+.t-arrow-s-l:before,
+.t-arrows_both_bra:before,
+.t-bending-priority:before,
+.t-bicycle:before,
+.t-bicycle-slippery:before,
+.t-bump:before,
+.t-bump_bra:before,
+.t-bump_road_bra:before,
+.t-bumps:before,
+.t-bus:before,
+.t-car:before,
+.t-children:before,
+.t-children-au:before,
+.t-circle-bar-rounded:before,
+.t-circle-bg:before,
+.t-circle-o:before,
+.t-circle-separator:before,
+.t-cliff:before,
+.t-cross-roads:before,
+.t-crossroads-ahead:before,
+.t-crossroads-ahead-ontario:before,
+.t-curve-r-l:before,
+.t-cyclists_crossing_bra:before,
+.t-d-curve-l:before,
+.t-dead-end:before,
+.t-descent:before,
+.t-disabled-p:before,
+.t-divided-highway:before,
+.t-domestic-animal:before,
+.t-domestic-animals-au:before,
+.t-emu:before,
+.t-end:before,
+.t-equestrian:before,
+.t-europe_stars:before,
+.t-exclamation:before,
+.t-falling-rocks-EU:before,
+.t-falling-rocks-US:before,
+.t-falling-rocks-au:before,
+.t-fire-station:before,
+.t-firemans-car:before,
+.t-flaggers:before,
+.t-footpath:before,
+.t-h:before,
+.t-h-align-l:before,
+.t-hairpin-curve:before,
+.t-hairpin-curve-au:before,
+.t-hazardous-material:before,
+.t-height:before,
+.t-height-restriction-ca:before,
+.t-highway-divided:before,
+.t-hitch-hiking:before,
+.t-kangaroo:before,
+.t-koala-ugly:before,
+.t-koalas:before,
+.t-level-crossing:before,
+.t-light-rail:before,
+.t-lightground-railroad-crossing:before,
+.t-loop-270:before,
+.t-loose_road_surface_bra:before,
+.t-lorry:before,
+.t-lorry-left:before,
+.t-low-clearance:before,
+.t-merge:before,
+.t-metric-clearance:before,
+.t-moped:before,
+.t-motorbike:before,
+.t-narrow-bridge-au:before,
+.t-narrow-bridge-us:before,
+.t-narrow-road-both:before,
+.t-narrow-road-l:before,
+.t-no-l-or-u-turn:before,
+.t-octagon:before,
+.t-offset-roads:before,
+.t-opening-swing-bridge-ca:before,
+.t-parking:before,
+.t-pass-either-us:before,
+.t-pass-l-r:before,
+.t-pavement-ends:before,
+.t-pedestrian:before,
+.t-pedestrian-crossing:before,
+.t-pedestrian-crossing-au:before,
+.t-pedestrian_bra:before,
+.t-pedestrian_crossing_bra:before,
+.t-pedestrians:before,
+.t-play-ground:before,
+.t-playground-ahead-ca:before,
+.t-playground-br:before,
+.t-pretzel-loop:before,
+.t-railroad:before,
+.t-railroad-barriers:before,
+.t-railway-flashing-au:before,
+.t-railway-xing-secured:before,
+.t-railway-xing-unsecured:before,
+.t-reverse-curve-au:before,
+.t-reverse-curve-ontario:before,
+.t-right-of-way:before,
+.t-right-of-way-l:before,
+.t-roadworks:before,
+.t-roadworks_bra:before,
+.t-rollerblading:before,
+.t-roundabout:before,
+.t-school:before,
+.t-school_zone_bra:before,
+.t-series-of-curves-left:before,
+.t-share-road:before,
+.t-share-roads:before,
+.t-side-road-a-a-l:before,
+.t-side-road-a-a-r:before,
+.t-side-road-p-l:before,
+.t-side-road-p-r:before,
+.t-side-road-perpendicular:before,
+.t-single-2-reverse-curve:before,
+.t-skewed-railroads:before,
+.t-slippery:before,
+.t-slippery-motorcycle:before,
+.t-slippery-road:before,
+.t-small-arrow-au:before,
+.t-snowflake:before,
+.t-square-angular:before,
+.t-square-diagonal-bar:before,
+.t-square-rounded:before,
+.t-steep-hill:before,
+.t-steep-hill-downwards:before,
+.t-steep-hill-upwards:before,
+.t-stop:before,
+.t-t-roads:before,
+.t-tractor:before,
+.t-traffic-signal-au:before,
+.t-trailer:before,
+.t-train-au:before,
+.t-train-electric:before,
+.t-tram:before,
+.t-transit_bra:before,
+.t-tri-angular:before,
+.t-tri-rounded:before,
+.t-truck:before,
+.t-truck-rollover-speed:before,
+.t-trucks-rollover:before,
+.t-tunnel:before,
+.t-turn-90-l:before,
+.t-turn-curve-speed:before,
+.t-turn-l:before,
+.t-turn-l-aus:before,
+.t-turn-l-curve:before,
+.t-turn-reverse-left:before,
+.t-turn-right-curve-ontario:before,
+.t-turnaround:before,
+.t-turnaround2:before,
+.t-two_way_arrows_bra:before,
+.t-u-turn:before,
+.t-u-turn-au:before,
+.t-wild-animal:before,
+.t-windbag:before,
+.t-winding-road-left:before,
+.t-wombat:before,
+.t-y-roads:before {
+  display: inline-block;
+  font-family: "traffico";
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  line-height: 1;
+  text-decoration: inherit;
+  text-rendering: optimizeLegibility;
+  text-transform: none;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  font-smoothing: antialiased;
+}
+
+.t-DE-arrow-up:before { content: "\f100"; }
+.t-US-arrow-oneway:before { content: "\f101"; }
+.t-US-arrow-up:before { content: "\f102"; }
+.t-added-lane:before { content: "\f103"; }
+.t-added-lane-entering-roadway:before { content: "\f104"; }
+.t-airplane:before { content: "\f105"; }
+.t-arrow-l:before { content: "\f106"; }
+.t-arrow-oneway:before { content: "\f107"; }
+.t-arrow-s-l:before { content: "\f108"; }
+.t-arrows_both_bra:before { content: "\f109"; }
+.t-bending-priority:before { content: "\f10a"; }
+.t-bicycle:before { content: "\f10b"; }
+.t-bicycle-slippery:before { content: "\f10c"; }
+.t-bump:before { content: "\f10d"; }
+.t-bump_bra:before { content: "\f10e"; }
+.t-bump_road_bra:before { content: "\f10f"; }
+.t-bumps:before { content: "\f110"; }
+.t-bus:before { content: "\f111"; }
+.t-car:before { content: "\f112"; }
+.t-children:before { content: "\f113"; }
+.t-children-au:before { content: "\f114"; }
+.t-circle-bar-rounded:before { content: "\f115"; }
+.t-circle-bg:before { content: "\f116"; }
+.t-circle-o:before { content: "\f117"; }
+.t-circle-separator:before { content: "\f118"; }
+.t-cliff:before { content: "\f119"; }
+.t-cross-roads:before { content: "\f11a"; }
+.t-crossroads-ahead:before { content: "\f11b"; }
+.t-crossroads-ahead-ontario:before { content: "\f11c"; }
+.t-curve-r-l:before { content: "\f11d"; }
+.t-cyclists_crossing_bra:before { content: "\f11e"; }
+.t-d-curve-l:before { content: "\f11f"; }
+.t-dead-end:before { content: "\f120"; }
+.t-descent:before { content: "\f121"; }
+.t-disabled-p:before { content: "\f122"; }
+.t-divided-highway:before { content: "\f123"; }
+.t-domestic-animal:before { content: "\f124"; }
+.t-domestic-animals-au:before { content: "\f125"; }
+.t-emu:before { content: "\f126"; }
+.t-end:before { content: "\f127"; }
+.t-equestrian:before { content: "\f128"; }
+.t-europe_stars:before { content: "\f129"; }
+.t-exclamation:before { content: "\f12a"; }
+.t-falling-rocks-EU:before { content: "\f12b"; }
+.t-falling-rocks-US:before { content: "\f12c"; }
+.t-falling-rocks-au:before { content: "\f12d"; }
+.t-fire-station:before { content: "\f12e"; }
+.t-firemans-car:before { content: "\f12f"; }
+.t-flaggers:before { content: "\f130"; }
+.t-footpath:before { content: "\f131"; }
+.t-h:before { content: "\f132"; }
+.t-h-align-l:before { content: "\f133"; }
+.t-hairpin-curve:before { content: "\f134"; }
+.t-hairpin-curve-au:before { content: "\f135"; }
+.t-hazardous-material:before { content: "\f136"; }
+.t-height:before { content: "\f137"; }
+.t-height-restriction-ca:before { content: "\f138"; }
+.t-highway-divided:before { content: "\f139"; }
+.t-hitch-hiking:before { content: "\f13a"; }
+.t-kangaroo:before { content: "\f13b"; }
+.t-koala-ugly:before { content: "\f13c"; }
+.t-koalas:before { content: "\f13d"; }
+.t-level-crossing:before { content: "\f13e"; }
+.t-light-rail:before { content: "\f13f"; }
+.t-lightground-railroad-crossing:before { content: "\f140"; }
+.t-loop-270:before { content: "\f141"; }
+.t-loose_road_surface_bra:before { content: "\f142"; }
+.t-lorry:before { content: "\f143"; }
+.t-lorry-left:before { content: "\f144"; }
+.t-low-clearance:before { content: "\f145"; }
+.t-merge:before { content: "\f146"; }
+.t-metric-clearance:before { content: "\f147"; }
+.t-moped:before { content: "\f148"; }
+.t-motorbike:before { content: "\f149"; }
+.t-narrow-bridge-au:before { content: "\f14a"; }
+.t-narrow-bridge-us:before { content: "\f14b"; }
+.t-narrow-road-both:before { content: "\f14c"; }
+.t-narrow-road-l:before { content: "\f14d"; }
+.t-no-l-or-u-turn:before { content: "\f14e"; }
+.t-octagon:before { content: "\f14f"; }
+.t-offset-roads:before { content: "\f150"; }
+.t-opening-swing-bridge-ca:before { content: "\f151"; }
+.t-parking:before { content: "\f152"; }
+.t-pass-either-us:before { content: "\f153"; }
+.t-pass-l-r:before { content: "\f154"; }
+.t-pavement-ends:before { content: "\f155"; }
+.t-pedestrian:before { content: "\f156"; }
+.t-pedestrian-crossing:before { content: "\f157"; }
+.t-pedestrian-crossing-au:before { content: "\f158"; }
+.t-pedestrian_bra:before { content: "\f159"; }
+.t-pedestrian_crossing_bra:before { content: "\f15a"; }
+.t-pedestrians:before { content: "\f15b"; }
+.t-play-ground:before { content: "\f15c"; }
+.t-playground-ahead-ca:before { content: "\f15d"; }
+.t-playground-br:before { content: "\f15e"; }
+.t-pretzel-loop:before { content: "\f15f"; }
+.t-railroad:before { content: "\f160"; }
+.t-railroad-barriers:before { content: "\f161"; }
+.t-railway-flashing-au:before { content: "\f162"; }
+.t-railway-xing-secured:before { content: "\f163"; }
+.t-railway-xing-unsecured:before { content: "\f164"; }
+.t-reverse-curve-au:before { content: "\f165"; }
+.t-reverse-curve-ontario:before { content: "\f166"; }
+.t-right-of-way:before { content: "\f167"; }
+.t-right-of-way-l:before { content: "\f168"; }
+.t-roadworks:before { content: "\f169"; }
+.t-roadworks_bra:before { content: "\f16a"; }
+.t-rollerblading:before { content: "\f16b"; }
+.t-roundabout:before { content: "\f16c"; }
+.t-school:before { content: "\f16d"; }
+.t-school_zone_bra:before { content: "\f16e"; }
+.t-series-of-curves-left:before { content: "\f16f"; }
+.t-share-road:before { content: "\f170"; }
+.t-share-roads:before { content: "\f171"; }
+.t-side-road-a-a-l:before { content: "\f172"; }
+.t-side-road-a-a-r:before { content: "\f173"; }
+.t-side-road-p-l:before { content: "\f174"; }
+.t-side-road-p-r:before { content: "\f175"; }
+.t-side-road-perpendicular:before { content: "\f176"; }
+.t-single-2-reverse-curve:before { content: "\f177"; }
+.t-skewed-railroads:before { content: "\f178"; }
+.t-slippery:before { content: "\f179"; }
+.t-slippery-motorcycle:before { content: "\f17a"; }
+.t-slippery-road:before { content: "\f17b"; }
+.t-small-arrow-au:before { content: "\f17c"; }
+.t-snowflake:before { content: "\f17d"; }
+.t-square-angular:before { content: "\f17e"; }
+.t-square-diagonal-bar:before { content: "\f17f"; }
+.t-square-rounded:before { content: "\f180"; }
+.t-steep-hill:before { content: "\f181"; }
+.t-steep-hill-downwards:before { content: "\f182"; }
+.t-steep-hill-upwards:before { content: "\f183"; }
+.t-stop:before { content: "\f184"; }
+.t-t-roads:before { content: "\f185"; }
+.t-tractor:before { content: "\f186"; }
+.t-traffic-signal-au:before { content: "\f187"; }
+.t-trailer:before { content: "\f188"; }
+.t-train-au:before { content: "\f189"; }
+.t-train-electric:before { content: "\f18a"; }
+.t-tram:before { content: "\f18b"; }
+.t-transit_bra:before { content: "\f18c"; }
+.t-tri-angular:before { content: "\f18d"; }
+.t-tri-rounded:before { content: "\f18e"; }
+.t-truck:before { content: "\f18f"; }
+.t-truck-rollover-speed:before { content: "\f190"; }
+.t-trucks-rollover:before { content: "\f191"; }
+.t-tunnel:before { content: "\f192"; }
+.t-turn-90-l:before { content: "\f193"; }
+.t-turn-curve-speed:before { content: "\f194"; }
+.t-turn-l:before { content: "\f195"; }
+.t-turn-l-aus:before { content: "\f196"; }
+.t-turn-l-curve:before { content: "\f197"; }
+.t-turn-reverse-left:before { content: "\f198"; }
+.t-turn-right-curve-ontario:before { content: "\f199"; }
+.t-turnaround:before { content: "\f19a"; }
+.t-turnaround2:before { content: "\f19b"; }
+.t-two_way_arrows_bra:before { content: "\f19c"; }
+.t-u-turn:before { content: "\f19d"; }
+.t-u-turn-au:before { content: "\f19e"; }
+.t-wild-animal:before { content: "\f19f"; }
+.t-windbag:before { content: "\f1a0"; }
+.t-winding-road-left:before { content: "\f1a1"; }
+.t-wombat:before { content: "\f1a2"; }
+.t-y-roads:before { content: "\f1a3"; }
+
+/** Base */
+.t {
+  display: inline-block;
+  font: normal normal normal 14px/1 traffico;
+  position: relative;
+  width: 1em;
+  height: 1em;
+  line-height: 1em;
+  vertical-align: middle;
+  font-size: inherit;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.t i {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height:1em;
+  line-height:0;
+  text-align: center;
+}
+
+/** Content */
+
+.t-content,
+.t-content-3,
+.t-content-4{
+  font-family: Helvetica, Arial, sans-serif;
+  font-weight: bold;
+  font-style: normal;
+  letter-spacing:0;
+  top:48.5%;
+}
+.t-content {
+  font-size: 50%;
+}
+
+.t-content-3 {
+  font-size: 40%;
+}
+
+.t-content-4 {
+  font-size: 22.5%;
+}
+
+.t-content-5 {
+  font-family: Helvetica, Arial, sans-serif;
+  font-weight: normal;
+  font-style: normal;
+  font-size: 15%;
+  letter-spacing:0;
+  top:50%;
+}
+
+/** Colours */
+
+.t-c-white {
+  color: white;
+}
+
+.t-c-red {
+  color: #c1121c;
+}
+
+.t-c-orange {
+  color: #f60;
+}
+
+.t-c-blue {
+  color: #154889;
+}
+
+.t-c-black {
+  color: black;
+}
+
+.t-c-yellow-dark {
+  color: #f0ca00;
+}
+
+.t-c-yellow {
+  color: #fecf33;
+}
+
+.t-c-grey {
+  color: grey;
+}
+
+.t-c-green {
+  color: #008754;
+}
+
+.t-c-fluogreen {
+  color: #A2FF31;
+}
