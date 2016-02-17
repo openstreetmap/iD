@@ -16,6 +16,12 @@
     <script src="../node_modules/happen/src/happen.js"></script>
     <script src="lib/bind-shim.js"></script>
 
+    <script>
+    if (typeof initMochaPhantomJS === 'function') {
+        initMochaPhantomJS()
+    }
+    </script>
+
     <!-- include source files here... -->
     <script src='../js/lib/lodash.js'></script>
     <script src='../js/lib/d3.v3.js'></script>
@@ -327,7 +333,7 @@
 
     <script>
         iD.data.load('../', function() {
-            (window.mochaPhantomJS || window.mocha).run();
+            window.mocha.run();
         });
     </script>
 </body>

@@ -6,8 +6,10 @@ describe("iD.modes.AddPoint", function() {
 
         context = iD()
             .presets(iD.data.presets)
-            .imagery(iD.data.imagery)
+            .imagery([])
             .container(container);
+
+        context.loadTiles = function () {};
 
         container.call(context.map())
             .append('div')
