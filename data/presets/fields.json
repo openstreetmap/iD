@@ -70,7 +70,7 @@
         "type": "combo",
         "label": "Access",
         "options": [
-            "public",
+            "yes",
             "permissive",
             "private",
             "customers"
