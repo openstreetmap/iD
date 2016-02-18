@@ -1,6 +1,6 @@
 {
     "geometry": "area",
-    "name": "Building",
+    "name": "Building Features",
     "icon": "building",
     "members": [
         "building/house",

@@ -1,6 +1,6 @@
 {
     "geometry": "relation",
-    "name": "Restriction",
+    "name": "Restriction Features",
     "icon": "restriction",
     "members": [
         "type/restriction/no_left_turn",

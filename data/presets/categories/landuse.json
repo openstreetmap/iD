@@ -1,6 +1,6 @@
 {
     "geometry": "area",
-    "name": "Land Use",
+    "name": "Land Use Features",
     "icon": "land-use",
     "members": [
         "landuse/residential",

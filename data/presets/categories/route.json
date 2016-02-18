@@ -1,6 +1,6 @@
 {
     "geometry": "relation",
-    "name": "Route",
+    "name": "Route Features",
     "icon": "route",
     "members": [
         "type/route/road",

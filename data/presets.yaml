@@ -2,25 +2,25 @@ en:
   presets:
     categories:
       category-building:
-        name: Building
+        name: Building Features
       category-golf:
-        name: Golf
+        name: Golf Features
       category-landuse:
-        name: Land Use
+        name: Land Use Features
       category-path:
-        name: Path
+        name: Path Features
       category-rail:
-        name: Rail
+        name: Rail Features
       category-restriction:
-        name: Restriction
+        name: Restriction Features
       category-road:
-        name: Road
+        name: Road Features
       category-route:
-        name: Route
+        name: Route Features
       category-water-area:
-        name: Water
+        name: Water Features
       category-water-line:
-        name: Water
+        name: Water Features
     fields:
       access:
         # 'access=*, foot=*, motor_vehicle=*, bicycle=*, horse=*'

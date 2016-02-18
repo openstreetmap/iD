@@ -1,6 +1,6 @@
 {
     "geometry": "line",
-    "name": "Road",
+    "name": "Road Features",
     "icon": "category-roads",
     "members": [
         "highway/residential",
