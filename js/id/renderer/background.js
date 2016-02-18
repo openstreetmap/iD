@@ -2,7 +2,7 @@ iD.Background = function(context) {
     var dispatch = d3.dispatch('change'),
         baseLayer = iD.TileLayer()
             .projection(context.projection),
-        gpxLayer = iD.GpxLayer(context, dispatch)
+        gpxLayer = iD.svg.Gpx(context, dispatch)
             .projection(context.projection),
         mapillaryImageLayer,
         mapillarySignLayer,
@@ -98,7 +98,7 @@ iD.Background = function(context) {
             .attr('class', 'layer-layer layer-mapillary-images');
 
         if (supportsMapillaryImages) {
-            if (!mapillaryImageLayer) { mapillaryImageLayer = iD.MapillaryImageLayer(context); }
+            if (!mapillaryImageLayer) { mapillaryImageLayer = iD.svg.MapillaryImages(context); }
             mapillaryImages.call(mapillaryImageLayer);
         } else {
             mapillaryImageLayer = null;
@@ -115,7 +115,7 @@ iD.Background = function(context) {
             .attr('class', 'layer-layer layer-mapillary-signs');
 
         if (supportsMapillarySigns) {
-            if (!mapillarySignLayer) { mapillarySignLayer = iD.MapillarySignLayer(context); }
+            if (!mapillarySignLayer) { mapillarySignLayer = iD.svg.MapillarySigns(context); }
             mapillarySigns.call(mapillarySignLayer);
         } else {
             mapillarySignLayer = null;

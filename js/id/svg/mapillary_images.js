@@ -1,4 +1,4 @@
-iD.MapillarySignLayer = function(context) {
+iD.svg.MapillaryImages = function(context) {
     var debouncedRedraw = _.debounce(function () { context.pan([0,0]); }, 1000),
         enabled = false,
         minZoom = 12,
@@ -7,7 +7,7 @@ iD.MapillarySignLayer = function(context) {
 
     function getMapillary() {
         if (iD.services.mapillary && !_mapillary) {
-            _mapillary = iD.services.mapillary().on('loadedSigns', debouncedRedraw);
+            _mapillary = iD.services.mapillary().on('loadedImages', debouncedRedraw);
         } else if (!iD.services.mapillary && _mapillary) {
             _mapillary = null;
         }
@@ -43,13 +43,22 @@ iD.MapillarySignLayer = function(context) {
 
     function showLayer() {
         editOn();
-        debouncedRedraw();
+        layer
+            .style('opacity', 0)
+            .transition()
+            .duration(500)
+            .style('opacity', 1)
+            .each('end', debouncedRedraw);
     }
 
     function hideLayer() {
         debouncedRedraw.cancel();
         hideThumbnail();
-        editOff();
+        layer
+            .transition()
+            .duration(500)
+            .style('opacity', 0)
+            .each('end', editOff);
     }
 
     function editOn() {
@@ -57,61 +66,45 @@ iD.MapillarySignLayer = function(context) {
     }
 
     function editOff() {
-        layer.selectAll('.icon-sign').remove();
+        layer.selectAll('.viewfield-group').remove();
         layer.style('display', 'none');
     }
 
-    function drawSigns() {
-        var mapillary = getMapillary(),
-            data = (mapillary ? mapillary.signs(context.projection, layer.dimensions()) : []);
+    function transform(d) {
+        var t = iD.svg.PointTransform(context.projection)(d);
+        if (d.ca) t += ' rotate(' + Math.floor(d.ca) + ',0,0)';
+        return t;
+    }
 
-        var signs = layer.select('.mapillary-sign-offset')
-            .selectAll('.icon-sign')
+    function drawMarkers() {
+        var mapillary = getMapillary(),
+            data = (mapillary ? mapillary.images(context.projection, layer.dimensions()) : []);
+
+        var markers = layer.selectAll('.viewfield-group')
             .data(data, function(d) { return d.key; });
 
         // Enter
-        var enter = signs.enter()
-            .append('foreignObject')
-            .attr('class', 'icon-sign')
-            .attr('width', '32px')      // for Firefox
-            .attr('height', '32px');    // for Firefox
+        var enter = markers.enter()
+            .append('g')
+            .attr('class', 'viewfield-group');
 
-        enter
-            .append('xhtml:body')
-            .html(mapillary.signHTML);
+        enter.append('path')
+            .attr('class', 'viewfield')
+            .attr('transform', 'scale(1.5,1.5),translate(-8, -13)')
+            .attr('d', 'M 6,9 C 8,8.4 8,8.4 10,9 L 16,-2 C 12,-5 4,-5 0,-2 z');
 
-        enter
-            .on('click', function(d) {   // deselect/select
-                var mapillary = getMapillary();
-                if (!mapillary) return;
-                var thumb = mapillary.selectedThumbnail();
-                if (thumb && thumb.key === d.key) {
-                    hideThumbnail();
-                } else {
-                    mapillary.selectedThumbnail(d);
-                    context.map().centerEase(d.loc);
-                    showThumbnail(d);
-                }
-            })
-            .on('mouseover', showThumbnail)
-            .on('mouseout', function() {
-                var mapillary = getMapillary();
-                if (!mapillary) return;
-                var thumb = mapillary.selectedThumbnail();
-                if (thumb) {
-                    showThumbnail(thumb);
-                } else {
-                    hideThumbnail();
-                }
-            });
+        enter.append('circle')
+            .attr('dx', '0')
+            .attr('dy', '0')
+            .attr('r', '6');
 
         // Exit
-        signs.exit()
+        markers.exit()
             .remove();
 
         // Update
-        signs
-            .attr('transform', iD.svg.PointTransform(context.projection));
+        markers
+            .attr('transform', transform);
     }
 
     function render(selection) {
@@ -124,9 +117,34 @@ iD.MapillarySignLayer = function(context) {
             .append('svg')
             .style('display', enabled ? 'block' : 'none')
             .dimensions(context.map().dimensions())
-            .append('g')
-            .attr('class', 'mapillary-sign-offset')
-            .attr('transform', 'translate(-16, -16)');  // center signs on loc
+            .on('click', function() {   // deselect/select
+                var mapillary = getMapillary();
+                if (!mapillary) return;
+                var d = d3.event.target.__data__,
+                    thumb = mapillary.selectedThumbnail();
+                if (thumb && thumb.key === d.key) {
+                    hideThumbnail();
+                } else {
+                    mapillary.selectedThumbnail(d);
+                    context.map().centerEase(d.loc);
+                    showThumbnail(d);
+                }
+            })
+            .on('mouseover', function() {
+                var mapillary = getMapillary();
+                if (!mapillary) return;
+                showThumbnail(d3.event.target.__data__);
+            })
+            .on('mouseout', function() {
+                var mapillary = getMapillary();
+                if (!mapillary) return;
+                var thumb = mapillary.selectedThumbnail();
+                if (thumb) {
+                    showThumbnail(thumb);
+                } else {
+                    hideThumbnail();
+                }
+            });
 
         layer.exit()
             .remove();
@@ -134,8 +152,8 @@ iD.MapillarySignLayer = function(context) {
         if (enabled) {
             if (mapillary && ~~context.map().zoom() >= minZoom) {
                 editOn();
-                drawSigns();
-                mapillary.loadSigns(context, context.projection, layer.dimensions());
+                drawMarkers();
+                mapillary.loadImages(context.projection, layer.dimensions());
             } else {
                 editOff();
             }

@@ -2,11 +2,10 @@ iD.ui.MapInMap = function(context) {
     var key = '/';
 
     function map_in_map(selection) {
-
         var backgroundLayer = iD.TileLayer(),
             overlayLayers = {},
             dispatch = d3.dispatch('change'),
-            gpxLayer = iD.GpxLayer(context, dispatch),
+            gpxLayer = iD.svg.Gpx(context, dispatch),
             projection = iD.geo.RawMercator(),
             zoom = d3.behavior.zoom()
                 .scaleExtent([ztok(0.5), ztok(24)])

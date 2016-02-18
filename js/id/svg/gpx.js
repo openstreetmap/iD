@@ -1,4 +1,4 @@
-iD.GpxLayer = function(context) {
+iD.svg.Gpx = function(context) {
     var projection,
         gj = {},
         enable = true,

@@ -1,4 +1,4 @@
-iD.MapillaryImageLayer = function(context) {
+iD.svg.MapillarySigns = function(context) {
     var debouncedRedraw = _.debounce(function () { context.pan([0,0]); }, 1000),
         enabled = false,
         minZoom = 12,
@@ -7,7 +7,7 @@ iD.MapillaryImageLayer = function(context) {
 
     function getMapillary() {
         if (iD.services.mapillary && !_mapillary) {
-            _mapillary = iD.services.mapillary().on('loadedImages', debouncedRedraw);
+            _mapillary = iD.services.mapillary().on('loadedSigns', debouncedRedraw);
         } else if (!iD.services.mapillary && _mapillary) {
             _mapillary = null;
         }
@@ -43,22 +43,13 @@ iD.MapillaryImageLayer = function(context) {
 
     function showLayer() {
         editOn();
-        layer
-            .style('opacity', 0)
-            .transition()
-            .duration(500)
-            .style('opacity', 1)
-            .each('end', debouncedRedraw);
+        debouncedRedraw();
     }
 
     function hideLayer() {
         debouncedRedraw.cancel();
         hideThumbnail();
-        layer
-            .transition()
-            .duration(500)
-            .style('opacity', 0)
-            .each('end', editOff);
+        editOff();
     }
 
     function editOn() {
@@ -66,45 +57,61 @@ iD.MapillaryImageLayer = function(context) {
     }
 
     function editOff() {
-        layer.selectAll('.viewfield-group').remove();
+        layer.selectAll('.icon-sign').remove();
         layer.style('display', 'none');
     }
 
-    function transform(d) {
-        var t = iD.svg.PointTransform(context.projection)(d);
-        if (d.ca) t += ' rotate(' + Math.floor(d.ca) + ',0,0)';
-        return t;
-    }
-
-    function drawMarkers() {
+    function drawSigns() {
         var mapillary = getMapillary(),
-            data = (mapillary ? mapillary.images(context.projection, layer.dimensions()) : []);
+            data = (mapillary ? mapillary.signs(context.projection, layer.dimensions()) : []);
 
-        var markers = layer.selectAll('.viewfield-group')
+        var signs = layer.select('.mapillary-sign-offset')
+            .selectAll('.icon-sign')
             .data(data, function(d) { return d.key; });
 
         // Enter
-        var enter = markers.enter()
-            .append('g')
-            .attr('class', 'viewfield-group');
+        var enter = signs.enter()
+            .append('foreignObject')
+            .attr('class', 'icon-sign')
+            .attr('width', '32px')      // for Firefox
+            .attr('height', '32px');    // for Firefox
 
-        enter.append('path')
-            .attr('class', 'viewfield')
-            .attr('transform', 'scale(1.5,1.5),translate(-8, -13)')
-            .attr('d', 'M 6,9 C 8,8.4 8,8.4 10,9 L 16,-2 C 12,-5 4,-5 0,-2 z');
+        enter
+            .append('xhtml:body')
+            .html(mapillary.signHTML);
 
-        enter.append('circle')
-            .attr('dx', '0')
-            .attr('dy', '0')
-            .attr('r', '6');
+        enter
+            .on('click', function(d) {   // deselect/select
+                var mapillary = getMapillary();
+                if (!mapillary) return;
+                var thumb = mapillary.selectedThumbnail();
+                if (thumb && thumb.key === d.key) {
+                    hideThumbnail();
+                } else {
+                    mapillary.selectedThumbnail(d);
+                    context.map().centerEase(d.loc);
+                    showThumbnail(d);
+                }
+            })
+            .on('mouseover', showThumbnail)
+            .on('mouseout', function() {
+                var mapillary = getMapillary();
+                if (!mapillary) return;
+                var thumb = mapillary.selectedThumbnail();
+                if (thumb) {
+                    showThumbnail(thumb);
+                } else {
+                    hideThumbnail();
+                }
+            });
 
         // Exit
-        markers.exit()
+        signs.exit()
             .remove();
 
         // Update
-        markers
-            .attr('transform', transform);
+        signs
+            .attr('transform', iD.svg.PointTransform(context.projection));
     }
 
     function render(selection) {
@@ -117,34 +124,9 @@ iD.MapillaryImageLayer = function(context) {
             .append('svg')
             .style('display', enabled ? 'block' : 'none')
             .dimensions(context.map().dimensions())
-            .on('click', function() {   // deselect/select
-                var mapillary = getMapillary();
-                if (!mapillary) return;
-                var d = d3.event.target.__data__,
-                    thumb = mapillary.selectedThumbnail();
-                if (thumb && thumb.key === d.key) {
-                    hideThumbnail();
-                } else {
-                    mapillary.selectedThumbnail(d);
-                    context.map().centerEase(d.loc);
-                    showThumbnail(d);
-                }
-            })
-            .on('mouseover', function() {
-                var mapillary = getMapillary();
-                if (!mapillary) return;
-                showThumbnail(d3.event.target.__data__);
-            })
-            .on('mouseout', function() {
-                var mapillary = getMapillary();
-                if (!mapillary) return;
-                var thumb = mapillary.selectedThumbnail();
-                if (thumb) {
-                    showThumbnail(thumb);
-                } else {
-                    hideThumbnail();
-                }
-            });
+            .append('g')
+            .attr('class', 'mapillary-sign-offset')
+            .attr('transform', 'translate(-16, -16)');  // center signs on loc
 
         layer.exit()
             .remove();
@@ -152,8 +134,8 @@ iD.MapillaryImageLayer = function(context) {
         if (enabled) {
             if (mapillary && ~~context.map().zoom() >= minZoom) {
                 editOn();
-                drawMarkers();
-                mapillary.loadImages(context.projection, layer.dimensions());
+                drawSigns();
+                mapillary.loadSigns(context, context.projection, layer.dimensions());
             } else {
                 editOff();
             }
