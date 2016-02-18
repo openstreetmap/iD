@@ -89,8 +89,7 @@ names when identifying the icon to be used for a given preset.
 To build presets, all you need to do is run `make`.
 
 This command will take care of running the build script, which packages all presets
-together with imagery data, and deprecated or discarded tags into one file, `data/data.js`,
-which is included in the packaged iD.js file.
+into one file: `dist/presets.js`, which is included in the packaged iD.js file.
 
 ## Custom Presets
 
