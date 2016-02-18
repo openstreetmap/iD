@@ -1492,7 +1492,7 @@
             "operator",
             "address",
             "building_area",
-            "collection_times"
+            "opening_hours"
         ],
         "geometry": [
             "point",
