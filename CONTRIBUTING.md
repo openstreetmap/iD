@@ -175,8 +175,10 @@ into the public directory of your webserver to deploy iD.
 
 You can use [live-server](https://www.npmjs.com/package/live-server) *(npm module)* to
 reload the browser automatically whenever there is a change in code.
+
 1. run `npm install -g live-server`
-2. run  `live-server .` or `live-server dist` *(You will be automatically redirected to the local server page.)*
+2. run  `live-server .` or `live-server dist`
+ *(You will be automatically redirected to the local server page.)*
 
 *(Note: Sometimes auto reload might not display correctly and you might need to rebuild iD by running `make`.)*
 
