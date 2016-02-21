@@ -285,6 +285,7 @@ en:
     data_layers: Data Layers
     fill_area: Fill Areas
     map_features: Map Features
+    select_all: Select All
     autohidden: "These features have been automatically hidden because too many would be shown on the screen.  You can zoom in to edit them."
   feature:
     points:
