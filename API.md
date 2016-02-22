@@ -157,7 +157,7 @@ var iD = iD()
 
 ```
 
-The Imagery object should follow the structure defined by [editor-imagery-index](https://github.com/osmlab/editor-imagery-index/blob/gh-pages/schema.json)
+The Imagery object should follow the structure defined by [editor-layer-index](https://github.com/osmlab/editor-layer-index/blob/gh-pages/schema.json)
 
 
 ### Taginfo

@@ -117,7 +117,7 @@ translations:
 	node data/update_locales
 
 imagery:
-	npm install editor-imagery-index@git://github.com/osmlab/editor-imagery-index.git#gh-pages
+	npm install editor-layer-index@git://github.com/osmlab/editor-layer-index.git#gh-pages
 	node data/update_imagery
 
 suggestions:

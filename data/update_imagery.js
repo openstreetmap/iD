@@ -1,5 +1,5 @@
 var fs = require('fs');
-var sources = require('editor-imagery-index/imagery.json');
+var sources = require('editor-layer-index/imagery.json');
 var imagery = [];
 
 var blacklist = {

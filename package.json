@@ -22,7 +22,7 @@
   "devDependencies": {
     "chai": "~1.9.2",
     "d3": "3.5.5",
-    "editor-imagery-index": "git://github.com/osmlab/editor-imagery-index.git#gh-pages",
+    "editor-layer-index": "git://github.com/osmlab/editor-layer-index.git#gh-pages",
     "eslint": "~1.10.3",
     "glob": "~3.1.21",
     "happen": "0.1.2",
