@@ -10,9 +10,8 @@ iD.svg.Points = function(projection, context) {
         return b.loc[1] - a.loc[1];
     }
 
-    return function drawPoints(surface, entities, filter) {
-        var graph = context.graph(),
-            wireframe = surface.classed('fill-wireframe'),
+    return function drawPoints(surface, graph, entities, filter) {
+        var wireframe = surface.classed('fill-wireframe'),
             points = wireframe ? [] : _.filter(entities, function(e) {
                 return e.geometry(graph) === 'point';
             });
@@ -49,7 +48,7 @@ iD.svg.Points = function(projection, context) {
         groups.select('.stroke');
         groups.select('.icon')
             .attr('xlink:href', function(entity) {
-                var preset = context.presets().match(entity, context.graph());
+                var preset = context.presets().match(entity, graph);
                 return preset.icon ? '#' + preset.icon + '-12' : '';
             });
 

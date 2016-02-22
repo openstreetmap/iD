@@ -10,9 +10,10 @@ describe("iD.svg.Points", function () {
     });
 
     it("adds tag classes", function () {
-        var point = iD.Node({tags: {amenity: "cafe"}, loc: [0, 0]});
+        var point = iD.Node({tags: {amenity: "cafe"}, loc: [0, 0]}),
+            graph = iD.Graph([point]);
 
-        surface.call(iD.svg.Points(projection, context), [point]);
+        surface.call(iD.svg.Points(projection, context), graph, [point]);
 
         expect(surface.select('.point')).to.be.classed('tag-amenity');
         expect(surface.select('.point')).to.be.classed('tag-amenity-cafe');

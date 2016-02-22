@@ -138,7 +138,7 @@ iD.Map = function(context) {
             .call(areas, graph, data, filter)
             .call(midpoints, graph, data, filter, map.trimmedExtent())
             .call(labels, graph, data, filter, dimensions, !difference && !extent)
-            .call(points, data, filter);
+            .call(points, graph, data, filter);
 
         dispatch.drawn({full: true});
     }
