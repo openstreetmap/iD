@@ -133,10 +133,9 @@ iD.ui.MapData = function(context) {
 
 
         function drawGpxItem(selection) {
-            var supportsGpx = iD.detect().filedrop,
-                gpxLayerItem = selection
-                    .selectAll('.layer-gpx')
-                    .data(supportsGpx ? [0] : []);
+            var gpxLayerItem = selection
+                .selectAll('.layer-gpx')
+                .data([0]);
 
             // Enter
             var enter = gpxLayerItem.enter()
@@ -153,7 +152,7 @@ iD.ui.MapData = function(context) {
                 .on('click', function() {
                     d3.event.preventDefault();
                     d3.event.stopPropagation();
-                    context.background().zoomToGpxLayer();
+                    context.background().gpxLayer().fitZoom();
                 })
                 .call(iD.svg.Icon('#icon-search'));
 
@@ -166,7 +165,7 @@ iD.ui.MapData = function(context) {
                     d3.select(document.createElement('input'))
                         .attr('type', 'file')
                         .on('change', function() {
-                            context.background().gpxLayerFiles(d3.event.target.files);
+                            context.background().gpxLayer().files(d3.event.target.files);
                         })
                         .node().click();
                 })
@@ -185,8 +184,8 @@ iD.ui.MapData = function(context) {
                 .text(t('gpx.local_layer'));
 
             // Update
-            var hasGpx = supportsGpx && context.background().hasGpxLayer(),
-                showsGpx = supportsGpx && context.background().showsGpxLayer();
+            var hasGpx = context.background().hasGpxLayer(),
+                showsGpx = context.background().showsGpxLayer();
 
             gpxLayerItem
                 .classed('active', showsGpx)

@@ -1,9 +1,7 @@
 iD.Background = function(context) {
     var dispatch = d3.dispatch('change'),
-        baseLayer = iD.TileLayer()
-            .projection(context.projection),
-        gpxLayer = iD.svg.Gpx(context, dispatch)
-            .projection(context.projection),
+        baseLayer = iD.TileLayer().projection(context.projection),
+        gpxLayer = iD.svg.Gpx(context.projection, context),
         mapillaryImageLayer,
         mapillarySignLayer,
         overlayLayers = [];
@@ -78,13 +76,20 @@ iD.Background = function(context) {
         overlays.exit()
             .remove();
 
-        var gpx = selection.selectAll('.layer-gpx')
-            .data([0]);
 
-        gpx.enter().insert('div')
-            .attr('class', 'layer-layer layer-gpx');
 
-        gpx.call(gpxLayer);
+        // var gpx = selection.selectAll('.layer-gpx')
+        //     .data([0]);
+
+        // gpx.enter().insert('div')
+        //     .attr('class', 'layer-layer layer-gpx');
+
+        // gpx.call(gpxLayer);
+
+        selection.selectAll('#surface')
+            .call(gpxLayer);
+
+
 
 
         var mapillary = iD.services.mapillary,
@@ -133,7 +138,6 @@ iD.Background = function(context) {
 
     background.dimensions = function(_) {
         baseLayer.dimensions(_);
-        gpxLayer.dimensions(_);
         if (mapillaryImageLayer) mapillaryImageLayer.dimensions(_);
         if (mapillarySignLayer) mapillarySignLayer.dimensions(_);
 
@@ -156,51 +160,20 @@ iD.Background = function(context) {
         background.baseLayerSource(findSource('Bing'));
     };
 
+    background.gpxLayer = function() {
+        return gpxLayer;
+    };
+
     background.hasGpxLayer = function() {
         return !_.isEmpty(gpxLayer.geojson());
     };
 
     background.showsGpxLayer = function() {
-        return background.hasGpxLayer() && gpxLayer.enable();
-    };
-
-    function toDom(x) {
-        return (new DOMParser()).parseFromString(x, 'text/xml');
-    }
-
-    background.gpxLayerFiles = function(fileList) {
-        var f = fileList[0],
-            reader = new FileReader();
-
-        reader.onload = function(e) {
-            gpxLayer.geojson(toGeoJSON.gpx(toDom(e.target.result)));
-            iD.ui.MapInMap.gpxLayer.geojson(toGeoJSON.gpx(toDom(e.target.result)));
-            background.zoomToGpxLayer();
-            dispatch.change();
-        };
-
-        reader.readAsText(f);
-    };
-
-    background.zoomToGpxLayer = function() {
-        if (background.hasGpxLayer()) {
-            var map = context.map(),
-                viewport = map.trimmedExtent().polygon(),
-                coords = _.reduce(gpxLayer.geojson().features, function(coords, feature) {
-                    var c = feature.geometry.coordinates;
-                    return _.union(coords, feature.geometry.type === 'Point' ? [c] : c);
-                }, []);
-
-            if (!iD.geo.polygonIntersectsPolygon(viewport, coords, true)) {
-                var extent = iD.geo.Extent(d3.geo.bounds(gpxLayer.geojson()));
-                map.centerZoom(extent.center(), map.trimmedExtentZoom(extent));
-            }
-        }
+        return background.hasGpxLayer() && gpxLayer.enabled();
     };
 
     background.toggleGpxLayer = function() {
-        gpxLayer.enable(!gpxLayer.enable());
-        iD.ui.MapInMap.gpxLayer.enable(!iD.ui.MapInMap.gpxLayer.enable());
+        gpxLayer.enabled(!gpxLayer.enabled());
         dispatch.change();
     };
 
@@ -317,15 +290,8 @@ iD.Background = function(context) {
             if (overlay) background.toggleOverlayLayer(overlay);
         });
 
-        var gpx = q.gpx;
-        if (gpx) {
-            d3.text(gpx, function(err, gpxTxt) {
-                if (!err) {
-                    gpxLayer.geojson(toGeoJSON.gpx(toDom(gpxTxt)));
-                    iD.ui.MapInMap.gpxLayer.geojson(toGeoJSON.gpx(toDom(gpxTxt)));
-                    dispatch.change();
-                }
-            });
+        if (q.gpx) {
+            gpxLayer.url(q.gpx);
         }
     };
 

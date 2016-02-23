@@ -1,26 +1,61 @@
-iD.svg.Gpx = function(context) {
-    var projection,
-        gj = {},
-        enable = true,
-        svg;
+iD.svg.Gpx = function(projection, context) {
+    var showLabels = true,
+        layer;
 
-    function render(selection) {
-        svg = selection.selectAll('svg')
-            .data([render]);
 
-        svg.enter()
-            .append('svg');
+    function init() {
+        if (iD.svg.Gpx.initialized) return;  // run once
 
-        svg.style('display', enable ? 'block' : 'none');
+        iD.svg.Gpx.geojson = {};
+        iD.svg.Gpx.enabled = true;
 
-        var paths = svg
+        function over() {
+            d3.event.stopPropagation();
+            d3.event.preventDefault();
+            d3.event.dataTransfer.dropEffect = 'copy';
+        }
+
+        d3.select('body')
+            .attr('dropzone', 'copy')
+            .on('drop.localgpx', function() {
+                d3.event.stopPropagation();
+                d3.event.preventDefault();
+                if (!iD.detect().filedrop) return;
+                gpx.files(d3.event.dataTransfer.files);
+            })
+            .on('dragenter.localgpx', over)
+            .on('dragexit.localgpx', over)
+            .on('dragover.localgpx', over);
+
+        iD.svg.Gpx.initialized = true;
+    }
+
+
+    function gpx(surface) {
+        var geojson = iD.svg.Gpx.geojson,
+            enabled = iD.svg.Gpx.enabled;
+
+        layer = surface.selectAll('.layer-gpx')
+            .data(enabled ? [0] : []);
+
+        layer.enter()
+            .append('g')
+            .attr('class', 'layer layer-gpx');
+
+        layer.exit()
+            .remove();
+
+
+        var paths = layer
             .selectAll('path')
-            .data([gj]);
+            .data([geojson]);
 
-        paths
-            .enter()
+        paths.enter()
             .append('path')
             .attr('class', 'gpx');
+
+        paths.exit()
+            .remove();
 
         var path = d3.geo.path()
             .projection(projection);
@@ -28,74 +63,98 @@ iD.svg.Gpx = function(context) {
         paths
             .attr('d', path);
 
-        if (typeof gj.features !== 'undefined') {
-            svg
-                .selectAll('text')
-                .remove();
 
-            svg
-                .selectAll('path')
-                .data(gj.features)
-                .enter()
-                .append('text')
-                .attr('class', 'gpx')
-                .text(function(d) {
-                    return d.properties.desc || d.properties.name;
-                })
-                .attr('x', function(d) {
-                    var centroid = path.centroid(d);
-                    return centroid[0] + 5;
-                })
-                .attr('y', function(d) {
-                    var centroid = path.centroid(d);
-                    return centroid[1];
-                });
+        var labels = layer.selectAll('text')
+            .data(showLabels && geojson.features ? geojson.features : []);
+
+        labels.enter()
+            .append('text')
+            .attr('class', 'gpx')
+            .text(function(d) {
+                return d.properties.desc || d.properties.name;
+            });
+
+        labels.exit()
+            .remove();
+
+        labels
+            .attr('x', function(d) {
+                var centroid = path.centroid(d);
+                return centroid[0] + 7;
+            })
+            .attr('y', function(d) {
+                var centroid = path.centroid(d);
+                return centroid[1];
+            });
+
+    }
+
+    function toDom(x) {
+        return (new DOMParser()).parseFromString(x, 'text/xml');
+    }
+
+
+    gpx.showLabels = function(_) {
+        if (!arguments.length) return showLabels;
+        showLabels = _;
+        return gpx;
+    };
+
+    gpx.enabled = function(_) {
+        if (!arguments.length) return iD.svg.Gpx.enabled;
+        iD.svg.Gpx.enabled = _;
+        return gpx;
+    };
+
+    gpx.geojson = function(gj) {
+        if (!arguments.length) return iD.svg.Gpx.geojson;
+        if (_.isEmpty(gj) || _.isEmpty(gj.features)) return gpx;
+        iD.svg.Gpx.geojson = gj;
+        return gpx;
+    };
+
+    gpx.url = function(url) {
+        d3.text(url, function(err, data) {
+            if (!err) {
+                gpx.geojson(toGeoJSON.gpx(toDom(data)));
+                // dispatch.change();
+            }
+        });
+        return gpx;
+    };
+
+    gpx.files = function(fileList) {
+        var f = fileList[0],
+            reader = new FileReader();
+
+        reader.onload = function(e) {
+            gpx.geojson(toGeoJSON.gpx(toDom(e.target.result))).fitZoom();
+            // dispatch.change();
+        };
+
+        reader.readAsText(f);
+        return gpx;
+    };
+
+    gpx.fitZoom = function() {
+        var geojson = iD.svg.Gpx.geojson;
+        if (_.isEmpty(geojson) || _.isEmpty(geojson.features)) return gpx;
+
+        var map = context.map(),
+            viewport = map.trimmedExtent().polygon(),
+            coords = _.reduce(geojson.features, function(coords, feature) {
+                var c = feature.geometry.coordinates;
+                return _.union(coords, feature.geometry.type === 'Point' ? [c] : c);
+            }, []);
+
+        if (!iD.geo.polygonIntersectsPolygon(viewport, coords, true)) {
+            var extent = iD.geo.Extent(d3.geo.bounds(geojson));
+            map.centerZoom(extent.center(), map.trimmedExtentZoom(extent));
         }
-    }
 
-    render.projection = function(_) {
-        if (!arguments.length) return projection;
-        projection = _;
-        return render;
+        return gpx;
     };
 
-    render.enable = function(_) {
-        if (!arguments.length) return enable;
-        enable = _;
-        return render;
-    };
-
-    render.geojson = function(_) {
-        if (!arguments.length) return gj;
-        gj = _;
-        return render;
-    };
-
-    render.dimensions = function(_) {
-        if (!arguments.length) return svg.dimensions();
-        svg.dimensions(_);
-        return render;
-    };
-
-    render.id = 'layer-gpx';
-
-    function over() {
-        d3.event.stopPropagation();
-        d3.event.preventDefault();
-        d3.event.dataTransfer.dropEffect = 'copy';
-    }
-
-    d3.select('body')
-        .attr('dropzone', 'copy')
-        .on('drop.localgpx', function() {
-            d3.event.stopPropagation();
-            d3.event.preventDefault();
-            if (!iD.detect().filedrop) return;
-            context.background().gpxLayerFiles(d3.event.dataTransfer.files);
-        })
-        .on('dragenter.localgpx', over)
-        .on('dragexit.localgpx', over)
-        .on('dragover.localgpx', over);
-
-    return render;
+    init();
+    return gpx;
 };

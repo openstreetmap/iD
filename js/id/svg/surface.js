@@ -9,6 +9,6 @@ iD.svg.Surface = function() {
             .data(['areas', 'lines', 'hit', 'halo', 'label']);
 
         layers.enter().append('g')
-            .attr('class', function(d) { return 'layer layer-' + d; });
+            .attr('class', function(d) { return 'layer layer-osm layer-' + d; });
     };
 };

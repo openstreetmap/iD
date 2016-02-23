@@ -145,7 +145,7 @@ iD.Map = function(context) {
 
     function editOff() {
         context.features().resetStats();
-        surface.selectAll('.layer *').remove();
+        surface.selectAll('.layer-osm *').remove();
         dispatch.drawn({full: true});
     }
 
