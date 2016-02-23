@@ -7,21 +7,19 @@ iD.ui.preset.restrictions = function(field, context) {
         var wrap = selection.selectAll('.preset-input-wrap')
             .data([0]);
 
-        var enter = wrap.enter().append('div')
+        var enter = wrap.enter()
+            .append('div')
             .attr('class', 'preset-input-wrap');
 
-        enter.append('div')
+        enter
+            .append('div')
             .attr('class', 'restriction-help');
 
-        enter.append('svg')
-            .call(iD.svg.Surface(context))
-            .call(iD.behavior.Hover(context));
 
         var intersection = iD.geo.Intersection(context.graph(), vertexID),
             graph = intersection.graph,
             vertex = graph.entity(vertexID),
-            surface = wrap.selectAll('svg'),
-            filter = function () { return true; },
+            filter = d3.functor(true),
             extent = iD.geo.Extent(),
             projection = iD.geo.RawMercator(),
             lines = iD.svg.Lines(projection, context),
@@ -30,7 +28,7 @@ iD.ui.preset.restrictions = function(field, context) {
 
         var d = wrap.dimensions(),
             c = [d[0] / 2, d[1] / 2],
-            z = 21;
+            z = 24;
 
         projection
             .scale(256 * Math.pow(2, z) / (2 * Math.PI));
@@ -40,6 +38,13 @@ iD.ui.preset.restrictions = function(field, context) {
         projection
             .translate([c[0] - s[0], c[1] - s[1]])
             .clipExtent([[0, 0], d]);
+
+        enter
+            .append('svg')
+            .call(iD.svg.Surface(projection, context).only('osm'))
+            .call(iD.behavior.Hover(context));
+
+        var surface = wrap.selectAll('svg');
 
         surface
             .call(vertices, graph, [vertex], filter, extent, z)

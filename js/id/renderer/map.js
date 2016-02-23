@@ -56,7 +56,7 @@ iD.Map = function(context) {
                 if (resetTransform()) redraw();
             })
             .attr('id', 'surface')
-            .call(iD.svg.Surface(context));
+            .call(iD.svg.Surface(projection, context));
 
         supersurface.call(context.background());
 

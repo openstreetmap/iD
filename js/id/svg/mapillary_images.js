@@ -1,4 +1,4 @@
-iD.svg.MapillaryImages = function(context) {
+iD.svg.MapillaryImages = function(projection, context) {
     var debouncedRedraw = _.debounce(function () { context.pan([0,0]); }, 1000),
         enabled = false,
         minZoom = 12,
@@ -19,7 +19,7 @@ iD.svg.MapillaryImages = function(context) {
         if (!mapillary) return;
 
         var thumb = mapillary.selectedThumbnail(),
-            posX = context.projection(image.loc)[0],
+            posX = projection(image.loc)[0],
             width = layer.dimensions()[0],
             position = (posX < width / 2) ? 'right' : 'left';
 
@@ -71,14 +71,14 @@ iD.svg.MapillaryImages = function(context) {
     }
 
     function transform(d) {
-        var t = iD.svg.PointTransform(context.projection)(d);
+        var t = iD.svg.PointTransform(projection)(d);
         if (d.ca) t += ' rotate(' + Math.floor(d.ca) + ',0,0)';
         return t;
     }
 
     function drawMarkers() {
         var mapillary = getMapillary(),
-            data = (mapillary ? mapillary.images(context.projection, layer.dimensions()) : []);
+            data = (mapillary ? mapillary.images(projection, layer.dimensions()) : []);
 
         var markers = layer.selectAll('.viewfield-group')
             .data(data, function(d) { return d.key; });
@@ -153,7 +153,7 @@ iD.svg.MapillaryImages = function(context) {
             if (mapillary && ~~context.map().zoom() >= minZoom) {
                 editOn();
                 drawMarkers();
-                mapillary.loadImages(context.projection, layer.dimensions());
+                mapillary.loadImages(projection, layer.dimensions());
             } else {
                 editOff();
             }

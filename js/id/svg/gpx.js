@@ -93,6 +93,9 @@ iD.svg.Gpx = function(projection, context) {
         return (new DOMParser()).parseFromString(x, 'text/xml');
     }
 
+    function redraw() {
+        context.pan([0,0]);
+    }
 
     gpx.showLabels = function(_) {
         if (!arguments.length) return showLabels;
@@ -117,7 +120,7 @@ iD.svg.Gpx = function(projection, context) {
         d3.text(url, function(err, data) {
             if (!err) {
                 gpx.geojson(toGeoJSON.gpx(toDom(data)));
-                // dispatch.change();
+                redraw();
             }
         });
         return gpx;
@@ -129,7 +132,7 @@ iD.svg.Gpx = function(projection, context) {
 
         reader.onload = function(e) {
             gpx.geojson(toGeoJSON.gpx(toDom(e.target.result))).fitZoom();
-            // dispatch.change();
+            redraw();
         };
 
         reader.readAsText(f);

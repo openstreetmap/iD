@@ -1,4 +1,4 @@
-iD.svg.MapillarySigns = function(context) {
+iD.svg.MapillarySigns = function(projection, context) {
     var debouncedRedraw = _.debounce(function () { context.pan([0,0]); }, 1000),
         enabled = false,
         minZoom = 12,
@@ -19,7 +19,7 @@ iD.svg.MapillarySigns = function(context) {
         if (!mapillary) return;
 
         var thumb = mapillary.selectedThumbnail(),
-            posX = context.projection(image.loc)[0],
+            posX = projection(image.loc)[0],
             width = layer.dimensions()[0],
             position = (posX < width / 2) ? 'right' : 'left';
 
@@ -63,7 +63,7 @@ iD.svg.MapillarySigns = function(context) {
 
     function drawSigns() {
         var mapillary = getMapillary(),
-            data = (mapillary ? mapillary.signs(context.projection, layer.dimensions()) : []);
+            data = (mapillary ? mapillary.signs(projection, layer.dimensions()) : []);
 
         var signs = layer.select('.mapillary-sign-offset')
             .selectAll('.icon-sign')
@@ -111,7 +111,7 @@ iD.svg.MapillarySigns = function(context) {
 
         // Update
         signs
-            .attr('transform', iD.svg.PointTransform(context.projection));
+            .attr('transform', iD.svg.PointTransform(projection));
     }
 
     function render(selection) {
@@ -135,7 +135,7 @@ iD.svg.MapillarySigns = function(context) {
             if (mapillary && ~~context.map().zoom() >= minZoom) {
                 editOn();
                 drawSigns();
-                mapillary.loadSigns(context, context.projection, layer.dimensions());
+                mapillary.loadSigns(context, projection, layer.dimensions());
             } else {
                 editOff();
             }

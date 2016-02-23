@@ -78,56 +78,48 @@ iD.Background = function(context) {
 
 
 
-        // var gpx = selection.selectAll('.layer-gpx')
-        //     .data([0]);
-
-        // gpx.enter().insert('div')
-        //     .attr('class', 'layer-layer layer-gpx');
-
-        // gpx.call(gpxLayer);
-
-        selection.selectAll('#surface')
-            .call(gpxLayer);
+        // selection.selectAll('#surface')
+        //     .call(gpxLayer);
 
 
 
 
-        var mapillary = iD.services.mapillary,
-            supportsMapillaryImages = !!mapillary,
-            supportsMapillarySigns = !!mapillary && mapillary().signsSupported();
+        // var mapillary = iD.services.mapillary,
+        //     supportsMapillaryImages = !!mapillary,
+        //     supportsMapillarySigns = !!mapillary && mapillary().signsSupported();
 
-        var mapillaryImages = selection.selectAll('.layer-mapillary-images')
-            .data(supportsMapillaryImages ? [0] : []);
+        // var mapillaryImages = selection.selectAll('.layer-mapillary-images')
+        //     .data(supportsMapillaryImages ? [0] : []);
 
-        mapillaryImages.enter().insert('div')
-            .attr('class', 'layer-layer layer-mapillary-images');
+        // mapillaryImages.enter().insert('div')
+        //     .attr('class', 'layer-layer layer-mapillary-images');
 
-        if (supportsMapillaryImages) {
-            if (!mapillaryImageLayer) { mapillaryImageLayer = iD.svg.MapillaryImages(context); }
-            mapillaryImages.call(mapillaryImageLayer);
-        } else {
-            mapillaryImageLayer = null;
-        }
+        // if (supportsMapillaryImages) {
+        //     if (!mapillaryImageLayer) { mapillaryImageLayer = iD.svg.MapillaryImages(context); }
+        //     mapillaryImages.call(mapillaryImageLayer);
+        // } else {
+        //     mapillaryImageLayer = null;
+        // }
 
-        mapillaryImages.exit()
-            .remove();
+        // mapillaryImages.exit()
+        //     .remove();
 
 
-        var mapillarySigns = selection.selectAll('.layer-mapillary-signs')
-            .data(supportsMapillarySigns ? [0] : []);
+        // var mapillarySigns = selection.selectAll('.layer-mapillary-signs')
+        //     .data(supportsMapillarySigns ? [0] : []);
 
-        mapillarySigns.enter().insert('div')
-            .attr('class', 'layer-layer layer-mapillary-signs');
+        // mapillarySigns.enter().insert('div')
+        //     .attr('class', 'layer-layer layer-mapillary-signs');
 
-        if (supportsMapillarySigns) {
-            if (!mapillarySignLayer) { mapillarySignLayer = iD.svg.MapillarySigns(context); }
-            mapillarySigns.call(mapillarySignLayer);
-        } else {
-            mapillarySignLayer = null;
-        }
+        // if (supportsMapillarySigns) {
+        //     if (!mapillarySignLayer) { mapillarySignLayer = iD.svg.MapillarySigns(context); }
+        //     mapillarySigns.call(mapillarySignLayer);
+        // } else {
+        //     mapillarySignLayer = null;
+        // }
 
-        mapillarySigns.exit()
-            .remove();
+        // mapillarySigns.exit()
+        //     .remove();
     }
 
     background.sources = function(extent) {
