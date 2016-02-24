@@ -7832,8 +7832,9 @@
         "name": "Antiques Shop"
     },
     "shop/art": {
-        "icon": "art-gallery",
+        "icon": "shop",
         "fields": [
+            "artwork_type",
             "operator",
             "address",
             "building_area",
@@ -7843,10 +7844,15 @@
             "point",
             "area"
         ],
+        "terms": [
+            "art*",
+            "exhibit*",
+            "gallery"
+        ],
         "tags": {
             "shop": "art"
         },
-        "name": "Art Gallery"
+        "name": "Art Store"
     },
     "shop/baby_goods": {
         "icon": "shop",
@@ -8320,7 +8326,7 @@
         "name": "Cosmetics Store"
     },
     "shop/craft": {
-        "icon": "art-gallery",
+        "icon": "shop",
         "fields": [
             "operator",
             "address",
@@ -8334,6 +8340,11 @@
         "tags": {
             "shop": "craft"
         },
+        "terms": [
+            "art*",
+            "paint*",
+            "frame"
+        ],
         "name": "Arts and Crafts Store"
     },
     "shop/curtain": {
@@ -8607,6 +8618,12 @@
         "tags": {
             "shop": "frame"
         },
+        "terms": [
+            "art*",
+            "paint*",
+            "photo*",
+            "frame"
+        ],
         "name": "Framing Shop"
     },
     "shop/funeral_directors": {
@@ -9924,6 +9941,31 @@
         },
         "name": "Chalet"
     },
+    "tourism/gallery": {
+        "icon": "art-gallery",
+        "fields": [
+            "artwork_type",
+            "operator",
+            "address",
+            "building_area",
+            "opening_hours"
+        ],
+        "geometry": [
+            "point",
+            "area"
+        ],
+        "terms": [
+            "art*",
+            "exhibit*",
+            "paint*",
+            "photo*",
+            "sculpt*"
+        ],
+        "tags": {
+            "tourism": "gallery"
+        },
+        "name": "Art Gallery"
+    },
     "tourism/guest_house": {
         "icon": "lodging",
         "fields": [
@@ -10026,11 +10068,15 @@
             "area"
         ],
         "terms": [
-            "exhibition",
-            "foundation",
+            "art*",
+            "exhibit*",
             "gallery",
+            "foundation",
             "hall",
-            "institution"
+            "institution",
+            "paint*",
+            "photo*",
+            "sculpt*"
         ],
         "tags": {
             "tourism": "museum"

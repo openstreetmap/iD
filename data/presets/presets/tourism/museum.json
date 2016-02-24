@@ -11,11 +11,15 @@
         "area"
     ],
     "terms": [
-        "exhibition",
-        "foundation",
+        "art*",
+        "exhibit*",
         "gallery",
+        "foundation",
         "hall",
-        "institution"
+        "institution",
+        "paint*",
+        "photo*",
+        "sculpt*"
     ],
     "tags": {
         "tourism": "museum"

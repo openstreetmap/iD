@@ -3119,8 +3119,9 @@ en:
         terms: "<translate with synonyms or related terms for 'Antiques Shop', separated by commas>"
       shop/art:
         # shop=art
-        name: Art Gallery
-        terms: "<translate with synonyms or related terms for 'Art Gallery', separated by commas>"
+        name: Art Store
+        # 'terms: art*,exhibit*,gallery'
+        terms: "<translate with synonyms or related terms for 'Art Store', separated by commas>"
       shop/baby_goods:
         # shop=baby_goods
         name: Baby Goods Store
@@ -3236,6 +3237,7 @@ en:
       shop/craft:
         # shop=craft
         name: Arts and Crafts Store
+        # 'terms: art*,paint*,frame'
         terms: "<translate with synonyms or related terms for 'Arts and Crafts Store', separated by commas>"
       shop/curtain:
         # shop=curtain
@@ -3300,6 +3302,7 @@ en:
       shop/frame:
         # shop=frame
         name: Framing Shop
+        # 'terms: art*,paint*,photo*,frame'
         terms: "<translate with synonyms or related terms for 'Framing Shop', separated by commas>"
       shop/funeral_directors:
         # shop=funeral_directors
@@ -3609,6 +3612,11 @@ en:
         # tourism=chalet
         name: Chalet
         terms: "<translate with synonyms or related terms for 'Chalet', separated by commas>"
+      tourism/gallery:
+        # tourism=gallery
+        name: Art Gallery
+        # 'terms: art*,exhibit*,paint*,photo*,sculpt*'
+        terms: "<translate with synonyms or related terms for 'Art Gallery', separated by commas>"
       tourism/guest_house:
         # tourism=guest_house
         name: Guest House
@@ -3633,7 +3641,7 @@ en:
       tourism/museum:
         # tourism=museum
         name: Museum
-        # 'terms: exhibition,foundation,gallery,hall,institution'
+        # 'terms: art*,exhibit*,gallery,foundation,hall,institution,paint*,photo*,sculpt*'
         terms: "<translate with synonyms or related terms for 'Museum', separated by commas>"
       tourism/picnic_site:
         # tourism=picnic_site

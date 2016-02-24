@@ -3398,8 +3398,8 @@
                 "terms": ""
             },
             "shop/art": {
-                "name": "Art Gallery",
-                "terms": ""
+                "name": "Art Store",
+                "terms": "art*,exhibit*,gallery"
             },
             "shop/baby_goods": {
                 "name": "Baby Goods Store",
@@ -3507,7 +3507,7 @@
             },
             "shop/craft": {
                 "name": "Arts and Crafts Store",
-                "terms": ""
+                "terms": "art*,paint*,frame"
             },
             "shop/curtain": {
                 "name": "Curtain Store",
@@ -3563,7 +3563,7 @@
             },
             "shop/frame": {
                 "name": "Framing Shop",
-                "terms": ""
+                "terms": "art*,paint*,photo*,frame"
             },
             "shop/funeral_directors": {
                 "name": "Funeral Home",
@@ -3849,6 +3849,10 @@
                 "name": "Chalet",
                 "terms": ""
             },
+            "tourism/gallery": {
+                "name": "Art Gallery",
+                "terms": "art*,exhibit*,paint*,photo*,sculpt*"
+            },
             "tourism/guest_house": {
                 "name": "Guest House",
                 "terms": "B&B,Bed and Breakfast"
@@ -3871,7 +3875,7 @@
             },
             "tourism/museum": {
                 "name": "Museum",
-                "terms": "exhibition,foundation,gallery,hall,institution"
+                "terms": "art*,exhibit*,gallery,foundation,hall,institution,paint*,photo*,sculpt*"
             },
             "tourism/picnic_site": {
                 "name": "Picnic Site",
