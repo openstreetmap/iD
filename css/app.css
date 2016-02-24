@@ -2132,7 +2132,7 @@ div.full-screen > button:hover {
     user-select: none;
 }
 
-#supersurface, .layer-layer {
+#supersurface, .layer {
     position: absolute;
     top: 0;
     left: 0;

@@ -12,13 +12,15 @@ iD.Map = function(context) {
         transformStart,
         transformed = false,
         minzoom = 0,
+        drawSurface = iD.svg.Surface(projection, context),
         points = iD.svg.Points(projection, context),
         vertices = iD.svg.Vertices(projection, context),
         lines = iD.svg.Lines(projection),
         areas = iD.svg.Areas(projection),
         midpoints = iD.svg.Midpoints(projection, context),
         labels = iD.svg.Labels(projection, context),
-        supersurface, surface,
+        surface,
+        supersurface,
         mouse,
         mousemove;
 
@@ -35,18 +37,21 @@ iD.Map = function(context) {
             .call(zoom);
 
         supersurface = selection.append('div')
-            .attr('id', 'supersurface');
-
-        // Mapillary streetsigns require supersurface transform to have
-        // a value in order to do correct foreignObject positioning in Chrome
-        iD.util.setTransform(supersurface, 0, 0);
+            .attr('id', 'supersurface')
+            .call(iD.util.setTransform, 0, 0);
 
         // Need a wrapper div because Opera can't cope with an absolutely positioned
         // SVG element: http://bl.ocks.org/jfirebaugh/6fbfbd922552bf776c16
-        var dataLayer = supersurface.append('div')
-            .attr('class', 'layer-layer layer-data');
+        var dataLayer = supersurface
+            .append('div')
+            .attr('class', 'layer layer-data');
 
-        map.surface = surface = dataLayer.append('svg')
+        map.surface = surface = dataLayer
+            .call(drawSurface)
+            .select('.surface')
+            .attr('id', 'surface');
+
+        surface
             .on('mousedown.zoom', function() {
                 if (d3.event.button === 2) {
                     d3.event.stopPropagation();
@@ -55,30 +60,28 @@ iD.Map = function(context) {
             .on('mouseup.zoom', function() {
                 if (resetTransform()) redraw();
             })
-            .attr('id', 'surface')
-            .call(iD.svg.Surface(projection, context));
+            .on('mousemove.map', function() {
+                mousemove = d3.event;
+            })
+            .on('mouseover.vertices', function() {
+                if (map.editable() && !transformed) {
+                    var hover = d3.event.target.__data__;
+                    surface.call(vertices.drawHover, context.graph(), hover, map.extent(), map.zoom());
+                    dispatch.drawn({full: false});
+                }
+            })
+            .on('mouseout.vertices', function() {
+                if (map.editable() && !transformed) {
+                    var hover = d3.event.relatedTarget && d3.event.relatedTarget.__data__;
+                    surface.call(vertices.drawHover, context.graph(), hover, map.extent(), map.zoom());
+                    dispatch.drawn({full: false});
+                }
+            });
 
-        supersurface.call(context.background());
 
-        surface.on('mousemove.map', function() {
-            mousemove = d3.event;
-        });
+        supersurface
+            .call(context.background());
 
-        surface.on('mouseover.vertices', function() {
-            if (map.editable() && !transformed) {
-                var hover = d3.event.target.__data__;
-                surface.call(vertices.drawHover, context.graph(), hover, map.extent(), map.zoom());
-                dispatch.drawn({full: false});
-            }
-        });
-
-        surface.on('mouseout.vertices', function() {
-            if (map.editable() && !transformed) {
-                var hover = d3.event.relatedTarget && d3.event.relatedTarget.__data__;
-                surface.call(vertices.drawHover, context.graph(), hover, map.extent(), map.zoom());
-                dispatch.drawn({full: false});
-            }
-        });
 
         context.on('enter.map', function() {
             if (map.editable() && !transformed) {
@@ -328,7 +331,7 @@ iD.Map = function(context) {
         if (!arguments.length) return dimensions;
         var center = map.center();
         dimensions = _;
-        surface.dimensions(dimensions);
+        drawSurface.dimensions(dimensions);
         context.background().dimensions(dimensions);
         projection.clipExtent([[0, 0], dimensions]);
         mouse = iD.util.fastMouse(supersurface.node());

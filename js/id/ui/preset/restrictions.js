@@ -39,14 +39,17 @@ iD.ui.preset.restrictions = function(field, context) {
             .translate([c[0] - s[0], c[1] - s[1]])
             .clipExtent([[0, 0], d]);
 
+
         enter
-            .append('svg')
-            .call(iD.svg.Surface(projection, context).only('osm'))
+            .call(iD.svg.Surface(projection, context).only('osm').dimensions(d))
+            .select('.surface')
             .call(iD.behavior.Hover(context));
 
-        var surface = wrap.selectAll('svg');
+
+        var surface = wrap.select('.surface');
 
         surface
+            .dimensions(d)
             .call(vertices, graph, [vertex], filter, extent, z)
             .call(lines, graph, intersection.ways, filter)
             .call(turns, graph, intersection.turns(fromNodeID));
@@ -72,7 +75,10 @@ iD.ui.preset.restrictions = function(field, context) {
             .on('change.restrictions', render);
 
         d3.select(window)
-            .on('resize.restrictions', render);
+            .on('resize.restrictions', function() {
+                wrap.dimensions(null);
+                render();
+            });
 
         function click() {
             var datum = d3.event.target.__data__;

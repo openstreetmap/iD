@@ -24,11 +24,11 @@ img.tile-removing {
 use { pointer-events: none; }
 
 /* base styles */
-.layer path:not(.oneway) { fill: none; }     /* IE needs :not(.oneway) */
+.layer-osm path:not(.oneway) { fill: none; }     /* IE needs :not(.oneway) */
 
 /* the above fill: none rule affects paths in <use> shadow dom only in Firefox */
-.layer use.icon path { fill: #333; }                       /* FF svg Maki icons */
-.layer .turn use path { fill: #000; }                      /* FF turn restriction icons */
+.layer-osm use.icon path { fill: #333; }                       /* FF svg Maki icons */
+.layer-osm .turn use path { fill: #000; }                      /* FF turn restriction icons */
 #turn-only-shape2, #turn-only-u-shape2 { fill: #7092FF; }  /* FF turn-only, turn-only-u */
 #turn-no-shape2, #turn-no-u-shape2     { fill: #E06D5F; }  /* FF turn-no, turn-no-u */
 #turn-yes-shape2, #turn-yes-u-shape2   { fill: #8CD05F; }  /* FF turn-yes, turn-yes-u */
@@ -1500,7 +1500,7 @@ g.turn circle {
 }
 
 /* GPX Paths */
-div.layer-gpx {
+.layer-gpx {
     pointer-events: none;
 }
 

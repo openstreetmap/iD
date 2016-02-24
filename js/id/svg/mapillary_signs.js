@@ -65,7 +65,7 @@ iD.svg.MapillarySigns = function(projection, context) {
         var mapillary = getMapillary(),
             data = (mapillary ? mapillary.signs(projection, layer.dimensions()) : []);
 
-        var signs = layer.select('.mapillary-sign-offset')
+        var signs = layer.select('.layer-mapillary-signs')
             .selectAll('.icon-sign')
             .data(data, function(d) { return d.key; });
 
@@ -117,15 +117,13 @@ iD.svg.MapillarySigns = function(projection, context) {
     function render(selection) {
         var mapillary = getMapillary();
 
-        layer = selection.selectAll('svg')
+        layer = selection.selectAll('.layer-mapillary-signs')
             .data(mapillary ? [0] : []);
 
         layer.enter()
-            .append('svg')
-            .style('display', enabled ? 'block' : 'none')
-            .dimensions(context.map().dimensions())
             .append('g')
-            .attr('class', 'mapillary-sign-offset')
+            .attr('class', 'layer-mapillary-signs')
+            .style('display', enabled ? 'block' : 'none')
             .attr('transform', 'translate(-16, -16)');  // center signs on loc
 
         layer.exit()
@@ -154,7 +152,6 @@ iD.svg.MapillarySigns = function(projection, context) {
     };
 
     render.dimensions = function(_) {
-        if (layer.empty()) return null;
         if (!arguments.length) return layer.dimensions();
         layer.dimensions(_);
         return render;

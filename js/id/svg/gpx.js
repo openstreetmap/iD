@@ -40,7 +40,7 @@ iD.svg.Gpx = function(projection, context) {
 
         layer.enter()
             .append('g')
-            .attr('class', 'layer layer-gpx');
+            .attr('class', 'layer-gpx');
 
         layer.exit()
             .remove();

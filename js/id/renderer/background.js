@@ -55,19 +55,21 @@ iD.Background = function(context) {
     }
 
     function background(selection) {
-        var base = selection.selectAll('.background-layer')
+        var base = selection.selectAll('.layer-background')
             .data([0]);
 
-        base.enter().insert('div', '.layer-data')
-            .attr('class', 'layer-layer background-layer');
+        base.enter()
+            .insert('div', '.layer-data')
+            .attr('class', 'layer layer-background');
 
         base.call(baseLayer);
 
         var overlays = selection.selectAll('.layer-overlay')
             .data(overlayLayers, function(d) { return d.source().name(); });
 
-        overlays.enter().insert('div', '.layer-data')
-            .attr('class', 'layer-layer layer-overlay');
+        overlays.enter()
+            .insert('div', '.layer-data')
+            .attr('class', 'layer layer-overlay');
 
         overlays.each(function(layer) {
             d3.select(this).call(layer);

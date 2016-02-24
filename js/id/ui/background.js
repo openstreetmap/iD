@@ -24,7 +24,7 @@ iD.ui.Background = function(context) {
         }
 
         function setOpacity(d) {
-            var bg = context.container().selectAll('.background-layer')
+            var bg = context.container().selectAll('.layer-background')
                 .transition()
                 .style('opacity', d)
                 .attr('data-opacity', d);

@@ -110,13 +110,13 @@ iD.svg.MapillaryImages = function(projection, context) {
     function render(selection) {
         var mapillary = getMapillary();
 
-        layer = selection.selectAll('svg')
+        layer = selection.selectAll('.layer-mapillary-images')
             .data(mapillary ? [0] : []);
 
         layer.enter()
-            .append('svg')
+            .append('g')
+            .attr('class', 'layer-mapillary-images')
             .style('display', enabled ? 'block' : 'none')
-            .dimensions(context.map().dimensions())
             .on('click', function() {   // deselect/select
                 var mapillary = getMapillary();
                 if (!mapillary) return;
@@ -172,7 +172,6 @@ iD.svg.MapillaryImages = function(projection, context) {
     };
 
     render.dimensions = function(_) {
-        if (layer.empty()) return null;
         if (!arguments.length) return layer.dimensions();
         layer.dimensions(_);
         return render;
