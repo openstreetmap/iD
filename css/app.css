@@ -2208,7 +2208,7 @@ div.full-screen > button:hover {
     border-bottom: 1px solid black;
 }
 
-.infobox .selection-heading {
+.infobox .infobox-heading {
     display: block;
     border-radius: 4px 0 0 0;
     padding: 5px 10px;
