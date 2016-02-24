@@ -1,5 +1,5 @@
 iD.svg.Icon = function(name, svgklass, useklass) {
-    return function (selection) {
+    return function drawIcon(selection) {
         selection.selectAll('svg')
             .data([0])
             .enter()

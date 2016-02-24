@@ -2,7 +2,6 @@ iD.svg.Gpx = function(projection, context) {
     var showLabels = true,
         layer;
 
-
     function init() {
         if (iD.svg.Gpx.initialized) return;  // run once
 
@@ -21,7 +20,7 @@ iD.svg.Gpx = function(projection, context) {
                 d3.event.stopPropagation();
                 d3.event.preventDefault();
                 if (!iD.detect().filedrop) return;
-                gpx.files(d3.event.dataTransfer.files);
+                drawGpx.files(d3.event.dataTransfer.files);
             })
             .on('dragenter.localgpx', over)
             .on('dragexit.localgpx', over)
@@ -31,7 +30,7 @@ iD.svg.Gpx = function(projection, context) {
     }
 
 
-    function gpx(surface) {
+    function drawGpx(surface) {
         var geojson = iD.svg.Gpx.geojson,
             enabled = iD.svg.Gpx.enabled;
 
@@ -97,51 +96,51 @@ iD.svg.Gpx = function(projection, context) {
         context.pan([0,0]);
     }
 
-    gpx.showLabels = function(_) {
+    drawGpx.showLabels = function(_) {
         if (!arguments.length) return showLabels;
         showLabels = _;
-        return gpx;
+        return drawGpx;
     };
 
-    gpx.enabled = function(_) {
+    drawGpx.enabled = function(_) {
         if (!arguments.length) return iD.svg.Gpx.enabled;
         iD.svg.Gpx.enabled = _;
-        return gpx;
+        return drawGpx;
     };
 
-    gpx.geojson = function(gj) {
+    drawGpx.geojson = function(gj) {
         if (!arguments.length) return iD.svg.Gpx.geojson;
-        if (_.isEmpty(gj) || _.isEmpty(gj.features)) return gpx;
+        if (_.isEmpty(gj) || _.isEmpty(gj.features)) return drawGpx;
         iD.svg.Gpx.geojson = gj;
-        return gpx;
+        return drawGpx;
     };
 
-    gpx.url = function(url) {
+    drawGpx.url = function(url) {
         d3.text(url, function(err, data) {
             if (!err) {
-                gpx.geojson(toGeoJSON.gpx(toDom(data)));
+                drawGpx.geojson(toGeoJSON.gpx(toDom(data)));
                 redraw();
             }
         });
-        return gpx;
+        return drawGpx;
     };
 
-    gpx.files = function(fileList) {
+    drawGpx.files = function(fileList) {
         var f = fileList[0],
             reader = new FileReader();
 
         reader.onload = function(e) {
-            gpx.geojson(toGeoJSON.gpx(toDom(e.target.result))).fitZoom();
+            drawGpx.geojson(toGeoJSON.gpx(toDom(e.target.result))).fitZoom();
             redraw();
         };
 
         reader.readAsText(f);
-        return gpx;
+        return drawGpx;
     };
 
-    gpx.fitZoom = function() {
+    drawGpx.fitZoom = function() {
         var geojson = iD.svg.Gpx.geojson;
-        if (_.isEmpty(geojson) || _.isEmpty(geojson.features)) return gpx;
+        if (_.isEmpty(geojson) || _.isEmpty(geojson.features)) return drawGpx;
 
         var map = context.map(),
             viewport = map.trimmedExtent().polygon(),
@@ -155,9 +154,9 @@ iD.svg.Gpx = function(projection, context) {
             map.centerZoom(extent.center(), map.trimmedExtentZoom(extent));
         }
 
-        return gpx;
+        return drawGpx;
     };
 
     init();
-    return gpx;
+    return drawGpx;
 };

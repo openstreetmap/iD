@@ -1,4 +1,4 @@
-iD.svg.Surface = function(projection, context) {
+iD.svg.Layers = function(projection, context) {
     var svg = d3.select(null),
         layers = [
             { id: 'osm', render: iD.svg.Osm(projection, context) },
@@ -8,7 +8,7 @@ iD.svg.Surface = function(projection, context) {
         ];
 
 
-    function surface(selection) {
+    function drawLayers(selection) {
         svg = selection.selectAll('.surface')
             .data([0]);
 
@@ -31,32 +31,39 @@ iD.svg.Surface = function(projection, context) {
             .remove();
     }
 
-
-    surface.only = function(what) {
-        var arr = [].concat(what);
-        surface.remove(_.difference(_.pluck(layers, 'id'), arr));
-        return surface;
+    drawLayers.all = function() {
+        return layers;
     };
 
-    surface.remove = function(what) {
+    drawLayers.layer = function(id) {
+        return _.find(layers, 'id', id);
+    };
+
+    drawLayers.only = function(what) {
+        var arr = [].concat(what);
+        drawLayers.remove(_.difference(_.pluck(layers, 'id'), arr));
+        return drawLayers;
+    };
+
+    drawLayers.remove = function(what) {
         var arr = [].concat(what);
         arr.forEach(function(id) {
-            layers = _.reject(layers, function(d) { return d.id === id; });
+            layers = _.reject(layers, 'id', id);
         });
-        return surface;
+        return drawLayers;
     };
 
-    surface.add = function(what) {
+    drawLayers.add = function(what) {
         var arr = [].concat(what);
         arr.forEach(function(obj) {
             if ('id' in obj && 'render' in obj) {
                 layers.push(obj);
             }
         });
-        return surface;
+        return drawLayers;
     };
 
-    surface.dimensions = function(_) {
+    drawLayers.dimensions = function(_) {
         if (!arguments.length) return svg.dimensions();
         svg.dimensions(_);
         layers.forEach(function(layer) {
@@ -64,9 +71,9 @@ iD.svg.Surface = function(projection, context) {
                 layer.render.dimensions(_);
             }
         });
-        return surface;
+        return drawLayers;
     };
 
 
-    return surface;
+    return drawLayers;
 };

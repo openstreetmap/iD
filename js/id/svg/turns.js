@@ -1,5 +1,5 @@
 iD.svg.Turns = function(projection) {
-    return function(surface, graph, turns) {
+    return function drawTurns(surface, graph, turns) {
         function key(turn) {
             return [turn.from.node + turn.via.node + turn.to.node].join('-');
         }

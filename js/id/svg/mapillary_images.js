@@ -76,7 +76,7 @@ iD.svg.MapillaryImages = function(projection, context) {
         return t;
     }
 
-    function drawMarkers() {
+    function update() {
         var mapillary = getMapillary(),
             data = (mapillary ? mapillary.images(projection, layer.dimensions()) : []);
 
@@ -107,7 +107,7 @@ iD.svg.MapillaryImages = function(projection, context) {
             .attr('transform', transform);
     }
 
-    function render(selection) {
+    function drawImages(selection) {
         var mapillary = getMapillary();
 
         layer = selection.selectAll('.layer-mapillary-images')
@@ -152,7 +152,7 @@ iD.svg.MapillaryImages = function(projection, context) {
         if (enabled) {
             if (mapillary && ~~context.map().zoom() >= minZoom) {
                 editOn();
-                drawMarkers();
+                update();
                 mapillary.loadImages(projection, layer.dimensions());
             } else {
                 editOff();
@@ -160,7 +160,7 @@ iD.svg.MapillaryImages = function(projection, context) {
         }
     }
 
-    render.enable = function(_) {
+    drawImages.enable = function(_) {
         if (!arguments.length) return enabled;
         enabled = _;
         if (enabled) {
@@ -168,14 +168,14 @@ iD.svg.MapillaryImages = function(projection, context) {
         } else {
             hideLayer();
         }
-        return render;
+        return drawImages;
     };
 
-    render.dimensions = function(_) {
+    drawImages.dimensions = function(_) {
         if (!arguments.length) return layer.dimensions();
         layer.dimensions(_);
-        return render;
+        return drawImages;
     };
 
-    return render;
+    return drawImages;
 };

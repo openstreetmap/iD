@@ -7,7 +7,7 @@ describe("iD.svg.Areas", function () {
 
     beforeEach(function () {
         surface = d3.select(document.createElementNS('http://www.w3.org/2000/svg', 'svg'))
-            .call(iD.svg.Surface(iD()));
+            .call(iD.svg.Layers(iD()));
     });
 
     it("adds way and area classes", function () {

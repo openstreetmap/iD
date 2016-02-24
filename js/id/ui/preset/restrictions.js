@@ -21,10 +21,7 @@ iD.ui.preset.restrictions = function(field, context) {
             vertex = graph.entity(vertexID),
             filter = d3.functor(true),
             extent = iD.geo.Extent(),
-            projection = iD.geo.RawMercator(),
-            lines = iD.svg.Lines(projection, context),
-            vertices = iD.svg.Vertices(projection, context),
-            turns = iD.svg.Turns(projection, context);
+            projection = iD.geo.RawMercator();
 
         var d = wrap.dimensions(),
             c = [d[0] / 2, d[1] / 2],
@@ -39,9 +36,13 @@ iD.ui.preset.restrictions = function(field, context) {
             .translate([c[0] - s[0], c[1] - s[1]])
             .clipExtent([[0, 0], d]);
 
+        var drawLayers = iD.svg.Layers(projection, context).only('osm').dimensions(d),
+            drawVertices = iD.svg.Vertices(projection, context),
+            drawLines = iD.svg.Lines(projection, context),
+            drawTurns = iD.svg.Turns(projection, context);
 
         enter
-            .call(iD.svg.Surface(projection, context).only('osm').dimensions(d))
+            .call(drawLayers)
             .select('.surface')
             .call(iD.behavior.Hover(context));
 
@@ -50,9 +51,9 @@ iD.ui.preset.restrictions = function(field, context) {
 
         surface
             .dimensions(d)
-            .call(vertices, graph, [vertex], filter, extent, z)
-            .call(lines, graph, intersection.ways, filter)
-            .call(turns, graph, intersection.turns(fromNodeID));
+            .call(drawVertices, graph, [vertex], filter, extent, z)
+            .call(drawLines, graph, intersection.ways, filter)
+            .call(drawTurns, graph, intersection.turns(fromNodeID));
 
         surface
             .on('click.restrictions', click)

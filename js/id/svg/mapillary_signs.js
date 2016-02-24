@@ -61,7 +61,7 @@ iD.svg.MapillarySigns = function(projection, context) {
         layer.style('display', 'none');
     }
 
-    function drawSigns() {
+    function update() {
         var mapillary = getMapillary(),
             data = (mapillary ? mapillary.signs(projection, layer.dimensions()) : []);
 
@@ -114,7 +114,7 @@ iD.svg.MapillarySigns = function(projection, context) {
             .attr('transform', iD.svg.PointTransform(projection));
     }
 
-    function render(selection) {
+    function drawSigns(selection) {
         var mapillary = getMapillary();
 
         layer = selection.selectAll('.layer-mapillary-signs')
@@ -132,7 +132,7 @@ iD.svg.MapillarySigns = function(projection, context) {
         if (enabled) {
             if (mapillary && ~~context.map().zoom() >= minZoom) {
                 editOn();
-                drawSigns();
+                update();
                 mapillary.loadSigns(context, projection, layer.dimensions());
             } else {
                 editOff();
@@ -140,7 +140,7 @@ iD.svg.MapillarySigns = function(projection, context) {
         }
     }
 
-    render.enable = function(_) {
+    drawSigns.enable = function(_) {
         if (!arguments.length) return enabled;
         enabled = _;
         if (enabled) {
@@ -148,14 +148,14 @@ iD.svg.MapillarySigns = function(projection, context) {
         } else {
             hideLayer();
         }
-        return render;
+        return drawSigns;
     };
 
-    render.dimensions = function(_) {
+    drawSigns.dimensions = function(_) {
         if (!arguments.length) return layer.dimensions();
         layer.dimensions(_);
-        return render;
+        return drawSigns;
     };
 
-    return render;
+    return drawSigns;
 };

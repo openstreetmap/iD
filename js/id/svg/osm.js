@@ -1,5 +1,5 @@
 iD.svg.Osm = function() {
-    return function (selection) {
+    return function drawOsm(selection) {
         var layers = selection.selectAll('.layer-osm')
             .data(['areas', 'lines', 'hit', 'halo', 'label']);
 

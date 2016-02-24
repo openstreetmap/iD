@@ -131,7 +131,6 @@ iD.svg.Labels = function(projection, context) {
     }
 
     function drawPointLabels(group, entities, filter, classes, labels) {
-
         var texts = group.selectAll('text.' + classes)
             .filter(filter)
             .data(entities, iD.Entity.key);
@@ -248,8 +247,7 @@ iD.svg.Labels = function(projection, context) {
     var rtree = rbush(),
         rectangles = {};
 
-    function labels(surface, graph, entities, filter, dimensions, fullRedraw) {
-
+    function drawLabels(surface, graph, entities, filter, dimensions, fullRedraw) {
         var hidePoints = !surface.select('.node.point').node();
 
         var labelable = [], i, k, entity;
@@ -427,7 +425,7 @@ iD.svg.Labels = function(projection, context) {
         drawAreaIcons(label, labelled.area, filter, 'arealabel-icon', positions.area);
     }
 
-    labels.supersurface = function(supersurface) {
+    drawLabels.supersurface = function(supersurface) {
         supersurface
             .on('mousemove.hidelabels', hideOnMouseover)
             .on('mousedown.hidelabels', function () {
@@ -438,5 +436,5 @@ iD.svg.Labels = function(projection, context) {
             });
     };
 
-    return labels;
+    return drawLabels;
 };
