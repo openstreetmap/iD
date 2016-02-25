@@ -19,8 +19,9 @@ iD.Map = function(context) {
         drawAreas = iD.svg.Areas(projection),
         drawMidpoints = iD.svg.Midpoints(projection, context),
         drawLabels = iD.svg.Labels(projection, context),
-        surface,
         supersurface,
+        wrapper,
+        surface,
         mouse,
         mousemove;
 
@@ -42,13 +43,11 @@ iD.Map = function(context) {
 
         // Need a wrapper div because Opera can't cope with an absolutely positioned
         // SVG element: http://bl.ocks.org/jfirebaugh/6fbfbd922552bf776c16
-        var wrap = supersurface
+        wrapper = supersurface
             .append('div')
             .attr('class', 'layer layer-data');
 
-        map.layers = drawLayers;
-
-        map.surface = surface = wrap
+        map.surface = surface = wrapper
             .call(drawLayers)
             .selectAll('.surface')
             .attr('id', 'surface');
@@ -226,7 +225,7 @@ iD.Map = function(context) {
             editOff();
         }
 
-        surface
+        wrapper
             .call(drawLayers);
 
         transformStart = [
@@ -483,6 +482,8 @@ iD.Map = function(context) {
         minzoom = _;
         return map;
     };
+
+    map.layers = drawLayers;
 
     return d3.rebind(map, dispatch, 'on');
 };

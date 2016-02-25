@@ -99,30 +99,35 @@ iD.svg.Gpx = function(projection, context) {
     drawGpx.showLabels = function(_) {
         if (!arguments.length) return showLabels;
         showLabels = _;
-        return drawGpx;
+        return this;
     };
 
     drawGpx.enabled = function(_) {
         if (!arguments.length) return iD.svg.Gpx.enabled;
         iD.svg.Gpx.enabled = _;
-        return drawGpx;
+        return this;
+    };
+
+    drawGpx.hasGpx = function() {
+        var geojson = iD.svg.Gpx.geojson;
+        return (!(_.isEmpty(geojson) || _.isEmpty(geojson.features)));
     };
 
     drawGpx.geojson = function(gj) {
         if (!arguments.length) return iD.svg.Gpx.geojson;
-        if (_.isEmpty(gj) || _.isEmpty(gj.features)) return drawGpx;
+        if (_.isEmpty(gj) || _.isEmpty(gj.features)) return this;
         iD.svg.Gpx.geojson = gj;
-        return drawGpx;
+        return this;
     };
 
     drawGpx.url = function(url) {
         d3.text(url, function(err, data) {
             if (!err) {
-                drawGpx.geojson(toGeoJSON.gpx(toDom(data)));
+                this.geojson(toGeoJSON.gpx(toDom(data)));
                 redraw();
             }
         });
-        return drawGpx;
+        return this;
     };
 
     drawGpx.files = function(fileList) {
@@ -130,17 +135,17 @@ iD.svg.Gpx = function(projection, context) {
             reader = new FileReader();
 
         reader.onload = function(e) {
-            drawGpx.geojson(toGeoJSON.gpx(toDom(e.target.result))).fitZoom();
+            this.geojson(toGeoJSON.gpx(toDom(e.target.result))).fitZoom();
             redraw();
         };
 
         reader.readAsText(f);
-        return drawGpx;
+        return this;
     };
 
     drawGpx.fitZoom = function() {
+        if (!this.hasGpx()) return this;
         var geojson = iD.svg.Gpx.geojson;
-        if (_.isEmpty(geojson) || _.isEmpty(geojson.features)) return drawGpx;
 
         var map = context.map(),
             viewport = map.trimmedExtent().polygon(),
@@ -154,7 +159,7 @@ iD.svg.Gpx = function(projection, context) {
             map.centerZoom(extent.center(), map.trimmedExtentZoom(extent));
         }
 
-        return drawGpx;
+        return this;
     };
 
     init();

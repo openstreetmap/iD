@@ -1,9 +1,15 @@
 iD.svg.MapillaryImages = function(projection, context) {
     var debouncedRedraw = _.debounce(function () { context.pan([0,0]); }, 1000),
-        enabled = false,
         minZoom = 12,
         layer = d3.select(null),
         _mapillary;
+
+
+    function init() {
+        if (iD.svg.MapillaryImages.initialized) return;  // run once
+        iD.svg.MapillaryImages.enabled = false;
+        iD.svg.MapillaryImages.initialized = true;
+    }
 
     function getMapillary() {
         if (iD.services.mapillary && !_mapillary) {
@@ -108,7 +114,8 @@ iD.svg.MapillaryImages = function(projection, context) {
     }
 
     function drawImages(selection) {
-        var mapillary = getMapillary();
+        var enabled = iD.svg.MapillaryImages.enabled,
+            mapillary = getMapillary();
 
         layer = selection.selectAll('.layer-mapillary-images')
             .data(mapillary ? [0] : []);
@@ -160,22 +167,27 @@ iD.svg.MapillaryImages = function(projection, context) {
         }
     }
 
-    drawImages.enable = function(_) {
-        if (!arguments.length) return enabled;
-        enabled = _;
-        if (enabled) {
+    drawImages.enabled = function(_) {
+        if (!arguments.length) return iD.svg.MapillaryImages.enabled;
+        iD.svg.MapillaryImages.enabled = _;
+        if (iD.svg.MapillaryImages.enabled) {
             showLayer();
         } else {
             hideLayer();
         }
-        return drawImages;
+        return this;
+    };
+
+    drawImages.supported = function() {
+        return !!getMapillary();
     };
 
     drawImages.dimensions = function(_) {
         if (!arguments.length) return layer.dimensions();
         layer.dimensions(_);
-        return drawImages;
+        return this;
     };
 
+    init();
     return drawImages;
 };

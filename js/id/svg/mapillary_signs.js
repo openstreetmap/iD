@@ -1,9 +1,15 @@
 iD.svg.MapillarySigns = function(projection, context) {
     var debouncedRedraw = _.debounce(function () { context.pan([0,0]); }, 1000),
-        enabled = false,
         minZoom = 12,
         layer = d3.select(null),
         _mapillary;
+
+
+    function init() {
+        if (iD.svg.MapillarySigns.initialized) return;  // run once
+        iD.svg.MapillarySigns.enabled = false;
+        iD.svg.MapillarySigns.initialized = true;
+    }
 
     function getMapillary() {
         if (iD.services.mapillary && !_mapillary) {
@@ -65,8 +71,7 @@ iD.svg.MapillarySigns = function(projection, context) {
         var mapillary = getMapillary(),
             data = (mapillary ? mapillary.signs(projection, layer.dimensions()) : []);
 
-        var signs = layer.select('.layer-mapillary-signs')
-            .selectAll('.icon-sign')
+        var signs = layer.selectAll('.icon-sign')
             .data(data, function(d) { return d.key; });
 
         // Enter
@@ -115,7 +120,8 @@ iD.svg.MapillarySigns = function(projection, context) {
     }
 
     function drawSigns(selection) {
-        var mapillary = getMapillary();
+        var enabled = iD.svg.MapillarySigns.enabled,
+            mapillary = getMapillary();
 
         layer = selection.selectAll('.layer-mapillary-signs')
             .data(mapillary ? [0] : []);
@@ -140,22 +146,28 @@ iD.svg.MapillarySigns = function(projection, context) {
         }
     }
 
-    drawSigns.enable = function(_) {
-        if (!arguments.length) return enabled;
-        enabled = _;
-        if (enabled) {
+    drawSigns.enabled = function(_) {
+        if (!arguments.length) return iD.svg.MapillarySigns.enabled;
+        iD.svg.MapillarySigns.enabled = _;
+        if (iD.svg.MapillarySigns.enabled) {
             showLayer();
         } else {
             hideLayer();
         }
-        return drawSigns;
+        return this;
+    };
+
+    drawSigns.supported = function() {
+        var mapillary = getMapillary();
+        return (mapillary && mapillary.signsSupported());
     };
 
     drawSigns.dimensions = function(_) {
         if (!arguments.length) return layer.dimensions();
         layer.dimensions(_);
-        return drawSigns;
+        return this;
     };
 
+    init();
     return drawSigns;
 };
