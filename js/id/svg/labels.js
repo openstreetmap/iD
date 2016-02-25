@@ -248,7 +248,7 @@ iD.svg.Labels = function(projection, context) {
         rectangles = {};
 
     function drawLabels(surface, graph, entities, filter, dimensions, fullRedraw) {
-        var hidePoints = !surface.select('.node.point').node();
+        var hidePoints = !surface.selectAll('.node.point').node();
 
         var labelable = [], i, k, entity;
         for (i = 0; i < label_stack.length; i++) labelable.push([]);
@@ -407,8 +407,8 @@ iD.svg.Labels = function(projection, context) {
             return v;
         }
 
-        var label = surface.select('.layer-label'),
-            halo = surface.select('.layer-halo');
+        var label = surface.selectAll('.layer-label'),
+            halo = surface.selectAll('.layer-halo');
 
         // points
         drawPointLabels(label, labelled.point, filter, 'pointlabel', positions.point);

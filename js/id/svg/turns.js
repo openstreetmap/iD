@@ -13,7 +13,7 @@ iD.svg.Turns = function(projection) {
                 (!turn.indirect_restriction && /^only_/.test(restriction) ? 'only' : 'no') + u;
         }
 
-        var groups = surface.select('.layer-hit').selectAll('g.turn')
+        var groups = surface.selectAll('.layer-hit').selectAll('g.turn')
             .data(turns, key);
 
         // Enter

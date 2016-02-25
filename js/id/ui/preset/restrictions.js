@@ -43,7 +43,7 @@ iD.ui.preset.restrictions = function(field, context) {
 
         enter
             .call(drawLayers)
-            .select('.surface')
+            .selectAll('.surface')
             .call(iD.behavior.Hover(context));
 
 

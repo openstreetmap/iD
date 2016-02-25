@@ -18,7 +18,7 @@ iD.svg.Points = function(projection, context) {
 
         points.sort(sortY);
 
-        var groups = surface.select('.layer-hit').selectAll('g.point')
+        var groups = surface.selectAll('.layer-hit').selectAll('g.point')
             .filter(filter)
             .data(points, iD.Entity.key);
 
