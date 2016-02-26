@@ -1,9 +1,17 @@
 iD.ui.preset.restrictions = function(field, context) {
     var dispatch = d3.dispatch('change'),
+        hover = iD.behavior.Hover(context),
         vertexID,
         fromNodeID;
 
+
     function restrictions(selection) {
+        // if form field is hidden or has detached from dom, clean up.
+        if (!d3.select('.inspector-wrap.inspector-hidden').empty() || !selection.node().parentNode) {
+            selection.call(restrictions.off);
+            return;
+        }
+
         var wrap = selection.selectAll('.preset-input-wrap')
             .data([0]);
 
@@ -44,10 +52,10 @@ iD.ui.preset.restrictions = function(field, context) {
         enter
             .call(drawLayers)
             .selectAll('.surface')
-            .call(iD.behavior.Hover(context));
+            .call(hover);
 
 
-        var surface = wrap.select('.surface');
+        var surface = wrap.selectAll('.surface');
 
         surface
             .dimensions(d)
@@ -147,6 +155,20 @@ iD.ui.preset.restrictions = function(field, context) {
 
     restrictions.tags = function() {};
     restrictions.focus = function() {};
+
+    restrictions.off = function(selection) {
+        selection.selectAll('.surface')
+            .call(hover.off)
+            .on('click.restrictions', null)
+            .on('mouseover.restrictions', null)
+            .on('mouseout.restrictions', null);
+
+        context.history()
+            .on('change.restrictions', null);
+
+        d3.select(window)
+            .on('resize.restrictions', null);
+    };
 
     return d3.rebind(restrictions, dispatch, 'on');
 };
