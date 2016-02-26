@@ -190,6 +190,8 @@ iD.Map = function(context) {
 
     function resetTransform() {
         if (!transformed) return false;
+
+        surface.selectAll('.radial-menu').interrupt().remove();
         iD.util.setTransform(supersurface, 0, 0);
         transformed = false;
         return true;
