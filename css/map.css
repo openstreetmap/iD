@@ -1268,7 +1268,7 @@ path.shadow.tag-cutting {
 
 /* Surface - unpaved */
 path.casing.tag-unpaved {
-    stroke: #eaeaea;
+    stroke: #ccc;
     stroke-linecap: butt;
     stroke-dasharray: 4, 3;
 }
