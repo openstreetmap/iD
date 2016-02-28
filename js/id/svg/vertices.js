@@ -48,19 +48,10 @@ iD.svg.Vertices = function(projection, context) {
 
     function draw(selection, vertices, klass, graph, zoom) {
         var icons = {},
-            z;
+            z = (zoom < 17 ? 0 : zoom < 18 ? 1 : 2);
 
-        if (zoom < 17) {
-            z = 0;
-        } else if (zoom < 18) {
-            z = 1;
-        } else {
-            z = 2;
-        }
-
-        var groups = selection.data(vertices, function(entity) {
-            return iD.Entity.key(entity);
-        });
+        var groups = selection
+            .data(vertices, iD.Entity.key);
 
         function icon(entity) {
             if (entity.id in icons) return icons[entity.id];
@@ -162,7 +153,7 @@ iD.svg.Vertices = function(projection, context) {
             }
         }
 
-        surface.select('.layer-hit').selectAll('g.vertex.vertex-persistent')
+        surface.selectAll('.layer-hit').selectAll('g.vertex.vertex-persistent')
             .filter(filter)
             .call(draw, vertices, 'vertex-persistent', graph, zoom);
 
@@ -172,15 +163,14 @@ iD.svg.Vertices = function(projection, context) {
     function drawHover(surface, graph, extent, zoom) {
         var hovered = hover ? siblingAndChildVertices([hover.id], graph, extent) : {};
 
-        surface.select('.layer-hit').selectAll('g.vertex.vertex-hover')
+        surface.selectAll('.layer-hit').selectAll('g.vertex.vertex-hover')
             .call(draw, d3.values(hovered), 'vertex-hover', graph, zoom);
     }
 
-    drawVertices.drawHover = function(surface, graph, _, extent, zoom) {
-        if (hover !== _) {
-            hover = _;
-            drawHover(surface, graph, extent, zoom);
-        }
+    drawVertices.drawHover = function(surface, graph, target, extent, zoom) {
+        if (target === hover) return;
+        hover = target;
+        drawHover(surface, graph, extent, zoom);
     };
 
     return drawVertices;

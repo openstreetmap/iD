@@ -1,17 +1,23 @@
 d3.selection.prototype.dimensions = function (dimensions) {
-    if (!arguments.length) {
-        var node = this.node();
-        if (!node) return;
-
-        var prop = this.property('__dimensions__');
-        if (!prop) {
-            var cr = node.getBoundingClientRect();
-            prop = [cr.width, cr.height];
-            this.property('__dimensions__', prop);
-        }
+    var refresh = (function(node) {
+        var cr = node.getBoundingClientRect();
+        prop = [cr.width, cr.height];
+        this.property('__dimensions__', prop);
         return prop;
+    }).bind(this);
+
+    var node = this.node();
+
+    if (!arguments.length) {
+        if (!node) return [0,0];
+        return this.property('__dimensions__') || refresh(node);
+    }
+    if (dimensions === null) {
+        if (!node) return [0,0];
+        return refresh(node);
     }
 
-    this.property('__dimensions__', [dimensions[0], dimensions[1]]);
-    return this.attr({width: dimensions[0], height: dimensions[1]});
+    return this
+        .property('__dimensions__', [dimensions[0], dimensions[1]])
+        .attr({width: dimensions[0], height: dimensions[1]});
 };

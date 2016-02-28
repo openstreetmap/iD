@@ -1,6 +1,7 @@
 iD.ui.MapData = function(context) {
     var key = 'F',
         features = context.features().keys(),
+        layers = context.layers(),
         fills = ['wireframe', 'partial', 'full'],
         fillDefault = context.storage('area-fill') || 'partial',
         fillSelected = fillDefault;
@@ -38,30 +39,38 @@ iD.ui.MapData = function(context) {
             update();
         }
 
+        function toggleLayer(which) {
+            var layer = layers.layer(which);
+            if (layer) {
+                layer.enabled(!layer.enabled());
+                update();
+            }
+        }
+
         function clickGpx() {
-            context.background().toggleGpxLayer();
-            update();
+            toggleLayer('gpx');
         }
 
         function clickMapillaryImages() {
-            context.background().toggleMapillaryImageLayer();
-            update();
+            toggleLayer('mapillary-images');
         }
 
         function clickMapillarySigns() {
-            context.background().toggleMapillarySignLayer();
-            update();
+            toggleLayer('mapillary-signs');
         }
 
 
         function drawMapillaryItems(selection) {
-            var mapillary = iD.services.mapillary,
-                supportsMapillaryImages = !!mapillary,
-                supportsMapillarySigns = !!mapillary && mapillary().signsSupported();
+            var mapillaryImages = layers.layer('mapillary-images'),
+                mapillarySigns = layers.layer('mapillary-signs'),
+                supportsMapillaryImages = mapillaryImages && mapillaryImages.supported(),
+                supportsMapillarySigns = mapillarySigns && mapillarySigns.supported(),
+                showsMapillaryImages = supportsMapillaryImages && mapillaryImages.enabled(),
+                showsMapillarySigns = supportsMapillarySigns && mapillarySigns.enabled();
 
             var mapillaryList = selection
-                    .selectAll('.mapillary-list')
-                    .data([0]);
+                .selectAll('.mapillary-list')
+                .data([0]);
 
             // Enter
             mapillaryList
@@ -70,8 +79,8 @@ iD.ui.MapData = function(context) {
                 .attr('class', 'layer-list mapillary-list');
 
             var mapillaryImageLayerItem = mapillaryList
-                    .selectAll('.item-mapillary-images')
-                    .data(supportsMapillaryImages ? [0] : []);
+                .selectAll('.item-mapillary-images')
+                .data(supportsMapillaryImages ? [0] : []);
 
             var enterImages = mapillaryImageLayerItem.enter()
                 .append('li')
@@ -91,8 +100,8 @@ iD.ui.MapData = function(context) {
 
 
             var mapillarySignLayerItem = mapillaryList
-                    .selectAll('.item-mapillary-signs')
-                    .data(supportsMapillarySigns ? [0] : []);
+                .selectAll('.item-mapillary-signs')
+                .data(supportsMapillarySigns ? [0] : []);
 
             var enterSigns = mapillarySignLayerItem.enter()
                 .append('li')
@@ -111,9 +120,6 @@ iD.ui.MapData = function(context) {
                 .text(t('mapillary_signs.title'));
 
             // Update
-            var showsMapillaryImages = supportsMapillaryImages && context.background().showsMapillaryImageLayer(),
-                showsMapillarySigns = supportsMapillarySigns && context.background().showsMapillarySignLayer();
-
             mapillaryImageLayerItem
                 .classed('active', showsMapillaryImages)
                 .selectAll('input')
@@ -133,10 +139,13 @@ iD.ui.MapData = function(context) {
 
 
         function drawGpxItem(selection) {
-            var supportsGpx = iD.detect().filedrop,
-                gpxLayerItem = selection
-                    .selectAll('.layer-gpx')
-                    .data(supportsGpx ? [0] : []);
+            var gpx = layers.layer('gpx'),
+                hasGpx = gpx && gpx.hasGpx(),
+                showsGpx = hasGpx && gpx.enabled();
+
+            var gpxLayerItem = selection
+                .selectAll('.layer-gpx')
+                .data(gpx ? [0] : []);
 
             // Enter
             var enter = gpxLayerItem.enter()
@@ -153,7 +162,7 @@ iD.ui.MapData = function(context) {
                 .on('click', function() {
                     d3.event.preventDefault();
                     d3.event.stopPropagation();
-                    context.background().zoomToGpxLayer();
+                    gpx.fitZoom();
                 })
                 .call(iD.svg.Icon('#icon-search'));
 
@@ -166,7 +175,7 @@ iD.ui.MapData = function(context) {
                     d3.select(document.createElement('input'))
                         .attr('type', 'file')
                         .on('change', function() {
-                            context.background().gpxLayerFiles(d3.event.target.files);
+                            gpx.files(d3.event.target.files);
                         })
                         .node().click();
                 })
@@ -185,9 +194,6 @@ iD.ui.MapData = function(context) {
                 .text(t('gpx.local_layer'));
 
             // Update
-            var hasGpx = supportsGpx && context.background().hasGpxLayer(),
-                showsGpx = supportsGpx && context.background().showsGpxLayer();
-
             gpxLayerItem
                 .classed('active', showsGpx)
                 .selectAll('input')

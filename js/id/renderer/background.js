@@ -1,11 +1,6 @@
 iD.Background = function(context) {
     var dispatch = d3.dispatch('change'),
-        baseLayer = iD.TileLayer()
-            .projection(context.projection),
-        gpxLayer = iD.GpxLayer(context, dispatch)
-            .projection(context.projection),
-        mapillaryImageLayer,
-        mapillarySignLayer,
+        baseLayer = iD.TileLayer().projection(context.projection),
         overlayLayers = [];
 
     var backgroundSources;
@@ -49,7 +44,8 @@ iD.Background = function(context) {
             }
         });
 
-        if (background.showsGpxLayer()) {
+        var gpx = context.layers().layer('gpx');
+        if (gpx && gpx.enabled() && gpx.hasGpx()) {
             imageryUsed.push('Local GPX');
         }
 
@@ -57,71 +53,27 @@ iD.Background = function(context) {
     }
 
     function background(selection) {
-        var base = selection.selectAll('.background-layer')
+        var base = selection.selectAll('.layer-background')
             .data([0]);
 
-        base.enter().insert('div', '.layer-data')
-            .attr('class', 'layer-layer background-layer');
+        base.enter()
+            .insert('div', '.layer-data')
+            .attr('class', 'layer layer-background');
 
         base.call(baseLayer);
 
         var overlays = selection.selectAll('.layer-overlay')
             .data(overlayLayers, function(d) { return d.source().name(); });
 
-        overlays.enter().insert('div', '.layer-data')
-            .attr('class', 'layer-layer layer-overlay');
+        overlays.enter()
+            .insert('div', '.layer-data')
+            .attr('class', 'layer layer-overlay');
 
         overlays.each(function(layer) {
             d3.select(this).call(layer);
         });
 
         overlays.exit()
-            .remove();
-
-        var gpx = selection.selectAll('.layer-gpx')
-            .data([0]);
-
-        gpx.enter().insert('div')
-            .attr('class', 'layer-layer layer-gpx');
-
-        gpx.call(gpxLayer);
-
-
-        var mapillary = iD.services.mapillary,
-            supportsMapillaryImages = !!mapillary,
-            supportsMapillarySigns = !!mapillary && mapillary().signsSupported();
-
-        var mapillaryImages = selection.selectAll('.layer-mapillary-images')
-            .data(supportsMapillaryImages ? [0] : []);
-
-        mapillaryImages.enter().insert('div')
-            .attr('class', 'layer-layer layer-mapillary-images');
-
-        if (supportsMapillaryImages) {
-            if (!mapillaryImageLayer) { mapillaryImageLayer = iD.MapillaryImageLayer(context); }
-            mapillaryImages.call(mapillaryImageLayer);
-        } else {
-            mapillaryImageLayer = null;
-        }
-
-        mapillaryImages.exit()
-            .remove();
-
-
-        var mapillarySigns = selection.selectAll('.layer-mapillary-signs')
-            .data(supportsMapillarySigns ? [0] : []);
-
-        mapillarySigns.enter().insert('div')
-            .attr('class', 'layer-layer layer-mapillary-signs');
-
-        if (supportsMapillarySigns) {
-            if (!mapillarySignLayer) { mapillarySignLayer = iD.MapillarySignLayer(context); }
-            mapillarySigns.call(mapillarySignLayer);
-        } else {
-            mapillarySignLayer = null;
-        }
-
-        mapillarySigns.exit()
             .remove();
     }
 
@@ -133,9 +85,6 @@ iD.Background = function(context) {
 
     background.dimensions = function(_) {
         baseLayer.dimensions(_);
-        gpxLayer.dimensions(_);
-        if (mapillaryImageLayer) mapillaryImageLayer.dimensions(_);
-        if (mapillarySignLayer) mapillarySignLayer.dimensions(_);
 
         overlayLayers.forEach(function(layer) {
             layer.dimensions(_);
@@ -154,74 +103,6 @@ iD.Background = function(context) {
 
     background.bing = function() {
         background.baseLayerSource(findSource('Bing'));
-    };
-
-    background.hasGpxLayer = function() {
-        return !_.isEmpty(gpxLayer.geojson());
-    };
-
-    background.showsGpxLayer = function() {
-        return background.hasGpxLayer() && gpxLayer.enable();
-    };
-
-    function toDom(x) {
-        return (new DOMParser()).parseFromString(x, 'text/xml');
-    }
-
-    background.gpxLayerFiles = function(fileList) {
-        var f = fileList[0],
-            reader = new FileReader();
-
-        reader.onload = function(e) {
-            gpxLayer.geojson(toGeoJSON.gpx(toDom(e.target.result)));
-            iD.ui.MapInMap.gpxLayer.geojson(toGeoJSON.gpx(toDom(e.target.result)));
-            background.zoomToGpxLayer();
-            dispatch.change();
-        };
-
-        reader.readAsText(f);
-    };
-
-    background.zoomToGpxLayer = function() {
-        if (background.hasGpxLayer()) {
-            var map = context.map(),
-                viewport = map.trimmedExtent().polygon(),
-                coords = _.reduce(gpxLayer.geojson().features, function(coords, feature) {
-                    var c = feature.geometry.coordinates;
-                    return _.union(coords, feature.geometry.type === 'Point' ? [c] : c);
-                }, []);
-
-            if (!iD.geo.polygonIntersectsPolygon(viewport, coords, true)) {
-                var extent = iD.geo.Extent(d3.geo.bounds(gpxLayer.geojson()));
-                map.centerZoom(extent.center(), map.trimmedExtentZoom(extent));
-            }
-        }
-    };
-
-    background.toggleGpxLayer = function() {
-        gpxLayer.enable(!gpxLayer.enable());
-        iD.ui.MapInMap.gpxLayer.enable(!iD.ui.MapInMap.gpxLayer.enable());
-        dispatch.change();
-    };
-
-    background.showsMapillaryImageLayer = function() {
-        return mapillaryImageLayer && mapillaryImageLayer.enable();
-    };
-
-    background.showsMapillarySignLayer = function() {
-        return mapillarySignLayer && mapillarySignLayer.enable();
-    };
-
-    background.toggleMapillaryImageLayer = function() {
-        if (!mapillaryImageLayer) return;
-        mapillaryImageLayer.enable(!mapillaryImageLayer.enable());
-        dispatch.change();
-    };
-
-    background.toggleMapillarySignLayer = function() {
-        if (!mapillarySignLayer) return;
-        mapillarySignLayer.enable(!mapillarySignLayer.enable());
-        dispatch.change();
     };
 
     background.showsLayer = function(d) {
@@ -317,15 +198,9 @@ iD.Background = function(context) {
             if (overlay) background.toggleOverlayLayer(overlay);
         });
 
-        var gpx = q.gpx;
-        if (gpx) {
-            d3.text(gpx, function(err, gpxTxt) {
-                if (!err) {
-                    gpxLayer.geojson(toGeoJSON.gpx(toDom(gpxTxt)));
-                    iD.ui.MapInMap.gpxLayer.geojson(toGeoJSON.gpx(toDom(gpxTxt)));
-                    dispatch.change();
-                }
-            });
+        if (q.gpx) {
+            var gpx = context.layers().layer('gpx');
+            if (gpx) { gpx.url(q.gpx); }
         }
     };
 

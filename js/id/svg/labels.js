@@ -131,7 +131,6 @@ iD.svg.Labels = function(projection, context) {
     }
 
     function drawPointLabels(group, entities, filter, classes, labels) {
-
         var texts = group.selectAll('text.' + classes)
             .filter(filter)
             .data(entities, iD.Entity.key);
@@ -248,9 +247,8 @@ iD.svg.Labels = function(projection, context) {
     var rtree = rbush(),
         rectangles = {};
 
-    function labels(surface, graph, entities, filter, dimensions, fullRedraw) {
-
-        var hidePoints = !surface.select('.node.point').node();
+    function drawLabels(surface, graph, entities, filter, dimensions, fullRedraw) {
+        var hidePoints = !surface.selectAll('.node.point').node();
 
         var labelable = [], i, k, entity;
         for (i = 0; i < label_stack.length; i++) labelable.push([]);
@@ -409,8 +407,8 @@ iD.svg.Labels = function(projection, context) {
             return v;
         }
 
-        var label = surface.select('.layer-label'),
-            halo = surface.select('.layer-halo');
+        var label = surface.selectAll('.layer-label'),
+            halo = surface.selectAll('.layer-halo');
 
         // points
         drawPointLabels(label, labelled.point, filter, 'pointlabel', positions.point);
@@ -427,7 +425,7 @@ iD.svg.Labels = function(projection, context) {
         drawAreaIcons(label, labelled.area, filter, 'arealabel-icon', positions.area);
     }
 
-    labels.supersurface = function(supersurface) {
+    drawLabels.supersurface = function(supersurface) {
         supersurface
             .on('mousemove.hidelabels', hideOnMouseover)
             .on('mousedown.hidelabels', function () {
@@ -438,5 +436,5 @@ iD.svg.Labels = function(projection, context) {
             });
     };
 
-    return labels;
+    return drawLabels;
 };

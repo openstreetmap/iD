@@ -50,7 +50,7 @@ iD.svg.Lines = function(projection) {
         });
 
         var layergroup = surface
-            .select('.layer-lines')
+            .selectAll('.layer-lines')
             .selectAll('g.layergroup')
             .data(d3.range(-10, 11));
 

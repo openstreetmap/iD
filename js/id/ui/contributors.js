@@ -1,7 +1,11 @@
 iD.ui.Contributors = function(context) {
-    function update(selection) {
+    var debouncedUpdate = _.debounce(function() { update(); }, 1000),
+        limit = 4,
+        hidden = false,
+        wrap = d3.select(null);
+
+    function update() {
         var users = {},
-            limit = 4,
             entities = context.intersects(context.map().extent());
 
         entities.forEach(function(entity) {
@@ -11,7 +15,7 @@ iD.ui.Contributors = function(context) {
         var u = Object.keys(users),
             subset = u.slice(0, u.length > limit ? limit - 1 : limit);
 
-        selection.html('')
+        wrap.html('')
             .call(iD.svg.Icon('#icon-nearby', 'pre-text light'));
 
         var userList = d3.select(document.createElement('span'));
@@ -37,29 +41,32 @@ iD.ui.Contributors = function(context) {
                 })
                 .text(u.length - limit + 1);
 
-            selection.append('span')
-                .html(t('contributors.truncated_list', {users: userList.html(), count: count.html()}));
+            wrap.append('span')
+                .html(t('contributors.truncated_list', { users: userList.html(), count: count.html() }));
+
         } else {
-            selection.append('span')
-                .html(t('contributors.list', {users: userList.html()}));
+            wrap.append('span')
+                .html(t('contributors.list', { users: userList.html() }));
         }
 
         if (!u.length) {
-            selection.transition().style('opacity', 0);
-        } else if (selection.style('opacity') === '0') {
-            selection.transition().style('opacity', 1);
+            hidden = true;
+            wrap
+                .transition()
+                .style('opacity', 0);
+
+        } else if (hidden) {
+            wrap
+                .transition()
+                .style('opacity', 1);
         }
     }
 
     return function(selection) {
-        update(selection);
+        wrap = selection;
+        update();
 
-        context.connection().on('loaded.contributors', function() {
-            update(selection);
-        });
-
-        context.map().on('move.contributors', _.debounce(function() {
-            update(selection);
-        }, 500));
+        context.connection().on('loaded.contributors', debouncedUpdate);
+        context.map().on('move.contributors', debouncedUpdate);
     };
 };

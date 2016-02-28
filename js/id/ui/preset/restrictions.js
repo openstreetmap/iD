@@ -1,36 +1,39 @@
 iD.ui.preset.restrictions = function(field, context) {
     var dispatch = d3.dispatch('change'),
+        hover = iD.behavior.Hover(context),
         vertexID,
         fromNodeID;
 
+
     function restrictions(selection) {
+        // if form field is hidden or has detached from dom, clean up.
+        if (!d3.select('.inspector-wrap.inspector-hidden').empty() || !selection.node().parentNode) {
+            selection.call(restrictions.off);
+            return;
+        }
+
         var wrap = selection.selectAll('.preset-input-wrap')
             .data([0]);
 
-        var enter = wrap.enter().append('div')
+        var enter = wrap.enter()
+            .append('div')
             .attr('class', 'preset-input-wrap');
 
-        enter.append('div')
+        enter
+            .append('div')
             .attr('class', 'restriction-help');
 
-        enter.append('svg')
-            .call(iD.svg.Surface(context))
-            .call(iD.behavior.Hover(context));
 
         var intersection = iD.geo.Intersection(context.graph(), vertexID),
             graph = intersection.graph,
             vertex = graph.entity(vertexID),
-            surface = wrap.selectAll('svg'),
-            filter = function () { return true; },
+            filter = d3.functor(true),
             extent = iD.geo.Extent(),
-            projection = iD.geo.RawMercator(),
-            lines = iD.svg.Lines(projection, context),
-            vertices = iD.svg.Vertices(projection, context),
-            turns = iD.svg.Turns(projection, context);
+            projection = iD.geo.RawMercator();
 
         var d = wrap.dimensions(),
             c = [d[0] / 2, d[1] / 2],
-            z = 21;
+            z = 24;
 
         projection
             .scale(256 * Math.pow(2, z) / (2 * Math.PI));
@@ -41,10 +44,24 @@ iD.ui.preset.restrictions = function(field, context) {
             .translate([c[0] - s[0], c[1] - s[1]])
             .clipExtent([[0, 0], d]);
 
+        var drawLayers = iD.svg.Layers(projection, context).only('osm').dimensions(d),
+            drawVertices = iD.svg.Vertices(projection, context),
+            drawLines = iD.svg.Lines(projection, context),
+            drawTurns = iD.svg.Turns(projection, context);
+
+        enter
+            .call(drawLayers)
+            .selectAll('.surface')
+            .call(hover);
+
+
+        var surface = wrap.selectAll('.surface');
+
         surface
-            .call(vertices, graph, [vertex], filter, extent, z)
-            .call(lines, graph, intersection.ways, filter)
-            .call(turns, graph, intersection.turns(fromNodeID));
+            .dimensions(d)
+            .call(drawVertices, graph, [vertex], filter, extent, z)
+            .call(drawLines, graph, intersection.ways, filter)
+            .call(drawTurns, graph, intersection.turns(fromNodeID));
 
         surface
             .on('click.restrictions', click)
@@ -67,7 +84,10 @@ iD.ui.preset.restrictions = function(field, context) {
             .on('change.restrictions', render);
 
         d3.select(window)
-            .on('resize.restrictions', render);
+            .on('resize.restrictions', function() {
+                wrap.dimensions(null);
+                render();
+            });
 
         function click() {
             var datum = d3.event.target.__data__;
@@ -135,6 +155,20 @@ iD.ui.preset.restrictions = function(field, context) {
 
     restrictions.tags = function() {};
     restrictions.focus = function() {};
+
+    restrictions.off = function(selection) {
+        selection.selectAll('.surface')
+            .call(hover.off)
+            .on('click.restrictions', null)
+            .on('mouseover.restrictions', null)
+            .on('mouseout.restrictions', null);
+
+        context.history()
+            .on('change.restrictions', null);
+
+        d3.select(window)
+            .on('resize.restrictions', null);
+    };
 
     return d3.rebind(restrictions, dispatch, 'on');
 };

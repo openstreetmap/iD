@@ -82,7 +82,7 @@ iD.svg.Areas = function(projection) {
            .remove();
 
         var areagroup = surface
-            .select('.layer-areas')
+            .selectAll('.layer-areas')
             .selectAll('g.areagroup')
             .data(['fill', 'shadow', 'stroke']);
 
