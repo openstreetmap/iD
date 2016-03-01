@@ -10,21 +10,22 @@ iD.Tree = function(head) {
     }
 
     function updateParents(entity, insertions, memo) {
-        head.parentWays(entity).forEach(function(parent) {
-            if (rectangles[parent.id]) {
-                rtree.remove(rectangles[parent.id]);
-                insertions[parent.id] = parent;
+        head.parentWays(entity).forEach(function(way) {
+            if (rectangles[way.id]) {
+                rtree.remove(rectangles[way.id]);
+                insertions[way.id] = way;
             }
+            updateParents(way, insertions, memo);
         });
 
-        head.parentRelations(entity).forEach(function(parent) {
+        head.parentRelations(entity).forEach(function(relation) {
             if (memo[entity.id]) return;
             memo[entity.id] = true;
-            if (rectangles[parent.id]) {
-                rtree.remove(rectangles[parent.id]);
-                insertions[parent.id] = parent;
+            if (rectangles[relation.id]) {
+                rtree.remove(rectangles[relation.id]);
+                insertions[relation.id] = relation;
             }
-            updateParents(parent, insertions, memo);
+            updateParents(relation, insertions, memo);
         });
     }
 
