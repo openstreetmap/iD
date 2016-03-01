@@ -1,0 +1,4893 @@
+/* http://meyerweb.com/eric/tools/css/reset/
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+a { text-decoration: none;}
+/*
+ * 1. Corrects font family not being inherited in all browsers.
+ * 2. Corrects font size not being inherited in all browsers.
+ * 3. Addresses margins set differently in Firefox 4+, Safari 5, and Chrome
+ */
+
+button,
+input,
+select,
+textarea {
+    font-family: inherit; /* 1 */
+    font-size: 100%; /* 2 */
+    margin: 0; /* 3 */
+    padding: 0;
+}
+
+/*
+ * Addresses Firefox 4+ setting `line-height` on `input` using `!important` in
+ * the UA stylesheet.
+ */
+
+button,
+input {
+    line-height: normal;
+}
+
+/* Hide default number spinner controls */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+display: none;
+}
+
+/*
+ * 1. Avoid the WebKit bug in Android 4.0.* where (2) destroys native `audio`
+ *    and `video` controls.
+ * 2. Corrects inability to style clickable `input` types in iOS.
+ * 3. Improves usability and consistency of cursor style between image-type
+ *    `input` and others.
+ */
+
+button,
+html input[type="button"], /* 1 */
+input[type="reset"],
+input[type="submit"] {
+    -webkit-appearance: button; /* 2 */
+    cursor: pointer; /* 3 */
+}
+
+/*
+ * Re-set default cursor for disabled elements.
+ */
+
+button[disabled],
+input[disabled] {
+    cursor: default;
+}
+
+/*
+ * 1. Addresses box sizing set to `content-box` in IE 8/9.
+ * 2. Removes excess padding in IE 8/9.
+ */
+
+input[type="checkbox"],
+input[type="radio"] {
+    box-sizing: border-box; /* 1 */
+    padding: 0; /* 2 */
+}
+
+/*
+ * 1. Addresses `appearance` set to `searchfield` in Safari 5 and Chrome.
+ * 2. Addresses `box-sizing` set to `border-box` in Safari 5 and Chrome
+ *    (include `-moz` to future-proof).
+ */
+
+input[type="search"] {
+    -webkit-appearance: textfield; /* 1 */
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box; /* 2 */
+    box-sizing: border-box;
+}
+
+/*
+ * Removes inner padding and search cancel button in Safari 5 and Chrome
+ * on OS X.
+ */
+
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-decoration {
+    -webkit-appearance: none;
+}
+
+/*
+ * Removes inner padding and border in Firefox 4+.
+ */
+
+button::-moz-focus-inner,
+input::-moz-focus-inner {
+    border: 0;
+    padding: 0;
+}
+
+/*
+** Markup free clearing
+** Details: http://www.positioniseverything.net/easyclearing.html
+*/
+.cf:before,
+.cf:after {
+    content: " "; /* 1 */
+    display: table; /* 2 */
+}
+
+.cf:after {
+    clear: both;
+}
+/* tiles */
+img.tile {
+    position:absolute;
+    transform-origin:0 0;
+    -ms-transform-origin:0 0;
+    -webkit-transform-origin:0 0;
+    -moz-transform-origin:0 0;
+    -o-transform-origin:0 0;
+
+    opacity: 0;
+
+    -webkit-transition: opacity 200ms linear;
+    transition: opacity 200ms linear;
+    -moz-transition: opacity 200ms linear;
+}
+
+img.tile-loaded {
+    opacity: 1;
+}
+img.tile-removing {
+    opacity: 0;
+}
+
+use { pointer-events: none; }
+
+/* base styles */
+.layer-osm path:not(.oneway) { fill: none; }     /* IE needs :not(.oneway) */
+
+/* the above fill: none rule affects paths in <use> shadow dom only in Firefox */
+.layer-osm use.icon path { fill: #333; }                       /* FF svg Maki icons */
+.layer-osm .turn use path { fill: #000; }                      /* FF turn restriction icons */
+#turn-only-shape2, #turn-only-u-shape2 { fill: #7092FF; }  /* FF turn-only, turn-only-u */
+#turn-no-shape2, #turn-no-u-shape2     { fill: #E06D5F; }  /* FF turn-no, turn-no-u */
+#turn-yes-shape2, #turn-yes-u-shape2   { fill: #8CD05F; }  /* FF turn-yes, turn-yes-u */
+
+g.point .shadow,
+g.vertex .shadow,
+g.midpoint .shadow {
+    pointer-events: all;
+}
+
+path.shadow {
+    pointer-events: stroke;
+}
+
+
+/* points */
+
+g.point .stroke {
+    stroke: #444;
+    stroke-width: 1;
+    fill: #fff;
+}
+
+g.point .shadow {
+    fill: none;
+    stroke: #f6634f;
+    stroke-width: 8;
+    stroke-opacity: 0;
+}
+
+g.point.hover:not(.selected) .shadow {
+    stroke-opacity: 0.5;
+}
+
+g.point.selected .shadow {
+    stroke-opacity: 0.7;
+}
+
+g.point.active, g.point.active * {
+    pointer-events: none;
+}
+
+/* vertices and midpoints */
+
+g.vertex .fill {
+    fill: #000;
+}
+
+g.vertex .stroke {
+    stroke: #666;
+    stroke-width: 1;
+    fill: white;
+}
+
+g.vertex.shared .stroke {
+    fill: #aaa;
+}
+
+g.midpoint .fill {
+    fill: #eee;
+    stroke: #444;
+    stroke-opacity: .6;
+    opacity: .7;
+}
+
+g.midpoint.tag-highway-corridor .fill,
+g.midpoint.tag-highway-pedestrian .fill,
+g.midpoint.tag-highway-steps .fill,
+g.midpoint.tag-highway-path .fill,
+g.midpoint.tag-highway-footway .fill,
+g.midpoint.tag-highway-cycleway .fill,
+g.midpoint.tag-highway-bridleway .fill {
+    fill: #fff;
+    stroke: #333;
+    stroke-opacity: .8;
+    opacity: .8;
+}
+
+g.vertex .shadow,
+g.midpoint .shadow {
+    fill: #f6634f;
+    fill-opacity: 0;
+}
+
+g.vertex.vertex-hover {
+    display: none;
+}
+
+.mode-draw-area g.vertex.vertex-hover,
+.mode-draw-line g.vertex.vertex-hover,
+.mode-add-area  g.vertex.vertex-hover,
+.mode-add-line  g.vertex.vertex-hover,
+.mode-add-point g.vertex.vertex-hover,
+.mode-drag-node g.vertex.vertex-hover {
+    display: block;
+}
+
+g.vertex.hover:not(.selected) .shadow,
+g.midpoint.hover:not(.selected) .shadow {
+    fill-opacity: 0.5;
+}
+
+g.vertex.selected .shadow {
+    fill-opacity: 0.7;
+}
+
+.mode-draw-area g.midpoint,
+.mode-draw-line g.midpoint,
+.mode-add-area g.midpoint,
+.mode-add-line g.midpoint,
+.mode-add-point g.midpoint {
+  display: none;
+}
+
+/* lines */
+
+.preset-icon .icon.other-line {
+    color: #fff;
+    fill: #777;
+}
+
+path.line {
+    stroke-linecap: round;
+    stroke-linejoin: bevel;
+}
+
+path.stroke {
+    stroke: #000;
+    stroke-width: 4;
+}
+
+path.shadow {
+    stroke: #f6634f;
+    stroke-width: 10;
+    stroke-opacity: 0;
+}
+
+path.shadow.hover:not(.selected) {
+    stroke-opacity: 0.4;
+}
+
+path.shadow.selected {
+    stroke-opacity: 0.7;
+}
+
+path.line.stroke {
+    stroke: #fff;
+    stroke-width: 2;
+}
+
+path.area.stroke {
+    stroke: #fff;
+    stroke-width: 1;
+}
+path.area.fill {
+    stroke-width: 0;
+    stroke: rgba(255, 255, 255, 0.3);
+    fill: rgba(255, 255, 255, 0.3);
+    fill-rule: evenodd;
+}
+.preset-icon-fill-area {
+    border: 1px solid rgb(170, 170, 170);
+    background-color: rgba(170, 170, 170, 0.3);
+}
+
+path.stroke.tag-natural {
+    stroke: rgb(182, 225, 153);
+}
+path.fill.tag-natural {
+    stroke: rgba(182, 225, 153, 0.3);
+    fill: rgba(182, 225, 153, 0.3);
+}
+.preset-icon-fill-area.tag-natural {
+    border-color: rgb(182, 225, 153);
+    background-color: rgba(182, 225, 153, 0.3);
+}
+
+path.stroke.tag-landuse,
+path.stroke.tag-natural-wood,
+path.stroke.tag-natural-tree,
+path.stroke.tag-natural-grassland,
+path.stroke.tag-natural-grass,
+path.stroke.tag-leisure-nature_reserve,
+path.stroke.tag-leisure-pitch,
+path.stroke.tag-leisure-park {
+    stroke: rgb(140, 208, 95);
+}
+path.fill.tag-landuse,
+path.fill.tag-natural-wood,
+path.fill.tag-natural-tree,
+path.fill.tag-natural-grassland,
+path.fill.tag-natural-grass,
+path.fill.tag-leisure-nature_reserve,
+path.fill.tag-leisure-pitch,
+path.fill.tag-leisure-park {
+    stroke: rgba(140, 208, 95, 0.3);
+    fill: rgba(140, 208, 95, 0.3);
+}
+.preset-icon-fill-area.tag-landuse,
+.preset-icon-fill-area.tag-natural-wood,
+.preset-icon-fill-area.tag-natural-tree,
+.preset-icon-fill-area.tag-natural-grassland,
+.preset-icon-fill-area.tag-natural-grass,
+.preset-icon-fill-area.tag-leisure-nature_reserve,
+.preset-icon-fill-area.tag-leisure-pitch,
+.preset-icon-fill-area.tag-leisure-park {
+    border-color: rgb(140, 208, 95);
+    background-color: rgba(140, 208, 95, 0.3);
+}
+
+path.stroke.tag-amenity-swimming_pool,
+path.stroke.tag-leisure-swimming_pool,
+path.stroke.tag-natural-water,
+path.stroke.tag-landuse-basin,
+path.stroke.tag-landuse-reservoir {
+    stroke: rgb(119, 211, 222);
+}
+path.fill.tag-amenity-swimming_pool,
+path.fill.tag-leisure-swimming_pool,
+path.fill.tag-landuse-basin,
+path.fill.tag-landuse-reservoir,
+path.fill.tag-natural-water {
+    stroke: rgba(119, 211, 222, 0.3);
+    fill: rgba(119, 211, 222, 0.3);
+}
+.preset-icon-fill-area.tag-amenity-swimming_pool,
+.preset-icon-fill-area.tag-leisure-swimming_pool,
+.preset-icon-fill-area.tag-landuse-basin,
+.preset-icon-fill-area.tag-landuse-reservoir,
+.preset-icon-fill-area.tag-natural-water {
+    border-color: rgb(119, 211, 222);
+    background-color: rgba(119, 211, 222, 0.3);
+}
+
+path.stroke.tag-amenity-childcare,
+path.stroke.tag-amenity-kindergarten,
+path.stroke.tag-amenity-school,
+path.stroke.tag-amenity-college,
+path.stroke.tag-amenity-university {
+    stroke: rgb(255, 255, 148);
+}
+path.fill.tag-amenity-childcare,
+path.fill.tag-amenity-kindergarten,
+path.fill.tag-amenity-school,
+path.fill.tag-amenity-college,
+path.fill.tag-amenity-university {
+    stroke: rgba(255, 255, 148, 0.15);
+    fill: rgba(255, 255, 148, 0.15);
+}
+.preset-icon-fill-area.tag-amenity-childcare,
+.preset-icon-fill-area.tag-amenity-kindergarten,
+.preset-icon-fill-area.tag-amenity-school,
+.preset-icon-fill-area.tag-amenity-college,
+.preset-icon-fill-area.tag-amenity-university {
+    border-color: rgb(255, 255, 148);
+    background-color: rgba(255, 255, 148, 0.15);
+}
+
+path.stroke.tag-landuse-residential {
+    stroke: rgb(196, 189, 25);
+}
+path.fill.tag-landuse-residential {
+    stroke: rgba(196, 189, 25, 0.3);
+    fill: rgba(196, 189, 25, 0.3);
+}
+.preset-icon-fill-area.tag-landuse-residential {
+    border-color: rgb(196, 189, 25);
+    background: rgba(196, 189, 25, 0.3);
+}
+
+path.stroke.tag-landuse-retail,
+path.stroke.tag-landuse-commercial {
+    stroke: rgb(214, 136, 26);
+}
+path.fill.tag-landuse-retail,
+path.fill.tag-landuse-commercial {
+    stroke: rgba(214, 136, 26, 0.3);
+    fill: rgba(214, 136, 26, 0.3);
+}
+.preset-icon-fill-area.tag-landuse-retail,
+.preset-icon-fill-area.tag-landuse-commercial {
+    border-color: rgb(214, 136, 26);
+    background-color: rgba(214, 136, 26, 0.3);
+}
+
+path.stroke.tag-landuse-industrial {
+    stroke: rgb(228, 164, 245);
+}
+path.fill.tag-landuse-industrial {
+    stroke: rgba(228, 164, 245, 0.3);
+    fill: rgba(228, 164, 245, 0.3);
+}
+.preset-icon-fill-area.tag-landuse-industrial {
+    border-color: rgb(228, 164, 245);
+    background-color: rgba(228, 164, 245, 0.3);
+}
+
+path.stroke.tag-landuse-quarry {
+    stroke: rgb(166, 149, 123);
+}
+path.fill.tag-landuse-quarry {
+    stroke: rgba(166, 149, 123, 0.2);
+    fill: rgba(166, 149, 123, 0.2);
+}
+.preset-icon-fill-area.tag-landuse-quarry {
+    border-color: rgb(166, 149, 123);
+    background-color: rgba(166, 149, 123, 0.2);
+}
+
+path.stroke.tag-landuse-landfill {
+    stroke: rgb(255, 153, 51);
+}
+path.fill.tag-landuse-landfill {
+    stroke: rgba(255, 153, 51, 0.2);
+    fill: rgba(255, 153, 51, 0.2);
+}
+.preset-icon-fill-area.tag-landuse-landfill {
+    border-color: rgb(255, 153, 51);
+    background-color: rgba(255, 153, 51, 0.2);
+}
+
+.pattern-color-construction {
+    fill: rgba(196, 189, 25, 0.2);
+}
+path.stroke.tag-landuse.tag-status {
+    stroke: rgb(196, 189, 25);
+}
+.preset-icon-fill-area.tag-landuse.tag-status {
+    border-color: rgb(196, 189, 25);
+    background-color: rgba(196, 189, 25, 0.2);
+}
+
+path.stroke.tag-landuse-military {
+    stroke: rgb(214, 136, 26);
+}
+path.fill.tag-landuse-military {
+    stroke: rgba(214, 136, 26, 0.2);
+    fill: rgba(214, 136, 26, 0.2);
+}
+.preset-icon-fill-area.tag-landuse-military {
+    border-color: rgb(214, 136, 26);
+    background-color: rgba(214, 136, 26, 0.2);
+}
+
+.pattern-color-wetland {
+    fill: rgba(182, 225, 153, 0.2);
+}
+path.stroke.tag-natural-wetland {
+    stroke: rgb(182, 225, 153);
+}
+.preset-icon-fill-area.tag-natural-wetland {
+    border-color: rgb(182, 225, 153);
+    background-color: rgba(182, 225, 153, 0.2);
+}
+
+.pattern-color-meadow {
+    fill: rgba(182, 225, 153, 0.2);
+}
+path.stroke.tag-landuse-meadow {
+    stroke: rgb(182, 225, 153);
+}
+.preset-icon-fill-area.tag-landuse-meadow {
+    border-color: rgb(182, 225, 153);
+    background-color: rgba(182, 225, 153, 0.2);
+}
+
+.pattern-color-beach {
+    fill: rgba(255, 255, 126, 0.2);
+}
+path.stroke.tag-natural-beach {
+    stroke: rgb(255, 255, 126);
+}
+.preset-icon-fill-area.tag-natural-beach {
+    border-color: rgb(255, 255, 126);
+    background-color: rgba(255, 255, 126, 0.2);
+}
+
+.pattern-color-scrub {
+    fill: rgba(219, 240, 139, 0.2);
+}
+path.stroke.tag-natural-scrub {
+    stroke: rgb(219, 240, 139);
+}
+.preset-icon-fill-area.tag-natural-scrub {
+    border-color: rgb(219, 240, 139);
+    background-color: rgba(219, 240, 139, 0.2);
+}
+
+.pattern-color-farm,
+.pattern-color-farmland {
+    fill: rgba(140, 208, 95, 0.2);
+}
+path.stroke.tag-landuse-farm,
+path.stroke.tag-landuse-farmland {
+    stroke: rgb(140, 208, 95);
+}
+.preset-icon-fill-area.tag-landuse-farm,
+.preset-icon-fill-area.tag-landuse-farmland {
+    background-color: rgba(140, 208, 95, 0.2);
+}
+
+.pattern-color-cemetery,
+.pattern-color-orchard {
+    fill: rgba(140, 208, 95, 0.2);
+}
+path.stroke.tag-landuse-cemetery,
+path.stroke.tag-landuse-orchard {
+    stroke: rgb(140, 208, 95);
+}
+.preset-icon-fill-area.tag-landuse-cemetery,
+.preset-icon-fill-area.tag-landuse-orchard {
+    background-color: rgba(140, 208, 95, 0.2);
+}
+
+path.stroke.tag-amenity-parking {
+    stroke: rgb(170, 170, 170);
+}
+path.fill.tag-amenity-parking {
+    stroke: rgba(170, 170, 170, 0.3);
+    fill: rgba(170, 170, 170, 0.3);
+}
+.preset-icon-fill-area.tag-amenity-parking {
+    border-color: rgb(170, 170, 170);
+    background-color: rgba(170, 170, 170, 0.3);
+}
+
+
+/* highway areas */
+
+path.stroke.area.tag-highway {
+    stroke:#fff;
+    stroke-dasharray: none;
+    stroke-width: 2;
+}
+
+/* wide highways */
+
+.preset-icon .icon.tag-highway.other-line {
+    color: #fff;
+    fill: #777;
+}
+
+path.shadow.tag-highway {
+    stroke-width:16;
+}
+path.casing.tag-highway {
+    stroke:#444;
+    stroke-width:10;
+}
+path.stroke.tag-highway {
+    stroke:#ccc;
+    stroke-width:8;
+}
+
+.low-zoom path.shadow.tag-highway {
+    stroke-width:12;
+}
+.low-zoom path.casing.tag-highway {
+    stroke-width:6;
+}
+.low-zoom path.stroke.tag-highway {
+    stroke-width:4;
+}
+
+.preset-icon .icon.highway-motorway,
+.preset-icon .icon.highway-motorway-link {
+    color: #CF2081;
+    fill: #70372f;
+}
+path.stroke.tag-highway-motorway,
+path.stroke.tag-highway-motorway_link,
+path.stroke.tag-motorway {
+    stroke:#CF2081;
+}
+path.casing.tag-highway-motorway,
+path.casing.tag-highway-motorway_link,
+path.casing.tag-motorway {
+    stroke:#70372f;
+}
+
+.preset-icon .icon.highway-trunk,
+.preset-icon .icon.highway-trunk-link {
+    color: #DD2F22;
+    fill: #70372f;
+}
+path.stroke.tag-highway-trunk,
+path.stroke.tag-highway-trunk_link,
+path.stroke.tag-trunk {
+    stroke:#DD2F22;
+}
+path.casing.tag-highway-trunk,
+path.casing.tag-highway-trunk_link,
+path.casing.tag-trunk {
+    stroke:#70372f;
+}
+
+.preset-icon .icon.highway-primary,
+.preset-icon .icon.highway-primary-link {
+    color: #F99806;
+    fill: #70372f;
+}
+path.stroke.tag-highway-primary,
+path.stroke.tag-highway-primary_link,
+path.stroke.tag-primary {
+    stroke:#F99806;
+}
+path.casing.tag-highway-primary,
+path.casing.tag-highway-primary_link,
+path.casing.tag-primary {
+    stroke:#70372f;
+}
+
+.preset-icon .icon.highway-secondary,
+.preset-icon .icon.highway-secondary-link {
+    color: #F3F312;
+    fill: #70372f;
+}
+path.stroke.tag-highway-secondary,
+path.stroke.tag-highway-secondary_link,
+path.stroke.tag-secondary {
+    stroke:#F3F312;
+}
+path.casing.tag-highway-secondary,
+path.casing.tag-highway-secondary_link,
+path.casing.tag-secondary {
+    stroke:#70372f;
+}
+
+.preset-icon .icon.highway-tertiary,
+.preset-icon .icon.highway-tertiary-link {
+    color: #FFF9B3;
+    fill: #70372f;
+}
+path.stroke.tag-highway-tertiary,
+path.stroke.tag-highway-tertiary_link,
+path.stroke.tag-tertiary {
+    stroke:#FFF9B3;
+}
+path.casing.tag-highway-tertiary,
+path.casing.tag-highway-tertiary_link,
+path.casing.tag-tertiary {
+    stroke:#70372f;
+}
+
+.legacy-carto .preset-icon .icon.highway-motorway,
+.legacy-carto .preset-icon .icon.highway-motorway-link {
+    color: #58a9ed;
+    fill: #2c5476;
+}
+.legacy-carto path.stroke.tag-highway-motorway,
+.legacy-carto path.stroke.tag-highway-motorway_link,
+.legacy-carto path.stroke.tag-motorway {
+    stroke:#58a9ed;
+}
+.legacy-carto path.casing.tag-highway-motorway,
+.legacy-carto path.casing.tag-highway-motorway_link,
+.legacy-carto path.casing.tag-motorway {
+    stroke:#2c5476;
+}
+
+.legacy-carto .preset-icon .icon.highway-trunk,
+.legacy-carto .preset-icon .icon.highway-trunk-link {
+    color: #8cd05f;
+    fill: #46682f;
+}
+.legacy-carto path.stroke.tag-highway-trunk,
+.legacy-carto path.stroke.tag-highway-trunk_link,
+.legacy-carto path.stroke.tag-trunk {
+    stroke:#8cd05f;
+}
+.legacy-carto path.casing.tag-highway-trunk,
+.legacy-carto path.casing.tag-highway-trunk_link,
+.legacy-carto path.casing.tag-trunk {
+    stroke:#46682f;
+}
+
+.legacy-carto .preset-icon .icon.highway-primary,
+.legacy-carto .preset-icon .icon.highway-primary-link {
+    color: #e06d5f;
+    fill: #70372f;
+}
+.legacy-carto path.stroke.tag-highway-primary,
+.legacy-carto path.stroke.tag-highway-primary_link,
+.legacy-carto path.stroke.tag-primary {
+    stroke:#e06d5f;
+}
+.legacy-carto path.casing.tag-highway-primary,
+.legacy-carto path.casing.tag-highway-primary_link,
+.legacy-carto path.casing.tag-primary {
+    stroke:#70372f;
+}
+
+.legacy-carto .preset-icon .icon.highway-secondary,
+.legacy-carto .preset-icon .icon.highway-secondary-link {
+    color: #eab056;
+    fill: #75582b;
+}
+.legacy-carto path.stroke.tag-highway-secondary,
+.legacy-carto path.stroke.tag-highway-secondary_link,
+.legacy-carto path.stroke.tag-secondary {
+    stroke:#eab056;
+}
+.legacy-carto path.casing.tag-highway-secondary,
+.legacy-carto path.casing.tag-highway-secondary_link,
+.legacy-carto path.casing.tag-secondary {
+    stroke:#75582b;
+}
+
+.legacy-carto .preset-icon .icon.highway-tertiary,
+.legacy-carto .preset-icon .icon.highway-tertiary-link {
+    color: #ffff7e;
+    fill: #7f7f3f;
+}
+.legacy-carto path.stroke.tag-highway-tertiary,
+.legacy-carto path.stroke.tag-highway-tertiary_link,
+.legacy-carto path.stroke.tag-tertiary {
+    stroke:#ffff7e;
+}
+.legacy-carto path.casing.tag-highway-tertiary,
+.legacy-carto path.casing.tag-highway-tertiary_link,
+.legacy-carto path.casing.tag-tertiary {
+    stroke:#7f7f3f;
+}
+
+.preset-icon .icon.highway-residential {
+    color: #fff;
+    fill: #444;
+}
+path.stroke.tag-highway-residential,
+path.stroke.tag-residential {
+    stroke:#fff;
+}
+path.casing.tag-highway-residential,
+path.casing.tag-residential {
+    stroke:#444;
+}
+
+/* narrow highways */
+path.stroke.tag-highway-living_street,
+path.stroke.tag-highway-unclassified,
+path.stroke.tag-highway-service,
+path.stroke.tag-highway-track,
+path.stroke.tag-highway-path,
+path.stroke.tag-highway-footway,
+path.stroke.tag-highway-cycleway,
+path.stroke.tag-highway-bridleway,
+path.stroke.tag-highway-corridor,
+path.stroke.tag-highway-pedestrian,
+path.stroke.tag-highway-steps,
+path.stroke.tag-highway-road,
+path.stroke.tag-living_street,
+path.stroke.tag-unclassified,
+path.stroke.tag-service,
+path.stroke.tag-track,
+path.stroke.tag-path,
+path.stroke.tag-footway,
+path.stroke.tag-cycleway,
+path.stroke.tag-bridleway,
+path.stroke.tag-corridor,
+path.stroke.tag-pedestrian,
+path.stroke.tag-steps,
+path.stroke.tag-road {
+    stroke-width:4;
+}
+path.casing.tag-highway-living_street,
+path.casing.tag-highway-unclassified,
+path.casing.tag-highway-service,
+path.casing.tag-highway-track,
+path.casing.tag-highway-path,
+path.casing.tag-highway-footway,
+path.casing.tag-highway-cycleway,
+path.casing.tag-highway-bridleway,
+path.casing.tag-highway-corridor,
+path.casing.tag-highway-pedestrian,
+path.casing.tag-highway-steps,
+path.casing.tag-highway-road,
+path.casing.tag-living_street,
+path.casing.tag-unclassified,
+path.casing.tag-service,
+path.casing.tag-track,
+path.casing.tag-path,
+path.casing.tag-footway,
+path.casing.tag-cycleway,
+path.casing.tag-bridleway,
+path.casing.tag-corridor,
+path.casing.tag-pedestrian,
+path.casing.tag-steps,
+path.casing.tag-road {
+    stroke-width:6;
+}
+
+.low-zoom path.stroke.tag-highway-living_street,
+.low-zoom path.stroke.tag-highway-unclassified,
+.low-zoom path.stroke.tag-highway-service,
+.low-zoom path.stroke.tag-highway-track,
+.low-zoom path.stroke.tag-highway-path,
+.low-zoom path.stroke.tag-highway-footway,
+.low-zoom path.stroke.tag-highway-cycleway,
+.low-zoom path.stroke.tag-highway-bridleway,
+.low-zoom path.stroke.tag-highway-corridor,
+.low-zoom path.stroke.tag-highway-pedestrian,
+.low-zoom path.stroke.tag-highway-steps,
+.low-zoom path.stroke.tag-highway-road,
+.low-zoom path.stroke.tag-living_street,
+.low-zoom path.stroke.tag-unclassified,
+.low-zoom path.stroke.tag-service,
+.low-zoom path.stroke.tag-track,
+.low-zoom path.stroke.tag-path,
+.low-zoom path.stroke.tag-footway,
+.low-zoom path.stroke.tag-cycleway,
+.low-zoom path.stroke.tag-bridleway,
+.low-zoom path.stroke.tag-corridor,
+.low-zoom path.stroke.tag-pedestrian,
+.low-zoom path.stroke.tag-steps,
+.low-zoom path.stroke.tag-road {
+    stroke-width:2;
+}
+.low-zoom path.casing.tag-highway-living_street,
+.low-zoom path.casing.tag-highway-unclassified,
+.low-zoom path.casing.tag-highway-service,
+.low-zoom path.casing.tag-highway-track,
+.low-zoom path.casing.tag-highway-path,
+.low-zoom path.casing.tag-highway-footway,
+.low-zoom path.casing.tag-highway-cycleway,
+.low-zoom path.casing.tag-highway-bridleway,
+.low-zoom path.casing.tag-highway-corridor,
+.low-zoom path.casing.tag-highway-pedestrian,
+.low-zoom path.casing.tag-highway-steps,
+.low-zoom path.casing.tag-highway-road,
+.low-zoom path.casing.tag-living_street,
+.low-zoom path.casing.tag-unclassified,
+.low-zoom path.casing.tag-service,
+.low-zoom path.casing.tag-track,
+.low-zoom path.casing.tag-path,
+.low-zoom path.casing.tag-footway,
+.low-zoom path.casing.tag-cycleway,
+.low-zoom path.casing.tag-bridleway,
+.low-zoom path.casing.tag-corridor,
+.low-zoom path.casing.tag-pedestrian,
+.low-zoom path.casing.tag-steps,
+.low-zoom path.casing.tag-road {
+    stroke-width:4;
+}
+
+.preset-icon .icon.highway-living-street {
+    color: #ccc;
+    fill: #fff;
+}
+path.stroke.tag-highway-living_street,
+path.stroke.tag-living_street {
+    stroke:#ccc;
+}
+path.casing.tag-highway-living_street,
+path.casing.tag-living_street {
+    stroke:#fff;
+}
+
+.preset-icon .icon.highway-footway.tag-highway-corridor,
+.preset-icon .icon.highway-footway.tag-highway-pedestrian {
+    color: #8cd05f;
+    fill: #fff;
+}
+path.stroke.tag-highway-corridor,
+path.stroke.tag-highway-pedestrian,
+path.stroke.tag-corridor,
+path.stroke.tag-pedestrian {
+    stroke:#fff;
+    stroke-dasharray: 2, 8;
+}
+path.casing.tag-highway-corridor,
+path.casing.tag-highway-pedestrian,
+path.casing.tag-corridor,
+path.casing.tag-pedestrian,
+path.casing.tag-highway-corridor.tag-unpaved,
+path.casing.tag-highway-pedestrian.tag-unpaved,
+path.casing.tag-corridor.tag-unpaved,
+path.casing.tag-pedestrian.tag-unpaved {
+    stroke: #8cd05f;
+    stroke-linecap: round;
+    stroke-dasharray: none;
+}
+
+.preset-icon .icon.highway-unclassified {
+    color: #eee;
+    fill: #444;
+}
+path.stroke.tag-highway-unclassified,
+path.stroke.tag-unclassified {
+    stroke:#eee;
+}
+path.casing.tag-highway-unclassified,
+path.casing.tag-unclassified {
+    stroke:#444;
+}
+
+.preset-icon .icon.highway-road {
+    color: #9e9e9e;
+    fill: #666;
+}
+path.stroke.tag-highway-road,
+path.stroke.tag-road {
+    stroke:#9e9e9e;
+}
+path.casing.tag-highway-road,
+path.casing.tag-road {
+    stroke:#666;
+}
+
+.preset-icon .icon.highway-service {
+    color: #fff;
+    fill: #666;
+}
+path.stroke.tag-highway-service,
+path.stroke.tag-service {
+    stroke:#fff;
+}
+path.casing.tag-highway-service,
+path.casing.tag-service {
+    stroke:#666;
+}
+
+.preset-icon .icon.highway-track {
+    color: #eaeaea;
+    fill: #c5b59f;
+}
+path.stroke.tag-highway-track,
+path.stroke.tag-track {
+    stroke: #c5b59f;
+}
+path.casing.tag-highway-track,
+path.casing.tag-track {
+    stroke: #746f6f;
+}
+
+path.stroke.tag-highway-path,
+path.stroke.tag-highway-footway,
+path.stroke.tag-highway-cycleway,
+path.stroke.tag-highway-bridleway {
+    stroke-linecap: butt;
+    stroke-dasharray: 6, 6;
+}
+
+path.casing.tag-highway-path,
+path.casing.tag-highway-path.tag-unpaved {
+    stroke: #c5b59f;
+    stroke-linecap: round;
+    stroke-dasharray: none;
+}
+path.casing.tag-highway-footway,
+path.casing.tag-highway-cycleway,
+path.casing.tag-highway-bridleway,
+path.casing.tag-highway-footway.tag-unpaved,
+path.casing.tag-highway-cycleway.tag-unpaved,
+path.casing.tag-highway-bridleway.tag-unpaved {
+    stroke: #fff;
+    stroke-linecap: round;
+    stroke-dasharray: none;
+}
+
+.preset-icon .icon.category-path,
+.preset-icon .icon.highway-path {
+    color: #746f6f;
+    fill: #c5b59f;
+}
+path.stroke.tag-highway-path {
+    stroke: #746f6f;
+}
+
+.preset-icon .icon.tag-route-foot,
+.preset-icon .icon.tag-route-hiking,
+.preset-icon .icon.highway-footway {
+    color: #ae8681;
+    fill: #fff;
+}
+path.stroke.tag-highway-footway {
+    stroke: #ae8681;
+}
+
+.preset-icon .icon.highway-footway.tag-crossing {
+    color: #444;
+}
+path.stroke.tag-highway-footway.tag-crossing {
+    stroke: #444;
+    stroke-dasharray: 6, 4;
+}
+
+.preset-icon .icon.tag-route-bicycle,
+.preset-icon .icon.highway-cycleway {
+    color: #58a9ed;
+    fill: #fff;
+}
+path.stroke.tag-highway-cycleway {
+    stroke: #58a9ed;
+}
+
+.preset-icon .icon.highway-bridleway {
+    color: #e06d5f;
+    fill: #fff;
+}
+path.stroke.tag-highway-bridleway {
+    stroke: #e06d5f;
+}
+
+.preset-icon .icon.highway-steps {
+    color: #81d25c;
+    fill: #fff;
+}
+path.stroke.tag-highway-steps {
+    stroke: #81d25c;
+    stroke-linecap: butt;
+    stroke-dasharray: 3, 3;
+}
+path.casing.tag-highway-steps,
+path.casing.tag-highway-steps.tag-unpaved {
+    stroke: #fff;
+    stroke-linecap: round;
+    stroke-dasharray: none;
+}
+
+
+/* aeroways */
+path.stroke.tag-aeroway-taxiway {
+    stroke: #805C80;
+    stroke-width: 4;
+}
+path.shadow.tag-aeroway-runway {
+    stroke-width: 20;
+}
+path.stroke.tag-aeroway-runway {
+    stroke: #fff;
+    stroke-width: 2;
+    stroke-linecap: butt;
+    stroke-dasharray: 24, 48;
+}
+path.casing.tag-aeroway-runway {
+    stroke-width: 10;
+    stroke: #000;
+    stroke-linecap: square;
+}
+path.fill.tag-aeroway-runway {
+    stroke: rgba(0, 0, 0, 0.6);
+    fill: rgba(0, 0, 0, 0.6);
+}
+path.stroke.tag-aeroway-apron {
+    stroke: #805C80;
+}
+path.fill.tag-aeroway-apron {
+    stroke: rgba(128, 92, 128, 0.2);
+    fill: rgba(128, 92, 128, 0.2);
+}
+
+
+/* railways */
+.preset-icon .icon.tag-railway.other-line {
+    color: #fff;
+    fill: #777;
+}
+.preset-icon .icon.tag-railway {
+    color: #555;
+    fill: #eee;
+}
+path.stroke.tag-railway {
+    stroke: #eee;
+    stroke-width: 2;
+    stroke-linecap: butt;
+    stroke-dasharray: 12,12;
+}
+path.casing.tag-railway {
+    stroke: #555;
+    stroke-width: 4;
+}
+
+.preset-icon .icon.tag-railway-disused,
+.preset-icon .icon.tag-railway-abandoned {
+    color: #999;
+    fill: #eee;
+}
+path.stroke.tag-railway-abandoned {
+    stroke: #eee;
+}
+path.casing.tag-railway-abandoned {
+    stroke: #999;
+}
+
+.preset-icon .icon.tag-railway-subway {
+    color: #222;
+    fill: #bbb;
+}
+path.stroke.tag-railway-subway {
+    stroke: #bbb;
+}
+path.casing.tag-railway-subway {
+    stroke: #222;
+}
+
+path.stroke.tag-railway-platform {
+    stroke: #999;
+    stroke-width: 4;
+    stroke-dasharray: none;
+}
+path.casing.tag-railway-platform {
+    stroke: none;
+}
+
+.area.stroke.tag-railway {
+    stroke: white;
+    stroke-width: 1;
+    stroke-dasharray: none;
+}
+.area.casing.tag-railway {
+    stroke: none;
+}
+
+
+/* waterways */
+.preset-icon .icon.tag-waterway.other-line {
+    color: #77d3de;
+    fill: #77d3de;
+}
+.preset-icon .icon.category-water,
+.preset-icon .icon.tag-route-ferry,
+.preset-icon .icon.tag-waterway {
+    color: #77d3de;
+    fill: #fff;
+}
+
+path.fill.tag-waterway {
+    stroke: rgba(119, 211, 222, 0.3);
+    fill: rgba(119, 211, 222, 0.3);
+}
+
+path.stroke.tag-waterway {
+    stroke: #77d3de;
+    stroke-width: 2;
+}
+path.casing.tag-waterway {
+    stroke: #77d3de;
+    stroke-width: 4;
+}
+
+path.stroke.tag-waterway-river {
+    stroke-width: 4;
+}
+path.casing.tag-waterway-river {
+    stroke-width: 6;
+}
+
+.preset-icon .icon.tag-waterway-ditch {
+    color: #6591ff;
+}
+path.stroke.tag-waterway-ditch {
+    stroke: #6591ff;
+    stroke-width: 1;
+}
+path.casing.tag-waterway-ditch {
+    stroke: #6591ff;
+    stroke-width: 3;
+}
+
+path.area.stroke.tag-waterway-dock,
+path.area.stroke.tag-waterway-boatyard,
+path.area.stroke.tag-waterway-fuel {
+    stroke: white;
+    stroke-width: 1;
+}
+path.area.casing.tag-waterway-dock,
+path.area.casing.tag-waterway-boatyard,
+path.area.casing.tag-waterway-fuel {
+    stroke: none;
+}
+path.area.fill.tag-waterway-dock,
+path.area.fill.tag-waterway-boatyard,
+path.area.fill.tag-waterway-fuel {
+    stroke: rgba(255, 255, 255, 0.3);
+    fill: rgba(255, 255, 255, 0.3);
+}
+
+
+/* power */
+.preset-icon .icon.tag-man_made-pipeline,
+.preset-icon .icon.tag-power {
+    color: #939393;
+    fill: #939393;
+}
+
+path.stroke.tag-power {
+    stroke: #939393;
+    stroke-width: 2;
+}
+path.casing.tag-power {
+    stroke: none;
+}
+
+
+/* boundaries */
+path.stroke.tag-boundary {
+    stroke: #fff;
+    stroke-width: 2;
+    stroke-linecap: butt;
+    stroke-dasharray: 20, 5, 5, 5;
+}
+path.casing.tag-boundary {
+    stroke: #82B5FE;
+    stroke-width: 6;
+}
+
+path.casing.tag-boundary-protected_area,
+path.casing.tag-boundary-national_park {
+    stroke: #b0e298;
+}
+
+
+/* barriers */
+path.stroke.tag-barrier {
+    stroke: #ddd;
+    stroke-width: 3px;
+    stroke-linecap: round;
+    stroke-dasharray: 15, 5, 1, 5;
+}
+.low-zoom path.stroke.tag-barrier {
+    stroke-width: 2px;
+    stroke-linecap: butt;
+    stroke-dasharray: 8, 2, 2, 2;
+}
+
+
+/* bridges */
+path.casing.tag-bridge {
+    stroke-width: 16;
+    stroke-opacity: 0.6;
+    stroke: #000;
+    stroke-linecap: butt;
+    stroke-dasharray: none;
+}
+
+path.shadow.tag-bridge {
+    stroke-width: 22;
+}
+path.casing.line.tag-railway.tag-bridge,
+path.casing.tag-highway-living_street.tag-bridge,
+path.casing.tag-highway-path.tag-bridge,
+path.casing.tag-highway-corridor.tag-bridge,
+path.casing.line.tag-highway-pedestrian.tag-bridge,
+path.casing.tag-highway-service.tag-bridge,
+path.casing.tag-highway-track.tag-bridge,
+path.casing.tag-highway-steps.tag-bridge,
+path.casing.tag-highway-footway.tag-bridge,
+path.casing.tag-highway-cycleway.tag-bridge,
+path.casing.tag-highway-bridleway.tag-bridge {
+    stroke-width: 10;
+}
+path.shadow.line.tag-railway.tag-bridge,
+path.shadow.tag-highway-living_street.tag-bridge,
+path.shadow.tag-highway-path.tag-bridge,
+path.shadow.tag-highway-corridor.tag-bridge,
+path.shadow.line.tag-highway-pedestrian.tag-bridge,
+path.shadow.tag-highway-service.tag-bridge,
+path.shadow.tag-highway-track.tag-bridge,
+path.shadow.tag-highway-steps.tag-bridge,
+path.shadow.tag-highway-footway.tag-bridge,
+path.shadow.tag-highway-cycleway.tag-bridge,
+path.shadow.tag-highway-bridleway.tag-bridge {
+    stroke-width: 17;
+}
+.low-zoom path.casing.tag-bridge {
+    stroke-width: 10;
+}
+.low-zoom path.shadow.tag-bridge {
+    stroke-width: 14;
+}
+
+.low-zoom path.casing.line.tag-railway.tag-bridge,
+.low-zoom path.casing.tag-highway-living_street.tag-bridge,
+.low-zoom path.casing.tag-highway-path.tag-bridge,
+.low-zoom path.casing.tag-highway-corridor.tag-bridge,
+.low-zoom path.casing.line.tag-highway-pedestrian.tag-bridge,
+.low-zoom path.casing.tag-highway-service.tag-bridge,
+.low-zoom path.casing.tag-highway-track.tag-bridge,
+.low-zoom path.casing.tag-highway-steps.tag-bridge,
+.low-zoom path.casing.tag-highway-footway.tag-bridge,
+.low-zoom path.casing.tag-highway-cycleway.tag-bridge,
+.low-zoom path.casing.tag-highway-bridleway.tag-bridge {
+    stroke-width: 6;
+}
+
+.low-zoom path.shadow.line.tag-railway.tag-bridge,
+.low-zoom path.shadow.tag-highway-living_street.tag-bridge,
+.low-zoom path.shadow.tag-highway-path.tag-bridge,
+.low-zoom path.shadow.tag-highway-corridor.tag-bridge,
+.low-zoom path.shadow.line.tag-highway-pedestrian.tag-bridge,
+.low-zoom path.shadow.tag-highway-service.tag-bridge,
+.low-zoom path.shadow.tag-highway-track.tag-bridge,
+.low-zoom path.shadow.tag-highway-steps.tag-bridge,
+.low-zoom path.shadow.tag-highway-footway.tag-bridge,
+.low-zoom path.shadow.tag-highway-cycleway.tag-bridge,
+.low-zoom path.shadow.tag-highway-bridleway.tag-bridge {
+    stroke-width: 13;
+}
+
+
+/* tunnels */
+path.stroke.tag-tunnel {
+    stroke-opacity: 0.3;
+}
+path.casing.tag-tunnel {
+    stroke-opacity: 0.5;
+    stroke-linecap: butt;
+    stroke-dasharray: none;
+}
+
+
+/* embankments / cuttings */
+path.casing.tag-embankment,
+path.casing.tag-cutting {
+    stroke-opacity: 0.5;
+    stroke: #000;
+    stroke-width: 22;
+    stroke-dasharray: 2, 4;
+    stroke-linecap: butt;
+}
+
+path.shadow.tag-embankment,
+path.shadow.tag-cutting {
+    stroke-width: 28;
+}
+
+.low-zoom path.casing.tag-embankment,
+.low-zoom path.casing.tag-cutting {
+    stroke-width: 10;
+}
+
+.low-zoom path.shadow.tag-embankment,
+.low-zoom path.shadow.tag-cutting {
+    stroke-width: 14;
+}
+
+
+/* Surface - unpaved */
+path.casing.tag-unpaved {
+    stroke: #ccc;
+    stroke-linecap: butt;
+    stroke-dasharray: 4, 3;
+}
+.low-zoom path.casing.tag-unpaved {
+    stroke-dasharray: 3, 2;
+}
+path.casing.tag-bridge.tag-unpaved {
+    stroke: #000;
+    stroke-dasharray: 4, 3;
+}
+.low-zoom path.casing.tag-bridge.tag-unpaved {
+    stroke: #000;
+    stroke-dasharray: 3, 2;
+}
+
+
+/* Status (e.g. construction, proposed, abandoned) */
+path.stroke.tag-status,
+path.casing.tag-status {
+    stroke-linecap: butt;
+    stroke-dasharray: 7, 3;
+}
+.low-zoom path.stroke.tag-status,
+.low-zoom path.casing.tag-status {
+    stroke-dasharray: 5, 2;
+}
+
+
+/* Buildings */
+path.stroke.tag-building,
+path.stroke.tag-amenity-shelter {
+    stroke: rgb(224, 110, 95);
+}
+path.fill.tag-building,
+path.fill.tag-amenity-shelter {
+    stroke: rgba(224, 110, 95, 0.3);
+    fill: rgba(224, 110, 95, 0.3);
+}
+.preset-icon-fill-area.tag-building,
+.preset-icon-fill-area.tag-amenity-shelter {
+    border-color: rgb(224, 110, 95);
+    background-color: rgba(224, 110, 95, 0.3);
+}
+
+
+/* Labels / Markers */
+
+text {
+    font-size:10px;
+    pointer-events: none;
+    color: #222;
+    opacity: 1;
+}
+
+.oneway .textpath.tag-waterway {
+    fill: #002F35;
+}
+
+path.oneway {
+    stroke-width: 6px;
+}
+
+
+text.arealabel-halo,
+text.linelabel-halo,
+text.pointlabel-halo,
+text.arealabel,
+text.linelabel,
+text.pointlabel {
+    font-size: 12px;
+    font-weight: bold;
+    fill: #333;
+    text-anchor: middle;
+    pointer-events: none;
+    -webkit-transition: opacity 100ms linear;
+    transition: opacity 100ms linear;
+    -moz-transition: opacity 100ms linear;
+}
+
+.linelabel-halo .textpath,
+.linelabel .textpath {
+  dominant-baseline: middle;
+}
+
+/* Opera doesn't support dominant-baseline. See #715 */
+.opera .linelabel-halo .textpath,
+.opera .linelabel .textpath {
+  baseline-shift: -33%;
+  dominant-baseline: auto;
+}
+
+.layer-halo text {
+    opacity: 0.7;
+    stroke: #fff;
+    stroke-width: 5px;
+    stroke-miterlimit: 1;
+}
+
+text.proximate {
+    opacity: 0;
+}
+
+text.point {
+  font-size: 10px;
+}
+
+/* Turns */
+
+g.turn rect,
+g.turn circle {
+    fill: none;
+    pointer-events: all;
+}
+
+.form-field-restrictions .vertex {
+    pointer-events: none;
+    cursor: auto !important;
+}
+
+/* Cursors */
+
+.map-in-map,
+#map {
+    cursor: auto; /* Opera */
+    cursor: url(img/cursor-grab.png) 9 9, auto; /* FF */
+}
+
+.mode-browse .point,
+.mode-select .point {
+    cursor: pointer; /* Opera */
+    cursor: url(img/cursor-select-point.png), pointer; /* FF */
+}
+
+.mode-select .vertex,
+.mode-browse .vertex {
+    cursor: pointer; /* Opera */
+    cursor: url(img/cursor-select-vertex.png), pointer; /* FF */
+}
+
+.mode-browse .line,
+.mode-select .line {
+    cursor: pointer; /* Opera */
+    cursor: url(img/cursor-select-line.png), pointer; /* FF */
+}
+
+.mode-select .area,
+.mode-browse .area {
+    cursor: pointer; /* Opera */
+    cursor: url(img/cursor-select-area.png), pointer; /* FF */
+}
+
+.mode-select .midpoint,
+.mode-browse .midpoint {
+    cursor: pointer; /* Opera */
+    cursor: url(img/cursor-select-split.png), pointer; /* FF */
+}
+
+.mode-select .behavior-multiselect .point,
+.mode-select .behavior-multiselect .vertex,
+.mode-select .behavior-multiselect .line,
+.mode-select .behavior-multiselect .area {
+    cursor: pointer; /* Opera */
+    cursor: url(img/cursor-select-add.png), pointer; /* FF */
+}
+
+.mode-select .behavior-multiselect .selected {
+    cursor: pointer; /* Opera */
+    cursor: url(img/cursor-select-remove.png), pointer; /* FF */
+}
+
+#map .point:active,
+#map .vertex:active,
+#map .line:active,
+#map .area:active,
+#map .midpoint:active,
+#map .mode-select .selected {
+    cursor: pointer; /* Opera */
+    cursor: url(img/cursor-select-acting.png), pointer; /* FF */
+}
+
+.mode-draw-line #map,
+.mode-draw-area #map,
+.mode-add-line  #map,
+.mode-add-area  #map,
+.mode-drag-node #map {
+    cursor: crosshair; /* Opera */
+    cursor: url(img/cursor-draw.png) 9 9, crosshair; /* FF */
+}
+
+.mode-draw-line .way.hover,
+.mode-draw-area .way.hover,
+.mode-add-line  .way.hover,
+.mode-add-area  .way.hover,
+.mode-drag-node .way.hover {
+    cursor: crosshair; /* Opera */
+    cursor: url(img/cursor-draw-connect-line.png) 9 9, crosshair; /* FF */
+}
+
+.mode-draw-line .vertex.hover,
+.mode-draw-area .vertex.hover,
+.mode-add-line  .vertex.hover,
+.mode-add-area  .vertex.hover,
+.mode-drag-node .vertex.hover {
+    cursor: crosshair; /* Opera */
+    cursor: url(img/cursor-draw-connect-vertex.png) 9 9, crosshair; /* FF */
+}
+
+.mode-add-point #map,
+.mode-browse.lasso #map,
+.mode-browse.lasso .way,
+.mode-browse.lasso .vertex,
+.mode-browse.lasso .midpoint,
+.mode-select.lasso #map,
+.mode-select.lasso .way,
+.mode-select.lasso .vertex,
+.mode-select.lasso .midpoint {
+    cursor: crosshair; /* Opera */
+    cursor: url(img/cursor-draw.png) 9 9, crosshair; /* FF */
+}
+
+.turn rect,
+.turn circle {
+    cursor: pointer; /* Opera */
+    cursor: url(img/cursor-pointer.png) 6 1, pointer; /* FF */
+}
+
+.lasso #map {
+    pointer-events: visibleStroke;
+}
+
+/* GPX Paths */
+.layer-gpx {
+    pointer-events: none;
+}
+
+path.gpx {
+    stroke: #FF26D4;
+    stroke-width: 2;
+    fill: none;
+}
+
+text.gpx {
+    fill: #FF26D4;
+}
+
+/* Mapillary Image Layer */
+
+.layer-mapillary-images {
+    pointer-events: none;
+}
+
+.layer-mapillary-images .viewfield-group {
+    pointer-events: visible;
+    cursor: pointer; /* Opera */
+    cursor: url(img/cursor-select-mapillary.png) 6 1, pointer; /* FF */
+}
+
+.layer-mapillary-images .viewfield-group * {
+    stroke-width: 1;
+    stroke: #444;
+    fill: #ffc600;
+    z-index: 50;
+}
+
+.layer-mapillary-images .viewfield-group:hover * {
+    stroke-width: 1;
+    stroke: #333;
+    fill: #ff9900;
+    z-index: 60;
+}
+
+.layer-mapillary-images .viewfield-group.selected  * {
+    stroke-width: 2;
+    stroke: #222;
+    fill: #ff5800;
+    z-index: 60;
+}
+
+.layer-mapillary-images .viewfield-group:hover path.viewfield,
+.layer-mapillary-images .viewfield-group.selected path.viewfield,
+.layer-mapillary-images .viewfield-group path.viewfield {
+    stroke-width: 0;
+    fill-opacity: 0.6;
+}
+
+/* Mapillary Sign Layer */
+
+.layer-mapillary-signs {
+    pointer-events: none;
+}
+
+.layer-mapillary-signs .icon-sign body {
+    min-width: 20px;
+    height: 28px;
+    width: 28px;
+    border: 2px solid transparent;
+    pointer-events: visible;
+    cursor: pointer; /* Opera */
+    cursor: url(img/cursor-select-mapillary.png) 6 1, pointer; /* FF */
+    z-index: 70;
+}
+
+.layer-mapillary-signs .icon-sign:hover body {
+    border: 2px solid rgba(255,198,0,0.8);
+    z-index: 80;
+ }
+
+.layer-mapillary-signs .icon-sign.selected body {
+    border: 2px solid rgba(255,0,0,0.8);
+    z-index: 80;
+ }
+
+.layer-mapillary-signs .icon-sign .t {
+    font-size: 28px;
+    z-index: 70;
+    position: absolute;
+}
+
+.layer-mapillary-signs .icon-sign:hover .t,
+.layer-mapillary-signs .icon-sign.selected .t {
+    z-index: 80;
+}
+
+/* Modes */
+
+.mode-draw-line .vertex.active,
+.mode-draw-area .vertex.active,
+.mode-drag-node .vertex.active {
+    display: none;
+}
+
+.mode-draw-line .way.active,
+.mode-draw-area .way.active,
+.mode-drag-node .active {
+    pointer-events: none;
+}
+
+/* Ensure drawing doesn't interact with area fills. */
+.mode-add-point .area.fill,
+.mode-draw-line .area.fill,
+.mode-draw-area .area.fill,
+.mode-add-line .area.fill,
+.mode-add-area .area.fill,
+.mode-drag-node .area.fill {
+    pointer-events: none;
+}
+
+
+/* Fill Styles */
+.low-zoom.fill-wireframe path.stroke,
+.fill-wireframe path.stroke {
+    stroke-width: 1;
+    stroke-opacity: 0.5;
+    stroke-dasharray: none;
+    fill: none;
+}
+
+.low-zoom.fill-wireframe path.shadow,
+.fill-wireframe path.shadow {
+    stroke-width: 8;
+}
+
+.fill-wireframe path.shadow.hover:not(.selected) {
+    stroke-opacity: 0.4;
+}
+.fill-wireframe path.shadow.selected {
+    stroke-opacity: 0.6;
+}
+
+.fill-wireframe .point,
+.fill-wireframe .areaicon,
+.fill-wireframe path.casing,
+.fill-wireframe path.fill,
+.fill-wireframe path.oneway {
+    display: none;
+}
+
+.fill-partial path.fill {
+    fill-opacity: 0;
+    stroke-width: 60px;
+    pointer-events: visibleStroke;
+}
+/* Basics
+------------------------------------------------------- */
+
+/*
+  Opera misbehaves when the window is resized vertically unless 100% width + height are
+  applied to both html and body. https://gist.github.com/jfirebaugh/bd225bcfdd3a633850c4
+*/
+html, body {
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    font:normal 12px/1.6667 'Helvetica Neue', Arial, sans-serif;
+    margin:0;
+    padding:0;
+    min-width: 768px;
+    color:#333;
+    overflow: hidden;
+}
+
+.unsupported {
+    text-align: center;
+    vertical-align: middle;
+    padding-top: 100px;
+    font-size: 15px;
+}
+
+.id-container {
+    height: 100%;
+    width: 100%;
+    min-width: 768px;
+}
+
+#content {
+    position: relative;
+    overflow: hidden;
+    height: 100%;
+}
+
+#defs {
+    /* Can't be display: none or the clippaths are ignored. */
+    position: absolute;
+    width: 0;
+    height: 0;
+}
+
+.spacer {
+    height: 40px;
+    margin-right: 10px;
+}
+
+.limiter {
+    position: relative;
+    max-width: 1200px;
+}
+
+.spinner {
+    opacity: .5;
+    float: right;
+}
+
+.spinner img {
+    height: 40px;
+    width: 40px;
+    border-radius: 4px;
+    margin-right: 10px;
+    background: black;
+}
+
+div, textarea, label, input, form, span, ul, li, ol, a, button, h1, h2, h3, h4, h5, p, img {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+a, button, input, textarea {
+    -webkit-tap-highlight-color:rgba(0,0,0,0);
+    -webkit-touch-callout:none;
+}
+
+a,
+button,
+.checkselect label:hover,
+.opacity-options li,
+.radial-menu-item {
+    cursor: pointer; /* Opera */
+    cursor: url(img/cursor-pointer.png) 6 1, pointer; /* FF */
+}
+
+h2 {
+    font-size: 25px;
+    line-height: 1.25;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+h3:last-child,
+h2:last-child,
+h4:last-child { margin-bottom: 0;}
+
+h3 {
+    font-size: 16px;
+    line-height: 1.25;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+h4, h5 {
+    font-size: 12px;
+    font-weight: bold;
+    padding-bottom: 10px;
+}
+
+:focus {
+    outline-color: transparent;
+    outline-style: none;
+}
+
+p {
+    font-size: 12px;
+    margin:0;
+    padding:0;
+}
+
+p:last-child {
+    padding-bottom: 0;
+}
+
+em {
+    font-style: italic;
+}
+
+strong {
+    font-weight: bold;
+}
+
+a:visited, a {
+    color: #7092ff;
+}
+
+a:hover {
+    color:#597be7;
+}
+
+/* Forms
+------------------------------------------------------- */
+
+textarea  {
+    resize: vertical;
+    font:normal 12px/20px 'Helvetica Neue', Arial, sans-serif;
+}
+
+textarea,
+input[type=text],
+input[type=search],
+input[type=number],
+input[type=url],
+input[type=tel],
+input[type=email] {
+    background-color: white;
+    border:1px solid #ccc;
+    padding:5px 10px;
+    height:30px;
+    width: 100%;
+    border-radius:4px;
+    text-overflow: ellipsis;
+}
+
+textarea:focus,
+input:focus {
+    background-color: #F1F1F1;
+}
+
+input[type="checkbox"],
+input[type="radio"] {
+    float: left;
+    width: 14px;
+    height: 14px;
+    margin-right: 5px;
+    margin-top: 3px;
+}
+
+/* remove bottom border radius when combobox is open */
+.combobox + * textarea:focus,
+.combobox + * input:focus {
+    border-bottom-left-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+}
+
+/* tables */
+
+table {
+    background-color: white;
+    border-collapse: collapse;
+    width:100%;
+    border-spacing:0;
+}
+
+table th {
+    text-align:left;
+}
+
+table.tags, table.tags td, table.tags th {
+    border: 1px solid #CCC;
+    padding: 4px;
+}
+
+::-ms-clear {
+   display: none;
+}
+
+/* Grid
+------------------------------------------------------- */
+
+.col0    { float:left; width:04.1666%; }
+.col1    { float:left; width:08.3333%; }
+.col2    { float:left; width:16.6666%; }
+.col3    { float:left; width:25.0000%; max-width: 300px; }
+.col4    { float:left; width:33.3333%; max-width: 400px; }
+.col5    { float:left; width:41.6666%; max-width: 500px; }
+.col6    { float:left; width:50.0000%; max-width: 600px; }
+.col7    { float:left; width:58.3333%; }
+.col8    { float:left; width:66.6666%; }
+.col9    { float:left; width:75.0000%; }
+.col10   { float:left; width:83.3333%; }
+.col11   { float:left; width:91.6666%; }
+.col12   { float:left; width:100.0000%; }
+
+/* UI Lists
+------------------------------------------------------- */
+
+ul li { list-style: none;}
+
+.toggle-list > label {
+    position: relative;
+    padding: 5px 10px;
+    display: block;
+    height: 30px;
+    background-color: white;
+    color: #7092FF;
+    cursor: pointer;
+}
+
+.toggle-list > label:hover {
+    background-color: #ececec;
+}
+
+.toggle-list > label:not(:last-child) {
+    border-bottom: 1px solid #ccc;
+}
+
+.toggle-list > label:last-child {
+    border-radius: 0 0 3px 3px;
+}
+
+.toggle-list label > span {
+    display: block;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.toggle-list > label.active {
+    background: #E8EBFF;
+}
+
+
+/* Utility Classes
+------------------------------------------------------- */
+.fillL {
+    background: white;
+    color: #333;
+}
+
+.fillL2 {
+    background: #f6f6f6;
+    color: #333;
+}
+
+.fillL3 {
+    background: #ececec;
+    color: #333;
+}
+
+.fillD {
+    background:rgba(0,0,0,.5);
+    color: white;
+}
+
+.fillD2 {
+    background:rgba(0,0,0,.75);
+    color: white;
+}
+
+.fl { float: left;}
+.fr { float: right;}
+.al { left: 0; }
+.ar { right: 0; }
+
+div.hide,
+form.hide,
+button.hide,
+a.hide,
+li.hide {
+    display: none;
+}
+
+.deemphasize {
+    color: #a9a9a9;
+}
+
+.content {
+    box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.25);
+}
+
+.loading {
+    background: url(img/loader_bg.gif);
+    background-size:5px 5px;
+}
+
+.panewrap {
+    position:absolute;
+    width:200%;
+    height:100%;
+    right: -100%;
+}
+
+
+.pane {
+    position:absolute;
+    width:50%;
+    top: 0;
+    bottom: 30px;
+}
+
+.pane:first-child {
+    left: 0;
+}
+
+.pane:last-child {
+    right: 0;
+}
+
+/* Buttons */
+
+button {
+    text-align: center;
+    line-height:20px;
+    border:0;
+    background: white;
+    font-weight: bold;
+    color:#333;
+    font-size:12px;
+    display: inline-block;
+    height:40px;
+    border-radius:4px;
+}
+
+button:focus,
+button:hover {
+    background-color: #ececec;
+}
+
+button[disabled],
+button.disabled {
+    background-color: rgba(255,255,255,.25);
+    color: rgba(0,0,0,.5);
+    cursor: auto;
+}
+
+button.active {
+    background: #7092ff;
+}
+
+button.minor {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: 10%;
+    border-radius: 0;
+    background-color: #fafafa;
+}
+
+button.minor .icon {
+    opacity: .5;
+}
+
+button.minor:hover {
+    background-color: #f1f1f1;
+}
+
+.button-wrap {
+    display: inline-block;
+    padding-right:10px;
+    margin: 0;
+}
+
+.button-wrap button:only-child {
+    width: 100%;
+}
+
+.button-wrap:last-of-type {
+    padding-right: 0;
+}
+
+.joined button {
+    border-radius:0;
+    border-right: 1px solid rgba(0,0,0,.5);
+}
+
+.fillL .joined button {
+    border-right: 1px solid white;
+}
+
+.joined button:first-child {
+    border-radius:4px 0 0 4px;
+}
+
+.joined button:last-child {
+    border-right-width: 0;
+    border-radius:0 4px 4px 0;
+}
+
+button.action {
+    background: #7092ff;
+    color: white;
+}
+
+button[disabled].action,
+button[disabled].action:hover {
+    background: #cccccc;
+    color: #888;
+}
+
+button.action:focus,
+button.action:hover {
+    background: #597BE7;
+}
+
+button.secondary-action {
+    background: #ececec;
+}
+
+button.secondary-action:focus,
+button.secondary-action:hover {
+    background: #cccccc;
+}
+
+button.save.has-count {
+    padding: 9px;
+}
+
+button.save .count {
+    display: none;
+}
+
+button.save.has-count .count {
+    display: block;
+    position: absolute;
+    top: 5px;
+    background: rgba(255, 255, 255, .5);
+    color: #333;
+    padding: 10px;
+    height: 30px;
+    line-height: 12px;
+    border-radius: 4px;
+    margin: auto;
+    margin-left: 8.3333%;
+}
+
+button.save.has-count .count::before {
+    content: "";
+    margin: auto;
+    width: 0;
+    height: 0;
+    position: absolute;
+    left: -6px;
+    top: 0;
+    bottom: 0;
+    border-top:    6px solid transparent;
+    border-bottom: 6px solid transparent;
+    border-right:  6px solid rgba(255,255,255,.5);
+}
+
+/* Icons */
+
+.icon {
+    vertical-align: top;
+    width: 20px;
+    height: 20px;
+}
+
+.icon.inline {
+    vertical-align: text-top;
+    width: 14px;
+    height: 14px;
+    margin: 0px 3px;
+}
+
+.icon.pre-text {
+    margin-right: 3px;
+}
+
+.icon.light {
+    color: #fff;
+}
+
+.icon.created {
+    color: #00ca07;
+}
+
+.icon.modified {
+    color: #666;
+}
+
+.icon.deleted {
+    color: #ea0000;
+}
+
+.user-icon {
+    max-height: 20px;
+    max-width: 20px;
+    height: auto;
+    width: auto;
+    border-radius: 3px;
+}
+
+
+/* ToolBar / Persistent UI Elements
+------------------------------------------------------- */
+
+#bar {
+    position: fixed;
+    padding: 10px 0;
+    left:0;
+    top:0;
+    right:0;
+    height:60px;
+    z-index: 9;
+    min-width: 768px;
+}
+
+/* Header for modals / panes
+------------------------------------------------------- */
+
+.header {
+    border-bottom: 1px solid #ccc;
+    height: 60px;
+    position: relative;
+}
+
+.header h3 {
+    text-align: left;
+    margin-bottom: 0;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    padding: 20px 20px 20px 40px;
+}
+
+.header button,
+.modal > button {
+    border-radius: 0;
+    width: 40px;
+    text-align: center;
+    overflow: hidden;
+}
+
+.header button {
+    position: relative;
+    height: 100%;
+}
+
+.entity-editor-pane .header button.preset-close,
+.preset-list-pane .header button.preset-choose {
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+.entity-editor-pane .header button.preset-choose {
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+.preset-choose {
+    font-size: 16px;
+    line-height: 1.25;
+    font-weight: bold;
+}
+
+.modal > button {
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 59px;
+    z-index: 50;
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    padding: 5px 20px 5px 20px;
+    border-top: 1px solid #ccc;
+    background-color: #fafafa;
+    width: 100%;
+}
+
+.sidebar-component .body {
+    width: 100%;
+    overflow: auto;
+    top: 60px;
+    bottom: 0;
+    position: absolute;
+}
+
+/* Inspector
+------------------------------------------------------- */
+
+#sidebar {
+    position: relative;
+    float: left;
+    height: 100%;
+    overflow: hidden;
+    z-index: 10;
+    background: #f6f6f6;
+}
+
+.sidebar-component {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+}
+
+.inspector-wrap {
+    width: 100%;
+    height: 100%;
+}
+
+.inspector-hidden {
+    display: none;
+}
+
+.inspector-body {
+    overflow-y: scroll;
+    overflow-x: hidden;
+    position: absolute;
+    right: 0;
+    left: 0;
+    bottom: 0;
+}
+
+.mapillary-image {
+    position: absolute;
+    bottom: 30px;
+    width: 330px;
+    height: 250px;
+    padding: 5px;
+    background-color: #fff;
+}
+
+.mapillary-image a {
+    display: block;
+    position: absolute;
+    height: auto;
+    background-color: rgba(0,0,0,.5);
+    bottom: 0;
+    padding: 5px 10px;
+}
+
+.mapillary-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.mapillary-image.hidden {
+    visibility: hidden;
+}
+
+.mapillary-image.temp button {
+    display: none;
+}
+
+.mapillary-image button {
+    border-radius: 0;
+    padding: 5px;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+.feature-list-pane .inspector-body {
+    top: 120px;
+}
+
+.preset-list-pane .inspector-body {
+    top: 120px;
+}
+
+.entity-editor-pane .inspector-body {
+    top: 60px;
+}
+
+.selection-list-pane .inspector-body {
+    top: 60px;
+}
+
+.inspector-inner {
+    padding: 20px;
+    position: relative;
+}
+
+#sidebar .search-header .icon {
+    display: block;
+    position: absolute;
+    left: 10px;
+    top: 80px;
+    pointer-events: none;
+}
+
+#sidebar .search-header input {
+    position: absolute;
+    top: 60px;
+    height: 60px;
+    width: 100%;
+    padding: 5px 10px;
+    border-radius: 0;
+    border-width: 0;
+    border-bottom-width: 1px;
+    text-indent: 30px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+/* Feature list */
+
+.feature-list  {
+    width:100%;
+}
+
+.no-results-item,
+.geocode-item,
+.feature-list-item {
+    width: 100%;
+    position: relative;
+    border-bottom: 1px solid #ccc;
+    border-radius: 0;
+}
+
+.feature-list-item .label {
+    text-align: left;
+    padding: 5px 10px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    border-left: 1px solid rgba(0, 0, 0, .1);
+}
+
+.feature-list-item .label .icon {
+    opacity: .5;
+}
+
+.feature-list-item:hover .label {
+    background-color: #ececec;
+}
+
+.feature-list-item .entity-type {
+    color:#7092ff;
+}
+
+.feature-list-item:hover .entity-type {
+    color:#597be7;
+}
+
+.feature-list-item .entity-name {
+    font-weight: normal;
+    color: #666;
+    padding-left: 10px;
+}
+
+/* Presets
+------------------------------------------------------- */
+
+/* Preset grid  */
+
+.preset-list  {
+    width:100%;
+    padding: 20px 20px 10px 20px;
+    border-bottom: 1px solid #ccc;
+}
+
+.preset-list-button-wrap {
+    position: relative;
+    margin-bottom: 10px;
+    height: 60px;
+}
+
+.preset-list-button {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    border: 1px solid #ccc;
+}
+
+.preset-list.filtered .preset-list-item:first-child .preset-list-button {
+    background: #ececec;
+}
+
+.preset-icon-fill-area {
+    cursor: inherit;
+    height: 40px;
+    width: 40px;
+    margin: auto;
+    position: absolute;
+    left: 10px;
+    top: 10px;
+}
+
+.preset-icon-frame {
+    position: absolute;
+    top: 7px;
+    left: 7px;
+    height: 42px;
+    width: 42px;
+    margin: auto;
+}
+
+.preset-icon-frame .icon {
+    width: 46px;
+    height: 46px;
+}
+
+.preset-icon-60 {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    margin: auto;
+}
+
+.preset-icon-60 .icon {
+    width: 60px;
+    height: 60px;
+}
+
+.preset-icon-44 {
+    position: absolute;
+    top: 9px;
+    left: 8px;
+    margin: auto;
+}
+
+.preset-icon-44 .icon {
+    width: 44px;
+    height: 44px;
+}
+
+.preset-icon-32 {
+    position: absolute;
+    top: 14px;
+    left: 13px;   /* Maki icons off center? */
+    margin: auto;
+}
+
+.preset-icon-32 .icon {
+    width: 32px;
+    height: 32px;
+}
+
+.preset-list-button .label {
+    background-color: #f6f6f6;
+    text-align: left;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    padding: 5px 10px;
+    left: 60px;
+    line-height: 50px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    border-left: 1px solid rgba(0, 0, 0, .1);
+    border-radius: 0 3px 3px 0;
+    }
+
+.preset-list-button:hover .label {
+    background-color: #ececec;
+}
+
+.preset-list-item button.tag-reference-button {
+    height: 100%;
+    border: 1px solid #CCC;
+    border-radius: 0 3px 3px 0;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 10%;
+    background: #fafafa;
+}
+
+.preset-list-item button.tag-reference-button:hover {
+    background: #f1f1f1;
+}
+
+.preset-list-item button.tag-reference-button .icon {
+    opacity: .5;
+}
+
+.current .preset-list-button,
+.current .preset-list-button .label {
+    background-color: #E8EBFF;
+}
+
+.category .preset-list-button:after,
+.category .preset-list-button:before {
+    content: "";
+    position: absolute;
+    top: -5px;
+    left: -1px; right: -1px;
+    border: 1px solid #ccc;
+    border-bottom: none;
+    border-radius: 6px 6px 0 0;
+    height: 6px;
+}
+
+.category .preset-list-button:before {
+    top: -3px;
+}
+
+.subgrid .preset-list {
+    padding: 10px 10px 0 10px;
+    margin-top: 0;
+    border: 0;
+    border-radius: 8px;
+    width: -webkit-calc(100% + 20px);
+    margin-left: -10px;
+}
+
+.subgrid .arrow {
+    border: solid rgba(0, 0, 0, 0);
+    border-width: 10px;
+    border-bottom-color: #f1f1f1;
+    width: 0;
+    height: 0;
+    margin-left: 50%;
+    margin-left: -webkit-calc(50% - 10px);
+    margin-top: -10px;
+}
+
+
+/* preset form basics */
+
+.inspector-preset {
+    overflow: hidden;
+    padding-bottom: 10px;
+}
+
+.inspector-preset a.hide-toggle {
+    margin: 0 20px 10px 20px;
+}
+
+.inspector-preset .preset-form {
+    padding: 10px;
+    margin: 0 10px 10px 10px;
+    border-radius: 8px;
+}
+
+.entity-editor-pane .preset-list-item .preset-list-button-wrap {
+    margin-bottom: 0;
+}
+
+.form-field {
+    margin-bottom: 10px;
+    width: 100%;
+    -webkit-transition: margin-bottom 200ms;
+       -moz-transition: margin-bottom 200ms;
+         -o-transition: margin-bottom 200ms;
+            transition: margin-bottom 200ms;
+}
+
+.form-field:last-child {
+    margin-bottom: 0;
+}
+
+.form-label {
+    position: relative;
+    font-weight: bold;
+    border: 1px solid #cfcfcf;
+    padding: 5px 0 5px 10px;
+    background: #f6f6f6;
+    display: block;
+    border-radius: 4px 4px 0 0;
+    overflow: hidden;
+}
+
+.form-label-button-wrap {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    background: transparent;
+    text-align: right;
+}
+
+.form-label-button-wrap .tag-reference-button {
+    border-radius: 0 3px 0 0;
+}
+
+.form-label-button-wrap .icon {
+    opacity: .5;
+}
+
+.form-label button {
+    border-left: 1px solid #CCC;
+    width: 10%;
+    height: 100%;
+    border-radius: 0;
+    background: #f6f6f6;
+}
+.form-label button:hover {
+    background: #f1f1f1;
+}
+
+.form-label .modified-icon,
+.form-field .remove-icon {
+    display: none;
+}
+
+.modified .form-label .modified-icon,
+.present .form-label .remove-icon {
+    display: inline-block;
+}
+
+.form-field > input,
+.form-field > textarea,
+.form-field .preset-input-wrap {
+    border: 1px solid #CCC;
+    min-height: 30px;
+    border-top: 0;
+    border-radius: 0 0 4px 4px;
+    overflow: hidden;
+}
+
+.form-field textarea {
+    height: 65px;
+}
+
+.inspector-border {
+    border-bottom: 1px solid #CCC
+}
+
+/* Preset form (hover mode) */
+
+.inspector-hover .checkselect label:last-of-type,
+.inspector-hover .preset-input-wrap .label,
+.inspector-hover input,
+.inspector-hover label {
+    background: #ececec;
+}
+
+.inspector-hover a,
+.inspector-hover .checkselect label:last-of-type {
+    color: #666;
+}
+
+/* hide and remove from layout */
+.inspector-hidden,
+.inspector-hover label input[type="checkbox"],
+.inspector-hover label input[type="radio"],
+.inspector-hover .toggle-list label,
+.inspector-hover .toggle-list label span,
+.inspector-hover .inspector-inner .add-tag,
+.inspector-hover .inspector-inner .add-relation,
+.inspector-hover .toggle-list label.remove .icon {
+    height: 0;
+    width: 0;
+    overflow: hidden;
+    opacity: 0 !important;
+    border-width: 0;
+    margin: 0;
+    padding: 0;
+}
+
+/* hide but preserve in layout */
+.inspector-hover .entity-editor-pane button.minor,
+.inspector-hover .combobox-caret,
+.inspector-hover .entity-editor-pane .header button,
+.inspector-hover .spin-control,
+.inspector-hover .hide-toggle:before,
+.inspector-hover .more-fields,
+.inspector-hover .form-label-button-wrap,
+.inspector-hover .tag-reference-button,
+.inspector-hover .view-on-osm {
+    opacity: 0;
+}
+
+/* Styles for raw tag inspector on hover */
+.inspector-hover .tag-row .key-wrap,
+.inspector-hover .tag-row .form-field.input-wrap-position {
+    width: 50%;
+}
+
+.inspector-hover .tag-row:first-child input.value {
+    border-top-right-radius: 4px;
+}
+
+.inspector-hover .tag-row:last-child input.value {
+    border-bottom-right-radius: 4px;
+}
+
+.inspector-hover .tag-row:last-child input.key {
+    border-bottom-left-radius: 4px;
+}
+
+.inspector-hover .more-fields {
+    max-height: 0;
+    margin-bottom: -10px;
+}
+
+/* Unstyle button fields */
+.inspector-hover .toggle-list label.active,
+.inspector-hover .entity-editor-pane a.hide-toggle {
+    opacity: 1;
+    background-color: transparent;
+    color: #666;
+    padding-left: 0;
+    border-width: 0;
+}
+
+.inspector-hover .toggle-list button.active {
+    padding-left: 10px;
+}
+
+/* Add placeholder only on hover for radio buttons */
+.inspector-hover .toggle-list .placeholder {
+    color: #a9a9a9;
+    padding: 5px 10px;
+    opacity: 1;
+    line-height: 20px;
+    width: 100%;
+}
+
+/* Hide placeholder for radio buttons if another is active, or not in hover state */
+.toggle-list label.active ~ .placeholder,
+.toggle-list .placeholder {
+    padding: 0;
+    opacity: 0;
+    width: 0;
+    line-height: 0;
+    display: block;
+    overflow: hidden;
+}
+
+/* adding additional preset fields */
+
+.more-fields {
+    padding: 0 20px 20px 20px;
+    font-weight: bold;
+}
+
+.more-fields label { padding: 5px 10px 5px 0; }
+.more-fields input { width: 50%;}
+
+/* preset form access */
+
+.preset-input-wrap .label {
+    height: 30px;
+    background: #F6F6F6;
+    padding: 5px 10px;
+}
+
+.form-field-access .preset-input-wrap li {
+    border-bottom: 1px solid #CCC;
+}
+.form-field-access .preset-input-wrap li:last-child {
+    border-bottom: 0;
+}
+
+.preset-input-access-wrap input {
+    border-radius: 0;
+    border-width: 0;
+    border-left-width: 1px;
+}
+
+.preset-input-wrap li:last-child input {
+    border-bottom-right-radius: 4px;
+}
+
+/* preset form cycleway */
+
+.form-field-cycleway .preset-input-wrap li {
+    border-bottom: 1px solid #CCC;
+}
+.form-field-cycleway .preset-input-wrap li:last-child {
+    border-bottom: 0;
+}
+
+.preset-input-cycleway-wrap input {
+    border-radius: 0;
+    border-width: 0;
+    border-left-width: 1px;
+}
+
+/* preset form numbers */
+
+input[type=number] {
+    position: relative;
+    padding-right: 20%;
+}
+
+.spin-control {
+    width: 20%;
+    height: 29px;
+    display: inline-block;
+    margin-left: -20%;
+    margin-bottom: -11px;
+    position: relative;
+}
+
+.spin-control button {
+    right: 1px;
+    position: relative;
+    float: left;
+    height: 100%;
+    width: 50%;
+    border-left: 1px solid #CCC;
+    border-radius: 0;
+    background: rgba(0, 0, 0, 0);
+}
+
+.spin-control button.decrement {
+    border-bottom-right-radius: 3px;
+}
+
+.spin-control button.decrement::after,
+.spin-control button.increment::after {
+    content:"";
+    height: 0; width: 0;
+    position: absolute;
+    left: 0; right: 0; bottom: 0; top: 0;
+    margin: auto;
+}
+
+.spin-control button.decrement::after {
+    border-top: 5px solid #CCC;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+}
+
+.spin-control button.increment::after {
+    border-bottom: 5px solid #CCC;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+}
+
+/* preset form checkbox */
+
+.checkselect label:last-of-type {
+    display: block;
+    background: white;
+    padding: 5px 10px;
+    color: #7092FF;
+}
+
+.checkselect label:hover {
+    background: #f1f1f1;
+}
+
+.checkselect .set {
+    color: inherit;
+}
+
+.checkselect label:not(.set) input[type="checkbox"] {
+    opacity: .5;
+}
+
+/* Preset form radio button */
+
+.toggle-list button.remove {
+    border-radius: 0 0 3px 3px;
+}
+
+.toggle-list button.remove .icon {
+    position: absolute;
+    left: 5px;
+}
+
+.toggle-list button.remove::before {
+    content: none;
+}
+
+.form-field .wiki-lang {
+    border-radius: 0;
+}
+
+.form-field .wiki-title {
+    padding-right: 10%;
+}
+
+.form-field .wiki-title ~ .combobox-caret {
+    margin-left: -18%;
+    margin-right: 9%;
+}
+
+.form-field .wiki-link {
+    float: right;
+    background: #fafafa;
+    padding: 5px;
+    text-align: center;
+}
+
+.form-field .wiki-link:hover {
+    background: #f1f1f1;
+}
+
+#preset-input-maxspeed {
+    border-right: none;
+    border-radius: 0 0 0 4px;
+    width: 80%;
+}
+
+.form-field .maxspeed-unit {
+    border-radius: 0 0 4px 0;
+    width: 20%;
+}
+
+/* Name + translate form */
+
+.form-field .localized-main {
+    padding-right: 10%;
+}
+
+.form-field .button-input-action {
+    position: relative;
+    right: 1px;
+    width: 10%;
+    margin-left: -10%;
+    border: 1px solid #CCC;
+    border-top-width: 0;
+    border-right-width: 0;
+    border-radius: 0 0 4px 0;
+    height: 30px;
+    vertical-align: top;
+}
+
+.form-field .localized-wrap {
+    padding: 0 10px;
+}
+
+.form-field .localized-wrap .entry {
+    position: relative;
+    overflow: hidden;
+}
+
+.form-field .localized-wrap .entry::before {
+    content: "";
+    display: block;
+    position: absolute;
+    background:#ccc;
+    height: 11px;
+    width: 1px;
+    left: 0;
+    right: 0;
+    top: -11px;
+    margin: auto;
+}
+
+.form-field .localized-wrap .entry .localized-lang {
+    border-radius: 0;
+    border-top-width: 0;
+}
+
+.form-field .localized-wrap .entry .localized-value {
+    border-top-width: 0;
+    border-radius: 0 0 4px 4px;
+}
+
+.form-field .localized-wrap .form-label button {
+    border-top-right-radius: 3px;
+}
+
+/* Preset form address */
+
+.addr-row input {
+    border-right: 0;
+    border-bottom: 0;
+}
+
+.addr-row:first-of-type input {
+    border-top: 0;
+}
+
+.addr-row input:first-of-type {
+    border-left: 0;
+}
+
+.addr-row input {
+    border-radius: 0;
+}
+
+.addr-row:last-of-type input:first-of-type {
+    border-radius: 0 0 0 4px;
+}
+
+.addr-row:last-of-type input:last-of-type {
+    border-radius: 0 0 4px 0;
+}
+
+/* Restrictions editor */
+
+.form-field-restrictions .preset-input-wrap {
+    position: relative;
+    height: 300px;
+}
+
+.form-field-restrictions svg {
+    width: 100%;
+    height: 100%;
+}
+
+.form-field-restrictions .restriction-help {
+    z-index: 1;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: 2px 6px;
+    background-color: rgba(255, 255, 255, .8);
+    color: #999;
+    text-align: center;
+}
+
+/* combobox dropdown */
+
+div.combobox {
+    z-index: 9999;
+    display: none;
+    box-shadow: 0 0 10px 0 rgba(0,0,0,.1);
+    margin-top: -1px;
+    background: white;
+    max-height: 120px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    border: 1px solid #ccc;
+    border-radius: 0 0 4px 4px;
+}
+
+.combobox a {
+    display: block;
+    padding: 5px 10px;
+    border-top:1px solid #ccc;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.combobox a.selected,
+.combobox a:hover {
+    background: #ececec;
+}
+
+.combobox a:first-child {
+    border-top: 0;
+}
+
+.combobox-caret {
+    display: inline-block;
+    position: relative;
+    height: 30px;
+    width: 30px;
+    margin-left: -30px;
+    vertical-align: top;
+}
+
+.combobox-caret::after {
+    content:"";
+    height: 0; width: 0;
+    position: absolute;
+    left: 0; right: 0; bottom: 0; top: 0;
+    margin: auto;
+    border-top: 5px solid #ccc;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+}
+
+/* Raw Tag Editor */
+
+.tag-list {
+    padding-top: 10px;
+}
+
+.tag-row {
+    width: 100%;
+    position: relative;
+    clear: both;
+}
+
+.tag-row input {
+    height: 31px;
+    border: 0;
+    border-radius: 0;
+    border-bottom: 1px solid #CCC;
+    border-left: 1px solid #CCC;
+}
+
+.tag-row .key-wrap,
+.tag-row .input-wrap-position {
+    width: 40%;
+    float: left;
+    height: 30px;
+}
+
+.tag-row input.key {
+    font-weight: bold;
+    background-color: #f6f6f6;
+}
+
+.tag-row input.value {
+    border-right: 1px solid #CCC;
+}
+
+.tag-row:first-child input.key {
+    border-top: 1px solid #CCC;
+    border-top-left-radius: 4px;
+}
+
+.tag-row:first-child input.value {
+    border-top: 1px solid #CCC;
+}
+
+.tag-row button {
+    position: absolute;
+    height: 31px;
+    right: 10%;
+    border: 1px solid #CCC;
+    border-top-width: 0;
+    border-left-width: 0;
+}
+
+.tag-row button:hover {
+    background: #f1f1f1;
+}
+
+.tag-row button .icon {
+    opacity: .5;
+}
+
+.tag-row:first-child button {
+    border-top-width: 1px;
+}
+
+.tag-row:first-child .tag-reference-button {
+    border-top-right-radius: 4px;
+}
+
+.tag-row:last-child .tag-reference-button {
+    border-bottom-right-radius: 4px;
+}
+
+.tag-row .tag-reference-button {
+    right: 0;
+    border-radius: 0;
+    width: 10%;
+    top: 0;
+    background: #fafafa;
+}
+
+/* Adding form fields to tag editor */
+
+.inspector-inner .add-tag {
+    width: 40%;
+    height: 30px;
+    border-top: 0;
+    background: rgba(0,0,0,.5);
+    border-radius: 0 0 4px 4px;
+}
+
+.inspector-inner .add-tag:hover {
+    background: rgba(0,0,0,.8);
+}
+
+.inspector-inner .add-tag .label {
+    display: none;
+}
+
+/* Tag reference */
+
+button.minor.tag-reference-loading {
+    background-color: #f5f5f5;
+}
+
+.tag-reference-loading .icon {
+    background-image: url(img/mini-loader.gif);
+    background-position: 0 0;
+}
+
+.tag-reference-body {
+    overflow: hidden;
+    clear: both;
+}
+
+.tag-reference-body p,
+.tag-reference-body img {
+    margin-top: 20px;
+}
+
+.tag-reference-body p:last-child {
+    padding-bottom: 10px;
+}
+
+.tag-reference-body a {
+    display: block;
+    padding-bottom: 10px;
+}
+
+.preset-list .tag-reference-body {
+    position: relative;
+    width: 100%;
+}
+
+.preset-list .tag-reference-body a {
+    padding-bottom: 20px;
+}
+
+.preset-list .tag-reference-body p,
+.preset-list .tag-reference-body img {
+    margin-top: 10px;
+}
+
+.raw-tag-editor .tag-reference-body {
+    border-bottom: 1px solid #ccc;
+    float: left;
+    width: 100%;
+}
+
+.raw-tag-editor .tag-reference-body p:last-child {
+    padding-bottom: 20px;
+}
+
+.raw-tag-editor .tag-reference-body a {
+    padding-bottom: 20px;
+}
+
+img.wiki-image {
+    float: right;
+    width: 33.3333%;
+    width: -webkit-calc(33.3333% - 10px);
+    width: calc(33.3333% - 10px);
+    margin-left: 20px;
+    margin-right: 10px;
+    border-radius: 4px;
+    max-height: 200px;
+    margin-bottom: 20px;
+}
+
+/* Raw relation membership editor */
+
+.raw-member-editor .member-list li:first-child,
+.raw-membership-editor .member-list li:first-child {
+    padding-top: 10px;
+}
+
+.raw-member-editor .member-row,
+.raw-membership-editor .member-row {
+    position: relative;
+}
+
+.raw-member-editor .member-row .member-entity-name,
+.raw-membership-editor .member-row .member-entity-name {
+    font-weight: normal;
+    padding-left: 10px;
+}
+
+.member-incomplete .member-delete {
+    display: none;
+}
+
+.member-row-new .member-entity-input {
+    border-radius: 4px 4px 0 0;
+    border: 1px solid #cfcfcf;
+}
+
+.add-relation {
+    width: 40%;
+    height: 30px;
+    background: rgba(0,0,0,.5);
+    border-radius: 4px;
+    margin-top: 10px;
+}
+
+.add-relation:hover {
+    background: rgba(0,0,0,.8);
+}
+
+/* Fullscreen button */
+div.full-screen {
+    float: right;
+    width: 40px;
+    margin-right: 10px;
+}
+
+div.full-screen .tooltip {
+    min-width: 160px;
+}
+
+div.full-screen > button, div.full-screen > button.active {
+    width: 40px;
+    height: 40px;
+    background: transparent;
+}
+
+div.full-screen > button:hover {
+    background-color: rgba(0, 0, 0, .8);
+}
+
+/* Map Controls */
+
+.map-controls {
+    right: 0;
+    top: 70px;
+    width: 40px;
+    position: fixed;
+    z-index: 100;
+}
+
+.map-control > button {
+    width: 40px;
+    background: rgba(0,0,0,.5);
+    border-radius: 0;
+}
+
+.map-control > button:hover {
+    background: rgba(0, 0, 0, .8);
+}
+
+.map-control > button.active,
+.map-control > button.active:hover {
+    background: #7092ff;
+}
+
+/* Zoomer */
+
+.zoombuttons button.zoom-in {
+    border-radius: 4px 0 0 0;
+}
+
+/* Background / Map Data Settings */
+
+
+.map-data-control button {
+    border-radius: 0;
+}
+
+.background-control button {
+    border-radius: 4px 0 0 0;
+}
+
+.map-data-control,
+.background-control {
+    position: relative;
+}
+
+.nudge-container {
+    border: 1px solid #CCC;
+}
+
+.imagery-faq {
+  margin-bottom: 10px;
+}
+
+.background-control .adjustments button:last-child {
+    border: 0;
+}
+
+.map-data-control .hide-toggle,
+.background-control .hide-toggle {
+    padding-bottom: 10px;
+}
+
+.layer-list, .controls-list {
+    margin-bottom: 10px;
+    border: 1px solid #CCC;
+    border-radius: 4px;
+}
+
+.layer-list li {
+    position: relative;
+    height: 30px;
+    background-color: white;
+    color: #7092FF;
+}
+
+.layer-list:empty {
+    display: none;
+}
+
+.layer-list > li:first-child {
+    border-radius: 3px 3px 0 0;
+}
+
+.layer-list > li:last-child {
+    border-radius: 0 0 3px 3px;
+}
+
+.layer-list > li:only-child {
+    border-radius: 3px;
+}
+
+.layer-list li:not(:last-child) {
+    border-bottom: 1px solid #ccc;
+}
+
+.layer-list li:hover {
+    background-color: #ececec;
+}
+
+.layer-list li.active {
+    background: #E8EBFF;
+}
+
+.layer-list li.best > div.best {
+    display: inline-block;
+    padding: 5px;
+    float: right;
+}
+
+/* make sure tooltip fits in map-control panel */
+/* if too wide, placement will be wrong the first time it displays */
+.layer-list li.best .tooltip-inner {
+    max-width: 160px;
+}
+
+.layer-list label {
+    display: block;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.layer-list label > span {
+    display: block;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.minimap-toggle {
+    display: block;
+    padding: 5px 10px;
+    cursor: pointer;
+    color: #7092FF;
+    border-radius: 3px;
+}
+
+.minimap-toggle.active {
+    background: #E8EBFF;
+}
+
+.minimap-toggle:hover {
+    background-color: #ececec;
+}
+
+.hide-toggle {
+    display: block;
+    padding-left:12px;
+    position: relative;
+}
+
+.hide-toggle:before {
+    content: '';
+    display: block;
+    position: absolute;
+    height: 0;
+    width: 0;
+    left: 0;
+    top: 5px;
+    border-top:  4px solid transparent;
+    border-bottom:  4px solid transparent;
+    border-left:  8px solid #7092ff;
+}
+
+.hide-toggle.expanded:before {
+    border-top:  8px solid #7092ff;
+    border-bottom: 0;
+    border-right:  4px solid transparent;
+    border-left:  4px solid transparent;
+}
+
+.background-control .nudge-container button {
+    float: left;
+    display: block;
+    width:20%;
+    border-right: 1px solid #CCC;
+    position: relative;
+}
+
+.background-control .nudge::after {
+    content: '';
+    display: block;
+    position: absolute;
+    margin: auto;
+    left: 0; right: 0; top: 0; bottom: 0;
+    height: 0;
+    width: 0;
+}
+
+.background-control .nudge.left::after {
+    border-top:  5px solid transparent;
+    border-bottom:  5px solid transparent;
+    border-left:  5px solid #222;
+}
+
+.background-control .nudge.right::after {
+    border-top:  5px solid transparent;
+    border-bottom:  5px solid transparent;
+    border-right:  5px solid #222;
+}
+
+.background-control .nudge.top::after {
+    border-right:  5px solid transparent;
+    border-left:  5px solid transparent;
+    border-bottom:  5px solid #222;
+}
+
+.background-control .nudge.bottom::after {
+    border-right:  5px solid transparent;
+    border-left:  5px solid transparent;
+    border-top:  5px solid #222;
+}
+
+.opacity-options {
+    background: url(img/background-pattern-opacity.png) 0 0 repeat;
+    height:20px;
+    width:82px;
+    position: absolute;
+    right: 50px;
+    top: 20px;
+    border: 1px solid #ccc;
+}
+
+.opacity-options li {
+    height: 100%;
+    display: block;
+    float: left;
+}
+
+.opacity-options li .select-box{
+    position: absolute;
+    width:20px;
+    height:18px;
+    z-index: 9999;
+}
+
+.map-data-control li:hover .select-box,
+.map-data-control li.selected .select-box,
+.background-control li:hover .select-box,
+.background-control li.selected .select-box {
+    border: 2px solid #7092ff;
+    background: rgba(89, 123, 231, .5);
+    opacity: .5;
+}
+
+.map-data-control li.selected:hover .select-box,
+.map-data-control li.selected .select-box,
+.background-control li.selected:hover .select-box,
+.background-control li.selected .select-box {
+    opacity: 1;
+}
+
+.background-control .opacity {
+    background:#222;
+    display:inline-block;
+    width:20px;
+    height:18px;
+}
+
+.map-data-control .layer-list button,
+.background-control .layer-list button {
+    float: right;
+    height: 100%;
+    width: 10%;
+    border-left: 1px solid #CCC;
+    border-radius: 0;
+}
+
+.map-data-control .layer-list button .icon,
+.background-control .layer-list button .icon {
+    opacity: 0.5;
+}
+
+.map-data-control .layer-list button:first-of-type,
+.background-control .layer-list button:first-of-type {
+    border-radius: 0 3px 3px 0;
+}
+
+.map-data-control .map-overlay,
+.background-control .map-overlay,
+.help-control .map-overlay {
+    z-index: -1;
+}
+
+
+/* Geolocator */
+
+.geolocate-control {
+    margin-bottom: 10px;
+}
+
+.geolocate-control button {
+    border-radius: 0 0 0 4px;
+}
+
+.map-overlay.content {
+    position: fixed;
+    top:60px;
+    bottom: 30px;
+    padding: 20px 50px 20px 20px;
+    right: 0;
+    overflow: auto;
+}
+
+/* Help */
+
+.help-control button {
+    border-radius: 0 0 0 4px;
+}
+
+.help-wrap p {
+    font-size: 15px;
+    margin-bottom: 20px;
+}
+
+.help-wrap .left-content .body p code {
+    padding:2px 4px;
+    background:#eee;
+}
+
+.help-wrap .toc {
+    /* This is two columns, 41.66666 x .4 = 16.6666 */
+    width:40%;
+    float:right;
+    margin-left: 20px;
+    margin-bottom: 20px;
+    padding-left: 5px
+}
+
+.help-wrap .toc li a,
+.help-wrap .nav a {
+    display: block;
+    border: 1px solid #CCC;
+    padding: 5px 10px;
+}
+
+.help-wrap .toc li a {
+    border-bottom: 0;
+}
+
+.help-wrap .toc li a:hover,
+.help-wrap .nav a:hover  {
+    background: #ececec;
+}
+
+.help-wrap .toc li a.selected {
+    background: #E8EBFF;
+}
+
+.help-wrap .toc li:first-child a {
+    border-radius: 4px 4px 0 0;
+}
+
+.help-wrap .toc li:nth-last-child(2) a {
+    border-bottom: 1px solid #CCC;
+    border-radius: 0 0 4px 4px
+}
+
+.help-wrap .toc li.walkthrough a {
+    overflow: hidden;
+    margin-top: 10px;
+    border-bottom: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.help-wrap .nav {
+    position: relative;
+}
+
+.help-wrap .nav a {
+    float: left;
+    width: 50%;
+    text-align: center;
+}
+
+.help-wrap .nav a:first-child {
+    border-radius: 4px 0 0 4px;
+}
+
+.help-wrap .nav a:last-child:not(:only-child) {
+    border-radius: 0 4px 4px 0;
+    border-left: 0;
+}
+
+.help-wrap .nav a:only-child {
+    width: 100%;
+    border-radius: 4px;
+}
+
+/* Map
+------------------------------------------------------- */
+
+#map {
+    position:relative;
+    overflow:hidden;
+    height:100%;
+    background:#000;
+}
+
+#supersurface {
+    transform-origin:0 0;
+    -ms-transform-origin:0 0;
+    -webkit-transform-origin:0 0;
+    -moz-transform-origin:0 0;
+    -o-transform-origin:0 0;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+#supersurface, .layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+/* Map-In-Map
+------------------------------------------------------- */
+
+.map-in-map {
+    position: absolute;
+    overflow: hidden;
+    top: 60px;
+    width: 200px;
+    height: 150px;
+    z-index: 5;
+    background: #000;
+    border: #aaa 1px solid;
+    box-shadow: 0 0 2em black;
+}
+
+.map-in-map-tiles {
+    transform-origin:0 0;
+    -ms-transform-origin:0 0;
+    -webkit-transform-origin:0 0;
+    -moz-transform-origin:0 0;
+    -o-transform-origin:0 0;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.map-in-map-svg,
+.map-in-map-gpx {
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    height: 100%;
+    width: 100%;
+}
+
+.map-in-map-svg {
+    position: absolute;
+}
+
+.map-in-map-gpx {
+    position: relative;
+    z-index: 10;
+}
+
+.map-in-map-bbox {
+    fill: none;
+    stroke: rgba(255, 255, 0, 0.75);
+    stroke-width: 1;
+    shape-rendering: crispEdges;
+}
+
+.map-in-map-bbox.thick {
+    stroke-width: 5;
+}
+
+/* Info Box
+------------------------------------------------------- */
+.infobox {
+    position: absolute;
+    z-index: 1;
+    right: 0;
+    bottom: 30px;
+    width: 240px;
+    border-radius: 4px 0 0 0;
+    border-bottom: 1px solid black;
+}
+
+.infobox .infobox-heading {
+    display: block;
+    border-radius: 4px 0 0 0;
+    padding: 5px 10px;
+    height: 30px;
+}
+
+.infobox ul {
+    padding: 5px 10px;
+}
+
+.infobox .button {
+    position: absolute;
+    background: #7092ff;
+    border-radius: 2px;
+    padding: 0 4px;
+    color: white;
+    top: 40px;
+    right: 10px;
+}
+
+/* About Section
+------------------------------------------------------- */
+
+#about {
+    width: 100%;
+    position: absolute;
+    right:0;
+    bottom:0;
+    border-radius: 0;
+    pointer-events: none;
+}
+
+#attrib {
+    width: 100%;
+    height: 20px;
+    margin-bottom: 5px;
+    float: left;
+    clear: both;
+}
+
+#attrib * { pointer-events: all; }
+
+.base-layer-attribution,
+.overlay-layer-attribution {
+    position: absolute;
+    color: #888;
+    font-size: 10px;
+}
+
+.base-layer-attribution {
+    left: 10px;
+}
+
+.overlay-layer-attribution {
+    right: 10px;
+}
+
+.overlay-layer-attribution .attribution:not(:last-child):after {
+    content: '; ';
+}
+
+.source-image {
+    height:20px;
+    vertical-align:top;
+}
+
+#footer {
+    width: 100%;
+    float: left;
+    clear: both;
+    pointer-events: all;
+}
+
+#scale-block {
+    display: table-cell;
+    vertical-align: bottom;
+    width: 250px;
+    max-height: 30px;
+    float: left;
+    clear: left;
+}
+
+#info-block {
+    max-height: 30px;
+    clear: right;
+}
+
+#scale {
+    height: 30px;
+    width: 100%;
+}
+
+#scale text {
+    font: 12px sans-serif;
+    stroke: none;
+    fill: #ccc;
+    text-anchor: start;
+}
+
+#scale path {
+    fill: none;
+    stroke: #ccc;
+    stroke-width: 1;
+    shape-rendering: crispEdges;
+}
+
+#about-list {
+    text-align: right;
+    margin-right: 10px;
+    clear: right;
+    overflow: hidden;
+}
+
+#about-list li {
+    float: right;
+    border-left: 1px solid rgba(255,255,255,.5);
+    padding: 5px 0 5px 5px;
+    margin-left: 5px;
+}
+
+#about-list li:last-child {
+    border-left: 0;
+    margin-left: 0;
+    padding-left: 0;
+}
+
+.source-switch a {
+    padding: 2px 4px 4px 4px;
+    border-radius: 2px;
+}
+.source-switch a.live {
+    background: #d32232;
+    color:#fff;
+}
+
+.feature-warning a {
+    background: #1e90ff;
+    padding: 2px 4px 4px 4px;
+    border-radius: 2px;
+    color: #eee;
+}
+
+.user-list a:not(:last-child):after {
+    content: ', ';
+}
+
+.api-status {
+    float: right;
+    clear: both;
+    text-align: right;
+    width: 100%;
+    padding: 0px 10px;
+}
+
+.api-status.offline,
+.api-status.readonly,
+.api-status.error {
+    background: red;
+}
+
+/* Modals
+------------------------------------------------------- */
+
+.modal {
+    top: 40px;
+    display: inline-block;
+    position:absolute;
+    border-radius: 3px;
+    overflow: hidden;
+    left: 0;
+    right: 0;
+    margin: auto;
+    z-index: 50;
+}
+
+.modal .loader {
+    margin-bottom: 10px;
+}
+
+.modal .description {
+    text-align: center;
+}
+
+.shaded {
+    z-index: 49;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    overflow: auto;
+}
+
+.shaded:before {
+    content:'';
+    background:rgba(0,0,0,0.5);
+    position:fixed;
+    left:0px; right:0px; top:0px; bottom:0px;
+}
+
+.modal-section {
+    padding: 20px;
+    border-bottom: 1px solid #CCC;
+}
+
+.modal-section.header h3 {
+    padding: 0;
+}
+
+.modal-section.buttons {
+    text-align: center;
+}
+
+.modal-section.buttons .action {
+    display: inline-block;
+    margin: 0 10px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.save-section .buttons .action {
+    display: inline-block;
+    margin: 0 20px 0 0;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.loading-modal {
+    text-align: center;
+}
+
+.modal-actions button,
+.save-success a.button {
+    font-weight: normal;
+    color: #7092FF;
+    border-bottom: 1px solid #CCC;
+    border-radius: 0;
+    height: 160px;
+    text-align: center;
+    display: inline-block;
+}
+
+.modal-actions button:hover
+.save-success a.button:hover {
+    background-color: #ececec;
+}
+
+.modal-actions button:before,
+.save-success a.button.osm:before,
+.walkthrough a:before {
+    display: block;
+    content: '';
+    height: 100px;
+    width: 100%;
+    max-width: 100px;
+    margin: auto;
+    margin-bottom: 10px;
+    background:transparent url(img/iD-sprite.svg) no-repeat -200px -460px;
+}
+
+.modal-actions :first-child {
+    border-right: 1px solid #CCC;
+}
+
+.modal-section:last-child {
+    border-bottom: 0;
+}
+
+/* Restore Modal
+------------------------------------------------------- */
+
+.modal-actions .restore:before {
+    background-position: -500px -460px;
+}
+
+.modal-actions .reset:before {
+    background-position: -600px -460px;
+}
+
+/* Success Modal
+------------------------------------------------------- */
+
+.save-success p {
+    padding: 15px 15px 0 15px;
+}
+.save-success a.details {
+  padding-left: 15px;
+}
+.save-success .button {
+    padding-top: 15px;
+}
+
+.save-success a.button.social {
+    height: auto;
+}
+
+.save-success .icon.social {
+    height: 80px;
+    width: 80px;
+    color: #7092FF;
+}
+
+.save-success .button.osm:before {
+    background-position: -200px -460px;
+}
+
+/* Splash Modal
+------------------------------------------------------- */
+
+.modal-actions .walkthrough:before,
+.walkthrough a:before {
+    background-position: -300px -460px;
+}
+
+.modal-actions .start:before {
+    background-position: -400px -460px;
+}
+
+/* Commit Modal
+------------------------------------------------------- */
+
+.mode-save a.user-info {
+    display: inline-block;
+}
+
+.mode-save .commit-form {
+    margin-bottom: 0;
+}
+
+.mode-save .user-info img {
+    float: left;
+}
+
+.mode-save h3 small.count {
+    margin-right: 10px;
+    text-align: center;
+    float: left;
+    height: 12px;
+    min-width: 12px;
+    font-size:12px;
+    line-height: 12px;
+    border-radius:24px;
+    padding:5px;
+    background:#7092ff;
+    color:#fff;
+}
+
+.mode-save .commit-info {
+    margin-bottom: 10px;
+}
+
+.mode-save .changeset-list {
+    border:1px solid #ccc;
+    border-radius: 4px;
+    background:#fff;
+}
+
+.mode-save .warning-section .changeset-list button {
+    border-left: 1px solid #CCC;
+}
+
+.mode-save .changeset-list li {
+    position: relative;
+    border-top:1px solid #ccc;
+    padding:5px 10px;
+    cursor: pointer;
+}
+
+.mode-save .changeset-list li:hover {
+    background-color: #ececec;
+}
+
+.mode-save .changeset-list .alert {
+    opacity: 0.5;
+}
+
+.changeset-list li span.count {
+    font-size:10px;
+    color:#555;
+}
+
+.mode-save .commit-section .changeset-list button {
+    border-left: 1px solid #CCC;
+}
+
+.changeset-list li span.count:before { content: '('; }
+
+.changeset-list li span.count:after { content: ')'; }
+
+.changeset-list li:first-child { border-top: 0;}
+
+/* Conflict resolution
+------------------------------------------------------- */
+
+.conflicts-help {
+    padding: 20px;
+    background-color: #ffffbb;
+    border-bottom: 1px solid #ccc;
+}
+
+.conflicts-buttons {
+    padding: 20px;
+}
+
+.mode-save button.conflicts-button {
+    float: left;
+}
+
+.conflict-container {
+    border-bottom: 1px solid #ccc;
+}
+
+.conflict-description {
+    padding: 5px 20px;
+    display: block;
+}
+
+.conflicts-done {
+    padding: 20px 20px 0 20px;
+}
+
+.conflict-detail-container {
+    padding: 10px 20px;
+}
+
+.conflict-count {
+    padding: 10px 20px;
+}
+
+.conflict-choices {
+    margin-top: 10px;
+}
+
+.conflict-nav-buttons {
+    padding: 10px 0 20px 0;
+}
+
+.conflict-nav-button {
+    height: 30px;
+}
+
+/* Notices
+------------------------------------------------------- */
+
+.notice {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+    background: #fff;
+}
+
+.notice .zoom-to {
+    margin: auto;
+    width: 80%;
+    height: 100px;
+    border-radius: 5px;
+    line-height: 40px;
+    color: #000;
+    opacity: 0.9;
+}
+
+.notice .zoom-to:hover {
+    background: #d8e1ff;
+}
+
+.notice .zoom-to .icon {
+    margin-top:10px;
+    margin-right:10px;
+}
+
+/* Tooltips
+------------------------------------------------------- */
+
+.tooltip {
+    position: absolute;
+    display: none;
+    color:#333;
+    text-align: left;
+    font-size: 12px;
+}
+
+.tooltip.in {
+    opacity: 0.8;
+    z-index: 1030;
+    height: auto;
+    display: block;
+}
+
+.tooltip.top {
+    margin-top: -20px;
+    text-align: center;
+}
+
+.tooltip.right {
+    margin-left: 20px;
+}
+
+.tooltip.bottom {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.tooltip.left {
+    margin-left: -20px;
+    text-align: right;
+}
+
+.tooltip-inner {
+    display: inline-block;
+    border-radius: 3px;
+    max-width: 200px;
+    min-width: 80px;
+    padding: 10px;
+    font-weight: normal;
+    background-color: white;
+}
+
+.tail {
+    width: 200px;
+    height: 400px;
+    pointer-events: none;
+    opacity: .8;
+    margin-top: -200px;
+    position: absolute;
+    background: transparent;
+}
+
+.tail::after {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-color: transparent;
+    border-style: solid;
+    top: 50%;
+    right: -5px;
+    margin-top: -5px;
+    border-left-color: white;
+    border-width: 5px 0 5px 5px;
+}
+
+.tail div {
+    border-radius: 3px;
+    padding: 10px;
+    background: white;
+    position: absolute;
+    top: 180px;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+
+.left.tail::after {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-color: transparent;
+    border-style: solid;
+    top: 50%;
+    left: -5px;
+    margin-top: -5px;
+    border-right-color: white;
+    border-width: 5px 5px 5px 0;
+}
+
+.tooltip-arrow {
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-color: transparent;
+    border-style: solid;
+}
+
+.tooltip.top .tooltip-arrow {
+    bottom: -5px;
+    left: 50%;
+    margin-left: -5px;
+    border-top-color: white;
+    border-width: 5px 5px 0;
+}
+
+.tooltip.right .tooltip-arrow {
+    top: 50%;
+    left: -5px;
+    margin-top: -5px;
+    border-right-color: white;
+    border-width: 5px 5px 5px 0;
+}
+
+.tooltip.left .tooltip-arrow {
+    top: 50%;
+    right: -5px;
+    margin-top: -5px;
+    border-left-color: white;
+    border-width: 5px 0 5px 5px;
+}
+
+.tooltip.bottom .tooltip-arrow {
+    top: -5px;
+    left: 50%;
+    margin-left: -5px;
+    border-bottom-color: white;
+    border-width: 0 5px 5px;
+}
+
+.keyhint-wrap {
+    background: #F6F6F6;
+    padding: 10px;
+    margin: 10px -10px -10px;
+    border-radius: 0 0 3px 3px;
+}
+
+.tooltip-inner .keyhint {
+    font-weight: bold;
+}
+
+/* Exceptions for tooltip layouts */
+
+/* make tooltips in panels dark */
+.map-overlay .tooltip.top .tooltip-arrow,
+.entity-editor-pane .tooltip.top .tooltip-arrow,
+.warning-section .tooltip.top .tooltip-arrow {
+    border-top-color: #000;
+}
+
+.map-overlay .tooltip.bottom .tooltip-arrow,
+.entity-editor-pane .tooltip.bottom .tooltip-arrow,
+.warning-section .tooltip.bottom .tooltip-arrow {
+    border-bottom-color: #000;
+}
+
+.map-overlay .tooltip.left .tooltip-arrow,
+.entity-editor-pane .tooltip.left .tooltip-arrow,
+.warning-section .tooltip.left .tooltip-arrow {
+    border-left-color: #000;
+}
+
+.map-overlay .tooltip.right .tooltip-arrow,
+.entity-editor-pane .tooltip.right .tooltip-arrow,
+.warning-section .tooltip.right .tooltip-arrow {
+    border-right-color: #000;
+}
+
+.map-overlay .tooltip-inner,
+.map-overlay .keyhint-wrap,
+.entity-editor-pane .tooltip-inner,
+.warning-section .tooltip-inner {
+    background: #000;
+    color: #ccc;
+}
+/* commit warning tooltips need to be closer */
+.warning-section .tooltip.top {
+    margin-top: -5px;
+}
+
+/* Uncramp map-control tooltips */
+.map-control .tooltip {
+    min-width: 160px;
+}
+/* Move over tooltips that are near the edge of screen */
+.add-point .tooltip {
+    left: 33.3333% !important;
+}
+
+.curtain-tooltip.intro-points-add .tooltip-arrow,
+.add-point .tooltip .tooltip-arrow {
+    left: 60px;
+}
+
+.radial-menu-tooltip {
+    opacity: 0.8;
+    display: none;
+    position: absolute;
+    width: 200px;
+}
+
+.radial-menu-background {
+    fill: none;
+    stroke: black;
+    stroke-opacity: 0.5;
+}
+
+.radial-menu-item circle {
+    fill: #eee;
+}
+
+.radial-menu-item circle:active,
+.radial-menu-item circle:hover {
+    fill: #fff;
+}
+
+.radial-menu-item.disabled circle {
+    cursor: auto;
+    fill: rgba(255,255,255,.5);
+}
+
+.radial-menu-item use {
+    fill: #222;
+    color: #79f;
+}
+
+.radial-menu-item.disabled use {
+    fill: rgba(32,32,32,.5);
+    color: rgba(40,40,40,.5);
+}
+
+.lasso-box {
+    fill-opacity:0.1;
+    stroke: #fff;
+    stroke-width: 1;
+    stroke-opacity: 1;
+    stroke-dasharray: 5, 5;
+}
+
+/* Media Queries
+------------------------------------------------------- */
+
+@media only screen and (max-width: 840px) {
+    /* override hide for save button */
+    #bar .save .label { display: block;}
+}
+
+@media screen and (max-width: 1200px) {
+    .user-list { display: none !important; }
+}
+
+@media screen and (max-width: 1000px) {
+    #userLink { display: none !important; }
+}
+
+@media screen and (max-width: 900px) {
+    #scale-block { display: none !important; }
+}
+
+
+/* Scrollbars
+ ----------------------------------------------------- */
+
+::-webkit-scrollbar {
+    height: 20px;
+    overflow: visible;
+    width: 10px;
+    background: white;
+    border-left: 1px solid #DDD;
+}
+
+::-webkit-scrollbar-track {
+    background-clip: padding-box;
+    border: solid transparent;
+    border-width: 0;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: rgba(0,0,0,.2);
+    background-clip: padding-box;
+    border: solid transparent;
+    border-width: 3px 3px 3px 4px;
+    border-radius: 6px;
+}
+::-webkit-scrollbar-track:hover,
+::-webkit-scrollbar-track:active {
+    background-color: rgba(0,0,0,.05);
+}
+
+/* Intro walkthrough
+ ----------------------------------------------------- */
+
+.curtain-darkness {
+    pointer-events: all;
+    fill-opacity: 0.7;
+    fill: #222;
+    fill-rule: evenodd;
+}
+
+.intro-nav-wrap {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 30px;
+    padding: 10px;
+    z-index: 1001;
+}
+
+.intro-nav-wrap button.step {
+    width: 20%;
+}
+
+.intro-nav-wrap button.step.finished {
+    background: #8cd05f;
+}
+
+.intro-nav-wrap button.step .icon {
+    display: none;
+}
+
+.intro-nav-wrap button.step.finished .icon {
+    display: inline-block;
+}
+
+
+.curtain-tooltip .tooltip-inner {
+    text-align: left;
+    padding: 20px;
+}
+
+.curtain-tooltip .tooltip-inner {
+    font-size: 15px;
+}
+
+.curtain-tooltip .tooltip-inner .bold {
+    font-weight: bold;
+    display: block;
+    border-top: 1px solid #CCC;
+    margin-top: 10px;
+    margin-left: -20px;
+    margin-right: -20px;
+    padding: 10px 20px 0 20px;
+}
+
+.curtain-tooltip .tooltip-inner .bold:only-child {
+    border: 0;
+    padding: 0;
+    margin: 0;
+}
+
+.curtain-tooltip.intro-points-describe {
+    top: 133px !important;
+}
+
+/* Tooltip illustrations */
+
+.intro-points-add .tooltip-inner::before,
+.intro-areas-add .tooltip-inner::before,
+.intro-lines-add .tooltip-inner::before {
+    margin-left: -20px;
+    display: block;
+    content: "";
+    height: 80px;
+    width: 200px;
+    background:transparent url(img/iD-sprite.svg) no-repeat 0 -320px;
+}
+
+.intro-areas-add .tooltip-inner::before {
+    background-position: 0 -400px;
+}
+
+.intro-lines-add .tooltip-inner::before {
+    background-position: 0 -480px;
+}
+
+.huge-modal-button {
+    width: 100%;
+    height: auto;
+    padding: 20px;
+}
+
+.huge-modal-button .illustration {
+    height: 100px;
+    width: 100px;
+    background: rgba(0, 0, 0, 0) url(img/iD-sprite.svg) no-repeat -300px -460px;
+    margin: auto;
+}
