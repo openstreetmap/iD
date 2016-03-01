@@ -69,22 +69,22 @@ iD.ui.MapData = function(context) {
                 showsMapillarySigns = supportsMapillarySigns && mapillarySigns.enabled();
 
             var mapillaryList = selection
-                .selectAll('.mapillary-list')
+                .selectAll('.layer-list-mapillary')
                 .data([0]);
 
             // Enter
             mapillaryList
                 .enter()
                 .append('ul')
-                .attr('class', 'layer-list mapillary-list');
+                .attr('class', 'layer-list layer-list-mapillary');
 
             var mapillaryImageLayerItem = mapillaryList
-                .selectAll('.item-mapillary-images')
+                .selectAll('.list-item-mapillary-images')
                 .data(supportsMapillaryImages ? [0] : []);
 
             var enterImages = mapillaryImageLayerItem.enter()
                 .append('li')
-                .attr('class', 'item-mapillary-images');
+                .attr('class', 'list-item-mapillary-images');
 
             var labelImages = enterImages.append('label')
                 .call(bootstrap.tooltip()
@@ -100,12 +100,12 @@ iD.ui.MapData = function(context) {
 
 
             var mapillarySignLayerItem = mapillaryList
-                .selectAll('.item-mapillary-signs')
+                .selectAll('.list-item-mapillary-signs')
                 .data(supportsMapillarySigns ? [0] : []);
 
             var enterSigns = mapillarySignLayerItem.enter()
                 .append('li')
-                .attr('class', 'item-mapillary-signs');
+                .attr('class', 'list-item-mapillary-signs');
 
             var labelSigns = enterSigns.append('label')
                 .call(bootstrap.tooltip()
@@ -144,18 +144,18 @@ iD.ui.MapData = function(context) {
                 showsGpx = hasGpx && gpx.enabled();
 
             var gpxLayerItem = selection
-                .selectAll('.layer-gpx')
+                .selectAll('.layer-list-gpx')
                 .data(gpx ? [0] : []);
 
             // Enter
             var enter = gpxLayerItem.enter()
                 .append('ul')
-                .attr('class', 'layer-list layer-gpx')
+                .attr('class', 'layer-list layer-list-gpx')
                 .append('li')
-                .classed('layer-toggle-gpx', true);
+                .classed('list-item-gpx', true);
 
             enter.append('button')
-                .attr('class', 'layer-extent')
+                .attr('class', 'list-item-gpx-extent')
                 .call(bootstrap.tooltip()
                     .title(t('gpx.zoom'))
                     .placement('left'))
@@ -167,7 +167,7 @@ iD.ui.MapData = function(context) {
                 .call(iD.svg.Icon('#icon-search'));
 
             enter.append('button')
-                .attr('class', 'layer-browse')
+                .attr('class', 'list-item-gpx-browse')
                 .call(bootstrap.tooltip()
                     .title(t('gpx.browse'))
                     .placement('left'))
