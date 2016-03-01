@@ -133,7 +133,8 @@
             "key": "T",
             "annotation": "tháo gỡ đường kẻ và vùng",
             "not_connected": "Không có đủ đường kẻ hoặc vùng ở đây để tháo gỡ.",
-            "connected_to_hidden": "Không thể tháo gỡ đối tượng này vì nó nối liền với một đối tượng ẩn."
+            "connected_to_hidden": "Không thể tháo gỡ đối tượng này vì nó nối liền với một đối tượng ẩn.",
+            "relation": "Không thể tháo gỡ đối tượng này vì nó nối liền các thành viên của một quan hệ."
         },
         "merge": {
             "title": "Gộp",
@@ -324,10 +325,12 @@
         "description": "Tùy chọn Hình nền",
         "percent_brightness": "Độ sáng {opacity}%",
         "none": "Không có",
+        "best_imagery": "Nguồn hình ảnh hữu ích nhất đối với nơi này",
         "custom": "Tùy biến",
         "custom_button": "Sửa hình nền tùy biến",
         "custom_prompt": "Nhập định dạng URL của các mảnh bản đồ. Bạn có thể sử dụng các dấu hiệu {z}, {x}, {y} cho định dạng Z/X/Y hoặc {u} cho định dạng quadtile.",
         "fix_misalignment": "Điều chỉnh lại",
+        "imagery_source_faq": "Hình ảnh này được lấy từ đâu?",
         "reset": "đặt lại",
         "minimap": {
             "description": "Bản đồ nhỏ",
@@ -499,8 +502,6 @@
         "browse": "Chọn một tập tin .gpx"
     },
     "mapillary": {
-        "tooltip": "Hình ảnh từ con đường do Mapillary cung cấp",
-        "title": "Lớp phủ Hình ảnh (Mapillary)",
         "view_on_mapillary": "Xem hình này trên Mapillary"
     },
     "help": {
@@ -597,38 +598,6 @@
         }
     },
     "presets": {
-        "categories": {
-            "category-building": {
-                "name": "Tòa nhà"
-            },
-            "category-golf": {
-                "name": "Golf"
-            },
-            "category-landuse": {
-                "name": "Sử dụng Đất"
-            },
-            "category-path": {
-                "name": "Đường mòn"
-            },
-            "category-rail": {
-                "name": "Đường sắt"
-            },
-            "category-restriction": {
-                "name": "Hạn chế"
-            },
-            "category-road": {
-                "name": "Đường"
-            },
-            "category-route": {
-                "name": "Tuyến đường"
-            },
-            "category-water-area": {
-                "name": "Nước"
-            },
-            "category-water-line": {
-                "name": "Nước"
-            }
-        },
         "fields": {
             "access": {
                 "label": "Quyền Truy cập",
@@ -1367,6 +1336,9 @@
             },
             "shop": {
                 "label": "Kiểu"
+            },
+            "site": {
+                "label": "Loại"
             },
             "sloped_curb": {
                 "label": "Lề đường Dốc"
@@ -2171,7 +2143,7 @@
             },
             "building/school": {
                 "name": "Nhà Trường",
-                "terms": "nhà trường, trường học, học viện, nha truong, truong học, hoc vien"
+                "terms": "nhà trường, trường học, học viện, trường sở, nha truong, truong học, hoc vien, truong so"
             },
             "building/semidetached_house": {
                 "name": "Nhà Bán tách biệt",
@@ -2600,10 +2572,6 @@
             "highway/tertiary_link": {
                 "name": "Nhánh Ra vào Phố",
                 "terms": "đường nhánh phố, đoạn nhánh phố, đường nhánh rẽ phố, đoạn nhánh rẽ phố, đường nhánh chuyển đường phố, nhánh chuyển đường phố, lối ra vào phố, lối ra phố, lối vào phố, nhánh ra phố, nhánh vào phố, đường nối phố, duong nhanh pho, doan nhanh pho, duong nhanh re pho, doan nhanh re pho, duong nhanh chuyen duong pho, nhanh chuyen duong pho, loi ra vao pho, loi ra pho, loi vao pho, nhanh ra pho, nhanh vao pho, duong noi pho"
-            },
-            "highway/track": {
-                "name": "Đường mòn",
-                "terms": "đường mòn, duong mon"
             },
             "highway/traffic_signals": {
                 "name": "Đèn Giao thông",
@@ -3385,10 +3353,6 @@
                 "name": "Tiệm Đồ Cổ",
                 "terms": "tiệm đồ cổ, cửa hàng đồ cổ, cửa hiệu đồ cổ, người bán đồ cổ, chỗ bán đồ cổ, nơi bán đồ cổ, tiem do co, cua hang do co, cua hieu do co, nguoi ban do co, cho ban do co, noi ban do co"
             },
-            "shop/art": {
-                "name": "Tiệm Nghệ phẩm",
-                "terms": "tiệm nghệ phẩm, tiệm bức tranh, tiệm bức vẽ, cửa hàng nghệ phẩm, cửa hàng bức tranh, cửa hàng bức vẽ, quán nghệ phẩm, quán bức tranh, quán bức vẽ, nơi bán nghệ phẩm, nơi bán bức tranh, nơi bán bức vẽ, tiem nghe pham, tiem buc tranh, tiem buc ve, cua hang nghe pham, cua hang buc tranh, cua hang buc ve, quan nghe pham, quan buc tranh, quan buc ve, noi ban nghe pham, noi ban buc tranh, noi ban buc ve"
-            },
             "shop/baby_goods": {
                 "name": "Tiệm Đồ Sơ sinh",
                 "terms": "tiệm đồ sơ sinh, cửa hàng đồ sơ sinh, cửa hiệu đồ sơ sinh, tiệm đồ em bé, cửa hàng đồ em bé, cửa hiệu đồ em bé, chăm sóc em bé, đồ chơi em bé, sữa, tiem do so sinh, cua hang do so sinh, cua hieu do so sinh, tiem do em be, cua hang do em be, cua hieu do em be, cham soc em be, do choi em be, sua"
@@ -3733,6 +3697,10 @@
                 "name": "Tiệm Văn phòng phẩm",
                 "terms": "tiệm văn phòng phẩm, tiệm đồ văn phòng, cửa hàng văn phòng phẩm, cửa hiệu văn phòng phẩm, bút, chì, giấy, máy tính, máy chữ, máy in, máy sao, máy quét, mực, thư mục, phong bì, tiem van phong pham, tiem do van phong, cua hang van phong pham, cua hieu van phong pham, but, chi, giay, may tinh, may chu, may in, may sao, may quet, muc, thu muc, phong bi"
             },
+            "shop/storage_rental": {
+                "name": "Cho thuê Chỗ Để đồ",
+                "terms": "cho thuê chỗ để đồ, cho thuê phòng kho, cho thuê phòng để đồ, cho thuê ga ra, cho thuê chỗ đậu xe, nhà kho tự túc, cho thue cho de do, cho thue phong kho, cho thue phong de do, cho thue ga ra, cho thu cho dau xe, nha kho tu tuc"
+            },
             "shop/supermarket": {
                 "name": "Siêu thị",
                 "terms": "siêu thị, chợ siêu thị, sieu thi, cho sieu thi"
@@ -3984,6 +3952,10 @@
             "type/route_master": {
                 "name": "Tuyến đường Chung",
                 "terms": "tuyến đường chung, dịch vụ xe buýt, tổ hợp tuyến đường, tuyen duong chung, dich vu xe buyt, to hop tuyen duong"
+            },
+            "type/site": {
+                "name": "Nơi",
+                "terms": "nơi, chỗ, khu, trường, địa điểm, noi, cho, truong, dia diem"
             },
             "vertex": {
                 "name": "Khác",

@@ -231,12 +231,17 @@
     "infobox": {
         "selected": "{n} مُختارة",
         "closed": "مُغلق",
+        "center": "مركز",
+        "perimeter": "محيط",
+        "length": "طول",
         "area": "مساحة",
         "location": "المكان",
-        "metric": "متري"
+        "metric": "متري",
+        "imperial": "إمبراطوري"
     },
     "geometry": {
         "point": "نقطة",
+        "vertex": "قمّة",
         "line": "خط",
         "area": "مساحة",
         "relation": "العلاقة"
@@ -254,6 +259,7 @@
         "no_documentation_key": "لا يوجد توثيق لهذا المفتاح",
         "show_more": "شاهد المزيد",
         "view_on_osm": "العرض على openstreetmap.org",
+        "all_fields": "كل الحقول",
         "all_tags": "كل الوسوم",
         "all_members": "كل اﻷعضاء",
         "all_relations": "كل العلاقات",
@@ -273,7 +279,7 @@
             "yes": "نعم",
             "no": "لا"
         },
-        "none": "None",
+        "none": "لا شيء",
         "node": "نقطة تلاقي",
         "way": "مسار",
         "relation": "علاقة",
@@ -327,10 +333,16 @@
         }
     },
     "area_fill": {
+        "wireframe": {
+            "description": "بدون ملء (خطوط رفيعة)",
+            "tooltip": "تفعيل نمط الخطوط الرفيعة يجعل من السهل عليك رؤية الخلفية بوضوح تام."
+        },
         "partial": {
+            "description": "ملء جزئي",
             "tooltip": "المساحات تظهر مملوءة فقط حول حوافها الداخلية. (مستحسن للمبتدأين)"
         },
         "full": {
+            "description": "ملء كامل",
             "tooltip": "المساحات تظهر مملوءة بالكامل."
         }
     },
@@ -344,14 +356,17 @@
         "title": "حفظ",
         "help": "حفظ التغييرات على OpenStreetMap يجعلها ظاهرة للمستخدمين الآخرين.",
         "no_changes": "لا يوجد تعديلات للحفظ.",
+        "error": "حدث خطأ أثناء محاولة الحفظ",
         "unknown_error_details": "الرجاء التأكد من أنك متصل بالإنترنت.",
         "uploading": "يرفع التغييرات إلى OpenStreetMap.",
         "unsaved_changes": "لديك تغييرات غير محفوظة",
         "conflict": {
             "header": "حل عمليات التحرير المتعارضة",
+            "count": "تعارض {num} من {total}",
             "previous": "< السابق",
             "next": "التالي >",
             "restore": "استعادة",
+            "download_changes": "أو قم بتنزيل تغييراتك.",
             "done": "تم حل جميع التعارضات!"
         }
     },
@@ -442,46 +457,20 @@
         }
     },
     "presets": {
-        "categories": {
-            "category-building": {
-                "name": "مبنى"
-            },
-            "category-golf": {
-                "name": "جولف"
-            },
-            "category-landuse": {
-                "name": "استخدام الأرض"
-            },
-            "category-path": {
-                "name": "طريق"
-            },
-            "category-rail": {
-                "name": "قطار"
-            },
-            "category-road": {
-                "name": "طريق"
-            },
-            "category-route": {
-                "name": "مسار"
-            },
-            "category-water-area": {
-                "name": "مياه"
-            },
-            "category-water-line": {
-                "name": "مياه"
-            }
-        },
         "fields": {
             "access": {
                 "label": "الدخول مسموح",
                 "options": {
                     "designated": {
-                        "description": "الدخول مصرح به وفقا للعلامات أو قوانين محلية مخصصة.",
+                        "description": "الدخول مصرح به وفقا لعلامات أو قوانين محلية مخصصة.",
                         "title": "مخصص"
                     },
                     "destination": {
-                        "description": "الدخول مسموح به فقط للوصل إلى وجهة معينة",
+                        "description": "الدخول مسموح به فقط للوصول إلى وجهة معينة",
                         "title": "الوجهة"
+                    },
+                    "dismount": {
+                        "description": "الدخول مسموح ولكن على السائق أن يترجل"
                     },
                     "no": {
                         "description": "الدخول ليس مسموحا به للعامة",
@@ -526,7 +515,9 @@
                     "hamlet": "قرية",
                     "housename": "اسم المنزل",
                     "housenumber": "123",
+                    "place": "المكان",
                     "postcode": "الرمز البريدي",
+                    "province": "المحافظة",
                     "street": "الشارع"
                 }
             },
@@ -557,6 +548,7 @@
             },
             "aerialway/summer/access": {
                 "options": {
+                    "both": "كلاهما",
                     "entry": "مدخل",
                     "exit": "مخرج"
                 }
@@ -604,7 +596,22 @@
             "cardinal_direction": {
                 "label": "الاتجاه",
                 "options": {
-                    "E": "الشرق"
+                    "E": "الشرق",
+                    "ENE": "شرقي - شمال شرقي",
+                    "ESE": "شرقي - جنوب شرقي",
+                    "N": "الشمال",
+                    "NE": "الشمال الشرقي",
+                    "NNE": "شمالي - شمالي شرقي",
+                    "NNW": "شمالي - شمالي غربي",
+                    "NW": "الشمال الغربي",
+                    "S": "الجنوب",
+                    "SE": "الجنوب الشرقي",
+                    "SSE": "جنوبي - جنوبي شرقي",
+                    "SSW": "جنوبي - جنوبي غربي",
+                    "SW": "الجنوب الغربي",
+                    "W": "الغرب",
+                    "WNW": "غربي - شمالي غربي",
+                    "WSW": "غربي - جنوبي غربي"
                 }
             },
             "clock_direction": {
@@ -620,8 +627,11 @@
             "construction": {
                 "label": "النوع"
             },
+            "content": {
+                "label": "المحتويات"
+            },
             "country": {
-                "label": "دولة"
+                "label": "الدولة"
             },
             "craft": {
                 "label": "النوع"
@@ -633,6 +643,12 @@
                 "label": "طعام"
             },
             "cycleway": {
+                "label": "ممر للدراجات",
+                "options": {
+                    "none": {
+                        "title": "لا شيء"
+                    }
+                },
                 "types": {
                     "cycleway:left": "جانب أيسر",
                     "cycleway:right": "جانب أيمن"
@@ -646,6 +662,9 @@
             },
             "description": {
                 "label": "الوصف"
+            },
+            "dock": {
+                "label": "النوع"
             },
             "drive_through": {
                 "label": "يمكن القيادة من خلاله"
@@ -761,6 +780,7 @@
                 "label": "ولوج للإنترنت",
                 "options": {
                     "no": "لا",
+                    "terminal": "محطة",
                     "wired": "سلكي",
                     "wlan": "واي فاي",
                     "yes": "نعم"
@@ -955,6 +975,12 @@
             },
             "shop": {
                 "label": "النوع"
+            },
+            "site": {
+                "label": "النوع"
+            },
+            "smoking": {
+                "label": "التدخين"
             },
             "source": {
                 "label": "المصدر"
@@ -1368,7 +1394,7 @@
             },
             "building/apartments": {
                 "name": "شقق",
-                "terms": "شقق"
+                "terms": "شقق, شقة, بيت"
             },
             "building/commercial": {
                 "name": "مبني تجاري",
@@ -1513,10 +1539,6 @@
             "highway/tertiary_link": {
                 "name": "رابط لطريق ثالثي",
                 "terms": "رابط لشارع ثالثي"
-            },
-            "highway/track": {
-                "name": "شاحنات",
-                "terms": "شاحنات"
             },
             "highway/traffic_signals": {
                 "name": "إشارات مرور",

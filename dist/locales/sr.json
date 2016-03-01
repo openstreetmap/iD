@@ -412,38 +412,6 @@
         }
     },
     "presets": {
-        "categories": {
-            "category-building": {
-                "name": "Зграда"
-            },
-            "category-golf": {
-                "name": "Голф"
-            },
-            "category-landuse": {
-                "name": "Коришћење земљишта"
-            },
-            "category-path": {
-                "name": "Путања"
-            },
-            "category-rail": {
-                "name": "Шина"
-            },
-            "category-restriction": {
-                "name": "Ограничења"
-            },
-            "category-road": {
-                "name": "Пут"
-            },
-            "category-route": {
-                "name": "Путања"
-            },
-            "category-water-area": {
-                "name": "Вода"
-            },
-            "category-water-line": {
-                "name": "Вода"
-            }
-        },
         "fields": {
             "access": {
                 "label": "Дозвољен приступ",
@@ -1781,9 +1749,6 @@
             },
             "highway/tertiary_link": {
                 "name": "Локални прилаз"
-            },
-            "highway/track": {
-                "name": "Макадам"
             },
             "highway/traffic_signals": {
                 "name": "Саобраћајна сигнализација"

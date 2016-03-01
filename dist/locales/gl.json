@@ -483,8 +483,6 @@
         "browse": "Buscar un ficheiro .gpx"
     },
     "mapillary": {
-        "tooltip": "Fotos a pé de rúa de Mapillary",
-        "title": "Superposición de fotos (Mapillary)",
         "view_on_mapillary": "Ver esta imaxe en Mapillary"
     },
     "help": {
@@ -523,38 +521,6 @@
         }
     },
     "presets": {
-        "categories": {
-            "category-building": {
-                "name": "Edificio"
-            },
-            "category-golf": {
-                "name": "Golf"
-            },
-            "category-landuse": {
-                "name": "Uso do solo"
-            },
-            "category-path": {
-                "name": "Camiño"
-            },
-            "category-rail": {
-                "name": "Ferrocarril"
-            },
-            "category-restriction": {
-                "name": "Restrición"
-            },
-            "category-road": {
-                "name": "Estrada"
-            },
-            "category-route": {
-                "name": "Ruta"
-            },
-            "category-water-area": {
-                "name": "Auga"
-            },
-            "category-water-line": {
-                "name": "Auga"
-            }
-        },
         "fields": {
             "access": {
                 "options": {
@@ -1243,9 +1209,6 @@
             },
             "highway/tertiary_link": {
                 "name": "Enlace a estrada terciaria"
-            },
-            "highway/track": {
-                "name": "Pista"
             },
             "highway/traffic_signals": {
                 "name": "Semáforo"

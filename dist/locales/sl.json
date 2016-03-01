@@ -382,38 +382,6 @@
         }
     },
     "presets": {
-        "categories": {
-            "category-building": {
-                "name": "Zgradba"
-            },
-            "category-golf": {
-                "name": "Golf"
-            },
-            "category-landuse": {
-                "name": "Raba tal"
-            },
-            "category-path": {
-                "name": "Pot"
-            },
-            "category-rail": {
-                "name": "Železnica"
-            },
-            "category-restriction": {
-                "name": "Prepoved"
-            },
-            "category-road": {
-                "name": "Cesta"
-            },
-            "category-route": {
-                "name": "Proga"
-            },
-            "category-water-area": {
-                "name": "Voda"
-            },
-            "category-water-line": {
-                "name": "Vodotok"
-            }
-        },
         "fields": {
             "access": {
                 "options": {
@@ -2001,10 +1969,6 @@
             "highway/tertiary_link": {
                 "name": "Priključek na lokalno cesto",
                 "terms": "priključek na lokalno cesto,priključek na terciarno cesto"
-            },
-            "highway/track": {
-                "name": "Kolovoz",
-                "terms": "kolesnice,brazda"
             },
             "highway/traffic_signals": {
                 "name": "Semafor",

@@ -316,38 +316,6 @@
         }
     },
     "presets": {
-        "categories": {
-            "category-building": {
-                "name": "ಕಟ್ಟಡ"
-            },
-            "category-golf": {
-                "name": "ಗಾಲ್ಫ್"
-            },
-            "category-landuse": {
-                "name": "ಭೂಬಳಕೆ"
-            },
-            "category-path": {
-                "name": "ದಾರಿ"
-            },
-            "category-rail": {
-                "name": "ರೈಲು"
-            },
-            "category-restriction": {
-                "name": "ನಿರ್ಬಂಧ"
-            },
-            "category-road": {
-                "name": "ರಸ್ತೆ"
-            },
-            "category-route": {
-                "name": "ಮಾರ್ಗ"
-            },
-            "category-water-area": {
-                "name": "ನೀರು"
-            },
-            "category-water-line": {
-                "name": "ನೀರು"
-            }
-        },
         "fields": {
             "access": {
                 "label": "ಅನುಮತಿಸಲಾದ ಪ್ರವೇಶ",

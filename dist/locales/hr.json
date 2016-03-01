@@ -133,7 +133,8 @@
             "key": "D",
             "annotation": "Razdvoji linije/područja.",
             "not_connected": "Ovdje nema dovoljno linija/područja za odvajanje.",
-            "connected_to_hidden": "Ovo se ne može odvojiti jer je spojeno na skrivenu značajku."
+            "connected_to_hidden": "Ovo se ne može odvojiti jer je spojeno na skrivenu značajku.",
+            "relation": "Ovo se ne može razdvojiti jer spaja članove relacije."
         },
         "merge": {
             "title": "Spoji",
@@ -324,10 +325,12 @@
         "description": "Postavke pozadine",
         "percent_brightness": "{opacity}% svjetline",
         "none": "Nijedna",
+        "best_imagery": "Najpoznatiji izvornik snimaka za ovo područje",
         "custom": "Podesivo",
         "custom_button": "Uredi prilagođenu pozadinu",
         "custom_prompt": "Unesi URL predložak za popločavanje. Ispravni znakovi su {z}, {x}, {y} za Z/X/Y shemu i {u} za quadtile shemu.",
         "fix_misalignment": "Popravi odstupanje",
+        "imagery_source_faq": "Koji je izvornik snimaka?",
         "reset": "resetiraj",
         "minimap": {
             "description": "Mini-karta",
@@ -498,9 +501,15 @@
         "zoom": "Povećaj na GPX putanju",
         "browse": "Potraži .gpx datoteku"
     },
-    "mapillary": {
+    "mapillary_images": {
         "tooltip": "Ulične fotografije s Mapillary servisa",
-        "title": "Foto preklop (Mapillary)",
+        "title": "Foto preklop (Mapillary)"
+    },
+    "mapillary_signs": {
+        "tooltip": "Prometni znakovi s Mapillary servisa",
+        "title": "Preklop prometnih znakova (Mapillary)"
+    },
+    "mapillary": {
         "view_on_mapillary": "Pogledaj ovu sliku na Mapillary"
     },
     "help": {
@@ -597,38 +606,6 @@
         }
     },
     "presets": {
-        "categories": {
-            "category-building": {
-                "name": "Građevina"
-            },
-            "category-golf": {
-                "name": "Golf"
-            },
-            "category-landuse": {
-                "name": "Namjena zemljišta"
-            },
-            "category-path": {
-                "name": "Staza"
-            },
-            "category-rail": {
-                "name": "Pruga"
-            },
-            "category-restriction": {
-                "name": "Ograničenje"
-            },
-            "category-road": {
-                "name": "Prometnica"
-            },
-            "category-route": {
-                "name": "Ruta"
-            },
-            "category-water-area": {
-                "name": "Voda"
-            },
-            "category-water-line": {
-                "name": "Voda"
-            }
-        },
         "fields": {
             "access": {
                 "label": "Dozvoljen pristup",
@@ -2213,10 +2190,6 @@
             "highway/tertiary_link": {
                 "name": "Pristupna cesta lokalne ceste"
             },
-            "highway/track": {
-                "name": "Poljski ili šumski put",
-                "terms": "put,poljski put,šumski put,makadam"
-            },
             "highway/traffic_signals": {
                 "name": "Semafor",
                 "terms": "semafor,prometna svjetla"
@@ -2738,9 +2711,6 @@
             },
             "shop/antiques": {
                 "name": "Antikvarijat"
-            },
-            "shop/art": {
-                "name": "Umjetnička galerija"
             },
             "shop/baby_goods": {
                 "name": "Trgovina za bebe",

@@ -1,0 +1,28 @@
+{
+    "intro": {
+        "areas": {
+            "place": "Disegna l'area metèndughe ciü nodi. Sèra l'area sciacàndu in sciu nodu de partènsa. **Disegna in area pè i giardinéti.**",
+            "search": "**Serca pé '{name}'.**",
+            "choose": "**Çèrni Giardinéti dàa lista.**",
+            "describe": "**Azunta in nome, e sciàca u {button} butùn pe serà a mudifica**"
+        },
+        "lines": {
+            "title": "Righe",
+            "add": "E righe i sun aduveràe pe raprèsentà strade, feruvìe, e šciümàire. **Sciàca u {button} butùn Riga pe azuntà ina növa riga**",
+            "start": "**Cumènsa a riga sciacàndu a fin da strada.**",
+            "intersect": "Sciàca pe' azuntà autri nodi àa riga. Ti pöi stirassà a màpa mèntre ti disegni. E strade e in bigu de autri tipi de righe, i fàn parte d'ina réa ciü granda.L'è impurtante, ste righe i vèsse bèn culegàe demodu che i prugràmi de navigasiun i travaje bèn. **Sciàca {name} pé fà in incruiju dée due righe.**",
+            "finish": "E righe besögna feniire sciacàndu ancù l'ürtimu nodu. **Fenisci de disegnà a strada.**",
+            "road": "**Çèrni a Strada d'inta lista**",
+            "residential": "Ghè in bigu de tipi de strade, a' ciü comüne l'é a Residènçiale. **Çèrni a Residènçiale**",
+            "describe": "**Métti u nome dàa strada, e sciàca u {button} butùn pé çerà a mudifica.**",
+            "restart": "E' strade v'èsse incruijà {name}.",
+            "wrong_preset": "Nu ti pöi  çèrne a stràda Residençiale. **Sciàca-chi pé çèrne in'àutra vouta**"
+        },
+        "startediting": {
+            "title": "Tàca a Mudificà",
+            "help": "Ti pöi refà da capu stu passagiu, senunca vié a documentasiun sciacàndu u {button} butùn d'Agiütu.",
+            "save": "Nu te scurdà de sarvà regularmènte e tou mudifiche!",
+            "start": "Cumènsa a disegnà a tou màpa!"
+        }
+    }
+}

@@ -681,9 +681,6 @@
             "highway/steps": {
                 "name": "Kāpnes"
             },
-            "highway/track": {
-                "name": "Meža ceļš"
-            },
             "highway/traffic_signals": {
                 "name": "Luksofors"
             },

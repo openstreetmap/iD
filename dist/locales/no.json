@@ -1,7 +1,7 @@
 {
     "modes": {
         "add_area": {
-            "title": "Areal",
+            "title": "Område",
             "description": "Legg til parker, bygninger, innsjøer eller andre området på kartet.",
             "tail": "Trykk på kartet for å starte og tegne et område, slik som en park, innsjø eller bygning."
         },
@@ -37,6 +37,9 @@
         "continue": {
             "key": "A",
             "title": "Fortsett",
+            "description": "Videreføre en linje.",
+            "not_eligible": "Ingen linje kan bli videreført her.",
+            "multiple": "Flere linjer kan videreføres her. For å velge en linje, hold Shift knappen og klikk på en linje for å velge den.",
             "annotation": {
                 "line": "Videreførte en linje.",
                 "area": "Videreførte et areal."
@@ -50,24 +53,43 @@
         },
         "circularize": {
             "title": "Gjør rund",
+            "description": {
+                "line": "Gjør denne linjen sirkulær.",
+                "area": "Gjør dette området sirkulært."
+            },
             "key": "O",
             "annotation": {
                 "line": "Laget en linje rund.",
                 "area": "Laget et areal rundt."
-            }
+            },
+            "not_closed": "Denne kan ikke bli sirkulær, for endene er ikke koblet.",
+            "too_large": "Denne kan ikke bli sirkulær fordi for lite av den er synlig.",
+            "connected_to_hidden": "Denne kan ikke bli sirkulær fordi den er koblet til en skjult egenskap."
         },
         "orthogonalize": {
+            "title": "Rett opp hjørner",
+            "description": {
+                "line": "Rett opp hjørner på denne linja.",
+                "area": "Rett opp hjørner i dette området."
+            },
             "key": "S",
             "annotation": {
                 "line": "Laget hjørnene på linjen vinkelrette.",
                 "area": "Laget hjørnene på arealet vinkelrette."
-            }
+            },
+            "not_squarish": "Denne kan ikke rettes opp fordi det er vanskelig å finne hjørner.",
+            "too_large": "Denne kan ikke rettes opp fordi kun noen deler er synlige.",
+            "connected_to_hidden": "Denne kan ikke rettes opp fordi den er knyttet til en skjult kartegenskap."
         },
         "straighten": {
-            "key": "S"
+            "title": "Gjør rett.",
+            "description": "Gjør denne linjen rett.",
+            "key": "S",
+            "annotation": "Gjorde en linje rett."
         },
         "delete": {
             "title": "Fjern",
+            "description": "Ta vekk objektet permanent.",
             "annotation": {
                 "point": "Fjern et punkt.",
                 "vertex": "Fjernet en node fra veien.",
@@ -98,7 +120,9 @@
         },
         "merge": {
             "title": "Knytt sammen",
+            "description": "Slå sammen disse kartegenskapene.",
             "key": "C",
+            "annotation": "{n} kartegenskaper er slått sammen.",
             "incomplete_relation": "Disse funksjonene kan ikke bli knyttet sammen fordi hvertfall én av dem er ikke ferdig nedlastet."
         },
         "move": {
@@ -147,6 +171,7 @@
         "localized_translation_language": "Velg språk",
         "localized_translation_name": "Navn"
     },
+    "zoom_in_edit": "Zoom inn for å redigere",
     "logout": "logg ut",
     "loading_auth": "Kobler til OpenStreetMap...",
     "commit": {
@@ -159,7 +184,22 @@
         "deleted": "Fjernet",
         "created": "Opprettet"
     },
+    "infobox": {
+        "geometry": "Geometri",
+        "closed": "lukket",
+        "center": "Senter",
+        "perimeter": "Perimeter",
+        "length": "Lengde",
+        "area": "Område",
+        "metric": "Metrisk"
+    },
+    "geometry": {
+        "point": "punkt",
+        "line": "linje",
+        "area": "område"
+    },
     "geocoder": {
+        "search": "Søk over hele verden...",
         "no_results_worldwide": "Ingen resultater funnet"
     },
     "geolocate": {
@@ -169,25 +209,103 @@
         "no_documentation_combination": "Det finnes ingen dokumentasjon for denne tag-kombinasjonen",
         "no_documentation_key": "Det finnes ingen dokumentasjon tilgjengelig for denne nøkkelen",
         "show_more": "Vis mer",
+        "all_fields": "Alle felter",
+        "all_tags": "Alle tagger",
         "all_members": "Alle medlemmer",
         "new_relation": "Ny relasjon...",
         "role": "Rolle",
         "choose": "Velg egenskapstype",
         "results": "{n} resultater for {search}",
+        "reference": "Les mere på OpenStreetMap Wiki",
         "back_tooltip": "Endre funksjon",
         "remove": "Fjern",
         "search": "Søk",
         "unknown": "Ukjent",
+        "feature_list": "Søkeegenskaper",
         "edit": "Endre funksjon",
+        "check": {
+            "yes": "Ja",
+            "no": "Nei"
+        },
+        "none": "Ingen",
+        "node": "Node",
         "way": "Vei",
         "relation": "Relasjon",
-        "location": "Sted"
+        "location": "Sted",
+        "add_fields": "Legg til felt:"
     },
     "background": {
         "title": "Bakgrunn",
         "description": "Bakgrunnsinnstillinger",
         "percent_brightness": "{opacity}% lysstyrke",
-        "reset": "tilbakestill"
+        "none": "Ingen",
+        "custom": "Egendefinert",
+        "custom_button": "Endre egendefinert bakgrunn",
+        "reset": "tilbakestill",
+        "minimap": {
+            "description": "Mini-kart"
+        }
+    },
+    "map_data": {
+        "data_layers": "Datalag",
+        "fill_area": "Fyll områder",
+        "map_features": "Kartegenskaper"
+    },
+    "feature": {
+        "points": {
+            "description": "Punkter",
+            "tooltip": "Interessepunkter"
+        },
+        "major_roads": {
+            "description": "Hovedveier",
+            "tooltip": "Motorveier, gater etc."
+        },
+        "minor_roads": {
+            "description": "Mindre veier",
+            "tooltip": "Skogveier, parkeringsveier, stier"
+        },
+        "paths": {
+            "description": "Stier",
+            "tooltip": "Fortau, gangveier, sykkelveier etc."
+        },
+        "buildings": {
+            "description": "Bygninger",
+            "tooltip": "Bygninger, skur, garasjer etc."
+        },
+        "landuse": {
+            "description": "Kartegenskaper for arealbruk"
+        },
+        "boundaries": {
+            "description": "Grenser",
+            "tooltip": "Administrative grenser"
+        },
+        "water": {
+            "description": "Vannrelaterte egenskaper",
+            "tooltip": "Elver, innsjøer, bekker, badedammer etc."
+        },
+        "rail": {
+            "description": "Jernbanerelaterte egenskaper",
+            "tooltip": "Jernbane"
+        },
+        "power": {
+            "description": "Kartegenskaper for kraftanlegg",
+            "tooltip": "Kraftlinjer, kraftverk etc."
+        },
+        "others": {
+            "description": "Andre",
+            "tooltip": "Alt annet"
+        }
+    },
+    "area_fill": {
+        "wireframe": {
+            "description": "Ingen fyll (wireframe)"
+        },
+        "partial": {
+            "description": "Delvis fylt"
+        },
+        "full": {
+            "description": "Helfylt"
+        }
     },
     "restore": {
         "heading": "Du har ulagrede endringer",
@@ -198,14 +316,26 @@
         "help": "Lagre endringene i OpenStreetMap, slik at de blir synlige for andre brukere.",
         "no_changes": "Ingen endringer å lagre.",
         "uploading": "Laster opp endringer til OpenStreetMap.",
-        "unsaved_changes": "Du har ulagrede endringer"
+        "unsaved_changes": "Du har ulagrede endringer",
+        "conflict": {
+            "previous": "< Forrige",
+            "next": "Neste >",
+            "keep_local": "Behold min",
+            "keep_remote": "Bruk de andre sin"
+        }
     },
     "success": {
+        "edited_osm": "Redigert OSM!",
         "just_edited": "Du har akkurat endret OpenStreetMap!",
         "view_on_osm": "Vis på OSM",
         "facebook": "Del på Facebook",
         "twitter": "Del på Twitter",
-        "google": "Del på Google+"
+        "google": "Del på Google+",
+        "help_link_text": "Detaljer"
+    },
+    "confirm": {
+        "okay": "OK",
+        "cancel": "Avbryt"
     },
     "splash": {
         "welcome": "Velkommen til iD OpenStreetMap editor",
@@ -242,6 +372,9 @@
             "title": "Navigasjon",
             "drag": "Hovedkartet viser data fra OpenstreetMap lagt over en bakgrunn. Du kan navigere ved å dra eller scrolle, slik som et vanlig nettkart. **Dra kartet!**"
         },
+        "points": {
+            "title": "Punkter"
+        },
         "areas": {
             "search": "**Søk etter '{name}'.**"
         },
@@ -252,31 +385,22 @@
     "presets": {
         "categories": {
             "category-building": {
-                "name": "Bygning"
+                "name": "Bygingsrelatert"
             },
             "category-golf": {
-                "name": "Golf"
-            },
-            "category-landuse": {
-                "name": "Arealbruk"
-            },
-            "category-path": {
-                "name": "Sti"
+                "name": "Golfrelatert"
             },
             "category-rail": {
-                "name": "Skinne"
+                "name": "Togsporrelaterte egenskaper"
             },
             "category-road": {
-                "name": "Vei"
-            },
-            "category-route": {
-                "name": "Rute"
+                "name": "Veirelatert"
             },
             "category-water-area": {
-                "name": "Vann"
+                "name": "Vannrelaterte egenskaper"
             },
             "category-water-line": {
-                "name": "Vann"
+                "name": "Vannrelaterte egenskaper"
             }
         },
         "fields": {
@@ -306,6 +430,7 @@
                         "title": "Tillatt"
                     }
                 },
+                "placeholder": "Ikke spesifisert",
                 "types": {
                     "bicycle": "Sykler",
                     "foot": "Fot",
@@ -313,11 +438,22 @@
                     "motor_vehicle": "Motorkjøretøy"
                 }
             },
+            "access_simple": {
+                "placeholder": "ja"
+            },
             "address": {
                 "label": "Adresse",
                 "placeholders": {
                     "city": "By",
-                    "street": "Gate"
+                    "conscriptionnumber": "123",
+                    "country": "Land",
+                    "hamlet": "Bosetning",
+                    "housenumber": "123",
+                    "place": "Sted",
+                    "postcode": "Postnummer",
+                    "state": "Stat",
+                    "street": "Gate",
+                    "suburb": "Forstad"
                 }
             },
             "admin_level": {
@@ -389,8 +525,20 @@
             "cuisine": {
                 "label": "Kjøkken"
             },
+            "cycleway": {
+                "options": {
+                    "none": {
+                        "title": "Ingen"
+                    }
+                }
+            },
             "description": {
                 "label": "Beskrivelse"
+            },
+            "electrified": {
+                "options": {
+                    "no": "Nei"
+                }
             },
             "elevation": {
                 "label": "Høyde over havet"
@@ -409,10 +557,39 @@
                 "label": "Avgift"
             },
             "fire_hydrant/type": {
-                "label": "Type"
+                "label": "Type",
+                "options": {
+                    "wall": "Vegg"
+                }
             },
             "fixme": {
                 "label": "Fiks meg"
+            },
+            "fuel": {
+                "label": "Drivstoff"
+            },
+            "fuel/biodiesel": {
+                "label": "Selger biodiesel"
+            },
+            "fuel/diesel": {
+                "label": "Selger diesel"
+            },
+            "fuel/e10": {
+                "label": "Selger E10"
+            },
+            "fuel/e85": {
+                "label": "Selger E85"
+            },
+            "fuel/lpg": {
+                "label": "Selger propangass"
+            },
+            "gender": {
+                "label": "Kjønn",
+                "options": {
+                    "female": "Hunkjønn",
+                    "male": "Hankjønn",
+                    "unisex": "Unisex"
+                }
             },
             "generator/method": {
                 "label": "Metode"
@@ -423,11 +600,17 @@
             "generator/type": {
                 "label": "Type"
             },
+            "handicap": {
+                "placeholder": "1-18"
+            },
             "highway": {
                 "label": "Type"
             },
             "historic": {
                 "label": "Type"
+            },
+            "hoops": {
+                "placeholder": "1, 2, 4..."
             },
             "iata": {
                 "label": "IATA"
@@ -438,15 +621,23 @@
             "incline": {
                 "label": "Stigning"
             },
+            "incline_steps": {
+                "options": {
+                    "down": "Ned",
+                    "up": "Opp"
+                }
+            },
             "information": {
                 "label": "Type"
             },
             "internet_access": {
                 "label": "Internettilgang",
                 "options": {
+                    "no": "Nei",
                     "terminal": "Terminal",
                     "wired": "Kablet",
-                    "wlan": "Trådløs"
+                    "wlan": "Trådløs",
+                    "yes": "Ja"
                 }
             },
             "landuse": {
@@ -493,10 +684,18 @@
                 "label": "Type"
             },
             "oneway": {
-                "label": "Enveis"
+                "label": "Enveis",
+                "options": {
+                    "no": "Nei",
+                    "yes": "Ja"
+                }
             },
             "oneway_yes": {
-                "label": "Enveis"
+                "label": "Enveis",
+                "options": {
+                    "no": "Nei",
+                    "yes": "Ja"
+                }
             },
             "opening_hours": {
                 "label": "Timer"
@@ -508,7 +707,11 @@
                 "label": "Park & Ride"
             },
             "parking": {
-                "label": "Type"
+                "label": "Type",
+                "options": {
+                    "sheds": "Skur/utebod",
+                    "surface": "Overflate"
+                }
             },
             "phone": {
                 "label": "Telefon",
@@ -544,6 +747,18 @@
             "service": {
                 "label": "Type"
             },
+            "service/bicycle/chain_tool": {
+                "options": {
+                    "no": "Nei",
+                    "yes": "Ja"
+                }
+            },
+            "service/bicycle/pump": {
+                "options": {
+                    "no": "Nei",
+                    "yes": "Ja"
+                }
+            },
             "shelter_type": {
                 "label": "Type"
             },
@@ -572,6 +787,12 @@
             },
             "surface": {
                 "label": "Overflate"
+            },
+            "takeaway": {
+                "options": {
+                    "no": "Nei",
+                    "yes": "Ja"
+                }
             },
             "tourism": {
                 "label": "Type"
@@ -1034,6 +1255,9 @@
             },
             "place/city": {
                 "name": "By"
+            },
+            "place/hamlet": {
+                "name": "Bosetning"
             },
             "place/island": {
                 "name": "Øy"

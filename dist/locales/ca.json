@@ -493,8 +493,6 @@
         "browse": "Buscar el fitxer .gpx"
     },
     "mapillary": {
-        "tooltip": "Fotografies a peu de carrer de Mapillary",
-        "title": "Capa de fotografia (Mapillary)",
         "view_on_mapillary": "Visualitzeu la imatge a Mapillary"
     },
     "help": {
@@ -570,38 +568,6 @@
         }
     },
     "presets": {
-        "categories": {
-            "category-building": {
-                "name": "Edifici"
-            },
-            "category-golf": {
-                "name": "Golf"
-            },
-            "category-landuse": {
-                "name": "Aprofitament del terreny"
-            },
-            "category-path": {
-                "name": "Sender"
-            },
-            "category-rail": {
-                "name": "Rail"
-            },
-            "category-restriction": {
-                "name": "Restricció"
-            },
-            "category-road": {
-                "name": "Carretera"
-            },
-            "category-route": {
-                "name": "Ruta"
-            },
-            "category-water-area": {
-                "name": "Aigua"
-            },
-            "category-water-line": {
-                "name": "Aigua"
-            }
-        },
         "fields": {
             "access": {
                 "label": "Accés permès",
@@ -2414,10 +2380,6 @@
                 "name": "Enllaç de carretera terciària",
                 "terms": "Enllaç amb terciària"
             },
-            "highway/track": {
-                "name": "Pista",
-                "terms": "Pista, Traça, Camí"
-            },
             "highway/traffic_signals": {
                 "name": "Semàfors",
                 "terms": "Senyals de trànsit, Senyals de tràfic"
@@ -3075,9 +3037,6 @@
             },
             "shop/antiques": {
                 "name": "Botiga d'antiguitats"
-            },
-            "shop/art": {
-                "name": "Galeria d'art"
             },
             "shop/baby_goods": {
                 "name": "Botiga per a nadons"

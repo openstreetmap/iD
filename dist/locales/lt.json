@@ -485,8 +485,6 @@
         "browse": "Naršyti .gpx failo"
     },
     "mapillary": {
-        "tooltip": "Gatvių-lygio nuotraukos iš Mapillary",
-        "title": "Nuotraukų perdanga (Mapillary)",
         "view_on_mapillary": "Žiūrėti šią nuotrauką per Mapillary"
     },
     "help": {
@@ -532,38 +530,6 @@
         }
     },
     "presets": {
-        "categories": {
-            "category-building": {
-                "name": "Pastatas"
-            },
-            "category-golf": {
-                "name": "Golfas"
-            },
-            "category-landuse": {
-                "name": "Žemėnauda"
-            },
-            "category-path": {
-                "name": "Takas"
-            },
-            "category-rail": {
-                "name": "Geležinkelis"
-            },
-            "category-restriction": {
-                "name": "Apribojimas"
-            },
-            "category-road": {
-                "name": "Kelias"
-            },
-            "category-route": {
-                "name": "Maršrutas"
-            },
-            "category-water-area": {
-                "name": "Vanduo"
-            },
-            "category-water-line": {
-                "name": "Vanduo"
-            }
-        },
         "fields": {
             "access": {
                 "label": "Leidžiamas priėjimas",
@@ -2128,10 +2094,6 @@
                 "name": "Gatvė lempa",
                 "terms": "lempa,žibintas,gatvės žibintas"
             },
-            "highway/track": {
-                "name": "Kelias",
-                "terms": "kelias"
-            },
             "highway/traffic_signals": {
                 "name": "Eismo signala",
                 "terms": "šviesoforas"
@@ -2725,10 +2687,6 @@
             "shop/antiques": {
                 "name": "Atikvarų parduotuvė",
                 "terms": "antikvariatas"
-            },
-            "shop/art": {
-                "name": "Meno galerija",
-                "terms": "meno galerija,galerija"
             },
             "shop/baby_goods": {
                 "name": "Vaikų prekių parduotuvė"

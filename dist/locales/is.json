@@ -366,7 +366,6 @@
         "browse": "Finna .gpx skrá"
     },
     "mapillary": {
-        "title": "Ljósmyndaþekja (Mapillary)",
         "view_on_mapillary": "Skoða þessa mynd á Mapillary"
     },
     "help": {
@@ -407,38 +406,6 @@
         }
     },
     "presets": {
-        "categories": {
-            "category-building": {
-                "name": "Bygging"
-            },
-            "category-golf": {
-                "name": "Golf"
-            },
-            "category-landuse": {
-                "name": "Landnotkun"
-            },
-            "category-path": {
-                "name": "Stígur"
-            },
-            "category-rail": {
-                "name": "Lestarteinar"
-            },
-            "category-restriction": {
-                "name": "Takmörkun"
-            },
-            "category-road": {
-                "name": "Vegur"
-            },
-            "category-route": {
-                "name": "Leið"
-            },
-            "category-water-area": {
-                "name": "Vatn"
-            },
-            "category-water-line": {
-                "name": "Vatn"
-            }
-        },
         "fields": {
             "access": {
                 "options": {
@@ -1299,9 +1266,6 @@
             },
             "highway/tertiary_link": {
                 "name": "Safnbrautarrein"
-            },
-            "highway/track": {
-                "name": "Slóð"
             },
             "highway/traffic_signals": {
                 "name": "Umferðarskilti"

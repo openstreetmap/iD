@@ -494,8 +494,6 @@
         "browse": "Procurar por ficheiro .gpx"
     },
     "mapillary": {
-        "tooltip": "Fotos ao nível da rua de Mapillary",
-        "title": "Sobreposição de foto (Mapillary)",
         "view_on_mapillary": "Ver esta imagem no Mapillary"
     },
     "help": {
@@ -592,38 +590,6 @@
         }
     },
     "presets": {
-        "categories": {
-            "category-building": {
-                "name": "Edifício"
-            },
-            "category-golf": {
-                "name": "Golfe"
-            },
-            "category-landuse": {
-                "name": "Uso do solo"
-            },
-            "category-path": {
-                "name": "Caminho"
-            },
-            "category-rail": {
-                "name": "Ferrovia"
-            },
-            "category-restriction": {
-                "name": "Restrição"
-            },
-            "category-road": {
-                "name": "Estrada"
-            },
-            "category-route": {
-                "name": "Rota"
-            },
-            "category-water-area": {
-                "name": "Água"
-            },
-            "category-water-line": {
-                "name": "Água"
-            }
-        },
         "fields": {
             "access": {
                 "label": "Acesso autorizado",
@@ -2596,10 +2562,6 @@
                 "name": "Ligação a uma estrada terciária",
                 "terms": "Tertiary Link, Ligação Estrada Municipal, Ligação Rodovia Municipal, Ligação Municipal,  Ligação Estrada Terciária, Entrada Estrada Municipal, Entrada Rodovia Municipal, Entrada Municipal, Entrada Estrada Terciária, Saída Municipal, Saída Rodovia Municipal, Saída Municipal, Saída Estrada Municipal"
             },
-            "highway/track": {
-                "name": "Estrada florestal / agrícola",
-                "terms": "Track, Estrada Rural, Carreiro, Carreiro Florestal"
-            },
             "highway/traffic_signals": {
                 "name": "Semáforos",
                 "terms": "Semáforo, Vermelho, Verde, Amarelo, Sinal, Sinal de Trânsito"
@@ -3367,10 +3329,6 @@
             "shop/antiques": {
                 "name": "Loja de antiguidades",
                 "terms": "Antiques Shop, Antiguidade, Antiguidades, Antigo, Relíquia, Relíquias"
-            },
-            "shop/art": {
-                "name": "Galeria de arte",
-                "terms": "Art Gallery, Art Shop, Exposição"
             },
             "shop/baby_goods": {
                 "name": "Loja de acessórios para bebés",

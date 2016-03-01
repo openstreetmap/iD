@@ -493,8 +493,6 @@
         "browse": "浏览GPX文件"
     },
     "mapillary": {
-        "tooltip": "Mapillary的街道照片",
-        "title": "照片叠加层(Mapillary)",
         "view_on_mapillary": "在Mapillary上查看这张图片"
     },
     "help": {
@@ -591,38 +589,6 @@
         }
     },
     "presets": {
-        "categories": {
-            "category-building": {
-                "name": "建筑物"
-            },
-            "category-golf": {
-                "name": "高尔夫球"
-            },
-            "category-landuse": {
-                "name": "土地使用"
-            },
-            "category-path": {
-                "name": "小径"
-            },
-            "category-rail": {
-                "name": "铁轨"
-            },
-            "category-restriction": {
-                "name": "限制"
-            },
-            "category-road": {
-                "name": "道路"
-            },
-            "category-route": {
-                "name": "线路"
-            },
-            "category-water-area": {
-                "name": "水"
-            },
-            "category-water-line": {
-                "name": "水"
-            }
-        },
         "fields": {
             "access": {
                 "label": "通行规则",
@@ -2423,10 +2389,6 @@
                 "name": "三级道路匝道",
                 "terms": "三级道路匝道"
             },
-            "highway/track": {
-                "name": "小路",
-                "terms": "未铺设路面的车径"
-            },
             "highway/traffic_signals": {
                 "name": "交通信号灯",
                 "terms": "红绿灯"
@@ -3085,10 +3047,6 @@
             },
             "shop/antiques": {
                 "name": "古董店"
-            },
-            "shop/art": {
-                "name": "画廊",
-                "terms": "美术馆,艺术馆"
             },
             "shop/baby_goods": {
                 "name": "婴儿用品店",

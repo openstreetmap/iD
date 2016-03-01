@@ -450,8 +450,6 @@
         "browse": "Vali .gpx fail"
     },
     "mapillary": {
-        "tooltip": "Tänava-tasandi fotod Mapillary'st",
-        "title": "Foto-pealiskiht (Mapillary)",
         "view_on_mapillary": "Vaata seda fotot Mapillary's"
     },
     "help": {
@@ -484,38 +482,6 @@
         }
     },
     "presets": {
-        "categories": {
-            "category-building": {
-                "name": "Hoone"
-            },
-            "category-golf": {
-                "name": "Golf"
-            },
-            "category-landuse": {
-                "name": "Maakasutus"
-            },
-            "category-path": {
-                "name": "Rada (path)"
-            },
-            "category-rail": {
-                "name": "Raudtee"
-            },
-            "category-restriction": {
-                "name": "Piirang"
-            },
-            "category-road": {
-                "name": "Tee"
-            },
-            "category-route": {
-                "name": "Teekond"
-            },
-            "category-water-area": {
-                "name": "Vesi"
-            },
-            "category-water-line": {
-                "name": "Vesi"
-            }
-        },
         "fields": {
             "access": {
                 "label": "Lubatud ligipääs",
@@ -1491,9 +1457,6 @@
             },
             "shop/alcohol": {
                 "name": "Alkoholipood"
-            },
-            "shop/art": {
-                "name": "Kunstigalerii"
             },
             "shop/bakery": {
                 "name": "Pagariäri"

@@ -96,7 +96,7 @@
             "key": "S",
             "annotation": "Lijn rechtgetrokken.",
             "too_bendy": "Dit kan niet rechtgetrokken worden omdat het te veel kromt.",
-            "connected_to_hidden": "Deze lijn kan niet recht worden gemaakt omdat ze verbonden is met een verborgen object."
+            "connected_to_hidden": "Deze lijn kan niet rechtgemaakt worden omdat ze verbonden is met een verborgen object."
         },
         "delete": {
             "title": "Verwijder",
@@ -133,7 +133,8 @@
             "key": "D",
             "annotation": "Lijnen/vlakken losgemaakt.",
             "not_connected": "Er zijn hier niet genoeg lijnen/vlakken om los te maken.",
-            "connected_to_hidden": "Dit kan niet losgemaakt worden omdat het verbonden is met een verborgen object."
+            "connected_to_hidden": "Dit kan niet losgemaakt worden omdat het verbonden is met een verborgen object.",
+            "relation": "Dit kan niet losgemaakt worden omdat het leden van een relatie verbindt."
         },
         "merge": {
             "title": "Voeg samen",
@@ -324,10 +325,12 @@
         "description": "Achtergrondinstellingen",
         "percent_brightness": "Helderheid: {opacity}%",
         "none": "Geen",
+        "best_imagery": "Beste bekende afbeeldingsbron voor deze locatie",
         "custom": "Aangepast",
         "custom_button": "Aangepaste achtergrond aanpassen",
         "custom_prompt": "Voeg een tegel-URL-sjabloon toe. Geldige placeholders zijn {z}, {x}, {y} voor het Z/X/Y-schema en {u} voor het quadtile-schema.",
         "fix_misalignment": "Repareer de ligging",
+        "imagery_source_faq": "Waar komen deze afbeeldingen vandaan? (Engels)",
         "reset": "Standaard herstellen",
         "minimap": {
             "description": "Minikaart",
@@ -498,9 +501,15 @@
         "zoom": "GPX-route in beeld brengen",
         "browse": "Blader naar een .gpx-bestand"
     },
-    "mapillary": {
+    "mapillary_images": {
         "tooltip": "Foto's op straatniveau van Mapillary",
-        "title": "Foto Overheen Leggen (Mapillary)",
+        "title": "Foto-laag (Mapillary)"
+    },
+    "mapillary_signs": {
+        "tooltip": "Verkeerslichten uit Mapillary",
+        "title": "Herkende-verkeersborden-laag (Mapillary)"
+    },
+    "mapillary": {
         "view_on_mapillary": "Bekijk deze afbeelding op Mapillary"
     },
     "help": {
@@ -599,34 +608,34 @@
     "presets": {
         "categories": {
             "category-building": {
-                "name": "Gebouw"
+                "name": "Gebouwobjecten"
             },
             "category-golf": {
-                "name": "Golf"
+                "name": "Golfobjecten"
             },
             "category-landuse": {
-                "name": "Landgebruik"
+                "name": "Landgebruikobjecten"
             },
             "category-path": {
-                "name": "Pad"
+                "name": "Pad-objecten"
             },
             "category-rail": {
-                "name": "Spoor"
+                "name": "Spoorwegobjecten"
             },
             "category-restriction": {
-                "name": "Beperking"
+                "name": "Beperkingsobjecten"
             },
             "category-road": {
-                "name": "Weg"
+                "name": "Weg-objecten"
             },
             "category-route": {
-                "name": "Route"
+                "name": "Routeobjecten"
             },
             "category-water-area": {
-                "name": "Waterbekkens"
+                "name": "Waterobjecten"
             },
             "category-water-line": {
-                "name": "Waterloop"
+                "name": "Waterloopobjecten"
             }
         },
         "fields": {
@@ -1351,7 +1360,7 @@
                 }
             },
             "service_rail": {
-                "label": "Type Dienstspoor",
+                "label": "Type dienstspoor",
                 "options": {
                     "crossover": "Wisselspoor",
                     "siding": "Zijspoor",
@@ -1366,6 +1375,9 @@
                 "label": "Type"
             },
             "shop": {
+                "label": "Type"
+            },
+            "site": {
                 "label": "Type"
             },
             "sloped_curb": {
@@ -2145,7 +2157,7 @@
                 "terms": "school, onderwijs, secundair onderwijs, lager onderwijs, basisschool, middelbaar, voortgezet onderwijs"
             },
             "building/semidetached_house": {
-                "name": "NIET GEBRUIKEN - Koppelwoninghelft"
+                "name": "Verworpen tag, gebruik dit niet"
             },
             "building/shed": {
                 "name": "Schuurtje",
@@ -2525,7 +2537,7 @@
                 "name": "Verbinding van tertiaire weg"
             },
             "highway/track": {
-                "name": "Veldweg"
+                "name": "Veld- of bosweg"
             },
             "highway/traffic_signals": {
                 "name": "Verkeerslichten",
@@ -3143,16 +3155,16 @@
                 "name": "Stopplaats"
             },
             "railway": {
-                "name": "Spoorwegemplacement",
-                "terms": "spoorweg"
+                "name": "Spoorweg",
+                "terms": "sporen,treinspoor,rails,treinrails"
             },
             "railway/abandoned": {
-                "name": "Verloederde spoorbaan",
-                "terms": "in onbruik geraakte spoorbaan,ongebruikte spoorweg,oude spoorweg,voormalige spoorweg"
+                "name": "Voormalige spoorweg (sporen weggehaald)",
+                "terms": "in onbruik geraakte spoorbaan,ongebruikte spoorweg,oude spoorweg,voormalige spoorweg,rails,oude rails,sporen,oude sporen,oude treinroute,treinroute,ongebruikte spoorweg,verloederde spoorweg"
             },
             "railway/disused": {
-                "name": "Ongebruikte spoorweg",
-                "terms": "in onbruik geraakte spoorbaan,verloederde spoorweg,oude spoorweg,voormalige spoorweg"
+                "name": "Ongebruikte spoorweg (sporen nog aanwezig)",
+                "terms": "in onbruik geraakte spoorbaan,verloederde spoorweg,oude spoorweg,voormalige spoorweg,rails,oude rails,sporen,oude sporen,oude treinroute,treinroute,voormalige spoorweg,verloederde spoorweg"
             },
             "railway/funicular": {
                 "name": "Kabelspoorweg",
@@ -3160,11 +3172,11 @@
             },
             "railway/halt": {
                 "name": "Treinhalte",
-                "terms": "treinhalte,strainstation,treinstop,stop,halte,station"
+                "terms": "treinstation,treinstop,stop,halte,station"
             },
             "railway/level_crossing": {
                 "name": "Spoorwegovergang",
-                "terms": "overweg"
+                "terms": "overweg,spooroverweg,treinkruising,treinsporen"
             },
             "railway/monorail": {
                 "name": "Monorail",
@@ -3176,7 +3188,7 @@
             },
             "railway/platform": {
                 "name": "Spoorperron",
-                "terms": "spoorwegperron"
+                "terms": "spoorwegperron,treinperron,tramperron,metroperron"
             },
             "railway/rail": {
                 "name": "Spoorweg",
@@ -3223,8 +3235,8 @@
                 "terms": "antiek, winkel"
             },
             "shop/art": {
-                "name": "Kunstgalerie",
-                "terms": "galerij, kunstgalerij, galerie, tentoonstelling, exposé"
+                "name": "Kunstwinkel",
+                "terms": "galerij,kunstgalerij,galerie,kunstgalerie,tentoonstelling"
             },
             "shop/baby_goods": {
                 "name": "Babyartikelenwinkel",
@@ -3527,6 +3539,9 @@
             "shop/stationery": {
                 "name": "Kantoorboekhandel"
             },
+            "shop/storage_rental": {
+                "name": "Verworpen tag, gebruik dit niet"
+            },
             "shop/supermarket": {
                 "name": "Supermarkt",
                 "terms": "supermarkt, grootwarenhuis"
@@ -3613,6 +3628,10 @@
             "tourism/chalet": {
                 "name": "Chalet",
                 "terms": "chalet,vakantiehuis,vakantiehuisje,huisje,bungalow"
+            },
+            "tourism/gallery": {
+                "name": "Kunstgallerij",
+                "terms": "tentoonstelling,exposé,gallerij,kunstgallerie,gallerie"
             },
             "tourism/guest_house": {
                 "name": "Pension",
@@ -3738,6 +3757,9 @@
             },
             "type/route_master": {
                 "name": "Lijn"
+            },
+            "type/site": {
+                "name": "Site"
             },
             "vertex": {
                 "name": "Overige"

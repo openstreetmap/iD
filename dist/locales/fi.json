@@ -245,7 +245,9 @@
         "warnings": "Varoitukset",
         "modified": "Muokattu",
         "deleted": "Poistettu",
-        "created": "Luotu"
+        "created": "Luotu",
+        "about_changeset_comments": "Tietoja muutoskokoelman kommenteista",
+        "about_changeset_comments_link": "//wiki.openstreetmap.org/wiki/Good_changeset_comments"
     },
     "contributors": {
         "list": "Muokkaajat {users}",
@@ -317,10 +319,12 @@
         "description": "Taustan asetukset",
         "percent_brightness": "{opacity}% kirkkaus",
         "none": "Ei taustaa",
+        "best_imagery": "Paras ilmakuvalähde tälle sijainnille",
         "custom": "Mukautettu",
         "custom_button": "Muokkaa omaa taustaa",
         "custom_prompt": "Kirjoita tiilen verkko-osoitemallinne. Kelvollisia merkkejä ovat {z}, {x}, {y} Z/X/Y-skeemalle ja {u} quadtile-skeemalle.",
         "fix_misalignment": "Korjaa ilmakuvavirhe",
+        "imagery_source_faq": "Mikä on tämän ilmakuvan lähde?",
         "reset": "palauta",
         "minimap": {
             "description": "Pienoiskartta",
@@ -442,7 +446,9 @@
         "view_on_osm": "Näytä OSM-kartalla",
         "facebook": "Jaa Facebookissa",
         "twitter": "Jaa Twitterissä",
-        "google": "Jaa Google+-palvelussa"
+        "google": "Jaa Google+-palvelussa",
+        "help_html": "Karttaan tehdyt muutokset ilmestyvät perinteiseen karttanäkymään muutaman minuutin kuluessa. Joidenkin ominaisuuksien ilmestyminen kartalle ja muutokset joihinkin karttanäkymiin voivat viedä kauemmin.",
+        "help_link_text": "Tiedot"
     },
     "confirm": {
         "okay": "OK",
@@ -487,9 +493,15 @@
         "zoom": "Lähennä GPX-reittiin",
         "browse": "Selaa GPX-tiedostoja"
     },
+    "mapillary_images": {
+        "tooltip": "Katunäkymäkuvat (Mapillary)",
+        "title": "Valokuvat kartalla (Mapillary)"
+    },
+    "mapillary_signs": {
+        "tooltip": "Liikennemerkit (Mapillary)",
+        "title": "Liikennemerkit kartalla (Mapillary)"
+    },
     "mapillary": {
-        "tooltip": "Mapillaryn toimittamat katutasokuvat",
-        "title": "Kuvakerros (Mapillary)",
         "view_on_mapillary": "Näytä tämä kuva Mapillary-palvelussa"
     },
     "help": {
@@ -585,38 +597,6 @@
         }
     },
     "presets": {
-        "categories": {
-            "category-building": {
-                "name": "Rakennus"
-            },
-            "category-golf": {
-                "name": "Golf"
-            },
-            "category-landuse": {
-                "name": "Maankäyttö"
-            },
-            "category-path": {
-                "name": "Kevyenliikenteenväylä"
-            },
-            "category-rail": {
-                "name": "Rautatie"
-            },
-            "category-restriction": {
-                "name": "Rajoitus"
-            },
-            "category-road": {
-                "name": "Tie"
-            },
-            "category-route": {
-                "name": "Reitti"
-            },
-            "category-water-area": {
-                "name": "Vesi"
-            },
-            "category-water-line": {
-                "name": "Vesi"
-            }
-        },
         "fields": {
             "access": {
                 "label": "Käyttöoikeus",
@@ -2311,9 +2291,6 @@
             "highway/tertiary_link": {
                 "name": "Yhdystien ramppi"
             },
-            "highway/track": {
-                "name": "Metsätie"
-            },
             "highway/traffic_signals": {
                 "name": "Liikennevalot"
             },
@@ -2675,7 +2652,8 @@
                 "terms": "tilintarkastus, tilintarkastaja, kirjanpito, kirjanpitäjä, kirjanpitotoimisto"
             },
             "office/administrative": {
-                "name": "Hallinnon toimisto"
+                "name": "Kunnallishallinnon toimisto",
+                "terms": "kunta, paikkakunta, paikallinen, paikallis, seutu, seudullinen, kaupunki, kaupungin, kunnan, kunnallinen, toimisto, hallinto, hallitus"
             },
             "office/architect": {
                 "name": "Arkkitehtitoimisto"
@@ -2698,7 +2676,8 @@
                 "name": "Taloustoimisto"
             },
             "office/government": {
-                "name": "Hallinnon toimisto"
+                "name": "Valtionhallinnon toimisto",
+                "terms": "valtio, valtion, osavaltio, osavaltion, lääni, läänin, seutu, seudullinen, valtiollinen, läänillinen, kunnan, toimisto, hallinto, hallitus"
             },
             "office/insurance": {
                 "name": "Vakuutustoimisto",
@@ -2884,9 +2863,6 @@
             },
             "shop/antiques": {
                 "name": "Antiikkiliike"
-            },
-            "shop/art": {
-                "name": "Taidegalleria"
             },
             "shop/baby_goods": {
                 "name": "Vauvatarvikeliike",

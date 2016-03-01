@@ -359,35 +359,6 @@
         }
     },
     "presets": {
-        "categories": {
-            "category-building": {
-                "name": "屋宇"
-            },
-            "category-golf": {
-                "name": "哥夫球"
-            },
-            "category-landuse": {
-                "name": "用地"
-            },
-            "category-path": {
-                "name": "徑"
-            },
-            "category-rail": {
-                "name": "軌道"
-            },
-            "category-road": {
-                "name": "路"
-            },
-            "category-route": {
-                "name": "路綫"
-            },
-            "category-water-area": {
-                "name": "水"
-            },
-            "category-water-line": {
-                "name": "水"
-            }
-        },
         "fields": {
             "access": {
                 "options": {
@@ -1294,10 +1265,6 @@
             "highway/tertiary_link": {
                 "name": "細路駁路",
                 "terms": "Tertiary Link,三級道路匝道,三級道路連接路,細路駁路"
-            },
-            "highway/track": {
-                "name": "分徑",
-                "terms": "Track,分徑,未舖設路面的車徑,未鋪設路面的車徑"
             },
             "highway/traffic_signals": {
                 "name": "紅綠燈",

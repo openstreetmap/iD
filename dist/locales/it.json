@@ -30,7 +30,7 @@
         "add": {
             "annotation": {
                 "point": "Aggiunto un punto.",
-                "vertex": "Aggiunto un punto ad una linea.",
+                "vertex": "Aggiunto un nodo ad una strada.",
                 "relation": "Aggiunta una relazione."
             }
         },
@@ -133,7 +133,8 @@
             "key": "D",
             "annotation": "Linee disconnesse.",
             "not_connected": "Non ci sono sufficienti linee/aree da disconnettere.",
-            "connected_to_hidden": "Questo elemento non può essere staccato perché è connesso ad un elemento nascosto."
+            "connected_to_hidden": "Questo elemento non può essere staccato perché è connesso ad un elemento nascosto.",
+            "relation": "Questo elemento non può essere staccato perché connette dei membri di una relazione."
         },
         "merge": {
             "title": "Unisci",
@@ -324,10 +325,12 @@
         "description": "Impostazioni dello sfondo",
         "percent_brightness": "{opacity}% luminosità",
         "none": "Nessuno",
+        "best_imagery": "Migliore sorgente di immagini per questo luogo",
         "custom": "Personalizzato",
         "custom_button": "Modifica sfondo personalizzato",
         "custom_prompt": "Inserisci l'URL dello schema dei tasselli. Valori validi sono {z}, {x}, {y} per lo schema Z/X/Y e {u} per lo schema QuadTile.",
         "fix_misalignment": "Allinea",
+        "imagery_source_faq": "Da dove vengono queste immagini?",
         "reset": "reset",
         "minimap": {
             "description": "Minimappa",
@@ -498,9 +501,15 @@
         "zoom": "Zoom su traccia GPX",
         "browse": "Scegli un file .gpx"
     },
-    "mapillary": {
+    "mapillary_images": {
         "tooltip": "Fotografie stradali da Mapillary",
-        "title": "Livello Foto (Mapillary)",
+        "title": "Livello Foto (Mapillary)"
+    },
+    "mapillary_signs": {
+        "tooltip": "Segnali stradali da Mapillary",
+        "title": "Livello Segnali Stradali (Mapillary)"
+    },
+    "mapillary": {
         "view_on_mapillary": "Guarda questa immagine su Mapillary"
     },
     "help": {
@@ -599,7 +608,7 @@
     "presets": {
         "categories": {
             "category-building": {
-                "name": "Edificio"
+                "name": "Edifici"
             },
             "category-golf": {
                 "name": "Golf"
@@ -608,19 +617,19 @@
                 "name": "Utilizzi del terreno"
             },
             "category-path": {
-                "name": "Percorso"
+                "name": "Sentieri"
             },
             "category-rail": {
-                "name": "Ferrovia"
+                "name": "Ferrovie"
             },
             "category-restriction": {
-                "name": "Limitazione"
+                "name": "Limitazioni"
             },
             "category-road": {
-                "name": "Strada"
+                "name": "Strade"
             },
             "category-route": {
-                "name": "Percorso"
+                "name": "Percorsi"
             },
             "category-water-area": {
                 "name": "Specchi d'acqua"
@@ -1367,6 +1376,9 @@
             "shop": {
                 "label": "Tipo"
             },
+            "site": {
+                "label": "Tipo"
+            },
             "sloped_curb": {
                 "label": "Cordolo inclinato"
             },
@@ -1709,7 +1721,8 @@
                 "terms": "evento,sala comune"
             },
             "amenity/compressed_air": {
-                "name": "Aria Compressa"
+                "name": "Aria Compressa",
+                "terms": "Aria Compressa"
             },
             "amenity/courthouse": {
                 "name": "Tribunale",
@@ -2199,6 +2212,9 @@
                 "name": "Magazzino",
                 "terms": "magazzino,ripostiglio,rimessa"
             },
+            "craft": {
+                "name": "Mestiere"
+            },
             "craft/basket_maker": {
                 "name": "Cestaio"
             },
@@ -2567,8 +2583,8 @@
                 "terms": "Svincolo terziario"
             },
             "highway/track": {
-                "name": "Strada ad uso agricolo / forestale",
-                "terms": "Strada Sterrata"
+                "name": "Tracciato stradale non manutenuto",
+                "terms": "strada sterrata,strada forestale,strada agricola,abbandonata,fuoristrada,4x4,quattro ruote motrici,quad,atv,jeep"
             },
             "highway/traffic_signals": {
                 "name": "Semaforo",
@@ -3341,7 +3357,7 @@
             },
             "shop/art": {
                 "name": "Negozio di opere d'arte",
-                "terms": "opere d'arte,quadri,sculture,galleria"
+                "terms": "opere d'arte,quadri,sculture,galleria,art*"
             },
             "shop/bag": {
                 "name": "Negozio di borse e valigie",
@@ -3349,7 +3365,7 @@
             },
             "shop/bakery": {
                 "name": "Panificio",
-                "terms": "Panificio"
+                "terms": "panificio,forno,panetteria,pane,fornaio"
             },
             "shop/bathroom_furnishing": {
                 "name": "Negozio di Prodotti per Bagno"
@@ -3658,6 +3674,10 @@
                 "name": "Negozio di cancelleria",
                 "terms": "Cartoleria"
             },
+            "shop/storage_rental": {
+                "name": "Noleggio",
+                "terms": "noleggio"
+            },
             "shop/supermarket": {
                 "name": "Supermercato",
                 "terms": "bazar,boutique,negozio,discount,mercato delle pulci,galleria,centro commerciale,mercato,outlet,chiosco,supermercato,negozio dell'usato"
@@ -3756,6 +3776,10 @@
             "tourism/chalet": {
                 "name": "Chalet",
                 "terms": " Casetta (chalet) "
+            },
+            "tourism/gallery": {
+                "name": "Galleria d'arte",
+                "terms": "opere d'arte,quadri,sculture,galleria,fotografie,dipinti,art*"
             },
             "tourism/guest_house": {
                 "name": "Affittacamere",
@@ -3908,6 +3932,10 @@
             "type/route_master": {
                 "name": "Percorso Principale",
                 "terms": "Route Master"
+            },
+            "type/site": {
+                "name": "Luogo",
+                "terms": "area,zona,sito,posto"
             },
             "vertex": {
                 "name": "Altro",

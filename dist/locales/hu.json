@@ -133,7 +133,8 @@
             "key": "D",
             "annotation": "Vonalak/területek szétkapcsolva.",
             "not_connected": "Nincsenek szétkapcsolható vonalak/területek.",
-            "connected_to_hidden": "Nem kapcsolható szét, mert egy rejtett elemhez csatlakozik."
+            "connected_to_hidden": "Nem kapcsolható szét, mert egy rejtett elemhez csatlakozik.",
+            "relation": "Nem kapcsolható szét, mert egy kapcsolat tagjait köti össze."
         },
         "merge": {
             "title": "Egyesítés",
@@ -324,10 +325,12 @@
         "description": "Háttérbeállítások",
         "percent_brightness": "{opacity}% fényerő",
         "none": "Nincs",
+        "best_imagery": "Legjobb ismert légifeltétel ehhez a helyszínhez",
         "custom": "Egyéni",
         "custom_button": "Egyedi háttér szerkesztése",
         "custom_prompt": "Adj meg egy csempe URL sablont. Érvényes tokenek: {z}, {x}, {y} a Z/X/Y rendszerű URL-ekhez és {u} a kvadratikusakhoz.",
         "fix_misalignment": "Eltolódás korrigálása",
+        "imagery_source_faq": "Honnan jön ez a légifelvétel?",
         "reset": "visszavonás",
         "minimap": {
             "description": "Minitérkép",
@@ -499,8 +502,6 @@
         "browse": ".gpx fájl tallózása"
     },
     "mapillary": {
-        "tooltip": "Utcafotók a Mapillary-ból",
-        "title": "Fotó réteg (Mapillary)",
         "view_on_mapillary": "E kép megtekintése a Mapillary weboldalon"
     },
     "help": {
@@ -597,38 +598,6 @@
         }
     },
     "presets": {
-        "categories": {
-            "category-building": {
-                "name": "Épület"
-            },
-            "category-golf": {
-                "name": "Golf"
-            },
-            "category-landuse": {
-                "name": "Területfunkció"
-            },
-            "category-path": {
-                "name": "Ösvény"
-            },
-            "category-rail": {
-                "name": "Vasút"
-            },
-            "category-restriction": {
-                "name": "Korlátozás"
-            },
-            "category-road": {
-                "name": "Út"
-            },
-            "category-route": {
-                "name": "Útvonal"
-            },
-            "category-water-area": {
-                "name": "Víz"
-            },
-            "category-water-line": {
-                "name": "Víz"
-            }
-        },
         "fields": {
             "access": {
                 "label": "Engedélyezett behajtás",
@@ -1366,6 +1335,9 @@
                 "label": "Típus"
             },
             "shop": {
+                "label": "Típus"
+            },
+            "site": {
                 "label": "Típus"
             },
             "sloped_curb": {
@@ -2601,10 +2573,6 @@
                 "name": "Bekötőút felhajtó",
                 "terms": "Harmadrendű főút csatlakozás"
             },
-            "highway/track": {
-                "name": "Földút",
-                "terms": "Földút"
-            },
             "highway/traffic_signals": {
                 "name": "Jelzőlámpa",
                 "terms": "Közlekedési lámpa"
@@ -2854,7 +2822,7 @@
                 "terms": "Játszótér"
             },
             "leisure/running_track": {
-                "name": "Fútópálya",
+                "name": "Futópálya",
                 "terms": "Futópálya"
             },
             "leisure/slipway": {
@@ -3385,10 +3353,6 @@
                 "name": "Antikvitás",
                 "terms": "Régiségkereskedés"
             },
-            "shop/art": {
-                "name": "Művészeti galéria",
-                "terms": "Műalkotások boltja"
-            },
             "shop/baby_goods": {
                 "name": "Bababolt",
                 "terms": "babruha - babakocsi - babaágy - babjáték bolt"
@@ -3731,7 +3695,7 @@
             },
             "shop/stationery": {
                 "name": "Írószerbolt",
-                "terms": "Papír - Írószer és nyomtatván bolt,  Papír - írószer és irodaszer kereskedelem, papirbolt, irodaszerbolt"
+                "terms": "Papír - Írószer és nyomtatvány bolt,  Papír - írószer és irodaszer kereskedelem, papírbolt, irodaszerbolt"
             },
             "shop/supermarket": {
                 "name": "Szupermarket",

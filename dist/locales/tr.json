@@ -482,38 +482,6 @@
         }
     },
     "presets": {
-        "categories": {
-            "category-building": {
-                "name": "Yapı"
-            },
-            "category-golf": {
-                "name": "Gold"
-            },
-            "category-landuse": {
-                "name": "Kullanılan Toprak"
-            },
-            "category-path": {
-                "name": "Keçi Yolu"
-            },
-            "category-rail": {
-                "name": "Demiryolu"
-            },
-            "category-restriction": {
-                "name": "Kısıtlama"
-            },
-            "category-road": {
-                "name": "Yol"
-            },
-            "category-route": {
-                "name": "Güzergah"
-            },
-            "category-water-area": {
-                "name": "Su"
-            },
-            "category-water-line": {
-                "name": "Su"
-            }
-        },
         "fields": {
             "access": {
                 "options": {
@@ -1597,9 +1565,6 @@
             "highway/tertiary": {
                 "name": "Köy arası yolu"
             },
-            "highway/track": {
-                "name": "Toprak yol"
-            },
             "highway/traffic_signals": {
                 "name": "Trafik Sinyali"
             },
@@ -2007,9 +1972,6 @@
             },
             "shop/antiques": {
                 "name": "Antika Dükkanı"
-            },
-            "shop/art": {
-                "name": "Sanat Galerisi"
             },
             "shop/bakery": {
                 "name": "Fırın"

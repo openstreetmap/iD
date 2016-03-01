@@ -425,7 +425,6 @@
         "browse": "Εξερεύνηση για αρχείο .gpx"
     },
     "mapillary": {
-        "tooltip": "Φωτογραφίες από το επίπεδο του δρόμου, από το Mapillary",
         "view_on_mapillary": "Δείτε αυτή τη φωτογραφία στο Mapillary"
     },
     "help": {
@@ -455,38 +454,6 @@
         }
     },
     "presets": {
-        "categories": {
-            "category-building": {
-                "name": "Κτίριο"
-            },
-            "category-golf": {
-                "name": "Γκόλφ"
-            },
-            "category-landuse": {
-                "name": "Χρήση Γης"
-            },
-            "category-path": {
-                "name": "Μονοπάτι"
-            },
-            "category-rail": {
-                "name": "Σιδηροδρομική Γραμμή"
-            },
-            "category-restriction": {
-                "name": "Απαγόρευση"
-            },
-            "category-road": {
-                "name": "Δρόμος"
-            },
-            "category-route": {
-                "name": "Διαδρομή"
-            },
-            "category-water-area": {
-                "name": "Νερό"
-            },
-            "category-water-line": {
-                "name": "Νερό"
-            }
-        },
         "fields": {
             "access": {
                 "label": "Επιτρεπόμενη Πρόσβαση",
@@ -1728,10 +1695,6 @@
             "highway/tertiary": {
                 "name": "Τριτεύων Δρόμος"
             },
-            "highway/track": {
-                "name": "Χωματόδρομος",
-                "terms": "Χωματόδρομος, Καρόδρομος"
-            },
             "highway/traffic_signals": {
                 "name": "Φανάρια",
                 "terms": "Φανάρια, Φανάρια κυκλοφορίας"
@@ -2214,10 +2177,6 @@
             "shop/alcohol": {
                 "name": "Κάβα Ποτών",
                 "terms": "Κατάστημα ποτών, Κάβα"
-            },
-            "shop/art": {
-                "name": "Γκαλερί Τέχνης",
-                "terms": "Πινακοθήκη"
             },
             "shop/baby_goods": {
                 "name": "Κατάστημα Βρεφικών Ειδών"

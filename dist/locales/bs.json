@@ -355,35 +355,6 @@
         }
     },
     "presets": {
-        "categories": {
-            "category-building": {
-                "name": "Građevina"
-            },
-            "category-golf": {
-                "name": "Golf"
-            },
-            "category-landuse": {
-                "name": "Upotreba zemljišta"
-            },
-            "category-path": {
-                "name": "Staza"
-            },
-            "category-rail": {
-                "name": "Šina"
-            },
-            "category-road": {
-                "name": "Put"
-            },
-            "category-route": {
-                "name": "Ruta"
-            },
-            "category-water-area": {
-                "name": "Voda"
-            },
-            "category-water-line": {
-                "name": "Voda"
-            }
-        },
         "fields": {
             "access": {
                 "options": {
@@ -1364,10 +1335,6 @@
             "highway/tertiary_link": {
                 "name": "Tercijarna poveznica",
                 "terms": "poveznica na tercijarnu cestu,poveznica na cestu od tercijarnog značaja"
-            },
-            "highway/track": {
-                "name": "Makadam",
-                "terms": "makadam,nasuti put"
             },
             "highway/traffic_signals": {
                 "name": "Saobraćajna signalizacija",

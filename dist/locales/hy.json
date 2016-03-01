@@ -490,8 +490,6 @@
         "browse": "Գտնել .gpx նիշք"
     },
     "mapillary": {
-        "tooltip": "Փողոցի մակարդակի լուսանկարներ Mapillary֊ից",
-        "title": "Ֆոտո օվերլեյ (Mapillary)",
         "view_on_mapillary": "Դիտել այս նկարը Mapillary ֊ում"
     },
     "help": {
@@ -581,11 +579,6 @@
         }
     },
     "presets": {
-        "categories": {
-            "category-golf": {
-                "name": "Գոլֆ"
-            }
-        },
         "fields": {
             "access": {
                 "types": {

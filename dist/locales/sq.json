@@ -313,23 +313,6 @@
         }
     },
     "presets": {
-        "categories": {
-            "category-building": {
-                "name": "Ndërtesë"
-            },
-            "category-golf": {
-                "name": "Golf"
-            },
-            "category-road": {
-                "name": "Rrugë"
-            },
-            "category-water-area": {
-                "name": "Ujë"
-            },
-            "category-water-line": {
-                "name": "Ujë"
-            }
-        },
         "fields": {
             "access": {
                 "options": {

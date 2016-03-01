@@ -157,29 +157,6 @@
         }
     },
     "presets": {
-        "categories": {
-            "category-building": {
-                "name": "Konstruaĵo"
-            },
-            "category-golf": {
-                "name": "Golfo"
-            },
-            "category-path": {
-                "name": "Vojo"
-            },
-            "category-rail": {
-                "name": "Relo"
-            },
-            "category-restriction": {
-                "name": "Restrikto"
-            },
-            "category-water-area": {
-                "name": "Akvo"
-            },
-            "category-water-line": {
-                "name": "Akvo"
-            }
-        },
         "fields": {
             "access": {
                 "options": {

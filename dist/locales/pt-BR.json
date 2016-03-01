@@ -493,8 +493,6 @@
         "browse": "Procurar um arquivo .gpx"
     },
     "mapillary": {
-        "tooltip": "Fotos de Rua do Mapillary",
-        "title": "Camada de Fotos (Mapillary)",
         "view_on_mapillary": "Ver esta imagem no Mapillary"
     },
     "help": {
@@ -554,38 +552,6 @@
         }
     },
     "presets": {
-        "categories": {
-            "category-building": {
-                "name": "Edificação"
-            },
-            "category-golf": {
-                "name": "Golfe"
-            },
-            "category-landuse": {
-                "name": "Uso da Terra"
-            },
-            "category-path": {
-                "name": "Caminho"
-            },
-            "category-rail": {
-                "name": "Trilho"
-            },
-            "category-restriction": {
-                "name": "Restrição"
-            },
-            "category-road": {
-                "name": "Estrada"
-            },
-            "category-route": {
-                "name": "Rota"
-            },
-            "category-water-area": {
-                "name": "Água"
-            },
-            "category-water-line": {
-                "name": "Água"
-            }
-        },
         "fields": {
             "access": {
                 "label": "Acesso permitido",
@@ -2505,10 +2471,6 @@
                 "name": "Ligação Terciária",
                 "terms": "Acesso Terciário, Acesso a Via Terciária"
             },
-            "highway/track": {
-                "name": "Estrada Informal",
-                "terms": "Via Agro-Florestal, Trilha Automotiva, Estrada de Fazenda, Estrada Agrícola, Estrada Bucólica, Caminho"
-            },
             "highway/traffic_signals": {
                 "name": "Semáforo",
                 "terms": "Semáforo"
@@ -3248,10 +3210,6 @@
             "shop/antiques": {
                 "name": "Loja de Antiguidades",
                 "terms": "Antiquário"
-            },
-            "shop/art": {
-                "name": "Loja de Artigos de Arte",
-                "terms": "Loja de Artigos de Arte"
             },
             "shop/baby_goods": {
                 "name": "Loja de Artigos para Bebês",

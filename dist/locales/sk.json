@@ -493,8 +493,6 @@
         "browse": "Vyber .gpx súbor"
     },
     "mapillary": {
-        "tooltip": "Fotografie ulíc z Mapillary",
-        "title": "Vrstva fotografií (Mapillary)",
         "view_on_mapillary": "Prezrieť tento obrázok na Mapillary"
     },
     "help": {
@@ -542,38 +540,6 @@
         }
     },
     "presets": {
-        "categories": {
-            "category-building": {
-                "name": "Budova"
-            },
-            "category-golf": {
-                "name": "Golf"
-            },
-            "category-landuse": {
-                "name": "Využitie krajiny"
-            },
-            "category-path": {
-                "name": "Chodník"
-            },
-            "category-rail": {
-                "name": "Železnica"
-            },
-            "category-restriction": {
-                "name": "Obmedzenie"
-            },
-            "category-road": {
-                "name": "Cesta"
-            },
-            "category-route": {
-                "name": "Trasa"
-            },
-            "category-water-area": {
-                "name": "Voda"
-            },
-            "category-water-line": {
-                "name": "Voda"
-            }
-        },
         "fields": {
             "access": {
                 "label": "Povolený vstup",
@@ -2542,10 +2508,6 @@
                 "name": "Privádzač na cestu 3. triedy",
                 "terms": "privadzac na cestu tretej triedy,privadzac,privádzač,zjazd,vyjazd,výjazd,nájazd,najazd,pripojovací pruh,pripojovaci pruh"
             },
-            "highway/track": {
-                "name": "Lesná cesta",
-                "terms": "lesna cesta,poľná cesta,polna cesta,"
-            },
             "highway/traffic_signals": {
                 "name": "Semafory",
                 "terms": "semafor,svetelná križovatka,svetelné dopravné značenie,svetelna krizovatka,svetelne znacenie,svetelne dopravne znacenie"
@@ -3289,10 +3251,6 @@
             "shop/antiques": {
                 "name": "Obchod so tarožitnosťami",
                 "terms": "obchod so starozitnostami,starozitnosti,starožitnosti,starý nábytok,stary nabytok"
-            },
-            "shop/art": {
-                "name": "Obchod s umením",
-                "terms": "obchod s umenim,obrazy,umelecké diela,umelecke diela"
             },
             "shop/baby_goods": {
                 "name": "Obchod s detskými potrebami",

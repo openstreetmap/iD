@@ -450,14 +450,6 @@
         }
     },
     "presets": {
-        "categories": {
-            "category-water-area": {
-                "name": "ජලය"
-            },
-            "category-water-line": {
-                "name": "ජලය"
-            }
-        },
         "fields": {
             "aerialway": {
                 "label": "වර්ගය"

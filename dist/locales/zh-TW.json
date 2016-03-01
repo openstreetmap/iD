@@ -133,7 +133,8 @@
             "key": "D",
             "annotation": "斷開了路徑。",
             "not_connected": "未有足夠的路徑／區域來斷開。",
-            "connected_to_hidden": "無法斷開，因為其連接著隱藏的特徵。"
+            "connected_to_hidden": "無法斷開，因為其連接著隱藏的特徵。",
+            "relation": "因為其連接到了關係中的成員，所以不能斷開。"
         },
         "merge": {
             "title": "合併",
@@ -324,10 +325,12 @@
         "description": "背景圖像設定",
         "percent_brightness": "{opacity}%的亮度",
         "none": "無",
+        "best_imagery": "這個地點已知最佳的影像來源",
         "custom": "客製化",
         "custom_button": "編輯自訂的背景",
         "custom_prompt": "輸入地圖影像區塊的URL模版。以 Z/X/Y 方式存取區塊的伺服器，可在模版中使用{z}, {x}, {y}作參數，而以quadtile存取區塊的伺服器，則可使用{u}作參數。",
         "fix_misalignment": "校準",
+        "imagery_source_faq": "影像是從那裡來的呢？",
         "reset": "重設",
         "minimap": {
             "description": "小地圖",
@@ -498,9 +501,15 @@
         "zoom": "放大至 GPX 軌跡",
         "browse": "開啟 .gpx 檔案"
     },
-    "mapillary": {
+    "mapillary_images": {
         "tooltip": "從 Mapillary 來的街道照片",
-        "title": "照片重疊 (Mapillary)",
+        "title": "照片重疊 (Mapillary)"
+    },
+    "mapillary_signs": {
+        "tooltip": "從 Mapillary 來的紅綠燈",
+        "title": "紅綠燈重疊 (Mapillary)"
+    },
+    "mapillary": {
         "view_on_mapillary": "在 Mapillary 看這張照片"
     },
     "help": {
@@ -599,34 +608,34 @@
     "presets": {
         "categories": {
             "category-building": {
-                "name": "建築物"
+                "name": "建築物圖徵"
             },
             "category-golf": {
-                "name": "高爾夫球"
+                "name": "高爾夫圖徵"
             },
             "category-landuse": {
-                "name": "土地用途"
+                "name": "土地利用圖徵"
             },
             "category-path": {
-                "name": "小徑"
+                "name": "通道圖徵"
             },
             "category-rail": {
-                "name": "鐵道"
+                "name": "鐵路圖徵"
             },
             "category-restriction": {
-                "name": "限制"
+                "name": "限制圖徵"
             },
             "category-road": {
-                "name": "道路"
+                "name": "道路圖徵"
             },
             "category-route": {
-                "name": "路線"
+                "name": "路線圖徵"
             },
             "category-water-area": {
-                "name": "水"
+                "name": "水域圖徵"
             },
             "category-water-line": {
-                "name": "水"
+                "name": "水域圖徵"
             }
         },
         "fields": {
@@ -939,7 +948,7 @@
                 "label": "修復我"
             },
             "fuel": {
-                "label": "加油站"
+                "label": "燃料"
             },
             "fuel/biodiesel": {
                 "label": "販售生質燃料"
@@ -1366,6 +1375,9 @@
                 "label": "種類"
             },
             "shop": {
+                "label": "種類"
+            },
+            "site": {
                 "label": "種類"
             },
             "sloped_curb": {
@@ -1978,7 +1990,7 @@
                 "terms": "垃圾集中處,垃圾放置點"
             },
             "amenity/water_point": {
-                "name": "送水車",
+                "name": "RV 飲用水",
                 "terms": "運水車"
             },
             "area": {
@@ -3386,8 +3398,8 @@
                 "terms": "古董店"
             },
             "shop/art": {
-                "name": "畫廊",
-                "terms": "藝廏"
+                "name": "藝術商店",
+                "terms": "藝術商店"
             },
             "shop/baby_goods": {
                 "name": "嬰兒用品店",
@@ -3733,6 +3745,10 @@
                 "name": "文具店",
                 "terms": "文具店"
             },
+            "shop/storage_rental": {
+                "name": "儲物空間出租",
+                "terms": "儲物空間出租"
+            },
             "shop/supermarket": {
                 "name": "超級市場",
                 "terms": "超市"
@@ -3832,6 +3848,10 @@
             "tourism/chalet": {
                 "name": "木屋",
                 "terms": "木屋"
+            },
+            "tourism/gallery": {
+                "name": "藝廊",
+                "terms": "藝廊"
             },
             "tourism/guest_house": {
                 "name": "招待所",
@@ -3984,6 +4004,10 @@
             "type/route_master": {
                 "name": "路線總纜",
                 "terms": "路線總目"
+            },
+            "type/site": {
+                "name": "地點",
+                "terms": "場地"
             },
             "vertex": {
                 "name": "其他",

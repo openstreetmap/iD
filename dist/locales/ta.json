@@ -84,16 +84,21 @@
             "key": "V"
         },
         "split": {
+            "title": "பிரி",
             "key": "X"
         }
     },
     "translate": {
-        "translate": "மொழிமாற்றம் செய்"
+        "translate": "மொழிமாற்றம் செய்",
+        "localized_translation_language": "மொழியை தேர்ந்தெடு",
+        "localized_translation_name": "பெயர்"
     },
     "logout": "விடுபதிகை",
     "commit": {
         "title": "மாற்றங்களைச் சேமி",
         "save": "சேமி",
+        "cancel": "ரத்து",
+        "changes": "{எண்ணிக்கை} மாற்றங்கள்",
         "deleted": "நீக்கப்பட்டது",
         "created": "உருவாக்கப்பட்டது"
     },
@@ -109,7 +114,8 @@
         "title": "சேமி"
     },
     "confirm": {
-        "okay": "சரி"
+        "okay": "சரி",
+        "cancel": "ரத்து"
     },
     "help": {
         "title": "உதவி"
@@ -120,26 +126,6 @@
         }
     },
     "presets": {
-        "categories": {
-            "category-path": {
-                "name": "வழி"
-            },
-            "category-rail": {
-                "name": "இரயில்"
-            },
-            "category-road": {
-                "name": "சாலை"
-            },
-            "category-route": {
-                "name": "வழி"
-            },
-            "category-water-area": {
-                "name": "நீர்"
-            },
-            "category-water-line": {
-                "name": "நீர்"
-            }
-        },
         "fields": {
             "access": {
                 "label": "அனுமதிக்கப்பட்ட அணுகல்",
@@ -527,9 +513,6 @@
             },
             "highway/steps": {
                 "name": "படிகட்டுகள்"
-            },
-            "highway/track": {
-                "name": "பாதை"
             },
             "historic/castle": {
                 "name": "கோட்டை"

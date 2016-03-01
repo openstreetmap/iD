@@ -345,26 +345,6 @@
         }
     },
     "presets": {
-        "categories": {
-            "category-building": {
-                "name": "Сграда"
-            },
-            "category-landuse": {
-                "name": "Земеползване"
-            },
-            "category-path": {
-                "name": "Пътека"
-            },
-            "category-rail": {
-                "name": "ЖП транспорт"
-            },
-            "category-road": {
-                "name": "Пътища"
-            },
-            "category-route": {
-                "name": "Маршрути"
-            }
-        },
         "fields": {
             "access": {
                 "options": {
@@ -975,9 +955,6 @@
             },
             "highway/tertiary_link": {
                 "name": "Връзка с третокласен път"
-            },
-            "highway/track": {
-                "name": "Черен път"
             },
             "highway/traffic_signals": {
                 "name": "Светофари"

@@ -249,29 +249,6 @@
         }
     },
     "presets": {
-        "categories": {
-            "category-landuse": {
-                "name": "Landsgebruik"
-            },
-            "category-path": {
-                "name": "Paaidjie"
-            },
-            "category-rail": {
-                "name": "Spoor"
-            },
-            "category-road": {
-                "name": "Pad"
-            },
-            "category-route": {
-                "name": "Roete"
-            },
-            "category-water-area": {
-                "name": "Water"
-            },
-            "category-water-line": {
-                "name": "Water"
-            }
-        },
         "fields": {
             "access": {
                 "options": {
@@ -881,9 +858,6 @@
             },
             "highway/tertiary": {
                 "name": "Tertiere Pad"
-            },
-            "highway/track": {
-                "name": "Spoor"
             },
             "highway/traffic_signals": {
                 "name": "Robot"

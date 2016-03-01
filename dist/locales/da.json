@@ -133,7 +133,8 @@
             "key": "D",
             "annotation": "Frakoblede linjer/områder.",
             "not_connected": "Der er ikke nok linjer/områder at frakoble her.",
-            "connected_to_hidden": "Dette kan ikke frakobles, da det er forbundet til et skjult objekt."
+            "connected_to_hidden": "Dette kan ikke frakobles, da det er forbundet til et skjult objekt.",
+            "relation": "Dette kan ikke frakobles da det forbinder medlemmer af en relation."
         },
         "merge": {
             "title": "Fusioner",
@@ -324,10 +325,12 @@
         "description": "Baggrundsindstillinger",
         "percent_brightness": "{opacity} % lysstyrke",
         "none": "Ingen",
+        "best_imagery": "Bedst kendte luftfotokilde for denne her lokalitet",
         "custom": "Brugerdefineret",
         "custom_button": "Rediger brugerdefineret baggrund",
         "custom_prompt": "Angiv en URL-skabelon for fliser. Gyldige værdier er {z}, {x}, {y} for Z/X/Y-systemet og {u} for quadtile-systemet. ",
         "fix_misalignment": "Ret justering",
+        "imagery_source_faq": "Hvem er ophavsmand til luftfotoets?",
         "reset": "nulstil",
         "minimap": {
             "description": "Minikort",
@@ -498,9 +501,15 @@
         "zoom": "Zoom til GPX-spor",
         "browse": "Vælg en .gpx-fil"
     },
+    "mapillary_images": {
+        "tooltip": "Gadeniveau billeder fra Mapillary",
+        "title": "Billedelag (Mapillary)"
+    },
+    "mapillary_signs": {
+        "tooltip": "Trafikskilte fra Mapillary",
+        "title": "Trafikskiltelag (Mapillary)"
+    },
     "mapillary": {
-        "tooltip": "Billeder på gadeniveau fra Mapillary",
-        "title": "Fotolag (Mapillary)",
         "view_on_mapillary": "Vis dette billede på Mapillary"
     },
     "help": {
@@ -599,34 +608,34 @@
     "presets": {
         "categories": {
             "category-building": {
-                "name": "Bygning"
+                "name": "Bygningsegenskaber"
             },
             "category-golf": {
-                "name": "Golf"
+                "name": "Golfegenskaber"
             },
             "category-landuse": {
-                "name": "Arealanvendelse"
+                "name": "Arealanvendelsesegegenskaber"
             },
             "category-path": {
-                "name": "Sti"
+                "name": "Stiegenskaber"
             },
             "category-rail": {
-                "name": "Jernbane"
+                "name": "Jernbaneegenskaber"
             },
             "category-restriction": {
-                "name": "Restriktion"
+                "name": "Restriktionsegenskaber"
             },
             "category-road": {
-                "name": "Vej"
+                "name": "Vejegenskaber"
             },
             "category-route": {
-                "name": "Rute"
+                "name": "Ruteegenskaber"
             },
             "category-water-area": {
-                "name": "Vand"
+                "name": "Vandegenskaber"
             },
             "category-water-line": {
-                "name": "Vand"
+                "name": "Vandegenskaber"
             }
         },
         "fields": {
@@ -1366,6 +1375,9 @@
                 "label": "Type"
             },
             "shop": {
+                "label": "Type"
+            },
+            "site": {
                 "label": "Type"
             },
             "sloped_curb": {
@@ -2602,8 +2614,8 @@
                 "terms": "Link til tertiær vej"
             },
             "highway/track": {
-                "name": "Mark/Skovvej",
-                "terms": "Mark/Skovvej"
+                "name": "Uvedligeholdt markvej",
+                "terms": "Uvedligeholdt markvej"
             },
             "highway/traffic_signals": {
                 "name": "Trafiksignal",
@@ -3386,8 +3398,8 @@
                 "terms": "Antikvitetsforretning, Antikvitetsbutik"
             },
             "shop/art": {
-                "name": "Kunstgalleri",
-                "terms": "Kunstgalleri"
+                "name": "Kunstbutik",
+                "terms": "Kunstbutik, Galleributik"
             },
             "shop/baby_goods": {
                 "name": "Babyudstyrsbutik",
@@ -3733,6 +3745,10 @@
                 "name": "Papirforhandler",
                 "terms": "Papirforhandler"
             },
+            "shop/storage_rental": {
+                "name": "Lagerhotel",
+                "terms": "Lagerhotel, Opbevaringshotel"
+            },
             "shop/supermarket": {
                 "name": "Supermarked",
                 "terms": "Supermarked, Lavprisbutik, Discountbutik"
@@ -3832,6 +3848,10 @@
             "tourism/chalet": {
                 "name": "Bjergferiehytte",
                 "terms": "Bjergferiehytte"
+            },
+            "tourism/gallery": {
+                "name": "Kunstgalleri",
+                "terms": "Kunstgalleri, Galleri"
             },
             "tourism/guest_house": {
                 "name": "Gæstehus",
@@ -3984,6 +4004,10 @@
             "type/route_master": {
                 "name": "Rutemasterplan",
                 "terms": "Rutemasterplan"
+            },
+            "type/site": {
+                "name": "Sted",
+                "terms": "Sted"
             },
             "vertex": {
                 "name": "Andre",

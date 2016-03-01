@@ -485,8 +485,6 @@
         "browse": "Telusuri untuk file .gpx"
     },
     "mapillary": {
-        "tooltip": "Pemandangan jalan dari Mapillary",
-        "title": "Lapisan Foto (Mapillary)",
         "view_on_mapillary": "Lihat gambar ini di Mapillary"
     },
     "help": {
@@ -531,38 +529,6 @@
         }
     },
     "presets": {
-        "categories": {
-            "category-building": {
-                "name": "Bangunan"
-            },
-            "category-golf": {
-                "name": "Golf"
-            },
-            "category-landuse": {
-                "name": "Penggunaan Tanah"
-            },
-            "category-path": {
-                "name": "Gang"
-            },
-            "category-rail": {
-                "name": "Rel"
-            },
-            "category-restriction": {
-                "name": "Larangan"
-            },
-            "category-road": {
-                "name": "Jalan"
-            },
-            "category-route": {
-                "name": "Rute"
-            },
-            "category-water-area": {
-                "name": "Air"
-            },
-            "category-water-line": {
-                "name": "Air"
-            }
-        },
         "fields": {
             "access": {
                 "label": "Akses diperbolehkan",
@@ -1923,10 +1889,6 @@
                 "name": "Jalan Penghubung Tersier",
                 "terms": "Jalan Penghubung Tersier"
             },
-            "highway/track": {
-                "name": "Titian",
-                "terms": "Trek"
-            },
             "highway/traffic_signals": {
                 "name": "Lampu Lalu lintas",
                 "terms": "Lampu Merah"
@@ -2476,9 +2438,6 @@
             },
             "shop/antiques": {
                 "name": "Toko Barang Antik"
-            },
-            "shop/art": {
-                "name": "Galeri Seni"
             },
             "shop/baby_goods": {
                 "name": "Toko Perlengkapan Bayi"
