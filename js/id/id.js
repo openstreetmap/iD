@@ -359,7 +359,7 @@ window.iD = function () {
 };
 
 
-iD.version = '1.8.5';
+iD.version = '1.9.0';
 
 (function() {
     var detected = {};
