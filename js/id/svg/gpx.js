@@ -123,7 +123,7 @@ iD.svg.Gpx = function(projection, context) {
     drawGpx.url = function(url) {
         d3.text(url, function(err, data) {
             if (!err) {
-                this.geojson(toGeoJSON.gpx(toDom(data)));
+                drawGpx.geojson(toGeoJSON.gpx(toDom(data)));
                 redraw();
             }
         });
@@ -135,7 +135,7 @@ iD.svg.Gpx = function(projection, context) {
             reader = new FileReader();
 
         reader.onload = function(e) {
-            this.geojson(toGeoJSON.gpx(toDom(e.target.result))).fitZoom();
+            drawGpx.geojson(toGeoJSON.gpx(toDom(e.target.result))).fitZoom();
             redraw();
         };
 
