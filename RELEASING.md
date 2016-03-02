@@ -29,6 +29,7 @@
 
 #### Sync master and update iD (every time)
 
+- [ ] `bundle install`
 - [ ] `git fetch --all`
 - [ ] `git checkout master`
 - [ ] `git reset --hard upstream/master`
