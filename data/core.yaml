@@ -276,6 +276,7 @@ en:
     fix_misalignment: Fix alignment
     imagery_source_faq: Where does this imagery come from?
     reset: reset
+    offset: Type or drag to adjust offset
     minimap:
       description: Minimap
       tooltip: Show a zoomed out map to help locate the area currently displayed.

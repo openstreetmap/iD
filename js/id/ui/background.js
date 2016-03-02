@@ -138,23 +138,87 @@ iD.ui.Background = function(context) {
             }
         }
 
+        function resetOffset() {
+            context.background().offset([0, 0]);
+
+            d3.select('.nudge-inner-rect')
+                .select('input')
+                .classed('error', false)
+                .node().value = null;
+
+            resetButton.classed('disabled', true);
+        }
+
+        function nudge(d) {
+            var offset = context.background()
+                .nudge(d, context.map().zoom())
+                .offset();
+
+            resetButton.classed('disabled', offset[0] === 0 && offset[1] === 0);
+        }
+
         function clickNudge(d) {
             var timeout = window.setTimeout(function() {
-                    interval = window.setInterval(nudge, 100);
+                    interval = window.setInterval(nudge.bind(null, d), 100);
                 }, 500),
                 interval;
 
             d3.select(this).on('mouseup', function() {
                 window.clearInterval(interval);
                 window.clearTimeout(timeout);
-                nudge();
+                d3.select(this).on('mouseup', null);
+                nudge(d);
             });
 
-            function nudge() {
-                var offset = context.background()
-                    .nudge(d[1], context.map().zoom())
-                    .offset();
-                resetButton.classed('disabled', offset[0] === 0 && offset[1] === 0);
+            nudge(d);
+        }
+
+        function customNudge() {
+            var input = d3.select(this);
+            var d = input.node().value;
+
+            if (d === '') return resetOffset();
+
+            d = d.split(',').map(function(n) {
+                // if n is NaN, it will always get mapped to false.
+                return !isNaN(n) && n;
+            });
+
+            if (d.length !== 2 || !d[0] || !d[1]) {
+                input.classed('error', true);
+                return;
+            }
+
+            input.classed('error', false);
+            nudge(d);
+        }
+
+        function dragOffset() {
+            var delay = 100, prev = 0;
+            var body = d3.select('body');
+            var lastMoused;
+            body.on('mousemove', function() {
+                var t = new Date().getTime();
+                if (t - prev >= delay) {
+                    prev = new Date().getTime();
+                    drag.call(this);
+                }
+            });
+
+            body.on('mouseup', function() {
+                d3.select('body').on('mousemove', null);
+                d3.select('body').on('mouseup', null);
+            });
+
+            function drag() {
+                var latest = d3.mouse(this);
+
+                var d = latest.map(function(n, i) {
+                  return lastMoused ? (n - lastMoused[i])/4 : 0;
+                });
+
+                lastMoused = d3.mouse(this);
+                nudge(d);
             }
         }
 
@@ -264,14 +328,14 @@ iD.ui.Background = function(context) {
             .text(t('background.custom'));
 
         content.append('div')
-          .attr('class', 'imagery-faq')
-          .append('a')
-          .attr('target', '_blank')
-          .attr('tabindex', -1)
-          .call(iD.svg.Icon('#icon-out-link', 'inline'))
-          .attr('href', 'https://github.com/openstreetmap/iD/blob/master/FAQ.md#how-can-i-report-an-issue-with-background-imagery')
-          .append('span')
-          .text(t('background.imagery_source_faq'));
+            .attr('class', 'imagery-faq')
+            .append('a')
+            .attr('target', '_blank')
+            .attr('tabindex', -1)
+            .call(iD.svg.Icon('#icon-out-link', 'inline'))
+            .attr('href', 'https://github.com/openstreetmap/iD/blob/master/FAQ.md#how-can-i-report-an-issue-with-background-imagery')
+            .append('span')
+            .text(t('background.imagery_source_faq'));
 
         var overlayList = content.append('ul')
             .attr('class', 'layer-list');
@@ -315,21 +379,37 @@ iD.ui.Background = function(context) {
 
         var nudgeContainer = adjustments.append('div')
             .attr('class', 'nudge-container cf')
-            .style('display', 'none');
+            .style('display', 'none')
+            .call(bootstrap.tooltip()
+                .html(true)
+                .title(iD.ui.tooltipHtml(t('background.offset'))
+                .placement('top')));
 
-        nudgeContainer.selectAll('button')
+        var nudgeRect = nudgeContainer.append('div')
+            .attr('class', 'nudge-outer-rect')
+            // mouseup is being handled at dragOffset
+            .on('mousedown', dragOffset);
+
+        nudgeRect.append('div')
+            .attr('class', 'nudge-inner-rect')
+            .append('input')
+            .on('change', customNudge)
+            .on('mousedown', function() {
+              d3.event.stopPropagation();
+            });
+
+        nudgeContainer.append('div').selectAll('button')
             .data(directions).enter()
             .append('button')
             .attr('class', function(d) { return d[0] + ' nudge'; })
-            .on('mousedown', clickNudge);
+            .on('mousedown', function(d) {
+              clickNudge(d[1]);
+            });
 
         var resetButton = nudgeContainer
             .append('button')
             .attr('class', 'reset disabled')
-            .on('click', function () {
-                context.background().offset([0, 0]);
-                resetButton.classed('disabled', true);
-            })
+            .on('click', resetOffset)
             .call(iD.svg.Icon('#icon-undo'));
 
         context.map()
