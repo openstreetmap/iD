@@ -227,14 +227,13 @@ iD.services.mapillary = function() {
 
         }
         if(mly == undefined) {
-            mly = new Mapillary.Viewer('mly', 'cjJ1SUtVOEMtdy11b21JM0tyYTZIQTo2ZmVjNTQ3YWQ0OWI2Yjgx',imageKey, {
+            mly = new Mapillary.Viewer('mly', 'NzNRM2otQkR2SHJzaXJmNmdQWVQ0dzo1ZWYyMmYwNjdmNDdlNmVi',imageKey, {
                 'imagePlane': false,
                 'image': true,
                 'cover': false,
                 'debug': true
             });
         }
-        console.log(mly);
         mly.moveToKey(imageKey);
         mly.on('nodechanged', function (node) {
             d3.selectAll('.layer-mapillary-images .viewfield-group, .layer-mapillary-signs .icon-sign')
