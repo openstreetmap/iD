@@ -1,5 +1,10 @@
 :warning: = Breaking change, may affect downstream projects or sites that embed iD.
 
+## 1.9.1
+##### Mar 3, 2016
+* Add context.asset for building asset filenames, use for Mapillary Traffico files (#3011)
+* Fix crash in starting tutorial, bad selector for .layer-background opacity (#3010)
+
 ## 1.9.0
 ##### Mar 1, 2016
 * Fix rendering of modified/moved multipolygons (#3008)
