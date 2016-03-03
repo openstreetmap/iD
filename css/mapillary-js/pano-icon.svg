@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="145px" height="114px" viewBox="0 0 145 114" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <!-- Generator: Sketch 3.4.4 (17249) - http://www.bohemiancoding.com/sketch -->
+    <title>pano</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <g id="pano" sketch:type="MSLayerGroup" transform="translate(4.000000, 6.000000)">
+            <path d="M136.427616,101.807648 C136.427616,101.807648 103.95513,92.4055621 68.5000001,92.4055621 C33.0448703,92.4055621 0.572384,101.807648 0.572384,101.807648 L0.572384,0.192352 C0.572384,0.192352 30.9846137,10.2284306 68.5000001,10.2284306 C106.015387,10.2284306 136.427616,0.192352 136.427616,0.192352 L136.427616,101.807648 L136.427616,101.807648 Z" id="Rectangle-1-Copy" stroke="#FFFFFF" stroke-width="8" sketch:type="MSShapeGroup"></path>
+            <path d="M65.8239308,92.4231971 C66.713742,92.4115409 67.6059227,92.4055621 68.5000001,92.4055621 C103.95513,92.4055621 136.427616,101.807648 136.427616,101.807648 L136.427616,84.2903818 L98.9050281,49.1182351 L76.9921806,75.2240455 L51.5180961,57.490618 L26.6619151,75.2240455 L15.7632278,65.691486 L1.63866675,83.6540085 L0.969168939,97.555913 L5.96006817,100.397529 C16.1005638,97.9020616 39.2901084,92.9240832 64.582964,92.4431338 L65.9122033,92.3076437 L65.8239308,92.4231971 L65.8239308,92.4231971 L65.8239308,92.4231971 Z" id="Rectangle-1-Copy-2" fill="#FFFFFF" sketch:type="MSShapeGroup"></path>
+            <ellipse id="Oval-1" fill="#FFFFFF" sketch:type="MSShapeGroup" cx="24.7873212" cy="29.9869603" rx="12.2647085" ry="12.2314708"></ellipse>
+        </g>
+    </g>
+</svg>

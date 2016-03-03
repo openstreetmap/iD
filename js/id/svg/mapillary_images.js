@@ -114,6 +114,9 @@ iD.svg.MapillaryImages = function(projection, context, dispatch) {
     }
 
     function drawImages(selection) {
+        selection.selectAll('.mapillary-js')
+            .data([0]);
+
         var enabled = iD.svg.MapillaryImages.enabled,
             mapillary = getMapillary();
 
