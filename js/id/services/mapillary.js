@@ -16,14 +16,14 @@ iD.services.mapillary = function() {
             .append('link')
             .attr('id', 'traffico')
             .attr('rel', 'stylesheet')
-            .attr('href', context.assetPath() + 'traffico/stylesheets/traffico.css');
+            .attr('href', context.asset('traffico/stylesheets/traffico.css'));
     }
 
     function loadSignDefs(context) {
         if (!iD.services.mapillary.sign_defs) {
             iD.services.mapillary.sign_defs = {};
             _.each(['au', 'br', 'ca', 'de', 'us'], function(region) {
-                d3.json(context.assetPath() + 'traffico/string-maps/' + region + '-map.json', function(err, data) {
+                d3.json(context.asset('traffico/string-maps/' + region + '-map.json'), function(err, data) {
                     if (err) return;
                     if (region === 'de') region = 'eu';
                     iD.services.mapillary.sign_defs[region] = data;

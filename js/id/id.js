@@ -31,32 +31,6 @@ window.iD = function () {
         }
     };
 
-    var locale, localePath;
-    context.locale = function(loc, path) {
-        locale = loc;
-        localePath = path;
-
-        // Also set iD.detect().locale (unless we detected 'en-us' and openstreetmap wants 'en')..
-        if (!(loc.toLowerCase() === 'en' && iD.detect().locale.toLowerCase() === 'en-us')) {
-            iD.detect().locale = loc;
-        }
-
-        return context;
-    };
-
-    context.loadLocale = function(cb) {
-        if (locale && locale !== 'en' && iD.data.locales.indexOf(locale) !== -1) {
-            localePath = localePath || context.assetPath() + 'locales/' + locale + '.json';
-            d3.json(localePath, function(err, result) {
-                window.locale[locale] = result;
-                window.locale.current(locale);
-                cb();
-            });
-        } else {
-            cb();
-        }
-    };
-
 
     /* Straight accessors. Avoid using these if you can. */
     var ui, connection, history;
@@ -297,9 +271,39 @@ window.iD = function () {
         return context;
     };
 
+    context.asset = function(_) {
+        var filename = assetPath + _;
+        return assetMap[filename] || filename;
+    };
+
     context.imagePath = function(_) {
-        var asset = 'img/' + _;
-        return assetMap[asset] || assetPath + asset;
+        return context.asset('img/' + _);
+    };
+
+    var locale, localePath;
+    context.locale = function(loc, path) {
+        locale = loc;
+        localePath = path;
+
+        // Also set iD.detect().locale (unless we detected 'en-us' and openstreetmap wants 'en')..
+        if (!(loc.toLowerCase() === 'en' && iD.detect().locale.toLowerCase() === 'en-us')) {
+            iD.detect().locale = loc;
+        }
+
+        return context;
+    };
+
+    context.loadLocale = function(cb) {
+        if (locale && locale !== 'en' && iD.data.locales.indexOf(locale) !== -1) {
+            localePath = localePath || context.asset('locales/' + locale + '.json');
+            d3.json(localePath, function(err, result) {
+                window.locale[locale] = result;
+                window.locale.current(locale);
+                cb();
+            });
+        } else {
+            cb();
+        }
     };
 
 
