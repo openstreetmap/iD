@@ -598,6 +598,38 @@
         }
     },
     "presets": {
+        "categories": {
+            "category-building": {
+                "name": "建物"
+            },
+            "category-golf": {
+                "name": "ゴルフ"
+            },
+            "category-landuse": {
+                "name": "土地利用"
+            },
+            "category-path": {
+                "name": "歩道"
+            },
+            "category-rail": {
+                "name": "線路"
+            },
+            "category-restriction": {
+                "name": "進行方向制限"
+            },
+            "category-road": {
+                "name": "車道"
+            },
+            "category-route": {
+                "name": "ルート"
+            },
+            "category-water-area": {
+                "name": "水域"
+            },
+            "category-water-line": {
+                "name": "流水"
+            }
+        },
         "fields": {
             "access": {
                 "label": "通行可",
@@ -2573,6 +2605,10 @@
                 "name": "転回場",
                 "terms": "転回場, 車回し"
             },
+            "highway/unclassified": {
+                "name": "一般道（2車線未満）",
+                "terms": "一般道（2車線未満）"
+            },
             "historic": {
                 "name": "史跡",
                 "terms": "史跡, 歴史的建造物"
@@ -2928,6 +2964,10 @@
             "man_made/water_works": {
                 "name": "浄水場",
                 "terms": "浄水場"
+            },
+            "man_made/works": {
+                "name": "工場",
+                "terms": "プラント"
             },
             "military/airfield": {
                 "name": "軍用飛行場",

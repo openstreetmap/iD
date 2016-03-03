@@ -133,7 +133,8 @@
             "key": "D",
             "annotation": "Linhas/áreas desligadas.",
             "not_connected": "Para desligar é necessário selecionar 1 ponto comum a pelo menos 2 linhas ou áreas.",
-            "connected_to_hidden": "Não é possível desligar pois este elemento está ligado a outro elemento escondido."
+            "connected_to_hidden": "Não é possível desligar pois este elemento está ligado a outro elemento escondido.",
+            "relation": "Isto não pode ser desconectado porque conecta membros de uma relação."
         },
         "merge": {
             "title": "Combinar",
@@ -250,7 +251,8 @@
         "warnings": "Avisos",
         "modified": "Alterado",
         "deleted": "Eliminado",
-        "created": "Criado"
+        "created": "Criado",
+        "about_changeset_comments": "Sobre comentários de changesets"
     },
     "contributors": {
         "list": "Edições de {users}",
@@ -322,10 +324,12 @@
         "description": "Configuração da imagem de fundo",
         "percent_brightness": "{opacity}% transparente",
         "none": "Nenhum",
+        "best_imagery": "Melhor fonte de imagem para esse lugar",
         "custom": "Personalizado",
         "custom_button": "Editar fundo personalizando",
         "custom_prompt": "Introduzir um URL válido. Tokens válidos são {z}, {x}, {y} para esquemas Z/X/Y e {u} para esquemas QuadTile.",
         "fix_misalignment": "Corrigir alinhamento",
+        "imagery_source_faq": "De onde essa imagem vem?",
         "reset": "reiniciar",
         "minimap": {
             "description": "Mini-mapa",
@@ -448,7 +452,9 @@
         "view_on_osm": "Ver no OpenStreetMap",
         "facebook": "Partilhar no Facebook",
         "twitter": "Partilhar no Twitter",
-        "google": "Partilhar no Google+"
+        "google": "Partilhar no Google+",
+        "help_html": "Suas mudanças devem aparecer na \"Camada padrão\" em poucos minutos. Outras camadas e determinados recursos podem demorar mais.",
+        "help_link_text": "Detalhes"
     },
     "confirm": {
         "okay": "OK",
@@ -492,6 +498,14 @@
         "drag_drop": "Arraste um ficheiro .gpx para a página, ou clique no botão à direita para o abrir",
         "zoom": "Enquadrar trilho GPX",
         "browse": "Procurar por ficheiro .gpx"
+    },
+    "mapillary_images": {
+        "tooltip": "Fotos ao nível da rua do Mapillary",
+        "title": "Camada de Fotos (Mapillary)"
+    },
+    "mapillary_signs": {
+        "tooltip": "Placas de trânsito do Mapillary",
+        "title": "Camada de Placas de Trânsito (Mapillary)"
     },
     "mapillary": {
         "view_on_mapillary": "Ver esta imagem no Mapillary"
@@ -590,6 +604,38 @@
         }
     },
     "presets": {
+        "categories": {
+            "category-building": {
+                "name": "Tipos de Edificações"
+            },
+            "category-golf": {
+                "name": "Recursos de Golfe"
+            },
+            "category-landuse": {
+                "name": "Tipos de Uso do Solo"
+            },
+            "category-path": {
+                "name": "Tipos de Caminhos"
+            },
+            "category-rail": {
+                "name": "Tipos de Ferrovias"
+            },
+            "category-restriction": {
+                "name": "Tipos de Restrição"
+            },
+            "category-road": {
+                "name": "Rodovias e Ruas"
+            },
+            "category-route": {
+                "name": "Tipos de Rotas"
+            },
+            "category-water-area": {
+                "name": "Elementos de Água"
+            },
+            "category-water-line": {
+                "name": "Tipos de Cursos d'água"
+            }
+        },
         "fields": {
             "access": {
                 "label": "Acesso autorizado",
@@ -1327,6 +1373,9 @@
                 "label": "Tipo"
             },
             "shop": {
+                "label": "Tipo"
+            },
+            "site": {
                 "label": "Tipo"
             },
             "sloped_curb": {
@@ -2562,6 +2611,10 @@
                 "name": "Ligação a uma estrada terciária",
                 "terms": "Tertiary Link, Ligação Estrada Municipal, Ligação Rodovia Municipal, Ligação Municipal,  Ligação Estrada Terciária, Entrada Estrada Municipal, Entrada Rodovia Municipal, Entrada Municipal, Entrada Estrada Terciária, Saída Municipal, Saída Rodovia Municipal, Saída Municipal, Saída Estrada Municipal"
             },
+            "highway/track": {
+                "name": "Estrada sem manutenção",
+                "terms": "Estrada de terra, estrada agrícola"
+            },
             "highway/traffic_signals": {
                 "name": "Semáforos",
                 "terms": "Semáforo, Vermelho, Verde, Amarelo, Sinal, Sinal de Trânsito"
@@ -2818,6 +2871,14 @@
                 "name": "Rampa para barcos",
                 "terms": "Slipway"
             },
+            "leisure/sports_centre": {
+                "name": "Centro Esportivo / Academia",
+                "terms": "Ginástica, Academia, Ginásio, Escola, Centro de Treinamento, Treinamento, Esportes, Centro de Esportes"
+            },
+            "leisure/sports_centre/swimming": {
+                "name": "Academia de Natação",
+                "terms": "Piscina, Natação, Aquática, Centro Aquático, Saltos ornamentais, Esportes Aquáticos, Polo aquático"
+            },
             "leisure/stadium": {
                 "name": "Estádio",
                 "terms": "Estádio, Stadium"
@@ -2829,6 +2890,10 @@
             "leisure/track": {
                 "name": "Circuito de corrida (não motorizada)",
                 "terms": "Racetrack (non-Motorsport), Circuito de Bicicletas"
+            },
+            "leisure/water_park": {
+                "name": "Parque Aquático",
+                "terms": "Piscina, Parque de diversões, Lazer, Diversão,"
             },
             "line": {
                 "name": "Linha",
@@ -3330,6 +3395,10 @@
                 "name": "Loja de antiguidades",
                 "terms": "Antiques Shop, Antiguidade, Antiguidades, Antigo, Relíquia, Relíquias"
             },
+            "shop/art": {
+                "name": "Loja de Artes",
+                "terms": "Artesanato, Decoração, Objetos artísticos, Objetos decorativos, Quadros, Pintura,"
+            },
             "shop/baby_goods": {
                 "name": "Loja de acessórios para bebés",
                 "terms": "Baby Goods Store, Loja de Roupa, Carrinho, Brinquedos, Bébé, Bébe, Bebe, bébés"
@@ -3674,6 +3743,10 @@
                 "name": "Papelaria",
                 "terms": "Stationery Store, Loja de Material de Escritório"
             },
+            "shop/storage_rental": {
+                "name": "Aluguel de Armazenamento",
+                "terms": "Estoque, Armazenamento, Depósito"
+            },
             "shop/supermarket": {
                 "name": "Supermercado / Hipermercado",
                 "terms": "Hiper-mercado, Hiper mercado, Super-mercado, Super mercado, Compras, Loja, Alimentar, Alimentos"
@@ -3773,6 +3846,10 @@
             "tourism/chalet": {
                 "name": "Chalé / Casa de férias",
                 "terms": "Chalet"
+            },
+            "tourism/gallery": {
+                "name": "Galeria de arte",
+                "terms": "Centro Cultural, Galeria, Exposição, Arte"
             },
             "tourism/guest_house": {
                 "name": "Casa de hóspedes",
