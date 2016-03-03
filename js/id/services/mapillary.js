@@ -2,8 +2,6 @@ iD.services.mapillary = function() {
     var mapillary = {},
         dispatch = d3.dispatch('loadedImages', 'loadedSigns'),
         apibase = 'https://a.mapillary.com/v2/',
-        urlImage = 'https://www.mapillary.com/map/im/',
-        urlThumb = 'https://d1cuyjsrcm0gby.cloudfront.net/',
         clientId = 'NzNRM2otQkR2SHJzaXJmNmdQWVQ0dzo1ZWYyMmYwNjdmNDdlNmVi',
         maxResults = 1000,
         mly, thumbnail,
@@ -223,10 +221,11 @@ iD.services.mapillary = function() {
             d3.select('#content').selectAll('.mapillary-image')
                 .transition()
                 .duration(200)
-                .style('opacity', 100);
+                .style('opacity', 100)
+                .attr('class', positionClass);
 
         }
-        if(mly == undefined) {
+        if(mly === undefined) {
             mly = new Mapillary.Viewer('mly', 'NzNRM2otQkR2SHJzaXJmNmdQWVQ0dzo1ZWYyMmYwNjdmNDdlNmVi',imageKey, {
                 'imagePlane': false,
                 'image': true,
@@ -246,7 +245,6 @@ iD.services.mapillary = function() {
 
     mapillary.hideThumbnail = function() {
         if (iD.services.mapillary && iD.services.mapillary.thumb != null) {
-            console.log(iD.services.mapillary.thumb);
             d3.select('#content').selectAll('.mapillary-image')
                 .transition()
                 .duration(200)
