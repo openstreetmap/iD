@@ -1,8 +1,10 @@
 describe('iD.geo', function() {
     describe('.roundCoords', function() {
-        expect(iD.geo.roundCoords([0.1, 1])).to.eql([0, 1]);
-        expect(iD.geo.roundCoords([0, 1])).to.eql([0, 1]);
-        expect(iD.geo.roundCoords([0, 1.1])).to.eql([0, 1]);
+        it('rounds coordinates', function() {
+            expect(iD.geo.roundCoords([0.1, 1])).to.eql([0, 1]);
+            expect(iD.geo.roundCoords([0, 1])).to.eql([0, 1]);
+            expect(iD.geo.roundCoords([0, 1.1])).to.eql([0, 1]);
+        });
     });
 
     describe('.interp', function() {
