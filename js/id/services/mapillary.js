@@ -218,11 +218,16 @@ iD.services.mapillary = function() {
                 .attr('class', 'mly-wrapper')
                 .attr('id', 'mly');
         } else {
-            d3.select('#content').selectAll('.mapillary-image')
+            var pos = 'ar';
+            if(positionClass.al) {
+                pos = 'al';
+            }
+            var im = d3.select('#content').selectAll('.mapillary-image');
+            im
                 .transition()
                 .duration(200)
                 .style('opacity', 100)
-                .attr('class', positionClass);
+                .attr('class','mapillary-image ' + pos);
 
         }
         if(mly === undefined) {
