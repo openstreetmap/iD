@@ -10,14 +10,14 @@ iD.Features = function(context) {
         'secondary_link': true,
         'tertiary': true,
         'tertiary_link': true,
-        'residential': true
+        'residential': true,
+        'unclassified': true
     };
 
     var minor_roads = {
         'service': true,
         'living_street': true,
         'road': true,
-        'unclassified': true,
         'track': true
     };
 
