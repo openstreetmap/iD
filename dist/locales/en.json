@@ -351,11 +351,11 @@
             "tooltip": "Points of Interest"
         },
         "major_roads": {
-            "description": "Major Roads",
+            "description": "Traffic Roads",
             "tooltip": "Highways, Streets, etc."
         },
         "minor_roads": {
-            "description": "Minor Roads",
+            "description": "Service Roads",
             "tooltip": "Service Roads, Parking Aisles, Tracks, etc."
         },
         "paths": {
