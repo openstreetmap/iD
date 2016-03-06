@@ -290,10 +290,10 @@ en:
     points:
       description: Points
       tooltip: "Points of Interest"
-    major_roads:
+    traffic_roads:
       description: Traffic Roads
       tooltip: "Highways, Streets, etc."
-    minor_roads:
+    service_roads:
       description: Service Roads
       tooltip: "Service Roads, Parking Aisles, Tracks, etc."
     paths:

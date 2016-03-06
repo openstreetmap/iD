@@ -1,5 +1,5 @@
 iD.Features = function(context) {
-    var major_roads = {
+    var traffic_roads = {
         'motorway': true,
         'motorway_link': true,
         'trunk': true,
@@ -11,12 +11,12 @@ iD.Features = function(context) {
         'tertiary': true,
         'tertiary_link': true,
         'residential': true,
-        'unclassified': true
+        'unclassified': true,
+        'living_street': true
     };
 
-    var minor_roads = {
+    var service_roads = {
         'service': true,
-        'living_street': true,
         'road': true,
         'track': true
     };
@@ -76,12 +76,12 @@ iD.Features = function(context) {
         return geometry === 'point';
     }, 200);
 
-    defineFeature('major_roads', function isMajorRoad(entity) {
-        return major_roads[entity.tags.highway];
+    defineFeature('traffic_roads', function isTrafficRoad(entity) {
+        return traffic_roads[entity.tags.highway];
     });
 
-    defineFeature('minor_roads', function isMinorRoad(entity) {
-        return minor_roads[entity.tags.highway];
+    defineFeature('service_roads', function isServiceRoad(entity) {
+        return service_roads[entity.tags.highway];
     });
 
     defineFeature('paths', function isPath(entity) {
@@ -128,8 +128,8 @@ iD.Features = function(context) {
             !!entity.tags.railway ||
             entity.tags.landuse === 'railway'
         ) && !(
-            major_roads[entity.tags.highway] ||
-            minor_roads[entity.tags.highway] ||
+            traffic_roads[entity.tags.highway] ||
+            service_roads[entity.tags.highway] ||
             paths[entity.tags.highway]
         );
     });
@@ -141,8 +141,8 @@ iD.Features = function(context) {
     // contains a past/future tag, but not in active use as a road/path/cycleway/etc..
     defineFeature('past_future', function isPastFuture(entity) {
         if (
-            major_roads[entity.tags.highway] ||
-            minor_roads[entity.tags.highway] ||
+            traffic_roads[entity.tags.highway] ||
+            service_roads[entity.tags.highway] ||
             paths[entity.tags.highway]
         ) { return false; }
 
