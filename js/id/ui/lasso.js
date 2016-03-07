@@ -1,8 +1,9 @@
 iD.ui.Lasso = function(context) {
 
-    var box, group,
-        a = [0, 0],
-        b = [0, 0];
+    var group, path,
+        polygon, p;
+
+    lasso.coordinates = [];
 
     function lasso(selection) {
 
@@ -11,7 +12,7 @@ iD.ui.Lasso = function(context) {
         group = selection.append('g')
             .attr('class', 'lasso hide');
 
-        box = group.append('rect')
+        polygon = group.append('path')
             .attr('class', 'lasso-box');
 
         group.call(iD.ui.Toggle(true));
@@ -20,36 +21,37 @@ iD.ui.Lasso = function(context) {
 
     // top-left
     function topLeft(d) {
-        return 'translate(' + Math.min(d[0][0], d[1][0]) + ',' + Math.min(d[0][1], d[1][1]) + ')';
+        return path = (path ? (path + ' L ') : 'M ') + d[0] + ' ' + d[1];
     }
 
-    function width(d) { return Math.abs(d[0][0] - d[1][0]); }
-    function height(d) { return Math.abs(d[0][1] - d[1][1]); }
-
     function draw() {
-        if (box) {
-            box.data([[a, b]])
-                .attr('transform', topLeft)
-                .attr('width', width)
-                .attr('height', height);
+        if (polygon) {
+            polygon.data([p])
+                .attr('d', topLeft);
         }
     }
 
-    lasso.a = function(_) {
-        if (!arguments.length) return a;
-        a = _;
+    lasso.getBounds = function () {
+        var x = lasso.coordinates.map(function(i) {return i[0];});
+        var y = lasso.coordinates.map(function(i) {return i[1];});
+        return [[Math.min.apply(null, x), Math.min.apply(null, y)],
+                [Math.max.apply(null, x), Math.max.apply(null, y)]];
+    };
+
+    lasso.p = function(_) {
+        if (!arguments.length) return p;
+        p = _;
+        lasso.coordinates.push(p);
         draw();
         return lasso;
     };
 
-    lasso.b = function(_) {
-        if (!arguments.length) return b;
-        b = _;
-        draw();
-        return lasso;
-    };
 
     lasso.close = function() {
+
+        polygon.data([p])
+            .attr('d', path + ' Z');
+
         if (group) {
             group.call(iD.ui.Toggle(false, function() {
                 d3.select(this).remove();
