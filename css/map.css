@@ -666,9 +666,22 @@ path.casing.tag-residential {
     stroke:#444;
 }
 
+.preset-icon .icon.highway-unclassified {
+    color: #dcd9b9;
+    fill: #444;
+}
+path.stroke.tag-highway-unclassified,
+path.stroke.tag-unclassified {
+    stroke:#dcd9b9;
+}
+path.casing.tag-highway-unclassified,
+path.casing.tag-unclassified {
+    stroke:#444;
+}
+
+
 /* narrow highways */
 path.stroke.tag-highway-living_street,
-path.stroke.tag-highway-unclassified,
 path.stroke.tag-highway-service,
 path.stroke.tag-highway-track,
 path.stroke.tag-highway-path,
@@ -680,7 +693,6 @@ path.stroke.tag-highway-pedestrian,
 path.stroke.tag-highway-steps,
 path.stroke.tag-highway-road,
 path.stroke.tag-living_street,
-path.stroke.tag-unclassified,
 path.stroke.tag-service,
 path.stroke.tag-track,
 path.stroke.tag-path,
@@ -694,7 +706,6 @@ path.stroke.tag-road {
     stroke-width:4;
 }
 path.casing.tag-highway-living_street,
-path.casing.tag-highway-unclassified,
 path.casing.tag-highway-service,
 path.casing.tag-highway-track,
 path.casing.tag-highway-path,
@@ -706,7 +717,6 @@ path.casing.tag-highway-pedestrian,
 path.casing.tag-highway-steps,
 path.casing.tag-highway-road,
 path.casing.tag-living_street,
-path.casing.tag-unclassified,
 path.casing.tag-service,
 path.casing.tag-track,
 path.casing.tag-path,
@@ -721,7 +731,6 @@ path.casing.tag-road {
 }
 
 .low-zoom path.stroke.tag-highway-living_street,
-.low-zoom path.stroke.tag-highway-unclassified,
 .low-zoom path.stroke.tag-highway-service,
 .low-zoom path.stroke.tag-highway-track,
 .low-zoom path.stroke.tag-highway-path,
@@ -733,7 +742,6 @@ path.casing.tag-road {
 .low-zoom path.stroke.tag-highway-steps,
 .low-zoom path.stroke.tag-highway-road,
 .low-zoom path.stroke.tag-living_street,
-.low-zoom path.stroke.tag-unclassified,
 .low-zoom path.stroke.tag-service,
 .low-zoom path.stroke.tag-track,
 .low-zoom path.stroke.tag-path,
@@ -747,7 +755,6 @@ path.casing.tag-road {
     stroke-width:2;
 }
 .low-zoom path.casing.tag-highway-living_street,
-.low-zoom path.casing.tag-highway-unclassified,
 .low-zoom path.casing.tag-highway-service,
 .low-zoom path.casing.tag-highway-track,
 .low-zoom path.casing.tag-highway-path,
@@ -759,7 +766,6 @@ path.casing.tag-road {
 .low-zoom path.casing.tag-highway-steps,
 .low-zoom path.casing.tag-highway-road,
 .low-zoom path.casing.tag-living_street,
-.low-zoom path.casing.tag-unclassified,
 .low-zoom path.casing.tag-service,
 .low-zoom path.casing.tag-track,
 .low-zoom path.casing.tag-path,
@@ -809,19 +815,6 @@ path.casing.tag-pedestrian.tag-unpaved {
     stroke: #8cd05f;
     stroke-linecap: round;
     stroke-dasharray: none;
-}
-
-.preset-icon .icon.highway-unclassified {
-    color: #eee;
-    fill: #444;
-}
-path.stroke.tag-highway-unclassified,
-path.stroke.tag-unclassified {
-    stroke:#eee;
-}
-path.casing.tag-highway-unclassified,
-path.casing.tag-unclassified {
-    stroke:#444;
 }
 
 .preset-icon .icon.highway-road {
