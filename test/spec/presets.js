@@ -48,6 +48,10 @@ describe("iD.presets", function() {
                     geometry: ['point','area'],
                     suggestion: true
                 },
+                'golf/water_hazard': {
+                    tags: { 'golf': 'water_hazard' },
+                    geometry: ['line','area']
+                },
                 'highway/foo': {
                     tags: { 'highway': 'foo' },
                     geometry: ['area']
@@ -80,7 +84,11 @@ describe("iD.presets", function() {
             expect(presets.areaKeys().natural.tree_row).to.eq(true);
         });
 
-        it("does not blacklist key-values for presets without a line geometry (e.g. used only on nodes)", function() {
+        it("does not blacklist key-values for presets with both area and line geometry", function() {
+            expect(presets.areaKeys().golf).not.to.have.key('water_hazard');
+        });
+
+        it("does not blacklist key-values for presets with neither area nor line geometry", function() {
             expect(presets.areaKeys().natural).not.to.have.key('peak');
         });
 
@@ -88,7 +96,7 @@ describe("iD.presets", function() {
             expect(presets.areaKeys().natural).not.to.have.key('natural');
         });
 
-        it("ignores keys like 'highway'", function() {
+        it("ignores keys like 'highway' that are assumed to be lines", function() {
             expect(presets.areaKeys()).not.to.have.key('highway');
         });
 
