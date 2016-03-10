@@ -73,7 +73,7 @@ iD.ui = function(context) {
 
         controls.append('div')
             .attr('class', 'map-control geolocate-control')
-            .call(iD.ui.Geolocate(map));
+            .call(iD.ui.Geolocate(context));
 
         controls.append('div')
             .attr('class', 'map-control background-control')

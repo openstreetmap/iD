@@ -233,6 +233,7 @@ en:
     no_results_worldwide: No results found
   geolocate:
     title: Show My Location
+    locating: "Locating, please wait..."
   inspector:
     no_documentation_combination: There is no documentation available for this tag combination
     no_documentation_key: There is no documentation available for this key
