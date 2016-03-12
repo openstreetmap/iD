@@ -2778,6 +2778,10 @@
                 "name": "Adult Gaming Center",
                 "terms": "gambling,slot machine"
             },
+            "leisure/bird_hide": {
+                "name": "Bird Hide",
+                "terms": "machan,ornithology"
+            },
             "leisure/bowling_alley": {
                 "name": "Bowling Alley",
                 "terms": ""

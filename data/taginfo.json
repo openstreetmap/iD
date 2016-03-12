@@ -1241,6 +1241,10 @@
         },
         {
             "key": "leisure",
+            "value": "bird_hide"
+        },
+        {
+            "key": "leisure",
             "value": "bowling_alley"
         },
         {

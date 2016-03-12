@@ -5401,6 +5401,23 @@
         },
         "name": "Adult Gaming Center"
     },
+    "leisure/bird_hide": {
+        "fields": [
+            "building_area"
+        ],
+        "geometry": [
+            "point",
+            "area"
+        ],
+        "tags": {
+            "leisure": "bird_hide"
+        },
+        "terms": [
+            "machan",
+            "ornithology"
+        ],
+        "name": "Bird Hide"
+    },
     "leisure/bowling_alley": {
         "fields": [
             "operator",
