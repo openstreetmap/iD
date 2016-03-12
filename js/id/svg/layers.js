@@ -1,10 +1,11 @@
 iD.svg.Layers = function(projection, context) {
-    var svg = d3.select(null),
+    var dispatch = d3.dispatch('change'),
+        svg = d3.select(null),
         layers = [
-            { id: 'osm', layer: iD.svg.Osm(projection, context) },
-            { id: 'gpx', layer: iD.svg.Gpx(projection, context) },
-            { id: 'mapillary-images', layer: iD.svg.MapillaryImages(projection, context) },
-            { id: 'mapillary-signs',  layer: iD.svg.MapillarySigns(projection, context) }
+            { id: 'osm', layer: iD.svg.Osm(projection, context, dispatch) },
+            { id: 'gpx', layer: iD.svg.Gpx(projection, context, dispatch) },
+            { id: 'mapillary-images', layer: iD.svg.MapillaryImages(projection, context, dispatch) },
+            { id: 'mapillary-signs',  layer: iD.svg.MapillarySigns(projection, context, dispatch) }
         ];
 
 
@@ -51,6 +52,7 @@ iD.svg.Layers = function(projection, context) {
         arr.forEach(function(id) {
             layers = _.reject(layers, 'id', id);
         });
+        dispatch.change();
         return this;
     };
 
@@ -61,6 +63,7 @@ iD.svg.Layers = function(projection, context) {
                 layers.push(obj);
             }
         });
+        dispatch.change();
         return this;
     };
 
@@ -76,5 +79,5 @@ iD.svg.Layers = function(projection, context) {
     };
 
 
-    return drawLayers;
+    return d3.rebind(drawLayers, dispatch, 'on');
 };

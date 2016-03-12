@@ -1,9 +1,9 @@
 iD.Background = function(context) {
     var dispatch = d3.dispatch('change'),
         baseLayer = iD.TileLayer().projection(context.projection),
-        overlayLayers = [];
+        overlayLayers = [],
+        backgroundSources;
 
-    var backgroundSources;
 
     function findSource(id) {
         return _.find(backgroundSources, function(d) {
@@ -11,7 +11,34 @@ iD.Background = function(context) {
         });
     }
 
-    function updateImagery() {
+
+    function background(selection) {
+        var base = selection.selectAll('.layer-background')
+            .data([0]);
+
+        base.enter()
+            .insert('div', '.layer-data')
+            .attr('class', 'layer layer-background');
+
+        base.call(baseLayer);
+
+        var overlays = selection.selectAll('.layer-overlay')
+            .data(overlayLayers, function(d) { return d.source().name(); });
+
+        overlays.enter()
+            .insert('div', '.layer-data')
+            .attr('class', 'layer layer-overlay');
+
+        overlays.each(function(layer) {
+            d3.select(this).call(layer);
+        });
+
+        overlays.exit()
+            .remove();
+    }
+
+
+    background.updateImagery = function() {
         var b = background.baseLayerSource(),
             o = overlayLayers.map(function (d) { return d.source().id; }).join(','),
             q = iD.util.stringQs(location.hash.substring(1));
@@ -50,32 +77,7 @@ iD.Background = function(context) {
         }
 
         context.history().imageryUsed(imageryUsed);
-    }
-
-    function background(selection) {
-        var base = selection.selectAll('.layer-background')
-            .data([0]);
-
-        base.enter()
-            .insert('div', '.layer-data')
-            .attr('class', 'layer layer-background');
-
-        base.call(baseLayer);
-
-        var overlays = selection.selectAll('.layer-overlay')
-            .data(overlayLayers, function(d) { return d.source().name(); });
-
-        overlays.enter()
-            .insert('div', '.layer-data')
-            .attr('class', 'layer layer-overlay');
-
-        overlays.each(function(layer) {
-            d3.select(this).call(layer);
-        });
-
-        overlays.exit()
-            .remove();
-    }
+    };
 
     background.sources = function(extent) {
         return backgroundSources.filter(function(source) {
@@ -96,7 +98,7 @@ iD.Background = function(context) {
 
         baseLayer.source(d);
         dispatch.change();
-        updateImagery();
+        background.updateImagery();
 
         return background;
     };
@@ -123,7 +125,7 @@ iD.Background = function(context) {
             if (layer.source() === d) {
                 overlayLayers.splice(i, 1);
                 dispatch.change();
-                updateImagery();
+                background.updateImagery();
                 return;
             }
         }
@@ -135,7 +137,7 @@ iD.Background = function(context) {
 
         overlayLayers.push(layer);
         dispatch.change();
-        updateImagery();
+        background.updateImagery();
     };
 
     background.nudge = function(d, zoom) {

@@ -1,4 +1,4 @@
-iD.svg.Gpx = function(projection, context) {
+iD.svg.Gpx = function(projection, context, dispatch) {
     var showLabels = true,
         layer;
 
@@ -92,10 +92,6 @@ iD.svg.Gpx = function(projection, context) {
         return (new DOMParser()).parseFromString(x, 'text/xml');
     }
 
-    function redraw() {
-        context.pan([0,0]);
-    }
-
     drawGpx.showLabels = function(_) {
         if (!arguments.length) return showLabels;
         showLabels = _;
@@ -105,6 +101,7 @@ iD.svg.Gpx = function(projection, context) {
     drawGpx.enabled = function(_) {
         if (!arguments.length) return iD.svg.Gpx.enabled;
         iD.svg.Gpx.enabled = _;
+        dispatch.change();
         return this;
     };
 
@@ -117,6 +114,7 @@ iD.svg.Gpx = function(projection, context) {
         if (!arguments.length) return iD.svg.Gpx.geojson;
         if (_.isEmpty(gj) || _.isEmpty(gj.features)) return this;
         iD.svg.Gpx.geojson = gj;
+        dispatch.change();
         return this;
     };
 
@@ -124,7 +122,6 @@ iD.svg.Gpx = function(projection, context) {
         d3.text(url, function(err, data) {
             if (!err) {
                 drawGpx.geojson(toGeoJSON.gpx(toDom(data)));
-                redraw();
             }
         });
         return this;
@@ -136,7 +133,6 @@ iD.svg.Gpx = function(projection, context) {
 
         reader.onload = function(e) {
             drawGpx.geojson(toGeoJSON.gpx(toDom(e.target.result))).fitZoom();
-            redraw();
         };
 
         reader.readAsText(f);

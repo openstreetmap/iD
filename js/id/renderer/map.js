@@ -32,6 +32,11 @@ iD.Map = function(context) {
             .on('change.map', redraw);
         context.features()
             .on('redraw.map', redraw);
+        drawLayers
+            .on('change.map', function() {
+                context.background().updateImagery();
+                redraw();
+            });
 
         selection
             .on('dblclick.map', dblClick)

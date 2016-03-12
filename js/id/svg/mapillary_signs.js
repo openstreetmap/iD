@@ -1,5 +1,5 @@
-iD.svg.MapillarySigns = function(projection, context) {
-    var debouncedRedraw = _.debounce(function () { context.pan([0,0]); }, 1000),
+iD.svg.MapillarySigns = function(projection, context, dispatch) {
+    var debouncedRedraw = _.debounce(function () { dispatch.change(); }, 1000),
         minZoom = 12,
         layer = d3.select(null),
         _mapillary;
@@ -154,6 +154,7 @@ iD.svg.MapillarySigns = function(projection, context) {
         } else {
             hideLayer();
         }
+        dispatch.change();
         return this;
     };
 
