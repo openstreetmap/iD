@@ -2307,8 +2307,8 @@ en:
         terms: "<translate with synonyms or related terms for 'Turning Circle', separated by commas>"
       highway/unclassified:
         # highway=unclassified
-        name: Minor Road
-        terms: "<translate with synonyms or related terms for 'Minor Road', separated by commas>"
+        name: Minor/Unclassified Road
+        terms: "<translate with synonyms or related terms for 'Minor/Unclassified Road', separated by commas>"
       historic:
         # 'historic=*'
         name: Historic Site

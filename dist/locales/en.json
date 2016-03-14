@@ -2635,7 +2635,7 @@
                 "terms": "cul-de-sac"
             },
             "highway/unclassified": {
-                "name": "Minor Road",
+                "name": "Minor/Unclassified Road",
                 "terms": ""
             },
             "historic": {
