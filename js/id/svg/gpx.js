@@ -68,15 +68,15 @@ iD.svg.Gpx = function(projection, context, dispatch) {
 
         labels.enter()
             .append('text')
-            .attr('class', 'gpx')
-            .text(function(d) {
-                return d.properties.desc || d.properties.name;
-            });
+            .attr('class', 'gpx');
 
         labels.exit()
             .remove();
 
         labels
+            .text(function(d) {
+                return d.properties.desc || d.properties.name;
+            })
             .attr('x', function(d) {
                 var centroid = path.centroid(d);
                 return centroid[0] + 7;
