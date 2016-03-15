@@ -1,7 +1,5 @@
 iD.ui.Lasso = function(context) {
-
-    var group, path,
-        polygon, p;
+    var group, polygon;
 
     lasso.coordinates = [];
 
@@ -13,45 +11,33 @@ iD.ui.Lasso = function(context) {
             .attr('class', 'lasso hide');
 
         polygon = group.append('path')
-            .attr('class', 'lasso-box');
+            .attr('class', 'lasso-path');
 
         group.call(iD.ui.Toggle(true));
 
     }
 
-    // top-left
-    function topLeft(d) {
-        return path = (path ? (path + ' L ') : 'M ') + d[0] + ' ' + d[1];
-    }
-
     function draw() {
         if (polygon) {
-            polygon.data([p])
-                .attr('d', topLeft);
+            polygon.data([lasso.coordinates])
+                .attr('d', function(d) { return 'M' + d.join(' L') + ' Z'; });
         }
     }
 
-    lasso.getBounds = function () {
-        var x = lasso.coordinates.map(function(i) {return i[0];});
-        var y = lasso.coordinates.map(function(i) {return i[1];});
-        return [[Math.min.apply(null, x), Math.min.apply(null, y)],
-                [Math.max.apply(null, x), Math.max.apply(null, y)]];
+    lasso.extent = function () {
+        return lasso.coordinates.reduce(function(extent, point) {
+            return extent.extend(iD.geo.Extent(point));
+        }, iD.geo.Extent());
     };
 
     lasso.p = function(_) {
-        if (!arguments.length) return p;
-        p = _;
-        lasso.coordinates.push(p);
+        if (!arguments.length) return lasso;
+        lasso.coordinates.push(_);
         draw();
         return lasso;
     };
 
-
     lasso.close = function() {
-
-        polygon.data([p])
-            .attr('d', path + ' Z');
-
         if (group) {
             group.call(iD.ui.Toggle(false, function() {
                 d3.select(this).remove();

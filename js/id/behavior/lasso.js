@@ -1,13 +1,10 @@
 iD.behavior.Lasso = function(context) {
 
     var behavior = function(selection) {
-        var mouse = null,
-            lasso;
+        var lasso;
 
         function mousedown() {
             if (d3.event.shiftKey === true) {
-
-                mouse = context.mouse();
                 lasso = null;
 
                 selection
@@ -20,7 +17,7 @@ iD.behavior.Lasso = function(context) {
 
         function mousemove() {
             if (!lasso) {
-                lasso = iD.ui.Lasso(context).p(mouse);
+                lasso = iD.ui.Lasso(context);
                 context.surface().call(lasso);
             }
 
@@ -41,9 +38,8 @@ iD.behavior.Lasso = function(context) {
             if (!lasso) return;
 
             var graph = context.graph(),
-                extent = iD.geo.Extent(
-                normalize(context.projection.invert(lasso.getBounds()[0]),
-                context.projection.invert(lasso.getBounds()[1])));
+                bounds = lasso.extent().map(context.projection.invert),
+                extent = iD.geo.Extent(normalize(bounds[0], bounds[1]));
 
             lasso.close();
 
