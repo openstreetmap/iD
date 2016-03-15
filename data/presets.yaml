@@ -2657,6 +2657,7 @@ en:
       man_made/pier:
         # man_made=pier
         name: Pier
+        # 'terms: dock'
         terms: "<translate with synonyms or related terms for 'Pier', separated by commas>"
       man_made/pipeline:
         # man_made=pipeline
@@ -3810,8 +3811,9 @@ en:
         terms: "<translate with synonyms or related terms for 'Ditch', separated by commas>"
       waterway/dock:
         # waterway=dock
-        name: Dock
-        terms: "<translate with synonyms or related terms for 'Dock', separated by commas>"
+        name: Wet Dock / Dry Dock
+        # 'terms: boat,ship,vessel,marine'
+        terms: "<translate with synonyms or related terms for 'Wet Dock / Dry Dock', separated by commas>"
       waterway/drain:
         # waterway=drain
         name: Drain

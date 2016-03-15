@@ -9,8 +9,14 @@
         "vertex",
         "point"
     ],
+    "terms": [
+        "boat",
+        "ship",
+        "vessel",
+        "marine"
+    ],
     "tags": {
         "waterway": "dock"
     },
-    "name": "Dock"
+    "name": "Wet Dock / Dry Dock"
 }

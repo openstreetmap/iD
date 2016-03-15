@@ -6137,6 +6137,9 @@
             "line",
             "area"
         ],
+        "terms": [
+            "dock"
+        ],
         "tags": {
             "man_made": "pier"
         },
@@ -10675,10 +10678,16 @@
             "vertex",
             "point"
         ],
+        "terms": [
+            "boat",
+            "ship",
+            "vessel",
+            "marine"
+        ],
         "tags": {
             "waterway": "dock"
         },
-        "name": "Dock"
+        "name": "Wet Dock / Dry Dock"
     },
     "waterway/drain": {
         "icon": "waterway-stream",

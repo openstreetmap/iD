@@ -2960,7 +2960,7 @@
             },
             "man_made/pier": {
                 "name": "Pier",
-                "terms": ""
+                "terms": "dock"
             },
             "man_made/pipeline": {
                 "name": "Pipeline",
@@ -4039,8 +4039,8 @@
                 "terms": ""
             },
             "waterway/dock": {
-                "name": "Dock",
-                "terms": ""
+                "name": "Wet Dock / Dry Dock",
+                "terms": "boat,ship,vessel,marine"
             },
             "waterway/drain": {
                 "name": "Drain",
