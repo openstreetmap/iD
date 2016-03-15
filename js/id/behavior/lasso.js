@@ -4,7 +4,8 @@ iD.behavior.Lasso = function(context) {
         var lasso;
 
         function mousedown() {
-            if (d3.event.shiftKey === true) {
+            var button = 0;  // left
+            if (d3.event.button === button && d3.event.shiftKey === true) {
                 lasso = null;
 
                 selection
@@ -30,6 +31,20 @@ iD.behavior.Lasso = function(context) {
                 [Math.max(a[0], b[0]), Math.max(a[1], b[1])]];
         }
 
+        function lassoed() {
+            if (!lasso) return [];
+
+            var graph = context.graph(),
+                bounds = lasso.extent().map(context.projection.invert),
+                extent = iD.geo.Extent(normalize(bounds[0], bounds[1]));
+
+            return _.pluck(context.intersects(extent).filter(function(entity) {
+                return entity.type === 'node' &&
+                    iD.geo.pointInPolygon(context.projection(entity.loc), lasso.coordinates) &&
+                    !context.features().isHidden(entity, graph, entity.geometry(graph));
+            }), 'id');
+        }
+
         function mouseup() {
             selection
                 .on('mousemove.lasso', null)
@@ -37,20 +52,11 @@ iD.behavior.Lasso = function(context) {
 
             if (!lasso) return;
 
-            var graph = context.graph(),
-                bounds = lasso.extent().map(context.projection.invert),
-                extent = iD.geo.Extent(normalize(bounds[0], bounds[1]));
-
+            var ids = lassoed();
             lasso.close();
 
-            var selected = context.intersects(extent).filter(function(entity) {
-                return entity.type === 'node' &&
-                    iD.geo.pointInPolygon(context.projection(entity.loc), lasso.coordinates) &&
-                    !context.features().isHidden(entity, graph, entity.geometry(graph));
-            });
-
-            if (selected.length) {
-                context.enter(iD.modes.Select(context, _.pluck(selected, 'id')));
+            if (ids.length) {
+                context.enter(iD.modes.Select(context, ids));
             }
         }
 
