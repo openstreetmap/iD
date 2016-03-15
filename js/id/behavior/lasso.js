@@ -20,11 +20,11 @@ iD.behavior.Lasso = function(context) {
 
         function mousemove() {
             if (!lasso) {
-                lasso = iD.ui.Lasso(context).a(mouse);
+                lasso = iD.ui.Lasso(context).p(mouse);
                 context.surface().call(lasso);
             }
 
-            lasso.b(context.mouse());
+            lasso.p(context.mouse());
         }
 
         function normalize(a, b) {
@@ -42,13 +42,14 @@ iD.behavior.Lasso = function(context) {
 
             var graph = context.graph(),
                 extent = iD.geo.Extent(
-                normalize(context.projection.invert(lasso.a()),
-                context.projection.invert(lasso.b())));
+                normalize(context.projection.invert(lasso.getBounds()[0]),
+                context.projection.invert(lasso.getBounds()[1])));
 
             lasso.close();
 
             var selected = context.intersects(extent).filter(function(entity) {
                 return entity.type === 'node' &&
+                    iD.geo.pointInPolygon(context.projection(entity.loc), lasso.coordinates) &&
                     !context.features().isHidden(entity, graph, entity.geometry(graph));
             });
 
