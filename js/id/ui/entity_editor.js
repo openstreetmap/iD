@@ -191,10 +191,9 @@ iD.ui.EntityEditor = function(context) {
                 context.overwrite(iD.actions.ChangeTags(id, tags), annotation);
             } else {
                 context.perform(iD.actions.ChangeTags(id, tags), annotation);
+                coalesceChanges = !!onInput;
             }
         }
-
-        coalesceChanges = !!onInput;
     }
 
     entityEditor.modified = function(_) {
