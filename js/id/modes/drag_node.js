@@ -8,6 +8,7 @@ iD.modes.DragNode = function(context) {
         activeIDs,
         wasMidpoint,
         cancelled,
+        nodeOffset,
         selectedIDs = [],
         hover = iD.behavior.Hover(context)
             .altDisables(true)
@@ -103,6 +104,12 @@ iD.modes.DragNode = function(context) {
         var loc = context.projection.invert(d3.event.point);
 
         var d = datum();
+
+        // save the offset as difference between loc and d.loc during start of drag
+        nodeOffset = nodeOffset || [loc[0] - d.loc[0], loc[1] - d.loc[1]];
+        // use this offset to prevent jumping of POI marker (node)
+        loc = [loc[0] - nodeOffset[0], loc[1] - nodeOffset[1]];
+
         if (d.type === 'node' && d.id !== entity.id) {
             loc = d.loc;
         } else if (d.type === 'way' && !d3.select(d3.event.sourceEvent.target).classed('fill')) {
