@@ -1,5 +1,20 @@
 :warning: = Breaking change, may affect downstream projects or sites that embed iD.
 
+## 1.9.2
+##### Mar 18, 2016
+* Avoid jumpiness when dragging node markers (#3003)
+* Rename "Dock" -> "Wet Dock / Dry Dock" (#3030)
+* Refresh lables when switching to a new GPX file (#3032)
+* Fix bug where adding a space to a name would undo a previous edit (#3035)
+* Display GPX tracks immediately when loaded or toggled (#3027)
+* Include "Local GPX" in imagery used list when GPX loaded via url parameter (#2804)
+* Add Bird Hide preset (#3026)
+* Exclude from areaKeys blacklist presets that are point/vertex only (#3009)
+* Return to browse mode and block ui while geolocating (#3016)
+* Restore highway=unclassified to thick line rendering and rename as "Minor/Unclassified Road" (#3015)
+* Allow drawing of freeform shapes when using the shift-click-drag lasso selection tool (#2937, thanks @kepta)
+* Rename "Major Roads" -> "Traffic Roads", "Minor Roads" -> "Service Roads" in feature filter list
+
 ## 1.9.1
 ##### Mar 3, 2016
 * Add context.asset for building asset filenames, use for Mapillary Traffico files (#3011)
