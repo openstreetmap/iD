@@ -336,14 +336,6 @@
             "description": "Titik",
             "tooltip": "Lokasi Pusat Perhatian"
         },
-        "major_roads": {
-            "description": "Jalan Besar",
-            "tooltip": "Jalan Protokol, Jalan Umum, dsb."
-        },
-        "minor_roads": {
-            "description": "Jalan Kecil",
-            "tooltip": "Jalan Akses, Tempat Parkir, Jalan Setapak, dsb."
-        },
         "paths": {
             "description": "Jalan Kecil",
             "tooltip": "Trotoar, Jalur Pejalan Kaki, Jalur Sepeda, dsb."

@@ -252,7 +252,8 @@
         "modified": "Alterado",
         "deleted": "Eliminado",
         "created": "Criado",
-        "about_changeset_comments": "Sobre comentários de changesets"
+        "about_changeset_comments": "Sobre comentários de changesets",
+        "about_changeset_comments_link": "//wiki.openstreetmap.org/wiki/Good_changeset_comments"
     },
     "contributors": {
         "list": "Edições de {users}",
@@ -284,7 +285,8 @@
         "no_results_worldwide": "Nenhum resultado encontrado"
     },
     "geolocate": {
-        "title": "Mostrar a minha localização"
+        "title": "Mostrar a minha localização",
+        "locating": "A ler, aguarde..."
     },
     "inspector": {
         "no_documentation_combination": "Não existe documentação disponível para esta combinação de etiqueta",
@@ -329,7 +331,7 @@
         "custom_button": "Editar fundo personalizando",
         "custom_prompt": "Introduzir um URL válido. Tokens válidos são {z}, {x}, {y} para esquemas Z/X/Y e {u} para esquemas QuadTile.",
         "fix_misalignment": "Corrigir alinhamento",
-        "imagery_source_faq": "De onde essa imagem vem?",
+        "imagery_source_faq": "De onde vem essa imagem?",
         "reset": "reiniciar",
         "minimap": {
             "description": "Mini-mapa",
@@ -349,13 +351,13 @@
             "description": "Pontos",
             "tooltip": "Pontos de Interesse"
         },
-        "major_roads": {
-            "description": "Rodovias Principais",
-            "tooltip": "Estradas, Ruas, etc."
+        "traffic_roads": {
+            "description": "Estradas com tráfego",
+            "tooltip": "Autoestradas, ruas, etc."
         },
-        "minor_roads": {
-            "description": "Rodovias Menores",
-            "tooltip": "Estradas de Serviço, Estradas Florestais, etc."
+        "service_roads": {
+            "description": "Estradas de serviço",
+            "tooltip": "Estradas de serviço, corredores de estacionamento, estradas agrícolas, etc."
         },
         "paths": {
             "description": "Caminhos",
@@ -454,7 +456,8 @@
         "twitter": "Partilhar no Twitter",
         "google": "Partilhar no Google+",
         "help_html": "Suas mudanças devem aparecer na \"Camada padrão\" em poucos minutos. Outras camadas e determinados recursos podem demorar mais.",
-        "help_link_text": "Detalhes"
+        "help_link_text": "Detalhes",
+        "help_link_url": "https://wiki.openstreetmap.org/wiki/FAQ#I_have_just_made_some_changes_to_the_map._How_do_I_get_to_see_my_changes.3F"
     },
     "confirm": {
         "okay": "OK",
@@ -606,34 +609,34 @@
     "presets": {
         "categories": {
             "category-building": {
-                "name": "Tipos de Edificações"
+                "name": "Tipos de edifícios"
             },
             "category-golf": {
                 "name": "Recursos de Golfe"
             },
             "category-landuse": {
-                "name": "Tipos de Uso do Solo"
+                "name": "Tipos de uso do solo"
             },
             "category-path": {
-                "name": "Tipos de Caminhos"
+                "name": "Tipos de caminho"
             },
             "category-rail": {
-                "name": "Tipos de Ferrovias"
+                "name": "Tipos de ferrovia"
             },
             "category-restriction": {
-                "name": "Tipos de Restrição"
+                "name": "Tipos de restrição"
             },
             "category-road": {
-                "name": "Rodovias e Ruas"
+                "name": "Tipos de Rodovia"
             },
             "category-route": {
-                "name": "Tipos de Rotas"
+                "name": "Tipos de rota"
             },
             "category-water-area": {
-                "name": "Elementos de Água"
+                "name": "Elementos de água"
             },
             "category-water-line": {
-                "name": "Tipos de Cursos d'água"
+                "name": "Tipos de cursos de água"
             }
         },
         "fields": {
@@ -2568,7 +2571,7 @@
                 "terms": "Rodovia de Serviço"
             },
             "highway/service/alley": {
-                "name": "Rua de traseiras",
+                "name": "Viela / Traseiras",
                 "terms": "Traseiras"
             },
             "highway/service/drive-through": {
@@ -2584,7 +2587,7 @@
                 "terms": "Acesso de Emergência, Entrada de Emergência, Corredor de Emergência, Ambulâncias, Ambulância, Emergência"
             },
             "highway/service/parking_aisle": {
-                "name": "Estrada de estacionamento",
+                "name": "Corredor de estacionamento",
                 "terms": "Pista de Estacionamento, Estacionar, Estacionamento, Estrada"
             },
             "highway/services": {
@@ -2612,7 +2615,7 @@
                 "terms": "Tertiary Link, Ligação Estrada Municipal, Ligação Rodovia Municipal, Ligação Municipal,  Ligação Estrada Terciária, Entrada Estrada Municipal, Entrada Rodovia Municipal, Entrada Municipal, Entrada Estrada Terciária, Saída Municipal, Saída Rodovia Municipal, Saída Municipal, Saída Estrada Municipal"
             },
             "highway/track": {
-                "name": "Estrada sem manutenção",
+                "name": "Estrada florestal / agrícola",
                 "terms": "Estrada de terra, estrada agrícola"
             },
             "highway/traffic_signals": {
@@ -2632,7 +2635,7 @@
                 "terms": "Inversão de Marcha"
             },
             "highway/unclassified": {
-                "name": "Estrada menor",
+                "name": "Estrada menor / sem classificação",
                 "terms": "Minor Road"
             },
             "historic": {
@@ -2774,6 +2777,10 @@
             "leisure/adult_gaming_centre": {
                 "name": "Centro de jogos para adultos",
                 "terms": "Adult Gaming Center"
+            },
+            "leisure/bird_hide": {
+                "name": "Abrigo de passaros",
+                "terms": "Bird Hide"
             },
             "leisure/bowling_alley": {
                 "name": "Pista de Bowling",
@@ -4002,6 +4009,10 @@
             "type/route_master": {
                 "name": "Rede de rotas",
                 "terms": "Route Master, Rota Mestre"
+            },
+            "type/site": {
+                "name": "Sítio",
+                "terms": "Site"
             },
             "vertex": {
                 "name": "Outro",

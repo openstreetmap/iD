@@ -285,7 +285,8 @@
         "no_results_worldwide": "Нічого не знайдено"
     },
     "geolocate": {
-        "title": "Моє місцезнаходження"
+        "title": "Моє місцезнаходження",
+        "locating": "Визначаємо положення, зачекайте…"
     },
     "inspector": {
         "no_documentation_combination": "Для цієї комбінації теґів немає документації",
@@ -350,13 +351,13 @@
             "description": "Точки",
             "tooltip": "Об’єкти - POI"
         },
-        "major_roads": {
-            "description": "Основні дороги",
-            "tooltip": "Автомагістралі, вулиці й т.д."
+        "traffic_roads": {
+            "description": "Автомагістралі",
+            "tooltip": "Проспекти, вулиці"
         },
-        "minor_roads": {
-            "description": "Другорядні дороги",
-            "tooltip": "Службові проїзди, проїзди на стоянках, путівці й т.д."
+        "service_roads": {
+            "description": "Службові проїзди",
+            "tooltip": "Службові дороги, проїзди на стоянках, путівці й т.д."
         },
         "paths": {
             "description": "Шляхи",
@@ -2634,7 +2635,7 @@
                 "terms": "Turning Circle, vscwt lkz hjdjhjne, місце для розвороту"
             },
             "highway/unclassified": {
-                "name": "Некласифікована дорога",
+                "name": "Незначні дороги",
                 "terms": "дорога,некласифікована,сільска,промислова,загальна"
             },
             "historic": {
@@ -2776,6 +2777,10 @@
             "leisure/adult_gaming_centre": {
                 "name": "Гральні автомати",
                 "terms": "азарт,ставки,гроші,виграш,програш,атомат,казіно"
+            },
+            "leisure/bird_hide": {
+                "name": "Пункт спостереження",
+                "terms": "птахи,звіри,природа,тварини"
             },
             "leisure/bowling_alley": {
                 "name": "Боулінг",
@@ -4034,8 +4039,8 @@
                 "terms": "Ditch, rfyfdf, канава"
             },
             "waterway/dock": {
-                "name": "Док",
-                "terms": "док,верф,корабель,будівництво"
+                "name": "Сухий/Мокрий док",
+                "terms": "корабель,човен,лодка,яклик,бухта,затока"
             },
             "waterway/drain": {
                 "name": "Дренажний канал",

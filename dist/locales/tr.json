@@ -322,9 +322,6 @@
             "description": "Noktalar",
             "tooltip": "İlgi Çekici Nokta (POI)"
         },
-        "major_roads": {
-            "tooltip": "Karayolu, Sokak, vb."
-        },
         "paths": {
             "description": "Patikalar"
         },
@@ -341,6 +338,7 @@
             "tooltip": "İdari Sınırları"
         },
         "water": {
+            "description": "Su Özellikleri",
             "tooltip": "Nehirler, Göller, Havuzlar, Havzalar, vb."
         },
         "rail": {
@@ -482,8 +480,38 @@
         }
     },
     "presets": {
+        "categories": {
+            "category-building": {
+                "name": "Bina Özellikleri"
+            },
+            "category-golf": {
+                "name": "Golf Özellikleri"
+            },
+            "category-landuse": {
+                "name": "Arazi Özellikleri"
+            },
+            "category-path": {
+                "name": "Patika Özellikleri"
+            },
+            "category-rail": {
+                "name": "Demiryolu Özellikleri"
+            },
+            "category-road": {
+                "name": "Yol Özellikleri"
+            },
+            "category-route": {
+                "name": "Yönlendirme Özellikleri"
+            },
+            "category-water-area": {
+                "name": "Su Özellikleri"
+            },
+            "category-water-line": {
+                "name": "Su Özellikleri"
+            }
+        },
         "fields": {
             "access": {
+                "label": "İzinli Giriş",
                 "options": {
                     "designated": {
                         "description": "Giriş, imlere ya da yerel yasalara göre olurlanmış",
@@ -510,8 +538,9 @@
                         "title": "Serbest"
                     }
                 },
-                "placeholder": "Tüm",
+                "placeholder": "Belirlenmemiş",
                 "types": {
+                    "access": "Tüm",
                     "bicycle": "Bisikletler",
                     "foot": "Yürüyerek",
                     "horse": "Atlar",
@@ -519,6 +548,7 @@
                 }
             },
             "access_simple": {
+                "label": "İzinli Giriş",
                 "placeholder": "evet"
             },
             "access_toilets": {
@@ -527,13 +557,14 @@
             "address": {
                 "label": "Adres",
                 "placeholders": {
-                    "city": "Şehir",
+                    "city": "Büyükşehir",
+                    "conscriptionnumber": "123",
                     "country": "Ülke",
                     "district": "İlçe",
-                    "hamlet": "Küçük köy",
+                    "hamlet": "Mezra",
                     "housename": "Ev adı",
                     "housenumber": "123",
-                    "place": "Yer",
+                    "place": "Yerleşim Yeri",
                     "postcode": "Posta kodu",
                     "province": "İl",
                     "state": "Uçbeylik",
@@ -662,7 +693,7 @@
                 "label": "Ülke"
             },
             "covered": {
-                "label": "Kapalı"
+                "label": "Üstü Kapalı"
             },
             "craft": {
                 "label": "Tip"
@@ -683,6 +714,9 @@
                     "cycleway:right": "Sağ tarafta"
                 }
             },
+            "delivery": {
+                "label": "Teslim"
+            },
             "denomination": {
                 "label": "Sınıf"
             },
@@ -691,6 +725,9 @@
             },
             "description": {
                 "label": "Açıklama"
+            },
+            "dock": {
+                "label": "Tip"
             },
             "electrified": {
                 "options": {
@@ -706,6 +743,9 @@
             "entrance": {
                 "label": "Tip"
             },
+            "except": {
+                "label": "İstisnalar"
+            },
             "fax": {
                 "label": "Faks",
                 "placeholder": "+31 42 123 4567"
@@ -716,6 +756,7 @@
             "fire_hydrant/type": {
                 "label": "Tip",
                 "options": {
+                    "pond": "Havuz",
                     "underground": "Yeraltı",
                     "wall": "Duvar"
                 }
@@ -726,19 +767,32 @@
             "fuel": {
                 "label": "Benzin İstasyonu"
             },
+            "fuel/diesel": {
+                "label": "Mazot Var"
+            },
+            "gauge": {
+                "label": "Dingil Genişliği"
+            },
             "gender": {
                 "label": "Cinsiyet",
                 "options": {
                     "female": "Kadın",
-                    "male": "Erkek"
+                    "male": "Erkek",
+                    "unisex": "Eş"
                 },
                 "placeholder": "Bilinmiyor"
+            },
+            "generator/method": {
+                "label": "Yöntem"
             },
             "generator/source": {
                 "label": "Kaynak"
             },
             "generator/type": {
                 "label": "Tip"
+            },
+            "golf_hole": {
+                "placeholder": "Çukur Numarası (1-18)"
             },
             "handicap": {
                 "label": "Engelli",
@@ -759,7 +813,11 @@
             "icao": {
                 "label": "ICAO"
             },
+            "incline": {
+                "label": "Meyil"
+            },
             "incline_steps": {
+                "label": "Meyil",
                 "options": {
                     "down": "Aşağı",
                     "up": "Yukarı"
@@ -792,7 +850,16 @@
                 "label": "Katman"
             },
             "leaf_type": {
-                "label": "Yaprak Türü"
+                "label": "Yaprak Türü",
+                "options": {
+                    "needleleaved": "İğneli"
+                }
+            },
+            "leaf_type_singular": {
+                "label": "Yaprak Türü",
+                "options": {
+                    "needleleaved": "İğneli"
+                }
             },
             "leisure": {
                 "label": "Tip"
@@ -840,6 +907,7 @@
                 "label": "Tek Yön",
                 "options": {
                     "no": "Hayır",
+                    "undefined": "Tahminen Hayir",
                     "yes": "Evet"
                 }
             },
@@ -847,6 +915,7 @@
                 "label": "Tek Yön",
                 "options": {
                     "no": "Hayır",
+                    "undefined": "Tahminen Evet",
                     "yes": "Evet"
                 }
             },
@@ -862,6 +931,7 @@
             "parking": {
                 "label": "Tür",
                 "options": {
+                    "multi-storey": "Çokkatlı",
                     "surface": "Yüzey",
                     "underground": "Yeraltı"
                 }
@@ -896,6 +966,11 @@
             "railway": {
                 "label": "Tip"
             },
+            "recycling/type": {
+                "options": {
+                    "centre": "Geri Dönüşüm Merkezi"
+                }
+            },
             "ref": {
                 "label": "Referans"
             },
@@ -926,12 +1001,14 @@
             "service/bicycle/chain_tool": {
                 "options": {
                     "no": "Hayır",
+                    "undefined": "Tahminen Hayir",
                     "yes": "Evet"
                 }
             },
             "service/bicycle/pump": {
                 "options": {
-                    "no": "Hayır"
+                    "no": "Hayır",
+                    "undefined": "Tahminen Hayir"
                 }
             },
             "shelter": {
@@ -941,6 +1018,9 @@
                 "label": "Tip"
             },
             "shop": {
+                "label": "Tip"
+            },
+            "site": {
                 "label": "Tip"
             },
             "social_facility_for": {
@@ -981,6 +1061,7 @@
                 "label": "Yüzey"
             },
             "takeaway": {
+                "label": "Algötür",
                 "options": {
                     "no": "Hayır",
                     "yes": "Evet"
@@ -989,11 +1070,18 @@
             "toilets/disposal": {
                 "options": {
                     "bucket": "Kova",
+                    "chemical": "Kimyasal",
                     "pitlatrine": "Hela"
                 }
             },
             "tourism": {
                 "label": "Tip"
+            },
+            "towertype": {
+                "label": "Kule tipi"
+            },
+            "tracktype": {
+                "label": "Toprak yolunun tipi"
             },
             "traffic_signals": {
                 "label": "Tip"

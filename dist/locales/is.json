@@ -274,13 +274,6 @@
         "points": {
             "tooltip": "Áhugaverðir staðir"
         },
-        "major_roads": {
-            "description": "Aðalvegir",
-            "tooltip": "Þjóðvegir, götur, osfrv."
-        },
-        "minor_roads": {
-            "description": "Minni vegir"
-        },
         "buildings": {
             "description": "Byggingar",
             "tooltip": "Byggingar, skýli, bílskúrar oþh."

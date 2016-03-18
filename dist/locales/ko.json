@@ -343,14 +343,6 @@
             "description": "점",
             "tooltip": "관심 있는 점"
         },
-        "major_roads": {
-            "description": "주요 도로",
-            "tooltip": "고속도로, 거리 등"
-        },
-        "minor_roads": {
-            "description": "보조 도로",
-            "tooltip": "취부 도로, 주차장 통로, 트랙 등"
-        },
         "paths": {
             "description": "경로",
             "tooltip": "인도, 보도, 자전거로 등"

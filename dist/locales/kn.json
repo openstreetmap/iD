@@ -217,14 +217,6 @@
         "points": {
             "description": "ಬಿಂದುಗಳು"
         },
-        "major_roads": {
-            "description": "‍ಪ್ರಮುಖ ರಸ್ತೆಗಳು",
-            "tooltip": "ಹೆದ್ದಾರಿಗಳು, ಬೀದಿಗಳು ಇತ್ಯಾದಿಗಳು"
-        },
-        "minor_roads": {
-            "description": "ಸಣ್ಣ ರಸ್ತೆಗಳು",
-            "tooltip": "ಸೇವೆ ರಸ್ತೆಗಳು, ನಿಲುಗಡೆ ನಡುದಾರಿಗಳು, ಟ್ರ್ಯಾಕ್ಸ್, ಇತ್ಯಾದಿ"
-        },
         "paths": {
             "description": "ಪಥ",
             "tooltip": "ಪಾದಚಾರಿ ಮಾರ್ಗಗಳು, ಕಾಲುದಾರಿಗಳು, ಸೈಕ‍ಲ್ ಮಾರ್ಗಗಳು, ಇತ್ಯಾದಿ"
@@ -316,6 +308,38 @@
         }
     },
     "presets": {
+        "categories": {
+            "category-building": {
+                "name": "‍ಕಟ್ಟಡ ‍ವೈಶಿಷ್ಟ್ಯಗಳು"
+            },
+            "category-golf": {
+                "name": "ಗಾಲ್ಫ್ ವೈಶಿಷ್ಟ್ಯಗಳು‍‍‍"
+            },
+            "category-landuse": {
+                "name": "ಭೂಮಿಯ  ವೈಶಿಷ್ಟ್ಯಗಳು‍‍"
+            },
+            "category-path": {
+                "name": "‍‍‍‍ ದಾರಿ ‍ವೈಶಿಷ್ಟ್ಯಗಳು"
+            },
+            "category-rail": {
+                "name": "‍ರೈಲು‍‍‍ ವೈಶಿಷ್ಟ್ಯಗಳು"
+            },
+            "category-restriction": {
+                "name": "ಬ೦ದನೆ ಮುಖಭಾಗ"
+            },
+            "category-road": {
+                "name": "ರಸ್ತೆ ವೈಶಿಷ್ಟ್ಯಗಳು"
+            },
+            "category-route": {
+                "name": "ಮಾರ್ಗ ಮುಖ್ಯಲಕ್ಷಣ"
+            },
+            "category-water-area": {
+                "name": "ನೀರು ಮುಖ್ಯಲಕ್ಷಣ"
+            },
+            "category-water-line": {
+                "name": "ನೀರು ಮುಖ್ಯಲಕ್ಷಣ"
+            }
+        },
         "fields": {
             "access": {
                 "label": "ಅನುಮತಿಸಲಾದ ಪ್ರವೇಶ",
@@ -324,9 +348,11 @@
                         "title": "ನಿಯೋಜಿತ"
                     },
                     "destination": {
+                        "description": "‍‍ಪ್ರವೇಶ ಅನುಮತಿ ನಿರ್ದಿಷ್ಟ ಸ್ಥಳಕ್ ‍ಮಾತ್ರ",
                         "title": "ತಲಪುದಾಣ"
                     },
                     "dismount": {
+                        "description": "ೞ್‍",
                         "title": "ಬೇರ್ಪಡಿಸು"
                     },
                     "no": {
@@ -363,12 +389,12 @@
                 "label": "ವಿಳಾಸ",
                 "placeholders": {
                     "city": "ನಗರ",
-                    "conscriptionnumber": "123",
+                    "conscriptionnumber": "೧೨೩",
                     "country": "ದೇಶ",
                     "district": "ಜಿಲ್ಲೆ",
                     "hamlet": "ಕೊಪ್ಪಲು",
                     "housename": "ಮನೆ ಹೆಸರು",
-                    "housenumber": "123",
+                    "housenumber": "೧೨೩",
                     "place": "ಸ್ಥಳ",
                     "postcode": "ಅಂಚೆ ಸಂಖ್ಯೆ",
                     "province": "ಪ್ರಾಂತ್ಯ",
@@ -397,18 +423,18 @@
             },
             "aerialway/capacity": {
                 "label": "ಸಾಮರ್ಥ್ಯ (ಗಂಟೆಗೆ)",
-                "placeholder": "500, 2500, 5000..."
+                "placeholder": "೫೦೦, ೨೫೦೦, ೫೦೦೦..."
             },
             "aerialway/duration": {
                 "label": "ಅವಧಿ (ನಿಮಿಷಗಳು)",
-                "placeholder": "1, 2, 3..."
+                "placeholder": "೧, ೨, ೩..."
             },
             "aerialway/heating": {
                 "label": "ಬಿಸಿ"
             },
             "aerialway/occupancy": {
                 "label": "ನೆಲೆಸುವಿಕೆ",
-                "placeholder": "2, 4, 8..."
+                "placeholder": "೨, ೪, ೮..."
             },
             "aerialway/summer/access": {
                 "label": "ಪ್ರವೇಶ(ಬೇಸಿಗೆ)",
@@ -434,7 +460,7 @@
                 "label": "ವಿಧ"
             },
             "atm": {
-                "label": "ATM"
+                "label": "ಎಟಿಎಮ್ "
             },
             "backrest": {
                 "label": "ಬೆನ್ನಾಸರೆ"
@@ -492,11 +518,14 @@
                     "clockwise": "ಪ್ರದಕ್ಷಿಣವಾಗಿ"
                 }
             },
+            "collection_times": {
+                "label": "ಸಂಗ್ರಹ ವೇಳೆ"
+            },
             "construction": {
                 "label": "ವಿಧ"
             },
             "content": {
-                "label": "‍"
+                "label": "‍ ಒಳಾಂಶಗಳು"
             },
             "country": {
                 "label": "ದೇಶ"
@@ -517,9 +546,17 @@
                 "label": "ಪಾಕಪದ್ಧತಿ"
             },
             "cycleway": {
+                "label": " ಸೈಕಲ್ ಪಥ‍ಗಳು‍",
                 "options": {
                     "none": {
+                        "description": " ರಹಿತ ಸೈಕಲ್ ಪಥ‍",
                         "title": "‍‍ಯಾವುದೂ ಇಲ್ಲದ"
+                    },
+                    "shared_lane": {
+                        "title": "‍ಹಂಚಿದ‍  ಸೈಕಲ್ ಪಥ‍"
+                    },
+                    "track": {
+                        "title": "ಸೈಕಲ್  ಪಥ "
                     }
                 },
                 "placeholder": "‍‍ಯಾವುದೂ ಇಲ್ಲದ",
@@ -539,6 +576,9 @@
             },
             "description": {
                 "label": "ವಿವರಣೆ"
+            },
+            "dock": {
+                "label": "ವಿಧ"
             },
             "electrified": {
                 "label": "ವಿದ್ಯುದೀಕರಣ",
@@ -721,6 +761,9 @@
                 "label": "ಮಟ್ಟ",
                 "placeholder": "2, 4, 6..."
             },
+            "lit": {
+                "label": "ಜ್ಯೋತಿ"
+            },
             "location": {
                 "label": "ಸ್ಥಾನ"
             },
@@ -792,7 +835,7 @@
             },
             "par": {
                 "label": "Par",
-                "placeholder": "3, 4, 5..."
+                "placeholder": "೩, ೪, ೫..."
             },
             "park_ride": {
                 "label": "ನಿಲ್ಲಿಸು ಮತ್ತು ಸವಾರಿ ಮಾಡು"
@@ -803,7 +846,7 @@
                     "multi-storey": "ಬಹುಮಟ್ಟದ",
                     "sheds": "ತಂಗುದಾಣ",
                     "surface": "ಮೇಲ್ಮೈ",
-                    "underground": "‍‍‍"
+                    "underground": "‍‍‍ನೆಲದಡಿ"
                 }
             },
             "phone": {
@@ -862,6 +905,9 @@
             "restriction": {
                 "label": "ವಿಧ"
             },
+            "restrictions": {
+                "label": "ತಿರುಗು ನಿರ್ಬಂಧ‍ಗಲು"
+            },
             "route": {
                 "label": "ವಿಧ"
             },
@@ -893,6 +939,9 @@
                 "label": "ವಿಧ"
             },
             "shop": {
+                "label": "ವಿಧ"
+            },
+            "site": {
                 "label": "ವಿಧ"
             },
             "smoking": {
@@ -962,6 +1011,9 @@
             "water": {
                 "label": "ವಿಧ"
             },
+            "water_point": {
+                "label": "ನೀರಿನ ಬಿಂದು"
+            },
             "waterway": {
                 "label": "ವಿಧ"
             },
@@ -1011,7 +1063,7 @@
                 "terms": "<translate with synonyms or related terms for 'Arts Center', separated by commas>"
             },
             "amenity/atm": {
-                "name": "ATM"
+                "name": "ಎಟಿಎಮ್ "
             },
             "amenity/bank": {
                 "name": "ಬ್ಯಾಂಕ್"
@@ -1023,19 +1075,116 @@
                 "terms": "<translate with synonyms or related terms for 'Barbecue/Grill', separated by commas>"
             },
             "amenity/bench": {
+                "name": " ನ್ಯಾಯಪೀಠ",
                 "terms": "<translate with synonyms or related terms for 'Bench', separated by commas>"
             },
             "amenity/bicycle_parking": {
                 "terms": "<translate with synonyms or related terms for 'Bicycle Parking', separated by commas>"
             },
+            "amenity/bus_station": {
+                "name": "ಬಸ್ ನಿಲ್ದಾಣ"
+            },
             "amenity/cinema": {
                 "name": "ಸಿನಿಮಾ"
+            },
+            "amenity/clinic": {
+                "name": "ಚಿಕಿತ್ಸಾಲಯ"
+            },
+            "amenity/clock": {
+                "name": "ಗಡಿಯಾರ"
+            },
+            "amenity/dentist": {
+                "name": "ದಂತವೈದ್ಯ"
+            },
+            "amenity/doctors": {
+                "name": "ವೈದ್ಯರು"
+            },
+            "amenity/embassy": {
+                "name": "ರಾಯಭಾರ"
+            },
+            "amenity/fire_station": {
+                "name": "ಅಗ್ನಿಶಾಮಕ ಕೇಂದ್ರ"
+            },
+            "amenity/fountain": {
+                "name": "ಬುಗ್ಗೆ"
+            },
+            "amenity/grave_yard": {
+                "name": "ಶ್ಮಶಾನ"
             },
             "amenity/library": {
                 "name": "ಗ್ರಂಥಾಲಯ"
             },
+            "amenity/parking": {
+                "name": "ಬಂಡಿ ನಿಲ್ದಾಣ"
+            },
+            "amenity/pharmacy": {
+                "name": "ಔಷಧಾಲಯ"
+            },
+            "amenity/place_of_worship/christian": {
+                "name": "ಕ್ರೈಸ್ತ ದೇವಾಲಯ"
+            },
+            "amenity/place_of_worship/muslim": {
+                "name": "ಮಸೀದಿ"
+            },
+            "amenity/police": {
+                "name": "ಪೊಲೀಸು"
+            },
+            "amenity/post_office": {
+                "name": "ಅಂಚೆ ಕಚೇರಿ"
+            },
+            "amenity/restaurant": {
+                "name": " ಉಪಾಹಾರ ಗೃಹ"
+            },
+            "amenity/shelter": {
+                "name": "ಅಡೆ"
+            },
+            "amenity/swimming_pool": {
+                "name": "ಈಜುಕೊಳ"
+            },
+            "amenity/taxi": {
+                "name": "‍ಕಾರು ನಿಲ್ಡಾಣ "
+            },
+            "amenity/telephone": {
+                "name": "ದುರವಾಣಿ"
+            },
+            "amenity/theatre": {
+                "name": "ಚಿತ್ರಮಂದಿರ"
+            },
+            "amenity/toilets": {
+                "name": "ಶೌಚಾಲಯ"
+            },
+            "amenity/veterinary": {
+                "name": "ಪಶುವೈದ್ಯಕೀಯ"
+            },
+            "area": {
+                "name": "ಸೀಮೆ"
+            },
+            "barrier/entrance": {
+                "name": " ಪ್ರವೇಶ"
+            },
+            "barrier/gate": {
+                "name": "ಹೊರಬಾಗಿಲು"
+            },
+            "barrier/wall": {
+                "name": "‍ಗೋಡೆ"
+            },
+            "building": {
+                "name": "‍ಕಟ್ಟಡ"
+            },
+            "building/garage": {
+                "name": "ಮೋಟಾರುಖಾನೆ"
+            },
+            "building/garages": {
+                "name": "ಮೋಟಾರುಖಾನೆ‍ಗಳ್"
+            },
             "building/school": {
                 "name": "ಶಾಲಾ ಕಟ್ಟಡ"
+            },
+            "craft/optician": {
+                "name": "ನೇತ್ರ ತಜ್ಞ"
+            },
+            "craft/tailor": {
+                "name": "ದರ್ಜಿ"
             },
             "ford": {
                 "name": "‍ಕಾಲ್ಗಡ"
@@ -1046,6 +1195,15 @@
             "highway/steps": {
                 "name": "ಮೆಟ್ಟಿಲು"
             },
+            "landuse/cemetery": {
+                "name": " ಸ್ಮಶಾನ"
+            },
+            "landuse/forest": {
+                "name": "ಅರಣ್ಯ"
+            },
+            "landuse/garages": {
+                "name": "ಮೋಟಾರುಖಾನೆ‍ಗಳ್"
+            },
             "leisure/garden": {
                 "name": "ಕೈತೋಟ"
             },
@@ -1055,17 +1213,71 @@
             "leisure/stadium": {
                 "name": "ಕ್ರೀಡಾಂಗಣ"
             },
+            "leisure/swimming_pool": {
+                "name": "ಈಜುಕೊಳ"
+            },
             "natural/beach": {
                 "name": "ಕಡಲ ತೀರ"
             },
+            "natural/tree": {
+                "name": "ಮರ"
+            },
+            "natural/water": {
+                "name": "ನೀರು"
+            },
+            "natural/water/lake": {
+                "name": " ಕೆರೆ"
+            },
+            "natural/water/pond": {
+                "name": "ಕೊಳ"
+            },
+            "office": {
+                "name": "ಕಚೇರಿ"
+            },
+            "office/newspaper": {
+                "name": "ವಾರ್ತಾಪತ್ರಿಕೆ"
+            },
+            "office/physician": {
+                "name": "ವೈದ್ಯ"
+            },
             "office/research": {
                 "name": "ಸಂಶೋಧನಾ ಕಛೇರಿ"
+            },
+            "place": {
+                "name": "ಊರು"
+            },
+            "place/city": {
+                "name": "ನಗರ"
+            },
+            "place/farm": {
+                "name": "ತೋಟ"
+            },
+            "place/island": {
+                "name": "ದ್ವೀಪ"
+            },
+            "place/locality": {
+                "name": "ಸ್ಥಳ"
             },
             "place/town": {
                 "name": "ಪಟ್ಟಣ"
             },
             "place/village": {
                 "name": "ಹಳ್ಳಿ"
+            },
+            "railway/station": {
+                "name": "ರೈಲು ನಿಲ್ದಾಣ"
+            },
+            "shop": {
+                "name": "ಅಂಗಡಿ"
+            },
+            "shop/alcohol": {
+                "name": " ಸಾರಾಯಿ ಅಂಗಡಿ"
+            },
+            "shop/bakery": {
+                "name": "ಅಟ್ಟಂಗಡಿ"
+            },
+            "shop/chemist": {
+                "name": "ಔಷಧ ವ್ಯಾಪಾರಿ"
             },
             "shop/computer": {
                 "name": "ಗಣಕಯಂತ್ರದ ಅಂಗಡಿ"
@@ -1084,6 +1296,45 @@
             },
             "shop/gift": {
                 "name": "ಉಡುಗೊರೆಯ ಅಂಗಡಿ"
+            },
+            "shop/laundry": {
+                "name": "ಧೋಬಿಖಾನೆ"
+            },
+            "shop/optician": {
+                "name": "ನೇತ್ರ ತಜ್ಞ"
+            },
+            "shop/shoes": {
+                "name": "ಮೆಟ್ಟು ಅಂಗಡಿ"
+            },
+            "shop/tailor": {
+                "name": "ದರ್ಜಿ"
+            },
+            "tourism/gallery": {
+                "name": "ಕಲಾಮಂದಿರ"
+            },
+            "tourism/hotel": {
+                "name": "ಭೋಜನಾಲಯ"
+            },
+            "tourism/information": {
+                "name": "ಮಾಹಿತಿ"
+            },
+            "tourism/museum": {
+                "name": "ಒಡವೆಮನೆ"
+            },
+            "type/route/bicycle": {
+                "name": "ಸೈಕಲ್ ಮಾರ್ಗ"
+            },
+            "type/route/bus": {
+                "name": "ಬಸ್ ಮಾರ್ಗ"
+            },
+            "waterway/canal": {
+                "name": "ನಾಲೆ"
+            },
+            "waterway/dam": {
+                "name": "ಅಣೆಕಟ್ಟು"
+            },
+            "waterway/river": {
+                "name": "ನದಿ"
             }
         }
     }

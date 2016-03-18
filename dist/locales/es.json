@@ -285,7 +285,8 @@
         "no_results_worldwide": "No hay resultados"
     },
     "geolocate": {
-        "title": "Mostrar mi localización"
+        "title": "Mostrar mi localización",
+        "locating": "Ubicando, espere..."
     },
     "inspector": {
         "no_documentation_combination": "No hay documentación disponible para esta combinación de etiquetas",
@@ -350,12 +351,12 @@
             "description": "Puntos",
             "tooltip": "Puntos de interés"
         },
-        "major_roads": {
-            "description": "Carreteras principales",
-            "tooltip": "Autopistas, calles, etc."
+        "traffic_roads": {
+            "description": "Carreteras de tráfico",
+            "tooltip": "Carreteras, calles, etc."
         },
-        "minor_roads": {
-            "description": "Carreteras secundarias",
+        "service_roads": {
+            "description": "Vías de servicio",
             "tooltip": "Vías de servicio, pasillos de aparcamiento, pistas, etc."
         },
         "paths": {
@@ -1778,7 +1779,7 @@
                 "terms": "depósito, contenedor, grava, gravilla, arena, arenilla, sal"
             },
             "amenity/hospital": {
-                "name": "Terreno de hospital",
+                "name": "Recinto hospitalario",
                 "terms": "Recinto hospitalario, hospital, clínica, terreno, área, suelo"
             },
             "amenity/hunting_stand": {
@@ -2614,8 +2615,8 @@
                 "terms": "Enlace a carretera terciaria, Enlace a carretera local, Enlace de carretera local"
             },
             "highway/track": {
-                "name": "Camino sin mantenimiento",
-                "terms": "camino, vía, pista, rural, sin, mantenimiento"
+                "name": "Camino o pista rural",
+                "terms": "camino, vía, pista, rural, pista forestal, camino forestal. camino agrícola"
             },
             "highway/traffic_signals": {
                 "name": "Semáforos",
@@ -2634,8 +2635,8 @@
                 "terms": "círculo de giro, cul de sac"
             },
             "highway/unclassified": {
-                "name": "Carretera menor",
-                "terms": "carretera, camino, menor, no clasificado, sin clasificación"
+                "name": "Camino menor / sin clasificación",
+                "terms": "Camino, carretera, menor, sin clasificación"
             },
             "historic": {
                 "name": "Lugar histórico",
@@ -2776,6 +2777,10 @@
             "leisure/adult_gaming_centre": {
                 "name": "Centro de juegos para adultos",
                 "terms": "juego, videojuegos, azar, juegos de azar, máquinas de juego, salón de juegos"
+            },
+            "leisure/bird_hide": {
+                "name": "Observatorio de aves",
+                "terms": "observatorio, ave, pájaro"
             },
             "leisure/bowling_alley": {
                 "name": "Pista de bolos",
@@ -4034,8 +4039,8 @@
                 "terms": "zanja, zanjas, acequia, foso, cuneta, hoyo"
             },
             "waterway/dock": {
-                "name": "Dársena",
-                "terms": "dársena, carga, barco, bote, lancha, embarcación"
+                "name": "Dársena / dique seco",
+                "terms": "dársena, dique seco, dique de carena"
             },
             "waterway/drain": {
                 "name": "Desagüe",

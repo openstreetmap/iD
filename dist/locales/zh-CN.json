@@ -344,14 +344,6 @@
             "description": "点",
             "tooltip": "兴趣点(POI)"
         },
-        "major_roads": {
-            "description": "主要道路",
-            "tooltip": "公路，街道等。"
-        },
-        "minor_roads": {
-            "description": "次要道路",
-            "tooltip": "辅助道路，停车场通道，土路等。"
-        },
         "paths": {
             "description": "小路",
             "tooltip": "人行道，步行道路，自行车道等。"
@@ -589,6 +581,14 @@
         }
     },
     "presets": {
+        "categories": {
+            "category-water-area": {
+                "name": "水体特征"
+            },
+            "category-water-line": {
+                "name": "水体特征"
+            }
+        },
         "fields": {
             "access": {
                 "label": "通行规则",
@@ -3446,6 +3446,10 @@
                 "name": "动物园",
                 "terms": "动物园"
             },
+            "traffic_calming/table": {
+                "name": "人行横道",
+                "terms": "行人专用路"
+            },
             "type/boundary": {
                 "name": "边界",
                 "terms": "边界"
@@ -3561,9 +3565,6 @@
             "waterway/ditch": {
                 "name": "水沟",
                 "terms": "沟,沟渠,涧"
-            },
-            "waterway/dock": {
-                "name": "码头"
             },
             "waterway/drain": {
                 "name": "渠",

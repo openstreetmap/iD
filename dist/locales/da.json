@@ -350,14 +350,6 @@
             "description": "Punkter",
             "tooltip": "Interessepunkter"
         },
-        "major_roads": {
-            "description": "Større veje",
-            "tooltip": "Veje, gader, osv."
-        },
-        "minor_roads": {
-            "description": "Mindre veje",
-            "tooltip": "Serviceveje, parkeringspladsveje, markveje, skovveje osv."
-        },
         "paths": {
             "description": "Stier",
             "tooltip": "Fortove, gangstier, cykelstier, osv."
@@ -2633,10 +2625,6 @@
                 "name": "Vendeplads",
                 "terms": "Vendeplads"
             },
-            "highway/unclassified": {
-                "name": "Mindre vej",
-                "terms": "Mindre vej"
-            },
             "historic": {
                 "name": "Historisk sted",
                 "terms": "Historisk sted"
@@ -4032,10 +4020,6 @@
             "waterway/ditch": {
                 "name": "Grøft",
                 "terms": "Grøft, Grøftekant"
-            },
-            "waterway/dock": {
-                "name": "Dok",
-                "terms": "Dok, Dock"
             },
             "waterway/drain": {
                 "name": "Drænløb",

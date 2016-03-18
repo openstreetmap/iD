@@ -246,12 +246,12 @@
         "upload_explanation_with_user": "Zmiany, które wyślesz jako {user} będą widoczne na wszystkich mapach używających danych OpenStreetMap.",
         "save": "Zapisz",
         "cancel": "Anuluj",
-        "changes": "{count} zmian",
+        "changes": "{count} zmian/zmiany",
         "warnings": "Ostrzeżenia",
         "modified": "Zmodyfikowano",
         "deleted": "Usunięto",
         "created": "Utworzono",
-        "about_changeset_comments": "Komentarze do zestawu zmian",
+        "about_changeset_comments": "Jak dobrze opisywać zmiany.",
         "about_changeset_comments_link": "http://wiki.openstreetmap.org/wiki/Pl:Good_changeset_comments"
     },
     "contributors": {
@@ -284,7 +284,8 @@
         "no_results_worldwide": "Brak wyników"
     },
     "geolocate": {
-        "title": "Pokaż moją pozycję"
+        "title": "Pokaż moją pozycję",
+        "locating": "Ustalanie pozycji, proszę czekać..."
     },
     "inspector": {
         "no_documentation_combination": "Nie ma dokumentacji dla tej kombinacji tagów",
@@ -349,13 +350,12 @@
             "description": "Punkty",
             "tooltip": "Użyteczne miejsce (POI)"
         },
-        "major_roads": {
-            "description": "Główne drogi",
-            "tooltip": "Autostrady, ulice, itp."
+        "traffic_roads": {
+            "tooltip": "Drogi, ulice itp."
         },
-        "minor_roads": {
-            "description": "Drogi drugorzędne",
-            "tooltip": "Drogi wewnętrzne, alejki parkingowe, ścieżki, etc."
+        "service_roads": {
+            "description": "Drogi serwisowe",
+            "tooltip": "Drogi serwisowe, wewnętrzne, parkingowe, podjazdowe itp."
         },
         "paths": {
             "description": "Ścieżki",
@@ -453,7 +453,8 @@
         "facebook": "Podziel się na Facebooku",
         "twitter": "Podziel się na Twitterze",
         "google": "Podziel się na Google+",
-        "help_link_text": "Szczegóły",
+        "help_html": "Twoje zmiany powinny pojawić się na warstwie standardowej mapy w ciągu kilku minut. Inne warstwy mogą odświeżać się dłużej.",
+        "help_link_text": "Więcej informacji",
         "help_link_url": "http://wiki.openstreetmap.org/wiki/Pl:FAQ#Kiedy_wprowadzone_przeze_mnie_zmiany_poka.C5.BCa_si.C4.99_na_mapie.3F"
     },
     "confirm": {
@@ -632,7 +633,7 @@
         },
         "fields": {
             "access": {
-                "label": "Dozwolony wstęp",
+                "label": "Prawo wstępu mają",
                 "options": {
                     "designated": {
                         "description": "Dostęp jest dozwolony na podstawie znaków lub określonych przepisów lokalnych",
@@ -643,7 +644,7 @@
                         "title": "Docelowy"
                     },
                     "dismount": {
-                        "description": "Dostęp dozwolony tylko gdy jeździec siądzie z pojazdu/zwierzęcia",
+                        "description": "Dostęp dozwolony tylko, gdy kierujący/jeździec zsiądzie z pojazdu/zwierzęcia",
                         "title": "Zsiądź z konia/pojazdu"
                     },
                     "no": {
@@ -651,8 +652,8 @@
                         "title": "Zabroniony"
                     },
                     "permissive": {
-                        "description": "Dostęp dozwolony do czasu, gdy właściciel wycofa zgodę",
-                        "title": "Dozwolony"
+                        "description": "Dostęp jest możliwy, ale właściciel może w każdej chwili wycofać zgodę",
+                        "title": "Dopuszczalny"
                     },
                     "private": {
                         "description": "Dostęp jest dozwolony tylko za zgodą właściciela na zasadzie indywidualnej",
@@ -713,7 +714,7 @@
                 }
             },
             "aerialway/bubble": {
-                "label": "osłona przeciwwiatrowa"
+                "label": "Osłona przeciwwiatrowa"
             },
             "aerialway/capacity": {
                 "label": "Przepustowość (na godzinę)",
@@ -851,10 +852,11 @@
                         "title": "Brak"
                     },
                     "opposite": {
+                        "description": "Kontraruch - na tej drodze ruch rowerowy odbywa się w obie strony",
                         "title": "Kontrapas"
                     },
                     "opposite_lane": {
-                        "description": "Pas rowerowy na którym ruch odbywa się w przeciwnym kierunku niż kierunek ruchu pasa drogi przy której leży."
+                        "description": "Kontrapas - pas rowerowy na którym ruch odbywa się w przeciwnym kierunku niż kierunek ruchu pasa drogi przy której leży."
                     },
                     "share_busway": {
                         "description": "Pas rowerowy dzielony z buspasem",
@@ -864,7 +866,7 @@
                         "description": "Pas rowerowy nieoddzielony od pasa ruchu"
                     },
                     "track": {
-                        "title": "Droga rowerowa"
+                        "title": "Wydzielona droga rowerowa (nie pas)"
                     }
                 },
                 "placeholder": "brak",
@@ -884,6 +886,9 @@
             },
             "description": {
                 "label": "Opis obiektu"
+            },
+            "diaper": {
+                "label": "Dostępny przewijak dla dzieci"
             },
             "dock": {
                 "label": "Typ"
@@ -930,7 +935,7 @@
                 }
             },
             "fixme": {
-                "label": "Napraw mnie"
+                "label": "Napraw Mnie (FIXME)"
             },
             "fuel": {
                 "label": "Paliwo"
@@ -951,16 +956,16 @@
                 "label": "LPG"
             },
             "fuel/octane_100": {
-                "label": "Sprzedawana benzyna wyścigowa"
+                "label": "Benzyna wyścigowa (100 oktanów)"
             },
             "fuel/octane_91": {
-                "label": "Sprzedawana benzyna niskooktanowa"
+                "label": "Benzyna niskooktanowa (91 oktanów)"
             },
             "fuel/octane_95": {
-                "label": "Sprzedawana benzyna średniooktanowa"
+                "label": "Benzyna 95"
             },
             "fuel/octane_98": {
-                "label": "Sprzedawana benzyna wysokooktanowa"
+                "label": "Benzyna 98"
             },
             "gauge": {
                 "label": "Wskaźnik"
@@ -1206,11 +1211,12 @@
             },
             "phone": {
                 "label": "Telefon",
-                "placeholder": "+31 42 123 4567"
+                "placeholder": "+48 42 123 4567"
             },
             "piste/difficulty": {
                 "label": "Stopień trudności",
                 "options": {
+                    "easy": "Łatwy (zielony okrąg)",
                     "extreme": "Ekstremalna (konieczne wyposażenie wspinaczkowe)"
                 },
                 "placeholder": "Łatwy, Średni, Zaawansowany..."
@@ -1394,7 +1400,7 @@
                 "label": "Typ"
             },
             "supervised": {
-                "label": "Strzeżone"
+                "label": "Strzeżone/nadzorowane"
             },
             "surface": {
                 "label": "Nawierzchnia"
@@ -1406,7 +1412,7 @@
                 "label": "Na wynos",
                 "options": {
                     "no": "Nie",
-                    "only": "Tylko na wynos.",
+                    "only": "Tylko na wynos",
                     "yes": "Tak"
                 },
                 "placeholder": "Tak, Nie, Tylko na wynos..."
@@ -1427,13 +1433,13 @@
                 "label": "Typ wieży"
             },
             "tracktype": {
-                "label": "Typ drogi nieutwardzonej",
+                "label": "Spoistość drogi, zazwyczaj leśnej lub polnej (tracktype)",
                 "options": {
-                    "grade1": "Utwardzona lub mocna ubita nawierzchnia",
-                    "grade2": "Żwirowa z niewielką domieszką piasku, mułu lub gliny",
+                    "grade1": "Utwardzona lub mocno ubita nawierzchnia",
+                    "grade2": "Żwirowa/tłuczniowa z niewielką domieszką piasku, mułu lub gliny",
                     "grade3": "Składająca się z równej ilości twardych i miękkich materiałów",
                     "grade4": "Ziemia/piasek/trawa z domieszką twardych materiałów",
-                    "grade5": "Ziemia/piasek/trawa, bez dodatku materiałów utwardzonych, słabo widoczna"
+                    "grade5": "Ziemia/piasek/trawa, bez dodatku materiałów utwardzonych; często słabo widoczna"
                 },
                 "placeholder": "Utwardzona, nieubita..."
             },
@@ -1442,6 +1448,9 @@
             },
             "trail_visibility": {
                 "label": "Widoczność szlaku",
+                "options": {
+                    "bad": "Zła: brak oznakowania, ścieżka czasem niewidoczna lub brak ścieżki"
+                },
                 "placeholder": "Doskonała, Dobra, Zła..."
             },
             "trees": {
@@ -1482,7 +1491,8 @@
                 "terms": "namiar, numer"
             },
             "aerialway": {
-                "name": "Wyciąg narciarski"
+                "name": "Wyciąg narciarski",
+                "terms": "kolejka"
             },
             "aerialway/cable_car": {
                 "name": "Kolejka górska"
@@ -1585,6 +1595,9 @@
             "amenity/bicycle_rental": {
                 "name": "Wypożyczalnia rowerów",
                 "terms": "wypożyczalnia"
+            },
+            "amenity/bicycle_repair_station": {
+                "name": "Samoobsługowa stacja naprawy rowerów"
             },
             "amenity/biergarten": {
                 "name": "Ogródek piwny"
@@ -1728,7 +1741,8 @@
                 "name": "Wjazd/wyjazd z parkingu/garażu"
             },
             "amenity/parking_space": {
-                "name": "Miejsce parkingowe (pojedyncze)"
+                "name": "Miejsce/miejsca parkingowe (pojedyncze lub ich zwarty blok)",
+                "terms": "zatoczka"
             },
             "amenity/pharmacy": {
                 "name": "Apteka",
@@ -1763,7 +1777,7 @@
                 "terms": "skrzynka,pocztowa,listy"
             },
             "amenity/post_office": {
-                "name": "Poczta",
+                "name": "Poczta/agencja pocztowa",
                 "terms": "poczta,urząd pocztowy"
             },
             "amenity/pub": {
@@ -1845,6 +1859,9 @@
             },
             "amenity/vending_machine/sweets": {
                 "name": "Automat z przekąskami"
+            },
+            "amenity/vending_machine/vending_machine": {
+                "name": "Automat sprzedający"
             },
             "amenity/veterinary": {
                 "name": "Weterynarz",
@@ -1948,6 +1965,15 @@
             },
             "building/cabin": {
                 "name": "Chata"
+            },
+            "building/cathedral": {
+                "name": "Budynek katedry"
+            },
+            "building/chapel": {
+                "name": "kaplica"
+            },
+            "building/church": {
+                "name": "kościół"
             },
             "building/college": {
                 "name": "Budynek szkoły policealnej"
@@ -2062,14 +2088,15 @@
                 "name": "Budowa statków"
             },
             "craft/bookbinder": {
-                "name": "Introligator"
+                "name": "Introligator",
+                "terms": "introligator,oprawianie"
             },
             "craft/brewery": {
-                "name": "Gorzelnia",
-                "terms": "Gorzelnia, "
+                "name": "Browar",
+                "terms": "browar, piwo"
             },
             "craft/carpenter": {
-                "name": "Cieśla",
+                "name": "Stolarz",
                 "terms": "cieśla,stolarz"
             },
             "craft/carpet_layer": {
@@ -2366,6 +2393,9 @@
                 "name": "Łącznik dróg trzeciorzędnych",
                 "terms": "rampa,wjazd,wyjazd,zjazd"
             },
+            "highway/track": {
+                "name": "Droga polna lub leśna"
+            },
             "highway/traffic_signals": {
                 "name": "Sygnalizacja świetlna",
                 "terms": "światła,sygnalizacja świetlna,sygnalizator"
@@ -2381,6 +2411,9 @@
             "highway/turning_circle": {
                 "name": "Miejsce do zawracania",
                 "terms": "miejsce,zawracania,zawracanie"
+            },
+            "highway/unclassified": {
+                "name": "Droga czwartorzędna"
             },
             "historic": {
                 "name": "Miejsce historyczne",
@@ -2455,7 +2488,7 @@
                 "name": "Pola uprawne"
             },
             "landuse/farmyard": {
-                "name": "Zabudowa rolnicza",
+                "name": "Teren z zabudowaniami rolniczymi",
                 "terms": "podwórze gospodarskie"
             },
             "landuse/forest": {
@@ -2509,6 +2542,9 @@
             "leisure": {
                 "name": "Rozrywka i wypoczynek",
                 "terms": "Wypoczynek, czas wolny"
+            },
+            "leisure/bird_hide": {
+                "name": "Czatownia ornitologiczna"
             },
             "leisure/bowling_alley": {
                 "name": "Kręgielnia"
@@ -2616,6 +2652,9 @@
             "man_made/breakwater": {
                 "name": "Falochron"
             },
+            "man_made/chimney": {
+                "name": "Komin"
+            },
             "man_made/cutline": {
                 "name": "Przecinka leśna"
             },
@@ -2624,6 +2663,9 @@
             },
             "man_made/flagpole": {
                 "name": "Maszt flagowy"
+            },
+            "man_made/gasometer": {
+                "name": "Zbiornik gazu"
             },
             "man_made/groyne": {
                 "name": "Ostroga brzegowa"
@@ -2650,7 +2692,11 @@
                 "name": "Rurociąg"
             },
             "man_made/silo": {
-                "name": "Silos"
+                "name": "Silos",
+                "terms": "zboże,kukurydza,pszenica"
+            },
+            "man_made/storage_tank": {
+                "name": "Zbiornik"
             },
             "man_made/survey_point": {
                 "name": "Punkt geodezyjny"
@@ -2674,6 +2720,10 @@
                 "name": "Zakład uzdatniania wody",
                 "terms": "Filtracja wody,wodociągi"
             },
+            "man_made/works": {
+                "name": "Fabryka/zakład pracy",
+                "terms": "fabryka, zakład"
+            },
             "military/airfield": {
                 "name": "Lotnisko wojskowe"
             },
@@ -2687,7 +2737,13 @@
             "military/checkpoint": {
                 "name": "Wojskowy punkt kontrolny"
             },
+            "military/naval_base": {
+                "name": "Port wojenny"
+            },
             "military/range": {
+                "name": "Poligon wojskowy"
+            },
+            "military/training_area": {
                 "name": "Poligon wojskowy"
             },
             "natural": {
@@ -3577,9 +3633,6 @@
             },
             "waterway/ditch": {
                 "name": "Rów"
-            },
-            "waterway/dock": {
-                "name": "Dok"
             },
             "waterway/drain": {
                 "name": "Odpływ"

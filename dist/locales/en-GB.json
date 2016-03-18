@@ -133,7 +133,8 @@
             "key": "D",
             "annotation": "Disconnected lines/areas.",
             "not_connected": "There aren't enough lines/areas here to disconnect.",
-            "connected_to_hidden": "This can't be disconnected because it is connected to a hidden feature."
+            "connected_to_hidden": "This can't be disconnected because it is connected to a hidden feature.",
+            "relation": "This can't be disconnected because it connects members of a relation."
         },
         "merge": {
             "title": "Merge",
@@ -250,7 +251,9 @@
         "warnings": "Warnings",
         "modified": "Modified",
         "deleted": "Deleted",
-        "created": "Created"
+        "created": "Created",
+        "about_changeset_comments": "About changeset comments",
+        "about_changeset_comments_link": "//wiki.openstreetmap.org/wiki/Good_changeset_comments"
     },
     "contributors": {
         "list": "Edits by {users}",
@@ -282,41 +285,671 @@
         "no_results_worldwide": "No results found"
     },
     "geolocate": {
-        "title": "Show My Location"
+        "title": "Show My Location",
+        "locating": "Locating, please wait..."
     },
     "inspector": {
         "no_documentation_combination": "There is no documentation available for this tag combination",
         "no_documentation_key": "There is no documentation available for this key",
         "show_more": "Show More",
         "view_on_osm": "View on openstreetmap.org",
+        "all_fields": "All fields",
         "all_tags": "All tags",
         "all_members": "All members",
         "all_relations": "All relations",
         "new_relation": "New relation...",
         "role": "Role",
+        "choose": "Select feature type",
+        "results": "{n} results for {search}",
+        "reference": "View on OpenStreetMap Wiki",
+        "back_tooltip": "Change feature",
+        "remove": "Remove",
+        "search": "Search",
+        "multiselect": "Selected items",
+        "unknown": "Unknown",
+        "incomplete": "<not downloaded>",
+        "feature_list": "Search features",
+        "edit": "Edit feature",
+        "check": {
+            "yes": "Yes",
+            "no": "No"
+        },
         "none": "None",
-        "location": "Location"
+        "node": "Node",
+        "way": "Way",
+        "relation": "Relation",
+        "location": "Location",
+        "add_fields": "Add field:"
     },
     "background": {
-        "fix_misalignment": "Fix alignment"
+        "title": "Background",
+        "description": "Background settings",
+        "percent_brightness": "{opacity}% brightness",
+        "none": "None",
+        "best_imagery": "Best known imagery source for this location",
+        "custom": "Custom",
+        "custom_button": "Edit custom background",
+        "custom_prompt": "Enter a tile URL template. Valid tokens are {z}, {x}, {y} for Z/X/Y scheme and {u} for quadtile scheme.",
+        "fix_misalignment": "Fix alignment",
+        "imagery_source_faq": "Where does this imagery come from?",
+        "reset": "reset",
+        "minimap": {
+            "description": "Minimap",
+            "tooltip": "Show a zoomed out map to help locate the area currently displayed."
+        }
+    },
+    "map_data": {
+        "title": "Map Data",
+        "description": "Map Data",
+        "data_layers": "Data Layers",
+        "fill_area": "Fill Areas",
+        "map_features": "Map Features",
+        "autohidden": "These features have been automatically hidden because too many would be shown on the screen.  You can zoom in to edit them."
+    },
+    "feature": {
+        "points": {
+            "description": "Points",
+            "tooltip": "Points of Interest"
+        },
+        "traffic_roads": {
+            "description": "Traffic Roads",
+            "tooltip": "Highways, Streets, etc."
+        },
+        "service_roads": {
+            "description": "Service Roads",
+            "tooltip": "Service Roads, Parking Aisles, Tracks, etc."
+        },
+        "paths": {
+            "description": "Paths",
+            "tooltip": "Foot Paths, Sidewalks, Cycle Paths, etc."
+        },
+        "buildings": {
+            "description": "Buildings",
+            "tooltip": "Buildings, Shelters, Garages, etc."
+        },
+        "landuse": {
+            "description": "Landuse Features",
+            "tooltip": "Forests, Farmland, Parks, Residential, Commercial, etc."
+        },
+        "boundaries": {
+            "description": "Boundaries",
+            "tooltip": "Administrative Boundaries"
+        },
+        "water": {
+            "description": "Water Features",
+            "tooltip": "Rivers, Lakes, Ponds, Basins, etc."
+        },
+        "rail": {
+            "description": "Rail Features",
+            "tooltip": "Railways"
+        },
+        "power": {
+            "description": "Power Features",
+            "tooltip": "Power Lines, Power Plants, Substations, etc."
+        },
+        "past_future": {
+            "description": "Past/Future",
+            "tooltip": "Proposed, Construction, Abandoned, Demolished, etc."
+        },
+        "others": {
+            "description": "Others",
+            "tooltip": "Everything Else"
+        }
+    },
+    "area_fill": {
+        "wireframe": {
+            "description": "No Fill (Wireframe)",
+            "tooltip": "Enabling wireframe mode makes it easy to see the background imagery."
+        },
+        "partial": {
+            "description": "Partial Fill",
+            "tooltip": "Areas are drawn with fill only around their inner edges. (Recommended for beginner mappers)"
+        },
+        "full": {
+            "description": "Full Fill",
+            "tooltip": "Areas are drawn fully filled."
+        }
+    },
+    "restore": {
+        "heading": "You have unsaved changes",
+        "description": "Do you wish to restore unsaved changes from a previous editing session?",
+        "restore": "Restore",
+        "reset": "Reset"
     },
     "save": {
-        "title": "Save"
+        "title": "Save",
+        "help": "Save changes to OpenStreetMap, making them visible to other users.",
+        "no_changes": "No changes to save.",
+        "error": "Errors occurred while trying to save",
+        "status_code": "Server returned status code {code}",
+        "unknown_error_details": "Please ensure you are connected to the Internet.",
+        "uploading": "Uploading changes to OpenStreetMap.",
+        "unsaved_changes": "You have unsaved changes",
+        "conflict": {
+            "header": "Resolve conflicting edits",
+            "count": "Conflict {num} of {total}",
+            "previous": "< Previous",
+            "next": "Next >",
+            "keep_local": "Keep mine",
+            "keep_remote": "Use theirs",
+            "restore": "Restore",
+            "delete": "Leave Deleted",
+            "download_changes": "Or download your changes.",
+            "done": "All conflicts resolved!",
+            "help": "Another user changed some of the same map features you changed.\nClick on each item below for more details about the conflict, and choose whether to keep\nyour changes or the other user's changes.\n"
+        }
+    },
+    "merge_remote_changes": {
+        "conflict": {
+            "deleted": "This object has been deleted by {user}.",
+            "location": "This object was moved by both you and {user}.",
+            "nodelist": "Nodes were changed by both you and {user}.",
+            "memberlist": "Relation members were changed by both you and {user}.",
+            "tags": "You changed the <b>{tag}</b> tag to \"{local}\" and {user} changed it to \"{remote}\"."
+        }
+    },
+    "success": {
+        "edited_osm": "Edited OSM!",
+        "just_edited": "You just edited OpenStreetMap!",
+        "view_on_osm": "View on OSM",
+        "facebook": "Share on Facebook",
+        "twitter": "Share on Twitter",
+        "google": "Share on Google+",
+        "help_html": "Your changes should appear in the \"Standard\" layer in a few minutes. Other layers, and certain features, may take longer.",
+        "help_link_text": "Details",
+        "help_link_url": "https://wiki.openstreetmap.org/wiki/FAQ#I_have_just_made_some_changes_to_the_map._How_do_I_get_to_see_my_changes.3F"
     },
     "confirm": {
+        "okay": "Okay",
         "cancel": "Cancel"
     },
+    "splash": {
+        "welcome": "Welcome to the iD OpenStreetMap editor",
+        "text": "iD is a friendly but powerful tool for contributing to the World's best free World map. This is version {version}. For more information see {website} and report bugs at {github}.",
+        "walkthrough": "Start the Walkthrough",
+        "start": "Edit Now"
+    },
+    "source_switch": {
+        "live": "live",
+        "lose_changes": "You have unsaved changes. Switching the map server will discard them. Are you sure you want to switch servers?",
+        "dev": "dev"
+    },
+    "tag_reference": {
+        "description": "Description",
+        "on_wiki": "{tag} on wiki.osm.org",
+        "used_with": "used with {type}"
+    },
+    "validations": {
+        "untagged_point": "Untagged point",
+        "untagged_line": "Untagged line",
+        "untagged_area": "Untagged area",
+        "many_deletions": "You're deleting {n} objects. Are you sure you want to do this? This will delete them from the map that everyone else sees on openstreetmap.org.",
+        "tag_suggests_area": "The tag {tag} suggests line should be area, but it is not an area",
+        "untagged_point_tooltip": "Select a feature type that describes what this point is.",
+        "untagged_line_tooltip": "Select a feature type that describes what this line is.",
+        "untagged_area_tooltip": "Select a feature type that describes what this area is.",
+        "deprecated_tags": "Deprecated tags: {tags}"
+    },
+    "zoom": {
+        "in": "Zoom In",
+        "out": "Zoom Out"
+    },
+    "cannot_zoom": "Cannot zoom out further in current mode.",
+    "full_screen": "Toggle Full Screen",
     "gpx": {
+        "local_layer": "Local GPX file",
         "drag_drop": "Drag and drop a .gpx file on the page, or click the button to the right to browse",
+        "zoom": "Zoom to GPX track",
         "browse": "Browse for a .gpx file"
     },
+    "mapillary_images": {
+        "tooltip": "Street-level photos from Mapillary",
+        "title": "Photo Overlay (Mapillary)"
+    },
+    "mapillary_signs": {
+        "tooltip": "Traffic signs from Mapillary",
+        "title": "Traffic Sign Overlay (Mapillary)"
+    },
+    "mapillary": {
+        "view_on_mapillary": "View this image on Mapillary"
+    },
+    "help": {
+        "title": "Help",
+        "help": "# Help\n\nThis is an editor for [OpenStreetMap](http://www.openstreetmap.org/), the\nfree and editable map of the World. You can use it to add and update\ndata in your area, making an open-source and open-data map of the world\nbetter for everyone.\n\nEdits that you make on this map will be visible to everyone who uses\nOpenStreetMap. In order to make an edit, you'll need to\n[log in](https://www.openstreetmap.org/login).\n\nThe [iD editor](http://ideditor.com/) is a collaborative project with [source\ncode available on GitHub](https://github.com/openstreetmap/iD).\n",
+        "editing_saving": "# Editing & Saving\n\nThis editor is designed to work primarily online, and you're accessing\nit through a website right now.\n\n### Selecting Features\n\nTo select a map feature, like a road or point of interest, click\non it on the map. This will highlight the selected feature, open a panel with\ndetails about it, and show a menu of things you can do with the feature.\n\nTo select multiple features, hold down the 'Shift' key. Then either click\non the features you want to select, or drag on the map to draw a rectangle.\nThis will draw a box and select all the points within it.\n\n### Saving Edits\n\nWhen you make changes like editing roads, buildings, and places, these are\nstored locally until you save them to the server. Don't worry if you make\na mistake - you can undo changes by clicking the undo button, and redo\nchanges by clicking the redo button.\n\nClick 'Save' to finish a group of edits - for instance, if you've completed\nan area of town and would like to start on a new area. You'll have a chance\nto review what you've done, and the editor supplies helpful suggestions\nand warnings if something doesn't seem right about the changes.\n\nIf everything looks good, you can enter a short comment explaining the change\nyou made, and click 'Save' again to post the changes\nto [OpenStreetMap.org](http://www.openstreetmap.org/), where they are visible\nto all other users and available for others to build and improve upon.\n\nIf you can't finish your edits in one sitting, you can leave the editor\nwindow and come back (on the same browser and computer), and the\neditor application will offer to restore your work.\n\n### Using the editor\n\nA list of available keyboard shortcuts can be found [here](http://wiki.openstreetmap.org/wiki/ID/Shortcuts).\n",
+        "roads": "# Roads\n\nYou can create, fix, and delete roads with this editor. Roads can be all\nkinds: paths, highways, trails, cycleways, and more - any often-crossed\nsegment should be mappable.\n\n### Selecting\n\nClick on a road to select it. An outline should become visible, along\nwith a small tools menu on the map and a sidebar showing more information\nabout the road.\n\n### Modifying\n\nOften you'll see roads that aren't aligned to the imagery behind them\nor to a GPS track. You can adjust these roads so they are in the correct\nplace.\n\nFirst click on the road you want to change. This will highlight it and show\ncontrol points along it that you can drag to better locations. If\nyou want to add new control points for more detail, double-click a part\nof the road without a node, and one will be added.\n\nIf the road connects to another road, but doesn't properly connect on\nthe map, you can drag one of its control points onto the other road in\norder to join them. Having roads connect is important for the map\nand essential for providing driving directions.\n\nYou can also click the 'Move' tool or press the `M` shortcut key to move the entire road at\none time, and then click again to save that movement.\n\n### Deleting\n\nIf a road is entirely incorrect - you can see that it doesn't exist in satellite\nimagery and ideally have confirmed locally that it's not present - you can delete\nit, which removes it from the map. Be cautious when deleting features -\nlike any other edit, the results are seen by everyone and satellite imagery\nis often out of date, so the road could simply be newly built.\n\nYou can delete a road by clicking on it to select it, then clicking the\ntrash can icon or pressing the 'Delete' key.\n\n### Creating\n\nFound somewhere there should be a road but there isn't? Click the 'Line'\nicon in the top-left of the editor or press the shortcut key `2` to start drawing\na line.\n\nClick on the start of the road on the map to start drawing. If the road\nbranches off from an existing road, start by clicking on the place where they connect.\n\nThen click on points along the road so that it follows the right path, according\nto satellite imagery or GPS. If the road you are drawing crosses another road, connect\nit by clicking on the intersection point. When you're done drawing, double-click\nor press 'Return' or 'Enter' on your keyboard.\n",
+        "gps": "# GPS\n\nCollected GPS traces are one valuable source of data for OpenStreetMap. This editor\nsupports local traces - `.gpx` files on your local computer. You can collect\nthis kind of GPS trace with a number of smartphone applications as well as\npersonal GPS hardware.\n\nFor information on how to perform a GPS survey, read\n[Mapping with a smartphone, GPS, or paper](http://learnosm.org/en/mobile-mapping/).\n\nTo use a GPX track for mapping, drag and drop the GPX file onto the map\neditor. If it's recognised, it will be added to the map as a bright purple\nline. Click on the 'Map Data' menu on the right side to enable,\ndisable, or zoom to this new GPX-powered layer.\n\nThe GPX track isn't directly uploaded to OpenStreetMap - the best way to\nuse it is to draw on the map, using it as a guide for the new features that\nyou add, and also to [upload it to OpenStreetMap](http://www.openstreetmap.org/trace/create)\nfor other users to use.\n",
+        "imagery": "# Imagery\n\nAerial imagery is an important resource for mapping. A combination of\naeroplane flyovers, satellite views, and freely-compiled sources are available\nin the editor under the 'Background Settings' menu on the right.\n\nBy default a [Bing Maps](http://www.bing.com/maps/) satellite layer is\npresented in the editor, but as you pan and zoom the map to new geographical\nareas, new sources will become available. Some countries, like the United Kingdom, United\nStates, France, and Denmark have very high-quality imagery available for some areas.\n\nImagery is sometimes offset from the map data because of a mistake on the\nimagery provider's side. If you see a lot of roads shifted from the background,\ndon't immediately move them all to match the background. Instead you can adjust\nthe imagery so that it matches the existing data by clicking 'Fix alignment' at\nthe bottom of the Background Settings UI.\n",
+        "addresses": "# Addresses\n\nAddresses are some of the most useful information for the map.\n\nAlthough addresses are often represented as parts of streets, in OpenStreetMap\nthey're recorded as attributes of buildings and places along streets.\n\nYou can add address information to places mapped as building outlines\nas well as those mapped as single points. The optimal source of address\ndata is from an on-the-ground survey or personal knowledge - as with any\nother feature, copying from commercial sources like Google Maps is strictly\nforbidden.\n",
+        "inspector": "# Using the Inspector\n\nThe inspector is the section on the left side of the page that allows you to\nedit the details of the selected feature.\n\n### Selecting a Feature Type\n\nAfter you add a point, line, or area, you can choose what type of feature it\nis, like whether it's a highway or residential road, supermarket or cafe.\nThe inspector will display buttons for common feature types, and you can\nfind others by typing what you're looking for in the search box.\n\nClick the 'i' in the bottom-right-hand corner of a feature type button to\nlearn more about it. Click a button to choose that type.\n\n### Using Forms and Editing Tags\n\nAfter you choose a feature type, or when you select a feature that already\nhas a type assigned, the inspector will display fields with details about\nthe feature like its name and address.\n\nBelow the fields you see, you can click the 'Add field' dropdown to add\nother details, like a Wikipedia link, wheelchair access, and more.\n\nAt the bottom of the inspector, click 'Additional tags' to add arbitrary\nother tags to the element. [Taginfo](http://taginfo.openstreetmap.org/) is a\ngreat resource for learn more about popular tag combinations.\n\nChanges you make in the inspector are automatically applied to the map.\nYou can undo them at any time by clicking the 'Undo' button.\n",
+        "buildings": "# Buildings\n\nOpenStreetMap is the World's largest database of buildings. You can create\nand improve this database.\n\n### Selecting\n\nYou can select a building by clicking on its border. This will highlight the\nbuilding and open a small tools menu and a sidebar showing more information\nabout the building.\n\n### Modifying\n\nSometimes buildings are incorrectly placed or have incorrect tags.\n\nTo move an entire building, select it, then click the 'Move' tool. Move your\nmouse to shift the building, and click when it's correctly placed.\n\nTo fix the specific shape of a building, click and drag the nodes that form\nits border into better places.\n\n### Creating\n\nOne of the main questions around adding buildings to the map is that\nOpenStreetMap records buildings both as shapes and points. The rule of thumb\nis to _map a building as a shape whenever possible_, and map companies, homes,\namenities, and other things that operate out of buildings as points placed\nwithin the building shape.\n\nStart drawing a building as a shape by clicking the 'Area' button in the top\nleft of the interface, and end it either by pressing 'Return' on your keyboard\nor clicking on the first node drawn to close the shape.\n\n### Deleting\n\nIf a building is entirely incorrect - you can see that it doesn't exist in satellite\nimagery and ideally have confirmed locally that it's not present - you can delete\nit, which removes it from the map. Be cautious when deleting features -\nlike any other edit, the results are seen by everyone and satellite imagery\nis often out of date, so the building could simply be newly built.\n\nYou can delete a building by clicking on it to select it, then clicking the\ntrash can icon or pressing the 'Delete' key.\n",
+        "relations": "# Relations\n\nA relation is a special type of feature in OpenStreetMap that groups together\nother features. For example, two common types of relations are *route relations*,\nwhich group together sections of road that belong to a specific freeway or\nhighway, and *multipolygons*, which group together several lines that define\na complex area (one with several pieces or holes in it like a donut).\n\nThe group of features in a relation are called *members*. In the sidebar, you can\nsee which relations a feature is a member of, and click on a relation there\nto select the it. When the relation is selected, you can see all of its\nmembers listed in the sidebar and highlighted on the map.\n\nFor the most part, iD will take care of maintaining relations automatically\nwhile you edit. The main thing you should be aware of is that if you delete a\nsection of road to redraw it more accurately, you should make sure that the\nnew section is a member of the same relations as the original.\n\n## Editing Relations\n\nIf you want to edit relations, here are the basics.\n\nTo add a feature to a relation, select the feature, click the \"+\" button in the\n\"All relations\" section of the sidebar, and select or type the name of the relation.\n\nTo create a new relation, select the first feature that should be a member,\nclick the \"+\" button in the \"All relations\" section, and select \"New relation...\".\n\nTo remove a feature from a relation, select the feature and click the trash\nbutton next to the relation you want to remove it from.\n\nYou can create multipolygons with holes using the \"Merge\" tool. Draw two areas (inner\nand outer), hold the Shift key and click on each of them to select them both, and then\nclick the \"Merge\" (+) button.\n"
+    },
+    "intro": {
+        "graph": {
+            "city_hall": "Three Rivers City Hall",
+            "fire_department": "Three Rivers Fire and Rescue Service",
+            "memory_isle_park": "Memory Isle Park",
+            "riverwalk_trail": "Riverwalk Trail",
+            "w_michigan_ave": "West Michigan Avenue",
+            "e_michigan_ave": "East Michigan Avenue",
+            "spring_st": "Spring Street",
+            "scidmore_park": "Scidmore Park",
+            "petting_zoo": "Scidmore Park Zoo",
+            "n_andrews_st": "North Andrews Street",
+            "s_andrews_st": "South Andrews Street",
+            "n_constantine_st": "North Constantine Street",
+            "s_constantine_st": "South Constantine Street",
+            "rocky_river": "Rocky River",
+            "railroad_dr": "Station Drive",
+            "conrail_rr": "Ravenglass Railway",
+            "st_joseph_river": "Saint Joseph River",
+            "n_main_st": "North High Street",
+            "s_main_st": "South High Street",
+            "water_st": "Water Street",
+            "foster_st": "Foster Street",
+            "portage_river": "Portage River",
+            "flower_st": "Flower Street",
+            "elm_st": "Oak Street",
+            "walnut_st": "Walnut Street",
+            "morris_ave": "Morris Avenue",
+            "east_st": "East Street",
+            "portage_ave": "Portage Avenue"
+        },
+        "navigation": {
+            "title": "Navigation",
+            "drag": "The main map area shows OpenStreetMap data on top of a background. You can navigate by dragging and scrolling, just like any web map. **Drag the map!**",
+            "select": "Map features are represented three ways: using points, lines or areas. All features can be selected by clicking on them. **Click on the point to select it.**",
+            "pane": "When a feature is selected, the feature editor is displayed. The header shows us the feature type and the main pane shows the feature's attributes, such as its name and address. **Close the feature editor by pressing the {button} button in the top right.**",
+            "search": "You can also search for features in the current view, or worldwide. **Search for '{name}'**",
+            "choose": "**Choose {name} from the list to select it.**",
+            "chosen": "Great! {name} is now selected. **Close the feature editor by pressing the {button} button.**"
+        },
+        "points": {
+            "title": "Points",
+            "add": "Points can be used to represent features such as shops, restaurants, and monuments. They mark a specific location, and describe what's there. **Click the {button} Point button to add a new point.**",
+            "place": "The point can be placed by clicking on the map. **Click the map to place the new point on top of the building.**",
+            "search": "There are many different features that can be represented by points. The point you just added is a Cafe. **Search for '{name}'**",
+            "choose": "**Choose Cafe from the list.**",
+            "describe": "The point is now marked as a cafe. Using the feature editor, we can add more information about the feature. **Add a name**",
+            "close": "The feature editor will remember all of your changes automatically.  When you change a feature, the close button will change to a checkmark. **Click the {button} button to close the feature editor**",
+            "reselect": "Often points will already exist, but have mistakes or be incomplete. We can edit existing points. **Click to select the point you just created.**",
+            "fixname": "**Change the name, then click the {button} button to close the feature editor.**",
+            "reselect_delete": "All features on the map can be deleted. **Click to select the point you created.**",
+            "delete": "The menu around the point contains operations that can be performed on it, including delete. **Click on the {button} button to delete the point.**"
+        },
+        "areas": {
+            "title": "Areas",
+            "add": "Areas are used to show the boundaries of features like lakes, buildings, and residential areas. They can be also be used for more detailed mapping of many features you might normally map as points. **Click the {button} Area button to add a new area.**",
+            "corner": "Areas are drawn by placing nodes that mark the boundary of the area. **Click to place a starting node on one of the corners of the playground.**",
+            "place": "Draw the area by placing more nodes. Finish the area by clicking on the starting node. **Draw an area for the playground.**",
+            "search": "**Search for '{name}'.**",
+            "choose": "**Choose Playground from the list.**",
+            "describe": "**Add a name, then click the {button} button to close the feature editor**"
+        },
+        "lines": {
+            "title": "Lines",
+            "add": "Lines are used to represent features such as roads, railways, and rivers. **Click the {button} Line button to add a new line.**",
+            "start": "**Start the line by clicking on the end of the road.**",
+            "intersect": "Click to add more nodes to the line. You can drag the map while drawing if necessary. Roads, and many other types of lines, are part of a larger network. It is important for these lines to be connected properly in order for routing applications to work. **Click on {name} to create an intersection connecting the two lines.**",
+            "finish": "Lines can be finished by clicking on the last node again. **Finish drawing the road.**",
+            "road": "**Select Road from the list**",
+            "residential": "There are different types of roads, the most common of which is Residential. **Choose the Residential road type**",
+            "describe": "**Name the road, then click the {button} button to close the feature editor.**",
+            "restart": "The road needs to intersect {name}.",
+            "wrong_preset": "You didn't select the Residential road type. **Click here to choose again**"
+        },
+        "startediting": {
+            "title": "Start Editing",
+            "help": "You can replay this walkthrough or view more documentation by clicking the {button} Help button.",
+            "save": "Don't forget to regularly save your changes!",
+            "start": "Start mapping!"
+        }
+    },
     "presets": {
+        "categories": {
+            "category-building": {
+                "name": "Building Features"
+            },
+            "category-golf": {
+                "name": "Golf Features"
+            },
+            "category-landuse": {
+                "name": "Land Use Features"
+            },
+            "category-path": {
+                "name": "Path Features"
+            },
+            "category-rail": {
+                "name": "Rail Features"
+            },
+            "category-road": {
+                "name": "Road Features"
+            },
+            "category-route": {
+                "name": "Route Features"
+            },
+            "category-water-area": {
+                "name": "Water Features"
+            },
+            "category-water-line": {
+                "name": "Water Features"
+            }
+        },
         "fields": {
+            "access": {
+                "label": "Allowed Access",
+                "options": {
+                    "designated": {
+                        "description": "Access permitted according to signs or specific local laws",
+                        "title": "Designated"
+                    },
+                    "destination": {
+                        "description": "Access permitted only to reach a destination",
+                        "title": "Destination"
+                    },
+                    "dismount": {
+                        "description": "Access permitted but rider must dismount",
+                        "title": "Dismount"
+                    },
+                    "no": {
+                        "description": "Access not permitted to the general public",
+                        "title": "Prohibited"
+                    },
+                    "permissive": {
+                        "description": "Access permitted until such time as the owner revokes the permission",
+                        "title": "Permissive"
+                    },
+                    "private": {
+                        "description": "Access permitted only with permission of the owner on an individual basis",
+                        "title": "Private"
+                    },
+                    "yes": {
+                        "description": "Access permitted by law; a right of way",
+                        "title": "Allowed"
+                    }
+                },
+                "placeholder": "Not Specified",
+                "types": {
+                    "access": "All",
+                    "bicycle": "Bicycles",
+                    "foot": "Foot",
+                    "horse": "Horses",
+                    "motor_vehicle": "Motor Vehicles"
+                }
+            },
+            "access_simple": {
+                "label": "Allowed Access",
+                "placeholder": "yes"
+            },
+            "access_toilets": {
+                "label": "Access"
+            },
+            "address": {
+                "label": "Address",
+                "placeholders": {
+                    "city": "City",
+                    "conscriptionnumber": "123",
+                    "country": "Country",
+                    "district": "District",
+                    "hamlet": "Hamlet",
+                    "housename": "Housename",
+                    "housenumber": "123",
+                    "place": "Place",
+                    "postcode": "Postcode",
+                    "province": "Province",
+                    "state": "State",
+                    "street": "Street",
+                    "subdistrict": "Subdistrict",
+                    "suburb": "Suburb"
+                }
+            },
+            "admin_level": {
+                "label": "Admin Level"
+            },
+            "aerialway": {
+                "label": "Type"
+            },
+            "aerialway/access": {
+                "label": "Access",
+                "options": {
+                    "both": "Both",
+                    "entry": "Entry",
+                    "exit": "Exit"
+                }
+            },
+            "aerialway/bubble": {
+                "label": "Bubble"
+            },
+            "aerialway/capacity": {
+                "label": "Capacity (per hour)",
+                "placeholder": "500, 2500, 5000..."
+            },
+            "aerialway/duration": {
+                "label": "Duration (minutes)",
+                "placeholder": "1, 2, 3..."
+            },
+            "aerialway/heating": {
+                "label": "Heated"
+            },
+            "aerialway/occupancy": {
+                "label": "Occupancy",
+                "placeholder": "2, 4, 8..."
+            },
+            "aerialway/summer/access": {
+                "label": "Access (summer)",
+                "options": {
+                    "both": "Both",
+                    "entry": "Entry",
+                    "exit": "Exit"
+                }
+            },
+            "aeroway": {
+                "label": "Type"
+            },
+            "amenity": {
+                "label": "Type"
+            },
+            "area/highway": {
+                "label": "Type"
+            },
+            "artist": {
+                "label": "Artist"
+            },
+            "artwork_type": {
+                "label": "Type"
+            },
+            "atm": {
+                "label": "ATM"
+            },
+            "backrest": {
+                "label": "Backrest"
+            },
+            "barrier": {
+                "label": "Type"
+            },
+            "bench": {
+                "label": "Bench"
+            },
+            "bicycle_parking": {
+                "label": "Type"
+            },
+            "boundary": {
+                "label": "Type"
+            },
+            "building": {
+                "label": "Building"
+            },
+            "building_area": {
+                "label": "Building"
+            },
+            "capacity": {
+                "label": "Capacity",
+                "placeholder": "50, 100, 200..."
+            },
+            "cardinal_direction": {
+                "label": "Direction",
+                "options": {
+                    "E": "East",
+                    "ENE": "East-northeast",
+                    "ESE": "East-southeast",
+                    "N": "North",
+                    "NE": "Northeast",
+                    "NNE": "North-northeast",
+                    "NNW": "North-northwest",
+                    "NW": "Northwest",
+                    "S": "South",
+                    "SE": "Southeast",
+                    "SSE": "South-southeast",
+                    "SSW": "South-southwest",
+                    "SW": "Southwest",
+                    "W": "West",
+                    "WNW": "West-northwest",
+                    "WSW": "West-southwest"
+                }
+            },
+            "clock_direction": {
+                "label": "Direction",
+                "options": {
+                    "anticlockwise": "Anticlockwise",
+                    "clockwise": "Clockwise"
+                }
+            },
+            "collection_times": {
+                "label": "Collection Times"
+            },
+            "construction": {
+                "label": "Type"
+            },
+            "country": {
+                "label": "Country"
+            },
+            "craft": {
+                "label": "Type"
+            },
+            "crossing": {
+                "label": "Type"
+            },
+            "cycleway": {
+                "options": {
+                    "lane": {
+                        "description": "A bike lane separated from motor traffic by a painted line",
+                        "title": "Standard bike lane"
+                    },
+                    "none": {
+                        "description": "No bike lane",
+                        "title": "None"
+                    },
+                    "opposite": {
+                        "description": "A bike lane that travels in both directions on a one-way street",
+                        "title": "Contraflow bike lane"
+                    },
+                    "opposite_lane": {
+                        "description": "A bike lane that travels in the opposite direction of traffic"
+                    }
+                }
+            },
+            "denotation": {
+                "label": "Denotation"
+            },
+            "description": {
+                "label": "Description"
+            },
+            "diaper": {
+                "label": "Baby Changing Available"
+            },
+            "dock": {
+                "label": "Type"
+            },
+            "drive_through": {
+                "label": "Drive-Through"
+            },
+            "electrified": {
+                "label": "Electrification",
+                "options": {
+                    "no": "No"
+                }
+            },
+            "entrance": {
+                "label": "Type"
+            },
             "fax": {
                 "placeholder": "+44 207 123456"
             },
+            "fire_hydrant/type": {
+                "label": "Type"
+            },
             "fuel/lpg": {
                 "label": "Sells LPG"
+            },
+            "gender": {
+                "placeholder": "Unknown"
+            },
+            "generator/type": {
+                "label": "Type"
+            },
+            "highway": {
+                "label": "Type"
+            },
+            "historic": {
+                "label": "Type"
+            },
+            "information": {
+                "label": "Type"
+            },
+            "internet_access": {
+                "options": {
+                    "no": "No",
+                    "yes": "Yes"
+                }
+            },
+            "lamp_type": {
+                "label": "Type"
+            },
+            "landuse": {
+                "label": "Type"
+            },
+            "lanes": {
+                "placeholder": "1, 2, 3..."
+            },
+            "leaf_cycle": {
+                "label": "Leaf Cycle",
+                "options": {
+                    "deciduous": "Deciduous",
+                    "evergreen": "Evergreen",
+                    "mixed": "Mixed",
+                    "semi_deciduous": "Semi-Deciduous",
+                    "semi_evergreen": "Semi-Evergreen"
+                }
+            },
+            "leaf_cycle_singular": {
+                "label": "Leaf Cycle",
+                "options": {
+                    "deciduous": "Deciduous",
+                    "evergreen": "Evergreen",
+                    "semi_deciduous": "Semi-Deciduous",
+                    "semi_evergreen": "Semi-Evergreen"
+                }
+            },
+            "leaf_type": {
+                "label": "Leaf Type",
+                "options": {
+                    "broadleaved": "Broadleaved",
+                    "leafless": "Leafless",
+                    "mixed": "Mixed",
+                    "needleleaved": "Needleleaved"
+                }
+            },
+            "leaf_type_singular": {
+                "label": "Leaf Type",
+                "options": {
+                    "broadleaved": "Broadleaved",
+                    "leafless": "Leafless",
+                    "needleleaved": "Needleleaved"
+                }
+            },
+            "leisure": {
+                "label": "Type"
             },
             "lit": {
                 "label": "Street Lighting"
@@ -324,22 +957,177 @@
             "location": {
                 "label": "Location"
             },
+            "man_made": {
+                "label": "Type"
+            },
             "name": {
                 "label": "Name"
             },
+            "office": {
+                "label": "Type"
+            },
+            "oneway": {
+                "options": {
+                    "no": "No",
+                    "yes": "Yes"
+                }
+            },
+            "oneway_yes": {
+                "options": {
+                    "no": "No",
+                    "yes": "Yes"
+                }
+            },
+            "parking": {
+                "label": "Type"
+            },
             "phone": {
+                "label": "Telephone",
                 "placeholder": "+44 207 123456"
+            },
+            "piste/grooming": {
+                "options": {
+                    "skating": "Skating"
+                }
+            },
+            "piste/type": {
+                "label": "Type",
+                "options": {
+                    "downhill": "Downhill",
+                    "hike": "Hike",
+                    "ice_skate": "Ice Skate",
+                    "nordic": "Nordic",
+                    "playground": "Playground",
+                    "skitour": "Skitour",
+                    "sled": "Sled",
+                    "sleigh": "Sleigh",
+                    "snow_park": "Snow Park"
+                }
+            },
+            "place": {
+                "label": "Type"
+            },
+            "population": {
+                "label": "Population"
+            },
+            "power": {
+                "label": "Type"
+            },
+            "power_supply": {
+                "label": "Power Supply"
+            },
+            "railway": {
+                "label": "Type"
+            },
+            "recycling/cans": {
+                "label": "Accepts Cans"
+            },
+            "recycling/clothes": {
+                "label": "Accepts Clothes"
+            },
+            "recycling/glass": {
+                "label": "Accepts Glass"
+            },
+            "recycling/glass_bottles": {
+                "label": "Accepts Glass Bottles"
+            },
+            "recycling/paper": {
+                "label": "Accepts Paper"
+            },
+            "recycling/plastic": {
+                "label": "Accepts Plastic"
+            },
+            "recycling/type": {
+                "label": "Recycling Type",
+                "options": {
+                    "centre": "Recycling Centre"
+                }
+            },
+            "relation": {
+                "label": "Type"
+            },
+            "restriction": {
+                "label": "Type"
+            },
+            "route": {
+                "label": "Type"
+            },
+            "route_master": {
+                "label": "Type"
+            },
+            "service": {
+                "label": "Type"
+            },
+            "service/bicycle/chain_tool": {
+                "options": {
+                    "no": "No",
+                    "yes": "Yes"
+                }
+            },
+            "service/bicycle/pump": {
+                "options": {
+                    "no": "No",
+                    "yes": "Yes"
+                }
+            },
+            "shelter_type": {
+                "label": "Type"
+            },
+            "shop": {
+                "label": "Type"
+            },
+            "site": {
+                "label": "Type"
+            },
+            "structure": {
+                "placeholder": "Unknown"
+            },
+            "studio_type": {
+                "label": "Type"
+            },
+            "substation": {
+                "label": "Type"
+            },
+            "takeaway": {
+                "options": {
+                    "no": "No",
+                    "yes": "Yes"
+                }
             },
             "toilets/disposal": {
                 "label": "Toilet Disposal"
+            },
+            "tourism": {
+                "label": "Type"
+            },
+            "traffic_signals": {
+                "label": "Type"
+            },
+            "water": {
+                "label": "Type"
+            },
+            "waterway": {
+                "label": "Type"
+            },
+            "wetland": {
+                "label": "Type"
             }
         },
         "presets": {
+            "address": {
+                "name": "Address"
+            },
             "aerialway/gondola": {
                 "terms": "Dangleway"
             },
             "amenity/arts_centre": {
                 "name": "Arts Centre"
+            },
+            "amenity/atm": {
+                "name": "ATM"
+            },
+            "amenity/bench": {
+                "name": "Bench"
             },
             "amenity/fuel": {
                 "name": "Petrol Station",
@@ -358,6 +1146,9 @@
             "area": {
                 "name": "Area"
             },
+            "building": {
+                "name": "Building"
+            },
             "building/static_caravan": {
                 "name": "Static Caravan"
             },
@@ -366,6 +1157,12 @@
             },
             "highway/bridleway": {
                 "name": "Bridleway"
+            },
+            "highway/service/drive-through": {
+                "name": "Drive-Through"
+            },
+            "highway/track": {
+                "name": "Track"
             },
             "landuse/allotments": {
                 "name": "Allotments"
@@ -376,8 +1173,23 @@
             "leisure/pitch/soccer": {
                 "name": "Football Field"
             },
+            "leisure/playground": {
+                "name": "Playground"
+            },
             "office/estate_agent": {
                 "name": "Estate Agent"
+            },
+            "place": {
+                "name": "Place"
+            },
+            "place/city": {
+                "name": "City"
+            },
+            "place/hamlet": {
+                "name": "Hamlet"
+            },
+            "relation": {
+                "name": "Relation"
             },
             "shop/alcohol": {
                 "name": "Off license"

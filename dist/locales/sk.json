@@ -344,14 +344,6 @@
             "description": "Body",
             "tooltip": "Body záujmu"
         },
-        "major_roads": {
-            "description": "Hlavné cesty",
-            "tooltip": "Diaľnice, ulice, atď."
-        },
-        "minor_roads": {
-            "description": "Vedľajšie cesty",
-            "tooltip": "Servisné cesty, parkovacie uličky, lesná cesta, atď."
-        },
         "paths": {
             "description": "Cestičky",
             "tooltip": "Chodníky, cestičky pre pešich, cyklocesty, atď."
@@ -3871,10 +3863,6 @@
             "waterway/ditch": {
                 "name": "Priekopa",
                 "terms": "priekopa,jarok,jama,garat,kanál,kanal,stoka"
-            },
-            "waterway/dock": {
-                "name": "Dok",
-                "terms": "oprava lodí,oprava lodi"
             },
             "waterway/drain": {
                 "name": "Odvodňovací kanál",

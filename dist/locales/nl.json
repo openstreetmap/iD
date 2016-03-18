@@ -350,14 +350,6 @@
             "description": "Punten",
             "tooltip": "Interessante Punten"
         },
-        "major_roads": {
-            "description": "Hoofdwegen",
-            "tooltip": "Autowegen, Straten …"
-        },
-        "minor_roads": {
-            "description": "Kleine wegen",
-            "tooltip": "Toegangswegen, Rijbanen in Parkings, Veldwegen …"
-        },
         "paths": {
             "description": "Paden",
             "tooltip": "Trottoirs, Paden voor Voetgangers of Fietsers …"
@@ -2554,10 +2546,6 @@
             "highway/turning_circle": {
                 "name": "Keerplein"
             },
-            "highway/unclassified": {
-                "name": "Kleine weg",
-                "terms": "ongeclassificeerde weg,niet-geclassificeerde weg"
-            },
             "historic": {
                 "name": "Geschiedskundige plaats"
             },
@@ -2687,6 +2675,9 @@
                 "name": "Speelzaal (met kansspelmachines)",
                 "terms": "casino,slot machine,slots,gokken,slotmachine"
             },
+            "leisure/bird_hide": {
+                "name": "Vogelkijkscherm"
+            },
             "leisure/bowling_alley": {
                 "name": "Bowlingbaan",
                 "terms": "bowlingcentrum,kegelbaan,bowlen,bowl inn"
@@ -2766,7 +2757,8 @@
                 "terms": "atletiekbaan, stadion, stadium, hardlopen, hordenloop"
             },
             "leisure/slipway": {
-                "name": "Botenhelling"
+                "name": "Botenhelling",
+                "terms": "trailerhelling,tewaterlating,te water laten,boot,helling,boothelling"
             },
             "leisure/sports_centre": {
                 "name": "Sportcentrum / Fitnesscentrum",
@@ -3781,10 +3773,6 @@
             "waterway/ditch": {
                 "name": "Greppel",
                 "terms": "sloot,gracht"
-            },
-            "waterway/dock": {
-                "name": "Dok",
-                "terms": "Kade, Haven, Dok"
             },
             "waterway/drain": {
                 "name": "Sloot",

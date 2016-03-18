@@ -285,7 +285,8 @@
         "no_results_worldwide": "Inget hittades"
     },
     "geolocate": {
-        "title": "Visa var jag är"
+        "title": "Visa var jag är",
+        "locating": "Lokaliserar, var god vänta..."
     },
     "inspector": {
         "no_documentation_combination": "Det finns ingen dokumentation för denna tagg-kombination",
@@ -350,12 +351,12 @@
             "description": "Punkter",
             "tooltip": "Intressanta platser"
         },
-        "major_roads": {
-            "description": "Större vägar",
+        "traffic_roads": {
+            "description": "Trafikvägar",
             "tooltip": "Landsväg, gata m.m."
         },
-        "minor_roads": {
-            "description": "Mindre vägar",
+        "service_roads": {
+            "description": "Servicevägar",
             "tooltip": "Servicevägar, parkeringsvägar, bruksväg m.m."
         },
         "paths": {
@@ -2634,7 +2635,7 @@
                 "terms": "Vändplan, vändplats, återvändsgata"
             },
             "highway/unclassified": {
-                "name": "Oklassificerad väg",
+                "name": "Mindre/oklassificerad väg",
                 "terms": "Oklassificerad väg, mindre väg, liten väg, enskild väg, skogsväg, övrig väg, industriväg, industrigata"
             },
             "historic": {
@@ -2776,6 +2777,10 @@
             "leisure/adult_gaming_centre": {
                 "name": "Center för vuxenspel",
                 "terms": "Center för vuxenspel, vuxenspel, spelmaskiner, spel, spelmaskin, flipperspel, flipper"
+            },
+            "leisure/bird_hide": {
+                "name": "Torn/gömsle för fågelskådning",
+                "terms": "Fågelskådning, fågelskådare, fågelskådartorn, vilttorn, fågeltorn, fågelskådargömsel, utsiktstorn, fågelskådningstorn"
             },
             "leisure/bowling_alley": {
                 "name": "Bowlinghall",
@@ -4034,8 +4039,8 @@
                 "terms": "Dike, fåra"
             },
             "waterway/dock": {
-                "name": "Docka",
-                "terms": "Docka, båtvarv, båtdocka, fartygsdocka, fartygsvarv, varv"
+                "name": "Våt- / Torrdocka",
+                "terms": "Torrdocka, våtdocka, docka, båtvarv, båtdocka, fartygsdocka, fartygsvarv, varv, lastdocka"
             },
             "waterway/drain": {
                 "name": "Dränering",

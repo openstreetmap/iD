@@ -285,7 +285,8 @@
         "no_results_worldwide": "找不到搜尋結果"
     },
     "geolocate": {
-        "title": "顯示我的位置"
+        "title": "顯示我的位置",
+        "locating": "正在定位，請等待..."
     },
     "inspector": {
         "no_documentation_combination": "這個標籤組合沒有可用的說明",
@@ -350,13 +351,13 @@
             "description": "點",
             "tooltip": "興趣點"
         },
-        "major_roads": {
-            "description": "主要道路",
-            "tooltip": "公路、街道等"
+        "traffic_roads": {
+            "description": "通勤道路",
+            "tooltip": "道路、巷弄等"
         },
-        "minor_roads": {
-            "description": "非主要道路",
-            "tooltip": "服務道路、停車場通道、路徑等"
+        "service_roads": {
+            "description": "服務性道路",
+            "tooltip": "服務性道路，停車場通道、路徑等"
         },
         "paths": {
             "description": "通道",
@@ -2634,8 +2635,8 @@
                 "terms": "回轉圈"
             },
             "highway/unclassified": {
-                "name": "非主要道路",
-                "terms": "非主要道路"
+                "name": "小道路/未分類道路",
+                "terms": "小道路/未分類道路"
             },
             "historic": {
                 "name": "歷史景點",
@@ -2776,6 +2777,10 @@
             "leisure/adult_gaming_centre": {
                 "name": "成人遊戲中心",
                 "terms": "成人遊樂場"
+            },
+            "leisure/bird_hide": {
+                "name": "鳥類棲息處",
+                "terms": "鳥類棲息處,鳥類棲地,鳥類藏身處"
             },
             "leisure/bowling_alley": {
                 "name": "保齡球館",
@@ -4034,8 +4039,8 @@
                 "terms": "水溝"
             },
             "waterway/dock": {
-                "name": "碼頭",
-                "terms": "碼頭"
+                "name": "濕塢 / 乾塢",
+                "terms": "濕塢 / 乾塢"
             },
             "waterway/drain": {
                 "name": "渠",

@@ -350,12 +350,11 @@
             "description": "ポイント",
             "tooltip": "地点情報"
         },
-        "major_roads": {
-            "description": "主要道路",
+        "traffic_roads": {
             "tooltip": "道路、街路など"
         },
-        "minor_roads": {
-            "description": "市町村道など",
+        "service_roads": {
+            "description": "敷地内道路",
             "tooltip": "私道、駐車場内経路、農道など"
         },
         "paths": {
@@ -500,6 +499,14 @@
         "drag_drop": "ページ上に .gpxファイルをドラッグ＆ドロップするか、画面右側のボタンをクリックしてください",
         "zoom": "GPX軌跡へズーム",
         "browse": ".gpxファイル追加"
+    },
+    "mapillary_images": {
+        "tooltip": "Mapillary から路上からの写真を取得します",
+        "title": "写真の重ね合わせ (Mapillary)"
+    },
+    "mapillary_signs": {
+        "tooltip": "Mapillary から交通標識を取得します",
+        "title": "交通標識の重ね合わせ (Mapillary)"
     },
     "mapillary": {
         "view_on_mapillary": "この画像をMapillaryで表示"
@@ -2586,8 +2593,8 @@
                 "terms": "一般道（2車線以上）の接続路"
             },
             "highway/track": {
-                "name": "状態の悪い道路",
-                "terms": "酷道, 腐道, 険道, 死道, 損道, 道路"
+                "name": "農道・林道",
+                "terms": "未舗装農道, 農道, 未舗装林道, 林道, 獣道, けもの道, 酷道, 腐道, 険道, 死道, 損道, 道路"
             },
             "highway/traffic_signals": {
                 "name": "信号機",
@@ -2604,10 +2611,6 @@
             "highway/turning_circle": {
                 "name": "転回場",
                 "terms": "転回場, 車回し"
-            },
-            "highway/unclassified": {
-                "name": "一般道（2車線未満）",
-                "terms": "一般道（2車線未満）"
             },
             "historic": {
                 "name": "史跡",
@@ -2748,6 +2751,10 @@
             "leisure/adult_gaming_centre": {
                 "name": "遊技場",
                 "terms": "遊技場, パチンコ, パチスロ, スロット"
+            },
+            "leisure/bird_hide": {
+                "name": "野鳥観察舎",
+                "terms": "ハイド, 野鳥観察小屋"
             },
             "leisure/bowling_alley": {
                 "name": "ボウリング場",
@@ -3365,6 +3372,9 @@
                 "name": "古美術品店",
                 "terms": "古美術品店, アンティークショップ"
             },
+            "shop/art": {
+                "name": "美術品販売店"
+            },
             "shop/baby_goods": {
                 "name": "赤ちゃん用品店",
                 "terms": "赤ちゃん用品店, ベビー用品店"
@@ -3812,6 +3822,10 @@
                 "name": "貸別荘",
                 "terms": "貸別荘, コテージ"
             },
+            "tourism/gallery": {
+                "name": "アートギャラリー",
+                "terms": "画廊"
+            },
             "tourism/guest_house": {
                 "name": "民宿",
                 "terms": "民宿, ゲストハウス"
@@ -3986,9 +4000,6 @@
             "waterway/ditch": {
                 "name": "排水路",
                 "terms": "排水路"
-            },
-            "waterway/dock": {
-                "name": "ドック"
             },
             "waterway/drain": {
                 "name": "放水路",

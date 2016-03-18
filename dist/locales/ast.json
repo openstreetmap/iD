@@ -336,14 +336,6 @@
             "description": "Puntos",
             "tooltip": "Puntos d'interés"
         },
-        "major_roads": {
-            "description": "Carreteres principales",
-            "tooltip": "Carreteres, cais, etc."
-        },
-        "minor_roads": {
-            "description": "Carreteres menores",
-            "tooltip": "Víes de serviciu, pasiellos d'aparcamientu, pistes, etc."
-        },
         "paths": {
             "description": "Caminos",
             "tooltip": "Aceres, siendes peatonales, víes ciclistes, etc."

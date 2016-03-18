@@ -335,14 +335,6 @@
             "description": "Puntos",
             "tooltip": "Puntos de interese"
         },
-        "major_roads": {
-            "description": "Estradas primarias",
-            "tooltip": "Estradas principais, rías etc. "
-        },
-        "minor_roads": {
-            "description": "Estradas secundarias",
-            "tooltip": "Estradas de servizo, áreas de estacionamento, pistas etc."
-        },
         "paths": {
             "description": "Camiño",
             "tooltip": "Beirarrúas, camiños peonís, camiños para ciclismo, etc."

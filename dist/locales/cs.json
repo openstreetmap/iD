@@ -350,14 +350,6 @@
             "description": "Uzly",
             "tooltip": "Body zájmu"
         },
-        "major_roads": {
-            "description": "Podstatné silnice",
-            "tooltip": "Důležité silnice, ulice atd."
-        },
-        "minor_roads": {
-            "description": "Nepodstatné silnice",
-            "tooltip": "Účelové komunikace, příjezdy, lesní a polní cesty atd."
-        },
         "paths": {
             "description": "Pěší cesty",
             "tooltip": "Chodníky, pěšiny, cyklostezky atd."
@@ -2633,10 +2625,6 @@
                 "name": "Obratiště",
                 "terms": "místo k otočení"
             },
-            "highway/unclassified": {
-                "name": "Silnice bez klasifikace",
-                "terms": "silnice bez klasifikace,neklasifikovaná silnice,místní komunikace"
-            },
             "historic": {
                 "name": "Památné místo",
                 "terms": "historické místo"
@@ -4024,10 +4012,6 @@
             "waterway/ditch": {
                 "name": "Příkop / strouha",
                 "terms": "příkop, strouha, škarpa"
-            },
-            "waterway/dock": {
-                "name": "Doky",
-                "terms": "doky,výroba lodí,oprava lodí,údržba lodí,loděnice"
             },
             "waterway/drain": {
                 "name": "Odvodňovací strouha",

@@ -285,7 +285,8 @@
         "no_results_worldwide": "Không tìm thấy kết quả"
     },
     "geolocate": {
-        "title": "Nhảy tới Vị trí của Tôi"
+        "title": "Nhảy tới Vị trí của Tôi",
+        "locating": "Đang tải, vui lòng chờ đợi…"
     },
     "inspector": {
         "no_documentation_combination": "Không có tài liệu về tổ hợp thẻ này",
@@ -348,15 +349,15 @@
     "feature": {
         "points": {
             "description": "Địa điểm",
-            "tooltip": "Địa điểm quan tâm"
+            "tooltip": "Địa điểm Quan tâm"
         },
-        "major_roads": {
-            "description": "Đường Lớn",
-            "tooltip": "Đường Cao tốc, Ngõ phố, v.v."
+        "traffic_roads": {
+            "description": "Đường Giao thông",
+            "tooltip": "Đường Cao tốc, Đường sá, v.v."
         },
-        "minor_roads": {
-            "description": "Đường Nhỏ",
-            "tooltip": "Ngõ ngách, Lối trong Bãi đậu xe, Đường đất, v.v."
+        "service_roads": {
+            "description": "Ngõ ngách",
+            "tooltip": "Ngách, Lối trong Bãi đậu xe, Đường mòn, v.v."
         },
         "paths": {
             "description": "Đường mòn",
@@ -392,7 +393,7 @@
         },
         "others": {
             "description": "Khác",
-            "tooltip": "Những gì khác"
+            "tooltip": "Những Gì Khác"
         }
     },
     "area_fill": {
@@ -501,6 +502,14 @@
         "zoom": "Phóng vừa tuyến đường GPX",
         "browse": "Chọn một tập tin .gpx"
     },
+    "mapillary_images": {
+        "tooltip": "Hình ảnh từ con đường do Mapillary cung cấp",
+        "title": "Lớp phủ Hình ảnh (Mapillary)"
+    },
+    "mapillary_signs": {
+        "tooltip": "Bảng giao thông do Mapillary cung cấp",
+        "title": "Lớp phủ Bảng Giao thông (Mapillary)"
+    },
     "mapillary": {
         "view_on_mapillary": "Xem hình này trên Mapillary"
     },
@@ -598,6 +607,38 @@
         }
     },
     "presets": {
+        "categories": {
+            "category-building": {
+                "name": "Liên quan đến Tòa nhà"
+            },
+            "category-golf": {
+                "name": "Liên quan đến Golf"
+            },
+            "category-landuse": {
+                "name": "Liên quan đến Sử dụng Đất"
+            },
+            "category-path": {
+                "name": "Liên quan đến Đường mòn"
+            },
+            "category-rail": {
+                "name": "Liên quan đến Đường sắt"
+            },
+            "category-restriction": {
+                "name": "Liên quan đến Hạn chế"
+            },
+            "category-road": {
+                "name": "Liên quan đến Đường sá"
+            },
+            "category-route": {
+                "name": "Liên quan đến Tuyến đường"
+            },
+            "category-water-area": {
+                "name": "Liên quan đến Nước"
+            },
+            "category-water-line": {
+                "name": "Liên quan đến Nước"
+            }
+        },
         "fields": {
             "access": {
                 "label": "Quyền Truy cập",
@@ -2573,6 +2614,10 @@
                 "name": "Nhánh Ra vào Phố",
                 "terms": "đường nhánh phố, đoạn nhánh phố, đường nhánh rẽ phố, đoạn nhánh rẽ phố, đường nhánh chuyển đường phố, nhánh chuyển đường phố, lối ra vào phố, lối ra phố, lối vào phố, nhánh ra phố, nhánh vào phố, đường nối phố, duong nhanh pho, doan nhanh pho, duong nhanh re pho, doan nhanh re pho, duong nhanh chuyen duong pho, nhanh chuyen duong pho, loi ra vao pho, loi ra pho, loi vao pho, nhanh ra pho, nhanh vao pho, duong noi pho"
             },
+            "highway/track": {
+                "name": "Đường gom",
+                "terms": "đường gom, đường mòn, đường nông thôn, đường lâm nghiệp, đường bỏ hoang, duong gom, duong mon, duong nong thon, duong lam nghiep, duong bo hoang"
+            },
             "highway/traffic_signals": {
                 "name": "Đèn Giao thông",
                 "terms": "đèn giao thông, đèn tín hiệu giao thông, đèn tín hiệu, đèn điều khiển giao thông, đèn điều khiển, đèn xanh đèn đỏ, đèn xanh đỏ, đèn ngã tư, đèn ngã ba, den giao thong, den tin hieu giao thong, den tin hieu, den dieu khien giao thong, den dieu khien, den xanh den do, den xanh do, den nga tu, den nga ba"
@@ -2732,6 +2777,10 @@
             "leisure/adult_gaming_centre": {
                 "name": "Trung tâm Đánh bạc",
                 "terms": "trung tâm đánh bạc, máy đánh bạc, trung tam danh bac, may danh bac"
+            },
+            "leisure/bird_hide": {
+                "name": "Căn nhà Quan sát Chim",
+                "terms": "căn nhà quan sát chim, căn nhà quan sát động vật, can nha quan sat chim, can nha quan sat dong vat"
             },
             "leisure/bowling_alley": {
                 "name": "Khu Bowling",
@@ -3353,6 +3402,10 @@
                 "name": "Tiệm Đồ Cổ",
                 "terms": "tiệm đồ cổ, cửa hàng đồ cổ, cửa hiệu đồ cổ, người bán đồ cổ, chỗ bán đồ cổ, nơi bán đồ cổ, tiem do co, cua hang do co, cua hieu do co, nguoi ban do co, cho ban do co, noi ban do co"
             },
+            "shop/art": {
+                "name": "Tiệm Nghệ phẩm",
+                "terms": "tiệm nghệ phẩm, tiệm tác phẩm nghệ thuật, tiệm bức tranh, tiệm bức vẽ, cửa hàng nghệ phẩm, cửa hàng tác phẩm nghệ thuật, cửa hàng bức tranh, cửa hàng bức vẽ, quán nghệ phẩm, quán bức tranh, quán bức vẽ, nơi bán nghệ phẩm, nơi bán bức tranh, nơi bán bức vẽ, tiem nghe pham, tiem tac pham nghe thuat, tiem buc tranh, tiem buc ve, cua hang nghe pham, cua hang tac pham nghe thuat, cua hang buc tranh, cua hang buc ve, quan nghe pham, quan buc tranh, quan buc ve, noi ban nghe pham, noi ban buc tranh, noi ban buc ve"
+            },
             "shop/baby_goods": {
                 "name": "Tiệm Đồ Sơ sinh",
                 "terms": "tiệm đồ sơ sinh, cửa hàng đồ sơ sinh, cửa hiệu đồ sơ sinh, tiệm đồ em bé, cửa hàng đồ em bé, cửa hiệu đồ em bé, chăm sóc em bé, đồ chơi em bé, sữa, tiem do so sinh, cua hang do so sinh, cua hieu do so sinh, tiem do em be, cua hang do em be, cua hieu do em be, cham soc em be, do choi em be, sua"
@@ -3800,6 +3853,10 @@
             "tourism/chalet": {
                 "name": "Nhà nghỉ Riêng biệt",
                 "terms": "nhà nghỉ riêng biệt, nhà ván gỗ kiểu Thụy Sĩ, nhà ván gỗ kiểu Thụy Sỹ, nhà ván gỗ kiểu Thuỵ Sĩ, nhà ván gỗ kiểu Thuỵ Sỹ, nhà nghỉ trên núi tuyết, nha nghi rieng biet, nha van go kieu Thuy Si, nha van go kieu Thuy Sy, nha nghi tren nui tuyet"
+            },
+            "tourism/gallery": {
+                "name": "Phòng tranh",
+                "terms": "phòng tranh, phòng triển lãm nghệ thuật, phòng triển lãm nghệ phẩm, phong tranh, phong trien lam nghe thuat, phong trien lam nghe pham"
             },
             "tourism/guest_house": {
                 "name": "Nhà khách",

@@ -133,7 +133,8 @@
             "key": "D",
             "annotation": "Heu desconnectat línies/àrees.",
             "not_connected": "Aquí no hi han suficients línies/àrees a desconnectar.",
-            "connected_to_hidden": "No es pot desconnectar perquè està connectat a una característica oculta."
+            "connected_to_hidden": "No es pot desconnectar perquè està connectat a una característica oculta.",
+            "relation": "Això no pot ser desconnectat perquè connecta membres d'una relació."
         },
         "merge": {
             "title": "Fusionar",
@@ -250,7 +251,9 @@
         "warnings": "Avisos",
         "modified": "Modificat",
         "deleted": "Eliminat",
-        "created": "Creat"
+        "created": "Creat",
+        "about_changeset_comments": "Quant als comentaris del conjunt de canvis",
+        "about_changeset_comments_link": "//wiki.openstreetmap.org/wiki/Good_changeset_comments"
     },
     "contributors": {
         "list": "Edicions fetes per {users}",
@@ -282,13 +285,15 @@
         "no_results_worldwide": "No s'han trobat resultats"
     },
     "geolocate": {
-        "title": "Mostra la meva ubicació"
+        "title": "Mostra la meva ubicació",
+        "locating": "Localitzant, espereu si us plau..."
     },
     "inspector": {
         "no_documentation_combination": "No hi ha documentació per a aquesta combinació d'etiquetes",
         "no_documentation_key": "No hi ha documentació per a aquesta clau",
         "show_more": "Mostra'n més",
         "view_on_osm": "Mostra-ho a openstreetmap.org",
+        "all_fields": "Tots els camps",
         "all_tags": "Totes les etiquetes",
         "all_members": "Tots els membres",
         "all_relations": "Totes les relacions",
@@ -321,10 +326,12 @@
         "description": "Paràmetres de configuració del fons",
         "percent_brightness": "{opacity}% brillantor",
         "none": "Cap",
+        "best_imagery": "Font d'imatgeria millor coneguda per a aquesta ubicació",
         "custom": "Personalitzar",
         "custom_button": "Editar el fons personalitzat",
         "custom_prompt": "Introduïu una plantilla d'URL de casella. Els paràmetres vàlids són {z}, {x}, {y} per a l'esquema Z/X/Y i  {u} per a l'esquema quadtile.",
         "fix_misalignment": "Corregir la alineació",
+        "imagery_source_faq": "D'on prové aquesta imatgeria?",
         "reset": "reiniciar",
         "minimap": {
             "description": "Miniatura del mapa",
@@ -344,13 +351,13 @@
             "description": "Punts",
             "tooltip": "Punts d'Interès"
         },
-        "major_roads": {
-            "description": "Carreteres bàsiques",
+        "traffic_roads": {
+            "description": "Carreteres pel trànsit",
             "tooltip": "Autopistes, carrers, etc."
         },
-        "minor_roads": {
-            "description": "Carreteres menors",
-            "tooltip": "Carreteres de servei, carrils d'aparcament, pistes, etc."
+        "service_roads": {
+            "description": "Vies de servei",
+            "tooltip": "Vies de servei, carrils d'aparcament, pistes, etc."
         },
         "paths": {
             "description": "Camins",
@@ -447,7 +454,10 @@
         "view_on_osm": "Mostra-ho a OSM",
         "facebook": "Compartiu-ho a Facebook",
         "twitter": "Compartiu-ho al Twitter",
-        "google": "Compartiu-ho a Google+"
+        "google": "Compartiu-ho a Google+",
+        "help_html": "Els vostres canvis haurien d'aparèixer a la capa \"Estàndard\" en pocs minuts. Altres capes i certes característiques, poden tardar més.",
+        "help_link_text": "Detalls",
+        "help_link_url": "https://wiki.openstreetmap.org/wiki/FAQ#I_have_just_made_some_changes_to_the_map._How_do_I_get_to_see_my_changes.3F"
     },
     "confirm": {
         "okay": "D'acord",
@@ -492,6 +502,14 @@
         "zoom": "Ajusta la vista a la traça GPX",
         "browse": "Buscar el fitxer .gpx"
     },
+    "mapillary_images": {
+        "tooltip": "Fotos a peu de carrer de Mapillary",
+        "title": "Superposició de fotos (Mapillary)"
+    },
+    "mapillary_signs": {
+        "tooltip": "Senyals de Trànsit de Mapillary",
+        "title": "Superposició de Senyals de Trànsit (Mapillary)"
+    },
     "mapillary": {
         "view_on_mapillary": "Visualitzeu la imatge a Mapillary"
     },
@@ -518,15 +536,34 @@
             "spring_st": "Carrer Barcelona",
             "scidmore_park": "Parc de la Pau",
             "petting_zoo": "Zoològic del parc de la pau",
+            "n_andrews_st": "Carrer de la Font Freda Nord",
+            "s_andrews_st": "Carrer de la Font Freda Sud",
+            "n_constantine_st": "Carrer de L'Hospital Nord",
+            "s_constantine_st": "Carrer de L'Hospital Sud",
             "rocky_river": "Riera d'Aigüesavall",
             "railroad_dr": "Carrer del Ferrocarril",
-            "conrail_rr": "FGC Llobregat - Anoia"
+            "conrail_rr": "FGC Llobregat - Anoia",
+            "st_joseph_river": "Riu Llobregat",
+            "n_main_st": "Avinguda General Nord",
+            "s_main_st": "Avinguda General Sud",
+            "water_st": "Carrer de l'Aigua",
+            "foster_st": "Carrer del Fuster",
+            "portage_river": "Riera del Pedrerol",
+            "flower_st": "Carrer dels Jocs Florals",
+            "elm_st": "Carrer dels Somnis",
+            "walnut_st": "Carrer Priorat",
+            "morris_ave": "Avinguda de l'Onze de Setembre",
+            "east_st": "Carrer dels Balcans",
+            "portage_ave": "Avinguda de Circumval·lació"
         },
         "navigation": {
             "title": "Navegació",
             "drag": "L'àrea del mapa principal us mostra les dades de l'OpenStreetMap a sobre d'un fons. Podeu navegar-hi arrossegant el ratolí, igual que tots els mapes virtuals. **Arrossegueu el mapa!**",
             "select": "Les característiques del mapa són representades de tres maneres diferents: utilitzant punts, línies o bé àrees. Totes les característiques poden ser seleccionades clicant-hi a sobre. **Cliqueu el punt per seleccionar-lo.**",
-            "pane": "Quan es selecciona una característica, es desplega l'editor. L'encapçalament us mostra el tipus de característica i el tauler principal mostra els atributs de la característica, com ara el seu nom o l'adreça. **Tanqueu l'editor de la característica clicant al botó {button} que es troba al capdamunt a la dreta.**"
+            "pane": "Quan es selecciona una característica, es desplega l'editor. L'encapçalament us mostra el tipus de característica i el tauler principal mostra els atributs de la característica, com ara el seu nom o l'adreça. **Tanqueu l'editor de la característica clicant al botó {button} que es troba al capdamunt a la dreta.**",
+            "search": "També podeu cercar característiques de la vista actual o bé a nivell mundial. **Cerqueu {name}**",
+            "choose": "**Escolliu {name} de la llista per seleccionar-ho.**",
+            "chosen": "Perfecte! S'ha seleccionat {name}. **Tanqueu l'editor de característiques prement el botó {button}.**"
         },
         "points": {
             "title": "Punts",
@@ -554,10 +591,12 @@
             "title": "Línies",
             "add": "Les línies acostumen a representar característiques com ara carreteres, vies de tren o rius. **Cliqueu el botó de Línia {button} per afegir una nova línia**",
             "start": "**Comenceu a dibuixar la línia clicant al final de la carretera.**",
+            "intersect": "Cliqueu al mapa per a afegir més nodes a la línia. Podeu arrossegar el mapa mentre dibuixeu si és necessari. Les carreteres i molts altres tipus de línies, són part d'una xarxa més gran. És molt important connectar aquestes línies a d'altres per tal que les aplicacions de navegació funcionin. **Cliqueu a {name} per a crear una intersecció que connecti aquestes dues línies.**",
             "finish": "Les línies poden ser acabades clicant al últim node una altra vegada. **Acabeu el dibuix de la carretera.**",
             "road": "**Escolliu Carretera de la llista**",
             "residential": "Hi ha molts tipus de carreteres, les més comunes són els carrers. **Escolliu el carrer**",
             "describe": "**Poseu nom al carrer i cliqueu el botó {button} per tancar l'editor de característica.**",
+            "restart": "La carretera ha d'unir-se a {name}.",
             "wrong_preset": "No heu seleccionat el Carrer. **Cliqueu aquí per seleccionar-lo de nou**"
         },
         "startediting": {
@@ -568,6 +607,38 @@
         }
     },
     "presets": {
+        "categories": {
+            "category-building": {
+                "name": "Característiques d'Edificació"
+            },
+            "category-golf": {
+                "name": "Característiques de Golf"
+            },
+            "category-landuse": {
+                "name": "Característiques d'Ús de la Terra"
+            },
+            "category-path": {
+                "name": "Característiques de Camins"
+            },
+            "category-rail": {
+                "name": "Característiques Ferroviàries"
+            },
+            "category-restriction": {
+                "name": "Característiques de Restricció"
+            },
+            "category-road": {
+                "name": "Característiques Viàries"
+            },
+            "category-route": {
+                "name": "Característiques d'Enrutament"
+            },
+            "category-water-area": {
+                "name": "Característiques Hidràuliques"
+            },
+            "category-water-line": {
+                "name": "Característiques Hidràuliques"
+            }
+        },
         "fields": {
             "access": {
                 "label": "Accés permès",
@@ -1304,6 +1375,9 @@
             "shop": {
                 "label": "Tipus"
             },
+            "site": {
+                "label": "Tipus"
+            },
             "sloped_curb": {
                 "label": "Rampa a la vorera"
             },
@@ -1854,6 +1928,9 @@
             "amenity/waste_disposal": {
                 "name": "Contenidor d'escombraries"
             },
+            "amenity/water_point": {
+                "name": "Aigua potable d'autocaravana"
+            },
             "area": {
                 "name": "Àrea",
                 "terms": "Àrea"
@@ -2380,6 +2457,9 @@
                 "name": "Enllaç de carretera terciària",
                 "terms": "Enllaç amb terciària"
             },
+            "highway/track": {
+                "name": "Pista forestal no mantinguda"
+            },
             "highway/traffic_signals": {
                 "name": "Semàfors",
                 "terms": "Senyals de trànsit, Senyals de tràfic"
@@ -2395,9 +2475,6 @@
             "highway/turning_circle": {
                 "name": "Cul de sac",
                 "terms": "Girar 180 graus, Canviar de sentit"
-            },
-            "highway/unclassified": {
-                "name": "Carretera local"
             },
             "historic": {
                 "name": "Lloc històric",
@@ -2611,6 +2688,12 @@
                 "name": "Pendent per a embarcacions",
                 "terms": "Varador"
             },
+            "leisure/sports_centre": {
+                "name": "Centre d'esport / Gimnàs"
+            },
+            "leisure/sports_centre/swimming": {
+                "name": "Instal·lacions de Piscina"
+            },
             "leisure/stadium": {
                 "name": "Estadi",
                 "terms": "Estadi,Camp"
@@ -2621,6 +2704,9 @@
             },
             "leisure/track": {
                 "name": "Circuit de curses (sense motor)"
+            },
+            "leisure/water_park": {
+                "name": "Parc Aquàtic"
             },
             "line": {
                 "name": "Línia",
@@ -3038,6 +3124,9 @@
             "shop/antiques": {
                 "name": "Botiga d'antiguitats"
             },
+            "shop/art": {
+                "name": "Botiga d'art"
+            },
             "shop/baby_goods": {
                 "name": "Botiga per a nadons"
             },
@@ -3319,6 +3408,9 @@
             "shop/stationery": {
                 "name": "Papereria"
             },
+            "shop/storage_rental": {
+                "name": "Lloguer de magatzem"
+            },
             "shop/supermarket": {
                 "name": "Supermercat",
                 "terms": "Supermercat, Súper, Hipermercat, Híper"
@@ -3400,6 +3492,9 @@
             },
             "tourism/chalet": {
                 "name": "Xalet"
+            },
+            "tourism/gallery": {
+                "name": "Galeria d'art"
             },
             "tourism/guest_house": {
                 "name": "Habitacions de lloguer",
@@ -3539,6 +3634,9 @@
             "type/route_master": {
                 "name": "Patró de la Ruta"
             },
+            "type/site": {
+                "name": "Lloc"
+            },
             "vertex": {
                 "name": "Altres",
                 "terms": "Altre, Altres"
@@ -3561,9 +3659,6 @@
             "waterway/ditch": {
                 "name": "Séquia",
                 "terms": "Séquia, Sèquia, Rara, Canal, Aigua, Via aqüífera, Torrent, Conducció d'aigua, Aqüífer, Rierol"
-            },
-            "waterway/dock": {
-                "name": "Embarcador"
             },
             "waterway/drain": {
                 "name": "Torrent",

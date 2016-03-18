@@ -174,17 +174,26 @@
     "zoom_in_edit": "Zoom inn for å redigere",
     "logout": "logg ut",
     "loading_auth": "Kobler til OpenStreetMap...",
+    "report_a_bug": "Rapporter feil",
+    "help_translate": "Hjelp til med oversettelse",
     "commit": {
         "title": "Lagre endringer",
         "description_placeholder": "Kort beskrivelse av dine bidrag",
+        "message_label": "Kommentar til endringssettet",
         "save": "Lagre",
         "cancel": "Avbryt",
+        "changes": "{count} endringer",
         "warnings": "Advarsler",
         "modified": "Endret",
         "deleted": "Fjernet",
-        "created": "Opprettet"
+        "created": "Opprettet",
+        "about_changeset_comments": "Angående kommentarer til endringssett"
+    },
+    "contributors": {
+        "list": "Redigeringer utført av {users}"
     },
     "infobox": {
+        "selected": "{n} valgt(e)",
         "geometry": "Geometri",
         "closed": "lukket",
         "center": "Senter",
@@ -256,14 +265,6 @@
             "description": "Punkter",
             "tooltip": "Interessepunkter"
         },
-        "major_roads": {
-            "description": "Hovedveier",
-            "tooltip": "Motorveier, gater etc."
-        },
-        "minor_roads": {
-            "description": "Mindre veier",
-            "tooltip": "Skogveier, parkeringsveier, stier"
-        },
         "paths": {
             "description": "Stier",
             "tooltip": "Fortau, gangveier, sykkelveier etc."
@@ -321,7 +322,10 @@
             "previous": "< Forrige",
             "next": "Neste >",
             "keep_local": "Behold min",
-            "keep_remote": "Bruk de andre sin"
+            "keep_remote": "Bruk de andre sin",
+            "delete": "Behold som slettet",
+            "download_changes": "Eller last ned dine endringer",
+            "done": "Alle konflikter er løst!"
         }
     },
     "success": {
@@ -355,14 +359,17 @@
         "untagged_line": "Utagget linje",
         "untagged_area": "Utagget areal",
         "many_deletions": "Du skal slette {n} objekter. Er du sikker på at du vil gjøre dette? Dette vil slette dem fra kartet som alle andre ser på openstreetmap.org.",
-        "tag_suggests_area": "Taggen {tag} anbefaler at linje bør være et areal, men dette er ikke et areal"
+        "tag_suggests_area": "Taggen {tag} anbefaler at linje bør være et areal, men dette er ikke et areal",
+        "deprecated_tags": "Utgående tagger: {tags}"
     },
     "zoom": {
         "in": "Forstørr",
         "out": "Forminsk"
     },
     "gpx": {
-        "local_layer": "Lokal GPX-fil"
+        "local_layer": "Lokal GPX-fil",
+        "zoom": "Zoom inn til GPX-spor",
+        "browse": "Finn .gpx-fil"
     },
     "help": {
         "title": "Hjelp"
@@ -376,10 +383,15 @@
             "title": "Punkter"
         },
         "areas": {
+            "title": "Områder",
             "search": "**Søk etter '{name}'.**"
         },
         "lines": {
             "title": "Linjer"
+        },
+        "startediting": {
+            "title": "Begynn redigeringen",
+            "start": "Begynn kartredigeringen!"
         }
     },
     "presets": {
@@ -405,6 +417,7 @@
         },
         "fields": {
             "access": {
+                "label": "Tillatt for",
                 "options": {
                     "designated": {
                         "description": "Tilgang tillatt i henhold til skilt eller spesifike lokale lover"
@@ -439,6 +452,7 @@
                 }
             },
             "access_simple": {
+                "label": "Tillatt for",
                 "placeholder": "ja"
             },
             "address": {
@@ -447,12 +461,16 @@
                     "city": "By",
                     "conscriptionnumber": "123",
                     "country": "Land",
+                    "district": "Distrikt",
                     "hamlet": "Bosetning",
+                    "housename": "Husnavn",
                     "housenumber": "123",
                     "place": "Sted",
                     "postcode": "Postnummer",
+                    "province": "Provins",
                     "state": "Stat",
                     "street": "Gate",
+                    "subdistrict": "Underdistrikt",
                     "suburb": "Forstad"
                 }
             },
@@ -462,6 +480,13 @@
             "aerialway": {
                 "label": "Type"
             },
+            "aerialway/access": {
+                "options": {
+                    "both": "Begge",
+                    "entry": "Inngang",
+                    "exit": "Utgang"
+                }
+            },
             "aerialway/capacity": {
                 "label": "Kapasitet (per time)",
                 "placeholder": "500, 2500, 5000..."
@@ -469,13 +494,29 @@
             "aerialway/duration": {
                 "placeholder": "1, 2, 3..."
             },
+            "aerialway/heating": {
+                "label": "Oppvarmet"
+            },
             "aerialway/occupancy": {
                 "placeholder": "2, 4, 8..."
+            },
+            "aerialway/summer/access": {
+                "options": {
+                    "both": "Begge",
+                    "entry": "Inngang",
+                    "exit": "Utgang"
+                }
             },
             "aeroway": {
                 "label": "Type"
             },
             "amenity": {
+                "label": "Type"
+            },
+            "area/highway": {
+                "label": "Type"
+            },
+            "artwork_type": {
                 "label": "Type"
             },
             "atm": {
@@ -484,11 +525,17 @@
             "barrier": {
                 "label": "Type"
             },
+            "bench": {
+                "label": "Benk"
+            },
             "bicycle_parking": {
                 "label": "Type"
             },
             "boundary": {
                 "label": "Type"
+            },
+            "brand": {
+                "label": "Merke"
             },
             "building": {
                 "label": "Bygning"
@@ -501,7 +548,25 @@
                 "placeholder": "50, 100, 200..."
             },
             "cardinal_direction": {
-                "label": "Retning"
+                "label": "Retning",
+                "options": {
+                    "E": "Øst",
+                    "ENE": "Øst-nordøst",
+                    "ESE": "Øst-sørøst",
+                    "N": "Nord",
+                    "NE": "Nordøst",
+                    "NNE": "Nord-nordøst",
+                    "NNW": "Nord-nordvest",
+                    "NW": "Nordvest",
+                    "S": "Sør",
+                    "SE": "Sørøst",
+                    "SSE": "Sør-sørøst",
+                    "SSW": "Sør-sørvest",
+                    "SW": "Sørvest",
+                    "W": "Vest",
+                    "WNW": "Vest-nordvest",
+                    "WSW": "Vest-sørvest"
+                }
             },
             "clock_direction": {
                 "label": "Retning",
@@ -516,8 +581,17 @@
             "construction": {
                 "label": "Type"
             },
+            "content": {
+                "label": "Innhold"
+            },
             "country": {
                 "label": "Land"
+            },
+            "craft": {
+                "label": "Type"
+            },
+            "crop": {
+                "label": "Avling"
             },
             "crossing": {
                 "label": "Type"
@@ -526,18 +600,44 @@
                 "label": "Kjøkken"
             },
             "cycleway": {
+                "label": "Sykkelfelter",
                 "options": {
+                    "lane": {
+                        "description": "Et sykkelfelt separat fra biltrafikk med en malt linje",
+                        "title": "Standard sykkelfelt"
+                    },
                     "none": {
+                        "description": "Ingen sykklfelt",
                         "title": "Ingen"
+                    },
+                    "shared_lane": {
+                        "title": "Delt sykkelfelt"
                     }
+                },
+                "placeholder": "ingen",
+                "types": {
+                    "cycleway:left": "Venstresidig",
+                    "cycleway:right": "Høyresidig"
                 }
+            },
+            "delivery": {
+                "label": "Levering"
             },
             "description": {
                 "label": "Beskrivelse"
             },
+            "dock": {
+                "label": "Type"
+            },
+            "drive_through": {
+                "label": "Gjennomkjøring"
+            },
             "electrified": {
+                "label": "Elektrifisering",
                 "options": {
-                    "no": "Nei"
+                    "no": "Nei",
+                    "rail": "Elektrifisert jernbane",
+                    "yes": "Ja (uspesifisert)"
                 }
             },
             "elevation": {
@@ -549,6 +649,9 @@
             "entrance": {
                 "label": "Type"
             },
+            "except": {
+                "label": "Unntak"
+            },
             "fax": {
                 "label": "Fax",
                 "placeholder": "+47 22 12 34 56"
@@ -559,6 +662,9 @@
             "fire_hydrant/type": {
                 "label": "Type",
                 "options": {
+                    "pillar": "Over bakken",
+                    "pond": "Vanndam",
+                    "underground": "Under overflaten",
                     "wall": "Vegg"
                 }
             },
@@ -583,13 +689,17 @@
             "fuel/lpg": {
                 "label": "Selger propangass"
             },
+            "gauge": {
+                "label": "Måler"
+            },
             "gender": {
                 "label": "Kjønn",
                 "options": {
                     "female": "Hunkjønn",
                     "male": "Hankjønn",
                     "unisex": "Unisex"
-                }
+                },
+                "placeholder": "Ukjent"
             },
             "generator/method": {
                 "label": "Metode"
@@ -600,8 +710,16 @@
             "generator/type": {
                 "label": "Type"
             },
+            "golf_hole": {
+                "label": "Referanse",
+                "placeholder": "Hull nummer (1-18)"
+            },
             "handicap": {
+                "label": "Handikapp",
                 "placeholder": "1-18"
+            },
+            "handrail": {
+                "label": "Gelender"
             },
             "highway": {
                 "label": "Type"
@@ -640,6 +758,9 @@
                     "yes": "Ja"
                 }
             },
+            "lamp_type": {
+                "label": "Type"
+            },
             "landuse": {
                 "label": "Type"
             },
@@ -649,6 +770,22 @@
             },
             "layer": {
                 "label": "Lag"
+            },
+            "leaf_cycle": {
+                "options": {
+                    "evergreen": "Eviggrønn",
+                    "mixed": "Blandet"
+                }
+            },
+            "leaf_cycle_singular": {
+                "options": {
+                    "evergreen": "Eviggrønn"
+                }
+            },
+            "leaf_type": {
+                "options": {
+                    "mixed": "Blandet"
+                }
             },
             "leisure": {
                 "label": "Type"
@@ -687,6 +824,7 @@
                 "label": "Enveis",
                 "options": {
                     "no": "Nei",
+                    "undefined": "Antatt til å være Nei",
                     "yes": "Ja"
                 }
             },
@@ -710,12 +848,16 @@
                 "label": "Type",
                 "options": {
                     "sheds": "Skur/utebod",
-                    "surface": "Overflate"
+                    "surface": "Overflate",
+                    "underground": "Under overflaten"
                 }
             },
             "phone": {
                 "label": "Telefon",
                 "placeholder": "+47 22 12 34 56"
+            },
+            "piste/type": {
+                "label": "Type"
             },
             "place": {
                 "label": "Type"
@@ -750,20 +892,31 @@
             "service/bicycle/chain_tool": {
                 "options": {
                     "no": "Nei",
+                    "undefined": "Antatt til å være Nei",
                     "yes": "Ja"
                 }
             },
             "service/bicycle/pump": {
                 "options": {
                     "no": "Nei",
+                    "undefined": "Antatt til å være Nei",
                     "yes": "Ja"
                 }
+            },
+            "shelter": {
+                "label": "Skur"
             },
             "shelter_type": {
                 "label": "Type"
             },
             "shop": {
                 "label": "Type"
+            },
+            "site": {
+                "label": "Type"
+            },
+            "smoking": {
+                "label": "Røyking"
             },
             "source": {
                 "label": "Kilde"
@@ -774,15 +927,23 @@
             "sport_ice": {
                 "label": "Sport"
             },
+            "sport_racing": {
+                "label": "Idrett"
+            },
             "structure": {
                 "label": "Struktur",
                 "options": {
                     "bridge": "Bru",
+                    "embankment": "Dike",
+                    "ford": "Vadested",
                     "tunnel": "Tunnel"
                 },
                 "placeholder": "Ukjent"
             },
             "studio_type": {
+                "label": "Type"
+            },
+            "substation": {
                 "label": "Type"
             },
             "surface": {
@@ -799,6 +960,12 @@
             },
             "towertype": {
                 "label": "Tårntype"
+            },
+            "traffic_signals": {
+                "label": "Type"
+            },
+            "trees": {
+                "label": "Trær"
             },
             "tunnel": {
                 "label": "Tunnel"
@@ -884,8 +1051,17 @@
             "amenity/car_wash": {
                 "name": "Bilvask"
             },
+            "amenity/casino": {
+                "name": "Kasino"
+            },
+            "amenity/charging_station": {
+                "name": "Ladestasjon"
+            },
             "amenity/cinema": {
                 "name": "Kino"
+            },
+            "amenity/clinic": {
+                "name": "Klinikk"
             },
             "amenity/clock": {
                 "name": "Klokke"
@@ -893,8 +1069,14 @@
             "amenity/drinking_water": {
                 "name": "Drikkevann"
             },
+            "amenity/embassy": {
+                "name": "Ambassade"
+            },
             "amenity/fast_food": {
                 "name": "Hurtigmat"
+            },
+            "amenity/ferry_terminal": {
+                "name": "Fergeterminal"
             },
             "amenity/fire_station": {
                 "name": "Brannstasjon"
@@ -908,14 +1090,32 @@
             "amenity/grave_yard": {
                 "name": "Kirkegård"
             },
+            "amenity/hospital": {
+                "name": "Sykehusområde"
+            },
+            "amenity/kindergarten": {
+                "name": "Barnehageområde"
+            },
             "amenity/library": {
                 "name": "Bibliotek"
             },
             "amenity/marketplace": {
                 "name": "Markedsplass"
             },
+            "amenity/motorcycle_parking": {
+                "name": "Motorsykkelparkering"
+            },
             "amenity/nightclub": {
                 "name": "Nattklubb"
+            },
+            "amenity/parking": {
+                "name": "Bilparkering"
+            },
+            "amenity/parking_entrance": {
+                "name": "Innkjøring/utkjøring parkeringsgarasje"
+            },
+            "amenity/parking_space": {
+                "name": "Parkeringsplass"
             },
             "amenity/pharmacy": {
                 "name": "Apotek"
@@ -947,8 +1147,23 @@
             "amenity/pub": {
                 "name": "Pub"
             },
+            "amenity/recycling": {
+                "name": "Resirkulering"
+            },
             "amenity/restaurant": {
                 "name": "Restaurant"
+            },
+            "amenity/school": {
+                "name": "Skoleområde"
+            },
+            "amenity/shelter": {
+                "name": "Skur"
+            },
+            "amenity/social_facility/homeless_shelter": {
+                "name": "Overnatting for hjemløse"
+            },
+            "amenity/studio": {
+                "name": "Studio"
             },
             "amenity/swimming_pool": {
                 "name": "Svømmebasseng"
@@ -959,11 +1174,20 @@
             "amenity/telephone": {
                 "name": "Telefon"
             },
+            "amenity/theatre": {
+                "name": "Teater"
+            },
             "amenity/toilets": {
                 "name": "Toaletter"
             },
             "amenity/townhall": {
                 "name": "Rådhus"
+            },
+            "amenity/university": {
+                "name": "Universitetsområde"
+            },
+            "amenity/veterinary": {
+                "name": "Veterinær"
             },
             "amenity/waste_basket": {
                 "name": "Søppel"
@@ -974,8 +1198,14 @@
             "barrier": {
                 "name": "Hinder"
             },
+            "barrier/city_wall": {
+                "name": "Bymur"
+            },
             "barrier/cycle_barrier": {
                 "name": "Sykkelhinder"
+            },
+            "barrier/ditch": {
+                "name": "Grøft"
             },
             "barrier/entrance": {
                 "name": "Inngang"
@@ -1004,20 +1234,293 @@
             "building/apartments": {
                 "name": "Leiligheter"
             },
+            "building/barn": {
+                "name": "Låve"
+            },
+            "building/bunker": {
+                "name": "Bunker"
+            },
+            "building/cabin": {
+                "name": "Hytte"
+            },
+            "building/cathedral": {
+                "name": "Katedral"
+            },
+            "building/chapel": {
+                "name": "Kapell"
+            },
+            "building/church": {
+                "name": "Kirke"
+            },
+            "building/college": {
+                "name": "College"
+            },
+            "building/commercial": {
+                "name": "Kommersiell bygning"
+            },
+            "building/construction": {
+                "name": "Bygning under oppføring"
+            },
+            "building/dormitory": {
+                "name": "Sovesal"
+            },
+            "building/entrance": {
+                "name": "Inngang/utgang"
+            },
+            "building/garage": {
+                "name": "Garasje"
+            },
+            "building/garages": {
+                "name": "Garasjer"
+            },
+            "building/greenhouse": {
+                "name": "Veksthus"
+            },
+            "building/hospital": {
+                "name": "Sykehus"
+            },
+            "building/hotel": {
+                "name": "Hotell"
+            },
             "building/house": {
                 "name": "Hus"
+            },
+            "building/industrial": {
+                "name": "Industribygg"
+            },
+            "building/kindergarten": {
+                "name": "Barnehage"
+            },
+            "building/public": {
+                "name": "Offentlig bygning"
+            },
+            "building/residential": {
+                "name": "Boliger"
+            },
+            "building/roof": {
+                "name": "Tak"
+            },
+            "building/school": {
+                "name": "Skole"
+            },
+            "building/shed": {
+                "name": "Skur/naust"
+            },
+            "building/stable": {
+                "name": "Stall"
+            },
+            "building/train_station": {
+                "name": "Togstasjon"
+            },
+            "building/university": {
+                "name": "Universitetsbygning"
+            },
+            "building/warehouse": {
+                "name": "Lagerbygning"
+            },
+            "craft": {
+                "name": "Håndverk"
+            },
+            "craft/basket_maker": {
+                "name": "Kurvmaker"
+            },
+            "craft/beekeeper": {
+                "name": "Birøkter"
+            },
+            "craft/blacksmith": {
+                "name": "Grovsmed"
+            },
+            "craft/boatbuilder": {
+                "name": "Båtbygger"
+            },
+            "craft/bookbinder": {
+                "name": "Bokbinderi"
+            },
+            "craft/brewery": {
+                "name": "Bryggeri"
+            },
+            "craft/carpenter": {
+                "name": "Snekker"
+            },
+            "craft/carpet_layer": {
+                "name": "Teppelegger"
+            },
+            "craft/caterer": {
+                "name": "Cateringfirma"
+            },
+            "craft/clockmaker": {
+                "name": "Klokkemaker"
+            },
+            "craft/confectionery": {
+                "name": "Konfektmaker"
+            },
+            "craft/dressmaker": {
+                "name": "Syer/syerske"
+            },
+            "craft/electrician": {
+                "name": "Elektriker"
+            },
+            "craft/gardener": {
+                "name": "Gartner"
+            },
+            "craft/glaziery": {
+                "name": "Glassmester"
+            },
+            "craft/handicraft": {
+                "name": "Kunsthåndverk"
+            },
+            "craft/hvac": {
+                "name": "VVS"
+            },
+            "craft/insulator": {
+                "name": "Isolatør"
+            },
+            "craft/jeweler": {
+                "name": "Gullsmed"
+            },
+            "craft/key_cutter": {
+                "name": "Nøkkelsliper"
+            },
+            "craft/locksmith": {
+                "name": "Låsesmed"
+            },
+            "craft/metal_construction": {
+                "name": "Metallkonstruktør"
             },
             "craft/optician": {
                 "name": "Optiker"
             },
+            "craft/painter": {
+                "name": "Maler"
+            },
+            "craft/photographer": {
+                "name": "Fotograf"
+            },
+            "craft/photographic_laboratory": {
+                "name": "Fotolaboratorium"
+            },
+            "craft/plasterer": {
+                "name": "Murpusser"
+            },
+            "craft/plumber": {
+                "name": "Rørlegger"
+            },
+            "craft/pottery": {
+                "name": "Keramikk"
+            },
+            "craft/rigger": {
+                "name": "Scenerigger"
+            },
+            "craft/roofer": {
+                "name": "Taktekker"
+            },
+            "craft/saddler": {
+                "name": "Salmaker"
+            },
+            "craft/sailmaker": {
+                "name": "Seilmaker"
+            },
+            "craft/sawmill": {
+                "name": "Sagbruk"
+            },
+            "craft/scaffolder": {
+                "name": "Stillasbygger"
+            },
+            "craft/sculpter": {
+                "name": "Skulptør"
+            },
+            "craft/shoemaker": {
+                "name": "Skomaker"
+            },
+            "craft/stonemason": {
+                "name": "Steinhugger"
+            },
+            "craft/sweep": {
+                "name": "Feier"
+            },
+            "craft/tailor": {
+                "name": "Skredder"
+            },
+            "craft/tiler": {
+                "name": "Flislegger"
+            },
+            "craft/tinsmith": {
+                "name": "Blikkenslager"
+            },
+            "craft/upholsterer": {
+                "name": "Møbeltapetserer"
+            },
+            "craft/watchmaker": {
+                "name": "Urmaker"
+            },
+            "craft/winery": {
+                "name": "Vingård"
+            },
+            "embankment": {
+                "name": "Dike"
+            },
+            "emergency/ambulance_station": {
+                "name": "Ambulansebase"
+            },
+            "emergency/fire_hydrant": {
+                "name": "Brannhydrant"
+            },
             "emergency/phone": {
                 "name": "Nødtelefon"
+            },
+            "entrance": {
+                "name": "Inngang/utgang"
+            },
+            "footway/crossing": {
+                "name": "Fotgjengerovergang"
+            },
+            "footway/crosswalk": {
+                "name": "Fotgjengerovergang"
+            },
+            "footway/sidewalk": {
+                "name": "Fortau"
+            },
+            "ford": {
+                "name": "Vadested"
+            },
+            "golf/bunker": {
+                "name": "Bunkers"
+            },
+            "golf/fairway": {
+                "name": "Golfbane"
+            },
+            "golf/green": {
+                "name": "Green"
+            },
+            "golf/hole": {
+                "name": "Golfbanehull"
+            },
+            "golf/lateral_water_hazard": {
+                "name": "Sidevannhinder"
+            },
+            "golf/rough": {
+                "name": "Rough"
+            },
+            "golf/tee": {
+                "name": "Utslagssted"
+            },
+            "golf/water_hazard": {
+                "name": "Vannhinder"
             },
             "highway": {
                 "name": "Vei"
             },
+            "highway/bridleway": {
+                "name": "Ridevei"
+            },
             "highway/bus_stop": {
                 "name": "Busstopp"
+            },
+            "highway/crossing": {
+                "name": "Fotgjengerovergang"
+            },
+            "highway/crosswalk": {
+                "name": "Fotgjengerovergang"
             },
             "highway/cycleway": {
                 "name": "Sykkelvei"
@@ -1034,11 +1537,17 @@
             "highway/motorway": {
                 "name": "Motorvei"
             },
+            "highway/motorway_junction": {
+                "name": "Motorveikryss / Avkjøring"
+            },
             "highway/motorway_link": {
                 "name": "Motorveirampe"
             },
             "highway/path": {
                 "name": "Sti"
+            },
+            "highway/pedestrian": {
+                "name": "Gågate"
             },
             "highway/primary": {
                 "name": "Primær hovedvei"
@@ -1073,6 +1582,9 @@
             "highway/steps": {
                 "name": "Trapp"
             },
+            "highway/stop": {
+                "name": "Stoppskilt"
+            },
             "highway/tertiary": {
                 "name": "Tertiær hovedvei"
             },
@@ -1097,8 +1609,20 @@
             "landuse/cemetery": {
                 "name": "Kirkegård"
             },
+            "landuse/churchyard": {
+                "name": "Kirkegård"
+            },
+            "landuse/commercial": {
+                "name": "Kommersielt område"
+            },
             "landuse/construction": {
                 "name": "Konstruksjon"
+            },
+            "landuse/farm": {
+                "name": "Jordbruksland"
+            },
+            "landuse/farmland": {
+                "name": "Jordbruksland"
             },
             "landuse/farmyard": {
                 "name": "Gårdsplass"
@@ -1106,17 +1630,38 @@
             "landuse/forest": {
                 "name": "Skog"
             },
+            "landuse/garages": {
+                "name": "Garasjer"
+            },
             "landuse/grass": {
                 "name": "Gress"
+            },
+            "landuse/industrial": {
+                "name": "Industrielt område"
+            },
+            "landuse/landfill": {
+                "name": "Deponi"
             },
             "landuse/meadow": {
                 "name": "Blomstereng"
             },
+            "landuse/military": {
+                "name": "Militært område"
+            },
             "landuse/orchard": {
                 "name": "Frukthage"
             },
+            "landuse/plant_nursery": {
+                "name": "Planteskole"
+            },
             "landuse/quarry": {
                 "name": "Steinbrudd"
+            },
+            "landuse/residential": {
+                "name": "Boligområde"
+            },
+            "landuse/retail": {
+                "name": "Butikkområde"
             },
             "landuse/vineyard": {
                 "name": "Vingård"
@@ -1124,8 +1669,20 @@
             "leisure": {
                 "name": "Fritid"
             },
+            "leisure/adult_gaming_centre": {
+                "name": "Spillekasino"
+            },
+            "leisure/bowling_alley": {
+                "name": "Bowlingsenter"
+            },
+            "leisure/common": {
+                "name": "Fellesområde"
+            },
             "leisure/dog_park": {
                 "name": "Hundepark"
+            },
+            "leisure/firepit": {
+                "name": "Bålsted"
             },
             "leisure/garden": {
                 "name": "Hage"
@@ -1133,11 +1690,20 @@
             "leisure/golf_course": {
                 "name": "Golfbane"
             },
+            "leisure/ice_rink": {
+                "name": "Skøytebane"
+            },
             "leisure/marina": {
                 "name": "Marina"
             },
+            "leisure/nature_reserve": {
+                "name": "Naturreservat"
+            },
             "leisure/park": {
                 "name": "Park"
+            },
+            "leisure/picnic_table": {
+                "name": "Piknikbord"
             },
             "leisure/pitch": {
                 "name": "Idrettsbane"
@@ -1151,6 +1717,15 @@
             "leisure/pitch/basketball": {
                 "name": "Basketballbane"
             },
+            "leisure/pitch/rugby_league": {
+                "name": "Rugby league-bane"
+            },
+            "leisure/pitch/rugby_union": {
+                "name": "Rugby union-bane"
+            },
+            "leisure/pitch/skateboard": {
+                "name": "Skatepark"
+            },
             "leisure/pitch/soccer": {
                 "name": "Fotballbane"
             },
@@ -1163,23 +1738,83 @@
             "leisure/playground": {
                 "name": "Lekeplass"
             },
+            "leisure/running_track": {
+                "name": "Løpebane"
+            },
+            "leisure/slipway": {
+                "name": "Båtslipp"
+            },
+            "leisure/sports_centre": {
+                "name": "Sportssenter / gym"
+            },
+            "leisure/sports_centre/swimming": {
+                "name": "Svømmehall / badeland"
+            },
+            "leisure/stadium": {
+                "name": "Stadion"
+            },
             "leisure/swimming_pool": {
                 "name": "Svømmebasseng"
+            },
+            "leisure/water_park": {
+                "name": "Utendørs badeland"
             },
             "line": {
                 "name": "Linje"
             },
             "man_made": {
-                "name": "Menneskeskap"
+                "name": "Menneskeskapt"
+            },
+            "man_made/adit": {
+                "name": "Stoll"
+            },
+            "man_made/breakwater": {
+                "name": "Molo"
+            },
+            "man_made/chimney": {
+                "name": "Pipe"
+            },
+            "man_made/cutline": {
+                "name": "Utsiktssted"
+            },
+            "man_made/embankment": {
+                "name": "Dike"
+            },
+            "man_made/flagpole": {
+                "name": "Flaggstang"
+            },
+            "man_made/gasometer": {
+                "name": "Gasometer"
+            },
+            "man_made/groyne": {
+                "name": "Bølgebryter / høfde"
             },
             "man_made/lighthouse": {
                 "name": "Fyrtårn"
+            },
+            "man_made/mast": {
+                "name": "Radiomast"
+            },
+            "man_made/observation": {
+                "name": "Observasjonstårn"
+            },
+            "man_made/petroleum_well": {
+                "name": "Oljebrønn"
             },
             "man_made/pier": {
                 "name": "Pir"
             },
             "man_made/pipeline": {
                 "name": "Rørledning"
+            },
+            "man_made/silo": {
+                "name": "Silo"
+            },
+            "man_made/storage_tank": {
+                "name": "Lagringstank"
+            },
+            "man_made/surveillance": {
+                "name": "Overvåkning"
             },
             "man_made/survey_point": {
                 "name": "Oppmålingspunkt"
@@ -1193,8 +1828,41 @@
             "man_made/water_tower": {
                 "name": "Vanntårn"
             },
+            "man_made/water_well": {
+                "name": "Brønn"
+            },
             "man_made/water_works": {
                 "name": "Vannfiltreringsanlegg"
+            },
+            "man_made/works": {
+                "name": "Anleggsarbeid"
+            },
+            "military/airfield": {
+                "name": "Flyplass / lufthavn"
+            },
+            "military/barracks": {
+                "name": "Militærforlegning"
+            },
+            "military/bunker": {
+                "name": "Bunker"
+            },
+            "military/checkpoint": {
+                "name": "Sjekkpunkt"
+            },
+            "military/danger_area": {
+                "name": "Farlig område"
+            },
+            "military/naval_base": {
+                "name": "Marinebase"
+            },
+            "military/obstacle_course": {
+                "name": "Hinderløype"
+            },
+            "military/range": {
+                "name": "Militær skytebane"
+            },
+            "military/training_area": {
+                "name": "Militært skytefelt"
             },
             "natural": {
                 "name": "Naturlig"
@@ -1205,11 +1873,17 @@
             "natural/beach": {
                 "name": "Strand"
             },
+            "natural/cave_entrance": {
+                "name": "Huleinngang"
+            },
             "natural/cliff": {
                 "name": "Klippe"
             },
             "natural/coastline": {
                 "name": "Kystlinje"
+            },
+            "natural/fell": {
+                "name": "Snaufjell"
             },
             "natural/glacier": {
                 "name": "Bre"
@@ -1217,14 +1891,32 @@
             "natural/grassland": {
                 "name": "Gressåker"
             },
+            "natural/heath": {
+                "name": "Hei"
+            },
             "natural/peak": {
                 "name": "Topp"
+            },
+            "natural/saddle": {
+                "name": "Sadelpunkt"
+            },
+            "natural/scree": {
+                "name": "Ur"
+            },
+            "natural/scrub": {
+                "name": "Krattskog"
             },
             "natural/spring": {
                 "name": "Vannkilde"
             },
             "natural/tree": {
                 "name": "Tre"
+            },
+            "natural/tree_row": {
+                "name": "Trerekke"
+            },
+            "natural/volcano": {
+                "name": "Vulkan"
             },
             "natural/water": {
                 "name": "Vann"
@@ -1247,14 +1939,32 @@
             "office": {
                 "name": "Kontor"
             },
+            "office/accountant": {
+                "name": "Regnskapsfører"
+            },
             "office/architect": {
                 "name": "Arkitekt"
+            },
+            "office/lawyer": {
+                "name": "Advokatkontor"
+            },
+            "office/newspaper": {
+                "name": "Avisredaksjon"
+            },
+            "office/political_party": {
+                "name": "Politisk parti"
+            },
+            "office/travel_agent": {
+                "name": "Reisebyrå"
             },
             "place": {
                 "name": "Sted"
             },
             "place/city": {
                 "name": "By"
+            },
+            "place/farm": {
+                "name": "Gård"
             },
             "place/hamlet": {
                 "name": "Bosetning"
@@ -1283,11 +1993,29 @@
             "power/transformer": {
                 "name": "Transformator"
             },
+            "public_transport/platform": {
+                "name": "Plattform"
+            },
             "railway": {
                 "name": "Jernbane"
             },
+            "railway/abandoned": {
+                "name": "Nedlagt jernbane"
+            },
+            "railway/funicular": {
+                "name": "Kabelbane"
+            },
+            "railway/halt": {
+                "name": "Jernbanestasjon"
+            },
+            "railway/level_crossing": {
+                "name": "Jernbaneovergang"
+            },
             "railway/monorail": {
                 "name": "Monorail"
+            },
+            "railway/narrow_gauge": {
+                "name": "Smalsporet jernbane"
             },
             "railway/platform": {
                 "name": "Jernbaneplattform"
@@ -1310,6 +2038,9 @@
             "relation": {
                 "name": "Relasjon"
             },
+            "roundabout": {
+                "name": "Rundkjøring"
+            },
             "route/ferry": {
                 "name": "Fergerute"
             },
@@ -1319,17 +2050,53 @@
             "shop/alcohol": {
                 "name": "Vinutsalg"
             },
+            "shop/anime": {
+                "name": "Anime-butikk"
+            },
+            "shop/antiques": {
+                "name": "Antikvariat / antikvitetshandel"
+            },
+            "shop/art": {
+                "name": "Kunsthandel"
+            },
+            "shop/baby_goods": {
+                "name": "Babyutstyrsbutikk"
+            },
+            "shop/bag": {
+                "name": "Veskebutikk"
+            },
             "shop/bakery": {
                 "name": "Bakeri"
+            },
+            "shop/bathroom_furnishing": {
+                "name": "Baderomsbutikk"
             },
             "shop/beauty": {
                 "name": "Skjønnhetsbutikk"
             },
+            "shop/bed": {
+                "name": "Sengebutikk"
+            },
+            "shop/beverages": {
+                "name": "Øl- og vinutsalg"
+            },
             "shop/bicycle": {
                 "name": "Sykkelbutikk"
             },
+            "shop/bookmaker": {
+                "name": "Bookmaker"
+            },
+            "shop/books": {
+                "name": "Bokhandel"
+            },
+            "shop/boutique": {
+                "name": "Klesbutikk"
+            },
             "shop/butcher": {
                 "name": "Slakter"
+            },
+            "shop/candles": {
+                "name": "Lysstøperi"
             },
             "shop/car": {
                 "name": "Bilforhandler"
@@ -1337,20 +2104,89 @@
             "shop/car_parts": {
                 "name": "Bildelforhandler"
             },
+            "shop/car_repair": {
+                "name": "Bilverksted"
+            },
+            "shop/carpet": {
+                "name": "Teppehandler"
+            },
+            "shop/cheese": {
+                "name": "Ostebutikk"
+            },
+            "shop/chemist": {
+                "name": "Apotek"
+            },
+            "shop/chocolate": {
+                "name": "Sjokoladebutikk"
+            },
             "shop/clothes": {
                 "name": "Klesbutikk"
             },
             "shop/computer": {
                 "name": "Databutikk"
             },
+            "shop/confectionery": {
+                "name": "Godtebutikk"
+            },
+            "shop/convenience": {
+                "name": "Nærbutikk"
+            },
+            "shop/copyshop": {
+                "name": "Printsjappe"
+            },
+            "shop/cosmetics": {
+                "name": "Parfymeri"
+            },
+            "shop/craft": {
+                "name": "Håndverks- og kunstbutikk"
+            },
+            "shop/curtain": {
+                "name": "Gardinbutikk"
+            },
+            "shop/dairy": {
+                "name": "Ferskvarebutikk"
+            },
+            "shop/deli": {
+                "name": "Delikatessebutikk"
+            },
+            "shop/department_store": {
+                "name": "Supermarked"
+            },
+            "shop/doityourself": {
+                "name": "Byggevarehus"
+            },
+            "shop/dry_cleaning": {
+                "name": "Renseri"
+            },
             "shop/electronics": {
                 "name": "Elektronikkbutikk"
+            },
+            "shop/erotic": {
+                "name": "Erotikkbutikk"
+            },
+            "shop/fabric": {
+                "name": "Stoffbutikk"
+            },
+            "shop/farm": {
+                "name": "Gårdsutsalg"
+            },
+            "shop/fashion": {
+                "name": "Motebutikk"
             },
             "shop/fishmonger": {
                 "name": "Fiskeforhandler"
             },
             "shop/florist": {
                 "name": "Blomsterbutikk"
+            },
+            "shop/frame": {
+                "name": "Innrammingsbutikk"
+            },
+            "shop/funeral_directors": {
+                "name": "Begravelsesagent"
+            },
+            "shop/furnace": {
+                "name": "Varmebutikk"
             },
             "shop/furniture": {
                 "name": "Møbelforhandler"
@@ -1367,20 +2203,56 @@
             "shop/hairdresser": {
                 "name": "Frisør"
             },
+            "shop/hardware": {
+                "name": "Jernvarehandel"
+            },
+            "shop/hearing_aids": {
+                "name": "Høreapparatutsalg"
+            },
+            "shop/herbalist": {
+                "name": "Plantelegemiddelbutikk"
+            },
             "shop/hifi": {
                 "name": "Hifi-butikk"
+            },
+            "shop/houseware": {
+                "name": "Isenkrambutikk"
+            },
+            "shop/interior_decoration": {
+                "name": "Interiørbutikk"
             },
             "shop/jewelry": {
                 "name": "Smykkeforhandler"
             },
+            "shop/kiosk": {
+                "name": "Aviskiosk"
+            },
+            "shop/kitchen": {
+                "name": "Kjøkkenbutikk"
+            },
             "shop/laundry": {
                 "name": "Vaskeri"
+            },
+            "shop/leather": {
+                "name": "Skinnbutikk"
+            },
+            "shop/locksmith": {
+                "name": "Låsesmed"
             },
             "shop/mall": {
                 "name": "Kjøpesenter"
             },
+            "shop/massage": {
+                "name": "Massasjesenter"
+            },
+            "shop/medical_supply": {
+                "name": "Medisinsk utstyrsbutikk"
+            },
             "shop/mobile_phone": {
                 "name": "Mobiltelefonforhandler"
+            },
+            "shop/money_lender": {
+                "name": "Pengeutlåner"
             },
             "shop/motorcycle": {
                 "name": "Motorsykkelforhandler"
@@ -1388,17 +2260,80 @@
             "shop/music": {
                 "name": "Musikkforretning"
             },
+            "shop/musical_instrument": {
+                "name": "Musikkinstrumentbutikk"
+            },
+            "shop/newsagent": {
+                "name": "Aviskiosk"
+            },
             "shop/optician": {
                 "name": "Optiker"
+            },
+            "shop/organic": {
+                "name": "Økologisk matbutikk"
+            },
+            "shop/outdoor": {
+                "name": "Villmarksbutikk"
+            },
+            "shop/paint": {
+                "name": "Malingsbutikk"
+            },
+            "shop/pawnbroker": {
+                "name": "Pantelåner"
             },
             "shop/pet": {
                 "name": "Dyrebutikk"
             },
+            "shop/photo": {
+                "name": "Fotobutikk"
+            },
+            "shop/pyrotechnics": {
+                "name": "Fyrverkerihandel"
+            },
+            "shop/radiotechnics": {
+                "name": "Elektronikkbutikk"
+            },
+            "shop/religion": {
+                "name": "Religiøs butikk"
+            },
+            "shop/scuba_diving": {
+                "name": "Dykkerutstyrsbutikk"
+            },
+            "shop/seafood": {
+                "name": "Sjømatbutikk"
+            },
+            "shop/second_hand": {
+                "name": "Gjenbruksbutikk"
+            },
             "shop/shoes": {
                 "name": "Skobutikk"
             },
+            "shop/sports": {
+                "name": "Sportsbutikk"
+            },
+            "shop/stationery": {
+                "name": "Papirhandel"
+            },
+            "shop/storage_rental": {
+                "name": "Minilager"
+            },
             "shop/supermarket": {
                 "name": "Supermarked"
+            },
+            "shop/tailor": {
+                "name": "Skredder"
+            },
+            "shop/tattoo": {
+                "name": "Tatovør"
+            },
+            "shop/tea": {
+                "name": "Tebutikk"
+            },
+            "shop/ticket": {
+                "name": "Billettutsalg"
+            },
+            "shop/tobacco": {
+                "name": "Tobakksbutikk"
             },
             "shop/toys": {
                 "name": "Lekebutikk"
@@ -1409,8 +2344,20 @@
             "shop/tyres": {
                 "name": "Dekkutsalg"
             },
+            "shop/vacuum_cleaner": {
+                "name": "Støvsugerbutikk"
+            },
             "shop/video": {
                 "name": "Videoforhandler"
+            },
+            "shop/video_games": {
+                "name": "Dataspillbutikk"
+            },
+            "shop/weapons": {
+                "name": "Våpenbutikk"
+            },
+            "shop/wine": {
+                "name": "Vinbutikk"
             },
             "tourism": {
                 "name": "Turisme"
@@ -1429,6 +2376,9 @@
             },
             "tourism/chalet": {
                 "name": "Hytte"
+            },
+            "tourism/gallery": {
+                "name": "Kunstgalleri"
             },
             "tourism/guest_house": {
                 "name": "Gjestehus"
@@ -1457,6 +2407,12 @@
             "tourism/zoo": {
                 "name": "Zoologisk hage"
             },
+            "traffic_calming/bump": {
+                "name": "Fartsdump"
+            },
+            "traffic_calming/hump": {
+                "name": "Fartshump"
+            },
             "type/boundary": {
                 "name": "Grense"
             },
@@ -1468,6 +2424,27 @@
             },
             "type/restriction": {
                 "name": "Begrensning"
+            },
+            "type/restriction/no_left_turn": {
+                "name": "Ingen venstresving"
+            },
+            "type/restriction/no_right_turn": {
+                "name": "Ingen høyresving"
+            },
+            "type/restriction/no_straight_on": {
+                "name": "Ikke rett fram"
+            },
+            "type/restriction/no_u_turn": {
+                "name": "Ingen U-sving"
+            },
+            "type/restriction/only_left_turn": {
+                "name": "Påbudt venstresving"
+            },
+            "type/restriction/only_right_turn": {
+                "name": "Påbudt høyresving"
+            },
+            "type/restriction/only_straight_on": {
+                "name": "Ikke tillatt å snu"
             },
             "type/route": {
                 "name": "Rute"
@@ -1487,6 +2464,9 @@
             "type/route/foot": {
                 "name": "Gangrute"
             },
+            "type/route/hiking": {
+                "name": "Oppmerket sti"
+            },
             "type/route/pipeline": {
                 "name": "Rørledningsrute"
             },
@@ -1499,11 +2479,17 @@
             "type/route/tram": {
                 "name": "Trikkelinje"
             },
+            "type/site": {
+                "name": "Sted"
+            },
             "vertex": {
                 "name": "Andre"
             },
             "waterway": {
                 "name": "Vannvei"
+            },
+            "waterway/boatyard": {
+                "name": "Skipsverft"
             },
             "waterway/canal": {
                 "name": "Kanal"
@@ -1511,11 +2497,17 @@
             "waterway/dam": {
                 "name": "Demning"
             },
+            "waterway/ditch": {
+                "name": "Grøft"
+            },
             "waterway/drain": {
                 "name": "Sluk"
             },
             "waterway/river": {
                 "name": "Elv"
+            },
+            "waterway/riverbank": {
+                "name": "Elvebredd"
             },
             "waterway/stream": {
                 "name": "Bekk"

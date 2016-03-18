@@ -307,14 +307,6 @@
             "description": "Punktid",
             "tooltip": "Huvipunktid"
         },
-        "major_roads": {
-            "description": "Põhiteed",
-            "tooltip": "Maanteed, tänavad.."
-        },
-        "minor_roads": {
-            "description": "Vähetähtsad teed",
-            "tooltip": "Juurdepääsuteed, parkla teed, metsavaheteed.."
-        },
         "paths": {
             "description": "Rajad",
             "tooltip": "Kõnniteed, jalgteed, rattateed.."

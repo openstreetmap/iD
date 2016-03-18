@@ -350,12 +350,11 @@
             "description": "Points",
             "tooltip": "Points d'intérêt"
         },
-        "major_roads": {
-            "description": "Routes principales",
+        "traffic_roads": {
             "tooltip": "Voies, Rues, etc."
         },
-        "minor_roads": {
-            "description": "Routes secondaires",
+        "service_roads": {
+            "description": "Route d'accès",
             "tooltip": "Voies de service, Allées de stationnement, Chemins, etc."
         },
         "paths": {
@@ -1215,7 +1214,7 @@
                     "lane": "Route",
                     "multi-storey": "Multiples étages",
                     "sheds": "Cabanes",
-                    "surface": "Revêtement",
+                    "surface": "Surface",
                     "underground": "Souterrain"
                 }
             },
@@ -2633,10 +2632,6 @@
                 "name": "Zone de manœuvre",
                 "terms": "Point de retournement"
             },
-            "highway/unclassified": {
-                "name": "Route secondaire",
-                "terms": "Voie secondaire"
-            },
             "historic": {
                 "name": "Site historique",
                 "terms": "Site historique"
@@ -2776,6 +2771,10 @@
             "leisure/adult_gaming_centre": {
                 "name": "Jeux pour adultes",
                 "terms": "Jeux pour adultes"
+            },
+            "leisure/bird_hide": {
+                "name": "Observatoire ornithologique",
+                "terms": "Observatoire d'oiseaux"
             },
             "leisure/bowling_alley": {
                 "name": "Bowling",
@@ -4032,10 +4031,6 @@
             "waterway/ditch": {
                 "name": "Fossé",
                 "terms": "Fossé"
-            },
-            "waterway/dock": {
-                "name": "Quai",
-                "terms": "Quai, Dock"
             },
             "waterway/drain": {
                 "name": "Canal d'évacuation d'eau pluviale",

@@ -350,14 +350,6 @@
             "description": "點",
             "tooltip": "興趣點"
         },
-        "major_roads": {
-            "description": "主要道路",
-            "tooltip": "公路、街道等等"
-        },
-        "minor_roads": {
-            "description": "次級道路",
-            "tooltip": "支路、停車場通道、小徑等等"
-        },
         "paths": {
             "description": "徑",
             "tooltip": "行人路、步行徑、單車徑等等"
@@ -2633,10 +2625,6 @@
                 "name": "迴車處",
                 "terms": "Turning Circle,回轉圈,迴車場,迴車圓環,車輛迴轉處,車輛迴旋處"
             },
-            "highway/unclassified": {
-                "name": "次級道路",
-                "terms": "小路,小規模道路"
-            },
             "historic": {
                 "name": "歷史遺跡",
                 "terms": "Historic Site,史跡,史蹟,歷史遺址,歷史遺跡,歷史景點"
@@ -4032,10 +4020,6 @@
             "waterway/ditch": {
                 "name": "溝渠",
                 "terms": "Ditch,溝,溝渠,明溝"
-            },
-            "waterway/dock": {
-                "name": "船塢",
-                "terms": "浮塢"
             },
             "waterway/drain": {
                 "name": "排水道",

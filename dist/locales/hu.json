@@ -227,7 +227,7 @@
     },
     "zoom_in_edit": "Szerkesztéshez nagyíts rá",
     "logout": "kijelentkezés",
-    "loading_auth": "Csatlakozás az OpenStreetMap szerverhez…",
+    "loading_auth": "Csatlakozás az OpenStreetMap kiszolgálóhoz…",
     "report_a_bug": "Hibajelentés",
     "help_translate": "Segíts a fordításban",
     "feature_info": {
@@ -285,7 +285,8 @@
         "no_results_worldwide": "Nincs találat"
     },
     "geolocate": {
-        "title": "Pozícióm megjelenítése"
+        "title": "Pozícióm megjelenítése",
+        "locating": "Meghatározás, kérem várjon…"
     },
     "inspector": {
         "no_documentation_combination": "Ehhez a címkekombinációhoz nem érhető el dokumentáció",
@@ -350,13 +351,13 @@
             "description": "Pontok",
             "tooltip": "Érdekes pontok"
         },
-        "major_roads": {
-            "description": "Főutak",
+        "traffic_roads": {
+            "description": "Forgalmi utak",
             "tooltip": "Autópályák, utcák, stb."
         },
-        "minor_roads": {
-            "description": "Alsóbbrendű utak",
-            "tooltip": "Szervizutak, parkolók útjai, keskeny utak, stb."
+        "service_roads": {
+            "description": "Bekötőutak",
+            "tooltip": "Bekötőutak, parkolók útjai, keskeny utak, stb."
         },
         "paths": {
             "description": "Gyalogutak",
@@ -420,7 +421,7 @@
         "help": "Változtatások mentése az OpenStreetMapbe, és láthatóvá tétele más szerkesztők számára.",
         "no_changes": "Nincs mit elmenteni.",
         "error": "Mentés közben több hiba történt",
-        "status_code": "A szerver a(z) {code} státuszkóddal válaszolt",
+        "status_code": "A kiszolgáló a(z) {code} státuszkóddal válaszolt",
         "unknown_error_details": "Győződj meg arról, hogy csatlakozik-e az internethez.",
         "uploading": "Változtatások mentése OpenStreetMapre.",
         "unsaved_changes": "Elmentetlen változtatásaid vannak",
@@ -470,7 +471,7 @@
     },
     "source_switch": {
         "live": "élő",
-        "lose_changes": "Elmentetlen változtatásaid vannak, amik a térképszerver váltásával el lesznek dobva. Biztosan szervert akarsz váltani?",
+        "lose_changes": "Elmentetlen változtatásaid vannak, amik a térképkiszolgáló váltásával el lesznek dobva. Biztosan kiszolgálót akarsz váltani?",
         "dev": "dev"
     },
     "tag_reference": {
@@ -501,13 +502,21 @@
         "zoom": "Nagyítás a GPX nyomvonalra",
         "browse": ".gpx fájl tallózása"
     },
+    "mapillary_images": {
+        "tooltip": "Utcafotók a Mapillary-ből",
+        "title": "Fotó réteg (Mapillary)"
+    },
+    "mapillary_signs": {
+        "tooltip": "Közlekedési táblák a Mapillary-ből",
+        "title": "Közlekedési tábla réteg (Mapillary)"
+    },
     "mapillary": {
         "view_on_mapillary": "E kép megtekintése a Mapillary weboldalon"
     },
     "help": {
         "title": "Súgó",
         "help": "# Súgó\n\nEz egy szerkesztő az [OpenStreetMap](http://www.openstreetmap.org/)-hoz, a szabadon szerkeszthető és felhasználható világtérképhez. A környezetedről tölthetsz fel, vagy frissíthetsz adatokat, ezáltal mindenki számára jobbá téve egy ingyenes térképet.\n\nAmit ezen a térképen alkotsz, mindenki számára látható lesz, aki használja az OpenStreetMapet. A szerkesztéshez [be kell jelentkezned]\n(https://www.openstreetmap.org/login)\n\nAz [iD szerkesztő](http://ideditor.com/) egy együttműködésen alapuló projekt, a [GitHub-on elérhető forráskóddal](https://github.com/openstreetmap/iD), aminek a fordításába és fejlesztésébe te is besegíthetsz.\n",
-        "editing_saving": "# Szerkesztés és Mentés \n\nA szerkesztőt elsődlegesen online munkára tervezték és te jelenleg egy weblapon éred el. \n\n### Elemek kiválasztása \n\nEgy térképelem, mint út vagy érdekes hely kiválasztásához kattints rá a térképen. Ettől a kiválasztott elem kiemelődik és megnyílik egy panel az adataival, és egy menüvel, ami mutatja, miket tudsz az elemmel csinálni. Több elemet a 'Shift' gomb nyomva tartása közbeni kattintással, vagy húzással tudsz kiválasztani. A húzással kijelölöd a bekeretezett részen lévő összes elemet, lehetővé téve, hogy egyszerre több mindent változtass. \n\n### Szerkesztések mentése \n\nAmikor utakat, épületeket, helyeket szerkesztesz, ezek a változások helyileg lesznek tárolva, amíg nem mented őket a szerverre. Ne aggódj, ha elrontasz valamit - vissza tudod vonni a változtatásaidat a visszavonás gombra kattintva, a mégis gombra kattintva pedig a korábban visszavont változtatásaidat állíthatod vissza. \n\nKattints a 'Mentés' gombra, ha végeztél egy terület szerkesztésével - például, ha befejezted egy város részletének szerkesztését és egy másik területet szeretnél szerkeszteni. Lehetőséged lesz visszanézni, hogy mit csináltál. A szerkesztő hasznos tanácsokat biztosít és figyelmeztet ha valami nem tűnik megfelelőnek a változtatásaiddal. \n\nHa minden rendben van, beírhatsz egy rövid ismertetést a szerkesztéseiddel kapcsolatban és újból a 'Mentés' gombra kattintva közzéteheted a változtatásaidat és az információkat velük kapcsolatban az [OpenStreetMap.org](http://www.openstreetmap.org/) webhelyen, ahol az összes felhasználónak láthatóak és elérhetőek lesznek, hogy azokra építhessenek, fejleszthessék azokat. \n\nHa nem tudod befejezni a szerkesztéseidet egyszerre, elhagyhatod a szerkesztő ablakot, mert amikor visszatérsz (ugyanazzal a böngészővel és számítógéppel), a szerkesztő fel fogja ajánlani, hogy visszaállítsa-e a korábbi munkádat.\n\n### Szerkesztő használata\n\nA szerkesztést megkönnyítő gyorsbillentyűket [itt](http://wiki.openstreetmap.org/wiki/Hu:iD/Shortcuts) találhatod meg.\n",
+        "editing_saving": "# Szerkesztés és Mentés \n\nA szerkesztőt elsődlegesen online munkára tervezték és te jelenleg egy weblapon éred el. \n\n### Elemek kiválasztása \n\nEgy térképelem, mint út vagy érdekes hely kiválasztásához kattints rá a térképen. Ettől a kiválasztott elem kiemelődik és megnyílik egy panel az adataival, és egy menüvel, ami mutatja, miket tudsz az elemmel csinálni. Több elemet a 'Shift' gomb nyomva tartása közbeni kattintással, vagy húzással tudsz kiválasztani. A húzással kijelölöd a bekeretezett részen lévő összes elemet, lehetővé téve, hogy egyszerre több mindent változtass. \n\n### Szerkesztések mentése \n\nAmikor utakat, épületeket, helyeket szerkesztesz, ezek a változások helyileg lesznek tárolva, amíg nem mented őket a kiszolgálóra. Ne aggódj, ha elrontasz valamit - vissza tudod vonni a változtatásaidat a visszavonás gombra kattintva, a mégis gombra kattintva pedig a korábban visszavont változtatásaidat állíthatod vissza. \n\nKattints a 'Mentés' gombra, ha végeztél egy terület szerkesztésével - például, ha befejezted egy város részletének szerkesztését és egy másik területet szeretnél szerkeszteni. Lehetőséged lesz visszanézni, hogy mit csináltál. A szerkesztő hasznos tanácsokat biztosít és figyelmeztet ha valami nem tűnik megfelelőnek a változtatásaiddal. \n\nHa minden rendben van, beírhatsz egy rövid ismertetést a szerkesztéseiddel kapcsolatban és újból a 'Mentés' gombra kattintva közzéteheted a változtatásaidat és az információkat velük kapcsolatban az [OpenStreetMap.org](http://www.openstreetmap.org/) webhelyen, ahol az összes felhasználónak láthatóak és elérhetőek lesznek, hogy azokra építhessenek, fejleszthessék azokat. \n\nHa nem tudod befejezni a szerkesztéseidet egyszerre, elhagyhatod a szerkesztő ablakot, mert amikor visszatérsz (ugyanazzal a böngészővel és számítógéppel), a szerkesztő fel fogja ajánlani, hogy visszaállítsa-e a korábbi munkádat.\n\n### Szerkesztő használata\n\nA szerkesztést megkönnyítő gyorsbillentyűket [itt](http://wiki.openstreetmap.org/wiki/Hu:iD/Shortcuts) találhatod meg.\n",
         "roads": "# Utak\n\nA szerkesztőprogrammal tudsz utakat létrehozni, javítani és törölni. Az utak \nsokfélék lehetnek: ösvények, közutak, kerékpárutak, stb. – minden gyakran \nkeresztezett szakaszt térképezni kell.\n\n### Kiválasztás\n\nÚt kiválasztásához kattints rá. Meg fog jelenni kiemelve, mellette egy kis eszköztár \nmenüvel és egy oldalsávval, ami további információkat mutat az útról.\n\n### Módosítás\n\nGyakran láthatod, hogy az út nincs a mögötte lévő légifelvételhez, vagy GPS \nnyomvonalhoz igazítva. Ha megbizonyosodtál arról, hogy nem a légifelvétel téved, \nhelyreigazíthatod az utakat.\n\nElőször is kattints a módosítandó útra. Ettől kiemelődik az út és megjelennek a\nkezelőpontjai, amiket mozgatni tudsz a megfelelő helyre. Ha új kezelőpontot \nszeretnél hozzáadni, hogy részletesebb utat kapj, kattints duplán az útnak egy \nolyan részére, ahol még nincs pont.\n\nHa egy út egy másik útba csatlakozik, de a térképen nincsenek összekapcsolva, \nhúzd az egyik út kezelőpontját a másik útra, és össze fognak kapcsolódni. \nAz utak megfelelő összekapcsolása a térképen nagyon fontos, útvonaltervezéshez \nlétfontosságú.\n\nHasználhatod a 'Mozgatás' eszközt is, vagy megnyomhatod az 'M' gyorsbillentyűt, ha az \naz egész utat szeretnéd mozgatni. Mozgatás után kattintással rögzítheted az új helyén.\n\n### Törlés\n\nHa egy út teljesen hibás – ha azt látod, hogy egyáltalán nincs rajta a légifelvételen, \nés biztos vagy benne, hogy nem is létezik –, törölheted, amivel eltávolítod a térképről. \nLegyél óvatos elemek törlésekor, akárcsak bármilyen más szerkesztésnél, a mindenki \náltal látható eredmény és a légifelvétel gyakran elavult, lehet, hogy az utat nemrég építették.\n\nAz út törléséhez előbb válaszd ki, majd kattints a kuka ikonra, vagy nyomd meg a Delete \nbillentyűt.\n\n### Létrehozás\n\nTaláltál egy utat, ami még nincs rajta a térképen? Kattints a bal felső eszköztár 'Vonal' \nikonjára vagy nyomd meg a '2'-es billentyűt és kezdd el rajzolni a vonalat.\n\nA rajzolás megkezdéséhez kattints a térképen az út elejére. Ha az út \negy másik meglévő útból ágazik ki, arra a helyre kattints, ahol csatlakoznak.\n\nEzután kattintással hozz létre pontokat a műholdkép vagy GPS nyomvonal alapján, \nhogy a vonal az út középvonalát kövesse. Ha az utad keresztez egy másik utat, kapcsold \nössze őket a metszéspontjukra kattintva. Ha kész vagy a rajzolással, kattints duplán, \nvagy nyomj a billentyűzeten egy 'Enter'-t.\n",
         "gps": "#GPS\n\nAz összegyűjtött GPS nyomvonalak hasznos adatok az OpenStreetMap számára. Ez a szerkesztő\ntámogatja a helyi nyomvonalakat - `.gpx` fájlok a saját gépeden. Ezeket a\nGPS nyomvonalakat begyűjtheted jó pár okostelefon alkalmazással, vagy\nszemélyi GPS eszközökkel.\n\nTovábbi információkért, hogy hogy kell GPS felmérést végezni, olvasd el a\n[Térképezés okostelefonnal, GPS-szel, vagy papíron](http://learnosm.org/en/mobile-mapping/) cikket.\n\nHogy egy GPX sávot térképezéshez használj, fogd és vidd a GPX fájlt a térképszerkesztőre. Ha felismeri a program, akkor hozzáadásra kerül a térképre, mint egy fényes lila\nvonal. Kattints a „Térképadatok” menüre jobb oldalt a bekapcsoláshoz, kikapcsoláshoz vagy közelítéshez a GPX-vezérelt rétegen.\n\nA GPX sáv nem kerül közvetlen feltöltésre az OpenStreetMapbe - a legjobb módszer a használatára az,\nhogy rajzolsz a térképre, és az új elemek felviteléhez segítségként használod,\nmajd [feltöltöd az OpenStreetMapbe](http://www.openstreetmap.org/trace/create),\nhogy mások is használni tudják.\n",
         "imagery": "# Légifelvétel\n\nA légifelvétel a térképezés egyik fontos forrása. A repülőgépes ortofotók, műholdképek és szabadon összeállított források kombinációja rendelkezésre áll a szerkesztőben a bal oldali menü 'Háttérbeállítások' gombjára kattintva.\n\nAlapértelmezésként a [Bing Maps](http://www.bing.com/maps/) műholdkép réteg jelenik meg a szerkesztőben, de ahogy új helyekre görgeted a térképet, új források jelennek meg. Néhány országban, mint az Egyesül Államok, Franciaország, vagy Dánia nagyon jó minőségű légifelvételek érhetőek el egyes területeken.\n\nA légifelvételek gyakran el vannak csúszva a valósághoz képest, a légifelvétel szolgáltatók hibájából. Ha látsz egy csomó utat eltolódva a háttértől, ne húzd őket rögtön a háttérképhez. Ehelyett igazítsd úgy a háttérképet, hogy a meglévő adatok illeszkedjenek rá. Ehhez kattints a Háttérbeállítások menü 'Elcsúszás korrigálása' gombjára.\n",
@@ -598,6 +607,38 @@
         }
     },
     "presets": {
+        "categories": {
+            "category-building": {
+                "name": "Épület elemek"
+            },
+            "category-golf": {
+                "name": "Golf elemek"
+            },
+            "category-landuse": {
+                "name": "Területi elemek"
+            },
+            "category-path": {
+                "name": "Útvonal elemek"
+            },
+            "category-rail": {
+                "name": "Vasúti elemek"
+            },
+            "category-restriction": {
+                "name": "Korlátozás elemek"
+            },
+            "category-road": {
+                "name": "Út elemek"
+            },
+            "category-route": {
+                "name": "Útvonal elemek"
+            },
+            "category-water-area": {
+                "name": "Vízi elemek"
+            },
+            "category-water-line": {
+                "name": "Vízi elemek"
+            }
+        },
         "fields": {
             "access": {
                 "label": "Engedélyezett behajtás",
@@ -2573,6 +2614,10 @@
                 "name": "Bekötőút felhajtó",
                 "terms": "Harmadrendű főút csatlakozás"
             },
+            "highway/track": {
+                "name": "Nem karbantartott földút",
+                "terms": "földút,nem karbantartott"
+            },
             "highway/traffic_signals": {
                 "name": "Jelzőlámpa",
                 "terms": "Közlekedési lámpa"
@@ -2591,7 +2636,7 @@
             },
             "highway/unclassified": {
                 "name": "Alsóbbrendű út",
-                "terms": "alsórendű út"
+                "terms": "alsóbbrendű út"
             },
             "historic": {
                 "name": "Történelmi hely",
@@ -2732,6 +2777,10 @@
             "leisure/adult_gaming_centre": {
                 "name": "Felnőtt játékközpont",
                 "terms": "játékterem"
+            },
+            "leisure/bird_hide": {
+                "name": "Madárles",
+                "terms": "madárles"
             },
             "leisure/bowling_alley": {
                 "name": "Tekepálya",
@@ -3353,6 +3402,10 @@
                 "name": "Antikvitás",
                 "terms": "Régiségkereskedés"
             },
+            "shop/art": {
+                "name": "Művészeti bolt",
+                "terms": "művészbolt"
+            },
             "shop/baby_goods": {
                 "name": "Bababolt",
                 "terms": "babruha - babakocsi - babaágy - babjáték bolt"
@@ -3697,6 +3750,10 @@
                 "name": "Írószerbolt",
                 "terms": "Papír - Írószer és nyomtatvány bolt,  Papír - írószer és irodaszer kereskedelem, papírbolt, irodaszerbolt"
             },
+            "shop/storage_rental": {
+                "name": "Tárolókölcsönző",
+                "terms": "tároló"
+            },
             "shop/supermarket": {
                 "name": "Szupermarket",
                 "terms": "Szupermarket"
@@ -3796,6 +3853,10 @@
             "tourism/chalet": {
                 "name": "Nyaralóház",
                 "terms": "Vikkendház"
+            },
+            "tourism/gallery": {
+                "name": "Művészeti galéria",
+                "terms": "galéria, kiállítás, kiállító terem, képzőművészet"
             },
             "tourism/guest_house": {
                 "name": "Vendégház",
@@ -3949,6 +4010,10 @@
                 "name": "Route Master",
                 "terms": "Route Master"
             },
+            "type/site": {
+                "name": "Telek",
+                "terms": "telek,házhely"
+            },
             "vertex": {
                 "name": "Egyéb",
                 "terms": "Egyéb"
@@ -3974,8 +4039,8 @@
                 "terms": "Vizesárok"
             },
             "waterway/dock": {
-                "name": "Kikötő",
-                "terms": "kikötő,dokk"
+                "name": "Nedves dokk / szárazdokk",
+                "terms": "kikötő, dokk, nedves dokk, szárazdokk"
             },
             "waterway/drain": {
                 "name": "Vízelvezető árok",

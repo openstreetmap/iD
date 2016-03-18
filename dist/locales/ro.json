@@ -225,13 +225,6 @@
             "description": "Puncte",
             "tooltip": "Puncte de interes"
         },
-        "major_roads": {
-            "description": "Drumuri principale",
-            "tooltip": "Autostrazi, Strazi, etc"
-        },
-        "minor_roads": {
-            "description": "Drumuri secundare"
-        },
         "paths": {
             "description": "Poteci",
             "tooltip": "Trotuare, Poteci, Piste de biciclete, etc"

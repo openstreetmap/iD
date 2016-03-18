@@ -336,14 +336,6 @@
             "description": "Taškai",
             "tooltip": "Lankytinos vietos"
         },
-        "major_roads": {
-            "description": "Pagrindiniai keliai",
-            "tooltip": "Plentai, gatvės ir pan."
-        },
-        "minor_roads": {
-            "description": "Nedideli keliai",
-            "tooltip": "Privažiavimai, parkavimo keliai, miško/laukų keliai ir pan."
-        },
         "paths": {
             "description": "Takai",
             "tooltip": "Šaligatviai, pėsčiųjų takai, dviračių takai ir pan."

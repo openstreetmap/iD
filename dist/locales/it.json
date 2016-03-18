@@ -350,14 +350,6 @@
             "description": "Punti",
             "tooltip": "Punti di interesse"
         },
-        "major_roads": {
-            "description": "Strade principali",
-            "tooltip": "Autostrade, strade, ecc."
-        },
-        "minor_roads": {
-            "description": "Strade minori",
-            "tooltip": "Strade di servizio, corsie di parcheggi, piste, ecc."
-        },
         "paths": {
             "description": "Sentieri",
             "tooltip": "Marciapiedi, piste pedonali, piste ciclabili, ecc."
@@ -2602,10 +2594,6 @@
                 "name": "Slargo per inversione",
                 "terms": "Slargo per inversione di marcia"
             },
-            "highway/unclassified": {
-                "name": "Strada minore",
-                "terms": "non classificata,strada secondaria,viabilità ordinaria"
-            },
             "historic": {
                 "name": "Sito storico",
                 "terms": "Luogo storico"
@@ -3960,10 +3948,6 @@
             "waterway/ditch": {
                 "name": "Fossato",
                 "terms": "Fosso"
-            },
-            "waterway/dock": {
-                "name": "Darsena",
-                "terms": "cantiere"
             },
             "waterway/drain": {
                 "name": "Canale di scolo",

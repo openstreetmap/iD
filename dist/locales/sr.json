@@ -285,13 +285,6 @@
         "reset": "ресетовање"
     },
     "feature": {
-        "major_roads": {
-            "description": "Главни путеви",
-            "tooltip": "Ауто-путеви, улице, итд."
-        },
-        "minor_roads": {
-            "description": "Споредни путеви"
-        },
         "paths": {
             "description": "Путање"
         },
@@ -2508,9 +2501,6 @@
             },
             "waterway/ditch": {
                 "name": "Јарак"
-            },
-            "waterway/dock": {
-                "name": "Пристаниште"
             },
             "waterway/drain": {
                 "name": "Одвод"

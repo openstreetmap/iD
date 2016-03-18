@@ -285,7 +285,8 @@
         "no_results_worldwide": "Keine Ergebnisse gefunden"
     },
     "geolocate": {
-        "title": "Meinen Standort anzeigen"
+        "title": "Meinen Standort anzeigen",
+        "locating": "Lokalisiere, bitte warten ..."
     },
     "inspector": {
         "no_documentation_combination": "Für diese Eigenschaftskombination ist keine Dokumentation verfügbar.",
@@ -330,7 +331,7 @@
         "custom_button": "Benutzerdefinierten Hintergrund bearbeiten",
         "custom_prompt": "Gib eine Vorlage für eine Kachel-URL ein. Gültige Platzhalter sind {z}, {x}, {y} für das Z/X/Y Schema und {u} für das „quadtile“-Schema.",
         "fix_misalignment": "Ausrichtung korrigieren",
-        "imagery_source_faq": "Woher kommt dieser Hintergrund",
+        "imagery_source_faq": "Woher kommt dieser Hintergrund?",
         "reset": "Zurücksetzen",
         "minimap": {
             "description": "Minikarte",
@@ -350,13 +351,13 @@
             "description": "Punkte",
             "tooltip": "Wichtiger Punkt"
         },
-        "major_roads": {
+        "traffic_roads": {
             "description": "Hauptstraßen",
             "tooltip": "Autobahnen, Straßen, etc."
         },
-        "minor_roads": {
-            "description": "Nebenstraßen",
-            "tooltip": "Zufahrtsstraßen, Parkplatzreihe, Feldweg, etc."
+        "service_roads": {
+            "description": "Zufahrtsstraße",
+            "tooltip": "Zufahrtsstraßen, Parkplatzstraßen, Feldwege, Waldwege, etc."
         },
         "paths": {
             "description": "Pfade",
@@ -1476,7 +1477,7 @@
                 "label": "Turmart"
             },
             "tracktype": {
-                "label": "Feld-/Waldweg-Typ",
+                "label": "Wegzustand",
                 "options": {
                     "grade1": "Fest: befestigt oder sehr kompakte harte Oberfläche",
                     "grade2": "Großenteils fest: Kies/Stein gemischt mit etwas weichem Material",
@@ -2078,7 +2079,7 @@
                 "terms": "Gebäude"
             },
             "building/apartments": {
-                "name": "Wohnungen",
+                "name": "Mehrfamilienhaus",
                 "terms": "Wohnung"
             },
             "building/barn": {
@@ -2614,8 +2615,8 @@
                 "terms": "Auffahrt"
             },
             "highway/track": {
-                "name": "Nicht erhaltene Straße",
-                "terms": "Nicht erhaltene Straße, nicht gepflegte Straße, verfallene Straße"
+                "name": "Feld-/Waldweg",
+                "terms": "Feldweg, Waldweg, Forststraße, primitive Straße, nicht ausgebaute Straße, verfallene Straße"
             },
             "highway/traffic_signals": {
                 "name": "Ampel",
@@ -2634,8 +2635,8 @@
                 "terms": "Wendekreis, Wendeplatz, Wendehammer, Wendestelle"
             },
             "highway/unclassified": {
-                "name": "Nebenstraße",
-                "terms": "Nebenstraße, niederrangige Straße"
+                "name": "Nebenstraße/Verbindungsstraße",
+                "terms": "Nebenstraße, Verbindungsstraße"
             },
             "historic": {
                 "name": "Historische Stätte",
@@ -2777,6 +2778,10 @@
                 "name": "Spielothek",
                 "terms": "Erwachsenenspielzentrum, Spielhölle, Spielothek, Spielautomat, Spielcasino, Spielsalon"
             },
+            "leisure/bird_hide": {
+                "name": "Vogelbeobachtungsturm",
+                "terms": "Vogelbeobachtungsturm"
+            },
             "leisure/bowling_alley": {
                 "name": "Bowlingbahn",
                 "terms": "Kegelbahn"
@@ -2891,7 +2896,7 @@
             },
             "leisure/track": {
                 "name": "Rennbahn (nicht-Motorsport)",
-                "terms": "Rennbahn (Nicht Motorsport),Rennstrecke (Nicht Motorsport)"
+                "terms": "Rennbahn (Nicht Motorsport), Rennstrecke (Nicht Motorsport)"
             },
             "leisure/water_park": {
                 "name": "Erlebnisbad",
@@ -4034,8 +4039,8 @@
                 "terms": "Entwässerungsgraben"
             },
             "waterway/dock": {
-                "name": "Dock",
-                "terms": "Dock, Trockendock, Hafenbecken, Kai, Ampfer"
+                "name": "Schwimmdock / Trockendock",
+                "terms": "Schwimmdock, Trockendock, Dock, Reparaturwerft, Schiffsausbesserungswerk, Schiffswerft, Werft"
             },
             "waterway/drain": {
                 "name": "Ablauf",
