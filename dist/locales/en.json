@@ -3490,6 +3490,10 @@
                 "name": "Clothing Store",
                 "terms": ""
             },
+            "shop/coffee": {
+                "name": "Coffee Store",
+                "terms": ""
+            },
             "shop/computer": {
                 "name": "Computer Store",
                 "terms": ""

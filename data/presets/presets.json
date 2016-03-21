@@ -8260,6 +8260,23 @@
         },
         "name": "Clothing Store"
     },
+    "shop/coffee": {
+        "icon": "shop",
+        "fields": [
+            "operator",
+            "address",
+            "building_area",
+            "opening_hours"
+        ],
+        "geometry": [
+            "point",
+            "area"
+        ],
+        "tags": {
+            "shop": "coffee"
+        },
+        "name": "Coffee Store"
+    },
     "shop/computer": {
         "icon": "shop",
         "fields": [

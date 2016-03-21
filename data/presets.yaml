@@ -3220,6 +3220,10 @@ en:
         # shop=clothes
         name: Clothing Store
         terms: "<translate with synonyms or related terms for 'Clothing Store', separated by commas>"
+      shop/coffee:
+        # shop=coffee
+        name: Coffee Store
+        terms: "<translate with synonyms or related terms for 'Coffee Store', separated by commas>"
       shop/computer:
         # shop=computer
         name: Computer Store
