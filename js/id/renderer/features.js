@@ -358,6 +358,7 @@ iD.Features = function(context) {
         return false;
     };
 
+    // entity, iD.Graph, enum(vertex,...)
     features.isHiddenChild = function(entity, resolver, geometry) {
         if (!_hidden.length) return false;
         if (!entity.version || geometry === 'point') return false;
@@ -403,6 +404,11 @@ iD.Features = function(context) {
         return fn(entity, resolver, geometry);
     };
 
+    /**
+     * @param d array of all entities
+     * @param resolver iD.Graph
+     * @returns {Array} filtered array
+     */
     features.filter = function(d, resolver) {
         if (!_hidden.length) return d;
 

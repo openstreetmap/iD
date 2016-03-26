@@ -54,7 +54,12 @@ iD.ui = function(context) {
 
         limiter.append('div')
             .attr('class', 'button-wrap col1')
+            .attr('style', 'margin-right: 60px')
             .call(iD.ui.Save(context));
+
+        limiter.append('div')
+            .attr('class', 'button-wrap col1 ar')
+            .call(iD.ui.IndoorMode(context));
 
         bar.append('div')
             .attr('class', 'full-screen')

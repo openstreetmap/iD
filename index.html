@@ -94,6 +94,7 @@
         <script src='js/id/ui/map_data.js'></script>
         <script src='js/id/ui/map_in_map.js'></script>
         <script src='js/id/ui/modes.js'></script>
+        <script src='js/id/ui/indoor_mode.js'></script>
         <script src='js/id/ui/contributors.js'></script>
         <script src='js/id/ui/help.js'></script>
         <script src='js/id/ui/geolocate.js'></script>
@@ -274,6 +275,12 @@
                                 "oauth_secret": "aMnOOCwExO2XYtRVWJ1bI9QOdqh1cay2UgpbhA6p"
                             }
                         ]));
+
+                id.connection().switch({
+                    "url": "http://localhost:3000",
+                    "oauth_consumer_key": "y0SQSVjXlQRXgEefMNmJ6zSwFwI4kwXo7oUGI9eM",
+                    "oauth_secret": "kg67RISYNj9rJ7GuUdGbPwBpRzouJvLulC7DOItB"
+                });
 
             });
         </script>

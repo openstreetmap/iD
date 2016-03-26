@@ -2,7 +2,7 @@ window.iD = function () {
     window.locale.en = iD.data.en;
     window.locale.current('en');
 
-    var dispatch = d3.dispatch('enter', 'exit'),
+    var dispatch = d3.dispatch('enter', 'exit', 'indoorMode'),
         context = {};
 
     // https://github.com/openstreetmap/iD/issues/772
@@ -320,6 +320,23 @@ window.iD = function () {
         }
     };
 
+
+    /* Indoor mode */
+    var indoorMode = false, indoorLevel;
+
+    context.indoorMode = function () {
+        return indoorMode;
+    };
+
+    context.indoorLevel = function () {
+        return indoorLevel;
+    };
+
+    context.enterIndoorMode = function () {
+        console.log("context.enterIndoorMode called");
+        indoorMode = true;
+        indoorLevel = prompt("Enter level", "1");
+    };
 
     /* Init */
 
