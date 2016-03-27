@@ -9201,6 +9201,23 @@
         },
         "name": "Newspaper/Magazine Shop"
     },
+    "shop/nutrition_supplements": {
+        "icon": "shop",
+        "fields": [
+            "operator",
+            "address",
+            "building_area",
+            "opening_hours"
+        ],
+        "geometry": [
+            "point",
+            "area"
+        ],
+        "tags": {
+            "shop": "nutrition_supplements"
+        },
+        "name": "Nutrition Supplements Store"
+    },
     "shop/optician": {
         "icon": "shop",
         "fields": [

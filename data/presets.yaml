@@ -3440,6 +3440,10 @@ en:
         # shop=newsagent
         name: Newspaper/Magazine Shop
         terms: "<translate with synonyms or related terms for 'Newspaper/Magazine Shop', separated by commas>"
+      shop/nutrition_supplements:
+        # shop=nutrition_supplements
+        name: Nutrition Supplements Store
+        terms: "<translate with synonyms or related terms for 'Nutrition Supplements Store', separated by commas>"
       shop/optician:
         # shop=optician
         name: Optician

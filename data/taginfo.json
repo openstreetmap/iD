@@ -2133,6 +2133,10 @@
         },
         {
             "key": "shop",
+            "value": "nutrition_supplements"
+        },
+        {
+            "key": "shop",
             "value": "optician"
         },
         {
