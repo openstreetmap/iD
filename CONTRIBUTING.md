@@ -5,9 +5,8 @@ so that you can write code that fits in perfectly.
 
 ## Code of Conduct
 
-We want everyone to feel comfortable contributing to iD.  Please read the
-[CODE_OF_CONDUCT.md](https://github.com/openstreetmap/iD/blob/master/CODE_OF_CONDUCT.md)
-document and remember to be nice to one another.
+We want everyone to feel comfortable contributing to iD.  Please read the project
+[Code of Conduct](CODE_OF_CONDUCT.md) and remember to be nice to one another.
 
 ## Reporting Issues
 
