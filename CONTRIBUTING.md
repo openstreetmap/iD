@@ -3,6 +3,12 @@
 Thinking of contributing to iD? High five! Here are some basics for our habits
 so that you can write code that fits in perfectly.
 
+## Code of Conduct
+
+We want everyone to feel comfortable contributing to iD.  Please read the
+[CODE_OF_CONDUCT.md](https://github.com/openstreetmap/iD/blob/master/CODE_OF_CONDUCT.md)
+document and remember to be nice to one another.
+
 ## Reporting Issues
 
 We'd love to hear what you think about iD, about any specific problems or
@@ -12,11 +18,15 @@ Please [search for your issue before filing it: many bugs and improvements have 
 
 To report a bug:
 
-* Write specifically what browser (type and version, like "Firefox 43.0"), OS, and browser extensions you have installed
-* Write steps to replicate the error: when did it happen? What did you expect to happen? What happened instead?
+* Write specifically what browser (type and version, like "Firefox 43.0"), OS,
+and browser extensions you have installed
+* Write steps to replicate the error: when did it happen? What did you expect to happen?
+What happened instead?
+* We love screenshots.  If you can take a picture of the issue, that is extra helpful.
+You can drag the image file onto the GitHub issue and it will be included with your bug report.
 * Please keep bug reports professional and straightforward: trust us, we share your dismay at software breaking.
 * If you can, [enable web developer extensions](http://debugbrowser.com/) and report the
-  Javascript error message.
+Javascript error message.
 
 When in doubt, be over-descriptive of the bug and how you discovered it.
 
