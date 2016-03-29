@@ -248,6 +248,44 @@ describe('iD.Connection', function () {
         });
     });
 
+    describe('#userChangesets', function() {
+        var server,
+            changesetsXML = '<?xml version="1.0" encoding="UTF-8"?><osm>' +
+                '<changeset id="36777543" user="Steve" uid="1" created_at="2016-01-24T15:02:06Z" closed_at="2016-01-24T15:02:07Z" open="false" min_lat="39.3823819" min_lon="-104.8639728" max_lat="39.3834184" max_lon="-104.8618622" comments_count="0">' +
+                '<tag k="comment" v="Caprice Court has been extended"/>' +
+                '<tag k="created_by" v="iD 1.8.5"/>' +
+                '</changeset>' +
+                '</osm>';
+
+        beforeEach(function() {
+            server = sinon.fakeServer.create();
+        });
+
+        afterEach(function() {
+            server.restore();
+        });
+
+        it('loads user changesets', function(done) {
+            c.userDetails = function (callback) {
+                callback(undefined, { id: 1 });
+            };
+
+            c.userChangesets(function(err, changesets) {
+                expect(changesets).to.deep.equal([{
+                    tags: {
+                        comment: 'Caprice Court has been extended',
+                        created_by: 'iD 1.8.5'
+                    }
+                }]);
+                done();
+            });
+
+            server.respondWith("GET", "http://www.openstreetmap.org/api/0.6/changesets?user=1",
+                [200, { "Content-Type": "text/xml" }, changesetsXML]);
+            server.respond();
+        });
+    });
+
     describe('#changesetTags', function() {
         it('omits comment when empty', function() {
             expect(c.changesetTags('', [])).not.to.have.property('comment');

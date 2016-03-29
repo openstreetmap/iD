@@ -133,7 +133,8 @@
             "key": "D",
             "annotation": "Disconnected lines/areas.",
             "not_connected": "There aren't enough lines/areas here to disconnect.",
-            "connected_to_hidden": "This can't be disconnected because it is connected to a hidden feature."
+            "connected_to_hidden": "This can't be disconnected because it is connected to a hidden feature.",
+            "relation": "This can't be disconnected because it connects members of a relation."
         },
         "merge": {
             "title": "Merge",
@@ -250,7 +251,9 @@
         "warnings": "Warnings",
         "modified": "Modified",
         "deleted": "Deleted",
-        "created": "Created"
+        "created": "Created",
+        "about_changeset_comments": "About changeset comments",
+        "about_changeset_comments_link": "//wiki.openstreetmap.org/wiki/Good_changeset_comments"
     },
     "contributors": {
         "list": "Edits by {users}",
@@ -282,13 +285,15 @@
         "no_results_worldwide": "No results found"
     },
     "geolocate": {
-        "title": "Show My Location"
+        "title": "Show My Location",
+        "locating": "Locating, please wait..."
     },
     "inspector": {
         "no_documentation_combination": "There is no documentation available for this tag combination",
         "no_documentation_key": "There is no documentation available for this key",
         "show_more": "Show More",
         "view_on_osm": "View on openstreetmap.org",
+        "all_fields": "All fields",
         "all_tags": "All tags",
         "all_members": "All members",
         "all_relations": "All relations",
@@ -321,10 +326,12 @@
         "description": "Background settings",
         "percent_brightness": "{opacity}% brightness",
         "none": "None",
+        "best_imagery": "Best known imagery source for this location",
         "custom": "Custom",
         "custom_button": "Edit custom background",
         "custom_prompt": "Enter a tile URL template. Valid tokens are {z}, {x}, {y} for Z/X/Y scheme and {u} for quadtile scheme.",
         "fix_misalignment": "Fix alignment",
+        "imagery_source_faq": "Where does this imagery come from?",
         "reset": "reset",
         "minimap": {
             "description": "Minimap",
@@ -344,12 +351,12 @@
             "description": "Points",
             "tooltip": "Points of Interest"
         },
-        "major_roads": {
-            "description": "Major Roads",
+        "traffic_roads": {
+            "description": "Traffic Roads",
             "tooltip": "Highways, Streets, etc."
         },
-        "minor_roads": {
-            "description": "Minor Roads",
+        "service_roads": {
+            "description": "Service Roads",
             "tooltip": "Service Roads, Parking Aisles, Tracks, etc."
         },
         "paths": {
@@ -448,7 +455,9 @@
         "facebook": "Share on Facebook",
         "twitter": "Share on Twitter",
         "google": "Share on Google+",
-        "help_html": "Your changes should appear in the \"Standard\" layer in a few minutes. Other layers, and certain features, may take longer\n(<a href='https://help.openstreetmap.org/questions/4705/why-havent-my-changes-appeared-on-the-map' target='_blank'>details</a>).\n"
+        "help_html": "Your changes should appear in the \"Standard\" layer in a few minutes. Other layers, and certain features, may take longer.",
+        "help_link_text": "Details",
+        "help_link_url": "https://wiki.openstreetmap.org/wiki/FAQ#I_have_just_made_some_changes_to_the_map._How_do_I_get_to_see_my_changes.3F"
     },
     "confirm": {
         "okay": "Okay",
@@ -493,9 +502,15 @@
         "zoom": "Zoom to GPX track",
         "browse": "Browse for a .gpx file"
     },
-    "mapillary": {
+    "mapillary_images": {
         "tooltip": "Street-level photos from Mapillary",
-        "title": "Photo Overlay (Mapillary)",
+        "title": "Photo Overlay (Mapillary)"
+    },
+    "mapillary_signs": {
+        "tooltip": "Traffic signs from Mapillary",
+        "title": "Traffic Sign Overlay (Mapillary)"
+    },
+    "mapillary": {
         "view_on_mapillary": "View this image on Mapillary"
     },
     "help": {
@@ -594,34 +609,34 @@
     "presets": {
         "categories": {
             "category-building": {
-                "name": "Building"
+                "name": "Building Features"
             },
             "category-golf": {
-                "name": "Golf"
+                "name": "Golf Features"
             },
             "category-landuse": {
-                "name": "Land Use"
+                "name": "Land Use Features"
             },
             "category-path": {
-                "name": "Path"
+                "name": "Path Features"
             },
             "category-rail": {
-                "name": "Rail"
+                "name": "Rail Features"
             },
             "category-restriction": {
-                "name": "Restriction"
+                "name": "Restriction Features"
             },
             "category-road": {
-                "name": "Road"
+                "name": "Road Features"
             },
             "category-route": {
-                "name": "Route"
+                "name": "Route Features"
             },
             "category-water-area": {
-                "name": "Water"
+                "name": "Water Features"
             },
             "category-water-line": {
-                "name": "Water"
+                "name": "Water Features"
             }
         },
         "fields": {
@@ -882,6 +897,9 @@
             },
             "description": {
                 "label": "Description"
+            },
+            "diaper": {
+                "label": "Diaper Changing Available"
             },
             "dock": {
                 "label": "Type"
@@ -1358,6 +1376,9 @@
                 "label": "Type"
             },
             "shop": {
+                "label": "Type"
+            },
+            "site": {
                 "label": "Type"
             },
             "sloped_curb": {
@@ -1964,6 +1985,10 @@
             "amenity/waste_basket": {
                 "name": "Waste Basket",
                 "terms": "bin,rubbish,litter,trash,garbage"
+            },
+            "amenity/waste_disposal": {
+                "name": "Garbage Dumpster",
+                "terms": "rubbish,litter,trash"
             },
             "amenity/water_point": {
                 "name": "RV Drinking Water",
@@ -2590,8 +2615,8 @@
                 "terms": "ramp,on ramp,off ramp"
             },
             "highway/track": {
-                "name": "Track",
-                "terms": "woods road,fire road"
+                "name": "Unmaintained Track Road",
+                "terms": "woods road,forest road,logging road,fire road,farm road,agricultural road,ranch road,carriage road,primitive,unmaintained,rut,offroad,4wd,4x4,four wheel drive,atv,quad,jeep,double track,two track"
             },
             "highway/traffic_signals": {
                 "name": "Traffic Signals",
@@ -2610,7 +2635,7 @@
                 "terms": "cul-de-sac"
             },
             "highway/unclassified": {
-                "name": "Unclassified Road",
+                "name": "Minor/Unclassified Road",
                 "terms": ""
             },
             "historic": {
@@ -2753,6 +2778,10 @@
                 "name": "Adult Gaming Center",
                 "terms": "gambling,slot machine"
             },
+            "leisure/bird_hide": {
+                "name": "Bird Hide",
+                "terms": "machan,ornithology"
+            },
             "leisure/bowling_alley": {
                 "name": "Bowling Alley",
                 "terms": ""
@@ -2849,9 +2878,13 @@
                 "name": "Slipway",
                 "terms": "boat launch,boat ramp"
             },
-            "leisure/sports_center": {
+            "leisure/sports_centre": {
                 "name": "Sports Center / Gym",
                 "terms": "gym"
+            },
+            "leisure/sports_centre/swimming": {
+                "name": "Swimming Pool Facility",
+                "terms": "dive,water"
             },
             "leisure/stadium": {
                 "name": "Stadium",
@@ -2859,11 +2892,15 @@
             },
             "leisure/swimming_pool": {
                 "name": "Swimming Pool",
-                "terms": ""
+                "terms": "dive,water"
             },
             "leisure/track": {
                 "name": "Racetrack (non-Motorsport)",
                 "terms": ""
+            },
+            "leisure/water_park": {
+                "name": "Water Park",
+                "terms": "swim,pool,dive"
             },
             "line": {
                 "name": "Line",
@@ -2881,6 +2918,10 @@
                 "name": "Breakwater",
                 "terms": ""
             },
+            "man_made/chimney": {
+                "name": "Chimney",
+                "terms": ""
+            },
             "man_made/cutline": {
                 "name": "Cut line",
                 "terms": ""
@@ -2891,6 +2932,14 @@
             },
             "man_made/flagpole": {
                 "name": "Flagpole",
+                "terms": ""
+            },
+            "man_made/gasometer": {
+                "name": "Gasometer",
+                "terms": "gas holder"
+            },
+            "man_made/groyne": {
+                "name": "Groyne",
                 "terms": ""
             },
             "man_made/lighthouse": {
@@ -2911,7 +2960,7 @@
             },
             "man_made/pier": {
                 "name": "Pier",
-                "terms": ""
+                "terms": "dock"
             },
             "man_made/pipeline": {
                 "name": "Pipeline",
@@ -2924,6 +2973,10 @@
             "man_made/storage_tank": {
                 "name": "Storage Tank",
                 "terms": "water,oil,gas,petrol"
+            },
+            "man_made/surveillance": {
+                "name": "Surveillance",
+                "terms": ""
             },
             "man_made/survey_point": {
                 "name": "Survey Point",
@@ -2948,6 +3001,10 @@
             "man_made/water_works": {
                 "name": "Water Works",
                 "terms": ""
+            },
+            "man_made/works": {
+                "name": "Works",
+                "terms": "car assembly plant,aluminium processing plant,brewery,furniture manufacture factory,oil refinery,plastic recycling"
             },
             "military/airfield": {
                 "name": "Airfield",
@@ -3346,8 +3403,8 @@
                 "terms": ""
             },
             "shop/art": {
-                "name": "Art Gallery",
-                "terms": ""
+                "name": "Art Store",
+                "terms": "art*,exhibit*,gallery"
             },
             "shop/baby_goods": {
                 "name": "Baby Goods Store",
@@ -3433,6 +3490,10 @@
                 "name": "Clothing Store",
                 "terms": ""
             },
+            "shop/coffee": {
+                "name": "Coffee Store",
+                "terms": ""
+            },
             "shop/computer": {
                 "name": "Computer Store",
                 "terms": ""
@@ -3455,7 +3516,7 @@
             },
             "shop/craft": {
                 "name": "Arts and Crafts Store",
-                "terms": ""
+                "terms": "art*,paint*,frame"
             },
             "shop/curtain": {
                 "name": "Curtain Store",
@@ -3511,7 +3572,7 @@
             },
             "shop/frame": {
                 "name": "Framing Shop",
-                "terms": ""
+                "terms": "art*,paint*,photo*,frame"
             },
             "shop/funeral_directors": {
                 "name": "Funeral Home",
@@ -3629,6 +3690,10 @@
                 "name": "Newspaper/Magazine Shop",
                 "terms": ""
             },
+            "shop/nutrition_supplements": {
+                "name": "Nutrition Supplements Store",
+                "terms": ""
+            },
             "shop/optician": {
                 "name": "Optician",
                 "terms": "eye,glasses"
@@ -3692,6 +3757,10 @@
             "shop/stationery": {
                 "name": "Stationery Store",
                 "terms": "card,paper"
+            },
+            "shop/storage_rental": {
+                "name": "Storage Rental",
+                "terms": ""
             },
             "shop/supermarket": {
                 "name": "Supermarket",
@@ -3793,6 +3862,10 @@
                 "name": "Chalet",
                 "terms": ""
             },
+            "tourism/gallery": {
+                "name": "Art Gallery",
+                "terms": "art*,exhibit*,paint*,photo*,sculpt*"
+            },
             "tourism/guest_house": {
                 "name": "Guest House",
                 "terms": "B&B,Bed and Breakfast"
@@ -3815,7 +3888,7 @@
             },
             "tourism/museum": {
                 "name": "Museum",
-                "terms": "exhibition,foundation,gallery,hall,institution"
+                "terms": "art*,exhibit*,gallery,foundation,hall,institution,paint*,photo*,sculpt*"
             },
             "tourism/picnic_site": {
                 "name": "Picnic Site",
@@ -3945,6 +4018,10 @@
                 "name": "Route Master",
                 "terms": ""
             },
+            "type/site": {
+                "name": "Site",
+                "terms": ""
+            },
             "vertex": {
                 "name": "Other",
                 "terms": ""
@@ -3970,8 +4047,8 @@
                 "terms": ""
             },
             "waterway/dock": {
-                "name": "Dock",
-                "terms": ""
+                "name": "Wet Dock / Dry Dock",
+                "terms": "boat,ship,vessel,marine"
             },
             "waterway/drain": {
                 "name": "Drain",

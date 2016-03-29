@@ -146,7 +146,7 @@ iD.modes.Select = function(context, selectedIDs) {
             }
         }
 
-        function ret() {
+        function esc() {
             if (!context.inIntro()) {
                 context.enter(iD.modes.Browse(context));
             }
@@ -164,8 +164,7 @@ iD.modes.Select = function(context, selectedIDs) {
         operations.unshift(iD.operations.Delete(selectedIDs, context));
 
         keybinding
-            .on('⎋', ret, true)
-            .on('↩', ret, true)
+            .on('⎋', esc, true)
             .on('space', toggleMenu);
 
         operations.forEach(function(operation) {

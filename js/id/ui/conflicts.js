@@ -64,7 +64,7 @@ iD.ui.Conflicts = function(context) {
     function showConflict(selection, index) {
         if (index < 0 || index >= list.length) return;
 
-        var parent = d3.select(selection.node().parentElement);
+        var parent = d3.select(selection.node().parentNode);
 
         // enable save button if this is the last conflict being reviewed..
         if (index === list.length - 1) {
@@ -172,7 +172,7 @@ iD.ui.Conflicts = function(context) {
             .attr('type', 'radio')
             .attr('name', function(d) { return d.id; })
             .on('change', function(d, i) {
-                var ul = this.parentElement.parentElement.parentElement;
+                var ul = this.parentNode.parentNode.parentNode;
                 ul.__data__.chosen = i;
                 choose(ul, d);
             });
@@ -183,7 +183,7 @@ iD.ui.Conflicts = function(context) {
 
         choices
             .each(function(d, i) {
-                var ul = this.parentElement;
+                var ul = this.parentNode;
                 if (ul.__data__.chosen === i) choose(ul, d);
             });
     }

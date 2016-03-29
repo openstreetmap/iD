@@ -458,6 +458,10 @@
         },
         {
             "key": "amenity",
+            "value": "waste_disposal"
+        },
+        {
+            "key": "amenity",
             "value": "water_point"
         },
         {
@@ -1237,6 +1241,10 @@
         },
         {
             "key": "leisure",
+            "value": "bird_hide"
+        },
+        {
+            "key": "leisure",
             "value": "bowling_alley"
         },
         {
@@ -1336,6 +1344,10 @@
             "value": "sports_centre"
         },
         {
+            "key": "sport",
+            "value": "swimming"
+        },
+        {
             "key": "leisure",
             "value": "stadium"
         },
@@ -1346,6 +1358,10 @@
         {
             "key": "leisure",
             "value": "track"
+        },
+        {
+            "key": "leisure",
+            "value": "water_park"
         },
         {
             "key": "man_made"
@@ -1360,6 +1376,10 @@
         },
         {
             "key": "man_made",
+            "value": "chimney"
+        },
+        {
+            "key": "man_made",
             "value": "cutline"
         },
         {
@@ -1369,6 +1389,14 @@
         {
             "key": "man_made",
             "value": "flagpole"
+        },
+        {
+            "key": "man_made",
+            "value": "gasometer"
+        },
+        {
+            "key": "man_made",
+            "value": "groyne"
         },
         {
             "key": "man_made",
@@ -1404,6 +1432,10 @@
         },
         {
             "key": "man_made",
+            "value": "surveillance"
+        },
+        {
+            "key": "man_made",
             "value": "survey_point"
         },
         {
@@ -1425,6 +1457,10 @@
         {
             "key": "man_made",
             "value": "water_works"
+        },
+        {
+            "key": "man_made",
+            "value": "works"
         },
         {
             "key": "military",
@@ -1897,6 +1933,10 @@
         },
         {
             "key": "shop",
+            "value": "coffee"
+        },
+        {
+            "key": "shop",
             "value": "computer"
         },
         {
@@ -2093,6 +2133,10 @@
         },
         {
             "key": "shop",
+            "value": "nutrition_supplements"
+        },
+        {
+            "key": "shop",
             "value": "optician"
         },
         {
@@ -2154,6 +2198,10 @@
         {
             "key": "shop",
             "value": "stationery"
+        },
+        {
+            "key": "shop",
+            "value": "storage_rental"
         },
         {
             "key": "shop",
@@ -2253,6 +2301,10 @@
         {
             "key": "tourism",
             "value": "chalet"
+        },
+        {
+            "key": "tourism",
+            "value": "gallery"
         },
         {
             "key": "tourism",
@@ -2405,6 +2457,10 @@
         {
             "key": "type",
             "value": "route_master"
+        },
+        {
+            "key": "type",
+            "value": "site"
         },
         {
             "key": "waterway"

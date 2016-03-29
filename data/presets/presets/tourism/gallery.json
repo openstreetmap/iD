@@ -1,0 +1,25 @@
+{
+    "icon": "art-gallery",
+    "fields": [
+        "artwork_type",
+        "operator",
+        "address",
+        "building_area",
+        "opening_hours"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "art*",
+        "exhibit*",
+        "paint*",
+        "photo*",
+        "sculpt*"
+    ],
+    "tags": {
+        "tourism": "gallery"
+    },
+    "name": "Art Gallery"
+}

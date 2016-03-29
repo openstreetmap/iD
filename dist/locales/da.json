@@ -133,7 +133,8 @@
             "key": "D",
             "annotation": "Frakoblede linjer/områder.",
             "not_connected": "Der er ikke nok linjer/områder at frakoble her.",
-            "connected_to_hidden": "Dette kan ikke frakobles, da det er forbundet til et skjult objekt."
+            "connected_to_hidden": "Dette kan ikke frakobles, da det er forbundet til et skjult objekt.",
+            "relation": "Dette kan ikke frakobles da det forbinder medlemmer af en relation."
         },
         "merge": {
             "title": "Fusioner",
@@ -250,7 +251,9 @@
         "warnings": "Advarsler",
         "modified": "Ændret",
         "deleted": "Slettet",
-        "created": "Oprettet"
+        "created": "Oprettet",
+        "about_changeset_comments": "Vedr. ændringssætskommentarer",
+        "about_changeset_comments_link": "http://wiki.openstreetmap.org/wiki/Good_changeset_comments"
     },
     "contributors": {
         "list": "Redigeringer af {users}",
@@ -289,6 +292,7 @@
         "no_documentation_key": "Der er ingen tilgængelig dokumentation for denne nøgle",
         "show_more": "Vis mere",
         "view_on_osm": "Se på openstreetmap.org",
+        "all_fields": "Alle felter",
         "all_tags": "Alle tags",
         "all_members": "Alle medlemmer",
         "all_relations": "Alle relationer",
@@ -321,10 +325,12 @@
         "description": "Baggrundsindstillinger",
         "percent_brightness": "{opacity} % lysstyrke",
         "none": "Ingen",
+        "best_imagery": "Bedst kendte luftfotokilde for denne her lokalitet",
         "custom": "Brugerdefineret",
         "custom_button": "Rediger brugerdefineret baggrund",
         "custom_prompt": "Angiv en URL-skabelon for fliser. Gyldige værdier er {z}, {x}, {y} for Z/X/Y-systemet og {u} for quadtile-systemet. ",
         "fix_misalignment": "Ret justering",
+        "imagery_source_faq": "Hvem er ophavsmand til luftfotoets?",
         "reset": "nulstil",
         "minimap": {
             "description": "Minikort",
@@ -343,14 +349,6 @@
         "points": {
             "description": "Punkter",
             "tooltip": "Interessepunkter"
-        },
-        "major_roads": {
-            "description": "Større veje",
-            "tooltip": "Veje, gader, osv."
-        },
-        "minor_roads": {
-            "description": "Mindre veje",
-            "tooltip": "Serviceveje, parkeringspladsveje, markveje, skovveje osv."
         },
         "paths": {
             "description": "Stier",
@@ -448,7 +446,9 @@
         "facebook": "Del på Facebook",
         "twitter": "Del på Twitter",
         "google": "Del på Google+",
-        "help_html": "Dine ændringer skulle blive synlige i \"Standard\"-laget om få minutter. Andre lag og visse specielle objekter kan tage længere tid\n(<a href='https://help.openstreetmap.org/questions/4705/why-havent-my-changes-appeared-on-the-map'>mere information</a>).\n"
+        "help_html": "Dine ændringer vil komme frem i \"Standard\" kortlaget om få minutter. Andre kortlag  med bestemte objekter vil tage længere tid.",
+        "help_link_text": "Detaljer",
+        "help_link_url": "https://wiki.openstreetmap.org/wiki/FAQ#I_have_just_made_some_changes_to_the_map._How_do_I_get_to_see_my_changes.3F"
     },
     "confirm": {
         "okay": "Okay",
@@ -493,9 +493,15 @@
         "zoom": "Zoom til GPX-spor",
         "browse": "Vælg en .gpx-fil"
     },
+    "mapillary_images": {
+        "tooltip": "Gadeniveau billeder fra Mapillary",
+        "title": "Billedelag (Mapillary)"
+    },
+    "mapillary_signs": {
+        "tooltip": "Trafikskilte fra Mapillary",
+        "title": "Trafikskiltelag (Mapillary)"
+    },
     "mapillary": {
-        "tooltip": "Billeder på gadeniveau fra Mapillary",
-        "title": "Fotolag (Mapillary)",
         "view_on_mapillary": "Vis dette billede på Mapillary"
     },
     "help": {
@@ -511,50 +517,82 @@
         "relations": "# Relationer\n\nEn relation er en speciel type objekt i OpenStreetMap sammenhænge som grupperer andre\nobjekter sammen. For eksempel to af de mest almindelige former for relationer er\n1) *rute relationer* der grupperer vejsegmenter der tilhører en bestemt vej/sti\nsammen. 2) *multipolygoner* som grupperer flere linjer der udgør et komplekst område\nsammen (en med flere stykker eller huller i som fx i en donut).\n\nGruppen af objekter i en relation kaldes *medlemmer*. I sidemenuen kan du se hvilke\nrelationer et objekt er medlem af. Du kan også i sidemenuen klikke på relationen. Når\nder er blevet klikket på en relation vil der dukke en liste op med alle dens medlemer og \npå kortet vil disse medlemmer være markeret tydeligt ud.\n\nDe fleste gange vil iD håndtere relationer automatisk for dig.\nDu skal her være meget opmærksom på hvis du fx sletter et vejsegment fordi du vil optegne\ndet mere præcist med et nyt vejsegment, at dette nye vejsegment også bliver tilføjet\nsom et medlem af den oprindelige relation(er).\n\n\n## Redigering relationer\n\nHer kommer de grundlæggende trin for trin for at redigere relationer\n\nDu tilføjer et objekt til en relation ved at markere objektet ud, dernæst klik \"+\" knappen\nved \"Alle relationer\" sektionen i sidemenuen. Vælg eller skriv navnet på relationen.\n\nEn helt ny relation laves ved at du først udvælger det første objekt som skal være medlem.\nKlik dernæst på \"+\" knappen ved \"Alle relationer\" sektionen og vælg \"Ny relation...\".\n\nDu fjerner et objekt fra en relation ved at udvælge objektet på kortet. Dernæst går du ned til\nrelationen du vil fjerne det fra (i sidemenuen). Klik så på skraldespands ikonet ved relationens navn. \nAdvarsel vær forsigtig med dette.\n\nDu laver en multipolygon med huller ved at benytte \"Fusioner\" værktøjet. Indtegn de to områder\n(indre og ydre område), hold så Skift knappen ned og klik på hver af dem.\nDernæst klik på \"Fusioner\" (+) knappen.\n"
     },
     "intro": {
+        "graph": {
+            "city_hall": "Three Rivers City Hall",
+            "fire_department": "Three Rivers Fire Department",
+            "memory_isle_park": "Memory Isle Park",
+            "riverwalk_trail": "Riverwalk Trail",
+            "w_michigan_ave": "West Michigan Avenue",
+            "e_michigan_ave": "East Michigan Avenue",
+            "spring_st": "Spring Street",
+            "scidmore_park": "Scidmore Park",
+            "petting_zoo": "Scidmore Park Petting Zoo",
+            "n_andrews_st": "North Andrews Street",
+            "s_andrews_st": "South Andrews Street",
+            "n_constantine_st": "North Constantine Street",
+            "s_constantine_st": "South Constantine Street",
+            "rocky_river": "Rocky River",
+            "railroad_dr": "Railroad Drive",
+            "conrail_rr": "Conrail Railroad",
+            "st_joseph_river": "Saint Joseph River",
+            "n_main_st": "North Main Street",
+            "s_main_st": "South Main Street",
+            "water_st": "Water Street",
+            "foster_st": "Foster Street",
+            "portage_river": "Portage River",
+            "flower_st": "Flower Street",
+            "elm_st": "Elm Street",
+            "walnut_st": "Walnut Street",
+            "morris_ave": "Morris Avenue",
+            "east_st": "East Street",
+            "portage_ave": "Portage Avenue"
+        },
         "navigation": {
             "title": "Navigation",
             "drag": "Grundkortet viser OpenStreetMap data oven på et baggrundkort. Du kan navigere ved at trække og scrolle lige som ethvert andet webkort.**Træk i kortet!**",
             "select": "Kortets elementer repræsenteres på tre måder: Ved brug af punkter, linjer eller områder. Alle elementer kan vælges ved at klikke på dem.**Klik på punktet for at vælge dette.**",
-            "header": "Overskriften viser os elementtypen.",
-            "pane": "Når et geografisk element er valgt, så vil redigeringsværktøjet blive vist. Overskriften viser os elementtypen og det centrale panel viser elementets attributter som fx dets navn og adresse.**Luk redigeringsværktøjet med luk-knappen i øverste højre hjørne.** "
+            "pane": "Når et objektet er udpeget så vises objektredigeringsværktøjet. Overskiften viser os objekttypen og hovedvinduet viser os objektets tags fx navne og adresser. **Luk objektredigeringsværktøjet ved at klikke på {button}  knappen oppe i højre hjørne.** ",
+            "search": "Du kan også søge efter objekter i nuværende kortudsnit eller globalt . **Søg efter  '{name}'**",
+            "choose": "**Vælg {name} fra listen for udvælge det.**",
+            "chosen": "Storartet!  {name} er nu valgt. **Vælg objektredigeringsværktøjet ved at klikke på {button} knappen.**"
         },
         "points": {
             "title": "Punkter",
-            "add": "Punkter kan bruges til at beskrive ting som fx butikker, restauranter og mindesmærker. De markerer en bestemt lokalitet og beskriver hvad der er lige der.**Klik på punktknappen for at tilføje et nyt punkt.**",
-            "place": "Punktet kan placeres ved at klikke på kortet. **Placerer punktet ovenpå bygningen.**",
+            "add": "Punkter kan bruges til at repræsentere objekter som fx butikker, restauranter om mindesmærker.  Disse udgør en bestemt lokalitet med hvad der er. **Klik på  {button} Punkt knappen for at tilføje et nyt punkt.**",
+            "place": "Punktet tilføjes ved at klikke på kortet. **Klik på kortet for at tilføje et nyt punkt på toppen af bygningen.**",
             "search": "Der er mange forskellige objekter, der kan repræsenteres ved punkter. Punktet du lige tilføjede var en cafe. ** Søg efter '{name}'**",
             "choose": "**Vælg Cafe fra listen.**",
             "describe": "Punktet er nu markeret som en cafe. Ved at bruge redigeringsværktøjet kan vi tilføje mere information om elementet. **Tilføj et navn**",
-            "close": "Elementeditoren kan lukkes ved at klikke på luk-knappen.\n**Luk redigeringsværktøjet**",
-            "reselect": "Ofte vil punkter allerede eksistere, men have fejl eller mangler. Vi kan rette i eksisterende punkter. **Vælg punktet du lige oprettede.**",
-            "fixname": "**Ændr navnet og luk elementeditoren.**",
-            "reselect_delete": "Alle objekter på kortet kan slettes. **Klik på punktet du oprettede.**",
-            "delete": "Menuen omkring punktet indeholder værktøjer der kan bruges på det, inklusive sletning. **Slet punktet.**"
+            "close": "Objektredigeringsværktøjet vil huske alle dine ændringer automatisk. Når du ændrer et objekt med lukkeknappen så vil dette blive ændret. **Klik på {button} knappen for at lukke objektredigeringsværktøjet**",
+            "reselect": "Ofte vil punkterne allerede være der, men er forkerte eller ej færdige. Vi kan redigere i allerede eksisterende punkter. **Klik på punktet som du lige har lavet.**",
+            "fixname": "**Navneændring så klik på {button} knappen for at lukke objekt redigeringsværktøjet.**",
+            "reselect_delete": "Alle objekter på kortet kan slettes. **Klik for at vælge punktet du lavede.**",
+            "delete": "Menuen omkring punkterne indeholder værktøjer der kan bruges til at forbedre samt slette. **Klik på {button} sletteknappen for at slette punktet.**"
         },
         "areas": {
             "title": "Områder",
-            "add": "Områder bruges til at vise omkredsen af objekter som fx søer, bygninger og beboelsesområder. De kan også bruges til mere detaljeret kortlægning af objekter som du normalt kortlægger som punkter. **Klik på Område-knappen for at tilføje et nyt område.**",
-            "corner": "Områder indtegnes ved at placere punkter der samlet markerer områdets ydergrænse. **Placer startpunktet på et af legepladsens hjørner.**",
+            "add": "Områder bruges til at vise grænserne af et objekt fx søer, bygninger og bebeoelsesområder. Områder kan også bruges til mere detaljeret kortlægning af objekter som du måske normalt indsætter som enkeltpunkt. **Klik på  {button} Område knappen for at tilføje et nyt område.**",
+            "corner": "Områder indtegnes ved at indsætte punkter der omgrænser området. **Klik på et sted med et startpunkt på et af hjørnerne på legepladsens område.**",
             "place": "Indtegn området ved at placere flere punkter. Afslut området ved at klikke på det først indtegnede punkt. **Indtegn legepladsens område.**",
             "search": "**Søg efter  '{name}'.**",
             "choose": "**Vælg Legeplads fra listen.**",
-            "describe": "**Tilføj et navn og luk redigeringsværktøjet**"
+            "describe": "**Tilføj et navn og klik så på  {button} knappen for at lukke objekt redigeringsværktøjet.**"
         },
         "lines": {
             "title": "Linjer",
-            "add": "Linjer bruges til at beskrive objekter som veje, jernbanespor og floder. **Klik på Linje-knappen for at tilføje en ny linje.**",
+            "add": "Linjer kan bruges til at repræsentere objekter som veje, jernbaner og floder. **Klik på {button} Linjeknappen for at tilføje en ny linje.**",
             "start": "**Start linjen ved at klikke på enden af vejen.**",
-            "intersect": "Klik for at tilføje flere punkter til linjen. Du kan om nødvendigt trække i kortet mens du tegner. Veje og mange andre typer linjer er dele af et større netværk. Det er meget vigtigt at disse linjer er forbundet korrekt for at navigationsværktøjer kan fungere. **Klik på Flower Street for at lave et skæringspunkt der forbinder de to linjer.**",
+            "intersect": "Klik for at tilføje flere punkter til linjen. Du kan trække kortet hvis det er nødvendigt. Veje og mange andre typer af linjer er  dele af større netværk. Det er meget vigtigt for disse linjer at de hænger sammen for at rutenavigationssoftware virker. **Klik på  {name} for at lave en intersektion der forbinder disse to linjer.** ",
             "finish": "Linjer kan afsluttes ved at klikke på det sidste punkt igen. **Afslut tegning af vejen.**",
             "road": "**Vælg Vej fra listen**",
             "residential": "Der er forskellige typer veje. Den mest brugte er Villavej. **Vælg vejtypen Villavej**",
-            "describe": "**Navngiv vejen og luk objekteditoren.**",
-            "restart": "Vejen skal skære Flower Street.",
+            "describe": "**Navngiv vejen og klik så {button} knappen for at lukke objekt redigeringsværktøjet.**",
+            "restart": "Vejen behøver en intersektion  {name}.",
             "wrong_preset": "Du valgte ikke typen Villavej. **Klik her for at vælge igen***"
         },
         "startediting": {
             "title": "Start redigering",
-            "help": "Mere dokumentation og denne gennemgang kan ses her.",
+            "help": "Du kan gentage gennemgangen eller se mere dokumentation ved at klikke på {button}  Hjælp knappen.",
             "save": "Glem ikke regelmæssigt at gemme dine ændringer!",
             "start": "Start kortlægning!"
         }
@@ -562,34 +600,34 @@
     "presets": {
         "categories": {
             "category-building": {
-                "name": "Bygning"
+                "name": "Bygningsegenskaber"
             },
             "category-golf": {
-                "name": "Golf"
+                "name": "Golfegenskaber"
             },
             "category-landuse": {
-                "name": "Arealanvendelse"
+                "name": "Arealanvendelsesegegenskaber"
             },
             "category-path": {
-                "name": "Sti"
+                "name": "Stiegenskaber"
             },
             "category-rail": {
-                "name": "Jernbane"
+                "name": "Jernbaneegenskaber"
             },
             "category-restriction": {
-                "name": "Restriktion"
+                "name": "Restriktionsegenskaber"
             },
             "category-road": {
-                "name": "Vej"
+                "name": "Vejegenskaber"
             },
             "category-route": {
-                "name": "Rute"
+                "name": "Ruteegenskaber"
             },
             "category-water-area": {
-                "name": "Vand"
+                "name": "Vandegenskaber"
             },
             "category-water-line": {
-                "name": "Vand"
+                "name": "Vandegenskaber"
             }
         },
         "fields": {
@@ -850,6 +888,12 @@
             },
             "description": {
                 "label": "Beskrivelse"
+            },
+            "diaper": {
+                "label": "Babybleskifte"
+            },
+            "dock": {
+                "label": "Type"
             },
             "drive_through": {
                 "label": "Gennemkørsel - uden stop"
@@ -1325,6 +1369,9 @@
             "shop": {
                 "label": "Type"
             },
+            "site": {
+                "label": "Type"
+            },
             "sloped_curb": {
                 "label": "Sløfekurve"
             },
@@ -1599,8 +1646,8 @@
                 "terms": "Cykeludlejning, Rent-a-Bike"
             },
             "amenity/bicycle_repair_station": {
-                "name": "Cykelværktøjlån",
-                "terms": "Cykelværktøjlån, Cykelværktøj"
+                "name": "Cykelreperationsværktøj",
+                "terms": "Cykelreperationsværktøj"
             },
             "amenity/biergarten": {
                 "name": "Ølhave",
@@ -1678,9 +1725,9 @@
                 "name": "Tandlæge",
                 "terms": "Tandlæge"
             },
-            "amenity/doctor": {
+            "amenity/doctors": {
                 "name": "Læge",
-                "terms": "Læge, Doktor"
+                "terms": "Læge, doktor"
             },
             "amenity/dojo": {
                 "name": "Dojo/Kampsports akdemi",
@@ -1697,6 +1744,10 @@
             "amenity/fast_food": {
                 "name": "Fast food",
                 "terms": "Fastfood, Grillbar, Pølsevogn"
+            },
+            "amenity/ferry_terminal": {
+                "name": "Færgeterminal",
+                "terms": "Færgeterminal, Færgekaj"
             },
             "amenity/fire_station": {
                 "name": "Brandstation",
@@ -1721,6 +1772,10 @@
             "amenity/hospital": {
                 "name": "Hospitalsområde",
                 "terms": "Hospitalsområde"
+            },
+            "amenity/hunting_stand": {
+                "name": "Jagttårn",
+                "terms": "Jagttårn, Jagtskydeplads"
             },
             "amenity/kindergarten": {
                 "name": "Børnehavegrund",
@@ -1749,6 +1804,10 @@
             "amenity/parking_entrance": {
                 "name": "Parkeringsgarage Indgang/Udgang",
                 "terms": "Parkeringsgarage Indgang/Udgang, Parkeringskælder Indgang/Udgang"
+            },
+            "amenity/parking_space": {
+                "name": "Parkeringsplads",
+                "terms": "Parkeringsplads"
             },
             "amenity/pharmacy": {
                 "name": "Apotek",
@@ -1917,6 +1976,14 @@
             "amenity/waste_basket": {
                 "name": "Skraldespand",
                 "terms": "<oversæt med synonymer eller beslægtet termer for 'Skraldespand', adskilt med kommaer>"
+            },
+            "amenity/waste_disposal": {
+                "name": "Skraldespand",
+                "terms": "Skraldespand"
+            },
+            "amenity/water_point": {
+                "name": "Genbrugsvand",
+                "terms": "Genbrugsvand"
             },
             "area": {
                 "name": "Område",
@@ -2539,8 +2606,8 @@
                 "terms": "Link til tertiær vej"
             },
             "highway/track": {
-                "name": "Mark/Skovvej",
-                "terms": "Mark/Skovvej"
+                "name": "Uvedligeholdt markvej",
+                "terms": "Uvedligeholdt markvej"
             },
             "highway/traffic_signals": {
                 "name": "Trafiksignal",
@@ -2557,10 +2624,6 @@
             "highway/turning_circle": {
                 "name": "Vendeplads",
                 "terms": "Vendeplads"
-            },
-            "highway/unclassified": {
-                "name": "Mindre vej",
-                "terms": "Ukendt vejtype"
             },
             "historic": {
                 "name": "Historisk sted",
@@ -2798,9 +2861,13 @@
                 "name": "Bådrampe",
                 "terms": "Bådrampe, Skibsrampe"
             },
-            "leisure/sports_center": {
-                "name": "Sportscenter/Gymnastik",
-                "terms": "Sportscenter/Gymnastik"
+            "leisure/sports_centre": {
+                "name": "Sportscenter / Gymnastik",
+                "terms": "Sportscenter / Gymnastik"
+            },
+            "leisure/sports_centre/swimming": {
+                "name": "Swimmingpool",
+                "terms": "Swimmingpool, Svømmepool"
             },
             "leisure/stadium": {
                 "name": "Stadion",
@@ -2813,6 +2880,10 @@
             "leisure/track": {
                 "name": "Racebane (ej motorspor)",
                 "terms": "Racebane (ej motorspor)"
+            },
+            "leisure/water_park": {
+                "name": "Vandland",
+                "terms": "Vandland, Badeland"
             },
             "line": {
                 "name": "Linje",
@@ -2830,6 +2901,10 @@
                 "name": "Bølgebryder",
                 "terms": "Bølgebryder"
             },
+            "man_made/chimney": {
+                "name": "Skorsten",
+                "terms": "Skorsten"
+            },
             "man_made/cutline": {
                 "name": "Skærelinje",
                 "terms": "Skærelinje"
@@ -2841,6 +2916,14 @@
             "man_made/flagpole": {
                 "name": "Flagstang",
                 "terms": "Flagstang"
+            },
+            "man_made/gasometer": {
+                "name": "Gasværk",
+                "terms": "Gasværk, Gasometer"
+            },
+            "man_made/groyne": {
+                "name": "Høfde",
+                "terms": "Høfde"
             },
             "man_made/lighthouse": {
                 "name": "Fyr (navigation)",
@@ -2874,6 +2957,10 @@
                 "name": "Lagertank",
                 "terms": "Lagertank"
             },
+            "man_made/surveillance": {
+                "name": "Overvågning",
+                "terms": "Overvågning"
+            },
             "man_made/survey_point": {
                 "name": "Geografisk fixpunkt",
                 "terms": "Geografisk fixpunkt"
@@ -2897,6 +2984,10 @@
             "man_made/water_works": {
                 "name": "Vandforsyning",
                 "terms": "Vandforsyning, Vandværk"
+            },
+            "man_made/works": {
+                "name": "Fabrik",
+                "terms": "Fabrik, Produktionsvirksomhed"
             },
             "military/airfield": {
                 "name": "Flyveplads",
@@ -3295,8 +3386,8 @@
                 "terms": "Antikvitetsforretning, Antikvitetsbutik"
             },
             "shop/art": {
-                "name": "Kunstgalleri",
-                "terms": "Kunstgalleri"
+                "name": "Kunstbutik",
+                "terms": "Kunstbutik, Galleributik"
             },
             "shop/baby_goods": {
                 "name": "Babyudstyrsbutik",
@@ -3642,6 +3733,10 @@
                 "name": "Papirforhandler",
                 "terms": "Papirforhandler"
             },
+            "shop/storage_rental": {
+                "name": "Lagerhotel",
+                "terms": "Lagerhotel, Opbevaringshotel"
+            },
             "shop/supermarket": {
                 "name": "Supermarked",
                 "terms": "Supermarked, Lavprisbutik, Discountbutik"
@@ -3741,6 +3836,10 @@
             "tourism/chalet": {
                 "name": "Bjergferiehytte",
                 "terms": "Bjergferiehytte"
+            },
+            "tourism/gallery": {
+                "name": "Kunstgalleri",
+                "terms": "Kunstgalleri, Galleri"
             },
             "tourism/guest_house": {
                 "name": "Gæstehus",
@@ -3894,6 +3993,10 @@
                 "name": "Rutemasterplan",
                 "terms": "Rutemasterplan"
             },
+            "type/site": {
+                "name": "Sted",
+                "terms": "Sted"
+            },
             "vertex": {
                 "name": "Andre",
                 "terms": "Andre"
@@ -3901,6 +4004,10 @@
             "waterway": {
                 "name": "Vandvej",
                 "terms": "Vandvej"
+            },
+            "waterway/boatyard": {
+                "name": "Bådplads",
+                "terms": "Bådplads"
             },
             "waterway/canal": {
                 "name": "Kanal",
@@ -3937,6 +4044,10 @@
             "waterway/stream": {
                 "name": "Bæk",
                 "terms": "Bæk"
+            },
+            "waterway/water_point": {
+                "name": "Havnedrikkevand",
+                "terms": "Havnedrikkevand"
             },
             "waterway/weir": {
                 "name": "Stemmeværk",

@@ -1,0 +1,17 @@
+{
+    "fields": [
+        "building_area"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "leisure": "bird_hide"
+    },
+    "terms": [
+        "machan",
+        "ornithology"
+    ],
+    "name": "Bird Hide"
+}

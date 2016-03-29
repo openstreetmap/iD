@@ -16,11 +16,16 @@
     <script src="../node_modules/happen/src/happen.js"></script>
     <script src="lib/bind-shim.js"></script>
 
+    <script>
+    if (typeof initMochaPhantomJS === 'function') {
+        initMochaPhantomJS()
+    }
+    </script>
+
     <!-- include source files here... -->
     <script src='../js/lib/lodash.js'></script>
     <script src='../js/lib/d3.v3.js'></script>
     <script src='../js/lib/jxon.js'></script>
-    <script src='../js/lib/d3.typeahead.js'></script>
     <script src='../js/lib/d3.combobox.js'></script>
     <script src='../js/lib/d3.geo.tile.js'></script>
     <script src='../js/lib/d3.dimensions.js'></script>
@@ -39,7 +44,9 @@
     <script src='../js/id/id.js'></script>
     <script src='../js/id/util.js'></script>
 
-    <script src='../js/id/services/countrycode.js'></script>
+    <script src='../js/id/services.js'></script>
+    <script src='../js/id/services/mapillary.js'></script>
+    <script src='../js/id/services/nominatim.js'></script>
     <script src='../js/id/services/taginfo.js'></script>
     <script src='../js/id/services/wikipedia.js'></script>
 
@@ -55,19 +62,21 @@
     <script src='../js/id/renderer/background_source.js'></script>
     <script src='../js/id/renderer/features.js'></script>
     <script src='../js/id/renderer/map.js'></script>
-    <script src='../js/id/renderer/gpx_layer.js'></script>
     <script src='../js/id/renderer/tile_layer.js'></script>
-    <script src='../js/id/renderer/mapillary_layer.js'></script>
 
     <script src="../js/id/svg.js"></script>
     <script src="../js/id/svg/areas.js"></script>
     <script src="../js/id/svg/defs.js"></script>
+    <script src='../js/id/svg/gpx.js'></script>
     <script src="../js/id/svg/icon.js"></script>
     <script src="../js/id/svg/labels.js"></script>
     <script src="../js/id/svg/lines.js"></script>
+    <script src='../js/id/svg/mapillary_images.js'></script>
+    <script src='../js/id/svg/mapillary_signs.js'></script>
     <script src="../js/id/svg/midpoints.js"></script>
+    <script src="../js/id/svg/osm.js"></script>
     <script src="../js/id/svg/points.js"></script>
-    <script src="../js/id/svg/surface.js"></script>
+    <script src="../js/id/svg/layers.js"></script>
     <script src="../js/id/svg/tag_classes.js"></script>
     <script src="../js/id/svg/turns.js"></script>
     <script src="../js/id/svg/vertices.js"></script>
@@ -131,7 +140,7 @@
     <script src='../js/id/actions/change_tags.js'></script>
     <script src='../js/id/actions/circularize.js'></script>
     <script src='../js/id/actions/connect.js'></script>
-    <script src='../js/id/actions/copy_entity.js'></script>
+    <script src='../js/id/actions/copy_entities.js'></script>
     <script src='../js/id/actions/delete_member.js'></script>
     <script src='../js/id/actions/delete_multiple.js'></script>
     <script src='../js/id/actions/delete_node.js'></script>
@@ -241,7 +250,7 @@
     <script src='spec/actions/orthogonalize.js'></script>
     <script src='spec/actions/straighten.js'></script>
     <script src='spec/actions/connect.js'></script>
-    <script src="spec/actions/copy_entity.js"></script>
+    <script src="spec/actions/copy_entities.js"></script>
     <script src='spec/actions/delete_member.js'></script>
     <script src="spec/actions/delete_multiple.js"></script>
     <script src="spec/actions/delete_node.js"></script>
@@ -262,6 +271,7 @@
     <script src="spec/actions/split.js"></script>
     <script src="spec/actions/unrestrict_turn.js"></script>
 
+    <script src="spec/geo.js"></script>
     <script src="spec/geo/extent.js"></script>
     <script src="spec/geo/intersection.js"></script>
     <script src="spec/geo/multipolygon.js"></script>
@@ -301,9 +311,9 @@
     <script src="spec/ui/preset/localized.js"></script>
     <script src="spec/ui/preset/wikipedia.js"></script>
 
-    <script src="spec/countrycode.js"></script>
-    <script src="spec/geo.js"></script>
-    <script src="spec/taginfo.js"></script>
+    <script src="spec/services/mapillary.js"></script>
+    <script src="spec/services/nominatim.js"></script>
+    <script src="spec/services/taginfo.js"></script>
 
     <script src="spec/util.js"></script>
     <script src='spec/util/session_mutex.js'></script>
@@ -324,7 +334,7 @@
 
     <script>
         iD.data.load('../', function() {
-            (window.mochaPhantomJS || window.mocha).run();
+            window.mocha.run();
         });
     </script>
 </body>

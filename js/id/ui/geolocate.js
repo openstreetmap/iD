@@ -1,17 +1,36 @@
-iD.ui.Geolocate = function(map) {
+iD.ui.Geolocate = function(context) {
+    var geoOptions = { enableHighAccuracy: false, timeout: 6000 /* 6sec */ },
+        locating = iD.ui.Loading(context).message(t('geolocate.locating')).blocking(true),
+        timeoutId;
+
     function click() {
-        navigator.geolocation.getCurrentPosition(
-            success, error);
+        context.enter(iD.modes.Browse(context));
+        context.container().call(locating);
+        navigator.geolocation.getCurrentPosition(success, error, geoOptions);
+
+        // This timeout ensures that we still call finish() even if
+        // the user declines to share their location in Firefox
+        timeoutId = setTimeout(finish, 10000 /* 10sec */ );
     }
 
     function success(position) {
-        var extent = iD.geo.Extent([position.coords.longitude, position.coords.latitude])
-            .padByMeters(position.coords.accuracy);
+        var map = context.map(),
+            extent = iD.geo.Extent([position.coords.longitude, position.coords.latitude])
+                .padByMeters(position.coords.accuracy);
 
         map.centerZoom(extent.center(), Math.min(20, map.extentZoom(extent)));
+        finish();
     }
 
-    function error() { }
+    function error() {
+        finish();
+    }
+
+    function finish() {
+        locating.close();  // unblock ui
+        if (timeoutId) { clearTimeout(timeoutId); }
+        timeoutId = undefined;
+    }
 
     return function(selection) {
         if (!navigator.geolocation) return;

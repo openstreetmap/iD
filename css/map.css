@@ -24,11 +24,11 @@ img.tile-removing {
 use { pointer-events: none; }
 
 /* base styles */
-.layer path:not(.oneway) { fill: none; }     /* IE needs :not(.oneway) */
+.layer-osm path:not(.oneway) { fill: none; }     /* IE needs :not(.oneway) */
 
 /* the above fill: none rule affects paths in <use> shadow dom only in Firefox */
-.layer use.icon path { fill: #333; }                       /* FF svg Maki icons */
-.layer .turn use path { fill: #000; }                      /* FF turn restriction icons */
+.layer-osm use.icon path { fill: #333; }                       /* FF svg Maki icons */
+.layer-osm .turn use path { fill: #000; }                      /* FF turn restriction icons */
 #turn-only-shape2, #turn-only-u-shape2 { fill: #7092FF; }  /* FF turn-only, turn-only-u */
 #turn-no-shape2, #turn-no-u-shape2     { fill: #E06D5F; }  /* FF turn-no, turn-no-u */
 #turn-yes-shape2, #turn-yes-u-shape2   { fill: #8CD05F; }  /* FF turn-yes, turn-yes-u */
@@ -239,17 +239,23 @@ path.fill.tag-leisure-park {
     background-color: rgba(140, 208, 95, 0.3);
 }
 
+path.stroke.tag-amenity-swimming_pool,
+path.stroke.tag-leisure-swimming_pool,
 path.stroke.tag-natural-water,
 path.stroke.tag-landuse-basin,
 path.stroke.tag-landuse-reservoir {
     stroke: rgb(119, 211, 222);
 }
+path.fill.tag-amenity-swimming_pool,
+path.fill.tag-leisure-swimming_pool,
 path.fill.tag-landuse-basin,
 path.fill.tag-landuse-reservoir,
 path.fill.tag-natural-water {
     stroke: rgba(119, 211, 222, 0.3);
     fill: rgba(119, 211, 222, 0.3);
 }
+.preset-icon-fill-area.tag-amenity-swimming_pool,
+.preset-icon-fill-area.tag-leisure-swimming_pool,
 .preset-icon-fill-area.tag-landuse-basin,
 .preset-icon-fill-area.tag-landuse-reservoir,
 .preset-icon-fill-area.tag-natural-water {
@@ -647,19 +653,6 @@ path.casing.tag-tertiary {
     stroke:#7f7f3f;
 }
 
-.preset-icon .icon.highway-unclassified {
-    color: #eaeaea;
-    fill: #444;
-}
-path.stroke.tag-highway-unclassified,
-path.stroke.tag-unclassified {
-    stroke:#eaeaea;
-}
-path.casing.tag-highway-unclassified,
-path.casing.tag-unclassified {
-    stroke:#444;
-}
-
 .preset-icon .icon.highway-residential {
     color: #fff;
     fill: #444;
@@ -672,6 +665,20 @@ path.casing.tag-highway-residential,
 path.casing.tag-residential {
     stroke:#444;
 }
+
+.preset-icon .icon.highway-unclassified {
+    color: #dcd9b9;
+    fill: #444;
+}
+path.stroke.tag-highway-unclassified,
+path.stroke.tag-unclassified {
+    stroke:#dcd9b9;
+}
+path.casing.tag-highway-unclassified,
+path.casing.tag-unclassified {
+    stroke:#444;
+}
+
 
 /* narrow highways */
 path.stroke.tag-highway-living_street,
@@ -1254,7 +1261,7 @@ path.shadow.tag-cutting {
 
 /* Surface - unpaved */
 path.casing.tag-unpaved {
-    stroke: #eaeaea;
+    stroke: #ccc;
     stroke-linecap: butt;
     stroke-dasharray: 4, 3;
 }
@@ -1486,7 +1493,7 @@ g.turn circle {
 }
 
 /* GPX Paths */
-div.layer-gpx {
+.layer-gpx {
     pointer-events: none;
 }
 
@@ -1500,41 +1507,82 @@ text.gpx {
     fill: #FF26D4;
 }
 
-/* Mapillary Layer */
+/* Mapillary Image Layer */
 
-.layer-mapillary {
+.layer-mapillary-images {
     pointer-events: none;
 }
 
-.layer-mapillary g {
+.layer-mapillary-images .viewfield-group {
     pointer-events: visible;
     cursor: pointer; /* Opera */
     cursor: url(img/cursor-select-mapillary.png) 6 1, pointer; /* FF */
 }
 
-.layer-mapillary g * {
+.layer-mapillary-images .viewfield-group * {
     stroke-width: 1;
     stroke: #444;
     fill: #ffc600;
+    z-index: 50;
 }
 
-.layer-mapillary g:hover * {
+.layer-mapillary-images .viewfield-group:hover * {
     stroke-width: 1;
     stroke: #333;
     fill: #ff9900;
+    z-index: 60;
 }
 
-.layer-mapillary g.selected  * {
+.layer-mapillary-images .viewfield-group.selected  * {
     stroke-width: 2;
     stroke: #222;
     fill: #ff5800;
+    z-index: 60;
 }
 
-.layer-mapillary g:hover path.viewfield,
-.layer-mapillary g.selected path.viewfield,
-.layer-mapillary g path.viewfield {
+.layer-mapillary-images .viewfield-group:hover path.viewfield,
+.layer-mapillary-images .viewfield-group.selected path.viewfield,
+.layer-mapillary-images .viewfield-group path.viewfield {
     stroke-width: 0;
     fill-opacity: 0.6;
+}
+
+/* Mapillary Sign Layer */
+
+.layer-mapillary-signs {
+    pointer-events: none;
+}
+
+.layer-mapillary-signs .icon-sign body {
+    min-width: 20px;
+    height: 28px;
+    width: 28px;
+    border: 2px solid transparent;
+    pointer-events: visible;
+    cursor: pointer; /* Opera */
+    cursor: url(img/cursor-select-mapillary.png) 6 1, pointer; /* FF */
+    z-index: 70;
+}
+
+.layer-mapillary-signs .icon-sign:hover body {
+    border: 2px solid rgba(255,198,0,0.8);
+    z-index: 80;
+ }
+
+.layer-mapillary-signs .icon-sign.selected body {
+    border: 2px solid rgba(255,0,0,0.8);
+    z-index: 80;
+ }
+
+.layer-mapillary-signs .icon-sign .t {
+    font-size: 28px;
+    z-index: 70;
+    position: absolute;
+}
+
+.layer-mapillary-signs .icon-sign:hover .t,
+.layer-mapillary-signs .icon-sign.selected .t {
+    z-index: 80;
 }
 
 /* Modes */

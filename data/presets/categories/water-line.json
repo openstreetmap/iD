@@ -1,6 +1,6 @@
 {
     "geometry": "line",
-    "name": "Water",
+    "name": "Water Features",
     "icon": "category-water",
     "members": [
         "waterway/river",

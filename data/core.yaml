@@ -105,6 +105,7 @@ en:
       annotation: Disconnected lines/areas.
       not_connected: There aren't enough lines/areas here to disconnect.
       connected_to_hidden: This can't be disconnected because it is connected to a hidden feature.
+      relation: This can't be disconnected because it connects members of a relation.
     merge:
       title: Merge
       description: Merge these features.
@@ -203,6 +204,8 @@ en:
     modified: Modified
     deleted: Deleted
     created: Created
+    about_changeset_comments: About changeset comments
+    about_changeset_comments_link: //wiki.openstreetmap.org/wiki/Good_changeset_comments
   contributors:
     list: "Edits by {users}"
     truncated_list: "Edits by {users} and {count} others"
@@ -230,11 +233,13 @@ en:
     no_results_worldwide: No results found
   geolocate:
     title: Show My Location
+    locating: "Locating, please wait..."
   inspector:
     no_documentation_combination: There is no documentation available for this tag combination
     no_documentation_key: There is no documentation available for this key
     show_more: Show More
     view_on_osm: View on openstreetmap.org
+    all_fields: All fields
     all_tags: All tags
     all_members: All members
     all_relations: All relations
@@ -265,10 +270,12 @@ en:
     description: Background settings
     percent_brightness: "{opacity}% brightness"
     none: None
+    best_imagery: Best known imagery source for this location
     custom: Custom
     custom_button: Edit custom background
     custom_prompt: "Enter a tile URL template. Valid tokens are {z}, {x}, {y} for Z/X/Y scheme and {u} for quadtile scheme."
     fix_misalignment: Fix alignment
+    imagery_source_faq: Where does this imagery come from?
     reset: reset
     minimap:
       description: Minimap
@@ -284,11 +291,11 @@ en:
     points:
       description: Points
       tooltip: "Points of Interest"
-    major_roads:
-      description: Major Roads
+    traffic_roads:
+      description: Traffic Roads
       tooltip: "Highways, Streets, etc."
-    minor_roads:
-      description: Minor Roads
+    service_roads:
+      description: Service Roads
       tooltip: "Service Roads, Parking Aisles, Tracks, etc."
     paths:
       description: Paths
@@ -370,9 +377,9 @@ en:
     facebook: "Share on Facebook"
     twitter: "Share on Twitter"
     google: "Share on Google+"
-    help_html: |
-      Your changes should appear in the "Standard" layer in a few minutes. Other layers, and certain features, may take longer
-      (<a href='https://help.openstreetmap.org/questions/4705/why-havent-my-changes-appeared-on-the-map' target='_blank'>details</a>).
+    help_html: Your changes should appear in the "Standard" layer in a few minutes. Other layers, and certain features, may take longer.
+    help_link_text: Details
+    help_link_url: "https://wiki.openstreetmap.org/wiki/FAQ#I_have_just_made_some_changes_to_the_map._How_do_I_get_to_see_my_changes.3F"
   confirm:
     okay: "Okay"
     cancel: "Cancel"
@@ -409,9 +416,13 @@ en:
     drag_drop: "Drag and drop a .gpx file on the page, or click the button to the right to browse"
     zoom: "Zoom to GPX track"
     browse: "Browse for a .gpx file"
-  mapillary:
+  mapillary_images:
     tooltip: "Street-level photos from Mapillary"
     title: "Photo Overlay (Mapillary)"
+  mapillary_signs:
+    tooltip: "Traffic signs from Mapillary"
+    title: "Traffic Sign Overlay (Mapillary)"
+  mapillary:
     view_on_mapillary: "View this image on Mapillary"
   help:
     title: "Help"
@@ -760,4 +771,3 @@ en:
       help: "You can replay this walkthrough or view more documentation by clicking the {button} Help button."
       save: "Don't forget to regularly save your changes!"
       start: "Start mapping!"
-

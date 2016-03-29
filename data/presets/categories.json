@@ -1,7 +1,7 @@
 {
     "category-building": {
         "geometry": "area",
-        "name": "Building",
+        "name": "Building Features",
         "icon": "building",
         "members": [
             "building/house",
@@ -14,7 +14,7 @@
     },
     "category-golf": {
         "geometry": "area",
-        "name": "Golf",
+        "name": "Golf Features",
         "icon": "golf",
         "members": [
             "golf/fairway",
@@ -28,7 +28,7 @@
     },
     "category-landuse": {
         "geometry": "area",
-        "name": "Land Use",
+        "name": "Land Use Features",
         "icon": "land-use",
         "members": [
             "landuse/residential",
@@ -45,7 +45,7 @@
     },
     "category-path": {
         "geometry": "line",
-        "name": "Path",
+        "name": "Path Features",
         "icon": "category-path",
         "members": [
             "highway/pedestrian",
@@ -58,7 +58,7 @@
     },
     "category-rail": {
         "geometry": "line",
-        "name": "Rail",
+        "name": "Rail Features",
         "icon": "category-rail",
         "members": [
             "railway/rail",
@@ -71,7 +71,7 @@
     },
     "category-restriction": {
         "geometry": "relation",
-        "name": "Restriction",
+        "name": "Restriction Features",
         "icon": "restriction",
         "members": [
             "type/restriction/no_left_turn",
@@ -86,7 +86,7 @@
     },
     "category-road": {
         "geometry": "line",
-        "name": "Road",
+        "name": "Road Features",
         "icon": "category-roads",
         "members": [
             "highway/residential",
@@ -108,7 +108,7 @@
     },
     "category-route": {
         "geometry": "relation",
-        "name": "Route",
+        "name": "Route Features",
         "icon": "route",
         "members": [
             "type/route/road",
@@ -128,7 +128,7 @@
     },
     "category-water-area": {
         "geometry": "area",
-        "name": "Water",
+        "name": "Water Features",
         "icon": "water",
         "members": [
             "natural/water/lake",
@@ -139,7 +139,7 @@
     },
     "category-water-line": {
         "geometry": "line",
-        "name": "Water",
+        "name": "Water Features",
         "icon": "category-water",
         "members": [
             "waterway/river",

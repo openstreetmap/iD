@@ -16,6 +16,12 @@
     <script src="../node_modules/happen/src/happen.js"></script>
     <script src="lib/bind-shim.js"></script>
 
+    <script>
+    if (typeof initMochaPhantomJS === 'function') {
+        initMochaPhantomJS()
+    }
+    </script>
+
     <!-- include source files here... -->
     <script src='../dist/iD.js'></script>
     <script src='../dist/presets.js'></script>
@@ -36,7 +42,7 @@
     <script src="spec/actions/change_tags.js"></script>
     <script src='spec/actions/circularize.js'></script>
     <script src='spec/actions/connect.js'></script>
-    <script src="spec/actions/copy_entity.js"></script>
+    <script src="spec/actions/copy_entities.js"></script>
     <script src='spec/actions/delete_member.js'></script>
     <script src="spec/actions/delete_multiple.js"></script>
     <script src="spec/actions/delete_node.js"></script>
@@ -59,6 +65,7 @@
     <script src="spec/actions/straighten.js"></script>
     <script src="spec/actions/unrestrict_turn.js"></script>
 
+    <script src="spec/geo.js"></script>
     <script src="spec/geo/extent.js"></script>
     <script src="spec/geo/intersection.js"></script>
     <script src="spec/geo/multipolygon.js"></script>
@@ -98,9 +105,9 @@
     <script src="spec/ui/preset/localized.js"></script>
     <script src="spec/ui/preset/wikipedia.js"></script>
 
-    <script src="spec/countrycode.js"></script>
-    <script src="spec/geo.js"></script>
-    <script src="spec/taginfo.js"></script>
+    <script src="spec/services/mapillary.js"></script>
+    <script src="spec/services/nominatim.js"></script>
+    <script src="spec/services/taginfo.js"></script>
 
     <script src="spec/util.js"></script>
     <script src='spec/util/session_mutex.js'></script>
@@ -120,7 +127,7 @@
     <script src="spec/id.js"></script>
 
     <script>
-        (window.mochaPhantomJS || window.mocha).run();
+        window.mocha.run();
     </script>
 </body>
 </html>

@@ -69,7 +69,7 @@ iD.ui.TagReference = function(tag, context) {
             body
                 .append('a')
                 .attr('target', '_blank')
-                .attr('href', 'http://wiki.openstreetmap.org/wiki/' + docs.title)
+                .attr('href', 'https://wiki.openstreetmap.org/wiki/' + docs.title)
                 .call(iD.svg.Icon('#icon-out-link', 'inline'))
                 .append('span')
                 .text(t('inspector.reference'));

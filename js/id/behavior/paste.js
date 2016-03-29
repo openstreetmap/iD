@@ -21,7 +21,8 @@ iD.behavior.Paste = function(context) {
         d3.event.preventDefault();
         if (context.inIntro()) return;
 
-        var mouse = context.mouse(),
+        var baseGraph = context.graph(),
+            mouse = context.mouse(),
             projection = context.projection,
             viewport = iD.geo.Extent(projection.clipExtent()).polygon();
 
@@ -30,30 +31,21 @@ iD.behavior.Paste = function(context) {
         var extent = iD.geo.Extent(),
             oldIDs = context.copyIDs(),
             oldGraph = context.copyGraph(),
-            newIDs = [],
-            i, j;
+            newIDs = [];
 
         if (!oldIDs.length) return;
 
-        for (i = 0; i < oldIDs.length; i++) {
-            var oldEntity = oldGraph.entity(oldIDs[i]),
-                action = iD.actions.CopyEntity(oldEntity.id, oldGraph, true),
-                newEntities;
+        var action = iD.actions.CopyEntities(oldIDs, oldGraph);
+        context.perform(action);
+
+        var copies = action.copies();
+        for (var id in copies) {
+            var oldEntity = oldGraph.entity(id),
+                newEntity = copies[id];
 
             extent._extend(oldEntity.extent(oldGraph));
-            context.perform(action);
-
-            // First element in `newEntities` contains the copied Entity,
-            // Subsequent array elements contain any descendants..
-            newEntities = action.newEntities();
-            newIDs.push(newEntities[0].id);
-
-            for (j = 0; j < newEntities.length; j++) {
-                var newEntity = newEntities[j],
-                    tags = _.omit(newEntity.tags, omitTag);
-
-                context.perform(iD.actions.ChangeTags(newEntity.id, tags));
-            }
+            newIDs.push(newEntity.id);
+            context.perform(iD.actions.ChangeTags(newEntity.id, _.omit(newEntity.tags, omitTag)));
         }
 
         // Put pasted objects where mouse pointer is..
@@ -61,7 +53,7 @@ iD.behavior.Paste = function(context) {
             delta = [ mouse[0] - center[0], mouse[1] - center[1] ];
 
         context.perform(iD.actions.Move(newIDs, delta, projection));
-        context.enter(iD.modes.Move(context, newIDs));
+        context.enter(iD.modes.Move(context, newIDs, baseGraph));
     }
 
     function paste() {

@@ -12,29 +12,19 @@ _.extend(iD.Way.prototype, {
     type: 'way',
     nodes: [],
 
-    copy: function(deep, resolver) {
-        var copy = iD.Entity.prototype.copy.call(this);
+    copy: function(resolver, copies) {
+        if (copies[this.id])
+            return copies[this.id];
 
-        if (!deep || !resolver) {
-            return copy;
-        }
+        var copy = iD.Entity.prototype.copy.call(this, resolver, copies);
 
-        var nodes = [],
-            replacements = {},
-            i, oldid, newid, child;
+        var nodes = this.nodes.map(function(id) {
+            return resolver.entity(id).copy(resolver, copies).id;
+        });
 
-        for (i = 0; i < this.nodes.length; i++) {
-            oldid = this.nodes[i];
-            newid = replacements[oldid];
-            if (!newid) {
-                child = resolver.entity(oldid).copy();
-                newid = replacements[oldid] = child[0].id;
-                copy = copy.concat(child);
-            }
-            nodes.push(newid);
-        }
+        copy = copy.update({nodes: nodes});
+        copies[this.id] = copy;
 
-        copy[0] = copy[0].update({nodes: nodes});
         return copy;
     },
 

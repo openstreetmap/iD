@@ -45,6 +45,7 @@
         "category-restriction",
         "type/boundary",
         "type/multipolygon",
+        "type/site",
         "relation"
     ]
 }

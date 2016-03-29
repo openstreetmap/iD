@@ -1,6 +1,7 @@
 {
-    "icon": "art-gallery",
+    "icon": "shop",
     "fields": [
+        "artwork_type",
         "operator",
         "address",
         "building_area",
@@ -10,8 +11,13 @@
         "point",
         "area"
     ],
+    "terms": [
+        "art*",
+        "exhibit*",
+        "gallery"
+    ],
     "tags": {
         "shop": "art"
     },
-    "name": "Art Gallery"
+    "name": "Art Store"
 }

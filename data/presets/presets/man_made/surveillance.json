@@ -1,0 +1,10 @@
+{
+    "icon": "camera",
+    "geometry": [
+        "point"
+    ],
+    "tags": {
+        "man_made": "surveillance"
+    },
+    "name": "Surveillance"
+}

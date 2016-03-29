@@ -143,8 +143,7 @@
         },
         "areas": {
             "title": "Areoj",
-            "choose": "**Rifo Korto de la listo.**",
-            "describe": "**Aldoni nomo, kaj fermi la redaktilon trajto **"
+            "choose": "**Rifo Korto de la listo.**"
         },
         "lines": {
             "title": "Linioj",
@@ -153,35 +152,11 @@
         },
         "startediting": {
             "title": "Komenco Redaktado",
-            "help": "Pli dokumentado kaj tiu walkthrough estas havebla ĉi tie.",
             "save": "Ne forgesu regule savu viajn ŝanĝojn!",
             "start": "Starti surĵeto!"
         }
     },
     "presets": {
-        "categories": {
-            "category-building": {
-                "name": "Konstruaĵo"
-            },
-            "category-golf": {
-                "name": "Golfo"
-            },
-            "category-path": {
-                "name": "Vojo"
-            },
-            "category-rail": {
-                "name": "Relo"
-            },
-            "category-restriction": {
-                "name": "Restrikto"
-            },
-            "category-water-area": {
-                "name": "Akvo"
-            },
-            "category-water-line": {
-                "name": "Akvo"
-            }
-        },
         "fields": {
             "access": {
                 "options": {

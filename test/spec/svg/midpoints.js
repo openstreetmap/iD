@@ -7,7 +7,7 @@ describe("iD.svg.Midpoints", function () {
     beforeEach(function () {
         context = iD();
         surface = d3.select(document.createElementNS('http://www.w3.org/2000/svg', 'svg'))
-            .call(iD.svg.Surface(context));
+            .call(iD.svg.Layers(context));
     });
 
     it("creates midpoint on segment completely within the extent", function () {

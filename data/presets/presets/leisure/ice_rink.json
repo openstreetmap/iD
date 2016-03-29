@@ -5,7 +5,7 @@
         "sport_ice",
         "operator",
         "address",
-        "building_area",
+        "building",
         "opening_hours"
     ],
     "geometry": [

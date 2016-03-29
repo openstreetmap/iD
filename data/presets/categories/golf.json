@@ -1,6 +1,6 @@
 {
     "geometry": "area",
-    "name": "Golf",
+    "name": "Golf Features",
     "icon": "golf",
     "members": [
         "golf/fairway",

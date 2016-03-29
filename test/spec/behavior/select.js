@@ -15,7 +15,7 @@ describe("iD.behavior.Select", function() {
             .append('div')
             .attr('class', 'inspector-wrap');
 
-        context.surface().selectAll('circle')
+        context.surface().select('.data-layer-osm').selectAll('circle')
             .data([a, b])
             .enter().append('circle')
             .attr('class', function(d) { return d.id; });
@@ -33,7 +33,7 @@ describe("iD.behavior.Select", function() {
     });
 
     specify("click on entity selects the entity", function() {
-        happen.click(context.surface().select('.' + a.id).node());
+        happen.click(context.surface().selectAll('.' + a.id).node());
         expect(context.selectedIDs()).to.eql([a.id]);
     });
 
@@ -45,19 +45,19 @@ describe("iD.behavior.Select", function() {
 
     specify("shift-click on unselected entity adds it to the selection", function() {
         context.enter(iD.modes.Select(context, [a.id]));
-        happen.click(context.surface().select('.' + b.id).node(), {shiftKey: true});
+        happen.click(context.surface().selectAll('.' + b.id).node(), {shiftKey: true});
         expect(context.selectedIDs()).to.eql([a.id, b.id]);
     });
 
     specify("shift-click on selected entity removes it from the selection", function() {
         context.enter(iD.modes.Select(context, [a.id, b.id]));
-        happen.click(context.surface().select('.' + b.id).node(), {shiftKey: true});
+        happen.click(context.surface().selectAll('.' + b.id).node(), {shiftKey: true});
         expect(context.selectedIDs()).to.eql([a.id]);
     });
 
     specify("shift-click on last selected entity clears the selection", function() {
         context.enter(iD.modes.Select(context, [a.id]));
-        happen.click(context.surface().select('.' + a.id).node(), {shiftKey: true});
+        happen.click(context.surface().selectAll('.' + a.id).node(), {shiftKey: true});
         expect(context.mode().id).to.eql('browse');
     });
 

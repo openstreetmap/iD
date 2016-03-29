@@ -7,8 +7,11 @@
     ],
     "geometry": [
         "point",
-        "vertex",
         "area"
+    ],
+    "terms": [
+        "dive",
+        "water"
     ],
     "tags": {
         "leisure": "swimming_pool"

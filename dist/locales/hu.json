@@ -133,7 +133,8 @@
             "key": "D",
             "annotation": "Vonalak/területek szétkapcsolva.",
             "not_connected": "Nincsenek szétkapcsolható vonalak/területek.",
-            "connected_to_hidden": "Nem kapcsolható szét, mert egy rejtett elemhez csatlakozik."
+            "connected_to_hidden": "Nem kapcsolható szét, mert egy rejtett elemhez csatlakozik.",
+            "relation": "Nem kapcsolható szét, mert egy kapcsolat tagjait köti össze."
         },
         "merge": {
             "title": "Egyesítés",
@@ -226,7 +227,7 @@
     },
     "zoom_in_edit": "Szerkesztéshez nagyíts rá",
     "logout": "kijelentkezés",
-    "loading_auth": "Csatlakozás az OpenStreetMap szerverhez…",
+    "loading_auth": "Csatlakozás az OpenStreetMap kiszolgálóhoz…",
     "report_a_bug": "Hibajelentés",
     "help_translate": "Segíts a fordításban",
     "feature_info": {
@@ -250,7 +251,9 @@
         "warnings": "Figyelmeztetések",
         "modified": "Módosítva",
         "deleted": "Törölve",
-        "created": "Létrehozva"
+        "created": "Létrehozva",
+        "about_changeset_comments": "A módosításcsomag megjegyzésekről",
+        "about_changeset_comments_link": "//wiki.openstreetmap.org/wiki/Hu:Good_changeset_comments"
     },
     "contributors": {
         "list": "Szerkesztette {users}",
@@ -282,17 +285,19 @@
         "no_results_worldwide": "Nincs találat"
     },
     "geolocate": {
-        "title": "Pozícióm megjelenítése"
+        "title": "Pozícióm megjelenítése",
+        "locating": "Meghatározás, kérem várjon…"
     },
     "inspector": {
         "no_documentation_combination": "Ehhez a címkekombinációhoz nem érhető el dokumentáció",
         "no_documentation_key": "Ehhez a kulcshoz nem érhető el dokumentáció",
         "show_more": "Mutass többet",
         "view_on_osm": "Megtekintés openstreetmap.org-on",
+        "all_fields": "Összes mező",
         "all_tags": "Összes címke",
         "all_members": "Összes kapcsolattag",
         "all_relations": "Összes kapcsolat",
-        "new_relation": "Új reláció...",
+        "new_relation": "Új kapcsolat…",
         "role": "Szerep",
         "choose": "Válassz elemtípust",
         "results": "{n} találat {search} keresésre",
@@ -321,10 +326,12 @@
         "description": "Háttérbeállítások",
         "percent_brightness": "{opacity}% fényerő",
         "none": "Nincs",
+        "best_imagery": "Legjobb ismert légifeltétel ehhez a helyszínhez",
         "custom": "Egyéni",
         "custom_button": "Egyedi háttér szerkesztése",
         "custom_prompt": "Adj meg egy csempe URL sablont. Érvényes tokenek: {z}, {x}, {y} a Z/X/Y rendszerű URL-ekhez és {u} a kvadratikusakhoz.",
         "fix_misalignment": "Eltolódás korrigálása",
+        "imagery_source_faq": "Honnan jön ez a légifelvétel?",
         "reset": "visszavonás",
         "minimap": {
             "description": "Minitérkép",
@@ -344,13 +351,13 @@
             "description": "Pontok",
             "tooltip": "Érdekes pontok"
         },
-        "major_roads": {
-            "description": "Főutak",
+        "traffic_roads": {
+            "description": "Forgalmi utak",
             "tooltip": "Autópályák, utcák, stb."
         },
-        "minor_roads": {
-            "description": "Alsóbbrendű utak",
-            "tooltip": "Szervizutak, parkolók útjai, keskeny utak, stb."
+        "service_roads": {
+            "description": "Bekötőutak",
+            "tooltip": "Bekötőutak, parkolók útjai, keskeny utak, stb."
         },
         "paths": {
             "description": "Gyalogutak",
@@ -414,7 +421,7 @@
         "help": "Változtatások mentése az OpenStreetMapbe, és láthatóvá tétele más szerkesztők számára.",
         "no_changes": "Nincs mit elmenteni.",
         "error": "Mentés közben több hiba történt",
-        "status_code": "A szerver a(z) {code} státuszkóddal válaszolt",
+        "status_code": "A kiszolgáló a(z) {code} státuszkóddal válaszolt",
         "unknown_error_details": "Győződj meg arról, hogy csatlakozik-e az internethez.",
         "uploading": "Változtatások mentése OpenStreetMapre.",
         "unsaved_changes": "Elmentetlen változtatásaid vannak",
@@ -448,7 +455,9 @@
         "facebook": "Megosztás Facebookon",
         "twitter": "Megosztás Twitteren",
         "google": "Megosztás Google+-on",
-        "help_html": "Módosításaid néhány perc múlva megjelennek a \"Standard\" rétegen. Más rétegeken ez tovább tarthat\n(<a href='https://help.openstreetmap.org/questions/4705/why-havent-my-changes-appeared-on-the-map' target='_blank'>details</a>).\n"
+        "help_html": "A változtatásaid néhány percen belül megjelennek az alapértelmezett rétegen. Ez a többi rétegnél és bizonyos funkcióknál több ideig is tarthat.",
+        "help_link_text": "Részletek",
+        "help_link_url": "https://wiki.openstreetmap.org/wiki/Hu:FAQ#V.C3.A1ltoztat.C3.A1sokat_eszk.C3.B6z.C3.B6ltem_a_t.C3.A9rk.C3.A9pen.2C_hogyan_l.C3.A1thatom_ezeket.3F"
     },
     "confirm": {
         "okay": "Oké",
@@ -462,7 +471,7 @@
     },
     "source_switch": {
         "live": "élő",
-        "lose_changes": "Elmentetlen változtatásaid vannak, amik a térképszerver váltásával el lesznek dobva. Biztosan szervert akarsz váltani?",
+        "lose_changes": "Elmentetlen változtatásaid vannak, amik a térképkiszolgáló váltásával el lesznek dobva. Biztosan kiszolgálót akarsz váltani?",
         "dev": "dev"
     },
     "tag_reference": {
@@ -493,68 +502,106 @@
         "zoom": "Nagyítás a GPX nyomvonalra",
         "browse": ".gpx fájl tallózása"
     },
+    "mapillary_images": {
+        "tooltip": "Utcafotók a Mapillary-ből",
+        "title": "Fotó réteg (Mapillary)"
+    },
+    "mapillary_signs": {
+        "tooltip": "Közlekedési táblák a Mapillary-ből",
+        "title": "Közlekedési tábla réteg (Mapillary)"
+    },
     "mapillary": {
-        "tooltip": "Utcafotók a Mapillary-ból",
-        "title": "Fotó réteg (Mapillary)",
         "view_on_mapillary": "E kép megtekintése a Mapillary weboldalon"
     },
     "help": {
         "title": "Súgó",
         "help": "# Súgó\n\nEz egy szerkesztő az [OpenStreetMap](http://www.openstreetmap.org/)-hoz, a szabadon szerkeszthető és felhasználható világtérképhez. A környezetedről tölthetsz fel, vagy frissíthetsz adatokat, ezáltal mindenki számára jobbá téve egy ingyenes térképet.\n\nAmit ezen a térképen alkotsz, mindenki számára látható lesz, aki használja az OpenStreetMapet. A szerkesztéshez [be kell jelentkezned]\n(https://www.openstreetmap.org/login)\n\nAz [iD szerkesztő](http://ideditor.com/) egy együttműködésen alapuló projekt, a [GitHub-on elérhető forráskóddal](https://github.com/openstreetmap/iD), aminek a fordításába és fejlesztésébe te is besegíthetsz.\n",
-        "editing_saving": "# Szerkesztés és Mentés \n\nA szerkesztőt elsődlegesen online munkára tervezték és te jelenleg egy weblapon éred el. \n\n### Elemek kiválasztása \n\nEgy térképelem, mint út vagy érdekes hely kiválasztásához kattints rá a térképen. Ettől a kiválasztott elem kiemelődik és megnyílik egy panel az adataival, és egy menüvel, ami mutatja, miket tudsz az elemmel csinálni. Több elemet a 'Shift' gomb nyomva tartása közbeni kattintással, vagy húzással tudsz kiválasztani. A húzással kijelölöd a bekeretezett részen lévő összes elemet, lehetővé téve, hogy egyszerre több mindent változtass. \n\n### Szerkesztések mentése \n\nAmikor utakat, épületeket, helyeket szerkesztesz, ezek a változások helyileg lesznek tárolva, amíg nem mented őket a szerverre. Ne aggódj, ha elrontasz valamit - vissza tudod vonni a változtatásaidat a visszavonás gombra kattintva, a mégis gombra kattintva pedig a korábban visszavont változtatásaidat állíthatod vissza. \n\nKattints a 'Mentés' gombra, ha végeztél egy terület szerkesztésével - például, ha befejezted egy város részletének szerkesztését és egy másik területet szeretnél szerkeszteni. Lehetőséged lesz visszanézni, hogy mit csináltál. A szerkesztő hasznos tanácsokat biztosít és figyelmeztet ha valami nem tűnik megfelelőnek a változtatásaiddal. \n\nHa minden rendben van, beírhatsz egy rövid ismertetést a szerkesztéseiddel kapcsolatban és újból a 'Mentés' gombra kattintva közzéteheted a változtatásaidat és az információkat velük kapcsolatban az [OpenStreetMap.org](http://www.openstreetmap.org/) webhelyen, ahol az összes felhasználónak láthatóak és elérhetőek lesznek, hogy azokra építhessenek, fejleszthessék azokat. \n\nHa nem tudod befejezni a szerkesztéseidet egyszerre, elhagyhatod a szerkesztő ablakot, mert amikor visszatérsz (ugyanazzal a böngészővel és számítógéppel), a szerkesztő fel fogja ajánlani, hogy visszaállítsa-e a korábbi munkádat.\n\n### Szerkesztő használata\n\nA szerkesztést megkönnyítő gyorsbillentyűket [itt](http://wiki.openstreetmap.org/wiki/Hu:iD/Shortcuts) találhatod meg.\n",
+        "editing_saving": "# Szerkesztés és Mentés \n\nA szerkesztőt elsődlegesen online munkára tervezték és te jelenleg egy weblapon éred el. \n\n### Elemek kiválasztása \n\nEgy térképelem, mint út vagy érdekes hely kiválasztásához kattints rá a térképen. Ettől a kiválasztott elem kiemelődik és megnyílik egy panel az adataival, és egy menüvel, ami mutatja, miket tudsz az elemmel csinálni. Több elemet a 'Shift' gomb nyomva tartása közbeni kattintással, vagy húzással tudsz kiválasztani. A húzással kijelölöd a bekeretezett részen lévő összes elemet, lehetővé téve, hogy egyszerre több mindent változtass. \n\n### Szerkesztések mentése \n\nAmikor utakat, épületeket, helyeket szerkesztesz, ezek a változások helyileg lesznek tárolva, amíg nem mented őket a kiszolgálóra. Ne aggódj, ha elrontasz valamit - vissza tudod vonni a változtatásaidat a visszavonás gombra kattintva, a mégis gombra kattintva pedig a korábban visszavont változtatásaidat állíthatod vissza. \n\nKattints a 'Mentés' gombra, ha végeztél egy terület szerkesztésével - például, ha befejezted egy város részletének szerkesztését és egy másik területet szeretnél szerkeszteni. Lehetőséged lesz visszanézni, hogy mit csináltál. A szerkesztő hasznos tanácsokat biztosít és figyelmeztet ha valami nem tűnik megfelelőnek a változtatásaiddal. \n\nHa minden rendben van, beírhatsz egy rövid ismertetést a szerkesztéseiddel kapcsolatban és újból a 'Mentés' gombra kattintva közzéteheted a változtatásaidat és az információkat velük kapcsolatban az [OpenStreetMap.org](http://www.openstreetmap.org/) webhelyen, ahol az összes felhasználónak láthatóak és elérhetőek lesznek, hogy azokra építhessenek, fejleszthessék azokat. \n\nHa nem tudod befejezni a szerkesztéseidet egyszerre, elhagyhatod a szerkesztő ablakot, mert amikor visszatérsz (ugyanazzal a böngészővel és számítógéppel), a szerkesztő fel fogja ajánlani, hogy visszaállítsa-e a korábbi munkádat.\n\n### Szerkesztő használata\n\nA szerkesztést megkönnyítő gyorsbillentyűket [itt](http://wiki.openstreetmap.org/wiki/Hu:iD/Shortcuts) találhatod meg.\n",
         "roads": "# Utak\n\nA szerkesztőprogrammal tudsz utakat létrehozni, javítani és törölni. Az utak \nsokfélék lehetnek: ösvények, közutak, kerékpárutak, stb. – minden gyakran \nkeresztezett szakaszt térképezni kell.\n\n### Kiválasztás\n\nÚt kiválasztásához kattints rá. Meg fog jelenni kiemelve, mellette egy kis eszköztár \nmenüvel és egy oldalsávval, ami további információkat mutat az útról.\n\n### Módosítás\n\nGyakran láthatod, hogy az út nincs a mögötte lévő légifelvételhez, vagy GPS \nnyomvonalhoz igazítva. Ha megbizonyosodtál arról, hogy nem a légifelvétel téved, \nhelyreigazíthatod az utakat.\n\nElőször is kattints a módosítandó útra. Ettől kiemelődik az út és megjelennek a\nkezelőpontjai, amiket mozgatni tudsz a megfelelő helyre. Ha új kezelőpontot \nszeretnél hozzáadni, hogy részletesebb utat kapj, kattints duplán az útnak egy \nolyan részére, ahol még nincs pont.\n\nHa egy út egy másik útba csatlakozik, de a térképen nincsenek összekapcsolva, \nhúzd az egyik út kezelőpontját a másik útra, és össze fognak kapcsolódni. \nAz utak megfelelő összekapcsolása a térképen nagyon fontos, útvonaltervezéshez \nlétfontosságú.\n\nHasználhatod a 'Mozgatás' eszközt is, vagy megnyomhatod az 'M' gyorsbillentyűt, ha az \naz egész utat szeretnéd mozgatni. Mozgatás után kattintással rögzítheted az új helyén.\n\n### Törlés\n\nHa egy út teljesen hibás – ha azt látod, hogy egyáltalán nincs rajta a légifelvételen, \nés biztos vagy benne, hogy nem is létezik –, törölheted, amivel eltávolítod a térképről. \nLegyél óvatos elemek törlésekor, akárcsak bármilyen más szerkesztésnél, a mindenki \náltal látható eredmény és a légifelvétel gyakran elavult, lehet, hogy az utat nemrég építették.\n\nAz út törléséhez előbb válaszd ki, majd kattints a kuka ikonra, vagy nyomd meg a Delete \nbillentyűt.\n\n### Létrehozás\n\nTaláltál egy utat, ami még nincs rajta a térképen? Kattints a bal felső eszköztár 'Vonal' \nikonjára vagy nyomd meg a '2'-es billentyűt és kezdd el rajzolni a vonalat.\n\nA rajzolás megkezdéséhez kattints a térképen az út elejére. Ha az út \negy másik meglévő útból ágazik ki, arra a helyre kattints, ahol csatlakoznak.\n\nEzután kattintással hozz létre pontokat a műholdkép vagy GPS nyomvonal alapján, \nhogy a vonal az út középvonalát kövesse. Ha az utad keresztez egy másik utat, kapcsold \nössze őket a metszéspontjukra kattintva. Ha kész vagy a rajzolással, kattints duplán, \nvagy nyomj a billentyűzeten egy 'Enter'-t.\n",
         "gps": "#GPS\n\nAz összegyűjtött GPS nyomvonalak hasznos adatok az OpenStreetMap számára. Ez a szerkesztő\ntámogatja a helyi nyomvonalakat - `.gpx` fájlok a saját gépeden. Ezeket a\nGPS nyomvonalakat begyűjtheted jó pár okostelefon alkalmazással, vagy\nszemélyi GPS eszközökkel.\n\nTovábbi információkért, hogy hogy kell GPS felmérést végezni, olvasd el a\n[Térképezés okostelefonnal, GPS-szel, vagy papíron](http://learnosm.org/en/mobile-mapping/) cikket.\n\nHogy egy GPX sávot térképezéshez használj, fogd és vidd a GPX fájlt a térképszerkesztőre. Ha felismeri a program, akkor hozzáadásra kerül a térképre, mint egy fényes lila\nvonal. Kattints a „Térképadatok” menüre jobb oldalt a bekapcsoláshoz, kikapcsoláshoz vagy közelítéshez a GPX-vezérelt rétegen.\n\nA GPX sáv nem kerül közvetlen feltöltésre az OpenStreetMapbe - a legjobb módszer a használatára az,\nhogy rajzolsz a térképre, és az új elemek felviteléhez segítségként használod,\nmajd [feltöltöd az OpenStreetMapbe](http://www.openstreetmap.org/trace/create),\nhogy mások is használni tudják.\n",
         "imagery": "# Légifelvétel\n\nA légifelvétel a térképezés egyik fontos forrása. A repülőgépes ortofotók, műholdképek és szabadon összeállított források kombinációja rendelkezésre áll a szerkesztőben a bal oldali menü 'Háttérbeállítások' gombjára kattintva.\n\nAlapértelmezésként a [Bing Maps](http://www.bing.com/maps/) műholdkép réteg jelenik meg a szerkesztőben, de ahogy új helyekre görgeted a térképet, új források jelennek meg. Néhány országban, mint az Egyesül Államok, Franciaország, vagy Dánia nagyon jó minőségű légifelvételek érhetőek el egyes területeken.\n\nA légifelvételek gyakran el vannak csúszva a valósághoz képest, a légifelvétel szolgáltatók hibájából. Ha látsz egy csomó utat eltolódva a háttértől, ne húzd őket rögtön a háttérképhez. Ehelyett igazítsd úgy a háttérképet, hogy a meglévő adatok illeszkedjenek rá. Ehhez kattints a Háttérbeállítások menü 'Elcsúszás korrigálása' gombjára.\n",
         "addresses": "# Lakcímek\n\nA lakcímek a térkép egyik leghasznosabb információi.\n\nHabár a címeket gyakran az utca részeként ábrázolják, az OpenStreetMap\naz utca mentén levő házak és helyek tulajdonságaiként tárolja őket.\n\nCím információkat adhatsz épület körvonalként felrajzolt helyekhez, vagy\nönálló pontokhoz. A címadatok javasolt forrása a helyszíni felmérés, vagy\nszemélyes ismeretek. Mint minden más adatnál, a kereskedelmi források\n(mint Google Maps) másolása szigorúan tilos.\n",
         "inspector": "#A címkeszerkesztő használata\n\nA címkeszerkesztő az oldal bal oldalán a kiválasztott\nelemek szerkesztésére szolgál.\n\n### Elemtípus kiválasztása\n\nMiután hozzáadsz egy pontot, vonalat vagy területet, kiválaszthatod a típusát, hogy\negy autópálya, városi út, szupermarket vagy kávézó.\nA címkeszerkesztő megjeleníti a gyakori elemtípusokat, valamint\nkikereshetsz másokat is a keresőmezőbe gépeléssel.\n\nKattints az „i” gombra a jobb alsó sarokban, hogy\ntöbbet tudj meg az elemtípusról. Kattints rá a kiválasztásához.\n\n### Űrlapok használata és címkék szerkesztése\n\nMiután kiválasztottad az elemtípust, vagy kiválasztottad a már meglévő típust,\nakkor a címkeszerkesztő megjeleníti a részleteit, mint\na neve és a címe.\n\nA látható mezők alatt megnyomhatod a „Mező hozzáadása” legördülőt a további\nrészletek hozzáadásához, mint például egy Wikipedia link, kerekesszékes elérés és így tovább.\n\nA címkeszerkesztő alján kattints a „További címkék”-re hogy tetszőleges\nmás címkéket adj az elemhez. A [Taginfo](http://taginfo.openstreetmap.org/) egy nagyszerű forrás a népszerű címkekombinációk megismerésére.\n\nA változtatások, amiket a címkeszesztőben végzel, automatikusan végrehajtódnak a térképen.\nEzeket bármikor visszonvonhatod a „Visszavonás” gombbal.\n",
-        "buildings": "# Épületek\n\nAz OpenStreetMap a világ legnagyobb épület adatbázisa. Te is bővítheted és \nfejlesztheted ezt az adatbázist.\n\n### Kiválasztás\n\nÉpületet a körvonalára kattintva tudsz kiválasztani. Ez kiemeli az épületet és megnyitja az eszközmenüt és a további információkat mutató oldalsávot.\n\n### Módosítás\n\nAz épületek gyakran pontatlan helyen vannak, vagy pontatlan a címkézésük.\n\nEgy egész épület mozgatásához kattints a 'Mozgatás' eszközre. Mozgasd az \negeret az épület eltolásához, és kattints, ha jó helyre került.\n\nAz épület egyedi alakjának javításához kattints a korvonalának pontjaira és \nhúzd őket jó helyre.\n\n### Létrehozás\n\nAz épületek létrehozása körüli egyik fő kérdés, hogy az OpenStreetMap \naz épületeket alakzatként és pontként is tudja tárolni. Az ökölszabály, hogy \n_az épületet alakzatként kell térképezni, hacsak lehet_ és a cégeket, lakásokat, \nszolgáltatásokat és egyéb a házon belül működő dolgokat a ház körvonalán belüli \npontként kell térképezni.\n\nKezd az épület alakzatként rajzolását a 'Terület' gombra kattintva a bal felső \neszköztáron. Befejezni az 'Enter' billentyűvel, vagy a terület első pontjára kattintva \ntudod, bezárva az alakzatot.\n\n### Törlés\n\nHa egy épület teljesen hibás – például azt látod, hogy nincs rajta a műholdképen és \nbiztos vagy benne, hogy nem létezik – törölheted, ezzel eltávolítva a térképről.\n\nHa egy épület teljesen hibás – ha azt látod, hogy egyáltalán nincs rajta a légifelvételen, \nés biztos vagy benne, hogy nem is létezik –, törölheted, ezzel eltávolítva a térképről.\nLegyél óvatos elemek törlésekor, akárcsak bármilyen más szerkesztésnél, a mindenki \náltal látható eredmény és a légifelvétel gyakran elavult, lehet, hogy a ház egyszerűen új építésű.\n\n\nHáz törléséhez előbb válaszd ki, majd kattints a kuka ikonra, vagy nyomd meg a Delete \nbillentyűt.\n",
+        "buildings": "# Épületek\n\nAz OpenStreetMap a világ legnagyobb épület adatbázisa. Te is bővítheted és \nfejlesztheted ezt az adatbázist.\n\n### Kiválasztás\n\nÉpületet a körvonalára kattintva tudsz kiválasztani. Ez kiemeli az épületet és megnyitja az eszközmenüt és a további információkat mutató oldalsávot.\n\n### Módosítás\n\nAz épületek gyakran pontatlan helyen vannak, vagy pontatlan a címkézésük.\n\nEgy egész épület mozgatásához kattints a 'Mozgatás' eszközre. Mozgasd az \negeret az épület eltolásához, és kattints, ha jó helyre került.\n\nAz épület egyedi alakjának javításához kattints a korvonalának pontjaira és \nhúzd őket jó helyre.\n\n### Létrehozás\n\nAz épületek létrehozása körüli egyik fő kérdés, hogy az OpenStreetMap \naz épületeket alakzatként és pontként is tudja tárolni. Az ökölszabály, hogy \n_az épületet alakzatként kell térképezni, hacsak lehet_ és a cégeket, lakásokat, \nszolgáltatásokat és egyéb a házon belül működő dolgokat a ház körvonalán belüli \npontként kell térképezni.\n\nKezd az épület alakzatként rajzolását a 'Terület' gombra kattintva a bal felső \neszköztáron. Befejezni az 'Enter' billentyűvel, vagy a terület első pontjára kattintva \ntudod, bezárva az alakzatot.\n\n### Törlés\n\nHa egy épület teljesen hibás – például azt látod, hogy nincs rajta a műholdképen és \nbiztos vagy benne, hogy nem létezik – törölheted, ezzel eltávolítva a térképről.\n\nLegyél óvatos elemek törlésekor, akárcsak bármilyen más szerkesztésnél, a mindenki \náltal látható eredmény és a légifelvétel gyakran elavult, lehet, hogy a ház egyszerűen új építésű.\n\n\nHáz törléséhez előbb válaszd ki, majd kattints a kuka ikonra, vagy nyomd meg a Delete \nbillentyűt.\n",
         "relations": "# Kapcsolatok\n\nA kapcsolat az OpenStreetMap egyik speciális típusú eleme, amely más\nelemeket csoportosít egymáshoz. Például a kapcsolatok két gyakori típusa\naz *útkapcsolatok*, amely egy adott autópályához vagy autóúthoz tartozó\nút szakaszait csoportosítja, és a *multipoligonok*, amelyek egy komplex\nterületet (több darabból állót vagy lyukat tartalmazót - akárcsak egy\nfánk) meghatározó vonalakat csoportosítanak egymáshoz.\n\nAz elemek csoportját a kapcsolatban *tagoknak* hívják. Az oldalsávon\nláthatja, hogy mely kapcsolatok az elem tagjai, és egy kapcsolatra\nkattintva kijelölheti azt. Ha egy kapcsolat ki van jelölve, akkor láthatóvá\nválik annak összes tagja az oldalsávon felsorolva és a térképen kiemelve.\n\nA legtöbb rész esetében az iD automatikusan gondoskodik a kapcsolatok\nkarbantartásáról, miközben ön szerkeszt. A legfontosabb dolog, amit tudnia\nkell, hogy ha törli egy út szakaszát, hogy pontosabban újrarajzolja, akkor\nmeg kell győződnie arról, hogy az új szakasz ugyanannak a kapcsolatnak a\ntagja, mint az eredeti.\n\n## Kapcsolatok szerkesztése\n\nHa kapcsolatokat szeretne szerkeszteni, itt találja az alapokat.\n\nEgy kapcsolathoz való elem hozzáadásához jelölje ki az elemet, kattintson\na „+” gombra az oldalsáv „Összes kapcsolat” szakaszában, és válassza ki\nvagy gépelje be a kapcsolat nevét.\n\nEgy új kapcsolat létrehozásához válassza ki az első elemet, amely a tagja\nlesz annak, kattintson a „+” gombra az „Összes kapcsolat” szakaszban, és\nválassza az „Új kapcsolat…” menüpontot.\n\nEgy elem kapcsolatból való eltávolításához jelölje ki az elemet, és\nkattintson a kuka gombra azon kapcsolat mellett, amelyből el szeretné\ntávolítani.\n\nLétrehozhat lyukakkal rendelkező multipoligonokat az „Egyesítés” eszköz\nhasználatával. Rajzoljon két területet (belső és külső), tartsa nyomva a\nShift billentyűt, és kattintson egyesével rájuk mindkettő kijelöléséhez,\nmajd kattintson az „Egyesítés” (+) gombra.\n"
     },
     "intro": {
+        "graph": {
+            "city_hall": "Three Rivers városháza",
+            "fire_department": "Three Rivers tűzoltóság",
+            "memory_isle_park": "Memory Isle Park",
+            "riverwalk_trail": "Riverwalk Trail",
+            "w_michigan_ave": "West Michigan Avenue",
+            "e_michigan_ave": "East Michigan Avenue",
+            "spring_st": "Spring Street",
+            "scidmore_park": "Scidmore Park",
+            "petting_zoo": "Scidmore Park állatsimogató",
+            "n_andrews_st": "North Andrews Street",
+            "s_andrews_st": "South Andrews Street",
+            "n_constantine_st": "North Constantine Street",
+            "s_constantine_st": "South Constantine Street",
+            "rocky_river": "Rocky River",
+            "railroad_dr": "Railroad Drive",
+            "conrail_rr": "Conrail Railroad",
+            "st_joseph_river": "Saint Joseph River",
+            "n_main_st": "North Main Street",
+            "s_main_st": "South Main Street",
+            "water_st": "Water Street",
+            "foster_st": "Foster Street",
+            "portage_river": "Portage River",
+            "flower_st": "Flower Street",
+            "elm_st": "Elm Street",
+            "walnut_st": "Walnut Street",
+            "morris_ave": "Morris Avenue",
+            "east_st": "East Street",
+            "portage_ave": "Portage Avenue"
+        },
         "navigation": {
             "title": "Navigálás",
             "drag": "A térkép fő területe az OpenStreetMap adatokat ábrázolja a háttér fölött. Navigálni húzással és görgetéssel tudsz, mint bármely másik webes térképen. **Húzd arrébb a térképet!**",
             "select": "A térképelemeknek három típusa van: pont, vonal, terület. A térképelemeket rájuk kattintva lehet kiválasztani. **Kattints a pontra, hogy kiválaszd.**",
-            "header": "A fejléc mutatja az elem típusát.",
-            "pane": "Egy elem kiválasztásakor megjelenik a címkeszerkesztő. A fejléc mutatja az elem típusát, a fő ablaktábla pedig az elem attribútumait, mint a név, vagy cím. **Zárd be a címkeszerkesztőt a jobb felső sarkában lévő X gombbal.**"
+            "pane": "Amikor az elem kiválasztásra kerül, akkor a címkeszerkesztő megnyitásra kerül. A fejléc megjeleníti az elem típusát, a főpanel pedig az elem tulajdonságait, mint a nevét és a címét. **Zárja be a címkeszerkesztőt a {button} megnyomásával a jobb felső sarokban.**",
+            "search": "Kereshet elemekre is a jelenlegi nézetben, vagy világszerte. **Keresés erre: „{name}”**",
+            "choose": "**Válassza ezt a listából a kiválasztáshoz: {name}.**",
+            "chosen": "Nagyszerű! A(z) {name} most már kiválasztott! **Zárja be a címkeszerkesztőt a {button} megnyomásával.**"
         },
         "points": {
             "title": "Pontok",
-            "add": "A pontok általában olyan helyeket ábrázolnak, mint boltok, éttermek, emlékművek. Jelzik az objektum konkrét helyét és leírják, mi van ott. **Kattints a Pont gombra és hozz létre egy új pontot.**",
-            "place": "A pont a térképre kattintva helyezhető el. **Tedd a pontot az épület tetejére.**",
+            "add": "A pontok olyan elemek ábrázolására használhatóak, mint például boltok, éttermek és műemlékek. Ezek egy konkrét helyet jelölnek, és leírják mi van ott. **Kattintson a(z) {button} pont gombra egy új pont hozzáadásához.**",
+            "place": "A pont a térképre kattintással helyezhető el. **Kattintson a térképre hogy az új pontot az épület tetejére helyezze.**",
             "search": "Több elem is van, amit pontként lehet ábrázolni. Az általad létrehozott pont egy kávézó. **Keress rá a „{name}” pontra.**",
             "choose": "**Válaszd a Kávézót a listából.**",
             "describe": "A pont kávézónak lett jelölve. A címkeszerkesztőt használva megadhatsz az elemről további adatokat is. **Adj neki nevet**",
-            "close": "A címkeszerkesztő az X gombbal zárható be. **Zárd be a címkeszerkesztőt**",
-            "reselect": "A pontok gyakran már léteznek, de hibásak, vagy hiányosak. A meglévő pontokat is tudod szerkeszteni. **Válaszd ki az előbb létrehozott pontot.**",
-            "fixname": "**Változtasd meg a nevét, majd zárd be a címkeszerkesztőt.**",
-            "reselect_delete": "A térképen minden elem törölhető. **Kattints az általad létrehozott pontra.**",
-            "delete": "A pont körüli menü tartalmazza azokat a műveleteket, amiket végezhetsz vele, beleértve a törlést. **Töröld a pontot.**"
+            "close": "A címkeszerkesztő automatikusan megjegyzi a változtatásait. Amikor megváltoztat egy elemet, a bezárás gomb egy jelölőgombra változik. **Kattintson a(z) {gomb}  gombra a címkeszerkesztő bezárásához.**",
+            "reselect": "Gyakran a pontok már léteznek, de hibákat tartalmaznak vagy hiányosak. A létező pontok is szerkeszhetőek. **Kattints a most létrehozott pont kiválasztásához.**",
+            "fixname": "**Változtasd meg a nevet, és kattints a {button} gombra a címkeszerkesztő bezárásához.**",
+            "reselect_delete": "Minden elem törölhető a térképről. **Kattints a létrehozott pont kijelöléséhez.**",
+            "delete": "A pont melletti menü a rajta végezhető műveleteket tartalmazza, beleértve a törlést is. **Kattints a {buttton} gombra a pont törléséhez.**"
         },
         "areas": {
             "title": "Területek",
-            "add": "A területek az elemek határainak megjelenítésére használhatók, úgymint tavak, épületek és lakott területek. Azon elemek részletesebb térképezéshez is használhatók, amelyeket normál esetben pontokként jelölne. **Kattintson a Terület gombra egy új terület hozzáadásához.**",
+            "add": "A területek az elemek határainak megjelenítésére használhatók, úgymint tavak, épületek és lakott területek. Azon elemek részletesebb térképezéshez is használhatók, amelyeket normál esetben pontokként jelölnél. **Kattints a {button} Terület gombra egy új terület hozzáadásához.**",
             "corner": "Területet létrehozni az objektum körvonalát jelölő pontsorozat rajzolásával lehet. **Helyezd el a kezdőpontot a játszótér valamelyik sarkában.**",
             "place": "Rajzol jegy területet több pont elhelyezésével. Befejezni a kezdőpontra kattintva tudod. **Rajzold meg a játszótér területét.**",
             "search": "**Keress rá erre: „{name}”.**",
             "choose": "**Válaszd a Játszóteret a listából.**",
-            "describe": "**Adj neki nevet, majd zárd be a címkeszerkesztőt**"
+            "describe": "**Add meg egy nevet, és kattints a {button} gombra a címkeszerkesztő bezárásához.**"
         },
         "lines": {
             "title": "Vonalak",
-            "add": "Vonalakkal jelöljük az utakat, vasutakat és folyókat. **Kattints a vonal gombra új vonal rajzolásához.**",
+            "add": "A vonalak olyan elemek ábrázolására használhatóak, mint például utak, vasútvonalak és folyók. **Kattints a {button} Vonal gombra új vonal rajzolásához.**",
             "start": "**Indítsd a vonalat az út végére kattintva.**",
-            "intersect": "Kattints, hogy több pontot adj a vonalhoz. Ha szükséges, rajzolás közben is arrébb húzhatod a térképet. Az utak és sok más vonaltípus egy nagyobb hálózat tagja. Fontos, hogy ezek a vonalak megfelelően csatlakozzanak, hogy az útvonaltervezők használni tudják. **Kattints a Flower Streetre, hogy létrehozd a két vonalat összekapcsoló kereszteződést.**",
+            "intersect": "Kattints további csomópontok hozzáadásához a vonalhoz. Elhúzhatod a térképet rajzolás közben ha szükséges. Az utak, és sok egyéb fajta vonal, egy nagyobb hálózat részei. Fontos hogy ezek a vonalak megfelelően legyenek összekötve hogy működjenek az útkereső alkalmazások. **A két vonalt összekötő elágazás létrehozásához kattints erre: {name}.**",
             "finish": "A vonalat az utolsó pontjára való ismételt kattintással lehet befejezni. **Fejezd be az út rajzolását.**",
             "road": "**Válaszd az Utat a listából.**",
             "residential": "Különféle úttípusok léteznek, közülük a leggyakoribb a Lakóút. **Válaszd ki a Lakóút típust.**",
-            "describe": "**Nevezd el az utat, majd zárd be a címkeszerkesztőt.**",
-            "restart": "Az útnak kereszteznie kell a Flower Streetet.",
+            "describe": "**Nevezd el az utat és kattints a {button} gombra a címkeszerkesztő bezárásához.**",
+            "restart": "Az útnak metszeni kell ezt: {name}.",
             "wrong_preset": "Nem választottál ki lakóút típust. **Idekattintva tudod kiválasztani**"
         },
         "startediting": {
             "title": "Szerkesztés megkezdése",
-            "help": "További dokumentáció és ez a gyakorlósor elérhető itt.",
+            "help": "Megismételheted a gyakorlást bagy megtekintheted a dokumentációt a {button} Súgó gombra kattintva.",
             "save": "Ne felejtsd rendszeresen menteni a változtatásaidat!",
             "start": "Kezdhetsz térképezni!"
         }
@@ -562,34 +609,34 @@
     "presets": {
         "categories": {
             "category-building": {
-                "name": "Épület"
+                "name": "Épület elemek"
             },
             "category-golf": {
-                "name": "Golf"
+                "name": "Golf elemek"
             },
             "category-landuse": {
-                "name": "Területfunkció"
+                "name": "Területi elemek"
             },
             "category-path": {
-                "name": "Ösvény"
+                "name": "Útvonal elemek"
             },
             "category-rail": {
-                "name": "Vasút"
+                "name": "Vasúti elemek"
             },
             "category-restriction": {
-                "name": "Korlátozás"
+                "name": "Korlátozás elemek"
             },
             "category-road": {
-                "name": "Út"
+                "name": "Út elemek"
             },
             "category-route": {
-                "name": "Útvonal"
+                "name": "Útvonal elemek"
             },
             "category-water-area": {
-                "name": "Víz"
+                "name": "Vízi elemek"
             },
             "category-water-line": {
-                "name": "Víz"
+                "name": "Vízi elemek"
             }
         },
         "fields": {
@@ -850,6 +897,12 @@
             },
             "description": {
                 "label": "Leírás"
+            },
+            "diaper": {
+                "label": "Pelenkázó elérhető"
+            },
+            "dock": {
+                "label": "Típus"
             },
             "drive_through": {
                 "label": "Áthajtás"
@@ -1325,6 +1378,9 @@
             "shop": {
                 "label": "Típus"
             },
+            "site": {
+                "label": "Típus"
+            },
             "sloped_curb": {
                 "label": "Kerekített szélű járda"
             },
@@ -1599,8 +1655,8 @@
                 "terms": "bicaj - bringa - bicikli - kétkerekű kölcsönző "
             },
             "amenity/bicycle_repair_station": {
-                "name": "Kerékpárszerelő pont",
-                "terms": "Biciklijavító állomás"
+                "name": "Kerékpárjavító szerszámállvány",
+                "terms": "bicaj,bringa,bicikli,kétkerekű"
             },
             "amenity/biergarten": {
                 "name": "Sörkert",
@@ -1678,9 +1734,9 @@
                 "name": "Fogorvos",
                 "terms": "Fogorvos, Fogász, Fogászat"
             },
-            "amenity/doctor": {
+            "amenity/doctors": {
                 "name": "Orvos",
-                "terms": "Orvos, Doktor"
+                "terms": "orvos,doktor"
             },
             "amenity/dojo": {
                 "name": "Harcművészeti edzőterem - dojo",
@@ -1697,6 +1753,10 @@
             "amenity/fast_food": {
                 "name": "Gyorsétterem",
                 "terms": "Pizzás, Gyroszos, Gyorskajálda, Lángosos "
+            },
+            "amenity/ferry_terminal": {
+                "name": "Kompterminál",
+                "terms": "komp,terminál,átkelő"
             },
             "amenity/fire_station": {
                 "name": "Tűzoltóság",
@@ -1721,6 +1781,10 @@
             "amenity/hospital": {
                 "name": "Kórház",
                 "terms": "Kórház"
+            },
+            "amenity/hunting_stand": {
+                "name": "Vadászles",
+                "terms": "vadászles,vadász,bódé"
             },
             "amenity/kindergarten": {
                 "name": "bölcsőde - óvoda",
@@ -1749,6 +1813,10 @@
             "amenity/parking_entrance": {
                 "name": "Parkológarázs be-kijárat",
                 "terms": "parkológarázs bejárat/kijárat"
+            },
+            "amenity/parking_space": {
+                "name": "Parkolóhely",
+                "terms": "parkoló"
             },
             "amenity/pharmacy": {
                 "name": "Gyógyszertár",
@@ -1811,7 +1879,8 @@
                 "terms": "kajálda, étkezde, vendéglő, csárda, fogadó, ebédlő, kisvendéglő"
             },
             "amenity/sanitary_dump_station": {
-                "name": "Lakóautó WC ártalmatlanítás"
+                "name": "Lakóautó WC ártalmatlanítás",
+                "terms": "lakóautó,lakókocsi,vécé,toalett,tisztasági"
             },
             "amenity/school": {
                 "name": "Iskola",
@@ -1882,7 +1951,8 @@
                 "terms": "italautomata, italgép"
             },
             "amenity/vending_machine/excrement_bags": {
-                "name": "Kutyapiszok zacskó árusító automata"
+                "name": "Kutyapiszok zacskó árusító automata",
+                "terms": "kutyapiszok,zacskó,automata"
             },
             "amenity/vending_machine/news_papers": {
                 "name": "Újságárusító automata",
@@ -1897,10 +1967,16 @@
                 "terms": "parkolóautomata"
             },
             "amenity/vending_machine/public_transport_tickets": {
-                "name": "Tranzitjegy automata"
+                "name": "Tranzitjegy automata",
+                "terms": "busz,vonat,komp,vasút,jegy,utazás"
+            },
+            "amenity/vending_machine/sweets": {
+                "name": "Ételárusító automata",
+                "terms": "ételautomata, ételgép"
             },
             "amenity/vending_machine/vending_machine": {
-                "name": "Árusító automata"
+                "name": "Árusító automata",
+                "terms": "automata,árusító automata"
             },
             "amenity/veterinary": {
                 "name": "Állatorvos",
@@ -1909,6 +1985,14 @@
             "amenity/waste_basket": {
                 "name": "Szemetes",
                 "terms": "szemeteskosár"
+            },
+            "amenity/waste_disposal": {
+                "name": "Szemetes konténer",
+                "terms": "szemetes, kuka, szemetes kuka"
+            },
+            "amenity/water_point": {
+                "name": "Lakóautó ivóvíz",
+                "terms": "lakóautó,lakókocsi,víz,ivóvíz"
             },
             "area": {
                 "name": "Terület",
@@ -2483,8 +2567,8 @@
                 "terms": "Másodrendű főút csatlakozás"
             },
             "highway/service": {
-                "name": "Szervizút",
-                "terms": "Szervizút"
+                "name": "Bekötőút",
+                "terms": "szervizút,bekötő,út"
             },
             "highway/service/alley": {
                 "name": "Sikátor",
@@ -2508,7 +2592,7 @@
             },
             "highway/services": {
                 "name": "Autós pihenőhely",
-                "terms": "Autós pihenőhely"
+                "terms": "autó,pihenő,pihenőhely"
             },
             "highway/steps": {
                 "name": "Lépcső",
@@ -2531,8 +2615,8 @@
                 "terms": "Harmadrendű főút csatlakozás"
             },
             "highway/track": {
-                "name": "Földút",
-                "terms": "Földút"
+                "name": "Nem karbantartott földút",
+                "terms": "földút,nem karbantartott"
             },
             "highway/traffic_signals": {
                 "name": "Jelzőlámpa",
@@ -2551,8 +2635,8 @@
                 "terms": "Forduló"
             },
             "highway/unclassified": {
-                "name": "Egyéb közút",
-                "terms": "Ismeretlen típusú út"
+                "name": "Alsóbbrendű út",
+                "terms": "alsóbbrendű út"
             },
             "historic": {
                 "name": "Történelmi hely",
@@ -2595,7 +2679,8 @@
                 "terms": "Elágazás, útkereszteződés, csomópont"
             },
             "landuse": {
-                "name": "Földhasználat"
+                "name": "Területfunkció",
+                "terms": "föld,terület,használat,funkció"
             },
             "landuse/allotments": {
                 "name": "Közösségi kert",
@@ -2683,14 +2768,19 @@
             },
             "landuse/vineyard": {
                 "name": "Szőlős",
-                "terms": "Szőlős terület"
+                "terms": "szőlős,lugas,szőlőlugas"
             },
             "leisure": {
                 "name": "Szabadidő",
-                "terms": "Szabadidő"
+                "terms": "szabadidő"
             },
             "leisure/adult_gaming_centre": {
-                "name": "Felnőtt játékközpont"
+                "name": "Felnőtt játékközpont",
+                "terms": "játékterem"
+            },
+            "leisure/bird_hide": {
+                "name": "Madárles",
+                "terms": "madárles"
             },
             "leisure/bowling_alley": {
                 "name": "Tekepálya",
@@ -2706,7 +2796,7 @@
             },
             "leisure/firepit": {
                 "name": "Tűzrakóhely",
-                "terms": "Tűzrakó hely"
+                "terms": "tűz,tűzrakó,hely"
             },
             "leisure/garden": {
                 "name": "Kert",
@@ -2726,7 +2816,7 @@
             },
             "leisure/nature_reserve": {
                 "name": "Természetvédelmi terület",
-                "terms": "Természetvédelmi terület"
+                "terms": "természetvédelem,terület,nemzeti,park"
             },
             "leisure/park": {
                 "name": "Park",
@@ -2753,10 +2843,12 @@
                 "terms": "Kosárlabdapálya"
             },
             "leisure/pitch/rugby_league": {
-                "name": "Rögbi Liga Pálya"
+                "name": "Rögbi liga pálya",
+                "terms": "rögbi,pálya"
             },
             "leisure/pitch/rugby_union": {
-                "name": "Rögbi Egyesült Pálya"
+                "name": "Rögbi pálya",
+                "terms": "rögbi,pálya"
             },
             "leisure/pitch/skateboard": {
                 "name": "Gördeszkapark",
@@ -2772,23 +2864,27 @@
             },
             "leisure/pitch/volleyball": {
                 "name": "Röplabdapálya",
-                "terms": "Röplabda pálya"
+                "terms": "röplabda,röpi,pálya"
             },
             "leisure/playground": {
                 "name": "Játszótér",
                 "terms": "Játszótér"
             },
             "leisure/running_track": {
-                "name": "Fútópálya",
+                "name": "Futópálya",
                 "terms": "Futópálya"
             },
             "leisure/slipway": {
                 "name": "Sólya",
                 "terms": "Sólya"
             },
-            "leisure/sports_center": {
-                "name": "Sportcenter / konditerem",
-                "terms": "Sportcenter / konditerem"
+            "leisure/sports_centre": {
+                "name": "Sportközpont / konditerem",
+                "terms": "sportcentrum, edzőterem"
+            },
+            "leisure/sports_centre/swimming": {
+                "name": "Uszoda",
+                "terms": "Úszómedence, uszoda"
             },
             "leisure/stadium": {
                 "name": "Stadion",
@@ -2802,6 +2898,10 @@
                 "name": "Versenypálya (nem motoros sportoknak)",
                 "terms": "Kerékpárpálya, Futópálya"
             },
+            "leisure/water_park": {
+                "name": "Vízipark",
+                "terms": "aquapark,vízi szórakoztatópark"
+            },
             "line": {
                 "name": "Vonal",
                 "terms": "Vonal"
@@ -2811,11 +2911,16 @@
                 "terms": "Ember alkotta"
             },
             "man_made/adit": {
-                "name": "Tárna"
+                "name": "Tárna",
+                "terms": "bejárat,földalatt,bánya,barlang"
             },
             "man_made/breakwater": {
                 "name": "Hullámtörő",
                 "terms": "Hullámtörő"
+            },
+            "man_made/chimney": {
+                "name": "Kémény",
+                "terms": "füstelvezető"
             },
             "man_made/cutline": {
                 "name": "Nyiladék",
@@ -2829,12 +2934,21 @@
                 "name": "Zászlórúd",
                 "terms": "Zászlórúd"
             },
+            "man_made/gasometer": {
+                "name": "Gáztartály",
+                "terms": "gazométer"
+            },
+            "man_made/groyne": {
+                "name": "Gát",
+                "terms": "védőgát"
+            },
             "man_made/lighthouse": {
                 "name": "Világítótorony",
                 "terms": "Világítótorony"
             },
             "man_made/mast": {
-                "name": "Rádiótorony"
+                "name": "Rádiótorony",
+                "terms": "rádiótorony,adótorony,telefon adótorony,mobiltelefon adótorony,tv torony"
             },
             "man_made/observation": {
                 "name": "Kilátótorony",
@@ -2860,6 +2974,10 @@
                 "name": "Tárolótartály",
                 "terms": "tároló, tartály"
             },
+            "man_made/surveillance": {
+                "name": "Videomegfigyelő",
+                "terms": "térfigyelő kamera, biztonsági kamera"
+            },
             "man_made/survey_point": {
                 "name": "Földmérési alappont",
                 "terms": "Megfigyelőpont"
@@ -2884,6 +3002,10 @@
                 "name": "Vízmű",
                 "terms": "Vízmű"
             },
+            "man_made/works": {
+                "name": "Gyár",
+                "terms": "művek"
+            },
             "military/airfield": {
                 "name": "Katonai repülőtér",
                 "terms": "Katonai repülőtér"
@@ -2901,11 +3023,12 @@
                 "terms": "ellenőrzőpont"
             },
             "military/danger_area": {
-                "name": "Veszélyes Terület"
+                "name": "Veszélyes terület",
+                "terms": "veszély,veszélyes,terület"
             },
             "military/naval_base": {
-                "name": "Haditengerészeti Bázis",
-                "terms": "tengerészeti bázis"
+                "name": "Haditengerészeti bázis",
+                "terms": "tengerészeti,haditengerészeti,bázis"
             },
             "military/obstacle_course": {
                 "name": "Akadálypálya",
@@ -3280,8 +3403,8 @@
                 "terms": "Régiségkereskedés"
             },
             "shop/art": {
-                "name": "Művészeti galéria",
-                "terms": "Műalkotások boltja"
+                "name": "Művészeti bolt",
+                "terms": "művészbolt"
             },
             "shop/baby_goods": {
                 "name": "Bababolt",
@@ -3625,7 +3748,11 @@
             },
             "shop/stationery": {
                 "name": "Írószerbolt",
-                "terms": "Papír - Írószer és nyomtatván bolt,  Papír - írószer és irodaszer kereskedelem, papirbolt, irodaszerbolt"
+                "terms": "Papír - Írószer és nyomtatvány bolt,  Papír - írószer és irodaszer kereskedelem, papírbolt, irodaszerbolt"
+            },
+            "shop/storage_rental": {
+                "name": "Tárolókölcsönző",
+                "terms": "tároló"
             },
             "shop/supermarket": {
                 "name": "Szupermarket",
@@ -3720,12 +3847,16 @@
                 "terms": "Kemping, camping"
             },
             "tourism/caravan_site": {
-                "name": "Lakókocsi park",
-                "terms": "Lakókocsi park"
+                "name": "Lakóautó park",
+                "terms": "lakóautó,lakókocsi,park"
             },
             "tourism/chalet": {
                 "name": "Nyaralóház",
                 "terms": "Vikkendház"
+            },
+            "tourism/gallery": {
+                "name": "Művészeti galéria",
+                "terms": "galéria, kiállítás, kiállító terem, képzőművészet"
             },
             "tourism/guest_house": {
                 "name": "Vendégház",
@@ -3879,6 +4010,10 @@
                 "name": "Route Master",
                 "terms": "Route Master"
             },
+            "type/site": {
+                "name": "Telek",
+                "terms": "telek,házhely"
+            },
             "vertex": {
                 "name": "Egyéb",
                 "terms": "Egyéb"
@@ -3886,6 +4021,10 @@
             "waterway": {
                 "name": "Vízfolyás",
                 "terms": "Vizi út"
+            },
+            "waterway/boatyard": {
+                "name": "Csónakkikötő",
+                "terms": "csónak,kikötő"
             },
             "waterway/canal": {
                 "name": "Csatorna",
@@ -3899,12 +4038,17 @@
                 "name": "Vizesárok",
                 "terms": "Vizesárok"
             },
+            "waterway/dock": {
+                "name": "Nedves dokk / szárazdokk",
+                "terms": "kikötő, dokk, nedves dokk, szárazdokk"
+            },
             "waterway/drain": {
                 "name": "Vízelvezető árok",
                 "terms": "Ér"
             },
             "waterway/fuel": {
-                "name": "Tengeri üzemanyag állomás"
+                "name": "Tengeri üzemanyag állomás",
+                "terms": "üzemanyag,dízel,gázolaj,csónak,hajó"
             },
             "waterway/river": {
                 "name": "Folyó",
@@ -3915,11 +4059,16 @@
                 "terms": "Vízpart"
             },
             "waterway/sanitary_dump_station": {
-                "name": "Tengeri WC ártalmatlanítás"
+                "name": "Tengeri WC ártalmatlanítás",
+                "terms": "csónak,hajó,vízijármű,tisztasági"
             },
             "waterway/stream": {
                 "name": "Patak",
                 "terms": "Patak"
+            },
+            "waterway/water_point": {
+                "name": "Tengeri ivóvíz",
+                "terms": "csónak,hajó,vízijármű,víz,ivóvíz"
             },
             "waterway/weir": {
                 "name": "Bukógát",

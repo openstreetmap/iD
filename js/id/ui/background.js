@@ -24,7 +24,7 @@ iD.ui.Background = function(context) {
         }
 
         function setOpacity(d) {
-            var bg = context.container().selectAll('.background-layer')
+            var bg = context.container().selectAll('.layer-background')
                 .transition()
                 .style('opacity', d)
                 .attr('data-opacity', d);
@@ -92,13 +92,23 @@ iD.ui.Background = function(context) {
 
             var enter = layerLinks.enter()
                 .insert('li', '.custom_layer')
-                .attr('class', 'layer');
+                .attr('class', 'layer')
+                .classed('best', function(d) { return d.best(); });
 
             // only set tooltips for layers with tooltips
             enter.filter(function(d) { return d.description; })
                 .call(bootstrap.tooltip()
                     .title(function(d) { return d.description; })
                     .placement('top'));
+
+            enter.filter(function(d) { return d.best(); })
+                .append('div')
+                .attr('class', 'best')
+                .call(bootstrap.tooltip()
+                    .title(t('background.best_imagery'))
+                    .placement('left'))
+                .append('span')
+                .html('&#9733;');
 
             var label = enter.append('label');
 
@@ -252,6 +262,16 @@ iD.ui.Background = function(context) {
 
         label.append('span')
             .text(t('background.custom'));
+
+        content.append('div')
+          .attr('class', 'imagery-faq')
+          .append('a')
+          .attr('target', '_blank')
+          .attr('tabindex', -1)
+          .call(iD.svg.Icon('#icon-out-link', 'inline'))
+          .attr('href', 'https://github.com/openstreetmap/iD/blob/master/FAQ.md#how-can-i-report-an-issue-with-background-imagery')
+          .append('span')
+          .text(t('background.imagery_source_faq'));
 
         var overlayList = content.append('ul')
             .attr('class', 'layer-list');

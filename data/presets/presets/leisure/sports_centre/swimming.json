@@ -1,0 +1,22 @@
+{
+    "icon": "swimming",
+    "fields": [
+        "access_simple",
+        "operator",
+        "address",
+        "building"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "dive",
+        "water"
+    ],
+    "tags": {
+      "leisure":"sports_centre",
+      "sport":"swimming"
+    },
+    "name": "Swimming Pool Facility"
+}

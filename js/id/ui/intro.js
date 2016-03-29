@@ -58,7 +58,7 @@ iD.ui.intro = function(context) {
             center = context.map().center(),
             zoom = context.map().zoom(),
             background = context.background().baseLayerSource(),
-            opacity = d3.select('.background-layer').style('opacity'),
+            opacity = d3.selectAll('#map .layer-background').style('opacity'),
             loadedTiles = context.connection().loadedTiles(),
             baseEntities = context.history().graph().base().entities,
             introGraph, name;
@@ -81,7 +81,7 @@ iD.ui.intro = function(context) {
         context.history().merge(d3.values(iD.Graph().load(introGraph).entities));
         context.background().bing();
 
-        d3.select('.background-layer').style('opacity', 1);
+        d3.selectAll('#map .layer-background').style('opacity', 1);
 
         var curtain = d3.curtain();
         selection.call(curtain);
@@ -106,7 +106,7 @@ iD.ui.intro = function(context) {
         steps[steps.length - 1].on('startEditing', function() {
             curtain.remove();
             navwrap.remove();
-            d3.select('.background-layer').style('opacity', opacity);
+            d3.selectAll('#map .layer-background').style('opacity', opacity);
             context.connection().toggle(true).flush().loadedTiles(loadedTiles);
             context.history().reset().merge(d3.values(baseEntities));
             context.background().baseLayerSource(background);

@@ -1,6 +1,6 @@
 iD.ui.preset.localized = function(field, context) {
     var dispatch = d3.dispatch('change', 'input'),
-        wikipedia = iD.wikipedia(),
+        wikipedia = iD.services.wikipedia(),
         input, localizedInputs, wikiTitles,
         entity;
 
@@ -38,7 +38,7 @@ iD.ui.preset.localized = function(field, context) {
                 .placement('left'));
 
         translateButton
-            .on('click', addBlank);
+            .on('click', addNew);
 
         localizedInputs = selection.selectAll('.localized-wrap')
             .data([0]);
@@ -47,10 +47,16 @@ iD.ui.preset.localized = function(field, context) {
             .attr('class', 'localized-wrap');
     }
 
-    function addBlank() {
+    function addNew() {
         d3.event.preventDefault();
         var data = localizedInputs.selectAll('div.entry').data();
-        data.push({ lang: '', value: '' });
+        var defaultLang = iD.detect().locale.toLowerCase().split('-')[0];
+        var langExists = _.find(data, function(datum) { return datum.lang === defaultLang;});
+        var isLangEn = defaultLang.indexOf('en') > -1;
+        if (isLangEn || langExists) {
+          defaultLang = '';
+        }
+        data.push({ lang: defaultLang, value: '' });
         localizedInputs.call(render, data);
     }
 

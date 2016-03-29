@@ -1,5 +1,5 @@
 iD.Features = function(context) {
-    var major_roads = {
+    var traffic_roads = {
         'motorway': true,
         'motorway_link': true,
         'trunk': true,
@@ -10,14 +10,14 @@ iD.Features = function(context) {
         'secondary_link': true,
         'tertiary': true,
         'tertiary_link': true,
-        'residential': true
+        'residential': true,
+        'unclassified': true,
+        'living_street': true
     };
 
-    var minor_roads = {
+    var service_roads = {
         'service': true,
-        'living_street': true,
         'road': true,
-        'unclassified': true,
         'track': true
     };
 
@@ -76,12 +76,12 @@ iD.Features = function(context) {
         return geometry === 'point';
     }, 200);
 
-    defineFeature('major_roads', function isMajorRoad(entity) {
-        return major_roads[entity.tags.highway];
+    defineFeature('traffic_roads', function isTrafficRoad(entity) {
+        return traffic_roads[entity.tags.highway];
     });
 
-    defineFeature('minor_roads', function isMinorRoad(entity) {
-        return minor_roads[entity.tags.highway];
+    defineFeature('service_roads', function isServiceRoad(entity) {
+        return service_roads[entity.tags.highway];
     });
 
     defineFeature('paths', function isPath(entity) {
@@ -128,8 +128,8 @@ iD.Features = function(context) {
             !!entity.tags.railway ||
             entity.tags.landuse === 'railway'
         ) && !(
-            major_roads[entity.tags.highway] ||
-            minor_roads[entity.tags.highway] ||
+            traffic_roads[entity.tags.highway] ||
+            service_roads[entity.tags.highway] ||
             paths[entity.tags.highway]
         );
     });
@@ -141,8 +141,8 @@ iD.Features = function(context) {
     // contains a past/future tag, but not in active use as a road/path/cycleway/etc..
     defineFeature('past_future', function isPastFuture(entity) {
         if (
-            major_roads[entity.tags.highway] ||
-            minor_roads[entity.tags.highway] ||
+            traffic_roads[entity.tags.highway] ||
+            service_roads[entity.tags.highway] ||
             paths[entity.tags.highway]
         ) { return false; }
 
@@ -279,66 +279,67 @@ iD.Features = function(context) {
     };
 
     features.getMatches = function(entity, resolver, geometry) {
-        var ent = iD.Entity.key(entity);
+        if (geometry === 'vertex' || geometry === 'relation') return {};
 
+        var ent = iD.Entity.key(entity);
         if (!_cache[ent]) {
             _cache[ent] = {};
         }
+
         if (!_cache[ent].matches) {
             var matches = {},
                 hasMatch = false;
 
-            if (!(geometry === 'vertex' || geometry === 'relation')) {
-                for (var i = 0; i < _keys.length; i++) {
+            for (var i = 0; i < _keys.length; i++) {
+                if (_keys[i] === 'others') {
+                    if (hasMatch) continue;
 
-                    if (_keys[i] === 'others') {
-                        if (hasMatch) continue;
-
-                        // If the entity is a way that has not matched any other
-                        // feature type, see if it has a parent relation, and if so,
-                        // match whatever feature types the parent has matched.
-                        // (The way is a member of a multipolygon.)
-                        //
-                        // IMPORTANT:
-                        // For this to work, getMatches must be called on relations before ways.
-                        //
-                        if (entity.type === 'way') {
-                            var parents = features.getParents(entity, resolver, geometry);
-                            if (parents.length === 1) {
-                                var pkey = iD.Entity.key(parents[0]);
-                                if (_cache[pkey] && _cache[pkey].matches) {
-                                    matches = _.clone(_cache[pkey].matches);
-                                    continue;
-                                }
+                    // Multipolygon members:
+                    // If an entity...
+                    //   1. is a way that hasn't matched other "interesting" feature rules,
+                    //   2. and it belongs to a single parent multipolygon relation
+                    // ...then match whatever feature rules the parent multipolygon has matched.
+                    // see #2548, #2887
+                    //
+                    // IMPORTANT:
+                    // For this to work, getMatches must be called on relations before ways.
+                    //
+                    if (entity.type === 'way') {
+                        var parents = features.getParents(entity, resolver, geometry);
+                        if (parents.length === 1 && parents[0].isMultipolygon()) {
+                            var pkey = iD.Entity.key(parents[0]);
+                            if (_cache[pkey] && _cache[pkey].matches) {
+                                matches = _.clone(_cache[pkey].matches);
+                                continue;
                             }
                         }
                     }
+                }
 
-                    if (_features[_keys[i]].filter(entity, resolver, geometry)) {
-                        matches[_keys[i]] = hasMatch = true;
-                    }
+                if (_features[_keys[i]].filter(entity, resolver, geometry)) {
+                    matches[_keys[i]] = hasMatch = true;
                 }
             }
             _cache[ent].matches = matches;
         }
+
         return _cache[ent].matches;
     };
 
     features.getParents = function(entity, resolver, geometry) {
-        var ent = iD.Entity.key(entity);
+        if (geometry === 'point') return [];
 
+        var ent = iD.Entity.key(entity);
         if (!_cache[ent]) {
             _cache[ent] = {};
         }
+
         if (!_cache[ent].parents) {
             var parents = [];
-
-            if (geometry !== 'point') {
-                if (geometry === 'vertex') {
-                    parents = resolver.parentWays(entity);
-                } else {   // 'line', 'area', 'relation'
-                    parents = resolver.parentRelations(entity);
-                }
+            if (geometry === 'vertex') {
+                parents = resolver.parentWays(entity);
+            } else {   // 'line', 'area', 'relation'
+                parents = resolver.parentRelations(entity);
             }
             _cache[ent].parents = parents;
         }
@@ -346,22 +347,23 @@ iD.Features = function(context) {
     };
 
     features.isHiddenFeature = function(entity, resolver, geometry) {
+        if (!_hidden.length) return false;
         if (!entity.version) return false;
 
         var matches = features.getMatches(entity, resolver, geometry);
 
         for (var i = 0; i < _hidden.length; i++) {
-            if (matches[_hidden[i]]) { return true; }
+            if (matches[_hidden[i]]) return true;
         }
         return false;
     };
 
     features.isHiddenChild = function(entity, resolver, geometry) {
-        if (!entity.version || geometry === 'point') { return false; }
+        if (!_hidden.length) return false;
+        if (!entity.version || geometry === 'point') return false;
 
         var parents = features.getParents(entity, resolver, geometry);
-
-        if (!parents.length) { return false; }
+        if (!parents.length) return false;
 
         for (var i = 0; i < parents.length; i++) {
             if (!features.isHidden(parents[i], resolver, parents[i].geometry(resolver))) {
@@ -372,6 +374,7 @@ iD.Features = function(context) {
     };
 
     features.hasHiddenConnections = function(entity, resolver) {
+        if (!_hidden.length) return false;
         var childNodes, connections;
 
         if (entity.type === 'midpoint') {
@@ -393,20 +396,15 @@ iD.Features = function(context) {
     };
 
     features.isHidden = function(entity, resolver, geometry) {
+        if (!_hidden.length) return false;
         if (!entity.version) return false;
 
-        if (geometry === 'vertex')
-            return features.isHiddenChild(entity, resolver, geometry);
-        if (geometry === 'point')
-            return features.isHiddenFeature(entity, resolver, geometry);
-
-        return features.isHiddenFeature(entity, resolver, geometry) ||
-               features.isHiddenChild(entity, resolver, geometry);
+        var fn = (geometry === 'vertex' ? features.isHiddenChild : features.isHiddenFeature);
+        return fn(entity, resolver, geometry);
     };
 
     features.filter = function(d, resolver) {
-        if (!_hidden.length)
-            return d;
+        if (!_hidden.length) return d;
 
         var result = [];
         for (var i = 0; i < d.length; i++) {

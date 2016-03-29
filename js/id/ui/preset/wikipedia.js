@@ -1,6 +1,6 @@
 iD.ui.preset.wikipedia = function(field, context) {
     var dispatch = d3.dispatch('change'),
-        wikipedia = iD.wikipedia(),
+        wikipedia = iD.services.wikipedia(),
         link, entity, lang, title;
 
     function i(selection) {
@@ -128,13 +128,13 @@ iD.ui.preset.wikipedia = function(field, context) {
                     anchor = anchor.replace(/ /g, '_');
                 }
             }
-            link.attr('href', 'http://' + m[1] + '.wikipedia.org/wiki/' +
+            link.attr('href', 'https://' + m[1] + '.wikipedia.org/wiki/' +
                       m[2].replace(/ /g, '_') + (anchor ? ('#' + anchor) : ''));
 
         // unrecognized value format
         } else {
             title.value(value);
-            link.attr('href', 'http://en.wikipedia.org/wiki/Special:Search?search=' + value);
+            link.attr('href', 'https://en.wikipedia.org/wiki/Special:Search?search=' + value);
         }
     };
 

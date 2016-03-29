@@ -1,6 +1,6 @@
 {
     "geometry": "line",
-    "name": "Rail",
+    "name": "Rail Features",
     "icon": "category-rail",
     "members": [
         "railway/rail",

@@ -295,6 +295,8 @@ ul li { list-style: none;}
 
 .fl { float: left;}
 .fr { float: right;}
+.al { left: 0; }
+.ar { right: 0; }
 
 div.hide,
 form.hide,
@@ -655,7 +657,6 @@ button.save.has-count .count::before {
 
 .mapillary-image {
     position: absolute;
-    right: 0;
     bottom: 30px;
     width: 330px;
     height: 250px;
@@ -669,7 +670,6 @@ button.save.has-count .count::before {
     height: auto;
     background-color: rgba(0,0,0,.5);
     bottom: 0;
-    right: 0;
     padding: 5px 10px;
 }
 
@@ -848,6 +848,18 @@ button.save.has-count .count::before {
     height: 60px;
 }
 
+.preset-icon-44 {
+    position: absolute;
+    top: 9px;
+    left: 8px;
+    margin: auto;
+}
+
+.preset-icon-44 .icon {
+    width: 44px;
+    height: 44px;
+}
+
 .preset-icon-32 {
     position: absolute;
     top: 14px;
@@ -946,6 +958,11 @@ button.save.has-count .count::before {
 
 .inspector-preset {
     overflow: hidden;
+    padding-bottom: 10px;
+}
+
+.inspector-preset a.hide-toggle {
+    margin: 0 20px 10px 20px;
 }
 
 .inspector-preset .preset-form {
@@ -954,24 +971,9 @@ button.save.has-count .count::before {
     border-radius: 8px;
 }
 
-.entity-editor-pane .preset-list-item::after {
-    content: "";
-    position: absolute;
-    height: 0;
-    width: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    margin: auto;
-    border: solid rgba(0, 0, 0, 0);
-    border-width: 10px;
-    border-bottom-color: #ececec;
-}
-
 .entity-editor-pane .preset-list-item .preset-list-button-wrap {
     margin-bottom: 0;
 }
-
 
 .form-field {
     margin-bottom: 10px;
@@ -1769,6 +1771,10 @@ div.full-screen > button:hover {
     border: 1px solid #CCC;
 }
 
+.imagery-faq {
+  margin-bottom: 10px;
+}
+
 .background-control .adjustments button:last-child {
     border: 0;
 }
@@ -1789,6 +1795,10 @@ div.full-screen > button:hover {
     height: 30px;
     background-color: white;
     color: #7092FF;
+}
+
+.layer-list:empty {
+    display: none;
 }
 
 .layer-list > li:first-child {
@@ -1813,6 +1823,18 @@ div.full-screen > button:hover {
 
 .layer-list li.active {
     background: #E8EBFF;
+}
+
+.layer-list li.best > div.best {
+    display: inline-block;
+    padding: 5px;
+    float: right;
+}
+
+/* make sure tooltip fits in map-control panel */
+/* if too wide, placement will be wrong the first time it displays */
+.layer-list li.best .tooltip-inner {
+    max-width: 160px;
 }
 
 .layer-list label {
@@ -2110,7 +2132,7 @@ div.full-screen > button:hover {
     user-select: none;
 }
 
-#supersurface, .layer-layer {
+#supersurface, .layer {
     position: absolute;
     top: 0;
     left: 0;
@@ -2186,7 +2208,7 @@ div.full-screen > button:hover {
     border-bottom: 1px solid black;
 }
 
-.infobox .selection-heading {
+.infobox .infobox-heading {
     display: block;
     border-radius: 4px 0 0 0;
     padding: 5px 10px;
@@ -2470,9 +2492,11 @@ div.full-screen > button:hover {
 ------------------------------------------------------- */
 
 .save-success p {
-    padding: 15px;
+    padding: 15px 15px 0 15px;
 }
-
+.save-success a.details {
+  padding-left: 15px;
+}
 .save-success .button {
     padding-top: 15px;
 }
@@ -2895,8 +2919,8 @@ div.full-screen > button:hover {
     color: rgba(40,40,40,.5);
 }
 
-.lasso-box {
-    fill-opacity:0.1;
+.lasso-path {
+    fill-opacity:0.3;
     stroke: #fff;
     stroke-width: 1;
     stroke-opacity: 1;

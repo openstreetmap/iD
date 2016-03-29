@@ -81,6 +81,45 @@ describe("iD.actions.Disconnect", function () {
             expect(iD.actions.Disconnect('b', ['|']).disabled(graph)).not.to.be.ok;
         });
 
+        it("returns 'relation' for a node connecting any two members of the same relation", function () {
+            // Covers restriction relations, routes, multipolygons.
+            // a ---- b ---- c
+            var graph = iD.Graph([
+                iD.Node({id: 'a'}),
+                iD.Node({id: 'b'}),
+                iD.Node({id: 'c'}),
+                iD.Way({id: 'f', nodes: ['a', 'b']}),
+                iD.Way({id: 't', nodes: ['b', 'c']}),
+                iD.Relation({id: 'r', members: [
+                    { id: 'f' },
+                    { id: 't' }
+                ]})
+            ]);
+
+            expect(iD.actions.Disconnect('b').disabled(graph)).to.eql('relation');
+        });
+
+        it("returns falsy for a node connecting two members of an unaffected relation", function () {
+            // a ---- b ---- c
+            //        |
+            //        d
+
+            var graph = iD.Graph([
+                iD.Node({id: 'a'}),
+                iD.Node({id: 'b'}),
+                iD.Node({id: 'c'}),
+                iD.Node({id: 'd'}),
+                iD.Way({id: 'f', nodes: ['a', 'b']}),
+                iD.Way({id: 't', nodes: ['b', 'c']}),
+                iD.Way({id: '|', nodes: ['b', 'd']}),
+                iD.Relation({id: 'r', members: [
+                    { id: 'f' },
+                    { id: 't' }
+                ]})
+            ]);
+
+            expect(iD.actions.Disconnect('b').limitWays(['|']).disabled(graph)).not.to.be.ok;
+        });
     });
 
     it("replaces the node with a new node in all but the first way", function () {

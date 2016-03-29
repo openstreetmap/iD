@@ -1,0 +1,10 @@
+{
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "man_made": "chimney"
+    },
+    "name": "Chimney"
+}

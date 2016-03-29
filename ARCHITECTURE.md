@@ -296,7 +296,7 @@ correspondence with entities:
   two vertices.
 * `iD.svg.Labels` renders the textual
   [labels](http://mapbox.com/osmdev/2013/02/12/labeling-id/).
-* `iD.svg.Surface` sets up a number of layers that ensure that map elements
+* `iD.svg.Layers` sets up a number of layers that ensure that map elements
   appear in an appropriate z-order.
 
 ## Other UI

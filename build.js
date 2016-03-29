@@ -24,10 +24,6 @@ function rp(f) {
     return r('presets/' + f);
 }
 
-function stringify(o) {
-    return JSON.stringify(o, null, 4);
-}
-
 function validate(file, instance, schema) {
     var result = jsonschema.validate(instance, schema);
     if (result.length) {
@@ -239,9 +235,9 @@ validateCategoryPresets(categories, presets);
 validatePresetFields(presets, fields);
 
 // Save individual data files
-fs.writeFileSync('data/presets/categories.json', stringify(categories));
-fs.writeFileSync('data/presets/fields.json', stringify(fields));
-fs.writeFileSync('data/presets/presets.json', stringify(presets));
+fs.writeFileSync('data/presets/categories.json', JSON.stringify(categories, null, 4));
+fs.writeFileSync('data/presets/fields.json', JSON.stringify(fields, null, 4));
+fs.writeFileSync('data/presets/presets.json', JSON.stringify(presets, null, 4));
 fs.writeFileSync('data/presets.yaml',
     YAML.dump({en: {presets: translate}}, {sortKeys: sortKeys})
         .replace(/\'.*#\':/g, '#')
@@ -282,15 +278,15 @@ _.forEach(presets, function(preset) {
     taginfo.tags.push(tag);
 });
 
-fs.writeFileSync('data/taginfo.json', stringify(taginfo));
+fs.writeFileSync('data/taginfo.json', JSON.stringify(taginfo, null, 4));
 
 // Push changes from data/core.yaml into en.json
 var core = YAML.load(fs.readFileSync('data/core.yaml', 'utf8'));
 var presets = {en: {presets: translations}};
 var en = _.merge(core, presets);
-fs.writeFileSync('dist/locales/en.json', stringify(en.en));
+fs.writeFileSync('dist/locales/en.json', JSON.stringify(en.en, null, 4));
 
-fs.writeFileSync('data/data.js', 'iD.data = ' + stringify({
+fs.writeFileSync('data/data.js', 'iD.data = ' + JSON.stringify({
     deprecated: r('deprecated.json'),
     discarded: r('discarded.json'),
     wikipedia: r('wikipedia.json'),
@@ -302,11 +298,11 @@ fs.writeFileSync('data/data.js', 'iD.data = ' + stringify({
     addressFormats: r('address-formats.json')
 }) + ';');
 
-fs.writeFileSync('dist/presets.js', 'iD.data.presets = ' + stringify({
+fs.writeFileSync('dist/presets.js', 'iD.data.presets = ' + JSON.stringify({
     presets: rp('presets.json'),
     defaults: rp('defaults.json'),
     categories: rp('categories.json'),
     fields: rp('fields.json')
 }) + ';');
 
-fs.writeFileSync('dist/imagery.js', 'iD.data.imagery = ' + stringify(r('imagery.json')) + ';');
+fs.writeFileSync('dist/imagery.js', 'iD.data.imagery = ' + JSON.stringify(r('imagery.json')) + ';');

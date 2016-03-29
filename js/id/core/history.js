@@ -250,7 +250,8 @@ iD.History = function(context) {
         },
 
         fromJSON: function(json, loadChildNodes) {
-            var h = JSON.parse(json);
+            var h = JSON.parse(json),
+                loadComplete = true;
 
             iD.Entity.id.next = h.nextIDs;
             index = h.index;
@@ -266,9 +267,7 @@ iD.History = function(context) {
                     // This merges originals for changed entities into the base of
                     // the stack even if the current stack doesn't have them (for
                     // example when iD has been restarted in a different region)
-                    var baseEntities = h.baseEntities.map(function(entity) {
-                        return iD.Entity(entity);
-                    });
+                    var baseEntities = h.baseEntities.map(function(d) { return iD.Entity(d); });
                     stack[0].graph.rebase(baseEntities, _.pluck(stack, 'graph'), true);
                     tree.rebase(baseEntities, true);
 
@@ -284,20 +283,33 @@ iD.History = function(context) {
                                 .value();
 
                         if (!_.isEmpty(missing)) {
-                            var childNodesLoaded = function(err, result) {
-                                if (err) return;
+                            loadComplete = false;
+                            context.redrawEnable(false);
 
-                                var visible = _.groupBy(result.data, 'visible');
-                                if (!_.isEmpty(visible.true)) {
-                                    stack[0].graph.rebase(visible.true, _.pluck(stack, 'graph'), false);
-                                    tree.rebase(visible.true, false);
+                            var loading = iD.ui.Loading(context).blocking(true);
+                            context.container().call(loading);
+
+                            var childNodesLoaded = function(err, result) {
+                                if (!err) {
+                                    var visible = _.groupBy(result.data, 'visible');
+                                    if (!_.isEmpty(visible.true)) {
+                                        missing = _.difference(missing, _.pluck(visible.true, 'id'));
+                                        stack[0].graph.rebase(visible.true, _.pluck(stack, 'graph'), true);
+                                        tree.rebase(visible.true, true);
+                                    }
+
+                                    // fetch older versions of nodes that were deleted..
+                                    _.each(visible.false, function(entity) {
+                                        context.connection()
+                                            .loadEntityVersion(entity.id, +entity.version - 1, childNodesLoaded);
+                                    });
                                 }
 
-                                // fetch older versions of nodes that were deleted..
-                                _.each(visible.false, function(entity) {
-                                    context.connection()
-                                        .loadEntityVersion(entity.id, +entity.version - 1, childNodesLoaded);
-                                });
+                                if (err || _.isEmpty(missing)) {
+                                    loading.close();
+                                    context.redrawEnable(true);
+                                    dispatch.change();
+                                }
                             };
 
                             context.connection().loadMultiple(missing, childNodesLoaded);
@@ -327,6 +339,7 @@ iD.History = function(context) {
                         imageryUsed: d.imageryUsed
                     };
                 });
+
             } else { // original version
                 stack = h.stack.map(function(d) {
                     var entities = {};
@@ -341,7 +354,9 @@ iD.History = function(context) {
                 });
             }
 
-            dispatch.change();
+            if (loadComplete) {
+                dispatch.change();
+            }
 
             return history;
         },

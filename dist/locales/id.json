@@ -336,14 +336,6 @@
             "description": "Titik",
             "tooltip": "Lokasi Pusat Perhatian"
         },
-        "major_roads": {
-            "description": "Jalan Besar",
-            "tooltip": "Jalan Protokol, Jalan Umum, dsb."
-        },
-        "minor_roads": {
-            "description": "Jalan Kecil",
-            "tooltip": "Jalan Akses, Tempat Parkir, Jalan Setapak, dsb."
-        },
         "paths": {
             "description": "Jalan Kecil",
             "tooltip": "Trotoar, Jalur Pejalan Kaki, Jalur Sepeda, dsb."
@@ -439,8 +431,7 @@
         "view_on_osm": "Lihat di OSM",
         "facebook": "Bagikan di Facebook",
         "twitter": "Bagikan di Twitter",
-        "google": "Bagikan di Google+",
-        "help_html": "Perubahan yang anda buat seharusnya akan muncul di layer \"Standar\" dalam beberapa menit. Layer lain dan fitur tertentu, mungkin akan membutuhkan waktu lama\n(<a href='https://help.openstreetmap.org/questions/4705/why-havent-my-changes-appeared-on-the-map' target='_blank'>Penjelasan lebih lanjut</a>).\n"
+        "google": "Bagikan di Google+"
     },
     "confirm": {
         "okay": "Baiklah",
@@ -486,8 +477,6 @@
         "browse": "Telusuri untuk file .gpx"
     },
     "mapillary": {
-        "tooltip": "Pemandangan jalan dari Mapillary",
-        "title": "Lapisan Foto (Mapillary)",
         "view_on_mapillary": "Lihat gambar ini di Mapillary"
     },
     "help": {
@@ -503,84 +492,35 @@
         "navigation": {
             "title": "Navigasi",
             "drag": "Area peta utama menampilkan data OpenStreetMap pada bagian atas dari latar. Anda dapat bernavigasi dengan menggeser dan mengskrol, seperti peta web lainnya. **Geser petanya!**",
-            "select": "Fitur peta dapat diwakili dengan tiga cara: dengan titik, garis, atau area. Semua fitur dapat dipilih dengan mengklik mereka. **Klik sebuah titik untuk memilihnya.**",
-            "header": "Header menunjukan tipe fitur.",
-            "pane": "Ketika sebuah fitur terpilih, fitur penyunting akan tampil. Header menunjukan tipe fitur dan panel utama yang menunjukan atribut fitur, seperti nama dan alamat. **Tutup fitur penyunting dengan mengklik tombol tutup di bagian kanan atas.**"
+            "select": "Fitur peta dapat diwakili dengan tiga cara: dengan titik, garis, atau area. Semua fitur dapat dipilih dengan mengklik mereka. **Klik sebuah titik untuk memilihnya.**"
         },
         "points": {
             "title": "Titik",
-            "add": "Titik dapat digunakan untuk mewakili fitur seperti toko, restoran, dan monumen. Mereka menadakan lokasi pasti, dan menggambarkan ada apa di sana. **Klik tombol Titik untuk menambahkan titik baru.**",
-            "place": "Titik bisa diletakkan dengan mengklik pada peta. **Letakan titik di atap gedungnya.**",
             "search": "Terdapat banyak fitur berbeda yang dapat diwakili oleh titik. Titik yang baru anda tambahkan adalah Cafe. **Pencarian untuk '{name}'**",
             "choose": "**Pilih Kafe dari daftar.**",
-            "describe": "Kini titik bisa ditandai sebagai cafe. Gunakan penyunting fitur, kita dapat tambahkan informasi lebih tentang fitur. **Tambahkan sebuah nama**",
-            "close": "Penyunting fitur dapat ditutup dengan mengklik tombol tutup. **Tutup penyunting fitur**",
-            "reselect": "Terkadang titik sudah ada, tapi ada kesalahan atau kurang lengkap. Kita dapat memperbaiki titik yang sudah ada. **Pilih titik yang baru saja anda buat.**",
-            "fixname": "**Ubah nama dan tutup fitur penyunting.**",
-            "reselect_delete": "Seluruh fitur pada peta dapat dihapus. **Klik pada titik yang anda buat**",
-            "delete": "Menu di sekitar titik berisi operasi yang bisa dilakukannya, termasuk menghapus. **Hapus titik**"
+            "describe": "Kini titik bisa ditandai sebagai cafe. Gunakan penyunting fitur, kita dapat tambahkan informasi lebih tentang fitur. **Tambahkan sebuah nama**"
         },
         "areas": {
             "title": "Area",
-            "add": "Area digunakan untuk menampilkan batas fitur-fitur seperti danau, bangunan, dan kawasan permukiman. Area juga dapat digunakan untuk memetakan fitur-fitur yang biasanya dipetakan menggunakan titik secara lebih rinci lagi. **Klik tombol Area untuk menambahkan area baru.**",
-            "corner": "Area tergambar dengan meletakkan simpul yang menandakan batas suatu area. **Letakan simpul pemula di satu sudut dari tempat-bermain.**",
             "place": "Gambar area dengan meletakan lebih banyak simpul. Selesaikan area dengan mengklik pada simpul awal. **Gambar sebuah area untuk tempat bermain.**",
             "search": "**Pencarian untuk '{name}'.**",
-            "choose": "**Pilih Tempat-bermain dari daftar.**",
-            "describe": "**Tambahkan nama, dan tutup fitur penyunting**"
+            "choose": "**Pilih Tempat-bermain dari daftar.**"
         },
         "lines": {
             "title": "Garis",
-            "add": "Garis biasa digunakan untuk mewakili fitur seperti jalan, rel dan sungai. **Klik tombol Garis untuk menambahkan sebuah garis baru.**",
             "start": "**Mulai garis dengan mengklik pada ujung sebuah jalan.**",
-            "intersect": "Klik untuk menambahkan lagi simpul pada garis. Anda dapat menggeser peta ketika menggambar jika diperlukan. Jalan, dan banyak tipe lain dari garis, adalah bagian dari jaringan yang lebih besar. Ini penting untuk garis-garis ini untuk terhubung dengan baik agar alat penelusuran rute bisa berjalan. **Klik di Jalan Flower, untuk membuat percabangan yang menghubungkan dua garis.**",
             "finish": "Garis bisa diselesaikan dengan mengklik ulang pada simpul terakhir. **Selesaikan menggambar jalan.**",
             "road": "**Pilih Jalan dari daftar**",
             "residential": "Ada beberapa tipe jalan berbeda, yang paling umum adalah Jalan Perumahan. **Pilih tipe jalan Perumahan**",
-            "describe": "**Namakan jalan dan tutup fitur penyunting.**",
-            "restart": "Jalan perlu memotong Jalan Flower.",
             "wrong_preset": "Anda belum memilih tipe Jalan Perumahan. **Klik di sini untuk memilih lagi**"
         },
         "startediting": {
             "title": "Mulai Menyunting",
-            "help": "Dokumentasi lebih dan panduan tersedia di sini.",
             "save": "Jangan lupa menyimpan perubahan secara berkala!",
             "start": "Mulai memetakan!"
         }
     },
     "presets": {
-        "categories": {
-            "category-building": {
-                "name": "Bangunan"
-            },
-            "category-golf": {
-                "name": "Golf"
-            },
-            "category-landuse": {
-                "name": "Penggunaan Tanah"
-            },
-            "category-path": {
-                "name": "Gang"
-            },
-            "category-rail": {
-                "name": "Rel"
-            },
-            "category-restriction": {
-                "name": "Larangan"
-            },
-            "category-road": {
-                "name": "Jalan"
-            },
-            "category-route": {
-                "name": "Rute"
-            },
-            "category-water-area": {
-                "name": "Air"
-            },
-            "category-water-line": {
-                "name": "Air"
-            }
-        },
         "fields": {
             "access": {
                 "label": "Akses diperbolehkan",
@@ -1343,10 +1283,6 @@
                 "name": "Penyewaan Sepeda",
                 "terms": "Penyewaan Sepeda"
             },
-            "amenity/bicycle_repair_station": {
-                "name": "Bengkel Sepeda",
-                "terms": "Perbaikan Sepeda"
-            },
             "amenity/biergarten": {
                 "name": "Taman Bir"
             },
@@ -1400,9 +1336,6 @@
             },
             "amenity/dentist": {
                 "name": "Dokter Gigi"
-            },
-            "amenity/doctor": {
-                "name": "Dokter"
             },
             "amenity/dojo": {
                 "name": "Sasana Bela Diri"
@@ -1948,10 +1881,6 @@
                 "name": "Jalan Penghubung Tersier",
                 "terms": "Jalan Penghubung Tersier"
             },
-            "highway/track": {
-                "name": "Titian",
-                "terms": "Trek"
-            },
             "highway/traffic_signals": {
                 "name": "Lampu Lalu lintas",
                 "terms": "Lampu Merah"
@@ -1967,10 +1896,6 @@
             "highway/turning_circle": {
                 "name": "Putaran",
                 "terms": "Putar Balik"
-            },
-            "highway/unclassified": {
-                "name": "Jalan Tak Diklasifikasi",
-                "terms": "Jalan Tanpa Jenis"
             },
             "historic": {
                 "name": "Situs Bersejarah",
@@ -2178,9 +2103,6 @@
             },
             "leisure/running_track": {
                 "name": "Lintasan Lari"
-            },
-            "leisure/sports_center": {
-                "name": "Pusat Olahraga / Gym"
             },
             "leisure/stadium": {
                 "name": "Stadion",
@@ -2508,9 +2430,6 @@
             },
             "shop/antiques": {
                 "name": "Toko Barang Antik"
-            },
-            "shop/art": {
-                "name": "Galeri Seni"
             },
             "shop/baby_goods": {
                 "name": "Toko Perlengkapan Bayi"

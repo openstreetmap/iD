@@ -15,7 +15,7 @@ iD.svg.Defs = function(context) {
         };
     }
 
-    return function (selection) {
+    return function drawDefs(selection) {
         var defs = selection.append('defs');
 
         // marker

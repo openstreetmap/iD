@@ -83,11 +83,12 @@ iD.svg = {
         };
     },
 
-    MultipolygonMemberTags: function(graph) {
+    RelationMemberTags: function(graph) {
         return function(entity) {
             var tags = entity.tags;
             graph.parentRelations(entity).forEach(function(relation) {
-                if (relation.isMultipolygon()) {
+                var type = relation.tags.type;
+                if (type === 'multipolygon' || type === 'boundary') {
                     tags = _.extend({}, relation.tags, tags);
                 }
             });

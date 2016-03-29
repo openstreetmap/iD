@@ -1,5 +1,5 @@
 {
-    "icon": "art-gallery",
+    "icon": "shop",
     "fields": [
         "operator",
         "address",
@@ -13,5 +13,10 @@
     "tags": {
         "shop": "craft"
     },
+    "terms": [
+        "art*",
+        "paint*",
+        "frame"
+    ],
     "name": "Arts and Crafts Store"
 }

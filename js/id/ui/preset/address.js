@@ -97,18 +97,19 @@ iD.ui.preset.address = function(field, context) {
     function address(selection) {
         isInitialized = false;
 
-        selection.selectAll('.preset-input-wrap')
-            .remove();
+        wrap = selection.selectAll('.preset-input-wrap')
+            .data([0]);
+
+        // Enter
+
+        wrap.enter()
+            .append('div')
+            .attr('class', 'preset-input-wrap');
 
         var center = entity.extent(context.graph()).center(),
             addressFormat;
 
-        // Enter
-
-        wrap = selection.append('div')
-            .attr('class', 'preset-input-wrap');
-
-        iD.countryCode().search(center, function (err, countryCode) {
+        iD.services.nominatim().countryCode(center, function (err, countryCode) {
             addressFormat = _.find(iD.data.addressFormats, function (a) {
                 return a && a.countryCodes && _.contains(a.countryCodes, countryCode);
             }) || _.first(iD.data.addressFormats);

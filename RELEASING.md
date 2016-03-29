@@ -1,23 +1,27 @@
 ## Release Checklist
 
 ### Prerelease (several days prior)
-
 - [ ] Notify translators of impending release
   (https://www.transifex.com/projects/p/id-editor/announcements/)
 - [ ] Notify TomH
 
-### Make release
-
-TODO: turn this into a script.
-
+### Update master branch
+- [ ] `git checkout master`
 - [ ] `make translations`
 - [ ] `make imagery`
 - [ ] `make suggestions`
 - [ ] Update `CHANGELOG.md`
 - [ ] Update version number in `id.js`, `package.json`
-- [ ] `git checkout release && git reset --hard master`
+- [ ] `git add .`
+- [ ] `git commit -m 'A.B.C'`
+- [ ] `git push origin master`
+
+### Update and tag release branch
+- [ ] `git checkout release`
+- [ ] `git reset --hard master`
 - [ ] `make`
-- [ ] `git add -f dist/*.css dist/*.js dist/img/*.svg && git commit -m 'Check in build'`
+- [ ] `git add -f dist/*.css dist/*.js dist/img/*.svg dist/locales/*.json`
+- [ ] `git commit -m 'Check in build'`
 - [ ] `git tag vA.B.C`
 - [ ] `git push origin -f release vA.B.C`
 
@@ -30,6 +34,7 @@ TODO: turn this into a script.
 
 #### Sync master and update iD (every time)
 
+- [ ] `bundle install`
 - [ ] `git fetch --all`
 - [ ] `git checkout master`
 - [ ] `git reset --hard upstream/master`

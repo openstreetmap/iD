@@ -43,28 +43,67 @@ describe("iD.presets", function() {
     describe("#areaKeys", function() {
         var presets = iD.presets().load({
             presets: {
-                a: {
-                    tags: {
-                        a: '*'
-                    },
-                    geometry: ['point', 'line', 'area']
+                'amenity/fuel/shell': {
+                    tags: { 'amenity': 'fuel' },
+                    geometry: ['point','area'],
+                    suggestion: true
                 },
-                ab: {
-                    tags: {
-                        a: 'b'
-                    },
+                'golf/water_hazard': {
+                    tags: { 'golf': 'water_hazard' },
+                    geometry: ['line','area']
+                },
+                'highway/foo': {
+                    tags: { 'highway': 'foo' },
+                    geometry: ['area']
+                },
+                'natural': {
+                    tags: { 'natural': '*' },
+                    geometry: ['point', 'vertex', 'area']
+                },
+                'natural/peak': {
+                    tags: { 'natural': 'peak' },
+                    geometry: ['point', 'vertex']
+                },
+                'natural/tree_row': {
+                    tags: { 'natural': 'tree_row' },
                     geometry: ['line']
+                }
+                'natural/wood': {
+                    tags: { 'natural': 'wood' },
+                    geometry: ['point', 'area']
                 }
             }
         });
 
-        it("whitelists keys from presets with area geometry", function() {
-            expect(presets.areaKeys()).to.have.key('a');
+        it("whitelists keys for presets with area geometry", function() {
+            expect(presets.areaKeys()).to.have.key('natural');
         });
 
-        it("blacklists key-values from presets without an area geometry", function() {
-            expect(presets.areaKeys().a.b).to.eq(true);
+        it("blacklists key-values for presets with a line geometry", function() {
+            expect(presets.areaKeys().natural).to.have.key('tree_row');
+            expect(presets.areaKeys().natural.tree_row).to.eq(true);
         });
+
+        it("does not blacklist key-values for presets with both area and line geometry", function() {
+            expect(presets.areaKeys().golf).not.to.have.key('water_hazard');
+        });
+
+        it("does not blacklist key-values for presets with neither area nor line geometry", function() {
+            expect(presets.areaKeys().natural).not.to.have.key('peak');
+        });
+
+        it("does not blacklist generic '*' key-values", function() {
+            expect(presets.areaKeys().natural).not.to.have.key('natural');
+        });
+
+        it("ignores keys like 'highway' that are assumed to be lines", function() {
+            expect(presets.areaKeys()).not.to.have.key('highway');
+        });
+
+        it("ignores suggestion presets", function() {
+            expect(presets.areaKeys()).not.to.have.key('amenity');
+        });
+
     });
 
     describe("expected matches", function() {

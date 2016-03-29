@@ -12,7 +12,7 @@ describe('iD.ui.preset.wikipedia', function() {
         wikipedia.tags({wikipedia: 'en:Title'});
         expect(selection.selectAll('.wiki-lang').value()).to.equal('English');
         expect(selection.selectAll('.wiki-title').value()).to.equal('Title');
-        expect(selection.selectAll('.wiki-link').attr('href')).to.equal('http://en.wikipedia.org/wiki/Title');
+        expect(selection.selectAll('.wiki-link').attr('href')).to.equal('https://en.wikipedia.org/wiki/Title');
     });
 
     it('sets a new value', function() {

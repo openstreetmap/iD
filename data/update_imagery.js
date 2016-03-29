@@ -1,10 +1,8 @@
 var fs = require('fs');
-var sources = require('editor-imagery-index/imagery.json');
+var sources = require('editor-layer-index/imagery.json');
 var imagery = [];
 
-// CENSORSHIP! No, these are just layers that essentially duplicate other layers
-// or which have no clear use case.
-var censor = {
+var blacklist = {
     "2u": true,
     "Hike & Bike": true,
     "OpenCycleMap": true,
@@ -12,7 +10,7 @@ var censor = {
     "OpenStreetMap (German Style)": true,
     "OpenStreetMap (Sorbian Language)": true,
     "MapQuest OSM": true,
-    "OpenStreetMap (Mapnik Black & White)": true,
+    "OpenStreetMap (Standard Black & White)": true,
     "Skobbler": true,
 
     "Stadtplan Z\u00fcrich": true, // https://github.com/osmlab/editor-imagery-index/issues/14
@@ -38,19 +36,19 @@ var censor = {
     "QA No Address": true
 };
 
+var whitelist = [
+    // Add custom sources here if needed.
+];
+
 var descriptions = {
     'Mapbox Satellite': 'Satellite and aerial imagery.',
-    'OpenStreetMap (Mapnik)': 'The default OpenStreetMap layer.',
-    'TIGER 2012 Roads Overlay': 'Public domain road data from the US Government.',
     'Bing aerial imagery': 'Satellite and aerial imagery.',
-    'NAIP': 'National Agriculture Imagery Program'
+    'OpenStreetMap (Standard)': 'The default OpenStreetMap layer.'
 };
 
-sources.forEach(function(source) {
-    if (source.type !== 'tms' && source.type !== 'bing')
-        return;
-    if (source.name in censor)
-        return;
+sources.concat(whitelist).forEach(function(source) {
+    if (source.type !== 'tms' && source.type !== 'bing') return;
+    if (source.name in blacklist) return;
 
     var im = {
         name: source.name,
@@ -63,7 +61,6 @@ sources.forEach(function(source) {
     im.template = source.url;
 
     var extent = source.extent || {};
-
     if (extent.min_zoom || extent.max_zoom) {
         im.scaleExtent = [
             extent.min_zoom || 0,
@@ -83,7 +80,7 @@ sources.forEach(function(source) {
         ]];
     }
 
-    if (source.name == 'Locator Overlay') {
+    if (source.name === 'Locator Overlay') {
         im.overzoom = false;
     }
 
@@ -111,4 +108,4 @@ imagery.sort(function(a, b) {
     return a.name.localeCompare(b.name);
 });
 
-fs.writeFileSync('data/imagery.json', JSON.stringify(imagery));
+fs.writeFileSync('data/imagery.json', JSON.stringify(imagery, null, 4));

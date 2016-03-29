@@ -271,3 +271,23 @@ d3.combobox = function() {
 
     return d3.rebind(combobox, event, 'on');
 };
+
+d3.combobox.off = function(input) {
+    data = null;
+    fetcher = null;
+
+    input
+        .on('focus.typeahead', null)
+        .on('blur.typeahead', null)
+        .on('keydown.typeahead', null)
+        .on('keyup.typeahead', null)
+        .on('input.typeahead', null)
+        .each(function() {
+            d3.select(this.parentNode).selectAll('.combobox-caret')
+                .filter(function(d) { return d === input.node(); })
+                .on('mousedown', null);
+        });
+
+    d3.select(document.body)
+        .on('scroll.combobox', null);
+};

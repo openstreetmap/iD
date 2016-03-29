@@ -70,7 +70,7 @@
         "type": "combo",
         "label": "Access",
         "options": [
-            "public",
+            "yes",
             "permissive",
             "private",
             "customers"
@@ -243,7 +243,7 @@
     },
     "building": {
         "key": "building",
-        "type": "typeCombo",
+        "type": "combo",
         "label": "Building"
     },
     "building_area": {
@@ -406,7 +406,23 @@
     "description": {
         "key": "description",
         "type": "textarea",
-        "label": "Description"
+        "label": "Description",
+        "universal": true
+    },
+    "diaper": {
+        "key": "diaper",
+        "type": "combo",
+        "label": "Diaper Changing Available",
+        "options": [
+            "yes",
+            "no",
+            "room",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5"
+        ]
     },
     "dock": {
         "key": "dock",
@@ -481,7 +497,8 @@
     "fixme": {
         "key": "fixme",
         "type": "textarea",
-        "label": "Fix Me"
+        "label": "Fix Me",
+        "universal": true
     },
     "fuel": {
         "key": "fuel",
@@ -1171,6 +1188,11 @@
     "shop": {
         "key": "shop",
         "type": "typeCombo",
+        "label": "Type"
+    },
+    "site": {
+        "key": "site",
+        "type": "combo",
         "label": "Type"
     },
     "sloped_curb": {

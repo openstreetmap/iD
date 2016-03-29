@@ -2,38 +2,30 @@ iD.Tree = function(head) {
     var rtree = rbush(),
         rectangles = {};
 
-    function extentRectangle(extent) {
-        return [
-            extent[0][0],
-            extent[0][1],
-            extent[1][0],
-            extent[1][1]
-        ];
-    }
-
     function entityRectangle(entity) {
-        var rect = extentRectangle(entity.extent(head));
+        var rect = entity.extent(head).rectangle();
         rect.id = entity.id;
         rectangles[entity.id] = rect;
         return rect;
     }
 
     function updateParents(entity, insertions, memo) {
-        head.parentWays(entity).forEach(function(parent) {
-            if (rectangles[parent.id]) {
-                rtree.remove(rectangles[parent.id]);
-                insertions[parent.id] = parent;
+        head.parentWays(entity).forEach(function(way) {
+            if (rectangles[way.id]) {
+                rtree.remove(rectangles[way.id]);
+                insertions[way.id] = way;
             }
+            updateParents(way, insertions, memo);
         });
 
-        head.parentRelations(entity).forEach(function(parent) {
+        head.parentRelations(entity).forEach(function(relation) {
             if (memo[entity.id]) return;
             memo[entity.id] = true;
-            if (rectangles[parent.id]) {
-                rtree.remove(rectangles[parent.id]);
-                insertions[parent.id] = parent;
+            if (rectangles[relation.id]) {
+                rtree.remove(rectangles[relation.id]);
+                insertions[relation.id] = relation;
             }
-            updateParents(parent, insertions, memo);
+            updateParents(relation, insertions, memo);
         });
     }
 
@@ -90,7 +82,7 @@ iD.Tree = function(head) {
             rtree.load(_.map(insertions, entityRectangle));
         }
 
-        return rtree.search(extentRectangle(extent)).map(function(rect) {
+        return rtree.search(extent.rectangle()).map(function(rect) {
             return head.entity(rect.id);
         });
     };

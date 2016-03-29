@@ -13,5 +13,11 @@
     "tags": {
         "shop": "frame"
     },
+    "terms": [
+        "art*",
+        "paint*",
+        "photo*",
+        "frame"
+    ],
     "name": "Framing Shop"
 }

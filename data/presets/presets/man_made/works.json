@@ -1,0 +1,18 @@
+{
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "car assembly plant",
+        "aluminium processing plant",
+        "brewery",
+        "furniture manufacture factory",
+        "oil refinery",
+        "plastic recycling"
+    ],
+    "tags": {
+        "man_made": "works"
+    },
+    "name": "Works"
+}

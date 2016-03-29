@@ -133,7 +133,8 @@
             "key": "D",
             "annotation": "Razdvoji linije/područja.",
             "not_connected": "Ovdje nema dovoljno linija/područja za odvajanje.",
-            "connected_to_hidden": "Ovo se ne može odvojiti jer je spojeno na skrivenu značajku."
+            "connected_to_hidden": "Ovo se ne može odvojiti jer je spojeno na skrivenu značajku.",
+            "relation": "Ovo se ne može razdvojiti jer spaja članove relacije."
         },
         "merge": {
             "title": "Spoji",
@@ -250,7 +251,9 @@
         "warnings": "Upozorenja",
         "modified": "Promijenjeno",
         "deleted": "Obrisano",
-        "created": "Stvoreno"
+        "created": "Stvoreno",
+        "about_changeset_comments": "O komentarima promjena",
+        "about_changeset_comments_link": "//wiki.openstreetmap.org/wiki/Good_changeset_comments"
     },
     "contributors": {
         "list": "Uređivali {users}",
@@ -282,13 +285,15 @@
         "no_results_worldwide": "Nema nađenih rezultata"
     },
     "geolocate": {
-        "title": "Pokaži moju lokaciju"
+        "title": "Pokaži moju lokaciju",
+        "locating": "Lociram, molim pričekaj..."
     },
     "inspector": {
         "no_documentation_combination": "Ne postoji dokumentacija za ovu kombinaciju oznaka",
         "no_documentation_key": "Ne postoji dokumentacija za ovaj ključ.",
         "show_more": "Prikaži više",
         "view_on_osm": "Pogledaj na openstreetmap.org",
+        "all_fields": "Sva polja",
         "all_tags": "Sve oznake",
         "all_members": "Svi članovi",
         "all_relations": "Sve relacije",
@@ -321,10 +326,12 @@
         "description": "Postavke pozadine",
         "percent_brightness": "{opacity}% svjetline",
         "none": "Nijedna",
+        "best_imagery": "Najpoznatiji izvornik snimaka za ovo područje",
         "custom": "Podesivo",
         "custom_button": "Uredi prilagođenu pozadinu",
         "custom_prompt": "Unesi URL predložak za popločavanje. Ispravni znakovi su {z}, {x}, {y} za Z/X/Y shemu i {u} za quadtile shemu.",
         "fix_misalignment": "Popravi odstupanje",
+        "imagery_source_faq": "Koji je izvornik snimaka?",
         "reset": "resetiraj",
         "minimap": {
             "description": "Mini-karta",
@@ -344,13 +351,11 @@
             "description": "Točke",
             "tooltip": "Interesne točke"
         },
-        "major_roads": {
-            "description": "Glavne ceste",
+        "traffic_roads": {
             "tooltip": "Prometnice, ulice, itd."
         },
-        "minor_roads": {
-            "description": "Sporedne ceste",
-            "tooltip": "Pristupne ceste, parkirni prolazi, zemljani putovi, itd."
+        "service_roads": {
+            "description": "Pristupna cesta"
         },
         "paths": {
             "description": "Staze",
@@ -448,7 +453,9 @@
         "facebook": "Podijeli na mreži Facebook",
         "twitter": "Podijeli na mreži Twitter",
         "google": "Podijeli na mreži Google+",
-        "help_html": "Tvoje promjene bi se trebale pojaviti u sloju \"Standard\" kroz par minuta. Za druge slojeve i određena svojstva trebati će više vremena.\n(<a href='https://help.openstreetmap.org/questions/4705/why-havent-my-changes-appeared-on-the-map' target='_blank'>detalji</a>).\n"
+        "help_html": "Tvoje promjene bi se trebale pojaviti u sloju \"Standard\" kroz par minuta. Za druge slojeve i određena svojstva trebati će više vremena.",
+        "help_link_text": "Detalji",
+        "help_link_url": "https://wiki.openstreetmap.org/wiki/FAQ#I_have_just_made_some_changes_to_the_map._How_do_I_get_to_see_my_changes.3F"
     },
     "confirm": {
         "okay": "Ok",
@@ -493,9 +500,15 @@
         "zoom": "Povećaj na GPX putanju",
         "browse": "Potraži .gpx datoteku"
     },
-    "mapillary": {
+    "mapillary_images": {
         "tooltip": "Ulične fotografije s Mapillary servisa",
-        "title": "Foto preklop (Mapillary)",
+        "title": "Foto preklop (Mapillary)"
+    },
+    "mapillary_signs": {
+        "tooltip": "Prometni znakovi s Mapillary servisa",
+        "title": "Preklop prometnih znakova (Mapillary)"
+    },
+    "mapillary": {
         "view_on_mapillary": "Pogledaj ovu sliku na Mapillary"
     },
     "help": {
@@ -511,85 +524,117 @@
         "relations": "# Relacije\n\nRelacija je poseban oblik značajki na OpenStreetMap karti koja grupira druge\nznačajke. Na primjer, dvije često korištene relacije su *cestovne relacije*, koje\nmeđusobno grupiraju dijelove cesta koje zajedno pripadaju državnoj ili\nžupanijskoj cesti i *multipoligoni*, koji međusobno grupiraju nekoliko linija\nkoje definiraju složena područja (koja se sastoje od  više područja ili ona koja\nimaju rupu u sebi poput krafne).\n\nSkupine značajki u relaciji se nazivaju *članovi*. U bočnom oknu možeš vidjeti\nkojim sve relacijama značajka pripada i tamo kliknuti na relaciju kako bi ju\nodabrao/la. Kada je relacija odabrana možeš vidjeti sve njezine članove koji su\noznačeni na karti i izlistani u bočnom oknu.\n\niD će uglavnom automatski održavati relacije dok ti uređuješ kartu. Glavna\nstvar koje moraš biti svjestan/na je da ako obrišeš dio ceste da ju nacrtaš\npreciznije, trebaš provjeriti da je i novi dio član istih relacija kao i originalni\ndio.\n\n## Uređivanje relacija\n\nAko želiš uređivati relacije, ovdje su navedene osnove.\n\nZa dodavanje značajke nekoj relaciji, označi značajku, klikni tipku \"+\" u odjeljku\n\"Sve relacije\" na dnu bočnog okna i odaberi ili upiši ime relacije.\n\nZa stvaranje nove relacije, odaberi prvu značajku koja bi trebala biti član,\nzatim klikni tipku \"+\" u odjeljku \"Sve relacije\" i odaberi \"Nova relacija...\".\n\nZa odstranjivanje značajke iz relacije, odaberi značajku i klikni ikonu kante za\nsmeće pokraj relacije iz koje ju želiš ukloniti.\n\nMožeš stvarati višestruke poligone - multipoligone sa rupama pomoću alata\n\"Spoji\". Nacrtaj dva područja (unutarnje i vanjsko), drži tipku Shift i klikni na\noba područja kako bi ih selektirao/la i zatim klikni na tipku \"Spoji\" (+).\n"
     },
     "intro": {
+        "graph": {
+            "city_hall": "Gradska vijećnica",
+            "fire_department": "Vatrogasni dom",
+            "memory_isle_park": "Gradski park",
+            "riverwalk_trail": "Šetalište",
+            "w_michigan_ave": "Jesenska avenija",
+            "e_michigan_ave": "Proljetna avenija",
+            "spring_st": "Anina ulica ",
+            "scidmore_park": "Park prijateljstva",
+            "petting_zoo": "Dječji zoološki vrt",
+            "n_andrews_st": "Mažuranićeva ulica",
+            "s_andrews_st": "Držićeva ulica",
+            "n_constantine_st": "Marulićeva ulica",
+            "s_constantine_st": "Držićeva ulica",
+            "rocky_river": "Rijeka Mura",
+            "railroad_dr": "Željeznička ulica",
+            "conrail_rr": "Željeznička pruga",
+            "st_joseph_river": "Rijeka Sava",
+            "n_main_st": "Sjeverna cesta",
+            "s_main_st": "Južna cesta",
+            "water_st": "Ulica voća",
+            "foster_st": "Dječja ulica",
+            "portage_river": "Rijeka Drava",
+            "flower_st": "Ulica cvijeća",
+            "elm_st": "Ulica brijestova",
+            "walnut_st": "Ulica oraha",
+            "morris_ave": "Zimska avenija",
+            "east_st": "Istočna ulica",
+            "portage_ave": "Ljetna avenija"
+        },
         "navigation": {
             "title": "Navigacija",
             "drag": "Glavno područje karte prikazuje OpenStreetMap podatke iznad pozadine. Možeš mijenjati pogled povlačeći i pomičući, kao na svakoj drugoj web karti. **Pomakni prikaz karte.**",
             "select": "Značajke karte su prikazane na tri načina: koristeći točke, linije ili područja. Sve značajke mogu se odabrati klikom na njih. **Klikni na točku kako bi ju odabrao/la.**",
-            "header": "Zaglavlje nam pokazuje tip svojstva.",
-            "pane": "Kada je značajka odabrana, prikazan je uređivač svojstava. Zaglavlje prikazuje tip značajke, a glavni prozor prikazuje njegova svojstva npr. naziv i adresu. **Zatvori uređivač svojstava gumbom X u gornjem desnom kutu.**"
+            "pane": "Kada je značajka odabrana, prikazan je uređivač svojstava. Zaglavlje prikazuje tip značajke, a glavni prozor prikazuje njegova svojstva npr. naziv i adresu. **Zatvori uređivač svojstava klikom na gumb {button} gore desno.**",
+            "search": "Također možeš potražiti značajke koje se nalaze u trenutnom pogledu ili koje se nalaze bilo gdje na svijetu. **Potraži '{name}'** ",
+            "choose": "**Odaberi {name} s liste da ga selektiraš.**",
+            "chosen": "Odlično! {name} je sada selektirano. **Zatvori uređivač svojstava pritiskom na {button} gumb.**"
         },
         "points": {
             "title": "Točke",
-            "add": "Točke se koriste za predstavljanje značajki kao što su trgovine, restorani i spomenici. One označavaju specifičnu lokaciju i opisuju što je ondje. **Klikni na gumb 'Točka' za dodavanje nove točke.**",
-            "place": "Točka se može postaviti klikom na kartu. **Postavi točku na vrh zgrade.**",
+            "add": "Točke se koriste za predstavljanje značajki kao što su trgovine, restorani i spomenici. One označavaju specifičnu lokaciju i opisuju što je ondje. **Klikni na gumb {button} Točka za dodavanje nove točke.**",
+            "place": "Točka se može postaviti klikom na kartu. **Klikni na kartu za postavljanje nove točke na vrh zgrade.**",
             "search": "Postoje mnoge različite značajke koje mogu biti prikazane točkom. Točka koju si upravo dodao/la je kafić. **Pretraži '{name}'.**",
             "choose": "**Odaberi 'Kafić' sa liste.**",
             "describe": "Točka je sada označena kao kafić. Koristeći uređivač svojstava, možemo dodati više informacija o toj značajki. **Dodaj ime kafiću.**",
-            "close": "Uređivač svojstava može se zatvoriti klikom na gumb X. **Zatvori uređivač svojstava.**",
-            "reselect": "Često će točke već postojati, ali mogu biti pogrešne ili nedovršene. Možemo urediti postojeće točke. **Odaberi točku koju si upravo kreirao/la.**",
-            "fixname": "**Promijeni ime i zatvori uređivač svojstava.**",
-            "reselect_delete": "Sva svojstva na karti se mogu obrisati. **Klikni na točku koji si stvorio/la.**",
-            "delete": "Izbornik oko točke sadrži operacije koje se mogu izvršiti nad njom, uključujući brisanje. **Obriši točku.**"
+            "close": "Uređivač svojstava će automatski spremiti sve tvoje promjene. Kada napraviš promjenu, gumb za zatvaranje će se promijeniti u kvačicu. **Klikni {button} gumb za zatvaranje uređivača svojstava.**",
+            "reselect": "Često će točke već postojati, ali mogu biti pogrešne ili nedovršene. Možemo urediti postojeće točke. **Klikni za selektiranje točke koju si upravo kreirao/la.**",
+            "fixname": "**Promijeni ime, a zatim klikni {button} gumb za zatvaranje uređivača.**",
+            "reselect_delete": "Sva svojstva na karti se mogu obrisati. **Klikni za selektiranje točke koji si stvorio/la.**",
+            "delete": "Izbornik oko točke sadrži operacije koje se mogu izvršiti nad njom, uključujući brisanje. **Klikni na {button} gumb za brisanje točke.**"
         },
         "areas": {
             "title": "Područja",
-            "add": "Područja se koriste za prikaz granica značajki poput jezera, zgrada i naseljenih područja. Također se mogu koristiti za detaljnije kartiranje mnogih značajki koje se inače prikazuju točkama. **Klikni na gumb 'Područje' za dodavanje novog područja.**",
-            "corner": "Područja se crtaju postavljanjem točaka koje označavaju granicu područja. **Postavi početnu točku na jedan rub igrališta.**",
+            "add": "Područja se koriste za prikaz granica značajki poput jezera, zgrada i naseljenih područja. Također se mogu koristiti za detaljnije kartiranje mnogih značajki koje se inače prikazuju točkama. **Klikni na gumb {button} Područje za dodavanje novog područja.**",
+            "corner": "Područja se crtaju postavljanjem točaka koje označavaju granicu područja. **Klikni za postavljanje početne točke na jedan ugao igrališta.**",
             "place": "Nacrtaj područje dodavanjem više točaka. Završi područje tako da klikneš na početnu točku. **Nacrtaj područje igrališta.**",
             "search": "**Pretraži za '{name}'.**",
             "choose": "**Odaberi igralište sa liste.**",
-            "describe": "**Dodaj ime i zatvori uređivač svojstava.**"
+            "describe": "**Dodaj ime, a zatim klikni {button} gumb za zatvaranje uređivača.**"
         },
         "lines": {
             "title": "Linije",
-            "add": "Linije se koriste za predstavljanje značajki kao što su npr. ceste, željeznice i rijeke. **Klikni na gumb 'Linija' za dodavanje nove linije.**",
+            "add": "Linije se koriste za predstavljanje značajki kao što su npr. ceste, željeznice i rijeke. **Klikni na {button} Linije za dodavanje nove linije.**",
             "start": "**Započni liniju tako da klikneš na kraj ceste.**",
-            "intersect": "Klikni za dodavanje više točaka linije. Možeš pomicati pogled na kartu dok crtaš ako je potrebno. Ceste i mnoge druge vrste linija su dio veće mreže. Važno je da su sve linije pravilno spojene kako bi softveri za određivanje rute ispravno funkcionirali. **Klikni na 'Flower Street' za stvaranje raskrižja povezujući dvije linije.**",
+            "intersect": "Klikni za dodavanje više točaka linije. Možeš pomicati pogled na kartu dok crtaš ako je potrebno. Ceste i mnoge druge vrste linija su dio veće mreže. Važno je da su sve linije pravilno spojene kako bi softveri za određivanje rute ispravno funkcionirali. **Klikni na {name} za stvaranje raskrižja povezujući dvije linije.**",
             "finish": "Linije se mogu završiti tako da ponovno kliknete na posljednju točku. **Završi crtanje ceste.**",
             "road": "**Odaberi Prometnica sa liste.**",
             "residential": "Postoje različite vrste cesta, najčešća je Ulica. **Odaberi tip 'Ulica'.**",
-            "describe": "**Dodaj naziv ulice i zatvori uređivač svojstava.**",
-            "restart": "Cesta treba presijecati Flower Street.",
+            "describe": "**Dodaj naziv ulice i klikni {button} gumb za zatvaranje uređivača.**",
+            "restart": "Cesta treba presijecati {name}.",
             "wrong_preset": "Nisi označio/la cestu koja predstavlja ulicu. **Klikni ovdje za ponovni odabir**"
         },
         "startediting": {
             "title": "Započni uređivanje",
-            "help": "Više dokumentacije i ovaj prohod su dostupni ovdje.",
+            "help": "Možeš ponoviti prohod ispočetka ili potražiti više dokumentacije klikom na gumb {button} Pomoć.",
             "save": "Ne zaboravi redovno spremiti tvoje promjene!",
-            "start": "Počni mapirati!"
+            "start": "Počni kartirati!"
         }
     },
     "presets": {
         "categories": {
             "category-building": {
-                "name": "Građevina"
+                "name": "Vrste građevina"
             },
             "category-golf": {
-                "name": "Golf"
+                "name": "Elementi golf igrališta"
             },
             "category-landuse": {
-                "name": "Namjena zemljišta"
+                "name": "Vrste korištenja zemljišta"
             },
             "category-path": {
-                "name": "Staza"
+                "name": "Vrste putova"
             },
             "category-rail": {
-                "name": "Pruga"
+                "name": "Elementi željeznica"
             },
             "category-restriction": {
-                "name": "Ograničenje"
+                "name": "Vrste zabrana"
             },
             "category-road": {
-                "name": "Prometnica"
+                "name": "Vrste cesta"
             },
             "category-route": {
-                "name": "Ruta"
+                "name": "Vrste trasa"
             },
             "category-water-area": {
-                "name": "Voda"
+                "name": "Vrste voda"
             },
             "category-water-line": {
-                "name": "Voda"
+                "name": "Vrste voda"
             }
         },
         "fields": {
@@ -851,6 +896,12 @@
             "description": {
                 "label": "Opis"
             },
+            "diaper": {
+                "label": "Omogućeno mijenjanje pelena"
+            },
+            "dock": {
+                "label": "Vrsta"
+            },
             "drive_through": {
                 "label": "Provezi-kroz"
             },
@@ -953,6 +1004,9 @@
             "handicap": {
                 "label": "Smetnja",
                 "placeholder": "1-18"
+            },
+            "handrail": {
+                "label": "Rukohvat"
             },
             "highway": {
                 "label": "Vrsta"
@@ -1212,6 +1266,9 @@
             "power": {
                 "label": "Vrsta"
             },
+            "power_supply": {
+                "label": "Napajanje električnom energijom"
+            },
             "railway": {
                 "label": "Vrsta"
             },
@@ -1273,6 +1330,9 @@
                 },
                 "placeholder": "Planinsko planinarenje, Alpsko planinarenje..."
             },
+            "sanitary_dump_station": {
+                "label": "Odvod toaleta"
+            },
             "seasonal": {
                 "label": "Sezonski"
             },
@@ -1296,17 +1356,33 @@
                 }
             },
             "service_rail": {
-                "label": "Vrsta usluge"
+                "label": "Vrsta usluge",
+                "options": {
+                    "crossover": "Skretnica",
+                    "siding": "Mimoilaznica",
+                    "spur": "Industrijski kolosijek",
+                    "yard": "Manipulacijski kolosijek"
+                }
             },
             "shelter": {
                 "label": "Sklonište"
             },
+            "shelter_type": {
+                "label": "Vrsta"
+            },
             "shop": {
                 "label": "Vrsta"
+            },
+            "site": {
+                "label": "Vrsta"
+            },
+            "sloped_curb": {
+                "label": "Spušteni rubnjak"
             },
             "smoking": {
                 "label": "Pušenje",
                 "options": {
+                    "dedicated": "Predviđeno za pušače (npr. klub pušača)",
                     "isolated": "U prostorijama za pušenje fizički odvojenima",
                     "no": "Nedozvoljeno svugdje",
                     "outside": "Dopušteno vani",
@@ -1330,12 +1406,19 @@
                 "placeholder": "Mali kotačići, kotači, off-road"
             },
             "social_facility_for": {
-                "label": "Posluživanje"
+                "label": "Posluživanje",
+                "placeholder": "Beskućnici, invalidi, djeca, itd."
             },
             "source": {
                 "label": "Izvor"
             },
             "sport": {
+                "label": "Sport"
+            },
+            "sport_ice": {
+                "label": "Sport"
+            },
+            "sport_racing": {
                 "label": "Sport"
             },
             "structure": {
@@ -1361,6 +1444,9 @@
             "surface": {
                 "label": "Površina"
             },
+            "tactile_paving": {
+                "label": "Taktilne oznake za slijepe"
+            },
             "takeaway": {
                 "label": "Dostava",
                 "options": {
@@ -1371,13 +1457,33 @@
                 "placeholder": "Da, ne, samo dostava..."
             },
             "toilets/disposal": {
-                "label": "Vrsta odvoda"
+                "label": "Vrsta odvoda",
+                "options": {
+                    "bucket": "Kanta",
+                    "chemical": "Kemijski",
+                    "flush": "Povuci vodu",
+                    "pitlatrine": "Rupa/Poljski wc"
+                }
             },
             "tourism": {
                 "label": "Vrsta"
             },
             "towertype": {
                 "label": "Vrsta tornja"
+            },
+            "tracktype": {
+                "label": "Vrsta poljskog ili šumskog puta",
+                "options": {
+                    "grade1": "Čvrsto: asfaltirana ili jako zbijeni makadam",
+                    "grade2": "Većinom čvrsto: šljunak/kamenčići pomiješani sa mekšim materijalima",
+                    "grade3": "Jednolika mješavina čvrstih i mekanih materijala",
+                    "grade4": "Većinom mekano: zemlja/pjesak/trava sa nešto čvrstih materijala",
+                    "grade5": "Mekano: zemlja/pijesak/trava"
+                },
+                "placeholder": "Čvrsto, većinom čvrsto, mekano..."
+            },
+            "traffic_signals": {
+                "label": "Vrsta"
             },
             "trail_visibility": {
                 "label": "Vidljivost staze",
@@ -1531,7 +1637,7 @@
                 "terms": "rentanje bicikala,rentanje bicikla,iznajmljivanje bicikala,iznajmljivanje bicikla,najam bicikala,najam bicikla,rent a bike"
             },
             "amenity/bicycle_repair_station": {
-                "name": "Bicikl servis"
+                "name": "Stalak sa alatima za bicikle"
             },
             "amenity/boat_rental": {
                 "name": "Najam brodova",
@@ -1596,7 +1702,7 @@
             "amenity/dentist": {
                 "name": "Zubar"
             },
-            "amenity/doctor": {
+            "amenity/doctors": {
                 "name": "Doktor"
             },
             "amenity/dojo": {
@@ -1614,6 +1720,9 @@
                 "name": "Brza hrana",
                 "terms": "brza hrana,restoran brze hrane,jela s roštilja,hamburger,pommes frites"
             },
+            "amenity/ferry_terminal": {
+                "name": "Trajektni terminal"
+            },
             "amenity/fire_station": {
                 "name": "Vatrogasna postaja",
                 "terms": "vatrogasci,protupožarna stanica,vatrogasna stanica,protupožarna postaja"
@@ -1630,8 +1739,14 @@
                 "name": "Groblje",
                 "terms": "groblje"
             },
+            "amenity/grit_bin": {
+                "name": "Kanta sa šljunkom za poledicu"
+            },
             "amenity/hospital": {
                 "name": "Bolničko zemljište"
+            },
+            "amenity/hunting_stand": {
+                "name": "Lovačka čeka"
             },
             "amenity/kindergarten": {
                 "name": "Dvorište vrtića"
@@ -1656,6 +1771,9 @@
             },
             "amenity/parking_entrance": {
                 "name": "Parking garaža Ulaz/Izlaz"
+            },
+            "amenity/parking_space": {
+                "name": "Parkirališno mjesto"
             },
             "amenity/pharmacy": {
                 "name": "Ljekarna",
@@ -1711,6 +1829,9 @@
                 "name": "Restoran",
                 "terms": "restoran,buffet,zdravljak,zalogajnica"
             },
+            "amenity/sanitary_dump_station": {
+                "name": "Pražnjenje toaleta za kamp kućice"
+            },
             "amenity/school": {
                 "name": "Škola i teren oko škole",
                 "terms": "škola,školsko zemljište"
@@ -1720,6 +1841,12 @@
             },
             "amenity/social_facility": {
                 "name": "Socijalna ustanova"
+            },
+            "amenity/social_facility/food_bank": {
+                "name": "Pučka kuhinja"
+            },
+            "amenity/social_facility/group_home": {
+                "name": "Starački dom"
             },
             "amenity/social_facility/homeless_shelter": {
                 "name": "Sklonište za beskućnike"
@@ -1754,6 +1881,36 @@
             "amenity/university": {
                 "name": "Fakultetsko zemljište"
             },
+            "amenity/vending_machine/cigarettes": {
+                "name": "Automat za cigarete"
+            },
+            "amenity/vending_machine/condoms": {
+                "name": "Automat za kondome"
+            },
+            "amenity/vending_machine/drinks": {
+                "name": "Automat za piće"
+            },
+            "amenity/vending_machine/excrement_bags": {
+                "name": "Automat za vrećice za fekalije"
+            },
+            "amenity/vending_machine/news_papers": {
+                "name": "Automat za novine"
+            },
+            "amenity/vending_machine/parcel_pickup_dropoff": {
+                "name": "Automat za slanje/primanje paketa"
+            },
+            "amenity/vending_machine/parking_tickets": {
+                "name": "Automat za parkirališne karte"
+            },
+            "amenity/vending_machine/public_transport_tickets": {
+                "name": "Automat za karte za javni prijevoz"
+            },
+            "amenity/vending_machine/sweets": {
+                "name": "Automat za grickalice"
+            },
+            "amenity/vending_machine/vending_machine": {
+                "name": "Samouslužni automat"
+            },
             "amenity/veterinary": {
                 "name": "Veterinar"
             },
@@ -1761,9 +1918,18 @@
                 "name": "Kanta za smeće",
                 "terms": "smeće,koš za smeće,kanta za smeće"
             },
+            "amenity/waste_disposal": {
+                "name": "Kontejner za smeće"
+            },
+            "amenity/water_point": {
+                "name": "Pitka voda za kamp kućice"
+            },
             "area": {
                 "name": "Površina",
                 "terms": "površina,područje"
+            },
+            "area/highway": {
+                "name": "Površina ceste"
             },
             "barrier": {
                 "name": "Prepreka"
@@ -1841,6 +2007,15 @@
             "building/cabin": {
                 "name": "Mala drvena kućica, sklonište"
             },
+            "building/cathedral": {
+                "name": "Zgrada katedrale"
+            },
+            "building/chapel": {
+                "name": "Zgrada kapelice"
+            },
+            "building/church": {
+                "name": "Zgrada crkve"
+            },
             "building/college": {
                 "name": "Zgrada fakulteta"
             },
@@ -1849,6 +2024,9 @@
             },
             "building/construction": {
                 "name": "Zgrada u izgradnji"
+            },
+            "building/detached": {
+                "name": "Odvojena kuća"
             },
             "building/dormitory": {
                 "name": "Studentski dom"
@@ -1901,11 +2079,20 @@
                 "name": "Školska zgrada",
                 "terms": "škola"
             },
+            "building/semidetached_house": {
+                "name": "Dijelom spojena kuća"
+            },
             "building/shed": {
                 "name": "Šupa"
             },
             "building/stable": {
                 "name": "Staja"
+            },
+            "building/static_caravan": {
+                "name": "Statičan mobilan dom"
+            },
+            "building/terrace": {
+                "name": "Kuće u nizu"
             },
             "building/train_station": {
                 "name": "Željeznički kolodvor"
@@ -1918,6 +2105,9 @@
             },
             "craft": {
                 "name": "Zanat"
+            },
+            "craft/basket_maker": {
+                "name": "Proizvođač košara"
             },
             "craft/beekeeper": {
                 "name": "Pčelar"
@@ -1967,6 +2157,9 @@
             "craft/hvac": {
                 "name": "HVAC",
                 "terms": "rashladni sustav,klimatizacija,ventilacija,klima,vanjski rashladni sustav,vanjski sustav za grijanje,klimatizacijsko grijaći sustav"
+            },
+            "craft/insulator": {
+                "name": "Izolator"
             },
             "craft/jeweler": {
                 "name": "Draguljar"
@@ -2073,11 +2266,17 @@
                 "name": "Pješački prijelaz",
                 "terms": "zebra"
             },
+            "footway/crosswalk": {
+                "name": "Pješački prijelaz"
+            },
             "footway/sidewalk": {
                 "name": "Pločnik"
             },
             "ford": {
                 "name": "Prijelaz preko potoka"
+            },
+            "golf/hole": {
+                "name": "Golfska rupa"
             },
             "golf/rough": {
                 "name": "Grubo"
@@ -2092,9 +2291,15 @@
                 "name": "Autobusna stanica",
                 "terms": "bus stanica,stanica za bus,autobusna stanica,busna stanica"
             },
+            "highway/corridor": {
+                "name": "Hodnik"
+            },
             "highway/crossing": {
                 "name": "Pješački prijelaz",
                 "terms": "zebra"
+            },
+            "highway/crosswalk": {
+                "name": "Pješački prijelaz"
             },
             "highway/cycleway": {
                 "name": "Biciklistička staza"
@@ -2129,6 +2334,9 @@
             },
             "highway/primary_link": {
                 "name": "Pristupna cesta državne ceste"
+            },
+            "highway/raceway": {
+                "name": "Staza za moto utrke"
             },
             "highway/residential": {
                 "name": "Ulica"
@@ -2183,8 +2391,7 @@
                 "name": "Pristupna cesta lokalne ceste"
             },
             "highway/track": {
-                "name": "Poljski ili šumski put",
-                "terms": "put,poljski put,šumski put,makadam"
+                "name": "Šumski ili poljski put"
             },
             "highway/traffic_signals": {
                 "name": "Semafor",
@@ -2198,9 +2405,6 @@
             },
             "highway/turning_circle": {
                 "name": "Površina na kraju ceste za polukružno okretanje"
-            },
-            "highway/unclassified": {
-                "name": "Nerazvrstana cesta"
             },
             "historic": {
                 "name": "Povijesno područje"
@@ -2244,8 +2448,17 @@
             "landuse/cemetery": {
                 "name": "Groblje"
             },
+            "landuse/churchyard": {
+                "name": "Crkveno dvorište"
+            },
             "landuse/construction": {
                 "name": "Građevinsko"
+            },
+            "landuse/farm": {
+                "name": "Oranica"
+            },
+            "landuse/farmland": {
+                "name": "Oranica"
             },
             "landuse/farmyard": {
                 "name": "Gospodarsko imanje"
@@ -2300,6 +2513,9 @@
             "leisure/dog_park": {
                 "name": "Park za pse"
             },
+            "leisure/firepit": {
+                "name": "Mjesto za vatru"
+            },
             "leisure/garden": {
                 "name": "Vrt",
                 "terms": "vrt,bašća,povrtnjak,cvjetnjak"
@@ -2314,6 +2530,9 @@
             "leisure/marina": {
                 "name": "Marina",
                 "terms": "marina"
+            },
+            "leisure/nature_reserve": {
+                "name": "Prirodni rezervat"
             },
             "leisure/park": {
                 "name": "Park"
@@ -2364,8 +2583,11 @@
                 "name": "Navoz za brodove",
                 "terms": "istezalište"
             },
-            "leisure/sports_center": {
+            "leisure/sports_centre": {
                 "name": "Sportski centar"
+            },
+            "leisure/sports_centre/swimming": {
+                "name": "Ustanova sa bazenima"
             },
             "leisure/stadium": {
                 "name": "Stadion",
@@ -2374,6 +2596,13 @@
             "leisure/swimming_pool": {
                 "name": "Sportski bazen",
                 "terms": "bazen"
+            },
+            "leisure/track": {
+                "name": "Staza za utrke (nemotorizirane)"
+            },
+            "leisure/water_park": {
+                "name": "Vodeni park",
+                "terms": "Aquapark, akvapark, bazeni"
             },
             "line": {
                 "name": "Linija",
@@ -2389,6 +2618,9 @@
             "man_made/breakwater": {
                 "name": "Lukobran",
                 "terms": "lukobran,zaštita luke od valova,zaštita luke,umjetna zaštita luke,valolom,utvrda obale,molo"
+            },
+            "man_made/chimney": {
+                "name": "Dimnjak"
             },
             "man_made/cutline": {
                 "name": "Prosjeka",
@@ -2408,6 +2640,9 @@
                 "name": "Toranj za promatranje",
                 "terms": "toranj za promatranje,čeka,vidikovački toranj,toranj vidikovac,promatrajući toranj"
             },
+            "man_made/petroleum_well": {
+                "name": "Izvor nafte"
+            },
             "man_made/pier": {
                 "name": "Mol",
                 "terms": "pristanište,mol,lukobran,molo,mul,gat"
@@ -2415,6 +2650,12 @@
             "man_made/pipeline": {
                 "name": "Cjevovod",
                 "terms": "cjevovod,sustav cijevi za prijenos materijala,vod u obliku cijevi,protočna struktura,naftovod,plinovod,cjevovodni transport,transport"
+            },
+            "man_made/silo": {
+                "name": "Silos"
+            },
+            "man_made/surveillance": {
+                "name": "Nadzor"
             },
             "man_made/survey_point": {
                 "name": "Geodetska točka",
@@ -2439,6 +2680,9 @@
             "man_made/water_works": {
                 "name": "Vodocrpilište",
                 "terms": "vodocrpilište,vodovod,vodovodna instalacija,vađenje pitke vode"
+            },
+            "man_made/works": {
+                "name": "Tvornica"
             },
             "military/barracks": {
                 "name": "Vojarna"
@@ -2490,7 +2734,8 @@
                 "terms": "planinski vrh,vrh,sljeme,vrhunac,šiljak,najviša točka"
             },
             "natural/saddle": {
-                "name": "Prijevoj"
+                "name": "Sedlo",
+                "terms": "prijevoj"
             },
             "natural/scree": {
                 "name": "Sitno kamenje na strmini",
@@ -2548,11 +2793,41 @@
             "office/architect": {
                 "name": "Arhitekt"
             },
+            "office/educational_institution": {
+                "name": "Obrazovna ustanova"
+            },
+            "office/government": {
+                "name": "Državni ured"
+            },
+            "office/insurance": {
+                "name": "Ured osiguravajućeg društva"
+            },
+            "office/it": {
+                "name": "Informatički ured"
+            },
+            "office/lawyer": {
+                "name": "Odvjetnički ured"
+            },
+            "office/newspaper": {
+                "name": "Redakcija novina"
+            },
             "office/ngo": {
                 "name": "Nevladina organizacija"
             },
+            "office/physician": {
+                "name": "Liječnička praksa"
+            },
             "office/political_party": {
                 "name": "Politička stranka"
+            },
+            "office/research": {
+                "name": "Ured za istraživanje"
+            },
+            "office/telecommunication": {
+                "name": "Ured za telekomunikacije"
+            },
+            "office/therapist": {
+                "name": "Psihoterapeut"
             },
             "office/travel_agent": {
                 "name": "Putnička agencija"
@@ -2583,6 +2858,9 @@
             "place/locality": {
                 "name": "Lokalitet",
                 "terms": "lokalitet,nenastanjeno mjesto,specifično mjesto"
+            },
+            "place/neighbourhood": {
+                "name": "Susjedstvo"
             },
             "place/town": {
                 "name": "Gradić",
@@ -2714,7 +2992,7 @@
                 "name": "Antikvarijat"
             },
             "shop/art": {
-                "name": "Umjetnička galerija"
+                "name": "Trgovina umjetninama"
             },
             "shop/baby_goods": {
                 "name": "Trgovina za bebe",
@@ -2756,6 +3034,9 @@
             "shop/butcher": {
                 "name": "Mesnica",
                 "terms": "mesnica"
+            },
+            "shop/candles": {
+                "name": "Prodavaonica svijeća"
             },
             "shop/car": {
                 "name": "Prodavaonica automobila",
@@ -2805,7 +3086,7 @@
                 "name": "Prodavaonica kozmetike"
             },
             "shop/craft": {
-                "name": "Hobby & art dućan",
+                "name": "Hobby & art trgovina",
                 "terms": "dućan za hobije, slikarski dućan, kistovi"
             },
             "shop/curtain": {
@@ -2917,7 +3198,7 @@
                 "name": "Bravar"
             },
             "shop/lottery": {
-                "name": "Dućan igara na sreću",
+                "name": "Trgovina igara na sreću",
                 "terms": "lutrija"
             },
             "shop/mall": {
@@ -2960,6 +3241,9 @@
             "shop/outdoor": {
                 "name": "Trgovina sa opremom za kampiranje",
                 "terms": "planinarenje, trčanje, kampiranje"
+            },
+            "shop/paint": {
+                "name": "Prodavaonica boja"
             },
             "shop/pawnbroker": {
                 "name": "Zalagaonica"
@@ -3012,6 +3296,9 @@
             },
             "shop/tea": {
                 "name": "Trgovina za čajeve"
+            },
+            "shop/ticket": {
+                "name": "Prodavač ulaznica"
             },
             "shop/tobacco": {
                 "name": "Trgovina za duhanske proizvode",
@@ -3086,8 +3373,12 @@
                 "name": "Bungalov",
                 "terms": "planinarski dom,planinska koliba,koliba,planinarski,planinarska"
             },
+            "tourism/gallery": {
+                "name": "Umjetnička galerija"
+            },
             "tourism/guest_house": {
-                "name": "Gostinjska kuća"
+                "name": "Gostinjska kuća",
+                "terms": "apartmani, gostinjska kuća"
             },
             "tourism/hostel": {
                 "name": "Hostel",
@@ -3126,6 +3417,10 @@
                 "terms": "zoološki vrt,zoopark,park sa životinjama"
             },
             "traffic_calming/bump": {
+                "name": "Uspornik",
+                "terms": "ležeći policajac"
+            },
+            "traffic_calming/hump": {
                 "name": "Uspornik",
                 "terms": "ležeći policajac"
             },

@@ -3,6 +3,11 @@
 Thinking of contributing to iD? High five! Here are some basics for our habits
 so that you can write code that fits in perfectly.
 
+## Code of Conduct
+
+We want everyone to feel comfortable contributing to iD.  Please read the project
+[Code of Conduct](CODE_OF_CONDUCT.md) and remember to be nice to one another.
+
 ## Reporting Issues
 
 We'd love to hear what you think about iD, about any specific problems or
@@ -12,11 +17,15 @@ Please [search for your issue before filing it: many bugs and improvements have 
 
 To report a bug:
 
-* Write specifically what browser (type and version, like "Firefox 43.0"), OS, and browser extensions you have installed
-* Write steps to replicate the error: when did it happen? What did you expect to happen? What happened instead?
+* Write specifically what browser (type and version, like "Firefox 43.0"), OS,
+and browser extensions you have installed
+* Write steps to replicate the error: when did it happen? What did you expect to happen?
+What happened instead?
+* We love screenshots.  If you can take a picture of the issue, that is extra helpful.
+You can drag the image file onto the GitHub issue and it will be included with your bug report.
 * Please keep bug reports professional and straightforward: trust us, we share your dismay at software breaking.
 * If you can, [enable web developer extensions](http://debugbrowser.com/) and report the
-  Javascript error message.
+Javascript error message.
 
 When in doubt, be over-descriptive of the bug and how you discovered it.
 
@@ -153,13 +162,15 @@ feel free to use newer features wisely.
 
 ## Tests
 
-Test your code and make sure it passes. Our testing harness requires [node.js](http://nodejs.org/)
-and a few modules:
+Test your code and make sure it passes.
 
-1. [Install node.js](http://nodejs.org/) version 0.10.0 or later - 'Install' will download a package for your OS
-2. Go to the directory where you have checked out `iD`
-3. Run `npm install`
-4. Run `npm test` to see whether your tests pass or fail.
+First ensure you have a `phantomjs` binary, version 2.0 or later, available on your `$PATH`. On a Mac,
+you can install this via homebrew with `brew install phantomjs`. Then:
+
+1. Go to the directory where you have checked out `iD`
+2. run `npm install`
+3. run `make`
+4. run `npm test` to see whether your tests pass or fail.
 
 ## Building / Installing
 
@@ -168,6 +179,17 @@ required for this.
 
 iD will be built to the `dist` directory. This directory is self-contained; you can copy it
 into the public directory of your webserver to deploy iD.
+
+## Live reloading
+
+You can use [live-server](https://www.npmjs.com/package/live-server) *(npm module)* to
+reload the browser automatically whenever there is a change in code.
+
+1. run `npm install -g live-server`
+2. run  `live-server .` or `live-server dist`
+ *(You will be automatically redirected to the local server page.)*
+
+*(Note: Sometimes auto reload might not display correctly and you might need to rebuild iD by running `make`.)*
 
 ## Licensing
 

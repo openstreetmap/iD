@@ -67,7 +67,7 @@ iD.svg.Midpoints = function(projection, context) {
             return false;
         }
 
-        var groups = surface.select('.layer-hit').selectAll('g.midpoint')
+        var groups = surface.selectAll('.layer-hit').selectAll('g.midpoint')
             .filter(midpointFilter)
             .data(_.values(midpoints), function(d) { return d.id; });
 

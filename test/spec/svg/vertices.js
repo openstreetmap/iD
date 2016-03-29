@@ -6,7 +6,7 @@ describe("iD.svg.Vertices", function () {
     beforeEach(function () {
         context = iD();
         surface = d3.select(document.createElementNS('http://www.w3.org/2000/svg', 'svg'))
-            .call(iD.svg.Surface(context));
+            .call(iD.svg.Layers(context));
     });
 
     it("adds the .shared class to vertices that are members of two or more ways", function () {
