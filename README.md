@@ -24,11 +24,18 @@ Come on in, the water's lovely. More help? Ping `jfire` or `bhousel` on
 (`irc.oftc.net`, in `#iD` or `#osm-dev` or `#osm`) or on the [OpenStreetMap `dev` mailing list](http://wiki.openstreetmap.org/wiki/Mailing_lists).
 
 ## Prerequisites
-
 * [Node.js](http://nodejs.org/) version 0.10.0 or newer
 * Command line development tools (`make`, `git`, and a compiler) for your platform
-  * Ubuntu: `sudo apt-get install build-essential git`
-  * Mac OS X: Install Xcode and run `xcode-select --install` from a command line
+  * Ubuntu:
+    * `sudo apt-get install build-essential git`
+  * Mac OS X:
+    * Install [Xcode](https://developer.apple.com/xcode/) and run `xcode-select --install` from a command line
+  * Windows (Cygwin):
+    * Install [Git for Windows](https://git-scm.com/downloads)
+    * Install [Cygwin](https://cygwin.com/install.html) - install default packages + `make`, `wget`
+    * Optionally, install [apt-cyg](https://github.com/transcode-open/apt-cyg) for managing your Cygwin packages
+    * Edit `.bashrc`:
+      * Put Git for Windows before Cygwin in PATH, otherwise `npm install` may [fail to fetch git repositories](https://github.com/npm/npm/issues/7456)<br/>`export PATH=/cygdrive/c/Program\ Files/Git/mingw64/bin/:$PATH`
 
 ## Installation
 
