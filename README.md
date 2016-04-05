@@ -34,8 +34,13 @@ Come on in, the water's lovely. More help? Ping `jfire` or `bhousel` on
     * Install [Git for Windows](https://git-scm.com/downloads)
     * Install [Cygwin](https://cygwin.com/install.html) - install default packages + `make`, `wget`
     * Optionally, install [apt-cyg](https://github.com/transcode-open/apt-cyg) for managing your Cygwin packages
-    * Edit `.bashrc`:
-      * Put Git for Windows before Cygwin in PATH, otherwise `npm install` may [fail to fetch git repositories](https://github.com/npm/npm/issues/7456)<br/>`export PATH=/cygdrive/c/Program\ Files/Git/mingw64/bin/:$PATH`
+    * Edit `~/.bashrc`:<br/>
+      Put Git for Windows before Cygwin in PATH, otherwise `npm install` may [fail to fetch git repositories](https://github.com/npm/npm/issues/7456)<br/><pre>
+      export PATH=/cygdrive/c/Program\ Files/Git/mingw64/bin/:$PATH</pre>
+    * Edit `~/.gitconfig`:<br/>
+      Add these lines to avoid checking in files with CRLF newlines<br><pre>
+      [core]
+          autocrlf = input</pre>
 
 ## Installation
 
