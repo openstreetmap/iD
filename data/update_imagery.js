@@ -5,7 +5,7 @@ var imagery = [];
 var blacklist = {
     "2u": true,
     "Hike & Bike": true,
-    "OpenCycleMap": true,
+    // "OpenCycleMap": true,
     "OpenStreetMap (German Language)": true,
     "OpenStreetMap (German Style)": true,
     "OpenStreetMap (Sorbian Language)": true,
