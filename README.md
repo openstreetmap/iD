@@ -47,10 +47,11 @@ Come on in, the water's lovely. More help? Ping `jfire` or `bhousel` on
 To run the current development version of iD on your own computer:
 
 1. Create a local `git clone` of the project, then `cd` into the project folder
-2. Run `npm install`
-3. Run `make`
-4. Start a local web server, e.g. `python -m SimpleHTTPServer`
-5. Open `http://localhost:8000/` in a web browser
+2. (Windows Only)  Run `fixWinSymlinks.bat`.  This script will prompt for Administrator rights.  see also: http://stackoverflow.com/questions/5917249/git-symlinks-in-windows
+3. Run `npm install`
+4. Run `make`
+5. Start a local web server, e.g. `python -m SimpleHTTPServer`
+6. Open `http://localhost:8000/` in a web browser
 
 For guidance on building a packaged version, running tests, and contributing to
 development, see [CONTRIBUTING.md](CONTRIBUTING.md).
