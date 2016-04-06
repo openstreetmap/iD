@@ -9,7 +9,8 @@ iD.TileLayer = function() {
         source = d3.functor('');
 
     function tileSizeAtZoom(d, z) {
-        return (tileSize * Math.pow(2, z - d[2])) / tileSize;
+        var epsilon = 0.002;
+        return ((tileSize * Math.pow(2, z - d[2])) / tileSize) + epsilon;
     }
 
     function atZoom(t, distance) {
