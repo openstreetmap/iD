@@ -41208,6 +41208,36 @@
         "terms_text": "Stadt Zürich Luftbild 2011"
     },
     {
+        "name": "Stadtplan Zürich",
+        "type": "tms",
+        "template": "http://mapproxy.sosm.ch:8080/tiles/zh_stadtplan/EPSG900913/{zoom}/{x}/{y}.png?origin=nw",
+        "polygon": [
+            [
+                [
+                    8.4482,
+                    47.321
+                ],
+                [
+                    8.4482,
+                    47.4339
+                ],
+                [
+                    8.6248,
+                    47.4339
+                ],
+                [
+                    8.6248,
+                    47.321
+                ],
+                [
+                    8.4482,
+                    47.321
+                ]
+            ]
+        ],
+        "terms_text": "Stadt Zürich Open Government Data"
+    },
+    {
         "name": "Stevns (Denmark)",
         "type": "tms",
         "template": "http://{switch:a,b,c}.tile.openstreetmap.dk/stevns/2009/{zoom}/{x}/{y}.png",

@@ -5,15 +5,12 @@ var imagery = [];
 var blacklist = {
     "2u": true,
     "Hike & Bike": true,
-    // "OpenCycleMap": true,
     "OpenStreetMap (German Language)": true,
     "OpenStreetMap (German Style)": true,
     "OpenStreetMap (Sorbian Language)": true,
-    "MapQuest OSM": true,
     "OpenStreetMap (Standard Black & White)": true,
     "Skobbler": true,
 
-    "Stadtplan Z\u00fcrich": true, // https://github.com/osmlab/editor-imagery-index/issues/14
     "Public Transport (\u00d6PNV)": true, // https://github.com/osmlab/editor-imagery-index/issues/15
 
     "TIGER 2012 Roads Overlay": true, // https://github.com/openstreetmap/iD/pull/2010,
