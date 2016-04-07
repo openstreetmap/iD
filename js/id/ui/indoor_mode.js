@@ -1,98 +1,97 @@
 iD.ui.IndoorMode = function (context) {
-    var redrawButton = function (selection, enableButton) {
+    var updateControls = function (selection, enableButton) {
 
-        //buttons.each(function(d) {
-        //    d3.select(this)
-        //        .call(iD.svg.Icon('#icon-' + d.id));
-        //});
 
-        //update selection
-        buttons.select('span.label')
-            .text('Good');
+        var enterButton = selection.select('.indoormode-enter-button');
+        var indoorControl = selection.select('.indoormode-control');
 
         if (context.indoorMode()) {
-            commands[0].title = "Level " + context.indoorLevel();
-            //selection.selectAll('button').data(commands)
-        }
+            console.log("updateControls indoor=true");
+            enterButton.classed('hide', true);
+            indoorControl.classed('hide', false);
+            indoorControl.select('.combobox-input')
+                .attr('placeholder', context.indoorLevel())
+                .value('')
+                .call(d3.combobox().data(context.indoorLevels().map(comboValues)));
 
-        buttons
-            .property('disabled', !enableButton)
-            .classed('hide', !enableButton)
-        //.each(function() {
-        //    var selection = d3.select(this);
-        //    if (selection.property('tooltipVisible')) {
-        //        selection.call(tooltip.show);
-        //    }
-        //});
+        }
+        else {
+            enterButton.classed('hide', false).property('disabled', !enableButton);
+            indoorControl.classed('hide', true);
+        }
     };
 
-    var initButtons = function (selection) {
-        var enterButtonTooltip = bootstrap.tooltip()
+    var toggleIndoor = function () {
+        d3.event.preventDefault();
+        context.toggleIndoorMode();
+
+    };
+
+    var buttonTooltip = function (description) {
+        return bootstrap.tooltip()
             .placement('bottom')
             .html(true)
-            .title(iD.ui.tooltipHtml('Enter indoor editing mode', iD.ui.cmd('⌘I')));
+            .title(iD.ui.tooltipHtml(description, iD.ui.cmd('⌘⇧I')));
+    };
 
-        var exitButtonTooltip = bootstrap.tooltip()
-            .placement('bottom')
-            .html(true)
-            .title(iD.ui.tooltipHtml('Exit indoor editing mode', iD.ui.cmd('⌘I')));
+    var setLevel = function () {
+        var input = d3.select(this);
+        var data = input.value(); //string!
+        if (data === '') return; //blank value
+        console.log('setLevel', data);
 
+        input
+            .attr('placeholder', data)
+            .value('');
 
+        context.indoorLevel(data);
+
+    };
+
+    var createControls = function (selection) {
         var enterButton = selection.append('button')
-            .attr('class', 'col6')
-            .on('click', function () {
-                context.enterIndoorMode();
-            })
-            .call(enterButtonTooltip);
+            .attr('class', 'indoormode-enter-button col12 ')
+            .on('click', toggleIndoor)
+            .call(buttonTooltip('Enter indoor editing mode'))
+            .append('span').attr('class', 'label').text('Indoor');
 
 
-        var buttons = selection.selectAll('button');
+        var indoorControl = selection.append('div')
+            .attr('class', 'indoormode-control joined ');
 
-        //enter selection
-        buttons
-            .enter().append('button')
+        indoorControl.append('div')
+            .attr('class', 'col8 indoormode-level-combo')
+            .append('input')
+            .attr('type', 'text')
+            .call(d3.combobox().data([0, 1, 2, 3, 4, 5, 6].map(comboValues)))
+            .on('blur', setLevel)
+            .on('change', setLevel)
 
+        indoorControl.append('button')
+            .attr('class', 'col4')
+            .on('click', toggleIndoor)
+            .call(buttonTooltip('Exit indoor editing mode'))
+            .call(iD.svg.Icon('#icon-close'));
 
-        //update selection
-        buttons.append('span')
-            .attr('class', 'label')
-            .text(function (mode) {
-                return mode.title;
-            });
-
-
-        buttons
-            .property('disabled', !true)
-            .classed('hide', !true);
-
+        enterButton.classed('hide', false).property('disabled', true);
+        indoorControl.classed('hide', true);
     };
 
 
     return function (selection) {
 
         // draw both controls hidden
-        initButtons(selection);
-
-        // enable one of them and update labels
-        redrawButton(selection, false);
-
+        createControls(selection);
 
         var keybinding = d3.keybinding('indoor')
-            .on(commands[0].cmd, function () {
-                d3.event.preventDefault();
-                commands[0].action();
-            })
-        //.on(commands[1].cmd, function() { d3.event.preventDefault(); commands[1].action(); });
+            .on(iD.ui.cmd('⌘I'), toggleIndoor)
 
         d3.select(document)
             .call(keybinding);
 
-        //context.history()
-        //    .on('change.undo_redo', update);
-
         context
             .on('enter.indoor_mode', update)
-        //.on('indoorModeChanged.indoor_mode', update);
+            .on('indoor.indoor_mode', update);
 
         function update() {
             var enableButton = context.indoorMode();
@@ -111,9 +110,17 @@ iD.ui.IndoorMode = function (context) {
 
             console.log("context.on(enter) called");
             console.log('enableIndoor', enableButton)
-            redrawButton(selection, enableButton);
+            updateControls(selection, enableButton);
         }
     };
+
+
+    function comboValues(d) {
+        return {
+            value: d.toString(),
+            title: d.toString()
+        };
+    }
 };
 
 /*

@@ -140,8 +140,52 @@ iD.Map = function(context) {
             }
         }
 
+        //filtering data
+        if (context.indoorMode()) {
+            var levelRange = /(-?\d+)(?:(-)(-?\d+)|(;-?\d)+)?/; // alowing untrimed string (not sure..)
+
+            var inRange = function (value, rangeText) {
+                var range = rangeText && levelRange.exec(rangeText);
+
+                if (!range) {  //blank text OR not matched
+                    return false;
+                }
+
+                if (range[2] === undefined && range[4] == undefined) { //exact match
+                    if (range[1] === value) {
+                        return true;
+                    }
+                }
+                else if (range[2] === '-') { // range from - to
+                    if (range[1] <= value && range[3] >= value) {
+                        return true;
+                    }
+                }
+                else { // range list
+                    if (range[0].split(';').indexOf(value) !== -1) {
+                        return true;
+                    }
+                }
+
+                return false;
+            };
+
+            data = data.filter(function (entity) {
+                var current = context.indoorLevel();
+
+                if (inRange(current, entity.tags.level)) {
+                    return true;
+                }
+                if (inRange(current, entity.tags.repeat_on)) {
+                    return true;
+                }
+                return false;
+            });
+        }
+
         data = features.filter(data, graph);
 
+        //surface = d3 selection of "<svg>'s surface for entities"
         surface
             .call(drawVertices, graph, data, filter, map.extent(), map.zoom())
             .call(drawLines, graph, data, filter)
@@ -202,6 +246,7 @@ iD.Map = function(context) {
         return true;
     }
 
+    map.redraw = redraw;
     function redraw(difference, extent) {
         if (!surface || !redrawEnabled) return;
 

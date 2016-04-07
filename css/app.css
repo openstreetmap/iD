@@ -485,6 +485,12 @@ button.save.has-count .count::before {
     border-right:  6px solid rgba(255,255,255,.5);
 }
 
+.indoormode-level-combo .combobox-input,
+.indoormode-level-combo .combobox-caret {
+    height: 40px;
+    border-radius: 4px 0 0 4px;
+}
+
 /* Icons */
 
 .icon {

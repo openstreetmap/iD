@@ -2,7 +2,7 @@ window.iD = function () {
     window.locale.en = iD.data.en;
     window.locale.current('en');
 
-    var dispatch = d3.dispatch('enter', 'exit', 'indoorMode'),
+    var dispatch = d3.dispatch('enter', 'exit', 'indoor'),
         context = {};
 
     // https://github.com/openstreetmap/iD/issues/772
@@ -322,20 +322,33 @@ window.iD = function () {
 
 
     /* Indoor mode */
-    var indoorMode = false, indoorLevel;
+    var indoorMode = false, indoorLevel = '0';
+    //    return d3.rebind(indoor, dispatch, 'on');
+
 
     context.indoorMode = function () {
         return indoorMode;
     };
 
-    context.indoorLevel = function () {
+    context.indoorLevel = function (newLevel) {
+        if (newLevel && newLevel !== indoorLevel) {
+            indoorLevel = newLevel;
+            map.redraw(); //TODO event?
+
+        }
         return indoorLevel;
     };
 
-    context.enterIndoorMode = function () {
-        console.log("context.enterIndoorMode called");
-        indoorMode = true;
-        indoorLevel = prompt("Enter level", "1");
+    context.toggleIndoorMode = function () {
+        console.log("context.toggleIndoorMode called");
+        indoorMode = !indoorMode;
+        dispatch.indoor(); //update combo
+
+        map.redraw(); //TODO event?
+    };
+
+    context.indoorLevels = function () {
+        return [-1, 0, 1, 2]
     };
 
     /* Init */
