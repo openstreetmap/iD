@@ -2429,7 +2429,8 @@ div.full-screen > button:hover {
     vertical-align: middle;
 }
 
-.save-section .buttons .action {
+.save-section .buttons .action,
+.save-section .buttons .secondary-action {
     display: inline-block;
     margin: 0 20px 0 0;
     text-align: center;

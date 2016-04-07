@@ -151,6 +151,14 @@ iD.ui.Commit = function(context) {
         var buttonSection = saveSection.append('div')
             .attr('class','buttons fillL cf');
 
+        var cancelButton = buttonSection.append('button')
+            .attr('class', 'secondary-action col5 button cancel-button')
+            .on('click.cancel', function() { dispatch.cancel(); });
+
+        cancelButton.append('span')
+            .attr('class', 'label')
+            .text(t('commit.cancel'));
+
         var saveButton = buttonSection.append('button')
             .attr('class', 'action col5 button save-button')
             .attr('disabled', function() {
@@ -166,14 +174,6 @@ iD.ui.Commit = function(context) {
         saveButton.append('span')
             .attr('class', 'label')
             .text(t('commit.save'));
-
-        var cancelButton = buttonSection.append('button')
-            .attr('class', 'action col5 button cancel-button')
-            .on('click.cancel', function() { dispatch.cancel(); });
-
-        cancelButton.append('span')
-            .attr('class', 'label')
-            .text(t('commit.cancel'));
 
 
         // Changes
