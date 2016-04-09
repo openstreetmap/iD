@@ -44,12 +44,17 @@ iD.services.taginfo = function() {
         return function(d) { return parseFloat(d.fraction) > 0.01 || d.in_wiki; };
     }
 
-    function valKey(d) { return { value: d.key }; }
+    function valKey(d) {
+        return {
+            value: d.key,
+            title: d.key
+        };
+    }
 
     function valKeyDescription(d) {
         return {
             value: d.value,
-            title: d.description
+            title: d.description || d.value
         };
     }
 

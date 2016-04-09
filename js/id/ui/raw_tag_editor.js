@@ -100,11 +100,13 @@ iD.ui.RawTagEditor = function(context) {
         });
 
         $items.select('input.key')
+            .attr('title', function(d) { return d.key; })
             .value(function(d) { return d.key; })
             .on('blur', keyChange)
             .on('change', keyChange);
 
         $items.select('input.value')
+            .attr('title', function(d) { return d.value; })
             .value(function(d) { return d.value; })
             .on('blur', valueChange)
             .on('change', valueChange)
