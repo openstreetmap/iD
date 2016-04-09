@@ -184,8 +184,11 @@ iD.ui.EntityEditor = function(context) {
     function changeTags(changed, onInput) {
         var entity = context.entity(id),
             annotation = t('operations.change_tags.annotation'),
-            tags = clean(_.extend({}, entity.tags, changed));
+            tags = _.extend({}, entity.tags, changed);
 
+        if (!onInput) {
+            tags = clean(tags);
+        }
         if (!_.isEqual(entity.tags, tags)) {
             if (coalesceChanges) {
                 context.overwrite(iD.actions.ChangeTags(id, tags), annotation);
