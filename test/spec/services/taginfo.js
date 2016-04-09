@@ -26,7 +26,7 @@ describe("iD.services.taginfo", function() {
 
             expect(query(server.requests[0].url)).to.eql(
                 {query: "amen", page: "1", rp: "10", sortname: "count_all", sortorder: "desc"});
-            expect(callback).to.have.been.calledWith(null, [{"value":"amenity"}]);
+            expect(callback).to.have.been.calledWith(null, [{"title":"amenity", "value":"amenity"}]);
         });
 
         it("filters only popular keys", function() {
@@ -39,7 +39,7 @@ describe("iD.services.taginfo", function() {
                               {"count_all":1,"key":"amenityother","count_all_fraction":0.0, "count_nodes_fraction":0.0}]}']);
             server.respond();
 
-            expect(callback).to.have.been.calledWith(null, [{"value":"amenity"}]);
+            expect(callback).to.have.been.calledWith(null, [{"title":"amenity", "value":"amenity"}]);
         });
 
         it("filters only popular keys with an entity type filter", function() {
@@ -53,7 +53,7 @@ describe("iD.services.taginfo", function() {
                               {"count_all":1,"key":"amenityother","count_all_fraction":0.0, "count_nodes":100}]}']);
             server.respond();
 
-            expect(callback).to.have.been.calledWith(null, [{"value":"amenity"}]);
+            expect(callback).to.have.been.calledWith(null, [{"title":"amenity", "value":"amenity"}]);
         });
 
         it("sorts keys with ':' below keys without ':'", function() {
@@ -67,7 +67,7 @@ describe("iD.services.taginfo", function() {
                               {"key":"ref","count_all":7933528,"count_all_fraction":0.0023}]}']);
             server.respond();
 
-            expect(callback).to.have.been.calledWith(null, [{"value":"ref"},{"value":"ref:bag"}]);
+            expect(callback).to.have.been.calledWith(null, [{"title":"ref", "value":"ref"},{"title":"ref:bag", "value":"ref:bag"}]);
         });
     });
 
