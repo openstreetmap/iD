@@ -8,6 +8,19 @@ iD.TileLayer = function() {
         transformProp = iD.util.prefixCSSProperty('Transform'),
         source = d3.functor('');
 
+
+    // blacklist overlay tiles around Null Island..
+    function nearNullIsland(x, y, z) {
+        if (z >= 7) {
+            var center = Math.pow(2, z - 1),
+                width = Math.pow(2, z - 6),
+                min = center - (width / 2),
+                max = center + (width / 2) - 1;
+            return x >= min && x <= max && y >= min && y <= max;
+        }
+        return false;
+    }
+
     function tileSizeAtZoom(d, z) {
         var epsilon = 0.002;
         return ((tileSize * Math.pow(2, z - d[2])) / tileSize) + epsilon;
@@ -78,6 +91,9 @@ iD.TileLayer = function() {
             });
 
             requests = uniqueBy(requests, 3).filter(function(r) {
+                if (!!source.overlay && nearNullIsland(r[0], r[1], r[2])) {
+                    return false;
+                }
                 // don't re-request tiles which have failed in the past
                 return cache[r[3]] !== false;
             });

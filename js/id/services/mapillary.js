@@ -36,6 +36,17 @@ iD.services.mapillary = function() {
         i.abort();
     }
 
+    function nearNullIsland(x, y, z) {
+        if (z >= 7) {
+            var center = Math.pow(2, z - 1),
+                width = Math.pow(2, z - 6),
+                min = center - (width / 2),
+                max = center + (width / 2) - 1;
+            return x >= min && x <= max && y >= min && y <= max;
+        }
+        return false;
+    }
+
     function getTiles(projection, dimensions) {
         var s = projection.scale() * 2 * Math.PI,
             z = Math.max(Math.log(s) / Math.log(2) - 8, 0),
@@ -64,7 +75,10 @@ iD.services.mapillary = function() {
 
 
     function loadTiles(which, url, projection, dimensions) {
-        var tiles = getTiles(projection, dimensions);
+        var tiles = getTiles(projection, dimensions).filter(function(t) {
+                var xyz = t.id.split(',');
+                return !nearNullIsland(xyz[0], xyz[1], xyz[2]);
+            });
 
         _.filter(which.inflight, function(v, k) {
             var wanted = _.find(tiles, function(tile) { return k === (tile.id + ',0'); });
