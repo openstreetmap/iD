@@ -15,6 +15,8 @@ var blacklist = {
 
     "TIGER 2012 Roads Overlay": true, // https://github.com/openstreetmap/iD/pull/2010,
 
+    "Thunderforest OpenCycleMap": true,
+
     "Waymarked Trails: Cycling": true,
     "Waymarked Trails: Hiking": true,
     "Waymarked Trails: MTB": true,
