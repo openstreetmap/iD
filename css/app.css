@@ -1767,10 +1767,6 @@ div.full-screen > button:hover {
     position: relative;
 }
 
-.nudge-container {
-    border: 1px solid #CCC;
-}
-
 .imagery-faq {
   margin-bottom: 10px;
 }
@@ -1895,9 +1891,70 @@ div.full-screen > button:hover {
 .background-control .nudge-container button {
     float: left;
     display: block;
-    width:20%;
-    border-right: 1px solid #CCC;
+    width: 20%;
     position: relative;
+}
+
+.background-control .nudge-container input {
+    width: 100%;
+    height: 20px;
+    text-align: center;
+    border: 0;
+}
+
+.background-control .nudge-container input.error {
+    border: 1px solid #FF7878;
+    border-radius: 2px;
+}
+
+.background-control .nudge-container input:focus {
+    background-color: transparent;
+}
+
+.background-control .nudge-container button.left {
+    top: -50px;
+    right: -85%;
+    background-color: transparent;
+}
+
+.background-control .nudge-container button.right {
+    top: -50px;
+    right: 45%;
+    background-color: transparent;
+}
+
+.background-control .nudge-container button.top {
+    left: 20%;
+    top: -100px;
+    background-color: transparent;
+}
+
+.background-control .nudge-container button.bottom {
+    left: -20%;
+    background-color: transparent;
+}
+
+.background-control .nudge-outer-rect {
+    border: 1px solid #CCC;
+    width: 70%;
+    height: 60px;
+    padding: 20px 0;
+    background-color: #EEE;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 2px;
+    margin: 0 auto;
+    margin-top: 20px;
+    cursor: pointer;
+}
+
+.background-control .nudge-inner-rect {
+    width: 50%;
+    min-height: 20px;
+    border: 1px solid #CCC;
+    border-radius: 2px;
+    background-color: white
 }
 
 .background-control .nudge::after {
