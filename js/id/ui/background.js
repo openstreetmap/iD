@@ -136,44 +136,74 @@ iD.ui.Background = function(context) {
             if (source.id === 'custom') {
                 customTemplate = source.template;
             }
+
+            updateOffsetVal();
+        }
+
+        function offsetToMeters(offset) {
+            var equatRadius = 6356752.314245179,
+                polarRadius = 6378137.0,
+                tileSize = 256;
+
+            return [
+                offset[0] * 2 * Math.PI * equatRadius / tileSize,
+                offset[1] * 2 * Math.PI * polarRadius / tileSize
+            ];
+        }
+
+        function metersToOffset(meters) {
+            var equatRadius = 6356752.314245179,
+                polarRadius = 6378137.0,
+                tileSize = 256;
+
+            return [
+                meters[0] * tileSize / (2 * Math.PI * equatRadius),
+                meters[1] * tileSize / (2 * Math.PI * polarRadius)
+            ];
+        }
+
+        function updateOffsetVal() {
+            var meters = offsetToMeters(context.background().offset()),
+                x = +meters[0].toFixed(2),
+                y = +meters[1].toFixed(2);
+
+            d3.selectAll('.nudge-inner-rect')
+                .select('input')
+                .classed('error', false)
+                .property('value', x + ', ' + y);
+
+            d3.selectAll('.nudge-reset')
+                .classed('disabled', function() {
+                    return (x === 0 && y === 0);
+                });
         }
 
         function resetOffset() {
             context.background().offset([0, 0]);
-
-            d3.select('.nudge-inner-rect')
-                .select('input')
-                .classed('error', false)
-                .node().value = null;
-
-            resetButton.classed('disabled', true);
+            updateOffsetVal();
         }
 
         function nudge(d) {
-            var offset = context.background()
-                .nudge(d, context.map().zoom())
-                .offset();
-
-            resetButton.classed('disabled', offset[0] === 0 && offset[1] === 0);
+            context.background().nudge(d, context.map().zoom());
+            updateOffsetVal();
         }
 
-        function clickNudge(d) {
+        function buttonOffset(d) {
             var timeout = window.setTimeout(function() {
                     interval = window.setInterval(nudge.bind(null, d), 100);
                 }, 500),
                 interval;
 
-            d3.select(this).on('mouseup', function() {
+            d3.select(window).on('mouseup', function() {
                 window.clearInterval(interval);
                 window.clearTimeout(timeout);
-                d3.select(this).on('mouseup', null);
-                nudge(d);
+                d3.select(window).on('mouseup', null);
             });
 
             nudge(d);
         }
 
-        function customNudge() {
+        function inputOffset() {
             var input = d3.select(this);
             var d = input.node().value;
 
@@ -189,40 +219,38 @@ iD.ui.Background = function(context) {
                 return;
             }
 
-            input.classed('error', false);
-            nudge(d);
+            context.background().offset(metersToOffset(d));
+            updateOffsetVal();
         }
 
         function dragOffset() {
-            var delay = 100, prev = 0;
-            var body = d3.select('body');
-            var lastMoused;
-            body.on('mousemove', function() {
-                var t = new Date().getTime();
-                if (t - prev >= delay) {
-                    prev = new Date().getTime();
-                    drag.call(this);
-                }
-            });
+            var origin = [d3.event.clientX, d3.event.clientY];
 
-            body.on('mouseup', function() {
-                d3.select('body').on('mousemove', null);
-                d3.select('body').on('mouseup', null);
-            });
-
-            function drag() {
-                var latest = d3.mouse(this);
-
-                var d = latest.map(function(n, i) {
-                  return lastMoused ? (n - lastMoused[i])/4 : 0;
+            d3.select(window)
+                .on('mousemove.offset', function() {
+                    drag();
+                })
+                .on('mouseup', function() {
+                    d3.select(window)
+                        .on('mousemove.offset', null)
+                        .on('mouseup.offset', null);
                 });
 
-                lastMoused = d3.mouse(this);
+            function drag() {
+                var latest = [d3.event.clientX, d3.event.clientY];
+                var d = [
+                    (origin[0] - latest[0]) / 4,
+                    (origin[1] - latest[1]) / 4
+                ];
+
+                origin = latest;
                 nudge(d);
             }
         }
 
-        function hide() { setVisible(false); }
+        function hide() {
+            setVisible(false);
+        }
 
         function toggle() {
             if (d3.event) d3.event.preventDefault();
@@ -272,6 +300,9 @@ iD.ui.Background = function(context) {
                 .call(tooltip),
             shown = false;
 
+
+        /* opacity switcher */
+
         var opa = content.append('div')
                 .attr('class', 'opacity-options-wrapper');
 
@@ -295,6 +326,9 @@ iD.ui.Background = function(context) {
             .append('div')
             .attr('class', 'opacity')
             .style('opacity', function(d) { return 1.25 - d; });
+
+
+        /* background switcher */
 
         var backgroundList = content.append('ul')
             .attr('class', 'layer-list');
@@ -343,6 +377,9 @@ iD.ui.Background = function(context) {
         var controls = content.append('div')
             .attr('class', 'controls-list');
 
+
+        /* minimap toggle */
+
         var minimapLabel = controls
             .append('label')
             .call(bootstrap.tooltip()
@@ -362,6 +399,9 @@ iD.ui.Background = function(context) {
         minimapLabel.append('span')
             .text(t('background.minimap.description'));
 
+
+        /* imagery offset controls */
+
         var adjustments = content.append('div')
             .attr('class', 'adjustments');
 
@@ -379,23 +419,22 @@ iD.ui.Background = function(context) {
 
         var nudgeContainer = adjustments.append('div')
             .attr('class', 'nudge-container cf')
-            .style('display', 'none')
-            .call(bootstrap.tooltip()
-                .html(true)
-                .title(iD.ui.tooltipHtml(t('background.offset'))
-                .placement('top')));
+            .style('display', 'none');
+
+        nudgeContainer.append('div')
+            .attr('class', 'nudge-instructions')
+            .text(t('background.offset'));
 
         var nudgeRect = nudgeContainer.append('div')
             .attr('class', 'nudge-outer-rect')
-            // mouseup is being handled at dragOffset
             .on('mousedown', dragOffset);
 
         nudgeRect.append('div')
             .attr('class', 'nudge-inner-rect')
             .append('input')
-            .on('change', customNudge)
+            .on('change', inputOffset)
             .on('mousedown', function() {
-              d3.event.stopPropagation();
+                d3.event.stopPropagation();
             });
 
         nudgeContainer.append('div').selectAll('button')
@@ -403,12 +442,12 @@ iD.ui.Background = function(context) {
             .append('button')
             .attr('class', function(d) { return d[0] + ' nudge'; })
             .on('mousedown', function(d) {
-              clickNudge(d[1]);
+                buttonOffset(d[1]);
             });
 
         var resetButton = nudgeContainer
             .append('button')
-            .attr('class', 'reset disabled')
+            .attr('class', 'nudge-reset disabled')
             .on('click', resetOffset)
             .call(iD.svg.Icon('#icon-undo'));
 
@@ -417,6 +456,8 @@ iD.ui.Background = function(context) {
 
         context.background()
             .on('change.background-update', update);
+
+
 
         update();
         setOpacity(opacityDefault);

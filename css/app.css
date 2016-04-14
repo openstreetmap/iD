@@ -1753,7 +1753,6 @@ div.full-screen > button:hover {
 
 /* Background / Map Data Settings */
 
-
 .map-data-control button {
     border-radius: 0;
 }
@@ -1768,11 +1767,7 @@ div.full-screen > button:hover {
 }
 
 .imagery-faq {
-  margin-bottom: 10px;
-}
-
-.background-control .adjustments button:last-child {
-    border: 0;
+    margin-bottom: 10px;
 }
 
 .map-data-control .hide-toggle,
@@ -1888,76 +1883,37 @@ div.full-screen > button:hover {
     border-left:  4px solid transparent;
 }
 
-.background-control .nudge-container button {
-    float: left;
-    display: block;
-    width: 20%;
-    position: relative;
+/* Adjust Alignment controls */
+
+.background-control .nudge-container {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 10px;
 }
 
-.background-control .nudge-container input {
-    width: 100%;
-    height: 20px;
-    text-align: center;
-    border: 0;
-}
-
-.background-control .nudge-container input.error {
-    border: 1px solid #FF7878;
+.nudge-container .nudge-outer-rect {
+    background-color: #eee;
+    border: 1px solid #ccc;
     border-radius: 2px;
-}
-
-.background-control .nudge-container input:focus {
-    background-color: transparent;
-}
-
-.background-control .nudge-container button.left {
-    top: -50px;
-    right: -85%;
-    background-color: transparent;
-}
-
-.background-control .nudge-container button.right {
-    top: -50px;
-    right: 45%;
-    background-color: transparent;
-}
-
-.background-control .nudge-container button.top {
-    left: 20%;
-    top: -100px;
-    background-color: transparent;
-}
-
-.background-control .nudge-container button.bottom {
-    left: -20%;
-    background-color: transparent;
-}
-
-.background-control .nudge-outer-rect {
-    border: 1px solid #CCC;
-    width: 70%;
-    height: 60px;
     padding: 20px 0;
-    background-color: #EEE;
+    width: 70%;
     display: flex;
     justify-content: center;
     align-items: center;
-    border-radius: 2px;
     margin: 0 auto;
     margin-top: 20px;
     cursor: pointer;
 }
 
-.background-control .nudge-inner-rect {
-    width: 50%;
-    min-height: 20px;
-    border: 1px solid #CCC;
+.nudge-container .nudge-inner-rect {
+    background-color: #fff;
+    border: 1px solid #ccc;
     border-radius: 2px;
-    background-color: white
+    width: 65%;
+    min-height: 20px;
 }
 
-.background-control .nudge::after {
+.nudge-container .nudge::after {
     content: '';
     display: block;
     position: absolute;
@@ -1965,6 +1921,53 @@ div.full-screen > button:hover {
     left: 0; right: 0; top: 0; bottom: 0;
     height: 0;
     width: 0;
+}
+
+.nudge-container input {
+    width: 100%;
+    height: 20px;
+    text-align: center;
+    border: 0;
+}
+
+.nudge-container input.error {
+    border: 1px solid #FF7878;
+    border-radius: 2px;
+    background: #ffb;
+}
+
+.nudge-container input:focus {
+    background-color: transparent;
+}
+
+.nudge-container button {
+    float: left;
+    display: block;
+    width: 20%;
+    position: relative;
+}
+
+.nudge-container button.left {
+    top: -50px;
+    right: -85%;
+    background-color: transparent;
+}
+
+.nudge-container button.right {
+    top: -50px;
+    right: 45%;
+    background-color: transparent;
+}
+
+.nudge-container button.top {
+    left: 20%;
+    top: -100px;
+    background-color: transparent;
+}
+
+.nudge-container button.bottom {
+    left: -20%;
+    background-color: transparent;
 }
 
 .background-control .nudge.left::after {
