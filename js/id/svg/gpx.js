@@ -128,6 +128,7 @@ iD.svg.Gpx = function(projection, context, dispatch) {
     };
 
     drawGpx.files = function(fileList) {
+        if (!fileList.length) return this;
         var f = fileList[0],
             reader = new FileReader();
 
