@@ -2,10 +2,10 @@ iD.ui.Background = function(context) {
     var key = 'B',
         opacities = [1, 0.75, 0.5, 0.25],
         directions = [
-            ['left', [1, 0]],
-            ['top', [0, -1]],
-            ['right', [-1, 0]],
-            ['bottom', [0, 1]]],
+            ['right', [0.5, 0]],
+            ['top', [0, -0.5]],
+            ['left', [-0.5, 0]],
+            ['bottom', [0, 0.5]]],
         opacityDefault = (context.storage('background-opacity') !== null) ?
             (+context.storage('background-opacity')) : 1.0,
         customTemplate = context.storage('background-custom-template') || '';
@@ -147,7 +147,7 @@ iD.ui.Background = function(context) {
 
             return [
                 offset[0] * 2 * Math.PI * equatRadius / tileSize,
-                offset[1] * 2 * Math.PI * polarRadius / tileSize
+                -offset[1] * 2 * Math.PI * polarRadius / tileSize
             ];
         }
 
@@ -158,7 +158,7 @@ iD.ui.Background = function(context) {
 
             return [
                 meters[0] * tileSize / (2 * Math.PI * equatRadius),
-                meters[1] * tileSize / (2 * Math.PI * polarRadius)
+                -meters[1] * tileSize / (2 * Math.PI * polarRadius)
             ];
         }
 
@@ -209,7 +209,7 @@ iD.ui.Background = function(context) {
 
             if (d === '') return resetOffset();
 
-            d = d.split(',').map(function(n) {
+            d = d.replace(/;/g, ',').split(',').map(function(n) {
                 // if n is NaN, it will always get mapped to false.
                 return !isNaN(n) && n;
             });
@@ -228,24 +228,22 @@ iD.ui.Background = function(context) {
 
             d3.select(window)
                 .on('mousemove.offset', function() {
-                    drag();
+                    var latest = [d3.event.clientX, d3.event.clientY];
+                    var d = [
+                        -(origin[0] - latest[0]) / 4,
+                        -(origin[1] - latest[1]) / 4
+                    ];
+
+                    origin = latest;
+                    nudge(d);
                 })
-                .on('mouseup', function() {
+                .on('mouseup.offset', function() {
                     d3.select(window)
                         .on('mousemove.offset', null)
                         .on('mouseup.offset', null);
                 });
 
-            function drag() {
-                var latest = [d3.event.clientX, d3.event.clientY];
-                var d = [
-                    (origin[0] - latest[0]) / 4,
-                    (origin[1] - latest[1]) / 4
-                ];
-
-                origin = latest;
-                nudge(d);
-            }
+            d3.event.preventDefault();
         }
 
         function hide() {
@@ -437,7 +435,8 @@ iD.ui.Background = function(context) {
                 d3.event.stopPropagation();
             });
 
-        nudgeContainer.append('div').selectAll('button')
+        nudgeContainer.append('div')
+            .selectAll('button')
             .data(directions).enter()
             .append('button')
             .attr('class', function(d) { return d[0] + ' nudge'; })
@@ -445,8 +444,8 @@ iD.ui.Background = function(context) {
                 buttonOffset(d[1]);
             });
 
-        var resetButton = nudgeContainer
-            .append('button')
+        nudgeContainer.append('button')
+            .attr('title', t('background.reset'))
             .attr('class', 'nudge-reset disabled')
             .on('click', resetOffset)
             .call(iD.svg.Icon('#icon-undo'));
@@ -456,7 +455,6 @@ iD.ui.Background = function(context) {
 
         context.background()
             .on('change.background-update', update);
-
 
 
         update();

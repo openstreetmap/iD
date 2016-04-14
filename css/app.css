@@ -365,7 +365,7 @@ button:hover {
 button[disabled],
 button.disabled {
     background-color: rgba(255,255,255,.25);
-    color: rgba(0,0,0,.5);
+    color: rgba(0,0,0,.4);
     cursor: auto;
 }
 
@@ -1891,6 +1891,10 @@ div.full-screen > button:hover {
     padding: 10px;
 }
 
+.nudge-container .nudge-instructions {
+    padding-bottom: 15px;
+}
+
 .nudge-container .nudge-outer-rect {
     background-color: #eee;
     border: 1px solid #ccc;
@@ -1902,7 +1906,7 @@ div.full-screen > button:hover {
     align-items: center;
     margin: 0 auto;
     margin-top: 20px;
-    cursor: pointer;
+    cursor: move;
 }
 
 .nudge-container .nudge-inner-rect {
@@ -1945,38 +1949,39 @@ div.full-screen > button:hover {
     display: block;
     width: 20%;
     position: relative;
-}
-
-.nudge-container button.left {
-    top: -50px;
-    right: -85%;
     background-color: transparent;
 }
 
 .nudge-container button.right {
     top: -50px;
+    right: -85%;
+}
+
+.nudge-container button.left {
+    top: -50px;
     right: 45%;
-    background-color: transparent;
 }
 
 .nudge-container button.top {
     left: 20%;
-    top: -100px;
-    background-color: transparent;
+    top: -104px;
 }
 
 .nudge-container button.bottom {
     left: -20%;
-    background-color: transparent;
 }
 
-.background-control .nudge.left::after {
+.nudge-container button.nudge-reset {
+    right: -10px;
+}
+
+.background-control .nudge.right::after {
     border-top:  5px solid transparent;
     border-bottom:  5px solid transparent;
     border-left:  5px solid #222;
 }
 
-.background-control .nudge.right::after {
+.background-control .nudge.left::after {
     border-top:  5px solid transparent;
     border-bottom:  5px solid transparent;
     border-right:  5px solid #222;

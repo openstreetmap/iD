@@ -330,10 +330,10 @@
         "custom": "Custom",
         "custom_button": "Edit custom background",
         "custom_prompt": "Enter a tile URL template. Valid tokens are {z}, {x}, {y} for Z/X/Y scheme and {u} for quadtile scheme.",
-        "fix_misalignment": "Fix alignment",
+        "fix_misalignment": "Adjust imagery offset",
         "imagery_source_faq": "Where does this imagery come from?",
         "reset": "reset",
-        "offset": "Type or drag to adjust offset",
+        "offset": "Drag anywhere in the gray area below to adjust the imagery offset, or enter the offset values in meters.",
         "minimap": {
             "description": "Minimap",
             "tooltip": "Show a zoomed out map to help locate the area currently displayed."
