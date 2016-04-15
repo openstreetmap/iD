@@ -10560,6 +10560,21 @@
             "network"
         ]
     },
+    "type/route/horse": {
+        "geometry": [
+            "relation"
+        ],
+        "tags": {
+            "type": "route",
+            "route": "horse"
+        },
+        "name": "Bridle Route",
+        "icon": "route-foot",
+        "fields": [
+            "ref",
+            "operator"
+        ]
+    },
     "type/route/pipeline": {
         "geometry": [
             "relation"
