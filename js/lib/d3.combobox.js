@@ -2,7 +2,8 @@ d3.combobox = function() {
     var event = d3.dispatch('accept'),
         data = [],
         suggestions = [],
-        minItems = 2;
+        minItems = 2,
+        caseSensitive = false;
 
     var fetcher = function(val, cb) {
         cb(data.filter(function(d) {
@@ -179,18 +180,18 @@ d3.combobox = function() {
         }
 
         function autocomplete() {
-            var v = value();
-
+            var v = caseSensitive ? value() : value().toLowerCase();
             idx = -1;
-
             if (!v) return;
 
             for (var i = 0; i < suggestions.length; i++) {
-                if (suggestions[i].value.toLowerCase().indexOf(v.toLowerCase()) === 0) {
-                    var completion = suggestions[i].value;
+                var suggestion = suggestions[i].value,
+                    compare = caseSensitive ? suggestion : suggestion.toLowerCase();
+
+                if (compare.indexOf(v) === 0) {
                     idx = i;
-                    input.property('value', completion);
-                    input.node().setSelectionRange(v.length, completion.length);
+                    input.property('value', suggestion);
+                    input.node().setSelectionRange(v.length, suggestion.length);
                     return;
                 }
             }
@@ -266,6 +267,12 @@ d3.combobox = function() {
     combobox.minItems = function(_) {
         if (!arguments.length) return minItems;
         minItems = _;
+        return combobox;
+    };
+
+    combobox.caseSensitive = function(_) {
+        if (!arguments.length) return caseSensitive;
+        caseSensitive = _;
         return combobox;
     };
 

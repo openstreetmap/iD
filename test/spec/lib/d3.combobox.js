@@ -4,7 +4,7 @@ describe("d3.combobox", function() {
     var data = [
         {title: 'foo', value: 'foo'},
         {title: 'bar', value: 'bar'},
-        {title: 'baz', value: 'baz'}
+        {title: 'Baz', value: 'Baz'}
     ];
 
     function simulateKeypress(key) {
@@ -86,7 +86,7 @@ describe("d3.combobox", function() {
         input.node().focus();
         expect(body.selectAll('.combobox-option').size()).to.equal(2);
         expect(body.selectAll('.combobox-option')[0][0].text).to.equal('bar');
-        expect(body.selectAll('.combobox-option')[0][1].text).to.equal('baz');
+        expect(body.selectAll('.combobox-option')[0][1].text).to.equal('Baz');
     });
 
     it("shows no menu on focus if it would contain only one item", function() {
@@ -132,11 +132,21 @@ describe("d3.combobox", function() {
         expect(input.property('selectionEnd')).to.equal(3);
     });
 
-    it("does not preserve the case of the input portion of the value", function() {
+    it("does not preserve the case of the input portion of the value by default", function() {
         input.call(combobox.data(data));
         input.node().focus();
         simulateKeypress('B');
         expect(input.property('value')).to.equal('bar');
+        expect(input.property('selectionStart')).to.equal(1);
+        expect(input.property('selectionEnd')).to.equal(3);
+    });
+
+    it("does preserve the case of the input portion of the value with caseSensitive option", function() {
+        combobox.caseSensitive(true);
+        input.call(combobox.data(data));
+        input.node().focus();
+        simulateKeypress('B');
+        expect(input.property('value')).to.equal('Baz');
         expect(input.property('selectionStart')).to.equal(1);
         expect(input.property('selectionEnd')).to.equal(3);
     });
