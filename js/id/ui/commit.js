@@ -83,7 +83,7 @@ iD.ui.Commit = function(context) {
                 }
             }
 
-            commentField.call(d3.combobox().data(comments));
+            commentField.call(d3.combobox().caseSensitive(true).data(comments));
         });
 
         var clippyArea = commentSection.append('div')
