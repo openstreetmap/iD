@@ -40,6 +40,8 @@ iD.ui.Commit = function(context) {
             .property('value', context.storage('comment') || '')
             .on('input.save', enableDisableSaveButton)
             .on('change.save', enableDisableSaveButton)
+            .on('input.save', detectForClippy)
+            .on('change.save', detectForClippy)
             .on('blur.save', function() {
                 context.storage('comment', this.value);
             });
@@ -47,6 +49,22 @@ iD.ui.Commit = function(context) {
         function enableDisableSaveButton() {
             d3.selectAll('.save-section .save-button')
                 .attr('disabled', (this.value.length ? null : true));
+        }
+
+        function detectForClippy() {
+           var googleWarning = clippyArea
+             .html('')
+             .selectAll('a')
+             .data(this.value.match(/google/i) ? [true] : []);
+            googleWarning.exit().remove();
+            googleWarning.enter()
+             .append('a')
+             .attr('target', '_blank')
+             .attr('tabindex', -1)
+             .call(iD.svg.Icon('#icon-alert', 'inline'))
+             .attr('href', t('commit.google_warning_link'))
+             .append('span')
+             .text(t('commit.google_warning'));
         }
 
         commentField.node().select();
@@ -67,6 +85,10 @@ iD.ui.Commit = function(context) {
 
             commentField.call(d3.combobox().data(comments));
         });
+
+        var clippyArea = commentSection.append('div')
+            .attr('class', 'clippy-area');
+
 
         var changeSetInfo = commentSection.append('div')
             .attr('class', 'changeset-info');
@@ -251,6 +273,11 @@ iD.ui.Commit = function(context) {
                         .suppressMenu(true));
             }
         }
+
+        // Call the enableDisableSaveButton and detectForClippy methods
+        // off the bat, in case a changeset comment is recovered from
+        // localStorage
+        commentField.trigger('input');
     }
 
     return d3.rebind(commit, dispatch, 'on');
