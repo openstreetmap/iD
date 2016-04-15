@@ -52,19 +52,21 @@ iD.ui.Commit = function(context) {
         }
 
         function detectForClippy() {
-           var googleWarning = clippyArea
-             .html('')
-             .selectAll('a')
-             .data(this.value.match(/google/i) ? [true] : []);
+            var googleWarning = clippyArea
+               .html('')
+               .selectAll('a')
+               .data(this.value.match(/google/i) ? [true] : []);
+
             googleWarning.exit().remove();
+
             googleWarning.enter()
-             .append('a')
-             .attr('target', '_blank')
-             .attr('tabindex', -1)
-             .call(iD.svg.Icon('#icon-alert', 'inline'))
-             .attr('href', t('commit.google_warning_link'))
-             .append('span')
-             .text(t('commit.google_warning'));
+               .append('a')
+               .attr('target', '_blank')
+               .attr('tabindex', -1)
+               .call(iD.svg.Icon('#icon-alert', 'inline'))
+               .attr('href', t('commit.google_warning_link'))
+               .append('span')
+               .text(t('commit.google_warning'));
         }
 
         commentField.node().select();
@@ -94,12 +96,12 @@ iD.ui.Commit = function(context) {
             .attr('class', 'changeset-info');
 
         changeSetInfo.append('a')
-          .attr('target', '_blank')
-          .attr('tabindex', -1)
-          .call(iD.svg.Icon('#icon-out-link', 'inline'))
-          .attr('href', t('commit.about_changeset_comments_link'))
-          .append('span')
-          .text(t('commit.about_changeset_comments'));
+            .attr('target', '_blank')
+            .attr('tabindex', -1)
+            .call(iD.svg.Icon('#icon-out-link', 'inline'))
+            .attr('href', t('commit.about_changeset_comments_link'))
+            .append('span')
+            .text(t('commit.about_changeset_comments'));
 
         // Warnings
         var warnings = body.selectAll('div.warning-section')
@@ -248,9 +250,6 @@ iD.ui.Commit = function(context) {
             .transition()
             .style('opacity', 1);
 
-        li.style('opacity', 0)
-            .transition()
-            .style('opacity', 1);
 
         function mouseover(d) {
             if (d.entity) {
