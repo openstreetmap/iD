@@ -253,7 +253,9 @@
         "deleted": "Deleted",
         "created": "Created",
         "about_changeset_comments": "About changeset comments",
-        "about_changeset_comments_link": "//wiki.openstreetmap.org/wiki/Good_changeset_comments"
+        "about_changeset_comments_link": "//wiki.openstreetmap.org/wiki/Good_changeset_comments",
+        "google_warning": "You mentioned Google in this comment: remember that copying from Google Maps is strictly forbidden.",
+        "google_warning_link": "http://www.openstreetmap.org/copyright"
     },
     "contributors": {
         "list": "Edits by {users}",
