@@ -107,7 +107,7 @@ window.iD = function () {
     };
 
     context.save = function() {
-        if (inIntro || (mode && mode.id === 'save')) return;
+        if (inIntro || (mode && mode.id === 'save') || d3.select('.modal').size()) return;
         history.save();
         if (history.hasChanges()) return t('save.unsaved_changes');
     };

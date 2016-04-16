@@ -3,7 +3,7 @@ iD.ui.Restore = function(context) {
         if (!context.history().lock() || !context.history().restorableChanges())
             return;
 
-        var modal = iD.ui.modal(selection);
+        var modal = iD.ui.modal(selection, true);
 
         modal.select('.modal')
             .attr('class', 'modal fillL col6');

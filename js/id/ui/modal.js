@@ -1,5 +1,5 @@
 iD.ui.modal = function(selection, blocking) {
-
+    var keybinding = d3.keybinding('modal');
     var previous = selection.select('div.modal');
     var animate = previous.empty();
 
@@ -23,29 +23,32 @@ iD.ui.modal = function(selection, blocking) {
             .transition()
             .duration(200)
             .style('top','0px');
+
         keybinding.off();
     };
 
-    var keybinding = d3.keybinding('modal')
-        .on('⌫', shaded.close)
-        .on('⎋', shaded.close);
-
-    d3.select(document).call(keybinding);
 
     var modal = shaded.append('div')
         .attr('class', 'modal fillL col6');
 
+    if (!blocking) {
         shaded.on('click.remove-modal', function() {
-            if (d3.event.target === this && !blocking) shaded.close();
+            if (d3.event.target === this) {
+                shaded.close();
+            }
         });
 
-    modal.append('button')
-        .attr('class', 'close')
-        .on('click', function() {
-            if (!blocking) shaded.close();
-        })
-        .append('div')
-            .attr('class','icon close');
+        modal.append('button')
+            .attr('class', 'close')
+            .on('click', shaded.close)
+            .call(iD.svg.Icon('#icon-close'));
+
+        keybinding
+            .on('⌫', shaded.close)
+            .on('⎋', shaded.close);
+
+        d3.select(document).call(keybinding);
+    }
 
     modal.append('div')
         .attr('class', 'content');
