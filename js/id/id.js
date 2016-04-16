@@ -342,11 +342,20 @@ window.iD = function () {
     context.toggleIndoorMode = function () {
         console.log("context.toggleIndoorMode called");
         indoorMode = !indoorMode;
-        dispatch.indoor(); //update combo
 
         context.surface().classed('indoor-mode', indoorMode);
 
+        var selected = context.selectedIDs();
+        if (indoorMode && selected.length) {
+            var entity = context.graph().entity(selected[0]);
+            if (entity.tags.level)
+                indoorLevel = entity.tags.level.replace(/[-;].+/, '');
+            else if (entity.tags.repeat_on)
+                indoorLevel = entity.tags.repeat_on.replace(/[-;].+/, '');
+        }
+
         map.redraw(); //TODO event?
+        dispatch.indoor(); //update combo
     };
 
     context.indoorLevels = function () {
