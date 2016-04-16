@@ -1,62 +1,17 @@
 iD.ui.IndoorMode = function (context) {
-    var updateControls = function (selection, enableButton) {
 
+    var enterButton, indoorControl;
 
-        var enterButton = selection.select('.indoormode-enter-button');
-        var indoorControl = selection.select('.indoormode-control');
-
-        if (context.indoorMode()) {
-            console.log("updateControls indoor=true");
-            enterButton.classed('hide', true);
-            indoorControl.classed('hide', false);
-            indoorControl.select('.combobox-input')
-                .attr('placeholder', context.indoorLevel())
-                .value('')
-                .call(d3.combobox().data(context.indoorLevels().map(comboValues)));
-
-        }
-        else {
-            enterButton.classed('hide', false).property('disabled', !enableButton);
-            indoorControl.classed('hide', true);
-        }
-    };
-
-    var toggleIndoor = function () {
-        d3.event.preventDefault();
-        context.toggleIndoorMode();
-
-    };
-
-    var buttonTooltip = function (description) {
-        return bootstrap.tooltip()
-            .placement('bottom')
-            .html(true)
-            .title(iD.ui.tooltipHtml(description, iD.ui.cmd('⌘⇧I')));
-    };
-
-    var setLevel = function () {
-        var input = d3.select(this);
-        var data = input.value(); //string!
-        if (data === '') return; //blank value
-        console.log('setLevel', data);
-
-        input
-            .attr('placeholder', data)
-            .value('');
-
-        context.indoorLevel(data);
-
-    };
-
-    var createControls = function (selection) {
-        var enterButton = selection.append('button')
+    function createControls(selection) {
+        enterButton = selection.append('button')
             .attr('class', 'indoormode-enter-button col12 ')
             .on('click', toggleIndoor)
-            .call(buttonTooltip('Enter indoor editing mode'))
+            .call(buttonTooltip('Enter indoor editing mode'));
+        enterButton
             .append('span').attr('class', 'label').text('Indoor');
 
 
-        var indoorControl = selection.append('div')
+        indoorControl = selection.append('div')
             .attr('class', 'indoormode-control joined ');
 
         indoorControl.append('div')
@@ -65,7 +20,7 @@ iD.ui.IndoorMode = function (context) {
             .attr('type', 'text')
             .call(d3.combobox().data([0, 1, 2, 3, 4, 5, 6].map(comboValues)))
             .on('blur', setLevel)
-            .on('change', setLevel)
+            .on('change', setLevel);
 
         indoorControl.append('button')
             .attr('class', 'col4')
@@ -75,16 +30,14 @@ iD.ui.IndoorMode = function (context) {
 
         enterButton.classed('hide', false).property('disabled', true);
         indoorControl.classed('hide', true);
-    };
+    }
 
 
     return function (selection) {
-
-        // draw both controls hidden
         createControls(selection);
 
         var keybinding = d3.keybinding('indoor')
-            .on(iD.ui.cmd('⌘I'), toggleIndoor)
+            .on(iD.ui.cmd('⌘I'), toggleIndoor);
 
         d3.select(document)
             .call(keybinding);
@@ -109,11 +62,53 @@ iD.ui.IndoorMode = function (context) {
             }
 
             console.log("context.on(enter) called");
-            console.log('enableIndoor', enableButton)
+            console.log('enableIndoor', enableButton);
             updateControls(selection, enableButton);
         }
     };
 
+    function updateControls(selection, enableButton) {
+        if (context.indoorMode()) {
+            console.log("updateControls indoor=true");
+            enterButton.classed('hide', true);
+            indoorControl.classed('hide', false);
+            indoorControl.select('.combobox-input')
+                .attr('placeholder', context.indoorLevel())
+                .value('')
+                .call(d3.combobox().data(context.indoorLevels().map(comboValues)));
+
+        }
+        else {
+            enterButton.classed('hide', false).property('disabled', !enableButton);
+            indoorControl.classed('hide', true);
+        }
+    }
+
+    function toggleIndoor() {
+        d3.event.preventDefault();
+        context.toggleIndoorMode();
+
+    }
+
+    function buttonTooltip(description) {
+        return bootstrap.tooltip()
+            .placement('bottom')
+            .html(true)
+            .title(iD.ui.tooltipHtml(description, iD.ui.cmd('⌘⇧I')));
+    }
+
+    function setLevel() {
+        var input = d3.select(this);
+        var data = input.value(); //string!
+        if (data === '') return; //blank value
+        console.log('setLevel', data);
+
+        input
+            .attr('placeholder', data)
+            .value('');
+
+        context.indoorLevel(data);
+    }
 
     function comboValues(d) {
         return {
@@ -122,43 +117,3 @@ iD.ui.IndoorMode = function (context) {
         };
     }
 };
-
-/*
-
- init
- - vždy : vytvořit button, nastavit .hide
- - vždy : vytvořit select+buton, .hide
-
-
- update
- - indoorMode : nastavit správný level
- -vždy unhide to správné
-
- - přidat selectbox, přepsat text na X
-
-
-
-
-
-
- */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
