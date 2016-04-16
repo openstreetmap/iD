@@ -1325,7 +1325,14 @@ path.fill.tag-indoor {
 .indoor-mode path.stroke.tag-indoor {
     stroke: rgb(169, 169, 169);
 }
+.indoor-mode text {
+    display: none;
+}
 
+.indoor-mode use.icon.areaicon.tag-building,
+.indoor-mode text.arealabel.tag-building {
+    display: none;
+}
 
 
 /* Labels / Markers */
