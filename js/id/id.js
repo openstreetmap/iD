@@ -2,7 +2,7 @@ window.iD = function () {
     window.locale.en = iD.data.en;
     window.locale.current('en');
 
-    var dispatch = d3.dispatch('enter', 'exit', 'indoor'),
+    var dispatch = d3.dispatch('enter', 'exit', 'indoorLevelChanged'),
         context = {};
 
     // https://github.com/openstreetmap/iD/issues/772
@@ -355,7 +355,7 @@ window.iD = function () {
         }
 
         map.redraw(); //TODO event?
-        dispatch.indoor(); //update combo
+        dispatch.indoorLevelChanged(); //update combo
     };
 
     context.indoorLevels = function () {

@@ -44,7 +44,7 @@ iD.ui.IndoorMode = function (context) {
 
         context
             .on('enter.indoor_mode', update)
-            .on('indoor.indoor_mode', update);
+            .on('indoorLevelChanged.indoor_mode', update);
 
         function update() {
             var enableButton = context.indoorMode();
