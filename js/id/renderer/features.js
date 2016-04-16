@@ -410,6 +410,11 @@ iD.Features = function(context) {
      * @returns {Array} filtered array
      */
     features.filter = function(d, resolver) {
+
+        if (context.indoorMode()) {
+            d = filterByLevel(d);
+        }
+
         if (!_hidden.length) return d;
 
         var result = [];
@@ -421,6 +426,45 @@ iD.Features = function(context) {
         }
         return result;
     };
+
+    function filterByLevel(data) {
+        var levelRange = /(-?\d+)(?:(-)(-?\d+)|(;-?\d)+)?/; // alowing untrimed string (not sure..)
+
+        return data.filter(function (entity) {
+            var current = context.indoorLevel();
+
+            return entity.tags.building
+                || inRange(current, entity.tags.level)
+                || inRange(current, entity.tags.repeat_on);
+        });
+
+        function inRange(value, rangeText) {
+            var range = rangeText && levelRange.exec(rangeText);
+
+            if (!range) {  //blank text OR not matched
+                return false;
+            }
+
+            if (range[2] === undefined && range[4] == undefined) { //exact match
+                if (range[1] === value) {
+                    return true;
+                }
+            }
+            else if (range[2] === '-') { // range from - to
+                if (range[1] <= value && range[3] >= value) {
+                    return true;
+                }
+            }
+            else { // range list
+                if (range[0].split(';').indexOf(value) !== -1) {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+    }
+
 
     return d3.rebind(features, dispatch, 'on');
 };
