@@ -18,6 +18,10 @@ iD.modes.AddPoint = function(context) {
     function add(loc) {
         var node = iD.Node({loc: loc});
 
+        if (context.indoorMode()) {
+            node.tags.level = context.indoorLevel();
+        }
+
         context.perform(
             iD.actions.AddEntity(node),
             t('operations.add.annotation.point'));

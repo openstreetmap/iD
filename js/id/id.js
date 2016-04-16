@@ -349,9 +349,9 @@ window.iD = function () {
         if (indoorMode && selected.length) {
             var entity = context.graph().entity(selected[0]);
             if (entity.tags.level)
-                indoorLevel = entity.tags.level.replace(/[-;].+/, '');
+                indoorLevel = entity.tags.level.replace(/(-?\d+(\.\d+)?).+/, '$1');
             else if (entity.tags.repeat_on)
-                indoorLevel = entity.tags.repeat_on.replace(/[-;].+/, '');
+                indoorLevel = entity.tags.repeat_on.replace(/(-?\d+(\.\d+)?).+/, '$1');
         }
 
         map.redraw(); //TODO event?

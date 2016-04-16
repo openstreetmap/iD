@@ -18,6 +18,10 @@ iD.modes.AddLine = function(context) {
             node = iD.Node({loc: loc}),
             way = iD.Way();
 
+        if (context.indoorMode()) {
+            way.tags.level = context.indoorLevel();
+        }
+
         context.perform(
             iD.actions.AddEntity(node),
             iD.actions.AddEntity(way),

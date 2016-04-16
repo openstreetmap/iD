@@ -19,6 +19,10 @@ iD.modes.AddArea = function(context) {
             node = iD.Node({loc: loc}),
             way = iD.Way({tags: defaultTags});
 
+        if (context.indoorMode()) {
+            way.tags.level = context.indoorLevel();
+        }
+
         context.perform(
             iD.actions.AddEntity(node),
             iD.actions.AddEntity(way),
