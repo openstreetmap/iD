@@ -196,6 +196,7 @@ dist/iD.js: \
 	js/id/ui/full_screen.js \
 	js/id/ui/geolocate.js \
 	js/id/ui/help.js \
+	js/id/ui/indoor_mode.js \
 	js/id/ui/info.js \
 	js/id/ui/inspector.js \
 	js/id/ui/intro.js \
