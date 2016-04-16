@@ -1278,6 +1278,9 @@
             "religion": {
                 "label": "Religion"
             },
+            "repeat_on": {
+                "label": "Repeat on"
+            },
             "restriction": {
                 "label": "Type"
             },
@@ -2643,6 +2646,10 @@
             },
             "historic/wayside_shrine": {
                 "name": "Wayside Shrine",
+                "terms": ""
+            },
+            "indoor": {
+                "name": "Indoor object",
                 "terms": ""
             },
             "junction": {

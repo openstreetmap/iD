@@ -1,0 +1,17 @@
+{
+  "fields": [
+    "name",
+    "level",
+    "repeat_on"
+  ],
+  "geometry": [
+    "point",
+    "area"
+  ],
+  "tags": {
+    "indoor": "*"
+  },
+  "matchScore": 0.4,
+  "terms": [],
+  "name": "Indoor object"
+}

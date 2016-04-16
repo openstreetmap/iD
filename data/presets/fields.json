@@ -1015,6 +1015,11 @@
         "type": "combo",
         "label": "Religion"
     },
+    "repeat_on": {
+        "key": "repeat_on",
+        "type": "combo",
+        "label": "Repeat on"
+    },
     "restriction": {
         "key": "restriction",
         "type": "combo",

@@ -1142,6 +1142,9 @@
             "value": "wayside_shrine"
         },
         {
+            "key": "indoor"
+        },
+        {
             "key": "junction",
             "value": "yes"
         },

@@ -2,7 +2,7 @@ iD.svg.TagClasses = function() {
     var primaries = [
             'building', 'highway', 'railway', 'waterway', 'aeroway',
             'motorway', 'boundary', 'power', 'amenity', 'natural', 'landuse',
-            'leisure', 'place'
+            'leisure', 'place', 'indoor'
         ],
         statuses = [
             'proposed', 'construction', 'disused', 'abandoned', 'dismantled',

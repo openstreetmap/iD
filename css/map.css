@@ -1306,6 +1306,27 @@ path.fill.tag-amenity-shelter {
     background-color: rgba(224, 110, 95, 0.3);
 }
 
+.indoor-mode path.fill.tag-building {
+    clip-path: none !important;
+    stroke-width: 120px;
+}
+
+
+/* Indoor features */
+path.fill.tag-indoor {
+    display: none;
+}
+
+.indoor-mode path.fill.tag-indoor {
+    display: block;
+    fill: rgba(169, 169, 169, 0.3);
+    stroke-width: 30px;
+}
+.indoor-mode path.stroke.tag-indoor {
+    stroke: rgb(169, 169, 169);
+}
+
+
 
 /* Labels / Markers */
 

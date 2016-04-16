@@ -173,13 +173,9 @@ iD.Map = function(context) {
             data = data.filter(function (entity) {
                 var current = context.indoorLevel();
 
-                if (inRange(current, entity.tags.level)) {
-                    return true;
-                }
-                if (inRange(current, entity.tags.repeat_on)) {
-                    return true;
-                }
-                return false;
+                return entity.tags.building
+                    || inRange(current, entity.tags.level)
+                    || inRange(current, entity.tags.repeat_on);
             });
         }
 

@@ -344,6 +344,8 @@ window.iD = function () {
         indoorMode = !indoorMode;
         dispatch.indoor(); //update combo
 
+        context.surface().classed('indoor-mode', indoorMode);
+
         map.redraw(); //TODO event?
     };
 

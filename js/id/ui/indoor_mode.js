@@ -28,7 +28,7 @@ iD.ui.IndoorMode = function (context) {
             .call(buttonTooltip('Exit indoor editing mode'))
             .call(iD.svg.Icon('#icon-close'));
 
-        enterButton.classed('hide', false).property('disabled', true);
+        enterButton.classed('hide', true); //.property('disabled', true);
         indoorControl.classed('hide', true);
     }
 
@@ -56,7 +56,7 @@ iD.ui.IndoorMode = function (context) {
                     return graph.entity(id);
                 });
                 var hasIndoorRelatedTag = function (e) {
-                    return e.tags.level || e.tags.indoor || e.tags.building;
+                    return e.tags.level || e.tags.repeat_on || e.tags.indoor || e.tags.building;
                 };
                 enableButton = entities.some(hasIndoorRelatedTag);
             }
@@ -79,7 +79,7 @@ iD.ui.IndoorMode = function (context) {
 
         }
         else {
-            enterButton.classed('hide', false).property('disabled', !enableButton);
+            enterButton.classed('hide', !enableButton); //.property('disabled', !enableButton);
             indoorControl.classed('hide', true);
         }
     }
