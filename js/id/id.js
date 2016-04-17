@@ -215,6 +215,20 @@ window.iD = function () {
     };
 
 
+    /* Debug */
+    var debugTile = false, debugCollision = false;
+    context.debugTile = function(_) {
+        if (!arguments.length) return debugTile;
+        debugTile = _;
+        return context;
+    };
+    context.debugCollision = function(_) {
+        if (!arguments.length) return debugCollision;
+        debugCollision = _;
+        return context;
+    };
+
+
     /* Presets */
     var presets;
     context.presets = function(_) {
