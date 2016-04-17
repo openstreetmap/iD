@@ -2250,6 +2250,7 @@ div.full-screen > button:hover {
     z-index: 10;
 }
 
+.bbox,
 .map-in-map-bbox {
     fill: none;
     stroke: rgba(255, 255, 0, 0.75);

@@ -423,6 +423,42 @@ iD.svg.Labels = function(projection, context) {
         drawAreaLabels(label, labelled.area, filter, 'arealabel', positions.area);
         drawAreaLabels(halo, labelled.area, filter, 'arealabel-halo', positions.area);
         drawAreaIcons(label, labelled.area, filter, 'arealabel-icon', positions.area);
+
+        // debug
+        var showDebug = context.debugCollision();
+        var debug = label.selectAll('.layer-label-debug')
+            .data(showDebug ? [true] : []);
+
+        debug.enter()
+            .append('g')
+            .attr('class', 'layer-label-debug');
+
+        debug.exit()
+            .remove();
+
+        if (showDebug) {
+            var gj = rtree.all().map(function(d) {
+                return { type: 'Polygon', coordinates: [[
+                    [d[0], d[1]],
+                    [d[2], d[1]],
+                    [d[2], d[3]],
+                    [d[0], d[3]],
+                    [d[0], d[1]]
+                ]]};
+            });
+
+            var debugboxes = debug.selectAll('.bbox').data(gj);
+
+            debugboxes.enter()
+                .append('path')
+                .attr('class', 'bbox');
+
+            debugboxes.exit()
+                .remove();
+
+            debugboxes
+                .attr('d', d3.geo.path().projection(null));
+        }
     }
 
     drawLabels.supersurface = function(supersurface) {
