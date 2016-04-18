@@ -100,11 +100,12 @@ iD.Features = function(context) {
         );
     }, 250);
 
-    defineFeature('indoor_other_levels', function isIndoorOtherLevel(entity) { //other then current level
+    defineFeature('indoor_other_levels', function isIndoorOtherLevel(entity, resolver, geometry) { //other then current level, and also non-indoor-points
         var current = context.indoorLevel();
 
         return (!!entity.tags.level && !inRange(current, entity.tags.level))
-            || (!!entity.tags.repeat_on && !inRange(current, entity.tags.repeat_on));
+            || (!!entity.tags.repeat_on && !inRange(current, entity.tags.repeat_on))
+            || (geometry === 'point' && !entity.tags.level && !entity.tags.repeat_on);
     });
 
     defineFeature('indoor', function isIndoorOther(entity) {

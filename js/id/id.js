@@ -356,7 +356,7 @@ window.iD = function () {
             enabledFeaturesBeforeIndoor = features.enabled();
             features.enable('indoor');
             features.enable('buildings');
-            _.each(_.without(features.keys(), 'indoor', 'buildings'), features.disable); //without indoor to prevent selection loss
+            _.each(_.without(features.keys(), 'indoor', 'buildings', 'points'), features.disable);
         }
         else {
             _.each(features.keys(), features.disable);
