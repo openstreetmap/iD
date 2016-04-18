@@ -1447,6 +1447,11 @@ en:
         name: Post Office
         # 'terms: letter,mail'
         terms: "<translate with synonyms or related terms for 'Post Office', separated by commas>"
+      amenity/prison:
+        # amenity=prison
+        name: Prison Grounds
+        # 'terms: cell,jail'
+        terms: "<translate with synonyms or related terms for 'Prison Grounds', separated by commas>"
       amenity/pub:
         # amenity=pub
         name: Pub
