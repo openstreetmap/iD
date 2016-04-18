@@ -416,11 +416,6 @@ iD.Features = function(context) {
         return fn(entity, resolver, geometry);
     };
 
-    /**
-     * @param d array of all entities
-     * @param resolver iD.Graph
-     * @returns {Array} filtered array
-     */
     features.filter = function(d, resolver) {
         if (!_hidden.length) return d;
 
@@ -435,7 +430,7 @@ iD.Features = function(context) {
     };
 
 
-    var levelRangeRegExp = /(-?\d+)(?:(-)(-?\d+)|(;-?\d)+)?/; // alowing untrimed string (not sure..)
+    var levelRangeRegExp = /^(-?\d+)(?:(-)(-?\d+)|(;-?\d)+)?$/;
     function inRange(level, rangeText) {
         var range = rangeText && levelRangeRegExp.exec(rangeText);
 
