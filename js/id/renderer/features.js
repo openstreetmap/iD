@@ -100,12 +100,26 @@ iD.Features = function(context) {
         );
     }, 250);
 
-    defineFeature('indoor_other_levels', function isIndoorOtherLevel(entity, resolver, geometry) { //other then current level, and also non-indoor-points
+    defineFeature('indoor_other_then_current_level', function isHiddenByLevel(entity, resolver, geometry) { //disabled in indoor_mode -> hides unwanted levels
         var current = context.indoorLevel();
 
-        return (!!entity.tags.level && !inRange(current, entity.tags.level))
-            || (!!entity.tags.repeat_on && !inRange(current, entity.tags.repeat_on))
-            || (geometry === 'point' && !entity.tags.level && !entity.tags.repeat_on);
+        if (entity.tags.level && !inRange(current, entity.tags.level))
+            return true;
+
+        if (entity.tags.repeat_on && !inRange(current, entity.tags.repeat_on))
+            return true;
+
+        if (geometry === 'point' && !entity.tags.level && !entity.tags.repeat_on)
+            return true;
+
+        if (entity.tags.max_level && entity.tags.min_level) {
+            if (parseFloat(entity.tags.max_level) < current || parseFloat(entity.tags.min_level) > current)
+                return true;
+        }
+        else if (entity.tags['building'] || entity.tags['building:part']) {
+            if (parseFloat(entity.tags['building:levels'] || 0) < current)
+                return true;
+        }
     });
 
     defineFeature('indoor', function isIndoorOther(entity) {

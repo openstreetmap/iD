@@ -395,7 +395,7 @@
             "description": "Past/Future",
             "tooltip": "Proposed, Construction, Abandoned, Demolished, etc."
         },
-        "indoor_other_levels": {
+        "indoor_other_then_current_level": {
             "description": "Indoor other levels",
             "tooltip": "When in indoor mode, it hides all levels except the selected one."
         },
