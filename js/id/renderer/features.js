@@ -100,10 +100,22 @@ iD.Features = function(context) {
         );
     }, 250);
 
+    defineFeature('indoor_other_levels', function isIndoorOtherLevel(entity) { //other then current level
+        var current = context.indoorLevel();
+
+        return (!!entity.tags.level && !inRange(current, entity.tags.level))
+            || (!!entity.tags.repeat_on && !inRange(current, entity.tags.repeat_on));
+    });
+
+    defineFeature('indoor', function isIndoorOther(entity) {
+        return !!entity.tags.level || !!entity.tags.repeat_on;
+    });
+
     defineFeature('landuse', function isLanduse(entity, resolver, geometry) {
         return geometry === 'area' &&
             !_features.buildings.filter(entity) &&
-            !_features.water.filter(entity);
+            !_features.water.filter(entity) &&
+            !_features.indoor.filter(entity);
     });
 
     defineFeature('boundaries', function isBoundary(entity) {
@@ -348,7 +360,7 @@ iD.Features = function(context) {
 
     features.isHiddenFeature = function(entity, resolver, geometry) {
         if (!_hidden.length) return false;
-        if (!entity.version) return false;
+        if (!context.indoorMode() && !entity.version) return false;
 
         var matches = features.getMatches(entity, resolver, geometry);
 
@@ -358,10 +370,9 @@ iD.Features = function(context) {
         return false;
     };
 
-    // entity, iD.Graph, enum(vertex,...)
     features.isHiddenChild = function(entity, resolver, geometry) {
         if (!_hidden.length) return false;
-        if (!entity.version || geometry === 'point') return false;
+        if ((!context.indoorMode() && !entity.version) || geometry === 'point') return false;
 
         var parents = features.getParents(entity, resolver, geometry);
         if (!parents.length) return false;
@@ -398,7 +409,7 @@ iD.Features = function(context) {
 
     features.isHidden = function(entity, resolver, geometry) {
         if (!_hidden.length) return false;
-        if (!entity.version) return false;
+        if (!context.indoorMode() && !entity.version) return false;
 
         var fn = (geometry === 'vertex' ? features.isHiddenChild : features.isHiddenFeature);
         return fn(entity, resolver, geometry);
@@ -410,11 +421,6 @@ iD.Features = function(context) {
      * @returns {Array} filtered array
      */
     features.filter = function(d, resolver) {
-
-        if (context.indoorMode()) {
-            d = filterByLevel(d);
-        }
-
         if (!_hidden.length) return d;
 
         var result = [];
@@ -427,42 +433,31 @@ iD.Features = function(context) {
         return result;
     };
 
-    function filterByLevel(data) {
-        var levelRange = /(-?\d+)(?:(-)(-?\d+)|(;-?\d)+)?/; // alowing untrimed string (not sure..)
 
-        return data.filter(function (entity) {
-            var current = context.indoorLevel();
+    var levelRangeRegExp = /(-?\d+)(?:(-)(-?\d+)|(;-?\d)+)?/; // alowing untrimed string (not sure..)
+    function inRange(level, rangeText) {
+        var range = rangeText && levelRangeRegExp.exec(rangeText);
 
-            return entity.tags.building
-                || inRange(current, entity.tags.level)
-                || inRange(current, entity.tags.repeat_on);
-        });
-
-        function inRange(value, rangeText) {
-            var range = rangeText && levelRange.exec(rangeText);
-
-            if (!range) {  //blank text OR not matched
-                return false;
-            }
-
-            if (range[2] === undefined && range[4] == undefined) { //exact match
-                if (range[1] === value) {
-                    return true;
-                }
-            }
-            else if (range[2] === '-') { // range from - to
-                if (range[1] <= value && range[3] >= value) {
-                    return true;
-                }
-            }
-            else { // range list
-                if (range[0].split(';').indexOf(value) !== -1) {
-                    return true;
-                }
-            }
-
+        if (!range) {  //blank text OR not matched
             return false;
         }
+
+        if (range[2] === undefined && range[4] == undefined) { //exact match
+            if (range[1] === level) {
+                return true;
+            }
+        }
+        else if (range[2] === '-') { // range from - to, only numeric comparison
+            if (parseFloat(range[1]) <= level && parseFloat(range[3]) >= level) {
+                return true;
+            }
+        }
+        else { // range list
+            if (range[0].split(';').indexOf(level) !== -1) {
+                return true;
+            }
+        }
+        return false;
     }
 
 

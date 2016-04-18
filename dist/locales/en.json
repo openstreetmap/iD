@@ -395,6 +395,14 @@
             "description": "Past/Future",
             "tooltip": "Proposed, Construction, Abandoned, Demolished, etc."
         },
+        "indoor_other_levels": {
+            "description": "Indoor other levels",
+            "tooltip": "When in indoor mode, it hides all levels except the selected one."
+        },
+        "indoor": {
+            "description": "Indoor",
+            "tooltip": "All features with filled level or repeat_on."
+        },
         "others": {
             "description": "Others",
             "tooltip": "Everything Else"

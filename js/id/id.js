@@ -322,7 +322,7 @@ window.iD = function () {
 
 
     /* Indoor mode */
-    var indoorMode = false, indoorLevel = '0';
+    var indoorMode = false, indoorLevel = '0', enabledFeaturesBeforeIndoor;
     //    return d3.rebind(indoor, dispatch, 'on');
 
 
@@ -333,27 +333,37 @@ window.iD = function () {
     context.indoorLevel = function (newLevel) {
         if (newLevel && newLevel !== indoorLevel) {
             indoorLevel = newLevel;
+            features.reset();
             map.redraw(); //TODO event?
-
         }
         return indoorLevel;
     };
 
     context.toggleIndoorMode = function () {
-        console.log("context.toggleIndoorMode called");
         indoorMode = !indoorMode;
-
         context.surface().classed('indoor-mode', indoorMode);
 
-        var selected = context.selectedIDs();
-        if (indoorMode && selected.length) {
-            var entity = context.graph().entity(selected[0]);
+        var selectedFeature = context.selectedIDs();
+        if (indoorMode && selectedFeature.length) {
+            var entity = context.graph().entity(selectedFeature[0]);
             if (entity.tags.level)
                 indoorLevel = entity.tags.level.replace(/(-?\d+(\.\d+)?).+/, '$1');
             else if (entity.tags.repeat_on)
                 indoorLevel = entity.tags.repeat_on.replace(/(-?\d+(\.\d+)?).+/, '$1');
         }
 
+        if (indoorMode) {
+            enabledFeaturesBeforeIndoor = features.enabled();
+            features.enable('indoor');
+            features.enable('buildings');
+            _.each(_.without(features.keys(), 'indoor', 'buildings'), features.disable); //without indoor to prevent selection loss
+        }
+        else {
+            _.each(features.keys(), features.disable);
+            _.each(enabledFeaturesBeforeIndoor, features.enable);
+        }
+
+        features.reset();
         map.redraw(); //TODO event?
         dispatch.indoorLevelChanged(); //update combo
     };
