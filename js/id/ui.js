@@ -58,7 +58,7 @@ iD.ui = function(context) {
             .call(iD.ui.Save(context));
 
         limiter.append('div')
-            .attr('class', 'button-wrap col1')
+            .attr('class', 'button-wrap col2')
             .call(iD.ui.IndoorMode(context));
 
         bar.append('div')
