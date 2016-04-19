@@ -359,7 +359,7 @@ window.iD = function () {
             _.each(_.without(features.keys(), 'indoor', 'buildings', 'points'), features.disable);
         }
         else {
-            _.each(features.keys(), features.disable);
+            _.each(_.difference(features.keys(), enabledFeaturesBeforeIndoor), features.disable);
             _.each(enabledFeaturesBeforeIndoor, features.enable);
         }
 
