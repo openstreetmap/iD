@@ -966,8 +966,8 @@ en:
           tunnel: Tunnel
         # structure field placeholder
         placeholder: Unknown
-      studio_type:
-        # 'type=*'
+      studio:
+        # 'studio=*'
         label: Type
       substation:
         # 'substation=*'

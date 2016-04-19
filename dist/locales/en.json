@@ -1440,7 +1440,7 @@
                     "ford": "Ford"
                 }
             },
-            "studio_type": {
+            "studio": {
                 "label": "Type"
             },
             "substation": {

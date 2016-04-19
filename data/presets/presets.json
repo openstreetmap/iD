@@ -1818,7 +1818,7 @@
     "amenity/studio": {
         "icon": "music",
         "fields": [
-            "studio_type",
+            "studio",
             "address",
             "building_area"
         ],
