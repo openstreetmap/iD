@@ -100,7 +100,7 @@ iD.Features = function(context) {
         );
     }, 250);
 
-    defineFeature('indoor_other_then_current_level', function isHiddenByLevel(entity, resolver, geometry) { //disabled in indoor_mode -> hides unwanted levels
+    defineFeature('indoor_different_level', function isHiddenByLevel(entity, resolver, geometry) { //disabled in indoor_mode -> hides unwanted levels
         var current = context.indoorLevel();
 
         if (entity.tags.level && !inRange(current, entity.tags.level))
@@ -118,6 +118,11 @@ iD.Features = function(context) {
         }
         else if (entity.tags['building'] || entity.tags['building:part']) {
             if (parseFloat(entity.tags['building:levels'] || 0) < current)
+                return true;
+        }
+
+        if (current < 0) {
+            if (!entity.tags.level && !entity.tags.repeat_on)
                 return true;
         }
     });

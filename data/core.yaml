@@ -325,9 +325,9 @@ en:
     past_future:
       description: Past/Future
       tooltip: "Proposed, Construction, Abandoned, Demolished, etc."
-    indoor_other_then_current_level:
-      description: Indoor other levels
-      tooltip: "When in indoor mode, it hides all levels except the selected one."
+    indoor_different_level:
+      description: Indoor - different levels
+      tooltip: "When in indoor mode, it hides all levels except the selected one. Also lower buildings."
     indoor:
       description: Indoor
       tooltip: "All features with filled level or repeat_on."
