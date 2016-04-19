@@ -1324,8 +1324,11 @@ path.fill.tag-indoor {
     stroke: rgb(169, 169, 169);
 }
 .indoor-mode use.icon.areaicon.tag-building,
+.indoor-mode use.icon.areaicon.tag-amenity,
 .indoor-mode text.arealabel.tag-building,
-.indoor-mode text.arealabel-halo.tag-building {
+.indoor-mode text.arealabel.tag-amenity,
+.indoor-mode text.arealabel-halo.tag-building,
+.indoor-mode text.arealabel-halo.tag-amenity {
     display: none;
 }
 
