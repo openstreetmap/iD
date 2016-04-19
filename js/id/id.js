@@ -331,17 +331,29 @@ window.iD = function () {
     };
 
     context.indoorLevel = function (newLevel) {
-        if (newLevel && newLevel !== indoorLevel) {
+        if (newLevel) { //setter
             indoorLevel = newLevel;
-            features.reset();
-            map.redraw(); //TODO event?
+            if (indoorMode) {
+                features.reset();
+                map.redraw(); //TODO event?
+                dispatch.indoorLevelChanged(); //update hash & combo
+            }
+            else {
+                context.toggleIndoorMode();
+            }
         }
         return indoorLevel;
     };
 
     context.toggleIndoorMode = function () {
+        if (!context.surface()) { //hash too early
+            setTimeout(context.toggleIndoorMode, 200); //TODO better?
+            return false;
+        }
+
         indoorMode = !indoorMode;
         context.surface().classed('indoor-mode', indoorMode);
+
 
         var selectedFeature = context.selectedIDs();
         if (indoorMode && selectedFeature.length) {
@@ -354,9 +366,8 @@ window.iD = function () {
 
         if (indoorMode) {
             enabledFeaturesBeforeIndoor = features.enabled();
-            features.enable('indoor');
-            features.enable('buildings');
-            _.each(_.without(features.keys(), 'indoor', 'buildings', 'points'), features.disable);
+            _.each(_.without(features.keys(), 'indoor', 'buildings', 'points'), features.disable); //preserve selection on those 'withouts'
+            _.each(['indoor', 'buildings', 'points'], features.enable);
         }
         else {
             _.each(_.difference(features.keys(), enabledFeaturesBeforeIndoor), features.disable);
@@ -365,7 +376,7 @@ window.iD = function () {
 
         features.reset();
         map.redraw(); //TODO event?
-        dispatch.indoorLevelChanged(); //update combo
+        dispatch.indoorLevelChanged(); //update hash & combo
     };
 
     context.indoorLevels = function () {
