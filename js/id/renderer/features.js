@@ -394,6 +394,8 @@ iD.Features = function(context) {
         if (!_hidden.length) return false;
         if ((!context.indoorMode() && !entity.version) || geometry === 'point') return false;
 
+        if (context.indoorMode() && geometry === 'vertex' && _features.indoor_different_level.filter(entity, resolver, geometry)) return true;
+
         var parents = features.getParents(entity, resolver, geometry);
         if (!parents.length) return false;
 
