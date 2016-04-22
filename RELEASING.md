@@ -5,6 +5,12 @@
   (https://www.transifex.com/projects/p/id-editor/announcements/)
 - [ ] Notify TomH
 
+### Prep
+- [ ] If you don't have a `transifex.auth` file in the root of your iD checkout,
+      you'll need to create a Transifex account, ask @bhousel for admin rights
+      on the iD project, and then create this file with contents
+      like `{"user": "yourusername", "password": "*******"}`
+
 ### Update master branch
 - [ ] `git checkout master`
 - [ ] `make translations`
