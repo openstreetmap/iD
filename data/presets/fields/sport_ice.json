@@ -1,6 +1,6 @@
 {
     "key": "sport",
-    "type": "combo",
+    "type": "multiselect",
     "label": "Sport",
     "options": [
         "skating",
