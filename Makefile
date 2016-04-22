@@ -238,6 +238,7 @@ dist/iD.js: \
 	js/id/ui/preset/localized.js \
 	js/id/ui/preset/maxspeed.js \
 	js/id/ui/preset/radio.js \
+	js/id/ui/preset/range.js \
 	js/id/ui/preset/restrictions.js \
 	js/id/ui/preset/textarea.js \
 	js/id/ui/preset/wikipedia.js \

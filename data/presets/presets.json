@@ -2563,7 +2563,8 @@
         "icon": "building",
         "fields": [
             "address",
-            "levels"
+            "levels",
+            "indoor_levels"
         ],
         "geometry": [
             "area"
@@ -2642,6 +2643,7 @@
         "fields": [
             "address",
             "levels",
+            "indoor_levels",
             "smoking"
         ],
         "geometry": [
@@ -2749,7 +2751,8 @@
         "icon": "building",
         "fields": [
             "address",
-            "levels"
+            "levels",
+            "indoor_levels"
         ],
         "geometry": [
             "area"
@@ -2780,6 +2783,7 @@
         "fields": [
             "address",
             "levels",
+            "indoor_levels",
             "smoking"
         ],
         "geometry": [
@@ -2861,6 +2865,7 @@
         "fields": [
             "address",
             "levels",
+            "indoor_levels",
             "smoking"
         ],
         "geometry": [
@@ -2876,7 +2881,8 @@
         "icon": "building",
         "fields": [
             "address",
-            "levels"
+            "levels",
+            "indoor_levels"
         ],
         "geometry": [
             "area"
@@ -2892,6 +2898,7 @@
         "fields": [
             "address",
             "levels",
+            "indoor_levels",
             "smoking"
         ],
         "geometry": [
@@ -3011,7 +3018,8 @@
         "icon": "building",
         "fields": [
             "address",
-            "levels"
+            "levels",
+            "indoor_levels"
         ],
         "geometry": [
             "area"
@@ -3034,7 +3042,8 @@
         "icon": "building",
         "fields": [
             "address",
-            "levels"
+            "levels",
+            "indoor_levels"
         ],
         "geometry": [
             "point",

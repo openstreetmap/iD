@@ -1035,6 +1035,11 @@
                     "down": "Down"
                 }
             },
+            "indoor_levels": {
+                "label": "Indoor levels (min - max)",
+                "placeholder-0": "-1, 0, 1, 3...",
+                "placeholder-1": "3, 5, 10..."
+            },
             "information": {
                 "label": "Type"
             },

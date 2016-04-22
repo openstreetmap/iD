@@ -444,6 +444,11 @@ en:
           down: Down
           # incline=up
           up: Up
+      indoor_levels:
+        # 'min_level=*, max_level=*'
+        label: Indoor levels (min - max)
+        placeholder-0: '-1, 0, 1, 3...'
+        placeholder-1: '3, 5, 10...'
       information:
         # 'information=*'
         label: Type

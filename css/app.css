@@ -1071,6 +1071,9 @@ button.save.has-count .count::before {
     border-radius: 0 0 4px 4px;
     overflow: hidden;
 }
+.form-field > input:last-child {
+    border-left: 0;
+}
 
 .form-field textarea {
     height: 65px;

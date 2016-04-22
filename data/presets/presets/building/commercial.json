@@ -3,6 +3,7 @@
     "fields": [
         "address",
         "levels",
+        "indoor_levels",
         "smoking"
     ],
     "geometry": [

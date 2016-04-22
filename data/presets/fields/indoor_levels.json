@@ -1,0 +1,13 @@
+{
+    "keys": [
+        "min_level",
+        "max_level"
+    ],
+    "type": "range",
+    "label": "Indoor levels (min - max)",
+    "universal": true,
+    "strings": {
+        "placeholder-0": "-1, 0, 1, 3...",
+        "placeholder-1": "3, 5, 10..."
+    }
+}
