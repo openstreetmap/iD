@@ -114,10 +114,9 @@ iD.Features = function(context) {
                 return true;
         }
         else if (entity.tags['building'] || entity.tags['building:part']) {
-            if (parseFloat(entity.tags['building:levels'] || 0) < current)
+            if (current < 0 || current >= parseFloat(entity.tags['building:levels'] || 0))  //one level <=> level=0
                 return true;
         }
-
         if (current < 0) {
             if (!entity.tags.level && !entity.tags.repeat_on)
                 return true;
