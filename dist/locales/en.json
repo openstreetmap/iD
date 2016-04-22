@@ -451,6 +451,11 @@
             "help": "Another user changed some of the same map features you changed.\nClick on each item below for more details about the conflict, and choose whether to keep\nyour changes or the other user's changes.\n"
         }
     },
+    "indoor_mode": {
+        "title": "Indoor",
+        "help": "Indoor mode helps you creating indoor objects by filtering only the selected level.",
+        "exit": "Exit indoor editing mode."
+    },
     "merge_remote_changes": {
         "conflict": {
             "deleted": "This object has been deleted by {user}.",

@@ -7,9 +7,9 @@ iD.ui.IndoorMode = function (context) {
         enterButton = selection.append('button')
             .attr('class', 'indoormode-enter-button col12 ')
             .on('click', toggleIndoor)
-            .call(buttonTooltip('Indoor mode helps you creating indoor objects by filtering only the selected level. Even for currently added features.', '⌘⇧I'));
+            .call(buttonTooltip(t('indoor_mode.help'), '⌘⇧I'));
         enterButton
-            .append('span').attr('class', 'label').text('Indoor');
+            .append('span').attr('class', 'label').text(t('indoor_mode.title'));
 
 
         indoorControl = selection.append('div')
@@ -26,7 +26,7 @@ iD.ui.IndoorMode = function (context) {
         indoorControl.append('button')
             .attr('class', 'col3')
             .on('click', toggleIndoor)
-            .call(buttonTooltip('Exit indoor editing mode', '⌘⇧I'))
+            .call(buttonTooltip(t('indoor_mode.exit'), '⌘⇧I'))
             .call(iD.svg.Icon('#icon-close'));
 
         var spinControl;
@@ -74,15 +74,12 @@ iD.ui.IndoorMode = function (context) {
                 enableButton = entities.some(hasIndoorRelatedTag);
             }
 
-            console.log("context.on(enter) called");
-            console.log('enableIndoor', enableButton);
             updateControls(selection, enableButton);
         }
     };
 
     function updateControls(selection, enableButton) {
         if (context.indoorMode()) {
-            console.log("updateControls indoor=true");
             enterButton.classed('hide', true);
             indoorControl.classed('hide', false);
             indoorControl.select('.combobox-input')
@@ -92,7 +89,7 @@ iD.ui.IndoorMode = function (context) {
 
         }
         else {
-            enterButton.classed('hide', !enableButton); //.property('disabled', !enableButton);
+            enterButton.classed('hide', !enableButton);
             indoorControl.classed('hide', true);
         }
     }
@@ -121,7 +118,6 @@ iD.ui.IndoorMode = function (context) {
         var input = d3.select(this);
         var data = input.value(); //string!
         if (data === '') return; //blank value
-        console.log('setLevel', data);
 
         input
             .attr('placeholder', data)
