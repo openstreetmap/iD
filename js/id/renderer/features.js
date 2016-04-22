@@ -103,10 +103,7 @@ iD.Features = function(context) {
     defineFeature('indoor_different_level', function isHiddenByLevel(entity, resolver, geometry) { //disabled in indoor_mode -> hides unwanted levels
         var current = context.indoorLevel();
 
-        if (entity.tags.level && !inRange(current, entity.tags.level))
-            return true;
-
-        if (entity.tags.repeat_on && !inRange(current, entity.tags.repeat_on))
+        if (entity.tags.level && !inRange(current, entity.tags.level) && !inRange(current, entity.tags.repeat_on))
             return true;
 
         if (geometry === 'point' && !entity.tags.level && !entity.tags.repeat_on)
