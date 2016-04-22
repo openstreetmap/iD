@@ -1,6 +1,6 @@
 {
     "key": "internet_access",
-    "type": "combo",
+    "type": "multiselect",
     "label": "Internet Access",
     "strings": {
         "options": {

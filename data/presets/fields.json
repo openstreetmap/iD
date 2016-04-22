@@ -653,7 +653,7 @@
     },
     "internet_access": {
         "key": "internet_access",
-        "type": "combo",
+        "type": "multiselect",
         "label": "Internet Access",
         "strings": {
             "options": {
@@ -1020,46 +1020,10 @@
         "type": "typeCombo",
         "label": "Type"
     },
-    "recycling/cans": {
-        "key": "recycling:cans",
-        "type": "check",
-        "label": "Accepts Cans"
-    },
-    "recycling/clothes": {
-        "key": "recycling:clothes",
-        "type": "check",
-        "label": "Accepts Clothes"
-    },
-    "recycling/glass": {
-        "key": "recycling:glass",
-        "type": "check",
-        "label": "Accepts Glass"
-    },
-    "recycling/glass_bottles": {
-        "key": "recycling:glass_bottles",
-        "type": "check",
-        "label": "Accepts Glass Bottles"
-    },
-    "recycling/paper": {
-        "key": "recycling:paper",
-        "type": "check",
-        "label": "Accepts Paper"
-    },
-    "recycling/plastic": {
-        "key": "recycling:plastic",
-        "type": "check",
-        "label": "Accepts Plastic"
-    },
-    "recycling/type": {
-        "key": "recycling_type",
-        "type": "combo",
-        "label": "Recycling Type",
-        "strings": {
-            "options": {
-                "container": "Container",
-                "centre": "Recycling Center"
-            }
-        }
+    "recycling/recycling_choices": {
+        "key": "recycling",
+        "type": "multiselect",
+        "label": "Accepts"
     },
     "ref": {
         "key": "ref",
@@ -1270,7 +1234,7 @@
     },
     "sport_ice": {
         "key": "sport",
-        "type": "combo",
+        "type": "multiselect",
         "label": "Sport",
         "options": [
             "skating",

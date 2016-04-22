@@ -56,6 +56,7 @@
                 "defaultcheck",
                 "text",
                 "maxspeed",
+                "multiselect",
                 "number",
                 "tel",
                 "email",

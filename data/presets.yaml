@@ -773,32 +773,9 @@ en:
       railway:
         # 'railway=*'
         label: Type
-      recycling/cans:
-        # 'recycling:cans=*'
-        label: Accepts Cans
-      recycling/clothes:
-        # 'recycling:clothes=*'
-        label: Accepts Clothes
-      recycling/glass:
-        # 'recycling:glass=*'
-        label: Accepts Glass
-      recycling/glass_bottles:
-        # 'recycling:glass_bottles=*'
-        label: Accepts Glass Bottles
-      recycling/paper:
-        # 'recycling:paper=*'
-        label: Accepts Paper
-      recycling/plastic:
-        # 'recycling:plastic=*'
-        label: Accepts Plastic
-      recycling/type:
-        # 'recycling_type=*'
-        label: Recycling Type
-        options:
-          # recycling_type=centre
-          centre: Recycling Center
-          # recycling_type=container
-          container: Container
+      recycling/recycling_choices:
+        # 'recycling=*'
+        label: Accepts
       ref:
         # 'ref=*'
         label: Reference
