@@ -333,14 +333,10 @@ window.iD = function () {
     context.indoorLevel = function (newLevel) {
         if (newLevel) { //setter
             indoorLevel = newLevel;
-            if (indoorMode) {
-                features.reset();
-                map.redraw(); //TODO event?
-                dispatch.indoorLevelChanged(); //update hash & combo
-            }
-            else {
+            if (indoorMode)
+                context.indoorRedraw();
+            else
                 context.toggleIndoorMode();
-            }
         }
         return indoorLevel;
     };
@@ -351,36 +347,60 @@ window.iD = function () {
             return false;
         }
 
-        indoorMode = !indoorMode;
-        context.surface().classed('indoor-mode', indoorMode);
-
-
-        var selectedFeature = context.selectedIDs();
-        if (indoorMode && selectedFeature.length) {
-            var entity = context.graph().entity(selectedFeature[0]);
+        var selectedFeatures = context.selectedIDs();
+        if (!indoorMode && selectedFeatures.length) {
+            var entity = context.graph().entity(selectedFeatures[0]);
             if (entity.tags.level)
                 indoorLevel = entity.tags.level.replace(/(-?\d+(\.\d+)?).+/, '$1');
             else if (entity.tags.repeat_on)
                 indoorLevel = entity.tags.repeat_on.replace(/(-?\d+(\.\d+)?).+/, '$1');
+            else
+                indoorLevel = '0';
+
+            console.log(indoorLevel);
         }
+
+        indoorMode = !indoorMode;
+        context.surface().classed('indoor-mode', indoorMode);
 
         if (indoorMode) {
             enabledFeaturesBeforeIndoor = features.enabled();
-            _.each(_.without(features.keys(), 'indoor', 'buildings', 'points'), features.disable); //preserve selection on those 'withouts'
-            _.each(['indoor', 'buildings', 'points'], features.enable);
+            _.each(features.keys(), features.disable);
+            _.each(['indoor', 'buildings', 'points', 'paths', 'traffic_roads', 'service_roads'], features.enable);
         }
         else {
             _.each(_.difference(features.keys(), enabledFeaturesBeforeIndoor), features.disable);
             _.each(enabledFeaturesBeforeIndoor, features.enable);
         }
 
+        context.indoorRedraw();
+
+        selectedFeatures.length && context.enter(iD.modes.Select(context, selectedFeatures));
+
+    };
+
+    context.indoorRedraw = function () {
+        context.surface().classed('indoor-underground', indoorLevel < 0);
+        context.surface().classed('indoor-aboveground', indoorLevel > 0);
+        setBackgroundOpacity(indoorLevel < 0 && 0.1);
+
         features.reset();
         map.redraw(); //TODO event?
         dispatch.indoorLevelChanged(); //update hash & combo
+
+        function setBackgroundOpacity(d) {
+            var bg = context.container().selectAll('.layer-background');
+            if (d === false)
+                d = bg.attr('data-opacity');
+            bg.transition().style('opacity', d);
+            if (!iD.detect().opera) {
+                iD.util.setTransform(bg, 0, 0);
+            }
+        }
     };
 
     context.indoorLevels = function () {
-        return [-1, 0, 1, 2]
+        return [-1, 0, 1, 2, 3, 0.5, 1.5];
     };
 
     /* Init */

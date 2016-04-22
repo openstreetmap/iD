@@ -117,10 +117,6 @@ iD.Features = function(context) {
             if (current < 0 || current >= parseFloat(entity.tags['building:levels'] || 0))  //one level <=> level=0
                 return true;
         }
-        if (current < 0) {
-            if (!entity.tags.level && !entity.tags.repeat_on)
-                return true;
-        }
     });
 
     defineFeature('indoor', function isIndoorOther(entity) {

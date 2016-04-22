@@ -1311,7 +1311,7 @@ path.fill.tag-amenity-shelter {
 path.fill.tag-indoor {
     display: none;
 }
-.indoor-mode path.fill.tag-building {
+.indoor-mode path.fill.tag-building.tag-max_level {
     clip-path: none !important;
     stroke-width: 30px;
 }
@@ -1330,6 +1330,9 @@ path.fill.tag-indoor {
 .indoor-mode text.arealabel-halo.tag-building,
 .indoor-mode text.arealabel-halo.tag-amenity {
     display: none;
+}
+.indoor-mode.indoor-underground .way:not(.tag-level):not(.tag-building) {
+    opacity: 0.1;
 }
 
 

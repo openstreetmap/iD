@@ -488,6 +488,11 @@ button.save.has-count .count::before {
 .indoormode-level-combo .combobox-input {
     height: 40px;
     border-radius: 4px 0 0 4px;
+    font-weight: bold;
+    text-align: center;
+}
+.indoormode-level-combo .combobox-input::-webkit-input-placeholder  {
+    color: #000;
 }
 .indoormode-level-combo .combobox-caret {
     display: none;
