@@ -106,10 +106,8 @@ iD.ui.preset.multiselect = function(field, context) {
     function updateStrings(tagsData) {
         comboboxData = objectDifference(strings, tagsData);
         combobox.data(comboboxData.map(comboValues));
-        input.attr('placeholder', field.placeholder() ||
-            ( 'Type here'));
+        input.attr('placeholder', (field.placeholder() || t('inspector.add')) + '…');
     }
-
 
     function update(data) {
         var chips = multiselectContainer.selectAll('.chips').data(data);

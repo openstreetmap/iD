@@ -316,6 +316,7 @@
             "yes": "Yes",
             "no": "No"
         },
+        "add": "Add",
         "none": "None",
         "node": "Node",
         "way": "Way",
