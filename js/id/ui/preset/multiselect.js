@@ -45,7 +45,7 @@ iD.ui.preset.multiselect = function(field, context) {
 
     function multiselect(selection) {
         isInitialized = false;
-        combobox = d3.combobox();
+        combobox = d3.combobox().minItems(1);
 
         multiselectContainer = selection.selectAll('ul').data([0]);
 
