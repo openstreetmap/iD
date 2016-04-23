@@ -9,7 +9,10 @@ iD.ui.preset.multiselect = function(field, context) {
         input,
         isInitialized;
 
-    field.key += ':';
+    // ensure field.key ends with a ':'
+    if (field.key.match(/.*:$/) === null) {
+        field.key += ':';
+    }
 
     function getOptStringKey(val) {
         if (optstrings) {
@@ -35,7 +38,7 @@ iD.ui.preset.multiselect = function(field, context) {
             bObj[obj.key] = obj;
         });
         // Return all elements in a, unless in b
-        return a.filter(function(obj){
+        return a.filter(function(obj) {
             return !(obj.key in bObj);
         });
     }
@@ -71,10 +74,10 @@ iD.ui.preset.multiselect = function(field, context) {
             .each(function() {
                 if (optstrings) {
                     strings = Object.keys(optstrings).map(function(k) {
-                      return {
-                        key: k,
-                        value: field.t('options.' + k, { 'default': optstrings[k] })
-                      };
+                        return {
+                            key: k,
+                            value: field.t('options.' + k, { 'default': optstrings[k] })
+                        };
                     });
                     dispatch.init();
                     isInitialized = true;
@@ -111,12 +114,12 @@ iD.ui.preset.multiselect = function(field, context) {
     function update(data) {
         var chips = multiselectContainer.selectAll('.chips').data(data);
 
-        var chip = chips.enter()
+        var enter = chips.enter()
             .insert('li', 'input')
             .attr('class', 'chips');
 
-        chip.append('span');
-        chip.append('a');
+        enter.append('span');
+        enter.append('a');
 
         chips.select('span').text(function(d) {return d.value;});
 
@@ -130,8 +133,8 @@ iD.ui.preset.multiselect = function(field, context) {
 
     function comboValues(d) {
         return {
-          value: d.value,
-          title: d.value
+            value: d.value,
+            title: d.value
         };
     }
 
@@ -142,6 +145,7 @@ iD.ui.preset.multiselect = function(field, context) {
             var t = {};
             t[field.key + key] = 'yes';
             input.value('');
+            field.keys.push(field.key + key);
             dispatch.change(t);
         }
     }
@@ -174,6 +178,8 @@ iD.ui.preset.multiselect = function(field, context) {
                 }
             }
         });
+
+        field.keys = _.map(_.pluck(tagsData, 'key'), function(v) { return field.key + v; });
 
         update(tagsData);
 

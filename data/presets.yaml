@@ -774,7 +774,7 @@ en:
         # 'railway=*'
         label: Type
       recycling/recycling_choices:
-        # 'recycling=*'
+        # 'recycling:=*'
         label: Accepts
       ref:
         # 'ref=*'

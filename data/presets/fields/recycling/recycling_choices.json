@@ -1,5 +1,5 @@
 {
-    "key": "recycling",
+    "key": "recycling:",
     "type": "multiselect",
     "label": "Accepts"
 }

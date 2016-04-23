@@ -1021,7 +1021,7 @@
         "label": "Type"
     },
     "recycling/recycling_choices": {
-        "key": "recycling",
+        "key": "recycling:",
         "type": "multiselect",
         "label": "Accepts"
     },
