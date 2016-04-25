@@ -80,6 +80,14 @@ iD.ui.IndoorMode = function (context) {
                 });
             }
 
+            if (!showButton) {
+                var entities = context.intersects(context.map().extent());
+
+                showButton = entities.some(function hasIndoorRelatedTag(e) {
+                    return e.tags.level || e.tags.indoor;
+                });
+            }
+
             updateControls(selection, showButton);
         }
     };
