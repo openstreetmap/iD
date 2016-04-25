@@ -25,7 +25,7 @@ iD.Indoor = function (context) {
 
     indoor.toggle = function () {
         if (!context.surface()) { //hash calls before surface is initialized
-            setTimeout(indoor.toggle, 200); //TODO better?
+            setTimeout(indoor.toggle, 200);
             return false;
         }
 

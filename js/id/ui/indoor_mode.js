@@ -71,19 +71,19 @@ iD.ui.IndoorMode = function (context) {
             var showButton = context.indoor().enabled();
 
             if (!showButton) {
-                var entities = context.selectedIDs().map(function (id) {
+                var selectedEntities = context.selectedIDs().map(function (id) {
                     return graph.entity(id);
                 });
 
-                showButton = entities.some(function isBuilding(e) {
+                showButton = selectedEntities.some(function isBuilding(e) {
                     return e.tags.building;
                 });
             }
 
             if (!showButton) {
-                var entities = context.intersects(context.map().extent());
+                var displayedEntities = context.intersects(context.map().extent());
 
-                showButton = entities.some(function hasIndoorRelatedTag(e) {
+                showButton = displayedEntities.some(function hasIndoorRelatedTag(e) {
                     return e.tags.level || e.tags.indoor;
                 });
             }
@@ -116,9 +116,9 @@ iD.ui.IndoorMode = function (context) {
     function levelChangeFunc(dif) {
         return function () {
             d3.event.preventDefault();
-            context.indoor().level(parseFloat(context.indoor().level()) + dif + "");
+            context.indoor().level(parseFloat(context.indoor().level()) + dif + '');
             indoorControl.select('input').attr('placeholder', context.indoor().level());
-        }
+        };
     }
 
     function buttonTooltip(description, cmd) {

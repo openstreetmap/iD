@@ -106,14 +106,14 @@ iD.Features = function(context) {
         if (entity.tags.level && !inRange(current, entity.tags.level) && !inRange(current, entity.tags.repeat_on))
             return true;
 
-        if (geometry === 'point' && !entity.tags.level && !entity.tags.repeat_on)
+        if (geometry === 'point' && !entity.tags.level)
             return true;
 
         if (entity.tags.max_level && entity.tags.min_level) {
             if (parseFloat(entity.tags.max_level) < current || parseFloat(entity.tags.min_level) > current)
                 return true;
         }
-        else if (entity.tags['building'] || entity.tags['building:part']) {
+        else if (entity.tags.building || entity.tags['building:part']) {
             if (current < 0 || current >= parseFloat(entity.tags['building:levels'] || 0))  //one level <=> level=0
                 return true;
         }
@@ -124,7 +124,7 @@ iD.Features = function(context) {
     });
 
     defineFeature('indoor', function isIndoorOther(entity) {
-        return !!entity.tags.level || !!entity.tags.repeat_on;
+        return !!entity.tags.level;
     });
 
     defineFeature('landuse', function isLanduse(entity, resolver, geometry) {
@@ -456,7 +456,7 @@ iD.Features = function(context) {
             return false;
         }
 
-        if (range[2] === undefined && range[4] == undefined) { //exact match
+        if (range[2] === undefined && range[4] === undefined) { //exact match
             if (range[1] === level) {
                 return true;
             }
