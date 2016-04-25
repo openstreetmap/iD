@@ -64,8 +64,7 @@ iD.Indoor = function (context) {
         setBackgroundOpacity(indoorLevel < 0 ? 0.1 : 'revert');
 
         features.reset();
-        context.map().redraw(); //TODO event?
-        dispatch.levelChanged(); //update hash & combo
+        dispatch.levelChanged(); //update hash & combo, redraw map
     };
 
     indoor.levels = function () {

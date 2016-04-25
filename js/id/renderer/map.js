@@ -32,6 +32,8 @@ iD.Map = function(context) {
             .on('change.map', redraw);
         context.features()
             .on('redraw.map', redraw);
+        context.indoor()
+            .on('levelChanged.map', redraw);
         drawLayers
             .on('change.map', function() {
                 context.background().updateImagery();
@@ -202,7 +204,6 @@ iD.Map = function(context) {
         return true;
     }
 
-    map.redraw = redraw;
     function redraw(difference, extent) {
         if (!surface || !redrawEnabled) return;
 
