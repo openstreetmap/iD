@@ -1,5 +1,27 @@
 :warning: = Breaking change, may affect downstream projects or sites that embed iD.
 
+## 1.9.3
+##### Apr 25, 2016
+* Display "Choose language" placeholder value for Wikipedia language field (#3071)
+* Add prison preset (#3070, thanks @kepta)
+* Improve `studio=*` tagging (#3061, thanks @kepta)
+* Dedupe relations with same calculated name so they will appear in relation picker (#2891)
+* Modal Dialog and Save/Restore improvements (#3036)
+* Use case sensitive combo for changeset autocompletion (#3039)
+* Add a warning to the changeset page if a user mentions Google (#3063, thanks @tmcw)
+* Fix bug when manually assigning a role to a relation member (#2739)
+* Imagery offset control now allows dragging or typing to adjust offsets (#1340, thanks @kepta)
+* Support terrain imagery backgrounds: Stamen Terrain, Thunderforest Landscape
+* Don't fetch overlay tiles or Mapillary data around Null Island (#2751)
+* Show values as hover tooltips when field is too narrow to display full value (#3054)
+* Don't clean fields (trim whitespace) on every input event (#3045)
+* Improve usability of Save and Cancel buttons (#3040)
+* Close seams in imagery tiles (#3053)
+* Improve instructions for building on Windows (#2574)
+* Add Code of Conduct (#3051)
+* Add nutrition supplements store preset (#3043)
+* Add coffee shop preset (#3042)
+
 ## 1.9.2
 ##### Mar 18, 2016
 * Avoid jumpiness when dragging node markers (#3003)
