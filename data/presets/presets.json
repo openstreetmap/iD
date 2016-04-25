@@ -1511,7 +1511,7 @@
         "icon": "prison",
         "fields": [
             "operator",
-            "access"
+            "address"
         ],
         "geometry": [
             "point",
