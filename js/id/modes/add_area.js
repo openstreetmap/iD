@@ -15,8 +15,8 @@ iD.modes.AddArea = function(context) {
 
     function defaultTags() {
         var tags = {area: 'yes'};
-        if (context.indoorMode()) {
-            tags.level = context.indoorLevel();
+        if (context.indoor().enabled()) {
+            tags.level = context.indoor().level();
         }
         return tags;
     }

@@ -101,7 +101,7 @@ iD.Features = function(context) {
     }, 250);
 
     defineFeature('indoor_different_level', function isHiddenByLevel(entity, resolver, geometry) { //disabled in indoor_mode -> hides unwanted levels
-        var current = context.indoorLevel();
+        var current = context.indoor().level();
 
         if (entity.tags.level && !inRange(current, entity.tags.level) && !inRange(current, entity.tags.repeat_on))
             return true;
@@ -116,6 +116,10 @@ iD.Features = function(context) {
         else if (entity.tags['building'] || entity.tags['building:part']) {
             if (current < 0 || current >= parseFloat(entity.tags['building:levels'] || 0))  //one level <=> level=0
                 return true;
+        }
+
+        if (current > 0 && entity.tags.highway && !entity.tags.level) {
+            return true;
         }
     });
 
@@ -372,7 +376,7 @@ iD.Features = function(context) {
 
     features.isHiddenFeature = function(entity, resolver, geometry) {
         if (!_hidden.length) return false;
-        if (!context.indoorMode() && !entity.version) return false;
+        if (!context.indoor().enabled() && entity.isNew()) return false;
 
         var matches = features.getMatches(entity, resolver, geometry);
 
@@ -384,9 +388,10 @@ iD.Features = function(context) {
 
     features.isHiddenChild = function(entity, resolver, geometry) {
         if (!_hidden.length) return false;
-        if ((!context.indoorMode() && !entity.version) || geometry === 'point') return false;
+        if ((!context.indoor().enabled() && entity.isNew()) || geometry === 'point') return false;
 
-        if (context.indoorMode() && geometry === 'vertex' && _features.indoor_different_level.filter(entity, resolver, geometry)) return true;
+        //hide vertices with different level
+        if (geometry === 'vertex' && context.indoor().enabled() && _features.indoor_different_level.filter(entity, resolver, geometry)) return true;
 
         var parents = features.getParents(entity, resolver, geometry);
         if (!parents.length) return false;
@@ -423,7 +428,7 @@ iD.Features = function(context) {
 
     features.isHidden = function(entity, resolver, geometry) {
         if (!_hidden.length) return false;
-        if (!context.indoorMode() && !entity.version) return false;
+        if (!context.indoor().enabled() && !entity.version) return false;
 
         var fn = (geometry === 'vertex' ? features.isHiddenChild : features.isHiddenFeature);
         return fn(entity, resolver, geometry);
@@ -443,9 +448,9 @@ iD.Features = function(context) {
     };
 
 
-    var levelRangeRegExp = /^(-?\d+)(?:(-)(-?\d+)|(;-?\d)+)?$/;
+    var rangeRegExp = /^(-?\d+)(?:(-)(-?\d+)|(;-?\d)+)?$/;
     function inRange(level, rangeText) {
-        var range = rangeText && levelRangeRegExp.exec(rangeText);
+        var range = rangeText && rangeRegExp.exec(rangeText);
 
         if (!range) {  //blank text OR not matched
             return false;

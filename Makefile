@@ -161,6 +161,7 @@ dist/iD.js: \
 	js/id/renderer/background.js \
 	js/id/renderer/background_source.js \
 	js/id/renderer/features.js \
+	js/id/renderer/indoor.js \
 	js/id/renderer/map.js \
 	js/id/renderer/tile_layer.js \
 	js/id/svg.js \

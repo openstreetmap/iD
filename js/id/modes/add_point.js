@@ -17,8 +17,8 @@ iD.modes.AddPoint = function(context) {
 
     function defaultTags() {
         var tags = {};
-        if (context.indoorMode()) {
-            tags.level = context.indoorLevel();
+        if (context.indoor().enabled()) {
+            tags.level = context.indoor().level();
         }
         return tags;
     }

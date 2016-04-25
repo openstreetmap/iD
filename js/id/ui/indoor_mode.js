@@ -56,36 +56,42 @@ iD.ui.IndoorMode = function (context) {
             .call(keybinding);
 
         context
-            .on('enter.indoor_mode', update)
-            .on('indoorLevelChanged.indoor_mode', update);
+            .on('enter.indoor_mode', update);
+
+        context.indoor()
+            .on('levelChanged.indoor_mode', update);
+
+        context.map()
+            .on('move.indoor_mode', _.debounce(update, 400))
+            .on('drawn.indoor_mode', update);
+
 
         function update() {
-            var enableButton = context.indoorMode();
+            var graph = context.graph();
+            var showButton = context.indoor().enabled();
 
-            if (!enableButton) {
-                var graph = context.graph();
-                var ids = context.selectedIDs();
-                var entities = ids.map(function (id) {
+            if (!showButton) {
+                var entities = context.selectedIDs().map(function (id) {
                     return graph.entity(id);
                 });
-                var hasIndoorRelatedTag = function (e) {
-                    return e.tags.level || e.tags.repeat_on || e.tags.indoor || e.tags.building;
-                };
-                enableButton = entities.some(hasIndoorRelatedTag);
+
+                showButton = entities.some(function isBuilding(e) {
+                    return e.tags.building;
+                });
             }
 
-            updateControls(selection, enableButton);
+            updateControls(selection, showButton);
         }
     };
 
     function updateControls(selection, enableButton) {
-        if (context.indoorMode()) {
+        if (context.indoor().enabled()) {
             enterButton.classed('hide', true);
             indoorControl.classed('hide', false);
             indoorControl.select('.combobox-input')
-                .attr('placeholder', context.indoorLevel())
+                .attr('placeholder', context.indoor().level())
                 .value('')
-                .call(d3.combobox().data(context.indoorLevels().map(comboValues)));
+                .call(d3.combobox().data(context.indoor().levels().map(comboValues)));
 
         }
         else {
@@ -96,14 +102,14 @@ iD.ui.IndoorMode = function (context) {
 
     function toggleIndoor() {
         d3.event.preventDefault();
-        context.toggleIndoorMode();
+        context.indoor().toggle();
     }
 
     function levelChangeFunc(dif) {
         return function () {
             d3.event.preventDefault();
-            context.indoorLevel(parseFloat(context.indoorLevel()) + dif + "");
-            indoorControl.select('input').attr('placeholder', context.indoorLevel());
+            context.indoor().level(parseFloat(context.indoor().level()) + dif + "");
+            indoorControl.select('input').attr('placeholder', context.indoor().level());
         }
     }
 
@@ -111,7 +117,7 @@ iD.ui.IndoorMode = function (context) {
         return bootstrap.tooltip()
             .placement('bottom')
             .html(true)
-            .title(iD.ui.tooltipHtml(description, cmd ? iD.ui.cmd(cmd) : undefined));
+            .title(iD.ui.tooltipHtml(description, (cmd ? iD.ui.cmd(cmd) : undefined)));
     }
 
     function setLevel() {
@@ -123,7 +129,7 @@ iD.ui.IndoorMode = function (context) {
             .attr('placeholder', data)
             .value('');
 
-        context.indoorLevel(data);
+        context.indoor().level(data);
     }
 
     function comboValues(d) {

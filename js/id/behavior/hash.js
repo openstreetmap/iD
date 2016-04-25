@@ -36,8 +36,8 @@ iD.behavior.Hash = function(context) {
                 '/' + center[0].toFixed(precision) +
                 '/' + center[1].toFixed(precision);
 
-        if (context.indoorMode())
-            q.level = context.indoorLevel();
+        if (context.indoor().enabled())
+            q.level = context.indoor().level();
         else
             delete q.level;
 
@@ -66,8 +66,8 @@ iD.behavior.Hash = function(context) {
         context
             .on('enter.hash', throttledUpdate);
 
-        context
-            .on('indoorLevelChanged.hash', throttledUpdate);
+        context.indoor()
+            .on('levelChanged.hash', throttledUpdate);
 
         d3.select(window)
             .on('hashchange.hash', hashchange);
@@ -76,7 +76,7 @@ iD.behavior.Hash = function(context) {
             var q = iD.util.stringQs(location.hash.substring(1));
             if (q.id) context.zoomToEntity(q.id.split(',')[0], !q.map);
             if (q.comment) context.storage('comment', q.comment);
-            if (q.level) context.indoorLevel(q.level);
+            if (q.level) context.indoor().level(q.level);
             hashchange();
             if (q.map) hash.hadHash = true;
         }

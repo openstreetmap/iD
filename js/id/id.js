@@ -2,7 +2,7 @@ window.iD = function () {
     window.locale.en = iD.data.en;
     window.locale.current('en');
 
-    var dispatch = d3.dispatch('enter', 'exit', 'indoorLevelChanged'),
+    var dispatch = d3.dispatch('enter', 'exit'),
         context = {};
 
     // https://github.com/openstreetmap/iD/issues/772
@@ -215,6 +215,13 @@ window.iD = function () {
     };
 
 
+    /* Indoor mode */
+    var indoor;
+    context.indoor = function () {
+        return indoor;
+    };
+
+
     /* Debug */
     var debugTile = false, debugCollision = false;
     context.debugTile = function(_) {
@@ -321,88 +328,6 @@ window.iD = function () {
     };
 
 
-    /* Indoor mode */
-    var indoorMode = false, indoorLevel = '0', enabledFeaturesBeforeIndoor;
-    //    return d3.rebind(indoor, dispatch, 'on');
-
-
-    context.indoorMode = function () {
-        return indoorMode;
-    };
-
-    context.indoorLevel = function (newLevel) {
-        if (newLevel) { //setter
-            indoorLevel = newLevel;
-            if (indoorMode)
-                context.indoorRedraw();
-            else
-                context.toggleIndoorMode();
-        }
-        return indoorLevel;
-    };
-
-    context.toggleIndoorMode = function () {
-        if (!context.surface()) { //hash too early
-            setTimeout(context.toggleIndoorMode, 200); //TODO better?
-            return false;
-        }
-
-        var selectedFeatures = context.selectedIDs();
-        if (!indoorMode && selectedFeatures.length) {
-            var entity = context.graph().entity(selectedFeatures[0]);
-            if (entity.tags.level)
-                indoorLevel = entity.tags.level.replace(/(-?\d+(\.\d+)?).+/, '$1');
-            else if (entity.tags.repeat_on)
-                indoorLevel = entity.tags.repeat_on.replace(/(-?\d+(\.\d+)?).+/, '$1');
-            else
-                indoorLevel = '0';
-
-            console.log(indoorLevel);
-        }
-
-        indoorMode = !indoorMode;
-        context.surface().classed('indoor-mode', indoorMode);
-
-        if (indoorMode) {
-            enabledFeaturesBeforeIndoor = features.enabled();
-            _.each(features.keys(), features.disable);
-            _.each(['indoor', 'buildings', 'points', 'paths', 'traffic_roads', 'service_roads'], features.enable);
-        }
-        else {
-            _.each(_.difference(features.keys(), enabledFeaturesBeforeIndoor), features.disable);
-            _.each(enabledFeaturesBeforeIndoor, features.enable);
-        }
-
-        context.indoorRedraw();
-
-        selectedFeatures.length && context.enter(iD.modes.Select(context, selectedFeatures));
-
-    };
-
-    context.indoorRedraw = function () {
-        context.surface().classed('indoor-underground', indoorLevel < 0);
-        context.surface().classed('indoor-aboveground', indoorLevel > 0);
-        setBackgroundOpacity(indoorLevel < 0 && 0.1);
-
-        features.reset();
-        map.redraw(); //TODO event?
-        dispatch.indoorLevelChanged(); //update hash & combo
-
-        function setBackgroundOpacity(d) {
-            var bg = context.container().selectAll('.layer-background');
-            if (d === false)
-                d = bg.attr('data-opacity');
-            bg.transition().style('opacity', d);
-            if (!iD.detect().opera) {
-                iD.util.setTransform(bg, 0, 0);
-            }
-        }
-    };
-
-    context.indoorLevels = function () {
-        return [-1, 0, 1, 2, 3, 0.5, 1.5];
-    };
-
     /* Init */
 
     context.projection = iD.geo.RawMercator();
@@ -452,6 +377,8 @@ window.iD = function () {
     context.zoomInFurther = map.zoomInFurther;
     context.zoomOutFurther = map.zoomOutFurther;
     context.redrawEnable = map.redrawEnable;
+
+    indoor = iD.Indoor(context);
 
     presets = iD.presets();
 

@@ -1071,7 +1071,7 @@ button.save.has-count .count::before {
     border-radius: 0 0 4px 4px;
     overflow: hidden;
 }
-.form-field > input:last-child {
+.form-field > input:nth-child(3) {
     border-left: 0;
 }
 

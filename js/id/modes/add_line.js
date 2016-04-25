@@ -15,8 +15,8 @@ iD.modes.AddLine = function(context) {
 
     function defaultTags() {
         var tags = {};
-        if (context.indoorMode()) {
-            tags.level = context.indoorLevel();
+        if (context.indoor().enabled()) {
+            tags.level = context.indoor().level();
         }
         return tags;
     }
@@ -25,10 +25,6 @@ iD.modes.AddLine = function(context) {
         var baseGraph = context.graph(),
             node = iD.Node({loc: loc}),
             way = iD.Way({tags: defaultTags()});
-
-        if (context.indoorMode()) {
-            way.tags.level = context.indoorLevel();
-        }
 
         context.perform(
             iD.actions.AddEntity(node),
