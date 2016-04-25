@@ -127,7 +127,7 @@ iD.ui.preset.localized = function(field, context) {
         innerWrap.attr('class', 'entry')
             .each(function() {
                 var wrap = d3.select(this);
-                var langcombo = d3.combobox().fetcher(fetcher);
+                var langcombo = d3.combobox().fetcher(fetcher).minItems(0);
 
                 var label = wrap.append('label')
                     .attr('class','form-label')
