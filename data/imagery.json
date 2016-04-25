@@ -1,5 +1,64 @@
 [
     {
+        "name": "2013 aerial imagery for San Juan County WA",
+        "type": "tms",
+        "description": "Public domain aerial imagery taken in May/June 2013 from San Juan County, WA. Resolution is 9 inch.",
+        "template": "http://sjcgis.org/arcgis/rest/services/Basemaps/Aerials_2013_WM/MapServer/tile/{zoom}/{y}/{x}",
+        "scaleExtent": [
+            0,
+            19
+        ],
+        "polygon": [
+            [
+                [
+                    -123.274024,
+                    48.692975
+                ],
+                [
+                    -123.007726,
+                    48.767256
+                ],
+                [
+                    -123.007619,
+                    48.831577
+                ],
+                [
+                    -122.783495,
+                    48.758416
+                ],
+                [
+                    -122.693402,
+                    48.658522
+                ],
+                [
+                    -122.767451,
+                    48.603606
+                ],
+                [
+                    -122.744842,
+                    48.387083
+                ],
+                [
+                    -123.248221,
+                    48.283531
+                ],
+                [
+                    -123.114524,
+                    48.422614
+                ],
+                [
+                    -123.219035,
+                    48.548575
+                ],
+                [
+                    -123.274024,
+                    48.692975
+                ]
+            ]
+        ],
+        "best": true
+    },
+    {
         "name": "7th Series (OS7)",
         "type": "tms",
         "template": "http://ooc.openstreetmap.org/os7/{zoom}/{x}/{y}.jpg",
