@@ -324,7 +324,6 @@
         "custom": "自定义",
         "custom_button": "编辑自定义背景",
         "custom_prompt": "输入瓦片模板。Z/X/Y方案的有效标记是{z}，{x}，{y}，quadtile方案的有效标记是{u}。",
-        "fix_misalignment": "修复对齐",
         "reset": "重置",
         "minimap": {
             "description": "小地图",
@@ -1383,9 +1382,6 @@
                     "tunnel": "隧道"
                 },
                 "placeholder": "未知种类"
-            },
-            "studio_type": {
-                "label": "类型"
             },
             "substation": {
                 "label": "类型"
@@ -2462,7 +2458,8 @@
                 "terms": "墓地"
             },
             "landuse/commercial": {
-                "name": "商业区"
+                "name": "商业区",
+                "terms": "商业区,商业用地"
             },
             "landuse/construction": {
                 "name": "建设用地",

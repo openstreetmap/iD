@@ -151,7 +151,6 @@
         "title": "الخلفية",
         "description": "إعدادات الخلفية",
         "percent_brightness": "{opacity}% سطوع",
-        "fix_misalignment": "إصلاح الإستقامة",
         "reset": "أعد للوضع السابق"
     },
     "restore": {

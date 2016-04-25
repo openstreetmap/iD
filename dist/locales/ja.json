@@ -329,7 +329,6 @@
         "custom": "カスタム",
         "custom_button": "カスタム背景の編集",
         "custom_prompt": "タイルURLのテンプレートを入力してください。有効なトークンは、Z/X/Y方式ならば{z}, {x} , {y}、quadtile方式ならば{u}です。",
-        "fix_misalignment": "背景画像をずらす",
         "imagery_source_faq": "この写真の出典元",
         "reset": "設定リセット",
         "minimap": {
@@ -1434,9 +1433,6 @@
                     "tunnel": "トンネル"
                 },
                 "placeholder": "不明"
-            },
-            "studio_type": {
-                "label": "タイプ"
             },
             "substation": {
                 "label": "タイプ"

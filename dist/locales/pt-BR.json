@@ -252,7 +252,10 @@
         "modified": "Modificado",
         "deleted": "Excluído",
         "created": "Criado",
-        "about_changeset_comments": "Sobre comentários do changeset"
+        "about_changeset_comments": "Sobre comentários do changeset",
+        "about_changeset_comments_link": "//wiki.openstreetmap.org/wiki/Good_changeset_comments",
+        "google_warning": "Você mencionou o Google  neste comentário: lembre-se que a cópia do Google Maps é estritamente proibida.",
+        "google_warning_link": "http://www.openstreetmap.org/direitos autorais"
     },
     "contributors": {
         "list": "Edições de {users}",
@@ -329,9 +332,10 @@
         "custom": "Customizado",
         "custom_button": "Editar fundo de tela personalizado",
         "custom_prompt": "Informe um modelo de URL de quadrículas. Tokens válidos são {z}, {x}, {y} para o esquema Z/X/Y e {u} para o esquema quadtile.",
-        "fix_misalignment": "Corrigir alinhamento",
+        "fix_misalignment": "Ajustar o deslocamento da imagem",
         "imagery_source_faq": "De onde essa imagem de satélite vem?",
         "reset": "redefinir",
+        "offset": "Arraste em qualquer ponto da área cinza abaixo para ajustar o deslocamento da imagem, ou entre com o valor do deslocamento em metros.",
         "minimap": {
             "description": "Minimapa",
             "tooltip": "Afastar a visualização do mapa para facilitar a localização da área atualmente mostrada."
@@ -455,7 +459,8 @@
         "twitter": "Compartilhar no Twitter",
         "google": "Compartilhar Google+",
         "help_html": "Suas modificações devem aparecer na camada \"Padrão\" dentro de alguns minutos. Alguns elementos e outras camadas podem demorar mais para serem atualizadas.",
-        "help_link_text": "Detalhes"
+        "help_link_text": "Detalhes",
+        "help_link_url": "https://wiki.openstreetmap.org/wiki/FAQ#I_have_just_made_some_changes_to_the_map._How_do_I_get_to_see_my_changes.3F"
     },
     "confirm": {
         "okay": "O.K.",
@@ -1435,7 +1440,7 @@
                 },
                 "placeholder": "Desconhecido"
             },
-            "studio_type": {
+            "studio": {
                 "label": "Tipo"
             },
             "substation": {
@@ -2633,7 +2638,7 @@
                 "terms": "Balão de Retorno"
             },
             "highway/unclassified": {
-                "name": "Estrada Minoritária",
+                "name": "Estrada Vicinal",
                 "terms": "Via sem classificação, Estrada de Terra, Rodovia sem pavimentação,"
             },
             "historic": {
@@ -3488,6 +3493,10 @@
                 "name": "Loja de Roupas",
                 "terms": "Loja de Roupas, Vestuário, Moda"
             },
+            "shop/coffee": {
+                "name": "Cafeteria",
+                "terms": "Café"
+            },
             "shop/computer": {
                 "name": "Loja de Informática",
                 "terms": "Loja de Computadores, Computadores, Notebooks, Periféricos, Informática, Computação"
@@ -3683,6 +3692,10 @@
             "shop/newsagent": {
                 "name": "Banca de Revistas",
                 "terms": "Loja de Revistas, Banca de Jornal, Jornaleiro"
+            },
+            "shop/nutrition_supplements": {
+                "name": "Loja de Suplementos Nutricionais",
+                "terms": "Loja de Suplementos"
             },
             "shop/optician": {
                 "name": "Ótica",

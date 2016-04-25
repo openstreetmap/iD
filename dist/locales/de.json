@@ -253,7 +253,9 @@
         "deleted": "Gelöscht",
         "created": "Erstellt",
         "about_changeset_comments": "Über Changeset Kommentare",
-        "about_changeset_comments_link": "http://wiki.openstreetmap.org/wiki/DE:Good_changeset_comments"
+        "about_changeset_comments_link": "http://wiki.openstreetmap.org/wiki/DE:Good_changeset_comments",
+        "google_warning": "Du hast Google in diesem Kommentar erwähnt: Vergiss bitte nicht, dass kopieren von Google Maps streng verboten ist.",
+        "google_warning_link": "http://www.openstreetmap.org/copyright"
     },
     "contributors": {
         "list": "Bearbeitet von {users}",
@@ -326,13 +328,14 @@
         "description": "Hintergrundeinstellungen",
         "percent_brightness": "{opacity}% Helligkeit",
         "none": "Kein Hintergrund",
-        "best_imagery": "Bester bekannter Hintergrund für diesen Ort",
+        "best_imagery": "Beste bekannte Bildmaterialquelle für diesen Ort",
         "custom": "Benutzerdefiniert",
         "custom_button": "Benutzerdefinierten Hintergrund bearbeiten",
         "custom_prompt": "Gib eine Vorlage für eine Kachel-URL ein. Gültige Platzhalter sind {z}, {x}, {y} für das Z/X/Y Schema und {u} für das „quadtile“-Schema.",
-        "fix_misalignment": "Ausrichtung korrigieren",
-        "imagery_source_faq": "Woher kommt dieser Hintergrund?",
+        "fix_misalignment": "Bildmaterial-Versatz anpassen",
+        "imagery_source_faq": "Woher kommt dieses Bildmaterial?",
         "reset": "Zurücksetzen",
+        "offset": "Ziehe irgendwo im grauen Bereich um den Versatz des Bildmaterials anzupassen oder gib die Versatz-Werte in Metern ein.",
         "minimap": {
             "description": "Minikarte",
             "tooltip": "Herauszoomen, damit der angezeigte Bereiche leichter lokalisiert werden kann."
@@ -399,7 +402,7 @@
     "area_fill": {
         "wireframe": {
             "description": "Keine Füllung (Drahtgitter)",
-            "tooltip": "Der Drahtgittermodus verbessert die Sichtbarkeit des Hintergrundbildes"
+            "tooltip": "Drahtgittermodus aktivieren verbessert die Sichtbarkeit des Hintergrundbildes"
         },
         "partial": {
             "description": "Teilweise Füllung",
@@ -624,7 +627,7 @@
                 "name": "Schienentypen"
             },
             "category-restriction": {
-                "name": "Abbiegeverbote etc."
+                "name": "Abbiegeeinschränkungen"
             },
             "category-road": {
                 "name": "Straßentypen"
@@ -641,7 +644,7 @@
         },
         "fields": {
             "access": {
-                "label": "Erlaubter Zugang",
+                "label": "Zugang erlaubt",
                 "options": {
                     "designated": {
                         "description": "Zugang durch Schilder oder bestimmte lokale Gesetze erlaubt",
@@ -676,7 +679,7 @@
                 "types": {
                     "access": "Alle",
                     "bicycle": "Fahrräder",
-                    "foot": "zu Fuß",
+                    "foot": "Fußgänger",
                     "horse": "Pferde",
                     "motor_vehicle": "Motorfahrzeuge"
                 }
@@ -700,7 +703,7 @@
                     "housenumber": "123",
                     "place": "Ort",
                     "postcode": "Postleitzahl",
-                    "province": "Regierungsbezirk",
+                    "province": "Regierungsbezirk, Provinz",
                     "state": "Bundesland",
                     "street": "Straße",
                     "subdistrict": "Stadtbezirk",
@@ -834,7 +837,7 @@
                 "label": "Land"
             },
             "covered": {
-                "label": "Überdacht / Verdeckt"
+                "label": "Überdacht"
             },
             "craft": {
                 "label": "Typ"
@@ -856,7 +859,7 @@
                         "title": "Standard-Fahrradstreifen"
                     },
                     "none": {
-                        "description": "Kein Fahrradweg",
+                        "description": "Kein Fahrradstreifen",
                         "title": "Nichts"
                     },
                     "opposite": {
@@ -890,7 +893,7 @@
                 "label": "Zustellung"
             },
             "denomination": {
-                "label": "Glaubensrichtung"
+                "label": "Glaubensrichtung, Konfession"
             },
             "denotation": {
                 "label": "Vorgesehene Verwendung"
@@ -910,12 +913,12 @@
             "electrified": {
                 "label": "Elektrifizierung",
                 "options": {
-                    "contact_line": "Stromschiene",
+                    "contact_line": "Oberleitung",
                     "no": "Nein",
-                    "rail": "Elektrifizierte Eisenbahn",
+                    "rail": "Stromschiene",
                     "yes": "Ja (unspezifiziert)"
                 },
-                "placeholder": "Fahrleitung, elektrifizierte Eisenbahn ..."
+                "placeholder": "Oberleitung, Stromschiene …"
             },
             "elevation": {
                 "label": "Höhe über dem Meeresspiegel"
@@ -939,17 +942,17 @@
             "fire_hydrant/type": {
                 "label": "Typ",
                 "options": {
-                    "pillar": "Stützen/Oberirdisch",
-                    "pond": "Teich",
+                    "pillar": "Überflur-Hydrant",
+                    "pond": "Löschteich/Reservoir",
                     "underground": "Unterirdisch",
-                    "wall": "Mauer"
+                    "wall": "Wandanschluss"
                 }
             },
             "fixme": {
                 "label": "Korrigiere mich"
             },
             "fuel": {
-                "label": "Brennstoff"
+                "label": "Kraftstoff"
             },
             "fuel/biodiesel": {
                 "label": "Verkauft Biodiesel"
@@ -979,14 +982,14 @@
                 "label": "Verkauft Premiumkraftstoffe"
             },
             "gauge": {
-                "label": "Spurbreite"
+                "label": "Spurweite – Abstand zwischen den Schienen"
             },
             "gender": {
                 "label": "Geschlecht",
                 "options": {
-                    "female": "Weiblich",
-                    "male": "Männlich",
-                    "unisex": "Beide Geschlechter"
+                    "female": "Weiblich ♀",
+                    "male": "Männlich ♂",
+                    "unisex": "Beide Geschlechter ♂♀"
                 },
                 "placeholder": "Unbekannt"
             },
@@ -1057,7 +1060,7 @@
             },
             "lanes": {
                 "label": "Fahrspuren",
-                "placeholder": "1, 2, 3..."
+                "placeholder": "1, 2, 3 …"
             },
             "layer": {
                 "label": "Ebene"
@@ -1068,8 +1071,8 @@
                     "deciduous": "Sommergrün",
                     "evergreen": "Immergrün",
                     "mixed": "Gemischt",
-                    "semi_deciduous": "Halbimmergrün",
-                    "semi_evergreen": "Halbimmergrün"
+                    "semi_deciduous": "Größtenteils sommergrün",
+                    "semi_evergreen": "Größtenteils immergrün"
                 }
             },
             "leaf_cycle_singular": {
@@ -1077,14 +1080,14 @@
                 "options": {
                     "deciduous": "Sommergrün",
                     "evergreen": "Immergrün",
-                    "semi_deciduous": "Halbsommergrün",
-                    "semi_evergreen": "Halbimmergrün"
+                    "semi_deciduous": "Größtenteils sommergrün",
+                    "semi_evergreen": "Größtenteils immergrün"
                 }
             },
             "leaf_type": {
-                "label": "Blatttyp",
+                "label": "Blatt-Typ",
                 "options": {
-                    "broadleaved": "Breitblättrig",
+                    "broadleaved": "Breitblättrig/Laubblätter",
                     "leafless": "Blattlos",
                     "mixed": "Gemischt",
                     "needleleaved": "Nadelblättrig"
@@ -1093,7 +1096,7 @@
             "leaf_type_singular": {
                 "label": "Blatttyp",
                 "options": {
-                    "broadleaved": "Breitblättrig",
+                    "broadleaved": "Breitblättrig/Laubblätter",
                     "leafless": "Blattlos",
                     "needleleaved": "Nadelblättrig"
                 }
@@ -1105,14 +1108,14 @@
                 "label": "Länge (Meter)"
             },
             "level": {
-                "label": "Niveau"
+                "label": "Niveau/Etage"
             },
             "levels": {
                 "label": "Etagen",
-                "placeholder": "2, 4, 6..."
+                "placeholder": "2, 4, 6 …"
             },
             "lit": {
-                "label": "Beleuchtet"
+                "label": "Beleuchtung"
             },
             "location": {
                 "label": "Position"
@@ -1122,26 +1125,26 @@
             },
             "maxspeed": {
                 "label": "Höchstgeschwindigkeit",
-                "placeholder": "40, 50, 60..."
+                "placeholder": "40, 50, 60 …"
             },
             "maxstay": {
                 "label": "Maximale Parkzeit"
             },
             "mtb/scale": {
-                "label": "MTB Schwierigkeitsgrad",
+                "label": "Mountainbike-Schwierigkeitsgrad",
                 "options": {
                     "0": "0: Solider Kies/komprimierte Erde, keine Hindernisse, weite Kurven",
-                    "1": "1: Teilweise lockerer Untergrund, kleine Hindernisse, weite Kurve",
+                    "1": "1: Teilweise lockerer Untergrund, kleine Hindernisse, weite Kurven",
                     "2": "2: Viel loser Untergrund, große Hindernisse, einfache Haarnadelkurven",
                     "3": "3: Rutschige Oberfläche, große Hindernisse, enge Haarnadelkurven",
                     "4": "4: Lockere Oberfläche oder Felsbrocken, gefährliche Haarnadelkurven",
                     "5": "5: Maximale Schwierigkeit, Geröllfelder, Erdrutsche",
                     "6": "6: Nicht befahrbar ausgenommen durch die allerbesten Mountainbiker"
                 },
-                "placeholder": "0, 1, 2, 3 ..."
+                "placeholder": "0, 1, 2, 3, 4, 5, 6"
             },
             "mtb/scale/imba": {
-                "label": "IMBA Schwierigkeitsgrad",
+                "label": "IMBA-Schwierigkeitsgrad",
                 "options": {
                     "0": "Am einfachsten (weißer Kreis)",
                     "1": "Einfach (grüner Kreis)",
@@ -1149,19 +1152,19 @@
                     "3": "Schwierig (schwarze Raute)",
                     "4": "Sehr schwierig (doppelte schwarze Raute)"
                 },
-                "placeholder": "Einfach, Mittel, Schwierig ..."
+                "placeholder": "Einfach, Mittel, Schwierig …"
             },
             "mtb/scale/uphill": {
-                "label": "Mountainbike Schwierigkeit bergauf",
+                "label": "Mountainbike-Schwierigkeitsgrad bergauf",
                 "options": {
                     "0": "0: Durchschnittliche Steigung <10%, Kies/verdichtete Erde, keine Hindernisse",
                     "1": "1: Durchschnittliche Steigung <15%, Kies/verdichtete Erde, wenige kleine Hindernisse",
-                    "2": "2: Durchschnittliche Steigung <20%, stabil Oberfläche, faustgroße Steine/Wurzeln",
-                    "3": "3: Durchschnittliche Steigung <25%, unterschiedliche Oberfläche, faustgroße Steine/Wurzeln",
-                    "4": "4: Durchschnittliche Steigung <30%, schlechter Zustand, große Steine/Zweige",
-                    "5": "5: sehr steil, Fahrrad muss generell geschoben oder getragen werden"
+                    "2": "2: Durchschnittliche Steigung <20%, stabile Oberfläche, faustgroße Steine/Wurzeln",
+                    "3": "3: Durchschnittliche Steigung <25%, variable Oberfläche, faustgroße Steine/Äste",
+                    "4": "4: Durchschnittliche Steigung <30%, schlechter Zustand, große Steine/Äste",
+                    "5": "5: Sehr steil, Mountainbike muss generell geschoben oder getragen werden"
                 },
-                "placeholder": "0, 1, 2, 3 ..."
+                "placeholder": "0, 1, 2, 3, 4, 5"
             },
             "name": {
                 "label": "Name",
@@ -1183,7 +1186,7 @@
                 "label": "Einbahnstraße",
                 "options": {
                     "no": "Nein",
-                    "undefined": "Vermutlich Nein",
+                    "undefined": "Standardwert Nein",
                     "yes": "Ja"
                 }
             },
@@ -1191,7 +1194,7 @@
                 "label": "Einbahnstraße",
                 "options": {
                     "no": "Nein",
-                    "undefined": "Vermutlich Ja",
+                    "undefined": "Standardwert Ja",
                     "yes": "Ja"
                 }
             },
@@ -1203,17 +1206,17 @@
             },
             "par": {
                 "label": "Par",
-                "placeholder": "3, 4, 5…"
+                "placeholder": "3, 4, 5, 6"
             },
             "park_ride": {
-                "label": "Park and Ride"
+                "label": "Parken und Reisen"
             },
             "parking": {
                 "label": "Typ",
                 "options": {
-                    "carports": "Carport",
+                    "carports": "Carports",
                     "garage_boxes": "Garagen",
-                    "lane": "Straßenrand",
+                    "lane": "Parkstreifen am Straßenrand",
                     "multi-storey": "Parkhaus",
                     "sheds": "Schuppen",
                     "surface": "Ebenerdig",
@@ -1221,7 +1224,7 @@
                 }
             },
             "phone": {
-                "label": "Telefon",
+                "label": "Telefonnummer",
                 "placeholder": "+31 42 123 4567"
             },
             "piste/difficulty": {
@@ -1231,18 +1234,18 @@
                     "easy": "Einfach (grüner Kreis)",
                     "expert": "Experte (doppelte schwarze Raute)",
                     "extreme": "Extrem (Kletterausrüstung benötigt)",
-                    "freeride": "Variantenabfahrt (abseits der Piste)",
+                    "freeride": "Freie Abfahrt (abseits der Piste)",
                     "intermediate": "Mittel (blaues Quadrat)",
                     "novice": "Anfänger (Unterricht)"
                 },
-                "placeholder": "Einfach, Mittel, Fortgeschritten ..."
+                "placeholder": "Einfach, Mittel, Fortgeschritten …"
             },
             "piste/grooming": {
                 "label": "Grooming",
                 "options": {
                     "backcountry": "Hinterland-Skitouren",
                     "classic": "Klassisch",
-                    "classic+skating": "Klassisch oder Skating",
+                    "classic+skating": "Klassisch und Skating",
                     "mogul": "Buckelpiste",
                     "scooter": "Roller/Schneemobil",
                     "skating": "Skating"
@@ -1315,7 +1318,7 @@
                 "label": "Typ"
             },
             "restrictions": {
-                "label": "Abbiegevorschriften"
+                "label": "Abbiegebeschränkungen"
             },
             "route": {
                 "label": "Typ"
@@ -1348,7 +1351,7 @@
                 "label": "Kettennietdrücker",
                 "options": {
                     "no": "Nein",
-                    "undefined": "Vermutlich Nein",
+                    "undefined": "Standardwert Nein",
                     "yes": "Ja"
                 }
             },
@@ -1356,17 +1359,17 @@
                 "label": "Luftpumpe",
                 "options": {
                     "no": "Nein",
-                    "undefined": "Vermutlich Nein",
+                    "undefined": "Standardwert Nein",
                     "yes": "Ja"
                 }
             },
             "service_rail": {
-                "label": "Diensttyp",
+                "label": "Gleistyp",
                 "options": {
-                    "crossover": "Gleiskreuzung",
-                    "siding": "Abstellgleis",
-                    "spur": "Spur",
-                    "yard": "Hof"
+                    "crossover": "Überleitgleis",
+                    "siding": "Überhol-/Ausweichgleis",
+                    "spur": "Anschluss-/Ladegleis",
+                    "yard": "Rangier-/Abstellgleis"
                 }
             },
             "shelter": {
@@ -1387,14 +1390,14 @@
             "smoking": {
                 "label": "Rauchen",
                 "options": {
-                    "dedicated": "Für Raucher bestimmt (z.B.: Raucherklub)",
+                    "dedicated": "Für Raucher bestimmt (z. B. Raucherklub)",
                     "isolated": "In Raucherzonen, baulich getrennt",
                     "no": "Rauchen überall verboten",
                     "outside": "Im Freien erlaubt",
                     "separated": "In Raucherzonen, nicht baulich getrennt",
                     "yes": "Überall erlaubt"
                 },
-                "placeholder": "Nein, Getrennt, Ja ..."
+                "placeholder": "Nein, Getrennt, Ja …"
             },
             "smoothness": {
                 "label": "Ebenheit",
@@ -1431,20 +1434,20 @@
                 "options": {
                     "bridge": "Brücke",
                     "cutting": "Einschnitt",
-                    "embankment": "Fahrdamm",
+                    "embankment": "in Dammlage",
                     "ford": "Furt",
                     "tunnel": "Tunnel"
                 },
                 "placeholder": "Unbekannt"
             },
-            "studio_type": {
+            "studio": {
                 "label": "Typ"
             },
             "substation": {
                 "label": "Typ"
             },
             "supervised": {
-                "label": "überwacht"
+                "label": "Überwacht"
             },
             "surface": {
                 "label": "Oberfläche"
@@ -1459,7 +1462,7 @@
                     "only": "Nur Takeaway",
                     "yes": "Ja"
                 },
-                "placeholder": "Ja, Nein, Nur Takeaway ..."
+                "placeholder": "Ja, Nein, Nur Takeaway …"
             },
             "toilets/disposal": {
                 "label": "Toiletten-Bauart",
@@ -1477,21 +1480,21 @@
                 "label": "Turmart"
             },
             "tracktype": {
-                "label": "Wegzustand",
+                "label": "Wegzustand des Feld-/Waldweges",
                 "options": {
                     "grade1": "Fest: befestigt oder sehr kompakte harte Oberfläche",
-                    "grade2": "Großenteils fest: Kies/Stein gemischt mit etwas weichem Material",
-                    "grade3": "Gleichmäßige Mischung von harten und weichem Material",
-                    "grade4": "Großenteils weich: Erde/Sand/Gras gemischt mit etwas hartem Material",
+                    "grade2": "Größtenteils fest: Kies/Stein gemischt mit etwas weichem Material",
+                    "grade3": "Gleichmäßige Mischung aus harten und weichem Material",
+                    "grade4": "Größtenteils weich: Erde/Sand/Gras gemischt mit etwas hartem Material",
                     "grade5": "Weich: Erde/Sand/Gras"
                 },
-                "placeholder": "Fest, Großenteils fest, Weich ..."
+                "placeholder": "Fest, Großenteils fest, Weich …"
             },
             "traffic_signals": {
                 "label": "Typ"
             },
             "trail_visibility": {
-                "label": "Erkennbarkeit des Wanderweges",
+                "label": "Erkennbarkeit des Weges",
                 "options": {
                     "bad": "Schlecht: Keine Markierungen, Weg teilweise unsichtbar oder nicht vorhanden",
                     "excellent": "Ausgezeichnet: unmissverständlicher Weg oder überall Markierungen",
@@ -1500,7 +1503,7 @@
                     "intermediate": "Mittelmäßig: Wenige Markierungen, Weg großteils sichtbar",
                     "no": "Nein: Kein Weg, ausgezeichnete Orientierungserfahrung benötigt"
                 },
-                "placeholder": "Ausgezeichnet, Gut, Schlecht ..."
+                "placeholder": "Ausgezeichnet, Gut, Schlecht …"
             },
             "trees": {
                 "label": "Bäume"
@@ -1552,7 +1555,7 @@
             },
             "aerialway/chair_lift": {
                 "name": "Sessellift",
-                "terms": "Sessellift, Sesselbahn"
+                "terms": "Sessellift, Sesselbahn, Sitzlift"
             },
             "aerialway/gondola": {
                 "name": "Gondel",
@@ -1584,7 +1587,7 @@
             },
             "aeroway": {
                 "name": "Luftfahrt",
-                "terms": "Flugplatz, Flughafen"
+                "terms": "Luftfahrt, Flugplatz"
             },
             "aeroway/aerodrome": {
                 "name": "Flughafen",
@@ -1592,7 +1595,7 @@
             },
             "aeroway/apron": {
                 "name": "Vorfeld",
-                "terms": "Ramp,Apron"
+                "terms": "Vorfeld, Ramp, Apron"
             },
             "aeroway/gate": {
                 "name": "Flugsteig",
@@ -1604,19 +1607,19 @@
             },
             "aeroway/helipad": {
                 "name": "Hubschrauberlandeplatz",
-                "terms": "Heliport"
+                "terms": "Hubschrauberlandeplatz, Helikopterlandeplatz, Heliport"
             },
             "aeroway/runway": {
                 "name": "Start- und Landebahn",
-                "terms": "Start-/Landebahn,Startbahn,Landebahn"
+                "terms": "Start- und Landebahn, Start-/Landebahn, Startbahn, Landebahn"
             },
             "aeroway/taxiway": {
                 "name": "Rollweg",
-                "terms": "Rollweg"
+                "terms": "Rollweg, Rollbahn"
             },
             "aeroway/terminal": {
                 "name": "Flughafenterminal",
-                "terms": "Flughafen,Terminal,Flughafenterminal,Abfertigungsgebäude,Abfertigungshalle"
+                "terms": "Terminal, Flughafenterminal, Abfertigungsgebäude, Abfertigungshalle"
             },
             "amenity": {
                 "name": "Einrichtung",
@@ -1624,35 +1627,35 @@
             },
             "amenity/arts_centre": {
                 "name": "Kunstzentrum",
-                "terms": "Kulturzentrum"
+                "terms": "Kunstzentrum, Kulturzentrum"
             },
             "amenity/atm": {
                 "name": "Geldautomat",
-                "terms": "Geldautomat,Bankautomat,Bankomat,Bancomat,Geldausgabeautomat,ATM"
+                "terms": "Geldautomat, Bankautomat, Bankomat, Bancomat, Geldausgabeautomat, ATM"
             },
             "amenity/bank": {
                 "name": "Bank (Geldinstitut)",
-                "terms": "Kasse,Kontor,Kreditgenossenschaft,Lagerstelle,Fiskus,Fonds,Vermögen,Investmentfirma,Register,Rücklage,Vorrat,Tresor,Rücklagen,Grundkapital,Vorrat,Lager,Lagerhaus,Sparkasse,Schatz,Treuhandgesellschaft,Tresorraum"
+                "terms": "Kasse, Kontor, Kreditgenossenschaft, Lagerstelle, Fiskus, Fonds, Vermögen, Investmentfirma, Register, Rücklage, Vorrat, Tresor, Rücklagen, Grundkapital, Vorrat, Lager, Lagerhaus, Sparkasse, Schatz, Treuhandgesellschaft, Tresorraum"
             },
             "amenity/bar": {
-                "name": "Bar",
-                "terms": "Bar"
+                "name": "Nachtbar",
+                "terms": "Nachtbar, Bar, laute Bar"
             },
             "amenity/bbq": {
                 "name": "Grillplatz",
-                "terms": "Grill, Barbecue, BBQ"
+                "terms": "Grillplatz, Grillen, Barbecue, BBQ"
             },
             "amenity/bench": {
                 "name": "Sitzbank",
-                "terms": "Bank, Sitzbank"
+                "terms": "Bank, Sitzbank, Parkbank"
             },
             "amenity/bicycle_parking": {
                 "name": "Fahrradparkplatz",
-                "terms": "Fahrrad-Parkplatz, Fahrradständer"
+                "terms": "Fahrradparkplatz, Fahrradständer"
             },
             "amenity/bicycle_rental": {
                 "name": "Fahrradverleih",
-                "terms": "Fahrrad-Verleih"
+                "terms": "Fahrradverleih"
             },
             "amenity/bicycle_repair_station": {
                 "name": "Fahrradreperatur-Werkzeugkasten",
@@ -1667,7 +1670,7 @@
                 "terms": "Bootsverleih, Bootsvermietung"
             },
             "amenity/bureau_de_change": {
-                "name": "Wechselstube",
+                "name": "Geldwechselstube",
                 "terms": "Wechselstube, Geldwechselgeschäft, Währungsumtauschgeschäft, Bargeldumtauschgeschäft"
             },
             "amenity/bus_station": {
@@ -1676,7 +1679,7 @@
             },
             "amenity/cafe": {
                 "name": "Café",
-                "terms": "Kaffee,Café, Kaffeehaus"
+                "terms": "Kaffee, Café, Kaffeehaus"
             },
             "amenity/car_rental": {
                 "name": "Autovermietung",
@@ -1691,11 +1694,11 @@
                 "terms": "Auto-Waschanlage, Waschanlage"
             },
             "amenity/casino": {
-                "name": "Casino",
+                "name": "Kasino",
                 "terms": "Spielothek, Casino, Spielbank, Glücksspiel, Spielcasino"
             },
             "amenity/charging_station": {
-                "name": "Ladestation",
+                "name": "Ladestation für Elektroautos",
                 "terms": "Ladestation, E-Tankstelle, Stromtankstelle"
             },
             "amenity/childcare": {
@@ -1759,8 +1762,8 @@
                 "terms": "Fährhafen"
             },
             "amenity/fire_station": {
-                "name": "Feuerwehr",
-                "terms": "Feuerwehr, Feuerwehrstation"
+                "name": "Feuerwehrmagazin",
+                "terms": "Feuerwehr, Feuerwehrstation,Feuerwache"
             },
             "amenity/fountain": {
                 "name": "Springbrunnen",
@@ -1783,7 +1786,7 @@
                 "terms": "Krankenhaus, Klinik, Klinikgelände, Hospital"
             },
             "amenity/hunting_stand": {
-                "name": "Hochstand",
+                "name": "Hochsitz/Jagdanstand",
                 "terms": "Hochstand, Jagdhochstand, Jagdunterstand"
             },
             "amenity/kindergarten": {
@@ -1851,7 +1854,7 @@
                 "terms": "Briefkasten,Postkasten,Postbriefkasten"
             },
             "amenity/post_office": {
-                "name": "Post",
+                "name": "Postfiliale",
                 "terms": "Post, Postamt"
             },
             "amenity/pub": {
@@ -1907,7 +1910,7 @@
                 "terms": "Obdachlosenheim, Obdachlosenasyl"
             },
             "amenity/studio": {
-                "name": "Ton- / Fernsehstudio",
+                "name": "Ton-/Fernsehstudio",
                 "terms": "Tonstudio, Radiostudio, TV-Studio, Fernsehstudio"
             },
             "amenity/swimming_pool": {
@@ -1951,7 +1954,7 @@
                 "terms": "Getränkeautomat, Getränkespender"
             },
             "amenity/vending_machine/excrement_bags": {
-                "name": "Kottütenspender",
+                "name": "Hundekottütenspender",
                 "terms": "Kottütenspender, Hundetütenspender, Kottütenautomat, Hundetütenautomat"
             },
             "amenity/vending_machine/news_papers": {
@@ -2007,7 +2010,7 @@
                 "terms": "Barriere, Hindernis"
             },
             "barrier/block": {
-                "name": "Stein-/Betonblock/Stein-/Betonblöcke",
+                "name": "Stein-/Betonblock; Stein-/Betonblöcke",
                 "terms": "Block"
             },
             "barrier/bollard": {
@@ -2207,7 +2210,7 @@
                 "terms": "Reihenhäuser"
             },
             "building/train_station": {
-                "name": "Bahnhof",
+                "name": "Bahnhofsgebäude",
                 "terms": "Bahnhof, Haltestelle, Haltepunkt"
             },
             "building/university": {
@@ -2219,7 +2222,7 @@
                 "terms": "Lagerhaus, Lagergebäude"
             },
             "craft": {
-                "name": "Handwerk",
+                "name": "Handwerker",
                 "terms": "Kunsthandwerk"
             },
             "craft/basket_maker": {
@@ -2416,7 +2419,7 @@
             },
             "emergency/fire_hydrant": {
                 "name": "Hydrant",
-                "terms": "Hydrant"
+                "terms": "Hydrant,Löschwasserentnahmestelle"
             },
             "emergency/phone": {
                 "name": "Notruftelefon",
@@ -2480,14 +2483,14 @@
             },
             "highway/bridleway": {
                 "name": "Reitweg",
-                "terms": "Reitweg"
+                "terms": "Reitweg, Reiterweg"
             },
             "highway/bus_stop": {
                 "name": "Bushaltestelle",
                 "terms": "Bushaltestelle, Verkehrshalt, Halt, Haltestelle, Endhaltestelle, Endstelle"
             },
             "highway/corridor": {
-                "name": "Innengang",
+                "name": "Gang/Korridor im Innenraum",
                 "terms": "Innengang"
             },
             "highway/crossing": {
@@ -2500,14 +2503,14 @@
             },
             "highway/cycleway": {
                 "name": "Radweg",
-                "terms": "Radweg"
+                "terms": "Radweg, Radfahrweg, Radfahrerweg"
             },
             "highway/footway": {
                 "name": "Fußweg",
-                "terms": "Fußweg"
+                "terms": "Fußweg, Fußgängerweg, Fußpfad"
             },
             "highway/living_street": {
-                "name": "Verkehrsberuhigter Bereich (\"Spielstraße\")",
+                "name": "Verkehrsberuhigter Bereich, auch „Spielstraße“ genannt",
                 "terms": "Verkehrsberuhigter Bereich, Wohnstraße, Spielstraße"
             },
             "highway/mini_roundabout": {
@@ -2516,10 +2519,10 @@
             },
             "highway/motorway": {
                 "name": "Autobahn",
-                "terms": "Autobahn"
+                "terms": "Autobahn, Expressweg"
             },
             "highway/motorway_junction": {
-                "name": "Autobahnkreuz / Autobahnanschluss",
+                "name": "Autobahnanschlussstelle/Autobahnabfahrt",
                 "terms": "Autobahnkreuz, Autobahnanschluss, Autobahndreieck, Autobahnknoten, Autobahnzubringer"
             },
             "highway/motorway_link": {
@@ -2528,7 +2531,7 @@
             },
             "highway/path": {
                 "name": "Pfad",
-                "terms": "Pfad"
+                "terms": "Pfad, Wanderweg, Wanderpfad, schmaler Weg"
             },
             "highway/pedestrian": {
                 "name": "Fußgängerzone",
@@ -2536,11 +2539,11 @@
             },
             "highway/primary": {
                 "name": "Hauptverbindungsstraße",
-                "terms": "Hauptstraße"
+                "terms": "Hauptverbindungsstraße, Hauptstraße, Hauptverkehrsstraße, Fernstraße, Bundesstraße, Nationalstraße"
             },
             "highway/primary_link": {
-                "name": "Bundesstraßenanschluss",
-                "terms": "Bundesstraßenanschluss, Bundesstraßenauffahrt, Bundesstraßenabfahrt, Auffahrt, Abfahrt"
+                "name": "Hauptverbindungsstraßenanschluss",
+                "terms": "Hauptverbindungsstraßenanschluss, Hauptverbindungsstraßenauffahrt, Hauptverbindungsstraßenabfahrt, Fernstraßenanschluss, Fernstraßenauffahrt, Fernstraßenabfahrt, Bundesstraßenanschluss, Bundesstraßenauffahrt, Bundesstraßenabfahrt, Auffahrt, Abfahrt"
             },
             "highway/raceway": {
                 "name": "Motorrennstrecke",
@@ -2548,83 +2551,83 @@
             },
             "highway/residential": {
                 "name": "Wohngebietsstraße",
-                "terms": "Siedlungsstraße"
+                "terms": "Wohngebietsstraße, Siedlungsstraße, Ortsstraße, Wohnstraße"
             },
             "highway/rest_area": {
-                "name": "Rastplatz",
+                "name": "Rastplatz ohne Tankstelle/Restaurant",
                 "terms": "Rastplatz, Autobahnrastplatz, Pausenplatz, Autobahnpauseplatz, Raststelle, Autobahnraststelle, Rastanlage, Autobahnrastanlage"
             },
             "highway/road": {
                 "name": "Unbekannter Straßentyp",
-                "terms": "Unbekannte Straße"
+                "terms": "Unbekannter Straßentyp, Unbekannte Straße, Straße unbekannter Klassifikation, Straßentyp unbekannt"
             },
             "highway/secondary": {
                 "name": "Landesstraße",
-                "terms": "Nebenstraße"
+                "terms": "Hauptstraße, Landesstraße, Landstraße, Nebenstraße"
             },
             "highway/secondary_link": {
                 "name": "Landesstraßenanschluss",
-                "terms": "Landesstraßenanschluss, Landesstraßenauffahrt, Landesstraßenabfahrt, Auffahrt, Abfahrt"
+                "terms": "Hauptstraßenanschluss, Hauptstraßenauffahrt, Hauptstraßenabfahrt, Landesstraßenanschluss, Landesstraßenauffahrt, Landesstraßenabfahrt, Auffahrt, Abfahrt"
             },
             "highway/service": {
                 "name": "Erschließungsweg",
-                "terms": "Zufahrtsstraße"
+                "terms": "Erschließungsweg, Zufahrtsstraße"
             },
             "highway/service/alley": {
                 "name": "Gasse",
-                "terms": "Gasse"
+                "terms": "Gasse, schmale Straße"
             },
             "highway/service/drive-through": {
                 "name": "Drive-in",
-                "terms": "Durchfahrt"
+                "terms": "Durchfahrtsbedienung, Drive-in, Durchfahrt"
             },
             "highway/service/driveway": {
-                "name": "Zufahrtsstraße",
-                "terms": "Auffahrt, Zufahrt"
+                "name": "Zufahrtsweg",
+                "terms": "Zufahrtsweg, Auffahrt, Zufahrt, Zugangsweg, Zufahrtsstraße"
             },
             "highway/service/emergency_access": {
                 "name": "Zufahrtsstraße für Rettungskräfte",
-                "terms": "Rettungszufahrt, Feuerwehrzufahrt"
+                "terms": "Zufahrtsstraße für Rettungskräfte, Rettungszufahrt, Feuerwehrzufahrt"
             },
             "highway/service/parking_aisle": {
                 "name": "Parkplatzweg",
-                "terms": "Fahrweg auf Parkplatz"
+                "terms": "Parkplatzweg, Fahrweg auf Parkplatzflächen"
             },
             "highway/services": {
-                "name": "Raststätte",
+                "name": "Raststätte mit Tankstelle/Restaurant",
                 "terms": "Raststätte, Autobahnraststätte, Rasthof, Autobahnrasthof, Raststation, Autobahnraststation"
             },
             "highway/steps": {
                 "name": "Treppe",
-                "terms": "Treppe,Stufen"
+                "terms": "Treppe, Treppen, Stufen"
             },
             "highway/stop": {
                 "name": "Stoppschild",
-                "terms": "Halt,Stop,Stopp"
+                "terms": "Stoppschild, Stopschild, Halt! Vorfahrt gewähren, Halt, Stop, Stopp"
             },
             "highway/street_lamp": {
                 "name": "Straßenlampe",
-                "terms": "Straßenlaterne, Straßenlampe"
+                "terms": "Straßenlaterne, Straßenlampe, Straßenbeleuchtung"
             },
             "highway/tertiary": {
                 "name": "Kreisstraße",
-                "terms": "Drittrangige Straße"
+                "terms": "Verbindungsstraße, Drittrangige Straße, Kreisstraße"
             },
             "highway/tertiary_link": {
                 "name": "Kreisstraßenanschluss",
-                "terms": "Auffahrt"
+                "terms": "Kreisstraßenanschluss, Kreisstraßenauffahrt, Kreisstraßenabfahrt, Auffahrt, Abfahrt"
             },
             "highway/track": {
-                "name": "Feld-/Waldweg",
-                "terms": "Feldweg, Waldweg, Forststraße, primitive Straße, nicht ausgebaute Straße, verfallene Straße"
+                "name": "Unbesiedelter, oft unbefestigter Weg; oft Feld-/Waldweg",
+                "terms": "Wirtschaftsweg, Feldweg, Waldweg, Forststraße, primitive Straße, nicht ausgebaute Straße, verfallene Straße"
             },
             "highway/traffic_signals": {
-                "name": "Ampel",
-                "terms": "Ampel,Lichtzeichenanlage,Lichtsignalanlage,Verkehrslichtsignalanlage"
+                "name": "Eine oder mehrere Ampeln",
+                "terms": "Ampel, Ampeln, Lichtzeichenanlage, Lichtsignalanlage, Verkehrslichtsignalanlage"
             },
             "highway/trunk": {
-                "name": "Kraftfahrstraße",
-                "terms": "Fernstraße, Schnellstraße"
+                "name": "Schnellstraße",
+                "terms": "autobahnähnliche Fernstraße, Schnellstraße, autobahnähnliche Straße, Autostraße"
             },
             "highway/trunk_link": {
                 "name": "Schnellstraßenanschluss",
@@ -2636,7 +2639,7 @@
             },
             "highway/unclassified": {
                 "name": "Nebenstraße/Verbindungsstraße",
-                "terms": "Nebenstraße, Verbindungsstraße"
+                "terms": "Nebenstraße, Verbindungsstraße, kleine Verbindungsstraße"
             },
             "historic": {
                 "name": "Historische Stätte",
@@ -2644,7 +2647,7 @@
             },
             "historic/archaeological_site": {
                 "name": "Archäologische Stätte",
-                "terms": "Archäologische Stätte, Ausgrabung"
+                "terms": "Archäologische Stätte, Ausgrabungsstätte, Ausgrabung"
             },
             "historic/boundary_stone": {
                 "name": "Grenzstein",
@@ -2659,16 +2662,16 @@
                 "terms": "Denkmal, Mahnmal"
             },
             "historic/monument": {
-                "name": "Monument",
+                "name": "begehbares, großes Denkmal",
                 "terms": "Denkmal, Monument"
             },
             "historic/ruins": {
-                "name": "Ruine",
-                "terms": "Ruine, Ruinen"
+                "name": "Eine oder mehrere Ruinen",
+                "terms": "Ruine, Ruinen, Ruinenstätte"
             },
             "historic/wayside_cross": {
                 "name": "Wegkreuz",
-                "terms": "Wegkreuz,Wegekreuz,Flurkreuz"
+                "terms": "Wegkreuz, Wegekreuz, Flurkreuz"
             },
             "historic/wayside_shrine": {
                 "name": "Bildstock",
@@ -2707,39 +2710,39 @@
                 "terms": "Baugebiet, Baustelle, Großbaustelle"
             },
             "landuse/farm": {
-                "name": "Ackerland",
-                "terms": "Ackerland, Landwirtschaftsfläche, Ackerboden"
+                "name": "Ackerland – veraltetes Tag!",
+                "terms": "Ackerland, Landwirtschaftsfläche, Ackerboden, Acker, Feld"
             },
             "landuse/farmland": {
                 "name": "Ackerland",
-                "terms": "Ackerland, Landwirtschaftsfläche, Ackerboden"
+                "terms": "Ackerland, Landwirtschaftsfläche, Ackerboden, Acker, Feld"
             },
             "landuse/farmyard": {
                 "name": "Bauernhof",
-                "terms": "Bauernhof"
+                "terms": "Bauernhof, Farmhof"
             },
             "landuse/forest": {
                 "name": "Forst",
-                "terms": "Forst, bewirtschafteter Wald, Wald"
+                "terms": "Forst, Forstwald, bewirtschafteter Wald, Wald"
             },
             "landuse/garages": {
-                "name": "Garagen",
+                "name": "große Garagenfläche",
                 "terms": "Garagen"
             },
             "landuse/grass": {
                 "name": "Gras",
-                "terms": "Grünfläche, Wiese"
+                "terms": "Gras, Grünfläche, Wiese"
             },
             "landuse/industrial": {
                 "name": "Industriegebiet",
-                "terms": "Industriegebiet, Industriegelände, Industriegegend"
+                "terms": "Industriegebiet, Industriegelände, Industriegegend, Industrie, Fabriken"
             },
             "landuse/landfill": {
                 "name": "Deponie",
-                "terms": "Deponie, Mülldeponie, Geländeauffüllung"
+                "terms": "Deponie, Mülldeponie, Geländeauffüllung, Müllkippe"
             },
             "landuse/meadow": {
-                "name": "Weide",
+                "name": "Wiese/Weide",
                 "terms": "Wiese, Weide"
             },
             "landuse/military": {
@@ -2748,7 +2751,7 @@
             },
             "landuse/orchard": {
                 "name": "Obstplantage",
-                "terms": "Obstplantage, Streuobstwiese"
+                "terms": "Obstplantage, Streuobstwiese, Obstgarten"
             },
             "landuse/plant_nursery": {
                 "name": "Anpflanzung, Baumschule",
@@ -2756,35 +2759,35 @@
             },
             "landuse/quarry": {
                 "name": "Steinbruch",
-                "terms": "Steinbruch, Kiesgrube, Sandgrube, Tongrube"
+                "terms": "Steinbruch, Kiesgrube, Sandgrube, Tongrube, Tagebau"
             },
             "landuse/residential": {
                 "name": "Wohngebiet",
-                "terms": "Wohngebiet, Wohnanlage, Wohngegend, Wohnregion"
+                "terms": "Wohngebiet, Wohnanlage, Wohngegend, Wohnregion, Wohnhäuser, Siedlungsfläche"
             },
             "landuse/retail": {
                 "name": "Einzelhandelsgebiet",
-                "terms": "Einzelhandelsgebiet, Einzelhandelsfläche"
+                "terms": "Einzelhandelsgebiet, Einzelhandelsfläche, Geschäfte"
             },
             "landuse/vineyard": {
                 "name": "Weinberg",
-                "terms": "Weinberg"
+                "terms": "Weinberg, Weinanbau, Wengert"
             },
             "leisure": {
                 "name": "Freizeit",
                 "terms": "Freizeit, Erholung"
             },
             "leisure/adult_gaming_centre": {
-                "name": "Spielothek",
+                "name": "Spielothek für Erwachsene",
                 "terms": "Erwachsenenspielzentrum, Spielhölle, Spielothek, Spielautomat, Spielcasino, Spielsalon"
             },
             "leisure/bird_hide": {
                 "name": "Vogelbeobachtungsturm",
-                "terms": "Vogelbeobachtungsturm"
+                "terms": "Vogelbeobachtungsturm, Vogelbeobachtungshütte"
             },
             "leisure/bowling_alley": {
                 "name": "Bowlingbahn",
-                "terms": "Kegelbahn"
+                "terms": "Bowlingbahn, Kegelbahn"
             },
             "leisure/common": {
                 "name": "öffentliche Fläche, Allmende",
@@ -2792,7 +2795,7 @@
             },
             "leisure/dog_park": {
                 "name": "Hundepark",
-                "terms": "Hundefreilaufzone,Hundeauslaufzone,Hundezone,Hundeauslaufplatz"
+                "terms": "Hundefreilaufzone, Hundeauslaufzone, Hundezone, Hundeauslaufplatz"
             },
             "leisure/firepit": {
                 "name": "Feuerstelle",
@@ -2800,7 +2803,7 @@
             },
             "leisure/garden": {
                 "name": "Garten",
-                "terms": "Garten"
+                "terms": "Garten, Gartenanlage, Hausgarten"
             },
             "leisure/golf_course": {
                 "name": "Golfplatz",
@@ -2812,7 +2815,7 @@
             },
             "leisure/marina": {
                 "name": "Yachthafen",
-                "terms": "Yachthafen, Marina"
+                "terms": "Yachthafen, Jachthafen, Marina"
             },
             "leisure/nature_reserve": {
                 "name": "Naturschutzgebiet",
@@ -2820,7 +2823,7 @@
             },
             "leisure/park": {
                 "name": "Park",
-                "terms": "Esplanade,Lustgarten,Erholungsgebiet,Dorfanger,Dorfwiese"
+                "terms": "Park, Parkanlage, Esplanade, Lustgarten"
             },
             "leisure/picnic_table": {
                 "name": "Picknicktisch",
@@ -2835,7 +2838,7 @@
                 "terms": "American-Football-Platz"
             },
             "leisure/pitch/baseball": {
-                "name": "Baseballfeld",
+                "name": "Baseball-Rautenfeld",
                 "terms": "Baseball-Platz, Baseball-Feld"
             },
             "leisure/pitch/basketball": {
@@ -2852,11 +2855,11 @@
             },
             "leisure/pitch/skateboard": {
                 "name": "Skatepark",
-                "terms": "Skateboardpark, Boardpark, Skateplatz"
+                "terms": "Skatepark, Skateboardpark, Boardpark, Skateplatz"
             },
             "leisure/pitch/soccer": {
                 "name": "Fußballplatz",
-                "terms": "Fußballplatz"
+                "terms": "Fußballplatz, Fußballfeld"
             },
             "leisure/pitch/tennis": {
                 "name": "Tennisplatz",
@@ -2868,7 +2871,7 @@
             },
             "leisure/playground": {
                 "name": "Spielplatz",
-                "terms": "Kinderspielplatz"
+                "terms": "Spielplatz, Kinderspielplatz"
             },
             "leisure/running_track": {
                 "name": "Laufbahn",
@@ -2879,8 +2882,8 @@
                 "terms": "Gleitbahn, Rampe"
             },
             "leisure/sports_centre": {
-                "name": "Turnhalle / Fitnessstudio",
-                "terms": "Turnhalle, Finessstudio, Turnsaal"
+                "name": "Sportzentrum/Fitnessstudio",
+                "terms": "Sportzentrum, Turnhalle, Fitnessstudio, Turnsaal"
             },
             "leisure/sports_centre/swimming": {
                 "name": "Badeanstalt",
@@ -2892,11 +2895,11 @@
             },
             "leisure/swimming_pool": {
                 "name": "Schwimmbecken",
-                "terms": "Schwimmbecken"
+                "terms": "Schwimmbecken, Pool"
             },
             "leisure/track": {
                 "name": "Rennbahn (nicht-Motorsport)",
-                "terms": "Rennbahn (Nicht Motorsport), Rennstrecke (Nicht Motorsport)"
+                "terms": "Rennbahn für nicht-Motorsport, Rennstrecke (nicht-Motorsport), Rennstrecke für nicht-Motorsport"
             },
             "leisure/water_park": {
                 "name": "Erlebnisbad",
@@ -3183,7 +3186,7 @@
                 "terms": "Versicherungsbüro"
             },
             "office/it": {
-                "name": "IT Büro",
+                "name": "IT-Büro",
                 "terms": "Softwareentwickler, Softwarebüro, Programmierer, IT"
             },
             "office/lawyer": {
@@ -3283,15 +3286,15 @@
                 "terms": "Stromgenerator"
             },
             "power/line": {
-                "name": "Stromleitung",
+                "name": "Hauptstromleitung",
                 "terms": "Stromleitung"
             },
             "power/minor_line": {
-                "name": "Nieder-/Mittelspannungsleitung",
+                "name": "Nebenstromleitung",
                 "terms": "Niederspannungsleitung, Mittelspannungsleitung, Freileitung, Niederspannungsfreileitung, Mittelspannungsfreileitung"
             },
             "power/pole": {
-                "name": "Strommast",
+                "name": "Nebenstrommast",
                 "terms": "Strommast, Stromleitungsmast"
             },
             "power/sub_station": {
@@ -3303,7 +3306,7 @@
                 "terms": "Umspannwerk, Transformatorenstation, Schaltanlage"
             },
             "power/tower": {
-                "name": "Hochspannungsmast",
+                "name": "Hauptstrommast",
                 "terms": "Hochspannungsmast"
             },
             "power/transformer": {
@@ -3311,7 +3314,7 @@
                 "terms": "Transformator"
             },
             "public_transport/platform": {
-                "name": "Bahn-/ Bussteig ",
+                "name": "Bahn-/Bussteig ",
                 "terms": "Halte-Plattform, Bussteig"
             },
             "public_transport/stop_position": {
@@ -3323,11 +3326,11 @@
                 "terms": "Eisenbahn, Bahn, Zug, Eisenbahnstrecke, Bahnstrecke"
             },
             "railway/abandoned": {
-                "name": "Aufgelassene Eisenbahnstrecke",
+                "name": "Abgebaute Eisenbahnstrecke",
                 "terms": "Verfallene Eisenbahn, Aufgegebene Bahnstrecke"
             },
             "railway/disused": {
-                "name": "Ungenutzte Eisenbahnstrecke",
+                "name": "Stillgelegte Eisenbahnstrecke",
                 "terms": "Ungenutzte Eisenbahn, Eingestellte Eisenbahnstrecke, Stillgelegte Eisenbahn, Stillgelegte Bahnstrecke"
             },
             "railway/funicular": {
@@ -3335,7 +3338,7 @@
                 "terms": "Standseilbahn, Seilbahn, Drahtseilbahn, Kettenbahn"
             },
             "railway/halt": {
-                "name": "Eisenbahn-Haltestelle",
+                "name": "Eisenbahn-Haltepunkt",
                 "terms": "Bahn-Haltestelle, Zug-Haltestelle, Haltestelle, Haltepunkt"
             },
             "railway/level_crossing": {
@@ -3489,6 +3492,10 @@
             "shop/clothes": {
                 "name": "Bekleidungsgeschäft",
                 "terms": "Bekleidungs-Geschäft, Klamottenladen"
+            },
+            "shop/coffee": {
+                "name": "Kaffeegeschäft",
+                "terms": "Kaffeegeschäft, Kaffeeverkauf"
             },
             "shop/computer": {
                 "name": "Computerfachhandel",
@@ -3683,8 +3690,12 @@
                 "terms": "Musikinstrumentengeschäft,Instrumentenladen"
             },
             "shop/newsagent": {
-                "name": "Zeitungs/Magazin-Geschäft",
+                "name": "Zeitungs-/Magazin-Geschäft",
                 "terms": "Zeitungs-/ Zeitschriftenladen"
+            },
+            "shop/nutrition_supplements": {
+                "name": "Nahrungsergänzungsmittelgeschäft",
+                "terms": "Nahrungsergänzungsmittelgeschäft, Vitaminpräparategeschäft, Gewichtsreduktionspräparategeschäft"
             },
             "shop/optician": {
                 "name": "Optiker",
@@ -3751,7 +3762,7 @@
                 "terms": "Schreibwarenladen"
             },
             "shop/storage_rental": {
-                "name": "Lagerraum Vermieter",
+                "name": "Lagerraumvermieter",
                 "terms": "Lagerraum Vermieter, Einlagerplatz Vermieter"
             },
             "shop/supermarket": {
@@ -3843,11 +3854,11 @@
                 "terms": "Touristenattraktion"
             },
             "tourism/camp_site": {
-                "name": "Campingplatz",
+                "name": "Zelt-Campingplatz",
                 "terms": "Campingplatz, Zeltplatz"
             },
             "tourism/caravan_site": {
-                "name": "Campingplatz",
+                "name": "Wohnwagen-Campingplatz",
                 "terms": "Wohnwagenpark, Campingplatz"
             },
             "tourism/chalet": {

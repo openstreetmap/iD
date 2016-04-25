@@ -253,7 +253,9 @@
         "deleted": "Slettet",
         "created": "Oprettet",
         "about_changeset_comments": "Vedr. ændringssætskommentarer",
-        "about_changeset_comments_link": "http://wiki.openstreetmap.org/wiki/Good_changeset_comments"
+        "about_changeset_comments_link": "http://wiki.openstreetmap.org/wiki/Good_changeset_comments",
+        "google_warning": "Du nævnte Google i denne kommentar: husk at kopiering fra Google Maps er strengt forbudt.",
+        "google_warning_link": "http://www.openstreetmap.org/copyright"
     },
     "contributors": {
         "list": "Redigeringer af {users}",
@@ -285,7 +287,8 @@
         "no_results_worldwide": "Ingen søgeresultater fundet"
     },
     "geolocate": {
-        "title": "Vis hvor jeg er"
+        "title": "Vis hvor jeg er",
+        "locating": "Lokaliserer, vent venligst..."
     },
     "inspector": {
         "no_documentation_combination": "Der er ingen tilgængelig dokumentation for denne kombination af tags",
@@ -329,9 +332,10 @@
         "custom": "Brugerdefineret",
         "custom_button": "Rediger brugerdefineret baggrund",
         "custom_prompt": "Angiv en URL-skabelon for fliser. Gyldige værdier er {z}, {x}, {y} for Z/X/Y-systemet og {u} for quadtile-systemet. ",
-        "fix_misalignment": "Ret justering",
+        "fix_misalignment": "Justerer billedets offset",
         "imagery_source_faq": "Hvem er ophavsmand til luftfotoets?",
         "reset": "nulstil",
+        "offset": "Træk et hvert sted i det grå område nedenfor for at justere billedets offset eller indtast offset værdien i meter.",
         "minimap": {
             "description": "Minikort",
             "tooltip": "Vis et udzommet kort for at hjælpe med at lokalisere det viste område."
@@ -349,6 +353,14 @@
         "points": {
             "description": "Punkter",
             "tooltip": "Interessepunkter"
+        },
+        "traffic_roads": {
+            "description": "Trafikveje",
+            "tooltip": "Veje, Gader, Stier osv."
+        },
+        "service_roads": {
+            "description": "Serviceveje",
+            "tooltip": "Serviceveje, parkeringspladsveje, indkørselser"
         },
         "paths": {
             "description": "Stier",
@@ -1428,7 +1440,7 @@
                 },
                 "placeholder": "Ukendt"
             },
-            "studio_type": {
+            "studio": {
                 "label": "Type"
             },
             "substation": {
@@ -1844,6 +1856,10 @@
             "amenity/post_office": {
                 "name": "Postkontor",
                 "terms": "Posthus, Postkontor"
+            },
+            "amenity/prison": {
+                "name": "Fængselsgrund",
+                "terms": "Fængselsgrund, Fængselsområde"
             },
             "amenity/pub": {
                 "name": "Værtshus",
@@ -2625,6 +2641,10 @@
                 "name": "Vendeplads",
                 "terms": "Vendeplads"
             },
+            "highway/unclassified": {
+                "name": "Mindre/Uspecificeret vej",
+                "terms": "Mindre/Uspecificeret vej"
+            },
             "historic": {
                 "name": "Historisk sted",
                 "terms": "Historisk sted"
@@ -2764,6 +2784,10 @@
             "leisure/adult_gaming_centre": {
                 "name": "Voksen spillecenter",
                 "terms": "Voksen spillecenter"
+            },
+            "leisure/bird_hide": {
+                "name": "Fugletårn",
+                "terms": "Fugletårn"
             },
             "leisure/bowling_alley": {
                 "name": "Bowlingbaner",
@@ -3473,6 +3497,10 @@
                 "name": "Tøjbutik",
                 "terms": "Tøjbutik, Herretøjsbutik, Dametøjsbutik, Børnetøjsbutik"
             },
+            "shop/coffee": {
+                "name": "Kaffebutik",
+                "terms": "Kaffebutik, Kaffeforretning"
+            },
             "shop/computer": {
                 "name": "Computerforhandler",
                 "terms": "Computerbutik, PC-butik"
@@ -3668,6 +3696,10 @@
             "shop/newsagent": {
                 "name": "Avis/Bladforhandler",
                 "terms": "Avis/Bladforhandler"
+            },
+            "shop/nutrition_supplements": {
+                "name": "Helsekostbutik",
+                "terms": "Helsekostbutik, Helsekostforretning"
             },
             "shop/optician": {
                 "name": "Optiker",
@@ -4020,6 +4052,10 @@
             "waterway/ditch": {
                 "name": "Grøft",
                 "terms": "Grøft, Grøftekant"
+            },
+            "waterway/dock": {
+                "name": "Våddok / Tørdok",
+                "terms": "Våddok / Tørdok"
             },
             "waterway/drain": {
                 "name": "Drænløb",

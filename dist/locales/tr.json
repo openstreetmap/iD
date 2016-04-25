@@ -306,7 +306,6 @@
         "none": "Hiç",
         "custom": "Seçimlik",
         "custom_button": "Seçimlik artalanı düzenle",
-        "fix_misalignment": "Çizilemeyi ya da başka deyişle hizalamayı onar.",
         "reset": "Sıfırla"
     },
     "map_data": {
@@ -1047,9 +1046,6 @@
                     "tunnel": "Tünel"
                 },
                 "placeholder": "Bilinmeyen"
-            },
-            "studio_type": {
-                "label": "Tip"
             },
             "substation": {
                 "label": "Tip"

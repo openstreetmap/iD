@@ -316,7 +316,6 @@
         "custom": "Personalizáu",
         "custom_button": "Editar fondu personalizáu",
         "custom_prompt": "Escribi una plantía d'URL de títulu. Los parámetros válidos son {z}, {x}, {y} pal esquema Z/X/Y y {u} pal esquema QuadTiles.",
-        "fix_misalignment": "Iguar l'alliniamientu",
         "reset": "reaniciar",
         "minimap": {
             "description": "Minimapa",
@@ -1249,9 +1248,6 @@
                     "tunnel": "Túnel"
                 },
                 "placeholder": "Desconocíu"
-            },
-            "studio_type": {
-                "label": "Tipu"
             },
             "substation": {
                 "label": "Tipu"

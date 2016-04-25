@@ -281,7 +281,6 @@
         "percent_brightness": "{opacity}% прозирност",
         "none": "Ниједна",
         "custom": "Прилагођена",
-        "fix_misalignment": "Поправи поравнање",
         "reset": "ресетовање"
     },
     "feature": {
@@ -1038,9 +1037,6 @@
                     "tunnel": "Тунел"
                 },
                 "placeholder": "Непознато"
-            },
-            "studio_type": {
-                "label": "Врста"
             },
             "substation": {
                 "label": "Врста"

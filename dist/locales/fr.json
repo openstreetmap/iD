@@ -253,7 +253,9 @@
         "deleted": "Supprimé",
         "created": "Créé",
         "about_changeset_comments": "À propos des commentaires de groupe de modifications",
-        "about_changeset_comments_link": "//wiki.openstreetmap.org/wiki/Good_changeset_comments"
+        "about_changeset_comments_link": "//wiki.openstreetmap.org/wiki/Good_changeset_comments",
+        "google_warning": "Vous avez mentionné Google dans ce commentaire : rappelez-vous que copier depuis Google Maps est strictement interdit.",
+        "google_warning_link": "http://www.openstreetmap.org/copyright"
     },
     "contributors": {
         "list": "Editions de {users}",
@@ -285,7 +287,8 @@
         "no_results_worldwide": "Aucun résultat trouvé"
     },
     "geolocate": {
-        "title": "Me localiser"
+        "title": "Me localiser",
+        "locating": "En cours de localisation, veuillez patienter..."
     },
     "inspector": {
         "no_documentation_combination": "Aucune documentation n'est disponible pour cette combinaison d'étiquettes",
@@ -329,9 +332,10 @@
         "custom": "Personnalisé",
         "custom_button": "Modifier le fond personnalisé",
         "custom_prompt": "Saisir un template d'URL de tuile. Les symboles sont {z}, {x}, {y} pour la structure Z/X/Y et {u} pour la balance des domaines.",
-        "fix_misalignment": "Corriger l'alignement",
+        "fix_misalignment": "Ajuster le décalage de l'imagerie",
         "imagery_source_faq": "D'où provient cette imagerie ?",
         "reset": "réinitialiser",
+        "offset": "«Glissez» partout dans la zone grise ci-dessous pour ajuster le décalage d'image, ou entrez les valeurs de décalage en mètres.",
         "minimap": {
             "description": "Minicarte",
             "tooltip": "Montre une carte de vue d'ensemble pour aider à localiser la zone actuellement affichée."
@@ -351,6 +355,7 @@
             "tooltip": "Points d'intérêt"
         },
         "traffic_roads": {
+            "description": "Voies de circulation",
             "tooltip": "Voies, Rues, etc."
         },
         "service_roads": {
@@ -1435,9 +1440,6 @@
                 },
                 "placeholder": "Inconnu"
             },
-            "studio_type": {
-                "label": "Type"
-            },
             "substation": {
                 "label": "Type"
             },
@@ -1519,7 +1521,7 @@
                 "label": "Type"
             },
             "website": {
-                "label": "Site internet",
+                "label": "Site Web",
                 "placeholder": "http://exemple.fr"
             },
             "wetland": {
@@ -1829,8 +1831,8 @@
                 "terms": "Temple boudhiste"
             },
             "amenity/place_of_worship/christian": {
-                "name": "Église",
-                "terms": "Église"
+                "name": "Église chrétienne",
+                "terms": "Église, Culte chrétien"
             },
             "amenity/place_of_worship/jewish": {
                 "name": "Synagogue",
@@ -2631,6 +2633,10 @@
             "highway/turning_circle": {
                 "name": "Zone de manœuvre",
                 "terms": "Point de retournement"
+            },
+            "highway/unclassified": {
+                "name": "Route mineure ou non classifiée",
+                "terms": "route non classée;voie communale"
             },
             "historic": {
                 "name": "Site historique",
@@ -3484,6 +3490,10 @@
                 "name": "Magasin de vêtements",
                 "terms": "Magasin de vêtements"
             },
+            "shop/coffee": {
+                "name": "Boutique de vente de cafés",
+                "terms": "Magasin de café"
+            },
             "shop/computer": {
                 "name": "Magasin d'informatique",
                 "terms": "Magasin d'informatique"
@@ -3679,6 +3689,10 @@
             "shop/newsagent": {
                 "name": "Magasin de journaux",
                 "terms": "Vente de journaux, de magazines, Maison de la presse"
+            },
+            "shop/nutrition_supplements": {
+                "name": "Boutique de compléments alimentaires",
+                "terms": "compléments alimentaires;compléments nutritionnels"
             },
             "shop/optician": {
                 "name": "Opticien",
@@ -4031,6 +4045,10 @@
             "waterway/ditch": {
                 "name": "Fossé",
                 "terms": "Fossé"
+            },
+            "waterway/dock": {
+                "name": "Darse / Cale sèche",
+                "terms": "Quai pour cargo"
             },
             "waterway/drain": {
                 "name": "Canal d'évacuation d'eau pluviale",

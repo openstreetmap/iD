@@ -330,7 +330,6 @@
         "custom": "Personalizado",
         "custom_button": "Editar fundo personalizando",
         "custom_prompt": "Introduzir um URL válido. Tokens válidos são {z}, {x}, {y} para esquemas Z/X/Y e {u} para esquemas QuadTile.",
-        "fix_misalignment": "Corrigir alinhamento",
         "imagery_source_faq": "De onde vem essa imagem?",
         "reset": "reiniciar",
         "minimap": {
@@ -1437,7 +1436,7 @@
                 },
                 "placeholder": "Desconhecido"
             },
-            "studio_type": {
+            "studio": {
                 "label": "Tipo"
             },
             "substation": {
@@ -1853,6 +1852,10 @@
             "amenity/post_office": {
                 "name": "Estação de correios",
                 "terms": "Central de Correio, CTT, C.T.T., CTTs, Correio de Portugal"
+            },
+            "amenity/prison": {
+                "name": "Prisão",
+                "terms": "Prison Grounds"
             },
             "amenity/pub": {
                 "name": "Taberna / Tasca",
@@ -3231,7 +3234,7 @@
                 "terms": "Lugar"
             },
             "place/city": {
-                "name": "Capital de distrito (cidade)",
+                "name": "Capital de distrito",
                 "terms": "City, Cidade, Capital, Distrito"
             },
             "place/farm": {
@@ -3263,11 +3266,11 @@
                 "terms": "Borough"
             },
             "place/town": {
-                "name": "Sede de Concelho (cidade, vila)",
+                "name": "Cidade / Vila",
                 "terms": "Town, Conselho, Concelho"
             },
             "place/village": {
-                "name": "Sede de freguesia (cidade, vila, aldeia)",
+                "name": "Capital de freguesia",
                 "terms": "Village, Freguesia, Freguezia"
             },
             "point": {
@@ -3490,6 +3493,10 @@
                 "name": "Loja de roupas",
                 "terms": "Clothing, Roupa, Roupas"
             },
+            "shop/coffee": {
+                "name": "Loja de cafés",
+                "terms": "Coffee Store"
+            },
             "shop/computer": {
                 "name": "Loja de informática",
                 "terms": "Computer, Computador, Informática, Software, Programa"
@@ -3685,6 +3692,10 @@
             "shop/newsagent": {
                 "name": "Loja de jornais / revistas",
                 "terms": "Newspaper/Magazine Shop, Jornal, Revista"
+            },
+            "shop/nutrition_supplements": {
+                "name": "Loja de suplementos alimentares",
+                "terms": "Nutrition Supplements Store"
             },
             "shop/optician": {
                 "name": "Loja de ótica / óculos",

@@ -238,7 +238,6 @@
         "description": "পটভূমি নির্ধারণ",
         "percent_brightness": "{opacity}% উজ্জ্বলতা",
         "none": "কিছুনা",
-        "fix_misalignment": "এলাইনমেন্ট ঠিক করুন",
         "reset": "রিসেট"
     },
     "restore": {

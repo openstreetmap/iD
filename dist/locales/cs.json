@@ -253,7 +253,9 @@
         "deleted": "Smazáno",
         "created": "Vytvořeno",
         "about_changeset_comments": "Více o komentářích ke změnám (anglicky)",
-        "about_changeset_comments_link": "//wiki.openstreetmap.org/wiki/Good_changeset_comments"
+        "about_changeset_comments_link": "//wiki.openstreetmap.org/wiki/Good_changeset_comments",
+        "google_warning": "V komentáře jste zmínil/a Google. Důrazně upozorňujeme, že kopírování z map Googlu je zakázáno.",
+        "google_warning_link": "http://www.openstreetmap.org/copyright"
     },
     "contributors": {
         "list": "Přispěli {users}",
@@ -285,7 +287,8 @@
         "no_results_worldwide": "Nic nenalezeno"
     },
     "geolocate": {
-        "title": "Ukázat moji polohu"
+        "title": "Ukázat moji polohu",
+        "locating": "Moment, zjišťuji polohu…"
     },
     "inspector": {
         "no_documentation_combination": "K této kombinaci vlastností není k dispozici dokumentace",
@@ -329,9 +332,10 @@
         "custom": "Vlastní",
         "custom_button": "Editovat vlastní pozadí",
         "custom_prompt": "Vložte šablonu adres dlaždic. Lze použít tokeny {z}, {x}, {y} pro schéma Z/X/Y a {u} pro hierarchické schéma quadtile.",
-        "fix_misalignment": "Vyrovnat posunutí pozadí",
+        "fix_misalignment": "Zarovnat podklad",
         "imagery_source_faq": "Odkud jsou tyto podklady?",
         "reset": "vrátit na začátek",
+        "offset": "Vizuálně vyrovnejte posunutí podkladů v šedé oblasti tak, aby lícovaly s mapou. Nebo zadejte hodnotu posunu v metrech.",
         "minimap": {
             "description": "Mapka",
             "tooltip": "Zobrazit přehledovou mapku zobrazující aktuální výřez v širším okolí"
@@ -349,6 +353,14 @@
         "points": {
             "description": "Uzly",
             "tooltip": "Body zájmu"
+        },
+        "traffic_roads": {
+            "description": "Hlavní komunikace",
+            "tooltip": "Silnice, ulice atd."
+        },
+        "service_roads": {
+            "description": "Účelové komunikace",
+            "tooltip": "Účelové komunikace, příjezdy, lesní a polní cesty atd."
         },
         "paths": {
             "description": "Pěší cesty",
@@ -1099,7 +1111,7 @@
                 "label": "Patro"
             },
             "levels": {
-                "label": "Počet pater",
+                "label": "Počet nadzemních podlaží",
                 "placeholder": "2, 4, 6..."
             },
             "lit": {
@@ -1428,7 +1440,7 @@
                 },
                 "placeholder": "Není známo"
             },
-            "studio_type": {
+            "studio": {
                 "label": "Typ"
             },
             "substation": {
@@ -1918,7 +1930,7 @@
                 "terms": "divadlo,divadelní,představení,muzikál"
             },
             "amenity/toilets": {
-                "name": "Záchodky",
+                "name": "Toalety",
                 "terms": "toalety,toaleta,záchod,záchodky,WC"
             },
             "amenity/townhall": {
@@ -2625,6 +2637,10 @@
                 "name": "Obratiště",
                 "terms": "místo k otočení"
             },
+            "highway/unclassified": {
+                "name": "Silnice bez klasifikace",
+                "terms": "silnice bez klasifikace,neklasifikovaná silnice,místní komunikace"
+            },
             "historic": {
                 "name": "Památné místo",
                 "terms": "historické místo"
@@ -2764,6 +2780,10 @@
             "leisure/adult_gaming_centre": {
                 "name": "Herna (hrací automaty)",
                 "terms": "herna,automaty,hazard,hrací automaty,výherní hrací automaty,gambling"
+            },
+            "leisure/bird_hide": {
+                "name": "Pozorovatelna zvěře",
+                "terms": "pozorovatelna zvěře,pozorovatelna ptáků,ptačí zástěna,machan"
             },
             "leisure/bowling_alley": {
                 "name": "Bowlingová dráha",
@@ -3385,6 +3405,10 @@
                 "name": "Starožitnictví",
                 "terms": "starožitnost,starožitnosti,starožitnictví,antikvář,antikvity,antikvita,antikvariát"
             },
+            "shop/art": {
+                "name": "Obchod s uměním",
+                "terms": "obchod s uměním,umění,galerie,umělecká galerie,prodejní galerie"
+            },
             "shop/baby_goods": {
                 "name": "Potřeby pro děti",
                 "terms": "děti,dítě,miminko,mimino,plína,plíny,plínka,plínky,kojenecké potřeby,dětská výživa"
@@ -3468,6 +3492,10 @@
             "shop/clothes": {
                 "name": "Oblečení",
                 "terms": "oděvy,oděv,šaty,oblečení,obchod s oblečením,móda,módní"
+            },
+            "shop/coffee": {
+                "name": "Obchod kávou",
+                "terms": "káva,obchod kávou,obchod s kávou,pražírna"
             },
             "shop/computer": {
                 "name": "Počítače",
@@ -3665,6 +3693,10 @@
                 "name": "Trafika",
                 "terms": "trafika,trafikant,trafikantka,tabák,tisk,kiosek,noviny,stánek"
             },
+            "shop/nutrition_supplements": {
+                "name": "Obchod s potravními doplňky",
+                "terms": "doplňky stravy,potravní doplňky,doplňky potravy,potravinové doplňky,doplňky výživy,výživové doplňky,nutraceutika,supplementy,vitamíny,minerály,léky"
+            },
             "shop/optician": {
                 "name": "Optika",
                 "terms": "optik,optika,brýle,zrak,kontaktní čočky,čočky"
@@ -3832,6 +3864,10 @@
             "tourism/chalet": {
                 "name": "Chata",
                 "terms": "chata,chalupa,chatka"
+            },
+            "tourism/gallery": {
+                "name": "Galerie umění",
+                "terms": "muzeum umění,galerie umění,umělecká galerie,umělecké muzeum,galerie"
             },
             "tourism/guest_house": {
                 "name": "Penzion",
@@ -4012,6 +4048,10 @@
             "waterway/ditch": {
                 "name": "Příkop / strouha",
                 "terms": "příkop, strouha, škarpa"
+            },
+            "waterway/dock": {
+                "name": "Doky",
+                "terms": "doky,dok,výroba lodí,oprava lodí,údržba lodí,loděnice"
             },
             "waterway/drain": {
                 "name": "Odvodňovací strouha",

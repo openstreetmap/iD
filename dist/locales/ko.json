@@ -249,7 +249,8 @@
         "warnings": "경고",
         "modified": "수정됨",
         "deleted": "삭제됨",
-        "created": "만듦"
+        "created": "만듦",
+        "about_changeset_comments": "바뀜집합 댓글에 대해"
     },
     "contributors": {
         "list": "{users} 사용자의 편집",
@@ -281,13 +282,15 @@
         "no_results_worldwide": "결과가 없습니다"
     },
     "geolocate": {
-        "title": "내 위치 보기"
+        "title": "내 위치 보기",
+        "locating": "위치 확인 중, 기다려주세요..."
     },
     "inspector": {
         "no_documentation_combination": "이 태그 조합에 사용할 수 있는 설명문이 없습니다",
         "no_documentation_key": "이 키에 사용할 수 있는 설명문이 없습니다",
         "show_more": "더 보기",
         "view_on_osm": "openstreetmap.org에서 보기",
+        "all_fields": "모든 필드",
         "all_tags": "모든 태그",
         "all_members": "모든 구성원",
         "all_relations": "모든 관계",
@@ -323,7 +326,6 @@
         "custom": "사용자 지정",
         "custom_button": "사용자 지정 배경 편집",
         "custom_prompt": "타일 URL 템플릿을 입력하세요. 올바른 토큰은 Z/X/Y scheme에 대해 {z}, {x}, {y}이고 quadtile scheme에 대해 {u}입니다.",
-        "fix_misalignment": "정렬 고치기",
         "reset": "재설정",
         "minimap": {
             "description": "미니맵",
@@ -342,6 +344,13 @@
         "points": {
             "description": "점",
             "tooltip": "관심 있는 점"
+        },
+        "traffic_roads": {
+            "tooltip": "고속도로, 거리 등"
+        },
+        "service_roads": {
+            "description": "취부 도로",
+            "tooltip": "취부 도로, 주차장 통로, 트랙 등"
         },
         "paths": {
             "description": "경로",
@@ -438,7 +447,8 @@
         "view_on_osm": "OSM에서 보기",
         "facebook": "페이스북에 공유",
         "twitter": "트위터에 공유",
-        "google": "Google+에 공유"
+        "google": "Google+에 공유",
+        "help_link_text": "자세한 정보"
     },
     "confirm": {
         "okay": "확인",
@@ -482,6 +492,14 @@
         "drag_drop": "페이지에 .gpx 파일을 끌어 놓거나 오른쪽에 있는 찾아보기 버튼을 클릭하세요",
         "zoom": "GPX 트랙하려면 확대",
         "browse": ".gpx 파일 찾아보기"
+    },
+    "mapillary_images": {
+        "tooltip": "Mapillary에서 거리 수준 사진",
+        "title": "사진 겹치기 (Mapillary)"
+    },
+    "mapillary_signs": {
+        "tooltip": "Mapillary에서 교통 표지판",
+        "title": "교통 표지판 겹치기 (Mapillary)"
     },
     "mapillary": {
         "view_on_mapillary": "Mapillary에서 이 그림 보기"
@@ -1252,9 +1270,6 @@
                     "tunnel": "터널"
                 },
                 "placeholder": "알 수 없음"
-            },
-            "studio_type": {
-                "label": "유형"
             },
             "substation": {
                 "label": "유형"

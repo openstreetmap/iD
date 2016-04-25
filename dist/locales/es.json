@@ -8,7 +8,7 @@
         "add_line": {
             "title": "Línea",
             "description": "Añade carreteras, calles, pasos peatonales, canales u otras líneas al mapa.",
-            "tail": "Haga clic en el mapa para empezar a dibujar un camino, senda o ruta."
+            "tail": "Haga clic en el mapa para empezar a dibujar un camino, sendero o ruta."
         },
         "add_point": {
             "title": "Punto",
@@ -253,7 +253,9 @@
         "deleted": "Eliminado",
         "created": "Creado",
         "about_changeset_comments": "Acerca de los comentarios del conjuntos de cambios",
-        "about_changeset_comments_link": "//wiki.openstreetmap.org/wiki/ES:Good_changeset_comments"
+        "about_changeset_comments_link": "//wiki.openstreetmap.org/wiki/ES:Good_changeset_comments",
+        "google_warning": "Usted mencionó Google en este comentario: recuerde que copiar desde Google Maps está estrictamente prohibido.",
+        "google_warning_link": "http://www.openstreetmap.org/copyright"
     },
     "contributors": {
         "list": "Ediciones de {users}",
@@ -326,13 +328,14 @@
         "description": "Ajustes del fondo",
         "percent_brightness": "{opacity}% brillo",
         "none": "Ninguno",
-        "best_imagery": "La mejor fuente de imagen aérea para esta ubicación",
+        "best_imagery": "La mejor fuente de imágenes para esta ubicación",
         "custom": "Personalizado",
         "custom_button": "Editar fondo personalizado",
         "custom_prompt": "Introduzca la URL de una plantilla de teselas. Los símbolos válidos son {z}, {x}, {y} para el esquema Z/X/Y y {u} para el esquema quadtile.",
-        "fix_misalignment": "Corregir la alineación",
-        "imagery_source_faq": "¿De dónde viene esta imagen aérea?",
+        "fix_misalignment": "Ajustar desplazamiento de imágenes",
+        "imagery_source_faq": "¿De dónde vienen estas imágenes?",
         "reset": "reiniciar",
+        "offset": "Arrastre en cualquier lugar del área gris de abajo para ajustar el desplazamiento de imágenes, o introduzca los valores de desplazamiento en metros.",
         "minimap": {
             "description": "Minimapa",
             "tooltip": "Mostrar una vista alejada del mapa para ayudar a ubicar el área que se muestra actualmente."
@@ -399,7 +402,7 @@
     "area_fill": {
         "wireframe": {
             "description": "Sin relleno (rejilla)",
-            "tooltip": "Al activar el modo rejilla hace que sea fácil ver las imágenes de fondo."
+            "tooltip": "Habilitando el modo rejilla hace que sea fácil ver las imágenes de fondo."
         },
         "partial": {
             "description": "Relleno parcial",
@@ -519,7 +522,7 @@
         "editing_saving": "# Editar y guardar\n\nEste editor está diseñado para trabajar en línea principalmente, y en estos\nmomentos esta accediendo a través de un sitio web.\n\n### Seleccionar elementos\n\nPara seleccionar un elemento del mapa, como una carretera o un punto de\ninterés, haga clic sobre el en el mapa. Esto resaltará el elemento seleccionado,\nabriendo un panel con sus detalles, y mostrará un menú de cosas que puede\nhacer con ese elemento.\n\nPara seleccionar múltiples elementos, mantenga pulsada la tecla 'Mayús'. Luego\nhaga clic en los elementos que desea seleccionar o arrastre en el mapa para\ndibujar un rectángulo. Esto dibujará una caja y seleccionará todos los puntos\ndentro de ella.\n\n### Guardar ediciones\n\nCuando haga cambios como editar carreteras, edificios o lugares, estos se\nalmacenan localmente en su ordenador hasta que los guarde en el servidor.\nNo se preocupe si comete un error - puede deshacer los cambios haciendo\nclic en el botón 'Deshacer', y rehacerlos haciendo clic en el botón 'Rehacer'.\n\nHaga clic en 'Guardar' para finalizar un grupo de ediciones - por ejemplo, si ha\ncompletado una zona de la ciudad y quisiera empezar en un área nueva. Tendrá\nla oportunidad de revisar lo que ha hecho, y el editor proporciona avisos y\nsugerencias útiles si algo parece no ser correcto en los cambios.\n\nSi ve que todo es correcto, puede escribir un breve comentario explicando el\ncambio que ha hecho, y haga clic en 'Guardar' de nuevo para registrar los\ncambios en [OpenStreetMap.org](http://www.openstreetmap.org/), donde serán\nvisibles para todos los demás usuarios y estarán disponible para que otros\npuedan seguir construyendo y mejorando el mapa.\n\nSi no puede terminar sus ediciones en una sola sesión, puede dejar la ventana\ndel editor y volver más tarde (al mismo navegador y ordenador), y el editor le\npermitirá retomar su trabajo.\n\n### Uso del editor\n\nUna lista de métodos abreviados de teclado disponibles puede encontrarse [aquí](http://wiki.openstreetmap.org/wiki/ID/Shortcuts).\n",
         "roads": "# Carreteras\n\nPuede crear, corregir y borrar carreteras con este editor. Las vías pueden ser de todas las clases: caminos, carreteras, senderos, ciclovías, etc. A cualquier línea dibujada en el mapa se le debe indicar el tipo de elemento lineal que es.\n\n### Seleccionar\n\nHaga clic sobre una vía para seleccionarla. Verá sobre ella como se visualiza su esquema, formada por nodos y segmentos, junto con un menú de herramientas que aparece sobre el mapa y una barra lateral que muestra más información sobre la vía.\n\n### Modificar\n\nA menudo verá viales que no están alineados correctamente con la imagen aérea de fondo o con la traza GPS. Puede ajustar esas vías para situarlas en el lugar exacto.\n\nPrimero haga clic sobre la vía que desea cambiar. Esto la resaltará y mostrará los nodos o puntos de control a lo largo de la vía que la forman. A continuación simplemente arrastre esos puntos a la posición correcta. Si desea añadir nuevos puntos de control para dibujar la carretera con mayor detalle haga doble clic sobre la parte de la vía donde quiere añadir el nuevo nodo y este será creado en la vía. \n\nSi la vía conecta con otra carretera o camino pero esta conexión no aparece correctamente en el mapa puede arrastrar uno de los puntos de la vía hasta la otra carretera y se unirá automáticamente a ella mediante un nodo común. Es muy importante tener las carreteras conectadas en el mapa, ya que es esencial para proporcionar instrucciones correctas para la conducción si queremos que la cartografía se útil, por ejemplo, para los navegadores GPS.\n\n### Eliminar\n\nSi un camino es totalmente incorrecto -ha observado que no aparece en las imágenes de satélite y de manera ideal lo ha confirmado en campo- puede eliminarlo, lo cual lo borrará del mapa. Sea precavido al eliminar elementos del mapa. Como cualquier otra edición que haga este cambio será visto por todo el mundo y las imágenes de satélite a menudo no están actualizadas, por lo que una carretera que no existe en ellas pero sí en el mapa simplemente puede aparecer porque es de reciente construcción y otro usuario la ha añadido. \n\n### Crear\n\n¿Ha encontrado un lugar donde debería existir una carretera pero no aparece? Haga clic con el ratón sobre el icono 'Línea' situado en la parte superior izquierda del editor o simplemente presione la tecla '2'  de su teclado que es el acceso rápido para comenzar a dibujar una línea. \n\nHaga clic sobre el mapa en el inicio de la carretera para comenzar a dibujar. Si la vía se ramifica a partir de una carretera ya existente empiece haciendo clic sobre el lugar donde ambas conectan.\n\nHaga clic en puntos a lo largo de la vía para definir el trazado correcto de la carretera. La densidad de puntos dependerá de la complejidad del recorrido, por lo que es aconsejable dibujar desde un nivel de zoom apropiado. Si la vía que está dibujando atraviesa otra carretera conéctela con esta haciendo clic sobre el punto de intersección. Una vez haya terminado el dibujo haga doble clic con el ratón o presiones la tecla 'Return' o 'Intro' de su teclado para finalizar.\n",
         "gps": "# GPS\n\nLas trazas de GPS recogidas son una valiosa fuente de datos para OpenStreetMap. Este\neditor soporta trazas locales - archivos `.gpx` en su equipo local. Usted puede obtener\neste tipo de traza GPS con una serie de aplicaciones de smartphone, como también con\nhardware GPS personal.\n\nPara más información sobre cómo realizar un relevamiento GPS, lea\n[Mapear con un smartphone, GPS, o papel](http://learnosm.org/es/mobile-mapping/).\n\nPara utilizar una traza GPX para mapear, arrastre y suelte el archivo GPX en el editor\nde mapa. Si este es reconocido, se añadirá al mapa como una línea púrpura brillante.\nHaga clic en el menú 'Datos del mapa' en el lado derecho para activar,\ndesactivar o acercar a esta nueva capa alimentada por GPX.\n\nLa traza GPX no se carga directamente a OpenStreetMap - la mejor manera de\nutilizarlo es dibujar en el mapa, usándolo como guía para las nuevos elementos que\nagregue, y también [subirlo a OpenStreetMap](http://www.openstreetmap.org/trace/create)\npara que otros usuarios lo utilicen.\n",
-        "imagery": "# imágenes\n\nLas imágenes aéreas son un importante recurso para el trazado de mapas. Una combinación\nde vuelos aéreos, vistas de satélite, y compilaciones de fuentes gratuitas están disponibles\nen el editor bajo el menú 'Ajustes del fondo' a la derecha.\n\nDe forma predeterminada se presenta la capa de satélite de [Bing Maps](http://www.bing.com/maps/) en el editor, pero mientras se mueve y acerca el mapa a nuevas áreas\ngeográficas, nuevas fuentes estarán disponibles. Algunos países, como los Estados\nUnidos, Francia, y Dinamarca poseen imágenes de muy alta calidad disponible\npara algunas áreas.\n\nLas imágenes a veces están desplazadas de los datos del mapa por un error en el\nproveedor de imágenes. Si observa muchos caminos desplazados del fondo,\nno los mueva inmediatamente para emparejarlos. En su lugar puede ajustar\nla imagen para que coincida con los datos existentes haciendo clic\nen 'Corregir alineación' en la opción 'Ajustes del fondo'.\n",
+        "imagery": "# Imágenes\n\nLas imágenes aéreas son un importante recurso para mapear. Una combinación\nde vuelos aéreos, vistas de satélite, y compilaciones de fuentes libres están disponibles\nen el editor bajo el menú 'Ajustes del fondo' a la derecha.\n\nDe forma predeterminada se presenta la capa de satélite de [Bing Maps](http://www.bing.com/maps/) en el editor, pero mientras se mueva y acerque el mapa a nuevas áreas\ngeográficas, nuevas fuentes estarán disponibles. Algunos países, como los Estados\nUnidos, Francia, y Dinamarca poseen imágenes de muy alta calidad disponible\npara algunas áreas.\n\nLas imágenes a veces están desplazadas de los datos del mapa debido a un error en el\nlado del proveedor de imágenes. Si observa muchos caminos desplazados del fondo,\nno los mueva inmediatamente para emparejarlos con el fondo. En su lugar puede ajustar\nlas imágenes para que coincidan con los datos existentes haciendo clic\nen 'Corregir alineación' en la opción 'Ajustes del fondo' de la interfaz.\n",
         "addresses": "# Direcciones\n\nLas direcciones son parte de la información más útil que se puede añadir al mapa. \n\nAunque las direcciones se representan a menudo como parte de las calles, en OpenStreetMap esta información es guardada como atributos de los edificios y lugares presentes a lo largo de los viales.\n\nPuede agregar información sobre direcciones a lugares dibujados en el mapa como contornos de edificios, así como aquellos localizados únicamente con un punto. La fuente óptima para obtener datos de direcciones es la consulta sobre el terreno o el conocimiento personal. El uso de fuentes comerciales, como Google Maps, para obtener estos datos está estrictamente prohibido.\n",
         "inspector": "# Usando el inspector\n\nEl inspector es la sección en la parte izquierda de la página que le permite\neditar los detalles del elemento seleccionado.\n\n## Selección de un tipo de elemento\n\nDespués de agregar un punto, línea o área, puede elegir qué tipo de elemento\nes, como si se trata de una carretera o camino residencial, supermercado o una cafetería.\nEl inspector mostrará botones para tipos de elementos comunes, y usted puede\nencontrar otros escribiendo lo que  está buscando en el cuadro de búsqueda.\n\nHaga clic en la 'i' de la esquina inferior derecha de un botón de tipo de elemento\npara aprender más sobre él. Haga clic en un botón para elegir ese tipo.\n\n\n### Uso de formularios y edición de etiquetas\n\nDespués de elegir un tipo de elemento, o cuando se selecciona un elemento\nque ya tiene un tipo asignado, el inspector mostrará campos con detalles sobre\nel elemento como su nombre y dirección.\n\nDebajo de los campos que ve, puede hacer clic en el desplegable 'Añadir campo'\npara agregar otros detalles, como un enlace de Wikipedia,  acceso en silla de ruedas, y más.\n\nEn la parte inferior del inspector, haga clic en 'Etiquetas adicionales' para agregar otras\netiquetas arbitrarias al elemento. [Taginfo](http://taginfo.openstreetmap.org/) es un\ngran recurso para aprender más acerca de las combinaciones de etiquetas populares.\n\nLos cambios que realice en el inspector se aplican automáticamente al mapa.\nPuede deshacerlos en cualquier momento haciendo clic en el botón 'Deshacer'.\n",
         "buildings": "# Edificios\n\nOpenStreetMap es la base de datos cartográfica más grande del mundo sobre edificios. Puede crear y mejorar esta base de datos.\n\n### Seleccionar\n\nPuede seleccionar un edificio haciendo clic con el ratón sobre su borde. Esto resaltará el edificio y abrirá un pequeño menú de herramientas y una barra lateral que mostrará más información sobre la edificación. \n\n### Modificar\n\nAlgunas veces los edificios están situados incorrectamente o poseen etiquetas erróneas.\n\nPara mover un edificio completo selecciónelo y haga clic en la herramienta 'Mover'. Desplace el ratón para trasladar el edificio y haga clic cuando esté correctamente situado. \n\nPara corregir la forma del edificio de manera puntual haga clic con el ratón sobre uno de los nodos que forma el borde del edificio y sin soltar arrástrelo al lugar adecuado.\n\n### Crear\n\nUna de las principales preguntas acerca de cómo añadir edificios al mapa es por qué OpenStreetMap almacena los edificios independientemente bien como polígonos o como puntos. La regla general es \"dibujar un edificio como un polígono siempre que sea posible\" y cartografiar la situación de las empresas, hogares, servicios y otros elementos que alberga el edificio como puntos situados dentro de este. \n\nComience a dibujar un edificio como un polígono haciendo clic en el botón 'Área' situado en la parte superior izquierda del interfaz y finalice bien pulsando la tecla 'Return' o 'Intro' de su teclado o simplemente haciendo clic en el primer nodo dibujado para cerrar el polígono.\n\n### Eliminar\n\nSi un edificio es totalmente incorrecto -puede ver que no existe en la imagen por satélite y de manera ideal lo ha confirmado visitando el lugar- puede borrarlo para que se elimine del mapa. Sea precavido cuando suprima elementos del mapa, como en cualquier otra edición los cambios que realice serán visibles por todo el mundo y a veces las imágenes de satélite pueden estar desactualizadas, por lo que el edifico simplemente es de nueva construcción y ha sido añadido por otro usuario.\n\nPuede eliminar un edificio haciendo clic con el ratón sobre él para seleccionarlo  y a continuación pulsar en el icono de la papelera o simplemente pulsando la tecla 'Supr' de su teclado.\n",
@@ -615,7 +618,7 @@
                 "name": "Elementos de golf"
             },
             "category-landuse": {
-                "name": "Elementos de uso de tierra"
+                "name": "Elementos de uso de suelo"
             },
             "category-path": {
                 "name": "Elementos de sendero"
@@ -1437,7 +1440,7 @@
                 },
                 "placeholder": "Desconocido"
             },
-            "studio_type": {
+            "studio": {
                 "label": "Tipo"
             },
             "substation": {
@@ -1628,7 +1631,7 @@
             },
             "amenity/atm": {
                 "name": "Cajero automático",
-                "terms": "cajero automático,redbanc,ATM,ATH,banelco,link"
+                "terms": "cajero automático, dinero, efectivo, banco"
             },
             "amenity/bank": {
                 "name": "Banco",
@@ -1853,6 +1856,10 @@
             "amenity/post_office": {
                 "name": "Oficina postal",
                 "terms": "correo, oficina de correos, casa de correos, estafeta de correos"
+            },
+            "amenity/prison": {
+                "name": "Terreno de la prisión",
+                "terms": "prisión, presion, cárcel, carcel"
             },
             "amenity/pub": {
                 "name": "Pub",
@@ -2480,7 +2487,7 @@
             },
             "highway/bridleway": {
                 "name": "Camino de herradura",
-                "terms": "camino de herradura, senda ecuestre, camino para caballos, pista ecuestre, ruta a caballo"
+                "terms": "camino de herradura, senda ecuestre, camino para caballos, pista ecuestre, ruta a caballo, caballo"
             },
             "highway/bus_stop": {
                 "name": "Parada de autobús",
@@ -2500,11 +2507,11 @@
             },
             "highway/cycleway": {
                 "name": "Ciclovía",
-                "terms": "Camino para bicicletas, senda ciclable, sendero ciclista, carril bici, bicisenda, ciclovía, carril para bicicletas,pista para ciclistas"
+                "terms": "Camino para bicicletas, senda ciclable, sendero ciclista, carril bici, bicisenda, ciclovía, carril para bicicletas, pista para ciclistas"
             },
             "highway/footway": {
                 "name": "Acera peatonal",
-                "terms": "camino peatonal, sendero peatonal, peatón, acera peatonal, vereda peatonal"
+                "terms": "camino, sendero, acera, vereda, andén, banqueta, peatón, peatonal"
             },
             "highway/living_street": {
                 "name": "Calle residencial",
@@ -2528,7 +2535,7 @@
             },
             "highway/path": {
                 "name": "Sendero",
-                "terms": "vereda, sendero, camino, vía, calzada, ramal, trocha, atajo, travesía, huella, rastro"
+                "terms": "vereda, sendero, senda, camino, vía, calzada, ramal, trocha, atajo, travesía, huella, rastro"
             },
             "highway/pedestrian": {
                 "name": "Calle peatonal",
@@ -2636,7 +2643,7 @@
             },
             "highway/unclassified": {
                 "name": "Camino menor / sin clasificación",
-                "terms": "Camino, carretera, menor, sin clasificación"
+                "terms": "carretera, camino, menor, no clasificado, sin clasificación"
             },
             "historic": {
                 "name": "Lugar histórico",
@@ -2780,7 +2787,7 @@
             },
             "leisure/bird_hide": {
                 "name": "Observatorio de aves",
-                "terms": "observatorio, ave, pájaro"
+                "terms": "observatorio, refugio, ave, pájaro, vida silvestre, naturaleza"
             },
             "leisure/bowling_alley": {
                 "name": "Pista de bolos",
@@ -3490,6 +3497,10 @@
                 "name": "Tienda de ropa",
                 "terms": "tienda de ropa, local de ropa, ropa, vestido, traje, vestimenta, textil, ropaje, sastrería"
             },
+            "shop/coffee": {
+                "name": "Tienda de café",
+                "terms": "café, expresso, grano, molido, tienda, almacén, negocio"
+            },
             "shop/computer": {
                 "name": "Tienda de informática",
                 "terms": "informática, ordenador, computador, hardware, software, tienda de informática, computación, casa de computación, casa de informática, local de computación, local de informática"
@@ -3685,6 +3696,10 @@
             "shop/newsagent": {
                 "name": "Puesto de Periódicos / Revistas",
                 "terms": "periódico, periodico, revista, diario, Tienda de Periódicos, Tienda de Revistas, puesto de diarios, puesto de periódicos"
+            },
+            "shop/nutrition_supplements": {
+                "name": "Tienda de suplementos nutricionales",
+                "terms": "nutrición, suplementos, complementos, vitaminas, minerales, tienda, almacén, negocio"
             },
             "shop/optician": {
                 "name": "Óptica",

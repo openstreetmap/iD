@@ -253,7 +253,9 @@
         "deleted": "Deleted",
         "created": "Created",
         "about_changeset_comments": "About changeset comments",
-        "about_changeset_comments_link": "//wiki.openstreetmap.org/wiki/Good_changeset_comments"
+        "about_changeset_comments_link": "//wiki.openstreetmap.org/wiki/Good_changeset_comments",
+        "google_warning": "You mentioned Google in this comment: remember that copying from Google Maps is strictly forbidden.",
+        "google_warning_link": "http://www.openstreetmap.org/copyright"
     },
     "contributors": {
         "list": "Edits by {users}",
@@ -330,9 +332,10 @@
         "custom": "Custom",
         "custom_button": "Edit custom background",
         "custom_prompt": "Enter a tile URL template. Valid tokens are {z}, {x}, {y} for Z/X/Y scheme and {u} for quadtile scheme.",
-        "fix_misalignment": "Fix alignment",
+        "fix_misalignment": "Adjust imagery offset",
         "imagery_source_faq": "Where does this imagery come from?",
         "reset": "reset",
+        "offset": "Drag anywhere in the gray area below to adjust the imagery offset, or enter the offset values in meters.",
         "minimap": {
             "description": "Minimap",
             "tooltip": "Show a zoomed out map to help locate the area currently displayed."
@@ -623,6 +626,9 @@
             "category-rail": {
                 "name": "Rail Features"
             },
+            "category-restriction": {
+                "name": "Restriction Features"
+            },
             "category-road": {
                 "name": "Road Features"
             },
@@ -777,6 +783,9 @@
             "boundary": {
                 "label": "Type"
             },
+            "brand": {
+                "label": "Brand"
+            },
             "building": {
                 "label": "Building"
             },
@@ -821,16 +830,29 @@
             "construction": {
                 "label": "Type"
             },
+            "content": {
+                "label": "Contents"
+            },
             "country": {
                 "label": "Country"
+            },
+            "covered": {
+                "label": "Covered"
             },
             "craft": {
                 "label": "Type"
             },
+            "crop": {
+                "label": "Crop"
+            },
             "crossing": {
                 "label": "Type"
             },
+            "cuisine": {
+                "label": "Cuisine"
+            },
             "cycleway": {
+                "label": "Bike Lanes",
                 "options": {
                     "lane": {
                         "description": "A bike lane separated from motor traffic by a painted line",
@@ -845,9 +867,33 @@
                         "title": "Contraflow bike lane"
                     },
                     "opposite_lane": {
-                        "description": "A bike lane that travels in the opposite direction of traffic"
+                        "description": "A bike lane that travels in the opposite direction of traffic",
+                        "title": "Opposite bike lane"
+                    },
+                    "share_busway": {
+                        "description": "A bike lane shared with a bus lane",
+                        "title": "Bike lane shared with bus"
+                    },
+                    "shared_lane": {
+                        "description": "A bike lane with no separation from motor traffic",
+                        "title": "Shared bike lane"
+                    },
+                    "track": {
+                        "description": "A bike lane separated from traffic by a physical barrier",
+                        "title": "Bike track"
                     }
+                },
+                "placeholder": "none",
+                "types": {
+                    "cycleway:left": "Left side",
+                    "cycleway:right": "Right side"
                 }
+            },
+            "delivery": {
+                "label": "Delivery"
+            },
+            "denomination": {
+                "label": "Denomination"
             },
             "denotation": {
                 "label": "Denotation"
@@ -867,26 +913,105 @@
             "electrified": {
                 "label": "Electrification",
                 "options": {
-                    "no": "No"
-                }
+                    "contact_line": "Contact Line",
+                    "no": "No",
+                    "rail": "Electrified Rail",
+                    "yes": "Yes (unspecified)"
+                },
+                "placeholder": "Contact Line, Electrified Rail..."
+            },
+            "elevation": {
+                "label": "Elevation"
+            },
+            "emergency": {
+                "label": "Emergency"
             },
             "entrance": {
                 "label": "Type"
             },
+            "except": {
+                "label": "Exceptions"
+            },
             "fax": {
+                "label": "Fax",
                 "placeholder": "+44 207 123456"
             },
+            "fee": {
+                "label": "Fee"
+            },
             "fire_hydrant/type": {
-                "label": "Type"
+                "label": "Type",
+                "options": {
+                    "pillar": "Pillar/Aboveground",
+                    "pond": "Pond",
+                    "underground": "Underground",
+                    "wall": "Wall"
+                }
+            },
+            "fixme": {
+                "label": "Fix Me"
+            },
+            "fuel": {
+                "label": "Fuel"
+            },
+            "fuel/biodiesel": {
+                "label": "Sells Biodiesel"
+            },
+            "fuel/diesel": {
+                "label": "Sells Diesel"
+            },
+            "fuel/e10": {
+                "label": "Sells E10"
+            },
+            "fuel/e85": {
+                "label": "Sells E85"
             },
             "fuel/lpg": {
                 "label": "Sells LPG"
             },
+            "fuel/octane_100": {
+                "label": "Sells Racing Petrol"
+            },
+            "fuel/octane_91": {
+                "label": "Sells Regular Petrol"
+            },
+            "fuel/octane_95": {
+                "label": "Sells Midgrade Petrol"
+            },
+            "fuel/octane_98": {
+                "label": "Sells Premium Petrol"
+            },
+            "gauge": {
+                "label": "Gauge"
+            },
             "gender": {
+                "label": "Gender",
+                "options": {
+                    "female": "Female",
+                    "male": "Male",
+                    "unisex": "Unisex"
+                },
                 "placeholder": "Unknown"
+            },
+            "generator/method": {
+                "label": "Method"
+            },
+            "generator/source": {
+                "label": "Source"
             },
             "generator/type": {
                 "label": "Type"
+            },
+            "golf_hole": {
+                "label": "Reference",
+                "placeholder": "Hole number (1-18)"
+            },
+            "handicap": {
+                "label": "Handicap",
+                "placeholder": "1-18"
+            },
+            "handrail": {
+                "label": "Handrail"
             },
             "highway": {
                 "label": "Type"
@@ -894,12 +1019,36 @@
             "historic": {
                 "label": "Type"
             },
+            "hoops": {
+                "label": "Hoops",
+                "placeholder": "1, 2, 4..."
+            },
+            "iata": {
+                "label": "IATA"
+            },
+            "icao": {
+                "label": "ICAO"
+            },
+            "incline": {
+                "label": "Incline"
+            },
+            "incline_steps": {
+                "label": "Incline",
+                "options": {
+                    "down": "Down",
+                    "up": "Up"
+                }
+            },
             "information": {
                 "label": "Type"
             },
             "internet_access": {
+                "label": "Internet Access",
                 "options": {
                     "no": "No",
+                    "terminal": "Terminal",
+                    "wired": "Wired",
+                    "wlan": "Wi-Fi",
                     "yes": "Yes"
                 }
             },
@@ -910,7 +1059,11 @@
                 "label": "Type"
             },
             "lanes": {
+                "label": "Lanes",
                 "placeholder": "1, 2, 3..."
+            },
+            "layer": {
+                "label": "Layer"
             },
             "leaf_cycle": {
                 "label": "Leaf Cycle",
@@ -951,6 +1104,16 @@
             "leisure": {
                 "label": "Type"
             },
+            "length": {
+                "label": "Length (Metres)"
+            },
+            "level": {
+                "label": "Level"
+            },
+            "levels": {
+                "label": "Levels",
+                "placeholder": "2, 4, 6..."
+            },
             "lit": {
                 "label": "Street Lighting"
             },
@@ -960,33 +1123,131 @@
             "man_made": {
                 "label": "Type"
             },
+            "maxspeed": {
+                "label": "Speed Limit",
+                "placeholder": "40, 50, 60..."
+            },
+            "maxstay": {
+                "label": "Max Stay"
+            },
+            "mtb/scale": {
+                "label": "Mountain Biking Difficulty",
+                "options": {
+                    "0": "0: Solid gravel/packed earth, no obstacles, wide curves",
+                    "1": "1: Some loose surface, small obstacles, wide curves",
+                    "2": "2: Much loose surface, large obstacles, easy hairpins",
+                    "3": "3: Slippery surface, large obstacles, tight hairpins",
+                    "4": "4: Loose surface or boulders, dangerous hairpins",
+                    "5": "5: Maximum difficulty, boulder fields, landslides",
+                    "6": "6: Not rideable except by the very best mountain bikers"
+                },
+                "placeholder": "0, 1, 2, 3..."
+            },
+            "mtb/scale/imba": {
+                "label": "IMBA Trail Difficulty",
+                "options": {
+                    "0": "Easiest (white circle)",
+                    "1": "Easy (green circle)",
+                    "2": "Medium (blue square)",
+                    "3": "Difficult (black diamond)",
+                    "4": "Extremely Difficult (double black diamond)"
+                },
+                "placeholder": "Easy, Medium, Difficult..."
+            },
+            "mtb/scale/uphill": {
+                "label": "Mountain Biking Uphill Difficulty",
+                "options": {
+                    "0": "0: Avg. incline <10%, gravel/packed earth, no obstacles",
+                    "1": "1: Avg. incline <15%, gravel/packed earth, few small objects",
+                    "2": "2: Avg. incline <20%, stable surface, fistsize rocks/roots",
+                    "3": "3: Avg. incline <25%, variable surface, fistsize rocks/branches",
+                    "4": "4: Avg. incline <30%, poor condition, big rocks/branches",
+                    "5": "5: Very steep, bike generally needs to be pushed or carried"
+                },
+                "placeholder": "0, 1, 2, 3..."
+            },
             "name": {
-                "label": "Name"
+                "label": "Name",
+                "placeholder": "Common name (if any)"
+            },
+            "natural": {
+                "label": "Natural"
+            },
+            "network": {
+                "label": "Network"
+            },
+            "note": {
+                "label": "Note"
             },
             "office": {
                 "label": "Type"
             },
             "oneway": {
+                "label": "One Way",
                 "options": {
                     "no": "No",
+                    "undefined": "Assumed to be No",
                     "yes": "Yes"
                 }
             },
             "oneway_yes": {
+                "label": "One Way",
                 "options": {
                     "no": "No",
+                    "undefined": "Assumed to be Yes",
                     "yes": "Yes"
                 }
             },
+            "opening_hours": {
+                "label": "Hours"
+            },
+            "operator": {
+                "label": "Operator"
+            },
+            "par": {
+                "label": "Par",
+                "placeholder": "3, 4, 5..."
+            },
+            "park_ride": {
+                "label": "Park and Ride"
+            },
             "parking": {
-                "label": "Type"
+                "label": "Type",
+                "options": {
+                    "carports": "Carports",
+                    "garage_boxes": "Garage Boxes",
+                    "lane": "Roadside Lane",
+                    "multi-storey": "Multilevel",
+                    "sheds": "Sheds",
+                    "surface": "Surface",
+                    "underground": "Underground"
+                }
             },
             "phone": {
                 "label": "Telephone",
                 "placeholder": "+44 207 123456"
             },
-            "piste/grooming": {
+            "piste/difficulty": {
+                "label": "Difficulty",
                 "options": {
+                    "advanced": "Advanced (black diamond)",
+                    "easy": "Easy (green circle)",
+                    "expert": "Expert (double black diamond)",
+                    "extreme": "Extreme (climbing equipment required)",
+                    "freeride": "Freeride (off-piste)",
+                    "intermediate": "Intermediate (blue square)",
+                    "novice": "Novice (instructional)"
+                },
+                "placeholder": "Easy, Intermediate, Advanced..."
+            },
+            "piste/grooming": {
+                "label": "Grooming",
+                "options": {
+                    "backcountry": "Backcountry",
+                    "classic": "Classic",
+                    "classic+skating": "Classic and Skating",
+                    "mogul": "Mogul",
+                    "scooter": "Scooter/Snowmobile",
                     "skating": "Skating"
                 }
             },
@@ -1040,14 +1301,24 @@
             "recycling/type": {
                 "label": "Recycling Type",
                 "options": {
-                    "centre": "Recycling Centre"
+                    "centre": "Recycling Centre",
+                    "container": "Container"
                 }
+            },
+            "ref": {
+                "label": "Reference"
             },
             "relation": {
                 "label": "Type"
             },
+            "religion": {
+                "label": "Religion"
+            },
             "restriction": {
                 "label": "Type"
+            },
+            "restrictions": {
+                "label": "Turn Restrictions"
             },
             "route": {
                 "label": "Type"
@@ -1055,20 +1326,54 @@
             "route_master": {
                 "label": "Type"
             },
+            "sac_scale": {
+                "label": "Hiking Difficulty",
+                "options": {
+                    "alpine_hiking": "T4: Alpine Hiking",
+                    "demanding_alpine_hiking": "T5: Demanding Alpine Hiking",
+                    "demanding_mountain_hiking": "T3: Demanding Mountain Hiking",
+                    "difficult_alpine_hiking": "T6: Difficult Alpine Hiking",
+                    "hiking": "T1: Hiking",
+                    "mountain_hiking": "T2: Mountain Hiking"
+                },
+                "placeholder": "Mountain Hiking, Alpine Hiking..."
+            },
+            "sanitary_dump_station": {
+                "label": "Toilet Disposal"
+            },
+            "seasonal": {
+                "label": "Seasonal"
+            },
             "service": {
                 "label": "Type"
             },
             "service/bicycle/chain_tool": {
+                "label": "Chain Tool",
                 "options": {
                     "no": "No",
+                    "undefined": "Assumed to be No",
                     "yes": "Yes"
                 }
             },
             "service/bicycle/pump": {
+                "label": "Air Pump",
                 "options": {
                     "no": "No",
+                    "undefined": "Assumed to be No",
                     "yes": "Yes"
                 }
+            },
+            "service_rail": {
+                "label": "Service Type",
+                "options": {
+                    "crossover": "Crossover",
+                    "siding": "Siding",
+                    "spur": "Spur",
+                    "yard": "Yard"
+                }
+            },
+            "shelter": {
+                "label": "Shelter"
             },
             "shelter_type": {
                 "label": "Type"
@@ -1079,11 +1384,20 @@
             "site": {
                 "label": "Type"
             },
+            "sloped_curb": {
+                "label": "Sloped Curb"
+            },
+            "smoking": {
+                "label": "Smoking",
+                "options": {
+                    "dedicated": "Dedicated to smokers (e.g. smokers' club)",
+                    "isolated": "In smoking areas, physically isolated",
+                    "no": "No smoking anywhere",
+                    "outside": "Allowed outside"
+                }
+            },
             "structure": {
                 "placeholder": "Unknown"
-            },
-            "studio_type": {
-                "label": "Type"
             },
             "substation": {
                 "label": "Type"

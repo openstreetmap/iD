@@ -278,7 +278,6 @@
         "custom": "Custom",
         "custom_button": "I-edit ang custom na background",
         "custom_prompt": "Magpasok ng template na tile URL. Ang wastong mga token ay {z}, {x}, {y} para sa Z/X/Y scheme at {u} naman para sa quadtile scheme.",
-        "fix_misalignment": "Ayusin ang pagkakahanay ng \"imagery\"",
         "reset": "I-reset"
     },
     "feature": {
@@ -503,9 +502,6 @@
                 "label": "Uri"
             },
             "shop": {
-                "label": "Uri"
-            },
-            "studio_type": {
                 "label": "Uri"
             },
             "tourism": {

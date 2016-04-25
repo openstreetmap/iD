@@ -253,7 +253,9 @@
         "deleted": "Borttaget",
         "created": "Skapat",
         "about_changeset_comments": "Om ändringskommentarer",
-        "about_changeset_comments_link": "//wiki.openstreetmap.org/wiki/Good_changeset_comments"
+        "about_changeset_comments_link": "//wiki.openstreetmap.org/wiki/Good_changeset_comments",
+        "google_warning": "Du nämnde Google i kommentaren: kom ihåg att det är strängt förbjudet att kopiera från Google Maps",
+        "google_warning_link": "http://www.openstreetmap.org/copyright/sv"
     },
     "contributors": {
         "list": "Ändrad av {users}",
@@ -333,6 +335,7 @@
         "fix_misalignment": "Justera bildplacering",
         "imagery_source_faq": "Var kommer dessa flygfoton från?",
         "reset": "ta bort",
+        "offset": "Dra i den grå ytan nedan för att justera bildplaceringen, eller ange hur mycket det ska justeras i meter.",
         "minimap": {
             "description": "Minikarta",
             "tooltip": "Visar en utzoomad karta för att hjälpa dig att hitta i området som visas för tillfället."
@@ -1437,7 +1440,7 @@
                 },
                 "placeholder": "Okänt"
             },
-            "studio_type": {
+            "studio": {
                 "label": "Typ"
             },
             "substation": {
@@ -1853,6 +1856,10 @@
             "amenity/post_office": {
                 "name": "Postkontor",
                 "terms": "Postkontor, post, posten, postverk, postväsende, brev, paket, försändelser, postgång, kort, frimärke,"
+            },
+            "amenity/prison": {
+                "name": "Fängelseområde",
+                "terms": "Fängelseområde, fängelse, fånganstalt, anstalt, fångvårdsanstalt, häkte, polisarrest, arrest, finka, fängelseförvar"
             },
             "amenity/pub": {
                 "name": "Pub",
@@ -3490,6 +3497,10 @@
                 "name": "Klädaffär",
                 "terms": "Klädaffär, kläder, klädbutik, ekipering"
             },
+            "shop/coffee": {
+                "name": "Kaffeaffär",
+                "terms": "kaffeaffär, kaffeböner, kaffebönor, kaffepulver, bryggkaffe, kaffe"
+            },
             "shop/computer": {
                 "name": "Datorbutik",
                 "terms": "Datorbutik, datoraffär, data, dator, datorer, datorhårdvara, datorprogram, datorförsäljning"
@@ -3685,6 +3696,10 @@
             "shop/newsagent": {
                 "name": "Tidningsaffär",
                 "terms": "Tidningsaffär, pressbyrå, pressbyrån, kiosk, tidningskiosk, tidningsställ, tidningar, magasin, tidskrifter"
+            },
+            "shop/nutrition_supplements": {
+                "name": "Hälsokost",
+                "terms": "Hälsokost, hälsa, viktminskning, hälsoprodukter, vitaminer, mineraler, hälsoörter"
             },
             "shop/optician": {
                 "name": "Optiker",

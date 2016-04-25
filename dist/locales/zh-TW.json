@@ -253,7 +253,9 @@
         "deleted": "已刪除",
         "created": "已建立",
         "about_changeset_comments": "關於編輯變動",
-        "about_changeset_comments_link": "//wiki.openstreetmap.org/wiki/Good_changeset_comments"
+        "about_changeset_comments_link": "//wiki.openstreetmap.org/wiki/Good_changeset_comments",
+        "google_warning": "您在此留言中提到了 Google：請注意從 Google 地圖是嚴格禁止的。",
+        "google_warning_link": "http://www.openstreetmap.org/copyright"
     },
     "contributors": {
         "list": "正顯示 {users} 的編輯",
@@ -330,9 +332,10 @@
         "custom": "客製化",
         "custom_button": "編輯自訂的背景",
         "custom_prompt": "輸入地圖影像區塊的URL模版。以 Z/X/Y 方式存取區塊的伺服器，可在模版中使用{z}, {x}, {y}作參數，而以quadtile存取區塊的伺服器，則可使用{u}作參數。",
-        "fix_misalignment": "校準",
+        "fix_misalignment": "調整影像偏移",
         "imagery_source_faq": "影像是從那裡來的呢？",
         "reset": "重設",
+        "offset": "在灰色區域內拖拉調整影像偏移，或是輸入偏移公尺數。",
         "minimap": {
             "description": "小地圖",
             "tooltip": "顯示縮小的地圖幫助你確認所在區域的位置"
@@ -1437,7 +1440,7 @@
                 },
                 "placeholder": "未知種類"
             },
-            "studio_type": {
+            "studio": {
                 "label": "種類"
             },
             "substation": {
@@ -1853,6 +1856,10 @@
             "amenity/post_office": {
                 "name": "郵局",
                 "terms": "中華郵政,郵政公司,郵便局"
+            },
+            "amenity/prison": {
+                "name": "監獄範圍",
+                "terms": "監獄,監獄範圍"
             },
             "amenity/pub": {
                 "name": "Pub",
@@ -3490,6 +3497,10 @@
                 "name": "服飾店",
                 "terms": "衣服店,賣衣店"
             },
+            "shop/coffee": {
+                "name": "咖啡店",
+                "terms": "咖啡廳, 咖啡館"
+            },
             "shop/computer": {
                 "name": "電腦店",
                 "terms": "電腦店"
@@ -3685,6 +3696,10 @@
             "shop/newsagent": {
                 "name": "報紙/雜誌攤",
                 "terms": "報刊攤,報刊商店"
+            },
+            "shop/nutrition_supplements": {
+                "name": "營養補充品店",
+                "terms": "營養補充品店, 保健食品專賣店"
             },
             "shop/optician": {
                 "name": "眼鏡行",

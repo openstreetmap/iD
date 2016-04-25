@@ -253,7 +253,9 @@
         "deleted": "Вилучено",
         "created": "Створено",
         "about_changeset_comments": "Про опис наборів змін",
-        "about_changeset_comments_link": "//wiki.openstreetmap.org/wiki/Uk:Good_changeset_comments"
+        "about_changeset_comments_link": "//wiki.openstreetmap.org/wiki/Uk:Good_changeset_comments",
+        "google_warning": "Ви загадали Google в цьому коментарі; запамʼятайте, що використовувати Google Maps забороняється!",
+        "google_warning_link": "http://www.openstreetmap.org/copyright"
     },
     "contributors": {
         "list": "Редагували: {users}",
@@ -330,9 +332,10 @@
         "custom": "Власний фон",
         "custom_button": "Параметри власного фону",
         "custom_prompt": "Введіть шаблон URL для квадратів мапи. Використовуйте  {z}, {x}, {y} для схеми Z/X/Y та {u} для схеми QuadTiles.",
-        "fix_misalignment": "Виправити зсув",
+        "fix_misalignment": "Виправте зсув фону",
         "imagery_source_faq": "Звідки ці знімки?",
         "reset": "скинути",
+        "offset": "Перетягніть сіре поле в потрібному напрямку для підлаштування зміщення фону, або введіть значення зміщення в метрах.",
         "minimap": {
             "description": "Мінімапа",
             "tooltip": "Показує зменшену мапу, щоб допомогти з’ясувати місцезнаходження поточної ділянки."
@@ -1437,7 +1440,7 @@
                 },
                 "placeholder": "Невідомо"
             },
-            "studio_type": {
+            "studio": {
                 "label": "Тип"
             },
             "substation": {
@@ -3490,6 +3493,10 @@
                 "name": "Одяг",
                 "terms": "Clothing Store, jlzu, одяг"
             },
+            "shop/coffee": {
+                "name": "Крамниця кави",
+                "terms": "кава,крамниця,магазин"
+            },
             "shop/computer": {
                 "name": "Комп’ютери",
                 "terms": "Computer Store, rjvgnthb, комп’ютери"
@@ -3685,6 +3692,10 @@
             "shop/newsagent": {
                 "name": "Преса",
                 "terms": "новини, журнал, газета"
+            },
+            "shop/nutrition_supplements": {
+                "name": "Магазин храчових добавок",
+                "terms": "вітаміни,мінерали,спортивне харчування,дієтичне харчування,амінокіслоти"
             },
             "shop/optician": {
                 "name": "Оптика",

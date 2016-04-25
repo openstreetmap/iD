@@ -253,7 +253,9 @@
         "deleted": "Đã Xóa",
         "created": "Đã Tạo",
         "about_changeset_comments": "Nên tóm lược sửa đổi như thế nào?",
-        "about_changeset_comments_link": "//wiki.openstreetmap.org/wiki/Good_changeset_comments?setlang=vi"
+        "about_changeset_comments_link": "//wiki.openstreetmap.org/wiki/Good_changeset_comments?setlang=vi",
+        "google_warning": "Bạn đã đề cập đến Google trong lời tóm lược này. Chú ý cấm sao chép từ Google Maps.",
+        "google_warning_link": "http://www.openstreetmap.org/copyright/vi"
     },
     "contributors": {
         "list": "Đóng góp bởi {users}",
@@ -330,9 +332,10 @@
         "custom": "Tùy biến",
         "custom_button": "Sửa hình nền tùy biến",
         "custom_prompt": "Nhập định dạng URL của các mảnh bản đồ. Bạn có thể sử dụng các dấu hiệu {z}, {x}, {y} cho định dạng Z/X/Y hoặc {u} cho định dạng quadtile.",
-        "fix_misalignment": "Điều chỉnh lại",
+        "fix_misalignment": "Chỉnh độ lệch hình ảnh",
         "imagery_source_faq": "Hình ảnh này được lấy từ đâu?",
         "reset": "đặt lại",
+        "offset": "Kéo thả chuột ở vùng màu xám bên dưới để chỉnh độ lệch hình ảnh, hoặc nhập độ lệch được đo bằng mét.",
         "minimap": {
             "description": "Bản đồ nhỏ",
             "tooltip": "Mở một bản đồ thu nhỏ định vị trí đang được sửa đổi."
@@ -1437,8 +1440,8 @@
                 },
                 "placeholder": "Không rõ"
             },
-            "studio_type": {
-                "label": "Loại"
+            "studio": {
+                "label": "Kiểu"
             },
             "substation": {
                 "label": "Kiểu"
@@ -3490,6 +3493,10 @@
                 "name": "Tiệm Quần áo",
                 "terms": "tiệm quần áo, cửa hàng quần áo, chỗ bán bộ quần áo, tiem quan ao, cua hang quan ao, cho ban bo quan ao"
             },
+            "shop/coffee": {
+                "name": "Tiệm Bột Cà phê",
+                "terms": "tiệm bột cà phê, tiệm bột cà-phê, cửa hàng bột cà phê, cửa hàng bột cà-phê, quầy bột cà phê, quầy bột cà-phê, tiem bot ca phe, tiem bot ca-phe, cua hang bot ca phe, cua hang bot ca-phe, quay bot ca phe, quay bot ca-phe"
+            },
             "shop/computer": {
                 "name": "Tiệm Máy tính",
                 "terms": "tiệm máy tính, cửa hàng máy tính, vi tính, computer, màn hình, máy in, máy quét, phần mềm, nhu liệu, tiem may tinh, cua hang may tinh, vi tinh, man hinh, may in, may quet, phan mem, nhu lieu"
@@ -3685,6 +3692,10 @@
             "shop/newsagent": {
                 "name": "Tiệm Báo",
                 "terms": "tiệm báo, cửa hàng báo, cửa hiệu báo, quán báo, tiệm tạp chí, cửa hàng tạp chí, cửa hiệu tạp chí, quán tạp chí, tiem bao, cua hang bao, cua hieu bao, quan bao, tiem tap chi, cua hang tap chi, cua hieu tap chi, quan tap chi"
+            },
+            "shop/nutrition_supplements": {
+                "name": "Tiệm Thuốc bổ",
+                "terms": "tiệm thuốc bổ, tiệm thuốc uống bổ trợ, cửa hàng thuốc bổ, cửa hàng thuốc uống bổ trợ, quầy thuốc bổ, quầy thuốc uống bổ trợ, tiem thuoc bo, tiem thuoc uong bo tro, cua hang thuoc bo, cua hang thuoc uong bo tro, quay thuoc bo, quay thuoc uong bo tro"
             },
             "shop/optician": {
                 "name": "Tiệm Kính mắt",

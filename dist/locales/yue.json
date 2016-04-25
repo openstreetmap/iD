@@ -256,7 +256,6 @@
         "percent_brightness": "{opacity}% 光",
         "none": "無",
         "custom": "自訂",
-        "fix_misalignment": "校正對位誤差",
         "reset": "重設"
     },
     "restore": {

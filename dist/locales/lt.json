@@ -316,7 +316,6 @@
         "custom": "Savas",
         "custom_button": "Redaguoti pasirinktiną foną",
         "custom_prompt": "Įveskite kaladėlių URL šabloną. Galimi ženklai yra {z}, {x}, {y} Z/X/Y schemai ir {u} quadtile schemai.",
-        "fix_misalignment": "Taisyti poziciją",
         "reset": "iš naujo",
         "minimap": {
             "description": "Minižemėlapis",
@@ -1264,9 +1263,6 @@
                     "tunnel": "Tunelis"
                 },
                 "placeholder": "Nežinoma"
-            },
-            "studio_type": {
-                "label": "Tipas"
             },
             "substation": {
                 "label": "Tipas"

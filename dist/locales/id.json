@@ -316,7 +316,6 @@
         "custom": "Custom",
         "custom_button": "Ubah tampilan latar kustom",
         "custom_prompt": "Masukkan template URL. Token yang diperbolehkan adalah  {z}, {x}, {y} untuk skema Z/X/Y dan {u} untuk skema quadtile.",
-        "fix_misalignment": "Perbaiki perataan",
         "reset": "ulang",
         "minimap": {
             "description": "Peta mini",
@@ -1141,9 +1140,6 @@
                     "tunnel": "Terowongan"
                 },
                 "placeholder": "Tak Diketahui"
-            },
-            "studio_type": {
-                "label": "Tipe"
             },
             "surface": {
                 "label": "Permukaan"

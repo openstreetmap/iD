@@ -324,7 +324,6 @@
         "custom": "Voliteľné",
         "custom_button": "Upraviť volitelné pozadie",
         "custom_prompt": "Zadajte URL pre vzor mapového podkladu. Platné znaky sú {z}, {x}, {y} pre Z/X/Y schému a {u} pre quadtile schému.",
-        "fix_misalignment": "Oprav zarovnanie",
         "reset": "vynulovať",
         "minimap": {
             "description": "Náhľad mapy",
@@ -1326,9 +1325,6 @@
                     "tunnel": "Tunel"
                 },
                 "placeholder": "Neznáme"
-            },
-            "studio_type": {
-                "label": "Typ"
             },
             "substation": {
                 "label": "Typ"

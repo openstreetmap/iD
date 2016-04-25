@@ -310,7 +310,6 @@
         "none": "هیچ",
         "custom": "سفارشی",
         "custom_button": "ویرایش پشت زمینه سفارشی",
-        "fix_misalignment": "تعمیر تراز",
         "reset": "باز نشاندن",
         "minimap": {
             "tooltip": "برای پیدا کردن محل منطقه نشان داده شده، یک نقشه کوچک نمایی نشان بده"
@@ -1212,9 +1211,6 @@
                     "tunnel": "تونل"
                 },
                 "placeholder": "ناشناخته"
-            },
-            "studio_type": {
-                "label": "نوع"
             },
             "substation": {
                 "label": "نوع"

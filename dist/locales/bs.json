@@ -252,7 +252,6 @@
         "percent_brightness": "prozirnost {opacity}% ",
         "none": "Ništa",
         "custom": "Prilagođena pozadina",
-        "fix_misalignment": "Popravite poravnanje",
         "reset": "ponovo postavite"
     },
     "restore": {
@@ -701,9 +700,6 @@
                     "tunnel": "Tunel"
                 },
                 "placeholder": "Nepoznato"
-            },
-            "studio_type": {
-                "label": "Vrsta"
             },
             "supervised": {
                 "label": "Pod nadzorom"

@@ -304,7 +304,6 @@
         "none": "Κανένα",
         "custom": "Εξατομικευμένο",
         "custom_button": "Επεξεργασία εξατομικευμένου παρασκηνίου",
-        "fix_misalignment": "Διόρθωση ευθυγράμμισης",
         "reset": "Μηδενισμός",
         "minimap": {
             "description": "Μικροχάρτης",
@@ -990,9 +989,6 @@
                     "tunnel": "Σήραγγα"
                 },
                 "placeholder": "Άγνωστο"
-            },
-            "studio_type": {
-                "label": "Τύπος"
             },
             "supervised": {
                 "label": "Επιτηρείται"

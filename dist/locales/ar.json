@@ -293,7 +293,6 @@
         "none": "لا شيء",
         "custom": "الجمارك",
         "custom_button": "تحرير خلفية مخصصة",
-        "fix_misalignment": "إصلح المحاذاة",
         "reset": "إعادة الضبط",
         "minimap": {
             "description": "خريطة مصغّرة",
@@ -989,9 +988,6 @@
                     "tunnel": "نفق"
                 },
                 "placeholder": "غير معروف"
-            },
-            "studio_type": {
-                "label": "النوع"
             },
             "substation": {
                 "label": "النوع"

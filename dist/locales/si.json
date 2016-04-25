@@ -291,7 +291,6 @@
         "none": "කිසිවක් නැත",
         "custom": "රිසි පරදී සැකසු",
         "custom_button": "පසුතලය රිසි පරිදි සැකසීම සදහා",
-        "fix_misalignment": "එක එල්ලෙට ගැනීමට",
         "reset": "යළි පිහිටුවනවා"
     },
     "map_data": {
@@ -543,9 +542,6 @@
                 "label": "වර්ගය"
             },
             "shop": {
-                "label": "වර්ගය"
-            },
-            "studio_type": {
                 "label": "වර්ගය"
             },
             "substation": {

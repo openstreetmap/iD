@@ -791,7 +791,7 @@
                 "label": "Type"
             },
             "levels": {
-                "label": "Nivå",
+                "label": "Etasjer",
                 "placeholder": "2, 4, 6..."
             },
             "location": {
@@ -939,9 +939,6 @@
                     "tunnel": "Tunnel"
                 },
                 "placeholder": "Ukjent"
-            },
-            "studio_type": {
-                "label": "Type"
             },
             "substation": {
                 "label": "Type"

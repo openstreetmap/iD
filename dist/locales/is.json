@@ -43,6 +43,7 @@
         "continue": {
             "key": " ",
             "title": "Halda áfram",
+            "description": "Halda áfram með línu.",
             "not_eligible": "Ekki hægt að framlengja neina línu hér.",
             "multiple": "Hægt er að halda áfram með nokkrar línur héðan. Veldu línu með því að ýta á Shift og velja rétta línu.",
             "annotation": {
@@ -70,11 +71,14 @@
                 "line": "Gerði línu að hring.",
                 "area": "Gerði svæði að hring."
             },
-            "not_closed": "Það er ekki hægt að gera þetta hringlaga því að það er ekki samfelld röð hnúta."
+            "not_closed": "Það er ekki hægt að gera þetta hringlaga því að það er ekki samfelld röð hnúta.",
+            "too_large": "Ekki er hægt að gera þetta hringlaga því að það sést ekki í nógu mikið af því.",
+            "connected_to_hidden": "Ekki er hægt að gera þetta að hring því að það tengist földu eigindi."
         },
         "orthogonalize": {
             "title": "Ferhyrningur",
             "description": {
+                "line": "Rétta horn þessarar línu.",
                 "area": "Rétta horn þessa svæðis."
             },
             "key": "S",
@@ -83,7 +87,8 @@
                 "area": "Réttaði horn svæðis."
             },
             "not_squarish": "Það er ekki hægt að hornrétta þetta því að það er ekki kassalaga",
-            "too_large": "Ekki hægt að hornrétta þar sem hluti er utan sjónsviðs."
+            "too_large": "Ekki hægt að hornrétta þar sem hluti er utan sjónsviðs.",
+            "connected_to_hidden": "Ekki er hægt að hornrétta þetta því að það tengist földu eigindi."
         },
         "straighten": {
             "title": "Slétta",

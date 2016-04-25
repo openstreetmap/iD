@@ -253,7 +253,9 @@
         "deleted": "Obrisano",
         "created": "Stvoreno",
         "about_changeset_comments": "O komentarima promjena",
-        "about_changeset_comments_link": "//wiki.openstreetmap.org/wiki/Good_changeset_comments"
+        "about_changeset_comments_link": "//wiki.openstreetmap.org/wiki/Good_changeset_comments",
+        "google_warning": "Spomenuo/la si Google u ovom komentaru: molim te zapamti da je kopiranje s Google karata strogo zabranjeno.",
+        "google_warning_link": "http://www.openstreetmap.org/copyright"
     },
     "contributors": {
         "list": "Uređivali {users}",
@@ -330,9 +332,10 @@
         "custom": "Podesivo",
         "custom_button": "Uredi prilagođenu pozadinu",
         "custom_prompt": "Unesi URL predložak za popločavanje. Ispravni znakovi su {z}, {x}, {y} za Z/X/Y shemu i {u} za quadtile shemu.",
-        "fix_misalignment": "Popravi odstupanje",
+        "fix_misalignment": "Popravi odstupanje snimaka",
         "imagery_source_faq": "Koji je izvornik snimaka?",
         "reset": "resetiraj",
+        "offset": "Pomakni bilo gdje na donjem sivom području za usklađivanje snimaka, ili unesi iznose odstupanja u metrima.",
         "minimap": {
             "description": "Mini-karta",
             "tooltip": "Prikaži odzumiranu kartu za lakše lociranje trenutno prikazanog područja."
@@ -352,10 +355,12 @@
             "tooltip": "Interesne točke"
         },
         "traffic_roads": {
+            "description": "Autoceste",
             "tooltip": "Prometnice, ulice, itd."
         },
         "service_roads": {
-            "description": "Pristupna cesta"
+            "description": "Pristupne ceste",
+            "tooltip": "Pristupne ceste, parkirni prolazi, zemljani putovi, itd."
         },
         "paths": {
             "description": "Staze",
@@ -998,7 +1003,7 @@
                 "label": "Vrsta"
             },
             "golf_hole": {
-                "label": "Preporuka",
+                "label": "Redni broj",
                 "placeholder": "Broj rupa (1-18)"
             },
             "handicap": {
@@ -1122,6 +1127,9 @@
                 "label": "Ograničenje brzine",
                 "placeholder": "40, 50, 60..."
             },
+            "maxstay": {
+                "label": "Maks. ostanak"
+            },
             "mtb/scale": {
                 "label": "Težina brdske biciklističke staze",
                 "options": {
@@ -1197,7 +1205,7 @@
                 "label": "Operator"
             },
             "par": {
-                "label": "Jednakost",
+                "label": "Vrsta rupe (par)",
                 "placeholder": "3, 4, 5..."
             },
             "park_ride": {
@@ -1432,9 +1440,6 @@
                 },
                 "placeholder": "Nepoznat"
             },
-            "studio_type": {
-                "label": "Vrsta"
-            },
             "substation": {
                 "label": "Vrsta"
             },
@@ -1639,6 +1644,9 @@
             "amenity/bicycle_repair_station": {
                 "name": "Stalak sa alatima za bicikle"
             },
+            "amenity/biergarten": {
+                "name": "Pivnica na otvorenom"
+            },
             "amenity/boat_rental": {
                 "name": "Najam brodova",
                 "terms": "rentanje brodova,rentanje broda,iznajmljivanje brodova,iznajmljivanje broda,najam brodova,najam broda,rentanje čamaca,rentanje čamca,iznajmljivanje čamaca,iznajmljivanje čamca,najam čamaca,najam čamca,rent a boat"
@@ -1681,7 +1689,8 @@
                 "terms": "dvorana za gledanje filmova,kinematograf,kino dvorana"
             },
             "amenity/clinic": {
-                "name": "Klinika"
+                "name": "Klinika",
+                "terms": "klinika,ambulanta,"
             },
             "amenity/clock": {
                 "name": "Sat"
@@ -1743,7 +1752,8 @@
                 "name": "Kanta sa šljunkom za poledicu"
             },
             "amenity/hospital": {
-                "name": "Bolničko zemljište"
+                "name": "Bolničko zemljište",
+                "terms": "Bolnica,klinika,klinički centar"
             },
             "amenity/hunting_stand": {
                 "name": "Lovačka čeka"
@@ -1824,6 +1834,9 @@
             },
             "amenity/recycling": {
                 "name": "Recikliranje"
+            },
+            "amenity/register_office": {
+                "name": "Matični ured"
             },
             "amenity/restaurant": {
                 "name": "Restoran",
@@ -2275,14 +2288,36 @@
             "ford": {
                 "name": "Prijelaz preko potoka"
             },
+            "golf/bunker": {
+                "name": "Pješčana prepreka",
+                "terms": "sand trap"
+            },
+            "golf/fairway": {
+                "name": "Glavni dio rupe (fairway)",
+                "terms": "fairway"
+            },
+            "golf/green": {
+                "name": "Završni zeleni dio (green)",
+                "terms": "putting green,green"
+            },
             "golf/hole": {
-                "name": "Golfska rupa"
+                "name": "Golfska jamica",
+                "terms": "rupa"
+            },
+            "golf/lateral_water_hazard": {
+                "name": "Vodena prepreka sa strane",
+                "terms": "lateral water hazard"
             },
             "golf/rough": {
                 "name": "Grubo"
             },
+            "golf/water_hazard": {
+                "name": "Vodena prepreka",
+                "terms": "water hazard"
+            },
             "highway": {
-                "name": "Prometnica"
+                "name": "Prometnica",
+                "terms": "cesta,ulica,put"
             },
             "highway/bridleway": {
                 "name": "Staza za konje"
@@ -2354,7 +2389,7 @@
                 "name": "Pristupna cesta županijske ceste"
             },
             "highway/service": {
-                "name": "Servisna cesta"
+                "name": "Pristupna cesta"
             },
             "highway/service/alley": {
                 "name": "Servisna ulica između blokova"
@@ -2521,7 +2556,7 @@
                 "terms": "vrt,bašća,povrtnjak,cvjetnjak"
             },
             "leisure/golf_course": {
-                "name": "Golf tečaj",
+                "name": "Igralište za golf",
                 "terms": "golf teren"
             },
             "leisure/ice_rink": {

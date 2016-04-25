@@ -96,7 +96,7 @@
             "key": "S",
             "annotation": "Wyprostowano linię.",
             "too_bendy": "Nie można wyprostować tej linii gdyż zakręca ona zbyt mocno.",
-            "connected_to_hidden": "Ta linia nie może być wyprostowana, ponieważ jest połączona z innym niewidocznym obiektem lub jego cechą. "
+            "connected_to_hidden": "Ta linia nie może być wyprostowana, ponieważ jest połączona z innym niewidocznym obiektem."
         },
         "delete": {
             "title": "Usuń",
@@ -133,7 +133,8 @@
             "key": "D",
             "annotation": "Rozłączono drogi/obszary.",
             "not_connected": "Nie ma tu wystarczająco wielu linii/obszarów do rozłączenia.",
-            "connected_to_hidden": "Tego obiektu nie można odłączyć, ponieważ jest połączony z innym niewidocznym obiektem lub jego cechą. "
+            "connected_to_hidden": "Tego obiektu nie można odłączyć, ponieważ jest połączony z innym niewidocznym obiektem lub jego cechą. ",
+            "relation": "Tego obiektu nie można odłączyć, ponieważ łączy on członków pewnej relacji."
         },
         "merge": {
             "title": "Scal",
@@ -329,7 +330,7 @@
         "custom": "Własne",
         "custom_button": "Edycja własnego podkładu",
         "custom_prompt": "Wprowadź szablon URL dla kafelków. Dozwolone elementy to {z}, {x}, {y} dla schematu Z/X/Y oraz {u} dla schematu quadtile.",
-        "fix_misalignment": "Wyrównaj podkład",
+        "fix_misalignment": "Wyrównaj przesunięcie podkładu",
         "imagery_source_faq": "Skąd pochodzi ta warstwa?",
         "reset": "resetuj",
         "minimap": {
@@ -351,6 +352,7 @@
             "tooltip": "Użyteczne miejsce (POI)"
         },
         "traffic_roads": {
+            "description": "Drogi Samochodowe",
             "tooltip": "Drogi, ulice itp."
         },
         "service_roads": {
@@ -594,6 +596,7 @@
         },
         "startediting": {
             "title": "Rozpocznij edytowanie",
+            "help": "Możesz ponownie przejrzeć tego samouczka lub zajrzeć do dokumentacji za pomocą {button} przycisku \"Pomoc\"",
             "save": "Nie zapomnij o regularnym zapisywaniu swoich zmian!",
             "start": "Zacznij mapować!"
         }
@@ -866,6 +869,7 @@
                         "description": "Pas rowerowy nieoddzielony od pasa ruchu"
                     },
                     "track": {
+                        "description": "Pas rowerowy wydzielony z jezdni fizyczną barierą",
                         "title": "Wydzielona droga rowerowa (nie pas)"
                     }
                 },
@@ -910,7 +914,7 @@
                 "label": "Wysokość n.p.m. (WGS84)"
             },
             "emergency": {
-                "label": "Pogotowie"
+                "label": "W razie niebezpieczeństwa"
             },
             "entrance": {
                 "label": "Typ"
@@ -1216,10 +1220,14 @@
             "piste/difficulty": {
                 "label": "Stopień trudności",
                 "options": {
-                    "easy": "Łatwy (zielony okrąg)",
-                    "extreme": "Ekstremalna (konieczne wyposażenie wspinaczkowe)"
+                    "advanced": "Zaawansowana (czarny romb)",
+                    "easy": "Łatwa (zielony okrąg)",
+                    "expert": "Ekspercka (podwójny czarny romb)",
+                    "extreme": "Ekstremalna (konieczne wyposażenie wspinaczkowe)",
+                    "freeride": "Zjazd pozatrasowy",
+                    "intermediate": "Średni (niebieski kwadrat)"
                 },
-                "placeholder": "Łatwy, Średni, Zaawansowany..."
+                "placeholder": "Łatwa, Średnia, Zaawansowana..."
             },
             "piste/grooming": {
                 "label": "Ratrakowanie",
@@ -1231,6 +1239,8 @@
                 "label": "Typ",
                 "options": {
                     "downhill": "Downhill",
+                    "hike": "Turystyka piesza",
+                    "nordic": "Kombinacja norweska",
                     "playground": "Nauka jazdy na nartach",
                     "sled": "Tor saneczkowy",
                     "snow_park": "Snowpark"
@@ -1244,6 +1254,9 @@
             },
             "power": {
                 "label": "Typ"
+            },
+            "power_supply": {
+                "label": "Zasilacz"
             },
             "railway": {
                 "label": "Typ"
@@ -1393,9 +1406,6 @@
                 },
                 "placeholder": "Nieznane"
             },
-            "studio_type": {
-                "label": "Typ"
-            },
             "substation": {
                 "label": "Typ"
             },
@@ -1495,7 +1505,8 @@
                 "terms": "kolejka"
             },
             "aerialway/cable_car": {
-                "name": "Kolejka górska"
+                "name": "Kolejka górska",
+                "terms": "kolejka górska wagonikowa"
             },
             "aerialway/chair_lift": {
                 "name": "Wyciag krzesełkowy",
@@ -1582,7 +1593,8 @@
                 "terms": "knajpa,wyszynk"
             },
             "amenity/bbq": {
-                "name": "Grill"
+                "name": "Grill",
+                "terms": "grill,barbecue"
             },
             "amenity/bench": {
                 "name": "Ławka",
@@ -1600,7 +1612,8 @@
                 "name": "Samoobsługowa stacja naprawy rowerów"
             },
             "amenity/biergarten": {
-                "name": "Ogródek piwny"
+                "name": "Ogródek piwny",
+                "terms": "ogródek piwny"
             },
             "amenity/boat_rental": {
                 "name": "Wypożyczalnia łodzi",
@@ -1622,14 +1635,16 @@
                 "terms": "wypożyczalnia samochodów"
             },
             "amenity/car_sharing": {
-                "name": "Car-sharing"
+                "name": "Car-sharing",
+                "terms": "car-sharing,wspólne użytkowanie samochodów"
             },
             "amenity/car_wash": {
                 "name": "Myjnia samochodowa",
                 "terms": "myjnia"
             },
             "amenity/casino": {
-                "name": "Kasyno"
+                "name": "Kasyno",
+                "terms": "kasyno"
             },
             "amenity/charging_station": {
                 "name": "Stacja ładowania pojazdów"
@@ -1713,7 +1728,8 @@
                 "terms": "Teren szpitala, szpital, służba zdrowia, ambulatorium, chirurgia, oddział"
             },
             "amenity/hunting_stand": {
-                "name": "Ambona strzelnicza"
+                "name": "Ambona strzelnicza",
+                "terms": "ambona strzelnicza"
             },
             "amenity/kindergarten": {
                 "name": "Teren przedszkola",
@@ -1797,6 +1813,9 @@
                 "name": "Restauracja",
                 "terms": "bar,kawiarnia,stołówka,jadalnia,drive-in,knajpa,jadłodajnia,fast food,grill,gospoda,klub nocny,pizzeria,karczma,zajazd"
             },
+            "amenity/sanitary_dump_station": {
+                "name": "Miejsce opróżniania toalety (dla kamperów)"
+            },
             "amenity/school": {
                 "name": "Teren szkoły",
                 "terms": "tereny szkolne"
@@ -1847,6 +1866,9 @@
             "amenity/university": {
                 "name": "Teren uczelni wyższej",
                 "terms": "teren uniwersytetu,teren akademii,teren politechniki"
+            },
+            "amenity/vending_machine/cigarettes": {
+                "name": "Automat z papierosami"
             },
             "amenity/vending_machine/condoms": {
                 "name": "Automat z prezerwatywami"
@@ -2045,6 +2067,9 @@
             },
             "building/school": {
                 "name": "Budynek szkolny"
+            },
+            "building/semidetached_house": {
+                "name": "Bliźniak"
             },
             "building/shed": {
                 "name": "Szopa",
@@ -2262,6 +2287,13 @@
             "golf/hole": {
                 "name": "dołek na polu golfowym "
             },
+            "golf/lateral_water_hazard": {
+                "name": "Poprzeczna przeszkoda wodna",
+                "terms": "Przeszkoda wodna, Golf woda"
+            },
+            "golf/water_hazard": {
+                "name": "Przeszkoda Wodna"
+            },
             "highway": {
                 "name": "Droga",
                 "terms": "droga,szlak,ulica"
@@ -2304,7 +2336,8 @@
                 "terms": "autostrada"
             },
             "highway/motorway_junction": {
-                "name": "Wjazd/zjazd z autostrady"
+                "name": "Wjazd/zjazd z autostrady",
+                "terms": "wjazd/zjazd na autostradę"
             },
             "highway/motorway_link": {
                 "name": "Autostrada - wjazd/zjazd",
@@ -2474,7 +2507,7 @@
                 "name": "Dziedziniec kościelny"
             },
             "landuse/commercial": {
-                "name": "Obszar komercyjny"
+                "name": "Obszar biurowo-biznesowy"
             },
             "landuse/construction": {
                 "name": "Budowa",
@@ -2543,6 +2576,10 @@
                 "name": "Rozrywka i wypoczynek",
                 "terms": "Wypoczynek, czas wolny"
             },
+            "leisure/adult_gaming_centre": {
+                "name": "Salon gier hazardowych",
+                "terms": "automat do gier"
+            },
             "leisure/bird_hide": {
                 "name": "Czatownia ornitologiczna"
             },
@@ -2597,6 +2634,12 @@
                 "name": "Boisko do koszykówki",
                 "terms": "boisko do koszykówki "
             },
+            "leisure/pitch/rugby_league": {
+                "name": "Boisko rugby league"
+            },
+            "leisure/pitch/rugby_union": {
+                "name": "Boisko rugby league"
+            },
             "leisure/pitch/skateboard": {
                 "name": "Skate park",
                 "terms": "skate,park,rolki,deskorolka,bmx"
@@ -2623,6 +2666,9 @@
             "leisure/slipway": {
                 "name": "Pochylnia okrętowa",
                 "terms": "pochylnia"
+            },
+            "leisure/sports_centre": {
+                "name": "Ośrodek Sportu / Siłownia"
             },
             "leisure/stadium": {
                 "name": "Stadion",
@@ -2698,8 +2744,12 @@
             "man_made/storage_tank": {
                 "name": "Zbiornik"
             },
+            "man_made/surveillance": {
+                "name": "Monitoring"
+            },
             "man_made/survey_point": {
-                "name": "Punkt geodezyjny"
+                "name": "Punkt geodezyjny",
+                "terms": "punkt geodezyjny"
             },
             "man_made/tower": {
                 "name": "Wieża",
@@ -2735,10 +2785,15 @@
                 "terms": "bunkier, schron,"
             },
             "military/checkpoint": {
-                "name": "Wojskowy punkt kontrolny"
+                "name": "Wojskowy punkt kontrolny",
+                "terms": "Rogatka wojskowa"
             },
             "military/naval_base": {
                 "name": "Port wojenny"
+            },
+            "military/obstacle_course": {
+                "name": "Kurs Przeszkód",
+                "terms": "Tor Przeszkód"
             },
             "military/range": {
                 "name": "Poligon wojskowy"
@@ -2747,10 +2802,12 @@
                 "name": "Poligon wojskowy"
             },
             "natural": {
-                "name": "Natura"
+                "name": "Natura",
+                "terms": "Przyroda"
             },
             "natural/bay": {
-                "name": "Zatoka"
+                "name": "Zatoka",
+                "terms": "Zatoczka"
             },
             "natural/beach": {
                 "name": "Plaża",
@@ -2769,7 +2826,8 @@
                 "terms": "Linia brzegowa"
             },
             "natural/fell": {
-                "name": "Wzgórza"
+                "name": "Wzgórza",
+                "terms": "pagórki"
             },
             "natural/glacier": {
                 "name": "Lodowiec",
@@ -2785,7 +2843,7 @@
             },
             "natural/peak": {
                 "name": "Szczyt",
-                "terms": "szczyt"
+                "terms": "szczyt,wierzchołek"
             },
             "natural/saddle": {
                 "name": "Przełęcz"
@@ -2835,7 +2893,8 @@
                 "terms": "bagna, bagno, mokradło, mokradła"
             },
             "natural/wood": {
-                "name": "Puszcza"
+                "name": "Las/puszcza",
+                "terms": "las,puszcza,zalesienie"
             },
             "office": {
                 "name": "Biuro",
@@ -2846,14 +2905,16 @@
                 "terms": "biuro rachunkowe, księgowość, rachun"
             },
             "office/administrative": {
-                "name": "Biuro samorządowe"
+                "name": "Biuro samorządowe",
+                "terms": "Urząd"
             },
             "office/architect": {
                 "name": "Architekt",
                 "terms": "studio architektoniczne, biuro architektoniczne, pracownia architektoniczna"
             },
             "office/company": {
-                "name": "Biuro prywatnego przedsiębiorstwa"
+                "name": "Biuro prywatnego przedsiębiorstwa",
+                "terms": "biuro firmy, biuro zakładu, biuro fabryki"
             },
             "office/educational_institution": {
                 "name": "Instytucja edukacyjna"
@@ -2863,10 +2924,12 @@
                 "terms": "Agencja pracy, pośredniak, pośredniak, biuro pośrednictwa pracy, praca tymczasowa, pośrednictwo pracy"
             },
             "office/estate_agent": {
-                "name": "Biuro nieruchomości"
+                "name": "Biuro nieruchomości",
+                "terms": "biuro nieruchomości, agent nieruchomości"
             },
             "office/financial": {
-                "name": "Biuro finansowe"
+                "name": "Biuro finansowe",
+                "terms": "agent finansowy"
             },
             "office/government": {
                 "name": "Biuro rządowe",
@@ -2877,21 +2940,24 @@
                 "terms": "Agencja ubezpieczeniowa"
             },
             "office/it": {
-                "name": "Biuro branży IT (informatycznej)"
+                "name": "Biuro branży IT (informatycznej)",
+                "terms": "firma it, firma informatyczna"
             },
             "office/lawyer": {
                 "name": "Biuro prawnicze",
                 "terms": "prawnik, kancelaria, adwokat, radca"
             },
             "office/newspaper": {
-                "name": "Gazeta"
+                "name": "Gazeta",
+                "terms": "dziennik"
             },
             "office/ngo": {
                 "name": "Biuro organizacji pożytku publicznego",
                 "terms": "stowarzyszenie, fundacja,ngo"
             },
             "office/physician": {
-                "name": "Lekarz"
+                "name": "Lekarz",
+                "terms": "lekarz, gabinet lekarski"
             },
             "office/political_party": {
                 "name": "Partia polityczna",
@@ -2906,7 +2972,8 @@
                 "terms": "telekomunikacja"
             },
             "office/therapist": {
-                "name": "Terapeuta"
+                "name": "Terapeuta",
+                "terms": "terapeuta"
             },
             "office/travel_agent": {
                 "name": "Biuro podróży"
@@ -2928,14 +2995,15 @@
             },
             "place/hamlet": {
                 "name": "Przysiółek",
-                "terms": "mała wioska, przysiołek"
+                "terms": "mała wioska, przysiółek"
             },
             "place/island": {
                 "name": "Wyspa",
                 "terms": "Wyspa"
             },
             "place/isolated_dwelling": {
-                "name": "Pojedyncze zabudowania"
+                "name": "Pojedyncze zabudowania",
+                "terms": "izolowane zabudowania"
             },
             "place/locality": {
                 "name": "Okolica"
@@ -2955,7 +3023,8 @@
                 "terms": "Wieś, wioska"
             },
             "point": {
-                "name": "Punkt"
+                "name": "Punkt",
+                "terms": "węzeł"
             },
             "power": {
                 "name": "Energetyka",
@@ -2977,10 +3046,12 @@
                 "name": "Słup elektryczny"
             },
             "power/sub_station": {
-                "name": "Podstacja"
+                "name": "Podstacja",
+                "terms": "podstacja energetyczna"
             },
             "power/substation": {
-                "name": "Podstacja"
+                "name": "Podstacja",
+                "terms": "podstacja energetyczna"
             },
             "power/tower": {
                 "name": "Wieża wysokiego napięcia"
@@ -3004,7 +3075,8 @@
                 "terms": "rozebrany tor"
             },
             "railway/disused": {
-                "name": "Nieużywany tor"
+                "name": "Nieużywany tor",
+                "terms": "nieużywany tor"
             },
             "railway/funicular": {
                 "name": "Kolejka linowo-szynowa",
@@ -3055,7 +3127,8 @@
                 "terms": "relacja"
             },
             "roundabout": {
-                "name": "Rondo"
+                "name": "Rondo",
+                "terms": "skrzyżowanie o ruchu okrężnym"
             },
             "route/ferry": {
                 "name": "Trasa morska",
@@ -3074,20 +3147,22 @@
             },
             "shop/antiques": {
                 "name": "Antykwariat",
-                "terms": "sklep z antykami"
+                "terms": "sklep z antykami, antyki"
             },
             "shop/baby_goods": {
                 "name": "Sklep z artykułami dla dzieci i niemowląt"
             },
             "shop/bag": {
-                "name": "Sklep z torebkami/walizkami"
+                "name": "Sklep z torebkami/walizkami",
+                "terms": "torebki,walizki"
             },
             "shop/bakery": {
                 "name": "Piekarnia",
                 "terms": "Piekarnia"
             },
             "shop/bathroom_furnishing": {
-                "name": "Sklep z wyposażeniem łazienek"
+                "name": "Sklep z wyposażeniem łazienek",
+                "terms": "łazienki"
             },
             "shop/beauty": {
                 "name": "Salon piękności",
@@ -3114,14 +3189,16 @@
                 "terms": "antykwariat"
             },
             "shop/boutique": {
-                "name": "Butik"
+                "name": "Butik",
+                "terms": "butik"
             },
             "shop/butcher": {
                 "name": "Rzeźnik",
                 "terms": "sklep mięsny, rzeźnia"
             },
             "shop/candles": {
-                "name": "Sklep ze świecami"
+                "name": "Sklep ze świecami",
+                "terms": "świece"
             },
             "shop/car": {
                 "name": "Dealer samochodowy",
@@ -3148,11 +3225,16 @@
                 "terms": "apteka"
             },
             "shop/chocolate": {
-                "name": "Sklep z czekoladą"
+                "name": "Sklep z czekoladą",
+                "terms": "czekoladziarnia"
             },
             "shop/clothes": {
                 "name": "Sklep odzieżowy",
                 "terms": "ubrania"
+            },
+            "shop/coffee": {
+                "name": "Sklep z kawą",
+                "terms": "sklep z kawą,sklep kawowy"
             },
             "shop/computer": {
                 "name": "Sklep komputerowy",
@@ -3175,7 +3257,8 @@
                 "terms": "kosmetyki,drogeria"
             },
             "shop/curtain": {
-                "name": "Sklep z zasłonami"
+                "name": "Sklep z zasłonami",
+                "terms": "zasłony"
             },
             "shop/dairy": {
                 "name": "Sklep z nabiałem",
@@ -3194,7 +3277,8 @@
                 "terms": "sklep dla majsterkowiczów"
             },
             "shop/dry_cleaning": {
-                "name": "Pralnia chemiczna"
+                "name": "Pralnia chemiczna",
+                "terms": "pralnia chemiczna"
             },
             "shop/electronics": {
                 "name": "Sklep RTV/AGD",
@@ -3213,7 +3297,8 @@
                 "terms": "stragan"
             },
             "shop/fashion": {
-                "name": "Sklep odzieżowy"
+                "name": "Sklep odzieżowy",
+                "terms": "moda"
             },
             "shop/fishmonger": {
                 "name": "Sklep rybny",
@@ -3232,7 +3317,8 @@
                 "terms": "pochówek,pogrzeb"
             },
             "shop/furnace": {
-                "name": "Sklep z ogrzewaniem"
+                "name": "Sklep z ogrzewaniem",
+                "terms": "ogrzewanie"
             },
             "shop/furniture": {
                 "name": "Sklep meblowy",
@@ -3255,7 +3341,8 @@
                 "terms": "fryzjer"
             },
             "shop/hardware": {
-                "name": "Sklep z narzędziami"
+                "name": "Sklep z narzędziami",
+                "terms": "sklep narzędziowy"
             },
             "shop/hearing_aids": {
                 "name": "Sklep z aparatami słuchowymi"
@@ -3273,7 +3360,8 @@
                 "terms": "sztućce, garnki, artykuły kuchenne, małe agd"
             },
             "shop/interior_decoration": {
-                "name": "Sklep z dekoracją wnętrz"
+                "name": "Sklep z dekoracją wnętrz",
+                "terms": "dekoracja wnętrz"
             },
             "shop/jewelry": {
                 "name": "Jubiler",
@@ -3284,17 +3372,20 @@
                 "terms": "Kiosk"
             },
             "shop/kitchen": {
-                "name": "Sklep z wyposażeniem i meblami kuchennymi"
+                "name": "Sklep z wyposażeniem i meblami kuchennymi",
+                "terms": "wyposażenie kuchni"
             },
             "shop/laundry": {
                 "name": "Pralnia",
                 "terms": "pralnia"
             },
             "shop/leather": {
-                "name": "Sklep skórzany"
+                "name": "Sklep skórzany",
+                "terms": "galanteria skórzna"
             },
             "shop/locksmith": {
-                "name": "Ślusarz"
+                "name": "Ślusarz",
+                "terms": "ślusarz"
             },
             "shop/lottery": {
                 "name": "Kolektura",
@@ -3313,7 +3404,8 @@
                 "terms": "galanteria skórzana"
             },
             "shop/mobile_phone": {
-                "name": "Sklep z telefonami komórkowymi"
+                "name": "Sklep z telefonami komórkowymi",
+                "terms": "komórki, gsm"
             },
             "shop/money_lender": {
                 "name": "Pożyczki",
@@ -3328,15 +3420,20 @@
                 "terms": "sklep muzyczny"
             },
             "shop/musical_instrument": {
-                "name": "Sklep z instrumentami muzycznymi"
+                "name": "Sklep z instrumentami muzycznymi",
+                "terms": "instrumenty muzyczne"
             },
             "shop/newsagent": {
                 "name": "Sklep z prasą",
                 "terms": "kolporter"
             },
+            "shop/nutrition_supplements": {
+                "name": "Sklep z suplementami diety",
+                "terms": "suplementy diety"
+            },
             "shop/optician": {
                 "name": "Optyk",
-                "terms": "optyk"
+                "terms": "optyk,sklep optyczny"
             },
             "shop/organic": {
                 "name": "Sklep z naturalną żywnością",
@@ -3347,27 +3444,32 @@
                 "terms": "outdoor,Decathlon"
             },
             "shop/paint": {
-                "name": "Sklep z farbami"
+                "name": "Sklep z farbami",
+                "terms": "farby,malowanie"
             },
             "shop/pawnbroker": {
-                "name": "Lombard"
+                "name": "Lombard",
+                "terms": "lombard,"
             },
             "shop/pet": {
                 "name": "Sklep zoologiczny",
                 "terms": "Sklep zoologiczny"
             },
             "shop/photo": {
-                "name": "sklep fotograficzny"
+                "name": "Sklep fotograficzny",
+                "terms": "fotografia"
             },
             "shop/pyrotechnics": {
                 "name": "Sklep z ogniami sztucznymi",
                 "terms": "fajerwerki"
             },
             "shop/religion": {
-                "name": "Sklep z dewocjonaliami"
+                "name": "Sklep z dewocjonaliami",
+                "terms": "dewocjonalia"
             },
             "shop/scuba_diving": {
-                "name": "Sklep nurkowy"
+                "name": "Sklep nurkowy",
+                "terms": "sprzęt do nurkowania"
             },
             "shop/seafood": {
                 "name": "Sklep z owocami morza",
@@ -3382,7 +3484,8 @@
                 "terms": "buty,obuwie"
             },
             "shop/sports": {
-                "name": "Sklep sportowy"
+                "name": "Sklep sportowy",
+                "terms": "sprzęt sportowy"
             },
             "shop/stationery": {
                 "name": "Sklep papierniczy",
@@ -3398,10 +3501,11 @@
             },
             "shop/tattoo": {
                 "name": "Studio tatuażu",
-                "terms": "tatuażysta"
+                "terms": "tatuażysta,tatuaż"
             },
             "shop/tea": {
-                "name": "Herbaciarnia"
+                "name": "Herbaciarnia",
+                "terms": "sklep z herbatami,herbaty"
             },
             "shop/ticket": {
                 "name": "Sprzedaż biletów",
@@ -3424,25 +3528,36 @@
                 "terms": "wulkanizator,wulkanizacja,opony"
             },
             "shop/vacant": {
-                "name": "Pusty lokal sklepowy"
+                "name": "Pusty lokal sklepowy",
+                "terms": "Pusty lokal sklepowy, brak sklepu"
             },
             "shop/vacuum_cleaner": {
-                "name": "Sklep z odkurzaczami"
+                "name": "Sklep z odkurzaczami",
+                "terms": "odkurzacze"
             },
             "shop/variety_store": {
-                "name": "Sklep z różnościami"
+                "name": "Sklep z różnościami",
+                "terms": "Sklep z różnościami"
             },
             "shop/video": {
-                "name": "Sklep/wypożyczalnia z filmami wideo/dvd"
+                "name": "Sklep/wypożyczalnia z filmami wideo/dvd",
+                "terms": "filmy wideo, filmy dvd, filmy bluray"
             },
             "shop/video_games": {
-                "name": "Sklep z grami wideo"
+                "name": "Sklep z grami wideo",
+                "terms": "gry wideo"
+            },
+            "shop/water_sports": {
+                "name": "Sklep ze sprzętem do sportów wodnych",
+                "terms": "Sklep ze sprzętem do sportów wodnych"
             },
             "shop/weapons": {
-                "name": "Sklep z bronią"
+                "name": "Sklep z bronią",
+                "terms": "militaria"
             },
             "shop/window_blind": {
-                "name": "Sklep z żaluzjami/roletami"
+                "name": "Sklep z żaluzjami/roletami",
+                "terms": "żaluzje,rolety"
             },
             "shop/wine": {
                 "name": "Sklep z winami",
@@ -3476,20 +3591,25 @@
                 "name": "Drewniana chata",
                 "terms": "domek kempingowy"
             },
+            "tourism/gallery": {
+                "name": "Galeria lub muzeum (sztuka)",
+                "terms": "galeria, muzeum sztuki"
+            },
             "tourism/guest_house": {
                 "name": "Pensjonat",
-                "terms": "dom gościnny,kwatery"
+                "terms": "dom gościnny,kwatery,nocleg"
             },
             "tourism/hostel": {
                 "name": "Schronisko lub hostel",
-                "terms": "Hostel"
+                "terms": "Hostel,schronisko,nocleg"
             },
             "tourism/hotel": {
                 "name": "Hotel",
-                "terms": "Hotel"
+                "terms": "Hotel,nocleg"
             },
             "tourism/information": {
-                "name": "Informacja"
+                "name": "Informacja",
+                "terms": "informacja dla turystów"
             },
             "tourism/motel": {
                 "name": "Motel",
@@ -3516,19 +3636,24 @@
                 "terms": "Zoo, ogród zoologiczny"
             },
             "traffic_calming/bump": {
-                "name": "Próg zwalniający"
+                "name": "Próg zwalniający",
+                "terms": "próg zwalniający"
             },
             "traffic_calming/hump": {
-                "name": "Wysepka zwalniająca"
+                "name": "Wysepka zwalniająca",
+                "terms": "wysepka zwalniająca"
             },
             "traffic_calming/rumble_strip": {
-                "name": "Linia wibracyjna"
+                "name": "Linia wibracyjna",
+                "terms": "linia wibracyjna, wibracyjne oznakowanie poziome"
             },
             "traffic_calming/table": {
-                "name": "Wyniesione przejście dla pieszych"
+                "name": "Wyniesione przejście dla pieszych",
+                "terms": "wyniesione przejście dla pieszych"
             },
             "type/boundary": {
-                "name": "Granica"
+                "name": "Granica",
+                "terms": "granica"
             },
             "type/boundary/administrative": {
                 "name": "Granica administracyjna",
@@ -3571,26 +3696,28 @@
                 "terms": "zakaz,nakręcanie,wykręcanie,skręt"
             },
             "type/route": {
-                "name": "Trasa",
-                "terms": "trasa"
+                "name": "Trasa/linia",
+                "terms": "trasa,linia"
             },
             "type/route/bicycle": {
                 "name": "Trasa rowerowa",
                 "terms": "szlak rowerowy"
             },
             "type/route/bus": {
-                "name": "Trasa autobusowa ",
-                "terms": "linia autobusowa"
+                "name": "Linia autobusowa ",
+                "terms": "linia autobusowa,trasa autobusowa"
             },
             "type/route/detour": {
-                "name": "Objazd"
+                "name": "Objazd",
+                "terms": "objazd"
             },
             "type/route/ferry": {
                 "name": "Droga morska",
                 "terms": "trasa promowa"
             },
             "type/route/foot": {
-                "name": "Trasa piesza"
+                "name": "Trasa piesza",
+                "terms": "trasa piesza"
             },
             "type/route/hiking": {
                 "name": "Szlak pieszy",
@@ -3605,37 +3732,60 @@
                 "terms": "przebieg linii elektrycznej"
             },
             "type/route/road": {
-                "name": "Trasa drogowa"
+                "name": "Trasa drogowa",
+                "terms": "trasa drogowa"
             },
             "type/route/train": {
-                "name": "Trasa pociągów"
+                "name": "Linia kolejowa",
+                "terms": "trasa pociągów,linia kolejowa"
             },
             "type/route/tram": {
-                "name": "Trasa tramwajowa",
+                "name": "Linia tramwajowa",
                 "terms": "linia tramwajowa,trasa tramwajowa"
             },
             "type/route_master": {
-                "name": "Trasa główna"
+                "name": "Trasa główna",
+                "terms": "trasa główna, trasa grupująca"
+            },
+            "type/site": {
+                "name": "Relacja grupująca",
+                "terms": "grupowanie,wiązanie"
             },
             "vertex": {
                 "name": "Inne",
-                "terms": "różne"
+                "terms": "różne,pozostałe"
             },
             "waterway": {
-                "name": "Szlak wodny"
+                "name": "Szlak wodny",
+                "terms": "droga wodna"
+            },
+            "waterway/boatyard": {
+                "name": "Stocznia jachtowa",
+                "terms": "warsztat szkutniczy"
             },
             "waterway/canal": {
-                "name": "Kanał"
+                "name": "Kanał",
+                "terms": "kanał"
             },
             "waterway/dam": {
                 "name": "Tama",
-                "terms": "Zapora"
+                "terms": "zapora"
             },
             "waterway/ditch": {
-                "name": "Rów"
+                "name": "Rów",
+                "terms": "rów"
+            },
+            "waterway/dock": {
+                "name": "Suchy dok",
+                "terms": "Suchy dok"
             },
             "waterway/drain": {
-                "name": "Odpływ"
+                "name": "Odpływ",
+                "terms": "kanał odwadniający, rów odwadniający, odwodnienie"
+            },
+            "waterway/fuel": {
+                "name": "Stacja tankowania paliwa (dla łodzi)",
+                "terms": "wodna stacja paliw"
             },
             "waterway/river": {
                 "name": "Rzeka",
@@ -3643,14 +3793,23 @@
             },
             "waterway/riverbank": {
                 "name": "Brzeg rzeki",
-                "terms": "Brzeg rzeki, "
+                "terms": "Brzeg rzeki, linia brzegowa"
+            },
+            "waterway/sanitary_dump_station": {
+                "name": "Miejsce opróżniania toalety (dla łodzi)",
+                "terms": "Miejsce opróżniania toalety (dla łodzi)"
             },
             "waterway/stream": {
                 "name": "Strumień",
                 "terms": "potok,odpływ,strumień,prąd,dryf,zalew,wezbranie,strumyk,fala,ciek wodny"
             },
+            "waterway/water_point": {
+                "name": "Miejsce poboru wody (dla łodzi)",
+                "terms": "pobór wody"
+            },
             "waterway/weir": {
-                "name": "Jaz"
+                "name": "Jaz",
+                "terms": "jaz,tama"
             }
         }
     }

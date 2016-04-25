@@ -324,7 +324,6 @@
         "custom": "Mukautettu",
         "custom_button": "Muokkaa omaa taustaa",
         "custom_prompt": "Kirjoita tiilen verkko-osoitemallinne. Kelvollisia merkkejä ovat {z}, {x}, {y} Z/X/Y-skeemalle ja {u} quadtile-skeemalle.",
-        "fix_misalignment": "Korjaa ilmakuvavirhe",
         "imagery_source_faq": "Mikä tämän ilmakuvan lähde on?",
         "reset": "palauta",
         "minimap": {
@@ -585,7 +584,7 @@
             "start": "**Aloita viiva napsauttamalla tien loppupistettä.**",
             "intersect": "Lisää pisteitä viivaan napsauttamalla karttaa. Karttaa voi liikuttaa vetämällä viivan piirtämisen aikana. Tiet ja monet muutkin viivat ovat osa isompaa kokonaisuutta. Reitityksen takia on tärkeää, että tiet on yhdistetty toisiinsa oikein. **Luo kahden kadun risteys napsauttamalla {name}tä.**",
             "finish": "Viimeistele viiva kaksoisnapsauttamalla viimeisen viivapisteen kohdalla. **Lopeta viivan piirtäminen napsauttamalla viimeistä pistettä uudelleen.**",
-            "road": "**Valitse Tie listalta.**",
+            "road": "**Valitse Tiet ja kadut listalta.**",
             "residential": "Tiet luokitellaan niiden koon mukaan eri ryhmiin, yleisin niistä on asuinaluetie. **Valitse tietyypiksi Asuinaluetie**",
             "describe": "**Nimeä tie ja sulje sitten muokkausnäkymä napsauttamalla {button}-painiketta oikeasta yläkulmasta.**",
             "wrong_preset": "Et valinnut Asuinalue-tietyyppiä. **Kokeile uudelleen napsauttamalla tätä**"
@@ -1381,9 +1380,6 @@
                     "tunnel": "Tunneli"
                 },
                 "placeholder": "Tuntematon"
-            },
-            "studio_type": {
-                "label": "Tyyppi"
             },
             "supervised": {
                 "label": "Valvonta"

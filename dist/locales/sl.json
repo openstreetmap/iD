@@ -276,7 +276,6 @@
         "custom": "Po meri",
         "custom_button": "Uredi ozadje po meri",
         "custom_prompt": "Navedite naslov predloge URL. Dovoljeni znaki so {z}, {x}, {y} za shemo Z/X/Y in {u} za shemo quadtile.",
-        "fix_misalignment": "Popravi lego",
         "reset": "ponastavi"
     },
     "restore": {
@@ -996,9 +995,6 @@
                     "tunnel": "Predor"
                 },
                 "placeholder": "Neznano"
-            },
-            "studio_type": {
-                "label": "Vrsta"
             },
             "supervised": {
                 "label": "Nadzorovano"

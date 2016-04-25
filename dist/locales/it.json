@@ -253,7 +253,9 @@
         "deleted": "Cancellati",
         "created": "Creati",
         "about_changeset_comments": "Info sui Commenti al gruppo di modifiche",
-        "about_changeset_comments_link": "//wiki.openstreetmap.org/wiki/Good_changeset_comments"
+        "about_changeset_comments_link": "//wiki.openstreetmap.org/wiki/Good_changeset_comments",
+        "google_warning": "In questo commento hai nominato Google: ricorda sempre che copiare da Google Maps è severamente proibito.",
+        "google_warning_link": "http://www.openstreetmap.org/copyright"
     },
     "contributors": {
         "list": "Modifiche di {users}",
@@ -285,7 +287,8 @@
         "no_results_worldwide": "Nessun risultato trovato"
     },
     "geolocate": {
-        "title": "Mostra la mia posizione"
+        "title": "Mostra la mia posizione",
+        "locating": "Localizzazione in corso, attendere..."
     },
     "inspector": {
         "no_documentation_combination": "Non c'è documentazione per questa combinazione di tag",
@@ -329,9 +332,10 @@
         "custom": "Personalizzato",
         "custom_button": "Modifica sfondo personalizzato",
         "custom_prompt": "Inserisci l'URL dello schema dei tasselli. Valori validi sono {z}, {x}, {y} per lo schema Z/X/Y e {u} per lo schema QuadTile.",
-        "fix_misalignment": "Allinea",
+        "fix_misalignment": "Correggi spostamento immagini",
         "imagery_source_faq": "Da dove vengono queste immagini?",
         "reset": "reset",
+        "offset": "Per correggere lo spostamento delle immagini trascina dove preferisci all'interno dell'area grigia sottostante o inserisci i valori correttivi in metri.",
         "minimap": {
             "description": "Minimappa",
             "tooltip": "Mostra una mappa più vasta per localizzare meglio l'area corrente."
@@ -349,6 +353,14 @@
         "points": {
             "description": "Punti",
             "tooltip": "Punti di interesse"
+        },
+        "traffic_roads": {
+            "description": "Strade con traffico",
+            "tooltip": "Autostrade, strade, ecc."
+        },
+        "service_roads": {
+            "description": "Strade di servizio",
+            "tooltip": "Strade di servizio, corsie di sosta, piste, ecc."
         },
         "paths": {
             "description": "Sentieri",
@@ -1355,6 +1367,7 @@
                 "label": "Tipo di servizio",
                 "options": {
                     "crossover": "Scambio",
+                    "siding": "Binario di raccordo",
                     "spur": "Accesso",
                     "yard": "Smistamento"
                 }
@@ -1427,8 +1440,8 @@
                 },
                 "placeholder": "Sconosciuto"
             },
-            "studio_type": {
-                "label": "Tipo"
+            "studio": {
+                "label": "Settore"
             },
             "substation": {
                 "label": "Tipo"
@@ -2188,6 +2201,9 @@
                 "name": "Stalla",
                 "terms": "stalla,ricovero,scuderia"
             },
+            "building/static_caravan": {
+                "name": "Roulotte stazionaria"
+            },
             "building/terrace": {
                 "name": "Villette a schiera",
                 "terms": "villette,fila di case"
@@ -2315,6 +2331,9 @@
             "craft/rigger": {
                 "name": "Cablaggi",
                 "terms": "cavi,corde,gomene"
+            },
+            "craft/roofer": {
+                "name": "Riparatore tetti"
             },
             "craft/saddler": {
                 "name": "Sellaio"
@@ -2594,6 +2613,9 @@
                 "name": "Slargo per inversione",
                 "terms": "Slargo per inversione di marcia"
             },
+            "highway/unclassified": {
+                "name": "Strada secondaria / non classificata"
+            },
             "historic": {
                 "name": "Sito storico",
                 "terms": "Luogo storico"
@@ -2733,6 +2755,9 @@
             "leisure/adult_gaming_centre": {
                 "name": "Sala da gioco",
                 "terms": "gioco d'azzardo,casinò,bisca"
+            },
+            "leisure/bird_hide": {
+                "name": "osservazione uccelli"
             },
             "leisure/bowling_alley": {
                 "name": "Sala da Bowling",
@@ -3347,6 +3372,9 @@
                 "name": "Negozio di opere d'arte",
                 "terms": "opere d'arte,quadri,sculture,galleria,art*"
             },
+            "shop/baby_goods": {
+                "name": "Negozio di prodotti per l'infanzia"
+            },
             "shop/bag": {
                 "name": "Negozio di borse e valigie",
                 "terms": "borsetta,borsa,valigia"
@@ -3423,6 +3451,9 @@
                 "name": "Negozio di abbigliamento",
                 "terms": "Negozio vestiti"
             },
+            "shop/coffee": {
+                "name": "Bar Caffetteria"
+            },
             "shop/computer": {
                 "name": "Negozio di informatica",
                 "terms": "Negozio di computer"
@@ -3494,6 +3525,9 @@
                 "name": "Fioraio",
                 "terms": "Fioraio"
             },
+            "shop/frame": {
+                "name": "Negozio di cornici"
+            },
             "shop/funeral_directors": {
                 "name": "Casa funeraria",
                 "terms": "funerale,cimitero"
@@ -3525,6 +3559,9 @@
             "shop/hardware": {
                 "name": "Ferramenta",
                 "terms": "Negozio di Ferramenta"
+            },
+            "shop/hearing_aids": {
+                "name": "Negozio di apparecchi acustici"
             },
             "shop/herbalist": {
                 "name": "Erboristeria",
@@ -3578,6 +3615,9 @@
                 "name": "Centro Massaggi",
                 "terms": "massaggi,estetica"
             },
+            "shop/medical_supply": {
+                "name": "Negozio di forniture mediche"
+            },
             "shop/mobile_phone": {
                 "name": "Negozio di telefonia mobile",
                 "terms": "Negozio di Cellulari"
@@ -3599,6 +3639,9 @@
             },
             "shop/newsagent": {
                 "name": "Edicola"
+            },
+            "shop/nutrition_supplements": {
+                "name": "Negozio di integratori alimentari"
             },
             "shop/optician": {
                 "name": "Ottico",
@@ -3948,6 +3991,9 @@
             "waterway/ditch": {
                 "name": "Fossato",
                 "terms": "Fosso"
+            },
+            "waterway/dock": {
+                "name": "Bacino galleggiante / di carenaggio"
             },
             "waterway/drain": {
                 "name": "Canale di scolo",

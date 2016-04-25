@@ -330,7 +330,6 @@
         "custom": "Personalitzar",
         "custom_button": "Editar el fons personalitzat",
         "custom_prompt": "Introduïu una plantilla d'URL de casella. Els paràmetres vàlids són {z}, {x}, {y} per a l'esquema Z/X/Y i  {u} per a l'esquema quadtile.",
-        "fix_misalignment": "Corregir la alineació",
         "imagery_source_faq": "D'on prové aquesta imatgeria?",
         "reset": "reiniciar",
         "minimap": {
@@ -898,6 +897,9 @@
             "description": {
                 "label": "Descripció"
             },
+            "diaper": {
+                "label": "Canviadors per a nadons"
+            },
             "dock": {
                 "label": "Tipus"
             },
@@ -1433,9 +1435,6 @@
                     "tunnel": "Túnel"
                 },
                 "placeholder": "Desconegut"
-            },
-            "studio_type": {
-                "label": "Tipus"
             },
             "substation": {
                 "label": "Tipus"
@@ -3195,6 +3194,9 @@
                 "name": "Botiga de roba",
                 "terms": "Botiga de roba"
             },
+            "shop/coffee": {
+                "name": "Botiga de cafè"
+            },
             "shop/computer": {
                 "name": "Botiga d'informàtica",
                 "terms": "Botiga d'informàtica, Botiga d'ordinadors"
@@ -3659,6 +3661,9 @@
             "waterway/ditch": {
                 "name": "Séquia",
                 "terms": "Séquia, Sèquia, Rara, Canal, Aigua, Via aqüífera, Torrent, Conducció d'aigua, Aqüífer, Rierol"
+            },
+            "waterway/dock": {
+                "name": "Moll humit/Moll sec"
             },
             "waterway/drain": {
                 "name": "Torrent",
