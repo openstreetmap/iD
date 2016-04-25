@@ -36,6 +36,7 @@ iD.ui.preset.wikipedia = function(field, context) {
         lang.enter().append('input')
             .attr('type', 'text')
             .attr('class', 'wiki-lang')
+            .attr('placeholder', t('translate.localized_translation_language'))
             .value('English');
 
         lang
@@ -134,6 +135,9 @@ iD.ui.preset.wikipedia = function(field, context) {
         // unrecognized value format
         } else {
             title.value(value);
+            if (value && value !== '') {
+                lang.value('');
+            }
             link.attr('href', 'https://en.wikipedia.org/wiki/Special:Search?search=' + value);
         }
     };
