@@ -326,6 +326,10 @@
         },
         {
             "key": "amenity",
+            "value": "prison"
+        },
+        {
+            "key": "amenity",
             "value": "pub"
         },
         {

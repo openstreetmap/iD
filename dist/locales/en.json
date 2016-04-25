@@ -1857,6 +1857,10 @@
                 "name": "Post Office",
                 "terms": "letter,mail"
             },
+            "amenity/prison": {
+                "name": "Prison Grounds",
+                "terms": "cell,jail"
+            },
             "amenity/pub": {
                 "name": "Pub",
                 "terms": "dive,beer,bier,booze"
