@@ -37,11 +37,11 @@ iD.services.taginfo = function() {
     function popularKeys(parameters) {
         var pop_field = 'count_all';
         if (parameters.filter) pop_field = 'count_' + parameters.filter;
-        return function(d) { return parseFloat(d[pop_field]) > 5000 || d.in_wiki; };
+        return function(d) { return parseFloat(d[pop_field]) > 2500 || d.in_wiki; };
     }
 
     function popularValues() {
-        return function(d) { return parseFloat(d.fraction) > 0.01 || d.in_wiki; };
+        return function(d) { return parseFloat(d.fraction) > 0.0 || d.in_wiki; };
     }
 
     function valKey(d) {
