@@ -24,7 +24,7 @@ iD.ui.preset.url = function(field, context) {
                     .attr('type', field.type)
                     .attr('id', 'preset-input-' + field.id)
                     .attr('placeholder',
-                        iD.data.phonePlaceholders[countryCode] ||
+                        iD.data.phoneFormats[countryCode] ||
                         field.placeholder() ||
                         t('inspector.unknown'));
 

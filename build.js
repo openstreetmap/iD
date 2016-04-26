@@ -296,7 +296,7 @@ fs.writeFileSync('data/data.js', 'iD.data = ' + JSON.stringify({
     en: read('dist/locales/en.json'),
     suggestions: r('name-suggestions.json'),
     addressFormats: r('address-formats.json'),
-    phonePlaceholders: r('phone-placeholders.json')
+    phoneFormats: r('phone-formats.json')
 }) + ';');
 
 fs.writeFileSync('dist/presets.js', 'iD.data.presets = ' + JSON.stringify({

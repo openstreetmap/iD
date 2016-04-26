@@ -19,7 +19,7 @@ iD.data = {
             path + 'dist/locales/en.json',
             path + 'data/name-suggestions.json',
             path + 'data/address-formats.json',
-            path + 'data/phone-placeholders.json'
+            path + 'data/phone-formats.json'
             ], d3.json, function (err, data) {
 
             iD.data = {
@@ -39,7 +39,7 @@ iD.data = {
                 en: data[11],
                 suggestions: data[12],
                 addressFormats: data[13],
-                phonePlaceholders: data[14]
+                phoneFormats: data[14]
             };
 
             callback();
