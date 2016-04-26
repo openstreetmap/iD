@@ -44,7 +44,6 @@ describe("iD.services.taginfo", function() {
 
         it("filters only popular keys with an entity type filter", function() {
             var callback = sinon.spy();
-
             taginfo.keys({query: "amen", filter: "nodes"}, callback);
 
             server.respondWith("GET", new RegExp("https://taginfo.openstreetmap.org/api/4/keys/all"),
@@ -58,7 +57,6 @@ describe("iD.services.taginfo", function() {
 
         it("sorts keys with ':' below keys without ':'", function() {
             var callback = sinon.spy();
-
             taginfo.keys({query: "ref"}, callback);
 
             server.respondWith("GET", new RegExp("https://taginfo.openstreetmap.org/api/4/keys/all"),
@@ -71,10 +69,38 @@ describe("iD.services.taginfo", function() {
         });
     });
 
+    describe("#multikeys", function() {
+        it("calls the given callback with the results of the multikeys query", function() {
+            var callback = sinon.spy();
+            taginfo.multikeys({query: "recycling:"}, callback);
+
+            server.respondWith("GET", new RegExp("https://taginfo.openstreetmap.org/api/4/keys/all"),
+                [200, { "Content-Type": "application/json" },
+                    '{"data":[{"count_all":69593,"key":"recycling:glass","count_all_fraction":0.0}]}']);
+            server.respond();
+
+            expect(query(server.requests[0].url)).to.eql(
+                {query: "recycling:", page: "1", rp: "25", sortname: "count_all", sortorder: "desc"});
+            expect(callback).to.have.been.calledWith(null, [{"title":"recycling:glass", "value":"recycling:glass"}]);
+        });
+
+        it("excludes multikeys with extra colons", function() {
+            var callback = sinon.spy();
+            taginfo.multikeys({query: "recycling:"}, callback);
+
+            server.respondWith("GET", new RegExp("https://taginfo.openstreetmap.org/api/4/keys/all"),
+                [200, { "Content-Type": "application/json" },
+                    '{"data":[{"count_all":69593,"key":"recycling:glass","count_all_fraction":0.0},\
+                              {"count_all":22,"key":"recycling:glass:color","count_all_fraction":0.0}]}']);
+            server.respond();
+
+            expect(callback).to.have.been.calledWith(null, [{"title":"recycling:glass", "value":"recycling:glass"}]);
+        });
+    });
+
     describe("#values", function() {
         it("calls the given callback with the results of the values query", function() {
             var callback = sinon.spy();
-
             taginfo.values({key: "amenity", query: "par"}, callback);
 
             server.respondWith("GET", new RegExp("https://taginfo.openstreetmap.org/api/4/key/values"),
@@ -89,13 +115,25 @@ describe("iD.services.taginfo", function() {
 
         it("filters popular values", function() {
             var callback = sinon.spy();
-
             taginfo.values({key: "amenity", query: "par"}, callback);
 
             server.respondWith("GET", new RegExp("https://taginfo.openstreetmap.org/api/4/key/values"),
                 [200, { "Content-Type": "application/json" },
                     '{"data":[{"value":"parking","description":"A place for parking cars", "fraction":1.0},\
-                     {"value":"party","description":"A place for partying", "fraction":0.0}]}']);
+                              {"value":"party","description":"A place for partying", "fraction":0.0}]}']);
+            server.respond();
+
+            expect(callback).to.have.been.calledWith(null, [{"value":"parking","title":"A place for parking cars"}]);
+        });
+
+        it("excludes values with semicolons", function() {
+            var callback = sinon.spy();
+            taginfo.values({key: "amenity", query: "par"}, callback);
+
+            server.respondWith("GET", new RegExp("https://taginfo.openstreetmap.org/api/4/key/values"),
+                [200, { "Content-Type": "application/json" },
+                    '{"data":[{"value":"parking","description":"A place for parking cars", "fraction":1.0},\
+                              {"value":"parking;partying","description":"A place for parking cars *and* partying", "fraction":1.0}]}']);
             server.respond();
 
             expect(callback).to.have.been.calledWith(null, [{"value":"parking","title":"A place for parking cars"}]);
@@ -105,7 +143,6 @@ describe("iD.services.taginfo", function() {
     describe("#docs", function() {
         it("calls the given callback with the results of the docs query", function() {
             var callback = sinon.spy();
-
             taginfo.docs({key: "amenity", value: "parking"}, callback);
 
             server.respondWith("GET", new RegExp("https://taginfo.openstreetmap.org/api/4/tag/wiki_page"),

@@ -86,7 +86,7 @@ iD.ui.preset.multiselect = function(field, context) {
                     dispatch.init();
                     isInitialized = true;
                 } else if (context.taginfo()) {
-                    context.taginfo().keys({query: field.key}, function(err, data) {
+                    context.taginfo().multikeys({query: field.key}, function(err, data) {
                         if (!err) {
                             strings = data.map(function(k) {
                                 var d = k.value.replace(field.key, '');
