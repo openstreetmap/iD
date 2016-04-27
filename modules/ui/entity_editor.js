@@ -46,7 +46,7 @@ export function uiEntityEditor(context) {
             .attr('class', 'fl preset-reset preset-choose')
             .on('click', function() { dispatch.call('choose', this, activePreset); })
             .append('span')
-            .html('&#9668;');
+            .html((iD.detect().textDirection === 'rtl') ? '&#9658;' : '&#9668;');
 
         enter
             .append('button')

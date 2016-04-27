@@ -73,7 +73,12 @@ export function uiInit(context) {
         content
             .append('div')
             .attr('id', 'map')
+            .attr('dir', 'auto')
             .call(map);
+
+        if (iD.detect().textDirection === 'rtl') {
+          d3.select('body').attr('dir', 'rtl');
+        }
 
         content
             .call(uiMapInMap(context));
@@ -150,6 +155,7 @@ export function uiInit(context) {
         about
             .append('div')
             .attr('id', 'attrib')
+            .attr('dir', 'ltr')
             .call(uiAttribution(context));
 
         var footer = about

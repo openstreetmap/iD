@@ -44,7 +44,7 @@ export function uiPresetList(context) {
                 .attr('class', 'preset-choose')
                 .on('click', function() { dispatch.call('choose', this, currentPreset); })
                 .append('span')
-                .html('&#9658;');
+                .html((iD.detect().textDirection === 'rtl') ? '&#9668;' : '&#9658;');
         } else {
             messagewrap
                 .append('button')

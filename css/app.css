@@ -3318,8 +3318,6 @@ img.tile-removing {
     margin: auto;
 }
 
-/* Mapillary
-------------------------------------------------------- */
 .mapillary-wrap {
     position: absolute;
     bottom: 30px;
@@ -3357,4 +3355,286 @@ img.tile-removing {
 
 .mly-wrapper.active {
   visibility: visible;
+
+/* Right-to-left localization settings */
+
+/* sidebar */
+[dir='rtl'] #sidebar {
+  float: right;
+}
+
+#sidebar .search-header .icon {
+  left: auto;
+  right: 10px;
+}
+
+/* header */
+[dir='rtl'] .header h3 {
+  text-align: right;
+  padding: 20px 40px 20px 20px;
+}
+
+[dir='rtl'] .entity-editor-pane .header button.preset-choose {
+  left: auto;
+  right: 0;
+}
+
+[dir='rtl'] .entity-editor-pane .header button.preset-close, [dir='rtl'] .preset-list-pane .header button.preset-choose {
+  left: 0;
+  right: auto;
+}
+
+[dir='rtl'] .map-data-control .layer-list button, [dir='rtl'] .background-control .layer-list button {
+  float: left;
+  border-left: none;
+  border-right: 1px solid #CCC;
+}
+
+[dir='rtl'] .map-data-control .layer-list button:first-of-type, [dir='rtl'] .background-control .layer-list button:first-of-type {
+  border-radius: 3px 0 0 3px;
+}
+
+/* preset form */
+[dir='rtl'] .form-label {
+  padding: 5px 10px 5px 0;
+}
+
+[dir='rtl'] .form-label button {
+  border-left: none;
+  border-right: 1px solid #CCC;
+}
+
+[dir='rtl'] .more-fields label {
+  padding: 5px 0 5px 10px;
+}
+
+[dir='rtl'] .form-label-button-wrap {
+  text-align: left;
+}
+
+[dir='rtl'] button.minor {
+  left: 0;
+  right: auto;
+}
+
+[dir='rtl'] .form-field .localized-main {
+  padding-left: 10%;
+  padding-right: 10px;
+}
+
+[dir='rtl'] .combobox-caret {
+  margin-left: 0;
+  margin-right: -30px;
+}
+
+[dir='rtl'] .form-field .button-input-action {
+  margin-left: 0;
+  margin-right: -10%;
+}
+
+[dir='rtl'] .icon.pre-text {
+  margin-left: 3px;
+  margin-right: 0;
+}
+
+[dir='rtl'] .notice .zoom-to .icon {
+  margin-left: 10px;
+  margin-right: 0;
+}
+
+[dir='rtl'] .preset-list-button .label {
+  text-align: right;
+  left: 0;
+  right: 60px;
+  border-left: none;
+  border-right: 1px solid rgba(0, 0, 0, .1);
+  border-radius: 3px 0 0 3px;
+}
+
+[dir='rtl'] .preset-icon-frame {
+  left: auto;
+  right: 7px;
+}
+
+[dir='rtl'] .preset-list-item button.tag-reference-button {
+  left: 0;
+  right: auto;
+  border-radius: 3px 0 0 3px;
+}
+
+[dir='rtl'] .preset-list-button-wrap .preset-icon {
+  left: auto;
+  right: auto;
+}
+
+[dir='rtl'] .preset-list-button-wrap .preset-icon-32 {
+  right: 13px;
+}
+
+[dir='rtl'] .form-field .maxspeed-unit {
+  border-radius: 0 0 0 4px;
+}
+
+[dir='rtl'] input[type="checkbox"], [dir='rtl'] input[type="radio"] {
+  float: right;
+  margin-left: 5px;
+  margin-right: 0;
+}
+
+[dir='rtl'] .preset-input-wrap .col6 {
+  float: right;
+}
+
+/* tags form */
+[dir='rtl'] .tag-row .key-wrap, [dir='rtl'] .tag-row .input-wrap-position {
+  float: right;
+}
+
+[dir='rtl'] .tag-row input {
+  border-left: none;
+  border-right: 1px solid #CCC;
+}
+
+[dir='rtl'] .tag-row:first-child input.key {
+  border-top-left-radius: 0;
+  border-top-right-radius: 4px;
+}
+
+[dir='rtl'] .tag-row button {
+  left: 10%;
+  border-left-width: 1px;
+}
+
+[dir='rtl'] .tag-row .tag-reference-button {
+  left: auto;
+  right: auto;
+  margin-right: 35px;
+  border-left-width: 1px;
+  border-right-width: 0;
+}
+
+[dir='rtl'] .tag-row:first-child .tag-reference-button {
+  border-top-left-radius: 4px;
+  border-top-right-radius: 0;
+}
+
+[dir='rtl'] .tag-row:last-child .tag-reference-button {
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 0;
+}
+
+/* map control buttons */
+[dir='rtl'] .map-controls {
+  left: 0;
+  right: auto;
+}
+
+[dir='rtl'] .background-control button, [dir='rtl'] .zoombuttons button.zoom-in {
+  border-radius: 0 4px 0 0;
+}
+
+[dir='rtl'] .help-control button, [dir='rtl'] .geolocate-control button {
+  border-radius: 0 0 4px 0;
+}
+
+/* map control button overlays */
+[dir='rtl'] .map-overlay {
+  padding: 20px 20px 20px 50px;
+  left: 0;
+  right: auto !important;
+}
+
+[dir='rtl'] .opacity-options {
+  left: 50px;
+  right: auto;
+}
+
+[dir='rtl'] .hide-toggle {
+  padding-left: 0;
+  padding-right: 12px;
+}
+
+[dir='rtl'] .hide-toggle:before {
+  left: auto;
+  right: 0;
+  border-left: none;
+  border-right: 8px solid #7092ff;
+}
+
+[dir='rtl'] .hide-toggle.expanded:before {
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+}
+
+/* navbar */
+[dir='rtl'] #bar .spacer, [dir='rtl'] #bar .button-wrap, [dir='rtl'] #bar .button-wrap button {
+  float: right;
+}
+
+[dir='rtl'] .add-point .tooltip {
+  left: inherit !important;
+}
+
+[dir='rtl'] .button-wrap:last-of-type {
+  padding-left: 0;
+  padding-right: 10px;
+}
+
+[dir='rtl'] button.save.has-count .count {
+  margin-left: auto;
+  margin-right: 8%;
+}
+
+[dir='rtl'] button.save.has-count .count::before {
+  border-left: 6px solid rgba(255,255,255,.5);
+  border-right: none;
+  left: auto;
+  right: -6px;
+}
+
+[dir='rtl'] .joined button {
+  border-left: 1px solid rgba(0,0,0,.5);
+  border-right: none;
+}
+
+[dir='rtl'] .joined button:first-child {
+  border-radius: 0 4px 4px 0;
+}
+
+[dir='rtl'] .joined button:last-child {
+  border-radius: 4px 0 0 4px;
+}
+
+/* footer */
+[dir='rtl'] #scale-block {
+  float: right;
+  clear: right;
+}
+
+[dir='rtl'] #info-block {
+  clear: left;
+}
+
+[dir='rtl'] #about-list {
+  text-align: left;
+  clear: left;
+  margin-left: 10px;
+  margin-right: 0;
+}
+
+[dir='rtl'] #about-list li {
+  float: left;
+  border-left: none;
+  border-right: 1px solid rgba(255,255,255,.5);
+  margin-left: 0;
+  margin-right: 5px;
+  padding: 5px 5px 5px 0;
+}
+
+[dir='rtl'] #about-list li:last-child {
+  border-right: none;
+}
+
+[dir='rtl'] #scale text {
+  text-anchor: end;
 }
