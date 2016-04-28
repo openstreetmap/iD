@@ -5,7 +5,8 @@ iD.ui.preset.typeCombo = function(field, context) {
         optarray = field.options,
         snake_case = (field.snake_case || (field.snake_case === undefined)),
         strings = {},
-        input;
+        input,
+        entity;
 
     function snake(s) {
         return s.replace(/\s+/g, '_');
@@ -27,63 +28,66 @@ iD.ui.preset.typeCombo = function(field, context) {
             });
     }
 
-    function combo(selection) {
-        var combobox = d3.combobox();
+    function initCombo(selection) {
+        var d;
 
-        input = selection.selectAll('input')
-            .data([0]);
-
-        var enter = input.enter()
-            .append('input')
-            .attr('type', 'text')
-            .attr('id', 'preset-input-' + field.id);
-
-        if (optstrings) { enter.attr('readonly', 'readonly'); }
-
-        input
-            .call(combobox)
-            .on('change', change)
-            .on('blur', change)
-            .each(function() {
-                if (optstrings) {
-                    _.each(optstrings, function(v, k) {
-                        strings[k] = field.t('options.' + k, { 'default': v });
-                    });
-                    stringsLoaded();
-                } else if (optarray) {
-                    _.each(optarray, function(k) {
-                        strings[k] = (snake_case ? unsnake(k) : k);
-                    });
-                    stringsLoaded();
-                } else if (context.taginfo()) {
-                    context.taginfo().values({key: field.key}, function(err, data) {
-                        if (!err) {
-                            _.each(_.pluck(data, 'value'), function(k) {
-                                strings[k] = (snake_case ? unsnake(k) : k);
-                            });
-                            stringsLoaded();
-                        }
-                    });
-                }
+        if (optstrings) {
+            selection.attr('readonly', 'readonly');
+            d = Object.keys(optstrings).map(function(k) {
+                var v = field.t('options.' + k, { 'default': optstrings[k] });
+                return {
+                    key: k,
+                    value: v,
+                    title: v
+                };
             });
+            selection.call(d3.combobox().data(d));
+            setPlaceholders(d);
 
-        function stringsLoaded() {
-            var keys = _.keys(strings),
-                strs = [],
-                placeholders;
+        } else if (optarray) {
+            d = optarray.map(function(k) {
+                var v = snake_case ? unsnake(k) : k;
+                return {
+                    key: k,
+                    value: v,
+                    title: v
+                };
+            });
+            selection.call(d3.combobox().data(d));
+            setPlaceholders(d);
 
-            combobox.data(keys.map(function(k) {
-                var s = strings[k],
-                    o = {};
-                o.title = o.value = s;
-                if (s.length < 20) { strs.push(s); }
-                return o;
-            }));
-
-            placeholders = strs.length > 1 ? strs : keys;
-            input.attr('placeholder', field.placeholder() ||
-                (placeholders.slice(0, 3).join(', ') + '...'));
+        } else if (context.taginfo()) {
+            selection.call(d3.combobox().fetcher(taginfoValues));
+            taginfoValues('', setPlaceholders);
         }
+    }
+
+    function taginfoValues(q, callback) {
+        context.taginfo().values({
+            debounce: true,
+            key: field.key,
+            geometry: context.geometry(entity.id),
+            query: q
+        }, function(err, data) {
+            if (err) return;
+            var d = _.pluck(data, 'value').map(function(k) {
+                var v = snake_case ? unsnake(k) : k;
+                return {
+                    key: k,
+                    value: v,
+                    title: v
+                };
+            });
+            callback(d);
+        });
+    }
+
+    function setPlaceholders(d) {
+        var vals = _.pluck(d, 'value').filter(function(s) { return s.length < 20; }),
+            placeholders = vals.length > 1 ? vals : _.pluck(d, 'key');
+
+        input.attr('placeholder', field.placeholder() ||
+            (placeholders.slice(0, 3).join(', ') + '…'));
     }
 
     function change() {
@@ -99,6 +103,22 @@ iD.ui.preset.typeCombo = function(field, context) {
         var t = {};
         t[field.key] = value || undefined;
         dispatch.change(t);
+    }
+
+
+    function combo(selection) {
+        input = selection.selectAll('input')
+            .data([0]);
+
+        input.enter()
+            .append('input')
+            .attr('type', 'text')
+            .attr('id', 'preset-input-' + field.id)
+            .call(initCombo);
+
+        input
+            .on('change', change)
+            .on('blur', change);
     }
 
     combo.tags = function(tags) {
@@ -117,6 +137,12 @@ iD.ui.preset.typeCombo = function(field, context) {
 
     combo.focus = function() {
         input.node().focus();
+    };
+
+    combo.entity = function(_) {
+        if (!arguments.length) return entity;
+        entity = _;
+        return combo;
     };
 
     return d3.rebind(combo, dispatch, 'on');
