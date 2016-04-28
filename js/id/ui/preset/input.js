@@ -103,7 +103,8 @@ iD.ui.preset.url = function(field, context) {
     };
 
     i.focus = function() {
-        input.node().focus();
+        var node = input.node();
+        if (node) node.focus();
     };
 
     return d3.rebind(i, dispatch, 'on');
