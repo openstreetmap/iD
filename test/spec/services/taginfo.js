@@ -29,7 +29,7 @@ describe("iD.services.taginfo", function() {
             expect(callback).to.have.been.calledWith(null, [{"title":"amenity", "value":"amenity"}]);
         });
 
-        it("filters only popular keys", function() {
+        it("includes popular keys", function() {
             var callback = sinon.spy();
             taginfo.keys({query: "amen"}, callback);
 
@@ -42,7 +42,7 @@ describe("iD.services.taginfo", function() {
             expect(callback).to.have.been.calledWith(null, [{"title":"amenity", "value":"amenity"}]);
         });
 
-        it("filters only popular keys with an entity type filter", function() {
+        it("includes popular keys with an entity type filter", function() {
             var callback = sinon.spy();
             taginfo.keys({query: "amen", filter: "nodes"}, callback);
 
@@ -53,6 +53,22 @@ describe("iD.services.taginfo", function() {
             server.respond();
 
             expect(callback).to.have.been.calledWith(null, [{"title":"amenity", "value":"amenity"}]);
+        });
+
+        it("includes unpopular keys with a wiki page", function() {
+            var callback = sinon.spy();
+            taginfo.keys({query: "amen"}, callback);
+
+            server.respondWith("GET", new RegExp("https://taginfo.openstreetmap.org/api/4/keys/all"),
+                [200, { "Content-Type": "application/json" },
+                    '{"data":[{"count_all":5190337,"key":"amenity","count_all_fraction":1.0, "count_nodes_fraction":1.0},\
+                              {"count_all":1,"key":"amenityother","count_all_fraction":0.0, "count_nodes_fraction":0.0, "in_wiki": true}]}']);
+            server.respond();
+
+            expect(callback).to.have.been.calledWith(null, [
+                {"title":"amenity", "value":"amenity"}
+                {"title":"amenityother", "value":"amenityother"}
+            ]);
         });
 
         it("sorts keys with ':' below keys without ':'", function() {
@@ -113,7 +129,7 @@ describe("iD.services.taginfo", function() {
             expect(callback).to.have.been.calledWith(null, [{"value":"parking","title":"A place for parking cars"}]);
         });
 
-        it("filters popular values", function() {
+        it("includes popular values", function() {
             var callback = sinon.spy();
             taginfo.values({key: "amenity", query: "par"}, callback);
 
@@ -126,14 +142,33 @@ describe("iD.services.taginfo", function() {
             expect(callback).to.have.been.calledWith(null, [{"value":"parking","title":"A place for parking cars"}]);
         });
 
-        it("excludes values with semicolons", function() {
+        it("includes unpopular values with a wiki page", function() {
             var callback = sinon.spy();
             taginfo.values({key: "amenity", query: "par"}, callback);
 
             server.respondWith("GET", new RegExp("https://taginfo.openstreetmap.org/api/4/key/values"),
                 [200, { "Content-Type": "application/json" },
                     '{"data":[{"value":"parking","description":"A place for parking cars", "fraction":1.0},\
-                              {"value":"parking;partying","description":"A place for parking cars *and* partying", "fraction":1.0}]}']);
+                              {"value":"party","description":"A place for partying", "fraction":0.0, "in_wiki": true}]}']);
+            server.respond();
+
+            expect(callback).to.have.been.calledWith(null, [
+                {"value":"parking","title":"A place for parking cars"},
+                {"value":"party","title":"A place for partying"}
+            ]);
+        });
+
+        it("excludes values with capital letters and some punctuation", function() {
+            var callback = sinon.spy();
+            taginfo.values({key: "amenity", query: "par"}, callback);
+
+            server.respondWith("GET", new RegExp("https://taginfo.openstreetmap.org/api/4/key/values"),
+                [200, { "Content-Type": "application/json" },
+                    '{"data":[{"value":"parking","description":"A place for parking cars", "fraction":0.2},\
+                              {"value":"PArking","description":"A common mispelling", "fraction":0.2},\
+                              {"value":"parking;partying","description":"A place for parking cars *and* partying", "fraction":0.2},\
+                              {"value":"parking, partying","description":"A place for parking cars *and* partying", "fraction":0.2},\
+                              {"value":"*","description":"", "fraction":0.2}]}']);
             server.respond();
 
             expect(callback).to.have.been.calledWith(null, [{"value":"parking","title":"A place for parking cars"}]);

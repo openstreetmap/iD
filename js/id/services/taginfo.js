@@ -34,11 +34,10 @@ iD.services.taginfo = function() {
         return _.omit(parameters, 'geometry', 'debounce');
     }
 
-    function filterKeys(parameters) {
-        var pop_field = 'count_all';
-        if (parameters.filter) pop_field = 'count_' + parameters.filter;
+    function filterKeys(type) {
+        var count_type = type ? 'count_' + type : 'count_all';
         return function(d) {
-            return parseFloat(d[pop_field]) > 2500 || d.in_wiki;
+            return parseFloat(d[count_type]) > 2500 || d.in_wiki;
         };
     }
 
@@ -50,8 +49,8 @@ iD.services.taginfo = function() {
 
     function filterValues() {
         return function(d) {
-            return d.value.match(/;/g) === null &&    // exclude values with ';'
-                (parseFloat(d.fraction) > 0.0 || d.in_wiki);
+            if (d.value.match(/[A-Z*;,]/) !== null) return false;  // exclude some punctuation, uppercase letters
+            return parseFloat(d.fraction) > 0.0 || d.in_wiki;
         };
     }
 
@@ -106,7 +105,8 @@ iD.services.taginfo = function() {
                 page: 1
             }, parameters)), debounce, function(err, d) {
                 if (err) return callback(err);
-                callback(null, d.data.filter(filterKeys(parameters)).sort(sortKeys).map(valKey));
+                var f = filterKeys(parameters.filter);
+                callback(null, d.data.filter(f).sort(sortKeys).map(valKey));
             });
     };
 
@@ -121,7 +121,8 @@ iD.services.taginfo = function() {
                 page: 1
             }, parameters)), debounce, function(err, d) {
                 if (err) return callback(err);
-                callback(null, d.data.filter(filterMultikeys(parameters)).map(valKey));
+                var f = filterMultikeys();
+                callback(null, d.data.filter(f).map(valKey));
             });
     };
 
@@ -136,7 +137,8 @@ iD.services.taginfo = function() {
                 page: 1
             }, parameters)), debounce, function(err, d) {
                 if (err) return callback(err);
-                callback(null, d.data.filter(filterValues()).map(valKeyDescription), parameters);
+                var f = filterValues();
+                callback(null, d.data.filter(f).map(valKeyDescription));
             });
     };
 
