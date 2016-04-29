@@ -1,12 +1,23 @@
 iD.ui.preset.combo =
-iD.ui.preset.typeCombo = function(field, context) {
+iD.ui.preset.typeCombo =
+iD.ui.preset.multiCombo = function(field, context) {
     var dispatch = d3.dispatch('change'),
+        isMulti = (field.type === 'multiCombo'),
         optstrings = field.strings && field.strings.options,
         optarray = field.options,
         snake_case = (field.snake_case || (field.snake_case === undefined)),
-        strings = {},
+        combobox = d3.combobox().minItems(isMulti ? 1 : 2),
+        comboData = [],
+        multiData = [],
+        container,
         input,
         entity;
+
+    // ensure multiCombo field.key ends with a ':'
+    if (isMulti && field.key.match(/:$/) === null) {
+        field.key += ':';
+    }
+
 
     function snake(s) {
         return s.replace(/\s+/g, '_');
@@ -22,18 +33,76 @@ iD.ui.preset.typeCombo = function(field, context) {
             .join(';');
     }
 
-    function optString() {
-        return _.find(_.keys(strings), function(k) {
-                return strings[k] === input.value();
-            });
-    }
 
-    function initCombo(selection) {
-        var d;
+    // returns the tag value for a display value
+    // (for multiCombo, dval should be the key suffix, not the entire key)
+    function tagValue(dval) {
+        dval = clean(dval || '');
 
         if (optstrings) {
+            var match = _.find(comboData, function(o) { return o.value === dval && o.key; });
+            if (match) {
+                return match.key;
+            }
+        }
+
+        if (field.type === 'typeCombo' && !dval) {
+            return 'yes';
+        }
+
+        return (snake_case ? snake(dval) : dval) || undefined;
+    }
+
+
+    // returns the display value for a tag value
+    // (for multiCombo, tval should be the key suffix, not the entire key)
+    function displayValue(tval) {
+        tval = tval || '';
+
+        if (optstrings) {
+            var match = _.find(comboData, function(o) { return o.key === tval && o.value; });
+            if (match) {
+                return match.value;
+            }
+        }
+
+        if (field.type === 'typeCombo' && tval.toLowerCase() === 'yes') {
+            return '';
+        }
+
+        return snake_case ? unsnake(tval) : tval;
+    }
+
+
+    function objectDifference(a, b) {
+        return _.reject(a, function(d1) {
+            return _.any(b, function(d2) { return d1.value === d2.value; });
+        });
+    }
+
+
+    function initCombo(selection, attachTo) {
+        if (optstrings) {
             selection.attr('readonly', 'readonly');
-            d = Object.keys(optstrings).map(function(k) {
+            selection.call(combobox, attachTo);
+            setStaticValues(setPlaceholder);
+
+        } else if (optarray) {
+            selection.call(combobox, attachTo);
+            setStaticValues(setPlaceholder);
+
+        } else if (context.taginfo()) {
+            selection.call(combobox.fetcher(setTaginfoValues), attachTo);
+            setTaginfoValues('', setPlaceholder);
+        }
+    }
+
+
+    function setStaticValues(callback) {
+        if (!(optstrings || optarray)) return;
+
+        if (optstrings) {
+            comboData = Object.keys(optstrings).map(function(k) {
                 var v = field.t('options.' + k, { 'default': optstrings[k] });
                 return {
                     key: k,
@@ -41,11 +110,9 @@ iD.ui.preset.typeCombo = function(field, context) {
                     title: v
                 };
             });
-            selection.call(d3.combobox().data(d));
-            setPlaceholders(d);
 
         } else if (optarray) {
-            d = optarray.map(function(k) {
+            comboData = optarray.map(function(k) {
                 var v = snake_case ? unsnake(k) : k;
                 return {
                     key: k,
@@ -53,24 +120,24 @@ iD.ui.preset.typeCombo = function(field, context) {
                     title: v
                 };
             });
-            selection.call(d3.combobox().data(d));
-            setPlaceholders(d);
-
-        } else if (context.taginfo()) {
-            selection.call(d3.combobox().fetcher(taginfoValues));
-            taginfoValues('', setPlaceholders);
         }
+
+        combobox.data(objectDifference(comboData, multiData));
+        if (callback) callback(comboData);
     }
 
-    function taginfoValues(q, callback) {
-        context.taginfo().values({
+
+    function setTaginfoValues(q, callback) {
+        var fn = isMulti ? 'multikeys' : 'values';
+        context.taginfo()[fn]({
             debounce: true,
             key: field.key,
             geometry: context.geometry(entity.id),
-            query: q
+            query: (isMulti ? field.key : '') + q
         }, function(err, data) {
             if (err) return;
-            var d = _.pluck(data, 'value').map(function(k) {
+            comboData = _.pluck(data, 'value').map(function(k) {
+                if (isMulti) k = k.replace(field.key, '');
                 var v = snake_case ? unsnake(k) : k;
                 return {
                     key: k,
@@ -78,72 +145,151 @@ iD.ui.preset.typeCombo = function(field, context) {
                     title: v
                 };
             });
-            callback(d);
+            comboData = objectDifference(comboData, multiData);
+            if (callback) callback(comboData);
         });
     }
 
-    function setPlaceholders(d) {
-        var vals = _.pluck(d, 'value').filter(function(s) { return s.length < 20; }),
-            placeholders = vals.length > 1 ? vals : _.pluck(d, 'key');
 
-        input.attr('placeholder', field.placeholder() ||
-            (placeholders.slice(0, 3).join(', ') + '…'));
+    function setPlaceholder(d) {
+        var ph;
+        if (isMulti) {
+            ph = field.placeholder() || t('inspector.add');
+        } else {
+            var vals = _.pluck(d, 'value').filter(function(s) { return s.length < 20; }),
+                placeholders = vals.length > 1 ? vals : _.pluck(d, 'key');
+            ph = field.placeholder() || placeholders.slice(0, 3).join(', ');
+        }
+
+        input.attr('placeholder', ph + '…');
     }
 
+
     function change() {
-        var value = optString() || clean(input.value());
+        var val = tagValue(input.value()),
+            t = {};
 
-        if (snake_case) {
-            value = snake(value);
-        }
-        if (field.type === 'typeCombo' && !value) {
-            value = 'yes';
+        if (isMulti) {
+            if (!val) return;
+            container.classed('active', false);
+            input.value('');
+            field.keys.push(field.key + val);
+            t[field.key + val] = 'yes';
+
+        } else {
+            t[field.key] = val;
         }
 
+        dispatch.change(t);
+    }
+
+
+    function removeMultikey(d) {
+        d3.event.stopPropagation();
         var t = {};
-        t[field.key] = value || undefined;
+        t[d.key] = undefined;
         dispatch.change(t);
     }
 
 
     function combo(selection) {
-        input = selection.selectAll('input')
+        if (isMulti) {
+            container = selection.selectAll('ul').data([0]);
+
+            container.enter()
+                .append('ul')
+                .attr('class', 'form-field-multiselect')
+                .on('click', function() {
+                    window.setTimeout(function() { input.node().focus(); }, 100);
+                });
+
+        } else {
+            container = selection;
+        }
+
+        input = container.selectAll('input')
             .data([0]);
 
         input.enter()
             .append('input')
             .attr('type', 'text')
             .attr('id', 'preset-input-' + field.id)
-            .call(initCombo);
+            .call(initCombo, selection);
 
         input
             .on('change', change)
-            .on('blur', change);
+            .on('blur', change)
+            .on('focus', function() {
+                if (isMulti) container.classed('active', true);
+            });
     }
 
-    combo.tags = function(tags) {
-        var key = tags[field.key],
-            optstring = optString(),
-            value = strings[key] || key || '';
 
-        if (field.type === 'typeCombo' && value.toLowerCase() === 'yes') {
-            value = '';
+    combo.tags = function(tags) {
+        if (isMulti) {
+            multiData = [];
+
+            // Build multiData array containing keys already set..
+            Object.keys(tags).forEach(function(key) {
+                if (key.indexOf(field.key) !== 0 || tags[key].toLowerCase() !== 'yes') return;
+
+                var suffix = key.substring(field.key.length);
+                multiData.push({
+                    key: key,
+                    value: displayValue(suffix)
+                });
+            });
+
+            // Set keys for form-field modified (needed for undo and reset buttons)..
+            field.keys = _.pluck(multiData, 'key');
+
+            // Exclude existing multikeys from combo options..
+            var available = objectDifference(comboData, multiData);
+            combobox.data(available);
+
+            // Hide "Add" button if there are no available multiselect options remaining..
+            container.selectAll('.combobox-input, .combobox-caret')
+                .classed('hide', !available.length);
+
+
+            // Render chips
+            var chips = container.selectAll('.chips').data(multiData);
+
+            var enter = chips.enter()
+                .insert('li', 'input')
+                .attr('class', 'chips');
+
+            enter.append('span');
+            enter.append('a');
+
+            chips.select('span')
+                .text(function(d) { return d.value; });
+
+            chips.select('a')
+                .on('click', removeMultikey)
+                .attr('class', 'remove')
+                .text('×');
+
+            chips.exit()
+                .remove();
+
+        } else {
+            input.value(displayValue(tags[field.key]));
         }
-        if (!optstring && snake_case) {
-            value = unsnake(value);
-        }
-        input.value(value);
     };
+
 
     combo.focus = function() {
         input.node().focus();
     };
+
 
     combo.entity = function(_) {
         if (!arguments.length) return entity;
         entity = _;
         return combo;
     };
+
 
     return d3.rebind(combo, dispatch, 'on');
 };

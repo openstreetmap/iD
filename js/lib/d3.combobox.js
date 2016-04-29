@@ -14,7 +14,7 @@ d3.combobox = function() {
         }));
     };
 
-    var combobox = function(input, customBoundingRect) {
+    var combobox = function(input, attachTo) {
         var idx = -1,
             container = d3.select(document.body)
                 .selectAll('div.combobox')
@@ -223,7 +223,8 @@ d3.combobox = function() {
             options.exit()
                 .remove();
 
-            var rect = customBoundingRect ? customBoundingRect.node().getBoundingClientRect() : input.node().getBoundingClientRect();
+            var node = attachTo ? attachTo.node() : input.node(),
+                rect = node.getBoundingClientRect();
 
             container.style({
                 'left': rect.left + 'px',
