@@ -298,6 +298,7 @@ ul li { list-style: none;}
 .al { left: 0; }
 .ar { right: 0; }
 
+input.hide,
 div.hide,
 form.hide,
 button.hide,
@@ -1018,7 +1019,7 @@ button.save.has-count .count::before {
 }
 
 .form-label button {
-    border-left: 1px solid #CCC;
+    border-left: 1px solid #ccc;
     width: 10%;
     height: 100%;
     border-radius: 0;
@@ -1041,7 +1042,7 @@ button.save.has-count .count::before {
 .form-field > input,
 .form-field > textarea,
 .form-field .preset-input-wrap {
-    border: 1px solid #CCC;
+    border: 1px solid #ccc;
     min-height: 30px;
     border-top: 0;
     border-radius: 0 0 4px 4px;
@@ -1053,21 +1054,28 @@ button.save.has-count .count::before {
 }
 
 .inspector-border {
-    border-bottom: 1px solid #CCC
+    border-bottom: 1px solid #ccc
 }
 
 /* Preset form (hover mode) */
 
 .inspector-hover .checkselect label:last-of-type,
 .inspector-hover .preset-input-wrap .label,
+.inspector-hover .form-field-multiselect,
 .inspector-hover input,
 .inspector-hover label {
     background: #ececec;
 }
 
 .inspector-hover a,
+.inspector-hover .form-field-multiselect .chips,
 .inspector-hover .checkselect label:last-of-type {
     color: #666;
+}
+
+.inspector-hover .form-field-multiselect .chips {
+    background: #eee;
+    border: 1px solid #ccc;
 }
 
 /* hide and remove from layout */
@@ -1078,6 +1086,7 @@ button.save.has-count .count::before {
 .inspector-hover .toggle-list label span,
 .inspector-hover .inspector-inner .add-tag,
 .inspector-hover .inspector-inner .add-relation,
+.inspector-hover .form-field-multiselect .combobox-input,
 .inspector-hover .toggle-list label.remove .icon {
     height: 0;
     width: 0;
@@ -1093,6 +1102,7 @@ button.save.has-count .count::before {
 .inspector-hover .combobox-caret,
 .inspector-hover .entity-editor-pane .header button,
 .inspector-hover .spin-control,
+.inspector-hover .form-field-multiselect .chips .remove,
 .inspector-hover .hide-toggle:before,
 .inspector-hover .more-fields,
 .inspector-hover .form-label-button-wrap,
@@ -1221,14 +1231,14 @@ button.save.has-count .count::before {
     line-height: 25px;
     display: inline-block;
     padding: 2px 5px;
-    margin: 0 10px 5px 0;
+    margin: 3px;
     height: 30px;
 }
 
 .form-field-multiselect a {
     font-family: Arial, Helvetica, sans-serif !important;
     font-size: 16px !important;
-    line-height: 25px;
+    line-height: 24px;
     float: right;
     margin: 1px 0 0 5px;
     padding: 0;
@@ -1237,8 +1247,13 @@ button.save.has-count .count::before {
 }
 
 .form-field-multiselect input {
-    border: 0px;
-    width: 110px;
+    border: 1px solid #ddd;
+    width: 100px;
+    margin: 3px;
+}
+
+.form-field-multiselect .combobox-caret {
+    margin: 3px 3px 3px -30px;
 }
 
 .form-field-multiselect input:focus {

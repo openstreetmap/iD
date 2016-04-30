@@ -247,9 +247,10 @@ iD.ui.preset.multiCombo = function(field, context) {
             var available = objectDifference(comboData, multiData);
             combobox.data(available);
 
-            // Hide "Add" button if there are no available multiselect options remaining..
+            // Hide "Add" button if this field uses fixed set of
+            // translateable optstrings and they're all currently used..
             container.selectAll('.combobox-input, .combobox-caret')
-                .classed('hide', !available.length);
+                .classed('hide', optstrings && !available.length);
 
 
             // Render chips
