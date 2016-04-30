@@ -1020,46 +1020,10 @@
         "type": "typeCombo",
         "label": "Type"
     },
-    "recycling/cans": {
-        "key": "recycling:cans",
-        "type": "check",
-        "label": "Accepts Cans"
-    },
-    "recycling/clothes": {
-        "key": "recycling:clothes",
-        "type": "check",
-        "label": "Accepts Clothes"
-    },
-    "recycling/glass": {
-        "key": "recycling:glass",
-        "type": "check",
-        "label": "Accepts Glass"
-    },
-    "recycling/glass_bottles": {
-        "key": "recycling:glass_bottles",
-        "type": "check",
-        "label": "Accepts Glass Bottles"
-    },
-    "recycling/paper": {
-        "key": "recycling:paper",
-        "type": "check",
-        "label": "Accepts Paper"
-    },
-    "recycling/plastic": {
-        "key": "recycling:plastic",
-        "type": "check",
-        "label": "Accepts Plastic"
-    },
-    "recycling/type": {
-        "key": "recycling_type",
-        "type": "combo",
-        "label": "Recycling Type",
-        "strings": {
-            "options": {
-                "container": "Container",
-                "centre": "Recycling Center"
-            }
-        }
+    "recycling_accepts": {
+        "key": "recycling:",
+        "type": "multiCombo",
+        "label": "Accepts"
     },
     "ref": {
         "key": "ref",

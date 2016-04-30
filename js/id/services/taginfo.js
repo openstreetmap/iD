@@ -34,14 +34,24 @@ iD.services.taginfo = function() {
         return _.omit(parameters, 'geometry', 'debounce');
     }
 
-    function popularKeys(parameters) {
-        var pop_field = 'count_all';
-        if (parameters.filter) pop_field = 'count_' + parameters.filter;
-        return function(d) { return parseFloat(d[pop_field]) > 5000 || d.in_wiki; };
+    function filterKeys(type) {
+        var count_type = type ? 'count_' + type : 'count_all';
+        return function(d) {
+            return parseFloat(d[count_type]) > 2500 || d.in_wiki;
+        };
     }
 
-    function popularValues() {
-        return function(d) { return parseFloat(d.fraction) > 0.01 || d.in_wiki; };
+    function filterMultikeys() {
+        return function(d) {
+            return (d.key.match(/:/g) || []).length === 1;  // exactly one ':'
+        };
+    }
+
+    function filterValues() {
+        return function(d) {
+            if (d.value.match(/[A-Z*;,]/) !== null) return false;  // exclude some punctuation, uppercase letters
+            return parseFloat(d.fraction) > 0.0 || d.in_wiki;
+        };
     }
 
     function valKey(d) {
@@ -95,7 +105,24 @@ iD.services.taginfo = function() {
                 page: 1
             }, parameters)), debounce, function(err, d) {
                 if (err) return callback(err);
-                callback(null, d.data.filter(popularKeys(parameters)).sort(sortKeys).map(valKey));
+                var f = filterKeys(parameters.filter);
+                callback(null, d.data.filter(f).sort(sortKeys).map(valKey));
+            });
+    };
+
+    taginfo.multikeys = function(parameters, callback) {
+        var debounce = parameters.debounce;
+        parameters = clean(setSort(parameters));
+        request(endpoint + 'keys/all?' +
+            iD.util.qsString(_.extend({
+                rp: 25,
+                sortname: 'count_all',
+                sortorder: 'desc',
+                page: 1
+            }, parameters)), debounce, function(err, d) {
+                if (err) return callback(err);
+                var f = filterMultikeys();
+                callback(null, d.data.filter(f).map(valKey));
             });
     };
 
@@ -110,7 +137,8 @@ iD.services.taginfo = function() {
                 page: 1
             }, parameters)), debounce, function(err, d) {
                 if (err) return callback(err);
-                callback(null, d.data.filter(popularValues()).map(valKeyDescription), parameters);
+                var f = filterValues();
+                callback(null, d.data.filter(f).map(valKeyDescription));
             });
     };
 

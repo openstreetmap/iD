@@ -316,6 +316,7 @@
             "yes": "Yes",
             "no": "No"
         },
+        "add": "Add",
         "none": "None",
         "node": "Node",
         "way": "Way",
@@ -1280,30 +1281,8 @@
             "railway": {
                 "label": "Type"
             },
-            "recycling/cans": {
-                "label": "Accepts Cans"
-            },
-            "recycling/clothes": {
-                "label": "Accepts Clothes"
-            },
-            "recycling/glass": {
-                "label": "Accepts Glass"
-            },
-            "recycling/glass_bottles": {
-                "label": "Accepts Glass Bottles"
-            },
-            "recycling/paper": {
-                "label": "Accepts Paper"
-            },
-            "recycling/plastic": {
-                "label": "Accepts Plastic"
-            },
-            "recycling/type": {
-                "label": "Recycling Type",
-                "options": {
-                    "container": "Container",
-                    "centre": "Recycling Center"
-                }
+            "recycling_accepts": {
+                "label": "Accepts"
             },
             "ref": {
                 "label": "Reference"
