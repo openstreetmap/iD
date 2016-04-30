@@ -653,7 +653,7 @@
     },
     "internet_access": {
         "key": "internet_access",
-        "type": "multiselect",
+        "type": "combo",
         "label": "Internet Access",
         "strings": {
             "options": {
@@ -1020,9 +1020,9 @@
         "type": "typeCombo",
         "label": "Type"
     },
-    "recycling/recycling_choices": {
+    "recycling_accepts": {
         "key": "recycling:",
-        "type": "multiselect",
+        "type": "multiCombo",
         "label": "Accepts"
     },
     "ref": {
@@ -1234,7 +1234,7 @@
     },
     "sport_ice": {
         "key": "sport",
-        "type": "multiselect",
+        "type": "combo",
         "label": "Sport",
         "options": [
             "skating",

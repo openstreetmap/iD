@@ -1581,7 +1581,7 @@
         "fields": [
             "operator",
             "address",
-            "recycling/recycling_choices"
+            "recycling_accepts"
         ],
         "geometry": [
             "point",

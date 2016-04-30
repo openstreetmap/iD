@@ -1,5 +1,5 @@
 {
     "key": "recycling:",
-    "type": "multiselect",
+    "type": "multiCombo",
     "label": "Accepts"
 }

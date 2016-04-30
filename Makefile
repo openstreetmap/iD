@@ -232,7 +232,6 @@ dist/iD.js: \
 	js/id/ui/preset/address.js \
 	js/id/ui/preset/check.js \
 	js/id/ui/preset/combo.js \
-	js/id/ui/preset/multiselect.js \
 	js/id/ui/preset/cycleway.js \
 	js/id/ui/preset/input.js \
 	js/id/ui/preset/localized.js \

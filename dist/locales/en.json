@@ -1281,7 +1281,7 @@
             "railway": {
                 "label": "Type"
             },
-            "recycling/recycling_choices": {
+            "recycling_accepts": {
                 "label": "Accepts"
             },
             "ref": {

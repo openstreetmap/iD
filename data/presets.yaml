@@ -773,7 +773,7 @@ en:
       railway:
         # 'railway=*'
         label: Type
-      recycling/recycling_choices:
+      recycling_accepts:
         # 'recycling:=*'
         label: Accepts
       ref:
