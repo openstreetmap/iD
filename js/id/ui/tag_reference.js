@@ -69,6 +69,7 @@ iD.ui.TagReference = function(tag, context) {
             body
                 .append('a')
                 .attr('target', '_blank')
+                .attr('tabindex', -1)
                 .attr('href', 'https://wiki.openstreetmap.org/wiki/' + docs.title)
                 .call(iD.svg.Icon('#icon-out-link', 'inline'))
                 .append('span')

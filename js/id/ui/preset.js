@@ -125,6 +125,7 @@ iD.ui.preset = function(context) {
 
         wrap.append('button')
             .attr('class', 'remove-icon')
+            .attr('tabindex', -1)
             .call(iD.svg.Icon('#operation-delete'));
 
         wrap.append('button')
