@@ -159,7 +159,8 @@ iD.ui.preset = function(context) {
                     .call(field.input)
                     .selectAll('input')
                     .on('keydown', function() {
-                        if (d3.event.keyCode === 13) {  // enter
+                        // if user presses enter, and combobox is not active, accept edits..
+                        if (d3.event.keyCode === 13 && d3.select('.combobox').empty()) {
                             context.enter(iD.modes.Browse(context));
                         }
                     })

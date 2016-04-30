@@ -154,6 +154,7 @@ d3.combobox = function() {
         }
 
         function nav(dir) {
+            if (!suggestions.length) return;
             idx = Math.max(Math.min(idx + dir, suggestions.length - 1), 0);
             input.property('value', suggestions[idx].value);
             render();
