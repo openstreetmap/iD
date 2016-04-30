@@ -1061,19 +1061,19 @@ button.save.has-count .count::before {
 
 .inspector-hover .checkselect label:last-of-type,
 .inspector-hover .preset-input-wrap .label,
-.inspector-hover .form-field-multiselect,
+.inspector-hover .form-field-multicombo,
 .inspector-hover input,
 .inspector-hover label {
     background: #ececec;
 }
 
 .inspector-hover a,
-.inspector-hover .form-field-multiselect .chips,
+.inspector-hover .form-field-multicombo .chips,
 .inspector-hover .checkselect label:last-of-type {
     color: #666;
 }
 
-.inspector-hover .form-field-multiselect .chips {
+.inspector-hover .form-field-multicombo .chips {
     background: #eee;
     border: 1px solid #ccc;
 }
@@ -1086,7 +1086,7 @@ button.save.has-count .count::before {
 .inspector-hover .toggle-list label span,
 .inspector-hover .inspector-inner .add-tag,
 .inspector-hover .inspector-inner .add-relation,
-.inspector-hover .form-field-multiselect .combobox-input,
+.inspector-hover .form-field-multicombo .combobox-input,
 .inspector-hover .toggle-list label.remove .icon {
     height: 0;
     width: 0;
@@ -1102,7 +1102,7 @@ button.save.has-count .count::before {
 .inspector-hover .combobox-caret,
 .inspector-hover .entity-editor-pane .header button,
 .inspector-hover .spin-control,
-.inspector-hover .form-field-multiselect .chips .remove,
+.inspector-hover .form-field-multicombo .chips .remove,
 .inspector-hover .hide-toggle:before,
 .inspector-hover .more-fields,
 .inspector-hover .form-label-button-wrap,
@@ -1203,9 +1203,9 @@ button.save.has-count .count::before {
     border-bottom-right-radius: 4px;
 }
 
-/* preset form multiselect */
+/* preset form multicombo */
 
-.form-field-multiselect {
+.form-field-multicombo {
     border: 1px solid #cfcfcf;
     border-top: 0px;
     padding: 5px 0 5px 10px;
@@ -1215,16 +1215,16 @@ button.save.has-count .count::before {
     overflow: hidden;
 }
 
-.form-field-multiselect:focus {
+.form-field-multicombo:focus {
     border-bottom: 0px;
 }
 
-.form-field-multiselect.active {
+.form-field-multicombo.active {
     border-bottom-left-radius: 0px;
     border-bottom-right-radius: 0px;
 }
 
-.form-field-multiselect li {
+.form-field-multicombo li {
     background-color: #eff2f7;
     border: 1px solid #ccd5e3;
     border-radius: 4px;
@@ -1235,7 +1235,7 @@ button.save.has-count .count::before {
     height: 30px;
 }
 
-.form-field-multiselect a {
+.form-field-multicombo a {
     font-family: Arial, Helvetica, sans-serif !important;
     font-size: 16px !important;
     line-height: 24px;
@@ -1246,17 +1246,17 @@ button.save.has-count .count::before {
     color: #a6b4ce;
 }
 
-.form-field-multiselect input {
+.form-field-multicombo input {
     border: 1px solid #ddd;
     width: 100px;
     margin: 3px;
 }
 
-.form-field-multiselect .combobox-caret {
+.form-field-multicombo .combobox-caret {
     margin: 3px 3px 3px -30px;
 }
 
-.form-field-multiselect input:focus {
+.form-field-multicombo input:focus {
     border-radius: 4px !important;
 }
 

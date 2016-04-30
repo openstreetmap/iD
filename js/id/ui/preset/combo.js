@@ -198,7 +198,7 @@ iD.ui.preset.multiCombo = function(field, context) {
 
             container.enter()
                 .append('ul')
-                .attr('class', 'form-field-multiselect')
+                .attr('class', 'form-field-multicombo')
                 .on('click', function() {
                     window.setTimeout(function() { input.node().focus(); }, 100);
                 });
