@@ -175,6 +175,7 @@ iD.ui.preset.multiCombo = function(field, context) {
             input.value('');
             field.keys.push(field.key + val);
             t[field.key + val] = 'yes';
+            window.setTimeout(function() { input.node().focus(); }, 10);
 
         } else {
             t[field.key] = val;
@@ -200,7 +201,7 @@ iD.ui.preset.multiCombo = function(field, context) {
                 .append('ul')
                 .attr('class', 'form-field-multicombo')
                 .on('click', function() {
-                    window.setTimeout(function() { input.node().focus(); }, 100);
+                    window.setTimeout(function() { input.node().focus(); }, 10);
                 });
 
         } else {
@@ -218,10 +219,18 @@ iD.ui.preset.multiCombo = function(field, context) {
 
         input
             .on('change', change)
-            .on('blur', change)
-            .on('focus', function() {
-                if (isMulti) container.classed('active', true);
-            });
+            .on('blur', change);
+
+        if (isMulti) {
+            combobox
+                .on('accept', function() {
+                    input.node().blur();
+                    input.node().focus();
+                });
+
+            input
+                .on('focus', function() { container.classed('active', true); });
+        }
     }
 
 
