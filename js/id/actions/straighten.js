@@ -45,7 +45,7 @@ iD.actions.Straighten = function(wayId, projection) {
 
         return graph;
     };
-    
+
     action.disabled = function(graph) {
         // check way isn't too bendy
         var way = graph.entity(wayId),
@@ -56,6 +56,10 @@ iD.actions.Straighten = function(wayId, projection) {
             threshold = 0.2 * Math.sqrt(Math.pow(startPoint[0] - endPoint[0], 2) + Math.pow(startPoint[1] - endPoint[1], 2)),
             i;
 
+        if (threshold === 0) {
+            return 'too_bendy';
+        }
+
         for (i = 1; i < points.length-1; i++) {
             var point = points[i],
                 u = positionAlongWay(point, startPoint, endPoint),
@@ -64,7 +68,7 @@ iD.actions.Straighten = function(wayId, projection) {
                 dist = Math.sqrt(Math.pow(p0 - point[0], 2) + Math.pow(p1 - point[1], 2));
 
             // to bendy if point is off by 20% of total start/end distance in projected space
-            if (dist > threshold) {
+            if (isNaN(dist) || dist > threshold) {
                 return 'too_bendy';
             }
         }
