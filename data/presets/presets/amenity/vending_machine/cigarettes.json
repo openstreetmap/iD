@@ -1,6 +1,7 @@
 {
     "fields": [
-        "operator"
+        "operator",
+        "currency_multi"
     ],
     "geometry": [
         "point"

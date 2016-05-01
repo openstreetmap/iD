@@ -340,6 +340,11 @@
         "type": "combo",
         "label": "Cuisine"
     },
+    "currency_multi": {
+        "key": "currency:",
+        "type": "multiCombo",
+        "label": "Currency Types"
+    },
     "cycleway": {
         "keys": [
             "cycleway:left",

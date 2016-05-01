@@ -852,6 +852,9 @@
             "cuisine": {
                 "label": "Cuisine"
             },
+            "currency_multi": {
+                "label": "Currency Types"
+            },
             "cycleway": {
                 "label": "Bike Lanes",
                 "placeholder": "none",

@@ -260,6 +260,9 @@ en:
       cuisine:
         # 'cuisine=*'
         label: Cuisine
+      currency_multi:
+        # 'currency:=*'
+        label: Currency Types
       cycleway:
         # 'cycleway:left=*, cycleway:right=*'
         label: Bike Lanes
