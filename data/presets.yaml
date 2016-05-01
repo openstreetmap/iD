@@ -674,6 +674,9 @@ en:
           surface: Surface
           # parking=underground
           underground: Underground
+      payment_multi:
+        # 'payment:=*'
+        label: Payment Types
       phone:
         # 'phone=*'
         label: Phone

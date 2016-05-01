@@ -1997,6 +1997,7 @@
     "amenity/vending_machine/cigarettes": {
         "fields": [
             "operator",
+            "payment_multi",
             "currency_multi"
         ],
         "geometry": [
@@ -2014,6 +2015,7 @@
     "amenity/vending_machine/condoms": {
         "fields": [
             "operator",
+            "payment_multi",
             "currency_multi"
         ],
         "geometry": [
@@ -2031,6 +2033,7 @@
     "amenity/vending_machine/drinks": {
         "fields": [
             "operator",
+            "payment_multi",
             "currency_multi"
         ],
         "geometry": [
@@ -2052,6 +2055,7 @@
     "amenity/vending_machine/excrement_bags": {
         "fields": [
             "operator",
+            "payment_multi",
             "currency_multi"
         ],
         "geometry": [
@@ -2072,6 +2076,7 @@
     "amenity/vending_machine/news_papers": {
         "fields": [
             "operator",
+            "payment_multi",
             "currency_multi"
         ],
         "geometry": [
@@ -2089,6 +2094,7 @@
     "amenity/vending_machine/parcel_pickup_dropoff": {
         "fields": [
             "operator",
+            "payment_multi",
             "currency_multi"
         ],
         "geometry": [
@@ -2108,6 +2114,7 @@
     "amenity/vending_machine/parking_tickets": {
         "fields": [
             "operator",
+            "payment_multi",
             "currency_multi"
         ],
         "geometry": [
@@ -2126,6 +2133,7 @@
     "amenity/vending_machine/public_transport_tickets": {
         "fields": [
             "operator",
+            "payment_multi",
             "currency_multi"
         ],
         "geometry": [
@@ -2148,6 +2156,7 @@
     "amenity/vending_machine/sweets": {
         "fields": [
             "operator",
+            "payment_multi",
             "currency_multi"
         ],
         "geometry": [
@@ -2171,6 +2180,7 @@
         "fields": [
             "vending",
             "operator",
+            "payment_multi",
             "currency_multi"
         ],
         "geometry": [

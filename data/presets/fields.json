@@ -902,6 +902,11 @@
             }
         }
     },
+    "payment_multi": {
+        "key": "payment:",
+        "type": "multiCombo",
+        "label": "Payment Types"
+    },
     "phone": {
         "key": "phone",
         "type": "tel",

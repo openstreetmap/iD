@@ -1203,6 +1203,9 @@
                     "lane": "Roadside Lane"
                 }
             },
+            "payment_multi": {
+                "label": "Payment Types"
+            },
             "phone": {
                 "label": "Phone",
                 "placeholder": "+31 42 123 4567"
