@@ -370,33 +370,9 @@ en:
       fuel:
         # 'fuel=*'
         label: Fuel
-      fuel/biodiesel:
-        # 'fuel:biodiesel=*'
-        label: Sells Biodiesel
-      fuel/diesel:
-        # 'fuel:diesel=*'
-        label: Sells Diesel
-      fuel/e10:
-        # 'fuel:e10=*'
-        label: Sells E10
-      fuel/e85:
-        # 'fuel:e85=*'
-        label: Sells E85
-      fuel/lpg:
-        # 'fuel:lpg=*'
-        label: Sells Propane
-      fuel/octane_100:
-        # 'fuel:octane_100=*'
-        label: Sells Racing Gasoline
-      fuel/octane_91:
-        # 'fuel:octane_91=*'
-        label: Sells Regular Gasoline
-      fuel/octane_95:
-        # 'fuel:octane_95=*'
-        label: Sells Midgrade Gasoline
-      fuel/octane_98:
-        # 'fuel:octane_98=*'
-        label: Sells Premium Gasoline
+      fuel_multi:
+        # 'fuel:=*'
+        label: Fuel Types
       gauge:
         # 'gauge=*'
         label: Gauge
