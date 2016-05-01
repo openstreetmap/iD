@@ -172,6 +172,9 @@ en:
       bicycle_parking:
         # 'bicycle_parking=*'
         label: Type
+      bin:
+        # 'bin=*'
+        label: Waste Bin
       boundary:
         # 'boundary=*'
         label: Type

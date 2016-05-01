@@ -1,6 +1,7 @@
 {
     "fields": [
         "operator",
+        "fee",
         "payment_multi",
         "currency_multi"
     ],

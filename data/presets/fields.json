@@ -231,6 +231,11 @@
         "type": "combo",
         "label": "Type"
     },
+    "bin": {
+        "key": "bin",
+        "type": "check",
+        "label": "Waste Bin"
+    },
     "boundary": {
         "key": "boundary",
         "type": "combo",

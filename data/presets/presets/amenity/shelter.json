@@ -1,6 +1,7 @@
 {
     "fields": [
-        "shelter_type"
+        "shelter_type",
+        "bin"
     ],
     "geometry": [
         "point",

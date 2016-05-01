@@ -781,6 +781,9 @@
             "bicycle_parking": {
                 "label": "Type"
             },
+            "bin": {
+                "label": "Waste Bin"
+            },
             "boundary": {
                 "label": "Type"
             },
