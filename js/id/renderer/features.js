@@ -100,6 +100,10 @@ iD.Features = function(context) {
         );
     }, 250);
 
+    defineFeature('indoor', function isIndoorOther(entity) {
+        return !!entity.tags.level;
+    });
+
     defineFeature('indoor_different_level', function isHiddenByLevel(entity, resolver, geometry) { //disabled in indoor_mode -> hides unwanted levels
         var current = context.indoor().level();
 
@@ -117,14 +121,6 @@ iD.Features = function(context) {
             if (current < 0 || current >= parseFloat(entity.tags['building:levels'] || 0))  //one level <=> level=0
                 return true;
         }
-
-        if (current > 0 && entity.tags.highway && !entity.tags.level) {
-            return true;
-        }
-    });
-
-    defineFeature('indoor', function isIndoorOther(entity) {
-        return !!entity.tags.level;
     });
 
     defineFeature('landuse', function isLanduse(entity, resolver, geometry) {

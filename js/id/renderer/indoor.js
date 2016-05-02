@@ -69,13 +69,13 @@ iD.Indoor = function(context) {
 
         indoorLevel = '0';
         redraw();
+        setBackgroundOpacity('revert');
     }
 
     function redraw() {
         context.surface().classed('indoor-mode', indoorMode);
         context.surface().classed('indoor-underground', indoorLevel < 0);
-        context.surface().classed('indoor-aboveground', indoorLevel > 0);
-        setBackgroundOpacity(indoorLevel < 0 ? 0.1 : 'revert');
+        setBackgroundOpacity(indoorLevel < 0 ? 0.05 : 0.2);
 
         features.reset();
         dispatch.levelChanged(); // update hash & combo, redraw map
