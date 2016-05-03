@@ -1,14 +1,15 @@
-This file documents efforts toward establishing a public API for iD, one that
-can support plugin development.
+This file documents efforts toward establishing a public API for iD.
 
 ## URL parameters
+
+##### iD Standalone
 
 iD supports several URL parameters. When constructing a URL to a standalone instance
 of iD (e.g. `http://openstreetmap.us/iD/release/`), the following parameters are available
 in the hash portion of the URL:
 
-* `map` - A slash separated zoom level, longitude, and latitude. Example:
-  `map=20.00/-77.02271/38.90085`.
+* `map` - A slash separated `zoom/longitude/latitude`.  Example:
+  `map=20.00/-77.02271/38.90085`
 * `id` - The character 'n', 'w', or 'r', followed by the OSM ID of a node,
    way or relation, respectively. Selects the specified entity, and, unless
    a `map` parameter is also provided, centers the map on it.
@@ -17,20 +18,32 @@ in the hash portion of the URL:
   or a custom tile URL. A custom URL is specified in the format `custom:<url>`,
   where the URL can contain the standard tile URL placeholders `{x}`, `{y}` and
   `{z}`/`{zoom}`, `{ty}` for flipped TMS-style Y coordinates, and `{switch:a,b,c}` for
-  DNS multiplexing. Example:
+  DNS multiplexing.  Example:
   `background=custom:http://{switch:a,b,c}.tiles.mapbox.com/v4/examples.map-4l7djmvo/{z}/{x}/{y}.png`
+* `gpx` - A custom URL for loading a gpx track.  Specifying a `gpx` parameter will
+  automatically enable the gpx layer for display.  Example:
+  `gpx=https://tasks.hotosm.org/project/592/task/16.gpx`
+* `offset` - imagery offset in meters, formatted as `east,north`.  Example:
+  `offset=-10,5`
 * `comment` - Prefills the changeset comment box, for use when integrating iD with
-  external task management or quality assurance tools. Example:
+  external task management or quality assurance tools.  Example:
   `comment=CAR%20crisis%2C%20refugee%20areas%20in%20Cameroon%20%23hotosm-task-592`.
+
+##### iD on openstreetmap.org (Rails Port)
 
 When constructing a URL to an instance of iD embedded in the OpenStreetMap Rails
 Port (e.g. `http://www.openstreetmap.org/edit?editor=id`), the following parameters
 are available as regular URL query parameters:
 
+* `map` - slash separated `zoom/latitude/longitude`.  Example:
+  `map=20.00/38.90085/-77.02271`.
 * `lat`, `lon`, `zoom` - Self-explanatory.
 * `node`, `way`, `relation` - Select the specified entity.
+* `background` - same as standalone
+* `gpx` - same as standalone
+* `offset` - same as standalone
+* `comment` - same as standalone
 
-In addition, the `background` parameter is available as a hash parameter as above.
 
 ## CSS selectors
 

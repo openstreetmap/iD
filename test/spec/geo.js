@@ -131,6 +131,32 @@ describe('iD.geo', function() {
         });
     });
 
+    describe('.offsetToMeters', function() {
+        it('[0, 0] pixel offset is [0, -0] meter offset', function() {
+            var meters = iD.geo.offsetToMeters([0, 0]);
+            expect(meters[0]).to.eql(0);
+            expect(meters[1]).to.eql(-0);
+        });
+        it('[0.00064, -0.00064] pixel offset is roughly [100, 100] meter offset', function() {
+            var meters = iD.geo.offsetToMeters([0.00064, -0.00064]);
+            expect(meters[0]).to.be.within(99.5, 100.5);
+            expect(meters[1]).to.be.within(99.5, 100.5);
+        });
+    });
+
+    describe('.metersToOffset', function() {
+        it('[0, 0] meter offset is [0, -0] pixel offset', function() {
+            var offset = iD.geo.metersToOffset([0, 0]);
+            expect(offset[0]).to.eql(0);
+            expect(offset[1]).to.eql(-0);
+        });
+        it('[100, 100] meter offset is roughly [0.00064, -0.00064] pixel offset', function() {
+            var offset = iD.geo.metersToOffset([100, 100]);
+            expect(offset[0]).to.be.within(0.000635, 0.000645);
+            expect(offset[1]).to.be.within(-0.000645, -0.000635);
+        });
+    });
+
     describe('.sphericalDistance', function() {
         it('distance between two same points is zero', function() {
             var a = [0, 0],

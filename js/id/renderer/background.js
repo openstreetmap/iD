@@ -197,12 +197,26 @@ iD.Background = function(context) {
         var overlays = (q.overlays || '').split(',');
         overlays.forEach(function(overlay) {
             overlay = findSource(overlay);
-            if (overlay) background.toggleOverlayLayer(overlay);
+            if (overlay) {
+                background.toggleOverlayLayer(overlay);
+            }
         });
 
         if (q.gpx) {
             var gpx = context.layers().layer('gpx');
-            if (gpx) { gpx.url(q.gpx); }
+            if (gpx) {
+                gpx.url(q.gpx);
+            }
+        }
+
+        if (q.offset) {
+            var offset = q.offset.replace(/;/g, ',').split(',').map(function(n) {
+                return !isNaN(n) && n;
+            });
+
+            if (offset.length === 2) {
+                background.offset(iD.geo.metersToOffset(offset));
+            }
         }
     };
 

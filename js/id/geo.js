@@ -48,6 +48,28 @@ iD.geo.metersToLon = function(m, atLat) {
         m / 111319.490793 / Math.abs(Math.cos(atLat * (Math.PI/180)));
 };
 
+iD.geo.offsetToMeters = function(offset) {
+    var equatRadius = 6356752.314245179,
+        polarRadius = 6378137.0,
+        tileSize = 256;
+
+    return [
+        offset[0] * 2 * Math.PI * equatRadius / tileSize,
+        -offset[1] * 2 * Math.PI * polarRadius / tileSize
+    ];
+};
+
+iD.geo.metersToOffset = function(meters) {
+    var equatRadius = 6356752.314245179,
+        polarRadius = 6378137.0,
+        tileSize = 256;
+
+    return [
+        meters[0] * tileSize / (2 * Math.PI * equatRadius),
+        -meters[1] * tileSize / (2 * Math.PI * polarRadius)
+    ];
+};
+
 // Equirectangular approximation of spherical distances on Earth
 iD.geo.sphericalDistance = function(a, b) {
     var x = iD.geo.lonToMeters(a[0] - b[0], (a[1] + b[1]) / 2),
