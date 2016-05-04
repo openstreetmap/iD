@@ -1,5 +1,22 @@
 :warning: = Breaking change, may affect downstream projects or sites that embed iD.
 
+## 1.9.4
+##### May 3, 2016
+* Fix bug causing save button to remain disabled even when changeset comment is entered (#3096)
+* Support setting imagery offset via url hash parameter (#3093)
+* Don't allow user to straighten a line if start/end nodes are at the same location (#2792)
+* Add `fee` and `bin` fields to some presets (#2872)
+* Add multiCombo field type selecting multiple items from a list (#3034, #3080, thanks @kepta)
+  * Support `payment:` tagging, add to vending machine presets (#2872)
+  * Support `currency:` tagging, add to vending machine, money exchange, ATM presets (#2872)
+  * Support `fuel:` tagging, add to fuel station presets (#1987)
+  * Support `recycling:` tagging, add to recycling presets (#2873)
+* Improve tabbing and keyboard navigation in the entity editor
+* Exclude `name` tag when validating whether a feature has tags (#3091)
+* Add taginfo typeahead behavior to combo fields (#3089)
+* Lower popularity thresholds for taginfo lookups
+* Support looking up languages by English or local names (#3023, thanks @mapmeld)
+
 ## 1.9.3
 ##### Apr 25, 2016
 * Display "Choose language" placeholder value for Wikipedia language field (#3071)
