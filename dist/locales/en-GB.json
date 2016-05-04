@@ -316,6 +316,7 @@
             "yes": "Yes",
             "no": "No"
         },
+        "add": "Add",
         "none": "None",
         "node": "Node",
         "way": "Way",
@@ -954,33 +955,6 @@
             "fuel": {
                 "label": "Fuel"
             },
-            "fuel/biodiesel": {
-                "label": "Sells Biodiesel"
-            },
-            "fuel/diesel": {
-                "label": "Sells Diesel"
-            },
-            "fuel/e10": {
-                "label": "Sells E10"
-            },
-            "fuel/e85": {
-                "label": "Sells E85"
-            },
-            "fuel/lpg": {
-                "label": "Sells LPG"
-            },
-            "fuel/octane_100": {
-                "label": "Sells Racing Petrol"
-            },
-            "fuel/octane_91": {
-                "label": "Sells Regular Petrol"
-            },
-            "fuel/octane_95": {
-                "label": "Sells Midgrade Petrol"
-            },
-            "fuel/octane_98": {
-                "label": "Sells Premium Petrol"
-            },
             "gauge": {
                 "label": "Gauge"
             },
@@ -1279,31 +1253,6 @@
             },
             "railway": {
                 "label": "Type"
-            },
-            "recycling/cans": {
-                "label": "Accepts Cans"
-            },
-            "recycling/clothes": {
-                "label": "Accepts Clothes"
-            },
-            "recycling/glass": {
-                "label": "Accepts Glass"
-            },
-            "recycling/glass_bottles": {
-                "label": "Accepts Glass Bottles"
-            },
-            "recycling/paper": {
-                "label": "Accepts Paper"
-            },
-            "recycling/plastic": {
-                "label": "Accepts Plastic"
-            },
-            "recycling/type": {
-                "label": "Recycling Type",
-                "options": {
-                    "centre": "Recycling Centre",
-                    "container": "Container"
-                }
             },
             "ref": {
                 "label": "Reference"

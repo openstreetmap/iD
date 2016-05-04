@@ -795,33 +795,6 @@
             "fuel": {
                 "label": "Combustible"
             },
-            "fuel/biodiesel": {
-                "label": "Biodiesel"
-            },
-            "fuel/diesel": {
-                "label": "Diesel"
-            },
-            "fuel/e10": {
-                "label": "E10"
-            },
-            "fuel/e85": {
-                "label": "E85"
-            },
-            "fuel/lpg": {
-                "label": "Propanu"
-            },
-            "fuel/octane_100": {
-                "label": "Gasolina de competición"
-            },
-            "fuel/octane_91": {
-                "label": "Gasolina normal"
-            },
-            "fuel/octane_95": {
-                "label": "Gasolina media"
-            },
-            "fuel/octane_98": {
-                "label": "Gasolina súper"
-            },
             "gauge": {
                 "label": "Anchu de vía"
             },
@@ -1097,25 +1070,6 @@
             },
             "railway": {
                 "label": "Tipu"
-            },
-            "recycling/cans": {
-                "label": "Aceuta botes"
-            },
-            "recycling/clothes": {
-                "label": "Aceuta ropa"
-            },
-            "recycling/glass": {
-                "label": "Aceuta vidriu"
-            },
-            "recycling/paper": {
-                "label": "Aceuta papel"
-            },
-            "recycling/type": {
-                "label": "Tipu de reciclaxe",
-                "options": {
-                    "centre": "Centru de reciclaxe",
-                    "container": "Contenedor"
-                }
             },
             "ref": {
                 "label": "Referencia"

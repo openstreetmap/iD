@@ -844,33 +844,6 @@
             "fuel": {
                 "label": "주유소"
             },
-            "fuel/biodiesel": {
-                "label": "바이오디젤 판매"
-            },
-            "fuel/diesel": {
-                "label": "디젤 판매"
-            },
-            "fuel/e10": {
-                "label": "E10 판매"
-            },
-            "fuel/e85": {
-                "label": "E85 판매"
-            },
-            "fuel/lpg": {
-                "label": "프로판 판매; LPG"
-            },
-            "fuel/octane_100": {
-                "label": "경주용 휘발유 판매"
-            },
-            "fuel/octane_91": {
-                "label": "보통 휘발유 판매"
-            },
-            "fuel/octane_95": {
-                "label": "중급 휘발유 판매"
-            },
-            "fuel/octane_98": {
-                "label": "고급 휘발유 판매"
-            },
             "gauge": {
                 "label": "궤간"
             },
@@ -1134,24 +1107,6 @@
             },
             "railway": {
                 "label": "유형"
-            },
-            "recycling/cans": {
-                "label": "캔류"
-            },
-            "recycling/clothes": {
-                "label": "옷류"
-            },
-            "recycling/glass": {
-                "label": "병류"
-            },
-            "recycling/paper": {
-                "label": "종이류"
-            },
-            "recycling/type": {
-                "label": "재활용 종류",
-                "options": {
-                    "centre": "재활용 센터"
-                }
             },
             "ref": {
                 "label": "참조"

@@ -932,21 +932,6 @@
             "fuel": {
                 "label": "Polttoaine"
             },
-            "fuel/biodiesel": {
-                "label": "Biodiesel-myynti"
-            },
-            "fuel/diesel": {
-                "label": "Diesel-myynti"
-            },
-            "fuel/e10": {
-                "label": "E10-myynti"
-            },
-            "fuel/e85": {
-                "label": "E85-myynti"
-            },
-            "fuel/lpg": {
-                "label": "Propaanin myynti"
-            },
             "gauge": {
                 "label": "Raideväli"
             },
@@ -1225,31 +1210,6 @@
             },
             "railway": {
                 "label": "Tyyppi"
-            },
-            "recycling/cans": {
-                "label": "Tölkinkeräys"
-            },
-            "recycling/clothes": {
-                "label": "Vaatekeräys"
-            },
-            "recycling/glass": {
-                "label": "Lasinkeräys"
-            },
-            "recycling/glass_bottles": {
-                "label": "Lasipullojenkeräys"
-            },
-            "recycling/paper": {
-                "label": "Paperinkeräys"
-            },
-            "recycling/plastic": {
-                "label": "Muovinkeräys"
-            },
-            "recycling/type": {
-                "label": "Kierrätyksen tyyppi",
-                "options": {
-                    "centre": "Kierrätyskeskus",
-                    "container": "Säiliö"
-                }
             },
             "ref": {
                 "label": "Tie- tai linjanumero"

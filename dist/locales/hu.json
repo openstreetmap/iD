@@ -954,33 +954,6 @@
             "fuel": {
                 "label": "Üzemanyag"
             },
-            "fuel/biodiesel": {
-                "label": "Biodízelt árul"
-            },
-            "fuel/diesel": {
-                "label": "Dízelt árul"
-            },
-            "fuel/e10": {
-                "label": "E10-et árul"
-            },
-            "fuel/e85": {
-                "label": "E85-öt árul"
-            },
-            "fuel/lpg": {
-                "label": "Propánt árul"
-            },
-            "fuel/octane_100": {
-                "label": "Verseny benzint árul  min 100 oktánnal"
-            },
-            "fuel/octane_91": {
-                "label": "Normál benzint árul"
-            },
-            "fuel/octane_95": {
-                "label": "95-ös oktánszámú szuperbenzint árul"
-            },
-            "fuel/octane_98": {
-                "label": "Prémium benzint árul"
-            },
             "gauge": {
                 "label": "Nyomtáv"
             },
@@ -1279,31 +1252,6 @@
             },
             "railway": {
                 "label": "Típus"
-            },
-            "recycling/cans": {
-                "label": "Fémhulladékot elfogad"
-            },
-            "recycling/clothes": {
-                "label": "Használt ruhát elfogad"
-            },
-            "recycling/glass": {
-                "label": "Üveget elfogad"
-            },
-            "recycling/glass_bottles": {
-                "label": "Üvegpalackot elfogad"
-            },
-            "recycling/paper": {
-                "label": "Papírt elfogad"
-            },
-            "recycling/plastic": {
-                "label": "Műanyagot elfogad"
-            },
-            "recycling/type": {
-                "label": "Újrahasznosítás típusa",
-                "options": {
-                    "centre": "Újrahasznosító központ",
-                    "container": "Konténer"
-                }
             },
             "ref": {
                 "label": "Azonosító"
@@ -1856,6 +1804,10 @@
             "amenity/post_office": {
                 "name": "Posta",
                 "terms": "postaközpont,posta,levél,kézbesítő,kézbesítés"
+            },
+            "amenity/prison": {
+                "name": "Börtönterület",
+                "terms": "börtön, fogház, fegyház"
             },
             "amenity/pub": {
                 "name": "Kocsma",

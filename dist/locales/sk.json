@@ -843,33 +843,6 @@
             "fuel": {
                 "label": "Palivo"
             },
-            "fuel/biodiesel": {
-                "label": "Predáva Bionaftu"
-            },
-            "fuel/diesel": {
-                "label": "Predáva naftu"
-            },
-            "fuel/e10": {
-                "label": "Predáva E10"
-            },
-            "fuel/e85": {
-                "label": "Predáva E85"
-            },
-            "fuel/lpg": {
-                "label": "Predáva LPG"
-            },
-            "fuel/octane_100": {
-                "label": "Predáva 100 oktánový benzín"
-            },
-            "fuel/octane_91": {
-                "label": "Predáva 91 oktánový benzín"
-            },
-            "fuel/octane_95": {
-                "label": "Predáva 95 oktánový benzín"
-            },
-            "fuel/octane_98": {
-                "label": "Predáva 98 oktánový benzín"
-            },
             "gauge": {
                 "label": "Rozchod"
             },
@@ -1168,31 +1141,6 @@
             },
             "railway": {
                 "label": "Typ"
-            },
-            "recycling/cans": {
-                "label": "Plechovky"
-            },
-            "recycling/clothes": {
-                "label": "Oblečenie"
-            },
-            "recycling/glass": {
-                "label": "Sklo"
-            },
-            "recycling/glass_bottles": {
-                "label": "Hnedé sklo"
-            },
-            "recycling/paper": {
-                "label": "Papier"
-            },
-            "recycling/plastic": {
-                "label": "Plasty"
-            },
-            "recycling/type": {
-                "label": "Typ recyklácie",
-                "options": {
-                    "centre": "Recyklačné centrum",
-                    "container": "Kontainer"
-                }
             },
             "ref": {
                 "label": "Referenčné čislo"

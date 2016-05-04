@@ -954,33 +954,6 @@
             "fuel": {
                 "label": "Gorivo"
             },
-            "fuel/biodiesel": {
-                "label": "Prodaje biodizel"
-            },
-            "fuel/diesel": {
-                "label": "Prodaje dizel"
-            },
-            "fuel/e10": {
-                "label": "Prodaje Super E10"
-            },
-            "fuel/e85": {
-                "label": "Prodaje bioetanol E85"
-            },
-            "fuel/lpg": {
-                "label": "Prodaje auto-plin LPG"
-            },
-            "fuel/octane_100": {
-                "label": "Prodaje benzin za utrke"
-            },
-            "fuel/octane_91": {
-                "label": "Prodaje benzin 91 oktan"
-            },
-            "fuel/octane_95": {
-                "label": "Prodaje benzin 95 oktana"
-            },
-            "fuel/octane_98": {
-                "label": "Prodaje benzin 98 oktana"
-            },
             "gauge": {
                 "label": "Širina kolosijeka"
             },
@@ -1279,31 +1252,6 @@
             },
             "railway": {
                 "label": "Vrsta"
-            },
-            "recycling/cans": {
-                "label": "Prima limenke"
-            },
-            "recycling/clothes": {
-                "label": "Prima odjeću"
-            },
-            "recycling/glass": {
-                "label": "Prima staklo"
-            },
-            "recycling/glass_bottles": {
-                "label": "Prima staklene boce"
-            },
-            "recycling/paper": {
-                "label": "Prima papir"
-            },
-            "recycling/plastic": {
-                "label": "Prima plastiku"
-            },
-            "recycling/type": {
-                "label": "Tip reciklaže",
-                "options": {
-                    "centre": "Reciklažni centar",
-                    "container": "Kontejner"
-                }
             },
             "ref": {
                 "label": "Broj ceste"

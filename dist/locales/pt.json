@@ -776,6 +776,9 @@
             "bicycle_parking": {
                 "label": "Tipo"
             },
+            "bin": {
+                "label": "Caixote de lixo"
+            },
             "boundary": {
                 "label": "Tipo"
             },
@@ -846,6 +849,9 @@
             },
             "cuisine": {
                 "label": "Culinária"
+            },
+            "currency_multi": {
+                "label": "Tipos de moeda"
             },
             "cycleway": {
                 "label": "Faixa de bicicleta",
@@ -950,32 +956,8 @@
             "fuel": {
                 "label": "Combustível"
             },
-            "fuel/biodiesel": {
-                "label": "Vende \"Biodiesel\""
-            },
-            "fuel/diesel": {
-                "label": "Vende \"Gasóleo\""
-            },
-            "fuel/e10": {
-                "label": "Vende \"Etanol 10\""
-            },
-            "fuel/e85": {
-                "label": "Vende \"Etanol 85\""
-            },
-            "fuel/lpg": {
-                "label": "Vende \"GPL\""
-            },
-            "fuel/octane_100": {
-                "label": "Vende \"Gasolina 100\""
-            },
-            "fuel/octane_91": {
-                "label": "Vende \"Gasolina Simples\""
-            },
-            "fuel/octane_95": {
-                "label": "Vende \"Gasolina 95\""
-            },
-            "fuel/octane_98": {
-                "label": "Vende \"Gasolina 98\""
+            "fuel_multi": {
+                "label": "Tipos de combustíveis "
             },
             "gauge": {
                 "label": "Bitola"
@@ -1219,6 +1201,9 @@
                     "underground": "Subterrâneo"
                 }
             },
+            "payment_multi": {
+                "label": "Tipos de pagamentos"
+            },
             "phone": {
                 "label": "Telefone / Telemóvel",
                 "placeholder": "+351 211 123456"
@@ -1276,30 +1261,8 @@
             "railway": {
                 "label": "Tipo"
             },
-            "recycling/cans": {
-                "label": "Aceita latas"
-            },
-            "recycling/clothes": {
-                "label": "Aceita roupa"
-            },
-            "recycling/glass": {
-                "label": "Aceita vidros"
-            },
-            "recycling/glass_bottles": {
-                "label": "Aceita garrafas de vidro"
-            },
-            "recycling/paper": {
-                "label": "Aceita papel"
-            },
-            "recycling/plastic": {
-                "label": "Aceita plástico"
-            },
-            "recycling/type": {
-                "label": "Tipo de Reciclagem",
-                "options": {
-                    "centre": "Centro de reciclagem (eco-centro)",
-                    "container": "Contentor"
-                }
+            "recycling_accepts": {
+                "label": "Aceita"
             },
             "ref": {
                 "label": "Referência"

@@ -316,6 +316,7 @@
             "yes": "是",
             "no": "否"
         },
+        "add": "新增",
         "none": "無",
         "node": "節",
         "way": "路徑",
@@ -954,33 +955,6 @@
             "fuel": {
                 "label": "燃料"
             },
-            "fuel/biodiesel": {
-                "label": "售賣生物柴油"
-            },
-            "fuel/diesel": {
-                "label": "售賣柴油"
-            },
-            "fuel/e10": {
-                "label": "售賣E10"
-            },
-            "fuel/e85": {
-                "label": "售賣E85"
-            },
-            "fuel/lpg": {
-                "label": "售賣丙烷"
-            },
-            "fuel/octane_100": {
-                "label": "售賣賽車汽油"
-            },
-            "fuel/octane_91": {
-                "label": "售賣一般汽油"
-            },
-            "fuel/octane_95": {
-                "label": "售賣中級汽油"
-            },
-            "fuel/octane_98": {
-                "label": "售賣頂級汽油"
-            },
             "gauge": {
                 "label": "軌距"
             },
@@ -1280,30 +1254,8 @@
             "railway": {
                 "label": "類別"
             },
-            "recycling/cans": {
-                "label": "可收金屬罐"
-            },
-            "recycling/clothes": {
-                "label": "可收衣物"
-            },
-            "recycling/glass": {
-                "label": "可收玻璃"
-            },
-            "recycling/glass_bottles": {
-                "label": "可收玻璃瓶"
-            },
-            "recycling/paper": {
-                "label": "可收廢紙"
-            },
-            "recycling/plastic": {
-                "label": "可收塑膠"
-            },
-            "recycling/type": {
-                "label": "回收種類",
-                "options": {
-                    "centre": "回收中心",
-                    "container": "回收箱"
-                }
+            "recycling_accepts": {
+                "label": "接受"
             },
             "ref": {
                 "label": "參考"
@@ -1856,6 +1808,10 @@
             "amenity/post_office": {
                 "name": "郵政局",
                 "terms": "Post Office,郵局,郵政局,香港郵政"
+            },
+            "amenity/prison": {
+                "name": "監獄範圍",
+                "terms": "監倉範圍,懲教所範圍,勞教中心範圍"
             },
             "amenity/pub": {
                 "name": "酒館",

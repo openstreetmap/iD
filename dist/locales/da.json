@@ -316,6 +316,7 @@
             "yes": "Ja",
             "no": "Nej"
         },
+        "add": "Tilføj",
         "none": "Ingen",
         "node": "Punkt",
         "way": "Vej",
@@ -780,6 +781,9 @@
             "bicycle_parking": {
                 "label": "Type"
             },
+            "bin": {
+                "label": "Skraldespand"
+            },
             "boundary": {
                 "label": "Type"
             },
@@ -850,6 +854,9 @@
             },
             "cuisine": {
                 "label": "Cuisine"
+            },
+            "currency_multi": {
+                "label": "Valuta"
             },
             "cycleway": {
                 "label": "Cykelvejbaner",
@@ -954,32 +961,8 @@
             "fuel": {
                 "label": "Brændstof"
             },
-            "fuel/biodiesel": {
-                "label": "Sælger biodiesel"
-            },
-            "fuel/diesel": {
-                "label": "Sælger diesel"
-            },
-            "fuel/e10": {
-                "label": "Sælger E10"
-            },
-            "fuel/e85": {
-                "label": "Sælger E85"
-            },
-            "fuel/lpg": {
-                "label": "Sælger propangas"
-            },
-            "fuel/octane_100": {
-                "label": "Sælger \"racing\"-benzin"
-            },
-            "fuel/octane_91": {
-                "label": "Sælger \"regular\"-benzin (oktan 87)"
-            },
-            "fuel/octane_95": {
-                "label": "Sælger \"medium\"-benzin (oktan 89)"
-            },
-            "fuel/octane_98": {
-                "label": "Sælger \"premium\"-benzin (oktan 92-93)"
+            "fuel_multi": {
+                "label": "Benzintyper"
             },
             "gauge": {
                 "label": "Sporvidde"
@@ -1223,6 +1206,9 @@
                     "underground": "Underjordisk"
                 }
             },
+            "payment_multi": {
+                "label": "Betallingstyper"
+            },
             "phone": {
                 "label": "Telefon",
                 "placeholder": "+31 42 123 4567"
@@ -1280,30 +1266,8 @@
             "railway": {
                 "label": "Type"
             },
-            "recycling/cans": {
-                "label": "Accepterer dåser"
-            },
-            "recycling/clothes": {
-                "label": "Accepterer tøj"
-            },
-            "recycling/glass": {
-                "label": "Accepterer glas"
-            },
-            "recycling/glass_bottles": {
-                "label": "Accepterer glasflasker"
-            },
-            "recycling/paper": {
-                "label": "Accepterer papir"
-            },
-            "recycling/plastic": {
-                "label": "Accepterer plastik"
-            },
-            "recycling/type": {
-                "label": "Genbrugstype",
-                "options": {
-                    "centre": "Genbrugscenter",
-                    "container": "Container"
-                }
+            "recycling_accepts": {
+                "label": "Accepterer"
             },
             "ref": {
                 "label": "Reference"
@@ -1811,15 +1775,15 @@
             },
             "amenity/parking": {
                 "name": "Bilparkering",
-                "terms": "Bilparkering"
+                "terms": "Bilparkering, Parkering"
             },
             "amenity/parking_entrance": {
                 "name": "Parkeringsgarage Indgang/Udgang",
                 "terms": "Parkeringsgarage Indgang/Udgang, Parkeringskælder Indgang/Udgang"
             },
             "amenity/parking_space": {
-                "name": "Parkeringsplads",
-                "terms": "Parkeringsplads"
+                "name": "Parkeringsbås",
+                "terms": "Parkeringsbås"
             },
             "amenity/pharmacy": {
                 "name": "Apotek",

@@ -403,9 +403,6 @@
             "fixme": {
                 "label": "Maak My Reg"
             },
-            "fuel/diesel": {
-                "label": "Verkoop diesel"
-            },
             "highway": {
                 "label": "Tipe"
             },

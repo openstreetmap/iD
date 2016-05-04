@@ -316,6 +316,7 @@
             "yes": "Ja",
             "no": "Nein"
         },
+        "add": "Hinzufügen",
         "none": "Nichts",
         "node": "Punkt",
         "way": "Weg",
@@ -780,6 +781,9 @@
             "bicycle_parking": {
                 "label": "Typ"
             },
+            "bin": {
+                "label": "Abfallbehälter"
+            },
             "boundary": {
                 "label": "Typ"
             },
@@ -850,6 +854,9 @@
             },
             "cuisine": {
                 "label": "Küche"
+            },
+            "currency_multi": {
+                "label": "Währungen"
             },
             "cycleway": {
                 "label": "Fahrradstreifen",
@@ -954,32 +961,8 @@
             "fuel": {
                 "label": "Kraftstoff"
             },
-            "fuel/biodiesel": {
-                "label": "Verkauft Biodiesel"
-            },
-            "fuel/diesel": {
-                "label": "Verkauft Diesel"
-            },
-            "fuel/e10": {
-                "label": "Verkauft E10"
-            },
-            "fuel/e85": {
-                "label": "Verkauft E85"
-            },
-            "fuel/lpg": {
-                "label": "Verkauft Propan"
-            },
-            "fuel/octane_100": {
-                "label": "Verkauft Rennkraftstoffe"
-            },
-            "fuel/octane_91": {
-                "label": "Verkauft Kraftstoffe"
-            },
-            "fuel/octane_95": {
-                "label": "Verkauft Mittelklassekraftstoffe"
-            },
-            "fuel/octane_98": {
-                "label": "Verkauft Premiumkraftstoffe"
+            "fuel_multi": {
+                "label": "Spritsorten"
             },
             "gauge": {
                 "label": "Spurweite – Abstand zwischen den Schienen"
@@ -1223,6 +1206,9 @@
                     "underground": "Tiefgarage"
                 }
             },
+            "payment_multi": {
+                "label": "Zahlungsarten"
+            },
             "phone": {
                 "label": "Telefonnummer",
                 "placeholder": "+31 42 123 4567"
@@ -1280,30 +1266,8 @@
             "railway": {
                 "label": "Typ"
             },
-            "recycling/cans": {
-                "label": "Dosen"
-            },
-            "recycling/clothes": {
-                "label": "Kleidung"
-            },
-            "recycling/glass": {
-                "label": "Glas"
-            },
-            "recycling/glass_bottles": {
-                "label": "Glasflaschen"
-            },
-            "recycling/paper": {
-                "label": "Papier"
-            },
-            "recycling/plastic": {
-                "label": "Plastik"
-            },
-            "recycling/type": {
-                "label": "Recycling-Typ",
-                "options": {
-                    "centre": "Recyclingcenter",
-                    "container": "Container"
-                }
+            "recycling_accepts": {
+                "label": "akzeptiert"
             },
             "ref": {
                 "label": "Referenz"
@@ -1856,6 +1820,10 @@
             "amenity/post_office": {
                 "name": "Postfiliale",
                 "terms": "Post, Postamt"
+            },
+            "amenity/prison": {
+                "name": "Gefängnisanlage",
+                "terms": "Gefängnisanlage, Gefängnis"
             },
             "amenity/pub": {
                 "name": "Kneipe",
@@ -2618,7 +2586,7 @@
                 "terms": "Kreisstraßenanschluss, Kreisstraßenauffahrt, Kreisstraßenabfahrt, Auffahrt, Abfahrt"
             },
             "highway/track": {
-                "name": "Unbesiedelter, oft unbefestigter Weg; oft Feld-/Waldweg",
+                "name": "Feld-/Waldweg",
                 "terms": "Wirtschaftsweg, Feldweg, Waldweg, Forststraße, primitive Straße, nicht ausgebaute Straße, verfallene Straße"
             },
             "highway/traffic_signals": {

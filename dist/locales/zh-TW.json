@@ -316,6 +316,7 @@
             "yes": "是",
             "no": "否"
         },
+        "add": "新增",
         "none": "無",
         "node": "節點",
         "way": "路徑",
@@ -780,6 +781,9 @@
             "bicycle_parking": {
                 "label": "種類"
             },
+            "bin": {
+                "label": "垃圾筒"
+            },
             "boundary": {
                 "label": "種類"
             },
@@ -850,6 +854,9 @@
             },
             "cuisine": {
                 "label": "食物種類"
+            },
+            "currency_multi": {
+                "label": "外幣種類"
             },
             "cycleway": {
                 "label": "單車道",
@@ -954,32 +961,8 @@
             "fuel": {
                 "label": "燃料"
             },
-            "fuel/biodiesel": {
-                "label": "販售生質燃料"
-            },
-            "fuel/diesel": {
-                "label": "販售柴油"
-            },
-            "fuel/e10": {
-                "label": "販售E10燃料"
-            },
-            "fuel/e85": {
-                "label": "販售E85燃料"
-            },
-            "fuel/lpg": {
-                "label": "販售丙烷"
-            },
-            "fuel/octane_100": {
-                "label": "販售賽車燃料"
-            },
-            "fuel/octane_91": {
-                "label": "販售補通燃料"
-            },
-            "fuel/octane_95": {
-                "label": "販售中等燃料"
-            },
-            "fuel/octane_98": {
-                "label": "販售高級燃料"
+            "fuel_multi": {
+                "label": "燃料種類"
             },
             "gauge": {
                 "label": "軌距"
@@ -1223,6 +1206,9 @@
                     "underground": "地下"
                 }
             },
+            "payment_multi": {
+                "label": "付款種類"
+            },
             "phone": {
                 "label": "電話",
                 "placeholder": "+31 42 123 4567"
@@ -1280,30 +1266,8 @@
             "railway": {
                 "label": "種類"
             },
-            "recycling/cans": {
-                "label": "接受金屬罐"
-            },
-            "recycling/clothes": {
-                "label": "接受衣物"
-            },
-            "recycling/glass": {
-                "label": "接受玻璃"
-            },
-            "recycling/glass_bottles": {
-                "label": "可收玻璃瓶"
-            },
-            "recycling/paper": {
-                "label": "接受廢紙"
-            },
-            "recycling/plastic": {
-                "label": "可收塑膠"
-            },
-            "recycling/type": {
-                "label": "回收品項",
-                "options": {
-                    "centre": "回收中心",
-                    "container": "回收箱"
-                }
+            "recycling_accepts": {
+                "label": "接受"
             },
             "ref": {
                 "label": "編號"

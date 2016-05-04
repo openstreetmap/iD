@@ -291,8 +291,8 @@
         "locating": "Bezig met localiseren, even geduld ..."
     },
     "inspector": {
-        "no_documentation_combination": "Voor deze tag is geen documentatie beschikbaar.",
-        "no_documentation_key": "Er is geen documentatie beschikbaar voor deze categorie",
+        "no_documentation_combination": "Er is geen documentatie beschikbaar voor deze tag",
+        "no_documentation_key": "Er is geen documentatie beschikbaar voor deze sleutel",
         "show_more": "Toon Meer",
         "view_on_osm": "Toon op openstreetmap.org",
         "all_fields": "Alle velden",
@@ -316,6 +316,7 @@
             "yes": "Ja",
             "no": "Nee"
         },
+        "add": "Voeg toe",
         "none": "Geen",
         "node": "Knooppunt",
         "way": "Weg",
@@ -780,6 +781,9 @@
             "bicycle_parking": {
                 "label": "Type"
             },
+            "bin": {
+                "label": "Vuilnisbak"
+            },
             "boundary": {
                 "label": "Type"
             },
@@ -850,6 +854,9 @@
             },
             "cuisine": {
                 "label": "Keuken"
+            },
+            "currency_multi": {
+                "label": "Munteenheden"
             },
             "cycleway": {
                 "label": "Fietspaden",
@@ -954,32 +961,8 @@
             "fuel": {
                 "label": "Brandstof"
             },
-            "fuel/biodiesel": {
-                "label": "Verkoopt Biodiesel"
-            },
-            "fuel/diesel": {
-                "label": "Verkoopt Diesel"
-            },
-            "fuel/e10": {
-                "label": "Verkoopt E10"
-            },
-            "fuel/e85": {
-                "label": "Verkoopt E85"
-            },
-            "fuel/lpg": {
-                "label": "Verkoopt Propaan"
-            },
-            "fuel/octane_100": {
-                "label": "Verkoopt racingbrandstof"
-            },
-            "fuel/octane_91": {
-                "label": "Verkoopt gewone benzine (octane 91)"
-            },
-            "fuel/octane_95": {
-                "label": "Verkoopt Super 95"
-            },
-            "fuel/octane_98": {
-                "label": "Verkoopt Super 98"
+            "fuel_multi": {
+                "label": "Brandstoftypes"
             },
             "gauge": {
                 "label": "Spoorwijdte"
@@ -1223,6 +1206,9 @@
                     "underground": "ondergrond"
                 }
             },
+            "payment_multi": {
+                "label": "Betalingsmiddelen"
+            },
             "phone": {
                 "label": "Telefoonnummer",
                 "placeholder": "+31 42 123 4567"
@@ -1280,30 +1266,8 @@
             "railway": {
                 "label": "Type"
             },
-            "recycling/cans": {
-                "label": "Aanvaardt blikjes"
-            },
-            "recycling/clothes": {
-                "label": "Aanvaardt kleren"
-            },
-            "recycling/glass": {
-                "label": "Aanvaardt glas"
-            },
-            "recycling/glass_bottles": {
-                "label": "Aanvaardt glazen flessen"
-            },
-            "recycling/paper": {
-                "label": "Aanvaardt papier"
-            },
-            "recycling/plastic": {
-                "label": "Aanvaardt kunststof"
-            },
-            "recycling/type": {
-                "label": "Recyclage-infrastructuur",
-                "options": {
-                    "centre": "Milieupark/Containerpark",
-                    "container": "Container"
-                }
+            "recycling_accepts": {
+                "label": "Aanvaardt"
             },
             "ref": {
                 "label": "Nummering"

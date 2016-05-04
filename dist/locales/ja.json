@@ -948,33 +948,6 @@
             "fuel": {
                 "label": "ガソリンスタンド"
             },
-            "fuel/biodiesel": {
-                "label": "バイオディーゼルの販売"
-            },
-            "fuel/diesel": {
-                "label": "軽油の販売"
-            },
-            "fuel/e10": {
-                "label": "E10の販売"
-            },
-            "fuel/e85": {
-                "label": "E85の販売"
-            },
-            "fuel/lpg": {
-                "label": "プロパンの販売"
-            },
-            "fuel/octane_100": {
-                "label": "レース用ガソリンの販売"
-            },
-            "fuel/octane_91": {
-                "label": "レギュラーガソリンの販売"
-            },
-            "fuel/octane_95": {
-                "label": "中品質ガソリンの販売"
-            },
-            "fuel/octane_98": {
-                "label": "ハイオクガソリンの販売"
-            },
             "gauge": {
                 "label": "軌間"
             },
@@ -1273,31 +1246,6 @@
             },
             "railway": {
                 "label": "路線種別"
-            },
-            "recycling/cans": {
-                "label": "空き缶回収"
-            },
-            "recycling/clothes": {
-                "label": "古布回収"
-            },
-            "recycling/glass": {
-                "label": "ガラス回収"
-            },
-            "recycling/glass_bottles": {
-                "label": "空きガラス瓶回収"
-            },
-            "recycling/paper": {
-                "label": "古紙回収"
-            },
-            "recycling/plastic": {
-                "label": "プラスチック回収"
-            },
-            "recycling/type": {
-                "label": "回収設備の種類",
-                "options": {
-                    "centre": "リサイクルセンター",
-                    "container": "リサイクルボックス"
-                }
             },
             "ref": {
                 "label": "管理番号"

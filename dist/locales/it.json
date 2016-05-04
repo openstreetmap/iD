@@ -316,6 +316,7 @@
             "yes": "Sì",
             "no": "No"
         },
+        "add": "Aggiungi",
         "none": "Nessuno",
         "node": "Nodo",
         "way": "Linea",
@@ -780,6 +781,9 @@
             "bicycle_parking": {
                 "label": "Tipo"
             },
+            "bin": {
+                "label": "Cestino della spazzatura"
+            },
             "boundary": {
                 "label": "Tipo"
             },
@@ -850,6 +854,9 @@
             },
             "cuisine": {
                 "label": "Cucina"
+            },
+            "currency_multi": {
+                "label": "Valute"
             },
             "cycleway": {
                 "label": "Corsie Ciclabili",
@@ -954,32 +961,8 @@
             "fuel": {
                 "label": "Carburante"
             },
-            "fuel/biodiesel": {
-                "label": "Vendita di biodiesel"
-            },
-            "fuel/diesel": {
-                "label": "Vendita di diesel"
-            },
-            "fuel/e10": {
-                "label": "Vendita di carburante E10"
-            },
-            "fuel/e85": {
-                "label": "Vendita di carburante E85"
-            },
-            "fuel/lpg": {
-                "label": "Vendita di propano"
-            },
-            "fuel/octane_100": {
-                "label": "Vendita di carburante da competizione"
-            },
-            "fuel/octane_91": {
-                "label": "Vendita di carburante normale (87)"
-            },
-            "fuel/octane_95": {
-                "label": "Vendita di carburante medio (89)"
-            },
-            "fuel/octane_98": {
-                "label": "Vendita di carburante super (93)"
+            "fuel_multi": {
+                "label": "Carburanti"
             },
             "gauge": {
                 "label": "Scartamento"
@@ -1223,6 +1206,9 @@
                     "underground": "Sotterraneo"
                 }
             },
+            "payment_multi": {
+                "label": "Tipologie di pagamento"
+            },
             "phone": {
                 "label": "Telefono",
                 "placeholder": "+39 01 123 456"
@@ -1280,30 +1266,8 @@
             "railway": {
                 "label": "Tipo"
             },
-            "recycling/cans": {
-                "label": "Accetta Lattine"
-            },
-            "recycling/clothes": {
-                "label": "Accetta Vestiti"
-            },
-            "recycling/glass": {
-                "label": "Accetta Vetro"
-            },
-            "recycling/glass_bottles": {
-                "label": "Bottiglie di vetro"
-            },
-            "recycling/paper": {
-                "label": "Accetta Carta"
-            },
-            "recycling/plastic": {
-                "label": "Plastica"
-            },
-            "recycling/type": {
-                "label": "Tipo di raccolta",
-                "options": {
-                    "centre": "Stazione ecologica",
-                    "container": "Contenitore"
-                }
+            "recycling_accepts": {
+                "label": "Accetta"
             },
             "ref": {
                 "label": "Riferimento"
@@ -1856,6 +1820,10 @@
             "amenity/post_office": {
                 "name": "Ufficio Postale",
                 "terms": "Uffico postale"
+            },
+            "amenity/prison": {
+                "name": "Area carceraria",
+                "terms": "carcere,prigione,penitenziario,galera,gattabuia,casa circondariale,casa di reclusione,riformatorio"
             },
             "amenity/pub": {
                 "name": "Pub",
