@@ -3384,6 +3384,11 @@ img.tile-removing {
   right: auto;
 }
 
+[dir='rtl'] .preset-icon-fill-area {
+  left: auto;
+  right: 10px;
+}
+
 [dir='rtl'] .map-data-control .layer-list button, [dir='rtl'] .background-control .layer-list button {
   float: left;
   border-left: none;

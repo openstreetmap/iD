@@ -174,6 +174,9 @@ export function utilFastMouse(container) {
         rectTop = rect.top,
         clientLeft = +container.clientLeft,
         clientTop = +container.clientTop;
+    if (iD.detect().textDirection === 'rtl') {
+      rectLeft = 0;
+    }
     return function(e) {
         return [
             e.clientX - rectLeft - clientLeft,
