@@ -1,6 +1,10 @@
 {
     "fields": [
-        "operator"
+        "operator",
+        "fee",
+        "bin",
+        "payment_multi",
+        "currency_multi"
     ],
     "geometry": [
         "point"

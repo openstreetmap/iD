@@ -140,30 +140,8 @@ iD.ui.Background = function(context) {
             updateOffsetVal();
         }
 
-        function offsetToMeters(offset) {
-            var equatRadius = 6356752.314245179,
-                polarRadius = 6378137.0,
-                tileSize = 256;
-
-            return [
-                offset[0] * 2 * Math.PI * equatRadius / tileSize,
-                -offset[1] * 2 * Math.PI * polarRadius / tileSize
-            ];
-        }
-
-        function metersToOffset(meters) {
-            var equatRadius = 6356752.314245179,
-                polarRadius = 6378137.0,
-                tileSize = 256;
-
-            return [
-                meters[0] * tileSize / (2 * Math.PI * equatRadius),
-                -meters[1] * tileSize / (2 * Math.PI * polarRadius)
-            ];
-        }
-
         function updateOffsetVal() {
-            var meters = offsetToMeters(context.background().offset()),
+            var meters = iD.geo.offsetToMeters(context.background().offset()),
                 x = +meters[0].toFixed(2),
                 y = +meters[1].toFixed(2);
 
@@ -219,7 +197,7 @@ iD.ui.Background = function(context) {
                 return;
             }
 
-            context.background().offset(metersToOffset(d));
+            context.background().offset(iD.geo.metersToOffset(d));
             updateOffsetVal();
         }
 

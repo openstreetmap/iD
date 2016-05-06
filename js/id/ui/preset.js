@@ -125,6 +125,7 @@ iD.ui.preset = function(context) {
 
         wrap.append('button')
             .attr('class', 'remove-icon')
+            .attr('tabindex', -1)
             .call(iD.svg.Icon('#operation-delete'));
 
         wrap.append('button')
@@ -159,7 +160,8 @@ iD.ui.preset = function(context) {
                     .call(field.input)
                     .selectAll('input')
                     .on('keydown', function() {
-                        if (d3.event.keyCode === 13) {  // enter
+                        // if user presses enter, and combobox is not active, accept edits..
+                        if (d3.event.keyCode === 13 && d3.select('.combobox').empty()) {
                             context.enter(iD.modes.Browse(context));
                         }
                     })

@@ -38,20 +38,16 @@ iD.ui.Commit = function(context) {
             .attr('placeholder', t('commit.description_placeholder'))
             .attr('maxlength', 255)
             .property('value', context.storage('comment') || '')
-            .on('input.save', enableDisableSaveButton)
-            .on('change.save', enableDisableSaveButton)
-            .on('input.save', detectForClippy)
-            .on('change.save', detectForClippy)
+            .on('input.save', checkComment)
+            .on('change.save', checkComment)
             .on('blur.save', function() {
                 context.storage('comment', this.value);
             });
 
-        function enableDisableSaveButton() {
+        function checkComment() {
             d3.selectAll('.save-section .save-button')
                 .attr('disabled', (this.value.length ? null : true));
-        }
 
-        function detectForClippy() {
             var googleWarning = clippyArea
                .html('')
                .selectAll('a')
@@ -273,9 +269,8 @@ iD.ui.Commit = function(context) {
             }
         }
 
-        // Call the enableDisableSaveButton and detectForClippy methods
-        // off the bat, in case a changeset comment is recovered from
-        // localStorage
+        // Call checkComment off the bat, in case a changeset
+        // comment is recovered from localStorage
         commentField.trigger('input');
     }
 

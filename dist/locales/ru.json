@@ -926,33 +926,6 @@
             "fuel": {
                 "label": "Топливо"
             },
-            "fuel/biodiesel": {
-                "label": "Продают биодизель"
-            },
-            "fuel/diesel": {
-                "label": "Продают дизель"
-            },
-            "fuel/e10": {
-                "label": "Продают топливо E10"
-            },
-            "fuel/e85": {
-                "label": "Продают топливо E85"
-            },
-            "fuel/lpg": {
-                "label": "Продают пропан"
-            },
-            "fuel/octane_100": {
-                "label": "Продают бензин АИ100"
-            },
-            "fuel/octane_91": {
-                "label": "Продают бензин АИ91"
-            },
-            "fuel/octane_95": {
-                "label": "Продают бензин АИ95"
-            },
-            "fuel/octane_98": {
-                "label": "Продают бензин АИ98"
-            },
             "gauge": {
                 "label": "Колея"
             },
@@ -1251,31 +1224,6 @@
             },
             "railway": {
                 "label": "Тип"
-            },
-            "recycling/cans": {
-                "label": "Принимают жесть"
-            },
-            "recycling/clothes": {
-                "label": "Принимают одежду"
-            },
-            "recycling/glass": {
-                "label": "Принимают стекло"
-            },
-            "recycling/glass_bottles": {
-                "label": "Принимают стеклянные бутылки"
-            },
-            "recycling/paper": {
-                "label": "Принимают бумагу / мукулатура"
-            },
-            "recycling/plastic": {
-                "label": "Принимают пластик"
-            },
-            "recycling/type": {
-                "label": "Пункт приёма отходов для переработки",
-                "options": {
-                    "centre": "Пункт приёма отходов для переработки",
-                    "container": "Контейнер для приема отходов на переработку"
-                }
             },
             "ref": {
                 "label": "Номер / идентификатор"

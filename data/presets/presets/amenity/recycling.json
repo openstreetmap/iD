@@ -3,13 +3,7 @@
     "fields": [
         "operator",
         "address",
-        "recycling/type",
-        "recycling/cans",
-        "recycling/glass_bottles",
-        "recycling/paper",
-        "recycling/glass",
-        "recycling/plastic",
-        "recycling/clothes"
+        "recycling_accepts"
     ],
     "geometry": [
         "point",

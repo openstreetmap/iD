@@ -32,6 +32,7 @@ iD.ui.preset.localized = function(field, context) {
         translateButton.enter()
             .append('button')
             .attr('class', 'button-input-action localized-add minor')
+            .attr('tabindex', -1)
             .call(iD.svg.Icon('#icon-plus'))
             .call(bootstrap.tooltip()
                 .title(t('translate.translate'))

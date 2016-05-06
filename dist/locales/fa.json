@@ -767,27 +767,6 @@
             "fuel": {
                 "label": "سوخت"
             },
-            "fuel/biodiesel": {
-                "label": "فروش سوخت زیستی"
-            },
-            "fuel/diesel": {
-                "label": "فروش دیزل"
-            },
-            "fuel/lpg": {
-                "label": "فروش پروپان"
-            },
-            "fuel/octane_100": {
-                "label": "فروش بنزین مسابقه"
-            },
-            "fuel/octane_91": {
-                "label": "فروش بنزین معمولی"
-            },
-            "fuel/octane_95": {
-                "label": "فروش بنزین درجه متوسط"
-            },
-            "fuel/octane_98": {
-                "label": "فروش بنزین سوپر"
-            },
             "gauge": {
                 "label": "مقیاس"
             },
@@ -1065,31 +1044,6 @@
             },
             "railway": {
                 "label": "نوع"
-            },
-            "recycling/cans": {
-                "label": "پذیرش قوطی‌ها"
-            },
-            "recycling/clothes": {
-                "label": "پذیرش لباس‌ها"
-            },
-            "recycling/glass": {
-                "label": "پذیرش شیشه"
-            },
-            "recycling/glass_bottles": {
-                "label": "پذیرش بطری‌های شیشه‌ای"
-            },
-            "recycling/paper": {
-                "label": "پذیرش کاغذ"
-            },
-            "recycling/plastic": {
-                "label": "پذیرش پلاستیک"
-            },
-            "recycling/type": {
-                "label": "نوع بازیافت",
-                "options": {
-                    "centre": "مرکز بازیافت",
-                    "container": "ظرف"
-                }
             },
             "ref": {
                 "label": "مراجعتی"

@@ -812,33 +812,6 @@
             "fuel": {
                 "label": "Degalai"
             },
-            "fuel/biodiesel": {
-                "label": "Parduoda biodyzelį"
-            },
-            "fuel/diesel": {
-                "label": "Parduoda dyzelį"
-            },
-            "fuel/e10": {
-                "label": "Parduoda E10"
-            },
-            "fuel/e85": {
-                "label": "Parduoda E85"
-            },
-            "fuel/lpg": {
-                "label": "Parduoda propaną"
-            },
-            "fuel/octane_100": {
-                "label": "Parduoda lenktyninį benziną"
-            },
-            "fuel/octane_91": {
-                "label": "Parduoda normalų benziną"
-            },
-            "fuel/octane_95": {
-                "label": "Parduoda vidutinės kokybės benziną"
-            },
-            "fuel/octane_98": {
-                "label": "Parduoda aukščiausios kokybės benziną"
-            },
             "gauge": {
                 "label": "Matuoklis"
             },
@@ -1120,31 +1093,6 @@
             },
             "railway": {
                 "label": "Tipas"
-            },
-            "recycling/cans": {
-                "label": "Priima skardines"
-            },
-            "recycling/clothes": {
-                "label": "Priima drabužius"
-            },
-            "recycling/glass": {
-                "label": "Priima stiklą"
-            },
-            "recycling/glass_bottles": {
-                "label": "Priima stiklo taras"
-            },
-            "recycling/paper": {
-                "label": "Priima popierių"
-            },
-            "recycling/plastic": {
-                "label": "Priima plastiką"
-            },
-            "recycling/type": {
-                "label": "Rūšiavimo tipas",
-                "options": {
-                    "centre": "Rūšiavimo Centras",
-                    "container": "Konteineris"
-                }
             },
             "ref": {
                 "label": "Šaltinis"

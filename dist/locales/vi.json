@@ -316,6 +316,7 @@
             "yes": "Có",
             "no": "Không"
         },
+        "add": "Thêm",
         "none": "Không có",
         "node": "Nốt",
         "way": "Lối",
@@ -780,6 +781,9 @@
             "bicycle_parking": {
                 "label": "Kiểu"
             },
+            "bin": {
+                "label": "Thùng rác"
+            },
             "boundary": {
                 "label": "Kiểu"
             },
@@ -850,6 +854,9 @@
             },
             "cuisine": {
                 "label": "Ẩm thực"
+            },
+            "currency_multi": {
+                "label": "Loại Tiền"
             },
             "cycleway": {
                 "label": "Làn Xe đạp",
@@ -954,32 +961,8 @@
             "fuel": {
                 "label": "Nhiên liệu"
             },
-            "fuel/biodiesel": {
-                "label": "Bán Diesel Sinh học"
-            },
-            "fuel/diesel": {
-                "label": "Bán Diesel"
-            },
-            "fuel/e10": {
-                "label": "Bán E10"
-            },
-            "fuel/e85": {
-                "label": "Bán E85"
-            },
-            "fuel/lpg": {
-                "label": "Bán Prôpan"
-            },
-            "fuel/octane_100": {
-                "label": "Bán Xăng Xe đua"
-            },
-            "fuel/octane_91": {
-                "label": "Bán Xăng Bình thường"
-            },
-            "fuel/octane_95": {
-                "label": "Bán Xăng Trung hạng"
-            },
-            "fuel/octane_98": {
-                "label": "Bán Xăng Thượng hạng"
+            "fuel_multi": {
+                "label": "Loại Xăng"
             },
             "gauge": {
                 "label": "Khổ"
@@ -1223,6 +1206,9 @@
                     "underground": "Ngầm"
                 }
             },
+            "payment_multi": {
+                "label": "Phương thức Thanh toán"
+            },
             "phone": {
                 "label": "Số Điện thoại",
                 "placeholder": "+84 1 234 5678"
@@ -1280,30 +1266,8 @@
             "railway": {
                 "label": "Kiểu"
             },
-            "recycling/cans": {
-                "label": "Nhận Đồ Hộp"
-            },
-            "recycling/clothes": {
-                "label": "Nhận Quần áo"
-            },
-            "recycling/glass": {
-                "label": "Nhận Đồ Thủy tinh"
-            },
-            "recycling/glass_bottles": {
-                "label": "Nhận Chai Thủy tinh"
-            },
-            "recycling/paper": {
-                "label": "Nhận Tờ giấy"
-            },
-            "recycling/plastic": {
-                "label": "Nhận Đồ Nhựa"
-            },
-            "recycling/type": {
-                "label": "Kiểu Tái chế",
-                "options": {
-                    "centre": "Trung tâm Tái chế",
-                    "container": "Thùng"
-                }
+            "recycling_accepts": {
+                "label": "Nhận"
             },
             "ref": {
                 "label": "Số"
@@ -1856,6 +1820,10 @@
             "amenity/post_office": {
                 "name": "Bưu điện",
                 "terms": "nhà bưu điện, bưu điện, bưu chính, nha buu dien, buu dien, buu chinh"
+            },
+            "amenity/prison": {
+                "name": "Sân Nhà tù",
+                "terms": "sân nhà tù, sân tù, san nha tu, san tu"
             },
             "amenity/pub": {
                 "name": "Quán rượu Pub",

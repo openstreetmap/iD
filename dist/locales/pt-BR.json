@@ -954,33 +954,6 @@
             "fuel": {
                 "label": "Combustível"
             },
-            "fuel/biodiesel": {
-                "label": "Vende Biodiesel"
-            },
-            "fuel/diesel": {
-                "label": "Vende Diesel"
-            },
-            "fuel/e10": {
-                "label": "Vende Gasolina E10 10% Álcool"
-            },
-            "fuel/e85": {
-                "label": "Vende Combustível E85 85 Álcool/15 Gasolina"
-            },
-            "fuel/lpg": {
-                "label": "Vende Propano"
-            },
-            "fuel/octane_100": {
-                "label": "Vende Gasolina de Competição"
-            },
-            "fuel/octane_91": {
-                "label": "Vende Gasolina Comum"
-            },
-            "fuel/octane_95": {
-                "label": "Vende Gasolina Aditivada"
-            },
-            "fuel/octane_98": {
-                "label": "Vende Gasolina Premium"
-            },
             "gauge": {
                 "label": "Bitola"
             },
@@ -1279,31 +1252,6 @@
             },
             "railway": {
                 "label": "Tipo"
-            },
-            "recycling/cans": {
-                "label": "Aceita Latinhas"
-            },
-            "recycling/clothes": {
-                "label": "Aceita Roupas"
-            },
-            "recycling/glass": {
-                "label": "Aceita Vidro"
-            },
-            "recycling/glass_bottles": {
-                "label": "Aceita garrafa de vidro"
-            },
-            "recycling/paper": {
-                "label": "Aceita Papel"
-            },
-            "recycling/plastic": {
-                "label": "Aceita Plástico"
-            },
-            "recycling/type": {
-                "label": "Tipo de Reciclagem",
-                "options": {
-                    "centre": "Centro de Reciclagem",
-                    "container": "Container"
-                }
             },
             "ref": {
                 "label": "Código de referência"

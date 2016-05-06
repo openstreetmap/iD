@@ -241,7 +241,7 @@
     },
     "commit": {
         "title": "Save Changes",
-        "description_placeholder": "Brief description of your contributions",
+        "description_placeholder": "Brief description of your contributions (required)",
         "message_label": "Changeset comment",
         "upload_explanation": "The changes you upload will be visible on all maps that use OpenStreetMap data.",
         "upload_explanation_with_user": "The changes you upload as {user} will be visible on all maps that use OpenStreetMap data.",
@@ -316,6 +316,7 @@
             "yes": "Yes",
             "no": "No"
         },
+        "add": "Add",
         "none": "None",
         "node": "Node",
         "way": "Way",
@@ -780,6 +781,9 @@
             "bicycle_parking": {
                 "label": "Type"
             },
+            "bin": {
+                "label": "Waste Bin"
+            },
             "boundary": {
                 "label": "Type"
             },
@@ -850,6 +854,9 @@
             },
             "cuisine": {
                 "label": "Cuisine"
+            },
+            "currency_multi": {
+                "label": "Currency Types"
             },
             "cycleway": {
                 "label": "Bike Lanes",
@@ -954,32 +961,8 @@
             "fuel": {
                 "label": "Fuel"
             },
-            "fuel/biodiesel": {
-                "label": "Sells Biodiesel"
-            },
-            "fuel/diesel": {
-                "label": "Sells Diesel"
-            },
-            "fuel/e10": {
-                "label": "Sells E10"
-            },
-            "fuel/e85": {
-                "label": "Sells E85"
-            },
-            "fuel/lpg": {
-                "label": "Sells Propane"
-            },
-            "fuel/octane_100": {
-                "label": "Sells Racing Gasoline"
-            },
-            "fuel/octane_91": {
-                "label": "Sells Regular Gasoline"
-            },
-            "fuel/octane_95": {
-                "label": "Sells Midgrade Gasoline"
-            },
-            "fuel/octane_98": {
-                "label": "Sells Premium Gasoline"
+            "fuel_multi": {
+                "label": "Fuel Types"
             },
             "gauge": {
                 "label": "Gauge"
@@ -1223,6 +1206,9 @@
                     "lane": "Roadside Lane"
                 }
             },
+            "payment_multi": {
+                "label": "Payment Types"
+            },
             "phone": {
                 "label": "Phone",
                 "placeholder": "+31 42 123 4567"
@@ -1280,30 +1266,8 @@
             "railway": {
                 "label": "Type"
             },
-            "recycling/cans": {
-                "label": "Accepts Cans"
-            },
-            "recycling/clothes": {
-                "label": "Accepts Clothes"
-            },
-            "recycling/glass": {
-                "label": "Accepts Glass"
-            },
-            "recycling/glass_bottles": {
-                "label": "Accepts Glass Bottles"
-            },
-            "recycling/paper": {
-                "label": "Accepts Paper"
-            },
-            "recycling/plastic": {
-                "label": "Accepts Plastic"
-            },
-            "recycling/type": {
-                "label": "Recycling Type",
-                "options": {
-                    "container": "Container",
-                    "centre": "Recycling Center"
-                }
+            "recycling_accepts": {
+                "label": "Accepts"
             },
             "ref": {
                 "label": "Reference"

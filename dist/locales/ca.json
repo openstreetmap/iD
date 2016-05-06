@@ -950,33 +950,6 @@
             "fuel": {
                 "label": "Carburant"
             },
-            "fuel/biodiesel": {
-                "label": "Ven Biodièsel"
-            },
-            "fuel/diesel": {
-                "label": "Ven dièsel"
-            },
-            "fuel/e10": {
-                "label": "Ven E10"
-            },
-            "fuel/e85": {
-                "label": "Ven E85"
-            },
-            "fuel/lpg": {
-                "label": "Ven propà"
-            },
-            "fuel/octane_100": {
-                "label": "Ven benzina de competició"
-            },
-            "fuel/octane_91": {
-                "label": "Ven benzina regular"
-            },
-            "fuel/octane_95": {
-                "label": "Ven benzina de mig grau"
-            },
-            "fuel/octane_98": {
-                "label": "Ven benzina premium"
-            },
             "gauge": {
                 "label": "Ample"
             },
@@ -1275,31 +1248,6 @@
             },
             "railway": {
                 "label": "Tipus"
-            },
-            "recycling/cans": {
-                "label": "Accepta llaunes"
-            },
-            "recycling/clothes": {
-                "label": "Accepta roba"
-            },
-            "recycling/glass": {
-                "label": "Accepta vidre"
-            },
-            "recycling/glass_bottles": {
-                "label": "Accepta ampolles de vidre"
-            },
-            "recycling/paper": {
-                "label": "Accepta paper"
-            },
-            "recycling/plastic": {
-                "label": "Accepta Plàstic"
-            },
-            "recycling/type": {
-                "label": "Tipus de reciclatge",
-                "options": {
-                    "centre": "Centre de Reciclatge",
-                    "container": "Contenidor"
-                }
             },
             "ref": {
                 "label": "Referència"

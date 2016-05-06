@@ -316,6 +316,7 @@
             "yes": "Ano",
             "no": "Ne"
         },
+        "add": "Přidat",
         "none": "Žádné",
         "node": "Uzel",
         "way": "Čára",
@@ -954,33 +955,6 @@
             "fuel": {
                 "label": "Palivo"
             },
-            "fuel/biodiesel": {
-                "label": "Bionafta"
-            },
-            "fuel/diesel": {
-                "label": "Nafta"
-            },
-            "fuel/e10": {
-                "label": "E10"
-            },
-            "fuel/e85": {
-                "label": "E85"
-            },
-            "fuel/lpg": {
-                "label": "LPG"
-            },
-            "fuel/octane_100": {
-                "label": "Benzín s okt. číslem 100"
-            },
-            "fuel/octane_91": {
-                "label": "Benzín s okt. číslem 91"
-            },
-            "fuel/octane_95": {
-                "label": "Benzín s okt. číslem 95"
-            },
-            "fuel/octane_98": {
-                "label": "Benzín s okt. číslem 98"
-            },
             "gauge": {
                 "label": "Rozchod"
             },
@@ -1280,30 +1254,8 @@
             "railway": {
                 "label": "Typ"
             },
-            "recycling/cans": {
-                "label": "Plechovky"
-            },
-            "recycling/clothes": {
-                "label": "Textil"
-            },
-            "recycling/glass": {
-                "label": "Sklo"
-            },
-            "recycling/glass_bottles": {
-                "label": "Skleněné láhve"
-            },
-            "recycling/paper": {
-                "label": "Papír"
-            },
-            "recycling/plastic": {
-                "label": "Plast"
-            },
-            "recycling/type": {
-                "label": "Typ recyklačního místa",
-                "options": {
-                    "centre": "Sběrna odpadu",
-                    "container": "Kontejnery"
-                }
+            "recycling_accepts": {
+                "label": "Určení"
             },
             "ref": {
                 "label": "Označení"
@@ -1856,6 +1808,10 @@
             "amenity/post_office": {
                 "name": "Pošta",
                 "terms": "pošta,poštovní úřad,hlavní pošta"
+            },
+            "amenity/prison": {
+                "name": "Prostor věznice",
+                "terms": "věznice,vězení,káznice,šatlava,žalář,detence"
             },
             "amenity/pub": {
                 "name": "Hospoda",

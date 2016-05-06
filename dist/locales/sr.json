@@ -699,24 +699,6 @@
             "fuel": {
                 "label": "Гориво"
             },
-            "fuel/biodiesel": {
-                "label": "Продаје биодизел"
-            },
-            "fuel/diesel": {
-                "label": "Продаје дизел"
-            },
-            "fuel/e10": {
-                "label": "Продаје Е10"
-            },
-            "fuel/e85": {
-                "label": "Продаје Е85"
-            },
-            "fuel/lpg": {
-                "label": "Продаје пропан"
-            },
-            "fuel/octane_98": {
-                "label": "Продаје премијум бензин"
-            },
             "gauge": {
                 "label": "Колосек"
             },
@@ -942,21 +924,6 @@
             },
             "railway": {
                 "label": "Врста"
-            },
-            "recycling/cans": {
-                "label": "Прихвата конзерве"
-            },
-            "recycling/clothes": {
-                "label": "Прихвата одећу"
-            },
-            "recycling/glass": {
-                "label": "Прихвата стакло"
-            },
-            "recycling/paper": {
-                "label": "Прихвата папир"
-            },
-            "recycling/type": {
-                "label": "Врста рециклаже"
             },
             "ref": {
                 "label": "Референца"

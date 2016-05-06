@@ -900,33 +900,6 @@
             "fuel": {
                 "label": "油站"
             },
-            "fuel/biodiesel": {
-                "label": "销售生物柴油"
-            },
-            "fuel/diesel": {
-                "label": "销售柴油"
-            },
-            "fuel/e10": {
-                "label": "销售E10"
-            },
-            "fuel/e85": {
-                "label": "销售E85"
-            },
-            "fuel/lpg": {
-                "label": "销售丙烷"
-            },
-            "fuel/octane_100": {
-                "label": "销售赛车汽油"
-            },
-            "fuel/octane_91": {
-                "label": "销售普通汽油"
-            },
-            "fuel/octane_95": {
-                "label": "销售中等汽油"
-            },
-            "fuel/octane_98": {
-                "label": "销售高级汽油"
-            },
             "gauge": {
                 "label": "轨距"
             },
@@ -1225,31 +1198,6 @@
             },
             "railway": {
                 "label": "类型"
-            },
-            "recycling/cans": {
-                "label": "接受铝管回收"
-            },
-            "recycling/clothes": {
-                "label": "接受衣物回收"
-            },
-            "recycling/glass": {
-                "label": "接受玻璃回收"
-            },
-            "recycling/glass_bottles": {
-                "label": "接受玻璃瓶回收"
-            },
-            "recycling/paper": {
-                "label": "接受纸张回收"
-            },
-            "recycling/plastic": {
-                "label": "接受塑料回收"
-            },
-            "recycling/type": {
-                "label": "回收类型",
-                "options": {
-                    "centre": "回收中心",
-                    "container": "回收容器"
-                }
             },
             "ref": {
                 "label": "参考"

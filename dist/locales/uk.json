@@ -316,6 +316,7 @@
             "yes": "Так",
             "no": "Ні"
         },
+        "add": "Додати",
         "none": "Нічого",
         "node": "Точка",
         "way": "Лінія",
@@ -780,6 +781,9 @@
             "bicycle_parking": {
                 "label": "Тип"
             },
+            "bin": {
+                "label": "Урна для сміття"
+            },
             "boundary": {
                 "label": "Тип"
             },
@@ -850,6 +854,9 @@
             },
             "cuisine": {
                 "label": "Кухня"
+            },
+            "currency_multi": {
+                "label": "Валюта"
             },
             "cycleway": {
                 "label": "Велодоріжка",
@@ -954,32 +961,8 @@
             "fuel": {
                 "label": "АЗС"
             },
-            "fuel/biodiesel": {
-                "label": "Біодизель"
-            },
-            "fuel/diesel": {
-                "label": "Дизельне паливо"
-            },
-            "fuel/e10": {
-                "label": "E10"
-            },
-            "fuel/e85": {
-                "label": "E85"
-            },
-            "fuel/lpg": {
-                "label": "Пропан"
-            },
-            "fuel/octane_100": {
-                "label": "Гоночний бензин"
-            },
-            "fuel/octane_91": {
-                "label": "Звичайний бензин"
-            },
-            "fuel/octane_95": {
-                "label": "Покращений бензин"
-            },
-            "fuel/octane_98": {
-                "label": "Преміум бензин"
+            "fuel_multi": {
+                "label": "Паливо"
             },
             "gauge": {
                 "label": "Колія"
@@ -1223,6 +1206,9 @@
                     "underground": "Підземна"
                 }
             },
+            "payment_multi": {
+                "label": "Види розрахунків"
+            },
             "phone": {
                 "label": "Телефон",
                 "placeholder": "+31 42 123 4567"
@@ -1280,30 +1266,8 @@
             "railway": {
                 "label": "Тип"
             },
-            "recycling/cans": {
-                "label": "Бляшані банки"
-            },
-            "recycling/clothes": {
-                "label": "Одяг"
-            },
-            "recycling/glass": {
-                "label": "Скло"
-            },
-            "recycling/glass_bottles": {
-                "label": "Скляні пляшки"
-            },
-            "recycling/paper": {
-                "label": "Папір"
-            },
-            "recycling/plastic": {
-                "label": "Пластик"
-            },
-            "recycling/type": {
-                "label": "Місце збору",
-                "options": {
-                    "centre": "Центр приймання",
-                    "container": "Контейнер"
-                }
+            "recycling_accepts": {
+                "label": "Приймається"
             },
             "ref": {
                 "label": "Номер"
@@ -1856,6 +1820,10 @@
             "amenity/post_office": {
                 "name": "Пошта",
                 "terms": "Post Office, gjinf, поштамт, пошта, поштове відділення"
+            },
+            "amenity/prison": {
+                "name": "Вʼязниця",
+                "terms": "в'язниця,вʼязниця,ізолятор,сізо,камера,утримання,покарання,строк,слідство"
             },
             "amenity/pub": {
                 "name": "Паб",

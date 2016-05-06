@@ -685,18 +685,6 @@
             "railway": {
                 "label": "Tegund"
             },
-            "recycling/cans": {
-                "label": "Tekur við dósum"
-            },
-            "recycling/clothes": {
-                "label": "Tekur við fötum"
-            },
-            "recycling/glass": {
-                "label": "Tekur við gleri"
-            },
-            "recycling/paper": {
-                "label": "Tekur við pappír"
-            },
             "ref": {
                 "label": "Heimildir"
             },

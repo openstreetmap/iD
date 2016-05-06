@@ -698,18 +698,6 @@
             "fuel": {
                 "label": "Combustible"
             },
-            "fuel/biodiesel": {
-                "label": "Con Biodiesel"
-            },
-            "fuel/diesel": {
-                "label": "Con Diésel"
-            },
-            "fuel/octane_95": {
-                "label": "Con Gasolina 95"
-            },
-            "fuel/octane_98": {
-                "label": "Con Gasolina 98"
-            },
             "highway": {
                 "label": "Tipo"
             },

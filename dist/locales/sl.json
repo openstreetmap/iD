@@ -619,33 +619,6 @@
             "fuel": {
                 "label": "Bencinska črpalka"
             },
-            "fuel/biodiesel": {
-                "label": "Prodaja biodizel"
-            },
-            "fuel/diesel": {
-                "label": "Prodaja dizel"
-            },
-            "fuel/e10": {
-                "label": "Prodaja E10"
-            },
-            "fuel/e85": {
-                "label": "Prodaja bioetanol (E85)"
-            },
-            "fuel/lpg": {
-                "label": "Prodaja propan"
-            },
-            "fuel/octane_100": {
-                "label": "Prodaja 100 oktanski bencin"
-            },
-            "fuel/octane_91": {
-                "label": "Prodaja 91 oktanski bencin"
-            },
-            "fuel/octane_95": {
-                "label": "Prodaja 95 oktanski bencin"
-            },
-            "fuel/octane_98": {
-                "label": "Prodaja 98 oktanski bencin"
-            },
             "gauge": {
                 "label": "Širina tirov"
             },
@@ -880,18 +853,6 @@
             },
             "railway": {
                 "label": "Vrsta"
-            },
-            "recycling/cans": {
-                "label": "Sprejem pločevink"
-            },
-            "recycling/clothes": {
-                "label": "Sprejem oblačil"
-            },
-            "recycling/glass": {
-                "label": "Sprejem steklovine"
-            },
-            "recycling/paper": {
-                "label": "Sprejem papirja"
             },
             "ref": {
                 "label": "Referenca"

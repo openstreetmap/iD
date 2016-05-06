@@ -766,9 +766,6 @@
             "fuel": {
                 "label": "Benzin İstasyonu"
             },
-            "fuel/diesel": {
-                "label": "Mazot Var"
-            },
             "gauge": {
                 "label": "Dingil Genişliği"
             },
@@ -964,11 +961,6 @@
             },
             "railway": {
                 "label": "Tip"
-            },
-            "recycling/type": {
-                "options": {
-                    "centre": "Geri Dönüşüm Merkezi"
-                }
             },
             "ref": {
                 "label": "Referans"

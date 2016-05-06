@@ -316,6 +316,7 @@
             "yes": "Oui",
             "no": "Non"
         },
+        "add": "Ajouter",
         "none": "Aucun",
         "node": "Nœud",
         "way": "Chemin",
@@ -780,6 +781,9 @@
             "bicycle_parking": {
                 "label": "Type"
             },
+            "bin": {
+                "label": "Corbeille"
+            },
             "boundary": {
                 "label": "Type"
             },
@@ -850,6 +854,9 @@
             },
             "cuisine": {
                 "label": "Cuisine"
+            },
+            "currency_multi": {
+                "label": "Types de devises"
             },
             "cycleway": {
                 "label": "Bandes cyclables",
@@ -954,32 +961,8 @@
             "fuel": {
                 "label": "Station-service"
             },
-            "fuel/biodiesel": {
-                "label": "Vente de bio-gazole"
-            },
-            "fuel/diesel": {
-                "label": "Vente de gazole"
-            },
-            "fuel/e10": {
-                "label": "Vente de E10"
-            },
-            "fuel/e85": {
-                "label": "Vente de E85"
-            },
-            "fuel/lpg": {
-                "label": "Vente de gaz propane"
-            },
-            "fuel/octane_100": {
-                "label": "Vente d'Octane 100"
-            },
-            "fuel/octane_91": {
-                "label": "Vente de carburant Ordinaire"
-            },
-            "fuel/octane_95": {
-                "label": "Vente de Super 95"
-            },
-            "fuel/octane_98": {
-                "label": "Vente de Super 98"
+            "fuel_multi": {
+                "label": "Types de carburants"
             },
             "gauge": {
                 "label": "Écartement"
@@ -1223,6 +1206,9 @@
                     "underground": "Souterrain"
                 }
             },
+            "payment_multi": {
+                "label": "Types de paiement"
+            },
             "phone": {
                 "label": "Téléphone ",
                 "placeholder": "+33 1 23 45 67 89"
@@ -1280,30 +1266,8 @@
             "railway": {
                 "label": "Type"
             },
-            "recycling/cans": {
-                "label": "Accepte les boîtes de conserve"
-            },
-            "recycling/clothes": {
-                "label": "Accepte les vêtements"
-            },
-            "recycling/glass": {
-                "label": "Accepte le verre"
-            },
-            "recycling/glass_bottles": {
-                "label": "Accepte les bouteilles en verre"
-            },
-            "recycling/paper": {
-                "label": "Accepte le papier"
-            },
-            "recycling/plastic": {
-                "label": "Accepte le plastique"
-            },
-            "recycling/type": {
-                "label": "Type de recyclage",
-                "options": {
-                    "centre": "Déchèterie",
-                    "container": "Conteneur de recyclage"
-                }
+            "recycling_accepts": {
+                "label": "Accepte"
             },
             "ref": {
                 "label": "Référence"
@@ -1439,6 +1403,9 @@
                     "tunnel": "Tunnel"
                 },
                 "placeholder": "Inconnu"
+            },
+            "studio": {
+                "label": "Type"
             },
             "substation": {
                 "label": "Type"
@@ -1853,6 +1820,10 @@
             "amenity/post_office": {
                 "name": "Bureau de poste",
                 "terms": "Bureau de poste"
+            },
+            "amenity/prison": {
+                "name": "Terrains de prison",
+                "terms": "Enceinte de prison"
             },
             "amenity/pub": {
                 "name": "Pub",

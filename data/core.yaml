@@ -193,7 +193,7 @@ en:
     readonly: The API is read-only. You will need to wait to save your changes.
   commit:
     title: Save Changes
-    description_placeholder: Brief description of your contributions
+    description_placeholder: Brief description of your contributions (required)
     message_label: Changeset comment
     upload_explanation: "The changes you upload will be visible on all maps that use OpenStreetMap data."
     upload_explanation_with_user: "The changes you upload as {user} will be visible on all maps that use OpenStreetMap data."
@@ -261,6 +261,7 @@ en:
     check:
       "yes": "Yes"
       "no": "No"
+    add: Add
     none: None
     node: Node
     way: Way

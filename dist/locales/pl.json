@@ -944,33 +944,6 @@
             "fuel": {
                 "label": "Paliwo"
             },
-            "fuel/biodiesel": {
-                "label": "Biodiesel"
-            },
-            "fuel/diesel": {
-                "label": "Diesel"
-            },
-            "fuel/e10": {
-                "label": "E10"
-            },
-            "fuel/e85": {
-                "label": "E85"
-            },
-            "fuel/lpg": {
-                "label": "LPG"
-            },
-            "fuel/octane_100": {
-                "label": "Benzyna wyścigowa (100 oktanów)"
-            },
-            "fuel/octane_91": {
-                "label": "Benzyna niskooktanowa (91 oktanów)"
-            },
-            "fuel/octane_95": {
-                "label": "Benzyna 95"
-            },
-            "fuel/octane_98": {
-                "label": "Benzyna 98"
-            },
             "gauge": {
                 "label": "Wskaźnik"
             },
@@ -1260,31 +1233,6 @@
             },
             "railway": {
                 "label": "Typ"
-            },
-            "recycling/cans": {
-                "label": "Przyjmowanie puszek"
-            },
-            "recycling/clothes": {
-                "label": "Ubrania"
-            },
-            "recycling/glass": {
-                "label": "Szkło"
-            },
-            "recycling/glass_bottles": {
-                "label": "Przyjmowanie szklanych butelek"
-            },
-            "recycling/paper": {
-                "label": "Papier"
-            },
-            "recycling/plastic": {
-                "label": "Przyjmowanie plastiku"
-            },
-            "recycling/type": {
-                "label": "Typ miejsca składowania odpadów",
-                "options": {
-                    "centre": "Punkt Selektywnej Zbiórki Odpadów Komunalnych",
-                    "container": "Pojemnik"
-                }
             },
             "ref": {
                 "label": "Numer referencyjny"

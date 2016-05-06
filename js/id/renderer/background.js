@@ -41,6 +41,10 @@ iD.Background = function(context) {
     background.updateImagery = function() {
         var b = background.baseLayerSource(),
             o = overlayLayers.map(function (d) { return d.source().id; }).join(','),
+            meters = iD.geo.offsetToMeters(b.offset()),
+            epsilon = 0.01,
+            x = +meters[0].toFixed(2),
+            y = +meters[1].toFixed(2),
             q = iD.util.stringQs(location.hash.substring(1));
 
         var id = b.id;
@@ -58,6 +62,12 @@ iD.Background = function(context) {
             q.overlays = o;
         } else {
             delete q.overlays;
+        }
+
+        if (Math.abs(x) > epsilon || Math.abs(y) > epsilon) {
+            q.offset = x + ',' + y;
+        } else {
+            delete q.offset;
         }
 
         location.replace('#' + iD.util.qsString(q, true));
@@ -95,11 +105,9 @@ iD.Background = function(context) {
 
     background.baseLayerSource = function(d) {
         if (!arguments.length) return baseLayer.source();
-
         baseLayer.source(d);
         dispatch.change();
         background.updateImagery();
-
         return background;
     };
 
@@ -143,6 +151,7 @@ iD.Background = function(context) {
     background.nudge = function(d, zoom) {
         baseLayer.source().nudge(d, zoom);
         dispatch.change();
+        background.updateImagery();
         return background;
     };
 
@@ -150,6 +159,7 @@ iD.Background = function(context) {
         if (!arguments.length) return baseLayer.source().offset();
         baseLayer.source().offset(d);
         dispatch.change();
+        background.updateImagery();
         return background;
     };
 
@@ -197,12 +207,26 @@ iD.Background = function(context) {
         var overlays = (q.overlays || '').split(',');
         overlays.forEach(function(overlay) {
             overlay = findSource(overlay);
-            if (overlay) background.toggleOverlayLayer(overlay);
+            if (overlay) {
+                background.toggleOverlayLayer(overlay);
+            }
         });
 
         if (q.gpx) {
             var gpx = context.layers().layer('gpx');
-            if (gpx) { gpx.url(q.gpx); }
+            if (gpx) {
+                gpx.url(q.gpx);
+            }
+        }
+
+        if (q.offset) {
+            var offset = q.offset.replace(/;/g, ',').split(',').map(function(n) {
+                return !isNaN(n) && n;
+            });
+
+            if (offset.length === 2) {
+                background.offset(iD.geo.metersToOffset(offset));
+            }
         }
     };
 

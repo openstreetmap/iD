@@ -316,6 +316,7 @@
             "yes": "Si",
             "no": "No"
         },
+        "add": "Añadir",
         "none": "Ninguno",
         "node": "Nodo",
         "way": "Vía",
@@ -780,6 +781,9 @@
             "bicycle_parking": {
                 "label": "Tipo"
             },
+            "bin": {
+                "label": "Papelera"
+            },
             "boundary": {
                 "label": "Tipo"
             },
@@ -850,6 +854,9 @@
             },
             "cuisine": {
                 "label": "Cocina"
+            },
+            "currency_multi": {
+                "label": "Tipos de moneda"
             },
             "cycleway": {
                 "label": "Carriles para bicicletas",
@@ -954,32 +961,8 @@
             "fuel": {
                 "label": "Combustible"
             },
-            "fuel/biodiesel": {
-                "label": "Vende Biodiesel"
-            },
-            "fuel/diesel": {
-                "label": "Vende Diesel"
-            },
-            "fuel/e10": {
-                "label": "Vende E10"
-            },
-            "fuel/e85": {
-                "label": "Vende E85"
-            },
-            "fuel/lpg": {
-                "label": "Vende Propano"
-            },
-            "fuel/octane_100": {
-                "label": "Vende Gasolina de Carreras"
-            },
-            "fuel/octane_91": {
-                "label": "Vende Gasolina Común"
-            },
-            "fuel/octane_95": {
-                "label": "Vende Gasolina Súper"
-            },
-            "fuel/octane_98": {
-                "label": "Vende Gasolina Premium"
+            "fuel_multi": {
+                "label": "Tipos de combustible"
             },
             "gauge": {
                 "label": "Gálibo"
@@ -1223,6 +1206,9 @@
                     "underground": "Subterráneo"
                 }
             },
+            "payment_multi": {
+                "label": "Formas de pago"
+            },
             "phone": {
                 "label": "Teléfono",
                 "placeholder": "+31 42 123 4567"
@@ -1280,30 +1266,8 @@
             "railway": {
                 "label": "Tipo"
             },
-            "recycling/cans": {
-                "label": "Acepta envases"
-            },
-            "recycling/clothes": {
-                "label": "Acepta ropas"
-            },
-            "recycling/glass": {
-                "label": "Acepta vidrio"
-            },
-            "recycling/glass_bottles": {
-                "label": "Acepta botellas de vidrio"
-            },
-            "recycling/paper": {
-                "label": "Acepta papel"
-            },
-            "recycling/plastic": {
-                "label": "Acepta plástico"
-            },
-            "recycling/type": {
-                "label": "Tipo de reciclaje",
-                "options": {
-                    "centre": "Centro de reciclaje",
-                    "container": "Contenedor"
-                }
+            "recycling_accepts": {
+                "label": "Acepta"
             },
             "ref": {
                 "label": "Referencia"

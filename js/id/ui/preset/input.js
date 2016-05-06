@@ -58,11 +58,13 @@ iD.ui.preset.url = function(field, context) {
 
                 enter.append('button')
                     .datum(1)
-                    .attr('class', 'increment');
+                    .attr('class', 'increment')
+                    .attr('tabindex', -1);
 
                 enter.append('button')
                     .datum(-1)
-                    .attr('class', 'decrement');
+                    .attr('class', 'decrement')
+                    .attr('tabindex', -1);
 
                 spinControl.selectAll('button')
                     .on('click', function(d) {

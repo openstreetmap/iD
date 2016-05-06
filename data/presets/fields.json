@@ -231,6 +231,11 @@
         "type": "combo",
         "label": "Type"
     },
+    "bin": {
+        "key": "bin",
+        "type": "check",
+        "label": "Waste Bin"
+    },
     "boundary": {
         "key": "boundary",
         "type": "combo",
@@ -339,6 +344,11 @@
         "key": "cuisine",
         "type": "combo",
         "label": "Cuisine"
+    },
+    "currency_multi": {
+        "key": "currency:",
+        "type": "multiCombo",
+        "label": "Currency Types"
     },
     "cycleway": {
         "keys": [
@@ -505,50 +515,10 @@
         "type": "combo",
         "label": "Fuel"
     },
-    "fuel/biodiesel": {
-        "key": "fuel:biodiesel",
-        "type": "check",
-        "label": "Sells Biodiesel"
-    },
-    "fuel/diesel": {
-        "key": "fuel:diesel",
-        "type": "check",
-        "label": "Sells Diesel"
-    },
-    "fuel/e10": {
-        "key": "fuel:e10",
-        "type": "check",
-        "label": "Sells E10"
-    },
-    "fuel/e85": {
-        "key": "fuel:e85",
-        "type": "check",
-        "label": "Sells E85"
-    },
-    "fuel/lpg": {
-        "key": "fuel:lpg",
-        "type": "check",
-        "label": "Sells Propane"
-    },
-    "fuel/octane_100": {
-        "key": "fuel:octane_100",
-        "type": "check",
-        "label": "Sells Racing Gasoline"
-    },
-    "fuel/octane_91": {
-        "key": "fuel:octane_91",
-        "type": "check",
-        "label": "Sells Regular Gasoline"
-    },
-    "fuel/octane_95": {
-        "key": "fuel:octane_95",
-        "type": "check",
-        "label": "Sells Midgrade Gasoline"
-    },
-    "fuel/octane_98": {
-        "key": "fuel:octane_98",
-        "type": "check",
-        "label": "Sells Premium Gasoline"
+    "fuel_multi": {
+        "key": "fuel:",
+        "type": "multiCombo",
+        "label": "Fuel Types"
     },
     "gauge": {
         "key": "gauge",
@@ -937,6 +907,11 @@
             }
         }
     },
+    "payment_multi": {
+        "key": "payment:",
+        "type": "multiCombo",
+        "label": "Payment Types"
+    },
     "phone": {
         "key": "phone",
         "type": "tel",
@@ -1020,46 +995,10 @@
         "type": "typeCombo",
         "label": "Type"
     },
-    "recycling/cans": {
-        "key": "recycling:cans",
-        "type": "check",
-        "label": "Accepts Cans"
-    },
-    "recycling/clothes": {
-        "key": "recycling:clothes",
-        "type": "check",
-        "label": "Accepts Clothes"
-    },
-    "recycling/glass": {
-        "key": "recycling:glass",
-        "type": "check",
-        "label": "Accepts Glass"
-    },
-    "recycling/glass_bottles": {
-        "key": "recycling:glass_bottles",
-        "type": "check",
-        "label": "Accepts Glass Bottles"
-    },
-    "recycling/paper": {
-        "key": "recycling:paper",
-        "type": "check",
-        "label": "Accepts Paper"
-    },
-    "recycling/plastic": {
-        "key": "recycling:plastic",
-        "type": "check",
-        "label": "Accepts Plastic"
-    },
-    "recycling/type": {
-        "key": "recycling_type",
-        "type": "combo",
-        "label": "Recycling Type",
-        "strings": {
-            "options": {
-                "container": "Container",
-                "centre": "Recycling Center"
-            }
-        }
+    "recycling_accepts": {
+        "key": "recycling:",
+        "type": "multiCombo",
+        "label": "Accepts"
     },
     "ref": {
         "key": "ref",
