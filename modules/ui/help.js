@@ -113,7 +113,7 @@ export function uiHelp(context) {
         var pane = selection.append('div')
                 .attr('class', 'help-wrap map-overlay fillL col5 content hide'),
             tooltipBehavior = tooltip()
-                .placement('left')
+                .placement((iD.detect().textDirection === 'rtl') ? 'right' : 'left')
                 .html(true)
                 .title(uiTooltipHtml(t('help.title'), key)),
             button = selection.append('button')

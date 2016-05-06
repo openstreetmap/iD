@@ -150,7 +150,7 @@ export function uiBackground(context) {
                 .attr('class', 'best')
                 .call(tooltip()
                     .title(t('background.best_imagery'))
-                    .placement('left'))
+                    .placement((iD.detect().textDirection === 'rtl') ? 'right' : 'left'))
                 .append('span')
                 .html('&#9733;');
 
@@ -337,7 +337,7 @@ export function uiBackground(context) {
         var content = selection.append('div')
                 .attr('class', 'fillL map-overlay col3 content hide'),
             tooltipBehavior = tooltip()
-                .placement('left')
+                .placement((iD.detect().textDirection === 'rtl') ? 'right' : 'left')
                 .html(true)
                 .title(uiTooltipHtml(t('background.description'), key)),
             button = selection.append('button')
@@ -369,7 +369,7 @@ export function uiBackground(context) {
             .on('click.set-opacity', setOpacity)
             .html('<div class="select-box"></div>')
             .call(tooltip()
-                .placement('left'))
+                .placement((iD.detect().textDirection === 'rtl') ? 'right' : 'left'))
             .append('div')
             .attr('class', 'opacity')
             .style('opacity', function(d) { return 1.25 - d; });
@@ -388,7 +388,7 @@ export function uiBackground(context) {
             .attr('class', 'layer-browse')
             .call(tooltip()
                 .title(t('background.custom_button'))
-                .placement('left'))
+                .placement((iD.detect().textDirection === 'rtl') ? 'right' : 'left'))
             .on('click', editCustom)
             .call(svgIcon('#icon-search'));
 

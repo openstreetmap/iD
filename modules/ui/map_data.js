@@ -216,7 +216,7 @@ export function uiMapData(context) {
                 .attr('class', 'list-item-gpx-extent')
                 .call(tooltip()
                     .title(t('gpx.zoom'))
-                    .placement('left'))
+                    .placement((iD.detect().textDirection === 'rtl') ? 'right' : 'left'))
                 .on('click', function() {
                     d3.event.preventDefault();
                     d3.event.stopPropagation();
@@ -229,7 +229,7 @@ export function uiMapData(context) {
                 .attr('class', 'list-item-gpx-browse')
                 .call(tooltip()
                     .title(t('gpx.browse'))
-                    .placement('left'))
+                    .placement((iD.detect().textDirection === 'rtl') ? 'right' : 'left'))
                 .on('click', function() {
                     d3.select(document.createElement('input'))
                         .attr('type', 'file')
@@ -388,7 +388,7 @@ export function uiMapData(context) {
                 .append('div')
                 .attr('class', 'fillL map-overlay col3 content hide'),
             tooltipBehavior = tooltip()
-                .placement('left')
+                .placement((iD.detect().textDirection === 'rtl') ? 'right' : 'left')
                 .html(true)
                 .title(uiTooltipHtml(t('map_data.description'), key)),
             button = selection

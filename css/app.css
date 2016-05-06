@@ -3537,6 +3537,10 @@ img.tile-removing {
   border-radius: 0 0 4px 0;
 }
 
+[dir='rtl'] .geolocate-control button svg, [dir='rtl'] .list-item-gpx-browse svg {
+  transform: rotateY(180deg);
+}
+
 /* map control button overlays */
 [dir='rtl'] .map-overlay {
   padding: 20px 20px 20px 50px;

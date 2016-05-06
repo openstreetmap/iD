@@ -54,6 +54,7 @@ export function uiGeolocate(context) {
             .attr('title', t('geolocate.title'))
             .on('click', click)
             .call(svgIcon('#icon-geolocate', 'light'))
-            .call(tooltip().placement('left'));
+            .call(tooltip()
+                .placement((iD.detect().textDirection === 'rtl') ? 'right' : 'left'));
     };
 }

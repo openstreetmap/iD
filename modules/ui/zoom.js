@@ -57,7 +57,7 @@ export function uiZoom(context) {
             .attr('class', function(d) { return d.id; })
             .on('click.editor', function(d) { d.action(); })
             .call(tooltip()
-                .placement('left')
+                .placement((iD.detect().textDirection === 'rtl') ? 'right' : 'left')
                 .html(true)
                 .title(function(d) {
                     return uiTooltipHtml(d.title, d.key);
