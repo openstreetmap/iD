@@ -497,7 +497,9 @@ export function uiBackground(context) {
             .attr('title', t('background.reset'))
             .attr('class', 'nudge-reset disabled')
             .on('click', resetOffset)
-            .call(svgIcon('#icon-undo'));
+            .call(
+              (iD.detect().textDirection === 'rtl') ? svgIcon('#icon-redo') : svgIcon('#icon-undo')
+            );
 
         context.map()
             .on('move.background-update', _.debounce(update, 1000));

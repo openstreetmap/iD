@@ -160,7 +160,9 @@ export function uiPreset(context) {
         wrap.append('button')
             .attr('class', 'modified-icon')
             .attr('tabindex', -1)
-            .call(svgIcon('#icon-undo'));
+            .call(
+              (iD.detect().textDirection === 'rtl') ? svgIcon('#icon-redo') : svgIcon('#icon-undo')
+            );
 
 
         // Update

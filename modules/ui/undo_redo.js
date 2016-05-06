@@ -44,11 +44,18 @@ export function uiUndoRedo(context) {
             .on('click', function(d) { return d.action(); })
             .call(tooltipBehavior);
 
-        buttons
-            .each(function(d) {
-                d3.select(this)
-                    .call(svgIcon('#icon-' + d.id));
-            });
+        buttons.each(function(d) {
+            var iconName = d.id;
+            if (iD.detect().textDirection === 'rtl') {
+              if (iconName === 'undo') {
+                iconName = 'redo';
+              } else if (iconName === 'redo') {
+                iconName = 'undo';
+              }
+            }
+            d3.select(this)
+                .call(svgIcon('#icon-' + iconName));
+        });
 
         var keybinding = d3keybinding('undo')
             .on(commands[0].cmd, function() { d3.event.preventDefault(); commands[0].action(); })
