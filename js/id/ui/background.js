@@ -204,6 +204,10 @@ iD.ui.Background = function(context) {
         function dragOffset() {
             var origin = [d3.event.clientX, d3.event.clientY];
 
+            context.container()
+                .append('div')
+                .attr('class', 'nudge-surface');
+
             d3.select(window)
                 .on('mousemove.offset', function() {
                     var latest = [d3.event.clientX, d3.event.clientY];
@@ -216,6 +220,9 @@ iD.ui.Background = function(context) {
                     nudge(d);
                 })
                 .on('mouseup.offset', function() {
+                    d3.selectAll('.nudge-surface')
+                        .remove();
+
                     d3.select(window)
                         .on('mousemove.offset', null)
                         .on('mouseup.offset', null);
