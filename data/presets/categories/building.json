@@ -3,11 +3,11 @@
     "name": "Building Features",
     "icon": "building",
     "members": [
+        "building",
         "building/house",
         "building/apartments",
         "building/commercial",
         "building/industrial",
-        "building/residential",
-        "building"
+        "building/residential"
     ]
 }
