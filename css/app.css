@@ -2042,6 +2042,17 @@ div.full-screen > button:hover {
     right: -10px;
 }
 
+.nudge-surface {
+   position: absolute;
+   z-index: 5000;
+   left: 0;
+   top: 0;
+   width: 100%;
+   height: 100%;
+   background-color: transparent;
+   cursor: move;
+}
+
 .background-control .nudge.right::after {
     border-top:  5px solid transparent;
     border-bottom:  5px solid transparent;
