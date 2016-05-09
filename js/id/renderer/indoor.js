@@ -35,11 +35,6 @@ iD.Indoor = function (context) {
             enable();
     };
 
-    indoor.levels = function () {
-        return [-1, 0, 1, 1.5];
-    };
-
-
     function enable() {
         indoorMode = true;
 
@@ -97,7 +92,8 @@ iD.Indoor = function (context) {
     var rangeRegExp = /^(-?\d+(?:\.\d+)?)(?:(-)(-?\d+(?:\.\d+)?)|(;-?\d(?:\.\d+)?)+)?$/;
     indoor.inRange = function (level, entity) {
         return textInRange(level, entity.tags.level) || textInRange(level, entity.tags.repeat_on, true);
-    }
+    };
+
     function textInRange(level, rangeText, discreetValuesRange) {
         var range = rangeText && rangeRegExp.exec(rangeText);
 

@@ -13,13 +13,13 @@ iD.ui.IndoorMode = function (context) {
 
 
         indoorControl = selection.append('div')
-            .attr('class', 'indoormode-control joined ');
+            .attr('class', 'indoormode-control joined');
 
         indoorControl.append('div') //combo
             .attr('class', 'col4 indoormode-level-combo')
             .append('input')
             .attr('type', 'text')
-            .call(d3.combobox().data([0, 1, 2, 3, 4, 5, 6].map(comboValues)))
+            .call(d3.combobox().data([].map(comboValues)))
             .on('blur', setLevel)
             .on('change', setLevel);
         spinControl = indoorControl.append('div');
@@ -63,7 +63,7 @@ iD.ui.IndoorMode = function (context) {
 
         context.map()
             .on('move.indoor_mode', _.debounce(update, 400))
-            .on('drawn.indoor_mode', update);
+            .on('drawn.indoor_mode', _.debounce(update, 400));
 
 
         function update() {
@@ -99,13 +99,27 @@ iD.ui.IndoorMode = function (context) {
             indoorControl.select('.combobox-input')
                 .attr('placeholder', context.indoor().level())
                 .value('')
-                .call(d3.combobox().data(context.indoor().levels().map(comboValues)));
+                .call(d3.combobox().data(getLevelsInTags().map(comboValues)));
 
         }
         else {
             enterButton.classed('hide', !enableButton);
             indoorControl.classed('hide', true);
         }
+    }
+
+    function getLevelsInTags() {
+        var displayedEntities = context.intersects(context.map().extent());
+        var levelsSet = d3.set();
+        displayedEntities.forEach(function addToSet(e) {
+            if (e.tags.level) {
+                var match = e.tags.level.replace(/(-?\d+(\.\d+)?).*/, '$1'); //should parse ranges and so on
+                levelsSet.add(match);
+            }
+        });
+
+        var sorted = levelsSet.values().sort(d3.descending);
+        return sorted;
     }
 
     function toggleIndoor() {
@@ -116,7 +130,15 @@ iD.ui.IndoorMode = function (context) {
     function levelChangeFunc(dif) {
         return function () {
             d3.event.preventDefault();
-            context.indoor().level(parseFloat(context.indoor().level()) + dif + '');
+            var current = parseFloat(context.indoor().level());
+            var target = current + dif;
+            getLevelsInTags().forEach(function findClosestToCurrent(l){
+                if ((current < l && l < target) || (target < l && l < current))  {
+                    target = dif>0 ? Math.min(target, l) : Math.max(target, l);
+                }
+            });
+
+            context.indoor().level(target + '');
             indoorControl.select('input').attr('placeholder', context.indoor().level());
         };
     }
