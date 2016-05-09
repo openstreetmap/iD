@@ -107,7 +107,7 @@ iD.Features = function(context) {
     defineFeature('indoor_different_level', function isHiddenByLevel(entity, resolver, geometry) { //disabled in indoor_mode -> hides unwanted levels
         var current = context.indoor().level();
 
-        if (entity.tags.level && !inRange(current, entity))
+        if (entity.tags.level && !context.indoor().inRange(current, entity))
             return true;
 
         if (geometry === 'point' && !entity.tags.level)
@@ -444,40 +444,6 @@ iD.Features = function(context) {
     };
 
 
-    var rangeRegExp = /^(-?\d+(?:\.\d+)?)(?:(-)(-?\d+(?:\.\d+)?)|(;-?\d(?:\.\d+)?)+)?$/;
-    function inRange(level, entity) {
-        return textInRange(level, entity.tags.level) || textInRange(level, entity.tags.repeat_on, true);
-    }
-    function textInRange(level, rangeText, discreetValuesRange) {
-        var range = rangeText && rangeRegExp.exec(rangeText);
-
-        if (!range) {  //blank text OR not matched
-            return false;
-        }
-
-        if (range[2] === undefined && range[4] === undefined) { //exact match
-            if (range[1] === level) {
-                return true;
-            }
-        }
-        else if (range[2] === '-') { // range from - to, only numeric comparison
-            var min = parseFloat(range[1]);
-            var max = parseFloat(range[3]);
-            if (min <= level && max >= level) {
-                return discreetValuesRange ? isDecimalPartEqual(level, min) : true;
-            }
-        }
-        else { // range list
-            if (range[0].split(';').indexOf(level) !== -1) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    function isDecimalPartEqual(a, b) {
-        return Math.abs(a%1 - b%1) < 0.0001; //decimal part equals
-    }
 
     return d3.rebind(features, dispatch, 'on');
 };
