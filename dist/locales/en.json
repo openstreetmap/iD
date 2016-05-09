@@ -3965,6 +3965,10 @@
                 "name": "Hiking Route",
                 "terms": ""
             },
+            "type/route/horse": {
+                "name": "Bridle Route",
+                "terms": ""
+            },
             "type/route/pipeline": {
                 "name": "Pipeline Route",
                 "terms": ""
