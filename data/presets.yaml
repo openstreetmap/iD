@@ -3735,8 +3735,8 @@ en:
         terms: "<translate with synonyms or related terms for 'Hiking Route', separated by commas>"
       type/route/horse:
         # 'type=route, route=horse'
-        name: Bridle Route
-        terms: "<translate with synonyms or related terms for 'Bridle Route', separated by commas>"
+        name: Riding Route
+        terms: "<translate with synonyms or related terms for 'Riding Route', separated by commas>"
       type/route/pipeline:
         # 'type=route, route=pipeline'
         name: Pipeline Route

@@ -917,6 +917,7 @@ path.stroke.tag-highway-cycleway {
     stroke: #58a9ed;
 }
 
+.preset-icon .icon.tag-route-horse,
 .preset-icon .icon.highway-bridleway {
     color: #e06d5f;
     fill: #fff;

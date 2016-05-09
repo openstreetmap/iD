@@ -10568,8 +10568,8 @@
             "type": "route",
             "route": "horse"
         },
-        "name": "Bridle Route",
-        "icon": "route-foot",
+        "name": "Riding Route",
+        "icon": "route-horse",
         "fields": [
             "ref",
             "operator"
