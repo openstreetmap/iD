@@ -1,9 +1,9 @@
-describe('iD.Indoor', function() {
+describe('iD.Indoor', function () {
     var context,
         features,
         indoor;
 
-    beforeEach(function() {
+    beforeEach(function () {
         context = iD();
         context.map().zoom(17);
         features = context.features();
@@ -39,7 +39,6 @@ describe('iD.Indoor', function() {
         });
 
 
-
     });
 
     describe('filtering', function () {
@@ -73,6 +72,19 @@ describe('iD.Indoor', function() {
             indoor.level('-1.5');
             expect(features.isHidden(node2, graph, node2.geometry(graph)), 'level=-2--1 is shown in level -1.5').to.be.false;
 
+        });
+
+        it('shows decimal level', function () {
+
+            var node1 = iD.Node({tags: {amenity: 'bar', level: '0.5'}, version: 1});
+            var all = [node1];
+            var graph = iD.Graph(all);
+
+            // update _hidden field in features
+            features.gatherStats(all, graph, [1000, 1000]);
+
+            indoor.level('0.5');
+            expect(features.isHidden(node1, graph, node1.geometry(graph)), 'level=0.5 is shown in level 0.5').to.be.false;
         });
     });
 

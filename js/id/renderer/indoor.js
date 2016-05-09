@@ -47,7 +47,7 @@ iD.Indoor = function(context) {
         if (selectedFeatures.length) {
             var entity = context.graph().entity(selectedFeatures[0]);
             if (entity.tags.level)
-                indoorLevel = entity.tags.level.replace(/(-?\d+(\.\d+)?).+/, '$1');
+                indoorLevel = entity.tags.level.replace(/(-?\d+(\.\d+)?).*/, '$1');
         }
 
         enabledFeaturesBeforeIndoor = features.enabled();

@@ -444,7 +444,7 @@ iD.Features = function(context) {
     };
 
 
-    var rangeRegExp = /^(-?\d+)(?:(-)(-?\d+)|(;-?\d)+)?$/;
+    var rangeRegExp = /^(-?\d+(?:\.\d+)?)(?:(-)(-?\d+(?:\.\d+)?)|(;-?\d(?:\.\d+)?)+)?$/;
     function inRange(level, rangeText) {
         var range = rangeText && rangeRegExp.exec(rangeText);
 
