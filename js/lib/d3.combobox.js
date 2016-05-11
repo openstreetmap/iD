@@ -148,7 +148,9 @@ d3.combobox = function() {
 
         function change() {
             fetch(value(), function() {
-                autocomplete();
+                if (input.property('selectionEnd') === input.property('value').length) {
+                    autocomplete();
+                }
                 render();
             });
         }
@@ -180,16 +182,11 @@ d3.combobox = function() {
             });
         }
 
-        function isCursorNotAtEnd() {
-          return input.property('selectionStart') < input.property('value').length;
-        }
-
         function autocomplete() {
             var v = caseSensitive ? value() : value().toLowerCase();
             idx = -1;
-
             if (!v) return;
-            v = isCursorNotAtEnd() ? input.property('value'): v;
+
             for (var i = 0; i < suggestions.length; i++) {
                 var suggestion = suggestions[i].value,
                     compare = caseSensitive ? suggestion : suggestion.toLowerCase();
