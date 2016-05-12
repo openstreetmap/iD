@@ -1619,8 +1619,8 @@ en:
         terms: "<translate with synonyms or related terms for 'Cycle Barrier', separated by commas>"
       barrier/ditch:
         # barrier=ditch
-        name: Ditch
-        terms: "<translate with synonyms or related terms for 'Ditch', separated by commas>"
+        name: Trench
+        terms: "<translate with synonyms or related terms for 'Trench', separated by commas>"
       barrier/entrance:
         # barrier=entrance
         name: Entrance

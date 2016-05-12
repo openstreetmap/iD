@@ -2367,6 +2367,7 @@
         "name": "Cycle Barrier"
     },
     "barrier/ditch": {
+        "icon": "roadblock",
         "geometry": [
             "line",
             "area"
@@ -2374,7 +2375,7 @@
         "tags": {
             "barrier": "ditch"
         },
-        "name": "Ditch"
+        "name": "Trench"
     },
     "barrier/entrance": {
         "icon": "entrance",
