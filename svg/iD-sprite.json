@@ -30,6 +30,7 @@
     "icon-point-shape":               { "fill": "currentColor" },
     "icon-line-shape":                { "fill": "currentColor" },
     "icon-area-shape":                { "fill": "currentColor" },
+    "icon-area-fill":                 { "fill": "currentColor" },
     "icon-relation-shape":            { "fill": "currentColor" },
     "icon-vertex-shape":              { "fill": "currentColor" },
     "icon-undo-shape":                { "fill": "currentColor" },
