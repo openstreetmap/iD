@@ -1,4 +1,5 @@
 {
+    "icon": "roadblock",
     "geometry": [
         "point",
         "vertex",

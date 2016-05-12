@@ -1,12 +1,13 @@
 {
     "category-barrier": {
         "geometry": "line",
-        "name": "Barrier",
-        "icon": "barrier",
+        "name": "Barrier Features",
+        "icon": "roadblock",
         "members": [
             "barrier/fence",
             "barrier/wall",
             "barrier/ditch",
+            "barrier/gate",
             "barrier"
         ]
     },

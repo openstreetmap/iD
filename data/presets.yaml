@@ -1,6 +1,8 @@
 en:
   presets:
     categories:
+      category-barrier:
+        name: Barrier Features
       category-building:
         name: Building Features
       category-golf:

@@ -2288,6 +2288,7 @@
         "name": "Road Surface"
     },
     "barrier": {
+        "icon": "roadblock",
         "geometry": [
             "point",
             "vertex",
@@ -2303,6 +2304,7 @@
         "name": "Barrier"
     },
     "barrier/block": {
+        "icon": "roadblock",
         "fields": [
             "access"
         ],
@@ -2316,6 +2318,7 @@
         "name": "Block"
     },
     "barrier/bollard": {
+        "icon": "roadblock",
         "fields": [
             "access"
         ],
@@ -2330,6 +2333,7 @@
         "name": "Bollard"
     },
     "barrier/cattle_grid": {
+        "icon": "roadblock",
         "geometry": [
             "vertex"
         ],
@@ -2349,6 +2353,7 @@
         "name": "City Wall"
     },
     "barrier/cycle_barrier": {
+        "icon": "roadblock",
         "fields": [
             "access"
         ],
@@ -2382,6 +2387,7 @@
         "searchable": false
     },
     "barrier/fence": {
+        "icon": "roadblock",
         "geometry": [
             "line"
         ],
@@ -2391,6 +2397,7 @@
         "name": "Fence"
     },
     "barrier/gate": {
+        "icon": "roadblock",
         "fields": [
             "access"
         ],
@@ -2415,6 +2422,7 @@
         "name": "Hedge"
     },
     "barrier/kissing_gate": {
+        "icon": "roadblock",
         "fields": [
             "access"
         ],
@@ -2427,6 +2435,7 @@
         "name": "Kissing Gate"
     },
     "barrier/lift_gate": {
+        "icon": "roadblock",
         "fields": [
             "access"
         ],
@@ -2450,6 +2459,7 @@
         "name": "Retaining Wall"
     },
     "barrier/stile": {
+        "icon": "roadblock",
         "fields": [
             "access"
         ],
@@ -2463,6 +2473,7 @@
         "name": "Stile"
     },
     "barrier/toll_booth": {
+        "icon": "roadblock",
         "fields": [
             "access"
         ],
@@ -2475,6 +2486,7 @@
         "name": "Toll Booth"
     },
     "barrier/wall": {
+        "icon": "roadblock",
         "geometry": [
             "line",
             "area"
