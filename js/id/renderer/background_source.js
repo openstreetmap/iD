@@ -27,6 +27,12 @@ iD.BackgroundSource = function(data) {
         return best;
     };
 
+    source.area = function() {
+        if (!data.polygon) return Number.MAX_VALUE;  // worldwide
+        var area = d3.geo.area({ type: 'MultiPolygon', coordinates: [ data.polygon ] });
+        return isNaN(area) ? 0 : area;
+    };
+
     source.imageryUsed = function() {
         return source.id || name;
     };
@@ -133,6 +139,10 @@ iD.BackgroundSource.None = function() {
         return 'None';
     };
 
+    source.area = function() {
+        return -1;
+    };
+
     return source;
 };
 
@@ -145,6 +155,10 @@ iD.BackgroundSource.Custom = function(template) {
 
     source.imageryUsed = function() {
         return 'Custom (' + template + ')';
+    };
+
+    source.area = function() {
+        return -2;
     };
 
     return source;

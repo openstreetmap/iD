@@ -13,14 +13,13 @@ iD.ui.Background = function(context) {
     // Can be 0 from <1.3.0 use or due to issue #1923.
     if (opacityDefault === 0) opacityDefault = 1.0;
 
+
     function background(selection) {
 
         function sortSources(a, b) {
-            return a.best() ? -1
-                : b.best() ? 1
-                : a.id === 'none' ? 1
-                : b.id === 'none' ? -1
-                : d3.ascending(a, b);
+            return a.best() && !b.best() ? -1
+                : b.best() && !a.best() ? 1
+                : d3.descending(a.area(), b.area()) || d3.ascending(a.name(), b.name()) || 0;
         }
 
         function setOpacity(d) {
@@ -87,8 +86,7 @@ iD.ui.Background = function(context) {
                 .filter(filter);
 
             var layerLinks = layerList.selectAll('li.layer')
-                .data(sources, function(d) { return d.name(); })
-                .sort(sortSources);
+                .data(sources, function(d) { return d.name(); });
 
             var enter = layerLinks.enter()
                 .insert('li', '.custom_layer')
@@ -120,10 +118,13 @@ iD.ui.Background = function(context) {
             label.append('span')
                 .text(function(d) { return d.name(); });
 
+
             layerLinks.exit()
                 .remove();
 
-            layerList.style('display', layerList.selectAll('li.layer').data().length > 0 ? 'block' : 'none');
+            layerList.selectAll('li.layer')
+                .sort(sortSources)
+                .style('display', layerList.selectAll('li.layer').data().length > 0 ? 'block' : 'none');
         }
 
         function update() {
