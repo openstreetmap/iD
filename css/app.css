@@ -2434,6 +2434,10 @@ div.full-screen > button:hover {
     max-height: 30px;
     float: left;
     clear: left;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 #info-block {
@@ -2444,6 +2448,10 @@ div.full-screen > button:hover {
 #scale {
     height: 30px;
     width: 100%;
+}
+
+#scale:hover {
+    cursor: pointer;
 }
 
 #scale text {
