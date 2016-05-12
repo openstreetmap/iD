@@ -2333,7 +2333,7 @@
         "name": "Bollard"
     },
     "barrier/cattle_grid": {
-        "icon": "roadblock",
+        "icon": "prison",
         "geometry": [
             "vertex"
         ],
@@ -2343,6 +2343,7 @@
         "name": "Cattle Grid"
     },
     "barrier/city_wall": {
+        "icon": "prison",
         "geometry": [
             "line",
             "area"
@@ -2387,7 +2388,7 @@
         "searchable": false
     },
     "barrier/fence": {
-        "icon": "roadblock",
+        "icon": "prison",
         "geometry": [
             "line"
         ],
@@ -2397,7 +2398,7 @@
         "name": "Fence"
     },
     "barrier/gate": {
-        "icon": "roadblock",
+        "icon": "prison",
         "fields": [
             "access"
         ],
@@ -2422,7 +2423,7 @@
         "name": "Hedge"
     },
     "barrier/kissing_gate": {
-        "icon": "roadblock",
+        "icon": "prison",
         "fields": [
             "access"
         ],
@@ -2486,7 +2487,7 @@
         "name": "Toll Booth"
     },
     "barrier/wall": {
-        "icon": "roadblock",
+        "icon": "prison",
         "geometry": [
             "line",
             "area"
