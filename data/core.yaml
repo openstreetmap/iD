@@ -274,6 +274,7 @@ en:
     percent_brightness: "{opacity}% brightness"
     none: None
     best_imagery: Best known imagery source for this location
+    switch: Switch back to this background
     custom: Custom
     custom_button: Edit custom background
     custom_prompt: "Enter a tile URL template. Valid tokens are {z}, {x}, {y} for Z/X/Y scheme and {u} for quadtile scheme."

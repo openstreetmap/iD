@@ -9,7 +9,7 @@ iD.ui.Background = function(context) {
         opacityDefault = (context.storage('background-opacity') !== null) ?
             (+context.storage('background-opacity')) : 1.0,
         customTemplate = context.storage('background-custom-template') || '',
-        latestBg = [context.background().baseLayerSource(), null];
+        previous;
 
     // Can be 0 from <1.3.0 use or due to issue #1923.
     if (opacityDefault === 0) opacityDefault = 1.0;
@@ -39,29 +39,48 @@ iD.ui.Background = function(context) {
             context.storage('background-opacity', d);
         }
 
+        function setTooltips(selection) {
+            selection.each(function(d) {
+                var item = d3.select(this);
+                if (d === previous) {
+                    item.call(bootstrap.tooltip()
+                        .html(true)
+                        .title(function() {
+                            var tip = '<div>' + t('background.switch') + '</div>';
+                            return iD.ui.tooltipHtml(tip, iD.ui.cmd('⌘B'));
+                        })
+                        .placement('top')
+                    );
+                } else if (d.description) {
+                    item.call(bootstrap.tooltip()
+                        .title(d.description)
+                        .placement('top')
+                    );
+                } else {
+                    item.call(bootstrap.tooltip().destroy);
+                }
+            });
+        }
+
         function selectLayer() {
             function active(d) {
                 return context.background().showsLayer(d);
             }
 
-            function bgswitch(d) {
-                return latestBg[1] === d;
-            }
-
             content.selectAll('.layer, .custom_layer')
                 .classed('active', active)
-                .classed('switch', bgswitch)
+                .classed('switch', function(d) { return d === previous; })
+                .call(setTooltips)
                 .selectAll('input')
                 .property('checked', active);
         }
 
         function clickSetSource(d) {
-            latestBg[1] = latestBg[0];
-            latestBg[0] = d;
-
+            previous = context.background().baseLayerSource();
             d3.event.preventDefault();
             context.background().baseLayerSource(d);
             selectLayer();
+            document.activeElement.blur();
         }
 
         function editCustom() {
@@ -87,6 +106,7 @@ iD.ui.Background = function(context) {
             d3.event.preventDefault();
             context.background().toggleOverlayLayer(d);
             selectLayer();
+            document.activeElement.blur();
         }
 
         function drawList(layerList, type, change, filter) {
@@ -101,12 +121,6 @@ iD.ui.Background = function(context) {
                 .insert('li', '.custom_layer')
                 .attr('class', 'layer')
                 .classed('best', function(d) { return d.best(); });
-
-            // only set tooltips for layers with tooltips
-            enter.filter(function(d) { return d.description; })
-                .call(bootstrap.tooltip()
-                    .title(function(d) { return d.description; })
-                    .placement('top'));
 
             enter.filter(function(d) { return d.best(); })
                 .append('div')
@@ -251,18 +265,10 @@ iD.ui.Background = function(context) {
             setVisible(!button.classed('active'));
         }
 
-        function interchangeBg() {
-            var d = latestBg[1];
-            if (d == null) {
-                toggle();
-                return;
+        function quickSwitch() {
+            if (previous) {
+                clickSetSource(previous);
             }
-
-            latestBg[1] = latestBg[0];
-            latestBg[0] = d;
-
-            context.background().baseLayerSource(d);
-            selectLayer();
         }
 
         function setVisible(show) {
@@ -471,7 +477,7 @@ iD.ui.Background = function(context) {
 
         var keybinding = d3.keybinding('background')
             .on(key, toggle)
-            .on('I', interchangeBg)
+            .on(iD.ui.cmd('⌘B'), quickSwitch)
             .on('F', hide)
             .on('H', hide);
 

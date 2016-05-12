@@ -1879,7 +1879,8 @@ div.full-screen > button:hover {
     background-color: #ececec;
 }
 
-.layer-list li.active {
+.layer-list li.active,
+.layer-list li.switch {
     background: #E8EBFF;
 }
 
@@ -1893,10 +1894,6 @@ div.full-screen > button:hover {
 /* if too wide, placement will be wrong the first time it displays */
 .layer-list li.best .tooltip-inner {
     max-width: 160px;
-}
-
-.layer-list li.switch {
-    background: #fffce8;
 }
 
 .layer-list label {
