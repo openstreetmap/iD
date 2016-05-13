@@ -5,7 +5,6 @@ iD.Connection = function(useHttps) {
 
     var event = d3.dispatch('authenticating', 'authenticated', 'auth', 'loading', 'loaded'),
         protocol = useHttps ? 'https:' : 'http:',
-        url = protocol + '//www.openstreetmap.org',
         connection = {},
         inflight = {},
         loadedTiles = {},
@@ -26,6 +25,11 @@ iD.Connection = function(useHttps) {
         userDetails,
         off;
 
+    // Docker url
+    var url = '//192.168.99.100:4000';
+
+    // local testing url
+    // var url = '//localhost:4000';
 
     connection.changesetURL = function(changesetId) {
         return url + '/changeset/' + changesetId;
@@ -204,8 +208,11 @@ iD.Connection = function(useHttps) {
 
     // Generate Changeset XML. Returns a string.
     connection.changesetJXON = function(tags) {
+        var user = userDetails || {};
         return {
             osm: {
+                user: user.display_name || null,
+                uid: user.id || null,
                 changeset: {
                     tag: _.map(tags, function(value, key) {
                         return { '@k': key, '@v': value };
@@ -266,31 +273,20 @@ iD.Connection = function(useHttps) {
     };
 
     connection.putChangeset = function(changes, comment, imageryUsed, callback) {
-        oauth.xhr({
-                method: 'PUT',
-                path: '/api/0.6/changeset/create',
-                options: { header: { 'Content-Type': 'text/xml' } },
-                content: JXON.stringify(connection.changesetJXON(connection.changesetTags(comment, imageryUsed)))
-            }, function(err, changeset_id) {
+        var changesetJXON = JXON.stringify(connection.changesetJXON(connection.changesetTags(comment, imageryUsed)));
+        d3.xhr(url + '/api/0.6/changeset/create')
+        .header('Content-Type', 'text/xml')
+        .send('PUT', changesetJXON, function (err, resp) {
+            if (err) return callback(err);
+            var changeset_id = resp.responseText;
+            var osmChangeJXON = JXON.stringify(connection.osmChangeJXON(changeset_id, changes));
+            d3.xhr(url + '/api/0.6/changeset/' + changeset_id + '/upload')
+            .header('Content-Type', 'text/xml')
+            .send('POST', osmChangeJXON, function (err, resp) {
                 if (err) return callback(err);
-                oauth.xhr({
-                    method: 'POST',
-                    path: '/api/0.6/changeset/' + changeset_id + '/upload',
-                    options: { header: { 'Content-Type': 'text/xml' } },
-                    content: JXON.stringify(connection.osmChangeJXON(changeset_id, changes))
-                }, function(err) {
-                    if (err) return callback(err);
-                    // POST was successful, safe to call the callback.
-                    // Still attempt to close changeset, but ignore response because #2667
-                    // Add delay to allow for postgres replication #1646 #2678
-                    window.setTimeout(function() { callback(null, changeset_id); }, 2500);
-                    oauth.xhr({
-                        method: 'PUT',
-                        path: '/api/0.6/changeset/' + changeset_id + '/close',
-                        options: { header: { 'Content-Type': 'text/xml' } }
-                    }, d3.functor(true));
-                });
+                callback(null, changeset_id);
             });
+        });
     };
 
     connection.userDetails = function(callback) {
