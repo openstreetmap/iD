@@ -55,6 +55,9 @@ iD.behavior.DrawWay = function(context, wayId, index, mode, baseGraph) {
             .on('click', drawWay.add)
             .on('clickWay', drawWay.addWay)
             .on('clickNode', drawWay.addNode)
+            .on('spacedown', drawWay.add)
+            .on('spacedownWay', drawWay.addWay)
+            .on('spacedownNode', drawWay.addNode)
             .on('undo', context.undo)
             .on('cancel', drawWay.cancel)
             .on('finish', drawWay.finish);
