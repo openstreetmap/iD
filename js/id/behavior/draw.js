@@ -10,11 +10,20 @@ iD.behavior.Draw = function(context) {
         edit = iD.behavior.Edit(context),
         closeTolerance = 4,
         tolerance = 12,
-        lastDatum = {};
+        lastDatum;
 
     function datum() {
         if (d3.event.altKey) return {};
-        else return d3.event.target.__data__ || {};
+
+        if (d3.event.type === 'mousemove') {
+            lastDatum = d3.event.target.__data__;
+        }
+
+        if (d3.event.type === 'keydown') {
+            return lastDatum || {};
+        } else {
+            return d3.event.target.__data__ || {};
+        }
     }
 
     function mousedown() {
@@ -60,8 +69,7 @@ iD.behavior.Draw = function(context) {
     }
 
     function mousemove() {
-        lastDatum = datum();
-        event.move(lastDatum);
+        event.move(datum());
     }
 
     function click() {
@@ -80,18 +88,9 @@ iD.behavior.Draw = function(context) {
     }
 
     function space() {
-        var d = lastDatum;
-        if (d.type === 'way') {
-            var choice = iD.geo.chooseEdge(context.childNodes(d), context.mouse(), context.projection),
-                edge = [d.nodes[choice.index - 1], d.nodes[choice.index]];
-            event.spacedownWay(choice.loc, edge);
-
-        } else if (d.type === 'node') {
-            event.spacedownNode(d);
-
-        } else {
-            event.spacedown(context.map().mouseCoordinates());
-        }
+        d3.event.preventDefault();
+        d3.event.stopPropagation();
+        click();
     }
 
     function backspace() {
@@ -122,8 +121,7 @@ iD.behavior.Draw = function(context) {
             .on('⌦', del)
             .on('⎋', ret)
             .on('↩', ret)
-            .on('space', space)
-            .on('Alt+space', space);
+            .on('space', space, false);
 
         selection
             .on('mousedown.draw', mousedown)
