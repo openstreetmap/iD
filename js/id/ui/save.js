@@ -28,7 +28,6 @@ iD.ui.Save = function(context) {
         else if(numChanges === 50) {
             prevNumchange = numChanges;
             return 'rgb(255 , 255 , 136)';
-
         }
         else if(numChanges > 50 && numChanges < 100) {
             if(prevNumchange < numChanges) {
