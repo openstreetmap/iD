@@ -43,9 +43,9 @@ describe('iD.Map', function() {
             expect(map.zoom(4)).to.equal(map);
             map.zoomIn();
             window.setTimeout(function() {
-                expect(map.zoom()).to.equal(5);
+                expect(map.zoom()).to.be.closeTo(5, 1e-6);
                 done();
-            }, 500);
+            }, 300);
         });
     });
 
@@ -54,9 +54,9 @@ describe('iD.Map', function() {
             expect(map.zoom(4)).to.equal(map);
             map.zoomOut();
             window.setTimeout(function() {
-                expect(map.zoom()).to.equal(3);
+                expect(map.zoom()).to.be.closeTo(3, 1e-6);
                 done();
-            }, 500);
+            }, 300);
         });
     });
 
@@ -71,8 +71,8 @@ describe('iD.Map', function() {
             expect(map.center([0, 0])).to.equal(map);
             expect(map.center()).to.eql([0, 0]);
             expect(map.center([10, 15])).to.equal(map);
-            expect(map.center()[0]).to.be.closeTo(10, 0.5);
-            expect(map.center()[1]).to.be.closeTo(15, 0.5);
+            expect(map.center()[0]).to.be.closeTo(10, 1e-6);
+            expect(map.center()[1]).to.be.closeTo(15, 1e-6);
         });
 
         it('dispatches move event when center changes', function() {
@@ -97,8 +97,8 @@ describe('iD.Map', function() {
             expect(map.center([10, 10])).to.equal(map);
             expect(map.centerEase([20, 20])).to.equal(map);
             window.setTimeout(function() {
-                expect(map.center()[0]).to.be.closeTo(20, 0.5);
-                expect(map.center()[1]).to.be.closeTo(20, 0.5);
+                expect(map.center()[0]).to.be.closeTo(20, 1e-6);
+                expect(map.center()[1]).to.be.closeTo(20, 1e-6);
                 done();
             }, 1000);
         });
@@ -107,8 +107,8 @@ describe('iD.Map', function() {
     describe('#centerZoom', function() {
         it('gets and sets center and zoom', function() {
             expect(map.centerZoom([20, 25], 4)).to.equal(map);
-            expect(map.center()[0]).to.be.closeTo(20, 0.5);
-            expect(map.center()[1]).to.be.closeTo(25, 0.5);
+            expect(map.center()[0]).to.be.closeTo(20, 1e-6);
+            expect(map.center()[1]).to.be.closeTo(25, 1e-6);
             expect(map.zoom()).to.be.equal(4);
         });
     });
