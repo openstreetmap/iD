@@ -451,10 +451,7 @@ button.secondary-action:hover {
 
 button.save.has-count {
     padding: 9px;
-    -webkit-transition: background-color 8s;
-    transition: background-color 8s;
 }
-
 
 button.save .count {
     display: none;
@@ -472,10 +469,7 @@ button.save.has-count .count {
     border-radius: 4px;
     margin: auto;
     margin-left: 8.3333%;
-    -webkit-transition: background-color 8s;
-    transition: background-color 8s;
 }
-
 
 button.save.has-count .count::before {
     content: "";
@@ -488,31 +482,8 @@ button.save.has-count .count::before {
     bottom: 0;
     border-top:    6px solid transparent;
     border-bottom: 6px solid transparent;
-    border-right:  6px solid rgba(255,255,255,.5);
-
+    border-right:  6px solid rgba(255,255,255,.9);
 }
-/*style for soft warning on save btn*/
-
-button.save.has-count.yellow,
-button.save.has-count .count.yellow{
-    background-color: #FFFF88;
-    -webkit-transition: background-color 8s;
-    transition: background-color 8s;
-}
- 
-button.save.has-count.orange,
-button.save.has-count .count.orange{
-    background-color: #EB9326;
-    -webkit-transition: background-color 8s;
-    transition: background-color 8s;
-} 
-button.save.has-count.red,
-button.save.has-count .count.red{
-    background-color: #E06D5F;
-    -webkit-transition: background-color 8s;
-    transition: background-color 8s;
-} 
-/*end*/
 
 /* Icons */
 
@@ -1908,7 +1879,8 @@ div.full-screen > button:hover {
     background-color: #ececec;
 }
 
-.layer-list li.active {
+.layer-list li.active,
+.layer-list li.switch {
     background: #E8EBFF;
 }
 
@@ -2069,6 +2041,17 @@ div.full-screen > button:hover {
 
 .nudge-container button.nudge-reset {
     right: -10px;
+}
+
+.nudge-surface {
+   position: absolute;
+   z-index: 5000;
+   left: 0;
+   top: 0;
+   width: 100%;
+   height: 100%;
+   background-color: transparent;
+   cursor: move;
 }
 
 .background-control .nudge.right::after {
@@ -2451,6 +2434,10 @@ div.full-screen > button:hover {
     max-height: 30px;
     float: left;
     clear: left;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 #info-block {
@@ -2461,6 +2448,10 @@ div.full-screen > button:hover {
 #scale {
     height: 30px;
     width: 100%;
+}
+
+#scale:hover {
+    cursor: pointer;
 }
 
 #scale text {
