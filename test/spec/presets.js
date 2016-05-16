@@ -50,7 +50,7 @@ describe("iD.presets", function() {
                 },
                 'golf/water_hazard': {
                     tags: { 'golf': 'water_hazard' },
-                    geometry: ['line','area']
+                    geometry: ['line', 'area']
                 },
                 'highway/foo': {
                     tags: { 'highway': 'foo' },
@@ -67,7 +67,7 @@ describe("iD.presets", function() {
                 'natural/tree_row': {
                     tags: { 'natural': 'tree_row' },
                     geometry: ['line']
-                }
+                },
                 'natural/wood': {
                     tags: { 'natural': 'wood' },
                     geometry: ['point', 'area']
@@ -76,32 +76,32 @@ describe("iD.presets", function() {
         });
 
         it("whitelists keys for presets with area geometry", function() {
-            expect(presets.areaKeys()).to.have.key('natural');
+            expect(presets.areaKeys()).to.include.keys('natural');
         });
 
         it("blacklists key-values for presets with a line geometry", function() {
-            expect(presets.areaKeys().natural).to.have.key('tree_row');
-            expect(presets.areaKeys().natural.tree_row).to.eq(true);
+            expect(presets.areaKeys().natural).to.include.keys('tree_row');
+            expect(presets.areaKeys().natural.tree_row).to.be.true;
         });
 
         it("does not blacklist key-values for presets with both area and line geometry", function() {
-            expect(presets.areaKeys().golf).not.to.have.key('water_hazard');
+            expect(presets.areaKeys().golf).not.to.include.keys('water_hazard');
         });
 
         it("does not blacklist key-values for presets with neither area nor line geometry", function() {
-            expect(presets.areaKeys().natural).not.to.have.key('peak');
+            expect(presets.areaKeys().natural).not.to.include.keys('peak');
         });
 
         it("does not blacklist generic '*' key-values", function() {
-            expect(presets.areaKeys().natural).not.to.have.key('natural');
+            expect(presets.areaKeys().natural).not.to.include.keys('natural');
         });
 
         it("ignores keys like 'highway' that are assumed to be lines", function() {
-            expect(presets.areaKeys()).not.to.have.key('highway');
+            expect(presets.areaKeys()).not.to.include.keys('highway');
         });
 
         it("ignores suggestion presets", function() {
-            expect(presets.areaKeys()).not.to.have.key('amenity');
+            expect(presets.areaKeys()).not.to.include.keys('amenity');
         });
 
     });
