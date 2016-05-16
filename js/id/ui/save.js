@@ -19,14 +19,13 @@ iD.ui.Save = function(context) {
     }
 
     function getBackground(numChanges) {
-        var percentage = 0;
         var step = parseInt(255 / 50);
         var background = '';
         if(numChanges < 50) {
             prevNumchange = numChanges;
             return 'rgba(255,255,255)';
            }
-        else if(numChanges == 50) {
+        else if(numChanges === 50) {
             prevNumchange = numChanges;
             return 'rgb(255 , 255 , 136)';
 
@@ -41,7 +40,6 @@ iD.ui.Save = function(context) {
                 background = 'rgb(255 , '+ color + ' , 0)';
                 }
             prevNumchange = numChanges;  
-            console.log(color);
             return background;
          }
          else {
