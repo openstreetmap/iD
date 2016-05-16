@@ -44,6 +44,7 @@ d3.keybinding = function(namespace) {
     }
 
     keybinding.off = function(selection) {
+        bindings = [];
         selection = selection || d3.select(document);
         selection.on('keydown.capture' + namespace, null);
         selection.on('keydown.bubble' + namespace, null);
