@@ -15,17 +15,21 @@ d3.keybinding = function(namespace) {
             if (event[p] != binding.event[p])
                 return false;
         }
-
-        return (!binding.capture) === (event.eventPhase !== Event.CAPTURING_PHASE);
+        return true;
     }
 
-    function capture() {
+    function testBindings(isCapturing) {
         for (var i = 0; i < bindings.length; i++) {
             var binding = bindings[i];
-            if (matches(binding, d3.event)) {
+
+            if (!!binding.capture === isCapturing && matches(binding, d3.event)) {
                 binding.callback();
             }
         }
+    }
+
+    function capture() {
+        testBindings(true);
     }
 
     function bubble() {
@@ -33,7 +37,7 @@ d3.keybinding = function(namespace) {
         if (tagName == 'INPUT' || tagName == 'SELECT' || tagName == 'TEXTAREA') {
             return;
         }
-        capture();
+        testBindings(false);
     }
 
     function keybinding(selection) {

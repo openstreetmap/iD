@@ -25,7 +25,7 @@ describe("d3.keybinding", function() {
             expect(spy).not.to.have.been.called;
 
             happen.keydown(document, {keyCode: 65});
-            expect(spy).to.have.been.called;
+            expect(spy).to.have.been.calledOnce;
         });
 
         it("adds a binding for the specified key combination", function () {
@@ -35,7 +35,7 @@ describe("d3.keybinding", function() {
             expect(spy).not.to.have.been.called;
 
             happen.keydown(document, {keyCode: 65, metaKey: true});
-            expect(spy).to.have.been.called;
+            expect(spy).to.have.been.calledOnce;
         });
 
         it("does not dispatch when focus is in input elements by default", function () {
@@ -49,7 +49,20 @@ describe("d3.keybinding", function() {
             d3.select(document).call(keybinding.on('A', spy, true));
 
             happen.keydown(input.node(), {keyCode: 65});
-            expect(spy).to.have.been.called;
+            expect(spy).to.have.been.calledOnce;
         });
+
+        it("resets bindings when keybinding.off is called", function () {
+            d3.select(document).call(keybinding.on('A', spy));
+            happen.keydown(document, {keyCode: 65});
+            expect(spy).to.have.been.calledOnce;
+
+            spy = sinon.spy();
+            d3.select(document).call(keybinding.off);
+            d3.select(document).call(keybinding.on('A', spy));
+            happen.keydown(document, {keyCode: 65});
+            expect(spy).to.have.been.calledOnce;
+        });
+
     });
 });
