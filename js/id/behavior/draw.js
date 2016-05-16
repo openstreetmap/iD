@@ -1,6 +1,7 @@
 iD.behavior.Draw = function(context) {
     var event = d3.dispatch('move', 'click', 'clickWay',
-            'clickNode', 'undo', 'cancel', 'finish'),
+            'clickNode', 'undo', 'cancel', 'finish',
+            'spacedown', 'spacedownNode', 'spacedownWay'),
         keybinding = d3.keybinding('draw'),
         hover = iD.behavior.Hover(context)
             .altDisables(true)
@@ -8,11 +9,21 @@ iD.behavior.Draw = function(context) {
         tail = iD.behavior.Tail(),
         edit = iD.behavior.Edit(context),
         closeTolerance = 4,
-        tolerance = 12;
+        tolerance = 12,
+        lastDatum;
 
     function datum() {
         if (d3.event.altKey) return {};
-        else return d3.event.target.__data__ || {};
+
+        if (d3.event.type === 'mousemove') {
+            lastDatum = d3.event.target.__data__;
+        }
+
+        if (d3.event.type === 'keydown') {
+            return lastDatum || {};
+        } else {
+            return d3.event.target.__data__ || {};
+        }
     }
 
     function mousedown() {
@@ -76,6 +87,12 @@ iD.behavior.Draw = function(context) {
         }
     }
 
+    function space() {
+        d3.event.preventDefault();
+        d3.event.stopPropagation();
+        click();
+    }
+
     function backspace() {
         d3.event.preventDefault();
         event.undo();
@@ -103,7 +120,8 @@ iD.behavior.Draw = function(context) {
             .on('⌫', backspace)
             .on('⌦', del)
             .on('⎋', ret)
-            .on('↩', ret);
+            .on('↩', ret)
+            .on('space', space, false);
 
         selection
             .on('mousedown.draw', mousedown)
