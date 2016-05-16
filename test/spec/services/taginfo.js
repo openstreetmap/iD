@@ -3,7 +3,7 @@ describe("iD.services.taginfo", function() {
 
     beforeEach(function() {
         server = sinon.fakeServer.create();
-        taginfo = iD.services.taginfo();
+        taginfo = iD.services.taginfo().reset();
     });
 
     afterEach(function() {
@@ -66,7 +66,7 @@ describe("iD.services.taginfo", function() {
             server.respond();
 
             expect(callback).to.have.been.calledWith(null, [
-                {"title":"amenity", "value":"amenity"}
+                {"title":"amenity", "value":"amenity"},
                 {"title":"amenityother", "value":"amenityother"}
             ]);
         });
