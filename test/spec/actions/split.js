@@ -377,7 +377,7 @@ describe("iD.actions.Split", function () {
 
         graph = iD.actions.Split('b', ['='])(graph);
 
-        expect(_.pluck(graph.entity('r').members, 'id')).to.eql(['-', '=', '~']);
+        expect(_.map(graph.entity('r').members, 'id')).to.eql(['-', '=', '~']);
     });
 
     it("adds the new way to parent relations (reverse order)", function () {
@@ -403,7 +403,7 @@ describe("iD.actions.Split", function () {
 
         graph = iD.actions.Split('b', ['='])(graph);
 
-        expect(_.pluck(graph.entity('r').members, 'id')).to.eql(['~', '=', '-']);
+        expect(_.map(graph.entity('r').members, 'id')).to.eql(['~', '=', '-']);
     });
 
     it("handles incomplete relations", function () {
@@ -417,7 +417,7 @@ describe("iD.actions.Split", function () {
 
         graph = iD.actions.Split('b', ['='])(graph);
 
-        expect(_.pluck(graph.entity('r').members, 'id')).to.eql(['~', '-', '=']);
+        expect(_.map(graph.entity('r').members, 'id')).to.eql(['~', '-', '=']);
     });
 
     it("converts simple multipolygon to a proper multipolygon", function () {
@@ -433,7 +433,7 @@ describe("iD.actions.Split", function () {
 
         expect(graph.entity('-').tags).to.eql({});
         expect(graph.entity('r').tags).to.eql({type: 'multipolygon', natural: 'water'});
-        expect(_.pluck(graph.entity('r').members, 'id')).to.eql(['-', '=']);
+        expect(_.map(graph.entity('r').members, 'id')).to.eql(['-', '=']);
     });
 
     ['restriction', 'restriction:bus'].forEach(function (type) {

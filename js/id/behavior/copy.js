@@ -14,7 +14,7 @@ iD.behavior.Copy = function(context) {
         descendants = descendants || {};
 
         if (entity.type === 'relation') {
-            children = _.pluck(entity.members, 'id');
+            children = _.map(entity.members, 'id');
         } else if (entity.type === 'way') {
             children = entity.nodes;
         } else {

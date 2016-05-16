@@ -390,7 +390,7 @@ iD.Features = function(context) {
             return resolver.isShared(e) ? _.union(result, resolver.parentWays(e)) : result;
         }, connections);
 
-        return connections.length ? _.any(connections, function(e) {
+        return connections.length ? _.some(connections, function(e) {
             return features.isHidden(e, resolver, e.geometry(resolver));
         }) : false;
     };

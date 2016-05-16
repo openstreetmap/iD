@@ -27,7 +27,7 @@ iD.actions.Join = function(ids) {
 
         var joined = iD.geo.joinWays(ways, graph)[0];
 
-        survivor = survivor.update({nodes: _.pluck(joined.nodes, 'id')});
+        survivor = survivor.update({nodes: _.map(joined.nodes, 'id')});
         graph = graph.replace(survivor);
 
         joined.forEach(function(way) {
@@ -56,7 +56,7 @@ iD.actions.Join = function(ids) {
         if (joined.length > 1)
             return 'not_adjacent';
 
-        var nodeIds = _.pluck(joined[0].nodes, 'id').slice(1, -1),
+        var nodeIds = _.map(joined[0].nodes, 'id').slice(1, -1),
             relation,
             tags = {},
             conflicting = false;

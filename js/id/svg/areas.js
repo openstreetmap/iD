@@ -52,7 +52,7 @@ iD.svg.Areas = function(projection) {
 
         areas = d3.values(areas).filter(function hasPath(a) { return path(a.entity); });
         areas.sort(function areaSort(a, b) { return b.area - a.area; });
-        areas = _.pluck(areas, 'entity');
+        areas = _.map(areas, 'entity');
 
         var strokes = areas.filter(function(area) {
             return area.type === 'way';

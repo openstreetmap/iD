@@ -150,7 +150,7 @@ iD.Graph.prototype = {
             if (base.parentWays[child]) {
                 for (k = 0; k < base.parentWays[child].length; k++) {
                     id = base.parentWays[child][k];
-                    if (!this.entities.hasOwnProperty(id) && !_.contains(this._parentWays[child], id)) {
+                    if (!this.entities.hasOwnProperty(id) && !_.includes(this._parentWays[child], id)) {
                         this._parentWays[child].push(id);
                     }
                 }
@@ -163,7 +163,7 @@ iD.Graph.prototype = {
             if (base.parentRels[child]) {
                 for (k = 0; k < base.parentRels[child].length; k++) {
                     id = base.parentRels[child][k];
-                    if (!this.entities.hasOwnProperty(id) && !_.contains(this._parentRels[child], id)) {
+                    if (!this.entities.hasOwnProperty(id) && !_.includes(this._parentRels[child], id)) {
                         this._parentRels[child].push(id);
                     }
                 }

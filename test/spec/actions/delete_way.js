@@ -11,7 +11,7 @@ describe("iD.actions.DeleteWay", function() {
             relation = iD.Relation({members: [{ id: way.id }, { id: 'w-2' }]}),
             action   = iD.actions.DeleteWay(way.id),
             graph    = iD.Graph([way, relation]).update(action);
-        expect(_.pluck(graph.entity(relation.id).members, 'id')).not.to.contain(way.id);
+        expect(_.map(graph.entity(relation.id).members, 'id')).not.to.contain(way.id);
     });
 
     it("deletes member nodes not referenced by another parent", function() {

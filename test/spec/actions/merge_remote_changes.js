@@ -93,14 +93,15 @@ describe("iD.actions.MergeRemoteChanges", function () {
     describe("non-destuctive merging", function () {
         describe("tags", function() {
             it("doesn't merge tags if conflict (local change, remote change)", function () {
+
                 var localTags = {foo: 'foo_local'},      // changed foo
                     remoteTags = {foo: 'foo_remote'},    // changed foo
                     local = base.entity('a').update({tags: localTags}),
                     remote = base.entity('a').update({tags: remoteTags, version: '2'}),
                     localGraph = makeGraph([local]),
                     remoteGraph = makeGraph([remote]),
-                    action = iD.actions.MergeRemoteChanges('a', localGraph, remoteGraph),
-                    result = action(localGraph);
+                    action = iD.actions.MergeRemoteChanges('a', localGraph, remoteGraph);
+                  var  result = action(localGraph);
 
                 expect(result).to.eql(localGraph);
             });

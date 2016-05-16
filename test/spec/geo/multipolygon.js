@@ -73,7 +73,7 @@ describe("iD.geo.joinWays", function() {
         ]);
 
         var result = iD.geo.joinWays(graph.entity('r').members, graph);
-        expect(_.pluck(result[0], 'id')).to.eql(['=', '-', '~']);
+        expect(_.map(result[0], 'id')).to.eql(['=', '-', '~']);
     });
 
     it("reverses member tags of reversed segements", function() {

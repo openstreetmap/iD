@@ -111,7 +111,7 @@ iD.ui.preset.address = function(field, context) {
 
         iD.services.nominatim().countryCode(center, function (err, countryCode) {
             addressFormat = _.find(iD.data.addressFormats, function (a) {
-                return a && a.countryCodes && _.contains(a.countryCodes, countryCode);
+                return a && a.countryCodes && _.includes(a.countryCodes, countryCode);
             }) || _.first(iD.data.addressFormats);
 
             function row(r) {

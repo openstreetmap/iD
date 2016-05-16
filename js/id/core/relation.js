@@ -224,8 +224,8 @@ _.extend(iD.Relation.prototype, {
         outers = iD.geo.joinWays(outers, resolver);
         inners = iD.geo.joinWays(inners, resolver);
 
-        outers = outers.map(function(outer) { return _.pluck(outer.nodes, 'loc'); });
-        inners = inners.map(function(inner) { return _.pluck(inner.nodes, 'loc'); });
+        outers = outers.map(function(outer) { return _.map(outer.nodes, 'loc'); });
+        inners = inners.map(function(inner) { return _.map(inner.nodes, 'loc'); });
 
         var result = outers.map(function(o) {
             // Heuristic for detecting counterclockwise winding order. Assumes

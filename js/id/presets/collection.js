@@ -47,12 +47,12 @@ iD.presets.Collection = function(collection) {
 
             // matches value to preset.terms values
             var leading_terms = _.filter(searchable, function(a) {
-                    return _.any(a.terms() || [], leading);
+                    return _.some(a.terms() || [], leading);
                 });
 
             // matches value to preset.tags values
             var leading_tag_values = _.filter(searchable, function(a) {
-                    return _.any(_.without(_.values(a.tags || {}), '*'), leading);
+                    return _.some(_.without(_.values(a.tags || {}), '*'), leading);
                 });
 
 
@@ -72,7 +72,7 @@ iD.presets.Collection = function(collection) {
 
             // finds close matches to value in preset.terms
             var leventstein_terms = _.filter(searchable, function(a) {
-                    return _.any(a.terms() || [], function(b) {
+                    return _.some(a.terms() || [], function(b) {
                         return iD.util.editDistance(value, b) + Math.min(value.length - b.length, 0) < 3;
                     });
                 });
@@ -119,7 +119,7 @@ iD.presets.Collection = function(collection) {
                             leven_suggestions.slice(0, maxSuggestionResults)
                         ).slice(0, maxSearchResults-1);
 
-            return iD.presets.Collection(_.unique(
+            return iD.presets.Collection(_.uniq(
                     results.concat(other)
                 ));
         }

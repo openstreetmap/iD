@@ -30,7 +30,7 @@ iD.operations.Split = function(selectedIDs, context) {
 
     operation.disabled = function() {
         var reason;
-        if (_.any(selectedIDs, context.hasHiddenConnections)) {
+        if (_.some(selectedIDs, context.hasHiddenConnections)) {
             reason = 'connected_to_hidden';
         }
         return action.disabled(context.graph()) || reason;

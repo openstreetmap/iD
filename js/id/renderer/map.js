@@ -131,7 +131,7 @@ iD.Map = function(context) {
 
             if (extent) {
                 data = context.intersects(map.extent().intersection(extent));
-                var set = d3.set(_.pluck(data, 'id'));
+                var set = d3.set(_.map(data, 'id'));
                 filter = function(d) { return set.has(d.id); };
 
             } else {

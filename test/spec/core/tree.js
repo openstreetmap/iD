@@ -190,9 +190,9 @@ describe("iD.Tree", function() {
 
             graph = graph.replace(n1.move([1.1,1.1])).replace(n2.move([2.1,2.1]));
             expect(
-                _.pluck(tree.intersects(extent, graph),'id').sort()
+                _.map(tree.intersects(extent, graph),'id').sort()
             ).to.eql(
-                _.pluck([n1, n2, way],'id').sort()
+                _.map([n1, n2, way],'id').sort()
             );
         });
 

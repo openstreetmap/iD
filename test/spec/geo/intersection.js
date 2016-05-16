@@ -18,7 +18,7 @@ describe("iD.geo.Intersection", function() {
                 iD.Way({id: '=', nodes: ['u', '*'], tags: {highway: 'residential'}}),
                 iD.Way({id: '-', nodes: ['*'], tags: {highway: 'residential'}})
             ]);
-            expect(_.pluck(iD.geo.Intersection(graph, '*').ways, 'id')).to.eql(['=']);
+            expect(_.map(iD.geo.Intersection(graph, '*').ways, 'id')).to.eql(['=']);
         });
 
         it("excludes coincident highways", function() {
@@ -39,7 +39,7 @@ describe("iD.geo.Intersection", function() {
                 iD.Way({id: '=', nodes: ['u', '*'], tags: {highway: 'residential'}}),
                 iD.Way({id: '-', nodes: ['*', 'w']})
             ]);
-            expect(_.pluck(iD.geo.Intersection(graph, '*').ways, 'id')).to.eql(['=']);
+            expect(_.map(iD.geo.Intersection(graph, '*').ways, 'id')).to.eql(['=']);
         });
 
         it('excludes area highways', function() {
@@ -59,7 +59,7 @@ describe("iD.geo.Intersection", function() {
                 iD.Node({id: 'w'}),
                 iD.Way({id: '=', nodes: ['u', '*', 'w'], tags: {highway: 'residential'}})
             ]);
-            expect(_.pluck(iD.geo.Intersection(graph, '*').ways, 'id')).to.eql(['=-a', '=-b']);
+            expect(_.map(iD.geo.Intersection(graph, '*').ways, 'id')).to.eql(['=-a', '=-b']);
         });
     });
 

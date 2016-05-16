@@ -145,11 +145,11 @@ iD.ui.EntityEditor = function(context) {
             function keepSpaces(k) {
                 var whitelist = ['opening_hours', 'service_times', 'collection_times',
                     'operating_times', 'smoking_hours', 'happy_hours'];
-                return _.any(whitelist, function(s) { return k.indexOf(s) !== -1; });
+                return _.some(whitelist, function(s) { return k.indexOf(s) !== -1; });
             }
 
             var blacklist = ['description', 'note', 'fixme'];
-            if (_.any(blacklist, function(s) { return k.indexOf(s) !== -1; })) return v;
+            if (_.some(blacklist, function(s) { return k.indexOf(s) !== -1; })) return v;
 
             var cleaned = v.split(';')
                 .map(function(s) { return s.trim(); })

@@ -19,7 +19,7 @@ iD.actions.DeleteRelation = function(relationId) {
                 }
             });
 
-        _.uniq(_.pluck(relation.members, 'id')).forEach(function(memberId) {
+        _.uniq(_.map(relation.members, 'id')).forEach(function(memberId) {
             graph = graph.replace(relation.removeMembersWithID(memberId));
 
             var entity = graph.entity(memberId);

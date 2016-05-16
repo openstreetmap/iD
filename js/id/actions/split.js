@@ -148,7 +148,7 @@ iD.actions.Split = function(nodeId, newWayIds) {
     action.ways = function(graph) {
         var node = graph.entity(nodeId),
             parents = graph.parentWays(node),
-            hasLines = _.any(parents, function(parent) { return parent.geometry(graph) === 'line'; });
+            hasLines = _.some(parents, function(parent) { return parent.geometry(graph) === 'line'; });
 
         return parents.filter(function(parent) {
             if (wayIds && wayIds.indexOf(parent.id) === -1)

@@ -9,8 +9,8 @@ iD.actions.DeprecateTags = function(entityId) {
         for (var i = 0; i < iD.data.deprecated.length; i++) {
 
             rule = iD.data.deprecated[i];
-            var match = _.pairs(rule.old)[0],
-                replacements = rule.replace ? _.pairs(rule.replace) : null;
+            var match = _.toPairs(rule.old)[0],
+                replacements = rule.replace ? _.toPairs(rule.replace) : null;
 
             if (entity.tags[match[0]] && match[1] === '*') {
 

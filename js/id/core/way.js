@@ -102,7 +102,7 @@ _.extend(iD.Way.prototype, {
         if (!this.isClosed() || this.isDegenerate()) return null;
 
         var nodes = _.uniq(resolver.childNodes(this)),
-            coords = _.pluck(nodes, 'loc'),
+            coords = _.map(nodes, 'loc'),
             curr = 0, prev = 0;
 
         for (var i = 0; i < coords.length; i++) {
@@ -215,7 +215,7 @@ _.extend(iD.Way.prototype, {
 
     asGeoJSON: function(resolver) {
         return resolver.transient(this, 'GeoJSON', function() {
-            var coordinates = _.pluck(resolver.childNodes(this), 'loc');
+            var coordinates = _.map(resolver.childNodes(this), 'loc');
             if (this.isArea() && this.isClosed()) {
                 return {
                     type: 'Polygon',
@@ -236,7 +236,7 @@ _.extend(iD.Way.prototype, {
 
             var json = {
                 type: 'Polygon',
-                coordinates: [_.pluck(nodes, 'loc')]
+                coordinates: [_.map(nodes, 'loc')]
             };
 
             if (!this.isClosed() && nodes.length) {

@@ -76,7 +76,7 @@ iD.ui.preset.multiCombo = function(field, context) {
 
     function objectDifference(a, b) {
         return _.reject(a, function(d1) {
-            return _.any(b, function(d2) { return d1.value === d2.value; });
+            return _.some(b, function(d2) { return d1.value === d2.value; });
         });
     }
 
@@ -136,7 +136,7 @@ iD.ui.preset.multiCombo = function(field, context) {
             query: (isMulti ? field.key : '') + q
         }, function(err, data) {
             if (err) return;
-            comboData = _.pluck(data, 'value').map(function(k) {
+            comboData = _.map(data, 'value').map(function(k) {
                 if (isMulti) k = k.replace(field.key, '');
                 var v = snake_case ? unsnake(k) : k;
                 return {
@@ -156,8 +156,8 @@ iD.ui.preset.multiCombo = function(field, context) {
         if (isMulti) {
             ph = field.placeholder() || t('inspector.add');
         } else {
-            var vals = _.pluck(d, 'value').filter(function(s) { return s.length < 20; }),
-                placeholders = vals.length > 1 ? vals : _.pluck(d, 'key');
+            var vals = _.map(d, 'value').filter(function(s) { return s.length < 20; }),
+                placeholders = vals.length > 1 ? vals : _.map(d, 'key');
             ph = field.placeholder() || placeholders.slice(0, 3).join(', ');
         }
 
@@ -250,7 +250,7 @@ iD.ui.preset.multiCombo = function(field, context) {
             });
 
             // Set keys for form-field modified (needed for undo and reset buttons)..
-            field.keys = _.pluck(multiData, 'key');
+            field.keys = _.map(multiData, 'key');
 
             // Exclude existing multikeys from combo options..
             var available = objectDifference(comboData, multiData);

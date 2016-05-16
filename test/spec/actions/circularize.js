@@ -2,7 +2,7 @@ describe("iD.actions.Circularize", function () {
     var projection = d3.geo.mercator();
 
     function isCircular(id, graph) {
-        var points = _.pluck(graph.childNodes(graph.entity(id)), 'loc').map(projection),
+        var points = _.map(graph.childNodes(graph.entity(id)), 'loc').map(projection),
             centroid = d3.geom.polygon(points).centroid(),
             radius = iD.geo.euclideanDistance(centroid, points[0]),
             estArea = Math.PI * radius * radius,
@@ -105,7 +105,7 @@ describe("iD.actions.Circularize", function () {
         graph = iD.actions.Circularize('-', projection, 20)(graph);
 
         expect(isCircular('-', graph)).to.be.ok;
-        points = _.pluck(graph.childNodes(graph.entity('-')), 'loc').map(projection);
+        points = _.map(graph.childNodes(graph.entity('-')), 'loc').map(projection);
         centroid = d3.geom.polygon(points).centroid();
 
         for (var i = 0; i < points.length - 1; i++) {
@@ -116,7 +116,7 @@ describe("iD.actions.Circularize", function () {
     });
 
     function area(id, graph) {
-        return d3.geom.polygon(_.pluck(graph.childNodes(graph.entity(id)), 'loc')).area();
+        return d3.geom.polygon(_.map(graph.childNodes(graph.entity(id)), 'loc')).area();
     }
 
     it("leaves clockwise ways clockwise", function () {

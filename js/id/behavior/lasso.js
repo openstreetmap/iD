@@ -38,7 +38,7 @@ iD.behavior.Lasso = function(context) {
                 bounds = lasso.extent().map(context.projection.invert),
                 extent = iD.geo.Extent(normalize(bounds[0], bounds[1]));
 
-            return _.pluck(context.intersects(extent).filter(function(entity) {
+            return _.map(context.intersects(extent).filter(function(entity) {
                 return entity.type === 'node' &&
                     iD.geo.pointInPolygon(context.projection(entity.loc), lasso.coordinates) &&
                     !context.features().isHidden(entity, graph, entity.geometry(graph));

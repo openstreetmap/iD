@@ -142,12 +142,12 @@ iD.presets = function() {
     all.defaults = function(geometry, n) {
         var rec = recent.matchGeometry(geometry).collection.slice(0, 4),
             def = _.uniq(rec.concat(defaults[geometry].collection)).slice(0, n - 1);
-        return iD.presets.Collection(_.unique(rec.concat(def).concat(all.item(geometry))));
+        return iD.presets.Collection(_.uniq(rec.concat(def).concat(all.item(geometry))));
     };
 
     all.choose = function(preset) {
         if (!preset.isFallback()) {
-            recent = iD.presets.Collection(_.unique([preset].concat(recent.collection)));
+            recent = iD.presets.Collection(_.uniq([preset].concat(recent.collection)));
         }
         return all;
     };

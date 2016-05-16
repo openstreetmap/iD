@@ -128,11 +128,11 @@ iD.Entity.prototype = {
     },
 
     deprecatedTags: function() {
-        var tags = _.pairs(this.tags);
+        var tags = _.toPairs(this.tags);
         var deprecated = {};
 
         iD.data.deprecated.forEach(function(d) {
-            var match = _.pairs(d.old)[0];
+            var match = _.toPairs(d.old)[0];
             tags.forEach(function(t) {
                 if (t[0] === match[0] &&
                     (t[1] === match[1] || match[1] === '*')) {
