@@ -148,7 +148,7 @@ d3.keybinding = function(namespace) {
         '+': 107, 'plus': 107,
         // Num-Subtract, or -
         '-': 109, subtract: 109,
-        // Firefox Minus
+        // Firefox Plus
         'ffplus': 171,
         // Firefox Minus
         'ffminus': 173,
