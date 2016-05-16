@@ -1,7 +1,6 @@
 iD.behavior.Draw = function(context) {
     var event = d3.dispatch('move', 'click', 'clickWay',
-            'clickNode', 'undo', 'cancel', 'finish',
-            'spacedown', 'spacedownNode', 'spacedownWay'),
+            'clickNode', 'undo', 'cancel', 'finish'),
         keybinding = d3.keybinding('draw'),
         hover = iD.behavior.Hover(context)
             .altDisables(true)
@@ -10,17 +9,18 @@ iD.behavior.Draw = function(context) {
         edit = iD.behavior.Edit(context),
         closeTolerance = 4,
         tolerance = 12,
-        lastDatum;
+        disableSpace = false,
+        lastMouse;
 
     function datum() {
         if (d3.event.altKey) return {};
 
         if (d3.event.type === 'mousemove') {
-            lastDatum = d3.event.target.__data__;
+            lastMouse = d3.event;
         }
 
         if (d3.event.type === 'keydown') {
-            return lastDatum || {};
+            return lastMouse.target.__data__ || {};
         } else {
             return d3.event.target.__data__ || {};
         }
@@ -72,6 +72,14 @@ iD.behavior.Draw = function(context) {
         event.move(datum());
     }
 
+    function mouseenter() {
+        disableSpace = false;
+    }
+
+    function mouseleave() {
+        disableSpace = true;
+    }
+
     function click() {
         var d = datum();
         if (d.type === 'way') {
@@ -88,8 +96,8 @@ iD.behavior.Draw = function(context) {
     }
 
     function space() {
+        if (disableSpace || !lastMouse) return;
         d3.event.preventDefault();
-        d3.event.stopPropagation();
         click();
     }
 
@@ -109,6 +117,9 @@ iD.behavior.Draw = function(context) {
     }
 
     function draw(selection) {
+        disableSpace = false;
+        lastMouse = null;
+
         context.install(hover);
         context.install(edit);
 
@@ -121,9 +132,11 @@ iD.behavior.Draw = function(context) {
             .on('⌦', del)
             .on('⎋', ret)
             .on('↩', ret)
-            .on('space', space, false);
+            .on('space', space);
 
         selection
+            .on('mouseenter.draw', mouseenter)
+            .on('mouseleave.draw', mouseleave)
             .on('mousedown.draw', mousedown)
             .on('mousemove.draw', mousemove);
 
@@ -144,6 +157,8 @@ iD.behavior.Draw = function(context) {
         }
 
         selection
+            .on('mouseenter.draw', null)
+            .on('mouseleave.draw', null)
             .on('mousedown.draw', null)
             .on('mousemove.draw', null);
 
