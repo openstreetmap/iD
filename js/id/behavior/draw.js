@@ -9,18 +9,15 @@ iD.behavior.Draw = function(context) {
         edit = iD.behavior.Edit(context),
         closeTolerance = 4,
         tolerance = 12,
-        disableSpace = false,
-        lastMouse;
+        mouseLeave = false,
+        lastMouse = null,
+        cached = iD.behavior.Draw;
 
     function datum() {
         if (d3.event.altKey) return {};
 
-        if (d3.event.type === 'mousemove') {
-            lastMouse = d3.event;
-        }
-
         if (d3.event.type === 'keydown') {
-            return lastMouse.target.__data__ || {};
+            return (lastMouse && lastMouse.target.__data__) || {};
         } else {
             return d3.event.target.__data__ || {};
         }
@@ -69,15 +66,16 @@ iD.behavior.Draw = function(context) {
     }
 
     function mousemove() {
+        lastMouse = d3.event;
         event.move(datum());
     }
 
     function mouseenter() {
-        disableSpace = false;
+        mouseLeave = false;
     }
 
     function mouseleave() {
-        disableSpace = true;
+        mouseLeave = true;
     }
 
     function click() {
@@ -106,7 +104,25 @@ iD.behavior.Draw = function(context) {
     }
 
     function space() {
-        if (disableSpace || !lastMouse) return;
+        var currSpace = context.mouse();
+        if (cached.disableSpace && cached.lastSpace) {
+            var dist = iD.geo.euclideanDistance(cached.lastSpace, currSpace);
+            if (dist > tolerance) {
+                cached.disableSpace = false;
+            }
+        }
+
+        if (cached.disableSpace || mouseLeave || !lastMouse) return;
+
+        // user must move mouse or release space bar to allow another click
+        cached.lastSpace = currSpace;
+        cached.disableSpace = true;
+
+        d3.select(window).on('keyup.space-block', function() {
+            cached.disableSpace = false;
+            d3.select(window).on('keyup.space-block', null);
+        });
+
         d3.event.preventDefault();
         click();
     }
@@ -127,13 +143,10 @@ iD.behavior.Draw = function(context) {
     }
 
     function draw(selection) {
-        disableSpace = false;
-        lastMouse = null;
-
         context.install(hover);
         context.install(edit);
 
-        if (!context.inIntro() && !iD.behavior.Draw.usedTails[tail.text()]) {
+        if (!context.inIntro() && !cached.usedTails[tail.text()]) {
             context.install(tail);
         }
 
@@ -142,7 +155,8 @@ iD.behavior.Draw = function(context) {
             .on('⌦', del)
             .on('⎋', ret)
             .on('↩', ret)
-            .on('space', space);
+            .on('space', space)
+            .on('⌥space', space);
 
         selection
             .on('mouseenter.draw', mouseenter)
@@ -161,9 +175,9 @@ iD.behavior.Draw = function(context) {
         context.uninstall(hover);
         context.uninstall(edit);
 
-        if (!context.inIntro() && !iD.behavior.Draw.usedTails[tail.text()]) {
+        if (!context.inIntro() && !cached.usedTails[tail.text()]) {
             context.uninstall(tail);
-            iD.behavior.Draw.usedTails[tail.text()] = true;
+            cached.usedTails[tail.text()] = true;
         }
 
         selection
@@ -174,6 +188,7 @@ iD.behavior.Draw = function(context) {
 
         d3.select(window)
             .on('mouseup.draw', null);
+            // note: keyup.space-block, click.draw-block should remain
 
         d3.select(document)
             .call(keybinding.off);
@@ -188,3 +203,5 @@ iD.behavior.Draw = function(context) {
 };
 
 iD.behavior.Draw.usedTails = {};
+iD.behavior.Draw.disableSpace = false;
+iD.behavior.Draw.lastSpace = null;
