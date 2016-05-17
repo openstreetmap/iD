@@ -83,9 +83,19 @@ iD.behavior.Draw = function(context) {
     function click() {
         var d = datum();
         if (d.type === 'way') {
-            var choice = iD.geo.chooseEdge(context.childNodes(d), context.mouse(), context.projection),
-                edge = [d.nodes[choice.index - 1], d.nodes[choice.index]];
-            event.clickWay(choice.loc, edge);
+            var dims = context.map().dimensions(),
+                mouse = context.mouse(),
+                pad = 5,
+                trySnap = mouse[0] > pad && mouse[0] < dims[0] - pad &&
+                    mouse[1] > pad && mouse[1] < dims[1] - pad;
+
+            if (trySnap) {
+                var choice = iD.geo.chooseEdge(context.childNodes(d), context.mouse(), context.projection),
+                    edge = [d.nodes[choice.index - 1], d.nodes[choice.index]];
+                event.clickWay(choice.loc, edge);
+            } else {
+                event.click(context.map().mouseCoordinates());
+            }
 
         } else if (d.type === 'node') {
             event.clickNode(d);
