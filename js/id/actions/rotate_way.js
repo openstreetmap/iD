@@ -3,7 +3,7 @@ iD.actions.RotateWay = function(wayId, pivot, angle, projection) {
         return graph.update(function(graph) {
             var way = graph.entity(wayId);
 
-            _.unique(way.nodes).forEach(function(id) {
+            _.uniq(way.nodes).forEach(function(id) {
 
                 var node = graph.entity(id),
                     point = projection(node.loc),

@@ -37,20 +37,20 @@ iD.svg.Layers = function(projection, context) {
     };
 
     drawLayers.layer = function(id) {
-        var obj = _.find(layers, 'id', id);
+        var obj = _.find(layers, function(o) {return o.id === id;});
         return obj && obj.layer;
     };
 
     drawLayers.only = function(what) {
         var arr = [].concat(what);
-        drawLayers.remove(_.difference(_.pluck(layers, 'id'), arr));
+        drawLayers.remove(_.difference(_.map(layers, 'id'), arr));
         return this;
     };
 
     drawLayers.remove = function(what) {
         var arr = [].concat(what);
         arr.forEach(function(id) {
-            layers = _.reject(layers, 'id', id);
+            layers = _.reject(layers, function(o) {return o.id === id;});
         });
         dispatch.change();
         return this;

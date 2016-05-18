@@ -19,12 +19,12 @@ iD.ui.preset = function(context) {
         field.show = show;
 
         field.shown = function() {
-            return field.id === 'name' || field.show || _.any(field.keys, function(key) { return !!tags[key]; });
+            return field.id === 'name' || field.show || _.some(field.keys, function(key) { return !!tags[key]; });
         };
 
         field.modified = function() {
             var original = context.graph().base().entities[entity.id];
-            return _.any(field.keys, function(key) {
+            return _.some(field.keys, function(key) {
                 return original ? tags[key] !== original.tags[key] : tags[key];
             });
         };
@@ -39,7 +39,7 @@ iD.ui.preset = function(context) {
         };
 
         field.present = function() {
-            return _.any(field.keys, function(key) {
+            return _.some(field.keys, function(key) {
                 return tags[key];
             });
         };

@@ -75,7 +75,7 @@ iD.ui.intro.line = function(context, reveal) {
         }
 
         function addIntersection(changes) {
-            if ( _.any(changes.created(), function(d) {
+            if ( _.some(changes.created(), function(d) {
                 return d.type === 'node' && context.graph().parentWays(d).length > 1;
             })) {
                 context.history().on('change.intro', null);

@@ -28,7 +28,7 @@
     "happen": "0.1.2",
     "js-yaml": "~3.3.1",
     "jsonschema": "~0.3.2",
-    "lodash-cli": "3.9.3",
+    "lodash-cli": "4.12.0",
     "maki": "0.5.0",
     "minimist": "~1.2.0",
     "mocha": "~2.3.4",

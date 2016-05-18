@@ -68,7 +68,7 @@ iD.modes.DragNode = function(context) {
                 iD.actions.Noop());
         }
 
-        activeIDs = _.pluck(context.graph().parentWays(entity), 'id');
+        activeIDs = _.map(context.graph().parentWays(entity), 'id');
         activeIDs.push(entity.id);
 
         context.enter(mode);

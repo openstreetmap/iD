@@ -112,7 +112,7 @@ iD.BackgroundSource.Bing = function(data, dispatch) {
     bing.copyrightNotices = function(zoom, extent) {
         zoom = Math.min(zoom, 21);
         return providers.filter(function(provider) {
-            return _.any(provider.areas, function(area) {
+            return _.some(provider.areas, function(area) {
                 return extent.intersects(area.extent) &&
                     area.zoom[0] <= zoom &&
                     area.zoom[1] >= zoom;

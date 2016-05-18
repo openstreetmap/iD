@@ -14,7 +14,7 @@ iD.modes.Save = function(context) {
                 if (e.type === 'way') {
                     try {
                         var cn = graph.childNodes(e);
-                        result.push.apply(result, _.pluck(_.filter(cn, 'version'), 'id'));
+                        result.push.apply(result, _.map(_.filter(cn, 'version'), 'id'));
                     } catch(err) {
                         /* eslint-disable no-console */
                         if (typeof console !== 'undefined') console.error(err);
@@ -31,7 +31,7 @@ iD.modes.Save = function(context) {
             localGraph = context.graph(),
             remoteGraph = iD.Graph(history.base(), true),
             modified = _.filter(history.difference().summary(), {changeType: 'modified'}),
-            toCheck = _.pluck(_.pluck(modified, 'entity'), 'id'),
+            toCheck = _.map(_.map(modified, 'entity'), 'id'),
             toLoad = withChildNodes(toCheck, localGraph),
             conflicts = [],
             errors = [];
@@ -71,7 +71,7 @@ iD.modes.Save = function(context) {
                             _.difference(entity.nodes, toCheck, toLoad, loadMore));
                     } else if (entity.type === 'relation' && entity.isMultipolygon()) {
                         loadMore.push.apply(loadMore,
-                            _.difference(_.pluck(entity.members, 'id'), toCheck, toLoad, loadMore));
+                            _.difference(_.map(entity.members, 'id'), toCheck, toLoad, loadMore));
                     }
                 });
 

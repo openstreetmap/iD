@@ -8,7 +8,7 @@ iD.actions.Move = function(moveIds, tryDelta, projection, cache) {
 
     function setupCache(graph) {
         function canMove(nodeId) {
-            var parents = _.pluck(graph.parentWays(graph.entity(nodeId)), 'id');
+            var parents = _.map(graph.parentWays(graph.entity(nodeId)), 'id');
             if (parents.length < 3) return true;
 
             // Don't move a vertex where >2 ways meet, unless all parentWays are moving too..
@@ -33,7 +33,7 @@ iD.actions.Move = function(moveIds, tryDelta, projection, cache) {
                     cache.ways.push(id);
                     cacheEntities(entity.nodes);
                 } else {
-                    cacheEntities(_.pluck(entity.members, 'id'));
+                    cacheEntities(_.map(entity.members, 'id'));
                 }
             });
         }
@@ -223,10 +223,10 @@ iD.actions.Move = function(moveIds, tryDelta, projection, cache) {
                 start = projection(node.loc),
                 end = vecAdd(start, delta),
                 movedNodes = graph.childNodes(graph.entity(obj.movedId)),
-                movedPath = _.map(_.pluck(movedNodes, 'loc'),
+                movedPath = _.map(_.map(movedNodes, 'loc'),
                     function(loc) { return vecAdd(projection(loc), delta); }),
                 unmovedNodes = graph.childNodes(graph.entity(obj.unmovedId)),
-                unmovedPath = _.map(_.pluck(unmovedNodes, 'loc'), projection),
+                unmovedPath = _.map(_.map(unmovedNodes, 'loc'), projection),
                 hits = iD.geo.pathIntersections(movedPath, unmovedPath);
 
             for (var i = 0; i < hits.length; i++) {
@@ -267,7 +267,7 @@ iD.actions.Move = function(moveIds, tryDelta, projection, cache) {
             return entity.type === 'relation' && !entity.isComplete(graph);
         }
 
-        if (_.any(moveIds, incompleteRelation))
+        if (_.some(moveIds, incompleteRelation))
             return 'incomplete_relation';
     };
 

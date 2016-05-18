@@ -39,8 +39,8 @@ iD.actions.MergePolygon = function(ids, newRelationId) {
             return polygons.map(function(d, n) {
                 if (i === n) return null;
                 return iD.geo.polygonContainsPolygon(
-                    _.pluck(d.nodes, 'loc'),
-                    _.pluck(w.nodes, 'loc'));
+                    _.map(d.nodes, 'loc'),
+                    _.map(w.nodes, 'loc'));
             });
         });
 
@@ -55,7 +55,7 @@ iD.actions.MergePolygon = function(ids, newRelationId) {
         }
 
         function isContained(d, i) {
-            return _.any(contained[i]);
+            return _.some(contained[i]);
         }
 
         function filterContained(d) {

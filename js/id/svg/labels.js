@@ -58,7 +58,7 @@ iD.svg.Labels = function(projection, context) {
 
     var noIcons = ['building', 'landuse', 'natural'];
     function blacklisted(preset) {
-        return _.any(noIcons, function(s) {
+        return _.some(noIcons, function(s) {
             return preset.id.indexOf(s) >= 0;
         });
     }
@@ -237,7 +237,7 @@ iD.svg.Labels = function(projection, context) {
         var mouse = context.mouse(),
             pad = 50,
             rect = [mouse[0] - pad, mouse[1] - pad, mouse[0] + pad, mouse[1] + pad],
-            ids = _.pluck(rtree.search(rect), 'id');
+            ids = _.map(rtree.search(rect), 'id');
 
         if (!ids.length) return;
         layers.selectAll('.' + ids.join(', .'))
@@ -338,7 +338,7 @@ iD.svg.Labels = function(projection, context) {
 
 
         function getLineLabel(entity, width, height) {
-            var nodes = _.pluck(graph.childNodes(entity), 'loc').map(projection),
+            var nodes = _.map(graph.childNodes(entity), 'loc').map(projection),
                 length = iD.geo.pathLength(nodes);
             if (length < width + 20) return;
 

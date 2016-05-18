@@ -100,7 +100,7 @@ iD.modes.Select = function(context, selectedIDs) {
     mode.enter = function() {
         function update() {
             closeMenu();
-            if (_.any(selectedIDs, function(id) { return !context.hasEntity(id); })) {
+            if (_.some(selectedIDs, function(id) { return !context.hasEntity(id); })) {
                 // Exit mode if selected entity gets undone
                 context.enter(iD.modes.Browse(context));
             }

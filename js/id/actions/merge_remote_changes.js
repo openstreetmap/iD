@@ -65,7 +65,7 @@ iD.actions.MergeRemoteChanges = function(id, localGraph, remoteGraph, formatUser
 
     function mergeChildren(targetWay, children, updates, graph) {
         function isUsed(node, targetWay) {
-            var parentWays = _.pluck(graph.parentWays(node), 'id');
+            var parentWays = _.map(graph.parentWays(node), 'id');
             return node.hasInterestingTags() ||
                 _.without(parentWays, targetWay.id).length > 0 ||
                 graph.parentRelations(node).length > 0;
@@ -143,7 +143,7 @@ iD.actions.MergeRemoteChanges = function(id, localGraph, remoteGraph, formatUser
 
     function mergeTags(base, remote, target) {
         function ignoreKey(k) {
-            return _.contains(iD.data.discarded, k);
+            return _.includes(iD.data.discarded, k);
         }
 
         if (option === 'force_local' || _.isEqual(target.tags, remote.tags)) {

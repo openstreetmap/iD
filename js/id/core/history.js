@@ -46,7 +46,7 @@ iD.History = function(context) {
         },
 
         merge: function(entities, extent) {
-            stack[0].graph.rebase(entities, _.pluck(stack, 'graph'), false);
+            stack[0].graph.rebase(entities, _.map(stack, 'graph'), false);
             tree.rebase(entities, false);
 
             dispatch.change(undefined, extent);
@@ -181,9 +181,9 @@ iD.History = function(context) {
                 return history;
             } else {
                 return _(stack.slice(1, index + 1))
-                    .pluck('imageryUsed')
+                    .map('imageryUsed')
                     .flatten()
-                    .unique()
+                    .uniq()
                     .without(undefined, 'Custom')
                     .value();
             }
@@ -268,15 +268,15 @@ iD.History = function(context) {
                     // the stack even if the current stack doesn't have them (for
                     // example when iD has been restarted in a different region)
                     var baseEntities = h.baseEntities.map(function(d) { return iD.Entity(d); });
-                    stack[0].graph.rebase(baseEntities, _.pluck(stack, 'graph'), true);
+                    stack[0].graph.rebase(baseEntities, _.map(stack, 'graph'), true);
                     tree.rebase(baseEntities, true);
 
                     // When we restore a modified way, we also need to fetch any missing
                     // childnodes that would normally have been downloaded with it.. #2142
                     if (loadChildNodes) {
                         var missing =  _(baseEntities)
-                                .filter('type', 'way')
-                                .pluck('nodes')
+                                .filter({ type: 'way' })
+                                .map('nodes')
                                 .flatten()
                                 .uniq()
                                 .reject(function(n) { return stack[0].graph.hasEntity(n); })
@@ -293,8 +293,8 @@ iD.History = function(context) {
                                 if (!err) {
                                     var visible = _.groupBy(result.data, 'visible');
                                     if (!_.isEmpty(visible.true)) {
-                                        missing = _.difference(missing, _.pluck(visible.true, 'id'));
-                                        stack[0].graph.rebase(visible.true, _.pluck(stack, 'graph'), true);
+                                        missing = _.difference(missing, _.map(visible.true, 'id'));
+                                        stack[0].graph.rebase(visible.true, _.map(stack, 'graph'), true);
                                         tree.rebase(visible.true, true);
                                     }
 

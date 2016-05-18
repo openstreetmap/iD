@@ -7,7 +7,7 @@ describe("iD.actions.AddMember", function() {
 
     describe("inserts way members at a sensible index", function() {
         function members(graph) {
-            return _.pluck(graph.entity('r').members, 'id');
+            return _.map(graph.entity('r').members, 'id');
         }
 
         specify("no members", function() {
