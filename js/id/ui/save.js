@@ -1,11 +1,7 @@
 iD.ui.Save = function(context) {
     var history = context.history(),
-        key = iD.ui.cmd('⌘S'),
-        prevNumchange = 0 ,
-        color = 255 ,
-        saveBtnBackground = '';
-       
-       
+        key = iD.ui.cmd('⌘S');
+
 
     function saving() {
         return context.mode().id === 'save';
@@ -19,32 +15,16 @@ iD.ui.Save = function(context) {
     }
 
     function getBackground(numChanges) {
-        var step = parseInt(255 / 50);
-        var background = '';
-        if(numChanges < 50) {
-            prevNumchange = numChanges;
-            return 'rgba(255,255,255)';
-           }
-        else if(numChanges === 50) {
-            prevNumchange = numChanges;
-            return 'rgb(255 , 255 , 136)';
+        var step;
+        if (numChanges === 0) {
+            return null;
+        } else if (numChanges <= 50) {
+            step = numChanges / 50;
+            return d3.interpolateRgb('#fff', '#ff8')(step);  // white -> yellow
+        } else {
+            step = Math.min((numChanges - 50) / 50, 1.0);
+            return d3.interpolateRgb('#ff8', '#f88')(step);  // yellow -> red
         }
-        else if(numChanges > 50 && numChanges < 100) {
-            if(prevNumchange < numChanges) {
-                color = color - step;
-                background = 'rgb(255, ' + color + ' , 0)';
-                }
-            else if(prevNumchange > numChanges) {
-                color = color +  step;
-                background = 'rgb(255 , '+ color + ' , 0)';
-                }
-            prevNumchange = numChanges;  
-            return background;
-         }
-         else {
-            prevNumchange = numChanges;
-            return 'rgb(255 , 0 , 0 )';
-         }
     }
 
     return function(selection) {
@@ -83,16 +63,18 @@ iD.ui.Save = function(context) {
 
             tooltip.title(iD.ui.tooltipHtml(t(numChanges > 0 ?
                     'save.help' : 'save.no_changes'), key));
-            saveBtnBackground =  getBackground(numChanges);
+
+            var background = getBackground(numChanges);
+
             button
                 .classed('disabled', numChanges === 0)
                 .classed('has-count', numChanges > 0)
-                .style('background' , saveBtnBackground);
+                .style('background', background);
+
             button.select('span.count')
                 .text(numChanges)
-                .style('background' , saveBtnBackground)
-                .style('opacity' ,  '0.5' );
-               
+                .style('background', background)
+                .style('border-color', background);
         });
 
         context.on('enter.save', function() {

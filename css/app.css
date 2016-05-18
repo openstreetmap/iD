@@ -461,7 +461,9 @@ button.save.has-count .count {
     display: block;
     position: absolute;
     top: 5px;
-    background: rgba(255, 255, 255, .5);
+    background: #fff;
+    border-color: #fff;
+    opacity: 0.5;
     color: #333;
     padding: 10px;
     height: 30px;
@@ -482,7 +484,9 @@ button.save.has-count .count::before {
     bottom: 0;
     border-top:    6px solid transparent;
     border-bottom: 6px solid transparent;
-    border-right:  6px solid rgba(255,255,255,.9);
+    border-right-width: 6px;
+    border-right-style: solid;
+    border-right-color: inherit;
 }
 
 /* Icons */
