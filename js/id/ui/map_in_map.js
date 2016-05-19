@@ -2,7 +2,7 @@ iD.ui.MapInMap = function(context) {
     var key = '/';
 
     function map_in_map(selection) {
-        var backgroundLayer = iD.TileLayer(),
+        var backgroundLayer = iD.TileLayer(context),
             overlayLayers = {},
             projection = iD.geo.RawMercator(),
             gpxLayer = iD.svg.Gpx(projection, context).showLabels(false),
@@ -159,7 +159,7 @@ iD.ui.MapInMap = function(context) {
             var activeOverlayLayers = [];
             for (var i = 0; i < overlaySources.length; i++) {
                 if (overlaySources[i].validZoom(zMini)) {
-                    if (!overlayLayers[i]) overlayLayers[i] = iD.TileLayer();
+                    if (!overlayLayers[i]) overlayLayers[i] = iD.TileLayer(context);
                     activeOverlayLayers.push(overlayLayers[i]
                         .source(overlaySources[i])
                         .projection(projection)

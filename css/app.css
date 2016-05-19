@@ -2258,6 +2258,64 @@ div.full-screen > button:hover {
     border-radius: 4px;
 }
 
+
+/* Tiles
+------------------------------------------------------- */
+
+img.tile {
+    position:absolute;
+    transform-origin:0 0;
+    -ms-transform-origin:0 0;
+    -webkit-transform-origin:0 0;
+    -moz-transform-origin:0 0;
+    -o-transform-origin:0 0;
+
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+
+    opacity: 0;
+
+    -webkit-transition: opacity 200ms linear;
+    transition: opacity 200ms linear;
+    -moz-transition: opacity 200ms linear;
+}
+
+.tile-label-debug {
+    background: rgba(0, 0, 0, 0.7);
+    color: #fff;
+    position: absolute;
+    text-align: center;
+    width: 128px;
+    border-radius: 3px;
+    z-index: 2;
+
+    transform-origin:0 0;
+    -ms-transform-origin:0 0;
+    -webkit-transform-origin:0 0;
+    -moz-transform-origin:0 0;
+    -o-transform-origin:0 0;
+
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+img.tile-debug {
+    border: 1px solid red;
+}
+
+img.tile-loaded {
+    opacity: 1;
+}
+
+img.tile-removing {
+    opacity: 0;
+}
+
+
 /* Map
 ------------------------------------------------------- */
 
@@ -2274,6 +2332,7 @@ div.full-screen > button:hover {
     -webkit-transform-origin:0 0;
     -moz-transform-origin:0 0;
     -o-transform-origin:0 0;
+
     -moz-user-select: none;
     -webkit-user-select: none;
     -ms-user-select: none;
@@ -2309,6 +2368,7 @@ div.full-screen > button:hover {
     -webkit-transform-origin:0 0;
     -moz-transform-origin:0 0;
     -o-transform-origin:0 0;
+
     -moz-user-select: none;
     -webkit-user-select: none;
     -ms-user-select: none;

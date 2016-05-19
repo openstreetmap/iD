@@ -1,4 +1,4 @@
-iD.TileLayer = function() {
+iD.TileLayer = function(context) {
     var tileSize = 256,
         tile = d3.geo.tile(),
         projection,
@@ -78,6 +78,7 @@ iD.TileLayer = function() {
     // rentered when tiles load/error (see #644).
     function render(selection) {
         var requests = [];
+        var showDebug = context.debugTile() && !source.overlay;
 
         if (source.validZoom(z)) {
             tile().forEach(function(d) {
@@ -131,6 +132,14 @@ iD.TileLayer = function() {
                 'scale(' + scale + ',' + scale + ')';
         }
 
+        function debugTransform(d) {
+            var _ts = tileSize * Math.pow(2, z - d[2]);
+            var scale = tileSizeAtZoom(d, z);
+            return 'translate(' +
+                ((d[0] * _ts) - tileOrigin[0] + pixelOffset[0] + scale * (tileSize / 4)) + 'px,' +
+                ((d[1] * _ts) - tileOrigin[1] + pixelOffset[1] + scale * (tileSize / 2)) + 'px)';
+        }
+
         var image = selection
             .selectAll('img')
             .data(requests, function(d) { return d[3]; });
@@ -155,7 +164,23 @@ iD.TileLayer = function() {
 
         image
             .style(transformProp, imageTransform)
+            .classed('tile-debug', showDebug)
             .classed('tile-removing', false);
+
+
+        var debug = selection.selectAll('.tile-label-debug')
+            .data(showDebug ? requests : [], function(d) { return d[3]; });
+
+        debug.exit()
+            .remove();
+
+        debug.enter()
+            .append('div')
+            .attr('class', 'tile-label-debug');
+
+        debug
+            .text(function(d) { return d[2] + ' / ' + d[0] + ' / ' + d[1]; })
+            .style(transformProp, debugTransform);
     }
 
     background.projection = function(_) {

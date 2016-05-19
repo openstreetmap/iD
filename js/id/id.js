@@ -2,7 +2,7 @@ window.iD = function () {
     window.locale.en = iD.data.en;
     window.locale.current('en');
 
-    var dispatch = d3.dispatch('enter', 'exit'),
+    var dispatch = d3.dispatch('enter', 'exit', 'change'),
         context = {};
 
     // https://github.com/openstreetmap/iD/issues/772
@@ -220,11 +220,13 @@ window.iD = function () {
     context.debugTile = function(_) {
         if (!arguments.length) return debugTile;
         debugTile = _;
+        dispatch.change();
         return context;
     };
     context.debugCollision = function(_) {
         if (!arguments.length) return debugCollision;
         debugCollision = _;
+        dispatch.change();
         return context;
     };
 

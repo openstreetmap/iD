@@ -1,6 +1,6 @@
 iD.Background = function(context) {
     var dispatch = d3.dispatch('change'),
-        baseLayer = iD.TileLayer().projection(context.projection),
+        baseLayer = iD.TileLayer(context).projection(context.projection),
         overlayLayers = [],
         backgroundSources;
 
@@ -138,7 +138,7 @@ iD.Background = function(context) {
             }
         }
 
-        layer = iD.TileLayer()
+        layer = iD.TileLayer(context)
             .source(d)
             .projection(context.projection)
             .dimensions(baseLayer.dimensions());

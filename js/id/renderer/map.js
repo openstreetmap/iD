@@ -26,6 +26,8 @@ iD.Map = function(context) {
         mousemove;
 
     function map(selection) {
+        context
+            .on('change.map', redraw);
         context.history()
             .on('change.map', redraw);
         context.background()
