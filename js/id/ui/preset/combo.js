@@ -40,7 +40,9 @@ iD.ui.preset.multiCombo = function(field, context) {
         dval = clean(dval || '');
 
         if (optstrings) {
-            var match = _.find(comboData, function(o) { return o.value === dval && o.key; });
+            var match = _.find(comboData, function(o) {
+                return o.key && clean(o.value) === dval;
+            });
             if (match) {
                 return match.key;
             }
