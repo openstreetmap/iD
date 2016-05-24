@@ -1519,6 +1519,22 @@ text.gpx {
     z-index: 60;
 }
 
+.layer-mapillary-images .viewfield-group.loading  * {
+    stroke-width: 2;
+    stroke: #222;
+    fill: #ff9900;
+    z-index: 60;
+    animation-name: viewfield-group-loading;
+    animation-duration: 0.8s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+@keyframes viewfield-group-loading {
+    from {fill: #ff9900;}
+    to {fill: #ff5800;}
+}
+
 .layer-mapillary-images .viewfield-group:hover path.viewfield,
 .layer-mapillary-images .viewfield-group.selected path.viewfield,
 .layer-mapillary-images .viewfield-group path.viewfield {

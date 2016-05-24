@@ -20,7 +20,7 @@ iD.svg.MapillarySigns = function(projection, context, dispatch) {
         return _mapillary;
     }
 
-    function showThumbnail(image) {
+    function showThumbnail(image, interactive) {
         var mapillary = getMapillary();
         if (!mapillary) return;
 
@@ -34,7 +34,7 @@ iD.svg.MapillarySigns = function(projection, context, dispatch) {
                 .classed('selected', function(d) { return d.key === thumb.key; });
         }
 
-        mapillary.showThumbnail(image.key, position);
+        mapillary.showThumbnail(image.key, position, interactive);
     }
 
     function hideThumbnail() {
@@ -95,7 +95,7 @@ iD.svg.MapillarySigns = function(projection, context, dispatch) {
                 } else {
                     mapillary.selectedThumbnail(d);
                     context.map().centerEase(d.loc);
-                    showThumbnail(d);
+                    showThumbnail(d, true);
                 }
             })
             .on('mouseover', showThumbnail)
@@ -104,7 +104,7 @@ iD.svg.MapillarySigns = function(projection, context, dispatch) {
                 if (!mapillary) return;
                 var thumb = mapillary.selectedThumbnail();
                 if (thumb) {
-                    showThumbnail(thumb);
+                    showThumbnail(thumb, true);
                 } else {
                     hideThumbnail();
                 }

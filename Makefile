@@ -312,6 +312,11 @@ D3_FILES = \
 	node_modules/d3/src/xhr/index.js \
 	node_modules/d3/src/end.js
 
+mapillary:
+	cp node_modules/mapillary-js/dist/mapillary-js.min.css dist/mapillary/mapillary.css
+	cp node_modules/mapillary-js/dist/*.svg dist/mapillary
+	cp node_modules/mapillary-js/dist/mapillary-js.min.js dist/mapillary/mapillary.js
+
 d3:
 	node_modules/.bin/smash $(D3_FILES) > js/lib/d3.v3.js
 	@echo 'd3 rebuilt. Please reapply 7e2485d, 4da529f, and 223974d'

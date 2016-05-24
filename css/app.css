@@ -669,18 +669,13 @@ button.save.has-count .count::before {
     background-color: #fff;
 }
 
-.mapillary-image a {
-    display: block;
-    position: absolute;
-    height: auto;
-    background-color: rgba(0,0,0,.5);
-    bottom: 0;
-    padding: 5px 10px;
-}
-
 .mapillary-image img {
     width: 100%;
     height: auto;
+    display: none;
+}
+
+.mapillary-image img.active {
     display: block;
 }
 
@@ -692,12 +687,25 @@ button.save.has-count .count::before {
     display: none;
 }
 
-.mapillary-image button {
+.mapillary-image .uil-ripple-css {
+  top: -22px;
+  left: -16px;
+}
+.mapillary-image button.thumb-hide {
     border-radius: 0;
     padding: 5px;
     position: absolute;
     right: 0;
     top: 0;
+    z-index: 500;
+}
+
+.mly-wrapper {
+  visibility: hidden;
+}
+
+.mly-wrapper.active {
+  visibility: visible;
 }
 
 .feature-list-pane .inspector-body {
