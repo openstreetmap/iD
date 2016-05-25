@@ -232,7 +232,6 @@
     },
     "commit": {
         "title": "Gardar os cambios",
-        "description_placeholder": "Breve descrición das túas contribucións",
         "message_label": "Comentario sobre o conxunto de cambios",
         "upload_explanation": "Os cambios que subas serán visibles en tódolos mapas que usen os datos de OpenStreetMap.",
         "upload_explanation_with_user": "Os cambios que subas como {user} serán visibles en tódolos mapas que usen os datos de OpenStreetMap.",

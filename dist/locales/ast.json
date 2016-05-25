@@ -232,7 +232,6 @@
     },
     "commit": {
         "title": "Guardar cambios",
-        "description_placeholder": "Descripción curtia de les collaboraciones",
         "message_label": "Comentariu del conxuntu de cambios",
         "upload_explanation": "Los cambios que xuba tarán visibles en tolos mapes qu'usen los datos d'OpenStreetMap.",
         "upload_explanation_with_user": "Los cambios que xubas como {user} tarán visibles en tolos mapes qu'usen datos d'OpenStreetMap.",
@@ -1664,9 +1663,6 @@
             },
             "barrier/cycle_barrier": {
                 "name": "Barrera pa bicicletes"
-            },
-            "barrier/ditch": {
-                "name": "Riega"
             },
             "barrier/entrance": {
                 "name": "Entrada"

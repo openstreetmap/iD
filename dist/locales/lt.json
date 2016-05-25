@@ -232,7 +232,6 @@
     },
     "commit": {
         "title": "Išsaugoti pakeitimus",
-        "description_placeholder": "Trumpas jūsų indėlio aprašymas",
         "message_label": "Pakeitimo komentaras",
         "upload_explanation": "Jūsų įkeliami pakeitimai bus matomi visuose žemėlapiuose, naudojančiuose OpenStreetMap duomenis.",
         "upload_explanation_with_user": "Pakeitimai, kuriuos jūs įkeliate kaip naudotojas {user} bus matomi visuose žemėlapiuose, naudojančiuose OpenStreetMap duomenis.",
@@ -1615,10 +1614,6 @@
             "barrier/cycle_barrier": {
                 "name": "Dviračių barjeras",
                 "terms": "dviračių barjeras"
-            },
-            "barrier/ditch": {
-                "name": "Griovys",
-                "terms": "griovys"
             },
             "barrier/entrance": {
                 "name": "Įėjimas",

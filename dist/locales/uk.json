@@ -241,7 +241,7 @@
     },
     "commit": {
         "title": "Зберегти зміни",
-        "description_placeholder": "Короткий опис ваших правок",
+        "description_placeholder": "Стислий опис ваших дій (обовʼязково)",
         "message_label": "Пояснення до набору змін",
         "upload_explanation": "Зміни, зроблені вами, з’являться на всіх мапах, що використовують дані OpenStreetMap.",
         "upload_explanation_with_user": "Зміни, зроблені вами під іменем {user}, з’являться на всіх мапах, що використовують дані OpenStreetMap.",
@@ -330,6 +330,7 @@
         "percent_brightness": "прозорість {opacity}%",
         "none": "Пусте",
         "best_imagery": "Найкраші супутникові знімки для цього місця",
+        "switch": "Ввімкнути цей шар",
         "custom": "Власний фон",
         "custom_button": "Параметри власного фону",
         "custom_prompt": "Введіть шаблон URL для квадратів мапи. Використовуйте  {z}, {x}, {y} для схеми Z/X/Y та {u} для схеми QuadTiles.",
@@ -612,6 +613,9 @@
     },
     "presets": {
         "categories": {
+            "category-barrier": {
+                "name": "Види перепон"
+            },
             "category-building": {
                 "name": "Будівлі"
             },
@@ -1998,8 +2002,8 @@
                 "terms": "Cycle Barrier, gthtirjlf lkz dtkjcbgtlbcnsd, перешкода для велосипедів"
             },
             "barrier/ditch": {
-                "name": "Канава",
-                "terms": "Ditch, rfyfdf, рів, кювет, рівчак, канал, траншея"
+                "name": "Рівчак",
+                "terms": "рів,окоп,траншея,шурф"
             },
             "barrier/entrance": {
                 "name": "Вхід",
@@ -3964,6 +3968,10 @@
             "type/route/hiking": {
                 "name": "Туристичний маршрут",
                 "terms": "Hiking Route, nehbcnbxybq vfhihen, пішохідний маршрут, туристичний маршрут, туризм"
+            },
+            "type/route/horse": {
+                "name": "Маршрут для верхової їзди",
+                "terms": "кінь,верхи,шлях,маршрут"
             },
             "type/route/pipeline": {
                 "name": "Трубопровід",

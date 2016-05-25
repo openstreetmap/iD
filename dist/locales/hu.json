@@ -241,7 +241,7 @@
     },
     "commit": {
         "title": "Módosítások mentése",
-        "description_placeholder": "A közreműködésed rövid összefoglalója",
+        "description_placeholder": "A közreműködéseid rövid leírása (kötelező)",
         "message_label": "Módosításcsomag megjegyzés",
         "upload_explanation": "Az általad feltöltött változtatások minden OpenStreetMapet használó térképen láthatóak lesznek.",
         "upload_explanation_with_user": "Az általad {user} néven feltöltött változtatások minden OpenStreetMapet használó térképen láthatóak lesznek.",
@@ -316,6 +316,7 @@
             "yes": "Igen",
             "no": "Nem"
         },
+        "add": "Hozzáadás",
         "none": "Nincs",
         "node": "Csomópont",
         "way": "Út",
@@ -329,6 +330,7 @@
         "percent_brightness": "{opacity}% fényerő",
         "none": "Nincs",
         "best_imagery": "Legjobb ismert légifeltétel ehhez a helyszínhez",
+        "switch": "Visszaváltás erre a háttérre",
         "custom": "Egyéni",
         "custom_button": "Egyedi háttér szerkesztése",
         "custom_prompt": "Adj meg egy csempe URL sablont. Érvényes tokenek: {z}, {x}, {y} a Z/X/Y rendszerű URL-ekhez és {u} a kvadratikusakhoz.",
@@ -611,6 +613,9 @@
     },
     "presets": {
         "categories": {
+            "category-barrier": {
+                "name": "Akadály elemek"
+            },
             "category-building": {
                 "name": "Épület elemek"
             },
@@ -780,6 +785,9 @@
             "bicycle_parking": {
                 "label": "Típus"
             },
+            "bin": {
+                "label": "Szemetes kuka"
+            },
             "boundary": {
                 "label": "Típus"
             },
@@ -850,6 +858,9 @@
             },
             "cuisine": {
                 "label": "Konyha"
+            },
+            "currency_multi": {
+                "label": "Pénznem típusok"
             },
             "cycleway": {
                 "label": "Kerékpáros sávok",
@@ -953,6 +964,9 @@
             },
             "fuel": {
                 "label": "Üzemanyag"
+            },
+            "fuel_multi": {
+                "label": "Üzemanyag típusok"
             },
             "gauge": {
                 "label": "Nyomtáv"
@@ -1196,6 +1210,9 @@
                     "underground": "Földalatti parkoló"
                 }
             },
+            "payment_multi": {
+                "label": "Fizetési típusok"
+            },
             "phone": {
                 "label": "Telefonszám",
                 "placeholder": "+36 1 123 45 67"
@@ -1252,6 +1269,9 @@
             },
             "railway": {
                 "label": "Típus"
+            },
+            "recycling_accepts": {
+                "label": "Elfogad"
             },
             "ref": {
                 "label": "Azonosító"
@@ -1983,7 +2003,7 @@
             },
             "barrier/ditch": {
                 "name": "Árok",
-                "terms": "Árok"
+                "terms": "árok, gödör"
             },
             "barrier/entrance": {
                 "name": "Bejárat",
@@ -3948,6 +3968,10 @@
             "type/route/hiking": {
                 "name": "Turistaút",
                 "terms": "Túraút, Gyalogtúra"
+            },
+            "type/route/horse": {
+                "name": "Lovaglóút",
+                "terms": "lovagló út, lovagló útvonal, lovas út, lovas útvonal"
             },
             "type/route/pipeline": {
                 "name": "Csővezeték útvonal",

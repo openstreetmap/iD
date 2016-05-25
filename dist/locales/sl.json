@@ -219,7 +219,6 @@
     },
     "commit": {
         "title": "Shrani spremembe",
-        "description_placeholder": "Kratek opis vaših sprememb",
         "upload_explanation": "Spremembe, ki ji boste naložili, bodo vidne na vseh zemljevidih, ki uporabljajo podatke OpenStreetMap.",
         "upload_explanation_with_user": "Spremembe, ki jih boste naložili kot {user}, bodo vidne na vseh zemljevidih, ki uporabljajo podatke OpenStreetMap.",
         "save": "Shrani",
@@ -381,8 +380,44 @@
         }
     },
     "presets": {
+        "categories": {
+            "category-barrier": {
+                "name": "Vrsta ovire"
+            },
+            "category-building": {
+                "name": "Tipi zgradb"
+            },
+            "category-golf": {
+                "name": "Vrste golfa"
+            },
+            "category-landuse": {
+                "name": "Vrste zemljišča"
+            },
+            "category-path": {
+                "name": "Vrste poti"
+            },
+            "category-rail": {
+                "name": "Tipi železnice"
+            },
+            "category-restriction": {
+                "name": "Vrste prepovedi"
+            },
+            "category-road": {
+                "name": "Tipi povezav"
+            },
+            "category-route": {
+                "name": "Značilnosti cest"
+            },
+            "category-water-area": {
+                "name": "Vrste voda"
+            },
+            "category-water-line": {
+                "name": "Vrste voda"
+            }
+        },
         "fields": {
             "access": {
+                "label": "Dovoljen dostop",
                 "options": {
                     "designated": {
                         "description": "Dostop je dovoljen v skladu z znaki ali posebnimi krajevnimi zakoni",
@@ -391,6 +426,10 @@
                     "destination": {
                         "description": "Dostop je dovoljen samo za dostavo",
                         "title": "Za dostavo"
+                    },
+                    "dismount": {
+                        "description": "Dovoljen dostop, toda jezdec razjaha",
+                        "title": "Razjahati"
                     },
                     "no": {
                         "description": "Dostop za splošno javnosto NI dovoljen",
@@ -409,7 +448,9 @@
                         "title": "Dovoljeno"
                     }
                 },
+                "placeholder": "Ni določeno",
                 "types": {
+                    "access": "Vse",
                     "bicycle": "Kolesarji",
                     "foot": "Peš",
                     "horse": "Konji",
@@ -417,6 +458,7 @@
                 }
             },
             "access_simple": {
+                "label": "Dovoljen dostop",
                 "placeholder": "da"
             },
             "access_toilets": {
@@ -1404,10 +1446,6 @@
                 "name": "Ovira za kolesarje",
                 "terms": "kolesarska ovira,ovira za kolo"
             },
-            "barrier/ditch": {
-                "name": "Jarek",
-                "terms": "grapa"
-            },
             "barrier/entrance": {
                 "name": "Vhod",
                 "terms": "portal,vrata,vhod,izhod"
@@ -1851,6 +1889,9 @@
                 "name": "Pot",
                 "terms": "steza,gaz"
             },
+            "highway/pedestrian": {
+                "name": "Ulica namenjena pešcem"
+            },
             "highway/primary": {
                 "name": "Glavna cesta",
                 "terms": "glavna cesta,primarna cesta"
@@ -1942,6 +1983,9 @@
             "highway/turning_circle": {
                 "name": "Obračališče",
                 "terms": "obračalni krog"
+            },
+            "highway/unclassified": {
+                "name": "Ožja/Neopredeljena cestna povezava"
             },
             "historic": {
                 "name": "Zgodovinska znamenitost",

@@ -232,7 +232,6 @@
     },
     "commit": {
         "title": "Simpan Perubahan",
-        "description_placeholder": "Deskripsi singkat kontribusi Anda",
         "message_label": "Komentar set perubahan",
         "upload_explanation": "Perubahan yang anda unggah akan tampil di seluruh peta yang menggunakan data OpenStreetMap.",
         "upload_explanation_with_user": "Perubahan yang anda unggah sebagai {user} akan tampil di seluruh peta yang menggunakan data OpenStreetMap.",
@@ -1454,9 +1453,6 @@
             },
             "barrier/city_wall": {
                 "name": "Dinding Kota"
-            },
-            "barrier/ditch": {
-                "name": "Parit"
             },
             "barrier/entrance": {
                 "name": "Pintu Masuk"

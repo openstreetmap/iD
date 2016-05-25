@@ -158,7 +158,6 @@
     },
     "commit": {
         "title": "Saglabāt izmaiņas",
-        "description_placeholder": "Īss apraksts par jūsu ieguldījumu",
         "save": "Saglabāt",
         "cancel": "Atcelt",
         "warnings": "Brīdinājumi",
@@ -611,9 +610,6 @@
             },
             "barrier/cycle_barrier": {
                 "name": "Veloceliņa barjera"
-            },
-            "barrier/ditch": {
-                "name": "Grāvis"
             },
             "barrier/entrance": {
                 "name": "Ieeja"

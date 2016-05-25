@@ -240,7 +240,6 @@
     },
     "commit": {
         "title": "Ukladanie zmien",
-        "description_placeholder": "Stručný popis vašich úprav",
         "message_label": "Krátky popis ukladaných zmien",
         "upload_explanation": "Zmeny, ktoré nahráte, budú viditeľné na všetkých mapách, ktoré používajú údaje z OpenStreetMap.",
         "upload_explanation_with_user": "Zmeny, ktoré nahráte ako {user}, budú viditeľné na všetkých mapách, ktoré používajú údaje z OpenStreetMap.",
@@ -1855,10 +1854,6 @@
             "barrier/cycle_barrier": {
                 "name": "Zábrana pre cyklistov",
                 "terms": "Zabrana pre cyklistov,bicykel,bicykle,zatarasa,zátarasa"
-            },
-            "barrier/ditch": {
-                "name": "Priekopa",
-                "terms": "priekopa,jarok,jama,garat,kanál,kanal,stoka"
             },
             "barrier/entrance": {
                 "name": "Priechod",

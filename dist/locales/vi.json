@@ -241,7 +241,7 @@
     },
     "commit": {
         "title": "Lưu các Thay đổi",
-        "description_placeholder": "Tóm lược các đóng góp của bạn",
+        "description_placeholder": "Tóm lược các đóng góp của bạn (bắt buộc)",
         "message_label": "Tóm lược sửa đổi",
         "upload_explanation": "Các thay đổi bạn thực hiện sẽ xuất hiện trên tất cả các bản đồ sử dụng dữ liệu OpenStreetMap.",
         "upload_explanation_with_user": "Các thay đổi bạn thực hiện dưới tên {user} sẽ xuất hiện trên tất cả các bản đồ sử dụng dữ liệu OpenStreetMap.",
@@ -330,6 +330,7 @@
         "percent_brightness": "Độ sáng {opacity}%",
         "none": "Không có",
         "best_imagery": "Nguồn hình ảnh hữu ích nhất đối với nơi này",
+        "switch": "Quay về hình nền này",
         "custom": "Tùy biến",
         "custom_button": "Sửa hình nền tùy biến",
         "custom_prompt": "Nhập định dạng URL của các mảnh bản đồ. Bạn có thể sử dụng các dấu hiệu {z}, {x}, {y} cho định dạng Z/X/Y hoặc {u} cho định dạng quadtile.",
@@ -612,6 +613,9 @@
     },
     "presets": {
         "categories": {
+            "category-barrier": {
+                "name": "Liên quan đến Chướng ngại"
+            },
             "category-building": {
                 "name": "Liên quan đến Tòa nhà"
             },
@@ -3964,6 +3968,10 @@
             "type/route/hiking": {
                 "name": "Tuyến Đường đi bộ dài",
                 "terms": "tuyến đường đi bộ dài, tuyến đi bộ đường dài, tuyen duong di bo dai, tuyen di bo duong dai"
+            },
+            "type/route/horse": {
+                "name": "Tuyến đường Cưỡi ngựa",
+                "terms": "tuyến đường cưỡi ngựa, tuyen duong cuoi ngua"
             },
             "type/route/pipeline": {
                 "name": "Tuyến Đường ống",

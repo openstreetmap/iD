@@ -223,7 +223,6 @@
     },
     "commit": {
         "title": "Kryej Ndryshimet",
-        "description_placeholder": "Përmbledhja e redaktimeve",
         "upload_explanation": "Redaktimet qe ju ngarkoni do jen të dukshëm në të gjithë hartat që përdorin të dhëna OpenStreetMap.",
         "upload_explanation_with_user": "Redaktimet qe ju ngarkoni si {user} do jen të dukshëm në të gjithë hartat që përdorin të dhëna OpenStreetMap.",
         "save": "Ruaj",

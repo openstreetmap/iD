@@ -178,7 +178,6 @@
     "help_translate": "Hjelp til med oversettelse",
     "commit": {
         "title": "Lagre endringer",
-        "description_placeholder": "Kort beskrivelse av dine bidrag",
         "message_label": "Kommentar til endringssettet",
         "save": "Lagre",
         "cancel": "Avbryt",
@@ -1185,9 +1184,6 @@
             },
             "barrier/cycle_barrier": {
                 "name": "Sykkelhinder"
-            },
-            "barrier/ditch": {
-                "name": "Grøft"
             },
             "barrier/entrance": {
                 "name": "Inngang"

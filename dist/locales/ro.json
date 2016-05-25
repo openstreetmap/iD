@@ -152,7 +152,6 @@
     },
     "commit": {
         "title": "Salveaza modificarile",
-        "description_placeholder": "O scurtă descriere a contribuției tale.",
         "save": "Salveaza",
         "cancel": "Renunță",
         "changes": "{count} Modificări",

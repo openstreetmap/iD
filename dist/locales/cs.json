@@ -241,7 +241,7 @@
     },
     "commit": {
         "title": "Uložit změny",
-        "description_placeholder": "Stručný popis vašich úprav",
+        "description_placeholder": "Stručný popis vašich úprav (povinné)",
         "message_label": "Komentář ke změnám",
         "upload_explanation": "Vámi provedené změny budou viditelné na všech mapách postavených na datech z OpenStreetMap.",
         "upload_explanation_with_user": "Změny provedené pod jménem {user} budou viditelné na všech mapách postavených na datech z OpenStreetMap.",
@@ -330,6 +330,7 @@
         "percent_brightness": "{opacity}% viditelnost",
         "none": "Žádné",
         "best_imagery": "Nejlepší známý zdroj podkladů pro toto místo",
+        "switch": "Přepnout zpět na toto pozadí",
         "custom": "Vlastní",
         "custom_button": "Editovat vlastní pozadí",
         "custom_prompt": "Vložte šablonu adres dlaždic. Lze použít tokeny {z}, {x}, {y} pro schéma Z/X/Y a {u} pro hierarchické schéma quadtile.",
@@ -612,6 +613,9 @@
     },
     "presets": {
         "categories": {
+            "category-barrier": {
+                "name": "Překážky"
+            },
             "category-building": {
                 "name": "Budovy"
             },
@@ -781,6 +785,9 @@
             "bicycle_parking": {
                 "label": "Typ"
             },
+            "bin": {
+                "label": "Odpadkový koš"
+            },
             "boundary": {
                 "label": "Typ"
             },
@@ -851,6 +858,9 @@
             },
             "cuisine": {
                 "label": "Kuchyně"
+            },
+            "currency_multi": {
+                "label": "Měny"
             },
             "cycleway": {
                 "label": "Cyklopruhy",
@@ -954,6 +964,9 @@
             },
             "fuel": {
                 "label": "Palivo"
+            },
+            "fuel_multi": {
+                "label": "Paliva"
             },
             "gauge": {
                 "label": "Rozchod"
@@ -1196,6 +1209,9 @@
                     "surface": "Povrchové",
                     "underground": "Podzemní"
                 }
+            },
+            "payment_multi": {
+                "label": "Platební kanály"
             },
             "phone": {
                 "label": "Telefon",
@@ -1986,8 +2002,8 @@
                 "terms": "zábrana pro cyklisty"
             },
             "barrier/ditch": {
-                "name": "Příkop jako překážka",
-                "terms": "příkop,járek,jáma,strouha,škarpa,stoka"
+                "name": "Příkop",
+                "terms": "příkop,zákop"
             },
             "barrier/entrance": {
                 "name": "Vchod/východ",
@@ -3952,6 +3968,10 @@
             "type/route/hiking": {
                 "name": "Turistická trasa",
                 "terms": "pěší trasa,trasa pro pěší,turistická značka,turistická trasa,značka pro pěší,klub českých turistů,kčt"
+            },
+            "type/route/horse": {
+                "name": "Jezdecká trasa",
+                "terms": "jezdecká trasa,koňská trasa,jezdecká stezka,koňská stezka,kůň,koně,jezdec,jezdce"
             },
             "type/route/pipeline": {
                 "name": "Potrubní trasa",

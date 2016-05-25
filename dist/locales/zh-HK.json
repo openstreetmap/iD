@@ -241,7 +241,7 @@
     },
     "commit": {
         "title": "儲存變更",
-        "description_placeholder": "簡述你的貢獻",
+        "description_placeholder": "簡述你的貢獻 (必填)",
         "message_label": "編輯變動留言",
         "upload_explanation": "你上載的變更會出現在其他使用 OpenStreetMap 資料的地圖。",
         "upload_explanation_with_user": "你以{user}的名字上載的變更會出現在其他使用 OpenStreetMap 資料的地圖。",
@@ -330,6 +330,7 @@
         "percent_brightness": "{opacity}% 亮度",
         "none": "無",
         "best_imagery": "這地點最為人所知的背景影像",
+        "switch": "切換回這個背景",
         "custom": "自訂",
         "custom_button": "編輯自訂背景",
         "custom_prompt": "輪入區塊範本的網址。有效的標記是以 {z}, {x}, {y} 作為 Z/X/Y 標記系統 Z/X/Y scheme 和 {u} 作為四分位數標記系統 quadtile scheme。",
@@ -612,6 +613,9 @@
     },
     "presets": {
         "categories": {
+            "category-barrier": {
+                "name": "圍欄特徵"
+            },
             "category-building": {
                 "name": "建築物特徵"
             },
@@ -781,6 +785,9 @@
             "bicycle_parking": {
                 "label": "類"
             },
+            "bin": {
+                "label": "垃圾筒"
+            },
             "boundary": {
                 "label": "類"
             },
@@ -851,6 +858,9 @@
             },
             "cuisine": {
                 "label": "菜系"
+            },
+            "currency_multi": {
+                "label": "外幣種類"
             },
             "cycleway": {
                 "label": "單車徑",
@@ -954,6 +964,9 @@
             },
             "fuel": {
                 "label": "燃料"
+            },
+            "fuel_multi": {
+                "label": "燃料種類"
             },
             "gauge": {
                 "label": "軌距"
@@ -1196,6 +1209,9 @@
                     "surface": "地面",
                     "underground": "地下"
                 }
+            },
+            "payment_multi": {
+                "label": "付款種類"
             },
             "phone": {
                 "label": "電話",
@@ -3952,6 +3968,10 @@
             "type/route/hiking": {
                 "name": "遠足路綫",
                 "terms": "Hiking Route,行山路綫,行山路線,遠足路線"
+            },
+            "type/route/horse": {
+                "name": "策騎路線",
+                "terms": "騎馬路線"
             },
             "type/route/pipeline": {
                 "name": "管道路綫",

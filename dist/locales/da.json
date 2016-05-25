@@ -241,7 +241,7 @@
     },
     "commit": {
         "title": "Gem ændringer",
-        "description_placeholder": "Kort beskrivelse af dine bidrag",
+        "description_placeholder": "Skriv en kort beskrivelse af dit bidrag (påkrævet)",
         "message_label": "Ændringssætskommentar",
         "upload_explanation": "De ændringer du uploader vil blive synlige på alle kort der bruger OpenStreetMap-data.",
         "upload_explanation_with_user": "Ændringer du uploader under brugernavnet {user} vil blive synlige på alle kort der bruger OpenStreetMap-data.",
@@ -330,6 +330,7 @@
         "percent_brightness": "{opacity} % lysstyrke",
         "none": "Ingen",
         "best_imagery": "Bedst kendte luftfotokilde for denne her lokalitet",
+        "switch": "Skift tilbage til denne baggrund",
         "custom": "Brugerdefineret",
         "custom_button": "Rediger brugerdefineret baggrund",
         "custom_prompt": "Angiv en URL-skabelon for fliser. Gyldige værdier er {z}, {x}, {y} for Z/X/Y-systemet og {u} for quadtile-systemet. ",
@@ -1996,10 +1997,6 @@
             "barrier/cycle_barrier": {
                 "name": "Cykelbarriere",
                 "terms": "Cykelbarriere"
-            },
-            "barrier/ditch": {
-                "name": "Grøft",
-                "terms": "Grøft, Grøftekant"
             },
             "barrier/entrance": {
                 "name": "Indgang",
@@ -3964,6 +3961,10 @@
             "type/route/hiking": {
                 "name": "Vandrerute",
                 "terms": "Vandrerute, Vandretur, Gårute"
+            },
+            "type/route/horse": {
+                "name": "Kørerute",
+                "terms": "Kørerute"
             },
             "type/route/pipeline": {
                 "name": "Rørledningsnet",

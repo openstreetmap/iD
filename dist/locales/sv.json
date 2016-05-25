@@ -241,7 +241,7 @@
     },
     "commit": {
         "title": "Spara ändringar",
-        "description_placeholder": "Kort beskrivning av dina ändringar",
+        "description_placeholder": "Kortfattad beskrivning av ditt bidrag (obligatoriskt)",
         "message_label": "Ändringskommentar",
         "upload_explanation": "De redigeringar du bidrar med kommer att synas på alla kartor som använder OpenStreetMaps data.",
         "upload_explanation_with_user": "De redigeringar du bidrar med som {user} kommer att synas på alla kartor som använder OpenStreetMaps data.",
@@ -330,6 +330,7 @@
         "percent_brightness": "{opacity}% ljusstyrka",
         "none": "Ingen",
         "best_imagery": "Populäraste källan till flygfoton för den här platsen",
+        "switch": "Växla tillbaka till denna bakgrund",
         "custom": "Anpassa",
         "custom_button": "Ändra anpassad bakgrund",
         "custom_prompt": "Ange en URL-mall för plattor. Giltiga symboler är  {z}, {x}, {y} för Z/X/Y-schema och {u} för quadtile-schema.",
@@ -612,6 +613,9 @@
     },
     "presets": {
         "categories": {
+            "category-barrier": {
+                "name": "Barriärer"
+            },
             "category-building": {
                 "name": "Byggnad"
             },
@@ -3964,6 +3968,10 @@
             "type/route/hiking": {
                 "name": "Vandringsled",
                 "terms": "Vandringsrutt, vandringsled, stig"
+            },
+            "type/route/horse": {
+                "name": "Hästspår",
+                "terms": "Ridrutt, ridning, rida, häst, hästrutt, hästspår, ridspår"
             },
             "type/route/pipeline": {
                 "name": "Rörledningsrutt",

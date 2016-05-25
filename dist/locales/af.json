@@ -153,7 +153,6 @@
     },
     "commit": {
         "title": "Bêre veranderinge",
-        "description_placeholder": "Kortlikse beskrywing van jou bydraes",
         "save": "Bȇre",
         "cancel": "Kanseleer",
         "warnings": "Waarskuwings",
@@ -750,9 +749,6 @@
             },
             "barrier/cycle_barrier": {
                 "name": "Fietshinderpaal"
-            },
-            "barrier/ditch": {
-                "name": "Sloot"
             },
             "barrier/entrance": {
                 "name": "Ingang"

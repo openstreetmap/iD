@@ -241,7 +241,7 @@
     },
     "commit": {
         "title": "Desa els canvis",
-        "description_placeholder": "Breu descripció de les vostres contribucions",
+        "description_placeholder": "Breu descripció de les teves contribucions (necessari)",
         "message_label": "Comentari de conjunt de canvis",
         "upload_explanation": "Els canvis que deseu seran visibles a tots els mapes que utilitzin dades d'OpenStreetMap.",
         "upload_explanation_with_user": "Els canvis que deseu com a {user} seran visibles en tots els mapes que utilitzin dades d'OpenStreetMap.",
@@ -253,7 +253,9 @@
         "deleted": "Eliminat",
         "created": "Creat",
         "about_changeset_comments": "Quant als comentaris del conjunt de canvis",
-        "about_changeset_comments_link": "//wiki.openstreetmap.org/wiki/Good_changeset_comments"
+        "about_changeset_comments_link": "//wiki.openstreetmap.org/wiki/Good_changeset_comments",
+        "google_warning": "Has mencionat Google en aquest comentari: recorda que la còpia de Google Maps està estrictament prohibida.",
+        "google_warning_link": "http://www.openstreetmap.org/copyright"
     },
     "contributors": {
         "list": "Edicions fetes per {users}",
@@ -314,6 +316,7 @@
             "yes": "Sí",
             "no": "No"
         },
+        "add": "Afegir",
         "none": "Cap",
         "node": "Node",
         "way": "Via",
@@ -330,8 +333,10 @@
         "custom": "Personalitzar",
         "custom_button": "Editar el fons personalitzat",
         "custom_prompt": "Introduïu una plantilla d'URL de casella. Els paràmetres vàlids són {z}, {x}, {y} per a l'esquema Z/X/Y i  {u} per a l'esquema quadtile.",
+        "fix_misalignment": "Ajusta la alineació de la imatgeria",
         "imagery_source_faq": "D'on prové aquesta imatgeria?",
         "reset": "reiniciar",
+        "offset": "Arrosega cap a qualsevol lloc de la zona gris de sota per ajustar la alineació de la imatgeria, o entra els valors de la alineació en metres.",
         "minimap": {
             "description": "Miniatura del mapa",
             "tooltip": "Mostrar un mapa amb menys zoom per ajudar a localitzar l'àrea que es mostra actualment."
@@ -776,6 +781,9 @@
             "bicycle_parking": {
                 "label": "Tipus"
             },
+            "bin": {
+                "label": "Paperera"
+            },
             "boundary": {
                 "label": "Tipus"
             },
@@ -846,6 +854,9 @@
             },
             "cuisine": {
                 "label": "Tipus de cuina"
+            },
+            "currency_multi": {
+                "label": "Tipus de divisa"
             },
             "cycleway": {
                 "label": "Carrils Bici",
@@ -949,6 +960,9 @@
             },
             "fuel": {
                 "label": "Carburant"
+            },
+            "fuel_multi": {
+                "label": "Tipus de combustible"
             },
             "gauge": {
                 "label": "Ample"
@@ -1192,6 +1206,9 @@
                     "underground": "Subterrani"
                 }
             },
+            "payment_multi": {
+                "label": "Tipus de pagament"
+            },
             "phone": {
                 "label": "Telèfon",
                 "placeholder": "+31 42 123 4567"
@@ -1248,6 +1265,9 @@
             },
             "railway": {
                 "label": "Tipus"
+            },
+            "recycling_accepts": {
+                "label": "N'accepta"
             },
             "ref": {
                 "label": "Referència"
@@ -1383,6 +1403,9 @@
                     "tunnel": "Túnel"
                 },
                 "placeholder": "Desconegut"
+            },
+            "studio": {
+                "label": "Tipus"
             },
             "substation": {
                 "label": "Tipus"
@@ -1762,6 +1785,9 @@
                 "name": "Oficina de correus",
                 "terms": "Oficina de Correus, Correus, Edifici de Correus, Cartes, Carters"
             },
+            "amenity/prison": {
+                "name": "Terrenys de presó"
+            },
             "amenity/pub": {
                 "name": "Pub",
                 "terms": "Bar, Bar Musical, Pub, Local de copes, Local d'oci nocturn, Bareto"
@@ -1908,10 +1934,6 @@
             "barrier/cycle_barrier": {
                 "name": "Barrera per a ciclistes",
                 "terms": "Barrera per a ciclistes, Ciclisme, Bicicleta, Ruta cicloturista, Valla, Tanca, Tancament, Tanca per a bicicletes"
-            },
-            "barrier/ditch": {
-                "name": "Sèquia",
-                "terms": "Sèquia, Canal, Aigua, Via aquífera, Torrent, Conducció d'aigua, Aquífer, Rierol"
             },
             "barrier/entrance": {
                 "name": "Entrada",
@@ -2423,6 +2445,9 @@
                 "name": "Cul de sac",
                 "terms": "Girar 180 graus, Canviar de sentit"
             },
+            "highway/unclassified": {
+                "name": "Carretera menor / sense classificació"
+            },
             "historic": {
                 "name": "Lloc històric",
                 "terms": "Lloc històric"
@@ -2547,6 +2572,9 @@
             },
             "leisure/adult_gaming_centre": {
                 "name": "Centre d'oci adult"
+            },
+            "leisure/bird_hide": {
+                "name": "Observatori d'ocells"
             },
             "leisure/bowling_alley": {
                 "name": "Bolera"
@@ -3308,6 +3336,9 @@
             },
             "shop/newsagent": {
                 "name": "Botiga de diaris i revistes"
+            },
+            "shop/nutrition_supplements": {
+                "name": "Botiga de suplements nutricionals"
             },
             "shop/optician": {
                 "name": "Òptica"

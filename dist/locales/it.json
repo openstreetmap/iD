@@ -241,7 +241,7 @@
     },
     "commit": {
         "title": "Salva le modifiche",
-        "description_placeholder": "Una breve descrizione delle tue modifiche",
+        "description_placeholder": "Una breve descrizione delle tue modifiche (obbligatoria)",
         "message_label": "Commento al gruppo di modifiche",
         "upload_explanation": "Le modifiche che carichi saranno visibili su tutte le mappe che usano i dati di OpenStreetMap.",
         "upload_explanation_with_user": "Le modifiche che carichi come {user} saranno visibili su tutte le mappe che usano i dati di OpenStreetMap.",
@@ -330,6 +330,7 @@
         "percent_brightness": "{opacity}% luminosità",
         "none": "Nessuno",
         "best_imagery": "Migliore sorgente di immagini per questo luogo",
+        "switch": "Ritorna a questo sfondo",
         "custom": "Personalizzato",
         "custom_button": "Modifica sfondo personalizzato",
         "custom_prompt": "Inserisci l'URL dello schema dei tasselli. Valori validi sono {z}, {x}, {y} per lo schema Z/X/Y e {u} per lo schema QuadTile.",
@@ -612,6 +613,9 @@
     },
     "presets": {
         "categories": {
+            "category-barrier": {
+                "name": "Barriere"
+            },
             "category-building": {
                 "name": "Edifici"
             },
@@ -1998,8 +2002,8 @@
                 "terms": "Barriera Biciclette"
             },
             "barrier/ditch": {
-                "name": "Fossato",
-                "terms": "Fosso"
+                "name": "Trincea",
+                "terms": "trincea,fossato"
             },
             "barrier/entrance": {
                 "name": "Entrata",
@@ -3907,6 +3911,10 @@
             "type/route/hiking": {
                 "name": "Percorso escursionistico",
                 "terms": "sentiero,escursione,gita,rotta,percorso,passeggiata,cammino"
+            },
+            "type/route/horse": {
+                "name": "Ippovia",
+                "terms": "cavallo,strada,ippica,sentiero,equitazione"
             },
             "type/route/pipeline": {
                 "name": "Condotta",

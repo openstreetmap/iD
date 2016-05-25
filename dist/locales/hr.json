@@ -241,7 +241,7 @@
     },
     "commit": {
         "title": "Spremi promjene",
-        "description_placeholder": "Kratki opis tvojih doprinosa",
+        "description_placeholder": "Kratak opis tvog doprinosa (obavezno)",
         "message_label": "Komentar promjene",
         "upload_explanation": "Promjene koje postaviš biti će vidljive na svim kartama koje koriste podatke OpenStreetMap-a.",
         "upload_explanation_with_user": "Promjene koje postaviš kao {user} biti će vidljive na svim kartama koje koriste podatke OpenStreetMap-a.",
@@ -316,6 +316,7 @@
             "yes": "Da",
             "no": "Ne"
         },
+        "add": "Dodaj",
         "none": "Nijedna",
         "node": "Točka",
         "way": "Put",
@@ -329,6 +330,7 @@
         "percent_brightness": "{opacity}% svjetline",
         "none": "Nijedna",
         "best_imagery": "Najpoznatiji izvornik snimaka za ovo područje",
+        "switch": "Vrati nazad na ovu pozadinu",
         "custom": "Podesivo",
         "custom_button": "Uredi prilagođenu pozadinu",
         "custom_prompt": "Unesi URL predložak za popločavanje. Ispravni znakovi su {z}, {x}, {y} za Z/X/Y shemu i {u} za quadtile shemu.",
@@ -1910,10 +1912,6 @@
             },
             "barrier/cycle_barrier": {
                 "name": "Biciklistička prepreka"
-            },
-            "barrier/ditch": {
-                "name": "Prokop",
-                "terms": "jarak,rov,prokop,šanac,jama,kanal"
             },
             "barrier/entrance": {
                 "name": "Ulaz",

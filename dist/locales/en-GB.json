@@ -241,7 +241,7 @@
     },
     "commit": {
         "title": "Save Changes",
-        "description_placeholder": "Brief description of your contributions",
+        "description_placeholder": "Brief description of your contributions (required)",
         "message_label": "Changeset comment",
         "upload_explanation": "The changes you upload will be visible on all maps that use OpenStreetMap data.",
         "upload_explanation_with_user": "The changes you upload as {user} will be visible on all maps that use OpenStreetMap data.",
@@ -330,6 +330,7 @@
         "percent_brightness": "{opacity}% brightness",
         "none": "None",
         "best_imagery": "Best known imagery source for this location",
+        "switch": "Switch back to this background",
         "custom": "Custom",
         "custom_button": "Edit custom background",
         "custom_prompt": "Enter a tile URL template. Valid tokens are {z}, {x}, {y} for Z/X/Y scheme and {u} for quadtile scheme.",
@@ -612,6 +613,9 @@
     },
     "presets": {
         "categories": {
+            "category-barrier": {
+                "name": "Barrier Features"
+            },
             "category-building": {
                 "name": "Building Features"
             },
@@ -781,6 +785,9 @@
             "bicycle_parking": {
                 "label": "Type"
             },
+            "bin": {
+                "label": "Waste Bin"
+            },
             "boundary": {
                 "label": "Type"
             },
@@ -851,6 +858,9 @@
             },
             "cuisine": {
                 "label": "Cuisine"
+            },
+            "currency_multi": {
+                "label": "Currency Types"
             },
             "cycleway": {
                 "label": "Bike Lanes",
@@ -954,6 +964,9 @@
             },
             "fuel": {
                 "label": "Fuel"
+            },
+            "fuel_multi": {
+                "label": "Fuel Types"
             },
             "gauge": {
                 "label": "Gauge"
@@ -1197,6 +1210,9 @@
                     "underground": "Underground"
                 }
             },
+            "payment_multi": {
+                "label": "Payment Types"
+            },
             "phone": {
                 "label": "Telephone",
                 "placeholder": "+44 207 123456"
@@ -1253,6 +1269,9 @@
             },
             "railway": {
                 "label": "Type"
+            },
+            "recycling_accepts": {
+                "label": "Accepts"
             },
             "ref": {
                 "label": "Reference"
@@ -1342,23 +1361,83 @@
                     "dedicated": "Dedicated to smokers (e.g. smokers' club)",
                     "isolated": "In smoking areas, physically isolated",
                     "no": "No smoking anywhere",
-                    "outside": "Allowed outside"
-                }
+                    "outside": "Allowed outside",
+                    "separated": "In smoking areas, not physically isolated",
+                    "yes": "Allowed everywhere"
+                },
+                "placeholder": "No, Separated, Yes..."
+            },
+            "smoothness": {
+                "label": "Smoothness",
+                "options": {
+                    "bad": "Robust Wheels: trekking bike, car, rickshaw",
+                    "excellent": "Thin Rollers: rollerblade, skateboard",
+                    "good": "Thin Wheels: racing bike",
+                    "horrible": "Off-Road: heavy duty off-road vehicle",
+                    "impassable": "Impassable / No wheeled vehicle",
+                    "intermediate": "Wheels: city bike, wheelchair, scooter",
+                    "very_bad": "High Clearance: light duty off-road vehicle",
+                    "very_horrible": "Specialised off-road: tractor, ATV"
+                },
+                "placeholder": "Thin Rollers, Wheels, Off-Road..."
+            },
+            "social_facility_for": {
+                "label": "People served",
+                "placeholder": "Homeless, Disabled, Child, etc"
+            },
+            "source": {
+                "label": "Source"
+            },
+            "sport": {
+                "label": "Sport"
+            },
+            "sport_ice": {
+                "label": "Sport"
+            },
+            "sport_racing": {
+                "label": "Sport"
             },
             "structure": {
+                "label": "Structure",
+                "options": {
+                    "bridge": "Bridge",
+                    "cutting": "Cutting",
+                    "embankment": "Embankment",
+                    "ford": "Ford",
+                    "tunnel": "Tunnel"
+                },
                 "placeholder": "Unknown"
+            },
+            "studio": {
+                "label": "Type"
             },
             "substation": {
                 "label": "Type"
             },
+            "supervised": {
+                "label": "Supervised"
+            },
+            "surface": {
+                "label": "Surface"
+            },
+            "tactile_paving": {
+                "label": "Tactile Paving"
+            },
             "takeaway": {
+                "label": "Takeaway",
                 "options": {
                     "no": "No",
+                    "only": "Takeaway Only",
                     "yes": "Yes"
-                }
+                },
+                "placeholder": "Yes, No, Takeaway Only..."
             },
             "toilets/disposal": {
-                "label": "Toilet Disposal"
+                "label": "Toilet Disposal",
+                "options": {
+                    "bucket": "Bucket",
+                    "chemical": "Chemical"
+                }
             },
             "tourism": {
                 "label": "Type"

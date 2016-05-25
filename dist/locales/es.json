@@ -241,7 +241,7 @@
     },
     "commit": {
         "title": "Guardar cambios",
-        "description_placeholder": "Breve descripción de tus contribuciones",
+        "description_placeholder": "Breve descripción de sus contribuciones (requerido)",
         "message_label": "Comentario del conjunto de cambios",
         "upload_explanation": "Los cambios que sube serán visibles en todos los mapas que usen datos de OpenStreetMap.",
         "upload_explanation_with_user": "Los cambios que sube como {user} serán visibles en todos los mapas que usen datos de OpenStreetMap.",
@@ -330,6 +330,7 @@
         "percent_brightness": "{opacity}% brillo",
         "none": "Ninguno",
         "best_imagery": "La mejor fuente de imágenes para esta ubicación",
+        "switch": "Volver a este fondo",
         "custom": "Personalizado",
         "custom_button": "Editar fondo personalizado",
         "custom_prompt": "Introduzca la URL de una plantilla de teselas. Los símbolos válidos son {z}, {x}, {y} para el esquema Z/X/Y y {u} para el esquema quadtile.",
@@ -612,6 +613,9 @@
     },
     "presets": {
         "categories": {
+            "category-barrier": {
+                "name": "Elementos de barrera"
+            },
             "category-building": {
                 "name": "Elementos de edificio"
             },
@@ -1595,7 +1599,7 @@
             },
             "amenity/atm": {
                 "name": "Cajero automático",
-                "terms": "cajero automático, dinero, efectivo, banco"
+                "terms": "cajero automático, retiro, dinero, efectivo, banco"
             },
             "amenity/bank": {
                 "name": "Banco",
@@ -1683,7 +1687,7 @@
             },
             "amenity/college": {
                 "name": "Terreno de instituto",
-                "terms": "instituto, instituto, terreno, área, suelo, facultad"
+                "terms": "terreno, área, suelo, instituto, univerisdad"
             },
             "amenity/community_centre": {
                 "name": "Centro Comunitario",
@@ -1747,15 +1751,15 @@
             },
             "amenity/hospital": {
                 "name": "Recinto hospitalario",
-                "terms": "Recinto hospitalario, hospital, clínica, terreno, área, suelo"
+                "terms": "terreno, área, suelo, hospitalario, hospital, clínica, sanatorio, consultorio"
             },
             "amenity/hunting_stand": {
                 "name": "Puesto de caza",
                 "terms": "caza, puesto, caseta"
             },
             "amenity/kindergarten": {
-                "name": "Terreno de preescolar/Jardín de infancia",
-                "terms": "preescolar, jardín de infancia, parvulario, parvulos, terreno, área, suelo"
+                "name": "Terreno de preescolar o jardín de infancia",
+                "terms": "terreno, área, suelo, preescolar, preprimaria, jardín de infancia, jardín de niños, kinder, parvulario, párvulos"
             },
             "amenity/library": {
                 "name": "Biblioteca",
@@ -1822,8 +1826,8 @@
                 "terms": "correo, oficina de correos, casa de correos, estafeta de correos"
             },
             "amenity/prison": {
-                "name": "Terreno de la prisión",
-                "terms": "prisión, presion, cárcel, carcel"
+                "name": "Terreno de prisión",
+                "terms": "terreno, área, suelo, prisión, cárcel, carceleta, celda, penal, penitenciaria, presidio, reclusión, encierro, correccional, detención"
             },
             "amenity/pub": {
                 "name": "Pub",
@@ -1854,8 +1858,8 @@
                 "terms": "desecho, inodoro, taza, letrina, baño, aseo, lavabo, casa rodante, autocaravana, motorhome"
             },
             "amenity/school": {
-                "name": "Terreno de escuela",
-                "terms": "recinto escolar, escolar, escuela, colegio, instituto, terreno, área, suelo"
+                "name": "Terreno escolar",
+                "terms": "terreno, área, suelo, recinto escolar, escolar, escuela, colegio, centro educativo, unidad educativa, primaria, secundaria, secundario, instituto"
             },
             "amenity/shelter": {
                 "name": "Refugio",
@@ -1906,8 +1910,8 @@
                 "terms": "ayuntamiento, alcaldía, municipio, municipalidad, municipal, concejo, consistorio, cabildo, gobierno local, gobierno municipal, alcalde, intendente, concejales, ediles, comuna, casa consistorial"
             },
             "amenity/university": {
-                "name": "Terreno de universidad",
-                "terms": "universidad, campus, colegio mayor, facultad, terreno, área, suelo"
+                "name": "Terreno universitario",
+                "terms": "terreno, área, suelo, universidad, campus, colegio mayor, facultad, universitario, claustro"
             },
             "amenity/vending_machine/cigarettes": {
                 "name": "Máquina expendedora de cigarrillos",
@@ -1999,7 +2003,7 @@
             },
             "barrier/ditch": {
                 "name": "Zanja",
-                "terms": "zanja, foso, cuneta"
+                "terms": "zanja, trinchera, foso, fosa"
             },
             "barrier/entrance": {
                 "name": "Entrada / Apertura de barrera",
@@ -2471,11 +2475,11 @@
             },
             "highway/cycleway": {
                 "name": "Ciclovía",
-                "terms": "Camino para bicicletas, senda ciclable, sendero ciclista, carril bici, bicisenda, ciclovía, carril para bicicletas, pista para ciclistas"
+                "terms": "camino, senda, sendero, carril bici, bicisenda, ciclovía, ciclorruta, pista, ciclista, ciclismo, bicicleta, bici"
             },
             "highway/footway": {
                 "name": "Acera peatonal",
-                "terms": "camino, sendero, acera, vereda, andén, banqueta, peatón, peatonal"
+                "terms": "camino, senda, sendero, acera, vereda, andén, banqueta, peatón, peatonal"
             },
             "highway/living_street": {
                 "name": "Calle residencial",
@@ -2499,7 +2503,7 @@
             },
             "highway/path": {
                 "name": "Sendero",
-                "terms": "vereda, sendero, senda, camino, vía, calzada, ramal, trocha, atajo, travesía, huella, rastro"
+                "terms": "vereda, sendero, senda, camino, vía, ramal, trocha, atajo, travesía, huella, rastro"
             },
             "highway/pedestrian": {
                 "name": "Calle peatonal",
@@ -2507,7 +2511,7 @@
             },
             "highway/primary": {
                 "name": "Carretera primaria",
-                "terms": "carretera primaria, carretera principal, vía principal"
+                "terms": "carretera, camino, senda, calle, avenida, ruta, vía, primaria, primordial, principal, arteria"
             },
             "highway/primary_link": {
                 "name": "Enlace de carretera primaria",
@@ -2519,19 +2523,19 @@
             },
             "highway/residential": {
                 "name": "Calle urbana",
-                "terms": "calle urbana, calle residencial"
+                "terms": "calle, avenida, ruta, vía, boulevar, bulevar, paseo, residencial, urbana, domiciliaria"
             },
             "highway/rest_area": {
                 "name": "Área de descanso",
                 "terms": "Área de descanso, apartadero"
             },
             "highway/road": {
-                "name": "Carretera sin categoría conocida",
-                "terms": "calle, ronda, carril, ruta, arteria, rúa, trayecto, carretera, paseo, camino, vía"
+                "name": "Carretera desconocida",
+                "terms": "carretera, camino, senda, calle, avenida, ruta, vía, desconocida, temporal"
             },
             "highway/secondary": {
                 "name": "Carretera secundaria",
-                "terms": "Carretera secundaria, vía secundaria"
+                "terms": "carretera, camino, senda, calle, avenida, ruta, vía, secundaria"
             },
             "highway/secondary_link": {
                 "name": "Enlace de carretera secundaria",
@@ -2539,7 +2543,7 @@
             },
             "highway/service": {
                 "name": "Vía de servicio",
-                "terms": "vía de servicio, calle de servicio, servicio"
+                "terms": "camino, senda, calle, vía, servicio, callejón, pasaje, acceso, ingreso"
             },
             "highway/service/alley": {
                 "name": "Callejón",
@@ -2578,16 +2582,16 @@
                 "terms": "farola, iluminación, alumbrado, alumbrado público, farol, lámpara, fanal"
             },
             "highway/tertiary": {
-                "name": "Carretera local",
-                "terms": "Carretera terciaria, Carretera local"
+                "name": "Carretera terciaria",
+                "terms": "carretera, camino, senda, calle, avenida, ruta, vía, terciaria, local"
             },
             "highway/tertiary_link": {
                 "name": "Enlace de carretera local",
                 "terms": "Enlace a carretera terciaria, Enlace a carretera local, Enlace de carretera local"
             },
             "highway/track": {
-                "name": "Camino o pista rural",
-                "terms": "camino, vía, pista, rural, pista forestal, camino forestal. camino agrícola"
+                "name": "Camino o pista sin mantenimiento",
+                "terms": "camino, senda, sendero, calle, vía, pista, rural, forestal, agrícola, campo, sin mantenimiento, offroad, jeep, doble tracción, tractor, 4x4, atv, cuadrimotor, quadratrack, con huella"
             },
             "highway/traffic_signals": {
                 "name": "Semáforos",
@@ -2595,7 +2599,7 @@
             },
             "highway/trunk": {
                 "name": "Carretera principal",
-                "terms": "Carretera principal, carretera nacional, Carretera troncal"
+                "terms": "carretera, avenida, ruta, vía, ruta nacional, troncal, principal"
             },
             "highway/trunk_link": {
                 "name": "Enlace de carretera principal",
@@ -2607,7 +2611,7 @@
             },
             "highway/unclassified": {
                 "name": "Camino menor / sin clasificación",
-                "terms": "carretera, camino, menor, no clasificado, sin clasificación"
+                "terms": "carretera, camino, sendero, vía, menor, no clasificada, sin clasificación"
             },
             "historic": {
                 "name": "Lugar histórico",
@@ -2970,8 +2974,8 @@
                 "terms": "Pozo de Agua, agua en pozo"
             },
             "man_made/water_works": {
-                "name": "Obras hidráulicas",
-                "terms": "obras hidráulicas, obras hidraulicas, obra Hidráulica, obras sanitarias, obras hídricas, infraestructura hidráulica"
+                "name": "Planta potabilizadora de agua",
+                "terms": "potabilizadora, ETAP, planta potabilizadora, abastecimiento de agua, agua potable"
             },
             "man_made/works": {
                 "name": "Fábrica",
@@ -3964,6 +3968,10 @@
             "type/route/hiking": {
                 "name": "Ruta de senderismo",
                 "terms": "Ruta de senderismo,  excursionismo, caminata, excursionismo a pie"
+            },
+            "type/route/horse": {
+                "name": "Ruta a caballo",
+                "terms": "caballo, ruta, ecuestre, equitación, cabalgar, cabalgata"
             },
             "type/route/pipeline": {
                 "name": "Ruta de tubería",

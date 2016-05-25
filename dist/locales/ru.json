@@ -241,7 +241,7 @@
     },
     "commit": {
         "title": "Сохранить изменения",
-        "description_placeholder": "Краткое описание ваших правок",
+        "description_placeholder": "Короткое описание к вашим изменениям (обязательно)",
         "message_label": "Краткое описание ваших правок",
         "upload_explanation": "Сделанные вами изменения появятся на всех картах, использующих данные OpenStreetMap.",
         "upload_explanation_with_user": "Изменения, сделанные вами под именем {user}, появятся на всех картах, использующих данные OpenStreetMap.",
@@ -253,7 +253,9 @@
         "deleted": "Удалён",
         "created": "Создан",
         "about_changeset_comments": "О комментариях к пакетам правок",
-        "about_changeset_comments_link": "//wiki.openstreetmap.org/wiki/RU:Good_changeset_comments"
+        "about_changeset_comments_link": "//wiki.openstreetmap.org/wiki/RU:Good_changeset_comments",
+        "google_warning": "Вы упомянули Google в этом комментарии. Не забывайте, что копирование из Google Карт строго запрещено.",
+        "google_warning_link": "https://www.openstreetmap.org/copyright/ru"
     },
     "contributors": {
         "list": "Отредактировано {users}",
@@ -314,6 +316,7 @@
             "yes": "Да",
             "no": "Нет"
         },
+        "add": "Добавить",
         "none": "Нет",
         "node": "Точка",
         "way": "Линия",
@@ -327,11 +330,14 @@
         "percent_brightness": "яркость {opacity}%",
         "none": "Отключить",
         "best_imagery": "Наилучший источник космоснимков из известных для этой территории",
+        "switch": "Переключить обратно на эту подложку",
         "custom": "Настраиваемый",
         "custom_button": "Указать собственный слой",
         "custom_prompt": "Введите шаблон URL для тайлов. Допустимы переменные {z}, {x}, {y} для схемы Z/X/Y и {u} для схемы quadtile.",
+        "fix_misalignment": "Установка смещения слоя",
         "imagery_source_faq": "Кто предоставляет этот космоснимок?",
         "reset": "сброс",
+        "offset": "Перетащите серую область ниже, чтобы отрегулировать смещение слоя, или введите значения смещения в метрах.",
         "minimap": {
             "description": "Мини-карта",
             "tooltip": "Показать уменьшенную карту, чтобы помочь найти отображаемую в данный момент область."
@@ -1932,10 +1938,6 @@
             "barrier/cycle_barrier": {
                 "name": "Барьер для велосипедистов",
                 "terms": "Барьер для велосипедистов, Велосипедное препятствие, барьер"
-            },
-            "barrier/ditch": {
-                "name": "Траншея",
-                "terms": "канава, ров"
             },
             "barrier/entrance": {
                 "name": "Безпрепятственный проход / лаз",

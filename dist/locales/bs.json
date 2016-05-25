@@ -201,7 +201,6 @@
     },
     "commit": {
         "title": "Sačuvajte izmjene",
-        "description_placeholder": "Kratak opis Vaših doprinosa",
         "upload_explanation": "Promjene koje postavite će biti vidljive na svim kartama koje koriste OpenStreetMap podatke.",
         "upload_explanation_with_user": "Promjene koje postavite kao {user} će biti vidljive na svim kartama koje koriste OpenStreetMap podatke.",
         "save": "Sačuvajte",
@@ -1010,10 +1009,6 @@
             "barrier/cycle_barrier": {
                 "name": "Biciklistička prepreka",
                 "terms": "barijera za bicikle,prepreka za bicikle"
-            },
-            "barrier/ditch": {
-                "name": "Jarak",
-                "terms": "jarak,kanal,rov,prokop"
             },
             "barrier/entrance": {
                 "name": "Ulaz",

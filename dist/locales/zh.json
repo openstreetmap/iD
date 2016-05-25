@@ -178,7 +178,6 @@
     },
     "commit": {
         "title": "保存更改",
-        "description_placeholder": "简要说明你的贡献",
         "upload_explanation": "你上传的更新将会显示在所有使用 OpenStreetMap 数据的地图上。",
         "upload_explanation_with_user": "你 {user} 上传的更新将会显示在所有使用 OpenStreetMap 数据的地图上。",
         "save": "保存",
@@ -759,9 +758,6 @@
             },
             "barrier/cycle_barrier": {
                 "name": "单车矮栏"
-            },
-            "barrier/ditch": {
-                "name": "沟"
             },
             "barrier/entrance": {
                 "name": "入口"

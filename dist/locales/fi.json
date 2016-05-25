@@ -235,7 +235,6 @@
     },
     "commit": {
         "title": "Tallenna muutokset",
-        "description_placeholder": "Kuvaile lyhyesti karttaan tehtyjä muutoksia. Kirjoita muokkausten kohdemaan paikallisella kielellä (esimerkiksi Suomessa suomeksi tai ruotsiksi) tai englanniksi.",
         "message_label": "Muutossarjan kommentti",
         "upload_explanation": "Palvelimelle tallennettavat muutokset tulevat pian näkyviin kaikkiin OpenStreetMap-kartta-aineistoa käyttäviin palveluihin.",
         "upload_explanation_with_user": "Muutokset tallennetaan palvelimelle käyttäjätunnisteella {user} ja tulevat pian näkyviin kaikkiin OpenStreetMap-kartta-aineistoa käyttäviin palveluihin.",
@@ -767,6 +766,9 @@
             "bicycle_parking": {
                 "label": "Tyyppi"
             },
+            "bin": {
+                "label": "Jäteastia"
+            },
             "boundary": {
                 "label": "Tyyppi"
             },
@@ -834,6 +836,9 @@
             },
             "cuisine": {
                 "label": "Ruokakulttuuri"
+            },
+            "currency_multi": {
+                "label": "Valuutat"
             },
             "cycleway": {
                 "label": "Pyöräkaistat",
@@ -931,6 +936,9 @@
             },
             "fuel": {
                 "label": "Polttoaine"
+            },
+            "fuel_multi": {
+                "label": "Polttonestetyypit"
             },
             "gauge": {
                 "label": "Raideväli"
@@ -1831,9 +1839,6 @@
             },
             "barrier/cycle_barrier": {
                 "name": "Pyöräilyeste"
-            },
-            "barrier/ditch": {
-                "name": "Oja"
             },
             "barrier/entrance": {
                 "name": "Sisäänkäynti"

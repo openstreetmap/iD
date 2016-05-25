@@ -241,7 +241,6 @@
     },
     "commit": {
         "title": "Salvar Alterações",
-        "description_placeholder": "Descrição curta e clara de suas contribuições",
         "message_label": "Comentário para o conjunto de alterações",
         "upload_explanation": "As alterações que você enviar ficarão visíveis em todos os mapas que usam dados do OpenStreetMap. Atenção: NÃO é permitido copiar nomes de ruas do Google Maps, Bing, mapas impressos ou quaisquer fontes que possuam copyright.",
         "upload_explanation_with_user": "As alterações que você enviar como {user} estarão visíveis em todos os mapas que usam os dados do OpenStreetMap.<br><br>\n<b>Atenção:</b> NÃO é permitido copiar nomes de ruas do Google Maps, Bing, mapas impressos ou quaisquer fontes que possuam copyright.",
@@ -1976,10 +1975,6 @@
             "barrier/cycle_barrier": {
                 "name": "Barreira para Bicicletas",
                 "terms": "Barreira para Bicicletas"
-            },
-            "barrier/ditch": {
-                "name": "Vala",
-                "terms": "Vala"
             },
             "barrier/entrance": {
                 "name": "Entrada",

@@ -201,7 +201,6 @@
     },
     "commit": {
         "title": "記低修改",
-        "description_placeholder": "簡述你爾則稿件",
         "upload_explanation": "你嘅修改，傳咗上去公家街圖。凢用公家街圖資料，地圖都會見到。",
         "upload_explanation_with_user": "你以{user}名義，修改傳咗上去公家街圖。凢用公家街圖資料，地圖都會見到。",
         "save": "記",
@@ -1020,10 +1019,6 @@
             "barrier/cycle_barrier": {
                 "name": "單車減速欄",
                 "terms": "Cycle Barrier,單車減速欄,單車矮欄"
-            },
-            "barrier/ditch": {
-                "name": "溝",
-                "terms": "Ditch,溝"
             },
             "barrier/entrance": {
                 "name": "入口",

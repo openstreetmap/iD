@@ -212,7 +212,6 @@
     },
     "commit": {
         "title": "Vista breytingar",
-        "description_placeholder": "Stutt lýsing á breytingum þínum",
         "upload_explanation": "Breytingarnar sem þú gerir verða sýnilegar á öllum kortum sem nota OpenStreetMap gögn.",
         "upload_explanation_with_user": "Breytingarnar sem þú gerir sem {user} verða sýnilegar á öllum kortum sem nota OpenStreetMap gögn.",
         "save": "Vista",
@@ -988,9 +987,6 @@
             },
             "barrier/cycle_barrier": {
                 "name": "Hjólahindrun"
-            },
-            "barrier/ditch": {
-                "name": "Skurður"
             },
             "barrier/entrance": {
                 "name": "Inngangur"

@@ -2,8 +2,8 @@
     "modes": {
         "add_area": {
             "title": "공간",
-            "description": "지도에 공원, 건물, 호수나 다른 지역을 추가합니다.",
-            "tail": "공원, 호수나 건물과 같은, 지역 그리기를 시작하려면 지도를 클릭하세요."
+            "description": "지도에 공원, 건물, 호수나 다른 공간을 추가합니다.",
+            "tail": "공원, 호수나 건물과 같은 공간을 그리기를 시작하려면 지도를 클릭하세요."
         },
         "add_line": {
             "title": "선",
@@ -133,7 +133,8 @@
             "key": "D",
             "annotation": "선/지역을 연결 해제했습니다.",
             "not_connected": "여기에 연결 해제할 충분한 선/지역이 없습니다.",
-            "connected_to_hidden": "이것은 숨겨진 지물에 연결되어 있기 때문에 연결을 해제할 수 없습니다."
+            "connected_to_hidden": "이것은 숨겨진 지물에 연결되어 있기 때문에 연결을 해제할 수 없습니다.",
+            "relation": "이것은 관계의 구성원들을 연결하고 있기 때문에 연결을 해제할 수 없습니다."
         },
         "merge": {
             "title": "병합",
@@ -143,7 +144,8 @@
             "not_eligible": "이 지물은 병합할 수 없습니다.",
             "not_adjacent": "이 지물은 연결되어 있지 않기 때문에 병합할 수 없습니다.",
             "restriction": "이 지물은 적어도 하나가 \"{relation}\" 관계의 구성원이기 때문에 병합할 수 없습니다.",
-            "incomplete_relation": "이 지물은 완전히 다운로드되어 있지 않기 때문에 병합할 수 없습니다."
+            "incomplete_relation": "이 지물은 완전히 다운로드되어 있지 않기 때문에 병합할 수 없습니다.",
+            "conflicting_tags": "이 지물은 값이 상반되는 태그들로 인해 병합할 수 없습니다."
         },
         "move": {
             "title": "이동",
@@ -239,7 +241,7 @@
     },
     "commit": {
         "title": "바뀜 저장",
-        "description_placeholder": "기여에 대한 간단한 설명",
+        "description_placeholder": "기여 사항에 대한 간단한 설명 (필수)",
         "message_label": "바뀜집합 댓글",
         "upload_explanation": "올린 바뀜은 OpenStreetMap 데이터를 사용하는 모든 지도에 보여집니다.",
         "upload_explanation_with_user": "{user} 사용자로 올린 바뀜은 OpenStreetMap 데이터를 사용하는 모든 지도에 보여집니다.",
@@ -250,7 +252,8 @@
         "modified": "수정됨",
         "deleted": "삭제됨",
         "created": "만듦",
-        "about_changeset_comments": "바뀜집합 댓글에 대해"
+        "about_changeset_comments": "바뀜집합 댓글에 대해",
+        "google_warning": "당신이 이 댓글에 구글을 언급했습니다: 구글 지도에서 복사하는 것이 엄격히 금지됨을 유의하세요."
     },
     "contributors": {
         "list": "{users} 사용자의 편집",
@@ -311,6 +314,7 @@
             "yes": "예",
             "no": "아니오"
         },
+        "add": "추가",
         "none": "없음",
         "node": "노드",
         "way": "길",
@@ -323,9 +327,12 @@
         "description": "배경 설정",
         "percent_brightness": "명도 {opacity}%",
         "none": "없음",
+        "switch": "이 배경으로 복귀하다",
         "custom": "사용자 지정",
         "custom_button": "사용자 지정 배경 편집",
         "custom_prompt": "타일 URL 템플릿을 입력하세요. 올바른 토큰은 Z/X/Y scheme에 대해 {z}, {x}, {y}이고 quadtile scheme에 대해 {u}입니다.",
+        "fix_misalignment": "영상 오정렬 값을 조절하다",
+        "imagery_source_faq": "이 영상의 출처는 어딥니까?",
         "reset": "재설정",
         "minimap": {
             "description": "미니맵",
@@ -346,6 +353,7 @@
             "tooltip": "관심 있는 점"
         },
         "traffic_roads": {
+            "description": "교통도로",
             "tooltip": "고속도로, 거리 등"
         },
         "service_roads": {
@@ -517,6 +525,36 @@
         "relations": "# 관계\n\n관계는 다른 지물을 그룹화하는 OpenStreetMap에 있는 지물의 특수 유형입니다.\n예를 들어, 관계의 일반적인 두 유형은, 특정 프리웨이나 고속도로에 속하는 도로의\n부분을 그룹화하는 *경로 관계*와, 복잡한 지역(도넛처럼 여러 조각이나 구멍이 있는 것)을\n정의하는 여러 선을 그룹화하는 *다중 다각형*입니다.\n\n관계에 있는 지물의 그룹은 *구성원*이라고 부릅니다. 사이드바에서, 지물이\n구성원인 관계를 볼 수 있으며, 그것을 선택하려면 해당 관계를 클릭하세요.\n관계가 선택되면, 사이드바에 나열된 모든 구성원을 볼 수 있고 지도에\n강조됩니다.\n\n대부분의 경우, iD는 편집하는 동안 자동으로 관계를 유지하도록 다룰 것입니다.\n여러분이 알고 있어야 하는 중요한 것은 더 정확하게 다시 그리기 위해 도로의\n부분을 삭제한다면, 새 부분은 원래와 같은 관계의 구성원인지 확인해야 합니다.\n\n## 관계 편집하기\n\n관계를 편집하고 싶으면, 여기에 기초가 있습니다.\n\n관계에 지물을 추가하려면, 지물을 선택하고, 사이드바의 \"모든 관계\" 부분에\n있는 \"+\" 버튼을 클릭하고, 관계를 선택하거나 관계의 이름을 입력하세요.\n\n새 관계를 만드려면, 구성원이어야 할 첫 지물을 선택하고, 사이드바의\n\"모든 관계\" 부분에 있는 \"+\" 버튼을 클릭하고, \"새 관계...\"를 선택하세요.\n\n관계에서 지물을 제거하려면, 지물을 선택하고 제거하려는 관계 옆에 있는\n휴지통 버튼을 클릭하세요.\n\n\"병합\" 도구를 사용하여 구명으로 된 다중 다각형을 만들 수 있습니다. 두 지역(안쪽과\n바깥쪽)을 그리고, 그들 둘 다 선택하기 위해 Shift 키를 누른 채로 각각 클릭한 다음,\n\"병합\" (+) 버튼을 클릭하세요.\n"
     },
     "intro": {
+        "graph": {
+            "city_hall": "서라벌 시청",
+            "fire_department": "서라벌 소방서",
+            "memory_isle_park": "민속공원",
+            "riverwalk_trail": "강변 오솔길",
+            "w_michigan_ave": "강서대로",
+            "e_michigan_ave": "강동대로",
+            "spring_st": "희춘로",
+            "scidmore_park": "퇴계공원",
+            "petting_zoo": "퇴계 동물원",
+            "n_andrews_st": "세종북로",
+            "s_andrews_st": "세종남로",
+            "n_constantine_st": "고종북로",
+            "s_constantine_st": "고종남로",
+            "rocky_river": "암석강",
+            "railroad_dr": "철도길",
+            "conrail_rr": "남한철도",
+            "st_joseph_river": "원효강",
+            "n_main_st": "중앙북로",
+            "s_main_st": "중앙남로",
+            "water_st": "하천로",
+            "foster_st": "보양로",
+            "portage_river": "항해강",
+            "flower_st": "화초로",
+            "elm_st": "느릅길",
+            "walnut_st": "호두길",
+            "morris_ave": "율곡대로",
+            "east_st": "동방로",
+            "portage_ave": "항해대로"
+        },
         "navigation": {
             "title": "둘러보기",
             "drag": "주 지도 지역은 배경의 위에 OpenStreetMap 데이터를 보여줍니다. 어떤 웹 지도와 같이 드래그하고 스크롤해서 둘러볼 수 있습니다. **지도를 드래그하세요!**",
@@ -549,6 +587,41 @@
         }
     },
     "presets": {
+        "categories": {
+            "category-barrier": {
+                "name": "방벽 지물"
+            },
+            "category-building": {
+                "name": "건물 지물"
+            },
+            "category-golf": {
+                "name": "골프 지물"
+            },
+            "category-landuse": {
+                "name": "토지 이용 지물"
+            },
+            "category-path": {
+                "name": "경로 지물"
+            },
+            "category-rail": {
+                "name": "철로 지물"
+            },
+            "category-restriction": {
+                "name": "제한 지물"
+            },
+            "category-road": {
+                "name": "도로 지물"
+            },
+            "category-route": {
+                "name": "노선 지물"
+            },
+            "category-water-area": {
+                "name": "수역 지물"
+            },
+            "category-water-line": {
+                "name": "수역 지물"
+            }
+        },
         "fields": {
             "access": {
                 "label": "허가된 통행",
@@ -687,6 +760,9 @@
             "bicycle_parking": {
                 "label": "유형"
             },
+            "bin": {
+                "label": "쓰레기통"
+            },
             "boundary": {
                 "label": "유형"
             },
@@ -758,6 +834,9 @@
             "cuisine": {
                 "label": "요리 종류"
             },
+            "currency_multi": {
+                "label": "통용 통화"
+            },
             "cycleway": {
                 "label": "자전거 차선",
                 "options": {
@@ -770,7 +849,8 @@
                         "title": "없음"
                     },
                     "opposite": {
-                        "description": "일방 통행로에 양방향으로 이동하는 자전거 차선"
+                        "description": "일방 통행로에 양방향으로 이동하는 자전거 차선",
+                        "title": "역방향 통행 자전거 도로"
                     },
                     "track": {
                         "title": "자전거 트랙"
@@ -1611,9 +1691,6 @@
             },
             "barrier/cycle_barrier": {
                 "name": "자전거 방벽"
-            },
-            "barrier/ditch": {
-                "name": "구거"
             },
             "barrier/entrance": {
                 "name": "입구"

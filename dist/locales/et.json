@@ -205,7 +205,6 @@
     "loading_auth": "OpenStreetMap'iga ühendamine...",
     "commit": {
         "title": "Salvesta muudatused",
-        "description_placeholder": "Muudatuste lühikirjeldus",
         "message_label": "Muutuskogumi kommentaar",
         "upload_explanation": "Su salvestatavad muudatused on nähtaval kõikidel kaartidel mis kasutavad OpenStreetMap-i andmeid.",
         "upload_explanation_with_user": "Su kasutajana {user} salvestatavad muudatused on nähtaval kõikidel kaartidel, mis kasutavad OpenStreetMap-i andmeid.",
@@ -895,9 +894,6 @@
             },
             "barrier/city_wall": {
                 "name": "Linnamüür"
-            },
-            "barrier/ditch": {
-                "name": "Kraav"
             },
             "barrier/fence": {
                 "name": "Aed"

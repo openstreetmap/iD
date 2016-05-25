@@ -241,7 +241,7 @@
     },
     "commit": {
         "title": "儲存修改",
-        "description_placeholder": "簡要描述你的貢獻",
+        "description_placeholder": "你的貢獻摘要(必填)",
         "message_label": "編輯變動留言",
         "upload_explanation": "你的修改將會在所有使用OpenStreetMap資料的地圖上看到。",
         "upload_explanation_with_user": "你以 {user} 具名的修改將會在所有使用OpenStreetMap資料的地圖上看到。",
@@ -330,6 +330,7 @@
         "percent_brightness": "{opacity}%的亮度",
         "none": "無",
         "best_imagery": "這個地點已知最佳的影像來源",
+        "switch": "切換回此背景",
         "custom": "客製化",
         "custom_button": "編輯自訂的背景",
         "custom_prompt": "輸入地圖影像區塊的URL模版。以 Z/X/Y 方式存取區塊的伺服器，可在模版中使用{z}, {x}, {y}作參數，而以quadtile存取區塊的伺服器，則可使用{u}作參數。",
@@ -612,6 +613,9 @@
     },
     "presets": {
         "categories": {
+            "category-barrier": {
+                "name": "柵欄圖徵"
+            },
             "category-building": {
                 "name": "建築物圖徵"
             },
@@ -3964,6 +3968,10 @@
             "type/route/hiking": {
                 "name": "遠足路線",
                 "terms": "遠足路線"
+            },
+            "type/route/horse": {
+                "name": "騎馬路線",
+                "terms": "騎馬路線,騎乘路線"
             },
             "type/route/pipeline": {
                 "name": "管道路線",

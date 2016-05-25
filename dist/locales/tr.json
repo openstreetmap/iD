@@ -226,7 +226,6 @@
     },
     "commit": {
         "title": "Değişiklikleri kaydet",
-        "description_placeholder": "Katkı sağlayanlar hakkında kısa açıklama",
         "upload_explanation": "Yüklediğin değişiklikler OpenStreetMap verilerini kullanan bütün haritalarda görülebilecek. ",
         "upload_explanation_with_user": "{user} olarak yüklediğin değişiklikler OpenStreetMap verilerini kullanan bütün haritalarda görülebilecek. ",
         "save": "Kaydet",
@@ -1322,9 +1321,6 @@
             },
             "barrier/cycle_barrier": {
                 "name": "Bisiklet Bariyeri"
-            },
-            "barrier/ditch": {
-                "name": "Sulama kanalı"
             },
             "barrier/entrance": {
                 "name": "Giriş"

@@ -212,7 +212,6 @@
     },
     "commit": {
         "title": "حفظ التغييرات",
-        "description_placeholder": "وصف مختصر لمساهماتك",
         "message_label": "ملخص التغييرات التي قمت بها",
         "upload_explanation": "التغييرات التي قمت برفعها سوف تظهر على كل الخرائط التي تستخدم بيانات OpenStreetMap.",
         "upload_explanation_with_user": "التغييرات التي قمت برفعها كـ {user} سوف تظهر على كل الخرائط التي تستخدم بيانات OpenStreetMap.",
@@ -1336,10 +1335,6 @@
             "barrier/cycle_barrier": {
                 "name": "حاجز الدرجات الهوائية",
                 "terms": "حاجز دراجات هوائية"
-            },
-            "barrier/ditch": {
-                "name": "خندق",
-                "terms": "خندق, مصرف, منخر"
             },
             "barrier/entrance": {
                 "name": "مدخل",

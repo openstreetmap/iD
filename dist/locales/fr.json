@@ -241,7 +241,7 @@
     },
     "commit": {
         "title": "Sauvegarder vos modifications",
-        "description_placeholder": "Description succinte de vos contributions",
+        "description_placeholder": "Brève description de vos contributions (requis)",
         "message_label": "Commentaire de changeset",
         "upload_explanation": "Les modifications envoyées seront visibles sur toutes les cartes qui utilisent les données d'OpenStreetMap.",
         "upload_explanation_with_user": "Les modifications envoyées en tant que {user} seront visibles sur toutes les cartes qui utilisent les données d'OpenStreetMap.",
@@ -330,6 +330,7 @@
         "percent_brightness": "{opacity}% luminosité",
         "none": "Aucun",
         "best_imagery": "Meilleure source d'imagerie connue pour cet endroit",
+        "switch": "Revenir à cet arrière-plan",
         "custom": "Personnalisé",
         "custom_button": "Modifier le fond personnalisé",
         "custom_prompt": "Saisir un template d'URL de tuile. Les symboles sont {z}, {x}, {y} pour la structure Z/X/Y et {u} pour la balance des domaines.",
@@ -584,7 +585,7 @@
         },
         "areas": {
             "title": "Polygone",
-            "add": "Les zones sont utilisées pour montrer les forntières d'éleme,ts comme des lacs, batiments et des zones résidentielles. Elles peuvent aussi être utilisées pour cartographier plus en détail des élements que l'on peut cartographier comme des points. **Cliquer sur le {button} zone pour ajouter une nouvelle zone. ",
+            "add": "Les zones sont utilisées pour montrer les frontières d’éléments comme des lacs, bâtiments et des zones résidentielles. Elles peuvent aussi être utilisées pour cartographier plus en détail des éléments que l'on peut cartographier comme des points. **Cliquer sur le {button} zone pour ajouter une nouvelle zone. ",
             "corner": "Dessinez la zone en positionnant les noeuds qui forment la frontière de la zone. **Cliquer sur l'un des coins du terrain de jeux pour démarrer.  ",
             "place": "Dessinez le polygone en ajoutant des nœuds. Terminez le polygone en cliquant sur le nœud de départ. **Dessinez un polygone pour l'aire de jeu.**",
             "search": "**Rechercher '{name}'.**",
@@ -612,6 +613,9 @@
     },
     "presets": {
         "categories": {
+            "category-barrier": {
+                "name": "Éléments de barrières"
+            },
             "category-building": {
                 "name": "Éléments pour bâtiments"
             },
@@ -1998,8 +2002,8 @@
                 "terms": "Chicane vélos, Barrière vélos"
             },
             "barrier/ditch": {
-                "name": "Fossé",
-                "terms": "Fossé"
+                "name": "Tranchée",
+                "terms": "Tranchée,Cheminement,Retranchement,Boyau"
             },
             "barrier/entrance": {
                 "name": "Ouverture",
@@ -2630,7 +2634,7 @@
                 "terms": "Mémorial, Monument aux morts, statue, buste, stèle, plaque"
             },
             "historic/monument": {
-                "name": "Monument commémoratif",
+                "name": "Grand monument commémoratif",
                 "terms": "Grand mémorial"
             },
             "historic/ruins": {
@@ -3074,7 +3078,7 @@
                 "terms": "Source"
             },
             "natural/tree": {
-                "name": "Arbre remarquable",
+                "name": "Arbre",
                 "terms": "Arbre"
             },
             "natural/tree_row": {
@@ -3964,6 +3968,10 @@
             "type/route/hiking": {
                 "name": "Sentier pédestre",
                 "terms": "Sentier pédestre"
+            },
+            "type/route/horse": {
+                "name": "Itinéraire équestre",
+                "terms": "Trajet équestre"
             },
             "type/route/pipeline": {
                 "name": "Trajet de pipeline",

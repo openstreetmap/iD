@@ -240,7 +240,6 @@
     },
     "commit": {
         "title": "保存变更",
-        "description_placeholder": "简单说明你的贡献。",
         "message_label": "修改集合注释",
         "upload_explanation": "你的修改将会在所有使用OpenStreetMap的数据的地图上看得见。",
         "upload_explanation_with_user": "{user}，你的修改将会在所有使用OpenStreetMap数据的地图上展现。",
@@ -1856,10 +1855,6 @@
             "barrier/cycle_barrier": {
                 "name": "自行车路障",
                 "terms": "自行车,单车,路障"
-            },
-            "barrier/ditch": {
-                "name": "壕沟",
-                "terms": "沟坎,壕"
             },
             "barrier/entrance": {
                 "name": "入口",

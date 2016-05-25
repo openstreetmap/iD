@@ -241,7 +241,7 @@
     },
     "commit": {
         "title": "Aanpassingen Opslaan",
-        "description_placeholder": "Een korte omschrijving van je bijdragen",
+        "description_placeholder": "Een korte omschrijving van je bijdragen (verplicht)",
         "message_label": "Opmerking bij wijzigingen",
         "upload_explanation": "De aanpassingen die je uploadt worden zichtbaar op alle kaarten die de gegevens van OpenStreetMap gebruiken.",
         "upload_explanation_with_user": "De aanpassingen die je als {user} uploadt worden zichtbaar op alle kaarten die de gegevens van OpenStreetMap gebruiken.",
@@ -330,6 +330,7 @@
         "percent_brightness": "Helderheid: {opacity}%",
         "none": "Geen",
         "best_imagery": "Beste bekende afbeeldingsbron voor deze locatie",
+        "switch": "Selecteer terug deze achtergrond",
         "custom": "Aangepast",
         "custom_button": "Aangepaste achtergrond aanpassen",
         "custom_prompt": "Voeg een tegel-URL-sjabloon toe. Geldige placeholders zijn {z}, {x}, {y} voor het Z/X/Y-schema en {u} voor het quadtile-schema.",
@@ -612,6 +613,9 @@
     },
     "presets": {
         "categories": {
+            "category-barrier": {
+                "name": "Afscheidingsobjecten"
+            },
             "category-building": {
                 "name": "Gebouwobjecten"
             },
@@ -1185,7 +1189,7 @@
                 "label": "Openingstijden"
             },
             "operator": {
-                "label": "Uitbatend bedrijf"
+                "label": "Uitbatende organizatie"
             },
             "par": {
                 "label": "Par",
@@ -1760,15 +1764,16 @@
                 "terms": "dancing,bar,uitgaan,disco"
             },
             "amenity/parking": {
-                "name": "Parking",
-                "terms": "parkeerplaats"
+                "name": "Autoparking",
+                "terms": "parking,parkeerplaats,garage,parkeergarage,parkeergebouw"
             },
             "amenity/parking_entrance": {
                 "name": "Ingang/Uitgang van Parkingcomplex",
                 "terms": "inrit,uitrit"
             },
             "amenity/parking_space": {
-                "name": "Parkeerplaats"
+                "name": "Parkeerplaats binnen parkeergelegenheid",
+                "terms": "individuele parkeerplaats"
             },
             "amenity/pharmacy": {
                 "name": "Apotheek",
@@ -1979,8 +1984,8 @@
                 "terms": "fiets,fietshek,barrière,veiligheid,afsluiting,hekjes"
             },
             "barrier/ditch": {
-                "name": "Gracht",
-                "terms": "gracht,sloot,water"
+                "name": "Droge gracht",
+                "terms": "loopgraaf,loopgraven"
             },
             "barrier/entrance": {
                 "name": "Doorgang",
@@ -2484,7 +2489,8 @@
                 "name": "Hulpdienst toegangsweg"
             },
             "highway/service/parking_aisle": {
-                "name": "Rijbaan in parkeergelegenheid"
+                "name": "Rijbaan in parkeergelegenheid",
+                "terms": "parkingweg,parkingas"
             },
             "highway/services": {
                 "name": "Stopplaats aan Autoweg met Veel Faciliteiten",
@@ -3721,7 +3727,10 @@
                 "name": "Wandelroute"
             },
             "type/route/hiking": {
-                "name": "Wandelpad"
+                "name": "Wandelroute"
+            },
+            "type/route/horse": {
+                "name": "Ruiterroute"
             },
             "type/route/pipeline": {
                 "name": "Pijpleidingstraject"

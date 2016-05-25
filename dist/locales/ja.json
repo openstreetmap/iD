@@ -241,7 +241,7 @@
     },
     "commit": {
         "title": "編集結果を保存",
-        "description_placeholder": "貢献のための簡単な解説",
+        "description_placeholder": "投稿内容についての短い説明（必須）",
         "message_label": "変更セットコメント",
         "upload_explanation": "あなたがアップロードした編集内容は、OpenStreetMapを利用しているすべてのユーザが閲覧できるようになります。",
         "upload_explanation_with_user": "編集した内容を {user} アカウントでアップロードし、OpenStreetMapを利用しているすべてのユーザが閲覧できるようにします。",
@@ -253,7 +253,9 @@
         "deleted": "削除した地物",
         "created": "作成した地物",
         "about_changeset_comments": "変更セットのコメントについて",
-        "about_changeset_comments_link": "//wiki.openstreetmap.org/wiki/Good_changeset_comments"
+        "about_changeset_comments_link": "//wiki.openstreetmap.org/wiki/Good_changeset_comments",
+        "google_warning": "コメントの中で Google に触れていますが、 Google マップからのコピーは絶対に禁止です。",
+        "google_warning_link": "http://www.openstreetmap.org/copyright"
     },
     "contributors": {
         "list": "{users} による編集",
@@ -313,6 +315,7 @@
             "yes": "はい",
             "no": "いいえ"
         },
+        "add": "追加",
         "none": "なし",
         "node": "ノード",
         "way": "ウェイ",
@@ -326,11 +329,14 @@
         "percent_brightness": "明度 {opacity}%",
         "none": "なし",
         "best_imagery": "表示中の場所に最適な航空写真",
+        "switch": "背景に切り替え",
         "custom": "カスタム",
         "custom_button": "カスタム背景の編集",
         "custom_prompt": "タイルURLのテンプレートを入力してください。有効なトークンは、Z/X/Y方式ならば{z}, {x} , {y}、quadtile方式ならば{u}です。",
+        "fix_misalignment": "画像の位置を調整",
         "imagery_source_faq": "この写真の出典元",
         "reset": "設定リセット",
+        "offset": "画像の位置を調整するには、灰色のエリアのどこかをドラッグするか、ずれ幅をメートル単位で入力するかしてください。",
         "minimap": {
             "description": "ミニマップ",
             "tooltip": "現在表示中の周辺をズームアウトして表示"
@@ -774,6 +780,9 @@
             "bicycle_parking": {
                 "label": "種類"
             },
+            "bin": {
+                "label": "ゴミ箱"
+            },
             "boundary": {
                 "label": "タイプ"
             },
@@ -844,6 +853,9 @@
             },
             "cuisine": {
                 "label": "料理の種類"
+            },
+            "currency_multi": {
+                "label": "通貨の種類"
             },
             "cycleway": {
                 "label": "自転車通行帯",
@@ -947,6 +959,9 @@
             },
             "fuel": {
                 "label": "ガソリンスタンド"
+            },
+            "fuel_multi": {
+                "label": "燃料の種類"
             },
             "gauge": {
                 "label": "軌間"
@@ -1190,6 +1205,9 @@
                     "underground": "地下"
                 }
             },
+            "payment_multi": {
+                "label": "支払い方法"
+            },
             "phone": {
                 "label": "電話番号",
                 "placeholder": "+31 42 123 4567"
@@ -1246,6 +1264,9 @@
             },
             "railway": {
                 "label": "路線種別"
+            },
+            "recycling_accepts": {
+                "label": "リサイクル可能な素材"
             },
             "ref": {
                 "label": "管理番号"
@@ -1381,6 +1402,9 @@
                     "tunnel": "トンネル"
                 },
                 "placeholder": "不明"
+            },
+            "studio": {
+                "label": "スタジオの種類"
             },
             "substation": {
                 "label": "タイプ"
@@ -1947,10 +1971,6 @@
             "barrier/cycle_barrier": {
                 "name": "自転車止め",
                 "terms": "自転車止め"
-            },
-            "barrier/ditch": {
-                "name": "堀",
-                "terms": "堀"
             },
             "barrier/entrance": {
                 "name": "出入口",
@@ -3402,6 +3422,9 @@
             "shop/clothes": {
                 "name": "衣料品店",
                 "terms": "衣料品店, 洋服店, 呉服店"
+            },
+            "shop/coffee": {
+                "name": "コーヒー豆販売店"
             },
             "shop/computer": {
                 "name": "コンピューター店",

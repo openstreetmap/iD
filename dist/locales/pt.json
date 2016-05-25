@@ -241,7 +241,6 @@
     },
     "commit": {
         "title": "Gravar Alterações",
-        "description_placeholder": "Breve descrição das suas alterações",
         "message_label": "Descrição das alterações",
         "upload_explanation": "As alterações que enviar ficarão visíveis em todos os mapas que usem dados do OpenStreetMap.",
         "upload_explanation_with_user": "As alterações que enviar como {user} ficarão visíveis em todos os mapas que usem dados do OpenStreetMap.",
@@ -1991,10 +1990,6 @@
             "barrier/cycle_barrier": {
                 "name": "Barreira de bicicletas",
                 "terms": "Bicicleta"
-            },
-            "barrier/ditch": {
-                "name": "Fosso sem água",
-                "terms": "Sem Água, Seca, Vala sem Água, Vala Seca, Trincheira sem Água, Trincheira  Seca"
             },
             "barrier/entrance": {
                 "name": "Entrada",

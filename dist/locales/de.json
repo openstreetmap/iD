@@ -241,7 +241,7 @@
     },
     "commit": {
         "title": "Änderungen speichern",
-        "description_placeholder": "Eine kurze Beschreibung deiner Beiträge",
+        "description_placeholder": "Eine kurze Beschreibung deiner Beiträge (erforderlich)",
         "message_label": "Änderungssatzkommentar",
         "upload_explanation": "Änderungen, die du hoch lädst, werden auf allen Karten sichtbar, die OpenStreetMap nutzen.",
         "upload_explanation_with_user": "Änderungen, die du als {user} hoch lädst, werden auf allen Karten sichtbar, die OpenStreetMap nutzen.",
@@ -330,6 +330,7 @@
         "percent_brightness": "{opacity}% Helligkeit",
         "none": "Kein Hintergrund",
         "best_imagery": "Beste bekannte Bildmaterialquelle für diesen Ort",
+        "switch": "Zu diesem Hintergrund zurück wechseln",
         "custom": "Benutzerdefiniert",
         "custom_button": "Benutzerdefinierten Hintergrund bearbeiten",
         "custom_prompt": "Gib eine Vorlage für eine Kachel-URL ein. Gültige Platzhalter sind {z}, {x}, {y} für das Z/X/Y Schema und {u} für das „quadtile“-Schema.",
@@ -612,6 +613,9 @@
     },
     "presets": {
         "categories": {
+            "category-barrier": {
+                "name": "Barriere Objekte"
+            },
             "category-building": {
                 "name": "Gebäudefunktionen"
             },
@@ -622,7 +626,7 @@
                 "name": "Flächennutzungen"
             },
             "category-path": {
-                "name": "Pfadtypen"
+                "name": "Wegtypen"
             },
             "category-rail": {
                 "name": "Schienentypen"
@@ -1999,7 +2003,7 @@
             },
             "barrier/ditch": {
                 "name": "Graben",
-                "terms": "Graben, Straßengraben"
+                "terms": "Graben, Straßengraben, Rinne"
             },
             "barrier/entrance": {
                 "name": "Eingang",
@@ -3254,15 +3258,15 @@
                 "terms": "Stromgenerator"
             },
             "power/line": {
-                "name": "Hauptstromleitung",
+                "name": "Hochspannungsleitung",
                 "terms": "Stromleitung"
             },
             "power/minor_line": {
-                "name": "Nebenstromleitung",
+                "name": "Mittel-/Niederspannungsleitung",
                 "terms": "Niederspannungsleitung, Mittelspannungsleitung, Freileitung, Niederspannungsfreileitung, Mittelspannungsfreileitung"
             },
             "power/pole": {
-                "name": "Nebenstrommast",
+                "name": "Strommast",
                 "terms": "Strommast, Stromleitungsmast"
             },
             "power/sub_station": {
@@ -3274,12 +3278,12 @@
                 "terms": "Umspannwerk, Transformatorenstation, Schaltanlage"
             },
             "power/tower": {
-                "name": "Hauptstrommast",
-                "terms": "Hochspannungsmast"
+                "name": "Hochspannungsmast",
+                "terms": "Hauptstrommast"
             },
             "power/transformer": {
                 "name": "Transformator",
-                "terms": "Transformator"
+                "terms": "Transformator, Umspannwerk"
             },
             "public_transport/platform": {
                 "name": "Bahn-/Bussteig ",
@@ -3667,7 +3671,7 @@
             },
             "shop/optician": {
                 "name": "Optiker",
-                "terms": "Optiker"
+                "terms": "Brillengeschäft"
             },
             "shop/organic": {
                 "name": "Bioladen",
@@ -3964,6 +3968,10 @@
             "type/route/hiking": {
                 "name": "Wanderroute",
                 "terms": "Wanderweg, Fernwanderweg, Pilgerweg, Trekking"
+            },
+            "type/route/horse": {
+                "name": "Reitroute",
+                "terms": "Reitwanderroute, Reitroute, Wanderreitroute"
             },
             "type/route/pipeline": {
                 "name": "Pipelinenetz",
