@@ -1,5 +1,26 @@
 :warning: = Breaking change, may affect downstream projects or sites that embed iD.
 
+## 1.9.5
+##### May 25, 2016
+* Clean translated combo value when comparing to display value (#3129)
+* Change color of Save button as user edits increase (#2749, thanks @tanerochris)
+* Migrate to lodash v4 (#3107, thanks @kepta)
+* Don't try to snap new ways to offscreen areas (#3114)
+* Prevent keypress handlers from being called extra times (#3111)
+* Add spacebar click for efficient way drawing (#2784, thanks @brandonreavis)
+* Rename `barrier=ditch` preset to "Trench", leave `waterway=ditch` preset as "Ditch"
+* Use prison icon for gate-like barriers, roadblock icon for other barriers
+* Add Barrier category: wall, fence, ditch (#2344, thanks @Wikiwide)
+* Add slight fill to the area icon (#3109)
+* Localize phone placeholder for country being edited (#3084, thanks @dobratzp)
+* Clicking on scale bar will toggle units from imperial/metric (#2351)
+* Use ⌘B for quick background switching, add tooltip, style (#2854, thanks @RoPP)
+* Fix greediness of autocompletion (#3077, #3106, thanks @kepta)
+* Add preset for `route=horse` relations (#3057, thanks @kepta)
+* Keep "move" cursor while adjusting imagery offset (#3101)
+* Move generic Building preset to top of Building category list (#3102)
+* Update Wikipedia list (#3098, thanks @1ec5)
+
 ## 1.9.4
 ##### May 3, 2016
 * Fix bug causing save button to remain disabled even when changeset comment is entered (#3096)
