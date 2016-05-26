@@ -1045,7 +1045,7 @@ en:
         # 'width=*'
         label: Width (Meters)
       wikipedia:
-        # 'wikipedia=*'
+        # 'wikipedia=*, wikidata=*'
         label: Wikipedia
     presets:
       address:

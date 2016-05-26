@@ -67,6 +67,7 @@ dist/iD.js: \
 	js/id/services/mapillary.js \
 	js/id/services/nominatim.js \
 	js/id/services/taginfo.js \
+	js/id/services/wikidata.js \
 	js/id/services/wikipedia.js \
 	js/id/util.js \
 	js/id/util/session_mutex.js \

@@ -4,7 +4,7 @@ iD.ui.preset.wikipedia = function(field, context) {
         wikidata = iD.services.wikidata(),
         link, entity, lang, title;
 
-    function i(selection) {
+    function wiki(selection) {
         var langcombo = d3.combobox()
             .fetcher(function(value, cb) {
                 var v = value.toLowerCase();
@@ -109,22 +109,37 @@ iD.ui.preset.wikipedia = function(field, context) {
             title.value(value);
         }
 
-        syncTags[field.key] = value ? language()[2] + ':' + value : undefined;
+        syncTags.wikipedia = value ? language()[2] + ':' + value : undefined;
+        syncTags.wikidata = undefined;
+
         dispatch.change(syncTags);
 
+
+        // attempt asynchronous update of wikidata tag..
         if (value && language()[2]) {
-            wikidata.itemsByTitle(language()[2], value, function (title, entities) {
-                var qids = entities && Object.keys(entities),
-                    asyncTags = {};
-                asyncTags.wikidata = qids && _.find(qids, function (id) {
+            var initGraph = context.graph();
+            wikidata.itemsByTitle(language()[2], value, function (title, data) {
+                var qids = data && Object.keys(data),
+                    currGraph = context.graph();
+
+                // only do this if graph is unchanged..
+                if (initGraph !== currGraph) return;
+
+                var currEntity = context.entity(entity.id),
+                    currTags = _.clone(currEntity.tags);
+
+                currTags.wikidata = qids && _.find(qids, function (id) {
                     return id.match(/^Q\d+$/);
                 });
-                dispatch.change(asyncTags);
+
+                var annotation = t('operations.change_tags.annotation');
+                context.overwrite(iD.actions.ChangeTags(currEntity.id, currTags), annotation);
+                dispatch.change(currTags);
             });
         }
     }
 
-    i.tags = function(tags) {
+    wiki.tags = function(tags) {
         var value = tags[field.key] || '',
             m = value.match(/([^:]+):([^#]+)(?:#(.+))?/),
             l = m && _.find(iD.data.wikipedia, function(d) { return m[1] === d[2]; }),
@@ -143,7 +158,7 @@ iD.ui.preset.wikipedia = function(field, context) {
                 }
             }
             link.attr('href', 'https://' + m[1] + '.wikipedia.org/wiki/' +
-                      m[2].replace(/ /g, '_') + (anchor ? ('#' + anchor) : ''));
+                m[2].replace(/ /g, '_') + (anchor ? ('#' + anchor) : ''));
 
         // unrecognized value format
         } else {
@@ -155,13 +170,15 @@ iD.ui.preset.wikipedia = function(field, context) {
         }
     };
 
-    i.entity = function(_) {
+    wiki.entity = function(_) {
+        if (!arguments.length) return entity;
         entity = _;
+        return wiki;
     };
 
-    i.focus = function() {
+    wiki.focus = function() {
         title.node().focus();
     };
 
-    return d3.rebind(i, dispatch, 'on');
+    return d3.rebind(wiki, dispatch, 'on');
 };

@@ -1,13 +1,16 @@
 describe('iD.ui.preset.wikipedia', function() {
-    var selection, field;
+    var entity, context, selection, field, entity;
 
     beforeEach(function() {
+        entity = iD.Node({id: 'n12345'});
+        context = iD();
+        context.history().merge([entity]);
         selection = d3.select(document.createElement('div'));
-        field = iD().presets(iD.data.presets).presets().field('wikipedia');
+        field = context.presets(iD.data.presets).presets().field('wikipedia');
     });
 
     it('recognizes lang:title format', function() {
-        var wikipedia = iD.ui.preset.wikipedia(field, {});
+        var wikipedia = iD.ui.preset.wikipedia(field, context).entity(entity);
         selection.call(wikipedia);
         wikipedia.tags({wikipedia: 'en:Title'});
         expect(selection.selectAll('.wiki-lang').value()).to.equal('English');
@@ -16,11 +19,11 @@ describe('iD.ui.preset.wikipedia', function() {
     });
 
     it('sets a new value', function() {
-        var wikipedia = iD.ui.preset.wikipedia(field, {});
+        var wikipedia = iD.ui.preset.wikipedia(field, context).entity(entity);
         selection.call(wikipedia);
 
         wikipedia.on('change', function(tags) {
-            expect(tags).to.eql({wikipedia: undefined});
+            expect(tags).to.eql({wikipedia: undefined, wikidata: undefined});
         });
 
         selection.selectAll('.wiki-lang').value('Deutsch');
@@ -37,7 +40,7 @@ describe('iD.ui.preset.wikipedia', function() {
     });
 
     it('recognizes pasted URLs', function() {
-        var wikipedia = iD.ui.preset.wikipedia(field, {});
+        var wikipedia = iD.ui.preset.wikipedia(field, context).entity(entity);
         selection.call(wikipedia);
 
         selection.selectAll('.wiki-title').value('http://de.wikipedia.org/wiki/Title');
@@ -48,10 +51,10 @@ describe('iD.ui.preset.wikipedia', function() {
     });
 
     it('preserves existing language', function() {
-        selection.call(iD.ui.preset.wikipedia(field, {}));
+        selection.call(iD.ui.preset.wikipedia(field, context).entity(entity));
         selection.selectAll('.wiki-lang').value('Deutsch');
 
-        var wikipedia = iD.ui.preset.wikipedia(field, {});
+        var wikipedia = iD.ui.preset.wikipedia(field, context).entity(entity);
         selection.call(wikipedia);
         wikipedia.tags({});
 
