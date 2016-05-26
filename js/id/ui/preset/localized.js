@@ -4,7 +4,7 @@ iD.ui.preset.localized = function(field, context) {
         input, localizedInputs, wikiTitles,
         entity;
 
-    function i(selection) {
+    function localized(selection) {
         input = selection.selectAll('.localized-main')
             .data([0]);
 
@@ -203,7 +203,7 @@ iD.ui.preset.localized = function(field, context) {
             .value(function(d) { return d.value; });
     }
 
-    i.tags = function(tags) {
+    localized.tags = function(tags) {
         // Fetch translations from wikipedia
         if (tags.wikipedia && !wikiTitles) {
             wikiTitles = {};
@@ -228,13 +228,15 @@ iD.ui.preset.localized = function(field, context) {
         localizedInputs.call(render, postfixed.reverse());
     };
 
-    i.focus = function() {
+    localized.focus = function() {
         input.node().focus();
     };
 
-    i.entity = function(_) {
+    localized.entity = function(_) {
+        if (!arguments.length) return entity;
         entity = _;
+        return localized;
     };
 
-    return d3.rebind(i, dispatch, 'on');
+    return d3.rebind(localized, dispatch, 'on');
 };

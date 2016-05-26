@@ -2,7 +2,7 @@ iD.ui.preset.textarea = function(field) {
     var dispatch = d3.dispatch('change'),
         input;
 
-    function i(selection) {
+    function textarea(selection) {
         input = selection.selectAll('textarea')
             .data([0]);
 
@@ -25,13 +25,13 @@ iD.ui.preset.textarea = function(field) {
         };
     }
 
-    i.tags = function(tags) {
+    textarea.tags = function(tags) {
         input.value(tags[field.key] || '');
     };
 
-    i.focus = function() {
+    textarea.focus = function() {
         input.node().focus();
     };
 
-    return d3.rebind(i, dispatch, 'on');
+    return d3.rebind(textarea, dispatch, 'on');
 };

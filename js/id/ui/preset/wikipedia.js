@@ -1,9 +1,10 @@
 iD.ui.preset.wikipedia = function(field, context) {
     var dispatch = d3.dispatch('change'),
         wikipedia = iD.services.wikipedia(),
+        wikidata = iD.services.wikidata(),
         link, entity, lang, title;
 
-    function i(selection) {
+    function wiki(selection) {
         var langcombo = d3.combobox()
             .fetcher(function(value, cb) {
                 var v = value.toLowerCase();
@@ -54,7 +55,7 @@ iD.ui.preset.wikipedia = function(field, context) {
 
         title
             .call(titlecombo)
-            .on('blur', change)
+            .on('blur', blur)
             .on('change', change);
 
         link = selection.selectAll('a.wiki-link')
@@ -81,14 +82,19 @@ iD.ui.preset.wikipedia = function(field, context) {
 
     function changeLang() {
         lang.value(language()[1]);
-        change();
+        change(true);
     }
 
-    function change() {
+    function blur() {
+        change(true);
+    }
+
+    function change(skipWikidata) {
         var value = title.value(),
             m = value.match(/https?:\/\/([-a-z]+)\.wikipedia\.org\/(?:wiki|\1-[-a-z]+)\/([^#]+)(?:#(.+))?/),
             l = m && _.find(iD.data.wikipedia, function(d) { return m[1] === d[2]; }),
-            anchor;
+            anchor,
+            syncTags = {};
 
         if (l) {
             // Normalize title http://www.mediawiki.org/wiki/API:Query#Title_normalization
@@ -107,12 +113,47 @@ iD.ui.preset.wikipedia = function(field, context) {
             title.value(value);
         }
 
-        var t = {};
-        t[field.key] = value ? language()[2] + ':' + value : undefined;
-        dispatch.change(t);
+        syncTags.wikipedia = value ? language()[2] + ':' + value : undefined;
+        if (!skipWikidata) {
+            syncTags.wikidata = undefined;
+        }
+
+        dispatch.change(syncTags);
+
+
+        if (skipWikidata || !value || !language()[2]) return;
+
+        // attempt asynchronous update of wikidata tag..
+        var initEntityId = entity.id,
+            initWikipedia = context.entity(initEntityId).tags.wikipedia;
+
+        wikidata.itemsByTitle(language()[2], value, function (title, data) {
+            // 1. most recent change was a tag change
+            var annotation = t('operations.change_tags.annotation'),
+                currAnnotation = context.history().undoAnnotation();
+            if (currAnnotation !== annotation) return;
+
+            // 2. same entity exists and still selected
+            var selectedIds = context.selectedIDs(),
+                currEntityId = selectedIds.length > 0 && selectedIds[0];
+            if (currEntityId !== initEntityId) return;
+
+            // 3. wikipedia value has not changed
+            var currTags = _.clone(context.entity(currEntityId).tags),
+                qids = data && Object.keys(data);
+            if (initWikipedia !== currTags.wikipedia) return;
+
+            // ok to coalesce the update of wikidata tag into the previous tag change
+            currTags.wikidata = qids && _.find(qids, function (id) {
+                return id.match(/^Q\d+$/);
+            });
+
+            context.overwrite(iD.actions.ChangeTags(currEntityId, currTags), annotation);
+            dispatch.change(currTags);
+        });
     }
 
-    i.tags = function(tags) {
+    wiki.tags = function(tags) {
         var value = tags[field.key] || '',
             m = value.match(/([^:]+):([^#]+)(?:#(.+))?/),
             l = m && _.find(iD.data.wikipedia, function(d) { return m[1] === d[2]; }),
@@ -131,7 +172,7 @@ iD.ui.preset.wikipedia = function(field, context) {
                 }
             }
             link.attr('href', 'https://' + m[1] + '.wikipedia.org/wiki/' +
-                      m[2].replace(/ /g, '_') + (anchor ? ('#' + anchor) : ''));
+                m[2].replace(/ /g, '_') + (anchor ? ('#' + anchor) : ''));
 
         // unrecognized value format
         } else {
@@ -143,13 +184,15 @@ iD.ui.preset.wikipedia = function(field, context) {
         }
     };
 
-    i.entity = function(_) {
+    wiki.entity = function(_) {
+        if (!arguments.length) return entity;
         entity = _;
+        return wiki;
     };
 
-    i.focus = function() {
+    wiki.focus = function() {
         title.node().focus();
     };
 
-    return d3.rebind(i, dispatch, 'on');
+    return d3.rebind(wiki, dispatch, 'on');
 };
