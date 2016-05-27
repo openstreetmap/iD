@@ -11,6 +11,7 @@ iD.Map = function(context) {
         redrawEnabled = true,
         transformStart,
         transformed = false,
+        easing = false,
         minzoom = 0,
         drawLayers = iD.svg.Layers(projection, context),
         drawPoints = iD.svg.Points(projection, context),
@@ -110,7 +111,9 @@ iD.Map = function(context) {
         drawLabels.supersurface(supersurface);
     }
 
-    function pxCenter() { return [dimensions[0] / 2, dimensions[1] / 2]; }
+    function pxCenter() {
+        return [dimensions[0] / 2, dimensions[1] / 2];
+    }
 
     function drawVector(difference, extent) {
         var graph = context.graph(),
@@ -420,20 +423,51 @@ iD.Map = function(context) {
         return redraw();
     };
 
-    map.centerEase = function(loc) {
-        var from = map.center().slice(),
-            t = 0,
-            stop;
+    map.centerEase = function(loc2, duration) {
+        duration = duration || 250;
 
         surface.one('mousedown.ease', function() {
-            stop = true;
+            map.cancelEase();
         });
 
+        if (easing) {
+            map.cancelEase();
+        }
+
+        var t1 = Date.now(),
+            t2 = t1 + duration,
+            loc1 = map.center(),
+            ease = d3.ease('cubic-in-out');
+
+        easing = true;
+
         d3.timer(function() {
-            if (stop) return true;
-            map.center(iD.geo.interp(from, loc, (t += 1) / 10));
-            return t === 10;
-        }, 20);
+            if (!easing) return true;  // cancelled ease
+
+            var tNow = Date.now();
+            if (tNow > t2) {
+                tNow = t2;
+                easing = false;
+            }
+
+            var locNow = iD.geo.interp(loc1, loc2, ease((tNow - t1) / duration));
+            setCenter(locNow);
+
+            d3.event = {
+                scale: zoom.scale(),
+                translate: zoom.translate()
+            };
+
+            zoomPan();
+            return !easing;
+        });
+
+        return map;
+    };
+
+    map.cancelEase = function() {
+        easing = false;
+        d3.timer.flush();
         return map;
     };
 
