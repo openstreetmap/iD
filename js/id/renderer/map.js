@@ -249,8 +249,7 @@ iD.Map = function(context) {
 
     var timeoutId;
     function queueRedraw() {
-        clearTimeout(timeoutId);
-        timeoutId = setTimeout(function() { redraw(); }, 300);
+        timeoutId = setTimeout(function() { redraw(); }, 750);
     }
 
     function pointLocation(p) {
