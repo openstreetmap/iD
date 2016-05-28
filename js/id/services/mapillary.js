@@ -267,11 +267,15 @@ iD.services.mapillary = function() {
         if (iD.services.mapillary) {
             iD.services.mapillary.thumb = null;
         }
+
         d3.select('#content').selectAll('.mapillary-image')
             .classed('hidden', true);
+
         d3.select('#content').selectAll('.mly-wrapper')
             .classed('active', false);
 
+        d3.selectAll('.layer-mapillary-images .viewfield-group, .layer-mapillary-signs .icon-sign')
+            .classed('selected', false);
     };
 
     mapillary.killThumbnail = function() {

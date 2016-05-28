@@ -158,34 +158,21 @@ iD.svg.MapillaryImages = function(projection, context, dispatch) {
             .append('g')
             .attr('class', 'layer-mapillary-images')
             .style('display', enabled ? 'block' : 'none')
-            .on('click', function() {   // deselect/select
+            .on('click', function() {
                 var mapillary = getMapillary();
                 if (!mapillary) return;
+
                 var d = d3.event.target.__data__,
                     thumb = mapillary.selectedThumbnail();
-                if (thumb && thumb.key === d.key) {
-                    removeThumbnail();
-                } else if (_mlyLoading) {
+
+                if (thumb && thumb.key === d.key) return;
+
+                if (_mlyLoading) {
                     showLoading(d);
                 } else {
                     mapillary.selectedThumbnail(d);
                     context.map().centerEase(d.loc);
                     showThumbnail(d, true);
-                }
-            })
-            .on('mouseover', function() {
-                var mapillary = getMapillary();
-                if (!mapillary) return;
-                showThumbnail(d3.event.target.__data__);
-            })
-            .on('mouseout', function() {
-                var mapillary = getMapillary();
-                if (!mapillary) return;
-                var thumb = mapillary.selectedThumbnail();
-                if (thumb) {
-                    showThumbnail(thumb, true);
-                } else {
-                    removeThumbnail();
                 }
             });
 

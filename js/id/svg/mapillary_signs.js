@@ -84,28 +84,16 @@ iD.svg.MapillarySigns = function(projection, context, dispatch) {
             .html(mapillary.signHTML);
 
         enter
-            .on('click', function(d) {   // deselect/select
+            .on('click', function(d) {
                 var mapillary = getMapillary();
                 if (!mapillary) return;
+
                 var thumb = mapillary.selectedThumbnail();
-                if (thumb && thumb.key === d.key) {
-                    hideThumbnail();
-                } else {
-                    mapillary.selectedThumbnail(d);
-                    context.map().centerEase(d.loc);
-                    showThumbnail(d, true);
-                }
-            })
-            .on('mouseover', showThumbnail)
-            .on('mouseout', function() {
-                var mapillary = getMapillary();
-                if (!mapillary) return;
-                var thumb = mapillary.selectedThumbnail();
-                if (thumb) {
-                    showThumbnail(thumb, true);
-                } else {
-                    hideThumbnail();
-                }
+                if (thumb && thumb.key === d.key) return;
+
+                mapillary.selectedThumbnail(d);
+                context.map().centerEase(d.loc);
+                showThumbnail(d, true);
             });
 
         // Exit
