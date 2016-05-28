@@ -25,9 +25,7 @@ iD.svg.MapillarySigns = function(projection, context, dispatch) {
         if (!mapillary) return;
 
         var thumb = mapillary.selectedThumbnail(),
-            posX = projection(image.loc)[0],
-            width = layer.dimensions()[0],
-            position = (posX < width / 2) ? 'right' : 'left';
+            position = 'left';  // or 'right'
 
         if (thumb) {
             d3.selectAll('.layer-mapillary-images .viewfield-group, .layer-mapillary-signs .icon-sign')
