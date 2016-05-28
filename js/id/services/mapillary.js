@@ -202,65 +202,47 @@ iD.services.mapillary = function() {
         var detectionPackage = d.signs[0].package,
             type = d.signs[0].type,
             country = detectionPackage.split('_')[1];
+
         return iD.services.mapillary.sign_defs[country][type];
     };
 
-    mapillary.showThumbnail = function(imageKey, position, interactive) {
+    mapillary.showThumbnail = function(imageKey) {
         if (!imageKey) return;
 
-        var positionClass = {
-            'ar': (position !== 'left'),
-            'al': (position === 'left')
-        };
-
-        var thumbnail = d3.select('#content').selectAll('.mapillary-image')
+        var thumbnail = d3.select('#content').selectAll('.mapillary-wrap')
             .data([0]);
 
         // Enter
         var enter = thumbnail.enter().append('div')
-            .attr('class', 'mapillary-image ar');
+            .attr('class', 'mapillary-wrap al');   // 'al'=left,  'ar'=right
 
         enter.append('button')
             .attr('class', 'thumb-hide')
-            .on('click', function () {
-                mapillary.hideThumbnail();
-            })
+            .on('click', function () { mapillary.hideThumbnail(); })
             .append('div')
             .call(iD.svg.Icon('#icon-close'));
 
-        enter.append('img');
-
         enter.append('div')
-            .attr('class', 'mly-wrapper inactive')
+            .attr('class', 'mly-wrapper active')
             .attr('id', 'mly');
 
-
         // Update
-        thumbnail.selectAll('img')
-            .attr('src', urlThumb + imageKey + '/thumb-320.jpg')
-            .classed('active', !interactive);
+        thumbnail
+            .classed('hidden', false)
+            .selectAll('.mly-wrapper')
+            .attr('class', 'active');
 
-        thumbnail.selectAll('.mly-wrapper')
-          .classed('active', interactive);
-
-        if (position) {
-            thumbnail.classed(positionClass);
-        }
-
-        if(!iD.services.mapillary.viewer) {
+        if (!iD.services.mapillary.viewer) {
             iD.services.mapillary.viewer = new Mapillary.Viewer('mly', clientId, imageKey, {
-                'imagePlane': false,
-                'image': true,
-                'cover': false,
-                'debug': false
+                baseImageSize: 320,
+                imagePlane: false,
+                cover: false,
+                debug: false
             });
         }
-        if (interactive) {
-            iD.services.mapillary.viewer.moveToKey(imageKey);
-        }
 
-        thumbnail
-            .classed('hidden', false);
+        iD.services.mapillary.viewer.moveToKey(imageKey);
+
     };
 
     mapillary.hideThumbnail = function() {
@@ -268,7 +250,7 @@ iD.services.mapillary = function() {
             iD.services.mapillary.thumb = null;
         }
 
-        d3.select('#content').selectAll('.mapillary-image')
+        d3.select('#content').selectAll('.mapillary-wrap')
             .classed('hidden', true);
 
         d3.select('#content').selectAll('.mly-wrapper')
@@ -283,7 +265,7 @@ iD.services.mapillary = function() {
             iD.services.mapillary.thumb = null;
             iD.services.mapillary.viewer = null;
         }
-        d3.select('#content').selectAll('.mapillary-image')
+        d3.select('#content').selectAll('.mapillary-wrap')
             .remove();
     };
 

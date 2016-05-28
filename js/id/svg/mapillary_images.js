@@ -28,21 +28,19 @@ iD.svg.MapillaryImages = function(projection, context, dispatch) {
             .classed('loading', function(d) { return d.key === image.key; });
     }
 
-    function showThumbnail(image, interactive) {
+    function showThumbnail(image) {
         var mapillary = getMapillary();
         if (!mapillary) return;
 
-        var thumb = mapillary.selectedThumbnail(),
-            position = 'left';  // or 'right'
-
+        var thumb = mapillary.selectedThumbnail();
         if (thumb) {
             d3.selectAll('.layer-mapillary-images .viewfield-group, .layer-mapillary-signs .icon-sign')
                 .classed('selected', function(d) { return d.key === thumb.key; });
         }
 
-        mapillary.showThumbnail(image.key, position, interactive);
+        mapillary.showThumbnail(image.key);
 
-        if (!_viewer && interactive) {
+        if (!_viewer) {
             _viewer = iD.services.mapillary.viewer;
             _viewer.on('nodechanged', viewerNavHandler);
 
@@ -54,7 +52,7 @@ iD.svg.MapillaryImages = function(projection, context, dispatch) {
                         .classed('loading', function() { return false; });
                     mapillary.selectedThumbnail(pendingImg);
                     context.map().centerEase(pendingImg.loc);
-                    showThumbnail(pendingImg, true);
+                    showThumbnail(pendingImg);
                     pendingImg = null;
                 }
                 _mlyLoading = s;
@@ -172,7 +170,7 @@ iD.svg.MapillaryImages = function(projection, context, dispatch) {
                 } else {
                     mapillary.selectedThumbnail(d);
                     context.map().centerEase(d.loc);
-                    showThumbnail(d, true);
+                    showThumbnail(d);
                 }
             });
 

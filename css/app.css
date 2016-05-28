@@ -660,7 +660,7 @@ button.save.has-count .count::before {
     bottom: 0;
 }
 
-.mapillary-image {
+.mapillary-wrap {
     position: absolute;
     bottom: 30px;
     width: 330px;
@@ -669,29 +669,19 @@ button.save.has-count .count::before {
     background-color: #fff;
 }
 
-.mapillary-image img {
-    width: 100%;
-    height: auto;
-    display: none;
-}
-
-.mapillary-image img.active {
-    display: block;
-}
-
-.mapillary-image.hidden {
+.mapillary-wrap.hidden {
     visibility: hidden;
 }
 
-.mapillary-image.temp button {
+.mapillary-wrap.temp button {
     display: none;
 }
 
-.mapillary-image .uil-ripple-css {
+.mapillary-wrap .uil-ripple-css {
   top: -22px;
   left: -16px;
 }
-.mapillary-image button.thumb-hide {
+.mapillary-wrap button.thumb-hide {
     border-radius: 0;
     padding: 5px;
     position: absolute;
@@ -707,6 +697,7 @@ button.save.has-count .count::before {
 .mly-wrapper.active {
   visibility: visible;
 }
+
 
 .feature-list-pane .inspector-body {
     top: 120px;

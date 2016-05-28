@@ -20,19 +20,18 @@ iD.svg.MapillarySigns = function(projection, context, dispatch) {
         return _mapillary;
     }
 
-    function showThumbnail(image, interactive) {
+    function showThumbnail(image) {
         var mapillary = getMapillary();
         if (!mapillary) return;
 
-        var thumb = mapillary.selectedThumbnail(),
-            position = 'left';  // or 'right'
+        var thumb = mapillary.selectedThumbnail();
 
         if (thumb) {
             d3.selectAll('.layer-mapillary-images .viewfield-group, .layer-mapillary-signs .icon-sign')
                 .classed('selected', function(d) { return d.key === thumb.key; });
         }
 
-        mapillary.showThumbnail(image.key, position, interactive);
+        mapillary.showThumbnail(image.key);
     }
 
     function hideThumbnail() {
@@ -93,7 +92,7 @@ iD.svg.MapillarySigns = function(projection, context, dispatch) {
 
                 mapillary.selectedThumbnail(d);
                 context.map().centerEase(d.loc);
-                showThumbnail(d, true);
+                showThumbnail(d);
             });
 
         // Exit
