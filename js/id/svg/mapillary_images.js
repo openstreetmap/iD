@@ -28,50 +28,55 @@ iD.svg.MapillaryImages = function(projection, context, dispatch) {
             .classed('loading', function(d) { return d.key === image.key; });
     }
 
-    function showThumbnail(image) {
+    function showViewer(image) {
         var mapillary = getMapillary();
         if (!mapillary) return;
 
-        var thumb = mapillary.selectedThumbnail();
-        if (thumb) {
-            d3.selectAll('.layer-mapillary-images .viewfield-group, .layer-mapillary-signs .icon-sign')
-                .classed('selected', function(d) { return d.key === thumb.key; });
-        }
-
-        mapillary.showThumbnail(image.key);
+        mapillary.showViewer(image.key);
 
         if (!_viewer) {
             _viewer = iD.services.mapillary.viewer;
             _viewer.on('nodechanged', viewerNavHandler);
 
-            // To avoid edge case, when network is too slow and  user clicks on multiple
-            // viewfield-groups.
+            // To avoid edge case, when network is too slow and user clicks on multiple viewfield-groups
             _viewer.on('loadingchanged', function(s) {
-                if (!s && pendingImg) {
-                    d3.selectAll('.layer-mapillary-images .viewfield-group, .layer-mapillary-signs .icon-sign')
-                        .classed('loading', function() { return false; });
-                    mapillary.selectedThumbnail(pendingImg);
-                    context.map().centerEase(pendingImg.loc);
-                    showThumbnail(pendingImg);
-                    pendingImg = null;
-                }
-                _mlyLoading = s;
+                // if (!s && pendingImg) {
+                //     d3.selectAll('.layer-mapillary-images .viewfield-group, .layer-mapillary-signs .icon-sign')
+                //         .classed('loading', function() { return false; });
+                //     mapillary.selectedImage(pendingImg);
+                //     context.map().centerEase(pendingImg.loc);
+                //     showViewer(pendingImg);
+                //     pendingImg = null;
+                // }
+                // _mlyLoading = s;
             });
         }
     }
 
-    function removeThumbnail(permanent) {
-        d3.selectAll('.layer-mapillary-images .viewfield-group, .layer-mapillary-signs .icon-sign')
-            .classed('selected', false);
-
+    function hideViewer() {
         var mapillary = getMapillary();
         if (mapillary) {
-            if (permanent) return mapillary.killThumbnail();
-            return mapillary.hideThumbnail();
+            mapillary.hideViewer();
+        } else {
+            d3.select('#content').selectAll('.mapillary-wrap')
+                .remove();
         }
+
+        if (_viewer) {
+            _viewer.off('nodechanged');
+            _viewer.off('loadingchanged');
+            _viewer = null;
+        }
+
+        _mlyLoading = null;
+        pendingImg = null;
     }
 
     function showLayer() {
+        var mapillary = getMapillary();
+        if (!mapillary) return;
+        mapillary.initViewer();
+
         editOn();
         layer
             .style('opacity', 0)
@@ -83,15 +88,7 @@ iD.svg.MapillaryImages = function(projection, context, dispatch) {
 
     function hideLayer() {
         debouncedRedraw.cancel();
-        removeThumbnail(true);
-        if (_viewer) {
-            _viewer.off('nodechanged');
-            _viewer.off('loadingchanged');
-        }
-        _mlyLoading = null;
-        pendingImg = null;
-        _viewer = null;
-
+        hideViewer();
         layer
             .transition()
             .duration(500)
@@ -106,6 +103,22 @@ iD.svg.MapillaryImages = function(projection, context, dispatch) {
     function editOff() {
         layer.selectAll('.viewfield-group').remove();
         layer.style('display', 'none');
+    }
+
+    function click(d) {
+        var mapillary = getMapillary();
+        if (!mapillary) return;
+
+        var image = mapillary.selectedImage();
+        if (image && image.key === d.key) return;
+
+        if (_mlyLoading) {
+            showLoading(d);
+        } else {
+            mapillary.selectedImage(d);
+            context.map().centerEase(d.loc);
+            showViewer(d);
+        }
     }
 
     function transform(d) {
@@ -124,7 +137,8 @@ iD.svg.MapillaryImages = function(projection, context, dispatch) {
         // Enter
         var enter = markers.enter()
             .append('g')
-            .attr('class', 'viewfield-group');
+            .attr('class', 'viewfield-group')
+            .on('click', click);
 
         enter.append('path')
             .attr('class', 'viewfield')
@@ -155,24 +169,7 @@ iD.svg.MapillaryImages = function(projection, context, dispatch) {
         layer.enter()
             .append('g')
             .attr('class', 'layer-mapillary-images')
-            .style('display', enabled ? 'block' : 'none')
-            .on('click', function() {
-                var mapillary = getMapillary();
-                if (!mapillary) return;
-
-                var d = d3.event.target.__data__,
-                    thumb = mapillary.selectedThumbnail();
-
-                if (thumb && thumb.key === d.key) return;
-
-                if (_mlyLoading) {
-                    showLoading(d);
-                } else {
-                    mapillary.selectedThumbnail(d);
-                    context.map().centerEase(d.loc);
-                    showThumbnail(d);
-                }
-            });
+            .style('display', enabled ? 'block' : 'none');
 
         layer.exit()
             .remove();
@@ -192,13 +189,13 @@ iD.svg.MapillaryImages = function(projection, context, dispatch) {
         var mapillary = getMapillary();
         if (!mapillary) return;
 
-        var thumb = mapillary.selectedThumbnail();
-        if (!thumb || thumb.key === node.key) return;
+        var image = mapillary.selectedImage();
+        if (!image || image.key === node.key) return;
 
         d3.selectAll('.layer-mapillary-images .viewfield-group, .layer-mapillary-signs .icon-sign')
             .classed('selected', function(d) {
                 if (d.key === node.key) {
-                    mapillary.selectedThumbnail(d);
+                    mapillary.selectedImage(d);
                     context.map().centerEase(d.loc);
                     return true;
                 }

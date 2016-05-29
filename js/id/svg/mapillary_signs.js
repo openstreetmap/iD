@@ -20,30 +20,6 @@ iD.svg.MapillarySigns = function(projection, context, dispatch) {
         return _mapillary;
     }
 
-    function showThumbnail(image) {
-        var mapillary = getMapillary();
-        if (!mapillary) return;
-
-        var thumb = mapillary.selectedThumbnail();
-
-        if (thumb) {
-            d3.selectAll('.layer-mapillary-images .viewfield-group, .layer-mapillary-signs .icon-sign')
-                .classed('selected', function(d) { return d.key === thumb.key; });
-        }
-
-        mapillary.showThumbnail(image.key);
-    }
-
-    function hideThumbnail() {
-        d3.selectAll('.layer-mapillary-images .viewfield-group, .layer-mapillary-signs .icon-sign')
-            .classed('selected', false);
-
-        var mapillary = getMapillary();
-        if (mapillary) {
-            mapillary.hideThumbnail();
-        }
-    }
-
     function showLayer() {
         editOn();
         debouncedRedraw();
@@ -51,7 +27,6 @@ iD.svg.MapillarySigns = function(projection, context, dispatch) {
 
     function hideLayer() {
         debouncedRedraw.cancel();
-        hideThumbnail();
         editOff();
     }
 
@@ -62,6 +37,18 @@ iD.svg.MapillarySigns = function(projection, context, dispatch) {
     function editOff() {
         layer.selectAll('.icon-sign').remove();
         layer.style('display', 'none');
+    }
+
+    function click(d) {
+        var mapillary = getMapillary();
+        if (!mapillary) return;
+
+        var image = mapillary.selectedImage();
+        if (image && image.key === d.key) return;
+
+        mapillary.selectedImage(d);
+        context.map().centerEase(d.loc);
+        mapillary.showViewer(d.key);
     }
 
     function update() {
@@ -76,24 +63,12 @@ iD.svg.MapillarySigns = function(projection, context, dispatch) {
             .append('foreignObject')
             .attr('class', 'icon-sign')
             .attr('width', '32px')      // for Firefox
-            .attr('height', '32px');    // for Firefox
+            .attr('height', '32px')     // for Firefox
+            .on('click', click);
 
         enter
             .append('xhtml:body')
             .html(mapillary.signHTML);
-
-        enter
-            .on('click', function(d) {
-                var mapillary = getMapillary();
-                if (!mapillary) return;
-
-                var thumb = mapillary.selectedThumbnail();
-                if (thumb && thumb.key === d.key) return;
-
-                mapillary.selectedThumbnail(d);
-                context.map().centerEase(d.loc);
-                showThumbnail(d);
-            });
 
         // Exit
         signs.exit()
