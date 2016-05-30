@@ -2,7 +2,10 @@ iD.services.mapillary = function() {
     var mapillary = {},
         dispatch = d3.dispatch('loadedImages', 'loadedSigns'),
         apibase = 'https://a.mapillary.com/v2/',
+        viewercss = 'https://npmcdn.com/mapillary-js@1.3.0/dist/mapillary-js.min.css',
+        viewerjs = 'https://npmcdn.com/mapillary-js@1.3.0/dist/mapillary-js.min.js',
         clientId = 'NzNRM2otQkR2SHJzaXJmNmdQWVQ0dzo1ZWYyMmYwNjdmNDdlNmVi',
+        defaultKey = 'ytfE1_iD_N-jmHfTHkj1Ug',
         maxResults = 1000,
         tileZoom = 14;
 
@@ -18,16 +21,65 @@ iD.services.mapillary = function() {
     }
 
     function loadSignDefs(context) {
-        if (!iD.services.mapillary.sign_defs) {
-            iD.services.mapillary.sign_defs = {};
-            _.each(['au', 'br', 'ca', 'de', 'us'], function(region) {
-                d3.json(context.asset('traffico/string-maps/' + region + '-map.json'), function(err, data) {
-                    if (err) return;
-                    if (region === 'de') region = 'eu';
-                    iD.services.mapillary.sign_defs[region] = data;
-                });
+        if (iD.services.mapillary.sign_defs) return;
+        iD.services.mapillary.sign_defs = {};
+
+        _.each(['au', 'br', 'ca', 'de', 'us'], function(region) {
+            d3.json(context.asset('traffico/string-maps/' + region + '-map.json'), function(err, data) {
+                if (err) return;
+                if (region === 'de') region = 'eu';
+                iD.services.mapillary.sign_defs[region] = data;
             });
-        }
+        });
+    }
+
+    function loadViewer() {
+        // mapillary-wrap
+        var wrap = d3.select('#content').selectAll('.mapillary-wrap')
+            .data([0]);
+
+        var enter = wrap.enter().append('div')
+            .attr('class', 'mapillary-wrap')
+            .classed('al', true)       // 'al'=left,  'ar'=right
+            .classed('hidden', true);
+
+        enter.append('button')
+            .attr('class', 'thumb-hide')
+            .on('click', function () { mapillary.hideViewer(); })
+            .append('div')
+            .call(iD.svg.Icon('#icon-close'));
+
+        enter.append('div')
+            .attr('id', 'mly')
+            .attr('class', 'mly-wrapper')
+            .classed('active', false);
+
+        // mapillary-viewercss
+        d3.select('head').selectAll('#mapillary-viewercss')
+            .data([0])
+            .enter()
+            .append('link')
+            .attr('id', 'mapillary-viewercss')
+            .attr('rel', 'stylesheet')
+            .attr('href', viewercss);
+
+        // mapillary-viewerjs
+        d3.select('head').selectAll('#mapillary-viewerjs')
+            .data([0])
+            .enter()
+            .append('script')
+            .attr('id', 'mapillary-viewerjs')
+            .attr('src', viewerjs)
+            .on('load', function() {
+                if (Mapillary) {
+                    iD.services.mapillary.viewer = new Mapillary.Viewer('mly', clientId, defaultKey, {
+                        baseImageSize: 320,
+                        imagePlane: false,
+                        cover: false,
+                        debug: false
+                    });
+                }
+            });
     }
 
     function abortRequest(i) {
@@ -148,6 +200,10 @@ iD.services.mapillary = function() {
         loadTiles('signs', url, projection, dimensions);
     };
 
+    mapillary.loadViewer = function() {
+        loadViewer();
+    };
+
 
     // partition viewport into `psize` x `psize` regions
     function partitionViewport(psize, projection, dimensions) {
@@ -205,39 +261,6 @@ iD.services.mapillary = function() {
         return iD.services.mapillary.sign_defs[country][type];
     };
 
-    mapillary.initViewer = function(imageKey) {
-        var hidden = !imageKey;
-        var wrap = d3.select('#content').selectAll('.mapillary-wrap')
-            .data([0]);
-
-        // Enter
-        var enter = wrap.enter().append('div')
-            .attr('class', 'mapillary-wrap')
-            .classed('al', true)       // 'al'=left,  'ar'=right
-            .classed('hidden', hidden);
-
-        enter.append('button')
-            .attr('class', 'thumb-hide')
-            .on('click', function () { mapillary.hideViewer(); })
-            .append('div')
-            .call(iD.svg.Icon('#icon-close'));
-
-        enter.append('div')
-            .attr('id', 'mly')
-            .attr('class', 'mly-wrapper')
-            .classed('active', !hidden);
-
-        // if (Mapillary && !iD.services.mapillary.viewer) {
-        //     iD.services.mapillary.viewer = new Mapillary.Viewer('mly', clientId, imageKey, {
-        //         baseImageSize: 320,
-        //         imagePlane: false,
-        //         cover: false,
-        //         debug: false
-        //     });
-        // }
-
-        return mapillary;
-    };
 
     mapillary.showViewer = function(imageKey) {
         if (!imageKey) return;
@@ -253,17 +276,7 @@ iD.services.mapillary = function() {
         if (iD.services.mapillary.viewer) {
             iD.services.mapillary.viewer.moveToKey(imageKey);
         } else {
-            mapillary.initViewer(imageKey);
-
-            if (Mapillary && !iD.services.mapillary.viewer) {
-                iD.services.mapillary.viewer = new Mapillary.Viewer('mly', clientId, imageKey, {
-                    baseImageSize: 320,
-                    imagePlane: false,
-                    cover: false,
-                    debug: false
-                });
-            }
-
+            loadViewer();
         }
 
         return mapillary;

@@ -2,7 +2,7 @@ iD.svg.MapillaryImages = function(projection, context, dispatch) {
     var debouncedRedraw = _.debounce(function () { dispatch.change(); }, 1000),
         minZoom = 12,
         layer = d3.select(null),
-        _mapillary, _viewer, _mlyLoading, pendingImg;
+        _mapillary, _viewer; //, _mlyLoading, pendingImg;
 
 
     function init() {
@@ -20,13 +20,13 @@ iD.svg.MapillaryImages = function(projection, context, dispatch) {
         return _mapillary;
     }
 
-    function showLoading(image) {
-        var mapillary = getMapillary();
-        if (!mapillary) return;
-        pendingImg = image;
-        d3.selectAll('.layer-mapillary-images .viewfield-group, .layer-mapillary-signs .icon-sign')
-            .classed('loading', function(d) { return d.key === image.key; });
-    }
+    // function showLoading(image) {
+    //     var mapillary = getMapillary();
+    //     if (!mapillary) return;
+    //     pendingImg = image;
+    //     d3.selectAll('.layer-mapillary-images .viewfield-group, .layer-mapillary-signs .icon-sign')
+    //         .classed('loading', function(d) { return d.key === image.key; });
+    // }
 
     function showViewer(image) {
         var mapillary = getMapillary();
@@ -39,7 +39,7 @@ iD.svg.MapillaryImages = function(projection, context, dispatch) {
             _viewer.on('nodechanged', viewerNavHandler);
 
             // To avoid edge case, when network is too slow and user clicks on multiple viewfield-groups
-            _viewer.on('loadingchanged', function(s) {
+            // _viewer.on('loadingchanged', function(s) {
                 // if (!s && pendingImg) {
                 //     d3.selectAll('.layer-mapillary-images .viewfield-group, .layer-mapillary-signs .icon-sign')
                 //         .classed('loading', function() { return false; });
@@ -49,7 +49,7 @@ iD.svg.MapillaryImages = function(projection, context, dispatch) {
                 //     pendingImg = null;
                 // }
                 // _mlyLoading = s;
-            });
+            // });
         }
     }
 
@@ -64,18 +64,18 @@ iD.svg.MapillaryImages = function(projection, context, dispatch) {
 
         if (_viewer) {
             _viewer.off('nodechanged');
-            _viewer.off('loadingchanged');
+            // _viewer.off('loadingchanged');
             _viewer = null;
         }
 
-        _mlyLoading = null;
-        pendingImg = null;
+        // _mlyLoading = null;
+        // pendingImg = null;
     }
 
     function showLayer() {
         var mapillary = getMapillary();
         if (!mapillary) return;
-        mapillary.initViewer();
+        mapillary.loadViewer();
 
         editOn();
         layer
@@ -112,13 +112,13 @@ iD.svg.MapillaryImages = function(projection, context, dispatch) {
         var image = mapillary.selectedImage();
         if (image && image.key === d.key) return;
 
-        if (_mlyLoading) {
-            showLoading(d);
-        } else {
+        // if (_mlyLoading) {
+        //     showLoading(d);
+        // } else {
             mapillary.selectedImage(d);
             context.map().centerEase(d.loc);
             showViewer(d);
-        }
+        // }
     }
 
     function transform(d) {
