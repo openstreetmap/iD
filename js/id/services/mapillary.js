@@ -1,6 +1,6 @@
 iD.services.mapillary = function() {
     var mapillary = {},
-        dispatch = d3.dispatch('loadedImages', 'loadedSigns'),
+        dispatch = d3.dispatch('loadedImages', 'loadedSigns', 'loadedViewer'),
         apibase = 'https://a.mapillary.com/v2/',
         viewercss = 'https://npmcdn.com/mapillary-js@1.3.0/dist/mapillary-js.min.css',
         viewerjs = 'https://npmcdn.com/mapillary-js@1.3.0/dist/mapillary-js.min.js',
@@ -33,7 +33,9 @@ iD.services.mapillary = function() {
         });
     }
 
-    function loadViewer() {
+    function loadViewer(imageKey) {
+        imageKey = imageKey || defaultKey;
+
         // mapillary-wrap
         var wrap = d3.select('#content').selectAll('.mapillary-wrap')
             .data([0]);
@@ -72,12 +74,13 @@ iD.services.mapillary = function() {
             .attr('src', viewerjs)
             .on('load', function() {
                 if (Mapillary) {
-                    iD.services.mapillary.viewer = new Mapillary.Viewer('mly', clientId, defaultKey, {
+                    iD.services.mapillary.viewer = new Mapillary.Viewer('mly', clientId, imageKey, {
                         baseImageSize: 320,
                         imagePlane: false,
                         cover: false,
                         debug: false
                     });
+                    dispatch.loadedViewer(iD.services.mapillary.viewer);
                 }
             });
     }
@@ -261,36 +264,21 @@ iD.services.mapillary = function() {
         return iD.services.mapillary.sign_defs[country][type];
     };
 
-
-    mapillary.showViewer = function(imageKey) {
-        if (!imageKey) return;
-
-        var wrap = d3.select('#content').selectAll('.mapillary-wrap');
-
-        // Update
-        wrap
+    mapillary.showViewer = function() {
+        d3.select('#content')
+            .selectAll('.mapillary-wrap')
             .classed('hidden', false)
             .selectAll('.mly-wrapper')
-            .attr('class', 'active');
-
-        if (iD.services.mapillary.viewer) {
-            iD.services.mapillary.viewer.moveToKey(imageKey);
-        } else {
-            loadViewer();
-        }
+            .classed('active', true);
 
         return mapillary;
     };
 
     mapillary.hideViewer = function() {
-        if (iD.services.mapillary) {
-            iD.services.mapillary.image = null;
-        }
-
-        d3.select('#content').selectAll('.mapillary-wrap')
-            .classed('hidden', true);
-
-        d3.select('#content').selectAll('.mly-wrapper')
+        d3.select('#content')
+            .selectAll('.mapillary-wrap')
+            .classed('hidden', true)
+            .selectAll('.mly-wrapper')
             .classed('active', false);
 
         d3.selectAll('.layer-mapillary-images .viewfield-group, .layer-mapillary-signs .icon-sign')
@@ -299,13 +287,27 @@ iD.services.mapillary = function() {
         return mapillary;
     };
 
-    mapillary.selectedImage = function(image) {
+    mapillary.getImage = function() {
         if (!iD.services.mapillary) return null;
-        if (!arguments.length) return iD.services.mapillary.image;
+        return iD.services.mapillary.image;
+    };
+
+    mapillary.setImage = function(image, fromViewer) {
+        if (!iD.services.mapillary) return null;
+        if (iD.services.mapillary.image && iD.services.mapillary.image.key === image.key) return;
+
         iD.services.mapillary.image = image;
 
         d3.selectAll('.layer-mapillary-images .viewfield-group, .layer-mapillary-signs .icon-sign')
             .classed('selected', function(d) { return d.key === image.key; });
+
+        if (!fromViewer) {
+            if (iD.services.mapillary.viewer) {
+                iD.services.mapillary.viewer.moveToKey(image.key);
+            } else {
+                loadViewer(image.key);
+            }
+        }
     };
 
     mapillary.reset = function() {

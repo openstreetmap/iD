@@ -2,7 +2,8 @@ iD.svg.MapillaryImages = function(projection, context, dispatch) {
     var debouncedRedraw = _.debounce(function () { dispatch.change(); }, 1000),
         minZoom = 12,
         layer = d3.select(null),
-        _mapillary, _viewer; //, _mlyLoading, pendingImg;
+        pendingImg,
+        _mapillary;
 
 
     function init() {
@@ -13,63 +14,15 @@ iD.svg.MapillaryImages = function(projection, context, dispatch) {
 
     function getMapillary() {
         if (iD.services.mapillary && !_mapillary) {
-            _mapillary = iD.services.mapillary().on('loadedImages', debouncedRedraw);
+            _mapillary = iD.services.mapillary()
+                .on('loadedImages', debouncedRedraw)
+                .on('loadedViewer', function(viewer) {
+                    viewer.on('nodechanged', nodeChanged);
+                });
         } else if (!iD.services.mapillary && _mapillary) {
             _mapillary = null;
         }
         return _mapillary;
-    }
-
-    // function showLoading(image) {
-    //     var mapillary = getMapillary();
-    //     if (!mapillary) return;
-    //     pendingImg = image;
-    //     d3.selectAll('.layer-mapillary-images .viewfield-group, .layer-mapillary-signs .icon-sign')
-    //         .classed('loading', function(d) { return d.key === image.key; });
-    // }
-
-    function showViewer(image) {
-        var mapillary = getMapillary();
-        if (!mapillary) return;
-
-        mapillary.showViewer(image.key);
-
-        if (!_viewer) {
-            _viewer = iD.services.mapillary.viewer;
-            _viewer.on('nodechanged', viewerNavHandler);
-
-            // To avoid edge case, when network is too slow and user clicks on multiple viewfield-groups
-            // _viewer.on('loadingchanged', function(s) {
-                // if (!s && pendingImg) {
-                //     d3.selectAll('.layer-mapillary-images .viewfield-group, .layer-mapillary-signs .icon-sign')
-                //         .classed('loading', function() { return false; });
-                //     mapillary.selectedImage(pendingImg);
-                //     context.map().centerEase(pendingImg.loc);
-                //     showViewer(pendingImg);
-                //     pendingImg = null;
-                // }
-                // _mlyLoading = s;
-            // });
-        }
-    }
-
-    function hideViewer() {
-        var mapillary = getMapillary();
-        if (mapillary) {
-            mapillary.hideViewer();
-        } else {
-            d3.select('#content').selectAll('.mapillary-wrap')
-                .remove();
-        }
-
-        if (_viewer) {
-            _viewer.off('nodechanged');
-            // _viewer.off('loadingchanged');
-            _viewer = null;
-        }
-
-        // _mlyLoading = null;
-        // pendingImg = null;
     }
 
     function showLayer() {
@@ -78,6 +31,7 @@ iD.svg.MapillaryImages = function(projection, context, dispatch) {
         mapillary.loadViewer();
 
         editOn();
+
         layer
             .style('opacity', 0)
             .transition()
@@ -87,8 +41,13 @@ iD.svg.MapillaryImages = function(projection, context, dispatch) {
     }
 
     function hideLayer() {
+        var mapillary = getMapillary();
+        if (mapillary) {
+            mapillary.hideViewer();
+        }
+
         debouncedRedraw.cancel();
-        hideViewer();
+
         layer
             .transition()
             .duration(500)
@@ -106,19 +65,34 @@ iD.svg.MapillaryImages = function(projection, context, dispatch) {
     }
 
     function click(d) {
+        // if (pendingImg) return;  // block clicks if waiting for previous marker
+
+        var mapillary = getMapillary();
+        if (mapillary) {
+            // pendingImg = d.key;
+            context.map().centerEase(d.loc);
+            mapillary.setImage(d);
+        }
+    }
+
+    function nodeChanged(d) {
         var mapillary = getMapillary();
         if (!mapillary) return;
 
-        var image = mapillary.selectedImage();
-        if (image && image.key === d.key) return;
+        var image = mapillary.getImage();
+        if (!image) return;     // user has never clicked a marker..
 
-        // if (_mlyLoading) {
-        //     showLoading(d);
+        // if (pendingImg) {       // waiting for a marker the user clicked on
+        //     if (d.key !== pendingImg) return;
+        //     pendingImg = null;  // unblock clicks
         // } else {
-            mapillary.selectedImage(d);
-            context.map().centerEase(d.loc);
-            showViewer(d);
+        //     // user didn't click a marker, this change came from the viewer.
+            var loc = d.apiNavImIm ? [d.apiNavImIm.lon, d.apiNavImIm.lat] : [d.latLon.lon, d.latLon.lat];
+            context.map().centerEase(loc);
+            mapillary.setImage(d, true);
         // }
+
+        mapillary.showViewer();
     }
 
     function transform(d) {
@@ -129,7 +103,8 @@ iD.svg.MapillaryImages = function(projection, context, dispatch) {
 
     function update() {
         var mapillary = getMapillary(),
-            data = (mapillary ? mapillary.images(projection, layer.dimensions()) : []);
+            data = (mapillary ? mapillary.images(projection, layer.dimensions()) : []),
+            image = mapillary ? mapillary.getImage() : null;
 
         var markers = layer.selectAll('.viewfield-group')
             .data(data, function(d) { return d.key; });
@@ -138,6 +113,7 @@ iD.svg.MapillaryImages = function(projection, context, dispatch) {
         var enter = markers.enter()
             .append('g')
             .attr('class', 'viewfield-group')
+            .classed('selected', function(d) { return image && d.key === image.key; })
             .on('click', click);
 
         enter.append('path')
@@ -183,23 +159,6 @@ iD.svg.MapillaryImages = function(projection, context, dispatch) {
                 editOff();
             }
         }
-    }
-
-    function viewerNavHandler(node) {
-        var mapillary = getMapillary();
-        if (!mapillary) return;
-
-        var image = mapillary.selectedImage();
-        if (!image || image.key === node.key) return;
-
-        d3.selectAll('.layer-mapillary-images .viewfield-group, .layer-mapillary-signs .icon-sign')
-            .classed('selected', function(d) {
-                if (d.key === node.key) {
-                    mapillary.selectedImage(d);
-                    context.map().centerEase(d.loc);
-                    return true;
-                }
-            });
     }
 
     drawImages.enabled = function(_) {

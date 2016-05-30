@@ -360,15 +360,10 @@ describe('iD.services.mapillary', function() {
         });
     });
 
-    describe('#selectedImage', function() {
-        it('sets selected image', function() {
-            mapillary.selectedImage('foo');
-            expect(iD.services.mapillary.image).to.eql('foo');
-        });
-
+    describe('#getImage', function() {
         it('gets selected image', function() {
             iD.services.mapillary.image = 'bar';
-            expect(mapillary.selectedImage()).to.eql('bar');
+            expect(mapillary.getImage()).to.eql('bar');
         });
     });
 
