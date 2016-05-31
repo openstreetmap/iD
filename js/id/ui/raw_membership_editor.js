@@ -5,17 +5,17 @@ iD.ui.RawMembershipEditor = function(context) {
         d3.event.preventDefault();
         context.enter(iD.modes.Select(context, [d.relation.id]));
 
-        d.relation.members.forEach(function(member, index) {
+        d.relation.members.forEach(function(member) {
             if (member.type === 'way') {
-                var element = document.getElementsByClassName(member.id + ' ' + member.type + ' shadow');
+                var MemElement = document.getElementsByClassName(member.id + ' ' + member.type + ' shadow');
             }
             else if (member.type === 'node') {
-                var element = document.getElementsByClassName(member.id + ' ' + member.type);
+                var MemElement = document.getElementsByClassName(member.id + ' ' + member.type);
             }
             else {
                 return;
             }
-            element[0].classList.add("selected");
+            MemElement[0].classList.add('selected');
         });
     }
 
