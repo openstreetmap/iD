@@ -43,14 +43,16 @@ iD.svg.MapillarySigns = function(projection, context, dispatch) {
         var mapillary = getMapillary();
         if (mapillary) {
             context.map().centerEase(d.loc);
-            mapillary.setImage(d);
+            mapillary.setSelectedImage(d.key);
+            mapillary.setViewerImage(d.key);
+            mapillary.showViewer();
         }
     }
 
     function update() {
         var mapillary = getMapillary(),
             data = (mapillary ? mapillary.signs(projection, layer.dimensions()) : []),
-            image = mapillary ? mapillary.getImage() : null;
+            imageKey = mapillary ? mapillary.getSelectedImage() : null;
 
         var signs = layer.selectAll('.icon-sign')
             .data(data, function(d) { return d.key; });
@@ -61,7 +63,7 @@ iD.svg.MapillarySigns = function(projection, context, dispatch) {
             .attr('class', 'icon-sign')
             .attr('width', '32px')      // for Firefox
             .attr('height', '32px')     // for Firefox
-            .classed('selected', function(d) { return image && d.key === image.key; })
+            .classed('selected', function(d) { return d.key === imageKey; })
             .on('click', click);
 
         enter

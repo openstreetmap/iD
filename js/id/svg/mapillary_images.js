@@ -2,8 +2,8 @@ iD.svg.MapillaryImages = function(projection, context, dispatch) {
     var debouncedRedraw = _.debounce(function () { dispatch.change(); }, 1000),
         minZoom = 12,
         layer = d3.select(null),
-        pendingImg,
-        _mapillary;
+        _clicks = [],
+        _mapillary, _viewer;
 
 
     function init() {
@@ -14,14 +14,21 @@ iD.svg.MapillaryImages = function(projection, context, dispatch) {
 
     function getMapillary() {
         if (iD.services.mapillary && !_mapillary) {
-            _mapillary = iD.services.mapillary()
-                .on('loadedImages', debouncedRedraw)
-                .on('loadedViewer', function(viewer) {
-                    viewer.on('nodechanged', nodeChanged);
-                });
+            _mapillary = iD.services.mapillary();
+            _mapillary.on('loadedImages', debouncedRedraw);
         } else if (!iD.services.mapillary && _mapillary) {
             _mapillary = null;
         }
+
+        if (iD.services.mapillary && !_viewer) {
+            _viewer = iD.services.mapillary.viewer;
+            if (_viewer) {
+                _viewer.on('nodechanged', nodeChanged);
+            }
+        } else if (!iD.services.mapillary && _viewer) {
+            _viewer = null;
+        }
+
         return _mapillary;
     }
 
@@ -65,34 +72,28 @@ iD.svg.MapillaryImages = function(projection, context, dispatch) {
     }
 
     function click(d) {
-        // if (pendingImg) return;  // block clicks if waiting for previous marker
-
         var mapillary = getMapillary();
-        if (mapillary) {
-            // pendingImg = d.key;
-            context.map().centerEase(d.loc);
-            mapillary.setImage(d);
-        }
+        if (!mapillary) return;
+
+        context.map().centerEase(d.loc);
+        mapillary.setSelectedImage(d.key);
+        mapillary.setViewerImage(d.key);
+        mapillary.showViewer();
+        _clicks.push(d.key);
     }
 
     function nodeChanged(d) {
         var mapillary = getMapillary();
         if (!mapillary) return;
 
-        var image = mapillary.getImage();
-        if (!image) return;     // user has never clicked a marker..
-
-        // if (pendingImg) {       // waiting for a marker the user clicked on
-        //     if (d.key !== pendingImg) return;
-        //     pendingImg = null;  // unblock clicks
-        // } else {
-        //     // user didn't click a marker, this change came from the viewer.
+        var index = _clicks.indexOf(d.key);
+        if (index > -1) {
+            _clicks.splice(index, 1);
+        } else {   // change initiated from the viewer controls..
             var loc = d.apiNavImIm ? [d.apiNavImIm.lon, d.apiNavImIm.lat] : [d.latLon.lon, d.latLon.lat];
             context.map().centerEase(loc);
-            mapillary.setImage(d, true);
-        // }
-
-        mapillary.showViewer();
+            mapillary.setSelectedImage(d.key);
+        }
     }
 
     function transform(d) {
@@ -104,7 +105,7 @@ iD.svg.MapillaryImages = function(projection, context, dispatch) {
     function update() {
         var mapillary = getMapillary(),
             data = (mapillary ? mapillary.images(projection, layer.dimensions()) : []),
-            image = mapillary ? mapillary.getImage() : null;
+            imageKey = mapillary ? mapillary.getSelectedImage() : null;
 
         var markers = layer.selectAll('.viewfield-group')
             .data(data, function(d) { return d.key; });
@@ -113,7 +114,7 @@ iD.svg.MapillaryImages = function(projection, context, dispatch) {
         var enter = markers.enter()
             .append('g')
             .attr('class', 'viewfield-group')
-            .classed('selected', function(d) { return image && d.key === image.key; })
+            .classed('selected', function(d) { return d.key === imageKey; })
             .on('click', click);
 
         enter.append('path')

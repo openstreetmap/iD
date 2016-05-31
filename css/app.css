@@ -660,43 +660,7 @@ button.save.has-count .count::before {
     bottom: 0;
 }
 
-.mapillary-wrap {
-    position: absolute;
-    bottom: 30px;
-    width: 330px;
-    height: 250px;
-    padding: 5px;
-    background-color: #fff;
-}
 
-.mapillary-wrap.hidden {
-    visibility: hidden;
-}
-
-.mapillary-wrap.temp button {
-    display: none;
-}
-
-.mapillary-wrap .uil-ripple-css {
-  top: -22px;
-  left: -16px;
-}
-.mapillary-wrap button.thumb-hide {
-    border-radius: 0;
-    padding: 5px;
-    position: absolute;
-    right: 0;
-    top: 0;
-    z-index: 500;
-}
-
-.mly-wrapper {
-  visibility: hidden;
-}
-
-.mly-wrapper.active {
-  visibility: visible;
-}
 
 
 .feature-list-pane .inspector-body {
@@ -3291,4 +3255,45 @@ img.tile-removing {
     width: 100px;
     background: rgba(0, 0, 0, 0) url(img/iD-sprite.svg) no-repeat -300px -460px;
     margin: auto;
+}
+
+/* Mapillary
+------------------------------------------------------- */
+.mapillary-wrap {
+    position: absolute;
+    bottom: 30px;
+    width: 330px;
+    height: 250px;
+    padding: 5px;
+    background-color: #fff;
+}
+
+.mapillary-wrap.hidden {
+    visibility: hidden;
+}
+
+.mapillary-wrap .uil-ripple-css {
+  top: -9px;
+  left: -15px;
+}
+
+.mapillary-wrap .uil-ripple-css div {
+    top: 38px;
+}
+
+.mapillary-wrap button.thumb-hide {
+    border-radius: 0;
+    padding: 5px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 500;
+}
+
+.mly-wrapper {
+  visibility: hidden;
+}
+
+.mly-wrapper.active {
+  visibility: visible;
 }
