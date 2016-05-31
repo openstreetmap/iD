@@ -1,5 +1,5 @@
 iD.ui.RawMembershipEditor = function(context) {
-    var id, showBlank;
+    var id, showBlank, MemElement;
 
     function selectRelation(d) {
         d3.event.preventDefault();
@@ -7,10 +7,10 @@ iD.ui.RawMembershipEditor = function(context) {
 
         d.relation.members.forEach(function(member) {
             if (member.type === 'way') {
-                var MemElement = document.getElementsByClassName(member.id + ' ' + member.type + ' shadow');
+                MemElement = document.getElementsByClassName(member.id + ' ' + member.type + ' shadow');
             }
             else if (member.type === 'node') {
-                var MemElement = document.getElementsByClassName(member.id + ' ' + member.type);
+                MemElement = document.getElementsByClassName(member.id + ' ' + member.type);
             }
             else {
                 return;
