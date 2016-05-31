@@ -4,6 +4,19 @@ iD.ui.RawMembershipEditor = function(context) {
     function selectRelation(d) {
         d3.event.preventDefault();
         context.enter(iD.modes.Select(context, [d.relation.id]));
+
+        d.relation.members.forEach(function(member, index) {
+            if (member.type === 'way') {
+                var element = document.getElementsByClassName(member.id + ' ' + member.type + ' shadow');
+            }
+            else if (member.type === 'node') {
+                var element = document.getElementsByClassName(member.id + ' ' + member.type);
+            }
+            else {
+                return;
+            }
+            element[0].classList.add("selected");
+        });
     }
 
     function changeRole(d) {
