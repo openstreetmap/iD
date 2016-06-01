@@ -20,33 +20,6 @@ iD.svg.MapillarySigns = function(projection, context, dispatch) {
         return _mapillary;
     }
 
-    function showThumbnail(image) {
-        var mapillary = getMapillary();
-        if (!mapillary) return;
-
-        var thumb = mapillary.selectedThumbnail(),
-            posX = projection(image.loc)[0],
-            width = layer.dimensions()[0],
-            position = (posX < width / 2) ? 'right' : 'left';
-
-        if (thumb) {
-            d3.selectAll('.layer-mapillary-images .viewfield-group, .layer-mapillary-signs .icon-sign')
-                .classed('selected', function(d) { return d.key === thumb.key; });
-        }
-
-        mapillary.showThumbnail(image.key, position);
-    }
-
-    function hideThumbnail() {
-        d3.selectAll('.layer-mapillary-images .viewfield-group, .layer-mapillary-signs .icon-sign')
-            .classed('selected', false);
-
-        var mapillary = getMapillary();
-        if (mapillary) {
-            mapillary.hideThumbnail();
-        }
-    }
-
     function showLayer() {
         editOn();
         debouncedRedraw();
@@ -54,7 +27,6 @@ iD.svg.MapillarySigns = function(projection, context, dispatch) {
 
     function hideLayer() {
         debouncedRedraw.cancel();
-        hideThumbnail();
         editOff();
     }
 
@@ -67,9 +39,22 @@ iD.svg.MapillarySigns = function(projection, context, dispatch) {
         layer.style('display', 'none');
     }
 
+    function click(d) {
+        var mapillary = getMapillary();
+        if (!mapillary) return;
+
+        context.map().centerEase(d.loc);
+
+        mapillary
+            .setSelectedImage(d.key, true)
+            .updateViewer(d.key, context)
+            .showViewer();
+    }
+
     function update() {
         var mapillary = getMapillary(),
-            data = (mapillary ? mapillary.signs(projection, layer.dimensions()) : []);
+            data = (mapillary ? mapillary.signs(projection, layer.dimensions()) : []),
+            imageKey = mapillary ? mapillary.getSelectedImage() : null;
 
         var signs = layer.selectAll('.icon-sign')
             .data(data, function(d) { return d.key; });
@@ -79,36 +64,13 @@ iD.svg.MapillarySigns = function(projection, context, dispatch) {
             .append('foreignObject')
             .attr('class', 'icon-sign')
             .attr('width', '32px')      // for Firefox
-            .attr('height', '32px');    // for Firefox
+            .attr('height', '32px')     // for Firefox
+            .classed('selected', function(d) { return d.key === imageKey; })
+            .on('click', click);
 
         enter
             .append('xhtml:body')
             .html(mapillary.signHTML);
-
-        enter
-            .on('click', function(d) {   // deselect/select
-                var mapillary = getMapillary();
-                if (!mapillary) return;
-                var thumb = mapillary.selectedThumbnail();
-                if (thumb && thumb.key === d.key) {
-                    hideThumbnail();
-                } else {
-                    mapillary.selectedThumbnail(d);
-                    context.map().centerEase(d.loc);
-                    showThumbnail(d);
-                }
-            })
-            .on('mouseover', showThumbnail)
-            .on('mouseout', function() {
-                var mapillary = getMapillary();
-                if (!mapillary) return;
-                var thumb = mapillary.selectedThumbnail();
-                if (thumb) {
-                    showThumbnail(thumb);
-                } else {
-                    hideThumbnail();
-                }
-            });
 
         // Exit
         signs.exit()

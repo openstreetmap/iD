@@ -39,12 +39,24 @@ iD.ui.MapData = function(context) {
             update();
         }
 
-        function toggleLayer(which) {
+        function showsLayer(which) {
             var layer = layers.layer(which);
             if (layer) {
-                layer.enabled(!layer.enabled());
+                return layer.enabled();
+            }
+            return false;
+        }
+
+        function setLayer(which, enabled) {
+            var layer = layers.layer(which);
+            if (layer) {
+                layer.enabled(enabled);
                 update();
             }
+        }
+
+        function toggleLayer(which) {
+            setLayer(which, !showsLayer(which));
         }
 
         function clickGpx() {
@@ -53,6 +65,9 @@ iD.ui.MapData = function(context) {
 
         function clickMapillaryImages() {
             toggleLayer('mapillary-images');
+            if (!showsLayer('mapillary-images')) {
+                setLayer('mapillary-signs', false);
+            }
         }
 
         function clickMapillarySigns() {
@@ -128,7 +143,12 @@ iD.ui.MapData = function(context) {
             mapillarySignLayerItem
                 .classed('active', showsMapillarySigns)
                 .selectAll('input')
+                .property('disabled', !showsMapillaryImages)
                 .property('checked', showsMapillarySigns);
+
+            mapillarySignLayerItem
+                .selectAll('label')
+                .classed('deemphasize', !showsMapillaryImages);
 
             // Exit
             mapillaryImageLayerItem.exit()
@@ -199,6 +219,10 @@ iD.ui.MapData = function(context) {
                 .selectAll('input')
                 .property('disabled', !hasGpx)
                 .property('checked', showsGpx);
+
+            gpxLayerItem
+                .selectAll('label')
+                .classed('deemphasize', !hasGpx);
 
             // Exit
             gpxLayerItem.exit()

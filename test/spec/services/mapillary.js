@@ -360,26 +360,28 @@ describe('iD.services.mapillary', function() {
         });
     });
 
-    describe('#selectedThumbnail', function() {
-        it('sets thumbnail image', function() {
-            mapillary.selectedThumbnail('foo');
-            expect(iD.services.mapillary.thumb).to.eql('foo');
+    describe('#setSelectedImage', function() {
+        it('sets selected image', function() {
+            mapillary.setSelectedImage('foo');
+            expect(iD.services.mapillary.image).to.eql('foo');
         });
+    });
 
-        it('gets thumbnail image', function() {
-            iD.services.mapillary.thumb = 'bar';
-            expect(mapillary.selectedThumbnail()).to.eql('bar');
+    describe('#getSelectedImage', function() {
+        it('gets selected image', function() {
+            iD.services.mapillary.image = 'bar';
+            expect(mapillary.getSelectedImage()).to.eql('bar');
         });
     });
 
     describe('#reset', function() {
-        it('resets cache and thumbnail image', function() {
+        it('resets cache and image', function() {
             iD.services.mapillary.cache.foo = 'bar';
-            iD.services.mapillary.thumb = 'bar';
+            iD.services.mapillary.image = 'bar';
 
             mapillary.reset();
             expect(iD.services.mapillary.cache).to.not.have.property('foo');
-            expect(iD.services.mapillary.thumb).to.be.null;
+            expect(iD.services.mapillary.image).to.be.null;
         });
     });
 

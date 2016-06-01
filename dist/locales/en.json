@@ -512,7 +512,7 @@
         "title": "Photo Overlay (Mapillary)"
     },
     "mapillary_signs": {
-        "tooltip": "Traffic signs from Mapillary",
+        "tooltip": "Traffic signs from Mapillary (must enable Photo Overlay)",
         "title": "Traffic Sign Overlay (Mapillary)"
     },
     "mapillary": {

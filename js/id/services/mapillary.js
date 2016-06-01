@@ -2,8 +2,8 @@ iD.services.mapillary = function() {
     var mapillary = {},
         dispatch = d3.dispatch('loadedImages', 'loadedSigns'),
         apibase = 'https://a.mapillary.com/v2/',
-        urlImage = 'https://www.mapillary.com/map/im/',
-        urlThumb = 'https://d1cuyjsrcm0gby.cloudfront.net/',
+        viewercss = 'https://npmcdn.com/mapillary-js@1.3.0/dist/mapillary-js.min.css',
+        viewerjs = 'https://npmcdn.com/mapillary-js@1.3.0/dist/mapillary-js.min.js',
         clientId = 'NzNRM2otQkR2SHJzaXJmNmdQWVQ0dzo1ZWYyMmYwNjdmNDdlNmVi',
         maxResults = 1000,
         tileZoom = 14;
@@ -20,15 +20,86 @@ iD.services.mapillary = function() {
     }
 
     function loadSignDefs(context) {
-        if (!iD.services.mapillary.sign_defs) {
-            iD.services.mapillary.sign_defs = {};
-            _.each(['au', 'br', 'ca', 'de', 'us'], function(region) {
-                d3.json(context.asset('traffico/string-maps/' + region + '-map.json'), function(err, data) {
-                    if (err) return;
-                    if (region === 'de') region = 'eu';
-                    iD.services.mapillary.sign_defs[region] = data;
-                });
+        if (iD.services.mapillary.sign_defs) return;
+        iD.services.mapillary.sign_defs = {};
+
+        _.each(['au', 'br', 'ca', 'de', 'us'], function(region) {
+            d3.json(context.asset('traffico/string-maps/' + region + '-map.json'), function(err, data) {
+                if (err) return;
+                if (region === 'de') region = 'eu';
+                iD.services.mapillary.sign_defs[region] = data;
             });
+        });
+    }
+
+    function loadViewer() {
+        // mapillary-wrap
+        var wrap = d3.select('#content').selectAll('.mapillary-wrap')
+            .data([0]);
+
+        var enter = wrap.enter().append('div')
+            .attr('class', 'mapillary-wrap')
+            .classed('al', true)       // 'al'=left,  'ar'=right
+            .classed('hidden', true);
+
+        enter.append('button')
+            .attr('class', 'thumb-hide')
+            .on('click', function () { mapillary.hideViewer(); })
+            .append('div')
+            .call(iD.svg.Icon('#icon-close'));
+
+        enter.append('div')
+            .attr('id', 'mly')
+            .attr('class', 'mly-wrapper')
+            .classed('active', false);
+
+        // mapillary-viewercss
+        d3.select('head').selectAll('#mapillary-viewercss')
+            .data([0])
+            .enter()
+            .append('link')
+            .attr('id', 'mapillary-viewercss')
+            .attr('rel', 'stylesheet')
+            .attr('href', viewercss);
+
+        // mapillary-viewerjs
+        d3.select('head').selectAll('#mapillary-viewerjs')
+            .data([0])
+            .enter()
+            .append('script')
+            .attr('id', 'mapillary-viewerjs')
+            .attr('src', viewerjs);
+    }
+
+    function initViewer(imageKey, context) {
+
+        function nodeChanged(d) {
+            var clicks = iD.services.mapillary.clicks;
+            var index = clicks.indexOf(d.key);
+            if (index > -1) {    // nodechange initiated from clicking on a marker..
+                clicks.splice(index, 1);
+            } else {             // nodechange initiated from the Mapillary viewer controls..
+                var loc = d.apiNavImIm ? [d.apiNavImIm.lon, d.apiNavImIm.lat] : [d.latLon.lon, d.latLon.lat];
+                context.map().centerEase(loc);
+                mapillary.setSelectedImage(d.key, false);
+            }
+        }
+
+        if (Mapillary && imageKey) {
+            var opts = {
+                baseImageSize: 320,
+                cover: false,
+                cache: true,
+                debug: false,
+                imagePlane: true,
+                loading: true,
+                sequence: true
+            };
+
+            var viewer = new Mapillary.Viewer('mly', clientId, imageKey, opts);
+            viewer.on('nodechanged', nodeChanged);
+            viewer.on('loadingchanged', mapillary.setViewerLoading);
+            iD.services.mapillary.viewer = viewer;
         }
     }
 
@@ -76,8 +147,8 @@ iD.services.mapillary = function() {
 
     function loadTiles(which, url, projection, dimensions) {
         var tiles = getTiles(projection, dimensions).filter(function(t) {
-                var xyz = t.id.split(',');
-                return !nearNullIsland(xyz[0], xyz[1], xyz[2]);
+              var xyz = t.id.split(',');
+              return !nearNullIsland(xyz[0], xyz[1], xyz[2]);
             });
 
         _.filter(which.inflight, function(v, k) {
@@ -150,6 +221,10 @@ iD.services.mapillary = function() {
         loadTiles('signs', url, projection, dimensions);
     };
 
+    mapillary.loadViewer = function() {
+        loadViewer();
+    };
+
 
     // partition viewport into `psize` x `psize` regions
     function partitionViewport(psize, projection, dimensions) {
@@ -203,73 +278,87 @@ iD.services.mapillary = function() {
         var detectionPackage = d.signs[0].package,
             type = d.signs[0].type,
             country = detectionPackage.split('_')[1];
+
         return iD.services.mapillary.sign_defs[country][type];
     };
 
-    mapillary.showThumbnail = function(imageKey, position) {
+    mapillary.showViewer = function() {
+        d3.select('#content')
+            .selectAll('.mapillary-wrap')
+            .classed('hidden', false)
+            .selectAll('.mly-wrapper')
+            .classed('active', true);
+
+        return mapillary;
+    };
+
+    mapillary.hideViewer = function() {
+        d3.select('#content')
+            .selectAll('.mapillary-wrap')
+            .classed('hidden', true)
+            .selectAll('.mly-wrapper')
+            .classed('active', false);
+
+        d3.selectAll('.layer-mapillary-images .viewfield-group, .layer-mapillary-signs .icon-sign')
+            .classed('selected', false);
+
+        iD.services.mapillary.image = null;
+
+        return mapillary;
+    };
+
+    mapillary.setViewerLoading = function(loading) {
+        var cover = d3.select('#content')
+            .selectAll('.mly-wrapper .Cover');
+
+        cover.classed('CoverDone', !loading);
+
+        var button = cover.selectAll('.CoverButton')
+            .data(loading ? [0] : []);
+
+        button.enter()
+            .append('div')
+            .attr('class', 'CoverButton')
+            .append('div')
+            .attr('class', 'uil-ripple-css')
+            .append('div');
+
+        button.exit()
+            .remove();
+
+        return mapillary;
+    };
+
+    mapillary.updateViewer = function(imageKey, context) {
+        if (!iD.services.mapillary) return;
         if (!imageKey) return;
 
-        var positionClass = {
-            'ar': (position !== 'left'),
-            'al': (position === 'left')
-        };
-
-        var thumbnail = d3.select('#content').selectAll('.mapillary-image')
-            .data([0]);
-
-        // Enter
-        var enter = thumbnail.enter().append('div')
-            .attr('class', 'mapillary-image ar');
-
-        enter.append('button')
-            .on('click', function () {
-                mapillary.hideThumbnail();
-            })
-            .append('div')
-            .call(iD.svg.Icon('#icon-close'));
-
-        enter.append('img');
-
-        enter.append('a')
-            .attr('class', 'link ar')
-            .attr('target', '_blank')
-            .call(iD.svg.Icon('#icon-out-link', 'inline'))
-            .append('span')
-            .text(t('mapillary.view_on_mapillary'));
-
-        // Update
-        thumbnail.selectAll('img')
-            .attr('src', urlThumb + imageKey + '/thumb-320.jpg');
-
-        var link = thumbnail.selectAll('a')
-            .attr('href', urlImage + imageKey);
-
-        if (position) {
-            thumbnail.classed(positionClass);
-            link.classed(positionClass);
+        if (!iD.services.mapillary.viewer) {
+            initViewer(imageKey, context);
+        } else {
+            iD.services.mapillary.viewer.moveToKey(imageKey);
         }
 
-        thumbnail
-            .transition()
-            .duration(200)
-            .style('opacity', 1);
+        return mapillary;
     };
 
-    mapillary.hideThumbnail = function() {
-        if (iD.services.mapillary) {
-            iD.services.mapillary.thumb = null;
-        }
-        d3.select('#content').selectAll('.mapillary-image')
-            .transition()
-            .duration(200)
-            .style('opacity', 0)
-            .remove();
-    };
-
-    mapillary.selectedThumbnail = function(d) {
+    mapillary.getSelectedImage = function() {
         if (!iD.services.mapillary) return null;
-        if (!arguments.length) return iD.services.mapillary.thumb;
-        iD.services.mapillary.thumb = d;
+        return iD.services.mapillary.image;
+    };
+
+    mapillary.setSelectedImage = function(imageKey, fromClick) {
+        if (!iD.services.mapillary) return null;
+
+        iD.services.mapillary.image = imageKey;
+        if (fromClick) {
+            iD.services.mapillary.clicks.push(imageKey);
+        }
+
+        d3.selectAll('.layer-mapillary-images .viewfield-group, .layer-mapillary-signs .icon-sign')
+            .classed('selected', function(d) { return d.key === imageKey; });
+
+        return mapillary;
     };
 
     mapillary.reset = function() {
@@ -285,7 +374,8 @@ iD.services.mapillary = function() {
             signs:  { inflight: {}, loaded: {}, rtree: rbush() }
         };
 
-        iD.services.mapillary.thumb = null;
+        iD.services.mapillary.image = null;
+        iD.services.mapillary.clicks = [];
 
         return mapillary;
     };

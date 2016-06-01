@@ -13,42 +13,22 @@ iD.svg.MapillaryImages = function(projection, context, dispatch) {
 
     function getMapillary() {
         if (iD.services.mapillary && !_mapillary) {
-            _mapillary = iD.services.mapillary().on('loadedImages', debouncedRedraw);
+            _mapillary = iD.services.mapillary();
+            _mapillary.on('loadedImages', debouncedRedraw);
         } else if (!iD.services.mapillary && _mapillary) {
             _mapillary = null;
         }
+
         return _mapillary;
     }
 
-    function showThumbnail(image) {
+    function showLayer() {
         var mapillary = getMapillary();
         if (!mapillary) return;
 
-        var thumb = mapillary.selectedThumbnail(),
-            posX = projection(image.loc)[0],
-            width = layer.dimensions()[0],
-            position = (posX < width / 2) ? 'right' : 'left';
-
-        if (thumb) {
-            d3.selectAll('.layer-mapillary-images .viewfield-group, .layer-mapillary-signs .icon-sign')
-                .classed('selected', function(d) { return d.key === thumb.key; });
-        }
-
-        mapillary.showThumbnail(image.key, position);
-    }
-
-    function hideThumbnail() {
-        d3.selectAll('.layer-mapillary-images .viewfield-group, .layer-mapillary-signs .icon-sign')
-            .classed('selected', false);
-
-        var mapillary = getMapillary();
-        if (mapillary) {
-            mapillary.hideThumbnail();
-        }
-    }
-
-    function showLayer() {
+        mapillary.loadViewer();
         editOn();
+
         layer
             .style('opacity', 0)
             .transition()
@@ -58,8 +38,13 @@ iD.svg.MapillaryImages = function(projection, context, dispatch) {
     }
 
     function hideLayer() {
+        var mapillary = getMapillary();
+        if (mapillary) {
+            mapillary.hideViewer();
+        }
+
         debouncedRedraw.cancel();
-        hideThumbnail();
+
         layer
             .transition()
             .duration(500)
@@ -76,6 +61,18 @@ iD.svg.MapillaryImages = function(projection, context, dispatch) {
         layer.style('display', 'none');
     }
 
+    function click(d) {
+        var mapillary = getMapillary();
+        if (!mapillary) return;
+
+        context.map().centerEase(d.loc);
+
+        mapillary
+            .setSelectedImage(d.key, true)
+            .updateViewer(d.key, context)
+            .showViewer();
+    }
+
     function transform(d) {
         var t = iD.svg.PointTransform(projection)(d);
         if (d.ca) t += ' rotate(' + Math.floor(d.ca) + ',0,0)';
@@ -84,7 +81,8 @@ iD.svg.MapillaryImages = function(projection, context, dispatch) {
 
     function update() {
         var mapillary = getMapillary(),
-            data = (mapillary ? mapillary.images(projection, layer.dimensions()) : []);
+            data = (mapillary ? mapillary.images(projection, layer.dimensions()) : []),
+            imageKey = mapillary ? mapillary.getSelectedImage() : null;
 
         var markers = layer.selectAll('.viewfield-group')
             .data(data, function(d) { return d.key; });
@@ -92,7 +90,9 @@ iD.svg.MapillaryImages = function(projection, context, dispatch) {
         // Enter
         var enter = markers.enter()
             .append('g')
-            .attr('class', 'viewfield-group');
+            .attr('class', 'viewfield-group')
+            .classed('selected', function(d) { return d.key === imageKey; })
+            .on('click', click);
 
         enter.append('path')
             .attr('class', 'viewfield')
@@ -123,35 +123,7 @@ iD.svg.MapillaryImages = function(projection, context, dispatch) {
         layer.enter()
             .append('g')
             .attr('class', 'layer-mapillary-images')
-            .style('display', enabled ? 'block' : 'none')
-            .on('click', function() {   // deselect/select
-                var mapillary = getMapillary();
-                if (!mapillary) return;
-                var d = d3.event.target.__data__,
-                    thumb = mapillary.selectedThumbnail();
-                if (thumb && thumb.key === d.key) {
-                    hideThumbnail();
-                } else {
-                    mapillary.selectedThumbnail(d);
-                    context.map().centerEase(d.loc);
-                    showThumbnail(d);
-                }
-            })
-            .on('mouseover', function() {
-                var mapillary = getMapillary();
-                if (!mapillary) return;
-                showThumbnail(d3.event.target.__data__);
-            })
-            .on('mouseout', function() {
-                var mapillary = getMapillary();
-                if (!mapillary) return;
-                var thumb = mapillary.selectedThumbnail();
-                if (thumb) {
-                    showThumbnail(thumb);
-                } else {
-                    hideThumbnail();
-                }
-            });
+            .style('display', enabled ? 'block' : 'none');
 
         layer.exit()
             .remove();
