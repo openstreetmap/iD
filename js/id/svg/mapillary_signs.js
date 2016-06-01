@@ -41,12 +41,14 @@ iD.svg.MapillarySigns = function(projection, context, dispatch) {
 
     function click(d) {
         var mapillary = getMapillary();
-        if (mapillary) {
-            context.map().centerEase(d.loc);
-            mapillary.setSelectedImage(d.key);
-            mapillary.setViewerImage(d.key);
-            mapillary.showViewer();
-        }
+        if (!mapillary) return;
+
+        context.map().centerEase(d.loc);
+
+        mapillary
+            .setSelectedImage(d.key, true)
+            .updateViewer(d.key, context)
+            .showViewer();
     }
 
     function update() {

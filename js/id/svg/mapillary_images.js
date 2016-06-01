@@ -2,8 +2,7 @@ iD.svg.MapillaryImages = function(projection, context, dispatch) {
     var debouncedRedraw = _.debounce(function () { dispatch.change(); }, 1000),
         minZoom = 12,
         layer = d3.select(null),
-        _clicks = [],
-        _mapillary, _viewer;
+        _mapillary;
 
 
     function init() {
@@ -20,23 +19,14 @@ iD.svg.MapillaryImages = function(projection, context, dispatch) {
             _mapillary = null;
         }
 
-        if (iD.services.mapillary && !_viewer) {
-            _viewer = iD.services.mapillary.viewer;
-            if (_viewer) {
-                _viewer.on('nodechanged', nodeChanged);
-            }
-        } else if (!iD.services.mapillary && _viewer) {
-            _viewer = null;
-        }
-
         return _mapillary;
     }
 
     function showLayer() {
         var mapillary = getMapillary();
         if (!mapillary) return;
-        mapillary.loadViewer();
 
+        mapillary.loadViewer();
         editOn();
 
         layer
@@ -76,24 +66,11 @@ iD.svg.MapillaryImages = function(projection, context, dispatch) {
         if (!mapillary) return;
 
         context.map().centerEase(d.loc);
-        mapillary.setSelectedImage(d.key);
-        mapillary.setViewerImage(d.key);
-        mapillary.showViewer();
-        _clicks.push(d.key);
-    }
 
-    function nodeChanged(d) {
-        var mapillary = getMapillary();
-        if (!mapillary) return;
-
-        var index = _clicks.indexOf(d.key);
-        if (index > -1) {
-            _clicks.splice(index, 1);
-        } else {   // change initiated from the viewer controls..
-            var loc = d.apiNavImIm ? [d.apiNavImIm.lon, d.apiNavImIm.lat] : [d.latLon.lon, d.latLon.lat];
-            context.map().centerEase(loc);
-            mapillary.setSelectedImage(d.key);
-        }
+        mapillary
+            .setSelectedImage(d.key, true)
+            .updateViewer(d.key, context)
+            .showViewer();
     }
 
     function transform(d) {
