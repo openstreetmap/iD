@@ -86,6 +86,16 @@ iD.Background = function(context) {
             imageryUsed.push('Local GPX');
         }
 
+        var mapillary_images = context.layers().layer('mapillary-images');
+        if (mapillary_images && mapillary_images.enabled()) {
+            imageryUsed.push('Mapillary Images');
+        }
+
+        var mapillary_signs = context.layers().layer('mapillary-signs');
+        if (mapillary_signs && mapillary_signs.enabled()) {
+            imageryUsed.push('Mapillary Signs');
+        }
+
         context.history().imageryUsed(imageryUsed);
     };
 
