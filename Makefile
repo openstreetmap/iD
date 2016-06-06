@@ -77,40 +77,7 @@ dist/iD.js: \
 	js/id/geo/intersection.js \
 	js/id/geo/multipolygon.js \
 	js/id/geo/raw_mercator.js \
-	js/id/actions.js \
-	js/id/actions/add_entity.js \
-	js/id/actions/add_member.js \
-	js/id/actions/add_midpoint.js \
-	js/id/actions/add_vertex.js \
-	js/id/actions/change_member.js \
-	js/id/actions/change_preset.js \
-	js/id/actions/change_tags.js \
-	js/id/actions/circularize.js \
-	js/id/actions/connect.js \
-	js/id/actions/copy_entities.js \
-	js/id/actions/delete_member.js \
-	js/id/actions/delete_multiple.js \
-	js/id/actions/delete_node.js \
-	js/id/actions/delete_relation.js \
-	js/id/actions/delete_way.js \
-	js/id/actions/deprecate_tags.js \
-	js/id/actions/discard_tags.js \
-	js/id/actions/disconnect.js \
-	js/id/actions/join.js \
-	js/id/actions/merge.js \
-	js/id/actions/merge_polygon.js \
-	js/id/actions/merge_remote_changes.js \
-	js/id/actions/move.js \
-	js/id/actions/move_node.js \
-	js/id/actions/noop.js \
-	js/id/actions/orthogonalize.js \
-	js/id/actions/restrict_turn.js \
-	js/id/actions/reverse.js \
-	js/id/actions/revert.js \
-	js/id/actions/rotate_way.js \
-	js/id/actions/split.js \
-	js/id/actions/straighten.js \
-	js/id/actions/unrestrict_turn.js \
+	dist/modules/actions.js \
 	js/id/behavior.js \
 	js/id/behavior/add_way.js \
 	js/id/behavior/breathe.js \
@@ -316,6 +283,10 @@ D3_FILES = \
 d3:
 	node_modules/.bin/smash $(D3_FILES) > js/lib/d3.v3.js
 	@echo 'd3 rebuilt. Please reapply 7e2485d, 4da529f, and 223974d'
+
+ACTIONS = $(shell ./node_modules/.bin/browserify --list modules/actions/index.js)
+dist/modules/actions.js: $(ACTIONS)
+	node_modules/.bin/browserify modules/actions/index.js -s iD.actions > dist/modules/actions.js
 
 lodash:
 	node_modules/.bin/lodash --development --output js/lib/lodash.js include="includes,toPairs,assign,bind,chunk,clone,compact,debounce,difference,each,every,extend,filter,find,first,forEach,forOwn,groupBy,indexOf,intersection,isEmpty,isEqual,isFunction,keys,last,map,omit,reject,some,throttle,union,uniq,values,without,flatten,value,chain,cloneDeep,merge,pick,reduce" exports="global,node"
