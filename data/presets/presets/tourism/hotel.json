@@ -7,7 +7,7 @@
         "smoking",
         "stars",
         "rooms",
-        "internet_access"
+        "internet_access",
         "internet_access/fee"
     ],
     "geometry": [
