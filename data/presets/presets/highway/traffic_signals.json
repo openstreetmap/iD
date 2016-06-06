@@ -6,7 +6,8 @@
         "highway": "traffic_signals"
     },
     "fields": [
-        "traffic_signals"
+        "traffic_signals",
+        "traffic_signals_direction"
     ],
     "terms": [
         "light",
