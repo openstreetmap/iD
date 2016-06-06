@@ -1,0 +1,5 @@
+{
+    "key": "internet_access:fee",
+    "type": "check",
+    "label": "Internet Access Fee"
+}
