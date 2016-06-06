@@ -1163,7 +1163,7 @@ en:
       amenity/bbq:
         # amenity=bbq
         name: Barbecue/Grill
-        # 'terms: bbq'
+        # 'terms: bbq,grill'
         terms: "<translate with synonyms or related terms for 'Barbecue/Grill', separated by commas>"
       amenity/bench:
         # amenity=bench

@@ -1611,7 +1611,7 @@
             },
             "amenity/bbq": {
                 "name": "Barbecue/Grill",
-                "terms": "bbq"
+                "terms": "bbq,grill"
             },
             "amenity/bench": {
                 "name": "Bench",
