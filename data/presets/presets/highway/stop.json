@@ -8,5 +8,8 @@
     "terms": [
         "stop sign"
     ],
+    "fields": [
+        "parallel_direction"
+    ],
     "name": "Stop Sign"
 }
