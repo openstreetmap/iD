@@ -1,6 +1,6 @@
 /* Downloads the latest translations from Transifex */
 
-var request = require('request'),
+var request = require('request').defaults({maxSockets: 1}),
     yaml = require('js-yaml'),
     fs = require('fs'),
     _ = require('../js/lib/lodash.js');
@@ -9,6 +9,7 @@ var resources = ['core', 'presets'];
 var outdir = './dist/locales/';
 var api = 'https://www.transifex.com/api/2/';
 var project = api + 'project/id-editor/';
+
 
 /*
  * Transifex oddly doesn't allow anonymous downloading
@@ -67,18 +68,20 @@ function getLanguage(resource) {
         code = code.replace(/-/g, '_');
         var url = resource + 'translation/' + code;
         if (code === 'vi') url += '?mode=reviewed';
-        request.get(url, { auth : auth },
-            function(err, resp, body) {
+        request.get(url, { auth : auth }, function(err, resp, body) {
             if (err) return callback(err);
+            console.log(resp.statusCode + ': ' + url);
             callback(null, yaml.load(JSON.parse(body).content)[code]);
         });
     };
 }
 
 function getLanguages(resource, callback) {
-    request.get(resource + '?details', { auth: auth },
+    var url = resource + '?details';
+    request.get(url, { auth: auth },
         function(err, resp, body) {
         if (err) return callback(err);
+        console.log(resp.statusCode + ': ' + url);
         callback(null, JSON.parse(body).available_languages.map(function(d) {
             return d.code.replace(/_/g, '-');
         }).filter(function(d) {
