@@ -100,6 +100,46 @@ _.extend(Way.prototype, {
         return false;
     },
 
+    lanes: function() {
+        if (!this.tags.highway) return null;
+
+        var defaultLanes = {}, tagged = {};
+
+        switch (this.tags.highway) {
+            case 'service':
+            case 'track':
+            case 'path':
+                defaultLanes.count = this.isOneWay() ? 1 : 2;
+                break;
+            case 'trunk':
+            case 'motorway':
+                defaultLanes.count = this.isOneWay() ? 2 : 4;
+                break;
+            default:
+                defaultLanes.count = this.isOneWay() ? 1 : 2;
+                break;
+        }
+
+        if (!this.isOneWay()) {
+            defaultLanes.forward = defaultLanes.count/2;
+            defaultLanes.backward = defaultLanes.count/2;
+        } else {
+            tagged.oneway = 'yes';
+        }
+
+        tagged.lanes = {};
+        if (this.tags.lanes) tagged.lanes.count = this.tags.lanes;
+        if (this.tags['lanes:forward']) tagged.lanes.forward = this.tags['lanes:forward'];
+        if (this.tags['lanes:backward']) tagged.lanes.backward = this.tags['lanes:backward'];
+
+        return {
+            defaults: {
+                lanes: defaultLanes
+            },
+            tagged: tagged
+        };
+    },
+
     isClosed: function() {
         return this.nodes.length > 0 && this.first() === this.last();
     },
