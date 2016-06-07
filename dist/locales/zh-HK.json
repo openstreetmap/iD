@@ -512,7 +512,6 @@
         "title": "相片重疊 (Mapillary)"
     },
     "mapillary_signs": {
-        "tooltip": "來自Mapillary的交通訊號",
         "title": "交通訊號重疊 (Mapillary)"
     },
     "mapillary": {

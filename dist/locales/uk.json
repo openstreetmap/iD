@@ -512,7 +512,6 @@
         "title": "Фото-шар (Mapillary)"
     },
     "mapillary_signs": {
-        "tooltip": "Дорожні знаки від Mapillary",
         "title": "Шар дорожніх знаків (Mapillary)"
     },
     "mapillary": {

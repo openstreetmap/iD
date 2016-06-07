@@ -512,7 +512,7 @@
         "title": "Foto preklop (Mapillary)"
     },
     "mapillary_signs": {
-        "tooltip": "Prometni znakovi s Mapillary servisa",
+        "tooltip": "Prometni znakovi s Mapillary servisa (mora biti uključen foto preklop)",
         "title": "Preklop prometnih znakova (Mapillary)"
     },
     "mapillary": {

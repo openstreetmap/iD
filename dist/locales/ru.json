@@ -512,7 +512,6 @@
         "title": "Фотографии с Mapillary"
     },
     "mapillary_signs": {
-        "tooltip": "Дорожные знаки с Mapillary",
         "title": "Слой дорожных знаков с Mapillary"
     },
     "mapillary": {

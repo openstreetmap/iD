@@ -512,7 +512,7 @@
         "title": "Foto-laag (Mapillary)"
     },
     "mapillary_signs": {
-        "tooltip": "Verkeerslichten uit Mapillary",
+        "tooltip": "Verkeerslichten uit Mapillary (foto-laag moet geactiveerd zijn)",
         "title": "Herkende-verkeersborden-laag (Mapillary)"
     },
     "mapillary": {
@@ -2033,7 +2033,7 @@
             },
             "building/apartments": {
                 "name": "Appartementen",
-                "terms": "flatgebouw,flats,appartementsgebouw,wolkenkrabber,woongebouw,residentie"
+                "terms": "flatgebouw,flats,appartementsgebouw,wolkenkrabber,woongebouw,residentie,apartementen"
             },
             "building/barn": {
                 "name": "Schuur",
@@ -2097,7 +2097,7 @@
             },
             "building/hotel": {
                 "name": "Hotelgebouw",
-                "terms": "hotel"
+                "terms": "hotel,kamers"
             },
             "building/house": {
                 "name": "Huis",
@@ -3632,7 +3632,7 @@
             },
             "tourism/hotel": {
                 "name": "Hotel",
-                "terms": "hotel"
+                "terms": "hotelgebouw,kamers"
             },
             "tourism/information": {
                 "name": "Informatie",

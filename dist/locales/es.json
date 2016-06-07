@@ -512,7 +512,7 @@
         "title": "Superposición de fotos (Mapillary)"
     },
     "mapillary_signs": {
-        "tooltip": "Señales de tráfico de Mapillary",
+        "tooltip": "Señales de tráfico de Mapillary (debe permitir superposición de fotos)",
         "title": "Superposición de señal de tráfico (Mapillary)"
     },
     "mapillary": {

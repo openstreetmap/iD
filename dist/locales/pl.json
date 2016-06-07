@@ -511,7 +511,6 @@
         "title": "Nakładka zdjęć (Mapillary)"
     },
     "mapillary_signs": {
-        "tooltip": "Znaki drogowe z serwisu Mapillary",
         "title": "Nakładka z znakami drogowymi (Mapillary)"
     },
     "mapillary": {
@@ -2225,7 +2224,8 @@
                 "name": "Tapicer"
             },
             "craft/watchmaker": {
-                "name": "Zegarmistrz"
+                "name": "Zegarmistrz",
+                "terms": "zegarki"
             },
             "craft/window_construction": {
                 "name": "Montaż okien"
@@ -2256,7 +2256,8 @@
                 "name": "Przejście dla pieszych"
             },
             "footway/crosswalk": {
-                "name": "Przejście dla pieszych z zebrą"
+                "name": "Przejście dla pieszych z zebrą",
+                "terms": "zebra"
             },
             "footway/sidewalk": {
                 "name": "Chodnik",
@@ -2341,7 +2342,8 @@
                 "terms": "rampa,wjazd,wyjazd,zjazd"
             },
             "highway/raceway": {
-                "name": "Tor wyścigowy"
+                "name": "Tor wyścigowy",
+                "terms": "tor samochodowy"
             },
             "highway/residential": {
                 "name": "Droga lokalna",
@@ -2381,7 +2383,8 @@
                 "name": "Dojazd dla służb ratowniczych"
             },
             "highway/service/parking_aisle": {
-                "name": "Uliczka parkingowa"
+                "name": "Uliczka parkingowa",
+                "terms": "podjazd parkingowy"
             },
             "highway/services": {
                 "name": "Miejsce Obsługi Podróżnych (MOP)",
@@ -2408,7 +2411,8 @@
                 "terms": "rampa,wjazd,wyjazd,zjazd"
             },
             "highway/track": {
-                "name": "Droga polna lub leśna"
+                "name": "Droga polna lub leśna",
+                "terms": "trakt leśny"
             },
             "highway/traffic_signals": {
                 "name": "Sygnalizacja świetlna",
@@ -2466,7 +2470,8 @@
                 "terms": "kapliczka,przydrożna"
             },
             "junction": {
-                "name": "Skrzyżowanie"
+                "name": "Skrzyżowanie",
+                "terms": "krzyżówka"
             },
             "landuse": {
                 "name": "Zagospodarowanie terenu",
@@ -2485,7 +2490,8 @@
                 "terms": "cmentarz"
             },
             "landuse/churchyard": {
-                "name": "Dziedziniec kościelny"
+                "name": "Dziedziniec kościelny",
+                "terms": "Plac kościelny"
             },
             "landuse/commercial": {
                 "name": "Obszar biurowo-biznesowy"
@@ -2499,7 +2505,8 @@
                 "terms": "ziemia uprawna,grunty rolne"
             },
             "landuse/farmland": {
-                "name": "Pola uprawne"
+                "name": "Pola uprawne",
+                "terms": "Uprawy"
             },
             "landuse/farmyard": {
                 "name": "Teren z zabudowaniami rolniczymi",
@@ -2510,14 +2517,16 @@
                 "terms": "Las"
             },
             "landuse/garages": {
-                "name": "Garaże"
+                "name": "Garaże",
+                "terms": "garaże"
             },
             "landuse/grass": {
                 "name": "Trawa",
                 "terms": "trawa, trawnik, "
             },
             "landuse/industrial": {
-                "name": "Obszar przemysłowy"
+                "name": "Obszar przemysłowy",
+                "terms": "Teren przemysłowy"
             },
             "landuse/landfill": {
                 "name": "Wysypisko",
@@ -2544,7 +2553,8 @@
                 "terms": "kamieniołom, żwirownia, kruszywo,kopalnia odkrywkowa"
             },
             "landuse/residential": {
-                "name": "Zabudowa mieszkaniowa"
+                "name": "Zabudowa mieszkaniowa",
+                "terms": "Teren zamieszkały"
             },
             "landuse/retail": {
                 "name": "Obszar handlowy"
@@ -2565,10 +2575,12 @@
                 "name": "Czatownia ornitologiczna"
             },
             "leisure/bowling_alley": {
-                "name": "Kręgielnia"
+                "name": "Kręgielnia",
+                "terms": "Kręgle"
             },
             "leisure/dog_park": {
-                "name": "Park dla psów"
+                "name": "Park dla psów",
+                "terms": "psi park"
             },
             "leisure/firepit": {
                 "name": "Miejsce na ognisko",
@@ -2678,7 +2690,8 @@
                 "name": "Obiekty sztuczne"
             },
             "man_made/adit": {
-                "name": "Sztolnia"
+                "name": "Sztolnia",
+                "terms": "Tunel kopalniany"
             },
             "man_made/breakwater": {
                 "name": "Falochron",
@@ -2710,7 +2723,8 @@
                 "terms": "latarnia"
             },
             "man_made/mast": {
-                "name": "Maszt radiowy"
+                "name": "Maszt radiowy",
+                "terms": "Wieża radiowa"
             },
             "man_made/observation": {
                 "name": "Wieża obserwacyjna",
@@ -3143,7 +3157,8 @@
                 "terms": "alkohol"
             },
             "shop/anime": {
-                "name": "Sklep z anime"
+                "name": "Sklep z anime",
+                "terms": "sklep anime"
             },
             "shop/antiques": {
                 "name": "Antykwariat",
@@ -3258,7 +3273,8 @@
                 "terms": "kosmetyki,drogeria"
             },
             "shop/craft": {
-                "name": "Sklep z rzemiosłem artystycznym"
+                "name": "Sklep z rzemiosłem artystycznym",
+                "terms": "rzemiosło artystyczne"
             },
             "shop/curtain": {
                 "name": "Sklep z zasłonami",

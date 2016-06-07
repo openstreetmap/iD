@@ -512,7 +512,7 @@
         "title": "Vrstva fotografií (Mapillary)"
     },
     "mapillary_signs": {
-        "tooltip": "Dopravní značky z Mapillary",
+        "tooltip": "Dopravní značky z Mapillary (nutné povolit Vrstvu fotografií)",
         "title": "Vrstva dopravních značek (Mapillary)"
     },
     "mapillary": {

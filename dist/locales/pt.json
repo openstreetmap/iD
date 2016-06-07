@@ -241,6 +241,7 @@
     },
     "commit": {
         "title": "Gravar Alterações",
+        "description_placeholder": "Pequena descrição das tuas contribuições (necessário)",
         "message_label": "Descrição das alterações",
         "upload_explanation": "As alterações que enviar ficarão visíveis em todos os mapas que usem dados do OpenStreetMap.",
         "upload_explanation_with_user": "As alterações que enviar como {user} ficarão visíveis em todos os mapas que usem dados do OpenStreetMap.",
@@ -252,7 +253,9 @@
         "deleted": "Eliminado",
         "created": "Criado",
         "about_changeset_comments": "Sobre comentários de changesets",
-        "about_changeset_comments_link": "//wiki.openstreetmap.org/wiki/Good_changeset_comments"
+        "about_changeset_comments_link": "//wiki.openstreetmap.org/wiki/Good_changeset_comments",
+        "google_warning": "Mencionou o Google no seu comentário: lembre-se que copiar do Google Mapas é estritamente proibido.",
+        "google_warning_link": "http://www.openstreetmap.org/copyright"
     },
     "contributors": {
         "list": "Edições de {users}",
@@ -313,6 +316,7 @@
             "yes": "Sim",
             "no": "Não"
         },
+        "add": "Adicionar",
         "none": "Nenhum",
         "node": "Nó",
         "way": "Linha",
@@ -326,11 +330,14 @@
         "percent_brightness": "{opacity}% transparente",
         "none": "Nenhum",
         "best_imagery": "Melhor fonte de imagem para esse lugar",
+        "switch": "Mudar para este fundo",
         "custom": "Personalizado",
         "custom_button": "Editar fundo personalizando",
         "custom_prompt": "Introduzir um URL válido. Tokens válidos são {z}, {x}, {y} para esquemas Z/X/Y e {u} para esquemas QuadTile.",
+        "fix_misalignment": "Ajudar o alienamento da imagem ",
         "imagery_source_faq": "De onde vem essa imagem?",
         "reset": "reiniciar",
+        "offset": "Arrasta para a área cinzenta abaixo para ajustar o alienamento da imagem, ou insira os valores em metros. ",
         "minimap": {
             "description": "Mini-mapa",
             "tooltip": "Mostra um pequeno mapa com uma área mais abrangente que ajuda a localizar a área que está a editar."
@@ -505,7 +512,7 @@
         "title": "Camada de Fotos (Mapillary)"
     },
     "mapillary_signs": {
-        "tooltip": "Placas de trânsito do Mapillary",
+        "tooltip": "Sinais de trânsito do Mapillary (\"Photo Overlay\" tem de estar ativado)",
         "title": "Camada de Placas de Trânsito (Mapillary)"
     },
     "mapillary": {
@@ -606,6 +613,9 @@
     },
     "presets": {
         "categories": {
+            "category-barrier": {
+                "name": "Tipos de barreira"
+            },
             "category-building": {
                 "name": "Tipos de edifícios"
             },
@@ -625,7 +635,7 @@
                 "name": "Tipos de restrição"
             },
             "category-road": {
-                "name": "Tipos de Rodovia"
+                "name": "Tipos de rodovia"
             },
             "category-route": {
                 "name": "Tipos de rota"
@@ -1990,6 +2000,10 @@
             "barrier/cycle_barrier": {
                 "name": "Barreira de bicicletas",
                 "terms": "Bicicleta"
+            },
+            "barrier/ditch": {
+                "name": "Fosso / Vala / Trincheira (seca)",
+                "terms": "Trench"
             },
             "barrier/entrance": {
                 "name": "Entrada",
@@ -3955,6 +3969,10 @@
                 "name": "Rota de caminhada",
                 "terms": "Hiking Route, Rota de Escalagem"
             },
+            "type/route/horse": {
+                "name": "Rota de equitação",
+                "terms": "Riding Route"
+            },
             "type/route/pipeline": {
                 "name": "Rota de gasoduto / oleoduto",
                 "terms": "Pipeline Route"
@@ -4004,7 +4022,7 @@
                 "terms": "Dam, Usina, Hidrelétrica, Hidroelétrica, Hidro-elétrica, Hidro elétrica"
             },
             "waterway/ditch": {
-                "name": "Fosso / vala / trincheira",
+                "name": "Fosso / Vala / Trincheira",
                 "terms": "Vala, Trincheira, Represa"
             },
             "waterway/dock": {

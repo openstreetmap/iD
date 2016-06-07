@@ -506,7 +506,6 @@
         "title": "사진 겹치기 (Mapillary)"
     },
     "mapillary_signs": {
-        "tooltip": "Mapillary에서 교통 표지판",
         "title": "교통 표지판 겹치기 (Mapillary)"
     },
     "mapillary": {
@@ -851,6 +850,12 @@
                     "opposite": {
                         "description": "일방 통행로에 양방향으로 이동하는 자전거 차선",
                         "title": "역방향 통행 자전거 도로"
+                    },
+                    "opposite_lane": {
+                        "description": "교통 흐름의 방향을 거슬러 향하는 자전거 전용 도로"
+                    },
+                    "share_busway": {
+                        "description": "버스 전용 차선을 겸하는 자전거 도로"
                     },
                     "track": {
                         "title": "자전거 트랙"

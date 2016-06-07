@@ -330,6 +330,7 @@
         "percent_brightness": "{opacity}% brillantor",
         "none": "Cap",
         "best_imagery": "Font d'imatgeria millor coneguda per a aquesta ubicació",
+        "switch": "Senyals de trànsit ",
         "custom": "Personalitzar",
         "custom_button": "Editar el fons personalitzat",
         "custom_prompt": "Introduïu una plantilla d'URL de casella. Els paràmetres vàlids són {z}, {x}, {y} per a l'esquema Z/X/Y i  {u} per a l'esquema quadtile.",
@@ -511,7 +512,7 @@
         "title": "Superposició de fotos (Mapillary)"
     },
     "mapillary_signs": {
-        "tooltip": "Senyals de Trànsit de Mapillary",
+        "tooltip": "Senyals de trànsit de Mapillary (cal activar la capa de fotografies).",
         "title": "Superposició de Senyals de Trànsit (Mapillary)"
     },
     "mapillary": {
@@ -612,6 +613,9 @@
     },
     "presets": {
         "categories": {
+            "category-barrier": {
+                "name": "Característiques de Barrera"
+            },
             "category-building": {
                 "name": "Característiques d'Edificació"
             },
@@ -1934,6 +1938,9 @@
             "barrier/cycle_barrier": {
                 "name": "Barrera per a ciclistes",
                 "terms": "Barrera per a ciclistes, Ciclisme, Bicicleta, Ruta cicloturista, Valla, Tanca, Tancament, Tanca per a bicicletes"
+            },
+            "barrier/ditch": {
+                "name": "Trinxera"
             },
             "barrier/entrance": {
                 "name": "Entrada",
@@ -3596,6 +3603,9 @@
             },
             "type/route/hiking": {
                 "name": "Ruta senderista"
+            },
+            "type/route/horse": {
+                "name": "Ruta de conducció"
             },
             "type/route/pipeline": {
                 "name": "Traçat d'una canonada"

@@ -475,9 +475,6 @@
     "mapillary_images": {
         "tooltip": "Снимки за ниво на улицата от Mapillary"
     },
-    "mapillary_signs": {
-        "tooltip": "Пътни знаци от Mapillary"
-    },
     "mapillary": {
         "view_on_mapillary": "Вижте тази снимка на Mapillary"
     },
