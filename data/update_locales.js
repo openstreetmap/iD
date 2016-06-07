@@ -7,7 +7,7 @@ var request = require('request'),
 
 var resources = ['core', 'presets'];
 var outdir = './dist/locales/';
-var api = 'http://www.transifex.com/api/2/';
+var api = 'https://www.transifex.com/api/2/';
 var project = api + 'project/id-editor/';
 
 /*
