@@ -310,6 +310,11 @@ iD.services.mapillary = function() {
     };
 
     mapillary.setViewerLoading = function(loading) {
+        var canvas = d3.select('#content')
+            .selectAll('.mly-wrapper canvas');
+
+        if (canvas.empty()) return;   // viewer not loaded yet
+
         var cover = d3.select('#content')
             .selectAll('.mly-wrapper .Cover');
 
