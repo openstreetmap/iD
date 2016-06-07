@@ -88,6 +88,10 @@ export function preset(context) {
                 fields.push(UIField(context.presets().field('restrictions'), entity, true));
             }
 
+            if (entity.lanes(context.graph())) {
+                fields.push(UIField(context.presets().field('lanes'), entity, true));
+            }
+
             context.presets().universal().forEach(function(field) {
                 if (preset.fields.indexOf(field) < 0) {
                     fields.push(UIField(field, entity));
