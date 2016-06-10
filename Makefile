@@ -166,6 +166,7 @@ dist/iD.js: \
 	js/id/renderer/tile_layer.js \
 	js/id/svg.js \
 	js/id/svg/areas.js \
+	js/id/svg/debug.js \
 	js/id/svg/defs.js \
 	js/id/svg/gpx.js \
 	js/id/svg/icon.js \

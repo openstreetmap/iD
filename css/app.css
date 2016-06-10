@@ -2312,7 +2312,6 @@ img.tile-removing {
 
 /* Map-In-Map
 ------------------------------------------------------- */
-
 .map-in-map {
     position: absolute;
     overflow: hidden;
@@ -2338,8 +2337,8 @@ img.tile-removing {
     user-select: none;
 }
 
-.map-in-map-svg,
-.map-in-map-gpx {
+.map-in-map-viewport,
+.map-in-map-data {
     top: 0;
     left: 0;
     overflow: hidden;
@@ -2347,11 +2346,11 @@ img.tile-removing {
     width: 100%;
 }
 
-.map-in-map-svg {
+.map-in-map-viewport {
     position: absolute;
 }
 
-.map-in-map-gpx {
+.map-in-map-data {
     position: relative;
     z-index: 10;
 }
@@ -2371,19 +2370,23 @@ img.tile-removing {
 /* Debug
 ------------------------------------------------------- */
 .debug {
+    stroke: currentColor;
     fill: none;
     stroke-width: 2;
-    shape-rendering: crispEdges;
 }
-.red     { stroke: rgba(255, 0, 0, 0.75); }
-.green   { stroke: rgba(0, 255, 0, 0.75); }
-.blue    { stroke: rgba(0, 0, 255, 0.75); }
-.yellow  { stroke: rgba(255, 255, 0, 0.75); }
-.cyan    { stroke: rgba(0, 255, 255, 0.75); }
-.magenta { stroke: rgba(255, 0, 255, 0.75); }
-.orange  { stroke: rgba(255, 153, 0, 0.75); }
-.pink    { stroke: rgba(255, 0, 153, 0.75); }
-.purple  { stroke: rgba(153, 0, 255, 0.75); }
+.map-in-map-data .debug {
+    stroke-width: 1;
+}
+
+.red     { color: rgba(255, 0, 0, 0.75); }
+.green   { color: rgba(0, 255, 0, 0.75); }
+.blue    { color: rgba(0, 0, 255, 0.75); }
+.yellow  { color: rgba(255, 255, 0, 0.75); }
+.cyan    { color: rgba(0, 255, 255, 0.75); }
+.magenta { color: rgba(255, 0, 255, 0.75); }
+.orange  { color: rgba(255, 153, 0, 0.75); }
+.pink    { color: rgba(255, 0, 153, 0.75); }
+.purple  { color: rgba(153, 0, 255, 0.75); }
 
 
 /* Info Box
