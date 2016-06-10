@@ -78,7 +78,7 @@ iD.TileLayer = function(context) {
     // rentered when tiles load/error (see #644).
     function render(selection) {
         var requests = [];
-        var showDebug = context.debugTile() && !source.overlay;
+        var showDebug = context.getDebug('tile') && !source.overlay;
 
         if (source.validZoom(z)) {
             tile().forEach(function(d) {

@@ -2356,7 +2356,6 @@ img.tile-removing {
     z-index: 10;
 }
 
-.bbox,
 .map-in-map-bbox {
     fill: none;
     stroke: rgba(255, 255, 0, 0.75);
@@ -2367,6 +2366,25 @@ img.tile-removing {
 .map-in-map-bbox.thick {
     stroke-width: 5;
 }
+
+
+/* Debug
+------------------------------------------------------- */
+.debug {
+    fill: none;
+    stroke-width: 2;
+    shape-rendering: crispEdges;
+}
+.red     { stroke: rgba(255, 0, 0, 0.75); }
+.green   { stroke: rgba(0, 255, 0, 0.75); }
+.blue    { stroke: rgba(0, 0, 255, 0.75); }
+.yellow  { stroke: rgba(255, 255, 0, 0.75); }
+.cyan    { stroke: rgba(0, 255, 255, 0.75); }
+.magenta { stroke: rgba(255, 0, 255, 0.75); }
+.orange  { stroke: rgba(255, 153, 0, 0.75); }
+.pink    { stroke: rgba(255, 0, 153, 0.75); }
+.purple  { stroke: rgba(153, 0, 255, 0.75); }
+
 
 /* Info Box
 ------------------------------------------------------- */
