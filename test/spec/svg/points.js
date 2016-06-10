@@ -6,7 +6,7 @@ describe("iD.svg.Points", function () {
     beforeEach(function () {
         context = iD().presets(iD.data.presets);
         surface = d3.select(document.createElementNS('http://www.w3.org/2000/svg', 'svg'))
-            .call(iD.svg.Layers(context));
+            .call(iD.svg.Layers(projection, context));
     });
 
     it("adds tag classes", function () {
