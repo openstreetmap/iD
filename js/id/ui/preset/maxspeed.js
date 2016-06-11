@@ -31,7 +31,7 @@ iD.ui.preset.maxspeed = function(field, context) {
 
         imperial = _.some(iD.data.imperial.features, function(f) {
             return _.some(f.geometry.coordinates, function(d) {
-                return iD.geo.pointInPolygon(loc, d[0]);
+                return iD.geo.pointInPolygon(loc, d);
             });
         });
 
