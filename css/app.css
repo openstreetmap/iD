@@ -2158,7 +2158,7 @@ div.full-screen > button:hover {
     float:right;
     margin-left: 20px;
     margin-bottom: 20px;
-    padding-left: 5px
+    padding-left: 5px;
 }
 
 .help-wrap .toc li a,
@@ -2388,6 +2388,22 @@ img.tile-removing {
 .pink    { color: rgba(255, 0, 153, 0.75); }
 .purple  { color: rgba(153, 0, 255, 0.75); }
 
+.debug-legend {
+    position: absolute;
+    top: 70px;
+    right: 80px;
+    padding: 5px;
+    border-radius: 4px;
+    pointer-events: none;
+}
+
+.debug-legend-item {
+    padding-right: 5px;
+}
+.debug-legend-item:before {
+    content: "\25A0";
+    padding: 0 5px;
+}
 
 /* Info Box
 ------------------------------------------------------- */

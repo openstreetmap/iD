@@ -1,14 +1,59 @@
 iD.svg.Debug = function(projection, context) {
 
+    function multipolygons(imagery) {
+        return imagery.map(function(data) {
+            return {
+                type: 'MultiPolygon',
+                coordinates: [ data.polygon ]
+            };
+        });
+    }
+
     function drawDebug(surface) {
         var showsImagery = context.getDebug('imagery'),
             showsImperial = context.getDebug('imperial'),
             showsDriveLeft = context.getDebug('driveLeft'),
-            enabled = showsImagery || showsImperial || showsDriveLeft,
             path = d3.geo.path().projection(projection);
 
+
+        var debugData = [];
+        if (showsImagery) {
+            debugData.push({ class: 'orange', label: 'imagery' });
+        }
+        if (showsImperial) {
+            debugData.push({ class: 'cyan', label: 'imperial' });
+        }
+        if (showsDriveLeft) {
+            debugData.push({ class: 'green', label: 'driveLeft' });
+        }
+
+
+        var legend = d3.select('#content')
+            .selectAll('.debug-legend')
+            .data(debugData.length ? [0] : []);
+
+        legend.enter()
+            .append('div')
+            .attr('class', 'fillD debug-legend');
+
+        legend.exit()
+            .remove();
+
+
+        var legendItems = legend.selectAll('.debug-legend-item')
+            .data(debugData, function(d) { return d.label; });
+
+        legendItems.enter()
+            .append('span')
+            .attr('class', function(d) { return 'debug-legend-item ' + d.class; })
+            .text(function(d) { return d.label; });
+
+        legendItems.exit()
+            .remove();
+
+
         var layer = surface.selectAll('.layer-debug')
-            .data(enabled ? [0] : []);
+            .data(debugData.length ? [0] : []);
 
         layer.enter()
             .append('g')
@@ -18,22 +63,16 @@ iD.svg.Debug = function(projection, context) {
             .remove();
 
 
-        var legend = d3.select('#content')
-            .selectAll('#debugLegend')
-            .data(enabled ? [0] : []);
-
-        legend.enter()
-            .append('div')
-            .attr('id', 'debugLegend')
-            .attr('class', 'fillD')
-            .attr('style', 'position:absolute; top:70px; right:80px; padding:5px;');
-
-        legend.exit()
-            .remove();
-
+        var extent = context.map().extent(),
+            availableImagery = showsImagery && multipolygons(iD.data.imagery.filter(function(source) {
+                if (!source.polygon) return false;
+                return source.polygon.some(function(polygon) {
+                    return iD.geo.polygonIntersectsPolygon(polygon, extent, true);
+                });
+            }));
 
         var imagery = layer.selectAll('path.debug-imagery')
-            .data(showsImagery ? [] : []);  // TODO
+            .data(showsImagery ? availableImagery : []);
 
         imagery.enter()
             .append('path')
