@@ -10,13 +10,21 @@ iD.svg.Debug = function(projection, context) {
     }
 
     function drawDebug(surface) {
-        var showsImagery = context.getDebug('imagery'),
+        var showsTile = context.getDebug('tile'),
+            showsCollision = context.getDebug('collision'),
+            showsImagery = context.getDebug('imagery'),
             showsImperial = context.getDebug('imperial'),
             showsDriveLeft = context.getDebug('driveLeft'),
             path = d3.geo.path().projection(projection);
 
 
         var debugData = [];
+        if (showsTile) {
+            debugData.push({ class: 'red', label: 'tile' });
+        }
+        if (showsCollision) {
+            debugData.push({ class: 'yellow', label: 'collision' });
+        }
         if (showsImagery) {
             debugData.push({ class: 'orange', label: 'imagery' });
         }
@@ -53,7 +61,7 @@ iD.svg.Debug = function(projection, context) {
 
 
         var layer = surface.selectAll('.layer-debug')
-            .data(debugData.length ? [0] : []);
+            .data(showsImagery || showsImperial || showsDriveLeft ? [0] : []);
 
         layer.enter()
             .append('g')
@@ -115,7 +123,9 @@ iD.svg.Debug = function(projection, context) {
     // chainable getter/setters, and this one is just a getter.
     drawDebug.enabled = function() {
         if (!arguments.length) {
-            return context.getDebug('imagery') ||
+            return context.getDebug('tile') ||
+                context.getDebug('collision') ||
+                context.getDebug('imagery') ||
                 context.getDebug('imperial') ||
                 context.getDebug('driveLeft');
         } else {
