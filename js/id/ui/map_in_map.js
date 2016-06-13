@@ -6,6 +6,7 @@ iD.ui.MapInMap = function(context) {
             overlayLayers = {},
             projection = iD.geo.RawMercator(),
             gpxLayer = iD.svg.Gpx(projection, context).showLabels(false),
+            debugLayer = iD.svg.Debug(projection, context),
             zoom = d3.behavior.zoom()
                 .scaleExtent([ztok(0.5), ztok(24)])
                 .on('zoom', zoomPan),
@@ -13,7 +14,7 @@ iD.ui.MapInMap = function(context) {
             panning = false,
             hidden = true,
             zDiff = 6,    // by default, minimap renders at (main zoom - 6)
-            tStart, tLast, tCurr, kLast, kCurr, tiles, svg, timeoutId;
+            tStart, tLast, tCurr, kLast, kCurr, tiles, viewport, timeoutId;
 
         function ztok(z) { return 256 * Math.pow(2, z); }
         function ktoz(k) { return Math.log(k) / Math.LN2 - 8; }
@@ -51,7 +52,7 @@ iD.ui.MapInMap = function(context) {
                 tY = (tCurr[1] / scale - tLast[1]) * scale;
 
             iD.util.setTransform(tiles, tX, tY, scale);
-            iD.util.setTransform(svg, 0, 0, scale);
+            iD.util.setTransform(viewport, 0, 0, scale);
             transformed = true;
 
             queueRedraw();
@@ -112,7 +113,7 @@ iD.ui.MapInMap = function(context) {
 
             if (transformed) {
                 iD.util.setTransform(tiles, 0, 0);
-                iD.util.setTransform(svg, 0, 0);
+                iD.util.setTransform(viewport, 0, 0);
                 transformed = false;
             }
         }
@@ -188,33 +189,35 @@ iD.ui.MapInMap = function(context) {
                 .remove();
 
 
-            var gpx = tiles
-                .selectAll('.map-in-map-gpx')
-                .data(gpxLayer.enabled() ? [0] : []);
+            var dataLayers = tiles
+                .selectAll('.map-in-map-data')
+                .data([0]);
 
-            gpx.enter()
+            dataLayers.enter()
                 .append('svg')
-                .attr('class', 'map-in-map-gpx');
+                .attr('class', 'map-in-map-data');
 
-            gpx.exit()
+            dataLayers.exit()
                 .remove();
 
-            gpx.call(gpxLayer);
+            dataLayers
+                .call(gpxLayer)
+                .call(debugLayer);
 
 
-            // redraw bounding box
+            // redraw viewport bounding box
             if (!panning) {
                 var getPath = d3.geo.path().projection(projection),
                     bbox = { type: 'Polygon', coordinates: [context.map().extent().polygon()] };
 
-                svg = wrap.selectAll('.map-in-map-svg')
+                viewport = wrap.selectAll('.map-in-map-viewport')
                     .data([0]);
 
-                svg.enter()
+                viewport.enter()
                     .append('svg')
-                    .attr('class', 'map-in-map-svg');
+                    .attr('class', 'map-in-map-viewport');
 
-                var path = svg.selectAll('.map-in-map-bbox')
+                var path = viewport.selectAll('.map-in-map-bbox')
                     .data([bbox]);
 
                 path.enter()

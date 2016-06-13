@@ -133,6 +133,7 @@ dist/iD.js: \
 	js/id/renderer/tile_layer.js \
 	js/id/svg.js \
 	js/id/svg/areas.js \
+	js/id/svg/debug.js \
 	js/id/svg/defs.js \
 	js/id/svg/gpx.js \
 	js/id/svg/icon.js \
@@ -282,7 +283,7 @@ D3_FILES = \
 
 d3:
 	node_modules/.bin/smash $(D3_FILES) > js/lib/d3.v3.js
-	@echo 'd3 rebuilt. Please reapply 7e2485d, 4da529f, and 223974d'
+	@echo 'd3 rebuilt. Please reapply 7e2485d, 4da529f, 223974d and 71a3d3e'
 
 ACTIONS = $(shell ./node_modules/.bin/browserify --list modules/actions/index.js)
 dist/modules/actions.js: $(ACTIONS)

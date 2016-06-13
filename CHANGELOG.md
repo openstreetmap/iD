@@ -1,5 +1,11 @@
 :warning: = Breaking change, may affect downstream projects or sites that embed iD.
 
+## 1.9.6
+##### Jun 7, 2016
+* Embed interactive Mapillary JS viewer instead of static image (#3128, thanks @kepta, @peterneubauer)
+* Add "grill" as search term for `amenity=bbq` preset (#3139, thanks @manfredbrandl)
+* When setting Wikipedia value, also set corresponding Wikidata tag (#2732, thanks @1ec5)
+
 ## 1.9.5
 ##### May 25, 2016
 * Clean translated combo value when comparing to display value (#3129)

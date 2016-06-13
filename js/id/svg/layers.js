@@ -5,7 +5,8 @@ iD.svg.Layers = function(projection, context) {
             { id: 'osm', layer: iD.svg.Osm(projection, context, dispatch) },
             { id: 'gpx', layer: iD.svg.Gpx(projection, context, dispatch) },
             { id: 'mapillary-images', layer: iD.svg.MapillaryImages(projection, context, dispatch) },
-            { id: 'mapillary-signs',  layer: iD.svg.MapillarySigns(projection, context, dispatch) }
+            { id: 'mapillary-signs',  layer: iD.svg.MapillarySigns(projection, context, dispatch) },
+            { id: 'debug', layer: iD.svg.Debug(projection, context, dispatch) }
         ];
 
 

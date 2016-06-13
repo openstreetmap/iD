@@ -512,7 +512,7 @@
         "title": "Photo-Überlagerung (Mapillary)"
     },
     "mapillary_signs": {
-        "tooltip": "Verkehrszeichen von Mapillary",
+        "tooltip": "Verkehrsschilder von Mapillary (bei aktivierter Fotoebene)",
         "title": "Verkehrszeichen-Überlagerung (Mapillary)"
     },
     "mapillary": {
@@ -1742,8 +1742,8 @@
                 "terms": "Tankstelle, Tanke"
             },
             "amenity/grave_yard": {
-                "name": "Friedhof",
-                "terms": "Friedhof"
+                "name": "Gräberfeld",
+                "terms": "Gräberfeld, kleiner Friedhof"
             },
             "amenity/grit_bin": {
                 "name": "Streugutkiste",

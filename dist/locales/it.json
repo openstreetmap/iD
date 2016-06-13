@@ -512,7 +512,7 @@
         "title": "Livello Foto (Mapillary)"
     },
     "mapillary_signs": {
-        "tooltip": "Segnali stradali da Mapillary",
+        "tooltip": "Segnali stradali da Mapillary (necessita attivazione Livello Foto)",
         "title": "Livello Segnali Stradali (Mapillary)"
     },
     "mapillary": {

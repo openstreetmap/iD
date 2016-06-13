@@ -100,4 +100,29 @@ describe('iD', function() {
             expect(context.presets().match(way, graph).id).to.eql('mines');
         });
     });
+
+    describe('#debug', function() {
+        it('sets and gets debug flags', function() {
+            var context = iD(),
+                flags = {
+                    tile: false,
+                    collision: false,
+                    imagery: false,
+                    imperial: false,
+                    driveLeft: false
+                };
+
+            expect(context.debugFlags()).to.eql(flags);
+
+            context.setDebug('tile', true);
+            expect(context.getDebug('tile')).to.be.true;
+
+            context.setDebug('collision');
+            expect(context.getDebug('collision')).to.be.true;
+
+            context.setDebug('tile', false);
+            expect(context.getDebug('tile')).to.be.false;
+        });
+    });
+
 });

@@ -6,6 +6,7 @@ iD.services.mapillary = function() {
         viewerjs = 'https://npmcdn.com/mapillary-js@1.3.0/dist/mapillary-js.min.js',
         clientId = 'NzNRM2otQkR2SHJzaXJmNmdQWVQ0dzo1ZWYyMmYwNjdmNDdlNmVi',
         maxResults = 1000,
+        maxPages = 10,
         tileZoom = 14;
 
 
@@ -185,6 +186,7 @@ iD.services.mapillary = function() {
                 if (err || !data.features || !data.features.length) return;
 
                 var features = [],
+                    nextPage = page + 1,
                     feature, loc, d;
 
                 for (var i = 0; i < data.features.length; i++) {
@@ -202,8 +204,8 @@ iD.services.mapillary = function() {
                 if (which === 'images') dispatch.loadedImages();
                 if (which === 'signs') dispatch.loadedSigns();
 
-                if (data.features.length === maxResults) {
-                    loadTilePage(which, url, tile, ++page);
+                if (data.features.length === maxResults && nextPage < maxPages) {
+                    loadTilePage(which, url, tile, nextPage);
                 }
             }
         );
@@ -308,6 +310,11 @@ iD.services.mapillary = function() {
     };
 
     mapillary.setViewerLoading = function(loading) {
+        var canvas = d3.select('#content')
+            .selectAll('.mly-wrapper canvas');
+
+        if (canvas.empty()) return;   // viewer not loaded yet
+
         var cover = d3.select('#content')
             .selectAll('.mly-wrapper .Cover');
 

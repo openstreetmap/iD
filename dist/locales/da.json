@@ -512,7 +512,7 @@
         "title": "Billedelag (Mapillary)"
     },
     "mapillary_signs": {
-        "tooltip": "Trafikskilte fra Mapillary",
+        "tooltip": "Trafikskilte fra Mapillary (fotolag skal være slået til)",
         "title": "Trafikskiltelag (Mapillary)"
     },
     "mapillary": {
@@ -613,6 +613,9 @@
     },
     "presets": {
         "categories": {
+            "category-barrier": {
+                "name": "Barrierer objekter"
+            },
             "category-building": {
                 "name": "Bygningsegenskaber"
             },
@@ -1997,6 +2000,10 @@
             "barrier/cycle_barrier": {
                 "name": "Cykelbarriere",
                 "terms": "Cykelbarriere"
+            },
+            "barrier/ditch": {
+                "name": "Grøft",
+                "terms": "Grøft"
             },
             "barrier/entrance": {
                 "name": "Indgang",

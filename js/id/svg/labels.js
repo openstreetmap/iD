@@ -425,7 +425,7 @@ iD.svg.Labels = function(projection, context) {
         drawAreaIcons(label, labelled.area, filter, 'arealabel-icon', positions.area);
 
         // debug
-        var showDebug = context.debugCollision();
+        var showDebug = context.getDebug('collision');
         var debug = label.selectAll('.layer-label-debug')
             .data(showDebug ? [true] : []);
 
@@ -447,11 +447,11 @@ iD.svg.Labels = function(projection, context) {
                 ]]};
             });
 
-            var debugboxes = debug.selectAll('.bbox').data(gj);
+            var debugboxes = debug.selectAll('.debug').data(gj);
 
             debugboxes.enter()
                 .append('path')
-                .attr('class', 'bbox');
+                .attr('class', 'debug yellow');
 
             debugboxes.exit()
                 .remove();

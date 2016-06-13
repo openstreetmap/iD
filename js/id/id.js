@@ -216,18 +216,24 @@ window.iD = function () {
 
 
     /* Debug */
-    var debugTile = false, debugCollision = false;
-    context.debugTile = function(_) {
-        if (!arguments.length) return debugTile;
-        debugTile = _;
+    var debugFlags = {
+        tile: false,
+        collision: false,
+        imagery: false,
+        imperial: false,
+        driveLeft: false
+    };
+    context.debugFlags = function() {
+        return debugFlags;
+    };
+    context.setDebug = function(flag, val) {
+        if (arguments.length === 1) val = true;
+        debugFlags[flag] = val;
         dispatch.change();
         return context;
     };
-    context.debugCollision = function(_) {
-        if (!arguments.length) return debugCollision;
-        debugCollision = _;
-        dispatch.change();
-        return context;
+    context.getDebug = function(flag) {
+        return flag && debugFlags[flag];
     };
 
 
@@ -379,7 +385,7 @@ window.iD = function () {
 };
 
 
-iD.version = '1.9.5';
+iD.version = '1.9.6';
 
 (function() {
     var detected = {};

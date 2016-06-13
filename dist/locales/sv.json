@@ -512,7 +512,7 @@
         "title": "Bildlager (Mapillary)"
     },
     "mapillary_signs": {
-        "tooltip": "Trafikskyltar från Mapillary",
+        "tooltip": "Trafikskyltar från Mapillary (måste aktivera bildlager)",
         "title": "Bildlager med trafikskyltar (Mapillary)"
     },
     "mapillary": {

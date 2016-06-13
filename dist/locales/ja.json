@@ -287,7 +287,8 @@
         "no_results_worldwide": "検索結果がありません"
     },
     "geolocate": {
-        "title": "編集画面を現在地へ移動"
+        "title": "編集画面を現在地へ移動",
+        "locating": "位置情報を取得中です。しばらくお待ちください。"
     },
     "inspector": {
         "no_documentation_combination": "このタグの組み合わせに関する解説はありません",
@@ -356,6 +357,7 @@
             "tooltip": "地点情報"
         },
         "traffic_roads": {
+            "description": "公道",
             "tooltip": "道路、街路など"
         },
         "service_roads": {
@@ -363,7 +365,7 @@
             "tooltip": "私道、駐車場内経路、農道など"
         },
         "paths": {
-            "description": "山道",
+            "description": "歩道・小道",
             "tooltip": "歩道、自転車道など"
         },
         "buildings": {
@@ -510,7 +512,6 @@
         "title": "写真の重ね合わせ (Mapillary)"
     },
     "mapillary_signs": {
-        "tooltip": "Mapillary から交通標識を取得します",
         "title": "交通標識の重ね合わせ (Mapillary)"
     },
     "mapillary": {
@@ -611,6 +612,9 @@
     },
     "presets": {
         "categories": {
+            "category-barrier": {
+                "name": "障害物"
+            },
             "category-building": {
                 "name": "建物"
             },
@@ -934,9 +938,6 @@
             },
             "entrance": {
                 "label": "タイプ"
-            },
-            "except": {
-                "label": "例外"
             },
             "fax": {
                 "label": "FAX",
@@ -1279,9 +1280,6 @@
             },
             "restriction": {
                 "label": "タイプ"
-            },
-            "restrictions": {
-                "label": "進行方向制限"
             },
             "route": {
                 "label": "タイプ"
@@ -1677,7 +1675,7 @@
                 "terms": "時計"
             },
             "amenity/college": {
-                "name": "大学の敷地",
+                "name": "短大・高専・専門学校の敷地",
                 "terms": "キャンパス"
             },
             "amenity/community_centre": {
@@ -1812,6 +1810,10 @@
                 "name": "郵便局",
                 "terms": "郵便局"
             },
+            "amenity/prison": {
+                "name": "刑務所の敷地",
+                "terms": "刑務所, 刑務所の敷地, 監獄, 拘置所, 少年院"
+            },
             "amenity/pub": {
                 "name": "居酒屋",
                 "terms": "パブ, 居酒屋, 焼き鳥屋"
@@ -1916,6 +1918,9 @@
                 "name": "新聞自動販売機",
                 "terms": "新聞, 自動販売機, 自販機"
             },
+            "amenity/vending_machine/parcel_pickup_dropoff": {
+                "terms": "自動販売機, 自販機"
+            },
             "amenity/vending_machine/parking_tickets": {
                 "name": "パーキングチケット発給機",
                 "terms": "パーキングチケット, パーキングメーター, 駐車券, 券売機, 自動券売機, 自動販売機, 自販機, 自動発券機, 発券機"
@@ -1939,6 +1944,14 @@
             "amenity/waste_basket": {
                 "name": "ゴミ箱",
                 "terms": "ゴミ箱, ごみ箱"
+            },
+            "amenity/waste_disposal": {
+                "name": "ゴミ収集ボックス",
+                "terms": "ゴミステーション, ゴミ集積所, ゴミ捨て場, ゴミ置き場, ゴミ, ゴミ箱, ゴミコンテナ, ゴミ回収, ダストボックス"
+            },
+            "amenity/water_point": {
+                "name": "キャンピングカー用の給水施設",
+                "terms": "給水, 補給, 給水所, キャンピングカー, 給水塔, 飲料水, 飲水, 飲み水, キャンプ場, オートキャンプ場"
             },
             "area": {
                 "name": "エリア",
@@ -1971,6 +1984,10 @@
             "barrier/cycle_barrier": {
                 "name": "自転車止め",
                 "terms": "自転車止め"
+            },
+            "barrier/ditch": {
+                "name": "塹壕・空堀",
+                "terms": "塹壕, 空堀, 堀, 溝, 谷"
             },
             "barrier/entrance": {
                 "name": "出入口",
@@ -2049,8 +2066,8 @@
                 "terms": "教会"
             },
             "building/college": {
-                "name": "大学の建物",
-                "terms": "大学の建物"
+                "name": "短大・高専・専門学校の建物",
+                "terms": "短大, 高専, 高等専門学校, 短期大学, 専門, 専門学校"
             },
             "building/commercial": {
                 "name": "オフィスビル",
@@ -3337,7 +3354,8 @@
                 "terms": "古美術品店, アンティークショップ"
             },
             "shop/art": {
-                "name": "美術品販売店"
+                "name": "美術品販売店",
+                "terms": "現代美術の商店"
             },
             "shop/baby_goods": {
                 "name": "赤ちゃん用品店",
@@ -3424,7 +3442,8 @@
                 "terms": "衣料品店, 洋服店, 呉服店"
             },
             "shop/coffee": {
-                "name": "コーヒー豆販売店"
+                "name": "コーヒー豆販売店",
+                "terms": "コーヒー豆専門店"
             },
             "shop/computer": {
                 "name": "コンピューター店",
@@ -3622,6 +3641,10 @@
                 "name": "新聞・雑誌店",
                 "terms": "新聞, 雑誌, マガジン, ニュース, スタンド"
             },
+            "shop/nutrition_supplements": {
+                "name": "栄養サプリ販売店",
+                "terms": "栄養サプリメント販売店, サプリ専門店, サプリメント専門店"
+            },
             "shop/optician": {
                 "name": "メガネ",
                 "terms": "メガネ, 眼鏡, メガネ屋, 眼鏡屋"
@@ -3755,7 +3778,8 @@
                 "terms": "銃砲店"
             },
             "shop/window_blind": {
-                "name": "ブラインドカーテン専門店"
+                "name": "ブラインドカーテン専門店",
+                "terms": "ブラインド販売店"
             },
             "shop/wine": {
                 "name": "ワイン店",
@@ -3864,30 +3888,6 @@
             "type/restriction": {
                 "name": "進行方向制限",
                 "terms": "進行方向制限"
-            },
-            "type/restriction/no_left_turn": {
-                "name": "左折禁止",
-                "terms": "左折禁止"
-            },
-            "type/restriction/no_right_turn": {
-                "name": "右折禁止",
-                "terms": "右折禁止"
-            },
-            "type/restriction/no_straight_on": {
-                "name": "直進禁止",
-                "terms": "直進禁止"
-            },
-            "type/restriction/no_u_turn": {
-                "name": "転回禁止",
-                "terms": "転回禁止, Uターン禁止"
-            },
-            "type/restriction/only_left_turn": {
-                "name": "左折のみ可",
-                "terms": "左折のみ可"
-            },
-            "type/restriction/only_right_turn": {
-                "name": "右折のみ可",
-                "terms": "右折のみ可"
             },
             "type/restriction/only_straight_on": {
                 "name": "直進のみ可",

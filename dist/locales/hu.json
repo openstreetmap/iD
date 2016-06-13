@@ -512,7 +512,7 @@
         "title": "Fotó réteg (Mapillary)"
     },
     "mapillary_signs": {
-        "tooltip": "Közlekedési táblák a Mapillary-ből",
+        "tooltip": "Közlekedési táblák a Mapillaryről (be kell kapcsolni a fotó réteget)",
         "title": "Közlekedési tábla réteg (Mapillary)"
     },
     "mapillary": {

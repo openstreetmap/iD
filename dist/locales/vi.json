@@ -512,7 +512,7 @@
         "title": "Lớp phủ Hình ảnh (Mapillary)"
     },
     "mapillary_signs": {
-        "tooltip": "Bảng giao thông do Mapillary cung cấp",
+        "tooltip": "Bảng giao thông do Mapillary cung cấp (phải bật Lớp phủ Hình ảnh)",
         "title": "Lớp phủ Bảng Giao thông (Mapillary)"
     },
     "mapillary": {
