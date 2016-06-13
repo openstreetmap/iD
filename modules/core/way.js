@@ -101,16 +101,17 @@ _.extend(Way.prototype, {
     },
 
     lanes: function() {
+        function parseTurnLane(str) {
+            if (!str || str === '') return null;
+
+            return str.split('|').map(function(s) {
+                return s.split(';');
+            });
+        }
+
         if (!this.tags.highway) return null;
-
         var defaultLanes = {}, tagged = {};
-
         switch (this.tags.highway) {
-            case 'service':
-            case 'track':
-            case 'path':
-                defaultLanes.count = this.isOneWay() ? 1 : 2;
-                break;
             case 'trunk':
             case 'motorway':
                 defaultLanes.count = this.isOneWay() ? 2 : 4;
@@ -120,11 +121,10 @@ _.extend(Way.prototype, {
                 break;
         }
 
-        if (!this.isOneWay()) {
-            defaultLanes.forward = defaultLanes.count/2;
-            defaultLanes.backward = defaultLanes.count/2;
-        } else {
+        if (this.isOneWay()) {
             tagged.oneway = 'yes';
+        } else {
+            tagged.oneway = 'no';
         }
 
         tagged.lanes = {};
