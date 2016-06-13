@@ -554,7 +554,7 @@ describe('iD.Way', function() {
         });
     });
 
-    describe.only("iD.Lanes", function() {
+    describe("iD.Lanes", function() {
 
         describe("default lane tags", function() {
 
@@ -752,6 +752,42 @@ describe('iD.Way', function() {
                     expect(iD.Way({tags: { highway: 'path', oneway: 'yes' }}).lanes().defaults, 'path lanes')
                         .to.eql({ lanes: { count: 1 } });
                 });
+            });
+        });
+
+        describe.only("tagged", function() {
+
+            it("correctly returns oneway when tagged as oneway", function() {
+                expect(iD.Way({tags: { highway: 'residential', oneway: 'yes' }}).lanes().tagged.oneway, 'service lanes')
+                    .to.eql('yes');
+                expect(iD.Way({tags: { highway: 'residential', oneway: 'no' }}).lanes().tagged.oneway, 'service lanes')
+                    .to.eql('no');
+            });
+
+            it("correctly returns lane count", function() {
+                expect(iD.Way({tags: { highway: 'residential', oneway: 'yes', lanes: 4 }}).lanes().tagged.lanes, 'service lanes')
+                    .to.eql({ count: 4 });
+                expect(iD.Way({tags: { highway: 'path', lanes: 1 }}).lanes().tagged.lanes, 'service lanes')
+                    .to.eql({ count: 1 });
+            });
+
+            it("correctly returns the lane:forward and lane:backward count", function() {
+                expect(iD.Way({tags: { highway: 'residential', lanes: 2, 'lanes:forward': 1, 'lanes:backward': 1 }}).lanes().tagged.lanes, 'residential lanes')
+                    .to.eql({
+                        count: 2,
+                        forward: 1,
+                        backward: 1
+                    });
+                expect(iD.Way({tags: { highway: 'trunk', lanes: 2, oneway: 'yes' }}).lanes().tagged.lanes, 'trunk lanes')
+                    .to.eql({
+                        count: 2
+                    });
+                expect(iD.Way({tags: { highway: 'primary', lanes: 4, 'lanes:backward': 3, 'lanes:forward': 1 }}).lanes().tagged.lanes, 'primary lanes')
+                    .to.eql({
+                        count: 4,
+                        backward: 3,
+                        forward: 1
+                    });
             });
         });
     });
