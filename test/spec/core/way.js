@@ -269,27 +269,44 @@ describe('iD.Way', function() {
         });
 
         it('returns false when the way has tag oneway=no', function() {
-            expect(iD.Way({tags: { oneway: 'no' }}).isOneWay()).to.be.false;
-            expect(iD.Way({tags: { oneway: '0' }}).isOneWay()).to.be.false;
+            expect(iD.Way({tags: { oneway: 'no' }}).isOneWay(), 'oneway no').to.be.false;
+            expect(iD.Way({tags: { oneway: '0' }}).isOneWay(), 'oneway 0').to.be.false;
         });
 
         it('returns true when the way has tag oneway=yes', function() {
-            expect(iD.Way({tags: { oneway: 'yes' }}).isOneWay()).to.be.true;
-            expect(iD.Way({tags: { oneway: '1' }}).isOneWay()).to.be.true;
-            expect(iD.Way({tags: { oneway: '-1' }}).isOneWay()).to.be.true;
+            expect(iD.Way({tags: { oneway: 'yes' }}).isOneWay(), 'oneway yes').to.be.true;
+            expect(iD.Way({tags: { oneway: '1' }}).isOneWay(), 'oneway 1').to.be.true;
+            expect(iD.Way({tags: { oneway: '-1' }}).isOneWay(), 'oneway -1').to.be.true;
         });
 
         it('returns true when the way has implied oneway tag (waterway=river, waterway=stream, etc)', function() {
-            expect(iD.Way({tags: { waterway: 'river' }}).isOneWay()).to.be.true;
-            expect(iD.Way({tags: { waterway: 'stream' }}).isOneWay()).to.be.true;
-            expect(iD.Way({tags: { highway: 'motorway' }}).isOneWay()).to.be.true;
-            expect(iD.Way({tags: { highway: 'motorway_link' }}).isOneWay()).to.be.true;
-            expect(iD.Way({tags: { junction: 'roundabout' }}).isOneWay()).to.be.true;
+            expect(iD.Way({tags: { waterway: 'river' }}).isOneWay(), 'river').to.be.true;
+            expect(iD.Way({tags: { waterway: 'stream' }}).isOneWay(), 'stream').to.be.true;
+            expect(iD.Way({tags: { highway: 'motorway' }}).isOneWay(), 'motorway').to.be.true;
+            expect(iD.Way({tags: { highway: 'motorway_link' }}).isOneWay(), 'motorway_link').to.be.true;
+            expect(iD.Way({tags: { junction: 'roundabout' }}).isOneWay(), 'roundabout').to.be.true;
+        });
+
+        it('returns false when the way does not have implied oneway tag', function() {
+            expect(iD.Way({tags: { highway: 'trunk' }}).isOneWay(), 'trunk').to.be.false;
+            expect(iD.Way({tags: { highway: 'trunk_link' }}).isOneWay(), 'trunk_link').to.be.false;
+            expect(iD.Way({tags: { highway: 'primary' }}).isOneWay(), 'primary').to.be.false;
+            expect(iD.Way({tags: { highway: 'primary_link' }}).isOneWay(), 'primary_link').to.be.false;
+            expect(iD.Way({tags: { highway: 'secondary' }}).isOneWay(), 'secondary').to.be.false;
+            expect(iD.Way({tags: { highway: 'secondary_link' }}).isOneWay(), 'secondary_link').to.be.false;
+            expect(iD.Way({tags: { highway: 'tertiary' }}).isOneWay(), 'tertiary').to.be.false;
+            expect(iD.Way({tags: { highway: 'tertiary_link' }}).isOneWay(), 'tertiary_link').to.be.false;
+            expect(iD.Way({tags: { highway: 'unclassified' }}).isOneWay(), 'unclassified').to.be.false;
+            expect(iD.Way({tags: { highway: 'residential' }}).isOneWay(), 'residential').to.be.false;
+            expect(iD.Way({tags: { highway: 'living_street' }}).isOneWay(), 'living_street').to.be.false;
+            expect(iD.Way({tags: { highway: 'service' }}).isOneWay(), 'service').to.be.false;
+            expect(iD.Way({tags: { highway: 'track' }}).isOneWay(), 'track').to.be.false;
+            expect(iD.Way({tags: { highway: 'path' }}).isOneWay(), 'path').to.be.false;
         });
 
         it('returns false when oneway=no overrides implied oneway tag', function() {
-            expect(iD.Way({tags: { junction: 'roundabout', oneway: 'no' }}).isOneWay()).to.be.false;
-            expect(iD.Way({tags: { highway: 'motorway', oneway: 'no' }}).isOneWay()).to.be.false;
+            expect(iD.Way({tags: { junction: 'roundabout', oneway: 'no' }}).isOneWay(), 'roundabout').to.be.false;
+            expect(iD.Way({tags: { highway: 'motorway', oneway: 'no' }}).isOneWay(), 'motorway').to.be.false;
         });
     });
 
