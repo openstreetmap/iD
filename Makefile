@@ -41,6 +41,15 @@ BUILDJS_SOURCES = \
 $(BUILDJS_TARGETS): $(BUILDJS_SOURCES) build.js
 	node build.js
 
+
+MODULE_TARGETS = \
+	js/lib/id/actions.js
+
+ACTIONS = $(shell ./node_modules/.bin/browserify --list modules/actions/index.js)
+js/lib/id/actions.js: $(ACTIONS)
+	node_modules/.bin/browserify modules/actions/index.js -s iD.actions > $@
+
+
 dist/iD.js: \
 	js/lib/bootstrap-tooltip.js \
 	js/lib/d3.v3.js \
@@ -63,6 +72,7 @@ dist/iD.js: \
 	js/lib/marked.js \
 	js/id/start.js \
 	js/id/id.js \
+	$(MODULE_TARGETS) \
 	js/id/services.js \
 	js/id/services/mapillary.js \
 	js/id/services/nominatim.js \
@@ -77,7 +87,6 @@ dist/iD.js: \
 	js/id/geo/intersection.js \
 	js/id/geo/multipolygon.js \
 	js/id/geo/raw_mercator.js \
-	dist/modules/actions.js \
 	js/id/behavior.js \
 	js/id/behavior/add_way.js \
 	js/id/behavior/breathe.js \
@@ -245,9 +254,6 @@ node_modules/.install: package.json
 	npm install
 	touch node_modules/.install
 
-clean:
-	rm -f $(BUILDJS_TARGETS) data/feature-icons.json dist/iD*.js dist/iD.css dist/img/*.svg
-
 translations:
 	node data/update_locales
 
@@ -285,9 +291,8 @@ d3:
 	node_modules/.bin/smash $(D3_FILES) > js/lib/d3.v3.js
 	@echo 'd3 rebuilt. Please reapply 7e2485d, 4da529f, 223974d and 71a3d3e'
 
-ACTIONS = $(shell ./node_modules/.bin/browserify --list modules/actions/index.js)
-dist/modules/actions.js: $(ACTIONS)
-	node_modules/.bin/browserify modules/actions/index.js -s iD.actions > dist/modules/actions.js
-
 lodash:
 	node_modules/.bin/lodash --development --output js/lib/lodash.js include="includes,toPairs,assign,bind,chunk,clone,compact,debounce,difference,each,every,extend,filter,find,first,forEach,forOwn,groupBy,indexOf,intersection,isEmpty,isEqual,isFunction,keys,last,map,omit,reject,some,throttle,union,uniq,values,without,flatten,value,chain,cloneDeep,merge,pick,reduce" exports="global,node"
+
+clean:
+	rm -f $(BUILDJS_TARGETS) $(MODULE_TARGETS) data/feature-icons.json dist/iD*.js dist/iD.css dist/img/*.svg
