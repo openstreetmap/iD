@@ -1,4 +1,4 @@
-module.exports = function(ids, newRelationId) {
+export function MergePolygon(ids, newRelationId) {
 
     function groupEntities(graph) {
         var entities = ids.map(function (id) { return graph.entity(id); });
@@ -112,4 +112,4 @@ module.exports = function(ids, newRelationId) {
     };
 
     return action;
-};
+}

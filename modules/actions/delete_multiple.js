@@ -1,8 +1,12 @@
-module.exports = function(ids) {
+import { DeleteWay } from './delete_way';
+import { DeleteNode } from './delete_node';
+import { DeleteRelation } from './delete_relation';
+
+export function DeleteMultiple(ids) {
     var actions = {
-        way: iD.actions.DeleteWay,
-        node: iD.actions.DeleteNode,
-        relation: iD.actions.DeleteRelation
+        way: DeleteWay,
+        node: DeleteNode,
+        relation: DeleteRelation
     };
 
     var action = function(graph) {

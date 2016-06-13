@@ -1,4 +1,4 @@
-module.exports = function(ids) {
+export function Merge(ids) {
     function groupEntitiesByGeometry(graph) {
         var entities = ids.map(function(id) { return graph.entity(id); });
         return _.extend({point: [], area: [], line: [], relation: []},
@@ -34,4 +34,4 @@ module.exports = function(ids) {
     };
 
     return action;
-};
+}

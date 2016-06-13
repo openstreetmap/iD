@@ -1,3 +1,5 @@
+import { DeleteNode } from './delete_node';
+
 // Connect the ways at the given nodes.
 //
 // The last node will survive. All other nodes will be replaced with
@@ -12,7 +14,7 @@
 //   https://github.com/openstreetmap/potlatch2/blob/master/net/systemeD/halcyon/connection/actions/MergeNodesAction.as
 //   https://github.com/openstreetmap/josm/blob/mirror/src/org/openstreetmap/josm/actions/MergeNodesAction.java
 //
-module.exports = function(nodeIds) {
+export function Connect(nodeIds) {
     return function(graph) {
         var survivor = graph.entity(_.last(nodeIds));
 
@@ -32,7 +34,7 @@ module.exports = function(nodeIds) {
             /* eslint-enable no-loop-func */
 
             survivor = survivor.mergeTags(node.tags);
-            graph = iD.actions.DeleteNode(node.id)(graph);
+            graph = DeleteNode(node.id)(graph);
         }
 
         graph = graph.replace(survivor);

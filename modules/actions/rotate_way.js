@@ -1,4 +1,4 @@
-module.exports = function(wayId, pivot, angle, projection) {
+export function RotateWay(wayId, pivot, angle, projection) {
     return function(graph) {
         return graph.update(function(graph) {
             var way = graph.entity(wayId);
@@ -23,4 +23,4 @@ module.exports = function(wayId, pivot, angle, projection) {
 
         });
     };
-};
+}

@@ -1,4 +1,6 @@
 language: node_js
+node_js:
+  - "5.11"
 sudo: false
 before_install:
   # https://github.com/travis-ci/travis-ci/issues/3225
