@@ -1,3 +1,5 @@
+import { DeleteWay } from './delete_way';
+
 // Join ways at the end node they share.
 //
 // This is the inverse of `iD.actions.Split`.
@@ -6,7 +8,7 @@
 //   https://github.com/systemed/potlatch2/blob/master/net/systemeD/halcyon/connection/actions/MergeWaysAction.as
 //   https://github.com/openstreetmap/josm/blob/mirror/src/org/openstreetmap/josm/actions/CombineWayAction.java
 //
-module.exports = function(ids) {
+export function Join(ids) {
 
     function groupEntitiesByGeometry(graph) {
         var entities = ids.map(function(id) { return graph.entity(id); });
@@ -41,7 +43,7 @@ module.exports = function(ids) {
             survivor = survivor.mergeTags(way.tags);
 
             graph = graph.replace(survivor);
-            graph = iD.actions.DeleteWay(way.id)(graph);
+            graph = DeleteWay(way.id)(graph);
         });
 
         return graph;
@@ -85,4 +87,4 @@ module.exports = function(ids) {
     };
 
     return action;
-};
+}

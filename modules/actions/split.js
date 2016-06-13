@@ -1,3 +1,4 @@
+import { AddMember } from './add_member';
 // Split a way at the given node.
 //
 // Optionally, split only the given ways, if multiple ways share
@@ -12,7 +13,7 @@
 // Reference:
 //   https://github.com/systemed/potlatch2/blob/master/net/systemeD/halcyon/connection/actions/SplitWayAction.as
 //
-module.exports = function(nodeId, newWayIds) {
+export function Split(nodeId, newWayIds) {
     var wayIds;
 
     // if the way is closed, we need to search for a partner node
@@ -117,7 +118,7 @@ module.exports = function(nodeId, newWayIds) {
                     role: relation.memberById(wayA.id).role
                 };
 
-                graph = iD.actions.AddMember(relation.id, member)(graph);
+                graph = AddMember(relation.id, member)(graph);
             }
         });
 
@@ -184,4 +185,4 @@ module.exports = function(nodeId, newWayIds) {
     };
 
     return action;
-};
+}

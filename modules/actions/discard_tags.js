@@ -1,4 +1,4 @@
-module.exports = function(difference) {
+export function DiscardTags(difference) {
     return function(graph) {
         function discardTags(entity) {
             if (!_.isEmpty(entity.tags)) {
@@ -18,4 +18,4 @@ module.exports = function(difference) {
 
         return graph;
     };
-};
+}

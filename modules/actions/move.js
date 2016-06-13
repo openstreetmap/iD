@@ -1,6 +1,6 @@
 // https://github.com/openstreetmap/josm/blob/mirror/src/org/openstreetmap/josm/command/MoveCommand.java
 // https://github.com/openstreetmap/potlatch2/blob/master/net/systemeD/halcyon/connection/actions/MoveNodeAction.as
-module.exports = function(moveIds, tryDelta, projection, cache) {
+export function Move(moveIds, tryDelta, projection, cache) {
     var delta = tryDelta;
 
     function vecAdd(a, b) { return [a[0] + b[0], a[1] + b[1]]; }

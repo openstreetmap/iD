@@ -1,4 +1,4 @@
-module.exports = function(ids, fromGraph) {
+export function CopyEntities(ids, fromGraph) {
     var copies = {};
 
     var action = function(graph) {

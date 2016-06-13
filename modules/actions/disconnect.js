@@ -12,7 +12,7 @@
 //   https://github.com/openstreetmap/potlatch2/blob/master/net/systemeD/halcyon/connection/actions/UnjoinNodeAction.as
 //   https://github.com/openstreetmap/josm/blob/mirror/src/org/openstreetmap/josm/actions/UnGlueAction.java
 //
-module.exports = function(nodeId, newNodeId) {
+export function Disconnect(nodeId, newNodeId) {
     var wayIds;
 
     var action = function(graph) {
@@ -94,4 +94,4 @@ module.exports = function(nodeId, newNodeId) {
     };
 
     return action;
-};
+}
