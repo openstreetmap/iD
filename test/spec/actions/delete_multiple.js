@@ -1,5 +1,5 @@
-describe("iD.actions.DeleteMultiple", function () {
-    it("deletes multiple entities of heterogeneous types", function () {
+describe('iD.actions.DeleteMultiple', function () {
+    it('deletes multiple entities of heterogeneous types', function () {
         var n      = iD.Node(),
             w      = iD.Way(),
             r      = iD.Relation(),
@@ -10,7 +10,7 @@ describe("iD.actions.DeleteMultiple", function () {
         expect(graph.hasEntity(r.id)).to.be.undefined;
     });
 
-    it("deletes a way and one of its nodes", function () {
+    it('deletes a way and one of its nodes', function () {
         var n      = iD.Node(),
             w      = iD.Way({nodes: [n.id]}),
             action = iD.actions.DeleteMultiple([w.id, n.id]),
@@ -19,8 +19,8 @@ describe("iD.actions.DeleteMultiple", function () {
         expect(graph.hasEntity(n.id)).to.be.undefined;
     });
 
-    describe("#disabled", function () {
-        it("returns the result of the first action that is disabled", function () {
+    describe('#disabled', function () {
+        it('returns the result of the first action that is disabled', function () {
             var node     = iD.Node(),
                 relation = iD.Relation({members: [{id: 'w'}]}),
                 graph    = iD.Graph([node, relation]),

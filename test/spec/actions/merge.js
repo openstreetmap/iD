@@ -1,5 +1,5 @@
-describe("iD.actions.Merge", function () {
-    it("merges multiple points to a line", function () {
+describe('iD.actions.Merge', function () {
+    it('merges multiple points to a line', function () {
         var graph = iD.Graph([
                 iD.Node({id: 'a', tags: {a: 'a'}}),
                 iD.Node({id: 'b', tags: {b: 'b'}}),
@@ -18,7 +18,7 @@ describe("iD.actions.Merge", function () {
         expect(graph.entity('r').members).to.eql([{id: 'w', role: 'r', type: 'way'}]);
     });
 
-    it("merges multiple points to an area", function () {
+    it('merges multiple points to an area', function () {
         var graph = iD.Graph([
                 iD.Node({id: 'a', tags: {a: 'a'}}),
                 iD.Node({id: 'b', tags: {b: 'b'}}),

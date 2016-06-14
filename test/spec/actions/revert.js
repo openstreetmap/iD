@@ -1,5 +1,5 @@
 describe('iD.actions.Revert', function() {
-    describe("basic", function () {
+    describe('basic', function () {
         it('removes a new entity', function() {
             var n1 = iD.Node({id: 'n-1'}),
                 graph = iD.Graph().replace(n1);
@@ -26,7 +26,7 @@ describe('iD.actions.Revert', function() {
         });
     });
 
-    describe("reverting way child nodes", function () {
+    describe('reverting way child nodes', function () {
         it('removes new node, updates parent way nodelist', function() {
             // note: test with a 3 node way so w1 doesnt go degenerate..
             var n1 = iD.Node({id: 'n1'}),
@@ -65,7 +65,7 @@ describe('iD.actions.Revert', function() {
         });
     });
 
-    describe("reverting relation members", function () {
+    describe('reverting relation members', function () {
         it('removes new node, updates parent relation memberlist', function() {
             var n1 = iD.Node({id: 'n1'}),
                 n2 = iD.Node({id: 'n-2'}),
@@ -100,7 +100,7 @@ describe('iD.actions.Revert', function() {
         });
     });
 
-    describe("reverting parent ways", function () {
+    describe('reverting parent ways', function () {
         it('removes new way, preserves new and existing child nodes', function() {
             var n1 = iD.Node({id: 'n1'}),
                 n2 = iD.Node({id: 'n-2'}),
@@ -146,7 +146,7 @@ describe('iD.actions.Revert', function() {
         });
     });
 
-    describe("reverting parent relations", function () {
+    describe('reverting parent relations', function () {
         it('removes new relation, preserves new and existing members', function() {
             var n1 = iD.Node({id: 'n1'}),
                 n2 = iD.Node({id: 'n-2'}),

@@ -1,22 +1,22 @@
-describe("iD.actions.Move", function() {
+describe('iD.actions.Move', function() {
     var projection = d3.geo.mercator().scale(250 / Math.PI);
 
-    describe("#disabled", function() {
-        it("returns falsy by default", function() {
+    describe('#disabled', function() {
+        it('returns falsy by default', function() {
             var node  = iD.Node({loc: [0, 0]}),
                 action = iD.actions.Move([node.id], [0, 0], projection),
                 graph = iD.Graph([node]);
             expect(action.disabled(graph)).not.to.be.ok;
         });
 
-        it("returns 'incomplete_relation' for an incomplete relation", function() {
+        it('returns \'incomplete_relation\' for an incomplete relation', function() {
             var relation = iD.Relation({members: [{id: 1}]}),
                 action = iD.actions.Move([relation.id], [0, 0], projection),
                 graph = iD.Graph([relation]);
             expect(action.disabled(graph)).to.equal('incomplete_relation');
         });
 
-        it("returns falsy for a complete relation", function() {
+        it('returns falsy for a complete relation', function() {
             var node  = iD.Node({loc: [0, 0]}),
                 relation = iD.Relation({members: [{id: node.id}]}),
                 action = iD.actions.Move([relation.id], [0, 0], projection),
@@ -25,7 +25,7 @@ describe("iD.actions.Move", function() {
         });
     });
 
-    it("moves all nodes in a way by the given amount", function() {
+    it('moves all nodes in a way by the given amount', function() {
         var node1  = iD.Node({loc: [0, 0]}),
             node2  = iD.Node({loc: [5, 10]}),
             way    = iD.Way({nodes: [node1.id, node2.id]}),
@@ -39,7 +39,7 @@ describe("iD.actions.Move", function() {
         expect(loc2[1]).to.be.closeTo( 7.866, 0.001);
     });
 
-    it("moves repeated nodes only once", function() {
+    it('moves repeated nodes only once', function() {
         var node   = iD.Node({loc: [0, 0]}),
             way    = iD.Way({nodes: [node.id, node.id]}),
             delta  = [2, 3],
@@ -49,7 +49,7 @@ describe("iD.actions.Move", function() {
         expect(loc[1]).to.be.closeTo(-2.159, 0.001);
     });
 
-    it("moves multiple ways", function() {
+    it('moves multiple ways', function() {
         var node   = iD.Node({loc: [0, 0]}),
             way1   = iD.Way({nodes: [node.id]}),
             way2   = iD.Way({nodes: [node.id]}),
@@ -60,7 +60,7 @@ describe("iD.actions.Move", function() {
         expect(loc[1]).to.be.closeTo(-2.159, 0.001);
     });
 
-    it("moves leaf nodes of a relation", function() {
+    it('moves leaf nodes of a relation', function() {
         var node     = iD.Node({loc: [0, 0]}),
             way      = iD.Way({nodes: [node.id]}),
             relation = iD.Relation({members: [{id: way.id}]}),

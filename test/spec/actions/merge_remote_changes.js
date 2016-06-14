@@ -1,4 +1,6 @@
-describe("iD.actions.MergeRemoteChanges", function () {
+/* global locale: true */
+/* eslint no-console: 0 */
+describe('iD.actions.MergeRemoteChanges', function () {
     var base = iD.Graph([
             iD.Node({id: 'a', loc: [1, 1], version: '1', tags: {foo: 'foo'}}),
 
@@ -66,13 +68,13 @@ describe("iD.actions.MergeRemoteChanges", function () {
             _current: 'en',
             en: {
                 'merge_remote_changes': {
-                    "annotation": "Merged remote changes from server.",
-                    "conflict": {
-                        "deleted": "This object has been deleted by {user}.",
-                        "location": "This object was moved by both you and {user}.",
-                        "nodelist": "Nodes were changed by both you and {user}.",
-                        "memberlist": "Relation members were changed by both you and {user}.",
-                        "tags": "You changed the <b>{tag}</b> tag to \"{local}\" and {user} changed it to \"{remote}\"."
+                    'annotation': 'Merged remote changes from server.',
+                    'conflict': {
+                        'deleted': 'This object has been deleted by {user}.',
+                        'location': 'This object was moved by both you and {user}.',
+                        'nodelist': 'Nodes were changed by both you and {user}.',
+                        'memberlist': 'Relation members were changed by both you and {user}.',
+                        'tags': 'You changed the <b>{tag}</b> tag to \"{local}\" and {user} changed it to \"{remote}\".'
                     }
                 }
             }
@@ -90,9 +92,9 @@ describe("iD.actions.MergeRemoteChanges", function () {
         }, iD.Graph(base));
     }
 
-    describe("non-destuctive merging", function () {
-        describe("tags", function() {
-            it("doesn't merge tags if conflict (local change, remote change)", function () {
+    describe('non-destuctive merging', function () {
+        describe('tags', function() {
+            it('doesn\'t merge tags if conflict (local change, remote change)', function () {
 
                 var localTags = {foo: 'foo_local'},      // changed foo
                     remoteTags = {foo: 'foo_remote'},    // changed foo
@@ -106,7 +108,7 @@ describe("iD.actions.MergeRemoteChanges", function () {
                 expect(result).to.eql(localGraph);
             });
 
-            it("doesn't merge tags if conflict (local change, remote delete)", function () {
+            it('doesn\'t merge tags if conflict (local change, remote delete)', function () {
                 var localTags = {foo: 'foo_local'},     // changed foo
                     remoteTags = {},                    // deleted foo
                     local = base.entity('a').update({tags: localTags}),
@@ -119,7 +121,7 @@ describe("iD.actions.MergeRemoteChanges", function () {
                 expect(result).to.eql(localGraph);
             });
 
-            it("doesn't merge tags if conflict (local delete, remote change)", function () {
+            it('doesn\'t merge tags if conflict (local delete, remote change)', function () {
                 var localTags = {},                     // deleted foo
                     remoteTags = {foo: 'foo_remote'},   // changed foo
                     local = base.entity('a').update({tags: localTags}),
@@ -132,7 +134,7 @@ describe("iD.actions.MergeRemoteChanges", function () {
                 expect(result).to.eql(localGraph);
             });
 
-            it("doesn't merge tags if conflict (local add, remote add)", function () {
+            it('doesn\'t merge tags if conflict (local add, remote add)', function () {
                 var localTags = {foo: 'foo', bar: 'bar_local'},    // same foo, added bar
                     remoteTags = {foo: 'foo', bar: 'bar_remote'},  // same foo, added bar
                     local = base.entity('a').update({tags: localTags}),
@@ -145,7 +147,7 @@ describe("iD.actions.MergeRemoteChanges", function () {
                 expect(result).to.eql(localGraph);
             });
 
-            it("merges tags if no conflict (remote delete)", function () {
+            it('merges tags if no conflict (remote delete)', function () {
                 var localTags = {foo: 'foo', bar: 'bar_local'},   // same foo, added bar
                     remoteTags = {},                              // deleted foo
                     mergedTags = {bar: 'bar_local'},
@@ -160,7 +162,7 @@ describe("iD.actions.MergeRemoteChanges", function () {
                 expect(result.entity('a').tags).to.eql(mergedTags);
             });
 
-            it("merges tags if no conflict (local delete)", function () {
+            it('merges tags if no conflict (local delete)', function () {
                 var localTags = {},                                 // deleted foo
                     remoteTags = {foo: 'foo', bar: 'bar_remote'},   // same foo, added bar
                     mergedTags = {bar: 'bar_remote'},
@@ -177,8 +179,8 @@ describe("iD.actions.MergeRemoteChanges", function () {
         });
 
 
-        describe("nodes", function () {
-            it("doesn't merge nodes if location is different", function () {
+        describe('nodes', function () {
+            it('doesn\'t merge nodes if location is different', function () {
                 var localTags = {foo: 'foo_local'},                // changed foo
                     remoteTags = {foo: 'foo', bar: 'bar_remote'},  // same foo, added bar
                     localLoc = [2, 2],                             // moved node
@@ -193,7 +195,7 @@ describe("iD.actions.MergeRemoteChanges", function () {
                 expect(result).to.eql(localGraph);
             });
 
-            it("merges nodes if location is same", function () {
+            it('merges nodes if location is same', function () {
                 var localTags = {foo: 'foo_local'},                // changed foo
                     remoteTags = {foo: 'foo', bar: 'bar_remote'},  // same foo, added bar
                     mergedTags = {foo: 'foo_local', bar: 'bar_remote'},
@@ -213,8 +215,8 @@ describe("iD.actions.MergeRemoteChanges", function () {
         });
 
 
-        describe("ways", function () {
-            it("merges ways if nodelist is same", function () {
+        describe('ways', function () {
+            it('merges ways if nodelist is same', function () {
                 var localTags = {foo: 'foo_local', area: 'yes'},                // changed foo
                     remoteTags = {foo: 'foo', bar: 'bar_remote', area: 'yes'},  // same foo, added bar
                     mergedTags = {foo: 'foo_local', bar: 'bar_remote', area: 'yes'},
@@ -229,7 +231,7 @@ describe("iD.actions.MergeRemoteChanges", function () {
                 expect(result.entity('w1').tags).to.eql(mergedTags);
             });
 
-            it("merges ways if nodelist changed only remotely", function () {
+            it('merges ways if nodelist changed only remotely', function () {
                 var localTags = {foo: 'foo_local', area: 'yes'},                // changed foo
                     remoteTags = {foo: 'foo', bar: 'bar_remote', area: 'yes'},  // same foo, added bar
                     mergedTags = {foo: 'foo_local', bar: 'bar_remote', area: 'yes'},
@@ -249,7 +251,7 @@ describe("iD.actions.MergeRemoteChanges", function () {
                 expect(result.hasEntity('r3')).to.eql(r3);
             });
 
-            it("merges ways if nodelist changed only locally", function () {
+            it('merges ways if nodelist changed only locally', function () {
                 var localTags = {foo: 'foo_local', area: 'yes'},                // changed foo
                     remoteTags = {foo: 'foo', bar: 'bar_remote', area: 'yes'},  // same foo, added bar
                     mergedTags = {foo: 'foo_local', bar: 'bar_remote', area: 'yes'},
@@ -267,7 +269,7 @@ describe("iD.actions.MergeRemoteChanges", function () {
                 expect(result.entity('w1').nodes).to.eql(localNodes);
             });
 
-            it("merges ways if nodelist changes don't overlap", function () {
+            it('merges ways if nodelist changes don\'t overlap', function () {
                 var localTags   = {foo: 'foo_local', area: 'yes'},                 // changed foo
                     remoteTags  = {foo: 'foo', bar: 'bar_remote', area: 'yes'},    // same foo, added bar
                     mergedTags  = {foo: 'foo_local', bar: 'bar_remote', area: 'yes'},
@@ -288,7 +290,7 @@ describe("iD.actions.MergeRemoteChanges", function () {
                 expect(result.hasEntity('r4')).to.eql(r4);
             });
 
-            it("doesn't merge ways if nodelist changes overlap", function () {
+            it('doesn\'t merge ways if nodelist changes overlap', function () {
                 var localTags   = {foo: 'foo_local', area: 'yes'},                // changed foo
                     remoteTags  = {foo: 'foo', bar: 'bar_remote', area: 'yes'},   // same foo, added bar
                     localNodes  = ['p1', 'r1', 'r2', 'p3', 'p4', 'p1'],           // changed p2 -> r1, r2
@@ -303,7 +305,7 @@ describe("iD.actions.MergeRemoteChanges", function () {
                 expect(result).to.eql(localGraph);
             });
 
-            it("merges ways if childNode location is same", function () {
+            it('merges ways if childNode location is same', function () {
                 var localLoc = [12, 12],     // moved node
                     remoteLoc = [12, 12],    // moved node
                     local = base.entity('p1').update({loc: localLoc}),
@@ -317,7 +319,7 @@ describe("iD.actions.MergeRemoteChanges", function () {
                 expect(result.entity('p1').loc).to.eql(remoteLoc);
             });
 
-            it("doesn't merge ways if childNode location is different", function () {
+            it('doesn\'t merge ways if childNode location is different', function () {
                 var localLoc = [12, 12],     // moved node
                     remoteLoc = [13, 13],    // moved node
                     local = base.entity('p1').update({loc: localLoc}),
@@ -332,8 +334,8 @@ describe("iD.actions.MergeRemoteChanges", function () {
         });
 
 
-        describe("relations", function () {
-            it("doesn't merge relations if members have changed", function () {
+        describe('relations', function () {
+            it('doesn\'t merge relations if members have changed', function () {
                 var localTags   = {foo: 'foo_local', type: 'multipolygon'},                  // changed foo
                     remoteTags  = {foo: 'foo', bar: 'bar_remote', type: 'multipolygon'},     // same foo, added bar
                     localMembers = [{id: 'w1', role: 'outer'}, {id: 'w2', role: 'inner'}],   // same members
@@ -348,7 +350,7 @@ describe("iD.actions.MergeRemoteChanges", function () {
                 expect(result).to.eql(localGraph);
             });
 
-            it("merges relations if members are same and changed tags don't conflict", function () {
+            it('merges relations if members are same and changed tags don\'t conflict', function () {
                 var localTags   = {foo: 'foo_local', type: 'multipolygon'},                  // changed foo
                     remoteTags  = {foo: 'foo', bar: 'bar_remote', type: 'multipolygon'},     // same foo, added bar
                     mergedTags  = {foo: 'foo_local', bar: 'bar_remote', type: 'multipolygon'},
@@ -367,8 +369,8 @@ describe("iD.actions.MergeRemoteChanges", function () {
         });
 
 
-        describe("#conflicts", function () {
-            it("returns conflict details", function () {
+        describe('#conflicts', function () {
+            it('returns conflict details', function () {
                 var localTags = {foo: 'foo_local'},                // changed foo
                     remoteTags = {foo: 'foo', bar: 'bar_remote'},  // same foo, added bar
                     remoteLoc = [2, 2],                            // moved node
@@ -376,8 +378,8 @@ describe("iD.actions.MergeRemoteChanges", function () {
                     remote = base.entity('a').update({tags: remoteTags, loc: remoteLoc, version: '2'}),
                     localGraph = makeGraph([local]),
                     remoteGraph = makeGraph([remote]),
-                    action = iD.actions.MergeRemoteChanges('a', localGraph, remoteGraph),
-                    result = action(localGraph);
+                    action = iD.actions.MergeRemoteChanges('a', localGraph, remoteGraph);
+                    action(localGraph);
 
                 expect(action.conflicts()).not.to.be.empty;
             });
@@ -385,9 +387,9 @@ describe("iD.actions.MergeRemoteChanges", function () {
     });
 
 
-    describe("destuctive merging", function () {
-        describe("nodes", function () {
-            it("merges nodes with 'force_local' option", function () {
+    describe('destuctive merging', function () {
+        describe('nodes', function () {
+            it('merges nodes with \'force_local\' option', function () {
                 var localTags = {foo: 'foo_local'},       // changed foo
                     remoteTags = {foo: 'foo_remote'},     // changed foo
                     localLoc = [2, 2],                    // moved node
@@ -404,7 +406,7 @@ describe("iD.actions.MergeRemoteChanges", function () {
                 expect(result.entity('a').loc).to.eql(localLoc);
             });
 
-            it("merges nodes with 'force_remote' option", function () {
+            it('merges nodes with \'force_remote\' option', function () {
                 var localTags = {foo: 'foo_local'},       // changed foo
                     remoteTags = {foo: 'foo_remote'},     // changed foo
                     localLoc = [2, 2],                    // moved node
@@ -423,8 +425,8 @@ describe("iD.actions.MergeRemoteChanges", function () {
         });
 
 
-        describe("ways", function () {
-            it("merges ways with 'force_local' option", function () {
+        describe('ways', function () {
+            it('merges ways with \'force_local\' option', function () {
                 var localTags   = {foo: 'foo_local', area: 'yes'},        // changed foo
                     remoteTags  = {foo: 'foo_remote', area: 'yes'},       // changed foo
                     localNodes  = ['p1', 'r1', 'r2', 'p3', 'p4', 'p1'],   // changed p2 -> r1, r2
@@ -441,7 +443,7 @@ describe("iD.actions.MergeRemoteChanges", function () {
                 expect(result.entity('w1').nodes).to.eql(localNodes);
             });
 
-            it("merges ways with 'force_remote' option", function () {
+            it('merges ways with \'force_remote\' option', function () {
                 var localTags   = {foo: 'foo_local', area: 'yes'},        // changed foo
                     remoteTags  = {foo: 'foo_remote', area: 'yes'},       // changed foo
                     localNodes  = ['p1', 'r1', 'r2', 'p3', 'p4', 'p1'],   // changed p2 -> r1, r2
@@ -460,7 +462,7 @@ describe("iD.actions.MergeRemoteChanges", function () {
                 expect(result.hasEntity('r4')).to.eql(r4);
             });
 
-            it("merges way childNodes with 'force_local' option", function () {
+            it('merges way childNodes with \'force_local\' option', function () {
                 var localLoc = [12, 12],     // moved node
                     remoteLoc = [13, 13],    // moved node
                     local = base.entity('p1').update({loc: localLoc}),
@@ -474,7 +476,7 @@ describe("iD.actions.MergeRemoteChanges", function () {
                 expect(result.entity('p1').loc).to.eql(localLoc);
             });
 
-            it("merges way childNodes with 'force_remote' option", function () {
+            it('merges way childNodes with \'force_remote\' option', function () {
                 var localLoc = [12, 12],     // moved node
                     remoteLoc = [13, 13],    // moved node
                     local = base.entity('p1').update({loc: localLoc}),
@@ -488,7 +490,7 @@ describe("iD.actions.MergeRemoteChanges", function () {
                 expect(result.entity('p1').loc).to.eql(remoteLoc);
             });
 
-            it("keeps only important childNodes when merging", function () {
+            it('keeps only important childNodes when merging', function () {
                 var localNodes  = ['p1', 'r1', 'r2', 'p3', 'p4', 'p1'],    // changed p2 -> r1, r2
                     remoteNodes = ['p1', 'r3', 'r4', 'p3', 'p4', 'p1'],    // changed p2 -> r3, r4
                     localr1 = r1.update({tags: {highway: 'traffic_signals'}}),  // r1 has interesting tags
@@ -506,8 +508,8 @@ describe("iD.actions.MergeRemoteChanges", function () {
         });
 
 
-        describe("relations", function () {
-            it("merges relations with 'force_local' option", function () {
+        describe('relations', function () {
+            it('merges relations with \'force_local\' option', function () {
                 var localTags = {foo: 'foo_local', type: 'multipolygon'},      // changed foo
                     remoteTags = {foo: 'foo_remote', type: 'multipolygon'},    // changed foo
                     localMembers = [{id: 'w3', role: 'outer'}, {id: 'w2', role: 'inner'}],   // changed outer to w3
@@ -524,7 +526,7 @@ describe("iD.actions.MergeRemoteChanges", function () {
                 expect(result.entity('r').members).to.eql(localMembers);
             });
 
-            it("merges relations with 'force_remote' option", function () {
+            it('merges relations with \'force_remote\' option', function () {
                 var localTags = {foo: 'foo_local', type: 'multipolygon'},      // changed foo
                     remoteTags = {foo: 'foo_remote', type: 'multipolygon'},    // changed foo
                     localMembers = [{id: 'w3', role: 'outer'}, {id: 'w2', role: 'inner'}],   // changed outer to w3
