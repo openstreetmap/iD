@@ -8,7 +8,7 @@
       return function(graph) {
           return graph.replace(way);
       };
-  };
+  }
 
   function AddMember(relationId, member, memberIndex) {
       return function(graph) {
@@ -38,7 +38,7 @@
 
           return graph.replace(relation.addMember(member, memberIndex));
       };
-  };
+  }
 
   function AddMidpoint(midpoint, node) {
       return function(graph) {
@@ -62,20 +62,20 @@
 
           return graph;
       };
-  };
+  }
 
   // https://github.com/openstreetmap/potlatch2/blob/master/net/systemeD/halcyon/connection/actions/AddNodeToWayAction.as
   function AddVertex(wayId, nodeId, index) {
       return function(graph) {
           return graph.replace(graph.entity(wayId).addNode(nodeId, index));
       };
-  };
+  }
 
   function ChangeMember(relationId, member, memberIndex) {
       return function(graph) {
           return graph.replace(graph.entity(relationId).updateMember(member, memberIndex));
       };
-  };
+  }
 
   function ChangePreset(entityId, oldPreset, newPreset) {
       return function(graph) {
@@ -88,14 +88,14 @@
 
           return graph.replace(entity.update({tags: tags}));
       };
-  };
+  }
 
   function ChangeTags(entityId, tags) {
       return function(graph) {
           var entity = graph.entity(entityId);
           return graph.replace(entity.update({tags: tags}));
       };
-  };
+  }
 
   function Circularize(wayId, projection, maxAngle) {
       maxAngle = (maxAngle || 20) * Math.PI / 180;
@@ -279,7 +279,7 @@
       };
 
       return action;
-  };
+  }
 
   function DeleteMultiple(ids) {
       var actions = {
@@ -307,7 +307,7 @@
       };
 
       return action;
-  };
+  }
 
   // https://github.com/openstreetmap/potlatch2/blob/master/net/systemeD/halcyon/connection/actions/DeleteRelationAction.as
   function DeleteRelation(relationId) {
@@ -398,7 +398,7 @@
       };
 
       return action;
-  };
+  }
 
   // https://github.com/openstreetmap/potlatch2/blob/master/net/systemeD/halcyon/connection/actions/DeleteNodeAction.as
   function DeleteNode(nodeId) {
@@ -433,7 +433,7 @@
       };
 
       return action;
-  };
+  }
 
   // Connect the ways at the given nodes.
   //
@@ -476,7 +476,7 @@
 
           return graph;
       };
-  };
+  }
 
   function CopyEntities(ids, fromGraph) {
       var copies = {};
@@ -498,7 +498,7 @@
       };
 
       return action;
-  };
+  }
 
   function DeleteMember(relationId, memberIndex) {
       return function(graph) {
@@ -512,7 +512,7 @@
 
           return graph;
       };
-  };
+  }
 
   function DeprecateTags(entityId) {
       return function(graph) {
@@ -1168,7 +1168,7 @@
       };
 
       return action;
-  };
+  }
 
   // https://github.com/openstreetmap/josm/blob/mirror/src/org/openstreetmap/josm/command/MoveCommand.java
   // https://github.com/openstreetmap/potlatch2/blob/master/net/systemeD/halcyon/connection/actions/MoveNodeAction.as
@@ -1448,7 +1448,7 @@
       };
 
       return action;
-  };
+  }
 
   // https://github.com/openstreetmap/josm/blob/mirror/src/org/openstreetmap/josm/command/MoveCommand.java
   // https://github.com/openstreetmap/potlatch2/blob/master/net/systemeD/halcyon/connection/actions/MoveNodeAction.as
