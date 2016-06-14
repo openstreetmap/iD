@@ -1,4 +1,4 @@
-describe("d3.keybinding", function() {
+describe('d3.keybinding', function() {
     var keybinding, spy, input;
 
     beforeEach(function () {
@@ -13,12 +13,12 @@ describe("d3.keybinding", function() {
         input.remove();
     });
 
-    describe("#on", function () {
-        it("returns self", function () {
+    describe('#on', function () {
+        it('returns self', function () {
             expect(keybinding.on('a', spy)).to.equal(keybinding);
         });
 
-        it("adds a binding for the specified bare key", function () {
+        it('adds a binding for the specified bare key', function () {
             d3.select(document).call(keybinding.on('A', spy));
 
             happen.keydown(document, {keyCode: 65, metaKey: true});
@@ -28,7 +28,7 @@ describe("d3.keybinding", function() {
             expect(spy).to.have.been.calledOnce;
         });
 
-        it("adds a binding for the specified key combination", function () {
+        it('adds a binding for the specified key combination', function () {
             d3.select(document).call(keybinding.on('⌘+A', spy));
 
             happen.keydown(document, {keyCode: 65});
@@ -38,21 +38,21 @@ describe("d3.keybinding", function() {
             expect(spy).to.have.been.calledOnce;
         });
 
-        it("does not dispatch when focus is in input elements by default", function () {
+        it('does not dispatch when focus is in input elements by default', function () {
             d3.select(document).call(keybinding.on('A', spy));
 
             happen.keydown(input.node(), {keyCode: 65});
             expect(spy).not.to.have.been.called;
         });
 
-        it("dispatches when focus is in input elements when the capture flag was passed", function () {
+        it('dispatches when focus is in input elements when the capture flag was passed', function () {
             d3.select(document).call(keybinding.on('A', spy, true));
 
             happen.keydown(input.node(), {keyCode: 65});
             expect(spy).to.have.been.calledOnce;
         });
 
-        it("resets bindings when keybinding.off is called", function () {
+        it('resets bindings when keybinding.off is called', function () {
             d3.select(document).call(keybinding.on('A', spy));
             happen.keydown(document, {keyCode: 65});
             expect(spy).to.have.been.calledOnce;
