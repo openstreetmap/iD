@@ -15,7 +15,7 @@ iD.modes.Save = function(context) {
                     try {
                         var cn = graph.childNodes(e);
                         result.push.apply(result, _.map(_.filter(cn, 'version'), 'id'));
-                    } catch(err) {
+                    } catch (err) {
                         /* eslint-disable no-console */
                         if (typeof console !== 'undefined') console.error(err);
                         /* eslint-enable no-console */
