@@ -1,4 +1,4 @@
-describe("iD.behavior.Hover", function() {
+describe('iD.behavior.Hover', function() {
     var container, context;
 
     beforeEach(function() {
@@ -12,16 +12,16 @@ describe("iD.behavior.Hover", function() {
         container.remove();
     });
 
-    describe("#off", function () {
-        it("removes the .hover class from all elements", function () {
+    describe('#off', function () {
+        it('removes the .hover class from all elements', function () {
             container.append('span').attr('class', 'hover');
             container.call(iD.behavior.Hover(context).off);
-            expect(container.select('span')).not.to.be.classed('hover')
+            expect(container.select('span')).not.to.be.classed('hover');
         });
     });
 
-    describe("mouseover", function () {
-        it("adds the .hover class to all elements to which the same datum is bound", function () {
+    describe('mouseover', function () {
+        it('adds the .hover class to all elements to which the same datum is bound', function () {
             var a = iD.Node({id: 'a'}),
                 b = iD.Node({id: 'b'});
 
@@ -36,7 +36,7 @@ describe("iD.behavior.Hover", function() {
             expect(container.selectAll('.b.hover')[0]).to.have.length(0);
         });
 
-        it("adds the .hover class to all members of a relation", function() {
+        it('adds the .hover class to all members of a relation', function() {
             container.selectAll('span')
                 .data([iD.Relation({id: 'a', members: [{id: 'b'}]}), iD.Node({id: 'b'})])
                 .enter().append('span').attr('class', function(d) { return d.id; });
@@ -49,8 +49,8 @@ describe("iD.behavior.Hover", function() {
         });
     });
 
-    describe("mouseout", function () {
-        it("removes the .hover class from all elements", function () {
+    describe('mouseout', function () {
+        it('removes the .hover class from all elements', function () {
             container.append('span').attr('class', 'hover');
 
             container.call(iD.behavior.Hover(context));
@@ -60,8 +60,8 @@ describe("iD.behavior.Hover", function() {
         });
     });
 
-    describe("alt keydown", function () {
-        it("replaces the .hover class with .hover-suppressed", function () {
+    describe('alt keydown', function () {
+        it('replaces the .hover class with .hover-suppressed', function () {
             container.append('span').attr('class', 'hover');
 
             container.call(iD.behavior.Hover(context).altDisables(true));
@@ -72,8 +72,8 @@ describe("iD.behavior.Hover", function() {
         });
     });
 
-    describe("alt keyup", function () {
-        it("replaces the .hover-suppressed class with .hover", function () {
+    describe('alt keyup', function () {
+        it('replaces the .hover-suppressed class with .hover', function () {
             container.append('span').attr('class', 'hover-suppressed');
 
             container.call(iD.behavior.Hover(context).altDisables(true));

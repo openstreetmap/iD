@@ -1,4 +1,4 @@
-describe("iD.behavior.Lasso", function () {
+describe('iD.behavior.Lasso', function () {
     var lasso, context;
 
     beforeEach(function () {
