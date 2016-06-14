@@ -15,8 +15,16 @@ iD.modes.AddPoint = function(context) {
         .on('cancel', cancel)
         .on('finish', cancel);
 
+    function defaultTags() {
+        var tags = {};
+        if (context.indoor().enabled()) {
+            tags.level = context.indoor().level();
+        }
+        return tags;
+    }
+
     function add(loc) {
-        var node = iD.Node({loc: loc});
+        var node = iD.Node({loc: loc, tags: defaultTags()});
 
         context.perform(
             iD.actions.AddEntity(node),

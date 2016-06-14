@@ -166,7 +166,7 @@ iD.svg.Labels = function(projection, context) {
 
         icons.enter()
             .append('use')
-            .attr('class', 'icon areaicon')
+            .attr('class', function(d, i) { return 'icon areaicon ' + labels[i].classes; })
             .attr('width', '18px')
             .attr('height', '18px');
 

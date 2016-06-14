@@ -215,6 +215,13 @@ window.iD = function () {
     };
 
 
+    /* Indoor mode */
+    var indoor;
+    context.indoor = function () {
+        return indoor;
+    };
+
+
     /* Debug */
     var debugFlags = {
         tile: false,
@@ -378,6 +385,8 @@ window.iD = function () {
     context.zoomInFurther = map.zoomInFurther;
     context.zoomOutFurther = map.zoomOutFurther;
     context.redrawEnable = map.redrawEnable;
+
+    indoor = iD.Indoor(context);
 
     presets = iD.presets();
 

@@ -2638,7 +2638,8 @@
         "icon": "building",
         "fields": [
             "address",
-            "levels"
+            "levels",
+            "indoor_levels"
         ],
         "geometry": [
             "area"
@@ -2657,6 +2658,7 @@
         "fields": [
             "address",
             "levels",
+            "indoor_levels",
             "smoking"
         ],
         "geometry": [
@@ -2779,7 +2781,8 @@
         "icon": "building",
         "fields": [
             "address",
-            "levels"
+            "levels",
+            "indoor_levels"
         ],
         "geometry": [
             "area"
@@ -2795,6 +2798,7 @@
         "fields": [
             "address",
             "levels",
+            "indoor_levels",
             "smoking"
         ],
         "geometry": [
@@ -2876,6 +2880,7 @@
         "fields": [
             "address",
             "levels",
+            "indoor_levels",
             "smoking"
         ],
         "geometry": [
@@ -2907,6 +2912,7 @@
         "fields": [
             "address",
             "levels",
+            "indoor_levels",
             "smoking"
         ],
         "geometry": [
@@ -2936,7 +2942,8 @@
         "icon": "building",
         "fields": [
             "address",
-            "levels"
+            "levels",
+            "indoor_levels"
         ],
         "geometry": [
             "area"
@@ -3049,7 +3056,8 @@
         "icon": "building",
         "fields": [
             "address",
-            "levels"
+            "levels",
+            "indoor_levels"
         ],
         "geometry": [
             "point",
@@ -3067,7 +3075,8 @@
         "icon": "building",
         "fields": [
             "address",
-            "levels"
+            "levels",
+            "indoor_levels"
         ],
         "geometry": [
             "area"
@@ -5125,6 +5134,23 @@
             "historic": "wayside_shrine"
         },
         "name": "Wayside Shrine"
+    },
+    "indoor": {
+        "fields": [
+            "name",
+            "level",
+            "repeat_on"
+        ],
+        "geometry": [
+            "point",
+            "area"
+        ],
+        "tags": {
+            "indoor": "*"
+        },
+        "matchScore": 0.4,
+        "terms": [],
+        "name": "Indoor object"
     },
     "junction": {
         "geometry": [

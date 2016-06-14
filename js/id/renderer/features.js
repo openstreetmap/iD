@@ -100,10 +100,34 @@ iD.Features = function(context) {
         );
     }, 250);
 
+    defineFeature('indoor', function isIndoorOther(entity) {
+        return !!entity.tags.level;
+    });
+
+    defineFeature('indoor_different_level', function isHiddenByLevel(entity, resolver, geometry) { //disabled in indoor_mode -> hides unwanted levels
+        var current = context.indoor().level();
+
+        if (entity.tags.level && !context.indoor().inRange(current, entity))
+            return true;
+
+        if (geometry === 'point' && !entity.tags.level)
+            return true;
+
+        if (entity.tags.max_level && entity.tags.min_level) {
+            if (parseFloat(entity.tags.max_level) < current || parseFloat(entity.tags.min_level) > current)
+                return true;
+        }
+        else if (entity.tags.building || entity.tags['building:part']) {
+            if (current < 0 || current >= parseFloat(entity.tags['building:levels'] || 0))  //one level <=> level=0
+                return true;
+        }
+    });
+
     defineFeature('landuse', function isLanduse(entity, resolver, geometry) {
         return geometry === 'area' &&
             !_features.buildings.filter(entity) &&
-            !_features.water.filter(entity);
+            !_features.water.filter(entity) &&
+            !_features.indoor.filter(entity);
     });
 
     defineFeature('boundaries', function isBoundary(entity) {
@@ -348,7 +372,7 @@ iD.Features = function(context) {
 
     features.isHiddenFeature = function(entity, resolver, geometry) {
         if (!_hidden.length) return false;
-        if (!entity.version) return false;
+        if (!context.indoor().enabled() && entity.isNew()) return false;
 
         var matches = features.getMatches(entity, resolver, geometry);
 
@@ -360,7 +384,10 @@ iD.Features = function(context) {
 
     features.isHiddenChild = function(entity, resolver, geometry) {
         if (!_hidden.length) return false;
-        if (!entity.version || geometry === 'point') return false;
+        if ((!context.indoor().enabled() && entity.isNew()) || geometry === 'point') return false;
+
+        //hide vertices with different level
+        if (geometry === 'vertex' && context.indoor().enabled() && _features.indoor_different_level.filter(entity, resolver, geometry)) return true;
 
         var parents = features.getParents(entity, resolver, geometry);
         if (!parents.length) return false;
@@ -397,7 +424,7 @@ iD.Features = function(context) {
 
     features.isHidden = function(entity, resolver, geometry) {
         if (!_hidden.length) return false;
-        if (!entity.version) return false;
+        if (!context.indoor().enabled() && !entity.version) return false;
 
         var fn = (geometry === 'vertex' ? features.isHiddenChild : features.isHiddenFeature);
         return fn(entity, resolver, geometry);
@@ -415,6 +442,8 @@ iD.Features = function(context) {
         }
         return result;
     };
+
+
 
     return d3.rebind(features, dispatch, 'on');
 };

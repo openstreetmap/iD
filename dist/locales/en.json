@@ -396,6 +396,14 @@
             "description": "Past/Future",
             "tooltip": "Proposed, Construction, Abandoned, Demolished, etc."
         },
+        "indoor": {
+            "description": "Indoor Features",
+            "tooltip": "All features with filled level."
+        },
+        "indoor_different_level": {
+            "description": "Indoor - hidden levels",
+            "tooltip": "When in indoor mode, it hides all levels except the selected one."
+        },
         "others": {
             "description": "Others",
             "tooltip": "Everything Else"
@@ -443,6 +451,11 @@
             "done": "All conflicts resolved!",
             "help": "Another user changed some of the same map features you changed.\nClick on each item below for more details about the conflict, and choose whether to keep\nyour changes or the other user's changes.\n"
         }
+    },
+    "indoor_mode": {
+        "title": "Indoor",
+        "help": "Indoor mode helps you creating indoor objects by filtering only the selected level.",
+        "exit": "Exit indoor editing mode."
     },
     "merge_remote_changes": {
         "conflict": {
@@ -1026,6 +1039,11 @@
                     "down": "Down"
                 }
             },
+            "indoor_levels": {
+                "label": "Indoor levels (min - max)",
+                "placeholder-0": "-1, 0, 1, 3...",
+                "placeholder-1": "3, 5, 10..."
+            },
             "information": {
                 "label": "Type"
             },
@@ -1281,6 +1299,9 @@
             },
             "religion": {
                 "label": "Religion"
+            },
+            "repeat_on": {
+                "label": "Repeat on"
             },
             "restriction": {
                 "label": "Type"
@@ -2647,6 +2668,10 @@
             },
             "historic/wayside_shrine": {
                 "name": "Wayside Shrine",
+                "terms": ""
+            },
+            "indoor": {
+                "name": "Indoor object",
                 "terms": ""
             },
             "junction": {

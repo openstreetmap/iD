@@ -13,10 +13,18 @@ iD.modes.AddLine = function(context) {
         .on('startFromWay', startFromWay)
         .on('startFromNode', startFromNode);
 
+    function defaultTags() {
+        var tags = {};
+        if (context.indoor().enabled()) {
+            tags.level = context.indoor().level();
+        }
+        return tags;
+    }
+
     function start(loc) {
         var baseGraph = context.graph(),
             node = iD.Node({loc: loc}),
-            way = iD.Way();
+            way = iD.Way({tags: defaultTags()});
 
         context.perform(
             iD.actions.AddEntity(node),
@@ -29,7 +37,7 @@ iD.modes.AddLine = function(context) {
     function startFromWay(loc, edge) {
         var baseGraph = context.graph(),
             node = iD.Node({loc: loc}),
-            way = iD.Way();
+            way = iD.Way({tags: defaultTags()});
 
         context.perform(
             iD.actions.AddEntity(node),
@@ -42,7 +50,7 @@ iD.modes.AddLine = function(context) {
 
     function startFromNode(node) {
         var baseGraph = context.graph(),
-            way = iD.Way();
+            way = iD.Way({tags: defaultTags()});
 
         context.perform(
             iD.actions.AddEntity(way),

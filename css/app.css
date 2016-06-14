@@ -489,6 +489,29 @@ button.save.has-count .count::before {
     border-right-color: inherit;
 }
 
+.indoormode-level-combo .combobox-input {
+    height: 40px;
+    border-radius: 4px 0 0 4px;
+    font-weight: bold;
+    text-align: center;
+}
+.indoormode-level-combo .combobox-input::-webkit-input-placeholder  {
+    color: #000;
+}
+.indoormode-level-combo .combobox-caret {
+    display: none;
+}
+.indoormode-control .spin-control {
+    height: 40px;
+    width: 41.6666%; /* force .col5 */
+    border-right: 1px solid rgba(0,0,0,.5);
+    margin-left: 0;
+    background: white;
+}
+.indoormode-control .spin-control button {
+    border-right: 0;
+}
+
 /* Icons */
 
 .icon {
@@ -1014,6 +1037,9 @@ button.save.has-count .count::before {
     border-top: 0;
     border-radius: 0 0 4px 4px;
     overflow: hidden;
+}
+.form-field > input:nth-child(3) {
+    border-left: 0;
 }
 
 .form-field textarea {

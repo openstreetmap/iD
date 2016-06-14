@@ -326,6 +326,12 @@ en:
     past_future:
       description: Past/Future
       tooltip: "Proposed, Construction, Abandoned, Demolished, etc."
+    indoor:
+      description: Indoor Features
+      tooltip: "All features with filled level."
+    indoor_different_level:
+      description: Indoor - hidden levels
+      tooltip: "When in indoor mode, it hides all levels except the selected one."
     others:
       description: Others
       tooltip: "Everything Else"
@@ -368,6 +374,10 @@ en:
         Another user changed some of the same map features you changed.
         Click on each item below for more details about the conflict, and choose whether to keep
         your changes or the other user's changes.
+  indoor_mode:
+    title: Indoor
+    help: Indoor mode helps you creating indoor objects by filtering only the selected level.
+    exit: Exit indoor editing mode.
   merge_remote_changes:
     conflict:
       deleted: 'This object has been deleted by {user}.'

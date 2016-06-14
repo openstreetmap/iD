@@ -136,6 +136,7 @@ dist/iD.js: \
 	js/id/renderer/background.js \
 	js/id/renderer/background_source.js \
 	js/id/renderer/features.js \
+	js/id/renderer/indoor.js \
 	js/id/renderer/map.js \
 	js/id/renderer/tile_layer.js \
 	js/id/svg.js \
@@ -172,6 +173,7 @@ dist/iD.js: \
 	js/id/ui/full_screen.js \
 	js/id/ui/geolocate.js \
 	js/id/ui/help.js \
+	js/id/ui/indoor_mode.js \
 	js/id/ui/info.js \
 	js/id/ui/inspector.js \
 	js/id/ui/intro.js \
@@ -213,6 +215,7 @@ dist/iD.js: \
 	js/id/ui/preset/localized.js \
 	js/id/ui/preset/maxspeed.js \
 	js/id/ui/preset/radio.js \
+	js/id/ui/preset/range.js \
 	js/id/ui/preset/restrictions.js \
 	js/id/ui/preset/textarea.js \
 	js/id/ui/preset/wikipedia.js \

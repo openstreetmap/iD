@@ -1286,6 +1286,44 @@ path.fill.tag-amenity-shelter {
 }
 
 
+/* Indoor features */
+path.fill.tag-indoor {
+    display: none;
+}
+.indoor-mode path.fill.tag-building.tag-max_level {
+    clip-path: none !important;
+    stroke-width: 30px;
+}
+.indoor-mode path.way.area.stroke.tag-building.tag-max_level {
+    stroke-width: 6px;
+}
+.indoor-mode path.fill.tag-indoor {
+    display: block;
+    fill: rgba(169, 169, 169, 0.3);
+    stroke-width: 30px;
+}
+.indoor-mode path.stroke.tag-indoor {
+    stroke: rgb(169, 169, 169);
+}
+.indoor-mode path.stroke.tag-indoor-corridor {
+    opacity: 0.1;
+}
+.indoor-mode use.icon.areaicon.tag-building,
+.indoor-mode use.icon.areaicon.tag-amenity,
+.indoor-mode text.arealabel.tag-building,
+.indoor-mode text.arealabel.tag-amenity,
+.indoor-mode text.arealabel-halo.tag-building,
+.indoor-mode text.arealabel-halo.tag-amenity {
+    display: none;
+}
+.indoor-mode .way:not(.tag-level):not(.tag-building) {
+    opacity: 0.1;
+}
+.indoor-mode.indoor-underground .way:not(.tag-level):not(.tag-building) {
+    opacity: 0.05;
+}
+
+
 /* Labels / Markers */
 
 text {

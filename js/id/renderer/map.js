@@ -35,6 +35,8 @@ iD.Map = function(context) {
             .on('change.map', redraw);
         context.features()
             .on('redraw.map', redraw);
+        context.indoor()
+            .on('levelChanged.map', redraw);
         drawLayers
             .on('change.map', function() {
                 context.background().updateImagery();

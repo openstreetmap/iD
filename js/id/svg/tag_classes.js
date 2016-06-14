@@ -2,7 +2,7 @@ iD.svg.TagClasses = function() {
     var primaries = [
             'building', 'highway', 'railway', 'waterway', 'aeroway',
             'motorway', 'boundary', 'power', 'amenity', 'natural', 'landuse',
-            'leisure', 'place'
+            'leisure', 'place', 'indoor'
         ],
         statuses = [
             'proposed', 'construction', 'disused', 'abandoned', 'dismantled',
@@ -10,7 +10,7 @@ iD.svg.TagClasses = function() {
         ],
         secondaries = [
             'oneway', 'bridge', 'tunnel', 'embankment', 'cutting', 'barrier',
-            'surface', 'tracktype', 'crossing'
+            'surface', 'tracktype', 'crossing', 'level', 'max_level'
         ],
         tagClassRe = /^tag-/,
         tags = function(entity) { return entity.tags; };
