@@ -1,5 +1,5 @@
-module.exports = function() {
+export function Noop() {
     return function(graph) {
         return graph;
     };
-};
+}

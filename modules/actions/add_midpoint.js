@@ -1,4 +1,4 @@
-module.exports = function(midpoint, node) {
+export function AddMidpoint(midpoint, node) {
     return function(graph) {
         graph = graph.replace(node.move(midpoint.loc));
 
@@ -20,4 +20,4 @@ module.exports = function(midpoint, node) {
 
         return graph;
     };
-};
+}

@@ -1,5 +1,7 @@
+import { DeleteMultiple } from './delete_multiple';
+
 // https://github.com/openstreetmap/potlatch2/blob/master/net/systemeD/halcyon/connection/actions/DeleteRelationAction.as
-module.exports = function(relationId) {
+export function DeleteRelation(relationId) {
     function deleteEntity(entity, graph) {
         return !graph.parentWays(entity).length &&
             !graph.parentRelations(entity).length &&
@@ -15,7 +17,7 @@ module.exports = function(relationId) {
                 graph = graph.replace(parent);
 
                 if (parent.isDegenerate()) {
-                    graph = iD.actions.DeleteRelation(parent.id)(graph);
+                    graph = DeleteRelation(parent.id)(graph);
                 }
             });
 
@@ -24,7 +26,7 @@ module.exports = function(relationId) {
 
             var entity = graph.entity(memberId);
             if (deleteEntity(entity, graph)) {
-                graph = iD.actions.DeleteMultiple([memberId])(graph);
+                graph = DeleteMultiple([memberId])(graph);
             }
         });
 
@@ -37,4 +39,4 @@ module.exports = function(relationId) {
     };
 
     return action;
-};
+}

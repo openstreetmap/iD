@@ -1,4 +1,4 @@
-module.exports = function(wayId, projection, maxAngle) {
+export function Circularize(wayId, projection, maxAngle) {
     maxAngle = (maxAngle || 20) * Math.PI / 180;
 
     var action = function(graph) {
@@ -180,4 +180,4 @@ module.exports = function(wayId, projection, maxAngle) {
     };
 
     return action;
-};
+}

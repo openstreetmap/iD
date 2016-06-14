@@ -1,3 +1,5 @@
+import { Split } from './split';
+
 // Create a restriction relation for `turn`, which must have the following structure:
 //
 //     {
@@ -22,7 +24,7 @@
 // Normally, this will be undefined and the relation will automatically
 // be assigned a new ID.
 //
-module.exports = function(turn, projection, restrictionId) {
+export function RestrictTurn(turn, projection, restrictionId) {
     return function(graph) {
         var from = graph.entity(turn.from.way),
             via  = graph.entity(turn.via.node),
@@ -34,7 +36,7 @@ module.exports = function(turn, projection, restrictionId) {
 
         function split(toOrFrom) {
             var newID = toOrFrom.newID || iD.Way().id;
-            graph = iD.actions.Split(via.id, [newID])
+            graph = Split(via.id, [newID])
                 .limitWays([toOrFrom.way])(graph);
 
             var a = graph.entity(newID),
@@ -85,4 +87,4 @@ module.exports = function(turn, projection, restrictionId) {
             ]
         }));
     };
-};
+}

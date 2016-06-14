@@ -1,4 +1,4 @@
-module.exports = function(entityId, oldPreset, newPreset) {
+export function ChangePreset(entityId, oldPreset, newPreset) {
     return function(graph) {
         var entity = graph.entity(entityId),
             geometry = entity.geometry(graph),
@@ -9,4 +9,4 @@ module.exports = function(entityId, oldPreset, newPreset) {
 
         return graph.replace(entity.update({tags: tags}));
     };
-};
+}

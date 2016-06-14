@@ -1,8 +1,10 @@
+import { DeleteNode } from './delete_node';
+
 /*
  * Based on https://github.com/openstreetmap/potlatch2/blob/master/net/systemeD/potlatch2/tools/Quadrilateralise.as
  */
 
-module.exports = function(wayId, projection) {
+export function Orthogonalize(wayId, projection) {
     var threshold = 12, // degrees within right or straight to alter
         lowerThreshold = Math.cos((90 - threshold) * Math.PI / 180),
         upperThreshold = Math.cos(threshold * Math.PI / 180);
@@ -70,7 +72,7 @@ module.exports = function(wayId, projection) {
 
                 var dotp = normalizedDotProduct(i, points);
                 if (dotp < -1 + epsilon) {
-                    graph = iD.actions.DeleteNode(nodes[i].id)(graph);
+                    graph = DeleteNode(nodes[i].id)(graph);
                 }
             }
         }
@@ -169,4 +171,4 @@ module.exports = function(wayId, projection) {
     };
 
     return action;
-};
+}

@@ -1,4 +1,6 @@
-module.exports = function(id, localGraph, remoteGraph, formatUser) {
+import { DeleteMultiple } from './delete_multiple';
+
+export function MergeRemoteChanges(id, localGraph, remoteGraph, formatUser) {
     var option = 'safe',  // 'safe', 'force_local', 'force_remote'
         conflicts = [];
 
@@ -122,7 +124,7 @@ module.exports = function(id, localGraph, remoteGraph, formatUser) {
             graph = graph.replace(updates.replacements[i]);
         }
         if (updates.removeIds.length) {
-            graph = iD.actions.DeleteMultiple(updates.removeIds)(graph);
+            graph = DeleteMultiple(updates.removeIds)(graph);
         }
         return graph;
     }
@@ -204,7 +206,7 @@ module.exports = function(id, localGraph, remoteGraph, formatUser) {
         // delete/undelete
         if (!remote.visible) {
             if (option === 'force_remote') {
-                return iD.actions.DeleteMultiple([id])(graph);
+                return DeleteMultiple([id])(graph);
 
             } else if (option === 'force_local') {
                 if (target.type === 'way') {
@@ -252,4 +254,4 @@ module.exports = function(id, localGraph, remoteGraph, formatUser) {
     };
 
     return action;
-};
+}

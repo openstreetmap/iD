@@ -45,10 +45,8 @@ $(BUILDJS_TARGETS): $(BUILDJS_SOURCES) build.js
 MODULE_TARGETS = \
 	js/lib/id/actions.js
 
-ACTIONS = $(shell ./node_modules/.bin/browserify --list modules/actions/index.js)
-js/lib/id/actions.js: $(ACTIONS)
-	node_modules/.bin/browserify modules/actions/index.js -s iD.actions > $@
-
+js/lib/id/actions.js: modules/
+	node_modules/.bin/rollup -f umd -n iD.actions modules/actions/index.js --no-strict > $@
 
 dist/iD.js: \
 	js/lib/bootstrap-tooltip.js \
