@@ -20,4 +20,4 @@ export function AddMidpoint(midpoint, node) {
 
         return graph;
     };
-};
+}

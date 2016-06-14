@@ -28,4 +28,4 @@ export function DeleteMultiple(ids) {
     };
 
     return action;
-};
+}

@@ -34,4 +34,4 @@ export function DeleteNode(nodeId) {
     };
 
     return action;
-};
+}
