@@ -1,4 +1,4 @@
-iD.validations.TagSuggestsArea = function() {
+export function TagSuggestsArea() {
 
     // https://github.com/openstreetmap/josm/blob/mirror/src/org/
     // openstreetmap/josm/data/validation/tests/UnclosedWays.java#L80
@@ -34,4 +34,4 @@ iD.validations.TagSuggestsArea = function() {
     };
 
     return validation;
-};
+}

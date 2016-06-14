@@ -43,10 +43,14 @@ $(BUILDJS_TARGETS): $(BUILDJS_SOURCES) build.js
 
 
 MODULE_TARGETS = \
-	js/lib/id/actions.js
+	js/lib/id/actions.js \
+	js/lib/id/validations.js
 
 js/lib/id/actions.js: modules/
 	node_modules/.bin/rollup -f umd -n iD.actions modules/actions/index.js --no-strict > $@
+
+js/lib/id/validations.js: modules/
+	node_modules/.bin/rollup -f umd -n iD.validations modules/validations/index.js --no-strict > $@
 
 dist/iD.js: \
 	js/lib/bootstrap-tooltip.js \
@@ -226,11 +230,6 @@ dist/iD.js: \
 	js/id/presets/collection.js \
 	js/id/presets/field.js \
 	js/id/presets/preset.js \
-	js/id/validations.js \
-	js/id/validations/deprecated_tag.js \
-	js/id/validations/many_deletions.js \
-	js/id/validations/missing_tag.js \
-	js/id/validations/tag_suggests_area.js \
 	js/id/end.js \
 	js/lib/locale.js \
 	data/introGraph.js
