@@ -24,8 +24,8 @@ Come on in, the water's lovely. More help? Ping `jfire` or `bhousel` on
 (`irc.oftc.net`, in `#iD` or `#osm-dev` or `#osm`) or on the [OpenStreetMap `dev` mailing list](http://wiki.openstreetmap.org/wiki/Mailing_lists).
 
 ## Prerequisites
-* [Node.js](http://nodejs.org/) version 0.10.0 or newer
-* [PhantomJS](http://phantomjs.org/) version 2 or newer (for running tests)
+
+* [Node.js](http://nodejs.org/) version 4 or newer
 * Command line development tools (`make`, `git`, and a compiler) for your platform
   * Ubuntu:
     * `sudo apt-get install build-essential git`
