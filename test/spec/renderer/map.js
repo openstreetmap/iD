@@ -129,9 +129,9 @@ describe('iD.Map', function() {
         });
     });
 
-    describe("surface", function() {
-        it("is an SVG element", function() {
-           expect(map.surface.node().tagName).to.equal("svg");
+    describe('surface', function() {
+        it('is an SVG element', function() {
+           expect(map.surface.node().tagName).to.equal('svg');
         });
     });
 

@@ -83,7 +83,7 @@ describe('iD.Features', function() {
         });
     });
 
-    describe("matching", function() {
+    describe('matching', function() {
         var graph = iD.Graph([
             // Points
             iD.Node({id: 'point_bar', tags: {amenity: 'bar'}, version: 1}),
@@ -191,7 +191,7 @@ describe('iD.Features', function() {
                         {id: 'building_yes'}
                     ],
                     version: 1
-                }),
+                })
 
         ]),
         all = _.values(graph.base().entities);
@@ -214,7 +214,7 @@ describe('iD.Features', function() {
         }
 
 
-        it("matches points", function () {
+        it('matches points', function () {
             features.disable('points');
             features.gatherStats(all, graph, dimensions);
 
@@ -231,7 +231,7 @@ describe('iD.Features', function() {
         });
 
 
-        it("matches traffic roads", function () {
+        it('matches traffic roads', function () {
             features.disable('traffic_roads');
             features.gatherStats(all, graph, dimensions);
 
@@ -250,7 +250,7 @@ describe('iD.Features', function() {
         });
 
 
-        it("matches service roads", function () {
+        it('matches service roads', function () {
             features.disable('service_roads');
             features.gatherStats(all, graph, dimensions);
 
@@ -266,7 +266,7 @@ describe('iD.Features', function() {
         });
 
 
-        it("matches paths", function () {
+        it('matches paths', function () {
             features.disable('paths');
             features.gatherStats(all, graph, dimensions);
 
@@ -283,7 +283,7 @@ describe('iD.Features', function() {
         });
 
 
-        it("matches buildings", function () {
+        it('matches buildings', function () {
             features.disable('buildings');
             features.gatherStats(all, graph, dimensions);
 
@@ -300,7 +300,7 @@ describe('iD.Features', function() {
         });
 
 
-        it("matches landuse", function () {
+        it('matches landuse', function () {
             features.disable('landuse');
             features.gatherStats(all, graph, dimensions);
 
@@ -319,7 +319,7 @@ describe('iD.Features', function() {
         });
 
 
-        it("matches boundaries", function () {
+        it('matches boundaries', function () {
             features.disable('boundaries');
             features.gatherStats(all, graph, dimensions);
 
@@ -335,7 +335,7 @@ describe('iD.Features', function() {
         });
 
 
-        it("matches water", function () {
+        it('matches water', function () {
             features.disable('water');
             features.gatherStats(all, graph, dimensions);
 
@@ -352,7 +352,7 @@ describe('iD.Features', function() {
         });
 
 
-        it("matches rail", function () {
+        it('matches rail', function () {
             features.disable('rail');
             features.gatherStats(all, graph, dimensions);
 
@@ -370,7 +370,7 @@ describe('iD.Features', function() {
         });
 
 
-        it("matches power", function () {
+        it('matches power', function () {
             features.disable('power');
             features.gatherStats(all, graph, dimensions);
 
@@ -386,7 +386,7 @@ describe('iD.Features', function() {
         });
 
 
-        it("matches past/future", function () {
+        it('matches past/future', function () {
             features.disable('past_future');
             features.gatherStats(all, graph, dimensions);
 
@@ -403,7 +403,7 @@ describe('iD.Features', function() {
         });
 
 
-        it("matches others", function () {
+        it('matches others', function () {
             features.disable('others');
             features.gatherStats(all, graph, dimensions);
 
