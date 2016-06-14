@@ -254,4 +254,4 @@ export function MergeRemoteChanges(id, localGraph, remoteGraph, formatUser) {
     };
 
     return action;
-};
+}

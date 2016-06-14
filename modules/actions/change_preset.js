@@ -9,4 +9,4 @@ export function ChangePreset(entityId, oldPreset, newPreset) {
 
         return graph.replace(entity.update({tags: tags}));
     };
-};
+}

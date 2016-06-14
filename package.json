@@ -12,6 +12,7 @@
     "test": "npm run lint && phantomjs node_modules/mocha-phantomjs-core/mocha-phantomjs-core.js test/index.html dot && make && phantomjs node_modules/mocha-phantomjs-core/mocha-phantomjs-core.js test/index_packaged.html dot",
     "start": "http-server .",
     "lint": "eslint js/id && npm run lint:spec:actions",
+    "lint:modules": "eslint modules",
     "lint:spec:actions": "eslint test/spec/actions"
   },
   "repository": {
@@ -27,7 +28,7 @@
     "chai": "~1.9.2",
     "d3": "3.5.5",
     "editor-layer-index": "git://github.com/osmlab/editor-layer-index.git#gh-pages",
-    "eslint": "^1.10.3",
+    "eslint": "^2.12.0",
     "glob": "~3.1.21",
     "happen": "0.1.2",
     "http-server": "^0.9.0",

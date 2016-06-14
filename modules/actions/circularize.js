@@ -180,4 +180,4 @@ export function Circularize(wayId, projection, maxAngle) {
     };
 
     return action;
-};
+}
