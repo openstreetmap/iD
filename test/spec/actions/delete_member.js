@@ -1,5 +1,5 @@
-describe("iD.actions.DeleteMember", function () {
-    it("removes the member at the specified index", function () {
+describe('iD.actions.DeleteMember', function () {
+    it('removes the member at the specified index', function () {
         var a      = iD.Node({id: 'a'}),
             b      = iD.Node({id: 'b'}),
             r      = iD.Relation({members: [{id: 'a'}, {id: 'b'}]}),
@@ -8,7 +8,7 @@ describe("iD.actions.DeleteMember", function () {
         expect(graph.entity(r.id).members).to.eql([{id: 'b'}]);
     });
 
-    it("deletes relations that become degenerate", function () {
+    it('deletes relations that become degenerate', function () {
         var a      = iD.Node({id: 'a'}),
             r      = iD.Relation({id: 'r', members: [{id: 'a'}]}),
             action = iD.actions.DeleteMember(r.id, 0),

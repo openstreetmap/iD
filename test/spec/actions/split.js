@@ -1,11 +1,11 @@
-describe("iD.actions.Split", function () {
+describe('iD.actions.Split', function () {
 
     beforeEach(function () {
         iD.areaKeys = iD().presets(iD.data.presets).presets().areaKeys();
     });
 
-    describe("#disabled", function () {
-        it("returns falsy for a non-end node of a single way", function () {
+    describe('#disabled', function () {
+        it('returns falsy for a non-end node of a single way', function () {
             var graph = iD.Graph([
                     iD.Node({id: 'a'}),
                     iD.Node({id: 'b'}),
@@ -16,7 +16,7 @@ describe("iD.actions.Split", function () {
             expect(iD.actions.Split('b').disabled(graph)).not.to.be.ok;
         });
 
-        it("returns falsy for an intersection of two ways", function () {
+        it('returns falsy for an intersection of two ways', function () {
             var graph = iD.Graph([
                     iD.Node({id: 'a'}),
                     iD.Node({id: 'b'}),
@@ -30,7 +30,7 @@ describe("iD.actions.Split", function () {
             expect(iD.actions.Split('*').disabled(graph)).not.to.be.ok;
         });
 
-        it("returns falsy for an intersection of two ways with parent way specified", function () {
+        it('returns falsy for an intersection of two ways with parent way specified', function () {
             var graph = iD.Graph([
                     iD.Node({id: 'a'}),
                     iD.Node({id: 'b'}),
@@ -44,7 +44,7 @@ describe("iD.actions.Split", function () {
             expect(iD.actions.Split('*').limitWays(['-']).disabled(graph)).not.to.be.ok;
         });
 
-        it("returns falsy for a self-intersection", function () {
+        it('returns falsy for a self-intersection', function () {
             var graph = iD.Graph([
                     iD.Node({id: 'a'}),
                     iD.Node({id: 'b'}),
@@ -56,7 +56,7 @@ describe("iD.actions.Split", function () {
             expect(iD.actions.Split('a').disabled(graph)).not.to.be.ok;
         });
 
-        it("returns 'not_eligible' for the first node of a single way", function () {
+        it('returns \'not_eligible\' for the first node of a single way', function () {
             var graph = iD.Graph([
                     iD.Node({id: 'a'}),
                     iD.Node({id: 'b'}),
@@ -66,7 +66,7 @@ describe("iD.actions.Split", function () {
             expect(iD.actions.Split('a').disabled(graph)).to.equal('not_eligible');
         });
 
-        it("returns 'not_eligible' for the last node of a single way", function () {
+        it('returns \'not_eligible\' for the last node of a single way', function () {
             var graph = iD.Graph([
                     iD.Node({id: 'a'}),
                     iD.Node({id: 'b'}),
@@ -76,7 +76,7 @@ describe("iD.actions.Split", function () {
             expect(iD.actions.Split('b').disabled(graph)).to.equal('not_eligible');
         });
 
-        it("returns 'not_eligible' for an intersection of two ways with non-parent way specified", function () {
+        it('returns \'not_eligible\' for an intersection of two ways with non-parent way specified', function () {
             var graph = iD.Graph([
                     iD.Node({id: 'a'}),
                     iD.Node({id: 'b'}),
@@ -91,7 +91,7 @@ describe("iD.actions.Split", function () {
         });
     });
 
-    it("creates a new way with the appropriate nodes", function () {
+    it('creates a new way with the appropriate nodes', function () {
         // Situation:
         //    a ---- b ---- c
         //
@@ -113,7 +113,7 @@ describe("iD.actions.Split", function () {
         expect(graph.entity('=').nodes).to.eql(['b', 'c']);
     });
 
-    it("copies tags to the new way", function () {
+    it('copies tags to the new way', function () {
         var tags = {highway: 'residential'},
             graph = iD.Graph([
                 iD.Node({id: 'a'}),
@@ -129,7 +129,7 @@ describe("iD.actions.Split", function () {
         expect(graph.entity('=').tags).to.equal(tags);
     });
 
-    it("splits a way at a T-junction", function () {
+    it('splits a way at a T-junction', function () {
         // Situation:
         //    a ---- b ---- c
         //           |
@@ -158,7 +158,7 @@ describe("iD.actions.Split", function () {
         expect(graph.entity('|').nodes).to.eql(['d', 'b']);
     });
 
-    it("splits multiple ways at an intersection", function () {
+    it('splits multiple ways at an intersection', function () {
         // Situation:
         //           c
         //           |
@@ -193,7 +193,7 @@ describe("iD.actions.Split", function () {
         expect(graph.entity('¦').nodes).to.eql(['*', 'd']);
     });
 
-    it("splits the specified ways at an intersection", function () {
+    it('splits the specified ways at an intersection', function () {
         var graph = iD.Graph([
                 iD.Node({id: 'a'}),
                 iD.Node({id: 'b'}),
@@ -221,7 +221,7 @@ describe("iD.actions.Split", function () {
         expect(g3.entity('¦').nodes).to.eql(['*', 'd']);
     });
 
-    it("splits self-intersecting ways", function () {
+    it('splits self-intersecting ways', function () {
         // Situation:
         //            b
         //           / |
@@ -250,7 +250,7 @@ describe("iD.actions.Split", function () {
         expect(graph.entity('=').nodes).to.eql(['a', 'd']);
     });
 
-    it("splits a closed way at the given point and its antipode", function () {
+    it('splits a closed way at the given point and its antipode', function () {
         // Situation:
         //    a ---- b
         //    |      |
@@ -288,7 +288,7 @@ describe("iD.actions.Split", function () {
         expect(g4.entity('=').nodes).to.eql(['b', 'c', 'd']);
     });
 
-    it("splits an area by converting it to a multipolygon", function () {
+    it('splits an area by converting it to a multipolygon', function () {
         var graph = iD.Graph([
                 iD.Node({id: 'a', loc: [0,1]}),
                 iD.Node({id: 'b', loc: [1,1]}),
@@ -310,7 +310,7 @@ describe("iD.actions.Split", function () {
         ]);
     });
 
-    it("splits only the line of a node shared by a line and an area", function () {
+    it('splits only the line of a node shared by a line and an area', function () {
         var graph = iD.Graph([
                 iD.Node({id: 'a', loc: [0,1]}),
                 iD.Node({id: 'b', loc: [1,1]}),
@@ -327,7 +327,7 @@ describe("iD.actions.Split", function () {
         expect(graph.parentRelations(graph.entity('='))).to.have.length(0);
     });
 
-    it("adds the new way to parent relations (no connections)", function () {
+    it('adds the new way to parent relations (no connections)', function () {
         // Situation:
         //    a ---- b ---- c
         //    Relation: [----]
@@ -354,7 +354,7 @@ describe("iD.actions.Split", function () {
         ]);
     });
 
-    it("adds the new way to parent relations (forward order)", function () {
+    it('adds the new way to parent relations (forward order)', function () {
         // Situation:
         //    a ---- b ---- c ~~~~ d
         //    Relation: [----, ~~~~]
@@ -380,7 +380,7 @@ describe("iD.actions.Split", function () {
         expect(_.map(graph.entity('r').members, 'id')).to.eql(['-', '=', '~']);
     });
 
-    it("adds the new way to parent relations (reverse order)", function () {
+    it('adds the new way to parent relations (reverse order)', function () {
         // Situation:
         //    a ---- b ---- c ~~~~ d
         //    Relation: [~~~~, ----]
@@ -406,7 +406,7 @@ describe("iD.actions.Split", function () {
         expect(_.map(graph.entity('r').members, 'id')).to.eql(['~', '=', '-']);
     });
 
-    it("handles incomplete relations", function () {
+    it('handles incomplete relations', function () {
         var graph = iD.Graph([
                 iD.Node({id: 'a'}),
                 iD.Node({id: 'b'}),
@@ -420,7 +420,7 @@ describe("iD.actions.Split", function () {
         expect(_.map(graph.entity('r').members, 'id')).to.eql(['~', '-', '=']);
     });
 
-    it("converts simple multipolygon to a proper multipolygon", function () {
+    it('converts simple multipolygon to a proper multipolygon', function () {
         var graph = iD.Graph([
                 iD.Node({id: 'a'}),
                 iD.Node({id: 'b'}),
@@ -437,7 +437,7 @@ describe("iD.actions.Split", function () {
     });
 
     ['restriction', 'restriction:bus'].forEach(function (type) {
-        it("updates a restriction's 'from' role", function () {
+        it('updates a restriction\'s \'from\' role', function () {
             // Situation:
             //    a ----> b ----> c ~~~~ d
             // A restriction from ---- to ~~~~ via c.
@@ -469,7 +469,7 @@ describe("iD.actions.Split", function () {
                 {id: 'c', role: 'via'}]);
         });
 
-        it("updates a restriction's 'to' role", function () {
+        it('updates a restriction\'s \'to\' role', function () {
             // Situation:
             //    a ----> b ----> c ~~~~ d
             // A restriction from ~~~~ to ---- via c.
@@ -501,7 +501,7 @@ describe("iD.actions.Split", function () {
                 {id: 'c', role: 'via'}]);
         });
 
-        it("leaves unaffected restrictions unchanged", function () {
+        it('leaves unaffected restrictions unchanged', function () {
             // Situation:
             //    a <---- b <---- c ~~~~ d
             // A restriction from ---- to ~~~~ via c.

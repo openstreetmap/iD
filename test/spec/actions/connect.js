@@ -1,5 +1,5 @@
-describe("iD.actions.Connect", function() {
-    it("removes all but the final node", function() {
+describe('iD.actions.Connect', function() {
+    it('removes all but the final node', function() {
         var graph = iD.Graph([
                 iD.Node({id: 'a'}),
                 iD.Node({id: 'b'}),
@@ -13,7 +13,7 @@ describe("iD.actions.Connect", function() {
         expect(graph.entity('c')).not.to.be.undefined;
     });
 
-    it("replaces non-surviving nodes in parent ways", function() {
+    it('replaces non-surviving nodes in parent ways', function() {
         // a --- b --- c
         //
         //       e
@@ -44,7 +44,7 @@ describe("iD.actions.Connect", function() {
         expect(graph.entity('|').nodes).to.eql(['d', 'b']);
     });
 
-    it("handles circular ways", function() {
+    it('handles circular ways', function() {
         // c -- a   d === e
         // |   /
         // |  /
@@ -68,7 +68,7 @@ describe("iD.actions.Connect", function() {
         expect(graph.entity('-').nodes).to.eql(['d', 'b', 'c', 'd']);
     });
 
-    it("merges adjacent nodes", function() {
+    it('merges adjacent nodes', function() {
         // a --- b --- c
         //
         // Connect [b, c]
@@ -90,7 +90,7 @@ describe("iD.actions.Connect", function() {
         expect(graph.hasEntity('b')).to.be.undefined;
     });
 
-    it("merges adjacent nodes with connections", function() {
+    it('merges adjacent nodes with connections', function() {
         // a --- b --- c
         //       |
         //       d
@@ -119,7 +119,7 @@ describe("iD.actions.Connect", function() {
         expect(graph.hasEntity('b')).to.be.undefined;
     });
 
-    it("deletes a degenerate way", function() {
+    it('deletes a degenerate way', function() {
         // a --- b
         //
         // Connect [a, b]
@@ -136,7 +136,7 @@ describe("iD.actions.Connect", function() {
         expect(graph.hasEntity('-')).to.be.undefined;
     });
 
-    it("merges tags to the surviving node", function() {
+    it('merges tags to the surviving node', function() {
         var graph = iD.Graph([
                 iD.Node({id: 'a', tags: {a: 'a'}}),
                 iD.Node({id: 'b', tags: {b: 'b'}}),
@@ -148,7 +148,7 @@ describe("iD.actions.Connect", function() {
         expect(graph.entity('c').tags).to.eql({a: 'a', b: 'b', c: 'c'});
     });
 
-    it("merges memberships to the surviving node", function() {
+    it('merges memberships to the surviving node', function() {
         var graph = iD.Graph([
                 iD.Node({id: 'a'}),
                 iD.Node({id: 'b'}),

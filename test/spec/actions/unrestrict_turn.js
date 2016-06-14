@@ -1,4 +1,4 @@
-describe("iD.actions.UnrestrictTurn", function() {
+describe('iD.actions.UnrestrictTurn', function() {
     it('removes a restriction from a restricted turn', function() {
         // u====*--->w
         var graph = iD.Graph([

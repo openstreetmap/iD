@@ -1,4 +1,4 @@
-describe("iD.actions.Circularize", function () {
+describe('iD.actions.Circularize', function () {
     var projection = d3.geo.mercator();
 
     function isCircular(id, graph) {
@@ -12,7 +12,7 @@ describe("iD.actions.Circularize", function () {
         return (pctDiff < 0.025);   // within 2.5% of circular area..
     }
 
-    it("creates nodes if necessary", function () {
+    it('creates nodes if necessary', function () {
         //    d ---- c
         //    |      |
         //    a ---- b
@@ -30,7 +30,7 @@ describe("iD.actions.Circularize", function () {
         expect(graph.entity('-').nodes).to.have.length(20);
     });
 
-    it("reuses existing nodes", function () {
+    it('reuses existing nodes', function () {
         //    d,e -- c
         //    |      |
         //    a ---- b
@@ -56,7 +56,7 @@ describe("iD.actions.Circularize", function () {
         expect(nodes).to.contain('e');
     });
 
-    it("limits movement of nodes that are members of other ways", function () {
+    it('limits movement of nodes that are members of other ways', function () {
         //    b ---- a
         //    |      |
         //    c ---- d
@@ -89,7 +89,7 @@ describe("iD.actions.Circularize", function () {
         return 180 / Math.PI * Math.acos(vector1[0] * vector2[0] + vector1[1] * vector2[1]);
     }
 
-    it("creates circle respecting min-angle limit", function() {
+    it('creates circle respecting min-angle limit', function() {
         //    d ---- c
         //    |      |
         //    a ---- b
@@ -119,7 +119,7 @@ describe("iD.actions.Circularize", function () {
         return d3.geom.polygon(_.map(graph.childNodes(graph.entity(id)), 'loc')).area();
     }
 
-    it("leaves clockwise ways clockwise", function () {
+    it('leaves clockwise ways clockwise', function () {
         //    d ---- c
         //    |      |
         //    a ---- b
@@ -139,7 +139,7 @@ describe("iD.actions.Circularize", function () {
         expect(area('+', graph)).to.be.gt(0);
     });
 
-    it("leaves counter-clockwise ways counter-clockwise", function () {
+    it('leaves counter-clockwise ways counter-clockwise', function () {
         //    d ---- c
         //    |      |
         //    a ---- b
@@ -159,7 +159,7 @@ describe("iD.actions.Circularize", function () {
         expect(area('-', graph)).to.be.lt(0);
     });
 
-    it("adds new nodes on shared way wound in opposite direction", function () {
+    it('adds new nodes on shared way wound in opposite direction', function () {
         //    c ---- b ---- f
         //    |     /       |
         //    |    a        |
@@ -193,7 +193,7 @@ describe("iD.actions.Circularize", function () {
         expect(graph.entity('=').isConvex(graph)).to.be.false;
     });
 
-    it("adds new nodes on shared way wound in similar direction", function () {
+    it('adds new nodes on shared way wound in similar direction', function () {
         //    c ---- b ---- f
         //    |     /       |
         //    |    a        |
@@ -227,7 +227,7 @@ describe("iD.actions.Circularize", function () {
         expect(graph.entity('=').isConvex(graph)).to.be.false;
     });
 
-    it("circularizes extremely concave ways with a key node on the wrong side of the centroid", function () {
+    it('circularizes extremely concave ways with a key node on the wrong side of the centroid', function () {
         //    c ------------ b -- f
         //    |       ___---      |
         //    |  a ===            |
@@ -257,11 +257,11 @@ describe("iD.actions.Circularize", function () {
         expect(graph.entity('-').nodes).to.have.length(20);
     });
 
-    it("circularizes a closed single line way", function () {
+    it('circularizes a closed single line way', function () {
         var graph = iD.Graph([
                 iD.Node({id: 'a', loc: [0, 0]}),
                 iD.Node({id: 'b', loc: [0, 2]}),
-                iD.Way({id: '-', nodes: ['a', 'b', 'a']}),
+                iD.Way({id: '-', nodes: ['a', 'b', 'a']})
             ]);
 
         expect(area('-', graph)).to.eql(0);

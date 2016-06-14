@@ -1,6 +1,6 @@
-describe("iD.actions.Join", function () {
-    describe("#disabled", function () {
-        it("returns falsy for ways that share an end/start node", function () {
+describe('iD.actions.Join', function () {
+    describe('#disabled', function () {
+        it('returns falsy for ways that share an end/start node', function () {
             // a --> b ==> c
             var graph = iD.Graph([
                     iD.Node({id: 'a'}),
@@ -13,7 +13,7 @@ describe("iD.actions.Join", function () {
             expect(iD.actions.Join(['-', '=']).disabled(graph)).not.to.be.ok;
         });
 
-        it("returns falsy for ways that share a start/end node", function () {
+        it('returns falsy for ways that share a start/end node', function () {
             // a <-- b <== c
             var graph = iD.Graph([
                     iD.Node({id: 'a'}),
@@ -26,7 +26,7 @@ describe("iD.actions.Join", function () {
             expect(iD.actions.Join(['-', '=']).disabled(graph)).not.to.be.ok;
         });
 
-        it("returns falsy for ways that share a start/start node", function () {
+        it('returns falsy for ways that share a start/start node', function () {
             // a <-- b ==> c
             var graph = iD.Graph([
                     iD.Node({id: 'a'}),
@@ -39,7 +39,7 @@ describe("iD.actions.Join", function () {
             expect(iD.actions.Join(['-', '=']).disabled(graph)).not.to.be.ok;
         });
 
-        it("returns falsy for ways that share an end/end node", function () {
+        it('returns falsy for ways that share an end/end node', function () {
             // a --> b <== c
             var graph = iD.Graph([
                     iD.Node({id: 'a'}),
@@ -52,7 +52,7 @@ describe("iD.actions.Join", function () {
             expect(iD.actions.Join(['-', '=']).disabled(graph)).not.to.be.ok;
         });
 
-        it("returns falsy for more than two ways when connected, regardless of order", function () {
+        it('returns falsy for more than two ways when connected, regardless of order', function () {
             // a --> b ==> c ~~> d
             var graph = iD.Graph([
                     iD.Node({id: 'a'}),
@@ -72,7 +72,7 @@ describe("iD.actions.Join", function () {
             expect(iD.actions.Join(['~', '-', '=']).disabled(graph)).not.to.be.ok;
         });
 
-        it("returns 'not_eligible' for non-line geometries", function () {
+        it('returns \'not_eligible\' for non-line geometries', function () {
             var graph = iD.Graph([
                     iD.Node({id: 'a'})
                 ]);
@@ -80,7 +80,7 @@ describe("iD.actions.Join", function () {
             expect(iD.actions.Join(['a']).disabled(graph)).to.equal('not_eligible');
         });
 
-        it("returns 'not_adjacent' for ways that don't share the necessary nodes", function () {
+        it('returns \'not_adjacent\' for ways that don\'t share the necessary nodes', function () {
             // a -- b -- c
             //      |
             //      d
@@ -96,7 +96,7 @@ describe("iD.actions.Join", function () {
             expect(iD.actions.Join(['-', '=']).disabled(graph)).to.equal('not_adjacent');
         });
 
-        it("returns 'restriction' in situations where a turn restriction would be damaged (a)", function () {
+        it('returns \'restriction\' in situations where a turn restriction would be damaged (a)', function () {
             // a --> b ==> c
             // from: -
             // to: =
@@ -117,7 +117,7 @@ describe("iD.actions.Join", function () {
             expect(iD.actions.Join(['-', '=']).disabled(graph)).to.equal('restriction');
         });
 
-        it("returns 'restriction' in situations where a turn restriction would be damaged (b)", function () {
+        it('returns \'restriction\' in situations where a turn restriction would be damaged (b)', function () {
             // a --> b ==> c
             //       |
             //       d
@@ -142,7 +142,7 @@ describe("iD.actions.Join", function () {
             expect(iD.actions.Join(['-', '=']).disabled(graph)).to.equal('restriction');
         });
 
-        it("returns falsy in situations where a turn restriction wouldn't be damaged (a)", function () {
+        it('returns falsy in situations where a turn restriction wouldn\'t be damaged (a)', function () {
             // a --> b ==> c
             // |
             // d
@@ -167,7 +167,7 @@ describe("iD.actions.Join", function () {
             expect(iD.actions.Join(['-', '=']).disabled(graph)).not.to.be.ok;
         });
 
-        it("returns falsy in situations where a turn restriction wouldn't be damaged (b)", function () {
+        it('returns falsy in situations where a turn restriction wouldn\'t be damaged (b)', function () {
             //       d
             //       |
             // a --> b ==> c
@@ -195,7 +195,7 @@ describe("iD.actions.Join", function () {
             expect(iD.actions.Join(['-', '=']).disabled(graph)).not.to.be.ok;
         });
 
-        it("returns 'conflicting_tags' for two entities that have conflicting tags", function () {
+        it('returns \'conflicting_tags\' for two entities that have conflicting tags', function () {
             var graph = iD.Graph([
                 iD.Node({id: 'a'}),
                 iD.Node({id: 'b'}),
@@ -207,7 +207,7 @@ describe("iD.actions.Join", function () {
             expect(iD.actions.Join(['-', '=']).disabled(graph)).to.equal('conflicting_tags');
         });
 
-        it("takes tag reversals into account when calculating conflicts", function () {
+        it('takes tag reversals into account when calculating conflicts', function () {
             var graph = iD.Graph([
                 iD.Node({id: 'a'}),
                 iD.Node({id: 'b'}),
@@ -219,7 +219,7 @@ describe("iD.actions.Join", function () {
             expect(iD.actions.Join(['-', '=']).disabled(graph)).not.to.be.ok;
         });
 
-        it("returns falsy for exceptions to tag conflicts: missing tag", function () {
+        it('returns falsy for exceptions to tag conflicts: missing tag', function () {
             var graph = iD.Graph([
                 iD.Node({id: 'a'}),
                 iD.Node({id: 'b'}),
@@ -231,7 +231,7 @@ describe("iD.actions.Join", function () {
             expect(iD.actions.Join(['-', '=']).disabled(graph)).not.to.be.ok;
         });
 
-        it("returns falsy for exceptions to tag conflicts: uninteresting tag", function () {
+        it('returns falsy for exceptions to tag conflicts: uninteresting tag', function () {
             var graph = iD.Graph([
                 iD.Node({id: 'a'}),
                 iD.Node({id: 'b'}),
@@ -244,7 +244,7 @@ describe("iD.actions.Join", function () {
         });
     });
 
-    it("joins a --> b ==> c", function () {
+    it('joins a --> b ==> c', function () {
         // Expected result:
         // a --> b --> c
         var graph = iD.Graph([
@@ -261,7 +261,7 @@ describe("iD.actions.Join", function () {
         expect(graph.hasEntity('=')).to.be.undefined;
     });
 
-    it("joins a <-- b <== c", function () {
+    it('joins a <-- b <== c', function () {
         // Expected result:
         // a <-- b <-- c
         var graph = iD.Graph([
@@ -278,7 +278,7 @@ describe("iD.actions.Join", function () {
         expect(graph.hasEntity('=')).to.be.undefined;
     });
 
-    it("joins a <-- b ==> c", function () {
+    it('joins a <-- b ==> c', function () {
         // Expected result:
         // a <-- b <-- c
         // tags on === reversed
@@ -297,7 +297,7 @@ describe("iD.actions.Join", function () {
         expect(graph.entity('-').tags).to.eql({'lanes:backward': 2});
     });
 
-    it("joins a --> b <== c", function () {
+    it('joins a --> b <== c', function () {
         // Expected result:
         // a --> b --> c
         // tags on === reversed
@@ -316,7 +316,7 @@ describe("iD.actions.Join", function () {
         expect(graph.entity('-').tags).to.eql({'lanes:backward': 2});
     });
 
-    it("joins a --> b <== c <++ d **> e", function () {
+    it('joins a --> b <== c <++ d **> e', function () {
         // Expected result:
         // a --> b --> c --> d --> e
         // tags on === reversed
@@ -341,7 +341,7 @@ describe("iD.actions.Join", function () {
         expect(graph.entity('-').tags).to.eql({'lanes:backward': 2});
     });
 
-    it("prefers to keep existing ways", function () {
+    it('prefers to keep existing ways', function () {
         // a --> b ==> c ++> d
         // --- is new, === is existing, +++ is new
         // Expected result:
@@ -363,7 +363,7 @@ describe("iD.actions.Join", function () {
         expect(graph.hasEntity('w-2')).to.be.undefined;
     });
 
-    it("merges tags", function () {
+    it('merges tags', function () {
         var graph = iD.Graph([
                 iD.Node({id: 'a'}),
                 iD.Node({id: 'b'}),
@@ -379,7 +379,7 @@ describe("iD.actions.Join", function () {
         expect(graph.entity('-').tags).to.eql({a: 'a', b: '-;=', c: 'c', d: 'd', e: 'e'});
     });
 
-    it("merges relations", function () {
+    it('merges relations', function () {
         var graph = iD.Graph([
                 iD.Node({id: 'a'}),
                 iD.Node({id: 'b'}),

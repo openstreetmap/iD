@@ -1,4 +1,4 @@
-describe("iD.actions.RestrictTurn", function() {
+describe('iD.actions.RestrictTurn', function() {
     var projection = d3.geo.mercator().scale(250 / Math.PI);
 
     it('adds a restriction to an unrestricted turn', function() {

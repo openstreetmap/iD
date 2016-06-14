@@ -1,16 +1,16 @@
-describe("iD.actions.AddMember", function() {
-    it("adds an member to a relation at the specified index", function() {
+describe('iD.actions.AddMember', function() {
+    it('adds an member to a relation at the specified index', function() {
         var r = iD.Relation({members: [{id: '1'}, {id: '3'}]}),
             g = iD.actions.AddMember(r.id, {id: '2'}, 1)(iD.Graph([r]));
         expect(g.entity(r.id).members).to.eql([{id: '1'}, {id: '2'}, {id: '3'}]);
     });
 
-    describe("inserts way members at a sensible index", function() {
+    describe('inserts way members at a sensible index', function() {
         function members(graph) {
             return _.map(graph.entity('r').members, 'id');
         }
 
-        specify("no members", function() {
+        specify('no members', function() {
             var graph = iD.Graph([
                 iD.Node({id: 'a', loc: [0, 0]}),
                 iD.Node({id: 'b', loc: [0, 0]}),
@@ -22,7 +22,7 @@ describe("iD.actions.AddMember", function() {
             expect(members(graph)).to.eql(['-']);
         });
 
-        specify("not connecting", function() {
+        specify('not connecting', function() {
             // a--->b    c===>d
             var graph = iD.Graph([
                 iD.Node({id: 'a', loc: [0, 0]}),
@@ -38,7 +38,7 @@ describe("iD.actions.AddMember", function() {
             expect(members(graph)).to.eql(['-', '=']);
         });
 
-        specify("connecting at end", function() {
+        specify('connecting at end', function() {
             // a--->b===>c
             var graph = iD.Graph([
                 iD.Node({id: 'a', loc: [0, 0]}),
@@ -53,7 +53,7 @@ describe("iD.actions.AddMember", function() {
             expect(members(graph)).to.eql(['-', '=']);
         });
 
-        specify("connecting at beginning", function() {
+        specify('connecting at beginning', function() {
             // a===>b--->c~~~>d
             var graph = iD.Graph([
                 iD.Node({id: 'a', loc: [0, 0]}),
@@ -70,7 +70,7 @@ describe("iD.actions.AddMember", function() {
             expect(members(graph)).to.eql(['=', '-', '~']);
         });
 
-        specify("connecting in middle", function() {
+        specify('connecting in middle', function() {
             // a--->b===>c~~~>d
             var graph = iD.Graph([
                 iD.Node({id: 'a', loc: [0, 0]}),
