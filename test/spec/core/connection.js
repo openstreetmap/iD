@@ -39,20 +39,20 @@ describe('iD.Connection', function () {
         });
     });
 
-    describe("#switch", function() {
-        it("changes the URL", function() {
+    describe('#switch', function() {
+        it('changes the URL', function() {
             c.switch({
-                url: "http://example.com"
+                url: 'http://example.com'
             });
-            expect(c.changesetURL(1)).to.equal("http://example.com/changeset/1")
+            expect(c.changesetURL(1)).to.equal('http://example.com/changeset/1');
         });
 
-        it("emits an auth event", function(done) {
+        it('emits an auth event', function(done) {
             c.on('auth', function() {
                 done();
             });
             c.switch({
-                url: "http://example.com"
+                url: 'http://example.com'
             });
         });
     });
@@ -111,8 +111,8 @@ describe('iD.Connection', function () {
                 done();
             });
 
-            server.respondWith("GET", "http://www.openstreetmap.org/api/0.6/node/1",
-                [200, { "Content-Type": "text/xml" }, nodeXML]);
+            server.respondWith('GET', 'http://www.openstreetmap.org/api/0.6/node/1',
+                [200, { 'Content-Type': 'text/xml' }, nodeXML]);
             server.respond();
         });
 
@@ -124,8 +124,8 @@ describe('iD.Connection', function () {
                 done();
             });
 
-            server.respondWith("GET", "http://www.openstreetmap.org/api/0.6/way/1/full",
-                [200, { "Content-Type": "text/xml" }, wayXML]);
+            server.respondWith('GET', 'http://www.openstreetmap.org/api/0.6/way/1/full',
+                [200, { 'Content-Type': 'text/xml' }, wayXML]);
             server.respond();
         });
     });
@@ -155,8 +155,8 @@ describe('iD.Connection', function () {
                 done();
             });
 
-            server.respondWith("GET", "http://www.openstreetmap.org/api/0.6/node/1/1",
-                [200, { "Content-Type": "text/xml" }, nodeXML]);
+            server.respondWith('GET', 'http://www.openstreetmap.org/api/0.6/node/1/1',
+                [200, { 'Content-Type': 'text/xml' }, nodeXML]);
             server.respond();
         });
 
@@ -168,13 +168,14 @@ describe('iD.Connection', function () {
                 done();
             });
 
-            server.respondWith("GET", "http://www.openstreetmap.org/api/0.6/way/1/1",
-                [200, { "Content-Type": "text/xml" }, wayXML]);
+            server.respondWith('GET', 'http://www.openstreetmap.org/api/0.6/way/1/1',
+                [200, { 'Content-Type': 'text/xml' }, wayXML]);
             server.respond();
         });
     });
 
     describe('#loadMultiple', function () {
+        var server;
         beforeEach(function() {
             server = sinon.fakeServer.create();
         });
@@ -211,7 +212,7 @@ describe('iD.Connection', function () {
                 changes = {created: [r, w, n], modified: [], deleted: []},
                 jxon = c.osmChangeJXON('1234', changes);
 
-            expect(d3.entries(jxon.osmChange['create'])).to.eql([
+            expect(d3.entries(jxon.osmChange.create)).to.eql([
                 {key: 'node', value: [n.asJXON('1234').node]},
                 {key: 'way', value: [w.asJXON('1234').way]},
                 {key: 'relation', value: [r.asJXON('1234').relation]}
@@ -225,7 +226,7 @@ describe('iD.Connection', function () {
                 changes = {created: [], modified: [r, w, n], deleted: []},
                 jxon = c.osmChangeJXON('1234', changes);
 
-            expect(jxon.osmChange['modify']).to.eql({
+            expect(jxon.osmChange.modify).to.eql({
                 node: [n.asJXON('1234').node],
                 way: [w.asJXON('1234').way],
                 relation: [r.asJXON('1234').relation]
@@ -239,7 +240,7 @@ describe('iD.Connection', function () {
                 changes = {created: [], modified: [], deleted: [n, w, r]},
                 jxon = c.osmChangeJXON('1234', changes);
 
-            expect(d3.entries(jxon.osmChange['delete'])).to.eql([
+            expect(d3.entries(jxon.osmChange.delete)).to.eql([
                 {key: 'relation', value: [r.asJXON('1234').relation]},
                 {key: 'way', value: [w.asJXON('1234').way]},
                 {key: 'node', value: [n.asJXON('1234').node]},
@@ -280,8 +281,8 @@ describe('iD.Connection', function () {
                 done();
             });
 
-            server.respondWith("GET", "http://www.openstreetmap.org/api/0.6/changesets?user=1",
-                [200, { "Content-Type": "text/xml" }, changesetsXML]);
+            server.respondWith('GET', 'http://www.openstreetmap.org/api/0.6/changesets?user=1',
+                [200, { 'Content-Type': 'text/xml' }, changesetsXML]);
             server.respond();
         });
     });
@@ -289,6 +290,6 @@ describe('iD.Connection', function () {
     describe('#changesetTags', function() {
         it('omits comment when empty', function() {
             expect(c.changesetTags('', [])).not.to.have.property('comment');
-        })
-    })
+        });
+    });
 });

@@ -1,33 +1,33 @@
 describe('iD.Way', function() {
     if (iD.debug) {
-        it("freezes nodes", function () {
+        it('freezes nodes', function () {
             expect(Object.isFrozen(iD.Way().nodes)).to.be.true;
         });
     }
 
-    it("returns a way", function () {
+    it('returns a way', function () {
         expect(iD.Way()).to.be.an.instanceOf(iD.Way);
-        expect(iD.Way().type).to.equal("way");
+        expect(iD.Way().type).to.equal('way');
     });
 
-    it("defaults nodes to an empty array", function () {
+    it('defaults nodes to an empty array', function () {
         expect(iD.Way().nodes).to.eql([]);
     });
 
-    it("sets nodes as specified", function () {
-        expect(iD.Way({nodes: ["n-1"]}).nodes).to.eql(["n-1"]);
+    it('sets nodes as specified', function () {
+        expect(iD.Way({nodes: ['n-1']}).nodes).to.eql(['n-1']);
     });
 
-    it("defaults tags to an empty object", function () {
+    it('defaults tags to an empty object', function () {
         expect(iD.Way().tags).to.eql({});
     });
 
-    it("sets tags as specified", function () {
+    it('sets tags as specified', function () {
         expect(iD.Way({tags: {foo: 'bar'}}).tags).to.eql({foo: 'bar'});
     });
 
-    describe("#copy", function () {
-        it("returns a new Way", function () {
+    describe('#copy', function () {
+        it('returns a new Way', function () {
             var w = iD.Way({id: 'w'}),
                 result = w.copy(null, {});
 
@@ -35,7 +35,7 @@ describe('iD.Way', function() {
             expect(result).not.to.equal(w);
         });
 
-        it("adds the new Way to input object", function () {
+        it('adds the new Way to input object', function () {
             var w = iD.Way({id: 'w'}),
                 copies = {},
                 result = w.copy(null, copies);
@@ -43,7 +43,7 @@ describe('iD.Way', function() {
             expect(copies.w).to.equal(result);
         });
 
-        it("returns an existing copy in input object", function () {
+        it('returns an existing copy in input object', function () {
             var w = iD.Way({id: 'w'}),
                 copies = {},
                 result1 = w.copy(null, copies),
@@ -52,7 +52,7 @@ describe('iD.Way', function() {
             expect(result1).to.equal(result2);
         });
 
-        it("deep copies nodes", function () {
+        it('deep copies nodes', function () {
             var a = iD.Node({id: 'a'}),
                 b = iD.Node({id: 'b'}),
                 w = iD.Way({id: 'w', nodes: ['a', 'b']}),
@@ -68,7 +68,7 @@ describe('iD.Way', function() {
             expect(result.nodes).to.deep.eql([copies.a.id, copies.b.id]);
         });
 
-        it("creates only one copy of shared nodes", function () {
+        it('creates only one copy of shared nodes', function () {
             var a = iD.Node({id: 'a'}),
                 w = iD.Way({id: 'w', nodes: ['a', 'a']}),
                 graph = iD.Graph([a, w]),
@@ -79,45 +79,45 @@ describe('iD.Way', function() {
         });
     });
 
-    describe("#first", function () {
-        it("returns the first node", function () {
+    describe('#first', function () {
+        it('returns the first node', function () {
             expect(iD.Way({nodes: ['a', 'b', 'c']}).first()).to.equal('a');
         });
     });
 
-    describe("#last", function () {
-        it("returns the last node", function () {
+    describe('#last', function () {
+        it('returns the last node', function () {
             expect(iD.Way({nodes: ['a', 'b', 'c']}).last()).to.equal('c');
         });
     });
 
-    describe("#contains", function () {
-        it("returns true if the way contains the given node", function () {
+    describe('#contains', function () {
+        it('returns true if the way contains the given node', function () {
             expect(iD.Way({nodes: ['a', 'b', 'c']}).contains('b')).to.be.true;
         });
 
-        it("returns false if the way does not contain the given node", function () {
+        it('returns false if the way does not contain the given node', function () {
             expect(iD.Way({nodes: ['a', 'b', 'c']}).contains('d')).to.be.false;
         });
     });
 
-    describe("#affix", function () {
-        it("returns 'prefix' if the way starts with the given node", function () {
+    describe('#affix', function () {
+        it('returns \'prefix\' if the way starts with the given node', function () {
             expect(iD.Way({nodes: ['a', 'b', 'c']}).affix('a')).to.equal('prefix');
         });
 
-        it("returns 'suffix' if the way ends with the given node", function () {
+        it('returns \'suffix\' if the way ends with the given node', function () {
             expect(iD.Way({nodes: ['a', 'b', 'c']}).affix('c')).to.equal('suffix');
         });
 
-        it("returns falsy if the way does not start or end with the given node", function () {
+        it('returns falsy if the way does not start or end with the given node', function () {
             expect(iD.Way({nodes: ['a', 'b', 'c']}).affix('b')).not.to.be.ok;
             expect(iD.Way({nodes: []}).affix('b')).not.to.be.ok;
         });
     });
 
-    describe("#extent", function () {
-        it("returns the minimal extent containing all member nodes", function () {
+    describe('#extent', function () {
+        it('returns the minimal extent containing all member nodes', function () {
             var node1 = iD.Node({loc: [0, 0]}),
                 node2 = iD.Node({loc: [5, 10]}),
                 way   = iD.Way({nodes: [node1.id, node2.id]}),
@@ -340,48 +340,48 @@ describe('iD.Way', function() {
         });
     });
 
-    describe("#isDegenerate", function() {
-       it("returns true for a linear way with zero or one nodes", function () {
+    describe('#isDegenerate', function() {
+       it('returns true for a linear way with zero or one nodes', function () {
            expect(iD.Way({nodes: []}).isDegenerate()).to.equal(true);
            expect(iD.Way({nodes: ['a']}).isDegenerate()).to.equal(true);
        });
 
-        it("returns true for a circular way with only one unique node", function () {
+        it('returns true for a circular way with only one unique node', function () {
             expect(iD.Way({nodes: ['a', 'a']}).isDegenerate()).to.equal(true);
         });
 
-        it("returns false for a linear way with two or more nodes", function () {
+        it('returns false for a linear way with two or more nodes', function () {
             expect(iD.Way({nodes: ['a', 'b']}).isDegenerate()).to.equal(false);
         });
 
-        it("returns true for an area with zero, one, or two unique nodes", function () {
+        it('returns true for an area with zero, one, or two unique nodes', function () {
             expect(iD.Way({tags: {area: 'yes'}, nodes: []}).isDegenerate()).to.equal(true);
             expect(iD.Way({tags: {area: 'yes'}, nodes: ['a', 'a']}).isDegenerate()).to.equal(true);
             expect(iD.Way({tags: {area: 'yes'}, nodes: ['a', 'b', 'a']}).isDegenerate()).to.equal(true);
         });
 
-        it("returns false for an area with three or more unique nodes", function () {
+        it('returns false for an area with three or more unique nodes', function () {
             expect(iD.Way({tags: {area: 'yes'}, nodes: ['a', 'b', 'c', 'a']}).isDegenerate()).to.equal(false);
         });
     });
 
-    describe("#areAdjacent", function() {
-        it("returns false for nodes not in the way", function() {
+    describe('#areAdjacent', function() {
+        it('returns false for nodes not in the way', function() {
             expect(iD.Way().areAdjacent('a', 'b')).to.equal(false);
         });
 
-        it("returns false for non-adjacent nodes in the way", function() {
+        it('returns false for non-adjacent nodes in the way', function() {
             expect(iD.Way({nodes: ['a', 'b', 'c']}).areAdjacent('a', 'c')).to.equal(false);
         });
 
-        it("returns true for adjacent nodes in the way (forward)", function() {
+        it('returns true for adjacent nodes in the way (forward)', function() {
             var way = iD.Way({nodes: ['a', 'b', 'c', 'd']});
             expect(way.areAdjacent('a', 'b')).to.equal(true);
             expect(way.areAdjacent('b', 'c')).to.equal(true);
             expect(way.areAdjacent('c', 'd')).to.equal(true);
         });
 
-        it("returns true for adjacent nodes in the way (reverse)", function() {
+        it('returns true for adjacent nodes in the way (reverse)', function() {
             var way = iD.Way({nodes: ['a', 'b', 'c', 'd']});
             expect(way.areAdjacent('b', 'a')).to.equal(true);
             expect(way.areAdjacent('c', 'b')).to.equal(true);
@@ -389,54 +389,54 @@ describe('iD.Way', function() {
         });
     });
 
-    describe("#geometry", function() {
-        it("returns 'line' when the way is not an area", function () {
+    describe('#geometry', function() {
+        it('returns \'line\' when the way is not an area', function () {
             expect(iD.Way().geometry(iD.Graph())).to.equal('line');
         });
 
-        it("returns 'area' when the way is an area", function () {
+        it('returns \'area\' when the way is an area', function () {
             expect(iD.Way({tags: { area: 'yes' }}).geometry(iD.Graph())).to.equal('area');
         });
     });
 
-    describe("#addNode", function () {
-        it("adds a node to the end of a way", function () {
+    describe('#addNode', function () {
+        it('adds a node to the end of a way', function () {
             var w = iD.Way();
             expect(w.addNode('a').nodes).to.eql(['a']);
         });
 
-        it("adds a node to a way at index 0", function () {
+        it('adds a node to a way at index 0', function () {
             var w = iD.Way({nodes: ['a', 'b']});
             expect(w.addNode('c', 0).nodes).to.eql(['c', 'a', 'b']);
         });
 
-        it("adds a node to a way at a positive index", function () {
+        it('adds a node to a way at a positive index', function () {
             var w = iD.Way({nodes: ['a', 'b']});
             expect(w.addNode('c', 1).nodes).to.eql(['a', 'c', 'b']);
         });
 
-        it("adds a node to a way at a negative index", function () {
+        it('adds a node to a way at a negative index', function () {
             var w = iD.Way({nodes: ['a', 'b']});
             expect(w.addNode('c', -1).nodes).to.eql(['a', 'c', 'b']);
         });
     });
 
-    describe("#updateNode", function () {
-        it("updates the node id at the specified index", function () {
+    describe('#updateNode', function () {
+        it('updates the node id at the specified index', function () {
             var w = iD.Way({nodes: ['a', 'b', 'c']});
             expect(w.updateNode('d', 1).nodes).to.eql(['a', 'd', 'c']);
         });
     });
 
-    describe("#removeNode", function () {
-        it("removes the node", function () {
+    describe('#removeNode', function () {
+        it('removes the node', function () {
             var a = iD.Node({id: 'a'}),
                 w = iD.Way({nodes: ['a']});
 
             expect(w.removeNode('a').nodes).to.eql([]);
         });
 
-        it("prevents duplicate consecutive nodes", function () {
+        it('prevents duplicate consecutive nodes', function () {
             var a = iD.Node({id: 'a'}),
                 b = iD.Node({id: 'b'}),
                 c = iD.Node({id: 'c'}),
@@ -445,7 +445,7 @@ describe('iD.Way', function() {
             expect(w.removeNode('c').nodes).to.eql(['a', 'b']);
         });
 
-        it("preserves circularity", function () {
+        it('preserves circularity', function () {
             var a = iD.Node({id: 'a'}),
                 b = iD.Node({id: 'b'}),
                 c = iD.Node({id: 'c'}),
@@ -455,7 +455,7 @@ describe('iD.Way', function() {
             expect(w.removeNode('a').nodes).to.eql(['b', 'c', 'd', 'b']);
         });
 
-        it("prevents duplicate consecutive nodes when preserving circularity", function () {
+        it('prevents duplicate consecutive nodes when preserving circularity', function () {
             var a = iD.Node({id: 'a'}),
                 b = iD.Node({id: 'b'}),
                 c = iD.Node({id: 'c'}),
@@ -466,7 +466,7 @@ describe('iD.Way', function() {
         });
     });
 
-    describe("#asJXON", function () {
+    describe('#asJXON', function () {
         it('converts a way to jxon', function() {
             var node = iD.Way({id: 'w-1', nodes: ['n1', 'n2'], tags: {highway: 'residential'}});
             expect(node.asJXON()).to.eql({way: {
@@ -481,8 +481,8 @@ describe('iD.Way', function() {
         });
     });
 
-    describe("#asGeoJSON", function () {
-        it("converts a line to a GeoJSON LineString geometry", function () {
+    describe('#asGeoJSON', function () {
+        it('converts a line to a GeoJSON LineString geometry', function () {
             var a = iD.Node({loc: [1, 2]}),
                 b = iD.Node({loc: [3, 4]}),
                 w = iD.Way({tags: {highway: 'residential'}, nodes: [a.id, b.id]}),
@@ -493,7 +493,7 @@ describe('iD.Way', function() {
             expect(json.coordinates).to.eql([a.loc, b.loc]);
         });
 
-        it("converts an area to a GeoJSON Polygon geometry", function () {
+        it('converts an area to a GeoJSON Polygon geometry', function () {
             var a = iD.Node({loc: [1, 2]}),
                 b = iD.Node({loc: [5, 6]}),
                 c = iD.Node({loc: [3, 4]}),
@@ -505,7 +505,7 @@ describe('iD.Way', function() {
             expect(json.coordinates).to.eql([[a.loc, b.loc, c.loc, a.loc]]);
         });
 
-        it("converts an unclosed area to a GeoJSON LineString geometry", function () {
+        it('converts an unclosed area to a GeoJSON LineString geometry', function () {
             var a = iD.Node({loc: [1, 2]}),
                 b = iD.Node({loc: [5, 6]}),
                 c = iD.Node({loc: [3, 4]}),
@@ -518,8 +518,8 @@ describe('iD.Way', function() {
         });
     });
 
-    describe("#area", function() {
-        it("returns a relative measure of area", function () {
+    describe('#area', function() {
+        it('returns a relative measure of area', function () {
             var graph = iD.Graph([
                 iD.Node({id: 'a', loc: [-0.0002,  0.0001]}),
                 iD.Node({id: 'b', loc: [ 0.0002,  0.0001]}),
@@ -539,7 +539,7 @@ describe('iD.Way', function() {
             expect(s).to.be.lt(l);
         });
 
-        it("treats unclosed areas as if they were closed", function () {
+        it('treats unclosed areas as if they were closed', function () {
             var graph = iD.Graph([
                 iD.Node({id: 'a', loc: [-0.0002,  0.0001]}),
                 iD.Node({id: 'b', loc: [ 0.0002,  0.0001]}),
@@ -555,7 +555,7 @@ describe('iD.Way', function() {
             expect(s).to.equal(l);
         });
 
-        it("returns 0 for degenerate areas", function () {
+        it('returns 0 for degenerate areas', function () {
             var graph = iD.Graph([
                 iD.Node({id: 'a', loc: [-0.0002,  0.0001]}),
                 iD.Node({id: 'b', loc: [ 0.0002,  0.0001]}),
