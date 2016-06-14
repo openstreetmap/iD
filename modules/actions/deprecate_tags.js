@@ -1,4 +1,4 @@
-module.exports = function(entityId) {
+export function DeprecateTags(entityId) {
     return function(graph) {
         var entity = graph.entity(entityId),
             newtags = _.clone(entity.tags),
@@ -33,4 +33,4 @@ module.exports = function(entityId) {
             return graph;
         }
     };
-};
+}

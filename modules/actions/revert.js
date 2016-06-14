@@ -1,4 +1,7 @@
-module.exports = function(id) {
+import { DeleteWay } from './delete_way';
+import { DeleteRelation } from './delete_relation';
+
+export function Revert(id) {
 
     var action = function(graph) {
         var entity = graph.hasEntity(id),
@@ -12,7 +15,7 @@ module.exports = function(id) {
                         graph = graph.replace(parent);
 
                         if (parent.isDegenerate()) {
-                            graph = iD.actions.DeleteWay(parent.id)(graph);
+                            graph = DeleteWay(parent.id)(graph);
                         }
                     });
             }
@@ -23,7 +26,7 @@ module.exports = function(id) {
                     graph = graph.replace(parent);
 
                     if (parent.isDegenerate()) {
-                        graph = iD.actions.DeleteRelation(parent.id)(graph);
+                        graph = DeleteRelation(parent.id)(graph);
                     }
                 });
         }
@@ -32,4 +35,4 @@ module.exports = function(id) {
     };
 
     return action;
-};
+}

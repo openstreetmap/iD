@@ -1,4 +1,4 @@
-module.exports = function(relationId, member, memberIndex) {
+export function AddMember(relationId, member, memberIndex) {
     return function(graph) {
         var relation = graph.entity(relationId);
 

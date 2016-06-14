@@ -1,8 +1,10 @@
+import { DeleteNode } from './delete_node';
+
 /*
  * Based on https://github.com/openstreetmap/potlatch2/net/systemeD/potlatch2/tools/Straighten.as
  */
 
-module.exports = function(wayId, projection) {
+export function Straighten(wayId, projection) {
     function positionAlongWay(n, s, e) {
         return ((n[0] - s[0]) * (e[0] - s[0]) + (n[1] - s[1]) * (e[1] - s[1]))/
                 (Math.pow(e[0] - s[0], 2) + Math.pow(e[1] - s[1], 2));
@@ -40,7 +42,7 @@ module.exports = function(wayId, projection) {
         }
 
         for (i = 0; i < toDelete.length; i++) {
-            graph = iD.actions.DeleteNode(toDelete[i].id)(graph);
+            graph = DeleteNode(toDelete[i].id)(graph);
         }
 
         return graph;
@@ -75,4 +77,4 @@ module.exports = function(wayId, projection) {
     };
 
     return action;
-};
+}

@@ -29,7 +29,7 @@
       http://wiki.openstreetmap.org/wiki/Route#Members
       http://josm.openstreetmap.de/browser/josm/trunk/src/org/openstreetmap/josm/corrector/ReverseWayTagCorrector.java
  */
-module.exports = function(wayId, options) {
+export function Reverse(wayId, options) {
     var replacements = [
             [/:right$/, ':left'], [/:left$/, ':right'],
             [/:forward$/, ':backward'], [/:backward$/, ':forward']
@@ -86,4 +86,4 @@ module.exports = function(wayId, options) {
 
         return graph.replace(way.update({nodes: nodes, tags: tags}));
     };
-};
+}

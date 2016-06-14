@@ -1,4 +1,6 @@
-module.exports = function(relationId, memberIndex) {
+import { DeleteRelation } from './delete_relation';
+
+export function DeleteMember(relationId, memberIndex) {
     return function(graph) {
         var relation = graph.entity(relationId)
             .removeMember(memberIndex);
@@ -6,7 +8,7 @@ module.exports = function(relationId, memberIndex) {
         graph = graph.replace(relation);
 
         if (relation.isDegenerate())
-            graph = iD.actions.DeleteRelation(relation.id)(graph);
+            graph = DeleteRelation(relation.id)(graph);
 
         return graph;
     };
