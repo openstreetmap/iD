@@ -29,7 +29,7 @@ Come on in, the water's lovely. More help? Ping `jfire` or `bhousel` on
 * Command line development tools (`make`, `git`, and a compiler) for your platform
   * Ubuntu:
     * `sudo apt-get install build-essential git`
-  * Mac OS X:
+  * macOS:
     * Install [Xcode](https://developer.apple.com/xcode/) and run `xcode-select --install` from a command line
   * Windows (Cygwin):
     * Install [Git for Windows](https://git-scm.com/downloads)
