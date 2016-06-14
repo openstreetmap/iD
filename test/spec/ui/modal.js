@@ -1,4 +1,4 @@
-describe("iD.ui.modal", function () {
+describe('iD.ui.modal', function () {
     var elem;
 
     beforeEach(function() {

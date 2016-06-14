@@ -10,7 +10,7 @@ describe('iD.ui.preset.wikipedia', function() {
             else {
                 callback(title, data);
             }
-        }
+        };
         return wikidataStub;
     }
 
