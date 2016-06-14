@@ -1,4 +1,4 @@
-iD.validations.DeprecatedTag = function() {
+export function DeprecatedTag() {
 
     var validation = function(changes) {
         var warnings = [];
@@ -19,4 +19,4 @@ iD.validations.DeprecatedTag = function() {
     };
 
     return validation;
-};
+}

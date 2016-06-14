@@ -1,4 +1,4 @@
-iD.validations.MissingTag = function() {
+export function MissingTag() {
 
     // Slightly stricter check than Entity#isUsed (#3091)
     function hasTags(entity, graph) {
@@ -25,4 +25,4 @@ iD.validations.MissingTag = function() {
     };
 
     return validation;
-};
+}

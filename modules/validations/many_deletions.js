@@ -1,4 +1,4 @@
-iD.validations.ManyDeletions = function() {
+export function ManyDeletions() {
     var threshold = 100;
 
     var validation = function(changes) {
@@ -13,4 +13,4 @@ iD.validations.ManyDeletions = function() {
     };
 
     return validation;
-};
+}
