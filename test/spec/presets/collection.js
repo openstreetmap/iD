@@ -1,4 +1,4 @@
-describe("iD.presets.Collection", function() {
+describe('iD.presets.Collection', function() {
 
     var p = {
         point: iD.presets.Preset('point', {
@@ -28,40 +28,40 @@ describe("iD.presets.Collection", function() {
         w = iD.Way({ tags: { highway: 'residential' }}),
         g = iD.Graph().replace(w);
 
-    describe("#item", function() {
-        it("fetches a preset by id", function() {
+    describe('#item', function() {
+        it('fetches a preset by id', function() {
             expect(c.item('highway/residential')).to.equal(p.residential);
         });
     });
 
-    describe("#matchGeometry", function() {
-        it("returns a new collection only containing presets matching a geometry", function() {
+    describe('#matchGeometry', function() {
+        it('returns a new collection only containing presets matching a geometry', function() {
             expect(c.matchGeometry('area').collection).to.eql([p.area, p.park]);
         });
     });
 
-    describe("#search", function() {
-        it("filters presets by name", function() {
-            expect(c.search("resid", "line").collection.indexOf(p.residential) >= 0).to.eql(true);
+    describe('#search', function() {
+        it('filters presets by name', function() {
+            expect(c.search('resid', 'line').collection.indexOf(p.residential) >= 0).to.eql(true);
         });
 
-        it("is fuzzy", function() {
-            expect(c.search("rusid", "line").collection.indexOf(p.residential) >= 0).to.eql(true);
+        it('is fuzzy', function() {
+            expect(c.search('rusid', 'line').collection.indexOf(p.residential) >= 0).to.eql(true);
         });
 
-        it("includes the appropriate fallback preset", function() {
-            expect(c.search("blade of grass", "point").collection.indexOf(p.point) >= 0).to.eql(true);
-            expect(c.search("blade of grass", "area").collection.indexOf(p.area) >= 0).to.eql(true);
+        it('includes the appropriate fallback preset', function() {
+            expect(c.search('blade of grass', 'point').collection.indexOf(p.point) >= 0).to.eql(true);
+            expect(c.search('blade of grass', 'area').collection.indexOf(p.area) >= 0).to.eql(true);
         });
 
-        it("excludes presets with searchable: false", function() {
+        it('excludes presets with searchable: false', function() {
             var excluded = iD.presets.Preset('excluded', {
                     tags: {},
                     geometry: [],
                     searchable: false
                 }),
                 collection = iD.presets.Collection([excluded, p.point]);
-            expect(collection.search("excluded", "point").collection).not.to.include(excluded);
+            expect(collection.search('excluded', 'point').collection).not.to.include(excluded);
         });
     });
 });
