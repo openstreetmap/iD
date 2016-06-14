@@ -1,4 +1,4 @@
-describe("iD.svg.Areas", function () {
+describe('iD.svg.Areas', function () {
     var surface,
         projection = d3.geo.projection(function(x, y) { return [x, y]; })
             .clipExtent([[0, 0], [Infinity, Infinity]]),
@@ -10,7 +10,7 @@ describe("iD.svg.Areas", function () {
             .call(iD.svg.Layers(projection, iD()));
     });
 
-    it("adds way and area classes", function () {
+    it('adds way and area classes', function () {
         var graph = iD.Graph([
                 iD.Node({id: 'a', loc: [0, 0]}),
                 iD.Node({id: 'b', loc: [1, 0]}),
@@ -25,7 +25,7 @@ describe("iD.svg.Areas", function () {
         expect(surface.select('path.area')).to.be.classed('area');
     });
 
-    it("adds tag classes", function () {
+    it('adds tag classes', function () {
         var graph = iD.Graph([
                 iD.Node({id: 'a', loc: [0, 0]}),
                 iD.Node({id: 'b', loc: [1, 0]}),
@@ -40,7 +40,7 @@ describe("iD.svg.Areas", function () {
         expect(surface.select('.area')).to.be.classed('tag-building-yes');
     });
 
-    it("handles deletion of a way and a member vertex (#1903)", function () {
+    it('handles deletion of a way and a member vertex (#1903)', function () {
         var graph = iD.Graph([
                 iD.Node({id: 'a', loc: [0, 0]}),
                 iD.Node({id: 'b', loc: [1, 0]}),
@@ -57,7 +57,7 @@ describe("iD.svg.Areas", function () {
         expect(surface.select('.area').size()).to.equal(1);
     });
 
-    describe("z-indexing", function() {
+    describe('z-indexing', function() {
         var graph = iD.Graph([
                 iD.Node({id: 'a', loc: [-0.0002,  0.0001]}),
                 iD.Node({id: 'b', loc: [ 0.0002,  0.0001]}),
@@ -71,21 +71,21 @@ describe("iD.svg.Areas", function () {
                 iD.Way({id: 'l', tags: {landuse: 'park'}, nodes: ['e', 'f', 'g', 'h', 'e']})
             ]);
 
-        it("stacks smaller areas above larger ones in a single render", function () {
+        it('stacks smaller areas above larger ones in a single render', function () {
             surface.call(iD.svg.Areas(projection), graph, [graph.entity('s'), graph.entity('l')], none);
 
             expect(surface.select('.area:nth-child(1)')).to.be.classed('tag-landuse-park');
             expect(surface.select('.area:nth-child(2)')).to.be.classed('tag-building-yes');
         });
 
-        it("stacks smaller areas above larger ones in a single render (reverse)", function () {
+        it('stacks smaller areas above larger ones in a single render (reverse)', function () {
             surface.call(iD.svg.Areas(projection), graph, [graph.entity('l'), graph.entity('s')], none);
 
             expect(surface.select('.area:nth-child(1)')).to.be.classed('tag-landuse-park');
             expect(surface.select('.area:nth-child(2)')).to.be.classed('tag-building-yes');
         });
 
-        it("stacks smaller areas above larger ones in separate renders", function () {
+        it('stacks smaller areas above larger ones in separate renders', function () {
             surface.call(iD.svg.Areas(projection), graph, [graph.entity('s')], none);
             surface.call(iD.svg.Areas(projection), graph, [graph.entity('l')], none);
 
@@ -93,7 +93,7 @@ describe("iD.svg.Areas", function () {
             expect(surface.select('.area:nth-child(2)')).to.be.classed('tag-building-yes');
         });
 
-        it("stacks smaller areas above larger ones in separate renders (reverse)", function () {
+        it('stacks smaller areas above larger ones in separate renders (reverse)', function () {
             surface.call(iD.svg.Areas(projection), graph, [graph.entity('l')], none);
             surface.call(iD.svg.Areas(projection), graph, [graph.entity('s')], none);
 
@@ -102,7 +102,7 @@ describe("iD.svg.Areas", function () {
         });
     });
 
-    it("renders fills for multipolygon areas", function () {
+    it('renders fills for multipolygon areas', function () {
         var a = iD.Node({loc: [1, 1]}),
             b = iD.Node({loc: [2, 2]}),
             c = iD.Node({loc: [3, 3]}),
@@ -116,7 +116,7 @@ describe("iD.svg.Areas", function () {
         expect(surface.select('.fill')).to.be.classed('relation');
     });
 
-    it("renders no strokes for multipolygon areas", function () {
+    it('renders no strokes for multipolygon areas', function () {
         var a = iD.Node({loc: [1, 1]}),
             b = iD.Node({loc: [2, 2]}),
             c = iD.Node({loc: [3, 3]}),
@@ -130,7 +130,7 @@ describe("iD.svg.Areas", function () {
         expect(surface.selectAll('.stroke')[0].length).to.equal(0);
     });
 
-    it("renders fill for a multipolygon with tags on the outer way", function() {
+    it('renders fill for a multipolygon with tags on the outer way', function() {
         var a = iD.Node({loc: [1, 1]}),
             b = iD.Node({loc: [2, 2]}),
             c = iD.Node({loc: [3, 3]}),
@@ -145,7 +145,7 @@ describe("iD.svg.Areas", function () {
         expect(surface.select('.relation.fill')).to.be.classed('tag-natural-wood');
     });
 
-    it("renders no strokes for a multipolygon with tags on the outer way", function() {
+    it('renders no strokes for a multipolygon with tags on the outer way', function() {
         var a = iD.Node({loc: [1, 1]}),
             b = iD.Node({loc: [2, 2]}),
             c = iD.Node({loc: [3, 3]}),

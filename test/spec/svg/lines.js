@@ -1,4 +1,4 @@
-describe("iD.svg.Lines", function () {
+describe('iD.svg.Lines', function () {
     var surface,
         projection = d3.geo.projection(function(x, y) { return [x, y]; })
             .clipExtent([[0, 0], [Infinity, Infinity]]),
@@ -10,7 +10,7 @@ describe("iD.svg.Lines", function () {
             .call(iD.svg.Layers(projection, iD()));
     });
 
-    it("adds way and line classes", function () {
+    it('adds way and line classes', function () {
         var a = iD.Node({loc: [0, 0]}),
             b = iD.Node({loc: [1, 1]}),
             line = iD.Way({nodes: [a.id, b.id]}),
@@ -22,7 +22,7 @@ describe("iD.svg.Lines", function () {
         expect(surface.select('path.line')).to.be.classed('line');
     });
 
-    it("adds tag classes", function () {
+    it('adds tag classes', function () {
         var a = iD.Node({loc: [0, 0]}),
             b = iD.Node({loc: [1, 1]}),
             line = iD.Way({nodes: [a.id, b.id], tags: {highway: 'residential'}}),
@@ -34,7 +34,7 @@ describe("iD.svg.Lines", function () {
         expect(surface.select('.line')).to.be.classed('tag-highway-residential');
     });
 
-    it("adds stroke classes for the tags of the parent relation of multipolygon members", function() {
+    it('adds stroke classes for the tags of the parent relation of multipolygon members', function() {
         var a = iD.Node({loc: [0, 0]}),
             b = iD.Node({loc: [1, 1]}),
             line = iD.Way({nodes: [a.id, b.id]}),
@@ -46,7 +46,7 @@ describe("iD.svg.Lines", function () {
         expect(surface.select('.stroke')).to.be.classed('tag-natural-wood');
     });
 
-    it("renders stroke for outer way of multipolygon with tags on the outer way", function() {
+    it('renders stroke for outer way of multipolygon with tags on the outer way', function() {
         var a = iD.Node({loc: [1, 1]}),
             b = iD.Node({loc: [2, 2]}),
             c = iD.Node({loc: [3, 3]}),
@@ -59,7 +59,7 @@ describe("iD.svg.Lines", function () {
         expect(surface.select('.stroke')).to.be.classed('tag-natural-wood');
     });
 
-    it("adds stroke classes for the tags of the outer way of multipolygon with tags on the outer way", function() {
+    it('adds stroke classes for the tags of the outer way of multipolygon with tags on the outer way', function() {
         var a = iD.Node({loc: [1, 1]}),
             b = iD.Node({loc: [2, 2]}),
             c = iD.Node({loc: [3, 3]}),
@@ -73,7 +73,7 @@ describe("iD.svg.Lines", function () {
         expect(surface.select('.stroke')).to.be.classed('tag-natural-wood');
     });
 
-    describe("z-indexing", function() {
+    describe('z-indexing', function() {
         var graph = iD.Graph([
                 iD.Node({id: 'a', loc: [0, 0]}),
                 iD.Node({id: 'b', loc: [1, 1]}),
@@ -83,7 +83,7 @@ describe("iD.svg.Lines", function () {
                 iD.Way({id: 'hi', tags: {highway: 'residential', bridge: 'yes'}, nodes: ['c', 'd']})
             ]);
 
-        it("stacks higher lines above lower ones in a single render", function () {
+        it('stacks higher lines above lower ones in a single render', function () {
             surface.call(iD.svg.Lines(projection), graph, [graph.entity('lo'), graph.entity('hi')], none);
 
             var selection = surface.selectAll('g.line-stroke > path.line');
@@ -91,7 +91,7 @@ describe("iD.svg.Lines", function () {
             expect(selection[0][1].__data__.id).to.eql('hi');
         });
 
-        it("stacks higher lines above lower ones in a single render (reverse)", function () {
+        it('stacks higher lines above lower ones in a single render (reverse)', function () {
             surface.call(iD.svg.Lines(projection), graph, [graph.entity('hi'), graph.entity('lo')], none);
 
             var selection = surface.selectAll('g.line-stroke > path.line');
@@ -99,7 +99,7 @@ describe("iD.svg.Lines", function () {
             expect(selection[0][1].__data__.id).to.eql('hi');
         });
 
-        it("stacks higher lines above lower ones in separate renders", function () {
+        it('stacks higher lines above lower ones in separate renders', function () {
             surface.call(iD.svg.Lines(projection), graph, [graph.entity('lo')], none);
             surface.call(iD.svg.Lines(projection), graph, [graph.entity('hi')], none);
 
@@ -108,7 +108,7 @@ describe("iD.svg.Lines", function () {
             expect(selection[0][1].__data__.id).to.eql('hi');
         });
 
-        it("stacks higher lines above lower in separate renders (reverse)", function () {
+        it('stacks higher lines above lower in separate renders (reverse)', function () {
             surface.call(iD.svg.Lines(projection), graph, [graph.entity('hi')], none);
             surface.call(iD.svg.Lines(projection), graph, [graph.entity('lo')], none);
 

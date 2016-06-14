@@ -12,7 +12,7 @@
     "start": "http-server .",
     "lint": "eslint js/id && npm run lint:spec",
     "lint:modules": "eslint modules",
-    "lint:spec": "eslint test/spec/actions test/spec/behavior test/spec/core test/spec/geo test/spec/lib test/spec/presets test/spec/modes"
+    "lint:spec": "eslint test/spec/actions test/spec/behavior test/spec/core test/spec/geo test/spec/lib test/spec/presets test/spec/modes test/spec/renderer test/spec/svg"
   },
   "repository": {
     "type": "git",
