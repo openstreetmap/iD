@@ -48,4 +48,4 @@ export function DeleteWay(wayId) {
     };
 
     return action;
-};
+}

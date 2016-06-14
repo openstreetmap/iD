@@ -26,4 +26,4 @@ export function AddMember(relationId, member, memberIndex) {
 
         return graph.replace(relation.addMember(member, memberIndex));
     };
-};
+}

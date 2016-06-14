@@ -12,4 +12,4 @@ export function DeleteMember(relationId, memberIndex) {
 
         return graph;
     };
-};
+}

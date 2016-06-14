@@ -3,4 +3,4 @@ export function AddVertex(wayId, nodeId, index) {
     return function(graph) {
         return graph.replace(graph.entity(wayId).addNode(nodeId, index));
     };
-};
+}

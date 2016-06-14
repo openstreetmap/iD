@@ -41,4 +41,4 @@ export function Connect(nodeIds) {
 
         return graph;
     };
-};
+}

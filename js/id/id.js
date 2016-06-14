@@ -23,7 +23,7 @@ window.iD = function () {
             if (arguments.length === 1) return storage.getItem(k);
             else if (v === null) storage.removeItem(k);
             else storage.setItem(k, v);
-        } catch(e) {
+        } catch (e) {
             // localstorage quota exceeded
             /* eslint-disable no-console */
             if (typeof console !== 'undefined') console.error('localStorage quota exceeded');

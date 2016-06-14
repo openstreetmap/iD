@@ -18,4 +18,4 @@ export function CopyEntities(ids, fromGraph) {
     };
 
     return action;
-};
+}

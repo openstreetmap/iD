@@ -276,4 +276,4 @@ export function Move(moveIds, tryDelta, projection, cache) {
     };
 
     return action;
-};
+}
