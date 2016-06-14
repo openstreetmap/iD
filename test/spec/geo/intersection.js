@@ -1,4 +1,4 @@
-describe("iD.geo.Intersection", function() {
+describe('iD.geo.Intersection', function() {
     describe('highways', function() {
         it('excludes non-highways', function() {
             var graph = iD.Graph([
@@ -11,7 +11,7 @@ describe("iD.geo.Intersection", function() {
             expect(iD.geo.Intersection(graph, '*').ways).to.eql([]);
         });
 
-        it("excludes degenerate highways", function() {
+        it('excludes degenerate highways', function() {
             var graph = iD.Graph([
                 iD.Node({id: 'u'}),
                 iD.Node({id: '*'}),
@@ -21,7 +21,7 @@ describe("iD.geo.Intersection", function() {
             expect(_.map(iD.geo.Intersection(graph, '*').ways, 'id')).to.eql(['=']);
         });
 
-        it("excludes coincident highways", function() {
+        it('excludes coincident highways', function() {
             var graph = iD.Graph([
                 iD.Node({id: 'u'}),
                 iD.Node({id: '*'}),
@@ -64,7 +64,7 @@ describe("iD.geo.Intersection", function() {
     });
 
     describe('#turns', function() {
-        it("permits turns onto a way forward", function() {
+        it('permits turns onto a way forward', function() {
             // u====*--->w
             var graph = iD.Graph([
                     iD.Node({id: 'u'}),
@@ -83,7 +83,7 @@ describe("iD.geo.Intersection", function() {
             });
         });
 
-        it("permits turns onto a way backward", function() {
+        it('permits turns onto a way backward', function() {
             // u====*<---w
             var graph = iD.Graph([
                     iD.Node({id: 'u'}),
@@ -102,7 +102,7 @@ describe("iD.geo.Intersection", function() {
             });
         });
 
-        it("permits turns from a way that must be split", function() {
+        it('permits turns from a way that must be split', function() {
             //     w
             //     |
             // u===*
@@ -137,7 +137,7 @@ describe("iD.geo.Intersection", function() {
             });
         });
 
-        it("permits turns to a way that must be split", function() {
+        it('permits turns to a way that must be split', function() {
             //     w
             //     |
             // u===*
@@ -172,7 +172,7 @@ describe("iD.geo.Intersection", function() {
             });
         });
 
-        it("permits turns from a oneway forward", function() {
+        it('permits turns from a oneway forward', function() {
             // u===>v----w
             var graph = iD.Graph([
                     iD.Node({id: 'u'}),
@@ -190,7 +190,7 @@ describe("iD.geo.Intersection", function() {
             }]);
         });
 
-        it("permits turns from a reverse oneway backward", function() {
+        it('permits turns from a reverse oneway backward', function() {
             // u<===*----w
             var graph = iD.Graph([
                     iD.Node({id: 'u'}),
@@ -208,7 +208,7 @@ describe("iD.geo.Intersection", function() {
             }]);
         });
 
-        it("omits turns from a oneway backward", function() {
+        it('omits turns from a oneway backward', function() {
             // u<===*----w
             var graph = iD.Graph([
                 iD.Node({id: 'u'}),
@@ -220,7 +220,7 @@ describe("iD.geo.Intersection", function() {
             expect(iD.geo.Intersection(graph, '*').turns('u')).to.eql([]);
         });
 
-        it("omits turns from a reverse oneway forward", function() {
+        it('omits turns from a reverse oneway forward', function() {
             // u===>*----w
             var graph = iD.Graph([
                 iD.Node({id: 'u'}),
@@ -232,7 +232,7 @@ describe("iD.geo.Intersection", function() {
             expect(iD.geo.Intersection(graph, '*').turns('u')).to.eql([]);
         });
 
-        it("permits turns onto a oneway forward", function() {
+        it('permits turns onto a oneway forward', function() {
             // u====*--->w
             var graph = iD.Graph([
                     iD.Node({id: 'u'}),
@@ -251,7 +251,7 @@ describe("iD.geo.Intersection", function() {
             });
         });
 
-        it("permits turns onto a reverse oneway backward", function() {
+        it('permits turns onto a reverse oneway backward', function() {
             // u====*<---w
             var graph = iD.Graph([
                     iD.Node({id: 'u'}),
@@ -270,7 +270,7 @@ describe("iD.geo.Intersection", function() {
             });
         });
 
-        it("omits turns onto a oneway backward", function() {
+        it('omits turns onto a oneway backward', function() {
             // u====*<---w
             var graph = iD.Graph([
                 iD.Node({id: 'u'}),
@@ -282,7 +282,7 @@ describe("iD.geo.Intersection", function() {
             expect(iD.geo.Intersection(graph, '*').turns('u').length).to.eql(1);
         });
 
-        it("omits turns onto a reverse oneway forward", function() {
+        it('omits turns onto a reverse oneway forward', function() {
             // u====*--->w
             var graph = iD.Graph([
                 iD.Node({id: 'u'}),
@@ -294,7 +294,7 @@ describe("iD.geo.Intersection", function() {
             expect(iD.geo.Intersection(graph, '*').turns('u').length).to.eql(1);
         });
 
-        it("includes U-turns", function() {
+        it('includes U-turns', function() {
             // u====*--->w
             var graph = iD.Graph([
                     iD.Node({id: 'u'}),
@@ -314,7 +314,7 @@ describe("iD.geo.Intersection", function() {
             });
         });
 
-        it("restricts turns with a restriction relation", function() {
+        it('restricts turns with a restriction relation', function() {
             // u====*--->w
             var graph = iD.Graph([
                     iD.Node({id: 'u'}),
@@ -339,7 +339,7 @@ describe("iD.geo.Intersection", function() {
             });
         });
 
-        it("restricts turns affected by an only_* restriction relation", function() {
+        it('restricts turns affected by an only_* restriction relation', function() {
             // u====*~~~~v
             //      |
             //      w
@@ -383,7 +383,7 @@ describe("iD.geo.Intersection", function() {
             });
         });
 
-        it("permits turns to a circular way", function() {
+        it('permits turns to a circular way', function() {
             //
             //  b -- c
             //  |    |
@@ -419,7 +419,7 @@ describe("iD.geo.Intersection", function() {
             });
         });
 
-        it("permits turns from a circular way", function() {
+        it('permits turns from a circular way', function() {
             //
             //  b -- c
             //  |    |
@@ -455,7 +455,7 @@ describe("iD.geo.Intersection", function() {
             });
         });
 
-        it("permits turns to a oneway circular way", function() {
+        it('permits turns to a oneway circular way', function() {
             //
             //  b -- c
             //  |    |
@@ -486,7 +486,7 @@ describe("iD.geo.Intersection", function() {
             });
         });
 
-        it("permits turns to a reverse oneway circular way", function() {
+        it('permits turns to a reverse oneway circular way', function() {
             //
             //  b -- c
             //  |    |
@@ -517,7 +517,7 @@ describe("iD.geo.Intersection", function() {
             });
         });
 
-        it("permits turns from a oneway circular way", function() {
+        it('permits turns from a oneway circular way', function() {
             //
             //  b -- c
             //  |    |
@@ -547,7 +547,7 @@ describe("iD.geo.Intersection", function() {
             });
         });
 
-        it("permits turns from a reverse oneway circular way", function() {
+        it('permits turns from a reverse oneway circular way', function() {
             //
             //  b -- c
             //  |    |
