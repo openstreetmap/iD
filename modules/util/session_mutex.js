@@ -2,7 +2,7 @@
 // switch. If the session crashes, the mutex will auto-release
 // after 5 seconds.
 
-iD.util.SessionMutex = function(name) {
+export function SessionMutex(name) {
     var mutex = {},
         intervalID;
 
@@ -33,4 +33,4 @@ iD.util.SessionMutex = function(name) {
     };
 
     return mutex;
-};
+}

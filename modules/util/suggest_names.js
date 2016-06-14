@@ -1,4 +1,4 @@
-iD.util.SuggestNames = function(preset, suggestions) {
+export function SuggestNames(preset, suggestions) {
     preset = preset.id.split('/', 2);
     var k = preset[0],
         v = preset[1];
@@ -25,4 +25,4 @@ iD.util.SuggestNames = function(preset, suggestions) {
         result = result.slice(0,3);
         callback(result);
     };
-};
+}

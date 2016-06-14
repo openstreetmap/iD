@@ -1,17 +1,15 @@
-iD.util = {};
-
-iD.util.tagText = function(entity) {
+export function tagText(entity) {
     return d3.entries(entity.tags).map(function(e) {
         return e.key + '=' + e.value;
     }).join(', ');
-};
+}
 
-iD.util.entitySelector = function(ids) {
+export function entitySelector(ids) {
     return ids.length ? '.' + ids.join(',.') : 'nothing';
-};
+}
 
-iD.util.entityOrMemberSelector = function(ids, graph) {
-    var s = iD.util.entitySelector(ids);
+export function entityOrMemberSelector(ids, graph) {
+    var s = entitySelector(ids);
 
     ids.forEach(function(id) {
         var entity = graph.hasEntity(id);
@@ -23,22 +21,22 @@ iD.util.entityOrMemberSelector = function(ids, graph) {
     });
 
     return s;
-};
+}
 
-iD.util.displayName = function(entity) {
+export function displayName(entity) {
     var localeName = 'name:' + iD.detect().locale.toLowerCase().split('-')[0];
     return entity.tags[localeName] || entity.tags.name || entity.tags.ref;
-};
+}
 
-iD.util.displayType = function(id) {
+export function displayType(id) {
     return {
         n: t('inspector.node'),
         w: t('inspector.way'),
         r: t('inspector.relation')
     }[id.charAt(0)];
-};
+}
 
-iD.util.stringQs = function(str) {
+export function stringQs(str) {
     return str.split('&').reduce(function(obj, pair){
         var parts = pair.split('=');
         if (parts.length === 2) {
@@ -46,9 +44,9 @@ iD.util.stringQs = function(str) {
         }
         return obj;
     }, {});
-};
+}
 
-iD.util.qsString = function(obj, noencode) {
+export function qsString(obj, noencode) {
     function softEncode(s) {
       // encode everything except special characters used in certain hash parameters:
       // "/" in map states, ":", ",", {" and "}" in background
@@ -58,9 +56,9 @@ iD.util.qsString = function(obj, noencode) {
         return encodeURIComponent(key) + '=' + (
             noencode ? softEncode(obj[key]) : encodeURIComponent(obj[key]));
     }).join('&');
-};
+}
 
-iD.util.prefixDOMProperty = function(property) {
+export function prefixDOMProperty(property) {
     var prefixes = ['webkit', 'ms', 'moz', 'o'],
         i = -1,
         n = prefixes.length,
@@ -76,9 +74,9 @@ iD.util.prefixDOMProperty = function(property) {
             return prefixes[i] + property;
 
     return false;
-};
+}
 
-iD.util.prefixCSSProperty = function(property) {
+export function prefixCSSProperty(property) {
     var prefixes = ['webkit', 'ms', 'Moz', 'O'],
         i = -1,
         n = prefixes.length,
@@ -92,18 +90,19 @@ iD.util.prefixCSSProperty = function(property) {
             return '-' + prefixes[i].toLowerCase() + property.replace(/([A-Z])/g, '-$1').toLowerCase();
 
     return false;
-};
+}
 
 
-iD.util.setTransform = function(el, x, y, scale) {
-    var prop = iD.util.transformProperty = iD.util.transformProperty || iD.util.prefixCSSProperty('Transform'),
+var transformProperty;
+export function setTransform(el, x, y, scale) {
+    var prop = transformProperty = transformProperty || prefixCSSProperty('Transform'),
         translate = iD.detect().opera ?
             'translate('   + x + 'px,' + y + 'px)' :
             'translate3d(' + x + 'px,' + y + 'px,0)';
     return el.style(prop, translate + (scale ? ' scale(' + scale + ')' : ''));
-};
+}
 
-iD.util.getStyle = function(selector) {
+export function getStyle(selector) {
     for (var i = 0; i < document.styleSheets.length; i++) {
         var rules = document.styleSheets[i].rules || document.styleSheets[i].cssRules || [];
         for (var k = 0; k < rules.length; k++) {
@@ -113,9 +112,9 @@ iD.util.getStyle = function(selector) {
             }
         }
     }
-};
+}
 
-iD.util.editDistance = function(a, b) {
+export function editDistance(a, b) {
     if (a.length === 0) return b.length;
     if (b.length === 0) return a.length;
     var matrix = [];
@@ -133,12 +132,12 @@ iD.util.editDistance = function(a, b) {
         }
     }
     return matrix[b.length][a.length];
-};
+}
 
 // a d3.mouse-alike which
 // 1. Only works on HTML elements, not SVG
 // 2. Does not cause style recalculation
-iD.util.fastMouse = function(container) {
+export function fastMouse(container) {
     var rect = container.getBoundingClientRect(),
         rectLeft = rect.left,
         rectTop = rect.top,
@@ -149,13 +148,13 @@ iD.util.fastMouse = function(container) {
             e.clientX - rectLeft - clientLeft,
             e.clientY - rectTop - clientTop];
     };
-};
+}
 
 /* eslint-disable no-proto */
-iD.util.getPrototypeOf = Object.getPrototypeOf || function(obj) { return obj.__proto__; };
+export const getPrototypeOf = Object.getPrototypeOf || function(obj) { return obj.__proto__; };
 /* eslint-enable no-proto */
 
-iD.util.asyncMap = function(inputs, func, callback) {
+export function asyncMap(inputs, func, callback) {
     var remaining = inputs.length,
         results = [],
         errors = [];
@@ -168,11 +167,11 @@ iD.util.asyncMap = function(inputs, func, callback) {
             if (!remaining) callback(errors, results);
         });
     });
-};
+}
 
 // wraps an index to an interval [0..length-1]
-iD.util.wrap = function(index, length) {
+export function wrap(index, length) {
     if (index < 0)
         index += Math.ceil(-index/length)*length;
     return index % length;
-};
+}
