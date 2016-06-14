@@ -45,7 +45,8 @@ $(BUILDJS_TARGETS): $(BUILDJS_SOURCES) build.js
 MODULE_TARGETS = \
 	js/lib/id/actions.js \
 	js/lib/id/presets.js \
-	js/lib/id/validations.js
+	js/lib/id/validations.js \
+	js/lib/id/util.js
 
 js/lib/id/actions.js: modules/
 	node_modules/.bin/rollup -f umd -n iD.actions modules/actions/index.js --no-strict > $@
@@ -55,6 +56,9 @@ js/lib/id/presets.js: modules/
 
 js/lib/id/validations.js: modules/
 	node_modules/.bin/rollup -f umd -n iD.validations modules/validations/index.js --no-strict > $@
+
+js/lib/id/util.js: modules/
+	node_modules/.bin/rollup -f umd -n iD.util modules/util/index.js --no-strict > $@
 
 dist/iD.js: \
 	js/lib/bootstrap-tooltip.js \
@@ -85,9 +89,6 @@ dist/iD.js: \
 	js/id/services/taginfo.js \
 	js/id/services/wikidata.js \
 	js/id/services/wikipedia.js \
-	js/id/util.js \
-	js/id/util/session_mutex.js \
-	js/id/util/suggest_names.js \
 	js/id/geo.js \
 	js/id/geo/extent.js \
 	js/id/geo/intersection.js \
