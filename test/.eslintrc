@@ -8,7 +8,8 @@
         "afterEach": true,
         "mocha": true,
         "sinon": true,
-        "happen": true
+        "happen": true,
+        "before": true,
     },
     "rules": {
         "no-unused-expressions": 0

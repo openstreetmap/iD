@@ -194,7 +194,7 @@ describe('iD.geo', function() {
                 index: undefined,
                 distance: Infinity,
                 loc: undefined
-            })
+            });
         });
 
         it('returns undefined properties for a degenerate way (single node)', function() {
@@ -202,7 +202,7 @@ describe('iD.geo', function() {
                 index: undefined,
                 distance: Infinity,
                 loc: undefined
-            })
+            });
         });
 
         it('calculates the orthogonal projection of a point onto a segment', function() {

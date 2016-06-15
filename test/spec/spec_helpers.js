@@ -1,3 +1,5 @@
+/* globals chai */
+
 iD.debug = true;
 
 mocha.setup({
@@ -13,7 +15,7 @@ mocha.setup({
     ]
 });
 
-var expect = chai.expect;
+expect = chai.expect;
 
 chai.use(function (chai, utils) {
     var flag = utils.flag;
