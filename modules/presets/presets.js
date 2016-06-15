@@ -1,5 +1,4 @@
-iD.presets = function() {
-
+export function presets() {
     // an iD.presets.Collection with methods for
     // loading new data and returning defaults
 
@@ -153,4 +152,4 @@ iD.presets = function() {
     };
 
     return all;
-};
+}
