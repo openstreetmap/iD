@@ -23,10 +23,7 @@ describe('iD.presets.Collection', function() {
         })
     };
 
-    var c = iD.presets.Collection([p.point, p.area, p.residential, p.park]),
-        n = iD.Node( { id: 'n1' }),
-        w = iD.Way({ tags: { highway: 'residential' }}),
-        g = iD.Graph().replace(w);
+    var c = iD.presets.Collection([p.point, p.area, p.residential, p.park]);
 
     describe('#item', function() {
         it('fetches a preset by id', function() {

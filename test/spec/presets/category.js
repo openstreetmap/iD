@@ -25,10 +25,7 @@ describe('iD.presets.Category', function() {
 
     describe('#matchGeometry', function() {
         it('matches the type of an entity', function() {
-            var c = iD.presets.Category('road', category, iD.presets.Collection([residential])),
-                w = iD.Way(),
-                n = iD.Node(),
-                g = iD.Graph().replace(w);
+            var c = iD.presets.Category('road', category, iD.presets.Collection([residential]));
             expect(c.matchGeometry('line')).to.eql(true);
             expect(c.matchGeometry('point')).to.eql(false);
         });
