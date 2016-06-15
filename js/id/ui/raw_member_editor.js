@@ -1,6 +1,14 @@
 iD.ui.RawMemberEditor = function(context) {
     var id;
 
+    function downloadMember() {
+        // using interim class to indicate progress
+        // need advice on the appropriate class to use
+        d3.select(this.parentNode).classed('tag-reference-loading', true);
+        context.connection().loadEntity(id); // discussion: a possible alternative would be to loadEntity(d.id) one at a time.
+        d3.event.preventDefault();
+    }
+
     function selectMember(d) {
         d3.event.preventDefault();
         context.enter(iD.modes.Select(context, [d.id]));
@@ -85,9 +93,19 @@ iD.ui.RawMemberEditor = function(context) {
                         .text(function(d) { return iD.util.displayName(d.member); });
 
                 } else {
-                    d3.select(this).append('label')
+                    var $incomplete_label = d3.select(this).append('label')
                         .attr('class', 'form-label')
                         .text(t('inspector.incomplete'));
+
+                    var wrap = $incomplete_label.append('div')
+                        .attr('class', 'form-label-button-wrap');
+
+                    // need advise on the appropriate icon
+                    wrap.append('button')
+                        .attr('tabindex', -1)
+                        .append('div')
+                        .attr('class', 'icon geolocate')
+                        .on('click', downloadMember);
                 }
             });
 
