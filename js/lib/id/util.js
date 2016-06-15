@@ -157,7 +157,7 @@
     }
 
     /* eslint-disable no-proto */
-    const getPrototypeOf = Object.getPrototypeOf || function(obj) { return obj.__proto__; };
+    var getPrototypeOf = Object.getPrototypeOf || function(obj) { return obj.__proto__; };
     /* eslint-enable no-proto */
 
     function asyncMap(inputs, func, callback) {
