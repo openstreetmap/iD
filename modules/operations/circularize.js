@@ -1,4 +1,4 @@
-iD.operations.Circularize = function(selectedIDs, context) {
+export function Circularize(selectedIDs, context) {
     var entityId = selectedIDs[0],
         entity = context.entity(entityId),
         extent = entity.extent(context.graph()),
@@ -38,4 +38,4 @@ iD.operations.Circularize = function(selectedIDs, context) {
     operation.title = t('operations.circularize.title');
 
     return operation;
-};
+}

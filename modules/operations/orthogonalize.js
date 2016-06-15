@@ -1,4 +1,4 @@
-iD.operations.Orthogonalize = function(selectedIDs, context) {
+export function Orthogonalize(selectedIDs, context) {
     var entityId = selectedIDs[0],
         entity = context.entity(entityId),
         extent = entity.extent(context.graph()),
@@ -39,4 +39,4 @@ iD.operations.Orthogonalize = function(selectedIDs, context) {
     operation.title = t('operations.orthogonalize.title');
 
     return operation;
-};
+}

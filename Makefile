@@ -48,7 +48,8 @@ MODULE_TARGETS = \
 	js/lib/id/presets.js \
 	js/lib/id/util.js \
 	js/lib/id/validations.js \
-	js/lib/id/geo.js
+	js/lib/id/geo.js \
+	js/lib/id/operations.js
 
 js/lib/id/actions.js: modules/
 	node_modules/.bin/rollup -f umd -n iD.actions modules/actions/index.js --no-strict > $@
@@ -67,6 +68,9 @@ js/lib/id/validations.js: modules/
 
 js/lib/id/geo.js: modules/
 	node_modules/.bin/rollup -f umd -n iD.geo modules/geo/index.js --no-strict > $@
+
+js/lib/id/operations.js: modules/
+	node_modules/.bin/rollup -f umd -n iD.operations modules/operations/index.js --no-strict > $@
 
 dist/iD.js: \
 	js/lib/bootstrap-tooltip.js \
@@ -111,18 +115,6 @@ dist/iD.js: \
 	js/id/behavior/paste.js \
 	js/id/behavior/select.js \
 	js/id/behavior/tail.js \
-	js/id/operations.js \
-	js/id/operations/circularize.js \
-	js/id/operations/continue.js \
-	js/id/operations/delete.js \
-	js/id/operations/disconnect.js \
-	js/id/operations/merge.js \
-	js/id/operations/move.js \
-	js/id/operations/orthogonalize.js \
-	js/id/operations/reverse.js \
-	js/id/operations/rotate.js \
-	js/id/operations/split.js \
-	js/id/operations/straighten.js \
 	js/id/core/connection.js \
 	js/id/core/difference.js \
 	js/id/core/entity.js \

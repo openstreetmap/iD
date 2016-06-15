@@ -1,4 +1,4 @@
-iD.operations.Split = function(selectedIDs, context) {
+export function Split(selectedIDs, context) {
     var vertices = _.filter(selectedIDs, function vertex(entityId) {
         return context.geometry(entityId) === 'vertex';
     });
@@ -55,4 +55,4 @@ iD.operations.Split = function(selectedIDs, context) {
     operation.title = t('operations.split.title');
 
     return operation;
-};
+}
