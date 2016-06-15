@@ -1,4 +1,4 @@
-iD.presets.Category = function(id, category, all) {
+export function Category(id, category, all) {
     category = _.clone(category);
 
     category.id = id;
@@ -22,4 +22,4 @@ iD.presets.Category = function(id, category, all) {
     };
 
     return category;
-};
+}

@@ -1,4 +1,4 @@
-iD.presets.Preset = function(id, preset, fields) {
+export function Preset(id, preset, fields) {
     preset = _.clone(preset);
 
     preset.id = id;
@@ -126,4 +126,4 @@ iD.presets.Preset = function(id, preset, fields) {
     };
 
     return preset;
-};
+}

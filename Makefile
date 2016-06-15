@@ -44,10 +44,14 @@ $(BUILDJS_TARGETS): $(BUILDJS_SOURCES) build.js
 
 MODULE_TARGETS = \
 	js/lib/id/actions.js \
+	js/lib/id/presets.js \
 	js/lib/id/validations.js
 
 js/lib/id/actions.js: modules/
 	node_modules/.bin/rollup -f umd -n iD.actions modules/actions/index.js --no-strict > $@
+
+js/lib/id/presets.js: modules/
+	node_modules/.bin/rollup -f umd -n iD.presets modules/presets/index.js --no-strict > $@
 
 js/lib/id/validations.js: modules/
 	node_modules/.bin/rollup -f umd -n iD.validations modules/validations/index.js --no-strict > $@
@@ -225,11 +229,6 @@ dist/iD.js: \
 	js/id/ui/intro/navigation.js \
 	js/id/ui/intro/point.js \
 	js/id/ui/intro/start_editing.js \
-	js/id/presets.js \
-	js/id/presets/category.js \
-	js/id/presets/collection.js \
-	js/id/presets/field.js \
-	js/id/presets/preset.js \
 	js/id/end.js \
 	js/lib/locale.js \
 	data/introGraph.js

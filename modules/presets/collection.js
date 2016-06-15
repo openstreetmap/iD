@@ -1,5 +1,4 @@
-iD.presets.Collection = function(collection) {
-
+export function Collection(collection) {
     var maxSearchResults = 50,
         maxSuggestionResults = 10;
 
@@ -126,4 +125,4 @@ iD.presets.Collection = function(collection) {
     };
 
     return presets;
-};
+}

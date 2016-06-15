@@ -379,7 +379,7 @@ window.iD = function () {
     context.zoomOutFurther = map.zoomOutFurther;
     context.redrawEnable = map.redrawEnable;
 
-    presets = iD.presets();
+    presets = iD.presets.presets();
 
     return d3.rebind(context, dispatch, 'on');
 };
