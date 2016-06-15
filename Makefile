@@ -49,7 +49,11 @@ MODULE_TARGETS = \
 	js/lib/id/util.js \
 	js/lib/id/validations.js \
 	js/lib/id/geo.js \
-	js/lib/id/operations.js
+	js/lib/id/operations.js \
+	js/lib/id/core.js 
+
+js/lib/id/core.js: modules/
+	node_modules/.bin/rollup -f umd -n iD modules/core/index.js --no-strict > $@
 
 js/lib/id/actions.js: modules/
 	node_modules/.bin/rollup -f umd -n iD.actions modules/actions/index.js --no-strict > $@
@@ -115,16 +119,6 @@ dist/iD.js: \
 	js/id/behavior/paste.js \
 	js/id/behavior/select.js \
 	js/id/behavior/tail.js \
-	js/id/core/connection.js \
-	js/id/core/difference.js \
-	js/id/core/entity.js \
-	js/id/core/graph.js \
-	js/id/core/history.js \
-	js/id/core/node.js \
-	js/id/core/relation.js \
-	js/id/core/tags.js \
-	js/id/core/tree.js \
-	js/id/core/way.js \
 	js/id/renderer/background.js \
 	js/id/renderer/background_source.js \
 	js/id/renderer/features.js \

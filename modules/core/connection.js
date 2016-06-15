@@ -1,4 +1,9 @@
-iD.Connection = function(useHttps) {
+import { Entity } from './entity';
+import { Way } from './way';
+import { Relation } from './relation';
+import { Node } from './node';
+
+export function Connection(useHttps) {
     if (typeof useHttps !== 'boolean') {
       useHttps = window.location.protocol === 'https:';
     }
@@ -55,8 +60,8 @@ iD.Connection = function(useHttps) {
     };
 
     connection.loadEntity = function(id, callback) {
-        var type = iD.Entity.id.type(id),
-            osmID = iD.Entity.id.toOSM(id);
+        var type = Entity.id.type(id),
+            osmID = Entity.id.toOSM(id);
 
         connection.loadFromURL(
             url + '/api/0.6/' + type + '/' + osmID + (type !== 'node' ? '/full' : ''),
@@ -66,8 +71,8 @@ iD.Connection = function(useHttps) {
     };
 
     connection.loadEntityVersion = function(id, version, callback) {
-        var type = iD.Entity.id.type(id),
-            osmID = iD.Entity.id.toOSM(id);
+        var type = Entity.id.type(id),
+            osmID = Entity.id.toOSM(id);
 
         connection.loadFromURL(
             url + '/api/0.6/' + type + '/' + osmID + '/' + version,
@@ -77,9 +82,9 @@ iD.Connection = function(useHttps) {
     };
 
     connection.loadMultiple = function(ids, callback) {
-        _.each(_.groupBy(_.uniq(ids), iD.Entity.id.type), function(v, k) {
+        _.each(_.groupBy(_.uniq(ids), Entity.id.type), function(v, k) {
             var type = k + 's',
-                osmIDs = _.map(v, iD.Entity.id.toOSM);
+                osmIDs = _.map(v, Entity.id.toOSM);
 
             _.each(_.chunk(osmIDs, 150), function(arr) {
                 connection.loadFromURL(
@@ -145,8 +150,8 @@ iD.Connection = function(useHttps) {
     var parsers = {
         node: function nodeData(obj) {
             var attrs = obj.attributes;
-            return new iD.Node({
-                id: iD.Entity.id.fromOSM(nodeStr, attrs.id.value),
+            return new Node({
+                id: Entity.id.fromOSM(nodeStr, attrs.id.value),
                 loc: getLoc(attrs),
                 version: attrs.version.value,
                 user: attrs.user && attrs.user.value,
@@ -157,8 +162,8 @@ iD.Connection = function(useHttps) {
 
         way: function wayData(obj) {
             var attrs = obj.attributes;
-            return new iD.Way({
-                id: iD.Entity.id.fromOSM(wayStr, attrs.id.value),
+            return new Way({
+                id: Entity.id.fromOSM(wayStr, attrs.id.value),
                 version: attrs.version.value,
                 user: attrs.user && attrs.user.value,
                 tags: getTags(obj),
@@ -169,8 +174,8 @@ iD.Connection = function(useHttps) {
 
         relation: function relationData(obj) {
             var attrs = obj.attributes;
-            return new iD.Relation({
-                id: iD.Entity.id.fromOSM(relationStr, attrs.id.value),
+            return new Relation({
+                id: Entity.id.fromOSM(relationStr, attrs.id.value),
                 version: attrs.version.value,
                 user: attrs.user && attrs.user.value,
                 tags: getTags(obj),
@@ -466,4 +471,4 @@ iD.Connection = function(useHttps) {
     };
 
     return d3.rebind(connection, event, 'on');
-};
+}

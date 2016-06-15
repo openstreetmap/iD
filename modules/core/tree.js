@@ -1,4 +1,6 @@
-iD.Tree = function(head) {
+import { Difference } from './difference';
+
+export function Tree(head) {
     var rtree = rbush(),
         rectangles = {};
 
@@ -59,7 +61,7 @@ iD.Tree = function(head) {
 
     tree.intersects = function(extent, graph) {
         if (graph !== head) {
-            var diff = iD.Difference(head, graph),
+            var diff = Difference(head, graph),
                 insertions = {};
 
             head = graph;
@@ -88,4 +90,4 @@ iD.Tree = function(head) {
     };
 
     return tree;
-};
+}

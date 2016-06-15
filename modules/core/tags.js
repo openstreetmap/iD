@@ -1,4 +1,13 @@
-iD.oneWayTags = {
+export function interestingTag(key) {
+    return key !== 'attribution' &&
+        key !== 'created_by' &&
+        key !== 'source' &&
+        key !== 'odbl' &&
+        key.indexOf('tiger:') !== 0;
+
+}
+
+export var oneWayTags = {
     'aerialway': {
         'chair_lift': true,
         'mixed_lift': true,
@@ -30,7 +39,7 @@ iD.oneWayTags = {
     }
 };
 
-iD.pavedTags = {
+export var pavedTags = {
     'surface': {
         'paved': true,
         'asphalt': true,
@@ -39,13 +48,4 @@ iD.pavedTags = {
     'tracktype': {
         'grade1': true
     }
-};
-
-iD.interestingTag = function (key) {
-    return key !== 'attribution' &&
-        key !== 'created_by' &&
-        key !== 'source' &&
-        key !== 'odbl' &&
-        key.indexOf('tiger:') !== 0;
-
 };

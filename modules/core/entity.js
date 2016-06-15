@@ -1,42 +1,44 @@
-iD.Entity = function(attrs) {
+import { interestingTag } from './tags';
+
+export function Entity(attrs) {
     // For prototypal inheritance.
-    if (this instanceof iD.Entity) return;
+    if (this instanceof Entity) return;
 
     // Create the appropriate subtype.
     if (attrs && attrs.type) {
-        return iD.Entity[attrs.type].apply(this, arguments);
+        return Entity[attrs.type].apply(this, arguments);
     } else if (attrs && attrs.id) {
-        return iD.Entity[iD.Entity.id.type(attrs.id)].apply(this, arguments);
+        return Entity[Entity.id.type(attrs.id)].apply(this, arguments);
     }
 
     // Initialize a generic Entity (used only in tests).
-    return (new iD.Entity()).initialize(arguments);
+    return (new Entity()).initialize(arguments);
+}
+
+Entity.id = function(type) {
+    return Entity.id.fromOSM(type, Entity.id.next[type]--);
 };
 
-iD.Entity.id = function(type) {
-    return iD.Entity.id.fromOSM(type, iD.Entity.id.next[type]--);
-};
+Entity.id.next = {node: -1, way: -1, relation: -1};
 
-iD.Entity.id.next = {node: -1, way: -1, relation: -1};
-
-iD.Entity.id.fromOSM = function(type, id) {
+Entity.id.fromOSM = function(type, id) {
     return type[0] + id;
 };
 
-iD.Entity.id.toOSM = function(id) {
+Entity.id.toOSM = function(id) {
     return id.slice(1);
 };
 
-iD.Entity.id.type = function(id) {
+Entity.id.type = function(id) {
     return {'n': 'node', 'w': 'way', 'r': 'relation'}[id[0]];
 };
 
 // A function suitable for use as the second argument to d3.selection#data().
-iD.Entity.key = function(entity) {
+Entity.key = function(entity) {
     return entity.id + 'v' + (entity.v || 0);
 };
 
-iD.Entity.prototype = {
+Entity.prototype = {
     tags: {},
 
     initialize: function(sources) {
@@ -54,7 +56,7 @@ iD.Entity.prototype = {
         }
 
         if (!this.id && this.type) {
-            this.id = iD.Entity.id(this.type);
+            this.id = Entity.id(this.type);
         }
         if (!this.hasOwnProperty('visible')) {
             this.visible = true;
@@ -76,14 +78,14 @@ iD.Entity.prototype = {
         if (copies[this.id])
             return copies[this.id];
 
-        var copy = iD.Entity(this, {id: undefined, user: undefined, version: undefined});
+        var copy = Entity(this, {id: undefined, user: undefined, version: undefined});
         copies[this.id] = copy;
 
         return copy;
     },
 
     osmId: function() {
-        return iD.Entity.id.toOSM(this.id);
+        return Entity.id.toOSM(this.id);
     },
 
     isNew: function() {
@@ -91,7 +93,7 @@ iD.Entity.prototype = {
     },
 
     update: function(attrs) {
-        return iD.Entity(this, attrs, {v: 1 + (this.v || 0)});
+        return Entity(this, attrs, {v: 1 + (this.v || 0)});
     },
 
     mergeTags: function(tags) {
@@ -120,7 +122,7 @@ iD.Entity.prototype = {
     },
 
     hasInterestingTags: function() {
-        return _.keys(this.tags).some(iD.interestingTag);
+        return _.keys(this.tags).some(interestingTag);
     },
 
     isHighwayIntersection: function() {

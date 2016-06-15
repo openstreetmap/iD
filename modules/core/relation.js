@@ -1,22 +1,25 @@
-iD.Relation = iD.Entity.relation = function iD_Relation() {
-    if (!(this instanceof iD_Relation)) {
-        return (new iD_Relation()).initialize(arguments);
+import { Entity } from './entity';
+
+export function Relation() {
+    if (!(this instanceof Relation)) {
+        return (new Relation()).initialize(arguments);
     } else if (arguments.length) {
         this.initialize(arguments);
     }
-};
+}
+Entity.relation = Relation;
 
-iD.Relation.prototype = Object.create(iD.Entity.prototype);
+Relation.prototype = Object.create(Entity.prototype);
 
-iD.Relation.creationOrder = function(a, b) {
-    var aId = parseInt(iD.Entity.id.toOSM(a.id), 10);
-    var bId = parseInt(iD.Entity.id.toOSM(b.id), 10);
+Relation.creationOrder = function(a, b) {
+    var aId = parseInt(Entity.id.toOSM(a.id), 10);
+    var bId = parseInt(Entity.id.toOSM(b.id), 10);
 
     if (aId < 0 || bId < 0) return aId - bId;
     return bId - aId;
 };
 
-_.extend(iD.Relation.prototype, {
+_.extend(Relation.prototype, {
     type: 'relation',
     members: [],
 
@@ -24,7 +27,7 @@ _.extend(iD.Relation.prototype, {
         if (copies[this.id])
             return copies[this.id];
 
-        var copy = iD.Entity.prototype.copy.call(this, resolver, copies);
+        var copy = Entity.prototype.copy.call(this, resolver, copies);
 
         var members = this.members.map(function(member) {
             return _.extend({}, member, {id: resolver.entity(member.id).copy(resolver, copies).id});
@@ -154,7 +157,7 @@ _.extend(iD.Relation.prototype, {
                 '@id': this.osmId(),
                 '@version': this.version || 0,
                 member: _.map(this.members, function(member) {
-                    return { keyAttributes: { type: member.type, role: member.role, ref: iD.Entity.id.toOSM(member.id) } };
+                    return { keyAttributes: { type: member.type, role: member.role, ref: Entity.id.toOSM(member.id) } };
                 }),
                 tag: _.map(this.tags, function(v, k) {
                     return { keyAttributes: { k: k, v: v } };

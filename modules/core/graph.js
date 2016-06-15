@@ -1,7 +1,7 @@
-iD.Graph = function(other, mutable) {
-    if (!(this instanceof iD.Graph)) return new iD.Graph(other, mutable);
+export function Graph(other, mutable) {
+    if (!(this instanceof Graph)) return new Graph(other, mutable);
 
-    if (other instanceof iD.Graph) {
+    if (other instanceof Graph) {
         var base = other.base();
         this.entities = _.assign(Object.create(base.entities), other.entities);
         this._parentWays = _.assign(Object.create(base.parentWays), other._parentWays);
@@ -17,9 +17,9 @@ iD.Graph = function(other, mutable) {
     this.transients = {};
     this._childNodes = {};
     this.frozen = !mutable;
-};
+}
 
-iD.Graph.prototype = {
+Graph.prototype = {
     hasEntity: function(id) {
         return this.entities[id];
     },
@@ -263,7 +263,7 @@ iD.Graph.prototype = {
     },
 
     update: function() {
-        var graph = this.frozen ? iD.Graph(this, true) : this;
+        var graph = this.frozen ? Graph(this, true) : this;
 
         for (var i = 0; i < arguments.length; i++) {
             arguments[i].call(graph, graph);
