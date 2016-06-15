@@ -23,7 +23,7 @@ describe('iD.services.mapillary', function() {
             expect(cache).to.have.property('images');
             expect(cache).to.have.property('signs');
 
-            var mapillary2 = iD.services.mapillary();
+            iD.services.mapillary();
             var cache2 = iD.services.mapillary.cache;
             expect(cache).to.equal(cache2);
         });
@@ -98,7 +98,7 @@ describe('iD.services.mapillary', function() {
             var match0 = /page=0/,
                 response0 = { type: 'FeatureCollection', features: features0 },
                 match1 = /page=1/,
-                response1 = { type: 'FeatureCollection', features: features1 }
+                response1 = { type: 'FeatureCollection', features: features1 };
 
             server.respondWith('GET', match0,
                 [200, { 'Content-Type': 'application/json' }, JSON.stringify(response0) ]);
@@ -231,7 +231,7 @@ describe('iD.services.mapillary', function() {
             var match0 = /page=0/,
                 response0 = { type: 'FeatureCollection', features: features0 },
                 match1 = /page=1/,
-                response1 = { type: 'FeatureCollection', features: features1 }
+                response1 = { type: 'FeatureCollection', features: features1 };
 
             server.respondWith('GET', match0,
                 [200, { 'Content-Type': 'application/json' }, JSON.stringify(response0) ]);
@@ -356,7 +356,7 @@ describe('iD.services.mapillary', function() {
                     }]
                 };
 
-            expect(mapillary.signHTML(signdata)).to.eql('<span class="t">65</span>')
+            expect(mapillary.signHTML(signdata)).to.eql('<span class="t">65</span>');
         });
     });
 
