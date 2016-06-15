@@ -151,7 +151,7 @@ export function fastMouse(container) {
 }
 
 /* eslint-disable no-proto */
-export const getPrototypeOf = Object.getPrototypeOf || function(obj) { return obj.__proto__; };
+export var getPrototypeOf = Object.getPrototypeOf || function(obj) { return obj.__proto__; };
 /* eslint-enable no-proto */
 
 export function asyncMap(inputs, func, callback) {
