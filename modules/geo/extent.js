@@ -1,6 +1,7 @@
-iD.geo.Extent = function geoExtent(min, max) {
-    if (!(this instanceof iD.geo.Extent)) return new iD.geo.Extent(min, max);
-    if (min instanceof iD.geo.Extent) {
+import { metersToLat, metersToLon } from './index';
+export function Extent(min, max) {
+    if (!(this instanceof Extent)) return new Extent(min, max);
+    if (min instanceof Extent) {
         return min;
     } else if (min && min.length === 2 && min[0].length === 2 && min[1].length === 2) {
         this[0] = min[0];
@@ -9,11 +10,11 @@ iD.geo.Extent = function geoExtent(min, max) {
         this[0] = min        || [ Infinity,  Infinity];
         this[1] = max || min || [-Infinity, -Infinity];
     }
-};
+}
 
-iD.geo.Extent.prototype = new Array(2);
+Extent.prototype = new Array(2);
 
-_.extend(iD.geo.Extent.prototype, {
+_.extend(Extent.prototype, {
     equals: function (obj) {
         return this[0][0] === obj[0][0] &&
             this[0][1] === obj[0][1] &&
@@ -22,8 +23,8 @@ _.extend(iD.geo.Extent.prototype, {
     },
 
     extend: function(obj) {
-        if (!(obj instanceof iD.geo.Extent)) obj = new iD.geo.Extent(obj);
-        return iD.geo.Extent([Math.min(obj[0][0], this[0][0]),
+        if (!(obj instanceof Extent)) obj = new Extent(obj);
+        return Extent([Math.min(obj[0][0], this[0][0]),
                               Math.min(obj[0][1], this[0][1])],
                              [Math.max(obj[1][0], this[1][0]),
                               Math.max(obj[1][1], this[1][1])]);
@@ -60,7 +61,7 @@ _.extend(iD.geo.Extent.prototype, {
     },
 
     contains: function(obj) {
-        if (!(obj instanceof iD.geo.Extent)) obj = new iD.geo.Extent(obj);
+        if (!(obj instanceof Extent)) obj = new Extent(obj);
         return obj[0][0] >= this[0][0] &&
                obj[0][1] >= this[0][1] &&
                obj[1][0] <= this[1][0] &&
@@ -68,7 +69,7 @@ _.extend(iD.geo.Extent.prototype, {
     },
 
     intersects: function(obj) {
-        if (!(obj instanceof iD.geo.Extent)) obj = new iD.geo.Extent(obj);
+        if (!(obj instanceof Extent)) obj = new Extent(obj);
         return obj[0][0] <= this[1][0] &&
                obj[0][1] <= this[1][1] &&
                obj[1][0] >= this[0][0] &&
@@ -76,15 +77,15 @@ _.extend(iD.geo.Extent.prototype, {
     },
 
     intersection: function(obj) {
-        if (!this.intersects(obj)) return new iD.geo.Extent();
-        return new iD.geo.Extent([Math.max(obj[0][0], this[0][0]),
+        if (!this.intersects(obj)) return new Extent();
+        return new Extent([Math.max(obj[0][0], this[0][0]),
                                   Math.max(obj[0][1], this[0][1])],
                                  [Math.min(obj[1][0], this[1][0]),
                                   Math.min(obj[1][1], this[1][1])]);
     },
 
     percentContainedIn: function(obj) {
-        if (!(obj instanceof iD.geo.Extent)) obj = new iD.geo.Extent(obj);
+        if (!(obj instanceof Extent)) obj = new Extent(obj);
         var a1 = this.intersection(obj).area(),
             a2 = this.area();
 
@@ -96,9 +97,9 @@ _.extend(iD.geo.Extent.prototype, {
     },
 
     padByMeters: function(meters) {
-        var dLat = iD.geo.metersToLat(meters),
-            dLon = iD.geo.metersToLon(meters, this.center()[1]);
-        return iD.geo.Extent(
+        var dLat = metersToLat(meters),
+            dLon = metersToLon(meters, this.center()[1]);
+        return Extent(
                 [this[0][0] - dLon, this[0][1] - dLat],
                 [this[1][0] + dLon, this[1][1] + dLat]);
     },
