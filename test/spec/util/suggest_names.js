@@ -1,4 +1,4 @@
-describe("iD.util.SuggestNames", function() {
+describe('iD.util.SuggestNames', function() {
     var suggestions = {
         'key': {
             'value': {
