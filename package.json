@@ -10,8 +10,7 @@
   "scripts": {
     "test": "npm run lint && phantomjs node_modules/mocha-phantomjs-core/mocha-phantomjs-core.js test/index.html dot && make && phantomjs node_modules/mocha-phantomjs-core/mocha-phantomjs-core.js test/index_packaged.html dot",
     "start": "http-server .",
-    "lint": "eslint js/id test/spec",
-    "lint:modules": "eslint modules"
+    "lint": "eslint js/id test/spec modules"
   },
   "repository": {
     "type": "git",
