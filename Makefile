@@ -46,23 +46,24 @@ MODULE_TARGETS = \
 	js/lib/id/actions.js \
 	js/lib/id/modes.js \
 	js/lib/id/presets.js \
-	js/lib/id/validations.js \
-	js/lib/id/util.js
+	js/lib/id/util.js \
+	js/lib/id/validations.js
 
 js/lib/id/actions.js: modules/
 	node_modules/.bin/rollup -f umd -n iD.actions modules/actions/index.js --no-strict > $@
 
+js/lib/id/modes.js: modules/
+	node_modules/.bin/rollup -f umd -n iD.modes modules/modes/index.js --no-strict > $@
+
 js/lib/id/presets.js: modules/
 	node_modules/.bin/rollup -f umd -n iD.presets modules/presets/index.js --no-strict > $@
-
-js/lib/id/validations.js: modules/
-	node_modules/.bin/rollup -f umd -n iD.validations modules/validations/index.js --no-strict > $@
 
 js/lib/id/util.js: modules/
 	node_modules/.bin/rollup -f umd -n iD.util modules/util/index.js --no-strict > $@
 
-js/lib/id/modes.js: modules/
-	node_modules/.bin/rollup -f umd -n iD.modes modules/modes/index.js --no-strict > $@
+js/lib/id/validations.js: modules/
+	node_modules/.bin/rollup -f umd -n iD.validations modules/validations/index.js --no-strict > $@
+
 
 dist/iD.js: \
 	js/lib/bootstrap-tooltip.js \

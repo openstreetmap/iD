@@ -3,17 +3,17 @@
 <head>
     <meta charset='utf-8'>
     <title>Mocha Tests</title>
-    <link rel="stylesheet" href="../node_modules/mocha/mocha.css">
-    <link rel="stylesheet" href="css/map.css">
+    <link rel='stylesheet' href='../node_modules/mocha/mocha.css'>
+    <link rel='stylesheet' href='css/map.css'>
 </head>
 <body>
-    <div id="mocha"></div>
+    <div id='mocha'></div>
 
-    <script src="../node_modules/mocha/mocha.js"></script>
-    <script src="../node_modules/chai/chai.js"></script>
-    <script src="../node_modules/sinon/pkg/sinon.js"></script>
-    <script src="../node_modules/sinon-chai/lib/sinon-chai.js"></script>
-    <script src="../node_modules/happen/src/happen.js"></script>
+    <script src='../node_modules/mocha/mocha.js'></script>
+    <script src='../node_modules/chai/chai.js'></script>
+    <script src='../node_modules/sinon/pkg/sinon.js'></script>
+    <script src='../node_modules/sinon-chai/lib/sinon-chai.js'></script>
+    <script src='../node_modules/happen/src/happen.js'></script>
 
     <script>
     if (typeof initMochaPhantomJS === 'function') {
@@ -42,15 +42,10 @@
 
     <script src='../js/id/id.js'></script>
     <script src='../js/lib/id/actions.js'></script>
-<<<<<<< 6c7786ab274f46879f15cbb3ba2016a540cf8df5
-    <script src='../js/lib/id/presets.js'></script>
-    <script src='../js/lib/id/validations.js'></script>
     <script src='../js/lib/id/modes.js'></script>
-
-    <script src='../js/id/util.js'></script>
-=======
+    <script src='../js/lib/id/presets.js'></script>
     <script src='../js/lib/id/util.js'></script>
->>>>>>> refactor "util" into ES6 modules for #3118
+    <script src='../js/lib/id/validations.js'></script>
 
     <script src='../js/id/services.js'></script>
     <script src='../js/id/services/mapillary.js'></script>
@@ -59,13 +54,11 @@
     <script src='../js/id/services/wikidata.js'></script>
     <script src='../js/id/services/wikipedia.js'></script>
 
-    <script src='../data/data_dev.js'></script>
-
-    <script src="../js/id/geo.js"></script>
-    <script src="../js/id/geo/extent.js"></script>
-    <script src="../js/id/geo/intersection.js"></script>
-    <script src="../js/id/geo/multipolygon.js"></script>
-    <script src="../js/id/geo/raw_mercator.js"></script>
+    <script src='../js/id/geo.js'></script>
+    <script src='../js/id/geo/extent.js'></script>
+    <script src='../js/id/geo/intersection.js'></script>
+    <script src='../js/id/geo/multipolygon.js'></script>
+    <script src='../js/id/geo/raw_mercator.js'></script>
 
     <script src='../js/id/renderer/background.js'></script>
     <script src='../js/id/renderer/background_source.js'></script>
@@ -73,25 +66,25 @@
     <script src='../js/id/renderer/map.js'></script>
     <script src='../js/id/renderer/tile_layer.js'></script>
 
-    <script src="../js/id/svg.js"></script>
-    <script src="../js/id/svg/areas.js"></script>
+    <script src='../js/id/svg.js'></script>
+    <script src='../js/id/svg/areas.js'></script>
     <script src='../js/id/svg/debug.js'></script>
-    <script src="../js/id/svg/defs.js"></script>
+    <script src='../js/id/svg/defs.js'></script>
     <script src='../js/id/svg/gpx.js'></script>
-    <script src="../js/id/svg/icon.js"></script>
-    <script src="../js/id/svg/labels.js"></script>
-    <script src="../js/id/svg/lines.js"></script>
+    <script src='../js/id/svg/icon.js'></script>
+    <script src='../js/id/svg/labels.js'></script>
+    <script src='../js/id/svg/lines.js'></script>
     <script src='../js/id/svg/mapillary_images.js'></script>
     <script src='../js/id/svg/mapillary_signs.js'></script>
-    <script src="../js/id/svg/midpoints.js"></script>
-    <script src="../js/id/svg/osm.js"></script>
-    <script src="../js/id/svg/points.js"></script>
-    <script src="../js/id/svg/layers.js"></script>
-    <script src="../js/id/svg/tag_classes.js"></script>
-    <script src="../js/id/svg/turns.js"></script>
-    <script src="../js/id/svg/vertices.js"></script>
+    <script src='../js/id/svg/midpoints.js'></script>
+    <script src='../js/id/svg/osm.js'></script>
+    <script src='../js/id/svg/points.js'></script>
+    <script src='../js/id/svg/layers.js'></script>
+    <script src='../js/id/svg/tag_classes.js'></script>
+    <script src='../js/id/svg/turns.js'></script>
+    <script src='../js/id/svg/vertices.js'></script>
 
-    <script src="../js/id/ui.js"></script>
+    <script src='../js/id/ui.js'></script>
     <script src='../js/id/ui/attribution.js'></script>
     <script src='../js/id/ui/radial_menu.js'></script>
     <script src='../js/id/ui/inspector.js'></script>
@@ -179,124 +172,109 @@
     <script src='../js/id/core/tree.js'></script>
     <script src='../js/id/core/tags.js'></script>
 
-<<<<<<< 6c7786ab274f46879f15cbb3ba2016a540cf8df5
-    <script src='../js/id/util/session_mutex.js'></script>
-    <script src='../js/id/util/suggest_names.js'></script>
-=======
-    <script src='../js/id/presets.js'></script>
-    <script src='../js/id/presets/preset.js'></script>
-    <script src='../js/id/presets/category.js'></script>
-    <script src='../js/id/presets/collection.js'></script>
-    <script src='../js/id/presets/field.js'></script>
-
-    <script src='../js/id/validations.js'></script>
-    <script src='../js/id/validations/deprecated_tag.js'></script>
-    <script src='../js/id/validations/many_deletions.js'></script>
-    <script src='../js/id/validations/missing_tag.js'></script>
-    <script src='../js/id/validations/tag_suggests_area.js'></script>
->>>>>>> refactor "util" into ES6 modules for #3118
-
     <script src='../js/lib/locale.js'></script>
 
-    <script src="spec/spec_helpers.js"></script>
+    <script src='../data/data_dev.js'></script>
+
+    <script src='spec/spec_helpers.js'></script>
 
     <!-- include spec files here... -->
-    <script src="spec/lib/d3.combobox.js"></script>
-    <script src="spec/lib/d3.keybinding.js"></script>
-    <script src="spec/lib/diff3.js"></script>
-    <script src="spec/lib/locale.js"></script>
+    <script src='spec/lib/d3.combobox.js'></script>
+    <script src='spec/lib/d3.keybinding.js'></script>
+    <script src='spec/lib/diff3.js'></script>
+    <script src='spec/lib/locale.js'></script>
 
-    <script src="spec/actions/add_member.js"></script>
-    <script src="spec/actions/add_midpoint.js"></script>
-    <script src="spec/actions/add_entity.js"></script>
-    <script src="spec/actions/change_member.js"></script>
-    <script src="spec/actions/change_preset.js"></script>
-    <script src="spec/actions/change_tags.js"></script>
+    <script src='spec/actions/add_member.js'></script>
+    <script src='spec/actions/add_midpoint.js'></script>
+    <script src='spec/actions/add_entity.js'></script>
+    <script src='spec/actions/change_member.js'></script>
+    <script src='spec/actions/change_preset.js'></script>
+    <script src='spec/actions/change_tags.js'></script>
     <script src='spec/actions/circularize.js'></script>
     <script src='spec/actions/orthogonalize.js'></script>
     <script src='spec/actions/straighten.js'></script>
     <script src='spec/actions/connect.js'></script>
-    <script src="spec/actions/copy_entities.js"></script>
+    <script src='spec/actions/copy_entities.js'></script>
     <script src='spec/actions/delete_member.js'></script>
-    <script src="spec/actions/delete_multiple.js"></script>
-    <script src="spec/actions/delete_node.js"></script>
-    <script src="spec/actions/delete_relation.js"></script>
-    <script src="spec/actions/delete_way.js"></script>
+    <script src='spec/actions/delete_multiple.js'></script>
+    <script src='spec/actions/delete_node.js'></script>
+    <script src='spec/actions/delete_relation.js'></script>
+    <script src='spec/actions/delete_way.js'></script>
     <script src='spec/actions/discard_tags.js'></script>
     <script src='spec/actions/disconnect.js'></script>
-    <script src="spec/actions/join.js"></script>
+    <script src='spec/actions/join.js'></script>
     <script src='spec/actions/merge.js'></script>
-    <script src="spec/actions/merge_polygon.js"></script>
-    <script src="spec/actions/merge_remote_changes.js"></script>
-    <script src="spec/actions/move_node.js"></script>
-    <script src="spec/actions/move.js"></script>
-    <script src="spec/actions/noop.js"></script>
-    <script src="spec/actions/restrict_turn.js"></script>
-    <script src="spec/actions/reverse.js"></script>
-    <script src="spec/actions/revert.js"></script>
-    <script src="spec/actions/split.js"></script>
-    <script src="spec/actions/unrestrict_turn.js"></script>
+    <script src='spec/actions/merge_polygon.js'></script>
+    <script src='spec/actions/merge_remote_changes.js'></script>
+    <script src='spec/actions/move_node.js'></script>
+    <script src='spec/actions/move.js'></script>
+    <script src='spec/actions/noop.js'></script>
+    <script src='spec/actions/restrict_turn.js'></script>
+    <script src='spec/actions/reverse.js'></script>
+    <script src='spec/actions/revert.js'></script>
+    <script src='spec/actions/split.js'></script>
+    <script src='spec/actions/unrestrict_turn.js'></script>
 
-    <script src="spec/geo.js"></script>
-    <script src="spec/geo/extent.js"></script>
-    <script src="spec/geo/intersection.js"></script>
-    <script src="spec/geo/multipolygon.js"></script>
+    <script src='spec/geo.js'></script>
+    <script src='spec/geo/extent.js'></script>
+    <script src='spec/geo/intersection.js'></script>
+    <script src='spec/geo/multipolygon.js'></script>
 
-    <script src="spec/core/connection.js"></script>
-    <script src="spec/core/graph.js"></script>
-    <script src="spec/core/entity.js"></script>
-    <script src="spec/core/node.js"></script>
-    <script src="spec/core/way.js"></script>
-    <script src="spec/core/relation.js"></script>
-    <script src="spec/core/history.js"></script>
-    <script src="spec/core/difference.js"></script>
-    <script src="spec/core/tree.js"></script>
+    <script src='spec/core/connection.js'></script>
+    <script src='spec/core/graph.js'></script>
+    <script src='spec/core/entity.js'></script>
+    <script src='spec/core/node.js'></script>
+    <script src='spec/core/way.js'></script>
+    <script src='spec/core/relation.js'></script>
+    <script src='spec/core/history.js'></script>
+    <script src='spec/core/difference.js'></script>
+    <script src='spec/core/tree.js'></script>
 
-    <script src="spec/renderer/tile_layer.js"></script>
-    <script src="spec/renderer/background_source.js"></script>
-    <script src="spec/renderer/features.js"></script>
-    <script src="spec/renderer/map.js"></script>
+    <script src='spec/renderer/tile_layer.js'></script>
+    <script src='spec/renderer/background_source.js'></script>
+    <script src='spec/renderer/features.js'></script>
+    <script src='spec/renderer/map.js'></script>
 
-    <script src="spec/svg.js"></script>
-    <script src="spec/svg/areas.js"></script>
-    <script src="spec/svg/icon.js"></script>
-    <script src="spec/svg/lines.js"></script>
-    <script src="spec/svg/midpoints.js"></script>
-    <script src="spec/svg/points.js"></script>
-    <script src="spec/svg/vertices.js"></script>
-    <script src="spec/svg/tag_classes.js"></script>
+    <script src='spec/svg.js'></script>
+    <script src='spec/svg/areas.js'></script>
+    <script src='spec/svg/icon.js'></script>
+    <script src='spec/svg/lines.js'></script>
+    <script src='spec/svg/midpoints.js'></script>
+    <script src='spec/svg/points.js'></script>
+    <script src='spec/svg/vertices.js'></script>
+    <script src='spec/svg/tag_classes.js'></script>
 
-    <script src="spec/ui/inspector.js"></script>
-    <script src="spec/ui/raw_tag_editor.js"></script>
-    <script src="spec/ui/modal.js"></script>
-    <script src="spec/ui/flash.js"></script>
-    <script src="spec/ui/confirm.js"></script>
-    <script src="spec/ui/cmd.js"></script>
+    <script src='spec/ui/inspector.js'></script>
+    <script src='spec/ui/raw_tag_editor.js'></script>
+    <script src='spec/ui/modal.js'></script>
+    <script src='spec/ui/flash.js'></script>
+    <script src='spec/ui/confirm.js'></script>
+    <script src='spec/ui/cmd.js'></script>
 
-    <script src="spec/ui/preset/access.js"></script>
-    <script src="spec/ui/preset/localized.js"></script>
-    <script src="spec/ui/preset/wikipedia.js"></script>
+    <script src='spec/ui/preset/access.js'></script>
+    <script src='spec/ui/preset/localized.js'></script>
+    <script src='spec/ui/preset/wikipedia.js'></script>
 
-    <script src="spec/services/mapillary.js"></script>
-    <script src="spec/services/nominatim.js"></script>
-    <script src="spec/services/taginfo.js"></script>
+    <script src='spec/services/mapillary.js'></script>
+    <script src='spec/services/nominatim.js'></script>
+    <script src='spec/services/taginfo.js'></script>
 
-    <script src="spec/util.js"></script>
+    <script src='spec/util.js'></script>
     <script src='spec/util/session_mutex.js'></script>
     <script src='spec/util/suggest_names.js'></script>
 
-    <script src="spec/behavior/hash.js"></script>
-    <script src="spec/behavior/hover.js"></script>
-    <script src="spec/behavior/select.js"></script>
-    <script src="spec/behavior/lasso.js"></script>
+    <script src='spec/behavior/hash.js'></script>
+    <script src='spec/behavior/hover.js'></script>
+    <script src='spec/behavior/select.js'></script>
+    <script src='spec/behavior/lasso.js'></script>
 
-    <script src="spec/modes/add_point.js"></script>
+    <script src='spec/modes/add_point.js'></script>
 
-    <script src="spec/presets.js"></script>
-    <script src="spec/presets/preset.js"></script>
-    <script src="spec/presets/collection.js"></script>
-    <script src="spec/presets/category.js"></script>
-    <script src="spec/id.js"></script>
+    <script src='spec/presets.js'></script>
+    <script src='spec/presets/preset.js'></script>
+    <script src='spec/presets/collection.js'></script>
+    <script src='spec/presets/category.js'></script>
+    <script src='spec/id.js'></script>
 
     <script>
         iD.data.load('../', function() {
