@@ -1,4 +1,4 @@
-iD.presets.Field = function(id, field) {
+export function Field(id, field) {
     field = _.clone(field);
 
     field.id = id;
@@ -21,4 +21,4 @@ iD.presets.Field = function(id, field) {
     };
 
     return field;
-};
+}
