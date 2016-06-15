@@ -1,6 +1,6 @@
 // For fixing up rendering of multipolygons with tags on the outer member.
 // https://github.com/openstreetmap/iD/issues/613
-iD.geo.isSimpleMultipolygonOuterMember = function(entity, graph) {
+export function isSimpleMultipolygonOuterMember(entity, graph) {
     if (entity.type !== 'way')
         return false;
 
@@ -22,9 +22,9 @@ iD.geo.isSimpleMultipolygonOuterMember = function(entity, graph) {
     }
 
     return parent;
-};
+}
 
-iD.geo.simpleMultipolygonOuterMember = function(entity, graph) {
+export function simpleMultipolygonOuterMember(entity, graph) {
     if (entity.type !== 'way')
         return false;
 
@@ -47,7 +47,7 @@ iD.geo.simpleMultipolygonOuterMember = function(entity, graph) {
     }
 
     return outerMember && graph.hasEntity(outerMember.id);
-};
+}
 
 // Join `array` into sequences of connecting ways.
 //
@@ -69,7 +69,7 @@ iD.geo.simpleMultipolygonOuterMember = function(entity, graph) {
 // Incomplete members (those for which `graph.hasEntity(element.id)` returns
 // false) and non-way members are ignored.
 //
-iD.geo.joinWays = function(array, graph) {
+export function joinWays(array, graph) {
     var joined = [], member, current, nodes, first, last, i, how, what;
 
     array = array.filter(function(member) {
@@ -132,4 +132,4 @@ iD.geo.joinWays = function(array, graph) {
     }
 
     return joined;
-};
+}

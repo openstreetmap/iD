@@ -1,10 +1,12 @@
-iD.geo.Turn = function(turn) {
-    if (!(this instanceof iD.geo.Turn))
-        return new iD.geo.Turn(turn);
-    _.extend(this, turn);
-};
+import { angle as getAngle } from './index';
 
-iD.geo.Intersection = function(graph, vertexId) {
+export function Turn(turn) {
+    if (!(this instanceof Turn))
+        return new Turn(turn);
+    _.extend(this, turn);
+}
+
+export function Intersection(graph, vertexId) {
     var vertex = graph.entity(vertexId),
         parentWays = graph.parentWays(vertex),
         coincident = [],
@@ -106,7 +108,7 @@ iD.geo.Intersection = function(graph, vertexId) {
                 }
             });
 
-            return iD.geo.Turn(turn);
+            return Turn(turn);
         }
 
         var from = {
@@ -160,10 +162,10 @@ iD.geo.Intersection = function(graph, vertexId) {
     };
 
     return intersection;
-};
+}
 
 
-iD.geo.inferRestriction = function(graph, from, via, to, projection) {
+export function inferRestriction(graph, from, via, to, projection) {
     var fromWay = graph.entity(from.way),
         fromNode = graph.entity(from.node),
         toWay = graph.entity(to.way),
@@ -173,8 +175,8 @@ iD.geo.inferRestriction = function(graph, from, via, to, projection) {
             (fromWay.tags.oneway === '-1' && fromWay.first() === via.node),
         toOneWay = (toWay.tags.oneway === 'yes' && toWay.first() === via.node) ||
             (toWay.tags.oneway === '-1' && toWay.last() === via.node),
-        angle = iD.geo.angle(viaNode, fromNode, projection) -
-                iD.geo.angle(viaNode, toNode, projection);
+        angle = getAngle(viaNode, fromNode, projection) -
+                getAngle(viaNode, toNode, projection);
 
     angle = angle * 180 / Math.PI;
 
@@ -191,4 +193,4 @@ iD.geo.inferRestriction = function(graph, from, via, to, projection) {
         return 'no_left_turn';
 
     return 'no_straight_on';
-};
+}

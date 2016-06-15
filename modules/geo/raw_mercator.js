@@ -4,7 +4,7 @@
     * Spherical rotation
     * Resampling
 */
-iD.geo.RawMercator = function () {
+export function RawMercator() {
     var project = d3.geo.mercator.raw,
         k = 512 / Math.PI, // scale
         x = 0, y = 0, // translate
@@ -47,4 +47,4 @@ iD.geo.RawMercator = function () {
     }).stream;
 
     return projection;
-};
+}
