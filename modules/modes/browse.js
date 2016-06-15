@@ -1,4 +1,4 @@
-iD.modes.Browse = function(context) {
+export function Browse(context) {
     var mode = {
         button: 'browse',
         id: 'browse',
@@ -49,4 +49,4 @@ iD.modes.Browse = function(context) {
     };
 
     return mode;
-};
+}

@@ -1,4 +1,4 @@
-iD.modes.DrawLine = function(context, wayId, baseGraph, affix) {
+export function DrawLine(context, wayId, baseGraph, affix) {
     var mode = {
         button: 'line',
         id: 'draw-line'
@@ -36,4 +36,4 @@ iD.modes.DrawLine = function(context, wayId, baseGraph, affix) {
     };
 
     return mode;
-};
+}

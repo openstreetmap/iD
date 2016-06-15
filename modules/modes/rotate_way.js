@@ -1,4 +1,4 @@
-iD.modes.RotateWay = function(context, wayId) {
+export function RotateWay(context, wayId) {
     var mode = {
         id: 'rotate-way',
         button: 'browse'
@@ -80,4 +80,4 @@ iD.modes.RotateWay = function(context, wayId) {
     };
 
     return mode;
-};
+}

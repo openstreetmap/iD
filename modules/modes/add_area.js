@@ -1,4 +1,4 @@
-iD.modes.AddArea = function(context) {
+export function AddArea(context) {
     var mode = {
         id: 'add-area',
         button: 'area',
@@ -64,4 +64,4 @@ iD.modes.AddArea = function(context) {
     };
 
     return mode;
-};
+}

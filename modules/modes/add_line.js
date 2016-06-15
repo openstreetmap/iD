@@ -1,4 +1,4 @@
-iD.modes.AddLine = function(context) {
+export function AddLine(context) {
     var mode = {
         id: 'add-line',
         button: 'line',
@@ -60,4 +60,4 @@ iD.modes.AddLine = function(context) {
     };
 
     return mode;
-};
+}

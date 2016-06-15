@@ -1,4 +1,4 @@
-iD.modes.Move = function(context, entityIDs, baseGraph) {
+export function Move(context, entityIDs, baseGraph) {
     var mode = {
         id: 'move',
         button: 'browse'
@@ -119,4 +119,4 @@ iD.modes.Move = function(context, entityIDs, baseGraph) {
     };
 
     return mode;
-};
+}

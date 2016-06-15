@@ -1,4 +1,4 @@
-iD.modes.Save = function(context) {
+export function Save(context) {
     var ui = iD.ui.Commit(context)
             .on('cancel', cancel)
             .on('save', save);
@@ -327,4 +327,4 @@ iD.modes.Save = function(context) {
     };
 
     return mode;
-};
+}

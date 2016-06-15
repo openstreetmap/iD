@@ -1,4 +1,4 @@
-iD.modes.DragNode = function(context) {
+export function DragNode(context) {
     var mode = {
         id: 'drag-node',
         button: 'browse'
@@ -212,4 +212,4 @@ iD.modes.DragNode = function(context) {
     mode.behavior = behavior;
 
     return mode;
-};
+}

@@ -1,4 +1,4 @@
-iD.modes.AddPoint = function(context) {
+export function AddPoint(context) {
     var mode = {
         id: 'add-point',
         button: 'point',
@@ -49,4 +49,4 @@ iD.modes.AddPoint = function(context) {
     };
 
     return mode;
-};
+}

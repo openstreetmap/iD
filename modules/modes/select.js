@@ -1,4 +1,4 @@
-iD.modes.Select = function(context, selectedIDs) {
+export function Select(context, selectedIDs) {
     var mode = {
         id: 'select',
         button: 'browse'
@@ -243,4 +243,4 @@ iD.modes.Select = function(context, selectedIDs) {
     };
 
     return mode;
-};
+}
