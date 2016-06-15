@@ -44,13 +44,17 @@ $(BUILDJS_TARGETS): $(BUILDJS_SOURCES) build.js
 
 MODULE_TARGETS = \
 	js/lib/id/actions.js \
-	js/lib/id/validations.js
+	js/lib/id/validations.js \
+	js/lib/id/modes.js
 
 js/lib/id/actions.js: modules/
 	node_modules/.bin/rollup -f umd -n iD.actions modules/actions/index.js --no-strict > $@
 
 js/lib/id/validations.js: modules/
 	node_modules/.bin/rollup -f umd -n iD.validations modules/validations/index.js --no-strict > $@
+
+js/lib/id/modes.js: modules/
+	node_modules/.bin/rollup -f umd -n iD.modes modules/modes/index.js --no-strict > $@
 
 dist/iD.js: \
 	js/lib/bootstrap-tooltip.js \
@@ -103,18 +107,6 @@ dist/iD.js: \
 	js/id/behavior/paste.js \
 	js/id/behavior/select.js \
 	js/id/behavior/tail.js \
-	js/id/modes.js \
-	js/id/modes/add_area.js \
-	js/id/modes/add_line.js \
-	js/id/modes/add_point.js \
-	js/id/modes/browse.js \
-	js/id/modes/drag_node.js \
-	js/id/modes/draw_area.js \
-	js/id/modes/draw_line.js \
-	js/id/modes/move.js \
-	js/id/modes/rotate_way.js \
-	js/id/modes/save.js \
-	js/id/modes/select.js \
 	js/id/operations.js \
 	js/id/operations/circularize.js \
 	js/id/operations/continue.js \

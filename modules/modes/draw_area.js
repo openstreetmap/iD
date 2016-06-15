@@ -1,4 +1,4 @@
-iD.modes.DrawArea = function(context, wayId, baseGraph) {
+export function DrawArea(context, wayId, baseGraph) {
     var mode = {
         button: 'area',
         id: 'draw-area'
@@ -36,4 +36,4 @@ iD.modes.DrawArea = function(context, wayId, baseGraph) {
     };
 
     return mode;
-};
+}
