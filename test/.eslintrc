@@ -5,7 +5,11 @@
         "expect": true,
         "specify": true,
         "beforeEach": true,
-        "afterEach": true
+        "afterEach": true,
+        "mocha": true,
+        "sinon": true,
+        "happen": true,
+        "before": true,
     },
     "rules": {
         "no-unused-expressions": 0

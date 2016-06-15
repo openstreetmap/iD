@@ -1,4 +1,4 @@
-describe("iD.svg.Midpoints", function () {
+describe('iD.svg.Midpoints', function () {
     var surface,
         projection = Object,
         filter = d3.functor(true),
@@ -10,7 +10,7 @@ describe("iD.svg.Midpoints", function () {
             .call(iD.svg.Layers(projection, context));
     });
 
-    it("creates midpoint on segment completely within the extent", function () {
+    it('creates midpoint on segment completely within the extent', function () {
         var a = iD.Node({loc: [0, 0]}),
             b = iD.Node({loc: [50, 0]}),
             line = iD.Way({nodes: [a.id, b.id]}),
@@ -24,7 +24,7 @@ describe("iD.svg.Midpoints", function () {
         expect(surface.select('.midpoint').datum().loc).to.eql([25, 0]);
     });
 
-    it("doesn't create midpoint on segment with pixel length less than 40", function () {
+    it('doesn\'t create midpoint on segment with pixel length less than 40', function () {
         var a = iD.Node({loc: [0, 0]}),
             b = iD.Node({loc: [39, 0]}),
             line = iD.Way({nodes: [a.id, b.id]}),
@@ -37,7 +37,7 @@ describe("iD.svg.Midpoints", function () {
         expect(surface.selectAll('.midpoint')[0]).to.have.length(0);
     });
 
-    it("doesn't create midpoint on segment completely outside of the extent", function () {
+    it('doesn\'t create midpoint on segment completely outside of the extent', function () {
         var a = iD.Node({loc: [-100, 0]}),
             b = iD.Node({loc: [-50, 0]}),
             line = iD.Way({nodes: [a.id, b.id]}),
@@ -50,7 +50,7 @@ describe("iD.svg.Midpoints", function () {
         expect(surface.selectAll('.midpoint')[0]).to.have.length(0);
     });
 
-    it("creates midpoint on extent edge for segment partially outside of the extent", function () {
+    it('creates midpoint on extent edge for segment partially outside of the extent', function () {
         var a = iD.Node({loc: [50, 0]}),
             b = iD.Node({loc: [500, 0]}),
             line = iD.Way({nodes: [a.id, b.id]}),
@@ -64,7 +64,7 @@ describe("iD.svg.Midpoints", function () {
         expect(surface.select('.midpoint').datum().loc).to.eql([100, 0]);
     });
 
-    it("doesn't create midpoint on extent edge for segment with pixel length less than 20", function () {
+    it('doesn\'t create midpoint on extent edge for segment with pixel length less than 20', function () {
         var a = iD.Node({loc: [81, 0]}),
             b = iD.Node({loc: [500, 0]}),
             line = iD.Way({nodes: [a.id, b.id]}),

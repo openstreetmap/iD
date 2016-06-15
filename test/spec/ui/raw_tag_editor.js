@@ -14,7 +14,7 @@ describe('iD.ui.RawTagEditor', function() {
     }
 
     beforeEach(function () {
-        entity = iD.Node({id: "n12345"});
+        entity = iD.Node({id: 'n12345'});
         context = iD();
         context.history().merge([entity]);
         render({highway: 'residential'});
@@ -24,54 +24,54 @@ describe('iD.ui.RawTagEditor', function() {
         element.remove();
     });
 
-    it("creates input elements for each key-value pair", function () {
-        expect(element.selectAll("input[value=highway]")).not.to.be.empty;
-        expect(element.selectAll("input[value=residential]")).not.to.be.empty;
+    it('creates input elements for each key-value pair', function () {
+        expect(element.selectAll('input[value=highway]')).not.to.be.empty;
+        expect(element.selectAll('input[value=residential]')).not.to.be.empty;
     });
 
-    it("creates a pair of empty input elements if the entity has no tags", function () {
+    it('creates a pair of empty input elements if the entity has no tags', function () {
         element.remove();
         render({});
-        expect(element.select('.tag-list').selectAll("input.value").property('value')).to.be.empty;
-        expect(element.select('.tag-list').selectAll("input.key").property('value')).to.be.empty;
+        expect(element.select('.tag-list').selectAll('input.value').property('value')).to.be.empty;
+        expect(element.select('.tag-list').selectAll('input.key').property('value')).to.be.empty;
     });
 
-    it("adds tags when clicking the add button", function (done) {
-        element.selectAll("button.add-tag").trigger('click');
+    it('adds tags when clicking the add button', function (done) {
+        element.selectAll('button.add-tag').trigger('click');
         setTimeout(function() {
-            expect(element.select('.tag-list').selectAll("input")[0][2].value).to.be.empty;
-            expect(element.select('.tag-list').selectAll("input")[0][3].value).to.be.empty;
+            expect(element.select('.tag-list').selectAll('input')[0][2].value).to.be.empty;
+            expect(element.select('.tag-list').selectAll('input')[0][3].value).to.be.empty;
             done();
         }, 20);
     });
 
-    it("removes tags when clicking the remove button", function (done) {
+    it('removes tags when clicking the remove button', function (done) {
         taglist.on('change', function(tags) {
             expect(tags).to.eql({highway: undefined});
             done();
         });
-        element.selectAll("button.remove").trigger('click');
+        element.selectAll('button.remove').trigger('click');
     });
 
-    it("adds tags when pressing the TAB key on last input.value", function (done) {
+    it('adds tags when pressing the TAB key on last input.value', function (done) {
         expect(element.selectAll('.tag-list li')[0].length).to.eql(1);
         var input = d3.select('.tag-list li:last-child input.value')[0][0];
         happen.keydown(d3.select(input).node(), {keyCode: 9});
         setTimeout(function() {
             expect(element.selectAll('.tag-list li')[0].length).to.eql(2);
-            expect(element.select('.tag-list').selectAll("input")[0][2].value).to.be.empty;
-            expect(element.select('.tag-list').selectAll("input")[0][3].value).to.be.empty;
+            expect(element.select('.tag-list').selectAll('input')[0][2].value).to.be.empty;
+            expect(element.select('.tag-list').selectAll('input')[0][3].value).to.be.empty;
             done();
         }, 20);
     });
 
-    it("does not add a tag when pressing TAB while shift is pressed", function (done) {
+    it('does not add a tag when pressing TAB while shift is pressed', function (done) {
         expect(element.selectAll('.tag-list li')[0].length).to.eql(1);
         var input = d3.select('.tag-list li:last-child input.value')[0][0];
         happen.keydown(d3.select(input).node(), {keyCode: 9, shiftKey: true});
         setTimeout(function() {
             expect(element.selectAll('.tag-list li')[0].length).to.eql(1);
             done();
-        }, 20)
+        }, 20);
     });
 });

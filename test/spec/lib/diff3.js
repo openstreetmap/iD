@@ -1,4 +1,4 @@
-describe("diff3", function() {
+describe('diff3', function() {
     function split(s) {
         return s ? s.split(/ /) : [];
     }

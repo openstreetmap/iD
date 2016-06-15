@@ -1,4 +1,4 @@
-describe("iD.ui.flash", function () {
+describe('iD.ui.flash', function () {
     var clock;
 
     var elem;

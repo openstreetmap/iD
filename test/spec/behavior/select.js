@@ -1,4 +1,4 @@
-describe("iD.behavior.Select", function() {
+describe('iD.behavior.Select', function() {
     var a, b, context, behavior, container;
 
     beforeEach(function() {
@@ -32,36 +32,36 @@ describe("iD.behavior.Select", function() {
         container.remove();
     });
 
-    specify("click on entity selects the entity", function() {
+    specify('click on entity selects the entity', function() {
         happen.click(context.surface().selectAll('.' + a.id).node());
         expect(context.selectedIDs()).to.eql([a.id]);
     });
 
-    specify("click on empty space clears the selection", function() {
+    specify('click on empty space clears the selection', function() {
         context.enter(iD.modes.Select(context, [a.id]));
         happen.click(context.surface().node());
         expect(context.mode().id).to.eql('browse');
     });
 
-    specify("shift-click on unselected entity adds it to the selection", function() {
+    specify('shift-click on unselected entity adds it to the selection', function() {
         context.enter(iD.modes.Select(context, [a.id]));
         happen.click(context.surface().selectAll('.' + b.id).node(), {shiftKey: true});
         expect(context.selectedIDs()).to.eql([a.id, b.id]);
     });
 
-    specify("shift-click on selected entity removes it from the selection", function() {
+    specify('shift-click on selected entity removes it from the selection', function() {
         context.enter(iD.modes.Select(context, [a.id, b.id]));
         happen.click(context.surface().selectAll('.' + b.id).node(), {shiftKey: true});
         expect(context.selectedIDs()).to.eql([a.id]);
     });
 
-    specify("shift-click on last selected entity clears the selection", function() {
+    specify('shift-click on last selected entity clears the selection', function() {
         context.enter(iD.modes.Select(context, [a.id]));
         happen.click(context.surface().selectAll('.' + a.id).node(), {shiftKey: true});
         expect(context.mode().id).to.eql('browse');
     });
 
-    specify("shift-click on empty space leaves the selection unchanged", function() {
+    specify('shift-click on empty space leaves the selection unchanged', function() {
         context.enter(iD.modes.Select(context, [a.id]));
         happen.click(context.surface().node(), {shiftKey: true});
         expect(context.selectedIDs()).to.eql([a.id]);

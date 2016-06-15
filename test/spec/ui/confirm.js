@@ -1,5 +1,5 @@
-describe("iD.ui.confirm", function () {
-    
+describe('iD.ui.confirm', function () {
+
     var elem;
     beforeEach(function() { elem = d3.select('body').append('div'); });
     afterEach(function() { elem.remove(); });

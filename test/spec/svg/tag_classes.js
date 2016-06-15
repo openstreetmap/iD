@@ -1,4 +1,4 @@
-describe("iD.svg.TagClasses", function () {
+describe('iD.svg.TagClasses', function () {
     var selection;
 
     beforeEach(function () {
