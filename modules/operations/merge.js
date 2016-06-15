@@ -1,4 +1,4 @@
-iD.operations.Merge = function(selectedIDs, context) {
+export function Merge(selectedIDs, context) {
     var join = iD.actions.Join(selectedIDs),
         merge = iD.actions.Merge(selectedIDs),
         mergePolygon = iD.actions.MergePolygon(selectedIDs);
@@ -52,4 +52,4 @@ iD.operations.Merge = function(selectedIDs, context) {
     operation.title = t('operations.merge.title');
 
     return operation;
-};
+}

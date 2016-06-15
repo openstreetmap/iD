@@ -1,4 +1,4 @@
-iD.operations.Delete = function(selectedIDs, context) {
+export function Delete(selectedIDs, context) {
     var action = iD.actions.DeleteMultiple(selectedIDs);
 
     var operation = function() {
@@ -71,4 +71,4 @@ iD.operations.Delete = function(selectedIDs, context) {
     operation.title = t('operations.delete.title');
 
     return operation;
-};
+}

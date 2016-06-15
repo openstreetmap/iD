@@ -1,4 +1,4 @@
-iD.operations.Move = function(selectedIDs, context) {
+export function Move(selectedIDs, context) {
     var extent = selectedIDs.reduce(function(extent, id) {
             return extent.extend(context.entity(id).extent(context.graph()));
         }, iD.geo.Extent());
@@ -34,4 +34,4 @@ iD.operations.Move = function(selectedIDs, context) {
     operation.title = t('operations.move.title');
 
     return operation;
-};
+}

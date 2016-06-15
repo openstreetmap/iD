@@ -1,4 +1,4 @@
-iD.operations.Continue = function(selectedIDs, context) {
+export function Continue(selectedIDs, context) {
     var graph = context.graph(),
         entities = selectedIDs.map(function(id) { return graph.entity(id); }),
         geometries = _.extend({line: [], vertex: []},
@@ -47,4 +47,4 @@ iD.operations.Continue = function(selectedIDs, context) {
     operation.title = t('operations.continue.title');
 
     return operation;
-};
+}

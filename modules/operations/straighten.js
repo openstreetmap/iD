@@ -1,4 +1,4 @@
-iD.operations.Straighten = function(selectedIDs, context) {
+export function Straighten(selectedIDs, context) {
     var entityId = selectedIDs[0],
         action = iD.actions.Straighten(entityId, context.projection);
 
@@ -35,4 +35,4 @@ iD.operations.Straighten = function(selectedIDs, context) {
     operation.title = t('operations.straighten.title');
 
     return operation;
-};
+}

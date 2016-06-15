@@ -1,4 +1,4 @@
-iD.operations.Rotate = function(selectedIDs, context) {
+export function Rotate(selectedIDs, context) {
     var entityId = selectedIDs[0],
         entity = context.entity(entityId),
         extent = entity.extent(context.graph()),
@@ -41,4 +41,4 @@ iD.operations.Rotate = function(selectedIDs, context) {
     operation.title = t('operations.rotate.title');
 
     return operation;
-};
+}

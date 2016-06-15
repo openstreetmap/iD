@@ -1,4 +1,4 @@
-iD.operations.Reverse = function(selectedIDs, context) {
+export function Reverse(selectedIDs, context) {
     var entityId = selectedIDs[0];
 
     var operation = function() {
@@ -25,4 +25,4 @@ iD.operations.Reverse = function(selectedIDs, context) {
     operation.title = t('operations.reverse.title');
 
     return operation;
-};
+}
