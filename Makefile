@@ -44,30 +44,43 @@ $(BUILDJS_TARGETS): $(BUILDJS_SOURCES) build.js
 
 MODULE_TARGETS = \
 	js/lib/id/actions.js \
+	js/lib/id/geo.js \
 	js/lib/id/modes.js \
 	js/lib/id/presets.js \
+	js/lib/id/services.js \
 	js/lib/id/util.js \
-	js/lib/id/validations.js \
 	js/lib/id/geo.js \
-	js/lib/id/operations.js
+	js/lib/id/operations.js \
+	js/lib/id/validations.js
 
-js/lib/id/actions.js: modules/
-	node_modules/.bin/rollup -f umd -n iD.actions modules/actions/index.js --no-strict > $@
+js/lib/id/actions.js: $(shell find modules/actions -type f)
+	@rm -f $@
+	node_modules/.bin/rollup -f umd -n iD.actions modules/actions/index.js --no-strict -o $@
 
-js/lib/id/modes.js: modules/
-	node_modules/.bin/rollup -f umd -n iD.modes modules/modes/index.js --no-strict > $@
+js/lib/id/geo.js: $(shell find modules/geo -type f)
+	@rm -f $@
+	node_modules/.bin/rollup -f umd -n iD.geo modules/geo/index.js --no-strict -o $@
 
-js/lib/id/presets.js: modules/
-	node_modules/.bin/rollup -f umd -n iD.presets modules/presets/index.js --no-strict > $@
+js/lib/id/modes.js: $(shell find modules/modes -type f)
+	@rm -f $@
+	node_modules/.bin/rollup -f umd -n iD.modes modules/modes/index.js --no-strict -o $@
 
-js/lib/id/util.js: modules/
-	node_modules/.bin/rollup -f umd -n iD.util modules/util/index.js --no-strict > $@
+js/lib/id/presets.js: $(shell find modules/presets -type f)
+	@rm -f $@
+	node_modules/.bin/rollup -f umd -n iD.presets modules/presets/index.js --no-strict -o $@
 
-js/lib/id/validations.js: modules/
-	node_modules/.bin/rollup -f umd -n iD.validations modules/validations/index.js --no-strict > $@
+js/lib/id/services.js: $(shell find modules/services -type f)
+	@rm -f $@
+	node_modules/.bin/rollup -f umd -n iD.services modules/services/index.js --no-strict -o $@
 
-js/lib/id/geo.js: modules/
-	node_modules/.bin/rollup -f umd -n iD.geo modules/geo/index.js --no-strict > $@
+js/lib/id/util.js: $(shell find modules/util -type f)
+	@rm -f $@
+	node_modules/.bin/rollup -f umd -n iD.util modules/util/index.js --no-strict -o $@
+
+js/lib/id/validations.js: $(shell find modules/validations -type f)
+	@rm -f $@
+	node_modules/.bin/rollup -f umd -n iD.validations modules/validations/index.js --no-strict -o $@
+
 
 js/lib/id/operations.js: modules/
 	node_modules/.bin/rollup -f umd -n iD.operations modules/operations/index.js --no-strict > $@
@@ -95,12 +108,6 @@ dist/iD.js: \
 	js/id/start.js \
 	js/id/id.js \
 	$(MODULE_TARGETS) \
-	js/id/services.js \
-	js/id/services/mapillary.js \
-	js/id/services/nominatim.js \
-	js/id/services/taginfo.js \
-	js/id/services/wikidata.js \
-	js/id/services/wikipedia.js \
 	js/id/behavior.js \
 	js/id/behavior/add_way.js \
 	js/id/behavior/breathe.js \

@@ -1,11 +1,11 @@
-iD.services.nominatim  = function() {
-    var nominatim = {},
-        endpoint = 'https://nominatim.openstreetmap.org/reverse?';
+const endpoint = 'https://nominatim.openstreetmap.org/reverse?';
+var cache;
 
+export function nominatim() {
+    var nominatim = {};
 
     nominatim.countryCode = function(location, callback) {
-        var cache = iD.services.nominatim.cache,
-            countryCodes = cache.search([location[0], location[1], location[0], location[1]]);
+        var countryCodes = cache.search([location[0], location[1], location[0], location[1]]);
 
         if (countryCodes.length > 0)
             return callback(null, countryCodes[0][4]);
@@ -31,14 +31,14 @@ iD.services.nominatim  = function() {
     };
 
     nominatim.reset = function() {
-        iD.services.nominatim.cache = rbush();
-        return nominatim;
+        cache = rbush();
+        return this;
     };
 
-
-    if (!iD.services.nominatim.cache) {
+    if (!cache) {
         nominatim.reset();
     }
 
     return nominatim;
-};
+}
+
