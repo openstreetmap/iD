@@ -1,7 +1,7 @@
-const endpoint = 'https://en.wikipedia.org/w/api.php?';
-
 export function wikipedia() {
-    var wikipedia = {};
+    var wikipedia = {},
+        endpoint = 'https://en.wikipedia.org/w/api.php?';
+
 
     wikipedia.search = function(lang, query, callback) {
         lang = lang || 'en';

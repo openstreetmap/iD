@@ -4,15 +4,15 @@
     (factory((global.iD = global.iD || {}, global.iD.services = global.iD.services || {})));
 }(this, function (exports) { 'use strict';
 
-    const apibase = 'https://a.mapillary.com/v2/';
-    const viewercss = 'https://npmcdn.com/mapillary-js@1.3.0/dist/mapillary-js.min.css';
-    const viewerjs = 'https://npmcdn.com/mapillary-js@1.3.0/dist/mapillary-js.min.js';
-    const clientId = 'NzNRM2otQkR2SHJzaXJmNmdQWVQ0dzo1ZWYyMmYwNjdmNDdlNmVi';
-    const maxResults = 1000;
-    const maxPages = 10;
-    const tileZoom = 14;
     function mapillary() {
         var mapillary = {},
+            apibase = 'https://a.mapillary.com/v2/',
+            viewercss = 'https://npmcdn.com/mapillary-js@1.3.0/dist/mapillary-js.min.css',
+            viewerjs = 'https://npmcdn.com/mapillary-js@1.3.0/dist/mapillary-js.min.js',
+            clientId = 'NzNRM2otQkR2SHJzaXJmNmdQWVQ0dzo1ZWYyMmYwNjdmNDdlNmVi',
+            maxResults = 1000,
+            maxPages = 10,
+            tileZoom = 14,
             dispatch = d3.dispatch('loadedImages', 'loadedSigns');
 
 
@@ -401,14 +401,14 @@
         return d3.rebind(mapillary, dispatch, 'on');
     }
 
-    const endpoint = 'https://nominatim.openstreetmap.org/reverse?';
-    var cache;
-
     function nominatim() {
-        var nominatim = {};
+        var nominatim = {},
+            endpoint = 'https://nominatim.openstreetmap.org/reverse?';
+
 
         nominatim.countryCode = function(location, callback) {
-            var countryCodes = cache.search([location[0], location[1], location[0], location[1]]);
+            var cache = iD.services.nominatim.cache,
+                countryCodes = cache.search([location[0], location[1], location[0], location[1]]);
 
             if (countryCodes.length > 0)
                 return callback(null, countryCodes[0][4]);
@@ -434,11 +434,11 @@
         };
 
         nominatim.reset = function() {
-            cache = rbush();
+            iD.services.nominatim.cache = rbush();
             return this;
         };
 
-        if (!cache) {
+        if (!iD.services.nominatim.cache) {
             nominatim.reset();
         }
 
@@ -622,16 +622,16 @@
         return taginfo;
     }
 
-    const endpoint$1 = 'https://www.wikidata.org/w/api.php?';
-
     function wikidata() {
-        var wikidata = {};
+        var wikidata = {},
+            endpoint = 'https://www.wikidata.org/w/api.php?';
+
 
         // Given a Wikipedia language and article title, return an array of
         // corresponding Wikidata entities.
         wikidata.itemsByTitle = function(lang, title, callback) {
             lang = lang || 'en';
-            d3.jsonp(endpoint$1 + iD.util.qsString({
+            d3.jsonp(endpoint + iD.util.qsString({
                 action: 'wbgetentities',
                 format: 'json',
                 sites: lang.replace(/-/g, '_') + 'wiki',
@@ -646,14 +646,14 @@
         return wikidata;
     }
 
-    const endpoint$2 = 'https://en.wikipedia.org/w/api.php?';
-
     function wikipedia() {
-        var wikipedia = {};
+        var wikipedia = {},
+            endpoint = 'https://en.wikipedia.org/w/api.php?';
+
 
         wikipedia.search = function(lang, query, callback) {
             lang = lang || 'en';
-            d3.jsonp(endpoint$2.replace('en', lang) +
+            d3.jsonp(endpoint.replace('en', lang) +
                 iD.util.qsString({
                     action: 'query',
                     list: 'search',
@@ -672,7 +672,7 @@
 
         wikipedia.suggestions = function(lang, query, callback) {
             lang = lang || 'en';
-            d3.jsonp(endpoint$2.replace('en', lang) +
+            d3.jsonp(endpoint.replace('en', lang) +
                 iD.util.qsString({
                     action: 'opensearch',
                     namespace: 0,
@@ -686,7 +686,7 @@
         };
 
         wikipedia.translations = function(lang, title, callback) {
-            d3.jsonp(endpoint$2.replace('en', lang) +
+            d3.jsonp(endpoint.replace('en', lang) +
                 iD.util.qsString({
                     action: 'query',
                     prop: 'langlinks',

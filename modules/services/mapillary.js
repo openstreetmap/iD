@@ -1,13 +1,12 @@
-const apibase = 'https://a.mapillary.com/v2/',
-    viewercss = 'https://npmcdn.com/mapillary-js@1.3.0/dist/mapillary-js.min.css',
-    viewerjs = 'https://npmcdn.com/mapillary-js@1.3.0/dist/mapillary-js.min.js',
-    clientId = 'NzNRM2otQkR2SHJzaXJmNmdQWVQ0dzo1ZWYyMmYwNjdmNDdlNmVi',
-    maxResults = 1000,
-    maxPages = 10,
-    tileZoom = 14;
-
 export function mapillary() {
     var mapillary = {},
+        apibase = 'https://a.mapillary.com/v2/',
+        viewercss = 'https://npmcdn.com/mapillary-js@1.3.0/dist/mapillary-js.min.css',
+        viewerjs = 'https://npmcdn.com/mapillary-js@1.3.0/dist/mapillary-js.min.js',
+        clientId = 'NzNRM2otQkR2SHJzaXJmNmdQWVQ0dzo1ZWYyMmYwNjdmNDdlNmVi',
+        maxResults = 1000,
+        maxPages = 10,
+        tileZoom = 14,
         dispatch = d3.dispatch('loadedImages', 'loadedSigns');
 
 

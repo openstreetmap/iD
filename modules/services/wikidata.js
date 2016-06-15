@@ -1,7 +1,7 @@
-const endpoint = 'https://www.wikidata.org/w/api.php?';
-
 export function wikidata() {
-    var wikidata = {};
+    var wikidata = {},
+        endpoint = 'https://www.wikidata.org/w/api.php?';
+
 
     // Given a Wikipedia language and article title, return an array of
     // corresponding Wikidata entities.
