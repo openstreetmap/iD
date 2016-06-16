@@ -1,14 +1,18 @@
-iD.Node = iD.Entity.node = function iD_Node() {
-    if (!(this instanceof iD_Node)) {
-        return (new iD_Node()).initialize(arguments);
+// iD.Node = iD.Entity.node;
+import { Entity } from './entity';
+export function Node() {
+    if (!(this instanceof Node)) {
+        return (new Node()).initialize(arguments);
     } else if (arguments.length) {
         this.initialize(arguments);
     }
-};
+}
 
-iD.Node.prototype = Object.create(iD.Entity.prototype);
+Entity.node = Node;
 
-_.extend(iD.Node.prototype, {
+Node.prototype = Object.create(Entity.prototype);
+
+_.extend(Node.prototype, {
     type: 'node',
 
     extent: function() {

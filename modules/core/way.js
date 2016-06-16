@@ -1,14 +1,18 @@
-iD.Way = iD.Entity.way = function iD_Way() {
-    if (!(this instanceof iD_Way)) {
-        return (new iD_Way()).initialize(arguments);
+import { Entity } from './entity';
+import { oneWayTags } from './tags';
+export function Way() {
+    if (!(this instanceof Way)) {
+        return (new Way()).initialize(arguments);
     } else if (arguments.length) {
         this.initialize(arguments);
     }
-};
+}
 
-iD.Way.prototype = Object.create(iD.Entity.prototype);
+Entity.way = Way;
 
-_.extend(iD.Way.prototype, {
+Way.prototype = Object.create(Entity.prototype);
+
+_.extend(Way.prototype, {
     type: 'way',
     nodes: [],
 
@@ -16,7 +20,7 @@ _.extend(iD.Way.prototype, {
         if (copies[this.id])
             return copies[this.id];
 
-        var copy = iD.Entity.prototype.copy.call(this, resolver, copies);
+        var copy = Entity.prototype.copy.call(this, resolver, copies);
 
         var nodes = this.nodes.map(function(id) {
             return resolver.entity(id).copy(resolver, copies).id;
@@ -88,7 +92,7 @@ _.extend(iD.Way.prototype, {
 
         // implied oneway tag..
         for (var key in this.tags) {
-            if (key in iD.oneWayTags && (this.tags[key] in iD.oneWayTags[key]))
+            if (key in oneWayTags && (this.tags[key] in oneWayTags[key]))
                 return true;
         }
         return false;
@@ -202,7 +206,7 @@ _.extend(iD.Way.prototype, {
                 '@id': this.osmId(),
                 '@version': this.version || 0,
                 nd: _.map(this.nodes, function(id) {
-                    return { keyAttributes: { ref: iD.Entity.id.toOSM(id) } };
+                    return { keyAttributes: { ref: Entity.id.toOSM(id) } };
                 }),
                 tag: _.map(this.tags, function(v, k) {
                     return { keyAttributes: { k: k, v: v } };

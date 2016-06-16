@@ -1,4 +1,9 @@
-iD.History = function(context) {
+import { Entity } from './entity';
+import { Graph } from './graph';
+import { Difference } from './difference';
+import { Tree } from './tree';
+
+export function History(context) {
     var stack, index, tree,
         imageryUsed = ['Bing'],
         dispatch = d3.dispatch('change', 'undone', 'redone'),
@@ -26,7 +31,7 @@ iD.History = function(context) {
     }
 
     function change(previous) {
-        var difference = iD.Difference(previous, history.graph());
+        var difference = Difference(previous, history.graph());
         dispatch.change(difference);
         return difference;
     }
@@ -144,7 +149,7 @@ iD.History = function(context) {
         difference: function() {
             var base = stack[0].graph,
                 head = stack[index].graph;
-            return iD.Difference(base, head);
+            return Difference(base, head);
         },
 
         changes: function(action) {
@@ -155,7 +160,7 @@ iD.History = function(context) {
                 head = action(head);
             }
 
-            var difference = iD.Difference(base, head);
+            var difference = Difference(base, head);
 
             return {
                 modified: difference.modified(),
@@ -190,9 +195,9 @@ iD.History = function(context) {
         },
 
         reset: function() {
-            stack = [{graph: iD.Graph()}];
+            stack = [{graph: Graph()}];
             index = 0;
-            tree = iD.Tree(stack[0].graph);
+            tree = Tree(stack[0].graph);
             dispatch.change();
             return history;
         },
@@ -209,7 +214,7 @@ iD.History = function(context) {
 
                 _.forEach(i.graph.entities, function(entity, id) {
                     if (entity) {
-                        var key = iD.Entity.key(entity);
+                        var key = Entity.key(entity);
                         allEntities[key] = entity;
                         modified.push(key);
                     } else {
@@ -244,7 +249,7 @@ iD.History = function(context) {
                 entities: _.values(allEntities),
                 baseEntities: _.values(baseEntities),
                 stack: s,
-                nextIDs: iD.Entity.id.next,
+                nextIDs: Entity.id.next,
                 index: index
             });
         },
@@ -253,21 +258,21 @@ iD.History = function(context) {
             var h = JSON.parse(json),
                 loadComplete = true;
 
-            iD.Entity.id.next = h.nextIDs;
+            Entity.id.next = h.nextIDs;
             index = h.index;
 
             if (h.version === 2 || h.version === 3) {
                 var allEntities = {};
 
                 h.entities.forEach(function(entity) {
-                    allEntities[iD.Entity.key(entity)] = iD.Entity(entity);
+                    allEntities[Entity.key(entity)] = Entity(entity);
                 });
 
                 if (h.version === 3) {
                     // This merges originals for changed entities into the base of
                     // the stack even if the current stack doesn't have them (for
                     // example when iD has been restarted in a different region)
-                    var baseEntities = h.baseEntities.map(function(d) { return iD.Entity(d); });
+                    var baseEntities = h.baseEntities.map(function(d) { return Entity(d); });
                     stack[0].graph.rebase(baseEntities, _.map(stack, 'graph'), true);
                     tree.rebase(baseEntities, true);
 
@@ -334,7 +339,7 @@ iD.History = function(context) {
                     }
 
                     return {
-                        graph: iD.Graph(stack[0].graph).load(entities),
+                        graph: Graph(stack[0].graph).load(entities),
                         annotation: d.annotation,
                         imageryUsed: d.imageryUsed
                     };
@@ -346,10 +351,10 @@ iD.History = function(context) {
 
                     for (var i in d.entities) {
                         var entity = d.entities[i];
-                        entities[i] = entity === 'undefined' ? undefined : iD.Entity(entity);
+                        entities[i] = entity === 'undefined' ? undefined : Entity(entity);
                     }
 
-                    d.graph = iD.Graph(stack[0].graph).load(entities);
+                    d.graph = Graph(stack[0].graph).load(entities);
                     return d;
                 });
             }
@@ -401,4 +406,4 @@ iD.History = function(context) {
     history.reset();
 
     return d3.rebind(history, dispatch, 'on');
-};
+}

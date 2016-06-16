@@ -1,0 +1,10 @@
+export { Connection } from './connection';
+export { Difference } from './difference';
+export { Entity } from './entity';
+export { Graph } from './graph';
+export { History } from './history';
+export { Node } from './node';
+export { Relation } from './relation';
+export { oneWayTags, pavedTags, interestingTag } from './tags';
+export { Tree } from './tree';
+export { Way } from './way';

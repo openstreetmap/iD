@@ -6,7 +6,7 @@
     of entities that will require a redraw, taking into account
     child and parent relationships.
  */
-iD.Difference = function(base, head) {
+export function Difference(base, head) {
     var changes = {}, length = 0;
 
     function changed(h, b) {
@@ -173,4 +173,4 @@ iD.Difference = function(base, head) {
     };
 
     return difference;
-};
+}

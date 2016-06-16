@@ -44,18 +44,22 @@ $(BUILDJS_TARGETS): $(BUILDJS_SOURCES) build.js
 
 MODULE_TARGETS = \
 	js/lib/id/actions.js \
+	js/lib/id/core.js \
 	js/lib/id/geo.js \
 	js/lib/id/modes.js \
+	js/lib/id/operations.js \
 	js/lib/id/presets.js \
 	js/lib/id/services.js \
 	js/lib/id/util.js \
-	js/lib/id/geo.js \
-	js/lib/id/operations.js \
 	js/lib/id/validations.js
 
 js/lib/id/actions.js: $(shell find modules/actions -type f)
 	@rm -f $@
 	node_modules/.bin/rollup -f umd -n iD.actions modules/actions/index.js --no-strict -o $@
+
+js/lib/id/core.js: $(shell find modules/core -type f)
+	@rm -f $@
+	node_modules/.bin/rollup -f umd -n iD modules/core/index.js --no-strict -o $@
 
 js/lib/id/geo.js: $(shell find modules/geo -type f)
 	@rm -f $@
@@ -64,6 +68,10 @@ js/lib/id/geo.js: $(shell find modules/geo -type f)
 js/lib/id/modes.js: $(shell find modules/modes -type f)
 	@rm -f $@
 	node_modules/.bin/rollup -f umd -n iD.modes modules/modes/index.js --no-strict -o $@
+
+js/lib/id/operations.js: $(shell find modules/modes -type f)
+	@rm -f $@
+	node_modules/.bin/rollup -f umd -n iD.operations modules/operations/index.js --no-strict -o $@
 
 js/lib/id/presets.js: $(shell find modules/presets -type f)
 	@rm -f $@
@@ -81,9 +89,6 @@ js/lib/id/validations.js: $(shell find modules/validations -type f)
 	@rm -f $@
 	node_modules/.bin/rollup -f umd -n iD.validations modules/validations/index.js --no-strict -o $@
 
-
-js/lib/id/operations.js: modules/
-	node_modules/.bin/rollup -f umd -n iD.operations modules/operations/index.js --no-strict > $@
 
 dist/iD.js: \
 	js/lib/bootstrap-tooltip.js \
@@ -122,16 +127,6 @@ dist/iD.js: \
 	js/id/behavior/paste.js \
 	js/id/behavior/select.js \
 	js/id/behavior/tail.js \
-	js/id/core/connection.js \
-	js/id/core/difference.js \
-	js/id/core/entity.js \
-	js/id/core/graph.js \
-	js/id/core/history.js \
-	js/id/core/node.js \
-	js/id/core/relation.js \
-	js/id/core/tags.js \
-	js/id/core/tree.js \
-	js/id/core/way.js \
 	js/id/renderer/background.js \
 	js/id/renderer/background_source.js \
 	js/id/renderer/features.js \
