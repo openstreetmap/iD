@@ -1,4 +1,4 @@
-iD.svg.Gpx = function(projection, context, dispatch) {
+export function Gpx(projection, context, dispatch) {
     var showLabels = true,
         layer;
 
@@ -161,4 +161,4 @@ iD.svg.Gpx = function(projection, context, dispatch) {
 
     init();
     return drawGpx;
-};
+}

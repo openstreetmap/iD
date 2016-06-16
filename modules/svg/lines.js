@@ -1,4 +1,4 @@
-iD.svg.Lines = function(projection) {
+export function Lines(projection) {
 
     var highway_stack = {
         motorway: 0,
@@ -125,4 +125,4 @@ iD.svg.Lines = function(projection) {
             .remove();
 
     };
-};
+}

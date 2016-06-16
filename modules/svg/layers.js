@@ -1,4 +1,4 @@
-iD.svg.Layers = function(projection, context) {
+export function Layers(projection, context) {
     var dispatch = d3.dispatch('change'),
         svg = d3.select(null),
         layers = [
@@ -81,4 +81,4 @@ iD.svg.Layers = function(projection, context) {
 
 
     return d3.rebind(drawLayers, dispatch, 'on');
-};
+}

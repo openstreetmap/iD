@@ -1,4 +1,4 @@
-iD.svg.Debug = function(projection, context) {
+export function Debug(projection, context) {
 
     function multipolygons(imagery) {
         return imagery.map(function(data) {
@@ -134,4 +134,4 @@ iD.svg.Debug = function(projection, context) {
     };
 
     return drawDebug;
-};
+}
