@@ -1,4 +1,4 @@
-iD.svg.Labels = function(projection, context) {
+export function Labels(projection, context) {
     var path = d3.geo.path().projection(projection);
 
     // Replace with dict and iterate over entities tags instead?
@@ -473,4 +473,4 @@ iD.svg.Labels = function(projection, context) {
     };
 
     return drawLabels;
-};
+}

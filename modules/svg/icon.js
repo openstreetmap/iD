@@ -1,4 +1,4 @@
-iD.svg.Icon = function(name, svgklass, useklass) {
+export function Icon(name, svgklass, useklass) {
     return function drawIcon(selection) {
         selection.selectAll('svg')
             .data([0])
@@ -9,4 +9,4 @@ iD.svg.Icon = function(name, svgklass, useklass) {
             .attr('xlink:href', name)
             .attr('class', useklass);
     };
-};
+}

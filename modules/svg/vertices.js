@@ -1,4 +1,4 @@
-iD.svg.Vertices = function(projection, context) {
+export function Vertices(projection, context) {
     var radiuses = {
         //       z16-, z17, z18+, tagged
         shadow: [6,    7.5,   7.5,  11.5],
@@ -174,4 +174,4 @@ iD.svg.Vertices = function(projection, context) {
     };
 
     return drawVertices;
-};
+}

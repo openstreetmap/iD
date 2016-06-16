@@ -2,7 +2,7 @@
     A standalone SVG element that contains only a `defs` sub-element. To be
     used once globally, since defs IDs must be unique within a document.
 */
-iD.svg.Defs = function(context) {
+export function Defs(context) {
 
     function SVGSpriteDefinition(id, href) {
         return function(defs) {
@@ -108,4 +108,4 @@ iD.svg.Defs = function(context) {
             'maki-sprite',
             context.imagePath('maki-sprite.svg')));
     };
-};
+}

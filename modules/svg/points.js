@@ -1,4 +1,4 @@
-iD.svg.Points = function(projection, context) {
+export function Points(projection, context) {
     function markerPath(selection, klass) {
         selection
             .attr('class', klass)
@@ -55,4 +55,4 @@ iD.svg.Points = function(projection, context) {
         groups.exit()
             .remove();
     };
-};
+}

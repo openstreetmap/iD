@@ -1,4 +1,4 @@
-iD.svg.MapillarySigns = function(projection, context, dispatch) {
+export function MapillarySigns(projection, context, dispatch) {
     var debouncedRedraw = _.debounce(function () { dispatch.change(); }, 1000),
         minZoom = 12,
         layer = d3.select(null),
@@ -133,4 +133,4 @@ iD.svg.MapillarySigns = function(projection, context, dispatch) {
 
     init();
     return drawSigns;
-};
+}

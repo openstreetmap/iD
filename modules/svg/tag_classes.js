@@ -1,4 +1,4 @@
-iD.svg.TagClasses = function() {
+export function TagClasses() {
     var primaries = [
             'building', 'highway', 'railway', 'waterway', 'aeroway',
             'motorway', 'boundary', 'power', 'amenity', 'natural', 'landuse',
@@ -110,4 +110,4 @@ iD.svg.TagClasses = function() {
     };
 
     return tagClasses;
-};
+}

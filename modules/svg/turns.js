@@ -1,4 +1,4 @@
-iD.svg.Turns = function(projection) {
+export function Turns(projection) {
     return function drawTurns(surface, graph, turns) {
         function key(turn) {
             return [turn.from.node + turn.via.node + turn.to.node].join('-');
@@ -70,4 +70,4 @@ iD.svg.Turns = function(projection) {
 
         return this;
     };
-};
+}

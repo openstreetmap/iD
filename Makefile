@@ -50,6 +50,7 @@ MODULE_TARGETS = \
 	js/lib/id/operations.js \
 	js/lib/id/presets.js \
 	js/lib/id/services.js \
+	js/lib/id/svg.js \
 	js/lib/id/util.js \
 	js/lib/id/validations.js
 
@@ -80,6 +81,10 @@ js/lib/id/presets.js: $(shell find modules/presets -type f)
 js/lib/id/services.js: $(shell find modules/services -type f)
 	@rm -f $@
 	node_modules/.bin/rollup -f umd -n iD.services modules/services/index.js --no-strict -o $@
+
+js/lib/id/svg.js: $(shell find modules/svg -type f)
+	@rm -f $@
+	node_modules/.bin/rollup -f umd -n iD.svg modules/svg/index.js --no-strict -o $@
 
 js/lib/id/util.js: $(shell find modules/util -type f)
 	@rm -f $@
@@ -132,23 +137,6 @@ dist/iD.js: \
 	js/id/renderer/features.js \
 	js/id/renderer/map.js \
 	js/id/renderer/tile_layer.js \
-	js/id/svg.js \
-	js/id/svg/areas.js \
-	js/id/svg/debug.js \
-	js/id/svg/defs.js \
-	js/id/svg/gpx.js \
-	js/id/svg/icon.js \
-	js/id/svg/labels.js \
-	js/id/svg/layers.js \
-	js/id/svg/lines.js \
-	js/id/svg/mapillary_images.js \
-	js/id/svg/mapillary_signs.js \
-	js/id/svg/midpoints.js \
-	js/id/svg/osm.js \
-	js/id/svg/points.js \
-	js/id/svg/tag_classes.js \
-	js/id/svg/turns.js \
-	js/id/svg/vertices.js \
 	js/id/ui.js \
 	js/id/ui/account.js \
 	js/id/ui/attribution.js \

@@ -1,4 +1,4 @@
-iD.svg.Midpoints = function(projection, context) {
+export function Midpoints(projection, context) {
     return function drawMidpoints(surface, graph, entities, filter, extent) {
         var poly = extent.polygon(),
             midpoints = {};
@@ -102,4 +102,4 @@ iD.svg.Midpoints = function(projection, context) {
         groups.exit()
             .remove();
     };
-};
+}
