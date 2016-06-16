@@ -1,4 +1,4 @@
-iD.services.nominatim  = function() {
+export function nominatim() {
     var nominatim = {},
         endpoint = 'https://nominatim.openstreetmap.org/reverse?';
 
@@ -32,13 +32,13 @@ iD.services.nominatim  = function() {
 
     nominatim.reset = function() {
         iD.services.nominatim.cache = rbush();
-        return nominatim;
+        return this;
     };
-
 
     if (!iD.services.nominatim.cache) {
         nominatim.reset();
     }
 
     return nominatim;
-};
+}
+

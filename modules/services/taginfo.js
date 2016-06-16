@@ -1,4 +1,4 @@
-iD.services.taginfo = function() {
+export function taginfo() {
     var taginfo = {},
         endpoint = 'https://taginfo.openstreetmap.org/api/4/',
         tag_sorts = {
@@ -173,4 +173,4 @@ iD.services.taginfo = function() {
     }
 
     return taginfo;
-};
+}

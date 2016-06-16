@@ -1,10 +1,11 @@
-iD.services.wikidata = function() {
-    var wiki = {},
+export function wikidata() {
+    var wikidata = {},
         endpoint = 'https://www.wikidata.org/w/api.php?';
+
 
     // Given a Wikipedia language and article title, return an array of
     // corresponding Wikidata entities.
-    wiki.itemsByTitle = function(lang, title, callback) {
+    wikidata.itemsByTitle = function(lang, title, callback) {
         lang = lang || 'en';
         d3.jsonp(endpoint + iD.util.qsString({
             action: 'wbgetentities',
@@ -18,5 +19,5 @@ iD.services.wikidata = function() {
         });
     };
 
-    return wiki;
-};
+    return wikidata;
+}

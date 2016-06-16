@@ -1,8 +1,9 @@
-iD.services.wikipedia = function() {
-    var wiki = {},
+export function wikipedia() {
+    var wikipedia = {},
         endpoint = 'https://en.wikipedia.org/w/api.php?';
 
-    wiki.search = function(lang, query, callback) {
+
+    wikipedia.search = function(lang, query, callback) {
         lang = lang || 'en';
         d3.jsonp(endpoint.replace('en', lang) +
             iD.util.qsString({
@@ -21,7 +22,7 @@ iD.services.wikipedia = function() {
             });
     };
 
-    wiki.suggestions = function(lang, query, callback) {
+    wikipedia.suggestions = function(lang, query, callback) {
         lang = lang || 'en';
         d3.jsonp(endpoint.replace('en', lang) +
             iD.util.qsString({
@@ -36,7 +37,7 @@ iD.services.wikipedia = function() {
             });
     };
 
-    wiki.translations = function(lang, title, callback) {
+    wikipedia.translations = function(lang, title, callback) {
         d3.jsonp(endpoint.replace('en', lang) +
             iD.util.qsString({
                 action: 'query',
@@ -57,5 +58,5 @@ iD.services.wikipedia = function() {
             });
     };
 
-    return wiki;
-};
+    return wikipedia;
+}
