@@ -1,17 +1,21 @@
-iD.behavior.Draw = function(context) {
+import { Edit } from './edit';
+import { Hover } from './hover';
+import { Tail } from './tail';
+
+export function Draw(context) {
     var event = d3.dispatch('move', 'click', 'clickWay',
             'clickNode', 'undo', 'cancel', 'finish'),
         keybinding = d3.keybinding('draw'),
-        hover = iD.behavior.Hover(context)
+        hover = Hover(context)
             .altDisables(true)
             .on('hover', context.ui().sidebar.hover),
-        tail = iD.behavior.Tail(),
-        edit = iD.behavior.Edit(context),
+        tail = Tail(),
+        edit = Edit(context),
         closeTolerance = 4,
         tolerance = 12,
         mouseLeave = false,
         lastMouse = null,
-        cached = iD.behavior.Draw;
+        cached = Draw;
 
     function datum() {
         if (d3.event.altKey) return {};
@@ -200,8 +204,8 @@ iD.behavior.Draw = function(context) {
     };
 
     return d3.rebind(draw, event, 'on');
-};
+}
 
-iD.behavior.Draw.usedTails = {};
-iD.behavior.Draw.disableSpace = false;
-iD.behavior.Draw.lastSpace = null;
+Draw.usedTails = {};
+Draw.disableSpace = false;
+Draw.lastSpace = null;

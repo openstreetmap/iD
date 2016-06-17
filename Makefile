@@ -44,6 +44,7 @@ $(BUILDJS_TARGETS): $(BUILDJS_SOURCES) build.js
 
 MODULE_TARGETS = \
 	js/lib/id/actions.js \
+	js/lib/id/behavior.js \
 	js/lib/id/core.js \
 	js/lib/id/geo.js \
 	js/lib/id/modes.js \
@@ -58,6 +59,10 @@ MODULE_TARGETS = \
 js/lib/id/actions.js: $(shell find modules/actions -type f)
 	@rm -f $@
 	node_modules/.bin/rollup -f umd -n iD.actions modules/actions/index.js --no-strict -o $@
+
+js/lib/id/behavior.js: $(shell find modules/behavior -type f)
+	@rm -f $@
+	node_modules/.bin/rollup -f umd -n iD.behavior modules/behavior/index.js --no-strict -o $@
 
 js/lib/id/core.js: $(shell find modules/core -type f)
 	@rm -f $@
@@ -122,20 +127,6 @@ dist/iD.js: \
 	js/id/start.js \
 	js/id/id.js \
 	$(MODULE_TARGETS) \
-	js/id/behavior.js \
-	js/id/behavior/add_way.js \
-	js/id/behavior/breathe.js \
-	js/id/behavior/copy.js \
-	js/id/behavior/drag.js \
-	js/id/behavior/draw.js \
-	js/id/behavior/draw_way.js \
-	js/id/behavior/edit.js \
-	js/id/behavior/hash.js \
-	js/id/behavior/hover.js \
-	js/id/behavior/lasso.js \
-	js/id/behavior/paste.js \
-	js/id/behavior/select.js \
-	js/id/behavior/tail.js \
 	js/id/ui.js \
 	js/id/ui/account.js \
 	js/id/ui/attribution.js \

@@ -1,4 +1,4 @@
-iD.behavior.Edit = function(context) {
+export function Edit(context) {
     function edit() {
         context.map()
             .minzoom(context.minEditableZoom());
@@ -10,4 +10,4 @@ iD.behavior.Edit = function(context) {
     };
 
     return edit;
-};
+}

@@ -1,4 +1,4 @@
-iD.behavior.Paste = function(context) {
+export function Paste(context) {
     var keybinding = d3.keybinding('paste');
 
     function omitTag(v, k) {
@@ -67,4 +67,4 @@ iD.behavior.Paste = function(context) {
     };
 
     return paste;
-};
+}

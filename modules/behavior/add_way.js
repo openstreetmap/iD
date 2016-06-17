@@ -1,6 +1,8 @@
-iD.behavior.AddWay = function(context) {
+import { Draw } from './draw';
+
+export function AddWay(context) {
     var event = d3.dispatch('start', 'startFromWay', 'startFromNode'),
-        draw = iD.behavior.Draw(context);
+        draw = Draw(context);
 
     var addWay = function(surface) {
         draw.on('click', event.start)
@@ -33,4 +35,4 @@ iD.behavior.AddWay = function(context) {
     };
 
     return d3.rebind(addWay, event, 'on');
-};
+}

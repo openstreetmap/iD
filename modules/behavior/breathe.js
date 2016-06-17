@@ -1,4 +1,4 @@
-iD.behavior.Breathe = function() {
+export function Breathe(){
     var duration = 800,
         selector = '.selected.shadow, .selected .shadow',
         selected = d3.select(null),
@@ -102,4 +102,4 @@ iD.behavior.Breathe = function() {
     };
 
     return breathe;
-};
+}

@@ -1,4 +1,4 @@
-iD.behavior.Tail = function() {
+export function Tail() {
     var text,
         container,
         xmargin = 25,
@@ -79,4 +79,4 @@ iD.behavior.Tail = function() {
     };
 
     return tail;
-};
+}

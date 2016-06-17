@@ -1,4 +1,4 @@
-iD.behavior.Lasso = function(context) {
+export function Lasso(context) {
 
     var behavior = function(selection) {
         var lasso;
@@ -69,4 +69,4 @@ iD.behavior.Lasso = function(context) {
     };
 
     return behavior;
-};
+}
