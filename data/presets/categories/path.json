@@ -5,6 +5,7 @@
     "members": [
         "highway/pedestrian",
         "highway/footway",
+        "footway/sidewalk",
         "highway/cycleway",
         "highway/bridleway",
         "highway/path",
