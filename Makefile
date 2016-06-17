@@ -52,7 +52,12 @@ MODULE_TARGETS = \
 	js/lib/id/presets.js \
 	js/lib/id/renderer.js \
 	js/lib/id/services.js \
+	js/lib/id/ui/intro.js \
 	js/lib/id/svg.js \
+	js/lib/id/ui/index.js \
+	js/lib/id/ui/core.js \
+	js/lib/id/ui/intro.js \
+	js/lib/id/ui/preset.js \
 	js/lib/id/util.js \
 	js/lib/id/validations.js
 
@@ -96,6 +101,22 @@ js/lib/id/svg.js: $(shell find modules/svg -type f)
 	@rm -f $@
 	node_modules/.bin/rollup -f umd -n iD.svg modules/svg/index.js --no-strict -o $@
 
+js/lib/id/ui/index.js: $(shell find modules/ui -type f)
+	@rm -f $@
+	node_modules/.bin/rollup -f umd -n iD modules/ui/ui.js --no-strict -o $@
+
+js/lib/id/ui/core.js: $(shell find modules/ui/core -type f)
+	@rm -f $@
+	node_modules/.bin/rollup -f umd -n iD.ui modules/ui/core/index.js --no-strict -o $@
+
+js/lib/id/ui/intro.js: $(shell find modules/ui/intro -type f)
+	@rm -f $@
+	node_modules/.bin/rollup -f umd -n iD.ui.intro modules/ui/intro/index.js --no-strict -o $@
+
+js/lib/id/ui/preset.js: $(shell find modules/ui/preset -type f)
+	@rm -f $@
+	node_modules/.bin/rollup -f umd -n iD.ui.preset modules/ui/preset/index.js --no-strict -o $@
+
 js/lib/id/util.js: $(shell find modules/util -type f)
 	@rm -f $@
 	node_modules/.bin/rollup -f umd -n iD.util modules/util/index.js --no-strict -o $@
@@ -127,72 +148,6 @@ dist/iD.js: \
 	js/id/start.js \
 	js/id/id.js \
 	$(MODULE_TARGETS) \
-	js/id/ui.js \
-	js/id/ui/account.js \
-	js/id/ui/attribution.js \
-	js/id/ui/background.js \
-	js/id/ui/cmd.js \
-	js/id/ui/commit.js \
-	js/id/ui/confirm.js \
-	js/id/ui/conflicts.js \
-	js/id/ui/contributors.js \
-	js/id/ui/disclosure.js \
-	js/id/ui/entity_editor.js \
-	js/id/ui/feature_info.js \
-	js/id/ui/feature_list.js \
-	js/id/ui/flash.js \
-	js/id/ui/full_screen.js \
-	js/id/ui/geolocate.js \
-	js/id/ui/help.js \
-	js/id/ui/info.js \
-	js/id/ui/inspector.js \
-	js/id/ui/intro.js \
-	js/id/ui/lasso.js \
-	js/id/ui/loading.js \
-	js/id/ui/map_data.js \
-	js/id/ui/map_in_map.js \
-	js/id/ui/modal.js \
-	js/id/ui/modes.js \
-	js/id/ui/notice.js \
-	js/id/ui/preset_icon.js \
-	js/id/ui/preset.js \
-	js/id/ui/preset_list.js \
-	js/id/ui/radial_menu.js \
-	js/id/ui/raw_member_editor.js \
-	js/id/ui/raw_membership_editor.js \
-	js/id/ui/raw_tag_editor.js \
-	js/id/ui/restore.js \
-	js/id/ui/save.js \
-	js/id/ui/scale.js \
-	js/id/ui/selection_list.js \
-	js/id/ui/sidebar.js \
-	js/id/ui/source_switch.js \
-	js/id/ui/spinner.js \
-	js/id/ui/splash.js \
-	js/id/ui/status.js \
-	js/id/ui/success.js \
-	js/id/ui/tag_reference.js \
-	js/id/ui/toggle.js \
-	js/id/ui/undo_redo.js \
-	js/id/ui/view_on_osm.js \
-	js/id/ui/zoom.js \
-	js/id/ui/preset/access.js \
-	js/id/ui/preset/address.js \
-	js/id/ui/preset/check.js \
-	js/id/ui/preset/combo.js \
-	js/id/ui/preset/cycleway.js \
-	js/id/ui/preset/input.js \
-	js/id/ui/preset/localized.js \
-	js/id/ui/preset/maxspeed.js \
-	js/id/ui/preset/radio.js \
-	js/id/ui/preset/restrictions.js \
-	js/id/ui/preset/textarea.js \
-	js/id/ui/preset/wikipedia.js \
-	js/id/ui/intro/area.js \
-	js/id/ui/intro/line.js \
-	js/id/ui/intro/navigation.js \
-	js/id/ui/intro/point.js \
-	js/id/ui/intro/start_editing.js \
 	js/id/end.js \
 	js/lib/locale.js \
 	data/introGraph.js
