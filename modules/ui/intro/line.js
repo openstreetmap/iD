@@ -1,4 +1,4 @@
-iD.ui.intro.line = function(context, reveal) {
+export function line(context, reveal) {
     var event = d3.dispatch('done'),
         timeouts = [];
 
@@ -150,4 +150,4 @@ iD.ui.intro.line = function(context, reveal) {
     };
 
     return d3.rebind(step, event, 'on');
-};
+}

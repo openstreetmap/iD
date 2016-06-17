@@ -52,6 +52,7 @@ MODULE_TARGETS = \
 	js/lib/id/presets.js \
 	js/lib/id/renderer.js \
 	js/lib/id/services.js \
+	js/lib/id/ui/intro.js \
 	js/lib/id/svg.js \
 	js/lib/id/util.js \
 	js/lib/id/validations.js
@@ -95,6 +96,10 @@ js/lib/id/services.js: $(shell find modules/services -type f)
 js/lib/id/svg.js: $(shell find modules/svg -type f)
 	@rm -f $@
 	node_modules/.bin/rollup -f umd -n iD.svg modules/svg/index.js --no-strict -o $@
+
+js/lib/id/ui/intro.js: $(shell find modules/ui/intro -type f)
+	@rm -f $@
+	node_modules/.bin/rollup -f umd -n iD.ui.intro modules/ui/intro/index.js --no-strict -o $@
 
 js/lib/id/util.js: $(shell find modules/util -type f)
 	@rm -f $@
@@ -188,11 +193,6 @@ dist/iD.js: \
 	js/id/ui/preset/restrictions.js \
 	js/id/ui/preset/textarea.js \
 	js/id/ui/preset/wikipedia.js \
-	js/id/ui/intro/area.js \
-	js/id/ui/intro/line.js \
-	js/id/ui/intro/navigation.js \
-	js/id/ui/intro/point.js \
-	js/id/ui/intro/start_editing.js \
 	js/id/end.js \
 	js/lib/locale.js \
 	data/introGraph.js

@@ -1,4 +1,4 @@
-iD.ui.intro.area = function(context, reveal) {
+export function area(context, reveal) {
     var event = d3.dispatch('done'),
         timeout;
 
@@ -85,4 +85,4 @@ iD.ui.intro.area = function(context, reveal) {
     };
 
     return d3.rebind(step, event, 'on');
-};
+}

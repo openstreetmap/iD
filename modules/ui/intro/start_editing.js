@@ -1,4 +1,4 @@
-iD.ui.intro.startEditing = function(context, reveal) {
+export function startEditing(context, reveal) {
     var event = d3.dispatch('done', 'startEditing'),
         modal,
         timeouts = [];
@@ -54,4 +54,4 @@ iD.ui.intro.startEditing = function(context, reveal) {
     };
 
     return d3.rebind(step, event, 'on');
-};
+}

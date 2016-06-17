@@ -1,4 +1,4 @@
-iD.ui.intro.navigation = function(context, reveal) {
+export function navigation(context, reveal) {
     var event = d3.dispatch('done'),
         timeouts = [];
 
@@ -109,4 +109,4 @@ iD.ui.intro.navigation = function(context, reveal) {
     };
 
     return d3.rebind(step, event, 'on');
-};
+}
