@@ -54,7 +54,8 @@ MODULE_TARGETS = \
 	js/lib/id/services.js \
 	js/lib/id/ui/intro.js \
 	js/lib/id/svg.js \
-	js/lib/id/ui.js \
+	js/lib/id/ui/index.js \
+	js/lib/id/ui/core.js \
 	js/lib/id/ui/intro.js \
 	js/lib/id/ui/preset.js \
 	js/lib/id/util.js \
@@ -100,13 +101,17 @@ js/lib/id/svg.js: $(shell find modules/svg -type f)
 	@rm -f $@
 	node_modules/.bin/rollup -f umd -n iD.svg modules/svg/index.js --no-strict -o $@
 
+js/lib/id/ui/index.js: $(shell find modules/ui -type f)
+	@rm -f $@
+	node_modules/.bin/rollup -f umd -n iD modules/ui/ui.js --no-strict -o $@
+
+js/lib/id/ui/core.js: $(shell find modules/ui/core -type f)
+	@rm -f $@
+	node_modules/.bin/rollup -f umd -n iD.ui modules/ui/core/index.js --no-strict -o $@
+
 js/lib/id/ui/intro.js: $(shell find modules/ui/intro -type f)
 	@rm -f $@
 	node_modules/.bin/rollup -f umd -n iD.ui.intro modules/ui/intro/index.js --no-strict -o $@
-
-js/lib/id/ui.js: $(shell find modules/ui -type f)
-	@rm -f $@
-	node_modules/.bin/rollup -f umd -n iD.ui modules/ui/index.js --no-strict -o $@
 
 js/lib/id/ui/preset.js: $(shell find modules/ui/preset -type f)
 	@rm -f $@
@@ -142,7 +147,6 @@ dist/iD.js: \
 	js/lib/marked.js \
 	js/id/start.js \
 	js/id/id.js \
-	js/id/ui.js \
 	$(MODULE_TARGETS) \
 	js/id/end.js \
 	js/lib/locale.js \

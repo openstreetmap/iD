@@ -1,4 +1,4 @@
-iD.ui = function(context) {
+export function ui(context) {
     function render(container) {
         var map = context.map();
 
@@ -226,9 +226,9 @@ iD.ui = function(context) {
     ui.sidebar = iD.ui.Sidebar(context);
 
     return ui;
-};
+}
 
-iD.ui.tooltipHtml = function(text, key) {
+ui.tooltipHtml = function(text, key) {
     var s = '<span>' + text + '</span>';
     if (key) {
         s += '<div class="keyhint-wrap">' +
