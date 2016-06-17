@@ -1,4 +1,4 @@
-iD.ui.preset.textarea = function(field) {
+export function textarea(field) {
     var dispatch = d3.dispatch('change'),
         input;
 
@@ -34,4 +34,4 @@ iD.ui.preset.textarea = function(field) {
     };
 
     return d3.rebind(textarea, dispatch, 'on');
-};
+}

@@ -1,4 +1,4 @@
-iD.ui.preset.address = function(field, context) {
+export function address(field, context) {
     var dispatch = d3.dispatch('init', 'change'),
         wrap,
         entity,
@@ -216,4 +216,4 @@ iD.ui.preset.address = function(field, context) {
     };
 
     return d3.rebind(address, dispatch, 'on');
-};
+}

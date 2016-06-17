@@ -1,4 +1,4 @@
-iD.ui.preset.restrictions = function(field, context) {
+export function restrictions(field, context) {
     var dispatch = d3.dispatch('change'),
         hover = iD.behavior.Hover(context),
         vertexID,
@@ -171,4 +171,4 @@ iD.ui.preset.restrictions = function(field, context) {
     };
 
     return d3.rebind(restrictions, dispatch, 'on');
-};
+}

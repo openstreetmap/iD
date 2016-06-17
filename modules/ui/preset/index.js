@@ -1,0 +1,12 @@
+export { access } from './access';
+export { address } from './address';
+export { check, defaultcheck} from './check';
+export { combo, typeCombo, multiCombo } from './combo';
+export { cycleway } from './cycleway';
+export { text, url, number, email, tel } from './input';
+export { localized } from './localized';
+export { maxspeed } from './maxspeed';
+export { radio } from './radio';
+export { restrictions } from './restrictions';
+export { textarea } from './textarea';
+export { wikipedia } from './wikipedia';

@@ -1,6 +1,5 @@
-iD.ui.preset.combo =
-iD.ui.preset.typeCombo =
-iD.ui.preset.multiCombo = function(field, context) {
+export { combo as typeCombo, combo as multiCombo };
+export function combo(field, context) {
     var dispatch = d3.dispatch('change'),
         isMulti = (field.type === 'multiCombo'),
         optstrings = field.strings && field.strings.options,
@@ -304,4 +303,4 @@ iD.ui.preset.multiCombo = function(field, context) {
 
 
     return d3.rebind(combo, dispatch, 'on');
-};
+}

@@ -1,4 +1,4 @@
-iD.ui.preset.radio = function(field) {
+export function radio(field) {
     var dispatch = d3.dispatch('change'),
         labels, radios, placeholder;
 
@@ -72,4 +72,4 @@ iD.ui.preset.radio = function(field) {
     };
 
     return d3.rebind(radio, dispatch, 'on');
-};
+}

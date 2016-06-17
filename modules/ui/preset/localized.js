@@ -1,4 +1,4 @@
-iD.ui.preset.localized = function(field, context) {
+export function localized(field, context) {
     var dispatch = d3.dispatch('change', 'input'),
         wikipedia = iD.services.wikipedia(),
         input, localizedInputs, wikiTitles,
@@ -239,4 +239,4 @@ iD.ui.preset.localized = function(field, context) {
     };
 
     return d3.rebind(localized, dispatch, 'on');
-};
+}

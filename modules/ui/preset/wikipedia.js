@@ -1,4 +1,4 @@
-iD.ui.preset.wikipedia = function(field, context) {
+export function wikipedia(field, context) {
     var dispatch = d3.dispatch('change'),
         wikipedia = iD.services.wikipedia(),
         wikidata = iD.services.wikidata(),
@@ -195,4 +195,4 @@ iD.ui.preset.wikipedia = function(field, context) {
     };
 
     return d3.rebind(wiki, dispatch, 'on');
-};
+}

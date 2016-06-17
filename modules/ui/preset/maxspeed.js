@@ -1,4 +1,4 @@
-iD.ui.preset.maxspeed = function(field, context) {
+export function maxspeed(field, context) {
     var dispatch = d3.dispatch('change'),
         entity,
         imperial,
@@ -107,4 +107,4 @@ iD.ui.preset.maxspeed = function(field, context) {
     };
 
     return d3.rebind(maxspeed, dispatch, 'on');
-};
+}

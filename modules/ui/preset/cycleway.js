@@ -1,4 +1,4 @@
-iD.ui.preset.cycleway = function(field) {
+export function cycleway(field) {
     var dispatch = d3.dispatch('change'),
         items;
 
@@ -97,4 +97,4 @@ iD.ui.preset.cycleway = function(field) {
     };
 
     return d3.rebind(cycleway, dispatch, 'on');
-};
+}

@@ -1,5 +1,5 @@
-iD.ui.preset.check =
-iD.ui.preset.defaultcheck = function(field) {
+export { check as defaultcheck };
+export function check(field) {
     var dispatch = d3.dispatch('change'),
         options = field.strings && field.strings.options,
         values = [],
@@ -79,4 +79,4 @@ iD.ui.preset.defaultcheck = function(field) {
     };
 
     return d3.rebind(check, dispatch, 'on');
-};
+}

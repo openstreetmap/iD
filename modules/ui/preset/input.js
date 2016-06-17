@@ -1,8 +1,10 @@
-iD.ui.preset.text =
-iD.ui.preset.number =
-iD.ui.preset.tel =
-iD.ui.preset.email =
-iD.ui.preset.url = function(field, context) {
+export {
+  url as text,
+  url as number,
+  url as tel,
+  url as email
+};
+export function url(field, context) {
 
     var dispatch = d3.dispatch('change'),
         input,
@@ -85,4 +87,4 @@ iD.ui.preset.url = function(field, context) {
     };
 
     return d3.rebind(i, dispatch, 'on');
-};
+}

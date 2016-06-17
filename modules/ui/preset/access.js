@@ -1,4 +1,4 @@
-iD.ui.preset.access = function(field) {
+export function access(field) {
     var dispatch = d3.dispatch('change'),
         items;
 
@@ -193,4 +193,4 @@ iD.ui.preset.access = function(field) {
     };
 
     return d3.rebind(access, dispatch, 'on');
-};
+}
