@@ -1,4 +1,4 @@
-iD.Map = function(context) {
+export function Map(context) {
     var dimensions = [1, 1],
         dispatch = d3.dispatch('move', 'drawn'),
         projection = context.projection,
@@ -528,4 +528,4 @@ iD.Map = function(context) {
     map.layers = drawLayers;
 
     return d3.rebind(map, dispatch, 'on');
-};
+}

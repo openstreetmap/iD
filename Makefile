@@ -49,6 +49,7 @@ MODULE_TARGETS = \
 	js/lib/id/modes.js \
 	js/lib/id/operations.js \
 	js/lib/id/presets.js \
+	js/lib/id/renderer.js \
 	js/lib/id/services.js \
 	js/lib/id/svg.js \
 	js/lib/id/util.js \
@@ -78,6 +79,10 @@ js/lib/id/presets.js: $(shell find modules/presets -type f)
 	@rm -f $@
 	node_modules/.bin/rollup -f umd -n iD.presets modules/presets/index.js --no-strict -o $@
 
+js/lib/id/renderer.js: $(shell find modules/renderer -type f)
+	@rm -f $@
+	node_modules/.bin/rollup -f umd -n iD modules/renderer/index.js --no-strict -o $@
+
 js/lib/id/services.js: $(shell find modules/services -type f)
 	@rm -f $@
 	node_modules/.bin/rollup -f umd -n iD.services modules/services/index.js --no-strict -o $@
@@ -93,7 +98,6 @@ js/lib/id/util.js: $(shell find modules/util -type f)
 js/lib/id/validations.js: $(shell find modules/validations -type f)
 	@rm -f $@
 	node_modules/.bin/rollup -f umd -n iD.validations modules/validations/index.js --no-strict -o $@
-
 
 dist/iD.js: \
 	js/lib/bootstrap-tooltip.js \
@@ -132,11 +136,6 @@ dist/iD.js: \
 	js/id/behavior/paste.js \
 	js/id/behavior/select.js \
 	js/id/behavior/tail.js \
-	js/id/renderer/background.js \
-	js/id/renderer/background_source.js \
-	js/id/renderer/features.js \
-	js/id/renderer/map.js \
-	js/id/renderer/tile_layer.js \
 	js/id/ui.js \
 	js/id/ui/account.js \
 	js/id/ui/attribution.js \
