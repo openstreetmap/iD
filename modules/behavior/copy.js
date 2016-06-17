@@ -1,4 +1,4 @@
-iD.behavior.Copy = function(context) {
+export function Copy(context) {
     var keybinding = d3.keybinding('copy');
 
     function groupEntities(ids, graph) {
@@ -76,4 +76,4 @@ iD.behavior.Copy = function(context) {
     };
 
     return copy;
-};
+}

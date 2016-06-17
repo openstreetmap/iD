@@ -1,4 +1,4 @@
-iD.TileLayer = function(context) {
+export function TileLayer(context) {
     var tileSize = 256,
         tile = d3.geo.tile(),
         projection,
@@ -204,4 +204,4 @@ iD.TileLayer = function(context) {
     };
 
     return background;
-};
+}

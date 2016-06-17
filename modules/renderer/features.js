@@ -1,4 +1,4 @@
-iD.Features = function(context) {
+export function Features(context) {
     var traffic_roads = {
         'motorway': true,
         'motorway_link': true,
@@ -417,4 +417,4 @@ iD.Features = function(context) {
     };
 
     return d3.rebind(features, dispatch, 'on');
-};
+}

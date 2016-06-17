@@ -7,7 +7,7 @@
    Only one of these elements can have the :hover pseudo-class, but all of them will
    have the .hover class.
  */
-iD.behavior.Hover = function() {
+export function Hover() {
     var dispatch = d3.dispatch('hover'),
         selection,
         altDisables,
@@ -124,4 +124,4 @@ iD.behavior.Hover = function() {
     };
 
     return d3.rebind(hover, dispatch, 'on');
-};
+}

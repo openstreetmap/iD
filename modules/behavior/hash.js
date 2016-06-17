@@ -1,4 +1,4 @@
-iD.behavior.Hash = function(context) {
+export function Hash(context) {
     var s0 = null, // cached location.hash
         lat = 90 - 1e-8; // allowable latitude range
 
@@ -89,4 +89,4 @@ iD.behavior.Hash = function(context) {
     };
 
     return hash;
-};
+}

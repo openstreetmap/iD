@@ -1,4 +1,4 @@
-iD.behavior.Select = function(context) {
+export function Select(context) {
     function keydown() {
         if (d3.event && d3.event.shiftKey) {
             context.surface()
@@ -61,4 +61,4 @@ iD.behavior.Select = function(context) {
     };
 
     return behavior;
-};
+}

@@ -1,11 +1,13 @@
-iD.behavior.DrawWay = function(context, wayId, index, mode, baseGraph) {
+import { Draw } from './draw';
+
+export function DrawWay(context, wayId, index, mode, baseGraph) {
     var way = context.entity(wayId),
         isArea = context.geometry(wayId) === 'area',
         finished = false,
         annotation = t((way.isDegenerate() ?
             'operations.start.annotation.' :
             'operations.continue.annotation.') + context.geometry(wayId)),
-        draw = iD.behavior.Draw(context);
+        draw = Draw(context);
 
     var startIndex = typeof index === 'undefined' ? way.nodes.length - 1 : 0,
         start = iD.Node({loc: context.graph().entity(way.nodes[startIndex]).loc}),
@@ -207,4 +209,4 @@ iD.behavior.DrawWay = function(context, wayId, index, mode, baseGraph) {
     };
 
     return drawWay;
-};
+}

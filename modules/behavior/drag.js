@@ -14,7 +14,7 @@
     * Delegation is supported via the `delegate` function.
 
  */
-iD.behavior.drag = function() {
+export function drag() {
     function d3_eventCancel() {
       d3.event.stopPropagation();
       d3.event.preventDefault();
@@ -91,7 +91,7 @@ iD.behavior.drag = function() {
             var p = point(),
                 dx = p[0] - origin_[0],
                 dy = p[1] - origin_[1];
-            
+
             if (dx === 0 && dy === 0)
                 return;
 
@@ -198,4 +198,4 @@ iD.behavior.drag = function() {
     };
 
     return d3.rebind(drag, event, 'on');
-};
+}

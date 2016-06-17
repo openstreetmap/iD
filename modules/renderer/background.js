@@ -1,6 +1,9 @@
-iD.Background = function(context) {
+import { BackgroundSource } from './background_source';
+import { TileLayer } from './tile_layer';
+
+export function Background(context) {
     var dispatch = d3.dispatch('change'),
-        baseLayer = iD.TileLayer(context).projection(context.projection),
+        baseLayer = TileLayer(context).projection(context.projection),
         overlayLayers = [],
         backgroundSources;
 
@@ -148,7 +151,7 @@ iD.Background = function(context) {
             }
         }
 
-        layer = iD.TileLayer(context)
+        layer = TileLayer(context)
             .source(d)
             .projection(context.projection)
             .dimensions(baseLayer.dimensions());
@@ -188,20 +191,20 @@ iD.Background = function(context) {
 
         backgroundSources = imagery.map(function(source) {
             if (source.type === 'bing') {
-                return iD.BackgroundSource.Bing(source, dispatch);
+                return BackgroundSource.Bing(source, dispatch);
             } else {
-                return iD.BackgroundSource(source);
+                return BackgroundSource(source);
             }
         });
 
-        backgroundSources.unshift(iD.BackgroundSource.None());
+        backgroundSources.unshift(BackgroundSource.None());
 
         if (!chosen && extent) {
             best = _.find(this.sources(extent), function(s) { return s.best(); });
         }
 
         if (chosen && chosen.indexOf('custom:') === 0) {
-            background.baseLayerSource(iD.BackgroundSource.Custom(chosen.replace(/^custom:/, '')));
+            background.baseLayerSource(BackgroundSource.Custom(chosen.replace(/^custom:/, '')));
         } else {
             background.baseLayerSource(findSource(chosen) || best || findSource('Bing') || backgroundSources[1] || backgroundSources[0]);
         }
@@ -241,4 +244,4 @@ iD.Background = function(context) {
     };
 
     return d3.rebind(background, dispatch, 'on');
-};
+}

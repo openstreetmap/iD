@@ -1,4 +1,4 @@
-iD.BackgroundSource = function(data) {
+export function BackgroundSource(data) {
     var source = _.clone(data),
         offset = [0, 0],
         name = source.name,
@@ -80,15 +80,15 @@ iD.BackgroundSource = function(data) {
     source.copyrightNotices = function() {};
 
     return source;
-};
+}
 
-iD.BackgroundSource.Bing = function(data, dispatch) {
+BackgroundSource.Bing = function(data, dispatch) {
     // http://msdn.microsoft.com/en-us/library/ff701716.aspx
     // http://msdn.microsoft.com/en-us/library/ff701701.aspx
 
     data.template = 'https://ecn.t{switch:0,1,2,3}.tiles.virtualearth.net/tiles/a{u}.jpeg?g=587&mkt=en-gb&n=z';
 
-    var bing = iD.BackgroundSource(data),
+    var bing = BackgroundSource(data),
         key = 'Arzdiw4nlOJzRwOz__qailc8NiR31Tt51dN2D7cm57NrnceZnCpgOkmJhNpGoppU', // Same as P2 and JOSM
         url = 'https://dev.virtualearth.net/REST/v1/Imagery/Metadata/Aerial?include=ImageryProviders&key=' +
             key + '&jsonp={callback}',
@@ -128,8 +128,8 @@ iD.BackgroundSource.Bing = function(data, dispatch) {
     return bing;
 };
 
-iD.BackgroundSource.None = function() {
-    var source = iD.BackgroundSource({id: 'none', template: ''});
+BackgroundSource.None = function() {
+    var source = BackgroundSource({id: 'none', template: ''});
 
     source.name = function() {
         return t('background.none');
@@ -146,8 +146,8 @@ iD.BackgroundSource.None = function() {
     return source;
 };
 
-iD.BackgroundSource.Custom = function(template) {
-    var source = iD.BackgroundSource({id: 'custom', template: template});
+BackgroundSource.Custom = function(template) {
+    var source = BackgroundSource({id: 'custom', template: template});
 
     source.name = function() {
         return t('background.custom');
