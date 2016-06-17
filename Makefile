@@ -70,7 +70,7 @@ js/lib/id/modes.js: $(shell find modules/modes -type f)
 	@rm -f $@
 	node_modules/.bin/rollup -f umd -n iD.modes modules/modes/index.js --no-strict -o $@
 
-js/lib/id/operations.js: $(shell find modules/modes -type f)
+js/lib/id/operations.js: $(shell find modules/operations -type f)
 	@rm -f $@
 	node_modules/.bin/rollup -f umd -n iD.operations modules/operations/index.js --no-strict -o $@
 
