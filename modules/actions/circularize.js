@@ -1,4 +1,8 @@
-export function Circularize(wayId, projection, maxAngle) {
+import { Node } from '../core/index';
+import { interp, euclideanDistance } from '../geo/index';
+
+export function Circularize(wayId
+  , projection, maxAngle) {
     maxAngle = (maxAngle || 20) * Math.PI / 180;
 
     var action = function(graph) {
@@ -12,8 +16,8 @@ export function Circularize(wayId, projection, maxAngle) {
             keyNodes = nodes.filter(function(n) { return graph.parentWays(n).length !== 1; }),
             points = nodes.map(function(n) { return projection(n.loc); }),
             keyPoints = keyNodes.map(function(n) { return projection(n.loc); }),
-            centroid = (points.length === 2) ? iD.geo.interp(points[0], points[1], 0.5) : d3.geom.polygon(points).centroid(),
-            radius = d3.median(points, function(p) { return iD.geo.euclideanDistance(centroid, p); }),
+            centroid = (points.length === 2) ? interp(points[0], points[1], 0.5) : d3.geom.polygon(points).centroid(),
+            radius = d3.median(points, function(p) { return euclideanDistance(centroid, p); }),
             sign = d3.geom.polygon(points).area() > 0 ? 1 : -1,
             ids;
 
@@ -52,7 +56,7 @@ export function Circularize(wayId, projection, maxAngle) {
             }
 
             // position this key node
-            distance = iD.geo.euclideanDistance(centroid, keyPoints[i]);
+            distance = euclideanDistance(centroid, keyPoints[i]);
             if (distance === 0) { distance = 1e-4; }
             keyPoints[i] = [
                 centroid[0] + (keyPoints[i][0] - centroid[0]) / distance * radius,
@@ -92,7 +96,7 @@ export function Circularize(wayId, projection, maxAngle) {
                     centroid[0] + Math.cos(angle) * radius,
                     centroid[1] + Math.sin(angle) * radius]);
 
-                node = iD.Node({loc: loc});
+                node = Node({loc: loc});
                 graph = graph.replace(node);
 
                 nodes.splice(endNodeIndex + j, 0, node);
@@ -166,7 +170,7 @@ export function Circularize(wayId, projection, maxAngle) {
 
             // move interior nodes to the surface of the convex hull..
             for (var j = 1; j < indexRange; j++) {
-                var point = iD.geo.interp(hull[i], hull[i+1], j / indexRange),
+                var point = interp(hull[i], hull[i+1], j / indexRange),
                     node = nodes[(j + startIndex) % nodes.length].move(projection.invert(point));
                 graph = graph.replace(node);
             }

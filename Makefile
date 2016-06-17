@@ -43,7 +43,7 @@ $(BUILDJS_TARGETS): $(BUILDJS_SOURCES) build.js
 
 
 MODULE_TARGETS = \
-	js/lib/id/actions.js \
+	js/lib/id/index.js \
 	js/lib/id/behavior.js \
 	js/lib/id/core.js \
 	js/lib/id/geo.js \
@@ -61,9 +61,9 @@ MODULE_TARGETS = \
 	js/lib/id/util.js \
 	js/lib/id/validations.js
 
-js/lib/id/actions.js: $(shell find modules/actions -type f)
+js/lib/id/index.js: $(shell find modules/index.js -type f)
 	@rm -f $@
-	node_modules/.bin/rollup -f umd -n iD.actions modules/actions/index.js --no-strict -o $@
+	node_modules/.bin/rollup -f umd -n iD modules/index.js --no-strict -o $@
 
 js/lib/id/behavior.js: $(shell find modules/behavior -type f)
 	@rm -f $@

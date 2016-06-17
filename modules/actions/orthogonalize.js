@@ -1,5 +1,5 @@
 import { DeleteNode } from './delete_node';
-
+import { euclideanDistance } from '../geo/index';
 /*
  * Based on https://github.com/openstreetmap/potlatch2/blob/master/net/systemeD/potlatch2/tools/Quadrilateralise.as
  */
@@ -86,7 +86,7 @@ export function Orthogonalize(wayId, projection) {
                 q = subtractPoints(c, b),
                 scale, dotp;
 
-            scale = 2 * Math.min(iD.geo.euclideanDistance(p, [0, 0]), iD.geo.euclideanDistance(q, [0, 0]));
+            scale = 2 * Math.min(euclideanDistance(p, [0, 0]), euclideanDistance(q, [0, 0]));
             p = normalizePoint(p, 1.0);
             q = normalizePoint(q, 1.0);
 

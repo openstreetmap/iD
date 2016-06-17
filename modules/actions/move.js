@@ -1,5 +1,15 @@
 // https://github.com/openstreetmap/josm/blob/mirror/src/org/openstreetmap/josm/command/MoveCommand.java
 // https://github.com/openstreetmap/potlatch2/blob/master/net/systemeD/halcyon/connection/actions/MoveNodeAction.as
+import {
+  angle as getAngle,
+  sphericalDistance,
+  chooseEdge,
+  pathLength,
+  interp,
+  pathIntersections
+} from '../geo/index';
+import { Node } from '../core/index';
+
 export function Move(moveIds, tryDelta, projection, cache) {
     var delta = tryDelta;
 
@@ -114,7 +124,7 @@ export function Move(moveIds, tryDelta, projection, cache) {
         var key = wayId + '_' + nodeId,
             orig = cache.replacedVertex[key];
         if (!orig) {
-            orig = iD.Node();
+            orig = Node();
             cache.replacedVertex[key] = orig;
             cache.startLoc[orig.id] = cache.startLoc[nodeId];
         }
@@ -128,21 +138,21 @@ export function Move(moveIds, tryDelta, projection, cache) {
         }
         orig = orig.move(end);
 
-        var angle = Math.abs(iD.geo.angle(orig, prev, projection) -
-                iD.geo.angle(orig, next, projection)) * 180 / Math.PI;
+        var angle = Math.abs(getAngle(orig, prev, projection) -
+                getAngle(orig, next, projection)) * 180 / Math.PI;
 
         // Don't add orig vertex if it would just make a straight line..
         if (angle > 175 && angle < 185) return graph;
 
         // Don't add orig vertex if another point is already nearby (within 10m)
-        if (iD.geo.sphericalDistance(prev.loc, orig.loc) < 10 ||
-            iD.geo.sphericalDistance(orig.loc, next.loc) < 10) return graph;
+        if (sphericalDistance(prev.loc, orig.loc) < 10 ||
+            sphericalDistance(orig.loc, next.loc) < 10) return graph;
 
         // moving forward or backward along way?
         var p1 = [prev.loc, orig.loc, moved.loc, next.loc].map(projection),
             p2 = [prev.loc, moved.loc, orig.loc, next.loc].map(projection),
-            d1 = iD.geo.pathLength(p1),
-            d2 = iD.geo.pathLength(p2),
+            d1 = pathLength(p1),
+            d2 = pathLength(p2),
             insertAt = (d1 < d2) ? movedIndex : nextIndex;
 
         // moving around closed loop?
@@ -169,17 +179,17 @@ export function Move(moveIds, tryDelta, projection, cache) {
         if (way1.isClosed() && way1.first() === vertex.id) nodes1.push(nodes1[0]);
         if (way2.isClosed() && way2.first() === vertex.id) nodes2.push(nodes2[0]);
 
-        var edge1 = !isEP1 && iD.geo.chooseEdge(nodes1, projection(vertex.loc), projection),
-            edge2 = !isEP2 && iD.geo.chooseEdge(nodes2, projection(vertex.loc), projection),
+        var edge1 = !isEP1 && chooseEdge(nodes1, projection(vertex.loc), projection),
+            edge2 = !isEP2 && chooseEdge(nodes2, projection(vertex.loc), projection),
             loc;
 
         // snap vertex to nearest edge (or some point between them)..
         if (!isEP1 && !isEP2) {
             var epsilon = 1e-4, maxIter = 10;
             for (var i = 0; i < maxIter; i++) {
-                loc = iD.geo.interp(edge1.loc, edge2.loc, 0.5);
-                edge1 = iD.geo.chooseEdge(nodes1, projection(loc), projection);
-                edge2 = iD.geo.chooseEdge(nodes2, projection(loc), projection);
+                loc = interp(edge1.loc, edge2.loc, 0.5);
+                edge1 = chooseEdge(nodes1, projection(loc), projection);
+                edge2 = chooseEdge(nodes2, projection(loc), projection);
                 if (Math.abs(edge1.distance - edge2.distance) < epsilon) break;
             }
         } else if (!isEP1) {
@@ -227,11 +237,11 @@ export function Move(moveIds, tryDelta, projection, cache) {
                     function(loc) { return vecAdd(projection(loc), delta); }),
                 unmovedNodes = graph.childNodes(graph.entity(obj.unmovedId)),
                 unmovedPath = _.map(_.map(unmovedNodes, 'loc'), projection),
-                hits = iD.geo.pathIntersections(movedPath, unmovedPath);
+                hits = pathIntersections(movedPath, unmovedPath);
 
             for (var i = 0; i < hits.length; i++) {
                 if (_.isEqual(hits[i], end)) continue;
-                var edge = iD.geo.chooseEdge(unmovedNodes, end, projection);
+                var edge = chooseEdge(unmovedNodes, end, projection);
                 delta = vecSub(projection(edge.loc), start);
             }
         });

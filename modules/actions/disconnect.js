@@ -12,6 +12,7 @@
 //   https://github.com/openstreetmap/potlatch2/blob/master/net/systemeD/halcyon/connection/actions/UnjoinNodeAction.as
 //   https://github.com/openstreetmap/josm/blob/mirror/src/org/openstreetmap/josm/actions/UnGlueAction.java
 //
+import { Node } from '../core/index';
 export function Disconnect(nodeId, newNodeId) {
     var wayIds;
 
@@ -21,7 +22,7 @@ export function Disconnect(nodeId, newNodeId) {
 
         connections.forEach(function(connection) {
             var way = graph.entity(connection.wayID),
-                newNode = iD.Node({id: newNodeId, loc: node.loc, tags: node.tags});
+                newNode = Node({id: newNodeId, loc: node.loc, tags: node.tags});
 
             graph = graph.replace(newNode);
             if (connection.index === 0 && way.isArea()) {

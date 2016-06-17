@@ -1,5 +1,6 @@
 import { Split } from './split';
-
+import { inferRestriction } from '../geo/index';
+import { Relation, Way } from '../core/index';
 // Create a restriction relation for `turn`, which must have the following structure:
 //
 //     {
@@ -14,7 +15,7 @@ import { Split } from './split';
 // (The action does not check that these entities form a valid intersection.)
 //
 // If `restriction` is not provided, it is automatically determined by
-// iD.geo.inferRestriction.
+// inferRestriction.
 //
 // If necessary, the `from` and `to` ways are split. In these cases, `from.node`
 // and `to.node` are used to determine which portion of the split ways become
@@ -35,7 +36,7 @@ export function RestrictTurn(turn, projection, restrictionId) {
         }
 
         function split(toOrFrom) {
-            var newID = toOrFrom.newID || iD.Way().id;
+            var newID = toOrFrom.newID || Way().id;
             graph = Split(via.id, [newID])
                 .limitWays([toOrFrom.way])(graph);
 
@@ -68,12 +69,12 @@ export function RestrictTurn(turn, projection, restrictionId) {
             to = split(turn.to)[0];
         }
 
-        return graph.replace(iD.Relation({
+        return graph.replace(Relation({
             id: restrictionId,
             tags: {
                 type: 'restriction',
                 restriction: turn.restriction ||
-                    iD.geo.inferRestriction(
+                    inferRestriction(
                         graph,
                         turn.from,
                         turn.via,
