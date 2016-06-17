@@ -1,4 +1,5 @@
 import { Entity } from './entity';
+import { Extent, joinWays, polygonContainsPolygon, polygonIntersectsPolygon } from '../geo/index';
 
 export function Relation() {
     if (!(this instanceof Relation)) {
@@ -41,11 +42,11 @@ _.extend(Relation.prototype, {
 
     extent: function(resolver, memo) {
         return resolver.transient(this, 'extent', function() {
-            if (memo && memo[this.id]) return iD.geo.Extent();
+            if (memo && memo[this.id]) return Extent();
             memo = memo || {};
             memo[this.id] = true;
 
-            var extent = iD.geo.Extent();
+            var extent = Extent();
             for (var i = 0; i < this.members.length; i++) {
                 var member = resolver.hasEntity(this.members[i].id);
                 if (member) {
@@ -224,8 +225,8 @@ _.extend(Relation.prototype, {
         var outers = this.members.filter(function(m) { return 'outer' === (m.role || 'outer'); }),
             inners = this.members.filter(function(m) { return 'inner' === m.role; });
 
-        outers = iD.geo.joinWays(outers, resolver);
-        inners = iD.geo.joinWays(inners, resolver);
+        outers = joinWays(outers, resolver);
+        inners = joinWays(inners, resolver);
 
         outers = outers.map(function(outer) { return _.map(outer.nodes, 'loc'); });
         inners = inners.map(function(inner) { return _.map(inner.nodes, 'loc'); });
@@ -241,13 +242,13 @@ _.extend(Relation.prototype, {
 
             for (o = 0; o < outers.length; o++) {
                 outer = outers[o];
-                if (iD.geo.polygonContainsPolygon(outer, inner))
+                if (polygonContainsPolygon(outer, inner))
                     return o;
             }
 
             for (o = 0; o < outers.length; o++) {
                 outer = outers[o];
-                if (iD.geo.polygonIntersectsPolygon(outer, inner))
+                if (polygonIntersectsPolygon(outer, inner))
                     return o;
             }
         }

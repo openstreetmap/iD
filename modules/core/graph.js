@@ -1,3 +1,5 @@
+import { getPrototypeOf } from '../util/index';
+
 export function Graph(other, mutable) {
     if (!(this instanceof Graph)) return new Graph(other, mutable);
 
@@ -97,9 +99,9 @@ Graph.prototype = {
 
     base: function() {
         return {
-            'entities': iD.util.getPrototypeOf(this.entities),
-            'parentWays': iD.util.getPrototypeOf(this._parentWays),
-            'parentRels': iD.util.getPrototypeOf(this._parentRels)
+            'entities': getPrototypeOf(this.entities),
+            'parentWays': getPrototypeOf(this._parentWays),
+            'parentRels': getPrototypeOf(this._parentRels)
         };
     },
 

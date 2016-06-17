@@ -2,12 +2,14 @@ import { Entity } from './entity';
 import { Graph } from './graph';
 import { Difference } from './difference';
 import { Tree } from './tree';
+import { SessionMutex } from '../util/index';
+import { Loading } from '../ui/core/index';
 
 export function History(context) {
     var stack, index, tree,
         imageryUsed = ['Bing'],
         dispatch = d3.dispatch('change', 'undone', 'redone'),
-        lock = iD.util.SessionMutex('lock');
+        lock = SessionMutex('lock');
 
     function perform(actions) {
         actions = Array.prototype.slice.call(actions);
@@ -291,7 +293,7 @@ export function History(context) {
                             loadComplete = false;
                             context.redrawEnable(false);
 
-                            var loading = iD.ui.Loading(context).blocking(true);
+                            var loading = Loading(context).blocking(true);
                             context.container().call(loading);
 
                             var childNodesLoaded = function(err, result) {

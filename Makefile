@@ -45,7 +45,6 @@ $(BUILDJS_TARGETS): $(BUILDJS_SOURCES) build.js
 MODULE_TARGETS = \
 	js/lib/id/index.js \
 	js/lib/id/behavior.js \
-	js/lib/id/core.js \
 	js/lib/id/geo.js \
 	js/lib/id/modes.js \
 	js/lib/id/operations.js \

@@ -1,5 +1,7 @@
 import { Entity } from './entity';
 import { oneWayTags } from './tags';
+import { cross, Extent } from '../geo/index';
+
 export function Way() {
     if (!(this instanceof Way)) {
         return (new Way()).initialize(arguments);
@@ -34,7 +36,7 @@ _.extend(Way.prototype, {
 
     extent: function(resolver) {
         return resolver.transient(this, 'extent', function() {
-            var extent = iD.geo.Extent();
+            var extent = Extent();
             for (var i = 0; i < this.nodes.length; i++) {
                 var node = resolver.hasEntity(this.nodes[i]);
                 if (node) {
@@ -113,7 +115,7 @@ _.extend(Way.prototype, {
             var o = coords[(i+1) % coords.length],
                 a = coords[i],
                 b = coords[(i+2) % coords.length],
-                res = iD.geo.cross(o, a, b);
+                res = cross(o, a, b);
 
             curr = (res > 0) ? 1 : (res < 0) ? -1 : 0;
             if (curr === 0) {
