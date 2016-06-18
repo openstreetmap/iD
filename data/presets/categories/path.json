@@ -4,8 +4,9 @@
     "icon": "category-path",
     "members": [
         "highway/pedestrian",
-        "highway/footway",
+        "footway/crosswalk",
         "footway/sidewalk",
+        "highway/footway",
         "highway/cycleway",
         "highway/bridleway",
         "highway/path",
