@@ -5,6 +5,7 @@ import * as modes from './modes/index';
 import * as util from './util/index';
 import * as operations from './operations/index';
 import * as presets from './presets/index';
+import * as validations from './validations/index';
 
 export { Connection } from './core/connection';
 export { Difference } from './core/difference';
@@ -24,5 +25,6 @@ export {
   modes,
   operations,
   presets,
-  util
+  util,
+  validations
 };

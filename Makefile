@@ -49,8 +49,7 @@ MODULE_TARGETS = \
 	js/lib/id/ui/index.js \
 	js/lib/id/ui/core.js \
 	js/lib/id/ui/intro.js \
-	js/lib/id/ui/preset.js \
-	js/lib/id/validations.js
+	js/lib/id/ui/preset.js
 
 js/lib/id/index.js: $(shell find modules/index.js -type f)
 	@rm -f $@
@@ -83,10 +82,6 @@ js/lib/id/ui/intro.js: $(shell find modules/ui/intro -type f)
 js/lib/id/ui/preset.js: $(shell find modules/ui/preset -type f)
 	@rm -f $@
 	node_modules/.bin/rollup -f umd -n iD.ui.preset modules/ui/preset/index.js --no-strict -o $@
-
-js/lib/id/validations.js: $(shell find modules/validations -type f)
-	@rm -f $@
-	node_modules/.bin/rollup -f umd -n iD.validations modules/validations/index.js --no-strict -o $@
 
 dist/iD.js: \
 	js/lib/bootstrap-tooltip.js \
