@@ -1,3 +1,5 @@
+import { Paste, Hover, Select, Lasso } from '../behavior/index';
+import { DragNode } from './index';
 export function Browse(context) {
     var mode = {
         button: 'browse',
@@ -7,12 +9,12 @@ export function Browse(context) {
     }, sidebar;
 
     var behaviors = [
-        iD.behavior.Paste(context),
-        iD.behavior.Hover(context)
+        Paste(context),
+        Hover(context)
             .on('hover', context.ui().sidebar.hover),
-        iD.behavior.Select(context),
-        iD.behavior.Lasso(context),
-        iD.modes.DragNode(context).behavior];
+        Select(context),
+        Lasso(context),
+        DragNode(context).behavior];
 
     mode.enter = function() {
         behaviors.forEach(function(behavior) {

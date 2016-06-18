@@ -1,3 +1,6 @@
+import { Edit } from '../behavior/index';
+import { Select, Browse } from './index';
+import { Move as MoveAction, Noop } from '../actions/index';
 export function Move(context, entityIDs, baseGraph) {
     var mode = {
         id: 'move',
@@ -5,7 +8,7 @@ export function Move(context, entityIDs, baseGraph) {
     };
 
     var keybinding = d3.keybinding('move'),
-        edit = iD.behavior.Edit(context),
+        edit = Edit(context),
         annotation = entityIDs.length === 1 ?
             t('operations.move.annotation.' + context.geometry(entityIDs[0])) :
             t('operations.move.annotation.multiple'),
@@ -32,7 +35,7 @@ export function Move(context, entityIDs, baseGraph) {
             var currMouse = context.mouse(),
                 origMouse = context.projection(origin),
                 delta = vecSub(vecSub(currMouse, origMouse), nudge),
-                action = iD.actions.Move(entityIDs, delta, context.projection, cache);
+                action = MoveAction(entityIDs, delta, context.projection, cache);
 
             context.overwrite(action, annotation);
 
@@ -48,7 +51,7 @@ export function Move(context, entityIDs, baseGraph) {
         var currMouse = context.mouse(),
             origMouse = context.projection(origin),
             delta = vecSub(currMouse, origMouse),
-            action = iD.actions.Move(entityIDs, delta, context.projection, cache);
+            action = MoveAction(entityIDs, delta, context.projection, cache);
 
         context.overwrite(action, annotation);
 
@@ -59,23 +62,23 @@ export function Move(context, entityIDs, baseGraph) {
 
     function finish() {
         d3.event.stopPropagation();
-        context.enter(iD.modes.Select(context, entityIDs).suppressMenu(true));
+        context.enter(Select(context, entityIDs).suppressMenu(true));
         stopNudge();
     }
 
     function cancel() {
         if (baseGraph) {
             while (context.graph() !== baseGraph) context.pop();
-            context.enter(iD.modes.Browse(context));
+            context.enter(Browse(context));
         } else {
             context.pop();
-            context.enter(iD.modes.Select(context, entityIDs).suppressMenu(true));
+            context.enter(Select(context, entityIDs).suppressMenu(true));
         }
         stopNudge();
     }
 
     function undone() {
-        context.enter(iD.modes.Browse(context));
+        context.enter(Browse(context));
     }
 
     mode.enter = function() {
@@ -85,7 +88,7 @@ export function Move(context, entityIDs, baseGraph) {
         context.install(edit);
 
         context.perform(
-            iD.actions.Noop(),
+            Noop(),
             annotation);
 
         context.surface()

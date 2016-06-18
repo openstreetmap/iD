@@ -1,3 +1,9 @@
+import { Hover, Edit, drag } from '../behavior/index';
+import { Node } from '../core/index';
+import { entitySelector } from '../util/index';
+import { Select, Browse } from './index';
+import { chooseEdge } from '../geo/index';
+import { AddMidpoint, Noop, MoveNode, Connect } from '../actions/index';
 export function DragNode(context) {
     var mode = {
         id: 'drag-node',
@@ -9,10 +15,10 @@ export function DragNode(context) {
         wasMidpoint,
         cancelled,
         selectedIDs = [],
-        hover = iD.behavior.Hover(context)
+        hover = Hover(context)
             .altDisables(true)
             .on('hover', context.ui().sidebar.hover),
-        edit = iD.behavior.Edit(context);
+        edit = Edit(context);
 
     function edge(point, size) {
         var pad = [30, 100, 30, 100];
@@ -56,8 +62,8 @@ export function DragNode(context) {
         wasMidpoint = entity.type === 'midpoint';
         if (wasMidpoint) {
             var midpoint = entity;
-            entity = iD.Node();
-            context.perform(iD.actions.AddMidpoint(midpoint, entity));
+            entity = Node();
+            context.perform(AddMidpoint(midpoint, entity));
 
              var vertex = context.surface()
                 .selectAll('.' + entity.id);
@@ -65,7 +71,7 @@ export function DragNode(context) {
 
         } else {
             context.perform(
-                iD.actions.Noop());
+                Noop());
         }
 
         activeIDs = _.map(context.graph().parentWays(entity), 'id');
@@ -106,11 +112,11 @@ export function DragNode(context) {
         if (d.type === 'node' && d.id !== entity.id) {
             loc = d.loc;
         } else if (d.type === 'way' && !d3.select(d3.event.sourceEvent.target).classed('fill')) {
-            loc = iD.geo.chooseEdge(context.childNodes(d), context.mouse(), context.projection).loc;
+            loc = chooseEdge(context.childNodes(d), context.mouse(), context.projection).loc;
         }
 
         context.replace(
-            iD.actions.MoveNode(entity.id, loc),
+            MoveNode(entity.id, loc),
             moveAnnotation(entity));
     }
 
@@ -120,24 +126,24 @@ export function DragNode(context) {
         var d = datum();
 
         if (d.type === 'way') {
-            var choice = iD.geo.chooseEdge(context.childNodes(d), context.mouse(), context.projection);
+            var choice = chooseEdge(context.childNodes(d), context.mouse(), context.projection);
             context.replace(
-                iD.actions.AddMidpoint({ loc: choice.loc, edge: [d.nodes[choice.index - 1], d.nodes[choice.index]] }, entity),
+                AddMidpoint({ loc: choice.loc, edge: [d.nodes[choice.index - 1], d.nodes[choice.index]] }, entity),
                 connectAnnotation(d));
 
         } else if (d.type === 'node' && d.id !== entity.id) {
             context.replace(
-                iD.actions.Connect([d.id, entity.id]),
+                Connect([d.id, entity.id]),
                 connectAnnotation(d));
 
         } else if (wasMidpoint) {
             context.replace(
-                iD.actions.Noop(),
+                Noop(),
                 t('operations.add.annotation.vertex'));
 
         } else {
             context.replace(
-                iD.actions.Noop(),
+                Noop(),
                 moveAnnotation(entity));
         }
 
@@ -147,24 +153,24 @@ export function DragNode(context) {
 
         if (reselection.length) {
             context.enter(
-                iD.modes.Select(context, reselection)
+                Select(context, reselection)
                     .suppressMenu(true));
         } else {
-            context.enter(iD.modes.Browse(context));
+            context.enter(Browse(context));
         }
     }
 
     function cancel() {
         behavior.cancel();
-        context.enter(iD.modes.Browse(context));
+        context.enter(Browse(context));
     }
 
     function setActiveElements() {
-        context.surface().selectAll(iD.util.entitySelector(activeIDs))
+        context.surface().selectAll(entitySelector(activeIDs))
             .classed('active', true);
     }
 
-    var behavior = iD.behavior.drag()
+    var behavior = drag()
         .delegate('g.node, g.point, g.midpoint')
         .surface(context.surface().node())
         .origin(origin)

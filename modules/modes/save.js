@@ -1,10 +1,16 @@
+import { Graph } from '../core/index';
+import { displayName, displayType } from '../util/index';
+import { Browse } from './index';
+import { DiscardTags, Noop, MergeRemoteChanges, Revert } from '../actions/index';
+import { Commit, Loading, Success, Conflicts } from '../ui/core/index';
+
 export function Save(context) {
-    var ui = iD.ui.Commit(context)
+    var ui = Commit(context)
             .on('cancel', cancel)
             .on('save', save);
 
     function cancel() {
-        context.enter(iD.modes.Browse(context));
+        context.enter(Browse(context));
     }
 
     function save(e, tryAgain) {
@@ -25,18 +31,18 @@ export function Save(context) {
             }, _.clone(ids)));
         }
 
-        var loading = iD.ui.Loading(context).message(t('save.uploading')).blocking(true),
+        var loading = Loading(context).message(t('save.uploading')).blocking(true),
             history = context.history(),
-            origChanges = history.changes(iD.actions.DiscardTags(history.difference())),
+            origChanges = history.changes(DiscardTags(history.difference())),
             localGraph = context.graph(),
-            remoteGraph = iD.Graph(history.base(), true),
+            remoteGraph = Graph(history.base(), true),
             modified = _.filter(history.difference().summary(), {changeType: 'modified'}),
             toCheck = _.map(_.map(modified, 'entity'), 'id'),
             toLoad = withChildNodes(toCheck, localGraph),
             conflicts = [],
             errors = [];
 
-        if (!tryAgain) history.perform(iD.actions.Noop());  // checkpoint
+        if (!tryAgain) history.perform(Noop());  // checkpoint
         context.container().call(loading);
 
         if (toCheck.length) {
@@ -95,7 +101,7 @@ export function Save(context) {
                 return '<a href="' + context.connection().userURL(d) + '" target="_blank">' + d + '</a>';
             }
             function entityName(entity) {
-                return iD.util.displayName(entity) || (iD.util.displayType(entity.id) + ' ' + entity.id);
+                return displayName(entity) || (displayType(entity.id) + ' ' + entity.id);
             }
 
             function compareVersions(local, remote) {
@@ -121,7 +127,7 @@ export function Save(context) {
 
                 if (compareVersions(local, remote)) return;
 
-                var action = iD.actions.MergeRemoteChanges,
+                var action = MergeRemoteChanges,
                     merge = action(id, localGraph, remoteGraph, formatUser);
 
                 history.replace(merge);
@@ -157,7 +163,7 @@ export function Save(context) {
             } else if (errors.length) {
                 showErrors();
             } else {
-                var changes = history.changes(iD.actions.DiscardTags(history.difference()));
+                var changes = history.changes(DiscardTags(history.difference()));
                 if (changes.modified.length || changes.created.length || changes.deleted.length) {
                     context.connection().putChangeset(
                         changes,
@@ -197,7 +203,7 @@ export function Save(context) {
 
             loading.close();
 
-            selection.call(iD.ui.Conflicts(context)
+            selection.call(Conflicts(context)
                 .list(conflicts)
                 .on('download', function() {
                     var data = JXON.stringify(context.connection().osmChangeJXON('CHANGEME', origChanges)),
@@ -215,10 +221,10 @@ export function Save(context) {
                             if (entity && entity.type === 'way') {
                                 var children = _.uniq(entity.nodes);
                                 for (var j = 0; j < children.length; j++) {
-                                    history.replace(iD.actions.Revert(children[j]));
+                                    history.replace(Revert(children[j]));
                                 }
                             }
-                            history.replace(iD.actions.Revert(conflicts[i].id));
+                            history.replace(Revert(conflicts[i].id));
                         }
                     }
 
@@ -230,7 +236,7 @@ export function Save(context) {
 
 
         function showErrors() {
-            var selection = iD.ui.confirm(context.container());
+            var selection = confirm(context.container());
 
             history.pop();
             loading.close();
@@ -297,8 +303,8 @@ export function Save(context) {
 
 
     function success(e, changeset_id) {
-        context.enter(iD.modes.Browse(context)
-            .sidebar(iD.ui.Success(context)
+        context.enter(Browse(context)
+            .sidebar(Success(context)
                 .changeset({
                     id: changeset_id,
                     comment: e.comment

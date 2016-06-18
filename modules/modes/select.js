@@ -1,3 +1,12 @@
+import { Copy, Paste, Breathe, Hover, Select as SelectBehavior, Lasso } from '../behavior/index';
+import { Way, Node } from '../core/index';
+import { entityOrMemberSelector } from '../util/index';
+import { DragNode, Browse } from './index';
+import { Extent, pointInPolygon, chooseEdge } from '../geo/index';
+import { AddMidpoint } from '../actions/index';
+import * as Operations from '../operations/index';
+import {  RadialMenu, SelectionList } from '../ui/core/index';
+
 export function Select(context, selectedIDs) {
     var mode = {
         id: 'select',
@@ -7,13 +16,13 @@ export function Select(context, selectedIDs) {
     var keybinding = d3.keybinding('select'),
         timeout = null,
         behaviors = [
-            iD.behavior.Copy(context),
-            iD.behavior.Paste(context),
-            iD.behavior.Breathe(context),
-            iD.behavior.Hover(context),
-            iD.behavior.Select(context),
-            iD.behavior.Lasso(context),
-            iD.modes.DragNode(context)
+            Copy(context),
+            Paste(context),
+            Breathe(context),
+            Hover(context),
+            SelectBehavior(context),
+            Lasso(context),
+            DragNode(context)
                 .selectedIDs(selectedIDs)
                 .behavior],
         inspector,
@@ -47,8 +56,8 @@ export function Select(context, selectedIDs) {
             radialMenu.center(context.projection(entity.loc));
         } else {
             var point = context.mouse(),
-                viewport = iD.geo.Extent(context.projection.clipExtent()).polygon();
-            if (iD.geo.pointInPolygon(point, viewport)) {
+                viewport = Extent(context.projection.clipExtent()).polygon();
+            if (pointInPolygon(point, viewport)) {
                 radialMenu.center(point);
             } else {
                 suppressMenu = true;
@@ -102,7 +111,7 @@ export function Select(context, selectedIDs) {
             closeMenu();
             if (_.some(selectedIDs, function(id) { return !context.hasEntity(id); })) {
                 // Exit mode if selected entity gets undone
-                context.enter(iD.modes.Browse(context));
+                context.enter(Browse(context));
             }
         }
 
@@ -110,15 +119,15 @@ export function Select(context, selectedIDs) {
             var target = d3.select(d3.event.target),
                 datum = target.datum();
 
-            if (datum instanceof iD.Way && !target.classed('fill')) {
-                var choice = iD.geo.chooseEdge(context.childNodes(datum), context.mouse(), context.projection),
-                    node = iD.Node();
+            if (datum instanceof Way && !target.classed('fill')) {
+                var choice = chooseEdge(context.childNodes(datum), context.mouse(), context.projection),
+                    node = Node();
 
                 var prev = datum.nodes[choice.index - 1],
                     next = datum.nodes[choice.index];
 
                 context.perform(
-                    iD.actions.AddMidpoint({loc: choice.loc, edge: [prev, next]}, node),
+                    AddMidpoint({loc: choice.loc, edge: [prev, next]}, node),
                     t('operations.add.annotation.vertex'));
 
                 d3.event.preventDefault();
@@ -134,11 +143,11 @@ export function Select(context, selectedIDs) {
             }
 
             var selection = context.surface()
-                    .selectAll(iD.util.entityOrMemberSelector(selectedIDs, context.graph()));
+                    .selectAll(entityOrMemberSelector(selectedIDs, context.graph()));
 
             if (selection.empty()) {
                 if (drawn) {  // Exit mode if selected DOM elements have disappeared..
-                    context.enter(iD.modes.Browse(context));
+                    context.enter(Browse(context));
                 }
             } else {
                 selection
@@ -148,7 +157,7 @@ export function Select(context, selectedIDs) {
 
         function esc() {
             if (!context.inIntro()) {
-                context.enter(iD.modes.Browse(context));
+                context.enter(Browse(context));
             }
         }
 
@@ -157,11 +166,11 @@ export function Select(context, selectedIDs) {
             context.install(behavior);
         });
 
-        var operations = _.without(d3.values(iD.operations), iD.operations.Delete)
+        var operations = _.without(d3.values(Operations), Operations.Delete)
                 .map(function(o) { return o(selectedIDs, context); })
                 .filter(function(o) { return o.available(); });
 
-        operations.unshift(iD.operations.Delete(selectedIDs, context));
+        operations.unshift(Operations.Delete(selectedIDs, context));
 
         keybinding
             .on('⎋', esc, true)
@@ -180,7 +189,7 @@ export function Select(context, selectedIDs) {
         d3.select(document)
             .call(keybinding);
 
-        radialMenu = iD.ui.RadialMenu(context, operations);
+        radialMenu = RadialMenu(context, operations);
 
         context.ui().sidebar
             .select(singular() ? singular().id : null, newFeature);
@@ -211,7 +220,7 @@ export function Select(context, selectedIDs) {
         }, 200);
 
         if (selectedIDs.length > 1) {
-            var entities = iD.ui.SelectionList(context, selectedIDs);
+            var entities = SelectionList(context, selectedIDs);
             context.ui().sidebar.show(entities);
         }
     };

@@ -1,3 +1,7 @@
+import { Draw } from '../behavior/index';
+import { Node } from '../core/index';
+import { Select, Browse } from './index';
+import { AddEntity } from '../actions/index';
 export function AddPoint(context) {
     var mode = {
         id: 'add-point',
@@ -7,7 +11,7 @@ export function AddPoint(context) {
         key: '1'
     };
 
-    var behavior = iD.behavior.Draw(context)
+    var behavior = Draw(context)
         .tail(t('modes.add_point.tail'))
         .on('click', add)
         .on('clickWay', addWay)
@@ -16,14 +20,14 @@ export function AddPoint(context) {
         .on('finish', cancel);
 
     function add(loc) {
-        var node = iD.Node({loc: loc});
+        var node = Node({loc: loc});
 
         context.perform(
-            iD.actions.AddEntity(node),
+            AddEntity(node),
             t('operations.add.annotation.point'));
 
         context.enter(
-            iD.modes.Select(context, [node.id])
+            Select(context, [node.id])
                 .suppressMenu(true)
                 .newFeature(true));
     }
@@ -37,7 +41,7 @@ export function AddPoint(context) {
     }
 
     function cancel() {
-        context.enter(iD.modes.Browse(context));
+        context.enter(Browse(context));
     }
 
     mode.enter = function() {

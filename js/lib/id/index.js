@@ -1577,9 +1577,32 @@
        return ids.length ? '.' + ids.join(',.') : 'nothing';
    }
 
+   function entityOrMemberSelector(ids, graph) {
+       var s = entitySelector(ids);
+
+       ids.forEach(function(id) {
+           var entity = graph.hasEntity(id);
+           if (entity && entity.type === 'relation') {
+               entity.members.forEach(function(member) {
+                   s += ',.' + member.id;
+               });
+           }
+       });
+
+       return s;
+   }
+
    function displayName(entity) {
        var localeName = 'name:' + iD.detect().locale.toLowerCase().split('-')[0];
        return entity.tags[localeName] || entity.tags.name || entity.tags.ref;
+   }
+
+   function displayType(id) {
+       return {
+           n: t('inspector.node'),
+           w: t('inspector.way'),
+           r: t('inspector.relation')
+       }[id.charAt(0)];
    }
 
    function stringQs(str) {
@@ -2120,6 +2143,285 @@
        return result;
    }
 
+   function Commit(context) {
+       var dispatch = d3.dispatch('cancel', 'save');
+
+       function commit(selection) {
+           var changes = context.history().changes(),
+               summary = context.history().difference().summary();
+
+           function zoomToEntity(change) {
+               var entity = change.entity;
+               if (change.changeType !== 'deleted' &&
+                   context.graph().entity(entity.id).geometry(context.graph()) !== 'vertex') {
+                   context.map().zoomTo(entity);
+                   context.surface().selectAll(
+                       iD.util.entityOrMemberSelector([entity.id], context.graph()))
+                       .classed('hover', true);
+               }
+           }
+
+           var header = selection.append('div')
+               .attr('class', 'header fillL');
+
+           header.append('h3')
+               .text(t('commit.title'));
+
+           var body = selection.append('div')
+               .attr('class', 'body');
+
+
+           // Comment Section
+           var commentSection = body.append('div')
+               .attr('class', 'modal-section form-field commit-form');
+
+           commentSection.append('label')
+               .attr('class', 'form-label')
+               .text(t('commit.message_label'));
+
+           var commentField = commentSection.append('textarea')
+               .attr('placeholder', t('commit.description_placeholder'))
+               .attr('maxlength', 255)
+               .property('value', context.storage('comment') || '')
+               .on('input.save', checkComment)
+               .on('change.save', checkComment)
+               .on('blur.save', function() {
+                   context.storage('comment', this.value);
+               });
+
+           function checkComment() {
+               d3.selectAll('.save-section .save-button')
+                   .attr('disabled', (this.value.length ? null : true));
+
+               var googleWarning = clippyArea
+                  .html('')
+                  .selectAll('a')
+                  .data(this.value.match(/google/i) ? [true] : []);
+
+               googleWarning.exit().remove();
+
+               googleWarning.enter()
+                  .append('a')
+                  .attr('target', '_blank')
+                  .attr('tabindex', -1)
+                  .call(iD.svg.Icon('#icon-alert', 'inline'))
+                  .attr('href', t('commit.google_warning_link'))
+                  .append('span')
+                  .text(t('commit.google_warning'));
+           }
+
+           commentField.node().select();
+
+           context.connection().userChangesets(function (err, changesets) {
+               if (err) return;
+
+               var comments = [];
+
+               for (var i = 0; i < changesets.length; i++) {
+                   if (changesets[i].tags.comment) {
+                       comments.push({
+                           title: changesets[i].tags.comment,
+                           value: changesets[i].tags.comment
+                       });
+                   }
+               }
+
+               commentField.call(d3.combobox().caseSensitive(true).data(comments));
+           });
+
+           var clippyArea = commentSection.append('div')
+               .attr('class', 'clippy-area');
+
+
+           var changeSetInfo = commentSection.append('div')
+               .attr('class', 'changeset-info');
+
+           changeSetInfo.append('a')
+               .attr('target', '_blank')
+               .attr('tabindex', -1)
+               .call(iD.svg.Icon('#icon-out-link', 'inline'))
+               .attr('href', t('commit.about_changeset_comments_link'))
+               .append('span')
+               .text(t('commit.about_changeset_comments'));
+
+           // Warnings
+           var warnings = body.selectAll('div.warning-section')
+               .data([context.history().validate(changes)])
+               .enter()
+               .append('div')
+               .attr('class', 'modal-section warning-section fillL2')
+               .style('display', function(d) { return _.isEmpty(d) ? 'none' : null; })
+               .style('background', '#ffb');
+
+           warnings.append('h3')
+               .text(t('commit.warnings'));
+
+           var warningLi = warnings.append('ul')
+               .attr('class', 'changeset-list')
+               .selectAll('li')
+               .data(function(d) { return d; })
+               .enter()
+               .append('li')
+               .style()
+               .on('mouseover', mouseover)
+               .on('mouseout', mouseout)
+               .on('click', warningClick);
+
+           warningLi
+               .call(iD.svg.Icon('#icon-alert', 'pre-text'));
+
+           warningLi
+               .append('strong').text(function(d) {
+                   return d.message;
+               });
+
+           warningLi.filter(function(d) { return d.tooltip; })
+               .call(bootstrap.tooltip()
+                   .title(function(d) { return d.tooltip; })
+                   .placement('top')
+               );
+
+
+           // Upload Explanation
+           var saveSection = body.append('div')
+               .attr('class','modal-section save-section fillL cf');
+
+           var prose = saveSection.append('p')
+               .attr('class', 'commit-info')
+               .html(t('commit.upload_explanation'));
+
+           context.connection().userDetails(function(err, user) {
+               if (err) return;
+
+               var userLink = d3.select(document.createElement('div'));
+
+               if (user.image_url) {
+                   userLink.append('img')
+                       .attr('src', user.image_url)
+                       .attr('class', 'icon pre-text user-icon');
+               }
+
+               userLink.append('a')
+                   .attr('class','user-info')
+                   .text(user.display_name)
+                   .attr('href', context.connection().userURL(user.display_name))
+                   .attr('tabindex', -1)
+                   .attr('target', '_blank');
+
+               prose.html(t('commit.upload_explanation_with_user', {user: userLink.html()}));
+           });
+
+
+           // Buttons
+           var buttonSection = saveSection.append('div')
+               .attr('class','buttons fillL cf');
+
+           var cancelButton = buttonSection.append('button')
+               .attr('class', 'secondary-action col5 button cancel-button')
+               .on('click.cancel', function() { dispatch.cancel(); });
+
+           cancelButton.append('span')
+               .attr('class', 'label')
+               .text(t('commit.cancel'));
+
+           var saveButton = buttonSection.append('button')
+               .attr('class', 'action col5 button save-button')
+               .attr('disabled', function() {
+                   var n = d3.select('.commit-form textarea').node();
+                   return (n && n.value.length) ? null : true;
+               })
+               .on('click.save', function() {
+                   dispatch.save({
+                       comment: commentField.node().value
+                   });
+               });
+
+           saveButton.append('span')
+               .attr('class', 'label')
+               .text(t('commit.save'));
+
+
+           // Changes
+           var changeSection = body.selectAll('div.commit-section')
+               .data([0])
+               .enter()
+               .append('div')
+               .attr('class', 'commit-section modal-section fillL2');
+
+           changeSection.append('h3')
+               .text(t('commit.changes', {count: summary.length}));
+
+           var li = changeSection.append('ul')
+               .attr('class', 'changeset-list')
+               .selectAll('li')
+               .data(summary)
+               .enter()
+               .append('li')
+               .on('mouseover', mouseover)
+               .on('mouseout', mouseout)
+               .on('click', zoomToEntity);
+
+           li.each(function(d) {
+               d3.select(this)
+                   .call(iD.svg.Icon('#icon-' + d.entity.geometry(d.graph), 'pre-text ' + d.changeType));
+           });
+
+           li.append('span')
+               .attr('class', 'change-type')
+               .text(function(d) {
+                   return t('commit.' + d.changeType) + ' ';
+               });
+
+           li.append('strong')
+               .attr('class', 'entity-type')
+               .text(function(d) {
+                   return context.presets().match(d.entity, d.graph).name();
+               });
+
+           li.append('span')
+               .attr('class', 'entity-name')
+               .text(function(d) {
+                   var name = iD.util.displayName(d.entity) || '',
+                       string = '';
+                   if (name !== '') string += ':';
+                   return string += ' ' + name;
+               });
+
+           li.style('opacity', 0)
+               .transition()
+               .style('opacity', 1);
+
+
+           function mouseover(d) {
+               if (d.entity) {
+                   context.surface().selectAll(
+                       iD.util.entityOrMemberSelector([d.entity.id], context.graph())
+                   ).classed('hover', true);
+               }
+           }
+
+           function mouseout() {
+               context.surface().selectAll('.hover')
+                   .classed('hover', false);
+           }
+
+           function warningClick(d) {
+               if (d.entity) {
+                   context.map().zoomTo(d.entity);
+                   context.enter(
+                       iD.modes.Select(context, [d.entity.id])
+                           .suppressMenu(true));
+               }
+           }
+
+           // Call checkComment off the bat, in case a changeset
+           // comment is recovered from localStorage
+           commentField.trigger('input');
+       }
+
+       return d3.rebind(commit, dispatch, 'on');
+   }
+
    function modalModule(selection, blocking) {
        var keybinding = d3.keybinding('modal');
        var previous = selection.select('div.modal');
@@ -2182,6 +2484,257 @@
        }
 
        return shaded;
+   }
+
+   function Conflicts(context) {
+       var dispatch = d3.dispatch('download', 'cancel', 'save'),
+           list;
+
+       function conflicts(selection) {
+           var header = selection
+               .append('div')
+               .attr('class', 'header fillL');
+
+           header
+               .append('button')
+               .attr('class', 'fr')
+               .on('click', function() { dispatch.cancel(); })
+               .call(iD.svg.Icon('#icon-close'));
+
+           header
+               .append('h3')
+               .text(t('save.conflict.header'));
+
+           var body = selection
+               .append('div')
+               .attr('class', 'body fillL');
+
+           body
+               .append('div')
+               .attr('class', 'conflicts-help')
+               .text(t('save.conflict.help'))
+               .append('a')
+               .attr('class', 'conflicts-download')
+               .text(t('save.conflict.download_changes'))
+               .on('click.download', function() { dispatch.download(); });
+
+           body
+               .append('div')
+               .attr('class', 'conflict-container fillL3')
+               .call(showConflict, 0);
+
+           body
+               .append('div')
+               .attr('class', 'conflicts-done')
+               .attr('opacity', 0)
+               .style('display', 'none')
+               .text(t('save.conflict.done'));
+
+           var buttons = body
+               .append('div')
+               .attr('class','buttons col12 joined conflicts-buttons');
+
+           buttons
+               .append('button')
+               .attr('disabled', list.length > 1)
+               .attr('class', 'action conflicts-button col6')
+               .text(t('save.title'))
+               .on('click.try_again', function() { dispatch.save(); });
+
+           buttons
+               .append('button')
+               .attr('class', 'secondary-action conflicts-button col6')
+               .text(t('confirm.cancel'))
+               .on('click.cancel', function() { dispatch.cancel(); });
+       }
+
+
+       function showConflict(selection, index) {
+           if (index < 0 || index >= list.length) return;
+
+           var parent = d3.select(selection.node().parentNode);
+
+           // enable save button if this is the last conflict being reviewed..
+           if (index === list.length - 1) {
+               window.setTimeout(function() {
+                   parent.select('.conflicts-button')
+                       .attr('disabled', null);
+
+                   parent.select('.conflicts-done')
+                       .transition()
+                       .attr('opacity', 1)
+                       .style('display', 'block');
+               }, 250);
+           }
+
+           var item = selection
+               .selectAll('.conflict')
+               .data([list[index]]);
+
+           var enter = item.enter()
+               .append('div')
+               .attr('class', 'conflict');
+
+           enter
+               .append('h4')
+               .attr('class', 'conflict-count')
+               .text(t('save.conflict.count', { num: index + 1, total: list.length }));
+
+           enter
+               .append('a')
+               .attr('class', 'conflict-description')
+               .attr('href', '#')
+               .text(function(d) { return d.name; })
+               .on('click', function(d) {
+                   zoomToEntity(d.id);
+                   d3.event.preventDefault();
+               });
+
+           var details = enter
+               .append('div')
+               .attr('class', 'conflict-detail-container');
+
+           details
+               .append('ul')
+               .attr('class', 'conflict-detail-list')
+               .selectAll('li')
+               .data(function(d) { return d.details || []; })
+               .enter()
+               .append('li')
+               .attr('class', 'conflict-detail-item')
+               .html(function(d) { return d; });
+
+           details
+               .append('div')
+               .attr('class', 'conflict-choices')
+               .call(addChoices);
+
+           details
+               .append('div')
+               .attr('class', 'conflict-nav-buttons joined cf')
+               .selectAll('button')
+               .data(['previous', 'next'])
+               .enter()
+               .append('button')
+               .text(function(d) { return t('save.conflict.' + d); })
+               .attr('class', 'conflict-nav-button action col6')
+               .attr('disabled', function(d, i) {
+                   return (i === 0 && index === 0) ||
+                       (i === 1 && index === list.length - 1) || null;
+               })
+               .on('click', function(d, i) {
+                   var container = parent.select('.conflict-container'),
+                   sign = (i === 0 ? -1 : 1);
+
+                   container
+                       .selectAll('.conflict')
+                       .remove();
+
+                   container
+                       .call(showConflict, index + sign);
+
+                   d3.event.preventDefault();
+               });
+
+           item.exit()
+               .remove();
+
+       }
+
+       function addChoices(selection) {
+           var choices = selection
+               .append('ul')
+               .attr('class', 'layer-list')
+               .selectAll('li')
+               .data(function(d) { return d.choices || []; });
+
+           var enter = choices.enter()
+               .append('li')
+               .attr('class', 'layer');
+
+           var label = enter
+               .append('label');
+
+           label
+               .append('input')
+               .attr('type', 'radio')
+               .attr('name', function(d) { return d.id; })
+               .on('change', function(d, i) {
+                   var ul = this.parentNode.parentNode.parentNode;
+                   ul.__data__.chosen = i;
+                   choose(ul, d);
+               });
+
+           label
+               .append('span')
+               .text(function(d) { return d.text; });
+
+           choices
+               .each(function(d, i) {
+                   var ul = this.parentNode;
+                   if (ul.__data__.chosen === i) choose(ul, d);
+               });
+       }
+
+       function choose(ul, datum) {
+           if (d3.event) d3.event.preventDefault();
+
+           d3.select(ul)
+               .selectAll('li')
+               .classed('active', function(d) { return d === datum; })
+               .selectAll('input')
+               .property('checked', function(d) { return d === datum; });
+
+           var extent = iD.geo.Extent(),
+               entity;
+
+           entity = context.graph().hasEntity(datum.id);
+           if (entity) extent._extend(entity.extent(context.graph()));
+
+           datum.action();
+
+           entity = context.graph().hasEntity(datum.id);
+           if (entity) extent._extend(entity.extent(context.graph()));
+
+           zoomToEntity(datum.id, extent);
+       }
+
+       function zoomToEntity(id, extent) {
+           context.surface().selectAll('.hover')
+               .classed('hover', false);
+
+           var entity = context.graph().hasEntity(id);
+           if (entity) {
+               if (extent) {
+                   context.map().trimmedExtent(extent);
+               } else {
+                   context.map().zoomTo(entity);
+               }
+               context.surface().selectAll(
+                   iD.util.entityOrMemberSelector([entity.id], context.graph()))
+                   .classed('hover', true);
+           }
+       }
+
+
+       // The conflict list should be an array of objects like:
+       // {
+       //     id: id,
+       //     name: entityName(local),
+       //     details: merge.conflicts(),
+       //     chosen: 1,
+       //     choices: [
+       //         choice(id, keepMine, forceLocal),
+       //         choice(id, keepTheirs, forceRemote)
+       //     ]
+       // }
+       conflicts.list = function(_) {
+           if (!arguments.length) return list;
+           list = _;
+           return conflicts;
+       };
+
+       return d3.rebind(conflicts, dispatch, 'on');
    }
 
    // toggles the visibility of ui elements, using a combination of the
@@ -2298,6 +2851,281 @@
        };
 
        return lasso;
+   }
+
+   function RadialMenu(context, operations) {
+       var menu,
+           center = [0, 0],
+           tooltip;
+
+       var radialMenu = function(selection) {
+           if (!operations.length)
+               return;
+
+           selection.node().parentNode.focus();
+
+           function click(operation) {
+               d3.event.stopPropagation();
+               if (operation.disabled())
+                   return;
+               operation();
+               radialMenu.close();
+           }
+
+           menu = selection.append('g')
+               .attr('class', 'radial-menu')
+               .attr('transform', 'translate(' + center + ')')
+               .attr('opacity', 0);
+
+           menu.transition()
+               .attr('opacity', 1);
+
+           var r = 50,
+               a = Math.PI / 4,
+               a0 = -Math.PI / 4,
+               a1 = a0 + (operations.length - 1) * a;
+
+           menu.append('path')
+               .attr('class', 'radial-menu-background')
+               .attr('d', 'M' + r * Math.sin(a0) + ',' +
+                                r * Math.cos(a0) +
+                         ' A' + r + ',' + r + ' 0 ' + (operations.length > 5 ? '1' : '0') + ',0 ' +
+                                (r * Math.sin(a1) + 1e-3) + ',' +
+                                (r * Math.cos(a1) + 1e-3)) // Force positive-length path (#1305)
+               .attr('stroke-width', 50)
+               .attr('stroke-linecap', 'round');
+
+           var button = menu.selectAll()
+               .data(operations)
+               .enter()
+               .append('g')
+               .attr('class', function(d) { return 'radial-menu-item radial-menu-item-' + d.id; })
+               .classed('disabled', function(d) { return d.disabled(); })
+               .attr('transform', function(d, i) {
+                   return 'translate(' + iD.geo.roundCoords([
+                           r * Math.sin(a0 + i * a),
+                           r * Math.cos(a0 + i * a)]).join(',') + ')';
+               });
+
+           button.append('circle')
+               .attr('r', 15)
+               .on('click', click)
+               .on('mousedown', mousedown)
+               .on('mouseover', mouseover)
+               .on('mouseout', mouseout);
+
+           button.append('use')
+               .attr('transform', 'translate(-10,-10)')
+               .attr('width', '20')
+               .attr('height', '20')
+               .attr('xlink:href', function(d) { return '#operation-' + d.id; });
+
+           tooltip = d3.select(document.body)
+               .append('div')
+               .attr('class', 'tooltip-inner radial-menu-tooltip');
+
+           function mousedown() {
+               d3.event.stopPropagation(); // https://github.com/openstreetmap/iD/issues/1869
+           }
+
+           function mouseover(d, i) {
+               var rect = context.surfaceRect(),
+                   angle = a0 + i * a,
+                   top = rect.top + (r + 25) * Math.cos(angle) + center[1] + 'px',
+                   left = rect.left + (r + 25) * Math.sin(angle) + center[0] + 'px',
+                   bottom = rect.height - (r + 25) * Math.cos(angle) - center[1] + 'px',
+                   right = rect.width - (r + 25) * Math.sin(angle) - center[0] + 'px';
+
+               tooltip
+                   .style('top', null)
+                   .style('left', null)
+                   .style('bottom', null)
+                   .style('right', null)
+                   .style('display', 'block')
+                   .html(iD.ui.tooltipHtml(d.tooltip(), d.keys[0]));
+
+               if (i === 0) {
+                   tooltip
+                       .style('right', right)
+                       .style('top', top);
+               } else if (i >= 4) {
+                   tooltip
+                       .style('left', left)
+                       .style('bottom', bottom);
+               } else {
+                   tooltip
+                       .style('left', left)
+                       .style('top', top);
+               }
+           }
+
+           function mouseout() {
+               tooltip.style('display', 'none');
+           }
+       };
+
+       radialMenu.close = function() {
+           if (menu) {
+               menu
+                   .style('pointer-events', 'none')
+                   .transition()
+                   .attr('opacity', 0)
+                   .remove();
+           }
+
+           if (tooltip) {
+               tooltip.remove();
+           }
+       };
+
+       radialMenu.center = function(_) {
+           if (!arguments.length) return center;
+           center = _;
+           return radialMenu;
+       };
+
+       return radialMenu;
+   }
+
+   function SelectionList(context, selectedIDs) {
+
+       function selectEntity(entity) {
+           context.enter(iD.modes.Select(context, [entity.id]).suppressMenu(true));
+       }
+
+
+       function selectionList(selection) {
+           selection.classed('selection-list-pane', true);
+
+           var header = selection.append('div')
+               .attr('class', 'header fillL cf');
+
+           header.append('h3')
+               .text(t('inspector.multiselect'));
+
+           var listWrap = selection.append('div')
+               .attr('class', 'inspector-body');
+
+           var list = listWrap.append('div')
+               .attr('class', 'feature-list cf');
+
+           context.history().on('change.selection-list', drawList);
+           drawList();
+
+           function drawList() {
+               var entities = selectedIDs
+                   .map(function(id) { return context.hasEntity(id); })
+                   .filter(function(entity) { return entity; });
+
+               var items = list.selectAll('.feature-list-item')
+                   .data(entities, iD.Entity.key);
+
+               var enter = items.enter().append('button')
+                   .attr('class', 'feature-list-item')
+                   .on('click', selectEntity);
+
+               // Enter
+               var label = enter.append('div')
+                   .attr('class', 'label')
+                   .call(iD.svg.Icon('', 'pre-text'));
+
+               label.append('span')
+                   .attr('class', 'entity-type');
+
+               label.append('span')
+                   .attr('class', 'entity-name');
+
+               // Update
+               items.selectAll('use')
+                   .attr('href', function() {
+                       var entity = this.parentNode.parentNode.__data__;
+                       return '#icon-' + context.geometry(entity.id);
+                   });
+
+               items.selectAll('.entity-type')
+                   .text(function(entity) { return context.presets().match(entity, context.graph()).name(); });
+
+               items.selectAll('.entity-name')
+                   .text(function(entity) { return iD.util.displayName(entity); });
+
+               // Exit
+               items.exit()
+                   .remove();
+           }
+       }
+
+       return selectionList;
+
+   }
+
+   function Success(context) {
+       var dispatch = d3.dispatch('cancel'),
+           changeset;
+
+       function success(selection) {
+           var message = (changeset.comment || t('success.edited_osm')).substring(0, 130) +
+               ' ' + context.connection().changesetURL(changeset.id);
+
+           var header = selection.append('div')
+               .attr('class', 'header fillL');
+
+           header.append('button')
+               .attr('class', 'fr')
+               .on('click', function() { dispatch.cancel(); })
+               .call(iD.svg.Icon('#icon-close'));
+
+           header.append('h3')
+               .text(t('success.just_edited'));
+
+           var body = selection.append('div')
+               .attr('class', 'body save-success fillL');
+
+           body.append('p')
+               .html(t('success.help_html'));
+
+           body.append('a')
+               .attr('class', 'details')
+               .attr('target', '_blank')
+               .attr('tabindex', -1)
+               .call(iD.svg.Icon('#icon-out-link', 'inline'))
+               .attr('href', t('success.help_link_url'))
+               .append('span')
+               .text(t('success.help_link_text'));
+
+           var changesetURL = context.connection().changesetURL(changeset.id);
+
+           body.append('a')
+               .attr('class', 'button col12 osm')
+               .attr('target', '_blank')
+               .attr('href', changesetURL)
+               .text(t('success.view_on_osm'));
+
+           var sharing = {
+               facebook: 'https://facebook.com/sharer/sharer.php?u=' + encodeURIComponent(changesetURL),
+               twitter: 'https://twitter.com/intent/tweet?source=webclient&text=' + encodeURIComponent(message),
+               google: 'https://plus.google.com/share?url=' + encodeURIComponent(changesetURL)
+           };
+
+           body.selectAll('.button.social')
+               .data(d3.entries(sharing))
+               .enter()
+               .append('a')
+               .attr('class', 'button social col4')
+               .attr('target', '_blank')
+               .attr('href', function(d) { return d.value; })
+               .call(bootstrap.tooltip()
+                   .title(function(d) { return t('success.' + d.key); })
+                   .placement('bottom'))
+               .each(function(d) { d3.select(this).call(iD.svg.Icon('#logo-' + d.key, 'social')); });
+       }
+
+       success.changeset = function(_) {
+           if (!arguments.length) return changeset;
+           changeset = _;
+           return success;
+       };
+
+       return d3.rebind(success, dispatch, 'on');
    }
 
    function History(context) {
@@ -5372,7 +6200,7 @@
        return action;
    }
 
-   function RotateWay(wayId, pivot, angle, projection) {
+   function RotateWayAction(wayId, pivot, angle, projection) {
        return function(graph) {
            return graph.update(function(graph) {
                var way = graph.entity(wayId);
@@ -5534,7 +6362,7 @@
    	RestrictTurn: RestrictTurn,
    	Reverse: Reverse,
    	Revert: Revert,
-   	RotateWay: RotateWay,
+   	RotateWay: RotateWayAction,
    	Split: Split,
    	Straighten: Straighten,
    	UnrestrictTurn: UnrestrictTurn
@@ -8160,6 +8988,191 @@
    	Vertices: Vertices
    });
 
+   function AddArea(context) {
+       var mode = {
+           id: 'add-area',
+           button: 'area',
+           title: t('modes.add_area.title'),
+           description: t('modes.add_area.description'),
+           key: '3'
+       };
+
+       var behavior = AddWay(context)
+               .tail(t('modes.add_area.tail'))
+               .on('start', start)
+               .on('startFromWay', startFromWay)
+               .on('startFromNode', startFromNode),
+           defaultTags = {area: 'yes'};
+
+       function start(loc) {
+           var graph = context.graph(),
+               node = Node({loc: loc}),
+               way = Way({tags: defaultTags});
+
+           context.perform(
+               AddEntity(node),
+               AddEntity(way),
+               AddVertex(way.id, node.id),
+               AddVertex(way.id, node.id));
+
+           context.enter(DrawArea(context, way.id, graph));
+       }
+
+       function startFromWay(loc, edge) {
+           var graph = context.graph(),
+               node = Node({loc: loc}),
+               way = Way({tags: defaultTags});
+
+           context.perform(
+               AddEntity(node),
+               AddEntity(way),
+               AddVertex(way.id, node.id),
+               AddVertex(way.id, node.id),
+               AddMidpoint({ loc: loc, edge: edge }, node));
+
+           context.enter(DrawArea(context, way.id, graph));
+       }
+
+       function startFromNode(node) {
+           var graph = context.graph(),
+               way = Way({tags: defaultTags});
+
+           context.perform(
+               AddEntity(way),
+               AddVertex(way.id, node.id),
+               AddVertex(way.id, node.id));
+
+           context.enter(DrawArea(context, way.id, graph));
+       }
+
+       mode.enter = function() {
+           context.install(behavior);
+       };
+
+       mode.exit = function() {
+           context.uninstall(behavior);
+       };
+
+       return mode;
+   }
+
+   function AddLine(context) {
+       var mode = {
+           id: 'add-line',
+           button: 'line',
+           title: t('modes.add_line.title'),
+           description: t('modes.add_line.description'),
+           key: '2'
+       };
+
+       var behavior = AddWay(context)
+           .tail(t('modes.add_line.tail'))
+           .on('start', start)
+           .on('startFromWay', startFromWay)
+           .on('startFromNode', startFromNode);
+
+       function start(loc) {
+           var baseGraph = context.graph(),
+               node = Node({loc: loc}),
+               way = Way();
+
+           context.perform(
+               AddEntity(node),
+               AddEntity(way),
+               AddVertex(way.id, node.id));
+
+           context.enter(DrawLine(context, way.id, baseGraph));
+       }
+
+       function startFromWay(loc, edge) {
+           var baseGraph = context.graph(),
+               node = Node({loc: loc}),
+               way = Way();
+
+           context.perform(
+               AddEntity(node),
+               AddEntity(way),
+               AddVertex(way.id, node.id),
+               AddMidpoint({ loc: loc, edge: edge }, node));
+
+           context.enter(DrawLine(context, way.id, baseGraph));
+       }
+
+       function startFromNode(node) {
+           var baseGraph = context.graph(),
+               way = Way();
+
+           context.perform(
+               AddEntity(way),
+               AddVertex(way.id, node.id));
+
+           context.enter(DrawLine(context, way.id, baseGraph));
+       }
+
+       mode.enter = function() {
+           context.install(behavior);
+       };
+
+       mode.exit = function() {
+           context.uninstall(behavior);
+       };
+
+       return mode;
+   }
+
+   function AddPoint(context) {
+       var mode = {
+           id: 'add-point',
+           button: 'point',
+           title: t('modes.add_point.title'),
+           description: t('modes.add_point.description'),
+           key: '1'
+       };
+
+       var behavior = Draw(context)
+           .tail(t('modes.add_point.tail'))
+           .on('click', add)
+           .on('clickWay', addWay)
+           .on('clickNode', addNode)
+           .on('cancel', cancel)
+           .on('finish', cancel);
+
+       function add(loc) {
+           var node = Node({loc: loc});
+
+           context.perform(
+               AddEntity(node),
+               t('operations.add.annotation.point'));
+
+           context.enter(
+               SelectMode(context, [node.id])
+                   .suppressMenu(true)
+                   .newFeature(true));
+       }
+
+       function addWay(loc) {
+           add(loc);
+       }
+
+       function addNode(node) {
+           add(node.loc);
+       }
+
+       function cancel() {
+           context.enter(Browse(context));
+       }
+
+       mode.enter = function() {
+           context.install(behavior);
+       };
+
+       mode.exit = function() {
+           context.uninstall(behavior);
+       };
+
+       return mode;
+   }
+
    function Browse(context) {
        var mode = {
            button: 'browse',
@@ -8169,12 +9182,12 @@
        }, sidebar;
 
        var behaviors = [
-           iD.behavior.Paste(context),
-           iD.behavior.Hover(context)
+           Paste(context),
+           Hover(context)
                .on('hover', context.ui().sidebar.hover),
-           iD.behavior.Select(context),
-           iD.behavior.Lasso(context),
-           iD.modes.DragNode(context).behavior];
+           Select(context),
+           Lasso(context),
+           DragNode(context).behavior];
 
        mode.enter = function() {
            behaviors.forEach(function(behavior) {
@@ -8213,6 +9226,302 @@
        return mode;
    }
 
+   function DragNode(context) {
+       var mode = {
+           id: 'drag-node',
+           button: 'browse'
+       };
+
+       var nudgeInterval,
+           activeIDs,
+           wasMidpoint,
+           cancelled,
+           selectedIDs = [],
+           hover = Hover(context)
+               .altDisables(true)
+               .on('hover', context.ui().sidebar.hover),
+           edit = Edit(context);
+
+       function edge(point, size) {
+           var pad = [30, 100, 30, 100];
+           if (point[0] > size[0] - pad[0]) return [-10, 0];
+           else if (point[0] < pad[2]) return [10, 0];
+           else if (point[1] > size[1] - pad[1]) return [0, -10];
+           else if (point[1] < pad[3]) return [0, 10];
+           return null;
+       }
+
+       function startNudge(nudge) {
+           if (nudgeInterval) window.clearInterval(nudgeInterval);
+           nudgeInterval = window.setInterval(function() {
+               context.pan(nudge);
+           }, 50);
+       }
+
+       function stopNudge() {
+           if (nudgeInterval) window.clearInterval(nudgeInterval);
+           nudgeInterval = null;
+       }
+
+       function moveAnnotation(entity) {
+           return t('operations.move.annotation.' + entity.geometry(context.graph()));
+       }
+
+       function connectAnnotation(entity) {
+           return t('operations.connect.annotation.' + entity.geometry(context.graph()));
+       }
+
+       function origin(entity) {
+           return context.projection(entity.loc);
+       }
+
+       function start(entity) {
+           cancelled = d3.event.sourceEvent.shiftKey ||
+               context.features().hasHiddenConnections(entity, context.graph());
+
+           if (cancelled) return behavior.cancel();
+
+           wasMidpoint = entity.type === 'midpoint';
+           if (wasMidpoint) {
+               var midpoint = entity;
+               entity = Node();
+               context.perform(AddMidpoint(midpoint, entity));
+
+                var vertex = context.surface()
+                   .selectAll('.' + entity.id);
+                behavior.target(vertex.node(), entity);
+
+           } else {
+               context.perform(
+                   Noop());
+           }
+
+           activeIDs = _.map(context.graph().parentWays(entity), 'id');
+           activeIDs.push(entity.id);
+
+           context.enter(mode);
+       }
+
+       function datum() {
+           if (d3.event.sourceEvent.altKey) {
+               return {};
+           }
+
+           return d3.event.sourceEvent.target.__data__ || {};
+       }
+
+       // via https://gist.github.com/shawnbot/4166283
+       function childOf(p, c) {
+           if (p === c) return false;
+           while (c && c !== p) c = c.parentNode;
+           return c === p;
+       }
+
+       function move(entity) {
+           if (cancelled) return;
+           d3.event.sourceEvent.stopPropagation();
+
+           var nudge = childOf(context.container().node(),
+               d3.event.sourceEvent.toElement) &&
+               edge(d3.event.point, context.map().dimensions());
+
+           if (nudge) startNudge(nudge);
+           else stopNudge();
+
+           var loc = context.projection.invert(d3.event.point);
+
+           var d = datum();
+           if (d.type === 'node' && d.id !== entity.id) {
+               loc = d.loc;
+           } else if (d.type === 'way' && !d3.select(d3.event.sourceEvent.target).classed('fill')) {
+               loc = chooseEdge(context.childNodes(d), context.mouse(), context.projection).loc;
+           }
+
+           context.replace(
+               MoveNode(entity.id, loc),
+               moveAnnotation(entity));
+       }
+
+       function end(entity) {
+           if (cancelled) return;
+
+           var d = datum();
+
+           if (d.type === 'way') {
+               var choice = chooseEdge(context.childNodes(d), context.mouse(), context.projection);
+               context.replace(
+                   AddMidpoint({ loc: choice.loc, edge: [d.nodes[choice.index - 1], d.nodes[choice.index]] }, entity),
+                   connectAnnotation(d));
+
+           } else if (d.type === 'node' && d.id !== entity.id) {
+               context.replace(
+                   Connect([d.id, entity.id]),
+                   connectAnnotation(d));
+
+           } else if (wasMidpoint) {
+               context.replace(
+                   Noop(),
+                   t('operations.add.annotation.vertex'));
+
+           } else {
+               context.replace(
+                   Noop(),
+                   moveAnnotation(entity));
+           }
+
+           var reselection = selectedIDs.filter(function(id) {
+               return context.graph().hasEntity(id);
+           });
+
+           if (reselection.length) {
+               context.enter(
+                   SelectMode(context, reselection)
+                       .suppressMenu(true));
+           } else {
+               context.enter(Browse(context));
+           }
+       }
+
+       function cancel() {
+           behavior.cancel();
+           context.enter(Browse(context));
+       }
+
+       function setActiveElements() {
+           context.surface().selectAll(entitySelector(activeIDs))
+               .classed('active', true);
+       }
+
+       var behavior = drag()
+           .delegate('g.node, g.point, g.midpoint')
+           .surface(context.surface().node())
+           .origin(origin)
+           .on('start', start)
+           .on('move', move)
+           .on('end', end);
+
+       mode.enter = function() {
+           context.install(hover);
+           context.install(edit);
+
+           context.history()
+               .on('undone.drag-node', cancel);
+
+           context.map()
+               .on('drawn.drag-node', setActiveElements);
+
+           setActiveElements();
+       };
+
+       mode.exit = function() {
+           context.ui().sidebar.hover.cancel();
+           context.uninstall(hover);
+           context.uninstall(edit);
+
+           context.history()
+               .on('undone.drag-node', null);
+
+           context.map()
+               .on('drawn.drag-node', null);
+
+           context.surface()
+               .selectAll('.active')
+               .classed('active', false);
+
+           stopNudge();
+       };
+
+       mode.selectedIDs = function(_) {
+           if (!arguments.length) return selectedIDs;
+           selectedIDs = _;
+           return mode;
+       };
+
+       mode.behavior = behavior;
+
+       return mode;
+   }
+
+   function DrawArea(context, wayId, baseGraph) {
+       var mode = {
+           button: 'area',
+           id: 'draw-area'
+       };
+
+       var behavior;
+
+       mode.enter = function() {
+           var way = context.entity(wayId),
+               headId = way.nodes[way.nodes.length - 2],
+               tailId = way.first();
+
+           behavior = DrawWay(context, wayId, -1, mode, baseGraph)
+               .tail(t('modes.draw_area.tail'));
+
+           var addNode = behavior.addNode;
+
+           behavior.addNode = function(node) {
+               if (node.id === headId || node.id === tailId) {
+                   behavior.finish();
+               } else {
+                   addNode(node);
+               }
+           };
+
+           context.install(behavior);
+       };
+
+       mode.exit = function() {
+           context.uninstall(behavior);
+       };
+
+       mode.selectedIDs = function() {
+           return [wayId];
+       };
+
+       return mode;
+   }
+
+   function DrawLine(context, wayId, baseGraph, affix) {
+       var mode = {
+           button: 'line',
+           id: 'draw-line'
+       };
+
+       var behavior;
+
+       mode.enter = function() {
+           var way = context.entity(wayId),
+               index = (affix === 'prefix') ? 0 : undefined,
+               headId = (affix === 'prefix') ? way.first() : way.last();
+
+           behavior = DrawWay(context, wayId, index, mode, baseGraph)
+               .tail(t('modes.draw_line.tail'));
+
+           var addNode = behavior.addNode;
+
+           behavior.addNode = function(node) {
+               if (node.id === headId) {
+                   behavior.finish();
+               } else {
+                   addNode(node);
+               }
+           };
+
+           context.install(behavior);
+       };
+
+       mode.exit = function() {
+           context.uninstall(behavior);
+       };
+
+       mode.selectedIDs = function() {
+           return [wayId];
+       };
+
+       return mode;
+   }
+
    function MoveMode(context, entityIDs, baseGraph) {
        var mode = {
            id: 'move',
@@ -8220,7 +9529,7 @@
        };
 
        var keybinding = d3.keybinding('move'),
-           edit = iD.behavior.Edit(context),
+           edit = Edit(context),
            annotation = entityIDs.length === 1 ?
                t('operations.move.annotation.' + context.geometry(entityIDs[0])) :
                t('operations.move.annotation.multiple'),
@@ -8247,7 +9556,7 @@
                var currMouse = context.mouse(),
                    origMouse = context.projection(origin),
                    delta = vecSub(vecSub(currMouse, origMouse), nudge),
-                   action = iD.actions.Move(entityIDs, delta, context.projection, cache);
+                   action = MoveAction(entityIDs, delta, context.projection, cache);
 
                context.overwrite(action, annotation);
 
@@ -8263,7 +9572,7 @@
            var currMouse = context.mouse(),
                origMouse = context.projection(origin),
                delta = vecSub(currMouse, origMouse),
-               action = iD.actions.Move(entityIDs, delta, context.projection, cache);
+               action = MoveAction(entityIDs, delta, context.projection, cache);
 
            context.overwrite(action, annotation);
 
@@ -8274,23 +9583,23 @@
 
        function finish() {
            d3.event.stopPropagation();
-           context.enter(iD.modes.Select(context, entityIDs).suppressMenu(true));
+           context.enter(SelectMode(context, entityIDs).suppressMenu(true));
            stopNudge();
        }
 
        function cancel() {
            if (baseGraph) {
                while (context.graph() !== baseGraph) context.pop();
-               context.enter(iD.modes.Browse(context));
+               context.enter(Browse(context));
            } else {
                context.pop();
-               context.enter(iD.modes.Select(context, entityIDs).suppressMenu(true));
+               context.enter(SelectMode(context, entityIDs).suppressMenu(true));
            }
            stopNudge();
        }
 
        function undone() {
-           context.enter(iD.modes.Browse(context));
+           context.enter(Browse(context));
        }
 
        mode.enter = function() {
@@ -8300,7 +9609,7 @@
            context.install(edit);
 
            context.perform(
-               iD.actions.Noop(),
+               Noop(),
                annotation);
 
            context.surface()
@@ -8336,6 +9645,956 @@
        return mode;
    }
 
+   function RotateWay(context, wayId) {
+       var mode = {
+           id: 'rotate-way',
+           button: 'browse'
+       };
+
+       var keybinding = d3.keybinding('rotate-way'),
+           edit = Edit(context);
+
+       mode.enter = function() {
+           context.install(edit);
+
+           var annotation = t('operations.rotate.annotation.' + context.geometry(wayId)),
+               way = context.graph().entity(wayId),
+               nodes = _.uniq(context.graph().childNodes(way)),
+               points = nodes.map(function(n) { return context.projection(n.loc); }),
+               pivot = d3.geom.polygon(points).centroid(),
+               angle;
+
+           context.perform(
+               Noop(),
+               annotation);
+
+           function rotate() {
+
+               var mousePoint = context.mouse(),
+                   newAngle = Math.atan2(mousePoint[1] - pivot[1], mousePoint[0] - pivot[0]);
+
+               if (typeof angle === 'undefined') angle = newAngle;
+
+               context.replace(
+                   RotateWayAction(wayId, pivot, newAngle - angle, context.projection),
+                   annotation);
+
+               angle = newAngle;
+           }
+
+           function finish() {
+               d3.event.stopPropagation();
+               context.enter(SelectMode(context, [wayId])
+                   .suppressMenu(true));
+           }
+
+           function cancel() {
+               context.pop();
+               context.enter(SelectMode(context, [wayId])
+                   .suppressMenu(true));
+           }
+
+           function undone() {
+               context.enter(Browse(context));
+           }
+
+           context.surface()
+               .on('mousemove.rotate-way', rotate)
+               .on('click.rotate-way', finish);
+
+           context.history()
+               .on('undone.rotate-way', undone);
+
+           keybinding
+               .on('⎋', cancel)
+               .on('↩', finish);
+
+           d3.select(document)
+               .call(keybinding);
+       };
+
+       mode.exit = function() {
+           context.uninstall(edit);
+
+           context.surface()
+               .on('mousemove.rotate-way', null)
+               .on('click.rotate-way', null);
+
+           context.history()
+               .on('undone.rotate-way', null);
+
+           keybinding.off();
+       };
+
+       return mode;
+   }
+
+   function Save$1(context) {
+       var ui = Commit(context)
+               .on('cancel', cancel)
+               .on('save', save);
+
+       function cancel() {
+           context.enter(Browse(context));
+       }
+
+       function save(e, tryAgain) {
+           function withChildNodes(ids, graph) {
+               return _.uniq(_.reduce(ids, function(result, id) {
+                   var e = graph.entity(id);
+                   if (e.type === 'way') {
+                       try {
+                           var cn = graph.childNodes(e);
+                           result.push.apply(result, _.map(_.filter(cn, 'version'), 'id'));
+                       } catch (err) {
+                           /* eslint-disable no-console */
+                           if (typeof console !== 'undefined') console.error(err);
+                           /* eslint-enable no-console */
+                       }
+                   }
+                   return result;
+               }, _.clone(ids)));
+           }
+
+           var loading = Loading(context).message(t('save.uploading')).blocking(true),
+               history = context.history(),
+               origChanges = history.changes(DiscardTags(history.difference())),
+               localGraph = context.graph(),
+               remoteGraph = Graph(history.base(), true),
+               modified = _.filter(history.difference().summary(), {changeType: 'modified'}),
+               toCheck = _.map(_.map(modified, 'entity'), 'id'),
+               toLoad = withChildNodes(toCheck, localGraph),
+               conflicts = [],
+               errors = [];
+
+           if (!tryAgain) history.perform(Noop());  // checkpoint
+           context.container().call(loading);
+
+           if (toCheck.length) {
+               context.connection().loadMultiple(toLoad, loaded);
+           } else {
+               finalize();
+           }
+
+
+           // Reload modified entities into an alternate graph and check for conflicts..
+           function loaded(err, result) {
+               if (errors.length) return;
+
+               if (err) {
+                   errors.push({
+                       msg: err.responseText,
+                       details: [ t('save.status_code', { code: err.status }) ]
+                   });
+                   showErrors();
+
+               } else {
+                   var loadMore = [];
+                   _.each(result.data, function(entity) {
+                       remoteGraph.replace(entity);
+                       toLoad = _.without(toLoad, entity.id);
+
+                       // Because loadMultiple doesn't download /full like loadEntity,
+                       // need to also load children that aren't already being checked..
+                       if (!entity.visible) return;
+                       if (entity.type === 'way') {
+                           loadMore.push.apply(loadMore,
+                               _.difference(entity.nodes, toCheck, toLoad, loadMore));
+                       } else if (entity.type === 'relation' && entity.isMultipolygon()) {
+                           loadMore.push.apply(loadMore,
+                               _.difference(_.map(entity.members, 'id'), toCheck, toLoad, loadMore));
+                       }
+                   });
+
+                   if (loadMore.length) {
+                       toLoad.push.apply(toLoad, loadMore);
+                       context.connection().loadMultiple(loadMore, loaded);
+                   }
+
+                   if (!toLoad.length) {
+                       checkConflicts();
+                   }
+               }
+           }
+
+
+           function checkConflicts() {
+               function choice(id, text, action) {
+                   return { id: id, text: text, action: function() { history.replace(action); } };
+               }
+               function formatUser(d) {
+                   return '<a href="' + context.connection().userURL(d) + '" target="_blank">' + d + '</a>';
+               }
+               function entityName(entity) {
+                   return displayName(entity) || (displayType(entity.id) + ' ' + entity.id);
+               }
+
+               function compareVersions(local, remote) {
+                   if (local.version !== remote.version) return false;
+
+                   if (local.type === 'way') {
+                       var children = _.union(local.nodes, remote.nodes);
+
+                       for (var i = 0; i < children.length; i++) {
+                           var a = localGraph.hasEntity(children[i]),
+                               b = remoteGraph.hasEntity(children[i]);
+
+                           if (a && b && a.version !== b.version) return false;
+                       }
+                   }
+
+                   return true;
+               }
+
+               _.each(toCheck, function(id) {
+                   var local = localGraph.entity(id),
+                       remote = remoteGraph.entity(id);
+
+                   if (compareVersions(local, remote)) return;
+
+                   var action = MergeRemoteChanges,
+                       merge = action(id, localGraph, remoteGraph, formatUser);
+
+                   history.replace(merge);
+
+                   var mergeConflicts = merge.conflicts();
+                   if (!mergeConflicts.length) return;  // merged safely
+
+                   var forceLocal = action(id, localGraph, remoteGraph).withOption('force_local'),
+                       forceRemote = action(id, localGraph, remoteGraph).withOption('force_remote'),
+                       keepMine = t('save.conflict.' + (remote.visible ? 'keep_local' : 'restore')),
+                       keepTheirs = t('save.conflict.' + (remote.visible ? 'keep_remote' : 'delete'));
+
+                   conflicts.push({
+                       id: id,
+                       name: entityName(local),
+                       details: mergeConflicts,
+                       chosen: 1,
+                       choices: [
+                           choice(id, keepMine, forceLocal),
+                           choice(id, keepTheirs, forceRemote)
+                       ]
+                   });
+               });
+
+               finalize();
+           }
+
+
+           function finalize() {
+               if (conflicts.length) {
+                   conflicts.sort(function(a,b) { return b.id.localeCompare(a.id); });
+                   showConflicts();
+               } else if (errors.length) {
+                   showErrors();
+               } else {
+                   var changes = history.changes(DiscardTags(history.difference()));
+                   if (changes.modified.length || changes.created.length || changes.deleted.length) {
+                       context.connection().putChangeset(
+                           changes,
+                           e.comment,
+                           history.imageryUsed(),
+                           function(err, changeset_id) {
+                               if (err) {
+                                   errors.push({
+                                       msg: err.responseText,
+                                       details: [ t('save.status_code', { code: err.status }) ]
+                                   });
+                                   showErrors();
+                               } else {
+                                   history.clearSaved();
+                                   success(e, changeset_id);
+                                   // Add delay to allow for postgres replication #1646 #2678
+                                   window.setTimeout(function() {
+                                       loading.close();
+                                       context.flush();
+                                   }, 2500);
+                               }
+                           });
+                   } else {        // changes were insignificant or reverted by user
+                       loading.close();
+                       context.flush();
+                       cancel();
+                   }
+               }
+           }
+
+
+           function showConflicts() {
+               var selection = context.container()
+                   .select('#sidebar')
+                   .append('div')
+                   .attr('class','sidebar-component');
+
+               loading.close();
+
+               selection.call(Conflicts(context)
+                   .list(conflicts)
+                   .on('download', function() {
+                       var data = JXON.stringify(context.connection().osmChangeJXON('CHANGEME', origChanges)),
+                           win = window.open('data:text/xml,' + encodeURIComponent(data), '_blank');
+                       win.focus();
+                   })
+                   .on('cancel', function() {
+                       history.pop();
+                       selection.remove();
+                   })
+                   .on('save', function() {
+                       for (var i = 0; i < conflicts.length; i++) {
+                           if (conflicts[i].chosen === 1) {  // user chose "keep theirs"
+                               var entity = context.hasEntity(conflicts[i].id);
+                               if (entity && entity.type === 'way') {
+                                   var children = _.uniq(entity.nodes);
+                                   for (var j = 0; j < children.length; j++) {
+                                       history.replace(Revert(children[j]));
+                                   }
+                               }
+                               history.replace(Revert(conflicts[i].id));
+                           }
+                       }
+
+                       selection.remove();
+                       save(e, true);
+                   })
+               );
+           }
+
+
+           function showErrors() {
+               var selection = confirm(context.container());
+
+               history.pop();
+               loading.close();
+
+               selection
+                   .select('.modal-section.header')
+                   .append('h3')
+                   .text(t('save.error'));
+
+               addErrors(selection, errors);
+               selection.okButton();
+           }
+
+
+           function addErrors(selection, data) {
+               var message = selection
+                   .select('.modal-section.message-text');
+
+               var items = message
+                   .selectAll('.error-container')
+                   .data(data);
+
+               var enter = items.enter()
+                   .append('div')
+                   .attr('class', 'error-container');
+
+               enter
+                   .append('a')
+                   .attr('class', 'error-description')
+                   .attr('href', '#')
+                   .classed('hide-toggle', true)
+                   .text(function(d) { return d.msg || t('save.unknown_error_details'); })
+                   .on('click', function() {
+                       var error = d3.select(this),
+                           detail = d3.select(this.nextElementSibling),
+                           exp = error.classed('expanded');
+
+                       detail.style('display', exp ? 'none' : 'block');
+                       error.classed('expanded', !exp);
+
+                       d3.event.preventDefault();
+                   });
+
+               var details = enter
+                   .append('div')
+                   .attr('class', 'error-detail-container')
+                   .style('display', 'none');
+
+               details
+                   .append('ul')
+                   .attr('class', 'error-detail-list')
+                   .selectAll('li')
+                   .data(function(d) { return d.details || []; })
+                   .enter()
+                   .append('li')
+                   .attr('class', 'error-detail-item')
+                   .text(function(d) { return d; });
+
+               items.exit()
+                   .remove();
+           }
+
+       }
+
+
+       function success(e, changeset_id) {
+           context.enter(Browse(context)
+               .sidebar(Success(context)
+                   .changeset({
+                       id: changeset_id,
+                       comment: e.comment
+                   })
+                   .on('cancel', function() {
+                       context.ui().sidebar.hide();
+                   })));
+       }
+
+       var mode = {
+           id: 'save'
+       };
+
+       mode.enter = function() {
+           context.connection().authenticate(function(err) {
+               if (err) {
+                   cancel();
+               } else {
+                   context.ui().sidebar.show(ui);
+               }
+           });
+       };
+
+       mode.exit = function() {
+           context.ui().sidebar.hide();
+       };
+
+       return mode;
+   }
+
+   function Circularize$1(selectedIDs, context) {
+       var entityId = selectedIDs[0],
+           entity = context.entity(entityId),
+           extent = entity.extent(context.graph()),
+           geometry = context.geometry(entityId),
+           action = iD.actions.Circularize(entityId, context.projection);
+
+       var operation = function() {
+           var annotation = t('operations.circularize.annotation.' + geometry);
+           context.perform(action, annotation);
+       };
+
+       operation.available = function() {
+           return selectedIDs.length === 1 &&
+               entity.type === 'way' &&
+               _.uniq(entity.nodes).length > 1;
+       };
+
+       operation.disabled = function() {
+           var reason;
+           if (extent.percentContainedIn(context.extent()) < 0.8) {
+               reason = 'too_large';
+           } else if (context.hasHiddenConnections(entityId)) {
+               reason = 'connected_to_hidden';
+           }
+           return action.disabled(context.graph()) || reason;
+       };
+
+       operation.tooltip = function() {
+           var disable = operation.disabled();
+           return disable ?
+               t('operations.circularize.' + disable) :
+               t('operations.circularize.description.' + geometry);
+       };
+
+       operation.id = 'circularize';
+       operation.keys = [t('operations.circularize.key')];
+       operation.title = t('operations.circularize.title');
+
+       return operation;
+   }
+
+   function Continue(selectedIDs, context) {
+       var graph = context.graph(),
+           entities = selectedIDs.map(function(id) { return graph.entity(id); }),
+           geometries = _.extend({line: [], vertex: []},
+               _.groupBy(entities, function(entity) { return entity.geometry(graph); })),
+           vertex = geometries.vertex[0];
+
+       function candidateWays() {
+           return graph.parentWays(vertex).filter(function(parent) {
+               return parent.geometry(graph) === 'line' &&
+                   parent.affix(vertex.id) &&
+                   (geometries.line.length === 0 || geometries.line[0] === parent);
+           });
+       }
+
+       var operation = function() {
+           var candidate = candidateWays()[0];
+           context.enter(iD.modes.DrawLine(
+               context,
+               candidate.id,
+               context.graph(),
+               candidate.affix(vertex.id)));
+       };
+
+       operation.available = function() {
+           return geometries.vertex.length === 1 && geometries.line.length <= 1 &&
+               !context.features().hasHiddenConnections(vertex, context.graph());
+       };
+
+       operation.disabled = function() {
+           var candidates = candidateWays();
+           if (candidates.length === 0)
+               return 'not_eligible';
+           if (candidates.length > 1)
+               return 'multiple';
+       };
+
+       operation.tooltip = function() {
+           var disable = operation.disabled();
+           return disable ?
+               t('operations.continue.' + disable) :
+               t('operations.continue.description');
+       };
+
+       operation.id = 'continue';
+       operation.keys = [t('operations.continue.key')];
+       operation.title = t('operations.continue.title');
+
+       return operation;
+   }
+
+   function Delete(selectedIDs, context) {
+       var action = iD.actions.DeleteMultiple(selectedIDs);
+
+       var operation = function() {
+           var annotation,
+               nextSelectedID;
+
+           if (selectedIDs.length > 1) {
+               annotation = t('operations.delete.annotation.multiple', {n: selectedIDs.length});
+
+           } else {
+               var id = selectedIDs[0],
+                   entity = context.entity(id),
+                   geometry = context.geometry(id),
+                   parents = context.graph().parentWays(entity),
+                   parent = parents[0];
+
+               annotation = t('operations.delete.annotation.' + geometry);
+
+               // Select the next closest node in the way.
+               if (geometry === 'vertex' && parents.length === 1 && parent.nodes.length > 2) {
+                   var nodes = parent.nodes,
+                       i = nodes.indexOf(id);
+
+                   if (i === 0) {
+                       i++;
+                   } else if (i === nodes.length - 1) {
+                       i--;
+                   } else {
+                       var a = iD.geo.sphericalDistance(entity.loc, context.entity(nodes[i - 1]).loc),
+                           b = iD.geo.sphericalDistance(entity.loc, context.entity(nodes[i + 1]).loc);
+                       i = a < b ? i - 1 : i + 1;
+                   }
+
+                   nextSelectedID = nodes[i];
+               }
+           }
+
+           if (nextSelectedID && context.hasEntity(nextSelectedID)) {
+               context.enter(iD.modes.Select(context, [nextSelectedID]));
+           } else {
+               context.enter(iD.modes.Browse(context));
+           }
+
+           context.perform(
+               action,
+               annotation);
+       };
+
+       operation.available = function() {
+           return true;
+       };
+
+       operation.disabled = function() {
+           var reason;
+           if (_.some(selectedIDs, context.hasHiddenConnections)) {
+               reason = 'connected_to_hidden';
+           }
+           return action.disabled(context.graph()) || reason;
+       };
+
+       operation.tooltip = function() {
+           var disable = operation.disabled();
+           return disable ?
+               t('operations.delete.' + disable) :
+               t('operations.delete.description');
+       };
+
+       operation.id = 'delete';
+       operation.keys = [iD.ui.cmd('⌘⌫'), iD.ui.cmd('⌘⌦')];
+       operation.title = t('operations.delete.title');
+
+       return operation;
+   }
+
+   function Disconnect$1(selectedIDs, context) {
+       var vertices = _.filter(selectedIDs, function vertex(entityId) {
+           return context.geometry(entityId) === 'vertex';
+       });
+
+       var entityId = vertices[0],
+           action = iD.actions.Disconnect(entityId);
+
+       if (selectedIDs.length > 1) {
+           action.limitWays(_.without(selectedIDs, entityId));
+       }
+
+       var operation = function() {
+           context.perform(action, t('operations.disconnect.annotation'));
+       };
+
+       operation.available = function() {
+           return vertices.length === 1;
+       };
+
+       operation.disabled = function() {
+           var reason;
+           if (_.some(selectedIDs, context.hasHiddenConnections)) {
+               reason = 'connected_to_hidden';
+           }
+           return action.disabled(context.graph()) || reason;
+       };
+
+       operation.tooltip = function() {
+           var disable = operation.disabled();
+           return disable ?
+               t('operations.disconnect.' + disable) :
+               t('operations.disconnect.description');
+       };
+
+       operation.id = 'disconnect';
+       operation.keys = [t('operations.disconnect.key')];
+       operation.title = t('operations.disconnect.title');
+
+       return operation;
+   }
+
+   function Merge$1(selectedIDs, context) {
+       var join = iD.actions.Join(selectedIDs),
+           merge = iD.actions.Merge(selectedIDs),
+           mergePolygon = iD.actions.MergePolygon(selectedIDs);
+
+       var operation = function() {
+           var annotation = t('operations.merge.annotation', {n: selectedIDs.length}),
+               action;
+
+           if (!join.disabled(context.graph())) {
+               action = join;
+           } else if (!merge.disabled(context.graph())) {
+               action = merge;
+           } else {
+               action = mergePolygon;
+           }
+
+           context.perform(action, annotation);
+           context.enter(iD.modes.Select(context, selectedIDs.filter(function(id) { return context.hasEntity(id); }))
+               .suppressMenu(true));
+       };
+
+       operation.available = function() {
+           return selectedIDs.length >= 2;
+       };
+
+       operation.disabled = function() {
+           return join.disabled(context.graph()) &&
+               merge.disabled(context.graph()) &&
+               mergePolygon.disabled(context.graph());
+       };
+
+       operation.tooltip = function() {
+           var j = join.disabled(context.graph()),
+               m = merge.disabled(context.graph()),
+               p = mergePolygon.disabled(context.graph());
+
+           if (j === 'restriction' && m && p)
+               return t('operations.merge.restriction', {relation: context.presets().item('type/restriction').name()});
+
+           if (p === 'incomplete_relation' && j && m)
+               return t('operations.merge.incomplete_relation');
+
+           if (j && m && p)
+               return t('operations.merge.' + j);
+
+           return t('operations.merge.description');
+       };
+
+       operation.id = 'merge';
+       operation.keys = [t('operations.merge.key')];
+       operation.title = t('operations.merge.title');
+
+       return operation;
+   }
+
+   function Move(selectedIDs, context) {
+       var extent = selectedIDs.reduce(function(extent, id) {
+               return extent.extend(context.entity(id).extent(context.graph()));
+           }, iD.geo.Extent());
+
+       var operation = function() {
+           context.enter(iD.modes.Move(context, selectedIDs));
+       };
+
+       operation.available = function() {
+           return selectedIDs.length > 1 ||
+               context.entity(selectedIDs[0]).type !== 'node';
+       };
+
+       operation.disabled = function() {
+           var reason;
+           if (extent.area() && extent.percentContainedIn(context.extent()) < 0.8) {
+               reason = 'too_large';
+           } else if (_.some(selectedIDs, context.hasHiddenConnections)) {
+               reason = 'connected_to_hidden';
+           }
+           return iD.actions.Move(selectedIDs).disabled(context.graph()) || reason;
+       };
+
+       operation.tooltip = function() {
+           var disable = operation.disabled();
+           return disable ?
+               t('operations.move.' + disable) :
+               t('operations.move.description');
+       };
+
+       operation.id = 'move';
+       operation.keys = [t('operations.move.key')];
+       operation.title = t('operations.move.title');
+
+       return operation;
+   }
+
+   function Orthogonalize$1(selectedIDs, context) {
+       var entityId = selectedIDs[0],
+           entity = context.entity(entityId),
+           extent = entity.extent(context.graph()),
+           geometry = context.geometry(entityId),
+           action = iD.actions.Orthogonalize(entityId, context.projection);
+
+       var operation = function() {
+           var annotation = t('operations.orthogonalize.annotation.' + geometry);
+           context.perform(action, annotation);
+       };
+
+       operation.available = function() {
+           return selectedIDs.length === 1 &&
+               entity.type === 'way' &&
+               entity.isClosed() &&
+               _.uniq(entity.nodes).length > 2;
+       };
+
+       operation.disabled = function() {
+           var reason;
+           if (extent.percentContainedIn(context.extent()) < 0.8) {
+               reason = 'too_large';
+           } else if (context.hasHiddenConnections(entityId)) {
+               reason = 'connected_to_hidden';
+           }
+           return action.disabled(context.graph()) || reason;
+       };
+
+       operation.tooltip = function() {
+           var disable = operation.disabled();
+           return disable ?
+               t('operations.orthogonalize.' + disable) :
+               t('operations.orthogonalize.description.' + geometry);
+       };
+
+       operation.id = 'orthogonalize';
+       operation.keys = [t('operations.orthogonalize.key')];
+       operation.title = t('operations.orthogonalize.title');
+
+       return operation;
+   }
+
+   function Reverse$1(selectedIDs, context) {
+       var entityId = selectedIDs[0];
+
+       var operation = function() {
+           context.perform(
+               iD.actions.Reverse(entityId),
+               t('operations.reverse.annotation'));
+       };
+
+       operation.available = function() {
+           return selectedIDs.length === 1 &&
+               context.geometry(entityId) === 'line';
+       };
+
+       operation.disabled = function() {
+           return false;
+       };
+
+       operation.tooltip = function() {
+           return t('operations.reverse.description');
+       };
+
+       operation.id = 'reverse';
+       operation.keys = [t('operations.reverse.key')];
+       operation.title = t('operations.reverse.title');
+
+       return operation;
+   }
+
+   function Rotate(selectedIDs, context) {
+       var entityId = selectedIDs[0],
+           entity = context.entity(entityId),
+           extent = entity.extent(context.graph()),
+           geometry = context.geometry(entityId);
+
+       var operation = function() {
+           context.enter(iD.modes.RotateWay(context, entityId));
+       };
+
+       operation.available = function() {
+           if (selectedIDs.length !== 1 || entity.type !== 'way')
+               return false;
+           if (geometry === 'area')
+               return true;
+           if (entity.isClosed() &&
+               context.graph().parentRelations(entity).some(function(r) { return r.isMultipolygon(); }))
+               return true;
+           return false;
+       };
+
+       operation.disabled = function() {
+           if (extent.percentContainedIn(context.extent()) < 0.8) {
+               return 'too_large';
+           } else if (context.hasHiddenConnections(entityId)) {
+               return 'connected_to_hidden';
+           } else {
+               return false;
+           }
+       };
+
+       operation.tooltip = function() {
+           var disable = operation.disabled();
+           return disable ?
+               t('operations.rotate.' + disable) :
+               t('operations.rotate.description');
+       };
+
+       operation.id = 'rotate';
+       operation.keys = [t('operations.rotate.key')];
+       operation.title = t('operations.rotate.title');
+
+       return operation;
+   }
+
+   function Split$1(selectedIDs, context) {
+       var vertices = _.filter(selectedIDs, function vertex(entityId) {
+           return context.geometry(entityId) === 'vertex';
+       });
+
+       var entityId = vertices[0],
+           action = iD.actions.Split(entityId);
+
+       if (selectedIDs.length > 1) {
+           action.limitWays(_.without(selectedIDs, entityId));
+       }
+
+       var operation = function() {
+           var annotation;
+
+           var ways = action.ways(context.graph());
+           if (ways.length === 1) {
+               annotation = t('operations.split.annotation.' + context.geometry(ways[0].id));
+           } else {
+               annotation = t('operations.split.annotation.multiple', {n: ways.length});
+           }
+
+           var difference = context.perform(action, annotation);
+           context.enter(iD.modes.Select(context, difference.extantIDs()));
+       };
+
+       operation.available = function() {
+           return vertices.length === 1;
+       };
+
+       operation.disabled = function() {
+           var reason;
+           if (_.some(selectedIDs, context.hasHiddenConnections)) {
+               reason = 'connected_to_hidden';
+           }
+           return action.disabled(context.graph()) || reason;
+       };
+
+       operation.tooltip = function() {
+           var disable = operation.disabled();
+           if (disable) {
+               return t('operations.split.' + disable);
+           }
+
+           var ways = action.ways(context.graph());
+           if (ways.length === 1) {
+               return t('operations.split.description.' + context.geometry(ways[0].id));
+           } else {
+               return t('operations.split.description.multiple');
+           }
+       };
+
+       operation.id = 'split';
+       operation.keys = [t('operations.split.key')];
+       operation.title = t('operations.split.title');
+
+       return operation;
+   }
+
+   function Straighten$1(selectedIDs, context) {
+       var entityId = selectedIDs[0],
+           action = iD.actions.Straighten(entityId, context.projection);
+
+       function operation() {
+           var annotation = t('operations.straighten.annotation');
+           context.perform(action, annotation);
+       }
+
+       operation.available = function() {
+           var entity = context.entity(entityId);
+           return selectedIDs.length === 1 &&
+               entity.type === 'way' &&
+               !entity.isClosed() &&
+               _.uniq(entity.nodes).length > 2;
+       };
+
+       operation.disabled = function() {
+           var reason;
+           if (context.hasHiddenConnections(entityId)) {
+               reason = 'connected_to_hidden';
+           }
+           return action.disabled(context.graph()) || reason;
+       };
+
+       operation.tooltip = function() {
+           var disable = operation.disabled();
+           return disable ?
+               t('operations.straighten.' + disable) :
+               t('operations.straighten.description');
+       };
+
+       operation.id = 'straighten';
+       operation.keys = [t('operations.straighten.key')];
+       operation.title = t('operations.straighten.title');
+
+       return operation;
+   }
+
+
+
+   var Operations = Object.freeze({
+   	Circularize: Circularize$1,
+   	Continue: Continue,
+   	Delete: Delete,
+   	Disconnect: Disconnect$1,
+   	Merge: Merge$1,
+   	Move: Move,
+   	Orthogonalize: Orthogonalize$1,
+   	Reverse: Reverse$1,
+   	Rotate: Rotate,
+   	Split: Split$1,
+   	Straighten: Straighten$1
+   });
+
    function SelectMode(context, selectedIDs) {
        var mode = {
            id: 'select',
@@ -8345,13 +10604,13 @@
        var keybinding = d3.keybinding('select'),
            timeout = null,
            behaviors = [
-               iD.behavior.Copy(context),
-               iD.behavior.Paste(context),
-               iD.behavior.Breathe(context),
-               iD.behavior.Hover(context),
-               iD.behavior.Select(context),
-               iD.behavior.Lasso(context),
-               iD.modes.DragNode(context)
+               Copy(context),
+               Paste(context),
+               Breathe(context),
+               Hover(context),
+               Select(context),
+               Lasso(context),
+               DragNode(context)
                    .selectedIDs(selectedIDs)
                    .behavior],
            inspector,
@@ -8385,8 +10644,8 @@
                radialMenu.center(context.projection(entity.loc));
            } else {
                var point = context.mouse(),
-                   viewport = iD.geo.Extent(context.projection.clipExtent()).polygon();
-               if (iD.geo.pointInPolygon(point, viewport)) {
+                   viewport = Extent(context.projection.clipExtent()).polygon();
+               if (pointInPolygon(point, viewport)) {
                    radialMenu.center(point);
                } else {
                    suppressMenu = true;
@@ -8440,7 +10699,7 @@
                closeMenu();
                if (_.some(selectedIDs, function(id) { return !context.hasEntity(id); })) {
                    // Exit mode if selected entity gets undone
-                   context.enter(iD.modes.Browse(context));
+                   context.enter(Browse(context));
                }
            }
 
@@ -8448,15 +10707,15 @@
                var target = d3.select(d3.event.target),
                    datum = target.datum();
 
-               if (datum instanceof iD.Way && !target.classed('fill')) {
-                   var choice = iD.geo.chooseEdge(context.childNodes(datum), context.mouse(), context.projection),
-                       node = iD.Node();
+               if (datum instanceof Way && !target.classed('fill')) {
+                   var choice = chooseEdge(context.childNodes(datum), context.mouse(), context.projection),
+                       node = Node();
 
                    var prev = datum.nodes[choice.index - 1],
                        next = datum.nodes[choice.index];
 
                    context.perform(
-                       iD.actions.AddMidpoint({loc: choice.loc, edge: [prev, next]}, node),
+                       AddMidpoint({loc: choice.loc, edge: [prev, next]}, node),
                        t('operations.add.annotation.vertex'));
 
                    d3.event.preventDefault();
@@ -8472,11 +10731,11 @@
                }
 
                var selection = context.surface()
-                       .selectAll(iD.util.entityOrMemberSelector(selectedIDs, context.graph()));
+                       .selectAll(entityOrMemberSelector(selectedIDs, context.graph()));
 
                if (selection.empty()) {
                    if (drawn) {  // Exit mode if selected DOM elements have disappeared..
-                       context.enter(iD.modes.Browse(context));
+                       context.enter(Browse(context));
                    }
                } else {
                    selection
@@ -8486,7 +10745,7 @@
 
            function esc() {
                if (!context.inIntro()) {
-                   context.enter(iD.modes.Browse(context));
+                   context.enter(Browse(context));
                }
            }
 
@@ -8495,11 +10754,11 @@
                context.install(behavior);
            });
 
-           var operations = _.without(d3.values(iD.operations), iD.operations.Delete)
+           var operations = _.without(d3.values(Operations), Delete)
                    .map(function(o) { return o(selectedIDs, context); })
                    .filter(function(o) { return o.available(); });
 
-           operations.unshift(iD.operations.Delete(selectedIDs, context));
+           operations.unshift(Delete(selectedIDs, context));
 
            keybinding
                .on('⎋', esc, true)
@@ -8518,7 +10777,7 @@
            d3.select(document)
                .call(keybinding);
 
-           radialMenu = iD.ui.RadialMenu(context, operations);
+           radialMenu = RadialMenu(context, operations);
 
            context.ui().sidebar
                .select(singular() ? singular().id : null, newFeature);
@@ -8549,7 +10808,7 @@
            }, 200);
 
            if (selectedIDs.length > 1) {
-               var entities = iD.ui.SelectionList(context, selectedIDs);
+               var entities = SelectionList(context, selectedIDs);
                context.ui().sidebar.show(entities);
            }
        };
@@ -8582,6 +10841,22 @@
 
        return mode;
    }
+
+
+
+   var modes = Object.freeze({
+   	AddArea: AddArea,
+   	AddLine: AddLine,
+   	AddPoint: AddPoint,
+   	Browse: Browse,
+   	DragNode: DragNode,
+   	DrawArea: DrawArea,
+   	DrawLine: DrawLine,
+   	Move: MoveMode,
+   	RotateWay: RotateWay,
+   	Save: Save$1,
+   	Select: SelectMode
+   });
 
    function Edit(context) {
        function edit() {
@@ -9976,7 +12251,11 @@
    exports.geo = geo;
    exports.svg = svg;
    exports.behavior = behavior;
+<<<<<<< HEAD
 >>>>>>> ef619c2... external modules for behavior
+=======
+   exports.modes = modes;
+>>>>>>> 75901f6... external modules for modes
    exports.Connection = Connection;
    exports.Difference = Difference;
    exports.Entity = Entity;
