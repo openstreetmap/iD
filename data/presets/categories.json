@@ -61,6 +61,8 @@
         "icon": "category-path",
         "members": [
             "highway/pedestrian",
+            "footway/crosswalk",
+            "footway/sidewalk",
             "highway/footway",
             "highway/cycleway",
             "highway/bridleway",
