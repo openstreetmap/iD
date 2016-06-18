@@ -4,6 +4,7 @@ import * as behavior from './behavior/index';
 import * as modes from './modes/index';
 import * as util from './util/index';
 import * as operations from './operations/index';
+import * as presets from './presets/index';
 
 export { Connection } from './core/connection';
 export { Difference } from './core/difference';
@@ -22,5 +23,6 @@ export {
   behavior,
   modes,
   operations,
+  presets,
   util
 };

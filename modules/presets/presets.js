@@ -53,7 +53,7 @@ export function presets() {
     //
     // The returned object L is a whitelist/blacklist of tags. A closed way
     // with a tag (k, v) is considered to be an area if `k in L && !(v in L[k])`
-    // (see `iD.Way#isArea()`). In other words, the keys of L form the whitelist,
+    // (see `Way#isArea()`). In other words, the keys of L form the whitelist,
     // and the subkeys form the blacklist.
     all.areaKeys = function() {
         var areaKeys = {},

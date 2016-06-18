@@ -1,3 +1,4 @@
+import { editDistance } from '../util/index';
 export function Collection(collection) {
     var maxSearchResults = 50,
         maxSuggestionResults = 10;
@@ -59,7 +60,7 @@ export function Collection(collection) {
             var levenstein_name = searchable.map(function(a) {
                     return {
                         preset: a,
-                        dist: iD.util.editDistance(value, a.name().toLowerCase())
+                        dist: editDistance(value, a.name().toLowerCase())
                     };
                 }).filter(function(a) {
                     return a.dist + Math.min(value.length - a.preset.name().length, 0) < 3;
@@ -72,7 +73,7 @@ export function Collection(collection) {
             // finds close matches to value in preset.terms
             var leventstein_terms = _.filter(searchable, function(a) {
                     return _.some(a.terms() || [], function(b) {
-                        return iD.util.editDistance(value, b) + Math.min(value.length - b.length, 0) < 3;
+                        return editDistance(value, b) + Math.min(value.length - b.length, 0) < 3;
                     });
                 });
 
@@ -97,7 +98,7 @@ export function Collection(collection) {
             var leven_suggestions = suggestions.map(function(a) {
                     return {
                         preset: a,
-                        dist: iD.util.editDistance(value, suggestionName(a.name()))
+                        dist: editDistance(value, suggestionName(a.name()))
                     };
                 }).filter(function(a) {
                     return a.dist + Math.min(value.length - suggestionName(a.preset.name()).length, 0) < 1;
