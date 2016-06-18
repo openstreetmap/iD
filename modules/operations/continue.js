@@ -1,3 +1,4 @@
+import { DrawLine } from '../modes/index';
 export function Continue(selectedIDs, context) {
     var graph = context.graph(),
         entities = selectedIDs.map(function(id) { return graph.entity(id); }),
@@ -15,7 +16,7 @@ export function Continue(selectedIDs, context) {
 
     var operation = function() {
         var candidate = candidateWays()[0];
-        context.enter(iD.modes.DrawLine(
+        context.enter(DrawLine(
             context,
             candidate.id,
             context.graph(),

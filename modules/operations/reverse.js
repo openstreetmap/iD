@@ -1,9 +1,10 @@
+import { Reverse as ReverseAction } from '../actions/index';
 export function Reverse(selectedIDs, context) {
     var entityId = selectedIDs[0];
 
     var operation = function() {
         context.perform(
-            iD.actions.Reverse(entityId),
+            ReverseAction(entityId),
             t('operations.reverse.annotation'));
     };
 

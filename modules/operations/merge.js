@@ -1,7 +1,9 @@
+import { Select } from '../modes/index';
+import { Join, Merge as MergeAction, MergePolygon } from '../actions/index';
 export function Merge(selectedIDs, context) {
-    var join = iD.actions.Join(selectedIDs),
-        merge = iD.actions.Merge(selectedIDs),
-        mergePolygon = iD.actions.MergePolygon(selectedIDs);
+    var join = Join(selectedIDs),
+        merge = MergeAction(selectedIDs),
+        mergePolygon = MergePolygon(selectedIDs);
 
     var operation = function() {
         var annotation = t('operations.merge.annotation', {n: selectedIDs.length}),
@@ -16,7 +18,7 @@ export function Merge(selectedIDs, context) {
         }
 
         context.perform(action, annotation);
-        context.enter(iD.modes.Select(context, selectedIDs.filter(function(id) { return context.hasEntity(id); }))
+        context.enter(Select(context, selectedIDs.filter(function(id) { return context.hasEntity(id); }))
             .suppressMenu(true));
     };
 

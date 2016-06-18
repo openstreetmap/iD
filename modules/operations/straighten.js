@@ -1,6 +1,7 @@
+import { Straighten as StraightenAction } from '../actions/index';
 export function Straighten(selectedIDs, context) {
     var entityId = selectedIDs[0],
-        action = iD.actions.Straighten(entityId, context.projection);
+        action = StraightenAction(entityId, context.projection);
 
     function operation() {
         var annotation = t('operations.straighten.annotation');

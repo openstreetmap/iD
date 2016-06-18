@@ -3,6 +3,7 @@ import * as geo from './geo/index';
 import * as behavior from './behavior/index';
 import * as modes from './modes/index';
 import * as util from './util/index';
+import * as operations from './operations/index';
 
 export { Connection } from './core/connection';
 export { Difference } from './core/difference';
@@ -20,5 +21,6 @@ export {
   geo,
   behavior,
   modes,
+  operations,
   util
 };

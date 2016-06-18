@@ -4397,7 +4397,7 @@
        };
    }
 
-   function Circularize(wayId
+   function CircularizeAction(wayId
      , projection, maxAngle) {
        maxAngle = (maxAngle || 20) * Math.PI / 180;
 
@@ -4874,7 +4874,7 @@
        };
    }
 
-   function Disconnect(nodeId, newNodeId) {
+   function DisconnectAction(nodeId, newNodeId) {
        var wayIds;
 
        var action = function(graph) {
@@ -5039,7 +5039,7 @@
        return action;
    }
 
-   function Merge(ids) {
+   function MergeAction(ids) {
        function groupEntitiesByGeometry(graph) {
            var entities = ids.map(function(id) { return graph.entity(id); });
            return _.extend({point: [], area: [], line: [], relation: []},
@@ -5745,7 +5745,7 @@
     * Based on https://github.com/openstreetmap/potlatch2/blob/master/net/systemeD/potlatch2/tools/Quadrilateralise.as
     */
 
-   function Orthogonalize(wayId, projection) {
+   function OrthogonalizeAction(wayId, projection) {
        var threshold = 12, // degrees within right or straight to alter
            lowerThreshold = Math.cos((90 - threshold) * Math.PI / 180),
            upperThreshold = Math.cos(threshold * Math.PI / 180);
@@ -5928,7 +5928,7 @@
    // Reference:
    //   https://github.com/systemed/potlatch2/blob/master/net/systemeD/halcyon/connection/actions/SplitWayAction.as
    //
-   function Split(nodeId, newWayIds) {
+   function SplitAction(nodeId, newWayIds) {
        var wayIds;
 
        // if the way is closed, we need to search for a partner node
@@ -6138,7 +6138,7 @@
 
            function split(toOrFrom) {
                var newID = toOrFrom.newID || Way().id;
-               graph = Split(via.id, [newID])
+               graph = SplitAction(via.id, [newID])
                    .limitWays([toOrFrom.way])(graph);
 
                var a = graph.entity(newID),
@@ -6222,7 +6222,7 @@
          http://wiki.openstreetmap.org/wiki/Route#Members
          http://josm.openstreetmap.de/browser/josm/trunk/src/org/openstreetmap/josm/corrector/ReverseWayTagCorrector.java
     */
-   function Reverse(wayId, options) {
+   function ReverseAction(wayId, options) {
        var replacements = [
                [/:right$/, ':left'], [/:left$/, ':right'],
                [/:forward$/, ':backward'], [/:backward$/, ':forward']
@@ -6348,7 +6348,7 @@
     * Based on https://github.com/openstreetmap/potlatch2/net/systemeD/potlatch2/tools/Straighten.as
     */
 
-   function Straighten(wayId, projection) {
+   function StraightenAction(wayId, projection) {
        function positionAlongWay(n, s, e) {
            return ((n[0] - s[0]) * (e[0] - s[0]) + (n[1] - s[1]) * (e[1] - s[1]))/
                    (Math.pow(e[0] - s[0], 2) + Math.pow(e[1] - s[1], 2));
@@ -6457,7 +6457,7 @@
    	ChangeMember: ChangeMember,
    	ChangePreset: ChangePreset,
    	ChangeTags: ChangeTags,
-   	Circularize: Circularize,
+   	Circularize: CircularizeAction,
    	Connect: Connect,
    	CopyEntities: CopyEntities,
    	DeleteMember: DeleteMember,
@@ -6467,21 +6467,21 @@
    	DeleteWay: DeleteWay,
    	DeprecateTags: DeprecateTags,
    	DiscardTags: DiscardTags,
-   	Disconnect: Disconnect,
+   	Disconnect: DisconnectAction,
    	Join: Join,
-   	Merge: Merge,
+   	Merge: MergeAction,
    	MergePolygon: MergePolygon,
    	MergeRemoteChanges: MergeRemoteChanges,
    	Move: MoveAction,
    	MoveNode: MoveNode,
    	Noop: Noop,
-   	Orthogonalize: Orthogonalize,
+   	Orthogonalize: OrthogonalizeAction,
    	RestrictTurn: RestrictTurn,
-   	Reverse: Reverse,
+   	Reverse: ReverseAction,
    	Revert: Revert,
    	RotateWay: RotateWayAction,
-   	Split: Split,
-   	Straighten: Straighten,
+   	Split: SplitAction,
+   	Straighten: StraightenAction,
    	UnrestrictTurn: UnrestrictTurn
    });
 
@@ -10177,12 +10177,12 @@
        return mode;
    }
 
-   function Circularize$1(selectedIDs, context) {
+   function Circularize(selectedIDs, context) {
        var entityId = selectedIDs[0],
            entity = context.entity(entityId),
            extent = entity.extent(context.graph()),
            geometry = context.geometry(entityId),
-           action = iD.actions.Circularize(entityId, context.projection);
+           action = CircularizeAction(entityId, context.projection);
 
        var operation = function() {
            var annotation = t('operations.circularize.annotation.' + geometry);
@@ -10236,7 +10236,7 @@
 
        var operation = function() {
            var candidate = candidateWays()[0];
-           context.enter(iD.modes.DrawLine(
+           context.enter(DrawLine(
                context,
                candidate.id,
                context.graph(),
@@ -10271,7 +10271,7 @@
    }
 
    function Delete(selectedIDs, context) {
-       var action = iD.actions.DeleteMultiple(selectedIDs);
+       var action = DeleteMultiple(selectedIDs);
 
        var operation = function() {
            var annotation,
@@ -10299,8 +10299,8 @@
                    } else if (i === nodes.length - 1) {
                        i--;
                    } else {
-                       var a = iD.geo.sphericalDistance(entity.loc, context.entity(nodes[i - 1]).loc),
-                           b = iD.geo.sphericalDistance(entity.loc, context.entity(nodes[i + 1]).loc);
+                       var a = sphericalDistance(entity.loc, context.entity(nodes[i - 1]).loc),
+                           b = sphericalDistance(entity.loc, context.entity(nodes[i + 1]).loc);
                        i = a < b ? i - 1 : i + 1;
                    }
 
@@ -10309,9 +10309,9 @@
            }
 
            if (nextSelectedID && context.hasEntity(nextSelectedID)) {
-               context.enter(iD.modes.Select(context, [nextSelectedID]));
+               context.enter(SelectMode(context, [nextSelectedID]));
            } else {
-               context.enter(iD.modes.Browse(context));
+               context.enter(Browse(context));
            }
 
            context.perform(
@@ -10345,13 +10345,13 @@
        return operation;
    }
 
-   function Disconnect$1(selectedIDs, context) {
+   function Disconnect(selectedIDs, context) {
        var vertices = _.filter(selectedIDs, function vertex(entityId) {
            return context.geometry(entityId) === 'vertex';
        });
 
        var entityId = vertices[0],
-           action = iD.actions.Disconnect(entityId);
+           action = DisconnectAction(entityId);
 
        if (selectedIDs.length > 1) {
            action.limitWays(_.without(selectedIDs, entityId));
@@ -10387,10 +10387,10 @@
        return operation;
    }
 
-   function Merge$1(selectedIDs, context) {
-       var join = iD.actions.Join(selectedIDs),
-           merge = iD.actions.Merge(selectedIDs),
-           mergePolygon = iD.actions.MergePolygon(selectedIDs);
+   function Merge(selectedIDs, context) {
+       var join = Join(selectedIDs),
+           merge = MergeAction(selectedIDs),
+           mergePolygon = MergePolygon(selectedIDs);
 
        var operation = function() {
            var annotation = t('operations.merge.annotation', {n: selectedIDs.length}),
@@ -10405,7 +10405,7 @@
            }
 
            context.perform(action, annotation);
-           context.enter(iD.modes.Select(context, selectedIDs.filter(function(id) { return context.hasEntity(id); }))
+           context.enter(SelectMode(context, selectedIDs.filter(function(id) { return context.hasEntity(id); }))
                .suppressMenu(true));
        };
 
@@ -10446,10 +10446,10 @@
    function Move(selectedIDs, context) {
        var extent = selectedIDs.reduce(function(extent, id) {
                return extent.extend(context.entity(id).extent(context.graph()));
-           }, iD.geo.Extent());
+           }, Extent());
 
        var operation = function() {
-           context.enter(iD.modes.Move(context, selectedIDs));
+           context.enter(MoveMode(context, selectedIDs));
        };
 
        operation.available = function() {
@@ -10464,7 +10464,7 @@
            } else if (_.some(selectedIDs, context.hasHiddenConnections)) {
                reason = 'connected_to_hidden';
            }
-           return iD.actions.Move(selectedIDs).disabled(context.graph()) || reason;
+           return MoveAction(selectedIDs).disabled(context.graph()) || reason;
        };
 
        operation.tooltip = function() {
@@ -10481,12 +10481,12 @@
        return operation;
    }
 
-   function Orthogonalize$1(selectedIDs, context) {
+   function Orthogonalize(selectedIDs, context) {
        var entityId = selectedIDs[0],
            entity = context.entity(entityId),
            extent = entity.extent(context.graph()),
            geometry = context.geometry(entityId),
-           action = iD.actions.Orthogonalize(entityId, context.projection);
+           action = OrthogonalizeAction(entityId, context.projection);
 
        var operation = function() {
            var annotation = t('operations.orthogonalize.annotation.' + geometry);
@@ -10524,12 +10524,12 @@
        return operation;
    }
 
-   function Reverse$1(selectedIDs, context) {
+   function Reverse(selectedIDs, context) {
        var entityId = selectedIDs[0];
 
        var operation = function() {
            context.perform(
-               iD.actions.Reverse(entityId),
+               ReverseAction(entityId),
                t('operations.reverse.annotation'));
        };
 
@@ -10560,7 +10560,7 @@
            geometry = context.geometry(entityId);
 
        var operation = function() {
-           context.enter(iD.modes.RotateWay(context, entityId));
+           context.enter(RotateWay(context, entityId));
        };
 
        operation.available = function() {
@@ -10598,13 +10598,13 @@
        return operation;
    }
 
-   function Split$1(selectedIDs, context) {
+   function Split(selectedIDs, context) {
        var vertices = _.filter(selectedIDs, function vertex(entityId) {
            return context.geometry(entityId) === 'vertex';
        });
 
        var entityId = vertices[0],
-           action = iD.actions.Split(entityId);
+           action = SplitAction(entityId);
 
        if (selectedIDs.length > 1) {
            action.limitWays(_.without(selectedIDs, entityId));
@@ -10621,7 +10621,7 @@
            }
 
            var difference = context.perform(action, annotation);
-           context.enter(iD.modes.Select(context, difference.extantIDs()));
+           context.enter(SelectMode(context, difference.extantIDs()));
        };
 
        operation.available = function() {
@@ -10657,9 +10657,9 @@
        return operation;
    }
 
-   function Straighten$1(selectedIDs, context) {
+   function Straighten(selectedIDs, context) {
        var entityId = selectedIDs[0],
-           action = iD.actions.Straighten(entityId, context.projection);
+           action = StraightenAction(entityId, context.projection);
 
        function operation() {
            var annotation = t('operations.straighten.annotation');
@@ -10699,17 +10699,17 @@
 
 
    var Operations = Object.freeze({
-   	Circularize: Circularize$1,
+   	Circularize: Circularize,
    	Continue: Continue,
    	Delete: Delete,
-   	Disconnect: Disconnect$1,
-   	Merge: Merge$1,
+   	Disconnect: Disconnect,
+   	Merge: Merge,
    	Move: Move,
-   	Orthogonalize: Orthogonalize$1,
-   	Reverse: Reverse$1,
+   	Orthogonalize: Orthogonalize,
+   	Reverse: Reverse,
    	Rotate: Rotate,
-   	Split: Split$1,
-   	Straighten: Straighten$1
+   	Split: Split,
+   	Straighten: Straighten
    });
 
    function SelectMode(context, selectedIDs) {
@@ -12373,8 +12373,12 @@
 =======
    exports.modes = modes;
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 75901f6... external modules for modes
 =======
+=======
+   exports.operations = Operations;
+>>>>>>> 422ffee... external modules for operations
    exports.util = util;
 >>>>>>> 42ce4cf... external modules for util
    exports.Connection = Connection;

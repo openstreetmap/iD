@@ -44,7 +44,6 @@ $(BUILDJS_TARGETS): $(BUILDJS_SOURCES) build.js
 
 MODULE_TARGETS = \
 	js/lib/id/index.js \
-	js/lib/id/operations.js \
 	js/lib/id/presets.js \
 	js/lib/id/renderer.js \
 	js/lib/id/services.js \
@@ -61,10 +60,6 @@ js/lib/id/index.js: $(shell find modules/index.js -type f)
 js/lib/id/modes.js: $(shell find modules/modes -type f)
 	@rm -f $@
 	node_modules/.bin/rollup -f umd -n iD.modes modules/modes/index.js --no-strict -o $@
-
-js/lib/id/operations.js: $(shell find modules/operations -type f)
-	@rm -f $@
-	node_modules/.bin/rollup -f umd -n iD.operations modules/operations/index.js --no-strict -o $@
 
 js/lib/id/presets.js: $(shell find modules/presets -type f)
 	@rm -f $@

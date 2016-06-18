@@ -1,10 +1,11 @@
+import { Disconnect as DisconnectAction } from '../actions/index';
 export function Disconnect(selectedIDs, context) {
     var vertices = _.filter(selectedIDs, function vertex(entityId) {
         return context.geometry(entityId) === 'vertex';
     });
 
     var entityId = vertices[0],
-        action = iD.actions.Disconnect(entityId);
+        action = DisconnectAction(entityId);
 
     if (selectedIDs.length > 1) {
         action.limitWays(_.without(selectedIDs, entityId));
