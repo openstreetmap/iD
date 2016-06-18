@@ -13,7 +13,7 @@ export function Collection(collection) {
         },
 
         matchGeometry: function(geometry) {
-            return iD.presets.Collection(collection.filter(function(d) {
+            return Collection(collection.filter(function(d) {
                 return d.matchGeometry(geometry);
             }));
         },
@@ -118,7 +118,7 @@ export function Collection(collection) {
                             leven_suggestions.slice(0, maxSuggestionResults)
                         ).slice(0, maxSearchResults-1);
 
-            return iD.presets.Collection(_.uniq(
+            return Collection(_.uniq(
                     results.concat(other)
                 ));
         }

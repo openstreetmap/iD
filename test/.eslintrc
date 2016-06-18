@@ -1,5 +1,6 @@
 {
     "globals": {
+        "iD": false,
         "describe": true,
         "it": true,
         "expect": true,
