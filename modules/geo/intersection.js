@@ -1,4 +1,5 @@
 import { angle as getAngle } from './index';
+import { Way } from '../core/index';
 
 export function Turn(turn) {
     if (!(this instanceof Turn))
@@ -40,14 +41,14 @@ export function Intersection(graph, vertexId) {
             var splitIndex, wayA, wayB, indexA, indexB;
             if (isClosingNode) {
                 splitIndex = Math.ceil(way.nodes.length / 2);  // split at midpoint
-                wayA = iD.Way({id: way.id + '-a', tags: way.tags, nodes: way.nodes.slice(0, splitIndex)});
-                wayB = iD.Way({id: way.id + '-b', tags: way.tags, nodes: way.nodes.slice(splitIndex)});
+                wayA = Way({id: way.id + '-a', tags: way.tags, nodes: way.nodes.slice(0, splitIndex)});
+                wayB = Way({id: way.id + '-b', tags: way.tags, nodes: way.nodes.slice(splitIndex)});
                 indexA = 1;
                 indexB = way.nodes.length - 2;
             } else {
                 splitIndex = _.indexOf(way.nodes, vertex.id, 1);  // split at vertexid
-                wayA = iD.Way({id: way.id + '-a', tags: way.tags, nodes: way.nodes.slice(0, splitIndex + 1)});
-                wayB = iD.Way({id: way.id + '-b', tags: way.tags, nodes: way.nodes.slice(splitIndex)});
+                wayA = Way({id: way.id + '-a', tags: way.tags, nodes: way.nodes.slice(0, splitIndex + 1)});
+                wayB = Way({id: way.id + '-b', tags: way.tags, nodes: way.nodes.slice(splitIndex)});
                 indexA = splitIndex - 1;
                 indexB = splitIndex + 1;
             }

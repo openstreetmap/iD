@@ -1,4 +1,5 @@
 import * as actions from './actions/index';
+import * as geo from './geo/index';
 
 export { Connection } from './core/connection';
 export { Difference } from './core/difference';
@@ -12,5 +13,6 @@ export { Tree } from './core/tree';
 export { Way } from './core/way';
 
 export {
-  actions
+  actions,
+  geo
 };
