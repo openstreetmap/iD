@@ -1,3 +1,8 @@
+import { Move as MoveMode } from '../modes/index';
+import { Extent, pointInPolygon } from '../geo/index';
+import { CopyEntities, ChangeTags, Move as MoveAction} from '../actions/index';
+import { cmd } from '../ui/core/index';
+
 export function Paste(context) {
     var keybinding = d3.keybinding('paste');
 
@@ -24,18 +29,18 @@ export function Paste(context) {
         var baseGraph = context.graph(),
             mouse = context.mouse(),
             projection = context.projection,
-            viewport = iD.geo.Extent(projection.clipExtent()).polygon();
+            viewport = Extent(projection.clipExtent()).polygon();
 
-        if (!iD.geo.pointInPolygon(mouse, viewport)) return;
+        if (!pointInPolygon(mouse, viewport)) return;
 
-        var extent = iD.geo.Extent(),
+        var extent = Extent(),
             oldIDs = context.copyIDs(),
             oldGraph = context.copyGraph(),
             newIDs = [];
 
         if (!oldIDs.length) return;
 
-        var action = iD.actions.CopyEntities(oldIDs, oldGraph);
+        var action = CopyEntities(oldIDs, oldGraph);
         context.perform(action);
 
         var copies = action.copies();
@@ -45,19 +50,19 @@ export function Paste(context) {
 
             extent._extend(oldEntity.extent(oldGraph));
             newIDs.push(newEntity.id);
-            context.perform(iD.actions.ChangeTags(newEntity.id, _.omit(newEntity.tags, omitTag)));
+            context.perform(ChangeTags(newEntity.id, _.omit(newEntity.tags, omitTag)));
         }
 
         // Put pasted objects where mouse pointer is..
         var center = projection(extent.center()),
             delta = [ mouse[0] - center[0], mouse[1] - center[1] ];
 
-        context.perform(iD.actions.Move(newIDs, delta, projection));
-        context.enter(iD.modes.Move(context, newIDs, baseGraph));
+        context.perform(MoveAction(newIDs, delta, projection));
+        context.enter(MoveMode(context, newIDs, baseGraph));
     }
 
     function paste() {
-        keybinding.on(iD.ui.cmd('⌘V'), doPaste);
+        keybinding.on(cmd('⌘V'), doPaste);
         d3.select(document).call(keybinding);
         return paste;
     }

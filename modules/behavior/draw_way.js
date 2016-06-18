@@ -1,3 +1,8 @@
+import { Node, Way } from '../core/index';
+import { entitySelector } from '../util/index';
+import { Browse, Select } from '../modes/index';
+import { chooseEdge, edgeEqual } from '../geo/index';
+import { AddEntity, AddVertex, MoveNode, AddMidpoint } from '../actions/index';
 import { Draw } from './draw';
 
 export function DrawWay(context, wayId, index, mode, baseGraph) {
@@ -10,21 +15,21 @@ export function DrawWay(context, wayId, index, mode, baseGraph) {
         draw = Draw(context);
 
     var startIndex = typeof index === 'undefined' ? way.nodes.length - 1 : 0,
-        start = iD.Node({loc: context.graph().entity(way.nodes[startIndex]).loc}),
-        end = iD.Node({loc: context.map().mouseCoordinates()}),
-        segment = iD.Way({
+        start = Node({loc: context.graph().entity(way.nodes[startIndex]).loc}),
+        end = Node({loc: context.map().mouseCoordinates()}),
+        segment = Way({
             nodes: typeof index === 'undefined' ? [start.id, end.id] : [end.id, start.id],
             tags: _.clone(way.tags)
         });
 
     var f = context[way.isDegenerate() ? 'replace' : 'perform'];
     if (isArea) {
-        f(iD.actions.AddEntity(end),
-            iD.actions.AddVertex(wayId, end.id, index));
+        f(AddEntity(end),
+            AddVertex(wayId, end.id, index));
     } else {
-        f(iD.actions.AddEntity(start),
-            iD.actions.AddEntity(end),
-            iD.actions.AddEntity(segment));
+        f(AddEntity(start),
+            AddEntity(end),
+            AddEntity(segment));
     }
 
     function move(datum) {
@@ -41,7 +46,7 @@ export function DrawWay(context, wayId, index, mode, baseGraph) {
                     mouse[1] > pad && mouse[1] < dims[1] - pad;
 
             if (trySnap) {
-                loc = iD.geo.chooseEdge(context.childNodes(datum), context.mouse(), context.projection).loc;
+                loc = chooseEdge(context.childNodes(datum), context.mouse(), context.projection).loc;
             }
         }
 
@@ -49,17 +54,17 @@ export function DrawWay(context, wayId, index, mode, baseGraph) {
             loc = context.map().mouseCoordinates();
         }
 
-        context.replace(iD.actions.MoveNode(end.id, loc));
+        context.replace(MoveNode(end.id, loc));
     }
 
     function undone() {
         finished = true;
-        context.enter(iD.modes.Browse(context));
+        context.enter(Browse(context));
     }
 
     function setActiveElements() {
         var active = isArea ? [wayId, end.id] : [segment.id, start.id, end.id];
-        context.surface().selectAll(iD.util.entitySelector(active))
+        context.surface().selectAll(entitySelector(active))
             .classed('active', true);
     }
 
@@ -123,10 +128,10 @@ export function DrawWay(context, wayId, index, mode, baseGraph) {
         var last = context.hasEntity(way.nodes[way.nodes.length - (isArea ? 2 : 1)]);
         if (last && last.loc[0] === loc[0] && last.loc[1] === loc[1]) return;
 
-        var newNode = iD.Node({loc: loc});
+        var newNode = Node({loc: loc});
 
         context.replace(
-            iD.actions.AddEntity(newNode),
+            AddEntity(newNode),
             ReplaceTemporaryNode(newNode),
             annotation);
 
@@ -141,13 +146,13 @@ export function DrawWay(context, wayId, index, mode, baseGraph) {
             [way.nodes[0], way.nodes[1]];
 
         // Avoid creating duplicate segments
-        if (!isArea && iD.geo.edgeEqual(edge, previousEdge))
+        if (!isArea && edgeEqual(edge, previousEdge))
             return;
 
-        var newNode = iD.Node({ loc: loc });
+        var newNode = Node({ loc: loc });
 
         context.perform(
-            iD.actions.AddMidpoint({ loc: loc, edge: edge}, newNode),
+            AddMidpoint({ loc: loc, edge: edge}, newNode),
             ReplaceTemporaryNode(newNode),
             annotation);
 
@@ -181,11 +186,11 @@ export function DrawWay(context, wayId, index, mode, baseGraph) {
 
         if (context.hasEntity(wayId)) {
             context.enter(
-                iD.modes.Select(context, [wayId])
+                Select(context, [wayId])
                     .suppressMenu(true)
                     .newFeature(true));
         } else {
-            context.enter(iD.modes.Browse(context));
+            context.enter(Browse(context));
         }
     };
 
@@ -200,7 +205,7 @@ export function DrawWay(context, wayId, index, mode, baseGraph) {
         }, 1000);
 
         finished = true;
-        context.enter(iD.modes.Browse(context));
+        context.enter(Browse(context));
     };
 
     drawWay.tail = function(text) {

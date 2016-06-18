@@ -1,3 +1,4 @@
+import { Browse } from '../modes/index';
 import { Draw } from './draw';
 
 export function AddWay(context) {
@@ -26,7 +27,7 @@ export function AddWay(context) {
             context.map().dblclickEnable(true);
         }, 1000);
 
-        context.enter(iD.modes.Browse(context));
+        context.enter(Browse(context));
     };
 
     addWay.tail = function(text) {

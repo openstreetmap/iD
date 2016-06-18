@@ -1,3 +1,7 @@
+import { Select } from '../modes/index';
+import { Extent, pointInPolygon } from '../geo/index';
+import { Lasso as uiLasso } from '../ui/core/index';
+
 export function Lasso(context) {
 
     var behavior = function(selection) {
@@ -18,7 +22,7 @@ export function Lasso(context) {
 
         function mousemove() {
             if (!lasso) {
-                lasso = iD.ui.Lasso(context);
+                lasso = uiLasso(context);
                 context.surface().call(lasso);
             }
 
@@ -36,11 +40,11 @@ export function Lasso(context) {
 
             var graph = context.graph(),
                 bounds = lasso.extent().map(context.projection.invert),
-                extent = iD.geo.Extent(normalize(bounds[0], bounds[1]));
+                extent = Extent(normalize(bounds[0], bounds[1]));
 
             return _.map(context.intersects(extent).filter(function(entity) {
                 return entity.type === 'node' &&
-                    iD.geo.pointInPolygon(context.projection(entity.loc), lasso.coordinates) &&
+                    pointInPolygon(context.projection(entity.loc), lasso.coordinates) &&
                     !context.features().isHidden(entity, graph, entity.geometry(graph));
             }), 'id');
         }
@@ -56,7 +60,7 @@ export function Lasso(context) {
             lasso.close();
 
             if (ids.length) {
-                context.enter(iD.modes.Select(context, ids));
+                context.enter(Select(context, ids));
             }
         }
 

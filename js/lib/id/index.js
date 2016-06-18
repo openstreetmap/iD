@@ -1571,6 +1571,96 @@
        return difference;
    }
 
+<<<<<<< HEAD
+=======
+   function entitySelector(ids) {
+       return ids.length ? '.' + ids.join(',.') : 'nothing';
+   }
+
+   function displayName(entity) {
+       var localeName = 'name:' + iD.detect().locale.toLowerCase().split('-')[0];
+       return entity.tags[localeName] || entity.tags.name || entity.tags.ref;
+   }
+
+   function stringQs(str) {
+       return str.split('&').reduce(function(obj, pair){
+           var parts = pair.split('=');
+           if (parts.length === 2) {
+               obj[parts[0]] = (null === parts[1]) ? '' : decodeURIComponent(parts[1]);
+           }
+           return obj;
+       }, {});
+   }
+
+   function qsString(obj, noencode) {
+       function softEncode(s) {
+         // encode everything except special characters used in certain hash parameters:
+         // "/" in map states, ":", ",", {" and "}" in background
+         return encodeURIComponent(s).replace(/(%2F|%3A|%2C|%7B|%7D)/g, decodeURIComponent);
+       }
+       return Object.keys(obj).sort().map(function(key) {
+           return encodeURIComponent(key) + '=' + (
+               noencode ? softEncode(obj[key]) : encodeURIComponent(obj[key]));
+       }).join('&');
+   }
+
+   function prefixDOMProperty(property) {
+       var prefixes = ['webkit', 'ms', 'moz', 'o'],
+           i = -1,
+           n = prefixes.length,
+           s = document.body;
+
+       if (property in s)
+           return property;
+
+       property = property.substr(0, 1).toUpperCase() + property.substr(1);
+
+       while (++i < n)
+           if (prefixes[i] + property in s)
+               return prefixes[i] + property;
+
+       return false;
+   }
+
+   function prefixCSSProperty(property) {
+       var prefixes = ['webkit', 'ms', 'Moz', 'O'],
+           i = -1,
+           n = prefixes.length,
+           s = document.body.style;
+
+       if (property.toLowerCase() in s)
+           return property.toLowerCase();
+
+       while (++i < n)
+           if (prefixes[i] + property in s)
+               return '-' + prefixes[i].toLowerCase() + property.replace(/([A-Z])/g, '-$1').toLowerCase();
+
+       return false;
+   }
+
+
+   var transformProperty;
+   function setTransform(el, x, y, scale) {
+       var prop = transformProperty = transformProperty || prefixCSSProperty('Transform'),
+           translate = iD.detect().opera ?
+               'translate('   + x + 'px,' + y + 'px)' :
+               'translate3d(' + x + 'px,' + y + 'px,0)';
+       return el.style(prop, translate + (scale ? ' scale(' + scale + ')' : ''));
+   }
+
+   function getStyle(selector) {
+       for (var i = 0; i < document.styleSheets.length; i++) {
+           var rules = document.styleSheets[i].rules || document.styleSheets[i].cssRules || [];
+           for (var k = 0; k < rules.length; k++) {
+               var selectorText = rules[k].selectorText && rules[k].selectorText.split(', ');
+               if (_.includes(selectorText, selector)) {
+                   return rules[k];
+               }
+           }
+       }
+   }
+
+>>>>>>> ef619c2... external modules for behavior
    /* eslint-disable no-proto */
    var getPrototypeOf = Object.getPrototypeOf || function(obj) { return obj.__proto__; };
    // wraps an index to an interval [0..length-1]
@@ -1999,6 +2089,37 @@
        return tree;
    }
 
+   // Translate a MacOS key command into the appropriate Windows/Linux equivalent.
+   // For example, ⌘Z -> Ctrl+Z
+   function cmd(code) {
+       if (iD.detect().os === 'mac') {
+           return code;
+       }
+
+       if (iD.detect().os === 'win') {
+           if (code === '⌘⇧Z') return 'Ctrl+Y';
+       }
+
+       var result = '',
+           replacements = {
+               '⌘': 'Ctrl',
+               '⇧': 'Shift',
+               '⌥': 'Alt',
+               '⌫': 'Backspace',
+               '⌦': 'Delete'
+           };
+
+       for (var i = 0; i < code.length; i++) {
+           if (code[i] in replacements) {
+               result += replacements[code[i]] + '+';
+           } else {
+               result += code[i];
+           }
+       }
+
+       return result;
+   }
+
    function modalModule(selection, blocking) {
        var keybinding = d3.keybinding('modal');
        var previous = selection.select('div.modal');
@@ -2063,6 +2184,26 @@
        return shaded;
    }
 
+   // toggles the visibility of ui elements, using a combination of the
+   // hide class, which sets display=none, and a d3 transition for opacity.
+   // this will cause blinking when called repeatedly, so check that the
+   // value actually changes between calls.
+   function Toggle(show, callback) {
+       return function(selection) {
+           selection
+               .style('opacity', show ? 0 : 1)
+               .classed('hide', false)
+               .transition()
+               .style('opacity', show ? 1 : 0)
+               .each('end', function() {
+                   d3.select(this)
+                       .classed('hide', !show)
+                       .style('opacity', null);
+                   if (callback) callback.apply(this);
+               });
+       };
+   }
+
    function Loading(context) {
        var message = '',
            blocking = false,
@@ -2106,6 +2247,57 @@
        };
 
        return loading;
+   }
+
+   function uiLasso(context) {
+       var group, polygon;
+
+       lasso.coordinates = [];
+
+       function lasso(selection) {
+
+           context.container().classed('lasso', true);
+
+           group = selection.append('g')
+               .attr('class', 'lasso hide');
+
+           polygon = group.append('path')
+               .attr('class', 'lasso-path');
+
+           group.call(Toggle(true));
+
+       }
+
+       function draw() {
+           if (polygon) {
+               polygon.data([lasso.coordinates])
+                   .attr('d', function(d) { return 'M' + d.join(' L') + ' Z'; });
+           }
+       }
+
+       lasso.extent = function () {
+           return lasso.coordinates.reduce(function(extent, point) {
+               return extent.extend(iD.geo.Extent(point));
+           }, iD.geo.Extent());
+       };
+
+       lasso.p = function(_) {
+           if (!arguments.length) return lasso;
+           lasso.coordinates.push(_);
+           draw();
+           return lasso;
+       };
+
+       lasso.close = function() {
+           if (group) {
+               group.call(Toggle(false, function() {
+                   d3.select(this).remove();
+               }));
+           }
+           context.container().classed('lasso', false);
+       };
+
+       return lasso;
    }
 
    function History(context) {
@@ -4312,7 +4504,7 @@
        return action;
    }
 
-   function Move(moveIds, tryDelta, projection, cache) {
+   function MoveAction(moveIds, tryDelta, projection, cache) {
        var delta = tryDelta;
 
        function vecAdd(a, b) { return [a[0] + b[0], a[1] + b[1]]; }
@@ -5335,7 +5527,7 @@
    	Merge: Merge,
    	MergePolygon: MergePolygon,
    	MergeRemoteChanges: MergeRemoteChanges,
-   	Move: Move,
+   	Move: MoveAction,
    	MoveNode: MoveNode,
    	Noop: Noop,
    	Orthogonalize: Orthogonalize,
@@ -5348,8 +5540,4443 @@
    	UnrestrictTurn: UnrestrictTurn
    });
 
+<<<<<<< HEAD
    exports.actions = actions;
    exports.geo = geo;
+=======
+   function Areas(projection) {
+       // Patterns only work in Firefox when set directly on element.
+       // (This is not a bug: https://bugzilla.mozilla.org/show_bug.cgi?id=750632)
+       var patterns = {
+           wetland: 'wetland',
+           beach: 'beach',
+           scrub: 'scrub',
+           construction: 'construction',
+           military: 'construction',
+           cemetery: 'cemetery',
+           grave_yard: 'cemetery',
+           meadow: 'meadow',
+           farm: 'farmland',
+           farmland: 'farmland',
+           orchard: 'orchard'
+       };
+
+       var patternKeys = ['landuse', 'natural', 'amenity'];
+
+       function setPattern(d) {
+           for (var i = 0; i < patternKeys.length; i++) {
+               if (patterns.hasOwnProperty(d.tags[patternKeys[i]])) {
+                   this.style.fill = this.style.stroke = 'url("#pattern-' + patterns[d.tags[patternKeys[i]]] + '")';
+                   return;
+               }
+           }
+           this.style.fill = this.style.stroke = '';
+       }
+
+       return function drawAreas(surface, graph, entities, filter) {
+           var path = Path(projection, graph, true),
+               areas = {},
+               multipolygon;
+
+           for (var i = 0; i < entities.length; i++) {
+               var entity = entities[i];
+               if (entity.geometry(graph) !== 'area') continue;
+
+               multipolygon = isSimpleMultipolygonOuterMember(entity, graph);
+               if (multipolygon) {
+                   areas[multipolygon.id] = {
+                       entity: multipolygon.mergeTags(entity.tags),
+                       area: Math.abs(entity.area(graph))
+                   };
+               } else if (!areas[entity.id]) {
+                   areas[entity.id] = {
+                       entity: entity,
+                       area: Math.abs(entity.area(graph))
+                   };
+               }
+           }
+
+           areas = d3.values(areas).filter(function hasPath(a) { return path(a.entity); });
+           areas.sort(function areaSort(a, b) { return b.area - a.area; });
+           areas = _.map(areas, 'entity');
+
+           var strokes = areas.filter(function(area) {
+               return area.type === 'way';
+           });
+
+           var data = {
+               clip: areas,
+               shadow: strokes,
+               stroke: strokes,
+               fill: areas
+           };
+
+           var clipPaths = surface.selectAll('defs').selectAll('.clipPath')
+              .filter(filter)
+              .data(data.clip, Entity.key);
+
+           clipPaths.enter()
+              .append('clipPath')
+              .attr('class', 'clipPath')
+              .attr('id', function(entity) { return entity.id + '-clippath'; })
+              .append('path');
+
+           clipPaths.selectAll('path')
+              .attr('d', path);
+
+           clipPaths.exit()
+              .remove();
+
+           var areagroup = surface
+               .selectAll('.layer-areas')
+               .selectAll('g.areagroup')
+               .data(['fill', 'shadow', 'stroke']);
+
+           areagroup.enter()
+               .append('g')
+               .attr('class', function(d) { return 'layer areagroup area-' + d; });
+
+           var paths = areagroup
+               .selectAll('path')
+               .filter(filter)
+               .data(function(layer) { return data[layer]; }, Entity.key);
+
+           // Remove exiting areas first, so they aren't included in the `fills`
+           // array used for sorting below (https://github.com/openstreetmap/iD/issues/1903).
+           paths.exit()
+               .remove();
+
+           var fills = surface.selectAll('.area-fill path.area')[0];
+
+           var bisect = d3.bisector(function(node) {
+               return -node.__data__.area(graph);
+           }).left;
+
+           function sortedByArea(entity) {
+               if (this.__data__ === 'fill') {
+                   return fills[bisect(fills, -entity.area(graph))];
+               }
+           }
+
+           paths.enter()
+               .insert('path', sortedByArea)
+               .each(function(entity) {
+                   var layer = this.parentNode.__data__;
+
+                   this.setAttribute('class', entity.type + ' area ' + layer + ' ' + entity.id);
+
+                   if (layer === 'fill') {
+                       this.setAttribute('clip-path', 'url(#' + entity.id + '-clippath)');
+                       setPattern.apply(this, arguments);
+                   }
+               })
+               .call(TagClasses());
+
+           paths
+               .attr('d', path);
+       };
+   }
+
+   function Debug(projection, context) {
+
+       function multipolygons(imagery) {
+           return imagery.map(function(data) {
+               return {
+                   type: 'MultiPolygon',
+                   coordinates: [ data.polygon ]
+               };
+           });
+       }
+
+       function drawDebug(surface) {
+           var showsTile = context.getDebug('tile'),
+               showsCollision = context.getDebug('collision'),
+               showsImagery = context.getDebug('imagery'),
+               showsImperial = context.getDebug('imperial'),
+               showsDriveLeft = context.getDebug('driveLeft'),
+               path = d3.geo.path().projection(projection);
+
+
+           var debugData = [];
+           if (showsTile) {
+               debugData.push({ class: 'red', label: 'tile' });
+           }
+           if (showsCollision) {
+               debugData.push({ class: 'yellow', label: 'collision' });
+           }
+           if (showsImagery) {
+               debugData.push({ class: 'orange', label: 'imagery' });
+           }
+           if (showsImperial) {
+               debugData.push({ class: 'cyan', label: 'imperial' });
+           }
+           if (showsDriveLeft) {
+               debugData.push({ class: 'green', label: 'driveLeft' });
+           }
+
+
+           var legend = d3.select('#content')
+               .selectAll('.debug-legend')
+               .data(debugData.length ? [0] : []);
+
+           legend.enter()
+               .append('div')
+               .attr('class', 'fillD debug-legend');
+
+           legend.exit()
+               .remove();
+
+
+           var legendItems = legend.selectAll('.debug-legend-item')
+               .data(debugData, function(d) { return d.label; });
+
+           legendItems.enter()
+               .append('span')
+               .attr('class', function(d) { return 'debug-legend-item ' + d.class; })
+               .text(function(d) { return d.label; });
+
+           legendItems.exit()
+               .remove();
+
+
+           var layer = surface.selectAll('.layer-debug')
+               .data(showsImagery || showsImperial || showsDriveLeft ? [0] : []);
+
+           layer.enter()
+               .append('g')
+               .attr('class', 'layer-debug');
+
+           layer.exit()
+               .remove();
+
+
+           var extent = context.map().extent(),
+               availableImagery = showsImagery && multipolygons(iD.data.imagery.filter(function(source) {
+                   if (!source.polygon) return false;
+                   return source.polygon.some(function(polygon) {
+                       return polygonIntersectsPolygon(polygon, extent, true);
+                   });
+               }));
+
+           var imagery = layer.selectAll('path.debug-imagery')
+               .data(showsImagery ? availableImagery : []);
+
+           imagery.enter()
+               .append('path')
+               .attr('class', 'debug-imagery debug orange');
+
+           imagery.exit()
+               .remove();
+
+
+           var imperial = layer
+               .selectAll('path.debug-imperial')
+               .data(showsImperial ? [iD.data.imperial] : []);
+
+           imperial.enter()
+               .append('path')
+               .attr('class', 'debug-imperial debug cyan');
+
+           imperial.exit()
+               .remove();
+
+
+           var driveLeft = layer
+               .selectAll('path.debug-drive-left')
+               .data(showsDriveLeft ? [iD.data.driveLeft] : []);
+
+           driveLeft.enter()
+               .append('path')
+               .attr('class', 'debug-drive-left debug green');
+
+           driveLeft.exit()
+               .remove();
+
+
+           // update
+           layer.selectAll('path')
+               .attr('d', path);
+       }
+
+       // This looks strange because `enabled` methods on other layers are
+       // chainable getter/setters, and this one is just a getter.
+       drawDebug.enabled = function() {
+           if (!arguments.length) {
+               return context.getDebug('tile') ||
+                   context.getDebug('collision') ||
+                   context.getDebug('imagery') ||
+                   context.getDebug('imperial') ||
+                   context.getDebug('driveLeft');
+           } else {
+               return this;
+           }
+       };
+
+       return drawDebug;
+   }
+
+   /*
+       A standalone SVG element that contains only a `defs` sub-element. To be
+       used once globally, since defs IDs must be unique within a document.
+   */
+   function Defs(context) {
+
+       function SVGSpriteDefinition(id, href) {
+           return function(defs) {
+               d3.xml(href, 'image/svg+xml', function(err, svg) {
+                   if (err) return;
+                   defs.node().appendChild(
+                       d3.select(svg.documentElement).attr('id', id).node()
+                   );
+               });
+           };
+       }
+
+       return function drawDefs(selection) {
+           var defs = selection.append('defs');
+
+           // marker
+           defs.append('marker')
+               .attr({
+                   id: 'oneway-marker',
+                   viewBox: '0 0 10 10',
+                   refY: 2.5,
+                   refX: 5,
+                   markerWidth: 2,
+                   markerHeight: 2,
+                   markerUnits: 'strokeWidth',
+                   orient: 'auto'
+               })
+               .append('path')
+               .attr('class', 'oneway')
+               .attr('d', 'M 5 3 L 0 3 L 0 2 L 5 2 L 5 0 L 10 2.5 L 5 5 z')
+               .attr('stroke', 'none')
+               .attr('fill', '#000')
+               .attr('opacity', '0.5');
+
+           // patterns
+           var patterns = defs.selectAll('pattern')
+               .data([
+                   // pattern name, pattern image name
+                   ['wetland', 'wetland'],
+                   ['construction', 'construction'],
+                   ['cemetery', 'cemetery'],
+                   ['orchard', 'orchard'],
+                   ['farmland', 'farmland'],
+                   ['beach', 'dots'],
+                   ['scrub', 'dots'],
+                   ['meadow', 'dots']
+               ])
+               .enter()
+               .append('pattern')
+               .attr({
+                   id: function (d) {
+                       return 'pattern-' + d[0];
+                   },
+                   width: 32,
+                   height: 32,
+                   patternUnits: 'userSpaceOnUse'
+               });
+
+           patterns.append('rect')
+               .attr({
+                   x: 0,
+                   y: 0,
+                   width: 32,
+                   height: 32,
+                   'class': function (d) {
+                       return 'pattern-color-' + d[0];
+                   }
+               });
+
+           patterns.append('image')
+               .attr({
+                   x: 0,
+                   y: 0,
+                   width: 32,
+                   height: 32
+               })
+               .attr('xlink:href', function (d) {
+                   return context.imagePath('pattern/' + d[1] + '.png');
+               });
+
+           // clip paths
+           defs.selectAll()
+               .data([12, 18, 20, 32, 45])
+               .enter().append('clipPath')
+               .attr('id', function (d) {
+                   return 'clip-square-' + d;
+               })
+               .append('rect')
+               .attr('x', 0)
+               .attr('y', 0)
+               .attr('width', function (d) {
+                   return d;
+               })
+               .attr('height', function (d) {
+                   return d;
+               });
+
+           defs.call(SVGSpriteDefinition(
+               'iD-sprite',
+               context.imagePath('iD-sprite.svg')));
+
+           defs.call(SVGSpriteDefinition(
+               'maki-sprite',
+               context.imagePath('maki-sprite.svg')));
+       };
+   }
+
+   function Gpx(projection, context, dispatch) {
+       var showLabels = true,
+           layer;
+
+       function init() {
+           if (Gpx.initialized) return;  // run once
+
+           Gpx.geojson = {};
+           Gpx.enabled = true;
+
+           function over() {
+               d3.event.stopPropagation();
+               d3.event.preventDefault();
+               d3.event.dataTransfer.dropEffect = 'copy';
+           }
+
+           d3.select('body')
+               .attr('dropzone', 'copy')
+               .on('drop.localgpx', function() {
+                   d3.event.stopPropagation();
+                   d3.event.preventDefault();
+                   if (!iD.detect().filedrop) return;
+                   drawGpx.files(d3.event.dataTransfer.files);
+               })
+               .on('dragenter.localgpx', over)
+               .on('dragexit.localgpx', over)
+               .on('dragover.localgpx', over);
+
+           Gpx.initialized = true;
+       }
+
+
+       function drawGpx(surface) {
+           var geojson = Gpx.geojson,
+               enabled = Gpx.enabled;
+
+           layer = surface.selectAll('.layer-gpx')
+               .data(enabled ? [0] : []);
+
+           layer.enter()
+               .append('g')
+               .attr('class', 'layer-gpx');
+
+           layer.exit()
+               .remove();
+
+
+           var paths = layer
+               .selectAll('path')
+               .data([geojson]);
+
+           paths.enter()
+               .append('path')
+               .attr('class', 'gpx');
+
+           paths.exit()
+               .remove();
+
+           var path = d3.geo.path()
+               .projection(projection);
+
+           paths
+               .attr('d', path);
+
+
+           var labels = layer.selectAll('text')
+               .data(showLabels && geojson.features ? geojson.features : []);
+
+           labels.enter()
+               .append('text')
+               .attr('class', 'gpx');
+
+           labels.exit()
+               .remove();
+
+           labels
+               .text(function(d) {
+                   return d.properties.desc || d.properties.name;
+               })
+               .attr('x', function(d) {
+                   var centroid = path.centroid(d);
+                   return centroid[0] + 7;
+               })
+               .attr('y', function(d) {
+                   var centroid = path.centroid(d);
+                   return centroid[1];
+               });
+
+       }
+
+       function toDom(x) {
+           return (new DOMParser()).parseFromString(x, 'text/xml');
+       }
+
+       drawGpx.showLabels = function(_) {
+           if (!arguments.length) return showLabels;
+           showLabels = _;
+           return this;
+       };
+
+       drawGpx.enabled = function(_) {
+           if (!arguments.length) return Gpx.enabled;
+           Gpx.enabled = _;
+           dispatch.change();
+           return this;
+       };
+
+       drawGpx.hasGpx = function() {
+           var geojson = Gpx.geojson;
+           return (!(_.isEmpty(geojson) || _.isEmpty(geojson.features)));
+       };
+
+       drawGpx.geojson = function(gj) {
+           if (!arguments.length) return Gpx.geojson;
+           if (_.isEmpty(gj) || _.isEmpty(gj.features)) return this;
+           Gpx.geojson = gj;
+           dispatch.change();
+           return this;
+       };
+
+       drawGpx.url = function(url) {
+           d3.text(url, function(err, data) {
+               if (!err) {
+                   drawGpx.geojson(toGeoJSON.gpx(toDom(data)));
+               }
+           });
+           return this;
+       };
+
+       drawGpx.files = function(fileList) {
+           if (!fileList.length) return this;
+           var f = fileList[0],
+               reader = new FileReader();
+
+           reader.onload = function(e) {
+               drawGpx.geojson(toGeoJSON.gpx(toDom(e.target.result))).fitZoom();
+           };
+
+           reader.readAsText(f);
+           return this;
+       };
+
+       drawGpx.fitZoom = function() {
+           if (!this.hasGpx()) return this;
+           var geojson = Gpx.geojson;
+
+           var map = context.map(),
+               viewport = map.trimmedExtent().polygon(),
+               coords = _.reduce(geojson.features, function(coords, feature) {
+                   var c = feature.geometry.coordinates;
+                   return _.union(coords, feature.geometry.type === 'Point' ? [c] : c);
+               }, []);
+
+           if (!polygonIntersectsPolygon(viewport, coords, true)) {
+               var extent = Extent(d3.geo.bounds(geojson));
+               map.centerZoom(extent.center(), map.trimmedExtentZoom(extent));
+           }
+
+           return this;
+       };
+
+       init();
+       return drawGpx;
+   }
+
+   function Icon(name, svgklass, useklass) {
+       return function drawIcon(selection) {
+           selection.selectAll('svg')
+               .data([0])
+               .enter()
+               .append('svg')
+               .attr('class', 'icon ' + (svgklass || ''))
+               .append('use')
+               .attr('xlink:href', name)
+               .attr('class', useklass);
+       };
+   }
+
+   function Labels(projection, context) {
+       var path = d3.geo.path().projection(projection);
+
+       // Replace with dict and iterate over entities tags instead?
+       var label_stack = [
+           ['line', 'aeroway'],
+           ['line', 'highway'],
+           ['line', 'railway'],
+           ['line', 'waterway'],
+           ['area', 'aeroway'],
+           ['area', 'amenity'],
+           ['area', 'building'],
+           ['area', 'historic'],
+           ['area', 'leisure'],
+           ['area', 'man_made'],
+           ['area', 'natural'],
+           ['area', 'shop'],
+           ['area', 'tourism'],
+           ['point', 'aeroway'],
+           ['point', 'amenity'],
+           ['point', 'building'],
+           ['point', 'historic'],
+           ['point', 'leisure'],
+           ['point', 'man_made'],
+           ['point', 'natural'],
+           ['point', 'shop'],
+           ['point', 'tourism'],
+           ['line', 'name'],
+           ['area', 'name'],
+           ['point', 'name']
+       ];
+
+       var default_size = 12;
+
+       var font_sizes = label_stack.map(function(d) {
+           var style = getStyle('text.' + d[0] + '.tag-' + d[1]),
+               m = style && style.cssText.match('font-size: ([0-9]{1,2})px;');
+           if (m) return parseInt(m[1], 10);
+
+           style = getStyle('text.' + d[0]);
+           m = style && style.cssText.match('font-size: ([0-9]{1,2})px;');
+           if (m) return parseInt(m[1], 10);
+
+           return default_size;
+       });
+
+       var iconSize = 18;
+
+       var pointOffsets = [
+           [15, -11, 'start'], // right
+           [10, -11, 'start'], // unused right now
+           [-15, -11, 'end']
+       ];
+
+       var lineOffsets = [50, 45, 55, 40, 60, 35, 65, 30, 70, 25,
+           75, 20, 80, 15, 95, 10, 90, 5, 95];
+
+
+       var noIcons = ['building', 'landuse', 'natural'];
+       function blacklisted(preset) {
+           return _.some(noIcons, function(s) {
+               return preset.id.indexOf(s) >= 0;
+           });
+       }
+
+       function get(array, prop) {
+           return function(d, i) { return array[i][prop]; };
+       }
+
+       var textWidthCache = {};
+
+       function textWidth(text, size, elem) {
+           var c = textWidthCache[size];
+           if (!c) c = textWidthCache[size] = {};
+
+           if (c[text]) {
+               return c[text];
+
+           } else if (elem) {
+               c[text] = elem.getComputedTextLength();
+               return c[text];
+
+           } else {
+               var str = encodeURIComponent(text).match(/%[CDEFcdef]/g);
+               if (str === null) {
+                   return size / 3 * 2 * text.length;
+               } else {
+                   return size / 3 * (2 * text.length + str.length);
+               }
+           }
+       }
+
+       function drawLineLabels(group, entities, filter, classes, labels) {
+           var texts = group.selectAll('text.' + classes)
+               .filter(filter)
+               .data(entities, Entity.key);
+
+           texts.enter()
+               .append('text')
+               .attr('class', function(d, i) { return classes + ' ' + labels[i].classes + ' ' + d.id; })
+               .append('textPath')
+               .attr('class', 'textpath');
+
+
+           texts.selectAll('.textpath')
+               .filter(filter)
+               .data(entities, Entity.key)
+               .attr({
+                   'startOffset': '50%',
+                   'xlink:href': function(d) { return '#labelpath-' + d.id; }
+               })
+               .text(displayName);
+
+           texts.exit().remove();
+       }
+
+       function drawLinePaths(group, entities, filter, classes, labels) {
+           var halos = group.selectAll('path')
+               .filter(filter)
+               .data(entities, Entity.key);
+
+           halos.enter()
+               .append('path')
+               .style('stroke-width', get(labels, 'font-size'))
+               .attr('id', function(d) { return 'labelpath-' + d.id; })
+               .attr('class', classes);
+
+           halos.attr('d', get(labels, 'lineString'));
+
+           halos.exit().remove();
+       }
+
+       function drawPointLabels(group, entities, filter, classes, labels) {
+           var texts = group.selectAll('text.' + classes)
+               .filter(filter)
+               .data(entities, Entity.key);
+
+           texts.enter()
+               .append('text')
+               .attr('class', function(d, i) { return classes + ' ' + labels[i].classes + ' ' + d.id; });
+
+           texts.attr('x', get(labels, 'x'))
+               .attr('y', get(labels, 'y'))
+               .style('text-anchor', get(labels, 'textAnchor'))
+               .text(displayName)
+               .each(function(d, i) { textWidth(displayName(d), labels[i].height, this); });
+
+           texts.exit().remove();
+           return texts;
+       }
+
+       function drawAreaLabels(group, entities, filter, classes, labels) {
+           entities = entities.filter(hasText);
+           labels = labels.filter(hasText);
+           return drawPointLabels(group, entities, filter, classes, labels);
+
+           function hasText(d, i) {
+               return labels[i].hasOwnProperty('x') && labels[i].hasOwnProperty('y');
+           }
+       }
+
+       function drawAreaIcons(group, entities, filter, classes, labels) {
+           var icons = group.selectAll('use')
+               .filter(filter)
+               .data(entities, Entity.key);
+
+           icons.enter()
+               .append('use')
+               .attr('class', 'icon areaicon')
+               .attr('width', '18px')
+               .attr('height', '18px');
+
+           icons.attr('transform', get(labels, 'transform'))
+               .attr('xlink:href', function(d) {
+                   var icon = context.presets().match(d, context.graph()).icon;
+                   return '#' + icon + (icon === 'hairdresser' ? '-24': '-18');    // workaround: maki hairdresser-18 broken?
+               });
+
+
+           icons.exit().remove();
+       }
+
+       function reverse(p) {
+           var angle = Math.atan2(p[1][1] - p[0][1], p[1][0] - p[0][0]);
+           return !(p[0][0] < p[p.length - 1][0] && angle < Math.PI/2 && angle > -Math.PI/2);
+       }
+
+       function lineString(nodes) {
+           return 'M' + nodes.join('L');
+       }
+
+       function subpath(nodes, from, to) {
+           function segmentLength(i) {
+               var dx = nodes[i][0] - nodes[i + 1][0];
+               var dy = nodes[i][1] - nodes[i + 1][1];
+               return Math.sqrt(dx * dx + dy * dy);
+           }
+
+           var sofar = 0,
+               start, end, i0, i1;
+           for (var i = 0; i < nodes.length - 1; i++) {
+               var current = segmentLength(i);
+               var portion;
+               if (!start && sofar + current >= from) {
+                   portion = (from - sofar) / current;
+                   start = [
+                       nodes[i][0] + portion * (nodes[i + 1][0] - nodes[i][0]),
+                       nodes[i][1] + portion * (nodes[i + 1][1] - nodes[i][1])
+                   ];
+                   i0 = i + 1;
+               }
+               if (!end && sofar + current >= to) {
+                   portion = (to - sofar) / current;
+                   end = [
+                       nodes[i][0] + portion * (nodes[i + 1][0] - nodes[i][0]),
+                       nodes[i][1] + portion * (nodes[i + 1][1] - nodes[i][1])
+                   ];
+                   i1 = i + 1;
+               }
+               sofar += current;
+
+           }
+           var ret = nodes.slice(i0, i1);
+           ret.unshift(start);
+           ret.push(end);
+           return ret;
+
+       }
+
+       function hideOnMouseover() {
+           var layers = d3.select(this)
+               .selectAll('.layer-label, .layer-halo');
+
+           layers.selectAll('.proximate')
+               .classed('proximate', false);
+
+           var mouse = context.mouse(),
+               pad = 50,
+               rect = [mouse[0] - pad, mouse[1] - pad, mouse[0] + pad, mouse[1] + pad],
+               ids = _.map(rtree.search(rect), 'id');
+
+           if (!ids.length) return;
+           layers.selectAll('.' + ids.join(', .'))
+               .classed('proximate', true);
+       }
+
+       var rtree = rbush(),
+           rectangles = {};
+
+       function drawLabels(surface, graph, entities, filter, dimensions, fullRedraw) {
+           var hidePoints = !surface.selectAll('.node.point').node();
+
+           var labelable = [], i, k, entity;
+           for (i = 0; i < label_stack.length; i++) labelable.push([]);
+
+           if (fullRedraw) {
+               rtree.clear();
+               rectangles = {};
+           } else {
+               for (i = 0; i < entities.length; i++) {
+                   rtree.remove(rectangles[entities[i].id]);
+               }
+           }
+
+           // Split entities into groups specified by label_stack
+           for (i = 0; i < entities.length; i++) {
+               entity = entities[i];
+               var geometry = entity.geometry(graph);
+
+               if (geometry === 'vertex')
+                   continue;
+               if (hidePoints && geometry === 'point')
+                   continue;
+
+               var preset = geometry === 'area' && context.presets().match(entity, graph),
+                   icon = preset && !blacklisted(preset) && preset.icon;
+
+               if (!icon && !displayName(entity))
+                   continue;
+
+               for (k = 0; k < label_stack.length; k++) {
+                   if (geometry === label_stack[k][0] && entity.tags[label_stack[k][1]]) {
+                       labelable[k].push(entity);
+                       break;
+                   }
+               }
+           }
+
+           var positions = {
+               point: [],
+               line: [],
+               area: []
+           };
+
+           var labelled = {
+               point: [],
+               line: [],
+               area: []
+           };
+
+           // Try and find a valid label for labellable entities
+           for (k = 0; k < labelable.length; k++) {
+               var font_size = font_sizes[k];
+               for (i = 0; i < labelable[k].length; i++) {
+                   entity = labelable[k][i];
+                   var name = displayName(entity),
+                       width = name && textWidth(name, font_size),
+                       p;
+                   if (entity.geometry(graph) === 'point') {
+                       p = getPointLabel(entity, width, font_size);
+                   } else if (entity.geometry(graph) === 'line') {
+                       p = getLineLabel(entity, width, font_size);
+                   } else if (entity.geometry(graph) === 'area') {
+                       p = getAreaLabel(entity, width, font_size);
+                   }
+                   if (p) {
+                       p.classes = entity.geometry(graph) + ' tag-' + label_stack[k][1];
+                       positions[entity.geometry(graph)].push(p);
+                       labelled[entity.geometry(graph)].push(entity);
+                   }
+               }
+           }
+
+           function getPointLabel(entity, width, height) {
+               var coord = projection(entity.loc),
+                   m = 5,  // margin
+                   offset = pointOffsets[0],
+                   p = {
+                       height: height,
+                       width: width,
+                       x: coord[0] + offset[0],
+                       y: coord[1] + offset[1],
+                       textAnchor: offset[2]
+                   };
+               var rect = [p.x - m, p.y - m, p.x + width + m, p.y + height + m];
+               if (tryInsert(rect, entity.id)) return p;
+           }
+
+
+           function getLineLabel(entity, width, height) {
+               var nodes = _.map(graph.childNodes(entity), 'loc').map(projection),
+                   length = pathLength(nodes);
+               if (length < width + 20) return;
+
+               for (var i = 0; i < lineOffsets.length; i++) {
+                   var offset = lineOffsets[i],
+                       middle = offset / 100 * length,
+                       start = middle - width/2;
+                   if (start < 0 || start + width > length) continue;
+                   var sub = subpath(nodes, start, start + width),
+                       rev = reverse(sub),
+                       rect = [
+                           Math.min(sub[0][0], sub[sub.length - 1][0]) - 10,
+                           Math.min(sub[0][1], sub[sub.length - 1][1]) - 10,
+                           Math.max(sub[0][0], sub[sub.length - 1][0]) + 20,
+                           Math.max(sub[0][1], sub[sub.length - 1][1]) + 30
+                       ];
+                   if (rev) sub = sub.reverse();
+                   if (tryInsert(rect, entity.id)) return {
+                       'font-size': height + 2,
+                       lineString: lineString(sub),
+                       startOffset: offset + '%'
+                   };
+               }
+           }
+
+           function getAreaLabel(entity, width, height) {
+               var centroid = path.centroid(entity.asGeoJSON(graph, true)),
+                   extent = entity.extent(graph),
+                   entitywidth = projection(extent[1])[0] - projection(extent[0])[0],
+                   rect;
+
+               if (isNaN(centroid[0]) || entitywidth < 20) return;
+
+               var iconX = centroid[0] - (iconSize/2),
+                   iconY = centroid[1] - (iconSize/2),
+                   textOffset = iconSize + 5;
+
+               var p = {
+                   transform: 'translate(' + iconX + ',' + iconY + ')'
+               };
+
+               if (width && entitywidth >= width + 20) {
+                   p.x = centroid[0];
+                   p.y = centroid[1] + textOffset;
+                   p.textAnchor = 'middle';
+                   p.height = height;
+                   rect = [p.x - width/2, p.y, p.x + width/2, p.y + height + textOffset];
+               } else {
+                   rect = [iconX, iconY, iconX + iconSize, iconY + iconSize];
+               }
+
+               if (tryInsert(rect, entity.id)) return p;
+
+           }
+
+           function tryInsert(rect, id) {
+               // Check that label is visible
+               if (rect[0] < 0 || rect[1] < 0 || rect[2] > dimensions[0] ||
+                   rect[3] > dimensions[1]) return false;
+               var v = rtree.search(rect).length === 0;
+               if (v) {
+                   rect.id = id;
+                   rtree.insert(rect);
+                   rectangles[id] = rect;
+               }
+               return v;
+           }
+
+           var label = surface.selectAll('.layer-label'),
+               halo = surface.selectAll('.layer-halo');
+
+           // points
+           drawPointLabels(label, labelled.point, filter, 'pointlabel', positions.point);
+           drawPointLabels(halo, labelled.point, filter, 'pointlabel-halo', positions.point);
+
+           // lines
+           drawLinePaths(halo, labelled.line, filter, '', positions.line);
+           drawLineLabels(label, labelled.line, filter, 'linelabel', positions.line);
+           drawLineLabels(halo, labelled.line, filter, 'linelabel-halo', positions.line);
+
+           // areas
+           drawAreaLabels(label, labelled.area, filter, 'arealabel', positions.area);
+           drawAreaLabels(halo, labelled.area, filter, 'arealabel-halo', positions.area);
+           drawAreaIcons(label, labelled.area, filter, 'arealabel-icon', positions.area);
+
+           // debug
+           var showDebug = context.getDebug('collision');
+           var debug = label.selectAll('.layer-label-debug')
+               .data(showDebug ? [true] : []);
+
+           debug.enter()
+               .append('g')
+               .attr('class', 'layer-label-debug');
+
+           debug.exit()
+               .remove();
+
+           if (showDebug) {
+               var gj = rtree.all().map(function(d) {
+                   return { type: 'Polygon', coordinates: [[
+                       [d[0], d[1]],
+                       [d[2], d[1]],
+                       [d[2], d[3]],
+                       [d[0], d[3]],
+                       [d[0], d[1]]
+                   ]]};
+               });
+
+               var debugboxes = debug.selectAll('.debug').data(gj);
+
+               debugboxes.enter()
+                   .append('path')
+                   .attr('class', 'debug yellow');
+
+               debugboxes.exit()
+                   .remove();
+
+               debugboxes
+                   .attr('d', d3.geo.path().projection(null));
+           }
+       }
+
+       drawLabels.supersurface = function(supersurface) {
+           supersurface
+               .on('mousemove.hidelabels', hideOnMouseover)
+               .on('mousedown.hidelabels', function () {
+                   supersurface.on('mousemove.hidelabels', null);
+               })
+               .on('mouseup.hidelabels', function () {
+                   supersurface.on('mousemove.hidelabels', hideOnMouseover);
+               });
+       };
+
+       return drawLabels;
+   }
+
+   function Layers(projection, context) {
+       var dispatch = d3.dispatch('change'),
+           svg = d3.select(null),
+           layers = [
+               { id: 'osm', layer: Osm(projection, context, dispatch) },
+               { id: 'gpx', layer: Gpx(projection, context, dispatch) },
+               { id: 'mapillary-images', layer: MapillaryImages(projection, context, dispatch) },
+               { id: 'mapillary-signs',  layer: MapillarySigns(projection, context, dispatch) },
+               { id: 'debug', layer: Debug(projection, context, dispatch) }
+           ];
+
+
+       function drawLayers(selection) {
+           svg = selection.selectAll('.surface')
+               .data([0]);
+
+           svg.enter()
+               .append('svg')
+               .attr('class', 'surface')
+               .append('defs');
+
+           var groups = svg.selectAll('.data-layer')
+               .data(layers);
+
+           groups.enter()
+               .append('g')
+               .attr('class', function(d) { return 'data-layer data-layer-' + d.id; });
+
+           groups
+               .each(function(d) { d3.select(this).call(d.layer); });
+
+           groups.exit()
+               .remove();
+       }
+
+       drawLayers.all = function() {
+           return layers;
+       };
+
+       drawLayers.layer = function(id) {
+           var obj = _.find(layers, function(o) {return o.id === id;});
+           return obj && obj.layer;
+       };
+
+       drawLayers.only = function(what) {
+           var arr = [].concat(what);
+           drawLayers.remove(_.difference(_.map(layers, 'id'), arr));
+           return this;
+       };
+
+       drawLayers.remove = function(what) {
+           var arr = [].concat(what);
+           arr.forEach(function(id) {
+               layers = _.reject(layers, function(o) {return o.id === id;});
+           });
+           dispatch.change();
+           return this;
+       };
+
+       drawLayers.add = function(what) {
+           var arr = [].concat(what);
+           arr.forEach(function(obj) {
+               if ('id' in obj && 'layer' in obj) {
+                   layers.push(obj);
+               }
+           });
+           dispatch.change();
+           return this;
+       };
+
+       drawLayers.dimensions = function(_) {
+           if (!arguments.length) return svg.dimensions();
+           svg.dimensions(_);
+           layers.forEach(function(obj) {
+               if (obj.layer.dimensions) {
+                   obj.layer.dimensions(_);
+               }
+           });
+           return this;
+       };
+
+
+       return d3.rebind(drawLayers, dispatch, 'on');
+   }
+
+   function Lines(projection) {
+
+       var highway_stack = {
+           motorway: 0,
+           motorway_link: 1,
+           trunk: 2,
+           trunk_link: 3,
+           primary: 4,
+           primary_link: 5,
+           secondary: 6,
+           tertiary: 7,
+           unclassified: 8,
+           residential: 9,
+           service: 10,
+           footway: 11
+       };
+
+       function waystack(a, b) {
+           var as = 0, bs = 0;
+
+           if (a.tags.highway) { as -= highway_stack[a.tags.highway]; }
+           if (b.tags.highway) { bs -= highway_stack[b.tags.highway]; }
+           return as - bs;
+       }
+
+       return function drawLines(surface, graph, entities, filter) {
+           var ways = [], pathdata = {}, onewaydata = {},
+               getPath = Path(projection, graph);
+
+           for (var i = 0; i < entities.length; i++) {
+               var entity = entities[i],
+                   outer = simpleMultipolygonOuterMember(entity, graph);
+               if (outer) {
+                   ways.push(entity.mergeTags(outer.tags));
+               } else if (entity.geometry(graph) === 'line') {
+                   ways.push(entity);
+               }
+           }
+
+           ways = ways.filter(getPath);
+
+           pathdata = _.groupBy(ways, function(way) { return way.layer(); });
+
+           _.forOwn(pathdata, function(v, k) {
+               onewaydata[k] = _(v)
+                   .filter(function(d) { return d.isOneWay(); })
+                   .map(OneWaySegments(projection, graph, 35))
+                   .flatten()
+                   .valueOf();
+           });
+
+           var layergroup = surface
+               .selectAll('.layer-lines')
+               .selectAll('g.layergroup')
+               .data(d3.range(-10, 11));
+
+           layergroup.enter()
+               .append('g')
+               .attr('class', function(d) { return 'layer layergroup layer' + String(d); });
+
+
+           var linegroup = layergroup
+               .selectAll('g.linegroup')
+               .data(['shadow', 'casing', 'stroke']);
+
+           linegroup.enter()
+               .append('g')
+               .attr('class', function(d) { return 'layer linegroup line-' + d; });
+
+
+           var lines = linegroup
+               .selectAll('path')
+               .filter(filter)
+               .data(
+                   function() { return pathdata[this.parentNode.parentNode.__data__] || []; },
+                   Entity.key
+               );
+
+           // Optimization: call simple TagClasses only on enter selection. This
+           // works because Entity.key is defined to include the entity v attribute.
+           lines.enter()
+               .append('path')
+               .attr('class', function(d) { return 'way line ' + this.parentNode.__data__ + ' ' + d.id; })
+               .call(TagClasses());
+
+           lines
+               .sort(waystack)
+               .attr('d', getPath)
+               .call(TagClasses().tags(RelationMemberTags(graph)));
+
+           lines.exit()
+               .remove();
+
+
+           var onewaygroup = layergroup
+               .selectAll('g.onewaygroup')
+               .data(['oneway']);
+
+           onewaygroup.enter()
+               .append('g')
+               .attr('class', 'layer onewaygroup');
+
+
+           var oneways = onewaygroup
+               .selectAll('path')
+               .filter(filter)
+               .data(
+                   function() { return onewaydata[this.parentNode.parentNode.__data__] || []; },
+                   function(d) { return [d.id, d.index]; }
+               );
+
+           oneways.enter()
+               .append('path')
+               .attr('class', 'oneway')
+               .attr('marker-mid', 'url(#oneway-marker)');
+
+           oneways
+               .attr('d', function(d) { return d.d; });
+
+           if (iD.detect().ie) {
+               oneways.each(function() { this.parentNode.insertBefore(this, this); });
+           }
+
+           oneways.exit()
+               .remove();
+
+       };
+   }
+
+   function mapillary() {
+       var mapillary = {},
+           apibase = 'https://a.mapillary.com/v2/',
+           viewercss = 'https://npmcdn.com/mapillary-js@1.3.0/dist/mapillary-js.min.css',
+           viewerjs = 'https://npmcdn.com/mapillary-js@1.3.0/dist/mapillary-js.min.js',
+           clientId = 'NzNRM2otQkR2SHJzaXJmNmdQWVQ0dzo1ZWYyMmYwNjdmNDdlNmVi',
+           maxResults = 1000,
+           maxPages = 10,
+           tileZoom = 14,
+           dispatch = d3.dispatch('loadedImages', 'loadedSigns');
+
+
+       function loadSignStyles(context) {
+           d3.select('head').selectAll('#traffico')
+               .data([0])
+               .enter()
+               .append('link')
+               .attr('id', 'traffico')
+               .attr('rel', 'stylesheet')
+               .attr('href', context.asset('traffico/stylesheets/traffico.css'));
+       }
+
+       function loadSignDefs(context) {
+           if (iD.services.mapillary.sign_defs) return;
+           iD.services.mapillary.sign_defs = {};
+
+           _.each(['au', 'br', 'ca', 'de', 'us'], function(region) {
+               d3.json(context.asset('traffico/string-maps/' + region + '-map.json'), function(err, data) {
+                   if (err) return;
+                   if (region === 'de') region = 'eu';
+                   iD.services.mapillary.sign_defs[region] = data;
+               });
+           });
+       }
+
+       function loadViewer() {
+           // mapillary-wrap
+           var wrap = d3.select('#content').selectAll('.mapillary-wrap')
+               .data([0]);
+
+           var enter = wrap.enter().append('div')
+               .attr('class', 'mapillary-wrap')
+               .classed('al', true)       // 'al'=left,  'ar'=right
+               .classed('hidden', true);
+
+           enter.append('button')
+               .attr('class', 'thumb-hide')
+               .on('click', function () { mapillary.hideViewer(); })
+               .append('div')
+               .call(iD.svg.Icon('#icon-close'));
+
+           enter.append('div')
+               .attr('id', 'mly')
+               .attr('class', 'mly-wrapper')
+               .classed('active', false);
+
+           // mapillary-viewercss
+           d3.select('head').selectAll('#mapillary-viewercss')
+               .data([0])
+               .enter()
+               .append('link')
+               .attr('id', 'mapillary-viewercss')
+               .attr('rel', 'stylesheet')
+               .attr('href', viewercss);
+
+           // mapillary-viewerjs
+           d3.select('head').selectAll('#mapillary-viewerjs')
+               .data([0])
+               .enter()
+               .append('script')
+               .attr('id', 'mapillary-viewerjs')
+               .attr('src', viewerjs);
+       }
+
+       function initViewer(imageKey, context) {
+
+           function nodeChanged(d) {
+               var clicks = iD.services.mapillary.clicks;
+               var index = clicks.indexOf(d.key);
+               if (index > -1) {    // nodechange initiated from clicking on a marker..
+                   clicks.splice(index, 1);
+               } else {             // nodechange initiated from the Mapillary viewer controls..
+                   var loc = d.apiNavImIm ? [d.apiNavImIm.lon, d.apiNavImIm.lat] : [d.latLon.lon, d.latLon.lat];
+                   context.map().centerEase(loc);
+                   mapillary.setSelectedImage(d.key, false);
+               }
+           }
+
+           if (Mapillary && imageKey) {
+               var opts = {
+                   baseImageSize: 320,
+                   cover: false,
+                   cache: true,
+                   debug: false,
+                   imagePlane: true,
+                   loading: true,
+                   sequence: true
+               };
+
+               var viewer = new Mapillary.Viewer('mly', clientId, imageKey, opts);
+               viewer.on('nodechanged', nodeChanged);
+               viewer.on('loadingchanged', mapillary.setViewerLoading);
+               iD.services.mapillary.viewer = viewer;
+           }
+       }
+
+       function abortRequest(i) {
+           i.abort();
+       }
+
+       function nearNullIsland(x, y, z) {
+           if (z >= 7) {
+               var center = Math.pow(2, z - 1),
+                   width = Math.pow(2, z - 6),
+                   min = center - (width / 2),
+                   max = center + (width / 2) - 1;
+               return x >= min && x <= max && y >= min && y <= max;
+           }
+           return false;
+       }
+
+       function getTiles(projection, dimensions) {
+           var s = projection.scale() * 2 * Math.PI,
+               z = Math.max(Math.log(s) / Math.log(2) - 8, 0),
+               ts = 256 * Math.pow(2, z - tileZoom),
+               origin = [
+                   s / 2 - projection.translate()[0],
+                   s / 2 - projection.translate()[1]];
+
+           return d3.geo.tile()
+               .scaleExtent([tileZoom, tileZoom])
+               .scale(s)
+               .size(dimensions)
+               .translate(projection.translate())()
+               .map(function(tile) {
+                   var x = tile[0] * ts - origin[0],
+                       y = tile[1] * ts - origin[1];
+
+                   return {
+                       id: tile.toString(),
+                       extent: iD.geo.Extent(
+                           projection.invert([x, y + ts]),
+                           projection.invert([x + ts, y]))
+                   };
+               });
+       }
+
+
+       function loadTiles(which, url, projection, dimensions) {
+           var tiles = getTiles(projection, dimensions).filter(function(t) {
+                 var xyz = t.id.split(',');
+                 return !nearNullIsland(xyz[0], xyz[1], xyz[2]);
+               });
+
+           _.filter(which.inflight, function(v, k) {
+               var wanted = _.find(tiles, function(tile) { return k === (tile.id + ',0'); });
+               if (!wanted) delete which.inflight[k];
+               return !wanted;
+           }).map(abortRequest);
+
+           tiles.forEach(function(tile) {
+               loadTilePage(which, url, tile, 0);
+           });
+       }
+
+       function loadTilePage(which, url, tile, page) {
+           var cache = iD.services.mapillary.cache[which],
+               id = tile.id + ',' + String(page),
+               rect = tile.extent.rectangle();
+
+           if (cache.loaded[id] || cache.inflight[id]) return;
+
+           cache.inflight[id] = d3.json(url +
+               iD.util.qsString({
+                   geojson: 'true',
+                   limit: maxResults,
+                   page: page,
+                   client_id: clientId,
+                   min_lon: rect[0],
+                   min_lat: rect[1],
+                   max_lon: rect[2],
+                   max_lat: rect[3]
+               }), function(err, data) {
+                   cache.loaded[id] = true;
+                   delete cache.inflight[id];
+                   if (err || !data.features || !data.features.length) return;
+
+                   var features = [],
+                       nextPage = page + 1,
+                       feature, loc, d;
+
+                   for (var i = 0; i < data.features.length; i++) {
+                       feature = data.features[i];
+                       loc = feature.geometry.coordinates;
+                       d = { key: feature.properties.key, loc: loc };
+                       if (which === 'images') d.ca = feature.properties.ca;
+                       if (which === 'signs') d.signs = feature.properties.rects;
+
+                       features.push([loc[0], loc[1], loc[0], loc[1], d]);
+                   }
+
+                   cache.rtree.load(features);
+
+                   if (which === 'images') dispatch.loadedImages();
+                   if (which === 'signs') dispatch.loadedSigns();
+
+                   if (data.features.length === maxResults && nextPage < maxPages) {
+                       loadTilePage(which, url, tile, nextPage);
+                   }
+               }
+           );
+       }
+
+       mapillary.loadImages = function(projection, dimensions) {
+           var url = apibase + 'search/im/geojson?';
+           loadTiles('images', url, projection, dimensions);
+       };
+
+       mapillary.loadSigns = function(context, projection, dimensions) {
+           var url = apibase + 'search/im/geojson/or?';
+           loadSignStyles(context);
+           loadSignDefs(context);
+           loadTiles('signs', url, projection, dimensions);
+       };
+
+       mapillary.loadViewer = function() {
+           loadViewer();
+       };
+
+
+       // partition viewport into `psize` x `psize` regions
+       function partitionViewport(psize, projection, dimensions) {
+           psize = psize || 16;
+           var cols = d3.range(0, dimensions[0], psize),
+               rows = d3.range(0, dimensions[1], psize),
+               partitions = [];
+
+           rows.forEach(function(y) {
+               cols.forEach(function(x) {
+                   var min = [x, y + psize],
+                       max = [x + psize, y];
+                   partitions.push(
+                       iD.geo.Extent(projection.invert(min), projection.invert(max)));
+               });
+           });
+
+           return partitions;
+       }
+
+       // no more than `limit` results per partition.
+       function searchLimited(psize, limit, projection, dimensions, rtree) {
+           limit = limit || 3;
+
+           var partitions = partitionViewport(psize, projection, dimensions);
+           return _.flatten(_.compact(_.map(partitions, function(extent) {
+               return rtree.search(extent.rectangle())
+                   .slice(0, limit)
+                   .map(function(d) { return d[4]; });
+           })));
+       }
+
+       mapillary.images = function(projection, dimensions) {
+           var psize = 16, limit = 3;
+           return searchLimited(psize, limit, projection, dimensions, iD.services.mapillary.cache.images.rtree);
+       };
+
+       mapillary.signs = function(projection, dimensions) {
+           var psize = 32, limit = 3;
+           return searchLimited(psize, limit, projection, dimensions, iD.services.mapillary.cache.signs.rtree);
+       };
+
+       mapillary.signsSupported = function() {
+           var detected = iD.detect();
+           return (!(detected.ie || detected.browser.toLowerCase() === 'safari'));
+       };
+
+       mapillary.signHTML = function(d) {
+           if (!iD.services.mapillary.sign_defs) return;
+
+           var detectionPackage = d.signs[0].package,
+               type = d.signs[0].type,
+               country = detectionPackage.split('_')[1];
+
+           return iD.services.mapillary.sign_defs[country][type];
+       };
+
+       mapillary.showViewer = function() {
+           d3.select('#content')
+               .selectAll('.mapillary-wrap')
+               .classed('hidden', false)
+               .selectAll('.mly-wrapper')
+               .classed('active', true);
+
+           return mapillary;
+       };
+
+       mapillary.hideViewer = function() {
+           d3.select('#content')
+               .selectAll('.mapillary-wrap')
+               .classed('hidden', true)
+               .selectAll('.mly-wrapper')
+               .classed('active', false);
+
+           d3.selectAll('.layer-mapillary-images .viewfield-group, .layer-mapillary-signs .icon-sign')
+               .classed('selected', false);
+
+           iD.services.mapillary.image = null;
+
+           return mapillary;
+       };
+
+       mapillary.setViewerLoading = function(loading) {
+           var canvas = d3.select('#content')
+               .selectAll('.mly-wrapper canvas');
+
+           if (canvas.empty()) return;   // viewer not loaded yet
+
+           var cover = d3.select('#content')
+               .selectAll('.mly-wrapper .Cover');
+
+           cover.classed('CoverDone', !loading);
+
+           var button = cover.selectAll('.CoverButton')
+               .data(loading ? [0] : []);
+
+           button.enter()
+               .append('div')
+               .attr('class', 'CoverButton')
+               .append('div')
+               .attr('class', 'uil-ripple-css')
+               .append('div');
+
+           button.exit()
+               .remove();
+
+           return mapillary;
+       };
+
+       mapillary.updateViewer = function(imageKey, context) {
+           if (!iD.services.mapillary) return;
+           if (!imageKey) return;
+
+           if (!iD.services.mapillary.viewer) {
+               initViewer(imageKey, context);
+           } else {
+               iD.services.mapillary.viewer.moveToKey(imageKey);
+           }
+
+           return mapillary;
+       };
+
+       mapillary.getSelectedImage = function() {
+           if (!iD.services.mapillary) return null;
+           return iD.services.mapillary.image;
+       };
+
+       mapillary.setSelectedImage = function(imageKey, fromClick) {
+           if (!iD.services.mapillary) return null;
+
+           iD.services.mapillary.image = imageKey;
+           if (fromClick) {
+               iD.services.mapillary.clicks.push(imageKey);
+           }
+
+           d3.selectAll('.layer-mapillary-images .viewfield-group, .layer-mapillary-signs .icon-sign')
+               .classed('selected', function(d) { return d.key === imageKey; });
+
+           return mapillary;
+       };
+
+       mapillary.reset = function() {
+           var cache = iD.services.mapillary.cache;
+
+           if (cache) {
+               _.forEach(cache.images.inflight, abortRequest);
+               _.forEach(cache.signs.inflight, abortRequest);
+           }
+
+           iD.services.mapillary.cache = {
+               images: { inflight: {}, loaded: {}, rtree: rbush() },
+               signs:  { inflight: {}, loaded: {}, rtree: rbush() }
+           };
+
+           iD.services.mapillary.image = null;
+           iD.services.mapillary.clicks = [];
+
+           return mapillary;
+       };
+
+
+       if (!iD.services.mapillary.cache) {
+           mapillary.reset();
+       }
+
+       return d3.rebind(mapillary, dispatch, 'on');
+   }
+
+   function MapillaryImages(projection, context, dispatch) {
+       var debouncedRedraw = _.debounce(function () { dispatch.change(); }, 1000),
+           minZoom = 12,
+           layer = d3.select(null),
+           _mapillary;
+
+
+       function init() {
+           if (MapillaryImages.initialized) return;  // run once
+           MapillaryImages.enabled = false;
+           MapillaryImages.initialized = true;
+       }
+
+       function getMapillary() {
+           if (mapillary && !_mapillary) {
+               _mapillary = mapillary();
+               _mapillary.on('loadedImages', debouncedRedraw);
+           } else if (!mapillary && _mapillary) {
+               _mapillary = null;
+           }
+
+           return _mapillary;
+       }
+
+       function showLayer() {
+           var mapillary = getMapillary();
+           if (!mapillary) return;
+
+           mapillary.loadViewer();
+           editOn();
+
+           layer
+               .style('opacity', 0)
+               .transition()
+               .duration(500)
+               .style('opacity', 1)
+               .each('end', debouncedRedraw);
+       }
+
+       function hideLayer() {
+           var mapillary = getMapillary();
+           if (mapillary) {
+               mapillary.hideViewer();
+           }
+
+           debouncedRedraw.cancel();
+
+           layer
+               .transition()
+               .duration(500)
+               .style('opacity', 0)
+               .each('end', editOff);
+       }
+
+       function editOn() {
+           layer.style('display', 'block');
+       }
+
+       function editOff() {
+           layer.selectAll('.viewfield-group').remove();
+           layer.style('display', 'none');
+       }
+
+       function click(d) {
+           var mapillary = getMapillary();
+           if (!mapillary) return;
+
+           context.map().centerEase(d.loc);
+
+           mapillary
+               .setSelectedImage(d.key, true)
+               .updateViewer(d.key, context)
+               .showViewer();
+       }
+
+       function transform(d) {
+           var t = PointTransform(projection)(d);
+           if (d.ca) t += ' rotate(' + Math.floor(d.ca) + ',0,0)';
+           return t;
+       }
+
+       function update() {
+           var mapillary = getMapillary(),
+               data = (mapillary ? mapillary.images(projection, layer.dimensions()) : []),
+               imageKey = mapillary ? mapillary.getSelectedImage() : null;
+
+           var markers = layer.selectAll('.viewfield-group')
+               .data(data, function(d) { return d.key; });
+
+           // Enter
+           var enter = markers.enter()
+               .append('g')
+               .attr('class', 'viewfield-group')
+               .classed('selected', function(d) { return d.key === imageKey; })
+               .on('click', click);
+
+           enter.append('path')
+               .attr('class', 'viewfield')
+               .attr('transform', 'scale(1.5,1.5),translate(-8, -13)')
+               .attr('d', 'M 6,9 C 8,8.4 8,8.4 10,9 L 16,-2 C 12,-5 4,-5 0,-2 z');
+
+           enter.append('circle')
+               .attr('dx', '0')
+               .attr('dy', '0')
+               .attr('r', '6');
+
+           // Exit
+           markers.exit()
+               .remove();
+
+           // Update
+           markers
+               .attr('transform', transform);
+       }
+
+       function drawImages(selection) {
+           var enabled = MapillaryImages.enabled,
+               mapillary = getMapillary();
+
+           layer = selection.selectAll('.layer-mapillary-images')
+               .data(mapillary ? [0] : []);
+
+           layer.enter()
+               .append('g')
+               .attr('class', 'layer-mapillary-images')
+               .style('display', enabled ? 'block' : 'none');
+
+           layer.exit()
+               .remove();
+
+           if (enabled) {
+               if (mapillary && ~~context.map().zoom() >= minZoom) {
+                   editOn();
+                   update();
+                   mapillary.loadImages(projection, layer.dimensions());
+               } else {
+                   editOff();
+               }
+           }
+       }
+
+       drawImages.enabled = function(_) {
+           if (!arguments.length) return MapillaryImages.enabled;
+           MapillaryImages.enabled = _;
+           if (MapillaryImages.enabled) {
+               showLayer();
+           } else {
+               hideLayer();
+           }
+           dispatch.change();
+           return this;
+       };
+
+       drawImages.supported = function() {
+           return !!getMapillary();
+       };
+
+       drawImages.dimensions = function(_) {
+           if (!arguments.length) return layer.dimensions();
+           layer.dimensions(_);
+           return this;
+       };
+
+       init();
+       return drawImages;
+   }
+
+   function MapillarySigns(projection, context, dispatch) {
+       var debouncedRedraw = _.debounce(function () { dispatch.change(); }, 1000),
+           minZoom = 12,
+           layer = d3.select(null),
+           _mapillary;
+
+
+       function init() {
+           if (MapillarySigns.initialized) return;  // run once
+           MapillarySigns.enabled = false;
+           MapillarySigns.initialized = true;
+       }
+
+       function getMapillary() {
+           if (mapillary && !_mapillary) {
+               _mapillary = mapillary().on('loadedSigns', debouncedRedraw);
+           } else if (!mapillary && _mapillary) {
+               _mapillary = null;
+           }
+           return _mapillary;
+       }
+
+       function showLayer() {
+           editOn();
+           debouncedRedraw();
+       }
+
+       function hideLayer() {
+           debouncedRedraw.cancel();
+           editOff();
+       }
+
+       function editOn() {
+           layer.style('display', 'block');
+       }
+
+       function editOff() {
+           layer.selectAll('.icon-sign').remove();
+           layer.style('display', 'none');
+       }
+
+       function click(d) {
+           var mapillary = getMapillary();
+           if (!mapillary) return;
+
+           context.map().centerEase(d.loc);
+
+           mapillary
+               .setSelectedImage(d.key, true)
+               .updateViewer(d.key, context)
+               .showViewer();
+       }
+
+       function update() {
+           var mapillary = getMapillary(),
+               data = (mapillary ? mapillary.signs(projection, layer.dimensions()) : []),
+               imageKey = mapillary ? mapillary.getSelectedImage() : null;
+
+           var signs = layer.selectAll('.icon-sign')
+               .data(data, function(d) { return d.key; });
+
+           // Enter
+           var enter = signs.enter()
+               .append('foreignObject')
+               .attr('class', 'icon-sign')
+               .attr('width', '32px')      // for Firefox
+               .attr('height', '32px')     // for Firefox
+               .classed('selected', function(d) { return d.key === imageKey; })
+               .on('click', click);
+
+           enter
+               .append('xhtml:body')
+               .html(mapillary.signHTML);
+
+           // Exit
+           signs.exit()
+               .remove();
+
+           // Update
+           signs
+               .attr('transform', PointTransform(projection));
+       }
+
+       function drawSigns(selection) {
+           var enabled = MapillarySigns.enabled,
+               mapillary = getMapillary();
+
+           layer = selection.selectAll('.layer-mapillary-signs')
+               .data(mapillary ? [0] : []);
+
+           layer.enter()
+               .append('g')
+               .attr('class', 'layer-mapillary-signs')
+               .style('display', enabled ? 'block' : 'none')
+               .attr('transform', 'translate(-16, -16)');  // center signs on loc
+
+           layer.exit()
+               .remove();
+
+           if (enabled) {
+               if (mapillary && ~~context.map().zoom() >= minZoom) {
+                   editOn();
+                   update();
+                   mapillary.loadSigns(context, projection, layer.dimensions());
+               } else {
+                   editOff();
+               }
+           }
+       }
+
+       drawSigns.enabled = function(_) {
+           if (!arguments.length) return MapillarySigns.enabled;
+           MapillarySigns.enabled = _;
+           if (MapillarySigns.enabled) {
+               showLayer();
+           } else {
+               hideLayer();
+           }
+           dispatch.change();
+           return this;
+       };
+
+       drawSigns.supported = function() {
+           var mapillary = getMapillary();
+           return (mapillary && mapillary.signsSupported());
+       };
+
+       drawSigns.dimensions = function(_) {
+           if (!arguments.length) return layer.dimensions();
+           layer.dimensions(_);
+           return this;
+       };
+
+       init();
+       return drawSigns;
+   }
+
+   function Midpoints(projection, context) {
+       return function drawMidpoints(surface, graph, entities, filter, extent) {
+           var poly = extent.polygon(),
+               midpoints = {};
+
+           for (var i = 0; i < entities.length; i++) {
+               var entity = entities[i];
+
+               if (entity.type !== 'way')
+                   continue;
+               if (!filter(entity))
+                   continue;
+               if (context.selectedIDs().indexOf(entity.id) < 0)
+                   continue;
+
+               var nodes = graph.childNodes(entity);
+               for (var j = 0; j < nodes.length - 1; j++) {
+
+                   var a = nodes[j],
+                       b = nodes[j + 1],
+                       id = [a.id, b.id].sort().join('-');
+
+                   if (midpoints[id]) {
+                       midpoints[id].parents.push(entity);
+                   } else {
+                       if (euclideanDistance(projection(a.loc), projection(b.loc)) > 40) {
+                           var point = interp(a.loc, b.loc, 0.5),
+                               loc = null;
+
+                           if (extent.intersects(point)) {
+                               loc = point;
+                           } else {
+                               for (var k = 0; k < 4; k++) {
+                                   point = lineIntersection([a.loc, b.loc], [poly[k], poly[k+1]]);
+                                   if (point &&
+                                       euclideanDistance(projection(a.loc), projection(point)) > 20 &&
+                                       euclideanDistance(projection(b.loc), projection(point)) > 20)
+                                   {
+                                       loc = point;
+                                       break;
+                                   }
+                               }
+                           }
+
+                           if (loc) {
+                               midpoints[id] = {
+                                   type: 'midpoint',
+                                   id: id,
+                                   loc: loc,
+                                   edge: [a.id, b.id],
+                                   parents: [entity]
+                               };
+                           }
+                       }
+                   }
+               }
+           }
+
+           function midpointFilter(d) {
+               if (midpoints[d.id])
+                   return true;
+
+               for (var i = 0; i < d.parents.length; i++)
+                   if (filter(d.parents[i]))
+                       return true;
+
+               return false;
+           }
+
+           var groups = surface.selectAll('.layer-hit').selectAll('g.midpoint')
+               .filter(midpointFilter)
+               .data(_.values(midpoints), function(d) { return d.id; });
+
+           var enter = groups.enter()
+               .insert('g', ':first-child')
+               .attr('class', 'midpoint');
+
+           enter.append('polygon')
+               .attr('points', '-6,8 10,0 -6,-8')
+               .attr('class', 'shadow');
+
+           enter.append('polygon')
+               .attr('points', '-3,4 5,0 -3,-4')
+               .attr('class', 'fill');
+
+           groups
+               .attr('transform', function(d) {
+                   var translate = PointTransform(projection),
+                       a = context.entity(d.edge[0]),
+                       b = context.entity(d.edge[1]),
+                       angle$$ = Math.round(angle(a, b, projection) * (180 / Math.PI));
+                   return translate(d) + ' rotate(' + angle$$ + ')';
+               })
+               .call(TagClasses().tags(
+                   function(d) { return d.parents[0].tags; }
+               ));
+
+           // Propagate data bindings.
+           groups.select('polygon.shadow');
+           groups.select('polygon.fill');
+
+           groups.exit()
+               .remove();
+       };
+   }
+
+   function OneWaySegments(projection, graph, dt) {
+       return function(entity) {
+           var a,
+               b,
+               i = 0,
+               offset = dt,
+               segments = [],
+               clip = d3.geo.clipExtent().extent(projection.clipExtent()).stream,
+               coordinates = graph.childNodes(entity).map(function(n) {
+                   return n.loc;
+               });
+
+           if (entity.tags.oneway === '-1') coordinates.reverse();
+
+           d3.geo.stream({
+               type: 'LineString',
+               coordinates: coordinates
+           }, projection.stream(clip({
+               lineStart: function() {},
+               lineEnd: function() {
+                   a = null;
+               },
+               point: function(x, y) {
+                   b = [x, y];
+
+                   if (a) {
+                       var span = euclideanDistance(a, b) - offset;
+
+                       if (span >= 0) {
+                           var angle = Math.atan2(b[1] - a[1], b[0] - a[0]),
+                               dx = dt * Math.cos(angle),
+                               dy = dt * Math.sin(angle),
+                               p = [a[0] + offset * Math.cos(angle),
+                                    a[1] + offset * Math.sin(angle)];
+
+                           var segment = 'M' + a[0] + ',' + a[1] +
+                                         'L' + p[0] + ',' + p[1];
+
+                           for (span -= dt; span >= 0; span -= dt) {
+                               p[0] += dx;
+                               p[1] += dy;
+                               segment += 'L' + p[0] + ',' + p[1];
+                           }
+
+                           segment += 'L' + b[0] + ',' + b[1];
+                           segments.push({id: entity.id, index: i, d: segment});
+                       }
+
+                       offset = -span;
+                       i++;
+                   }
+
+                   a = b;
+               }
+           })));
+
+           return segments;
+       };
+   }
+
+   function Osm() {
+       return function drawOsm(selection) {
+           var layers = selection.selectAll('.layer-osm')
+               .data(['areas', 'lines', 'hit', 'halo', 'label']);
+
+           layers.enter().append('g')
+               .attr('class', function(d) { return 'layer-osm layer-' + d; });
+       };
+   }
+
+   function Path(projection, graph, polygon) {
+       var cache = {},
+           clip = d3.geo.clipExtent().extent(projection.clipExtent()).stream,
+           project = projection.stream,
+           path = d3.geo.path()
+               .projection({stream: function(output) { return polygon ? project(output) : project(clip(output)); }});
+
+       return function(entity) {
+           if (entity.id in cache) {
+               return cache[entity.id];
+           } else {
+               return cache[entity.id] = path(entity.asGeoJSON(graph));
+           }
+       };
+   }
+
+   function PointTransform(projection) {
+       return function(entity) {
+           // http://jsperf.com/short-array-join
+           var pt = projection(entity.loc);
+           return 'translate(' + pt[0] + ',' + pt[1] + ')';
+       };
+   }
+
+   function Points(projection, context) {
+       function markerPath(selection, klass) {
+           selection
+               .attr('class', klass)
+               .attr('transform', 'translate(-8, -23)')
+               .attr('d', 'M 17,8 C 17,13 11,21 8.5,23.5 C 6,21 0,13 0,8 C 0,4 4,-0.5 8.5,-0.5 C 13,-0.5 17,4 17,8 z');
+       }
+
+       function sortY(a, b) {
+           return b.loc[1] - a.loc[1];
+       }
+
+       return function drawPoints(surface, graph, entities, filter) {
+           var wireframe = surface.classed('fill-wireframe'),
+               points = wireframe ? [] : _.filter(entities, function(e) {
+                   return e.geometry(graph) === 'point';
+               });
+
+           points.sort(sortY);
+
+           var groups = surface.selectAll('.layer-hit').selectAll('g.point')
+               .filter(filter)
+               .data(points, Entity.key);
+
+           var group = groups.enter()
+               .append('g')
+               .attr('class', function(d) { return 'node point ' + d.id; })
+               .order();
+
+           group.append('path')
+               .call(markerPath, 'shadow');
+
+           group.append('path')
+               .call(markerPath, 'stroke');
+
+           group.append('use')
+               .attr('transform', 'translate(-6, -20)')
+               .attr('class', 'icon')
+               .attr('width', '12px')
+               .attr('height', '12px');
+
+           groups.attr('transform', PointTransform(projection))
+               .call(TagClasses());
+
+           // Selecting the following implicitly
+           // sets the data (point entity) on the element
+           groups.select('.shadow');
+           groups.select('.stroke');
+           groups.select('.icon')
+               .attr('xlink:href', function(entity) {
+                   var preset = context.presets().match(entity, graph);
+                   return preset.icon ? '#' + preset.icon + '-12' : '';
+               });
+
+           groups.exit()
+               .remove();
+       };
+   }
+
+   function RelationMemberTags(graph) {
+       return function(entity) {
+           var tags = entity.tags;
+           graph.parentRelations(entity).forEach(function(relation) {
+               var type = relation.tags.type;
+               if (type === 'multipolygon' || type === 'boundary') {
+                   tags = _.extend({}, relation.tags, tags);
+               }
+           });
+           return tags;
+       };
+   }
+
+   function TagClasses() {
+       var primaries = [
+               'building', 'highway', 'railway', 'waterway', 'aeroway',
+               'motorway', 'boundary', 'power', 'amenity', 'natural', 'landuse',
+               'leisure', 'place'
+           ],
+           statuses = [
+               'proposed', 'construction', 'disused', 'abandoned', 'dismantled',
+               'razed', 'demolished', 'obliterated'
+           ],
+           secondaries = [
+               'oneway', 'bridge', 'tunnel', 'embankment', 'cutting', 'barrier',
+               'surface', 'tracktype', 'crossing'
+           ],
+           tagClassRe = /^tag-/,
+           tags = function(entity) { return entity.tags; };
+
+
+       var tagClasses = function(selection) {
+           selection.each(function tagClassesEach(entity) {
+               var value = this.className,
+                   classes, primary, status;
+
+               if (value.baseVal !== undefined) value = value.baseVal;
+
+               classes = value.trim().split(/\s+/).filter(function(name) {
+                   return name.length && !tagClassRe.test(name);
+               }).join(' ');
+
+               var t = tags(entity), i, k, v;
+
+               // pick at most one primary classification tag..
+               for (i = 0; i < primaries.length; i++) {
+                   k = primaries[i];
+                   v = t[k];
+                   if (!v || v === 'no') continue;
+
+                   primary = k;
+                   if (statuses.indexOf(v) !== -1) {   // e.g. `railway=abandoned`
+                       status = v;
+                       classes += ' tag-' + k;
+                   } else {
+                       classes += ' tag-' + k + ' tag-' + k + '-' + v;
+                   }
+
+                   break;
+               }
+
+               // add at most one status tag, only if relates to primary tag..
+               if (!status) {
+                   for (i = 0; i < statuses.length; i++) {
+                       k = statuses[i];
+                       v = t[k];
+                       if (!v || v === 'no') continue;
+
+                       if (v === 'yes') {   // e.g. `railway=rail + abandoned=yes`
+                           status = k;
+                       }
+                       else if (primary && primary === v) {  // e.g. `railway=rail + abandoned=railway`
+                           status = k;
+                       } else if (!primary && primaries.indexOf(v) !== -1) {  // e.g. `abandoned=railway`
+                           status = k;
+                           primary = v;
+                           classes += ' tag-' + v;
+                       }  // else ignore e.g.  `highway=path + abandoned=railway`
+
+                       if (status) break;
+                   }
+               }
+
+               if (status) {
+                   classes += ' tag-status tag-status-' + status;
+               }
+
+               // add any secondary (structure) tags
+               for (i = 0; i < secondaries.length; i++) {
+                   k = secondaries[i];
+                   v = t[k];
+                   if (!v || v === 'no') continue;
+                   classes += ' tag-' + k + ' tag-' + k + '-' + v;
+               }
+
+               // For highways, look for surface tagging..
+               if (primary === 'highway') {
+                   var paved = (t.highway !== 'track');
+                   for (k in t) {
+                       v = t[k];
+                       if (k in pavedTags) {
+                           paved = !!pavedTags[k][v];
+                           break;
+                       }
+                   }
+                   if (!paved) {
+                       classes += ' tag-unpaved';
+                   }
+               }
+
+               classes = classes.trim();
+
+               if (classes !== value) {
+                   d3.select(this).attr('class', classes);
+               }
+           });
+       };
+
+       tagClasses.tags = function(_) {
+           if (!arguments.length) return tags;
+           tags = _;
+           return tagClasses;
+       };
+
+       return tagClasses;
+   }
+
+   function Turns(projection) {
+       return function drawTurns(surface, graph, turns) {
+           function key(turn) {
+               return [turn.from.node + turn.via.node + turn.to.node].join('-');
+           }
+
+           function icon(turn) {
+               var u = turn.u ? '-u' : '';
+               if (!turn.restriction)
+                   return '#turn-yes' + u;
+               var restriction = graph.entity(turn.restriction).tags.restriction;
+               return '#turn-' +
+                   (!turn.indirect_restriction && /^only_/.test(restriction) ? 'only' : 'no') + u;
+           }
+
+           var groups = surface.selectAll('.layer-hit').selectAll('g.turn')
+               .data(turns, key);
+
+           // Enter
+           var enter = groups.enter().append('g')
+               .attr('class', 'turn');
+
+           var nEnter = enter.filter(function (turn) { return !turn.u; });
+
+           nEnter.append('rect')
+               .attr('transform', 'translate(-22, -12)')
+               .attr('width', '44')
+               .attr('height', '24');
+
+           nEnter.append('use')
+               .attr('transform', 'translate(-22, -12)')
+               .attr('width', '44')
+               .attr('height', '24');
+
+
+           var uEnter = enter.filter(function (turn) { return turn.u; });
+
+           uEnter.append('circle')
+               .attr('r', '16');
+
+           uEnter.append('use')
+               .attr('transform', 'translate(-16, -16)')
+               .attr('width', '32')
+               .attr('height', '32');
+
+
+           // Update
+           groups
+               .attr('transform', function (turn) {
+                   var v = graph.entity(turn.via.node),
+                       t = graph.entity(turn.to.node),
+                       a = angle(v, t, projection),
+                       p = projection(v.loc),
+                       r = turn.u ? 0 : 60;
+
+                   return 'translate(' + (r * Math.cos(a) + p[0]) + ',' + (r * Math.sin(a) + p[1]) + ') ' +
+                       'rotate(' + a * 180 / Math.PI + ')';
+               });
+
+           groups.select('use')
+               .attr('xlink:href', icon);
+
+           groups.select('rect');
+           groups.select('circle');
+
+
+           // Exit
+           groups.exit()
+               .remove();
+
+           return this;
+       };
+   }
+
+   function Vertices(projection, context) {
+       var radiuses = {
+           //       z16-, z17, z18+, tagged
+           shadow: [6,    7.5,   7.5,  11.5],
+           stroke: [2.5,  3.5,   3.5,  7],
+           fill:   [1,    1.5,   1.5,  1.5]
+       };
+
+       var hover;
+
+       function siblingAndChildVertices(ids, graph, extent) {
+           var vertices = {};
+
+           function addChildVertices(entity) {
+               if (!context.features().isHiddenFeature(entity, graph, entity.geometry(graph))) {
+                   var i;
+                   if (entity.type === 'way') {
+                       for (i = 0; i < entity.nodes.length; i++) {
+                           addChildVertices(graph.entity(entity.nodes[i]));
+                       }
+                   } else if (entity.type === 'relation') {
+                       for (i = 0; i < entity.members.length; i++) {
+                           var member = context.hasEntity(entity.members[i].id);
+                           if (member) {
+                               addChildVertices(member);
+                           }
+                       }
+                   } else if (entity.intersects(extent, graph)) {
+                       vertices[entity.id] = entity;
+                   }
+               }
+           }
+
+           ids.forEach(function(id) {
+               var entity = context.hasEntity(id);
+               if (entity && entity.type === 'node') {
+                   vertices[entity.id] = entity;
+                   context.graph().parentWays(entity).forEach(function(entity) {
+                       addChildVertices(entity);
+                   });
+               } else if (entity) {
+                   addChildVertices(entity);
+               }
+           });
+
+           return vertices;
+       }
+
+       function draw(selection, vertices, klass, graph, zoom) {
+           var icons = {},
+               z = (zoom < 17 ? 0 : zoom < 18 ? 1 : 2);
+
+           var groups = selection
+               .data(vertices, Entity.key);
+
+           function icon(entity) {
+               if (entity.id in icons) return icons[entity.id];
+               icons[entity.id] =
+                   entity.hasInterestingTags() &&
+                   context.presets().match(entity, graph).icon;
+               return icons[entity.id];
+           }
+
+           function setClass(klass) {
+               return function(entity) {
+                   this.setAttribute('class', 'node vertex ' + klass + ' ' + entity.id);
+               };
+           }
+
+           function setAttributes(selection) {
+               ['shadow','stroke','fill'].forEach(function(klass) {
+                   var rads = radiuses[klass];
+                   selection.selectAll('.' + klass)
+                       .each(function(entity) {
+                           var i = z && icon(entity),
+                               c = i ? 0.5 : 0,
+                               r = rads[i ? 3 : z];
+                           this.setAttribute('cx', c);
+                           this.setAttribute('cy', -c);
+                           this.setAttribute('r', r);
+                           if (i && klass === 'fill') {
+                               this.setAttribute('visibility', 'hidden');
+                           } else {
+                               this.removeAttribute('visibility');
+                           }
+                       });
+               });
+
+               selection.selectAll('use')
+                   .each(function() {
+                       if (z) {
+                           this.removeAttribute('visibility');
+                       } else {
+                           this.setAttribute('visibility', 'hidden');
+                       }
+                   });
+           }
+
+           var enter = groups.enter()
+               .append('g')
+               .attr('class', function(d) { return 'node vertex ' + klass + ' ' + d.id; });
+
+           enter.append('circle')
+               .each(setClass('shadow'));
+
+           enter.append('circle')
+               .each(setClass('stroke'));
+
+           // Vertices with icons get a `use`.
+           enter.filter(function(d) { return icon(d); })
+               .append('use')
+               .attr('transform', 'translate(-6, -6)')
+               .attr('xlink:href', function(d) { return '#' + icon(d) + '-12'; })
+               .attr('width', '12px')
+               .attr('height', '12px')
+               .each(setClass('icon'));
+
+           // Vertices with tags get a fill.
+           enter.filter(function(d) { return d.hasInterestingTags(); })
+               .append('circle')
+               .each(setClass('fill'));
+
+           groups
+               .attr('transform', PointTransform(projection))
+               .classed('shared', function(entity) { return graph.isShared(entity); })
+               .call(setAttributes);
+
+           groups.exit()
+               .remove();
+       }
+
+       function drawVertices(surface, graph, entities, filter, extent, zoom) {
+           var selected = siblingAndChildVertices(context.selectedIDs(), graph, extent),
+               wireframe = surface.classed('fill-wireframe'),
+               vertices = [];
+
+           for (var i = 0; i < entities.length; i++) {
+               var entity = entities[i],
+                   geometry = entity.geometry(graph);
+
+               if (wireframe && geometry === 'point') {
+                   vertices.push(entity);
+                   continue;
+               }
+
+               if (geometry !== 'vertex')
+                   continue;
+
+               if (entity.id in selected ||
+                   entity.hasInterestingTags() ||
+                   entity.isIntersection(graph)) {
+                   vertices.push(entity);
+               }
+           }
+
+           surface.selectAll('.layer-hit').selectAll('g.vertex.vertex-persistent')
+               .filter(filter)
+               .call(draw, vertices, 'vertex-persistent', graph, zoom);
+
+           drawHover(surface, graph, extent, zoom);
+       }
+
+       function drawHover(surface, graph, extent, zoom) {
+           var hovered = hover ? siblingAndChildVertices([hover.id], graph, extent) : {};
+
+           surface.selectAll('.layer-hit').selectAll('g.vertex.vertex-hover')
+               .call(draw, d3.values(hovered), 'vertex-hover', graph, zoom);
+       }
+
+       drawVertices.drawHover = function(surface, graph, target, extent, zoom) {
+           if (target === hover) return;
+           hover = target;
+           drawHover(surface, graph, extent, zoom);
+       };
+
+       return drawVertices;
+   }
+
+
+
+   var svg = Object.freeze({
+   	Areas: Areas,
+   	Debug: Debug,
+   	Defs: Defs,
+   	Gpx: Gpx,
+   	Icon: Icon,
+   	Labels: Labels,
+   	Layers: Layers,
+   	Lines: Lines,
+   	MapillaryImages: MapillaryImages,
+   	MapillarySigns: MapillarySigns,
+   	Midpoints: Midpoints,
+   	OneWaySegments: OneWaySegments,
+   	Osm: Osm,
+   	Path: Path,
+   	PointTransform: PointTransform,
+   	Points: Points,
+   	RelationMemberTags: RelationMemberTags,
+   	TagClasses: TagClasses,
+   	Turns: Turns,
+   	Vertices: Vertices
+   });
+
+   function Browse(context) {
+       var mode = {
+           button: 'browse',
+           id: 'browse',
+           title: t('modes.browse.title'),
+           description: t('modes.browse.description')
+       }, sidebar;
+
+       var behaviors = [
+           iD.behavior.Paste(context),
+           iD.behavior.Hover(context)
+               .on('hover', context.ui().sidebar.hover),
+           iD.behavior.Select(context),
+           iD.behavior.Lasso(context),
+           iD.modes.DragNode(context).behavior];
+
+       mode.enter = function() {
+           behaviors.forEach(function(behavior) {
+               context.install(behavior);
+           });
+
+           // Get focus on the body.
+           if (document.activeElement && document.activeElement.blur) {
+               document.activeElement.blur();
+           }
+
+           if (sidebar) {
+               context.ui().sidebar.show(sidebar);
+           } else {
+               context.ui().sidebar.select(null);
+           }
+       };
+
+       mode.exit = function() {
+           context.ui().sidebar.hover.cancel();
+           behaviors.forEach(function(behavior) {
+               context.uninstall(behavior);
+           });
+
+           if (sidebar) {
+               context.ui().sidebar.hide();
+           }
+       };
+
+       mode.sidebar = function(_) {
+           if (!arguments.length) return sidebar;
+           sidebar = _;
+           return mode;
+       };
+
+       return mode;
+   }
+
+   function MoveMode(context, entityIDs, baseGraph) {
+       var mode = {
+           id: 'move',
+           button: 'browse'
+       };
+
+       var keybinding = d3.keybinding('move'),
+           edit = iD.behavior.Edit(context),
+           annotation = entityIDs.length === 1 ?
+               t('operations.move.annotation.' + context.geometry(entityIDs[0])) :
+               t('operations.move.annotation.multiple'),
+           cache,
+           origin,
+           nudgeInterval;
+
+       function vecSub(a, b) { return [a[0] - b[0], a[1] - b[1]]; }
+
+       function edge(point, size) {
+           var pad = [30, 100, 30, 100];
+           if (point[0] > size[0] - pad[0]) return [-10, 0];
+           else if (point[0] < pad[2]) return [10, 0];
+           else if (point[1] > size[1] - pad[1]) return [0, -10];
+           else if (point[1] < pad[3]) return [0, 10];
+           return null;
+       }
+
+       function startNudge(nudge) {
+           if (nudgeInterval) window.clearInterval(nudgeInterval);
+           nudgeInterval = window.setInterval(function() {
+               context.pan(nudge);
+
+               var currMouse = context.mouse(),
+                   origMouse = context.projection(origin),
+                   delta = vecSub(vecSub(currMouse, origMouse), nudge),
+                   action = iD.actions.Move(entityIDs, delta, context.projection, cache);
+
+               context.overwrite(action, annotation);
+
+           }, 50);
+       }
+
+       function stopNudge() {
+           if (nudgeInterval) window.clearInterval(nudgeInterval);
+           nudgeInterval = null;
+       }
+
+       function move() {
+           var currMouse = context.mouse(),
+               origMouse = context.projection(origin),
+               delta = vecSub(currMouse, origMouse),
+               action = iD.actions.Move(entityIDs, delta, context.projection, cache);
+
+           context.overwrite(action, annotation);
+
+           var nudge = edge(currMouse, context.map().dimensions());
+           if (nudge) startNudge(nudge);
+           else stopNudge();
+       }
+
+       function finish() {
+           d3.event.stopPropagation();
+           context.enter(iD.modes.Select(context, entityIDs).suppressMenu(true));
+           stopNudge();
+       }
+
+       function cancel() {
+           if (baseGraph) {
+               while (context.graph() !== baseGraph) context.pop();
+               context.enter(iD.modes.Browse(context));
+           } else {
+               context.pop();
+               context.enter(iD.modes.Select(context, entityIDs).suppressMenu(true));
+           }
+           stopNudge();
+       }
+
+       function undone() {
+           context.enter(iD.modes.Browse(context));
+       }
+
+       mode.enter = function() {
+           origin = context.map().mouseCoordinates();
+           cache = {};
+
+           context.install(edit);
+
+           context.perform(
+               iD.actions.Noop(),
+               annotation);
+
+           context.surface()
+               .on('mousemove.move', move)
+               .on('click.move', finish);
+
+           context.history()
+               .on('undone.move', undone);
+
+           keybinding
+               .on('⎋', cancel)
+               .on('↩', finish);
+
+           d3.select(document)
+               .call(keybinding);
+       };
+
+       mode.exit = function() {
+           stopNudge();
+
+           context.uninstall(edit);
+
+           context.surface()
+               .on('mousemove.move', null)
+               .on('click.move', null);
+
+           context.history()
+               .on('undone.move', null);
+
+           keybinding.off();
+       };
+
+       return mode;
+   }
+
+   function SelectMode(context, selectedIDs) {
+       var mode = {
+           id: 'select',
+           button: 'browse'
+       };
+
+       var keybinding = d3.keybinding('select'),
+           timeout = null,
+           behaviors = [
+               iD.behavior.Copy(context),
+               iD.behavior.Paste(context),
+               iD.behavior.Breathe(context),
+               iD.behavior.Hover(context),
+               iD.behavior.Select(context),
+               iD.behavior.Lasso(context),
+               iD.modes.DragNode(context)
+                   .selectedIDs(selectedIDs)
+                   .behavior],
+           inspector,
+           radialMenu,
+           newFeature = false,
+           suppressMenu = false;
+
+       var wrap = context.container()
+           .select('.inspector-wrap');
+
+
+       function singular() {
+           if (selectedIDs.length === 1) {
+               return context.hasEntity(selectedIDs[0]);
+           }
+       }
+
+       function closeMenu() {
+           if (radialMenu) {
+               context.surface().call(radialMenu.close);
+           }
+       }
+
+       function positionMenu() {
+           if (suppressMenu || !radialMenu) { return; }
+
+           var entity = singular();
+           if (entity && context.geometry(entity.id) === 'relation') {
+               suppressMenu = true;
+           } else if (entity && entity.type === 'node') {
+               radialMenu.center(context.projection(entity.loc));
+           } else {
+               var point = context.mouse(),
+                   viewport = iD.geo.Extent(context.projection.clipExtent()).polygon();
+               if (iD.geo.pointInPolygon(point, viewport)) {
+                   radialMenu.center(point);
+               } else {
+                   suppressMenu = true;
+               }
+           }
+       }
+
+       function showMenu() {
+           closeMenu();
+           if (!suppressMenu && radialMenu) {
+               context.surface().call(radialMenu);
+           }
+       }
+
+       function toggleMenu() {
+           if (d3.select('.radial-menu').empty()) {
+               showMenu();
+           } else {
+               closeMenu();
+           }
+       }
+
+       mode.selectedIDs = function() {
+           return selectedIDs;
+       };
+
+       mode.reselect = function() {
+           var surfaceNode = context.surface().node();
+           if (surfaceNode.focus) { // FF doesn't support it
+               surfaceNode.focus();
+           }
+
+           positionMenu();
+           showMenu();
+       };
+
+       mode.newFeature = function(_) {
+           if (!arguments.length) return newFeature;
+           newFeature = _;
+           return mode;
+       };
+
+       mode.suppressMenu = function(_) {
+           if (!arguments.length) return suppressMenu;
+           suppressMenu = _;
+           return mode;
+       };
+
+       mode.enter = function() {
+           function update() {
+               closeMenu();
+               if (_.some(selectedIDs, function(id) { return !context.hasEntity(id); })) {
+                   // Exit mode if selected entity gets undone
+                   context.enter(iD.modes.Browse(context));
+               }
+           }
+
+           function dblclick() {
+               var target = d3.select(d3.event.target),
+                   datum = target.datum();
+
+               if (datum instanceof iD.Way && !target.classed('fill')) {
+                   var choice = iD.geo.chooseEdge(context.childNodes(datum), context.mouse(), context.projection),
+                       node = iD.Node();
+
+                   var prev = datum.nodes[choice.index - 1],
+                       next = datum.nodes[choice.index];
+
+                   context.perform(
+                       iD.actions.AddMidpoint({loc: choice.loc, edge: [prev, next]}, node),
+                       t('operations.add.annotation.vertex'));
+
+                   d3.event.preventDefault();
+                   d3.event.stopPropagation();
+               }
+           }
+
+           function selectElements(drawn) {
+               var entity = singular();
+               if (entity && context.geometry(entity.id) === 'relation') {
+                   suppressMenu = true;
+                   return;
+               }
+
+               var selection = context.surface()
+                       .selectAll(iD.util.entityOrMemberSelector(selectedIDs, context.graph()));
+
+               if (selection.empty()) {
+                   if (drawn) {  // Exit mode if selected DOM elements have disappeared..
+                       context.enter(iD.modes.Browse(context));
+                   }
+               } else {
+                   selection
+                       .classed('selected', true);
+               }
+           }
+
+           function esc() {
+               if (!context.inIntro()) {
+                   context.enter(iD.modes.Browse(context));
+               }
+           }
+
+
+           behaviors.forEach(function(behavior) {
+               context.install(behavior);
+           });
+
+           var operations = _.without(d3.values(iD.operations), iD.operations.Delete)
+                   .map(function(o) { return o(selectedIDs, context); })
+                   .filter(function(o) { return o.available(); });
+
+           operations.unshift(iD.operations.Delete(selectedIDs, context));
+
+           keybinding
+               .on('⎋', esc, true)
+               .on('space', toggleMenu);
+
+           operations.forEach(function(operation) {
+               operation.keys.forEach(function(key) {
+                   keybinding.on(key, function() {
+                       if (!(context.inIntro() || operation.disabled())) {
+                           operation();
+                       }
+                   });
+               });
+           });
+
+           d3.select(document)
+               .call(keybinding);
+
+           radialMenu = iD.ui.RadialMenu(context, operations);
+
+           context.ui().sidebar
+               .select(singular() ? singular().id : null, newFeature);
+
+           context.history()
+               .on('undone.select', update)
+               .on('redone.select', update);
+
+           context.map()
+               .on('move.select', closeMenu)
+               .on('drawn.select', selectElements);
+
+           selectElements();
+
+           var show = d3.event && !suppressMenu;
+
+           if (show) {
+               positionMenu();
+           }
+
+           timeout = window.setTimeout(function() {
+               if (show) {
+                   showMenu();
+               }
+
+               context.surface()
+                   .on('dblclick.select', dblclick);
+           }, 200);
+
+           if (selectedIDs.length > 1) {
+               var entities = iD.ui.SelectionList(context, selectedIDs);
+               context.ui().sidebar.show(entities);
+           }
+       };
+
+       mode.exit = function() {
+           if (timeout) window.clearTimeout(timeout);
+
+           if (inspector) wrap.call(inspector.close);
+
+           behaviors.forEach(function(behavior) {
+               context.uninstall(behavior);
+           });
+
+           keybinding.off();
+           closeMenu();
+           radialMenu = undefined;
+
+           context.history()
+               .on('undone.select', null)
+               .on('redone.select', null);
+
+           context.surface()
+               .on('dblclick.select', null)
+               .selectAll('.selected')
+               .classed('selected', false);
+
+           context.map().on('drawn.select', null);
+           context.ui().sidebar.hide();
+       };
+
+       return mode;
+   }
+
+   function Edit(context) {
+       function edit() {
+           context.map()
+               .minzoom(context.minEditableZoom());
+       }
+
+       edit.off = function() {
+           context.map()
+               .minzoom(0);
+       };
+
+       return edit;
+   }
+
+   /*
+      The hover behavior adds the `.hover` class on mouseover to all elements to which
+      the identical datum is bound, and removes it on mouseout.
+
+      The :hover pseudo-class is insufficient for iD's purposes because a datum's visual
+      representation may consist of several elements scattered throughout the DOM hierarchy.
+      Only one of these elements can have the :hover pseudo-class, but all of them will
+      have the .hover class.
+    */
+   function Hover() {
+       var dispatch = d3.dispatch('hover'),
+           selection,
+           altDisables,
+           target;
+
+       function keydown() {
+           if (altDisables && d3.event.keyCode === d3.keybinding.modifierCodes.alt) {
+               dispatch.hover(null);
+               selection.selectAll('.hover')
+                   .classed('hover-suppressed', true)
+                   .classed('hover', false);
+           }
+       }
+
+       function keyup() {
+           if (altDisables && d3.event.keyCode === d3.keybinding.modifierCodes.alt) {
+               dispatch.hover(target ? target.id : null);
+               selection.selectAll('.hover-suppressed')
+                   .classed('hover-suppressed', false)
+                   .classed('hover', true);
+           }
+       }
+
+       var hover = function(__) {
+           selection = __;
+
+           function enter(d) {
+               if (d === target) return;
+
+               target = d;
+
+               selection.selectAll('.hover')
+                   .classed('hover', false);
+               selection.selectAll('.hover-suppressed')
+                   .classed('hover-suppressed', false);
+
+               if (target instanceof Entity) {
+                   var selector = '.' + target.id;
+
+                   if (target.type === 'relation') {
+                       target.members.forEach(function(member) {
+                           selector += ', .' + member.id;
+                       });
+                   }
+
+                   var suppressed = altDisables && d3.event && d3.event.altKey;
+
+                   selection.selectAll(selector)
+                       .classed(suppressed ? 'hover-suppressed' : 'hover', true);
+
+                   dispatch.hover(target.id);
+               } else {
+                   dispatch.hover(null);
+               }
+           }
+
+           var down;
+
+           function mouseover() {
+               if (down) return;
+               var target = d3.event.target;
+               enter(target ? target.__data__ : null);
+           }
+
+           function mouseout() {
+               if (down) return;
+               var target = d3.event.relatedTarget;
+               enter(target ? target.__data__ : null);
+           }
+
+           function mousedown() {
+               down = true;
+               d3.select(window)
+                   .on('mouseup.hover', mouseup);
+           }
+
+           function mouseup() {
+               down = false;
+           }
+
+           selection
+               .on('mouseover.hover', mouseover)
+               .on('mouseout.hover', mouseout)
+               .on('mousedown.hover', mousedown)
+               .on('mouseup.hover', mouseup);
+
+           d3.select(window)
+               .on('keydown.hover', keydown)
+               .on('keyup.hover', keyup);
+       };
+
+       hover.off = function(selection) {
+           selection.selectAll('.hover')
+               .classed('hover', false);
+           selection.selectAll('.hover-suppressed')
+               .classed('hover-suppressed', false);
+
+           selection
+               .on('mouseover.hover', null)
+               .on('mouseout.hover', null)
+               .on('mousedown.hover', null)
+               .on('mouseup.hover', null);
+
+           d3.select(window)
+               .on('keydown.hover', null)
+               .on('keyup.hover', null)
+               .on('mouseup.hover', null);
+       };
+
+       hover.altDisables = function(_) {
+           if (!arguments.length) return altDisables;
+           altDisables = _;
+           return hover;
+       };
+
+       return d3.rebind(hover, dispatch, 'on');
+   }
+
+   function Tail() {
+       var text,
+           container,
+           xmargin = 25,
+           tooltipSize = [0, 0],
+           selectionSize = [0, 0];
+
+       function tail(selection) {
+           if (!text) return;
+
+           d3.select(window)
+               .on('resize.tail', function() { selectionSize = selection.dimensions(); });
+
+           function show() {
+               container.style('display', 'block');
+               tooltipSize = container.dimensions();
+           }
+
+           function mousemove() {
+               if (container.style('display') === 'none') show();
+               var xoffset = ((d3.event.clientX + tooltipSize[0] + xmargin) > selectionSize[0]) ?
+                   -tooltipSize[0] - xmargin : xmargin;
+               container.classed('left', xoffset > 0);
+               setTransform(container, d3.event.clientX + xoffset, d3.event.clientY);
+           }
+
+           function mouseleave() {
+               if (d3.event.relatedTarget !== container.node()) {
+                   container.style('display', 'none');
+               }
+           }
+
+           function mouseenter() {
+               if (d3.event.relatedTarget !== container.node()) {
+                   show();
+               }
+           }
+
+           container = d3.select(document.body)
+               .append('div')
+               .style('display', 'none')
+               .attr('class', 'tail tooltip-inner');
+
+           container.append('div')
+               .text(text);
+
+           selection
+               .on('mousemove.tail', mousemove)
+               .on('mouseenter.tail', mouseenter)
+               .on('mouseleave.tail', mouseleave);
+
+           container
+               .on('mousemove.tail', mousemove);
+
+           tooltipSize = container.dimensions();
+           selectionSize = selection.dimensions();
+       }
+
+       tail.off = function(selection) {
+           if (!text) return;
+
+           container
+               .on('mousemove.tail', null)
+               .remove();
+
+           selection
+               .on('mousemove.tail', null)
+               .on('mouseenter.tail', null)
+               .on('mouseleave.tail', null);
+
+           d3.select(window)
+               .on('resize.tail', null);
+       };
+
+       tail.text = function(_) {
+           if (!arguments.length) return text;
+           text = _;
+           return tail;
+       };
+
+       return tail;
+   }
+
+   function Draw(context) {
+       var event = d3.dispatch('move', 'click', 'clickWay',
+               'clickNode', 'undo', 'cancel', 'finish'),
+           keybinding = d3.keybinding('draw'),
+           hover = Hover(context)
+               .altDisables(true)
+               .on('hover', context.ui().sidebar.hover),
+           tail = Tail(),
+           edit = Edit(context),
+           closeTolerance = 4,
+           tolerance = 12,
+           mouseLeave = false,
+           lastMouse = null,
+           cached = Draw;
+
+       function datum() {
+           if (d3.event.altKey) return {};
+
+           if (d3.event.type === 'keydown') {
+               return (lastMouse && lastMouse.target.__data__) || {};
+           } else {
+               return d3.event.target.__data__ || {};
+           }
+       }
+
+       function mousedown() {
+
+           function point() {
+               var p = context.container().node();
+               return touchId !== null ? d3.touches(p).filter(function(p) {
+                   return p.identifier === touchId;
+               })[0] : d3.mouse(p);
+           }
+
+           var element = d3.select(this),
+               touchId = d3.event.touches ? d3.event.changedTouches[0].identifier : null,
+               t1 = +new Date(),
+               p1 = point();
+
+           element.on('mousemove.draw', null);
+
+           d3.select(window).on('mouseup.draw', function() {
+               var t2 = +new Date(),
+                   p2 = point(),
+                   dist = euclideanDistance(p1, p2);
+
+               element.on('mousemove.draw', mousemove);
+               d3.select(window).on('mouseup.draw', null);
+
+               if (dist < closeTolerance || (dist < tolerance && (t2 - t1) < 500)) {
+                   // Prevent a quick second click
+                   d3.select(window).on('click.draw-block', function() {
+                       d3.event.stopPropagation();
+                   }, true);
+
+                   context.map().dblclickEnable(false);
+
+                   window.setTimeout(function() {
+                       context.map().dblclickEnable(true);
+                       d3.select(window).on('click.draw-block', null);
+                   }, 500);
+
+                   click();
+               }
+           });
+       }
+
+       function mousemove() {
+           lastMouse = d3.event;
+           event.move(datum());
+       }
+
+       function mouseenter() {
+           mouseLeave = false;
+       }
+
+       function mouseleave() {
+           mouseLeave = true;
+       }
+
+       function click() {
+           var d = datum();
+           if (d.type === 'way') {
+               var dims = context.map().dimensions(),
+                   mouse = context.mouse(),
+                   pad = 5,
+                   trySnap = mouse[0] > pad && mouse[0] < dims[0] - pad &&
+                       mouse[1] > pad && mouse[1] < dims[1] - pad;
+
+               if (trySnap) {
+                   var choice = chooseEdge(context.childNodes(d), context.mouse(), context.projection),
+                       edge = [d.nodes[choice.index - 1], d.nodes[choice.index]];
+                   event.clickWay(choice.loc, edge);
+               } else {
+                   event.click(context.map().mouseCoordinates());
+               }
+
+           } else if (d.type === 'node') {
+               event.clickNode(d);
+
+           } else {
+               event.click(context.map().mouseCoordinates());
+           }
+       }
+
+       function space() {
+           var currSpace = context.mouse();
+           if (cached.disableSpace && cached.lastSpace) {
+               var dist = euclideanDistance(cached.lastSpace, currSpace);
+               if (dist > tolerance) {
+                   cached.disableSpace = false;
+               }
+           }
+
+           if (cached.disableSpace || mouseLeave || !lastMouse) return;
+
+           // user must move mouse or release space bar to allow another click
+           cached.lastSpace = currSpace;
+           cached.disableSpace = true;
+
+           d3.select(window).on('keyup.space-block', function() {
+               cached.disableSpace = false;
+               d3.select(window).on('keyup.space-block', null);
+           });
+
+           d3.event.preventDefault();
+           click();
+       }
+
+       function backspace() {
+           d3.event.preventDefault();
+           event.undo();
+       }
+
+       function del() {
+           d3.event.preventDefault();
+           event.cancel();
+       }
+
+       function ret() {
+           d3.event.preventDefault();
+           event.finish();
+       }
+
+       function draw(selection) {
+           context.install(hover);
+           context.install(edit);
+
+           if (!context.inIntro() && !cached.usedTails[tail.text()]) {
+               context.install(tail);
+           }
+
+           keybinding
+               .on('⌫', backspace)
+               .on('⌦', del)
+               .on('⎋', ret)
+               .on('↩', ret)
+               .on('space', space)
+               .on('⌥space', space);
+
+           selection
+               .on('mouseenter.draw', mouseenter)
+               .on('mouseleave.draw', mouseleave)
+               .on('mousedown.draw', mousedown)
+               .on('mousemove.draw', mousemove);
+
+           d3.select(document)
+               .call(keybinding);
+
+           return draw;
+       }
+
+       draw.off = function(selection) {
+           context.ui().sidebar.hover.cancel();
+           context.uninstall(hover);
+           context.uninstall(edit);
+
+           if (!context.inIntro() && !cached.usedTails[tail.text()]) {
+               context.uninstall(tail);
+               cached.usedTails[tail.text()] = true;
+           }
+
+           selection
+               .on('mouseenter.draw', null)
+               .on('mouseleave.draw', null)
+               .on('mousedown.draw', null)
+               .on('mousemove.draw', null);
+
+           d3.select(window)
+               .on('mouseup.draw', null);
+               // note: keyup.space-block, click.draw-block should remain
+
+           d3.select(document)
+               .call(keybinding.off);
+       };
+
+       draw.tail = function(_) {
+           tail.text(_);
+           return draw;
+       };
+
+       return d3.rebind(draw, event, 'on');
+   }
+
+   Draw.usedTails = {};
+   Draw.disableSpace = false;
+   Draw.lastSpace = null;
+
+   function AddWay(context) {
+       var event = d3.dispatch('start', 'startFromWay', 'startFromNode'),
+           draw = Draw(context);
+
+       var addWay = function(surface) {
+           draw.on('click', event.start)
+               .on('clickWay', event.startFromWay)
+               .on('clickNode', event.startFromNode)
+               .on('cancel', addWay.cancel)
+               .on('finish', addWay.cancel);
+
+           context.map()
+               .dblclickEnable(false);
+
+           surface.call(draw);
+       };
+
+       addWay.off = function(surface) {
+           surface.call(draw.off);
+       };
+
+       addWay.cancel = function() {
+           window.setTimeout(function() {
+               context.map().dblclickEnable(true);
+           }, 1000);
+
+           context.enter(Browse(context));
+       };
+
+       addWay.tail = function(text) {
+           draw.tail(text);
+           return addWay;
+       };
+
+       return d3.rebind(addWay, event, 'on');
+   }
+
+   function Breathe(){
+       var duration = 800,
+           selector = '.selected.shadow, .selected .shadow',
+           selected = d3.select(null),
+           classed = '',
+           params = {},
+           done;
+
+       function reset(selection) {
+           selection
+               .style('stroke-opacity', null)
+               .style('stroke-width', null)
+               .style('fill-opacity', null)
+               .style('r', null);
+       }
+
+       function setAnimationParams(transition, fromTo) {
+           transition
+               .style('stroke-opacity', function(d) { return params[d.id][fromTo].opacity; })
+               .style('stroke-width', function(d) { return params[d.id][fromTo].width; })
+               .style('fill-opacity', function(d) { return params[d.id][fromTo].opacity; })
+               .style('r', function(d) { return params[d.id][fromTo].width; });
+       }
+
+       function calcAnimationParams(selection) {
+           selection
+               .call(reset)
+               .each(function(d) {
+                   var s = d3.select(this),
+                       tag = s.node().tagName,
+                       p = {'from': {}, 'to': {}},
+                       opacity, width;
+
+                   // determine base opacity and width
+                   if (tag === 'circle') {
+                       opacity = parseFloat(s.style('fill-opacity') || 0.5);
+                       width = parseFloat(s.style('r') || 15.5);
+                   } else {
+                       opacity = parseFloat(s.style('stroke-opacity') || 0.7);
+                       width = parseFloat(s.style('stroke-width') || 10);
+                   }
+
+                   // calculate from/to interpolation params..
+                   p.tag = tag;
+                   p.from.opacity = opacity * 0.6;
+                   p.to.opacity = opacity * 1.25;
+                   p.from.width = width * 0.9;
+                   p.to.width = width * (tag === 'circle' ? 1.5 : 1.25);
+                   params[d.id] = p;
+               });
+       }
+
+       function run(surface, fromTo) {
+           var toFrom = (fromTo === 'from' ? 'to': 'from'),
+               currSelected = surface.selectAll(selector),
+               currClassed = surface.attr('class'),
+               n = 0;
+
+           if (done || currSelected.empty()) {
+               selected.call(reset);
+               return;
+           }
+
+           if (!_.isEqual(currSelected, selected) || currClassed !== classed) {
+               selected.call(reset);
+               classed = currClassed;
+               selected = currSelected.call(calcAnimationParams);
+           }
+
+           selected
+               .transition()
+               .call(setAnimationParams, fromTo)
+               .duration(duration)
+               .each(function() { ++n; })
+               .each('end', function() {
+                   if (!--n) {  // call once
+                       surface.call(run, toFrom);
+                   }
+               });
+       }
+
+       var breathe = function(surface) {
+           done = false;
+           d3.timer(function() {
+               if (done) return true;
+
+               var currSelected = surface.selectAll(selector);
+               if (currSelected.empty()) return false;
+
+               surface.call(run, 'from');
+               return true;
+           }, 200);
+       };
+
+       breathe.off = function() {
+           done = true;
+           d3.timer.flush();
+           selected
+               .transition()
+               .call(reset)
+               .duration(0);
+       };
+
+       return breathe;
+   }
+
+   function Copy(context) {
+       var keybinding = d3.keybinding('copy');
+
+       function groupEntities(ids, graph) {
+           var entities = ids.map(function (id) { return graph.entity(id); });
+           return _.extend({relation: [], way: [], node: []},
+               _.groupBy(entities, function(entity) { return entity.type; }));
+       }
+
+       function getDescendants(id, graph, descendants) {
+           var entity = graph.entity(id),
+               i, children;
+
+           descendants = descendants || {};
+
+           if (entity.type === 'relation') {
+               children = _.map(entity.members, 'id');
+           } else if (entity.type === 'way') {
+               children = entity.nodes;
+           } else {
+               children = [];
+           }
+
+           for (i = 0; i < children.length; i++) {
+               if (!descendants[children[i]]) {
+                   descendants[children[i]] = true;
+                   descendants = getDescendants(children[i], graph, descendants);
+               }
+           }
+
+           return descendants;
+       }
+
+       function doCopy() {
+           d3.event.preventDefault();
+           if (context.inIntro()) return;
+
+           var graph = context.graph(),
+               selected = groupEntities(context.selectedIDs(), graph),
+               canCopy = [],
+               skip = {},
+               i, entity;
+
+           for (i = 0; i < selected.relation.length; i++) {
+               entity = selected.relation[i];
+               if (!skip[entity.id] && entity.isComplete(graph)) {
+                   canCopy.push(entity.id);
+                   skip = getDescendants(entity.id, graph, skip);
+               }
+           }
+           for (i = 0; i < selected.way.length; i++) {
+               entity = selected.way[i];
+               if (!skip[entity.id]) {
+                   canCopy.push(entity.id);
+                   skip = getDescendants(entity.id, graph, skip);
+               }
+           }
+           for (i = 0; i < selected.node.length; i++) {
+               entity = selected.node[i];
+               if (!skip[entity.id]) {
+                   canCopy.push(entity.id);
+               }
+           }
+
+           context.copyIDs(canCopy);
+       }
+
+       function copy() {
+           keybinding.on(cmd('⌘C'), doCopy);
+           d3.select(document).call(keybinding);
+           return copy;
+       }
+
+       copy.off = function() {
+           d3.select(document).call(keybinding.off);
+       };
+
+       return copy;
+   }
+
+   /*
+       `iD.behavior.drag` is like `d3.behavior.drag`, with the following differences:
+
+       * The `origin` function is expected to return an [x, y] tuple rather than an
+         {x, y} object.
+       * The events are `start`, `move`, and `end`.
+         (https://github.com/mbostock/d3/issues/563)
+       * The `start` event is not dispatched until the first cursor movement occurs.
+         (https://github.com/mbostock/d3/pull/368)
+       * The `move` event has a `point` and `delta` [x, y] tuple properties rather
+         than `x`, `y`, `dx`, and `dy` properties.
+       * The `end` event is not dispatched if no movement occurs.
+       * An `off` function is available that unbinds the drag's internal event handlers.
+       * Delegation is supported via the `delegate` function.
+
+    */
+   function drag() {
+       function d3_eventCancel() {
+         d3.event.stopPropagation();
+         d3.event.preventDefault();
+       }
+
+       var event = d3.dispatch('start', 'move', 'end'),
+           origin = null,
+           selector = '',
+           filter = null,
+           event_, target, surface;
+
+       event.of = function(thiz, argumentz) {
+         return function(e1) {
+           var e0 = e1.sourceEvent = d3.event;
+           e1.target = drag;
+           d3.event = e1;
+           try {
+             event[e1.type].apply(thiz, argumentz);
+           } finally {
+             d3.event = e0;
+           }
+         };
+       };
+
+       var d3_event_userSelectProperty = prefixCSSProperty('UserSelect'),
+           d3_event_userSelectSuppress = d3_event_userSelectProperty ?
+               function () {
+                   var selection = d3.selection(),
+                       select = selection.style(d3_event_userSelectProperty);
+                   selection.style(d3_event_userSelectProperty, 'none');
+                   return function () {
+                       selection.style(d3_event_userSelectProperty, select);
+                   };
+               } :
+               function (type) {
+                   var w = d3.select(window).on('selectstart.' + type, d3_eventCancel);
+                   return function () {
+                       w.on('selectstart.' + type, null);
+                   };
+               };
+
+       function mousedown() {
+           target = this;
+           event_ = event.of(target, arguments);
+           var eventTarget = d3.event.target,
+               touchId = d3.event.touches ? d3.event.changedTouches[0].identifier : null,
+               offset,
+               origin_ = point(),
+               started = false,
+               selectEnable = d3_event_userSelectSuppress(touchId !== null ? 'drag-' + touchId : 'drag');
+
+           var w = d3.select(window)
+               .on(touchId !== null ? 'touchmove.drag-' + touchId : 'mousemove.drag', dragmove)
+               .on(touchId !== null ? 'touchend.drag-' + touchId : 'mouseup.drag', dragend, true);
+
+           if (origin) {
+               offset = origin.apply(target, arguments);
+               offset = [offset[0] - origin_[0], offset[1] - origin_[1]];
+           } else {
+               offset = [0, 0];
+           }
+
+           if (touchId === null) d3.event.stopPropagation();
+
+           function point() {
+               var p = target.parentNode || surface;
+               return touchId !== null ? d3.touches(p).filter(function(p) {
+                   return p.identifier === touchId;
+               })[0] : d3.mouse(p);
+           }
+
+           function dragmove() {
+
+               var p = point(),
+                   dx = p[0] - origin_[0],
+                   dy = p[1] - origin_[1];
+
+               if (dx === 0 && dy === 0)
+                   return;
+
+               if (!started) {
+                   started = true;
+                   event_({
+                       type: 'start'
+                   });
+               }
+
+               origin_ = p;
+               d3_eventCancel();
+
+               event_({
+                   type: 'move',
+                   point: [p[0] + offset[0],  p[1] + offset[1]],
+                   delta: [dx, dy]
+               });
+           }
+
+           function dragend() {
+               if (started) {
+                   event_({
+                       type: 'end'
+                   });
+
+                   d3_eventCancel();
+                   if (d3.event.target === eventTarget) w.on('click.drag', click, true);
+               }
+
+               w.on(touchId !== null ? 'touchmove.drag-' + touchId : 'mousemove.drag', null)
+                   .on(touchId !== null ? 'touchend.drag-' + touchId : 'mouseup.drag', null);
+               selectEnable();
+           }
+
+           function click() {
+               d3_eventCancel();
+               w.on('click.drag', null);
+           }
+       }
+
+       function drag(selection) {
+           var matchesSelector = prefixDOMProperty('matchesSelector'),
+               delegate = mousedown;
+
+           if (selector) {
+               delegate = function() {
+                   var root = this,
+                       target = d3.event.target;
+                   for (; target && target !== root; target = target.parentNode) {
+                       if (target[matchesSelector](selector) &&
+                               (!filter || filter(target.__data__))) {
+                           return mousedown.call(target, target.__data__);
+                       }
+                   }
+               };
+           }
+
+           selection.on('mousedown.drag' + selector, delegate)
+               .on('touchstart.drag' + selector, delegate);
+       }
+
+       drag.off = function(selection) {
+           selection.on('mousedown.drag' + selector, null)
+               .on('touchstart.drag' + selector, null);
+       };
+
+       drag.delegate = function(_) {
+           if (!arguments.length) return selector;
+           selector = _;
+           return drag;
+       };
+
+       drag.filter = function(_) {
+           if (!arguments.length) return origin;
+           filter = _;
+           return drag;
+       };
+
+       drag.origin = function (_) {
+           if (!arguments.length) return origin;
+           origin = _;
+           return drag;
+       };
+
+       drag.cancel = function() {
+           d3.select(window)
+               .on('mousemove.drag', null)
+               .on('mouseup.drag', null);
+           return drag;
+       };
+
+       drag.target = function() {
+           if (!arguments.length) return target;
+           target = arguments[0];
+           event_ = event.of(target, Array.prototype.slice.call(arguments, 1));
+           return drag;
+       };
+
+       drag.surface = function() {
+           if (!arguments.length) return surface;
+           surface = arguments[0];
+           return drag;
+       };
+
+       return d3.rebind(drag, event, 'on');
+   }
+
+   function DrawWay(context, wayId, index, mode, baseGraph) {
+       var way = context.entity(wayId),
+           isArea = context.geometry(wayId) === 'area',
+           finished = false,
+           annotation = t((way.isDegenerate() ?
+               'operations.start.annotation.' :
+               'operations.continue.annotation.') + context.geometry(wayId)),
+           draw = Draw(context);
+
+       var startIndex = typeof index === 'undefined' ? way.nodes.length - 1 : 0,
+           start = Node({loc: context.graph().entity(way.nodes[startIndex]).loc}),
+           end = Node({loc: context.map().mouseCoordinates()}),
+           segment = Way({
+               nodes: typeof index === 'undefined' ? [start.id, end.id] : [end.id, start.id],
+               tags: _.clone(way.tags)
+           });
+
+       var f = context[way.isDegenerate() ? 'replace' : 'perform'];
+       if (isArea) {
+           f(AddEntity(end),
+               AddVertex(wayId, end.id, index));
+       } else {
+           f(AddEntity(start),
+               AddEntity(end),
+               AddEntity(segment));
+       }
+
+       function move(datum) {
+           var loc;
+
+           if (datum.type === 'node' && datum.id !== end.id) {
+               loc = datum.loc;
+
+           } else if (datum.type === 'way' && datum.id !== segment.id) {
+               var dims = context.map().dimensions(),
+                   mouse = context.mouse(),
+                   pad = 5,
+                   trySnap = mouse[0] > pad && mouse[0] < dims[0] - pad &&
+                       mouse[1] > pad && mouse[1] < dims[1] - pad;
+
+               if (trySnap) {
+                   loc = chooseEdge(context.childNodes(datum), context.mouse(), context.projection).loc;
+               }
+           }
+
+           if (!loc) {
+               loc = context.map().mouseCoordinates();
+           }
+
+           context.replace(MoveNode(end.id, loc));
+       }
+
+       function undone() {
+           finished = true;
+           context.enter(Browse(context));
+       }
+
+       function setActiveElements() {
+           var active = isArea ? [wayId, end.id] : [segment.id, start.id, end.id];
+           context.surface().selectAll(entitySelector(active))
+               .classed('active', true);
+       }
+
+       var drawWay = function(surface) {
+           draw.on('move', move)
+               .on('click', drawWay.add)
+               .on('clickWay', drawWay.addWay)
+               .on('clickNode', drawWay.addNode)
+               .on('undo', context.undo)
+               .on('cancel', drawWay.cancel)
+               .on('finish', drawWay.finish);
+
+           context.map()
+               .dblclickEnable(false)
+               .on('drawn.draw', setActiveElements);
+
+           setActiveElements();
+
+           surface.call(draw);
+
+           context.history()
+               .on('undone.draw', undone);
+       };
+
+       drawWay.off = function(surface) {
+           if (!finished)
+               context.pop();
+
+           context.map()
+               .on('drawn.draw', null);
+
+           surface.call(draw.off)
+               .selectAll('.active')
+               .classed('active', false);
+
+           context.history()
+               .on('undone.draw', null);
+       };
+
+       function ReplaceTemporaryNode(newNode) {
+           return function(graph) {
+               if (isArea) {
+                   return graph
+                       .replace(way.addNode(newNode.id, index))
+                       .remove(end);
+
+               } else {
+                   return graph
+                       .replace(graph.entity(wayId).addNode(newNode.id, index))
+                       .remove(end)
+                       .remove(segment)
+                       .remove(start);
+               }
+           };
+       }
+
+       // Accept the current position of the temporary node and continue drawing.
+       drawWay.add = function(loc) {
+
+           // prevent duplicate nodes
+           var last = context.hasEntity(way.nodes[way.nodes.length - (isArea ? 2 : 1)]);
+           if (last && last.loc[0] === loc[0] && last.loc[1] === loc[1]) return;
+
+           var newNode = Node({loc: loc});
+
+           context.replace(
+               AddEntity(newNode),
+               ReplaceTemporaryNode(newNode),
+               annotation);
+
+           finished = true;
+           context.enter(mode);
+       };
+
+       // Connect the way to an existing way.
+       drawWay.addWay = function(loc, edge) {
+           var previousEdge = startIndex ?
+               [way.nodes[startIndex], way.nodes[startIndex - 1]] :
+               [way.nodes[0], way.nodes[1]];
+
+           // Avoid creating duplicate segments
+           if (!isArea && edgeEqual(edge, previousEdge))
+               return;
+
+           var newNode = Node({ loc: loc });
+
+           context.perform(
+               AddMidpoint({ loc: loc, edge: edge}, newNode),
+               ReplaceTemporaryNode(newNode),
+               annotation);
+
+           finished = true;
+           context.enter(mode);
+       };
+
+       // Connect the way to an existing node and continue drawing.
+       drawWay.addNode = function(node) {
+
+           // Avoid creating duplicate segments
+           if (way.areAdjacent(node.id, way.nodes[way.nodes.length - 1])) return;
+
+           context.perform(
+               ReplaceTemporaryNode(node),
+               annotation);
+
+           finished = true;
+           context.enter(mode);
+       };
+
+       // Finish the draw operation, removing the temporary node. If the way has enough
+       // nodes to be valid, it's selected. Otherwise, return to browse mode.
+       drawWay.finish = function() {
+           context.pop();
+           finished = true;
+
+           window.setTimeout(function() {
+               context.map().dblclickEnable(true);
+           }, 1000);
+
+           if (context.hasEntity(wayId)) {
+               context.enter(
+                   SelectMode(context, [wayId])
+                       .suppressMenu(true)
+                       .newFeature(true));
+           } else {
+               context.enter(Browse(context));
+           }
+       };
+
+       // Cancel the draw operation and return to browse, deleting everything drawn.
+       drawWay.cancel = function() {
+           context.perform(
+               d3.functor(baseGraph),
+               t('operations.cancel_draw.annotation'));
+
+           window.setTimeout(function() {
+               context.map().dblclickEnable(true);
+           }, 1000);
+
+           finished = true;
+           context.enter(Browse(context));
+       };
+
+       drawWay.tail = function(text) {
+           draw.tail(text);
+           return drawWay;
+       };
+
+       return drawWay;
+   }
+
+   function Hash(context) {
+       var s0 = null, // cached location.hash
+           lat = 90 - 1e-8; // allowable latitude range
+
+       var parser = function(map, s) {
+           var q = stringQs(s);
+           var args = (q.map || '').split('/').map(Number);
+           if (args.length < 3 || args.some(isNaN)) {
+               return true; // replace bogus hash
+           } else if (s !== formatter(map).slice(1)) {
+               map.centerZoom([args[1],
+                   Math.min(lat, Math.max(-lat, args[2]))], args[0]);
+           }
+       };
+
+       var formatter = function(map) {
+           var mode = context.mode(),
+               center = map.center(),
+               zoom = map.zoom(),
+               precision = Math.max(0, Math.ceil(Math.log(zoom) / Math.LN2)),
+               q = _.omit(stringQs(location.hash.substring(1)), 'comment'),
+               newParams = {};
+
+           if (mode && mode.id === 'browse') {
+               delete q.id;
+           } else {
+               var selected = context.selectedIDs().filter(function(id) {
+                   return !context.entity(id).isNew();
+               });
+               if (selected.length) {
+                   newParams.id = selected.join(',');
+               }
+           }
+
+           newParams.map = zoom.toFixed(2) +
+                   '/' + center[0].toFixed(precision) +
+                   '/' + center[1].toFixed(precision);
+
+           return '#' + qsString(_.assign(q, newParams), true);
+       };
+
+       function update() {
+           if (context.inIntro()) return;
+           var s1 = formatter(context.map());
+           if (s0 !== s1) location.replace(s0 = s1); // don't recenter the map!
+       }
+
+       var throttledUpdate = _.throttle(update, 500);
+
+       function hashchange() {
+           if (location.hash === s0) return; // ignore spurious hashchange events
+           if (parser(context.map(), (s0 = location.hash).substring(1))) {
+               update(); // replace bogus hash
+           }
+       }
+
+       function hash() {
+           context.map()
+               .on('move.hash', throttledUpdate);
+
+           context
+               .on('enter.hash', throttledUpdate);
+
+           d3.select(window)
+               .on('hashchange.hash', hashchange);
+
+           if (location.hash) {
+               var q = stringQs(location.hash.substring(1));
+               if (q.id) context.zoomToEntity(q.id.split(',')[0], !q.map);
+               if (q.comment) context.storage('comment', q.comment);
+               hashchange();
+               if (q.map) hash.hadHash = true;
+           }
+       }
+
+       hash.off = function() {
+           throttledUpdate.cancel();
+
+           context.map()
+               .on('move.hash', null);
+
+           context
+               .on('enter.hash', null);
+
+           d3.select(window)
+               .on('hashchange.hash', null);
+
+           location.hash = '';
+       };
+
+       return hash;
+   }
+
+   function Lasso(context) {
+
+       var behavior = function(selection) {
+           var lasso;
+
+           function mousedown() {
+               var button = 0;  // left
+               if (d3.event.button === button && d3.event.shiftKey === true) {
+                   lasso = null;
+
+                   selection
+                       .on('mousemove.lasso', mousemove)
+                       .on('mouseup.lasso', mouseup);
+
+                   d3.event.stopPropagation();
+               }
+           }
+
+           function mousemove() {
+               if (!lasso) {
+                   lasso = uiLasso(context);
+                   context.surface().call(lasso);
+               }
+
+               lasso.p(context.mouse());
+           }
+
+           function normalize(a, b) {
+               return [
+                   [Math.min(a[0], b[0]), Math.min(a[1], b[1])],
+                   [Math.max(a[0], b[0]), Math.max(a[1], b[1])]];
+           }
+
+           function lassoed() {
+               if (!lasso) return [];
+
+               var graph = context.graph(),
+                   bounds = lasso.extent().map(context.projection.invert),
+                   extent = Extent(normalize(bounds[0], bounds[1]));
+
+               return _.map(context.intersects(extent).filter(function(entity) {
+                   return entity.type === 'node' &&
+                       pointInPolygon(context.projection(entity.loc), lasso.coordinates) &&
+                       !context.features().isHidden(entity, graph, entity.geometry(graph));
+               }), 'id');
+           }
+
+           function mouseup() {
+               selection
+                   .on('mousemove.lasso', null)
+                   .on('mouseup.lasso', null);
+
+               if (!lasso) return;
+
+               var ids = lassoed();
+               lasso.close();
+
+               if (ids.length) {
+                   context.enter(SelectMode(context, ids));
+               }
+           }
+
+           selection
+               .on('mousedown.lasso', mousedown);
+       };
+
+       behavior.off = function(selection) {
+           selection.on('mousedown.lasso', null);
+       };
+
+       return behavior;
+   }
+
+   function Paste(context) {
+       var keybinding = d3.keybinding('paste');
+
+       function omitTag(v, k) {
+           return (
+               k === 'phone' ||
+               k === 'fax' ||
+               k === 'email' ||
+               k === 'website' ||
+               k === 'url' ||
+               k === 'note' ||
+               k === 'description' ||
+               k.indexOf('name') !== -1 ||
+               k.indexOf('wiki') === 0 ||
+               k.indexOf('addr:') === 0 ||
+               k.indexOf('contact:') === 0
+           );
+       }
+
+       function doPaste() {
+           d3.event.preventDefault();
+           if (context.inIntro()) return;
+
+           var baseGraph = context.graph(),
+               mouse = context.mouse(),
+               projection = context.projection,
+               viewport = Extent(projection.clipExtent()).polygon();
+
+           if (!pointInPolygon(mouse, viewport)) return;
+
+           var extent = Extent(),
+               oldIDs = context.copyIDs(),
+               oldGraph = context.copyGraph(),
+               newIDs = [];
+
+           if (!oldIDs.length) return;
+
+           var action = CopyEntities(oldIDs, oldGraph);
+           context.perform(action);
+
+           var copies = action.copies();
+           for (var id in copies) {
+               var oldEntity = oldGraph.entity(id),
+                   newEntity = copies[id];
+
+               extent._extend(oldEntity.extent(oldGraph));
+               newIDs.push(newEntity.id);
+               context.perform(ChangeTags(newEntity.id, _.omit(newEntity.tags, omitTag)));
+           }
+
+           // Put pasted objects where mouse pointer is..
+           var center = projection(extent.center()),
+               delta = [ mouse[0] - center[0], mouse[1] - center[1] ];
+
+           context.perform(MoveAction(newIDs, delta, projection));
+           context.enter(MoveMode(context, newIDs, baseGraph));
+       }
+
+       function paste() {
+           keybinding.on(cmd('⌘V'), doPaste);
+           d3.select(document).call(keybinding);
+           return paste;
+       }
+
+       paste.off = function() {
+           d3.select(document).call(keybinding.off);
+       };
+
+       return paste;
+   }
+
+   function Select(context) {
+       function keydown() {
+           if (d3.event && d3.event.shiftKey) {
+               context.surface()
+                   .classed('behavior-multiselect', true);
+           }
+       }
+
+       function keyup() {
+           if (!d3.event || !d3.event.shiftKey) {
+               context.surface()
+                   .classed('behavior-multiselect', false);
+           }
+       }
+
+       function click() {
+           var datum = d3.event.target.__data__,
+               lasso = d3.select('#surface .lasso').node(),
+               mode = context.mode();
+
+           if (!(datum instanceof Entity)) {
+               if (!d3.event.shiftKey && !lasso && mode.id !== 'browse')
+                   context.enter(Browse(context));
+
+           } else if (!d3.event.shiftKey && !lasso) {
+               // Avoid re-entering Select mode with same entity.
+               if (context.selectedIDs().length !== 1 || context.selectedIDs()[0] !== datum.id) {
+                   context.enter(SelectMode(context, [datum.id]));
+               } else {
+                   mode.suppressMenu(false).reselect();
+               }
+           } else if (context.selectedIDs().indexOf(datum.id) >= 0) {
+               var selectedIDs = _.without(context.selectedIDs(), datum.id);
+               context.enter(selectedIDs.length ?
+                   SelectMode(context, selectedIDs) :
+                   Browse(context));
+
+           } else {
+               context.enter(SelectMode(context, context.selectedIDs().concat([datum.id])));
+           }
+       }
+
+       var behavior = function(selection) {
+           d3.select(window)
+               .on('keydown.select', keydown)
+               .on('keyup.select', keyup);
+
+           selection.on('click.select', click);
+
+           keydown();
+       };
+
+       behavior.off = function(selection) {
+           d3.select(window)
+               .on('keydown.select', null)
+               .on('keyup.select', null);
+
+           selection.on('click.select', null);
+
+           keyup();
+       };
+
+       return behavior;
+   }
+
+
+
+   var behavior = Object.freeze({
+   	AddWay: AddWay,
+   	Breathe: Breathe,
+   	Copy: Copy,
+   	drag: drag,
+   	DrawWay: DrawWay,
+   	Draw: Draw,
+   	Edit: Edit,
+   	Hash: Hash,
+   	Hover: Hover,
+   	Lasso: Lasso,
+   	Paste: Paste,
+   	Select: Select,
+   	Tail: Tail
+   });
+
+   exports.actions = actions;
+   exports.geo = geo;
+   exports.svg = svg;
+   exports.behavior = behavior;
+>>>>>>> ef619c2... external modules for behavior
    exports.Connection = Connection;
    exports.Difference = Difference;
    exports.Entity = Entity;

@@ -1,3 +1,4 @@
+import { cmd } from '../ui/core/index';
 export function Copy(context) {
     var keybinding = d3.keybinding('copy');
 
@@ -66,7 +67,7 @@ export function Copy(context) {
     }
 
     function copy() {
-        keybinding.on(iD.ui.cmd('⌘C'), doCopy);
+        keybinding.on(cmd('⌘C'), doCopy);
         d3.select(document).call(keybinding);
         return copy;
     }

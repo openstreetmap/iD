@@ -44,7 +44,6 @@ $(BUILDJS_TARGETS): $(BUILDJS_SOURCES) build.js
 
 MODULE_TARGETS = \
 	js/lib/id/index.js \
-	js/lib/id/behavior.js \
 	js/lib/id/modes.js \
 	js/lib/id/operations.js \
 	js/lib/id/presets.js \
@@ -62,10 +61,6 @@ MODULE_TARGETS = \
 js/lib/id/index.js: $(shell find modules/index.js -type f)
 	@rm -f $@
 	node_modules/.bin/rollup -f umd -n iD modules/index.js --no-strict -o $@
-
-js/lib/id/behavior.js: $(shell find modules/behavior -type f)
-	@rm -f $@
-	node_modules/.bin/rollup -f umd -n iD.behavior modules/behavior/index.js --no-strict -o $@
 
 js/lib/id/modes.js: $(shell find modules/modes -type f)
 	@rm -f $@
@@ -86,10 +81,6 @@ js/lib/id/renderer.js: $(shell find modules/renderer -type f)
 js/lib/id/services.js: $(shell find modules/services -type f)
 	@rm -f $@
 	node_modules/.bin/rollup -f umd -n iD.services modules/services/index.js --no-strict -o $@
-
-js/lib/id/svg.js: $(shell find modules/svg -type f)
-	@rm -f $@
-	node_modules/.bin/rollup -f umd -n iD.svg modules/svg/index.js --no-strict -o $@
 
 js/lib/id/ui/index.js: $(shell find modules/ui -type f)
 	@rm -f $@
