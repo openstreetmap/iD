@@ -2,6 +2,7 @@ import * as actions from './actions/index';
 import * as geo from './geo/index';
 import * as behavior from './behavior/index';
 import * as modes from './modes/index';
+import * as util from './util/index';
 
 export { Connection } from './core/connection';
 export { Difference } from './core/difference';
@@ -18,5 +19,6 @@ export {
   actions,
   geo,
   behavior,
-  modes
+  modes,
+  util
 };

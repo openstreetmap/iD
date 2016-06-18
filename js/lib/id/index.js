@@ -1572,7 +1572,16 @@
    }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+   function tagText(entity) {
+       return d3.entries(entity.tags).map(function(e) {
+           return e.key + '=' + e.value;
+       }).join(', ');
+   }
+
+>>>>>>> 42ce4cf... external modules for util
    function entitySelector(ids) {
        return ids.length ? '.' + ids.join(',.') : 'nothing';
    }
@@ -1683,9 +1692,65 @@
        }
    }
 
+<<<<<<< HEAD
 >>>>>>> ef619c2... external modules for behavior
+=======
+   function editDistance(a, b) {
+       if (a.length === 0) return b.length;
+       if (b.length === 0) return a.length;
+       var matrix = [];
+       for (var i = 0; i <= b.length; i++) { matrix[i] = [i]; }
+       for (var j = 0; j <= a.length; j++) { matrix[0][j] = j; }
+       for (i = 1; i <= b.length; i++) {
+           for (j = 1; j <= a.length; j++) {
+               if (b.charAt(i-1) === a.charAt(j-1)) {
+                   matrix[i][j] = matrix[i-1][j-1];
+               } else {
+                   matrix[i][j] = Math.min(matrix[i-1][j-1] + 1, // substitution
+                       Math.min(matrix[i][j-1] + 1, // insertion
+                       matrix[i-1][j] + 1)); // deletion
+               }
+           }
+       }
+       return matrix[b.length][a.length];
+   }
+
+   // a d3.mouse-alike which
+   // 1. Only works on HTML elements, not SVG
+   // 2. Does not cause style recalculation
+   function fastMouse(container) {
+       var rect = container.getBoundingClientRect(),
+           rectLeft = rect.left,
+           rectTop = rect.top,
+           clientLeft = +container.clientLeft,
+           clientTop = +container.clientTop;
+       return function(e) {
+           return [
+               e.clientX - rectLeft - clientLeft,
+               e.clientY - rectTop - clientTop];
+       };
+   }
+
+>>>>>>> 42ce4cf... external modules for util
    /* eslint-disable no-proto */
    var getPrototypeOf = Object.getPrototypeOf || function(obj) { return obj.__proto__; };
+   /* eslint-enable no-proto */
+
+   function asyncMap(inputs, func, callback) {
+       var remaining = inputs.length,
+           results = [],
+           errors = [];
+
+       inputs.forEach(function(d, i) {
+           func(d, function done(err, data) {
+               errors[i] = err;
+               results[i] = data;
+               remaining--;
+               if (!remaining) callback(errors, results);
+           });
+       });
+   }
+
    // wraps an index to an interval [0..length-1]
    function Wrap(index, length) {
        if (index < 0)
@@ -1729,6 +1794,58 @@
 
        return mutex;
    }
+
+   function SuggestNames(preset, suggestions) {
+       preset = preset.id.split('/', 2);
+       var k = preset[0],
+           v = preset[1];
+
+       return function(value, callback) {
+           var result = [];
+           if (value && value.length > 2) {
+               if (suggestions[k] && suggestions[k][v]) {
+                   for (var sugg in suggestions[k][v]) {
+                       var dist = editDistance(value, sugg.substring(0, value.length));
+                       if (dist < 3) {
+                           result.push({
+                               title: sugg,
+                               value: sugg,
+                               dist: dist
+                           });
+                       }
+                   }
+               }
+               result.sort(function(a, b) {
+                   return a.dist - b.dist;
+               });
+           }
+           result = result.slice(0,3);
+           callback(result);
+       };
+   }
+
+
+
+   var util = Object.freeze({
+   	tagText: tagText,
+   	entitySelector: entitySelector,
+   	entityOrMemberSelector: entityOrMemberSelector,
+   	displayName: displayName,
+   	displayType: displayType,
+   	stringQs: stringQs,
+   	qsString: qsString,
+   	prefixDOMProperty: prefixDOMProperty,
+   	prefixCSSProperty: prefixCSSProperty,
+   	setTransform: setTransform,
+   	getStyle: getStyle,
+   	editDistance: editDistance,
+   	fastMouse: fastMouse,
+   	getPrototypeOf: getPrototypeOf,
+   	asyncMap: asyncMap,
+   	wrap: Wrap,
+   	SessionMutex: SessionMutex,
+   	SuggestNames: SuggestNames
+   });
 
    function Graph(other, mutable) {
        if (!(this instanceof Graph)) return new Graph(other, mutable);
@@ -12255,7 +12372,11 @@
 >>>>>>> ef619c2... external modules for behavior
 =======
    exports.modes = modes;
+<<<<<<< HEAD
 >>>>>>> 75901f6... external modules for modes
+=======
+   exports.util = util;
+>>>>>>> 42ce4cf... external modules for util
    exports.Connection = Connection;
    exports.Difference = Difference;
    exports.Entity = Entity;
