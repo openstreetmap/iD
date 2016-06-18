@@ -1,3 +1,4 @@
+import { prefixCSSProperty } from '../util/index';
 export function TileLayer(context) {
     var tileSize = 256,
         tile = d3.geo.tile(),
@@ -5,7 +6,7 @@ export function TileLayer(context) {
         cache = {},
         tileOrigin,
         z,
-        transformProp = iD.util.prefixCSSProperty('Transform'),
+        transformProp = prefixCSSProperty('Transform'),
         source = d3.functor('');
 
 

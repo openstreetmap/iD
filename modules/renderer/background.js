@@ -1,3 +1,5 @@
+import { stringQs, qsString } from '../util/index';
+import { offsetToMeters, Extent, metersToOffset } from '../geo/index';
 import { BackgroundSource } from './background_source';
 import { TileLayer } from './tile_layer';
 
@@ -44,11 +46,11 @@ export function Background(context) {
     background.updateImagery = function() {
         var b = background.baseLayerSource(),
             o = overlayLayers.map(function (d) { return d.source().id; }).join(','),
-            meters = iD.geo.offsetToMeters(b.offset()),
+            meters = offsetToMeters(b.offset()),
             epsilon = 0.01,
             x = +meters[0].toFixed(2),
             y = +meters[1].toFixed(2),
-            q = iD.util.stringQs(location.hash.substring(1));
+            q = stringQs(location.hash.substring(1));
 
         var id = b.id;
         if (id === 'custom') {
@@ -73,7 +75,7 @@ export function Background(context) {
             delete q.offset;
         }
 
-        location.replace('#' + iD.util.qsString(q, true));
+        location.replace('#' + qsString(q, true));
 
         var imageryUsed = [b.imageryUsed()];
 
@@ -181,10 +183,10 @@ export function Background(context) {
             if (!qmap) return false;
             var args = qmap.split('/').map(Number);
             if (args.length < 3 || args.some(isNaN)) return false;
-            return iD.geo.Extent([args[1], args[2]]);
+            return Extent([args[1], args[2]]);
         }
 
-        var q = iD.util.stringQs(location.hash.substring(1)),
+        var q = stringQs(location.hash.substring(1)),
             chosen = q.background || q.layer,
             extent = parseMap(q.map),
             best;
@@ -238,7 +240,7 @@ export function Background(context) {
             });
 
             if (offset.length === 2) {
-                background.offset(iD.geo.metersToOffset(offset));
+                background.offset(metersToOffset(offset));
             }
         }
     };
