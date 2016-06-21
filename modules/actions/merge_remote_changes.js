@@ -1,4 +1,5 @@
 import { DeleteMultiple } from './delete_multiple';
+import { Entity } from '../core/index';
 
 export function MergeRemoteChanges(id, localGraph, remoteGraph, formatUser) {
     var option = 'safe',  // 'safe', 'force_local', 'force_remote'
@@ -96,14 +97,14 @@ export function MergeRemoteChanges(id, localGraph, remoteGraph, formatUser) {
                 updates.replacements.push(remote);
 
             } else if (option === 'force_local' && local) {
-                target = iD.Entity(local);
+                target = Entity(local);
                 if (remote) {
                     target = target.update({ version: remote.version });
                 }
                 updates.replacements.push(target);
 
             } else if (option === 'safe' && local && remote && local.version !== remote.version) {
-                target = iD.Entity(local, { version: remote.version });
+                target = Entity(local, { version: remote.version });
                 if (remote.visible) {
                     target = mergeLocation(remote, target);
                 } else {
@@ -201,7 +202,7 @@ export function MergeRemoteChanges(id, localGraph, remoteGraph, formatUser) {
             base = graph.base().entities[id],
             local = localGraph.entity(id),
             remote = remoteGraph.entity(id),
-            target = iD.Entity(local, { version: remote.version });
+            target = Entity(local, { version: remote.version });
 
         // delete/undelete
         if (!remote.visible) {

@@ -1,3 +1,6 @@
+import { joinWays, polygonContainsPolygon } from '../geo/index';
+import { Relation } from '../core/index';
+
 export function MergePolygon(ids, newRelationId) {
 
     function groupEntities(graph) {
@@ -25,7 +28,7 @@ export function MergePolygon(ids, newRelationId) {
         // Each element is itself an array of objects with an id property, and has a
         // locs property which is an array of the locations forming the polygon.
         var polygons = entities.multipolygon.reduce(function(polygons, m) {
-            return polygons.concat(iD.geo.joinWays(m.members, graph));
+            return polygons.concat(joinWays(m.members, graph));
         }, []).concat(entities.closedWay.map(function(d) {
             var member = [{id: d.id}];
             member.nodes = graph.childNodes(d);
@@ -38,7 +41,7 @@ export function MergePolygon(ids, newRelationId) {
         var contained = polygons.map(function(w, i) {
             return polygons.map(function(d, n) {
                 if (i === n) return null;
-                return iD.geo.polygonContainsPolygon(
+                return polygonContainsPolygon(
                     _.map(d.nodes, 'loc'),
                     _.map(w.nodes, 'loc'));
             });
@@ -79,7 +82,7 @@ export function MergePolygon(ids, newRelationId) {
 
         // Move all tags to one relation
         var relation = entities.multipolygon[0] ||
-            iD.Relation({ id: newRelationId, tags: { type: 'multipolygon' }});
+            Relation({ id: newRelationId, tags: { type: 'multipolygon' }});
 
         entities.multipolygon.slice(1).forEach(function(m) {
             relation = relation.mergeTags(m.tags);

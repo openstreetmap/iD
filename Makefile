@@ -43,10 +43,8 @@ $(BUILDJS_TARGETS): $(BUILDJS_SOURCES) build.js
 
 
 MODULE_TARGETS = \
-	js/lib/id/actions.js \
+	js/lib/id/index.js \
 	js/lib/id/behavior.js \
-	js/lib/id/core.js \
-	js/lib/id/geo.js \
 	js/lib/id/modes.js \
 	js/lib/id/operations.js \
 	js/lib/id/presets.js \
@@ -61,21 +59,13 @@ MODULE_TARGETS = \
 	js/lib/id/util.js \
 	js/lib/id/validations.js
 
-js/lib/id/actions.js: $(shell find modules/actions -type f)
+js/lib/id/index.js: $(shell find modules/index.js -type f)
 	@rm -f $@
-	node_modules/.bin/rollup -f umd -n iD.actions modules/actions/index.js --no-strict -o $@
+	node_modules/.bin/rollup -f umd -n iD modules/index.js --no-strict -o $@
 
 js/lib/id/behavior.js: $(shell find modules/behavior -type f)
 	@rm -f $@
 	node_modules/.bin/rollup -f umd -n iD.behavior modules/behavior/index.js --no-strict -o $@
-
-js/lib/id/core.js: $(shell find modules/core -type f)
-	@rm -f $@
-	node_modules/.bin/rollup -f umd -n iD modules/core/index.js --no-strict -o $@
-
-js/lib/id/geo.js: $(shell find modules/geo -type f)
-	@rm -f $@
-	node_modules/.bin/rollup -f umd -n iD.geo modules/geo/index.js --no-strict -o $@
 
 js/lib/id/modes.js: $(shell find modules/modes -type f)
 	@rm -f $@

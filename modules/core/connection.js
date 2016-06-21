@@ -2,6 +2,7 @@ import { Entity } from './entity';
 import { Way } from './way';
 import { Relation } from './relation';
 import { Node } from './node';
+import { Extent } from '../geo/index';
 
 export function Connection(useHttps) {
     if (typeof useHttps !== 'boolean') {
@@ -384,7 +385,7 @@ export function Connection(useHttps) {
 
                 return {
                     id: tile.toString(),
-                    extent: iD.geo.Extent(
+                    extent: Extent(
                         projection.invert([x, y + ts]),
                         projection.invert([x + ts, y]))
                 };

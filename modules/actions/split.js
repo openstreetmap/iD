@@ -1,4 +1,8 @@
 import { AddMember } from './add_member';
+import { sphericalDistance, isSimpleMultipolygonOuterMember} from '../geo/index';
+import { wrap as Wrap } from '../util/index';
+import { Way, Relation } from '../core/index';
+
 // Split a way at the given node.
 //
 // Optionally, split only the given ways, if multiple ways share
@@ -34,11 +38,11 @@ export function Split(nodeId, newWayIds) {
             idxB;
 
         function wrap(index) {
-            return iD.util.wrap(index, nodes.length);
+            return Wrap(index, nodes.length);
         }
 
         function dist(nA, nB) {
-            return iD.geo.sphericalDistance(graph.entity(nA).loc, graph.entity(nB).loc);
+            return sphericalDistance(graph.entity(nA).loc, graph.entity(nB).loc);
         }
 
         // calculate lengths
@@ -68,11 +72,11 @@ export function Split(nodeId, newWayIds) {
     }
 
     function split(graph, wayA, newWayId) {
-        var wayB = iD.Way({id: newWayId, tags: wayA.tags}),
+        var wayB = Way({id: newWayId, tags: wayA.tags}),
             nodesA,
             nodesB,
             isArea = wayA.isArea(),
-            isOuter = iD.geo.isSimpleMultipolygonOuterMember(wayA, graph);
+            isOuter = isSimpleMultipolygonOuterMember(wayA, graph);
 
         if (wayA.isClosed()) {
             var nodes = wayA.nodes.slice(0, -1),
@@ -123,7 +127,7 @@ export function Split(nodeId, newWayIds) {
         });
 
         if (!isOuter && isArea) {
-            var multipolygon = iD.Relation({
+            var multipolygon = Relation({
                 tags: _.extend({}, wayA.tags, {type: 'multipolygon'}),
                 members: [
                     {id: wayA.id, role: 'outer', type: 'way'},

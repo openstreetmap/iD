@@ -247,40 +247,6 @@
         return d3.rebind(step, event, 'on');
     }
 
-
-    function pointBox(point, context) {
-        var rect = context.surfaceRect();
-        point = context.projection(point);
-        return {
-            left: point[0] + rect.left - 30,
-            top: point[1] + rect.top - 50,
-            width: 60,
-            height: 70
-        };
-    }
-
-    function pad(box, padding, context) {
-        if (box instanceof Array) {
-            var rect = context.surfaceRect();
-            box = context.projection(box);
-            box = {
-                left: box[0] + rect.left,
-                top: box[1] + rect.top
-            };
-        }
-        return {
-            left: box.left - padding,
-            top: box.top - padding,
-            width: (box.width || 0) + 2 * padding,
-            height: (box.width || 0) + 2 * padding
-        };
-    }
-
-    function icon(name, svgklass) {
-        return '<svg class="icon ' + (svgklass || '') + '">' +
-            '<use xlink:href="' + name + '"></use></svg>';
-    }
-
     function navigation(context, reveal) {
         var event = d3.dispatch('done'),
             timeouts = [];
@@ -607,9 +573,6 @@
 
     exports.area = area;
     exports.line = line;
-    exports.pad = pad;
-    exports.pointBox = pointBox;
-    exports.icon = icon;
     exports.navigation = navigation;
     exports.point = point;
     exports.startEditing = startEditing;

@@ -1,5 +1,3 @@
-import { DeleteWay } from './delete_way';
-
 // Join ways at the end node they share.
 //
 // This is the inverse of `iD.actions.Split`.
@@ -8,6 +6,10 @@ import { DeleteWay } from './delete_way';
 //   https://github.com/systemed/potlatch2/blob/master/net/systemeD/halcyon/connection/actions/MergeWaysAction.as
 //   https://github.com/openstreetmap/josm/blob/mirror/src/org/openstreetmap/josm/actions/CombineWayAction.java
 //
+import { joinWays } from '../geo/index';
+import { interestingTag } from '../core/index';
+import { DeleteWay } from './delete_way';
+
 export function Join(ids) {
 
     function groupEntitiesByGeometry(graph) {
@@ -27,7 +29,7 @@ export function Join(ids) {
             }
         }
 
-        var joined = iD.geo.joinWays(ways, graph)[0];
+        var joined = joinWays(ways, graph)[0];
 
         survivor = survivor.update({nodes: _.map(joined.nodes, 'id')});
         graph = graph.replace(survivor);
@@ -54,7 +56,7 @@ export function Join(ids) {
         if (ids.length < 2 || ids.length !== geometries.line.length)
             return 'not_eligible';
 
-        var joined = iD.geo.joinWays(ids.map(graph.entity, graph), graph);
+        var joined = joinWays(ids.map(graph.entity, graph), graph);
         if (joined.length > 1)
             return 'not_adjacent';
 
@@ -73,7 +75,7 @@ export function Join(ids) {
             for (var k in way.tags) {
                 if (!(k in tags)) {
                     tags[k] = way.tags[k];
-                } else if (tags[k] && iD.interestingTag(k) && tags[k] !== way.tags[k]) {
+                } else if (tags[k] && interestingTag(k) && tags[k] !== way.tags[k]) {
                     conflicting = true;
                 }
             }

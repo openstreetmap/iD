@@ -1,5 +1,7 @@
 // iD.Node = iD.Entity.node;
 import { Entity } from './entity';
+import { Extent } from '../geo/index';
+
 export function Node() {
     if (!(this instanceof Node)) {
         return (new Node()).initialize(arguments);
@@ -16,7 +18,7 @@ _.extend(Node.prototype, {
     type: 'node',
 
     extent: function() {
-        return new iD.geo.Extent(this.loc);
+        return new Extent(this.loc);
     },
 
     geometry: function(graph) {
