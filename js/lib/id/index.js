@@ -418,6 +418,42 @@
            return false;
        },
 
+       lanes: function() {
+           // function parseTurnLane(str) {
+           //     if (!str || str === '') return null;
+           //
+           //     return str.split('|').map(function(s) {
+           //         return s.split(';');
+           //     });
+           // }
+
+           if (!this.tags.highway) return null;
+           var defaultLanes = {}, tagged = {};
+           switch (this.tags.highway) {
+               case 'trunk':
+               case 'motorway':
+                   defaultLanes.count = this.isOneWay() ? 2 : 4;
+                   break;
+               default:
+                   defaultLanes.count = this.isOneWay() ? 1 : 2;
+                   break;
+           }
+
+           tagged.oneway = this.isOneWay();
+           tagged.lanes = {};
+
+           if (this.tags.lanes) tagged.lanes.count = this.tags.lanes;
+           if (this.tags['lanes:forward']) tagged.lanes.forward = this.tags['lanes:forward'];
+           if (this.tags['lanes:backward']) tagged.lanes.backward = this.tags['lanes:backward'];
+
+           return {
+               defaults: {
+                   lanes: defaultLanes
+               },
+               tagged: tagged
+           };
+       },
+
        isClosed: function() {
            return this.nodes.length > 0 && this.first() === this.last();
        },
