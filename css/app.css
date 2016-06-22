@@ -159,6 +159,7 @@ input[type=url],
 input[type=tel],
 input[type=email] {
     background-color: white;
+    color: #333;
     border:1px solid #ccc;
     padding:5px 10px;
     height:30px;
