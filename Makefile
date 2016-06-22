@@ -46,6 +46,7 @@ MODULE_TARGETS = \
 	js/lib/id/index.js \
 	js/lib/id/services.js \
 	js/lib/id/ui/index.js \
+	js/lib/id/svg.js \
 	js/lib/id/ui/core.js \
 	js/lib/id/ui/intro.js \
 	js/lib/id/ui/preset.js
@@ -57,6 +58,10 @@ js/lib/id/index.js: $(shell find modules/index.js -type f)
 js/lib/id/services.js: $(shell find modules/services -type f)
 	@rm -f $@
 	node_modules/.bin/rollup -f umd -n iD.services modules/services/index.js --no-strict -o $@
+
+js/lib/id/svg.js: $(shell find modules/svg -type f)
+	@rm -f $@
+	node_modules/.bin/rollup -f umd -n iD.svg modules/svg/index.js --no-strict -o $@
 
 js/lib/id/ui/index.js: $(shell find modules/ui -type f)
 	@rm -f $@
