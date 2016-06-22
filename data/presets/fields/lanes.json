@@ -1,5 +1,6 @@
 {
     "key": "lanes",
-    "type": "lanes",
-    "label": "Lanes"
+    "type": "number",
+    "label": "Lanes",
+    "placeholder":"1, 2, 3..."
 }

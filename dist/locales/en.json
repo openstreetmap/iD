@@ -1046,7 +1046,8 @@
                 "label": "Type"
             },
             "lanes": {
-                "label": "Lanes"
+                "label": "Lanes",
+                "placeholder": "1, 2, 3..."
             },
             "layer": {
                 "label": "Layer"
