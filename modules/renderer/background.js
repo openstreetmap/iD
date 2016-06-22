@@ -59,6 +59,7 @@ export function Background(context) {
 
         if (id) {
             q.background = id;
+            context.storage('background', q.background);
         } else {
             delete q.background;
         }
@@ -187,7 +188,7 @@ export function Background(context) {
         }
 
         var q = stringQs(location.hash.substring(1)),
-            chosen = q.background || q.layer,
+            chosen = q.background || q.layer || context.storage('background'),
             extent = parseMap(q.map),
             best;
 
