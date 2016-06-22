@@ -1,9 +1,10 @@
+import { Orthogonalize as OrthogonalizeAction } from '../actions/index';
 export function Orthogonalize(selectedIDs, context) {
     var entityId = selectedIDs[0],
         entity = context.entity(entityId),
         extent = entity.extent(context.graph()),
         geometry = context.geometry(entityId),
-        action = iD.actions.Orthogonalize(entityId, context.projection);
+        action = OrthogonalizeAction(entityId, context.projection);
 
     var operation = function() {
         var annotation = t('operations.orthogonalize.annotation.' + geometry);

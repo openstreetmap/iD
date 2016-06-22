@@ -1,3 +1,4 @@
+import { DrawWay } from '../behavior/index';
 export function DrawLine(context, wayId, baseGraph, affix) {
     var mode = {
         button: 'line',
@@ -11,7 +12,7 @@ export function DrawLine(context, wayId, baseGraph, affix) {
             index = (affix === 'prefix') ? 0 : undefined,
             headId = (affix === 'prefix') ? way.first() : way.last();
 
-        behavior = iD.behavior.DrawWay(context, wayId, index, mode, baseGraph)
+        behavior = DrawWay(context, wayId, index, mode, baseGraph)
             .tail(t('modes.draw_line.tail'));
 
         var addNode = behavior.addNode;

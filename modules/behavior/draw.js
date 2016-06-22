@@ -1,3 +1,4 @@
+import { euclideanDistance, chooseEdge } from '../geo/index';
 import { Edit } from './edit';
 import { Hover } from './hover';
 import { Tail } from './tail';
@@ -46,7 +47,7 @@ export function Draw(context) {
         d3.select(window).on('mouseup.draw', function() {
             var t2 = +new Date(),
                 p2 = point(),
-                dist = iD.geo.euclideanDistance(p1, p2);
+                dist = euclideanDistance(p1, p2);
 
             element.on('mousemove.draw', mousemove);
             d3.select(window).on('mouseup.draw', null);
@@ -92,7 +93,7 @@ export function Draw(context) {
                     mouse[1] > pad && mouse[1] < dims[1] - pad;
 
             if (trySnap) {
-                var choice = iD.geo.chooseEdge(context.childNodes(d), context.mouse(), context.projection),
+                var choice = chooseEdge(context.childNodes(d), context.mouse(), context.projection),
                     edge = [d.nodes[choice.index - 1], d.nodes[choice.index]];
                 event.clickWay(choice.loc, edge);
             } else {
@@ -110,7 +111,7 @@ export function Draw(context) {
     function space() {
         var currSpace = context.mouse();
         if (cached.disableSpace && cached.lastSpace) {
-            var dist = iD.geo.euclideanDistance(cached.lastSpace, currSpace);
+            var dist = euclideanDistance(cached.lastSpace, currSpace);
             if (dist > tolerance) {
                 cached.disableSpace = false;
             }

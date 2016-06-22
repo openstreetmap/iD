@@ -1,3 +1,4 @@
+import { tagText } from '../util/index';
 export function DeprecatedTag() {
 
     var validation = function(changes) {
@@ -7,7 +8,7 @@ export function DeprecatedTag() {
                 deprecatedTags = change.deprecatedTags();
 
             if (!_.isEmpty(deprecatedTags)) {
-                var tags = iD.util.tagText({ tags: deprecatedTags });
+                var tags = tagText({ tags: deprecatedTags });
                 warnings.push({
                     id: 'deprecated_tags',
                     message: t('validations.deprecated_tags', { tags: tags }),

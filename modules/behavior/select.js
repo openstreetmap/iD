@@ -1,3 +1,5 @@
+import { Entity } from '../core/index';
+import { Browse, Select as SelectMode } from '../modes/index';
 export function Select(context) {
     function keydown() {
         if (d3.event && d3.event.shiftKey) {
@@ -18,25 +20,25 @@ export function Select(context) {
             lasso = d3.select('#surface .lasso').node(),
             mode = context.mode();
 
-        if (!(datum instanceof iD.Entity)) {
+        if (!(datum instanceof Entity)) {
             if (!d3.event.shiftKey && !lasso && mode.id !== 'browse')
-                context.enter(iD.modes.Browse(context));
+                context.enter(Browse(context));
 
         } else if (!d3.event.shiftKey && !lasso) {
             // Avoid re-entering Select mode with same entity.
             if (context.selectedIDs().length !== 1 || context.selectedIDs()[0] !== datum.id) {
-                context.enter(iD.modes.Select(context, [datum.id]));
+                context.enter(SelectMode(context, [datum.id]));
             } else {
                 mode.suppressMenu(false).reselect();
             }
         } else if (context.selectedIDs().indexOf(datum.id) >= 0) {
             var selectedIDs = _.without(context.selectedIDs(), datum.id);
             context.enter(selectedIDs.length ?
-                iD.modes.Select(context, selectedIDs) :
-                iD.modes.Browse(context));
+                SelectMode(context, selectedIDs) :
+                Browse(context));
 
         } else {
-            context.enter(iD.modes.Select(context, context.selectedIDs().concat([datum.id])));
+            context.enter(SelectMode(context, context.selectedIDs().concat([datum.id])));
         }
     }
 

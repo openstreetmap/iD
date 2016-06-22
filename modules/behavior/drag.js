@@ -1,3 +1,4 @@
+import { prefixCSSProperty, prefixDOMProperty } from '../util/index';
 /*
     `iD.behavior.drag` is like `d3.behavior.drag`, with the following differences:
 
@@ -39,7 +40,7 @@ export function drag() {
       };
     };
 
-    var d3_event_userSelectProperty = iD.util.prefixCSSProperty('UserSelect'),
+    var d3_event_userSelectProperty = prefixCSSProperty('UserSelect'),
         d3_event_userSelectSuppress = d3_event_userSelectProperty ?
             function () {
                 var selection = d3.selection(),
@@ -134,7 +135,7 @@ export function drag() {
     }
 
     function drag(selection) {
-        var matchesSelector = iD.util.prefixDOMProperty('matchesSelector'),
+        var matchesSelector = prefixDOMProperty('matchesSelector'),
             delegate = mousedown;
 
         if (selector) {

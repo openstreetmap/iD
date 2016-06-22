@@ -1,3 +1,7 @@
+import { AddWay } from '../behavior/index';
+import { Node, Way } from '../core/index';
+import { DrawLine } from './index';
+import { AddEntity, AddVertex, AddMidpoint } from '../actions/index';
 export function AddLine(context) {
     var mode = {
         id: 'add-line',
@@ -7,7 +11,7 @@ export function AddLine(context) {
         key: '2'
     };
 
-    var behavior = iD.behavior.AddWay(context)
+    var behavior = AddWay(context)
         .tail(t('modes.add_line.tail'))
         .on('start', start)
         .on('startFromWay', startFromWay)
@@ -15,40 +19,40 @@ export function AddLine(context) {
 
     function start(loc) {
         var baseGraph = context.graph(),
-            node = iD.Node({loc: loc}),
-            way = iD.Way();
+            node = Node({loc: loc}),
+            way = Way();
 
         context.perform(
-            iD.actions.AddEntity(node),
-            iD.actions.AddEntity(way),
-            iD.actions.AddVertex(way.id, node.id));
+            AddEntity(node),
+            AddEntity(way),
+            AddVertex(way.id, node.id));
 
-        context.enter(iD.modes.DrawLine(context, way.id, baseGraph));
+        context.enter(DrawLine(context, way.id, baseGraph));
     }
 
     function startFromWay(loc, edge) {
         var baseGraph = context.graph(),
-            node = iD.Node({loc: loc}),
-            way = iD.Way();
+            node = Node({loc: loc}),
+            way = Way();
 
         context.perform(
-            iD.actions.AddEntity(node),
-            iD.actions.AddEntity(way),
-            iD.actions.AddVertex(way.id, node.id),
-            iD.actions.AddMidpoint({ loc: loc, edge: edge }, node));
+            AddEntity(node),
+            AddEntity(way),
+            AddVertex(way.id, node.id),
+            AddMidpoint({ loc: loc, edge: edge }, node));
 
-        context.enter(iD.modes.DrawLine(context, way.id, baseGraph));
+        context.enter(DrawLine(context, way.id, baseGraph));
     }
 
     function startFromNode(node) {
         var baseGraph = context.graph(),
-            way = iD.Way();
+            way = Way();
 
         context.perform(
-            iD.actions.AddEntity(way),
-            iD.actions.AddVertex(way.id, node.id));
+            AddEntity(way),
+            AddVertex(way.id, node.id));
 
-        context.enter(iD.modes.DrawLine(context, way.id, baseGraph));
+        context.enter(DrawLine(context, way.id, baseGraph));
     }
 
     mode.enter = function() {

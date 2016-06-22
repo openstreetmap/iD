@@ -1,5 +1,8 @@
+import { Select, Browse } from '../modes/index';
+import { sphericalDistance } from '../geo/index';
+import { DeleteMultiple } from '../actions/index';
 export function Delete(selectedIDs, context) {
-    var action = iD.actions.DeleteMultiple(selectedIDs);
+    var action = DeleteMultiple(selectedIDs);
 
     var operation = function() {
         var annotation,
@@ -27,8 +30,8 @@ export function Delete(selectedIDs, context) {
                 } else if (i === nodes.length - 1) {
                     i--;
                 } else {
-                    var a = iD.geo.sphericalDistance(entity.loc, context.entity(nodes[i - 1]).loc),
-                        b = iD.geo.sphericalDistance(entity.loc, context.entity(nodes[i + 1]).loc);
+                    var a = sphericalDistance(entity.loc, context.entity(nodes[i - 1]).loc),
+                        b = sphericalDistance(entity.loc, context.entity(nodes[i + 1]).loc);
                     i = a < b ? i - 1 : i + 1;
                 }
 
@@ -37,9 +40,9 @@ export function Delete(selectedIDs, context) {
         }
 
         if (nextSelectedID && context.hasEntity(nextSelectedID)) {
-            context.enter(iD.modes.Select(context, [nextSelectedID]));
+            context.enter(Select(context, [nextSelectedID]));
         } else {
-            context.enter(iD.modes.Browse(context));
+            context.enter(Browse(context));
         }
 
         context.perform(

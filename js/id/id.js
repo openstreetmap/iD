@@ -1,3 +1,4 @@
+/*global iD*/
 window.iD = function () {
     window.locale.en = iD.data.en;
     window.locale.current('en');

@@ -1,3 +1,8 @@
+import { setTransform, fastMouse } from '../util/index';
+import { interp, Extent } from '../geo/index';
+import { Layers, Areas, Midpoints, Points, Vertices, Lines, Labels } from '../svg/index';
+import { flash } from '../ui/core/index';
+
 export function Map(context) {
     var dimensions = [1, 1],
         dispatch = d3.dispatch('move', 'drawn'),
@@ -13,13 +18,13 @@ export function Map(context) {
         transformed = false,
         easing = false,
         minzoom = 0,
-        drawLayers = iD.svg.Layers(projection, context),
-        drawPoints = iD.svg.Points(projection, context),
-        drawVertices = iD.svg.Vertices(projection, context),
-        drawLines = iD.svg.Lines(projection),
-        drawAreas = iD.svg.Areas(projection),
-        drawMidpoints = iD.svg.Midpoints(projection, context),
-        drawLabels = iD.svg.Labels(projection, context),
+        drawLayers = Layers(projection, context),
+        drawPoints = Points(projection, context),
+        drawVertices = Vertices(projection, context),
+        drawLines = Lines(projection),
+        drawAreas = Areas(projection),
+        drawMidpoints = Midpoints(projection, context),
+        drawLabels = Labels(projection, context),
         supersurface,
         wrapper,
         surface,
@@ -47,7 +52,7 @@ export function Map(context) {
 
         supersurface = selection.append('div')
             .attr('id', 'supersurface')
-            .call(iD.util.setTransform, 0, 0);
+            .call(setTransform, 0, 0);
 
         // Need a wrapper div because Opera can't cope with an absolutely positioned
         // SVG element: http://bl.ocks.org/jfirebaugh/6fbfbd922552bf776c16
@@ -174,7 +179,7 @@ export function Map(context) {
     function zoomPan() {
         if (Math.log(d3.event.scale) / Math.LN2 - 8 < minzoom) {
             surface.interrupt();
-            iD.ui.flash(context.container())
+            flash(context.container())
                 .select('.content')
                 .text(t('cannot_zoom'));
             setZoom(context.minEditableZoom(), true);
@@ -192,7 +197,7 @@ export function Map(context) {
             tY = (d3.event.translate[1] / scale - transformStart[1][1]) * scale;
 
         transformed = true;
-        iD.util.setTransform(supersurface, tX, tY, scale);
+        setTransform(supersurface, tX, tY, scale);
         queueRedraw();
 
         dispatch.move(map);
@@ -202,7 +207,7 @@ export function Map(context) {
         if (!transformed) return false;
 
         surface.selectAll('.radial-menu').interrupt().remove();
-        iD.util.setTransform(supersurface, 0, 0);
+        setTransform(supersurface, 0, 0);
         transformed = false;
         return true;
     }
@@ -351,7 +356,7 @@ export function Map(context) {
         drawLayers.dimensions(dimensions);
         context.background().dimensions(dimensions);
         projection.clipExtent([[0, 0], dimensions]);
-        mouse = iD.util.fastMouse(supersurface.node());
+        mouse = fastMouse(supersurface.node());
         setCenter(center);
         return redraw();
     };
@@ -389,7 +394,7 @@ export function Map(context) {
 
         if (z < minzoom) {
             surface.interrupt();
-            iD.ui.flash(context.container())
+            flash(context.container())
                 .select('.content')
                 .text(t('cannot_zoom'));
             z = context.minEditableZoom();
@@ -449,7 +454,7 @@ export function Map(context) {
                 easing = false;
             }
 
-            var locNow = iD.geo.interp(loc1, loc2, ease((tNow - t1) / duration));
+            var locNow = interp(loc1, loc2, ease((tNow - t1) / duration));
             setCenter(locNow);
 
             d3.event = {
@@ -472,10 +477,10 @@ export function Map(context) {
 
     map.extent = function(_) {
         if (!arguments.length) {
-            return new iD.geo.Extent(projection.invert([0, dimensions[1]]),
+            return new Extent(projection.invert([0, dimensions[1]]),
                                  projection.invert([dimensions[0], 0]));
         } else {
-            var extent = iD.geo.Extent(_);
+            var extent = Extent(_);
             map.centerZoom(extent.center(), map.extentZoom(extent));
         }
     };
@@ -483,10 +488,10 @@ export function Map(context) {
     map.trimmedExtent = function(_) {
         if (!arguments.length) {
             var headerY = 60, footerY = 30, pad = 10;
-            return new iD.geo.Extent(projection.invert([pad, dimensions[1] - footerY - pad]),
+            return new Extent(projection.invert([pad, dimensions[1] - footerY - pad]),
                     projection.invert([dimensions[0] - pad, headerY + pad]));
         } else {
-            var extent = iD.geo.Extent(_);
+            var extent = Extent(_);
             map.centerZoom(extent.center(), map.trimmedExtentZoom(extent));
         }
     };
@@ -506,13 +511,13 @@ export function Map(context) {
     }
 
     map.extentZoom = function(_) {
-        return calcZoom(iD.geo.Extent(_), dimensions);
+        return calcZoom(Extent(_), dimensions);
     };
 
     map.trimmedExtentZoom = function(_) {
         var trimY = 120, trimX = 40,
             trimmed = [dimensions[0] - trimX, dimensions[1] - trimY];
-        return calcZoom(iD.geo.Extent(_), trimmed);
+        return calcZoom(Extent(_), trimmed);
     };
 
     map.editable = function() {

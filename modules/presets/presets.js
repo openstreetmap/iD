@@ -1,12 +1,17 @@
+import { Collection } from './collection';
+import { Field } from './field';
+import { Preset } from './preset';
+import { Category } from './category';
+
 export function presets() {
     // an iD.presets.Collection with methods for
     // loading new data and returning defaults
 
-    var all = iD.presets.Collection([]),
+    var all = Collection([]),
         defaults = { area: all, line: all, point: all, vertex: all, relation: all },
         fields = {},
         universal = [],
-        recent = iD.presets.Collection([]);
+        recent = Collection([]);
 
     // Index of presets by (geometry, tag key).
     var index = {
@@ -48,7 +53,7 @@ export function presets() {
     //
     // The returned object L is a whitelist/blacklist of tags. A closed way
     // with a tag (k, v) is considered to be an area if `k in L && !(v in L[k])`
-    // (see `iD.Way#isArea()`). In other words, the keys of L form the whitelist,
+    // (see `Way#isArea()`). In other words, the keys of L form the whitelist,
     // and the subkeys form the blacklist.
     all.areaKeys = function() {
         var areaKeys = {},
@@ -87,31 +92,31 @@ export function presets() {
 
         if (d.fields) {
             _.forEach(d.fields, function(d, id) {
-                fields[id] = iD.presets.Field(id, d);
+                fields[id] = Field(id, d);
                 if (d.universal) universal.push(fields[id]);
             });
         }
 
         if (d.presets) {
             _.forEach(d.presets, function(d, id) {
-                all.collection.push(iD.presets.Preset(id, d, fields));
+                all.collection.push(Preset(id, d, fields));
             });
         }
 
         if (d.categories) {
             _.forEach(d.categories, function(d, id) {
-                all.collection.push(iD.presets.Category(id, d, all));
+                all.collection.push(Category(id, d, all));
             });
         }
 
         if (d.defaults) {
             var getItem = _.bind(all.item, all);
             defaults = {
-                area: iD.presets.Collection(d.defaults.area.map(getItem)),
-                line: iD.presets.Collection(d.defaults.line.map(getItem)),
-                point: iD.presets.Collection(d.defaults.point.map(getItem)),
-                vertex: iD.presets.Collection(d.defaults.vertex.map(getItem)),
-                relation: iD.presets.Collection(d.defaults.relation.map(getItem))
+                area: Collection(d.defaults.area.map(getItem)),
+                line: Collection(d.defaults.line.map(getItem)),
+                point: Collection(d.defaults.point.map(getItem)),
+                vertex: Collection(d.defaults.vertex.map(getItem)),
+                relation: Collection(d.defaults.relation.map(getItem))
             };
         }
 
@@ -141,12 +146,12 @@ export function presets() {
     all.defaults = function(geometry, n) {
         var rec = recent.matchGeometry(geometry).collection.slice(0, 4),
             def = _.uniq(rec.concat(defaults[geometry].collection)).slice(0, n - 1);
-        return iD.presets.Collection(_.uniq(rec.concat(def).concat(all.item(geometry))));
+        return Collection(_.uniq(rec.concat(def).concat(all.item(geometry))));
     };
 
     all.choose = function(preset) {
         if (!preset.isFallback()) {
-            recent = iD.presets.Collection(_.uniq([preset].concat(recent.collection)));
+            recent = Collection(_.uniq([preset].concat(recent.collection)));
         }
         return all;
     };

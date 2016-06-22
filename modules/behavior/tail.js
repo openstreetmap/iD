@@ -1,3 +1,4 @@
+import { setTransform } from '../util/index';
 export function Tail() {
     var text,
         container,
@@ -21,7 +22,7 @@ export function Tail() {
             var xoffset = ((d3.event.clientX + tooltipSize[0] + xmargin) > selectionSize[0]) ?
                 -tooltipSize[0] - xmargin : xmargin;
             container.classed('left', xoffset > 0);
-            iD.util.setTransform(container, d3.event.clientX + xoffset, d3.event.clientY);
+            setTransform(container, d3.event.clientX + xoffset, d3.event.clientY);
         }
 
         function mouseleave() {

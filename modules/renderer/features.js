@@ -1,3 +1,4 @@
+import { Entity } from '../core/index';
 export function Features(context) {
     var traffic_roads = {
         'motorway': true,
@@ -271,7 +272,7 @@ export function Features(context) {
     };
 
     features.clearEntity = function(entity) {
-        delete _cache[iD.Entity.key(entity)];
+        delete _cache[Entity.key(entity)];
     };
 
     features.reset = function() {
@@ -281,7 +282,7 @@ export function Features(context) {
     features.getMatches = function(entity, resolver, geometry) {
         if (geometry === 'vertex' || geometry === 'relation') return {};
 
-        var ent = iD.Entity.key(entity);
+        var ent = Entity.key(entity);
         if (!_cache[ent]) {
             _cache[ent] = {};
         }
@@ -307,7 +308,7 @@ export function Features(context) {
                     if (entity.type === 'way') {
                         var parents = features.getParents(entity, resolver, geometry);
                         if (parents.length === 1 && parents[0].isMultipolygon()) {
-                            var pkey = iD.Entity.key(parents[0]);
+                            var pkey = Entity.key(parents[0]);
                             if (_cache[pkey] && _cache[pkey].matches) {
                                 matches = _.clone(_cache[pkey].matches);
                                 continue;
@@ -329,7 +330,7 @@ export function Features(context) {
     features.getParents = function(entity, resolver, geometry) {
         if (geometry === 'point') return [];
 
-        var ent = iD.Entity.key(entity);
+        var ent = Entity.key(entity);
         if (!_cache[ent]) {
             _cache[ent] = {};
         }

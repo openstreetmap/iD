@@ -1,3 +1,6 @@
+import { Edit } from '../behavior/index';
+import { Select, Browse } from './index';
+import { Noop, RotateWay as RotateWayAction } from '../actions/index';
 export function RotateWay(context, wayId) {
     var mode = {
         id: 'rotate-way',
@@ -5,7 +8,7 @@ export function RotateWay(context, wayId) {
     };
 
     var keybinding = d3.keybinding('rotate-way'),
-        edit = iD.behavior.Edit(context);
+        edit = Edit(context);
 
     mode.enter = function() {
         context.install(edit);
@@ -18,7 +21,7 @@ export function RotateWay(context, wayId) {
             angle;
 
         context.perform(
-            iD.actions.Noop(),
+            Noop(),
             annotation);
 
         function rotate() {
@@ -29,7 +32,7 @@ export function RotateWay(context, wayId) {
             if (typeof angle === 'undefined') angle = newAngle;
 
             context.replace(
-                iD.actions.RotateWay(wayId, pivot, newAngle - angle, context.projection),
+                RotateWayAction(wayId, pivot, newAngle - angle, context.projection),
                 annotation);
 
             angle = newAngle;
@@ -37,18 +40,18 @@ export function RotateWay(context, wayId) {
 
         function finish() {
             d3.event.stopPropagation();
-            context.enter(iD.modes.Select(context, [wayId])
+            context.enter(Select(context, [wayId])
                 .suppressMenu(true));
         }
 
         function cancel() {
             context.pop();
-            context.enter(iD.modes.Select(context, [wayId])
+            context.enter(Select(context, [wayId])
                 .suppressMenu(true));
         }
 
         function undone() {
-            context.enter(iD.modes.Browse(context));
+            context.enter(Browse(context));
         }
 
         context.surface()

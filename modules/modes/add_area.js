@@ -1,3 +1,7 @@
+import { AddWay } from '../behavior/index';
+import { Node, Way } from '../core/index';
+import { DrawArea } from './index';
+import { AddEntity, AddVertex, AddMidpoint } from '../actions/index';
 export function AddArea(context) {
     var mode = {
         id: 'add-area',
@@ -7,7 +11,7 @@ export function AddArea(context) {
         key: '3'
     };
 
-    var behavior = iD.behavior.AddWay(context)
+    var behavior = AddWay(context)
             .tail(t('modes.add_area.tail'))
             .on('start', start)
             .on('startFromWay', startFromWay)
@@ -16,43 +20,43 @@ export function AddArea(context) {
 
     function start(loc) {
         var graph = context.graph(),
-            node = iD.Node({loc: loc}),
-            way = iD.Way({tags: defaultTags});
+            node = Node({loc: loc}),
+            way = Way({tags: defaultTags});
 
         context.perform(
-            iD.actions.AddEntity(node),
-            iD.actions.AddEntity(way),
-            iD.actions.AddVertex(way.id, node.id),
-            iD.actions.AddVertex(way.id, node.id));
+            AddEntity(node),
+            AddEntity(way),
+            AddVertex(way.id, node.id),
+            AddVertex(way.id, node.id));
 
-        context.enter(iD.modes.DrawArea(context, way.id, graph));
+        context.enter(DrawArea(context, way.id, graph));
     }
 
     function startFromWay(loc, edge) {
         var graph = context.graph(),
-            node = iD.Node({loc: loc}),
-            way = iD.Way({tags: defaultTags});
+            node = Node({loc: loc}),
+            way = Way({tags: defaultTags});
 
         context.perform(
-            iD.actions.AddEntity(node),
-            iD.actions.AddEntity(way),
-            iD.actions.AddVertex(way.id, node.id),
-            iD.actions.AddVertex(way.id, node.id),
-            iD.actions.AddMidpoint({ loc: loc, edge: edge }, node));
+            AddEntity(node),
+            AddEntity(way),
+            AddVertex(way.id, node.id),
+            AddVertex(way.id, node.id),
+            AddMidpoint({ loc: loc, edge: edge }, node));
 
-        context.enter(iD.modes.DrawArea(context, way.id, graph));
+        context.enter(DrawArea(context, way.id, graph));
     }
 
     function startFromNode(node) {
         var graph = context.graph(),
-            way = iD.Way({tags: defaultTags});
+            way = Way({tags: defaultTags});
 
         context.perform(
-            iD.actions.AddEntity(way),
-            iD.actions.AddVertex(way.id, node.id),
-            iD.actions.AddVertex(way.id, node.id));
+            AddEntity(way),
+            AddVertex(way.id, node.id),
+            AddVertex(way.id, node.id));
 
-        context.enter(iD.modes.DrawArea(context, way.id, graph));
+        context.enter(DrawArea(context, way.id, graph));
     }
 
     mode.enter = function() {

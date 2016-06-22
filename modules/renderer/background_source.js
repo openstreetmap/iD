@@ -1,3 +1,4 @@
+import { polygonIntersectsPolygon, Extent } from '../geo/index';
 export function BackgroundSource(data) {
     var source = _.clone(data),
         offset = [0, 0],
@@ -64,7 +65,7 @@ export function BackgroundSource(data) {
     source.intersects = function(extent) {
         extent = extent.polygon();
         return !data.polygon || data.polygon.some(function(polygon) {
-            return iD.geo.polygonIntersectsPolygon(polygon, extent, true);
+            return polygonIntersectsPolygon(polygon, extent, true);
         });
     };
 
@@ -101,7 +102,7 @@ BackgroundSource.Bing = function(data, dispatch) {
                 areas: provider.coverageAreas.map(function(area) {
                     return {
                         zoom: [area.zoomMin, area.zoomMax],
-                        extent: iD.geo.Extent([area.bbox[1], area.bbox[0]], [area.bbox[3], area.bbox[2]])
+                        extent: Extent([area.bbox[1], area.bbox[0]], [area.bbox[3], area.bbox[2]])
                     };
                 })
             };

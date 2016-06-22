@@ -1,6 +1,13 @@
 import * as actions from './actions/index';
 import * as geo from './geo/index';
+import * as behavior from './behavior/index';
+import * as modes from './modes/index';
+import * as util from './util/index';
+import * as operations from './operations/index';
+import * as presets from './presets/index';
+import * as validations from './validations/index';
 
+// core
 export { Connection } from './core/connection';
 export { Difference } from './core/difference';
 export { Entity } from './core/entity';
@@ -12,7 +19,20 @@ export { oneWayTags, pavedTags, interestingTag } from './core/tags';
 export { Tree } from './core/tree';
 export { Way } from './core/way';
 
+// renderer
+export { BackgroundSource } from './renderer/background_source';
+export { Background } from './renderer/background';
+export { Features } from './renderer/features';
+export { Map } from './renderer/map';
+export { TileLayer } from './renderer/tile_layer';
+
 export {
   actions,
-  geo
+  geo,
+  behavior,
+  modes,
+  operations,
+  presets,
+  util,
+  validations
 };

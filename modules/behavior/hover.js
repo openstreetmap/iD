@@ -1,3 +1,4 @@
+import { Entity } from '../core/index';
 /*
    The hover behavior adds the `.hover` class on mouseover to all elements to which
    the identical datum is bound, and removes it on mouseout.
@@ -44,7 +45,7 @@ export function Hover() {
             selection.selectAll('.hover-suppressed')
                 .classed('hover-suppressed', false);
 
-            if (target instanceof iD.Entity) {
+            if (target instanceof Entity) {
                 var selector = '.' + target.id;
 
                 if (target.type === 'relation') {

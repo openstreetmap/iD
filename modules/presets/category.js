@@ -1,9 +1,10 @@
+import { Collection } from './collection';
 export function Category(id, category, all) {
     category = _.clone(category);
 
     category.id = id;
 
-    category.members = iD.presets.Collection(category.members.map(function(id) {
+    category.members = Collection(category.members.map(function(id) {
         return all.item(id);
     }));
 

@@ -1,3 +1,4 @@
+import { DrawWay } from '../behavior/index';
 export function DrawArea(context, wayId, baseGraph) {
     var mode = {
         button: 'area',
@@ -11,7 +12,7 @@ export function DrawArea(context, wayId, baseGraph) {
             headId = way.nodes[way.nodes.length - 2],
             tailId = way.first();
 
-        behavior = iD.behavior.DrawWay(context, wayId, -1, mode, baseGraph)
+        behavior = DrawWay(context, wayId, -1, mode, baseGraph)
             .tail(t('modes.draw_area.tail'));
 
         var addNode = behavior.addNode;

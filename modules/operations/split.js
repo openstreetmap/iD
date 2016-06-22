@@ -1,10 +1,12 @@
+import { Select } from '../modes/index';
+import { Split as SplitAction } from '../actions/index';
 export function Split(selectedIDs, context) {
     var vertices = _.filter(selectedIDs, function vertex(entityId) {
         return context.geometry(entityId) === 'vertex';
     });
 
     var entityId = vertices[0],
-        action = iD.actions.Split(entityId);
+        action = SplitAction(entityId);
 
     if (selectedIDs.length > 1) {
         action.limitWays(_.without(selectedIDs, entityId));
@@ -21,7 +23,7 @@ export function Split(selectedIDs, context) {
         }
 
         var difference = context.perform(action, annotation);
-        context.enter(iD.modes.Select(context, difference.extantIDs()));
+        context.enter(Select(context, difference.extantIDs()));
     };
 
     operation.available = function() {

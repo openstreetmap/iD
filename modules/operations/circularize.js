@@ -1,9 +1,10 @@
+import { Circularize as CircularizeAction } from '../actions/index';
 export function Circularize(selectedIDs, context) {
     var entityId = selectedIDs[0],
         entity = context.entity(entityId),
         extent = entity.extent(context.graph()),
         geometry = context.geometry(entityId),
-        action = iD.actions.Circularize(entityId, context.projection);
+        action = CircularizeAction(entityId, context.projection);
 
     var operation = function() {
         var annotation = t('operations.circularize.annotation.' + geometry);

@@ -4,32 +4,6 @@
     (factory((global.iD = global.iD || {}, global.iD.presets = global.iD.presets || {})));
 }(this, function (exports) { 'use strict';
 
-    function Category(id, category, all) {
-        category = _.clone(category);
-
-        category.id = id;
-
-        category.members = iD.presets.Collection(category.members.map(function(id) {
-            return all.item(id);
-        }));
-
-        category.matchGeometry = function(geometry) {
-            return category.geometry.indexOf(geometry) >= 0;
-        };
-
-        category.matchScore = function() { return -1; };
-
-        category.name = function() {
-            return t('presets.categories.' + id + '.name', {'default': id});
-        };
-
-        category.terms = function() {
-            return [];
-        };
-
-        return category;
-    }
-
     function Collection(collection) {
         var maxSearchResults = 50,
             maxSuggestionResults = 10;
@@ -45,7 +19,7 @@
             },
 
             matchGeometry: function(geometry) {
-                return iD.presets.Collection(collection.filter(function(d) {
+                return Collection(collection.filter(function(d) {
                     return d.matchGeometry(geometry);
                 }));
             },
@@ -150,13 +124,39 @@
                                 leven_suggestions.slice(0, maxSuggestionResults)
                             ).slice(0, maxSearchResults-1);
 
-                return iD.presets.Collection(_.uniq(
+                return Collection(_.uniq(
                         results.concat(other)
                     ));
             }
         };
 
         return presets;
+    }
+
+    function Category(id, category, all) {
+        category = _.clone(category);
+
+        category.id = id;
+
+        category.members = Collection(category.members.map(function(id) {
+            return all.item(id);
+        }));
+
+        category.matchGeometry = function(geometry) {
+            return category.geometry.indexOf(geometry) >= 0;
+        };
+
+        category.matchScore = function() { return -1; };
+
+        category.name = function() {
+            return t('presets.categories.' + id + '.name', {'default': id});
+        };
+
+        category.terms = function() {
+            return [];
+        };
+
+        return category;
     }
 
     function Field(id, field) {
@@ -318,11 +318,11 @@
         // an iD.presets.Collection with methods for
         // loading new data and returning defaults
 
-        var all = iD.presets.Collection([]),
+        var all = Collection([]),
             defaults = { area: all, line: all, point: all, vertex: all, relation: all },
             fields = {},
             universal = [],
-            recent = iD.presets.Collection([]);
+            recent = Collection([]);
 
         // Index of presets by (geometry, tag key).
         var index = {
@@ -403,31 +403,31 @@
 
             if (d.fields) {
                 _.forEach(d.fields, function(d, id) {
-                    fields[id] = iD.presets.Field(id, d);
+                    fields[id] = Field(id, d);
                     if (d.universal) universal.push(fields[id]);
                 });
             }
 
             if (d.presets) {
                 _.forEach(d.presets, function(d, id) {
-                    all.collection.push(iD.presets.Preset(id, d, fields));
+                    all.collection.push(Preset(id, d, fields));
                 });
             }
 
             if (d.categories) {
                 _.forEach(d.categories, function(d, id) {
-                    all.collection.push(iD.presets.Category(id, d, all));
+                    all.collection.push(Category(id, d, all));
                 });
             }
 
             if (d.defaults) {
                 var getItem = _.bind(all.item, all);
                 defaults = {
-                    area: iD.presets.Collection(d.defaults.area.map(getItem)),
-                    line: iD.presets.Collection(d.defaults.line.map(getItem)),
-                    point: iD.presets.Collection(d.defaults.point.map(getItem)),
-                    vertex: iD.presets.Collection(d.defaults.vertex.map(getItem)),
-                    relation: iD.presets.Collection(d.defaults.relation.map(getItem))
+                    area: Collection(d.defaults.area.map(getItem)),
+                    line: Collection(d.defaults.line.map(getItem)),
+                    point: Collection(d.defaults.point.map(getItem)),
+                    vertex: Collection(d.defaults.vertex.map(getItem)),
+                    relation: Collection(d.defaults.relation.map(getItem))
                 };
             }
 
@@ -457,12 +457,12 @@
         all.defaults = function(geometry, n) {
             var rec = recent.matchGeometry(geometry).collection.slice(0, 4),
                 def = _.uniq(rec.concat(defaults[geometry].collection)).slice(0, n - 1);
-            return iD.presets.Collection(_.uniq(rec.concat(def).concat(all.item(geometry))));
+            return Collection(_.uniq(rec.concat(def).concat(all.item(geometry))));
         };
 
         all.choose = function(preset) {
             if (!preset.isFallback()) {
-                recent = iD.presets.Collection(_.uniq([preset].concat(recent.collection)));
+                recent = Collection(_.uniq([preset].concat(recent.collection)));
             }
             return all;
         };

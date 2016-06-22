@@ -1,3 +1,4 @@
+import { RotateWay } from '../modes/index';
 export function Rotate(selectedIDs, context) {
     var entityId = selectedIDs[0],
         entity = context.entity(entityId),
@@ -5,7 +6,7 @@ export function Rotate(selectedIDs, context) {
         geometry = context.geometry(entityId);
 
     var operation = function() {
-        context.enter(iD.modes.RotateWay(context, entityId));
+        context.enter(RotateWay(context, entityId));
     };
 
     operation.available = function() {

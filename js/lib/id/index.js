@@ -1571,8 +1571,177 @@
        return difference;
    }
 
+   function tagText(entity) {
+       return d3.entries(entity.tags).map(function(e) {
+           return e.key + '=' + e.value;
+       }).join(', ');
+   }
+
+   function entitySelector(ids) {
+       return ids.length ? '.' + ids.join(',.') : 'nothing';
+   }
+
+   function entityOrMemberSelector(ids, graph) {
+       var s = entitySelector(ids);
+
+       ids.forEach(function(id) {
+           var entity = graph.hasEntity(id);
+           if (entity && entity.type === 'relation') {
+               entity.members.forEach(function(member) {
+                   s += ',.' + member.id;
+               });
+           }
+       });
+
+       return s;
+   }
+
+   function displayName(entity) {
+       var localeName = 'name:' + iD.detect().locale.toLowerCase().split('-')[0];
+       return entity.tags[localeName] || entity.tags.name || entity.tags.ref;
+   }
+
+   function displayType(id) {
+       return {
+           n: t('inspector.node'),
+           w: t('inspector.way'),
+           r: t('inspector.relation')
+       }[id.charAt(0)];
+   }
+
+   function stringQs(str) {
+       return str.split('&').reduce(function(obj, pair){
+           var parts = pair.split('=');
+           if (parts.length === 2) {
+               obj[parts[0]] = (null === parts[1]) ? '' : decodeURIComponent(parts[1]);
+           }
+           return obj;
+       }, {});
+   }
+
+   function qsString(obj, noencode) {
+       function softEncode(s) {
+         // encode everything except special characters used in certain hash parameters:
+         // "/" in map states, ":", ",", {" and "}" in background
+         return encodeURIComponent(s).replace(/(%2F|%3A|%2C|%7B|%7D)/g, decodeURIComponent);
+       }
+       return Object.keys(obj).sort().map(function(key) {
+           return encodeURIComponent(key) + '=' + (
+               noencode ? softEncode(obj[key]) : encodeURIComponent(obj[key]));
+       }).join('&');
+   }
+
+   function prefixDOMProperty(property) {
+       var prefixes = ['webkit', 'ms', 'moz', 'o'],
+           i = -1,
+           n = prefixes.length,
+           s = document.body;
+
+       if (property in s)
+           return property;
+
+       property = property.substr(0, 1).toUpperCase() + property.substr(1);
+
+       while (++i < n)
+           if (prefixes[i] + property in s)
+               return prefixes[i] + property;
+
+       return false;
+   }
+
+   function prefixCSSProperty(property) {
+       var prefixes = ['webkit', 'ms', 'Moz', 'O'],
+           i = -1,
+           n = prefixes.length,
+           s = document.body.style;
+
+       if (property.toLowerCase() in s)
+           return property.toLowerCase();
+
+       while (++i < n)
+           if (prefixes[i] + property in s)
+               return '-' + prefixes[i].toLowerCase() + property.replace(/([A-Z])/g, '-$1').toLowerCase();
+
+       return false;
+   }
+
+
+   var transformProperty;
+   function setTransform(el, x, y, scale) {
+       var prop = transformProperty = transformProperty || prefixCSSProperty('Transform'),
+           translate = iD.detect().opera ?
+               'translate('   + x + 'px,' + y + 'px)' :
+               'translate3d(' + x + 'px,' + y + 'px,0)';
+       return el.style(prop, translate + (scale ? ' scale(' + scale + ')' : ''));
+   }
+
+   function getStyle(selector) {
+       for (var i = 0; i < document.styleSheets.length; i++) {
+           var rules = document.styleSheets[i].rules || document.styleSheets[i].cssRules || [];
+           for (var k = 0; k < rules.length; k++) {
+               var selectorText = rules[k].selectorText && rules[k].selectorText.split(', ');
+               if (_.includes(selectorText, selector)) {
+                   return rules[k];
+               }
+           }
+       }
+   }
+
+   function editDistance(a, b) {
+       if (a.length === 0) return b.length;
+       if (b.length === 0) return a.length;
+       var matrix = [];
+       for (var i = 0; i <= b.length; i++) { matrix[i] = [i]; }
+       for (var j = 0; j <= a.length; j++) { matrix[0][j] = j; }
+       for (i = 1; i <= b.length; i++) {
+           for (j = 1; j <= a.length; j++) {
+               if (b.charAt(i-1) === a.charAt(j-1)) {
+                   matrix[i][j] = matrix[i-1][j-1];
+               } else {
+                   matrix[i][j] = Math.min(matrix[i-1][j-1] + 1, // substitution
+                       Math.min(matrix[i][j-1] + 1, // insertion
+                       matrix[i-1][j] + 1)); // deletion
+               }
+           }
+       }
+       return matrix[b.length][a.length];
+   }
+
+   // a d3.mouse-alike which
+   // 1. Only works on HTML elements, not SVG
+   // 2. Does not cause style recalculation
+   function fastMouse(container) {
+       var rect = container.getBoundingClientRect(),
+           rectLeft = rect.left,
+           rectTop = rect.top,
+           clientLeft = +container.clientLeft,
+           clientTop = +container.clientTop;
+       return function(e) {
+           return [
+               e.clientX - rectLeft - clientLeft,
+               e.clientY - rectTop - clientTop];
+       };
+   }
+
    /* eslint-disable no-proto */
    var getPrototypeOf = Object.getPrototypeOf || function(obj) { return obj.__proto__; };
+   /* eslint-enable no-proto */
+
+   function asyncMap(inputs, func, callback) {
+       var remaining = inputs.length,
+           results = [],
+           errors = [];
+
+       inputs.forEach(function(d, i) {
+           func(d, function done(err, data) {
+               errors[i] = err;
+               results[i] = data;
+               remaining--;
+               if (!remaining) callback(errors, results);
+           });
+       });
+   }
+
    // wraps an index to an interval [0..length-1]
    function Wrap(index, length) {
        if (index < 0)
@@ -1616,6 +1785,58 @@
 
        return mutex;
    }
+
+   function SuggestNames(preset, suggestions) {
+       preset = preset.id.split('/', 2);
+       var k = preset[0],
+           v = preset[1];
+
+       return function(value, callback) {
+           var result = [];
+           if (value && value.length > 2) {
+               if (suggestions[k] && suggestions[k][v]) {
+                   for (var sugg in suggestions[k][v]) {
+                       var dist = editDistance(value, sugg.substring(0, value.length));
+                       if (dist < 3) {
+                           result.push({
+                               title: sugg,
+                               value: sugg,
+                               dist: dist
+                           });
+                       }
+                   }
+               }
+               result.sort(function(a, b) {
+                   return a.dist - b.dist;
+               });
+           }
+           result = result.slice(0,3);
+           callback(result);
+       };
+   }
+
+
+
+   var util = Object.freeze({
+   	tagText: tagText,
+   	entitySelector: entitySelector,
+   	entityOrMemberSelector: entityOrMemberSelector,
+   	displayName: displayName,
+   	displayType: displayType,
+   	stringQs: stringQs,
+   	qsString: qsString,
+   	prefixDOMProperty: prefixDOMProperty,
+   	prefixCSSProperty: prefixCSSProperty,
+   	setTransform: setTransform,
+   	getStyle: getStyle,
+   	editDistance: editDistance,
+   	fastMouse: fastMouse,
+   	getPrototypeOf: getPrototypeOf,
+   	asyncMap: asyncMap,
+   	wrap: Wrap,
+   	SessionMutex: SessionMutex,
+   	SuggestNames: SuggestNames
+   });
 
    function Graph(other, mutable) {
        if (!(this instanceof Graph)) return new Graph(other, mutable);
@@ -1999,6 +2220,316 @@
        return tree;
    }
 
+   // Translate a MacOS key command into the appropriate Windows/Linux equivalent.
+   // For example, ⌘Z -> Ctrl+Z
+   function cmd(code) {
+       if (iD.detect().os === 'mac') {
+           return code;
+       }
+
+       if (iD.detect().os === 'win') {
+           if (code === '⌘⇧Z') return 'Ctrl+Y';
+       }
+
+       var result = '',
+           replacements = {
+               '⌘': 'Ctrl',
+               '⇧': 'Shift',
+               '⌥': 'Alt',
+               '⌫': 'Backspace',
+               '⌦': 'Delete'
+           };
+
+       for (var i = 0; i < code.length; i++) {
+           if (code[i] in replacements) {
+               result += replacements[code[i]] + '+';
+           } else {
+               result += code[i];
+           }
+       }
+
+       return result;
+   }
+
+   function Commit(context) {
+       var dispatch = d3.dispatch('cancel', 'save');
+
+       function commit(selection) {
+           var changes = context.history().changes(),
+               summary = context.history().difference().summary();
+
+           function zoomToEntity(change) {
+               var entity = change.entity;
+               if (change.changeType !== 'deleted' &&
+                   context.graph().entity(entity.id).geometry(context.graph()) !== 'vertex') {
+                   context.map().zoomTo(entity);
+                   context.surface().selectAll(
+                       iD.util.entityOrMemberSelector([entity.id], context.graph()))
+                       .classed('hover', true);
+               }
+           }
+
+           var header = selection.append('div')
+               .attr('class', 'header fillL');
+
+           header.append('h3')
+               .text(t('commit.title'));
+
+           var body = selection.append('div')
+               .attr('class', 'body');
+
+
+           // Comment Section
+           var commentSection = body.append('div')
+               .attr('class', 'modal-section form-field commit-form');
+
+           commentSection.append('label')
+               .attr('class', 'form-label')
+               .text(t('commit.message_label'));
+
+           var commentField = commentSection.append('textarea')
+               .attr('placeholder', t('commit.description_placeholder'))
+               .attr('maxlength', 255)
+               .property('value', context.storage('comment') || '')
+               .on('input.save', checkComment)
+               .on('change.save', checkComment)
+               .on('blur.save', function() {
+                   context.storage('comment', this.value);
+               });
+
+           function checkComment() {
+               d3.selectAll('.save-section .save-button')
+                   .attr('disabled', (this.value.length ? null : true));
+
+               var googleWarning = clippyArea
+                  .html('')
+                  .selectAll('a')
+                  .data(this.value.match(/google/i) ? [true] : []);
+
+               googleWarning.exit().remove();
+
+               googleWarning.enter()
+                  .append('a')
+                  .attr('target', '_blank')
+                  .attr('tabindex', -1)
+                  .call(iD.svg.Icon('#icon-alert', 'inline'))
+                  .attr('href', t('commit.google_warning_link'))
+                  .append('span')
+                  .text(t('commit.google_warning'));
+           }
+
+           commentField.node().select();
+
+           context.connection().userChangesets(function (err, changesets) {
+               if (err) return;
+
+               var comments = [];
+
+               for (var i = 0; i < changesets.length; i++) {
+                   if (changesets[i].tags.comment) {
+                       comments.push({
+                           title: changesets[i].tags.comment,
+                           value: changesets[i].tags.comment
+                       });
+                   }
+               }
+
+               commentField.call(d3.combobox().caseSensitive(true).data(comments));
+           });
+
+           var clippyArea = commentSection.append('div')
+               .attr('class', 'clippy-area');
+
+
+           var changeSetInfo = commentSection.append('div')
+               .attr('class', 'changeset-info');
+
+           changeSetInfo.append('a')
+               .attr('target', '_blank')
+               .attr('tabindex', -1)
+               .call(iD.svg.Icon('#icon-out-link', 'inline'))
+               .attr('href', t('commit.about_changeset_comments_link'))
+               .append('span')
+               .text(t('commit.about_changeset_comments'));
+
+           // Warnings
+           var warnings = body.selectAll('div.warning-section')
+               .data([context.history().validate(changes)])
+               .enter()
+               .append('div')
+               .attr('class', 'modal-section warning-section fillL2')
+               .style('display', function(d) { return _.isEmpty(d) ? 'none' : null; })
+               .style('background', '#ffb');
+
+           warnings.append('h3')
+               .text(t('commit.warnings'));
+
+           var warningLi = warnings.append('ul')
+               .attr('class', 'changeset-list')
+               .selectAll('li')
+               .data(function(d) { return d; })
+               .enter()
+               .append('li')
+               .style()
+               .on('mouseover', mouseover)
+               .on('mouseout', mouseout)
+               .on('click', warningClick);
+
+           warningLi
+               .call(iD.svg.Icon('#icon-alert', 'pre-text'));
+
+           warningLi
+               .append('strong').text(function(d) {
+                   return d.message;
+               });
+
+           warningLi.filter(function(d) { return d.tooltip; })
+               .call(bootstrap.tooltip()
+                   .title(function(d) { return d.tooltip; })
+                   .placement('top')
+               );
+
+
+           // Upload Explanation
+           var saveSection = body.append('div')
+               .attr('class','modal-section save-section fillL cf');
+
+           var prose = saveSection.append('p')
+               .attr('class', 'commit-info')
+               .html(t('commit.upload_explanation'));
+
+           context.connection().userDetails(function(err, user) {
+               if (err) return;
+
+               var userLink = d3.select(document.createElement('div'));
+
+               if (user.image_url) {
+                   userLink.append('img')
+                       .attr('src', user.image_url)
+                       .attr('class', 'icon pre-text user-icon');
+               }
+
+               userLink.append('a')
+                   .attr('class','user-info')
+                   .text(user.display_name)
+                   .attr('href', context.connection().userURL(user.display_name))
+                   .attr('tabindex', -1)
+                   .attr('target', '_blank');
+
+               prose.html(t('commit.upload_explanation_with_user', {user: userLink.html()}));
+           });
+
+
+           // Buttons
+           var buttonSection = saveSection.append('div')
+               .attr('class','buttons fillL cf');
+
+           var cancelButton = buttonSection.append('button')
+               .attr('class', 'secondary-action col5 button cancel-button')
+               .on('click.cancel', function() { dispatch.cancel(); });
+
+           cancelButton.append('span')
+               .attr('class', 'label')
+               .text(t('commit.cancel'));
+
+           var saveButton = buttonSection.append('button')
+               .attr('class', 'action col5 button save-button')
+               .attr('disabled', function() {
+                   var n = d3.select('.commit-form textarea').node();
+                   return (n && n.value.length) ? null : true;
+               })
+               .on('click.save', function() {
+                   dispatch.save({
+                       comment: commentField.node().value
+                   });
+               });
+
+           saveButton.append('span')
+               .attr('class', 'label')
+               .text(t('commit.save'));
+
+
+           // Changes
+           var changeSection = body.selectAll('div.commit-section')
+               .data([0])
+               .enter()
+               .append('div')
+               .attr('class', 'commit-section modal-section fillL2');
+
+           changeSection.append('h3')
+               .text(t('commit.changes', {count: summary.length}));
+
+           var li = changeSection.append('ul')
+               .attr('class', 'changeset-list')
+               .selectAll('li')
+               .data(summary)
+               .enter()
+               .append('li')
+               .on('mouseover', mouseover)
+               .on('mouseout', mouseout)
+               .on('click', zoomToEntity);
+
+           li.each(function(d) {
+               d3.select(this)
+                   .call(iD.svg.Icon('#icon-' + d.entity.geometry(d.graph), 'pre-text ' + d.changeType));
+           });
+
+           li.append('span')
+               .attr('class', 'change-type')
+               .text(function(d) {
+                   return t('commit.' + d.changeType) + ' ';
+               });
+
+           li.append('strong')
+               .attr('class', 'entity-type')
+               .text(function(d) {
+                   return context.presets().match(d.entity, d.graph).name();
+               });
+
+           li.append('span')
+               .attr('class', 'entity-name')
+               .text(function(d) {
+                   var name = iD.util.displayName(d.entity) || '',
+                       string = '';
+                   if (name !== '') string += ':';
+                   return string += ' ' + name;
+               });
+
+           li.style('opacity', 0)
+               .transition()
+               .style('opacity', 1);
+
+
+           function mouseover(d) {
+               if (d.entity) {
+                   context.surface().selectAll(
+                       iD.util.entityOrMemberSelector([d.entity.id], context.graph())
+                   ).classed('hover', true);
+               }
+           }
+
+           function mouseout() {
+               context.surface().selectAll('.hover')
+                   .classed('hover', false);
+           }
+
+           function warningClick(d) {
+               if (d.entity) {
+                   context.map().zoomTo(d.entity);
+                   context.enter(
+                       iD.modes.Select(context, [d.entity.id])
+                           .suppressMenu(true));
+               }
+           }
+
+           // Call checkComment off the bat, in case a changeset
+           // comment is recovered from localStorage
+           commentField.trigger('input');
+       }
+
+       return d3.rebind(commit, dispatch, 'on');
+   }
+
    function modalModule(selection, blocking) {
        var keybinding = d3.keybinding('modal');
        var previous = selection.select('div.modal');
@@ -2063,6 +2594,297 @@
        return shaded;
    }
 
+   function Conflicts(context) {
+       var dispatch = d3.dispatch('download', 'cancel', 'save'),
+           list;
+
+       function conflicts(selection) {
+           var header = selection
+               .append('div')
+               .attr('class', 'header fillL');
+
+           header
+               .append('button')
+               .attr('class', 'fr')
+               .on('click', function() { dispatch.cancel(); })
+               .call(iD.svg.Icon('#icon-close'));
+
+           header
+               .append('h3')
+               .text(t('save.conflict.header'));
+
+           var body = selection
+               .append('div')
+               .attr('class', 'body fillL');
+
+           body
+               .append('div')
+               .attr('class', 'conflicts-help')
+               .text(t('save.conflict.help'))
+               .append('a')
+               .attr('class', 'conflicts-download')
+               .text(t('save.conflict.download_changes'))
+               .on('click.download', function() { dispatch.download(); });
+
+           body
+               .append('div')
+               .attr('class', 'conflict-container fillL3')
+               .call(showConflict, 0);
+
+           body
+               .append('div')
+               .attr('class', 'conflicts-done')
+               .attr('opacity', 0)
+               .style('display', 'none')
+               .text(t('save.conflict.done'));
+
+           var buttons = body
+               .append('div')
+               .attr('class','buttons col12 joined conflicts-buttons');
+
+           buttons
+               .append('button')
+               .attr('disabled', list.length > 1)
+               .attr('class', 'action conflicts-button col6')
+               .text(t('save.title'))
+               .on('click.try_again', function() { dispatch.save(); });
+
+           buttons
+               .append('button')
+               .attr('class', 'secondary-action conflicts-button col6')
+               .text(t('confirm.cancel'))
+               .on('click.cancel', function() { dispatch.cancel(); });
+       }
+
+
+       function showConflict(selection, index) {
+           if (index < 0 || index >= list.length) return;
+
+           var parent = d3.select(selection.node().parentNode);
+
+           // enable save button if this is the last conflict being reviewed..
+           if (index === list.length - 1) {
+               window.setTimeout(function() {
+                   parent.select('.conflicts-button')
+                       .attr('disabled', null);
+
+                   parent.select('.conflicts-done')
+                       .transition()
+                       .attr('opacity', 1)
+                       .style('display', 'block');
+               }, 250);
+           }
+
+           var item = selection
+               .selectAll('.conflict')
+               .data([list[index]]);
+
+           var enter = item.enter()
+               .append('div')
+               .attr('class', 'conflict');
+
+           enter
+               .append('h4')
+               .attr('class', 'conflict-count')
+               .text(t('save.conflict.count', { num: index + 1, total: list.length }));
+
+           enter
+               .append('a')
+               .attr('class', 'conflict-description')
+               .attr('href', '#')
+               .text(function(d) { return d.name; })
+               .on('click', function(d) {
+                   zoomToEntity(d.id);
+                   d3.event.preventDefault();
+               });
+
+           var details = enter
+               .append('div')
+               .attr('class', 'conflict-detail-container');
+
+           details
+               .append('ul')
+               .attr('class', 'conflict-detail-list')
+               .selectAll('li')
+               .data(function(d) { return d.details || []; })
+               .enter()
+               .append('li')
+               .attr('class', 'conflict-detail-item')
+               .html(function(d) { return d; });
+
+           details
+               .append('div')
+               .attr('class', 'conflict-choices')
+               .call(addChoices);
+
+           details
+               .append('div')
+               .attr('class', 'conflict-nav-buttons joined cf')
+               .selectAll('button')
+               .data(['previous', 'next'])
+               .enter()
+               .append('button')
+               .text(function(d) { return t('save.conflict.' + d); })
+               .attr('class', 'conflict-nav-button action col6')
+               .attr('disabled', function(d, i) {
+                   return (i === 0 && index === 0) ||
+                       (i === 1 && index === list.length - 1) || null;
+               })
+               .on('click', function(d, i) {
+                   var container = parent.select('.conflict-container'),
+                   sign = (i === 0 ? -1 : 1);
+
+                   container
+                       .selectAll('.conflict')
+                       .remove();
+
+                   container
+                       .call(showConflict, index + sign);
+
+                   d3.event.preventDefault();
+               });
+
+           item.exit()
+               .remove();
+
+       }
+
+       function addChoices(selection) {
+           var choices = selection
+               .append('ul')
+               .attr('class', 'layer-list')
+               .selectAll('li')
+               .data(function(d) { return d.choices || []; });
+
+           var enter = choices.enter()
+               .append('li')
+               .attr('class', 'layer');
+
+           var label = enter
+               .append('label');
+
+           label
+               .append('input')
+               .attr('type', 'radio')
+               .attr('name', function(d) { return d.id; })
+               .on('change', function(d, i) {
+                   var ul = this.parentNode.parentNode.parentNode;
+                   ul.__data__.chosen = i;
+                   choose(ul, d);
+               });
+
+           label
+               .append('span')
+               .text(function(d) { return d.text; });
+
+           choices
+               .each(function(d, i) {
+                   var ul = this.parentNode;
+                   if (ul.__data__.chosen === i) choose(ul, d);
+               });
+       }
+
+       function choose(ul, datum) {
+           if (d3.event) d3.event.preventDefault();
+
+           d3.select(ul)
+               .selectAll('li')
+               .classed('active', function(d) { return d === datum; })
+               .selectAll('input')
+               .property('checked', function(d) { return d === datum; });
+
+           var extent = iD.geo.Extent(),
+               entity;
+
+           entity = context.graph().hasEntity(datum.id);
+           if (entity) extent._extend(entity.extent(context.graph()));
+
+           datum.action();
+
+           entity = context.graph().hasEntity(datum.id);
+           if (entity) extent._extend(entity.extent(context.graph()));
+
+           zoomToEntity(datum.id, extent);
+       }
+
+       function zoomToEntity(id, extent) {
+           context.surface().selectAll('.hover')
+               .classed('hover', false);
+
+           var entity = context.graph().hasEntity(id);
+           if (entity) {
+               if (extent) {
+                   context.map().trimmedExtent(extent);
+               } else {
+                   context.map().zoomTo(entity);
+               }
+               context.surface().selectAll(
+                   iD.util.entityOrMemberSelector([entity.id], context.graph()))
+                   .classed('hover', true);
+           }
+       }
+
+
+       // The conflict list should be an array of objects like:
+       // {
+       //     id: id,
+       //     name: entityName(local),
+       //     details: merge.conflicts(),
+       //     chosen: 1,
+       //     choices: [
+       //         choice(id, keepMine, forceLocal),
+       //         choice(id, keepTheirs, forceRemote)
+       //     ]
+       // }
+       conflicts.list = function(_) {
+           if (!arguments.length) return list;
+           list = _;
+           return conflicts;
+       };
+
+       return d3.rebind(conflicts, dispatch, 'on');
+   }
+
+   // toggles the visibility of ui elements, using a combination of the
+   // hide class, which sets display=none, and a d3 transition for opacity.
+   // this will cause blinking when called repeatedly, so check that the
+   // value actually changes between calls.
+   function Toggle(show, callback) {
+       return function(selection) {
+           selection
+               .style('opacity', show ? 0 : 1)
+               .classed('hide', false)
+               .transition()
+               .style('opacity', show ? 1 : 0)
+               .each('end', function() {
+                   d3.select(this)
+                       .classed('hide', !show)
+                       .style('opacity', null);
+                   if (callback) callback.apply(this);
+               });
+       };
+   }
+
+   function flash(selection) {
+       var modal = modalModule(selection);
+
+       modal.select('.modal').classed('modal-flash', true);
+
+       modal.select('.content')
+           .classed('modal-section', true)
+           .append('div')
+           .attr('class', 'description');
+
+       modal.on('click.flash', function() { modal.remove(); });
+
+       setTimeout(function() {
+           modal.remove();
+           return true;
+       }, 1500);
+
+       return modal;
+   }
+
    function Loading(context) {
        var message = '',
            blocking = false,
@@ -2106,6 +2928,332 @@
        };
 
        return loading;
+   }
+
+   function uiLasso(context) {
+       var group, polygon;
+
+       lasso.coordinates = [];
+
+       function lasso(selection) {
+
+           context.container().classed('lasso', true);
+
+           group = selection.append('g')
+               .attr('class', 'lasso hide');
+
+           polygon = group.append('path')
+               .attr('class', 'lasso-path');
+
+           group.call(Toggle(true));
+
+       }
+
+       function draw() {
+           if (polygon) {
+               polygon.data([lasso.coordinates])
+                   .attr('d', function(d) { return 'M' + d.join(' L') + ' Z'; });
+           }
+       }
+
+       lasso.extent = function () {
+           return lasso.coordinates.reduce(function(extent, point) {
+               return extent.extend(iD.geo.Extent(point));
+           }, iD.geo.Extent());
+       };
+
+       lasso.p = function(_) {
+           if (!arguments.length) return lasso;
+           lasso.coordinates.push(_);
+           draw();
+           return lasso;
+       };
+
+       lasso.close = function() {
+           if (group) {
+               group.call(Toggle(false, function() {
+                   d3.select(this).remove();
+               }));
+           }
+           context.container().classed('lasso', false);
+       };
+
+       return lasso;
+   }
+
+   function RadialMenu(context, operations) {
+       var menu,
+           center = [0, 0],
+           tooltip;
+
+       var radialMenu = function(selection) {
+           if (!operations.length)
+               return;
+
+           selection.node().parentNode.focus();
+
+           function click(operation) {
+               d3.event.stopPropagation();
+               if (operation.disabled())
+                   return;
+               operation();
+               radialMenu.close();
+           }
+
+           menu = selection.append('g')
+               .attr('class', 'radial-menu')
+               .attr('transform', 'translate(' + center + ')')
+               .attr('opacity', 0);
+
+           menu.transition()
+               .attr('opacity', 1);
+
+           var r = 50,
+               a = Math.PI / 4,
+               a0 = -Math.PI / 4,
+               a1 = a0 + (operations.length - 1) * a;
+
+           menu.append('path')
+               .attr('class', 'radial-menu-background')
+               .attr('d', 'M' + r * Math.sin(a0) + ',' +
+                                r * Math.cos(a0) +
+                         ' A' + r + ',' + r + ' 0 ' + (operations.length > 5 ? '1' : '0') + ',0 ' +
+                                (r * Math.sin(a1) + 1e-3) + ',' +
+                                (r * Math.cos(a1) + 1e-3)) // Force positive-length path (#1305)
+               .attr('stroke-width', 50)
+               .attr('stroke-linecap', 'round');
+
+           var button = menu.selectAll()
+               .data(operations)
+               .enter()
+               .append('g')
+               .attr('class', function(d) { return 'radial-menu-item radial-menu-item-' + d.id; })
+               .classed('disabled', function(d) { return d.disabled(); })
+               .attr('transform', function(d, i) {
+                   return 'translate(' + iD.geo.roundCoords([
+                           r * Math.sin(a0 + i * a),
+                           r * Math.cos(a0 + i * a)]).join(',') + ')';
+               });
+
+           button.append('circle')
+               .attr('r', 15)
+               .on('click', click)
+               .on('mousedown', mousedown)
+               .on('mouseover', mouseover)
+               .on('mouseout', mouseout);
+
+           button.append('use')
+               .attr('transform', 'translate(-10,-10)')
+               .attr('width', '20')
+               .attr('height', '20')
+               .attr('xlink:href', function(d) { return '#operation-' + d.id; });
+
+           tooltip = d3.select(document.body)
+               .append('div')
+               .attr('class', 'tooltip-inner radial-menu-tooltip');
+
+           function mousedown() {
+               d3.event.stopPropagation(); // https://github.com/openstreetmap/iD/issues/1869
+           }
+
+           function mouseover(d, i) {
+               var rect = context.surfaceRect(),
+                   angle = a0 + i * a,
+                   top = rect.top + (r + 25) * Math.cos(angle) + center[1] + 'px',
+                   left = rect.left + (r + 25) * Math.sin(angle) + center[0] + 'px',
+                   bottom = rect.height - (r + 25) * Math.cos(angle) - center[1] + 'px',
+                   right = rect.width - (r + 25) * Math.sin(angle) - center[0] + 'px';
+
+               tooltip
+                   .style('top', null)
+                   .style('left', null)
+                   .style('bottom', null)
+                   .style('right', null)
+                   .style('display', 'block')
+                   .html(iD.ui.tooltipHtml(d.tooltip(), d.keys[0]));
+
+               if (i === 0) {
+                   tooltip
+                       .style('right', right)
+                       .style('top', top);
+               } else if (i >= 4) {
+                   tooltip
+                       .style('left', left)
+                       .style('bottom', bottom);
+               } else {
+                   tooltip
+                       .style('left', left)
+                       .style('top', top);
+               }
+           }
+
+           function mouseout() {
+               tooltip.style('display', 'none');
+           }
+       };
+
+       radialMenu.close = function() {
+           if (menu) {
+               menu
+                   .style('pointer-events', 'none')
+                   .transition()
+                   .attr('opacity', 0)
+                   .remove();
+           }
+
+           if (tooltip) {
+               tooltip.remove();
+           }
+       };
+
+       radialMenu.center = function(_) {
+           if (!arguments.length) return center;
+           center = _;
+           return radialMenu;
+       };
+
+       return radialMenu;
+   }
+
+   function SelectionList(context, selectedIDs) {
+
+       function selectEntity(entity) {
+           context.enter(iD.modes.Select(context, [entity.id]).suppressMenu(true));
+       }
+
+
+       function selectionList(selection) {
+           selection.classed('selection-list-pane', true);
+
+           var header = selection.append('div')
+               .attr('class', 'header fillL cf');
+
+           header.append('h3')
+               .text(t('inspector.multiselect'));
+
+           var listWrap = selection.append('div')
+               .attr('class', 'inspector-body');
+
+           var list = listWrap.append('div')
+               .attr('class', 'feature-list cf');
+
+           context.history().on('change.selection-list', drawList);
+           drawList();
+
+           function drawList() {
+               var entities = selectedIDs
+                   .map(function(id) { return context.hasEntity(id); })
+                   .filter(function(entity) { return entity; });
+
+               var items = list.selectAll('.feature-list-item')
+                   .data(entities, iD.Entity.key);
+
+               var enter = items.enter().append('button')
+                   .attr('class', 'feature-list-item')
+                   .on('click', selectEntity);
+
+               // Enter
+               var label = enter.append('div')
+                   .attr('class', 'label')
+                   .call(iD.svg.Icon('', 'pre-text'));
+
+               label.append('span')
+                   .attr('class', 'entity-type');
+
+               label.append('span')
+                   .attr('class', 'entity-name');
+
+               // Update
+               items.selectAll('use')
+                   .attr('href', function() {
+                       var entity = this.parentNode.parentNode.__data__;
+                       return '#icon-' + context.geometry(entity.id);
+                   });
+
+               items.selectAll('.entity-type')
+                   .text(function(entity) { return context.presets().match(entity, context.graph()).name(); });
+
+               items.selectAll('.entity-name')
+                   .text(function(entity) { return iD.util.displayName(entity); });
+
+               // Exit
+               items.exit()
+                   .remove();
+           }
+       }
+
+       return selectionList;
+
+   }
+
+   function Success(context) {
+       var dispatch = d3.dispatch('cancel'),
+           changeset;
+
+       function success(selection) {
+           var message = (changeset.comment || t('success.edited_osm')).substring(0, 130) +
+               ' ' + context.connection().changesetURL(changeset.id);
+
+           var header = selection.append('div')
+               .attr('class', 'header fillL');
+
+           header.append('button')
+               .attr('class', 'fr')
+               .on('click', function() { dispatch.cancel(); })
+               .call(iD.svg.Icon('#icon-close'));
+
+           header.append('h3')
+               .text(t('success.just_edited'));
+
+           var body = selection.append('div')
+               .attr('class', 'body save-success fillL');
+
+           body.append('p')
+               .html(t('success.help_html'));
+
+           body.append('a')
+               .attr('class', 'details')
+               .attr('target', '_blank')
+               .attr('tabindex', -1)
+               .call(iD.svg.Icon('#icon-out-link', 'inline'))
+               .attr('href', t('success.help_link_url'))
+               .append('span')
+               .text(t('success.help_link_text'));
+
+           var changesetURL = context.connection().changesetURL(changeset.id);
+
+           body.append('a')
+               .attr('class', 'button col12 osm')
+               .attr('target', '_blank')
+               .attr('href', changesetURL)
+               .text(t('success.view_on_osm'));
+
+           var sharing = {
+               facebook: 'https://facebook.com/sharer/sharer.php?u=' + encodeURIComponent(changesetURL),
+               twitter: 'https://twitter.com/intent/tweet?source=webclient&text=' + encodeURIComponent(message),
+               google: 'https://plus.google.com/share?url=' + encodeURIComponent(changesetURL)
+           };
+
+           body.selectAll('.button.social')
+               .data(d3.entries(sharing))
+               .enter()
+               .append('a')
+               .attr('class', 'button social col4')
+               .attr('target', '_blank')
+               .attr('href', function(d) { return d.value; })
+               .call(bootstrap.tooltip()
+                   .title(function(d) { return t('success.' + d.key); })
+                   .placement('bottom'))
+               .each(function(d) { d3.select(this).call(iD.svg.Icon('#logo-' + d.key, 'social')); });
+       }
+
+       success.changeset = function(_) {
+           if (!arguments.length) return changeset;
+           changeset = _;
+           return success;
+       };
+
+       return d3.rebind(success, dispatch, 'on');
    }
 
    function History(context) {
@@ -3260,7 +4408,7 @@
        };
    }
 
-   function Circularize(wayId
+   function CircularizeAction(wayId
      , projection, maxAngle) {
        maxAngle = (maxAngle || 20) * Math.PI / 180;
 
@@ -3737,7 +4885,7 @@
        };
    }
 
-   function Disconnect(nodeId, newNodeId) {
+   function DisconnectAction(nodeId, newNodeId) {
        var wayIds;
 
        var action = function(graph) {
@@ -3902,7 +5050,7 @@
        return action;
    }
 
-   function Merge(ids) {
+   function MergeAction(ids) {
        function groupEntitiesByGeometry(graph) {
            var entities = ids.map(function(id) { return graph.entity(id); });
            return _.extend({point: [], area: [], line: [], relation: []},
@@ -4312,7 +5460,7 @@
        return action;
    }
 
-   function Move(moveIds, tryDelta, projection, cache) {
+   function MoveAction(moveIds, tryDelta, projection, cache) {
        var delta = tryDelta;
 
        function vecAdd(a, b) { return [a[0] + b[0], a[1] + b[1]]; }
@@ -4608,7 +5756,7 @@
     * Based on https://github.com/openstreetmap/potlatch2/blob/master/net/systemeD/potlatch2/tools/Quadrilateralise.as
     */
 
-   function Orthogonalize(wayId, projection) {
+   function OrthogonalizeAction(wayId, projection) {
        var threshold = 12, // degrees within right or straight to alter
            lowerThreshold = Math.cos((90 - threshold) * Math.PI / 180),
            upperThreshold = Math.cos(threshold * Math.PI / 180);
@@ -4791,7 +5939,7 @@
    // Reference:
    //   https://github.com/systemed/potlatch2/blob/master/net/systemeD/halcyon/connection/actions/SplitWayAction.as
    //
-   function Split(nodeId, newWayIds) {
+   function SplitAction(nodeId, newWayIds) {
        var wayIds;
 
        // if the way is closed, we need to search for a partner node
@@ -5001,7 +6149,7 @@
 
            function split(toOrFrom) {
                var newID = toOrFrom.newID || Way().id;
-               graph = Split(via.id, [newID])
+               graph = SplitAction(via.id, [newID])
                    .limitWays([toOrFrom.way])(graph);
 
                var a = graph.entity(newID),
@@ -5085,7 +6233,7 @@
          http://wiki.openstreetmap.org/wiki/Route#Members
          http://josm.openstreetmap.de/browser/josm/trunk/src/org/openstreetmap/josm/corrector/ReverseWayTagCorrector.java
     */
-   function Reverse(wayId, options) {
+   function ReverseAction(wayId, options) {
        var replacements = [
                [/:right$/, ':left'], [/:left$/, ':right'],
                [/:forward$/, ':backward'], [/:backward$/, ':forward']
@@ -5180,7 +6328,7 @@
        return action;
    }
 
-   function RotateWay(wayId, pivot, angle, projection) {
+   function RotateWayAction(wayId, pivot, angle, projection) {
        return function(graph) {
            return graph.update(function(graph) {
                var way = graph.entity(wayId);
@@ -5211,7 +6359,7 @@
     * Based on https://github.com/openstreetmap/potlatch2/net/systemeD/potlatch2/tools/Straighten.as
     */
 
-   function Straighten(wayId, projection) {
+   function StraightenAction(wayId, projection) {
        function positionAlongWay(n, s, e) {
            return ((n[0] - s[0]) * (e[0] - s[0]) + (n[1] - s[1]) * (e[1] - s[1]))/
                    (Math.pow(e[0] - s[0], 2) + Math.pow(e[1] - s[1], 2));
@@ -5320,7 +6468,7 @@
    	ChangeMember: ChangeMember,
    	ChangePreset: ChangePreset,
    	ChangeTags: ChangeTags,
-   	Circularize: Circularize,
+   	Circularize: CircularizeAction,
    	Connect: Connect,
    	CopyEntities: CopyEntities,
    	DeleteMember: DeleteMember,
@@ -5330,26 +6478,6622 @@
    	DeleteWay: DeleteWay,
    	DeprecateTags: DeprecateTags,
    	DiscardTags: DiscardTags,
-   	Disconnect: Disconnect,
+   	Disconnect: DisconnectAction,
    	Join: Join,
-   	Merge: Merge,
+   	Merge: MergeAction,
    	MergePolygon: MergePolygon,
    	MergeRemoteChanges: MergeRemoteChanges,
-   	Move: Move,
+   	Move: MoveAction,
    	MoveNode: MoveNode,
    	Noop: Noop,
-   	Orthogonalize: Orthogonalize,
+   	Orthogonalize: OrthogonalizeAction,
    	RestrictTurn: RestrictTurn,
-   	Reverse: Reverse,
+   	Reverse: ReverseAction,
    	Revert: Revert,
-   	RotateWay: RotateWay,
-   	Split: Split,
-   	Straighten: Straighten,
+   	RotateWay: RotateWayAction,
+   	Split: SplitAction,
+   	Straighten: StraightenAction,
    	UnrestrictTurn: UnrestrictTurn
    });
 
+   function AddArea(context) {
+       var mode = {
+           id: 'add-area',
+           button: 'area',
+           title: t('modes.add_area.title'),
+           description: t('modes.add_area.description'),
+           key: '3'
+       };
+
+       var behavior = AddWay(context)
+               .tail(t('modes.add_area.tail'))
+               .on('start', start)
+               .on('startFromWay', startFromWay)
+               .on('startFromNode', startFromNode),
+           defaultTags = {area: 'yes'};
+
+       function start(loc) {
+           var graph = context.graph(),
+               node = Node({loc: loc}),
+               way = Way({tags: defaultTags});
+
+           context.perform(
+               AddEntity(node),
+               AddEntity(way),
+               AddVertex(way.id, node.id),
+               AddVertex(way.id, node.id));
+
+           context.enter(DrawArea(context, way.id, graph));
+       }
+
+       function startFromWay(loc, edge) {
+           var graph = context.graph(),
+               node = Node({loc: loc}),
+               way = Way({tags: defaultTags});
+
+           context.perform(
+               AddEntity(node),
+               AddEntity(way),
+               AddVertex(way.id, node.id),
+               AddVertex(way.id, node.id),
+               AddMidpoint({ loc: loc, edge: edge }, node));
+
+           context.enter(DrawArea(context, way.id, graph));
+       }
+
+       function startFromNode(node) {
+           var graph = context.graph(),
+               way = Way({tags: defaultTags});
+
+           context.perform(
+               AddEntity(way),
+               AddVertex(way.id, node.id),
+               AddVertex(way.id, node.id));
+
+           context.enter(DrawArea(context, way.id, graph));
+       }
+
+       mode.enter = function() {
+           context.install(behavior);
+       };
+
+       mode.exit = function() {
+           context.uninstall(behavior);
+       };
+
+       return mode;
+   }
+
+   function AddLine(context) {
+       var mode = {
+           id: 'add-line',
+           button: 'line',
+           title: t('modes.add_line.title'),
+           description: t('modes.add_line.description'),
+           key: '2'
+       };
+
+       var behavior = AddWay(context)
+           .tail(t('modes.add_line.tail'))
+           .on('start', start)
+           .on('startFromWay', startFromWay)
+           .on('startFromNode', startFromNode);
+
+       function start(loc) {
+           var baseGraph = context.graph(),
+               node = Node({loc: loc}),
+               way = Way();
+
+           context.perform(
+               AddEntity(node),
+               AddEntity(way),
+               AddVertex(way.id, node.id));
+
+           context.enter(DrawLine(context, way.id, baseGraph));
+       }
+
+       function startFromWay(loc, edge) {
+           var baseGraph = context.graph(),
+               node = Node({loc: loc}),
+               way = Way();
+
+           context.perform(
+               AddEntity(node),
+               AddEntity(way),
+               AddVertex(way.id, node.id),
+               AddMidpoint({ loc: loc, edge: edge }, node));
+
+           context.enter(DrawLine(context, way.id, baseGraph));
+       }
+
+       function startFromNode(node) {
+           var baseGraph = context.graph(),
+               way = Way();
+
+           context.perform(
+               AddEntity(way),
+               AddVertex(way.id, node.id));
+
+           context.enter(DrawLine(context, way.id, baseGraph));
+       }
+
+       mode.enter = function() {
+           context.install(behavior);
+       };
+
+       mode.exit = function() {
+           context.uninstall(behavior);
+       };
+
+       return mode;
+   }
+
+   function AddPoint(context) {
+       var mode = {
+           id: 'add-point',
+           button: 'point',
+           title: t('modes.add_point.title'),
+           description: t('modes.add_point.description'),
+           key: '1'
+       };
+
+       var behavior = Draw(context)
+           .tail(t('modes.add_point.tail'))
+           .on('click', add)
+           .on('clickWay', addWay)
+           .on('clickNode', addNode)
+           .on('cancel', cancel)
+           .on('finish', cancel);
+
+       function add(loc) {
+           var node = Node({loc: loc});
+
+           context.perform(
+               AddEntity(node),
+               t('operations.add.annotation.point'));
+
+           context.enter(
+               SelectMode(context, [node.id])
+                   .suppressMenu(true)
+                   .newFeature(true));
+       }
+
+       function addWay(loc) {
+           add(loc);
+       }
+
+       function addNode(node) {
+           add(node.loc);
+       }
+
+       function cancel() {
+           context.enter(Browse(context));
+       }
+
+       mode.enter = function() {
+           context.install(behavior);
+       };
+
+       mode.exit = function() {
+           context.uninstall(behavior);
+       };
+
+       return mode;
+   }
+
+   function Browse(context) {
+       var mode = {
+           button: 'browse',
+           id: 'browse',
+           title: t('modes.browse.title'),
+           description: t('modes.browse.description')
+       }, sidebar;
+
+       var behaviors = [
+           Paste(context),
+           Hover(context)
+               .on('hover', context.ui().sidebar.hover),
+           Select(context),
+           Lasso(context),
+           DragNode(context).behavior];
+
+       mode.enter = function() {
+           behaviors.forEach(function(behavior) {
+               context.install(behavior);
+           });
+
+           // Get focus on the body.
+           if (document.activeElement && document.activeElement.blur) {
+               document.activeElement.blur();
+           }
+
+           if (sidebar) {
+               context.ui().sidebar.show(sidebar);
+           } else {
+               context.ui().sidebar.select(null);
+           }
+       };
+
+       mode.exit = function() {
+           context.ui().sidebar.hover.cancel();
+           behaviors.forEach(function(behavior) {
+               context.uninstall(behavior);
+           });
+
+           if (sidebar) {
+               context.ui().sidebar.hide();
+           }
+       };
+
+       mode.sidebar = function(_) {
+           if (!arguments.length) return sidebar;
+           sidebar = _;
+           return mode;
+       };
+
+       return mode;
+   }
+
+   function DragNode(context) {
+       var mode = {
+           id: 'drag-node',
+           button: 'browse'
+       };
+
+       var nudgeInterval,
+           activeIDs,
+           wasMidpoint,
+           cancelled,
+           selectedIDs = [],
+           hover = Hover(context)
+               .altDisables(true)
+               .on('hover', context.ui().sidebar.hover),
+           edit = Edit(context);
+
+       function edge(point, size) {
+           var pad = [30, 100, 30, 100];
+           if (point[0] > size[0] - pad[0]) return [-10, 0];
+           else if (point[0] < pad[2]) return [10, 0];
+           else if (point[1] > size[1] - pad[1]) return [0, -10];
+           else if (point[1] < pad[3]) return [0, 10];
+           return null;
+       }
+
+       function startNudge(nudge) {
+           if (nudgeInterval) window.clearInterval(nudgeInterval);
+           nudgeInterval = window.setInterval(function() {
+               context.pan(nudge);
+           }, 50);
+       }
+
+       function stopNudge() {
+           if (nudgeInterval) window.clearInterval(nudgeInterval);
+           nudgeInterval = null;
+       }
+
+       function moveAnnotation(entity) {
+           return t('operations.move.annotation.' + entity.geometry(context.graph()));
+       }
+
+       function connectAnnotation(entity) {
+           return t('operations.connect.annotation.' + entity.geometry(context.graph()));
+       }
+
+       function origin(entity) {
+           return context.projection(entity.loc);
+       }
+
+       function start(entity) {
+           cancelled = d3.event.sourceEvent.shiftKey ||
+               context.features().hasHiddenConnections(entity, context.graph());
+
+           if (cancelled) return behavior.cancel();
+
+           wasMidpoint = entity.type === 'midpoint';
+           if (wasMidpoint) {
+               var midpoint = entity;
+               entity = Node();
+               context.perform(AddMidpoint(midpoint, entity));
+
+                var vertex = context.surface()
+                   .selectAll('.' + entity.id);
+                behavior.target(vertex.node(), entity);
+
+           } else {
+               context.perform(
+                   Noop());
+           }
+
+           activeIDs = _.map(context.graph().parentWays(entity), 'id');
+           activeIDs.push(entity.id);
+
+           context.enter(mode);
+       }
+
+       function datum() {
+           if (d3.event.sourceEvent.altKey) {
+               return {};
+           }
+
+           return d3.event.sourceEvent.target.__data__ || {};
+       }
+
+       // via https://gist.github.com/shawnbot/4166283
+       function childOf(p, c) {
+           if (p === c) return false;
+           while (c && c !== p) c = c.parentNode;
+           return c === p;
+       }
+
+       function move(entity) {
+           if (cancelled) return;
+           d3.event.sourceEvent.stopPropagation();
+
+           var nudge = childOf(context.container().node(),
+               d3.event.sourceEvent.toElement) &&
+               edge(d3.event.point, context.map().dimensions());
+
+           if (nudge) startNudge(nudge);
+           else stopNudge();
+
+           var loc = context.projection.invert(d3.event.point);
+
+           var d = datum();
+           if (d.type === 'node' && d.id !== entity.id) {
+               loc = d.loc;
+           } else if (d.type === 'way' && !d3.select(d3.event.sourceEvent.target).classed('fill')) {
+               loc = chooseEdge(context.childNodes(d), context.mouse(), context.projection).loc;
+           }
+
+           context.replace(
+               MoveNode(entity.id, loc),
+               moveAnnotation(entity));
+       }
+
+       function end(entity) {
+           if (cancelled) return;
+
+           var d = datum();
+
+           if (d.type === 'way') {
+               var choice = chooseEdge(context.childNodes(d), context.mouse(), context.projection);
+               context.replace(
+                   AddMidpoint({ loc: choice.loc, edge: [d.nodes[choice.index - 1], d.nodes[choice.index]] }, entity),
+                   connectAnnotation(d));
+
+           } else if (d.type === 'node' && d.id !== entity.id) {
+               context.replace(
+                   Connect([d.id, entity.id]),
+                   connectAnnotation(d));
+
+           } else if (wasMidpoint) {
+               context.replace(
+                   Noop(),
+                   t('operations.add.annotation.vertex'));
+
+           } else {
+               context.replace(
+                   Noop(),
+                   moveAnnotation(entity));
+           }
+
+           var reselection = selectedIDs.filter(function(id) {
+               return context.graph().hasEntity(id);
+           });
+
+           if (reselection.length) {
+               context.enter(
+                   SelectMode(context, reselection)
+                       .suppressMenu(true));
+           } else {
+               context.enter(Browse(context));
+           }
+       }
+
+       function cancel() {
+           behavior.cancel();
+           context.enter(Browse(context));
+       }
+
+       function setActiveElements() {
+           context.surface().selectAll(entitySelector(activeIDs))
+               .classed('active', true);
+       }
+
+       var behavior = drag()
+           .delegate('g.node, g.point, g.midpoint')
+           .surface(context.surface().node())
+           .origin(origin)
+           .on('start', start)
+           .on('move', move)
+           .on('end', end);
+
+       mode.enter = function() {
+           context.install(hover);
+           context.install(edit);
+
+           context.history()
+               .on('undone.drag-node', cancel);
+
+           context.map()
+               .on('drawn.drag-node', setActiveElements);
+
+           setActiveElements();
+       };
+
+       mode.exit = function() {
+           context.ui().sidebar.hover.cancel();
+           context.uninstall(hover);
+           context.uninstall(edit);
+
+           context.history()
+               .on('undone.drag-node', null);
+
+           context.map()
+               .on('drawn.drag-node', null);
+
+           context.surface()
+               .selectAll('.active')
+               .classed('active', false);
+
+           stopNudge();
+       };
+
+       mode.selectedIDs = function(_) {
+           if (!arguments.length) return selectedIDs;
+           selectedIDs = _;
+           return mode;
+       };
+
+       mode.behavior = behavior;
+
+       return mode;
+   }
+
+   function DrawArea(context, wayId, baseGraph) {
+       var mode = {
+           button: 'area',
+           id: 'draw-area'
+       };
+
+       var behavior;
+
+       mode.enter = function() {
+           var way = context.entity(wayId),
+               headId = way.nodes[way.nodes.length - 2],
+               tailId = way.first();
+
+           behavior = DrawWay(context, wayId, -1, mode, baseGraph)
+               .tail(t('modes.draw_area.tail'));
+
+           var addNode = behavior.addNode;
+
+           behavior.addNode = function(node) {
+               if (node.id === headId || node.id === tailId) {
+                   behavior.finish();
+               } else {
+                   addNode(node);
+               }
+           };
+
+           context.install(behavior);
+       };
+
+       mode.exit = function() {
+           context.uninstall(behavior);
+       };
+
+       mode.selectedIDs = function() {
+           return [wayId];
+       };
+
+       return mode;
+   }
+
+   function DrawLine(context, wayId, baseGraph, affix) {
+       var mode = {
+           button: 'line',
+           id: 'draw-line'
+       };
+
+       var behavior;
+
+       mode.enter = function() {
+           var way = context.entity(wayId),
+               index = (affix === 'prefix') ? 0 : undefined,
+               headId = (affix === 'prefix') ? way.first() : way.last();
+
+           behavior = DrawWay(context, wayId, index, mode, baseGraph)
+               .tail(t('modes.draw_line.tail'));
+
+           var addNode = behavior.addNode;
+
+           behavior.addNode = function(node) {
+               if (node.id === headId) {
+                   behavior.finish();
+               } else {
+                   addNode(node);
+               }
+           };
+
+           context.install(behavior);
+       };
+
+       mode.exit = function() {
+           context.uninstall(behavior);
+       };
+
+       mode.selectedIDs = function() {
+           return [wayId];
+       };
+
+       return mode;
+   }
+
+   function MoveMode(context, entityIDs, baseGraph) {
+       var mode = {
+           id: 'move',
+           button: 'browse'
+       };
+
+       var keybinding = d3.keybinding('move'),
+           edit = Edit(context),
+           annotation = entityIDs.length === 1 ?
+               t('operations.move.annotation.' + context.geometry(entityIDs[0])) :
+               t('operations.move.annotation.multiple'),
+           cache,
+           origin,
+           nudgeInterval;
+
+       function vecSub(a, b) { return [a[0] - b[0], a[1] - b[1]]; }
+
+       function edge(point, size) {
+           var pad = [30, 100, 30, 100];
+           if (point[0] > size[0] - pad[0]) return [-10, 0];
+           else if (point[0] < pad[2]) return [10, 0];
+           else if (point[1] > size[1] - pad[1]) return [0, -10];
+           else if (point[1] < pad[3]) return [0, 10];
+           return null;
+       }
+
+       function startNudge(nudge) {
+           if (nudgeInterval) window.clearInterval(nudgeInterval);
+           nudgeInterval = window.setInterval(function() {
+               context.pan(nudge);
+
+               var currMouse = context.mouse(),
+                   origMouse = context.projection(origin),
+                   delta = vecSub(vecSub(currMouse, origMouse), nudge),
+                   action = MoveAction(entityIDs, delta, context.projection, cache);
+
+               context.overwrite(action, annotation);
+
+           }, 50);
+       }
+
+       function stopNudge() {
+           if (nudgeInterval) window.clearInterval(nudgeInterval);
+           nudgeInterval = null;
+       }
+
+       function move() {
+           var currMouse = context.mouse(),
+               origMouse = context.projection(origin),
+               delta = vecSub(currMouse, origMouse),
+               action = MoveAction(entityIDs, delta, context.projection, cache);
+
+           context.overwrite(action, annotation);
+
+           var nudge = edge(currMouse, context.map().dimensions());
+           if (nudge) startNudge(nudge);
+           else stopNudge();
+       }
+
+       function finish() {
+           d3.event.stopPropagation();
+           context.enter(SelectMode(context, entityIDs).suppressMenu(true));
+           stopNudge();
+       }
+
+       function cancel() {
+           if (baseGraph) {
+               while (context.graph() !== baseGraph) context.pop();
+               context.enter(Browse(context));
+           } else {
+               context.pop();
+               context.enter(SelectMode(context, entityIDs).suppressMenu(true));
+           }
+           stopNudge();
+       }
+
+       function undone() {
+           context.enter(Browse(context));
+       }
+
+       mode.enter = function() {
+           origin = context.map().mouseCoordinates();
+           cache = {};
+
+           context.install(edit);
+
+           context.perform(
+               Noop(),
+               annotation);
+
+           context.surface()
+               .on('mousemove.move', move)
+               .on('click.move', finish);
+
+           context.history()
+               .on('undone.move', undone);
+
+           keybinding
+               .on('⎋', cancel)
+               .on('↩', finish);
+
+           d3.select(document)
+               .call(keybinding);
+       };
+
+       mode.exit = function() {
+           stopNudge();
+
+           context.uninstall(edit);
+
+           context.surface()
+               .on('mousemove.move', null)
+               .on('click.move', null);
+
+           context.history()
+               .on('undone.move', null);
+
+           keybinding.off();
+       };
+
+       return mode;
+   }
+
+   function RotateWay(context, wayId) {
+       var mode = {
+           id: 'rotate-way',
+           button: 'browse'
+       };
+
+       var keybinding = d3.keybinding('rotate-way'),
+           edit = Edit(context);
+
+       mode.enter = function() {
+           context.install(edit);
+
+           var annotation = t('operations.rotate.annotation.' + context.geometry(wayId)),
+               way = context.graph().entity(wayId),
+               nodes = _.uniq(context.graph().childNodes(way)),
+               points = nodes.map(function(n) { return context.projection(n.loc); }),
+               pivot = d3.geom.polygon(points).centroid(),
+               angle;
+
+           context.perform(
+               Noop(),
+               annotation);
+
+           function rotate() {
+
+               var mousePoint = context.mouse(),
+                   newAngle = Math.atan2(mousePoint[1] - pivot[1], mousePoint[0] - pivot[0]);
+
+               if (typeof angle === 'undefined') angle = newAngle;
+
+               context.replace(
+                   RotateWayAction(wayId, pivot, newAngle - angle, context.projection),
+                   annotation);
+
+               angle = newAngle;
+           }
+
+           function finish() {
+               d3.event.stopPropagation();
+               context.enter(SelectMode(context, [wayId])
+                   .suppressMenu(true));
+           }
+
+           function cancel() {
+               context.pop();
+               context.enter(SelectMode(context, [wayId])
+                   .suppressMenu(true));
+           }
+
+           function undone() {
+               context.enter(Browse(context));
+           }
+
+           context.surface()
+               .on('mousemove.rotate-way', rotate)
+               .on('click.rotate-way', finish);
+
+           context.history()
+               .on('undone.rotate-way', undone);
+
+           keybinding
+               .on('⎋', cancel)
+               .on('↩', finish);
+
+           d3.select(document)
+               .call(keybinding);
+       };
+
+       mode.exit = function() {
+           context.uninstall(edit);
+
+           context.surface()
+               .on('mousemove.rotate-way', null)
+               .on('click.rotate-way', null);
+
+           context.history()
+               .on('undone.rotate-way', null);
+
+           keybinding.off();
+       };
+
+       return mode;
+   }
+
+   function Save$1(context) {
+       var ui = Commit(context)
+               .on('cancel', cancel)
+               .on('save', save);
+
+       function cancel() {
+           context.enter(Browse(context));
+       }
+
+       function save(e, tryAgain) {
+           function withChildNodes(ids, graph) {
+               return _.uniq(_.reduce(ids, function(result, id) {
+                   var e = graph.entity(id);
+                   if (e.type === 'way') {
+                       try {
+                           var cn = graph.childNodes(e);
+                           result.push.apply(result, _.map(_.filter(cn, 'version'), 'id'));
+                       } catch (err) {
+                           /* eslint-disable no-console */
+                           if (typeof console !== 'undefined') console.error(err);
+                           /* eslint-enable no-console */
+                       }
+                   }
+                   return result;
+               }, _.clone(ids)));
+           }
+
+           var loading = Loading(context).message(t('save.uploading')).blocking(true),
+               history = context.history(),
+               origChanges = history.changes(DiscardTags(history.difference())),
+               localGraph = context.graph(),
+               remoteGraph = Graph(history.base(), true),
+               modified = _.filter(history.difference().summary(), {changeType: 'modified'}),
+               toCheck = _.map(_.map(modified, 'entity'), 'id'),
+               toLoad = withChildNodes(toCheck, localGraph),
+               conflicts = [],
+               errors = [];
+
+           if (!tryAgain) history.perform(Noop());  // checkpoint
+           context.container().call(loading);
+
+           if (toCheck.length) {
+               context.connection().loadMultiple(toLoad, loaded);
+           } else {
+               finalize();
+           }
+
+
+           // Reload modified entities into an alternate graph and check for conflicts..
+           function loaded(err, result) {
+               if (errors.length) return;
+
+               if (err) {
+                   errors.push({
+                       msg: err.responseText,
+                       details: [ t('save.status_code', { code: err.status }) ]
+                   });
+                   showErrors();
+
+               } else {
+                   var loadMore = [];
+                   _.each(result.data, function(entity) {
+                       remoteGraph.replace(entity);
+                       toLoad = _.without(toLoad, entity.id);
+
+                       // Because loadMultiple doesn't download /full like loadEntity,
+                       // need to also load children that aren't already being checked..
+                       if (!entity.visible) return;
+                       if (entity.type === 'way') {
+                           loadMore.push.apply(loadMore,
+                               _.difference(entity.nodes, toCheck, toLoad, loadMore));
+                       } else if (entity.type === 'relation' && entity.isMultipolygon()) {
+                           loadMore.push.apply(loadMore,
+                               _.difference(_.map(entity.members, 'id'), toCheck, toLoad, loadMore));
+                       }
+                   });
+
+                   if (loadMore.length) {
+                       toLoad.push.apply(toLoad, loadMore);
+                       context.connection().loadMultiple(loadMore, loaded);
+                   }
+
+                   if (!toLoad.length) {
+                       checkConflicts();
+                   }
+               }
+           }
+
+
+           function checkConflicts() {
+               function choice(id, text, action) {
+                   return { id: id, text: text, action: function() { history.replace(action); } };
+               }
+               function formatUser(d) {
+                   return '<a href="' + context.connection().userURL(d) + '" target="_blank">' + d + '</a>';
+               }
+               function entityName(entity) {
+                   return displayName(entity) || (displayType(entity.id) + ' ' + entity.id);
+               }
+
+               function compareVersions(local, remote) {
+                   if (local.version !== remote.version) return false;
+
+                   if (local.type === 'way') {
+                       var children = _.union(local.nodes, remote.nodes);
+
+                       for (var i = 0; i < children.length; i++) {
+                           var a = localGraph.hasEntity(children[i]),
+                               b = remoteGraph.hasEntity(children[i]);
+
+                           if (a && b && a.version !== b.version) return false;
+                       }
+                   }
+
+                   return true;
+               }
+
+               _.each(toCheck, function(id) {
+                   var local = localGraph.entity(id),
+                       remote = remoteGraph.entity(id);
+
+                   if (compareVersions(local, remote)) return;
+
+                   var action = MergeRemoteChanges,
+                       merge = action(id, localGraph, remoteGraph, formatUser);
+
+                   history.replace(merge);
+
+                   var mergeConflicts = merge.conflicts();
+                   if (!mergeConflicts.length) return;  // merged safely
+
+                   var forceLocal = action(id, localGraph, remoteGraph).withOption('force_local'),
+                       forceRemote = action(id, localGraph, remoteGraph).withOption('force_remote'),
+                       keepMine = t('save.conflict.' + (remote.visible ? 'keep_local' : 'restore')),
+                       keepTheirs = t('save.conflict.' + (remote.visible ? 'keep_remote' : 'delete'));
+
+                   conflicts.push({
+                       id: id,
+                       name: entityName(local),
+                       details: mergeConflicts,
+                       chosen: 1,
+                       choices: [
+                           choice(id, keepMine, forceLocal),
+                           choice(id, keepTheirs, forceRemote)
+                       ]
+                   });
+               });
+
+               finalize();
+           }
+
+
+           function finalize() {
+               if (conflicts.length) {
+                   conflicts.sort(function(a,b) { return b.id.localeCompare(a.id); });
+                   showConflicts();
+               } else if (errors.length) {
+                   showErrors();
+               } else {
+                   var changes = history.changes(DiscardTags(history.difference()));
+                   if (changes.modified.length || changes.created.length || changes.deleted.length) {
+                       context.connection().putChangeset(
+                           changes,
+                           e.comment,
+                           history.imageryUsed(),
+                           function(err, changeset_id) {
+                               if (err) {
+                                   errors.push({
+                                       msg: err.responseText,
+                                       details: [ t('save.status_code', { code: err.status }) ]
+                                   });
+                                   showErrors();
+                               } else {
+                                   history.clearSaved();
+                                   success(e, changeset_id);
+                                   // Add delay to allow for postgres replication #1646 #2678
+                                   window.setTimeout(function() {
+                                       loading.close();
+                                       context.flush();
+                                   }, 2500);
+                               }
+                           });
+                   } else {        // changes were insignificant or reverted by user
+                       loading.close();
+                       context.flush();
+                       cancel();
+                   }
+               }
+           }
+
+
+           function showConflicts() {
+               var selection = context.container()
+                   .select('#sidebar')
+                   .append('div')
+                   .attr('class','sidebar-component');
+
+               loading.close();
+
+               selection.call(Conflicts(context)
+                   .list(conflicts)
+                   .on('download', function() {
+                       var data = JXON.stringify(context.connection().osmChangeJXON('CHANGEME', origChanges)),
+                           win = window.open('data:text/xml,' + encodeURIComponent(data), '_blank');
+                       win.focus();
+                   })
+                   .on('cancel', function() {
+                       history.pop();
+                       selection.remove();
+                   })
+                   .on('save', function() {
+                       for (var i = 0; i < conflicts.length; i++) {
+                           if (conflicts[i].chosen === 1) {  // user chose "keep theirs"
+                               var entity = context.hasEntity(conflicts[i].id);
+                               if (entity && entity.type === 'way') {
+                                   var children = _.uniq(entity.nodes);
+                                   for (var j = 0; j < children.length; j++) {
+                                       history.replace(Revert(children[j]));
+                                   }
+                               }
+                               history.replace(Revert(conflicts[i].id));
+                           }
+                       }
+
+                       selection.remove();
+                       save(e, true);
+                   })
+               );
+           }
+
+
+           function showErrors() {
+               var selection = confirm(context.container());
+
+               history.pop();
+               loading.close();
+
+               selection
+                   .select('.modal-section.header')
+                   .append('h3')
+                   .text(t('save.error'));
+
+               addErrors(selection, errors);
+               selection.okButton();
+           }
+
+
+           function addErrors(selection, data) {
+               var message = selection
+                   .select('.modal-section.message-text');
+
+               var items = message
+                   .selectAll('.error-container')
+                   .data(data);
+
+               var enter = items.enter()
+                   .append('div')
+                   .attr('class', 'error-container');
+
+               enter
+                   .append('a')
+                   .attr('class', 'error-description')
+                   .attr('href', '#')
+                   .classed('hide-toggle', true)
+                   .text(function(d) { return d.msg || t('save.unknown_error_details'); })
+                   .on('click', function() {
+                       var error = d3.select(this),
+                           detail = d3.select(this.nextElementSibling),
+                           exp = error.classed('expanded');
+
+                       detail.style('display', exp ? 'none' : 'block');
+                       error.classed('expanded', !exp);
+
+                       d3.event.preventDefault();
+                   });
+
+               var details = enter
+                   .append('div')
+                   .attr('class', 'error-detail-container')
+                   .style('display', 'none');
+
+               details
+                   .append('ul')
+                   .attr('class', 'error-detail-list')
+                   .selectAll('li')
+                   .data(function(d) { return d.details || []; })
+                   .enter()
+                   .append('li')
+                   .attr('class', 'error-detail-item')
+                   .text(function(d) { return d; });
+
+               items.exit()
+                   .remove();
+           }
+
+       }
+
+
+       function success(e, changeset_id) {
+           context.enter(Browse(context)
+               .sidebar(Success(context)
+                   .changeset({
+                       id: changeset_id,
+                       comment: e.comment
+                   })
+                   .on('cancel', function() {
+                       context.ui().sidebar.hide();
+                   })));
+       }
+
+       var mode = {
+           id: 'save'
+       };
+
+       mode.enter = function() {
+           context.connection().authenticate(function(err) {
+               if (err) {
+                   cancel();
+               } else {
+                   context.ui().sidebar.show(ui);
+               }
+           });
+       };
+
+       mode.exit = function() {
+           context.ui().sidebar.hide();
+       };
+
+       return mode;
+   }
+
+   function Circularize(selectedIDs, context) {
+       var entityId = selectedIDs[0],
+           entity = context.entity(entityId),
+           extent = entity.extent(context.graph()),
+           geometry = context.geometry(entityId),
+           action = CircularizeAction(entityId, context.projection);
+
+       var operation = function() {
+           var annotation = t('operations.circularize.annotation.' + geometry);
+           context.perform(action, annotation);
+       };
+
+       operation.available = function() {
+           return selectedIDs.length === 1 &&
+               entity.type === 'way' &&
+               _.uniq(entity.nodes).length > 1;
+       };
+
+       operation.disabled = function() {
+           var reason;
+           if (extent.percentContainedIn(context.extent()) < 0.8) {
+               reason = 'too_large';
+           } else if (context.hasHiddenConnections(entityId)) {
+               reason = 'connected_to_hidden';
+           }
+           return action.disabled(context.graph()) || reason;
+       };
+
+       operation.tooltip = function() {
+           var disable = operation.disabled();
+           return disable ?
+               t('operations.circularize.' + disable) :
+               t('operations.circularize.description.' + geometry);
+       };
+
+       operation.id = 'circularize';
+       operation.keys = [t('operations.circularize.key')];
+       operation.title = t('operations.circularize.title');
+
+       return operation;
+   }
+
+   function Continue(selectedIDs, context) {
+       var graph = context.graph(),
+           entities = selectedIDs.map(function(id) { return graph.entity(id); }),
+           geometries = _.extend({line: [], vertex: []},
+               _.groupBy(entities, function(entity) { return entity.geometry(graph); })),
+           vertex = geometries.vertex[0];
+
+       function candidateWays() {
+           return graph.parentWays(vertex).filter(function(parent) {
+               return parent.geometry(graph) === 'line' &&
+                   parent.affix(vertex.id) &&
+                   (geometries.line.length === 0 || geometries.line[0] === parent);
+           });
+       }
+
+       var operation = function() {
+           var candidate = candidateWays()[0];
+           context.enter(DrawLine(
+               context,
+               candidate.id,
+               context.graph(),
+               candidate.affix(vertex.id)));
+       };
+
+       operation.available = function() {
+           return geometries.vertex.length === 1 && geometries.line.length <= 1 &&
+               !context.features().hasHiddenConnections(vertex, context.graph());
+       };
+
+       operation.disabled = function() {
+           var candidates = candidateWays();
+           if (candidates.length === 0)
+               return 'not_eligible';
+           if (candidates.length > 1)
+               return 'multiple';
+       };
+
+       operation.tooltip = function() {
+           var disable = operation.disabled();
+           return disable ?
+               t('operations.continue.' + disable) :
+               t('operations.continue.description');
+       };
+
+       operation.id = 'continue';
+       operation.keys = [t('operations.continue.key')];
+       operation.title = t('operations.continue.title');
+
+       return operation;
+   }
+
+   function Delete(selectedIDs, context) {
+       var action = DeleteMultiple(selectedIDs);
+
+       var operation = function() {
+           var annotation,
+               nextSelectedID;
+
+           if (selectedIDs.length > 1) {
+               annotation = t('operations.delete.annotation.multiple', {n: selectedIDs.length});
+
+           } else {
+               var id = selectedIDs[0],
+                   entity = context.entity(id),
+                   geometry = context.geometry(id),
+                   parents = context.graph().parentWays(entity),
+                   parent = parents[0];
+
+               annotation = t('operations.delete.annotation.' + geometry);
+
+               // Select the next closest node in the way.
+               if (geometry === 'vertex' && parents.length === 1 && parent.nodes.length > 2) {
+                   var nodes = parent.nodes,
+                       i = nodes.indexOf(id);
+
+                   if (i === 0) {
+                       i++;
+                   } else if (i === nodes.length - 1) {
+                       i--;
+                   } else {
+                       var a = sphericalDistance(entity.loc, context.entity(nodes[i - 1]).loc),
+                           b = sphericalDistance(entity.loc, context.entity(nodes[i + 1]).loc);
+                       i = a < b ? i - 1 : i + 1;
+                   }
+
+                   nextSelectedID = nodes[i];
+               }
+           }
+
+           if (nextSelectedID && context.hasEntity(nextSelectedID)) {
+               context.enter(SelectMode(context, [nextSelectedID]));
+           } else {
+               context.enter(Browse(context));
+           }
+
+           context.perform(
+               action,
+               annotation);
+       };
+
+       operation.available = function() {
+           return true;
+       };
+
+       operation.disabled = function() {
+           var reason;
+           if (_.some(selectedIDs, context.hasHiddenConnections)) {
+               reason = 'connected_to_hidden';
+           }
+           return action.disabled(context.graph()) || reason;
+       };
+
+       operation.tooltip = function() {
+           var disable = operation.disabled();
+           return disable ?
+               t('operations.delete.' + disable) :
+               t('operations.delete.description');
+       };
+
+       operation.id = 'delete';
+       operation.keys = [iD.ui.cmd('⌘⌫'), iD.ui.cmd('⌘⌦')];
+       operation.title = t('operations.delete.title');
+
+       return operation;
+   }
+
+   function Disconnect(selectedIDs, context) {
+       var vertices = _.filter(selectedIDs, function vertex(entityId) {
+           return context.geometry(entityId) === 'vertex';
+       });
+
+       var entityId = vertices[0],
+           action = DisconnectAction(entityId);
+
+       if (selectedIDs.length > 1) {
+           action.limitWays(_.without(selectedIDs, entityId));
+       }
+
+       var operation = function() {
+           context.perform(action, t('operations.disconnect.annotation'));
+       };
+
+       operation.available = function() {
+           return vertices.length === 1;
+       };
+
+       operation.disabled = function() {
+           var reason;
+           if (_.some(selectedIDs, context.hasHiddenConnections)) {
+               reason = 'connected_to_hidden';
+           }
+           return action.disabled(context.graph()) || reason;
+       };
+
+       operation.tooltip = function() {
+           var disable = operation.disabled();
+           return disable ?
+               t('operations.disconnect.' + disable) :
+               t('operations.disconnect.description');
+       };
+
+       operation.id = 'disconnect';
+       operation.keys = [t('operations.disconnect.key')];
+       operation.title = t('operations.disconnect.title');
+
+       return operation;
+   }
+
+   function Merge(selectedIDs, context) {
+       var join = Join(selectedIDs),
+           merge = MergeAction(selectedIDs),
+           mergePolygon = MergePolygon(selectedIDs);
+
+       var operation = function() {
+           var annotation = t('operations.merge.annotation', {n: selectedIDs.length}),
+               action;
+
+           if (!join.disabled(context.graph())) {
+               action = join;
+           } else if (!merge.disabled(context.graph())) {
+               action = merge;
+           } else {
+               action = mergePolygon;
+           }
+
+           context.perform(action, annotation);
+           context.enter(SelectMode(context, selectedIDs.filter(function(id) { return context.hasEntity(id); }))
+               .suppressMenu(true));
+       };
+
+       operation.available = function() {
+           return selectedIDs.length >= 2;
+       };
+
+       operation.disabled = function() {
+           return join.disabled(context.graph()) &&
+               merge.disabled(context.graph()) &&
+               mergePolygon.disabled(context.graph());
+       };
+
+       operation.tooltip = function() {
+           var j = join.disabled(context.graph()),
+               m = merge.disabled(context.graph()),
+               p = mergePolygon.disabled(context.graph());
+
+           if (j === 'restriction' && m && p)
+               return t('operations.merge.restriction', {relation: context.presets().item('type/restriction').name()});
+
+           if (p === 'incomplete_relation' && j && m)
+               return t('operations.merge.incomplete_relation');
+
+           if (j && m && p)
+               return t('operations.merge.' + j);
+
+           return t('operations.merge.description');
+       };
+
+       operation.id = 'merge';
+       operation.keys = [t('operations.merge.key')];
+       operation.title = t('operations.merge.title');
+
+       return operation;
+   }
+
+   function Move(selectedIDs, context) {
+       var extent = selectedIDs.reduce(function(extent, id) {
+               return extent.extend(context.entity(id).extent(context.graph()));
+           }, Extent());
+
+       var operation = function() {
+           context.enter(MoveMode(context, selectedIDs));
+       };
+
+       operation.available = function() {
+           return selectedIDs.length > 1 ||
+               context.entity(selectedIDs[0]).type !== 'node';
+       };
+
+       operation.disabled = function() {
+           var reason;
+           if (extent.area() && extent.percentContainedIn(context.extent()) < 0.8) {
+               reason = 'too_large';
+           } else if (_.some(selectedIDs, context.hasHiddenConnections)) {
+               reason = 'connected_to_hidden';
+           }
+           return MoveAction(selectedIDs).disabled(context.graph()) || reason;
+       };
+
+       operation.tooltip = function() {
+           var disable = operation.disabled();
+           return disable ?
+               t('operations.move.' + disable) :
+               t('operations.move.description');
+       };
+
+       operation.id = 'move';
+       operation.keys = [t('operations.move.key')];
+       operation.title = t('operations.move.title');
+
+       return operation;
+   }
+
+   function Orthogonalize(selectedIDs, context) {
+       var entityId = selectedIDs[0],
+           entity = context.entity(entityId),
+           extent = entity.extent(context.graph()),
+           geometry = context.geometry(entityId),
+           action = OrthogonalizeAction(entityId, context.projection);
+
+       var operation = function() {
+           var annotation = t('operations.orthogonalize.annotation.' + geometry);
+           context.perform(action, annotation);
+       };
+
+       operation.available = function() {
+           return selectedIDs.length === 1 &&
+               entity.type === 'way' &&
+               entity.isClosed() &&
+               _.uniq(entity.nodes).length > 2;
+       };
+
+       operation.disabled = function() {
+           var reason;
+           if (extent.percentContainedIn(context.extent()) < 0.8) {
+               reason = 'too_large';
+           } else if (context.hasHiddenConnections(entityId)) {
+               reason = 'connected_to_hidden';
+           }
+           return action.disabled(context.graph()) || reason;
+       };
+
+       operation.tooltip = function() {
+           var disable = operation.disabled();
+           return disable ?
+               t('operations.orthogonalize.' + disable) :
+               t('operations.orthogonalize.description.' + geometry);
+       };
+
+       operation.id = 'orthogonalize';
+       operation.keys = [t('operations.orthogonalize.key')];
+       operation.title = t('operations.orthogonalize.title');
+
+       return operation;
+   }
+
+   function Reverse(selectedIDs, context) {
+       var entityId = selectedIDs[0];
+
+       var operation = function() {
+           context.perform(
+               ReverseAction(entityId),
+               t('operations.reverse.annotation'));
+       };
+
+       operation.available = function() {
+           return selectedIDs.length === 1 &&
+               context.geometry(entityId) === 'line';
+       };
+
+       operation.disabled = function() {
+           return false;
+       };
+
+       operation.tooltip = function() {
+           return t('operations.reverse.description');
+       };
+
+       operation.id = 'reverse';
+       operation.keys = [t('operations.reverse.key')];
+       operation.title = t('operations.reverse.title');
+
+       return operation;
+   }
+
+   function Rotate(selectedIDs, context) {
+       var entityId = selectedIDs[0],
+           entity = context.entity(entityId),
+           extent = entity.extent(context.graph()),
+           geometry = context.geometry(entityId);
+
+       var operation = function() {
+           context.enter(RotateWay(context, entityId));
+       };
+
+       operation.available = function() {
+           if (selectedIDs.length !== 1 || entity.type !== 'way')
+               return false;
+           if (geometry === 'area')
+               return true;
+           if (entity.isClosed() &&
+               context.graph().parentRelations(entity).some(function(r) { return r.isMultipolygon(); }))
+               return true;
+           return false;
+       };
+
+       operation.disabled = function() {
+           if (extent.percentContainedIn(context.extent()) < 0.8) {
+               return 'too_large';
+           } else if (context.hasHiddenConnections(entityId)) {
+               return 'connected_to_hidden';
+           } else {
+               return false;
+           }
+       };
+
+       operation.tooltip = function() {
+           var disable = operation.disabled();
+           return disable ?
+               t('operations.rotate.' + disable) :
+               t('operations.rotate.description');
+       };
+
+       operation.id = 'rotate';
+       operation.keys = [t('operations.rotate.key')];
+       operation.title = t('operations.rotate.title');
+
+       return operation;
+   }
+
+   function Split(selectedIDs, context) {
+       var vertices = _.filter(selectedIDs, function vertex(entityId) {
+           return context.geometry(entityId) === 'vertex';
+       });
+
+       var entityId = vertices[0],
+           action = SplitAction(entityId);
+
+       if (selectedIDs.length > 1) {
+           action.limitWays(_.without(selectedIDs, entityId));
+       }
+
+       var operation = function() {
+           var annotation;
+
+           var ways = action.ways(context.graph());
+           if (ways.length === 1) {
+               annotation = t('operations.split.annotation.' + context.geometry(ways[0].id));
+           } else {
+               annotation = t('operations.split.annotation.multiple', {n: ways.length});
+           }
+
+           var difference = context.perform(action, annotation);
+           context.enter(SelectMode(context, difference.extantIDs()));
+       };
+
+       operation.available = function() {
+           return vertices.length === 1;
+       };
+
+       operation.disabled = function() {
+           var reason;
+           if (_.some(selectedIDs, context.hasHiddenConnections)) {
+               reason = 'connected_to_hidden';
+           }
+           return action.disabled(context.graph()) || reason;
+       };
+
+       operation.tooltip = function() {
+           var disable = operation.disabled();
+           if (disable) {
+               return t('operations.split.' + disable);
+           }
+
+           var ways = action.ways(context.graph());
+           if (ways.length === 1) {
+               return t('operations.split.description.' + context.geometry(ways[0].id));
+           } else {
+               return t('operations.split.description.multiple');
+           }
+       };
+
+       operation.id = 'split';
+       operation.keys = [t('operations.split.key')];
+       operation.title = t('operations.split.title');
+
+       return operation;
+   }
+
+   function Straighten(selectedIDs, context) {
+       var entityId = selectedIDs[0],
+           action = StraightenAction(entityId, context.projection);
+
+       function operation() {
+           var annotation = t('operations.straighten.annotation');
+           context.perform(action, annotation);
+       }
+
+       operation.available = function() {
+           var entity = context.entity(entityId);
+           return selectedIDs.length === 1 &&
+               entity.type === 'way' &&
+               !entity.isClosed() &&
+               _.uniq(entity.nodes).length > 2;
+       };
+
+       operation.disabled = function() {
+           var reason;
+           if (context.hasHiddenConnections(entityId)) {
+               reason = 'connected_to_hidden';
+           }
+           return action.disabled(context.graph()) || reason;
+       };
+
+       operation.tooltip = function() {
+           var disable = operation.disabled();
+           return disable ?
+               t('operations.straighten.' + disable) :
+               t('operations.straighten.description');
+       };
+
+       operation.id = 'straighten';
+       operation.keys = [t('operations.straighten.key')];
+       operation.title = t('operations.straighten.title');
+
+       return operation;
+   }
+
+
+
+   var Operations = Object.freeze({
+   	Circularize: Circularize,
+   	Continue: Continue,
+   	Delete: Delete,
+   	Disconnect: Disconnect,
+   	Merge: Merge,
+   	Move: Move,
+   	Orthogonalize: Orthogonalize,
+   	Reverse: Reverse,
+   	Rotate: Rotate,
+   	Split: Split,
+   	Straighten: Straighten
+   });
+
+   function SelectMode(context, selectedIDs) {
+       var mode = {
+           id: 'select',
+           button: 'browse'
+       };
+
+       var keybinding = d3.keybinding('select'),
+           timeout = null,
+           behaviors = [
+               Copy(context),
+               Paste(context),
+               Breathe(context),
+               Hover(context),
+               Select(context),
+               Lasso(context),
+               DragNode(context)
+                   .selectedIDs(selectedIDs)
+                   .behavior],
+           inspector,
+           radialMenu,
+           newFeature = false,
+           suppressMenu = false;
+
+       var wrap = context.container()
+           .select('.inspector-wrap');
+
+
+       function singular() {
+           if (selectedIDs.length === 1) {
+               return context.hasEntity(selectedIDs[0]);
+           }
+       }
+
+       function closeMenu() {
+           if (radialMenu) {
+               context.surface().call(radialMenu.close);
+           }
+       }
+
+       function positionMenu() {
+           if (suppressMenu || !radialMenu) { return; }
+
+           var entity = singular();
+           if (entity && context.geometry(entity.id) === 'relation') {
+               suppressMenu = true;
+           } else if (entity && entity.type === 'node') {
+               radialMenu.center(context.projection(entity.loc));
+           } else {
+               var point = context.mouse(),
+                   viewport = Extent(context.projection.clipExtent()).polygon();
+               if (pointInPolygon(point, viewport)) {
+                   radialMenu.center(point);
+               } else {
+                   suppressMenu = true;
+               }
+           }
+       }
+
+       function showMenu() {
+           closeMenu();
+           if (!suppressMenu && radialMenu) {
+               context.surface().call(radialMenu);
+           }
+       }
+
+       function toggleMenu() {
+           if (d3.select('.radial-menu').empty()) {
+               showMenu();
+           } else {
+               closeMenu();
+           }
+       }
+
+       mode.selectedIDs = function() {
+           return selectedIDs;
+       };
+
+       mode.reselect = function() {
+           var surfaceNode = context.surface().node();
+           if (surfaceNode.focus) { // FF doesn't support it
+               surfaceNode.focus();
+           }
+
+           positionMenu();
+           showMenu();
+       };
+
+       mode.newFeature = function(_) {
+           if (!arguments.length) return newFeature;
+           newFeature = _;
+           return mode;
+       };
+
+       mode.suppressMenu = function(_) {
+           if (!arguments.length) return suppressMenu;
+           suppressMenu = _;
+           return mode;
+       };
+
+       mode.enter = function() {
+           function update() {
+               closeMenu();
+               if (_.some(selectedIDs, function(id) { return !context.hasEntity(id); })) {
+                   // Exit mode if selected entity gets undone
+                   context.enter(Browse(context));
+               }
+           }
+
+           function dblclick() {
+               var target = d3.select(d3.event.target),
+                   datum = target.datum();
+
+               if (datum instanceof Way && !target.classed('fill')) {
+                   var choice = chooseEdge(context.childNodes(datum), context.mouse(), context.projection),
+                       node = Node();
+
+                   var prev = datum.nodes[choice.index - 1],
+                       next = datum.nodes[choice.index];
+
+                   context.perform(
+                       AddMidpoint({loc: choice.loc, edge: [prev, next]}, node),
+                       t('operations.add.annotation.vertex'));
+
+                   d3.event.preventDefault();
+                   d3.event.stopPropagation();
+               }
+           }
+
+           function selectElements(drawn) {
+               var entity = singular();
+               if (entity && context.geometry(entity.id) === 'relation') {
+                   suppressMenu = true;
+                   return;
+               }
+
+               var selection = context.surface()
+                       .selectAll(entityOrMemberSelector(selectedIDs, context.graph()));
+
+               if (selection.empty()) {
+                   if (drawn) {  // Exit mode if selected DOM elements have disappeared..
+                       context.enter(Browse(context));
+                   }
+               } else {
+                   selection
+                       .classed('selected', true);
+               }
+           }
+
+           function esc() {
+               if (!context.inIntro()) {
+                   context.enter(Browse(context));
+               }
+           }
+
+
+           behaviors.forEach(function(behavior) {
+               context.install(behavior);
+           });
+
+           var operations = _.without(d3.values(Operations), Delete)
+                   .map(function(o) { return o(selectedIDs, context); })
+                   .filter(function(o) { return o.available(); });
+
+           operations.unshift(Delete(selectedIDs, context));
+
+           keybinding
+               .on('⎋', esc, true)
+               .on('space', toggleMenu);
+
+           operations.forEach(function(operation) {
+               operation.keys.forEach(function(key) {
+                   keybinding.on(key, function() {
+                       if (!(context.inIntro() || operation.disabled())) {
+                           operation();
+                       }
+                   });
+               });
+           });
+
+           d3.select(document)
+               .call(keybinding);
+
+           radialMenu = RadialMenu(context, operations);
+
+           context.ui().sidebar
+               .select(singular() ? singular().id : null, newFeature);
+
+           context.history()
+               .on('undone.select', update)
+               .on('redone.select', update);
+
+           context.map()
+               .on('move.select', closeMenu)
+               .on('drawn.select', selectElements);
+
+           selectElements();
+
+           var show = d3.event && !suppressMenu;
+
+           if (show) {
+               positionMenu();
+           }
+
+           timeout = window.setTimeout(function() {
+               if (show) {
+                   showMenu();
+               }
+
+               context.surface()
+                   .on('dblclick.select', dblclick);
+           }, 200);
+
+           if (selectedIDs.length > 1) {
+               var entities = SelectionList(context, selectedIDs);
+               context.ui().sidebar.show(entities);
+           }
+       };
+
+       mode.exit = function() {
+           if (timeout) window.clearTimeout(timeout);
+
+           if (inspector) wrap.call(inspector.close);
+
+           behaviors.forEach(function(behavior) {
+               context.uninstall(behavior);
+           });
+
+           keybinding.off();
+           closeMenu();
+           radialMenu = undefined;
+
+           context.history()
+               .on('undone.select', null)
+               .on('redone.select', null);
+
+           context.surface()
+               .on('dblclick.select', null)
+               .selectAll('.selected')
+               .classed('selected', false);
+
+           context.map().on('drawn.select', null);
+           context.ui().sidebar.hide();
+       };
+
+       return mode;
+   }
+
+
+
+   var modes = Object.freeze({
+   	AddArea: AddArea,
+   	AddLine: AddLine,
+   	AddPoint: AddPoint,
+   	Browse: Browse,
+   	DragNode: DragNode,
+   	DrawArea: DrawArea,
+   	DrawLine: DrawLine,
+   	Move: MoveMode,
+   	RotateWay: RotateWay,
+   	Save: Save$1,
+   	Select: SelectMode
+   });
+
+   function Edit(context) {
+       function edit() {
+           context.map()
+               .minzoom(context.minEditableZoom());
+       }
+
+       edit.off = function() {
+           context.map()
+               .minzoom(0);
+       };
+
+       return edit;
+   }
+
+   /*
+      The hover behavior adds the `.hover` class on mouseover to all elements to which
+      the identical datum is bound, and removes it on mouseout.
+
+      The :hover pseudo-class is insufficient for iD's purposes because a datum's visual
+      representation may consist of several elements scattered throughout the DOM hierarchy.
+      Only one of these elements can have the :hover pseudo-class, but all of them will
+      have the .hover class.
+    */
+   function Hover() {
+       var dispatch = d3.dispatch('hover'),
+           selection,
+           altDisables,
+           target;
+
+       function keydown() {
+           if (altDisables && d3.event.keyCode === d3.keybinding.modifierCodes.alt) {
+               dispatch.hover(null);
+               selection.selectAll('.hover')
+                   .classed('hover-suppressed', true)
+                   .classed('hover', false);
+           }
+       }
+
+       function keyup() {
+           if (altDisables && d3.event.keyCode === d3.keybinding.modifierCodes.alt) {
+               dispatch.hover(target ? target.id : null);
+               selection.selectAll('.hover-suppressed')
+                   .classed('hover-suppressed', false)
+                   .classed('hover', true);
+           }
+       }
+
+       var hover = function(__) {
+           selection = __;
+
+           function enter(d) {
+               if (d === target) return;
+
+               target = d;
+
+               selection.selectAll('.hover')
+                   .classed('hover', false);
+               selection.selectAll('.hover-suppressed')
+                   .classed('hover-suppressed', false);
+
+               if (target instanceof Entity) {
+                   var selector = '.' + target.id;
+
+                   if (target.type === 'relation') {
+                       target.members.forEach(function(member) {
+                           selector += ', .' + member.id;
+                       });
+                   }
+
+                   var suppressed = altDisables && d3.event && d3.event.altKey;
+
+                   selection.selectAll(selector)
+                       .classed(suppressed ? 'hover-suppressed' : 'hover', true);
+
+                   dispatch.hover(target.id);
+               } else {
+                   dispatch.hover(null);
+               }
+           }
+
+           var down;
+
+           function mouseover() {
+               if (down) return;
+               var target = d3.event.target;
+               enter(target ? target.__data__ : null);
+           }
+
+           function mouseout() {
+               if (down) return;
+               var target = d3.event.relatedTarget;
+               enter(target ? target.__data__ : null);
+           }
+
+           function mousedown() {
+               down = true;
+               d3.select(window)
+                   .on('mouseup.hover', mouseup);
+           }
+
+           function mouseup() {
+               down = false;
+           }
+
+           selection
+               .on('mouseover.hover', mouseover)
+               .on('mouseout.hover', mouseout)
+               .on('mousedown.hover', mousedown)
+               .on('mouseup.hover', mouseup);
+
+           d3.select(window)
+               .on('keydown.hover', keydown)
+               .on('keyup.hover', keyup);
+       };
+
+       hover.off = function(selection) {
+           selection.selectAll('.hover')
+               .classed('hover', false);
+           selection.selectAll('.hover-suppressed')
+               .classed('hover-suppressed', false);
+
+           selection
+               .on('mouseover.hover', null)
+               .on('mouseout.hover', null)
+               .on('mousedown.hover', null)
+               .on('mouseup.hover', null);
+
+           d3.select(window)
+               .on('keydown.hover', null)
+               .on('keyup.hover', null)
+               .on('mouseup.hover', null);
+       };
+
+       hover.altDisables = function(_) {
+           if (!arguments.length) return altDisables;
+           altDisables = _;
+           return hover;
+       };
+
+       return d3.rebind(hover, dispatch, 'on');
+   }
+
+   function Tail() {
+       var text,
+           container,
+           xmargin = 25,
+           tooltipSize = [0, 0],
+           selectionSize = [0, 0];
+
+       function tail(selection) {
+           if (!text) return;
+
+           d3.select(window)
+               .on('resize.tail', function() { selectionSize = selection.dimensions(); });
+
+           function show() {
+               container.style('display', 'block');
+               tooltipSize = container.dimensions();
+           }
+
+           function mousemove() {
+               if (container.style('display') === 'none') show();
+               var xoffset = ((d3.event.clientX + tooltipSize[0] + xmargin) > selectionSize[0]) ?
+                   -tooltipSize[0] - xmargin : xmargin;
+               container.classed('left', xoffset > 0);
+               setTransform(container, d3.event.clientX + xoffset, d3.event.clientY);
+           }
+
+           function mouseleave() {
+               if (d3.event.relatedTarget !== container.node()) {
+                   container.style('display', 'none');
+               }
+           }
+
+           function mouseenter() {
+               if (d3.event.relatedTarget !== container.node()) {
+                   show();
+               }
+           }
+
+           container = d3.select(document.body)
+               .append('div')
+               .style('display', 'none')
+               .attr('class', 'tail tooltip-inner');
+
+           container.append('div')
+               .text(text);
+
+           selection
+               .on('mousemove.tail', mousemove)
+               .on('mouseenter.tail', mouseenter)
+               .on('mouseleave.tail', mouseleave);
+
+           container
+               .on('mousemove.tail', mousemove);
+
+           tooltipSize = container.dimensions();
+           selectionSize = selection.dimensions();
+       }
+
+       tail.off = function(selection) {
+           if (!text) return;
+
+           container
+               .on('mousemove.tail', null)
+               .remove();
+
+           selection
+               .on('mousemove.tail', null)
+               .on('mouseenter.tail', null)
+               .on('mouseleave.tail', null);
+
+           d3.select(window)
+               .on('resize.tail', null);
+       };
+
+       tail.text = function(_) {
+           if (!arguments.length) return text;
+           text = _;
+           return tail;
+       };
+
+       return tail;
+   }
+
+   function Draw(context) {
+       var event = d3.dispatch('move', 'click', 'clickWay',
+               'clickNode', 'undo', 'cancel', 'finish'),
+           keybinding = d3.keybinding('draw'),
+           hover = Hover(context)
+               .altDisables(true)
+               .on('hover', context.ui().sidebar.hover),
+           tail = Tail(),
+           edit = Edit(context),
+           closeTolerance = 4,
+           tolerance = 12,
+           mouseLeave = false,
+           lastMouse = null,
+           cached = Draw;
+
+       function datum() {
+           if (d3.event.altKey) return {};
+
+           if (d3.event.type === 'keydown') {
+               return (lastMouse && lastMouse.target.__data__) || {};
+           } else {
+               return d3.event.target.__data__ || {};
+           }
+       }
+
+       function mousedown() {
+
+           function point() {
+               var p = context.container().node();
+               return touchId !== null ? d3.touches(p).filter(function(p) {
+                   return p.identifier === touchId;
+               })[0] : d3.mouse(p);
+           }
+
+           var element = d3.select(this),
+               touchId = d3.event.touches ? d3.event.changedTouches[0].identifier : null,
+               t1 = +new Date(),
+               p1 = point();
+
+           element.on('mousemove.draw', null);
+
+           d3.select(window).on('mouseup.draw', function() {
+               var t2 = +new Date(),
+                   p2 = point(),
+                   dist = euclideanDistance(p1, p2);
+
+               element.on('mousemove.draw', mousemove);
+               d3.select(window).on('mouseup.draw', null);
+
+               if (dist < closeTolerance || (dist < tolerance && (t2 - t1) < 500)) {
+                   // Prevent a quick second click
+                   d3.select(window).on('click.draw-block', function() {
+                       d3.event.stopPropagation();
+                   }, true);
+
+                   context.map().dblclickEnable(false);
+
+                   window.setTimeout(function() {
+                       context.map().dblclickEnable(true);
+                       d3.select(window).on('click.draw-block', null);
+                   }, 500);
+
+                   click();
+               }
+           });
+       }
+
+       function mousemove() {
+           lastMouse = d3.event;
+           event.move(datum());
+       }
+
+       function mouseenter() {
+           mouseLeave = false;
+       }
+
+       function mouseleave() {
+           mouseLeave = true;
+       }
+
+       function click() {
+           var d = datum();
+           if (d.type === 'way') {
+               var dims = context.map().dimensions(),
+                   mouse = context.mouse(),
+                   pad = 5,
+                   trySnap = mouse[0] > pad && mouse[0] < dims[0] - pad &&
+                       mouse[1] > pad && mouse[1] < dims[1] - pad;
+
+               if (trySnap) {
+                   var choice = chooseEdge(context.childNodes(d), context.mouse(), context.projection),
+                       edge = [d.nodes[choice.index - 1], d.nodes[choice.index]];
+                   event.clickWay(choice.loc, edge);
+               } else {
+                   event.click(context.map().mouseCoordinates());
+               }
+
+           } else if (d.type === 'node') {
+               event.clickNode(d);
+
+           } else {
+               event.click(context.map().mouseCoordinates());
+           }
+       }
+
+       function space() {
+           var currSpace = context.mouse();
+           if (cached.disableSpace && cached.lastSpace) {
+               var dist = euclideanDistance(cached.lastSpace, currSpace);
+               if (dist > tolerance) {
+                   cached.disableSpace = false;
+               }
+           }
+
+           if (cached.disableSpace || mouseLeave || !lastMouse) return;
+
+           // user must move mouse or release space bar to allow another click
+           cached.lastSpace = currSpace;
+           cached.disableSpace = true;
+
+           d3.select(window).on('keyup.space-block', function() {
+               cached.disableSpace = false;
+               d3.select(window).on('keyup.space-block', null);
+           });
+
+           d3.event.preventDefault();
+           click();
+       }
+
+       function backspace() {
+           d3.event.preventDefault();
+           event.undo();
+       }
+
+       function del() {
+           d3.event.preventDefault();
+           event.cancel();
+       }
+
+       function ret() {
+           d3.event.preventDefault();
+           event.finish();
+       }
+
+       function draw(selection) {
+           context.install(hover);
+           context.install(edit);
+
+           if (!context.inIntro() && !cached.usedTails[tail.text()]) {
+               context.install(tail);
+           }
+
+           keybinding
+               .on('⌫', backspace)
+               .on('⌦', del)
+               .on('⎋', ret)
+               .on('↩', ret)
+               .on('space', space)
+               .on('⌥space', space);
+
+           selection
+               .on('mouseenter.draw', mouseenter)
+               .on('mouseleave.draw', mouseleave)
+               .on('mousedown.draw', mousedown)
+               .on('mousemove.draw', mousemove);
+
+           d3.select(document)
+               .call(keybinding);
+
+           return draw;
+       }
+
+       draw.off = function(selection) {
+           context.ui().sidebar.hover.cancel();
+           context.uninstall(hover);
+           context.uninstall(edit);
+
+           if (!context.inIntro() && !cached.usedTails[tail.text()]) {
+               context.uninstall(tail);
+               cached.usedTails[tail.text()] = true;
+           }
+
+           selection
+               .on('mouseenter.draw', null)
+               .on('mouseleave.draw', null)
+               .on('mousedown.draw', null)
+               .on('mousemove.draw', null);
+
+           d3.select(window)
+               .on('mouseup.draw', null);
+               // note: keyup.space-block, click.draw-block should remain
+
+           d3.select(document)
+               .call(keybinding.off);
+       };
+
+       draw.tail = function(_) {
+           tail.text(_);
+           return draw;
+       };
+
+       return d3.rebind(draw, event, 'on');
+   }
+
+   Draw.usedTails = {};
+   Draw.disableSpace = false;
+   Draw.lastSpace = null;
+
+   function AddWay(context) {
+       var event = d3.dispatch('start', 'startFromWay', 'startFromNode'),
+           draw = Draw(context);
+
+       var addWay = function(surface) {
+           draw.on('click', event.start)
+               .on('clickWay', event.startFromWay)
+               .on('clickNode', event.startFromNode)
+               .on('cancel', addWay.cancel)
+               .on('finish', addWay.cancel);
+
+           context.map()
+               .dblclickEnable(false);
+
+           surface.call(draw);
+       };
+
+       addWay.off = function(surface) {
+           surface.call(draw.off);
+       };
+
+       addWay.cancel = function() {
+           window.setTimeout(function() {
+               context.map().dblclickEnable(true);
+           }, 1000);
+
+           context.enter(Browse(context));
+       };
+
+       addWay.tail = function(text) {
+           draw.tail(text);
+           return addWay;
+       };
+
+       return d3.rebind(addWay, event, 'on');
+   }
+
+   function Breathe(){
+       var duration = 800,
+           selector = '.selected.shadow, .selected .shadow',
+           selected = d3.select(null),
+           classed = '',
+           params = {},
+           done;
+
+       function reset(selection) {
+           selection
+               .style('stroke-opacity', null)
+               .style('stroke-width', null)
+               .style('fill-opacity', null)
+               .style('r', null);
+       }
+
+       function setAnimationParams(transition, fromTo) {
+           transition
+               .style('stroke-opacity', function(d) { return params[d.id][fromTo].opacity; })
+               .style('stroke-width', function(d) { return params[d.id][fromTo].width; })
+               .style('fill-opacity', function(d) { return params[d.id][fromTo].opacity; })
+               .style('r', function(d) { return params[d.id][fromTo].width; });
+       }
+
+       function calcAnimationParams(selection) {
+           selection
+               .call(reset)
+               .each(function(d) {
+                   var s = d3.select(this),
+                       tag = s.node().tagName,
+                       p = {'from': {}, 'to': {}},
+                       opacity, width;
+
+                   // determine base opacity and width
+                   if (tag === 'circle') {
+                       opacity = parseFloat(s.style('fill-opacity') || 0.5);
+                       width = parseFloat(s.style('r') || 15.5);
+                   } else {
+                       opacity = parseFloat(s.style('stroke-opacity') || 0.7);
+                       width = parseFloat(s.style('stroke-width') || 10);
+                   }
+
+                   // calculate from/to interpolation params..
+                   p.tag = tag;
+                   p.from.opacity = opacity * 0.6;
+                   p.to.opacity = opacity * 1.25;
+                   p.from.width = width * 0.9;
+                   p.to.width = width * (tag === 'circle' ? 1.5 : 1.25);
+                   params[d.id] = p;
+               });
+       }
+
+       function run(surface, fromTo) {
+           var toFrom = (fromTo === 'from' ? 'to': 'from'),
+               currSelected = surface.selectAll(selector),
+               currClassed = surface.attr('class'),
+               n = 0;
+
+           if (done || currSelected.empty()) {
+               selected.call(reset);
+               return;
+           }
+
+           if (!_.isEqual(currSelected, selected) || currClassed !== classed) {
+               selected.call(reset);
+               classed = currClassed;
+               selected = currSelected.call(calcAnimationParams);
+           }
+
+           selected
+               .transition()
+               .call(setAnimationParams, fromTo)
+               .duration(duration)
+               .each(function() { ++n; })
+               .each('end', function() {
+                   if (!--n) {  // call once
+                       surface.call(run, toFrom);
+                   }
+               });
+       }
+
+       var breathe = function(surface) {
+           done = false;
+           d3.timer(function() {
+               if (done) return true;
+
+               var currSelected = surface.selectAll(selector);
+               if (currSelected.empty()) return false;
+
+               surface.call(run, 'from');
+               return true;
+           }, 200);
+       };
+
+       breathe.off = function() {
+           done = true;
+           d3.timer.flush();
+           selected
+               .transition()
+               .call(reset)
+               .duration(0);
+       };
+
+       return breathe;
+   }
+
+   function Copy(context) {
+       var keybinding = d3.keybinding('copy');
+
+       function groupEntities(ids, graph) {
+           var entities = ids.map(function (id) { return graph.entity(id); });
+           return _.extend({relation: [], way: [], node: []},
+               _.groupBy(entities, function(entity) { return entity.type; }));
+       }
+
+       function getDescendants(id, graph, descendants) {
+           var entity = graph.entity(id),
+               i, children;
+
+           descendants = descendants || {};
+
+           if (entity.type === 'relation') {
+               children = _.map(entity.members, 'id');
+           } else if (entity.type === 'way') {
+               children = entity.nodes;
+           } else {
+               children = [];
+           }
+
+           for (i = 0; i < children.length; i++) {
+               if (!descendants[children[i]]) {
+                   descendants[children[i]] = true;
+                   descendants = getDescendants(children[i], graph, descendants);
+               }
+           }
+
+           return descendants;
+       }
+
+       function doCopy() {
+           d3.event.preventDefault();
+           if (context.inIntro()) return;
+
+           var graph = context.graph(),
+               selected = groupEntities(context.selectedIDs(), graph),
+               canCopy = [],
+               skip = {},
+               i, entity;
+
+           for (i = 0; i < selected.relation.length; i++) {
+               entity = selected.relation[i];
+               if (!skip[entity.id] && entity.isComplete(graph)) {
+                   canCopy.push(entity.id);
+                   skip = getDescendants(entity.id, graph, skip);
+               }
+           }
+           for (i = 0; i < selected.way.length; i++) {
+               entity = selected.way[i];
+               if (!skip[entity.id]) {
+                   canCopy.push(entity.id);
+                   skip = getDescendants(entity.id, graph, skip);
+               }
+           }
+           for (i = 0; i < selected.node.length; i++) {
+               entity = selected.node[i];
+               if (!skip[entity.id]) {
+                   canCopy.push(entity.id);
+               }
+           }
+
+           context.copyIDs(canCopy);
+       }
+
+       function copy() {
+           keybinding.on(cmd('⌘C'), doCopy);
+           d3.select(document).call(keybinding);
+           return copy;
+       }
+
+       copy.off = function() {
+           d3.select(document).call(keybinding.off);
+       };
+
+       return copy;
+   }
+
+   /*
+       `iD.behavior.drag` is like `d3.behavior.drag`, with the following differences:
+
+       * The `origin` function is expected to return an [x, y] tuple rather than an
+         {x, y} object.
+       * The events are `start`, `move`, and `end`.
+         (https://github.com/mbostock/d3/issues/563)
+       * The `start` event is not dispatched until the first cursor movement occurs.
+         (https://github.com/mbostock/d3/pull/368)
+       * The `move` event has a `point` and `delta` [x, y] tuple properties rather
+         than `x`, `y`, `dx`, and `dy` properties.
+       * The `end` event is not dispatched if no movement occurs.
+       * An `off` function is available that unbinds the drag's internal event handlers.
+       * Delegation is supported via the `delegate` function.
+
+    */
+   function drag() {
+       function d3_eventCancel() {
+         d3.event.stopPropagation();
+         d3.event.preventDefault();
+       }
+
+       var event = d3.dispatch('start', 'move', 'end'),
+           origin = null,
+           selector = '',
+           filter = null,
+           event_, target, surface;
+
+       event.of = function(thiz, argumentz) {
+         return function(e1) {
+           var e0 = e1.sourceEvent = d3.event;
+           e1.target = drag;
+           d3.event = e1;
+           try {
+             event[e1.type].apply(thiz, argumentz);
+           } finally {
+             d3.event = e0;
+           }
+         };
+       };
+
+       var d3_event_userSelectProperty = prefixCSSProperty('UserSelect'),
+           d3_event_userSelectSuppress = d3_event_userSelectProperty ?
+               function () {
+                   var selection = d3.selection(),
+                       select = selection.style(d3_event_userSelectProperty);
+                   selection.style(d3_event_userSelectProperty, 'none');
+                   return function () {
+                       selection.style(d3_event_userSelectProperty, select);
+                   };
+               } :
+               function (type) {
+                   var w = d3.select(window).on('selectstart.' + type, d3_eventCancel);
+                   return function () {
+                       w.on('selectstart.' + type, null);
+                   };
+               };
+
+       function mousedown() {
+           target = this;
+           event_ = event.of(target, arguments);
+           var eventTarget = d3.event.target,
+               touchId = d3.event.touches ? d3.event.changedTouches[0].identifier : null,
+               offset,
+               origin_ = point(),
+               started = false,
+               selectEnable = d3_event_userSelectSuppress(touchId !== null ? 'drag-' + touchId : 'drag');
+
+           var w = d3.select(window)
+               .on(touchId !== null ? 'touchmove.drag-' + touchId : 'mousemove.drag', dragmove)
+               .on(touchId !== null ? 'touchend.drag-' + touchId : 'mouseup.drag', dragend, true);
+
+           if (origin) {
+               offset = origin.apply(target, arguments);
+               offset = [offset[0] - origin_[0], offset[1] - origin_[1]];
+           } else {
+               offset = [0, 0];
+           }
+
+           if (touchId === null) d3.event.stopPropagation();
+
+           function point() {
+               var p = target.parentNode || surface;
+               return touchId !== null ? d3.touches(p).filter(function(p) {
+                   return p.identifier === touchId;
+               })[0] : d3.mouse(p);
+           }
+
+           function dragmove() {
+
+               var p = point(),
+                   dx = p[0] - origin_[0],
+                   dy = p[1] - origin_[1];
+
+               if (dx === 0 && dy === 0)
+                   return;
+
+               if (!started) {
+                   started = true;
+                   event_({
+                       type: 'start'
+                   });
+               }
+
+               origin_ = p;
+               d3_eventCancel();
+
+               event_({
+                   type: 'move',
+                   point: [p[0] + offset[0],  p[1] + offset[1]],
+                   delta: [dx, dy]
+               });
+           }
+
+           function dragend() {
+               if (started) {
+                   event_({
+                       type: 'end'
+                   });
+
+                   d3_eventCancel();
+                   if (d3.event.target === eventTarget) w.on('click.drag', click, true);
+               }
+
+               w.on(touchId !== null ? 'touchmove.drag-' + touchId : 'mousemove.drag', null)
+                   .on(touchId !== null ? 'touchend.drag-' + touchId : 'mouseup.drag', null);
+               selectEnable();
+           }
+
+           function click() {
+               d3_eventCancel();
+               w.on('click.drag', null);
+           }
+       }
+
+       function drag(selection) {
+           var matchesSelector = prefixDOMProperty('matchesSelector'),
+               delegate = mousedown;
+
+           if (selector) {
+               delegate = function() {
+                   var root = this,
+                       target = d3.event.target;
+                   for (; target && target !== root; target = target.parentNode) {
+                       if (target[matchesSelector](selector) &&
+                               (!filter || filter(target.__data__))) {
+                           return mousedown.call(target, target.__data__);
+                       }
+                   }
+               };
+           }
+
+           selection.on('mousedown.drag' + selector, delegate)
+               .on('touchstart.drag' + selector, delegate);
+       }
+
+       drag.off = function(selection) {
+           selection.on('mousedown.drag' + selector, null)
+               .on('touchstart.drag' + selector, null);
+       };
+
+       drag.delegate = function(_) {
+           if (!arguments.length) return selector;
+           selector = _;
+           return drag;
+       };
+
+       drag.filter = function(_) {
+           if (!arguments.length) return origin;
+           filter = _;
+           return drag;
+       };
+
+       drag.origin = function (_) {
+           if (!arguments.length) return origin;
+           origin = _;
+           return drag;
+       };
+
+       drag.cancel = function() {
+           d3.select(window)
+               .on('mousemove.drag', null)
+               .on('mouseup.drag', null);
+           return drag;
+       };
+
+       drag.target = function() {
+           if (!arguments.length) return target;
+           target = arguments[0];
+           event_ = event.of(target, Array.prototype.slice.call(arguments, 1));
+           return drag;
+       };
+
+       drag.surface = function() {
+           if (!arguments.length) return surface;
+           surface = arguments[0];
+           return drag;
+       };
+
+       return d3.rebind(drag, event, 'on');
+   }
+
+   function DrawWay(context, wayId, index, mode, baseGraph) {
+       var way = context.entity(wayId),
+           isArea = context.geometry(wayId) === 'area',
+           finished = false,
+           annotation = t((way.isDegenerate() ?
+               'operations.start.annotation.' :
+               'operations.continue.annotation.') + context.geometry(wayId)),
+           draw = Draw(context);
+
+       var startIndex = typeof index === 'undefined' ? way.nodes.length - 1 : 0,
+           start = Node({loc: context.graph().entity(way.nodes[startIndex]).loc}),
+           end = Node({loc: context.map().mouseCoordinates()}),
+           segment = Way({
+               nodes: typeof index === 'undefined' ? [start.id, end.id] : [end.id, start.id],
+               tags: _.clone(way.tags)
+           });
+
+       var f = context[way.isDegenerate() ? 'replace' : 'perform'];
+       if (isArea) {
+           f(AddEntity(end),
+               AddVertex(wayId, end.id, index));
+       } else {
+           f(AddEntity(start),
+               AddEntity(end),
+               AddEntity(segment));
+       }
+
+       function move(datum) {
+           var loc;
+
+           if (datum.type === 'node' && datum.id !== end.id) {
+               loc = datum.loc;
+
+           } else if (datum.type === 'way' && datum.id !== segment.id) {
+               var dims = context.map().dimensions(),
+                   mouse = context.mouse(),
+                   pad = 5,
+                   trySnap = mouse[0] > pad && mouse[0] < dims[0] - pad &&
+                       mouse[1] > pad && mouse[1] < dims[1] - pad;
+
+               if (trySnap) {
+                   loc = chooseEdge(context.childNodes(datum), context.mouse(), context.projection).loc;
+               }
+           }
+
+           if (!loc) {
+               loc = context.map().mouseCoordinates();
+           }
+
+           context.replace(MoveNode(end.id, loc));
+       }
+
+       function undone() {
+           finished = true;
+           context.enter(Browse(context));
+       }
+
+       function setActiveElements() {
+           var active = isArea ? [wayId, end.id] : [segment.id, start.id, end.id];
+           context.surface().selectAll(entitySelector(active))
+               .classed('active', true);
+       }
+
+       var drawWay = function(surface) {
+           draw.on('move', move)
+               .on('click', drawWay.add)
+               .on('clickWay', drawWay.addWay)
+               .on('clickNode', drawWay.addNode)
+               .on('undo', context.undo)
+               .on('cancel', drawWay.cancel)
+               .on('finish', drawWay.finish);
+
+           context.map()
+               .dblclickEnable(false)
+               .on('drawn.draw', setActiveElements);
+
+           setActiveElements();
+
+           surface.call(draw);
+
+           context.history()
+               .on('undone.draw', undone);
+       };
+
+       drawWay.off = function(surface) {
+           if (!finished)
+               context.pop();
+
+           context.map()
+               .on('drawn.draw', null);
+
+           surface.call(draw.off)
+               .selectAll('.active')
+               .classed('active', false);
+
+           context.history()
+               .on('undone.draw', null);
+       };
+
+       function ReplaceTemporaryNode(newNode) {
+           return function(graph) {
+               if (isArea) {
+                   return graph
+                       .replace(way.addNode(newNode.id, index))
+                       .remove(end);
+
+               } else {
+                   return graph
+                       .replace(graph.entity(wayId).addNode(newNode.id, index))
+                       .remove(end)
+                       .remove(segment)
+                       .remove(start);
+               }
+           };
+       }
+
+       // Accept the current position of the temporary node and continue drawing.
+       drawWay.add = function(loc) {
+
+           // prevent duplicate nodes
+           var last = context.hasEntity(way.nodes[way.nodes.length - (isArea ? 2 : 1)]);
+           if (last && last.loc[0] === loc[0] && last.loc[1] === loc[1]) return;
+
+           var newNode = Node({loc: loc});
+
+           context.replace(
+               AddEntity(newNode),
+               ReplaceTemporaryNode(newNode),
+               annotation);
+
+           finished = true;
+           context.enter(mode);
+       };
+
+       // Connect the way to an existing way.
+       drawWay.addWay = function(loc, edge) {
+           var previousEdge = startIndex ?
+               [way.nodes[startIndex], way.nodes[startIndex - 1]] :
+               [way.nodes[0], way.nodes[1]];
+
+           // Avoid creating duplicate segments
+           if (!isArea && edgeEqual(edge, previousEdge))
+               return;
+
+           var newNode = Node({ loc: loc });
+
+           context.perform(
+               AddMidpoint({ loc: loc, edge: edge}, newNode),
+               ReplaceTemporaryNode(newNode),
+               annotation);
+
+           finished = true;
+           context.enter(mode);
+       };
+
+       // Connect the way to an existing node and continue drawing.
+       drawWay.addNode = function(node) {
+
+           // Avoid creating duplicate segments
+           if (way.areAdjacent(node.id, way.nodes[way.nodes.length - 1])) return;
+
+           context.perform(
+               ReplaceTemporaryNode(node),
+               annotation);
+
+           finished = true;
+           context.enter(mode);
+       };
+
+       // Finish the draw operation, removing the temporary node. If the way has enough
+       // nodes to be valid, it's selected. Otherwise, return to browse mode.
+       drawWay.finish = function() {
+           context.pop();
+           finished = true;
+
+           window.setTimeout(function() {
+               context.map().dblclickEnable(true);
+           }, 1000);
+
+           if (context.hasEntity(wayId)) {
+               context.enter(
+                   SelectMode(context, [wayId])
+                       .suppressMenu(true)
+                       .newFeature(true));
+           } else {
+               context.enter(Browse(context));
+           }
+       };
+
+       // Cancel the draw operation and return to browse, deleting everything drawn.
+       drawWay.cancel = function() {
+           context.perform(
+               d3.functor(baseGraph),
+               t('operations.cancel_draw.annotation'));
+
+           window.setTimeout(function() {
+               context.map().dblclickEnable(true);
+           }, 1000);
+
+           finished = true;
+           context.enter(Browse(context));
+       };
+
+       drawWay.tail = function(text) {
+           draw.tail(text);
+           return drawWay;
+       };
+
+       return drawWay;
+   }
+
+   function Hash(context) {
+       var s0 = null, // cached location.hash
+           lat = 90 - 1e-8; // allowable latitude range
+
+       var parser = function(map, s) {
+           var q = stringQs(s);
+           var args = (q.map || '').split('/').map(Number);
+           if (args.length < 3 || args.some(isNaN)) {
+               return true; // replace bogus hash
+           } else if (s !== formatter(map).slice(1)) {
+               map.centerZoom([args[1],
+                   Math.min(lat, Math.max(-lat, args[2]))], args[0]);
+           }
+       };
+
+       var formatter = function(map) {
+           var mode = context.mode(),
+               center = map.center(),
+               zoom = map.zoom(),
+               precision = Math.max(0, Math.ceil(Math.log(zoom) / Math.LN2)),
+               q = _.omit(stringQs(location.hash.substring(1)), 'comment'),
+               newParams = {};
+
+           if (mode && mode.id === 'browse') {
+               delete q.id;
+           } else {
+               var selected = context.selectedIDs().filter(function(id) {
+                   return !context.entity(id).isNew();
+               });
+               if (selected.length) {
+                   newParams.id = selected.join(',');
+               }
+           }
+
+           newParams.map = zoom.toFixed(2) +
+                   '/' + center[0].toFixed(precision) +
+                   '/' + center[1].toFixed(precision);
+
+           return '#' + qsString(_.assign(q, newParams), true);
+       };
+
+       function update() {
+           if (context.inIntro()) return;
+           var s1 = formatter(context.map());
+           if (s0 !== s1) location.replace(s0 = s1); // don't recenter the map!
+       }
+
+       var throttledUpdate = _.throttle(update, 500);
+
+       function hashchange() {
+           if (location.hash === s0) return; // ignore spurious hashchange events
+           if (parser(context.map(), (s0 = location.hash).substring(1))) {
+               update(); // replace bogus hash
+           }
+       }
+
+       function hash() {
+           context.map()
+               .on('move.hash', throttledUpdate);
+
+           context
+               .on('enter.hash', throttledUpdate);
+
+           d3.select(window)
+               .on('hashchange.hash', hashchange);
+
+           if (location.hash) {
+               var q = stringQs(location.hash.substring(1));
+               if (q.id) context.zoomToEntity(q.id.split(',')[0], !q.map);
+               if (q.comment) context.storage('comment', q.comment);
+               hashchange();
+               if (q.map) hash.hadHash = true;
+           }
+       }
+
+       hash.off = function() {
+           throttledUpdate.cancel();
+
+           context.map()
+               .on('move.hash', null);
+
+           context
+               .on('enter.hash', null);
+
+           d3.select(window)
+               .on('hashchange.hash', null);
+
+           location.hash = '';
+       };
+
+       return hash;
+   }
+
+   function Lasso(context) {
+
+       var behavior = function(selection) {
+           var lasso;
+
+           function mousedown() {
+               var button = 0;  // left
+               if (d3.event.button === button && d3.event.shiftKey === true) {
+                   lasso = null;
+
+                   selection
+                       .on('mousemove.lasso', mousemove)
+                       .on('mouseup.lasso', mouseup);
+
+                   d3.event.stopPropagation();
+               }
+           }
+
+           function mousemove() {
+               if (!lasso) {
+                   lasso = uiLasso(context);
+                   context.surface().call(lasso);
+               }
+
+               lasso.p(context.mouse());
+           }
+
+           function normalize(a, b) {
+               return [
+                   [Math.min(a[0], b[0]), Math.min(a[1], b[1])],
+                   [Math.max(a[0], b[0]), Math.max(a[1], b[1])]];
+           }
+
+           function lassoed() {
+               if (!lasso) return [];
+
+               var graph = context.graph(),
+                   bounds = lasso.extent().map(context.projection.invert),
+                   extent = Extent(normalize(bounds[0], bounds[1]));
+
+               return _.map(context.intersects(extent).filter(function(entity) {
+                   return entity.type === 'node' &&
+                       pointInPolygon(context.projection(entity.loc), lasso.coordinates) &&
+                       !context.features().isHidden(entity, graph, entity.geometry(graph));
+               }), 'id');
+           }
+
+           function mouseup() {
+               selection
+                   .on('mousemove.lasso', null)
+                   .on('mouseup.lasso', null);
+
+               if (!lasso) return;
+
+               var ids = lassoed();
+               lasso.close();
+
+               if (ids.length) {
+                   context.enter(SelectMode(context, ids));
+               }
+           }
+
+           selection
+               .on('mousedown.lasso', mousedown);
+       };
+
+       behavior.off = function(selection) {
+           selection.on('mousedown.lasso', null);
+       };
+
+       return behavior;
+   }
+
+   function Paste(context) {
+       var keybinding = d3.keybinding('paste');
+
+       function omitTag(v, k) {
+           return (
+               k === 'phone' ||
+               k === 'fax' ||
+               k === 'email' ||
+               k === 'website' ||
+               k === 'url' ||
+               k === 'note' ||
+               k === 'description' ||
+               k.indexOf('name') !== -1 ||
+               k.indexOf('wiki') === 0 ||
+               k.indexOf('addr:') === 0 ||
+               k.indexOf('contact:') === 0
+           );
+       }
+
+       function doPaste() {
+           d3.event.preventDefault();
+           if (context.inIntro()) return;
+
+           var baseGraph = context.graph(),
+               mouse = context.mouse(),
+               projection = context.projection,
+               viewport = Extent(projection.clipExtent()).polygon();
+
+           if (!pointInPolygon(mouse, viewport)) return;
+
+           var extent = Extent(),
+               oldIDs = context.copyIDs(),
+               oldGraph = context.copyGraph(),
+               newIDs = [];
+
+           if (!oldIDs.length) return;
+
+           var action = CopyEntities(oldIDs, oldGraph);
+           context.perform(action);
+
+           var copies = action.copies();
+           for (var id in copies) {
+               var oldEntity = oldGraph.entity(id),
+                   newEntity = copies[id];
+
+               extent._extend(oldEntity.extent(oldGraph));
+               newIDs.push(newEntity.id);
+               context.perform(ChangeTags(newEntity.id, _.omit(newEntity.tags, omitTag)));
+           }
+
+           // Put pasted objects where mouse pointer is..
+           var center = projection(extent.center()),
+               delta = [ mouse[0] - center[0], mouse[1] - center[1] ];
+
+           context.perform(MoveAction(newIDs, delta, projection));
+           context.enter(MoveMode(context, newIDs, baseGraph));
+       }
+
+       function paste() {
+           keybinding.on(cmd('⌘V'), doPaste);
+           d3.select(document).call(keybinding);
+           return paste;
+       }
+
+       paste.off = function() {
+           d3.select(document).call(keybinding.off);
+       };
+
+       return paste;
+   }
+
+   function Select(context) {
+       function keydown() {
+           if (d3.event && d3.event.shiftKey) {
+               context.surface()
+                   .classed('behavior-multiselect', true);
+           }
+       }
+
+       function keyup() {
+           if (!d3.event || !d3.event.shiftKey) {
+               context.surface()
+                   .classed('behavior-multiselect', false);
+           }
+       }
+
+       function click() {
+           var datum = d3.event.target.__data__,
+               lasso = d3.select('#surface .lasso').node(),
+               mode = context.mode();
+
+           if (!(datum instanceof Entity)) {
+               if (!d3.event.shiftKey && !lasso && mode.id !== 'browse')
+                   context.enter(Browse(context));
+
+           } else if (!d3.event.shiftKey && !lasso) {
+               // Avoid re-entering Select mode with same entity.
+               if (context.selectedIDs().length !== 1 || context.selectedIDs()[0] !== datum.id) {
+                   context.enter(SelectMode(context, [datum.id]));
+               } else {
+                   mode.suppressMenu(false).reselect();
+               }
+           } else if (context.selectedIDs().indexOf(datum.id) >= 0) {
+               var selectedIDs = _.without(context.selectedIDs(), datum.id);
+               context.enter(selectedIDs.length ?
+                   SelectMode(context, selectedIDs) :
+                   Browse(context));
+
+           } else {
+               context.enter(SelectMode(context, context.selectedIDs().concat([datum.id])));
+           }
+       }
+
+       var behavior = function(selection) {
+           d3.select(window)
+               .on('keydown.select', keydown)
+               .on('keyup.select', keyup);
+
+           selection.on('click.select', click);
+
+           keydown();
+       };
+
+       behavior.off = function(selection) {
+           d3.select(window)
+               .on('keydown.select', null)
+               .on('keyup.select', null);
+
+           selection.on('click.select', null);
+
+           keyup();
+       };
+
+       return behavior;
+   }
+
+
+
+   var behavior = Object.freeze({
+   	AddWay: AddWay,
+   	Breathe: Breathe,
+   	Copy: Copy,
+   	drag: drag,
+   	DrawWay: DrawWay,
+   	Draw: Draw,
+   	Edit: Edit,
+   	Hash: Hash,
+   	Hover: Hover,
+   	Lasso: Lasso,
+   	Paste: Paste,
+   	Select: Select,
+   	Tail: Tail
+   });
+
+   function Collection(collection) {
+       var maxSearchResults = 50,
+           maxSuggestionResults = 10;
+
+       var presets = {
+
+           collection: collection,
+
+           item: function(id) {
+               return _.find(collection, function(d) {
+                   return d.id === id;
+               });
+           },
+
+           matchGeometry: function(geometry) {
+               return Collection(collection.filter(function(d) {
+                   return d.matchGeometry(geometry);
+               }));
+           },
+
+           search: function(value, geometry) {
+               if (!value) return this;
+
+               value = value.toLowerCase();
+
+               var searchable = _.filter(collection, function(a) {
+                       return a.searchable !== false && a.suggestion !== true;
+                   }),
+                   suggestions = _.filter(collection, function(a) {
+                       return a.suggestion === true;
+                   });
+
+               function leading(a) {
+                   var index = a.indexOf(value);
+                   return index === 0 || a[index - 1] === ' ';
+               }
+
+               // matches value to preset.name
+               var leading_name = _.filter(searchable, function(a) {
+                       return leading(a.name().toLowerCase());
+                   }).sort(function(a, b) {
+                       var i = a.name().toLowerCase().indexOf(value) - b.name().toLowerCase().indexOf(value);
+                       if (i === 0) return a.name().length - b.name().length;
+                       else return i;
+                   });
+
+               // matches value to preset.terms values
+               var leading_terms = _.filter(searchable, function(a) {
+                       return _.some(a.terms() || [], leading);
+                   });
+
+               // matches value to preset.tags values
+               var leading_tag_values = _.filter(searchable, function(a) {
+                       return _.some(_.without(_.values(a.tags || {}), '*'), leading);
+                   });
+
+
+               // finds close matches to value in preset.name
+               var levenstein_name = searchable.map(function(a) {
+                       return {
+                           preset: a,
+                           dist: editDistance(value, a.name().toLowerCase())
+                       };
+                   }).filter(function(a) {
+                       return a.dist + Math.min(value.length - a.preset.name().length, 0) < 3;
+                   }).sort(function(a, b) {
+                       return a.dist - b.dist;
+                   }).map(function(a) {
+                       return a.preset;
+                   });
+
+               // finds close matches to value in preset.terms
+               var leventstein_terms = _.filter(searchable, function(a) {
+                       return _.some(a.terms() || [], function(b) {
+                           return editDistance(value, b) + Math.min(value.length - b.length, 0) < 3;
+                       });
+                   });
+
+               function suggestionName(name) {
+                   var nameArray = name.split(' - ');
+                   if (nameArray.length > 1) {
+                       name = nameArray.slice(0, nameArray.length-1).join(' - ');
+                   }
+                   return name.toLowerCase();
+               }
+
+               var leading_suggestions = _.filter(suggestions, function(a) {
+                       return leading(suggestionName(a.name()));
+                   }).sort(function(a, b) {
+                       a = suggestionName(a.name());
+                       b = suggestionName(b.name());
+                       var i = a.indexOf(value) - b.indexOf(value);
+                       if (i === 0) return a.length - b.length;
+                       else return i;
+                   });
+
+               var leven_suggestions = suggestions.map(function(a) {
+                       return {
+                           preset: a,
+                           dist: editDistance(value, suggestionName(a.name()))
+                       };
+                   }).filter(function(a) {
+                       return a.dist + Math.min(value.length - suggestionName(a.preset.name()).length, 0) < 1;
+                   }).sort(function(a, b) {
+                       return a.dist - b.dist;
+                   }).map(function(a) {
+                       return a.preset;
+                   });
+
+               var other = presets.item(geometry);
+
+               var results = leading_name.concat(
+                               leading_terms,
+                               leading_tag_values,
+                               leading_suggestions.slice(0, maxSuggestionResults+5),
+                               levenstein_name,
+                               leventstein_terms,
+                               leven_suggestions.slice(0, maxSuggestionResults)
+                           ).slice(0, maxSearchResults-1);
+
+               return Collection(_.uniq(
+                       results.concat(other)
+                   ));
+           }
+       };
+
+       return presets;
+   }
+
+   function Category(id, category, all) {
+       category = _.clone(category);
+
+       category.id = id;
+
+       category.members = Collection(category.members.map(function(id) {
+           return all.item(id);
+       }));
+
+       category.matchGeometry = function(geometry) {
+           return category.geometry.indexOf(geometry) >= 0;
+       };
+
+       category.matchScore = function() { return -1; };
+
+       category.name = function() {
+           return t('presets.categories.' + id + '.name', {'default': id});
+       };
+
+       category.terms = function() {
+           return [];
+       };
+
+       return category;
+   }
+
+   function Field(id, field) {
+       field = _.clone(field);
+
+       field.id = id;
+
+       field.matchGeometry = function(geometry) {
+           return !field.geometry || field.geometry === geometry;
+       };
+
+       field.t = function(scope, options) {
+           return t('presets.fields.' + id + '.' + scope, options);
+       };
+
+       field.label = function() {
+           return field.t('label', {'default': id});
+       };
+
+       var placeholder = field.placeholder;
+       field.placeholder = function() {
+           return field.t('placeholder', {'default': placeholder});
+       };
+
+       return field;
+   }
+
+   function Preset(id, preset, fields) {
+       preset = _.clone(preset);
+
+       preset.id = id;
+       preset.fields = (preset.fields || []).map(getFields);
+       preset.geometry = (preset.geometry || []);
+
+       function getFields(f) {
+           return fields[f];
+       }
+
+       preset.matchGeometry = function(geometry) {
+           return preset.geometry.indexOf(geometry) >= 0;
+       };
+
+       var matchScore = preset.matchScore || 1;
+       preset.matchScore = function(entity) {
+           var tags = preset.tags,
+               score = 0;
+
+           for (var t in tags) {
+               if (entity.tags[t] === tags[t]) {
+                   score += matchScore;
+               } else if (tags[t] === '*' && t in entity.tags) {
+                   score += matchScore / 2;
+               } else {
+                   return -1;
+               }
+           }
+
+           return score;
+       };
+
+       preset.t = function(scope, options) {
+           return t('presets.presets.' + id + '.' + scope, options);
+       };
+
+       var name = preset.name;
+       preset.name = function() {
+           if (preset.suggestion) {
+               id = id.split('/');
+               id = id[0] + '/' + id[1];
+               return name + ' - ' + t('presets.presets.' + id + '.name');
+           }
+           return preset.t('name', {'default': name});
+       };
+
+       preset.terms = function() {
+           return preset.t('terms', {'default': ''}).toLowerCase().trim().split(/\s*,+\s*/);
+       };
+
+       preset.isFallback = function() {
+           var tagCount = Object.keys(preset.tags).length;
+           return tagCount === 0 || (tagCount === 1 && preset.tags.hasOwnProperty('area'));
+       };
+
+       preset.reference = function(geometry) {
+           var key = Object.keys(preset.tags)[0],
+               value = preset.tags[key];
+
+           if (geometry === 'relation' && key === 'type') {
+               return { rtype: value };
+           } else if (value === '*') {
+               return { key: key };
+           } else {
+               return { key: key, value: value };
+           }
+       };
+
+       var removeTags = preset.removeTags || preset.tags;
+       preset.removeTags = function(tags, geometry) {
+           tags = _.omit(tags, _.keys(removeTags));
+
+           for (var f in preset.fields) {
+               var field = preset.fields[f];
+               if (field.matchGeometry(geometry) && field.default === tags[field.key]) {
+                   delete tags[field.key];
+               }
+           }
+
+           delete tags.area;
+           return tags;
+       };
+
+       var applyTags = preset.addTags || preset.tags;
+       preset.applyTags = function(tags, geometry) {
+           var k;
+
+           tags = _.clone(tags);
+
+           for (k in applyTags) {
+               if (applyTags[k] === '*') {
+                   tags[k] = 'yes';
+               } else {
+                   tags[k] = applyTags[k];
+               }
+           }
+
+           // Add area=yes if necessary.
+           // This is necessary if the geometry is already an area (e.g. user drew an area) AND any of:
+           // 1. chosen preset could be either an area or a line (`barrier=city_wall`)
+           // 2. chosen preset doesn't have a key in areaKeys (`railway=station`)
+           if (geometry === 'area') {
+               var needsAreaTag = true;
+               if (preset.geometry.indexOf('line') === -1) {
+                   for (k in applyTags) {
+                       if (k in iD.areaKeys) {
+                           needsAreaTag = false;
+                           break;
+                       }
+                   }
+               }
+               if (needsAreaTag) {
+                   tags.area = 'yes';
+               }
+           }
+
+           for (var f in preset.fields) {
+               var field = preset.fields[f];
+               if (field.matchGeometry(geometry) && field.key && !tags[field.key] && field.default) {
+                   tags[field.key] = field.default;
+               }
+           }
+
+           return tags;
+       };
+
+       return preset;
+   }
+
+   function presets$1() {
+       // an iD.presets.Collection with methods for
+       // loading new data and returning defaults
+
+       var all = Collection([]),
+           defaults = { area: all, line: all, point: all, vertex: all, relation: all },
+           fields = {},
+           universal = [],
+           recent = Collection([]);
+
+       // Index of presets by (geometry, tag key).
+       var index = {
+           point: {},
+           vertex: {},
+           line: {},
+           area: {},
+           relation: {}
+       };
+
+       all.match = function(entity, resolver) {
+           var geometry = entity.geometry(resolver),
+               geometryMatches = index[geometry],
+               best = -1,
+               match;
+
+           for (var k in entity.tags) {
+               var keyMatches = geometryMatches[k];
+               if (!keyMatches) continue;
+
+               for (var i = 0; i < keyMatches.length; i++) {
+                   var score = keyMatches[i].matchScore(entity);
+                   if (score > best) {
+                       best = score;
+                       match = keyMatches[i];
+                   }
+               }
+           }
+
+           return match || all.item(geometry);
+       };
+
+       // Because of the open nature of tagging, iD will never have a complete
+       // list of tags used in OSM, so we want it to have logic like "assume
+       // that a closed way with an amenity tag is an area, unless the amenity
+       // is one of these specific types". This function computes a structure
+       // that allows testing of such conditions, based on the presets designated
+       // as as supporting (or not supporting) the area geometry.
+       //
+       // The returned object L is a whitelist/blacklist of tags. A closed way
+       // with a tag (k, v) is considered to be an area if `k in L && !(v in L[k])`
+       // (see `Way#isArea()`). In other words, the keys of L form the whitelist,
+       // and the subkeys form the blacklist.
+       all.areaKeys = function() {
+           var areaKeys = {},
+               ignore = ['barrier', 'highway', 'footway', 'railway', 'type'],
+               presets = _.reject(all.collection, 'suggestion');
+
+           // whitelist
+           presets.forEach(function(d) {
+               for (var key in d.tags) break;
+               if (!key) return;
+               if (ignore.indexOf(key) !== -1) return;
+
+               if (d.geometry.indexOf('area') !== -1) {
+                   areaKeys[key] = areaKeys[key] || {};
+               }
+           });
+
+           // blacklist
+           presets.forEach(function(d) {
+               for (var key in d.tags) break;
+               if (!key) return;
+               if (ignore.indexOf(key) !== -1) return;
+
+               var value = d.tags[key];
+               if (d.geometry.indexOf('area') === -1 &&
+                   d.geometry.indexOf('line') !== -1 &&
+                   key in areaKeys && value !== '*') {
+                   areaKeys[key][value] = true;
+               }
+           });
+
+           return areaKeys;
+       };
+
+       all.load = function(d) {
+
+           if (d.fields) {
+               _.forEach(d.fields, function(d, id) {
+                   fields[id] = Field(id, d);
+                   if (d.universal) universal.push(fields[id]);
+               });
+           }
+
+           if (d.presets) {
+               _.forEach(d.presets, function(d, id) {
+                   all.collection.push(Preset(id, d, fields));
+               });
+           }
+
+           if (d.categories) {
+               _.forEach(d.categories, function(d, id) {
+                   all.collection.push(Category(id, d, all));
+               });
+           }
+
+           if (d.defaults) {
+               var getItem = _.bind(all.item, all);
+               defaults = {
+                   area: Collection(d.defaults.area.map(getItem)),
+                   line: Collection(d.defaults.line.map(getItem)),
+                   point: Collection(d.defaults.point.map(getItem)),
+                   vertex: Collection(d.defaults.vertex.map(getItem)),
+                   relation: Collection(d.defaults.relation.map(getItem))
+               };
+           }
+
+           for (var i = 0; i < all.collection.length; i++) {
+               var preset = all.collection[i],
+                   geometry = preset.geometry;
+
+               for (var j = 0; j < geometry.length; j++) {
+                   var g = index[geometry[j]];
+                   for (var k in preset.tags) {
+                       (g[k] = g[k] || []).push(preset);
+                   }
+               }
+           }
+
+           return all;
+       };
+
+       all.field = function(id) {
+           return fields[id];
+       };
+
+       all.universal = function() {
+           return universal;
+       };
+
+       all.defaults = function(geometry, n) {
+           var rec = recent.matchGeometry(geometry).collection.slice(0, 4),
+               def = _.uniq(rec.concat(defaults[geometry].collection)).slice(0, n - 1);
+           return Collection(_.uniq(rec.concat(def).concat(all.item(geometry))));
+       };
+
+       all.choose = function(preset) {
+           if (!preset.isFallback()) {
+               recent = Collection(_.uniq([preset].concat(recent.collection)));
+           }
+           return all;
+       };
+
+       return all;
+   }
+
+
+
+   var presets = Object.freeze({
+   	Category: Category,
+   	Collection: Collection,
+   	Field: Field,
+   	Preset: Preset,
+   	presets: presets$1
+   });
+
+   function DeprecatedTag() {
+
+       var validation = function(changes) {
+           var warnings = [];
+           for (var i = 0; i < changes.created.length; i++) {
+               var change = changes.created[i],
+                   deprecatedTags = change.deprecatedTags();
+
+               if (!_.isEmpty(deprecatedTags)) {
+                   var tags = tagText({ tags: deprecatedTags });
+                   warnings.push({
+                       id: 'deprecated_tags',
+                       message: t('validations.deprecated_tags', { tags: tags }),
+                       entity: change
+                   });
+               }
+           }
+           return warnings;
+       };
+
+       return validation;
+   }
+
+   function ManyDeletions() {
+       var threshold = 100;
+
+       var validation = function(changes) {
+           var warnings = [];
+           if (changes.deleted.length > threshold) {
+               warnings.push({
+                   id: 'many_deletions',
+                   message: t('validations.many_deletions', { n: changes.deleted.length })
+               });
+           }
+           return warnings;
+       };
+
+       return validation;
+   }
+
+   function MissingTag() {
+
+       // Slightly stricter check than Entity#isUsed (#3091)
+       function hasTags(entity, graph) {
+           return _.without(Object.keys(entity.tags), 'area', 'name').length > 0 ||
+               graph.parentRelations(entity).length > 0;
+       }
+
+       var validation = function(changes, graph) {
+           var warnings = [];
+           for (var i = 0; i < changes.created.length; i++) {
+               var change = changes.created[i],
+                   geometry = change.geometry(graph);
+
+               if ((geometry === 'point' || geometry === 'line' || geometry === 'area') && !hasTags(change, graph)) {
+                   warnings.push({
+                       id: 'missing_tag',
+                       message: t('validations.untagged_' + geometry),
+                       tooltip: t('validations.untagged_' + geometry + '_tooltip'),
+                       entity: change
+                   });
+               }
+           }
+           return warnings;
+       };
+
+       return validation;
+   }
+
+   function TagSuggestsArea() {
+
+       // https://github.com/openstreetmap/josm/blob/mirror/src/org/
+       // openstreetmap/josm/data/validation/tests/UnclosedWays.java#L80
+       function tagSuggestsArea(tags) {
+           if (_.isEmpty(tags)) return false;
+
+           var presence = ['landuse', 'amenities', 'tourism', 'shop'];
+           for (var i = 0; i < presence.length; i++) {
+               if (tags[presence[i]] !== undefined) {
+                   return presence[i] + '=' + tags[presence[i]];
+               }
+           }
+
+           if (tags.building && tags.building === 'yes') return 'building=yes';
+       }
+
+       var validation = function(changes, graph) {
+           var warnings = [];
+           for (var i = 0; i < changes.created.length; i++) {
+               var change = changes.created[i],
+                   geometry = change.geometry(graph),
+                   suggestion = (geometry === 'line' ? tagSuggestsArea(change.tags) : undefined);
+
+               if (suggestion) {
+                   warnings.push({
+                       id: 'tag_suggests_area',
+                       message: t('validations.tag_suggests_area', { tag: suggestion }),
+                       entity: change
+                   });
+               }
+           }
+           return warnings;
+       };
+
+       return validation;
+   }
+
+
+
+   var validations = Object.freeze({
+   	DeprecatedTag: DeprecatedTag,
+   	ManyDeletions: ManyDeletions,
+   	MissingTag: MissingTag,
+   	TagSuggestsArea: TagSuggestsArea
+   });
+
+   function BackgroundSource(data) {
+       var source = _.clone(data),
+           offset = [0, 0],
+           name = source.name,
+           best = !!source.best;
+
+       source.scaleExtent = data.scaleExtent || [0, 20];
+       source.overzoom = data.overzoom !== false;
+
+       source.offset = function(_) {
+           if (!arguments.length) return offset;
+           offset = _;
+           return source;
+       };
+
+       source.nudge = function(_, zoomlevel) {
+           offset[0] += _[0] / Math.pow(2, zoomlevel);
+           offset[1] += _[1] / Math.pow(2, zoomlevel);
+           return source;
+       };
+
+       source.name = function() {
+           return name;
+       };
+
+       source.best = function() {
+           return best;
+       };
+
+       source.area = function() {
+           if (!data.polygon) return Number.MAX_VALUE;  // worldwide
+           var area = d3.geo.area({ type: 'MultiPolygon', coordinates: [ data.polygon ] });
+           return isNaN(area) ? 0 : area;
+       };
+
+       source.imageryUsed = function() {
+           return source.id || name;
+       };
+
+       source.url = function(coord) {
+           return data.template
+               .replace('{x}', coord[0])
+               .replace('{y}', coord[1])
+               // TMS-flipped y coordinate
+               .replace(/\{[t-]y\}/, Math.pow(2, coord[2]) - coord[1] - 1)
+               .replace(/\{z(oom)?\}/, coord[2])
+               .replace(/\{switch:([^}]+)\}/, function(s, r) {
+                   var subdomains = r.split(',');
+                   return subdomains[(coord[0] + coord[1]) % subdomains.length];
+               })
+               .replace('{u}', function() {
+                   var u = '';
+                   for (var zoom = coord[2]; zoom > 0; zoom--) {
+                       var b = 0;
+                       var mask = 1 << (zoom - 1);
+                       if ((coord[0] & mask) !== 0) b++;
+                       if ((coord[1] & mask) !== 0) b += 2;
+                       u += b.toString();
+                   }
+                   return u;
+               });
+       };
+
+       source.intersects = function(extent) {
+           extent = extent.polygon();
+           return !data.polygon || data.polygon.some(function(polygon) {
+               return polygonIntersectsPolygon(polygon, extent, true);
+           });
+       };
+
+       source.validZoom = function(z) {
+           return source.scaleExtent[0] <= z &&
+               (source.overzoom || source.scaleExtent[1] > z);
+       };
+
+       source.isLocatorOverlay = function() {
+           return name === 'Locator Overlay';
+       };
+
+       source.copyrightNotices = function() {};
+
+       return source;
+   }
+
+   BackgroundSource.Bing = function(data, dispatch) {
+       // http://msdn.microsoft.com/en-us/library/ff701716.aspx
+       // http://msdn.microsoft.com/en-us/library/ff701701.aspx
+
+       data.template = 'https://ecn.t{switch:0,1,2,3}.tiles.virtualearth.net/tiles/a{u}.jpeg?g=587&mkt=en-gb&n=z';
+
+       var bing = BackgroundSource(data),
+           key = 'Arzdiw4nlOJzRwOz__qailc8NiR31Tt51dN2D7cm57NrnceZnCpgOkmJhNpGoppU', // Same as P2 and JOSM
+           url = 'https://dev.virtualearth.net/REST/v1/Imagery/Metadata/Aerial?include=ImageryProviders&key=' +
+               key + '&jsonp={callback}',
+           providers = [];
+
+       d3.jsonp(url, function(json) {
+           providers = json.resourceSets[0].resources[0].imageryProviders.map(function(provider) {
+               return {
+                   attribution: provider.attribution,
+                   areas: provider.coverageAreas.map(function(area) {
+                       return {
+                           zoom: [area.zoomMin, area.zoomMax],
+                           extent: Extent([area.bbox[1], area.bbox[0]], [area.bbox[3], area.bbox[2]])
+                       };
+                   })
+               };
+           });
+           dispatch.change();
+       });
+
+       bing.copyrightNotices = function(zoom, extent) {
+           zoom = Math.min(zoom, 21);
+           return providers.filter(function(provider) {
+               return _.some(provider.areas, function(area) {
+                   return extent.intersects(area.extent) &&
+                       area.zoom[0] <= zoom &&
+                       area.zoom[1] >= zoom;
+               });
+           }).map(function(provider) {
+               return provider.attribution;
+           }).join(', ');
+       };
+
+       bing.logo = 'bing_maps.png';
+       bing.terms_url = 'https://blog.openstreetmap.org/2010/11/30/microsoft-imagery-details';
+
+       return bing;
+   };
+
+   BackgroundSource.None = function() {
+       var source = BackgroundSource({id: 'none', template: ''});
+
+       source.name = function() {
+           return t('background.none');
+       };
+
+       source.imageryUsed = function() {
+           return 'None';
+       };
+
+       source.area = function() {
+           return -1;
+       };
+
+       return source;
+   };
+
+   BackgroundSource.Custom = function(template) {
+       var source = BackgroundSource({id: 'custom', template: template});
+
+       source.name = function() {
+           return t('background.custom');
+       };
+
+       source.imageryUsed = function() {
+           return 'Custom (' + template + ')';
+       };
+
+       source.area = function() {
+           return -2;
+       };
+
+       return source;
+   };
+
+   function TileLayer(context) {
+       var tileSize = 256,
+           tile = d3.geo.tile(),
+           projection,
+           cache = {},
+           tileOrigin,
+           z,
+           transformProp = prefixCSSProperty('Transform'),
+           source = d3.functor('');
+
+
+       // blacklist overlay tiles around Null Island..
+       function nearNullIsland(x, y, z) {
+           if (z >= 7) {
+               var center = Math.pow(2, z - 1),
+                   width = Math.pow(2, z - 6),
+                   min = center - (width / 2),
+                   max = center + (width / 2) - 1;
+               return x >= min && x <= max && y >= min && y <= max;
+           }
+           return false;
+       }
+
+       function tileSizeAtZoom(d, z) {
+           var epsilon = 0.002;
+           return ((tileSize * Math.pow(2, z - d[2])) / tileSize) + epsilon;
+       }
+
+       function atZoom(t, distance) {
+           var power = Math.pow(2, distance);
+           return [
+               Math.floor(t[0] * power),
+               Math.floor(t[1] * power),
+               t[2] + distance];
+       }
+
+       function lookUp(d) {
+           for (var up = -1; up > -d[2]; up--) {
+               var tile = atZoom(d, up);
+               if (cache[source.url(tile)] !== false) {
+                   return tile;
+               }
+           }
+       }
+
+       function uniqueBy(a, n) {
+           var o = [], seen = {};
+           for (var i = 0; i < a.length; i++) {
+               if (seen[a[i][n]] === undefined) {
+                   o.push(a[i]);
+                   seen[a[i][n]] = true;
+               }
+           }
+           return o;
+       }
+
+       function addSource(d) {
+           d.push(source.url(d));
+           return d;
+       }
+
+       // Update tiles based on current state of `projection`.
+       function background(selection) {
+           tile.scale(projection.scale() * 2 * Math.PI)
+               .translate(projection.translate());
+
+           tileOrigin = [
+               projection.scale() * Math.PI - projection.translate()[0],
+               projection.scale() * Math.PI - projection.translate()[1]];
+
+           z = Math.max(Math.log(projection.scale() * 2 * Math.PI) / Math.log(2) - 8, 0);
+
+           render(selection);
+       }
+
+       // Derive the tiles onscreen, remove those offscreen and position them.
+       // Important that this part not depend on `projection` because it's
+       // rentered when tiles load/error (see #644).
+       function render(selection) {
+           var requests = [];
+           var showDebug = context.getDebug('tile') && !source.overlay;
+
+           if (source.validZoom(z)) {
+               tile().forEach(function(d) {
+                   addSource(d);
+                   if (d[3] === '') return;
+                   if (typeof d[3] !== 'string') return; // Workaround for chrome crash https://github.com/openstreetmap/iD/issues/2295
+                   requests.push(d);
+                   if (cache[d[3]] === false && lookUp(d)) {
+                       requests.push(addSource(lookUp(d)));
+                   }
+               });
+
+               requests = uniqueBy(requests, 3).filter(function(r) {
+                   if (!!source.overlay && nearNullIsland(r[0], r[1], r[2])) {
+                       return false;
+                   }
+                   // don't re-request tiles which have failed in the past
+                   return cache[r[3]] !== false;
+               });
+           }
+
+           var pixelOffset = [
+               source.offset()[0] * Math.pow(2, z),
+               source.offset()[1] * Math.pow(2, z)
+           ];
+
+           function load(d) {
+               cache[d[3]] = true;
+               d3.select(this)
+                   .on('error', null)
+                   .on('load', null)
+                   .classed('tile-loaded', true);
+               render(selection);
+           }
+
+           function error(d) {
+               cache[d[3]] = false;
+               d3.select(this)
+                   .on('error', null)
+                   .on('load', null)
+                   .remove();
+               render(selection);
+           }
+
+           function imageTransform(d) {
+               var _ts = tileSize * Math.pow(2, z - d[2]);
+               var scale = tileSizeAtZoom(d, z);
+               return 'translate(' +
+                   ((d[0] * _ts) - tileOrigin[0] + pixelOffset[0]) + 'px,' +
+                   ((d[1] * _ts) - tileOrigin[1] + pixelOffset[1]) + 'px)' +
+                   'scale(' + scale + ',' + scale + ')';
+           }
+
+           function debugTransform(d) {
+               var _ts = tileSize * Math.pow(2, z - d[2]);
+               var scale = tileSizeAtZoom(d, z);
+               return 'translate(' +
+                   ((d[0] * _ts) - tileOrigin[0] + pixelOffset[0] + scale * (tileSize / 4)) + 'px,' +
+                   ((d[1] * _ts) - tileOrigin[1] + pixelOffset[1] + scale * (tileSize / 2)) + 'px)';
+           }
+
+           var image = selection
+               .selectAll('img')
+               .data(requests, function(d) { return d[3]; });
+
+           image.exit()
+               .style(transformProp, imageTransform)
+               .classed('tile-removing', true)
+               .each(function() {
+                   var tile = d3.select(this);
+                   window.setTimeout(function() {
+                       if (tile.classed('tile-removing')) {
+                           tile.remove();
+                       }
+                   }, 300);
+               });
+
+           image.enter().append('img')
+               .attr('class', 'tile')
+               .attr('src', function(d) { return d[3]; })
+               .on('error', error)
+               .on('load', load);
+
+           image
+               .style(transformProp, imageTransform)
+               .classed('tile-debug', showDebug)
+               .classed('tile-removing', false);
+
+
+           var debug = selection.selectAll('.tile-label-debug')
+               .data(showDebug ? requests : [], function(d) { return d[3]; });
+
+           debug.exit()
+               .remove();
+
+           debug.enter()
+               .append('div')
+               .attr('class', 'tile-label-debug');
+
+           debug
+               .text(function(d) { return d[2] + ' / ' + d[0] + ' / ' + d[1]; })
+               .style(transformProp, debugTransform);
+       }
+
+       background.projection = function(_) {
+           if (!arguments.length) return projection;
+           projection = _;
+           return background;
+       };
+
+       background.dimensions = function(_) {
+           if (!arguments.length) return tile.size();
+           tile.size(_);
+           return background;
+       };
+
+       background.source = function(_) {
+           if (!arguments.length) return source;
+           source = _;
+           cache = {};
+           tile.scaleExtent(source.scaleExtent);
+           return background;
+       };
+
+       return background;
+   }
+
+   function Background$1(context) {
+       var dispatch = d3.dispatch('change'),
+           baseLayer = TileLayer(context).projection(context.projection),
+           overlayLayers = [],
+           backgroundSources;
+
+
+       function findSource(id) {
+           return _.find(backgroundSources, function(d) {
+               return d.id && d.id === id;
+           });
+       }
+
+
+       function background(selection) {
+           var base = selection.selectAll('.layer-background')
+               .data([0]);
+
+           base.enter()
+               .insert('div', '.layer-data')
+               .attr('class', 'layer layer-background');
+
+           base.call(baseLayer);
+
+           var overlays = selection.selectAll('.layer-overlay')
+               .data(overlayLayers, function(d) { return d.source().name(); });
+
+           overlays.enter()
+               .insert('div', '.layer-data')
+               .attr('class', 'layer layer-overlay');
+
+           overlays.each(function(layer) {
+               d3.select(this).call(layer);
+           });
+
+           overlays.exit()
+               .remove();
+       }
+
+
+       background.updateImagery = function() {
+           var b = background.baseLayerSource(),
+               o = overlayLayers.map(function (d) { return d.source().id; }).join(','),
+               meters = offsetToMeters(b.offset()),
+               epsilon = 0.01,
+               x = +meters[0].toFixed(2),
+               y = +meters[1].toFixed(2),
+               q = stringQs(location.hash.substring(1));
+
+           var id = b.id;
+           if (id === 'custom') {
+               id = 'custom:' + b.template;
+           }
+
+           if (id) {
+               q.background = id;
+           } else {
+               delete q.background;
+           }
+
+           if (o) {
+               q.overlays = o;
+           } else {
+               delete q.overlays;
+           }
+
+           if (Math.abs(x) > epsilon || Math.abs(y) > epsilon) {
+               q.offset = x + ',' + y;
+           } else {
+               delete q.offset;
+           }
+
+           location.replace('#' + qsString(q, true));
+
+           var imageryUsed = [b.imageryUsed()];
+
+           overlayLayers.forEach(function (d) {
+               var source = d.source();
+               if (!source.isLocatorOverlay()) {
+                   imageryUsed.push(source.imageryUsed());
+               }
+           });
+
+           var gpx = context.layers().layer('gpx');
+           if (gpx && gpx.enabled() && gpx.hasGpx()) {
+               imageryUsed.push('Local GPX');
+           }
+
+           var mapillary_images = context.layers().layer('mapillary-images');
+           if (mapillary_images && mapillary_images.enabled()) {
+               imageryUsed.push('Mapillary Images');
+           }
+
+           var mapillary_signs = context.layers().layer('mapillary-signs');
+           if (mapillary_signs && mapillary_signs.enabled()) {
+               imageryUsed.push('Mapillary Signs');
+           }
+
+           context.history().imageryUsed(imageryUsed);
+       };
+
+       background.sources = function(extent) {
+           return backgroundSources.filter(function(source) {
+               return source.intersects(extent);
+           });
+       };
+
+       background.dimensions = function(_) {
+           baseLayer.dimensions(_);
+
+           overlayLayers.forEach(function(layer) {
+               layer.dimensions(_);
+           });
+       };
+
+       background.baseLayerSource = function(d) {
+           if (!arguments.length) return baseLayer.source();
+           baseLayer.source(d);
+           dispatch.change();
+           background.updateImagery();
+           return background;
+       };
+
+       background.bing = function() {
+           background.baseLayerSource(findSource('Bing'));
+       };
+
+       background.showsLayer = function(d) {
+           return d === baseLayer.source() ||
+               (d.id === 'custom' && baseLayer.source().id === 'custom') ||
+               overlayLayers.some(function(l) { return l.source() === d; });
+       };
+
+       background.overlayLayerSources = function() {
+           return overlayLayers.map(function (l) { return l.source(); });
+       };
+
+       background.toggleOverlayLayer = function(d) {
+           var layer;
+
+           for (var i = 0; i < overlayLayers.length; i++) {
+               layer = overlayLayers[i];
+               if (layer.source() === d) {
+                   overlayLayers.splice(i, 1);
+                   dispatch.change();
+                   background.updateImagery();
+                   return;
+               }
+           }
+
+           layer = TileLayer(context)
+               .source(d)
+               .projection(context.projection)
+               .dimensions(baseLayer.dimensions());
+
+           overlayLayers.push(layer);
+           dispatch.change();
+           background.updateImagery();
+       };
+
+       background.nudge = function(d, zoom) {
+           baseLayer.source().nudge(d, zoom);
+           dispatch.change();
+           background.updateImagery();
+           return background;
+       };
+
+       background.offset = function(d) {
+           if (!arguments.length) return baseLayer.source().offset();
+           baseLayer.source().offset(d);
+           dispatch.change();
+           background.updateImagery();
+           return background;
+       };
+
+       background.load = function(imagery) {
+           function parseMap(qmap) {
+               if (!qmap) return false;
+               var args = qmap.split('/').map(Number);
+               if (args.length < 3 || args.some(isNaN)) return false;
+               return Extent([args[1], args[2]]);
+           }
+
+           var q = stringQs(location.hash.substring(1)),
+               chosen = q.background || q.layer,
+               extent = parseMap(q.map),
+               best;
+
+           backgroundSources = imagery.map(function(source) {
+               if (source.type === 'bing') {
+                   return BackgroundSource.Bing(source, dispatch);
+               } else {
+                   return BackgroundSource(source);
+               }
+           });
+
+           backgroundSources.unshift(BackgroundSource.None());
+
+           if (!chosen && extent) {
+               best = _.find(this.sources(extent), function(s) { return s.best(); });
+           }
+
+           if (chosen && chosen.indexOf('custom:') === 0) {
+               background.baseLayerSource(BackgroundSource.Custom(chosen.replace(/^custom:/, '')));
+           } else {
+               background.baseLayerSource(findSource(chosen) || best || findSource('Bing') || backgroundSources[1] || backgroundSources[0]);
+           }
+
+           var locator = _.find(backgroundSources, function(d) {
+               return d.overlay && d.default;
+           });
+
+           if (locator) {
+               background.toggleOverlayLayer(locator);
+           }
+
+           var overlays = (q.overlays || '').split(',');
+           overlays.forEach(function(overlay) {
+               overlay = findSource(overlay);
+               if (overlay) {
+                   background.toggleOverlayLayer(overlay);
+               }
+           });
+
+           if (q.gpx) {
+               var gpx = context.layers().layer('gpx');
+               if (gpx) {
+                   gpx.url(q.gpx);
+               }
+           }
+
+           if (q.offset) {
+               var offset = q.offset.replace(/;/g, ',').split(',').map(function(n) {
+                   return !isNaN(n) && n;
+               });
+
+               if (offset.length === 2) {
+                   background.offset(metersToOffset(offset));
+               }
+           }
+       };
+
+       return d3.rebind(background, dispatch, 'on');
+   }
+
+   function Features(context) {
+       var traffic_roads = {
+           'motorway': true,
+           'motorway_link': true,
+           'trunk': true,
+           'trunk_link': true,
+           'primary': true,
+           'primary_link': true,
+           'secondary': true,
+           'secondary_link': true,
+           'tertiary': true,
+           'tertiary_link': true,
+           'residential': true,
+           'unclassified': true,
+           'living_street': true
+       };
+
+       var service_roads = {
+           'service': true,
+           'road': true,
+           'track': true
+       };
+
+       var paths = {
+           'path': true,
+           'footway': true,
+           'cycleway': true,
+           'bridleway': true,
+           'steps': true,
+           'pedestrian': true,
+           'corridor': true
+       };
+
+       var past_futures = {
+           'proposed': true,
+           'construction': true,
+           'abandoned': true,
+           'dismantled': true,
+           'disused': true,
+           'razed': true,
+           'demolished': true,
+           'obliterated': true
+       };
+
+       var dispatch = d3.dispatch('change', 'redraw'),
+           _cullFactor = 1,
+           _cache = {},
+           _features = {},
+           _stats = {},
+           _keys = [],
+           _hidden = [];
+
+       function update() {
+           _hidden = features.hidden();
+           dispatch.change();
+           dispatch.redraw();
+       }
+
+       function defineFeature(k, filter, max) {
+           _keys.push(k);
+           _features[k] = {
+               filter: filter,
+               enabled: true,   // whether the user wants it enabled..
+               count: 0,
+               currentMax: (max || Infinity),
+               defaultMax: (max || Infinity),
+               enable: function() { this.enabled = true; this.currentMax = this.defaultMax; },
+               disable: function() { this.enabled = false; this.currentMax = 0; },
+               hidden: function() { return !context.editable() || this.count > this.currentMax * _cullFactor; },
+               autoHidden: function() { return this.hidden() && this.currentMax > 0; }
+           };
+       }
+
+
+       defineFeature('points', function isPoint(entity, resolver, geometry) {
+           return geometry === 'point';
+       }, 200);
+
+       defineFeature('traffic_roads', function isTrafficRoad(entity) {
+           return traffic_roads[entity.tags.highway];
+       });
+
+       defineFeature('service_roads', function isServiceRoad(entity) {
+           return service_roads[entity.tags.highway];
+       });
+
+       defineFeature('paths', function isPath(entity) {
+           return paths[entity.tags.highway];
+       });
+
+       defineFeature('buildings', function isBuilding(entity) {
+           return (
+               !!entity.tags['building:part'] ||
+               (!!entity.tags.building && entity.tags.building !== 'no') ||
+               entity.tags.amenity === 'shelter' ||
+               entity.tags.parking === 'multi-storey' ||
+               entity.tags.parking === 'sheds' ||
+               entity.tags.parking === 'carports' ||
+               entity.tags.parking === 'garage_boxes'
+           );
+       }, 250);
+
+       defineFeature('landuse', function isLanduse(entity, resolver, geometry) {
+           return geometry === 'area' &&
+               !_features.buildings.filter(entity) &&
+               !_features.water.filter(entity);
+       });
+
+       defineFeature('boundaries', function isBoundary(entity) {
+           return !!entity.tags.boundary;
+       });
+
+       defineFeature('water', function isWater(entity) {
+           return (
+               !!entity.tags.waterway ||
+               entity.tags.natural === 'water' ||
+               entity.tags.natural === 'coastline' ||
+               entity.tags.natural === 'bay' ||
+               entity.tags.landuse === 'pond' ||
+               entity.tags.landuse === 'basin' ||
+               entity.tags.landuse === 'reservoir' ||
+               entity.tags.landuse === 'salt_pond'
+           );
+       });
+
+       defineFeature('rail', function isRail(entity) {
+           return (
+               !!entity.tags.railway ||
+               entity.tags.landuse === 'railway'
+           ) && !(
+               traffic_roads[entity.tags.highway] ||
+               service_roads[entity.tags.highway] ||
+               paths[entity.tags.highway]
+           );
+       });
+
+       defineFeature('power', function isPower(entity) {
+           return !!entity.tags.power;
+       });
+
+       // contains a past/future tag, but not in active use as a road/path/cycleway/etc..
+       defineFeature('past_future', function isPastFuture(entity) {
+           if (
+               traffic_roads[entity.tags.highway] ||
+               service_roads[entity.tags.highway] ||
+               paths[entity.tags.highway]
+           ) { return false; }
+
+           var strings = Object.keys(entity.tags);
+
+           for (var i = 0; i < strings.length; i++) {
+               var s = strings[i];
+               if (past_futures[s] || past_futures[entity.tags[s]]) { return true; }
+           }
+           return false;
+       });
+
+       // Lines or areas that don't match another feature filter.
+       // IMPORTANT: The 'others' feature must be the last one defined,
+       //   so that code in getMatches can skip this test if `hasMatch = true`
+       defineFeature('others', function isOther(entity, resolver, geometry) {
+           return (geometry === 'line' || geometry === 'area');
+       });
+
+
+       function features() {}
+
+       features.features = function() {
+           return _features;
+       };
+
+       features.keys = function() {
+           return _keys;
+       };
+
+       features.enabled = function(k) {
+           if (!arguments.length) {
+               return _.filter(_keys, function(k) { return _features[k].enabled; });
+           }
+           return _features[k] && _features[k].enabled;
+       };
+
+       features.disabled = function(k) {
+           if (!arguments.length) {
+               return _.reject(_keys, function(k) { return _features[k].enabled; });
+           }
+           return _features[k] && !_features[k].enabled;
+       };
+
+       features.hidden = function(k) {
+           if (!arguments.length) {
+               return _.filter(_keys, function(k) { return _features[k].hidden(); });
+           }
+           return _features[k] && _features[k].hidden();
+       };
+
+       features.autoHidden = function(k) {
+           if (!arguments.length) {
+               return _.filter(_keys, function(k) { return _features[k].autoHidden(); });
+           }
+           return _features[k] && _features[k].autoHidden();
+       };
+
+       features.enable = function(k) {
+           if (_features[k] && !_features[k].enabled) {
+               _features[k].enable();
+               update();
+           }
+       };
+
+       features.disable = function(k) {
+           if (_features[k] && _features[k].enabled) {
+               _features[k].disable();
+               update();
+           }
+       };
+
+       features.toggle = function(k) {
+           if (_features[k]) {
+               (function(f) { return f.enabled ? f.disable() : f.enable(); }(_features[k]));
+               update();
+           }
+       };
+
+       features.resetStats = function() {
+           _.each(_features, function(f) { f.count = 0; });
+           dispatch.change();
+       };
+
+       features.gatherStats = function(d, resolver, dimensions) {
+           var needsRedraw = false,
+               type = _.groupBy(d, function(ent) { return ent.type; }),
+               entities = [].concat(type.relation || [], type.way || [], type.node || []),
+               currHidden, geometry, matches;
+
+           _.each(_features, function(f) { f.count = 0; });
+
+           // adjust the threshold for point/building culling based on viewport size..
+           // a _cullFactor of 1 corresponds to a 1000x1000px viewport..
+           _cullFactor = dimensions[0] * dimensions[1] / 1000000;
+
+           for (var i = 0; i < entities.length; i++) {
+               geometry = entities[i].geometry(resolver);
+               if (!(geometry === 'vertex' || geometry === 'relation')) {
+                   matches = Object.keys(features.getMatches(entities[i], resolver, geometry));
+                   for (var j = 0; j < matches.length; j++) {
+                       _features[matches[j]].count++;
+                   }
+               }
+           }
+
+           currHidden = features.hidden();
+           if (currHidden !== _hidden) {
+               _hidden = currHidden;
+               needsRedraw = true;
+               dispatch.change();
+           }
+
+           return needsRedraw;
+       };
+
+       features.stats = function() {
+           _.each(_keys, function(k) { _stats[k] = _features[k].count; });
+           return _stats;
+       };
+
+       features.clear = function(d) {
+           for (var i = 0; i < d.length; i++) {
+               features.clearEntity(d[i]);
+           }
+       };
+
+       features.clearEntity = function(entity) {
+           delete _cache[Entity.key(entity)];
+       };
+
+       features.reset = function() {
+           _cache = {};
+       };
+
+       features.getMatches = function(entity, resolver, geometry) {
+           if (geometry === 'vertex' || geometry === 'relation') return {};
+
+           var ent = Entity.key(entity);
+           if (!_cache[ent]) {
+               _cache[ent] = {};
+           }
+
+           if (!_cache[ent].matches) {
+               var matches = {},
+                   hasMatch = false;
+
+               for (var i = 0; i < _keys.length; i++) {
+                   if (_keys[i] === 'others') {
+                       if (hasMatch) continue;
+
+                       // Multipolygon members:
+                       // If an entity...
+                       //   1. is a way that hasn't matched other "interesting" feature rules,
+                       //   2. and it belongs to a single parent multipolygon relation
+                       // ...then match whatever feature rules the parent multipolygon has matched.
+                       // see #2548, #2887
+                       //
+                       // IMPORTANT:
+                       // For this to work, getMatches must be called on relations before ways.
+                       //
+                       if (entity.type === 'way') {
+                           var parents = features.getParents(entity, resolver, geometry);
+                           if (parents.length === 1 && parents[0].isMultipolygon()) {
+                               var pkey = Entity.key(parents[0]);
+                               if (_cache[pkey] && _cache[pkey].matches) {
+                                   matches = _.clone(_cache[pkey].matches);
+                                   continue;
+                               }
+                           }
+                       }
+                   }
+
+                   if (_features[_keys[i]].filter(entity, resolver, geometry)) {
+                       matches[_keys[i]] = hasMatch = true;
+                   }
+               }
+               _cache[ent].matches = matches;
+           }
+
+           return _cache[ent].matches;
+       };
+
+       features.getParents = function(entity, resolver, geometry) {
+           if (geometry === 'point') return [];
+
+           var ent = Entity.key(entity);
+           if (!_cache[ent]) {
+               _cache[ent] = {};
+           }
+
+           if (!_cache[ent].parents) {
+               var parents = [];
+               if (geometry === 'vertex') {
+                   parents = resolver.parentWays(entity);
+               } else {   // 'line', 'area', 'relation'
+                   parents = resolver.parentRelations(entity);
+               }
+               _cache[ent].parents = parents;
+           }
+           return _cache[ent].parents;
+       };
+
+       features.isHiddenFeature = function(entity, resolver, geometry) {
+           if (!_hidden.length) return false;
+           if (!entity.version) return false;
+
+           var matches = features.getMatches(entity, resolver, geometry);
+
+           for (var i = 0; i < _hidden.length; i++) {
+               if (matches[_hidden[i]]) return true;
+           }
+           return false;
+       };
+
+       features.isHiddenChild = function(entity, resolver, geometry) {
+           if (!_hidden.length) return false;
+           if (!entity.version || geometry === 'point') return false;
+
+           var parents = features.getParents(entity, resolver, geometry);
+           if (!parents.length) return false;
+
+           for (var i = 0; i < parents.length; i++) {
+               if (!features.isHidden(parents[i], resolver, parents[i].geometry(resolver))) {
+                   return false;
+               }
+           }
+           return true;
+       };
+
+       features.hasHiddenConnections = function(entity, resolver) {
+           if (!_hidden.length) return false;
+           var childNodes, connections;
+
+           if (entity.type === 'midpoint') {
+               childNodes = [resolver.entity(entity.edge[0]), resolver.entity(entity.edge[1])];
+               connections = [];
+           } else {
+               childNodes = entity.nodes ? resolver.childNodes(entity) : [];
+               connections = features.getParents(entity, resolver, entity.geometry(resolver));
+           }
+
+           // gather ways connected to child nodes..
+           connections = _.reduce(childNodes, function(result, e) {
+               return resolver.isShared(e) ? _.union(result, resolver.parentWays(e)) : result;
+           }, connections);
+
+           return connections.length ? _.some(connections, function(e) {
+               return features.isHidden(e, resolver, e.geometry(resolver));
+           }) : false;
+       };
+
+       features.isHidden = function(entity, resolver, geometry) {
+           if (!_hidden.length) return false;
+           if (!entity.version) return false;
+
+           var fn = (geometry === 'vertex' ? features.isHiddenChild : features.isHiddenFeature);
+           return fn(entity, resolver, geometry);
+       };
+
+       features.filter = function(d, resolver) {
+           if (!_hidden.length) return d;
+
+           var result = [];
+           for (var i = 0; i < d.length; i++) {
+               var entity = d[i];
+               if (!features.isHidden(entity, resolver, entity.geometry(resolver))) {
+                   result.push(entity);
+               }
+           }
+           return result;
+       };
+
+       return d3.rebind(features, dispatch, 'on');
+   }
+
+   function Areas(projection) {
+       // Patterns only work in Firefox when set directly on element.
+       // (This is not a bug: https://bugzilla.mozilla.org/show_bug.cgi?id=750632)
+       var patterns = {
+           wetland: 'wetland',
+           beach: 'beach',
+           scrub: 'scrub',
+           construction: 'construction',
+           military: 'construction',
+           cemetery: 'cemetery',
+           grave_yard: 'cemetery',
+           meadow: 'meadow',
+           farm: 'farmland',
+           farmland: 'farmland',
+           orchard: 'orchard'
+       };
+
+       var patternKeys = ['landuse', 'natural', 'amenity'];
+
+       function setPattern(d) {
+           for (var i = 0; i < patternKeys.length; i++) {
+               if (patterns.hasOwnProperty(d.tags[patternKeys[i]])) {
+                   this.style.fill = this.style.stroke = 'url("#pattern-' + patterns[d.tags[patternKeys[i]]] + '")';
+                   return;
+               }
+           }
+           this.style.fill = this.style.stroke = '';
+       }
+
+       return function drawAreas(surface, graph, entities, filter) {
+           var path = iD.svg.Path(projection, graph, true),
+               areas = {},
+               multipolygon;
+
+           for (var i = 0; i < entities.length; i++) {
+               var entity = entities[i];
+               if (entity.geometry(graph) !== 'area') continue;
+
+               multipolygon = iD.geo.isSimpleMultipolygonOuterMember(entity, graph);
+               if (multipolygon) {
+                   areas[multipolygon.id] = {
+                       entity: multipolygon.mergeTags(entity.tags),
+                       area: Math.abs(entity.area(graph))
+                   };
+               } else if (!areas[entity.id]) {
+                   areas[entity.id] = {
+                       entity: entity,
+                       area: Math.abs(entity.area(graph))
+                   };
+               }
+           }
+
+           areas = d3.values(areas).filter(function hasPath(a) { return path(a.entity); });
+           areas.sort(function areaSort(a, b) { return b.area - a.area; });
+           areas = _.map(areas, 'entity');
+
+           var strokes = areas.filter(function(area) {
+               return area.type === 'way';
+           });
+
+           var data = {
+               clip: areas,
+               shadow: strokes,
+               stroke: strokes,
+               fill: areas
+           };
+
+           var clipPaths = surface.selectAll('defs').selectAll('.clipPath')
+              .filter(filter)
+              .data(data.clip, iD.Entity.key);
+
+           clipPaths.enter()
+              .append('clipPath')
+              .attr('class', 'clipPath')
+              .attr('id', function(entity) { return entity.id + '-clippath'; })
+              .append('path');
+
+           clipPaths.selectAll('path')
+              .attr('d', path);
+
+           clipPaths.exit()
+              .remove();
+
+           var areagroup = surface
+               .selectAll('.layer-areas')
+               .selectAll('g.areagroup')
+               .data(['fill', 'shadow', 'stroke']);
+
+           areagroup.enter()
+               .append('g')
+               .attr('class', function(d) { return 'layer areagroup area-' + d; });
+
+           var paths = areagroup
+               .selectAll('path')
+               .filter(filter)
+               .data(function(layer) { return data[layer]; }, iD.Entity.key);
+
+           // Remove exiting areas first, so they aren't included in the `fills`
+           // array used for sorting below (https://github.com/openstreetmap/iD/issues/1903).
+           paths.exit()
+               .remove();
+
+           var fills = surface.selectAll('.area-fill path.area')[0];
+
+           var bisect = d3.bisector(function(node) {
+               return -node.__data__.area(graph);
+           }).left;
+
+           function sortedByArea(entity) {
+               if (this.__data__ === 'fill') {
+                   return fills[bisect(fills, -entity.area(graph))];
+               }
+           }
+
+           paths.enter()
+               .insert('path', sortedByArea)
+               .each(function(entity) {
+                   var layer = this.parentNode.__data__;
+
+                   this.setAttribute('class', entity.type + ' area ' + layer + ' ' + entity.id);
+
+                   if (layer === 'fill') {
+                       this.setAttribute('clip-path', 'url(#' + entity.id + '-clippath)');
+                       setPattern.apply(this, arguments);
+                   }
+               })
+               .call(iD.svg.TagClasses());
+
+           paths
+               .attr('d', path);
+       };
+   }
+
+   function Labels(projection, context) {
+       var path = d3.geo.path().projection(projection);
+
+       // Replace with dict and iterate over entities tags instead?
+       var label_stack = [
+           ['line', 'aeroway'],
+           ['line', 'highway'],
+           ['line', 'railway'],
+           ['line', 'waterway'],
+           ['area', 'aeroway'],
+           ['area', 'amenity'],
+           ['area', 'building'],
+           ['area', 'historic'],
+           ['area', 'leisure'],
+           ['area', 'man_made'],
+           ['area', 'natural'],
+           ['area', 'shop'],
+           ['area', 'tourism'],
+           ['point', 'aeroway'],
+           ['point', 'amenity'],
+           ['point', 'building'],
+           ['point', 'historic'],
+           ['point', 'leisure'],
+           ['point', 'man_made'],
+           ['point', 'natural'],
+           ['point', 'shop'],
+           ['point', 'tourism'],
+           ['line', 'name'],
+           ['area', 'name'],
+           ['point', 'name']
+       ];
+
+       var default_size = 12;
+
+       var font_sizes = label_stack.map(function(d) {
+           var style = iD.util.getStyle('text.' + d[0] + '.tag-' + d[1]),
+               m = style && style.cssText.match('font-size: ([0-9]{1,2})px;');
+           if (m) return parseInt(m[1], 10);
+
+           style = iD.util.getStyle('text.' + d[0]);
+           m = style && style.cssText.match('font-size: ([0-9]{1,2})px;');
+           if (m) return parseInt(m[1], 10);
+
+           return default_size;
+       });
+
+       var iconSize = 18;
+
+       var pointOffsets = [
+           [15, -11, 'start'], // right
+           [10, -11, 'start'], // unused right now
+           [-15, -11, 'end']
+       ];
+
+       var lineOffsets = [50, 45, 55, 40, 60, 35, 65, 30, 70, 25,
+           75, 20, 80, 15, 95, 10, 90, 5, 95];
+
+
+       var noIcons = ['building', 'landuse', 'natural'];
+       function blacklisted(preset) {
+           return _.some(noIcons, function(s) {
+               return preset.id.indexOf(s) >= 0;
+           });
+       }
+
+       function get(array, prop) {
+           return function(d, i) { return array[i][prop]; };
+       }
+
+       var textWidthCache = {};
+
+       function textWidth(text, size, elem) {
+           var c = textWidthCache[size];
+           if (!c) c = textWidthCache[size] = {};
+
+           if (c[text]) {
+               return c[text];
+
+           } else if (elem) {
+               c[text] = elem.getComputedTextLength();
+               return c[text];
+
+           } else {
+               var str = encodeURIComponent(text).match(/%[CDEFcdef]/g);
+               if (str === null) {
+                   return size / 3 * 2 * text.length;
+               } else {
+                   return size / 3 * (2 * text.length + str.length);
+               }
+           }
+       }
+
+       function drawLineLabels(group, entities, filter, classes, labels) {
+           var texts = group.selectAll('text.' + classes)
+               .filter(filter)
+               .data(entities, iD.Entity.key);
+
+           texts.enter()
+               .append('text')
+               .attr('class', function(d, i) { return classes + ' ' + labels[i].classes + ' ' + d.id; })
+               .append('textPath')
+               .attr('class', 'textpath');
+
+
+           texts.selectAll('.textpath')
+               .filter(filter)
+               .data(entities, iD.Entity.key)
+               .attr({
+                   'startOffset': '50%',
+                   'xlink:href': function(d) { return '#labelpath-' + d.id; }
+               })
+               .text(iD.util.displayName);
+
+           texts.exit().remove();
+       }
+
+       function drawLinePaths(group, entities, filter, classes, labels) {
+           var halos = group.selectAll('path')
+               .filter(filter)
+               .data(entities, iD.Entity.key);
+
+           halos.enter()
+               .append('path')
+               .style('stroke-width', get(labels, 'font-size'))
+               .attr('id', function(d) { return 'labelpath-' + d.id; })
+               .attr('class', classes);
+
+           halos.attr('d', get(labels, 'lineString'));
+
+           halos.exit().remove();
+       }
+
+       function drawPointLabels(group, entities, filter, classes, labels) {
+           var texts = group.selectAll('text.' + classes)
+               .filter(filter)
+               .data(entities, iD.Entity.key);
+
+           texts.enter()
+               .append('text')
+               .attr('class', function(d, i) { return classes + ' ' + labels[i].classes + ' ' + d.id; });
+
+           texts.attr('x', get(labels, 'x'))
+               .attr('y', get(labels, 'y'))
+               .style('text-anchor', get(labels, 'textAnchor'))
+               .text(iD.util.displayName)
+               .each(function(d, i) { textWidth(iD.util.displayName(d), labels[i].height, this); });
+
+           texts.exit().remove();
+           return texts;
+       }
+
+       function drawAreaLabels(group, entities, filter, classes, labels) {
+           entities = entities.filter(hasText);
+           labels = labels.filter(hasText);
+           return drawPointLabels(group, entities, filter, classes, labels);
+
+           function hasText(d, i) {
+               return labels[i].hasOwnProperty('x') && labels[i].hasOwnProperty('y');
+           }
+       }
+
+       function drawAreaIcons(group, entities, filter, classes, labels) {
+           var icons = group.selectAll('use')
+               .filter(filter)
+               .data(entities, iD.Entity.key);
+
+           icons.enter()
+               .append('use')
+               .attr('class', 'icon areaicon')
+               .attr('width', '18px')
+               .attr('height', '18px');
+
+           icons.attr('transform', get(labels, 'transform'))
+               .attr('xlink:href', function(d) {
+                   var icon = context.presets().match(d, context.graph()).icon;
+                   return '#' + icon + (icon === 'hairdresser' ? '-24': '-18');    // workaround: maki hairdresser-18 broken?
+               });
+
+
+           icons.exit().remove();
+       }
+
+       function reverse(p) {
+           var angle = Math.atan2(p[1][1] - p[0][1], p[1][0] - p[0][0]);
+           return !(p[0][0] < p[p.length - 1][0] && angle < Math.PI/2 && angle > -Math.PI/2);
+       }
+
+       function lineString(nodes) {
+           return 'M' + nodes.join('L');
+       }
+
+       function subpath(nodes, from, to) {
+           function segmentLength(i) {
+               var dx = nodes[i][0] - nodes[i + 1][0];
+               var dy = nodes[i][1] - nodes[i + 1][1];
+               return Math.sqrt(dx * dx + dy * dy);
+           }
+
+           var sofar = 0,
+               start, end, i0, i1;
+           for (var i = 0; i < nodes.length - 1; i++) {
+               var current = segmentLength(i);
+               var portion;
+               if (!start && sofar + current >= from) {
+                   portion = (from - sofar) / current;
+                   start = [
+                       nodes[i][0] + portion * (nodes[i + 1][0] - nodes[i][0]),
+                       nodes[i][1] + portion * (nodes[i + 1][1] - nodes[i][1])
+                   ];
+                   i0 = i + 1;
+               }
+               if (!end && sofar + current >= to) {
+                   portion = (to - sofar) / current;
+                   end = [
+                       nodes[i][0] + portion * (nodes[i + 1][0] - nodes[i][0]),
+                       nodes[i][1] + portion * (nodes[i + 1][1] - nodes[i][1])
+                   ];
+                   i1 = i + 1;
+               }
+               sofar += current;
+
+           }
+           var ret = nodes.slice(i0, i1);
+           ret.unshift(start);
+           ret.push(end);
+           return ret;
+
+       }
+
+       function hideOnMouseover() {
+           var layers = d3.select(this)
+               .selectAll('.layer-label, .layer-halo');
+
+           layers.selectAll('.proximate')
+               .classed('proximate', false);
+
+           var mouse = context.mouse(),
+               pad = 50,
+               rect = [mouse[0] - pad, mouse[1] - pad, mouse[0] + pad, mouse[1] + pad],
+               ids = _.map(rtree.search(rect), 'id');
+
+           if (!ids.length) return;
+           layers.selectAll('.' + ids.join(', .'))
+               .classed('proximate', true);
+       }
+
+       var rtree = rbush(),
+           rectangles = {};
+
+       function drawLabels(surface, graph, entities, filter, dimensions, fullRedraw) {
+           var hidePoints = !surface.selectAll('.node.point').node();
+
+           var labelable = [], i, k, entity;
+           for (i = 0; i < label_stack.length; i++) labelable.push([]);
+
+           if (fullRedraw) {
+               rtree.clear();
+               rectangles = {};
+           } else {
+               for (i = 0; i < entities.length; i++) {
+                   rtree.remove(rectangles[entities[i].id]);
+               }
+           }
+
+           // Split entities into groups specified by label_stack
+           for (i = 0; i < entities.length; i++) {
+               entity = entities[i];
+               var geometry = entity.geometry(graph);
+
+               if (geometry === 'vertex')
+                   continue;
+               if (hidePoints && geometry === 'point')
+                   continue;
+
+               var preset = geometry === 'area' && context.presets().match(entity, graph),
+                   icon = preset && !blacklisted(preset) && preset.icon;
+
+               if (!icon && !iD.util.displayName(entity))
+                   continue;
+
+               for (k = 0; k < label_stack.length; k++) {
+                   if (geometry === label_stack[k][0] && entity.tags[label_stack[k][1]]) {
+                       labelable[k].push(entity);
+                       break;
+                   }
+               }
+           }
+
+           var positions = {
+               point: [],
+               line: [],
+               area: []
+           };
+
+           var labelled = {
+               point: [],
+               line: [],
+               area: []
+           };
+
+           // Try and find a valid label for labellable entities
+           for (k = 0; k < labelable.length; k++) {
+               var font_size = font_sizes[k];
+               for (i = 0; i < labelable[k].length; i++) {
+                   entity = labelable[k][i];
+                   var name = iD.util.displayName(entity),
+                       width = name && textWidth(name, font_size),
+                       p;
+                   if (entity.geometry(graph) === 'point') {
+                       p = getPointLabel(entity, width, font_size);
+                   } else if (entity.geometry(graph) === 'line') {
+                       p = getLineLabel(entity, width, font_size);
+                   } else if (entity.geometry(graph) === 'area') {
+                       p = getAreaLabel(entity, width, font_size);
+                   }
+                   if (p) {
+                       p.classes = entity.geometry(graph) + ' tag-' + label_stack[k][1];
+                       positions[entity.geometry(graph)].push(p);
+                       labelled[entity.geometry(graph)].push(entity);
+                   }
+               }
+           }
+
+           function getPointLabel(entity, width, height) {
+               var coord = projection(entity.loc),
+                   m = 5,  // margin
+                   offset = pointOffsets[0],
+                   p = {
+                       height: height,
+                       width: width,
+                       x: coord[0] + offset[0],
+                       y: coord[1] + offset[1],
+                       textAnchor: offset[2]
+                   };
+               var rect = [p.x - m, p.y - m, p.x + width + m, p.y + height + m];
+               if (tryInsert(rect, entity.id)) return p;
+           }
+
+
+           function getLineLabel(entity, width, height) {
+               var nodes = _.map(graph.childNodes(entity), 'loc').map(projection),
+                   length = iD.geo.pathLength(nodes);
+               if (length < width + 20) return;
+
+               for (var i = 0; i < lineOffsets.length; i++) {
+                   var offset = lineOffsets[i],
+                       middle = offset / 100 * length,
+                       start = middle - width/2;
+                   if (start < 0 || start + width > length) continue;
+                   var sub = subpath(nodes, start, start + width),
+                       rev = reverse(sub),
+                       rect = [
+                           Math.min(sub[0][0], sub[sub.length - 1][0]) - 10,
+                           Math.min(sub[0][1], sub[sub.length - 1][1]) - 10,
+                           Math.max(sub[0][0], sub[sub.length - 1][0]) + 20,
+                           Math.max(sub[0][1], sub[sub.length - 1][1]) + 30
+                       ];
+                   if (rev) sub = sub.reverse();
+                   if (tryInsert(rect, entity.id)) return {
+                       'font-size': height + 2,
+                       lineString: lineString(sub),
+                       startOffset: offset + '%'
+                   };
+               }
+           }
+
+           function getAreaLabel(entity, width, height) {
+               var centroid = path.centroid(entity.asGeoJSON(graph, true)),
+                   extent = entity.extent(graph),
+                   entitywidth = projection(extent[1])[0] - projection(extent[0])[0],
+                   rect;
+
+               if (isNaN(centroid[0]) || entitywidth < 20) return;
+
+               var iconX = centroid[0] - (iconSize/2),
+                   iconY = centroid[1] - (iconSize/2),
+                   textOffset = iconSize + 5;
+
+               var p = {
+                   transform: 'translate(' + iconX + ',' + iconY + ')'
+               };
+
+               if (width && entitywidth >= width + 20) {
+                   p.x = centroid[0];
+                   p.y = centroid[1] + textOffset;
+                   p.textAnchor = 'middle';
+                   p.height = height;
+                   rect = [p.x - width/2, p.y, p.x + width/2, p.y + height + textOffset];
+               } else {
+                   rect = [iconX, iconY, iconX + iconSize, iconY + iconSize];
+               }
+
+               if (tryInsert(rect, entity.id)) return p;
+
+           }
+
+           function tryInsert(rect, id) {
+               // Check that label is visible
+               if (rect[0] < 0 || rect[1] < 0 || rect[2] > dimensions[0] ||
+                   rect[3] > dimensions[1]) return false;
+               var v = rtree.search(rect).length === 0;
+               if (v) {
+                   rect.id = id;
+                   rtree.insert(rect);
+                   rectangles[id] = rect;
+               }
+               return v;
+           }
+
+           var label = surface.selectAll('.layer-label'),
+               halo = surface.selectAll('.layer-halo');
+
+           // points
+           drawPointLabels(label, labelled.point, filter, 'pointlabel', positions.point);
+           drawPointLabels(halo, labelled.point, filter, 'pointlabel-halo', positions.point);
+
+           // lines
+           drawLinePaths(halo, labelled.line, filter, '', positions.line);
+           drawLineLabels(label, labelled.line, filter, 'linelabel', positions.line);
+           drawLineLabels(halo, labelled.line, filter, 'linelabel-halo', positions.line);
+
+           // areas
+           drawAreaLabels(label, labelled.area, filter, 'arealabel', positions.area);
+           drawAreaLabels(halo, labelled.area, filter, 'arealabel-halo', positions.area);
+           drawAreaIcons(label, labelled.area, filter, 'arealabel-icon', positions.area);
+
+           // debug
+           var showDebug = context.getDebug('collision');
+           var debug = label.selectAll('.layer-label-debug')
+               .data(showDebug ? [true] : []);
+
+           debug.enter()
+               .append('g')
+               .attr('class', 'layer-label-debug');
+
+           debug.exit()
+               .remove();
+
+           if (showDebug) {
+               var gj = rtree.all().map(function(d) {
+                   return { type: 'Polygon', coordinates: [[
+                       [d[0], d[1]],
+                       [d[2], d[1]],
+                       [d[2], d[3]],
+                       [d[0], d[3]],
+                       [d[0], d[1]]
+                   ]]};
+               });
+
+               var debugboxes = debug.selectAll('.debug').data(gj);
+
+               debugboxes.enter()
+                   .append('path')
+                   .attr('class', 'debug yellow');
+
+               debugboxes.exit()
+                   .remove();
+
+               debugboxes
+                   .attr('d', d3.geo.path().projection(null));
+           }
+       }
+
+       drawLabels.supersurface = function(supersurface) {
+           supersurface
+               .on('mousemove.hidelabels', hideOnMouseover)
+               .on('mousedown.hidelabels', function () {
+                   supersurface.on('mousemove.hidelabels', null);
+               })
+               .on('mouseup.hidelabels', function () {
+                   supersurface.on('mousemove.hidelabels', hideOnMouseover);
+               });
+       };
+
+       return drawLabels;
+   }
+
+   function Layers(projection, context) {
+       var dispatch = d3.dispatch('change'),
+           svg = d3.select(null),
+           layers = [
+               { id: 'osm', layer: iD.svg.Osm(projection, context, dispatch) },
+               { id: 'gpx', layer: iD.svg.Gpx(projection, context, dispatch) },
+               { id: 'mapillary-images', layer: iD.svg.MapillaryImages(projection, context, dispatch) },
+               { id: 'mapillary-signs',  layer: iD.svg.MapillarySigns(projection, context, dispatch) },
+               { id: 'debug', layer: iD.svg.Debug(projection, context, dispatch) }
+           ];
+
+
+       function drawLayers(selection) {
+           svg = selection.selectAll('.surface')
+               .data([0]);
+
+           svg.enter()
+               .append('svg')
+               .attr('class', 'surface')
+               .append('defs');
+
+           var groups = svg.selectAll('.data-layer')
+               .data(layers);
+
+           groups.enter()
+               .append('g')
+               .attr('class', function(d) { return 'data-layer data-layer-' + d.id; });
+
+           groups
+               .each(function(d) { d3.select(this).call(d.layer); });
+
+           groups.exit()
+               .remove();
+       }
+
+       drawLayers.all = function() {
+           return layers;
+       };
+
+       drawLayers.layer = function(id) {
+           var obj = _.find(layers, function(o) {return o.id === id;});
+           return obj && obj.layer;
+       };
+
+       drawLayers.only = function(what) {
+           var arr = [].concat(what);
+           drawLayers.remove(_.difference(_.map(layers, 'id'), arr));
+           return this;
+       };
+
+       drawLayers.remove = function(what) {
+           var arr = [].concat(what);
+           arr.forEach(function(id) {
+               layers = _.reject(layers, function(o) {return o.id === id;});
+           });
+           dispatch.change();
+           return this;
+       };
+
+       drawLayers.add = function(what) {
+           var arr = [].concat(what);
+           arr.forEach(function(obj) {
+               if ('id' in obj && 'layer' in obj) {
+                   layers.push(obj);
+               }
+           });
+           dispatch.change();
+           return this;
+       };
+
+       drawLayers.dimensions = function(_) {
+           if (!arguments.length) return svg.dimensions();
+           svg.dimensions(_);
+           layers.forEach(function(obj) {
+               if (obj.layer.dimensions) {
+                   obj.layer.dimensions(_);
+               }
+           });
+           return this;
+       };
+
+
+       return d3.rebind(drawLayers, dispatch, 'on');
+   }
+
+   function Lines(projection) {
+
+       var highway_stack = {
+           motorway: 0,
+           motorway_link: 1,
+           trunk: 2,
+           trunk_link: 3,
+           primary: 4,
+           primary_link: 5,
+           secondary: 6,
+           tertiary: 7,
+           unclassified: 8,
+           residential: 9,
+           service: 10,
+           footway: 11
+       };
+
+       function waystack(a, b) {
+           var as = 0, bs = 0;
+
+           if (a.tags.highway) { as -= highway_stack[a.tags.highway]; }
+           if (b.tags.highway) { bs -= highway_stack[b.tags.highway]; }
+           return as - bs;
+       }
+
+       return function drawLines(surface, graph, entities, filter) {
+           var ways = [], pathdata = {}, onewaydata = {},
+               getPath = iD.svg.Path(projection, graph);
+
+           for (var i = 0; i < entities.length; i++) {
+               var entity = entities[i],
+                   outer = iD.geo.simpleMultipolygonOuterMember(entity, graph);
+               if (outer) {
+                   ways.push(entity.mergeTags(outer.tags));
+               } else if (entity.geometry(graph) === 'line') {
+                   ways.push(entity);
+               }
+           }
+
+           ways = ways.filter(getPath);
+
+           pathdata = _.groupBy(ways, function(way) { return way.layer(); });
+
+           _.forOwn(pathdata, function(v, k) {
+               onewaydata[k] = _(v)
+                   .filter(function(d) { return d.isOneWay(); })
+                   .map(iD.svg.OneWaySegments(projection, graph, 35))
+                   .flatten()
+                   .valueOf();
+           });
+
+           var layergroup = surface
+               .selectAll('.layer-lines')
+               .selectAll('g.layergroup')
+               .data(d3.range(-10, 11));
+
+           layergroup.enter()
+               .append('g')
+               .attr('class', function(d) { return 'layer layergroup layer' + String(d); });
+
+
+           var linegroup = layergroup
+               .selectAll('g.linegroup')
+               .data(['shadow', 'casing', 'stroke']);
+
+           linegroup.enter()
+               .append('g')
+               .attr('class', function(d) { return 'layer linegroup line-' + d; });
+
+
+           var lines = linegroup
+               .selectAll('path')
+               .filter(filter)
+               .data(
+                   function() { return pathdata[this.parentNode.parentNode.__data__] || []; },
+                   iD.Entity.key
+               );
+
+           // Optimization: call simple TagClasses only on enter selection. This
+           // works because iD.Entity.key is defined to include the entity v attribute.
+           lines.enter()
+               .append('path')
+               .attr('class', function(d) { return 'way line ' + this.parentNode.__data__ + ' ' + d.id; })
+               .call(iD.svg.TagClasses());
+
+           lines
+               .sort(waystack)
+               .attr('d', getPath)
+               .call(iD.svg.TagClasses().tags(iD.svg.RelationMemberTags(graph)));
+
+           lines.exit()
+               .remove();
+
+
+           var onewaygroup = layergroup
+               .selectAll('g.onewaygroup')
+               .data(['oneway']);
+
+           onewaygroup.enter()
+               .append('g')
+               .attr('class', 'layer onewaygroup');
+
+
+           var oneways = onewaygroup
+               .selectAll('path')
+               .filter(filter)
+               .data(
+                   function() { return onewaydata[this.parentNode.parentNode.__data__] || []; },
+                   function(d) { return [d.id, d.index]; }
+               );
+
+           oneways.enter()
+               .append('path')
+               .attr('class', 'oneway')
+               .attr('marker-mid', 'url(#oneway-marker)');
+
+           oneways
+               .attr('d', function(d) { return d.d; });
+
+           if (iD.detect().ie) {
+               oneways.each(function() { this.parentNode.insertBefore(this, this); });
+           }
+
+           oneways.exit()
+               .remove();
+
+       };
+   }
+
+   function Midpoints(projection, context) {
+       return function drawMidpoints(surface, graph, entities, filter, extent) {
+           var poly = extent.polygon(),
+               midpoints = {};
+
+           for (var i = 0; i < entities.length; i++) {
+               var entity = entities[i];
+
+               if (entity.type !== 'way')
+                   continue;
+               if (!filter(entity))
+                   continue;
+               if (context.selectedIDs().indexOf(entity.id) < 0)
+                   continue;
+
+               var nodes = graph.childNodes(entity);
+               for (var j = 0; j < nodes.length - 1; j++) {
+
+                   var a = nodes[j],
+                       b = nodes[j + 1],
+                       id = [a.id, b.id].sort().join('-');
+
+                   if (midpoints[id]) {
+                       midpoints[id].parents.push(entity);
+                   } else {
+                       if (iD.geo.euclideanDistance(projection(a.loc), projection(b.loc)) > 40) {
+                           var point = iD.geo.interp(a.loc, b.loc, 0.5),
+                               loc = null;
+
+                           if (extent.intersects(point)) {
+                               loc = point;
+                           } else {
+                               for (var k = 0; k < 4; k++) {
+                                   point = iD.geo.lineIntersection([a.loc, b.loc], [poly[k], poly[k+1]]);
+                                   if (point &&
+                                       iD.geo.euclideanDistance(projection(a.loc), projection(point)) > 20 &&
+                                       iD.geo.euclideanDistance(projection(b.loc), projection(point)) > 20)
+                                   {
+                                       loc = point;
+                                       break;
+                                   }
+                               }
+                           }
+
+                           if (loc) {
+                               midpoints[id] = {
+                                   type: 'midpoint',
+                                   id: id,
+                                   loc: loc,
+                                   edge: [a.id, b.id],
+                                   parents: [entity]
+                               };
+                           }
+                       }
+                   }
+               }
+           }
+
+           function midpointFilter(d) {
+               if (midpoints[d.id])
+                   return true;
+
+               for (var i = 0; i < d.parents.length; i++)
+                   if (filter(d.parents[i]))
+                       return true;
+
+               return false;
+           }
+
+           var groups = surface.selectAll('.layer-hit').selectAll('g.midpoint')
+               .filter(midpointFilter)
+               .data(_.values(midpoints), function(d) { return d.id; });
+
+           var enter = groups.enter()
+               .insert('g', ':first-child')
+               .attr('class', 'midpoint');
+
+           enter.append('polygon')
+               .attr('points', '-6,8 10,0 -6,-8')
+               .attr('class', 'shadow');
+
+           enter.append('polygon')
+               .attr('points', '-3,4 5,0 -3,-4')
+               .attr('class', 'fill');
+
+           groups
+               .attr('transform', function(d) {
+                   var translate = iD.svg.PointTransform(projection),
+                       a = context.entity(d.edge[0]),
+                       b = context.entity(d.edge[1]),
+                       angle = Math.round(iD.geo.angle(a, b, projection) * (180 / Math.PI));
+                   return translate(d) + ' rotate(' + angle + ')';
+               })
+               .call(iD.svg.TagClasses().tags(
+                   function(d) { return d.parents[0].tags; }
+               ));
+
+           // Propagate data bindings.
+           groups.select('polygon.shadow');
+           groups.select('polygon.fill');
+
+           groups.exit()
+               .remove();
+       };
+   }
+
+   function Points(projection, context) {
+       function markerPath(selection, klass) {
+           selection
+               .attr('class', klass)
+               .attr('transform', 'translate(-8, -23)')
+               .attr('d', 'M 17,8 C 17,13 11,21 8.5,23.5 C 6,21 0,13 0,8 C 0,4 4,-0.5 8.5,-0.5 C 13,-0.5 17,4 17,8 z');
+       }
+
+       function sortY(a, b) {
+           return b.loc[1] - a.loc[1];
+       }
+
+       return function drawPoints(surface, graph, entities, filter) {
+           var wireframe = surface.classed('fill-wireframe'),
+               points = wireframe ? [] : _.filter(entities, function(e) {
+                   return e.geometry(graph) === 'point';
+               });
+
+           points.sort(sortY);
+
+           var groups = surface.selectAll('.layer-hit').selectAll('g.point')
+               .filter(filter)
+               .data(points, iD.Entity.key);
+
+           var group = groups.enter()
+               .append('g')
+               .attr('class', function(d) { return 'node point ' + d.id; })
+               .order();
+
+           group.append('path')
+               .call(markerPath, 'shadow');
+
+           group.append('path')
+               .call(markerPath, 'stroke');
+
+           group.append('use')
+               .attr('transform', 'translate(-6, -20)')
+               .attr('class', 'icon')
+               .attr('width', '12px')
+               .attr('height', '12px');
+
+           groups.attr('transform', iD.svg.PointTransform(projection))
+               .call(iD.svg.TagClasses());
+
+           // Selecting the following implicitly
+           // sets the data (point entity) on the element
+           groups.select('.shadow');
+           groups.select('.stroke');
+           groups.select('.icon')
+               .attr('xlink:href', function(entity) {
+                   var preset = context.presets().match(entity, graph);
+                   return preset.icon ? '#' + preset.icon + '-12' : '';
+               });
+
+           groups.exit()
+               .remove();
+       };
+   }
+
+   function Vertices(projection, context) {
+       var radiuses = {
+           //       z16-, z17, z18+, tagged
+           shadow: [6,    7.5,   7.5,  11.5],
+           stroke: [2.5,  3.5,   3.5,  7],
+           fill:   [1,    1.5,   1.5,  1.5]
+       };
+
+       var hover;
+
+       function siblingAndChildVertices(ids, graph, extent) {
+           var vertices = {};
+
+           function addChildVertices(entity) {
+               if (!context.features().isHiddenFeature(entity, graph, entity.geometry(graph))) {
+                   var i;
+                   if (entity.type === 'way') {
+                       for (i = 0; i < entity.nodes.length; i++) {
+                           addChildVertices(graph.entity(entity.nodes[i]));
+                       }
+                   } else if (entity.type === 'relation') {
+                       for (i = 0; i < entity.members.length; i++) {
+                           var member = context.hasEntity(entity.members[i].id);
+                           if (member) {
+                               addChildVertices(member);
+                           }
+                       }
+                   } else if (entity.intersects(extent, graph)) {
+                       vertices[entity.id] = entity;
+                   }
+               }
+           }
+
+           ids.forEach(function(id) {
+               var entity = context.hasEntity(id);
+               if (entity && entity.type === 'node') {
+                   vertices[entity.id] = entity;
+                   context.graph().parentWays(entity).forEach(function(entity) {
+                       addChildVertices(entity);
+                   });
+               } else if (entity) {
+                   addChildVertices(entity);
+               }
+           });
+
+           return vertices;
+       }
+
+       function draw(selection, vertices, klass, graph, zoom) {
+           var icons = {},
+               z = (zoom < 17 ? 0 : zoom < 18 ? 1 : 2);
+
+           var groups = selection
+               .data(vertices, iD.Entity.key);
+
+           function icon(entity) {
+               if (entity.id in icons) return icons[entity.id];
+               icons[entity.id] =
+                   entity.hasInterestingTags() &&
+                   context.presets().match(entity, graph).icon;
+               return icons[entity.id];
+           }
+
+           function setClass(klass) {
+               return function(entity) {
+                   this.setAttribute('class', 'node vertex ' + klass + ' ' + entity.id);
+               };
+           }
+
+           function setAttributes(selection) {
+               ['shadow','stroke','fill'].forEach(function(klass) {
+                   var rads = radiuses[klass];
+                   selection.selectAll('.' + klass)
+                       .each(function(entity) {
+                           var i = z && icon(entity),
+                               c = i ? 0.5 : 0,
+                               r = rads[i ? 3 : z];
+                           this.setAttribute('cx', c);
+                           this.setAttribute('cy', -c);
+                           this.setAttribute('r', r);
+                           if (i && klass === 'fill') {
+                               this.setAttribute('visibility', 'hidden');
+                           } else {
+                               this.removeAttribute('visibility');
+                           }
+                       });
+               });
+
+               selection.selectAll('use')
+                   .each(function() {
+                       if (z) {
+                           this.removeAttribute('visibility');
+                       } else {
+                           this.setAttribute('visibility', 'hidden');
+                       }
+                   });
+           }
+
+           var enter = groups.enter()
+               .append('g')
+               .attr('class', function(d) { return 'node vertex ' + klass + ' ' + d.id; });
+
+           enter.append('circle')
+               .each(setClass('shadow'));
+
+           enter.append('circle')
+               .each(setClass('stroke'));
+
+           // Vertices with icons get a `use`.
+           enter.filter(function(d) { return icon(d); })
+               .append('use')
+               .attr('transform', 'translate(-6, -6)')
+               .attr('xlink:href', function(d) { return '#' + icon(d) + '-12'; })
+               .attr('width', '12px')
+               .attr('height', '12px')
+               .each(setClass('icon'));
+
+           // Vertices with tags get a fill.
+           enter.filter(function(d) { return d.hasInterestingTags(); })
+               .append('circle')
+               .each(setClass('fill'));
+
+           groups
+               .attr('transform', iD.svg.PointTransform(projection))
+               .classed('shared', function(entity) { return graph.isShared(entity); })
+               .call(setAttributes);
+
+           groups.exit()
+               .remove();
+       }
+
+       function drawVertices(surface, graph, entities, filter, extent, zoom) {
+           var selected = siblingAndChildVertices(context.selectedIDs(), graph, extent),
+               wireframe = surface.classed('fill-wireframe'),
+               vertices = [];
+
+           for (var i = 0; i < entities.length; i++) {
+               var entity = entities[i],
+                   geometry = entity.geometry(graph);
+
+               if (wireframe && geometry === 'point') {
+                   vertices.push(entity);
+                   continue;
+               }
+
+               if (geometry !== 'vertex')
+                   continue;
+
+               if (entity.id in selected ||
+                   entity.hasInterestingTags() ||
+                   entity.isIntersection(graph)) {
+                   vertices.push(entity);
+               }
+           }
+
+           surface.selectAll('.layer-hit').selectAll('g.vertex.vertex-persistent')
+               .filter(filter)
+               .call(draw, vertices, 'vertex-persistent', graph, zoom);
+
+           drawHover(surface, graph, extent, zoom);
+       }
+
+       function drawHover(surface, graph, extent, zoom) {
+           var hovered = hover ? siblingAndChildVertices([hover.id], graph, extent) : {};
+
+           surface.selectAll('.layer-hit').selectAll('g.vertex.vertex-hover')
+               .call(draw, d3.values(hovered), 'vertex-hover', graph, zoom);
+       }
+
+       drawVertices.drawHover = function(surface, graph, target, extent, zoom) {
+           if (target === hover) return;
+           hover = target;
+           drawHover(surface, graph, extent, zoom);
+       };
+
+       return drawVertices;
+   }
+
+   function Map(context) {
+       var dimensions = [1, 1],
+           dispatch = d3.dispatch('move', 'drawn'),
+           projection = context.projection,
+           zoom = d3.behavior.zoom()
+               .translate(projection.translate())
+               .scale(projection.scale() * 2 * Math.PI)
+               .scaleExtent([1024, 256 * Math.pow(2, 24)])
+               .on('zoom', zoomPan),
+           dblclickEnabled = true,
+           redrawEnabled = true,
+           transformStart,
+           transformed = false,
+           easing = false,
+           minzoom = 0,
+           drawLayers = Layers(projection, context),
+           drawPoints = Points(projection, context),
+           drawVertices = Vertices(projection, context),
+           drawLines = Lines(projection),
+           drawAreas = Areas(projection),
+           drawMidpoints = Midpoints(projection, context),
+           drawLabels = Labels(projection, context),
+           supersurface,
+           wrapper,
+           surface,
+           mouse,
+           mousemove;
+
+       function map(selection) {
+           context
+               .on('change.map', redraw);
+           context.history()
+               .on('change.map', redraw);
+           context.background()
+               .on('change.map', redraw);
+           context.features()
+               .on('redraw.map', redraw);
+           drawLayers
+               .on('change.map', function() {
+                   context.background().updateImagery();
+                   redraw();
+               });
+
+           selection
+               .on('dblclick.map', dblClick)
+               .call(zoom);
+
+           supersurface = selection.append('div')
+               .attr('id', 'supersurface')
+               .call(setTransform, 0, 0);
+
+           // Need a wrapper div because Opera can't cope with an absolutely positioned
+           // SVG element: http://bl.ocks.org/jfirebaugh/6fbfbd922552bf776c16
+           wrapper = supersurface
+               .append('div')
+               .attr('class', 'layer layer-data');
+
+           map.surface = surface = wrapper
+               .call(drawLayers)
+               .selectAll('.surface')
+               .attr('id', 'surface');
+
+           surface
+               .on('mousedown.zoom', function() {
+                   if (d3.event.button === 2) {
+                       d3.event.stopPropagation();
+                   }
+               }, true)
+               .on('mouseup.zoom', function() {
+                   if (resetTransform()) redraw();
+               })
+               .on('mousemove.map', function() {
+                   mousemove = d3.event;
+               })
+               .on('mouseover.vertices', function() {
+                   if (map.editable() && !transformed) {
+                       var hover = d3.event.target.__data__;
+                       surface.call(drawVertices.drawHover, context.graph(), hover, map.extent(), map.zoom());
+                       dispatch.drawn({full: false});
+                   }
+               })
+               .on('mouseout.vertices', function() {
+                   if (map.editable() && !transformed) {
+                       var hover = d3.event.relatedTarget && d3.event.relatedTarget.__data__;
+                       surface.call(drawVertices.drawHover, context.graph(), hover, map.extent(), map.zoom());
+                       dispatch.drawn({full: false});
+                   }
+               });
+
+
+           supersurface
+               .call(context.background());
+
+
+           context.on('enter.map', function() {
+               if (map.editable() && !transformed) {
+                   var all = context.intersects(map.extent()),
+                       filter = d3.functor(true),
+                       graph = context.graph();
+
+                   all = context.features().filter(all, graph);
+                   surface
+                       .call(drawVertices, graph, all, filter, map.extent(), map.zoom())
+                       .call(drawMidpoints, graph, all, filter, map.trimmedExtent());
+                   dispatch.drawn({full: false});
+               }
+           });
+
+           map.dimensions(selection.dimensions());
+
+           drawLabels.supersurface(supersurface);
+       }
+
+       function pxCenter() {
+           return [dimensions[0] / 2, dimensions[1] / 2];
+       }
+
+       function drawVector(difference, extent) {
+           var graph = context.graph(),
+               features = context.features(),
+               all = context.intersects(map.extent()),
+               data, filter;
+
+           if (difference) {
+               var complete = difference.complete(map.extent());
+               data = _.compact(_.values(complete));
+               filter = function(d) { return d.id in complete; };
+               features.clear(data);
+
+           } else {
+               // force a full redraw if gatherStats detects that a feature
+               // should be auto-hidden (e.g. points or buildings)..
+               if (features.gatherStats(all, graph, dimensions)) {
+                   extent = undefined;
+               }
+
+               if (extent) {
+                   data = context.intersects(map.extent().intersection(extent));
+                   var set = d3.set(_.map(data, 'id'));
+                   filter = function(d) { return set.has(d.id); };
+
+               } else {
+                   data = all;
+                   filter = d3.functor(true);
+               }
+           }
+
+           data = features.filter(data, graph);
+
+           surface
+               .call(drawVertices, graph, data, filter, map.extent(), map.zoom())
+               .call(drawLines, graph, data, filter)
+               .call(drawAreas, graph, data, filter)
+               .call(drawMidpoints, graph, data, filter, map.trimmedExtent())
+               .call(drawLabels, graph, data, filter, dimensions, !difference && !extent)
+               .call(drawPoints, graph, data, filter);
+
+           dispatch.drawn({full: true});
+       }
+
+       function editOff() {
+           context.features().resetStats();
+           surface.selectAll('.layer-osm *').remove();
+           dispatch.drawn({full: true});
+       }
+
+       function dblClick() {
+           if (!dblclickEnabled) {
+               d3.event.preventDefault();
+               d3.event.stopImmediatePropagation();
+           }
+       }
+
+       function zoomPan() {
+           if (Math.log(d3.event.scale) / Math.LN2 - 8 < minzoom) {
+               surface.interrupt();
+               flash(context.container())
+                   .select('.content')
+                   .text(t('cannot_zoom'));
+               setZoom(context.minEditableZoom(), true);
+               queueRedraw();
+               dispatch.move(map);
+               return;
+           }
+
+           projection
+               .translate(d3.event.translate)
+               .scale(d3.event.scale / (2 * Math.PI));
+
+           var scale = d3.event.scale / transformStart[0],
+               tX = (d3.event.translate[0] / scale - transformStart[1][0]) * scale,
+               tY = (d3.event.translate[1] / scale - transformStart[1][1]) * scale;
+
+           transformed = true;
+           setTransform(supersurface, tX, tY, scale);
+           queueRedraw();
+
+           dispatch.move(map);
+       }
+
+       function resetTransform() {
+           if (!transformed) return false;
+
+           surface.selectAll('.radial-menu').interrupt().remove();
+           setTransform(supersurface, 0, 0);
+           transformed = false;
+           return true;
+       }
+
+       function redraw(difference, extent) {
+           if (!surface || !redrawEnabled) return;
+
+           clearTimeout(timeoutId);
+
+           // If we are in the middle of a zoom/pan, we can't do differenced redraws.
+           // It would result in artifacts where differenced entities are redrawn with
+           // one transform and unchanged entities with another.
+           if (resetTransform()) {
+               difference = extent = undefined;
+           }
+
+           var zoom = String(~~map.zoom());
+           if (surface.attr('data-zoom') !== zoom) {
+               surface.attr('data-zoom', zoom)
+                   .classed('low-zoom', zoom <= 16);
+           }
+
+           if (!difference) {
+               supersurface.call(context.background());
+           }
+
+           // OSM
+           if (map.editable()) {
+               context.loadTiles(projection, dimensions);
+               drawVector(difference, extent);
+           } else {
+               editOff();
+           }
+
+           wrapper
+               .call(drawLayers);
+
+           transformStart = [
+               projection.scale() * 2 * Math.PI,
+               projection.translate().slice()];
+
+           return map;
+       }
+
+       var timeoutId;
+       function queueRedraw() {
+           timeoutId = setTimeout(function() { redraw(); }, 750);
+       }
+
+       function pointLocation(p) {
+           var translate = projection.translate(),
+               scale = projection.scale() * 2 * Math.PI;
+           return [(p[0] - translate[0]) / scale, (p[1] - translate[1]) / scale];
+       }
+
+       function locationPoint(l) {
+           var translate = projection.translate(),
+               scale = projection.scale() * 2 * Math.PI;
+           return [l[0] * scale + translate[0], l[1] * scale + translate[1]];
+       }
+
+       map.mouse = function() {
+           var e = mousemove || d3.event, s;
+           while ((s = e.sourceEvent)) e = s;
+           return mouse(e);
+       };
+
+       map.mouseCoordinates = function() {
+           return projection.invert(map.mouse());
+       };
+
+       map.dblclickEnable = function(_) {
+           if (!arguments.length) return dblclickEnabled;
+           dblclickEnabled = _;
+           return map;
+       };
+
+       map.redrawEnable = function(_) {
+           if (!arguments.length) return redrawEnabled;
+           redrawEnabled = _;
+           return map;
+       };
+
+       function interpolateZoom(_) {
+           var k = projection.scale(),
+               t = projection.translate();
+
+           surface.node().__chart__ = {
+               x: t[0],
+               y: t[1],
+               k: k * 2 * Math.PI
+           };
+
+           setZoom(_);
+           projection.scale(k).translate(t);  // undo setZoom projection changes
+
+           zoom.event(surface.transition());
+       }
+
+       function setZoom(_, force) {
+           if (_ === map.zoom() && !force)
+               return false;
+           var scale = 256 * Math.pow(2, _),
+               center = pxCenter(),
+               l = pointLocation(center);
+           scale = Math.max(1024, Math.min(256 * Math.pow(2, 24), scale));
+           projection.scale(scale / (2 * Math.PI));
+           zoom.scale(scale);
+           var t = projection.translate();
+           l = locationPoint(l);
+           t[0] += center[0] - l[0];
+           t[1] += center[1] - l[1];
+           projection.translate(t);
+           zoom.translate(projection.translate());
+           return true;
+       }
+
+       function setCenter(_) {
+           var c = map.center();
+           if (_[0] === c[0] && _[1] === c[1])
+               return false;
+           var t = projection.translate(),
+               pxC = pxCenter(),
+               ll = projection(_);
+           projection.translate([
+               t[0] - ll[0] + pxC[0],
+               t[1] - ll[1] + pxC[1]]);
+           zoom.translate(projection.translate());
+           return true;
+       }
+
+       map.pan = function(d) {
+           var t = projection.translate();
+           t[0] += d[0];
+           t[1] += d[1];
+           projection.translate(t);
+           zoom.translate(projection.translate());
+           dispatch.move(map);
+           return redraw();
+       };
+
+       map.dimensions = function(_) {
+           if (!arguments.length) return dimensions;
+           var center = map.center();
+           dimensions = _;
+           drawLayers.dimensions(dimensions);
+           context.background().dimensions(dimensions);
+           projection.clipExtent([[0, 0], dimensions]);
+           mouse = fastMouse(supersurface.node());
+           setCenter(center);
+           return redraw();
+       };
+
+       function zoomIn(integer) {
+         interpolateZoom(~~map.zoom() + integer);
+       }
+
+       function zoomOut(integer) {
+         interpolateZoom(~~map.zoom() - integer);
+       }
+
+       map.zoomIn = function() { zoomIn(1); };
+       map.zoomInFurther = function() { zoomIn(4); };
+
+       map.zoomOut = function() { zoomOut(1); };
+       map.zoomOutFurther = function() { zoomOut(4); };
+
+       map.center = function(loc) {
+           if (!arguments.length) {
+               return projection.invert(pxCenter());
+           }
+
+           if (setCenter(loc)) {
+               dispatch.move(map);
+           }
+
+           return redraw();
+       };
+
+       map.zoom = function(z) {
+           if (!arguments.length) {
+               return Math.max(Math.log(projection.scale() * 2 * Math.PI) / Math.LN2 - 8, 0);
+           }
+
+           if (z < minzoom) {
+               surface.interrupt();
+               flash(context.container())
+                   .select('.content')
+                   .text(t('cannot_zoom'));
+               z = context.minEditableZoom();
+           }
+
+           if (setZoom(z)) {
+               dispatch.move(map);
+           }
+
+           return redraw();
+       };
+
+       map.zoomTo = function(entity, zoomLimits) {
+           var extent = entity.extent(context.graph());
+           if (!isFinite(extent.area())) return;
+
+           var zoom = map.trimmedExtentZoom(extent);
+           zoomLimits = zoomLimits || [context.minEditableZoom(), 20];
+           map.centerZoom(extent.center(), Math.min(Math.max(zoom, zoomLimits[0]), zoomLimits[1]));
+       };
+
+       map.centerZoom = function(loc, z) {
+           var centered = setCenter(loc),
+               zoomed   = setZoom(z);
+
+           if (centered || zoomed) {
+               dispatch.move(map);
+           }
+
+           return redraw();
+       };
+
+       map.centerEase = function(loc2, duration) {
+           duration = duration || 250;
+
+           surface.one('mousedown.ease', function() {
+               map.cancelEase();
+           });
+
+           if (easing) {
+               map.cancelEase();
+           }
+
+           var t1 = Date.now(),
+               t2 = t1 + duration,
+               loc1 = map.center(),
+               ease = d3.ease('cubic-in-out');
+
+           easing = true;
+
+           d3.timer(function() {
+               if (!easing) return true;  // cancelled ease
+
+               var tNow = Date.now();
+               if (tNow > t2) {
+                   tNow = t2;
+                   easing = false;
+               }
+
+               var locNow = interp(loc1, loc2, ease((tNow - t1) / duration));
+               setCenter(locNow);
+
+               d3.event = {
+                   scale: zoom.scale(),
+                   translate: zoom.translate()
+               };
+
+               zoomPan();
+               return !easing;
+           });
+
+           return map;
+       };
+
+       map.cancelEase = function() {
+           easing = false;
+           d3.timer.flush();
+           return map;
+       };
+
+       map.extent = function(_) {
+           if (!arguments.length) {
+               return new Extent(projection.invert([0, dimensions[1]]),
+                                    projection.invert([dimensions[0], 0]));
+           } else {
+               var extent = Extent(_);
+               map.centerZoom(extent.center(), map.extentZoom(extent));
+           }
+       };
+
+       map.trimmedExtent = function(_) {
+           if (!arguments.length) {
+               var headerY = 60, footerY = 30, pad = 10;
+               return new Extent(projection.invert([pad, dimensions[1] - footerY - pad]),
+                       projection.invert([dimensions[0] - pad, headerY + pad]));
+           } else {
+               var extent = Extent(_);
+               map.centerZoom(extent.center(), map.trimmedExtentZoom(extent));
+           }
+       };
+
+       function calcZoom(extent, dim) {
+           var tl = projection([extent[0][0], extent[1][1]]),
+               br = projection([extent[1][0], extent[0][1]]);
+
+           // Calculate maximum zoom that fits extent
+           var hFactor = (br[0] - tl[0]) / dim[0],
+               vFactor = (br[1] - tl[1]) / dim[1],
+               hZoomDiff = Math.log(Math.abs(hFactor)) / Math.LN2,
+               vZoomDiff = Math.log(Math.abs(vFactor)) / Math.LN2,
+               newZoom = map.zoom() - Math.max(hZoomDiff, vZoomDiff);
+
+           return newZoom;
+       }
+
+       map.extentZoom = function(_) {
+           return calcZoom(Extent(_), dimensions);
+       };
+
+       map.trimmedExtentZoom = function(_) {
+           var trimY = 120, trimX = 40,
+               trimmed = [dimensions[0] - trimX, dimensions[1] - trimY];
+           return calcZoom(Extent(_), trimmed);
+       };
+
+       map.editable = function() {
+           return map.zoom() >= context.minEditableZoom();
+       };
+
+       map.minzoom = function(_) {
+           if (!arguments.length) return minzoom;
+           minzoom = _;
+           return map;
+       };
+
+       map.layers = drawLayers;
+
+       return d3.rebind(map, dispatch, 'on');
+   }
+
    exports.actions = actions;
    exports.geo = geo;
+   exports.behavior = behavior;
+   exports.modes = modes;
+   exports.operations = Operations;
+   exports.presets = presets;
+   exports.util = util;
+   exports.validations = validations;
    exports.Connection = Connection;
    exports.Difference = Difference;
    exports.Entity = Entity;
@@ -5362,6 +13106,11 @@
    exports.interestingTag = interestingTag;
    exports.Tree = Tree;
    exports.Way = Way;
+   exports.BackgroundSource = BackgroundSource;
+   exports.Background = Background$1;
+   exports.Features = Features;
+   exports.Map = Map;
+   exports.TileLayer = TileLayer;
 
    Object.defineProperty(exports, '__esModule', { value: true });
 
