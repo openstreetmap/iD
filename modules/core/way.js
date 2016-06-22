@@ -101,13 +101,13 @@ _.extend(Way.prototype, {
     },
 
     lanes: function() {
-        function parseTurnLane(str) {
-            if (!str || str === '') return null;
-
-            return str.split('|').map(function(s) {
-                return s.split(';');
-            });
-        }
+        // function parseTurnLane(str) {
+        //     if (!str || str === '') return null;
+        //
+        //     return str.split('|').map(function(s) {
+        //         return s.split(';');
+        //     });
+        // }
 
         if (!this.tags.highway) return null;
         var defaultLanes = {}, tagged = {};
@@ -121,13 +121,9 @@ _.extend(Way.prototype, {
                 break;
         }
 
-        if (this.isOneWay()) {
-            tagged.oneway = 'yes';
-        } else {
-            tagged.oneway = 'no';
-        }
-
+        tagged.oneway = this.isOneWay();
         tagged.lanes = {};
+
         if (this.tags.lanes) tagged.lanes.count = this.tags.lanes;
         if (this.tags['lanes:forward']) tagged.lanes.forward = this.tags['lanes:forward'];
         if (this.tags['lanes:backward']) tagged.lanes.backward = this.tags['lanes:backward'];
