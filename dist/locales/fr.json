@@ -2405,7 +2405,7 @@
                 "terms": "Traversée de rue,Passage clouté"
             },
             "footway/crosswalk": {
-                "name": "Passage pour piétons",
+                "name": "Passage pour piétons (zébra)",
                 "terms": "Passage piéton, Zébra, Passage zébré"
             },
             "footway/sidewalk": {
@@ -2469,7 +2469,7 @@
                 "terms": "Passage piéton "
             },
             "highway/crosswalk": {
-                "name": "Passage piéton",
+                "name": "Passage piéton (zébra)",
                 "terms": "Passage piéton, Zébra, Passage zébré"
             },
             "highway/cycleway": {

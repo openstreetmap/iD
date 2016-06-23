@@ -1,0 +1,12 @@
+{
+    "key": "internet_access:fee",
+    "type": "check",
+    "label": "Internet access fee ?",
+    "strings": {
+        "options": {
+            "undefined": "Assumed to be No",
+            "yes": "Yes",
+            "no": "No"
+        }
+    }
+}
