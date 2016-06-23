@@ -4,7 +4,10 @@
         "operator",
         "address",
         "building_area",
-        "smoking"
+        "smoking",
+        "rooms",
+        "internet_access",
+        "internet_access/fee"
     ],
     "geometry": [
         "point",

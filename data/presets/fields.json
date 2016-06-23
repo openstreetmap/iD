@@ -635,6 +635,11 @@
             }
         }
     },
+    "internet_access/fee": {
+        "key": "internet_access:fee",
+        "type": "check",
+        "label": "Internet Access Fee"
+    },
     "lamp_type": {
         "key": "lamp_type",
         "type": "combo",
@@ -1029,6 +1034,11 @@
         },
         "label": "Turn Restrictions"
     },
+    "rooms": {
+        "key": "rooms",
+        "type": "number",
+        "label": "Rooms"
+    },
     "route": {
         "key": "route",
         "type": "combo",
@@ -1232,6 +1242,11 @@
             "motocross",
             "running"
         ]
+    },
+    "stars": {
+        "key": "stars",
+        "type": "number",
+        "label": "Stars"
     },
     "structure": {
         "type": "radio",

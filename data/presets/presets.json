@@ -10082,7 +10082,10 @@
             "operator",
             "address",
             "building_area",
-            "smoking"
+            "smoking",
+            "rooms",
+            "internet_access",
+            "internet_access/fee"
         ],
         "geometry": [
             "point",
@@ -10103,7 +10106,10 @@
             "operator",
             "address",
             "building_area",
-            "smoking"
+            "smoking",
+            "rooms",
+            "internet_access",
+            "internet_access/fee"
         ],
         "geometry": [
             "point",
@@ -10120,7 +10126,11 @@
             "operator",
             "address",
             "building_area",
-            "smoking"
+            "smoking",
+            "stars",
+            "rooms",
+            "internet_access",
+            "internet_access/fee"
         ],
         "geometry": [
             "point",
@@ -10154,7 +10164,10 @@
             "operator",
             "address",
             "building_area",
-            "smoking"
+            "smoking",
+            "rooms",
+            "internet_access",
+            "internet_access/fee"
         ],
         "geometry": [
             "point",

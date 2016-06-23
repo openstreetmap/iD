@@ -463,6 +463,9 @@ en:
           wlan: Wifi
           # internet_access=yes
           'yes': 'Yes'
+      internet_access/fee:
+        # 'internet_access:fee=*'
+        label: Internet Access Fee
       lamp_type:
         # 'lamp_type=*'
         label: Type
@@ -777,6 +780,9 @@ en:
         label: Type
       restrictions:
         label: Turn Restrictions
+      rooms:
+        # 'rooms=*'
+        label: Rooms
       route:
         # 'route=*'
         label: Type
@@ -914,6 +920,9 @@ en:
       sport_racing:
         # 'sport=*'
         label: Sport
+      stars:
+        # 'stars=*'
+        label: Stars
       structure:
         # 'bridge=*, tunnel=*, embankment=*, cutting=*, ford=*'
         label: Structure
