@@ -1039,6 +1039,9 @@
                     "terminal": "Terminal"
                 }
             },
+            "internet_access/fee": {
+                "label": "Internet Access Fee"
+            },
             "lamp_type": {
                 "label": "Type"
             },
@@ -1288,6 +1291,9 @@
             "restrictions": {
                 "label": "Turn Restrictions"
             },
+            "rooms": {
+                "label": "Rooms"
+            },
             "route": {
                 "label": "Type"
             },
@@ -1396,6 +1402,9 @@
             },
             "sport_racing": {
                 "label": "Sport"
+            },
+            "stars": {
+                "label": "Stars"
             },
             "structure": {
                 "label": "Structure",
