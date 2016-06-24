@@ -976,6 +976,10 @@
         },
         {
             "key": "highway",
+            "value": "give_way"
+        },
+        {
+            "key": "highway",
             "value": "living_street"
         },
         {

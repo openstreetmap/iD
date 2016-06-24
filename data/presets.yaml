@@ -661,6 +661,14 @@ en:
         label: Par
         # par field placeholder
         placeholder: '3, 4, 5...'
+      parallel_direction:
+        # 'direction=*'
+        label: Direction
+        options:
+          # direction=backward
+          backward: Backward
+          # direction=forward
+          forward: Forward
       park_ride:
         # 'park_ride=*'
         label: Park and Ride
@@ -923,6 +931,14 @@ en:
       stars:
         # 'stars=*'
         label: Stars
+      stop:
+        # 'stop=*'
+        label: Stop Type
+        options:
+          # stop=all
+          all: All Ways
+          # stop=minor
+          minor: Minor Road
       structure:
         # 'bridge=*, tunnel=*, embankment=*, cutting=*, ford=*'
         label: Structure
@@ -2140,6 +2156,11 @@ en:
         name: Foot Path
         # 'terms: hike,hiking,trackway,trail,walk'
         terms: "<translate with synonyms or related terms for 'Foot Path', separated by commas>"
+      highway/give_way:
+        # highway=give_way
+        name: Yield Sign
+        # 'terms: give way,yield,sign'
+        terms: "<translate with synonyms or related terms for 'Yield Sign', separated by commas>"
       highway/living_street:
         # highway=living_street
         name: Living Street
@@ -2243,7 +2264,7 @@ en:
       highway/stop:
         # highway=stop
         name: Stop Sign
-        # 'terms: stop sign'
+        # 'terms: stop,halt,sign'
         terms: "<translate with synonyms or related terms for 'Stop Sign', separated by commas>"
       highway/street_lamp:
         # highway=street_lamp

@@ -1198,6 +1198,13 @@
                 "label": "Par",
                 "placeholder": "3, 4, 5..."
             },
+            "parallel_direction": {
+                "label": "Direction",
+                "options": {
+                    "forward": "Forward",
+                    "backward": "Backward"
+                }
+            },
             "park_ride": {
                 "label": "Park and Ride"
             },
@@ -1405,6 +1412,13 @@
             },
             "stars": {
                 "label": "Stars"
+            },
+            "stop": {
+                "label": "Stop Type",
+                "options": {
+                    "all": "All Ways",
+                    "minor": "Minor Road"
+                }
             },
             "structure": {
                 "label": "Structure",
@@ -2490,6 +2504,10 @@
                 "name": "Foot Path",
                 "terms": "hike,hiking,trackway,trail,walk"
             },
+            "highway/give_way": {
+                "name": "Yield Sign",
+                "terms": "give way,yield,sign"
+            },
             "highway/living_street": {
                 "name": "Living Street",
                 "terms": ""
@@ -2584,7 +2602,7 @@
             },
             "highway/stop": {
                 "name": "Stop Sign",
-                "terms": "stop sign"
+                "terms": "stop,halt,sign"
             },
             "highway/street_lamp": {
                 "name": "Street Lamp",
