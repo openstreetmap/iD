@@ -6,12 +6,12 @@
         "vertex"
     ],
     "tags": {
-        "highway": "stop"
+        "highway": "give_way"
     },
     "terms": [
-        "stop",
-        "halt",
+        "give way",
+        "yield",
         "sign"
     ],
-    "name": "Stop Sign"
+    "name": "Yield Sign"
 }
