@@ -188,8 +188,9 @@ export function Background(context) {
         }
 
         var q = stringQs(location.hash.substring(1)),
-            chosen = q.background || q.layer || context.storage('background'),
+            chosen = q.background || q.layer,
             extent = parseMap(q.map),
+            validRecent,
             best;
 
         backgroundSources = imagery.map(function(source) {
@@ -203,13 +204,18 @@ export function Background(context) {
         backgroundSources.unshift(BackgroundSource.None());
 
         if (!chosen && extent) {
-            best = _.find(this.sources(extent), function(s) { return s.best(); });
+            var recent = findSource(context.storage('background'));
+            if (recent && recent.intersects(extent)) {
+                validRecent = recent;
+            } else {
+                best = _.find(this.sources(extent), function(s) { return s.best(); });
+            }
         }
 
         if (chosen && chosen.indexOf('custom:') === 0) {
             background.baseLayerSource(BackgroundSource.Custom(chosen.replace(/^custom:/, '')));
         } else {
-            background.baseLayerSource(findSource(chosen) || best || findSource('Bing') || backgroundSources[1] || backgroundSources[0]);
+            background.baseLayerSource(findSource(chosen) || validRecent || best || findSource('Bing') || backgroundSources[1] || backgroundSources[0]);
         }
 
         var locator = _.find(backgroundSources, function(d) {
