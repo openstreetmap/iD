@@ -2,6 +2,10 @@ var fs = require('fs');
 var sources = require('editor-layer-index/imagery.json');
 var imagery = [];
 
+// ignore imagery more than 20 years old..
+var cutoffDate = new Date();
+cutoffDate.setFullYear(cutoffDate.getFullYear() - 20);
+
 var blacklist = {
     "2u": true,
     "Hike & Bike": true,
@@ -48,6 +52,12 @@ var descriptions = {
 sources.concat(whitelist).forEach(function(source) {
     if (source.type !== 'tms' && source.type !== 'bing') return;
     if (source.name in blacklist) return;
+
+    if (source.end_date) {
+        var endDate = new Date(source.end_date),
+            isValid = !isNaN(endDate.getTime());
+        if (isValid && endDate <= cutoffDate) return;
+    }
 
     var im = {
         name: source.name,
