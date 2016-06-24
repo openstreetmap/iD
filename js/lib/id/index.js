@@ -1,8 +1,8 @@
 (function (global, factory) {
-   typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
-   typeof define === 'function' && define.amd ? define(['exports'], factory) :
-   (factory((global.iD = global.iD || {})));
-}(this, function (exports) { 'use strict';
+   typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('sexagesimal')) :
+   typeof define === 'function' && define.amd ? define(['exports', 'sexagesimal'], factory) :
+   (factory((global.iD = global.iD || {}),global.sexagesimal));
+}(this, function (exports,sexagesimal) { 'use strict';
 
    function AddEntity(way) {
        return function(graph) {

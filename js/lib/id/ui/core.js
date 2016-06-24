@@ -3216,7 +3216,7 @@
 	}
 	});
 
-	var sexagesimal = (index && typeof index === 'object' && 'default' in index ? index['default'] : index);
+	var pair = index.pair;
 
 	function FeatureList(context) {
 	    var geocodeResults;
@@ -3294,7 +3294,7 @@
 	                });
 	            }
 
-	            var locationMatch = sexagesimal.pair(q.toUpperCase()) || q.match(/^(-?\d+\.?\d*)\s+(-?\d+\.?\d*)$/);
+	            var locationMatch = pair(q.toUpperCase()) || q.match(/^(-?\d+\.?\d*)\s+(-?\d+\.?\d*)$/);
 
 	            if (locationMatch) {
 	                var loc = [parseFloat(locationMatch[0]), parseFloat(locationMatch[1])];
