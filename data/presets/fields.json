@@ -891,6 +891,17 @@
         "label": "Par",
         "placeholder": "3, 4, 5..."
     },
+    "parallel_direction": {
+        "key": "direction",
+        "type": "combo",
+        "label": "Direction",
+        "strings": {
+            "options": {
+                "forward": "Forward",
+                "backward": "Backward"
+            }
+        }
+    },
     "park_ride": {
         "key": "park_ride",
         "type": "check",
@@ -1247,6 +1258,17 @@
         "key": "stars",
         "type": "number",
         "label": "Stars"
+    },
+    "stop": {
+        "key": "stop",
+        "type": "combo",
+        "label": "Stop Type",
+        "strings": {
+            "options": {
+                "all": "All Ways",
+                "minor": "Minor Road"
+            }
+        }
     },
     "structure": {
         "type": "radio",

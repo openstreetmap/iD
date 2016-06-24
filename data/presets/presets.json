@@ -4364,6 +4364,23 @@
         },
         "name": "Foot Path"
     },
+    "highway/give_way": {
+        "fields": [
+            "parallel_direction"
+        ],
+        "geometry": [
+            "vertex"
+        ],
+        "tags": {
+            "highway": "give_way"
+        },
+        "terms": [
+            "give way",
+            "yield",
+            "sign"
+        ],
+        "name": "Yield Sign"
+    },
     "highway/living_street": {
         "icon": "highway-living-street",
         "fields": [
@@ -4811,6 +4828,10 @@
         "name": "Steps"
     },
     "highway/stop": {
+        "fields": [
+            "stop",
+            "parallel_direction"
+        ],
         "geometry": [
             "vertex"
         ],
@@ -4818,7 +4839,9 @@
             "highway": "stop"
         },
         "terms": [
-            "stop sign"
+            "stop",
+            "halt",
+            "sign"
         ],
         "name": "Stop Sign"
     },

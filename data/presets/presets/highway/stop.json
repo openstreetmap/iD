@@ -1,5 +1,6 @@
 {
     "fields": [
+        "stop",
         "parallel_direction"
     ],
     "geometry": [
