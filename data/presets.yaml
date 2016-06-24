@@ -478,8 +478,6 @@ en:
       lanes:
         # lanes=*
         label: Lanes
-        # lanes field placeholder
-        placeholder: '1, 2, 3...'
       layer:
         # layer=*
         label: Layer

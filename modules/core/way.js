@@ -125,9 +125,9 @@ _.extend(Way.prototype, {
         tagged.oneway = this.isOneWay();
         tagged.lanes = {};
 
-        if (this.tags.lanes) tagged.lanes.count = this.tags.lanes;
-        if (this.tags['lanes:forward']) tagged.lanes.forward = this.tags['lanes:forward'];
-        if (this.tags['lanes:backward']) tagged.lanes.backward = this.tags['lanes:backward'];
+        if (this.tags.lanes) tagged.lanes.count = parseInt(this.tags.lanes);
+        if (this.tags['lanes:forward']) tagged.lanes.forward = parseInt(this.tags['lanes:forward']);
+        if (this.tags['lanes:backward']) tagged.lanes.backward = parseInt(this.tags['lanes:backward']);
 
         return {
             defaults: {
