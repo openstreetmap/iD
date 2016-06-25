@@ -1,3 +1,6 @@
+import { Icon } from '../../svg/index';
+import { Browse } from '../../modes/index';
+import { Extent } from '../../geo/index';
 import { Loading } from './loading';
 
 export function Geolocate(context) {
@@ -6,7 +9,7 @@ export function Geolocate(context) {
         timeoutId;
 
     function click() {
-        context.enter(iD.modes.Browse(context));
+        context.enter(Browse(context));
         context.container().call(locating);
         navigator.geolocation.getCurrentPosition(success, error, geoOptions);
 
@@ -17,7 +20,7 @@ export function Geolocate(context) {
 
     function success(position) {
         var map = context.map(),
-            extent = iD.geo.Extent([position.coords.longitude, position.coords.latitude])
+            extent = Extent([position.coords.longitude, position.coords.latitude])
                 .padByMeters(position.coords.accuracy);
 
         map.centerZoom(extent.center(), Math.min(20, map.extentZoom(extent)));
@@ -41,7 +44,7 @@ export function Geolocate(context) {
             .attr('tabindex', -1)
             .attr('title', t('geolocate.title'))
             .on('click', click)
-            .call(iD.svg.Icon('#icon-geolocate', 'light'))
+            .call(Icon('#icon-geolocate', 'light'))
             .call(bootstrap.tooltip()
                 .placement('left'));
     };

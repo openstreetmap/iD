@@ -1,3 +1,8 @@
+import { Icon } from '../../svg/index';
+import { Entity } from '../../core/index';
+import { displayName } from '../../util/index';
+import { Select, Browse } from '../../modes/index';
+import { ChangeMember, DeleteMember } from '../../actions/index';
 import { Disclosure } from './disclosure';
 
 export function RawMemberEditor(context) {
@@ -5,24 +10,24 @@ export function RawMemberEditor(context) {
 
     function selectMember(d) {
         d3.event.preventDefault();
-        context.enter(iD.modes.Select(context, [d.id]));
+        context.enter(Select(context, [d.id]));
     }
 
     function changeRole(d) {
         var role = d3.select(this).property('value');
         var member = {id: d.id, type: d.type, role: role};
         context.perform(
-            iD.actions.ChangeMember(d.relation.id, member, d.index),
+            ChangeMember(d.relation.id, member, d.index),
             t('operations.change_role.annotation'));
     }
 
     function deleteMember(d) {
         context.perform(
-            iD.actions.DeleteMember(d.relation.id, d.index),
+            DeleteMember(d.relation.id, d.index),
             t('operations.delete_member.annotation'));
 
         if (!context.hasEntity(d.relation.id)) {
-            context.enter(iD.modes.Browse(context));
+            context.enter(Browse(context));
         }
     }
 
@@ -62,8 +67,8 @@ export function RawMemberEditor(context) {
 
             var $items = $list.selectAll('li')
                 .data(memberships, function(d) {
-                    return iD.Entity.key(d.relation) + ',' + d.index + ',' +
-                        (d.member ? iD.Entity.key(d.member) : 'incomplete');
+                    return Entity.key(d.relation) + ',' + d.index + ',' +
+                        (d.member ? Entity.key(d.member) : 'incomplete');
                 });
 
             var $enter = $items.enter().append('li')
@@ -84,7 +89,7 @@ export function RawMemberEditor(context) {
 
                     $label.append('span')
                         .attr('class', 'member-entity-name')
-                        .text(function(d) { return iD.util.displayName(d.member); });
+                        .text(function(d) { return displayName(d.member); });
 
                 } else {
                     d3.select(this).append('label')
@@ -105,7 +110,7 @@ export function RawMemberEditor(context) {
                 .attr('tabindex', -1)
                 .attr('class', 'remove button-input-action member-delete minor')
                 .on('click', deleteMember)
-                .call(iD.svg.Icon('#operation-delete'));
+                .call(Icon('#operation-delete'));
 
             $items.exit()
                 .remove();

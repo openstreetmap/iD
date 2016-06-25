@@ -1,3 +1,6 @@
+import { roundCoords } from '../../geo/index';
+import { tooltipHtml } from './tooltipHtml';
+
 export function RadialMenu(context, operations) {
     var menu,
         center = [0, 0],
@@ -47,7 +50,7 @@ export function RadialMenu(context, operations) {
             .attr('class', function(d) { return 'radial-menu-item radial-menu-item-' + d.id; })
             .classed('disabled', function(d) { return d.disabled(); })
             .attr('transform', function(d, i) {
-                return 'translate(' + iD.geo.roundCoords([
+                return 'translate(' + roundCoords([
                         r * Math.sin(a0 + i * a),
                         r * Math.cos(a0 + i * a)]).join(',') + ')';
             });
@@ -87,7 +90,7 @@ export function RadialMenu(context, operations) {
                 .style('bottom', null)
                 .style('right', null)
                 .style('display', 'block')
-                .html(iD.ui.tooltipHtml(d.tooltip(), d.keys[0]));
+                .html(tooltipHtml(d.tooltip(), d.keys[0]));
 
             if (i === 0) {
                 tooltip

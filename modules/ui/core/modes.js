@@ -1,8 +1,12 @@
+import { Icon } from '../../svg/index';
+import { AddPoint, AddLine, AddArea, Browse } from '../../modes/index';
+import { tooltipHtml } from './tooltipHtml';
+
 export function Modes(context) {
     var modes = [
-        iD.modes.AddPoint(context),
-        iD.modes.AddLine(context),
-        iD.modes.AddArea(context)];
+        AddPoint(context),
+        AddLine(context),
+        AddArea(context)];
 
     function editable() {
         return context.editable() && context.mode().id !== 'save';
@@ -17,7 +21,7 @@ export function Modes(context) {
            .attr('class', function(mode) { return mode.id + ' add-button col4'; })
            .on('click.mode-buttons', function(mode) {
                if (mode.id === context.mode().id) {
-                   context.enter(iD.modes.Browse(context));
+                   context.enter(Browse(context));
                } else {
                    context.enter(mode);
                }
@@ -26,7 +30,7 @@ export function Modes(context) {
                .placement('bottom')
                .html(true)
                .title(function(mode) {
-                   return iD.ui.tooltipHtml(mode.description, mode.key);
+                   return tooltipHtml(mode.description, mode.key);
                }));
 
         context.map()
@@ -37,7 +41,7 @@ export function Modes(context) {
 
         buttons.each(function(d) {
             d3.select(this)
-                .call(iD.svg.Icon('#icon-' + d.button, 'pre-text'));
+                .call(Icon('#icon-' + d.button, 'pre-text'));
         });
 
         buttons.append('span')

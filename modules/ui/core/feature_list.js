@@ -1,3 +1,8 @@
+import { Icon } from '../../svg/index';
+import { Entity } from '../../core/index';
+import { displayName, entityOrMemberSelector } from '../../util/index';
+import { Select } from '../../modes/index';
+import { Extent, chooseEdge } from '../../geo/index';
 import * as sexagesimal from 'sexagesimal';
 
 export function FeatureList(context) {
@@ -33,7 +38,7 @@ export function FeatureList(context) {
             .on('input', inputevent);
 
         searchWrap
-            .call(iD.svg.Icon('#icon-search', 'pre-text'));
+            .call(Icon('#icon-search', 'pre-text'));
 
         var listWrap = selection.append('div')
             .attr('class', 'inspector-body');
@@ -95,7 +100,7 @@ export function FeatureList(context) {
 
                 entities[entity.id] = true;
 
-                var name = iD.util.displayName(entity) || '';
+                var name = displayName(entity) || '';
                 if (name.toLowerCase().indexOf(q) >= 0) {
                     result.push({
                         id: entity.id,
@@ -120,12 +125,12 @@ export function FeatureList(context) {
                 // https://github.com/openstreetmap/iD/issues/1890
                 if (d.osm_type && d.osm_id) {
                     result.push({
-                        id: iD.Entity.id.fromOSM(d.osm_type, d.osm_id),
+                        id: Entity.id.fromOSM(d.osm_type, d.osm_id),
                         geometry: d.osm_type === 'relation' ? 'relation' : d.osm_type === 'way' ? 'line' : 'point',
                         type: d.type !== 'yes' ? (d.type.charAt(0).toUpperCase() + d.type.slice(1)).replace('_', ' ')
                                                : (d.class.charAt(0).toUpperCase() + d.class.slice(1)).replace('_', ' '),
                         name: d.display_name,
-                        extent: new iD.geo.Extent(
+                        extent: new Extent(
                             [parseFloat(d.boundingbox[3]), parseFloat(d.boundingbox[0])],
                             [parseFloat(d.boundingbox[2]), parseFloat(d.boundingbox[1])])
                     });
@@ -148,7 +153,7 @@ export function FeatureList(context) {
                 .enter().append('button')
                 .property('disabled', true)
                 .attr('class', 'no-results-item')
-                .call(iD.svg.Icon('#icon-alert', 'pre-text'));
+                .call(Icon('#icon-alert', 'pre-text'));
 
             resultsIndicator.append('span')
                 .attr('class', 'entity-name');
@@ -193,7 +198,7 @@ export function FeatureList(context) {
 
             label.each(function(d) {
                 d3.select(this)
-                    .call(iD.svg.Icon('#icon-' + d.geometry, 'pre-text'));
+                    .call(Icon('#icon-' + d.geometry, 'pre-text'));
             });
 
             label.append('span')
@@ -217,7 +222,7 @@ export function FeatureList(context) {
         function mouseover(d) {
             if (d.id === -1) return;
 
-            context.surface().selectAll(iD.util.entityOrMemberSelector([d.id], context.graph()))
+            context.surface().selectAll(entityOrMemberSelector([d.id], context.graph()))
                 .classed('hover', true);
         }
 
@@ -236,10 +241,10 @@ export function FeatureList(context) {
                     context.map().center(d.entity.loc);
                 } else if (d.entity.type === 'way') {
                     var center = context.projection(context.map().center()),
-                        edge = iD.geo.chooseEdge(context.childNodes(d.entity), center, context.projection);
+                        edge = chooseEdge(context.childNodes(d.entity), center, context.projection);
                     context.map().center(edge.loc);
                 }
-                context.enter(iD.modes.Select(context, [d.entity.id]).suppressMenu(true));
+                context.enter(Select(context, [d.entity.id]).suppressMenu(true));
             } else {
                 context.zoomToEntity(d.id);
             }

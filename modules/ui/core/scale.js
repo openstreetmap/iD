@@ -1,3 +1,4 @@
+import { lonToMeters, metersToLon } from '../../geo/index';
 export function Scale(context) {
     var projection = context.projection,
         imperial = (iD.detect().locale.toLowerCase() === 'en-us'),
@@ -7,7 +8,7 @@ export function Scale(context) {
     function scaleDefs(loc1, loc2) {
         var lat = (loc2[1] + loc1[1]) / 2,
             conversion = (imperial ? 3.28084 : 1),
-            dist = iD.geo.lonToMeters(loc2[0] - loc1[0], lat) * conversion,
+            dist = lonToMeters(loc2[0] - loc1[0], lat) * conversion,
             scale = { dist: 0, px: 0, text: '' },
             buckets, i, val, dLon;
 
@@ -26,7 +27,7 @@ export function Scale(context) {
             }
         }
 
-        dLon = iD.geo.metersToLon(scale.dist / conversion, lat);
+        dLon = metersToLon(scale.dist / conversion, lat);
         scale.px = Math.round(projection([loc1[0] + dLon, loc1[1]])[0]);
 
         if (imperial) {

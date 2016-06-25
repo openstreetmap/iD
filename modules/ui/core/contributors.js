@@ -1,3 +1,4 @@
+import { Icon } from '../../svg/index';
 export function Contributors(context) {
     var debouncedUpdate = _.debounce(function() { update(); }, 1000),
         limit = 4,
@@ -16,7 +17,7 @@ export function Contributors(context) {
             subset = u.slice(0, u.length > limit ? limit - 1 : limit);
 
         wrap.html('')
-            .call(iD.svg.Icon('#icon-nearby', 'pre-text light'));
+            .call(Icon('#icon-nearby', 'pre-text light'));
 
         var userList = d3.select(document.createElement('span'));
 

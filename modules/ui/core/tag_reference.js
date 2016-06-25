@@ -1,3 +1,4 @@
+import { Icon } from '../../svg/index';
 export function TagReference(tag, context) {
     var tagReference = {},
         button,
@@ -71,7 +72,7 @@ export function TagReference(tag, context) {
                 .attr('target', '_blank')
                 .attr('tabindex', -1)
                 .attr('href', 'https://wiki.openstreetmap.org/wiki/' + docs.title)
-                .call(iD.svg.Icon('#icon-out-link', 'inline'))
+                .call(Icon('#icon-out-link', 'inline'))
                 .append('span')
                 .text(t('inspector.reference'));
         });
@@ -108,7 +109,7 @@ export function TagReference(tag, context) {
             .append('button')
             .attr('class', 'tag-reference-button')
             .attr('tabindex', -1)
-            .call(iD.svg.Icon('#icon-inspect'));
+            .call(Icon('#icon-inspect'));
 
         button.on('click', function () {
             d3.event.stopPropagation();

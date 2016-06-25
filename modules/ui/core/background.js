@@ -1,5 +1,10 @@
+import { Icon } from '../../svg/index';
+import { setTransform } from '../../util/index';
+import { BackgroundSource } from '../../renderer';
+import { offsetToMeters, metersToOffset } from '../../geo/index';
 import { cmd } from './cmd';
 import { MapInMap } from './map_in_map';
+import { tooltipHtml } from './tooltipHtml';
 
 export function Background(context) {
     var key = 'B',
@@ -33,7 +38,7 @@ export function Background(context) {
                 .attr('data-opacity', d);
 
             if (!iD.detect().opera) {
-                iD.util.setTransform(bg, 0, 0);
+                setTransform(bg, 0, 0);
             }
 
             opacityList.selectAll('li')
@@ -50,7 +55,7 @@ export function Background(context) {
                         .html(true)
                         .title(function() {
                             var tip = '<div>' + t('background.switch') + '</div>';
-                            return iD.ui.tooltipHtml(tip, iD.ui.cmd('⌘B'));
+                            return tooltipHtml(tip, cmd('⌘B'));
                         })
                         .placement('top')
                     );
@@ -100,7 +105,7 @@ export function Background(context) {
         }
 
         function setCustom(template) {
-            context.background().baseLayerSource(iD.BackgroundSource.Custom(template));
+            context.background().baseLayerSource(BackgroundSource.Custom(template));
             selectLayer();
             context.storage('background-custom-template', template);
         }
@@ -168,7 +173,7 @@ export function Background(context) {
         }
 
         function updateOffsetVal() {
-            var meters = iD.geo.offsetToMeters(context.background().offset()),
+            var meters = offsetToMeters(context.background().offset()),
                 x = +meters[0].toFixed(2),
                 y = +meters[1].toFixed(2);
 
@@ -224,7 +229,7 @@ export function Background(context) {
                 return;
             }
 
-            context.background().offset(iD.geo.metersToOffset(d));
+            context.background().offset(metersToOffset(d));
             updateOffsetVal();
         }
 
@@ -308,11 +313,11 @@ export function Background(context) {
             tooltip = bootstrap.tooltip()
                 .placement('left')
                 .html(true)
-                .title(iD.ui.tooltipHtml(t('background.description'), key)),
+                .title(tooltipHtml(t('background.description'), key)),
             button = selection.append('button')
                 .attr('tabindex', -1)
                 .on('click', toggle)
-                .call(iD.svg.Icon('#icon-layers', 'light'))
+                .call(Icon('#icon-layers', 'light'))
                 .call(tooltip),
             shown = false;
 
@@ -351,7 +356,7 @@ export function Background(context) {
 
         var custom = backgroundList.append('li')
             .attr('class', 'custom_layer')
-            .datum(iD.BackgroundSource.Custom());
+            .datum(BackgroundSource.Custom());
 
         custom.append('button')
             .attr('class', 'layer-browse')
@@ -359,7 +364,7 @@ export function Background(context) {
                 .title(t('background.custom_button'))
                 .placement('left'))
             .on('click', editCustom)
-            .call(iD.svg.Icon('#icon-search'));
+            .call(Icon('#icon-search'));
 
         var label = custom.append('label');
 
@@ -382,7 +387,7 @@ export function Background(context) {
             .append('a')
             .attr('target', '_blank')
             .attr('tabindex', -1)
-            .call(iD.svg.Icon('#icon-out-link', 'inline'))
+            .call(Icon('#icon-out-link', 'inline'))
             .attr('href', 'https://github.com/openstreetmap/iD/blob/master/FAQ.md#how-can-i-report-an-issue-with-background-imagery')
             .append('span')
             .text(t('background.imagery_source_faq'));
@@ -400,7 +405,7 @@ export function Background(context) {
             .append('label')
             .call(bootstrap.tooltip()
                 .html(true)
-                .title(iD.ui.tooltipHtml(t('background.minimap.tooltip'), '/'))
+                .title(tooltipHtml(t('background.minimap.tooltip'), '/'))
                 .placement('top')
             );
 
@@ -466,7 +471,7 @@ export function Background(context) {
             .attr('title', t('background.reset'))
             .attr('class', 'nudge-reset disabled')
             .on('click', resetOffset)
-            .call(iD.svg.Icon('#icon-undo'));
+            .call(Icon('#icon-undo'));
 
         context.map()
             .on('move.background-update', _.debounce(update, 1000));

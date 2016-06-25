@@ -1,3 +1,4 @@
+import { Browse } from '../../modes/index';
 export function SourceSwitch(context) {
     var keys;
 
@@ -13,7 +14,7 @@ export function SourceSwitch(context) {
         context.connection()
             .switch(live ? keys[1] : keys[0]);
 
-        context.enter(iD.modes.Browse(context));
+        context.enter(Browse(context));
         context.flush();
 
         d3.select(this)
