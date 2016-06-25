@@ -278,15 +278,15 @@
         },
         {
             "key": "amenity",
-            "value": "parking"
-        },
-        {
-            "key": "amenity",
             "value": "parking_entrance"
         },
         {
             "key": "amenity",
             "value": "parking_space"
+        },
+        {
+            "key": "amenity",
+            "value": "parking"
         },
         {
             "key": "amenity",
@@ -988,15 +988,15 @@
         },
         {
             "key": "highway",
-            "value": "motorway"
-        },
-        {
-            "key": "highway",
             "value": "motorway_junction"
         },
         {
             "key": "highway",
             "value": "motorway_link"
+        },
+        {
+            "key": "highway",
+            "value": "motorway"
         },
         {
             "key": "highway",
@@ -1008,11 +1008,11 @@
         },
         {
             "key": "highway",
-            "value": "primary"
+            "value": "primary_link"
         },
         {
             "key": "highway",
-            "value": "primary_link"
+            "value": "primary"
         },
         {
             "key": "highway",
@@ -1032,11 +1032,11 @@
         },
         {
             "key": "highway",
-            "value": "secondary"
+            "value": "secondary_link"
         },
         {
             "key": "highway",
-            "value": "secondary_link"
+            "value": "secondary"
         },
         {
             "key": "highway",
@@ -1080,11 +1080,11 @@
         },
         {
             "key": "highway",
-            "value": "tertiary"
+            "value": "tertiary_link"
         },
         {
             "key": "highway",
-            "value": "tertiary_link"
+            "value": "tertiary"
         },
         {
             "key": "highway",
@@ -1096,11 +1096,11 @@
         },
         {
             "key": "highway",
-            "value": "trunk"
+            "value": "trunk_link"
         },
         {
             "key": "highway",
-            "value": "trunk_link"
+            "value": "trunk"
         },
         {
             "key": "highway",
@@ -1567,11 +1567,11 @@
         },
         {
             "key": "natural",
-            "value": "tree"
+            "value": "tree_row"
         },
         {
             "key": "natural",
-            "value": "tree_row"
+            "value": "tree"
         },
         {
             "key": "natural",
@@ -1818,11 +1818,11 @@
         },
         {
             "key": "railway",
-            "value": "subway"
+            "value": "subway_entrance"
         },
         {
             "key": "railway",
-            "value": "subway_entrance"
+            "value": "subway"
         },
         {
             "key": "railway",
@@ -1909,15 +1909,15 @@
         },
         {
             "key": "shop",
-            "value": "car"
-        },
-        {
-            "key": "shop",
             "value": "car_parts"
         },
         {
             "key": "shop",
             "value": "car_repair"
+        },
+        {
+            "key": "shop",
+            "value": "car"
         },
         {
             "key": "shop",
@@ -2261,11 +2261,11 @@
         },
         {
             "key": "shop",
-            "value": "video"
+            "value": "video_games"
         },
         {
             "key": "shop",
-            "value": "video_games"
+            "value": "video"
         },
         {
             "key": "shop",
@@ -2416,6 +2416,10 @@
         },
         {
             "key": "type",
+            "value": "route_master"
+        },
+        {
+            "key": "type",
             "value": "route"
         },
         {
@@ -2465,10 +2469,6 @@
         {
             "key": "route",
             "value": "tram"
-        },
-        {
-            "key": "type",
-            "value": "route_master"
         },
         {
             "key": "type",
