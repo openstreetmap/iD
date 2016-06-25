@@ -1,6 +1,6 @@
 import { Icon } from '../../svg/index';
 import { setTransform } from '../../util/index';
-import { BackgroundSource } from '../../renderer';
+import { BackgroundSource } from '../../renderer/index';
 import { offsetToMeters, metersToOffset } from '../../geo/index';
 import { cmd } from './cmd';
 import { MapInMap } from './map_in_map';

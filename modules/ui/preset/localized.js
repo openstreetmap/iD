@@ -1,3 +1,5 @@
+import { Icon } from '../../svg/index';
+import { SuggestNames } from '../../util/index';
 export function localized(field, context) {
     var dispatch = d3.dispatch('change', 'input'),
         wikipedia = iD.services.wikipedia(),
@@ -17,7 +19,7 @@ export function localized(field, context) {
         if (field.id === 'name') {
             var preset = context.presets().match(entity, context.graph());
             input.call(d3.combobox().fetcher(
-                iD.util.SuggestNames(preset, iD.data.suggestions)
+                SuggestNames(preset, iD.data.suggestions)
             ));
         }
 
@@ -33,7 +35,7 @@ export function localized(field, context) {
             .append('button')
             .attr('class', 'button-input-action localized-add minor')
             .attr('tabindex', -1)
-            .call(iD.svg.Icon('#icon-plus'))
+            .call(Icon('#icon-plus'))
             .call(bootstrap.tooltip()
                 .title(t('translate.translate'))
                 .placement('left'));
@@ -150,7 +152,7 @@ export function localized(field, context) {
                             .style('max-height','0px')
                             .remove();
                     })
-                    .call(iD.svg.Icon('#operation-delete'));
+                    .call(Icon('#operation-delete'));
 
                 wrap.append('input')
                     .attr('class', 'localized-lang')

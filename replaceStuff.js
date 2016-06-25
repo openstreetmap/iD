@@ -8,9 +8,9 @@ function readFiles(dirname, outdir) {
         processFile(fileData, outdir + filename);
     });
 }
-var POSSIBLE_MODULES = [ 'actions', 'geo', 'modes', 'util', 'core', 'behavior' ];
+var POSSIBLE_MODULES = [ 'actions', 'geo', 'modes', 'util', 'core', 'behavior', 'svg' ];
 function findData(data) {
-  var modules = { 'actions': [], 'geo': [], 'modes': [], 'util': [], 'core': [], 'behavior': [] };
+  var modules = { 'actions': [], 'geo': [], 'modes': [], 'util': [], 'core': [], 'behavior': [], 'svg': [] };
   var cores = [ 'Entity', 'Way', 'Relation', 'Node', 'Graph', 'Tree', 'Difference', 'History' ];
   var ret = data.map(function(lineArg) {
     var line = lineArg;
@@ -43,7 +43,7 @@ function findData(data) {
   POSSIBLE_MODULES.forEach(function(mod) {
     if (modules[mod].length > 0) {
       var importStuff = modules[mod].join(', ');
-      ret.unshift(`import { ${importStuff} } from '../${mod}/index';`);
+      ret.unshift(`import { ${importStuff} } from '../../${mod}/index';`);
       /*eslint-disable */
       /*eslint-enable */
     }

@@ -1,7 +1,7 @@
 import { Icon } from '../../svg/index';
 import { Browse } from '../../modes/index';
 import { ChangePreset } from '../../actions/index';
-import { Delete } from '../../operations';
+import { Delete } from '../../operations/index';
 import { PresetIcon } from './preset_icon';
 import { TagReference } from './tag_reference';
 

@@ -1,5 +1,13 @@
-export { area } from './area';
-export { line } from './line';
-export { navigation } from './navigation';
-export { point } from './point';
-export { startEditing } from './start_editing';
+import { area } from './area';
+import { line } from './line';
+import { navigation } from './navigation';
+import { point } from './point';
+import { startEditing } from './start_editing';
+
+export var Intro = {
+    area: area,
+    line: line,
+    navigation: navigation,
+    point: point,
+    startEditing: startEditing
+};

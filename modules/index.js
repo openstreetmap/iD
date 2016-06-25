@@ -25,6 +25,7 @@ export { Background } from './renderer/background';
 export { Features } from './renderer/features';
 export { Map } from './renderer/map';
 export { TileLayer } from './renderer/tile_layer';
+export { ui } from './ui/index';
 
 export {
   actions,

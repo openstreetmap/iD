@@ -1,3 +1,5 @@
+import { Extent, chooseEdge, sphericalDistance } from '../../geo/index';
+
 export function address(field, context) {
     var dispatch = d3.dispatch('init', 'change'),
         wrap,
@@ -15,7 +17,7 @@ export function address(field, context) {
     function getStreets() {
         var extent = entity.extent(context.graph()),
             l = extent.center(),
-            box = iD.geo.Extent(l).padByMeters(200);
+            box = Extent(l).padByMeters(200);
 
         return context.intersects(box)
             .filter(isAddressable)
@@ -23,7 +25,7 @@ export function address(field, context) {
                 var loc = context.projection([
                     (extent[0][0] + extent[1][0]) / 2,
                     (extent[0][1] + extent[1][1]) / 2]),
-                    choice = iD.geo.chooseEdge(context.childNodes(d), loc, context.projection);
+                    choice = chooseEdge(context.childNodes(d), loc, context.projection);
                 return {
                     title: d.tags.name,
                     value: d.tags.name,
@@ -41,7 +43,7 @@ export function address(field, context) {
     function getCities() {
         var extent = entity.extent(context.graph()),
             l = extent.center(),
-            box = iD.geo.Extent(l).padByMeters(200);
+            box = Extent(l).padByMeters(200);
 
         return context.intersects(box)
             .filter(isAddressable)
@@ -49,7 +51,7 @@ export function address(field, context) {
                 return {
                     title: d.tags['addr:city'] || d.tags.name,
                     value: d.tags['addr:city'] || d.tags.name,
-                    dist: iD.geo.sphericalDistance(d.extent(context.graph()).center(), l)
+                    dist: sphericalDistance(d.extent(context.graph()).center(), l)
                 };
             }).sort(function(a, b) {
                 return a.dist - b.dist;
@@ -75,7 +77,7 @@ export function address(field, context) {
     function getPostCodes() {
         var extent = entity.extent(context.graph()),
             l = extent.center(),
-            box = iD.geo.Extent(l).padByMeters(200);
+            box = Extent(l).padByMeters(200);
 
         return context.intersects(box)
             .filter(isAddressable)
@@ -83,7 +85,7 @@ export function address(field, context) {
                 return {
                     title: d.tags['addr:postcode'],
                     value: d.tags['addr:postcode'],
-                    dist: iD.geo.sphericalDistance(d.extent(context.graph()).center(), l)
+                    dist: sphericalDistance(d.extent(context.graph()).center(), l)
                 };
             }).sort(function(a, b) {
                 return a.dist - b.dist;
