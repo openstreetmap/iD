@@ -1,3 +1,4 @@
+import { Extent } from '../../geo/index';
 import { cmd } from './cmd';
 
 export function Info(context) {
@@ -103,7 +104,7 @@ export function Info(context) {
             var resolver = context.graph(),
                 selected = _.filter(context.selectedIDs(), function(e) { return context.hasEntity(e); }),
                 singular = selected.length === 1 ? selected[0] : null,
-                extent = iD.geo.Extent(),
+                extent = Extent(),
                 entity;
 
             wrap.html('');

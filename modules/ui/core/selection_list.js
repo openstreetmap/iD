@@ -1,7 +1,11 @@
+import { Icon } from '../../svg/index';
+import { Entity } from '../../core/index';
+import { displayName } from '../../util/index';
+import { Select } from '../../modes/index';
 export function SelectionList(context, selectedIDs) {
 
     function selectEntity(entity) {
-        context.enter(iD.modes.Select(context, [entity.id]).suppressMenu(true));
+        context.enter(Select(context, [entity.id]).suppressMenu(true));
     }
 
 
@@ -29,7 +33,7 @@ export function SelectionList(context, selectedIDs) {
                 .filter(function(entity) { return entity; });
 
             var items = list.selectAll('.feature-list-item')
-                .data(entities, iD.Entity.key);
+                .data(entities, Entity.key);
 
             var enter = items.enter().append('button')
                 .attr('class', 'feature-list-item')
@@ -38,7 +42,7 @@ export function SelectionList(context, selectedIDs) {
             // Enter
             var label = enter.append('div')
                 .attr('class', 'label')
-                .call(iD.svg.Icon('', 'pre-text'));
+                .call(Icon('', 'pre-text'));
 
             label.append('span')
                 .attr('class', 'entity-type');
@@ -57,7 +61,7 @@ export function SelectionList(context, selectedIDs) {
                 .text(function(entity) { return context.presets().match(entity, context.graph()).name(); });
 
             items.selectAll('.entity-name')
-                .text(function(entity) { return iD.util.displayName(entity); });
+                .text(function(entity) { return displayName(entity); });
 
             // Exit
             items.exit()

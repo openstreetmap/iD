@@ -1,3 +1,6 @@
+import { Icon } from '../../svg/index';
+import { tooltipHtml } from './tooltipHtml';
+
 export function MapData(context) {
     var key = 'F',
         features = context.features().keys(),
@@ -184,7 +187,7 @@ export function MapData(context) {
                     d3.event.stopPropagation();
                     gpx.fitZoom();
                 })
-                .call(iD.svg.Icon('#icon-search'));
+                .call(Icon('#icon-search'));
 
             enter.append('button')
                 .attr('class', 'list-item-gpx-browse')
@@ -199,7 +202,7 @@ export function MapData(context) {
                         })
                         .node().click();
                 })
-                .call(iD.svg.Icon('#icon-geolocate'));
+                .call(Icon('#icon-geolocate'));
 
             var labelGpx = enter.append('label')
                 .call(bootstrap.tooltip()
@@ -247,7 +250,7 @@ export function MapData(context) {
                         if (name === 'feature' && autoHiddenFeature(d)) {
                             tip += '<div>' + t('map_data.autohidden') + '</div>';
                         }
-                        return iD.ui.tooltipHtml(tip, key);
+                        return tooltipHtml(tip, key);
                     })
                     .placement('top')
                 );
@@ -340,11 +343,11 @@ export function MapData(context) {
             tooltip = bootstrap.tooltip()
                 .placement('left')
                 .html(true)
-                .title(iD.ui.tooltipHtml(t('map_data.description'), key)),
+                .title(tooltipHtml(t('map_data.description'), key)),
             button = selection.append('button')
                 .attr('tabindex', -1)
                 .on('click', togglePanel)
-                .call(iD.svg.Icon('#icon-data', 'light'))
+                .call(Icon('#icon-data', 'light'))
                 .call(tooltip),
             shown = false;
 

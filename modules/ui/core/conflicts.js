@@ -1,3 +1,6 @@
+import { Icon } from '../../svg/index';
+import { entityOrMemberSelector } from '../../util/index';
+import { Extent } from '../../geo/index';
 export function Conflicts(context) {
     var dispatch = d3.dispatch('download', 'cancel', 'save'),
         list;
@@ -11,7 +14,7 @@ export function Conflicts(context) {
             .append('button')
             .attr('class', 'fr')
             .on('click', function() { dispatch.cancel(); })
-            .call(iD.svg.Icon('#icon-close'));
+            .call(Icon('#icon-close'));
 
         header
             .append('h3')
@@ -197,7 +200,7 @@ export function Conflicts(context) {
             .selectAll('input')
             .property('checked', function(d) { return d === datum; });
 
-        var extent = iD.geo.Extent(),
+        var extent = Extent(),
             entity;
 
         entity = context.graph().hasEntity(datum.id);
@@ -223,7 +226,7 @@ export function Conflicts(context) {
                 context.map().zoomTo(entity);
             }
             context.surface().selectAll(
-                iD.util.entityOrMemberSelector([entity.id], context.graph()))
+                entityOrMemberSelector([entity.id], context.graph()))
                 .classed('hover', true);
         }
     }

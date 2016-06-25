@@ -1,3 +1,8 @@
+import { Icon } from '../../svg/index';
+import { Relation, Entity } from '../../core/index';
+import { displayName } from '../../util/index';
+import { Select } from '../../modes/index';
+import { ChangeMember, AddMember, AddEntity, DeleteMember } from '../../actions/index';
 import { Disclosure } from './disclosure';
 
 export function RawMembershipEditor(context) {
@@ -5,13 +10,13 @@ export function RawMembershipEditor(context) {
 
     function selectRelation(d) {
         d3.event.preventDefault();
-        context.enter(iD.modes.Select(context, [d.relation.id]));
+        context.enter(Select(context, [d.relation.id]));
     }
 
     function changeRole(d) {
         var role = d3.select(this).property('value');
         context.perform(
-            iD.actions.ChangeMember(d.relation.id, _.extend({}, d.member, {role: role}), d.index),
+            ChangeMember(d.relation.id, _.extend({}, d.member, {role: role}), d.index),
             t('operations.change_role.annotation'));
     }
 
@@ -20,24 +25,24 @@ export function RawMembershipEditor(context) {
 
         if (d.relation) {
             context.perform(
-                iD.actions.AddMember(d.relation.id, {id: id, type: context.entity(id).type, role: role}),
+                AddMember(d.relation.id, {id: id, type: context.entity(id).type, role: role}),
                 t('operations.add_member.annotation'));
 
         } else {
-            var relation = iD.Relation();
+            var relation = Relation();
 
             context.perform(
-                iD.actions.AddEntity(relation),
-                iD.actions.AddMember(relation.id, {id: id, type: context.entity(id).type, role: role}),
+                AddEntity(relation),
+                AddMember(relation.id, {id: id, type: context.entity(id).type, role: role}),
                 t('operations.add.annotation.relation'));
 
-            context.enter(iD.modes.Select(context, [relation.id]));
+            context.enter(Select(context, [relation.id]));
         }
     }
 
     function deleteMembership(d) {
         context.perform(
-            iD.actions.DeleteMember(d.relation.id, d.index),
+            DeleteMember(d.relation.id, d.index),
             t('operations.delete_member.annotation'));
     }
 
@@ -54,7 +59,7 @@ export function RawMembershipEditor(context) {
                 return;
 
             var presetName = context.presets().match(entity, graph).name(),
-                entityName = iD.util.displayName(entity) || '';
+                entityName = displayName(entity) || '';
 
             var value = presetName + ' ' + entityName;
             if (q && value.toLowerCase().indexOf(q.toLowerCase()) === -1)
@@ -67,7 +72,7 @@ export function RawMembershipEditor(context) {
         });
 
         result.sort(function(a, b) {
-            return iD.Relation.creationOrder(a.relation, b.relation);
+            return Relation.creationOrder(a.relation, b.relation);
         });
 
         // Dedupe identical names by appending relation id - see #2891
@@ -119,7 +124,7 @@ export function RawMembershipEditor(context) {
                 .attr('class', 'member-list');
 
             var $items = $list.selectAll('li.member-row-normal')
-                .data(memberships, function(d) { return iD.Entity.key(d.relation) + ',' + d.index; });
+                .data(memberships, function(d) { return Entity.key(d.relation) + ',' + d.index; });
 
             var $enter = $items.enter().append('li')
                 .attr('class', 'member-row member-row-normal form-field');
@@ -136,7 +141,7 @@ export function RawMembershipEditor(context) {
 
             $label.append('span')
                 .attr('class', 'member-entity-name')
-                .text(function(d) { return iD.util.displayName(d.relation); });
+                .text(function(d) { return displayName(d.relation); });
 
             $enter.append('input')
                 .attr('class', 'member-role')
@@ -150,7 +155,7 @@ export function RawMembershipEditor(context) {
                 .attr('tabindex', -1)
                 .attr('class', 'remove button-input-action member-delete minor')
                 .on('click', deleteMembership)
-                .call(iD.svg.Icon('#operation-delete'));
+                .call(Icon('#operation-delete'));
 
             $items.exit()
                 .remove();
@@ -185,7 +190,7 @@ export function RawMembershipEditor(context) {
                     .attr('tabindex', -1)
                     .attr('class', 'remove button-input-action member-delete minor')
                     .on('click', deleteMembership)
-                    .call(iD.svg.Icon('#operation-delete'));
+                    .call(Icon('#operation-delete'));
 
             } else {
                 $list.selectAll('.member-row-new')
@@ -198,7 +203,7 @@ export function RawMembershipEditor(context) {
             $add.enter()
                 .append('button')
                 .attr('class', 'add-relation')
-                .call(iD.svg.Icon('#icon-plus', 'light'));
+                .call(Icon('#icon-plus', 'light'));
 
             $wrap.selectAll('.add-relation')
                 .on('click', function() {

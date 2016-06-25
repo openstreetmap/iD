@@ -1,3 +1,4 @@
+import { Icon } from '../../svg/index';
 export function Notice(context) {
     return function(selection) {
         var div = selection.append('div')
@@ -8,7 +9,7 @@ export function Notice(context) {
             .on('click', function() { context.map().zoom(context.minEditableZoom()); });
 
         button
-            .call(iD.svg.Icon('#icon-plus', 'pre-text'))
+            .call(Icon('#icon-plus', 'pre-text'))
             .append('span')
             .attr('class', 'label')
             .text(t('zoom_in_edit'));

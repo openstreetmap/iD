@@ -1,4 +1,6 @@
+import { Save as SaveMode } from '../../modes/index';
 import { cmd } from './cmd';
+import { tooltipHtml } from './tooltipHtml';
 
 export function Save(context) {
     var history = context.history(),
@@ -12,7 +14,7 @@ export function Save(context) {
     function save() {
         d3.event.preventDefault();
         if (!context.inIntro() && !saving() && history.hasChanges()) {
-            context.enter(iD.modes.Save(context));
+            context.enter(SaveMode(context));
         }
     }
 
@@ -33,7 +35,7 @@ export function Save(context) {
         var tooltip = bootstrap.tooltip()
             .placement('bottom')
             .html(true)
-            .title(iD.ui.tooltipHtml(t('save.no_changes'), key));
+            .title(tooltipHtml(t('save.no_changes'), key));
 
         var button = selection.append('button')
             .attr('class', 'save col12 disabled')
@@ -63,7 +65,7 @@ export function Save(context) {
                 return;
             numChanges = _;
 
-            tooltip.title(iD.ui.tooltipHtml(t(numChanges > 0 ?
+            tooltip.title(tooltipHtml(t(numChanges > 0 ?
                     'save.help' : 'save.no_changes'), key));
 
             var background = getBackground(numChanges);

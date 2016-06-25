@@ -1,3 +1,6 @@
+import { Icon } from '../../svg/index';
+import { Entity, Graph } from '../../core/index';
+import { Browse } from '../../modes/index';
 export function intro(context) {
     var step;
 
@@ -50,7 +53,7 @@ export function intro(context) {
             return features[id] && t('intro.graph.' + features[id]);
         }
 
-        context.enter(iD.modes.Browse(context));
+        context.enter(Browse(context));
 
         // Save current map state
         var history = context.history().toJSON(),
@@ -72,13 +75,13 @@ export function intro(context) {
 
         introGraph = JSON.parse(iD.introGraph);
         for (var key in introGraph) {
-            introGraph[key] = iD.Entity(introGraph[key]);
+            introGraph[key] = Entity(introGraph[key]);
             name = localizedName(key);
             if (name) {
                 introGraph[key].tags.name = name;
             }
         }
-        context.history().merge(d3.values(iD.Graph().load(introGraph).entities));
+        context.history().merge(d3.values(Graph().load(introGraph).entities));
         context.background().bing();
 
         d3.selectAll('#map .layer-background').style('opacity', 1);
@@ -93,7 +96,7 @@ export function intro(context) {
         }
 
         var steps = ['navigation', 'point', 'area', 'line', 'startEditing'].map(function(step, i) {
-            var s = iD.ui.intro[step](context, reveal)
+            var s = intro[step](context, reveal)
                 .on('done', function() {
                     entered.filter(function(d) {
                         return d.title === s.title;
@@ -130,7 +133,7 @@ export function intro(context) {
             .on('click', enter);
 
         entered
-            .call(iD.svg.Icon('#icon-apply', 'pre-text'));
+            .call(Icon('#icon-apply', 'pre-text'));
 
         entered
             .append('label')
@@ -141,7 +144,7 @@ export function intro(context) {
         function enter (newStep) {
             if (step) { step.exit(); }
 
-            context.enter(iD.modes.Browse(context));
+            context.enter(Browse(context));
 
             step = newStep;
             step.enter();

@@ -1,3 +1,9 @@
+import { Icon } from '../../svg/index';
+import { TagReference } from './tag_reference';
+import { Browse } from '../../modes/index';
+import { presetObj } from '../preset/index';
+import { Disclosure } from './disclosure';
+
 export function preset(context) {
     var event = d3.dispatch('change'),
         state,
@@ -9,7 +15,7 @@ export function preset(context) {
     function UIField(field, entity, show) {
         field = _.clone(field);
 
-        field.input = iD.ui.preset[field.type](field, context)
+        field.input = presetObj[field.type](field, context)
             .on('change', event.change);
 
         if (field.input.entity) field.input.entity(entity);
@@ -60,7 +66,7 @@ export function preset(context) {
     }
 
     function presets(selection) {
-        selection.call(iD.ui.Disclosure()
+        selection.call(Disclosure()
             .title(t('inspector.all_fields'))
             .expanded(context.storage('preset_fields.expanded') !== 'false')
             .on('toggled', toggled)
@@ -126,12 +132,12 @@ export function preset(context) {
         wrap.append('button')
             .attr('class', 'remove-icon')
             .attr('tabindex', -1)
-            .call(iD.svg.Icon('#operation-delete'));
+            .call(Icon('#operation-delete'));
 
         wrap.append('button')
             .attr('class', 'modified-icon')
             .attr('tabindex', -1)
-            .call(iD.svg.Icon('#icon-undo'));
+            .call(Icon('#icon-undo'));
 
         // Update
 
@@ -150,7 +156,7 @@ export function preset(context) {
                 return field.present();
             })
             .each(function(field) {
-                var reference = iD.ui.TagReference(field.reference || {key: field.key}, context);
+                var reference = TagReference(field.reference || {key: field.key}, context);
 
                 if (state === 'hover') {
                     reference.showing(false);
@@ -162,7 +168,7 @@ export function preset(context) {
                     .on('keydown', function() {
                         // if user presses enter, and combobox is not active, accept edits..
                         if (d3.event.keyCode === 13 && d3.select('.combobox').empty()) {
-                            context.enter(iD.modes.Browse(context));
+                            context.enter(Browse(context));
                         }
                     })
                     .call(reference.body)

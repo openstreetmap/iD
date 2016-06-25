@@ -1,3 +1,4 @@
+import { Icon } from '../../svg/index';
 import { Disclosure } from './disclosure';
 import { TagReference } from './tag_reference';
 
@@ -46,7 +47,7 @@ export function RawTagEditor(context) {
         $newTag.enter()
             .append('button')
             .attr('class', 'add-tag')
-            .call(iD.svg.Icon('#icon-plus', 'light'));
+            .call(Icon('#icon-plus', 'light'));
 
         $newTag.on('click', addTag);
 
@@ -75,7 +76,7 @@ export function RawTagEditor(context) {
         $enter.append('button')
             .attr('tabindex', -1)
             .attr('class', 'remove minor')
-            .call(iD.svg.Icon('#operation-delete'));
+            .call(Icon('#operation-delete'));
 
         if (context.taginfo()) {
             $enter.each(bindTypeahead);

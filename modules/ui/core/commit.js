@@ -1,3 +1,6 @@
+import { Icon } from '../../svg/index';
+import { entityOrMemberSelector, displayName } from '../../util/index';
+import { Select } from '../../modes/index';
 export function Commit(context) {
     var dispatch = d3.dispatch('cancel', 'save');
 
@@ -11,7 +14,7 @@ export function Commit(context) {
                 context.graph().entity(entity.id).geometry(context.graph()) !== 'vertex') {
                 context.map().zoomTo(entity);
                 context.surface().selectAll(
-                    iD.util.entityOrMemberSelector([entity.id], context.graph()))
+                    entityOrMemberSelector([entity.id], context.graph()))
                     .classed('hover', true);
             }
         }
@@ -59,7 +62,7 @@ export function Commit(context) {
                .append('a')
                .attr('target', '_blank')
                .attr('tabindex', -1)
-               .call(iD.svg.Icon('#icon-alert', 'inline'))
+               .call(Icon('#icon-alert', 'inline'))
                .attr('href', t('commit.google_warning_link'))
                .append('span')
                .text(t('commit.google_warning'));
@@ -94,7 +97,7 @@ export function Commit(context) {
         changeSetInfo.append('a')
             .attr('target', '_blank')
             .attr('tabindex', -1)
-            .call(iD.svg.Icon('#icon-out-link', 'inline'))
+            .call(Icon('#icon-out-link', 'inline'))
             .attr('href', t('commit.about_changeset_comments_link'))
             .append('span')
             .text(t('commit.about_changeset_comments'));
@@ -123,7 +126,7 @@ export function Commit(context) {
             .on('click', warningClick);
 
         warningLi
-            .call(iD.svg.Icon('#icon-alert', 'pre-text'));
+            .call(Icon('#icon-alert', 'pre-text'));
 
         warningLi
             .append('strong').text(function(d) {
@@ -218,7 +221,7 @@ export function Commit(context) {
 
         li.each(function(d) {
             d3.select(this)
-                .call(iD.svg.Icon('#icon-' + d.entity.geometry(d.graph), 'pre-text ' + d.changeType));
+                .call(Icon('#icon-' + d.entity.geometry(d.graph), 'pre-text ' + d.changeType));
         });
 
         li.append('span')
@@ -236,7 +239,7 @@ export function Commit(context) {
         li.append('span')
             .attr('class', 'entity-name')
             .text(function(d) {
-                var name = iD.util.displayName(d.entity) || '',
+                var name = displayName(d.entity) || '',
                     string = '';
                 if (name !== '') string += ':';
                 return string += ' ' + name;
@@ -250,7 +253,7 @@ export function Commit(context) {
         function mouseover(d) {
             if (d.entity) {
                 context.surface().selectAll(
-                    iD.util.entityOrMemberSelector([d.entity.id], context.graph())
+                    entityOrMemberSelector([d.entity.id], context.graph())
                 ).classed('hover', true);
             }
         }
@@ -264,7 +267,7 @@ export function Commit(context) {
             if (d.entity) {
                 context.map().zoomTo(d.entity);
                 context.enter(
-                    iD.modes.Select(context, [d.entity.id])
+                    Select(context, [d.entity.id])
                         .suppressMenu(true));
             }
         }

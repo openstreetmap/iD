@@ -1,3 +1,4 @@
+import { Icon } from '../../svg/index';
 export function modal(selection, blocking) {
     var keybinding = d3.keybinding('modal');
     var previous = selection.select('div.modal');
@@ -41,7 +42,7 @@ export function modal(selection, blocking) {
         modal.append('button')
             .attr('class', 'close')
             .on('click', shaded.close)
-            .call(iD.svg.Icon('#icon-close'));
+            .call(Icon('#icon-close'));
 
         keybinding
             .on('⌫', shaded.close)
