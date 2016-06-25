@@ -45,11 +45,7 @@ $(BUILDJS_TARGETS): $(BUILDJS_SOURCES) build.js
 MODULE_TARGETS = \
 	js/lib/id/index.js \
 	js/lib/id/services.js \
-	js/lib/id/ui/index.js \
-	js/lib/id/svg.js \
-	js/lib/id/ui/core.js \
-	js/lib/id/ui/intro.js \
-	js/lib/id/ui/preset.js
+	js/lib/id/svg.js
 
 js/lib/id/index.js: $(shell find modules/index.js -type f)
 	@rm -f $@
@@ -62,22 +58,6 @@ js/lib/id/services.js: $(shell find modules/services -type f)
 js/lib/id/svg.js: $(shell find modules/svg -type f)
 	@rm -f $@
 	node_modules/.bin/rollup -c rollup.config.js -f umd -n iD.svg modules/svg/index.js --no-strict -o $@
-
-js/lib/id/ui/index.js: $(shell find modules/ui -type f)
-	@rm -f $@
-	node_modules/.bin/rollup -c rollup.config.js -f umd -n iD modules/ui/ui.js --no-strict -o $@
-
-js/lib/id/ui/core.js: $(shell find modules/ui/core -type f)
-	@rm -f $@
-	node_modules/.bin/rollup -c rollup.config.js -f umd -n iD.ui modules/ui/core/index.js --no-strict -o $@
-
-js/lib/id/ui/intro.js: $(shell find modules/ui/intro -type f)
-	@rm -f $@
-	node_modules/.bin/rollup -c rollup.config.js -f umd -n iD.ui.intro modules/ui/intro/index.js --no-strict -o $@
-
-js/lib/id/ui/preset.js: $(shell find modules/ui/preset -type f)
-	@rm -f $@
-	node_modules/.bin/rollup -c rollup.config.js -f umd -n iD.ui.preset modules/ui/preset/index.js --no-strict -o $@
 
 dist/iD.js: \
 	js/lib/bootstrap-tooltip.js \

@@ -1,3 +1,6 @@
+import { intro } from '../core/index';
+import { modal as Modal } from '../core/modal';
+
 export function startEditing(context, reveal) {
     var event = d3.dispatch('done', 'startEditing'),
         modal,
@@ -13,7 +16,7 @@ export function startEditing(context, reveal) {
 
     step.enter = function() {
         reveal('.map-control.help-control',
-            t('intro.startediting.help', { button: iD.ui.intro.icon('#icon-help', 'pre-text') }));
+            t('intro.startediting.help', { button: intro.icon('#icon-help', 'pre-text') }));
 
         timeout(function() {
             reveal('#bar button.save', t('intro.startediting.save'));
@@ -24,7 +27,7 @@ export function startEditing(context, reveal) {
         }, 10000);
 
         timeout(function() {
-            modal = iD.ui.modal(context.container());
+            modal = Modal(context.container());
 
             modal.select('.modal')
                 .attr('class', 'modal-splash modal col6');

@@ -1,3 +1,5 @@
+import { Icon } from '../../svg/index';
+import { ChangeTags } from '../../actions/index';
 export function wikipedia(field, context) {
     var dispatch = d3.dispatch('change'),
         wikipedia = iD.services.wikipedia(),
@@ -65,7 +67,7 @@ export function wikipedia(field, context) {
             .attr('class', 'wiki-link button-input-action minor')
             .attr('tabindex', -1)
             .attr('target', '_blank')
-            .call(iD.svg.Icon('#icon-out-link', 'inline'));
+            .call(Icon('#icon-out-link', 'inline'));
     }
 
     function language() {
@@ -148,7 +150,7 @@ export function wikipedia(field, context) {
                 return id.match(/^Q\d+$/);
             });
 
-            context.overwrite(iD.actions.ChangeTags(currEntityId, currTags), annotation);
+            context.overwrite(ChangeTags(currEntityId, currTags), annotation);
             dispatch.change(currTags);
         });
     }

@@ -1,10 +1,41 @@
+import {
+    Account,
+    Attribution,
+    Background,
+    cmd,
+    Contributors,
+    FeatureInfo,
+    FullScreen,
+    Geolocate,
+    Help,
+    Info,
+    Loading,
+    MapData,
+    MapInMap,
+    Modes,
+    Restore,
+    Save,
+    Scale,
+    Sidebar,
+    Spinner,
+    Splash,
+    Status,
+    UndoRedo,
+    Zoom
+} from './core/index';
+
+
+import { Defs, Icon } from '../svg/index';
+import { Hash } from '../behavior/index';
+import { Browse } from '../modes/index';
+
 export function ui(context) {
     function render(container) {
         var map = context.map();
 
         if (iD.detect().opera) container.classed('opera', true);
 
-        var hash = iD.behavior.Hash(context);
+        var hash = Hash(context);
 
         hash();
 
@@ -14,7 +45,7 @@ export function ui(context) {
 
         container.append('svg')
             .attr('id', 'defs')
-            .call(iD.svg.Defs(context));
+            .call(Defs(context));
 
         container.append('div')
             .attr('id', 'sidebar')
@@ -33,10 +64,10 @@ export function ui(context) {
             .call(map);
 
         content
-            .call(iD.ui.MapInMap(context));
+            .call(MapInMap(context));
 
         content.append('div')
-            .call(iD.ui.Info(context));
+            .call(Info(context));
 
         bar.append('div')
             .attr('class', 'spacer col4');
@@ -46,53 +77,53 @@ export function ui(context) {
 
         limiter.append('div')
             .attr('class', 'button-wrap joined col3')
-            .call(iD.ui.Modes(context), limiter);
+            .call(Modes(context), limiter);
 
         limiter.append('div')
             .attr('class', 'button-wrap joined col1')
-            .call(iD.ui.UndoRedo(context));
+            .call(UndoRedo(context));
 
         limiter.append('div')
             .attr('class', 'button-wrap col1')
-            .call(iD.ui.Save(context));
+            .call(Save(context));
 
         bar.append('div')
             .attr('class', 'full-screen')
-            .call(iD.ui.FullScreen(context));
+            .call(FullScreen(context));
 
         bar.append('div')
             .attr('class', 'spinner')
-            .call(iD.ui.Spinner(context));
+            .call(Spinner(context));
 
         var controls = bar.append('div')
             .attr('class', 'map-controls');
 
         controls.append('div')
             .attr('class', 'map-control zoombuttons')
-            .call(iD.ui.Zoom(context));
+            .call(Zoom(context));
 
         controls.append('div')
             .attr('class', 'map-control geolocate-control')
-            .call(iD.ui.Geolocate(context));
+            .call(Geolocate(context));
 
         controls.append('div')
             .attr('class', 'map-control background-control')
-            .call(iD.ui.Background(context));
+            .call(Background(context));
 
         controls.append('div')
             .attr('class', 'map-control map-data-control')
-            .call(iD.ui.MapData(context));
+            .call(MapData(context));
 
         controls.append('div')
             .attr('class', 'map-control help-control')
-            .call(iD.ui.Help(context));
+            .call(Help(context));
 
         var about = content.append('div')
             .attr('id', 'about');
 
         about.append('div')
             .attr('id', 'attrib')
-            .call(iD.ui.Attribution(context));
+            .call(Attribution(context));
 
         var footer = about.append('div')
             .attr('id', 'footer')
@@ -100,11 +131,11 @@ export function ui(context) {
 
         footer.append('div')
             .attr('class', 'api-status')
-            .call(iD.ui.Status(context));
+            .call(Status(context));
 
         footer.append('div')
             .attr('id', 'scale-block')
-            .call(iD.ui.Scale(context));
+            .call(Scale(context));
 
         var aboutList = footer.append('div')
             .attr('id', 'info-block')
@@ -112,7 +143,7 @@ export function ui(context) {
             .attr('id', 'about-list');
 
         if (!context.embed()) {
-            aboutList.call(iD.ui.Account(context));
+            aboutList.call(Account(context));
         }
 
         aboutList.append('li')
@@ -128,7 +159,7 @@ export function ui(context) {
             .attr('target', '_blank')
             .attr('tabindex', -1)
             .attr('href', 'https://github.com/openstreetmap/iD/issues')
-            .call(iD.svg.Icon('#icon-bug', 'light'))
+            .call(Icon('#icon-bug', 'light'))
             .call(bootstrap.tooltip()
                 .title(t('report_a_bug'))
                 .placement('top')
@@ -138,7 +169,7 @@ export function ui(context) {
             .attr('target', '_blank')
             .attr('tabindex', -1)
             .attr('href', 'https://github.com/openstreetmap/iD/blob/master/CONTRIBUTING.md#translating')
-            .call(iD.svg.Icon('#icon-translate', 'light'))
+            .call(Icon('#icon-translate', 'light'))
             .call(bootstrap.tooltip()
                 .title(t('help_translate'))
                 .placement('top')
@@ -147,12 +178,12 @@ export function ui(context) {
         aboutList.append('li')
             .attr('class', 'feature-warning')
             .attr('tabindex', -1)
-            .call(iD.ui.FeatureInfo(context));
+            .call(FeatureInfo(context));
 
         aboutList.append('li')
             .attr('class', 'user-list')
             .attr('tabindex', -1)
-            .call(iD.ui.Contributors(context));
+            .call(Contributors(context));
 
         window.onbeforeunload = function() {
             return context.save();
@@ -189,21 +220,21 @@ export function ui(context) {
             .on('⇧↑', pan([0, mapDimensions[1]]))
             .on('⇧→', pan([-mapDimensions[0], 0]))
             .on('⇧↓', pan([0, -mapDimensions[1]]))
-            .on(iD.ui.cmd('⌘←'), pan([mapDimensions[0], 0]))
-            .on(iD.ui.cmd('⌘↑'), pan([0, mapDimensions[1]]))
-            .on(iD.ui.cmd('⌘→'), pan([-mapDimensions[0], 0]))
-            .on(iD.ui.cmd('⌘↓'), pan([0, -mapDimensions[1]]));
+            .on(cmd('⌘←'), pan([mapDimensions[0], 0]))
+            .on(cmd('⌘↑'), pan([0, mapDimensions[1]]))
+            .on(cmd('⌘→'), pan([-mapDimensions[0], 0]))
+            .on(cmd('⌘↓'), pan([0, -mapDimensions[1]]));
 
         d3.select(document)
             .call(keybinding);
 
-        context.enter(iD.modes.Browse(context));
+        context.enter(Browse(context));
 
         context.container()
-            .call(iD.ui.Splash(context))
-            .call(iD.ui.Restore(context));
+            .call(Splash(context))
+            .call(Restore(context));
 
-        var authenticating = iD.ui.Loading(context)
+        var authenticating = Loading(context)
             .message(t('loading_auth'));
 
         context.connection()
@@ -223,17 +254,7 @@ export function ui(context) {
         });
     }
 
-    ui.sidebar = iD.ui.Sidebar(context);
+    ui.sidebar = Sidebar(context);
 
     return ui;
 }
-
-ui.tooltipHtml = function(text, key) {
-    var s = '<span>' + text + '</span>';
-    if (key) {
-        s += '<div class="keyhint-wrap">' +
-            '<span> ' + (t('tooltip_keyhint')) + ' </span>' +
-            '<span class="keyhint"> ' + key + '</span></div>';
-    }
-    return s;
-};

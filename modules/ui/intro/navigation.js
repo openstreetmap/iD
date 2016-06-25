@@ -1,3 +1,5 @@
+import { intro } from '../core/index';
+
 export function navigation(context, reveal) {
     var event = d3.dispatch('done'),
         timeouts = [];
@@ -43,11 +45,11 @@ export function navigation(context, reveal) {
                 context.map().center(hall);
             }
 
-            var box = iD.ui.intro.pointBox(hall, context);
+            var box = intro.pointBox(hall, context);
             reveal(box, t('intro.navigation.select'));
 
             context.map().on('move.intro', function() {
-                var box = iD.ui.intro.pointBox(hall, context);
+                var box = intro.pointBox(hall, context);
                 reveal(box, t('intro.navigation.select'), {duration: 0});
             });
         }
@@ -58,7 +60,7 @@ export function navigation(context, reveal) {
             context.map().on('move.intro', null);
             set(function() {
                 reveal('.entity-editor-pane',
-                    t('intro.navigation.pane', { button: iD.ui.intro.icon('#icon-close', 'pre-text') }));
+                    t('intro.navigation.pane', { button: intro.icon('#icon-close', 'pre-text') }));
                 context.on('exit.intro', streetSearch);
             }, 700);
         }
@@ -92,7 +94,7 @@ export function navigation(context, reveal) {
                 reveal('.entity-editor-pane',
                     t('intro.navigation.chosen', {
                         name: t('intro.graph.spring_st'),
-                        button: iD.ui.intro.icon('#icon-close', 'pre-text')
+                        button: intro.icon('#icon-close', 'pre-text')
                     }));
             }, 400);
         }

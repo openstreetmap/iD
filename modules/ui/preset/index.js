@@ -1,13 +1,36 @@
-export { access } from './access';
-export { address } from './address';
-export { check, defaultcheck} from './check';
-export { combo, typeCombo, multiCombo } from './combo';
-export { cycleway } from './cycleway';
-export { text, url, number, email, tel } from './input';
-export { localized } from './localized';
-export { lanes } from './lanes';
-export { maxspeed } from './maxspeed';
-export { radio } from './radio';
-export { restrictions } from './restrictions';
-export { textarea } from './textarea';
-export { wikipedia } from './wikipedia';
+import { access } from './access';
+import { address } from './address';
+import { check, defaultcheck} from './check';
+import { combo, typeCombo, multiCombo } from './combo';
+import { cycleway } from './cycleway';
+import { text, url, number, email, tel } from './input';
+import { localized } from './localized';
+import { lanes } from './lanes';
+import { maxspeed } from './maxspeed';
+import { radio } from './radio';
+import { restrictions } from './restrictions';
+import { textarea } from './textarea';
+import { wikipedia } from './wikipedia';
+
+export var presetObj = {
+    access: access,
+    address: address,
+    check: check,
+    defaultcheck: defaultcheck,
+    combo: combo,
+    typeCombo: typeCombo,
+    multiCombo: multiCombo,
+    cycleway: cycleway,
+    text: text,
+    url: url,
+    number: number,
+    email: email,
+    tel: tel,
+    localized: localized,
+    lanes: lanes,
+    maxspeed: maxspeed,
+    radio: radio,
+    restrictions: restrictions,
+    textarea: textarea,
+    wikipedia: wikipedia
+};
