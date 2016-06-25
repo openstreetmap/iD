@@ -54,6 +54,9 @@
     "xml2js": "~0.4.13",
     "xmlbuilder": "~4.2.0"
   },
+  "greenkeeper": {
+    "ignore": ["d3", "maki"]
+  },
   "engines": {
     "node": ">=0.10.0"
   },
