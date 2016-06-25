@@ -1,3 +1,4 @@
+import { tooltipHtml } from './tooltipHtml';
 export function FeatureInfo(context) {
     function update(selection) {
         var features = context.features(),
@@ -17,7 +18,7 @@ export function FeatureInfo(context) {
                     .placement('top')
                     .html(true)
                     .title(function() {
-                        return iD.ui.tooltipHtml(hiddenList.join('<br/>'));
+                        return tooltipHtml(hiddenList.join('<br/>'));
                     });
 
             var warning = selection.append('a')

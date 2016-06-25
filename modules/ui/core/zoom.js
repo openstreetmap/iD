@@ -1,4 +1,6 @@
+import { Icon } from '../../svg/index';
 import { cmd } from './cmd';
+import { tooltipHtml } from './tooltipHtml';
 
 export function Zoom(context) {
     var zooms = [{
@@ -47,12 +49,12 @@ export function Zoom(context) {
                 .placement('left')
                 .html(true)
                 .title(function(d) {
-                    return iD.ui.tooltipHtml(d.title, d.key);
+                    return tooltipHtml(d.title, d.key);
                 }));
 
         button.each(function(d) {
             d3.select(this)
-                .call(iD.svg.Icon('#icon-' + d.icon, 'light'));
+                .call(Icon('#icon-' + d.icon, 'light'));
         });
 
         var keybinding = d3.keybinding('zoom');

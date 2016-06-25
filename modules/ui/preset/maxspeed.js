@@ -1,3 +1,4 @@
+import { pointInPolygon } from '../../geo/index';
 export function maxspeed(field, context) {
     var dispatch = d3.dispatch('change'),
         entity,
@@ -31,7 +32,7 @@ export function maxspeed(field, context) {
 
         imperial = _.some(iD.data.imperial.features, function(f) {
             return _.some(f.geometry.coordinates, function(d) {
-                return iD.geo.pointInPolygon(loc, d);
+                return pointInPolygon(loc, d);
             });
         });
 

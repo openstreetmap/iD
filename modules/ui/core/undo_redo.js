@@ -1,4 +1,6 @@
+import { Icon } from '../../svg/index';
 import { cmd } from './cmd';
+import { tooltipHtml } from './tooltipHtml';
 
 export function UndoRedo(context) {
     var commands = [{
@@ -22,7 +24,7 @@ export function UndoRedo(context) {
             .placement('bottom')
             .html(true)
             .title(function (d) {
-                return iD.ui.tooltipHtml(d.annotation() ?
+                return tooltipHtml(d.annotation() ?
                     t(d.id + '.tooltip', {action: d.annotation()}) :
                     t(d.id + '.nothing'), d.cmd);
             });
@@ -36,7 +38,7 @@ export function UndoRedo(context) {
 
         buttons.each(function(d) {
             d3.select(this)
-                .call(iD.svg.Icon('#icon-' + d.id));
+                .call(Icon('#icon-' + d.id));
         });
 
         var keybinding = d3.keybinding('undo')

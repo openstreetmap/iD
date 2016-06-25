@@ -1,3 +1,6 @@
+import { Icon } from '../../svg/index';
+import { Browse } from '../../modes/index';
+import { ChangeTags } from '../../actions/index';
 import { preset as presetModule } from './preset';
 import { PresetIcon } from './preset_icon';
 import { RawTagEditor } from './raw_tag_editor';
@@ -38,7 +41,7 @@ export function EntityEditor(context) {
 
         $enter.append('button')
             .attr('class', 'fr preset-close')
-            .call(iD.svg.Icon(modified ? '#icon-apply' : '#icon-close'));
+            .call(Icon(modified ? '#icon-apply' : '#icon-close'));
 
         $enter.append('h3');
 
@@ -48,7 +51,7 @@ export function EntityEditor(context) {
 
         $header.select('.preset-close')
             .on('click', function() {
-                context.enter(iD.modes.Browse(context));
+                context.enter(Browse(context));
             });
 
         var $body = selection.selectAll('.inspector-body')
@@ -198,9 +201,9 @@ export function EntityEditor(context) {
         }
         if (!_.isEqual(entity.tags, tags)) {
             if (coalesceChanges) {
-                context.overwrite(iD.actions.ChangeTags(id, tags), annotation);
+                context.overwrite(ChangeTags(id, tags), annotation);
             } else {
-                context.perform(iD.actions.ChangeTags(id, tags), annotation);
+                context.perform(ChangeTags(id, tags), annotation);
                 coalesceChanges = !!onInput;
             }
         }

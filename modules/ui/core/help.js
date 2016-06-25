@@ -1,4 +1,6 @@
+import { Icon } from '../../svg/index';
 import { intro } from './intro';
+import { tooltipHtml } from './tooltipHtml';
 
 export function Help(context) {
     var key = 'H';
@@ -102,11 +104,11 @@ export function Help(context) {
             tooltip = bootstrap.tooltip()
                 .placement('left')
                 .html(true)
-                .title(iD.ui.tooltipHtml(t('help.title'), key)),
+                .title(tooltipHtml(t('help.title'), key)),
             button = selection.append('button')
                 .attr('tabindex', -1)
                 .on('click', toggle)
-                .call(iD.svg.Icon('#icon-help', 'light'))
+                .call(Icon('#icon-help', 'light'))
                 .call(tooltip),
             shown = false;
 

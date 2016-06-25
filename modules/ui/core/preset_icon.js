@@ -1,3 +1,4 @@
+import { Icon } from '../../svg/index';
 export function PresetIcon() {
     var preset, geometry;
 
@@ -39,7 +40,7 @@ export function PresetIcon() {
 
         $frame.enter()
             .append('div')
-            .call(iD.svg.Icon('#preset-icon-frame'));
+            .call(Icon('#preset-icon-frame'));
 
         $frame.attr('class', function() {
             return 'preset-icon-frame ' + (geom === 'area' ? '' : 'hide');
@@ -52,7 +53,7 @@ export function PresetIcon() {
         $icon.enter()
             .append('div')
             .attr('class', 'preset-icon')
-            .call(iD.svg.Icon(''));
+            .call(Icon(''));
 
         $icon
             .attr('class', 'preset-icon preset-icon-' + (maki ? '32' : (geom === 'area' ? '44' : '60')));

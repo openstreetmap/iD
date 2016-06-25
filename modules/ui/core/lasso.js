@@ -1,3 +1,4 @@
+import { Extent } from '../../geo/index';
 import { Toggle } from './toggle';
 
 export function Lasso(context) {
@@ -28,8 +29,8 @@ export function Lasso(context) {
 
     lasso.extent = function () {
         return lasso.coordinates.reduce(function(extent, point) {
-            return extent.extend(iD.geo.Extent(point));
-        }, iD.geo.Extent());
+            return extent.extend(Extent(point));
+        }, Extent());
     };
 
     lasso.p = function(_) {

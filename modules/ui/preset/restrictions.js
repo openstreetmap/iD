@@ -1,9 +1,14 @@
+import { Layers, Vertices, Lines, Turns } from '../../svg/index';
+import { Hover } from '../../behavior/index';
+import { Entity } from '../../core/index';
+import { Intersection, Extent, RawMercator, Turn, inferRestriction } from '../../geo/index';
+import { UnrestrictTurn, RestrictTurn } from '../../actions/index';
+
 export function restrictions(field, context) {
     var dispatch = d3.dispatch('change'),
-        hover = iD.behavior.Hover(context),
+        hover = Hover(context),
         vertexID,
         fromNodeID;
-
 
     function restrictions(selection) {
         // if form field is hidden or has detached from dom, clean up.
@@ -24,12 +29,12 @@ export function restrictions(field, context) {
             .attr('class', 'restriction-help');
 
 
-        var intersection = iD.geo.Intersection(context.graph(), vertexID),
+        var intersection = Intersection(context.graph(), vertexID),
             graph = intersection.graph,
             vertex = graph.entity(vertexID),
             filter = d3.functor(true),
-            extent = iD.geo.Extent(),
-            projection = iD.geo.RawMercator();
+            extent = Extent(),
+            projection = RawMercator();
 
         var d = wrap.dimensions(),
             c = [d[0] / 2, d[1] / 2],
@@ -44,10 +49,10 @@ export function restrictions(field, context) {
             .translate([c[0] - s[0], c[1] - s[1]])
             .clipExtent([[0, 0], d]);
 
-        var drawLayers = iD.svg.Layers(projection, context).only('osm').dimensions(d),
-            drawVertices = iD.svg.Vertices(projection, context),
-            drawLines = iD.svg.Lines(projection, context),
-            drawTurns = iD.svg.Turns(projection, context);
+        var drawLayers = Layers(projection, context).only('osm').dimensions(d),
+            drawVertices = Vertices(projection, context),
+            drawLines = Lines(projection, context),
+            drawTurns = Turns(projection, context);
 
         enter
             .call(drawLayers)
@@ -91,17 +96,17 @@ export function restrictions(field, context) {
 
         function click() {
             var datum = d3.event.target.__data__;
-            if (datum instanceof iD.Entity) {
+            if (datum instanceof Entity) {
                 fromNodeID = intersection.adjacentNodeId(datum.id);
                 render();
-            } else if (datum instanceof iD.geo.Turn) {
+            } else if (datum instanceof Turn) {
                 if (datum.restriction) {
                     context.perform(
-                        iD.actions.UnrestrictTurn(datum, projection),
+                        UnrestrictTurn(datum, projection),
                         t('operations.restriction.annotation.delete'));
                 } else {
                     context.perform(
-                        iD.actions.RestrictTurn(datum, projection),
+                        RestrictTurn(datum, projection),
                         t('operations.restriction.annotation.create'));
                 }
             }
@@ -109,7 +114,7 @@ export function restrictions(field, context) {
 
         function mouseover() {
             var datum = d3.event.target.__data__;
-            if (datum instanceof iD.geo.Turn) {
+            if (datum instanceof Turn) {
                 var graph = context.graph(),
                     presets = context.presets(),
                     preset;
@@ -118,7 +123,7 @@ export function restrictions(field, context) {
                     preset = presets.match(graph.entity(datum.restriction), graph);
                 } else {
                     preset = presets.item('type/restriction/' +
-                        iD.geo.inferRestriction(
+                        inferRestriction(
                             graph,
                             datum.from,
                             datum.via,

@@ -1,3 +1,7 @@
+import { Icon } from '../../svg/index';
+import { Browse } from '../../modes/index';
+import { ChangePreset } from '../../actions/index';
+import { Delete } from '../../operations/index';
 import { PresetIcon } from './preset_icon';
 import { TagReference } from './tag_reference';
 
@@ -29,9 +33,9 @@ export function PresetList(context) {
             messagewrap.append('button')
                 .attr('class', 'close')
                 .on('click', function() {
-                    context.enter(iD.modes.Browse(context));
+                    context.enter(Browse(context));
                 })
-                .call(iD.svg.Icon('#icon-close'));
+                .call(Icon('#icon-close'));
         }
 
         function keydown() {
@@ -41,7 +45,7 @@ export function PresetList(context) {
                  d3.event.keyCode === d3.keybinding.keyCodes['⌦'])) {
                 d3.event.preventDefault();
                 d3.event.stopPropagation();
-                iD.operations.Delete([id], context)();
+                Delete([id], context)();
             } else if (search.property('value').length === 0 &&
                 (d3.event.ctrlKey || d3.event.metaKey) &&
                 d3.event.keyCode === d3.keybinding.keyCodes.z) {
@@ -89,7 +93,7 @@ export function PresetList(context) {
             .on('input', inputevent);
 
         searchWrap
-            .call(iD.svg.Icon('#icon-search', 'pre-text'));
+            .call(Icon('#icon-search', 'pre-text'));
 
         if (autofocus) {
             search.node().focus();
@@ -214,7 +218,7 @@ export function PresetList(context) {
             context.presets().choose(preset);
 
             context.perform(
-                iD.actions.ChangePreset(id, currentPreset, preset),
+                ChangePreset(id, currentPreset, preset),
                 t('operations.change_tags.annotation'));
 
             event.choose(preset);

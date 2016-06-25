@@ -43,6 +43,7 @@ export { Status } from './status';
 export { Success } from './success';
 export { TagReference } from './tag_reference';
 export { Toggle } from './toggle';
+export { tooltipHtml } from './tooltipHtml';
 export { UndoRedo } from './undo_redo';
 export { ViewOnOSM } from './view_on_osm';
 export { Zoom } from './zoom';

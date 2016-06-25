@@ -1,3 +1,4 @@
+import { Icon } from '../../svg/index';
 export function Account(context) {
     var connection = context.connection();
 
@@ -32,7 +33,7 @@ export function Account(context) {
                     .attr('src', details.image_url);
             } else {
                 userLink
-                    .call(iD.svg.Icon('#icon-avatar', 'pre-text light'));
+                    .call(Icon('#icon-avatar', 'pre-text light'));
             }
 
             // Add user name

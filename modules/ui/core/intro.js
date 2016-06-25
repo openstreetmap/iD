@@ -1,3 +1,8 @@
+import { Icon } from '../../svg/index';
+import { Entity, Graph } from '../../core/index';
+import { Browse } from '../../modes/index';
+import { Intro } from '../intro/index';
+
 export function intro(context) {
     var step;
 
@@ -50,7 +55,7 @@ export function intro(context) {
             return features[id] && t('intro.graph.' + features[id]);
         }
 
-        context.enter(iD.modes.Browse(context));
+        context.enter(Browse(context));
 
         // Save current map state
         var history = context.history().toJSON(),
@@ -72,13 +77,13 @@ export function intro(context) {
 
         introGraph = JSON.parse(iD.introGraph);
         for (var key in introGraph) {
-            introGraph[key] = iD.Entity(introGraph[key]);
+            introGraph[key] = Entity(introGraph[key]);
             name = localizedName(key);
             if (name) {
                 introGraph[key].tags.name = name;
             }
         }
-        context.history().merge(d3.values(iD.Graph().load(introGraph).entities));
+        context.history().merge(d3.values(Graph().load(introGraph).entities));
         context.background().bing();
 
         d3.selectAll('#map .layer-background').style('opacity', 1);
@@ -93,7 +98,7 @@ export function intro(context) {
         }
 
         var steps = ['navigation', 'point', 'area', 'line', 'startEditing'].map(function(step, i) {
-            var s = iD.ui.intro[step](context, reveal)
+            var s = Intro[step](context, reveal)
                 .on('done', function() {
                     entered.filter(function(d) {
                         return d.title === s.title;
@@ -130,7 +135,7 @@ export function intro(context) {
             .on('click', enter);
 
         entered
-            .call(iD.svg.Icon('#icon-apply', 'pre-text'));
+            .call(Icon('#icon-apply', 'pre-text'));
 
         entered
             .append('label')
@@ -141,7 +146,7 @@ export function intro(context) {
         function enter (newStep) {
             if (step) { step.exit(); }
 
-            context.enter(iD.modes.Browse(context));
+            context.enter(Browse(context));
 
             step = newStep;
             step.enter();
@@ -154,3 +159,36 @@ export function intro(context) {
     }
     return intro;
 }
+
+intro.pointBox = function(point, context) {
+    var rect = context.surfaceRect();
+    point = context.projection(point);
+    return {
+        left: point[0] + rect.left - 30,
+        top: point[1] + rect.top - 50,
+        width: 60,
+        height: 70
+     };
+};
+
+intro.pad = function(box, padding, context) {
+    if (box instanceof Array) {
+        var rect = context.surfaceRect();
+        box = context.projection(box);
+        box = {
+            left: box[0] + rect.left,
+            top: box[1] + rect.top
+        };
+    }
+    return {
+        left: box.left - padding,
+        top: box.top - padding,
+        width: (box.width || 0) + 2 * padding,
+        height: (box.width || 0) + 2 * padding
+    };
+};
+
+intro.icon = function(name, svgklass) {
+    return '<svg class="icon ' + (svgklass || '') + '">' +
+         '<use xlink:href="' + name + '"></use></svg>';
+ };

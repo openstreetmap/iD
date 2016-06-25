@@ -1,12 +1,17 @@
+import { Gpx, Debug } from '../../svg/index';
+import { setTransform } from '../../util/index';
+import { RawMercator } from '../../geo/index';
+import { TileLayer } from '../../renderer/index';
+
 export function MapInMap(context) {
     var key = '/';
 
     function map_in_map(selection) {
-        var backgroundLayer = iD.TileLayer(context),
+        var backgroundLayer = TileLayer(context),
             overlayLayers = {},
-            projection = iD.geo.RawMercator(),
-            gpxLayer = iD.svg.Gpx(projection, context).showLabels(false),
-            debugLayer = iD.svg.Debug(projection, context),
+            projection = RawMercator(),
+            gpxLayer = Gpx(projection, context).showLabels(false),
+            debugLayer = Debug(projection, context),
             zoom = d3.behavior.zoom()
                 .scaleExtent([ztok(0.5), ztok(24)])
                 .on('zoom', zoomPan),
@@ -51,8 +56,8 @@ export function MapInMap(context) {
                 tX = (tCurr[0] / scale - tLast[0]) * scale,
                 tY = (tCurr[1] / scale - tLast[1]) * scale;
 
-            iD.util.setTransform(tiles, tX, tY, scale);
-            iD.util.setTransform(viewport, 0, 0, scale);
+            setTransform(tiles, tX, tY, scale);
+            setTransform(viewport, 0, 0, scale);
             transformed = true;
 
             queueRedraw();
@@ -112,8 +117,8 @@ export function MapInMap(context) {
             kLast = kCurr = kMini;
 
             if (transformed) {
-                iD.util.setTransform(tiles, 0, 0);
-                iD.util.setTransform(viewport, 0, 0);
+                setTransform(tiles, 0, 0);
+                setTransform(viewport, 0, 0);
                 transformed = false;
             }
         }
@@ -160,7 +165,7 @@ export function MapInMap(context) {
             var activeOverlayLayers = [];
             for (var i = 0; i < overlaySources.length; i++) {
                 if (overlaySources[i].validZoom(zMini)) {
-                    if (!overlayLayers[i]) overlayLayers[i] = iD.TileLayer(context);
+                    if (!overlayLayers[i]) overlayLayers[i] = TileLayer(context);
                     activeOverlayLayers.push(overlayLayers[i]
                         .source(overlaySources[i])
                         .projection(projection)

@@ -1,3 +1,4 @@
+import { Icon } from '../../svg/index';
 export function Success(context) {
     var dispatch = d3.dispatch('cancel'),
         changeset;
@@ -12,7 +13,7 @@ export function Success(context) {
         header.append('button')
             .attr('class', 'fr')
             .on('click', function() { dispatch.cancel(); })
-            .call(iD.svg.Icon('#icon-close'));
+            .call(Icon('#icon-close'));
 
         header.append('h3')
             .text(t('success.just_edited'));
@@ -27,7 +28,7 @@ export function Success(context) {
             .attr('class', 'details')
             .attr('target', '_blank')
             .attr('tabindex', -1)
-            .call(iD.svg.Icon('#icon-out-link', 'inline'))
+            .call(Icon('#icon-out-link', 'inline'))
             .attr('href', t('success.help_link_url'))
             .append('span')
             .text(t('success.help_link_text'));
@@ -56,7 +57,7 @@ export function Success(context) {
             .call(bootstrap.tooltip()
                 .title(function(d) { return t('success.' + d.key); })
                 .placement('bottom'))
-            .each(function(d) { d3.select(this).call(iD.svg.Icon('#logo-' + d.key, 'social')); });
+            .each(function(d) { d3.select(this).call(Icon('#logo-' + d.key, 'social')); });
     }
 
     success.changeset = function(_) {
