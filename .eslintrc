@@ -59,7 +59,6 @@
         "rbush": false,
         "JXON": false,
         "osmAuth": false,
-        "sexagesimal": false,
         "toGeoJSON": false,
         "marked": false,
         "Mapillary": false,

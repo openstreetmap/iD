@@ -1,3 +1,5 @@
+import * as sexagesimal from 'sexagesimal';
+
 export function FeatureList(context) {
     var geocodeResults;
 
