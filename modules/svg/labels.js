@@ -1,3 +1,5 @@
+import rbush from 'rbush';
+
 export function Labels(projection, context) {
     var path = d3.geo.path().projection(projection);
 

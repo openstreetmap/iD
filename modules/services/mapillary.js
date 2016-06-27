@@ -1,3 +1,5 @@
+import rbush from 'rbush';
+
 export function mapillary() {
     var mapillary = {},
         apibase = 'https://a.mapillary.com/v2/',
