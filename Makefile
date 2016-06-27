@@ -53,31 +53,31 @@ MODULE_TARGETS = \
 
 js/lib/id/index.js: $(shell find modules/index.js -type f)
 	@rm -f $@
-	node_modules/.bin/rollup -f umd -n iD modules/index.js --no-strict -o $@
+	node_modules/.bin/rollup -c rollup.config.js -f umd -n iD modules/index.js --no-strict -o $@
 
 js/lib/id/services.js: $(shell find modules/services -type f)
 	@rm -f $@
-	node_modules/.bin/rollup -f umd -n iD.services modules/services/index.js --no-strict -o $@
+	node_modules/.bin/rollup -c rollup.config.js -f umd -n iD.services modules/services/index.js --no-strict -o $@
 
 js/lib/id/svg.js: $(shell find modules/svg -type f)
 	@rm -f $@
-	node_modules/.bin/rollup -f umd -n iD.svg modules/svg/index.js --no-strict -o $@
+	node_modules/.bin/rollup -c rollup.config.js -f umd -n iD.svg modules/svg/index.js --no-strict -o $@
 
 js/lib/id/ui/index.js: $(shell find modules/ui -type f)
 	@rm -f $@
-	node_modules/.bin/rollup -f umd -n iD modules/ui/ui.js --no-strict -o $@
+	node_modules/.bin/rollup -c rollup.config.js -f umd -n iD modules/ui/ui.js --no-strict -o $@
 
 js/lib/id/ui/core.js: $(shell find modules/ui/core -type f)
 	@rm -f $@
-	node_modules/.bin/rollup -c modules/ui/core/rollup.config.js -f umd -n iD.ui modules/ui/core/index.js --no-strict -o $@
+	node_modules/.bin/rollup -c rollup.config.js -f umd -n iD.ui modules/ui/core/index.js --no-strict -o $@
 
 js/lib/id/ui/intro.js: $(shell find modules/ui/intro -type f)
 	@rm -f $@
-	node_modules/.bin/rollup -f umd -n iD.ui.intro modules/ui/intro/index.js --no-strict -o $@
+	node_modules/.bin/rollup -c rollup.config.js -f umd -n iD.ui.intro modules/ui/intro/index.js --no-strict -o $@
 
 js/lib/id/ui/preset.js: $(shell find modules/ui/preset -type f)
 	@rm -f $@
-	node_modules/.bin/rollup -f umd -n iD.ui.preset modules/ui/preset/index.js --no-strict -o $@
+	node_modules/.bin/rollup -c rollup.config.js -f umd -n iD.ui.preset modules/ui/preset/index.js --no-strict -o $@
 
 dist/iD.js: \
 	js/lib/bootstrap-tooltip.js \
@@ -95,7 +95,6 @@ dist/iD.js: \
 	js/lib/jxon.js \
 	js/lib/lodash.js \
 	js/lib/osmauth.js \
-	js/lib/rbush.js \
 	js/lib/togeojson.js \
 	js/lib/marked.js \
 	js/id/start.js \

@@ -22,6 +22,7 @@
   ],
   "license": "ISC",
   "dependencies": {
+    "rbush": "1.4.3",
     "sexagesimal": "0.5.0"
   },
   "devDependencies": {

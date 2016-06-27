@@ -1,4 +1,5 @@
 import { Difference } from './difference';
+import rbush from 'rbush';
 
 export function Tree(head) {
     var rtree = rbush(),

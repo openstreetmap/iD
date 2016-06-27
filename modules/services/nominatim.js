@@ -1,3 +1,5 @@
+import rbush from 'rbush';
+
 export function nominatim() {
     var nominatim = {},
         endpoint = 'https://nominatim.openstreetmap.org/reverse?';
