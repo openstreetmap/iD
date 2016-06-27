@@ -51,7 +51,7 @@ MODULE_TARGETS = \
 	js/lib/id/ui/intro.js \
 	js/lib/id/ui/preset.js
 
-js/lib/id/index.js: $(shell find modules/index.js -type f)
+js/lib/id/index.js: $(shell find modules -type f)
 	@rm -f $@
 	node_modules/.bin/rollup -c rollup.config.js -f umd -n iD modules/index.js --no-strict -o $@
 
