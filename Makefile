@@ -92,7 +92,6 @@ dist/iD.js: \
 	js/lib/d3.curtain.js \
 	js/lib/d3.value.js \
 	js/lib/diff3.js \
-	js/lib/jxon.js \
 	js/lib/lodash.js \
 	js/lib/osmauth.js \
 	js/lib/togeojson.js \

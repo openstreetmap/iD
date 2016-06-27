@@ -3,6 +3,7 @@ import { Way } from './way';
 import { Relation } from './relation';
 import { Node } from './node';
 import { Extent } from '../geo/index';
+import JXON from 'jxon';
 
 export function Connection(useHttps) {
     if (typeof useHttps !== 'boolean') {
