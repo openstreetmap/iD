@@ -239,7 +239,7 @@ fs.writeFileSync('data/presets/categories.json', JSON.stringify(categories, null
 fs.writeFileSync('data/presets/fields.json', JSON.stringify(fields, null, 4));
 fs.writeFileSync('data/presets/presets.json', JSON.stringify(presets, null, 4));
 fs.writeFileSync('data/presets.yaml',
-    YAML.dump({en: {presets: translate}}, {sortKeys: sortKeys})
+    YAML.safeDump({en: {presets: translate}}, {sortKeys: sortKeys, lineWidth: -1})
         .replace(/\'.*#\':/g, '#')
 );
 
