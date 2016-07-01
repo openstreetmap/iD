@@ -1042,6 +1042,9 @@
             "internet_access/fee": {
                 "label": "Internet Access Fee"
             },
+            "kerb": {
+                "label": "Curb Ramp"
+            },
             "lamp_type": {
                 "label": "Type"
             },
@@ -1364,9 +1367,6 @@
             },
             "site": {
                 "label": "Type"
-            },
-            "sloped_curb": {
-                "label": "Sloped Curb"
             },
             "smoking": {
                 "label": "Smoking",
