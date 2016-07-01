@@ -1289,8 +1289,9 @@
             "amenity": "pharmacy"
         },
         "terms": [
-            "drug",
-            "medicine"
+            "drug*",
+            "med*",
+            "prescription"
         ],
         "name": "Pharmacy"
     },
@@ -8288,7 +8289,7 @@
         "name": "Cheese Store"
     },
     "shop/chemist": {
-        "icon": "chemist",
+        "icon": "grocery",
         "fields": [
             "operator",
             "address",
@@ -8302,7 +8303,12 @@
         "tags": {
             "shop": "chemist"
         },
-        "name": "Chemist"
+        "terms": [
+            "med*",
+            "drug*",
+            "gift"
+        ],
+        "name": "Drugstore"
     },
     "shop/chocolate": {
         "icon": "shop",
@@ -33779,7 +33785,7 @@
             "shop": "chemist"
         },
         "name": "dm",
-        "icon": "chemist",
+        "icon": "grocery",
         "geometry": [
             "point",
             "area"
@@ -33798,7 +33804,7 @@
             "shop": "chemist"
         },
         "name": "Müller",
-        "icon": "chemist",
+        "icon": "grocery",
         "geometry": [
             "point",
             "area"
@@ -33817,7 +33823,7 @@
             "shop": "chemist"
         },
         "name": "Schlecker",
-        "icon": "chemist",
+        "icon": "grocery",
         "geometry": [
             "point",
             "area"
@@ -33836,7 +33842,7 @@
             "shop": "chemist"
         },
         "name": "Etos",
-        "icon": "chemist",
+        "icon": "grocery",
         "geometry": [
             "point",
             "area"
@@ -33855,7 +33861,7 @@
             "shop": "chemist"
         },
         "name": "Bipa",
-        "icon": "chemist",
+        "icon": "grocery",
         "geometry": [
             "point",
             "area"
@@ -33874,7 +33880,7 @@
             "shop": "chemist"
         },
         "name": "Rossmann",
-        "icon": "chemist",
+        "icon": "grocery",
         "geometry": [
             "point",
             "area"
@@ -33893,7 +33899,7 @@
             "shop": "chemist"
         },
         "name": "DM Drogeriemarkt",
-        "icon": "chemist",
+        "icon": "grocery",
         "geometry": [
             "point",
             "area"
@@ -33912,7 +33918,7 @@
             "shop": "chemist"
         },
         "name": "Ihr Platz",
-        "icon": "chemist",
+        "icon": "grocery",
         "geometry": [
             "point",
             "area"
@@ -33931,7 +33937,7 @@
             "shop": "chemist"
         },
         "name": "Douglas",
-        "icon": "chemist",
+        "icon": "grocery",
         "geometry": [
             "point",
             "area"
@@ -33950,7 +33956,7 @@
             "shop": "chemist"
         },
         "name": "Kruidvat",
-        "icon": "chemist",
+        "icon": "grocery",
         "geometry": [
             "point",
             "area"
