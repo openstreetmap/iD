@@ -1814,7 +1814,7 @@
             },
             "amenity/pharmacy": {
                 "name": "Pharmacy",
-                "terms": "drug,medicine"
+                "terms": "drug*,med*,prescription"
             },
             "amenity/place_of_worship": {
                 "name": "Place of Worship",
@@ -3481,8 +3481,8 @@
                 "terms": ""
             },
             "shop/chemist": {
-                "name": "Chemist",
-                "terms": ""
+                "name": "Drugstore",
+                "terms": "med*,drug*,gift"
             },
             "shop/chocolate": {
                 "name": "Chocolate Store",
