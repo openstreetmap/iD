@@ -4041,7 +4041,7 @@
             "crossing",
             "access",
             "surface",
-            "sloped_curb",
+            "kerb",
             "tactile_paving"
         ],
         "geometry": [
@@ -4060,7 +4060,7 @@
             "crossing",
             "access",
             "surface",
-            "sloped_curb",
+            "kerb",
             "tactile_paving"
         ],
         "geometry": [
@@ -4289,7 +4289,7 @@
     "highway/crossing": {
         "fields": [
             "crossing",
-            "sloped_curb",
+            "kerb",
             "tactile_paving"
         ],
         "geometry": [
@@ -4304,7 +4304,7 @@
     "highway/crosswalk": {
         "fields": [
             "crossing",
-            "sloped_curb",
+            "kerb",
             "tactile_paving"
         ],
         "geometry": [

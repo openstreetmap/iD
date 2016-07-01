@@ -3,7 +3,7 @@
         "crossing",
         "access",
         "surface",
-        "sloped_curb",
+        "kerb",
         "tactile_paving"
     ],
     "geometry": [
