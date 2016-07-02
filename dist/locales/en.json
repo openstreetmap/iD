@@ -2920,6 +2920,10 @@
                 "name": "Breakwater",
                 "terms": ""
             },
+            "man_made/bridge": {
+                "name": "Bridge",
+                "terms": ""
+            },
             "man_made/chimney": {
                 "name": "Chimney",
                 "terms": ""
