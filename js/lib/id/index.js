@@ -61,6 +61,10 @@
 	        return [this[0][0], this[0][1], this[1][0], this[1][1]];
 	    },
 
+	    bbox: function() {
+	        return { minX: this[0][0], minY: this[0][1], maxX: this[1][0], maxY: this[1][1] };
+	    },
+
 	    polygon: function() {
 	        return [
 	            [this[0][0], this[0][1]],
@@ -2168,15 +2172,77 @@
 		return module = { exports: {} }, fn(module, module.exports), module.exports;
 	}
 
-	var rbush = createCommonjsModule(function (module) {
-	/*
-	 (c) 2015, Vladimir Agafonkin
-	 RBush, a JavaScript library for high-performance 2D spatial indexing of points and rectangles.
-	 https://github.com/mourner/rbush
-	*/
-
-	(function () {
+	var index$1 = createCommonjsModule(function (module) {
 	'use strict';
+
+	module.exports = partialSort;
+
+	// Floyd-Rivest selection algorithm:
+	// Rearrange items so that all items in the [left, k] range are smaller than all items in (k, right];
+	// The k-th element will have the (k - left + 1)th smallest value in [left, right]
+
+	function partialSort(arr, k, left, right, compare) {
+	    left = left || 0;
+	    right = right || (arr.length - 1);
+	    compare = compare || defaultCompare;
+
+	    while (right > left) {
+	        if (right - left > 600) {
+	            var n = right - left + 1;
+	            var m = k - left + 1;
+	            var z = Math.log(n);
+	            var s = 0.5 * Math.exp(2 * z / 3);
+	            var sd = 0.5 * Math.sqrt(z * s * (n - s) / n) * (m - n / 2 < 0 ? -1 : 1);
+	            var newLeft = Math.max(left, Math.floor(k - m * s / n + sd));
+	            var newRight = Math.min(right, Math.floor(k + (n - m) * s / n + sd));
+	            partialSort(arr, k, newLeft, newRight, compare);
+	        }
+
+	        var t = arr[k];
+	        var i = left;
+	        var j = right;
+
+	        swap(arr, left, k);
+	        if (compare(arr[right], t) > 0) swap(arr, left, right);
+
+	        while (i < j) {
+	            swap(arr, i, j);
+	            i++;
+	            j--;
+	            while (compare(arr[i], t) < 0) i++;
+	            while (compare(arr[j], t) > 0) j--;
+	        }
+
+	        if (compare(arr[left], t) === 0) swap(arr, left, j);
+	        else {
+	            j++;
+	            swap(arr, j, right);
+	        }
+
+	        if (j <= k) left = j + 1;
+	        if (k <= j) right = j - 1;
+	    }
+	}
+
+	function swap(arr, i, j) {
+	    var tmp = arr[i];
+	    arr[i] = arr[j];
+	    arr[j] = tmp;
+	}
+
+	function defaultCompare(a, b) {
+	    return a < b ? -1 : a > b ? 1 : 0;
+	}
+	});
+
+	var require$$0 = (index$1 && typeof index$1 === 'object' && 'default' in index$1 ? index$1['default'] : index$1);
+
+	var index = createCommonjsModule(function (module) {
+	'use strict';
+
+	module.exports = rbush;
+
+	var quickselect = require$$0;
 
 	function rbush(maxEntries, format) {
 	    if (!(this instanceof rbush)) return new rbush(maxEntries, format);
@@ -2204,7 +2270,7 @@
 	            result = [],
 	            toBBox = this.toBBox;
 
-	        if (!intersects(bbox, node.bbox)) return result;
+	        if (!intersects(bbox, node)) return result;
 
 	        var nodesToSearch = [],
 	            i, len, child, childBBox;
@@ -2213,7 +2279,7 @@
 	            for (i = 0, len = node.children.length; i < len; i++) {
 
 	                child = node.children[i];
-	                childBBox = node.leaf ? toBBox(child) : child.bbox;
+	                childBBox = node.leaf ? toBBox(child) : child;
 
 	                if (intersects(bbox, childBBox)) {
 	                    if (node.leaf) result.push(child);
@@ -2232,7 +2298,7 @@
 	        var node = this.data,
 	            toBBox = this.toBBox;
 
-	        if (!intersects(bbox, node.bbox)) return false;
+	        if (!intersects(bbox, node)) return false;
 
 	        var nodesToSearch = [],
 	            i, len, child, childBBox;
@@ -2241,7 +2307,7 @@
 	            for (i = 0, len = node.children.length; i < len; i++) {
 
 	                child = node.children[i];
-	                childBBox = node.leaf ? toBBox(child) : child.bbox;
+	                childBBox = node.leaf ? toBBox(child) : child;
 
 	                if (intersects(bbox, childBBox)) {
 	                    if (node.leaf || contains(bbox, childBBox)) return true;
@@ -2296,16 +2362,11 @@
 	    },
 
 	    clear: function () {
-	        this.data = {
-	            children: [],
-	            height: 1,
-	            bbox: empty(),
-	            leaf: true
-	        };
+	        this.data = createNode([]);
 	        return this;
 	    },
 
-	    remove: function (item) {
+	    remove: function (item, equalsFn) {
 	        if (!item) return this;
 
 	        var node = this.data,
@@ -2325,7 +2386,7 @@
 	            }
 
 	            if (node.leaf) { // check current node
-	                index = node.children.indexOf(item);
+	                index = findItem(item, node.children, equalsFn);
 
 	                if (index !== -1) {
 	                    // item found, remove the item and condense tree upwards
@@ -2336,7 +2397,7 @@
 	                }
 	            }
 
-	            if (!goingUp && !node.leaf && contains(node.bbox, bbox)) { // go down
+	            if (!goingUp && !node.leaf && contains(node, bbox)) { // go down
 	                path.push(node);
 	                indexes.push(i);
 	                i = 0;
@@ -2356,8 +2417,8 @@
 
 	    toBBox: function (item) { return item; },
 
-	    compareMinX: function (a, b) { return a[0] - b[0]; },
-	    compareMinY: function (a, b) { return a[1] - b[1]; },
+	    compareMinX: compareNodeMinX,
+	    compareMinY: compareNodeMinY,
 
 	    toJSON: function () { return this.data; },
 
@@ -2385,12 +2446,7 @@
 
 	        if (N <= M) {
 	            // reached leaf level; return leaf
-	            node = {
-	                children: items.slice(left, right + 1),
-	                height: 1,
-	                bbox: null,
-	                leaf: true
-	            };
+	            node = createNode(items.slice(left, right + 1));
 	            calcBBox(node, this.toBBox);
 	            return node;
 	        }
@@ -2403,12 +2459,9 @@
 	            M = Math.ceil(N / Math.pow(M, height - 1));
 	        }
 
-	        node = {
-	            children: [],
-	            height: height,
-	            bbox: null,
-	            leaf: false
-	        };
+	        node = createNode([]);
+	        node.leaf = false;
+	        node.height = height;
 
 	        // split the items into M mostly square tiles
 
@@ -2451,8 +2504,8 @@
 
 	            for (i = 0, len = node.children.length; i < len; i++) {
 	                child = node.children[i];
-	                area = bboxArea(child.bbox);
-	                enlargement = enlargedArea(bbox, child.bbox) - area;
+	                area = bboxArea(child);
+	                enlargement = enlargedArea(bbox, child) - area;
 
 	                // choose entry with the least area enlargement
 	                if (enlargement < minEnlargement) {
@@ -2478,7 +2531,7 @@
 	    _insert: function (item, level, isNode) {
 
 	        var toBBox = this.toBBox,
-	            bbox = isNode ? item.bbox : toBBox(item),
+	            bbox = isNode ? item : toBBox(item),
 	            insertPath = [];
 
 	        // find the best node for accommodating the item, saving all nodes along the path too
@@ -2486,7 +2539,7 @@
 
 	        // put the item into the node
 	        node.children.push(item);
-	        extend(node.bbox, bbox);
+	        extend(node, bbox);
 
 	        // split on node overflow; propagate upwards if necessary
 	        while (level >= 0) {
@@ -2511,14 +2564,9 @@
 
 	        var splitIndex = this._chooseSplitIndex(node, m, M);
 
-	        var newNode = {
-	            children: node.children.splice(splitIndex, node.children.length - splitIndex),
-	            height: node.height,
-	            bbox: null,
-	            leaf: false
-	        };
-
-	        if (node.leaf) newNode.leaf = true;
+	        var newNode = createNode(node.children.splice(splitIndex, node.children.length - splitIndex));
+	        newNode.height = node.height;
+	        newNode.leaf = node.leaf;
 
 	        calcBBox(node, this.toBBox);
 	        calcBBox(newNode, this.toBBox);
@@ -2529,12 +2577,9 @@
 
 	    _splitRoot: function (node, newNode) {
 	        // split root node
-	        this.data = {
-	            children: [node, newNode],
-	            height: node.height + 1,
-	            bbox: null,
-	            leaf: false
-	        };
+	        this.data = createNode([node, newNode]);
+	        this.data.height = node.height + 1;
+	        this.data.leaf = false;
 	        calcBBox(this.data, this.toBBox);
 	    },
 
@@ -2596,13 +2641,13 @@
 
 	        for (i = m; i < M - m; i++) {
 	            child = node.children[i];
-	            extend(leftBBox, node.leaf ? toBBox(child) : child.bbox);
+	            extend(leftBBox, node.leaf ? toBBox(child) : child);
 	            margin += bboxMargin(leftBBox);
 	        }
 
 	        for (i = M - m - 1; i >= m; i--) {
 	            child = node.children[i];
-	            extend(rightBBox, node.leaf ? toBBox(child) : child.bbox);
+	            extend(rightBBox, node.leaf ? toBBox(child) : child);
 	            margin += bboxMargin(rightBBox);
 	        }
 
@@ -2612,7 +2657,7 @@
 	    _adjustParentBBoxes: function (bbox, path, level) {
 	        // adjust bboxes along the given tree path
 	        for (var i = level; i >= 0; i--) {
-	            extend(path[i].bbox, bbox);
+	            extend(path[i], bbox);
 	        }
 	    },
 
@@ -2642,71 +2687,97 @@
 	        this.compareMinX = new Function('a', 'b', compareArr.join(format[0]));
 	        this.compareMinY = new Function('a', 'b', compareArr.join(format[1]));
 
-	        this.toBBox = new Function('a', 'return [a' + format.join(', a') + '];');
+	        this.toBBox = new Function('a',
+	            'return {minX: a' + format[0] +
+	            ', minY: a' + format[1] +
+	            ', maxX: a' + format[2] +
+	            ', maxY: a' + format[3] + '};');
 	    }
 	};
 
+	function findItem(item, items, equalsFn) {
+	    if (!equalsFn) return items.indexOf(item);
+
+	    for (var i = 0; i < items.length; i++) {
+	        if (equalsFn(item, items[i])) return i;
+	    }
+	    return -1;
+	}
 
 	// calculate node's bbox from bboxes of its children
 	function calcBBox(node, toBBox) {
-	    node.bbox = distBBox(node, 0, node.children.length, toBBox);
+	    distBBox(node, 0, node.children.length, toBBox, node);
 	}
 
 	// min bounding rectangle of node children from k to p-1
-	function distBBox(node, k, p, toBBox) {
-	    var bbox = empty();
+	function distBBox(node, k, p, toBBox, destNode) {
+	    if (!destNode) destNode = createNode(null);
+	    destNode.minX = Infinity;
+	    destNode.minY = Infinity;
+	    destNode.maxX = -Infinity;
+	    destNode.maxY = -Infinity;
 
 	    for (var i = k, child; i < p; i++) {
 	        child = node.children[i];
-	        extend(bbox, node.leaf ? toBBox(child) : child.bbox);
+	        extend(destNode, node.leaf ? toBBox(child) : child);
 	    }
 
-	    return bbox;
+	    return destNode;
 	}
 
-	function empty() { return [Infinity, Infinity, -Infinity, -Infinity]; }
-
 	function extend(a, b) {
-	    a[0] = Math.min(a[0], b[0]);
-	    a[1] = Math.min(a[1], b[1]);
-	    a[2] = Math.max(a[2], b[2]);
-	    a[3] = Math.max(a[3], b[3]);
+	    a.minX = Math.min(a.minX, b.minX);
+	    a.minY = Math.min(a.minY, b.minY);
+	    a.maxX = Math.max(a.maxX, b.maxX);
+	    a.maxY = Math.max(a.maxY, b.maxY);
 	    return a;
 	}
 
-	function compareNodeMinX(a, b) { return a.bbox[0] - b.bbox[0]; }
-	function compareNodeMinY(a, b) { return a.bbox[1] - b.bbox[1]; }
+	function compareNodeMinX(a, b) { return a.minX - b.minX; }
+	function compareNodeMinY(a, b) { return a.minY - b.minY; }
 
-	function bboxArea(a)   { return (a[2] - a[0]) * (a[3] - a[1]); }
-	function bboxMargin(a) { return (a[2] - a[0]) + (a[3] - a[1]); }
+	function bboxArea(a)   { return (a.maxX - a.minX) * (a.maxY - a.minY); }
+	function bboxMargin(a) { return (a.maxX - a.minX) + (a.maxY - a.minY); }
 
 	function enlargedArea(a, b) {
-	    return (Math.max(b[2], a[2]) - Math.min(b[0], a[0])) *
-	           (Math.max(b[3], a[3]) - Math.min(b[1], a[1]));
+	    return (Math.max(b.maxX, a.maxX) - Math.min(b.minX, a.minX)) *
+	           (Math.max(b.maxY, a.maxY) - Math.min(b.minY, a.minY));
 	}
 
 	function intersectionArea(a, b) {
-	    var minX = Math.max(a[0], b[0]),
-	        minY = Math.max(a[1], b[1]),
-	        maxX = Math.min(a[2], b[2]),
-	        maxY = Math.min(a[3], b[3]);
+	    var minX = Math.max(a.minX, b.minX),
+	        minY = Math.max(a.minY, b.minY),
+	        maxX = Math.min(a.maxX, b.maxX),
+	        maxY = Math.min(a.maxY, b.maxY);
 
 	    return Math.max(0, maxX - minX) *
 	           Math.max(0, maxY - minY);
 	}
 
 	function contains(a, b) {
-	    return a[0] <= b[0] &&
-	           a[1] <= b[1] &&
-	           b[2] <= a[2] &&
-	           b[3] <= a[3];
+	    return a.minX <= b.minX &&
+	           a.minY <= b.minY &&
+	           b.maxX <= a.maxX &&
+	           b.maxY <= a.maxY;
 	}
 
 	function intersects(a, b) {
-	    return b[0] <= a[2] &&
-	           b[1] <= a[3] &&
-	           b[2] >= a[0] &&
-	           b[3] >= a[1];
+	    return b.minX <= a.maxX &&
+	           b.minY <= a.maxY &&
+	           b.maxX >= a.minX &&
+	           b.maxY >= a.minY;
+	}
+
+	function createNode(children) {
+	    return {
+	        children: children,
+	        height: 1,
+	        leaf: true,
+	        minX: Infinity,
+	        minY: Infinity,
+	        maxX: -Infinity,
+	        maxY: -Infinity
+	    };
 	}
 
 	// sort an array so that items come in groups of n unsorted items, with groups sorted between each other;
@@ -2723,88 +2794,30 @@
 	        if (right - left <= n) continue;
 
 	        mid = left + Math.ceil((right - left) / n / 2) * n;
-	        select(arr, left, right, mid, compare);
+	        quickselect(arr, mid, left, right, compare);
 
 	        stack.push(left, mid, mid, right);
 	    }
 	}
-
-	// Floyd-Rivest selection algorithm:
-	// sort an array between left and right (inclusive) so that the smallest k elements come first (unordered)
-	function select(arr, left, right, k, compare) {
-	    var n, i, z, s, sd, newLeft, newRight, t, j;
-
-	    while (right > left) {
-	        if (right - left > 600) {
-	            n = right - left + 1;
-	            i = k - left + 1;
-	            z = Math.log(n);
-	            s = 0.5 * Math.exp(2 * z / 3);
-	            sd = 0.5 * Math.sqrt(z * s * (n - s) / n) * (i - n / 2 < 0 ? -1 : 1);
-	            newLeft = Math.max(left, Math.floor(k - i * s / n + sd));
-	            newRight = Math.min(right, Math.floor(k + (n - i) * s / n + sd));
-	            select(arr, newLeft, newRight, k, compare);
-	        }
-
-	        t = arr[k];
-	        i = left;
-	        j = right;
-
-	        swap(arr, left, k);
-	        if (compare(arr[right], t) > 0) swap(arr, left, right);
-
-	        while (i < j) {
-	            swap(arr, i, j);
-	            i++;
-	            j--;
-	            while (compare(arr[i], t) < 0) i++;
-	            while (compare(arr[j], t) > 0) j--;
-	        }
-
-	        if (compare(arr[left], t) === 0) swap(arr, left, j);
-	        else {
-	            j++;
-	            swap(arr, j, right);
-	        }
-
-	        if (j <= k) left = j + 1;
-	        if (k <= j) right = j - 1;
-	    }
-	}
-
-	function swap(arr, i, j) {
-	    var tmp = arr[i];
-	    arr[i] = arr[j];
-	    arr[j] = tmp;
-	}
-
-
-	// export as AMD/CommonJS module or global variable
-	if (typeof define === 'function' && define.amd) define('rbush', function () { return rbush; });
-	else if (typeof module !== 'undefined') module.exports = rbush;
-	else if (typeof self !== 'undefined') self.rbush = rbush;
-	else window.rbush = rbush;
-
-	})();
 	});
 
-	var rbush$1 = (rbush && typeof rbush === 'object' && 'default' in rbush ? rbush['default'] : rbush);
+	var rbush = (index && typeof index === 'object' && 'default' in index ? index['default'] : index);
 
 	function Tree(head) {
-	    var rtree = rbush$1(),
-	        rectangles = {};
+	    var rtree = rbush(),
+	        bboxes = {};
 
-	    function entityRectangle(entity) {
-	        var rect = entity.extent(head).rectangle();
-	        rect.id = entity.id;
-	        rectangles[entity.id] = rect;
-	        return rect;
+	    function entityBBox(entity) {
+	        var bbox = entity.extent(head).bbox();
+	        bbox.id = entity.id;
+	        bboxes[entity.id] = bbox;
+	        return bbox;
 	    }
 
 	    function updateParents(entity, insertions, memo) {
 	        head.parentWays(entity).forEach(function(way) {
-	            if (rectangles[way.id]) {
-	                rtree.remove(rectangles[way.id]);
+	            if (bboxes[way.id]) {
+	                rtree.remove(bboxes[way.id]);
 	                insertions[way.id] = way;
 	            }
 	            updateParents(way, insertions, memo);
@@ -2813,8 +2826,8 @@
 	        head.parentRelations(entity).forEach(function(relation) {
 	            if (memo[entity.id]) return;
 	            memo[entity.id] = true;
-	            if (rectangles[relation.id]) {
-	                rtree.remove(rectangles[relation.id]);
+	            if (bboxes[relation.id]) {
+	                rtree.remove(bboxes[relation.id]);
 	                insertions[relation.id] = relation;
 	            }
 	            updateParents(relation, insertions, memo);
@@ -2832,11 +2845,11 @@
 	            if (!entity.visible)
 	                continue;
 
-	            if (head.entities.hasOwnProperty(entity.id) || rectangles[entity.id]) {
+	            if (head.entities.hasOwnProperty(entity.id) || bboxes[entity.id]) {
 	                if (!force) {
 	                    continue;
-	                } else if (rectangles[entity.id]) {
-	                    rtree.remove(rectangles[entity.id]);
+	                } else if (bboxes[entity.id]) {
+	                    rtree.remove(bboxes[entity.id]);
 	                }
 	            }
 
@@ -2844,7 +2857,7 @@
 	            updateParents(entity, insertions, {});
 	        }
 
-	        rtree.load(_.map(insertions, entityRectangle));
+	        rtree.load(_.map(insertions, entityBBox));
 
 	        return tree;
 	    };
@@ -2857,12 +2870,12 @@
 	            head = graph;
 
 	            diff.deleted().forEach(function(entity) {
-	                rtree.remove(rectangles[entity.id]);
-	                delete rectangles[entity.id];
+	                rtree.remove(bboxes[entity.id]);
+	                delete bboxes[entity.id];
 	            });
 
 	            diff.modified().forEach(function(entity) {
-	                rtree.remove(rectangles[entity.id]);
+	                rtree.remove(bboxes[entity.id]);
 	                insertions[entity.id] = entity;
 	                updateParents(entity, insertions, {});
 	            });
@@ -2871,11 +2884,11 @@
 	                insertions[entity.id] = entity;
 	            });
 
-	            rtree.load(_.map(insertions, entityRectangle));
+	            rtree.load(_.map(insertions, entityBBox));
 	        }
 
-	        return rtree.search(extent.rectangle()).map(function(rect) {
-	            return head.entity(rect.id);
+	        return rtree.search(extent.bbox()).map(function(bbox) {
+	            return head.entity(bbox.id);
 	        });
 	    };
 
@@ -3527,7 +3540,7 @@
 	    };
 	}
 
-	var index = createCommonjsModule(function (module) {
+	var index$2 = createCommonjsModule(function (module) {
 	module.exports = element;
 	module.exports.pair = pair;
 	module.exports.format = format;
@@ -12503,16 +12516,16 @@
 
 	        var mouse = context.mouse(),
 	            pad = 50,
-	            rect = [mouse[0] - pad, mouse[1] - pad, mouse[0] + pad, mouse[1] + pad],
-	            ids = _.map(rtree.search(rect), 'id');
+	            bbox = { minX: mouse[0] - pad, minY: mouse[1] - pad, maxX: mouse[0] + pad, maxY: mouse[1] + pad },
+	            ids = _.map(rtree.search(bbox), 'id');
 
 	        if (!ids.length) return;
 	        layers.selectAll('.' + ids.join(', .'))
 	            .classed('proximate', true);
 	    }
 
-	    var rtree = rbush$1(),
-	        rectangles = {};
+	    var rtree = rbush(),
+	        bboxes = {};
 
 	    function drawLabels(surface, graph, entities, filter, dimensions, fullRedraw) {
 	        var hidePoints = !surface.selectAll('.node.point').node();
@@ -12522,10 +12535,10 @@
 
 	        if (fullRedraw) {
 	            rtree.clear();
-	            rectangles = {};
+	            bboxes = {};
 	        } else {
 	            for (i = 0; i < entities.length; i++) {
-	                rtree.remove(rectangles[entities[i].id]);
+	                rtree.remove(bboxes[entities[i].id]);
 	            }
 	        }
 
@@ -12599,8 +12612,8 @@
 	                    y: coord[1] + offset[1],
 	                    textAnchor: offset[2]
 	                };
-	            var rect = [p.x - m, p.y - m, p.x + width + m, p.y + height + m];
-	            if (tryInsert(rect, entity.id)) return p;
+	            var bbox = { minX: p.x - m, minY: p.y - m, maxX: p.x + width + m, maxY: p.y + height + m };
+	            if (tryInsert(bbox, entity.id)) return p;
 	        }
 
 
@@ -12616,14 +12629,14 @@
 	                if (start < 0 || start + width > length) continue;
 	                var sub = subpath(nodes, start, start + width),
 	                    rev = reverse(sub),
-	                    rect = [
-	                        Math.min(sub[0][0], sub[sub.length - 1][0]) - 10,
-	                        Math.min(sub[0][1], sub[sub.length - 1][1]) - 10,
-	                        Math.max(sub[0][0], sub[sub.length - 1][0]) + 20,
-	                        Math.max(sub[0][1], sub[sub.length - 1][1]) + 30
-	                    ];
+	                    bbox = {
+	                        minX: Math.min(sub[0][0], sub[sub.length - 1][0]) - 10,
+	                        minY: Math.min(sub[0][1], sub[sub.length - 1][1]) - 10,
+	                        maxX: Math.max(sub[0][0], sub[sub.length - 1][0]) + 20,
+	                        maxY: Math.max(sub[0][1], sub[sub.length - 1][1]) + 30
+	                    };
 	                if (rev) sub = sub.reverse();
-	                if (tryInsert(rect, entity.id)) return {
+	                if (tryInsert(bbox, entity.id)) return {
 	                    'font-size': height + 2,
 	                    lineString: lineString(sub),
 	                    startOffset: offset + '%'
@@ -12635,7 +12648,7 @@
 	            var centroid = path.centroid(entity.asGeoJSON(graph, true)),
 	                extent = entity.extent(graph),
 	                entitywidth = projection(extent[1])[0] - projection(extent[0])[0],
-	                rect;
+	                bbox;
 
 	            if (isNaN(centroid[0]) || entitywidth < 20) return;
 
@@ -12652,24 +12665,23 @@
 	                p.y = centroid[1] + textOffset;
 	                p.textAnchor = 'middle';
 	                p.height = height;
-	                rect = [p.x - width/2, p.y, p.x + width/2, p.y + height + textOffset];
+	                bbox = { minX: p.x - width/2, minY: p.y, maxX: p.x + width/2, maxY: p.y + height + textOffset };
 	            } else {
-	                rect = [iconX, iconY, iconX + iconSize, iconY + iconSize];
+	                bbox = { minX: iconX, minY: iconY, maxX: iconX + iconSize, maxY: iconY + iconSize };
 	            }
 
-	            if (tryInsert(rect, entity.id)) return p;
+	            if (tryInsert(bbox, entity.id)) return p;
 
 	        }
 
-	        function tryInsert(rect, id) {
+	        function tryInsert(bbox, id) {
 	            // Check that label is visible
-	            if (rect[0] < 0 || rect[1] < 0 || rect[2] > dimensions[0] ||
-	                rect[3] > dimensions[1]) return false;
-	            var v = rtree.search(rect).length === 0;
+	            if (bbox.minX < 0 || bbox.minY < 0 || bbox.maxX > dimensions[0] || bbox.maxY > dimensions[1]) return false;
+	            var v = rtree.search(bbox).length === 0;
 	            if (v) {
-	                rect.id = id;
-	                rtree.insert(rect);
-	                rectangles[id] = rect;
+	                bbox.id = id;
+	                rtree.insert(bbox);
+	                bboxes[id] = bbox;
 	            }
 	            return v;
 	        }
@@ -12706,11 +12718,11 @@
 	        if (showDebug) {
 	            var gj = rtree.all().map(function(d) {
 	                return { type: 'Polygon', coordinates: [[
-	                    [d[0], d[1]],
-	                    [d[2], d[1]],
-	                    [d[2], d[3]],
-	                    [d[0], d[3]],
-	                    [d[0], d[1]]
+	                    [d.minX, d.minY],
+	                    [d.maxX, d.minY],
+	                    [d.maxX, d.maxY],
+	                    [d.minX, d.maxY],
+	                    [d.minX, d.minY]
 	                ]]};
 	            });
 

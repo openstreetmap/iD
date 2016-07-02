@@ -50,6 +50,10 @@ _.extend(Extent.prototype, {
         return [this[0][0], this[0][1], this[1][0], this[1][1]];
     },
 
+    bbox: function() {
+        return { minX: this[0][0], minY: this[0][1], maxX: this[1][0], maxY: this[1][1] };
+    },
+
     polygon: function() {
         return [
             [this[0][0], this[0][1]],
