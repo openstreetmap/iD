@@ -1,56 +1,55 @@
 import { ui } from './ui';
 import { presetObj } from './preset/index';
-import {
-    Account,
-    Attribution,
-    Background,
-    cmd,
-    Commit,
-    confirm,
-    Conflicts,
-    Contributors,
-    Disclosure,
-    EntityEditor,
-    FeatureInfo,
-    FeatureList,
-    flash,
-    FullScreen,
-    Geolocate,
-    Help,
-    Info,
-    Inspector,
-    intro,
-    Lasso,
-    Loading,
-    MapData,
-    MapInMap,
-    modal,
-    Modes,
-    Notice,
-    preset,
-    PresetIcon,
-    PresetList,
-    RadialMenu,
-    RawMemberEditor,
-    RawMembershipEditor,
-    RawTagEditor,
-    Restore,
-    Save,
-    Scale,
-    SelectionList,
-    Sidebar,
-    SourceSwitch,
-    Spinner,
-    Splash,
-    Status,
-    Success,
-    TagReference,
-    Toggle,
-    tooltipHtml,
-    UndoRedo,
-    ViewOnOSM,
-    Zoom
-} from './core/index';
+import { Account } from './account';
+import { Attribution } from './attribution';
+import { Background } from './background';
+import { cmd } from './cmd';
+import { Commit } from './commit';
+import { confirm } from './confirm';
+import { Conflicts } from './conflicts';
+import { Contributors } from './contributors';
+import { Disclosure } from './disclosure';
+import { EntityEditor } from './entity_editor';
+import { FeatureInfo } from './feature_info';
+import { FeatureList } from './feature_list';
+import { flash } from './flash';
+import { FullScreen } from './full_screen';
+import { Geolocate } from './geolocate';
+import { Help } from './help';
+import { Info } from './info';
+import { Inspector } from './inspector';
+import { intro } from './intro';
+import { Lasso } from './lasso';
+import { Loading } from './loading';
+import { MapData } from './map_data';
+import { MapInMap } from './map_in_map';
+import { modal } from './modal';
+import { Modes } from './modes';
+import { Notice } from './notice';
+import { preset } from './preset';
+import { PresetIcon } from './preset_icon';
+import { PresetList } from './preset_list';
+import { RadialMenu } from './radial_menu';
+import { RawMemberEditor } from './raw_member_editor';
+import { RawMembershipEditor } from './raw_membership_editor';
+import { RawTagEditor } from './raw_tag_editor';
+import { Restore } from './restore';
+import { Save } from './save';
+import { Scale } from './scale';
+import { SelectionList } from './selection_list';
+import { Sidebar } from './sidebar';
+import { SourceSwitch } from './source_switch';
+import { Spinner } from './spinner';
+import { Splash } from './splash';
+import { Status } from './status';
+import { Success } from './success';
+import { TagReference } from './tag_reference';
+import { Toggle } from './toggle';
+import { tooltipHtml } from './tooltipHtml';
+import { UndoRedo } from './undo_redo';
+import { ViewOnOSM } from './view_on_osm';
+import { Zoom } from './zoom';
+
 export {ui};
 
 ui.preset = preset;
