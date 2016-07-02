@@ -1384,6 +1384,10 @@
         },
         {
             "key": "man_made",
+            "value": "bridge"
+        },
+        {
+            "key": "man_made",
             "value": "chimney"
         },
         {

@@ -6080,6 +6080,15 @@
         },
         "name": "Breakwater"
     },
+    "man_made/bridge": {
+        "geometry": [
+            "line"
+        ],
+        "tags": {
+            "man_made": "bridge"
+        },
+        "name": "Bridge"
+    },
     "man_made/chimney": {
         "geometry": [
             "point",
