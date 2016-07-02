@@ -466,6 +466,9 @@ en:
       internet_access/fee:
         # 'internet_access:fee=*'
         label: Internet Access Fee
+      kerb:
+        # kerb=*
+        label: Curb Ramp
       lamp_type:
         # lamp_type=*
         label: Type
@@ -868,9 +871,6 @@ en:
       site:
         # site=*
         label: Type
-      sloped_curb:
-        # sloped_curb=*
-        label: Sloped Curb
       smoking:
         # smoking=*
         label: Smoking
@@ -1394,7 +1394,7 @@ en:
       amenity/pharmacy:
         # amenity=pharmacy
         name: Pharmacy
-        # 'terms: drug,medicine'
+        # 'terms: drug*,med*,prescription'
         terms: '<translate with synonyms or related terms for ''Pharmacy'', separated by commas>'
       amenity/place_of_worship:
         # amenity=place_of_worship
@@ -3209,8 +3209,9 @@ en:
         terms: '<translate with synonyms or related terms for ''Cheese Store'', separated by commas>'
       shop/chemist:
         # shop=chemist
-        name: Chemist
-        terms: '<translate with synonyms or related terms for ''Chemist'', separated by commas>'
+        name: Drugstore
+        # 'terms: med*,drug*,gift'
+        terms: '<translate with synonyms or related terms for ''Drugstore'', separated by commas>'
       shop/chocolate:
         # shop=chocolate
         name: Chocolate Store
