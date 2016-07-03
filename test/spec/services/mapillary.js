@@ -71,43 +71,43 @@ describe('iD.services.mapillary', function() {
             expect(spy).to.have.been.not.called;
         });
 
-        // it('loads multiple pages of image results', function() {
-        //     var spy = sinon.spy();
-        //     mapillary.on('loadedImages', spy);
-        //     mapillary.loadImages(context.projection, dimensions);
+        it.skip('loads multiple pages of image results', function() {
+            var spy = sinon.spy();
+            mapillary.on('loadedImages', spy);
+            mapillary.loadImages(context.projection, dimensions);
 
-        //     var features0 = [],
-        //         features1 = [],
-        //         i;
+            var features0 = [],
+                features1 = [],
+                i;
 
-        //     for (i = 0; i < 1000; i++) {
-        //         features0.push({
-        //             type: 'Feature',
-        //             geometry: { type: 'Point', coordinates: [10,0] },
-        //             properties: { ca: 90, key: String(i) }
-        //         });
-        //     }
-        //     for (i = 0; i < 500; i++) {
-        //         features1.push({
-        //             type: 'Feature',
-        //             geometry: { type: 'Point', coordinates: [10,0] },
-        //             properties: { ca: 90, key: String(1000 + i) }
-        //         });
-        //     }
+            for (i = 0; i < 1000; i++) {
+                features0.push({
+                    type: 'Feature',
+                    geometry: { type: 'Point', coordinates: [10,0] },
+                    properties: { ca: 90, key: String(i) }
+                });
+            }
+            for (i = 0; i < 500; i++) {
+                features1.push({
+                    type: 'Feature',
+                    geometry: { type: 'Point', coordinates: [10,0] },
+                    properties: { ca: 90, key: String(1000 + i) }
+                });
+            }
 
-        //     var match0 = /page=0/,
-        //         response0 = { type: 'FeatureCollection', features: features0 },
-        //         match1 = /page=1/,
-        //         response1 = { type: 'FeatureCollection', features: features1 };
+            var match0 = /page=0/,
+                response0 = { type: 'FeatureCollection', features: features0 },
+                match1 = /page=1/,
+                response1 = { type: 'FeatureCollection', features: features1 };
 
-        //     server.respondWith('GET', match0,
-        //         [200, { 'Content-Type': 'application/json' }, JSON.stringify(response0) ]);
-        //     server.respondWith('GET', match1,
-        //         [200, { 'Content-Type': 'application/json' }, JSON.stringify(response1) ]);
-        //     server.respond();
+            server.respondWith('GET', match0,
+                [200, { 'Content-Type': 'application/json' }, JSON.stringify(response0) ]);
+            server.respondWith('GET', match1,
+                [200, { 'Content-Type': 'application/json' }, JSON.stringify(response1) ]);
+            server.respond();
 
-        //     expect(spy).to.have.been.calledTwice;
-        // });
+            expect(spy).to.have.been.calledTwice;
+        });
     });
 
     describe('#loadSigns', function() {
@@ -197,59 +197,59 @@ describe('iD.services.mapillary', function() {
             expect(spy).to.have.been.not.called;
         });
 
-        // it('loads multiple pages of signs results', function() {
-        //     var spy = sinon.spy();
-        //     mapillary.on('loadedSigns', spy);
-        //     mapillary.loadSigns(context, context.projection, dimensions);
+        it.skip('loads multiple pages of signs results', function() {
+            var spy = sinon.spy();
+            mapillary.on('loadedSigns', spy);
+            mapillary.loadSigns(context, context.projection, dimensions);
 
-        //     var rects = [{
-        //             'package': 'trafficsign_us_3.0',
-        //             rect: [ 0.805, 0.463, 0.833, 0.502 ],
-        //             length: 4,
-        //             score: '1.27',
-        //             type: 'regulatory--maximum-speed-limit-65--us'
-        //         }],
-        //         features0 = [],
-        //         features1 = [],
-        //         i;
+            var rects = [{
+                    'package': 'trafficsign_us_3.0',
+                    rect: [ 0.805, 0.463, 0.833, 0.502 ],
+                    length: 4,
+                    score: '1.27',
+                    type: 'regulatory--maximum-speed-limit-65--us'
+                }],
+                features0 = [],
+                features1 = [],
+                i;
 
-        //     for (i = 0; i < 1000; i++) {
-        //         features0.push({
-        //             type: 'Feature',
-        //             geometry: { type: 'Point', coordinates: [10,0] },
-        //             properties: { rects: rects, key: String(i) }
-        //         });
-        //     }
-        //     for (i = 0; i < 500; i++) {
-        //         features1.push({
-        //             type: 'Feature',
-        //             geometry: { type: 'Point', coordinates: [10,0] },
-        //             properties: { rects: rects, key: String(1000 + i) }
-        //         });
-        //     }
+            for (i = 0; i < 1000; i++) {
+                features0.push({
+                    type: 'Feature',
+                    geometry: { type: 'Point', coordinates: [10,0] },
+                    properties: { rects: rects, key: String(i) }
+                });
+            }
+            for (i = 0; i < 500; i++) {
+                features1.push({
+                    type: 'Feature',
+                    geometry: { type: 'Point', coordinates: [10,0] },
+                    properties: { rects: rects, key: String(1000 + i) }
+                });
+            }
 
-        //     var match0 = /page=0/,
-        //         response0 = { type: 'FeatureCollection', features: features0 },
-        //         match1 = /page=1/,
-        //         response1 = { type: 'FeatureCollection', features: features1 };
+            var match0 = /page=0/,
+                response0 = { type: 'FeatureCollection', features: features0 },
+                match1 = /page=1/,
+                response1 = { type: 'FeatureCollection', features: features1 };
 
-        //     server.respondWith('GET', match0,
-        //         [200, { 'Content-Type': 'application/json' }, JSON.stringify(response0) ]);
-        //     server.respondWith('GET', match1,
-        //         [200, { 'Content-Type': 'application/json' }, JSON.stringify(response1) ]);
-        //     server.respond();
+            server.respondWith('GET', match0,
+                [200, { 'Content-Type': 'application/json' }, JSON.stringify(response0) ]);
+            server.respondWith('GET', match1,
+                [200, { 'Content-Type': 'application/json' }, JSON.stringify(response1) ]);
+            server.respond();
 
-        //     expect(spy).to.have.been.calledTwice;
-        // });
+            expect(spy).to.have.been.calledTwice;
+        });
     });
 
 
     describe('#images', function() {
         it('returns images in the visible map area', function() {
             var features = [
-                [10, 0, 10, 0, { key: '0', loc: [10,0], ca: 90 }],
-                [10, 0, 10, 0, { key: '1', loc: [10,0], ca: 90 }],
-                [10, 1, 10, 1, { key: '2', loc: [10,1], ca: 90 }]
+                { minX: 10, minY: 0, maxX: 10, maxY: 0, data: { key: '0', loc: [10,0], ca: 90 } },
+                { minX: 10, minY: 0, maxX: 10, maxY: 0, data: { key: '1', loc: [10,0], ca: 90 } },
+                { minX: 10, minY: 1, maxX: 10, maxY: 1, data: { key: '2', loc: [10,1], ca: 90 } }
             ];
 
             iD.services.mapillary.cache.images.rtree.load(features);
@@ -263,11 +263,11 @@ describe('iD.services.mapillary', function() {
 
         it('limits results no more than 3 stacked images in one spot', function() {
             var features = [
-                [10, 0, 10, 0, { key: '0', loc: [10,0], ca: 90 }],
-                [10, 0, 10, 0, { key: '1', loc: [10,0], ca: 90 }],
-                [10, 0, 10, 0, { key: '2', loc: [10,0], ca: 90 }],
-                [10, 0, 10, 0, { key: '3', loc: [10,0], ca: 90 }],
-                [10, 0, 10, 0, { key: '4', loc: [10,0], ca: 90 }]
+                { minX: 10, minY: 0, maxX: 10, maxY: 0, data: { key: '0', loc: [10,0], ca: 90 } },
+                { minX: 10, minY: 0, maxX: 10, maxY: 0, data: { key: '1', loc: [10,0], ca: 90 } },
+                { minX: 10, minY: 0, maxX: 10, maxY: 0, data: { key: '2', loc: [10,0], ca: 90 } },
+                { minX: 10, minY: 0, maxX: 10, maxY: 0, data: { key: '3', loc: [10,0], ca: 90 } },
+                { minX: 10, minY: 0, maxX: 10, maxY: 0, data: { key: '4', loc: [10,0], ca: 90 } }
             ];
 
             iD.services.mapillary.cache.images.rtree.load(features);
@@ -286,9 +286,9 @@ describe('iD.services.mapillary', function() {
                     type: 'regulatory--maximum-speed-limit-65--us'
                 }],
                 features = [
-                    [10, 0, 10, 0, { key: '0', loc: [10,0], signs: signs }],
-                    [10, 0, 10, 0, { key: '1', loc: [10,0], signs: signs }],
-                    [10, 1, 10, 1, { key: '2', loc: [10,1], signs: signs }]
+                    { minX: 10, minY: 0, maxX: 10, maxY: 0, data: { key: '0', loc: [10,0], signs: signs } },
+                    { minX: 10, minY: 0, maxX: 10, maxY: 0, data: { key: '1', loc: [10,0], signs: signs } },
+                    { minX: 10, minY: 1, maxX: 10, maxY: 1, data: { key: '2', loc: [10,1], signs: signs } }
                 ];
 
             iD.services.mapillary.cache.signs.rtree.load(features);
@@ -309,11 +309,11 @@ describe('iD.services.mapillary', function() {
                     type: 'regulatory--maximum-speed-limit-65--us'
                 }],
                 features = [
-                    [10, 0, 10, 0, { key: '0', loc: [10,0], signs: signs }],
-                    [10, 0, 10, 0, { key: '1', loc: [10,0], signs: signs }],
-                    [10, 0, 10, 0, { key: '2', loc: [10,0], signs: signs }],
-                    [10, 0, 10, 0, { key: '3', loc: [10,0], signs: signs }],
-                    [10, 0, 10, 0, { key: '4', loc: [10,0], signs: signs }]
+                    { minX: 10, minY: 0, maxX: 10, maxY: 0, data: { key: '0', loc: [10,0], signs: signs } },
+                    { minX: 10, minY: 0, maxX: 10, maxY: 0, data: { key: '1', loc: [10,0], signs: signs } },
+                    { minX: 10, minY: 0, maxX: 10, maxY: 0, data: { key: '2', loc: [10,0], signs: signs } },
+                    { minX: 10, minY: 0, maxX: 10, maxY: 0, data: { key: '3', loc: [10,0], signs: signs } },
+                    { minX: 10, minY: 0, maxX: 10, maxY: 0, data: { key: '4', loc: [10,0], signs: signs } }
                 ];
 
             iD.services.mapillary.cache.signs.rtree.load(features);
