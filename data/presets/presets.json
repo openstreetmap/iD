@@ -6082,7 +6082,7 @@
     },
     "man_made/bridge": {
         "geometry": [
-            "line"
+            "area"
         ],
         "tags": {
             "man_made": "bridge"
