@@ -2609,6 +2609,10 @@ en:
         # man_made=breakwater
         name: Breakwater
         terms: '<translate with synonyms or related terms for ''Breakwater'', separated by commas>'
+      man_made/bridge:
+        # man_made=bridge
+        name: Bridge
+        terms: '<translate with synonyms or related terms for ''Bridge'', separated by commas>'
       man_made/chimney:
         # man_made=chimney
         name: Chimney
