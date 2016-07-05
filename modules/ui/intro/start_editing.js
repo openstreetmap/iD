@@ -1,6 +1,9 @@
+import { modal } from '../modal';
+import { icon } from './helper';
+
 export function startEditing(context, reveal) {
     var event = d3.dispatch('done', 'startEditing'),
-        modal,
+        modalSelection,
         timeouts = [];
 
     var step = {
@@ -13,7 +16,7 @@ export function startEditing(context, reveal) {
 
     step.enter = function() {
         reveal('.map-control.help-control',
-            t('intro.startediting.help', { button: iD.ui.intro.icon('#icon-help', 'pre-text') }));
+            t('intro.startediting.help', { button: icon('#icon-help', 'pre-text') }));
 
         timeout(function() {
             reveal('#bar button.save', t('intro.startediting.save'));
@@ -24,19 +27,19 @@ export function startEditing(context, reveal) {
         }, 10000);
 
         timeout(function() {
-            modal = iD.ui.modal(context.container());
+            modalSelection = modal(context.container());
 
-            modal.select('.modal')
+            modalSelection.select('.modal')
                 .attr('class', 'modal-splash modal col6');
 
-            modal.selectAll('.close').remove();
+            modalSelection.selectAll('.close').remove();
 
-            var startbutton = modal.select('.content')
+            var startbutton = modalSelection.select('.content')
                 .attr('class', 'fillL')
                     .append('button')
                         .attr('class', 'modal-section huge-modal-button')
                         .on('click', function() {
-                            modal.remove();
+                            modalSelection.remove();
                         });
 
                 startbutton.append('div')
@@ -49,7 +52,7 @@ export function startEditing(context, reveal) {
     };
 
     step.exit = function() {
-        if (modal) modal.remove();
+        if (modalSelection) modalSelection.remove();
         timeouts.forEach(window.clearTimeout);
     };
 

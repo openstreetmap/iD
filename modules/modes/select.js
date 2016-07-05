@@ -5,7 +5,7 @@ import { DragNode, Browse } from './index';
 import { Extent, pointInPolygon, chooseEdge } from '../geo/index';
 import { AddMidpoint } from '../actions/index';
 import * as Operations from '../operations/index';
-import {  RadialMenu, SelectionList } from '../ui/core/index';
+import {  RadialMenu, SelectionList } from '../ui/index';
 
 export function Select(context, selectedIDs) {
     var mode = {

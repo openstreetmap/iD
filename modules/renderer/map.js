@@ -1,7 +1,7 @@
 import { setTransform, fastMouse } from '../util/index';
 import { interp, Extent } from '../geo/index';
 import { Layers, Areas, Midpoints, Points, Vertices, Lines, Labels } from '../svg/index';
-import { flash } from '../ui/core/index';
+import { flash } from '../ui/index';
 
 export function Map(context) {
     var dimensions = [1, 1],

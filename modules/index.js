@@ -6,6 +6,7 @@ import * as util from './util/index';
 import * as operations from './operations/index';
 import * as presets from './presets/index';
 import * as validations from './validations/index';
+import * as ui from './ui/index';
 
 // core
 export { Connection } from './core/connection';
@@ -34,5 +35,6 @@ export {
   operations,
   presets,
   util,
+  ui,
   validations
 };

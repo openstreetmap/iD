@@ -1,6 +1,8 @@
 import { Select, Browse } from '../modes/index';
 import { sphericalDistance } from '../geo/index';
 import { DeleteMultiple } from '../actions/index';
+import { cmd } from '../ui/index';
+
 export function Delete(selectedIDs, context) {
     var action = DeleteMultiple(selectedIDs);
 
@@ -70,7 +72,7 @@ export function Delete(selectedIDs, context) {
     };
 
     operation.id = 'delete';
-    operation.keys = [iD.ui.cmd('⌘⌫'), iD.ui.cmd('⌘⌦')];
+    operation.keys = [cmd('⌘⌫'), cmd('⌘⌦')];
     operation.title = t('operations.delete.title');
 
     return operation;

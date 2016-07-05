@@ -362,7 +362,7 @@ window.iD = function () {
     context.undo = withDebouncedSave(history.undo);
     context.redo = withDebouncedSave(history.redo);
 
-    ui = iD.ui(context);
+    ui = iD.ui.init(context);
 
     connection = iD.Connection();
 
