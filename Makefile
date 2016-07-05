@@ -74,7 +74,6 @@ dist/iD.js: \
 	js/lib/diff3.js \
 	js/lib/jxon.js \
 	js/lib/lodash.js \
-	js/lib/osmauth.js \
 	js/lib/togeojson.js \
 	js/lib/marked.js \
 	js/id/start.js \
