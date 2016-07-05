@@ -1,6 +1,6 @@
 import { Select } from '../modes/index';
 import { Extent, pointInPolygon } from '../geo/index';
-import { Lasso as uiLasso } from '../ui/core/index';
+import { Lasso as uiLasso } from '../ui/index';
 
 export function Lasso(context) {
 

@@ -1,21 +1,21 @@
-import { modal as modalModule } from './modal';
+import { modal } from './modal';
 
 export function flash(selection) {
-    var modal = modalModule(selection);
+    var modalSelection = modal(selection);
 
-    modal.select('.modal').classed('modal-flash', true);
+    modalSelection.select('.modal').classed('modal-flash', true);
 
-    modal.select('.content')
+    modalSelection.select('.content')
         .classed('modal-section', true)
         .append('div')
         .attr('class', 'description');
 
-    modal.on('click.flash', function() { modal.remove(); });
+    modalSelection.on('click.flash', function() { modalSelection.remove(); });
 
     setTimeout(function() {
-        modal.remove();
+        modalSelection.remove();
         return true;
     }, 1500);
 
-    return modal;
+    return modalSelection;
 }

@@ -3,7 +3,7 @@ import { Graph } from './graph';
 import { Difference } from './difference';
 import { Tree } from './tree';
 import { SessionMutex } from '../util/index';
-import { Loading } from '../ui/core/index';
+import { Loading } from '../ui/index';
 
 export function History(context) {
     var stack, index, tree,

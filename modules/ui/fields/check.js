@@ -1,4 +1,5 @@
 export { check as defaultcheck };
+import { oneWayTags } from '../../core/index';
 export function check(field) {
     var dispatch = d3.dispatch('change'),
         options = field.strings && field.strings.options,
@@ -25,7 +26,7 @@ export function check(field) {
         // where implied oneway tag exists (e.g. `junction=roundabout`) #2220, #1841
         if (field.id === 'oneway') {
             for (var key in entity.tags) {
-                if (key in iD.oneWayTags && (entity.tags[key] in iD.oneWayTags[key])) {
+                if (key in oneWayTags && (entity.tags[key] in oneWayTags[key])) {
                     texts[0] = t('presets.fields.oneway_yes.options.undefined');
                     break;
                 }

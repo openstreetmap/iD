@@ -1,7 +1,7 @@
 import { Icon } from '../svg/index';
 import { Browse } from '../modes/index';
 import { ChangeTags } from '../actions/index';
-import { preset as presetModule } from './preset';
+import { preset } from './preset';
 import { PresetIcon } from './preset_icon';
 import { RawTagEditor } from './raw_tag_editor';
 import { RawMemberEditor } from './raw_member_editor';
@@ -15,10 +15,10 @@ export function EntityEditor(context) {
         modified = false,
         base,
         id,
-        preset,
+        activePreset,
         reference;
 
-    var presetEditor = presetModule(context)
+    var presetEditor = preset(context)
         .on('change', changeTags);
     var rawTagEditor = RawTagEditor(context)
         .on('change', changeTags);
@@ -93,28 +93,28 @@ export function EntityEditor(context) {
 
         selection.selectAll('.preset-reset')
             .on('click', function() {
-                dispatch.choose(preset);
+                dispatch.choose(activePreset);
             });
 
         // Update
         $body.select('.preset-list-item button')
             .call(PresetIcon()
                 .geometry(context.geometry(id))
-                .preset(preset));
+                .preset(activePreset));
 
         $body.select('.preset-list-item .label')
-            .text(preset.name());
+            .text(activePreset.name());
 
         $body.select('.inspector-preset')
             .call(presetEditor
-                .preset(preset)
+                .preset(activePreset)
                 .entityID(id)
                 .tags(tags)
                 .state(state));
 
         $body.select('.raw-tag-editor')
             .call(rawTagEditor
-                .preset(preset)
+                .preset(activePreset)
                 .entityID(id)
                 .tags(tags)
                 .state(state));
@@ -233,10 +233,10 @@ export function EntityEditor(context) {
     };
 
     entityEditor.preset = function(_) {
-        if (!arguments.length) return preset;
-        if (_ !== preset) {
-            preset = _;
-            reference = TagReference(preset.reference(context.geometry(id)), context)
+        if (!arguments.length) return activePreset;
+        if (_ !== activePreset) {
+            activePreset = _;
+            reference = TagReference(activePreset.reference(context.geometry(id)), context)
                 .showing(false);
         }
         return entityEditor;

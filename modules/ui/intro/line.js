@@ -1,4 +1,5 @@
-import { intro } from '../core/index';
+import { icon, pad } from './helper';
+
 import { DeleteMultiple } from '../../actions/index';
 
 export function line(context, reveal) {
@@ -26,7 +27,7 @@ export function line(context, reveal) {
 
         context.map().centerZoom(start, 18);
         reveal('button.add-line',
-            t('intro.lines.add', { button: intro.icon('#icon-line', 'pre-text') }),
+            t('intro.lines.add', { button: icon('#icon-line', 'pre-text') }),
             { tooltipClass: 'intro-lines-add' });
 
         context.on('enter.intro', addLine);
@@ -36,12 +37,12 @@ export function line(context, reveal) {
             context.on('enter.intro', drawLine);
 
             var padding = 150 * Math.pow(2, context.map().zoom() - 18);
-            var pointBox = intro.pad(start, padding, context);
+            var pointBox = pad(start, padding, context);
             reveal(pointBox, t('intro.lines.start'));
 
             context.map().on('move.intro', function() {
                 padding = 150 * Math.pow(2, context.map().zoom() - 18);
-                pointBox = intro.pad(start, padding, context);
+                pointBox = pad(start, padding, context);
                 reveal(pointBox, t('intro.lines.start'), {duration: 0});
             });
         }
@@ -52,12 +53,12 @@ export function line(context, reveal) {
             context.on('enter.intro', retry);
 
             var padding = 300 * Math.pow(2, context.map().zoom() - 19);
-            var pointBox = intro.pad(midpoint, padding, context);
+            var pointBox = pad(midpoint, padding, context);
             reveal(pointBox, t('intro.lines.intersect', {name: t('intro.graph.flower_st')}));
 
             context.map().on('move.intro', function() {
                 padding = 300 * Math.pow(2, context.map().zoom() - 19);
-                pointBox = intro.pad(midpoint, padding, context);
+                pointBox = pad(midpoint, padding, context);
                 reveal(pointBox, t('intro.lines.intersect', {name: t('intro.graph.flower_st')}), {duration: 0});
             });
         }
@@ -65,7 +66,7 @@ export function line(context, reveal) {
         // ended line before creating intersection
         function retry(mode) {
             if (mode.id !== 'select') return;
-            var pointBox = intro.pad(intersection, 30, context),
+            var pointBox = pad(intersection, 30, context),
                 ids = mode.selectedIDs();
             reveal(pointBox, t('intro.lines.restart', {name: t('intro.graph.flower_st')}));
             d3.select(window).on('mousedown.intro', eventCancel, true);
@@ -85,12 +86,12 @@ export function line(context, reveal) {
                 context.on('enter.intro', enterSelect);
 
                 var padding = 900 * Math.pow(2, context.map().zoom() - 19);
-                var pointBox = intro.pad(centroid, padding, context);
+                var pointBox = pad(centroid, padding, context);
                 reveal(pointBox, t('intro.lines.finish'));
 
                 context.map().on('move.intro', function() {
                     padding = 900 * Math.pow(2, context.map().zoom() - 19);
-                    pointBox = intro.pad(centroid, padding, context);
+                    pointBox = pad(centroid, padding, context);
                     reveal(pointBox, t('intro.lines.finish'), {duration: 0});
                 });
             }
@@ -136,7 +137,7 @@ export function line(context, reveal) {
 
         function roadDetails() {
             reveal('.pane',
-                t('intro.lines.describe', { button: intro.icon('#icon-apply', 'pre-text') }));
+                t('intro.lines.describe', { button: icon('#icon-apply', 'pre-text') }));
             context.on('exit.intro', event.done);
         }
 

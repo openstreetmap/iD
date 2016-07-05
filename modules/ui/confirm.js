@@ -1,12 +1,12 @@
-import { modal as modalModule } from './modal';
+import { modal } from './modal';
 
 export function confirm(selection) {
-    var modal = modalModule(selection);
+    var modalSelection = modal(selection);
 
-    modal.select('.modal')
+    modalSelection.select('.modal')
         .classed('modal-alert', true);
 
-    var section = modal.select('.content');
+    var section = modalSelection.select('.content');
 
     section.append('div')
         .attr('class', 'modal-section header');
@@ -17,17 +17,17 @@ export function confirm(selection) {
     var buttons = section.append('div')
         .attr('class', 'modal-section buttons cf');
 
-    modal.okButton = function() {
+    modalSelection.okButton = function() {
         buttons
             .append('button')
             .attr('class', 'action col4')
             .on('click.confirm', function() {
-                modal.remove();
+                modalSelection.remove();
             })
             .text(t('confirm.okay'));
 
-        return modal;
+        return modalSelection;
     };
 
-    return modal;
+    return modalSelection;
 }

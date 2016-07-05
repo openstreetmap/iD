@@ -1,4 +1,4 @@
-import { cmd } from '../ui/core/index';
+import { cmd } from '../ui/index';
 export function Copy(context) {
     var keybinding = d3.keybinding('copy');
 

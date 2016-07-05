@@ -2,7 +2,7 @@ import { Graph } from '../core/index';
 import { displayName, displayType } from '../util/index';
 import { Browse } from './index';
 import { DiscardTags, Noop, MergeRemoteChanges, Revert } from '../actions/index';
-import { Commit, Loading, Success, Conflicts } from '../ui/core/index';
+import { Commit, Loading, Success, Conflicts } from '../ui/index';
 
 export function Save(context) {
     var ui = Commit(context)

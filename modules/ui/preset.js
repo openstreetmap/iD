@@ -1,13 +1,13 @@
 import { Icon } from '../svg/index';
 import { TagReference } from './tag_reference';
 import { Browse } from '../modes/index';
-import { fields as fieldsObj } from './fields/index';
+import { fields } from './fields/index';
 import { Disclosure } from './disclosure';
 
 export function preset(context) {
     var event = d3.dispatch('change'),
         state,
-        fields,
+        fieldsArr,
         preset,
         tags,
         id;
@@ -15,7 +15,7 @@ export function preset(context) {
     function UIField(field, entity, show) {
         field = _.clone(field);
 
-        field.input = fieldsObj[field.type](field, context)
+        field.input = fields[field.type](field, context)
             .on('change', event.change);
 
         if (field.input.entity) field.input.entity(entity);
@@ -78,31 +78,31 @@ export function preset(context) {
     }
 
     function content(selection) {
-        if (!fields) {
+        if (!fieldsArr) {
             var entity = context.entity(id),
                 geometry = context.geometry(id);
 
-            fields = [UIField(context.presets().field('name'), entity)];
+            fieldsArr = [UIField(context.presets().field('name'), entity)];
 
             preset.fields.forEach(function(field) {
                 if (field.matchGeometry(geometry)) {
-                    fields.push(UIField(field, entity, true));
+                    fieldsArr.push(UIField(field, entity, true));
                 }
             });
 
             if (entity.isHighwayIntersection(context.graph())) {
-                fields.push(UIField(context.presets().field('restrictions'), entity, true));
+                fieldsArr.push(UIField(context.presets().field('restrictions'), entity, true));
             }
 
             context.presets().universal().forEach(function(field) {
                 if (preset.fields.indexOf(field) < 0) {
-                    fields.push(UIField(field, entity));
+                    fieldsArr.push(UIField(field, entity));
                 }
             });
         }
 
-        var shown = fields.filter(function(field) { return field.shown(); }),
-            notShown = fields.filter(function(field) { return !field.shown(); });
+        var shown = fieldsArr.filter(function(field) { return field.shown(); }),
+            notShown = fieldsArr.filter(function(field) { return !field.shown(); });
 
         var $form = selection.selectAll('.preset-form')
             .data([0]);
@@ -246,7 +246,7 @@ export function preset(context) {
         if (!arguments.length) return preset;
         if (preset && preset.id === _.id) return presets;
         preset = _;
-        fields = null;
+        fieldsArr = null;
         return presets;
     };
 
@@ -259,7 +259,7 @@ export function preset(context) {
     presets.tags = function(_) {
         if (!arguments.length) return tags;
         tags = _;
-        // Don't reset fields here.
+        // Don't reset fieldsArr here.
         return presets;
     };
 
@@ -267,7 +267,7 @@ export function preset(context) {
         if (!arguments.length) return id;
         if (id === _) return presets;
         id = _;
-        fields = null;
+        fieldsArr = null;
         return presets;
     };
 

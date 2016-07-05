@@ -1,4 +1,4 @@
-import { intro } from '../core/index';
+import { icon, pad } from './helper';
 
 export function area(context, reveal) {
     var event = d3.dispatch('done'),
@@ -13,7 +13,7 @@ export function area(context, reveal) {
             corner = [-85.63565411045074, 41.9417715536927];
         context.map().centerZoom(playground, 19);
         reveal('button.add-area',
-            t('intro.areas.add', { button: intro.icon('#icon-area', 'pre-text') }),
+            t('intro.areas.add', { button: icon('#icon-area', 'pre-text') }),
             { tooltipClass: 'intro-areas-add' });
 
         context.on('enter.intro', addArea);
@@ -23,12 +23,12 @@ export function area(context, reveal) {
             context.on('enter.intro', drawArea);
 
             var padding = 120 * Math.pow(2, context.map().zoom() - 19);
-            var pointBox = intro.pad(corner, padding, context);
+            var pointBox = pad(corner, padding, context);
             reveal(pointBox, t('intro.areas.corner'));
 
             context.map().on('move.intro', function() {
                 padding = 120 * Math.pow(2, context.map().zoom() - 19);
-                pointBox = intro.pad(corner, padding, context);
+                pointBox = pad(corner, padding, context);
                 reveal(pointBox, t('intro.areas.corner'), {duration: 0});
             });
         }
@@ -38,12 +38,12 @@ export function area(context, reveal) {
             context.on('enter.intro', enterSelect);
 
             var padding = 150 * Math.pow(2, context.map().zoom() - 19);
-            var pointBox = intro.pad(playground, padding, context);
+            var pointBox = pad(playground, padding, context);
             reveal(pointBox, t('intro.areas.place'));
 
             context.map().on('move.intro', function() {
                 padding = 150 * Math.pow(2, context.map().zoom() - 19);
-                pointBox = intro.pad(playground, padding, context);
+                pointBox = pad(playground, padding, context);
                 reveal(pointBox, t('intro.areas.place'), {duration: 0});
             });
         }
@@ -72,7 +72,7 @@ export function area(context, reveal) {
 
         function selectedPreset() {
             reveal('.pane',
-                t('intro.areas.describe', { button: intro.icon('#icon-apply', 'pre-text') }));
+                t('intro.areas.describe', { button: icon('#icon-apply', 'pre-text') }));
             context.on('exit.intro', event.done);
         }
     };

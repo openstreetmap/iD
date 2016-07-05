@@ -1,16 +1,16 @@
-import { modal as modalModule } from './modal';
+import { modal } from './modal';
 
 export function Restore(context) {
     return function(selection) {
         if (!context.history().lock() || !context.history().restorableChanges())
             return;
 
-        var modal = modalModule(selection, true);
+        var modalSelection = modal(selection, true);
 
-        modal.select('.modal')
+        modalSelection.select('.modal')
             .attr('class', 'modal fillL col6');
 
-        var introModal = modal.select('.content');
+        var introModal = modalSelection.select('.content');
 
         introModal.attr('class','cf');
 
@@ -32,7 +32,7 @@ export function Restore(context) {
             .text(t('restore.restore'))
             .on('click', function() {
                 context.history().restore();
-                modal.remove();
+                modalSelection.remove();
             });
 
         buttonWrap.append('button')
@@ -40,7 +40,7 @@ export function Restore(context) {
             .text(t('restore.reset'))
             .on('click', function() {
                 context.history().clearSaved();
-                modal.remove();
+                modalSelection.remove();
             });
 
         restore.node().focus();

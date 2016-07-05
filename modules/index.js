@@ -6,6 +6,7 @@ import * as util from './util/index';
 import * as operations from './operations/index';
 import * as presets from './presets/index';
 import * as validations from './validations/index';
+import * as ui from './ui/index';
 
 // core
 export { Connection } from './core/connection';
@@ -25,7 +26,6 @@ export { Background } from './renderer/background';
 export { Features } from './renderer/features';
 export { Map } from './renderer/map';
 export { TileLayer } from './renderer/tile_layer';
-export { ui } from './ui/index';
 
 export {
   actions,
@@ -35,5 +35,6 @@ export {
   operations,
   presets,
   util,
+  ui,
   validations
 };

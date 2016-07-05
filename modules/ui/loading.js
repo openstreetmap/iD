@@ -1,14 +1,14 @@
-import { modal as modalModule } from './modal';
+import { modal } from './modal';
 
 export function Loading(context) {
     var message = '',
         blocking = false,
-        modal;
+        modalSelection;
 
     var loading = function(selection) {
-        modal = modalModule(selection, blocking);
+        modalSelection = modal(selection, blocking);
 
-        var loadertext = modal.select('.content')
+        var loadertext = modalSelection.select('.content')
             .classed('loading-modal', true)
             .append('div')
             .attr('class', 'modal-section fillL');
@@ -20,7 +20,7 @@ export function Loading(context) {
         loadertext.append('h3')
             .text(message);
 
-        modal.select('button.close')
+        modalSelection.select('button.close')
             .attr('class', 'hide');
 
         return loading;
@@ -39,7 +39,7 @@ export function Loading(context) {
     };
 
     loading.close = function() {
-        modal.remove();
+        modalSelection.remove();
     };
 
     return loading;

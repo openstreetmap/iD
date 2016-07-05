@@ -1,4 +1,4 @@
-import { intro } from '../core/index';
+import { icon, pad } from './helper';
 
 export function point(context, reveal) {
     var event = d3.dispatch('done'),
@@ -20,7 +20,7 @@ export function point(context, reveal) {
     step.enter = function() {
         context.map().centerZoom([-85.63279, 41.94394], 19);
         reveal('button.add-point',
-            t('intro.points.add', { button: intro.icon('#icon-point', 'pre-text') }),
+            t('intro.points.add', { button: icon('#icon-point', 'pre-text') }),
             { tooltipClass: 'intro-points-add' });
 
         var corner = [-85.632481,41.944094];
@@ -31,11 +31,11 @@ export function point(context, reveal) {
             if (mode.id !== 'add-point') return;
             context.on('enter.intro', enterSelect);
 
-            var pointBox = intro.pad(corner, 150, context);
+            var pointBox = pad(corner, 150, context);
             reveal(pointBox, t('intro.points.place'));
 
             context.map().on('move.intro', function() {
-                pointBox = intro.pad(corner, 150, context);
+                pointBox = pad(corner, 150, context);
                 reveal(pointBox, t('intro.points.place'), {duration: 0});
             });
         }
@@ -75,7 +75,7 @@ export function point(context, reveal) {
             d3.select('.preset-search-input').on('keydown.intro', null);
             context.history().on('change.intro', null);
             reveal('.entity-editor-pane',
-                t('intro.points.close', { button: intro.icon('#icon-apply', 'pre-text') }));
+                t('intro.points.close', { button: icon('#icon-apply', 'pre-text') }));
         }
 
         function selectPoint() {
@@ -83,11 +83,11 @@ export function point(context, reveal) {
             context.history().on('change.intro', null);
             context.on('enter.intro', enterReselect);
 
-            var pointBox = intro.pad(corner, 150, context);
+            var pointBox = pad(corner, 150, context);
             reveal(pointBox, t('intro.points.reselect'));
 
             context.map().on('move.intro', function() {
-                pointBox = intro.pad(corner, 150, context);
+                pointBox = pad(corner, 150, context);
                 reveal(pointBox, t('intro.points.reselect'), {duration: 0});
             });
         }
@@ -99,7 +99,7 @@ export function point(context, reveal) {
 
             setTimeout(function() {
                 reveal('.entity-editor-pane',
-                    t('intro.points.fixname', { button: intro.icon('#icon-apply', 'pre-text') }));
+                    t('intro.points.fixname', { button: icon('#icon-apply', 'pre-text') }));
                 context.on('exit.intro', deletePoint);
             }, 500);
         }
@@ -108,11 +108,11 @@ export function point(context, reveal) {
             context.on('exit.intro', null);
             context.on('enter.intro', enterDelete);
 
-            var pointBox = intro.pad(corner, 150, context);
+            var pointBox = pad(corner, 150, context);
             reveal(pointBox, t('intro.points.reselect_delete'));
 
             context.map().on('move.intro', function() {
-                pointBox = intro.pad(corner, 150, context);
+                pointBox = pad(corner, 150, context);
                 reveal(pointBox, t('intro.points.reselect_delete'), {duration: 0});
             });
         }
@@ -127,9 +127,9 @@ export function point(context, reveal) {
 
             setTimeout(function() {
                 var node = d3.select('.radial-menu-item-delete').node();
-                var pointBox = intro.pad(node.getBoundingClientRect(), 50, context);
+                var pointBox = pad(node.getBoundingClientRect(), 50, context);
                 reveal(pointBox,
-                    t('intro.points.delete', { button: intro.icon('#operation-delete', 'pre-text') }));
+                    t('intro.points.delete', { button: icon('#operation-delete', 'pre-text') }));
             }, 300);
         }
 

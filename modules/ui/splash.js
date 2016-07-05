@@ -1,4 +1,4 @@
-import { modal as modalModule } from './modal';
+import { modal } from './modal';
 import { intro } from './intro';
 
 export function Splash(context) {
@@ -8,12 +8,12 @@ export function Splash(context) {
 
         context.storage('sawSplash', true);
 
-        var modal = modalModule(selection);
+        var modalSelection = modal(selection);
 
-        modal.select('.modal')
+        modalSelection.select('.modal')
             .attr('class', 'modal-splash modal col6');
 
-        var introModal = modal.select('.content')
+        var introModal = modalSelection.select('.content')
             .append('div')
             .attr('class', 'fillL');
 
@@ -37,15 +37,15 @@ export function Splash(context) {
             .text(t('splash.walkthrough'))
             .on('click', function() {
                 d3.select(document.body).call(intro(context));
-                modal.close();
+                modalSelection.close();
             });
 
         buttons.append('button')
             .attr('class', 'col6 start')
             .text(t('splash.start'))
-            .on('click', modal.close);
+            .on('click', modalSelection.close);
 
-        modal.select('button.close').attr('class','hide');
+        modalSelection.select('button.close').attr('class','hide');
 
     };
 }
