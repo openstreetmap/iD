@@ -1,4 +1,4 @@
-describe('iD.ui.preset.wikipedia', function() {
+describe('wikipedia', function() {
     var entity, context, selection, field, wikiDelay, selectedId;
 
     function wikidataStub() {
@@ -40,7 +40,7 @@ describe('iD.ui.preset.wikipedia', function() {
 
 
     it('recognizes lang:title format', function() {
-        var wikipedia = iD.ui.preset.wikipedia(field, context);
+        var wikipedia = wikipedia(field, context);
         selection.call(wikipedia);
         wikipedia.tags({wikipedia: 'en:Title'});
         expect(selection.selectAll('.wiki-lang').value()).to.equal('English');
@@ -49,7 +49,7 @@ describe('iD.ui.preset.wikipedia', function() {
     });
 
     it('sets language, value, wikidata', function() {
-        var wikipedia = iD.ui.preset.wikipedia(field, context).entity(entity);
+        var wikipedia = wikipedia(field, context).entity(entity);
         wikipedia.on('change', changeTags);
         selection.call(wikipedia);
 
@@ -74,7 +74,7 @@ describe('iD.ui.preset.wikipedia', function() {
     });
 
     it('recognizes pasted URLs', function() {
-        var wikipedia = iD.ui.preset.wikipedia(field, context).entity(entity);
+        var wikipedia = wikipedia(field, context).entity(entity);
         wikipedia.on('change', changeTags);
         selection.call(wikipedia);
 
@@ -85,10 +85,10 @@ describe('iD.ui.preset.wikipedia', function() {
     });
 
     it('preserves existing language', function() {
-        selection.call(iD.ui.preset.wikipedia(field, context));
+        selection.call(wikipedia(field, context));
         selection.selectAll('.wiki-lang').value('Deutsch');
 
-        var wikipedia = iD.ui.preset.wikipedia(field, context);
+        var wikipedia = wikipedia(field, context);
         selection.call(wikipedia);
         wikipedia.tags({});
 
@@ -96,7 +96,7 @@ describe('iD.ui.preset.wikipedia', function() {
     });
 
     it('does not set delayed wikidata tag if wikipedia field has changed', function(done) {
-        var wikipedia = iD.ui.preset.wikipedia(field, context).entity(entity);
+        var wikipedia = wikipedia(field, context).entity(entity);
         wikipedia.on('change', changeTags);
         selection.call(wikipedia);
         wikiDelay = 20;
@@ -127,7 +127,7 @@ describe('iD.ui.preset.wikipedia', function() {
     });
 
     it('does not set delayed wikidata tag if selected entity has changed', function(done) {
-        var wikipedia = iD.ui.preset.wikipedia(field, context).entity(entity);
+        var wikipedia = wikipedia(field, context).entity(entity);
         wikipedia.on('change', changeTags);
         selection.call(wikipedia);
         wikiDelay = 20;

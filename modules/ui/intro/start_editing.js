@@ -1,5 +1,5 @@
-import { intro } from '../intro';
 import { modal } from '../modal';
+import { icon } from './helper';
 
 export function startEditing(context, reveal) {
     var event = d3.dispatch('done', 'startEditing'),
@@ -16,7 +16,7 @@ export function startEditing(context, reveal) {
 
     step.enter = function() {
         reveal('.map-control.help-control',
-            t('intro.startediting.help', { button: intro.icon('#icon-help', 'pre-text') }));
+            t('intro.startediting.help', { button: icon('#icon-help', 'pre-text') }));
 
         timeout(function() {
             reveal('#bar button.save', t('intro.startediting.save'));

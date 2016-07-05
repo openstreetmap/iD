@@ -10,6 +10,6 @@
         "no-invalid-this": 0
     },
     globals: {
-        # "iD": false,
+        "iD": false,
     }
 }
