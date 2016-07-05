@@ -238,8 +238,8 @@ export function Labels(projection, context) {
 
         var mouse = context.mouse(),
             pad = 50,
-            rect = [mouse[0] - pad, mouse[1] - pad, mouse[0] + pad, mouse[1] + pad],
-            ids = _.map(rtree.search(rect), 'id');
+            bbox = { minX: mouse[0] - pad, minY: mouse[1] - pad, maxX: mouse[0] + pad, maxY: mouse[1] + pad },
+            ids = _.map(rtree.search(bbox), 'id');
 
         if (!ids.length) return;
         layers.selectAll('.' + ids.join(', .'))
@@ -247,7 +247,7 @@ export function Labels(projection, context) {
     }
 
     var rtree = rbush(),
-        rectangles = {};
+        bboxes = {};
 
     function drawLabels(surface, graph, entities, filter, dimensions, fullRedraw) {
         var hidePoints = !surface.selectAll('.node.point').node();
@@ -257,10 +257,10 @@ export function Labels(projection, context) {
 
         if (fullRedraw) {
             rtree.clear();
-            rectangles = {};
+            bboxes = {};
         } else {
             for (i = 0; i < entities.length; i++) {
-                rtree.remove(rectangles[entities[i].id]);
+                rtree.remove(bboxes[entities[i].id]);
             }
         }
 
@@ -334,8 +334,8 @@ export function Labels(projection, context) {
                     y: coord[1] + offset[1],
                     textAnchor: offset[2]
                 };
-            var rect = [p.x - m, p.y - m, p.x + width + m, p.y + height + m];
-            if (tryInsert(rect, entity.id)) return p;
+            var bbox = { minX: p.x - m, minY: p.y - m, maxX: p.x + width + m, maxY: p.y + height + m };
+            if (tryInsert(bbox, entity.id)) return p;
         }
 
 
@@ -351,14 +351,14 @@ export function Labels(projection, context) {
                 if (start < 0 || start + width > length) continue;
                 var sub = subpath(nodes, start, start + width),
                     rev = reverse(sub),
-                    rect = [
-                        Math.min(sub[0][0], sub[sub.length - 1][0]) - 10,
-                        Math.min(sub[0][1], sub[sub.length - 1][1]) - 10,
-                        Math.max(sub[0][0], sub[sub.length - 1][0]) + 20,
-                        Math.max(sub[0][1], sub[sub.length - 1][1]) + 30
-                    ];
+                    bbox = {
+                        minX: Math.min(sub[0][0], sub[sub.length - 1][0]) - 10,
+                        minY: Math.min(sub[0][1], sub[sub.length - 1][1]) - 10,
+                        maxX: Math.max(sub[0][0], sub[sub.length - 1][0]) + 20,
+                        maxY: Math.max(sub[0][1], sub[sub.length - 1][1]) + 30
+                    };
                 if (rev) sub = sub.reverse();
-                if (tryInsert(rect, entity.id)) return {
+                if (tryInsert(bbox, entity.id)) return {
                     'font-size': height + 2,
                     lineString: lineString(sub),
                     startOffset: offset + '%'
@@ -370,7 +370,7 @@ export function Labels(projection, context) {
             var centroid = path.centroid(entity.asGeoJSON(graph, true)),
                 extent = entity.extent(graph),
                 entitywidth = projection(extent[1])[0] - projection(extent[0])[0],
-                rect;
+                bbox;
 
             if (isNaN(centroid[0]) || entitywidth < 20) return;
 
@@ -387,24 +387,23 @@ export function Labels(projection, context) {
                 p.y = centroid[1] + textOffset;
                 p.textAnchor = 'middle';
                 p.height = height;
-                rect = [p.x - width/2, p.y, p.x + width/2, p.y + height + textOffset];
+                bbox = { minX: p.x - width/2, minY: p.y, maxX: p.x + width/2, maxY: p.y + height + textOffset };
             } else {
-                rect = [iconX, iconY, iconX + iconSize, iconY + iconSize];
+                bbox = { minX: iconX, minY: iconY, maxX: iconX + iconSize, maxY: iconY + iconSize };
             }
 
-            if (tryInsert(rect, entity.id)) return p;
+            if (tryInsert(bbox, entity.id)) return p;
 
         }
 
-        function tryInsert(rect, id) {
+        function tryInsert(bbox, id) {
             // Check that label is visible
-            if (rect[0] < 0 || rect[1] < 0 || rect[2] > dimensions[0] ||
-                rect[3] > dimensions[1]) return false;
-            var v = rtree.search(rect).length === 0;
+            if (bbox.minX < 0 || bbox.minY < 0 || bbox.maxX > dimensions[0] || bbox.maxY > dimensions[1]) return false;
+            var v = rtree.search(bbox).length === 0;
             if (v) {
-                rect.id = id;
-                rtree.insert(rect);
-                rectangles[id] = rect;
+                bbox.id = id;
+                rtree.insert(bbox);
+                bboxes[id] = bbox;
             }
             return v;
         }
@@ -441,11 +440,11 @@ export function Labels(projection, context) {
         if (showDebug) {
             var gj = rtree.all().map(function(d) {
                 return { type: 'Polygon', coordinates: [[
-                    [d[0], d[1]],
-                    [d[2], d[1]],
-                    [d[2], d[3]],
-                    [d[0], d[3]],
-                    [d[0], d[1]]
+                    [d.minX, d.minY],
+                    [d.maxX, d.minY],
+                    [d.maxX, d.maxY],
+                    [d.minX, d.maxY],
+                    [d.minX, d.minY]
                 ]]};
             });
 

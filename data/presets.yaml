@@ -2056,6 +2056,10 @@ en:
         name: Ambulance Station
         # 'terms: EMS,EMT,rescue'
         terms: '<translate with synonyms or related terms for ''Ambulance Station'', separated by commas>'
+      emergency/defibrillator:
+        # emergency=defibrillator
+        name: Defibrillator
+        terms: '<translate with synonyms or related terms for ''Defibrillator'', separated by commas>'
       emergency/fire_hydrant:
         # emergency=fire_hydrant
         name: Fire Hydrant
@@ -2609,6 +2613,10 @@ en:
         # man_made=breakwater
         name: Breakwater
         terms: '<translate with synonyms or related terms for ''Breakwater'', separated by commas>'
+      man_made/bridge:
+        # man_made=bridge
+        name: Bridge
+        terms: '<translate with synonyms or related terms for ''Bridge'', separated by commas>'
       man_made/chimney:
         # man_made=chimney
         name: Chimney

@@ -198,7 +198,7 @@ export function mapillary() {
                     if (which === 'images') d.ca = feature.properties.ca;
                     if (which === 'signs') d.signs = feature.properties.rects;
 
-                    features.push([loc[0], loc[1], loc[0], loc[1], d]);
+                    features.push({minX: loc[0], minY: loc[1], maxX: loc[0], maxY: loc[1], data: d});
                 }
 
                 cache.rtree.load(features);
@@ -255,9 +255,9 @@ export function mapillary() {
 
         var partitions = partitionViewport(psize, projection, dimensions);
         return _.flatten(_.compact(_.map(partitions, function(extent) {
-            return rtree.search(extent.rectangle())
+            return rtree.search(extent.bbox())
                 .slice(0, limit)
-                .map(function(d) { return d[4]; });
+                .map(function(d) { return d.data; });
         })));
     }
 

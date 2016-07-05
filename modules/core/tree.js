@@ -3,19 +3,19 @@ import rbush from 'rbush';
 
 export function Tree(head) {
     var rtree = rbush(),
-        rectangles = {};
+        bboxes = {};
 
-    function entityRectangle(entity) {
-        var rect = entity.extent(head).rectangle();
-        rect.id = entity.id;
-        rectangles[entity.id] = rect;
-        return rect;
+    function entityBBox(entity) {
+        var bbox = entity.extent(head).bbox();
+        bbox.id = entity.id;
+        bboxes[entity.id] = bbox;
+        return bbox;
     }
 
     function updateParents(entity, insertions, memo) {
         head.parentWays(entity).forEach(function(way) {
-            if (rectangles[way.id]) {
-                rtree.remove(rectangles[way.id]);
+            if (bboxes[way.id]) {
+                rtree.remove(bboxes[way.id]);
                 insertions[way.id] = way;
             }
             updateParents(way, insertions, memo);
@@ -24,8 +24,8 @@ export function Tree(head) {
         head.parentRelations(entity).forEach(function(relation) {
             if (memo[entity.id]) return;
             memo[entity.id] = true;
-            if (rectangles[relation.id]) {
-                rtree.remove(rectangles[relation.id]);
+            if (bboxes[relation.id]) {
+                rtree.remove(bboxes[relation.id]);
                 insertions[relation.id] = relation;
             }
             updateParents(relation, insertions, memo);
@@ -43,11 +43,11 @@ export function Tree(head) {
             if (!entity.visible)
                 continue;
 
-            if (head.entities.hasOwnProperty(entity.id) || rectangles[entity.id]) {
+            if (head.entities.hasOwnProperty(entity.id) || bboxes[entity.id]) {
                 if (!force) {
                     continue;
-                } else if (rectangles[entity.id]) {
-                    rtree.remove(rectangles[entity.id]);
+                } else if (bboxes[entity.id]) {
+                    rtree.remove(bboxes[entity.id]);
                 }
             }
 
@@ -55,7 +55,7 @@ export function Tree(head) {
             updateParents(entity, insertions, {});
         }
 
-        rtree.load(_.map(insertions, entityRectangle));
+        rtree.load(_.map(insertions, entityBBox));
 
         return tree;
     };
@@ -68,12 +68,12 @@ export function Tree(head) {
             head = graph;
 
             diff.deleted().forEach(function(entity) {
-                rtree.remove(rectangles[entity.id]);
-                delete rectangles[entity.id];
+                rtree.remove(bboxes[entity.id]);
+                delete bboxes[entity.id];
             });
 
             diff.modified().forEach(function(entity) {
-                rtree.remove(rectangles[entity.id]);
+                rtree.remove(bboxes[entity.id]);
                 insertions[entity.id] = entity;
                 updateParents(entity, insertions, {});
             });
@@ -82,11 +82,11 @@ export function Tree(head) {
                 insertions[entity.id] = entity;
             });
 
-            rtree.load(_.map(insertions, entityRectangle));
+            rtree.load(_.map(insertions, entityBBox));
         }
 
-        return rtree.search(extent.rectangle()).map(function(rect) {
-            return head.entity(rect.id);
+        return rtree.search(extent.bbox()).map(function(bbox) {
+            return head.entity(bbox.id);
         });
     };
 

@@ -7,10 +7,10 @@ export function nominatim() {
 
     nominatim.countryCode = function(location, callback) {
         var cache = iD.services.nominatim.cache,
-            countryCodes = cache.search([location[0], location[1], location[0], location[1]]);
+            countryCodes = cache.search({ minX: location[0], minY: location[1], maxX: location[0], maxY: location[1] });
 
         if (countryCodes.length > 0)
-            return callback(null, countryCodes[0][4]);
+            return callback(null, countryCodes[0].data);
 
         d3.json(endpoint +
             iD.util.qsString({
@@ -26,7 +26,7 @@ export function nominatim() {
 
                 var extent = iD.geo.Extent(location).padByMeters(1000);
 
-                cache.insert(extent.rectangle().concat(result.address.country_code));
+                cache.insert(Object.assign(extent.bbox(), { data: result.address.country_code }));
 
                 callback(null, result.address.country_code);
             });

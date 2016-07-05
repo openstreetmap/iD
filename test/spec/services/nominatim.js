@@ -15,7 +15,7 @@ describe('iD.services.nominatim', function() {
         return iD.util.stringQs(url.substring(url.indexOf('?') + 1));
     }
 
-    describe('#countryCode', function() {
+    describe.skip('#countryCode', function() {
         it('calls the given callback with the results of the country code query', function() {
             var callback = sinon.spy();
             nominatim.countryCode([16, 48], callback);
