@@ -1,3 +1,5 @@
+import toGeoJSON from 'togeojson';
+
 export function Gpx(projection, context, dispatch) {
     var showLabels = true,
         layer;
