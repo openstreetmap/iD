@@ -1,6 +1,7 @@
 import { Icon } from '../svg/index';
 import { intro } from './intro';
 import { tooltipHtml } from './tooltipHtml';
+import marked from 'marked';
 
 export function Help(context) {
     var key = 'H';

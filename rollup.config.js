@@ -3,7 +3,7 @@ import commonjs from 'rollup-plugin-commonjs';
 
 export default {
     plugins: [
-        nodeResolve({ jsnext: true, main: true }),
+        nodeResolve({ jsnext: true, main: true, browser: true }),
         commonjs()
     ]
 };
