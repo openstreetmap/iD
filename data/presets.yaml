@@ -2056,6 +2056,10 @@ en:
         name: Ambulance Station
         # 'terms: EMS,EMT,rescue'
         terms: "<translate with synonyms or related terms for 'Ambulance Station', separated by commas>"
+      emergency/defibrillator:
+        # emergency=defibrillator
+        name: Defibrillator
+        terms: "<translate with synonyms or related terms for 'Defibrillator', separated by commas>"
       emergency/fire_hydrant:
         # emergency=fire_hydrant
         name: Fire Hydrant

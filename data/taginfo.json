@@ -886,6 +886,10 @@
         },
         {
             "key": "emergency",
+            "value": "defibrillator"
+        },
+        {
+            "key": "emergency",
             "value": "fire_hydrant"
         },
         {

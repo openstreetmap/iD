@@ -2412,6 +2412,10 @@
                 "name": "Ambulance Station",
                 "terms": "EMS,EMT,rescue"
             },
+            "emergency/defibrillator": {
+                "name": "Defibrillator",
+                "terms": ""
+            },
             "emergency/fire_hydrant": {
                 "name": "Fire Hydrant",
                 "terms": ""

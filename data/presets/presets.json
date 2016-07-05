@@ -3994,6 +3994,20 @@
         },
         "name": "Ambulance Station"
     },
+    "emergency/defibrillator": {
+        "fields": [
+            "access",
+            "opening_hours",
+            "phone"
+        ],
+        "geometry": [
+            "point"
+        ],
+        "tags": {
+            "emergency": "defibrillator"
+        },
+        "name": "Defibrillator"
+    },
     "emergency/fire_hydrant": {
         "fields": [
             "fire_hydrant/type"
