@@ -4193,19 +4193,19 @@
 
    const JXON = new (function () {
      var
-       sValueProp = "keyValue", sAttributesProp = "keyAttributes", sAttrPref = "@", /* you can customize these values */
+       sValueProp = 'keyValue', sAttributesProp = 'keyAttributes', sAttrPref = '@', /* you can customize these values */
        aCache = [], rIsNull = /^\s*$/, rIsBool = /^(?:true|false)$/i;
 
      function parseText (sValue) {
        if (rIsNull.test(sValue)) { return null; }
-       if (rIsBool.test(sValue)) { return sValue.toLowerCase() === "true"; }
+       if (rIsBool.test(sValue)) { return sValue.toLowerCase() === 'true'; }
        if (isFinite(sValue)) { return parseFloat(sValue); }
        if (isFinite(Date.parse(sValue))) { return new Date(sValue); }
        return sValue;
      }
 
      function EmptyTree () { }
-     EmptyTree.prototype.toString = function () { return "null"; };
+     EmptyTree.prototype.toString = function () { return 'null'; };
      EmptyTree.prototype.valueOf = function () { return null; };
 
      function objectify (vValue) {
@@ -4218,15 +4218,15 @@
          bAttributes = oParentNode.hasAttributes(), bHighVerb = Boolean(nVerb & 2);
 
        var
-         sProp, vContent, nLength = 0, sCollectedTxt = "",
+         sProp, vContent, nLength = 0, sCollectedTxt = '',
          vResult = bHighVerb ? {} : /* put here the default value for empty nodes: */ true;
 
        if (bChildren) {
          for (var oNode, nItem = 0; nItem < oParentNode.childNodes.length; nItem++) {
            oNode = oParentNode.childNodes.item(nItem);
-           if (oNode.nodeType === 4) { sCollectedTxt += oNode.nodeValue; } /* nodeType is "CDATASection" (4) */
-           else if (oNode.nodeType === 3) { sCollectedTxt += oNode.nodeValue.trim(); } /* nodeType is "Text" (3) */
-           else if (oNode.nodeType === 1 && !oNode.prefix) { aCache.push(oNode); } /* nodeType is "Element" (1) */
+           if (oNode.nodeType === 4) { sCollectedTxt += oNode.nodeValue; } /* nodeType is 'CDATASection' (4) */
+           else if (oNode.nodeType === 3) { sCollectedTxt += oNode.nodeValue.trim(); } /* nodeType is 'Text' (3) */
+           else if (oNode.nodeType === 1 && !oNode.prefix) { aCache.push(oNode); } /* nodeType is 'Element' (1) */
          }
        }
 
@@ -4249,7 +4249,7 @@
        if (bAttributes) {
          var
            nAttrLen = oParentNode.attributes.length,
-           sAPrefix = bNesteAttr ? "" : sAttrPref, oAttrParent = bNesteAttr ? {} : vResult;
+           sAPrefix = bNesteAttr ? '' : sAttrPref, oAttrParent = bNesteAttr ? {} : vResult;
 
          for (var oAttrib, nAttrib = 0; nAttrib < nAttrLen; nLength++, nAttrib++) {
            oAttrib = oParentNode.attributes.item(nAttrib);
@@ -4313,12 +4313,12 @@
      }
 
      this.build = function (oXMLParent, nVerbosity /* optional */, bFreeze /* optional */, bNesteAttributes /* optional */) {
-       var _nVerb = arguments.length > 1 && typeof nVerbosity === "number" ? nVerbosity & 3 : /* put here the default verbosity level: */ 1;
+       var _nVerb = arguments.length > 1 && typeof nVerbosity === 'number' ? nVerbosity & 3 : /* put here the default verbosity level: */ 1;
        return createObjTree(oXMLParent, _nVerb, bFreeze || false, arguments.length > 3 ? bNesteAttributes : _nVerb === 3);    
      };
 
      this.unbuild = function (oObjTree) {    
-       var oNewDoc = document.implementation.createDocument("", "", null);
+       var oNewDoc = document.implementation.createDocument('', '', null);
        loadObjTree(oNewDoc, oNewDoc, oObjTree);
        return oNewDoc;
      };
