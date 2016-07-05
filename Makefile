@@ -75,7 +75,6 @@ dist/iD.js: \
 	js/lib/jxon.js \
 	js/lib/lodash.js \
 	js/lib/togeojson.js \
-	js/lib/marked.js \
 	js/id/start.js \
 	js/id/id.js \
 	$(MODULE_TARGETS) \
