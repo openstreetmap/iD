@@ -648,13 +648,6 @@
             }
         },
         "fields": {
-            "access_simple": {
-                "label": "Allowed Access",
-                "placeholder": "yes"
-            },
-            "access_toilets": {
-                "label": "Access"
-            },
             "access": {
                 "label": "Allowed Access",
                 "placeholder": "Not Specified",
@@ -695,6 +688,13 @@
                         "description": "Access permitted but rider must dismount"
                     }
                 }
+            },
+            "access_simple": {
+                "label": "Allowed Access",
+                "placeholder": "yes"
+            },
+            "access_toilets": {
+                "label": "Access"
             },
             "address": {
                 "label": "Address",
@@ -794,10 +794,10 @@
             "brand": {
                 "label": "Brand"
             },
-            "building_area": {
+            "building": {
                 "label": "Building"
             },
-            "building": {
+            "building_area": {
                 "label": "Building"
             },
             "capacity": {
@@ -962,11 +962,11 @@
             "fixme": {
                 "label": "Fix Me"
             },
-            "fuel_multi": {
-                "label": "Fuel Types"
-            },
             "fuel": {
                 "label": "Fuel"
+            },
+            "fuel_multi": {
+                "label": "Fuel Types"
             },
             "gauge": {
                 "label": "Gauge"
@@ -1016,15 +1016,15 @@
             "icao": {
                 "label": "ICAO"
             },
+            "incline": {
+                "label": "Incline"
+            },
             "incline_steps": {
                 "label": "Incline",
                 "options": {
                     "up": "Up",
                     "down": "Down"
                 }
-            },
-            "incline": {
-                "label": "Incline"
             },
             "information": {
                 "label": "Type"
@@ -1058,15 +1058,6 @@
             "layer": {
                 "label": "Layer"
             },
-            "leaf_cycle_singular": {
-                "label": "Leaf Cycle",
-                "options": {
-                    "evergreen": "Evergreen",
-                    "deciduous": "Deciduous",
-                    "semi_evergreen": "Semi-Evergreen",
-                    "semi_deciduous": "Semi-Deciduous"
-                }
-            },
             "leaf_cycle": {
                 "label": "Leaf Cycle",
                 "options": {
@@ -1077,12 +1068,13 @@
                     "mixed": "Mixed"
                 }
             },
-            "leaf_type_singular": {
-                "label": "Leaf Type",
+            "leaf_cycle_singular": {
+                "label": "Leaf Cycle",
                 "options": {
-                    "broadleaved": "Broadleaved",
-                    "needleleaved": "Needleleaved",
-                    "leafless": "Leafless"
+                    "evergreen": "Evergreen",
+                    "deciduous": "Deciduous",
+                    "semi_evergreen": "Semi-Evergreen",
+                    "semi_deciduous": "Semi-Deciduous"
                 }
             },
             "leaf_type": {
@@ -1091,6 +1083,14 @@
                     "broadleaved": "Broadleaved",
                     "needleleaved": "Needleleaved",
                     "mixed": "Mixed",
+                    "leafless": "Leafless"
+                }
+            },
+            "leaf_type_singular": {
+                "label": "Leaf Type",
+                "options": {
+                    "broadleaved": "Broadleaved",
+                    "needleleaved": "Needleleaved",
                     "leafless": "Leafless"
                 }
             },
@@ -1175,18 +1175,18 @@
             "office": {
                 "label": "Type"
             },
-            "oneway_yes": {
-                "label": "One Way",
-                "options": {
-                    "undefined": "Assumed to be Yes",
-                    "yes": "Yes",
-                    "no": "No"
-                }
-            },
             "oneway": {
                 "label": "One Way",
                 "options": {
                     "undefined": "Assumed to be No",
+                    "yes": "Yes",
+                    "no": "No"
+                }
+            },
+            "oneway_yes": {
+                "label": "One Way",
+                "options": {
+                    "undefined": "Assumed to be Yes",
                     "yes": "Yes",
                     "no": "No"
                 }
@@ -1274,11 +1274,11 @@
             "population": {
                 "label": "Population"
             },
-            "power_supply": {
-                "label": "Power Supply"
-            },
             "power": {
                 "label": "Type"
+            },
+            "power_supply": {
+                "label": "Power Supply"
             },
             "railway": {
                 "label": "Type"
@@ -1304,10 +1304,10 @@
             "rooms": {
                 "label": "Rooms"
             },
-            "route_master": {
+            "route": {
                 "label": "Type"
             },
-            "route": {
+            "route_master": {
                 "label": "Type"
             },
             "sac_scale": {
@@ -1328,15 +1328,6 @@
             "seasonal": {
                 "label": "Seasonal"
             },
-            "service_rail": {
-                "label": "Service Type",
-                "options": {
-                    "spur": "Spur",
-                    "yard": "Yard",
-                    "siding": "Siding",
-                    "crossover": "Crossover"
-                }
-            },
             "service": {
                 "label": "Type"
             },
@@ -1356,11 +1347,20 @@
                     "no": "No"
                 }
             },
-            "shelter_type": {
-                "label": "Type"
+            "service_rail": {
+                "label": "Service Type",
+                "options": {
+                    "spur": "Spur",
+                    "yard": "Yard",
+                    "siding": "Siding",
+                    "crossover": "Crossover"
+                }
             },
             "shelter": {
                 "label": "Shelter"
+            },
+            "shelter_type": {
+                "label": "Type"
             },
             "shop": {
                 "label": "Type"
@@ -1401,13 +1401,13 @@
             "source": {
                 "label": "Source"
             },
+            "sport": {
+                "label": "Sport"
+            },
             "sport_ice": {
                 "label": "Sport"
             },
             "sport_racing": {
-                "label": "Sport"
-            },
-            "sport": {
                 "label": "Sport"
             },
             "stars": {
@@ -1505,11 +1505,11 @@
             "vending": {
                 "label": "Type of Goods"
             },
-            "water_point": {
-                "label": "Water Point"
-            },
             "water": {
                 "label": "Type"
+            },
+            "water_point": {
+                "label": "Water Point"
             },
             "waterway": {
                 "label": "Type"
@@ -1800,16 +1800,16 @@
                 "name": "Nightclub",
                 "terms": "disco*,night club,dancing,dance club"
             },
+            "amenity/parking": {
+                "name": "Car Parking",
+                "terms": ""
+            },
             "amenity/parking_entrance": {
                 "name": "Parking Garage Entrance/Exit",
                 "terms": ""
             },
             "amenity/parking_space": {
                 "name": "Parking Space",
-                "terms": ""
-            },
-            "amenity/parking": {
-                "name": "Car Parking",
                 "terms": ""
             },
             "amenity/pharmacy": {
@@ -2412,6 +2412,10 @@
                 "name": "Ambulance Station",
                 "terms": "EMS,EMT,rescue"
             },
+            "emergency/defibrillator": {
+                "name": "Defibrillator",
+                "terms": ""
+            },
             "emergency/fire_hydrant": {
                 "name": "Fire Hydrant",
                 "terms": ""
@@ -2516,6 +2520,10 @@
                 "name": "Mini-Roundabout",
                 "terms": ""
             },
+            "highway/motorway": {
+                "name": "Motorway",
+                "terms": ""
+            },
             "highway/motorway_junction": {
                 "name": "Motorway Junction / Exit",
                 "terms": ""
@@ -2523,10 +2531,6 @@
             "highway/motorway_link": {
                 "name": "Motorway Link",
                 "terms": "ramp,on ramp,off ramp"
-            },
-            "highway/motorway": {
-                "name": "Motorway",
-                "terms": ""
             },
             "highway/path": {
                 "name": "Path",
@@ -2536,13 +2540,13 @@
                 "name": "Pedestrian Street",
                 "terms": ""
             },
-            "highway/primary_link": {
-                "name": "Primary Link",
-                "terms": "ramp,on ramp,off ramp"
-            },
             "highway/primary": {
                 "name": "Primary Road",
                 "terms": ""
+            },
+            "highway/primary_link": {
+                "name": "Primary Link",
+                "terms": "ramp,on ramp,off ramp"
             },
             "highway/raceway": {
                 "name": "Motor Raceway",
@@ -2560,13 +2564,13 @@
                 "name": "Unknown Road",
                 "terms": ""
             },
-            "highway/secondary_link": {
-                "name": "Secondary Link",
-                "terms": "ramp,on ramp,off ramp"
-            },
             "highway/secondary": {
                 "name": "Secondary Road",
                 "terms": ""
+            },
+            "highway/secondary_link": {
+                "name": "Secondary Link",
+                "terms": "ramp,on ramp,off ramp"
             },
             "highway/service": {
                 "name": "Service Road",
@@ -2608,13 +2612,13 @@
                 "name": "Street Lamp",
                 "terms": "streetlight,street light,lamp,light,gaslight"
             },
-            "highway/tertiary_link": {
-                "name": "Tertiary Link",
-                "terms": "ramp,on ramp,off ramp"
-            },
             "highway/tertiary": {
                 "name": "Tertiary Road",
                 "terms": ""
+            },
+            "highway/tertiary_link": {
+                "name": "Tertiary Link",
+                "terms": "ramp,on ramp,off ramp"
             },
             "highway/track": {
                 "name": "Unmaintained Track Road",
@@ -2624,13 +2628,13 @@
                 "name": "Traffic Signals",
                 "terms": "light,stoplight,traffic light"
             },
-            "highway/trunk_link": {
-                "name": "Trunk Link",
-                "terms": "ramp,on ramp,off ramp"
-            },
             "highway/trunk": {
                 "name": "Trunk Road",
                 "terms": ""
+            },
+            "highway/trunk_link": {
+                "name": "Trunk Link",
+                "terms": "ramp,on ramp,off ramp"
             },
             "highway/turning_circle": {
                 "name": "Turning Circle",
@@ -3108,12 +3112,12 @@
                 "name": "Spring",
                 "terms": ""
             },
-            "natural/tree_row": {
-                "name": "Tree row",
-                "terms": ""
-            },
             "natural/tree": {
                 "name": "Tree",
+                "terms": ""
+            },
+            "natural/tree_row": {
+                "name": "Tree row",
                 "terms": ""
             },
             "natural/volcano": {
@@ -3368,12 +3372,12 @@
                 "name": "Railway Station",
                 "terms": "train station,station"
             },
-            "railway/subway_entrance": {
-                "name": "Subway Entrance",
-                "terms": ""
-            },
             "railway/subway": {
                 "name": "Subway",
+                "terms": ""
+            },
+            "railway/subway_entrance": {
+                "name": "Subway Entrance",
                 "terms": ""
             },
             "railway/tram": {
@@ -3464,16 +3468,16 @@
                 "name": "Candle Shop",
                 "terms": ""
             },
+            "shop/car": {
+                "name": "Car Dealership",
+                "terms": "auto"
+            },
             "shop/car_parts": {
                 "name": "Car Parts Store",
                 "terms": "auto"
             },
             "shop/car_repair": {
                 "name": "Car Repair Shop",
-                "terms": "auto"
-            },
-            "shop/car": {
-                "name": "Car Dealership",
                 "terms": "auto"
             },
             "shop/carpet": {
@@ -3816,13 +3820,13 @@
                 "name": "Variety Store",
                 "terms": ""
             },
-            "shop/video_games": {
-                "name": "Video Game Store",
-                "terms": ""
-            },
             "shop/video": {
                 "name": "Video Store",
                 "terms": "DVD"
+            },
+            "shop/video_games": {
+                "name": "Video Game Store",
+                "terms": ""
             },
             "shop/water_sports": {
                 "name": "Watersport/Swim Shop",
@@ -3972,10 +3976,6 @@
                 "name": "No Turns",
                 "terms": ""
             },
-            "type/route_master": {
-                "name": "Route Master",
-                "terms": ""
-            },
             "type/route": {
                 "name": "Route",
                 "terms": ""
@@ -4026,6 +4026,10 @@
             },
             "type/route/tram": {
                 "name": "Tram Route",
+                "terms": ""
+            },
+            "type/route_master": {
+                "name": "Route Master",
                 "terms": ""
             },
             "type/site": {
