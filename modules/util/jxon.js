@@ -1,4 +1,4 @@
-var JXON = new (function () {
+export const JXON = new (function () {
   var
     sValueProp = "keyValue", sAttributesProp = "keyAttributes", sAttrPref = "@", /* you can customize these values */
     aCache = [], rIsNull = /^\s*$/, rIsBool = /^(?:true|false)$/i;
@@ -134,6 +134,7 @@ var JXON = new (function () {
     return (new XMLSerializer()).serializeToString(JXON.unbuild(oObjTree));
   };
 })();
+
 // var myObject = JXON.build(doc);
 // we got our javascript object! try: alert(JSON.stringify(myObject));
 

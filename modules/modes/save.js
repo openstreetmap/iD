@@ -3,6 +3,7 @@ import { displayName, displayType } from '../util/index';
 import { Browse } from './index';
 import { DiscardTags, Noop, MergeRemoteChanges, Revert } from '../actions/index';
 import { Commit, Loading, Success, Conflicts } from '../ui/index';
+import { JXON } from '../util/jxon';
 
 export function Save(context) {
     var ui = Commit(context)
