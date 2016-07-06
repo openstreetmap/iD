@@ -6,4 +6,3 @@ dist/*.js
 dist/*.css
 dist/img/*.svg
 data/data.js
-js/lib/id
