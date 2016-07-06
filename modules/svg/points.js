@@ -1,3 +1,6 @@
+import { PointTransform, TagClasses } from './index';
+import { Entity } from '../core/index';
+
 export function Points(projection, context) {
     function markerPath(selection, klass) {
         selection
@@ -20,7 +23,7 @@ export function Points(projection, context) {
 
         var groups = surface.selectAll('.layer-hit').selectAll('g.point')
             .filter(filter)
-            .data(points, iD.Entity.key);
+            .data(points, Entity.key);
 
         var group = groups.enter()
             .append('g')
@@ -39,8 +42,8 @@ export function Points(projection, context) {
             .attr('width', '12px')
             .attr('height', '12px');
 
-        groups.attr('transform', iD.svg.PointTransform(projection))
-            .call(iD.svg.TagClasses());
+        groups.attr('transform', PointTransform(projection))
+            .call(TagClasses());
 
         // Selecting the following implicitly
         // sets the data (point entity) on the element

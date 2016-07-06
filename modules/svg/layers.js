@@ -1,12 +1,18 @@
+import { Debug } from './debug';
+import { Gpx } from './gpx';
+import { MapillaryImages } from './mapillary_images';
+import { MapillarySigns } from './mapillary_signs';
+import { Osm } from './osm';
+
 export function Layers(projection, context) {
     var dispatch = d3.dispatch('change'),
         svg = d3.select(null),
         layers = [
-            { id: 'osm', layer: iD.svg.Osm(projection, context, dispatch) },
-            { id: 'gpx', layer: iD.svg.Gpx(projection, context, dispatch) },
-            { id: 'mapillary-images', layer: iD.svg.MapillaryImages(projection, context, dispatch) },
-            { id: 'mapillary-signs',  layer: iD.svg.MapillarySigns(projection, context, dispatch) },
-            { id: 'debug', layer: iD.svg.Debug(projection, context, dispatch) }
+            { id: 'osm', layer: Osm(projection, context, dispatch) },
+            { id: 'gpx', layer: Gpx(projection, context, dispatch) },
+            { id: 'mapillary-images', layer: MapillaryImages(projection, context, dispatch) },
+            { id: 'mapillary-signs',  layer: MapillarySigns(projection, context, dispatch) },
+            { id: 'debug', layer: Debug(projection, context, dispatch) }
         ];
 
 

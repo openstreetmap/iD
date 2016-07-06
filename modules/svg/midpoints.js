@@ -1,3 +1,6 @@
+import { PointTransform, TagClasses } from './index';
+import { angle, euclideanDistance, interp, lineIntersection } from '../geo/index';
+
 export function Midpoints(projection, context) {
     return function drawMidpoints(surface, graph, entities, filter, extent) {
         var poly = extent.polygon(),
@@ -23,18 +26,18 @@ export function Midpoints(projection, context) {
                 if (midpoints[id]) {
                     midpoints[id].parents.push(entity);
                 } else {
-                    if (iD.geo.euclideanDistance(projection(a.loc), projection(b.loc)) > 40) {
-                        var point = iD.geo.interp(a.loc, b.loc, 0.5),
+                    if (euclideanDistance(projection(a.loc), projection(b.loc)) > 40) {
+                        var point = interp(a.loc, b.loc, 0.5),
                             loc = null;
 
                         if (extent.intersects(point)) {
                             loc = point;
                         } else {
                             for (var k = 0; k < 4; k++) {
-                                point = iD.geo.lineIntersection([a.loc, b.loc], [poly[k], poly[k+1]]);
+                                point = lineIntersection([a.loc, b.loc], [poly[k], poly[k+1]]);
                                 if (point &&
-                                    iD.geo.euclideanDistance(projection(a.loc), projection(point)) > 20 &&
-                                    iD.geo.euclideanDistance(projection(b.loc), projection(point)) > 20)
+                                    euclideanDistance(projection(a.loc), projection(point)) > 20 &&
+                                    euclideanDistance(projection(b.loc), projection(point)) > 20)
                                 {
                                     loc = point;
                                     break;
@@ -85,13 +88,13 @@ export function Midpoints(projection, context) {
 
         groups
             .attr('transform', function(d) {
-                var translate = iD.svg.PointTransform(projection),
+                var translate = PointTransform(projection),
                     a = context.entity(d.edge[0]),
                     b = context.entity(d.edge[1]),
-                    angle = Math.round(iD.geo.angle(a, b, projection) * (180 / Math.PI));
-                return translate(d) + ' rotate(' + angle + ')';
+                    angleVal = Math.round(angle(a, b, projection) * (180 / Math.PI));
+                return translate(d) + ' rotate(' + angleVal + ')';
             })
-            .call(iD.svg.TagClasses().tags(
+            .call(TagClasses().tags(
                 function(d) { return d.parents[0].tags; }
             ));
 

@@ -1,12 +1,13 @@
-export function wikipedia() {
-    var wikipedia = {},
-        endpoint = 'https://en.wikipedia.org/w/api.php?';
+import { qsString } from '../util/index';
 
+var wikipedia = {},
+    endpoint = 'https://en.wikipedia.org/w/api.php?';
 
+export function init() {
     wikipedia.search = function(lang, query, callback) {
         lang = lang || 'en';
         d3.jsonp(endpoint.replace('en', lang) +
-            iD.util.qsString({
+            qsString({
                 action: 'query',
                 list: 'search',
                 srlimit: '10',
@@ -25,7 +26,7 @@ export function wikipedia() {
     wikipedia.suggestions = function(lang, query, callback) {
         lang = lang || 'en';
         d3.jsonp(endpoint.replace('en', lang) +
-            iD.util.qsString({
+            qsString({
                 action: 'opensearch',
                 namespace: 0,
                 suggest: '',
@@ -39,7 +40,7 @@ export function wikipedia() {
 
     wikipedia.translations = function(lang, title, callback) {
         d3.jsonp(endpoint.replace('en', lang) +
-            iD.util.qsString({
+            qsString({
                 action: 'query',
                 prop: 'langlinks',
                 format: 'json',

@@ -1,3 +1,6 @@
+import { displayName, getStyle } from '../util/index';
+import { Entity } from '../core/index';
+import { pathLength } from '../geo/index';
 import rbush from 'rbush';
 
 export function Labels(projection, context) {
@@ -35,11 +38,11 @@ export function Labels(projection, context) {
     var default_size = 12;
 
     var font_sizes = label_stack.map(function(d) {
-        var style = iD.util.getStyle('text.' + d[0] + '.tag-' + d[1]),
+        var style = getStyle('text.' + d[0] + '.tag-' + d[1]),
             m = style && style.cssText.match('font-size: ([0-9]{1,2})px;');
         if (m) return parseInt(m[1], 10);
 
-        style = iD.util.getStyle('text.' + d[0]);
+        style = getStyle('text.' + d[0]);
         m = style && style.cssText.match('font-size: ([0-9]{1,2})px;');
         if (m) return parseInt(m[1], 10);
 
@@ -95,7 +98,7 @@ export function Labels(projection, context) {
     function drawLineLabels(group, entities, filter, classes, labels) {
         var texts = group.selectAll('text.' + classes)
             .filter(filter)
-            .data(entities, iD.Entity.key);
+            .data(entities, Entity.key);
 
         texts.enter()
             .append('text')
@@ -106,12 +109,12 @@ export function Labels(projection, context) {
 
         texts.selectAll('.textpath')
             .filter(filter)
-            .data(entities, iD.Entity.key)
+            .data(entities, Entity.key)
             .attr({
                 'startOffset': '50%',
                 'xlink:href': function(d) { return '#labelpath-' + d.id; }
             })
-            .text(iD.util.displayName);
+            .text(displayName);
 
         texts.exit().remove();
     }
@@ -119,7 +122,7 @@ export function Labels(projection, context) {
     function drawLinePaths(group, entities, filter, classes, labels) {
         var halos = group.selectAll('path')
             .filter(filter)
-            .data(entities, iD.Entity.key);
+            .data(entities, Entity.key);
 
         halos.enter()
             .append('path')
@@ -135,7 +138,7 @@ export function Labels(projection, context) {
     function drawPointLabels(group, entities, filter, classes, labels) {
         var texts = group.selectAll('text.' + classes)
             .filter(filter)
-            .data(entities, iD.Entity.key);
+            .data(entities, Entity.key);
 
         texts.enter()
             .append('text')
@@ -144,8 +147,8 @@ export function Labels(projection, context) {
         texts.attr('x', get(labels, 'x'))
             .attr('y', get(labels, 'y'))
             .style('text-anchor', get(labels, 'textAnchor'))
-            .text(iD.util.displayName)
-            .each(function(d, i) { textWidth(iD.util.displayName(d), labels[i].height, this); });
+            .text(displayName)
+            .each(function(d, i) { textWidth(displayName(d), labels[i].height, this); });
 
         texts.exit().remove();
         return texts;
@@ -164,7 +167,7 @@ export function Labels(projection, context) {
     function drawAreaIcons(group, entities, filter, classes, labels) {
         var icons = group.selectAll('use')
             .filter(filter)
-            .data(entities, iD.Entity.key);
+            .data(entities, Entity.key);
 
         icons.enter()
             .append('use')
@@ -277,7 +280,7 @@ export function Labels(projection, context) {
             var preset = geometry === 'area' && context.presets().match(entity, graph),
                 icon = preset && !blacklisted(preset) && preset.icon;
 
-            if (!icon && !iD.util.displayName(entity))
+            if (!icon && !displayName(entity))
                 continue;
 
             for (k = 0; k < label_stack.length; k++) {
@@ -305,7 +308,7 @@ export function Labels(projection, context) {
             var font_size = font_sizes[k];
             for (i = 0; i < labelable[k].length; i++) {
                 entity = labelable[k][i];
-                var name = iD.util.displayName(entity),
+                var name = displayName(entity),
                     width = name && textWidth(name, font_size),
                     p;
                 if (entity.geometry(graph) === 'point') {
@@ -341,7 +344,7 @@ export function Labels(projection, context) {
 
         function getLineLabel(entity, width, height) {
             var nodes = _.map(graph.childNodes(entity), 'loc').map(projection),
-                length = iD.geo.pathLength(nodes);
+                length = pathLength(nodes);
             if (length < width + 20) return;
 
             for (var i = 0; i < lineOffsets.length; i++) {
