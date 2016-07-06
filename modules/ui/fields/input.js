@@ -28,7 +28,8 @@ export function url(field, context) {
 
         if (field.type === 'tel') {
             var center = entity.extent(context.graph()).center();
-            iD.services.nominatim().countryCode(center, function (err, countryCode) {
+            iD.services.nominatim.init();
+            iD.services.nominatim.countryCode(center, function (err, countryCode) {
                 if (err || !iD.data.phoneFormats[countryCode]) return;
                 selection.selectAll('#' + fieldId)
                     .attr('placeholder', iD.data.phoneFormats[countryCode]);

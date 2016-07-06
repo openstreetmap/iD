@@ -3,8 +3,9 @@ describe('iD.services.nominatim', function() {
 
     beforeEach(function() {
         server = sinon.fakeServer.create();
-        nominatim = iD.services.nominatim();
-        nominatim.reset();
+        iD.services.nominatim.init();
+        nominatim = iD.services.nominatim;
+        iD.services.nominatim.reset();
     });
 
     afterEach(function() {
