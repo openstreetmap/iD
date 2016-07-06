@@ -1,5 +1,5 @@
-import { modal } from '../modal';
 import { icon } from './helper';
+import { modal } from '../modal';
 
 export function startEditing(context, reveal) {
     var event = d3.dispatch('done', 'startEditing'),

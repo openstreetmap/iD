@@ -1,11 +1,12 @@
+import { check, defaultcheck} from './check';
+import { combo, multiCombo, typeCombo } from './combo';
+import { email, number, tel, text, url } from './input';
+
 import { access } from './access';
 import { address } from './address';
-import { check, defaultcheck} from './check';
-import { combo, typeCombo, multiCombo } from './combo';
 import { cycleway } from './cycleway';
-import { text, url, number, email, tel } from './input';
-import { localized } from './localized';
 import { lanes } from './lanes';
+import { localized } from './localized';
 import { maxspeed } from './maxspeed';
 import { radio } from './radio';
 import { restrictions } from './restrictions';

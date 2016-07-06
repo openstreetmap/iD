@@ -1,4 +1,4 @@
-import { euclideanDistance, chooseEdge } from '../geo/index';
+import { chooseEdge, euclideanDistance } from '../geo/index';
 import { Edit } from './edit';
 import { Hover } from './hover';
 import { Tail } from './tail';

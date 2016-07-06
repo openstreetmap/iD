@@ -1,7 +1,7 @@
-import { Gpx, Debug } from '../svg/index';
-import { setTransform } from '../util/index';
+import { Debug, Gpx } from '../svg/index';
 import { RawMercator } from '../geo/index';
 import { TileLayer } from '../renderer/index';
+import { setTransform } from '../util/index';
 
 export function MapInMap(context) {
     var key = '/';

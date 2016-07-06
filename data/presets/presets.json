@@ -1218,31 +1218,6 @@
         ],
         "name": "Nightclub"
     },
-    "amenity/parking": {
-        "icon": "parking",
-        "fields": [
-            "operator",
-            "parking",
-            "capacity",
-            "fee",
-            "access_simple",
-            "supervised",
-            "park_ride",
-            "surface",
-            "maxstay",
-            "address"
-        ],
-        "geometry": [
-            "point",
-            "vertex",
-            "area"
-        ],
-        "tags": {
-            "amenity": "parking"
-        },
-        "terms": [],
-        "name": "Car Parking"
-    },
     "amenity/parking_entrance": {
         "icon": "entrance",
         "fields": [
@@ -1271,6 +1246,31 @@
             "amenity": "parking_space"
         },
         "name": "Parking Space"
+    },
+    "amenity/parking": {
+        "icon": "parking",
+        "fields": [
+            "operator",
+            "parking",
+            "capacity",
+            "fee",
+            "access_simple",
+            "supervised",
+            "park_ride",
+            "surface",
+            "maxstay",
+            "address"
+        ],
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "tags": {
+            "amenity": "parking"
+        },
+        "terms": [],
+        "name": "Car Parking"
     },
     "amenity/pharmacy": {
         "icon": "pharmacy",
@@ -4426,26 +4426,6 @@
         ],
         "name": "Mini-Roundabout"
     },
-    "highway/motorway": {
-        "icon": "highway-motorway",
-        "fields": [
-            "oneway_yes",
-            "maxspeed",
-            "structure",
-            "access",
-            "lanes",
-            "surface",
-            "ref"
-        ],
-        "geometry": [
-            "line"
-        ],
-        "tags": {
-            "highway": "motorway"
-        },
-        "terms": [],
-        "name": "Motorway"
-    },
     "highway/motorway_junction": {
         "geometry": [
             "vertex"
@@ -4488,6 +4468,26 @@
             "off ramp"
         ],
         "name": "Motorway Link"
+    },
+    "highway/motorway": {
+        "icon": "highway-motorway",
+        "fields": [
+            "oneway_yes",
+            "maxspeed",
+            "structure",
+            "access",
+            "lanes",
+            "surface",
+            "ref"
+        ],
+        "geometry": [
+            "line"
+        ],
+        "tags": {
+            "highway": "motorway"
+        },
+        "terms": [],
+        "name": "Motorway"
     },
     "highway/path": {
         "icon": "highway-path",
@@ -4539,27 +4539,6 @@
         "terms": [],
         "name": "Pedestrian Street"
     },
-    "highway/primary": {
-        "icon": "highway-primary",
-        "fields": [
-            "oneway",
-            "maxspeed",
-            "structure",
-            "access",
-            "lanes",
-            "surface",
-            "ref",
-            "cycleway"
-        ],
-        "geometry": [
-            "line"
-        ],
-        "tags": {
-            "highway": "primary"
-        },
-        "terms": [],
-        "name": "Primary Road"
-    },
     "highway/primary_link": {
         "icon": "highway-primary-link",
         "fields": [
@@ -4583,6 +4562,27 @@
             "off ramp"
         ],
         "name": "Primary Link"
+    },
+    "highway/primary": {
+        "icon": "highway-primary",
+        "fields": [
+            "oneway",
+            "maxspeed",
+            "structure",
+            "access",
+            "lanes",
+            "surface",
+            "ref",
+            "cycleway"
+        ],
+        "geometry": [
+            "line"
+        ],
+        "tags": {
+            "highway": "primary"
+        },
+        "terms": [],
+        "name": "Primary Road"
     },
     "highway/raceway": {
         "icon": "highway-unclassified",
@@ -4660,27 +4660,6 @@
         "terms": [],
         "name": "Unknown Road"
     },
-    "highway/secondary": {
-        "icon": "highway-secondary",
-        "fields": [
-            "oneway",
-            "maxspeed",
-            "structure",
-            "access",
-            "lanes",
-            "surface",
-            "ref",
-            "cycleway"
-        ],
-        "geometry": [
-            "line"
-        ],
-        "tags": {
-            "highway": "secondary"
-        },
-        "terms": [],
-        "name": "Secondary Road"
-    },
     "highway/secondary_link": {
         "icon": "highway-secondary-link",
         "fields": [
@@ -4704,6 +4683,27 @@
             "off ramp"
         ],
         "name": "Secondary Link"
+    },
+    "highway/secondary": {
+        "icon": "highway-secondary",
+        "fields": [
+            "oneway",
+            "maxspeed",
+            "structure",
+            "access",
+            "lanes",
+            "surface",
+            "ref",
+            "cycleway"
+        ],
+        "geometry": [
+            "line"
+        ],
+        "tags": {
+            "highway": "secondary"
+        },
+        "terms": [],
+        "name": "Secondary Road"
     },
     "highway/service": {
         "icon": "highway-service",
@@ -4881,27 +4881,6 @@
         ],
         "name": "Street Lamp"
     },
-    "highway/tertiary": {
-        "icon": "highway-tertiary",
-        "fields": [
-            "oneway",
-            "maxspeed",
-            "structure",
-            "access",
-            "lanes",
-            "surface",
-            "ref",
-            "cycleway"
-        ],
-        "geometry": [
-            "line"
-        ],
-        "tags": {
-            "highway": "tertiary"
-        },
-        "terms": [],
-        "name": "Tertiary Road"
-    },
     "highway/tertiary_link": {
         "icon": "highway-tertiary-link",
         "fields": [
@@ -4925,6 +4904,27 @@
             "off ramp"
         ],
         "name": "Tertiary Link"
+    },
+    "highway/tertiary": {
+        "icon": "highway-tertiary",
+        "fields": [
+            "oneway",
+            "maxspeed",
+            "structure",
+            "access",
+            "lanes",
+            "surface",
+            "ref",
+            "cycleway"
+        ],
+        "geometry": [
+            "line"
+        ],
+        "tags": {
+            "highway": "tertiary"
+        },
+        "terms": [],
+        "name": "Tertiary Road"
     },
     "highway/track": {
         "icon": "highway-track",
@@ -4987,26 +4987,6 @@
         ],
         "name": "Traffic Signals"
     },
-    "highway/trunk": {
-        "icon": "highway-trunk",
-        "fields": [
-            "oneway",
-            "maxspeed",
-            "structure",
-            "access",
-            "lanes",
-            "surface",
-            "ref"
-        ],
-        "geometry": [
-            "line"
-        ],
-        "tags": {
-            "highway": "trunk"
-        },
-        "terms": [],
-        "name": "Trunk Road"
-    },
     "highway/trunk_link": {
         "icon": "highway-trunk-link",
         "fields": [
@@ -5029,6 +5009,26 @@
             "off ramp"
         ],
         "name": "Trunk Link"
+    },
+    "highway/trunk": {
+        "icon": "highway-trunk",
+        "fields": [
+            "oneway",
+            "maxspeed",
+            "structure",
+            "access",
+            "lanes",
+            "surface",
+            "ref"
+        ],
+        "geometry": [
+            "line"
+        ],
+        "tags": {
+            "highway": "trunk"
+        },
+        "terms": [],
+        "name": "Trunk Road"
     },
     "highway/turning_circle": {
         "icon": "circle",
@@ -6736,6 +6736,22 @@
         },
         "name": "Spring"
     },
+    "natural/tree_row": {
+        "fields": [
+            "leaf_type",
+            "leaf_cycle",
+            "denotation"
+        ],
+        "icon": "park",
+        "geometry": [
+            "line"
+        ],
+        "terms": [],
+        "tags": {
+            "natural": "tree_row"
+        },
+        "name": "Tree row"
+    },
     "natural/tree": {
         "fields": [
             "leaf_type_singular",
@@ -6752,22 +6768,6 @@
             "natural": "tree"
         },
         "name": "Tree"
-    },
-    "natural/tree_row": {
-        "fields": [
-            "leaf_type",
-            "leaf_cycle",
-            "denotation"
-        ],
-        "icon": "park",
-        "geometry": [
-            "line"
-        ],
-        "terms": [],
-        "tags": {
-            "natural": "tree_row"
-        },
-        "name": "Tree row"
     },
     "natural/volcano": {
         "icon": "triangle",
@@ -7797,6 +7797,17 @@
         ],
         "name": "Railway Station"
     },
+    "railway/subway_entrance": {
+        "icon": "rail-metro",
+        "geometry": [
+            "point"
+        ],
+        "tags": {
+            "railway": "subway_entrance"
+        },
+        "terms": [],
+        "name": "Subway Entrance"
+    },
     "railway/subway": {
         "icon": "railway-subway",
         "geometry": [
@@ -7813,17 +7824,6 @@
         ],
         "terms": [],
         "name": "Subway"
-    },
-    "railway/subway_entrance": {
-        "icon": "rail-metro",
-        "geometry": [
-            "point"
-        ],
-        "tags": {
-            "railway": "subway_entrance"
-        },
-        "terms": [],
-        "name": "Subway Entrance"
     },
     "railway/tram": {
         "icon": "railway-light-rail",
@@ -8214,26 +8214,6 @@
         },
         "name": "Candle Shop"
     },
-    "shop/car": {
-        "icon": "car",
-        "fields": [
-            "operator",
-            "address",
-            "building_area",
-            "opening_hours"
-        ],
-        "geometry": [
-            "point",
-            "area"
-        ],
-        "terms": [
-            "auto"
-        ],
-        "tags": {
-            "shop": "car"
-        },
-        "name": "Car Dealership"
-    },
     "shop/car_parts": {
         "icon": "car",
         "fields": [
@@ -8273,6 +8253,26 @@
             "shop": "car_repair"
         },
         "name": "Car Repair Shop"
+    },
+    "shop/car": {
+        "icon": "car",
+        "fields": [
+            "operator",
+            "address",
+            "building_area",
+            "opening_hours"
+        ],
+        "geometry": [
+            "point",
+            "area"
+        ],
+        "terms": [
+            "auto"
+        ],
+        "tags": {
+            "shop": "car"
+        },
+        "name": "Car Dealership"
     },
     "shop/carpet": {
         "icon": "shop",
@@ -9862,6 +9862,23 @@
         },
         "name": "Variety Store"
     },
+    "shop/video_games": {
+        "icon": "shop",
+        "fields": [
+            "operator",
+            "address",
+            "building_area",
+            "opening_hours"
+        ],
+        "geometry": [
+            "point",
+            "area"
+        ],
+        "tags": {
+            "shop": "video_games"
+        },
+        "name": "Video Game Store"
+    },
     "shop/video": {
         "icon": "shop",
         "fields": [
@@ -9881,23 +9898,6 @@
             "shop": "video"
         },
         "name": "Video Store"
-    },
-    "shop/video_games": {
-        "icon": "shop",
-        "fields": [
-            "operator",
-            "address",
-            "building_area",
-            "opening_hours"
-        ],
-        "geometry": [
-            "point",
-            "area"
-        ],
-        "tags": {
-            "shop": "video_games"
-        },
-        "name": "Video Game Store"
     },
     "shop/water_sports": {
         "icon": "shop",
@@ -10533,6 +10533,22 @@
         ],
         "icon": "restriction-only-straight-on"
     },
+    "type/route_master": {
+        "geometry": [
+            "relation"
+        ],
+        "tags": {
+            "type": "route_master"
+        },
+        "name": "Route Master",
+        "icon": "route-master",
+        "fields": [
+            "route_master",
+            "ref",
+            "operator",
+            "network"
+        ]
+    },
     "type/route": {
         "geometry": [
             "relation"
@@ -10728,22 +10744,6 @@
         "fields": [
             "ref",
             "operator"
-        ]
-    },
-    "type/route_master": {
-        "geometry": [
-            "relation"
-        ],
-        "tags": {
-            "type": "route_master"
-        },
-        "name": "Route Master",
-        "icon": "route-master",
-        "fields": [
-            "route_master",
-            "ref",
-            "operator",
-            "network"
         ]
     },
     "type/site": {

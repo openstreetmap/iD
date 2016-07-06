@@ -1,7 +1,8 @@
-import { Icon } from '../svg/index';
 import { Entity } from '../core/index';
-import { displayName } from '../util/index';
+import { Icon } from '../svg/index';
 import { Select } from '../modes/index';
+import { displayName } from '../util/index';
+
 export function SelectionList(context, selectedIDs) {
 
     function selectEntity(entity) {

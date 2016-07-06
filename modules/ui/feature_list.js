@@ -1,9 +1,9 @@
-import { Icon } from '../svg/index';
-import { Entity } from '../core/index';
-import { displayName, entityOrMemberSelector } from '../util/index';
-import { Select } from '../modes/index';
-import { Extent, chooseEdge } from '../geo/index';
 import * as sexagesimal from 'sexagesimal';
+import { Extent, chooseEdge } from '../geo/index';
+import { displayName, entityOrMemberSelector } from '../util/index';
+import { Entity } from '../core/index';
+import { Icon } from '../svg/index';
+import { Select } from '../modes/index';
 
 export function FeatureList(context) {
     var geocodeResults;

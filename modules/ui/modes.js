@@ -1,5 +1,5 @@
+import { AddArea, AddLine, AddPoint, Browse } from '../modes/index';
 import { Icon } from '../svg/index';
-import { AddPoint, AddLine, AddArea, Browse } from '../modes/index';
 import { tooltipHtml } from './tooltipHtml';
 
 export function Modes(context) {

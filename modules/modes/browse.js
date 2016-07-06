@@ -1,5 +1,6 @@
-import { Paste, Hover, Select, Lasso } from '../behavior/index';
+import { Hover, Lasso, Paste, Select } from '../behavior/index';
 import { DragNode } from './index';
+
 export function Browse(context) {
     var mode = {
         button: 'browse',

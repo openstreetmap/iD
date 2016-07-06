@@ -1,7 +1,7 @@
+import { Relation, Way } from '../core/index';
+import { isSimpleMultipolygonOuterMember, sphericalDistance } from '../geo/index';
 import { AddMember } from './add_member';
-import { sphericalDistance, isSimpleMultipolygonOuterMember} from '../geo/index';
 import { wrap as Wrap } from '../util/index';
-import { Way, Relation } from '../core/index';
 
 // Split a way at the given node.
 //

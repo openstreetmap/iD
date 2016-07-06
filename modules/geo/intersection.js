@@ -1,5 +1,5 @@
-import { angle as getAngle } from './index';
 import { Way } from '../core/index';
+import { angle as getAngle } from './index';
 
 export function Turn(turn) {
     if (!(this instanceof Turn))

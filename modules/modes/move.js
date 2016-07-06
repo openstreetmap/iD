@@ -1,6 +1,7 @@
-import { Edit } from '../behavior/index';
-import { Select, Browse } from './index';
+import { Browse, Select } from './index';
 import { Move as MoveAction, Noop } from '../actions/index';
+import { Edit } from '../behavior/index';
+
 export function Move(context, entityIDs, baseGraph) {
     var mode = {
         id: 'move',

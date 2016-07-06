@@ -1,5 +1,5 @@
-import { Icon } from '../svg/index';
 import { Disclosure } from './disclosure';
+import { Icon } from '../svg/index';
 import { TagReference } from './tag_reference';
 
 export function RawTagEditor(context) {

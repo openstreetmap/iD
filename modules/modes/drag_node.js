@@ -1,9 +1,10 @@
-import { Hover, Edit, drag } from '../behavior/index';
+import { AddMidpoint, Connect, MoveNode, Noop } from '../actions/index';
+import { Browse, Select } from './index';
+import { Edit, Hover, drag } from '../behavior/index';
 import { Node } from '../core/index';
-import { entitySelector } from '../util/index';
-import { Select, Browse } from './index';
 import { chooseEdge } from '../geo/index';
-import { AddMidpoint, Noop, MoveNode, Connect } from '../actions/index';
+import { entitySelector } from '../util/index';
+
 export function DragNode(context) {
     var mode = {
         id: 'drag-node',

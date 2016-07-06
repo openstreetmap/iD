@@ -1,6 +1,7 @@
+import { Extent } from '../geo/index';
 import { Icon } from '../svg/index';
 import { entityOrMemberSelector } from '../util/index';
-import { Extent } from '../geo/index';
+
 export function Conflicts(context) {
     var dispatch = d3.dispatch('download', 'cancel', 'save'),
         list;

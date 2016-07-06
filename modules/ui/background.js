@@ -1,9 +1,9 @@
-import { Icon } from '../svg/index';
-import { setTransform } from '../util/index';
+import { metersToOffset, offsetToMeters } from '../geo/index';
 import { BackgroundSource } from '../renderer/index';
-import { offsetToMeters, metersToOffset } from '../geo/index';
-import { cmd } from './cmd';
+import { Icon } from '../svg/index';
 import { MapInMap } from './map_in_map';
+import { cmd } from './cmd';
+import { setTransform } from '../util/index';
 import { tooltipHtml } from './tooltipHtml';
 
 export function Background(context) {

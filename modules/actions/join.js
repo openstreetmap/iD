@@ -6,9 +6,9 @@
 //   https://github.com/systemed/potlatch2/blob/master/net/systemeD/halcyon/connection/actions/MergeWaysAction.as
 //   https://github.com/openstreetmap/josm/blob/mirror/src/org/openstreetmap/josm/actions/CombineWayAction.java
 //
-import { joinWays } from '../geo/index';
-import { interestingTag } from '../core/index';
 import { DeleteWay } from './delete_way';
+import { interestingTag } from '../core/index';
+import { joinWays } from '../geo/index';
 
 export function Join(ids) {
 

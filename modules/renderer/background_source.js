@@ -1,4 +1,5 @@
-import { polygonIntersectsPolygon, Extent } from '../geo/index';
+import { Extent, polygonIntersectsPolygon } from '../geo/index';
+
 export function BackgroundSource(data) {
     var source = _.clone(data),
         offset = [0, 0],

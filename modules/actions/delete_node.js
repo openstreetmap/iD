@@ -1,5 +1,5 @@
-import { DeleteWay } from './delete_way';
 import { DeleteRelation } from './delete_relation';
+import { DeleteWay } from './delete_way';
 
 // https://github.com/openstreetmap/potlatch2/blob/master/net/systemeD/halcyon/connection/actions/DeleteNodeAction.as
 export function DeleteNode(nodeId) {

@@ -1,11 +1,12 @@
-import { Copy, Paste, Breathe, Hover, Select as SelectBehavior, Lasso } from '../behavior/index';
-import { Way, Node } from '../core/index';
-import { entityOrMemberSelector } from '../util/index';
-import { DragNode, Browse } from './index';
-import { Extent, pointInPolygon, chooseEdge } from '../geo/index';
-import { AddMidpoint } from '../actions/index';
 import * as Operations from '../operations/index';
-import {  RadialMenu, SelectionList } from '../ui/index';
+import { Breathe, Copy, Hover, Lasso, Paste, Select as SelectBehavior } from '../behavior/index';
+import { Extent, chooseEdge, pointInPolygon } from '../geo/index';
+import { Node, Way } from '../core/index';
+import { RadialMenu, SelectionList } from '../ui/index';
+import { AddMidpoint } from '../actions/index';
+import { Browse } from './browse';
+import { DragNode } from './drag_node';
+import { entityOrMemberSelector } from '../util/index';
 
 export function Select(context, selectedIDs) {
     var mode = {

@@ -1,6 +1,6 @@
-import { Move as MoveMode } from '../modes/index';
+import { ChangeTags, CopyEntities, Move as MoveAction} from '../actions/index';
 import { Extent, pointInPolygon } from '../geo/index';
-import { CopyEntities, ChangeTags, Move as MoveAction} from '../actions/index';
+import { Move as MoveMode } from '../modes/index';
 import { cmd } from '../ui/index';
 
 export function Paste(context) {

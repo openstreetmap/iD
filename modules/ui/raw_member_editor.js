@@ -1,9 +1,9 @@
-import { Icon } from '../svg/index';
-import { Entity } from '../core/index';
-import { displayName } from '../util/index';
-import { Select, Browse } from '../modes/index';
+import { Browse, Select } from '../modes/index';
 import { ChangeMember, DeleteMember } from '../actions/index';
 import { Disclosure } from './disclosure';
+import { Entity } from '../core/index';
+import { Icon } from '../svg/index';
+import { displayName } from '../util/index';
 
 export function RawMemberEditor(context) {
     var id;

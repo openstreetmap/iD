@@ -1,5 +1,5 @@
-import { Entity } from '../core/index';
 import { Browse, Select as SelectMode } from '../modes/index';
+import { Entity } from '../core/index';
 export function Select(context) {
     function keydown() {
         if (d3.event && d3.event.shiftKey) {

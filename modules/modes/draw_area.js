@@ -1,4 +1,5 @@
 import { DrawWay } from '../behavior/index';
+
 export function DrawArea(context, wayId, baseGraph) {
     var mode = {
         button: 'area',

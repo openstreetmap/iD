@@ -7,7 +7,12 @@
         "plugin:import/errors"
     ],
     rules: {
-        "no-invalid-this": 0
+        "no-invalid-this": 0,
+        "sort-imports": ["error", {
+            "ignoreCase": false,
+            "ignoreMemberSort": false,
+            "memberSyntaxSortOrder": ["none", "all", "multiple", "single"]
+        }]
     },
     globals: {
         "iD": false,

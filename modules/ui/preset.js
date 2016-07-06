@@ -1,8 +1,8 @@
+import { Browse } from '../modes/index';
+import { Disclosure } from './disclosure';
 import { Icon } from '../svg/index';
 import { TagReference } from './tag_reference';
-import { Browse } from '../modes/index';
 import { fields } from './fields/index';
-import { Disclosure } from './disclosure';
 
 export function preset(context) {
     var event = d3.dispatch('change'),
