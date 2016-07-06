@@ -1,3 +1,5 @@
+import { polygonIntersectsPolygon } from '../geo/index';
+
 export function Debug(projection, context) {
 
     function multipolygons(imagery) {
@@ -75,7 +77,7 @@ export function Debug(projection, context) {
             availableImagery = showsImagery && multipolygons(iD.data.imagery.filter(function(source) {
                 if (!source.polygon) return false;
                 return source.polygon.some(function(polygon) {
-                    return iD.geo.polygonIntersectsPolygon(polygon, extent, true);
+                    return polygonIntersectsPolygon(polygon, extent, true);
                 });
             }));
 

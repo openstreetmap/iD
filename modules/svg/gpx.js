@@ -1,3 +1,4 @@
+import { Extent, polygonIntersectsPolygon } from '../geo/index';
 import toGeoJSON from 'togeojson';
 
 export function Gpx(projection, context, dispatch) {
@@ -5,10 +6,10 @@ export function Gpx(projection, context, dispatch) {
         layer;
 
     function init() {
-        if (iD.svg.Gpx.initialized) return;  // run once
+        if (Gpx.initialized) return;  // run once
 
-        iD.svg.Gpx.geojson = {};
-        iD.svg.Gpx.enabled = true;
+        Gpx.geojson = {};
+        Gpx.enabled = true;
 
         function over() {
             d3.event.stopPropagation();
@@ -28,13 +29,13 @@ export function Gpx(projection, context, dispatch) {
             .on('dragexit.localgpx', over)
             .on('dragover.localgpx', over);
 
-        iD.svg.Gpx.initialized = true;
+        Gpx.initialized = true;
     }
 
 
     function drawGpx(surface) {
-        var geojson = iD.svg.Gpx.geojson,
-            enabled = iD.svg.Gpx.enabled;
+        var geojson = Gpx.geojson,
+            enabled = Gpx.enabled;
 
         layer = surface.selectAll('.layer-gpx')
             .data(enabled ? [0] : []);
@@ -101,21 +102,21 @@ export function Gpx(projection, context, dispatch) {
     };
 
     drawGpx.enabled = function(_) {
-        if (!arguments.length) return iD.svg.Gpx.enabled;
-        iD.svg.Gpx.enabled = _;
+        if (!arguments.length) return Gpx.enabled;
+        Gpx.enabled = _;
         dispatch.change();
         return this;
     };
 
     drawGpx.hasGpx = function() {
-        var geojson = iD.svg.Gpx.geojson;
+        var geojson = Gpx.geojson;
         return (!(_.isEmpty(geojson) || _.isEmpty(geojson.features)));
     };
 
     drawGpx.geojson = function(gj) {
-        if (!arguments.length) return iD.svg.Gpx.geojson;
+        if (!arguments.length) return Gpx.geojson;
         if (_.isEmpty(gj) || _.isEmpty(gj.features)) return this;
-        iD.svg.Gpx.geojson = gj;
+        Gpx.geojson = gj;
         dispatch.change();
         return this;
     };
@@ -144,7 +145,7 @@ export function Gpx(projection, context, dispatch) {
 
     drawGpx.fitZoom = function() {
         if (!this.hasGpx()) return this;
-        var geojson = iD.svg.Gpx.geojson;
+        var geojson = Gpx.geojson;
 
         var map = context.map(),
             viewport = map.trimmedExtent().polygon(),
@@ -153,8 +154,8 @@ export function Gpx(projection, context, dispatch) {
                 return _.union(coords, feature.geometry.type === 'Point' ? [c] : c);
             }, []);
 
-        if (!iD.geo.polygonIntersectsPolygon(viewport, coords, true)) {
-            var extent = iD.geo.Extent(d3.geo.bounds(geojson));
+        if (!polygonIntersectsPolygon(viewport, coords, true)) {
+            var extent = Extent(d3.geo.bounds(geojson));
             map.centerZoom(extent.center(), map.trimmedExtentZoom(extent));
         }
 

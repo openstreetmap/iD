@@ -1,3 +1,7 @@
+import { OneWaySegments, Path, RelationMemberTags, TagClasses } from './index';
+import { Entity } from '../core/index';
+import { simpleMultipolygonOuterMember } from '../geo/index';
+
 export function Lines(projection) {
 
     var highway_stack = {
@@ -25,11 +29,11 @@ export function Lines(projection) {
 
     return function drawLines(surface, graph, entities, filter) {
         var ways = [], pathdata = {}, onewaydata = {},
-            getPath = iD.svg.Path(projection, graph);
+            getPath = Path(projection, graph);
 
         for (var i = 0; i < entities.length; i++) {
             var entity = entities[i],
-                outer = iD.geo.simpleMultipolygonOuterMember(entity, graph);
+                outer = simpleMultipolygonOuterMember(entity, graph);
             if (outer) {
                 ways.push(entity.mergeTags(outer.tags));
             } else if (entity.geometry(graph) === 'line') {
@@ -44,7 +48,7 @@ export function Lines(projection) {
         _.forOwn(pathdata, function(v, k) {
             onewaydata[k] = _(v)
                 .filter(function(d) { return d.isOneWay(); })
-                .map(iD.svg.OneWaySegments(projection, graph, 35))
+                .map(OneWaySegments(projection, graph, 35))
                 .flatten()
                 .valueOf();
         });
@@ -73,20 +77,20 @@ export function Lines(projection) {
             .filter(filter)
             .data(
                 function() { return pathdata[this.parentNode.parentNode.__data__] || []; },
-                iD.Entity.key
+                Entity.key
             );
 
         // Optimization: call simple TagClasses only on enter selection. This
-        // works because iD.Entity.key is defined to include the entity v attribute.
+        // works because Entity.key is defined to include the entity v attribute.
         lines.enter()
             .append('path')
             .attr('class', function(d) { return 'way line ' + this.parentNode.__data__ + ' ' + d.id; })
-            .call(iD.svg.TagClasses());
+            .call(TagClasses());
 
         lines
             .sort(waystack)
             .attr('d', getPath)
-            .call(iD.svg.TagClasses().tags(iD.svg.RelationMemberTags(graph)));
+            .call(TagClasses().tags(RelationMemberTags(graph)));
 
         lines.exit()
             .remove();
