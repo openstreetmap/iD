@@ -1,8 +1,8 @@
-import { Graph } from '../core/index';
+import { Commit, Conflicts, Loading, Success } from '../ui/index';
+import { DiscardTags, MergeRemoteChanges, Noop, Revert } from '../actions/index';
 import { displayName, displayType } from '../util/index';
 import { Browse } from './index';
-import { DiscardTags, Noop, MergeRemoteChanges, Revert } from '../actions/index';
-import { Commit, Loading, Success, Conflicts } from '../ui/index';
+import { Graph } from '../core/index';
 import { JXON } from '../util/jxon';
 
 export function Save(context) {

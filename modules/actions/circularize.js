@@ -1,5 +1,5 @@
+import { euclideanDistance, interp } from '../geo/index';
 import { Node } from '../core/index';
-import { interp, euclideanDistance } from '../geo/index';
 
 export function Circularize(wayId
   , projection, maxAngle) {

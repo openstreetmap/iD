@@ -1,4 +1,4 @@
-import { stringQs, qsString } from '../util/index';
+import { qsString, stringQs } from '../util/index';
 export function Hash(context) {
     var s0 = null, // cached location.hash
         lat = 90 - 1e-8; // allowable latitude range

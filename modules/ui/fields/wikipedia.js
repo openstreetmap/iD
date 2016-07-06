@@ -1,5 +1,6 @@
-import { Icon } from '../../svg/index';
 import { ChangeTags } from '../../actions/index';
+import { Icon } from '../../svg/index';
+
 export function wikipedia(field, context) {
     var dispatch = d3.dispatch('change'),
         wikipedia = iD.services.wikipedia(),

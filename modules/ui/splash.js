@@ -1,5 +1,5 @@
-import { modal } from './modal';
 import { intro } from './intro';
+import { modal } from './modal';
 
 export function Splash(context) {
     return function(selection) {

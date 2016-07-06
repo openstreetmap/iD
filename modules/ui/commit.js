@@ -1,6 +1,7 @@
+import { displayName, entityOrMemberSelector } from '../util/index';
 import { Icon } from '../svg/index';
-import { entityOrMemberSelector, displayName } from '../util/index';
 import { Select } from '../modes/index';
+
 export function Commit(context) {
     var dispatch = d3.dispatch('cancel', 'save');
 

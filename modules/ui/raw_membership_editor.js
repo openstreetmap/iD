@@ -1,9 +1,9 @@
-import { Icon } from '../svg/index';
-import { Relation, Entity } from '../core/index';
-import { displayName } from '../util/index';
-import { Select } from '../modes/index';
-import { ChangeMember, AddMember, AddEntity, DeleteMember } from '../actions/index';
+import { AddEntity, AddMember, ChangeMember, DeleteMember } from '../actions/index';
+import { Entity, Relation } from '../core/index';
 import { Disclosure } from './disclosure';
+import { Icon } from '../svg/index';
+import { Select } from '../modes/index';
+import { displayName } from '../util/index';
 
 export function RawMembershipEditor(context) {
     var id, showBlank;

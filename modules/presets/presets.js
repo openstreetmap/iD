@@ -1,7 +1,7 @@
+import { Category } from './category';
 import { Collection } from './collection';
 import { Field } from './field';
 import { Preset } from './preset';
-import { Category } from './category';
 
 export function presets() {
     // an iD.presets.Collection with methods for

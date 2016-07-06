@@ -1,7 +1,8 @@
-import { AddWay } from '../behavior/index';
+import { AddEntity, AddMidpoint, AddVertex } from '../actions/index';
 import { Node, Way } from '../core/index';
+import { AddWay } from '../behavior/index';
 import { DrawArea } from './index';
-import { AddEntity, AddVertex, AddMidpoint } from '../actions/index';
+
 export function AddArea(context) {
     var mode = {
         id: 'add-area',

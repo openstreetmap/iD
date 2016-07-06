@@ -1,12 +1,12 @@
 // https://github.com/openstreetmap/josm/blob/mirror/src/org/openstreetmap/josm/command/MoveCommand.java
 // https://github.com/openstreetmap/potlatch2/blob/master/net/systemeD/halcyon/connection/actions/MoveNodeAction.as
 import {
-  angle as getAngle,
-  sphericalDistance,
   chooseEdge,
-  pathLength,
+  angle as getAngle,
   interp,
-  pathIntersections
+  pathIntersections,
+  pathLength,
+  sphericalDistance
 } from '../geo/index';
 import { Node } from '../core/index';
 

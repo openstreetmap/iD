@@ -1,58 +1,29 @@
-import { fields } from './fields/index';
+import { Defs, Icon } from '../svg/index';
 import { Account } from './account';
 import { Attribution } from './attribution';
 import { Background } from './background';
-import { cmd } from './cmd';
-import { Commit } from './commit';
-import { confirm } from './confirm';
-import { Conflicts } from './conflicts';
+import { Browse } from '../modes/index';
 import { Contributors } from './contributors';
-import { Disclosure } from './disclosure';
-import { EntityEditor } from './entity_editor';
 import { FeatureInfo } from './feature_info';
-import { FeatureList } from './feature_list';
-import { flash } from './flash';
 import { FullScreen } from './full_screen';
 import { Geolocate } from './geolocate';
+import { Hash } from '../behavior/index';
 import { Help } from './help';
 import { Info } from './info';
-import { Inspector } from './inspector';
-import { intro } from './intro/index';
-import { Lasso } from './lasso';
 import { Loading } from './loading';
 import { MapData } from './map_data';
 import { MapInMap } from './map_in_map';
-import { modal } from './modal';
 import { Modes } from './modes';
-import { Notice } from './notice';
-import { preset } from './preset';
-import { PresetIcon } from './preset_icon';
-import { PresetList } from './preset_list';
-import { RadialMenu } from './radial_menu';
-import { RawMemberEditor } from './raw_member_editor';
-import { RawMembershipEditor } from './raw_membership_editor';
-import { RawTagEditor } from './raw_tag_editor';
 import { Restore } from './restore';
 import { Save } from './save';
 import { Scale } from './scale';
-import { SelectionList } from './selection_list';
 import { Sidebar } from './sidebar';
-import { SourceSwitch } from './source_switch';
 import { Spinner } from './spinner';
 import { Splash } from './splash';
 import { Status } from './status';
-import { Success } from './success';
-import { TagReference } from './tag_reference';
-import { Toggle } from './toggle';
-import { tooltipHtml } from './tooltipHtml';
 import { UndoRedo } from './undo_redo';
-import { ViewOnOSM } from './view_on_osm';
 import { Zoom } from './zoom';
-
-
-import { Defs, Icon } from '../svg/index';
-import { Hash } from '../behavior/index';
-import { Browse } from '../modes/index';
+import { cmd } from './cmd';
 
 export function init(context) {
     function render(container) {
@@ -279,66 +250,7 @@ export function init(context) {
         });
     }
 
-    //TODO: figure this sidebar
     ui.sidebar = Sidebar(context);
 
     return ui;
 }
-
-
-//
-// ui.preset = preset;
-// Object.keys(fields).map(function(p) {
-//     ui.preset[p] = fields[p];
-// });
-//
-// ui.intro = intro;
-// ui.Account = Account;
-// ui.Attribution = Attribution;
-// ui.Background = Background;
-// ui.cmd = cmd;
-// ui.Commit = Commit;
-// ui.confirm = confirm;
-// ui.Conflicts = Conflicts;
-// ui.Contributors = Contributors;
-// ui.Disclosure = Disclosure;
-// ui.EntityEditor = EntityEditor;
-// ui.FeatureInfo = FeatureInfo;
-// ui.FeatureList = FeatureList;
-// ui.flash = flash;
-// ui.FullScreen = FullScreen;
-// ui.Geolocate = Geolocate;
-// ui.Help = Help;
-// ui.Info = Info;
-// ui.Inspector = Inspector;
-// ui.intro = intro;
-// ui.Lasso = Lasso;
-// ui.Loading = Loading;
-// ui.MapData = MapData;
-// ui.MapInMap = MapInMap;
-// ui.modal = modal;
-// ui.Modes = Modes;
-// ui.Notice = Notice;
-// ui.preset = preset;
-// ui.PresetIcon = PresetIcon;
-// ui.PresetList = PresetList;
-// ui.RadialMenu = RadialMenu;
-// ui.RawMemberEditor = RawMemberEditor;
-// ui.RawMembershipEditor = RawMembershipEditor;
-// ui.RawTagEditor = RawTagEditor;
-// ui.Restore = Restore;
-// ui.Save = Save;
-// ui.Scale = Scale;
-// ui.SelectionList = SelectionList;
-// ui.Sidebar = Sidebar;
-// ui.SourceSwitch = SourceSwitch;
-// ui.Spinner = Spinner;
-// ui.Splash = Splash;
-// ui.Status = Status;
-// ui.Success = Success;
-// ui.TagReference = TagReference;
-// ui.Toggle = Toggle;
-// ui.tooltipHtml = tooltipHtml;
-// ui.UndoRedo = UndoRedo;
-// ui.ViewOnOSM = ViewOnOSM;
-// ui.Zoom = Zoom;

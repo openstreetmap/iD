@@ -1,4 +1,27 @@
 {
+    "access_simple": {
+        "key": "access",
+        "type": "combo",
+        "label": "Allowed Access",
+        "placeholder": "yes",
+        "options": [
+            "permissive",
+            "private",
+            "customers",
+            "no"
+        ]
+    },
+    "access_toilets": {
+        "key": "access",
+        "type": "combo",
+        "label": "Access",
+        "options": [
+            "yes",
+            "permissive",
+            "private",
+            "customers"
+        ]
+    },
     "access": {
         "keys": [
             "access",
@@ -52,29 +75,6 @@
                 }
             }
         }
-    },
-    "access_simple": {
-        "key": "access",
-        "type": "combo",
-        "label": "Allowed Access",
-        "placeholder": "yes",
-        "options": [
-            "permissive",
-            "private",
-            "customers",
-            "no"
-        ]
-    },
-    "access_toilets": {
-        "key": "access",
-        "type": "combo",
-        "label": "Access",
-        "options": [
-            "yes",
-            "permissive",
-            "private",
-            "customers"
-        ]
     },
     "address": {
         "type": "address",
@@ -246,16 +246,16 @@
         "type": "text",
         "label": "Brand"
     },
-    "building": {
-        "key": "building",
-        "type": "combo",
-        "label": "Building"
-    },
     "building_area": {
         "key": "building",
         "type": "combo",
         "default": "yes",
         "geometry": "area",
+        "label": "Building"
+    },
+    "building": {
+        "key": "building",
+        "type": "combo",
         "label": "Building"
     },
     "capacity": {
@@ -510,15 +510,15 @@
         "label": "Fix Me",
         "universal": true
     },
-    "fuel": {
-        "key": "fuel",
-        "type": "combo",
-        "label": "Fuel"
-    },
     "fuel_multi": {
         "key": "fuel:",
         "type": "multiCombo",
         "label": "Fuel Types"
+    },
+    "fuel": {
+        "key": "fuel",
+        "type": "combo",
+        "label": "Fuel"
     },
     "gauge": {
         "key": "gauge",
@@ -600,11 +600,6 @@
         "type": "text",
         "label": "ICAO"
     },
-    "incline": {
-        "key": "incline",
-        "type": "combo",
-        "label": "Incline"
-    },
     "incline_steps": {
         "key": "incline",
         "type": "combo",
@@ -615,6 +610,11 @@
                 "down": "Down"
             }
         }
+    },
+    "incline": {
+        "key": "incline",
+        "type": "combo",
+        "label": "Incline"
     },
     "information": {
         "key": "information",
@@ -666,6 +666,19 @@
         "type": "combo",
         "label": "Layer"
     },
+    "leaf_cycle_singular": {
+        "key": "leaf_cycle",
+        "type": "combo",
+        "label": "Leaf Cycle",
+        "strings": {
+            "options": {
+                "evergreen": "Evergreen",
+                "deciduous": "Deciduous",
+                "semi_evergreen": "Semi-Evergreen",
+                "semi_deciduous": "Semi-Deciduous"
+            }
+        }
+    },
     "leaf_cycle": {
         "key": "leaf_cycle",
         "type": "combo",
@@ -680,16 +693,15 @@
             }
         }
     },
-    "leaf_cycle_singular": {
-        "key": "leaf_cycle",
+    "leaf_type_singular": {
+        "key": "leaf_type",
         "type": "combo",
-        "label": "Leaf Cycle",
+        "label": "Leaf Type",
         "strings": {
             "options": {
-                "evergreen": "Evergreen",
-                "deciduous": "Deciduous",
-                "semi_evergreen": "Semi-Evergreen",
-                "semi_deciduous": "Semi-Deciduous"
+                "broadleaved": "Broadleaved",
+                "needleleaved": "Needleleaved",
+                "leafless": "Leafless"
             }
         }
     },
@@ -702,18 +714,6 @@
                 "broadleaved": "Broadleaved",
                 "needleleaved": "Needleleaved",
                 "mixed": "Mixed",
-                "leafless": "Leafless"
-            }
-        }
-    },
-    "leaf_type_singular": {
-        "key": "leaf_type",
-        "type": "combo",
-        "label": "Leaf Type",
-        "strings": {
-            "options": {
-                "broadleaved": "Broadleaved",
-                "needleleaved": "Needleleaved",
                 "leafless": "Leafless"
             }
         }
@@ -856,18 +856,6 @@
         "type": "typeCombo",
         "label": "Type"
     },
-    "oneway": {
-        "key": "oneway",
-        "type": "check",
-        "label": "One Way",
-        "strings": {
-            "options": {
-                "undefined": "Assumed to be No",
-                "yes": "Yes",
-                "no": "No"
-            }
-        }
-    },
     "oneway_yes": {
         "key": "oneway",
         "type": "check",
@@ -875,6 +863,18 @@
         "strings": {
             "options": {
                 "undefined": "Assumed to be Yes",
+                "yes": "Yes",
+                "no": "No"
+            }
+        }
+    },
+    "oneway": {
+        "key": "oneway",
+        "type": "check",
+        "label": "One Way",
+        "strings": {
+            "options": {
+                "undefined": "Assumed to be No",
                 "yes": "Yes",
                 "no": "No"
             }
@@ -1001,15 +1001,15 @@
         "type": "text",
         "label": "Population"
     },
-    "power": {
-        "key": "power",
-        "type": "typeCombo",
-        "label": "Type"
-    },
     "power_supply": {
         "key": "power_supply",
         "type": "check",
         "label": "Power Supply"
+    },
+    "power": {
+        "key": "power",
+        "type": "typeCombo",
+        "label": "Type"
     },
     "railway": {
         "key": "railway",
@@ -1055,13 +1055,13 @@
         "type": "number",
         "label": "Rooms"
     },
-    "route": {
-        "key": "route",
+    "route_master": {
+        "key": "route_master",
         "type": "combo",
         "label": "Type"
     },
-    "route_master": {
-        "key": "route_master",
+    "route": {
+        "key": "route",
         "type": "combo",
         "label": "Type"
     },
@@ -1090,6 +1090,19 @@
         "key": "seasonal",
         "type": "check",
         "label": "Seasonal"
+    },
+    "service_rail": {
+        "key": "service",
+        "type": "combo",
+        "label": "Service Type",
+        "strings": {
+            "options": {
+                "spur": "Spur",
+                "yard": "Yard",
+                "siding": "Siding",
+                "crossover": "Crossover"
+            }
+        }
     },
     "service": {
         "key": "service",
@@ -1127,28 +1140,15 @@
             }
         }
     },
-    "service_rail": {
-        "key": "service",
+    "shelter_type": {
+        "key": "shelter_type",
         "type": "combo",
-        "label": "Service Type",
-        "strings": {
-            "options": {
-                "spur": "Spur",
-                "yard": "Yard",
-                "siding": "Siding",
-                "crossover": "Crossover"
-            }
-        }
+        "label": "Type"
     },
     "shelter": {
         "key": "shelter",
         "type": "check",
         "label": "Shelter"
-    },
-    "shelter_type": {
-        "key": "shelter_type",
-        "type": "combo",
-        "label": "Type"
     },
     "shop": {
         "key": "shop",
@@ -1223,11 +1223,6 @@
         "universal": true,
         "label": "Source"
     },
-    "sport": {
-        "key": "sport",
-        "type": "combo",
-        "label": "Sport"
-    },
     "sport_ice": {
         "key": "sport",
         "type": "combo",
@@ -1253,6 +1248,11 @@
             "motocross",
             "running"
         ]
+    },
+    "sport": {
+        "key": "sport",
+        "type": "combo",
+        "label": "Sport"
     },
     "stars": {
         "key": "stars",
@@ -1404,15 +1404,15 @@
         "type": "combo",
         "label": "Type of Goods"
     },
-    "water": {
-        "key": "water",
-        "type": "combo",
-        "label": "Type"
-    },
     "water_point": {
         "key": "water_point",
         "type": "check",
         "label": "Water Point"
+    },
+    "water": {
+        "key": "water",
+        "type": "combo",
+        "label": "Type"
     },
     "waterway": {
         "key": "waterway",

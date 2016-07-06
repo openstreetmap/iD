@@ -1,9 +1,9 @@
+import { Difference } from './difference';
 import { Entity } from './entity';
 import { Graph } from './graph';
-import { Difference } from './difference';
-import { Tree } from './tree';
-import { SessionMutex } from '../util/index';
 import { Loading } from '../ui/index';
+import { SessionMutex } from '../util/index';
+import { Tree } from './tree';
 
 export function History(context) {
     var stack, index, tree,

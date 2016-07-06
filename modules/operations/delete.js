@@ -1,7 +1,7 @@
-import { Select, Browse } from '../modes/index';
-import { sphericalDistance } from '../geo/index';
+import { Browse, Select } from '../modes/index';
 import { DeleteMultiple } from '../actions/index';
 import { cmd } from '../ui/index';
+import { sphericalDistance } from '../geo/index';
 
 export function Delete(selectedIDs, context) {
     var action = DeleteMultiple(selectedIDs);

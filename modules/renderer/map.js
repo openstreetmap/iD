@@ -1,6 +1,6 @@
-import { setTransform, fastMouse } from '../util/index';
-import { interp, Extent } from '../geo/index';
-import { Layers, Areas, Midpoints, Points, Vertices, Lines, Labels } from '../svg/index';
+import { Areas, Labels, Layers, Lines, Midpoints, Points, Vertices } from '../svg/index';
+import { Extent, interp } from '../geo/index';
+import { fastMouse, setTransform } from '../util/index';
 import { flash } from '../ui/index';
 
 export function Map(context) {

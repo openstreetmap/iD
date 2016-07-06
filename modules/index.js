@@ -1,12 +1,12 @@
 import * as actions from './actions/index';
-import * as geo from './geo/index';
 import * as behavior from './behavior/index';
+import * as geo from './geo/index';
 import * as modes from './modes/index';
-import * as util from './util/index';
 import * as operations from './operations/index';
 import * as presets from './presets/index';
-import * as validations from './validations/index';
 import * as ui from './ui/index';
+import * as util from './util/index';
+import * as validations from './validations/index';
 
 // core
 export { Connection } from './core/connection';

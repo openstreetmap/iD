@@ -1,5 +1,6 @@
-import { Select } from '../modes/index';
 import { Join, Merge as MergeAction, MergePolygon } from '../actions/index';
+import { Select } from '../modes/index';
+
 export function Merge(selectedIDs, context) {
     var join = Join(selectedIDs),
         merge = MergeAction(selectedIDs),

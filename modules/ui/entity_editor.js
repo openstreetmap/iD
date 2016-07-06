@@ -1,12 +1,12 @@
-import { Icon } from '../svg/index';
 import { Browse } from '../modes/index';
 import { ChangeTags } from '../actions/index';
-import { preset } from './preset';
+import { Icon } from '../svg/index';
 import { PresetIcon } from './preset_icon';
-import { RawTagEditor } from './raw_tag_editor';
 import { RawMemberEditor } from './raw_member_editor';
 import { RawMembershipEditor } from './raw_membership_editor';
+import { RawTagEditor } from './raw_tag_editor';
 import { TagReference } from './tag_reference';
+import { preset } from './preset';
 
 export function EntityEditor(context) {
     var dispatch = d3.dispatch('choose'),

@@ -1,6 +1,7 @@
-import { Move as MoveMode } from '../modes/index';
 import { Extent } from '../geo/index';
 import { Move as MoveAction } from '../actions/index';
+import { Move as MoveMode } from '../modes/index';
+
 export function Move(selectedIDs, context) {
     var extent = selectedIDs.reduce(function(extent, id) {
             return extent.extend(context.entity(id).extent(context.graph()));

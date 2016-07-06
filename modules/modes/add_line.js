@@ -1,7 +1,8 @@
-import { AddWay } from '../behavior/index';
+import { AddEntity, AddMidpoint, AddVertex } from '../actions/index';
 import { Node, Way } from '../core/index';
+import { AddWay } from '../behavior/index';
 import { DrawLine } from './index';
-import { AddEntity, AddVertex, AddMidpoint } from '../actions/index';
+
 export function AddLine(context) {
     var mode = {
         id: 'add-line',

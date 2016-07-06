@@ -1,8 +1,8 @@
-import { Layers, Vertices, Lines, Turns } from '../../svg/index';
-import { Hover } from '../../behavior/index';
+import { Extent, Intersection, RawMercator, Turn, inferRestriction } from '../../geo/index';
+import { Layers, Lines, Turns, Vertices } from '../../svg/index';
+import { RestrictTurn, UnrestrictTurn,  } from '../../actions/index';
 import { Entity } from '../../core/index';
-import { Intersection, Extent, RawMercator, Turn, inferRestriction } from '../../geo/index';
-import { UnrestrictTurn, RestrictTurn } from '../../actions/index';
+import { Hover } from '../../behavior/index';
 
 export function restrictions(field, context) {
     var dispatch = d3.dispatch('change'),

@@ -1,5 +1,5 @@
-import { DeleteWay } from './delete_way';
 import { DeleteRelation } from './delete_relation';
+import { DeleteWay } from './delete_way';
 
 export function Revert(id) {
 

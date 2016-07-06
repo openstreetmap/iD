@@ -1,6 +1,6 @@
-import { Icon } from '../../svg/index';
 import { Entity, Graph } from '../../core/index';
 import { Browse } from '../../modes/index';
+import { Icon } from '../../svg/index';
 import { area } from './area';
 import { line } from './line';
 import { navigation } from './navigation';

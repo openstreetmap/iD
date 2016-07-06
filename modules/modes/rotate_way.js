@@ -1,6 +1,7 @@
-import { Edit } from '../behavior/index';
-import { Select, Browse } from './index';
+import { Browse, Select } from './index';
 import { Noop, RotateWay as RotateWayAction } from '../actions/index';
+import { Edit } from '../behavior/index';
+
 export function RotateWay(context, wayId) {
     var mode = {
         id: 'rotate-way',

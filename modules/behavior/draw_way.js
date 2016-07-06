@@ -1,9 +1,9 @@
-import { Node, Way } from '../core/index';
-import { entitySelector } from '../util/index';
+import { AddEntity, AddMidpoint, AddVertex, MoveNode } from '../actions/index';
 import { Browse, Select } from '../modes/index';
+import { Node, Way } from '../core/index';
 import { chooseEdge, edgeEqual } from '../geo/index';
-import { AddEntity, AddVertex, MoveNode, AddMidpoint } from '../actions/index';
 import { Draw } from './draw';
+import { entitySelector } from '../util/index';
 
 export function DrawWay(context, wayId, index, mode, baseGraph) {
     var way = context.entity(wayId),

@@ -1,5 +1,5 @@
-import { Entity } from './entity';
 import { Extent, joinWays, polygonContainsPolygon, polygonIntersectsPolygon } from '../geo/index';
+import { Entity } from './entity';
 
 export function Relation() {
     if (!(this instanceof Relation)) {

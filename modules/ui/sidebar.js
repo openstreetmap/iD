@@ -1,5 +1,5 @@
-import { Inspector } from './inspector';
 import { FeatureList } from './feature_list';
+import { Inspector } from './inspector';
 import { Notice } from './notice';
 
 export function Sidebar(context) {

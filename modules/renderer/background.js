@@ -1,5 +1,5 @@
-import { stringQs, qsString } from '../util/index';
-import { offsetToMeters, Extent, metersToOffset } from '../geo/index';
+import { Extent, metersToOffset, offsetToMeters} from '../geo/index';
+import { qsString, stringQs } from '../util/index';
 import { BackgroundSource } from './background_source';
 import { TileLayer } from './tile_layer';
 

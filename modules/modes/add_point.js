@@ -1,7 +1,8 @@
+import { Browse, Select } from './index';
+import { AddEntity } from '../actions/index';
 import { Draw } from '../behavior/index';
 import { Node } from '../core/index';
-import { Select, Browse } from './index';
-import { AddEntity } from '../actions/index';
+
 export function AddPoint(context) {
     var mode = {
         id: 'add-point',

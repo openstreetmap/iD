@@ -1,6 +1,6 @@
-import { Icon } from '../svg/index';
 import { Browse } from '../modes/index';
 import { Extent } from '../geo/index';
+import { Icon } from '../svg/index';
 import { Loading } from './loading';
 
 export function Geolocate(context) {

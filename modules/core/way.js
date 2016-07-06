@@ -1,6 +1,6 @@
+import { Extent, cross } from '../geo/index';
 import { Entity } from './entity';
 import { oneWayTags } from './tags';
-import { cross, Extent } from '../geo/index';
 
 export function Way() {
     if (!(this instanceof Way)) {

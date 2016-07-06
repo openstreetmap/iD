@@ -1,6 +1,6 @@
+import { Relation, Way } from '../core/index';
 import { Split } from './split';
 import { inferRestriction } from '../geo/index';
-import { Relation, Way } from '../core/index';
 // Create a restriction relation for `turn`, which must have the following structure:
 //
 //     {
