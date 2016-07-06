@@ -2,4 +2,6 @@ language: node_js
 node_js:
   - "5.11"
 sudo: false
-before_script: make
+before_script:
+  - make clean
+  - make
