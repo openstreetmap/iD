@@ -63,7 +63,7 @@ export function longest_common_subsequence(file1, file2) {
 
             for (s = 0; s < candidates.length; s++) {
                 if ((candidates[s].file2index < j) &&
-                    ((s == candidates.length - 1) ||
+                    ((s === candidates.length - 1) ||
                      (candidates[s + 1].file2index > j)))
                     break;
             }
@@ -72,14 +72,14 @@ export function longest_common_subsequence(file1, file2) {
                 newCandidate = {file1index: i,
                                 file2index: j,
                                 chain: candidates[s]};
-                if (r == candidates.length) {
+                if (r === candidates.length) {
                     candidates.push(c);
                 } else {
                     candidates[r] = c;
                 }
                 r = s + 1;
                 c = newCandidate;
-                if (r == candidates.length) {
+                if (r === candidates.length) {
                     break; // no point in examining further (j)s
                 }
             }
@@ -317,7 +317,7 @@ export function diff3_merge_indices (a, o, b) {
         }
 
         copyCommon(regionLhs);
-        if (firstHunkIndex == hunkIndex) {
+        if (firstHunkIndex === hunkIndex) {
     // The "overlap" was only one hunk long, meaning that
     // there's no conflict here. Either a and o were the
     // same, or b and o were the same.
@@ -387,11 +387,11 @@ export function diff3_merge (a, o, b, excludeFalseConflicts) {
     }
 
     function isTrueConflict(rec) {
-        if (rec[2] != rec[6]) return true;
+        if (rec[2] !== rec[6]) return true;
         var aoff = rec[1];
         var boff = rec[5];
         for (var j = 0; j < rec[2]; j++) {
-            if (a[j + aoff] != b[j + boff]) return true;
+            if (a[j + aoff] !== b[j + boff]) return true;
         }
         return false;
     }
@@ -399,7 +399,7 @@ export function diff3_merge (a, o, b, excludeFalseConflicts) {
     for (var i = 0; i < indices.length; i++) {
         var x = indices[i];
         var side = x[0];
-        if (side == -1) {
+        if (side === -1) {
             if (excludeFalseConflicts && !isTrueConflict(x)) {
                 pushOk(files[0].slice(x[1], x[1] + x[2]));
             } else {
