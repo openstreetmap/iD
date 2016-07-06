@@ -1,5 +1,6 @@
 import { DeleteMultiple } from './delete_multiple';
 import { Entity } from '../core/index';
+import { diff3_merge } from '../util/diff3';
 
 export function MergeRemoteChanges(id, localGraph, remoteGraph, formatUser) {
     var option = 'safe',  // 'safe', 'force_local', 'force_remote'
@@ -41,7 +42,7 @@ export function MergeRemoteChanges(id, localGraph, remoteGraph, formatUser) {
             a = target.nodes || [],
             b = remote.nodes || [],
             nodes = [],
-            hunks = Diff3.diff3_merge(a, o, b, true);
+            hunks = diff3_merge(a, o, b, true);
 
         for (var i = 0; i < hunks.length; i++) {
             var hunk = hunks[i];
