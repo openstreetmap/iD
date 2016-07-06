@@ -1,13 +1,14 @@
-export function wikidata() {
-    var wikidata = {},
-        endpoint = 'https://www.wikidata.org/w/api.php?';
+import { qsString } from '../util/index';
 
+var wikidata = {},
+    endpoint = 'https://www.wikidata.org/w/api.php?';
 
+export function init() {
     // Given a Wikipedia language and article title, return an array of
     // corresponding Wikidata entities.
     wikidata.itemsByTitle = function(lang, title, callback) {
         lang = lang || 'en';
-        d3.jsonp(endpoint + iD.util.qsString({
+        d3.jsonp(endpoint + qsString({
             action: 'wbgetentities',
             format: 'json',
             sites: lang.replace(/-/g, '_') + 'wiki',
@@ -18,6 +19,5 @@ export function wikidata() {
             callback(title, data.entities || {});
         });
     };
-
     return wikidata;
 }

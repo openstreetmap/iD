@@ -4,6 +4,7 @@ import * as geo from './geo/index';
 import * as modes from './modes/index';
 import * as operations from './operations/index';
 import * as presets from './presets/index';
+import * as services from './services/index';
 import * as svg from './svg/index';
 import * as ui from './ui/index';
 import * as util from './util/index';
@@ -35,6 +36,7 @@ export {
   modes,
   operations,
   presets,
+  services,
   svg,
   util,
   ui,

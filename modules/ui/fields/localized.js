@@ -2,7 +2,7 @@ import { Icon } from '../../svg/index';
 import { SuggestNames } from '../../util/index';
 export function localized(field, context) {
     var dispatch = d3.dispatch('change', 'input'),
-        wikipedia = iD.services.wikipedia(),
+        wikipedia = iD.services.wikipedia.init(),
         input, localizedInputs, wikiTitles,
         entity;
 

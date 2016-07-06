@@ -6,7 +6,6 @@ export function MapillarySigns(projection, context, dispatch) {
         layer = d3.select(null),
         _mapillary;
 
-
     function init() {
         if (MapillarySigns.initialized) return;  // run once
         MapillarySigns.enabled = false;
@@ -15,7 +14,8 @@ export function MapillarySigns(projection, context, dispatch) {
 
     function getMapillary() {
         if (iD.services.mapillary && !_mapillary) {
-            _mapillary = iD.services.mapillary().on('loadedSigns', debouncedRedraw);
+            _mapillary = iD.services.mapillary.init();
+            _mapillary.event.on('loadedSigns', debouncedRedraw);
         } else if (!iD.services.mapillary && _mapillary) {
             _mapillary = null;
         }
