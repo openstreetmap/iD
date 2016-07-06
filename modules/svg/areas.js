@@ -1,3 +1,7 @@
+import { Path, TagClasses } from './index';
+import { Entity } from '../core/index';
+import { isSimpleMultipolygonOuterMember } from '../geo/index';
+
 export function Areas(projection) {
     // Patterns only work in Firefox when set directly on element.
     // (This is not a bug: https://bugzilla.mozilla.org/show_bug.cgi?id=750632)
@@ -28,7 +32,7 @@ export function Areas(projection) {
     }
 
     return function drawAreas(surface, graph, entities, filter) {
-        var path = iD.svg.Path(projection, graph, true),
+        var path = Path(projection, graph, true),
             areas = {},
             multipolygon;
 
@@ -36,7 +40,7 @@ export function Areas(projection) {
             var entity = entities[i];
             if (entity.geometry(graph) !== 'area') continue;
 
-            multipolygon = iD.geo.isSimpleMultipolygonOuterMember(entity, graph);
+            multipolygon = isSimpleMultipolygonOuterMember(entity, graph);
             if (multipolygon) {
                 areas[multipolygon.id] = {
                     entity: multipolygon.mergeTags(entity.tags),
@@ -67,7 +71,7 @@ export function Areas(projection) {
 
         var clipPaths = surface.selectAll('defs').selectAll('.clipPath')
            .filter(filter)
-           .data(data.clip, iD.Entity.key);
+           .data(data.clip, Entity.key);
 
         clipPaths.enter()
            .append('clipPath')
@@ -93,7 +97,7 @@ export function Areas(projection) {
         var paths = areagroup
             .selectAll('path')
             .filter(filter)
-            .data(function(layer) { return data[layer]; }, iD.Entity.key);
+            .data(function(layer) { return data[layer]; }, Entity.key);
 
         // Remove exiting areas first, so they aren't included in the `fills`
         // array used for sorting below (https://github.com/openstreetmap/iD/issues/1903).
@@ -124,7 +128,7 @@ export function Areas(projection) {
                     setPattern.apply(this, arguments);
                 }
             })
-            .call(iD.svg.TagClasses());
+            .call(TagClasses());
 
         paths
             .attr('d', path);

@@ -1,3 +1,5 @@
+import { angle } from '../geo/index';
+
 export function Turns(projection) {
     return function drawTurns(surface, graph, turns) {
         function key(turn) {
@@ -49,7 +51,7 @@ export function Turns(projection) {
             .attr('transform', function (turn) {
                 var v = graph.entity(turn.via.node),
                     t = graph.entity(turn.to.node),
-                    a = iD.geo.angle(v, t, projection),
+                    a = angle(v, t, projection),
                     p = projection(v.loc),
                     r = turn.u ? 0 : 60;
 

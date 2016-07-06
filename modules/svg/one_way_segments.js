@@ -1,3 +1,5 @@
+import { euclideanDistance } from '../geo/index';
+
 export function OneWaySegments(projection, graph, dt) {
     return function(entity) {
         var a,
@@ -24,7 +26,7 @@ export function OneWaySegments(projection, graph, dt) {
                 b = [x, y];
 
                 if (a) {
-                    var span = iD.geo.euclideanDistance(a, b) - offset;
+                    var span = euclideanDistance(a, b) - offset;
 
                     if (span >= 0) {
                         var angle = Math.atan2(b[1] - a[1], b[0] - a[0]),

@@ -1,3 +1,6 @@
+import { Entity } from '../core/index';
+import { PointTransform } from './index';
+
 export function Vertices(projection, context) {
     var radiuses = {
         //       z16-, z17, z18+, tagged
@@ -51,7 +54,7 @@ export function Vertices(projection, context) {
             z = (zoom < 17 ? 0 : zoom < 18 ? 1 : 2);
 
         var groups = selection
-            .data(vertices, iD.Entity.key);
+            .data(vertices, Entity.key);
 
         function icon(entity) {
             if (entity.id in icons) return icons[entity.id];
@@ -121,7 +124,7 @@ export function Vertices(projection, context) {
             .each(setClass('fill'));
 
         groups
-            .attr('transform', iD.svg.PointTransform(projection))
+            .attr('transform', PointTransform(projection))
             .classed('shared', function(entity) { return graph.isShared(entity); })
             .call(setAttributes);
 

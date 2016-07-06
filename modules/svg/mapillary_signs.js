@@ -1,3 +1,5 @@
+import { PointTransform } from './point_transform';
+
 export function MapillarySigns(projection, context, dispatch) {
     var debouncedRedraw = _.debounce(function () { dispatch.change(); }, 1000),
         minZoom = 12,
@@ -6,9 +8,9 @@ export function MapillarySigns(projection, context, dispatch) {
 
 
     function init() {
-        if (iD.svg.MapillarySigns.initialized) return;  // run once
-        iD.svg.MapillarySigns.enabled = false;
-        iD.svg.MapillarySigns.initialized = true;
+        if (MapillarySigns.initialized) return;  // run once
+        MapillarySigns.enabled = false;
+        MapillarySigns.initialized = true;
     }
 
     function getMapillary() {
@@ -78,11 +80,11 @@ export function MapillarySigns(projection, context, dispatch) {
 
         // Update
         signs
-            .attr('transform', iD.svg.PointTransform(projection));
+            .attr('transform', PointTransform(projection));
     }
 
     function drawSigns(selection) {
-        var enabled = iD.svg.MapillarySigns.enabled,
+        var enabled = MapillarySigns.enabled,
             mapillary = getMapillary();
 
         layer = selection.selectAll('.layer-mapillary-signs')
@@ -109,9 +111,9 @@ export function MapillarySigns(projection, context, dispatch) {
     }
 
     drawSigns.enabled = function(_) {
-        if (!arguments.length) return iD.svg.MapillarySigns.enabled;
-        iD.svg.MapillarySigns.enabled = _;
-        if (iD.svg.MapillarySigns.enabled) {
+        if (!arguments.length) return MapillarySigns.enabled;
+        MapillarySigns.enabled = _;
+        if (MapillarySigns.enabled) {
             showLayer();
         } else {
             hideLayer();
