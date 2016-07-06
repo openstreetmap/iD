@@ -4,6 +4,7 @@ import { Relation } from './relation';
 import { Node } from './node';
 import { Extent } from '../geo/index';
 import osmAuth from 'osm-auth';
+import { JXON } from '../util/jxon';
 
 export function Connection(useHttps) {
     if (typeof useHttps !== 'boolean') {
