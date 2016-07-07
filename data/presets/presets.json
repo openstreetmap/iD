@@ -1476,7 +1476,8 @@
         "fields": [
             "operator",
             "collection_times",
-            "drive_through"
+            "drive_through",
+            "ref"
         ],
         "geometry": [
             "point",
