@@ -22,7 +22,7 @@ export function Move(moveIds, tryDelta, projection, cache) {
             if (parents.length < 3) return true;
 
             // Don't move a vertex where >2 ways meet, unless all parentWays are moving too..
-            var parentsMoving = _.all(parents, function(id) { return cache.moving[id]; });
+            var parentsMoving = _.every(parents, function(id) { return cache.moving[id]; });
             if (!parentsMoving) delete cache.moving[nodeId];
 
             return parentsMoving;
