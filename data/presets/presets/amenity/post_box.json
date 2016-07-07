@@ -4,7 +4,7 @@
         "operator",
         "collection_times",
         "drive_through",
-        "reference"
+        "ref"
     ],
     "geometry": [
         "point",
