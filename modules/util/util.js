@@ -1,3 +1,5 @@
+import { remove as removeDiacritics } from 'diacritics';
+
 export function tagText(entity) {
     return d3.entries(entity.tags).map(function(e) {
         return e.key + '=' + e.value;
@@ -114,7 +116,12 @@ export function getStyle(selector) {
     }
 }
 
+// Calculates Levenshtein distance between two strings
+// see:  https://en.wikipedia.org/wiki/Levenshtein_distance
+// first converts the strings to lowercase and replaces diacritic marks with ascii equilivants.
 export function editDistance(a, b) {
+    a = removeDiacritics(a.toLowerCase());
+    b = removeDiacritics(b.toLowerCase());
     if (a.length === 0) return b.length;
     if (b.length === 0) return a.length;
     var matrix = [];

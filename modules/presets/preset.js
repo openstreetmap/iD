@@ -35,7 +35,7 @@ export function Preset(id, preset, fields) {
         return t('presets.presets.' + id + '.' + scope, options);
     };
 
-    var name = preset.name;
+    var name = preset.name || '';
     preset.name = function() {
         if (preset.suggestion) {
             id = id.split('/');

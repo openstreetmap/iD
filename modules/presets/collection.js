@@ -1,4 +1,5 @@
 import { editDistance } from '../util/index';
+
 export function Collection(collection) {
     var maxSearchResults = 50,
         maxSuggestionResults = 10;
@@ -22,6 +23,20 @@ export function Collection(collection) {
         search: function(value, geometry) {
             if (!value) return this;
 
+            function leading(a) {
+                var index = a.indexOf(value);
+                return index === 0 || a[index - 1] === ' ';
+            }
+
+            function suggestionName(name) {
+                var nameArray = name.split(' - ');
+                if (nameArray.length > 1) {
+                    name = nameArray.slice(0, nameArray.length - 1).join(' - ');
+                }
+                return name.toLowerCase();
+            }
+
+
             value = value.toLowerCase();
 
             var searchable = _.filter(collection, function(a) {
@@ -31,10 +46,6 @@ export function Collection(collection) {
                     return a.suggestion === true;
                 });
 
-            function leading(a) {
-                var index = a.indexOf(value);
-                return index === 0 || a[index - 1] === ' ';
-            }
 
             // matches value to preset.name
             var leading_name = _.filter(searchable, function(a) {
@@ -57,10 +68,10 @@ export function Collection(collection) {
 
 
             // finds close matches to value in preset.name
-            var levenstein_name = searchable.map(function(a) {
+            var similar_name = searchable.map(function(a) {
                     return {
                         preset: a,
-                        dist: editDistance(value, a.name().toLowerCase())
+                        dist: editDistance(value, a.name())
                     };
                 }).filter(function(a) {
                     return a.dist + Math.min(value.length - a.preset.name().length, 0) < 3;
@@ -71,19 +82,11 @@ export function Collection(collection) {
                 });
 
             // finds close matches to value in preset.terms
-            var leventstein_terms = _.filter(searchable, function(a) {
+            var similar_terms = _.filter(searchable, function(a) {
                     return _.some(a.terms() || [], function(b) {
                         return editDistance(value, b) + Math.min(value.length - b.length, 0) < 3;
                     });
                 });
-
-            function suggestionName(name) {
-                var nameArray = name.split(' - ');
-                if (nameArray.length > 1) {
-                    name = nameArray.slice(0, nameArray.length-1).join(' - ');
-                }
-                return name.toLowerCase();
-            }
 
             var leading_suggestions = _.filter(suggestions, function(a) {
                     return leading(suggestionName(a.name()));
@@ -95,7 +98,7 @@ export function Collection(collection) {
                     else return i;
                 });
 
-            var leven_suggestions = suggestions.map(function(a) {
+            var similar_suggestions = suggestions.map(function(a) {
                     return {
                         preset: a,
                         dist: editDistance(value, suggestionName(a.name()))
@@ -111,13 +114,13 @@ export function Collection(collection) {
             var other = presets.item(geometry);
 
             var results = leading_name.concat(
-                            leading_terms,
-                            leading_tag_values,
-                            leading_suggestions.slice(0, maxSuggestionResults+5),
-                            levenstein_name,
-                            leventstein_terms,
-                            leven_suggestions.slice(0, maxSuggestionResults)
-                        ).slice(0, maxSearchResults-1);
+                    leading_terms,
+                    leading_tag_values,
+                    leading_suggestions.slice(0, maxSuggestionResults + 5),
+                    similar_name,
+                    similar_terms,
+                    similar_suggestions.slice(0, maxSuggestionResults)
+                ).slice(0, maxSearchResults - 1);
 
             return Collection(_.uniq(
                     results.concat(other)
