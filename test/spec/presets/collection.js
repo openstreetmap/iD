@@ -37,9 +37,15 @@ describe('iD.presets.Collection', function() {
             geometry: ['point', 'area'],
             terms: []
         }),
-        grass: iD.presets.Preset('__test/landuse/grass', {
+        grass1: iD.presets.Preset('__test/landuse/grass1', {
             name: 'Grass',
             tags: { landuse: 'grass' },
+            geometry: ['point', 'area'],
+            terms: []
+        }),
+        grass2: iD.presets.Preset('__test/landuse/grass2', {
+            name: 'Ğṝȁß',
+            tags: { landuse: 'ğṝȁß' },
             geometry: ['point', 'area'],
             terms: []
         }),
@@ -65,17 +71,15 @@ describe('iD.presets.Collection', function() {
 
 
     var c = iD.presets.Collection([
-        p.point, p.line, p.area, p.grill, p.sandpit,
-        p.residential, p.grass, p.park, p.soccer, p.football
+        p.point, p.line, p.area, p.grill, p.sandpit, p.residential,
+        p.grass1, p.grass2, p.park, p.soccer, p.football
     ]);
 
-    var saved, error;
+    var saved;
 
     // setup mock locale object..
     beforeEach(function() {
         saved = locale;
-        error = console.error;
-        console.error = function () {};
         locale = {
             _current: 'en',
             en: {
@@ -94,8 +98,12 @@ describe('iD.presets.Collection', function() {
                             'name': 'Residential Area',
                             'terms': ''
                         },
-                        '__test/landuse/grass': {
+                        '__test/landuse/grass1': {
                             'name': 'Grass',
+                            'terms': ''
+                        },
+                        '__test/landuse/grass2': {
+                            'name': 'Ğṝȁß',
                             'terms': ''
                         },
                         '__test/leisure/park': {
@@ -118,7 +126,6 @@ describe('iD.presets.Collection', function() {
 
     afterEach(function() {
         locale = saved;
-        console.error = error;
     });
 
 
@@ -144,17 +151,24 @@ describe('iD.presets.Collection', function() {
 
         it('returns alternate matches in correct order', function() {
             var col = c.search('gri', 'point').matchGeometry('point').collection;
-            expect(col.indexOf(p.grill)).to.eql(0);      // 1. 'Grill' (leading name)
-            expect(col.indexOf(p.football)).to.eql(1);   // 2. 'Football' (leading term 'gridiron')
-            expect(col.indexOf(p.sandpit)).to.eql(2);    // 3. 'Sandpit' (leading tag value 'grit_bin')
-            expect(col.indexOf(p.grass)).to.eql(3);      // 4. 'Grass' (similar name 'grass')
-            expect(col.indexOf(p.park)).to.eql(4);       // 5. 'Park' (similar term 'grass')
+            expect(col.indexOf(p.grill)).to.eql(0);           // 1. 'Grill' (leading name)
+            expect(col.indexOf(p.football)).to.eql(1);        // 2. 'Football' (leading term 'gridiron')
+            expect(col.indexOf(p.sandpit)).to.eql(2);         // 3. 'Sandpit' (leading tag value 'grit_bin')
+            expect(col.indexOf(p.grass1)).to.be.within(3,4);  // 4. 'Grass' (similar name)
+            expect(col.indexOf(p.grass2)).to.be.within(3,4);  // 5. 'Ğṝȁß' (similar name)
+            expect(col.indexOf(p.park)).to.eql(5);            // 6. 'Park' (similar term 'grass')
         });
 
-        it.skip('considers diacritics on exact matches', function() {
+        it('considers diacritics on exact matches', function() {
+            var col = c.search('ğṝȁ', 'point').matchGeometry('point').collection;
+            expect(col.indexOf(p.grass2)).to.eql(0);    // 1. 'Ğṝȁß'  (leading name)
+            expect(col.indexOf(p.grass1)).to.eql(1);    // 2. 'Grass' (similar name)
         });
 
-        it.skip('replaces diacritics on fuzzy matches', function() {
+        it('replaces diacritics on fuzzy matches', function() {
+            var col = c.search('graß', 'point').matchGeometry('point').collection;
+            expect(col.indexOf(p.grass1)).to.be.within(0,1);    // 1. 'Grass' (similar name)
+            expect(col.indexOf(p.grass2)).to.be.within(0,1);    // 2. 'Ğṝȁß'  (similar name)
         });
 
         it('includes the appropriate fallback preset', function() {
