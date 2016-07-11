@@ -110,8 +110,8 @@ export function address(field, context) {
 
         var center = entity.extent(context.graph()).center(),
             addressFormat;
-
-        iD.services.nominatim().countryCode(center, function (err, countryCode) {
+        iD.services.nominatim.init();
+        iD.services.nominatim.countryCode(center, function (err, countryCode) {
             addressFormat = _.find(iD.data.addressFormats, function (a) {
                 return a && a.countryCodes && _.includes(a.countryCodes, countryCode);
             }) || _.first(iD.data.addressFormats);

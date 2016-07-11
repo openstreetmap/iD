@@ -15,8 +15,8 @@ export function MapillaryImages(projection, context, dispatch) {
 
     function getMapillary() {
         if (iD.services.mapillary && !_mapillary) {
-            _mapillary = iD.services.mapillary();
-            _mapillary.on('loadedImages', debouncedRedraw);
+            _mapillary = iD.services.mapillary.init();
+            _mapillary.event.on('loadedImages', debouncedRedraw);
         } else if (!iD.services.mapillary && _mapillary) {
             _mapillary = null;
         }

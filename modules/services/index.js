@@ -1,5 +1,6 @@
-export { mapillary } from './mapillary';
-export { nominatim } from './nominatim';
-export { taginfo } from './taginfo';
-export { wikidata } from './wikidata';
-export { wikipedia } from './wikipedia';
+import * as mapillary from './mapillary';
+import * as nominatim from './nominatim';
+import * as taginfo from './taginfo';
+import * as wikidata from './wikidata';
+import * as wikipedia from './wikipedia';
+export { mapillary, taginfo, nominatim, wikidata, wikipedia};

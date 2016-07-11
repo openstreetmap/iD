@@ -3,8 +3,8 @@ import { Icon } from '../../svg/index';
 
 export function wikipedia(field, context) {
     var dispatch = d3.dispatch('change'),
-        wikipedia = iD.services.wikipedia(),
-        wikidata = iD.services.wikidata(),
+        wikipedia = iD.services.wikipedia.init(),
+        wikidata = iD.services.wikidata.init(),
         link, entity, lang, title;
 
     function wiki(selection) {
