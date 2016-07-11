@@ -1,18 +1,20 @@
 describe('wikipedia', function() {
     var entity, context, selection, field, wikiDelay, selectedId;
 
-    function wikidataStub() {
-        wikidataStub.itemsByTitle = function(lang, title, callback) {
-            var data = {Q216353: {id: 'Q216353'}};
-            if (wikiDelay) {
-                window.setTimeout(function () { callback(title, data); }, wikiDelay);
+    function jsonp(url, callback) {
+        var args = [{
+            entities: {
+                Q216353: { id: 'Q216353' }
             }
-            else {
-                callback(title, data);
-            }
-        };
-        return wikidataStub;
-    }
+        }];
+        if (wikiDelay) {
+            window.setTimeout(function () {
+                callback.apply(null, args);
+            }, wikiDelay);
+        } else {
+            callback.apply(null, args);
+        }
+    };
 
     function changeTags(changed) {
         var annotation = t('operations.change_tags.annotation');
@@ -29,12 +31,12 @@ describe('wikipedia', function() {
         field = context.presets(iD.data.presets).presets().field('wikipedia');
         wikiDelay = 0;
 
-        sinon.stub(iD.services, 'wikidata', wikidataStub);
+        sinon.stub(d3, 'jsonp', jsonp);
         sinon.stub(context, 'selectedIDs', function() { return [selectedId]; });
     });
 
     afterEach(function() {
-        iD.services.wikidata.restore();
+        d3.jsonp.restore();
         context.selectedIDs.restore();
     });
 
