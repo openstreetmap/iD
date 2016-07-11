@@ -14,7 +14,7 @@ describe('wikipedia', function() {
         } else {
             callback.apply(null, args);
         }
-    };
+    }
 
     function changeTags(changed) {
         var annotation = t('operations.change_tags.annotation');
