@@ -1,3 +1,4 @@
+import { Detect } from '../util/detect';
 import { Extent } from '../geo/index';
 import { Icon } from '../svg/index';
 import { qsString } from '../util/index';
@@ -279,7 +280,7 @@ export function init() {
     };
 
     mapillary.signsSupported = function() {
-        var detected = iD.detect();
+        var detected = Detect();
         return (!(detected.ie || detected.browser.toLowerCase() === 'safari'));
     };
 

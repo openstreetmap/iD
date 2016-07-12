@@ -1,4 +1,5 @@
 import { ChangeTags } from '../../actions/index';
+import { Detect } from '../../util/detect';
 import { Icon } from '../../svg/index';
 
 export function wikipedia(field, context) {
@@ -73,7 +74,7 @@ export function wikipedia(field, context) {
 
     function language() {
         var value = lang.value().toLowerCase();
-        var locale = iD.detect().locale.toLowerCase();
+        var locale = Detect().locale.toLowerCase();
         var localeLanguage;
         return _.find(iD.data.wikipedia, function(d) {
             if (d[2] === locale) localeLanguage = d;

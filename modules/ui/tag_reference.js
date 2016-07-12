@@ -1,4 +1,6 @@
+import { Detect } from '../util/detect';
 import { Icon } from '../svg/index';
+
 export function TagReference(tag, context) {
     var tagReference = {},
         button,
@@ -7,7 +9,7 @@ export function TagReference(tag, context) {
         showing;
 
     function findLocal(data) {
-        var locale = iD.detect().locale.toLowerCase(),
+        var locale = Detect().locale.toLowerCase(),
             localized;
 
         localized = _.find(data, function(d) {

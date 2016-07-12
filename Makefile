@@ -62,10 +62,8 @@ dist/iD.js: \
 	js/lib/d3.curtain.js \
 	js/lib/d3.value.js \
 	js/lib/lodash.js \
-	js/id/start.js \
 	js/id/id.js \
 	$(MODULE_TARGETS) \
-	js/id/end.js \
 	js/lib/locale.js \
 	data/introGraph.js
 

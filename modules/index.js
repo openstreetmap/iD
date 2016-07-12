@@ -10,6 +10,9 @@ import * as ui from './ui/index';
 import * as util from './util/index';
 import * as validations from './validations/index';
 
+// detect
+export { Detect } from './util/detect';
+
 // core
 export { Connection } from './core/connection';
 export { Difference } from './core/difference';

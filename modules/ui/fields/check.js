@@ -1,5 +1,6 @@
-export { check as defaultcheck };
 import { oneWayTags } from '../../core/index';
+
+export { check as defaultcheck };
 export function check(field) {
     var dispatch = d3.dispatch('change'),
         options = field.strings && field.strings.options,

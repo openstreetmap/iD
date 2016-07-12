@@ -1,11 +1,15 @@
+import { Detect } from '../util/detect';
+
 // Translate a MacOS key command into the appropriate Windows/Linux equivalent.
 // For example, ⌘Z -> Ctrl+Z
 export function cmd(code) {
-    if (iD.detect().os === 'mac') {
+    var detected = Detect();
+
+    if (detected.os === 'mac') {
         return code;
     }
 
-    if (iD.detect().os === 'win') {
+    if (detected.os === 'win') {
         if (code === '⌘⇧Z') return 'Ctrl+Y';
     }
 

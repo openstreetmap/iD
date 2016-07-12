@@ -1,3 +1,4 @@
+import { Detect } from '../util/detect';
 import { Entity } from './entity';
 import { Extent } from '../geo/index';
 import { JXON } from '../util/jxon';
@@ -258,7 +259,7 @@ export function Connection(useHttps) {
     };
 
     connection.changesetTags = function(comment, imageryUsed) {
-        var detected = iD.detect(),
+        var detected = Detect(),
             tags = {
                 created_by: 'iD ' + iD.version,
                 imagery_used: imageryUsed.join(';').substr(0, 255),
