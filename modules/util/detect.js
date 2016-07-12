@@ -55,6 +55,13 @@ export function Detect() {
     detected.locale = (navigator.languages && navigator.languages.length)
         ? navigator.languages[0] : (navigator.language || navigator.userLanguage || 'en-US');
 
+    // Loaded locale is stored in window.locale.current()
+    // return that instead (except in the situation where 'en' might override 'en-US')
+    var loadedLocale = (window.locale && window.locale.current()) || 'en';
+    if (loadedLocale !== 'en') {
+        detected.locale = loadedLocale;
+    }
+
     detected.filedrop = (window.FileReader && 'ondrop' in window);
 
     function nav(x) {

@@ -307,14 +307,9 @@ window.iD = function () {
 
     var locale, localePath;
     context.locale = function(loc, path) {
+        if (!arguments.length) return locale;
         locale = loc;
         localePath = path;
-
-        // Also set iD.Detect().locale (unless we detected 'en-us' and openstreetmap wants 'en')..
-        if (!(loc.toLowerCase() === 'en' && iD.Detect().locale.toLowerCase() === 'en-us')) {
-            iD.Detect().locale = loc;
-        }
-
         return context;
     };
 
