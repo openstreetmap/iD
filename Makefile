@@ -48,10 +48,6 @@ MODULE_TARGETS = \
 js/lib/id/index.js: $(shell find modules -type f)
 	@rm -f $@
 	node_modules/.bin/rollup -c rollup.config.js -f umd -n iD modules/index.js --no-strict -o $@
-# 
-# js/lib/id/services.js: $(shell find modules/services -type f)
-# 	@rm -f $@
-# 	node_modules/.bin/rollup -c rollup.config.js -f umd -n iD.services modules/services/index.js --no-strict -o $@
 
 dist/iD.js: \
 	js/lib/bootstrap-tooltip.js \
