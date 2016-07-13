@@ -4,6 +4,7 @@ import { Attribution } from './attribution';
 import { Background } from './background';
 import { Browse } from '../modes/index';
 import { Contributors } from './contributors';
+import { Detect } from '../util/detect';
 import { FeatureInfo } from './feature_info';
 import { FullScreen } from './full_screen';
 import { Geolocate } from './geolocate';
@@ -29,7 +30,7 @@ export function init(context) {
     function render(container) {
         var map = context.map();
 
-        if (iD.detect().opera) container.classed('opera', true);
+        if (Detect().opera) container.classed('opera', true);
 
         var hash = Hash(context);
 

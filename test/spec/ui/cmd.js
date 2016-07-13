@@ -1,24 +1,26 @@
 describe('iD.ui.cmd', function () {
-    var detect, os;
+    var origNavigator, ua;
 
     beforeEach(function() {
-        detect = iD.detect;
-        iD.detect = function() {
-            return { os: os };
-        };
+        /* eslint-disable no-native-reassign */
+        origNavigator = navigator;
+        navigator = Object.create(origNavigator, {
+            userAgent: { get: function() { return ua; } }
+        });
     });
 
     afterEach(function() {
-        iD.detect = detect;
+        navigator = origNavigator;
+        /* eslint-enable no-native-reassign */
     });
 
     it('does not overwrite mac keybindings', function () {
-        os = 'mac';
+        ua = 'Mac';
         expect(iD.ui.cmd('⌘A')).to.eql('⌘A');
     });
 
     it('changes keys to linux versions', function () {
-        os = 'linux';
+        ua = 'Linux';
         expect(iD.ui.cmd('⌘A')).to.eql('Ctrl+A');
         expect(iD.ui.cmd('⇧A')).to.eql('Shift+A');
         expect(iD.ui.cmd('⌘⇧A')).to.eql('Ctrl+Shift+A');
@@ -26,7 +28,7 @@ describe('iD.ui.cmd', function () {
     });
 
     it('changes keys to win versions', function () {
-        os = 'win';
+        ua = 'Win';
         expect(iD.ui.cmd('⌘A')).to.eql('Ctrl+A');
         expect(iD.ui.cmd('⇧A')).to.eql('Shift+A');
         expect(iD.ui.cmd('⌘⇧A')).to.eql('Ctrl+Shift+A');
@@ -34,7 +36,7 @@ describe('iD.ui.cmd', function () {
     });
 
     it('handles multi-character keys', function () {
-        os = 'win';
+        ua = 'Win';
         expect(iD.ui.cmd('f11')).to.eql('f11');
         expect(iD.ui.cmd('⌘plus')).to.eql('Ctrl+plus');
     });

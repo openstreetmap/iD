@@ -1,5 +1,7 @@
+import { Detect } from '../../util/detect';
 import { Icon } from '../../svg/index';
 import { SuggestNames } from '../../util/index';
+
 export function localized(field, context) {
     var dispatch = d3.dispatch('change', 'input'),
         wikipedia = iD.services.wikipedia.init(),
@@ -53,7 +55,7 @@ export function localized(field, context) {
     function addNew() {
         d3.event.preventDefault();
         var data = localizedInputs.selectAll('div.entry').data();
-        var defaultLang = iD.detect().locale.toLowerCase().split('-')[0];
+        var defaultLang = Detect().locale.toLowerCase().split('-')[0];
         var langExists = _.find(data, function(datum) { return datum.lang === defaultLang;});
         var isLangEn = defaultLang.indexOf('en') > -1;
         if (isLangEn || langExists) {

@@ -1,4 +1,7 @@
-export { combo as typeCombo, combo as multiCombo };
+export {
+    combo as typeCombo,
+    combo as multiCombo
+};
 export function combo(field, context) {
     var dispatch = d3.dispatch('change'),
         isMulti = (field.type === 'multiCombo'),

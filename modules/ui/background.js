@@ -1,5 +1,6 @@
 import { metersToOffset, offsetToMeters } from '../geo/index';
 import { BackgroundSource } from '../renderer/index';
+import { Detect } from '../util/detect';
 import { Icon } from '../svg/index';
 import { MapInMap } from './map_in_map';
 import { cmd } from './cmd';
@@ -37,7 +38,7 @@ export function Background(context) {
                 .style('opacity', d)
                 .attr('data-opacity', d);
 
-            if (!iD.detect().opera) {
+            if (!Detect().opera) {
                 setTransform(bg, 0, 0);
             }
 

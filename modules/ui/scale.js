@@ -1,7 +1,9 @@
 import { lonToMeters, metersToLon } from '../geo/index';
+import { Detect } from '../util/detect';
+
 export function Scale(context) {
     var projection = context.projection,
-        imperial = (iD.detect().locale.toLowerCase() === 'en-us'),
+        imperial = (Detect().locale.toLowerCase() === 'en-us'),
         maxLength = 180,
         tickHeight = 8;
 

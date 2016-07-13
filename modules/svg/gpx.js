@@ -1,4 +1,5 @@
 import { Extent, polygonIntersectsPolygon } from '../geo/index';
+import { Detect } from '../util/detect';
 import toGeoJSON from 'togeojson';
 
 export function Gpx(projection, context, dispatch) {
@@ -22,7 +23,7 @@ export function Gpx(projection, context, dispatch) {
             .on('drop.localgpx', function() {
                 d3.event.stopPropagation();
                 d3.event.preventDefault();
-                if (!iD.detect().filedrop) return;
+                if (!Detect().filedrop) return;
                 drawGpx.files(d3.event.dataTransfer.files);
             })
             .on('dragenter.localgpx', over)

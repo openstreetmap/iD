@@ -1,4 +1,5 @@
 import { pointInPolygon } from '../../geo/index';
+
 export function maxspeed(field, context) {
     var dispatch = d3.dispatch('change'),
         entity,

@@ -1,4 +1,5 @@
 import { OneWaySegments, Path, RelationMemberTags, TagClasses } from './index';
+import { Detect } from '../util/detect';
 import { Entity } from '../core/index';
 import { simpleMultipolygonOuterMember } from '../geo/index';
 
@@ -121,7 +122,7 @@ export function Lines(projection) {
         oneways
             .attr('d', function(d) { return d.d; });
 
-        if (iD.detect().ie) {
+        if (Detect().ie) {
             oneways.each(function() { this.parentNode.insertBefore(this, this); });
         }
 

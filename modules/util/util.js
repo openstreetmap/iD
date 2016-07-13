@@ -1,3 +1,4 @@
+import { Detect } from './detect';
 import { remove as removeDiacritics } from 'diacritics';
 
 export function tagText(entity) {
@@ -26,7 +27,7 @@ export function entityOrMemberSelector(ids, graph) {
 }
 
 export function displayName(entity) {
-    var localeName = 'name:' + iD.detect().locale.toLowerCase().split('-')[0];
+    var localeName = 'name:' + Detect().locale.toLowerCase().split('-')[0];
     return entity.tags[localeName] || entity.tags.name || entity.tags.ref;
 }
 
@@ -98,7 +99,7 @@ export function prefixCSSProperty(property) {
 var transformProperty;
 export function setTransform(el, x, y, scale) {
     var prop = transformProperty = transformProperty || prefixCSSProperty('Transform'),
-        translate = iD.detect().opera ?
+        translate = Detect().opera ?
             'translate('   + x + 'px,' + y + 'px)' :
             'translate3d(' + x + 'px,' + y + 'px,0)';
     return el.style(prop, translate + (scale ? ' scale(' + scale + ')' : ''));

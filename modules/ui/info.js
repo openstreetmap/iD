@@ -1,9 +1,10 @@
+import { Detect } from '../util/detect';
 import { Extent } from '../geo/index';
 import { cmd } from './cmd';
 
 export function Info(context) {
     var key = cmd('⌘I'),
-        imperial = (iD.detect().locale.toLowerCase() === 'en-us'),
+        imperial = (Detect().locale.toLowerCase() === 'en-us'),
         hidden = true;
 
     function info(selection) {
