@@ -8,16 +8,16 @@ describe('iD.presets.presets', function() {
             tags: {},
             geometry: ['line']
         },
+        vertex: {
+            tags: {},
+            geometry: ['vertex']
+        },
         residential: {
-            tags: {
-                highway: 'residential'
-            },
+            tags: { highway: 'residential' },
             geometry: ['line']
         },
         park: {
-            tags: {
-                leisure: 'park'
-            },
+            tags: { leisure: 'park' },
             geometry: ['point', 'area']
         }
     };
@@ -26,18 +26,36 @@ describe('iD.presets.presets', function() {
 
     describe('#match', function() {
         it('returns a collection containing presets matching a geometry and tags', function() {
-            var way = iD.Way({tags: { highway: 'residential'}}),
+            var way = iD.Way({ tags: { highway: 'residential' } }),
                 graph = iD.Graph([way]);
             expect(c.match(way, graph).id).to.eql('residential');
         });
 
         it('returns the appropriate fallback preset when no tags match', function() {
             var point = iD.Node(),
-                line = iD.Way({tags: {foo: 'bar'}}),
+                line = iD.Way({ tags: { foo: 'bar' } }),
                 graph = iD.Graph([point, line]);
+
             expect(c.match(point, graph).id).to.eql('point');
             expect(c.match(line, graph).id).to.eql('line');
         });
+
+        it('matches vertices on a line as vertices', function() {
+            var point = iD.Node({ tags: { leisure: 'park' } }),
+                line = iD.Way({ nodes: [point.id], tags: { 'highway': 'residential' } }),
+                graph = iD.Graph([point, line]);
+
+            expect(c.match(point, graph).id).to.eql('vertex');
+        });
+
+        it('matches vertices on an addr:interpolation line as points', function() {
+            var point = iD.Node({ tags: { leisure: 'park' } }),
+                line = iD.Way({ nodes: [point.id], tags: { 'addr:interpolation': 'even' } }),
+                graph = iD.Graph([point, line]);
+
+            expect(c.match(point, graph).id).to.eql('park');
+        });
+
     });
 
     describe('#areaKeys', function() {

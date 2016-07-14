@@ -23,8 +23,14 @@ export function presets() {
     };
 
     all.match = function(entity, resolver) {
-        var geometry = entity.geometry(resolver),
-            geometryMatches = index[geometry],
+        var geometry = entity.geometry(resolver);
+
+        // Treat entities on addr:interpolation lines as points, not vertices (#3241)
+        if (geometry === 'vertex' && entity.isOnAddressLine(resolver)) {
+            geometry = 'point';
+        }
+
+        var geometryMatches = index[geometry],
             best = -1,
             match;
 
