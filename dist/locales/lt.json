@@ -1164,9 +1164,6 @@
             "shop": {
                 "label": "Tipas"
             },
-            "sloped_curb": {
-                "label": "Nužemintas šaligatvis"
-            },
             "smoking": {
                 "label": "Rūkymas",
                 "options": {
@@ -2680,9 +2677,6 @@
             "shop/cheese": {
                 "name": "Sūrių parduotuvė",
                 "terms": "sūrio parduotuvė"
-            },
-            "shop/chemist": {
-                "name": "Vaistinė"
             },
             "shop/chocolate": {
                 "name": "Šokolado parduotuvė",

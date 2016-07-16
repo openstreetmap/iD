@@ -23,7 +23,7 @@
             "tail": "I-click upang magdagdag ng mga tuldok sa poligon. I-click ang unang tuldok upang isarado ang poligon o area."
         },
         "draw_line": {
-            "tail": "I-click upang magdagdag ng higit pang mga node sa linya. Mag-click sa iba pang mga linya upang kumonekta sa kanila, at i-double click upang tapusin ang linya."
+            "tail": "I-click upang magdagdag ng higit pang mga node sa linya. Mag-click sa iba pang mga linya upang magdugtong ito at, i-double click para tapusin ang linya."
         }
     },
     "operations": {
@@ -72,7 +72,8 @@
                 "area": "Ginawang pabilog and isang area o poligon."
             },
             "not_closed": "Hindi ito maaaring gawing pabilog dahil hindi ito isang \"loop\".",
-            "too_large": "Hindi na ito maaaring gawing pabilog dahil hindi sapat ang kasalukuyang nakikita sa mapa."
+            "too_large": "Hindi na ito maaaring gawing pabilog dahil hindi sapat ang kasalukuyang nakikita sa mapa.",
+            "connected_to_hidden": "Hindi magawang pabilog dahil may nakatagong feature na konektado dito."
         },
         "orthogonalize": {
             "title": "Iskawalado",
@@ -86,14 +87,16 @@
                 "area": "Ginawang iskawalado ang bawat kanto ng area o poligon."
             },
             "not_squarish": "Hindi maaring gawing iskwalado.",
-            "too_large": "Hindi ito maaaring gawing iskuwalado dahil hindi sapat ang kasalukuyang nakikita sa mapa."
+            "too_large": "Hindi ito maaaring gawing iskuwalado dahil hindi sapat ang kasalukuyang nakikita sa mapa.",
+            "connected_to_hidden": "Hindi magawang iskawaldo dahil may nakatagong feature na konektado dito."
         },
         "straighten": {
             "title": "Ituwid",
             "description": "Ituwid ang linyang ito.",
             "key": "S",
             "annotation": "Naituwid ang linya.",
-            "too_bendy": "Hindi naituwid dahil masyadong kurbado."
+            "too_bendy": "Hindi naituwid dahil masyadong kurbado.",
+            "connected_to_hidden": "Hindi magawang tuwid dahil may nakatagong feature na konektado dito."
         },
         "delete": {
             "title": "Burahin",
@@ -106,7 +109,9 @@
                 "relation": "Binura ang isang \"relation\".",
                 "multiple": "Binura ang {n} bagay sa mapa."
             },
-            "incomplete_relation": "Hindi maaring mabura dahil ito ay hindi pa ganap na nai-download."
+            "incomplete_relation": "Hindi maaring mabura dahil ito ay hindi pa ganap na nai-download.",
+            "part_of_relation": "Hindi mabura dahil bahagi ito ng isang malaking relation.  Alising munu ito sa ralation bago burahin.",
+            "connected_to_hidden": "Hindi mabura dahil may nakatagong feature na konektado dito."
         },
         "add_member": {
             "annotation": "Dinagdag ang kasapi o miyembro ng relation."
@@ -127,13 +132,20 @@
             "description": "Alisin sa pagkakadugtong ang mga linya / poligon.",
             "key": "D",
             "annotation": "Naalis sa pagkakadugtong ang mga linya / poligon.",
-            "not_connected": "Hindi sapat na bilang ng mga linya upang i-diskonekta o paghiwalayin."
+            "not_connected": "Hindi sapat na bilang ng mga linya upang i-diskonekta o paghiwalayin.",
+            "connected_to_hidden": "Hindi maalis ang pagkakadugtong dahil may nakatagong feature na konektado dito.",
+            "relation": "Hindi maalis ang pagkakadugtong dahil bahagi ito ng relation."
         },
         "merge": {
             "title": "Pagsamahin",
+            "description": "Pagsamahin.",
             "key": "C",
+            "annotation": "Pinagsama ang {n} features.",
             "not_eligible": "Ang mga bagay na ito ay hindi maaaring pagsamahin.",
-            "incomplete_relation": "Hindi maaaring ipagsama o i-merge dahil ang isa sa mga ito ay hindi pa ganap na nai-download."
+            "not_adjacent": "Hindi maaring pagsamahin dahil hindi konektado.",
+            "restriction": "Hindi maaring pagsamahin dahil may isang o higit pang feature na bahagi ng \"{relation}\" relation.",
+            "incomplete_relation": "Hindi maaaring ipagsama o i-merge dahil ang isa sa mga ito ay hindi pa ganap na nai-download.",
+            "conflicting_tags": "Hindi maaring pagsamahin dahil may magkakaibang mga tags ang bawat isa."
         },
         "move": {
             "title": "Ilipat ng posisyon",
@@ -146,7 +158,9 @@
                 "area": "Inilipat ang posisyon ng isang area o poligon.",
                 "multiple": "Inilipat ang posisyon ang maraming bagay."
             },
-            "incomplete_relation": "Hindi maaring ilipat ng posisyon dahil ito ay hindi pa ganap na nai-download."
+            "incomplete_relation": "Hindi maaring ilipat ng posisyon dahil ito ay hindi pa ganap na nai-download.",
+            "too_large": "Hindi mailipat ng lokasyon dahil hindi kita sa mapa ang buong features.",
+            "connected_to_hidden": "Hindi mailipat ng lokasyon dahil dahil may nakatagong feature na konektado dito."
         },
         "rotate": {
             "title": "Paikutin",
@@ -155,7 +169,9 @@
             "annotation": {
                 "line": "Pinaikot ang linya.",
                 "area": "Pinaikot ang area o poligon."
-            }
+            },
+            "too_large": "Hindi mapaikot dahil hindi kita sa mapa ang buong features.",
+            "connected_to_hidden": "Hindi mapaikot dahil dahil may nakatagong feature na konektado dito."
         },
         "reverse": {
             "title": "Baliktarin",
@@ -177,7 +193,8 @@
                 "multiple": "Hatiin ang {n} linya/area o poligon."
             },
             "not_eligible": "Hindi maaaring hatiin ang linya mula sa umpisa o dulong \"node\" nito.",
-            "multiple_ways": "Masyadong maraming mga linya dito upang hatiin."
+            "multiple_ways": "Masyadong maraming mga linya dito upang hatiin.",
+            "connected_to_hidden": "Hindi masibak dahil dahil may nakatagong feature na konektado dito."
         },
         "restriction": {
             "help": {
@@ -201,6 +218,7 @@
         "nothing": "Walang ma-redo."
     },
     "tooltip_keyhint": "Shortcut:",
+    "browser_notice": "Ang editor na ito compatible lamang sa bagong version Firefox, Chrome, Safari, Opera, and Internet Explorer 11. Magupgrade ng browser o gamitin ang Potlatch 2 para makapag-edit.",
     "translate": {
         "translate": "I-salin",
         "localized_translation_label": "Multilingual name",
@@ -210,6 +228,12 @@
     "zoom_in_edit": "Mag-zoom-in para makapag-edit",
     "logout": "Mag-logout",
     "loading_auth": "Kumokonekta sa OpenStreetMap ...",
+    "report_a_bug": "Magulat ng bug.",
+    "help_translate": "Tumulong sa pagasasalin.",
+    "feature_info": {
+        "hidden_warning": "{count} na nakatagong features",
+        "hidden_details": "Nakatago ang mga features na ito: {details}"
+    },
     "status": {
         "error": "Hindi maka-konekta sa API.",
         "offline": "Kasalukuyang offline ang API. Subukang mag-edit muli sa ibang pagkakataon.",
@@ -217,18 +241,28 @@
     },
     "commit": {
         "title": "I-save ang mga binago.",
+        "description_placeholder": "Maikling paglalarawan ng iyong mga kontribusyon (kailangan)",
+        "message_label": "Komento sa changeset",
         "upload_explanation": "Ang mga pagbabagong na-upload ay makikita sa lahat ng mapang gumagamit ng datos ng OpenStreetMap.",
         "upload_explanation_with_user": "Ang mga pagbabagong na-upload bilang {user} ay makikita sa lahat ng mapang gumagamit ng datos ng OpenStreetMap.",
         "save": "I-save",
         "cancel": "Kanselahin",
+        "changes": "{count} Changes",
         "warnings": "Mga babala",
         "modified": "Binago",
         "deleted": "Binura",
-        "created": "Nilikha"
+        "created": "Nilikha",
+        "about_changeset_comments": "Tungkol changeset comments",
+        "about_changeset_comments_link": "//wiki.openstreetmap.org/wiki/Good_changeset_comments",
+        "google_warning": "Nabanggit mo ang Google sa komentong ito: tandaan na pagkopya mula sa Google Maps ay mahigpit na ipinagbabawal.",
+        "google_warning_link": "http://www.openstreetmap.org/copyright"
     },
     "contributors": {
         "list": "Edits nina {users}",
         "truncated_list": "Edits nina {users} at {count} iba pa"
+    },
+    "infobox": {
+        "selected": "{n} ang napili"
     },
     "geocoder": {
         "search": "Maghanap sa buong mundo ...",
@@ -277,6 +311,7 @@
         "custom": "Custom",
         "custom_button": "I-edit ang custom na background",
         "custom_prompt": "Magpasok ng template na tile URL. Ang wastong mga token ay {z}, {x}, {y} para sa Z/X/Y scheme at {u} naman para sa quadtile scheme.",
+        "fix_misalignment": "Baguhin ang imagery offset",
         "reset": "I-reset"
     },
     "feature": {
@@ -370,13 +405,17 @@
         "lines": {
             "title": "Mga linya",
             "start": "**Simulan ang linya sa pamamagitan ng pag-click sa dulo ng kalsada.**",
+            "intersect": "I-click upang magdagdag ng higit pang mga nodes sa linya. Maaari mong i-drag ang mapa kung kinakailangan. Ang kalsada o ibang pang mga uri ng mga linya, ay bahagi ng isang mas malaking network. Mahalagang konektado ang mga linyo para mas maayos na routing.  ** I-click sa {name} upang lumikha ng isang intersection sa dalawang linya. **",
             "finish": "Ang mga linya ay matatapos sa pamamagitan ng pag-click muli sa huling node. **Taposin ang pagguhit ng kalsada.**",
             "road": "**Piliin ang \"Road\" mula sa talaan**",
             "residential": "Mayroong iba't ibang mga uri ng mga kalsada, ang pinaka-karaniwang ay residential. **Piliin ang residential na uri ng kalsada**",
+            "describe": "**Lagyan ng pangalan ang kasada at i-click ang {button} button para masara ang feature editor.**",
+            "restart": "Kailangang magkadugtong ang kalsadang {name}.",
             "wrong_preset": "Hindi ka pumili ang Residential na uri ng kalsada. **I-click dito upang piliin muli**"
         },
         "startediting": {
             "title": "Umpisahan ang pag-edit",
+            "help": "Maaaring i-replay ang walkthrough o tingnan ang karagdagang dokumentasyon. I-click lamang ang {button} Help button.",
             "save": "Huwag kalimutan na regular na i-save ang iyong mga binago!",
             "start": "Simulan ang pagma-mapa!"
         }

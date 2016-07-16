@@ -608,6 +608,9 @@
             "cuisine": {
                 "label": "Кухиња"
             },
+            "currency_multi": {
+                "label": "Врсте валута"
+            },
             "cycleway": {
                 "label": "Стазе за бицикле",
                 "options": {
@@ -698,6 +701,9 @@
             "fuel": {
                 "label": "Гориво"
             },
+            "fuel_multi": {
+                "label": "Врсте горива"
+            },
             "gauge": {
                 "label": "Колосек"
             },
@@ -768,6 +774,9 @@
                     "wlan": "Бежични Интернет",
                     "yes": "Да"
                 }
+            },
+            "internet_access/fee": {
+                "label": "Накнада за приступ интернету"
             },
             "lamp_type": {
                 "label": "Врста"
@@ -842,6 +851,9 @@
                 "label": "Ограничење брзине",
                 "placeholder": "40, 50, 60..."
             },
+            "maxstay": {
+                "label": "Максимално задржавање"
+            },
             "mtb/scale": {
                 "placeholder": "0, 1, 2, 3..."
             },
@@ -887,17 +899,28 @@
             "par": {
                 "placeholder": "3, 4, 5..."
             },
+            "parallel_direction": {
+                "label": "Смер",
+                "options": {
+                    "backward": "Уназад",
+                    "forward": "Напред"
+                }
+            },
             "park_ride": {
                 "label": "Подстицај паркирања"
             },
             "parking": {
                 "label": "Врста",
                 "options": {
+                    "carports": "Складиште аутомобила",
                     "multi-storey": "Вишеспратни",
                     "sheds": "Наткривени",
                     "surface": "Подлога",
                     "underground": "Подземни"
                 }
+            },
+            "payment_multi": {
+                "label": "Врсте плаћања"
             },
             "phone": {
                 "label": "Телефон",
@@ -939,6 +962,9 @@
             "restrictions": {
                 "label": "Znaci zabrane kretanja"
             },
+            "rooms": {
+                "label": "Собе"
+            },
             "route": {
                 "label": "Врста"
             },
@@ -975,8 +1001,22 @@
             "shop": {
                 "label": "Врста"
             },
+            "site": {
+                "label": "Врста"
+            },
             "smoking": {
-                "label": "Пушење"
+                "label": "Пушење",
+                "options": {
+                    "isolated": "Простор за пушаче је физички изолован",
+                    "no": "Пушење није дозвољено",
+                    "outside": "Пушење дозвољено ван објекта",
+                    "separated": "Простор за пушаче није физички изолован",
+                    "yes": "Пушење дозвољено"
+                },
+                "placeholder": "Не, одвојено, да..."
+            },
+            "smoothness": {
+                "label": "Углачаност"
             },
             "social_facility_for": {
                 "label": "Народна кухиња",
@@ -1003,6 +1043,9 @@
                     "tunnel": "Тунел"
                 },
                 "placeholder": "Непознато"
+            },
+            "studio": {
+                "label": "Врста"
             },
             "substation": {
                 "label": "Врста"
@@ -1753,6 +1796,9 @@
             "landuse/churchyard": {
                 "name": "Црквено двориште"
             },
+            "landuse/commercial": {
+                "name": "Пословна област"
+            },
             "landuse/construction": {
                 "name": "Област у изградњи"
             },
@@ -1764,6 +1810,9 @@
             },
             "landuse/grass": {
                 "name": "Трава"
+            },
+            "landuse/industrial": {
+                "name": "Индустријска област"
             },
             "landuse/landfill": {
                 "name": "Депонија"
@@ -1779,6 +1828,12 @@
             },
             "landuse/quarry": {
                 "name": "Каменолом"
+            },
+            "landuse/residential": {
+                "name": "Стамбена област"
+            },
+            "landuse/retail": {
+                "name": "Малопродајна област"
             },
             "landuse/vineyard": {
                 "name": "Виноград"
@@ -2173,9 +2228,6 @@
             "shop/car_repair": {
                 "name": "Ауто сервис"
             },
-            "shop/chemist": {
-                "name": "Апотекар"
-            },
             "shop/clothes": {
                 "name": "Продавница одеће"
             },
@@ -2194,17 +2246,32 @@
             "shop/doityourself": {
                 "name": "Све за кућу"
             },
+            "shop/dry_cleaning": {
+                "name": "Хемијско чишћење"
+            },
             "shop/electronics": {
                 "name": "Електроника"
             },
+            "shop/erotic": {
+                "name": "Еротска продавница"
+            },
+            "shop/fabric": {
+                "name": "Текстилна продавница"
+            },
             "shop/farm": {
                 "name": "Производни штанд"
+            },
+            "shop/fashion": {
+                "name": "Бутик"
             },
             "shop/fishmonger": {
                 "name": "Рибарница"
             },
             "shop/florist": {
                 "name": "Цвећар"
+            },
+            "shop/funeral_directors": {
+                "name": "Загробна опрема"
             },
             "shop/furniture": {
                 "name": "Продавница намештаја"
@@ -2238,6 +2305,9 @@
             },
             "shop/jewelry": {
                 "name": "Златар"
+            },
+            "shop/kiosk": {
+                "name": "Трафика"
             },
             "shop/kitchen": {
                 "name": "Кухињски дизајн"
@@ -2281,8 +2351,17 @@
             "shop/organic": {
                 "name": "Органски производи"
             },
+            "shop/paint": {
+                "name": "Фарбара"
+            },
+            "shop/pawnbroker": {
+                "name": "Залагаоница"
+            },
             "shop/pet": {
                 "name": "Продавница кућних љубимаца"
+            },
+            "shop/photo": {
+                "name": "Фотографска радња"
             },
             "shop/seafood": {
                 "name": "Продавница морске хране "
@@ -2346,6 +2425,9 @@
             },
             "tourism/chalet": {
                 "name": "Шале"
+            },
+            "tourism/gallery": {
+                "name": "Галерија слика"
             },
             "tourism/guest_house": {
                 "name": "Гостинска кућа"

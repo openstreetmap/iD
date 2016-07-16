@@ -1039,6 +1039,12 @@
                     "yes": "有"
                 }
             },
+            "internet_access/fee": {
+                "label": "網路存取費用"
+            },
+            "kerb": {
+                "label": "路邊斜坡"
+            },
             "lamp_type": {
                 "label": "種類"
             },
@@ -1195,6 +1201,13 @@
                 "label": "標準桿數",
                 "placeholder": "3,4,5..."
             },
+            "parallel_direction": {
+                "label": "方向",
+                "options": {
+                    "backward": "反向",
+                    "forward": "正向"
+                }
+            },
             "park_ride": {
                 "label": "停車轉乘"
             },
@@ -1288,6 +1301,9 @@
             "restrictions": {
                 "label": "轉向限制"
             },
+            "rooms": {
+                "label": "房間數"
+            },
             "route": {
                 "label": "種類"
             },
@@ -1352,9 +1368,6 @@
             "site": {
                 "label": "種類"
             },
-            "sloped_curb": {
-                "label": "斜路緣"
-            },
             "smoking": {
                 "label": "吸煙",
                 "options": {
@@ -1396,6 +1409,16 @@
             },
             "sport_racing": {
                 "label": "運動"
+            },
+            "stars": {
+                "label": "星等"
+            },
+            "stop": {
+                "label": "停車指示種類",
+                "options": {
+                    "all": "全部方向",
+                    "minor": "非主要道路"
+                }
             },
             "structure": {
                 "label": "人造結構物",
@@ -2389,6 +2412,10 @@
                 "name": "救護站",
                 "terms": "急救站"
             },
+            "emergency/defibrillator": {
+                "name": "去顫器",
+                "terms": "去顫器,心臟去顫器,自動體外心臟去顫器,AED"
+            },
             "emergency/fire_hydrant": {
                 "name": "消防栓",
                 "terms": "消防栓,消防設施,"
@@ -2480,6 +2507,10 @@
             "highway/footway": {
                 "name": "人行道",
                 "terms": "步行徑,人行步道"
+            },
+            "highway/give_way": {
+                "name": "通行標誌",
+                "terms": "讓車標誌"
             },
             "highway/living_street": {
                 "name": "生活街道",
@@ -2892,6 +2923,10 @@
             "man_made/breakwater": {
                 "name": "防波堤",
                 "terms": "防波堤"
+            },
+            "man_made/bridge": {
+                "name": "橋樑",
+                "terms": "橋樑,橋,陸橋,天橋"
             },
             "man_made/chimney": {
                 "name": "煙囪",

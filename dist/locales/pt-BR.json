@@ -660,7 +660,7 @@
                         "title": "Destino"
                     },
                     "dismount": {
-                        "description": "Acesso permitido mas cavaleiro deve desmontar",
+                        "description": "Acesso permitido, mas deve-se descer da bicicleta/motocicleta/animal",
                         "title": "Desmontar"
                     },
                     "no": {
@@ -668,7 +668,7 @@
                         "title": "Proibido"
                     },
                     "permissive": {
-                        "description": "Acesso livre e autorizado (mas cancelável) pelo dono",
+                        "description": "Acesso permitido pelo dono, mas revogável a qualquer momento",
                         "title": "Autorizado"
                     },
                     "private": {
@@ -866,7 +866,7 @@
                 "label": "Ciclofaixas",
                 "options": {
                     "lane": {
-                        "description": "Uma ciclofaixa, ou seja, sem segregação fisica, apenas separada do trânsito de automóveis por uma linha pintada.",
+                        "description": "Uma ciclofaixa sem segregação fisica, ou seja, apenas separada do trânsito de automóveis por uma linha pintada e eventualmente tachões.",
                         "title": "Ciclofaixa padrão"
                     },
                     "none": {
@@ -878,7 +878,7 @@
                         "title": "Ciclofaixa na contramão"
                     },
                     "opposite_lane": {
-                        "description": "Uma ciclofaixa que segue em ambos sentidos em uma via de mão única",
+                        "description": "Uma ciclofaixa que segue no sentido contrário ao dos automóveis",
                         "title": "Ciclofaixa no sentido contrário"
                     },
                     "share_busway": {
@@ -890,7 +890,7 @@
                         "title": "Ciclofaixa compartilhada"
                     },
                     "track": {
-                        "description": "Uma ciclofaixa separada do trânsito por uma barreira física",
+                        "description": "Uma ciclofaixa separada dos automóveis por uma barreira física",
                         "title": "Ciclovia paralela"
                     }
                 },
@@ -1038,6 +1038,12 @@
                     "wlan": "Sem Fio",
                     "yes": "Sim"
                 }
+            },
+            "internet_access/fee": {
+                "label": "Taxa para acesso à Internet"
+            },
+            "kerb": {
+                "label": "Meio-fio"
             },
             "lamp_type": {
                 "label": "Tipo"
@@ -1195,6 +1201,13 @@
                 "label": "Par",
                 "placeholder": "3, 4, 5..."
             },
+            "parallel_direction": {
+                "label": "Direção",
+                "options": {
+                    "backward": "Contrária à direção da linha",
+                    "forward": "Igual à direção da linha"
+                }
+            },
             "park_ride": {
                 "label": "Estacionamento de Intercâmbio"
             },
@@ -1288,6 +1301,9 @@
             "restrictions": {
                 "label": "Restrições de curva"
             },
+            "rooms": {
+                "label": "Número de quartos ou apartamentos"
+            },
             "route": {
                 "label": "Tipo"
             },
@@ -1352,9 +1368,6 @@
             "site": {
                 "label": "Tipo"
             },
-            "sloped_curb": {
-                "label": "Rampa no Meio-fio"
-            },
             "smoking": {
                 "label": "Fumantes",
                 "options": {
@@ -1396,6 +1409,16 @@
             },
             "sport_racing": {
                 "label": "Esporte"
+            },
+            "stars": {
+                "label": "Estrelas"
+            },
+            "stop": {
+                "label": "Tipo de parada obrigatória",
+                "options": {
+                    "all": "De todas as direções",
+                    "minor": "Na(s) via(s) de hierarquia inferior"
+                }
             },
             "structure": {
                 "label": "Estrutura",
@@ -1505,7 +1528,7 @@
                 "label": "Largura (Metros)"
             },
             "wikipedia": {
-                "label": "Wikipédia"
+                "label": "Artigo na Wikipédia"
             }
         },
         "presets": {
@@ -1558,8 +1581,8 @@
                 "terms": "Aerovia"
             },
             "aeroway/aerodrome": {
-                "name": "Aeroporto",
-                "terms": "Aeroporto"
+                "name": "Aeroporto ou aeródromo",
+                "terms": "Aeroporto, aeródromo"
             },
             "aeroway/apron": {
                 "name": "Pátio de Aeródromo",
@@ -1650,7 +1673,7 @@
                 "terms": "Cafeteria, Café"
             },
             "amenity/car_rental": {
-                "name": "Aluguel de Carros",
+                "name": "Locadora de veículos",
                 "terms": "Aluguel de Veículos, locadora, locadora de carros, carros, veículos, automóveis"
             },
             "amenity/car_sharing": {
@@ -1658,19 +1681,19 @@
                 "terms": "Carsharing, "
             },
             "amenity/car_wash": {
-                "name": "Lavagem de Veículos",
-                "terms": "Lavagem de Veículos, Lava jato"
+                "name": "Lava a Jato",
+                "terms": "Lavagem de Veículos, Lava jato, lava rápido, lava-a-jato, lava-jato"
             },
             "amenity/casino": {
                 "name": "Cassino",
-                "terms": "jogos de azar"
+                "terms": "jogos de azar, aposta"
             },
             "amenity/charging_station": {
                 "name": "Eletroposto",
                 "terms": "Eletroposto, Estação de Recarga, Estação de Carga Elétrica, Tomada de Cargamento, Tomada de Recarga"
             },
             "amenity/childcare": {
-                "name": "Berçário/Creche",
+                "name": "Berçário ou Creche",
                 "terms": "Berçário, Creche, Maternal, Jardim de infância, Cuidados infantis"
             },
             "amenity/cinema": {
@@ -1678,7 +1701,7 @@
                 "terms": "Cinema, Sala de Cinema"
             },
             "amenity/clinic": {
-                "name": "Clínica",
+                "name": "Clínica ou Posto de Saúde",
                 "terms": "Clínica, Consultório, Posto de Saúde, Médico, Atendimento médico especializado, hospital"
             },
             "amenity/clock": {
@@ -1691,11 +1714,11 @@
             },
             "amenity/community_centre": {
                 "name": "Centro Comunitário",
-                "terms": "Centro comunitário, Salão de festas e eventos"
+                "terms": "Centro comunitário, Salão de festas e eventos, centro social, associação de moradores"
             },
             "amenity/compressed_air": {
-                "name": "Ar Comprimido",
-                "terms": "Ar Comprimido"
+                "name": "Bomba de ar comprimido",
+                "terms": "Ar Comprimido, calibragem, calibrar, pneu, bicicleta"
             },
             "amenity/courthouse": {
                 "name": "Tribunal",
@@ -1706,7 +1729,7 @@
                 "terms": "Dentista, Odontologista"
             },
             "amenity/doctors": {
-                "name": "Médico",
+                "name": "Consultório médico",
                 "terms": "Clínica, Doutor, Hospital, Saúde, Atendimento médico"
             },
             "amenity/dojo": {
@@ -1714,7 +1737,7 @@
                 "terms": "Judô, Karatê, hapkidô, jiu-jítsu, ju-jitsu boxe, savate, ninjitsu, esgrima, luta olímpica, krav magá, capoeira, artes marciais, luta, taekwondo, kickboxing"
             },
             "amenity/drinking_water": {
-                "name": "Água Potável",
+                "name": "Bebedouro",
                 "terms": "Água Potável, Bebedouro, fonte"
             },
             "amenity/embassy": {
@@ -1726,7 +1749,7 @@
                 "terms": "fast food, lanchonete, lanches, Lancheria, comida rápida"
             },
             "amenity/ferry_terminal": {
-                "name": "Terminal de Ferry",
+                "name": "Terminal de balsa",
                 "terms": "Terminal de Ferry Boat, Ferry Boat, Balsa, Barco"
             },
             "amenity/fire_station": {
@@ -1739,7 +1762,7 @@
             },
             "amenity/fuel": {
                 "name": "Posto de Combustível",
-                "terms": "Posto de Gasolina"
+                "terms": "Posto de Gasolina, Combustíveis, Posto de Combustíveis, Combustível, Diesel, Gasolina, GNV, Etanol, Abastecimento, Carro"
             },
             "amenity/grave_yard": {
                 "name": "Cemitério Paroquial",
@@ -1766,8 +1789,8 @@
                 "terms": "Livros"
             },
             "amenity/marketplace": {
-                "name": "Mercado municipal",
-                "terms": "Feira"
+                "name": "Mercado ou feira",
+                "terms": "Feira, mercado, mercado municipal, feirinha"
             },
             "amenity/motorcycle_parking": {
                 "name": "Estacionamento de motos",
@@ -1775,7 +1798,7 @@
             },
             "amenity/nightclub": {
                 "name": "Boate",
-                "terms": "Discoteca, Boate, Casa Noturna"
+                "terms": "Discoteca, Boate, Casa Noturna, boite, "
             },
             "amenity/parking": {
                 "name": "Estacionamento",
@@ -1791,7 +1814,7 @@
             },
             "amenity/pharmacy": {
                 "name": "Farmácia",
-                "terms": "Farmácia, Drogaria, Farmácia de Manipulação"
+                "terms": "Farmácia, Drogaria, Farmácia de Manipulação, remédio, medicamento"
             },
             "amenity/place_of_worship": {
                 "name": "Local de Prática Religiosa",
@@ -1874,16 +1897,16 @@
                 "terms": "Banco de Alimentos"
             },
             "amenity/social_facility/group_home": {
-                "name": "Lar de Idosos",
-                "terms": "Alberque, casa de repouso, Casa de idosos"
+                "name": "Asilo",
+                "terms": "Albergue, casa de repouso, Casa de idosos, asilo, ancionato, clínica geriátrica,"
             },
             "amenity/social_facility/homeless_shelter": {
                 "name": "Abrigo para moradores de rua",
-                "terms": "Refúgio para Desabrigados"
+                "terms": "Refúgio para Desabrigados, albergue, abrigo, mendigo, sopão"
             },
             "amenity/studio": {
-                "name": "Estúdio",
-                "terms": "Estúdio"
+                "name": "Estúdio de rádio ou de gravação",
+                "terms": "Estúdio, rádio, ensaio, música, banda, gravação"
             },
             "amenity/swimming_pool": {
                 "name": "Piscina",
@@ -1906,11 +1929,11 @@
                 "terms": "Banheiros, Sanitário, WC, Lavabo, Toalete"
             },
             "amenity/townhall": {
-                "name": "Paço Municipal",
+                "name": "Paço Municipal ou Prefeitura",
                 "terms": "Prefeitura"
             },
             "amenity/university": {
-                "name": "Área Universitária",
+                "name": "Universidade ou Faculdade",
                 "terms": "Área de Universidade, Faculdade, Área de Faculdade, Centro Universitário"
             },
             "amenity/vending_machine/cigarettes": {
@@ -1919,11 +1942,11 @@
             },
             "amenity/vending_machine/condoms": {
                 "name": "Máquina de Venda de Preservativos",
-                "terms": "Máquinas de venda de preservativos"
+                "terms": "Máquinas de venda de preservativos, camisinha"
             },
             "amenity/vending_machine/drinks": {
                 "name": "Máquina de Venda de Bebidas",
-                "terms": "Máquina de Venda de Bebidas"
+                "terms": "Máquina de Venda de Bebidas, refrigerante, lata, latinha"
             },
             "amenity/vending_machine/excrement_bags": {
                 "name": "Máquina de Vendas de Sacola de Excrementos",
@@ -1947,7 +1970,7 @@
             },
             "amenity/vending_machine/sweets": {
                 "name": "Máquina de Venda de Lanches",
-                "terms": "Salgados, Doces, Petiscos"
+                "terms": "Salgados, Doces, Petiscos, salgadinho"
             },
             "amenity/vending_machine/vending_machine": {
                 "name": "Máquina de Venda",
@@ -1962,7 +1985,7 @@
                 "terms": "Cesto de Lixo, Lixeira, Balde de Lixo"
             },
             "amenity/waste_disposal": {
-                "name": "Container de Lixo não Reciclável",
+                "name": "Contêiner de lixo não reciclável",
                 "terms": "lixo, resíduos, container"
             },
             "amenity/water_point": {
@@ -1987,7 +2010,7 @@
             },
             "barrier/bollard": {
                 "name": "Pilarete",
-                "terms": "Pilar, Poste, Cabeço, Pedestal, Estaca"
+                "terms": "Pilar, Poste, Cabeço, Pedestal, Estaca, frade"
             },
             "barrier/cattle_grid": {
                 "name": "Mata-burro",
@@ -2054,8 +2077,8 @@
                 "terms": "Edifício, Prédio, Edificação"
             },
             "building/apartments": {
-                "name": "Apartamentos",
-                "terms": "Apartamentos"
+                "name": "Edifício de apartamentos",
+                "terms": "Apartamentos, prédio, residencial, edifício, quitenete, kitnet, condomínio"
             },
             "building/barn": {
                 "name": "Celeiro",
@@ -2086,8 +2109,8 @@
                 "terms": "Colégio técnico, Ensino profissionalizante, Educação profissional"
             },
             "building/commercial": {
-                "name": "Edifício de Negócios",
-                "terms": "Edifício de Negócios, Edifício Comercial, Prédio Comercial"
+                "name": "Edifício de escritórios",
+                "terms": "Edifício de Negócios, Edifício Comercial, Prédio Comercial, edifício de escritórios, prédio de escritórios"
             },
             "building/construction": {
                 "name": "Edifício em construção",
@@ -2138,7 +2161,7 @@
                 "terms": "Edifício Industrial"
             },
             "building/kindergarten": {
-                "name": "Edifício da pré-escola",
+                "name": "Edifício de pré-escola",
                 "terms": "Pré-escola, Centro de educação infantil, CEI, Jardim de infância"
             },
             "building/public": {
@@ -2150,16 +2173,16 @@
                 "terms": "Edifício Residencial"
             },
             "building/retail": {
-                "name": "Edifício de Atividade de Vendas",
-                "terms": "Edifício de Atividade de Vendas, Edifício de Varejo"
+                "name": "Edifício de varejo ou loja",
+                "terms": "Edifício de Atividade de Vendas, Edifício de Varejo, loja"
             },
             "building/roof": {
-                "name": "Teto",
-                "terms": "Telhado, Cobertura"
+                "name": "Telhado ou cobertura",
+                "terms": "Telhado, Cobertura, teto"
             },
             "building/school": {
-                "name": "Edifício da Escola",
-                "terms": "Edifício Escolar"
+                "name": "Edifício escolar",
+                "terms": "Edifício Escolar, escola"
             },
             "building/semidetached_house": {
                 "name": "Casa Geminada",
@@ -2194,8 +2217,8 @@
                 "terms": "Armazém, Depósito, Almoxarifado"
             },
             "craft": {
-                "name": "Artesanato",
-                "terms": "arte, trabalho manual"
+                "name": "Profissional manual",
+                "terms": "arte, trabalho manual, ofício, serviço"
             },
             "craft/basket_maker": {
                 "name": "Cesteiro",
@@ -2226,19 +2249,19 @@
                 "terms": "Carpinteiro, Marceneiro, marcenaria, Carpintaria"
             },
             "craft/carpet_layer": {
-                "name": "Colocador de Carpete",
-                "terms": "Colocador de Carpete"
+                "name": "Instalador de Carpete",
+                "terms": "Colocador de Carpete, instalação"
             },
             "craft/caterer": {
-                "name": "Fornecedor de Mantimentos",
-                "terms": "Fornecedor de Mantimentos, Aprovisionador"
+                "name": "Fornecedor de refeições",
+                "terms": "Fornecedor de Mantimentos, Aprovisionador, cozinheiro, encomenda, marmita, PF, refeição,"
             },
             "craft/clockmaker": {
                 "name": "Relojoeiro",
                 "terms": "Relógios, relojoaria"
             },
             "craft/confectionery": {
-                "name": "Doçaria",
+                "name": "Doceiro",
                 "terms": "doçaria, confeitaria, doces"
             },
             "craft/dressmaker": {
@@ -2258,12 +2281,12 @@
                 "terms": "Vidraceiro"
             },
             "craft/handicraft": {
-                "name": "Artesanato",
-                "terms": "Artesanato"
+                "name": "Artesão",
+                "terms": "Artesanato, artesão, trabalho manual,"
             },
             "craft/hvac": {
-                "name": "HVAC",
-                "terms": "HVAC, Refrigeração, Aquecimento, Ventilação"
+                "name": "Técnico de ar condicionado",
+                "terms": "HVAC, Refrigeração, Aquecimento, Ventilação, ar condicionado"
             },
             "craft/insulator": {
                 "name": "Isolador",
@@ -2274,16 +2297,16 @@
                 "terms": "Ourives"
             },
             "craft/key_cutter": {
-                "name": "Chaveiro",
+                "name": "Copiador de chaves",
                 "terms": "Chaveiro"
             },
             "craft/locksmith": {
-                "name": "Serralheiro",
+                "name": "Chaveiro",
                 "terms": "Chaveiro"
             },
             "craft/metal_construction": {
                 "name": "Construção Metálica",
-                "terms": "Construção Metálica"
+                "terms": "Construção Metálica, corrimão, toldo, rampa, porta, ferreiro, solda"
             },
             "craft/optician": {
                 "name": "Ótica",
@@ -2359,7 +2382,7 @@
             },
             "craft/tiler": {
                 "name": "Ladrilheiro",
-                "terms": "Ladrilheiro"
+                "terms": "Ladrilheiro, lajota, assentamento"
             },
             "craft/tinsmith": {
                 "name": "Funileiro",
@@ -2388,6 +2411,10 @@
             "emergency/ambulance_station": {
                 "name": "Posto de Ambulâncias",
                 "terms": "Primeiros socorros, Parada de Ambulâncias, Garagem de Ambulâncias"
+            },
+            "emergency/defibrillator": {
+                "name": "Desfibrilador",
+                "terms": "desfibrilador automático externo, dea"
             },
             "emergency/fire_hydrant": {
                 "name": "Hidrante",
@@ -2481,9 +2508,13 @@
                 "name": "Caminho de Pedestre",
                 "terms": "Via de Pedestre, Caminho de Pedestre, Passeio, Calçada"
             },
+            "highway/give_way": {
+                "name": "Sinalização “dê a preferência”",
+                "terms": "dê a preferência, dar a preferência, preferencial"
+            },
             "highway/living_street": {
                 "name": "Via Compartilhada",
-                "terms": "Rua de Convivência, Rua Preferencial a Pedestres"
+                "terms": "Rua de Convivência, Rua Preferencial a Pedestres,espaço compartilhado,rua compartilhada"
             },
             "highway/mini_roundabout": {
                 "name": "Mini-Rotatória",
@@ -2522,8 +2553,8 @@
                 "terms": "Pista de Corrida de Automóveis, Autódromo, Kartódromo"
             },
             "highway/residential": {
-                "name": "Via Residencial",
-                "terms": "Via Residencial, Rua Residencial"
+                "name": "Via local residencial",
+                "terms": "Via Residencial, Rua Residencial, rua local"
             },
             "highway/rest_area": {
                 "name": "Área de Repouso",
@@ -2546,8 +2577,8 @@
                 "terms": "Via de Serviço"
             },
             "highway/service/alley": {
-                "name": "Beco",
-                "terms": "Beco"
+                "name": "Beco de serviço",
+                "terms": "Beco,viela,viela sanitária,ruela"
             },
             "highway/service/drive-through": {
                 "name": "Drive-Thru",
@@ -2566,16 +2597,16 @@
                 "terms": "Corredor de Estacionamento"
             },
             "highway/services": {
-                "name": "Área de Serviço",
-                "terms": "Área de Serviço"
+                "name": "Posto de Serviços",
+                "terms": "Área de Serviço, Posto de combustíveis, posto de gasolina, combustíveis, borracharia, lava jato, serviços, loja de conveniências"
             },
             "highway/steps": {
                 "name": "Escada",
                 "terms": "Degraus, Escada, Escadaria"
             },
             "highway/stop": {
-                "name": "Placa de Pare",
-                "terms": "Sinal de Pare, Placa Pare"
+                "name": "Parada obrigatória",
+                "terms": "Sinal de Pare, Placa Pare, pare, parada obrigatória"
             },
             "highway/street_lamp": {
                 "name": "Poste de Luz",
@@ -2610,8 +2641,8 @@
                 "terms": "Balão de Retorno"
             },
             "highway/unclassified": {
-                "name": "Estrada Vicinal",
-                "terms": "Via sem classificação, Estrada de Terra, Rodovia sem pavimentação,"
+                "name": "Via local não residencial",
+                "terms": "Via sem classificação, Estrada de Terra, Rodovia sem pavimentação,via local,vicinal,estrada"
             },
             "historic": {
                 "name": "Local Histórico",
@@ -2674,8 +2705,8 @@
                 "terms": "Adro, Entorno da Igreja, Terreno Adjacente à Igreja"
             },
             "landuse/commercial": {
-                "name": "Área de Negócios",
-                "terms": "Área de Negócios, Área Comercial"
+                "name": "Área de escritórios e negócios",
+                "terms": "Área de Negócios, Área Comercial, escritórios"
             },
             "landuse/construction": {
                 "name": "Construção",
@@ -2738,8 +2769,8 @@
                 "terms": "Residencial, residências"
             },
             "landuse/retail": {
-                "name": "Área de Vendas",
-                "terms": "Área de Vendas, Área de Varejo, Comércio, Varejista, Comercial, Vendas"
+                "name": "Área de comércio e varejo",
+                "terms": "Área de Vendas, Área de Varejo, Comércio, Varejista, Comercial, Vendas, lojas"
             },
             "landuse/vineyard": {
                 "name": "Vinha",
@@ -2794,7 +2825,7 @@
                 "terms": "Reserva florestal, floresta"
             },
             "leisure/park": {
-                "name": "Parque / Praça",
+                "name": "Parque ou Praça",
                 "terms": "Parque, praça"
             },
             "leisure/picnic_table": {
@@ -2892,6 +2923,10 @@
             "man_made/breakwater": {
                 "name": "Molhe/Quebra-Mar",
                 "terms": "Molhe, Quebra-Mar"
+            },
+            "man_made/bridge": {
+                "name": "Ponte",
+                "terms": "ponte, viaduto, rio, rodovia, estrada, rua,"
             },
             "man_made/chimney": {
                 "name": "Chaminé",
@@ -3150,8 +3185,8 @@
                 "terms": "Escritório Financeiro, Financeiro"
             },
             "office/government": {
-                "name": "Escritório do Governo",
-                "terms": "Gabinete do Governo, Escritório do Governo"
+                "name": "Órgão governamental",
+                "terms": "Gabinete, escritório, governo, secretaria, organização, departamento"
             },
             "office/insurance": {
                 "name": "Seguradora",
@@ -3178,7 +3213,7 @@
                 "terms": "médico, consultório, doutor, consulta"
             },
             "office/political_party": {
-                "name": "Partido Político",
+                "name": "Escritório de Partido Político",
                 "terms": "política, político, partido, gabinete"
             },
             "office/research": {
@@ -3455,7 +3490,7 @@
             },
             "shop/chemist": {
                 "name": "Loja de Cosméticos e Higiene",
-                "terms": "Loja de Cosméticos e Higiene Pessoal"
+                "terms": "farmácia, drogaria, cosmético, higiene, maquiagem, banho"
             },
             "shop/chocolate": {
                 "name": "Loja de Chocolates",
@@ -3490,8 +3525,8 @@
                 "terms": "Perfumaria, Cosméticos, Loja de Cosméticos, Beleza"
             },
             "shop/craft": {
-                "name": "Loja de Artes e Artesanato",
-                "terms": "loja de artesanato"
+                "name": "Loja de materiais artísticos ou para artesanato",
+                "terms": "loja de artesanato, desenho, material, papelaria, pintura, arte, biscuit"
             },
             "shop/curtain": {
                 "name": "Loja de Cortinas",
@@ -3506,7 +3541,7 @@
                 "terms": "Delicatessen"
             },
             "shop/department_store": {
-                "name": "Loja de Departamento",
+                "name": "Loja de Departamentos",
                 "terms": "Loja de Departamento"
             },
             "shop/doityourself": {
@@ -3570,7 +3605,7 @@
                 "terms": "Loja de Presentes"
             },
             "shop/greengrocer": {
-                "name": "Verdureira",
+                "name": "Verdureira ou quitanda",
                 "terms": "Quitanda, Quitandeiro, Loja de frutas e verduras, Frutaria, Verduraria"
             },
             "shop/hairdresser": {
@@ -3626,11 +3661,11 @@
                 "terms": "Técnico de Chaves e Cadeados, Cópia de Chaves, Conserto de Cadeados"
             },
             "shop/lottery": {
-                "name": "Lotérica",
+                "name": "Casa lotérica",
                 "terms": "Loteria, Casa Lotérica, Mega Sena, Quina, Casa de Apostas, Apostas"
             },
             "shop/mall": {
-                "name": "Galeria Comercial/Shopping",
+                "name": "Shopping ou Galeria de lojas",
                 "terms": "Shopping Center, Galeria Comercial"
             },
             "shop/massage": {
@@ -3690,8 +3725,8 @@
                 "terms": "casa de penhores, loja"
             },
             "shop/pet": {
-                "name": "Loja de animais",
-                "terms": "Pet Shop, Veterinário, Animais de estimação"
+                "name": "Loja de animais ou artigos para animais",
+                "terms": "Pet Shop, Veterinário, Animais de estimação, cão, cães, gato"
             },
             "shop/photo": {
                 "name": "Loja de Fotografia",
@@ -3714,8 +3749,8 @@
                 "terms": "Loja de Mergulho"
             },
             "shop/seafood": {
-                "name": "Peixaria / Frutos do mar",
-                "terms": "Peixaria, Pescado, Petisqueira, Loja de Frutos do Mar, Camarão, Lagosta, Peixes"
+                "name": "Peixaria ou loja de frutos do mar",
+                "terms": "Peixaria, Pescado, Petisqueira, Loja de Frutos do Mar, Camarão, Lagosta, Peixes, peixeiro"
             },
             "shop/second_hand": {
                 "name": "Brechó",
@@ -3731,7 +3766,7 @@
             },
             "shop/stationery": {
                 "name": "Papelaria",
-                "terms": "Papelaria"
+                "terms": "Papelaria, material de escritório, material escolar, xerox, cópia"
             },
             "shop/storage_rental": {
                 "name": "Aluguel de Armazenamento",
@@ -3839,7 +3874,7 @@
             },
             "tourism/gallery": {
                 "name": "Galeria de Arte",
-                "terms": "Arte, Galeria, Exposição, Artes Plásticas, Cultura"
+                "terms": "Arte, Galeria, Exposição, Artes Plásticas, Cultura, museu"
             },
             "tourism/guest_house": {
                 "name": "Guesthouse",

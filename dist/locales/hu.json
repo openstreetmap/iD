@@ -1039,6 +1039,12 @@
                     "yes": "Igen"
                 }
             },
+            "internet_access/fee": {
+                "label": "Internetelérés díja"
+            },
+            "kerb": {
+                "label": "Járdaszegély rámpa"
+            },
             "lamp_type": {
                 "label": "Típus"
             },
@@ -1195,6 +1201,13 @@
                 "label": "Golfpálya par száma",
                 "placeholder": "3, 4, 5..."
             },
+            "parallel_direction": {
+                "label": "Irány",
+                "options": {
+                    "backward": "Hátra",
+                    "forward": "Előre"
+                }
+            },
             "park_ride": {
                 "label": "P+R"
             },
@@ -1288,6 +1301,9 @@
             "restrictions": {
                 "label": "Kanyarodási korlátozások"
             },
+            "rooms": {
+                "label": "Szobák"
+            },
             "route": {
                 "label": "Típus"
             },
@@ -1352,9 +1368,6 @@
             "site": {
                 "label": "Típus"
             },
-            "sloped_curb": {
-                "label": "Kerekített szélű járda"
-            },
             "smoking": {
                 "label": "Dohányzó",
                 "options": {
@@ -1396,6 +1409,16 @@
             },
             "sport_racing": {
                 "label": "Sport"
+            },
+            "stars": {
+                "label": "Csillagok"
+            },
+            "stop": {
+                "label": "Elsőbbségadás típusa",
+                "options": {
+                    "all": "Összes út",
+                    "minor": "Alsóbbrendű út"
+                }
             },
             "structure": {
                 "label": "Szerkezet",
@@ -2389,6 +2412,10 @@
                 "name": "Mentőállomás",
                 "terms": "Mentőautó állomás"
             },
+            "emergency/defibrillator": {
+                "name": "Defibrillátor",
+                "terms": "Defibrillátor"
+            },
             "emergency/fire_hydrant": {
                 "name": "Tűzcsap",
                 "terms": "Tűzcsap"
@@ -2480,6 +2507,10 @@
             "highway/footway": {
                 "name": "Gyalogút",
                 "terms": "Járda"
+            },
+            "highway/give_way": {
+                "name": "Elsőbbségadás kötelező tábla",
+                "terms": "elsőbbségadás"
             },
             "highway/living_street": {
                 "name": "Pihenőút",
@@ -2892,6 +2923,10 @@
             "man_made/breakwater": {
                 "name": "Hullámtörő",
                 "terms": "Hullámtörő"
+            },
+            "man_made/bridge": {
+                "name": "Híd",
+                "terms": "híd"
             },
             "man_made/chimney": {
                 "name": "Kémény",
@@ -3455,7 +3490,7 @@
             },
             "shop/chemist": {
                 "name": "Drogéria",
-                "terms": "Drogéria"
+                "terms": "drogéria, gyógyszertár"
             },
             "shop/chocolate": {
                 "name": "Csokoládébolt",

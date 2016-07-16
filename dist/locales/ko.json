@@ -1260,9 +1260,6 @@
             "shop": {
                 "label": "유형"
             },
-            "sloped_curb": {
-                "label": "경사진 커브"
-            },
             "smoking": {
                 "label": "흡연",
                 "options": {
@@ -2526,9 +2523,6 @@
             },
             "shop/cheese": {
                 "name": "치즈 가게"
-            },
-            "shop/chemist": {
-                "name": "화학품점"
             },
             "shop/chocolate": {
                 "name": "초콜릿 가게"

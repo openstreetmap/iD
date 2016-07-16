@@ -509,9 +509,10 @@
     },
     "mapillary_images": {
         "tooltip": "Photos de rue depuis Mapillary",
-        "title": "Surcouche photo (Mapillary)"
+        "title": "Surcouche Photo (Mapillary)"
     },
     "mapillary_signs": {
+        "tooltip": "Panneaux de signalisation de Mapillary (nécessite la Surcouche Photo)",
         "title": "Surcouche de signaux routiers (Mapillary)"
     },
     "mapillary": {
@@ -1038,6 +1039,12 @@
                     "yes": "Oui"
                 }
             },
+            "internet_access/fee": {
+                "label": "Frais d'accès à Internet"
+            },
+            "kerb": {
+                "label": "Batteau de trottoir"
+            },
             "lamp_type": {
                 "label": "Type"
             },
@@ -1194,6 +1201,13 @@
                 "label": "Par",
                 "placeholder": "3, 4, 5..."
             },
+            "parallel_direction": {
+                "label": "Direction",
+                "options": {
+                    "backward": "Vers l'arrière",
+                    "forward": "Vers l'avant"
+                }
+            },
             "park_ride": {
                 "label": "Parking-relais"
             },
@@ -1287,6 +1301,9 @@
             "restrictions": {
                 "label": "Interdictions de tourner"
             },
+            "rooms": {
+                "label": "Chambres"
+            },
             "route": {
                 "label": "Type"
             },
@@ -1351,9 +1368,6 @@
             "site": {
                 "label": "Type de site"
             },
-            "sloped_curb": {
-                "label": "Bateau - abaissement de trottoir"
-            },
             "smoking": {
                 "label": "Fumeur",
                 "options": {
@@ -1395,6 +1409,16 @@
             },
             "sport_racing": {
                 "label": "Sport"
+            },
+            "stars": {
+                "label": "Étoiles"
+            },
+            "stop": {
+                "label": "Type de stop",
+                "options": {
+                    "all": "Tous les chemins",
+                    "minor": "Routes secondaires"
+                }
             },
             "structure": {
                 "label": "Structure",
@@ -2388,6 +2412,10 @@
                 "name": "Station d'ambulance",
                 "terms": "Station d'ambulance"
             },
+            "emergency/defibrillator": {
+                "name": "Défibrillateur",
+                "terms": "Défibrillateura "
+            },
             "emergency/fire_hydrant": {
                 "name": "Borne incendie",
                 "terms": "Borne incendie, borne-fontaine, borne fontaine, bouche d'incendie"
@@ -2405,7 +2433,7 @@
                 "terms": "Traversée de rue,Passage clouté"
             },
             "footway/crosswalk": {
-                "name": "Passage pour piétons",
+                "name": "Passage piéton (zebra)",
                 "terms": "Passage piéton, Zébra, Passage zébré"
             },
             "footway/sidewalk": {
@@ -2469,7 +2497,7 @@
                 "terms": "Passage piéton "
             },
             "highway/crosswalk": {
-                "name": "Passage piéton",
+                "name": "Passage piéton (zebra)",
                 "terms": "Passage piéton, Zébra, Passage zébré"
             },
             "highway/cycleway": {
@@ -2479,6 +2507,10 @@
             "highway/footway": {
                 "name": "Voie piétonne",
                 "terms": "Chemin piétonnier, Sentier"
+            },
+            "highway/give_way": {
+                "name": "Cédez-le-passage",
+                "terms": "Cédez-le-passage"
             },
             "highway/living_street": {
                 "name": "Zone de rencontre",
@@ -2857,8 +2889,8 @@
                 "terms": "Centre sportif,Salle de sport"
             },
             "leisure/sports_centre/swimming": {
-                "name": "Piscine",
-                "terms": "Piscine"
+                "name": "Centre aquatique",
+                "terms": "Piscine,Stade nautique,Stade aquatique"
             },
             "leisure/stadium": {
                 "name": "Stade",
@@ -2891,6 +2923,10 @@
             "man_made/breakwater": {
                 "name": "Brise-lames",
                 "terms": "Brise-lames"
+            },
+            "man_made/bridge": {
+                "name": "Pont",
+                "terms": "Pont"
             },
             "man_made/chimney": {
                 "name": "Cheminée",
@@ -3453,8 +3489,8 @@
                 "terms": "Vente de fromages"
             },
             "shop/chemist": {
-                "name": "Pharmacie",
-                "terms": "Pharmacie"
+                "name": "Parapharmacie",
+                "terms": "Droguerie,pharmacie"
             },
             "shop/chocolate": {
                 "name": "Chocolatier",
@@ -3818,7 +3854,7 @@
             },
             "tourism/artwork": {
                 "name": "Œuvre d'art",
-                "terms": "Œuvre d'art"
+                "terms": "Œuvre d'art,statue,peinture,sculpture"
             },
             "tourism/attraction": {
                 "name": "Attraction touristique",

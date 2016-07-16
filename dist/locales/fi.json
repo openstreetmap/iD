@@ -1294,9 +1294,6 @@
             "shop": {
                 "label": "Tyyppi"
             },
-            "sloped_curb": {
-                "label": "Viistetty reunakivi"
-            },
             "smoking": {
                 "label": "Tupakointi",
                 "options": {
@@ -2978,9 +2975,6 @@
             },
             "shop/cheese": {
                 "name": "Juustopuoti"
-            },
-            "shop/chemist": {
-                "name": "Kemisti"
             },
             "shop/chocolate": {
                 "name": "Suklaapuoti"

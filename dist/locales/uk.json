@@ -512,6 +512,7 @@
         "title": "Фото-шар (Mapillary)"
     },
     "mapillary_signs": {
+        "tooltip": "Дорожні знаки з Mapillary (потрібно увімкнути Фото-шар)",
         "title": "Шар дорожніх знаків (Mapillary)"
     },
     "mapillary": {
@@ -1038,6 +1039,12 @@
                     "yes": "Так"
                 }
             },
+            "internet_access/fee": {
+                "label": "Плата за доступ до Інтеренету"
+            },
+            "kerb": {
+                "label": "Зʼїзд з бордюра"
+            },
             "lamp_type": {
                 "label": "Тип"
             },
@@ -1194,6 +1201,13 @@
                 "label": "Пар",
                 "placeholder": "3, 4, 5…"
             },
+            "parallel_direction": {
+                "label": "Напрямок",
+                "options": {
+                    "backward": "Проти напрямку лінії",
+                    "forward": "За напрямком лінії"
+                }
+            },
             "park_ride": {
                 "label": "Перехоплююча стоянка"
             },
@@ -1287,6 +1301,9 @@
             "restrictions": {
                 "label": "Заборони повороту"
             },
+            "rooms": {
+                "label": "Кількість номерів"
+            },
             "route": {
                 "label": "Тип"
             },
@@ -1351,9 +1368,6 @@
             "site": {
                 "label": "Тип"
             },
-            "sloped_curb": {
-                "label": "Занижений бордюр"
-            },
             "smoking": {
                 "label": "Паління",
                 "options": {
@@ -1395,6 +1409,16 @@
             },
             "sport_racing": {
                 "label": "Спорт"
+            },
+            "stars": {
+                "label": "Кількість зірок"
+            },
+            "stop": {
+                "label": "STOP для…",
+                "options": {
+                    "all": "Всіх доріг",
+                    "minor": "Для другорядних"
+                }
             },
             "structure": {
                 "label": "Споруда",
@@ -2388,6 +2412,10 @@
                 "name": "Станція швидкої медичної допомоги",
                 "terms": "Ambulance Station,cnfywsz idblrj vtlbxyj ljgjvjub, швидка допомога, перша допомога, станція швидкої допомоги"
             },
+            "emergency/defibrillator": {
+                "name": "Дефібрилятор",
+                "terms": "дефібрилятор,кардіостимулятор,невідкладна допомога"
+            },
             "emergency/fire_hydrant": {
                 "name": "Пожежний гідрант",
                 "terms": "Fire Hydrant,gjtybq uslhfyn, пожежний гідрант"
@@ -2479,6 +2507,10 @@
             "highway/footway": {
                 "name": "Пішохідна доріжка",
                 "terms": "Foot Path, nhjnefh, стежка, маршрут, доріжка"
+            },
+            "highway/give_way": {
+                "name": "Дати дорогу",
+                "terms": "знак,дати дорогу,зупинка,пріоритет,рух,обмеження"
             },
             "highway/living_street": {
                 "name": "Житлова зона",
@@ -2891,6 +2923,10 @@
             "man_made/breakwater": {
                 "name": "Хвилеріз",
                 "terms": "Breakwater, dbkthsp, хвилеріз"
+            },
+            "man_made/bridge": {
+                "name": "Контур мосту",
+                "terms": "міст,контур,споруда,перехід,проїзд"
             },
             "man_made/chimney": {
                 "name": "Димохід",
@@ -3454,7 +3490,7 @@
             },
             "shop/chemist": {
                 "name": "Побутова хімія",
-                "terms": "Chemist, gjenjdf svsz, аптекар, фармацевт, хімік"
+                "terms": "побутова хімія,пральний,порошок,миючий засіб,догляд"
             },
             "shop/chocolate": {
                 "name": "Магазин шоколаду",

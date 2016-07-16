@@ -1039,6 +1039,12 @@
                     "yes": "Ja"
                 }
             },
+            "internet_access/fee": {
+                "label": "Internetzugangsgebühr"
+            },
+            "kerb": {
+                "label": "Bordsteinabsenkung"
+            },
             "lamp_type": {
                 "label": "Typ"
             },
@@ -1095,7 +1101,7 @@
                 "label": "Länge (Meter)"
             },
             "level": {
-                "label": "Niveau/Etage"
+                "label": "Stockwerk"
             },
             "levels": {
                 "label": "Etagen",
@@ -1195,6 +1201,13 @@
                 "label": "Par",
                 "placeholder": "3, 4, 5, 6"
             },
+            "parallel_direction": {
+                "label": "Richtung",
+                "options": {
+                    "backward": "Rückwärts",
+                    "forward": "Forwärts"
+                }
+            },
             "park_ride": {
                 "label": "Parken und Reisen"
             },
@@ -1288,6 +1301,9 @@
             "restrictions": {
                 "label": "Abbiegebeschränkungen"
             },
+            "rooms": {
+                "label": "Räume"
+            },
             "route": {
                 "label": "Typ"
             },
@@ -1352,9 +1368,6 @@
             "site": {
                 "label": "Typ"
             },
-            "sloped_curb": {
-                "label": "abgeschrägter Bordstein"
-            },
             "smoking": {
                 "label": "Rauchen",
                 "options": {
@@ -1396,6 +1409,16 @@
             },
             "sport_racing": {
                 "label": "Sport"
+            },
+            "stars": {
+                "label": "Sterne"
+            },
+            "stop": {
+                "label": "Hatestellen-Typ",
+                "options": {
+                    "all": "Rechts-Vor-Links Kreuzung",
+                    "minor": "Nebenstraße"
+                }
             },
             "structure": {
                 "label": "Struktur",
@@ -2389,6 +2412,10 @@
                 "name": "Rettungswache",
                 "terms": "Rettungswache"
             },
+            "emergency/defibrillator": {
+                "name": "Defibrillator",
+                "terms": "Defibrillator, Defi, Schockgeber"
+            },
             "emergency/fire_hydrant": {
                 "name": "Hydrant",
                 "terms": "Hydrant,Löschwasserentnahmestelle"
@@ -2480,6 +2507,10 @@
             "highway/footway": {
                 "name": "Fußweg",
                 "terms": "Fußweg, Fußgängerweg, Fußpfad"
+            },
+            "highway/give_way": {
+                "name": "Vorfahrt gewähren",
+                "terms": "Vorfahrt gewähren-Zeichen, Vorrang gewähren-Zeichen"
             },
             "highway/living_street": {
                 "name": "Verkehrsberuhigter Bereich, auch „Spielstraße“ genannt",
@@ -2892,6 +2923,10 @@
             "man_made/breakwater": {
                 "name": "Wellenbrecher",
                 "terms": "Wellenbrecher, Buhnen"
+            },
+            "man_made/bridge": {
+                "name": "Brücke",
+                "terms": "Brücke, Brückenbauwerk, Steg, Übergang"
             },
             "man_made/chimney": {
                 "name": "Schornstein",
@@ -3455,7 +3490,7 @@
             },
             "shop/chemist": {
                 "name": "Drogerie",
-                "terms": "Drogerie"
+                "terms": "Apotheke, Drogerie"
             },
             "shop/chocolate": {
                 "name": "Schokoladeladen",

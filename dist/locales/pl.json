@@ -330,6 +330,7 @@
         "percent_brightness": "jasność {opacity}%",
         "none": "Brak",
         "best_imagery": "Najlepsza znana warstwa podkładu dla tego obszaru",
+        "switch": "Wróć do tego podkładu",
         "custom": "Własne",
         "custom_button": "Edycja własnego podkładu",
         "custom_prompt": "Wprowadź szablon URL dla kafelków. Dozwolone elementy to {z}, {x}, {y} dla schematu Z/X/Y oraz {u} dla schematu quadtile.",
@@ -872,14 +873,16 @@
                         "title": "Kontrapas"
                     },
                     "opposite_lane": {
-                        "description": "Kontrapas - pas rowerowy na którym ruch odbywa się w przeciwnym kierunku niż kierunek ruchu pasa drogi przy której leży."
+                        "description": "Kontrapas - pas rowerowy na którym ruch odbywa się w przeciwnym kierunku niż kierunek ruchu pasa drogi przy której leży.",
+                        "title": "Kontrapas rowerowy"
                     },
                     "share_busway": {
                         "description": "Pas rowerowy dzielony z buspasem",
                         "title": "Pas rowerowy dzielony z buspasem"
                     },
                     "shared_lane": {
-                        "description": "Pas rowerowy nieoddzielony od pasa ruchu"
+                        "description": "Pas rowerowy nieoddzielony od pasa ruchu",
+                        "title": "Współdzielony pas rowerowy"
                     },
                     "track": {
                         "description": "Pas rowerowy wydzielony z jezdni fizyczną barierą",
@@ -1030,6 +1033,12 @@
                     "wlan": "Bezprzewodowy",
                     "yes": "Tak"
                 }
+            },
+            "internet_access/fee": {
+                "label": "Płatny dostęp do Internetu"
+            },
+            "kerb": {
+                "label": "Krawężnik"
             },
             "lamp_type": {
                 "label": "Typ"
@@ -1187,6 +1196,13 @@
                 "label": "Par",
                 "placeholder": "3, 4, 5..."
             },
+            "parallel_direction": {
+                "label": "Kierunek",
+                "options": {
+                    "backward": "Do tyłu",
+                    "forward": "Do przodu"
+                }
+            },
             "park_ride": {
                 "label": "Parkuj i jedź"
             },
@@ -1224,6 +1240,7 @@
             "piste/grooming": {
                 "label": "Ratrakowanie",
                 "options": {
+                    "backcountry": "Obozowisko",
                     "skating": "Łyżwiarstwo"
                 }
             },
@@ -1269,6 +1286,9 @@
             "restrictions": {
                 "label": "Zakazy/nakazy skrętu"
             },
+            "rooms": {
+                "label": "Liczba pokoi"
+            },
             "route": {
                 "label": "Typ"
             },
@@ -1302,6 +1322,8 @@
             },
             "service_rail": {
                 "options": {
+                    "crossover": "Rozjazd",
+                    "siding": "Bocznica",
                     "spur": "Bocznica",
                     "yard": "Tor na stacji rozrządowej"
                 }
@@ -1317,9 +1339,6 @@
             },
             "site": {
                 "label": "Typ"
-            },
-            "sloped_curb": {
-                "label": "Podjazd dla wózków"
             },
             "smoking": {
                 "label": "Dla palących",
@@ -1362,6 +1381,9 @@
             },
             "sport_racing": {
                 "label": "Sport"
+            },
+            "stars": {
+                "label": "Gwiazdki"
             },
             "structure": {
                 "label": "Struktura",
@@ -1855,9 +1877,15 @@
                 "name": "Automat z gazetami",
                 "terms": "Automat z gazetami"
             },
+            "amenity/vending_machine/parcel_pickup_dropoff": {
+                "name": "Poczkomat z funkcją nadawania przesyłek"
+            },
             "amenity/vending_machine/parking_tickets": {
                 "name": "Parkomat",
                 "terms": "Parkomat"
+            },
+            "amenity/vending_machine/public_transport_tickets": {
+                "name": "Automat z biletami komunikacji publicznej"
             },
             "amenity/vending_machine/sweets": {
                 "name": "Automat z przekąskami",
@@ -1874,6 +1902,9 @@
             "amenity/waste_basket": {
                 "name": "Kosz na śmieci",
                 "terms": "kosz,kubeł,śmietnik"
+            },
+            "amenity/waste_disposal": {
+                "name": "Śmietnik"
             },
             "area": {
                 "name": "Obszar",
@@ -1904,6 +1935,9 @@
             },
             "barrier/cycle_barrier": {
                 "name": "Przegroda antyrowerowa"
+            },
+            "barrier/ditch": {
+                "name": "Rów"
             },
             "barrier/entrance": {
                 "name": "Wejście",
@@ -2032,14 +2066,16 @@
                 "name": "Budynek przedszkola"
             },
             "building/public": {
-                "name": "Budynek publiczny"
+                "name": "Budynek publiczny",
+                "terms": "budynek użyteczności publicznej"
             },
             "building/residential": {
                 "name": "Budynek mieszkalny",
                 "terms": "blok, kamienica, dom, czynszówka"
             },
             "building/retail": {
-                "name": "Budynek handlu detalicznego"
+                "name": "Budynek handlu detalicznego",
+                "terms": "handel detaliczny"
             },
             "building/roof": {
                 "name": "Zadaszenie",
@@ -2049,7 +2085,8 @@
                 "name": "Budynek szkolny"
             },
             "building/semidetached_house": {
-                "name": "Bliźniak"
+                "name": "Bliźniak",
+                "terms": "Dom bliźniaczy"
             },
             "building/shed": {
                 "name": "Szopa",
@@ -2074,16 +2111,20 @@
                 "terms": "uniwersytet, szkoła wyższa, wydział, uczelnia"
             },
             "building/warehouse": {
-                "name": "Magazyn"
+                "name": "Magazyn",
+                "terms": "Magazyn"
             },
             "craft": {
-                "name": "Rzemiosło"
+                "name": "Rzemiosło",
+                "terms": "rzemieślnicy"
             },
             "craft/basket_maker": {
-                "name": "Wikliniarz"
+                "name": "Wikliniarz",
+                "terms": "wikilina"
             },
             "craft/beekeeper": {
-                "name": "Pszczelarz"
+                "name": "Pszczelarz",
+                "terms": "Miód"
             },
             "craft/blacksmith": {
                 "name": "Kowal",
@@ -2116,10 +2157,12 @@
                 "terms": "zegarmistrz"
             },
             "craft/confectionery": {
-                "name": "Sklep ze słodyczami"
+                "name": "Sklep ze słodyczami",
+                "terms": "Słodycze"
             },
             "craft/dressmaker": {
-                "name": "Krawiec"
+                "name": "Krawiec",
+                "terms": "Krawcowa"
             },
             "craft/electrician": {
                 "name": "Elektryk",
@@ -2195,7 +2238,8 @@
                 "name": "Tartak"
             },
             "craft/scaffolder": {
-                "name": "Rusztowania"
+                "name": "Rusztowania",
+                "terms": "Wyrób rusztowań"
             },
             "craft/sculpter": {
                 "name": "Rzeźbiarz"
@@ -2228,7 +2272,8 @@
                 "terms": "zegarki"
             },
             "craft/window_construction": {
-                "name": "Montaż okien"
+                "name": "Montaż okien",
+                "terms": "Monter okien"
             },
             "craft/winery": {
                 "name": "Winnica",
@@ -2241,6 +2286,9 @@
                 "name": "Stacja pogotowia ratunkowego",
                 "terms": "pogotowie ratunkowe"
             },
+            "emergency/defibrillator": {
+                "name": "Defibrylator"
+            },
             "emergency/fire_hydrant": {
                 "name": "Hydrant",
                 "terms": "hydrant"
@@ -2250,7 +2298,8 @@
                 "terms": "telefon,alarmowy,alarm"
             },
             "entrance": {
-                "name": "Wejście/wyjście"
+                "name": "Wejście/wyjście",
+                "terms": "Wejście, Wyjście"
             },
             "footway/crossing": {
                 "name": "Przejście dla pieszych"
@@ -2266,6 +2315,9 @@
             "ford": {
                 "name": "Bród"
             },
+            "golf/green": {
+                "name": "green"
+            },
             "golf/hole": {
                 "name": "dołek na polu golfowym "
             },
@@ -2273,15 +2325,23 @@
                 "name": "Poprzeczna przeszkoda wodna",
                 "terms": "Przeszkoda wodna, Golf woda"
             },
+            "golf/rough": {
+                "name": "rough",
+                "terms": "rough"
+            },
+            "golf/tee": {
+                "name": "rzutnia"
+            },
             "golf/water_hazard": {
-                "name": "Przeszkoda Wodna"
+                "name": "Przeszkoda Wodna",
+                "terms": "Niebezpieczeństwo wodne"
             },
             "highway": {
                 "name": "Droga",
                 "terms": "droga,szlak,ulica"
             },
             "highway/bridleway": {
-                "name": "Droga dla koni",
+                "name": "Droga tylko dla koni",
                 "terms": "jazda konna,szlak jeździecki,szlak konny"
             },
             "highway/bus_stop": {
@@ -2292,10 +2352,12 @@
                 "name": "Korytarz (w budynku)"
             },
             "highway/crossing": {
-                "name": "Przejście dla pieszych"
+                "name": "Przejście dla pieszych",
+                "terms": "Przejście drogowe"
             },
             "highway/crosswalk": {
-                "name": "Przejście dla pieszych"
+                "name": "Przejście dla pieszych",
+                "terms": "Przejście drogowe"
             },
             "highway/cycleway": {
                 "name": "Droga rowerowa",
@@ -2304,6 +2366,9 @@
             "highway/footway": {
                 "name": "Droga/ścieżka dla pieszych",
                 "terms": "pobocze,bulwar,ścieżka,deptak,szosa,spacer"
+            },
+            "highway/give_way": {
+                "name": "Ustąp pierwszeństwa przejazdu"
             },
             "highway/living_street": {
                 "name": "Droga w oznaczonej strefie zamieszkania",
@@ -2667,6 +2732,10 @@
                 "name": "Ośrodek Sportu / Siłownia",
                 "terms": "siłownia"
             },
+            "leisure/sports_centre/swimming": {
+                "name": "Pływalnia",
+                "terms": "basen"
+            },
             "leisure/stadium": {
                 "name": "Stadion",
                 "terms": "stadion"
@@ -2696,6 +2765,9 @@
             "man_made/breakwater": {
                 "name": "Falochron",
                 "terms": "bodiony"
+            },
+            "man_made/bridge": {
+                "name": "Most/wiadukt"
             },
             "man_made/chimney": {
                 "name": "Komin",
@@ -3237,8 +3309,7 @@
                 "terms": "sery"
             },
             "shop/chemist": {
-                "name": "Drogeria",
-                "terms": "apteka"
+                "name": "Drogeria"
             },
             "shop/chocolate": {
                 "name": "Sklep z czekoladą",
@@ -3745,6 +3816,9 @@
             "type/route/hiking": {
                 "name": "Szlak pieszy",
                 "terms": "szlak górski,szlak alpejski,szlak turystyki pieszej"
+            },
+            "type/route/horse": {
+                "name": "Szlak konny"
             },
             "type/route/pipeline": {
                 "name": "Trasa rurociągu",
