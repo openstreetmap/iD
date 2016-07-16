@@ -1,4 +1,4 @@
-describe("iD.presets", function() {
+describe('iD.presets', function() {
     var p = {
         point: {
             tags: {},
@@ -8,39 +8,57 @@ describe("iD.presets", function() {
             tags: {},
             geometry: ['line']
         },
+        vertex: {
+            tags: {},
+            geometry: ['vertex']
+        },
         residential: {
-            tags: {
-                highway: 'residential'
-            },
+            tags: { highway: 'residential' },
             geometry: ['line']
         },
         park: {
-            tags: {
-                leisure: 'park'
-            },
+            tags: { leisure: 'park' },
             geometry: ['point', 'area']
         }
     };
 
     var c = iD.presets().load({presets: p});
 
-    describe("#match", function() {
-        it("returns a collection containing presets matching a geometry and tags", function() {
-            var way = iD.Way({tags: { highway: 'residential'}}),
+    describe('#match', function() {
+        it('returns a collection containing presets matching a geometry and tags', function() {
+            var way = iD.Way({ tags: { highway: 'residential' } }),
                 graph = iD.Graph([way]);
             expect(c.match(way, graph).id).to.eql('residential');
         });
 
-        it("returns the appropriate fallback preset when no tags match", function() {
+        it('returns the appropriate fallback preset when no tags match', function() {
             var point = iD.Node(),
-                line = iD.Way({tags: {foo: 'bar'}}),
+                line = iD.Way({ tags: { foo: 'bar' } }),
                 graph = iD.Graph([point, line]);
+
             expect(c.match(point, graph).id).to.eql('point');
             expect(c.match(line, graph).id).to.eql('line');
         });
+
+        it('matches vertices on a line as vertices', function() {
+            var point = iD.Node({ tags: { leisure: 'park' } }),
+                line = iD.Way({ nodes: [point.id], tags: { 'highway': 'residential' } }),
+                graph = iD.Graph([point, line]);
+
+            expect(c.match(point, graph).id).to.eql('vertex');
+        });
+
+        it('matches vertices on an addr:interpolation line as points', function() {
+            var point = iD.Node({ tags: { leisure: 'park' } }),
+                line = iD.Way({ nodes: [point.id], tags: { 'addr:interpolation': 'even' } }),
+                graph = iD.Graph([point, line]);
+
+            expect(c.match(point, graph).id).to.eql('park');
+        });
+
     });
 
-    describe("#areaKeys", function() {
+    describe('#areaKeys', function() {
         var presets = iD.presets().load({
             presets: {
                 'amenity/fuel/shell': {
@@ -75,57 +93,57 @@ describe("iD.presets", function() {
             }
         });
 
-        it("whitelists keys for presets with area geometry", function() {
+        it('whitelists keys for presets with area geometry', function() {
             expect(presets.areaKeys()).to.include.keys('natural');
         });
 
-        it("blacklists key-values for presets with a line geometry", function() {
+        it('blacklists key-values for presets with a line geometry', function() {
             expect(presets.areaKeys().natural).to.include.keys('tree_row');
             expect(presets.areaKeys().natural.tree_row).to.be.true;
         });
 
-        it("does not blacklist key-values for presets with both area and line geometry", function() {
+        it('does not blacklist key-values for presets with both area and line geometry', function() {
             expect(presets.areaKeys().golf).not.to.include.keys('water_hazard');
         });
 
-        it("does not blacklist key-values for presets with neither area nor line geometry", function() {
+        it('does not blacklist key-values for presets with neither area nor line geometry', function() {
             expect(presets.areaKeys().natural).not.to.include.keys('peak');
         });
 
-        it("does not blacklist generic '*' key-values", function() {
+        it('does not blacklist generic \'*\' key-values', function() {
             expect(presets.areaKeys().natural).not.to.include.keys('natural');
         });
 
-        it("ignores keys like 'highway' that are assumed to be lines", function() {
+        it('ignores keys like \'highway\' that are assumed to be lines', function() {
             expect(presets.areaKeys()).not.to.include.keys('highway');
         });
 
-        it("ignores suggestion presets", function() {
+        it('ignores suggestion presets', function() {
             expect(presets.areaKeys()).not.to.include.keys('amenity');
         });
 
     });
 
-    describe("expected matches", function() {
+    describe('expected matches', function() {
         var presets;
 
         before(function() {
             presets = iD.presets().load(iD.data.presets);
         });
 
-        it("prefers building to multipolygon", function() {
+        it('prefers building to multipolygon', function() {
             var relation = iD.Relation({tags: {type: 'multipolygon', building: 'yes'}}),
                 graph    = iD.Graph([relation]);
             expect(presets.match(relation, graph).id).to.eql('building');
         });
 
-        it("prefers building to address", function() {
+        it('prefers building to address', function() {
             var way   = iD.Way({tags: {area: 'yes', building: 'yes', 'addr:housenumber': '1234'}}),
                 graph = iD.Graph([way]);
             expect(presets.match(way, graph).id).to.eql('building');
         });
 
-        it("prefers pedestrian to area", function() {
+        it('prefers pedestrian to area', function() {
             var way   = iD.Way({tags: {area: 'yes', highway: 'pedestrian'}}),
                 graph = iD.Graph([way]);
             expect(presets.match(way, graph).id).to.eql('highway/pedestrian');

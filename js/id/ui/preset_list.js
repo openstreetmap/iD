@@ -1,12 +1,19 @@
 iD.ui.PresetList = function(context) {
-    var event = d3.dispatch('choose'),
+    var dispatch = d3.dispatch('choose'),
         id,
         currentPreset,
         autofocus = false;
 
     function presetList(selection) {
-        var geometry = context.geometry(id),
-            presets = context.presets().matchGeometry(geometry);
+        var entity = context.entity(id),
+            geometry = context.geometry(id);
+
+        // Treat entities on addr:interpolation lines as points, not vertices (#3241)
+        if (geometry === 'vertex' && entity.isOnAddressLine(context.graph())) {
+            geometry = 'point';
+        }
+
+        var presets = context.presets().matchGeometry(geometry);
 
         selection.html('');
 
@@ -19,7 +26,7 @@ iD.ui.PresetList = function(context) {
         if (context.entity(id).isUsed(context.graph())) {
             messagewrap.append('button')
                 .attr('class', 'preset-choose')
-                .on('click', function() { event.choose(currentPreset); })
+                .on('click', function() { dispatch.choose(currentPreset); })
                 .append('span')
                 .html('&#9658;');
         } else {
@@ -214,7 +221,7 @@ iD.ui.PresetList = function(context) {
                 iD.actions.ChangePreset(id, currentPreset, preset),
                 t('operations.change_tags.annotation'));
 
-            event.choose(preset);
+            dispatch.choose(preset);
         };
 
         item.help = function() {
@@ -247,5 +254,5 @@ iD.ui.PresetList = function(context) {
         return presetList;
     };
 
-    return d3.rebind(presetList, event, 'on');
+    return d3.rebind(presetList, dispatch, 'on');
 };

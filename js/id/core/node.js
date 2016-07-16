@@ -45,6 +45,15 @@ _.extend(iD.Node.prototype, {
         });
     },
 
+    isOnAddressLine: function(resolver) {
+        return resolver.transient(this, 'isOnAddressLine', function() {
+            return resolver.parentWays(this).filter(function(parent) {
+                return parent.tags.hasOwnProperty('addr:interpolation') &&
+                    parent.geometry(resolver) === 'line';
+            }).length > 0;
+        });
+    },
+
     asJXON: function(changeset_id) {
         var r = {
             node: {
