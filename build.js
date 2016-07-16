@@ -111,6 +111,11 @@ function suggestionsToPresets(presets) {
         var tag = category.split('/'),
             parent = presets[tag[0] + '/' + tag[1]];
 
+        if (!parent) {
+            console.log('WARN: no preset for suggestion = ' + tag);
+            return;
+        }
+
         presets[category] = {
             tags: parent.tags ? _.merge(tags, parent.tags) : tags,
             name: name,
