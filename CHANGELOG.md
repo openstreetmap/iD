@@ -1,5 +1,23 @@
 :warning: = Breaking change, may affect downstream projects or sites that embed iD.
 
+## 1.9.7
+##### Jul 16, 2016
+* Treat features on `addr:interpolation` lines as points, not vertices (#3241)
+* Add ref field to `amenity=post_box` preset (#3232, thanks @boothym)
+* Fix crash calling `_.all` when moving multiple features (#3155, thanks @tyrasd)
+* Add `emergency=defibrillator` preset (#3202, thanks @ramyaragupathy)
+* Add `man_made=bridge` preset (#3183, thanks @SatyaSudheer)
+* Switch from `sloped_curb=*` to `kerb=*` (#3210)
+* Rename "Chemist" preset label to "Drugstore" for en_US (#3201)
+* Exclude imagery sources more than 20 years old (#3190)
+* Add `highway=give_way` preset for yield signs
+* Add stars, rooms, internet access fee fields for hotel presets (#3144, thanks @homersimpsons)
+* Add stop type, direction forward/backward fields for stop sign preset (#3115, thanks @homersimpsons)
+* When setting form's background color also set field color (#3100 thanks @jonnybarnes)
+* Add sidewalk preset to Path presets category (#3181, thanks @willemarcel)
+* Fix mph/kph imperial units test in maxspeed (#3156)
+* Fix d3 bug causing map to translate far away when zooming under heavy load (#2773, thanks @kepta)
+
 ## 1.9.6
 ##### Jun 7, 2016
 * Embed interactive Mapillary JS viewer instead of static image (#3128, thanks @kepta, @peterneubauer)
