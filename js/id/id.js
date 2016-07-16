@@ -385,7 +385,7 @@ window.iD = function () {
 };
 
 
-iD.version = '1.9.6';
+iD.version = '1.9.7';
 
 (function() {
     var detected = {};
