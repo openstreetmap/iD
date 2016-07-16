@@ -1274,9 +1274,6 @@
             "shop": {
                 "label": "类型"
             },
-            "sloped_curb": {
-                "label": "斜路缘"
-            },
             "smoking": {
                 "label": "吸烟",
                 "options": {
@@ -3057,10 +3054,6 @@
             "shop/cheese": {
                 "name": "奶酪店",
                 "terms": "奶酪店,奶酪专卖店"
-            },
-            "shop/chemist": {
-                "name": "日化用品店",
-                "terms": "药房"
             },
             "shop/chocolate": {
                 "name": "巧克力店",

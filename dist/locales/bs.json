@@ -1907,10 +1907,6 @@
                 "name": "Auto servis",
                 "terms": "auto servis,radnja za popravku automobila"
             },
-            "shop/chemist": {
-                "name": "Apotekar",
-                "terms": "apotekar,hemičar"
-            },
             "shop/clothes": {
                 "name": "Prodavnica odjeće",
                 "terms": "prodavnica odjeće,radnja za prodaju odjeće"

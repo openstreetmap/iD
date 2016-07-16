@@ -739,6 +739,9 @@
             "cuisine": {
                 "label": "Druh jedla"
             },
+            "currency_multi": {
+                "label": "Typy mien"
+            },
             "cycleway": {
                 "label": "Cyklopruh",
                 "options": {
@@ -842,6 +845,9 @@
             "fuel": {
                 "label": "Palivo"
             },
+            "fuel_multi": {
+                "label": "Typy palív"
+            },
             "gauge": {
                 "label": "Rozchod"
             },
@@ -912,6 +918,9 @@
                     "wlan": "Wifi",
                     "yes": "Áno"
                 }
+            },
+            "internet_access/fee": {
+                "label": "Poplatok za prístup k Internetu"
             },
             "lamp_type": {
                 "label": "Typ"
@@ -1069,6 +1078,13 @@
                 "label": "Par",
                 "placeholder": "3, 4, 5..."
             },
+            "parallel_direction": {
+                "label": "Smer",
+                "options": {
+                    "backward": "Dozadu",
+                    "forward": "Dopredu"
+                }
+            },
             "park_ride": {
                 "label": "Odstavné parkovisko"
             },
@@ -1083,6 +1099,9 @@
                     "surface": "Povrchové",
                     "underground": "Podzemné"
                 }
+            },
+            "payment_multi": {
+                "label": "Typy platieb"
             },
             "phone": {
                 "label": "Telefón",
@@ -1141,6 +1160,9 @@
             "railway": {
                 "label": "Typ"
             },
+            "recycling_accepts": {
+                "label": "Prijíma"
+            },
             "ref": {
                 "label": "Referenčné čislo"
             },
@@ -1155,6 +1177,9 @@
             },
             "restrictions": {
                 "label": "Zákazy odbočovanie"
+            },
+            "rooms": {
+                "label": "Izby"
             },
             "route": {
                 "label": "Typ"
@@ -1217,8 +1242,8 @@
             "shop": {
                 "label": "Typ"
             },
-            "sloped_curb": {
-                "label": "Znížený obrubník"
+            "site": {
+                "label": "Typ"
             },
             "smoking": {
                 "label": "Fajčenie",
@@ -1262,6 +1287,15 @@
             "sport_racing": {
                 "label": "Šport"
             },
+            "stars": {
+                "label": "Hviezdičky"
+            },
+            "stop": {
+                "options": {
+                    "all": "Všetky cesty",
+                    "minor": "Vedľajšia cesta"
+                }
+            },
             "structure": {
                 "label": "Štruktúra",
                 "options": {
@@ -1272,6 +1306,9 @@
                     "tunnel": "Tunel"
                 },
                 "placeholder": "Neznáme"
+            },
+            "studio": {
+                "label": "Typ"
             },
             "substation": {
                 "label": "Typ"
@@ -2691,6 +2728,12 @@
                 "name": "Spúšťanie lodí",
                 "terms": "Spustanie lodi,dok,lodenica,klzacka,kĺzačka"
             },
+            "leisure/sports_centre": {
+                "name": "Športové centrum / Gym"
+            },
+            "leisure/sports_centre/swimming": {
+                "name": "Zariadenie s plavárňou"
+            },
             "leisure/stadium": {
                 "name": "Štadión",
                 "terms": "stadion,futbal,futbalovy stadion,futbalový štadión,ihrisko"
@@ -2702,6 +2745,9 @@
             "leisure/track": {
                 "name": "Pretekárska dráha (nemotoristická)",
                 "terms": "pretekarska draha (nemotoristicka),zavodná dráha,zavodna draha"
+            },
+            "leisure/water_park": {
+                "name": "Vodný park"
             },
             "line": {
                 "name": "Čiara",
@@ -2718,6 +2764,12 @@
             "man_made/breakwater": {
                 "name": "Vlnolam",
                 "terms": "nasym,kamene,kameňe,mólo,zabrana,zábrana"
+            },
+            "man_made/bridge": {
+                "name": "Most"
+            },
+            "man_made/chimney": {
+                "name": "Komín"
             },
             "man_made/cutline": {
                 "name": "Lesný priesek",
@@ -3183,6 +3235,9 @@
                 "name": "Obchod so tarožitnosťami",
                 "terms": "obchod so starozitnostami,starozitnosti,starožitnosti,starý nábytok,stary nabytok"
             },
+            "shop/art": {
+                "name": "Umelecký obchod"
+            },
             "shop/baby_goods": {
                 "name": "Obchod s detskými potrebami",
                 "terms": "obchod s detskymi potrebami"
@@ -3256,8 +3311,7 @@
                 "terms": "syr,syry,korbáčiki,korbaciky,oštiepok,ostiepok,oštiepky,ostiepky"
             },
             "shop/chemist": {
-                "name": "Drogéria",
-                "terms": "drogeria"
+                "name": "Drogéria"
             },
             "shop/chocolate": {
                 "name": "Obchod s čokoládou",
@@ -3266,6 +3320,9 @@
             "shop/clothes": {
                 "name": "Obchod s odevami",
                 "terms": "odevy,odev,šaty,saty,oblečenie,obchod s oblečením,oblecienie,obchod s oblecenim"
+            },
+            "shop/coffee": {
+                "name": "Kaviareň"
             },
             "shop/computer": {
                 "name": "Obchod s výpočtovou technikou",
@@ -3626,6 +3683,9 @@
             "tourism/chalet": {
                 "name": "Koliba",
                 "terms": "salas,salaš,chata"
+            },
+            "tourism/gallery": {
+                "name": "Umelecká galéria"
             },
             "tourism/guest_house": {
                 "name": "Penzión",

@@ -512,6 +512,7 @@
         "title": "Фотографии с Mapillary"
     },
     "mapillary_signs": {
+        "tooltip": "Дорожные знаки с Mapillary (должны быть включены Фотографии с Mapillary)",
         "title": "Слой дорожных знаков с Mapillary"
     },
     "mapillary": {
@@ -757,6 +758,9 @@
             "bicycle_parking": {
                 "label": "Тип велосипедной парковки"
             },
+            "bin": {
+                "label": "Урна"
+            },
             "boundary": {
                 "label": "Тип границы"
             },
@@ -827,6 +831,9 @@
             },
             "cuisine": {
                 "label": "Кухня"
+            },
+            "currency_multi": {
+                "label": "Типы валюты"
             },
             "cycleway": {
                 "label": "Велосипедные дорожки",
@@ -931,6 +938,9 @@
             "fuel": {
                 "label": "Топливо"
             },
+            "fuel_multi": {
+                "label": "Виды топлива"
+            },
             "gauge": {
                 "label": "Колея"
             },
@@ -1001,6 +1011,9 @@
                     "wlan": "Wi-Fi",
                     "yes": "Да"
                 }
+            },
+            "internet_access/fee": {
+                "label": "Плата за доступ в Интернет"
             },
             "lamp_type": {
                 "label": "Тип"
@@ -1158,6 +1171,13 @@
                 "label": "Паровое поле",
                 "placeholder": "3, 4, 5…"
             },
+            "parallel_direction": {
+                "label": "Направление",
+                "options": {
+                    "backward": "Обратное",
+                    "forward": "Прямое"
+                }
+            },
             "park_ride": {
                 "label": "Перехватывающая парковка"
             },
@@ -1172,6 +1192,9 @@
                     "surface": "Наземная",
                     "underground": "Подземная"
                 }
+            },
+            "payment_multi": {
+                "label": "Способы оплаты"
             },
             "phone": {
                 "label": "Телефон",
@@ -1230,6 +1253,9 @@
             "railway": {
                 "label": "Тип"
             },
+            "recycling_accepts": {
+                "label": "Принимает"
+            },
             "ref": {
                 "label": "Номер / идентификатор"
             },
@@ -1244,6 +1270,9 @@
             },
             "restrictions": {
                 "label": "Запрет манёвров"
+            },
+            "rooms": {
+                "label": "Номера"
             },
             "route": {
                 "label": "Тип маршрута"
@@ -1309,9 +1338,6 @@
             "site": {
                 "label": "Тип"
             },
-            "sloped_curb": {
-                "label": "Заниженный бордюр"
-            },
             "smoking": {
                 "label": "Курение",
                 "options": {
@@ -1354,6 +1380,9 @@
             "sport_racing": {
                 "label": "Вид спорта"
             },
+            "stars": {
+                "label": "Звёзды"
+            },
             "structure": {
                 "label": "Сооружение",
                 "options": {
@@ -1364,6 +1393,9 @@
                     "tunnel": "Тоннель"
                 },
                 "placeholder": "не указано"
+            },
+            "studio": {
+                "label": "Тип"
             },
             "substation": {
                 "label": "Тип"
@@ -3360,10 +3392,6 @@
                 "name": "Магазин сыров",
                 "terms": "магазин сыра, магазин сыров, сыр, сыры, сырный магазин"
             },
-            "shop/chemist": {
-                "name": "Бытовая химия",
-                "terms": "Бытовая химия"
-            },
             "shop/chocolate": {
                 "name": "Магазин шоколада",
                 "terms": "шоколад"
@@ -3864,6 +3892,9 @@
             "type/route/hiking": {
                 "name": "Пешеходный Маршрут",
                 "terms": "туризм, туристическая прогулка, маршрут"
+            },
+            "type/route/horse": {
+                "name": "Конно-верховой маршрут"
             },
             "type/route/pipeline": {
                 "name": "Трубопроводный маршрут",

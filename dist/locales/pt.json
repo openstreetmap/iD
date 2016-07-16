@@ -1039,6 +1039,12 @@
                     "yes": "Sim"
                 }
             },
+            "internet_access/fee": {
+                "label": "Taxa de acesso à internet"
+            },
+            "kerb": {
+                "label": "Rampa"
+            },
             "lamp_type": {
                 "label": "Tipo"
             },
@@ -1195,6 +1201,13 @@
                 "label": "Par",
                 "placeholder": "3, 4, 5..."
             },
+            "parallel_direction": {
+                "label": "Direção",
+                "options": {
+                    "backward": "Para trás",
+                    "forward": "Para à frente"
+                }
+            },
             "park_ride": {
                 "label": "Estacionamento de intercâmbio"
             },
@@ -1288,6 +1301,9 @@
             "restrictions": {
                 "label": "Restrições de viragem"
             },
+            "rooms": {
+                "label": "Quartos"
+            },
             "route": {
                 "label": "Tipo"
             },
@@ -1352,9 +1368,6 @@
             "site": {
                 "label": "Tipo"
             },
-            "sloped_curb": {
-                "label": "Lancil inclinado"
-            },
             "smoking": {
                 "label": "Fumar",
                 "options": {
@@ -1396,6 +1409,16 @@
             },
             "sport_racing": {
                 "label": "Desporto"
+            },
+            "stars": {
+                "label": "Estrelas"
+            },
+            "stop": {
+                "label": "Tipo de stop",
+                "options": {
+                    "all": "Todas as estradas",
+                    "minor": "Só para estradas menores"
+                }
             },
             "structure": {
                 "label": "Estrutura",
@@ -2389,6 +2412,10 @@
                 "name": "Central de ambulâncias",
                 "terms": "Ambulance Station, Ambulância, Ambulâncias"
             },
+            "emergency/defibrillator": {
+                "name": "Desfibrilador",
+                "terms": "Defibrillator "
+            },
             "emergency/fire_hydrant": {
                 "name": "Boca de incêndio",
                 "terms": "Fire Hydrant, Hidrante, Marco de Água, Marco de Incêndio"
@@ -2480,6 +2507,10 @@
             "highway/footway": {
                 "name": "Caminho pedonal",
                 "terms": "Andar, Caminho, Estrada, Pé, Pedestre, Percurso, Rua, Ruela, Trajectória, Trilha, Trilho, Via, Viela, Caminho Pedonal"
+            },
+            "highway/give_way": {
+                "name": "Sinal de cedência",
+                "terms": "Tield Sign"
             },
             "highway/living_street": {
                 "name": "Zona de coexistência",
@@ -2892,6 +2923,10 @@
             "man_made/breakwater": {
                 "name": "Molhe",
                 "terms": "Breakwater"
+            },
+            "man_made/bridge": {
+                "name": "Ponte",
+                "terms": "Bridge, Viaduto"
             },
             "man_made/chimney": {
                 "name": "Chaminé",
@@ -3455,7 +3490,7 @@
             },
             "shop/chemist": {
                 "name": "Parafarmácia",
-                "terms": "Chemist, Para-farmácia, Para farmácia, Medicamento, Medicamentos, Não sujeito a receita médica"
+                "terms": "Drugstore"
             },
             "shop/chocolate": {
                 "name": "Loja de chocolates",

@@ -512,6 +512,7 @@
         "title": "相片重疊 (Mapillary)"
     },
     "mapillary_signs": {
+        "tooltip": "來自Mapillary的交通訊號（必須啟用相片重疊）",
         "title": "交通訊號重疊 (Mapillary)"
     },
     "mapillary": {
@@ -1038,6 +1039,12 @@
                     "yes": "有"
                 }
             },
+            "internet_access/fee": {
+                "label": "互聯網費用"
+            },
+            "kerb": {
+                "label": "下斜路緣"
+            },
             "lamp_type": {
                 "label": "類別"
             },
@@ -1194,6 +1201,13 @@
                 "label": "標準桿",
                 "placeholder": "3, 4, 5..."
             },
+            "parallel_direction": {
+                "label": "方向",
+                "options": {
+                    "backward": "後向",
+                    "forward": "前向"
+                }
+            },
             "park_ride": {
                 "label": "泊車轉乘"
             },
@@ -1287,6 +1301,9 @@
             "restrictions": {
                 "label": "轉彎限制"
             },
+            "rooms": {
+                "label": "房間數目"
+            },
             "route": {
                 "label": "類類別"
             },
@@ -1351,9 +1368,6 @@
             "site": {
                 "label": "類別"
             },
-            "sloped_curb": {
-                "label": "斜路緣"
-            },
             "smoking": {
                 "label": "吸煙",
                 "options": {
@@ -1395,6 +1409,16 @@
             },
             "sport_racing": {
                 "label": "運動"
+            },
+            "stars": {
+                "label": "星級"
+            },
+            "stop": {
+                "label": "停車指示種類",
+                "options": {
+                    "all": "全部方向",
+                    "minor": "次級道路"
+                }
             },
             "structure": {
                 "label": "結構",
@@ -2388,6 +2412,10 @@
                 "name": "救護站",
                 "terms": "Ambulance Station,十字車,救傷車,救護站,救護車"
             },
+            "emergency/defibrillator": {
+                "name": "自動外置式心臟去纖顫器",
+                "terms": "defibrillator,自動心臟去顫器,自動體外心臟去顫器"
+            },
             "emergency/fire_hydrant": {
                 "name": "消防栓",
                 "terms": "Fire Hydrant,消防栓,消防龍頭"
@@ -2479,6 +2507,10 @@
             "highway/footway": {
                 "name": "行人徑",
                 "terms": "Foot Path,步行徑,行人徑"
+            },
+            "highway/give_way": {
+                "name": "讓路標誌",
+                "terms": "讓車標誌"
             },
             "highway/living_street": {
                 "name": "生活街道",
@@ -2891,6 +2923,10 @@
             "man_made/breakwater": {
                 "name": "防波堤",
                 "terms": "Breakwater,防波堤"
+            },
+            "man_made/bridge": {
+                "name": "橋樑",
+                "terms": "bridge,橋"
             },
             "man_made/chimney": {
                 "name": "煙囱",
@@ -3453,8 +3489,8 @@
                 "terms": "芝士店, 起司店"
             },
             "shop/chemist": {
-                "name": "註冊藥房",
-                "terms": "Chemist,藥房,藥行,註冊藥房"
+                "name": "藥店",
+                "terms": "藥妝店,藥房"
             },
             "shop/chocolate": {
                 "name": "朱古力店",

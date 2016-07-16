@@ -512,6 +512,7 @@
         "title": "Photo Overlay (Mapillary)"
     },
     "mapillary_signs": {
+        "tooltip": "Traffic signs from Mapillary (must enable Photo Overlay)",
         "title": "Traffic Sign Overlay (Mapillary)"
     },
     "mapillary": {
@@ -1351,9 +1352,6 @@
             "site": {
                 "label": "Type"
             },
-            "sloped_curb": {
-                "label": "Sloped Curb"
-            },
             "smoking": {
                 "label": "Smoking",
                 "options": {
@@ -1533,7 +1531,10 @@
                 "name": "Relation"
             },
             "shop/alcohol": {
-                "name": "Off license"
+                "name": "Off licence (Alcohol shop)"
+            },
+            "shop/chemist": {
+                "name": "Chemist"
             },
             "shop/farm": {
                 "name": "Farm Shop"
@@ -1543,6 +1544,9 @@
             },
             "shop/jewelry": {
                 "name": "Jeweller"
+            },
+            "shop/shoes": {
+                "name": "Shoe Shop"
             },
             "tourism/camp_site": {
                 "terms": "camping"

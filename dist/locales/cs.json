@@ -71,7 +71,7 @@
                 "line": "Zakulacena čára.",
                 "area": "Zakulacena plocha."
             },
-            "not_closed": "Z objektu nelze udělat kruh, protože nejde o smyčku.",
+            "not_closed": "Z objektu nelze udělat kruh, neboť nejde o smyčku.",
             "too_large": "Z objektu nelze udělat kruh, protože není vidět dostatečně velká část.",
             "connected_to_hidden": "Z objektu nelze udělat kruh, protože je napojen na skrytý objekt."
         },
@@ -496,8 +496,8 @@
         "deprecated_tags": "Zastaralé vlastnosti: {tag}"
     },
     "zoom": {
-        "in": "Zvětšit",
-        "out": "Zmenšit"
+        "in": "Přiblížit",
+        "out": "Oddálit"
     },
     "cannot_zoom": "Aktuální nastavení nedovoluje větší zvětšení.",
     "full_screen": "Na celou obrazovku",
@@ -519,7 +519,7 @@
         "view_on_mapillary": "Zobrazit tento obrázek na Mapillary"
     },
     "help": {
-        "title": "Pomoc",
+        "title": "Nápověda",
         "help": "# Pomoc\n\nToto je editor [OpenStreetMap](http://www.openstreetmap.org/), svobodné a otevřené mapy světa, vytvářené jako open-source a open-data. S pomocí editoru můžete přidávat a upravovat data v mapě třeba ve svém okolí, a zlepšovat tak celou mapu pro každého.\n\nVaše úpravy mapy budou viditelné pro každého uživatele OpenStreetMap. Před editací se ovšem musíte [přihlásit](https://www.openstreetmap.org/login).\n\n[iD editor](http://ideditor.com/) je projekt vytvářený spoluprací mnoha lidí, se [zdrojovým kódem na GitHubu](https://github.com/openstreetmap/iD).\n",
         "editing_saving": "# Editace a publikace\n\nTento editor pracuje primárně online - právě teď k němu přistupujete prostřednictvím webové stránky.\n\n### Výběr objektů\n\nChcete-li vybrat objekt, jako třeba silnici nebo obchod, klikněte na něj v mapě. Objekt se tím označí, otevře se boční panel s vlastnostmi objektu a zobrazí se nabídka s akcemi, které lze s objektem provést.\n\nMůžete označit a pracovat s několika objekty najednou: podržte klávesu 'Shift', a pak buď postupně označte dotyčné objekty, anebo klikněte na mapu a táhněte myší či prstem - editor označí všechny objekty uvnitř příslušného obdélníku.\n\n### Publikace změn\n\nKdyž provedete nějaké úpravy objektů v mapě, úpravy jsou uloženy lokálně ve vašem prohlížeči. Nelekejte se, když uděláte chybu - úpravy lze vrátit zpět tlačítkem Zpět, a naopak je znovu provést tlačítkem Znovu.\n\nPo dokončení bloku úprav klikněte na 'Uložit' - například když jste upravili jednu část města, a chcete začít úpravy někde jinde. Zobrazí se přehled úprav, které jste provedli, editor tyto úpravy zkontroluje, a když se mu něco nebude zdát, zobrazí varování a návrhy.\n\nKdyž bude všechno v pořádku, můžete přidat krátký komentář s vysvětlením vašich úprav a kliknout znovu 'Uložit'. Úpravy se tímto publikují na [OpenStreetMap.org](http://www.openstreetmap.org/), kde za chvíli budou viditelné pro všechny uživatele a bude na nich možné provádět další úpravy.\n\nPokud nechcete nebo nemůžete úpravy dokončit teď, stačí prostě odejít ze stránky pryč. Až příště navštívíte stránku (na stejném počítači, ve stejném prohlížeči), editor vám nabídne možnost znovu načíst neuložené úpravy.\n\n### Používání editoru\n\nSeznam dostupných klávesových zkratek je k dispozici [zde](http://wiki.openstreetmap.org/wiki/ID/Shortcuts).\n",
         "roads": "# Cesty\n\nEditor umožňuje vytvářet, opravovat a mazat silnice, pěšiny, cyklostezky, železnice atd. Zmapovat by mělo jít jakýkoli druh komunikace.\n\n### Výběr\n\nKdyž na cestu kliknete, zbarví se její obrys, otevře se u ní malá nabídka s nástroji a dále boční panel s informacemi o cestě.\n\n### Úpravy\n\nČasto narazíte na cesty, které jen nepřesně sledují pozadí či trasu GPS. Takové cesty můžete zarovnat na správné místo.\n\nNapřed klikněte na cestu, kterou chcete upravit. Cesta se rozsvítí a podél ní se objeví kontrolní uzly, které můžete posunout na správné místo. Pokud chcete přidat další kontrolní body a zpřesnit tak průběh cesty, stačí dvakrát kliknout na kus cesty mezi dvěma uzly - na zvolené místo přibude nový uzel.\n\nKdyž je reálná cesta napojena na jinou, ale v mapě spojeny nejsou, posuňte myší kontrolní uzel jedné cesty nad druhou - cesty se pak spojí. Propojení cest je velmi důležité pro správnou funkci navigací.\n\nTaké můžete posunout najednou celou cestu: buď klikněte na ikonu posunu v menu zobrazeném u cesty nebo stiskněte klávesu `M` a potom klikněte myší pro ukončení posunu. Jen pozor - pokud jsou vůči pozadí či GPS stopě všechny objekty v okolí, pravděpodobně to bude chybným pozadím a ne chybnou polohou objektů.\n\n### Mazání\n\nPokud je cesta úplně špatně, můžete ji zcela odstranit z mapy. Neměli byste se spoléhat pouze na satelitní snímky - mohou být zastaralé nebo zavádějící -, ideální je se přesvědčit na místě, že cesta opravdu neexistuje. Zvlášť při mazání objektů buďte opatrní - výsledek vaší úpravy se projeví v mapě pro všechny její uživatele.\n\nCestu smažete tak, že na ni kliknete a zvolíte ikonu odpadkového koše nebo stisknete klávesu Delete.\n\n### Vytváření\n\nNarazili jste na cestu, která by v mapě měla být, ale není? Klikněte na tlačítko 'Cesta' vlevo nahoře nebo stiskněte klávesu `2` - to vám umožní nakreslit novou cestu.\n\nKlikněte na místo, kde cesta začíná. Pokud cesta vychází z jiné, existující cesty, klikněte na místo, kde se cesty oddělují.\n\nPotom postupně klikejte na body, kudy cesta vede, podle satelitních snímků nebo trasy z GPS. Pokud vaše cesta protíná jinou, je třeba je propojit tak, že kliknete na bod křížení. Nakonec dvakrát klikněte na stejné místo nebo stiskněte klávesu 'Return' nebo 'Enter', cesta se tak ukončí.\n",
@@ -1030,7 +1030,7 @@
                 "label": "Typ"
             },
             "internet_access": {
-                "label": "Přístup k internetu",
+                "label": "Připojení k internetu",
                 "options": {
                     "no": "Ne",
                     "terminal": "Počítače",
@@ -1038,6 +1038,12 @@
                     "wlan": "Wifi",
                     "yes": "Ano"
                 }
+            },
+            "internet_access/fee": {
+                "label": "Poplatek za připojení"
+            },
+            "kerb": {
+                "label": "Obrubník"
             },
             "lamp_type": {
                 "label": "Typ"
@@ -1195,6 +1201,13 @@
                 "label": "Par",
                 "placeholder": "3, 4, 5..."
             },
+            "parallel_direction": {
+                "label": "Směr",
+                "options": {
+                    "backward": "Zpátky",
+                    "forward": "Dopředu"
+                }
+            },
             "park_ride": {
                 "label": "Parkoviště P+R"
             },
@@ -1288,6 +1301,9 @@
             "restrictions": {
                 "label": "Omezení odbočování"
             },
+            "rooms": {
+                "label": "Pokojů"
+            },
             "route": {
                 "label": "Typ"
             },
@@ -1352,9 +1368,6 @@
             "site": {
                 "label": "Typ"
             },
-            "sloped_curb": {
-                "label": "Zkosený obrubník"
-            },
             "smoking": {
                 "label": "Kouření",
                 "options": {
@@ -1396,6 +1409,16 @@
             },
             "sport_racing": {
                 "label": "Sport"
+            },
+            "stars": {
+                "label": "Hvězdiček"
+            },
+            "stop": {
+                "label": "Typ stopky",
+                "options": {
+                    "all": "Ze všech směrů",
+                    "minor": "Z vedlejších"
+                }
             },
             "structure": {
                 "label": "Struktura",
@@ -2389,6 +2412,10 @@
                 "name": "Stanice záchranné služby",
                 "terms": "ambulance,pohotovost,zdravotní pohotovost,pohotovostní stanice,záchranná služba,služba"
             },
+            "emergency/defibrillator": {
+                "name": "Defibrilátor",
+                "terms": "defibrilátor,AED,resuscitace"
+            },
             "emergency/fire_hydrant": {
                 "name": "Požární hydrant",
                 "terms": "požární hydrant, hasičský hydrant, pumpa"
@@ -2480,6 +2507,10 @@
             "highway/footway": {
                 "name": "Chodník",
                 "terms": "cesta,silnice,ulice,ulička,chodník,třída,bulvár,avenue,pasáž,stezka,trasa,trať,magistrála,radiála,pěšina"
+            },
+            "highway/give_way": {
+                "name": "Značka Dej přednost",
+                "terms": "dej přednost v jízdě,dej přednost,značka přednosti v jízdě,vedlejší silnice,vedlejší ulice"
             },
             "highway/living_street": {
                 "name": "Obytná zóna",
@@ -2892,6 +2923,10 @@
             "man_made/breakwater": {
                 "name": "Vlnolam",
                 "terms": "pobřežní hráz,násep,kameny,molo,zábrana"
+            },
+            "man_made/bridge": {
+                "name": "Most",
+                "terms": "most,lávka,viadukt,akvadukt,ekodukt"
             },
             "man_made/chimney": {
                 "name": "Komín",
@@ -3455,7 +3490,7 @@
             },
             "shop/chemist": {
                 "name": "Drogérie",
-                "terms": "drogérie,parfumérie,kosmetika,hygiena,čisticí prostředky"
+                "terms": "drogérie,parfumérie,kosmetika,hygiena,čisticí prostředky,lékárna,léky"
             },
             "shop/chocolate": {
                 "name": "Prodejna čokolády",

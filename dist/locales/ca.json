@@ -1039,6 +1039,12 @@
                     "yes": "Sí"
                 }
             },
+            "internet_access/fee": {
+                "label": "Taxa d'accés a Internet"
+            },
+            "kerb": {
+                "label": "Rebaix de vorada"
+            },
             "lamp_type": {
                 "label": "Tipus"
             },
@@ -1195,6 +1201,13 @@
                 "label": "Par",
                 "placeholder": "3, 4, 5..."
             },
+            "parallel_direction": {
+                "label": "Direcció",
+                "options": {
+                    "backward": "Enrere",
+                    "forward": "Endavant"
+                }
+            },
             "park_ride": {
                 "label": "Aparca i viatja "
             },
@@ -1288,6 +1301,9 @@
             "restrictions": {
                 "label": "Restriccions de gir"
             },
+            "rooms": {
+                "label": "Habitacions"
+            },
             "route": {
                 "label": "Tipus"
             },
@@ -1352,9 +1368,6 @@
             "site": {
                 "label": "Tipus"
             },
-            "sloped_curb": {
-                "label": "Rampa a la vorera"
-            },
             "smoking": {
                 "label": "Apte per a fumadors",
                 "options": {
@@ -1396,6 +1409,16 @@
             },
             "sport_racing": {
                 "label": "Esport"
+            },
+            "stars": {
+                "label": "Estrelles"
+            },
+            "stop": {
+                "label": "Tipus de stop",
+                "options": {
+                    "all": "Totes direccions",
+                    "minor": "Carretera menor"
+                }
             },
             "structure": {
                 "label": "Estructura",
@@ -1523,7 +1546,8 @@
                 "name": "Telecadira"
             },
             "aerialway/gondola": {
-                "name": "Telecabina"
+                "name": "Telecabina",
+                "terms": "Góndola"
             },
             "aerialway/magic_carpet": {
                 "name": "Cinta remuntadora"
@@ -2255,6 +2279,9 @@
             "emergency/ambulance_station": {
                 "name": "Parada d'ambulàncies"
             },
+            "emergency/defibrillator": {
+                "name": "Desfibril·lador"
+            },
             "emergency/fire_hydrant": {
                 "name": "Boca d'incendis",
                 "terms": "Boca d'incendis, presa d'aigua per a bombers, incendi, bombers, sortida d'aigua, aigua"
@@ -2331,6 +2358,9 @@
             "highway/footway": {
                 "name": "Camí per a vianants",
                 "terms": "Camí per a vianants, carrer peatonal, camí per a peatons, a peu, camí per caminar, vianant, vianants, peató, peatons, transeünt, transeünts, peatonal"
+            },
+            "highway/give_way": {
+                "name": "Senyal de cediu el pas"
             },
             "highway/living_street": {
                 "name": "Carrer residencial",
@@ -2704,6 +2734,9 @@
             "man_made/breakwater": {
                 "name": "trencaonades",
                 "terms": "Escullera,Espigó,Espatller"
+            },
+            "man_made/bridge": {
+                "name": "Pont"
             },
             "man_made/chimney": {
                 "name": "Xemeneia"
@@ -3167,8 +3200,7 @@
                 "name": "Botiga de formatge"
             },
             "shop/chemist": {
-                "name": "Farmàcia",
-                "terms": "Farmàcia"
+                "name": "Farmàcia"
             },
             "shop/chocolate": {
                 "name": "Botiga de xocolata"

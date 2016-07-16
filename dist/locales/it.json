@@ -1039,6 +1039,12 @@
                     "yes": "Sì"
                 }
             },
+            "internet_access/fee": {
+                "label": "Accesso ad Internet a pagamento"
+            },
+            "kerb": {
+                "label": "Rampa sul cordolo"
+            },
             "lamp_type": {
                 "label": "Tipo"
             },
@@ -1195,6 +1201,13 @@
                 "label": "Par",
                 "placeholder": "3, 4, 5..."
             },
+            "parallel_direction": {
+                "label": "Direzione",
+                "options": {
+                    "backward": "A ritroso",
+                    "forward": "In avanti"
+                }
+            },
             "park_ride": {
                 "label": "Parcheggio di Interscambio"
             },
@@ -1288,6 +1301,9 @@
             "restrictions": {
                 "label": "Obblighi di svolta"
             },
+            "rooms": {
+                "label": "Stanze"
+            },
             "route": {
                 "label": "Tipo"
             },
@@ -1352,9 +1368,6 @@
             "site": {
                 "label": "Tipo"
             },
-            "sloped_curb": {
-                "label": "Cordolo inclinato"
-            },
             "smoking": {
                 "label": "Zona fumatori",
                 "options": {
@@ -1396,6 +1409,16 @@
             },
             "sport_racing": {
                 "label": "Sport"
+            },
+            "stars": {
+                "label": "Stelle"
+            },
+            "stop": {
+                "label": "Tipo di Stop",
+                "options": {
+                    "all": "Tutte le strade",
+                    "minor": "Solo strade minori"
+                }
             },
             "structure": {
                 "label": "Struttura",
@@ -2367,6 +2390,10 @@
                 "name": "Stazione ambulanze",
                 "terms": "Stazione ambulanze"
             },
+            "emergency/defibrillator": {
+                "name": "Defibrillatore",
+                "terms": "dae,defibrillatore"
+            },
             "emergency/fire_hydrant": {
                 "name": "Idrante",
                 "terms": " Pompa antincendio "
@@ -2456,6 +2483,10 @@
             "highway/footway": {
                 "name": "Percorso pedonale",
                 "terms": "percorso battuto,viale,pista pedonale,strada,corsia,percorso,sentiero,cammino,strada,rotta,via,traiettoria,camminata"
+            },
+            "highway/give_way": {
+                "name": "Dare la precedenza",
+                "terms": "precedenza,dare precedenza,cartello"
             },
             "highway/living_street": {
                 "name": "Strada residenziale prevalentemente pedonale",
@@ -2864,6 +2895,10 @@
             "man_made/breakwater": {
                 "name": "Frangiflutti",
                 "terms": "Frangifrutti"
+            },
+            "man_made/bridge": {
+                "name": "Ponte",
+                "terms": "ponte,viadotto,pontile,arco,strallato,cavalcavia"
             },
             "man_made/chimney": {
                 "name": "Ciminiera",

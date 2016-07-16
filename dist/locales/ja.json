@@ -1281,6 +1281,9 @@
             "restriction": {
                 "label": "タイプ"
             },
+            "restrictions": {
+                "label": "進行方向制限"
+            },
             "route": {
                 "label": "タイプ"
             },
@@ -1344,9 +1347,6 @@
             },
             "site": {
                 "label": "タイプ"
-            },
-            "sloped_curb": {
-                "label": "歩道のすりつけ勾配"
             },
             "smoking": {
                 "label": "喫煙の可否",
@@ -1618,6 +1618,10 @@
                 "name": "レンタサイクル",
                 "terms": "レンタサイクル"
             },
+            "amenity/bicycle_repair_station": {
+                "name": "自転車修理店",
+                "terms": "自転車修理店, 自転車店（修理）"
+            },
             "amenity/biergarten": {
                 "name": "ビアガーデン",
                 "terms": "ビアガーデン"
@@ -1741,6 +1745,10 @@
             "amenity/hospital": {
                 "name": "病院の敷地",
                 "terms": "病院の敷地"
+            },
+            "amenity/hunting_stand": {
+                "name": "狩猟スタンド",
+                "terms": "狩猟スタンド"
             },
             "amenity/kindergarten": {
                 "name": "保育園/幼稚園の敷地",
@@ -2593,6 +2601,9 @@
                 "name": "転回場",
                 "terms": "転回場, 車回し"
             },
+            "highway/unclassified": {
+                "name": "一般道（2車線未満）"
+            },
             "historic": {
                 "name": "史跡",
                 "terms": "史跡, 歴史的建造物"
@@ -2675,7 +2686,7 @@
             },
             "landuse/forest": {
                 "name": "人工林",
-                "terms": "人工林, 二次林, 営林, 保安林, 鉄道林, 防風林"
+                "terms": "人工林, 二次林, 営林, 保安林, 鉄道林, 防風林, 森林（人工）"
             },
             "landuse/garages": {
                 "name": "車庫",
@@ -2783,7 +2794,7 @@
             },
             "leisure/pitch": {
                 "name": "スポーツ競技場",
-                "terms": "スポーツ競技場, 運動場"
+                "terms": "スポーツ競技場, 運動場, 競技場, グラウンド"
             },
             "leisure/pitch/american_football": {
                 "name": "アメリカンフットボール場",
@@ -2928,6 +2939,10 @@
             "man_made/storage_tank": {
                 "name": "貯蔵タンク",
                 "terms": "貯蔵タンク, タンク"
+            },
+            "man_made/surveillance": {
+                "name": "監視カメラ",
+                "terms": "監視カメラ, 監視装置"
             },
             "man_made/survey_point": {
                 "name": "観測設備",
@@ -3087,7 +3102,7 @@
             },
             "natural/wood": {
                 "name": "自然林",
-                "terms": "自然林, 原生林"
+                "terms": "自然林, 原生林, 森林（自然）"
             },
             "office": {
                 "name": "オフィス",
@@ -3429,10 +3444,6 @@
                 "name": "チーズ店",
                 "terms": "チーズ店"
             },
-            "shop/chemist": {
-                "name": "薬品・化粧品店",
-                "terms": "薬品店, 化粧品店"
-            },
             "shop/chocolate": {
                 "name": "チョコレート店",
                 "terms": "チョコレート店"
@@ -3479,7 +3490,7 @@
             },
             "shop/deli": {
                 "name": "惣菜屋",
-                "terms": "惣菜屋, 弁当屋"
+                "terms": "惣菜屋, 弁当屋, デリカ"
             },
             "shop/department_store": {
                 "name": "百貨店",
@@ -3726,8 +3737,8 @@
                 "terms": "刺青屋"
             },
             "shop/tea": {
-                "name": "茶店",
-                "terms": "茶舗"
+                "name": "茶舗",
+                "terms": "茶舗, 茶店（販売）"
             },
             "shop/ticket": {
                 "name": "チケット店",
@@ -3831,7 +3842,7 @@
             },
             "tourism/information": {
                 "name": "観光案内",
-                "terms": "観光案内, 案内, 案内板, 案内所"
+                "terms": "観光案内, 案内, 案内板, 案内所, インフォメーション"
             },
             "tourism/motel": {
                 "name": "モーテル",
@@ -3888,6 +3899,30 @@
             "type/restriction": {
                 "name": "進行方向制限",
                 "terms": "進行方向制限"
+            },
+            "type/restriction/no_left_turn": {
+                "name": "左折禁止",
+                "terms": "左折禁止"
+            },
+            "type/restriction/no_right_turn": {
+                "name": "右折禁止",
+                "terms": "右折禁止"
+            },
+            "type/restriction/no_straight_on": {
+                "name": "直進禁止",
+                "terms": "直進禁止"
+            },
+            "type/restriction/no_u_turn": {
+                "name": "Uターン禁止",
+                "terms": "Uターン禁止"
+            },
+            "type/restriction/only_left_turn": {
+                "name": "左折専用",
+                "terms": "左折専用, 左折のみ"
+            },
+            "type/restriction/only_right_turn": {
+                "name": "右折専用",
+                "terms": "右折専用, 右折のみ"
             },
             "type/restriction/only_straight_on": {
                 "name": "直進のみ可",
@@ -3954,7 +3989,8 @@
                 "terms": "水路"
             },
             "waterway/boatyard": {
-                "name": "造船所"
+                "name": "小型船造船所",
+                "terms": "造船所, 小型船造船所"
             },
             "waterway/canal": {
                 "name": "運河",

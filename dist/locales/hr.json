@@ -1334,9 +1334,6 @@
             "site": {
                 "label": "Vrsta"
             },
-            "sloped_curb": {
-                "label": "Spušteni rubnjak"
-            },
             "smoking": {
                 "label": "Pušenje",
                 "options": {
@@ -3036,10 +3033,6 @@
             },
             "shop/cheese": {
                 "name": "Prodavaonica sira"
-            },
-            "shop/chemist": {
-                "name": "Drogerija",
-                "terms": "ljekarna, farmacija, apoteka"
             },
             "shop/chocolate": {
                 "name": "Prodavaonica čokolade"

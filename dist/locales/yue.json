@@ -1844,10 +1844,6 @@
                 "name": "車房",
                 "terms": "Car Repair Shop,汽車修理店,汽車維修店,車房"
             },
-            "shop/chemist": {
-                "name": "註冊藥房",
-                "terms": "Chemist,藥房,藥行,註冊藥房"
-            },
             "shop/clothes": {
                 "name": "衫舖",
                 "terms": "Clothing Store,服裝店,服飾店,衫舖"
