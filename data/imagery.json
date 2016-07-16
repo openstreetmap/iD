@@ -15317,33 +15317,126 @@
         ]
     },
     {
-        "name": "imagico.de OSM images for mapping",
+        "name": "imagico.de OSM images for mapping: Alaska Range",
         "type": "tms",
-        "description": "various imagery from all around the world where other image sources are insufficient",
-        "template": "http://imagico.de/map/osmim_tiles.php?z={zoom}&x={x}&y={-y}",
+        "description": "LC80700162014211LGN00, 2014-07-31 channels 234 (true color), Recent summer image of the Alaska Range for mapping natural features",
+        "template": "http://imagico.de/map/osmim_tiles.php?layer=LC80700162014211LGN00&z={zoom}&x={x}&y={-y}",
+        "scaleExtent": [
+            0,
+            12
+        ],
         "polygon": [
             [
                 [
-                    -89.8315284119521,
-                    81.3934028410464
+                    -152.708729431479,
+                    62.3036424122946
                 ],
                 [
-                    -89.8315284119521,
-                    83.7045077508689
+                    -152.708729431479,
+                    63.5464553885127
                 ],
                 [
-                    -17.9663056823904,
-                    83.7045077508689
+                    -148.994366411548,
+                    63.5464553885127
                 ],
                 [
-                    -17.9663056823904,
-                    81.3934028410464
+                    -148.994366411548,
+                    62.3036424122946
                 ],
                 [
-                    -89.8315284119521,
-                    81.3934028410464
+                    -152.708729431479,
+                    62.3036424122946
                 ]
-            ],
+            ]
+        ],
+        "terms_url": "http://maps.imagico.de/#osmim",
+        "terms_text": "imagico.de OSM images for mapping",
+        "id": "osmim-imagicode-LC80700162014211LGN00"
+    },
+    {
+        "name": "imagico.de OSM images for mapping: Bakun Reservoir",
+        "type": "tms",
+        "description": "LC81190582014075LGN00/LC81180582015183LGN00, 2014-03-16, channels 234 (true color), Missing in older pre-2011 images",
+        "template": "http://imagico.de/map/osmim_tiles.php?layer=LC81190582014075LGN00&z={zoom}&x={x}&y={-y}",
+        "scaleExtent": [
+            0,
+            13
+        ],
+        "polygon": [
+            [
+                [
+                    113.53447549873,
+                    2.02707458823865
+                ],
+                [
+                    113.53447549873,
+                    3.07076712442006
+                ],
+                [
+                    114.765167437974,
+                    3.07076712442006
+                ],
+                [
+                    114.765167437974,
+                    2.02707458823865
+                ],
+                [
+                    113.53447549873,
+                    2.02707458823865
+                ]
+            ]
+        ],
+        "terms_url": "http://maps.imagico.de/#osmim",
+        "terms_text": "imagico.de OSM images for mapping",
+        "id": "osmim-imagicode-LC81190582014075LGN00"
+    },
+    {
+        "name": "imagico.de OSM images for mapping: Batam",
+        "type": "tms",
+        "description": "LC81250592016107LGN00, LC81250602015184LGN00, LC81240602014174LGN00, 2014-2016, channels 234 (true color), Missing Islands in OSM",
+        "template": "http://imagico.de/map/osmim_tiles.php?layer=LC81250592016107LGN00&z={zoom}&x={x}&y={-y}",
+        "scaleExtent": [
+            0,
+            13
+        ],
+        "polygon": [
+            [
+                [
+                    104.001374040597,
+                    0
+                ],
+                [
+                    104.001374040597,
+                    1.45116299803241
+                ],
+                [
+                    104.910109782012,
+                    1.45116299803241
+                ],
+                [
+                    104.910109782012,
+                    0
+                ],
+                [
+                    104.001374040597,
+                    0
+                ]
+            ]
+        ],
+        "terms_url": "http://maps.imagico.de/#osmim",
+        "terms_text": "imagico.de OSM images for mapping",
+        "id": "osmim-imagicode-LC81250592016107LGN00"
+    },
+    {
+        "name": "imagico.de OSM images for mapping: Bouvet Island",
+        "type": "tms",
+        "description": "LC81800982013291LGN00, 2013-10-18, channels 234 (true color), For more accurate coastline and glacier mapping",
+        "template": "http://imagico.de/map/osmim_tiles.php?layer=LC81800982013291LGN00&z={zoom}&x={x}&y={-y}",
+        "scaleExtent": [
+            0,
+            13
+        ],
+        "polygon": [
             [
                 [
                     3.24652940311363,
@@ -15365,29 +15458,97 @@
                     3.24652940311363,
                     -54.4705168479877
                 ]
-            ],
+            ]
+        ],
+        "terms_url": "http://maps.imagico.de/#osmim",
+        "terms_text": "imagico.de OSM images for mapping",
+        "id": "osmim-imagicode-LC81800982013291LGN00",
+        "best": true
+    },
+    {
+        "name": "imagico.de OSM images for mapping: Clerke Rocks",
+        "type": "tms",
+        "description": "LC82050982015344LGN00, 2015-12-10, channels 234 (true color), Missing in other image sources",
+        "template": "http://imagico.de/map/osmim_tiles.php?layer=LC82050982015344LGN00&z={zoom}&x={x}&y={-y}",
+        "scaleExtent": [
+            0,
+            13
+        ],
+        "polygon": [
             [
                 [
-                    73.2279041335011,
-                    -53.2033655831056
+                    -35.1959928318028,
+                    -55.2968852515402
                 ],
                 [
-                    73.2279041335011,
-                    -52.9494391381048
+                    -35.1959928318028,
+                    -54.7209735214882
                 ],
                 [
-                    73.7898811920934,
-                    -52.9494391381048
+                    -34.1252010131324,
+                    -54.7209735214882
                 ],
                 [
-                    73.7898811920934,
-                    -53.2033655831056
+                    -34.1252010131324,
+                    -55.2968852515402
                 ],
                 [
-                    73.2279041335011,
-                    -53.2033655831056
+                    -35.1959928318028,
+                    -55.2968852515402
                 ]
-            ],
+            ]
+        ],
+        "terms_url": "http://maps.imagico.de/#osmim",
+        "terms_text": "imagico.de OSM images for mapping",
+        "id": "osmim-imagicode-LC82050982015344LGN00"
+    },
+    {
+        "name": "imagico.de OSM images for mapping: Cotonou",
+        "type": "tms",
+        "description": "S2A_OPER_PRD_MSIL1C_PDMC_20151222T164644_R022_V20151221T103009_20151221T103009, 2015-12-21, channels 234 (true color), Patchy and partly cloudy coverage in usual sources",
+        "template": "http://imagico.de/map/osmim_tiles.php?layer=S2A_R022_N06_20151221T103009&z={zoom}&x={x}&y={-y}",
+        "scaleExtent": [
+            0,
+            14
+        ],
+        "polygon": [
+            [
+                [
+                    1.83974970187678,
+                    6.25776229826032
+                ],
+                [
+                    1.83974970187678,
+                    7.1142717924319
+                ],
+                [
+                    2.5494187763312,
+                    7.1142717924319
+                ],
+                [
+                    2.5494187763312,
+                    6.25776229826032
+                ],
+                [
+                    1.83974970187678,
+                    6.25776229826032
+                ]
+            ]
+        ],
+        "terms_url": "http://maps.imagico.de/#osmim",
+        "terms_text": "imagico.de OSM images for mapping",
+        "id": "osmim-imagicode-S2A_R022_N06_20151221T103009"
+    },
+    {
+        "name": "imagico.de OSM images for mapping: Eastern Devon Island coast",
+        "type": "tms",
+        "description": "LC80360072014245LGN00/LC80380062014243LGN00, 2014-09-02, channel 654 (false color IR), Coastline mostly mapped meanwhile",
+        "template": "http://imagico.de/map/osmim_tiles.php?layer=LC80360072014245LGN00&z={zoom}&x={x}&y={-y}",
+        "scaleExtent": [
+            0,
+            11
+        ],
+        "polygon": [
             [
                 [
                     -84.3479873388655,
@@ -15409,227 +15570,170 @@
                     -84.3479873388655,
                     74.3894989734754
                 ]
-            ],
+            ]
+        ],
+        "terms_url": "http://maps.imagico.de/#osmim",
+        "terms_text": "imagico.de OSM images for mapping",
+        "id": "osmim-imagicode-LC80360072014245LGN00"
+    },
+    {
+        "name": "imagico.de OSM images for mapping: Eastern Iceland",
+        "type": "tms",
+        "description": "LC82160152013239LGN00, 2013-08-27, channels 234 (true color), Missing islets and inaccurate coast",
+        "template": "http://imagico.de/map/osmim_tiles.php?layer=LC82160152013239LGN00&z={zoom}&x={x}&y={-y}",
+        "scaleExtent": [
+            0,
+            12
+        ],
+        "polygon": [
             [
                 [
-                    29.7662967768464,
-                    0.20687257729646
+                    -15.1680535723581,
+                    64.2088554380107
                 ],
                 [
-                    29.7662967768464,
-                    0.509176367154027
+                    -15.1680535723581,
+                    64.8157280042209
                 ],
                 [
-                    30.0346684679771,
-                    0.509176367154027
+                    -13.0435379254154,
+                    64.8157280042209
                 ],
                 [
-                    30.0346684679771,
-                    0.20687257729646
+                    -13.0435379254154,
+                    64.2088554380107
                 ],
                 [
-                    29.7662967768464,
-                    0.20687257729646
+                    -15.1680535723581,
+                    64.2088554380107
                 ]
-            ],
+            ]
+        ],
+        "terms_url": "http://maps.imagico.de/#osmim",
+        "terms_text": "imagico.de OSM images for mapping",
+        "id": "osmim-imagicode-LC82160152013239LGN00"
+    },
+    {
+        "name": "imagico.de OSM images for mapping: El Altar",
+        "type": "tms",
+        "description": "AST_L1T_00302052007154424_20150518041444_91492, 2012-02-05, channels 12x (true color with estimated blue), 2007 ASTER image offering better glacier coverage than common sources",
+        "template": "http://imagico.de/map/osmim_tiles.php?layer=AST_L1T_00302052007154424_20150518041444_91492&z={zoom}&x={x}&y={-y}",
+        "scaleExtent": [
+            0,
+            14
+        ],
+        "polygon": [
             [
                 [
-                    150.388533766196,
-                    -2.80056783608088
+                    -78.531997745432,
+                    -1.8050814821624
                 ],
                 [
-                    150.388533766196,
-                    -2.38339617820643
+                    -78.531997745432,
+                    -1.60810556500124
                 ],
                 [
-                    150.833478309574,
-                    -2.38339617820643
+                    -78.3355811085593,
+                    -1.60810556500124
                 ],
                 [
-                    150.833478309574,
-                    -2.80056783608088
+                    -78.3355811085593,
+                    -1.8050814821624
                 ],
                 [
-                    150.388533766196,
-                    -2.80056783608088
+                    -78.531997745432,
+                    -1.8050814821624
                 ]
-            ],
+            ]
+        ],
+        "terms_url": "http://maps.imagico.de/#osmim",
+        "terms_text": "imagico.de OSM images for mapping",
+        "id": "osmim-imagicode-AST_L1T_00302052007154424_20150518041444_91492"
+    },
+    {
+        "name": "imagico.de OSM images for mapping: Elephant Island/Clarence Island",
+        "type": "tms",
+        "description": "S2A_OPER_PRD_MSIL1C_PDMC_20160109T225906_R009_V20160109T130043_20160109T130043, 2016-01-09, channels 234 (true color), Fairly clear up-to-date image for updating glacier edges",
+        "template": "http://imagico.de/map/osmim_tiles.php?layer=S2A_R009_S61_20160109&z={zoom}&x={x}&y={-y}",
+        "scaleExtent": [
+            0,
+            13
+        ],
+        "polygon": [
             [
                 [
-                    -72.2652065929688,
-                    -55.5594608405404
+                    -56.1347609072749,
+                    -61.634696838288
                 ],
                 [
-                    -72.2652065929688,
-                    -54.178890106312
+                    -56.1347609072749,
+                    -60.8398161307814
                 ],
                 [
-                    -69.4910293325508,
-                    -54.178890106312
+                    -53.723458105877,
+                    -60.8398161307814
                 ],
                 [
-                    -69.4910293325508,
-                    -55.5594608405404
+                    -53.723458105877,
+                    -61.634696838288
                 ],
                 [
-                    -72.2652065929688,
-                    -55.5594608405404
+                    -56.1347609072749,
+                    -61.634696838288
                 ]
-            ],
+            ]
+        ],
+        "terms_url": "http://maps.imagico.de/#osmim",
+        "terms_text": "imagico.de OSM images for mapping",
+        "id": "osmim-imagicode-S2A_R009_S61_20160109"
+    },
+    {
+        "name": "imagico.de OSM images for mapping: Fogo, Cape Verde",
+        "type": "tms",
+        "description": "LC82100502015347LGN00, 2015-12-13, channels 234 (true color), Image from after the 2014/2015 eruption",
+        "template": "http://imagico.de/map/osmim_tiles.php?layer=LC82100502015347LGN00&z={zoom}&x={x}&y={-y}",
+        "scaleExtent": [
+            0,
+            14
+        ],
+        "polygon": [
             [
                 [
-                    73.9309166917002,
-                    34.9688073863467
+                    -24.7587819559676,
+                    14.7481298855965
                 ],
                 [
-                    73.9309166917002,
-                    37.0985693236903
+                    -24.7587819559676,
+                    15.0924935449651
                 ],
                 [
-                    76.5270029470414,
-                    37.0985693236903
+                    -24.2670621357462,
+                    15.0924935449651
                 ],
                 [
-                    76.5270029470414,
-                    34.9688073863467
+                    -24.2670621357462,
+                    14.7481298855965
                 ],
                 [
-                    73.9309166917002,
-                    34.9688073863467
+                    -24.7587819559676,
+                    14.7481298855965
                 ]
-            ],
-            [
-                [
-                    120.843824420484,
-                    -3.59549835456283
-                ],
-                [
-                    120.843824420484,
-                    -2.51468168634705
-                ],
-                [
-                    122.626180758858,
-                    -2.51468168634705
-                ],
-                [
-                    122.626180758858,
-                    -3.59549835456283
-                ],
-                [
-                    120.843824420484,
-                    -3.59549835456283
-                ]
-            ],
-            [
-                [
-                    153.061381062565,
-                    -11.7892410342423
-                ],
-                [
-                    153.061381062565,
-                    -11.0722925205757
-                ],
-                [
-                    154.411998092239,
-                    -11.0722925205757
-                ],
-                [
-                    154.411998092239,
-                    -11.7892410342423
-                ],
-                [
-                    153.061381062565,
-                    -11.7892410342423
-                ]
-            ],
-            [
-                [
-                    67.8623118572194,
-                    22.3626187997331
-                ],
-                [
-                    67.8623118572194,
-                    24.8869308169273
-                ],
-                [
-                    71.4900144016907,
-                    24.8869308169273
-                ],
-                [
-                    71.4900144016907,
-                    22.3626187997331
-                ],
-                [
-                    67.8623118572194,
-                    22.3626187997331
-                ]
-            ],
-            [
-                [
-                    -152.708729431479,
-                    62.3036424122946
-                ],
-                [
-                    -152.708729431479,
-                    63.5464553885127
-                ],
-                [
-                    -148.994366411548,
-                    63.5464553885127
-                ],
-                [
-                    -148.994366411548,
-                    62.3036424122946
-                ],
-                [
-                    -152.708729431479,
-                    62.3036424122946
-                ]
-            ],
-            [
-                [
-                    7.63567991501593,
-                    53.2802190281286
-                ],
-                [
-                    7.63567991501593,
-                    55.502457780526
-                ],
-                [
-                    9.20773166222509,
-                    55.502457780526
-                ],
-                [
-                    9.20773166222509,
-                    53.2802190281286
-                ],
-                [
-                    7.63567991501593,
-                    53.2802190281286
-                ]
-            ],
-            [
-                [
-                    7.63567991501593,
-                    53.2802190281286
-                ],
-                [
-                    7.63567991501593,
-                    55.502457780526
-                ],
-                [
-                    9.20773166222509,
-                    55.502457780526
-                ],
-                [
-                    9.20773166222509,
-                    53.2802190281286
-                ],
-                [
-                    7.63567991501593,
-                    53.2802190281286
-                ]
-            ],
+            ]
+        ],
+        "terms_url": "http://maps.imagico.de/#osmim",
+        "terms_text": "imagico.de OSM images for mapping",
+        "id": "osmim-imagicode-LC82100502015347LGN00"
+    },
+    {
+        "name": "imagico.de OSM images for mapping: Greenland mosaic",
+        "type": "tms",
+        "description": "mostly Landsat 8 2013-2015 channels 234 (true color), Landsat mosaic of Greenland",
+        "template": "http://imagico.de/map/osmim_tiles.php?layer=greenland&z={zoom}&x={x}&y={-y}",
+        "scaleExtent": [
+            0,
+            12
+        ],
+        "polygon": [
             [
                 [
                     -43.335169388775576,
@@ -16207,7 +16311,1006 @@
         ],
         "terms_url": "http://maps.imagico.de/#osmim",
         "terms_text": "imagico.de OSM images for mapping",
-        "id": "osmim-imagicode"
+        "id": "osmim-imagicode-greenland"
+    },
+    {
+        "name": "imagico.de OSM images for mapping: Heard Island coast",
+        "type": "tms",
+        "description": "S2A_OPER_PRD_MSIL1C_PDMC_20160412T212111_R047_V20160411T044330_20160411T044330, 2016-04-12, channels 234 (true color), Recent image of Heard island with interior mostly cloud covered but mostly well visible coast",
+        "template": "http://imagico.de/map/osmim_tiles.php?layer=S2A_R047_S54_20160411T044330&z={zoom}&x={x}&y={-y}",
+        "scaleExtent": [
+            0,
+            13
+        ],
+        "polygon": [
+            [
+                [
+                    73.0689652102818,
+                    -53.2705500548086
+                ],
+                [
+                    73.0689652102818,
+                    -52.8754896362687
+                ],
+                [
+                    74.0885530577575,
+                    -52.8754896362687
+                ],
+                [
+                    74.0885530577575,
+                    -53.2705500548086
+                ],
+                [
+                    73.0689652102818,
+                    -53.2705500548086
+                ]
+            ]
+        ],
+        "terms_url": "http://maps.imagico.de/#osmim",
+        "terms_text": "imagico.de OSM images for mapping",
+        "id": "osmim-imagicode-S2A_R047_S54_20160411T044330"
+    },
+    {
+        "name": "imagico.de OSM images for mapping: Isla Londonderry",
+        "type": "tms",
+        "description": "LC82280982013259LGN00, 2013-09-16, channel 654 (false color IR), A lot of very coarse coastlines could be improved here, much snow cover though so no use for glacier mapping",
+        "template": "http://imagico.de/map/osmim_tiles.php?layer=LC82280982013259LGN00&z={zoom}&x={x}&y={-y}",
+        "scaleExtent": [
+            0,
+            12
+        ],
+        "polygon": [
+            [
+                [
+                    -72.2652065929688,
+                    -55.5594608405404
+                ],
+                [
+                    -72.2652065929688,
+                    -54.178890106312
+                ],
+                [
+                    -69.4910293325508,
+                    -54.178890106312
+                ],
+                [
+                    -69.4910293325508,
+                    -55.5594608405404
+                ],
+                [
+                    -72.2652065929688,
+                    -55.5594608405404
+                ]
+            ]
+        ],
+        "terms_url": "http://maps.imagico.de/#osmim",
+        "terms_text": "imagico.de OSM images for mapping",
+        "id": "osmim-imagicode-LC82280982013259LGN00"
+    },
+    {
+        "name": "imagico.de OSM images for mapping: Leskov Island ASTER",
+        "type": "tms",
+        "description": "AST_L1T_00311162013112731_20150618142416_109190, 2013-11-16, channels 12x (true color with estimated blue), Missing in other image sources",
+        "template": "http://imagico.de/map/osmim_tiles.php?layer=AST_L1T_00311162013112731_20150618142416_109190&z={zoom}&x={x}&y={-y}",
+        "scaleExtent": [
+            0,
+            13
+        ],
+        "polygon": [
+            [
+                [
+                    -28.2107470814065,
+                    -56.721108415345
+                ],
+                [
+                    -28.2107470814065,
+                    -56.6249750430891
+                ],
+                [
+                    -27.9696123096903,
+                    -56.6249750430891
+                ],
+                [
+                    -27.9696123096903,
+                    -56.721108415345
+                ],
+                [
+                    -28.2107470814065,
+                    -56.721108415345
+                ]
+            ]
+        ],
+        "terms_url": "http://maps.imagico.de/#osmim",
+        "terms_text": "imagico.de OSM images for mapping",
+        "id": "osmim-imagicode-AST_L1T_00311162013112731_20150618142416_109190"
+    },
+    {
+        "name": "imagico.de OSM images for mapping: Leskov Island Landsat",
+        "type": "tms",
+        "description": "LC81991002015286LGN00, 2015-10-13, channels 234 (true color), Missing in other image sources",
+        "template": "http://imagico.de/map/osmim_tiles.php?layer=LC81991002015286LGN00&z={zoom}&x={x}&y={-y}",
+        "scaleExtent": [
+            0,
+            13
+        ],
+        "polygon": [
+            [
+                [
+                    -28.2277611728877,
+                    -56.7347696464053
+                ],
+                [
+                    -28.2277611728877,
+                    -56.6007525373185
+                ],
+                [
+                    -27.9690463710613,
+                    -56.6007525373185
+                ],
+                [
+                    -27.9690463710613,
+                    -56.7347696464053
+                ],
+                [
+                    -28.2277611728877,
+                    -56.7347696464053
+                ]
+            ]
+        ],
+        "terms_url": "http://maps.imagico.de/#osmim",
+        "terms_text": "imagico.de OSM images for mapping",
+        "id": "osmim-imagicode-LC81991002015286LGN00"
+    },
+    {
+        "name": "imagico.de OSM images for mapping: May 2013 off-nadir Landsat",
+        "type": "tms",
+        "description": "LC80372442013137LGN01-LC80530012013137LGN01, 2013-05-17, channels 234 (true color), Only available image north of the regular Landsat limit, mostly with seasonal snow cover so difficult to interpret",
+        "template": "http://imagico.de/map/osmim_tiles.php?layer=ls_polar&z={zoom}&x={x}&y={-y}",
+        "scaleExtent": [
+            0,
+            10
+        ],
+        "polygon": [
+            [
+                [
+                    -89.8315284119521,
+                    81.3934028410464
+                ],
+                [
+                    -89.8315284119521,
+                    83.7045077508689
+                ],
+                [
+                    -17.9663056823904,
+                    83.7045077508689
+                ],
+                [
+                    -17.9663056823904,
+                    81.3934028410464
+                ],
+                [
+                    -89.8315284119521,
+                    81.3934028410464
+                ]
+            ]
+        ],
+        "terms_url": "http://maps.imagico.de/#osmim",
+        "terms_text": "imagico.de OSM images for mapping",
+        "id": "osmim-imagicode-ls_polar"
+    },
+    {
+        "name": "imagico.de OSM images for mapping: New Ireland",
+        "type": "tms",
+        "description": "LC80940622015159LGN00, 2015-06-08, channels 234 (true color), Many missing islands in OSM (mostly mapped meanwhile)",
+        "template": "http://imagico.de/map/osmim_tiles.php?layer=LC80940622015159LGN00&z={zoom}&x={x}&y={-y}",
+        "scaleExtent": [
+            0,
+            14
+        ],
+        "polygon": [
+            [
+                [
+                    150.388533766196,
+                    -2.80056783608088
+                ],
+                [
+                    150.388533766196,
+                    -2.38339617820643
+                ],
+                [
+                    150.833478309574,
+                    -2.38339617820643
+                ],
+                [
+                    150.833478309574,
+                    -2.80056783608088
+                ],
+                [
+                    150.388533766196,
+                    -2.80056783608088
+                ]
+            ]
+        ],
+        "terms_url": "http://maps.imagico.de/#osmim",
+        "terms_text": "imagico.de OSM images for mapping",
+        "id": "osmim-imagicode-LC80940622015159LGN00"
+    },
+    {
+        "name": "imagico.de OSM images for mapping: Northern Ellesmere Island",
+        "type": "tms",
+        "description": "ASTER L1T, 2012-07-09/2012-07-15, channels 12x (true color with estimated blue), Assembled from July 2012 ASTER imagery",
+        "template": "http://imagico.de/map/osmim_tiles.php?layer=nellesmere_ast&z={zoom}&x={x}&y={-y}",
+        "scaleExtent": [
+            0,
+            10
+        ],
+        "polygon": [
+            [
+                [
+                    -83.0313625595429,
+                    82.4597689567848
+                ],
+                [
+                    -83.0313625595429,
+                    83.0958397705009
+                ],
+                [
+                    -65.6583851391606,
+                    83.0958397705009
+                ],
+                [
+                    -65.6583851391606,
+                    82.4597689567848
+                ],
+                [
+                    -83.0313625595429,
+                    82.4597689567848
+                ]
+            ]
+        ],
+        "terms_url": "http://maps.imagico.de/#osmim",
+        "terms_text": "imagico.de OSM images for mapping",
+        "id": "osmim-imagicode-nellesmere_ast"
+    },
+    {
+        "name": "imagico.de OSM images for mapping: Northern German west coast tidalflats",
+        "type": "tms",
+        "description": "LC81960222015233LGN00, 2015-08-21 channels 134 (true color), Up-to-date low tide imagery of the coast for updating mapping of tidalflats and shoals",
+        "template": "http://imagico.de/map/osmim_tiles.php?layer=LC81960222015233LGN00vis&z={zoom}&x={x}&y={-y}",
+        "scaleExtent": [
+            0,
+            12
+        ],
+        "polygon": [
+            [
+                [
+                    7.63567991501593,
+                    53.2802190281286
+                ],
+                [
+                    7.63567991501593,
+                    55.502457780526
+                ],
+                [
+                    9.20773166222509,
+                    55.502457780526
+                ],
+                [
+                    9.20773166222509,
+                    53.2802190281286
+                ],
+                [
+                    7.63567991501593,
+                    53.2802190281286
+                ]
+            ]
+        ],
+        "terms_url": "http://maps.imagico.de/#osmim",
+        "terms_text": "imagico.de OSM images for mapping",
+        "id": "osmim-imagicode-LC81960222015233LGN00vis"
+    },
+    {
+        "name": "imagico.de OSM images for mapping: Northern German west coast tidalflats (infrared)",
+        "type": "tms",
+        "description": "LC81960222015233LGN00, 2015-08-21 channel 654 (false color IR), Up-to-date low tide imagery of the coast for updating mapping of tidalflats and shoals",
+        "template": "http://imagico.de/map/osmim_tiles.php?layer=LC81960222015233LGN00ir&z={zoom}&x={x}&y={-y}",
+        "scaleExtent": [
+            0,
+            12
+        ],
+        "polygon": [
+            [
+                [
+                    7.63567991501593,
+                    53.2802190281286
+                ],
+                [
+                    7.63567991501593,
+                    55.502457780526
+                ],
+                [
+                    9.20773166222509,
+                    55.502457780526
+                ],
+                [
+                    9.20773166222509,
+                    53.2802190281286
+                ],
+                [
+                    7.63567991501593,
+                    53.2802190281286
+                ]
+            ]
+        ],
+        "terms_url": "http://maps.imagico.de/#osmim",
+        "terms_text": "imagico.de OSM images for mapping",
+        "id": "osmim-imagicode-LC81960222015233LGN00ir"
+    },
+    {
+        "name": "imagico.de OSM images for mapping: Northern Greenland ASTER",
+        "type": "tms",
+        "description": "ASTER L1T, 2005-06-21 to 2012-08-13, channels 12x (true color with estimated blue), Assembled from mostly 2012 ASTER imagery, some 2005 images mainly in the northeast",
+        "template": "http://imagico.de/map/osmim_tiles.php?layer=ngreenland_ast&z={zoom}&x={x}&y={-y}",
+        "scaleExtent": [
+            0,
+            10
+        ],
+        "polygon": [
+            [
+                [
+                    -52.49221819431,
+                    82.4897991404581
+                ],
+                [
+                    -52.49221819431,
+                    83.7321400994933
+                ],
+                [
+                    -21.1842327268577,
+                    83.7321400994933
+                ],
+                [
+                    -21.1842327268577,
+                    82.4897991404581
+                ],
+                [
+                    -52.49221819431,
+                    82.4897991404581
+                ]
+            ]
+        ],
+        "terms_url": "http://maps.imagico.de/#osmim",
+        "terms_text": "imagico.de OSM images for mapping",
+        "id": "osmim-imagicode-ngreenland_ast"
+    },
+    {
+        "name": "imagico.de OSM images for mapping: Northwest Heard Island",
+        "type": "tms",
+        "description": "EO1A1350972013086110KF, 2013-03-13, channels 973 (false color IR), Glaciers of Northwest Heard Island (mapped meanwhile)",
+        "template": "http://imagico.de/map/osmim_tiles.php?layer=EO1A1350972013086110KF&z={zoom}&x={x}&y={-y}",
+        "scaleExtent": [
+            0,
+            13
+        ],
+        "polygon": [
+            [
+                [
+                    73.2279041335011,
+                    -53.2033655831056
+                ],
+                [
+                    73.2279041335011,
+                    -52.9494391381048
+                ],
+                [
+                    73.7898811920934,
+                    -52.9494391381048
+                ],
+                [
+                    73.7898811920934,
+                    -53.2033655831056
+                ],
+                [
+                    73.2279041335011,
+                    -53.2033655831056
+                ]
+            ]
+        ],
+        "terms_url": "http://maps.imagico.de/#osmim",
+        "terms_text": "imagico.de OSM images for mapping",
+        "id": "osmim-imagicode-EO1A1350972013086110KF"
+    },
+    {
+        "name": "imagico.de OSM images for mapping: Panama Canal",
+        "type": "tms",
+        "description": "S2A_OPER_PRD_MSIL1C_PDMC_20160607T121312_R111_V20160604T154554_20160604T154554, 2016-06-07, channels 234 (true color), Images of the new locks (but partly cloudy)",
+        "template": "http://imagico.de/map/osmim_tiles.php?layer=S2A_R111_N09_20160604T154554&z={zoom}&x={x}&y={-y}",
+        "scaleExtent": [
+            0,
+            14
+        ],
+        "polygon": [
+            [
+                [
+                    -80.0165356176622,
+                    8.84894832639322
+                ],
+                [
+                    -80.0165356176622,
+                    9.41480707574399
+                ],
+                [
+                    -79.4685632943493,
+                    9.41480707574399
+                ],
+                [
+                    -79.4685632943493,
+                    8.84894832639322
+                ],
+                [
+                    -80.0165356176622,
+                    8.84894832639322
+                ]
+            ]
+        ],
+        "terms_url": "http://maps.imagico.de/#osmim",
+        "terms_text": "imagico.de OSM images for mapping",
+        "id": "osmim-imagicode-S2A_R111_N09_20160604T154554"
+    },
+    {
+        "name": "imagico.de OSM images for mapping: Pensacola Mountains",
+        "type": "tms",
+        "description": "LC81511242016033LGN00/LC81511232016033LGN00, 2016-02-02, channels 234 (true color), Outside regular Landsat coverage and therefore not in LIMA and Bing/Mapbox",
+        "template": "http://imagico.de/map/osmim_tiles.php?layer=LC81511242016033LGN00&z={zoom}&x={x}&y={-y}",
+        "scaleExtent": [
+            0,
+            10
+        ],
+        "polygon": [
+            [
+                [
+                    -60.6153778814062,
+                    -84.1252820431153
+                ],
+                [
+                    -60.6153778814062,
+                    -82.299687854391
+                ],
+                [
+                    -44.5135525206644,
+                    -82.299687854391
+                ],
+                [
+                    -44.5135525206644,
+                    -84.1252820431153
+                ],
+                [
+                    -60.6153778814062,
+                    -84.1252820431153
+                ]
+            ]
+        ],
+        "terms_url": "http://maps.imagico.de/#osmim",
+        "terms_text": "imagico.de OSM images for mapping",
+        "id": "osmim-imagicode-LC81511242016033LGN00"
+    },
+    {
+        "name": "imagico.de OSM images for mapping: Prokletije Mountains",
+        "type": "tms",
+        "description": "S2A_OPER_PRD_MSIL1C_PDMC_20160316T034950_R136_V20150831T093006_20150831T093006, 2015-08-31, channels 234 (true color), Late summer imagery where usual sources are severely limited by clouds and snow",
+        "template": "http://imagico.de/map/osmim_tiles.php?layer=S2A_R136_N41_20150831T093006&z={zoom}&x={x}&y={-y}",
+        "scaleExtent": [
+            0,
+            14
+        ],
+        "polygon": [
+            [
+                [
+                    19.0842590534772,
+                    42.1531616550022
+                ],
+                [
+                    19.0842590534772,
+                    43.0960297809089
+                ],
+                [
+                    20.6378953373619,
+                    43.0960297809089
+                ],
+                [
+                    20.6378953373619,
+                    42.1531616550022
+                ],
+                [
+                    19.0842590534772,
+                    42.1531616550022
+                ]
+            ]
+        ],
+        "terms_url": "http://maps.imagico.de/#osmim",
+        "terms_text": "imagico.de OSM images for mapping",
+        "id": "osmim-imagicode-S2A_R136_N41_20150831T093006"
+    },
+    {
+        "name": "imagico.de OSM images for mapping: Qasigiannguit",
+        "type": "tms",
+        "description": "DMS_1142622_03746_20110415_17533956, 2011-04-15, true color, Icebridge DMS image of the settlement - alignment might be poor",
+        "template": "http://imagico.de/map/osmim_tiles.php?layer=DMS_1142622_03746_20110415_17533956&z={zoom}&x={x}&y={-y}",
+        "scaleExtent": [
+            0,
+            15
+        ],
+        "polygon": [
+            [
+                [
+                    -51.2433353705628,
+                    68.7997259148871
+                ],
+                [
+                    -51.2433353705628,
+                    68.8530261295114
+                ],
+                [
+                    -51.140370472697,
+                    68.8530261295114
+                ],
+                [
+                    -51.140370472697,
+                    68.7997259148871
+                ],
+                [
+                    -51.2433353705628,
+                    68.7997259148871
+                ]
+            ]
+        ],
+        "terms_url": "http://maps.imagico.de/#osmim",
+        "terms_text": "imagico.de OSM images for mapping",
+        "id": "osmim-imagicode-DMS_1142622_03746_20110415_17533956"
+    },
+    {
+        "name": "imagico.de OSM images for mapping: Rann of Kutch",
+        "type": "tms",
+        "description": "various Landsat early 2015, channel 654 (false color IR), Land/water distinction difficult to properly map based on Bing/Mapbox images",
+        "template": "http://imagico.de/map/osmim_tiles.php?layer=LC81510432015030LGN00&z={zoom}&x={x}&y={-y}",
+        "scaleExtent": [
+            0,
+            12
+        ],
+        "polygon": [
+            [
+                [
+                    67.8623118572194,
+                    22.3626187997331
+                ],
+                [
+                    67.8623118572194,
+                    24.8869308169273
+                ],
+                [
+                    71.4900144016907,
+                    24.8869308169273
+                ],
+                [
+                    71.4900144016907,
+                    22.3626187997331
+                ],
+                [
+                    67.8623118572194,
+                    22.3626187997331
+                ]
+            ]
+        ],
+        "terms_url": "http://maps.imagico.de/#osmim",
+        "terms_text": "imagico.de OSM images for mapping",
+        "id": "osmim-imagicode-LC81510432015030LGN00"
+    },
+    {
+        "name": "imagico.de OSM images for mapping: Rila and Pirin Mountains",
+        "type": "tms",
+        "description": "S2A_OPER_PRD_MSIL1C_PDMC_20160412T121341_R093_V20150828T092005_20150828T092005, 2015-08-28, channels 234 (true color), Late summer imagery where usual sources are severely limited by clouds and snow",
+        "template": "http://imagico.de/map/osmim_tiles.php?layer=S2A_R093_N41_20150828T092005&z={zoom}&x={x}&y={-y}",
+        "scaleExtent": [
+            0,
+            14
+        ],
+        "polygon": [
+            [
+                [
+                    22.9923796970391,
+                    41.5848941590232
+                ],
+                [
+                    22.9923796970391,
+                    42.2998374736026
+                ],
+                [
+                    23.9940012388324,
+                    42.2998374736026
+                ],
+                [
+                    23.9940012388324,
+                    41.5848941590232
+                ],
+                [
+                    22.9923796970391,
+                    41.5848941590232
+                ]
+            ]
+        ],
+        "terms_url": "http://maps.imagico.de/#osmim",
+        "terms_text": "imagico.de OSM images for mapping",
+        "id": "osmim-imagicode-S2A_R093_N41_20150828T092005"
+    },
+    {
+        "name": "imagico.de OSM images for mapping: Rwenzori Mountains",
+        "type": "tms",
+        "description": "LC81730602015040LGN00, 2015-02-09, channel 654 (false color IR), Recent image of most of the remaining Rwenzori Mountains glaciers",
+        "template": "http://imagico.de/map/osmim_tiles.php?layer=LC81730602015040LGN00&z={zoom}&x={x}&y={-y}",
+        "scaleExtent": [
+            0,
+            13
+        ],
+        "polygon": [
+            [
+                [
+                    29.7662967768464,
+                    0.20687257729646
+                ],
+                [
+                    29.7662967768464,
+                    0.509176367154027
+                ],
+                [
+                    30.0346684679771,
+                    0.509176367154027
+                ],
+                [
+                    30.0346684679771,
+                    0.20687257729646
+                ],
+                [
+                    29.7662967768464,
+                    0.20687257729646
+                ]
+            ]
+        ],
+        "terms_url": "http://maps.imagico.de/#osmim",
+        "terms_text": "imagico.de OSM images for mapping",
+        "id": "osmim-imagicode-LC81730602015040LGN00"
+    },
+    {
+        "name": "imagico.de OSM images for mapping: Scott Island",
+        "type": "tms",
+        "description": "LC80611072014036LGN00, 2014-02-05, channels 234 (true color), Missing in other image sources",
+        "template": "http://imagico.de/map/osmim_tiles.php?layer=LC80611072014036LGN00&z={zoom}&x={x}&y={-y}",
+        "scaleExtent": [
+            0,
+            13
+        ],
+        "polygon": [
+            [
+                [
+                    -180,
+                    -67.4263452022474
+                ],
+                [
+                    -180,
+                    -67.3252448474477
+                ],
+                [
+                    -179.824753575046,
+                    -67.3252448474477
+                ],
+                [
+                    -179.824753575046,
+                    -67.4263452022474
+                ],
+                [
+                    -180,
+                    -67.4263452022474
+                ]
+            ]
+        ],
+        "terms_url": "http://maps.imagico.de/#osmim",
+        "terms_text": "imagico.de OSM images for mapping",
+        "id": "osmim-imagicode-LC80611072014036LGN00"
+    },
+    {
+        "name": "imagico.de OSM images for mapping: Shag Rocks",
+        "type": "tms",
+        "description": "LC82100972015347LGN00, 2015-12-13, channels 234 (true color), Missing in other image sources",
+        "template": "http://imagico.de/map/osmim_tiles.php?layer=LC82100972015347LGN00&z={zoom}&x={x}&y={-y}",
+        "scaleExtent": [
+            0,
+            13
+        ],
+        "polygon": [
+            [
+                [
+                    -42.1462581850356,
+                    -53.7205050698923
+                ],
+                [
+                    -42.1462581850356,
+                    -53.4458622334244
+                ],
+                [
+                    -41.6557780399063,
+                    -53.4458622334244
+                ],
+                [
+                    -41.6557780399063,
+                    -53.7205050698923
+                ],
+                [
+                    -42.1462581850356,
+                    -53.7205050698923
+                ]
+            ]
+        ],
+        "terms_url": "http://maps.imagico.de/#osmim",
+        "terms_text": "imagico.de OSM images for mapping",
+        "id": "osmim-imagicode-LC82100972015347LGN00"
+    },
+    {
+        "name": "imagico.de OSM images for mapping: Southeastern Sulawesi",
+        "type": "tms",
+        "description": "LC81130622013270LGN00, 2013-09-27, channels 234 (true color), Missing islands and coarse coastline due to cloud cover in Bing, lakes could also use additional detail",
+        "template": "http://imagico.de/map/osmim_tiles.php?layer=LC81130622013270LGN00&z={zoom}&x={x}&y={-y}",
+        "scaleExtent": [
+            0,
+            13
+        ],
+        "polygon": [
+            [
+                [
+                    120.843824420484,
+                    -3.59549835456283
+                ],
+                [
+                    120.843824420484,
+                    -2.51468168634705
+                ],
+                [
+                    122.626180758858,
+                    -2.51468168634705
+                ],
+                [
+                    122.626180758858,
+                    -3.59549835456283
+                ],
+                [
+                    120.843824420484,
+                    -3.59549835456283
+                ]
+            ]
+        ],
+        "terms_url": "http://maps.imagico.de/#osmim",
+        "terms_text": "imagico.de OSM images for mapping",
+        "id": "osmim-imagicode-LC81130622013270LGN00"
+    },
+    {
+        "name": "imagico.de OSM images for mapping: Southern Transantarctic Mountains",
+        "type": "tms",
+        "description": "LC80281222016035LGN00/LC80281212016035LGN00, 2016-02-04, channels 234 (true color), Outside regular Landsat coverage and therefore not in LIMA and Bing/Mapbox",
+        "template": "http://imagico.de/map/osmim_tiles.php?layer=LC80281222016035LGN00&z={zoom}&x={x}&y={-y}",
+        "scaleExtent": [
+            0,
+            10
+        ],
+        "polygon": [
+            [
+                [
+                    154.508575968435,
+                    -84.5010049969839
+                ],
+                [
+                    154.508575968435,
+                    -82.5848702651189
+                ],
+                [
+                    177.005570718893,
+                    -82.5848702651189
+                ],
+                [
+                    177.005570718893,
+                    -84.5010049969839
+                ],
+                [
+                    154.508575968435,
+                    -84.5010049969839
+                ]
+            ]
+        ],
+        "terms_url": "http://maps.imagico.de/#osmim",
+        "terms_text": "imagico.de OSM images for mapping",
+        "id": "osmim-imagicode-LC80281222016035LGN00"
+    },
+    {
+        "name": "imagico.de OSM images for mapping: Thule Air Base",
+        "type": "tms",
+        "description": "DMS_1142636_16001_20110507_18221638-DMS_1142636_16076_20110507_18224996, 2011-05-07, true color, Icebridge DMS image - alignment might be poor",
+        "template": "http://imagico.de/map/osmim_tiles.php?layer=DMS_1142636_160xx_20110507_1822xxxx&z={zoom}&x={x}&y={-y}",
+        "scaleExtent": [
+            0,
+            15
+        ],
+        "polygon": [
+            [
+                [
+                    -68.9397691752981,
+                    76.5113260720978
+                ],
+                [
+                    -68.9397691752981,
+                    76.5517569988038
+                ],
+                [
+                    -68.5074010458985,
+                    76.5517569988038
+                ],
+                [
+                    -68.5074010458985,
+                    76.5113260720978
+                ],
+                [
+                    -68.9397691752981,
+                    76.5113260720978
+                ]
+            ]
+        ],
+        "terms_url": "http://maps.imagico.de/#osmim",
+        "terms_text": "imagico.de OSM images for mapping",
+        "id": "osmim-imagicode-DMS_1142636_160xx_20110507_1822xxxx"
+    },
+    {
+        "name": "imagico.de OSM images for mapping: Vanatinai",
+        "type": "tms",
+        "description": "LC80910682014358LGN00, 2014-12-24, channels 234 (true color), Coarse coastline due to cloud cover in Bing/Mapbox",
+        "template": "http://imagico.de/map/osmim_tiles.php?layer=LC80910682014358LGN00&z={zoom}&x={x}&y={-y}",
+        "scaleExtent": [
+            0,
+            13
+        ],
+        "polygon": [
+            [
+                [
+                    153.061381062565,
+                    -11.7892410342423
+                ],
+                [
+                    153.061381062565,
+                    -11.0722925205757
+                ],
+                [
+                    154.411998092239,
+                    -11.0722925205757
+                ],
+                [
+                    154.411998092239,
+                    -11.7892410342423
+                ],
+                [
+                    153.061381062565,
+                    -11.7892410342423
+                ]
+            ]
+        ],
+        "terms_url": "http://maps.imagico.de/#osmim",
+        "terms_text": "imagico.de OSM images for mapping",
+        "id": "osmim-imagicode-LC80910682014358LGN00"
+    },
+    {
+        "name": "imagico.de OSM images for mapping: Volcán Calbuco",
+        "type": "tms",
+        "description": "LC82330892016031LGN00, 2016-01-31, channels 234 (true color), Image from after the 2015 eruption",
+        "template": "http://imagico.de/map/osmim_tiles.php?layer=LC82330892016031LGN00&z={zoom}&x={x}&y={-y}",
+        "scaleExtent": [
+            0,
+            13
+        ],
+        "polygon": [
+            [
+                [
+                    -72.8669610523419,
+                    -41.5174389446875
+                ],
+                [
+                    -72.8669610523419,
+                    -41.045274923011
+                ],
+                [
+                    -71.8751580966041,
+                    -41.045274923011
+                ],
+                [
+                    -71.8751580966041,
+                    -41.5174389446875
+                ],
+                [
+                    -72.8669610523419,
+                    -41.5174389446875
+                ]
+            ]
+        ],
+        "terms_url": "http://maps.imagico.de/#osmim",
+        "terms_text": "imagico.de OSM images for mapping",
+        "id": "osmim-imagicode-LC82330892016031LGN00"
+    },
+    {
+        "name": "imagico.de OSM images for mapping: Western Karakoram",
+        "type": "tms",
+        "description": "LC81490352013282LGN00, 2013-10-09, channels 234 (true color), Represents approximately minimum snow cover so can be well used for glacier mapping",
+        "template": "http://imagico.de/map/osmim_tiles.php?layer=LC81490352013282LGN00&z={zoom}&x={x}&y={-y}",
+        "scaleExtent": [
+            0,
+            13
+        ],
+        "polygon": [
+            [
+                [
+                    73.9309166917002,
+                    34.9688073863467
+                ],
+                [
+                    73.9309166917002,
+                    37.0985693236903
+                ],
+                [
+                    76.5270029470414,
+                    37.0985693236903
+                ],
+                [
+                    76.5270029470414,
+                    34.9688073863467
+                ],
+                [
+                    73.9309166917002,
+                    34.9688073863467
+                ]
+            ]
+        ],
+        "terms_url": "http://maps.imagico.de/#osmim",
+        "terms_text": "imagico.de OSM images for mapping",
+        "id": "osmim-imagicode-LC81490352013282LGN00"
+    },
+    {
+        "name": "imagico.de OSM images for mapping: Willkanuta Mountains and Quelccaya Ice Cap",
+        "type": "tms",
+        "description": "S2A_OPER_PRD_MSIL1C_PDMC_20160511T025410_R039_V20160510T145731_20160510T150701, 2016-05-10, channels 234 (true color), Poor and outdated imagery in other sources",
+        "template": "http://imagico.de/map/osmim_tiles.php?layer=S2A_R039_S15_20160510T145731&z={zoom}&x={x}&y={-y}",
+        "scaleExtent": [
+            0,
+            14
+        ],
+        "polygon": [
+            [
+                [
+                    -71.1807064830626,
+                    -14.4978825528812
+                ],
+                [
+                    -71.1807064830626,
+                    -13.7102928800508
+                ],
+                [
+                    -70.5563773605996,
+                    -13.7102928800508
+                ],
+                [
+                    -70.5563773605996,
+                    -14.4978825528812
+                ],
+                [
+                    -71.1807064830626,
+                    -14.4978825528812
+                ]
+            ]
+        ],
+        "terms_url": "http://maps.imagico.de/#osmim",
+        "terms_text": "imagico.de OSM images for mapping",
+        "id": "osmim-imagicode-S2A_R039_S15_20160510T145731"
     },
     {
         "name": "Interspect ortofotó 2014",
