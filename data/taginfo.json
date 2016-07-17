@@ -1649,6 +1649,10 @@
             "value": "government"
         },
         {
+            "key": "government",
+            "value": "register_office"
+        },
+        {
             "key": "office",
             "value": "insurance"
         },

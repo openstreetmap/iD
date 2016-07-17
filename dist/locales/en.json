@@ -3188,6 +3188,10 @@
                 "name": "Government Office",
                 "terms": ""
             },
+            "office/government/register_office": {
+                "name": "Register Office",
+                "terms": "clerk,marriage,death,birth,certificate"
+            },
             "office/insurance": {
                 "name": "Insurance Office",
                 "terms": ""

@@ -1640,7 +1640,8 @@
         "tags": {
             "amenity": "register_office"
         },
-        "name": "Register Office"
+        "name": "Register Office",
+        "searchable": false
     },
     "amenity/restaurant": {
         "icon": "restaurant",
@@ -7063,6 +7064,31 @@
         },
         "terms": [],
         "name": "Government Office"
+    },
+    "office/government/register_office": {
+        "icon": "town-hall",
+        "fields": [
+            "address",
+            "building_area",
+            "opening_hours",
+            "operator"
+        ],
+        "geometry": [
+            "point",
+            "area"
+        ],
+        "terms": [
+            "clerk",
+            "marriage",
+            "death",
+            "birth",
+            "certificate"
+        ],
+        "tags": {
+            "office": "government",
+            "government": "register_office"
+        },
+        "name": "Register Office"
     },
     "office/insurance": {
         "icon": "commercial",

@@ -2897,6 +2897,11 @@ en:
         # office=government
         name: Government Office
         terms: '<translate with synonyms or related terms for ''Government Office'', separated by commas>'
+      office/government/register_office:
+        # 'office=government, government=register_office'
+        name: Register Office
+        # 'terms: clerk,marriage,death,birth,certificate'
+        terms: '<translate with synonyms or related terms for ''Register Office'', separated by commas>'
       office/insurance:
         # office=insurance
         name: Insurance Office

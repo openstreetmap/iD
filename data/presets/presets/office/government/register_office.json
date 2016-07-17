@@ -11,10 +11,15 @@
         "area"
     ],
     "terms": [
+        "clerk",
+        "marriage",
+        "death",
+        "birth",
+        "certificate"
     ],
     "tags": {
-        "amenity": "register_office"
+        "office": "government",
+        "government": "register_office"
     },
-    "name": "Register Office",
-    "searchable": false
+    "name": "Register Office"
 }
