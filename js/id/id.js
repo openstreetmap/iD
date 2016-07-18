@@ -382,6 +382,6 @@ window.iD = function () {
     return d3.rebind(context, dispatch, 'on');
 };
 
-iD.version = '1.9.6';
+iD.version = '2.0.0-alpha.1';
 
 })();
