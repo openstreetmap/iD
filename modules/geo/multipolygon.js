@@ -1,3 +1,5 @@
+import { Reverse } from '../actions/reverse';
+
 // For fixing up rendering of multipolygons with tags on the outer member.
 // https://github.com/openstreetmap/iD/issues/613
 export function isSimpleMultipolygonOuterMember(entity, graph) {
@@ -81,7 +83,7 @@ export function joinWays(array, graph) {
     }
 
     function reverse(member) {
-        return member.tags ? iD.actions.Reverse(member.id, {reverseOneway: true})(graph).entity(member.id) : member;
+        return member.tags ? Reverse(member.id, {reverseOneway: true})(graph).entity(member.id) : member;
     }
 
     while (array.length) {
