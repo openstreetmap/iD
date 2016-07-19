@@ -1,4 +1,4 @@
-/* globals chai */
+/* globals chai:false */
 
 iD.debug = true;
 

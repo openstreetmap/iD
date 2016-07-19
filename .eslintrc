@@ -10,9 +10,7 @@
     "globals": {
         "d3": false,
         "t": false,
-        "bootstrap": false,
-        "Diff3": false,
-        "Mapillary": false,
+        "bootstrap": false
     },
     "parserOptions": {
         "ecmaVersion": 6,

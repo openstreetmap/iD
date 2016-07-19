@@ -1,19 +1,16 @@
 {
+    "env": {
+        "browser": true,
+        "mocha": true
+    },
     "globals": {
-        "iD": false,
-        "describe": true,
-        "it": true,
+        "_": false,
         "expect": true,
-        "specify": true,
-        "beforeEach": true,
-        "afterEach": true,
-        "mocha": true,
-        "sinon": true,
-        "happen": true,
-        "before": true,
-	"_": true
+        "happen": false,
+        "iD": false,
+        "sinon": false
     },
     "rules": {
-        "no-unused-expressions": 0
+        "no-unused-expressions": "off"
     }
 }
