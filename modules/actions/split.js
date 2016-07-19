@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import { Relation, Way } from '../core/index';
 import { isSimpleMultipolygonOuterMember, sphericalDistance } from '../geo/index';
 import { AddMember } from './add_member';

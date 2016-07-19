@@ -1,3 +1,4 @@
+import _ from 'lodash';
 export function DeprecateTags(entityId) {
     return function(graph) {
         var entity = graph.entity(entityId),

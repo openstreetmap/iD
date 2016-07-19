@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import { Way } from '../core/index';
 import { angle as getAngle } from './index';
 

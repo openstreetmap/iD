@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import { Entity } from '../core/index';
 export function Features(context) {
     var traffic_roads = {

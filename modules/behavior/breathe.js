@@ -1,3 +1,4 @@
+import _ from 'lodash';
 export function Breathe(){
     var duration = 800,
         selector = '.selected.shadow, .selected .shadow',

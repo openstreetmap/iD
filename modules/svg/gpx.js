@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import { Extent, polygonIntersectsPolygon } from '../geo/index';
 import { Detect } from '../util/detect';
 import toGeoJSON from 'togeojson';

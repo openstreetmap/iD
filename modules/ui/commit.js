@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import { displayName, entityOrMemberSelector } from '../util/index';
 import { Icon } from '../svg/index';
 import { Select } from '../modes/index';

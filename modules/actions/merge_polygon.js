@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import { joinWays, polygonContainsPolygon } from '../geo/index';
 import { Relation } from '../core/index';
 

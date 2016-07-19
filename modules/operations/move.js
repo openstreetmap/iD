@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import { Extent } from '../geo/index';
 import { Move as MoveAction } from '../actions/index';
 import { Move as MoveMode } from '../modes/index';

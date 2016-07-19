@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import { Extent, metersToOffset, offsetToMeters} from '../geo/index';
 import { qsString, stringQs } from '../util/index';
 import { BackgroundSource } from './background_source';

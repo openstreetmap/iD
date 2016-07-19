@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import { Browse } from '../modes/index';
 import { Disclosure } from './disclosure';
 import { Icon } from '../svg/index';

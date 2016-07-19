@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import { Extent, cross } from '../geo/index';
 import { Entity } from './entity';
 import { oneWayTags } from './tags';

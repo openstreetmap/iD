@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import { metersToLat, metersToLon } from './index';
 export function Extent(min, max) {
     if (!(this instanceof Extent)) return new Extent(min, max);

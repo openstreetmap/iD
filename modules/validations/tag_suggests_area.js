@@ -1,3 +1,4 @@
+import _ from 'lodash';
 export function TagSuggestsArea() {
 
     // https://github.com/openstreetmap/josm/blob/mirror/src/org/

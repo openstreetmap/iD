@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import { Category } from './category';
 import { Collection } from './collection';
 import { Field } from './field';

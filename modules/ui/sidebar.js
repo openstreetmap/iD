@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import { FeatureList } from './feature_list';
 import { Inspector } from './inspector';
 import { Notice } from './notice';

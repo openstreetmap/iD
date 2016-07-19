@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import { DrawLine } from '../modes/index';
 export function Continue(selectedIDs, context) {
     var graph = context.graph(),

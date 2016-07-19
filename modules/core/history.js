@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import * as Validations from '../validations/index';
 import { Difference } from './difference';
 import { Entity } from './entity';

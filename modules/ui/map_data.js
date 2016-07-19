@@ -1,5 +1,6 @@
 import { Icon } from '../svg/index';
 import { tooltipHtml } from './tooltipHtml';
+import _ from 'lodash';
 
 export function MapData(context) {
     var key = 'F',

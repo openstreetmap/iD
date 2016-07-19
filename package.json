@@ -23,6 +23,7 @@
   "license": "ISC",
   "dependencies": {
     "diacritics": "1.2.3",
+    "lodash": "4.13.1",
     "marked": "0.3.5",
     "osm-auth": "0.2.8",
     "rbush": "2.0.1",
@@ -40,7 +41,6 @@
     "http-server": "0.9.0",
     "js-yaml": "3.6.1",
     "jsonschema": "1.1.0",
-    "lodash-cli": "4.13.1",
     "maki": "0.5.0",
     "minimist": "~1.2.0",
     "mocha": "2.5.3",

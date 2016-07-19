@@ -52,7 +52,6 @@
 
     "globals": {
         "d3": false,
-        "_": false,
         "t": false,
         "bootstrap": false,
         "Diff3": false,

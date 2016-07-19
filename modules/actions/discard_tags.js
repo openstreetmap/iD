@@ -1,3 +1,4 @@
+import _ from 'lodash';
 export function DiscardTags(difference) {
     return function(graph) {
         function discardTags(entity) {

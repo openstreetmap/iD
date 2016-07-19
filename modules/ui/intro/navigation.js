@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import { icon, pointBox } from './helper';
 
 export function navigation(context, reveal) {

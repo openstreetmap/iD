@@ -11,6 +11,7 @@
         "sinon": true,
         "happen": true,
         "before": true,
+	"_": true
     },
     "rules": {
         "no-unused-expressions": 0

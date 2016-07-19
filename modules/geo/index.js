@@ -1,3 +1,4 @@
+import _ from 'lodash';
 export { Extent } from './extent.js';
 export {
         Intersection,

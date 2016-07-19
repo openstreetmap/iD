@@ -1,3 +1,4 @@
+import _ from 'lodash';
 export function Preset(id, preset, fields) {
     preset = _.clone(preset);
 

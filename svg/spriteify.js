@@ -9,7 +9,7 @@ if (argv.help || argv.h || !argv.svg) {
 
 var fs = require('fs');
 var json = (argv.json ? JSON.parse(fs.readFileSync(argv.json)) : {});
-var _ = require('../js/lib/lodash.js');
+var _ = require('lodash');
 var xml2js = require('xml2js');
 
 xmlToJs(argv.svg, function (err, obj) {

@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import { Debug } from './debug';
 import { Gpx } from './gpx';
 import { MapillaryImages } from './mapillary_images';

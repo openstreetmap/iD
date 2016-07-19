@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import { getPrototypeOf } from '../util/index';
 
 export function Graph(other, mutable) {

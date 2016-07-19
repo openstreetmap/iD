@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import { qsString } from '../util/index';
 
 var taginfo = {},

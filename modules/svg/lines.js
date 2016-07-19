@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import { OneWaySegments, Path, RelationMemberTags, TagClasses } from './index';
 import { Detect } from '../util/detect';
 import { Entity } from '../core/index';
