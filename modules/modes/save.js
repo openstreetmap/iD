@@ -1,3 +1,4 @@
+import { t } from '../util/locale';
 import _ from 'lodash';
 import { Commit, Conflicts, Loading, Success } from '../ui/index';
 import { DiscardTags, MergeRemoteChanges, Noop, Revert } from '../actions/index';

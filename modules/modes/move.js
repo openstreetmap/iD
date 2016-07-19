@@ -1,3 +1,4 @@
+import { t } from '../util/locale';
 import { Browse, Select } from './index';
 import { Move as MoveAction, Noop } from '../actions/index';
 import { Edit } from '../behavior/index';

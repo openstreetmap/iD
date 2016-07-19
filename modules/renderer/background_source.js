@@ -1,3 +1,4 @@
+import { t } from '../util/locale';
 import _ from 'lodash';
 import { Extent, polygonIntersectsPolygon } from '../geo/index';
 

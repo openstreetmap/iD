@@ -1,3 +1,4 @@
+import { t } from '../util/locale';
 import { Join, Merge as MergeAction, MergePolygon } from '../actions/index';
 import { Select } from '../modes/index';
 

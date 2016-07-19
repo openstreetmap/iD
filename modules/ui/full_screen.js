@@ -1,3 +1,4 @@
+import { t } from '../util/locale';
 import { cmd } from './cmd';
 
 export function FullScreen(context) {

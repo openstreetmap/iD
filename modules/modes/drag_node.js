@@ -1,3 +1,4 @@
+import { t } from '../util/locale';
 import _ from 'lodash';
 import { AddMidpoint, Connect, MoveNode, Noop } from '../actions/index';
 import { Browse, Select } from './index';

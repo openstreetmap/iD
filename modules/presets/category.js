@@ -1,3 +1,4 @@
+import { t } from '../util/locale';
 import _ from 'lodash';
 import { Collection } from './collection';
 export function Category(id, category, all) {

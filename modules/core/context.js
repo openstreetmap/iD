@@ -1,3 +1,4 @@
+import { t } from '../util/locale';
 import _ from 'lodash';
 import { Background } from '../renderer/background';
 import { Connection } from './connection';

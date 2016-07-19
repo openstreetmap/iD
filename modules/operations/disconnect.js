@@ -1,3 +1,4 @@
+import { t } from '../util/locale';
 import _ from 'lodash';
 import { Disconnect as DisconnectAction } from '../actions/index';
 export function Disconnect(selectedIDs, context) {

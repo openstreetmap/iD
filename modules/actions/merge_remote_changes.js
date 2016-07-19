@@ -1,3 +1,4 @@
+import { t } from '../util/locale';
 import _ from 'lodash';
 import { DeleteMultiple } from './delete_multiple';
 import { Entity } from '../core/index';

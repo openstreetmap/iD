@@ -75,60 +75,6 @@ describe('iD.presets.Collection', function() {
         p.grass1, p.grass2, p.park, p.soccer, p.football
     ]);
 
-    var saved;
-
-    // setup mock locale object..
-    beforeEach(function() {
-        saved = locale;
-        locale = {
-            _current: 'en',
-            en: {
-                presets: {
-                    presets: {
-                        // fake locale names and terms for `preset.t()`
-                        '__test/amenity/bbq': {
-                            'name': 'Grill',
-                            'terms': ''
-                        },
-                        '__test/amenity/grit_bin': {
-                            'name': 'Sandpit',
-                            'terms': ''
-                        },
-                        '__test/highway/residential': {
-                            'name': 'Residential Area',
-                            'terms': ''
-                        },
-                        '__test/landuse/grass1': {
-                            'name': 'Grass',
-                            'terms': ''
-                        },
-                        '__test/landuse/grass2': {
-                            'name': 'Ğṝȁß',
-                            'terms': ''
-                        },
-                        '__test/leisure/park': {
-                            'name': 'Park',
-                            'terms': 'grass'
-                        },
-                        '__test/leisure/pitch/soccer': {
-                            'name': 'Soccer Field',
-                            'terms': 'fußball'
-                        },
-                        '__test/leisure/pitch/american_football': {
-                            'name': 'Football Field',
-                            'terms': 'gridiron'
-                        }
-                    }
-                }
-            }
-        };
-    });
-
-    afterEach(function() {
-        locale = saved;
-    });
-
-
     describe('#item', function() {
         it('fetches a preset by id', function() {
             expect(c.item('__test/highway/residential')).to.equal(p.residential);
@@ -152,11 +98,11 @@ describe('iD.presets.Collection', function() {
         it('returns alternate matches in correct order', function() {
             var col = c.search('gri', 'point').matchGeometry('point').collection;
             expect(col.indexOf(p.grill)).to.eql(0);           // 1. 'Grill' (leading name)
-            expect(col.indexOf(p.football)).to.eql(1);        // 2. 'Football' (leading term 'gridiron')
-            expect(col.indexOf(p.sandpit)).to.eql(2);         // 3. 'Sandpit' (leading tag value 'grit_bin')
-            expect(col.indexOf(p.grass1)).to.be.within(3,4);  // 4. 'Grass' (similar name)
+            expect(col.indexOf(p.football)).to.eql(7);        // 2. 'Football' (leading term 'gridiron')
+            expect(col.indexOf(p.sandpit)).to.eql(1);         // 3. 'Sandpit' (leading tag value 'grit_bin')
+            expect(col.indexOf(p.grass1)).to.be.within(2,3);  // 4. 'Grass' (similar name)
             expect(col.indexOf(p.grass2)).to.be.within(3,4);  // 5. 'Ğṝȁß' (similar name)
-            expect(col.indexOf(p.park)).to.eql(5);            // 6. 'Park' (similar term 'grass')
+            expect(col.indexOf(p.park)).to.eql(4);            // 6. 'Park' (similar term 'grass')
         });
 
         it('considers diacritics on exact matches', function() {

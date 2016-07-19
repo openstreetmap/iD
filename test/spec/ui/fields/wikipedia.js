@@ -17,7 +17,7 @@ describe('wikipedia', function() {
     }
 
     function changeTags(changed) {
-        var annotation = t('operations.change_tags.annotation');
+        var annotation = 'Changed tags.';
         var tags = _.extend({}, entity.tags, changed);
         context.perform(iD.actions.ChangeTags(entity.id, tags), annotation);
     }

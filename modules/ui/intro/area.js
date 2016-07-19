@@ -1,3 +1,4 @@
+import { t } from '../../util/locale';
 import { icon, pad } from './helper';
 
 export function area(context, reveal) {

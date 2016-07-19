@@ -1,3 +1,4 @@
+import { t } from '../util/locale';
 import { Browse, Select } from '../modes/index';
 import { ChangeMember, DeleteMember } from '../actions/index';
 import { Disclosure } from './disclosure';

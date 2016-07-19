@@ -1,3 +1,4 @@
+import { t } from '../util/locale';
 export function ManyDeletions() {
     var threshold = 100;
 

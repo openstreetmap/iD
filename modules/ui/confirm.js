@@ -1,3 +1,4 @@
+import { t } from '../util/locale';
 import { modal } from './modal';
 
 export function confirm(selection) {

@@ -1,4 +1,5 @@
-window.locale = { _current: 'en' };
+var locale = { _current: 'en' };
+window.locale = locale;
 
 locale.current = function(_) {
     if (!arguments.length) return locale._current;
@@ -7,10 +8,10 @@ locale.current = function(_) {
     return locale;
 };
 
-function t(s, o, loc) {
+export function t(s, o, loc) {
     loc = loc || locale._current;
 
-    var path = s.split(".").reverse(),
+    var path = s.split('.').reverse(),
         rep = locale[loc];
 
     while (rep !== undefined && path.length) rep = rep[path.pop()];
@@ -25,11 +26,11 @@ function t(s, o, loc) {
     }
 
     if (o && 'default' in o) {
-        return o['default'];
+        return o.default;
     }
 
     var missing = 'Missing ' + loc + ' translation: ' + s;
-    if (typeof console !== "undefined") console.error(missing);
+    if (typeof console !== 'undefined') console.error(missing); // eslint-disable-line
 
     return missing;
 }

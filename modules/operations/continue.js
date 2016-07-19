@@ -1,3 +1,4 @@
+import { t } from '../util/locale';
 import _ from 'lodash';
 import { DrawLine } from '../modes/index';
 export function Continue(selectedIDs, context) {
