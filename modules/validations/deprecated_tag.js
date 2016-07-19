@@ -1,3 +1,4 @@
+import { t } from '../util/locale';
 import { tagText } from '../util/index';
 export function DeprecatedTag() {
 

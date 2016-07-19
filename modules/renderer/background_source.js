@@ -1,3 +1,4 @@
+import { t } from '../util/locale';
 import { Extent, polygonIntersectsPolygon } from '../geo/index';
 
 export function BackgroundSource(data) {

@@ -1,3 +1,4 @@
+import { t } from '../util/locale';
 import { Icon } from '../svg/index';
 export function Notice(context) {
     return function(selection) {

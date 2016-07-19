@@ -1,3 +1,4 @@
+import { t } from '../util/locale';
 export function MissingTag() {
 
     // Slightly stricter check than Entity#isUsed (#3091)

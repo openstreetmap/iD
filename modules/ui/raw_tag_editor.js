@@ -1,3 +1,4 @@
+import { t } from '../util/locale';
 import { Disclosure } from './disclosure';
 import { Icon } from '../svg/index';
 import { TagReference } from './tag_reference';

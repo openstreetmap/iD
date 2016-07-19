@@ -1,3 +1,4 @@
+import { t } from '../util/locale';
 import { Browse, Select } from './index';
 import { AddEntity } from '../actions/index';
 import { Draw } from '../behavior/index';

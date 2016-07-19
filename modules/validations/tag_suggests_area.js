@@ -1,3 +1,4 @@
+import { t } from '../util/locale';
 export function TagSuggestsArea() {
 
     // https://github.com/openstreetmap/josm/blob/mirror/src/org/

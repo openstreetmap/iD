@@ -7,10 +7,10 @@ locale.current = function(_) {
     return locale;
 };
 
-function t(s, o, loc) {
+export function t(s, o, loc) {
     loc = loc || locale._current;
 
-    var path = s.split(".").reverse(),
+    var path = s.split('.').reverse(),
         rep = locale[loc];
 
     while (rep !== undefined && path.length) rep = rep[path.pop()];
@@ -29,7 +29,7 @@ function t(s, o, loc) {
     }
 
     var missing = 'Missing ' + loc + ' translation: ' + s;
-    if (typeof console !== "undefined") console.error(missing);
+    if (typeof console !== 'undefined') console.error(missing);
 
     return missing;
 }

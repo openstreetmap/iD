@@ -1,3 +1,4 @@
+import { t } from '../util/locale';
 import { AddMidpoint, Connect, MoveNode, Noop } from '../actions/index';
 import { Browse, Select } from './index';
 import { Edit, Hover, drag } from '../behavior/index';

@@ -1,3 +1,4 @@
+import { t } from '../util/locale';
 import { Icon } from '../svg/index';
 import { intro } from './intro';
 import marked from 'marked';

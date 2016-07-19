@@ -1,3 +1,4 @@
+import { t } from '../util/locale';
 import { Reverse as ReverseAction } from '../actions/index';
 export function Reverse(selectedIDs, context) {
     var entityId = selectedIDs[0];

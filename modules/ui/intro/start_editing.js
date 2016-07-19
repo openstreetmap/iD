@@ -1,3 +1,4 @@
+import { t } from '../../util/locale';
 import { icon } from './helper';
 import { modal } from '../modal';
 

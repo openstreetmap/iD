@@ -1,3 +1,4 @@
+import { t } from '../../util/locale';
 import { Detect } from '../../util/detect';
 import { Icon } from '../../svg/index';
 import { SuggestNames } from '../../util/index';

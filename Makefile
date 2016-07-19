@@ -63,7 +63,6 @@ dist/iD.js: \
 	js/lib/d3.value.js \
 	js/lib/lodash.js \
 	$(MODULE_TARGETS) \
-	js/lib/locale.js \
 	data/introGraph.js
 
 .INTERMEDIATE dist/iD.js: data/data.js

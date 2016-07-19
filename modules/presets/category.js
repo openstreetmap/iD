@@ -1,3 +1,4 @@
+import { t } from '../util/locale';
 import { Collection } from './collection';
 export function Category(id, category, all) {
     category = _.clone(category);

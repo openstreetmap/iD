@@ -1,3 +1,4 @@
+import { t } from '../util/locale';
 import { tooltipHtml } from './tooltipHtml';
 export function FeatureInfo(context) {
     function update(selection) {

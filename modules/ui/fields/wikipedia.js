@@ -1,3 +1,4 @@
+import { t } from '../../util/locale';
 import { ChangeTags } from '../../actions/index';
 import { Detect } from '../../util/detect';
 import { Icon } from '../../svg/index';

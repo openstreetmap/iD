@@ -1,3 +1,4 @@
+import { t } from '../util/locale';
 import { Save as SaveMode } from '../modes/index';
 import { cmd } from './cmd';
 import { tooltipHtml } from './tooltipHtml';

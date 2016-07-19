@@ -1,3 +1,4 @@
+import { t } from '../../util/locale';
 import { Extent, chooseEdge, sphericalDistance } from '../../geo/index';
 
 export function address(field, context) {

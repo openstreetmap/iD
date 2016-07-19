@@ -1,3 +1,4 @@
+import { t } from '../util/locale';
 export function Preset(id, preset, fields) {
     preset = _.clone(preset);
 

@@ -1,3 +1,4 @@
+import { t } from '../util/locale';
 import { Entity } from '../core/index';
 import { Icon } from '../svg/index';
 import { Select } from '../modes/index';

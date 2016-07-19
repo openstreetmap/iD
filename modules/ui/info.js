@@ -1,3 +1,4 @@
+import { t } from '../util/locale';
 import { Detect } from '../util/detect';
 import { Extent } from '../geo/index';
 import { cmd } from './cmd';

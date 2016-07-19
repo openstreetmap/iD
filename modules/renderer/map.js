@@ -1,3 +1,4 @@
+import { t } from '../util/locale';
 import { Areas, Labels, Layers, Lines, Midpoints, Points, Vertices } from '../svg/index';
 import { Extent, interp } from '../geo/index';
 import { fastMouse, setTransform } from '../util/index';

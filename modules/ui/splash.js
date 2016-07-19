@@ -1,3 +1,4 @@
+import { t } from '../util/locale';
 import { intro } from './intro';
 import { modal } from './modal';
 

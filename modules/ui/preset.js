@@ -1,3 +1,4 @@
+import { t } from '../util/locale';
 import { Browse } from '../modes/index';
 import { Disclosure } from './disclosure';
 import { Icon } from '../svg/index';

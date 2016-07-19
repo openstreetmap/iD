@@ -1,3 +1,4 @@
+import { t } from '../../util/locale';
 export {
     combo as typeCombo,
     combo as multiCombo

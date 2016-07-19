@@ -1,3 +1,4 @@
+import { t } from '../util/locale';
 import { Browse } from '../modes/index';
 import { ChangeTags } from '../actions/index';
 import { Icon } from '../svg/index';

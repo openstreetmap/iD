@@ -1,3 +1,4 @@
+import { t } from '../util/locale';
 import { metersToOffset, offsetToMeters } from '../geo/index';
 import { BackgroundSource } from '../renderer/index';
 import { Detect } from '../util/detect';

@@ -1,3 +1,4 @@
+import { t } from '../../util/locale';
 import { icon, pointBox } from './helper';
 
 export function navigation(context, reveal) {

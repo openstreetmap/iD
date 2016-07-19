@@ -1,3 +1,4 @@
+import { t } from '../../util/locale';
 import { icon, pad } from './helper';
 
 import { DeleteMultiple } from '../../actions/index';

@@ -1,3 +1,4 @@
+import { t } from '../../util/locale';
 export function access(field) {
     var dispatch = d3.dispatch('change'),
         items;

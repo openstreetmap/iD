@@ -1,3 +1,4 @@
+import { t } from '../util/locale';
 import { Background } from '../renderer/background';
 import { Connection } from './connection';
 import { Detect } from '../util/detect';

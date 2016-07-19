@@ -1,3 +1,4 @@
+import { t } from '../util/locale';
 import { Straighten as StraightenAction } from '../actions/index';
 export function Straighten(selectedIDs, context) {
     var entityId = selectedIDs[0],

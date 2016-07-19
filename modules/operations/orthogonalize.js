@@ -1,3 +1,4 @@
+import { t } from '../util/locale';
 import { Orthogonalize as OrthogonalizeAction } from '../actions/index';
 export function Orthogonalize(selectedIDs, context) {
     var entityId = selectedIDs[0],
