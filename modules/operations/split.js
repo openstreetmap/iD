@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import { Select } from '../modes/index';
 import { Split as SplitAction } from '../actions/index';
 export function Split(selectedIDs, context) {

@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import { Extent, chooseEdge, sphericalDistance } from '../../geo/index';
 
 export function address(field, context) {

@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import { AddEntity, AddMember, ChangeMember, DeleteMember } from '../actions/index';
 import { Entity, Relation } from '../core/index';
 import { Disclosure } from './disclosure';

@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import { DeleteMultiple } from './delete_multiple';
 import { Entity } from '../core/index';
 import { diff3_merge } from '../util/diff3';

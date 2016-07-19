@@ -3,7 +3,7 @@
 var request = require('request').defaults({maxSockets: 1}),
     yaml = require('js-yaml'),
     fs = require('fs'),
-    _ = require('../js/lib/lodash.js');
+    _ = require('lodash');
 
 var resources = ['core', 'presets'];
 var outdir = './dist/locales/';

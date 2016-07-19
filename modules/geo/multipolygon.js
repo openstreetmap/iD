@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import { Reverse } from '../actions/reverse';
 
 // For fixing up rendering of multipolygons with tags on the outer member.

@@ -1,3 +1,4 @@
+import _ from 'lodash';
 export function Field(id, field) {
     field = _.clone(field);
 

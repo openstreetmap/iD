@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import { Path, TagClasses } from './index';
 import { Entity } from '../core/index';
 import { isSimpleMultipolygonOuterMember } from '../geo/index';

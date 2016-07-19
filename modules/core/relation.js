@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import { Extent, joinWays, polygonContainsPolygon, polygonIntersectsPolygon } from '../geo/index';
 import { Entity } from './entity';
 

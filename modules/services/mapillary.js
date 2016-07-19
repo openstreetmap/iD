@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import { Detect } from '../util/detect';
 import { Extent } from '../geo/index';
 import { Icon } from '../svg/index';

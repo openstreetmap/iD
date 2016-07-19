@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import { AddArea, AddLine, AddPoint, Browse } from '../modes/index';
 import { Icon } from '../svg/index';
 import { tooltipHtml } from './tooltipHtml';

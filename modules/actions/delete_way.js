@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import { DeleteRelation } from './delete_relation';
 
 // https://github.com/openstreetmap/potlatch2/blob/master/net/systemeD/halcyon/connection/actions/DeleteWayAction.as

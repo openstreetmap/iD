@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import { Icon } from '../svg/index';
 export function Contributors(context) {
     var debouncedUpdate = _.debounce(function() { update(); }, 1000),

@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import { Circularize as CircularizeAction } from '../actions/index';
 export function Circularize(selectedIDs, context) {
     var entityId = selectedIDs[0],

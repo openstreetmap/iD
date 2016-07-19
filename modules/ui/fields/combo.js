@@ -1,3 +1,4 @@
+import _ from 'lodash';
 export {
     combo as typeCombo,
     combo as multiCombo

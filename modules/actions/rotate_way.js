@@ -1,3 +1,4 @@
+import _ from 'lodash';
 export function RotateWay(wayId, pivot, angle, projection) {
     return function(graph) {
         return graph.update(function(graph) {

@@ -1,3 +1,4 @@
+import _ from 'lodash';
 export function MissingTag() {
 
     // Slightly stricter check than Entity#isUsed (#3091)

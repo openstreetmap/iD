@@ -1,5 +1,6 @@
 import { euclideanDistance, interp } from '../geo/index';
 import { Node } from '../core/index';
+import _ from 'lodash';
 
 export function Circularize(wayId
   , projection, maxAngle) {

@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import { editDistance } from '../util/index';
 
 export function Collection(collection) {

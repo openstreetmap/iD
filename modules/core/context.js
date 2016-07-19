@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import { Background } from '../renderer/background';
 import { Connection } from './connection';
 import { Detect } from '../util/detect';

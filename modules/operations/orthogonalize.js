@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import { Orthogonalize as OrthogonalizeAction } from '../actions/index';
 export function Orthogonalize(selectedIDs, context) {
     var entityId = selectedIDs[0],

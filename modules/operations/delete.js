@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import { Browse, Select } from '../modes/index';
 import { DeleteMultiple } from '../actions/index';
 import { cmd } from '../ui/index';

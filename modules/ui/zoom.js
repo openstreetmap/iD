@@ -1,6 +1,7 @@
 import { Icon } from '../svg/index';
 import { cmd } from './cmd';
 import { tooltipHtml } from './tooltipHtml';
+import _ from 'lodash';
 
 export function Zoom(context) {
     var zooms = [{

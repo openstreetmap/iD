@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import { metersToOffset, offsetToMeters } from '../geo/index';
 import { BackgroundSource } from '../renderer/index';
 import { Detect } from '../util/detect';

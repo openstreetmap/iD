@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import { pointInPolygon } from '../../geo/index';
 
 export function maxspeed(field, context) {

@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import { DeleteNode } from './delete_node';
 import { euclideanDistance } from '../geo/index';
 /*

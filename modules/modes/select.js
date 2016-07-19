@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import * as Operations from '../operations/index';
 import { Breathe, Copy, Hover, Lasso, Paste, Select as SelectBehavior } from '../behavior/index';
 import { Extent, chooseEdge, pointInPolygon } from '../geo/index';

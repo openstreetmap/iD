@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import { cmd } from '../ui/index';
 export function Copy(context) {
     var keybinding = d3.keybinding('copy');

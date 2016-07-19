@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import { Disconnect as DisconnectAction } from '../actions/index';
 export function Disconnect(selectedIDs, context) {
     var vertices = _.filter(selectedIDs, function vertex(entityId) {

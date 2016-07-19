@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import { PointTransform, TagClasses } from './index';
 import { angle, euclideanDistance, interp, lineIntersection } from '../geo/index';
 

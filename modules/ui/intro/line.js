@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import { icon, pad } from './helper';
 
 import { DeleteMultiple } from '../../actions/index';

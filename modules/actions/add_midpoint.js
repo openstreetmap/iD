@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import { edgeEqual } from '../geo/index';
 export function AddMidpoint(midpoint, node) {
     return function(graph) {

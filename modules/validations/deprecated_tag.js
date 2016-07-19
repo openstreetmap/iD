@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import { tagText } from '../util/index';
 export function DeprecatedTag() {
 

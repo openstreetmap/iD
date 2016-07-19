@@ -1,5 +1,6 @@
 import { Detect } from './detect';
 import { remove as removeDiacritics } from 'diacritics';
+import _ from 'lodash';
 
 export function tagText(entity) {
     return d3.entries(entity.tags).map(function(e) {

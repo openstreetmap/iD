@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import { Browse } from '../modes/index';
 import { ChangeTags } from '../actions/index';
 import { Icon } from '../svg/index';

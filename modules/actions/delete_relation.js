@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import { DeleteMultiple } from './delete_multiple';
 
 // https://github.com/openstreetmap/potlatch2/blob/master/net/systemeD/halcyon/connection/actions/DeleteRelationAction.as

@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import { Difference } from './difference';
 import rbush from 'rbush';
 

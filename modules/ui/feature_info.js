@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import { tooltipHtml } from './tooltipHtml';
 export function FeatureInfo(context) {
     function update(selection) {

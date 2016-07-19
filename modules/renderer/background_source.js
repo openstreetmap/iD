@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import { Extent, polygonIntersectsPolygon } from '../geo/index';
 
 export function BackgroundSource(data) {

@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import { Browse, Select as SelectMode } from '../modes/index';
 import { Entity } from '../core/index';
 export function Select(context) {

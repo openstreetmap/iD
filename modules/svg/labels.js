@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import { displayName, getStyle } from '../util/index';
 import { Entity } from '../core/index';
 import { pathLength } from '../geo/index';

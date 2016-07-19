@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import { Icon } from '../svg/index';
 export function Notice(context) {
     return function(selection) {

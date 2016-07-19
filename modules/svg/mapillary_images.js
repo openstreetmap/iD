@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import { PointTransform } from './point_transform';
 
 export function MapillaryImages(projection, context, dispatch) {

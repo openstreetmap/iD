@@ -1,3 +1,4 @@
+import _ from 'lodash';
 // iD.Node = iD.Entity.node;
 import { Entity } from './entity';
 import { Extent } from '../geo/index';
