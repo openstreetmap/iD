@@ -1,3 +1,4 @@
+import * as Validations from '../validations/index';
 import { Difference } from './difference';
 import { Entity } from './entity';
 import { Graph } from './graph';
@@ -172,7 +173,7 @@ export function History(context) {
         },
 
         validate: function(changes) {
-            return _(iD.validations)
+            return _(Validations)
                 .map(function(fn) { return fn()(changes, stack[index].graph); })
                 .flatten()
                 .value();
