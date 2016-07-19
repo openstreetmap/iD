@@ -4,7 +4,7 @@ describe('iD.modes.AddPoint', function() {
     beforeEach(function() {
         var container = d3.select(document.createElement('div'));
 
-        context = iD()
+        context = iD.Context(window)
             .presets(iD.data.presets)
             .imagery([])
             .container(container);

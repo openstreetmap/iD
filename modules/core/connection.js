@@ -258,13 +258,13 @@ export function Connection(useHttps) {
         };
     };
 
-    connection.changesetTags = function(comment, imageryUsed) {
+    connection.changesetTags = function(version, comment, imageryUsed) {
         var detected = Detect(),
             tags = {
-                created_by: 'iD ' + iD.version,
+                created_by: ('iD ' + version).substr(0, 255),
                 imagery_used: imageryUsed.join(';').substr(0, 255),
-                host: (window.location.origin + window.location.pathname).substr(0, 255),
-                locale: detected.locale
+                host: detected.host.substr(0, 255),
+                locale: detected.locale.substr(0, 255)
             };
 
         if (comment) {
@@ -274,7 +274,7 @@ export function Connection(useHttps) {
         return tags;
     };
 
-    connection.putChangeset = function(changes, comment, imageryUsed, callback) {
+    connection.putChangeset = function(changes, version, comment, imageryUsed, callback) {
         oauth.xhr({
                 method: 'PUT',
                 path: '/api/0.6/changeset/create',

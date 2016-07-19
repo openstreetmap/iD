@@ -15,6 +15,7 @@ export { Detect } from './util/detect';
 
 // core
 export { Connection } from './core/connection';
+export { Context } from './core/context';
 export { Difference } from './core/difference';
 export { Entity } from './core/entity';
 export { Graph } from './core/graph';

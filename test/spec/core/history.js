@@ -3,7 +3,7 @@ describe('iD.History', function () {
         action = function() { return iD.Graph(); };
 
     beforeEach(function () {
-        context = iD();
+        context = iD.Context(window);
         history = context.history();
         spy = sinon.spy();
         // clear lock

@@ -5,7 +5,7 @@ describe('iD', function() {
 
     describe('#assetPath', function() {
         it('sets and gets assetPath', function() {
-            var context = iD();
+            var context = iD.Context(window);
             expect(context.assetPath()).to.eql('');
 
             context.assetPath('iD/');
@@ -15,7 +15,7 @@ describe('iD', function() {
 
     describe('#assetMap', function() {
         it('sets and gets assetMap', function() {
-            var context = iD();
+            var context = iD.Context(window);
             expect(context.assetMap()).to.eql({});
 
             context.assetMap(assets);
@@ -25,8 +25,8 @@ describe('iD', function() {
 
     describe('#asset', function() {
         var context;
-        beforeEach(function () {
-            context = iD().assetPath('iD/').assetMap(assets);
+        beforeEach(function() {
+            context = iD.Context(window).assetPath('iD/').assetMap(assets);
         });
 
         it('looks first in assetMap', function() {
@@ -39,8 +39,8 @@ describe('iD', function() {
 
     describe('#imagePath', function() {
         var context;
-        beforeEach(function () {
-            context = iD().assetPath('iD/').assetMap(assets);
+        beforeEach(function() {
+            context = iD.Context(window).assetPath('iD/').assetMap(assets);
         });
 
         it('looks first in assetMap', function() {
@@ -58,9 +58,7 @@ describe('iD', function() {
                     'mines': {
                         geometry: ['point', 'area'],
                         name: 'Mining Concession',
-                        tags: {
-                            'concession': 'mining'
-                        }
+                        tags: { 'concession': 'mining' }
                     },
                     'area': {
                         'name': 'Area',
@@ -93,7 +91,7 @@ describe('iD', function() {
                 }
             };
 
-            var context = iD().presets(presetsCollection),
+            var context = iD.Context(window).presets(presetsCollection),
                 way = iD.Way({tags: {concession: 'mining', area: 'yes'}}),
                 graph = iD.Graph([way]);
 
@@ -103,7 +101,7 @@ describe('iD', function() {
 
     describe('#debug', function() {
         it('sets and gets debug flags', function() {
-            var context = iD(),
+            var context = iD.Context(window),
                 flags = {
                     tile: false,
                     collision: false,

@@ -144,11 +144,11 @@ iD is used to edit data outside of the OpenStreetMap environment. There are some
 
 ### Presets
 
-iD can use external presets exclusively or along with the default OpenStreetMap presets. This is configured using the `iD().presets` accessor. To use external presets alone, initialize iD in index.html with the Presets object.
+iD can use external presets exclusively or along with the default OpenStreetMap presets. This is configured using the `context.presets` accessor. To use external presets alone, initialize the iD context with a custom `Presets` object:
 
 ```js
 
-var iD = iD()
+var id = iD.Context(window)
   .presets(customPresets)
   .taginfo(iD.services.taginfo())
   .imagery(iD.data.imagery);
@@ -159,11 +159,11 @@ The format of the Preset object is [documented here](https://github.com/openstre
 
 ### Imagery
 
-Just like Presets, Imagery can be configured using the `iD().imagery` accessor.
+Just like Presets, Imagery can be configured using the `context.imagery` accessor:
 
 ```js
 
-var iD = iD()
+var id = iD.Context(window)
   .presets(customPresets)
   .taginfo(iD.services.taginfo())
   .imagery(customImagery);
@@ -175,11 +175,11 @@ The Imagery object should follow the structure defined by [editor-layer-index](h
 
 ### Taginfo
 
-[Taginfo](http://taginfo.openstreetmap.org/) is a service that provides comprehensive documentation about the tags used in OpenStreetMap. iD uses Taginfo to display description and also autocomplete keys and values. This can be completely disabled by removing the `iD().taginfo` accessor. To point iD to a different instance of Taginfo other than the default OpenStreetMap instance
+[Taginfo](http://taginfo.openstreetmap.org/) is a service that provides comprehensive documentation about the tags used in OpenStreetMap. iD uses Taginfo to display description and also autocomplete keys and values. This can be completely disabled by removing the `context.taginfo` accessor. To point iD to a different instance of Taginfo other than the default OpenStreetMap instance:
 
 ```js
 
-var iD = iD()
+var id = iD.Context(window)
   .presets(customPresets)
   .taginfo(iD.services.taginfo().endpoint('url'))
   .imagery(customImagery);
@@ -188,11 +188,11 @@ var iD = iD()
 
 ### Minimum Editable Zoom
 
-The minimum zoom at which iD enters the edit mode is configured using the `iD().minEditableZoom()` accessor. The default value is 16. To change this initialise iD as
+The minimum zoom at which iD enters the edit mode is configured using the `context.minEditableZoom()` accessor. The default value is 16. To change this initialise the iD context as:
 
 ```js
 
-var iD = iD().
+var id = iD.Context(window).
   .minEditableZoom(zoom_level)
 
 ```

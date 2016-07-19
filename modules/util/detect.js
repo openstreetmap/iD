@@ -62,6 +62,8 @@ export function Detect() {
         detected.locale = loadedLocale;
     }
 
+    detected.host = window.location && (window.location.origin + window.location.pathname);
+
     detected.filedrop = (window.FileReader && 'ondrop' in window);
 
     function nav(x) {

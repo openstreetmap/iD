@@ -1,4 +1,5 @@
 export { Connection } from './connection';
+export { Context } from './context';
 export { Difference } from './difference';
 export { Entity } from './entity';
 export { Graph } from './graph';
