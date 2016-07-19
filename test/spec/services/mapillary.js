@@ -3,7 +3,7 @@ describe('iD.services.mapillary', function() {
         context, server, mapillary;
 
     beforeEach(function() {
-        context = iD().assetPath('../dist/');
+        context = iD.Context(window).assetPath('../dist/');
         context.projection.scale(667544.214430109);  // z14
         context.projection.translate([-116508, 0]);  // 10,0
 

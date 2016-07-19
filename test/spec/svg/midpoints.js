@@ -5,7 +5,7 @@ describe('iD.svg.Midpoints', function () {
         context;
 
     beforeEach(function () {
-        context = iD();
+        context = iD.Context(window);
         surface = d3.select(document.createElementNS('http://www.w3.org/2000/svg', 'svg'))
             .call(iD.svg.Layers(projection, context));
     });

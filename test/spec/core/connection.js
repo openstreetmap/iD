@@ -254,7 +254,7 @@ describe('iD.Connection', function () {
             changesetsXML = '<?xml version="1.0" encoding="UTF-8"?><osm>' +
                 '<changeset id="36777543" user="Steve" uid="1" created_at="2016-01-24T15:02:06Z" closed_at="2016-01-24T15:02:07Z" open="false" min_lat="39.3823819" min_lon="-104.8639728" max_lat="39.3834184" max_lon="-104.8618622" comments_count="0">' +
                 '<tag k="comment" v="Caprice Court has been extended"/>' +
-                '<tag k="created_by" v="iD 1.8.5"/>' +
+                '<tag k="created_by" v="iD 2.0.0"/>' +
                 '</changeset>' +
                 '</osm>';
 
@@ -275,7 +275,7 @@ describe('iD.Connection', function () {
                 expect(changesets).to.deep.equal([{
                     tags: {
                         comment: 'Caprice Court has been extended',
-                        created_by: 'iD 1.8.5'
+                        created_by: 'iD 2.0.0'
                     }
                 }]);
                 done();
@@ -289,7 +289,7 @@ describe('iD.Connection', function () {
 
     describe('#changesetTags', function() {
         it('omits comment when empty', function() {
-            expect(c.changesetTags('', [])).not.to.have.property('comment');
+            expect(c.changesetTags('2.0.0', '', [])).not.to.have.property('comment');
         });
     });
 });

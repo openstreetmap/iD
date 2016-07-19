@@ -2,7 +2,7 @@ describe('iD.behavior.Lasso', function () {
     var lasso, context;
 
     beforeEach(function () {
-        context = iD().imagery(iD.data.imagery);
+        context = iD.Context(window).imagery(iD.data.imagery);
         context.container(d3.select(document.createElement('div')));
 
         // Neuter connection

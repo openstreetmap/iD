@@ -168,6 +168,7 @@ export function Save(context) {
                 if (changes.modified.length || changes.created.length || changes.deleted.length) {
                     context.connection().putChangeset(
                         changes,
+                        context.version,
                         e.comment,
                         history.imageryUsed(),
                         function(err, changeset_id) {

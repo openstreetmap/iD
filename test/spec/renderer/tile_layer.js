@@ -2,7 +2,7 @@ describe('iD.TileLayer', function() {
     var context, d, c;
 
     beforeEach(function() {
-        context = iD();
+        context = iD.Context(window);
         d = d3.select(document.createElement('div'));
         c = iD.TileLayer(context).projection(d3.geo.mercator());
     });

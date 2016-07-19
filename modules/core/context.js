@@ -1,9 +1,21 @@
-(function () {
+import { Background } from '../renderer/background';
+import { Connection } from './connection';
+import { Detect } from '../util/detect';
+import { Features } from '../renderer/features';
+import { History } from './history';
+import { Map } from '../renderer/map';
+import { RawMercator } from '../geo/raw_mercator';
+import { presets as presetsInit } from '../presets/presets';
+import { init as uiInit } from '../ui/init';
 
-/*global iD*/
-window.iD = function () {
-    window.locale.en = iD.data.en;
-    window.locale.current('en');
+export function Context(root) {
+    if (!root.locale) {
+        root.locale = {
+            current: function(_) { this._current = _; }
+        };
+    }
+    root.locale.en = iD.data.en;
+    root.locale.current('en');
 
     var dispatch = d3.dispatch('enter', 'exit', 'change'),
         context = {};
@@ -317,8 +329,8 @@ window.iD = function () {
         if (locale && locale !== 'en' && iD.data.locales.indexOf(locale) !== -1) {
             localePath = localePath || context.asset('locales/' + locale + '.json');
             d3.json(localePath, function(err, result) {
-                window.locale[locale] = result;
-                window.locale.current(locale);
+                root.locale[locale] = result;
+                root.locale.current(locale);
                 cb();
             });
         } else {
@@ -328,15 +340,16 @@ window.iD = function () {
 
 
     /* Init */
+    context.version = '2.0.0-alpha.1';
 
-    context.projection = iD.geo.RawMercator();
+    context.projection = RawMercator();
 
-    locale = iD.Detect().locale;
+    locale = Detect().locale;
     if (locale && iD.data.locales.indexOf(locale) === -1) {
         locale = locale.split('-')[0];
     }
 
-    history = iD.History(context);
+    history = History(context);
     context.graph = history.graph;
     context.changes = history.changes;
     context.intersects = history.intersects;
@@ -359,15 +372,15 @@ window.iD = function () {
     context.undo = withDebouncedSave(history.undo);
     context.redo = withDebouncedSave(history.redo);
 
-    ui = iD.ui.init(context);
+    ui = uiInit(context);
 
-    connection = iD.Connection();
+    connection = Connection();
 
-    background = iD.Background(context);
+    background = Background(context);
 
-    features = iD.Features(context);
+    features = Features(context);
 
-    map = iD.Map(context);
+    map = Map(context);
     context.mouse = map.mouse;
     context.extent = map.extent;
     context.pan = map.pan;
@@ -377,11 +390,8 @@ window.iD = function () {
     context.zoomOutFurther = map.zoomOutFurther;
     context.redrawEnable = map.redrawEnable;
 
-    presets = iD.presets.presets();
+    presets = presetsInit();
 
     return d3.rebind(context, dispatch, 'on');
-};
+}
 
-iD.version = '2.0.0-alpha.1';
-
-})();

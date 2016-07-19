@@ -25,7 +25,7 @@ describe('wikipedia', function() {
     beforeEach(function() {
         entity = iD.Node({id: 'n12345'});
         selectedId = entity.id;
-        context = iD();
+        context = iD.Context(window);
         context.history().merge([entity]);
         selection = d3.select(document.createElement('div'));
         field = context.presets(iD.data.presets).presets().field('wikipedia');

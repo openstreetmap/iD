@@ -4,7 +4,7 @@ describe('iD.Features', function() {
         features;
 
     beforeEach(function() {
-        context = iD();
+        context = iD.Context(window);
         context.map().zoom(16);
         features = iD.Features(context);
     });

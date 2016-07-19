@@ -148,7 +148,7 @@ export function init(context) {
             .attr('target', '_blank')
             .attr('tabindex', -1)
             .attr('href', 'https://github.com/openstreetmap/iD')
-            .text(iD.version);
+            .text(context.version);
 
         var issueLinks = aboutList.append('li');
 

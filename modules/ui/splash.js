@@ -25,7 +25,7 @@ export function Splash(context) {
             .attr('class','modal-section')
             .append('p')
             .html(t('splash.text', {
-                version: iD.version,
+                version: context.version,
                 website: '<a href="http://ideditor.com/">ideditor.com</a>',
                 github: '<a href="https://github.com/openstreetmap/iD">github.com</a>'
             }));
