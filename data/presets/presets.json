@@ -1121,6 +1121,31 @@
         },
         "name": "Hunting Stand"
     },
+    "amenity/ice_cream": {
+        "icon": "ice-cream",
+        "fields": [
+            "address",
+            "building_area",
+            "opening_hours",
+            "takeaway",
+            "delivery"
+        ],
+        "geometry": [
+            "point",
+            "area"
+        ],
+        "terms": [
+            "gelato",
+            "sorbet",
+            "sherbet",
+            "frozen",
+            "yogurt"
+        ],
+        "tags": {
+            "amenity": "ice_cream"
+        },
+        "name": "Ice Cream Shop"
+    },
     "amenity/kindergarten": {
         "icon": "school",
         "fields": [
@@ -63186,6 +63211,26 @@
             "address",
             "building_area",
             "opening_hours"
+        ],
+        "suggestion": true
+    },
+    "amenity/ice_cream/Grido": {
+        "tags": {
+            "name": "Grido",
+            "amenity": "ice_cream"
+        },
+        "name": "Grido",
+        "icon": "ice-cream",
+        "geometry": [
+            "point",
+            "area"
+        ],
+        "fields": [
+            "address",
+            "building_area",
+            "opening_hours",
+            "takeaway",
+            "delivery"
         ],
         "suggestion": true
     },

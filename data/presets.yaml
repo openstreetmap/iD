@@ -1356,6 +1356,11 @@ en:
         # amenity=hunting_stand
         name: Hunting Stand
         terms: '<translate with synonyms or related terms for ''Hunting Stand'', separated by commas>'
+      amenity/ice_cream:
+        # amenity=ice_cream
+        name: Ice Cream Shop
+        # 'terms: gelato,sorbet,sherbet,frozen,yogurt'
+        terms: '<translate with synonyms or related terms for ''Ice Cream Shop'', separated by commas>'
       amenity/kindergarten:
         # amenity=kindergarten
         name: Preschool/Kindergarten Grounds
