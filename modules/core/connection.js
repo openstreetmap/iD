@@ -280,7 +280,7 @@ export function Connection(useHttps) {
                 method: 'PUT',
                 path: '/api/0.6/changeset/create',
                 options: { header: { 'Content-Type': 'text/xml' } },
-                content: JXON.stringify(connection.changesetJXON(connection.changesetTags(comment, imageryUsed)))
+                content: JXON.stringify(connection.changesetJXON(connection.changesetTags(version, comment, imageryUsed)))
             }, function(err, changeset_id) {
                 if (err) return callback(err);
                 oauth.xhr({
