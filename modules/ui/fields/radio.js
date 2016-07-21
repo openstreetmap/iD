@@ -1,3 +1,4 @@
+import { t } from '../../util/locale';
 export function radio(field) {
     var dispatch = d3.dispatch('change'),
         labels, radios, placeholder;

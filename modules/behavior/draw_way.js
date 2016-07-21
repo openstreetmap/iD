@@ -1,3 +1,4 @@
+import { t } from '../util/locale';
 import _ from 'lodash';
 import { AddEntity, AddMidpoint, AddVertex, MoveNode } from '../actions/index';
 import { Browse, Select } from '../modes/index';

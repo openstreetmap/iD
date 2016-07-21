@@ -9,7 +9,6 @@
     ],
     "globals": {
         "d3": false,
-        "t": false,
         "bootstrap": false
     },
     "parserOptions": {

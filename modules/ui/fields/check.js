@@ -1,3 +1,4 @@
+import { t } from '../../util/locale';
 import { oneWayTags } from '../../core/index';
 
 export { check as defaultcheck };

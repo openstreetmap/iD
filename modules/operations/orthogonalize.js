@@ -1,3 +1,4 @@
+import { t } from '../util/locale';
 import _ from 'lodash';
 import { Orthogonalize as OrthogonalizeAction } from '../actions/index';
 export function Orthogonalize(selectedIDs, context) {

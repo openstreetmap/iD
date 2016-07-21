@@ -1,3 +1,4 @@
+import { t } from '../../util/locale';
 import { Entity, Graph } from '../../core/index';
 import { Browse } from '../../modes/index';
 import { Icon } from '../../svg/index';

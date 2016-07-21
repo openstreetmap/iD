@@ -1,3 +1,4 @@
+import { t } from '../util/locale';
 import _ from 'lodash';
 import { Browse } from '../modes/index';
 import { Disclosure } from './disclosure';

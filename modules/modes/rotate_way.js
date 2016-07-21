@@ -1,3 +1,4 @@
+import { t } from '../util/locale';
 import _ from 'lodash';
 import { Browse, Select } from './index';
 import { Noop, RotateWay as RotateWayAction } from '../actions/index';

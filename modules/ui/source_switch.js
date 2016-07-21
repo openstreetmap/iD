@@ -1,3 +1,4 @@
+import { t } from '../util/locale';
 import { Browse } from '../modes/index';
 export function SourceSwitch(context) {
     var keys;

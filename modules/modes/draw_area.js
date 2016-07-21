@@ -1,3 +1,4 @@
+import { t } from '../util/locale';
 import { DrawWay } from '../behavior/index';
 
 export function DrawArea(context, wayId, baseGraph) {

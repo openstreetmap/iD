@@ -1,3 +1,4 @@
+import { t } from '../util/locale';
 import { Defs, Icon } from '../svg/index';
 import { Account } from './account';
 import { Attribution } from './attribution';

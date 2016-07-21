@@ -1,3 +1,4 @@
+import { t } from './locale';
 import { Detect } from './detect';
 import { remove as removeDiacritics } from 'diacritics';
 import _ from 'lodash';

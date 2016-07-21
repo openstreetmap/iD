@@ -1,3 +1,4 @@
+import { t } from '../util/locale';
 import { Extent } from '../geo/index';
 import { Icon } from '../svg/index';
 import { entityOrMemberSelector } from '../util/index';

@@ -1,3 +1,4 @@
+import { t } from '../util/locale';
 import { Icon } from '../svg/index';
 import { cmd } from './cmd';
 import { tooltipHtml } from './tooltipHtml';

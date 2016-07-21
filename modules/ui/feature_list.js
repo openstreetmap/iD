@@ -1,3 +1,4 @@
+import { t } from '../util/locale';
 import * as sexagesimal from 'sexagesimal';
 import { Extent, chooseEdge } from '../geo/index';
 import { displayName, entityOrMemberSelector } from '../util/index';

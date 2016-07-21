@@ -1,3 +1,4 @@
+import { t } from '../util/locale';
 import { Hover, Lasso, Paste, Select } from '../behavior/index';
 import { DragNode } from './index';
 

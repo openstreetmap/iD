@@ -1,3 +1,4 @@
+import { t } from '../util/locale';
 import { Browse } from '../modes/index';
 import { ChangePreset } from '../actions/index';
 import { Delete } from '../operations/index';
