@@ -699,20 +699,21 @@
             "address": {
                 "label": "Address",
                 "placeholders": {
+                    "city": "City",
+                    "conscriptionnumber": "123",
+                    "country": "Country",
+                    "district": "District",
+                    "floor": "Floor",
+                    "hamlet": "Hamlet",
                     "housename": "Housename",
                     "housenumber": "123",
-                    "conscriptionnumber": "123",
-                    "street": "Street",
-                    "city": "City",
-                    "postcode": "Postcode",
                     "place": "Place",
-                    "hamlet": "Hamlet",
-                    "suburb": "Suburb",
-                    "subdistrict": "Subdistrict",
-                    "district": "District",
+                    "postcode": "Postcode",
                     "province": "Province",
                     "state": "State",
-                    "country": "Country"
+                    "street": "Street",
+                    "subdistrict": "Subdistrict",
+                    "suburb": "Suburb"
                 }
             },
             "admin_level": {
