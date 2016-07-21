@@ -2,6 +2,7 @@ import _ from 'lodash';
 import { Extent, cross } from '../geo/index';
 import { Entity } from './entity';
 import { oneWayTags } from './tags';
+import { areaKeys } from './context';
 
 export function Way() {
     if (!(this instanceof Way)) {
@@ -217,9 +218,11 @@ _.extend(Way.prototype, {
             return true;
         if (!this.isClosed() || this.tags.area === 'no')
             return false;
-        for (var key in this.tags)
-            if (key in iD.areaKeys && !(this.tags[key] in iD.areaKeys[key]))
+        for (var key in this.tags) {
+            if (key in areaKeys && !(this.tags[key] in areaKeys[key])) {
                 return true;
+            }
+        }
         return false;
     },
 

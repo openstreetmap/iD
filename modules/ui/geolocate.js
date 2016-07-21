@@ -1,4 +1,5 @@
 import { t } from '../util/locale';
+import { tooltip } from '../util/tooltip';
 import { Browse } from '../modes/index';
 import { Extent } from '../geo/index';
 import { Icon } from '../svg/index';
@@ -46,7 +47,7 @@ export function Geolocate(context) {
             .attr('title', t('geolocate.title'))
             .on('click', click)
             .call(Icon('#icon-geolocate', 'light'))
-            .call(bootstrap.tooltip()
+            .call(tooltip()
                 .placement('left'));
     };
 }

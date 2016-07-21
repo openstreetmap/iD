@@ -1,5 +1,7 @@
 import { t } from '../util/locale';
 import _ from 'lodash';
+import { areaKeys } from '../core/context';
+
 export function Preset(id, preset, fields) {
     preset = _.clone(preset);
 
@@ -113,7 +115,7 @@ export function Preset(id, preset, fields) {
             var needsAreaTag = true;
             if (preset.geometry.indexOf('line') === -1) {
                 for (k in applyTags) {
-                    if (k in iD.areaKeys) {
+                    if (k in areaKeys) {
                         needsAreaTag = false;
                         break;
                     }

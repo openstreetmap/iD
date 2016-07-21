@@ -1,3 +1,4 @@
+import { jsonpRequest } from '../util/jsonp_request';
 import { qsString } from '../util/index';
 
 var wikidata = {},
@@ -8,7 +9,7 @@ export function init() {
     // corresponding Wikidata entities.
     wikidata.itemsByTitle = function(lang, title, callback) {
         lang = lang || 'en';
-        d3.jsonp(endpoint + qsString({
+        jsonpRequest(endpoint + qsString({
             action: 'wbgetentities',
             format: 'json',
             sites: lang.replace(/-/g, '_') + 'wiki',

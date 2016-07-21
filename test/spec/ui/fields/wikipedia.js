@@ -1,20 +1,6 @@
 describe('wikipedia', function() {
-    var entity, context, selection, field, wikiDelay, selectedId;
+    var entity, context, selection, field, selectedId;
 
-    function jsonp(url, callback) {
-        var args = [{
-            entities: {
-                Q216353: { id: 'Q216353' }
-            }
-        }];
-        if (wikiDelay) {
-            window.setTimeout(function () {
-                callback.apply(null, args);
-            }, wikiDelay);
-        } else {
-            callback.apply(null, args);
-        }
-    }
 
     function changeTags(changed) {
         var annotation = 'Changed tags.';
@@ -29,14 +15,18 @@ describe('wikipedia', function() {
         context.history().merge([entity]);
         selection = d3.select(document.createElement('div'));
         field = context.presets(iD.data.presets).presets().field('wikipedia');
-        wikiDelay = 0;
+        window.JSONP_DELAY = 0;
+        window.JSONP_FIX = {
+            entities: {
+                Q216353: { id: 'Q216353' }
+            }
+        };
 
-        sinon.stub(d3, 'jsonp', jsonp);
         sinon.stub(context, 'selectedIDs', function() { return [selectedId]; });
     });
 
     afterEach(function() {
-        d3.jsonp.restore();
+        window.JSONP_FIX = undefined;
         context.selectedIDs.restore();
     });
 
@@ -100,7 +90,7 @@ describe('wikipedia', function() {
         var wikipedia = iD.ui.fields.wikipedia(field, context).entity(entity);
         wikipedia.on('change', changeTags);
         selection.call(wikipedia);
-        wikiDelay = 20;
+        window.JSONP_DELAY = 20;
 
         var spy = sinon.spy();
         wikipedia.on('change.spy', spy);
@@ -131,7 +121,7 @@ describe('wikipedia', function() {
         var wikipedia = iD.ui.fields.wikipedia(field, context).entity(entity);
         wikipedia.on('change', changeTags);
         selection.call(wikipedia);
-        wikiDelay = 20;
+        window.JSONP_DELAY = 20;
 
         var spy = sinon.spy();
         wikipedia.on('change.spy', spy);

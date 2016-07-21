@@ -1,4 +1,5 @@
 import { t } from '../util/locale';
+import { tooltip } from '../util/tooltip';
 import { Icon } from '../svg/index';
 export function Success(context) {
     var dispatch = d3.dispatch('cancel'),
@@ -55,7 +56,7 @@ export function Success(context) {
             .attr('class', 'button social col4')
             .attr('target', '_blank')
             .attr('href', function(d) { return d.value; })
-            .call(bootstrap.tooltip()
+            .call(tooltip()
                 .title(function(d) { return t('success.' + d.key); })
                 .placement('bottom'))
             .each(function(d) { d3.select(this).call(Icon('#logo-' + d.key, 'social')); });

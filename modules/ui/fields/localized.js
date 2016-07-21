@@ -1,4 +1,5 @@
 import { t } from '../../util/locale';
+import { tooltip } from '../../util/tooltip';
 import _ from 'lodash';
 import { Detect } from '../../util/detect';
 import { Icon } from '../../svg/index';
@@ -40,7 +41,7 @@ export function localized(field, context) {
             .attr('class', 'button-input-action localized-add minor')
             .attr('tabindex', -1)
             .call(Icon('#icon-plus'))
-            .call(bootstrap.tooltip()
+            .call(tooltip()
                 .title(t('translate.translate'))
                 .placement('left'));
 

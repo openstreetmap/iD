@@ -1,4 +1,5 @@
 import { t } from '../util/locale';
+import { tooltip } from '../util/tooltip';
 import { Defs, Icon } from '../svg/index';
 import { Account } from './account';
 import { Attribution } from './attribution';
@@ -158,7 +159,7 @@ export function init(context) {
             .attr('tabindex', -1)
             .attr('href', 'https://github.com/openstreetmap/iD/issues')
             .call(Icon('#icon-bug', 'light'))
-            .call(bootstrap.tooltip()
+            .call(tooltip()
                 .title(t('report_a_bug'))
                 .placement('top')
             );
@@ -168,7 +169,7 @@ export function init(context) {
             .attr('tabindex', -1)
             .attr('href', 'https://github.com/openstreetmap/iD/blob/master/CONTRIBUTING.md#translating')
             .call(Icon('#icon-translate', 'light'))
-            .call(bootstrap.tooltip()
+            .call(tooltip()
                 .title(t('help_translate'))
                 .placement('top')
             );

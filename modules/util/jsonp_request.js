@@ -1,4 +1,19 @@
-d3.jsonp = function (url, callback) {
+var jsonpCache = {};
+window.jsonpCache = jsonpCache;
+
+export function jsonpRequest(url, callback) {
+
+  if (window.JSONP_FIX) {
+    if (window.JSONP_DELAY === 0) {
+      callback(window.JSONP_FIX);
+    } else {
+      setTimeout(function() {
+        callback(window.JSONP_FIX);
+      }, window.JSONP_DELAY || 0);
+    }
+    return;
+  }
+
   function rand() {
     var chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz',
       c = '', i = -1;
@@ -7,14 +22,14 @@ d3.jsonp = function (url, callback) {
   }
 
   function create(url) {
-    var e = url.match(/callback=d3.jsonp.(\w+)/),
+    var e = url.match(/callback=(\w+)/),
       c = e ? e[1] : rand();
-    d3.jsonp[c] = function(data) {
+    jsonpCache[c] = function(data) {
       callback(data);
-      delete d3.jsonp[c];
+      delete jsonpCache[c];
       script.remove();
     };
-    return 'd3.jsonp.' + c;
+    return 'jsonpCache.' + c;
   }
 
   var cb = create(url),
@@ -22,4 +37,4 @@ d3.jsonp = function (url, callback) {
     .append('script')
     .attr('type', 'text/javascript')
     .attr('src', url.replace(/(\{|%7B)callback(\}|%7D)/, cb));
-};
+}

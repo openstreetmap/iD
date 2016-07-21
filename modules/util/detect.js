@@ -1,3 +1,5 @@
+import { currentLocale } from './locale';
+
 export function Detect() {
     var detected = {};
 
@@ -55,9 +57,9 @@ export function Detect() {
     detected.locale = (navigator.languages && navigator.languages.length)
         ? navigator.languages[0] : (navigator.language || navigator.userLanguage || 'en-US');
 
-    // Loaded locale is stored in window.locale.current()
+    // Loaded locale is stored in currentLocale
     // return that instead (except in the situation where 'en' might override 'en-US')
-    var loadedLocale = (window.locale && window.locale.current()) || 'en';
+    var loadedLocale = currentLocale || 'en';
     if (loadedLocale !== 'en') {
         detected.locale = loadedLocale;
     }

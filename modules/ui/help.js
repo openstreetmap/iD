@@ -1,6 +1,7 @@
 import { t } from '../util/locale';
+import { tooltip } from '../util/tooltip';
 import { Icon } from '../svg/index';
-import { intro } from './intro';
+import { intro } from './intro/index';
 import marked from 'marked';
 import { tooltipHtml } from './tooltipHtml';
 
@@ -34,7 +35,7 @@ export function Help(context) {
 
         function toggle() {
             if (d3.event) d3.event.preventDefault();
-            tooltip.hide(button);
+            tooltipBehavior.hide(button);
             setVisible(!button.classed('active'));
         }
 
@@ -103,7 +104,7 @@ export function Help(context) {
 
         var pane = selection.append('div')
                 .attr('class', 'help-wrap map-overlay fillL col5 content hide'),
-            tooltip = bootstrap.tooltip()
+            tooltipBehavior = tooltip()
                 .placement('left')
                 .html(true)
                 .title(tooltipHtml(t('help.title'), key)),
@@ -111,7 +112,7 @@ export function Help(context) {
                 .attr('tabindex', -1)
                 .on('click', toggle)
                 .call(Icon('#icon-help', 'light'))
-                .call(tooltip),
+                .call(tooltipBehavior),
             shown = false;
 
 
