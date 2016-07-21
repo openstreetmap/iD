@@ -1,4 +1,3 @@
-import { t } from '../../util/locale';
 export function cycleway(field) {
     var dispatch = d3.dispatch('change'),
         items;
