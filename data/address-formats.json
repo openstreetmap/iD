@@ -36,6 +36,6 @@
     },
     {
         "countryCodes": ["tw"],
-        "format": [["postcode", "city", "district"], ["place", "village", "street"], ["housenumber", "floor"]]
+        "format": [["postcode", "city", "district"], ["place", "street"], ["housenumber"]]
     }
 ]
