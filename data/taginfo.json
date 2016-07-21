@@ -258,6 +258,10 @@
         },
         {
             "key": "amenity",
+            "value": "ice_cream"
+        },
+        {
+            "key": "amenity",
             "value": "kindergarten"
         },
         {

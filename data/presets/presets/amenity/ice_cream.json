@@ -1,0 +1,25 @@
+{
+    "icon": "ice-cream",
+    "fields": [
+        "address",
+        "building_area",
+        "opening_hours",
+        "takeaway",
+        "delivery"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "gelato",
+        "sorbet",
+        "sherbet",
+        "frozen",
+        "yogurt"
+    ],
+    "tags": {
+        "amenity": "ice_cream"
+    },
+    "name": "Ice Cream Shop"
+}
