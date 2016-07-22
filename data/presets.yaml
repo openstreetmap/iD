@@ -80,13 +80,14 @@ en:
         # access=*
         label: Access
       address:
-        # 'addr:housename=*, addr:housenumber=*, addr:conscriptionnumber=*, addr:street=*, addr:city=*, addr:postcode=*, addr:place=*, addr:hamlet=*, addr:suburb=*, addr:subdistrict=*, addr:district=*, addr:province=*, addr:state=*, addr:country=*'
+        # 'addr:city=*, addr:conscriptionnumber=*, addr:country=*, addr:district=*, addr:floor=*, addr:hamlet=*, addr:housename=*, addr:housenumber=*, addr:place=*, addr:postcode=*, addr:province=*, addr:state=*, addr:street=*, addr:subdistrict=*, addr:suburb=*'
         label: Address
         placeholders:
           city: City
           conscriptionnumber: '123'
           country: Country
           district: District
+          floor: Floor
           hamlet: Hamlet
           housename: Housename
           housenumber: '123'

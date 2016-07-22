@@ -33,5 +33,9 @@
     {
         "countryCodes": ["ca"],
         "format": [["housenumber", "street"], ["city", "province", "postcode"]]
+    },
+    {
+        "countryCodes": ["tw"],
+        "format": [["postcode", "city", "district"], ["place", "street"], ["housenumber", "floor"]]
     }
 ]
