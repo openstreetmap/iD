@@ -1468,6 +1468,28 @@
         },
         "name": "Mosque"
     },
+    "amenity/planetarium": {
+        "icon": "museum",
+        "fields": [
+            "operator",
+            "building_area",
+            "address",
+            "opening_hours"
+        ],
+        "geometry": [
+            "point",
+            "area"
+        ],
+        "terms": [
+            "museum",
+            "astronomy",
+            "observatory"
+        ],
+        "tags": {
+            "amenity": "planetarium"
+        },
+        "name": "Planetarium"
+    },
     "amenity/police": {
         "icon": "police",
         "fields": [
