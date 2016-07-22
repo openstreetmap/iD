@@ -1,20 +1,21 @@
 {
     "type": "address",
     "keys": [
+        "addr:city",
+        "addr:conscriptionnumber",
+        "addr:country",
+        "addr:district",
+        "addr:floor",
+        "addr:hamlet",
         "addr:housename",
         "addr:housenumber",
-        "addr:conscriptionnumber",
-        "addr:street",
-        "addr:city",
-        "addr:postcode",
         "addr:place",
-        "addr:hamlet",
-        "addr:suburb",
-        "addr:subdistrict",
-        "addr:district",
+        "addr:postcode",
         "addr:province",
         "addr:state",
-        "addr:country"
+        "addr:street",
+        "addr:subdistrict",
+        "addr:suburb"
     ],
     "reference": {"key": "addr"},
     "icon": "address",
@@ -22,20 +23,21 @@
     "label": "Address",
     "strings": {
         "placeholders": {
+          "city": "City",
+          "conscriptionnumber": "123",
+          "country": "Country",
+          "district": "District",
+          "floor": "Floor",
+          "hamlet": "Hamlet",
           "housename": "Housename",
           "housenumber": "123",
-          "conscriptionnumber": "123",
-          "street": "Street",
-          "city": "City",
-          "postcode": "Postcode",
           "place": "Place",
-          "hamlet": "Hamlet",
-          "suburb": "Suburb",
-          "subdistrict": "Subdistrict",
-          "district": "District",
+          "postcode": "Postcode",
           "province": "Province",
           "state": "State",
-          "country": "Country"
+          "street": "Street",
+          "subdistrict": "Subdistrict",
+          "suburb": "Suburb"
         }
     }
 }
