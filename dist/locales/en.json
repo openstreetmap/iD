@@ -1840,6 +1840,10 @@
                 "name": "Mosque",
                 "terms": "muslim"
             },
+            "amenity/planetarium": {
+                "name": "Planetarium",
+                "terms": "museum,astronomy,observatory"
+            },
             "amenity/police": {
                 "name": "Police",
                 "terms": "badge,constable,constabulary,cop,detective,fed,law,enforcement,officer,patrol"

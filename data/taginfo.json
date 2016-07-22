@@ -318,6 +318,10 @@
         },
         {
             "key": "amenity",
+            "value": "planetarium"
+        },
+        {
+            "key": "amenity",
             "value": "police"
         },
         {

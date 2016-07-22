@@ -1426,6 +1426,11 @@ en:
         name: Mosque
         # 'terms: muslim'
         terms: '<translate with synonyms or related terms for ''Mosque'', separated by commas>'
+      amenity/planetarium:
+        # amenity=planetarium
+        name: Planetarium
+        # 'terms: museum,astronomy,observatory'
+        terms: '<translate with synonyms or related terms for ''Planetarium'', separated by commas>'
       amenity/police:
         # amenity=police
         name: Police
