@@ -44,7 +44,7 @@ export function wikipedia(field, context) {
             .attr('type', 'text')
             .attr('class', 'wiki-lang')
             .attr('placeholder', t('translate.localized_translation_language'))
-            .value('English');
+            .value(language()[1]);
 
         lang
             .call(langcombo)
