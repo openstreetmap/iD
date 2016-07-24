@@ -703,6 +703,7 @@ en:
       and outer), hold the Shift key and click on each of them to select them both, and then
       click the "Merge" (+) button.
   intro:
+    done: done
     graph:
       city_hall: Three Rivers City Hall
       fire_department: Three Rivers Fire Department

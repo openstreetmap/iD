@@ -3223,11 +3223,12 @@ img.tile-removing {
     background: #8cd05f;
 }
 
-.intro-nav-wrap button.step .icon {
+.intro-nav-wrap button.step .status {
+    margin-left: 3px;
     display: none;
 }
 
-.intro-nav-wrap button.step.finished .icon {
+.intro-nav-wrap button.step.finished .status {
     display: inline-block;
 }
 

@@ -148,15 +148,17 @@ export function intro(context) {
             .on('click', enter);
 
         entered
-            .call(Icon('#icon-apply', 'pre-text'));
-
-        entered
             .append('label')
             .text(function(d) { return t(d.title); });
 
+        entered
+            .append('span')
+            .attr('class', 'status')
+            .text(' - ' + t('intro.done'));
+
         enter(steps[0]);
 
-        function enter (newStep) {
+        function enter(newStep) {
             if (step) { step.exit(); }
 
             context.enter(Browse(context));
