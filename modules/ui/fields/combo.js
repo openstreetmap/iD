@@ -1,5 +1,6 @@
 import { t } from '../../util/locale';
 import _ from 'lodash';
+
 export {
     combo as typeCombo,
     combo as multiCombo

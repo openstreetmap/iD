@@ -1,7 +1,7 @@
-/* global locale: true */
+/* global locale:true, t:false */
 /* eslint no-console: 0 */
-/*
-describe('locale', function() {
+
+describe.skip('locale', function() {
     var saved, error;
 
     beforeEach(function() {
@@ -31,4 +31,3 @@ describe('locale', function() {
         });
     });
 });
-*/

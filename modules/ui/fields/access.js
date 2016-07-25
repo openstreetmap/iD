@@ -1,5 +1,5 @@
-import { t } from '../../util/locale';
 import _ from 'lodash';
+
 export function access(field) {
     var dispatch = d3.dispatch('change'),
         items;
