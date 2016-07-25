@@ -1,6 +1,5 @@
 import { t } from '../util/locale';
 import { Hover, Lasso, Paste, Select } from '../behavior/index';
-import { DragNode } from './index';
 
 export function Browse(context) {
     var mode = {
@@ -15,8 +14,7 @@ export function Browse(context) {
         Hover(context)
             .on('hover', context.ui().sidebar.hover),
         Select(context),
-        Lasso(context),
-        DragNode(context).behavior];
+        Lasso(context)];
 
     mode.enter = function() {
         behaviors.forEach(function(behavior) {
