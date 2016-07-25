@@ -235,6 +235,9 @@ export function Move(moveIds, tryDelta, projection, cache) {
     // check if moving way endpoint can cross an unmoved way, if so limit delta..
     function limitDelta(graph) {
         _.each(cache.intersection, function(obj) {
+            // Don't limit movement if this is vertex joins 2 endpoints..
+            if (obj.movedIsEP && obj.unmovedIsEP) return;
+            // Don't limit movement if this vertex is not an endpoint anyway..
             if (!obj.movedIsEP) return;
 
             var node = graph.entity(obj.nodeId),
