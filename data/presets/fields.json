@@ -1096,7 +1096,7 @@
     "second_hand": {
         "key": "second_hand",
         "type": "combo",
-        "label": "Second Hand / Used / Previously Owned ",
+        "label": "Sells Used",
         "placeholder": "Yes, No, Only",
         "strings": {
             "options": {

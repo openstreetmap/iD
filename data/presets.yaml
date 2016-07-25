@@ -827,7 +827,7 @@ en:
         label: Seasonal
       second_hand:
         # second_hand=*
-        label: 'Second Hand / Used / Previously Owned '
+        label: Sells Used
         options:
           # second_hand=no
           'no': 'No'

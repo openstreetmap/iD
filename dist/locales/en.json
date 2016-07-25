@@ -1331,7 +1331,7 @@
                 "label": "Seasonal"
             },
             "second_hand": {
-                "label": "Second Hand / Used / Previously Owned ",
+                "label": "Sells Used",
                 "placeholder": "Yes, No, Only",
                 "options": {
                     "yes": "Yes",
