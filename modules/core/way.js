@@ -102,38 +102,86 @@ _.extend(Way.prototype, {
     },
 
     lanes: function() {
-        // function parseTurnLane(str) {
-        //     if (!str || str === '') return null;
-        //
-        //     return str.split('|').map(function(s) {
-        //         return s.split(';');
-        //     });
-        // }
+
+        function makeLanesArray(metadata) {
+            function createLaneItem(index, direction) {
+                return {
+                    index: index,
+                    direction: direction
+                };
+            }
+            var lanesArray = [];
+            for (var i = 0; i < metadata.forward; i++) {
+                lanesArray.push(createLaneItem(i, 'forward'));
+            }
+            for (i = 0; i < metadata.bothways; i++) {
+                lanesArray.push(createLaneItem(metadata.forward + i, 'bothways'));
+            }
+            for (i = 0; i < metadata.backward; i++) {
+                lanesArray.push(createLaneItem(metadata.forward + metadata.bothways + i, 'backward'));
+            }
+            return lanesArray;
+        }
+
+        function safeValue(n) {
+            if (n < 0) return 0;
+            if (n > metadata.count - metadata.bothways)
+                return metadata.count - metadata.bothways;
+            return n;
+        }
 
         if (!this.tags.highway) return null;
-        var defaultLanes = {}, tagged = {};
+
+        var metadata = {};
+
+        // fill metadata.count with default count
         switch (this.tags.highway) {
             case 'trunk':
             case 'motorway':
-                defaultLanes.count = this.isOneWay() ? 2 : 4;
+                metadata.count = this.isOneWay() ? 2 : 4;
                 break;
             default:
-                defaultLanes.count = this.isOneWay() ? 1 : 2;
+                metadata.count = this.isOneWay() ? 1 : 2;
                 break;
         }
 
-        tagged.oneway = this.isOneWay();
-        tagged.lanes = {};
+        if (this.tags.lanes) metadata.count = parseInt(this.tags.lanes);
 
-        if (this.tags.lanes) tagged.lanes.count = parseInt(this.tags.lanes);
-        if (this.tags['lanes:forward']) tagged.lanes.forward = parseInt(this.tags['lanes:forward']);
-        if (this.tags['lanes:backward']) tagged.lanes.backward = parseInt(this.tags['lanes:backward']);
+        metadata.oneway = this.isOneWay();
+
+        if (parseInt(this.tags.oneway) === -1) {
+            metadata.forward = 0;
+            metadata.bothways = 0;
+            metadata.backward = metadata.count;
+        }
+        else if (metadata.oneway) {
+            metadata.forward = metadata.count;
+            metadata.bothways = 0;
+            metadata.backward = 0;
+        } else {
+            metadata.bothways = parseInt(this.tags['lanes:both_ways']) > 0 ? 1 : 0;
+            metadata.forward = parseInt(this.tags['lanes:forward']);
+            metadata.backward = parseInt(this.tags['lanes:backward']);
+
+            if (_.isNaN(metadata.forward) && _.isNaN(metadata.backward)) {
+                metadata.forward = parseInt((metadata.count - metadata.bothways)/2);
+                metadata.backward = metadata.count - metadata.bothways - metadata.forward;
+            }
+            else if (_.isNaN(metadata.forward)) {
+                metadata.backward = safeValue(metadata.backward);
+                metadata.forward = metadata.count - metadata.bothways - metadata.backward;
+
+            }
+            else if (_.isNaN(metadata.backward)) {
+                metadata.forward = safeValue(metadata.forward);
+                metadata.backward = metadata.count - metadata.bothways - metadata.forward;
+            }
+        }
+
 
         return {
-            defaults: {
-                lanes: defaultLanes
-            },
-            tagged: tagged
+            metadata: metadata,
+            lanes: makeLanesArray(metadata)
         };
     },
 

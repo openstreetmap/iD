@@ -3,48 +3,11 @@ export function lanes(field, context) {
         LANE_WIDTH = 40,
         LANE_HEIGHT = 200,
         wayID,
-        laneData;
+        lanesData;
 
-    function processData(raw) {
-        var laneCount = raw.tagged.lanes.count || raw.defaults.lanes.count;
-        var lanesArray = [];
-
-        for (var i = 0; i < laneCount; i++) {
-            lanesArray.push({ key: i });
-        }
-
-        if (raw.tagged.oneway) {
-            lanesArray.forEach(function(l) {
-                l.forward = true;
-                l.backward = false;
-            });
-        } else {
-            var countForward = raw.tagged.lanes.forward || 0;
-            var countBackward = raw.tagged.lanes.backward || 0;
-
-            if (countForward + countBackward === 0) {
-                countForward = laneCount/2;
-                countBackward = laneCount/2;
-            }
-
-            for (i = 0; i < countForward; i++) {
-                lanesArray[i].forward = true;
-                lanesArray[i].backward = false;
-            }
-            for (i = 0; i < countBackward; i++) {
-                lanesArray[countForward + i].forward = false;
-                lanesArray[countForward + i].backward = true;
-            }
-        }
-
-        return lanesArray;
-    }
     function lanes(selection) {
-        laneData = processData(context.entity(wayID).lanes());
+        lanesData = context.entity(wayID).lanes();
 
-        var laneCount = laneData.length;
-
-        // if form field is hidden or has detached from dom, clean up.
         if (!d3.select('.inspector-wrap.inspector-hidden').empty() || !selection.node().parentNode) {
             selection.call(lanes.off);
             return;
@@ -61,7 +24,7 @@ export function lanes(field, context) {
             .data([0]);
 
         var d = wrap.dimensions();
-        var freeSpace = d[0] - laneCount*LANE_WIDTH*1.5 + LANE_WIDTH*0.5;
+        var freeSpace = d[0] - lanesData.lanes.length*LANE_WIDTH*1.5 + LANE_WIDTH*0.5;
 
         surface.enter()
             .append('svg')
@@ -82,7 +45,7 @@ export function lanes(field, context) {
             });
 
         var lane = lanesSelection.selectAll('.lane')
-           .data(laneData);
+           .data(lanesData.lanes);
 
         var enter = lane.enter()
             .append('g')
@@ -105,6 +68,14 @@ export function lanes(field, context) {
 
         enter
             .append('g')
+            .attr('class', 'bothways')
+            .append('text')
+            .attr('y', 40)
+            .attr('x', 14)
+            .text('▲▼');
+
+        enter
+            .append('g')
             .attr('class', 'backward')
             .append('text')
             .attr('y', 40)
@@ -115,14 +86,23 @@ export function lanes(field, context) {
 
         lane
             .attr('transform', function(d) {
-                return 'translate(' + (LANE_WIDTH*d.key*1.5)+ ', 0)';
+                return 'translate(' + (LANE_WIDTH*d.index*1.5)+ ', 0)';
             });
 
         lane.select('.forward')
-            .style('visibility', function(d) { return d.forward ? 'visible' : 'hidden'; });
+            .style('visibility', function(d) {
+                return d.direction === 'forward' ? 'visible' : 'hidden';
+            });
+
+        lane.select('.bothways')
+            .style('visibility', function(d) {
+                return d.direction === 'bothways' ? 'visible' : 'hidden';
+            });
 
         lane.select('.backward')
-            .style('visibility', function(d) { return d.backward ? 'visible' : 'hidden'; });
+            .style('visibility', function(d) {
+                return d.direction === 'backward' ? 'visible' : 'hidden';
+            });
     }
 
 
