@@ -19,10 +19,14 @@ export function Move(moveIds, tryDelta, projection, cache) {
 
     function setupCache(graph) {
         function canMove(nodeId) {
+            // Allow movement of any node that is in the selectedIDs list..
+            if (moveIds.indexOf(nodeId) !== -1) return true;
+
+            // Allow movement of a vertex where 2 ways meet..
             var parents = _.map(graph.parentWays(graph.entity(nodeId)), 'id');
             if (parents.length < 3) return true;
 
-            // Don't move a vertex where >2 ways meet, unless all parentWays are moving too..
+            // Restrict movement of a vertex where >2 ways meet, unless all parentWays are moving too..
             var parentsMoving = _.every(parents, function(id) { return cache.moving[id]; });
             if (!parentsMoving) delete cache.moving[nodeId];
 
@@ -30,7 +34,7 @@ export function Move(moveIds, tryDelta, projection, cache) {
         }
 
         function cacheEntities(ids) {
-            _.each(ids, function(id) {
+            ids.forEach(function(id) {
                 if (cache.moving[id]) return;
                 cache.moving[id] = true;
 
@@ -44,7 +48,9 @@ export function Move(moveIds, tryDelta, projection, cache) {
                     cache.ways.push(id);
                     cacheEntities(entity.nodes);
                 } else {
-                    cacheEntities(_.map(entity.members, 'id'));
+                    cacheEntities(entity.members.map(function(member) {
+                        return member.id;
+                    }));
                 }
             });
         }
@@ -52,9 +58,10 @@ export function Move(moveIds, tryDelta, projection, cache) {
         function cacheIntersections(ids) {
             function isEndpoint(way, id) { return !way.isClosed() && !!way.affix(id); }
 
-            _.each(ids, function(id) {
+            ids.forEach(function(id) {
                 // consider only intersections with 1 moved and 1 unmoved way.
-                _.each(graph.childNodes(graph.entity(id)), function(node) {
+                var childNodes = graph.childNodes(graph.entity(id));
+                childNodes.forEach(function(node) {
                     var parents = graph.parentWays(node);
                     if (parents.length !== 2) return;
 
