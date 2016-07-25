@@ -825,6 +825,18 @@ en:
       seasonal:
         # seasonal=*
         label: Seasonal
+      second_hand:
+        # second_hand=*
+        label: Sells Used
+        options:
+          # second_hand=no
+          'no': 'No'
+          # second_hand=only
+          only: Only
+          # second_hand=yes
+          'yes': 'Yes'
+        # second_hand field placeholder
+        placeholder: 'Yes, No, Only'
       service:
         # service=*
         label: Type

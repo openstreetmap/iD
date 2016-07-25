@@ -8334,7 +8334,8 @@
             "operator",
             "address",
             "building_area",
-            "opening_hours"
+            "opening_hours",
+            "second_hand"
         ],
         "geometry": [
             "point",
@@ -76845,7 +76846,8 @@
             "operator",
             "address",
             "building_area",
-            "opening_hours"
+            "opening_hours",
+            "second_hand"
         ],
         "suggestion": true
     },
@@ -76864,7 +76866,8 @@
             "operator",
             "address",
             "building_area",
-            "opening_hours"
+            "opening_hours",
+            "second_hand"
         ],
         "suggestion": true
     },
@@ -76883,7 +76886,8 @@
             "operator",
             "address",
             "building_area",
-            "opening_hours"
+            "opening_hours",
+            "second_hand"
         ],
         "suggestion": true
     },
@@ -76902,7 +76906,8 @@
             "operator",
             "address",
             "building_area",
-            "opening_hours"
+            "opening_hours",
+            "second_hand"
         ],
         "suggestion": true
     },
@@ -76921,7 +76926,8 @@
             "operator",
             "address",
             "building_area",
-            "opening_hours"
+            "opening_hours",
+            "second_hand"
         ],
         "suggestion": true
     },
@@ -76940,7 +76946,8 @@
             "operator",
             "address",
             "building_area",
-            "opening_hours"
+            "opening_hours",
+            "second_hand"
         ],
         "suggestion": true
     },
@@ -76959,7 +76966,8 @@
             "operator",
             "address",
             "building_area",
-            "opening_hours"
+            "opening_hours",
+            "second_hand"
         ],
         "suggestion": true
     },
@@ -76978,7 +76986,8 @@
             "operator",
             "address",
             "building_area",
-            "opening_hours"
+            "opening_hours",
+            "second_hand"
         ],
         "suggestion": true
     },
@@ -76997,7 +77006,8 @@
             "operator",
             "address",
             "building_area",
-            "opening_hours"
+            "opening_hours",
+            "second_hand"
         ],
         "suggestion": true
     },
@@ -77016,7 +77026,8 @@
             "operator",
             "address",
             "building_area",
-            "opening_hours"
+            "opening_hours",
+            "second_hand"
         ],
         "suggestion": true
     },
@@ -77035,7 +77046,8 @@
             "operator",
             "address",
             "building_area",
-            "opening_hours"
+            "opening_hours",
+            "second_hand"
         ],
         "suggestion": true
     },
@@ -77054,7 +77066,8 @@
             "operator",
             "address",
             "building_area",
-            "opening_hours"
+            "opening_hours",
+            "second_hand"
         ],
         "suggestion": true
     },
@@ -77073,7 +77086,8 @@
             "operator",
             "address",
             "building_area",
-            "opening_hours"
+            "opening_hours",
+            "second_hand"
         ],
         "suggestion": true
     },
@@ -77092,7 +77106,8 @@
             "operator",
             "address",
             "building_area",
-            "opening_hours"
+            "opening_hours",
+            "second_hand"
         ],
         "suggestion": true
     },
@@ -77111,7 +77126,8 @@
             "operator",
             "address",
             "building_area",
-            "opening_hours"
+            "opening_hours",
+            "second_hand"
         ],
         "suggestion": true
     },
@@ -77130,7 +77146,8 @@
             "operator",
             "address",
             "building_area",
-            "opening_hours"
+            "opening_hours",
+            "second_hand"
         ],
         "suggestion": true
     },
@@ -77149,7 +77166,8 @@
             "operator",
             "address",
             "building_area",
-            "opening_hours"
+            "opening_hours",
+            "second_hand"
         ],
         "suggestion": true
     },
@@ -77168,7 +77186,8 @@
             "operator",
             "address",
             "building_area",
-            "opening_hours"
+            "opening_hours",
+            "second_hand"
         ],
         "suggestion": true
     },
@@ -77187,7 +77206,8 @@
             "operator",
             "address",
             "building_area",
-            "opening_hours"
+            "opening_hours",
+            "second_hand"
         ],
         "suggestion": true
     },
@@ -77206,7 +77226,8 @@
             "operator",
             "address",
             "building_area",
-            "opening_hours"
+            "opening_hours",
+            "second_hand"
         ],
         "suggestion": true
     },
@@ -77225,7 +77246,8 @@
             "operator",
             "address",
             "building_area",
-            "opening_hours"
+            "opening_hours",
+            "second_hand"
         ],
         "suggestion": true
     },
@@ -77244,7 +77266,8 @@
             "operator",
             "address",
             "building_area",
-            "opening_hours"
+            "opening_hours",
+            "second_hand"
         ],
         "suggestion": true
     },
@@ -77263,7 +77286,8 @@
             "operator",
             "address",
             "building_area",
-            "opening_hours"
+            "opening_hours",
+            "second_hand"
         ],
         "suggestion": true
     },
@@ -77282,7 +77306,8 @@
             "operator",
             "address",
             "building_area",
-            "opening_hours"
+            "opening_hours",
+            "second_hand"
         ],
         "suggestion": true
     },
@@ -77301,7 +77326,8 @@
             "operator",
             "address",
             "building_area",
-            "opening_hours"
+            "opening_hours",
+            "second_hand"
         ],
         "suggestion": true
     },
@@ -77320,7 +77346,8 @@
             "operator",
             "address",
             "building_area",
-            "opening_hours"
+            "opening_hours",
+            "second_hand"
         ],
         "suggestion": true
     },
@@ -77339,7 +77366,8 @@
             "operator",
             "address",
             "building_area",
-            "opening_hours"
+            "opening_hours",
+            "second_hand"
         ],
         "suggestion": true
     },
@@ -77358,7 +77386,8 @@
             "operator",
             "address",
             "building_area",
-            "opening_hours"
+            "opening_hours",
+            "second_hand"
         ],
         "suggestion": true
     },
@@ -77377,7 +77406,8 @@
             "operator",
             "address",
             "building_area",
-            "opening_hours"
+            "opening_hours",
+            "second_hand"
         ],
         "suggestion": true
     },
