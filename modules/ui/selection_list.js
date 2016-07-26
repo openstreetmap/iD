@@ -10,6 +10,14 @@ export function SelectionList(context, selectedIDs) {
         context.enter(Select(context, [entity.id]).suppressMenu(true));
     }
 
+    function deselectEntity(entity) {
+        d3.event.stopPropagation();
+        var index = selectedIDs.indexOf(entity.id);
+        if (index > -1) {
+            selectedIDs.splice(index, 1);
+        }
+        context.enter(Select(context, selectedIDs).suppressMenu(true));
+    }
 
     function selectionList(selection) {
         selection.classed('selection-list-pane', true);
@@ -64,6 +72,11 @@ export function SelectionList(context, selectedIDs) {
 
             items.selectAll('.entity-name')
                 .text(function(entity) { return displayName(entity); });
+
+            label.append('span')
+                .attr('class', 'close')
+                .on('click', deselectEntity)
+                .call(Icon('#icon-close'));
 
             // Exit
             items.exit()
