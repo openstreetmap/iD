@@ -51,7 +51,10 @@ export function SelectionList(context, selectedIDs) {
 
             // Enter
             var label = enter.append('div')
-                .attr('class', 'label')
+                .attr('class', 'label');
+
+            label.append('span')
+                .attr('class', 'entity-geom-icon')
                 .call(Icon('', 'pre-text'));
 
             label.append('span')
@@ -60,8 +63,13 @@ export function SelectionList(context, selectedIDs) {
             label.append('span')
                 .attr('class', 'entity-name');
 
+            label.append('span')
+                .attr('class', 'close')
+                .on('click', deselectEntity)
+                .call(Icon('#icon-close'));
+
             // Update
-            items.selectAll('use')
+            items.selectAll('.entity-geom-icon use')
                 .attr('href', function() {
                     var entity = this.parentNode.parentNode.__data__;
                     return '#icon-' + context.geometry(entity.id);
@@ -72,11 +80,6 @@ export function SelectionList(context, selectedIDs) {
 
             items.selectAll('.entity-name')
                 .text(function(entity) { return displayName(entity); });
-
-            label.append('span')
-                .attr('class', 'close')
-                .on('click', deselectEntity)
-                .call(Icon('#icon-close'));
 
             // Exit
             items.exit()
