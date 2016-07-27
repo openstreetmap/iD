@@ -2,6 +2,7 @@
     "fields": [
         "access",
         "opening_hours",
+        "indoor",
         "phone"
     ],
     "geometry": [
