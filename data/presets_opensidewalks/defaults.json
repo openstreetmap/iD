@@ -3,14 +3,14 @@
         "area"
     ],
     "line": [
-        "category-path",
+        "Pedestrian Path",
         "line"
     ],
     "point": [
         "point"
     ],
     "vertex": [
-        "category-kerb",
+        "Pedestrian Kerb",
         "vertex"
     ],
     "relation": [

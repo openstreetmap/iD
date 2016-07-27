@@ -1,19 +1,19 @@
 {
-    "category-path": {
-        "geometry": "line",
-        "name": "Pedestrian Path",
-        "icon": "category-path",
-        "members": [
-            "footway/sidewalk",
-            "footway/crossing"
-        ]
-    },
-    "category-kerb": {
-        "geometry": "vertex",
-        "name": "Sidewalk Kerbs",
-        "icon": "roadblock",
-        "members": [
-            "kerb/curbramp"
-        ]
-    }
+  "Pedestrian Path": {
+    "geometry": "line",
+    "name": "Pedestrian Path",
+    "icon": "category-path",
+    "members": [
+      "footway/pedestrainsidewalk",
+      "footway/pedestraincrossing"
+    ]
+  },
+  "Pedestrian Kerb": {
+    "geometry": "vertex",
+    "name": "Pedestrian Kerb",
+    "icon": "roadblock",
+    "members": [
+      "footway/curbramp"
+    ]
+  }
 }
