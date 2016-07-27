@@ -6,7 +6,9 @@
     ],
     "geometry": [
         "point"
-    
+    ],
+    "terms": [
+        "AED"
     ],
    "tags": {
         "emergency": "defibrillator"

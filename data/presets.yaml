@@ -2082,6 +2082,7 @@ en:
       emergency/defibrillator:
         # emergency=defibrillator
         name: Defibrillator
+        # 'terms: AED'
         terms: '<translate with synonyms or related terms for ''Defibrillator'', separated by commas>'
       emergency/fire_hydrant:
         # emergency=fire_hydrant
