@@ -4,8 +4,8 @@
     "name": "Pedestrian Path",
     "icon": "category-path",
     "members": [
-      "footway/pedestrainsidewalk",
-      "footway/pedestraincrossing"
+      "footway/pedestriansidewalk",
+      "footway/pedestriancrossing"
     ]
   },
   "Pedestrian Kerb": {

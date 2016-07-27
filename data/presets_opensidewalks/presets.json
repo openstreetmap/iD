@@ -4117,7 +4117,7 @@
         "terms": [],
         "name": "Street Crossing"
     },
-    "footway/pedestraincrossing": {
+    "footway/pedestriancrossing": {
     	"icon": "highway-footway",
     	"fields": [
     		"access",
@@ -4130,24 +4130,27 @@
     	],
     	"tags": {
     		"highway": "footway",
-    		"footway": "crossing"
+    		"footway": "crossing",
+            "project": "open_sidewalks"
     	},
     	"terms": [],
-    	"name": "Pedestrain Crossing"
+    	"name": "Pedestrian Crossing"
     },
     "footway/curbramp": {
-    	"fields": [
-    		"access",
-    		"kerb",
-    		"height",
-    		"tactile_paving",
-            "width",
-            "landing_width"
-    	],
-    	"geometry": [
-    		"vertex"
-    	],
-    	"tags": [],
+      "fields": [
+          "access",
+          "kerb",
+          "height",
+          "tactile_paving",
+          "width",
+          "landing_width"
+      ],
+      "geometry": [
+          "vertex"
+      ],
+      "tags": {
+          "project": "open_sidewalks"
+      },
     	"terms": [],
     	"name": "Sidewalk Curb Ramp"
     },
@@ -4192,7 +4195,7 @@
         "terms": [],
         "name": "Sidewalk"
     },
-    "footway/pedestrainsidewalk": {
+    "footway/pedestriansidewalk": {
     	"icon": "highway-footway",
     	"fields": [
     		"access",
@@ -4206,10 +4209,11 @@
     	],
     	"tags": {
     		"highway": "footway",
-    		"footway": "sidewalk"
+    		"footway": "sidewalk",
+            "project": "open_sidewalks"
     	},
     	"terms": [],
-    	"name": "Pedestrain Sidewalk"
+    	"name": "Pedestrian Sidewalk"
     },
     "ford": {
         "geometry": [
