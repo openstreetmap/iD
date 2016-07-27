@@ -864,6 +864,9 @@
             "currency_multi": {
                 "label": "Currency Types"
             },
+            "cycle_network": {
+                "label": "Network"
+            },
             "cycleway": {
                 "label": "Bike Lanes",
                 "placeholder": "none",
@@ -1167,6 +1170,26 @@
             },
             "natural": {
                 "label": "Natural"
+            },
+            "network_bicycle": {
+                "label": "Network Type",
+                "placeholder": "Local, Regional, National, International",
+                "options": {
+                    "lcn": "Local",
+                    "rcn": "Regional",
+                    "ncn": "National",
+                    "icn": "International"
+                }
+            },
+            "network_foot": {
+                "label": "Network Type",
+                "placeholder": "Local, Regional, National, International",
+                "options": {
+                    "lwn": "Local",
+                    "rwn": "Regional",
+                    "nwn": "National",
+                    "iwn": "International"
+                }
             },
             "network": {
                 "label": "Network"

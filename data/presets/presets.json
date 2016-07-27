@@ -10650,7 +10650,8 @@
         "icon": "route-bicycle",
         "fields": [
             "ref",
-            "network"
+            "network_bicycle",
+            "cycle_network"
         ]
     },
     "type/route/bus": {
@@ -10712,7 +10713,7 @@
         "fields": [
             "ref",
             "operator",
-            "network"
+            "network_foot"
         ]
     },
     "type/route/hiking": {
@@ -10728,7 +10729,7 @@
         "fields": [
             "ref",
             "operator",
-            "network"
+            "network_foot"
         ]
     },
     "type/route/horse": {

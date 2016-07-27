@@ -352,6 +352,11 @@
         "type": "multiCombo",
         "label": "Currency Types"
     },
+    "cycle_network": {
+        "key": "cycle_network",
+        "type": "combo",
+        "label": "Network"
+    },
     "cycleway": {
         "keys": [
             "cycleway:left",
@@ -840,6 +845,34 @@
         "key": "natural",
         "type": "typeCombo",
         "label": "Natural"
+    },
+    "network_bicycle": {
+        "key": "network",
+        "type": "combo",
+        "label": "Network Type",
+        "placeholder": "Local, Regional, National, International",
+        "strings": {
+            "options": {
+                "lcn": "Local",
+                "rcn": "Regional",
+                "ncn": "National",
+                "icn": "International"
+            }
+        }
+    },
+    "network_foot": {
+        "key": "network",
+        "type": "combo",
+        "label": "Network Type",
+        "placeholder": "Local, Regional, National, International",
+        "strings": {
+            "options": {
+                "lwn": "Local",
+                "rwn": "Regional",
+                "nwn": "National",
+                "iwn": "International"
+            }
+        }
     },
     "network": {
         "key": "network",
