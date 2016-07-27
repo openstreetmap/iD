@@ -1,0 +1,19 @@
+{
+    "category-path": {
+        "geometry": "line",
+        "name": "Pedestrian Path",
+        "icon": "category-path",
+        "members": [
+            "footway/sidewalk",
+            "footway/crossing"
+        ]
+    },
+    "category-kerb": {
+        "geometry": "vertex",
+        "name": "Sidewalk Kerbs",
+        "icon": "roadblock",
+        "members": [
+            "kerb/curbramp"
+        ]
+    }
+}

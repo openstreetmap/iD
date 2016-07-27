@@ -1,0 +1,19 @@
+{
+    "area": [
+        "area"
+    ],
+    "line": [
+        "category-path",
+        "line"
+    ],
+    "point": [
+        "point"
+    ],
+    "vertex": [
+        "category-kerb",
+        "vertex"
+    ],
+    "relation": [
+        "relation"
+    ]
+}

@@ -1,0 +1,42 @@
+{
+  "access": {
+    "key": "access",
+    "type": "check",
+    "label": "Access"
+  },
+  "surface": {
+    "key": "surface",
+    "type": "textarea",
+    "label": "Surface"
+  },
+  "tactile_paving": {
+    "key": "tactile_paving",
+    "type": "check",
+    "label": "Tactile Paving"
+  },
+  "lit": {
+    "key": "lit",
+    "type": "check",
+    "label": "Lit"
+  },
+  "width": {
+    "key": "width",
+    "type": "number",
+    "label": "Width (Meters)"
+  },
+  "incline": {
+    "key": "incline",
+    "type": "number",
+    "label": "Incline"
+  },
+  "crossing": {
+    "key": "crossing",
+    "type": "textarea",
+    "label": "Type"
+  },
+  "height": {
+    "key": "height",
+    "type": "number",
+    "label": "Height (Meters)"
+  }
+}

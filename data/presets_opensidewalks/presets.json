@@ -1,0 +1,100 @@
+{
+  "area": {
+    "name": "Area",
+    "tags": {},
+    "geometry": [
+      "area"
+    ],
+    "matchScore": 0.1
+  },
+  "line": {
+    "name": "Line",
+    "tags": {},
+    "geometry": [
+      "line"
+    ],
+    "matchScore": 0.1
+  },
+  "point": {
+    "name": "Point",
+    "tags": {},
+    "geometry": [
+      "point"
+    ],
+    "matchScore": 0.1
+  },
+  "vertex": {
+    "name": "Other",
+    "tags": {},
+    "geometry": [
+      "vertex"
+    ],
+    "matchScore": 0.1
+  },
+  "footway/sidewalk": {
+    "icon": "highway-footway",
+    "field": [
+      "access",
+      "surface",
+      "lit",
+      "width",
+      "incline"
+    ],
+    "geometry": [
+      "line"
+    ],
+    "tags": {
+      "highway": "footway",
+      "footway": "sidewalk"
+    },
+    "terms": [],
+    "name": {
+      "key": "name",
+      "type": "localized",
+      "label": "Name",
+      "placeholder": "Sidewalk"
+    }
+  },
+  "footway/crossing": {
+    "icon": "highway-footway",
+    "fields": [
+      "access",
+      "crossing",
+      "surface",
+      "tactile_paving"
+    ],
+    "geometry": [
+      "line"
+    ],
+    "tags": {
+      "highway": "footway",
+      "footway": "crossing"
+    },
+    "terms": [],
+    "name": {
+      "key": "name",
+      "type": "localized",
+      "label": "Name",
+      "placeholder": "Crossing"
+    }
+  },
+  "kerb/curbramp": {
+    "fields": [
+      "access",
+      "kerb",
+      "height",
+      "tactile_paving"
+    ],
+    "geometry": [
+      "vertex"
+    ],
+    "tags": [],
+    "terms": [],
+    "name": {
+      "key": "name",
+      "type": "localized",
+      "label": "Name",
+      "placeholder": "Curb Ramp"
+    }
+  }
+}
