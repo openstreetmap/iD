@@ -1469,6 +1469,11 @@
         "type": "number",
         "label": "Width (Meters)"
     },
+    "landing_width": {
+        "key": "landing_width",
+        "type": "number",
+        "label": "Landing Width (Meters)"
+    },
     "wikipedia": {
         "key": "wikipedia",
         "keys": [

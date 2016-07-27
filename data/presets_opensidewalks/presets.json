@@ -4140,7 +4140,9 @@
     		"access",
     		"kerb",
     		"height",
-    		"tactile_paving"
+    		"tactile_paving",
+            "width",
+            "landing_width"
     	],
     	"geometry": [
     		"vertex"
