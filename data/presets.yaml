@@ -2523,6 +2523,11 @@ en:
         name: Marina
         # 'terms: boat'
         terms: '<translate with synonyms or related terms for ''Marina'', separated by commas>'
+      leisure/miniature_golf:
+        # leisure=miniature_golf
+        name: Miniature Golf
+        # 'terms: crazy,mini,putt'
+        terms: '<translate with synonyms or related terms for ''Miniature Golf'', separated by commas>'
       leisure/nature_reserve:
         # leisure=nature_reserve
         name: Nature Reserve

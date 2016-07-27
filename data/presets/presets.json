@@ -5699,6 +5699,27 @@
         },
         "name": "Marina"
     },
+    "leisure/miniature_golf": {
+        "icon": "golf",
+        "fields": [
+            "operator",
+            "address",
+            "opening_hours"
+        ],
+        "geometry": [
+            "point",
+            "area"
+        ],
+        "terms": [
+            "crazy",
+            "mini",
+            "putt"
+        ],
+        "tags": {
+            "leisure": "miniature_golf"
+        },
+        "name": "Miniature Golf"
+    },
     "leisure/nature_reserve": {
         "icon": "park",
         "geometry": [

@@ -1297,6 +1297,10 @@
         },
         {
             "key": "leisure",
+            "value": "miniature_golf"
+        },
+        {
+            "key": "leisure",
             "value": "nature_reserve"
         },
         {
