@@ -45,13 +45,18 @@ export function SelectionList(context, selectedIDs) {
             var items = list.selectAll('.feature-list-item')
                 .data(entities, Entity.key);
 
-            var enter = items.enter().append('button')
+            var enter = items.enter().append('div')
                 .attr('class', 'feature-list-item')
                 .on('click', selectEntity);
 
             // Enter
-            var label = enter.append('div')
+            var label = enter.append('button')
                 .attr('class', 'label');
+
+            enter.append('button')
+                .attr('class', 'close')
+                .on('click', deselectEntity)
+                .call(Icon('#icon-close'));
 
             label.append('span')
                 .attr('class', 'entity-geom-icon')
@@ -62,11 +67,6 @@ export function SelectionList(context, selectedIDs) {
 
             label.append('span')
                 .attr('class', 'entity-name');
-
-            label.append('span')
-                .attr('class', 'close')
-                .on('click', deselectEntity)
-                .call(Icon('#icon-close'));
 
             // Update
             items.selectAll('.entity-geom-icon use')
