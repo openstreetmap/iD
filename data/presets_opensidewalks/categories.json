@@ -1,11 +1,12 @@
 {
-  "Pedestrian Path": {
+  "category-path": {
     "geometry": "line",
-    "name": "Pedestrian Path",
+    "name": "Path Features",
     "icon": "category-path",
     "members": [
-      "footway/pedestriansidewalk",
-      "footway/pedestriancrossing"
+      "footway/sidewalk",
+      "footway/crosswalk",
+      "highway/steps"
     ]
   },
   "Pedestrian Kerb": {
