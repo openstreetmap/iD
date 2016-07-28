@@ -178,6 +178,18 @@ en:
       bin:
         # bin=*
         label: Waste Bin
+      blood_components:
+        # 'blood:=*'
+        label: Blood Components
+        options:
+          # 'blood:=plasma'
+          plasma: plasma
+          # 'blood:=platelets'
+          platelets: platelets
+          # 'blood:=stemcells'
+          stemcells: stem cell samples
+          # 'blood:=whole'
+          whole: whole blood
       boundary:
         # boundary=*
         label: Type
@@ -2147,6 +2159,11 @@ en:
         # 'golf=water_hazard, natural=water'
         name: Water Hazard
         terms: '<translate with synonyms or related terms for ''Water Hazard'', separated by commas>'
+      healthcare/blood_donation:
+        # healthcare=blood_donation
+        name: Blood Donor Center
+        # 'terms: blood bank,blood donation,blood transfusion,apheresis,plasmapheresis,plateletpheresis,stem cell donation'
+        terms: '<translate with synonyms or related terms for ''Blood Donor Center'', separated by commas>'
       highway:
         # highway=*
         name: Highway
@@ -2526,7 +2543,7 @@ en:
       leisure/miniature_golf:
         # leisure=miniature_golf
         name: Miniature Golf
-        # 'terms: crazy,mini,putt'
+        # 'terms: crazy golf,mini golf,putt-putt'
         terms: '<translate with synonyms or related terms for ''Miniature Golf'', separated by commas>'
       leisure/nature_reserve:
         # leisure=nature_reserve

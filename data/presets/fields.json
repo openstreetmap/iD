@@ -238,6 +238,19 @@
         "type": "check",
         "label": "Waste Bin"
     },
+    "blood_components": {
+        "key": "blood:",
+        "type": "multiCombo",
+        "label": "Blood Components",
+        "strings": {
+            "options": {
+                "whole": "whole blood",
+                "plasma": "plasma",
+                "platelets": "platelets",
+                "stemcells": "stem cell samples"
+            }
+        }
+    },
     "boundary": {
         "key": "boundary",
         "type": "combo",

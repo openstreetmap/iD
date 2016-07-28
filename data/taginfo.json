@@ -956,6 +956,10 @@
             "value": "water"
         },
         {
+            "key": "healthcare",
+            "value": "blood_donation"
+        },
+        {
             "key": "highway"
         },
         {

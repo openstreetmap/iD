@@ -1,0 +1,28 @@
+{
+    "icon": "hospital",
+    "fields": [
+        "operator",
+        "address",
+        "blood_components",
+        "opening_hours",
+        "ref"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "blood bank",
+        "blood donation",
+        "blood transfusion",
+        "apheresis",
+        "plasmapheresis",
+        "plateletpheresis",
+        "stem cell donation"
+    ],
+    "tags": {
+        "healthcare": "blood_donation"
+    },
+    "name": "Blood Donor Center"
+}
+ 
