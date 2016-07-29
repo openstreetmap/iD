@@ -8421,6 +8421,29 @@
         },
         "name": "Carpet Store"
     },
+    "shop/charity": {
+        "icon": "shop",
+        "fields": [
+            "operator",
+            "address",
+            "building_area",
+            "opening_hours",
+            "second_hand"
+        ],
+        "geometry": [
+            "point",
+            "area"
+        ],
+        "terms": [
+            "thrift",
+            "op shop",
+            "nonprofit"
+        ],
+        "tags": {
+            "shop": "charity"
+        },
+        "name": "Charity Store"
+    },
     "shop/cheese": {
         "icon": "shop",
         "fields": [
@@ -9687,7 +9710,8 @@
             "operator",
             "address",
             "building_area",
-            "opening_hours"
+            "opening_hours",
+            "second_hand"
         ],
         "geometry": [
             "point",
@@ -84482,6 +84506,126 @@
         ],
         "suggestion": true
     },
+    "shop/charity/British Heart Foundation": {
+        "tags": {
+            "name": "British Heart Foundation",
+            "shop": "charity"
+        },
+        "name": "British Heart Foundation",
+        "icon": "shop",
+        "geometry": [
+            "point",
+            "area"
+        ],
+        "fields": [
+            "operator",
+            "address",
+            "building_area",
+            "opening_hours",
+            "second_hand"
+        ],
+        "suggestion": true
+    },
+    "shop/charity/Cancer Research UK": {
+        "tags": {
+            "name": "Cancer Research UK",
+            "shop": "charity"
+        },
+        "name": "Cancer Research UK",
+        "icon": "shop",
+        "geometry": [
+            "point",
+            "area"
+        ],
+        "fields": [
+            "operator",
+            "address",
+            "building_area",
+            "opening_hours",
+            "second_hand"
+        ],
+        "suggestion": true
+    },
+    "shop/charity/Oxfam": {
+        "tags": {
+            "name": "Oxfam",
+            "shop": "charity"
+        },
+        "name": "Oxfam",
+        "icon": "shop",
+        "geometry": [
+            "point",
+            "area"
+        ],
+        "fields": [
+            "operator",
+            "address",
+            "building_area",
+            "opening_hours",
+            "second_hand"
+        ],
+        "suggestion": true
+    },
+    "shop/charity/Scope": {
+        "tags": {
+            "name": "Scope",
+            "shop": "charity"
+        },
+        "name": "Scope",
+        "icon": "shop",
+        "geometry": [
+            "point",
+            "area"
+        ],
+        "fields": [
+            "operator",
+            "address",
+            "building_area",
+            "opening_hours",
+            "second_hand"
+        ],
+        "suggestion": true
+    },
+    "shop/charity/Age UK": {
+        "tags": {
+            "name": "Age UK",
+            "shop": "charity"
+        },
+        "name": "Age UK",
+        "icon": "shop",
+        "geometry": [
+            "point",
+            "area"
+        ],
+        "fields": [
+            "operator",
+            "address",
+            "building_area",
+            "opening_hours",
+            "second_hand"
+        ],
+        "suggestion": true
+    },
+    "shop/charity/Sue Ryder": {
+        "tags": {
+            "name": "Sue Ryder",
+            "shop": "charity"
+        },
+        "name": "Sue Ryder",
+        "icon": "shop",
+        "geometry": [
+            "point",
+            "area"
+        ],
+        "fields": [
+            "operator",
+            "address",
+            "building_area",
+            "opening_hours",
+            "second_hand"
+        ],
+        "suggestion": true
+    },
     "shop/florist/Monceau Fleurs": {
         "tags": {
             "name": "Monceau Fleurs",
@@ -86189,7 +86333,8 @@
             "operator",
             "address",
             "building_area",
-            "opening_hours"
+            "opening_hours",
+            "second_hand"
         ],
         "suggestion": true
     },

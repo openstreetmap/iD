@@ -3265,6 +3265,11 @@ en:
         name: Carpet Store
         # 'terms: rug'
         terms: '<translate with synonyms or related terms for ''Carpet Store'', separated by commas>'
+      shop/charity:
+        # shop=charity
+        name: Charity Store
+        # 'terms: thrift,op shop,nonprofit'
+        terms: '<translate with synonyms or related terms for ''Charity Store'', separated by commas>'
       shop/cheese:
         # shop=cheese
         name: Cheese Store

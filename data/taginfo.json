@@ -1953,6 +1953,10 @@
         },
         {
             "key": "shop",
+            "value": "charity"
+        },
+        {
+            "key": "shop",
             "value": "cheese"
         },
         {

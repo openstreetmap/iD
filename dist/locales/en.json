@@ -2857,7 +2857,7 @@
             },
             "leisure/miniature_golf": {
                 "name": "Miniature Golf",
-                "terms": "crazy,mini,putt"
+                "terms": "crazy golf,mini golf,putt-putt"
             },
             "leisure/nature_reserve": {
                 "name": "Nature Reserve",
@@ -3526,6 +3526,10 @@
             "shop/carpet": {
                 "name": "Carpet Store",
                 "terms": "rug"
+            },
+            "shop/charity": {
+                "name": "Charity Store",
+                "terms": "thrift,op shop,nonprofit"
             },
             "shop/cheese": {
                 "name": "Cheese Store",

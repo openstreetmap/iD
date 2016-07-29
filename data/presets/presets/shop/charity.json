@@ -12,14 +12,12 @@
         "area"
     ],
     "terms": [
-        "secondhand",
-        "second hand",
-        "resale",
         "thrift",
-        "used"
+        "op shop",
+        "nonprofit"
     ],
     "tags": {
-        "shop": "second_hand"
+        "shop": "charity"
     },
-    "name": "Consignment/Thrift Store"
+    "name": "Charity Store"
 }
