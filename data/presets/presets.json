@@ -10820,7 +10820,8 @@
         "icon": "route-horse",
         "fields": [
             "ref",
-            "operator"
+            "operator",
+            "network_horse"
         ]
     },
     "type/route/pipeline": {

@@ -674,6 +674,20 @@ en:
           rwn: Regional
         # network_foot field placeholder
         placeholder: 'Local, Regional, National, International'
+      network_horse:
+        # network=*
+        label: Network Type
+        options:
+          # network=ihn
+          ihn: International
+          # network=lhn
+          lhn: Local
+          # network=nhn
+          nhn: National
+          # network=rhn
+          rhn: Regional
+        # network_horse field placeholder
+        placeholder: 'Local, Regional, National, International'
       note:
         # note=*
         label: Note

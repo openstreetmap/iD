@@ -1203,6 +1203,16 @@
                     "iwn": "International"
                 }
             },
+            "network_horse": {
+                "label": "Network Type",
+                "placeholder": "Local, Regional, National, International",
+                "options": {
+                    "lhn": "Local",
+                    "rhn": "Regional",
+                    "nhn": "National",
+                    "ihn": "International"
+                }
+            },
             "network": {
                 "label": "Network"
             },

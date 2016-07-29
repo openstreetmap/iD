@@ -892,6 +892,20 @@
             }
         }
     },
+    "network_horse": {
+        "key": "network",
+        "type": "combo",
+        "label": "Network Type",
+        "placeholder": "Local, Regional, National, International",
+        "strings": {
+            "options": {
+                "lhn": "Local",
+                "rhn": "Regional",
+                "nhn": "National",
+                "ihn": "International"
+            }
+        }
+    },
     "network": {
         "key": "network",
         "type": "text",
