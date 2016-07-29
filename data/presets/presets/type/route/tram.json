@@ -10,6 +10,7 @@
     "icon": "route-tram",
     "fields": [
         "ref",
-        "operator"
+        "operator",
+        "network"
     ]
 }

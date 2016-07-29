@@ -10711,7 +10711,9 @@
         "icon": "route",
         "fields": [
             "route",
-            "ref"
+            "ref",
+            "operator",
+            "network"
         ]
     },
     "type/route/bicycle": {
@@ -10881,7 +10883,8 @@
         "icon": "route-train",
         "fields": [
             "ref",
-            "operator"
+            "operator",
+            "network"
         ]
     },
     "type/route/tram": {
@@ -10896,7 +10899,8 @@
         "icon": "route-tram",
         "fields": [
             "ref",
-            "operator"
+            "operator",
+            "network"
         ]
     },
     "type/site": {
