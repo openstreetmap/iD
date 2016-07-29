@@ -281,6 +281,9 @@ en:
       currency_multi:
         # 'currency:=*'
         label: Currency Types
+      cycle_network:
+        # cycle_network=*
+        label: Network
       cycleway:
         # 'cycleway:left=*, cycleway:right=*'
         label: Bike Lanes
@@ -643,6 +646,34 @@ en:
       network:
         # network=*
         label: Network
+      network_bicycle:
+        # network=*
+        label: Network Type
+        options:
+          # network=icn
+          icn: International
+          # network=lcn
+          lcn: Local
+          # network=ncn
+          ncn: National
+          # network=rcn
+          rcn: Regional
+        # network_bicycle field placeholder
+        placeholder: 'Local, Regional, National, International'
+      network_foot:
+        # network=*
+        label: Network Type
+        options:
+          # network=iwn
+          iwn: International
+          # network=lwn
+          lwn: Local
+          # network=nwn
+          nwn: National
+          # network=rwn
+          rwn: Regional
+        # network_foot field placeholder
+        placeholder: 'Local, Regional, National, International'
       note:
         # note=*
         label: Note
