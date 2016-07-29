@@ -4274,6 +4274,33 @@
         },
         "name": "Water Hazard"
     },
+    "healthcare/blood_donation": {
+        "icon": "hospital",
+        "fields": [
+            "operator",
+            "address",
+            "blood_components",
+            "opening_hours",
+            "ref"
+        ],
+        "geometry": [
+            "point",
+            "area"
+        ],
+        "terms": [
+            "blood bank",
+            "blood donation",
+            "blood transfusion",
+            "apheresis",
+            "plasmapheresis",
+            "plateletpheresis",
+            "stem cell donation"
+        ],
+        "tags": {
+            "healthcare": "blood_donation"
+        },
+        "name": "Blood Donor Center"
+    },
     "highway": {
         "fields": [
             "highway"
@@ -5712,9 +5739,9 @@
             "area"
         ],
         "terms": [
-            "crazy",
-            "mini",
-            "putt"
+            "crazy golf",
+            "mini golf",
+            "putt-putt"
         ],
         "tags": {
             "leisure": "miniature_golf"
