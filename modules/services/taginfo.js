@@ -49,9 +49,10 @@ function filterMultikeys() {
     };
 }
 
-function filterValues() {
+function filterValues(allowUpperCase) {
     return function(d) {
-        if (d.value.match(/[A-Z*;,]/) !== null) return false;  // exclude some punctuation, uppercase letters
+        if (d.value.match(/[;,]/) !== null) return false;  // exclude some punctuation
+        if (!allowUpperCase && d.value.match(/[A-Z*]/) !== null) return false;  // exclude uppercase letters
         return parseFloat(d.fraction) > 0.0 || d.in_wiki;
     };
 }
@@ -140,7 +141,7 @@ export function init() {
                 page: 1
             }, parameters)), debounce, function(err, d) {
                 if (err) return callback(err);
-                var f = filterValues();
+                var f = filterValues(parameters.key === 'cycle_network' || parameters.key === 'network');
                 callback(null, d.data.filter(f).map(valKeyDescription));
             });
     };
