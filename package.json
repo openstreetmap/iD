@@ -34,7 +34,7 @@
     "chai": "3.5.0",
     "d3": "3.5.5",
     "editor-layer-index": "git://github.com/osmlab/editor-layer-index.git#gh-pages",
-    "eslint": "~3.1.1",
+    "eslint": "~3.2.0",
     "glob": "~7.0.5",
     "happen": "0.3.1",
     "http-server": "0.9.0",
