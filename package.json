@@ -45,7 +45,7 @@
     "mocha": "2.5.3",
     "mocha-phantomjs-core": "2.0.1",
     "name-suggestion-index": "0.1.1",
-    "phantomjs-prebuilt": "2.1.8",
+    "phantomjs-prebuilt": "2.1.9",
     "request": "~2.73.0",
     "rollup": "0.34.1",
     "rollup-plugin-commonjs": "3.3.1",
