@@ -618,6 +618,11 @@
         "type": "combo",
         "label": "Incline"
     },
+    "indoor": {
+        "key": "indoor",
+        "type": "check",
+        "label": "Indoor"
+    },
     "information": {
         "key": "information",
         "type": "typeCombo",

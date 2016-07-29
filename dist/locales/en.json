@@ -1028,6 +1028,9 @@
             "incline": {
                 "label": "Incline"
             },
+            "indoor": {
+                "label": "Indoor"
+            },
             "information": {
                 "label": "Type"
             },

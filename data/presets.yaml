@@ -447,6 +447,9 @@ en:
           down: Down
           # incline=up
           up: Up
+      indoor:
+        # indoor=*
+        label: Indoor
       information:
         # information=*
         label: Type
