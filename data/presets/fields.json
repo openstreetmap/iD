@@ -906,6 +906,11 @@
             }
         }
     },
+    "network_road": {
+        "key": "network",
+        "type": "networkCombo",
+        "label": "Network"
+    },
     "network": {
         "key": "network",
         "type": "text",

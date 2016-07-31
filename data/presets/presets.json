@@ -10868,7 +10868,7 @@
         "icon": "route-road",
         "fields": [
             "ref",
-            "network"
+            "network_road"
         ]
     },
     "type/route/train": {
