@@ -140,7 +140,7 @@ export function combo(field, context) {
     function setTaginfoValues(q, callback) {
         var fn = isMulti ? 'multikeys' : 'values';
         var query = (isMulti ? field.key : '') + q;
-        if (isNetwork && countryCode && countryCode.indexOf(q) === 0) {
+        if (isNetwork && countryCode && countryCode.indexOf(q.toLowerCase()) === 0) {
             query = countryCode + ':';
         }
         context.taginfo()[fn]({
