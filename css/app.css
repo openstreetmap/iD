@@ -752,6 +752,7 @@ button.save.has-count .count::before {
 
 .feature-list-item .close {
     float: right;
+    padding: 10px;
 }
 
 .feature-list-item .close .icon {
