@@ -722,9 +722,24 @@ button.save.has-count .count::before {
     border-radius: 0;
 }
 
+.feature-list-item {
+    background-color: white;
+    font-weight: bold;
+    height: 40px;
+    line-height: 20px;
+}
+
+.feature-list-item:hover {
+    background-color: #ececec;
+}
+
+.feature-list-item button {
+    background: transparent;
+}
+
 .feature-list-item .label {
     text-align: left;
-    padding: 5px 10px;
+    padding: 10px 10px;
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
@@ -735,16 +750,12 @@ button.save.has-count .count::before {
     opacity: .5;
 }
 
-.feature-list-item .label .close {
+.feature-list-item .close {
     float: right;
 }
 
-.feature-list-item .label .close .icon {
+.feature-list-item .close .icon {
     opacity: 1;
-}
-
-.feature-list-item:hover .label {
-    background-color: #ececec;
 }
 
 .feature-list-item .entity-type {
