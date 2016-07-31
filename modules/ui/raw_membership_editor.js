@@ -159,7 +159,12 @@ export function RawMembershipEditor(context) {
                 .on('click', deleteMembership)
                 .call(Icon('#operation-delete'));
 
+            if (context.taginfo()) {
+                $enter.each(bindTypeahead);
+            }
+
             $items.exit()
+                .each(unbind)
                 .remove();
 
             if (showBlank) {
@@ -213,6 +218,44 @@ export function RawMembershipEditor(context) {
                     content($wrap);
                     $list.selectAll('.member-entity-input').node().focus();
                 });
+
+            function bindTypeahead(d) {
+                var row = d3.select(this),
+                    role = row.selectAll('input.member-role');
+    
+                function sort(value, data) {
+                    var sameletter = [],
+                        other = [];
+                    for (var i = 0; i < data.length; i++) {
+                        if (data[i].value.substring(0, value.length) === value) {
+                            sameletter.push(data[i]);
+                        } else {
+                            other.push(data[i]);
+                        }
+                    }
+                    return sameletter.concat(other);
+                }
+    
+                role.call(d3.combobox()
+                    .fetcher(function(role, callback) {
+                        var rtype = d.relation.tags.type;
+                        context.taginfo().roles({
+                            debounce: true,
+                            rtype: rtype || '',
+                            geometry: context.geometry(id),
+                            query: role
+                        }, function(err, data) {
+                            if (!err) callback(sort(role, data));
+                        });
+                    }));
+            }
+    
+            function unbind() {
+                var row = d3.select(this);
+    
+                row.selectAll('input.member-role')
+                    .call(d3.combobox.off);
+            }
         }
     }
 
