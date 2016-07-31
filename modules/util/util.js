@@ -29,8 +29,15 @@ export function entityOrMemberSelector(ids, graph) {
 }
 
 export function displayName(entity) {
-    var localeName = 'name:' + Detect().locale.toLowerCase().split('-')[0];
-    return entity.tags[localeName] || entity.tags.name || entity.tags.ref;
+    var localizedNameKey = 'name:' + Detect().locale.toLowerCase().split('-')[0];
+    var name = entity.tags[localizedNameKey] || entity.tags.name;
+    if (!name && entity.tags.ref) {
+        name = entity.tags.ref;
+        if (entity.tags.network) {
+            name = entity.tags.network + ' ' + name;
+        }
+    }
+    return name;
 }
 
 export function displayType(id) {
