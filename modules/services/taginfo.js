@@ -156,7 +156,7 @@ export function init() {
 
         request(endpoint + path + qsString(parameters), debounce, function(err, d) {
             if (err) return callback(err);
-            callback(null, d.data);
+            callback(null, parameters.rtype ? d : d.data);
         });
     };
 
