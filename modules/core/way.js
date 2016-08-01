@@ -164,7 +164,7 @@ _.extend(Way.prototype, {
             metadata.backward = parseInt(this.tags['lanes:backward']);
 
             if (_.isNaN(metadata.forward) && _.isNaN(metadata.backward)) {
-                metadata.forward = parseInt((metadata.count - metadata.bothways)/2);
+                metadata.forward = parseInt((metadata.count - metadata.bothways) / 2);
                 metadata.backward = metadata.count - metadata.bothways - metadata.forward;
             }
             else if (_.isNaN(metadata.forward)) {
@@ -177,7 +177,6 @@ _.extend(Way.prototype, {
                 metadata.backward = metadata.count - metadata.bothways - metadata.forward;
             }
         }
-
 
         return {
             metadata: metadata,

@@ -24,7 +24,7 @@ export function lanes(field, context) {
             .data([0]);
 
         var d = wrap.dimensions();
-        var freeSpace = d[0] - lanesData.lanes.length*LANE_WIDTH*1.5 + LANE_WIDTH*0.5;
+        var freeSpace = d[0] - lanesData.lanes.length * LANE_WIDTH * 1.5 + LANE_WIDTH * 0.5;
 
         surface.enter()
             .append('svg')
@@ -41,7 +41,7 @@ export function lanes(field, context) {
 
         lanesSelection
             .attr('transform', function () {
-                return 'translate(' + (freeSpace/2)+ ', 0)';
+                return 'translate(' + (freeSpace / 2) + ', 0)';
             });
 
         var lane = lanesSelection.selectAll('.lane')
@@ -86,7 +86,7 @@ export function lanes(field, context) {
 
         lane
             .attr('transform', function(d) {
-                return 'translate(' + (LANE_WIDTH*d.index*1.5)+ ', 0)';
+                return 'translate(' + (LANE_WIDTH * d.index * 1.5) + ', 0)';
             });
 
         lane.select('.forward')
