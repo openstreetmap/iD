@@ -561,27 +561,27 @@ describe('iD.Way', function() {
             describe('motorway', function() {
 
                 it('returns 2 lanes for highway=motorway', function() {
-                    expect(iD.Way({tags: { highway: 'motorway' }}).lanes().defaults, 'motorway lanes')
-                        .to.eql({ lanes: { count: 2 } });
-                    expect(iD.Way({tags: { highway: 'motorway', oneway: 'yes' }}).lanes().defaults, 'motorway lanes')
-                        .to.eql({ lanes: { count: 2 } });
+                    expect(iD.Way({tags: { highway: 'motorway' }}).lanes().metadata.count, 'motorway lanes')
+                        .to.eql(2);
+                    expect(iD.Way({tags: { highway: 'motorway', oneway: 'yes' }}).lanes().metadata.count, 'motorway lanes')
+                        .to.eql(2);
                 });
 
                 it('returns 4 lanes for highway=motorway and oneway=no', function() {
-                    expect(iD.Way({tags: { highway: 'motorway', oneway: 'no' }}).lanes().defaults, 'motorway lanes')
-                        .to.eql({ lanes: {count: 4 } });
+                    expect(iD.Way({tags: { highway: 'motorway', oneway: 'no' }}).lanes().metadata.count, 'motorway lanes')
+                        .to.eql(4);
                 });
 
                 it('returns 1 lane for highway=motorway_link', function() {
-                    expect(iD.Way({tags: { highway: 'motorway_link' }}).lanes().defaults, 'motorway_link lanes')
-                        .to.eql({ lanes: { count: 1 } });
-                    expect(iD.Way({tags: { highway: 'motorway_link', oneway: 'yes' }}).lanes().defaults, 'motorway_link lanes')
-                        .to.eql({ lanes: { count: 1 } });
+                    expect(iD.Way({tags: { highway: 'motorway_link' }}).lanes().metadata.count, 'motorway_link lanes')
+                        .to.eql(1);
+                    expect(iD.Way({tags: { highway: 'motorway_link', oneway: 'yes' }}).lanes().metadata.count, 'motorway_link lanes')
+                        .to.eql(1);
                 });
 
                 it('returns 2 lanes for highway=motorway_link and oneway=no', function() {
-                    expect(iD.Way({tags: { highway: 'motorway_link', oneway: 'no' }}).lanes().defaults, 'motorway_link lanes')
-                        .to.eql({ lanes: { count: 2 } });
+                    expect(iD.Way({tags: { highway: 'motorway_link', oneway: 'no' }}).lanes().metadata.count, 'motorway_link lanes')
+                        .to.eql(2);
                 });
 
             });
@@ -589,204 +589,359 @@ describe('iD.Way', function() {
             describe('trunk', function() {
 
                 it('returns 4 lanes for highway=trunk', function() {
-                    expect(iD.Way({tags: { highway: 'trunk' }}).lanes().defaults, 'trunk lanes')
-                        .to.eql({ lanes: { count: 4 } });
-                    expect(iD.Way({tags: { highway: 'trunk', oneway: 'no' }}).lanes().defaults, 'trunk lanes')
-                        .to.eql({ lanes: { count: 4 } });
+                    expect(iD.Way({tags: { highway: 'trunk' }}).lanes().metadata.count, 'trunk lanes')
+                        .to.eql(4);
+                    expect(iD.Way({tags: { highway: 'trunk', oneway: 'no' }}).lanes().metadata.count, 'trunk lanes')
+                        .to.eql(4);
                 });
 
                 it('returns 2 lanes for highway=trunk and oneway=yes', function() {
-                    expect(iD.Way({tags: { highway: 'trunk', oneway: 'yes' }}).lanes().defaults, 'trunk lanes')
-                        .to.eql({ lanes: { count: 2 } });
+                    expect(iD.Way({tags: { highway: 'trunk', oneway: 'yes' }}).lanes().metadata.count, 'trunk lanes')
+                        .to.eql(2);
                 });
 
                 it('returns 2 lanes for highway=trunk_link', function() {
-                    expect(iD.Way({tags: { highway: 'trunk_link' }}).lanes().defaults, 'trunk_link lanes')
-                        .to.eql({ lanes: { count: 2 } });
-                    expect(iD.Way({tags: { highway: 'trunk_link', oneway: 'no' }}).lanes().defaults, 'trunk_link lanes')
-                        .to.eql({ lanes: { count: 2 } });
+                    expect(iD.Way({tags: { highway: 'trunk_link' }}).lanes().metadata.count, 'trunk_link lanes')
+                        .to.eql(2);
+                    expect(iD.Way({tags: { highway: 'trunk_link', oneway: 'no' }}).lanes().metadata.count, 'trunk_link lanes')
+                        .to.eql(2);
                 });
 
                 it('returns 1 lane for highway=trunk_link and oneway=yes', function() {
-                    expect(iD.Way({tags: { highway: 'trunk_link', oneway: 'yes' }}).lanes().defaults, 'trunk_link lanes')
-                        .to.eql({ lanes: { count: 1 } });
+                    expect(iD.Way({tags: { highway: 'trunk_link', oneway: 'yes' }}).lanes().metadata.count, 'trunk_link lanes')
+                        .to.eql(1);
                 });
             });
 
             describe('primary', function() {
 
                 it('returns 2 lanes for highway=primary', function() {
-                    expect(iD.Way({tags: { highway: 'primary' }}).lanes().defaults, 'primary lanes')
-                        .to.eql({ lanes: { count: 2 } });
-                    expect(iD.Way({tags: { highway: 'primary', oneway: 'no' }}).lanes().defaults, 'primary lanes')
-                        .to.eql({ lanes: { count: 2 } });
+                    expect(iD.Way({tags: { highway: 'primary' }}).lanes().metadata.count, 'primary lanes')
+                        .to.eql(2);
+                    expect(iD.Way({tags: { highway: 'primary', oneway: 'no' }}).lanes().metadata.count, 'primary lanes')
+                        .to.eql(2);
                 });
 
                 it('returns 1 lane for highway=primary and oneway=yes', function() {
-                    expect(iD.Way({tags: { highway: 'primary', oneway: 'yes' }}).lanes().defaults, 'primary lanes')
-                        .to.eql({ lanes: { count: 1 } });
+                    expect(iD.Way({tags: { highway: 'primary', oneway: 'yes' }}).lanes().metadata.count, 'primary lanes')
+                        .to.eql(1);
                 });
 
                 it('returns 2 lanes for highway=primary_link', function() {
-                    expect(iD.Way({tags: { highway: 'primary_link' }}).lanes().defaults, 'primary lanes')
-                        .to.eql({ lanes: { count: 2 } });
-                    expect(iD.Way({tags: { highway: 'primary_link', oneway: 'no' }}).lanes().defaults, 'primary lanes')
-                        .to.eql({ lanes: { count: 2 } });
+                    expect(iD.Way({tags: { highway: 'primary_link' }}).lanes().metadata.count, 'primary lanes')
+                        .to.eql(2);
+                    expect(iD.Way({tags: { highway: 'primary_link', oneway: 'no' }}).lanes().metadata.count, 'primary lanes')
+                        .to.eql(2);
                 });
 
                 it('returns 1 lane for highway=primary_link and oneway=yes', function() {
-                    expect(iD.Way({tags: { highway: 'primary_link', oneway: 'yes' }}).lanes().defaults, 'primary lanes')
-                        .to.eql({ lanes: { count: 1 } });
+                    expect(iD.Way({tags: { highway: 'primary_link', oneway: 'yes' }}).lanes().metadata.count, 'primary lanes')
+                        .to.eql(1);
                 });
             });
 
             describe('seconday', function() {
 
                 it('returns 2 lanes for highway=secondary', function() {
-                    expect(iD.Way({tags: { highway: 'secondary' }}).lanes().defaults, 'secondary lanes')
-                        .to.eql({ lanes: { count: 2 } });
-                    expect(iD.Way({tags: { highway: 'secondary', oneway: 'no' }}).lanes().defaults, 'secondary lanes')
-                        .to.eql({ lanes: { count: 2 } });
+                    expect(iD.Way({tags: { highway: 'secondary' }}).lanes().metadata.count, 'secondary lanes')
+                        .to.eql(2);
+                    expect(iD.Way({tags: { highway: 'secondary', oneway: 'no' }}).lanes().metadata.count, 'secondary lanes')
+                        .to.eql(2);
                 });
 
                 it('returns 1 lane for highway=secondary and oneway=yes', function() {
-                    expect(iD.Way({tags: { highway: 'secondary', oneway: 'yes' }}).lanes().defaults, 'secondary lanes')
-                        .to.eql({ lanes: { count: 1 } });
+                    expect(iD.Way({tags: { highway: 'secondary', oneway: 'yes' }}).lanes().metadata.count, 'secondary lanes')
+                        .to.eql(1);
                 });
 
                 it('returns 2 lane for highway=secondary_link', function() {
-                    expect(iD.Way({tags: { highway: 'secondary_link' }}).lanes().defaults, 'secondary_link lanes')
-                        .to.eql({ lanes: { count: 2 } });
-                    expect(iD.Way({tags: { highway: 'secondary_link', oneway: 'no' }}).lanes().defaults, 'secondary_link lanes')
-                        .to.eql({ lanes: { count: 2 } });
+                    expect(iD.Way({tags: { highway: 'secondary_link' }}).lanes().metadata.count, 'secondary_link lanes')
+                        .to.eql(2);
+                    expect(iD.Way({tags: { highway: 'secondary_link', oneway: 'no' }}).lanes().metadata.count, 'secondary_link lanes')
+                        .to.eql(2);
                 });
 
                 it('returns 1 lane for highway=secondary_link and oneway=yes', function() {
-                    expect(iD.Way({tags: { highway: 'secondary_link', oneway: 'yes' }}).lanes().defaults, 'secondary_link lanes')
-                        .to.eql({ lanes: { count: 1 } });
+                    expect(iD.Way({tags: { highway: 'secondary_link', oneway: 'yes' }}).lanes().metadata.count, 'secondary_link lanes')
+                        .to.eql(1);
                 });
             });
 
             describe('tertiary', function() {
 
                 it('returns 2 lanes for highway=tertiary', function() {
-                    expect(iD.Way({tags: { highway: 'tertiary' }}).lanes().defaults, 'tertiary lanes')
-                        .to.eql({ lanes: { count: 2 } });
-                    expect(iD.Way({tags: { highway: 'tertiary', oneway: 'no' }}).lanes().defaults, 'tertiary lanes')
-                        .to.eql({ lanes: { count: 2 } });
+                    expect(iD.Way({tags: { highway: 'tertiary' }}).lanes().metadata.count, 'tertiary lanes')
+                        .to.eql(2);
+                    expect(iD.Way({tags: { highway: 'tertiary', oneway: 'no' }}).lanes().metadata.count, 'tertiary lanes')
+                        .to.eql(2);
                 });
 
                 it('returns 1 lane for highway=tertiary and oneway=yes', function() {
-                    expect(iD.Way({tags: { highway: 'tertiary', oneway: 'yes' }}).lanes().defaults, 'tertiary lanes')
-                        .to.eql({ lanes: { count: 1 } });
+                    expect(iD.Way({tags: { highway: 'tertiary', oneway: 'yes' }}).lanes().metadata.count, 'tertiary lanes')
+                        .to.eql(1);
                 });
 
                 it('returns 2 lane for highway=tertiary_link', function() {
-                    expect(iD.Way({tags: { highway: 'tertiary_link' }}).lanes().defaults, 'tertiary_link lanes')
-                        .to.eql({ lanes: { count: 2 } });
-                    expect(iD.Way({tags: { highway: 'tertiary_link', oneway: 'no' }}).lanes().defaults, 'tertiary_link lanes')
-                        .to.eql({ lanes: { count: 2 } });
+                    expect(iD.Way({tags: { highway: 'tertiary_link' }}).lanes().metadata.count, 'tertiary_link lanes')
+                        .to.eql(2);
+                    expect(iD.Way({tags: { highway: 'tertiary_link', oneway: 'no' }}).lanes().metadata.count, 'tertiary_link lanes')
+                        .to.eql(2);
                 });
 
                 it('returns 1 lane for highway=tertiary_link and oneway=yes', function() {
-                    expect(iD.Way({tags: { highway: 'tertiary_link', oneway: 'yes' }}).lanes().defaults, 'tertiary_link lanes')
-                        .to.eql({ lanes: { count: 1 } });
+                    expect(iD.Way({tags: { highway: 'tertiary_link', oneway: 'yes' }}).lanes().metadata.count, 'tertiary_link lanes')
+                        .to.eql(1);
                 });
             });
 
             describe('residential', function() {
 
                 it('returns 2 lanes for highway=residential', function() {
-                    expect(iD.Way({tags: { highway: 'residential' }}).lanes().defaults, 'residential lanes')
-                        .to.eql({ lanes: { count: 2 } });
-                    expect(iD.Way({tags: { highway: 'residential', oneway: 'no' }}).lanes().defaults, 'residential lanes')
-                        .to.eql({ lanes: { count: 2 } });
+                    expect(iD.Way({tags: { highway: 'residential' }}).lanes().metadata.count, 'residential lanes')
+                        .to.eql(2);
+                    expect(iD.Way({tags: { highway: 'residential', oneway: 'no' }}).lanes().metadata.count, 'residential lanes')
+                        .to.eql(2);
                 });
 
                 it('returns 1 lane for highway=residential and oneway=yes', function() {
-                    expect(iD.Way({tags: { highway: 'residential', oneway: 'yes' }}).lanes().defaults, 'residential lanes')
-                        .to.eql({ lanes: { count: 1 } });
+                    expect(iD.Way({tags: { highway: 'residential', oneway: 'yes' }}).lanes().metadata.count, 'residential lanes')
+                        .to.eql(1);
                 });
             });
 
             describe('service', function() {
 
                 it('returns 2 lanes for highway=service', function() {
-                    expect(iD.Way({tags: { highway: 'service' }}).lanes().defaults, 'service lanes')
-                        .to.eql({ lanes: { count: 2 } });
-                    expect(iD.Way({tags: { highway: 'service', oneway: 'no' }}).lanes().defaults, 'service lanes')
-                        .to.eql({ lanes: { count: 2 } });
+                    expect(iD.Way({tags: { highway: 'service' }}).lanes().metadata.count, 'service lanes')
+                        .to.eql(2);
+                    expect(iD.Way({tags: { highway: 'service', oneway: 'no' }}).lanes().metadata.count, 'service lanes')
+                        .to.eql(2);
                 });
 
                 it('returns 1 lane for highway=service and oneway=yes', function() {
-                    expect(iD.Way({tags: { highway: 'service', oneway: 'yes' }}).lanes().defaults, 'service lanes')
-                        .to.eql({ lanes: { count: 1 } });
+                    expect(iD.Way({tags: { highway: 'service', oneway: 'yes' }}).lanes().metadata.count, 'service lanes')
+                        .to.eql(1);
                 });
             });
 
             describe('track', function() {
 
                 it('returns 2 lanes for highway=track', function() {
-                    expect(iD.Way({tags: { highway: 'track' }}).lanes().defaults, 'track lanes')
-                        .to.eql({ lanes: { count: 2 } });
-                    expect(iD.Way({tags: { highway: 'track', oneway: 'no' }}).lanes().defaults, 'track lanes')
-                        .to.eql({ lanes: { count: 2 } });
+                    expect(iD.Way({tags: { highway: 'track' }}).lanes().metadata.count, 'track lanes')
+                        .to.eql(2);
+                    expect(iD.Way({tags: { highway: 'track', oneway: 'no' }}).lanes().metadata.count, 'track lanes')
+                        .to.eql(2);
                 });
 
                 it('returns 1 lane for highway=track and oneway=yes', function() {
-                    expect(iD.Way({tags: { highway: 'track', oneway: 'yes' }}).lanes().defaults, 'track lanes')
-                        .to.eql({ lanes: { count: 1 } });
+                    expect(iD.Way({tags: { highway: 'track', oneway: 'yes' }}).lanes().metadata.count, 'track lanes')
+                        .to.eql(1);
                 });
             });
 
             describe('path', function() {
 
                 it('returns 2 lanes for highway=path', function() {
-                    expect(iD.Way({tags: { highway: 'path' }}).lanes().defaults, 'path lanes')
-                        .to.eql({ lanes: { count: 2 } });
-                    expect(iD.Way({tags: { highway: 'path', oneway: 'no' }}).lanes().defaults, 'path lanes')
-                        .to.eql({ lanes: { count: 2 } });
+                    expect(iD.Way({tags: { highway: 'path' }}).lanes().metadata.count, 'path lanes')
+                        .to.eql(2);
+                    expect(iD.Way({tags: { highway: 'path', oneway: 'no' }}).lanes().metadata.count, 'path lanes')
+                        .to.eql(2);
                 });
 
                 it('returns 1 lane for highway=path and oneway=yes', function() {
-                    expect(iD.Way({tags: { highway: 'path', oneway: 'yes' }}).lanes().defaults, 'path lanes')
-                        .to.eql({ lanes: { count: 1 } });
+                    expect(iD.Way({tags: { highway: 'path', oneway: 'yes' }}).lanes().metadata.count, 'path lanes')
+                        .to.eql(1);
                 });
             });
         });
 
-        describe('tagged', function() {
-
+        describe('oneway tags', function() {
             it('correctly returns oneway when tagged as oneway', function() {
-                expect(iD.Way({tags: { highway: 'residential', oneway: 'yes' }}).lanes().tagged.oneway, 'service lanes')
+                expect(iD.Way({tags: { highway: 'residential', oneway: 'yes' }}).lanes().metadata.oneway, 'residential lanes')
                     .to.be.true;
-                expect(iD.Way({tags: { highway: 'residential', oneway: 'no' }}).lanes().tagged.oneway, 'service lanes')
+                expect(iD.Way({tags: { highway: 'residential', oneway: 'no' }}).lanes().metadata.oneway, 'residential lanes')
                     .to.be.false;
             });
+        });
 
-            it('correctly returns lane count', function() {
-                expect(iD.Way({tags: { highway: 'residential', oneway: 'yes', lanes: 4 }}).lanes().tagged.lanes, 'service lanes')
-                    .to.eql({ count: 4 });
-                expect(iD.Way({tags: { highway: 'path', lanes: 1 }}).lanes().tagged.lanes, 'service lanes')
-                    .to.eql({ count: 1 });
-            });
-
+        describe('lane direction', function() {
             it('correctly returns the lane:forward and lane:backward count', function() {
-                expect(iD.Way({tags: { highway: 'residential', lanes: 2, 'lanes:forward': 1, 'lanes:backward': 1 }}).lanes().tagged.lanes, 'residential lanes')
+                expect(iD.Way({tags: { highway: 'residential', lanes: 2, 'lanes:forward': 1, 'lanes:backward': 1 }}).lanes().metadata, 'residential lanes')
                     .to.eql({
                         count: 2,
+                        oneway: false,
                         forward: 1,
-                        backward: 1
+                        backward: 1,
+                        bothways: 0
                     });
-                expect(iD.Way({tags: { highway: 'trunk', lanes: 2, oneway: 'yes' }}).lanes().tagged.lanes, 'trunk lanes')
-                    .to.eql({
-                        count: 2
-                    });
-                expect(iD.Way({tags: { highway: 'primary', lanes: 4, 'lanes:backward': 3, 'lanes:forward': 1 }}).lanes().tagged.lanes, 'primary lanes')
+                expect(iD.Way({tags: { highway: 'residential', lanes: 4, 'lanes:forward': 3, 'lanes:backward': 1 }}).lanes().metadata, 'residential lanes')
                     .to.eql({
                         count: 4,
+                        oneway: false,
+                        forward: 3,
+                        backward: 1,
+                        bothways: 0
+                    });
+            });
+            it('correctly returns count under total count if erroneous values are supplied', function() {
+                expect(iD.Way({tags: { highway: 'trunk', lanes: 2, 'lanes:forward': 3 }}).lanes().metadata, 'trunk lanes')
+                    .to.eql({
+                        count: 2,
+                        oneway: false,
+                        forward: 2,
+                        backward: 0,
+                        bothways: 0
+                    });
+            });
+            it('correctly returns forward count when oneway=yes', function() {
+                expect(iD.Way({tags: { highway: 'trunk', lanes: 2, oneway: 'yes' }}).lanes().metadata, 'trunk lanes')
+                    .to.eql({
+                        count: 2,
+                        oneway: true,
+                        forward: 2,
+                        backward: 0,
+                        bothways: 0
+                    });
+            });
+            it('correctly returns backward count the when oneway=-1', function() {
+                expect(iD.Way({tags: { highway: 'primary', lanes: 4, oneway: '-1' }}).lanes().metadata, 'primary lanes')
+                    .to.eql({
+                        count: 4,
+                        oneway: true,
+                        backward: 4,
+                        forward: 0,
+                        bothways: 0
+                    });
+            });
+            it('skips provided lanes:forward value when oneway=yes', function() {
+                expect(iD.Way({tags: { highway: 'trunk', lanes: 2, oneway: 'yes', 'lanes:forward': 1 }}).lanes().metadata, 'trunk lanes')
+                    .to.eql({
+                        count: 2,
+                        oneway: true,
+                        forward: 2,
+                        backward: 0,
+                        bothways: 0
+                    });
+            });
+            it('skips provided lanes:backward value when oneway=yes', function() {
+                expect(iD.Way({tags: { highway: 'trunk', lanes: 2, oneway: 'yes', 'lanes:backward': 1 }}).lanes().metadata, 'trunk lanes')
+                    .to.eql({
+                        count: 2,
+                        oneway: true,
+                        forward: 2,
+                        backward: 0,
+                        bothways: 0
+                    });
+            });
+            it('correctly returns forward count if only backward is supplied', function() {
+                expect(iD.Way({tags: { highway: 'residential', lanes: 3, 'lanes:backward': 1, }}).lanes().metadata, 'residential lanes')
+                    .to.eql({
+                        count: 3,
+                        oneway: false,
+                        forward: 2,
+                        backward: 1,
+                        bothways: 0
+                    });
+                expect(iD.Way({tags: { highway: 'residential', lanes: 4, 'lanes:backward': 3, }}).lanes().metadata, 'residential lanes')
+                    .to.eql({
+                        count: 4,
+                        oneway: false,
+                        forward: 1,
                         backward: 3,
-                        forward: 1
+                        bothways: 0
+                    });
+            });
+            it('correctly returns backward count if only forward is supplied', function() {
+                expect(iD.Way({tags: { highway: 'residential', lanes: 3, 'lanes:forward': 1, }}).lanes().metadata, 'residential lanes')
+                    .to.eql({
+                        count: 3,
+                        oneway: false,
+                        forward: 1,
+                        backward: 2,
+                        bothways: 0
+                    });
+                expect(iD.Way({tags: { highway: 'residential', lanes: 2, 'lanes:forward': 1, }}).lanes().metadata, 'residential lanes')
+                    .to.eql({
+                        count: 2,
+                        oneway: false,
+                        forward: 1,
+                        backward: 1,
+                        bothways: 0
+                    });
+            });
+            it('correctly returns backward count if forward and both_ways are supplied', function() {
+                expect(iD.Way({tags: { highway: 'residential', lanes: 3, 'lanes:forward': 1, 'lanes:both_ways': 1 }}).lanes().metadata, 'residential lanes')
+                    .to.eql({
+                        count: 3,
+                        oneway: false,
+                        forward: 1,
+                        backward: 1,
+                        bothways: 1
+                    });
+                expect(iD.Way({tags: { highway: 'residential', lanes: 5, 'lanes:forward': 1, 'lanes:both_ways': 1 }}).lanes().metadata, 'residential lanes')
+                    .to.eql({
+                        count: 5,
+                        oneway: false,
+                        forward: 1,
+                        backward: 3,
+                        bothways: 1
+                    });
+            });
+            it('correctly returns forward count if backward and both_ways are supplied', function() {
+                expect(iD.Way({tags: { highway: 'residential', lanes: 3, 'lanes:backward': 1, 'lanes:both_ways': 1 }}).lanes().metadata, 'residential lanes')
+                    .to.eql({
+                        count: 3,
+                        oneway: false,
+                        forward: 1,
+                        backward: 1,
+                        bothways: 1
+                    });
+                expect(iD.Way({tags: { highway: 'residential', lanes: 5, 'lanes:backward': 1, 'lanes:both_ways': 1 }}).lanes().metadata, 'residential lanes')
+                    .to.eql({
+                        count: 5,
+                        oneway: false,
+                        forward: 3,
+                        backward: 1,
+                        bothways: 1
+                    });
+            });
+
+            it('correctly returns the lane:both_ways count as 1', function() {
+                expect(iD.Way({tags: { highway: 'residential', lanes: 2, 'lanes:forward': 1, 'lanes:both_ways': 1 }}).lanes().metadata, 'residential lanes')
+                    .to.eql({
+                        count: 2,
+                        oneway: false,
+                        forward: 1,
+                        backward: 0,
+                        bothways: 1
+                    });
+            });
+            it('correctly returns when lane:both_ways>1', function() {
+                expect(iD.Way({tags: { highway: 'residential', lanes: 5, 'lanes:forward': 2, 'lanes:both_ways': 2, 'lanes:backward': 2 }}).lanes().metadata, 'residential lanes')
+                    .to.eql({
+                        count: 5,
+                        oneway: false,
+                        forward: 2,
+                        backward: 2,
+                        bothways: 1
+                    });
+            });
+            it('correctly returns the lane:both_ways as 0 or NaN', function() {
+                expect(iD.Way({tags: { highway: 'residential', lanes: 5, 'lanes:forward': 2, 'lanes:both_ways': 0, 'lanes:backward': 3 }}).lanes().metadata, 'residential lanes')
+                    .to.eql({
+                        count: 5,
+                        oneway: false,
+                        forward: 2,
+                        backward: 3,
+                        bothways: 0
+                    });
+                expect(iD.Way({tags: { highway: 'residential', lanes: 2, 'lanes:forward': 1, 'lanes:both_ways': 'none' }}).lanes().metadata, 'residential lanes')
+                    .to.eql({
+                        count: 2,
+                        oneway: false,
+                        forward: 1,
+                        backward: 1,
+                        bothways: 0
                     });
             });
         });
