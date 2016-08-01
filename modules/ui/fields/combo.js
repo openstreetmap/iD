@@ -143,13 +143,14 @@ export function combo(field, context) {
             query: (isMulti ? field.key : '') + q
         }, function(err, data) {
             if (err) return;
-            comboData = _.map(data, 'value').map(function(k) {
+            comboData = _.map(data, function(d) {
+                var k = d.value;
                 if (isMulti) k = k.replace(field.key, '');
                 var v = snake_case ? unsnake(k) : k;
                 return {
                     key: k,
                     value: v,
-                    title: v
+                    title: isMulti ? v : d.title
                 };
             });
             comboData = objectDifference(comboData, multiData);
