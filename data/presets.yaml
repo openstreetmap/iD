@@ -688,6 +688,9 @@ en:
           rhn: Regional
         # network_horse field placeholder
         placeholder: 'Local, Regional, National, International'
+      network_road:
+        # network=*
+        label: Network
       note:
         # note=*
         label: Note

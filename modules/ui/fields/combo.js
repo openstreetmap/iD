@@ -3,11 +3,13 @@ import _ from 'lodash';
 
 export {
     combo as typeCombo,
-    combo as multiCombo
+    combo as multiCombo,
+    combo as networkCombo
 };
 export function combo(field, context) {
     var dispatch = d3.dispatch('change'),
         isMulti = (field.type === 'multiCombo'),
+        isNetwork = (field.type === 'networkCombo'),
         optstrings = field.strings && field.strings.options,
         optarray = field.options,
         snake_case = (field.snake_case || (field.snake_case === undefined)),
@@ -16,7 +18,8 @@ export function combo(field, context) {
         multiData = [],
         container,
         input,
-        entity;
+        entity,
+        countryCode;
 
     // ensure multiCombo field.key ends with a ':'
     if (isMulti && field.key.match(/:$/) === null) {
@@ -136,13 +139,23 @@ export function combo(field, context) {
 
     function setTaginfoValues(q, callback) {
         var fn = isMulti ? 'multikeys' : 'values';
+        var query = (isMulti ? field.key : '') + q;
+        var hasCountryPrefix = isNetwork && countryCode && countryCode.indexOf(q.toLowerCase()) === 0;
+        if (hasCountryPrefix) {
+            query = countryCode + ':';
+        }
         context.taginfo()[fn]({
             debounce: true,
             key: field.key,
             geometry: context.geometry(entity.id),
-            query: (isMulti ? field.key : '') + q
+            query: query
         }, function(err, data) {
             if (err) return;
+            if (hasCountryPrefix) {
+                data = _.filter(data, function(d) {
+                    return d.value.toLowerCase().indexOf(countryCode + ':') === 0;
+                });
+            }
             comboData = _.map(data, function(d) {
                 var k = d.value;
                 if (isMulti) k = k.replace(field.key, '');
@@ -224,6 +237,14 @@ export function combo(field, context) {
             .attr('type', 'text')
             .attr('id', 'preset-input-' + field.id)
             .call(initCombo, selection);
+
+        if (isNetwork) {
+            var center = entity.extent(context.graph()).center();
+            iD.services.nominatim.init();
+            iD.services.nominatim.countryCode(center, function (err, code) {
+                countryCode = code;
+            });
+        }
 
         input
             .on('change', change)
