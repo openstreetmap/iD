@@ -10,7 +10,7 @@ export function maxspeed(field, context) {
         input;
 
     var metricValues = [20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120],
-        imperialValues = [20, 25, 30, 35, 40, 45, 50, 55, 65, 70];
+        imperialValues = [20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70];
 
     function maxspeed(selection) {
         combobox = d3.combobox();
