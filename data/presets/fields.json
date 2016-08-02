@@ -367,7 +367,7 @@
     },
     "cycle_network": {
         "key": "cycle_network",
-        "type": "combo",
+        "type": "networkCombo",
         "label": "Network"
     },
     "cycleway": {

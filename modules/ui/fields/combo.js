@@ -140,7 +140,8 @@ export function combo(field, context) {
     function setTaginfoValues(q, callback) {
         var fn = isMulti ? 'multikeys' : 'values';
         var query = (isMulti ? field.key : '') + q;
-        if (isNetwork && countryCode && countryCode.indexOf(q.toLowerCase()) === 0) {
+        var hasCountryPrefix = isNetwork && countryCode && countryCode.indexOf(q.toLowerCase()) === 0;
+        if (hasCountryPrefix) {
             query = countryCode + ':';
         }
         context.taginfo()[fn]({
@@ -150,6 +151,11 @@ export function combo(field, context) {
             query: query
         }, function(err, data) {
             if (err) return;
+            if (hasCountryPrefix) {
+                data = _.filter(data, function(d) {
+                    return d.value.toLowerCase().indexOf(countryCode + ':') === 0;
+                });
+            }
             comboData = _.map(data, function(d) {
                 var k = d.value;
                 if (isMulti) k = k.replace(field.key, '');
