@@ -29,12 +29,13 @@ export function entityOrMemberSelector(ids, graph) {
 }
 
 export function displayName(entity) {
-    var localizedNameKey = 'name:' + Detect().locale.toLowerCase().split('-')[0];
-    var name = entity.tags[localizedNameKey] || entity.tags.name;
+    var localizedNameKey = 'name:' + Detect().locale.toLowerCase().split('-')[0]
+        name = entity.tags[localizedNameKey] || entity.tags.name || '',
+        network = entity.tags.cycle_network || entity.tags.network;
     if (!name && entity.tags.ref) {
         name = entity.tags.ref;
-        if (entity.tags.network) {
-            name = entity.tags.network + ' ' + name;
+        if (network) {
+            name = network + ' ' + name;
         }
     }
     return name;
