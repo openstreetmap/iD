@@ -61,8 +61,15 @@ export function Preset(id, preset, fields) {
             value = preset.tags[key];
 
         if (geometry === 'relation' && key === 'type') {
-            return { rtype: value };
-        } else if (value === '*') {
+            if (value in preset.tags) {
+                key = value;
+                value = preset.tags[key];
+            } else {
+                return { rtype: value };
+            }
+        }
+
+        if (value === '*') {
             return { key: key };
         } else {
             return { key: key, value: value };
