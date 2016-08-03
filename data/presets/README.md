@@ -46,7 +46,7 @@ A basic preset is of the form:
     "name": "Park"
 }
 ```
-The complete JSON schema for presets can be found in [`data/presets/schema/preset.json`](data/presets/schema/preset.json)
+The complete JSON schema for presets can be found in [`data/presets/schema/preset.json`](schema/preset.json)
 
 
 #### Preset Properties
@@ -90,7 +90,7 @@ For example, the field for the tag `piste:difficulty=*` is stored in the file
     "label": "Cuisine"
 }
 ```
-The complete JSON schema for fields can be found in [`data/presets/schema/field.json`](data/presets/schema/field.json)
+The complete JSON schema for fields can be found in [`data/presets/schema/field.json`](schema/field.json)
 
 
 #### Field Types
