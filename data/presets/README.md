@@ -48,6 +48,16 @@ A basic preset is of the form:
 }
 ```
 
+#### Searchable
+
+Deprecated or generic presets can include the property `"searchable": false`.
+This means that they will be recognized by iD when editing existing data,
+but will not be available as an option when adding new features.
+
+By convention, unsearchable presets have filenames that begin with an underscore
+(e.g. `data/presets/presets/landuse/_farm.json`)
+
+
 ## Fields
 
 Fields are, like presets, defined in JSON structures. A typical field is
