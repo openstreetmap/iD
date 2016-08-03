@@ -2137,6 +2137,30 @@ en:
         # embankment=yes
         name: Embankment
         terms: '<translate with synonyms or related terms for ''Embankment'', separated by commas>'
+      emergency/_designated:
+        # emergency=designated
+        name: Emergency Access Designated
+        terms: '<translate with synonyms or related terms for ''Emergency Access Designated'', separated by commas>'
+      emergency/_destination:
+        # emergency=destination
+        name: Emergency Access Destination
+        terms: '<translate with synonyms or related terms for ''Emergency Access Destination'', separated by commas>'
+      emergency/_no:
+        # emergency=no
+        name: Emergency Access No
+        terms: '<translate with synonyms or related terms for ''Emergency Access No'', separated by commas>'
+      emergency/_official:
+        # emergency=official
+        name: Emergency Access Official
+        terms: '<translate with synonyms or related terms for ''Emergency Access Official'', separated by commas>'
+      emergency/_private:
+        # emergency=private
+        name: Emergency Access Private
+        terms: '<translate with synonyms or related terms for ''Emergency Access Private'', separated by commas>'
+      emergency/_yes:
+        # emergency=yes
+        name: Emergency Access Yes
+        terms: '<translate with synonyms or related terms for ''Emergency Access Yes'', separated by commas>'
       emergency/ambulance_station:
         # emergency=ambulance_station
         name: Ambulance Station

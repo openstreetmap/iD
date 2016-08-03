@@ -2475,6 +2475,30 @@
                 "name": "Embankment",
                 "terms": ""
             },
+            "emergency/_designated": {
+                "name": "Emergency Access Designated",
+                "terms": ""
+            },
+            "emergency/_destination": {
+                "name": "Emergency Access Destination",
+                "terms": ""
+            },
+            "emergency/_no": {
+                "name": "Emergency Access No",
+                "terms": ""
+            },
+            "emergency/_official": {
+                "name": "Emergency Access Official",
+                "terms": ""
+            },
+            "emergency/_private": {
+                "name": "Emergency Access Private",
+                "terms": ""
+            },
+            "emergency/_yes": {
+                "name": "Emergency Access Yes",
+                "terms": ""
+            },
             "emergency/ambulance_station": {
                 "name": "Ambulance Station",
                 "terms": "EMS,EMT,rescue"

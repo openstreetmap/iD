@@ -1,0 +1,14 @@
+{
+    "fields": [
+    ],
+    "geometry": [
+        "line"
+    ],
+    "tags": {
+        "emergency": "official"
+    },
+    "terms": [],
+    "name": "Emergency Access Official",
+    "searchable": false,
+    "matchScore": 0.01
+}

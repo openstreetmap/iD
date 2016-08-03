@@ -4022,6 +4022,84 @@
         "name": "Embankment",
         "matchScore": 0.2
     },
+    "emergency/_designated": {
+        "fields": [],
+        "geometry": [
+            "line"
+        ],
+        "tags": {
+            "emergency": "designated"
+        },
+        "terms": [],
+        "name": "Emergency Access Designated",
+        "searchable": false,
+        "matchScore": 0.01
+    },
+    "emergency/_destination": {
+        "fields": [],
+        "geometry": [
+            "line"
+        ],
+        "tags": {
+            "emergency": "destination"
+        },
+        "terms": [],
+        "name": "Emergency Access Destination",
+        "searchable": false,
+        "matchScore": 0.01
+    },
+    "emergency/_no": {
+        "fields": [],
+        "geometry": [
+            "line"
+        ],
+        "tags": {
+            "emergency": "no"
+        },
+        "terms": [],
+        "name": "Emergency Access No",
+        "searchable": false,
+        "matchScore": 0.01
+    },
+    "emergency/_official": {
+        "fields": [],
+        "geometry": [
+            "line"
+        ],
+        "tags": {
+            "emergency": "official"
+        },
+        "terms": [],
+        "name": "Emergency Access Official",
+        "searchable": false,
+        "matchScore": 0.01
+    },
+    "emergency/_private": {
+        "fields": [],
+        "geometry": [
+            "line"
+        ],
+        "tags": {
+            "emergency": "private"
+        },
+        "terms": [],
+        "name": "Emergency Access Private",
+        "searchable": false,
+        "matchScore": 0.01
+    },
+    "emergency/_yes": {
+        "fields": [],
+        "geometry": [
+            "line"
+        ],
+        "tags": {
+            "emergency": "yes"
+        },
+        "terms": [],
+        "name": "Emergency Access Yes",
+        "searchable": false,
+        "matchScore": 0.01
+    },
     "emergency/ambulance_station": {
         "icon": "hospital",
         "fields": [

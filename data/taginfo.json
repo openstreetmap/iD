@@ -890,6 +890,30 @@
         },
         {
             "key": "emergency",
+            "value": "designated"
+        },
+        {
+            "key": "emergency",
+            "value": "destination"
+        },
+        {
+            "key": "emergency",
+            "value": "no"
+        },
+        {
+            "key": "emergency",
+            "value": "official"
+        },
+        {
+            "key": "emergency",
+            "value": "private"
+        },
+        {
+            "key": "emergency",
+            "value": "yes"
+        },
+        {
+            "key": "emergency",
             "value": "ambulance_station"
         },
         {
