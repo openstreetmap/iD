@@ -197,6 +197,26 @@ describe('iD.services.taginfo', function() {
         });
     });
 
+    describe('#roles', function() {
+        it('calls the given callback with the results of the roles query', function() {
+            var callback = sinon.spy();
+            taginfo.roles({rtype: 'route', query: 's', geometry: 'relation'}, callback);
+
+            server.respondWith('GET', new RegExp('https://taginfo.openstreetmap.org/api/4/relation/roles'),
+                [200, { 'Content-Type': 'application/json' },
+                    '{"data":[{"role":"stop","count_relation_members_fraction":0.1757},' +
+                             '{"role":"south","count_relation_members_fraction":0.0035}]}']);
+            server.respond();
+
+            expect(query(server.requests[0].url)).to.eql(
+                {rtype: 'route', query: 's', page: '1', rp: '25', sortname: 'count_relation_members', sortorder: 'desc'});
+            expect(callback).to.have.been.calledWith(null, [
+                {'value': 'stop', 'title': 'stop'},
+                {'value': 'south', 'title': 'south'}
+            ]);
+        });
+    });
+
     describe('#docs', function() {
         it('calls the given callback with the results of the docs query', function() {
             var callback = sinon.spy();

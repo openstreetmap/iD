@@ -113,8 +113,51 @@ export function RawMemberEditor(context) {
                 .on('click', deleteMember)
                 .call(Icon('#operation-delete'));
 
+            if (context.taginfo()) {
+                $enter.each(bindTypeahead);
+            }
+
             $items.exit()
+                .each(unbind)
                 .remove();
+
+            function bindTypeahead(d) {
+                var row = d3.select(this),
+                    role = row.selectAll('input.member-role');
+    
+                function sort(value, data) {
+                    var sameletter = [],
+                        other = [];
+                    for (var i = 0; i < data.length; i++) {
+                        if (data[i].value.substring(0, value.length) === value) {
+                            sameletter.push(data[i]);
+                        } else {
+                            other.push(data[i]);
+                        }
+                    }
+                    return sameletter.concat(other);
+                }
+    
+                role.call(d3.combobox()
+                    .fetcher(function(role, callback) {
+                        var rtype = entity.tags.type;
+                        context.taginfo().roles({
+                            debounce: true,
+                            rtype: rtype || '',
+                            geometry: context.geometry(d.member.id),
+                            query: role
+                        }, function(err, data) {
+                            if (!err) callback(sort(role, data));
+                        });
+                    }));
+            }
+    
+            function unbind() {
+                var row = d3.select(this);
+    
+                row.selectAll('input.member-role')
+                    .call(d3.combobox.off);
+            }
         }
     }
 
