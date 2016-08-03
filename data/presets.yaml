@@ -2137,30 +2137,6 @@ en:
         # embankment=yes
         name: Embankment
         terms: '<translate with synonyms or related terms for ''Embankment'', separated by commas>'
-      emergency/_designated:
-        # emergency=designated
-        name: Emergency Access Designated
-        terms: '<translate with synonyms or related terms for ''Emergency Access Designated'', separated by commas>'
-      emergency/_destination:
-        # emergency=destination
-        name: Emergency Access Destination
-        terms: '<translate with synonyms or related terms for ''Emergency Access Destination'', separated by commas>'
-      emergency/_no:
-        # emergency=no
-        name: Emergency Access No
-        terms: '<translate with synonyms or related terms for ''Emergency Access No'', separated by commas>'
-      emergency/_official:
-        # emergency=official
-        name: Emergency Access Official
-        terms: '<translate with synonyms or related terms for ''Emergency Access Official'', separated by commas>'
-      emergency/_private:
-        # emergency=private
-        name: Emergency Access Private
-        terms: '<translate with synonyms or related terms for ''Emergency Access Private'', separated by commas>'
-      emergency/_yes:
-        # emergency=yes
-        name: Emergency Access Yes
-        terms: '<translate with synonyms or related terms for ''Emergency Access Yes'', separated by commas>'
       emergency/ambulance_station:
         # emergency=ambulance_station
         name: Ambulance Station
@@ -2171,14 +2147,38 @@ en:
         name: Defibrillator
         # 'terms: AED'
         terms: '<translate with synonyms or related terms for ''Defibrillator'', separated by commas>'
+      emergency/designated:
+        # emergency=designated
+        name: Emergency Access Designated
+        terms: '<translate with synonyms or related terms for ''Emergency Access Designated'', separated by commas>'
+      emergency/destination:
+        # emergency=destination
+        name: Emergency Access Destination
+        terms: '<translate with synonyms or related terms for ''Emergency Access Destination'', separated by commas>'
       emergency/fire_hydrant:
         # emergency=fire_hydrant
         name: Fire Hydrant
         terms: '<translate with synonyms or related terms for ''Fire Hydrant'', separated by commas>'
+      emergency/no:
+        # emergency=no
+        name: Emergency Access No
+        terms: '<translate with synonyms or related terms for ''Emergency Access No'', separated by commas>'
+      emergency/official:
+        # emergency=official
+        name: Emergency Access Official
+        terms: '<translate with synonyms or related terms for ''Emergency Access Official'', separated by commas>'
       emergency/phone:
         # emergency=phone
         name: Emergency Phone
         terms: '<translate with synonyms or related terms for ''Emergency Phone'', separated by commas>'
+      emergency/private:
+        # emergency=private
+        name: Emergency Access Private
+        terms: '<translate with synonyms or related terms for ''Emergency Access Private'', separated by commas>'
+      emergency/yes:
+        # emergency=yes
+        name: Emergency Access Yes
+        terms: '<translate with synonyms or related terms for ''Emergency Access Yes'', separated by commas>'
       entrance:
         # entrance=*
         name: Entrance/Exit

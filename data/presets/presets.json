@@ -1,19 +1,4 @@
 {
-    "address": {
-        "fields": [
-            "address"
-        ],
-        "geometry": [
-            "point"
-        ],
-        "tags": {
-            "addr:housenumber": "*"
-        },
-        "addTags": {},
-        "removeTags": {},
-        "matchScore": 0.2,
-        "name": "Address"
-    },
     "aerialway": {
         "fields": [
             "aerialway"
@@ -33,6 +18,143 @@
         ],
         "searchable": false,
         "name": "Aerialway"
+    },
+    "aeroway": {
+        "icon": "airport",
+        "fields": [
+            "aeroway"
+        ],
+        "geometry": [
+            "point",
+            "vertex",
+            "line",
+            "area"
+        ],
+        "tags": {
+            "aeroway": "*"
+        },
+        "searchable": false,
+        "name": "Aeroway"
+    },
+    "amenity": {
+        "fields": [
+            "amenity"
+        ],
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "tags": {
+            "amenity": "*"
+        },
+        "searchable": false,
+        "name": "Amenity"
+    },
+    "highway": {
+        "fields": [
+            "highway"
+        ],
+        "geometry": [
+            "point",
+            "vertex",
+            "line",
+            "area"
+        ],
+        "tags": {
+            "highway": "*"
+        },
+        "searchable": false,
+        "name": "Highway"
+    },
+    "place": {
+        "fields": [
+            "place"
+        ],
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "tags": {
+            "place": "*"
+        },
+        "searchable": false,
+        "name": "Place"
+    },
+    "power": {
+        "geometry": [
+            "point",
+            "vertex",
+            "line",
+            "area"
+        ],
+        "tags": {
+            "power": "*"
+        },
+        "fields": [
+            "power"
+        ],
+        "searchable": false,
+        "name": "Power"
+    },
+    "railway": {
+        "fields": [
+            "railway"
+        ],
+        "geometry": [
+            "point",
+            "vertex",
+            "line",
+            "area"
+        ],
+        "tags": {
+            "railway": "*"
+        },
+        "searchable": false,
+        "name": "Railway"
+    },
+    "roundabout": {
+        "geometry": [
+            "vertex",
+            "line"
+        ],
+        "tags": {
+            "junction": "roundabout"
+        },
+        "name": "Roundabout",
+        "searchable": false
+    },
+    "waterway": {
+        "fields": [
+            "waterway"
+        ],
+        "geometry": [
+            "point",
+            "vertex",
+            "line",
+            "area"
+        ],
+        "tags": {
+            "waterway": "*"
+        },
+        "searchable": false,
+        "name": "Waterway"
+    },
+    "address": {
+        "fields": [
+            "address"
+        ],
+        "geometry": [
+            "point"
+        ],
+        "tags": {
+            "addr:housenumber": "*"
+        },
+        "addTags": {},
+        "removeTags": {},
+        "matchScore": 0.2,
+        "name": "Address"
     },
     "aerialway/cable_car": {
         "geometry": [
@@ -174,23 +296,6 @@
         },
         "name": "T-bar Lift"
     },
-    "aeroway": {
-        "icon": "airport",
-        "fields": [
-            "aeroway"
-        ],
-        "geometry": [
-            "point",
-            "vertex",
-            "line",
-            "area"
-        ],
-        "tags": {
-            "aeroway": "*"
-        },
-        "searchable": false,
-        "name": "Aeroway"
-    },
     "aeroway/aerodrome": {
         "icon": "airport",
         "geometry": [
@@ -321,20 +426,37 @@
         },
         "name": "Airport terminal"
     },
-    "amenity": {
+    "amenity/register_office": {
+        "icon": "town-hall",
         "fields": [
-            "amenity"
+            "address",
+            "building_area",
+            "opening_hours",
+            "operator"
         ],
+        "geometry": [
+            "point",
+            "area"
+        ],
+        "terms": [],
+        "tags": {
+            "amenity": "register_office"
+        },
+        "name": "Register Office",
+        "searchable": false
+    },
+    "amenity/swimming_pool": {
+        "icon": "swimming",
         "geometry": [
             "point",
             "vertex",
             "area"
         ],
         "tags": {
-            "amenity": "*"
+            "amenity": "swimming_pool"
         },
-        "searchable": false,
-        "name": "Amenity"
+        "name": "Swimming Pool",
+        "searchable": false
     },
     "amenity/arts_centre": {
         "icon": "theatre",
@@ -1671,25 +1793,6 @@
         },
         "name": "Recycling"
     },
-    "amenity/register_office": {
-        "icon": "town-hall",
-        "fields": [
-            "address",
-            "building_area",
-            "opening_hours",
-            "operator"
-        ],
-        "geometry": [
-            "point",
-            "area"
-        ],
-        "terms": [],
-        "tags": {
-            "amenity": "register_office"
-        },
-        "name": "Register Office",
-        "searchable": false
-    },
     "amenity/restaurant": {
         "icon": "restaurant",
         "fields": [
@@ -1903,19 +2006,6 @@
             "amenity": "studio"
         },
         "name": "Studio"
-    },
-    "amenity/swimming_pool": {
-        "icon": "swimming",
-        "geometry": [
-            "point",
-            "vertex",
-            "area"
-        ],
-        "tags": {
-            "amenity": "swimming_pool"
-        },
-        "name": "Swimming Pool",
-        "searchable": false
     },
     "amenity/taxi": {
         "icon": "car",
@@ -2354,6 +2444,17 @@
         ],
         "name": "Barrier"
     },
+    "barrier/entrance": {
+        "icon": "entrance",
+        "geometry": [
+            "vertex"
+        ],
+        "tags": {
+            "barrier": "entrance"
+        },
+        "name": "Entrance",
+        "searchable": false
+    },
     "barrier/block": {
         "icon": "roadblock",
         "fields": [
@@ -2427,17 +2528,6 @@
             "barrier": "ditch"
         },
         "name": "Trench"
-    },
-    "barrier/entrance": {
-        "icon": "entrance",
-        "geometry": [
-            "vertex"
-        ],
-        "tags": {
-            "barrier": "entrance"
-        },
-        "name": "Entrance",
-        "searchable": false
     },
     "barrier/fence": {
         "icon": "prison",
@@ -2579,6 +2669,50 @@
         "terms": [],
         "name": "Building"
     },
+    "building/bunker": {
+        "fields": [
+            "address",
+            "levels"
+        ],
+        "geometry": [
+            "area"
+        ],
+        "tags": {
+            "building": "bunker"
+        },
+        "matchScore": 0.5,
+        "name": "Bunker",
+        "searchable": false
+    },
+    "building/entrance": {
+        "icon": "entrance",
+        "geometry": [
+            "vertex"
+        ],
+        "tags": {
+            "building": "entrance"
+        },
+        "name": "Entrance/Exit",
+        "searchable": false
+    },
+    "building/train_station": {
+        "icon": "building",
+        "fields": [
+            "address",
+            "levels"
+        ],
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "tags": {
+            "building": "train_station"
+        },
+        "matchScore": 0.5,
+        "name": "Train Station",
+        "searchable": false
+    },
     "building/apartments": {
         "icon": "commercial",
         "fields": [
@@ -2608,21 +2742,6 @@
         },
         "matchScore": 0.5,
         "name": "Barn"
-    },
-    "building/bunker": {
-        "fields": [
-            "address",
-            "levels"
-        ],
-        "geometry": [
-            "area"
-        ],
-        "tags": {
-            "building": "bunker"
-        },
-        "matchScore": 0.5,
-        "name": "Bunker",
-        "searchable": false
     },
     "building/cabin": {
         "icon": "building",
@@ -2770,17 +2889,6 @@
         },
         "matchScore": 0.5,
         "name": "Dormitory"
-    },
-    "building/entrance": {
-        "icon": "entrance",
-        "geometry": [
-            "vertex"
-        ],
-        "tags": {
-            "building": "entrance"
-        },
-        "name": "Entrance/Exit",
-        "searchable": false
     },
     "building/garage": {
         "icon": "warehouse",
@@ -3095,24 +3203,6 @@
         "matchScore": 0.5,
         "name": "Row Houses"
     },
-    "building/train_station": {
-        "icon": "building",
-        "fields": [
-            "address",
-            "levels"
-        ],
-        "geometry": [
-            "point",
-            "vertex",
-            "area"
-        ],
-        "tags": {
-            "building": "train_station"
-        },
-        "matchScore": 0.5,
-        "name": "Train Station",
-        "searchable": false
-    },
     "building/university": {
         "icon": "building",
         "fields": [
@@ -3164,6 +3254,82 @@
         },
         "terms": [],
         "name": "Craft"
+    },
+    "craft/jeweler": {
+        "icon": "marker-stroked",
+        "fields": [
+            "operator",
+            "address",
+            "building_area",
+            "opening_hours"
+        ],
+        "geometry": [
+            "point",
+            "area"
+        ],
+        "tags": {
+            "craft": "jeweler"
+        },
+        "name": "Jeweler",
+        "searchable": false
+    },
+    "craft/locksmith": {
+        "icon": "marker-stroked",
+        "fields": [
+            "operator",
+            "address",
+            "building_area",
+            "opening_hours"
+        ],
+        "geometry": [
+            "point",
+            "area"
+        ],
+        "tags": {
+            "craft": "locksmith"
+        },
+        "name": "Locksmith",
+        "searchable": false
+    },
+    "craft/optician": {
+        "icon": "marker-stroked",
+        "fields": [
+            "operator",
+            "address",
+            "building_area",
+            "opening_hours"
+        ],
+        "geometry": [
+            "point",
+            "area"
+        ],
+        "tags": {
+            "craft": "optician"
+        },
+        "name": "Optician",
+        "searchable": false
+    },
+    "craft/tailor": {
+        "icon": "clothing-store",
+        "fields": [
+            "operator",
+            "address",
+            "building_area",
+            "opening_hours"
+        ],
+        "geometry": [
+            "point",
+            "area"
+        ],
+        "terms": [
+            "clothes",
+            "suit"
+        ],
+        "tags": {
+            "craft": "tailor"
+        },
+        "name": "Tailor",
+        "searchable": false
     },
     "craft/basket_maker": {
         "icon": "art-gallery",
@@ -3507,24 +3673,6 @@
         },
         "name": "Insulator"
     },
-    "craft/jeweler": {
-        "icon": "marker-stroked",
-        "fields": [
-            "operator",
-            "address",
-            "building_area",
-            "opening_hours"
-        ],
-        "geometry": [
-            "point",
-            "area"
-        ],
-        "tags": {
-            "craft": "jeweler"
-        },
-        "name": "Jeweler",
-        "searchable": false
-    },
     "craft/key_cutter": {
         "icon": "marker-stroked",
         "fields": [
@@ -3542,24 +3690,6 @@
         },
         "name": "Key Cutter"
     },
-    "craft/locksmith": {
-        "icon": "marker-stroked",
-        "fields": [
-            "operator",
-            "address",
-            "building_area",
-            "opening_hours"
-        ],
-        "geometry": [
-            "point",
-            "area"
-        ],
-        "tags": {
-            "craft": "locksmith"
-        },
-        "name": "Locksmith",
-        "searchable": false
-    },
     "craft/metal_construction": {
         "icon": "marker-stroked",
         "fields": [
@@ -3576,24 +3706,6 @@
             "craft": "metal_construction"
         },
         "name": "Metal Construction"
-    },
-    "craft/optician": {
-        "icon": "marker-stroked",
-        "fields": [
-            "operator",
-            "address",
-            "building_area",
-            "opening_hours"
-        ],
-        "geometry": [
-            "point",
-            "area"
-        ],
-        "tags": {
-            "craft": "optician"
-        },
-        "name": "Optician",
-        "searchable": false
     },
     "craft/painter": {
         "icon": "art-gallery",
@@ -3885,28 +3997,6 @@
         },
         "name": "Chimney Sweep"
     },
-    "craft/tailor": {
-        "icon": "clothing-store",
-        "fields": [
-            "operator",
-            "address",
-            "building_area",
-            "opening_hours"
-        ],
-        "geometry": [
-            "point",
-            "area"
-        ],
-        "terms": [
-            "clothes",
-            "suit"
-        ],
-        "tags": {
-            "craft": "tailor"
-        },
-        "name": "Tailor",
-        "searchable": false
-    },
     "craft/tiler": {
         "icon": "marker-stroked",
         "fields": [
@@ -4022,7 +4112,7 @@
         "name": "Embankment",
         "matchScore": 0.2
     },
-    "emergency/_designated": {
+    "emergency/designated": {
         "fields": [],
         "geometry": [
             "line"
@@ -4035,7 +4125,7 @@
         "searchable": false,
         "matchScore": 0.01
     },
-    "emergency/_destination": {
+    "emergency/destination": {
         "fields": [],
         "geometry": [
             "line"
@@ -4048,7 +4138,7 @@
         "searchable": false,
         "matchScore": 0.01
     },
-    "emergency/_no": {
+    "emergency/no": {
         "fields": [],
         "geometry": [
             "line"
@@ -4061,7 +4151,7 @@
         "searchable": false,
         "matchScore": 0.01
     },
-    "emergency/_official": {
+    "emergency/official": {
         "fields": [],
         "geometry": [
             "line"
@@ -4074,7 +4164,7 @@
         "searchable": false,
         "matchScore": 0.01
     },
-    "emergency/_private": {
+    "emergency/private": {
         "fields": [],
         "geometry": [
             "line"
@@ -4087,7 +4177,7 @@
         "searchable": false,
         "matchScore": 0.01
     },
-    "emergency/_yes": {
+    "emergency/yes": {
         "fields": [],
         "geometry": [
             "line"
@@ -4378,22 +4468,6 @@
             "healthcare": "blood_donation"
         },
         "name": "Blood Donor Center"
-    },
-    "highway": {
-        "fields": [
-            "highway"
-        ],
-        "geometry": [
-            "point",
-            "vertex",
-            "line",
-            "area"
-        ],
-        "tags": {
-            "highway": "*"
-        },
-        "searchable": false,
-        "name": "Highway"
     },
     "highway/bridleway": {
         "fields": [
@@ -5344,6 +5418,22 @@
         },
         "name": "Land Use"
     },
+    "landuse/farm": {
+        "icon": "farm",
+        "fields": [
+            "crop"
+        ],
+        "geometry": [
+            "point",
+            "area"
+        ],
+        "tags": {
+            "landuse": "farm"
+        },
+        "terms": [],
+        "name": "Farmland",
+        "searchable": false
+    },
     "landuse/allotments": {
         "geometry": [
             "area"
@@ -5420,22 +5510,6 @@
         },
         "terms": [],
         "name": "Construction"
-    },
-    "landuse/farm": {
-        "icon": "farm",
-        "fields": [
-            "crop"
-        ],
-        "geometry": [
-            "point",
-            "area"
-        ],
-        "tags": {
-            "landuse": "farm"
-        },
-        "terms": [],
-        "name": "Farmland",
-        "searchable": false
     },
     "landuse/farmland": {
         "icon": "farm",
@@ -6244,6 +6318,16 @@
         },
         "name": "Man Made"
     },
+    "man_made/embankment": {
+        "geometry": [
+            "line"
+        ],
+        "tags": {
+            "man_made": "embankment"
+        },
+        "name": "Embankment",
+        "searchable": false
+    },
     "man_made/adit": {
         "geometry": [
             "point",
@@ -6300,16 +6384,6 @@
             "man_made": "cutline"
         },
         "name": "Cut line"
-    },
-    "man_made/embankment": {
-        "geometry": [
-            "line"
-        ],
-        "tags": {
-            "man_made": "embankment"
-        },
-        "name": "Embankment",
-        "searchable": false
     },
     "man_made/flagpole": {
         "geometry": [
@@ -7077,6 +7151,25 @@
         "terms": [],
         "name": "Office"
     },
+    "office/travel_agent": {
+        "icon": "suitcase",
+        "fields": [
+            "address",
+            "building_area",
+            "opening_hours"
+        ],
+        "geometry": [
+            "point",
+            "vertex",
+            "area"
+        ],
+        "tags": {
+            "office": "travel_agent"
+        },
+        "terms": [],
+        "name": "Travel Agency",
+        "searchable": false
+    },
     "office/accountant": {
         "icon": "commercial",
         "fields": [
@@ -7448,25 +7541,6 @@
         "terms": [],
         "name": "Therapist"
     },
-    "office/travel_agent": {
-        "icon": "suitcase",
-        "fields": [
-            "address",
-            "building_area",
-            "opening_hours"
-        ],
-        "geometry": [
-            "point",
-            "vertex",
-            "area"
-        ],
-        "tags": {
-            "office": "travel_agent"
-        },
-        "terms": [],
-        "name": "Travel Agency",
-        "searchable": false
-    },
     "piste": {
         "icon": "skiing",
         "fields": [
@@ -7494,21 +7568,6 @@
             "piste:type": "*"
         },
         "name": "Piste/Ski Trail"
-    },
-    "place": {
-        "fields": [
-            "place"
-        ],
-        "geometry": [
-            "point",
-            "vertex",
-            "area"
-        ],
-        "tags": {
-            "place": "*"
-        },
-        "searchable": false,
-        "name": "Place"
     },
     "place/city": {
         "icon": "city",
@@ -7664,21 +7723,21 @@
         ],
         "matchScore": 0.1
     },
-    "power": {
+    "power/sub_station": {
+        "fields": [
+            "substation",
+            "operator",
+            "building"
+        ],
         "geometry": [
             "point",
-            "vertex",
-            "line",
             "area"
         ],
         "tags": {
-            "power": "*"
+            "power": "sub_station"
         },
-        "fields": [
-            "power"
-        ],
-        "searchable": false,
-        "name": "Power"
+        "name": "Substation",
+        "searchable": false
     },
     "power/generator": {
         "fields": [
@@ -7725,22 +7784,6 @@
             "power": "pole"
         },
         "name": "Power Pole"
-    },
-    "power/sub_station": {
-        "fields": [
-            "substation",
-            "operator",
-            "building"
-        ],
-        "geometry": [
-            "point",
-            "area"
-        ],
-        "tags": {
-            "power": "sub_station"
-        },
-        "name": "Substation",
-        "searchable": false
     },
     "power/substation": {
         "fields": [
@@ -7809,22 +7852,6 @@
             "public_transport": "stop_position"
         },
         "name": "Stop Position"
-    },
-    "railway": {
-        "fields": [
-            "railway"
-        ],
-        "geometry": [
-            "point",
-            "vertex",
-            "line",
-            "area"
-        ],
-        "tags": {
-            "railway": "*"
-        },
-        "searchable": false,
-        "name": "Railway"
     },
     "railway/abandoned": {
         "icon": "railway-abandoned",
@@ -8059,17 +8086,6 @@
             "relation"
         ]
     },
-    "roundabout": {
-        "geometry": [
-            "vertex",
-            "line"
-        ],
-        "tags": {
-            "junction": "roundabout"
-        },
-        "name": "Roundabout",
-        "searchable": false
-    },
     "route/ferry": {
         "icon": "ferry-line",
         "geometry": [
@@ -8098,6 +8114,40 @@
         },
         "terms": [],
         "name": "Shop"
+    },
+    "shop/fishmonger": {
+        "icon": "shop",
+        "fields": [
+            "operator",
+            "address",
+            "building_area",
+            "opening_hours"
+        ],
+        "geometry": [
+            "point",
+            "area"
+        ],
+        "tags": {
+            "shop": "fishmonger"
+        },
+        "name": "Fishmonger",
+        "searchable": false
+    },
+    "shop/vacant": {
+        "icon": "shop",
+        "fields": [
+            "address",
+            "building_area"
+        ],
+        "geometry": [
+            "point",
+            "area"
+        ],
+        "tags": {
+            "shop": "vacant"
+        },
+        "name": "Vacant Shop",
+        "searchable": false
     },
     "shop/alcohol": {
         "icon": "alcohol-shop",
@@ -8936,24 +8986,6 @@
             "shop": "fashion"
         },
         "name": "Fashion Store"
-    },
-    "shop/fishmonger": {
-        "icon": "shop",
-        "fields": [
-            "operator",
-            "address",
-            "building_area",
-            "opening_hours"
-        ],
-        "geometry": [
-            "point",
-            "area"
-        ],
-        "tags": {
-            "shop": "fishmonger"
-        },
-        "name": "Fishmonger",
-        "searchable": false
     },
     "shop/florist": {
         "icon": "shop",
@@ -10041,22 +10073,6 @@
         },
         "name": "Tire Store"
     },
-    "shop/vacant": {
-        "icon": "shop",
-        "fields": [
-            "address",
-            "building_area"
-        ],
-        "geometry": [
-            "point",
-            "area"
-        ],
-        "tags": {
-            "shop": "vacant"
-        },
-        "name": "Vacant Shop",
-        "searchable": false
-    },
     "shop/vacuum_cleaner": {
         "icon": "shop",
         "fields": [
@@ -10609,6 +10625,20 @@
         ],
         "name": "Raised Pedestrian Crossing"
     },
+    "type/multipolygon": {
+        "geometry": [
+            "area",
+            "relation"
+        ],
+        "tags": {
+            "type": "multipolygon"
+        },
+        "removeTags": {},
+        "name": "Multipolygon",
+        "icon": "multipolygon",
+        "searchable": false,
+        "matchScore": 0.1
+    },
     "type/boundary": {
         "geometry": [
             "relation"
@@ -10635,20 +10665,6 @@
             "admin_level"
         ],
         "icon": "boundary"
-    },
-    "type/multipolygon": {
-        "geometry": [
-            "area",
-            "relation"
-        ],
-        "tags": {
-            "type": "multipolygon"
-        },
-        "removeTags": {},
-        "name": "Multipolygon",
-        "icon": "multipolygon",
-        "searchable": false,
-        "matchScore": 0.1
     },
     "type/restriction": {
         "geometry": [
@@ -11001,22 +11017,6 @@
             "vertex"
         ],
         "matchScore": 0.1
-    },
-    "waterway": {
-        "fields": [
-            "waterway"
-        ],
-        "geometry": [
-            "point",
-            "vertex",
-            "line",
-            "area"
-        ],
-        "tags": {
-            "waterway": "*"
-        },
-        "searchable": false,
-        "name": "Waterway"
     },
     "waterway/boatyard": {
         "icon": "harbor",

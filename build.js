@@ -62,7 +62,7 @@ function generateFields() {
     var fields = {};
     glob.sync(__dirname + '/data/presets/fields/**/*.json').forEach(function(file) {
         var field = read(file),
-            id = file.match(/presets\/fields\/([^.]*)\.json/)[1];
+            id = stripLeadingUnderscores(file.match(/presets\/fields\/([^.]*)\.json/)[1]);
 
         validate(file, field, fieldSchema);
 
@@ -134,12 +134,16 @@ function suggestionsToPresets(presets) {
     return presets;
 }
 
+function stripLeadingUnderscores(str) {
+    return str.split('/').map(function(s) {return s.replace(/^_/,''); }).join('/');
+}
+
 function generatePresets() {
     var presets = {};
 
     glob.sync(__dirname + '/data/presets/presets/**/*.json').forEach(function(file) {
         var preset = read(file),
-            id = file.match(/presets\/presets\/([^.]*)\.json/)[1];
+            id = stripLeadingUnderscores(file.match(/presets\/presets\/([^.]*)\.json/)[1]);
 
         validate(file, preset, presetSchema);
 

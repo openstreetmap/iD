@@ -13,10 +13,35 @@
     },
     "tags": [
         {
-            "key": "addr:housenumber"
+            "key": "aerialway"
         },
         {
-            "key": "aerialway"
+            "key": "aeroway"
+        },
+        {
+            "key": "amenity"
+        },
+        {
+            "key": "highway"
+        },
+        {
+            "key": "place"
+        },
+        {
+            "key": "power"
+        },
+        {
+            "key": "railway"
+        },
+        {
+            "key": "junction",
+            "value": "roundabout"
+        },
+        {
+            "key": "waterway"
+        },
+        {
+            "key": "addr:housenumber"
         },
         {
             "key": "aerialway",
@@ -55,9 +80,6 @@
             "value": "t-bar"
         },
         {
-            "key": "aeroway"
-        },
-        {
             "key": "aeroway",
             "value": "aerodrome"
         },
@@ -90,7 +112,12 @@
             "value": "terminal"
         },
         {
-            "key": "amenity"
+            "key": "amenity",
+            "value": "register_office"
+        },
+        {
+            "key": "amenity",
+            "value": "swimming_pool"
         },
         {
             "key": "amenity",
@@ -354,10 +381,6 @@
         },
         {
             "key": "amenity",
-            "value": "register_office"
-        },
-        {
-            "key": "amenity",
             "value": "restaurant"
         },
         {
@@ -391,10 +414,6 @@
         {
             "key": "amenity",
             "value": "studio"
-        },
-        {
-            "key": "amenity",
-            "value": "swimming_pool"
         },
         {
             "key": "amenity",
@@ -488,6 +507,10 @@
         },
         {
             "key": "barrier",
+            "value": "entrance"
+        },
+        {
+            "key": "barrier",
             "value": "block"
         },
         {
@@ -509,10 +532,6 @@
         {
             "key": "barrier",
             "value": "ditch"
-        },
-        {
-            "key": "barrier",
-            "value": "entrance"
         },
         {
             "key": "barrier",
@@ -559,15 +578,23 @@
         },
         {
             "key": "building",
+            "value": "bunker"
+        },
+        {
+            "key": "building",
+            "value": "entrance"
+        },
+        {
+            "key": "building",
+            "value": "train_station"
+        },
+        {
+            "key": "building",
             "value": "apartments"
         },
         {
             "key": "building",
             "value": "barn"
-        },
-        {
-            "key": "building",
-            "value": "bunker"
         },
         {
             "key": "building",
@@ -604,10 +631,6 @@
         {
             "key": "building",
             "value": "dormitory"
-        },
-        {
-            "key": "building",
-            "value": "entrance"
         },
         {
             "key": "building",
@@ -687,10 +710,6 @@
         },
         {
             "key": "building",
-            "value": "train_station"
-        },
-        {
-            "key": "building",
             "value": "university"
         },
         {
@@ -699,6 +718,22 @@
         },
         {
             "key": "craft"
+        },
+        {
+            "key": "craft",
+            "value": "jeweler"
+        },
+        {
+            "key": "craft",
+            "value": "locksmith"
+        },
+        {
+            "key": "craft",
+            "value": "optician"
+        },
+        {
+            "key": "craft",
+            "value": "tailor"
         },
         {
             "key": "craft",
@@ -774,23 +809,11 @@
         },
         {
             "key": "craft",
-            "value": "jeweler"
-        },
-        {
-            "key": "craft",
             "value": "key_cutter"
         },
         {
             "key": "craft",
-            "value": "locksmith"
-        },
-        {
-            "key": "craft",
             "value": "metal_construction"
-        },
-        {
-            "key": "craft",
-            "value": "optician"
         },
         {
             "key": "craft",
@@ -855,10 +878,6 @@
         {
             "key": "craft",
             "value": "sweep"
-        },
-        {
-            "key": "craft",
-            "value": "tailor"
         },
         {
             "key": "craft",
@@ -982,9 +1001,6 @@
         {
             "key": "healthcare",
             "value": "blood_donation"
-        },
-        {
-            "key": "highway"
         },
         {
             "key": "highway",
@@ -1194,6 +1210,10 @@
         },
         {
             "key": "landuse",
+            "value": "farm"
+        },
+        {
+            "key": "landuse",
             "value": "allotments"
         },
         {
@@ -1215,10 +1235,6 @@
         {
             "key": "landuse",
             "value": "construction"
-        },
-        {
-            "key": "landuse",
-            "value": "farm"
         },
         {
             "key": "landuse",
@@ -1420,6 +1436,10 @@
         },
         {
             "key": "man_made",
+            "value": "embankment"
+        },
+        {
+            "key": "man_made",
             "value": "adit"
         },
         {
@@ -1437,10 +1457,6 @@
         {
             "key": "man_made",
             "value": "cutline"
-        },
-        {
-            "key": "man_made",
-            "value": "embankment"
         },
         {
             "key": "man_made",
@@ -1654,6 +1670,10 @@
         },
         {
             "key": "office",
+            "value": "travel_agent"
+        },
+        {
+            "key": "office",
             "value": "accountant"
         },
         {
@@ -1733,14 +1753,7 @@
             "value": "therapist"
         },
         {
-            "key": "office",
-            "value": "travel_agent"
-        },
-        {
             "key": "piste:type"
-        },
-        {
-            "key": "place"
         },
         {
             "key": "place",
@@ -1783,7 +1796,8 @@
             "value": "village"
         },
         {
-            "key": "power"
+            "key": "power",
+            "value": "sub_station"
         },
         {
             "key": "power",
@@ -1800,10 +1814,6 @@
         {
             "key": "power",
             "value": "pole"
-        },
-        {
-            "key": "power",
-            "value": "sub_station"
         },
         {
             "key": "power",
@@ -1824,9 +1834,6 @@
         {
             "key": "public_transport",
             "value": "stop_position"
-        },
-        {
-            "key": "railway"
         },
         {
             "key": "railway",
@@ -1881,15 +1888,19 @@
             "value": "tram"
         },
         {
-            "key": "junction",
-            "value": "roundabout"
-        },
-        {
             "key": "route",
             "value": "ferry"
         },
         {
             "key": "shop"
+        },
+        {
+            "key": "shop",
+            "value": "fishmonger"
+        },
+        {
+            "key": "shop",
+            "value": "vacant"
         },
         {
             "key": "shop",
@@ -2066,10 +2077,6 @@
         {
             "key": "shop",
             "value": "fashion"
-        },
-        {
-            "key": "shop",
-            "value": "fishmonger"
         },
         {
             "key": "shop",
@@ -2305,10 +2312,6 @@
         },
         {
             "key": "shop",
-            "value": "vacant"
-        },
-        {
-            "key": "shop",
             "value": "vacuum_cleaner"
         },
         {
@@ -2428,15 +2431,15 @@
         },
         {
             "key": "type",
+            "value": "multipolygon"
+        },
+        {
+            "key": "type",
             "value": "boundary"
         },
         {
             "key": "boundary",
             "value": "administrative"
-        },
-        {
-            "key": "type",
-            "value": "multipolygon"
         },
         {
             "key": "type",
@@ -2529,9 +2532,6 @@
         {
             "key": "type",
             "value": "site"
-        },
-        {
-            "key": "waterway"
         },
         {
             "key": "waterway",

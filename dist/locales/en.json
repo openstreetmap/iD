@@ -1591,13 +1591,45 @@
             }
         },
         "presets": {
-            "address": {
-                "name": "Address",
-                "terms": ""
-            },
             "aerialway": {
                 "name": "Aerialway",
                 "terms": "ski lift,funifor,funitel"
+            },
+            "aeroway": {
+                "name": "Aeroway",
+                "terms": ""
+            },
+            "amenity": {
+                "name": "Amenity",
+                "terms": ""
+            },
+            "highway": {
+                "name": "Highway",
+                "terms": ""
+            },
+            "place": {
+                "name": "Place",
+                "terms": ""
+            },
+            "power": {
+                "name": "Power",
+                "terms": ""
+            },
+            "railway": {
+                "name": "Railway",
+                "terms": ""
+            },
+            "roundabout": {
+                "name": "Roundabout",
+                "terms": ""
+            },
+            "waterway": {
+                "name": "Waterway",
+                "terms": ""
+            },
+            "address": {
+                "name": "Address",
+                "terms": ""
             },
             "aerialway/cable_car": {
                 "name": "Cable Car",
@@ -1635,10 +1667,6 @@
                 "name": "T-bar Lift",
                 "terms": ""
             },
-            "aeroway": {
-                "name": "Aeroway",
-                "terms": ""
-            },
             "aeroway/aerodrome": {
                 "name": "Airport",
                 "terms": "airplane,airport,aerodrome"
@@ -1671,8 +1699,12 @@
                 "name": "Airport terminal",
                 "terms": "airport,aerodrome"
             },
-            "amenity": {
-                "name": "Amenity",
+            "amenity/register_office": {
+                "name": "Register Office",
+                "terms": ""
+            },
+            "amenity/swimming_pool": {
+                "name": "Swimming Pool",
                 "terms": ""
             },
             "amenity/arts_centre": {
@@ -1935,10 +1967,6 @@
                 "name": "Recycling",
                 "terms": "can,bottle,garbage,scrap,trash"
             },
-            "amenity/register_office": {
-                "name": "Register Office",
-                "terms": ""
-            },
             "amenity/restaurant": {
                 "name": "Restaurant",
                 "terms": "bar,breakfast,cafe,café,canteen,coffee,dine,dining,dinner,drive-in,eat,grill,lunch,table"
@@ -1974,10 +2002,6 @@
             "amenity/studio": {
                 "name": "Studio",
                 "terms": "recording,radio,television"
-            },
-            "amenity/swimming_pool": {
-                "name": "Swimming Pool",
-                "terms": ""
             },
             "amenity/taxi": {
                 "name": "Taxi Stand",
@@ -2071,6 +2095,10 @@
                 "name": "Barrier",
                 "terms": ""
             },
+            "barrier/entrance": {
+                "name": "Entrance",
+                "terms": ""
+            },
             "barrier/block": {
                 "name": "Block",
                 "terms": ""
@@ -2093,10 +2121,6 @@
             },
             "barrier/ditch": {
                 "name": "Trench",
-                "terms": ""
-            },
-            "barrier/entrance": {
-                "name": "Entrance",
                 "terms": ""
             },
             "barrier/fence": {
@@ -2143,16 +2167,24 @@
                 "name": "Building",
                 "terms": ""
             },
+            "building/bunker": {
+                "name": "Bunker",
+                "terms": ""
+            },
+            "building/entrance": {
+                "name": "Entrance/Exit",
+                "terms": ""
+            },
+            "building/train_station": {
+                "name": "Train Station",
+                "terms": ""
+            },
             "building/apartments": {
                 "name": "Apartments",
                 "terms": ""
             },
             "building/barn": {
                 "name": "Barn",
-                "terms": ""
-            },
-            "building/bunker": {
-                "name": "Bunker",
                 "terms": ""
             },
             "building/cabin": {
@@ -2189,10 +2221,6 @@
             },
             "building/dormitory": {
                 "name": "Dormitory",
-                "terms": ""
-            },
-            "building/entrance": {
-                "name": "Entrance/Exit",
                 "terms": ""
             },
             "building/garage": {
@@ -2271,10 +2299,6 @@
                 "name": "Row Houses",
                 "terms": "home,terrace,brownstone,family,residence,dwelling"
             },
-            "building/train_station": {
-                "name": "Train Station",
-                "terms": ""
-            },
             "building/university": {
                 "name": "University Building",
                 "terms": "college"
@@ -2286,6 +2310,22 @@
             "craft": {
                 "name": "Craft",
                 "terms": ""
+            },
+            "craft/jeweler": {
+                "name": "Jeweler",
+                "terms": ""
+            },
+            "craft/locksmith": {
+                "name": "Locksmith",
+                "terms": ""
+            },
+            "craft/optician": {
+                "name": "Optician",
+                "terms": ""
+            },
+            "craft/tailor": {
+                "name": "Tailor",
+                "terms": "clothes,suit"
             },
             "craft/basket_maker": {
                 "name": "Basket Maker",
@@ -2359,24 +2399,12 @@
                 "name": "Insulator",
                 "terms": ""
             },
-            "craft/jeweler": {
-                "name": "Jeweler",
-                "terms": ""
-            },
             "craft/key_cutter": {
                 "name": "Key Cutter",
                 "terms": ""
             },
-            "craft/locksmith": {
-                "name": "Locksmith",
-                "terms": ""
-            },
             "craft/metal_construction": {
                 "name": "Metal Construction",
-                "terms": ""
-            },
-            "craft/optician": {
-                "name": "Optician",
                 "terms": ""
             },
             "craft/painter": {
@@ -2443,10 +2471,6 @@
                 "name": "Chimney Sweep",
                 "terms": ""
             },
-            "craft/tailor": {
-                "name": "Tailor",
-                "terms": "clothes,suit"
-            },
             "craft/tiler": {
                 "name": "Tiler",
                 "terms": ""
@@ -2475,27 +2499,27 @@
                 "name": "Embankment",
                 "terms": ""
             },
-            "emergency/_designated": {
+            "emergency/designated": {
                 "name": "Emergency Access Designated",
                 "terms": ""
             },
-            "emergency/_destination": {
+            "emergency/destination": {
                 "name": "Emergency Access Destination",
                 "terms": ""
             },
-            "emergency/_no": {
+            "emergency/no": {
                 "name": "Emergency Access No",
                 "terms": ""
             },
-            "emergency/_official": {
+            "emergency/official": {
                 "name": "Emergency Access Official",
                 "terms": ""
             },
-            "emergency/_private": {
+            "emergency/private": {
                 "name": "Emergency Access Private",
                 "terms": ""
             },
-            "emergency/_yes": {
+            "emergency/yes": {
                 "name": "Emergency Access Yes",
                 "terms": ""
             },
@@ -2570,10 +2594,6 @@
             "healthcare/blood_donation": {
                 "name": "Blood Donor Center",
                 "terms": "blood bank,blood donation,blood transfusion,apheresis,plasmapheresis,plateletpheresis,stem cell donation"
-            },
-            "highway": {
-                "name": "Highway",
-                "terms": ""
             },
             "highway/bridleway": {
                 "name": "Bridle Path",
@@ -2783,6 +2803,10 @@
                 "name": "Land Use",
                 "terms": ""
             },
+            "landuse/farm": {
+                "name": "Farmland",
+                "terms": ""
+            },
             "landuse/allotments": {
                 "name": "Community Garden",
                 "terms": "allotment,garden"
@@ -2805,10 +2829,6 @@
             },
             "landuse/construction": {
                 "name": "Construction",
-                "terms": ""
-            },
-            "landuse/farm": {
-                "name": "Farmland",
                 "terms": ""
             },
             "landuse/farmland": {
@@ -3015,6 +3035,10 @@
                 "name": "Man Made",
                 "terms": ""
             },
+            "man_made/embankment": {
+                "name": "Embankment",
+                "terms": ""
+            },
             "man_made/adit": {
                 "name": "Adit",
                 "terms": "entrance,underground,mine,cave"
@@ -3033,10 +3057,6 @@
             },
             "man_made/cutline": {
                 "name": "Cut line",
-                "terms": ""
-            },
-            "man_made/embankment": {
-                "name": "Embankment",
                 "terms": ""
             },
             "man_made/flagpole": {
@@ -3251,6 +3271,10 @@
                 "name": "Office",
                 "terms": ""
             },
+            "office/travel_agent": {
+                "name": "Travel Agency",
+                "terms": ""
+            },
             "office/accountant": {
                 "name": "Accountant",
                 "terms": ""
@@ -3331,17 +3355,9 @@
                 "name": "Therapist",
                 "terms": ""
             },
-            "office/travel_agent": {
-                "name": "Travel Agency",
-                "terms": ""
-            },
             "piste": {
                 "name": "Piste/Ski Trail",
                 "terms": "ski,sled,sleigh,snowboard,nordic,downhill,snowmobile"
-            },
-            "place": {
-                "name": "Place",
-                "terms": ""
             },
             "place/city": {
                 "name": "City",
@@ -3387,8 +3403,8 @@
                 "name": "Point",
                 "terms": ""
             },
-            "power": {
-                "name": "Power",
+            "power/sub_station": {
+                "name": "Substation",
                 "terms": ""
             },
             "power/generator": {
@@ -3405,10 +3421,6 @@
             },
             "power/pole": {
                 "name": "Power Pole",
-                "terms": ""
-            },
-            "power/sub_station": {
-                "name": "Substation",
                 "terms": ""
             },
             "power/substation": {
@@ -3429,10 +3441,6 @@
             },
             "public_transport/stop_position": {
                 "name": "Stop Position",
-                "terms": ""
-            },
-            "railway": {
-                "name": "Railway",
                 "terms": ""
             },
             "railway/abandoned": {
@@ -3491,16 +3499,20 @@
                 "name": "Relation",
                 "terms": ""
             },
-            "roundabout": {
-                "name": "Roundabout",
-                "terms": ""
-            },
             "route/ferry": {
                 "name": "Ferry Route",
                 "terms": ""
             },
             "shop": {
                 "name": "Shop",
+                "terms": ""
+            },
+            "shop/fishmonger": {
+                "name": "Fishmonger",
+                "terms": ""
+            },
+            "shop/vacant": {
+                "name": "Vacant Shop",
                 "terms": ""
             },
             "shop/alcohol": {
@@ -3677,10 +3689,6 @@
             },
             "shop/fashion": {
                 "name": "Fashion Store",
-                "terms": ""
-            },
-            "shop/fishmonger": {
-                "name": "Fishmonger",
                 "terms": ""
             },
             "shop/florist": {
@@ -3915,10 +3923,6 @@
                 "name": "Tire Store",
                 "terms": ""
             },
-            "shop/vacant": {
-                "name": "Vacant Shop",
-                "terms": ""
-            },
             "shop/vacuum_cleaner": {
                 "name": "Vacuum Cleaner Store",
                 "terms": ""
@@ -4039,16 +4043,16 @@
                 "name": "Raised Pedestrian Crossing",
                 "terms": "speed table,flat top hump"
             },
+            "type/multipolygon": {
+                "name": "Multipolygon",
+                "terms": ""
+            },
             "type/boundary": {
                 "name": "Boundary",
                 "terms": ""
             },
             "type/boundary/administrative": {
                 "name": "Administrative Boundary",
-                "terms": ""
-            },
-            "type/multipolygon": {
-                "name": "Multipolygon",
                 "terms": ""
             },
             "type/restriction": {
@@ -4145,10 +4149,6 @@
             },
             "vertex": {
                 "name": "Other",
-                "terms": ""
-            },
-            "waterway": {
-                "name": "Waterway",
                 "terms": ""
             },
             "waterway/boatyard": {
