@@ -1,14 +1,16 @@
 {
     "fields": [
+        "access",
         "kerb",
-        "tactile_paving"
+        "height",
+        "tactile_paving",
+        "width",
+        "landing_width"
     ],
     "geometry": [
         "vertex"
     ],
-    "tags": {
-        "highway": "crossing"
-    },
+    "tags": {},
     "terms": [],
-    "name": "Curb Ramp (Kerb Ramp)"
+    "name": "Sidewalk Curb Ramp"
 }

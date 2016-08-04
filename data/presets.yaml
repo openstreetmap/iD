@@ -7,6 +7,8 @@ en:
         name: Building Features
       category-golf:
         name: Golf Features
+      category-kerb:
+        name: Pedestrian Kerb
       category-landuse:
         name: Land Use Features
       category-path:
@@ -419,6 +421,11 @@ en:
       handrail:
         # handrail=*
         label: Handrail
+      height:
+        # height=*
+        label: Height (Meters)
+        # height field placeholder
+        placeholder: '1.0, 2.0, 3.0...'
       highway:
         # highway=*
         label: Type
@@ -473,6 +480,11 @@ en:
       lamp_type:
         # lamp_type=*
         label: Type
+      landing_width:
+        # landing_width=*
+        label: Landing Width (Meters)
+        # landing_width field placeholder
+        placeholder: '1.0, 2.0, 3.0...'
       landuse:
         # landuse=*
         label: Type
@@ -872,6 +884,9 @@ en:
           spur: Spur
           # service=yard
           yard: Yard
+      shade:
+        # shade=*
+        label: Shade
       shelter:
         # shelter=*
         label: Shelter
@@ -2105,9 +2120,8 @@ en:
         # 'terms: zebra crossing'
         terms: '<translate with synonyms or related terms for ''Pedestrian Crosswalk'', separated by commas>'
       footway/curbramp:
-        # highway=crossing
-        name: Curb Ramp (Kerb Ramp)
-        terms: '<translate with synonyms or related terms for ''Curb Ramp (Kerb Ramp)'', separated by commas>'
+        name: Sidewalk Curb Ramp
+        terms: '<translate with synonyms or related terms for ''Sidewalk Curb Ramp'', separated by commas>'
       footway/sidewalk:
         # 'highway=footway, footway=sidewalk'
         name: Sidewalk
@@ -2290,7 +2304,7 @@ en:
       highway/steps:
         # highway=steps
         name: Steps
-        # 'terms: stairs,staircase'
+        # 'terms: ramp,stairs,staircase'
         terms: '<translate with synonyms or related terms for ''Steps'', separated by commas>'
       highway/stop:
         # highway=stop

@@ -6,6 +6,7 @@
     "members": [
       "footway/sidewalk",
       "footway/crosswalk",
+      "highway/footway",
       "highway/steps"
     ]
   },

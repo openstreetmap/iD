@@ -4120,10 +4120,9 @@
     "footway/crosswalk": {
         "icon": "highway-footway",
         "fields": [
-            "crossing",
-            "access",
             "surface",
-            "kerb",
+            "access",
+            "crossing",
             "tactile_paving"
         ],
         "geometry": [
@@ -4141,26 +4140,29 @@
     },
     "footway/curbramp": {
         "fields": [
+            "access",
             "kerb",
-            "tactile_paving"
+            "height",
+            "tactile_paving",
+            "width",
+            "landing_width"
         ],
         "geometry": [
             "vertex"
         ],
-        "tags": {
-            "highway": "crossing"
-        },
+        "tags": {},
         "terms": [],
-        "name": "Curb Ramp (Kerb Ramp)"
+        "name": "Sidewalk Curb Ramp"
     },
     "footway/sidewalk": {
         "icon": "highway-footway",
         "fields": [
             "surface",
-            "lit",
+            "access",
             "width",
-            "structure",
-            "access"
+            "shade",
+            "lit",
+            "structure"
         ],
         "geometry": [
             "line"
@@ -4900,6 +4902,7 @@
             "highway": "steps"
         },
         "terms": [
+            "ramp",
             "stairs",
             "staircase"
         ],

@@ -38,6 +38,14 @@
             "golf/water_hazard"
         ]
     },
+    "category-kerb": {
+        "geometry": "vertex",
+        "name": "Pedestrian Kerb",
+        "icon": "roadblock",
+        "members": [
+            "footway/curbramp"
+        ]
+    },
     "category-landuse": {
         "geometry": "area",
         "name": "Land Use Features",
