@@ -2879,6 +2879,10 @@
                 "name": "Quarry",
                 "terms": ""
             },
+            "landuse/recreation_ground": {
+                "name": "Recreation Ground",
+                "terms": "playing fields"
+            },
             "landuse/residential": {
                 "name": "Residential Area",
                 "terms": ""

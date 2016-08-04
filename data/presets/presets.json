@@ -5660,6 +5660,18 @@
         "terms": [],
         "name": "Quarry"
     },
+    "landuse/recreation_ground": {
+        "geometry": [
+            "area"
+        ],
+        "tags": {
+            "landuse": "recreation_ground"
+        },
+        "terms": [
+            "playing fields"
+        ],
+        "name": "Recreation Ground"
+    },
     "landuse/residential": {
         "icon": "building",
         "geometry": [

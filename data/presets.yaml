@@ -2552,6 +2552,11 @@ en:
         # landuse=quarry
         name: Quarry
         terms: '<translate with synonyms or related terms for ''Quarry'', separated by commas>'
+      landuse/recreation_ground:
+        # landuse=recreation_ground
+        name: Recreation Ground
+        # 'terms: playing fields'
+        terms: '<translate with synonyms or related terms for ''Recreation Ground'', separated by commas>'
       landuse/residential:
         # landuse=residential
         name: Residential Area

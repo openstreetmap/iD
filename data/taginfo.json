@@ -1286,6 +1286,10 @@
         },
         {
             "key": "landuse",
+            "value": "recreation_ground"
+        },
+        {
+            "key": "landuse",
             "value": "residential"
         },
         {
