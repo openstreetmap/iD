@@ -9,7 +9,7 @@
       "highway/steps"
     ]
   },
-  "Pedestrian Kerb": {
+  "category-kerb": {
     "geometry": "vertex",
     "name": "Pedestrian Kerb",
     "icon": "roadblock",

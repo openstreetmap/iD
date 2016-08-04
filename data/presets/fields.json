@@ -1462,8 +1462,7 @@
     "width": {
         "key": "width",
         "type": "number",
-        "label": "Width (Meters)",
-        "placeholder": "1.0, 2.0, 3.0..."
+        "label": "Width (Meters)"
     },
     "wikipedia": {
         "key": "wikipedia",
@@ -1475,22 +1474,5 @@
         "icon": "wikipedia",
         "universal": true,
         "label": "Wikipedia"
-    },
-    "Shade": {
-        "key": "shade",
-        "type": "check",
-        "label": "Shade"
-    },
-    "Height (Meters)": {
-        "key": "height",
-        "type": "number",
-        "label": "Height (Meters)",
-        "placeholder": "1.0, 2.0, 3.0..."
-    },
-    "Landing Width (Meters)": {
-        "key": "landing_width",
-        "type": "number",
-        "label": "Landing Width (Meters)",
-        "placeholder": "1.0, 2.0, 3.0..."
     }
 }

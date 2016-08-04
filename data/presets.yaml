@@ -2104,6 +2104,10 @@ en:
         name: Pedestrian Crosswalk
         # 'terms: zebra crossing'
         terms: '<translate with synonyms or related terms for ''Pedestrian Crosswalk'', separated by commas>'
+      footway/curbramp:
+        # highway=crossing
+        name: Curb Ramp (Kerb Ramp)
+        terms: '<translate with synonyms or related terms for ''Curb Ramp (Kerb Ramp)'', separated by commas>'
       footway/sidewalk:
         # 'highway=footway, footway=sidewalk'
         name: Sidewalk

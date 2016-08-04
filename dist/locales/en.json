@@ -2455,6 +2455,10 @@
                 "name": "Pedestrian Crosswalk",
                 "terms": "zebra crossing"
             },
+            "footway/curbramp": {
+                "name": "Curb Ramp (Kerb Ramp)",
+                "terms": ""
+            },
             "footway/sidewalk": {
                 "name": "Sidewalk",
                 "terms": ""

@@ -1,0 +1,14 @@
+{
+    "fields": [
+        "kerb",
+        "tactile_paving"
+    ],
+    "geometry": [
+        "vertex"
+    ],
+    "tags": {
+        "highway": "crossing"
+    },
+    "terms": [],
+    "name": "Curb Ramp (Kerb Ramp)"
+}

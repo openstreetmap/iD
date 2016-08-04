@@ -916,6 +916,10 @@
             "value": "zebra"
         },
         {
+            "key": "highway",
+            "value": "crossing"
+        },
+        {
             "key": "footway",
             "value": "sidewalk"
         },
