@@ -926,7 +926,7 @@ describe('iD.Way', function() {
                         bothways: 1
                     });
             });
-            it('correctly returns the lane:both_ways as 0 or NaN', function() {
+            it('correctly returns when lane:both_ways is 0 or Not a Number', function() {
                 expect(iD.Way({tags: { highway: 'residential', lanes: 5, 'lanes:forward': 2, 'lanes:both_ways': 0, 'lanes:backward': 3 }}).lanes().metadata, 'residential lanes')
                     .to.eql({
                         count: 5,
@@ -944,6 +944,40 @@ describe('iD.Way', function() {
                         bothways: 0
                     });
             });
+        });
+
+        describe.only('lanes array', function() {
+          it('should have correct number of direction elements', function() {
+            var lanes = iD.Way({tags: { highway: 'residential', lanes: 5, 'lanes:forward': 2, 'lanes:both_ways': 0, 'lanes:backward': 3 }}).lanes().lanes;
+            var forward = lanes.filter(function(l) {
+              return l.direction === 'forward';
+            });
+            var backward = lanes.filter(function(l) {
+              return l.direction === 'backward';
+            });
+            var bothways = lanes.filter(function(l) {
+              return l.direction === 'bothways';
+            });
+            expect(forward.length).to.eql(2);
+            expect(backward.length).to.eql(3);
+            expect(bothways.length).to.eql(0);
+
+          });
+          it('should have corrent number of direction elements', function() {
+            var lanes = iD.Way({tags: { highway: 'residential', lanes: 5, 'lanes:backward': 1, 'lanes:both_ways': 1 }}).lanes().lanes;
+            var forward = lanes.filter(function(l) {
+              return l.direction === 'forward';
+            });
+            var backward = lanes.filter(function(l) {
+              return l.direction === 'backward';
+            });
+            var bothways = lanes.filter(function(l) {
+              return l.direction === 'bothways';
+            });
+            expect(forward.length).to.eql(3);
+            expect(backward.length).to.eql(1);
+            expect(bothways.length).to.eql(1);
+          });
         });
     });
 });
