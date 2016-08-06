@@ -47,7 +47,7 @@
     "name-suggestion-index": "0.1.1",
     "phantomjs-prebuilt": "2.1.10",
     "request": "~2.73.0",
-    "rollup": "0.34.3",
+    "rollup": "0.34.5",
     "rollup-plugin-commonjs": "3.3.1",
     "rollup-plugin-node-resolve": "2.0.0",
     "sinon": "1.17.5",
