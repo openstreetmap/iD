@@ -10,7 +10,9 @@
     "geometry": [
         "vertex"
     ],
-    "tags": {},
+    "tags": {
+        "kerb": "lowered"
+    },
     "terms": [],
     "name": "Sidewalk Curb Ramp"
 }
