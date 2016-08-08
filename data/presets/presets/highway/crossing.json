@@ -1,6 +1,7 @@
 {
     "fields": [
         "crossing",
+        "wheelchair",
         "kerb",
         "tactile_paving"
     ],

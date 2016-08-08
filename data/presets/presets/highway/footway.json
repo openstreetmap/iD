@@ -2,6 +2,7 @@
     "icon": "highway-footway",
     "fields": [
         "surface",
+        "wheelchair",
         "lit",
         "width",
         "structure",

@@ -1,6 +1,7 @@
 {
     "fields": [
         "access",
+        "wheelchair",
         "kerb",
         "height",
         "tactile_paving",

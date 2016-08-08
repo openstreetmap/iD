@@ -9,6 +9,7 @@
     "fields": [
         "entrance",
         "access_simple",
+        "wheelchair",
         "address"
     ],
     "name": "Entrance/Exit"
