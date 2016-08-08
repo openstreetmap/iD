@@ -7,6 +7,7 @@
         "footway/crosswalk",
         "highway/footway",
         "highway/steps",
+        "highway/ramp",
         "line"
     ],
     "point": [

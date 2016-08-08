@@ -1,0 +1,24 @@
+{
+    "fields": [
+        "surface",
+        "lit",
+        "width",
+        "incline_steps",
+        "handrail",
+        "wheelchair"
+    ],
+    "icon": "highway-path",
+    "geometry": [
+        "line"
+    ],
+    "tags": {
+        "highway": "steps",
+        "ramp":"yes"
+    },
+    "terms": [
+        "ramp",
+        "stairs",
+        "staircase"
+    ],
+    "name": "Ramp"
+}
