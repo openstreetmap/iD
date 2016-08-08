@@ -1,11 +1,11 @@
 {
     "fields": [
         "surface",
+        "wheelchair",
         "lit",
         "width",
         "incline_steps",
-        "handrail",
-        "wheelchair"
+        "handrail"
     ],
     "icon": "highway-path",
     "geometry": [

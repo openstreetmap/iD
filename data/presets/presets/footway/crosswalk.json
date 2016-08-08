@@ -3,6 +3,7 @@
     "fields": [
         "surface",
         "access",
+        "wheelchair",
         "crossing",
         "tactile_paving"
     ],
