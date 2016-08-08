@@ -6,15 +6,15 @@
         "footway/sidewalk",
         "footway/crosswalk",
         "highway/footway",
-        "highway/steps"
+        "highway/steps",
         "line"
     ],
     "point": [
         "point"
     ],
     "vertex": [
-        "entrance",
         "footway/curbramp",
+        "entrance",
         "vertex"
     ],
     "relation": [
