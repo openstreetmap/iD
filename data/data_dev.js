@@ -10,7 +10,7 @@ iD.data = {
             path + 'data/imagery.json',
             path + 'data/wikipedia.json',
             path + 'data/presets/presets.json',
-            path + 'data/presets/defaults.json',
+            path + 'data/presets_opensidewalks/defaults.json',
             path + 'data/presets/categories.json',
             path + 'data/presets/fields.json',
             path + 'data/imperial.json',

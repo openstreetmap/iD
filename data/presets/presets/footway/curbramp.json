@@ -1,0 +1,19 @@
+{
+    "fields": [
+        "access",
+        "wheelchair",
+        "kerb",
+        "height",
+        "tactile_paving",
+        "width",
+        "landing_width"
+    ],
+    "geometry": [
+        "vertex"
+    ],
+    "tags": {
+        "kerb": "lowered"
+    },
+    "terms": [],
+    "name": "Sidewalk Curb Ramp"
+}
