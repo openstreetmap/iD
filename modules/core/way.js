@@ -110,7 +110,6 @@ _.extend(Way.prototype, {
                     direction: direction
                 };
             }
-            var lanesArray = [];
             for (var i = 0; i < metadata.forward; i++) {
                 lanesArray.push(createLaneItem(i, 'forward'));
             }
@@ -123,6 +122,21 @@ _.extend(Way.prototype, {
             return lanesArray;
         }
 
+        function getTurns(str, count) {
+            var array = str.split('|')
+                .filter(function(s, i) {
+                    return i < count;
+                })
+                .map(function(s) {
+                    if (s === '') s = 'none';
+                    return s.split(';');
+                });
+            while (array.length < count) {
+                array.push(['none']);
+            }
+            return array;
+        }
+
         function safeValue(n) {
             if (n < 0) return 0;
             if (n > metadata.count - metadata.bothways)
@@ -133,6 +147,7 @@ _.extend(Way.prototype, {
         if (!this.tags.highway) return null;
 
         var metadata = {};
+        var lanesArray = [];
 
         // fill metadata.count with default count
         switch (this.tags.highway) {
@@ -147,8 +162,13 @@ _.extend(Way.prototype, {
 
         if (this.tags.lanes) metadata.count = parseInt(this.tags.lanes);
 
+        for (var i = 0; i < metadata.count; i++) {
+            lanesArray.push({ index: i});
+        }
+
         metadata.oneway = this.isOneWay();
 
+        // fill metadata with safe forward, backward, bothways values.
         if (parseInt(this.tags.oneway) === -1) {
             metadata.forward = 0;
             metadata.bothways = 0;
@@ -158,19 +178,20 @@ _.extend(Way.prototype, {
             metadata.forward = metadata.count;
             metadata.bothways = 0;
             metadata.backward = 0;
-        } else {
+        }
+        else {
+            // bothways is forced to always be either 1 or 0.
             metadata.bothways = parseInt(this.tags['lanes:both_ways']) > 0 ? 1 : 0;
             metadata.forward = parseInt(this.tags['lanes:forward']);
             metadata.backward = parseInt(this.tags['lanes:backward']);
 
             if (_.isNaN(metadata.forward) && _.isNaN(metadata.backward)) {
-                metadata.forward = parseInt((metadata.count - metadata.bothways) / 2);
-                metadata.backward = metadata.count - metadata.bothways - metadata.forward;
+                metadata.backward = parseInt((metadata.count - metadata.bothways) / 2);
+                metadata.forward = metadata.count - metadata.bothways - metadata.backward;
             }
             else if (_.isNaN(metadata.forward)) {
                 metadata.backward = safeValue(metadata.backward);
                 metadata.forward = metadata.count - metadata.bothways - metadata.backward;
-
             }
             else if (_.isNaN(metadata.backward)) {
                 metadata.forward = safeValue(metadata.forward);
@@ -178,9 +199,38 @@ _.extend(Way.prototype, {
             }
         }
 
+        for (i = 0; i < metadata.count; i++) {
+            if (i < metadata.forward)
+                lanesArray[i].direction = 'forward';
+            else if (i < metadata.forward + metadata.bothways)
+                lanesArray[i].direction = 'bothways';
+            else
+                lanesArray[i].direction = 'backward';
+        }
+
+        // parse turn:lanes:forward/backward first
+        if (!metadata.oneway && this.tags['turn:lanes:forward'] && this.tags['turn:lanes:backward']) {
+            metadata.turnLanesForward = getTurns(this.tags['turn:lanes:forward'], metadata.forward);
+            metadata.turnLanesBackward = getTurns(this.tags['turn:lanes:backward'], metadata.backward);
+
+            // set turnLane for each lanesArray item, except for bothways.
+            metadata.turnLanesForward.forEach(function(l, i) {
+                lanesArray[i].turnLane = l;
+            });
+            metadata.turnLanesBackward.forEach(function(l, i) {
+                lanesArray[i + metadata.forward + metadata.bothways].turnLane = l;
+            });
+        }
+        else if (this.tags['turn:lanes']) {
+            metadata.turnLanes = getTurns(this.tags['turn:lanes'], metadata.count);
+            metadata.turnLanes.forEach(function(l, i) {
+                lanesArray[i].turnLane = l;
+            });
+        }
+
         return {
             metadata: metadata,
-            lanes: makeLanesArray(metadata)
+            lanes: lanesArray
         };
     },
 
