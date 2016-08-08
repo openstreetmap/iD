@@ -3,14 +3,18 @@
         "area"
     ],
     "line": [
-        "category-path",
+        "footway/sidewalk",
+        "footway/crosswalk",
+        "highway/footway",
+        "highway/steps"
         "line"
     ],
     "point": [
         "point"
     ],
     "vertex": [
-        "category-kerb",
+        "entrance",
+        "footway/curbramp",
         "vertex"
     ],
     "relation": [

@@ -11,7 +11,7 @@ iD.data = {
             path + 'data/wikipedia.json',
             path + 'data/presets/presets.json',
             path + 'data/presets_opensidewalks/defaults.json',
-            path + 'data/presets_opensidewalks/categories.json',
+            path + 'data/presets/categories.json',
             path + 'data/presets/fields.json',
             path + 'data/imperial.json',
             path + 'data/feature-icons.json',
