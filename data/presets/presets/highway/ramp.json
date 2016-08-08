@@ -4,14 +4,15 @@
         "lit",
         "width",
         "incline_steps",
-        "handrail"
+        "handrail",
+        "wheelchair"
     ],
     "icon": "highway-path",
     "geometry": [
         "line"
     ],
     "tags": {
-        "highway": "steps"
+        "highway": "steps",
         "ramp":"yes"
     },
     "terms": [
