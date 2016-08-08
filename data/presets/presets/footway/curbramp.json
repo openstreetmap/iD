@@ -1,0 +1,16 @@
+{
+    "fields": [
+        "access",
+        "kerb",
+        "height",
+        "tactile_paving",
+        "width",
+        "landing_width"
+    ],
+    "geometry": [
+        "vertex"
+    ],
+    "tags": {},
+    "terms": [],
+    "name": "Sidewalk Curb Ramp"
+}

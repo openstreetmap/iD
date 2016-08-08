@@ -1,10 +1,9 @@
 {
     "icon": "highway-footway",
     "fields": [
-        "crossing",
-        "access",
         "surface",
-        "kerb",
+        "access",
+        "crossing",
         "tactile_paving"
     ],
     "geometry": [

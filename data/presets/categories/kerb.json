@@ -1,0 +1,8 @@
+{
+  "geometry": "vertex",
+  "name": "Pedestrian Kerb",
+  "icon": "roadblock",
+  "members": [
+    "footway/curbramp"
+  ]
+}

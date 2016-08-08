@@ -1,0 +1,23 @@
+{
+    "area": [
+        "area"
+    ],
+    "line": [
+        "footway/sidewalk",
+        "footway/crosswalk",
+        "highway/footway",
+        "highway/steps",
+        "line"
+    ],
+    "point": [
+        "point"
+    ],
+    "vertex": [
+        "footway/curbramp",
+        "entrance",
+        "vertex"
+    ],
+    "relation": [
+        "relation"
+    ]
+}

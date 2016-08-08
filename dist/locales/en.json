@@ -623,6 +623,9 @@
             "category-golf": {
                 "name": "Golf Features"
             },
+            "category-kerb": {
+                "name": "Pedestrian Kerb"
+            },
             "category-landuse": {
                 "name": "Land Use Features"
             },
@@ -1014,6 +1017,10 @@
             "handrail": {
                 "label": "Handrail"
             },
+            "height": {
+                "label": "Height (Meters)",
+                "placeholder": "1.0, 2.0, 3.0..."
+            },
             "highway": {
                 "label": "Type"
             },
@@ -1064,6 +1071,10 @@
             },
             "lamp_type": {
                 "label": "Type"
+            },
+            "landing_width": {
+                "label": "Landing Width (Meters)",
+                "placeholder": "1.0, 2.0, 3.0..."
             },
             "landuse": {
                 "label": "Type"
@@ -1414,6 +1425,9 @@
                     "yes": "Yes",
                     "no": "No"
                 }
+            },
+            "shade": {
+                "label": "Shade"
             },
             "shelter_type": {
                 "label": "Type"
@@ -2551,6 +2565,10 @@
                 "name": "Pedestrian Crosswalk",
                 "terms": "zebra crossing"
             },
+            "footway/curbramp": {
+                "name": "Sidewalk Curb Ramp",
+                "terms": ""
+            },
             "footway/sidewalk": {
                 "name": "Sidewalk",
                 "terms": ""
@@ -2717,7 +2735,7 @@
             },
             "highway/steps": {
                 "name": "Steps",
-                "terms": "stairs,staircase"
+                "terms": "ramp,stairs,staircase"
             },
             "highway/stop": {
                 "name": "Stop Sign",

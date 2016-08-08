@@ -1,0 +1,6 @@
+{
+  "key": "height",
+  "type": "number",
+  "label": "Height (Meters)",
+  "placeholder": "1.0, 2.0, 3.0..."
+}

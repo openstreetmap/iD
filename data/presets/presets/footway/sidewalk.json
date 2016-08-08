@@ -2,10 +2,11 @@
     "icon": "highway-footway",
     "fields": [
         "surface",
-        "lit",
+        "access",
         "width",
-        "structure",
-        "access"
+        "shade",
+        "lit",
+        "structure"
     ],
     "geometry": [
         "line"
