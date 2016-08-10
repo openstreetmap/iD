@@ -1,5 +1,5 @@
 import { t } from '../util/locale';
-import { intro } from './intro';
+import { intro } from './intro/index';
 import { modal } from './modal';
 
 export function Splash(context) {

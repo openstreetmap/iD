@@ -1,4 +1,5 @@
 import { t } from '../util/locale';
+import { tooltip } from '../util/tooltip';
 import _ from 'lodash';
 import { tooltipHtml } from './tooltipHtml';
 export function FeatureInfo(context) {
@@ -16,7 +17,7 @@ export function FeatureInfo(context) {
         selection.html('');
 
         if (hiddenList.length) {
-            var tooltip = bootstrap.tooltip()
+            var tooltipBehavior = tooltip()
                     .placement('top')
                     .html(true)
                     .title(function() {
@@ -27,9 +28,9 @@ export function FeatureInfo(context) {
                 .attr('href', '#')
                 .attr('tabindex', -1)
                 .html(t('feature_info.hidden_warning', { count: count }))
-                .call(tooltip)
+                .call(tooltipBehavior)
                 .on('click', function() {
-                    tooltip.hide(warning);
+                    tooltipBehavior.hide(warning);
                     // open map data panel?
                     d3.event.preventDefault();
                 });

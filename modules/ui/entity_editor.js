@@ -1,4 +1,5 @@
 import { t } from '../util/locale';
+import { tooltip } from '../util/tooltip';
 import _ from 'lodash';
 import { Browse } from '../modes/index';
 import { ChangeTags } from '../actions/index';
@@ -69,7 +70,7 @@ export function EntityEditor(context) {
             .attr('class', 'preset-list-button-wrap')
             .append('button')
             .attr('class', 'preset-list-button preset-reset')
-            .call(bootstrap.tooltip()
+            .call(tooltip()
                 .title(t('inspector.back_tooltip'))
                 .placement('bottom'))
             .append('div')

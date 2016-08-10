@@ -53,9 +53,6 @@ export function FullScreen(context) {
         if (!isSupported())
             return;
 
-        // var tooltip = bootstrap.tooltip()
-        //     .placement('left');
-
         // button = selection.append('button')
         //     .attr('title', t('full_screen'))
         //     .attr('tabindex', -1)

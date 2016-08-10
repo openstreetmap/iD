@@ -1,5 +1,4 @@
-!function(){
-  var d3 = {version: "3.5.5"}; // semver
+var d3 = {version: "3.5.5"}; // semver
 d3.ascending = d3_ascending;
 
 function d3_ascending(a, b) {
@@ -6039,5 +6038,3 @@ d3.xml = d3_xhrType(function(request) {
 });
   if (typeof define === "function" && define.amd) define(d3);
   else if (typeof module === "object" && module.exports) module.exports = d3;
-  this.d3 = d3;
-}();

@@ -284,9 +284,6 @@ d3.combobox = function() {
 };
 
 d3.combobox.off = function(input) {
-    data = null;
-    fetcher = null;
-
     input
         .on('focus.typeahead', null)
         .on('blur.typeahead', null)

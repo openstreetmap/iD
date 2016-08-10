@@ -1,6 +1,7 @@
 import { t } from '../util/locale';
 import _ from 'lodash';
 import { Extent, polygonIntersectsPolygon } from '../geo/index';
+import { jsonpRequest } from '../util/jsonp_request';
 
 export function BackgroundSource(data) {
     var source = _.clone(data),
@@ -98,7 +99,7 @@ BackgroundSource.Bing = function(data, dispatch) {
             key + '&jsonp={callback}',
         providers = [];
 
-    d3.jsonp(url, function(json) {
+    jsonpRequest(url, function(json) {
         providers = json.resourceSets[0].resources[0].imageryProviders.map(function(provider) {
             return {
                 attribution: provider.attribution,

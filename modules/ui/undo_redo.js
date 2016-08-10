@@ -1,4 +1,5 @@
 import { t } from '../util/locale';
+import { tooltip } from '../util/tooltip';
 import { Icon } from '../svg/index';
 import { cmd } from './cmd';
 import { tooltipHtml } from './tooltipHtml';
@@ -21,7 +22,7 @@ export function UndoRedo(context) {
     }
 
     return function(selection) {
-        var tooltip = bootstrap.tooltip()
+        var tooltipBehavior = tooltip()
             .placement('bottom')
             .html(true)
             .title(function (d) {
@@ -35,7 +36,7 @@ export function UndoRedo(context) {
             .enter().append('button')
             .attr('class', 'col6 disabled')
             .on('click', function(d) { return d.action(); })
-            .call(tooltip);
+            .call(tooltipBehavior);
 
         buttons.each(function(d) {
             d3.select(this)
@@ -62,7 +63,7 @@ export function UndoRedo(context) {
                 .each(function() {
                     var selection = d3.select(this);
                     if (selection.property('tooltipVisible')) {
-                        selection.call(tooltip.show);
+                        selection.call(tooltipBehavior.show);
                     }
                 });
         }

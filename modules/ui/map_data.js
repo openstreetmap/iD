@@ -1,4 +1,5 @@
 import { t } from '../util/locale';
+import { tooltip } from '../util/tooltip';
 import { Icon } from '../svg/index';
 import { tooltipHtml } from './tooltipHtml';
 import _ from 'lodash';
@@ -107,7 +108,7 @@ export function MapData(context) {
                 .attr('class', 'list-item-mapillary-images');
 
             var labelImages = enterImages.append('label')
-                .call(bootstrap.tooltip()
+                .call(tooltip()
                     .title(t('mapillary_images.tooltip'))
                     .placement('top'));
 
@@ -128,7 +129,7 @@ export function MapData(context) {
                 .attr('class', 'list-item-mapillary-signs');
 
             var labelSigns = enterSigns.append('label')
-                .call(bootstrap.tooltip()
+                .call(tooltip()
                     .title(t('mapillary_signs.tooltip'))
                     .placement('top'));
 
@@ -181,7 +182,7 @@ export function MapData(context) {
 
             enter.append('button')
                 .attr('class', 'list-item-gpx-extent')
-                .call(bootstrap.tooltip()
+                .call(tooltip()
                     .title(t('gpx.zoom'))
                     .placement('left'))
                 .on('click', function() {
@@ -193,7 +194,7 @@ export function MapData(context) {
 
             enter.append('button')
                 .attr('class', 'list-item-gpx-browse')
-                .call(bootstrap.tooltip()
+                .call(tooltip()
                     .title(t('gpx.browse'))
                     .placement('left'))
                 .on('click', function() {
@@ -207,7 +208,7 @@ export function MapData(context) {
                 .call(Icon('#icon-geolocate'));
 
             var labelGpx = enter.append('label')
-                .call(bootstrap.tooltip()
+                .call(tooltip()
                     .title(t('gpx.drag_drop'))
                     .placement('top'));
 
@@ -243,7 +244,7 @@ export function MapData(context) {
             var enter = items.enter()
                 .append('li')
                 .attr('class', 'layer')
-                .call(bootstrap.tooltip()
+                .call(tooltip()
                     .html(true)
                     .title(function(d) {
                         var tip = t(name + '.' + d + '.tooltip'),
@@ -297,7 +298,7 @@ export function MapData(context) {
 
         function togglePanel() {
             if (d3.event) d3.event.preventDefault();
-            tooltip.hide(button);
+            tooltipBehavior.hide(button);
             setVisible(!button.classed('active'));
         }
 
@@ -342,7 +343,7 @@ export function MapData(context) {
 
         var content = selection.append('div')
                 .attr('class', 'fillL map-overlay col3 content hide'),
-            tooltip = bootstrap.tooltip()
+            tooltipBehavior = tooltip()
                 .placement('left')
                 .html(true)
                 .title(tooltipHtml(t('map_data.description'), key)),
@@ -350,7 +351,7 @@ export function MapData(context) {
                 .attr('tabindex', -1)
                 .on('click', togglePanel)
                 .call(Icon('#icon-data', 'light'))
-                .call(tooltip),
+                .call(tooltipBehavior),
             shown = false;
 
         content.append('h4')
