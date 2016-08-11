@@ -96,8 +96,8 @@ function suggestionsToPresets(presets) {
                     delete existing[name];
                 }
                 if (!existing[name]) {
-                    tags = _.extend({name: name}, suggestions[key][value][name].tags);
-                    addSuggestion(item, tags, name, count);
+                    tags = _.extend({name: name.replace(/"/g, '')}, suggestions[key][value][name].tags);
+                    addSuggestion(item, tags, name.replace(/"/g, ''), count);
                 }
             }
         }
@@ -112,7 +112,7 @@ function suggestionsToPresets(presets) {
             return;
         }
 
-        presets[category] = {
+        presets[category.replace(/"/g, '')] = {
             tags: parent.tags ? _.merge(tags, parent.tags) : tags,
             name: name,
             icon: parent.icon,

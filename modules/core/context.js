@@ -6,9 +6,12 @@ import { Detect } from '../util/detect';
 import { Features } from '../renderer/features';
 import { History } from './history';
 import { Map } from '../renderer/map';
+import { Select } from '../modes/select';
 import { RawMercator } from '../geo/raw_mercator';
 import { presets as presetsInit } from '../presets/presets';
 import { init as uiInit } from '../ui/init';
+import { locales, en } from '../../data/index';
+import * as services from '../services/index';
 
 export var areaKeys = {};
 
@@ -18,7 +21,7 @@ export function Context(root) {
             current: function(_) { this._current = _; }
         };
     }
-    addTranslation('en', iD.data.en);
+    addTranslation('en', en);
     setLocale('en');
 
     var dispatch = d3.dispatch('enter', 'exit', 'change'),
@@ -97,7 +100,7 @@ export function Context(root) {
             if (!context.hasEntity(id)) return;
             map.on('drawn.zoomToEntity', null);
             context.on('enter.zoomToEntity', null);
-            context.enter(iD.modes.Select(context, [id]));
+            context.enter(Select(context, [id]));
         });
 
         context.on('enter.zoomToEntity', function() {
@@ -136,7 +139,7 @@ export function Context(root) {
         connection.flush();
         features.reset();
         history.reset();
-        _.each(iD.services, function(service) {
+        _.each(services, function(service) {
             var reset = service().reset;
             if (reset) reset(context);
         });
@@ -330,7 +333,7 @@ export function Context(root) {
     };
 
     context.loadLocale = function(cb) {
-        if (locale && locale !== 'en' && iD.data.locales.indexOf(locale) !== -1) {
+        if (locale && locale !== 'en' && locales.indexOf(locale) !== -1) {
             localePath = localePath || context.asset('locales/' + locale + '.json');
             d3.json(localePath, function(err, result) {
                 addTranslation(locale, result);
@@ -349,7 +352,7 @@ export function Context(root) {
     context.projection = RawMercator();
 
     locale = Detect().locale;
-    if (locale && iD.data.locales.indexOf(locale) === -1) {
+    if (locale && locales.indexOf(locale) === -1) {
         locale = locale.split('-')[0];
     }
 

@@ -1,5 +1,6 @@
 import _ from 'lodash';
 import { PointTransform } from './point_transform';
+import { mapillary as mapillaryService } from '../services/index';
 
 export function MapillaryImages(projection, context, dispatch) {
     var debouncedRedraw = _.debounce(function () { dispatch.change(); }, 1000),
@@ -15,10 +16,10 @@ export function MapillaryImages(projection, context, dispatch) {
     }
 
     function getMapillary() {
-        if (iD.services.mapillary && !_mapillary) {
-            _mapillary = iD.services.mapillary.init();
+        if (mapillaryService && !_mapillary) {
+            _mapillary = mapillaryService.init();
             _mapillary.event.on('loadedImages', debouncedRedraw);
-        } else if (!iD.services.mapillary && _mapillary) {
+        } else if (!mapillaryService && _mapillary) {
             _mapillary = null;
         }
 

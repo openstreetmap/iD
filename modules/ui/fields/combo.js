@@ -1,5 +1,7 @@
-import { t } from '../../util/locale';
 import _ from 'lodash';
+
+import { t } from '../../util/locale';
+import { nominatim } from '../../services/index';
 
 export {
     combo as typeCombo,
@@ -240,8 +242,8 @@ export function combo(field, context) {
 
         if (isNetwork) {
             var center = entity.extent(context.graph()).center();
-            iD.services.nominatim.init();
-            iD.services.nominatim.countryCode(center, function (err, code) {
+            nominatim.init();
+            nominatim.countryCode(center, function (err, code) {
                 countryCode = code;
             });
         }

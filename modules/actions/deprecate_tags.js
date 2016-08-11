@@ -1,4 +1,6 @@
 import _ from 'lodash';
+import { deprecated } from '../../data/index';
+
 export function DeprecateTags(entityId) {
     return function(graph) {
         var entity = graph.entity(entityId),
@@ -7,9 +9,9 @@ export function DeprecateTags(entityId) {
             rule;
 
         // This handles deprecated tags with a single condition
-        for (var i = 0; i < iD.data.deprecated.length; i++) {
+        for (var i = 0; i < deprecated.length; i++) {
 
-            rule = iD.data.deprecated[i];
+            rule = deprecated[i];
             var match = _.toPairs(rule.old)[0],
                 replacements = rule.replace ? _.toPairs(rule.replace) : null;
 

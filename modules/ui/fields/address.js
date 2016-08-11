@@ -1,5 +1,7 @@
 import _ from 'lodash';
 import { Extent, chooseEdge, sphericalDistance } from '../../geo/index';
+import { nominatim } from '../../services/index';
+import { addressFormats } from '../../../data/index';
 
 export function address(field, context) {
     var dispatch = d3.dispatch('init', 'change'),
@@ -111,11 +113,11 @@ export function address(field, context) {
 
         var center = entity.extent(context.graph()).center(),
             addressFormat;
-        iD.services.nominatim.init();
-        iD.services.nominatim.countryCode(center, function (err, countryCode) {
-            addressFormat = _.find(iD.data.addressFormats, function (a) {
+        nominatim.init();
+        nominatim.countryCode(center, function (err, countryCode) {
+            addressFormat = _.find(addressFormats, function (a) {
                 return a && a.countryCodes && _.includes(a.countryCodes, countryCode);
-            }) || _.first(iD.data.addressFormats);
+            }) || _.first(addressFormats);
 
             function row(r) {
                 // Normalize widths.
