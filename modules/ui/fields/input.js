@@ -1,4 +1,6 @@
 import { t } from '../../util/locale';
+import { nominatim as nominatimService } from '../../services/index';
+import { phoneFormats } from '../../../data/index';
 
 export {
   url as text,
@@ -30,11 +32,11 @@ export function url(field, context) {
 
         if (field.type === 'tel') {
             var center = entity.extent(context.graph()).center();
-            iD.services.nominatim.init();
-            iD.services.nominatim.countryCode(center, function (err, countryCode) {
-                if (err || !iD.data.phoneFormats[countryCode]) return;
+            nominatimService.init();
+            nominatimService.countryCode(center, function (err, countryCode) {
+                if (err || !phoneFormats[countryCode]) return;
                 selection.selectAll('#' + fieldId)
-                    .attr('placeholder', iD.data.phoneFormats[countryCode]);
+                    .attr('placeholder', phoneFormats[countryCode]);
             });
 
         } else if (field.type === 'number') {

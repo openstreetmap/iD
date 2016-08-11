@@ -1,5 +1,6 @@
 import _ from 'lodash';
 import { getPrototypeOf } from '../util/index';
+import { debug } from '../index';
 
 export function Graph(other, mutable) {
     if (!(this instanceof Graph)) return new Graph(other, mutable);
@@ -92,7 +93,7 @@ Graph.prototype = {
             nodes[i] = this.entity(entity.nodes[i]);
         }
 
-        if (iD.debug) Object.freeze(nodes);
+        if (debug) Object.freeze(nodes);
 
         this._childNodes[entity.id] = nodes;
         return this._childNodes[entity.id];

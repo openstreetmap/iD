@@ -35,6 +35,8 @@ export { TileLayer } from './renderer/tile_layer';
 
 import * as data from '../data/index.js';
 
+export var debug = false;
+
 export {
   data,
   actions,

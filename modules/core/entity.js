@@ -1,5 +1,7 @@
 import _ from 'lodash';
+import { debug } from '../index';
 import { interestingTag } from './tags';
+import { deprecated as deprecatedData } from '../../data/index';
 
 export function Entity(attrs) {
     // For prototypal inheritance.
@@ -63,7 +65,7 @@ Entity.prototype = {
             this.visible = true;
         }
 
-        if (iD.debug) {
+        if (debug) {
             Object.freeze(this);
             Object.freeze(this.tags);
 
@@ -134,7 +136,7 @@ Entity.prototype = {
         var tags = _.toPairs(this.tags);
         var deprecated = {};
 
-        iD.data.deprecated.forEach(function(d) {
+        deprecatedData.forEach(function(d) {
             var match = _.toPairs(d.old)[0];
             tags.forEach(function(t) {
                 if (t[0] === match[0] &&

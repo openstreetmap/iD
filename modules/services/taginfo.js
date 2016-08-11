@@ -21,7 +21,7 @@ var taginfo = {},
         vertex: 'nodes',
         area: 'ways',
         line: 'ways'
-    };
+    },
     tag_members_fractions = {
         point: 'count_node_members_fraction',
         vertex: 'count_node_members_fraction',
@@ -29,7 +29,6 @@ var taginfo = {},
         line: 'count_way_members_fraction',
         relation: 'count_relation_members_fraction'
     };
-
 
 function sets(parameters, n, o) {
     if (parameters.geometry && o[parameters.geometry]) {

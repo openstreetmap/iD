@@ -1,5 +1,6 @@
 import _ from 'lodash';
 import { pointInPolygon } from '../../geo/index';
+import { imperial as imperialData } from '../../../data/index';
 
 export function maxspeed(field, context) {
     var dispatch = d3.dispatch('change'),
@@ -32,7 +33,7 @@ export function maxspeed(field, context) {
         var childNodes = context.graph().childNodes(context.entity(entity.id)),
             loc = childNodes[~~(childNodes.length/2)].loc;
 
-        imperial = _.some(iD.data.imperial.features, function(f) {
+        imperial = _.some(imperialData.features, function(f) {
             return _.some(f.geometry.coordinates, function(d) {
                 return pointInPolygon(loc, d);
             });

@@ -1,3 +1,5 @@
+import { pavedTags } from '../core/tags';
+
 export function TagClasses() {
     var primaries = [
             'building', 'highway', 'railway', 'waterway', 'aeroway',
@@ -85,8 +87,8 @@ export function TagClasses() {
                 var paved = (t.highway !== 'track');
                 for (k in t) {
                     v = t[k];
-                    if (k in iD.pavedTags) {
-                        paved = !!iD.pavedTags[k][v];
+                    if (k in pavedTags) {
+                        paved = !!pavedTags[k][v];
                         break;
                     }
                 }

@@ -1,4 +1,9 @@
 import { polygonIntersectsPolygon } from '../geo/index';
+import {
+    imperial as imperialData,
+    driveLeft as driveLeftData,
+    imagery as imageryData
+} from '../../data/index';
 
 export function Debug(projection, context) {
 
@@ -74,7 +79,7 @@ export function Debug(projection, context) {
 
 
         var extent = context.map().extent(),
-            availableImagery = showsImagery && multipolygons(iD.data.imagery.filter(function(source) {
+            availableImagery = showsImagery && multipolygons(imageryData.filter(function(source) {
                 if (!source.polygon) return false;
                 return source.polygon.some(function(polygon) {
                     return polygonIntersectsPolygon(polygon, extent, true);
@@ -94,7 +99,7 @@ export function Debug(projection, context) {
 
         var imperial = layer
             .selectAll('path.debug-imperial')
-            .data(showsImperial ? [iD.data.imperial] : []);
+            .data(showsImperial ? [imperialData] : []);
 
         imperial.enter()
             .append('path')
@@ -106,7 +111,7 @@ export function Debug(projection, context) {
 
         var driveLeft = layer
             .selectAll('path.debug-drive-left')
-            .data(showsDriveLeft ? [iD.data.driveLeft] : []);
+            .data(showsDriveLeft ? [driveLeftData] : []);
 
         driveLeft.enter()
             .append('path')

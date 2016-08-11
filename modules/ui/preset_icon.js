@@ -1,4 +1,6 @@
 import { Icon } from '../svg/index';
+import { featureIcons } from '../../data/index';
+
 export function PresetIcon() {
     var preset, geometry;
 
@@ -11,7 +13,7 @@ export function PresetIcon() {
             p = preset.apply(this, arguments),
             geom = geometry.apply(this, arguments),
             icon = p.icon || (geom === 'line' ? 'other-line' : 'marker-stroked'),
-            maki = iD.data.featureIcons.hasOwnProperty(icon + '-24');
+            maki = featureIcons.hasOwnProperty(icon + '-24');
 
         if (icon === 'dentist') maki = true;  // workaround for dentist icon missing in `maki-sprite.json`
 
