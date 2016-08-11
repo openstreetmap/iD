@@ -8,8 +8,7 @@
         "eslint:recommended"
     ],
     "globals": {
-        "d3": false,
-        "bootstrap": false
+        "d3": false
     },
     "parserOptions": {
         "ecmaVersion": 6,
