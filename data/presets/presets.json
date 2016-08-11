@@ -28977,12 +28977,12 @@
         ],
         "suggestion": true
     },
-    "amenity/kindergarten/Детский сад \"Солнышко\"": {
+    "amenity/kindergarten/Детский сад Солнышко": {
         "tags": {
-            "name": "Детский сад \"Солнышко\"",
+            "name": "Детский сад Солнышко",
             "amenity": "kindergarten"
         },
-        "name": "Детский сад \"Солнышко\"",
+        "name": "Детский сад Солнышко",
         "icon": "school",
         "geometry": [
             "point",
