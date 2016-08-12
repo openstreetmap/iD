@@ -1,3 +1,4 @@
+import * as d3 from 'd3';
 import { t } from '../../util/locale';
 import { Entity, Graph } from '../../core/index';
 import { Browse } from '../../modes/index';
@@ -6,6 +7,7 @@ import { line } from './line';
 import { navigation } from './navigation';
 import { point } from './point';
 import { startEditing } from './start_editing';
+import { d3curtain } from '../../util/curtain';
 import { default as introGraphRaw } from '../../../data/intro_graph.json';
 
 var sampleIntros = {
@@ -104,7 +106,7 @@ export function intro(context) {
 
         d3.selectAll('#map .layer-background').style('opacity', 1);
 
-        var curtain = d3.curtain();
+        var curtain = d3curtain();
         selection.call(curtain);
 
         function reveal(box, text, options) {

@@ -1,3 +1,7 @@
+import { rebind } from '../../util/rebind';
+import { getSetValue } from '../../util/get_set_value';
+import { d3combobox } from '../../../js/lib/d3.combobox.js';
+import * as d3 from 'd3';
 import _ from 'lodash';
 import { pointInPolygon } from '../../geo/index';
 import { imperial as imperialData } from '../../../data/index';
@@ -14,8 +18,8 @@ export function maxspeed(field, context) {
         imperialValues = [5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80];
 
     function maxspeed(selection) {
-        combobox = d3.combobox();
-        var unitCombobox = d3.combobox().data(['km/h', 'mph'].map(comboValues));
+        combobox = d3combobox();
+        var unitCombobox = d3combobox().data(['km/h', 'mph'].map(comboValues));
 
         input = selection.selectAll('#preset-input-' + field.id)
             .data([0]);
@@ -52,8 +56,8 @@ export function maxspeed(field, context) {
             .call(unitCombobox);
 
         function changeUnits() {
-            imperial = unitInput.value() === 'mph';
-            unitInput.value(imperial ? 'mph' : 'km/h');
+            imperial = getSetValue(unitInput) === 'mph';
+            getSetValue(unitInput, imperial ? 'mph' : 'km/h');
             setSuggestions();
             change();
         }
@@ -62,7 +66,7 @@ export function maxspeed(field, context) {
 
     function setSuggestions() {
         combobox.data((imperial ? imperialValues : metricValues).map(comboValues));
-        unitInput.value(imperial ? 'mph' : 'km/h');
+        getSetValue(unitInput, imperial ? 'mph' : 'km/h');
     }
 
     function comboValues(d) {
@@ -74,7 +78,7 @@ export function maxspeed(field, context) {
 
     function change() {
         var tag = {},
-            value = input.value();
+            value = getSetValue(input);
 
         if (!value) {
             tag[field.key] = undefined;
@@ -84,7 +88,7 @@ export function maxspeed(field, context) {
             tag[field.key] = value + ' mph';
         }
 
-        dispatch.change(tag);
+        dispatch.call("change", this, tag);
     }
 
     maxspeed.tags = function(tags) {
@@ -99,7 +103,7 @@ export function maxspeed(field, context) {
 
         setSuggestions();
 
-        input.value(value || '');
+        getSetValue(input, value || '');
     };
 
     maxspeed.focus = function() {
@@ -110,5 +114,5 @@ export function maxspeed(field, context) {
         entity = _;
     };
 
-    return d3.rebind(maxspeed, dispatch, 'on');
+    return rebind(maxspeed, dispatch, 'on');
 }

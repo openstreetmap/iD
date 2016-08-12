@@ -1,9 +1,11 @@
+import * as d3 from 'd3';
 import _ from 'lodash';
 import { PointTransform } from './point_transform';
+import { getDimensions, setDimensions } from '../util/dimensions';
 import { mapillary as mapillaryService } from '../services/index';
 
 export function MapillaryImages(projection, context, dispatch) {
-    var debouncedRedraw = _.debounce(function () { dispatch.change(); }, 1000),
+    var debouncedRedraw = _.debounce(function () { dispatch.call("change"); }, 1000),
         minZoom = 12,
         layer = d3.select(null),
         _mapillary;
@@ -85,7 +87,7 @@ export function MapillaryImages(projection, context, dispatch) {
 
     function update() {
         var mapillary = getMapillary(),
-            data = (mapillary ? mapillary.images(projection, layer.dimensions()) : []),
+            data = (mapillary ? mapillary.images(projection, getDimensions(layer)) : []),
             imageKey = mapillary ? mapillary.getSelectedImage() : null;
 
         var markers = layer.selectAll('.viewfield-group')
@@ -136,7 +138,7 @@ export function MapillaryImages(projection, context, dispatch) {
             if (mapillary && ~~context.map().zoom() >= minZoom) {
                 editOn();
                 update();
-                mapillary.loadImages(projection, layer.dimensions());
+                mapillary.loadImages(projection, getDimensions(layer));
             } else {
                 editOff();
             }
@@ -151,7 +153,7 @@ export function MapillaryImages(projection, context, dispatch) {
         } else {
             hideLayer();
         }
-        dispatch.change();
+        dispatch.call("change");
         return this;
     };
 
@@ -160,8 +162,8 @@ export function MapillaryImages(projection, context, dispatch) {
     };
 
     drawImages.dimensions = function(_) {
-        if (!arguments.length) return layer.dimensions();
-        layer.dimensions(_);
+        if (!arguments.length) return getDimensions(layer);
+        setDimensions(layer, _);
         return this;
     };
 

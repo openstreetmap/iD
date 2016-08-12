@@ -1,4 +1,8 @@
+import { rebind } from '../util/rebind';
+import { d3combobox } from '../../js/lib/d3.combobox.js';
+import * as d3 from 'd3';
 import { t } from '../util/locale';
+import { triggerEvent } from '../util/trigger_event';
 import { tooltip } from '../util/tooltip';
 import _ from 'lodash';
 import { displayName, entityOrMemberSelector } from '../util/index';
@@ -88,7 +92,7 @@ export function Commit(context) {
                 }
             }
 
-            commentField.call(d3.combobox().caseSensitive(true).data(comments));
+            commentField.call(d3combobox().caseSensitive(true).data(comments));
         });
 
         var clippyArea = commentSection.append('div')
@@ -180,7 +184,7 @@ export function Commit(context) {
 
         var cancelButton = buttonSection.append('button')
             .attr('class', 'secondary-action col5 button cancel-button')
-            .on('click.cancel', function() { dispatch.cancel(); });
+            .on('click.cancel', function() { dispatch.call("cancel"); });
 
         cancelButton.append('span')
             .attr('class', 'label')
@@ -193,7 +197,7 @@ export function Commit(context) {
                 return (n && n.value.length) ? null : true;
             })
             .on('click.save', function() {
-                dispatch.save({
+                dispatch.call('save', this, {
                     comment: commentField.node().value
                 });
             });
@@ -278,8 +282,8 @@ export function Commit(context) {
 
         // Call checkComment off the bat, in case a changeset
         // comment is recovered from localStorage
-        commentField.trigger('input');
+        triggerEvent(commentField, 'input');
     }
 
-    return d3.rebind(commit, dispatch, 'on');
+    return rebind(commit, dispatch, 'on');
 }

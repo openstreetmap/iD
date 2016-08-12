@@ -1,3 +1,5 @@
+import { d3keybinding } from '../../js/lib/d3.keybinding.js';
+import * as d3 from 'd3';
 import { t } from '../util/locale';
 import { tooltip } from '../util/tooltip';
 import { Save as SaveMode } from '../modes/index';
@@ -53,7 +55,7 @@ export function Save(context) {
             .attr('class', 'count')
             .text('0');
 
-        var keybinding = d3.keybinding('undo-redo')
+        var keybinding = d3keybinding('undo-redo')
             .on(key, save, true);
 
         d3.select(document)

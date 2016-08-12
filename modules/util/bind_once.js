@@ -1,5 +1,5 @@
-d3.selection.prototype.one = function (type, listener, capture) {
-    var target = this, typeOnce = type + ".once";
+export function bindOnce(target, type, listener, capture) {
+    var typeOnce = type + ".once";
     function one() {
         target.on(typeOnce, null);
         listener.apply(this, arguments);

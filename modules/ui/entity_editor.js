@@ -1,3 +1,5 @@
+import { rebind } from '../util/rebind';
+import * as d3 from 'd3';
 import { t } from '../util/locale';
 import { tooltip } from '../util/tooltip';
 import _ from 'lodash';
@@ -96,7 +98,7 @@ export function EntityEditor(context) {
 
         selection.selectAll('.preset-reset')
             .on('click', function() {
-                dispatch.choose(activePreset);
+                dispatch.call("choose", this, activePreset);
             });
 
         // Update
@@ -245,5 +247,5 @@ export function EntityEditor(context) {
         return entityEditor;
     };
 
-    return d3.rebind(entityEditor, dispatch, 'on');
+    return rebind(entityEditor, dispatch, 'on');
 }

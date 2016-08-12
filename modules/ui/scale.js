@@ -1,5 +1,6 @@
 import { lonToMeters, metersToLon } from '../geo/index';
 import { Detect } from '../util/detect';
+import { getDimensions, setDimensions } from '../util/dimensions';
 
 export function Scale(context) {
     var projection = context.projection,

@@ -1,5 +1,5 @@
 describe('iD.actions.Move', function() {
-    var projection = d3.geo.mercator().scale(250 / Math.PI);
+    var projection = d3.geoMercator().scale(250 / Math.PI);
 
     describe('#disabled', function() {
         it('returns falsy by default', function() {

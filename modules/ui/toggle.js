@@ -1,3 +1,4 @@
+import * as d3 from 'd3';
 // toggles the visibility of ui elements, using a combination of the
 // hide class, which sets display=none, and a d3 transition for opacity.
 // this will cause blinking when called repeatedly, so check that the

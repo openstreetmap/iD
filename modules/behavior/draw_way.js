@@ -1,11 +1,13 @@
+import * as d3 from 'd3';
 import { t } from '../util/locale';
+import { getDimensions } from '../util/dimensions';
 import _ from 'lodash';
 import { AddEntity, AddMidpoint, AddVertex, MoveNode } from '../actions/index';
 import { Browse, Select } from '../modes/index';
 import { Node, Way } from '../core/index';
 import { chooseEdge, edgeEqual } from '../geo/index';
 import { Draw } from './draw';
-import { entitySelector } from '../util/index';
+import { entitySelector, functor } from '../util/index';
 
 export function DrawWay(context, wayId, index, mode, baseGraph) {
     var way = context.entity(wayId),
@@ -41,7 +43,7 @@ export function DrawWay(context, wayId, index, mode, baseGraph) {
             loc = datum.loc;
 
         } else if (datum.type === 'way' && datum.id !== segment.id) {
-            var dims = context.map().dimensions(),
+            var dims = getDimensions(context.map()),
                 mouse = context.mouse(),
                 pad = 5,
                 trySnap = mouse[0] > pad && mouse[0] < dims[0] - pad &&
@@ -199,7 +201,7 @@ export function DrawWay(context, wayId, index, mode, baseGraph) {
     // Cancel the draw operation and return to browse, deleting everything drawn.
     drawWay.cancel = function() {
         context.perform(
-            d3.functor(baseGraph),
+            functor(baseGraph),
             t('operations.cancel_draw.annotation'));
 
         window.setTimeout(function() {

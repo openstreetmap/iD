@@ -1,3 +1,5 @@
+import { d3keybinding } from '../../js/lib/d3.keybinding.js';
+import * as d3 from 'd3';
 import { t } from '../util/locale';
 import _ from 'lodash';
 import * as Operations from '../operations/index';
@@ -16,7 +18,7 @@ export function Select(context, selectedIDs) {
         button: 'browse'
     };
 
-    var keybinding = d3.keybinding('select'),
+    var keybinding = d3keybinding('select'),
         timeout = null,
         behaviors = [
             Copy(context),

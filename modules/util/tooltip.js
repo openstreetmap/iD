@@ -1,10 +1,12 @@
+import { functor } from './index';
+import * as d3 from 'd3';
 export function tooltip() {
 
   var tooltip = function(selection) {
       selection.each(setup);
     },
-    animation = d3.functor(false),
-    html = d3.functor(false),
+    animation = functor(false),
+    html = functor(false),
     title = function() {
       var title = this.getAttribute('data-original-title');
       if (title) {
@@ -18,11 +20,11 @@ export function tooltip() {
     },
     over = 'mouseenter.tooltip',
     out = 'mouseleave.tooltip',
-    placement = d3.functor('top');
+    placement = functor('top');
 
   tooltip.title = function(_) {
     if (arguments.length) {
-      title = d3.functor(_);
+      title = functor(_);
       return tooltip;
     } else {
       return title;
@@ -31,7 +33,7 @@ export function tooltip() {
 
   tooltip.html = function(_) {
     if (arguments.length) {
-      html = d3.functor(_);
+      html = functor(_);
       return tooltip;
     } else {
       return html;
@@ -40,7 +42,7 @@ export function tooltip() {
 
   tooltip.placement = function(_) {
     if (arguments.length) {
-      placement = d3.functor(_);
+      placement = functor(_);
       return tooltip;
     } else {
       return placement;

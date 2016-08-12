@@ -1,4 +1,7 @@
+import { d3keybinding } from '../../js/lib/d3.keybinding.js';
+import * as d3 from 'd3';
 import { t } from '../util/locale';
+import { getDimensions, setDimensions } from '../util/dimensions';
 import { tooltip } from '../util/tooltip';
 import { Defs, Icon } from '../svg/index';
 import { Account } from './account';
@@ -195,7 +198,7 @@ export function init(context) {
         var mapDimensions = map.dimensions();
 
         d3.select(window).on('resize.editor', function() {
-            mapDimensions = content.dimensions(null);
+            mapDimensions = setDimensions(content, null);
             map.dimensions(mapDimensions);
         });
 
@@ -209,7 +212,7 @@ export function init(context) {
         // pan amount
         var pa = 10;
 
-        var keybinding = d3.keybinding('main')
+        var keybinding = d3keybinding('main')
             .on('⌫', function() { d3.event.preventDefault(); })
             .on('←', pan([pa, 0]))
             .on('↑', pan([0, pa]))
@@ -246,7 +249,8 @@ export function init(context) {
             });
     }
 
-    function ui(container) {
+    function ui(node) {
+        var container = d3.select(node);
         context.container(container);
         context.loadLocale(function() {
             render(container);

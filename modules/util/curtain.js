@@ -1,5 +1,9 @@
+import { getDimensions } from './dimensions';
+import { rebind } from '../../modules/util/rebind';
+import * as d3 from 'd3';
+
 // Tooltips and svg mask used to highlight certain features
-d3.curtain = function() {
+export function d3curtain() {
 
     var event = d3.dispatch(),
         surface,
@@ -19,11 +23,9 @@ d3.curtain = function() {
             });
 
         darkness = surface.append('path')
-            .attr({
-                x: 0,
-                y: 0,
-                'class': 'curtain-darkness'
-            });
+            .attr('x', 0)
+            .attr('y', 0)
+            .attr('class', 'curtain-darkness')
 
         d3.select(window).on('resize.curtain', resize);
 
@@ -37,10 +39,9 @@ d3.curtain = function() {
         resize();
 
         function resize() {
-            surface.attr({
-                width: window.innerWidth,
-                height: window.innerHeight
-            });
+            surface
+            .attr('width', window.innerWidth)
+            .attr('height', window.innerHeight);
             curtain.cut(darkness.datum());
         }
     }
@@ -57,10 +58,9 @@ d3.curtain = function() {
             var html = parts[0] ? '<span>' + parts[0] + '</span>' : '';
             if (parts[1]) html += '<span class="bold">' + parts[1] + '</span>';
 
-            var dimensions = tooltip.classed('in', true)
+            var dimensions = getDimensions(tooltip.classed('in', true)
                 .select('.tooltip-inner')
-                    .html(html)
-                    .dimensions();
+                    .html(html));
 
             var pos;
 
@@ -127,5 +127,5 @@ d3.curtain = function() {
         tooltip.remove();
     };
 
-    return d3.rebind(curtain, event, 'on');
+    return rebind(curtain, event, 'on');
 };

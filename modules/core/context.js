@@ -1,3 +1,5 @@
+import { rebind } from '../util/rebind';
+import * as d3 from 'd3';
 import { t, addTranslation, setLocale } from '../util/locale';
 import _ from 'lodash';
 import { Background } from '../renderer/background';
@@ -170,12 +172,12 @@ export function Context(root) {
     context.enter = function(newMode) {
         if (mode) {
             mode.exit();
-            dispatch.exit(mode);
+            dispatch.call("exit", this, mode);
         }
 
         mode = newMode;
         mode.enter();
-        dispatch.enter(mode);
+        dispatch.call("enter", this, mode);
     };
 
     context.selectedIDs = function() {
@@ -251,7 +253,7 @@ export function Context(root) {
     context.setDebug = function(flag, val) {
         if (arguments.length === 1) val = true;
         debugFlags[flag] = val;
-        dispatch.change();
+        dispatch.call("change");
         return context;
     };
     context.getDebug = function(flag) {
@@ -399,6 +401,6 @@ export function Context(root) {
 
     presets = presetsInit();
 
-    return d3.rebind(context, dispatch, 'on');
+    return rebind(context, dispatch, 'on');
 }
 

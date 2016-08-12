@@ -1,3 +1,4 @@
+import * as d3 from 'd3';
 import _ from 'lodash';
 export function Breathe(){
     var duration = 800,

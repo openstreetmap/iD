@@ -1,3 +1,4 @@
+import * as d3 from 'd3';
 import { polygonIntersectsPolygon } from '../geo/index';
 import {
     imperial as imperialData,
@@ -22,7 +23,7 @@ export function Debug(projection, context) {
             showsImagery = context.getDebug('imagery'),
             showsImperial = context.getDebug('imperial'),
             showsDriveLeft = context.getDebug('driveLeft'),
-            path = d3.geo.path().projection(projection);
+            path = d3.geoPath().projection(projection);
 
 
         var debugData = [];

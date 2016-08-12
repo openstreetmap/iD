@@ -1,5 +1,5 @@
 describe('iD.actions.Straighten', function () {
-    var projection = d3.geo.mercator();
+    var projection = d3.geoMercator();
 
     describe('#disabled', function () {
         it('returns falsy for ways with internal nodes near centerline', function () {

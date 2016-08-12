@@ -14,5 +14,6 @@ export { fastMouse } from './util';
 export { getPrototypeOf } from './util';
 export { asyncMap } from './util';
 export { wrap } from './util';
+export { functor } from './util';
 export { SessionMutex } from './session_mutex';
 export { SuggestNames } from './suggest_names';

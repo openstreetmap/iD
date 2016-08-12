@@ -1,3 +1,5 @@
+import { rebind } from '../../util/rebind';
+import * as d3 from 'd3';
 import { t } from '../../util/locale';
 
 export function textarea(field) {
@@ -22,18 +24,18 @@ export function textarea(field) {
     function change(onInput) {
         return function() {
             var t = {};
-            t[field.key] = input.value() || undefined;
-            dispatch.change(t, onInput);
+            t[field.key] = getSetValue(input) || undefined;
+            dispatch.call("change", this, t, onInput);
         };
     }
 
     textarea.tags = function(tags) {
-        input.value(tags[field.key] || '');
+        getSetValue(input, tags[field.key] || '');
     };
 
     textarea.focus = function() {
         input.node().focus();
     };
 
-    return d3.rebind(textarea, dispatch, 'on');
+    return rebind(textarea, dispatch, 'on');
 }

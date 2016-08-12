@@ -1,3 +1,5 @@
+import { d3keybinding } from '../../js/lib/d3.keybinding.js';
+import * as d3 from 'd3';
 import { t } from '../util/locale';
 import { tooltip } from '../util/tooltip';
 import _ from 'lodash';
@@ -487,7 +489,7 @@ export function Background(context) {
         update();
         setOpacity(opacityDefault);
 
-        var keybinding = d3.keybinding('background')
+        var keybinding = d3keybinding('background')
             .on(key, toggle)
             .on(cmd('⌘B'), quickSwitch)
             .on('F', hide)

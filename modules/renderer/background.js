@@ -1,3 +1,5 @@
+import { rebind } from '../util/rebind';
+import * as d3 from 'd3';
 import _ from 'lodash';
 import { Extent, metersToOffset, offsetToMeters} from '../geo/index';
 import { qsString, stringQs } from '../util/index';
@@ -112,6 +114,7 @@ export function Background(context) {
     };
 
     background.dimensions = function(_) {
+        if (!_) return;
         baseLayer.dimensions(_);
 
         overlayLayers.forEach(function(layer) {
@@ -122,7 +125,7 @@ export function Background(context) {
     background.baseLayerSource = function(d) {
         if (!arguments.length) return baseLayer.source();
         baseLayer.source(d);
-        dispatch.change();
+        dispatch.call("change");
         background.updateImagery();
         return background;
     };
@@ -148,7 +151,7 @@ export function Background(context) {
             layer = overlayLayers[i];
             if (layer.source() === d) {
                 overlayLayers.splice(i, 1);
-                dispatch.change();
+                dispatch.call("change");
                 background.updateImagery();
                 return;
             }
@@ -160,13 +163,13 @@ export function Background(context) {
             .dimensions(baseLayer.dimensions());
 
         overlayLayers.push(layer);
-        dispatch.change();
+        dispatch.call("change");
         background.updateImagery();
     };
 
     background.nudge = function(d, zoom) {
         baseLayer.source().nudge(d, zoom);
-        dispatch.change();
+        dispatch.call("change");
         background.updateImagery();
         return background;
     };
@@ -174,7 +177,7 @@ export function Background(context) {
     background.offset = function(d) {
         if (!arguments.length) return baseLayer.source().offset();
         baseLayer.source().offset(d);
-        dispatch.change();
+        dispatch.call("change");
         background.updateImagery();
         return background;
     };
@@ -246,5 +249,5 @@ export function Background(context) {
         }
     };
 
-    return d3.rebind(background, dispatch, 'on');
+    return rebind(background, dispatch, 'on');
 }

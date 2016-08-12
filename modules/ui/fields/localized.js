@@ -1,3 +1,7 @@
+import { rebind } from '../../util/rebind';
+import { d3combobox } from '../../../js/lib/d3.combobox.js';
+import { getSetValue } from '../../util/get_set_value';
+import * as d3 from 'd3';
 import { t } from '../../util/locale';
 import { tooltip } from '../../util/tooltip';
 import _ from 'lodash';
@@ -25,7 +29,7 @@ export function localized(field, context) {
 
         if (field.id === 'name') {
             var preset = context.presets().match(entity, context.graph());
-            input.call(d3.combobox().fetcher(
+            input.call(d3combobox().fetcher(
                 SuggestNames(preset, suggestions)
             ));
         }
@@ -73,15 +77,15 @@ export function localized(field, context) {
     function change(onInput) {
         return function() {
             var t = {};
-            t[field.key] = d3.select(this).value() || undefined;
-            dispatch.change(t, onInput);
+            t[field.key] = getSetValue(d3.select(this)) || undefined;
+            dispatch.call("change", this, t, onInput);
         };
     }
 
     function key(lang) { return field.key + ':' + lang; }
 
     function changeLang(d) {
-        var lang = d3.select(this).value(),
+        var lang = getSetValue(d3.select(this)),
             t = {},
             language = _.find(wikipediaData, function(d) {
                 return d[0].toLowerCase() === lang.toLowerCase() ||
@@ -94,9 +98,8 @@ export function localized(field, context) {
             t[key(d.lang)] = undefined;
         }
 
-        var value = d3.select(this.parentNode)
-            .selectAll('.localized-value')
-            .value();
+        var value = getSetValue(d3.select(this.parentNode)
+            .selectAll('.localized-value'));
 
         if (lang && value) {
             t[key(lang)] = value;
@@ -105,14 +108,14 @@ export function localized(field, context) {
         }
 
         d.lang = lang;
-        dispatch.change(t);
+        dispatch.call("change", this, t);
     }
 
     function changeValue(d) {
         if (!d.lang) return;
         var t = {};
-        t[key(d.lang)] = d3.select(this).value() || undefined;
-        dispatch.change(t);
+        t[key(d.lang)] = getSetValue(d3.select(this)) || undefined;
+        dispatch.call("change", this, t);
     }
 
     function fetcher(value, cb) {
@@ -137,7 +140,7 @@ export function localized(field, context) {
         innerWrap.attr('class', 'entry')
             .each(function() {
                 var wrap = d3.select(this);
-                var langcombo = d3.combobox().fetcher(fetcher).minItems(0);
+                var langcombo = d3combobox().fetcher(fetcher).minItems(0);
 
                 var label = wrap.append('label')
                     .attr('class','form-label')
@@ -150,7 +153,7 @@ export function localized(field, context) {
                         d3.event.preventDefault();
                         var t = {};
                         t[key(d.lang)] = undefined;
-                        dispatch.change(t);
+                        dispatch.call("change", this, t);
                         d3.select(this.parentNode.parentNode)
                             .style('top','0')
                             .style('max-height','240px')
@@ -202,14 +205,13 @@ export function localized(field, context) {
 
         var entry = selection.selectAll('.entry');
 
-        entry.select('.localized-lang')
-            .value(function(d) {
+        getSetValue(entry.select('.localized-lang'), function(d) {
                 var lang = _.find(wikipediaData, function(lang) { return lang[2] === d.lang; });
                 return lang ? lang[1] : d.lang;
             });
 
-        entry.select('.localized-value')
-            .value(function(d) { return d.value; });
+        getSetValue(entry.select('.localized-value'),
+            function(d) { return d.value; });
     }
 
     localized.tags = function(tags) {
@@ -224,7 +226,7 @@ export function localized(field, context) {
             }
         }
 
-        input.value(tags[field.key] || '');
+        getSetValue(input, tags[field.key] || '');
 
         var postfixed = [], k, m;
         for (k in tags) {
@@ -247,5 +249,5 @@ export function localized(field, context) {
         return localized;
     };
 
-    return d3.rebind(localized, dispatch, 'on');
+    return rebind(localized, dispatch, 'on');
 }

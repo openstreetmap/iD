@@ -1,3 +1,4 @@
+import * as d3 from 'd3';
 import { pavedTags } from '../core/tags';
 
 export function TagClasses() {

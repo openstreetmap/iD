@@ -1,4 +1,6 @@
+import * as d3 from 'd3';
 import { t } from '../util/locale';
+import { getDimensions } from '../util/dimensions';
 import _ from 'lodash';
 import { AddMidpoint, Connect, MoveNode, Noop } from '../actions/index';
 import { Browse, Select } from './index';
@@ -104,7 +106,7 @@ export function DragNode(context) {
 
         var nudge = childOf(context.container().node(),
             d3.event.sourceEvent.toElement) &&
-            edge(d3.event.point, context.map().dimensions());
+            edge(d3.event.point, getDimensions(context.map()));
 
         if (nudge) startNudge(nudge);
         else stopNudge();

@@ -1,4 +1,6 @@
+import * as d3 from 'd3';
 import { setTransform } from '../util/index';
+import { getDimensions } from '../util/dimensions';
 export function Tail() {
     var text,
         container,
@@ -10,11 +12,11 @@ export function Tail() {
         if (!text) return;
 
         d3.select(window)
-            .on('resize.tail', function() { selectionSize = selection.dimensions(); });
+            .on('resize.tail', function() { selectionSize = getDimensions(selection); });
 
         function show() {
             container.style('display', 'block');
-            tooltipSize = container.dimensions();
+            tooltipSize = getDimensions(container);
         }
 
         function mousemove() {
@@ -53,8 +55,8 @@ export function Tail() {
         container
             .on('mousemove.tail', mousemove);
 
-        tooltipSize = container.dimensions();
-        selectionSize = selection.dimensions();
+        tooltipSize = getDimensions(container);
+        selectionSize = getDimensions(selection);
     }
 
     tail.off = function(selection) {

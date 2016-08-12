@@ -1,3 +1,5 @@
+import { rebind } from '../../util/rebind';
+import * as d3 from 'd3';
 import { t } from '../../util/locale';
 import { icon, pad } from './helper';
 
@@ -87,5 +89,5 @@ export function area(context, reveal) {
         d3.select('.preset-search-input').on('keyup.intro', null);
     };
 
-    return d3.rebind(step, event, 'on');
+    return rebind(step, event, 'on');
 }

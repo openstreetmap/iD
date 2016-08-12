@@ -1,3 +1,6 @@
+import { rebind } from '../../util/rebind';
+import { d3combobox } from '../../../js/lib/d3.combobox.js';
+import * as d3 from 'd3';
 import { t } from '../../util/locale';
 import _ from 'lodash';
 import { ChangeTags } from '../../actions/index';
@@ -16,7 +19,7 @@ export function wikipedia(field, context) {
         link, entity, lang, title;
 
     function wiki(selection) {
-        var langcombo = d3.combobox()
+        var langcombo = d3combobox()
             .fetcher(function(value, cb) {
                 var v = value.toLowerCase();
 
@@ -29,7 +32,7 @@ export function wikipedia(field, context) {
                 }));
             });
 
-        var titlecombo = d3.combobox()
+        var titlecombo = d3combobox()
             .fetcher(function(value, cb) {
 
                 if (!value) value = context.entity(entity.id).tags.name || '';
@@ -45,11 +48,11 @@ export function wikipedia(field, context) {
         lang = selection.selectAll('input.wiki-lang')
             .data([0]);
 
-        lang.enter().append('input')
+        getSetValue(lang.enter().append('input')
             .attr('type', 'text')
             .attr('class', 'wiki-lang')
-            .attr('placeholder', t('translate.localized_translation_language'))
-            .value(language()[1]);
+            .attr('placeholder', t('translate.localized_translation_language')),
+            language()[1]);
 
         lang
             .call(langcombo)
@@ -80,7 +83,7 @@ export function wikipedia(field, context) {
     }
 
     function language() {
-        var value = lang.value().toLowerCase();
+        var value = getSetValue(lang).toLowerCase();
         var locale = Detect().locale.toLowerCase();
         var localeLanguage;
         return _.find(wikipediaData, function(d) {
@@ -92,7 +95,7 @@ export function wikipedia(field, context) {
     }
 
     function changeLang() {
-        lang.value(language()[1]);
+        getSetValue(lang, language()[1]);
         change(true);
     }
 
@@ -101,7 +104,7 @@ export function wikipedia(field, context) {
     }
 
     function change(skipWikidata) {
-        var value = title.value(),
+        var value = getSetValue(title),
             m = value.match(/https?:\/\/([-a-z]+)\.wikipedia\.org\/(?:wiki|\1-[-a-z]+)\/([^#]+)(?:#(.+))?/),
             l = m && _.find(wikipediaData, function(d) { return m[1] === d[2]; }),
             anchor,
@@ -120,8 +123,8 @@ export function wikipedia(field, context) {
                 value += '#' + anchor.replace(/_/g, ' ');
             }
             value = value.slice(0, 1).toUpperCase() + value.slice(1);
-            lang.value(l[1]);
-            title.value(value);
+            getSetValue(lang, l[1]);
+            getSetValue(title, value);
         }
 
         syncTags.wikipedia = value ? language()[2] + ':' + value : undefined;
@@ -129,7 +132,7 @@ export function wikipedia(field, context) {
             syncTags.wikidata = undefined;
         }
 
-        dispatch.change(syncTags);
+        dispatch.call("change", this, syncTags);
 
 
         if (skipWikidata || !value || !language()[2]) return;
@@ -160,7 +163,7 @@ export function wikipedia(field, context) {
             });
 
             context.overwrite(ChangeTags(currEntityId, currTags), annotation);
-            dispatch.change(currTags);
+            dispatch.call("change", this, currTags);
         });
     }
 
@@ -172,8 +175,8 @@ export function wikipedia(field, context) {
 
         // value in correct format
         if (l) {
-            lang.value(l[1]);
-            title.value(m[2] + (anchor ? ('#' + anchor) : ''));
+            getSetValue(lang, l[1]);
+            getSetValue(title, m[2] + (anchor ? ('#' + anchor) : ''));
             if (anchor) {
                 try {
                     // Best-effort `anchorencode:` implementation
@@ -187,9 +190,9 @@ export function wikipedia(field, context) {
 
         // unrecognized value format
         } else {
-            title.value(value);
+            getSetValue(title, value);
             if (value && value !== '') {
-                lang.value('');
+                getSetValue(lang, '');
             }
             link.attr('href', 'https://en.wikipedia.org/wiki/Special:Search?search=' + value);
         }
@@ -205,5 +208,5 @@ export function wikipedia(field, context) {
         title.node().focus();
     };
 
-    return d3.rebind(wiki, dispatch, 'on');
+    return rebind(wiki, dispatch, 'on');
 }

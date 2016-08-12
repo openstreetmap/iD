@@ -1,3 +1,7 @@
+import { rebind } from '../util/rebind';
+import { getSetValue } from '../util/get_set_value';
+import { d3combobox } from '../../js/lib/d3.combobox.js';
+import * as d3 from 'd3';
 import { t } from '../util/locale';
 import { Disclosure } from './disclosure';
 import { Icon } from '../svg/index';
@@ -104,18 +108,18 @@ export function RawTagEditor(context) {
                 .call(reference.body);
         });
 
-        $items.select('input.key')
+        getSetValue($items.select('input.key')
             .attr('title', function(d) { return d.key; })
-            .value(function(d) { return d.key; })
             .on('blur', keyChange)
-            .on('change', keyChange);
+            .on('change', keyChange),
+            function(d) { return d.key; })
 
-        $items.select('input.value')
+        getSetValue($items.select('input.value')
             .attr('title', function(d) { return d.value; })
-            .value(function(d) { return d.value; })
             .on('blur', valueChange)
             .on('change', valueChange)
-            .on('keydown.push-more', pushMore);
+            .on('keydown.push-more', pushMore),
+            function(d) { return d.value; })
 
         $items.select('button.remove')
             .on('click', removeTag);
@@ -149,7 +153,7 @@ export function RawTagEditor(context) {
                 return sameletter.concat(other);
             }
 
-            key.call(d3.combobox()
+            key.call(d3combobox()
                 .fetcher(function(value, callback) {
                     context.taginfo().keys({
                         debounce: true,
@@ -160,11 +164,11 @@ export function RawTagEditor(context) {
                     });
                 }));
 
-            value.call(d3.combobox()
+            value.call(d3combobox()
                 .fetcher(function(value, callback) {
                     context.taginfo().values({
                         debounce: true,
-                        key: key.value(),
+                        key: getSetValue(key),
                         geometry: context.geometry(id),
                         query: value
                     }, function(err, data) {
@@ -177,10 +181,10 @@ export function RawTagEditor(context) {
             var row = d3.select(this);
 
             row.selectAll('input.key')
-                .call(d3.combobox.off);
+                .call(d3combobox.off);
 
             row.selectAll('input.value')
-                .call(d3.combobox.off);
+                .call(d3combobox.off);
         }
 
         function keyChange(d) {
@@ -200,19 +204,19 @@ export function RawTagEditor(context) {
             tag[kNew] = d.value;
             d.key = kNew; // Maintain DOM identity through the subsequent update.
             this.value = kNew;
-            event.change(tag);
+            event.call("change", tag);
         }
 
         function valueChange(d) {
             var tag = {};
             tag[d.key] = this.value;
-            event.change(tag);
+            event.call("change", tag);
         }
 
         function removeTag(d) {
             var tag = {};
             tag[d.key] = undefined;
-            event.change(tag);
+            event.call("change", tag);
             d3.select(this.parentNode).remove();
         }
 
@@ -252,5 +256,5 @@ export function RawTagEditor(context) {
         return rawTagEditor;
     };
 
-    return d3.rebind(rawTagEditor, event, 'on');
+    return rebind(rawTagEditor, event, 'on');
 }

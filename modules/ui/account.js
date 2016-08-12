@@ -1,3 +1,4 @@
+import * as d3 from 'd3';
 import { t } from '../util/locale';
 import { Icon } from '../svg/index';
 export function Account(context) {

@@ -1,3 +1,5 @@
+import { d3keybinding } from '../../js/lib/d3.keybinding.js';
+import * as d3 from 'd3';
 import { t } from '../util/locale';
 import { tooltip } from '../util/tooltip';
 import { Icon } from '../svg/index';
@@ -60,7 +62,7 @@ export function Zoom(context) {
                 .call(Icon('#icon-' + d.icon, 'light'));
         });
 
-        var keybinding = d3.keybinding('zoom');
+        var keybinding = d3keybinding('zoom');
 
         _.each(['=','ffequals','plus','ffplus'], function(key) {
             keybinding.on(key, zoomIn);

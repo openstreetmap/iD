@@ -1,3 +1,4 @@
+import * as d3 from 'd3';
 import _ from 'lodash';
 import { displayName, getStyle } from '../util/index';
 import { Entity } from '../core/index';
@@ -5,7 +6,7 @@ import { pathLength } from '../geo/index';
 import rbush from 'rbush';
 
 export function Labels(projection, context) {
-    var path = d3.geo.path().projection(projection);
+    var path = d3.geoPath().projection(projection);
 
     // Replace with dict and iterate over entities tags instead?
     var label_stack = [
@@ -111,10 +112,8 @@ export function Labels(projection, context) {
         texts.selectAll('.textpath')
             .filter(filter)
             .data(entities, Entity.key)
-            .attr({
-                'startOffset': '50%',
-                'xlink:href': function(d) { return '#labelpath-' + d.id; }
-            })
+            .attr('startOffset', '50%')
+            .attr('xlink:href', function(d) { return '#labelpath-' + d.id; })
             .text(displayName);
 
         texts.exit().remove();
@@ -462,7 +461,7 @@ export function Labels(projection, context) {
                 .remove();
 
             debugboxes
-                .attr('d', d3.geo.path().projection(null));
+                .attr('d', d3.geoPath().projection(null));
         }
     }
 

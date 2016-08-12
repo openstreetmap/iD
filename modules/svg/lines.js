@@ -1,3 +1,4 @@
+import * as d3 from 'd3';
 import _ from 'lodash';
 import { OneWaySegments, Path, RelationMemberTags, TagClasses } from './index';
 import { Detect } from '../util/detect';

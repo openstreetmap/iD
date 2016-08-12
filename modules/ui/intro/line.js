@@ -1,3 +1,6 @@
+import { rebind } from '../../util/rebind';
+import { bindOnce } from '../../util/bind_once';
+import * as d3 from 'd3';
 import { t } from '../../util/locale';
 import _ from 'lodash';
 import { icon, pad } from './helper';
@@ -113,7 +116,7 @@ export function line(context, reveal) {
                 d3.select('#curtain').style('pointer-events', 'none');
                 var road = d3.select('.preset-category-road .preset-list-button');
                 reveal(road.node(), t('intro.lines.road'));
-                road.one('click.intro', roadCategory);
+                bindOnce(road, 'click.intro', roadCategory);
             }, 500);
         }
 
@@ -121,10 +124,10 @@ export function line(context, reveal) {
             timeout(function() {
                 var grid = d3.select('.subgrid');
                 reveal(grid.node(), t('intro.lines.residential'));
-                grid.selectAll(':not(.preset-highway-residential) .preset-list-button')
-                    .one('click.intro', retryPreset);
-                grid.selectAll('.preset-highway-residential .preset-list-button')
-                    .one('click.intro', roadDetails);
+                bindOnce(grid.selectAll(':not(.preset-highway-residential) .preset-list-button'),
+                    'click.intro', retryPreset);
+                bindOnce(grid.selectAll('.preset-highway-residential .preset-list-button'),
+                    'click.intro', roadDetails);
             }, 500);
         }
 
@@ -133,7 +136,7 @@ export function line(context, reveal) {
             timeout(function() {
                 var preset = d3.select('.entity-editor-pane .preset-list-button');
                 reveal(preset.node(), t('intro.lines.wrong_preset'));
-                preset.one('click.intro', presetCategory);
+                bindOnce(preset, 'click.intro', presetCategory);
             }, 500);
         }
 
@@ -155,5 +158,5 @@ export function line(context, reveal) {
         context.history().on('change.intro', null);
     };
 
-    return d3.rebind(step, event, 'on');
+    return rebind(step, event, 'on');
 }

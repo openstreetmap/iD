@@ -1,3 +1,5 @@
+import { d3keybinding } from '../../js/lib/d3.keybinding.js';
+import * as d3 from 'd3';
 import { t } from '../util/locale';
 import { tooltip } from '../util/tooltip';
 import { Icon } from '../svg/index';
@@ -423,7 +425,7 @@ export function MapData(context) {
 
         setFill(fillDefault);
 
-        var keybinding = d3.keybinding('features')
+        var keybinding = d3keybinding('features')
             .on(key, togglePanel)
             .on('W', toggleWireframe)
             .on('B', hidePanel)

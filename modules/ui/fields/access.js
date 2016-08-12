@@ -1,3 +1,7 @@
+import { rebind } from '../../util/rebind';
+import { getSetValue } from '../../util/get_set_value';
+import { d3combobox } from '../../../js/lib/d3.combobox.js';
+import * as d3 from 'd3';
 import _ from 'lodash';
 
 export function access(field) {
@@ -33,7 +37,7 @@ export function access(field) {
             .attr('id', function(d) { return 'preset-input-access-' + d; })
             .each(function(d) {
                 d3.select(this)
-                    .call(d3.combobox()
+                    .call(d3combobox()
                         .data(access.options(d)));
             });
 
@@ -46,8 +50,8 @@ export function access(field) {
 
     function change(d) {
         var tag = {};
-        tag[d] = d3.select(this).value() || undefined;
-        dispatch.change(tag);
+        tag[d] = getSetValue(d3.select(this)) || undefined;
+        dispatch.call("change", this, tag);
     }
 
     access.options = function(type) {
@@ -174,8 +178,8 @@ export function access(field) {
     };
 
     access.tags = function(tags) {
-        items.selectAll('.preset-input-access')
-            .value(function(d) { return tags[d] || ''; })
+        getSetValue(items.selectAll('.preset-input-access'),
+            function(d) { return tags[d] || ''; })
             .attr('placeholder', function() {
                 return tags.access ? tags.access : field.placeholder();
             });
@@ -194,5 +198,5 @@ export function access(field) {
             .node().focus();
     };
 
-    return d3.rebind(access, dispatch, 'on');
+    return rebind(access, dispatch, 'on');
 }

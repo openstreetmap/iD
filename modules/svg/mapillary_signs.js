@@ -1,9 +1,11 @@
+import * as d3 from 'd3';
 import _ from 'lodash';
+import { getDimensions, setDimensions } from '../util/dimensions';
 import { PointTransform } from './point_transform';
 import { mapillary as mapillaryService } from '../services/index';
 
 export function MapillarySigns(projection, context, dispatch) {
-    var debouncedRedraw = _.debounce(function () { dispatch.change(); }, 1000),
+    var debouncedRedraw = _.debounce(function () { dispatch.call("change"); }, 1000),
         minZoom = 12,
         layer = d3.select(null),
         _mapillary;
@@ -57,7 +59,7 @@ export function MapillarySigns(projection, context, dispatch) {
 
     function update() {
         var mapillary = getMapillary(),
-            data = (mapillary ? mapillary.signs(projection, layer.dimensions()) : []),
+            data = (mapillary ? mapillary.signs(projection, getDimensions(layer)) : []),
             imageKey = mapillary ? mapillary.getSelectedImage() : null;
 
         var signs = layer.selectAll('.icon-sign')
@@ -105,7 +107,7 @@ export function MapillarySigns(projection, context, dispatch) {
             if (mapillary && ~~context.map().zoom() >= minZoom) {
                 editOn();
                 update();
-                mapillary.loadSigns(context, projection, layer.dimensions());
+                mapillary.loadSigns(context, projection, getDimensions(layer));
             } else {
                 editOff();
             }
@@ -120,7 +122,7 @@ export function MapillarySigns(projection, context, dispatch) {
         } else {
             hideLayer();
         }
-        dispatch.change();
+        dispatch.call("change");
         return this;
     };
 
@@ -130,8 +132,8 @@ export function MapillarySigns(projection, context, dispatch) {
     };
 
     drawSigns.dimensions = function(_) {
-        if (!arguments.length) return layer.dimensions();
-        layer.dimensions(_);
+        if (!arguments.length) return getDimensions(layer);
+        setDimensions(layer, _);
         return this;
     };
 

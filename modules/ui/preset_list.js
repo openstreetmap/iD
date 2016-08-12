@@ -1,3 +1,6 @@
+import { rebind } from '../util/rebind';
+import { d3keybinding } from '../../js/lib/d3.keybinding.js';
+import * as d3 from 'd3';
 import { t } from '../util/locale';
 import { Browse } from '../modes/index';
 import { ChangePreset } from '../actions/index';
@@ -34,7 +37,7 @@ export function PresetList(context) {
         if (context.entity(id).isUsed(context.graph())) {
             messagewrap.append('button')
                 .attr('class', 'preset-choose')
-                .on('click', function() { dispatch.choose(currentPreset); })
+                .on('click', function() { dispatch.call("choose", this, currentPreset); })
                 .append('span')
                 .html('&#9658;');
         } else {
@@ -49,14 +52,14 @@ export function PresetList(context) {
         function keydown() {
             // hack to let delete shortcut work when search is autofocused
             if (search.property('value').length === 0 &&
-                (d3.event.keyCode === d3.keybinding.keyCodes['⌫'] ||
-                 d3.event.keyCode === d3.keybinding.keyCodes['⌦'])) {
+                (d3.event.keyCode === d3keybinding.keyCodes['⌫'] ||
+                 d3.event.keyCode === d3keybinding.keyCodes['⌦'])) {
                 d3.event.preventDefault();
                 d3.event.stopPropagation();
                 Delete([id], context)();
             } else if (search.property('value').length === 0 &&
                 (d3.event.ctrlKey || d3.event.metaKey) &&
-                d3.event.keyCode === d3.keybinding.keyCodes.z) {
+                d3.event.keyCode === d3keybinding.keyCodes.z) {
                 d3.event.preventDefault();
                 d3.event.stopPropagation();
                 context.undo();
@@ -229,7 +232,7 @@ export function PresetList(context) {
                 ChangePreset(id, currentPreset, preset),
                 t('operations.change_tags.annotation'));
 
-            dispatch.choose(preset);
+            dispatch.call("choose", this, preset);
         };
 
         item.help = function() {
@@ -262,5 +265,5 @@ export function PresetList(context) {
         return presetList;
     };
 
-    return d3.rebind(presetList, dispatch, 'on');
+    return rebind(presetList, dispatch, 'on');
 }

@@ -1,3 +1,4 @@
+import * as d3 from 'd3';
 import { EntityEditor } from './entity_editor';
 import { PresetList } from './preset_list';
 import { ViewOnOSM } from './view_on_osm';

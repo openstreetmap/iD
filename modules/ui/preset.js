@@ -1,3 +1,7 @@
+import { rebind } from '../util/rebind';
+import { getSetValue } from '../util/get_set_value';
+import { d3combobox } from '../../js/lib/d3.combobox.js';
+import * as d3 from 'd3';
 import { t } from '../util/locale';
 import _ from 'lodash';
 import { Browse } from '../modes/index';
@@ -206,7 +210,7 @@ export function preset(context) {
             .attr('class', 'value')
             .attr('type', 'text');
 
-        $input.value('')
+        getSetValue($input, '')
             .attr('placeholder', function() {
                 var placeholder = [];
                 for (var field in notShown) {
@@ -214,7 +218,7 @@ export function preset(context) {
                 }
                 return placeholder.slice(0,3).join(', ') + ((placeholder.length > 3) ? '…' : '');
             })
-            .call(d3.combobox().data(notShown)
+            .call(d3combobox().data(notShown)
                 .minItems(1)
                 .on('accept', show));
 
@@ -234,13 +238,13 @@ export function preset(context) {
         function revert(field) {
             d3.event.stopPropagation();
             d3.event.preventDefault();
-            event.change(field.revert());
+            event.call("change", field.revert());
         }
 
         function remove(field) {
             d3.event.stopPropagation();
             d3.event.preventDefault();
-            event.change(field.remove());
+            event.call("change", field.remove());
         }
     }
 
@@ -273,5 +277,5 @@ export function preset(context) {
         return presets;
     };
 
-    return d3.rebind(presets, event, 'on');
+    return rebind(presets, event, 'on');
 }

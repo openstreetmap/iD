@@ -1,3 +1,4 @@
+import * as d3 from 'd3';
 import { t } from '../util/locale';
 import { Browse } from '../modes/index';
 export function SourceSwitch(context) {

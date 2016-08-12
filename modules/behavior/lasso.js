@@ -1,3 +1,4 @@
+import * as d3 from 'd3';
 import _ from 'lodash';
 import { Extent, pointInPolygon } from '../geo/index';
 import { Select } from '../modes/index';

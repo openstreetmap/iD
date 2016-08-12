@@ -1,3 +1,7 @@
+import { rebind } from '../../util/rebind';
+import { getSetValue } from '../../util/get_set_value';
+import { d3combobox } from '../../../js/lib/d3.combobox.js';
+import * as d3 from 'd3';
 import _ from 'lodash';
 import { Extent, chooseEdge, sphericalDistance } from '../../geo/index';
 import { nominatim } from '../../services/index';
@@ -150,19 +154,19 @@ export function address(field, context) {
             // Update
 
             wrap.selectAll('.addr-street')
-                .call(d3.combobox()
+                .call(d3combobox()
                     .fetcher(function(value, callback) {
                         callback(getStreets());
                     }));
 
             wrap.selectAll('.addr-city')
-                .call(d3.combobox()
+                .call(d3combobox()
                     .fetcher(function(value, callback) {
                         callback(getCities());
                     }));
 
             wrap.selectAll('.addr-postcode')
-                .call(d3.combobox()
+                .call(d3combobox()
                     .fetcher(function(value, callback) {
                         callback(getPostCodes());
                     }));
@@ -174,7 +178,7 @@ export function address(field, context) {
             wrap.selectAll('input:not(.combobox-input)')
                 .on('input', change(true));
 
-            dispatch.init();
+            dispatch.call("init");
             isInitialized = true;
         });
     }
@@ -188,15 +192,14 @@ export function address(field, context) {
                     tags['addr:' + field.id] = this.value || undefined;
                 });
 
-            dispatch.change(tags, onInput);
+            dispatch.call("change", this, tags, onInput);
         };
     }
 
     function updateTags(tags) {
-        wrap.selectAll('input')
-            .value(function (field) {
-                return tags['addr:' + field.id] || '';
-            });
+        getSetValue(wrap.selectAll('input'), function (field) {
+            return tags['addr:' + field.id] || '';
+        });
     }
 
     address.entity = function(_) {
@@ -209,7 +212,7 @@ export function address(field, context) {
         if (isInitialized) {
             updateTags(tags);
         } else {
-            dispatch.on('init', function () {
+            dispatch.call("on", this, 'init', function () {
                 updateTags(tags);
             });
         }
@@ -220,5 +223,5 @@ export function address(field, context) {
         if (node) node.focus();
     };
 
-    return d3.rebind(address, dispatch, 'on');
+    return rebind(address, dispatch, 'on');
 }

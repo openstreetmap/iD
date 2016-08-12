@@ -1,3 +1,5 @@
+import { rebind } from '../../util/rebind';
+import * as d3 from 'd3';
 import { t } from '../../util/locale';
 import { oneWayTags } from '../../core/index';
 
@@ -56,7 +58,7 @@ export function check(field) {
             .on('click', function() {
                 var t = {};
                 t[field.key] = values[(values.indexOf(value) + 1) % values.length];
-                dispatch.change(t);
+                dispatch.call("change", this, t);
                 d3.event.stopPropagation();
             });
 
@@ -81,5 +83,5 @@ export function check(field) {
         box.node().focus();
     };
 
-    return d3.rebind(check, dispatch, 'on');
+    return rebind(check, dispatch, 'on');
 }

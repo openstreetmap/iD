@@ -12,7 +12,7 @@ changes;
 which provides a callback-based [Observer
 pattern](http://en.wikipedia.org/wiki/Observer_pattern) between different
 parts of iD;
-[d3.geo.path](https://github.com/mbostock/d3/wiki/Geo-Paths#wiki-path), which
+[d3.geoPath](https://github.com/mbostock/d3/wiki/Geo-Paths#wiki-path), which
 generates SVG paths for lines and areas; and
 [d3.behavior.zoom](https://github.com/mbostock/d3/wiki/Zoom-Behavior#wiki-zoom),
 which implements map panning and zooming.

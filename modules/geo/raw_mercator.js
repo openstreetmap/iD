@@ -1,3 +1,5 @@
+import * as d3 from 'd3';
+
 /*
     Bypasses features of D3's default projection stream pipeline that are unnecessary:
     * Antimeridian clipping
@@ -5,7 +7,7 @@
     * Resampling
 */
 export function RawMercator() {
-    var project = d3.geo.mercator.raw,
+    var project = d3.geoMercatorRaw,
         k = 512 / Math.PI, // scale
         x = 0, y = 0, // translate
         clipExtent = [[0, 0], [0, 0]];
@@ -39,7 +41,7 @@ export function RawMercator() {
         return projection;
     };
 
-    projection.stream = d3.geo.transform({
+    projection.stream = d3.geoTransform({
         point: function(x, y) {
             x = projection([x, y]);
             this.stream.point(x[0], x[1]);

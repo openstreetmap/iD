@@ -1,3 +1,5 @@
+import { functor } from '../index';
+import * as d3 from 'd3';
 import { t } from './locale';
 import { Detect } from './detect';
 import { remove as removeDiacritics } from 'diacritics';
@@ -192,4 +194,17 @@ export function wrap(index, length) {
     if (index < 0)
         index += Math.ceil(-index/length)*length;
     return index % length;
+}
+
+/**
+ * a replacement for functor
+ *
+ * @param {*} value any value
+ * @returns {Function} a function that returns that value or the value if it's a function
+ */
+export function functor(value) {
+    if (typeof value === 'function') return value;
+    return function() {
+        return value;
+    };
 }

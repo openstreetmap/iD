@@ -1,3 +1,5 @@
+import { rebind } from '../util/rebind';
+import * as d3 from 'd3';
 import _ from 'lodash';
 import * as Validations from '../validations/index';
 import { Difference } from './difference';
@@ -36,7 +38,7 @@ export function History(context) {
 
     function change(previous) {
         var difference = Difference(previous, history.graph());
-        dispatch.change(difference);
+        dispatch.call("change", this, difference);
         return difference;
     }
 
@@ -58,7 +60,7 @@ export function History(context) {
             stack[0].graph.rebase(entities, _.map(stack, 'graph'), false);
             tree.rebase(entities, false);
 
-            dispatch.change(undefined, extent);
+            dispatch.call("change", this, undefined, extent);
         },
 
         perform: function() {
@@ -114,7 +116,7 @@ export function History(context) {
                 if (stack[index].annotation) break;
             }
 
-            dispatch.undone();
+            dispatch.call("undone");
             return change(previous);
         },
 
@@ -126,7 +128,7 @@ export function History(context) {
                 if (stack[index].annotation) break;
             }
 
-            dispatch.redone();
+            dispatch.call("redone");
             return change(previous);
         },
 
@@ -202,7 +204,7 @@ export function History(context) {
             stack = [{graph: Graph()}];
             index = 0;
             tree = Tree(stack[0].graph);
-            dispatch.change();
+            dispatch.call("change");
             return history;
         },
 
@@ -317,7 +319,7 @@ export function History(context) {
                                 if (err || _.isEmpty(missing)) {
                                     loading.close();
                                     context.redrawEnable(true);
-                                    dispatch.change();
+                                    dispatch.call("change");
                                 }
                             };
 
@@ -364,7 +366,7 @@ export function History(context) {
             }
 
             if (loadComplete) {
-                dispatch.change();
+                dispatch.call("change");
             }
 
             return history;
@@ -409,5 +411,5 @@ export function History(context) {
 
     history.reset();
 
-    return d3.rebind(history, dispatch, 'on');
+    return rebind(history, dispatch, 'on');
 }

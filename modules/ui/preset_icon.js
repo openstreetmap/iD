@@ -1,3 +1,5 @@
+import { functor } from '../util/index';
+import * as d3 from 'd3';
 import { Icon } from '../svg/index';
 import { featureIcons } from '../../data/index';
 
@@ -71,13 +73,13 @@ export function PresetIcon() {
 
     presetIcon.preset = function(_) {
         if (!arguments.length) return preset;
-        preset = d3.functor(_);
+        preset = functor(_);
         return presetIcon;
     };
 
     presetIcon.geometry = function(_) {
         if (!arguments.length) return geometry;
-        geometry = d3.functor(_);
+        geometry = functor(_);
         return presetIcon;
     };
 

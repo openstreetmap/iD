@@ -1,3 +1,7 @@
+import { rebind } from '../../util/rebind';
+import { getSetValue } from '../../util/get_set_value';
+import { d3combobox } from '../../../js/lib/d3.combobox.js';
+import * as d3 from 'd3';
 import _ from 'lodash';
 
 import { t } from '../../util/locale';
@@ -15,7 +19,7 @@ export function combo(field, context) {
         optstrings = field.strings && field.strings.options,
         optarray = field.options,
         snake_case = (field.snake_case || (field.snake_case === undefined)),
-        combobox = d3.combobox().minItems(isMulti ? 1 : 2),
+        combobox = d3combobox().minItems(isMulti ? 1 : 2),
         comboData = [],
         multiData = [],
         container,
@@ -189,13 +193,13 @@ export function combo(field, context) {
 
 
     function change() {
-        var val = tagValue(input.value()),
+        var val = tagValue(getSetValue(input)),
             t = {};
 
         if (isMulti) {
             if (!val) return;
             container.classed('active', false);
-            input.value('');
+            getSetValue(input, '');
             field.keys.push(field.key + val);
             t[field.key + val] = 'yes';
             window.setTimeout(function() { input.node().focus(); }, 10);
@@ -204,7 +208,7 @@ export function combo(field, context) {
             t[field.key] = val;
         }
 
-        dispatch.change(t);
+        dispatch.call("change", this, t);
     }
 
 
@@ -212,7 +216,7 @@ export function combo(field, context) {
         d3.event.stopPropagation();
         var t = {};
         t[d.key] = undefined;
-        dispatch.change(t);
+        dispatch.call("change", this, t);
     }
 
 
@@ -315,7 +319,7 @@ export function combo(field, context) {
                 .remove();
 
         } else {
-            input.value(displayValue(tags[field.key]));
+            getSetValue(input, displayValue(tags[field.key]));
         }
     };
 
@@ -332,5 +336,5 @@ export function combo(field, context) {
     };
 
 
-    return d3.rebind(combo, dispatch, 'on');
+    return rebind(combo, dispatch, 'on');
 }

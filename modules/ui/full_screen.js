@@ -1,8 +1,10 @@
+import { d3keybinding } from '../../js/lib/d3.keybinding.js';
+import * as d3 from 'd3';
 import { cmd } from './cmd';
 
 export function FullScreen(context) {
     var element = context.container().node(),
-        keybinding = d3.keybinding('full-screen');
+        keybinding = d3keybinding('full-screen');
         // button;
 
     function getFullScreenFn() {

@@ -1,3 +1,5 @@
+import { rebind } from '../util/rebind';
+import * as d3 from 'd3';
 import { t } from '../util/locale';
 import { tooltip } from '../util/tooltip';
 import { Icon } from '../svg/index';
@@ -14,7 +16,7 @@ export function Success(context) {
 
         header.append('button')
             .attr('class', 'fr')
-            .on('click', function() { dispatch.cancel(); })
+            .on('click', function() { dispatch.call("cancel"); })
             .call(Icon('#icon-close'));
 
         header.append('h3')
@@ -68,5 +70,5 @@ export function Success(context) {
         return success;
     };
 
-    return d3.rebind(success, dispatch, 'on');
+    return rebind(success, dispatch, 'on');
 }

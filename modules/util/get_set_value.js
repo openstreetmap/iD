@@ -1,19 +1,19 @@
 // Like selection.property('value', ...), but avoids no-op value sets,
 // which can result in layout/repaint thrashing in some situations.
-d3.selection.prototype.value = function(value) {
+export function getSetValue (target, value) {
     function d3_selection_value(value) {
       function valueNull() {
-        delete this.value;
+        delete target.value;
       }
 
       function valueConstant() {
-        if (this.value !== value) this.value = value;
+        if (target.value !== value) target.value = value;
       }
 
       function valueFunction() {
-        var x = value.apply(this, arguments);
-        if (x == null) delete this.value;
-        else if (this.value !== x) this.value = x;
+        var x = value.apply(target, arguments);
+        if (x == null) delete target.value;
+        else if (target.value !== x) target.value = x;
       }
 
       return value == null
@@ -21,6 +21,6 @@ d3.selection.prototype.value = function(value) {
           ? valueFunction : valueConstant);
     }
 
-    if (!arguments.length) return this.property('value');
-    return this.each(d3_selection_value(value));
-};
+    if (!arguments.length) return target.property('value');
+    return target.each(d3_selection_value(value));
+}

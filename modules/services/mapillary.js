@@ -1,5 +1,8 @@
+import { rebind } from '../util/rebind';
+import * as d3 from 'd3';
 /* global Mapillary:false */
 import _ from 'lodash';
+import { d3geoTile } from '../../js/lib/d3.geo.tile';
 import { Detect } from '../util/detect';
 import { Extent } from '../geo/index';
 import { Icon } from '../svg/index';
@@ -134,7 +137,7 @@ function getTiles(projection, dimensions) {
             s / 2 - projection.translate()[0],
             s / 2 - projection.translate()[1]];
 
-    return d3.geo.tile()
+    return d3geoTile()
         .scaleExtent([tileZoom, tileZoom])
         .scale(s)
         .size(dimensions)
@@ -207,8 +210,8 @@ function loadTilePage(which, url, tile, page) {
 
             cache.rtree.load(features);
 
-            if (which === 'images') dispatch.loadedImages();
-            if (which === 'signs') dispatch.loadedSigns();
+            if (which === 'images') dispatch.call("loadedImages");
+            if (which === 'signs') dispatch.call("loadedSigns");
 
             if (data.features.length === maxResults && nextPage < maxPages) {
                 loadTilePage(which, url, tile, nextPage);
@@ -403,7 +406,7 @@ export function init() {
         mapillary.reset();
     }
 
-    mapillary.event = d3.rebind(mapillary, dispatch, 'on');
+    mapillary.event = rebind(mapillary, dispatch, 'on');
 
     return mapillary;
 }

@@ -1,17 +1,22 @@
+import { rebind } from '../util/rebind';
+import * as d3 from 'd3';
 import { t } from '../util/locale';
+import { bindOnce } from '../util/bind_once';
+import { getDimensions, setDimensions } from '../util/dimensions';
 import _ from 'lodash';
 import { Areas, Labels, Layers, Lines, Midpoints, Points, Vertices } from '../svg/index';
 import { Extent, interp } from '../geo/index';
-import { fastMouse, setTransform } from '../util/index';
+import { fastMouse, setTransform, functor } from '../util/index';
 import { flash } from '../ui/index';
 
 export function Map(context) {
     var dimensions = [1, 1],
         dispatch = d3.dispatch('move', 'drawn'),
         projection = context.projection,
-        zoom = d3.behavior.zoom()
+        initialTransform = d3.zoomIdentity
             .translate(projection.translate())
-            .scale(projection.scale() * 2 * Math.PI)
+            .scale(projection.scale() * 2 * Math.PI),
+        zoom = d3.zoom()
             .scaleExtent([1024, 256 * Math.pow(2, 24)])
             .on('zoom', zoomPan),
         dblclickEnabled = true,
@@ -33,7 +38,12 @@ export function Map(context) {
         mouse,
         mousemove;
 
+    var _selection;
+
     function map(selection) {
+
+        _selection = selection;
+
         context
             .on('change.map', redraw);
         context.history()
@@ -50,7 +60,7 @@ export function Map(context) {
 
         selection
             .on('dblclick.map', dblClick)
-            .call(zoom);
+            .call(zoom, initialTransform);
 
         supersurface = selection.append('div')
             .attr('id', 'supersurface')
@@ -83,14 +93,14 @@ export function Map(context) {
                 if (map.editable() && !transformed) {
                     var hover = d3.event.target.__data__;
                     surface.call(drawVertices.drawHover, context.graph(), hover, map.extent(), map.zoom());
-                    dispatch.drawn({full: false});
+                    dispatch.call("drawn", this, {full: false});
                 }
             })
             .on('mouseout.vertices', function() {
                 if (map.editable() && !transformed) {
                     var hover = d3.event.relatedTarget && d3.event.relatedTarget.__data__;
                     surface.call(drawVertices.drawHover, context.graph(), hover, map.extent(), map.zoom());
-                    dispatch.drawn({full: false});
+                    dispatch.call("drawn", this, {full: false});
                 }
             });
 
@@ -102,18 +112,18 @@ export function Map(context) {
         context.on('enter.map', function() {
             if (map.editable() && !transformed) {
                 var all = context.intersects(map.extent()),
-                    filter = d3.functor(true),
+                    filter = functor(true),
                     graph = context.graph();
 
                 all = context.features().filter(all, graph);
                 surface
                     .call(drawVertices, graph, all, filter, map.extent(), map.zoom())
                     .call(drawMidpoints, graph, all, filter, map.trimmedExtent());
-                dispatch.drawn({full: false});
+                dispatch.call("drawn", this, {full: false});
             }
         });
 
-        map.dimensions(selection.dimensions());
+        map.dimensions(getDimensions(selection));
 
         drawLabels.supersurface(supersurface);
     }
@@ -148,7 +158,7 @@ export function Map(context) {
 
             } else {
                 data = all;
-                filter = d3.functor(true);
+                filter = functor(true);
             }
         }
 
@@ -162,13 +172,13 @@ export function Map(context) {
             .call(drawLabels, graph, data, filter, dimensions, !difference && !extent)
             .call(drawPoints, graph, data, filter);
 
-        dispatch.drawn({full: true});
+        dispatch.call("drawn", this, {full: true});
     }
 
     function editOff() {
         context.features().resetStats();
         surface.selectAll('.layer-osm *').remove();
-        dispatch.drawn({full: true});
+        dispatch.call("drawn", this, {full: true});
     }
 
     function dblClick() {
@@ -178,31 +188,34 @@ export function Map(context) {
         }
     }
 
-    function zoomPan() {
-        if (Math.log(d3.event.scale) / Math.LN2 - 8 < minzoom) {
+    function zoomPan(manualEvent) {
+
+        var eventTransform = (manualEvent || d3.event).transform;
+
+        if (Math.log(event) / Math.LN2 - 8 < minzoom) {
             surface.interrupt();
             flash(context.container())
                 .select('.content')
                 .text(t('cannot_zoom'));
             setZoom(context.minEditableZoom(), true);
             queueRedraw();
-            dispatch.move(map);
+            dispatch.call("move", this, map);
             return;
         }
 
         projection
-            .translate(d3.event.translate)
-            .scale(d3.event.scale / (2 * Math.PI));
+            .translate([eventTransform.x, eventTransform.y])
+            .scale(eventTransform.k / (2 * Math.PI));
 
-        var scale = d3.event.scale / transformStart[0],
-            tX = (d3.event.translate[0] / scale - transformStart[1][0]) * scale,
-            tY = (d3.event.translate[1] / scale - transformStart[1][1]) * scale;
+        var scale = eventTransform.k / transformStart.k,
+            tX = (eventTransform.x / scale - transformStart.x) * scale,
+            tY = (eventTransform.y / scale - transformStart.y) * scale;
 
         transformed = true;
         setTransform(supersurface, tX, tY, scale);
         queueRedraw();
 
-        dispatch.move(map);
+        dispatch.call("move", this, map);
     }
 
     function resetTransform() {
@@ -247,9 +260,11 @@ export function Map(context) {
         wrapper
             .call(drawLayers);
 
-        transformStart = [
-            projection.scale() * 2 * Math.PI,
-            projection.translate().slice()];
+        transformStart = {
+            k: projection.k * 2 * Math.PI,
+            x: projection.x,
+            y: projection
+        };
 
         return map;
     }
@@ -317,13 +332,15 @@ export function Map(context) {
             l = pointLocation(center);
         scale = Math.max(1024, Math.min(256 * Math.pow(2, 24), scale));
         projection.scale(scale / (2 * Math.PI));
-        zoom.scale(scale);
+        if (_selection) {
+            _selection.call(zoom.transform, d3.zoomTransform(_selection).scale(scale));
+        }
         var t = projection.translate();
         l = locationPoint(l);
         t[0] += center[0] - l[0];
         t[1] += center[1] - l[1];
         projection.translate(t);
-        zoom.translate(projection.translate());
+        // TODO zoom.translate(projection.translate());
         return true;
     }
 
@@ -337,7 +354,9 @@ export function Map(context) {
         projection.translate([
             t[0] - ll[0] + pxC[0],
             t[1] - ll[1] + pxC[1]]);
-        zoom.translate(projection.translate());
+        if (_selection) {
+            _selection.call(zoom.transform, d3.zoomTransform(_selection).translate(projection.translate()));
+        }
         return true;
     }
 
@@ -346,8 +365,10 @@ export function Map(context) {
         t[0] += d[0];
         t[1] += d[1];
         projection.translate(t);
-        zoom.translate(projection.translate());
-        dispatch.move(map);
+        if (_selection) {
+            _selection.call(zoom.transform, d3.zoomTransform(_selection).translate(projection.translate()));
+        }
+        dispatch.call("move", this, map);
         return redraw();
     };
 
@@ -383,7 +404,7 @@ export function Map(context) {
         }
 
         if (setCenter(loc)) {
-            dispatch.move(map);
+            dispatch.call("move", this, map);
         }
 
         return redraw();
@@ -403,7 +424,7 @@ export function Map(context) {
         }
 
         if (setZoom(z)) {
-            dispatch.move(map);
+            dispatch.call("move", this, map);
         }
 
         return redraw();
@@ -423,7 +444,7 @@ export function Map(context) {
             zoomed   = setZoom(z);
 
         if (centered || zoomed) {
-            dispatch.move(map);
+            dispatch.call("move", this, map);
         }
 
         return redraw();
@@ -432,7 +453,7 @@ export function Map(context) {
     map.centerEase = function(loc2, duration) {
         duration = duration || 250;
 
-        surface.one('mousedown.ease', function() {
+        bindOnce(surface, 'mousedown.ease', function() {
             map.cancelEase();
         });
 
@@ -443,7 +464,7 @@ export function Map(context) {
         var t1 = Date.now(),
             t2 = t1 + duration,
             loc1 = map.center(),
-            ease = d3.ease('cubic-in-out');
+            ease = d3.easeCubicInOut;
 
         easing = true;
 
@@ -459,12 +480,11 @@ export function Map(context) {
             var locNow = interp(loc1, loc2, ease((tNow - t1) / duration));
             setCenter(locNow);
 
-            d3.event = {
-                scale: zoom.scale(),
-                translate: zoom.translate()
-            };
+            // TODO: fix
 
-            zoomPan();
+            zoomPan({
+                transform: d3.zoomTransform(_selection)
+            });
             return !easing;
         });
 
@@ -534,5 +554,5 @@ export function Map(context) {
 
     map.layers = drawLayers;
 
-    return d3.rebind(map, dispatch, 'on');
+    return rebind(map, dispatch, 'on');
 }

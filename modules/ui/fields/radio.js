@@ -1,3 +1,5 @@
+import { rebind } from '../../util/rebind';
+import * as d3 from 'd3';
 import { t } from '../../util/locale';
 
 export function radio(field) {
@@ -47,7 +49,7 @@ export function radio(field) {
                 t[d] = active ? 'yes' : undefined;
             }
         });
-        dispatch.change(t);
+        dispatch.call("change", this, t);
     }
 
     radio.tags = function(tags) {
@@ -73,5 +75,5 @@ export function radio(field) {
         radios.node().focus();
     };
 
-    return d3.rebind(radio, dispatch, 'on');
+    return rebind(radio, dispatch, 'on');
 }

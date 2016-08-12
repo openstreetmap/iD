@@ -1,3 +1,6 @@
+import { rebind } from '../util/rebind';
+import { getDimensions, setDimensions } from '../util/dimensions';
+import * as d3 from 'd3';
 import _ from 'lodash';
 import { Debug } from './debug';
 import { Gpx } from './gpx';
@@ -60,7 +63,7 @@ export function Layers(projection, context) {
         arr.forEach(function(id) {
             layers = _.reject(layers, function(o) {return o.id === id;});
         });
-        dispatch.change();
+        dispatch.call("change");
         return this;
     };
 
@@ -71,13 +74,13 @@ export function Layers(projection, context) {
                 layers.push(obj);
             }
         });
-        dispatch.change();
+        dispatch.call("change");
         return this;
     };
 
     drawLayers.dimensions = function(_) {
-        if (!arguments.length) return svg.dimensions();
-        svg.dimensions(_);
+        if (!arguments.length) return getDimensions(svg);
+        setDimensions(svg, _);
         layers.forEach(function(obj) {
             if (obj.layer.dimensions) {
                 obj.layer.dimensions(_);
@@ -87,5 +90,5 @@ export function Layers(projection, context) {
     };
 
 
-    return d3.rebind(drawLayers, dispatch, 'on');
+    return rebind(drawLayers, dispatch, 'on');
 }

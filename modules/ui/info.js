@@ -1,3 +1,5 @@
+import { d3keybinding } from '../../js/lib/d3.keybinding.js';
+import * as d3 from 'd3';
 import { t } from '../util/locale';
 import _ from 'lodash';
 import { Detect } from '../util/detect';
@@ -141,9 +143,9 @@ export function Info(context) {
             if (geometry === 'line' || geometry === 'area') {
                 var closed = (entity.type === 'relation') || (entity.isClosed() && !entity.isDegenerate()),
                     feature = entity.asGeoJSON(resolver),
-                    length = radiansToMeters(d3.geo.length(toLineString(feature))),
+                    length = radiansToMeters(d3.geoLength(toLineString(feature))),
                     lengthLabel = t('infobox.' + (closed ? 'perimeter' : 'length')),
-                    centroid = d3.geo.centroid(feature);
+                    centroid = d3.geoCentroid(feature);
 
                 list.append('li')
                     .text(t('infobox.geometry') + ': ' +
@@ -226,7 +228,7 @@ export function Info(context) {
 
         redraw();
 
-        var keybinding = d3.keybinding('info')
+        var keybinding = d3keybinding('info')
             .on(key, toggle);
 
         d3.select(document)

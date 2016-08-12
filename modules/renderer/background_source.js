@@ -1,3 +1,4 @@
+import * as d3 from 'd3';
 import { t } from '../util/locale';
 import _ from 'lodash';
 import { Extent, polygonIntersectsPolygon } from '../geo/index';
@@ -34,7 +35,7 @@ export function BackgroundSource(data) {
 
     source.area = function() {
         if (!data.polygon) return Number.MAX_VALUE;  // worldwide
-        var area = d3.geo.area({ type: 'MultiPolygon', coordinates: [ data.polygon ] });
+        var area = d3.geoArea({ type: 'MultiPolygon', coordinates: [ data.polygon ] });
         return isNaN(area) ? 0 : area;
     };
 
@@ -111,7 +112,7 @@ BackgroundSource.Bing = function(data, dispatch) {
                 })
             };
         });
-        dispatch.change();
+        dispatch.call("change");
     });
 
     bing.copyrightNotices = function(zoom, extent) {

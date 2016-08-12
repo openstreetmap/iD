@@ -1,3 +1,4 @@
+import * as d3 from 'd3';
 import _ from 'lodash';
 import { Extent, cross } from '../geo/index';
 import { Entity } from './entity';
@@ -336,13 +337,13 @@ _.extend(Way.prototype, {
                 json.coordinates[0].push(nodes[0].loc);
             }
 
-            var area = d3.geo.area(json);
+            var area = d3.geoArea(json);
 
             // Heuristic for detecting counterclockwise winding order. Assumes
             // that OpenStreetMap polygons are not hemisphere-spanning.
             if (area > 2 * Math.PI) {
                 json.coordinates[0] = json.coordinates[0].reverse();
-                area = d3.geo.area(json);
+                area = d3.geoArea(json);
             }
 
             return isNaN(area) ? 0 : area;

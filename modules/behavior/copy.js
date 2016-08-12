@@ -1,7 +1,9 @@
+import { d3keybinding } from '../../js/lib/d3.keybinding.js';
+import * as d3 from 'd3';
 import _ from 'lodash';
 import { cmd } from '../ui/index';
 export function Copy(context) {
-    var keybinding = d3.keybinding('copy');
+    var keybinding = d3keybinding('copy');
 
     function groupEntities(ids, graph) {
         var entities = ids.map(function (id) { return graph.entity(id); });

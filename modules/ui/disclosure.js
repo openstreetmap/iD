@@ -1,3 +1,5 @@
+import { rebind } from '../util/rebind';
+import * as d3 from 'd3';
 import { Toggle } from './toggle';
 
 export function Disclosure() {
@@ -30,7 +32,7 @@ export function Disclosure() {
             expanded = !expanded;
             $link.classed('expanded', expanded);
             $body.call(Toggle(expanded));
-            dispatch.toggled(expanded);
+            dispatch.call("toggled", this, expanded);
         }
     };
 
@@ -52,5 +54,5 @@ export function Disclosure() {
         return disclosure;
     };
 
-    return d3.rebind(disclosure, dispatch, 'on');
+    return rebind(disclosure, dispatch, 'on');
 }

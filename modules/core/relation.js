@@ -1,3 +1,4 @@
+import * as d3 from 'd3';
 import _ from 'lodash';
 import { Extent, joinWays, polygonContainsPolygon, polygonIntersectsPolygon } from '../geo/index';
 import { Entity } from './entity';
@@ -191,7 +192,7 @@ _.extend(Relation.prototype, {
 
     area: function(resolver) {
         return resolver.transient(this, 'area', function() {
-            return d3.geo.area(this.asGeoJSON(resolver));
+            return d3.geoArea(this.asGeoJSON(resolver));
         });
     },
 
@@ -235,7 +236,7 @@ _.extend(Relation.prototype, {
         var result = outers.map(function(o) {
             // Heuristic for detecting counterclockwise winding order. Assumes
             // that OpenStreetMap polygons are not hemisphere-spanning.
-            return [d3.geo.area({type: 'Polygon', coordinates: [o]}) > 2 * Math.PI ? o.reverse() : o];
+            return [d3.geoArea({type: 'Polygon', coordinates: [o]}) > 2 * Math.PI ? o.reverse() : o];
         });
 
         function findOuter(inner) {
@@ -257,7 +258,7 @@ _.extend(Relation.prototype, {
         for (var i = 0; i < inners.length; i++) {
             var inner = inners[i];
 
-            if (d3.geo.area({type: 'Polygon', coordinates: [inner]}) < 2 * Math.PI) {
+            if (d3.geoArea({type: 'Polygon', coordinates: [inner]}) < 2 * Math.PI) {
                 inner = inner.reverse();
             }
 

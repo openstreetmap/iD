@@ -1,5 +1,5 @@
 describe('iD.actions.Orthogonalize', function () {
-    var projection = d3.geo.mercator();
+    var projection = d3.geoMercator();
 
     it('orthogonalizes a perfect quad', function () {
         var graph = iD.Graph([

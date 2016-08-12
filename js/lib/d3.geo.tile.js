@@ -1,4 +1,6 @@
-d3.geo.tile = function() {
+import * as d3 from 'd3';
+
+export function d3geoTile() {
   var size = [960, 500],
       scale = 256,
       scaleExtent = [0, 20],
@@ -61,4 +63,4 @@ d3.geo.tile = function() {
   };
 
   return tile;
-};
+}

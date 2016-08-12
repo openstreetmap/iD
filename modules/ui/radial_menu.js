@@ -1,3 +1,4 @@
+import * as d3 from 'd3';
 import { roundCoords } from '../geo/index';
 import { tooltipHtml } from './tooltipHtml';
 

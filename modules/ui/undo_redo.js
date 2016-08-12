@@ -1,3 +1,5 @@
+import { d3keybinding } from '../../js/lib/d3.keybinding.js';
+import * as d3 from 'd3';
 import { t } from '../util/locale';
 import { tooltip } from '../util/tooltip';
 import { Icon } from '../svg/index';
@@ -43,7 +45,7 @@ export function UndoRedo(context) {
                 .call(Icon('#icon-' + d.id));
         });
 
-        var keybinding = d3.keybinding('undo')
+        var keybinding = d3keybinding('undo')
             .on(commands[0].cmd, function() { d3.event.preventDefault(); commands[0].action(); })
             .on(commands[1].cmd, function() { d3.event.preventDefault(); commands[1].action(); });
 

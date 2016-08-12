@@ -1,3 +1,5 @@
+import { rebind } from '../../util/rebind';
+import * as d3 from 'd3';
 export function lanes(field, context) {
     var dispatch = d3.dispatch('change'),
         LANE_WIDTH = 40,
@@ -23,7 +25,7 @@ export function lanes(field, context) {
         var surface =  wrap.selectAll('.surface')
             .data([0]);
 
-        var d = wrap.dimensions();
+        var d = getDimensions(wrap);
         var freeSpace = d[0] - lanesData.lanes.length * LANE_WIDTH * 1.5 + LANE_WIDTH * 0.5;
 
         surface.enter()
@@ -116,5 +118,5 @@ export function lanes(field, context) {
     lanes.focus = function() {};
     lanes.off = function() {};
 
-    return d3.rebind(lanes, dispatch, 'on');
+    return rebind(lanes, dispatch, 'on');
 }

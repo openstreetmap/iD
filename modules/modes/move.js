@@ -1,4 +1,7 @@
+import { d3keybinding } from '../../js/lib/d3.keybinding.js';
+import * as d3 from 'd3';
 import { t } from '../util/locale';
+import { getDimensions } from '../util/dimensions';
 import { Browse, Select } from './index';
 import { Move as MoveAction, Noop } from '../actions/index';
 import { Edit } from '../behavior/index';
@@ -9,7 +12,7 @@ export function Move(context, entityIDs, baseGraph) {
         button: 'browse'
     };
 
-    var keybinding = d3.keybinding('move'),
+    var keybinding = d3keybinding('move'),
         edit = Edit(context),
         annotation = entityIDs.length === 1 ?
             t('operations.move.annotation.' + context.geometry(entityIDs[0])) :
@@ -57,7 +60,7 @@ export function Move(context, entityIDs, baseGraph) {
 
         context.overwrite(action, annotation);
 
-        var nudge = edge(currMouse, context.map().dimensions());
+        var nudge = edge(currMouse, getDimensions(context.map()));
         if (nudge) startNudge(nudge);
         else stopNudge();
     }

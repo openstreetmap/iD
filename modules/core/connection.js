@@ -1,3 +1,7 @@
+import { rebind } from '../util/rebind';
+import { functor } from '../util/index';
+import { d3geoTile } from '../../js/lib/d3.geo.tile';
+import * as d3 from 'd3';
 import _ from 'lodash';
 import { Detect } from '../util/detect';
 import { Entity } from './entity';
@@ -102,11 +106,11 @@ export function Connection(useHttps) {
     };
 
     function authenticating() {
-        event.authenticating();
+        event.call("authenticating");
     }
 
     function authenticated() {
-        event.authenticated();
+        event.call("authenticated");
     }
 
     function getLoc(attrs) {
@@ -298,7 +302,7 @@ export function Connection(useHttps) {
                         method: 'PUT',
                         path: '/api/0.6/changeset/' + changeset_id + '/close',
                         options: { header: { 'Content-Type': 'text/xml' } }
-                    }, d3.functor(true));
+                    }, functor(true));
                 });
             });
     };
@@ -378,7 +382,7 @@ export function Connection(useHttps) {
                 s / 2 - projection.translate()[0],
                 s / 2 - projection.translate()[1]];
 
-        var tiles = d3.geo.tile()
+        var tiles = d3geoTile()
             .scaleExtent([tileZoom, tileZoom])
             .scale(s)
             .size(dimensions)
@@ -413,7 +417,7 @@ export function Connection(useHttps) {
             if (loadedTiles[id] || inflight[id]) return;
 
             if (_.isEmpty(inflight)) {
-                event.loading();
+                event.call("loading");
             }
 
             inflight[id] = connection.loadFromURL(bboxUrl(tile), function(err, parsed) {
@@ -423,7 +427,7 @@ export function Connection(useHttps) {
                 if (callback) callback(err, _.extend({data: parsed}, tile));
 
                 if (_.isEmpty(inflight)) {
-                    event.loaded();
+                    event.call("loaded");
                 }
             });
         });
@@ -435,7 +439,7 @@ export function Connection(useHttps) {
             loading: authenticating,
             done: authenticated
         }, options));
-        event.auth();
+        event.call("auth");
         connection.flush();
         return connection;
     };
@@ -462,18 +466,18 @@ export function Connection(useHttps) {
     connection.logout = function() {
         userDetails = undefined;
         oauth.logout();
-        event.auth();
+        event.call("auth");
         return connection;
     };
 
     connection.authenticate = function(callback) {
         userDetails = undefined;
         function done(err, res) {
-            event.auth();
+            event.call("auth");
             if (callback) callback(err, res);
         }
         return oauth.authenticate(done);
     };
 
-    return d3.rebind(connection, event, 'on');
+    return rebind(connection, event, 'on');
 }

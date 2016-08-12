@@ -1,3 +1,7 @@
+import { rebind } from '../util/rebind';
+import { getDimensions } from '../util/dimensions';
+import { d3keybinding } from '../../js/lib/d3.keybinding.js';
+import * as d3 from 'd3';
 import { chooseEdge, euclideanDistance } from '../geo/index';
 import { Edit } from './edit';
 import { Hover } from './hover';
@@ -6,7 +10,7 @@ import { Tail } from './tail';
 export function Draw(context) {
     var event = d3.dispatch('move', 'click', 'clickWay',
             'clickNode', 'undo', 'cancel', 'finish'),
-        keybinding = d3.keybinding('draw'),
+        keybinding = d3keybinding('draw'),
         hover = Hover(context)
             .altDisables(true)
             .on('hover', context.ui().sidebar.hover),
@@ -72,7 +76,7 @@ export function Draw(context) {
 
     function mousemove() {
         lastMouse = d3.event;
-        event.move(datum());
+        event.call("move", datum());
     }
 
     function mouseenter() {
@@ -86,7 +90,7 @@ export function Draw(context) {
     function click() {
         var d = datum();
         if (d.type === 'way') {
-            var dims = context.map().dimensions(),
+            var dims = getDimensions(context.map()),
                 mouse = context.mouse(),
                 pad = 5,
                 trySnap = mouse[0] > pad && mouse[0] < dims[0] - pad &&
@@ -95,16 +99,16 @@ export function Draw(context) {
             if (trySnap) {
                 var choice = chooseEdge(context.childNodes(d), context.mouse(), context.projection),
                     edge = [d.nodes[choice.index - 1], d.nodes[choice.index]];
-                event.clickWay(choice.loc, edge);
+                event.call("clickWay", choice.loc, edge);
             } else {
-                event.click(context.map().mouseCoordinates());
+                event.call("click", context.map().mouseCoordinates());
             }
 
         } else if (d.type === 'node') {
-            event.clickNode(d);
+            event.call("clickNode", d);
 
         } else {
-            event.click(context.map().mouseCoordinates());
+            event.call("click", context.map().mouseCoordinates());
         }
     }
 
@@ -134,17 +138,17 @@ export function Draw(context) {
 
     function backspace() {
         d3.event.preventDefault();
-        event.undo();
+        event.call("undo");
     }
 
     function del() {
         d3.event.preventDefault();
-        event.cancel();
+        event.call("cancel");
     }
 
     function ret() {
         d3.event.preventDefault();
-        event.finish();
+        event.call("finish");
     }
 
     function draw(selection) {
@@ -204,7 +208,7 @@ export function Draw(context) {
         return draw;
     };
 
-    return d3.rebind(draw, event, 'on');
+    return rebind(draw, event, 'on');
 }
 
 Draw.usedTails = {};

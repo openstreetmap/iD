@@ -1,3 +1,5 @@
+import { rebind } from '../../util/rebind';
+import * as d3 from 'd3';
 import { t } from '../../util/locale';
 import { icon } from './helper';
 import { modal } from '../modal';
@@ -48,7 +50,7 @@ export function startEditing(context, reveal) {
                 startbutton.append('h2')
                     .text(t('intro.startediting.start'));
 
-            event.startEditing();
+            event.call("startEditing");
         }, 10500);
     };
 
@@ -57,5 +59,5 @@ export function startEditing(context, reveal) {
         timeouts.forEach(window.clearTimeout);
     };
 
-    return d3.rebind(step, event, 'on');
+    return rebind(step, event, 'on');
 }

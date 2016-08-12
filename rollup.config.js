@@ -4,7 +4,7 @@ import json from 'rollup-plugin-json';
 
 export default {
     plugins: [
-        nodeResolve({ jsnext: true, main: true, browser: true }),
+        nodeResolve({ jsnext: true, main: true, browser: false }),
         commonjs(),
         json()
     ]

@@ -1,3 +1,4 @@
+import * as d3 from 'd3';
 import { Entity } from '../core/index';
 import { PointTransform } from './index';
 

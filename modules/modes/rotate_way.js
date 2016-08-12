@@ -1,3 +1,5 @@
+import { d3keybinding } from '../../js/lib/d3.keybinding.js';
+import * as d3 from 'd3';
 import { t } from '../util/locale';
 import _ from 'lodash';
 import { Browse, Select } from './index';
@@ -10,7 +12,7 @@ export function RotateWay(context, wayId) {
         button: 'browse'
     };
 
-    var keybinding = d3.keybinding('rotate-way'),
+    var keybinding = d3keybinding('rotate-way'),
         edit = Edit(context);
 
     mode.enter = function() {
@@ -20,7 +22,7 @@ export function RotateWay(context, wayId) {
             way = context.graph().entity(wayId),
             nodes = _.uniq(context.graph().childNodes(way)),
             points = nodes.map(function(n) { return context.projection(n.loc); }),
-            pivot = d3.geom.polygon(points).centroid(),
+            pivot = d3.polygonCentroid(points),
             angle;
 
         context.perform(
