@@ -30,7 +30,7 @@
     "rbush": "2.0.1",
     "sexagesimal": "0.5.0",
     "wmf-sitematrix": "0.1.2",
-    "togeojson": "0.13.0"
+    "togeojson": "0.14.0"
   },
   "devDependencies": {
     "chai": "~3.5.0",
