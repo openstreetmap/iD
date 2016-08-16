@@ -21,10 +21,10 @@ function r(f) {
 }
 
 function validate(file, instance, schema) {
-    var result = jsonschema.validate(instance, schema);
-    if (result.length) {
+    var validationErrors = jsonschema.validate(instance, schema).errors;
+    if (validationErrors.length) {
         console.error(file + ": ");
-        result.forEach(function(error) {
+        validationErrors.forEach(function(error) {
             if (error.property) {
                 console.error(error.property + ' ' + error.message);
             } else {
