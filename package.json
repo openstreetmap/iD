@@ -37,7 +37,7 @@
     "brfs": "1.4.3",
     "d3": "3.5.5",
     "editor-layer-index": "git://github.com/osmlab/editor-layer-index.git#gh-pages",
-    "eslint": "~3.2.0",
+    "eslint": "~3.3.1",
     "glob": "~7.0.5",
     "happen": "~0.3.1",
     "js-yaml": "~3.6.1",
