@@ -980,7 +980,7 @@ describe('iD.Way', function() {
           });
         });
 
-        describe.only('turn lanes', function() {
+        describe('turn lanes', function() {
             it('returns correctly when oneway=yes', function() {
                 var metadata = iD.Way({
                     tags: {
@@ -1215,6 +1215,49 @@ describe('iD.Way', function() {
                     .to.equal(undefined);
             });
 
+            it('parses turnLane correctly when lanes:both_ways=1', function() {
+                var lanes = iD.Way({
+                    tags: {
+                        highway: 'tertiary',
+                        lanes: 5,
+                        oneway: 'no',
+                        'lanes:forward': 3,
+                        'lanes:both_ways': 1,
+                        'lanes:backward': 1,
+                        'turn:lanes:backward': 'slight_right',
+                        'turn:lanes:forward': 'slight_left||',
+                    }
+                }).lanes().lanes;
+                var turnLanes = lanes.map(function(l) { return l.turnLane; });
+                expect(turnLanes).to.deep.equal([
+                    ['slight_left'], ['none'], ['none'], null, ['slight_right']
+                ]);
+
+            });
+
+            it('parses turnLane correctly when lanes:both_ways=1 & lanes:forward < lanes:backward', function() {
+                var lanes = iD.Way({
+                    tags: {
+                        highway: 'tertiary',
+                        lanes: 5,
+                        oneway: 'no',
+                        'lanes:forward': 1,
+                        'lanes:both_ways': 1,
+                        'lanes:backward': 3,
+                        'turn:lanes:forward': 'through',
+                        'turn:lanes:backward': 'slight_left||',
+                    }
+                }).lanes().lanes;
+
+                var turnLanes = lanes.map(function(l) { return l.turnLane; });
+                expect(turnLanes).to.deep.equal([
+                    ['through'], null, ['slight_left'], ['none'], ['none']
+                ]);
+
+            });
+
+
+
             it('parses correctly when turn:lanes= ||x', function() {
                 var metadata = iD.Way({
                     tags: {
@@ -1298,25 +1341,6 @@ describe('iD.Way', function() {
                 ]);
             });
 
-            it('fills turnLane correctly in lanes when lanes:both_ways=1', function() {
-                var lanes = iD.Way({
-                    tags: {
-                        highway: 'tertiary',
-                        lanes: 5,
-                        oneway: 'no',
-                        'lanes:forward': 3,
-                        'lanes:both_ways': 1,
-                        'lanes:backward': 1,
-                        'turn:lanes:backward': 'slight_right',
-                        'turn:lanes:forward': 'slight_left||',
-                    }
-                }).lanes().lanes;
-
-                var turnLanes = lanes.map(function(l) { return l.turnLane; });
-                expect(turnLanes).to.deep.equal([
-                    ['slight_left'], ['none'], ['none'], undefined, ['slight_right']
-                ]);
-            });
         });
     });
 });

@@ -110,122 +110,144 @@ _.extend(Way.prototype, {
                     direction: direction
                 };
             }
-            for (var i = 0; i < metadata.forward; i++) {
+            for (var i = 0; i < forward; i++) {
                 lanesArray.push(createLaneItem(i, 'forward'));
             }
-            for (i = 0; i < metadata.bothways; i++) {
-                lanesArray.push(createLaneItem(metadata.forward + i, 'bothways'));
+            for (i = 0; i < bothways; i++) {
+                lanesArray.push(createLaneItem(forward + i, 'bothways'));
             }
-            for (i = 0; i < metadata.backward; i++) {
-                lanesArray.push(createLaneItem(metadata.forward + metadata.bothways + i, 'backward'));
+            for (i = 0; i < backward; i++) {
+                lanesArray.push(createLaneItem(forward + bothways + i, 'backward'));
             }
             return lanesArray;
         }
 
-        function getTurns(str, count) {
+        function parseString(str, n) {
             var array = str.split('|')
                 .filter(function(s, i) {
-                    return i < count;
+                    return i < n;
                 })
                 .map(function(s) {
                     if (s === '') s = 'none';
                     return s.split(';');
                 });
-            while (array.length < count) {
+            while (array.length < n) {
                 array.push(['none']);
             }
             return array;
         }
 
+        // smartly fills the undefined array.key elements with values
+        function smartFill(array, key, values) {
+            if (!array) return;
+            // keeps track of elements filled with 'value'
+            var counter = 0;
+            array.forEach(function(o) {
+                if (!o || counter === values.length) return;
+
+                if (o[key] === undefined) {
+                    o[key] = values[counter];
+                    counter++;
+                }
+            });
+        }
+
         function safeValue(n) {
             if (n < 0) return 0;
-            if (n > metadata.count - metadata.bothways)
-                return metadata.count - metadata.bothways;
+            if (n > count - bothways)
+                return count - bothways;
             return n;
         }
 
         if (!this.tags.highway) return null;
 
-        var metadata = {};
+        var laneCount, forward, bothways, backward;
         var lanesArray = [];
+        var oneway = this.isOneWay();
 
-        // fill metadata.count with default count
+        // fill laneCount with defaults
         switch (this.tags.highway) {
             case 'trunk':
             case 'motorway':
-                metadata.count = this.isOneWay() ? 2 : 4;
+                laneCount = oneway ? 2 : 4;
                 break;
             default:
-                metadata.count = this.isOneWay() ? 1 : 2;
+                laneCount = oneway ? 1 : 2;
                 break;
         }
 
-        if (this.tags.lanes) metadata.count = parseInt(this.tags.lanes);
+        if (this.tags.lanes) laneCount = parseInt(this.tags.lanes);
 
-        for (var i = 0; i < metadata.count; i++) {
+        for (var i = 0; i < laneCount; i++) {
             lanesArray.push({ index: i});
         }
 
-        metadata.oneway = this.isOneWay();
-
         // fill metadata with safe forward, backward, bothways values.
         if (parseInt(this.tags.oneway) === -1) {
-            metadata.forward = 0;
-            metadata.bothways = 0;
-            metadata.backward = metadata.count;
+            forward = 0;
+            bothways = 0;
+            backward = laneCount;
         }
-        else if (metadata.oneway) {
-            metadata.forward = metadata.count;
-            metadata.bothways = 0;
-            metadata.backward = 0;
+        else if (oneway) {
+            forward = laneCount;
+            bothways = 0;
+            backward = 0;
         }
         else {
             // bothways is forced to always be either 1 or 0.
-            metadata.bothways = parseInt(this.tags['lanes:both_ways']) > 0 ? 1 : 0;
-            metadata.forward = parseInt(this.tags['lanes:forward']);
-            metadata.backward = parseInt(this.tags['lanes:backward']);
+            bothways = parseInt(this.tags['lanes:both_ways']) > 0 ? 1 : 0;
+            forward = parseInt(this.tags['lanes:forward']);
+            backward = parseInt(this.tags['lanes:backward']);
 
-            if (_.isNaN(metadata.forward) && _.isNaN(metadata.backward)) {
-                metadata.backward = parseInt((metadata.count - metadata.bothways) / 2);
-                metadata.forward = metadata.count - metadata.bothways - metadata.backward;
+            if (_.isNaN(forward) && _.isNaN(backward)) {
+                backward = parseInt((laneCount - bothways) / 2);
+                forward = laneCount - bothways - backward;
             }
-            else if (_.isNaN(metadata.forward)) {
-                metadata.backward = safeValue(metadata.backward);
-                metadata.forward = metadata.count - metadata.bothways - metadata.backward;
+            else if (_.isNaN(forward)) {
+                backward = safeValue(backward);
+                forward = laneCount - bothways - backward;
             }
-            else if (_.isNaN(metadata.backward)) {
-                metadata.forward = safeValue(metadata.forward);
-                metadata.backward = metadata.count - metadata.bothways - metadata.forward;
+            else if (_.isNaN(backward)) {
+                forward = safeValue(forward);
+                backward = laneCount - bothways - forward;
             }
         }
 
-        for (i = 0; i < metadata.count; i++) {
-            if (i < metadata.forward)
-                lanesArray[i].direction = 'forward';
-            else if (i < metadata.forward + metadata.bothways)
-                lanesArray[i].direction = 'bothways';
-            else
-                lanesArray[i].direction = 'backward';
-        }
+        // fill each undefined lanesArray's direction element with 'forward/bothwats/backward'.
+        smartFill(lanesArray, 'direction', _.fill(Array(forward), 'forward'));
+        smartFill(lanesArray, 'direction', _.fill(Array(bothways), 'bothways'));
+        smartFill(lanesArray, 'direction', _.fill(Array(backward), 'backward'));
 
         // parse turn:lanes:forward/backward first
-        if (!metadata.oneway && this.tags['turn:lanes:forward'] && this.tags['turn:lanes:backward']) {
-            metadata.turnLanesForward = getTurns(this.tags['turn:lanes:forward'], metadata.forward);
-            metadata.turnLanesBackward = getTurns(this.tags['turn:lanes:backward'], metadata.backward);
+        var turnLanes, turnLanesForward, turnLanesBackward;
 
-            // set turnLane for each lanesArray item, except for bothways.
-            metadata.turnLanesForward.forEach(function(l, i) {
-                lanesArray[i].turnLane = l;
-            });
-            metadata.turnLanesBackward.forEach(function(l, i) {
-                lanesArray[i + metadata.forward + metadata.bothways].turnLane = l;
-            });
+        if (!oneway && this.tags['turn:lanes:forward'] && this.tags['turn:lanes:backward']) {
+            turnLanesForward = parseString(this.tags['turn:lanes:forward'], forward);
+            turnLanesBackward = parseString(this.tags['turn:lanes:backward'], backward);
+
+            smartFill(lanesArray, 'turnLane', turnLanesForward);
+            // if both_ways fill it with null
+            smartFill(lanesArray, 'turnLane', _.fill(Array(bothways), null));
+            smartFill(lanesArray, 'turnLane', turnLanesBackward);
         }
         else if (this.tags['turn:lanes']) {
-            metadata.turnLanes = getTurns(this.tags['turn:lanes'], metadata.count);
-            metadata.turnLanes.forEach(function(l, i) {
-                lanesArray[i].turnLane = l;
-            });
+            turnLanes = parseString(this.tags['turn:lanes'], laneCount);
+            smartFill(lanesArray, 'turnLane', turnLanes);
+        }
+
+        // parse max speed
+        var maxspeed, maxspeedForward, maxspeedBackward;
+        if (!oneway && this.tags['maxspeed:lanes:forward'] && this.tags['maxspeed:lanes:backward']) {
+            maxspeedForward = parseString(this.tags['maxspeed:lanes:forward'], forward);
+            maxspeedBackward = parseString(this.tags['maxspeed:lanes:backward'], backward);
+
+            smartFill(lanesArray, 'maxspeed', maxspeedForward);
+            smartFill(lanesArray, 'maxspeed', _.fill(Array(bothways), null));
+            smartFill(lanesArray, 'maxspeed', maxspeedBackward);
+        }
+        else if (this.tags['maxspeed:lanes']) {
+            maxspeed = parseString(this.tags['maxspeed:lanes'], forward);
+            smartFill(lanesArray, 'maxspeed', maxspeed);
         }
 
         return {
