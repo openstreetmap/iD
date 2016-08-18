@@ -11,7 +11,9 @@
         "area"
     ],
     "terms": [
-        "auto"
+        "auto",
+        "garage",
+        "service"
     ],
     "tags": {
         "shop": "car_repair"
