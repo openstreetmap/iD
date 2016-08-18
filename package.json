@@ -10,7 +10,7 @@
   "scripts": {
     "test": "npm run lint && make && phantomjs node_modules/mocha-phantomjs-core/mocha-phantomjs-core.js test/index.html dot",
     "start": "rollup --config=./rollup.config.js -w --input ./modules/id.js --output dist/iD.js",
-    "web": "node_modules/http-server/bin/http-server",
+    "web": "http-server",
     "build": "rollup --config=./rollup.config.js -f iife --input ./modules/id.js --output dist/iD.js && uglifyjs dist/iD.js -c -m -o dist/iD.min.js",
     "lint": "eslint js/id test/spec modules"
   },
