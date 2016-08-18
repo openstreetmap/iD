@@ -1837,7 +1837,7 @@
             },
             "amenity/fast_food": {
                 "name": "Fast Food",
-                "terms": "restaurant"
+                "terms": "restaurant,takeaway"
             },
             "amenity/ferry_terminal": {
                 "name": "Ferry Terminal",
@@ -2971,6 +2971,10 @@
                 "name": "Basketball Court",
                 "terms": ""
             },
+            "leisure/pitch/bowls": {
+                "name": "Bowling Green",
+                "terms": ""
+            },
             "leisure/pitch/rugby_league": {
                 "name": "Rugby League Field",
                 "terms": ""
@@ -3569,7 +3573,7 @@
             },
             "shop/bookmaker": {
                 "name": "Bookmaker",
-                "terms": ""
+                "terms": "betting"
             },
             "shop/books": {
                 "name": "Book Store",
@@ -3593,7 +3597,7 @@
             },
             "shop/car_repair": {
                 "name": "Car Repair Shop",
-                "terms": "auto"
+                "terms": "auto,garage,service"
             },
             "shop/car": {
                 "name": "Car Dealership",
@@ -3721,7 +3725,7 @@
             },
             "shop/gift": {
                 "name": "Gift Shop",
-                "terms": ""
+                "terms": "souvenir"
             },
             "shop/greengrocer": {
                 "name": "Greengrocer",
@@ -3729,7 +3733,7 @@
             },
             "shop/hairdresser": {
                 "name": "Hairdresser",
-                "terms": ""
+                "terms": "barber"
             },
             "shop/hardware": {
                 "name": "Hardware Store",
@@ -3785,7 +3789,7 @@
             },
             "shop/mall": {
                 "name": "Mall",
-                "terms": ""
+                "terms": "shopping"
             },
             "shop/massage": {
                 "name": "Massage Shop",
@@ -3805,7 +3809,7 @@
             },
             "shop/motorcycle": {
                 "name": "Motorcycle Dealership",
-                "terms": ""
+                "terms": "bike"
             },
             "shop/music": {
                 "name": "Music Store",
@@ -3813,7 +3817,7 @@
             },
             "shop/musical_instrument": {
                 "name": "Musical Instrument Store",
-                "terms": ""
+                "terms": "guitar"
             },
             "shop/newsagent": {
                 "name": "Newspaper/Magazine Shop",

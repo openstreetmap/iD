@@ -1377,6 +1377,10 @@
         },
         {
             "key": "sport",
+            "value": "bowls"
+        },
+        {
+            "key": "sport",
             "value": "rugby_league"
         },
         {

@@ -1395,7 +1395,7 @@ en:
       amenity/fast_food:
         # amenity=fast_food
         name: Fast Food
-        # 'terms: restaurant'
+        # 'terms: restaurant,takeaway'
         terms: '<translate with synonyms or related terms for ''Fast Food'', separated by commas>'
       amenity/ferry_terminal:
         # amenity=ferry_terminal
@@ -2657,6 +2657,10 @@ en:
         # 'leisure=pitch, sport=basketball'
         name: Basketball Court
         terms: '<translate with synonyms or related terms for ''Basketball Court'', separated by commas>'
+      leisure/pitch/bowls:
+        # 'leisure=pitch, sport=bowls'
+        name: Bowling Green
+        terms: '<translate with synonyms or related terms for ''Bowling Green'', separated by commas>'
       leisure/pitch/rugby_league:
         # 'leisure=pitch, sport=rugby_league'
         name: Rugby League Field
@@ -3304,6 +3308,7 @@ en:
       shop/bookmaker:
         # shop=bookmaker
         name: Bookmaker
+        # 'terms: betting'
         terms: '<translate with synonyms or related terms for ''Bookmaker'', separated by commas>'
       shop/books:
         # shop=books
@@ -3335,7 +3340,7 @@ en:
       shop/car_repair:
         # shop=car_repair
         name: Car Repair Shop
-        # 'terms: auto'
+        # 'terms: auto,garage,service'
         terms: '<translate with synonyms or related terms for ''Car Repair Shop'', separated by commas>'
       shop/carpet:
         # shop=carpet
@@ -3481,6 +3486,7 @@ en:
       shop/gift:
         # shop=gift
         name: Gift Shop
+        # 'terms: souvenir'
         terms: '<translate with synonyms or related terms for ''Gift Shop'', separated by commas>'
       shop/greengrocer:
         # shop=greengrocer
@@ -3490,6 +3496,7 @@ en:
       shop/hairdresser:
         # shop=hairdresser
         name: Hairdresser
+        # 'terms: barber'
         terms: '<translate with synonyms or related terms for ''Hairdresser'', separated by commas>'
       shop/hardware:
         # shop=hardware
@@ -3550,6 +3557,7 @@ en:
       shop/mall:
         # shop=mall
         name: Mall
+        # 'terms: shopping'
         terms: '<translate with synonyms or related terms for ''Mall'', separated by commas>'
       shop/massage:
         # shop=massage
@@ -3570,6 +3578,7 @@ en:
       shop/motorcycle:
         # shop=motorcycle
         name: Motorcycle Dealership
+        # 'terms: bike'
         terms: '<translate with synonyms or related terms for ''Motorcycle Dealership'', separated by commas>'
       shop/music:
         # shop=music
@@ -3579,6 +3588,7 @@ en:
       shop/musical_instrument:
         # shop=musical_instrument
         name: Musical Instrument Store
+        # 'terms: guitar'
         terms: '<translate with synonyms or related terms for ''Musical Instrument Store'', separated by commas>'
       shop/newsagent:
         # shop=newsagent
