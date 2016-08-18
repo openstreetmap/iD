@@ -1183,38 +1183,6 @@ describe('iD.Way', function() {
                     .to.equal(undefined);
             });
 
-            it('turnLanesForward and turnLanesBackward are both undefined when either is provided', function() {
-                var metadata = iD.Way({
-                    tags: {
-                        highway: 'tertiary',
-                        lanes: 2,
-                        'turn:lanes:backward': 'none',
-                    }
-                }).lanes().metadata;
-
-                expect(metadata.turnLanesForward)
-                    .to.equal(undefined);
-                expect(metadata.turnLanesBackward)
-                    .to.equal(undefined);
-            });
-
-            it('turnLanesForward and turnLanesBackward are both undefined when oneway="yes"', function() {
-                var metadata = iD.Way({
-                    tags: {
-                        highway: 'tertiary',
-                        lanes: 2,
-                        oneway: 'yes',
-                        'turn:lanes:forward': 'through',
-                        'turn:lanes:backward': 'none'
-                    }
-                }).lanes().metadata;
-
-                expect(metadata.turnLanesForward)
-                    .to.equal(undefined);
-                expect(metadata.turnLanesBackward)
-                    .to.equal(undefined);
-            });
-
             it('parses turnLane correctly when lanes:both_ways=1', function() {
                 var lanes = iD.Way({
                     tags: {
@@ -1341,6 +1309,23 @@ describe('iD.Way', function() {
                 ]);
             });
 
+        });
+
+        describe.only('maxspeed', function() {
+            it('should parse maxspeed correctly', function() {
+                var maxspeedLanes = iD.Way({
+                    tags: {
+                        highway: 'residential',
+                        lanes: 5,
+                        'maxspeed:lanes': '30|40|40|40|40'
+                    }
+                }).lanes().metadata.maxspeedLanes;
+
+                expect(maxspeedLanes).to.deep.equal([
+                    30, 40, 40, 40, 40
+                ]);
+
+            });
         });
     });
 });

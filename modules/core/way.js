@@ -103,26 +103,11 @@ _.extend(Way.prototype, {
 
     lanes: function() {
 
-        function makeLanesArray(metadata) {
-            function createLaneItem(index, direction) {
-                return {
-                    index: index,
-                    direction: direction
-                };
-            }
-            for (var i = 0; i < forward; i++) {
-                lanesArray.push(createLaneItem(i, 'forward'));
-            }
-            for (i = 0; i < bothways; i++) {
-                lanesArray.push(createLaneItem(forward + i, 'bothways'));
-            }
-            for (i = 0; i < backward; i++) {
-                lanesArray.push(createLaneItem(forward + bothways + i, 'backward'));
-            }
-            return lanesArray;
-        }
+        function parsePipeString(key, n) {
+            var str = tags[key];
 
-        function parseString(str, n) {
+            if (!str) return;
+
             var array = str.split('|')
                 .filter(function(s, i) {
                     return i < n;
@@ -135,6 +120,73 @@ _.extend(Way.prototype, {
                 array.push(['none']);
             }
             return array;
+        }
+
+        function parseTurnLanes(key, n){
+            var validValues = [
+                'left', 'slight_left', 'sharp_left', 'through', 'right', 'slight_right',
+                'sharp_right', 'reverse', 'merge_to_left', 'merge_to_right', 'none'
+            ];
+            var parsedArray = parsePipeString(key, n);
+            if (!parsedArray) return;
+
+            return parsedArray.map(function(l) {
+                return l.map(function(i) {
+                    return validValues.indexOf(i) === -1 ? 'unknown': i;
+                });
+            });
+        }
+
+        function parseMaxspeed(key, n) {
+            var str = tags[key];
+            if (!str) return;
+            return str.split('|')
+                .filter(function(s, i) {
+                    return i < n;
+                })
+                .map(function(s) {
+                    if (s === '') return 'none';
+                    var m = parseInt(s);
+                    return _.isNaN(m) ? 'unknown': m;
+                });
+        }
+
+        function parseLaneDirections() {
+            var forward = parseInt(tags['lanes:forward']);
+            var backward = parseInt(tags['lanes:backward']);
+            var bothways = parseInt(tags['lanes:both_ways']) > 0 ? 1 : 0;
+
+            if (parseInt(tags.oneway) === -1) {
+                forward = 0;
+                bothways = 0;
+                backward = laneCount;
+            }
+            else if (oneway) {
+                forward = laneCount;
+                bothways = 0;
+                backward = 0;
+            }
+            else if (_.isNaN(forward) && _.isNaN(backward)) {
+                    backward = parseInt((laneCount - bothways) / 2);
+                    forward = laneCount - bothways - backward;
+            }
+            else if (_.isNaN(forward)) {
+                if (backward > laneCount - bothways) {
+                    backward = laneCount - bothways;
+                }
+                forward = laneCount - bothways - backward;
+            }
+            else if (_.isNaN(backward)) {
+                if (forward > laneCount - bothways) {
+                    forward = laneCount - bothways;
+                }
+                backward = laneCount - bothways - forward;
+            }
+            return {
+                forward: forward,
+                backward: backward,
+                bothways: bothways
+            };
         }
 
         // smartly fills the undefined array.key elements with values
@@ -152,66 +204,47 @@ _.extend(Way.prototype, {
             });
         }
 
-        function safeValue(n) {
-            if (n < 0) return 0;
-            if (n > count - bothways)
-                return count - bothways;
-            return n;
+        function getLaneCount() {
+            var count;
+            // fill laneCount with defaults
+            switch (tags.highway) {
+                case 'trunk':
+                case 'motorway':
+                    count = oneway ? 2 : 4;
+                    break;
+                default:
+                    count = oneway ? 1 : 2;
+                    break;
+            }
+
+            if (tags.lanes) count = parseInt(tags.lanes);
+            return count;
         }
 
         if (!this.tags.highway) return null;
 
-        var laneCount, forward, bothways, backward;
-        var lanesArray = [];
+        var tags = this.tags;
         var oneway = this.isOneWay();
+        var laneCount = getLaneCount();
 
-        // fill laneCount with defaults
-        switch (this.tags.highway) {
-            case 'trunk':
-            case 'motorway':
-                laneCount = oneway ? 2 : 4;
-                break;
-            default:
-                laneCount = oneway ? 1 : 2;
-                break;
-        }
-
-        if (this.tags.lanes) laneCount = parseInt(this.tags.lanes);
-
+        var lanesArray = [];
         for (var i = 0; i < laneCount; i++) {
             lanesArray.push({ index: i});
         }
 
-        // fill metadata with safe forward, backward, bothways values.
-        if (parseInt(this.tags.oneway) === -1) {
-            forward = 0;
-            bothways = 0;
-            backward = laneCount;
-        }
-        else if (oneway) {
-            forward = laneCount;
-            bothways = 0;
-            backward = 0;
-        }
-        else {
-            // bothways is forced to always be either 1 or 0.
-            bothways = parseInt(this.tags['lanes:both_ways']) > 0 ? 1 : 0;
-            forward = parseInt(this.tags['lanes:forward']);
-            backward = parseInt(this.tags['lanes:backward']);
+        var laneDirections = parseLaneDirections();
+        var forward = laneDirections.forward;
+        var backward = laneDirections.backward;
+        var bothways = laneDirections.bothways;
 
-            if (_.isNaN(forward) && _.isNaN(backward)) {
-                backward = parseInt((laneCount - bothways) / 2);
-                forward = laneCount - bothways - backward;
-            }
-            else if (_.isNaN(forward)) {
-                backward = safeValue(backward);
-                forward = laneCount - bothways - backward;
-            }
-            else if (_.isNaN(backward)) {
-                forward = safeValue(forward);
-                backward = laneCount - bothways - forward;
-            }
-        }
+        // parse the piped string 'x|y|z' format
+        var turnLanes = parseTurnLanes('turn:lanes', laneCount);
+        var turnLanesForward = parseTurnLanes('turn:lanes:forward', forward);
+        var turnLanesBackward = parseTurnLanes('turn:lanes:backward', backward);
+
+        var maxspeedLanes = parseMaxspeed('maxspeed:lanes', laneCount);
+        var maxspeedLanesForward = parseMaxspeed('maxspeed:lanes:forward', forward);
+        var maxspeedLanesBackward = parseMaxspeed('maxspeed:lanes:backward', backward);
 
         // fill each undefined lanesArray's direction element with 'forward/bothwats/backward'.
         smartFill(lanesArray, 'direction', _.fill(Array(forward), 'forward'));
@@ -219,39 +252,41 @@ _.extend(Way.prototype, {
         smartFill(lanesArray, 'direction', _.fill(Array(backward), 'backward'));
 
         // parse turn:lanes:forward/backward first
-        var turnLanes, turnLanesForward, turnLanesBackward;
 
         if (!oneway && this.tags['turn:lanes:forward'] && this.tags['turn:lanes:backward']) {
-            turnLanesForward = parseString(this.tags['turn:lanes:forward'], forward);
-            turnLanesBackward = parseString(this.tags['turn:lanes:backward'], backward);
-
             smartFill(lanesArray, 'turnLane', turnLanesForward);
             // if both_ways fill it with null
             smartFill(lanesArray, 'turnLane', _.fill(Array(bothways), null));
             smartFill(lanesArray, 'turnLane', turnLanesBackward);
         }
         else if (this.tags['turn:lanes']) {
-            turnLanes = parseString(this.tags['turn:lanes'], laneCount);
             smartFill(lanesArray, 'turnLane', turnLanes);
         }
 
         // parse max speed
-        var maxspeed, maxspeedForward, maxspeedBackward;
         if (!oneway && this.tags['maxspeed:lanes:forward'] && this.tags['maxspeed:lanes:backward']) {
-            maxspeedForward = parseString(this.tags['maxspeed:lanes:forward'], forward);
-            maxspeedBackward = parseString(this.tags['maxspeed:lanes:backward'], backward);
-
-            smartFill(lanesArray, 'maxspeed', maxspeedForward);
+            smartFill(lanesArray, 'maxspeed', maxspeedLanesForward);
             smartFill(lanesArray, 'maxspeed', _.fill(Array(bothways), null));
-            smartFill(lanesArray, 'maxspeed', maxspeedBackward);
+            smartFill(lanesArray, 'maxspeed', maxspeedLanesBackward);
         }
         else if (this.tags['maxspeed:lanes']) {
-            maxspeed = parseString(this.tags['maxspeed:lanes'], forward);
-            smartFill(lanesArray, 'maxspeed', maxspeed);
+            smartFill(lanesArray, 'maxspeed', maxspeedLanes);
         }
 
         return {
-            metadata: metadata,
+            metadata: {
+                count: laneCount,
+                oneway: oneway,
+                forward: forward,
+                backward: backward,
+                bothways: bothways,
+                turnLanes: turnLanes,
+                turnLanesForward: turnLanesForward,
+                turnLanesBackward: turnLanesBackward,
+                maxspeedLanes: maxspeedLanes,
+                maxspeedLanesForward: maxspeedLanesForward,
+                maxspeedLanesBackward: maxspeedLanesBackward,
+            },
             lanes: lanesArray
         };
     },
