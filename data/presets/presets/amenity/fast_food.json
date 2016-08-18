@@ -19,7 +19,8 @@
         "amenity": "fast_food"
     },
     "terms": [
-        "restaurant"
+        "restaurant",
+        "takeaway"
     ],
     "name": "Fast Food"
 }

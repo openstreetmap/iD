@@ -9,6 +9,9 @@
     "geometry": [
         "point",
         "area"
+    ],    
+    "terms": [
+        "bike"
     ],
     "tags": {
         "shop": "motorcycle"
