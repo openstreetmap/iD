@@ -225,6 +225,21 @@ _.extend(Way.prototype, {
             return parsedArray;
         }
 
+        function addToLanesArray(data, key) {
+            if (data.forward) data.forward.forEach(function(l, i) {
+                if (!lanesArray.forward[i]) lanesArray.forward[i] = {};
+                lanesArray.forward[i][key] = l;
+            });
+            if (data.backward) data.backward.forEach(function(l, i) {
+                if (!lanesArray.backward[i]) lanesArray.backward[i] = {};
+                lanesArray.backward[i][key] = l;
+            });
+            if (data.unspecified) data.unspecified.forEach(function(l, i) {
+                if (!lanesArray.unspecified[i]) lanesArray.unspecified[i] = {};
+                lanesArray.unspecified[i][key] = l;
+            });
+
+        }
         if (!this.tags.highway) return null;
 
         var tags = this.tags;
@@ -278,32 +293,20 @@ _.extend(Way.prototype, {
         bicyclewayLanes.forward = parseBicycleWay('bicycleway:lanes:forward');
         bicyclewayLanes.backward = parseBicycleWay('bicycleway:lanes:backward');
 
-        // fill each undefined lanesArray's direction element with 'forward/bothways/backward'.
-        // smartFill(lanesArray, 'direction', _.fill(Array(forward), 'forward'));
-        // smartFill(lanesArray, 'direction', _.fill(Array(bothways), 'bothways'));
-        // smartFill(lanesArray, 'direction', _.fill(Array(backward), 'backward'));
-        //
-        // // parse turn:lanes:forward/backward first
-        //
-        // if (!oneway && this.tags['turn:lanes:forward'] && this.tags['turn:lanes:backward']) {
-        //     smartFill(lanesArray, 'turnLane', turnLanesForward);
-        //     // if both_ways fill it with null
-        //     smartFill(lanesArray, 'turnLane', _.fill(Array(bothways), null));
-        //     smartFill(lanesArray, 'turnLane', turnLanesBackward);
-        // }
-        // else if (this.tags['turn:lanes']) {
-        //     smartFill(lanesArray, 'turnLane', turnLanes);
-        // }
-        //
-        // // parse max speed
-        // if (!oneway && this.tags['maxspeed:lanes:forward'] && this.tags['maxspeed:lanes:backward']) {
-        //     smartFill(lanesArray, 'maxspeed', maxspeedLanesForward);
-        //     smartFill(lanesArray, 'maxspeed', _.fill(Array(bothways), null));
-        //     smartFill(lanesArray, 'maxspeed', maxspeedLanesBackward);
-        // }
-        // else if (this.tags['maxspeed:lanes']) {
-        //     smartFill(lanesArray, 'maxspeed', maxspeedLanes);
-        // }
+        var lanesArray = {
+            forward: [],
+            backward: [],
+            unspecified: []
+        };
+
+        addToLanesArray(turnLanes, 'turnLane');
+        addToLanesArray(maxspeedLanes, 'maxspeed');
+        addToLanesArray(psvLanes, 'psv');
+        addToLanesArray(busLanes, 'bus');
+        addToLanesArray(taxiLanes, 'taxi');
+        addToLanesArray(hovLanes, 'hov');
+        addToLanesArray(hgvLanes, 'hgv');
+        addToLanesArray(bicyclewayLanes, 'bicycle');
 
         return {
             metadata: {
@@ -321,7 +324,8 @@ _.extend(Way.prototype, {
                 hovLanes: hovLanes,
                 hgvLanes: hgvLanes,
                 bicyclewayLanes: bicyclewayLanes
-            }
+            },
+            lanes: lanesArray
         };
     },
 

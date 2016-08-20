@@ -1487,15 +1487,20 @@ describe('iD.Way', function() {
             });
 
             it('should parse correctly when some values maxspeed:lanes are implied by x||| notation', function() {
-                var maxspeedLanes = iD.Way({
+                var lanes = iD.Way({
                     tags: {
                         highway: 'residential',
-                        lanes: 4,
+                        lanes: 5,
+                        'lanes:forward': 1,
+                        'lanes:both_ways': 1,
+                        'turn:lanes:forward': 'slight_left',
+                        'turn:lanes:backward': 'none|through|through;slight_right',
                         maxspeed: '60kmh',
                         'maxspeed:lanes': '30|||'
                     }
-                }).lanes().metadata.maxspeedLanes;
-                expect(maxspeedLanes.unspecified).to.deep.equal([
+                }).lanes();
+                console.log(JSON.stringify(lanes.lanes, null, '\t'));
+                expect(lanes.metadata.maxspeedLanes.unspecified).to.deep.equal([
                     30, 'none', 'none', 'none'
                 ]);
             });
