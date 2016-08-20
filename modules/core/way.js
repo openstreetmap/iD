@@ -127,28 +127,47 @@ _.extend(Way.prototype, {
                 'left', 'slight_left', 'sharp_left', 'through', 'right', 'slight_right',
                 'sharp_right', 'reverse', 'merge_to_left', 'merge_to_right', 'none'
             ];
-            var parsedArray = parsePipeString(key, n);
-            if (!parsedArray) return;
-
-            return parsedArray.map(function(l) {
-                return l.map(function(i) {
-                    return validValues.indexOf(i) === -1 ? 'unknown': i;
-                });
-            });
-        }
-
-        function parseMaxspeed(key, n) {
             var str = tags[key];
             if (!str) return;
-            return str.split('|')
-                .filter(function(s, i) {
-                    return i < n;
-                })
-                .map(function(s) {
-                    if (s === '') return 'none';
+            var parsedArray = str.split('|')
+                .slice(0, n)
+                .map(function (s) {
+                    if (s === '') s = 'none';
+                    return s.split(';')
+                        .map(function (d) {
+                            return validValues.indexOf(d) === -1 ? 'unknown': d;
+                        });
+                });
+            while (parsedArray.length < n) {
+                parsedArray.push(['unknown']);
+            }
+            return parsedArray;
+        }
+
+        function parseMaxspeed() {
+            var maxspeed = tags.maxspeed;
+            if (_.isNumber(maxspeed)) return maxspeed;
+            if (_.isString(maxspeed)) {
+                maxspeed = maxspeed.match(/^([0-9][\.0-9]+?)(?:[ ]?(?:km\/h|kmh|kph|mph|knots))?$/g);
+                if (!maxspeed) return;
+                return parseInt(maxspeed);
+            }
+        }
+
+        function parseMaxspeedLanes(key, n) {
+            var str = tags[key];
+            if (!str) return;
+            var parsedArray = str.split('|')
+                .slice(0, n)
+                .map(function (s) {
                     var m = parseInt(s);
+                    if (s === '' || m === maxspeed) return 'none';
                     return _.isNaN(m) ? 'unknown': m;
                 });
+            while (parsedArray.length < n) {
+                parsedArray.push('unknown');
+            }
+            return parsedArray;
         }
 
         function parseLaneDirections() {
@@ -242,11 +261,13 @@ _.extend(Way.prototype, {
         var turnLanesForward = parseTurnLanes('turn:lanes:forward', forward);
         var turnLanesBackward = parseTurnLanes('turn:lanes:backward', backward);
 
-        var maxspeedLanes = parseMaxspeed('maxspeed:lanes', laneCount);
-        var maxspeedLanesForward = parseMaxspeed('maxspeed:lanes:forward', forward);
-        var maxspeedLanesBackward = parseMaxspeed('maxspeed:lanes:backward', backward);
+        var maxspeed = parseMaxspeed();
+        var maxspeedLanes = parseMaxspeedLanes('maxspeed:lanes', laneCount);
+        var maxspeedLanesForward = parseMaxspeedLanes('maxspeed:lanes:forward', forward);
+        var maxspeedLanesBackward = parseMaxspeedLanes('maxspeed:lanes:backward', backward);
 
-        // fill each undefined lanesArray's direction element with 'forward/bothwats/backward'.
+
+        // fill each undefined lanesArray's direction element with 'forward/bothways/backward'.
         smartFill(lanesArray, 'direction', _.fill(Array(forward), 'forward'));
         smartFill(lanesArray, 'direction', _.fill(Array(bothways), 'bothways'));
         smartFill(lanesArray, 'direction', _.fill(Array(backward), 'backward'));
@@ -283,6 +304,7 @@ _.extend(Way.prototype, {
                 turnLanes: turnLanes,
                 turnLanesForward: turnLanesForward,
                 turnLanesBackward: turnLanesBackward,
+                maxspeed: maxspeed,
                 maxspeedLanes: maxspeedLanes,
                 maxspeedLanesForward: maxspeedLanesForward,
                 maxspeedLanesBackward: maxspeedLanesBackward,

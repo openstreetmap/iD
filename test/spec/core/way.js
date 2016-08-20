@@ -1106,7 +1106,7 @@ describe('iD.Way', function() {
 
                 expect(metadata.turnLanes)
                     .to.deep.equal([
-                        ['slight_left'], ['none'], ['none'], ['none'], ['none']
+                        ['slight_left'], ['unknown'], ['unknown'], ['unknown'], ['unknown']
                     ]);
             });
 
@@ -1124,11 +1124,11 @@ describe('iD.Way', function() {
 
                 expect(metadata.turnLanesForward)
                     .to.deep.equal([
-                        ['slight_left'], ['none'], ['none']
+                        ['slight_left'], ['unknown'], ['unknown']
                     ]);
                 expect(metadata.turnLanesBackward)
                     .to.deep.equal([
-                        ['through'], ['none']
+                        ['through'], ['unknown']
                     ]);
             });
 
@@ -1224,8 +1224,6 @@ describe('iD.Way', function() {
 
             });
 
-
-
             it('parses correctly when turn:lanes= ||x', function() {
                 var metadata = iD.Way({
                     tags: {
@@ -1250,7 +1248,7 @@ describe('iD.Way', function() {
                 }).lanes().metadata;
 
                 expect(metadata.turnLanes)
-                    .to.deep.equal([['none'], ['through'], ['none'], ['none'], ['none']]);
+                    .to.deep.equal([['none'], ['through'], ['none'], ['unknown'], ['unknown']]);
             });
 
             it('parses correctly when turn:lanes:forward= ||x', function() {
@@ -1311,8 +1309,99 @@ describe('iD.Way', function() {
 
         });
 
-        describe.only('maxspeed', function() {
-            it('should parse maxspeed correctly', function() {
+        describe('maxspeed', function() {
+            it('should parse maxspeed without any units correctly', function() {
+                var maxspeed = iD.Way({
+                    tags: {
+                        highway: 'residential',
+                        lanes: 5,
+                        'maxspeed': '70'
+                    }
+                }).lanes().metadata.maxspeed;
+                expect(maxspeed).to.equal(70);
+            });
+            it('should parse maxspeed with km/h correctly', function() {
+                var maxspeed = iD.Way({
+                    tags: {
+                        highway: 'residential',
+                        lanes: 5,
+                        'maxspeed': '70 km/h'
+                    }
+                }).lanes().metadata.maxspeed;
+                expect(maxspeed).to.equal(70);
+            });
+            it('should parse maxspeed with kmh correctly', function() {
+                var maxspeed = iD.Way({
+                    tags: {
+                        highway: 'residential',
+                        lanes: 5,
+                        'maxspeed': '70kmh'
+                    }
+                }).lanes().metadata.maxspeed;
+                expect(maxspeed).to.equal(70);
+            });
+            it('should parse maxspeed with kph correctly', function() {
+                var maxspeed = iD.Way({
+                    tags: {
+                        highway: 'residential',
+                        lanes: 5,
+                        'maxspeed': '70 kph'
+                    }
+                }).lanes().metadata.maxspeed;
+                expect(maxspeed).to.equal(70);
+            });
+            it('should parse maxspeed with mph correctly', function() {
+                var maxspeed = iD.Way({
+                    tags: {
+                        highway: 'residential',
+                        lanes: 5,
+                        'maxspeed': '70mph'
+                    }
+                }).lanes().metadata.maxspeed;
+                expect(maxspeed).to.equal(70);
+            });
+            it('should parse maxspeed with knots correctly', function() {
+                var maxspeed = iD.Way({
+                    tags: {
+                        highway: 'residential',
+                        lanes: 5,
+                        'maxspeed': '50knots'
+                    }
+                }).lanes().metadata.maxspeed;
+                expect(maxspeed).to.equal(50);
+            });
+            it('should return undefined when incorrect maxspeed unit provided ', function() {
+                var maxspeed = iD.Way({
+                    tags: {
+                        highway: 'residential',
+                        lanes: 5,
+                        'maxspeed': '70km'
+                    }
+                }).lanes().metadata.maxspeed;
+                expect(maxspeed).to.equal(undefined);
+            });
+            it('should return undefined when incorrect maxspeed value provided ', function() {
+                var maxspeed = iD.Way({
+                    tags: {
+                        highway: 'residential',
+                        lanes: 5,
+                        'maxspeed': 'a70knots'
+                    }
+                }).lanes().metadata.maxspeed;
+                expect(maxspeed).to.equal(undefined);
+            });
+            it('should return undefined when maxspeed not provided ', function() {
+                var maxspeed = iD.Way({
+                    tags: {
+                        highway: 'residential',
+                        lanes: 5,
+                    }
+                }).lanes().metadata.maxspeed;
+                expect(maxspeed).to.equal(undefined);
+            });
+        });
+        describe('maxspeed:lanes', function() {
+            it('should parse correctly', function() {
                 var maxspeedLanes = iD.Way({
                     tags: {
                         highway: 'residential',
@@ -1320,11 +1409,145 @@ describe('iD.Way', function() {
                         'maxspeed:lanes': '30|40|40|40|40'
                     }
                 }).lanes().metadata.maxspeedLanes;
-
                 expect(maxspeedLanes).to.deep.equal([
                     30, 40, 40, 40, 40
                 ]);
+            });
 
+            it('should parse maxspeed:lanes:forward/backward correctly', function() {
+                var metadata = iD.Way({
+                    tags: {
+                        highway: 'residential',
+                        lanes: 5,
+                        maxspeed: 30,
+                        'lanes:forward': 4,
+                        'lanes:backward': 1,
+                        'maxspeed:lanes:forward': '30|40|40|40',
+                        'maxspeed:lanes:backward': '30'
+                    }
+                }).lanes().metadata;
+                expect(metadata.maxspeedLanesForward).to.deep.equal([
+                    'none', 40, 40, 40
+                ]);
+                expect(metadata.maxspeedLanesBackward).to.deep.equal([
+                    'none'
+                ]);
+            });
+
+            it('should parse correctly when some values maxspeed:lanes are implied by x||y notation', function() {
+                var maxspeedLanes = iD.Way({
+                    tags: {
+                        highway: 'residential',
+                        lanes: 4,
+                        maxspeed: '40kmh',
+                        'maxspeed:lanes': '30|||40'
+                    }
+                }).lanes().metadata.maxspeedLanes;
+                expect(maxspeedLanes).to.deep.equal([
+                    30, 'none', 'none', 'none'
+                ]);
+            });
+
+            it('should parse correctly when some values maxspeed:lanes are implied by x||| notation', function() {
+                var maxspeedLanes = iD.Way({
+                    tags: {
+                        highway: 'residential',
+                        lanes: 4,
+                        maxspeed: '60kmh',
+                        'maxspeed:lanes': '30|||'
+                    }
+                }).lanes().metadata.maxspeedLanes;
+                expect(maxspeedLanes).to.deep.equal([
+                    30, 'none', 'none', 'none'
+                ]);
+            });
+
+            it('should return none for each maxspeed:lanes which equals maxspeed', function() {
+                var maxspeedLanes = iD.Way({
+                    tags: {
+                        highway: 'residential',
+                        lanes: 5,
+                        maxspeed: '40kmh',
+                        'maxspeed:lanes': '30|40|40|40|40'
+                    }
+                }).lanes().metadata.maxspeedLanes;
+                expect(maxspeedLanes).to.deep.equal([
+                    30, 'none', 'none', 'none', 'none'
+                ]);
+                maxspeedLanes = iD.Way({
+                    tags: {
+                        highway: 'residential',
+                        lanes: 5,
+                        maxspeed: '50kmh',
+                        'maxspeed:lanes': '30|40|40|40|40'
+                    }
+                }).lanes().metadata.maxspeedLanes;
+                expect(maxspeedLanes).to.deep.equal([
+                    30, 40, 40, 40, 40
+                ]);
+                maxspeedLanes = iD.Way({
+                    tags: {
+                        highway: 'residential',
+                        lanes: 5,
+                        maxspeed: '30knots',
+                        'maxspeed:lanes': '30|40|40|40|40'
+                    }
+                }).lanes().metadata.maxspeedLanes;
+                expect(maxspeedLanes).to.deep.equal([
+                    'none', 40, 40, 40, 40
+                ]);
+            });
+            it('should return \'unknown\' for every bogus maxspeed:lane value', function() {
+                var maxspeedLanes = iD.Way({
+                    tags: {
+                        highway: 'residential',
+                        lanes: 5,
+                        maxspeed: '30kmh',
+                        'maxspeed:lanes': '30|40|fourty|40|40'
+                    }
+                }).lanes().metadata.maxspeedLanes;
+                expect(maxspeedLanes).to.deep.equal([
+                    'none', 40, 'unknown', 40, 40
+                ]);
+                maxspeedLanes = iD.Way({
+                    tags: {
+                        highway: 'residential',
+                        lanes: 5,
+                        maxspeed: '30kmh',
+                        'maxspeed:lanes': '30|40|fourty|40|random'
+                    }
+                }).lanes().metadata.maxspeedLanes;
+                expect(maxspeedLanes).to.deep.equal([
+                    'none', 40, 'unknown', 40, 'unknown'
+                ]);
+            });
+
+            it('should return \'unknown\' when maxspeed:lanes length is less than lane count', function() {
+                var maxspeedLanes = iD.Way({
+                    tags: {
+                        highway: 'primary',
+                        lanes: 4,
+                        maxspeed: '40mph',
+                        'maxspeed:lanes': '40|60|60'
+                    }
+                }).lanes().metadata.maxspeedLanes;
+                expect(maxspeedLanes).to.deep.equal([
+                    'none', 60, 60, 'unknown'
+                ]);
+            });
+
+            it('should clip if maxspeed:lanes length is more than lane count', function() {
+                var maxspeedLanes = iD.Way({
+                    tags: {
+                        highway: 'primary',
+                        lanes: 4,
+                        maxspeed: '40mph',
+                        'maxspeed:lanes': '40|60|60|60|40'
+                    }
+                }).lanes().metadata.maxspeedLanes;
+                expect(maxspeedLanes).to.deep.equal([
+                    'none', 60, 60, 60
+                ]);
             });
         });
     });
