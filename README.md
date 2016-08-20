@@ -33,7 +33,7 @@ Come on in, the water's lovely. More help? Ping `jfire` or `bhousel` on
   * Ubuntu:
     * `sudo apt-get install build-essential git`
   * macOS:
-    * Install [Xcode](https://developer.apple.com/xcode/) and run `xcode-select --install` from a command line
+    * Run `xcode-select --install` from a command line or install [Xcode](https://developer.apple.com/xcode/)
   * Windows (Cygwin):
     * Install [Git for Windows](https://git-scm.com/downloads)
     * Install [Cygwin](https://cygwin.com/install.html) - choose default packages + `make`, `wget`, `apache2` (needed for updated mime type list)
