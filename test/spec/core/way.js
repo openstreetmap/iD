@@ -554,7 +554,7 @@ describe('iD.Way', function() {
         });
     });
 
-    describe('iD.Lanes', function() {
+    describe.only('iD.Lanes', function() {
 
         describe('default lane tags', function() {
 
@@ -956,7 +956,7 @@ describe('iD.Way', function() {
                         bothways: 0
                     });
             });
-            
+
         });
 
         describe('lanes array', function() {
@@ -1107,23 +1107,59 @@ describe('iD.Way', function() {
                     ]);
             });
 
-            it('fills with [\'none\'] when given turn:lanes are less than lanes count', function() {
+            it('returns unknown for every invalid value in turn:lanes', function() {
+                var metadata = iD.Way({
+                    tags: {
+                        highway: 'tertiary',
+                        lanes: 3,
+                        oneway: 'yes',
+                        'turn:lanes': '||straight;NO_LEFT',
+                    }
+                }).lanes().metadata;
+                expect(metadata.turnLanes)
+                    .to.deep.equal([
+                        ['none'], ['none'], ['unknown', 'unknown']
+                    ]);
+            });
+
+            it('returns unknown for every invalid value in turn:lanes:forward & turn:lanes:backward', function() {
+                var metadata = iD.Way({
+                    tags: {
+                        highway: 'residential',
+                        lanes: 5,
+                        'lanes:forward': 1,
+                        'lanes:both_ways': 1,
+                        'turn:lanes:forward': 'sligh_left',
+                        'turn:lanes:backward': 'none|through|though;slight_right',
+                    }
+                }).lanes().metadata;
+                expect(metadata.turnLanesForward)
+                    .to.deep.equal([
+                        ['unknown']
+                    ]);
+                expect(metadata.turnLanesBackward)
+                    .to.deep.equal([
+                        ['none'], ['through'], ['unknown', 'slight_right']
+                    ]);
+            });
+
+            it('fills with [\'unknown\'] when given turn:lanes are less than lanes count', function() {
                 var metadata = iD.Way({
                     tags: {
                         highway: 'tertiary',
                         lanes: 5,
                         oneway: 'yes',
-                        'turn:lanes': 'slight_left',
+                        'turn:lanes': 'slight_left|',
                     }
                 }).lanes().metadata;
 
                 expect(metadata.turnLanes)
                     .to.deep.equal([
-                        ['slight_left'], ['unknown'], ['unknown'], ['unknown'], ['unknown']
+                        ['slight_left'], ['none'], ['unknown'], ['unknown'], ['unknown']
                     ]);
             });
 
-            it('fills with [\'none\'] when given turn:lanes:forward are less than lanes forward count', function() {
+            it('fills with [\'unknown\'] when given turn:lanes:forward are less than lanes forward count', function() {
                 var metadata = iD.Way({
                     tags: {
                         highway: 'tertiary',

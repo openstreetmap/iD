@@ -103,25 +103,6 @@ _.extend(Way.prototype, {
 
     lanes: function() {
 
-        function parsePipeString(key, n) {
-            var str = tags[key];
-
-            if (!str) return;
-
-            var array = str.split('|')
-                .filter(function(s, i) {
-                    return i < n;
-                })
-                .map(function(s) {
-                    if (s === '') s = 'none';
-                    return s.split(';');
-                });
-            while (array.length < n) {
-                array.push(['none']);
-            }
-            return array;
-        }
-
         function parseTurnLanes(key, n){
             var validValues = [
                 'left', 'slight_left', 'sharp_left', 'through', 'right', 'slight_right',
@@ -170,6 +151,12 @@ _.extend(Way.prototype, {
             return parsedArray;
         }
 
+        function parseVehicleLanes(key, n) {
+            var str = tags[key];
+            if (!str) return;
+            var parsedArray
+        }
+
         function parseLaneDirections() {
             var forward = parseInt(tags['lanes:forward']);
             var backward = parseInt(tags['lanes:backward']);
@@ -208,19 +195,32 @@ _.extend(Way.prototype, {
             };
         }
 
-        // smartly fills the undefined array.key elements with values
-        function smartFill(array, key, values) {
-            if (!array) return;
-            // keeps track of elements filled with 'value'
-            var counter = 0;
-            array.forEach(function(o) {
-                if (!o || counter === values.length) return;
+        function parseMiscLanes(key) {
+            var validValues = [
+                'yes', 'no', 'designated'
+            ];
+            var str = tags[key];
+            if (!str) return;
+            var parsedArray = str.split('|')
+                .map(function (s) {
+                    if (s === '') s = 'no';
+                        return validValues.indexOf(s) === -1 ? 'unknown': s;
+                });
+            return parsedArray;
+        }
 
-                if (o[key] === undefined) {
-                    o[key] = values[counter];
-                    counter++;
-                }
-            });
+        function parsebicycleWay(key) {
+            var validValues = [
+                'yes', 'no', 'designated', 'lane'
+            ];
+            var str = tags[key];
+            if (!str) return;
+            var parsedArray = str.split('|')
+                .map(function (s) {
+                    if (s === '') s = 'no';
+                        return validValues.indexOf(s) === -1 ? 'unknown': s;
+                });
+            return parsedArray;
         }
 
         function getLaneCount() {
@@ -245,11 +245,7 @@ _.extend(Way.prototype, {
         var tags = this.tags;
         var oneway = this.isOneWay();
         var laneCount = getLaneCount();
-
-        var lanesArray = [];
-        for (var i = 0; i < laneCount; i++) {
-            lanesArray.push({ index: i});
-        }
+        var maxspeed = parseMaxspeed();
 
         var laneDirections = parseLaneDirections();
         var forward = laneDirections.forward;
@@ -257,15 +253,45 @@ _.extend(Way.prototype, {
         var bothways = laneDirections.bothways;
 
         // parse the piped string 'x|y|z' format
-        var turnLanes = parseTurnLanes('turn:lanes', laneCount);
-        var turnLanesForward = parseTurnLanes('turn:lanes:forward', forward);
-        var turnLanesBackward = parseTurnLanes('turn:lanes:backward', backward);
+        var turnLanes = {};
+        turnLanes.unspecified = parseTurnLanes('turn:lanes', laneCount);
+        turnLanes.forward = parseTurnLanes('turn:lanes:forward', forward);
+        turnLanes.backward = parseTurnLanes('turn:lanes:backward', backward);
 
-        var maxspeed = parseMaxspeed();
-        var maxspeedLanes = parseMaxspeedLanes('maxspeed:lanes', laneCount);
-        var maxspeedLanesForward = parseMaxspeedLanes('maxspeed:lanes:forward', forward);
-        var maxspeedLanesBackward = parseMaxspeedLanes('maxspeed:lanes:backward', backward);
+        var maxspeedLanes = {};
+        maxspeedLanes.unspecified = parseMaxspeedLanes('maxspeed:lanes', laneCount);
+        maxspeedLanes.forward = parseMaxspeedLanes('maxspeed:lanes:forward', forward);
+        maxspeedLanes.backward = parseMaxspeedLanes('maxspeed:lanes:backward', backward);
 
+        var psvLanes = {};
+        psvLanes.unspecified = parseMiscLanes('psv:lanes');
+        psvLanes.forward = parseMiscLanes('psv:lanes:forward');
+        psvLanes.backward = parseMiscLanes('psv:lanes:backward');
+
+        var busLanes = {};
+        busLanes.unspecified = parseMiscLanes('bus:lanes');
+        busLanes.forward = parseMiscLanes('bus:lanes:forward');
+        busLanes.backward = parseMiscLanes('bus:lanes:backward');
+
+        var taxiLanes = {};
+        taxiLanes.unspecified = parseMiscLanes('taxi:lanes');
+        taxiLanes.forward = parseMiscLanes('taxi:lanes:forward');
+        taxiLanes.backward = parseMiscLanes('taxi:lanes:backward');
+
+        var hovLanes = {};
+        hovLanes.unspecified = parseMiscLanes('hov:lanes');
+        hovLanes.forward = parseMiscLanes('hov:lanes:forward');
+        hovLanes.backward = parseMiscLanes('hov:lanes:backward');
+
+        var hgvLanes = {};
+        hgvLanes.unspecified = parseMiscLanes('hgv:lanes');
+        hgvLanes.forward = parseMiscLanes('hgv:lanes:forward');
+        hgvLanes.backward = parseMiscLanes('hgv:lanes:backward');
+
+        var bicyclewayLanes = {};
+        bicyclewayLanes.unspecified = parsebicycleWay('bicycleway:lanes');
+        bicyclewayLanes.forward = parsebicycleWay('bicycleway:lanes:forward');
+        bicyclewayLanes.backward = parsebicycleWay('bicycleway:lanes:backward');
 
         // fill each undefined lanesArray's direction element with 'forward/bothways/backward'.
         smartFill(lanesArray, 'direction', _.fill(Array(forward), 'forward'));
@@ -308,6 +334,9 @@ _.extend(Way.prototype, {
                 maxspeedLanes: maxspeedLanes,
                 maxspeedLanesForward: maxspeedLanesForward,
                 maxspeedLanesBackward: maxspeedLanesBackward,
+                vehicleLanes: vehicleLanes,
+                vehicleLanesForward: vehicleLanesForward,
+                vehicleLanesBackward: vehicleLanesBackward
             },
             lanes: lanesArray
         };
