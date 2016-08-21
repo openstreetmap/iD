@@ -1,0 +1,21 @@
+{
+    "icon": "pitch",
+    "fields": [
+        "operator",
+        "address",
+        "building"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "yoga",
+        "studio"
+    ],
+    "tags": {
+      "leisure":"fitness_centre",
+      "sport":"yoga"
+    },
+    "name": "Yoga Studio"
+}
