@@ -5813,6 +5813,27 @@
         ],
         "name": "Firepit"
     },
+    "leisure/fitness_centre/yoga": {
+        "icon": "pitch",
+        "fields": [
+            "sport",
+            "address",
+            "building_area",
+            "opening_hours"
+        ],
+        "geometry": [
+            "point",
+            "area"
+        ],
+        "terms": [
+            "studio"
+        ],
+        "tags": {
+            "leisure": "fitness_centre",
+            "sport": "yoga"
+        },
+        "name": "Yoga Studio"
+    },
     "leisure/garden": {
         "icon": "garden",
         "geometry": [

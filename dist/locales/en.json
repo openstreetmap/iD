@@ -2923,6 +2923,10 @@
                 "name": "Firepit",
                 "terms": "fireplace,campfire"
             },
+            "leisure/fitness_centre/yoga": {
+                "name": "Yoga Studio",
+                "terms": "studio"
+            },
             "leisure/garden": {
                 "name": "Garden",
                 "terms": ""
