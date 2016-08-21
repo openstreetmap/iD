@@ -49,27 +49,5 @@ translations:
 imagery:
 	node data/update_imagery
 
-D3_FILES = \
-	node_modules/d3/src/start.js \
-	node_modules/d3/src/arrays/index.js \
-	node_modules/d3/src/behavior/behavior.js \
-	node_modules/d3/src/behavior/zoom.js \
-	node_modules/d3/src/core/index.js \
-	node_modules/d3/src/event/index.js \
-	node_modules/d3/src/geo/length.js \
-	node_modules/d3/src/geo/mercator.js \
-	node_modules/d3/src/geo/path.js \
-	node_modules/d3/src/geo/stream.js \
-	node_modules/d3/src/geom/polygon.js \
-	node_modules/d3/src/geom/hull.js \
-	node_modules/d3/src/selection/index.js \
-	node_modules/d3/src/transition/index.js \
-	node_modules/d3/src/xhr/index.js \
-	node_modules/d3/src/end.js
-
-d3:
-	node_modules/.bin/smash $(D3_FILES) > js/lib/d3.v3.js
-	@echo 'd3 rebuilt. Please reapply 7e2485d, 4da529f, 223974d and 71a3d3e'
-
 clean:
 	rm -f $(BUILDJS_TARGETS) data/feature-icons.json dist/iD*.js dist/iD.css dist/img/*.svg
