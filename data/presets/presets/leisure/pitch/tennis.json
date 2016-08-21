@@ -2,7 +2,8 @@
     "icon": "tennis",
     "fields": [
         "surface",
-        "lit"
+        "lit",
+        "access_simple"
     ],
     "geometry": [
         "point",
