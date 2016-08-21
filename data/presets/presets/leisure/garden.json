@@ -1,5 +1,8 @@
 {
     "icon": "garden",
+    "fields": [
+        "access_simple"
+    ],
     "geometry": [
         "point",
         "vertex",
