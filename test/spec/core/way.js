@@ -554,7 +554,7 @@ describe('iD.Way', function() {
         });
     });
 
-    describe.only('iD.Lanes', function() {
+    describe('iD.Lanes', function() {
 
         describe('default lane tags', function() {
 
@@ -1318,7 +1318,24 @@ describe('iD.Way', function() {
                     .to.deep.equal([['none'], ['none']]);
             });
 
-            it.skip('fills turnLane correctly in lanes', function() {
+            it('fills lanes.unspecified with key \'turnLane\' correctly', function() {
+                var lanes = iD.Way({
+                    tags: {
+                        highway: 'tertiary',
+                        lanes: 5,
+                        oneway: 'yes',
+                        'turn:lanes': 'slight_left||through|through;slight_right|slight_right'
+                    }
+                }).lanes().lanes;
+                var turnLanesUnspecified = lanes.unspecified.map(function(l) { return l.turnLane; });
+                expect(turnLanesUnspecified).to.deep.equal([
+                    ['slight_left'], ['none'], ['through'], ['through', 'slight_right'], ['slight_right']
+                ]);
+                expect(lanes.forward).to.deep.equal([]);
+                expect(lanes.backward).to.deep.equal([]);
+            });
+
+            it('fills lanes.forward & lanes.backward with key \'turnLane\' correctly', function() {
                 var lanes = iD.Way({
                     tags: {
                         highway: 'tertiary',
@@ -1329,10 +1346,14 @@ describe('iD.Way', function() {
                         'turn:lanes:forward': 'slight_left||',
                     }
                 }).lanes().lanes;
-
-                var turnLanes = lanes.map(function(l) { return l.turnLane; });
-                expect(turnLanes).to.deep.equal([
-                    ['slight_left'], ['none'], ['none'], ['none'], ['slight_right']
+                expect(lanes.unspecified).to.deep.equal([]);
+                var turnLanesForward = lanes.forward.map(function(l) { return l.turnLane; });
+                var turnLanesBackward = lanes.backward.map(function(l) { return l.turnLane; });
+                expect(turnLanesForward).to.deep.equal([
+                    ['slight_left'], ['none'], ['none']
+                ]);
+                expect(turnLanesBackward).to.deep.equal([
+                    ['none'], ['slight_right']
                 ]);
             });
         });
@@ -1344,6 +1365,14 @@ describe('iD.Way', function() {
                         highway: 'residential',
                         lanes: 5,
                         'maxspeed': '70'
+                    }
+                }).lanes().metadata.maxspeed;
+                expect(maxspeed).to.equal(70);
+                maxspeed = iD.Way({
+                    tags: {
+                        highway: 'residential',
+                        lanes: 5,
+                        'maxspeed': 70
                     }
                 }).lanes().metadata.maxspeed;
                 expect(maxspeed).to.equal(70);
@@ -1499,7 +1528,6 @@ describe('iD.Way', function() {
                         'maxspeed:lanes': '30|||'
                     }
                 }).lanes();
-                console.log(JSON.stringify(lanes.lanes, null, '\t'));
                 expect(lanes.metadata.maxspeedLanes.unspecified).to.deep.equal([
                     30, 'none', 'none', 'none'
                 ]);
@@ -1541,7 +1569,7 @@ describe('iD.Way', function() {
                 ]);
             });
 
-            it('should return \'unknown\' for every bogus maxspeed:lane value', function() {
+            it('should return \'unknown\' for every invalid maxspeed:lane value', function() {
                 var maxspeedLanes = iD.Way({
                     tags: {
                         highway: 'residential',
@@ -1561,36 +1589,171 @@ describe('iD.Way', function() {
                         'maxspeed:lanes': '30|40|fourty|40|random'
                     }
                 }).lanes().metadata.maxspeedLanes;
+
                 expect(maxspeedLanes.unspecified).to.deep.equal([
                     'none', 40, 'unknown', 40, 'unknown'
                 ]);
             });
-
-            it.skip('should return \'unknown\' when maxspeed:lanes length is less than lane count', function() {
-                var maxspeedLanes = iD.Way({
+            it('fills lanes.unspecified with key \'maxspeed\' correctly', function() {
+                var lanes = iD.Way({
                     tags: {
-                        highway: 'primary',
-                        lanes: 4,
-                        maxspeed: '40mph',
-                        'maxspeed:lanes': '40|60|60'
+                        highway: 'residential',
+                        lanes: 5,
+                        maxspeed: '30kmh',
+                        'maxspeed:lanes': '30|40|fourty|40|40'
                     }
-                }).lanes().metadata.maxspeedLanes;
-                expect(maxspeedLanes.unspecified).to.deep.equal([
-                    'none', 60, 60, 'unknown'
+                }).lanes().lanes;
+                var maxspeedLanes = lanes.unspecified.map(function (l) {
+                    return l.maxspeed;
+                });
+                expect(maxspeedLanes).to.deep.equal([
+                    'none', 40, 'unknown', 40, 40
+                ]);
+            });
+        });
+
+        describe('bicycle lanes', function() {
+            it('should parse bicycle:lanes correctly', function() {
+                var lanes = iD.Way({
+                    tags: {
+                        highway: 'residential',
+                        lanes: 3,
+                        'lanes:bicycleway': 2,
+                        'bicycleway:lanes': 'no|yes|no|designated|no',
+                        maxspeed: '30kmh',
+                        'turn:lanes': 'left|||through|right'
+                    }
+                }).lanes();
+                expect(lanes.metadata.bicyclewayLanes.unspecified).to.deep.equal([
+                    'no','yes','no', 'designated', 'no'
+                ]);
+                var bicyclewayLanes = lanes.lanes.unspecified.map(function(l) {
+                    return l.bicycleway;
+                });
+                expect(bicyclewayLanes).to.deep.equal([
+                    'no','yes','no', 'designated', 'no'
                 ]);
             });
 
-            it.skip('should clip if maxspeed:lanes length is more than lane count', function() {
-                var maxspeedLanes = iD.Way({
+            it('should parse bicycle:lanes:forward/backward correctly', function() {
+                var lanes = iD.Way({
                     tags: {
-                        highway: 'primary',
-                        lanes: 4,
-                        maxspeed: '40mph',
-                        'maxspeed:lanes': '40|60|60|60|40'
+                        highway: 'residential',
+                        'lanes:forward': 4,
+                        'lanes:backward': 3,
+                        'turn:lanes:forward': 'left;through|left;through|through|right;through|right',
+                        'bicycleway:lanes:forward': 'lane|no|no|no|no',
+                        'bicycleway:lanes:backward': 'lane|no|no|no'
                     }
-                }).lanes().metadata.maxspeedLanes;
-                expect(maxspeedLanes.unspecified).to.deep.equal([
-                    'none', 60, 60, 60
+                }).lanes();
+                expect(lanes.metadata.bicyclewayLanes.forward).to.deep.equal([
+                    'lane','no','no', 'no', 'no'
+                ]);
+                expect(lanes.metadata.bicyclewayLanes.backward).to.deep.equal([
+                    'lane','no','no', 'no'
+                ]);
+                var bicyclewayLanesForward = lanes.lanes.forward.map(function(l) {
+                    return l.bicycleway;
+                });
+                expect(bicyclewayLanesForward).to.deep.equal([
+                    'lane','no','no', 'no', 'no'
+                ]);
+                var bicyclewayLanesBackward = lanes.lanes.backward.map(function(l) {
+                    return l.bicycleway;
+                });
+                expect(bicyclewayLanesBackward).to.deep.equal([
+                    'lane','no','no', 'no'
+                ]);
+            });
+
+            it('should replace any invalid value with unknown', function() {
+                var lanes = iD.Way({
+                    tags: {
+                        highway: 'residential',
+                        lanes: 3,
+                        maxspeed: '30kmh',
+                        'bicycleway:lanes': 'no|share|no|designated|no',
+                        'turn:lanes': 'left|||through|right'
+                    }
+                }).lanes();
+                expect(lanes.metadata.bicyclewayLanes.unspecified).to.deep.equal([
+                    'no','unknown','no', 'designated', 'no'
+                ]);
+                var psvLanesForward = lanes.lanes.unspecified.map(function(l) {
+                    return l.bicycleway;
+                });
+                expect(psvLanesForward).to.deep.equal([
+                    'no','unknown','no', 'designated', 'no'
+                ]);
+            });
+        });
+
+        describe('miscellaneous lanes', function() {
+            it('should parse psv:lanes correctly', function() {
+                var lanes = iD.Way({
+                    tags: {
+                        highway: 'residential',
+                        lanes: 5,
+                        maxspeed: '30kmh',
+                        'psv:lanes': 'yes|no||no|no'
+                    }
+                }).lanes();
+                expect(lanes.metadata.psvLanes.unspecified).to.deep.equal([
+                    'yes','no','no', 'no', 'no'
+                ]);
+                var psvLanesForward = lanes.lanes.unspecified.map(function(l) {
+                    return l.psv;
+                });
+                expect(psvLanesForward).to.deep.equal([
+                    'yes','no','no', 'no', 'no'
+                ]);
+            });
+            it('should parse psv:lanes:forward/backward correctly', function() {
+                var lanes = iD.Way({
+                    tags: {
+                        highway: 'residential',
+                        lanes: 5,
+                        maxspeed: '30kmh',
+                        'psv:lanes:forward': 'no|no|',
+                        'psv:lanes:backward': 'yes|designated',
+                    }
+                }).lanes();
+                expect(lanes.metadata.psvLanes.forward).to.deep.equal([
+                    'no','no','no'
+                ]);
+                expect(lanes.metadata.psvLanes.backward).to.deep.equal([
+                    'yes', 'designated'
+                ]);
+                var psvLanesForward = lanes.lanes.forward.map(function(l) {
+                    return l.psv;
+                });
+                var psvLanesBackward = lanes.lanes.backward.map(function(l) {
+                    return l.psv;
+                });
+                expect(psvLanesForward).to.deep.equal([
+                    'no','no','no'
+                ]);
+                expect(psvLanesBackward).to.deep.equal([
+                    'yes', 'designated'
+                ]);
+            });
+            it('should replace any invalid value with unknown', function() {
+                var lanes = iD.Way({
+                    tags: {
+                        highway: 'residential',
+                        lanes: 3,
+                        maxspeed: '30kmh',
+                        'psv:lanes': 'yes|no|garbage'
+                    }
+                }).lanes();
+                expect(lanes.metadata.psvLanes.unspecified).to.deep.equal([
+                    'yes','no', 'unknown'
+                ]);
+                var psvLanesForward = lanes.lanes.unspecified.map(function(l) {
+                    return l.psv;
+                });
+                expect(psvLanesForward).to.deep.equal([
+                    'yes','no', 'unknown'
                 ]);
             });
         });

@@ -225,21 +225,21 @@ _.extend(Way.prototype, {
             return parsedArray;
         }
 
-        function addToLanesArray(data, key) {
+        function mapToLanesObj(data, key) {
             if (data.forward) data.forward.forEach(function(l, i) {
-                if (!lanesArray.forward[i]) lanesArray.forward[i] = {};
-                lanesArray.forward[i][key] = l;
+                if (!lanesObj.forward[i]) lanesObj.forward[i] = {};
+                lanesObj.forward[i][key] = l;
             });
             if (data.backward) data.backward.forEach(function(l, i) {
-                if (!lanesArray.backward[i]) lanesArray.backward[i] = {};
-                lanesArray.backward[i][key] = l;
+                if (!lanesObj.backward[i]) lanesObj.backward[i] = {};
+                lanesObj.backward[i][key] = l;
             });
             if (data.unspecified) data.unspecified.forEach(function(l, i) {
-                if (!lanesArray.unspecified[i]) lanesArray.unspecified[i] = {};
-                lanesArray.unspecified[i][key] = l;
+                if (!lanesObj.unspecified[i]) lanesObj.unspecified[i] = {};
+                lanesObj.unspecified[i][key] = l;
             });
-
         }
+
         if (!this.tags.highway) return null;
 
         var tags = this.tags;
@@ -293,20 +293,21 @@ _.extend(Way.prototype, {
         bicyclewayLanes.forward = parseBicycleWay('bicycleway:lanes:forward');
         bicyclewayLanes.backward = parseBicycleWay('bicycleway:lanes:backward');
 
-        var lanesArray = {
+        var lanesObj = {
             forward: [],
             backward: [],
             unspecified: []
         };
 
-        addToLanesArray(turnLanes, 'turnLane');
-        addToLanesArray(maxspeedLanes, 'maxspeed');
-        addToLanesArray(psvLanes, 'psv');
-        addToLanesArray(busLanes, 'bus');
-        addToLanesArray(taxiLanes, 'taxi');
-        addToLanesArray(hovLanes, 'hov');
-        addToLanesArray(hgvLanes, 'hgv');
-        addToLanesArray(bicyclewayLanes, 'bicycle');
+        // map forward/backward/unspecified of each lane type to lanesObj
+        mapToLanesObj(turnLanes, 'turnLane');
+        mapToLanesObj(maxspeedLanes, 'maxspeed');
+        mapToLanesObj(psvLanes, 'psv');
+        mapToLanesObj(busLanes, 'bus');
+        mapToLanesObj(taxiLanes, 'taxi');
+        mapToLanesObj(hovLanes, 'hov');
+        mapToLanesObj(hgvLanes, 'hgv');
+        mapToLanesObj(bicyclewayLanes, 'bicycleway');
 
         return {
             metadata: {
@@ -325,7 +326,7 @@ _.extend(Way.prototype, {
                 hgvLanes: hgvLanes,
                 bicyclewayLanes: bicyclewayLanes
             },
-            lanes: lanesArray
+            lanes: lanesObj
         };
     },
 
