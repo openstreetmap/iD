@@ -20,7 +20,7 @@ export function Modes(context) {
         var buttons = selection.selectAll('button.add-button')
             .data(modes);
 
-       buttons.enter().append('button')
+       buttons = buttons.enter().append('button')
            .attr('tabindex', -1)
            .attr('class', function(mode) { return mode.id + ' add-button col4'; })
            .on('click.mode-buttons', function(mode) {
