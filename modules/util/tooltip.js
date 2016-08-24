@@ -1,5 +1,6 @@
 import { functor } from './index';
 import * as d3 from 'd3';
+import 'd3-selection-multi';
 export function tooltip() {
 
   var tooltip = function(selection) {
@@ -122,7 +123,7 @@ export function tooltip() {
         break;
     }
 
-    tip.style(pos ?
+    tip.styles(pos ?
       {left: ~~pos.x + 'px', top: ~~pos.y + 'px'} :
       {left: null, top: null});
 
