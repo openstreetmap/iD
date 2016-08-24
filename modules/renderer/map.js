@@ -189,6 +189,7 @@ export function Map(context) {
     }
 
     function zoomPan(manualEvent) {
+        return; // TODO
 
         var eventTransform = (manualEvent || d3.event).transform;
 

@@ -118,7 +118,7 @@ export function FeatureList(context) {
                 });
             }
 
-            var visible = context.surface().selectAll('.point, .line, .area')[0];
+            var visible = context.surface().selectAll('.point, .line, .area').nodes();
             for (var i = 0; i < visible.length && result.length <= 200; i++) {
                 addEntity(visible[i].__data__);
             }
