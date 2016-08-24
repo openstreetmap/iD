@@ -5,7 +5,7 @@ export { Attribution } from './attribution';
 export { Background } from './background';
 export { cmd } from './cmd';
 export { Commit } from './commit';
-export { confirm } from './confirm';
+export { uiconfirm } from './confirm';
 export { Conflicts } from './conflicts';
 export { Contributors } from './contributors';
 export { Disclosure } from './disclosure';
