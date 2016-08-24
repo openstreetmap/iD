@@ -1,3 +1,4 @@
+import _ from 'lodash';
 /*
   Order the nodes of a way in reverse order and reverse any direction dependent tags
   other than `oneway`. (We assume that correcting a backwards oneway is the primary
@@ -22,12 +23,21 @@
    The JOSM implementation was used as a guide, but transformations that were of unclear benefit
    or adjusted tags that don't seem to be used in practice were omitted.
 
+   Also, each node on the way is examined for its own tags and the following transformations are performed
+   in order to ensure associated nodes (eg a Stop Sign) is also reversed
+
+    Node Keys:
+        direction=forward ⟺ direction=backward
+         *:forward=* ⟺ *:backward=*
+
    References:
       http://wiki.openstreetmap.org/wiki/Forward_%26_backward,_left_%26_right
       http://wiki.openstreetmap.org/wiki/Key:direction#Steps
       http://wiki.openstreetmap.org/wiki/Key:incline
       http://wiki.openstreetmap.org/wiki/Route#Members
       http://josm.openstreetmap.de/browser/josm/trunk/src/org/openstreetmap/josm/corrector/ReverseWayTagCorrector.java
+      http://wiki.openstreetmap.org/wiki/Tag:highway%3Dstop
+      http://wiki.openstreetmap.org/wiki/Key:traffic_sign#On_a_way_or_area
  */
 export function Reverse(wayId, options) {
     var replacements = [
@@ -66,6 +76,35 @@ export function Reverse(wayId, options) {
         }
     }
 
+    function reverseDirectionTags(node) {
+        // Update the direction based tags as appropriate then return an updated node
+        return node.update({tags: _.transform(node.tags, function(acc, tagValue, tagKey) {
+            // See if this is a direction tag and reverse (or use existing value if not forward/backward)
+            if (tagKey === 'direction') {
+                acc[tagKey] = tagValue === 'forward' ? 'backward'
+                    : tagValue === 'backward' ? 'forward' : tagValue;
+            } else {
+                // Use the reverseKey method to cater for situations such as traffic_sign:forward=stop
+                // This will pass through other tags unchanged
+                acc[reverseKey(tagKey)] = tagValue;
+            }
+            return acc;
+        }, {})});
+    }
+
+    function reverseTagsOnNodes(graph, nodeIds) {
+        // Reverse the direction of appropriate tags attached to the nodes (#3076)
+        return _(nodeIds)
+            // Get each node from the graph
+            .map(function(nodeId) { return graph.entity(nodeId);})
+            // Check tags on the node, if there aren't any, we can skip
+            .filter(function(existingNode) { return existingNode.tags !== undefined;})
+            // Get a new version of each node with the appropriate tags reversed
+            .map(function(existingNode) { return reverseDirectionTags(existingNode);})
+            // Chain together consecutive updates to the graph for each updated node and return
+            .reduce(function (accGraph, value) { return accGraph.replace(value); }, graph);
+    }
+
     return function(graph) {
         var way = graph.entity(wayId),
             nodes = way.nodes.slice().reverse(),
@@ -84,6 +123,8 @@ export function Reverse(wayId, options) {
             });
         });
 
-        return graph.replace(way.update({nodes: nodes, tags: tags}));
+        // Reverse any associated directions on nodes on the way and then replace
+        // the way itself with the reversed node ids and updated way tags
+        return reverseTagsOnNodes(graph, nodes).replace(way.update({nodes: nodes, tags: tags}));
     };
 }
