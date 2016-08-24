@@ -1,5 +1,6 @@
 import { getDimensions } from './dimensions';
 import { rebind } from '../../modules/util/rebind';
+import 'd3-selection-multi';
 import * as d3 from 'd3';
 
 // Tooltips and svg mask used to highlight certain features
@@ -14,7 +15,7 @@ export function d3curtain() {
 
         surface = selection.append('svg')
             .attr('id', 'curtain')
-            .style({
+            .styles({
                 'z-index': 1000,
                 'pointer-events': 'none',
                 'position': 'absolute',

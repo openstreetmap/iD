@@ -1,4 +1,5 @@
 import { rebind } from '../../modules/util/rebind';
+import 'd3-selection-multi';
 import * as d3 from 'd3';
 
 export function d3combobox() {
@@ -71,7 +72,7 @@ export function d3combobox() {
                     .insert('div', ':first-child')
                     .datum(input.node())
                     .attr('class', 'combobox')
-                    .style({
+                    .styles({
                         position: 'absolute',
                         display: 'block',
                         left: '0px'
@@ -232,7 +233,7 @@ export function d3combobox() {
             var node = attachTo ? attachTo.node() : input.node(),
                 rect = node.getBoundingClientRect();
 
-            container.style({
+            container.styles({
                 'left': rect.left + 'px',
                 'width': rect.width + 'px',
                 'top': rect.height + rect.top + 'px'

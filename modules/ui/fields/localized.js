@@ -189,7 +189,7 @@ export function localized(field, context) {
             .style('margin-top', '10px')
             .style('max-height', '240px')
             .style('opacity', '1')
-            .each('end', function() {
+            .on('end', function() {
                 d3.select(this)
                     .style('max-height', '')
                     .style('overflow', 'visible');

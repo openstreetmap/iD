@@ -10,7 +10,7 @@ export function Toggle(show, callback) {
             .classed('hide', false)
             .transition()
             .style('opacity', show ? 1 : 0)
-            .each('end', function() {
+            .on('end', function() {
                 d3.select(this)
                     .classed('hide', !show)
                     .style('opacity', null);

@@ -40,7 +40,7 @@ export function MapillaryImages(projection, context, dispatch) {
             .transition()
             .duration(500)
             .style('opacity', 1)
-            .each('end', debouncedRedraw);
+            .on('end', debouncedRedraw);
     }
 
     function hideLayer() {
@@ -55,7 +55,7 @@ export function MapillaryImages(projection, context, dispatch) {
             .transition()
             .duration(500)
             .style('opacity', 0)
-            .each('end', editOff);
+            .on('end', editOff);
     }
 
     function editOn() {

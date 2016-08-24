@@ -199,7 +199,7 @@ export function Info(context) {
                     .transition()
                     .duration(200)
                     .style('opacity', 0)
-                    .each('end', function() {
+                    .on('end', function() {
                         d3.select(this).style('display', 'none');
                     });
             } else {

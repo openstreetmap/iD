@@ -60,7 +60,7 @@ export function Help(context) {
                         .transition()
                         .duration(200)
                         .style('right', '-500px')
-                        .each('end', function() {
+                        .on('end', function() {
                             d3.select(this).style('display', 'none');
                         });
                     selection.on('mousedown.help-inside', null);

@@ -334,7 +334,7 @@ export function MapData(context) {
                         .transition()
                         .duration(200)
                         .style('right', '-300px')
-                        .each('end', function() {
+                        .on('end', function() {
                             d3.select(this).style('display', 'none');
                         });
                     selection.on('mousedown.map_data-inside', null);
