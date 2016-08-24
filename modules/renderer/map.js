@@ -10,15 +10,10 @@ import { fastMouse, setTransform, functor } from '../util/index';
 import { flash } from '../ui/index';
 
 export function Map(context) {
+
     var dimensions = [1, 1],
         dispatch = d3.dispatch('move', 'drawn'),
         projection = context.projection,
-        initialTransform = d3.zoomIdentity
-            .translate(projection.translate())
-            .scale(projection.scale() * 2 * Math.PI),
-        zoom = d3.zoom()
-            .scaleExtent([1024, 256 * Math.pow(2, 24)])
-            .on('zoom', zoomPan),
         dblclickEnabled = true,
         redrawEnabled = true,
         transformStart,
@@ -37,6 +32,13 @@ export function Map(context) {
         surface,
         mouse,
         mousemove;
+
+    var initialTransform = d3.zoomIdentity
+            .translate(projection.translate())
+            .scale(projection.scale() * 2 * Math.PI),
+        zoom = d3.zoom()
+            .scaleExtent([1024, 256 * Math.pow(2, 24)])
+            .on('zoom', zoomPan);
 
     var _selection;
 
@@ -93,21 +95,19 @@ export function Map(context) {
                 if (map.editable() && !transformed) {
                     var hover = d3.event.target.__data__;
                     surface.call(drawVertices.drawHover, context.graph(), hover, map.extent(), map.zoom());
-                    dispatch.call("drawn", this, {full: false});
+                    dispatch.call('drawn', this, {full: false});
                 }
             })
             .on('mouseout.vertices', function() {
                 if (map.editable() && !transformed) {
                     var hover = d3.event.relatedTarget && d3.event.relatedTarget.__data__;
                     surface.call(drawVertices.drawHover, context.graph(), hover, map.extent(), map.zoom());
-                    dispatch.call("drawn", this, {full: false});
+                    dispatch.call('drawn', this, {full: false});
                 }
             });
 
-
         supersurface
             .call(context.background());
-
 
         context.on('enter.map', function() {
             if (map.editable() && !transformed) {
@@ -119,7 +119,7 @@ export function Map(context) {
                 surface
                     .call(drawVertices, graph, all, filter, map.extent(), map.zoom())
                     .call(drawMidpoints, graph, all, filter, map.trimmedExtent());
-                dispatch.call("drawn", this, {full: false});
+                dispatch.call('drawn', this, {full: false});
             }
         });
 
@@ -172,13 +172,13 @@ export function Map(context) {
             .call(drawLabels, graph, data, filter, dimensions, !difference && !extent)
             .call(drawPoints, graph, data, filter);
 
-        dispatch.call("drawn", this, {full: true});
+        dispatch.call('drawn', this, {full: true});
     }
 
     function editOff() {
         context.features().resetStats();
         surface.selectAll('.layer-osm *').remove();
-        dispatch.call("drawn", this, {full: true});
+        dispatch.call('drawn', this, {full: true});
     }
 
     function dblClick() {
@@ -189,8 +189,7 @@ export function Map(context) {
     }
 
     function zoomPan(manualEvent) {
-        return; // TODO
-
+        return // TODO
         var eventTransform = (manualEvent || d3.event).transform;
 
         if (Math.log(event) / Math.LN2 - 8 < minzoom) {
@@ -200,7 +199,7 @@ export function Map(context) {
                 .text(t('cannot_zoom'));
             setZoom(context.minEditableZoom(), true);
             queueRedraw();
-            dispatch.call("move", this, map);
+            dispatch.call('move', this, map);
             return;
         }
 
@@ -216,7 +215,7 @@ export function Map(context) {
         setTransform(supersurface, tX, tY, scale);
         queueRedraw();
 
-        dispatch.call("move", this, map);
+        dispatch.call('move', this, map);
     }
 
     function resetTransform() {
@@ -369,7 +368,7 @@ export function Map(context) {
         if (_selection) {
             _selection.call(zoom.transform, d3.zoomTransform(_selection).translate(projection.translate()));
         }
-        dispatch.call("move", this, map);
+        dispatch.call('move', this, map);
         return redraw();
     };
 
@@ -405,7 +404,7 @@ export function Map(context) {
         }
 
         if (setCenter(loc)) {
-            dispatch.call("move", this, map);
+            dispatch.call('move', this, map);
         }
 
         return redraw();
@@ -425,7 +424,7 @@ export function Map(context) {
         }
 
         if (setZoom(z)) {
-            dispatch.call("move", this, map);
+            dispatch.call('move', this, map);
         }
 
         return redraw();
@@ -445,7 +444,7 @@ export function Map(context) {
             zoomed   = setZoom(z);
 
         if (centered || zoomed) {
-            dispatch.call("move", this, map);
+            dispatch.call('move', this, map);
         }
 
         return redraw();
@@ -494,7 +493,7 @@ export function Map(context) {
 
     map.cancelEase = function() {
         easing = false;
-        d3.timer.flush();
+        d3.timerFlush();
         return map;
     };
 

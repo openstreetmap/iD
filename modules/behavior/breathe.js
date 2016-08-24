@@ -1,6 +1,7 @@
 import * as d3 from 'd3';
 import _ from 'lodash';
-export function Breathe(){
+
+export function Breathe() {
     var duration = 800,
         selector = '.selected.shadow, .selected .shadow',
         selected = d3.select(null),
@@ -74,7 +75,7 @@ export function Breathe(){
             .call(setAnimationParams, fromTo)
             .duration(duration)
             .each(function() { ++n; })
-            .each('end', function() {
+            .on('end', function() {
                 if (!--n) {  // call once
                     surface.call(run, toFrom);
                 }
@@ -96,7 +97,7 @@ export function Breathe(){
 
     breathe.off = function() {
         done = true;
-        d3.timer.flush();
+        d3.timerFlush();
         selected
             .transition()
             .call(reset)
