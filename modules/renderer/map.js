@@ -16,7 +16,11 @@ export function Map(context) {
         projection = context.projection,
         dblclickEnabled = true,
         redrawEnabled = true,
-        transformStart,
+        transformStart = {
+            x: 0,
+            y: 0,
+            k: 1
+        },
         transformed = false,
         easing = false,
         minzoom = 0,
@@ -189,10 +193,9 @@ export function Map(context) {
     }
 
     function zoomPan(manualEvent) {
-        return // TODO
         var eventTransform = (manualEvent || d3.event).transform;
 
-        if (Math.log(event) / Math.LN2 - 8 < minzoom) {
+        if (Math.log(eventTransform.k) / Math.LN2 - 8 < minzoom) {
             surface.interrupt();
             flash(context.container())
                 .select('.content')
@@ -261,9 +264,9 @@ export function Map(context) {
             .call(drawLayers);
 
         transformStart = {
-            k: projection.k * 2 * Math.PI,
-            x: projection.x,
-            y: projection
+            k: projection.scale() * 2 * Math.PI,
+            x: projection.translate()[0],
+            y: projection.translate()[1]
         };
 
         return map;
@@ -355,7 +358,10 @@ export function Map(context) {
             t[0] - ll[0] + pxC[0],
             t[1] - ll[1] + pxC[1]]);
         if (_selection) {
-            _selection.call(zoom.transform, d3.zoomTransform(_selection).translate(projection.translate()));
+            _selection.call(zoom.transform, d3.zoomTransform(_selection).translate(
+                projection.translate()[0],
+                projection.translate()[1]
+            ));
         }
         return true;
     }
@@ -366,7 +372,10 @@ export function Map(context) {
         t[1] += d[1];
         projection.translate(t);
         if (_selection) {
-            _selection.call(zoom.transform, d3.zoomTransform(_selection).translate(projection.translate()));
+            _selection.call(zoom.transform, d3.zoomTransform(_selection).translate(
+                projection.translate()[0],
+                projection.translate()[1]
+            ));
         }
         dispatch.call('move', this, map);
         return redraw();
