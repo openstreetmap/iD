@@ -188,6 +188,38 @@ describe('iD.actions.Reverse', function () {
         expect(target.tags.direction).to.eql('forward');
     });
 
+   it('reverses the direction of a left facing stop sign on the way', function () {
+        var node1 = iD.Node();
+        var node2 = iD.Node();
+        var node3 = iD.Node();
+        // Attach a left facing stop sign to node 2 (not sure this is a real situation,
+        // but allows us to test)
+        node2.tags = { 'direction': 'left', 'highway': 'stop' };
+        // Create our way
+        var way = iD.Way({nodes: [node1.id, node2.id, node3.id]});
+        // Act - reverse the way
+        var graph = iD.actions.Reverse(way.id)(iD.Graph([node1, node2, node3, way]));
+        // Assert - confirm that the stop sign on node 2 has changed direction
+        var target = graph.entity(node2.id);
+        expect(target.tags.direction).to.eql('right');
+    });
+
+    it('reverses the direction of a right facing stop sign on the way', function () {
+        var node1 = iD.Node();
+        var node2 = iD.Node();
+        var node3 = iD.Node();
+        // Attach a right facing stop sign to node 2 (not sure this is a real situation,
+        // but allows us to test)
+        node2.tags = { 'direction': 'right', 'highway': 'stop' };
+        // Create our way
+        var way = iD.Way({nodes: [node1.id, node2.id, node3.id]});
+        // Act - reverse the way
+        var graph = iD.actions.Reverse(way.id)(iD.Graph([node1, node2, node3, way]));
+        // Assert - confirm that the stop sign on node 2 has changed direction
+        var target = graph.entity(node2.id);
+        expect(target.tags.direction).to.eql('left');
+    });
+
     it('does not assign a direction to a directionless stop sign on the way during a reverse', function () {
         var node1 = iD.Node();
         var node2 = iD.Node();
@@ -246,6 +278,36 @@ describe('iD.actions.Reverse', function () {
         // Assert - confirm that the stop sign on node 2 has changed direction
         var target = graph.entity(node2.id);
         expect(target.tags['traffic_sign:forward']).to.eql('stop');
+    });
+
+    it('reverses the direction of a left facing traffic sign on the way', function () {
+        var node1 = iD.Node();
+        var node2 = iD.Node();
+        var node3 = iD.Node();
+        // Attach a left facing stop sign to node 2 using the traffic_sign approach
+        node2.tags = { 'traffic_sign:left': 'stop' };
+        // Create our way
+        var way = iD.Way({nodes: [node1.id, node2.id, node3.id]});
+        // Act - reverse the way
+        var graph = iD.actions.Reverse(way.id)(iD.Graph([node1, node2, node3, way]));
+        // Assert - confirm that the stop sign on node 2 has changed direction
+        var target = graph.entity(node2.id);
+        expect(target.tags['traffic_sign:right']).to.eql('stop');
+    });
+
+    it('reverses the direction of a right facing stop sign on the way', function () {
+        var node1 = iD.Node();
+        var node2 = iD.Node();
+        var node3 = iD.Node();
+        // Attach a right facing stop sign to node 2 using the traffic_sign approach
+        node2.tags = { 'traffic_sign:right': 'stop' };
+        // Create our way
+        var way = iD.Way({nodes: [node1.id, node2.id, node3.id]});
+        // Act - reverse the way
+        var graph = iD.actions.Reverse(way.id)(iD.Graph([node1, node2, node3, way]));
+        // Assert - confirm that the stop sign on node 2 has changed direction
+        var target = graph.entity(node2.id);
+        expect(target.tags['traffic_sign:left']).to.eql('stop');
     });
 
 });
