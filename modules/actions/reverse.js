@@ -28,7 +28,9 @@ import _ from 'lodash';
 
     Node Keys:
         direction=forward ⟺ direction=backward
-         *:forward=* ⟺ *:backward=*
+        direction=left ⟺ direction=right
+        *:forward=* ⟺ *:backward=*
+        *:left=* ⟺ *:right=*
 
    References:
       http://wiki.openstreetmap.org/wiki/Forward_%26_backward,_left_%26_right
@@ -81,8 +83,7 @@ export function Reverse(wayId, options) {
         return node.update({tags: _.transform(node.tags, function(acc, tagValue, tagKey) {
             // See if this is a direction tag and reverse (or use existing value if not forward/backward)
             if (tagKey === 'direction') {
-                acc[tagKey] = tagValue === 'forward' ? 'backward'
-                    : tagValue === 'backward' ? 'forward' : tagValue;
+                acc[tagKey] = {forward: 'backward', backward: 'forward', left: 'right', right: 'left'}[tagValue] || tagValue;
             } else {
                 // Use the reverseKey method to cater for situations such as traffic_sign:forward=stop
                 // This will pass through other tags unchanged
