@@ -81,7 +81,7 @@ export function Reverse(wayId, options) {
     function reverseDirectionTags(node) {
         // Update the direction based tags as appropriate then return an updated node
         return node.update({tags: _.transform(node.tags, function(acc, tagValue, tagKey) {
-            // See if this is a direction tag and reverse (or use existing value if not forward/backward)
+            // See if this is a direction tag and reverse (or use existing value if not recognised)
             if (tagKey === 'direction') {
                 acc[tagKey] = {forward: 'backward', backward: 'forward', left: 'right', right: 'left'}[tagValue] || tagValue;
             } else {
