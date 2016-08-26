@@ -1,18 +1,18 @@
-import { getDimensions } from './dimensions';
-import { rebind } from '../../modules/util/rebind';
-import 'd3-selection-multi';
 import * as d3 from 'd3';
+import 'd3-selection-multi';
+import { getDimensions } from './dimensions';
+import { rebind } from './rebind';
+import { Toggle } from '../ui/toggle';
 
 // Tooltips and svg mask used to highlight certain features
 export function d3curtain() {
 
-    var event = d3.dispatch(),
+    var dispatch = d3.dispatch(),
         surface,
         tooltip,
         darkness;
 
     function curtain(selection) {
-
         surface = selection.append('svg')
             .attr('id', 'curtain')
             .styles({
@@ -26,7 +26,7 @@ export function d3curtain() {
         darkness = surface.append('path')
             .attr('x', 0)
             .attr('y', 0)
-            .attr('class', 'curtain-darkness')
+            .attr('class', 'curtain-darkness');
 
         d3.select(window).on('resize.curtain', resize);
 
@@ -63,7 +63,7 @@ export function d3curtain() {
                 .select('.tooltip-inner')
                     .html(html));
 
-            var pos;
+            var side, pos;
 
             var w = window.innerWidth,
                 h = window.innerHeight;
@@ -90,7 +90,9 @@ export function d3curtain() {
             ];
 
 
-            if (duration !== 0 || !tooltip.classed(side)) tooltip.call(iD.ui.Toggle(true));
+            if (duration !== 0 || !tooltip.classed(side)) {
+                tooltip.call(Toggle(true));
+            }
 
             tooltip
                 .style('top', pos[1] + 'px')
@@ -100,7 +102,7 @@ export function d3curtain() {
                     .html(html);
 
         } else {
-            tooltip.call(iD.ui.Toggle(false));
+            tooltip.call(Toggle(false));
         }
     };
 
@@ -109,9 +111,9 @@ export function d3curtain() {
 
         (duration === 0 ? darkness : darkness.transition().duration(duration || 600))
             .attr('d', function(d) {
-                var string = "M 0,0 L 0," + window.innerHeight + " L " +
-                    window.innerWidth + "," + window.innerHeight + "L" +
-                    window.innerWidth + ",0 Z";
+                var string = 'M 0,0 L 0,' + window.innerHeight + ' L ' +
+                    window.innerWidth + ',' + window.innerHeight + 'L' +
+                    window.innerWidth + ',0 Z';
 
                 if (!d) return string;
                 return string + 'M' +
@@ -128,5 +130,5 @@ export function d3curtain() {
         tooltip.remove();
     };
 
-    return rebind(curtain, event, 'on');
-};
+    return rebind(curtain, dispatch, 'on');
+}

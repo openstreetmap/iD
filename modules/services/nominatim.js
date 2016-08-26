@@ -1,7 +1,7 @@
 import * as d3 from 'd3';
+import rbush from 'rbush';
 import { Extent } from '../geo/index';
 import { qsString } from '../util/index';
-import rbush from 'rbush';
 
 var endpoint, cache;
 

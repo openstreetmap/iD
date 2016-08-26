@@ -1,5 +1,5 @@
-import { t } from '../util/locale';
 import _ from 'lodash';
+import { t } from '../util/locale';
 
 export function Field(id, field) {
     field = _.clone(field);

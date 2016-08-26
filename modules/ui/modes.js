@@ -1,6 +1,6 @@
-import { d3keybinding } from '../../js/lib/d3.keybinding.js';
 import * as d3 from 'd3';
 import _ from 'lodash';
+import { d3keybinding } from '../../js/lib/d3.keybinding.js';
 import { tooltip } from '../util/tooltip';
 import { AddArea, AddLine, AddPoint, Browse } from '../modes/index';
 import { Icon } from '../svg/index';

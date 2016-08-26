@@ -1,14 +1,14 @@
-import { rebind } from '../util/rebind';
-import * as d3 from 'd3';
 /* global Mapillary:false */
+import * as d3 from 'd3';
 import _ from 'lodash';
+import rbush from 'rbush';
+import { rebind } from '../util/rebind';
 import { d3geoTile } from '../../js/lib/d3.geo.tile';
 import { Detect } from '../util/detect';
 import { Extent } from '../geo/index';
 import { Icon } from '../svg/index';
 import { qsString } from '../util/index';
 
-import rbush from 'rbush';
 
 var mapillary = {},
     apibase = 'https://a.mapillary.com/v2/',
@@ -210,8 +210,8 @@ function loadTilePage(which, url, tile, page) {
 
             cache.rtree.load(features);
 
-            if (which === 'images') dispatch.call("loadedImages");
-            if (which === 'signs') dispatch.call("loadedSigns");
+            if (which === 'images') dispatch.call('loadedImages');
+            if (which === 'signs') dispatch.call('loadedSigns');
 
             if (data.features.length === maxResults && nextPage < maxPages) {
                 loadTilePage(which, url, tile, nextPage);

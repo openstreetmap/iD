@@ -1,6 +1,7 @@
 import * as d3 from 'd3';
 import { setTransform } from '../util/index';
 import { getDimensions } from '../util/dimensions';
+
 export function Tail() {
     var text,
         container,

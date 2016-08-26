@@ -1,5 +1,7 @@
-import { rebind } from '../../util/rebind';
 import * as d3 from 'd3';
+import { rebind } from '../../util/rebind';
+import { getDimensions } from '../../util/dimensions';
+
 export function lanes(field, context) {
     var dispatch = d3.dispatch('change'),
         LANE_WIDTH = 40,

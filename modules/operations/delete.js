@@ -1,5 +1,5 @@
-import { t } from '../util/locale';
 import _ from 'lodash';
+import { t } from '../util/locale';
 import { Browse, Select } from '../modes/index';
 import { DeleteMultiple } from '../actions/index';
 import { cmd } from '../ui/index';

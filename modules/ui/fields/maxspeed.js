@@ -1,8 +1,8 @@
+import * as d3 from 'd3';
+import _ from 'lodash';
 import { rebind } from '../../util/rebind';
 import { getSetValue } from '../../util/get_set_value';
 import { d3combobox } from '../../../js/lib/d3.combobox.js';
-import * as d3 from 'd3';
-import _ from 'lodash';
 import { pointInPolygon } from '../../geo/index';
 import { imperial as imperialData } from '../../../data/index';
 
@@ -88,7 +88,7 @@ export function maxspeed(field, context) {
             tag[field.key] = value + ' mph';
         }
 
-        dispatch.call("change", this, tag);
+        dispatch.call('change', this, tag);
     }
 
     maxspeed.tags = function(tags) {

@@ -1,5 +1,6 @@
 import { t } from '../util/locale';
 import { Icon } from '../svg/index';
+
 export function ViewOnOSM(context) {
     var id;
 

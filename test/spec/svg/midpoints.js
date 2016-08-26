@@ -1,7 +1,7 @@
 describe('iD.svg.Midpoints', function () {
     var surface,
         projection = Object,
-        filter = d3.functor(true),
+        filter = function() { return true; },
         context;
 
     beforeEach(function () {

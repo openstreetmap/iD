@@ -3,7 +3,6 @@ import { DeleteNode } from './delete_node';
 /*
  * Based on https://github.com/openstreetmap/potlatch2/net/systemeD/potlatch2/tools/Straighten.as
  */
-
 export function Straighten(wayId, projection) {
     function positionAlongWay(n, s, e) {
         return ((n[0] - s[0]) * (e[0] - s[0]) + (n[1] - s[1]) * (e[1] - s[1]))/

@@ -1,6 +1,7 @@
-import { t } from '../util/locale';
 import _ from 'lodash';
+import { t } from '../util/locale';
 import { Disconnect as DisconnectAction } from '../actions/index';
+
 export function Disconnect(selectedIDs, context) {
     var vertices = _.filter(selectedIDs, function vertex(entityId) {
         return context.geometry(entityId) === 'vertex';

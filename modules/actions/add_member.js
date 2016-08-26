@@ -1,4 +1,5 @@
 import { joinWays } from '../geo/index';
+
 export function AddMember(relationId, member, memberIndex) {
     return function(graph) {
         var relation = graph.entity(relationId);

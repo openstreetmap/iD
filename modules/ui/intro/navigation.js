@@ -1,11 +1,11 @@
-import { rebind } from '../../util/rebind';
 import * as d3 from 'd3';
-import { t } from '../../util/locale';
 import _ from 'lodash';
+import { rebind } from '../../util/rebind';
+import { t } from '../../util/locale';
 import { icon, pointBox } from './helper';
 
 export function navigation(context, reveal) {
-    var event = d3.dispatch('done'),
+    var dispatch = d3.dispatch('done'),
         timeouts = [];
 
     var step = {
@@ -93,7 +93,7 @@ export function navigation(context, reveal) {
         function selectedStreet() {
             var springSt = [-85.63585099140167, 41.942506848938926];
             context.map().center(springSt);
-            context.on('exit.intro', event.done);
+            context.on('exit.intro', dispatch.done);
             set(function() {
                 reveal('.entity-editor-pane',
                     t('intro.navigation.chosen', {
@@ -114,5 +114,5 @@ export function navigation(context, reveal) {
             .on('keyup.intro', null);
     };
 
-    return rebind(step, event, 'on');
+    return rebind(step, dispatch, 'on');
 }

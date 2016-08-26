@@ -1,4 +1,5 @@
 import * as d3 from 'd3';
+
 /*
     A standalone SVG element that contains only a `defs` sub-element. To be
     used once globally, since defs IDs must be unique within a document.
@@ -8,14 +9,14 @@ export function Defs(context) {
     function SVGSpriteDefinition(id, href) {
         return function(defs) {
             d3.request(href)
-		.mimeType('image/svg+xml')
-		.response(function(xhr) { return xhr.responseXML; })
-            	.get(function(err, svg) {
-		    if (err) return;
-		    defs.node().appendChild(
-			d3.select(svg.documentElement).attr('id', id).node()
-		    );
-		});
+            .mimeType('image/svg+xml')
+            .response(function(xhr) { return xhr.responseXML; })
+                .get(function(err, svg) {
+                    if (err) return;
+                    defs.node().appendChild(
+                    d3.select(svg.documentElement).attr('id', id).node()
+                );
+            });
         };
     }
 
@@ -60,7 +61,7 @@ export function Defs(context) {
             })
             .attr('width', 32)
             .attr('height', 32)
-            .attr('patternUnits', 'userSpaceOnUse')
+            .attr('patternUnits', 'userSpaceOnUse');
 
         patterns.append('rect')
             .attr('x', 0)

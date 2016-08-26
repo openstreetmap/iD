@@ -1,6 +1,7 @@
-import { rebind } from '../util/rebind';
 import * as d3 from 'd3';
+import { rebind } from '../util/rebind';
 import { prefixCSSProperty, prefixDOMProperty } from '../util/index';
+
 /*
     `iD.behavior.drag` is like `d3.behavior.drag`, with the following differences:
 
@@ -62,7 +63,7 @@ export function drag() {
 
     function mousedown() {
         target = this;
-        event_ = event.call("of", target, arguments);
+        event_ = event.call('of', target, arguments);
         var eventTarget = d3.event.target,
             touchId = d3.event.touches ? d3.event.changedTouches[0].identifier : null,
             offset,
@@ -191,7 +192,7 @@ export function drag() {
     drag.target = function() {
         if (!arguments.length) return target;
         target = arguments[0];
-        event_ = event.call("of", target, Array.prototype.slice.call(arguments, 1));
+        event_ = event.call('of', target, Array.prototype.slice.call(arguments, 1));
         return drag;
     };
 

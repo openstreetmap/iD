@@ -1,8 +1,8 @@
+import * as d3 from 'd3';
+import { t } from '../../util/locale';
 import { rebind } from '../../util/rebind';
 import { functor } from '../../util/index';
 import { getDimensions, setDimensions } from '../../util/dimensions';
-import * as d3 from 'd3';
-import { t } from '../../util/locale';
 import { Extent, Intersection, RawMercator, Turn, inferRestriction } from '../../geo/index';
 import { Layers, Lines, Turns, Vertices } from '../../svg/index';
 import { RestrictTurn, UnrestrictTurn,  } from '../../actions/index';

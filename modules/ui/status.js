@@ -1,4 +1,5 @@
 import { t } from '../util/locale';
+
 export function Status(context) {
     var connection = context.connection(),
         errCount = 0;

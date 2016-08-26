@@ -1,8 +1,8 @@
-import { functor } from './index';
 import * as d3 from 'd3';
+import { functor } from './index';
 import 'd3-selection-multi';
-export function tooltip() {
 
+export function tooltip() {
   var tooltip = function(selection) {
       selection.each(setup);
     },

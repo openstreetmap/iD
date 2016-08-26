@@ -5,7 +5,7 @@ import { getDimensions, setDimensions } from '../util/dimensions';
 import { mapillary as mapillaryService } from '../services/index';
 
 export function MapillaryImages(projection, context, dispatch) {
-    var debouncedRedraw = _.debounce(function () { dispatch.call("change"); }, 1000),
+    var debouncedRedraw = _.debounce(function () { dispatch.call('change'); }, 1000),
         minZoom = 12,
         layer = d3.select(null),
         _mapillary;
@@ -153,7 +153,7 @@ export function MapillaryImages(projection, context, dispatch) {
         } else {
             hideLayer();
         }
-        dispatch.call("change");
+        dispatch.call('change');
         return this;
     };
 

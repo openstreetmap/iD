@@ -1,5 +1,6 @@
 import * as d3 from 'd3';
 import _ from 'lodash';
+
 /*
     iD.Difference represents the difference between two graphs.
     It knows how to calculate the set of entities that were

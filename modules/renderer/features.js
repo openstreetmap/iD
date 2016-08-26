@@ -1,7 +1,8 @@
-import { rebind } from '../util/rebind';
 import * as d3 from 'd3';
 import _ from 'lodash';
+import { rebind } from '../util/rebind';
 import { Entity } from '../core/index';
+
 export function Features(context) {
     var traffic_roads = {
         'motorway': true,
@@ -56,8 +57,8 @@ export function Features(context) {
 
     function update() {
         _hidden = features.hidden();
-        dispatch.call("change");
-        dispatch.call("redraw");
+        dispatch.call('change');
+        dispatch.call('redraw');
     }
 
     function defineFeature(k, filter, max) {
@@ -228,7 +229,7 @@ export function Features(context) {
 
     features.resetStats = function() {
         _.each(_features, function(f) { f.count = 0; });
-        dispatch.call("change");
+        dispatch.call('change');
     };
 
     features.gatherStats = function(d, resolver, dimensions) {
@@ -257,7 +258,7 @@ export function Features(context) {
         if (currHidden !== _hidden) {
             _hidden = currHidden;
             needsRedraw = true;
-            dispatch.call("change");
+            dispatch.call('change');
         }
 
         return needsRedraw;
@@ -300,7 +301,7 @@ export function Features(context) {
 
                     // Multipolygon members:
                     // If an entity...
-                    //   1. is a way that hasn't matched other "interesting" feature rules,
+                    //   1. is a way that hasn't matched other 'interesting' feature rules,
                     //   2. and it belongs to a single parent multipolygon relation
                     // ...then match whatever feature rules the parent multipolygon has matched.
                     // see #2548, #2887

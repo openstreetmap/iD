@@ -1,6 +1,5 @@
 import _ from 'lodash';
-// https://github.com/openstreetmap/josm/blob/mirror/src/org/openstreetmap/josm/command/MoveCommand.java
-// https://github.com/openstreetmap/potlatch2/blob/master/net/systemeD/halcyon/connection/actions/MoveNodeAction.as
+import { Node } from '../core/index';
 import {
   chooseEdge,
   angle as getAngle,
@@ -9,8 +8,9 @@ import {
   pathLength,
   sphericalDistance
 } from '../geo/index';
-import { Node } from '../core/index';
 
+// https://github.com/openstreetmap/josm/blob/mirror/src/org/openstreetmap/josm/command/MoveCommand.java
+// https://github.com/openstreetmap/potlatch2/blob/master/net/systemeD/halcyon/connection/actions/MoveNodeAction.as
 export function Move(moveIds, tryDelta, projection, cache) {
     var delta = tryDelta;
 

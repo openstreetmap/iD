@@ -1,3 +1,5 @@
+import { Node } from '../core/index';
+
 // Disconect the ways at the given node.
 //
 // Optionally, disconnect only the given ways.
@@ -12,7 +14,6 @@
 //   https://github.com/openstreetmap/potlatch2/blob/master/net/systemeD/halcyon/connection/actions/UnjoinNodeAction.as
 //   https://github.com/openstreetmap/josm/blob/mirror/src/org/openstreetmap/josm/actions/UnGlueAction.java
 //
-import { Node } from '../core/index';
 export function Disconnect(nodeId, newNodeId) {
     var wayIds;
 

@@ -8,7 +8,7 @@
     "test": "test"
   },
   "scripts": {
-    "test": "npm run lint && make && phantomjs node_modules/mocha-phantomjs-core/mocha-phantomjs-core.js test/index.html dot",
+    "test": "npm run lint && make && phantomjs node_modules/mocha-phantomjs-core/mocha-phantomjs-core.js test/index.html spec",
     "start": "rollup --config=./rollup.config.js -f iife --input ./modules/id.js --output dist/iD.js -w",
     "web": "http-server",
     "build-min": "npm run build && uglifyjs dist/iD.js -c -m -o dist/iD.min.js",

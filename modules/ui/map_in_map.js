@@ -1,10 +1,10 @@
-import { d3keybinding } from '../../js/lib/d3.keybinding.js';
 import * as d3 from 'd3';
+import { d3keybinding } from '../../js/lib/d3.keybinding.js';
 import { Debug, Gpx } from '../svg/index';
 import { RawMercator } from '../geo/index';
 import { TileLayer } from '../renderer/index';
 import { setTransform } from '../util/index';
-import { getDimensions, setDimensions } from '../util/dimensions';
+import { getDimensions } from '../util/dimensions';
 
 export function MapInMap(context) {
     var key = '/';

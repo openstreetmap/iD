@@ -1,6 +1,7 @@
-import { d3keybinding } from '../../js/lib/d3.keybinding.js';
 import * as d3 from 'd3';
+import { d3keybinding } from '../../js/lib/d3.keybinding.js';
 import { Icon } from '../svg/index';
+
 export function modal(selection, blocking) {
     var keybinding = d3keybinding('modal');
     var previous = selection.select('div.modal');

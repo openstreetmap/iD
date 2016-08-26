@@ -1,6 +1,6 @@
 import * as d3 from 'd3';
-import { t } from '../util/locale';
 import _ from 'lodash';
+import { t } from '../util/locale';
 import { Detect } from '../util/detect';
 import { Icon } from '../svg/index';
 

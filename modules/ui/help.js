@@ -1,10 +1,10 @@
-import { d3keybinding } from '../../js/lib/d3.keybinding.js';
 import * as d3 from 'd3';
+import marked from 'marked';
+import { d3keybinding } from '../../js/lib/d3.keybinding.js';
 import { t } from '../util/locale';
 import { tooltip } from '../util/tooltip';
 import { Icon } from '../svg/index';
 import { intro } from './intro/index';
-import marked from 'marked';
 import { tooltipHtml } from './tooltipHtml';
 
 export function Help(context) {

@@ -2,7 +2,6 @@ import { DeleteRelation } from './delete_relation';
 import { DeleteWay } from './delete_way';
 
 export function Revert(id) {
-
     var action = function(graph) {
         var entity = graph.hasEntity(id),
             base = graph.base().entities[id];

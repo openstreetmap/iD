@@ -1,9 +1,8 @@
-import { functor } from '../index';
 import * as d3 from 'd3';
+import _ from 'lodash';
 import { t } from './locale';
 import { Detect } from './detect';
 import { remove as removeDiacritics } from 'diacritics';
-import _ from 'lodash';
 
 export function tagText(entity) {
     return d3.entries(entity.tags).map(function(e) {

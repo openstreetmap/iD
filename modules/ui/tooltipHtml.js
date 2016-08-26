@@ -1,4 +1,5 @@
 import { t } from '../util/locale';
+
 export function tooltipHtml(text, key) {
     var s = '<span>' + text + '</span>';
     if (key) {

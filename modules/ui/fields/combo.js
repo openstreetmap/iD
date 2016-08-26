@@ -1,10 +1,9 @@
+import * as d3 from 'd3';
+import _ from 'lodash';
+import { t } from '../../util/locale';
 import { rebind } from '../../util/rebind';
 import { getSetValue } from '../../util/get_set_value';
 import { d3combobox } from '../../../js/lib/d3.combobox.js';
-import * as d3 from 'd3';
-import _ from 'lodash';
-
-import { t } from '../../util/locale';
 import { nominatim } from '../../services/index';
 
 export {
@@ -208,7 +207,7 @@ export function combo(field, context) {
             t[field.key] = val;
         }
 
-        dispatch.call("change", this, t);
+        dispatch.call('change', this, t);
     }
 
 
@@ -216,7 +215,7 @@ export function combo(field, context) {
         d3.event.stopPropagation();
         var t = {};
         t[d.key] = undefined;
-        dispatch.call("change", this, t);
+        dispatch.call('change', this, t);
     }
 
 
@@ -291,7 +290,7 @@ export function combo(field, context) {
             var available = objectDifference(comboData, multiData);
             combobox.data(available);
 
-            // Hide "Add" button if this field uses fixed set of
+            // Hide 'Add' button if this field uses fixed set of
             // translateable optstrings and they're all currently used..
             container.selectAll('.combobox-input, .combobox-caret')
                 .classed('hide', optstrings && !available.length);

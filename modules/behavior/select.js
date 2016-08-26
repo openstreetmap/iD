@@ -2,6 +2,7 @@ import * as d3 from 'd3';
 import _ from 'lodash';
 import { Browse, Select as SelectMode } from '../modes/index';
 import { Entity } from '../core/index';
+
 export function Select(context) {
     function keydown() {
         if (d3.event && d3.event.shiftKey) {

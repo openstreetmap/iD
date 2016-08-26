@@ -1,5 +1,5 @@
-import { qsString } from '../util/index';
 import { jsonpRequest } from '../util/jsonp_request';
+import { qsString } from '../util/index';
 
 var wikipedia = {},
     endpoint = 'https://en.wikipedia.org/w/api.php?';

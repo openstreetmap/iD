@@ -1,14 +1,14 @@
+import * as d3 from 'd3';
+import _ from 'lodash';
 import { rebind } from '../../util/rebind';
 import { bindOnce } from '../../util/bind_once';
-import * as d3 from 'd3';
 import { t } from '../../util/locale';
-import _ from 'lodash';
 import { icon, pad } from './helper';
 
 import { DeleteMultiple } from '../../actions/index';
 
 export function line(context, reveal) {
-    var event = d3.dispatch('done'),
+    var dispatch = d3.dispatch('done'),
         timeouts = [];
 
     var step = {
@@ -143,7 +143,7 @@ export function line(context, reveal) {
         function roadDetails() {
             reveal('.pane',
                 t('intro.lines.describe', { button: icon('#icon-apply', 'pre-text') }));
-            context.on('exit.intro', event.done);
+            context.on('exit.intro', dispatch.done);
         }
 
     };
@@ -158,5 +158,5 @@ export function line(context, reveal) {
         context.history().on('change.intro', null);
     };
 
-    return rebind(step, event, 'on');
+    return rebind(step, dispatch, 'on');
 }

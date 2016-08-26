@@ -1,5 +1,5 @@
-import { DeleteNode } from './delete_node';
 import _ from 'lodash';
+import { DeleteNode } from './delete_node';
 
 // Connect the ways at the given nodes.
 //

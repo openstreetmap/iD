@@ -1,7 +1,7 @@
 import * as d3 from 'd3';
+import _ from 'lodash';
 import { t } from '../util/locale';
 import { getDimensions } from '../util/dimensions';
-import _ from 'lodash';
 import { AddMidpoint, Connect, MoveNode, Noop } from '../actions/index';
 import { Browse, Select } from './index';
 import { Edit, Hover, drag } from '../behavior/index';

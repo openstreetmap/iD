@@ -1,7 +1,7 @@
+import * as d3 from 'd3';
 import { rebind } from '../util/rebind';
 import { getSetValue } from '../util/get_set_value';
 import { d3combobox } from '../../js/lib/d3.combobox.js';
-import * as d3 from 'd3';
 import { t } from '../util/locale';
 import { Disclosure } from './disclosure';
 import { Icon } from '../svg/index';
@@ -112,14 +112,16 @@ export function RawTagEditor(context) {
             .attr('title', function(d) { return d.key; })
             .on('blur', keyChange)
             .on('change', keyChange),
-            function(d) { return d.key; })
+            function(d) { return d.key; }
+        );
 
         getSetValue($items.select('input.value')
             .attr('title', function(d) { return d.value; })
             .on('blur', valueChange)
             .on('change', valueChange)
             .on('keydown.push-more', pushMore),
-            function(d) { return d.value; })
+            function(d) { return d.value; }
+        );
 
         $items.select('button.remove')
             .on('click', removeTag);
@@ -204,19 +206,19 @@ export function RawTagEditor(context) {
             tag[kNew] = d.value;
             d.key = kNew; // Maintain DOM identity through the subsequent update.
             this.value = kNew;
-            event.call("change", tag);
+            event.call('change', tag);
         }
 
         function valueChange(d) {
             var tag = {};
             tag[d.key] = this.value;
-            event.call("change", tag);
+            event.call('change', tag);
         }
 
         function removeTag(d) {
             var tag = {};
             tag[d.key] = undefined;
-            event.call("change", tag);
+            event.call('change', tag);
             d3.select(this.parentNode).remove();
         }
 

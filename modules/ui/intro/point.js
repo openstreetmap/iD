@@ -1,10 +1,10 @@
-import { rebind } from '../../util/rebind';
 import * as d3 from 'd3';
+import { rebind } from '../../util/rebind';
 import { t } from '../../util/locale';
 import { icon, pad } from './helper';
 
 export function point(context, reveal) {
-    var event = d3.dispatch('done'),
+    var dispatch = d3.dispatch('done'),
         timeouts = [];
 
     var step = {
@@ -137,7 +137,9 @@ export function point(context, reveal) {
         }
 
         function deleted(changed) {
-            if (changed.deleted().length) event.call("done");
+            if (changed.deleted().length) {
+                dispatch.call('done');
+            }
         }
 
     };
@@ -153,5 +155,5 @@ export function point(context, reveal) {
             .on('keydown.intro', null);
     };
 
-    return rebind(step, event, 'on');
+    return rebind(step, dispatch, 'on');
 }

@@ -1,5 +1,5 @@
-import { d3combobox } from '../../js/lib/d3.combobox.js';
 import * as d3 from 'd3';
+import { d3combobox } from '../../js/lib/d3.combobox.js';
 import { t } from '../util/locale';
 import { Browse, Select } from '../modes/index';
 import { ChangeMember, DeleteMember } from '../actions/index';
@@ -126,7 +126,7 @@ export function RawMemberEditor(context) {
             function bindTypeahead(d) {
                 var row = d3.select(this),
                     role = row.selectAll('input.member-role');
-    
+
                 function sort(value, data) {
                     var sameletter = [],
                         other = [];
@@ -139,7 +139,7 @@ export function RawMemberEditor(context) {
                     }
                     return sameletter.concat(other);
                 }
-    
+
                 role.call(d3combobox()
                     .fetcher(function(role, callback) {
                         var rtype = entity.tags.type;
@@ -153,10 +153,10 @@ export function RawMemberEditor(context) {
                         });
                     }));
             }
-    
+
             function unbind() {
                 var row = d3.select(this);
-    
+
                 row.selectAll('input.member-role')
                     .call(d3combobox.off);
             }

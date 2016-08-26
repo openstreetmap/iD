@@ -1,6 +1,6 @@
-import { rebind } from '../util/rebind';
 import * as d3 from 'd3';
 import _ from 'lodash';
+import { rebind } from '../util/rebind';
 import { Extent, metersToOffset, offsetToMeters} from '../geo/index';
 import { qsString, stringQs } from '../util/index';
 import { BackgroundSource } from './background_source';
@@ -125,7 +125,7 @@ export function Background(context) {
     background.baseLayerSource = function(d) {
         if (!arguments.length) return baseLayer.source();
         baseLayer.source(d);
-        dispatch.call("change");
+        dispatch.call('change');
         background.updateImagery();
         return background;
     };
@@ -151,7 +151,7 @@ export function Background(context) {
             layer = overlayLayers[i];
             if (layer.source() === d) {
                 overlayLayers.splice(i, 1);
-                dispatch.call("change");
+                dispatch.call('change');
                 background.updateImagery();
                 return;
             }
@@ -163,13 +163,13 @@ export function Background(context) {
             .dimensions(baseLayer.dimensions());
 
         overlayLayers.push(layer);
-        dispatch.call("change");
+        dispatch.call('change');
         background.updateImagery();
     };
 
     background.nudge = function(d, zoom) {
         baseLayer.source().nudge(d, zoom);
-        dispatch.call("change");
+        dispatch.call('change');
         background.updateImagery();
         return background;
     };
@@ -177,7 +177,7 @@ export function Background(context) {
     background.offset = function(d) {
         if (!arguments.length) return baseLayer.source().offset();
         baseLayer.source().offset(d);
-        dispatch.call("change");
+        dispatch.call('change');
         background.updateImagery();
         return background;
     };

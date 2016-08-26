@@ -1,5 +1,6 @@
-import { rebind } from '../../util/rebind';
 import * as d3 from 'd3';
+import { getSetValue } from '../../util/get_set_value';
+import { rebind } from '../../util/rebind';
 import { t } from '../../util/locale';
 
 export function textarea(field) {
@@ -25,7 +26,7 @@ export function textarea(field) {
         return function() {
             var t = {};
             t[field.key] = getSetValue(input) || undefined;
-            dispatch.call("change", this, t, onInput);
+            dispatch.call('change', this, t, onInput);
         };
     }
 

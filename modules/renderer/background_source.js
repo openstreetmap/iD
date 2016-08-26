@@ -1,6 +1,6 @@
 import * as d3 from 'd3';
-import { t } from '../util/locale';
 import _ from 'lodash';
+import { t } from '../util/locale';
 import { Extent, polygonIntersectsPolygon } from '../geo/index';
 import { jsonpRequest } from '../util/jsonp_request';
 
@@ -112,7 +112,7 @@ BackgroundSource.Bing = function(data, dispatch) {
                 })
             };
         });
-        dispatch.call("change");
+        dispatch.call('change');
     });
 
     bing.copyrightNotices = function(zoom, extent) {
@@ -146,7 +146,7 @@ BackgroundSource.None = function() {
     };
 
     source.area = function() {
-        return -1;
+        return -1;  // sources in background pane are sorted by area
     };
 
     return source;
@@ -164,7 +164,7 @@ BackgroundSource.Custom = function(template) {
     };
 
     source.area = function() {
-        return -2;
+        return -2;  // sources in background pane are sorted by area
     };
 
     return source;

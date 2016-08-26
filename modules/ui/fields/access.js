@@ -1,8 +1,8 @@
+import * as d3 from 'd3';
+import _ from 'lodash';
 import { rebind } from '../../util/rebind';
 import { getSetValue } from '../../util/get_set_value';
 import { d3combobox } from '../../../js/lib/d3.combobox.js';
-import * as d3 from 'd3';
-import _ from 'lodash';
 
 export function access(field) {
     var dispatch = d3.dispatch('change'),
@@ -51,7 +51,7 @@ export function access(field) {
     function change(d) {
         var tag = {};
         tag[d] = getSetValue(d3.select(this)) || undefined;
-        dispatch.call("change", this, tag);
+        dispatch.call('change', this, tag);
     }
 
     access.options = function(type) {

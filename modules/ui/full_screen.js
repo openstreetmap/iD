@@ -1,5 +1,5 @@
-import { d3keybinding } from '../../js/lib/d3.keybinding.js';
 import * as d3 from 'd3';
+import { d3keybinding } from '../../js/lib/d3.keybinding.js';
 import { cmd } from './cmd';
 
 export function FullScreen(context) {

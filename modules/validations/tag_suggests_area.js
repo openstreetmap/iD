@@ -1,9 +1,9 @@
-import { t } from '../util/locale';
 import _ from 'lodash';
-export function TagSuggestsArea() {
+import { t } from '../util/locale';
 
-    // https://github.com/openstreetmap/josm/blob/mirror/src/org/
-    // openstreetmap/josm/data/validation/tests/UnclosedWays.java#L80
+// https://github.com/openstreetmap/josm/blob/mirror/src/org/
+// openstreetmap/josm/data/validation/tests/UnclosedWays.java#L80
+export function TagSuggestsArea() {
     function tagSuggestsArea(tags) {
         if (_.isEmpty(tags)) return false;
 

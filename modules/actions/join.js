@@ -1,4 +1,8 @@
 import _ from 'lodash';
+import { DeleteWay } from './delete_way';
+import { interestingTag } from '../core/index';
+import { joinWays } from '../geo/index';
+
 // Join ways at the end node they share.
 //
 // This is the inverse of `iD.actions.Split`.
@@ -7,10 +11,6 @@ import _ from 'lodash';
 //   https://github.com/systemed/potlatch2/blob/master/net/systemeD/halcyon/connection/actions/MergeWaysAction.as
 //   https://github.com/openstreetmap/josm/blob/mirror/src/org/openstreetmap/josm/actions/CombineWayAction.java
 //
-import { DeleteWay } from './delete_way';
-import { interestingTag } from '../core/index';
-import { joinWays } from '../geo/index';
-
 export function Join(ids) {
 
     function groupEntitiesByGeometry(graph) {

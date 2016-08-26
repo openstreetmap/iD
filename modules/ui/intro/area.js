@@ -1,10 +1,10 @@
-import { rebind } from '../../util/rebind';
 import * as d3 from 'd3';
+import { rebind } from '../../util/rebind';
 import { t } from '../../util/locale';
 import { icon, pad } from './helper';
 
 export function area(context, reveal) {
-    var event = d3.dispatch('done'),
+    var dispatch = d3.dispatch('done'),
         timeout;
 
     var step = {
@@ -76,7 +76,7 @@ export function area(context, reveal) {
         function selectedPreset() {
             reveal('.pane',
                 t('intro.areas.describe', { button: icon('#icon-apply', 'pre-text') }));
-            context.on('exit.intro', event.done);
+            context.on('exit.intro', dispatch.done);
         }
     };
 
@@ -89,5 +89,5 @@ export function area(context, reveal) {
         d3.select('.preset-search-input').on('keyup.intro', null);
     };
 
-    return rebind(step, event, 'on');
+    return rebind(step, dispatch, 'on');
 }

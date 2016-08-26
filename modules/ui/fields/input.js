@@ -1,16 +1,17 @@
+import * as d3 from 'd3';
 import { rebind } from '../../util/rebind';
 import { getSetValue } from '../../util/get_set_value';
-import * as d3 from 'd3';
 import { t } from '../../util/locale';
 import { nominatim as nominatimService } from '../../services/index';
 import { phoneFormats } from '../../../data/index';
 
 export {
-  url as text,
-  url as number,
-  url as tel,
-  url as email
+    url as text,
+    url as number,
+    url as tel,
+    url as email
 };
+
 export function url(field, context) {
 
     var dispatch = d3.dispatch('change'),
@@ -75,7 +76,7 @@ export function url(field, context) {
         return function() {
             var t = {};
             t[field.key] = getSetValue(input) || undefined;
-            dispatch.call("change", this, t, onInput);
+            dispatch.call('change', this, t, onInput);
         };
     }
 

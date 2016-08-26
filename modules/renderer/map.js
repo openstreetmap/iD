@@ -1,9 +1,9 @@
-import { rebind } from '../util/rebind';
 import * as d3 from 'd3';
+import _ from 'lodash';
+import { rebind } from '../util/rebind';
 import { t } from '../util/locale';
 import { bindOnce } from '../util/bind_once';
-import { getDimensions, setDimensions } from '../util/dimensions';
-import _ from 'lodash';
+import { getDimensions } from '../util/dimensions';
 import { Areas, Labels, Layers, Lines, Midpoints, Points, Vertices } from '../svg/index';
 import { Extent, interp } from '../geo/index';
 import { fastMouse, setTransform, functor } from '../util/index';

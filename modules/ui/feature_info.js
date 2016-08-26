@@ -1,8 +1,9 @@
 import * as d3 from 'd3';
+import _ from 'lodash';
 import { t } from '../util/locale';
 import { tooltip } from '../util/tooltip';
-import _ from 'lodash';
 import { tooltipHtml } from './tooltipHtml';
+
 export function FeatureInfo(context) {
     function update(selection) {
         var features = context.features(),

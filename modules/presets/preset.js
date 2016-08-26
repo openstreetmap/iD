@@ -1,5 +1,5 @@
-import { t } from '../util/locale';
 import _ from 'lodash';
+import { t } from '../util/locale';
 import { areaKeys } from '../core/context';
 
 export function Preset(id, preset, fields) {

@@ -1,12 +1,14 @@
-import { rebind } from '../../util/rebind';
-import { d3combobox } from '../../../js/lib/d3.combobox.js';
 import * as d3 from 'd3';
-import { t } from '../../util/locale';
 import _ from 'lodash';
+import { d3combobox } from '../../../js/lib/d3.combobox.js';
+import { getSetValue } from '../../util/get_set_value';
+import { rebind } from '../../util/rebind';
+import { t } from '../../util/locale';
 import { ChangeTags } from '../../actions/index';
 import { Detect } from '../../util/detect';
 import { Icon } from '../../svg/index';
 import { wikipedia as wikipediaData } from '../../../data/index';
+
 import {
     wikipedia as wikipediaService,
     wikidata as wikidataService
@@ -132,7 +134,7 @@ export function wikipedia(field, context) {
             syncTags.wikidata = undefined;
         }
 
-        dispatch.call("change", this, syncTags);
+        dispatch.call('change', this, syncTags);
 
 
         if (skipWikidata || !value || !language()[2]) return;
@@ -163,7 +165,7 @@ export function wikipedia(field, context) {
             });
 
             context.overwrite(ChangeTags(currEntityId, currTags), annotation);
-            dispatch.call("change", this, currTags);
+            dispatch.call('change', this, currTags);
         });
     }
 

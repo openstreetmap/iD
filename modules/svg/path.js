@@ -1,4 +1,5 @@
 import * as d3 from 'd3';
+
 export function Path(projection, graph, polygon) {
     var cache = {},
         clip = d3.geoClipExtent().extent(projection.clipExtent()).stream,

@@ -1,7 +1,7 @@
-import { d3combobox } from '../../js/lib/d3.combobox.js';
 import * as d3 from 'd3';
-import { t } from '../util/locale';
 import _ from 'lodash';
+import { d3combobox } from '../../js/lib/d3.combobox.js';
+import { t } from '../util/locale';
 import { AddEntity, AddMember, ChangeMember, DeleteMember } from '../actions/index';
 import { Entity, Relation } from '../core/index';
 import { Disclosure } from './disclosure';
@@ -224,7 +224,7 @@ export function RawMembershipEditor(context) {
             function bindTypeahead(d) {
                 var row = d3.select(this),
                     role = row.selectAll('input.member-role');
-    
+
                 function sort(value, data) {
                     var sameletter = [],
                         other = [];
@@ -237,7 +237,7 @@ export function RawMembershipEditor(context) {
                     }
                     return sameletter.concat(other);
                 }
-    
+
                 role.call(d3combobox()
                     .fetcher(function(role, callback) {
                         var rtype = d.relation.tags.type;
@@ -251,10 +251,10 @@ export function RawMembershipEditor(context) {
                         });
                     }));
             }
-    
+
             function unbind() {
                 var row = d3.select(this);
-    
+
                 row.selectAll('input.member-role')
                     .call(d3combobox.off);
             }

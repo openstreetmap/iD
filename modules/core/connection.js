@@ -1,8 +1,8 @@
+import * as d3 from 'd3';
+import _ from 'lodash';
 import { rebind } from '../util/rebind';
 import { functor } from '../util/index';
 import { d3geoTile } from '../../js/lib/d3.geo.tile';
-import * as d3 from 'd3';
-import _ from 'lodash';
 import { Detect } from '../util/detect';
 import { Entity } from './entity';
 import { Extent } from '../geo/index';
@@ -14,10 +14,10 @@ import osmAuth from 'osm-auth';
 
 export function Connection(useHttps) {
     if (typeof useHttps !== 'boolean') {
-      useHttps = window.location.protocol === 'https:';
+        useHttps = window.location.protocol === 'https:';
     }
 
-    var event = d3.dispatch('authenticating', 'authenticated', 'auth', 'loading', 'loaded'),
+    var dispatch = d3.dispatch('authenticating', 'authenticated', 'auth', 'loading', 'loaded'),
         protocol = useHttps ? 'https:' : 'http:',
         url = protocol + '//www.openstreetmap.org',
         connection = {},
@@ -106,11 +106,11 @@ export function Connection(useHttps) {
     };
 
     function authenticating() {
-        event.call("authenticating");
+        dispatch.call('authenticating');
     }
 
     function authenticated() {
-        event.call("authenticated");
+        dispatch.call('authenticated');
     }
 
     function getLoc(attrs) {
@@ -417,7 +417,7 @@ export function Connection(useHttps) {
             if (loadedTiles[id] || inflight[id]) return;
 
             if (_.isEmpty(inflight)) {
-                event.call("loading");
+                dispatch.call('loading');
             }
 
             inflight[id] = connection.loadFromURL(bboxUrl(tile), function(err, parsed) {
@@ -427,7 +427,7 @@ export function Connection(useHttps) {
                 if (callback) callback(err, _.extend({data: parsed}, tile));
 
                 if (_.isEmpty(inflight)) {
-                    event.call("loaded");
+                    dispatch.call('loaded');
                 }
             });
         });
@@ -439,7 +439,7 @@ export function Connection(useHttps) {
             loading: authenticating,
             done: authenticated
         }, options));
-        event.call("auth");
+        dispatch.call('auth');
         connection.flush();
         return connection;
     };
@@ -466,18 +466,18 @@ export function Connection(useHttps) {
     connection.logout = function() {
         userDetails = undefined;
         oauth.logout();
-        event.call("auth");
+        dispatch.call('auth');
         return connection;
     };
 
     connection.authenticate = function(callback) {
         userDetails = undefined;
         function done(err, res) {
-            event.call("auth");
+            dispatch.call('auth');
             if (callback) callback(err, res);
         }
         return oauth.authenticate(done);
     };
 
-    return rebind(connection, event, 'on');
+    return rebind(connection, dispatch, 'on');
 }

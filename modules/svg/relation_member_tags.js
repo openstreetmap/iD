@@ -1,4 +1,5 @@
 import _ from 'lodash';
+
 export function RelationMemberTags(graph) {
     return function(entity) {
         var tags = entity.tags;

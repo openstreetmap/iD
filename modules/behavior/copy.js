@@ -1,7 +1,8 @@
-import { d3keybinding } from '../../js/lib/d3.keybinding.js';
 import * as d3 from 'd3';
 import _ from 'lodash';
+import { d3keybinding } from '../../js/lib/d3.keybinding.js';
 import { cmd } from '../ui/index';
+
 export function Copy(context) {
     var keybinding = d3keybinding('copy');
 

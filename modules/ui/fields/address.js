@@ -1,8 +1,8 @@
+import * as d3 from 'd3';
+import _ from 'lodash';
 import { rebind } from '../../util/rebind';
 import { getSetValue } from '../../util/get_set_value';
 import { d3combobox } from '../../../js/lib/d3.combobox.js';
-import * as d3 from 'd3';
-import _ from 'lodash';
 import { Extent, chooseEdge, sphericalDistance } from '../../geo/index';
 import { nominatim } from '../../services/index';
 import { addressFormats } from '../../../data/index';
@@ -178,7 +178,7 @@ export function address(field, context) {
             wrap.selectAll('input:not(.combobox-input)')
                 .on('input', change(true));
 
-            dispatch.call("init");
+            dispatch.call('init');
             isInitialized = true;
         });
     }
@@ -192,7 +192,7 @@ export function address(field, context) {
                     tags['addr:' + field.id] = this.value || undefined;
                 });
 
-            dispatch.call("change", this, tags, onInput);
+            dispatch.call('change', this, tags, onInput);
         };
     }
 
@@ -212,7 +212,7 @@ export function address(field, context) {
         if (isInitialized) {
             updateTags(tags);
         } else {
-            dispatch.call("on", this, 'init', function () {
+            dispatch.call('on', this, 'init', function () {
                 updateTags(tags);
             });
         }

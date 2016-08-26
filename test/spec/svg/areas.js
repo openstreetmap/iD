@@ -2,8 +2,8 @@ describe('iD.svg.Areas', function () {
     var surface,
         projection = d3.geoProjection(function(x, y) { return [x, y]; })
             .clipExtent([[0, 0], [Infinity, Infinity]]),
-        all = d3.functor(true),
-        none = d3.functor(false);
+        all = function() { return true; },
+        none = function() { return false; };
 
     beforeEach(function () {
         surface = d3.select(document.createElementNS('http://www.w3.org/2000/svg', 'svg'))

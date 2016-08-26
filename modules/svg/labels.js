@@ -1,9 +1,9 @@
 import * as d3 from 'd3';
 import _ from 'lodash';
+import rbush from 'rbush';
 import { displayName, getStyle } from '../util/index';
 import { Entity } from '../core/index';
 import { pathLength } from '../geo/index';
-import rbush from 'rbush';
 
 export function Labels(projection, context) {
     var path = d3.geoPath().projection(projection);

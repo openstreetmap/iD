@@ -37,7 +37,7 @@
 
         var infiniteExtent = iD.geo.Extent([0, 0], [Infinity, Infinity]),
             projection = function(p) { return p; },
-            filter = d3.functor(true),
+            filter = function() { return true; },
             context = {};
 
         projection.stream = function(listener) {

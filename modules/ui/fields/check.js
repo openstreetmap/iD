@@ -1,9 +1,10 @@
-import { rebind } from '../../util/rebind';
 import * as d3 from 'd3';
+import { rebind } from '../../util/rebind';
 import { t } from '../../util/locale';
 import { oneWayTags } from '../../core/index';
 
 export { check as defaultcheck };
+
 export function check(field) {
     var dispatch = d3.dispatch('change'),
         options = field.strings && field.strings.options,
@@ -58,7 +59,7 @@ export function check(field) {
             .on('click', function() {
                 var t = {};
                 t[field.key] = values[(values.indexOf(value) + 1) % values.length];
-                dispatch.call("change", this, t);
+                dispatch.call('change', this, t);
                 d3.event.stopPropagation();
             });
 

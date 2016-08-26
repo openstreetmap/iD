@@ -4,4 +4,4 @@ export function triggerEvent(target, type) {
         evt.initEvent(type, true, true);
         this.dispatchEvent(evt);
     });
-};
+}

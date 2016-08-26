@@ -1,7 +1,7 @@
-import { d3keybinding } from '../../js/lib/d3.keybinding.js';
 import * as d3 from 'd3';
+import { d3keybinding } from '../../js/lib/d3.keybinding.js';
 import { t } from '../util/locale';
-import { getDimensions, setDimensions } from '../util/dimensions';
+import { setDimensions } from '../util/dimensions';
 import { tooltip } from '../util/tooltip';
 import { Defs, Icon } from '../svg/index';
 import { Account } from './account';
@@ -38,7 +38,6 @@ export function init(context) {
         if (Detect().opera) container.classed('opera', true);
 
         var hash = Hash(context);
-
         hash();
 
         if (!hash.hadHash) {

@@ -1,5 +1,5 @@
-import { rebind } from '../util/rebind';
 import * as d3 from 'd3';
+import { rebind } from '../util/rebind';
 import { t } from '../util/locale';
 import { Extent } from '../geo/index';
 import { Icon } from '../svg/index';
@@ -17,7 +17,7 @@ export function Conflicts(context) {
         header
             .append('button')
             .attr('class', 'fr')
-            .on('click', function() { dispatch.call("cancel"); })
+            .on('click', function() { dispatch.call('cancel'); })
             .call(Icon('#icon-close'));
 
         header
@@ -35,7 +35,7 @@ export function Conflicts(context) {
             .append('a')
             .attr('class', 'conflicts-download')
             .text(t('save.conflict.download_changes'))
-            .on('click.download', function() { dispatch.call("download"); });
+            .on('click.download', function() { dispatch.call('download'); });
 
         body
             .append('div')
@@ -58,13 +58,13 @@ export function Conflicts(context) {
             .attr('disabled', list.length > 1)
             .attr('class', 'action conflicts-button col6')
             .text(t('save.title'))
-            .on('click.try_again', function() { dispatch.call("save"); });
+            .on('click.try_again', function() { dispatch.call('save'); });
 
         buttons
             .append('button')
             .attr('class', 'secondary-action conflicts-button col6')
             .text(t('confirm.cancel'))
-            .on('click.cancel', function() { dispatch.call("cancel"); });
+            .on('click.cancel', function() { dispatch.call('cancel'); });
     }
 
 

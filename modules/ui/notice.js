@@ -1,6 +1,7 @@
-import { t } from '../util/locale';
 import _ from 'lodash';
+import { t } from '../util/locale';
 import { Icon } from '../svg/index';
+
 export function Notice(context) {
     return function(selection) {
         var div = selection.append('div')

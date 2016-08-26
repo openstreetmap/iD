@@ -1,5 +1,6 @@
 import { t } from '../util/locale';
 import { RotateWay } from '../modes/index';
+
 export function Rotate(selectedIDs, context) {
     var entityId = selectedIDs[0],
         entity = context.entity(entityId),

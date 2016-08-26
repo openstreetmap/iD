@@ -1,6 +1,7 @@
-import { t } from '../util/locale';
 import _ from 'lodash';
+import { t } from '../util/locale';
 import { Straighten as StraightenAction } from '../actions/index';
+
 export function Straighten(selectedIDs, context) {
     var entityId = selectedIDs[0],
         action = StraightenAction(entityId, context.projection);

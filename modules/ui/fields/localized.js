@@ -1,10 +1,10 @@
+import * as d3 from 'd3';
+import _ from 'lodash';
 import { rebind } from '../../util/rebind';
 import { d3combobox } from '../../../js/lib/d3.combobox.js';
 import { getSetValue } from '../../util/get_set_value';
-import * as d3 from 'd3';
 import { t } from '../../util/locale';
 import { tooltip } from '../../util/tooltip';
-import _ from 'lodash';
 import { Detect } from '../../util/detect';
 import { Icon } from '../../svg/index';
 import { SuggestNames } from '../../util/index';
@@ -78,7 +78,7 @@ export function localized(field, context) {
         return function() {
             var t = {};
             t[field.key] = getSetValue(d3.select(this)) || undefined;
-            dispatch.call("change", this, t, onInput);
+            dispatch.call('change', this, t, onInput);
         };
     }
 
@@ -108,14 +108,14 @@ export function localized(field, context) {
         }
 
         d.lang = lang;
-        dispatch.call("change", this, t);
+        dispatch.call('change', this, t);
     }
 
     function changeValue(d) {
         if (!d.lang) return;
         var t = {};
         t[key(d.lang)] = getSetValue(d3.select(this)) || undefined;
-        dispatch.call("change", this, t);
+        dispatch.call('change', this, t);
     }
 
     function fetcher(value, cb) {
@@ -153,7 +153,7 @@ export function localized(field, context) {
                         d3.event.preventDefault();
                         var t = {};
                         t[key(d.lang)] = undefined;
-                        dispatch.call("change", this, t);
+                        dispatch.call('change', this, t);
                         d3.select(this.parentNode.parentNode)
                             .style('top','0')
                             .style('max-height','240px')

@@ -1,5 +1,5 @@
-import { rebind } from '../util/rebind';
 import * as d3 from 'd3';
+import { rebind } from '../util/rebind';
 import { Browse } from '../modes/index';
 import { Draw } from './draw';
 

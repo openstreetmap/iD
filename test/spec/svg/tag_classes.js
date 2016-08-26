@@ -162,9 +162,10 @@ describe('iD.svg.TagClasses', function () {
     });
 
     it('adds tags based on the result of the `tags` accessor', function() {
+        var primary = function () { return { highway: 'primary'}; };
         selection
             .datum(iD.Entity())
-            .call(iD.svg.TagClasses().tags(d3.functor({highway: 'primary'})));
+            .call(iD.svg.TagClasses().tags(primary));
         expect(selection.attr('class')).to.equal('tag-highway tag-highway-primary');
     });
 

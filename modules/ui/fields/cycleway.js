@@ -1,7 +1,8 @@
+import * as d3 from 'd3';
 import { rebind } from '../../util/rebind';
 import { getSetValue } from '../../util/get_set_value';
 import { d3combobox } from '../../../js/lib/d3.combobox.js';
-import * as d3 from 'd3';
+
 export function cycleway(field) {
     var dispatch = d3.dispatch('change'),
         items;
@@ -18,7 +19,6 @@ export function cycleway(field) {
             .data(field.keys);
 
         // Enter
-
         var enter = items.enter().append('li')
             .attr('class', function(d) { return 'cf preset-cycleway-' + d; });
 
@@ -40,7 +40,6 @@ export function cycleway(field) {
             });
 
         // Update
-
         wrap.selectAll('.preset-input-cycleway')
             .on('change', change)
             .on('blur', change);
@@ -51,6 +50,7 @@ export function cycleway(field) {
             left = getSetValue(d3.select(inputs[0])),
             right = getSetValue(d3.select(inputs[1])),
             tag = {};
+
         if (left === 'none' || left === '') { left = undefined; }
         if (right === 'none' || right === '') { right = undefined; }
 
@@ -71,7 +71,7 @@ export function cycleway(field) {
             };
         }
 
-        dispatch.call("change", this, tag);
+        dispatch.call('change', this, tag);
     }
 
     cycleway.options = function() {

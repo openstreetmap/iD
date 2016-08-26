@@ -1,7 +1,7 @@
-import { rebind } from '../util/rebind';
-import { getDimensions, setDimensions } from '../util/dimensions';
 import * as d3 from 'd3';
 import _ from 'lodash';
+import { rebind } from '../util/rebind';
+import { getDimensions, setDimensions } from '../util/dimensions';
 import { Debug } from './debug';
 import { Gpx } from './gpx';
 import { MapillaryImages } from './mapillary_images';
@@ -63,7 +63,7 @@ export function Layers(projection, context) {
         arr.forEach(function(id) {
             layers = _.reject(layers, function(o) {return o.id === id;});
         });
-        dispatch.call("change");
+        dispatch.call('change');
         return this;
     };
 
@@ -74,7 +74,7 @@ export function Layers(projection, context) {
                 layers.push(obj);
             }
         });
-        dispatch.call("change");
+        dispatch.call('change');
         return this;
     };
 

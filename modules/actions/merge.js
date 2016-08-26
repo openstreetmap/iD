@@ -1,4 +1,5 @@
 import _ from 'lodash';
+
 export function Merge(ids) {
     function groupEntitiesByGeometry(graph) {
         var entities = ids.map(function(id) { return graph.entity(id); });

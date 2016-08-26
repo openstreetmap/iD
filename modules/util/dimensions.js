@@ -20,5 +20,5 @@ export function setDimensions (target, dimensions) {
     return target
         .property('__dimensions__', [dimensions[0], dimensions[1]])
         .attr('width', dimensions[0])
-        .attr('height', dimensions[1])
+        .attr('height', dimensions[1]);
 }

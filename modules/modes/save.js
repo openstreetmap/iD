@@ -1,6 +1,6 @@
 import * as d3 from 'd3';
-import { t } from '../util/locale';
 import _ from 'lodash';
+import { t } from '../util/locale';
 import { Conflicts, uiconfirm, Commit, Loading, Success } from '../ui/index';
 import { DiscardTags, MergeRemoteChanges, Noop, Revert } from '../actions/index';
 import { displayName, displayType } from '../util/index';

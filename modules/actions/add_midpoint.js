@@ -1,5 +1,6 @@
 import _ from 'lodash';
 import { edgeEqual } from '../geo/index';
+
 export function AddMidpoint(midpoint, node) {
     return function(graph) {
         graph = graph.replace(node.move(midpoint.loc));

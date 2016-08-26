@@ -5,7 +5,7 @@ import { PointTransform } from './point_transform';
 import { mapillary as mapillaryService } from '../services/index';
 
 export function MapillarySigns(projection, context, dispatch) {
-    var debouncedRedraw = _.debounce(function () { dispatch.call("change"); }, 1000),
+    var debouncedRedraw = _.debounce(function () { dispatch.call('change'); }, 1000),
         minZoom = 12,
         layer = d3.select(null),
         _mapillary;
@@ -122,7 +122,7 @@ export function MapillarySigns(projection, context, dispatch) {
         } else {
             hideLayer();
         }
-        dispatch.call("change");
+        dispatch.call('change');
         return this;
     };
 

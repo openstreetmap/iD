@@ -1,7 +1,8 @@
-import { t } from '../util/locale';
 import _ from 'lodash';
+import { t } from '../util/locale';
 import { Select } from '../modes/index';
 import { Split as SplitAction } from '../actions/index';
+
 export function Split(selectedIDs, context) {
     var vertices = _.filter(selectedIDs, function vertex(entityId) {
         return context.geometry(entityId) === 'vertex';

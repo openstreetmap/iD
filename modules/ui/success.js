@@ -1,8 +1,9 @@
-import { rebind } from '../util/rebind';
 import * as d3 from 'd3';
+import { rebind } from '../util/rebind';
 import { t } from '../util/locale';
 import { tooltip } from '../util/tooltip';
 import { Icon } from '../svg/index';
+
 export function Success(context) {
     var dispatch = d3.dispatch('cancel'),
         changeset;
@@ -16,7 +17,7 @@ export function Success(context) {
 
         header.append('button')
             .attr('class', 'fr')
-            .on('click', function() { dispatch.call("cancel"); })
+            .on('click', function() { dispatch.call('cancel'); })
             .call(Icon('#icon-close'));
 
         header.append('h3')

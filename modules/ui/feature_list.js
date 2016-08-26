@@ -1,6 +1,6 @@
 import * as d3 from 'd3';
-import { t } from '../util/locale';
 import * as sexagesimal from 'sexagesimal';
+import { t } from '../util/locale';
 import { Extent, chooseEdge } from '../geo/index';
 import { displayName, entityOrMemberSelector } from '../util/index';
 import { Entity } from '../core/index';

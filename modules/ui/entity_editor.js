@@ -1,8 +1,8 @@
-import { rebind } from '../util/rebind';
 import * as d3 from 'd3';
+import _ from 'lodash';
+import { rebind } from '../util/rebind';
 import { t } from '../util/locale';
 import { tooltip } from '../util/tooltip';
-import _ from 'lodash';
 import { Browse } from '../modes/index';
 import { ChangeTags } from '../actions/index';
 import { Icon } from '../svg/index';
@@ -98,7 +98,7 @@ export function EntityEditor(context) {
 
         selection.selectAll('.preset-reset')
             .on('click', function() {
-                dispatch.call("choose", this, activePreset);
+                dispatch.call('choose', this, activePreset);
             });
 
         // Update

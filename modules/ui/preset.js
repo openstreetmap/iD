@@ -1,9 +1,9 @@
+import * as d3 from 'd3';
+import _ from 'lodash';
 import { rebind } from '../util/rebind';
 import { getSetValue } from '../util/get_set_value';
 import { d3combobox } from '../../js/lib/d3.combobox.js';
-import * as d3 from 'd3';
 import { t } from '../util/locale';
-import _ from 'lodash';
 import { Browse } from '../modes/index';
 import { Disclosure } from './disclosure';
 import { Icon } from '../svg/index';
@@ -11,7 +11,7 @@ import { TagReference } from './tag_reference';
 import { fields } from './fields/index';
 
 export function preset(context) {
-    var event = d3.dispatch('change'),
+    var dispatch = d3.dispatch('change'),
         state,
         fieldsArr,
         preset,
@@ -22,7 +22,7 @@ export function preset(context) {
         field = _.clone(field);
 
         field.input = fields[field.type](field, context)
-            .on('change', event.change);
+            .on('change', dispatch.change);
 
         if (field.input.entity) field.input.entity(entity);
 
@@ -238,13 +238,13 @@ export function preset(context) {
         function revert(field) {
             d3.event.stopPropagation();
             d3.event.preventDefault();
-            event.call("change", field.revert());
+            dispatch.call('change', field.revert());
         }
 
         function remove(field) {
             d3.event.stopPropagation();
             d3.event.preventDefault();
-            event.call("change", field.remove());
+            dispatch.call('change', field.remove());
         }
     }
 
@@ -277,5 +277,5 @@ export function preset(context) {
         return presets;
     };
 
-    return rebind(presets, event, 'on');
+    return rebind(presets, dispatch, 'on');
 }

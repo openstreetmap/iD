@@ -107,7 +107,7 @@ export function Gpx(projection, context, dispatch) {
     drawGpx.enabled = function(_) {
         if (!arguments.length) return Gpx.enabled;
         Gpx.enabled = _;
-        dispatch.call("change");
+        dispatch.call('change');
         return this;
     };
 
@@ -120,7 +120,7 @@ export function Gpx(projection, context, dispatch) {
         if (!arguments.length) return Gpx.geojson;
         if (_.isEmpty(gj) || _.isEmpty(gj.features)) return this;
         Gpx.geojson = gj;
-        dispatch.call("change");
+        dispatch.call('change');
         return this;
     };
 

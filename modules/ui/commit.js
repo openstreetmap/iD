@@ -1,10 +1,10 @@
+import * as d3 from 'd3';
+import _ from 'lodash';
 import { rebind } from '../util/rebind';
 import { d3combobox } from '../../js/lib/d3.combobox.js';
-import * as d3 from 'd3';
 import { t } from '../util/locale';
 import { triggerEvent } from '../util/trigger_event';
 import { tooltip } from '../util/tooltip';
-import _ from 'lodash';
 import { displayName, entityOrMemberSelector } from '../util/index';
 import { Icon } from '../svg/index';
 import { Select } from '../modes/index';
@@ -184,7 +184,7 @@ export function Commit(context) {
 
         var cancelButton = buttonSection.append('button')
             .attr('class', 'secondary-action col5 button cancel-button')
-            .on('click.cancel', function() { dispatch.call("cancel"); });
+            .on('click.cancel', function() { dispatch.call('cancel'); });
 
         cancelButton.append('span')
             .attr('class', 'label')

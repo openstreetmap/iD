@@ -1,6 +1,6 @@
+import * as d3 from 'd3';
 import { rebind } from '../util/rebind';
 import { d3keybinding } from '../../js/lib/d3.keybinding.js';
-import * as d3 from 'd3';
 import { t } from '../util/locale';
 import { Browse } from '../modes/index';
 import { ChangePreset } from '../actions/index';
@@ -37,7 +37,7 @@ export function PresetList(context) {
         if (context.entity(id).isUsed(context.graph())) {
             messagewrap.append('button')
                 .attr('class', 'preset-choose')
-                .on('click', function() { dispatch.call("choose", this, currentPreset); })
+                .on('click', function() { dispatch.call('choose', this, currentPreset); })
                 .append('span')
                 .html('&#9658;');
         } else {
@@ -232,7 +232,7 @@ export function PresetList(context) {
                 ChangePreset(id, currentPreset, preset),
                 t('operations.change_tags.annotation'));
 
-            dispatch.call("choose", this, preset);
+            dispatch.call('choose', this, preset);
         };
 
         item.help = function() {

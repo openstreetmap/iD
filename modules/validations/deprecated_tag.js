@@ -1,8 +1,8 @@
-import { t } from '../util/locale';
 import _ from 'lodash';
+import { t } from '../util/locale';
 import { tagText } from '../util/index';
-export function DeprecatedTag() {
 
+export function DeprecatedTag() {
     var validation = function(changes) {
         var warnings = [];
         for (var i = 0; i < changes.created.length; i++) {

@@ -1,4 +1,4 @@
-export function pointBox (point, context) {
+export function pointBox(point, context) {
     var rect = context.surfaceRect();
     point = context.projection(point);
     return {
@@ -9,7 +9,7 @@ export function pointBox (point, context) {
      };
 }
 
-export function pad (box, padding, context) {
+export function pad(box, padding, context) {
     if (box instanceof Array) {
         var rect = context.surfaceRect();
         box = context.projection(box);

@@ -1,15 +1,18 @@
 import _ from 'lodash';
+
 export { Extent } from './extent.js';
 export {
         Intersection,
         Turn,
         inferRestriction
-    } from './intersection.js';
+} from './intersection.js';
+
 export {
     isSimpleMultipolygonOuterMember,
     simpleMultipolygonOuterMember,
     joinWays
- } from './multipolygon.js';
+} from './multipolygon.js';
+
 export { RawMercator } from './raw_mercator.js';
 
 export function roundCoords(c) {

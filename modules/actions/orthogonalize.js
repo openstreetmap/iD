@@ -1,10 +1,10 @@
 import _ from 'lodash';
 import { DeleteNode } from './delete_node';
 import { euclideanDistance } from '../geo/index';
+
 /*
  * Based on https://github.com/openstreetmap/potlatch2/blob/master/net/systemeD/potlatch2/tools/Quadrilateralise.as
  */
-
 export function Orthogonalize(wayId, projection) {
     var threshold = 12, // degrees within right or straight to alter
         lowerThreshold = Math.cos((90 - threshold) * Math.PI / 180),

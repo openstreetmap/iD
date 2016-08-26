@@ -1,7 +1,8 @@
 import * as d3 from 'd3';
-import { t } from '../util/locale';
 import _ from 'lodash';
+import { t } from '../util/locale';
 import { Icon } from '../svg/index';
+
 export function Contributors(context) {
     var debouncedUpdate = _.debounce(function() { update(); }, 1000),
         limit = 4,

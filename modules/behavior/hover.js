@@ -1,7 +1,8 @@
+import * as d3 from 'd3';
 import { rebind } from '../util/rebind';
 import { d3keybinding } from '../../js/lib/d3.keybinding.js';
-import * as d3 from 'd3';
 import { Entity } from '../core/index';
+
 /*
    The hover behavior adds the `.hover` class on mouseover to all elements to which
    the identical datum is bound, and removes it on mouseout.
@@ -19,7 +20,7 @@ export function Hover() {
 
     function keydown() {
         if (altDisables && d3.event.keyCode === d3keybinding.modifierCodes.alt) {
-            dispatch.call("hover", this, null);
+            dispatch.call('hover', this, null);
             selection.selectAll('.hover')
                 .classed('hover-suppressed', true)
                 .classed('hover', false);
@@ -28,7 +29,7 @@ export function Hover() {
 
     function keyup() {
         if (altDisables && d3.event.keyCode === d3keybinding.modifierCodes.alt) {
-            dispatch.call("hover", this, target ? target.id : null);
+            dispatch.call('hover', this, target ? target.id : null);
             selection.selectAll('.hover-suppressed')
                 .classed('hover-suppressed', false)
                 .classed('hover', true);
@@ -62,9 +63,9 @@ export function Hover() {
                 selection.selectAll(selector)
                     .classed(suppressed ? 'hover-suppressed' : 'hover', true);
 
-                dispatch.call("hover", this, target.id);
+                dispatch.call('hover', this, target.id);
             } else {
-                dispatch.call("hover", this, null);
+                dispatch.call('hover', this, null);
             }
         }
 
