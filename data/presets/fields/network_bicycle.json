@@ -1,0 +1,14 @@
+{
+    "key": "network",
+    "type": "combo",
+    "label": "Network Type",
+    "placeholder": "Local, Regional, National, International",
+    "strings": {
+        "options": {
+            "lcn": "Local",
+            "rcn": "Regional",
+            "ncn": "National",
+            "icn": "International"
+        }
+    }
+}

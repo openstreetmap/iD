@@ -1,4 +1,5 @@
 import { t } from '../util/locale';
+import { tooltip } from '../util/tooltip';
 import { Save as SaveMode } from '../modes/index';
 import { cmd } from './cmd';
 import { tooltipHtml } from './tooltipHtml';
@@ -33,7 +34,7 @@ export function Save(context) {
     }
 
     return function(selection) {
-        var tooltip = bootstrap.tooltip()
+        var tooltipBehavior = tooltip()
             .placement('bottom')
             .html(true)
             .title(tooltipHtml(t('save.no_changes'), key));
@@ -42,7 +43,7 @@ export function Save(context) {
             .attr('class', 'save col12 disabled')
             .attr('tabindex', -1)
             .on('click', save)
-            .call(tooltip);
+            .call(tooltipBehavior);
 
         button.append('span')
             .attr('class', 'label')
@@ -66,7 +67,7 @@ export function Save(context) {
                 return;
             numChanges = _;
 
-            tooltip.title(tooltipHtml(t(numChanges > 0 ?
+            tooltipBehavior.title(tooltipHtml(t(numChanges > 0 ?
                     'save.help' : 'save.no_changes'), key));
 
             var background = getBackground(numChanges);
@@ -84,7 +85,7 @@ export function Save(context) {
 
         context.on('enter.save', function() {
             button.property('disabled', saving());
-            if (saving()) button.call(tooltip.hide);
+            if (saving()) button.call(tooltipBehavior.hide);
         });
     };
 }

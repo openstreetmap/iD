@@ -178,6 +178,18 @@ en:
       bin:
         # bin=*
         label: Waste Bin
+      blood_components:
+        # 'blood:=*'
+        label: Blood Components
+        options:
+          # 'blood:=plasma'
+          plasma: plasma
+          # 'blood:=platelets'
+          platelets: platelets
+          # 'blood:=stemcells'
+          stemcells: stem cell samples
+          # 'blood:=whole'
+          whole: whole blood
       boundary:
         # boundary=*
         label: Type
@@ -269,6 +281,9 @@ en:
       currency_multi:
         # 'currency:=*'
         label: Currency Types
+      cycle_network:
+        # cycle_network=*
+        label: Network
       cycleway:
         # 'cycleway:left=*, cycleway:right=*'
         label: Bike Lanes
@@ -447,6 +462,9 @@ en:
           down: Down
           # incline=up
           up: Up
+      indoor:
+        # indoor=*
+        label: Indoor
       information:
         # information=*
         label: Type
@@ -626,6 +644,51 @@ en:
         # natural=*
         label: Natural
       network:
+        # network=*
+        label: Network
+      network_bicycle:
+        # network=*
+        label: Network Type
+        options:
+          # network=icn
+          icn: International
+          # network=lcn
+          lcn: Local
+          # network=ncn
+          ncn: National
+          # network=rcn
+          rcn: Regional
+        # network_bicycle field placeholder
+        placeholder: 'Local, Regional, National, International'
+      network_foot:
+        # network=*
+        label: Network Type
+        options:
+          # network=iwn
+          iwn: International
+          # network=lwn
+          lwn: Local
+          # network=nwn
+          nwn: National
+          # network=rwn
+          rwn: Regional
+        # network_foot field placeholder
+        placeholder: 'Local, Regional, National, International'
+      network_horse:
+        # network=*
+        label: Network Type
+        options:
+          # network=ihn
+          ihn: International
+          # network=lhn
+          lhn: Local
+          # network=nhn
+          nhn: National
+          # network=rhn
+          rhn: Regional
+        # network_horse field placeholder
+        placeholder: 'Local, Regional, National, International'
+      network_road:
         # network=*
         label: Network
       note:
@@ -825,6 +888,18 @@ en:
       seasonal:
         # seasonal=*
         label: Seasonal
+      second_hand:
+        # second_hand=*
+        label: Sells Used
+        options:
+          # second_hand=no
+          'no': 'No'
+          # second_hand=only
+          only: Only
+          # second_hand=yes
+          'yes': 'Yes'
+        # second_hand field placeholder
+        placeholder: 'Yes, No, Only'
       service:
         # service=*
         label: Type
@@ -1320,7 +1395,7 @@ en:
       amenity/fast_food:
         # amenity=fast_food
         name: Fast Food
-        # 'terms: restaurant'
+        # 'terms: restaurant,takeaway'
         terms: '<translate with synonyms or related terms for ''Fast Food'', separated by commas>'
       amenity/ferry_terminal:
         # amenity=ferry_terminal
@@ -2070,15 +2145,40 @@ en:
       emergency/defibrillator:
         # emergency=defibrillator
         name: Defibrillator
+        # 'terms: AED'
         terms: '<translate with synonyms or related terms for ''Defibrillator'', separated by commas>'
+      emergency/designated:
+        # emergency=designated
+        name: Emergency Access Designated
+        terms: '<translate with synonyms or related terms for ''Emergency Access Designated'', separated by commas>'
+      emergency/destination:
+        # emergency=destination
+        name: Emergency Access Destination
+        terms: '<translate with synonyms or related terms for ''Emergency Access Destination'', separated by commas>'
       emergency/fire_hydrant:
         # emergency=fire_hydrant
         name: Fire Hydrant
         terms: '<translate with synonyms or related terms for ''Fire Hydrant'', separated by commas>'
+      emergency/no:
+        # emergency=no
+        name: Emergency Access No
+        terms: '<translate with synonyms or related terms for ''Emergency Access No'', separated by commas>'
+      emergency/official:
+        # emergency=official
+        name: Emergency Access Official
+        terms: '<translate with synonyms or related terms for ''Emergency Access Official'', separated by commas>'
       emergency/phone:
         # emergency=phone
         name: Emergency Phone
         terms: '<translate with synonyms or related terms for ''Emergency Phone'', separated by commas>'
+      emergency/private:
+        # emergency=private
+        name: Emergency Access Private
+        terms: '<translate with synonyms or related terms for ''Emergency Access Private'', separated by commas>'
+      emergency/yes:
+        # emergency=yes
+        name: Emergency Access Yes
+        terms: '<translate with synonyms or related terms for ''Emergency Access Yes'', separated by commas>'
       entrance:
         # entrance=*
         name: Entrance/Exit
@@ -2134,6 +2234,11 @@ en:
         # 'golf=water_hazard, natural=water'
         name: Water Hazard
         terms: '<translate with synonyms or related terms for ''Water Hazard'', separated by commas>'
+      healthcare/blood_donation:
+        # healthcare=blood_donation
+        name: Blood Donor Center
+        # 'terms: blood bank,blood donation,blood transfusion,apheresis,plasmapheresis,plateletpheresis,stem cell donation'
+        terms: '<translate with synonyms or related terms for ''Blood Donor Center'', separated by commas>'
       highway:
         # highway=*
         name: Highway
@@ -2447,6 +2552,11 @@ en:
         # landuse=quarry
         name: Quarry
         terms: '<translate with synonyms or related terms for ''Quarry'', separated by commas>'
+      landuse/recreation_ground:
+        # landuse=recreation_ground
+        name: Recreation Ground
+        # 'terms: playing fields'
+        terms: '<translate with synonyms or related terms for ''Recreation Ground'', separated by commas>'
       landuse/residential:
         # landuse=residential
         name: Residential Area
@@ -2491,6 +2601,11 @@ en:
         name: Firepit
         # 'terms: fireplace,campfire'
         terms: '<translate with synonyms or related terms for ''Firepit'', separated by commas>'
+      leisure/fitness_centre/yoga:
+        # 'leisure=fitness_centre, sport=yoga'
+        name: Yoga Studio
+        # 'terms: studio'
+        terms: '<translate with synonyms or related terms for ''Yoga Studio'', separated by commas>'
       leisure/garden:
         # leisure=garden
         name: Garden
@@ -2510,6 +2625,11 @@ en:
         name: Marina
         # 'terms: boat'
         terms: '<translate with synonyms or related terms for ''Marina'', separated by commas>'
+      leisure/miniature_golf:
+        # leisure=miniature_golf
+        name: Miniature Golf
+        # 'terms: crazy golf,mini golf,putt-putt'
+        terms: '<translate with synonyms or related terms for ''Miniature Golf'', separated by commas>'
       leisure/nature_reserve:
         # leisure=nature_reserve
         name: Nature Reserve
@@ -2542,6 +2662,10 @@ en:
         # 'leisure=pitch, sport=basketball'
         name: Basketball Court
         terms: '<translate with synonyms or related terms for ''Basketball Court'', separated by commas>'
+      leisure/pitch/bowls:
+        # 'leisure=pitch, sport=bowls'
+        name: Bowling Green
+        terms: '<translate with synonyms or related terms for ''Bowling Green'', separated by commas>'
       leisure/pitch/rugby_league:
         # 'leisure=pitch, sport=rugby_league'
         name: Rugby League Field
@@ -3189,6 +3313,7 @@ en:
       shop/bookmaker:
         # shop=bookmaker
         name: Bookmaker
+        # 'terms: betting'
         terms: '<translate with synonyms or related terms for ''Bookmaker'', separated by commas>'
       shop/books:
         # shop=books
@@ -3220,13 +3345,18 @@ en:
       shop/car_repair:
         # shop=car_repair
         name: Car Repair Shop
-        # 'terms: auto'
+        # 'terms: auto,garage,service'
         terms: '<translate with synonyms or related terms for ''Car Repair Shop'', separated by commas>'
       shop/carpet:
         # shop=carpet
         name: Carpet Store
         # 'terms: rug'
         terms: '<translate with synonyms or related terms for ''Carpet Store'', separated by commas>'
+      shop/charity:
+        # shop=charity
+        name: Charity Store
+        # 'terms: thrift,op shop,nonprofit'
+        terms: '<translate with synonyms or related terms for ''Charity Store'', separated by commas>'
       shop/cheese:
         # shop=cheese
         name: Cheese Store
@@ -3361,6 +3491,7 @@ en:
       shop/gift:
         # shop=gift
         name: Gift Shop
+        # 'terms: souvenir'
         terms: '<translate with synonyms or related terms for ''Gift Shop'', separated by commas>'
       shop/greengrocer:
         # shop=greengrocer
@@ -3370,6 +3501,7 @@ en:
       shop/hairdresser:
         # shop=hairdresser
         name: Hairdresser
+        # 'terms: barber'
         terms: '<translate with synonyms or related terms for ''Hairdresser'', separated by commas>'
       shop/hardware:
         # shop=hardware
@@ -3430,6 +3562,7 @@ en:
       shop/mall:
         # shop=mall
         name: Mall
+        # 'terms: shopping'
         terms: '<translate with synonyms or related terms for ''Mall'', separated by commas>'
       shop/massage:
         # shop=massage
@@ -3450,6 +3583,7 @@ en:
       shop/motorcycle:
         # shop=motorcycle
         name: Motorcycle Dealership
+        # 'terms: bike'
         terms: '<translate with synonyms or related terms for ''Motorcycle Dealership'', separated by commas>'
       shop/music:
         # shop=music
@@ -3459,6 +3593,7 @@ en:
       shop/musical_instrument:
         # shop=musical_instrument
         name: Musical Instrument Store
+        # 'terms: guitar'
         terms: '<translate with synonyms or related terms for ''Musical Instrument Store'', separated by commas>'
       shop/newsagent:
         # shop=newsagent

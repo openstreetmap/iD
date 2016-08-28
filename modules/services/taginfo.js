@@ -9,13 +9,26 @@ var taginfo = {},
         area: 'count_ways',
         line: 'count_ways'
     },
+    tag_sort_members = {
+        point: 'count_node_members',
+        vertex: 'count_node_members',
+        area: 'count_way_members',
+        line: 'count_way_members',
+        relation: 'count_relation_members'
+    },
     tag_filters = {
         point: 'nodes',
         vertex: 'nodes',
         area: 'ways',
         line: 'ways'
+    },
+    tag_members_fractions = {
+        point: 'count_node_members_fraction',
+        vertex: 'count_node_members_fraction',
+        area: 'count_way_members_fraction',
+        line: 'count_way_members_fraction',
+        relation: 'count_relation_members_fraction'
     };
-
 
 function sets(parameters, n, o) {
     if (parameters.geometry && o[parameters.geometry]) {
@@ -30,6 +43,10 @@ function setFilter(parameters) {
 
 function setSort(parameters) {
     return sets(parameters, 'sortname', tag_sorts);
+}
+
+function setSortMembers(parameters) {
+    return sets(parameters, 'sortname', tag_sort_members);
 }
 
 function clean(parameters) {
@@ -49,10 +66,19 @@ function filterMultikeys() {
     };
 }
 
-function filterValues() {
+function filterValues(allowUpperCase) {
     return function(d) {
-        if (d.value.match(/[A-Z*;,]/) !== null) return false;  // exclude some punctuation, uppercase letters
+        if (d.value.match(/[;,]/) !== null) return false;  // exclude some punctuation
+        if (!allowUpperCase && d.value.match(/[A-Z*]/) !== null) return false;  // exclude uppercase letters
         return parseFloat(d.fraction) > 0.0 || d.in_wiki;
+    };
+}
+
+function filterRoles(geometry) {
+    return function(d) {
+        if (d.role === '') return false; // exclude empty role
+        if (d.role.match(/[A-Z*;,]/) !== null) return false;  // exclude uppercase letters and some punctuation
+        return parseFloat(d[tag_members_fractions[geometry]]) > 0.0;
     };
 }
 
@@ -67,6 +93,13 @@ function valKeyDescription(d) {
     return {
         value: d.value,
         title: d.description || d.value
+    };
+}
+
+function roleKey(d) {
+    return {
+        value: d.role,
+        title: d.role
     };
 }
 
@@ -140,8 +173,25 @@ export function init() {
                 page: 1
             }, parameters)), debounce, function(err, d) {
                 if (err) return callback(err);
-                var f = filterValues();
+                var f = filterValues(parameters.key === 'cycle_network' || parameters.key === 'network');
                 callback(null, d.data.filter(f).map(valKeyDescription));
+            });
+    };
+
+    taginfo.roles = function(parameters, callback) {
+        var debounce = parameters.debounce;
+        var geometry = parameters.geometry;
+        parameters = clean(setSortMembers(parameters));
+        request(endpoint + 'relation/roles?' +
+            qsString(_.extend({
+                rp: 25,
+                sortname: 'count_all_members',
+                sortorder: 'desc',
+                page: 1
+            }, parameters)), debounce, function(err, d) {
+                if (err) return callback(err);
+                var f = filterRoles(geometry);
+                callback(null, d.data.filter(f).map(roleKey));
             });
     };
 

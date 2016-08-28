@@ -1,0 +1,21 @@
+{
+    "icon": "golf",
+    "fields": [
+        "operator",
+        "address",
+        "opening_hours"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "crazy golf",
+        "mini golf",
+        "putt-putt"
+    ],
+    "tags": {
+        "leisure": "miniature_golf"
+    },
+    "name": "Miniature Golf"
+}

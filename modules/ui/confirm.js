@@ -1,7 +1,7 @@
 import { t } from '../util/locale';
 import { modal } from './modal';
 
-export function confirm(selection) {
+export function uiconfirm(selection) {
     var modalSelection = modal(selection);
 
     modalSelection.select('.modal')

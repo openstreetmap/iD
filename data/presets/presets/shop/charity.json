@@ -1,0 +1,23 @@
+{
+    "icon": "shop",
+    "fields": [
+        "operator",
+        "address",
+        "building_area",
+        "opening_hours",
+        "second_hand"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "thrift",
+        "op shop",
+        "nonprofit"
+    ],
+    "tags": {
+        "shop": "charity"
+    },
+    "name": "Charity Store"
+}

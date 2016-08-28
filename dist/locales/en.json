@@ -531,6 +531,7 @@
         "relations": "# Relations\n\nA relation is a special type of feature in OpenStreetMap that groups together\nother features. For example, two common types of relations are *route relations*,\nwhich group together sections of road that belong to a specific freeway or\nhighway, and *multipolygons*, which group together several lines that define\na complex area (one with several pieces or holes in it like a donut).\n\nThe group of features in a relation are called *members*. In the sidebar, you can\nsee which relations a feature is a member of, and click on a relation there\nto select the it. When the relation is selected, you can see all of its\nmembers listed in the sidebar and highlighted on the map.\n\nFor the most part, iD will take care of maintaining relations automatically\nwhile you edit. The main thing you should be aware of is that if you delete a\nsection of road to redraw it more accurately, you should make sure that the\nnew section is a member of the same relations as the original.\n\n## Editing Relations\n\nIf you want to edit relations, here are the basics.\n\nTo add a feature to a relation, select the feature, click the \"+\" button in the\n\"All relations\" section of the sidebar, and select or type the name of the relation.\n\nTo create a new relation, select the first feature that should be a member,\nclick the \"+\" button in the \"All relations\" section, and select \"New relation...\".\n\nTo remove a feature from a relation, select the feature and click the trash\nbutton next to the relation you want to remove it from.\n\nYou can create multipolygons with holes using the \"Merge\" tool. Draw two areas (inner\nand outer), hold the Shift key and click on each of them to select them both, and then\nclick the \"Merge\" (+) button.\n"
     },
     "intro": {
+        "done": "done",
         "graph": {
             "city_hall": "Three Rivers City Hall",
             "fire_department": "Three Rivers Fire Department",
@@ -789,6 +790,15 @@
             "bin": {
                 "label": "Waste Bin"
             },
+            "blood_components": {
+                "label": "Blood Components",
+                "options": {
+                    "whole": "whole blood",
+                    "plasma": "plasma",
+                    "platelets": "platelets",
+                    "stemcells": "stem cell samples"
+                }
+            },
             "boundary": {
                 "label": "Type"
             },
@@ -862,6 +872,9 @@
             },
             "currency_multi": {
                 "label": "Currency Types"
+            },
+            "cycle_network": {
+                "label": "Network"
             },
             "cycleway": {
                 "label": "Bike Lanes",
@@ -1027,6 +1040,9 @@
             "incline": {
                 "label": "Incline"
             },
+            "indoor": {
+                "label": "Indoor"
+            },
             "information": {
                 "label": "Type"
             },
@@ -1166,6 +1182,39 @@
             },
             "natural": {
                 "label": "Natural"
+            },
+            "network_bicycle": {
+                "label": "Network Type",
+                "placeholder": "Local, Regional, National, International",
+                "options": {
+                    "lcn": "Local",
+                    "rcn": "Regional",
+                    "ncn": "National",
+                    "icn": "International"
+                }
+            },
+            "network_foot": {
+                "label": "Network Type",
+                "placeholder": "Local, Regional, National, International",
+                "options": {
+                    "lwn": "Local",
+                    "rwn": "Regional",
+                    "nwn": "National",
+                    "iwn": "International"
+                }
+            },
+            "network_horse": {
+                "label": "Network Type",
+                "placeholder": "Local, Regional, National, International",
+                "options": {
+                    "lhn": "Local",
+                    "rhn": "Regional",
+                    "nhn": "National",
+                    "ihn": "International"
+                }
+            },
+            "network_road": {
+                "label": "Network"
             },
             "network": {
                 "label": "Network"
@@ -1328,6 +1377,15 @@
             },
             "seasonal": {
                 "label": "Seasonal"
+            },
+            "second_hand": {
+                "label": "Sells Used",
+                "placeholder": "Yes, No, Only",
+                "options": {
+                    "yes": "Yes",
+                    "no": "No",
+                    "only": "Only"
+                }
             },
             "service_rail": {
                 "label": "Service Type",
@@ -1533,13 +1591,45 @@
             }
         },
         "presets": {
-            "address": {
-                "name": "Address",
-                "terms": ""
-            },
             "aerialway": {
                 "name": "Aerialway",
                 "terms": "ski lift,funifor,funitel"
+            },
+            "aeroway": {
+                "name": "Aeroway",
+                "terms": ""
+            },
+            "amenity": {
+                "name": "Amenity",
+                "terms": ""
+            },
+            "highway": {
+                "name": "Highway",
+                "terms": ""
+            },
+            "place": {
+                "name": "Place",
+                "terms": ""
+            },
+            "power": {
+                "name": "Power",
+                "terms": ""
+            },
+            "railway": {
+                "name": "Railway",
+                "terms": ""
+            },
+            "roundabout": {
+                "name": "Roundabout",
+                "terms": ""
+            },
+            "waterway": {
+                "name": "Waterway",
+                "terms": ""
+            },
+            "address": {
+                "name": "Address",
+                "terms": ""
             },
             "aerialway/cable_car": {
                 "name": "Cable Car",
@@ -1577,10 +1667,6 @@
                 "name": "T-bar Lift",
                 "terms": ""
             },
-            "aeroway": {
-                "name": "Aeroway",
-                "terms": ""
-            },
             "aeroway/aerodrome": {
                 "name": "Airport",
                 "terms": "airplane,airport,aerodrome"
@@ -1613,8 +1699,12 @@
                 "name": "Airport terminal",
                 "terms": "airport,aerodrome"
             },
-            "amenity": {
-                "name": "Amenity",
+            "amenity/register_office": {
+                "name": "Register Office",
+                "terms": ""
+            },
+            "amenity/swimming_pool": {
+                "name": "Swimming Pool",
                 "terms": ""
             },
             "amenity/arts_centre": {
@@ -1747,7 +1837,7 @@
             },
             "amenity/fast_food": {
                 "name": "Fast Food",
-                "terms": "restaurant"
+                "terms": "restaurant,takeaway"
             },
             "amenity/ferry_terminal": {
                 "name": "Ferry Terminal",
@@ -1877,10 +1967,6 @@
                 "name": "Recycling",
                 "terms": "can,bottle,garbage,scrap,trash"
             },
-            "amenity/register_office": {
-                "name": "Register Office",
-                "terms": ""
-            },
             "amenity/restaurant": {
                 "name": "Restaurant",
                 "terms": "bar,breakfast,cafe,café,canteen,coffee,dine,dining,dinner,drive-in,eat,grill,lunch,table"
@@ -1916,10 +2002,6 @@
             "amenity/studio": {
                 "name": "Studio",
                 "terms": "recording,radio,television"
-            },
-            "amenity/swimming_pool": {
-                "name": "Swimming Pool",
-                "terms": ""
             },
             "amenity/taxi": {
                 "name": "Taxi Stand",
@@ -2013,6 +2095,10 @@
                 "name": "Barrier",
                 "terms": ""
             },
+            "barrier/entrance": {
+                "name": "Entrance",
+                "terms": ""
+            },
             "barrier/block": {
                 "name": "Block",
                 "terms": ""
@@ -2035,10 +2121,6 @@
             },
             "barrier/ditch": {
                 "name": "Trench",
-                "terms": ""
-            },
-            "barrier/entrance": {
-                "name": "Entrance",
                 "terms": ""
             },
             "barrier/fence": {
@@ -2085,16 +2167,24 @@
                 "name": "Building",
                 "terms": ""
             },
+            "building/bunker": {
+                "name": "Bunker",
+                "terms": ""
+            },
+            "building/entrance": {
+                "name": "Entrance/Exit",
+                "terms": ""
+            },
+            "building/train_station": {
+                "name": "Train Station",
+                "terms": ""
+            },
             "building/apartments": {
                 "name": "Apartments",
                 "terms": ""
             },
             "building/barn": {
                 "name": "Barn",
-                "terms": ""
-            },
-            "building/bunker": {
-                "name": "Bunker",
                 "terms": ""
             },
             "building/cabin": {
@@ -2131,10 +2221,6 @@
             },
             "building/dormitory": {
                 "name": "Dormitory",
-                "terms": ""
-            },
-            "building/entrance": {
-                "name": "Entrance/Exit",
                 "terms": ""
             },
             "building/garage": {
@@ -2213,10 +2299,6 @@
                 "name": "Row Houses",
                 "terms": "home,terrace,brownstone,family,residence,dwelling"
             },
-            "building/train_station": {
-                "name": "Train Station",
-                "terms": ""
-            },
             "building/university": {
                 "name": "University Building",
                 "terms": "college"
@@ -2228,6 +2310,22 @@
             "craft": {
                 "name": "Craft",
                 "terms": ""
+            },
+            "craft/jeweler": {
+                "name": "Jeweler",
+                "terms": ""
+            },
+            "craft/locksmith": {
+                "name": "Locksmith",
+                "terms": ""
+            },
+            "craft/optician": {
+                "name": "Optician",
+                "terms": ""
+            },
+            "craft/tailor": {
+                "name": "Tailor",
+                "terms": "clothes,suit"
             },
             "craft/basket_maker": {
                 "name": "Basket Maker",
@@ -2301,24 +2399,12 @@
                 "name": "Insulator",
                 "terms": ""
             },
-            "craft/jeweler": {
-                "name": "Jeweler",
-                "terms": ""
-            },
             "craft/key_cutter": {
                 "name": "Key Cutter",
                 "terms": ""
             },
-            "craft/locksmith": {
-                "name": "Locksmith",
-                "terms": ""
-            },
             "craft/metal_construction": {
                 "name": "Metal Construction",
-                "terms": ""
-            },
-            "craft/optician": {
-                "name": "Optician",
                 "terms": ""
             },
             "craft/painter": {
@@ -2385,10 +2471,6 @@
                 "name": "Chimney Sweep",
                 "terms": ""
             },
-            "craft/tailor": {
-                "name": "Tailor",
-                "terms": "clothes,suit"
-            },
             "craft/tiler": {
                 "name": "Tiler",
                 "terms": ""
@@ -2417,13 +2499,37 @@
                 "name": "Embankment",
                 "terms": ""
             },
+            "emergency/designated": {
+                "name": "Emergency Access Designated",
+                "terms": ""
+            },
+            "emergency/destination": {
+                "name": "Emergency Access Destination",
+                "terms": ""
+            },
+            "emergency/no": {
+                "name": "Emergency Access No",
+                "terms": ""
+            },
+            "emergency/official": {
+                "name": "Emergency Access Official",
+                "terms": ""
+            },
+            "emergency/private": {
+                "name": "Emergency Access Private",
+                "terms": ""
+            },
+            "emergency/yes": {
+                "name": "Emergency Access Yes",
+                "terms": ""
+            },
             "emergency/ambulance_station": {
                 "name": "Ambulance Station",
                 "terms": "EMS,EMT,rescue"
             },
             "emergency/defibrillator": {
                 "name": "Defibrillator",
-                "terms": ""
+                "terms": "AED"
             },
             "emergency/fire_hydrant": {
                 "name": "Fire Hydrant",
@@ -2485,9 +2591,9 @@
                 "name": "Water Hazard",
                 "terms": ""
             },
-            "highway": {
-                "name": "Highway",
-                "terms": ""
+            "healthcare/blood_donation": {
+                "name": "Blood Donor Center",
+                "terms": "blood bank,blood donation,blood transfusion,apheresis,plasmapheresis,plateletpheresis,stem cell donation"
             },
             "highway/bridleway": {
                 "name": "Bridle Path",
@@ -2697,6 +2803,10 @@
                 "name": "Land Use",
                 "terms": ""
             },
+            "landuse/farm": {
+                "name": "Farmland",
+                "terms": ""
+            },
             "landuse/allotments": {
                 "name": "Community Garden",
                 "terms": "allotment,garden"
@@ -2719,10 +2829,6 @@
             },
             "landuse/construction": {
                 "name": "Construction",
-                "terms": ""
-            },
-            "landuse/farm": {
-                "name": "Farmland",
                 "terms": ""
             },
             "landuse/farmland": {
@@ -2773,6 +2879,10 @@
                 "name": "Quarry",
                 "terms": ""
             },
+            "landuse/recreation_ground": {
+                "name": "Recreation Ground",
+                "terms": "playing fields"
+            },
             "landuse/residential": {
                 "name": "Residential Area",
                 "terms": ""
@@ -2813,6 +2923,10 @@
                 "name": "Firepit",
                 "terms": "fireplace,campfire"
             },
+            "leisure/fitness_centre/yoga": {
+                "name": "Yoga Studio",
+                "terms": "studio"
+            },
             "leisure/garden": {
                 "name": "Garden",
                 "terms": ""
@@ -2828,6 +2942,10 @@
             "leisure/marina": {
                 "name": "Marina",
                 "terms": "boat"
+            },
+            "leisure/miniature_golf": {
+                "name": "Miniature Golf",
+                "terms": "crazy golf,mini golf,putt-putt"
             },
             "leisure/nature_reserve": {
                 "name": "Nature Reserve",
@@ -2855,6 +2973,10 @@
             },
             "leisure/pitch/basketball": {
                 "name": "Basketball Court",
+                "terms": ""
+            },
+            "leisure/pitch/bowls": {
+                "name": "Bowling Green",
                 "terms": ""
             },
             "leisure/pitch/rugby_league": {
@@ -2925,6 +3047,10 @@
                 "name": "Man Made",
                 "terms": ""
             },
+            "man_made/embankment": {
+                "name": "Embankment",
+                "terms": ""
+            },
             "man_made/adit": {
                 "name": "Adit",
                 "terms": "entrance,underground,mine,cave"
@@ -2943,10 +3069,6 @@
             },
             "man_made/cutline": {
                 "name": "Cut line",
-                "terms": ""
-            },
-            "man_made/embankment": {
-                "name": "Embankment",
                 "terms": ""
             },
             "man_made/flagpole": {
@@ -3161,6 +3283,10 @@
                 "name": "Office",
                 "terms": ""
             },
+            "office/travel_agent": {
+                "name": "Travel Agency",
+                "terms": ""
+            },
             "office/accountant": {
                 "name": "Accountant",
                 "terms": ""
@@ -3241,17 +3367,9 @@
                 "name": "Therapist",
                 "terms": ""
             },
-            "office/travel_agent": {
-                "name": "Travel Agency",
-                "terms": ""
-            },
             "piste": {
                 "name": "Piste/Ski Trail",
                 "terms": "ski,sled,sleigh,snowboard,nordic,downhill,snowmobile"
-            },
-            "place": {
-                "name": "Place",
-                "terms": ""
             },
             "place/city": {
                 "name": "City",
@@ -3297,8 +3415,8 @@
                 "name": "Point",
                 "terms": ""
             },
-            "power": {
-                "name": "Power",
+            "power/sub_station": {
+                "name": "Substation",
                 "terms": ""
             },
             "power/generator": {
@@ -3315,10 +3433,6 @@
             },
             "power/pole": {
                 "name": "Power Pole",
-                "terms": ""
-            },
-            "power/sub_station": {
-                "name": "Substation",
                 "terms": ""
             },
             "power/substation": {
@@ -3339,10 +3453,6 @@
             },
             "public_transport/stop_position": {
                 "name": "Stop Position",
-                "terms": ""
-            },
-            "railway": {
-                "name": "Railway",
                 "terms": ""
             },
             "railway/abandoned": {
@@ -3401,16 +3511,20 @@
                 "name": "Relation",
                 "terms": ""
             },
-            "roundabout": {
-                "name": "Roundabout",
-                "terms": ""
-            },
             "route/ferry": {
                 "name": "Ferry Route",
                 "terms": ""
             },
             "shop": {
                 "name": "Shop",
+                "terms": ""
+            },
+            "shop/fishmonger": {
+                "name": "Fishmonger",
+                "terms": ""
+            },
+            "shop/vacant": {
+                "name": "Vacant Shop",
                 "terms": ""
             },
             "shop/alcohol": {
@@ -3463,7 +3577,7 @@
             },
             "shop/bookmaker": {
                 "name": "Bookmaker",
-                "terms": ""
+                "terms": "betting"
             },
             "shop/books": {
                 "name": "Book Store",
@@ -3487,7 +3601,7 @@
             },
             "shop/car_repair": {
                 "name": "Car Repair Shop",
-                "terms": "auto"
+                "terms": "auto,garage,service"
             },
             "shop/car": {
                 "name": "Car Dealership",
@@ -3496,6 +3610,10 @@
             "shop/carpet": {
                 "name": "Carpet Store",
                 "terms": "rug"
+            },
+            "shop/charity": {
+                "name": "Charity Store",
+                "terms": "thrift,op shop,nonprofit"
             },
             "shop/cheese": {
                 "name": "Cheese Store",
@@ -3585,10 +3703,6 @@
                 "name": "Fashion Store",
                 "terms": ""
             },
-            "shop/fishmonger": {
-                "name": "Fishmonger",
-                "terms": ""
-            },
             "shop/florist": {
                 "name": "Florist",
                 "terms": "flower"
@@ -3615,7 +3729,7 @@
             },
             "shop/gift": {
                 "name": "Gift Shop",
-                "terms": ""
+                "terms": "souvenir"
             },
             "shop/greengrocer": {
                 "name": "Greengrocer",
@@ -3623,7 +3737,7 @@
             },
             "shop/hairdresser": {
                 "name": "Hairdresser",
-                "terms": ""
+                "terms": "barber"
             },
             "shop/hardware": {
                 "name": "Hardware Store",
@@ -3679,7 +3793,7 @@
             },
             "shop/mall": {
                 "name": "Mall",
-                "terms": ""
+                "terms": "shopping"
             },
             "shop/massage": {
                 "name": "Massage Shop",
@@ -3699,7 +3813,7 @@
             },
             "shop/motorcycle": {
                 "name": "Motorcycle Dealership",
-                "terms": ""
+                "terms": "bike"
             },
             "shop/music": {
                 "name": "Music Store",
@@ -3707,7 +3821,7 @@
             },
             "shop/musical_instrument": {
                 "name": "Musical Instrument Store",
-                "terms": ""
+                "terms": "guitar"
             },
             "shop/newsagent": {
                 "name": "Newspaper/Magazine Shop",
@@ -3819,10 +3933,6 @@
             },
             "shop/tyres": {
                 "name": "Tire Store",
-                "terms": ""
-            },
-            "shop/vacant": {
-                "name": "Vacant Shop",
                 "terms": ""
             },
             "shop/vacuum_cleaner": {
@@ -3945,16 +4055,16 @@
                 "name": "Raised Pedestrian Crossing",
                 "terms": "speed table,flat top hump"
             },
+            "type/multipolygon": {
+                "name": "Multipolygon",
+                "terms": ""
+            },
             "type/boundary": {
                 "name": "Boundary",
                 "terms": ""
             },
             "type/boundary/administrative": {
                 "name": "Administrative Boundary",
-                "terms": ""
-            },
-            "type/multipolygon": {
-                "name": "Multipolygon",
                 "terms": ""
             },
             "type/restriction": {
@@ -4051,10 +4161,6 @@
             },
             "vertex": {
                 "name": "Other",
-                "terms": ""
-            },
-            "waterway": {
-                "name": "Waterway",
                 "terms": ""
             },
             "waterway/boatyard": {

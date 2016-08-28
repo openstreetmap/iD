@@ -13,52 +13,35 @@
         <meta name='apple-mobile-web-app-status-bar-style' content='black-translucent' />
 
         <script src='js/lib/d3.v3.js'></script>
-        <script src='js/lib/d3.combobox.js'></script>
-        <script src='js/lib/d3.geo.tile.js'></script>
-        <script src='js/lib/d3.dimensions.js'></script>
-        <script src='js/lib/d3.trigger.js'></script>
-        <script src='js/lib/d3.jsonp.js'></script>
-        <script src='js/lib/d3.keybinding.js'></script>
-        <script src='js/lib/d3.curtain.js'></script>
-        <script src='js/lib/d3.one.js'></script>
-        <script src='js/lib/d3.value.js'></script>
-        <script src='js/lib/d3-compat.js'></script>
-        <script src='js/lib/bootstrap-tooltip.js'></script>
-        <script src='js/lib/id/index.js'></script>
-
-        <script src='data/data_dev.js'></script>
-        <script src='data/introGraph.js'></script>
+        <script src='dist/iD.js'></script>
     </head>
     <body>
         <div id='id-container'></div>
         <script>
-            iD.data.load(function() {
-                id = iD.Context(window)
-                    .presets(iD.data.presets)
-                    .imagery(iD.data.imagery)
-                    .taginfo(iD.services.taginfo.init())
-                    .assetPath('dist/');
+        id = iD.Context(window)
+            .presets(iD.data.presets)
+            .imagery(iD.data.imagery)
+            .taginfo(iD.services.taginfo.init())
+            .assetPath('dist/');
 
-                d3.select('#id-container')
-                    .call(id.ui());
+        d3.select('#id-container')
+            .call(id.ui());
 
-                d3.select('#about-list').insert('li', '.user-list')
-                    .attr('class', 'source-switch')
-                    .call(iD.ui.SourceSwitch(id)
-                        .keys([
-                            {
-                                'url': 'http://www.openstreetmap.org',
-                                'oauth_consumer_key': '5A043yRSEugj4DJ5TljuapfnrflWDte8jTOcWLlT',
-                                'oauth_secret': 'aB3jKq1TRsCOUrfOIZ6oQMEDmv2ptV76PA54NGLL'
-                            },
-                            {
-                                'url': 'http://api06.dev.openstreetmap.org',
-                                'oauth_consumer_key': 'zwQZFivccHkLs3a8Rq5CoS412fE5aPCXDw9DZj7R',
-                                'oauth_secret': 'aMnOOCwExO2XYtRVWJ1bI9QOdqh1cay2UgpbhA6p'
-                            }
-                        ]));
-
-            });
+        d3.select('#about-list').insert('li', '.user-list')
+            .attr('class', 'source-switch')
+            .call(iD.ui.SourceSwitch(id)
+                .keys([
+                    {
+                        'url': 'http://www.openstreetmap.org',
+                        'oauth_consumer_key': '5A043yRSEugj4DJ5TljuapfnrflWDte8jTOcWLlT',
+                        'oauth_secret': 'aB3jKq1TRsCOUrfOIZ6oQMEDmv2ptV76PA54NGLL'
+                    },
+                    {
+                        'url': 'http://api06.dev.openstreetmap.org',
+                        'oauth_consumer_key': 'zwQZFivccHkLs3a8Rq5CoS412fE5aPCXDw9DZj7R',
+                        'oauth_secret': 'aMnOOCwExO2XYtRVWJ1bI9QOdqh1cay2UgpbhA6p'
+                    }
+                ]));
         </script>
     </body>
 </html>

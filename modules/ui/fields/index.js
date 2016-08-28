@@ -1,5 +1,5 @@
 import { check, defaultcheck} from './check';
-import { combo, multiCombo, typeCombo } from './combo';
+import { combo, multiCombo, networkCombo, typeCombo } from './combo';
 import { email, number, tel, text, url } from './input';
 
 import { access } from './access';
@@ -21,6 +21,7 @@ export var fields = {
     combo: combo,
     typeCombo: typeCombo,
     multiCombo: multiCombo,
+    networkCombo: networkCombo,
     cycleway: cycleway,
     text: text,
     url: url,

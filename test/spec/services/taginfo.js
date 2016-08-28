@@ -173,6 +173,48 @@ describe('iD.services.taginfo', function() {
 
             expect(callback).to.have.been.calledWith(null, [{'value':'parking','title':'A place for parking cars'}]);
         });
+
+        it('includes network values with capital letters and some punctuation', function() {
+            var callback = sinon.spy();
+            taginfo.values({key: 'network', query: 'us'}, callback);
+
+            server.respondWith('GET', new RegExp('https://taginfo.openstreetmap.org/api/4/key/values'),
+                [200, { 'Content-Type': 'application/json' },
+                    '{"data":[{"value":"US:TX:FM","description":"Farm to Market Roads in the U.S. state of Texas.", "fraction":0.34},'
+                            + '{"value":"US:KY","description":"Primary and secondary state highways in the U.S. state of Kentucky.", "fraction":0.31},'
+                            + '{"value":"US:US","description":"U.S. routes in the United States.", "fraction":0.19},'
+                            + '{"value":"US:I","description":"Interstate highways in the United States.", "fraction":0.11},'
+                            + '{"value":"US:MD","description":"State highways in the U.S. state of Maryland.", "fraction":0.06}]}']);
+            server.respond();
+
+            expect(callback).to.have.been.calledWith(null, [
+                {'value':'US:TX:FM','title':'Farm to Market Roads in the U.S. state of Texas.'},
+                {'value':'US:KY','title':'Primary and secondary state highways in the U.S. state of Kentucky.'},
+                {'value':'US:US','title':'U.S. routes in the United States.'},
+                {'value':'US:I','title':'Interstate highways in the United States.'},
+                {'value':'US:MD','title':'State highways in the U.S. state of Maryland.'}
+            ]);
+        });
+    });
+
+    describe('#roles', function() {
+        it('calls the given callback with the results of the roles query', function() {
+            var callback = sinon.spy();
+            taginfo.roles({rtype: 'route', query: 's', geometry: 'relation'}, callback);
+
+            server.respondWith('GET', new RegExp('https://taginfo.openstreetmap.org/api/4/relation/roles'),
+                [200, { 'Content-Type': 'application/json' },
+                    '{"data":[{"role":"stop","count_relation_members_fraction":0.1757},' +
+                             '{"role":"south","count_relation_members_fraction":0.0035}]}']);
+            server.respond();
+
+            expect(query(server.requests[0].url)).to.eql(
+                {rtype: 'route', query: 's', page: '1', rp: '25', sortname: 'count_relation_members', sortorder: 'desc'});
+            expect(callback).to.have.been.calledWith(null, [
+                {'value': 'stop', 'title': 'stop'},
+                {'value': 'south', 'title': 'south'}
+            ]);
+        });
     });
 
     describe('#docs', function() {

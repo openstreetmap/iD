@@ -6,7 +6,7 @@ var fs = require('fs'),
     jsonschema = require('jsonschema'),
     fieldSchema = require('./data/presets/schema/field.json'),
     presetSchema = require('./data/presets/schema/preset.json'),
-    suggestions = require('./data/name-suggestions.json');
+    suggestions = require('name-suggestion-index/name-suggestions.json');
 
 function readtxt(f) {
     return fs.readFileSync(f, 'utf8');
@@ -20,15 +20,11 @@ function r(f) {
     return read(__dirname + '/data/' + f);
 }
 
-function rp(f) {
-    return r('presets/' + f);
-}
-
 function validate(file, instance, schema) {
-    var result = jsonschema.validate(instance, schema);
-    if (result.length) {
+    var validationErrors = jsonschema.validate(instance, schema).errors;
+    if (validationErrors.length) {
         console.error(file + ": ");
-        result.forEach(function(error) {
+        validationErrors.forEach(function(error) {
             if (error.property) {
                 console.error(error.property + ' ' + error.message);
             } else {
@@ -62,7 +58,7 @@ function generateFields() {
     var fields = {};
     glob.sync(__dirname + '/data/presets/fields/**/*.json').forEach(function(file) {
         var field = read(file),
-            id = file.match(/presets\/fields\/([^.]*)\.json/)[1];
+            id = stripLeadingUnderscores(file.match(/presets\/fields\/([^.]*)\.json/)[1]);
 
         validate(file, field, fieldSchema);
 
@@ -100,8 +96,8 @@ function suggestionsToPresets(presets) {
                     delete existing[name];
                 }
                 if (!existing[name]) {
-                    tags = _.extend({name: name}, suggestions[key][value][name].tags);
-                    addSuggestion(item, tags, name, count);
+                    tags = _.extend({name: name.replace(/"/g, '')}, suggestions[key][value][name].tags);
+                    addSuggestion(item, tags, name.replace(/"/g, ''), count);
                 }
             }
         }
@@ -116,7 +112,7 @@ function suggestionsToPresets(presets) {
             return;
         }
 
-        presets[category] = {
+        presets[category.replace(/"/g, '')] = {
             tags: parent.tags ? _.merge(tags, parent.tags) : tags,
             name: name,
             icon: parent.icon,
@@ -134,12 +130,16 @@ function suggestionsToPresets(presets) {
     return presets;
 }
 
+function stripLeadingUnderscores(str) {
+    return str.split('/').map(function(s) {return s.replace(/^_/,''); }).join('/');
+}
+
 function generatePresets() {
     var presets = {};
 
     glob.sync(__dirname + '/data/presets/presets/**/*.json').forEach(function(file) {
         var preset = read(file),
-            id = file.match(/presets\/presets\/([^.]*)\.json/)[1];
+            id = stripLeadingUnderscores(file.match(/presets\/presets\/([^.]*)\.json/)[1]);
 
         validate(file, preset, presetSchema);
 
@@ -291,25 +291,3 @@ var presets = {en: {presets: translations}};
 var en = _.merge(core, presets);
 fs.writeFileSync('dist/locales/en.json', JSON.stringify(en.en, null, 4));
 
-fs.writeFileSync('data/data.js', 'iD.data = ' + JSON.stringify({
-    deprecated: r('deprecated.json'),
-    discarded: r('discarded.json'),
-    wikipedia: r('wikipedia.json'),
-    imperial: r('imperial.json'),
-    featureIcons: r('feature-icons.json'),
-    locales: r('locales.json'),
-    en: read('dist/locales/en.json'),
-    suggestions: r('name-suggestions.json'),
-    addressFormats: r('address-formats.json'),
-    phoneFormats: r('phone-formats.json'),
-    driveLeft: r('drive-left.json')
-}) + ';');
-
-fs.writeFileSync('dist/presets.js', 'iD.data.presets = ' + JSON.stringify({
-    presets: rp('presets.json'),
-    defaults: rp('defaults.json'),
-    categories: rp('categories.json'),
-    fields: rp('fields.json')
-}) + ';');
-
-fs.writeFileSync('dist/imagery.js', 'iD.data.imagery = ' + JSON.stringify(r('imagery.json')) + ';');

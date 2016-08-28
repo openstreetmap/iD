@@ -11,6 +11,6 @@
     "fields": [
         "ref",
         "operator",
-        "network"
+        "network_foot"
     ]
 }

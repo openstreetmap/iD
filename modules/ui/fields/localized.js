@@ -1,12 +1,15 @@
 import { t } from '../../util/locale';
+import { tooltip } from '../../util/tooltip';
 import _ from 'lodash';
 import { Detect } from '../../util/detect';
 import { Icon } from '../../svg/index';
 import { SuggestNames } from '../../util/index';
+import { wikipedia as wikipediaService } from '../../services/index';
+import { suggestions, wikipedia as wikipediaData } from '../../../data/index';
 
 export function localized(field, context) {
     var dispatch = d3.dispatch('change', 'input'),
-        wikipedia = iD.services.wikipedia.init(),
+        wikipedia = wikipediaService.init(),
         input, localizedInputs, wikiTitles,
         entity;
 
@@ -23,7 +26,7 @@ export function localized(field, context) {
         if (field.id === 'name') {
             var preset = context.presets().match(entity, context.graph());
             input.call(d3.combobox().fetcher(
-                SuggestNames(preset, iD.data.suggestions)
+                SuggestNames(preset, suggestions)
             ));
         }
 
@@ -40,7 +43,7 @@ export function localized(field, context) {
             .attr('class', 'button-input-action localized-add minor')
             .attr('tabindex', -1)
             .call(Icon('#icon-plus'))
-            .call(bootstrap.tooltip()
+            .call(tooltip()
                 .title(t('translate.translate'))
                 .placement('left'));
 
@@ -80,7 +83,7 @@ export function localized(field, context) {
     function changeLang(d) {
         var lang = d3.select(this).value(),
             t = {},
-            language = _.find(iD.data.wikipedia, function(d) {
+            language = _.find(wikipediaData, function(d) {
                 return d[0].toLowerCase() === lang.toLowerCase() ||
                     d[1].toLowerCase() === lang.toLowerCase();
             });
@@ -115,7 +118,7 @@ export function localized(field, context) {
     function fetcher(value, cb) {
         var v = value.toLowerCase();
 
-        cb(iD.data.wikipedia.filter(function(d) {
+        cb(wikipediaData.filter(function(d) {
             return d[0].toLowerCase().indexOf(v) >= 0 ||
             d[1].toLowerCase().indexOf(v) >= 0 ||
             d[2].toLowerCase().indexOf(v) >= 0;
@@ -201,7 +204,7 @@ export function localized(field, context) {
 
         entry.select('.localized-lang')
             .value(function(d) {
-                var lang = _.find(iD.data.wikipedia, function(lang) { return lang[2] === d.lang; });
+                var lang = _.find(wikipediaData, function(lang) { return lang[2] === d.lang; });
                 return lang ? lang[1] : d.lang;
             });
 

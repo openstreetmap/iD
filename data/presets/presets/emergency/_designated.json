@@ -1,0 +1,14 @@
+{
+    "fields": [
+    ],
+    "geometry": [
+        "line"
+    ],
+    "tags": {
+        "emergency": "designated"
+    },
+    "terms": [],
+    "name": "Emergency Access Designated",
+    "searchable": false,
+    "matchScore": 0.01
+}

@@ -3,6 +3,7 @@ import _ from 'lodash';
 import { DeleteMultiple } from './delete_multiple';
 import { Entity } from '../core/index';
 import { diff3_merge } from '../util/diff3';
+import { discarded } from '../../data/index';
 
 export function MergeRemoteChanges(id, localGraph, remoteGraph, formatUser) {
     var option = 'safe',  // 'safe', 'force_local', 'force_remote'
@@ -149,7 +150,7 @@ export function MergeRemoteChanges(id, localGraph, remoteGraph, formatUser) {
 
     function mergeTags(base, remote, target) {
         function ignoreKey(k) {
-            return _.includes(iD.data.discarded, k);
+            return _.includes(discarded, k);
         }
 
         if (option === 'force_local' || _.isEqual(target.tags, remote.tags)) {

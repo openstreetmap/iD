@@ -1,4 +1,5 @@
 import { t } from '../util/locale';
+import { tooltip } from '../util/tooltip';
 import _ from 'lodash';
 import { displayName, entityOrMemberSelector } from '../util/index';
 import { Icon } from '../svg/index';
@@ -137,7 +138,7 @@ export function Commit(context) {
             });
 
         warningLi.filter(function(d) { return d.tooltip; })
-            .call(bootstrap.tooltip()
+            .call(tooltip()
                 .title(function(d) { return d.tooltip; })
                 .placement('top')
             );

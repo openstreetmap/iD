@@ -3,11 +3,16 @@ import _ from 'lodash';
 import { ChangeTags } from '../../actions/index';
 import { Detect } from '../../util/detect';
 import { Icon } from '../../svg/index';
+import { wikipedia as wikipediaData } from '../../../data/index';
+import {
+    wikipedia as wikipediaService,
+    wikidata as wikidataService
+} from '../../services/index';
 
 export function wikipedia(field, context) {
     var dispatch = d3.dispatch('change'),
-        wikipedia = iD.services.wikipedia.init(),
-        wikidata = iD.services.wikidata.init(),
+        wikipedia = wikipediaService.init(),
+        wikidata = wikidataService.init(),
         link, entity, lang, title;
 
     function wiki(selection) {
@@ -15,7 +20,7 @@ export function wikipedia(field, context) {
             .fetcher(function(value, cb) {
                 var v = value.toLowerCase();
 
-                cb(iD.data.wikipedia.filter(function(d) {
+                cb(wikipediaData.filter(function(d) {
                     return d[0].toLowerCase().indexOf(v) >= 0 ||
                         d[1].toLowerCase().indexOf(v) >= 0 ||
                         d[2].toLowerCase().indexOf(v) >= 0;
@@ -44,7 +49,7 @@ export function wikipedia(field, context) {
             .attr('type', 'text')
             .attr('class', 'wiki-lang')
             .attr('placeholder', t('translate.localized_translation_language'))
-            .value('English');
+            .value(language()[1]);
 
         lang
             .call(langcombo)
@@ -78,7 +83,7 @@ export function wikipedia(field, context) {
         var value = lang.value().toLowerCase();
         var locale = Detect().locale.toLowerCase();
         var localeLanguage;
-        return _.find(iD.data.wikipedia, function(d) {
+        return _.find(wikipediaData, function(d) {
             if (d[2] === locale) localeLanguage = d;
             return d[0].toLowerCase() === value ||
                 d[1].toLowerCase() === value ||
@@ -98,7 +103,7 @@ export function wikipedia(field, context) {
     function change(skipWikidata) {
         var value = title.value(),
             m = value.match(/https?:\/\/([-a-z]+)\.wikipedia\.org\/(?:wiki|\1-[-a-z]+)\/([^#]+)(?:#(.+))?/),
-            l = m && _.find(iD.data.wikipedia, function(d) { return m[1] === d[2]; }),
+            l = m && _.find(wikipediaData, function(d) { return m[1] === d[2]; }),
             anchor,
             syncTags = {};
 
@@ -162,7 +167,7 @@ export function wikipedia(field, context) {
     wiki.tags = function(tags) {
         var value = tags[field.key] || '',
             m = value.match(/([^:]+):([^#]+)(?:#(.+))?/),
-            l = m && _.find(iD.data.wikipedia, function(d) { return m[1] === d[2]; }),
+            l = m && _.find(wikipediaData, function(d) { return m[1] === d[2]; }),
             anchor = m && m[3];
 
         // value in correct format

@@ -5,13 +5,13 @@ describe('iD.ui.confirm', function () {
     afterEach(function() { elem.remove(); });
 
     it('can be instantiated', function () {
-        var confirm = iD.ui.confirm(elem);
+        var confirm = iD.ui.uiconfirm(elem);
         expect(confirm).to.be.ok;
         happen.keydown(document, {keyCode: 27}); // dismiss
     });
 
     it('can be dismissed', function (done) {
-        var confirm = iD.ui.confirm(elem);
+        var confirm = iD.ui.uiconfirm(elem);
         happen.click(confirm.select('button').node());
         window.setTimeout(function() {
             expect(confirm.node().parentNode).to.be.null;

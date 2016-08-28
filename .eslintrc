@@ -8,8 +8,7 @@
         "eslint:recommended"
     ],
     "globals": {
-        "d3": false,
-        "bootstrap": false
+        "d3": false
     },
     "parserOptions": {
         "ecmaVersion": 6,
@@ -50,7 +49,7 @@
         "no-shadow": "off",
         "no-shadow-restricted-names": "error",
         "no-throw-literal": "error",
-        "no-undef": "warn",   // To catch uses of iD global - TODO remove
+        "no-undef": "error",
         "no-unneeded-ternary": "error",
         "no-unused-expressions": "error",
         "no-unexpected-multiline": "error",

@@ -1,32 +1,108 @@
 export function lanes(field, context) {
     var dispatch = d3.dispatch('change'),
+        LANE_WIDTH = 40,
+        LANE_HEIGHT = 200,
         wayID,
-        laneData;
+        lanesData;
 
     function lanes(selection) {
-        // if form field is hidden or has detached from dom, clean up.
+        lanesData = context.entity(wayID).lanes();
+
         if (!d3.select('.inspector-wrap.inspector-hidden').empty() || !selection.node().parentNode) {
             selection.call(lanes.off);
             return;
         }
 
-        laneData = context.entity(wayID).lanes();
-
         var wrap = selection.selectAll('.preset-input-wrap')
             .data([0]);
 
-        var enter = wrap.enter()
+        wrap.enter()
             .append('div')
             .attr('class', 'preset-input-wrap');
 
+        var surface =  wrap.selectAll('.surface')
+            .data([0]);
+
+        var d = wrap.dimensions();
+        var freeSpace = d[0] - lanesData.lanes.length * LANE_WIDTH * 1.5 + LANE_WIDTH * 0.5;
+
+        surface.enter()
+            .append('svg')
+            .attr('width', d[0])
+            .attr('height', 300)
+            .attr('class', 'surface');
+
+        var lanesSelection = surface.selectAll('.lanes')
+            .data([0]);
+
+        lanesSelection.enter()
+            .append('g')
+            .attr('class', 'lanes');
+
+        lanesSelection
+            .attr('transform', function () {
+                return 'translate(' + (freeSpace / 2) + ', 0)';
+            });
+
+        var lane = lanesSelection.selectAll('.lane')
+           .data(lanesData.lanes);
+
+        var enter = lane.enter()
+            .append('g')
+            .attr('class', 'lane');
+
         enter
-            .append('div')
-            .attr('class', 'lane-count')
-            .append('span');
+            .append('g')
+            .append('rect')
+            .attr('y', 50)
+            .attr('width', LANE_WIDTH)
+            .attr('height', LANE_HEIGHT);
 
-        selection.selectAll('.lane-count')
-          .text(laneData.tagged.lanes.count || laneData.defaults.lanes.count);
+        enter
+            .append('g')
+            .attr('class', 'forward')
+            .append('text')
+            .attr('y', 40)
+            .attr('x', 14)
+            .text('▲');
 
+        enter
+            .append('g')
+            .attr('class', 'bothways')
+            .append('text')
+            .attr('y', 40)
+            .attr('x', 14)
+            .text('▲▼');
+
+        enter
+            .append('g')
+            .attr('class', 'backward')
+            .append('text')
+            .attr('y', 40)
+            .attr('x', 14)
+            .text('▼');
+
+        lane.exit().remove();
+
+        lane
+            .attr('transform', function(d) {
+                return 'translate(' + (LANE_WIDTH * d.index * 1.5) + ', 0)';
+            });
+
+        lane.select('.forward')
+            .style('visibility', function(d) {
+                return d.direction === 'forward' ? 'visible' : 'hidden';
+            });
+
+        lane.select('.bothways')
+            .style('visibility', function(d) {
+                return d.direction === 'bothways' ? 'visible' : 'hidden';
+            });
+
+        lane.select('.backward')
+            .style('visibility', function(d) {
+                return d.direction === 'backward' ? 'visible' : 'hidden';
+            });
     }
 
 

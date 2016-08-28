@@ -10,6 +10,14 @@ export function SelectionList(context, selectedIDs) {
         context.enter(Select(context, [entity.id]).suppressMenu(true));
     }
 
+    function deselectEntity(entity) {
+        d3.event.stopPropagation();
+        var index = selectedIDs.indexOf(entity.id);
+        if (index > -1) {
+            selectedIDs.splice(index, 1);
+        }
+        context.enter(Select(context, selectedIDs).suppressMenu(true));
+    }
 
     function selectionList(selection) {
         selection.classed('selection-list-pane', true);
@@ -37,13 +45,21 @@ export function SelectionList(context, selectedIDs) {
             var items = list.selectAll('.feature-list-item')
                 .data(entities, Entity.key);
 
-            var enter = items.enter().append('button')
+            var enter = items.enter().append('div')
                 .attr('class', 'feature-list-item')
                 .on('click', selectEntity);
 
             // Enter
-            var label = enter.append('div')
-                .attr('class', 'label')
+            var label = enter.append('button')
+                .attr('class', 'label');
+
+            enter.append('button')
+                .attr('class', 'close')
+                .on('click', deselectEntity)
+                .call(Icon('#icon-close'));
+
+            label.append('span')
+                .attr('class', 'entity-geom-icon')
                 .call(Icon('', 'pre-text'));
 
             label.append('span')
@@ -53,7 +69,7 @@ export function SelectionList(context, selectedIDs) {
                 .attr('class', 'entity-name');
 
             // Update
-            items.selectAll('use')
+            items.selectAll('.entity-geom-icon use')
                 .attr('href', function() {
                     var entity = this.parentNode.parentNode.__data__;
                     return '#icon-' + context.geometry(entity.id);

@@ -52,20 +52,6 @@ http://wiki.openstreetmap.org/wiki/Relation:restriction
 * Paths with intersecting boundaries (invalid geometries)
 * Nodes with tags that repeat what the way says
 
-## Code Layout
-
-This follows a similar layout to d3: each module of d3 has a file with its exact
-name, like
-
-```javascript
-// format.js
-
-iD.format = {};
-```
-
-And the parts of that module are in separate files that implement `iD.format.XML`
-and so on.
-
 ## The Graph
 
 The data model of OSM is something like
@@ -143,7 +129,7 @@ be storing much more.
 
 We also need to worry about **memory leaks**, which have been a big problem
 in Potlatch 2. Storing OSM data and versions leads to a lot of object-referencing
-in Javascript.
+in JavaScript.
 
 ## Connection, Graph, Map
 

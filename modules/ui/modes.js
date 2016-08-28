@@ -1,4 +1,5 @@
 import _ from 'lodash';
+import { tooltip } from '../util/tooltip';
 import { AddArea, AddLine, AddPoint, Browse } from '../modes/index';
 import { Icon } from '../svg/index';
 import { tooltipHtml } from './tooltipHtml';
@@ -27,7 +28,7 @@ export function Modes(context) {
                    context.enter(mode);
                }
            })
-           .call(bootstrap.tooltip()
+           .call(tooltip()
                .placement('bottom')
                .html(true)
                .title(function(mode) {

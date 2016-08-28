@@ -25,7 +25,7 @@ What happened instead?
 You can drag the image file onto the GitHub issue and it will be included with your bug report.
 * Please keep bug reports professional and straightforward: trust us, we share your dismay at software breaking.
 * If you can, [enable web developer extensions](http://debugbrowser.com/) and report the
-Javascript error message.
+JavaScript error message.
 
 When in doubt, be over-descriptive of the bug and how you discovered it.
 
@@ -109,7 +109,9 @@ documents in [core.yaml](/data/core.yaml). The documentation
 is in the `help` section (currently starting at line 258). The first line
 of each new section of documentation should be of the form
 
-    # GPS
+```markdown
+# GPS
+```
 
 This will be used for navigation and as its title in iD. Documentation is
 shown in alphabetical order, so most documentation is prefixed with `02-` and
@@ -123,22 +125,23 @@ Presets save time for iD users by automatically showing them the tags they are
 likely to add for a given feature. They are stored in `data/presets/presets`. If
 you're going to update the presets, [review the Presets README](/data/presets/README.md).
 
-## Javascript
+## JavaScript
 
-We use the [Airbnb style for Javascript](https://github.com/airbnb/javascript) with
+We use the [Airbnb style for JavaScript](https://github.com/airbnb/javascript) with
 only one difference:
 
-**4 space soft tabs always for Javascript, not 2.**
+**4 space soft tabs always for JavaScript, not 2.**
 
 No aligned `=`, no aligned arguments, spaces are either indents or the 1
 space between expressions. No hard tabs, ever.
 
-Javascript code should pass through [ESLint](http://eslint.org/) with no
-warnings.
+JavaScript code should pass through [ESLint](http://eslint.org/) with no
+warnings. iD uses [ES6 modules](http://exploringjs.com/es6/ch_modules.html) to
+handle connect code together, so we support `import` and `export` constructs.
 
 ## HTML
 
-There isn't much HTML in iD, but what there is is similar to JS: 4 spaces
+There isn't much HTML in iD, but what there is is similar to JavaScript: 4 spaces
 always, indented by the level of the tree:
 
 ```html
@@ -149,7 +152,7 @@ always, indented by the level of the tree:
 
 ## CSS
 
-Just like HTML and Javascript, 4 space soft tabs always.
+Just like HTML and JavaScript, 4 space soft tabs always.
 
 ```css
 .radial-menu-tooltip {

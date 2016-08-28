@@ -238,6 +238,19 @@
         "type": "check",
         "label": "Waste Bin"
     },
+    "blood_components": {
+        "key": "blood:",
+        "type": "multiCombo",
+        "label": "Blood Components",
+        "strings": {
+            "options": {
+                "whole": "whole blood",
+                "plasma": "plasma",
+                "platelets": "platelets",
+                "stemcells": "stem cell samples"
+            }
+        }
+    },
     "boundary": {
         "key": "boundary",
         "type": "combo",
@@ -351,6 +364,11 @@
         "key": "currency:",
         "type": "multiCombo",
         "label": "Currency Types"
+    },
+    "cycle_network": {
+        "key": "cycle_network",
+        "type": "networkCombo",
+        "label": "Network"
     },
     "cycleway": {
         "keys": [
@@ -618,6 +636,11 @@
         "type": "combo",
         "label": "Incline"
     },
+    "indoor": {
+        "key": "indoor",
+        "type": "check",
+        "label": "Indoor"
+    },
     "information": {
         "key": "information",
         "type": "typeCombo",
@@ -840,6 +863,53 @@
         "key": "natural",
         "type": "typeCombo",
         "label": "Natural"
+    },
+    "network_bicycle": {
+        "key": "network",
+        "type": "combo",
+        "label": "Network Type",
+        "placeholder": "Local, Regional, National, International",
+        "strings": {
+            "options": {
+                "lcn": "Local",
+                "rcn": "Regional",
+                "ncn": "National",
+                "icn": "International"
+            }
+        }
+    },
+    "network_foot": {
+        "key": "network",
+        "type": "combo",
+        "label": "Network Type",
+        "placeholder": "Local, Regional, National, International",
+        "strings": {
+            "options": {
+                "lwn": "Local",
+                "rwn": "Regional",
+                "nwn": "National",
+                "iwn": "International"
+            }
+        }
+    },
+    "network_horse": {
+        "key": "network",
+        "type": "combo",
+        "label": "Network Type",
+        "placeholder": "Local, Regional, National, International",
+        "strings": {
+            "options": {
+                "lhn": "Local",
+                "rhn": "Regional",
+                "nhn": "National",
+                "ihn": "International"
+            }
+        }
+    },
+    "network_road": {
+        "key": "network",
+        "type": "networkCombo",
+        "label": "Network"
     },
     "network": {
         "key": "network",
@@ -1092,6 +1162,19 @@
         "key": "seasonal",
         "type": "check",
         "label": "Seasonal"
+    },
+    "second_hand": {
+        "key": "second_hand",
+        "type": "combo",
+        "label": "Sells Used",
+        "placeholder": "Yes, No, Only",
+        "strings": {
+            "options": {
+                "yes": "Yes",
+                "no": "No",
+                "only": "Only"
+            }
+        }
     },
     "service_rail": {
         "key": "service",

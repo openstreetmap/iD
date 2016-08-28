@@ -1,5 +1,6 @@
 import _ from 'lodash';
 import { pointInPolygon } from '../../geo/index';
+import { imperial as imperialData } from '../../../data/index';
 
 export function maxspeed(field, context) {
     var dispatch = d3.dispatch('change'),
@@ -10,7 +11,7 @@ export function maxspeed(field, context) {
         input;
 
     var metricValues = [20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120],
-        imperialValues = [20, 25, 30, 35, 40, 45, 50, 55, 65, 70];
+        imperialValues = [5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80];
 
     function maxspeed(selection) {
         combobox = d3.combobox();
@@ -32,7 +33,7 @@ export function maxspeed(field, context) {
         var childNodes = context.graph().childNodes(context.entity(entity.id)),
             loc = childNodes[~~(childNodes.length/2)].loc;
 
-        imperial = _.some(iD.data.imperial.features, function(f) {
+        imperial = _.some(imperialData.features, function(f) {
             return _.some(f.geometry.coordinates, function(d) {
                 return pointInPolygon(loc, d);
             });

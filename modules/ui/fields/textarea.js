@@ -1,4 +1,5 @@
 import { t } from '../../util/locale';
+
 export function textarea(field) {
     var dispatch = d3.dispatch('change'),
         input;

@@ -9,6 +9,8 @@
     "icon": "route",
     "fields": [
         "route",
-        "ref"
+        "ref",
+        "operator",
+        "network"
     ]
 }

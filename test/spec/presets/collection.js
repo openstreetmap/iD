@@ -1,8 +1,4 @@
-/* global locale: true */
-/* eslint no-console: 0 */
-
 describe('iD.presets.Collection', function() {
-
     var p = {
         point: iD.presets.Preset('point', {
             name: 'Point',

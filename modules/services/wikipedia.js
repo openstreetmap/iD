@@ -1,4 +1,5 @@
 import { qsString } from '../util/index';
+import { jsonpRequest } from '../util/jsonp_request';
 
 var wikipedia = {},
     endpoint = 'https://en.wikipedia.org/w/api.php?';
@@ -6,7 +7,7 @@ var wikipedia = {},
 export function init() {
     wikipedia.search = function(lang, query, callback) {
         lang = lang || 'en';
-        d3.jsonp(endpoint.replace('en', lang) +
+        jsonpRequest(endpoint.replace('en', lang) +
             qsString({
                 action: 'query',
                 list: 'search',
@@ -25,7 +26,7 @@ export function init() {
 
     wikipedia.suggestions = function(lang, query, callback) {
         lang = lang || 'en';
-        d3.jsonp(endpoint.replace('en', lang) +
+        jsonpRequest(endpoint.replace('en', lang) +
             qsString({
                 action: 'opensearch',
                 namespace: 0,
@@ -39,7 +40,7 @@ export function init() {
     };
 
     wikipedia.translations = function(lang, title, callback) {
-        d3.jsonp(endpoint.replace('en', lang) +
+        jsonpRequest(endpoint.replace('en', lang) +
             qsString({
                 action: 'query',
                 prop: 'langlinks',

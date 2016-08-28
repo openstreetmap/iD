@@ -1,4 +1,4 @@
-import { t } from '../util/locale';
+import { t, addTranslation, setLocale } from '../util/locale';
 import _ from 'lodash';
 import { Background } from '../renderer/background';
 import { Connection } from './connection';
@@ -6,9 +6,14 @@ import { Detect } from '../util/detect';
 import { Features } from '../renderer/features';
 import { History } from './history';
 import { Map } from '../renderer/map';
+import { Select } from '../modes/select';
 import { RawMercator } from '../geo/raw_mercator';
 import { presets as presetsInit } from '../presets/presets';
 import { init as uiInit } from '../ui/init';
+import { locales, en } from '../../data/index';
+import * as services from '../services/index';
+
+export var areaKeys = {};
 
 export function Context(root) {
     if (!root.locale) {
@@ -16,8 +21,8 @@ export function Context(root) {
             current: function(_) { this._current = _; }
         };
     }
-    root.locale.en = iD.data.en;
-    root.locale.current('en');
+    addTranslation('en', en);
+    setLocale('en');
 
     var dispatch = d3.dispatch('enter', 'exit', 'change'),
         context = {};
@@ -95,7 +100,7 @@ export function Context(root) {
             if (!context.hasEntity(id)) return;
             map.on('drawn.zoomToEntity', null);
             context.on('enter.zoomToEntity', null);
-            context.enter(iD.modes.Select(context, [id]));
+            context.enter(Select(context, [id]));
         });
 
         context.on('enter.zoomToEntity', function() {
@@ -134,7 +139,7 @@ export function Context(root) {
         connection.flush();
         features.reset();
         history.reset();
-        _.each(iD.services, function(service) {
+        _.each(services, function(service) {
             var reset = service().reset;
             if (reset) reset(context);
         });
@@ -259,7 +264,7 @@ export function Context(root) {
     context.presets = function(_) {
         if (!arguments.length) return presets;
         presets.load(_);
-        iD.areaKeys = presets.areaKeys();
+        areaKeys = presets.areaKeys();
         return context;
     };
 
@@ -328,11 +333,11 @@ export function Context(root) {
     };
 
     context.loadLocale = function(cb) {
-        if (locale && locale !== 'en' && iD.data.locales.indexOf(locale) !== -1) {
+        if (locale && locale !== 'en' && locales.indexOf(locale) !== -1) {
             localePath = localePath || context.asset('locales/' + locale + '.json');
             d3.json(localePath, function(err, result) {
-                root.locale[locale] = result;
-                root.locale.current(locale);
+                addTranslation(locale, result);
+                setLocale(locale);
                 cb();
             });
         } else {
@@ -347,7 +352,7 @@ export function Context(root) {
     context.projection = RawMercator();
 
     locale = Detect().locale;
-    if (locale && iD.data.locales.indexOf(locale) === -1) {
+    if (locale && locales.indexOf(locale) === -1) {
         locale = locale.split('-')[0];
     }
 

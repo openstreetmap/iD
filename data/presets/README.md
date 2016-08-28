@@ -1,15 +1,15 @@
 ## Presets
 
-iD uses a simple presets system based on [JSON](http://en.wikipedia.org/wiki/JSON)
-preset definitions and simple structure.
+iD editor preset and field types are defined in [JSON](http://en.wikipedia.org/wiki/JSON)
+files located under the `data/presets` folder of the iD repository.
 
-## Individual Presets
+#### Preset Files
 
-Specific presets are located under `data/presets/presets`. They're organized in a
-directory hierarchy based on OSM key/value pairs. For example, the preset that matches
+Presets are defined in JSON files located under `data/presets/presets`.  They're organized in a
+directory hierarchy based on OSM key/value pairs.  For example, the preset that matches
 the tag `leisure=park` is in the file `data/presets/presets/leisure/park.json`.
 
-## Preset Format
+#### Preset Schema
 
 A basic preset is of the form:
 
@@ -23,8 +23,7 @@ A basic preset is of the form:
     ],
     // The geometry types for which this preset is valid.
     // options are point, area, line, and vertex.
-    // vertexes are points that are parts of lines, like the nodes
-    // in a road
+    // vertexes are points that are parts of lines, like the nodes in a road
     // lines are unclosed ways, and areas are closed ways
     "geometry": [
         "point", "area"
@@ -47,42 +46,174 @@ A basic preset is of the form:
     "name": "Park"
 }
 ```
+The complete JSON schema for presets can be found in [`data/presets/schema/preset.json`](schema/preset.json)
+
+
+#### Preset Properties
+
+##### searchable
+
+Deprecated or generic presets can include the property `"searchable": false`.
+This means that they will be recognized by iD when editing existing data,
+but will not be available as an option when adding new features.
+
+By convention, unsearchable presets have filenames that begin with an underscore
+(e.g. `data/presets/presets/landuse/_farm.json`)
+
 
 ## Fields
 
-Fields are, like presets, defined in JSON structures. A typical field is
+Fields are reusable form elements that can be associated with presets.
+
+#### Field Files
+
+Fields are defined in JSON files located under `data/presets/fields`.
+
+The field files are typically named according to their associated OSM key.
+For example, the field for the tag `access=*` is stored in the file
+`data/presets/fields/access.json`.  Note that there are exceptions to this rule
+for fields that might work differently depending on which preset is active
+(`access_simple.json`, `access_toilets.json`).
+
+Some keys in OSM are namespaced using colons (':').  Namespaced fields
+are nested in folders according to their tag.
+For example, the field for the tag `piste:difficulty=*` is stored in the file
+`data/presets/fields/piste/difficulty.json`.
+
+
+#### Field Schema
 
 ```js
 {
-    "key": "access",
-    "type": "combo"
+    "key": "cuisine",
+    "type": "combo",
+    "label": "Cuisine"
+}
+```
+The complete JSON schema for fields can be found in [`data/presets/schema/field.json`](schema/field.json)
+
+
+#### Field Types
+
+**Text fields**
+* `text` - Basic single line text field
+* `number` - Text field with up/down buttons for entering numbers (e.g. `width=*`)
+* `localized` - Text field with localization abilities (e.g. `name=*`, `name:es=*`, etc.)
+* `tel` - Text field for entering phone numbers (localized for editing location)
+* `email` - Text field for entering email addresses
+* `url` - Text field for entering URLs
+* `textarea` - Multi-line text area (e.g. `description=*`)
+
+**Combo/Dropdown fields**
+* `combo` - Dropdown field for picking one option out of many (e.g. `surface=*`)
+* `typeCombo` - Dropdown field picking a specific type from a generic category key<br/>
+(e.g. `waterway=*`.  If unset, tag will be `waterway=yes`, but dropdown contains options like `stream`, `ditch`, `river`)
+* `multiCombo` - Dropdown field for adding `yes` values to a common multikey<br/>
+(e.g. `recycling:*` -> `recycling:glass=yes`, `recycling:paper=yes`, etc.)
+* `networkCombo` - Dropdown field that helps users pick a route `network` tag (localized for editing location)
+
+**Checkboxes**
+* `check` - 3-state checkbox: `yes`, `no`, unknown (no tag)
+* `defaultcheck` - 2-state checkbox where checked produces `yes` and unchecked produces no tag
+
+**Radio Buttons**
+* `radio` - Multiple choice radio button field
+
+**Special**
+* `access` - Block of dropdowns for defining the `access=*` tags on a highway
+* `address` - Block of text and dropdown fields for entering address information (localized for editing location)
+* `cycleway` - Block of dropdowns for adding `cycleway:left` and `cycleway:right` tags on a highway
+* `maxspeed` - Numeric text field for speed and dropdown for "mph/kph"
+* `restrictions` - Graphical field for editing turn restrictions
+* `wikipedia` - Block of fields for selecting a wiki language and wikipedia page
+
+
+#### Field Properties
+
+##### `key`/`keys`
+
+The `key` property names the OSM key that the field will edit.
+Compound fields like `address` expect an array of keys in the `keys` property.
+
+##### `universal`
+
+If a field definition contains the property `"universal": true`, this field will
+appear in the "Add Field" list for all presets
+
+##### `geometry`
+
+If specified, only show the field for this kind of geometry.  Should contain
+one of `point`, `vertex`, `line`, `area`.
+
+##### `default`
+
+The default value for the field.  For exmaple, the `building_area.json` field
+will automatically add the tag `building=yes` to certain presets that are
+associated with building features (but only if drawn as a closed area).
+
+```js
+{
+    "key": "building",
+    "type": "combo",
+    "default": "yes",
+    "geometry": "area",
+    "label": "Building"
 }
 ```
 
-In which `type` is the fields's type. Valid field types are
+##### `options`
 
-* textarea
-* radio
-* combo
-* address
-* check - a tri-state checkbox: yes, no, or unknown (no tag)
-* defaultcheck - a boolean checkbox where checked produces a `*=yes` tag and
-  unchecked produces no tag
+Combo field types can provide dropdown values in an `options` array.
+The user can pick from any of the options, or type their own value.
 
-The `key` property names the OSM key that the field will edit. Alternatively, for
-compound fields like `address`, you can specify an array of keys in the `keys`
-property.
+```js
+{
+    "key": "diaper",
+    "type": "combo",
+    "label": "Diaper Changing Available",
+    "options": ["yes", "no", "room", "1", "2", "3", "4", "5"]
+}
+```
 
-Each field definition lives in a separate file in `data/presets/fields`. The field
-name (used in the preset `fields` property) is the name of the file (minus the `.json`
-extension).
+##### `strings`
+
+Combo field types can accept name-value pairs in the `strings` property.
+This is helpful when the field has a fixed number of options and you want to be
+able to provide a translateable description of each option.  When using `strings`,
+the user can not type their own value, they must choose one of the given values.
+```js
+{
+    "key": "smoothness",
+    "type": "combo",
+    "label": "Smoothness",
+    "placeholder": "Thin Rollers, Wheels, Off-Road...",
+    "strings": {
+        "options": {
+            "excellent": "Thin Rollers: rollerblade, skateboard",
+            "good": "Thin Wheels: racing bike",
+            "intermediate": "Wheels: city bike, wheelchair, scooter",
+            "bad": "Robust Wheels: trekking bike, car, rickshaw",
+            "very_bad": "High Clearance: light duty off-road vehicle",
+            "horrible": "Off-Road: heavy duty off-road vehicle",
+            "very_horrible": "Specialized off-road: tractor, ATV",
+            "impassable": "Impassable / No wheeled vehicle"
+        }
+    }
+}
+```
+
+If a combo field does not specify `options` or `strings`, the field will fetch
+common tag values from the Taginfo service to use as dropdown values.
+
 
 ## Icons
 
 Preset icons in iD are pulled from the open source map icon set,
 [Maki](http://www.mapbox.com/maki/).
-The icons are identified in iD by the same name as they are on the Maki home. Use those
+
+The icons are identified in iD by the same name as they are on the Maki home.  Use those
 names when identifying the icon to be used for a given preset.
+
 
 ## Building
 
@@ -90,6 +221,7 @@ To build presets, all you need to do is run `make`.
 
 This command will take care of running the build script, which packages all presets
 into one file: `dist/presets.js`, which is included in the packaged iD.js file.
+
 
 ## Custom Presets
 

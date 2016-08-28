@@ -1,4 +1,5 @@
 import { t } from '../util/locale';
+import { tooltip } from '../util/tooltip';
 import _ from 'lodash';
 import { metersToOffset, offsetToMeters } from '../geo/index';
 import { BackgroundSource } from '../renderer/index';
@@ -54,7 +55,7 @@ export function Background(context) {
             selection.each(function(d) {
                 var item = d3.select(this);
                 if (d === previous) {
-                    item.call(bootstrap.tooltip()
+                    item.call(tooltip()
                         .html(true)
                         .title(function() {
                             var tip = '<div>' + t('background.switch') + '</div>';
@@ -63,12 +64,12 @@ export function Background(context) {
                         .placement('top')
                     );
                 } else if (d.description) {
-                    item.call(bootstrap.tooltip()
+                    item.call(tooltip()
                         .title(d.description)
                         .placement('top')
                     );
                 } else {
-                    item.call(bootstrap.tooltip().destroy);
+                    item.call(tooltip().destroy);
                 }
             });
         }
@@ -136,7 +137,7 @@ export function Background(context) {
             enter.filter(function(d) { return d.best(); })
                 .append('div')
                 .attr('class', 'best')
-                .call(bootstrap.tooltip()
+                .call(tooltip()
                     .title(t('background.best_imagery'))
                     .placement('left'))
                 .append('span')
@@ -272,7 +273,7 @@ export function Background(context) {
 
         function toggle() {
             if (d3.event) d3.event.preventDefault();
-            tooltip.hide(button);
+            tooltipBehavior.hide(button);
             setVisible(!button.classed('active'));
         }
 
@@ -313,7 +314,7 @@ export function Background(context) {
 
         var content = selection.append('div')
                 .attr('class', 'fillL map-overlay col3 content hide'),
-            tooltip = bootstrap.tooltip()
+            tooltipBehavior = tooltip()
                 .placement('left')
                 .html(true)
                 .title(tooltipHtml(t('background.description'), key)),
@@ -321,7 +322,7 @@ export function Background(context) {
                 .attr('tabindex', -1)
                 .on('click', toggle)
                 .call(Icon('#icon-layers', 'light'))
-                .call(tooltip),
+                .call(tooltipBehavior),
             shown = false;
 
 
@@ -345,7 +346,7 @@ export function Background(context) {
             })
             .on('click.set-opacity', setOpacity)
             .html('<div class="select-box"></div>')
-            .call(bootstrap.tooltip()
+            .call(tooltip()
                 .placement('left'))
             .append('div')
             .attr('class', 'opacity')
@@ -363,7 +364,7 @@ export function Background(context) {
 
         custom.append('button')
             .attr('class', 'layer-browse')
-            .call(bootstrap.tooltip()
+            .call(tooltip()
                 .title(t('background.custom_button'))
                 .placement('left'))
             .on('click', editCustom)
@@ -406,7 +407,7 @@ export function Background(context) {
 
         var minimapLabel = controls
             .append('label')
-            .call(bootstrap.tooltip()
+            .call(tooltip()
                 .html(true)
                 .title(tooltipHtml(t('background.minimap.tooltip'), '/'))
                 .placement('top')

@@ -1,4 +1,5 @@
 import { t } from '../util/locale';
+import { tooltip } from '../util/tooltip';
 import { Icon } from '../svg/index';
 import { cmd } from './cmd';
 import { tooltipHtml } from './tooltipHtml';
@@ -47,7 +48,7 @@ export function Zoom(context) {
             .attr('tabindex', -1)
             .attr('class', function(d) { return d.id; })
             .on('click.editor', function(d) { d.action(); })
-            .call(bootstrap.tooltip()
+            .call(tooltip()
                 .placement('left')
                 .html(true)
                 .title(function(d) {
