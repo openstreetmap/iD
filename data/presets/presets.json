@@ -5857,6 +5857,9 @@
     },
     "leisure/garden": {
         "icon": "garden",
+        "fields": [
+            "access_simple"
+        ],
         "geometry": [
             "point",
             "vertex",
@@ -6072,7 +6075,8 @@
         "fields": [
             "surface",
             "hoops",
-            "lit"
+            "lit",
+            "access_simple"
         ],
         "geometry": [
             "point",
@@ -6174,7 +6178,8 @@
         "icon": "tennis",
         "fields": [
             "surface",
-            "lit"
+            "lit",
+            "access_simple"
         ],
         "geometry": [
             "point",

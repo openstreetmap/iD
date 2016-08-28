@@ -3,7 +3,8 @@
     "fields": [
         "surface",
         "hoops",
-        "lit"
+        "lit",
+        "access_simple"
     ],
     "geometry": [
         "point",
