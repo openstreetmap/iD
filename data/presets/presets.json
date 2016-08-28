@@ -4251,6 +4251,7 @@
         "name": "Defibrillator"
     },
     "emergency/fire_hydrant": {
+        "icon": "fire-station",
         "fields": [
             "fire_hydrant/type"
         ],
