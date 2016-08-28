@@ -418,6 +418,11 @@
             }
         }
     },
+    "date": {
+        "key": "date",
+        "type": "check",
+        "label": "Date"
+    },
     "delivery": {
         "key": "delivery",
         "type": "check",
@@ -452,6 +457,17 @@
             "3",
             "4",
             "5"
+        ]
+    },
+    "display": {
+        "key": "display",
+        "type": "combo",
+        "label": "Display",
+        "options": [
+            "analog",
+            "digital",
+            "sundial",
+            "unorthodox"
         ]
     },
     "dock": {
@@ -1391,6 +1407,11 @@
         "type": "check",
         "label": "Supervised"
     },
+    "support": {
+        "key": "support",
+        "type": "combo",
+        "label": "Support"
+    },
     "surface": {
         "key": "surface",
         "type": "combo",
@@ -1488,6 +1509,18 @@
         "key": "vending",
         "type": "combo",
         "label": "Type of Goods"
+    },
+    "visibility": {
+        "key": "visibility",
+        "type": "combo",
+        "label": "Visibility",
+        "strings": {
+            "options": {
+                "house": "Up to 5m (16ft)",
+                "street": "5 to 20m (16 to 65ft)",
+                "area": "Over 20m (65ft)"
+            }
+        }
     },
     "water_point": {
         "key": "water_point",

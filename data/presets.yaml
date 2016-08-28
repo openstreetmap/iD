@@ -321,6 +321,9 @@ en:
         types:
           'cycleway:left': Left side
           'cycleway:right': Right side
+      date:
+        # date=*
+        label: Date
       delivery:
         # delivery=*
         label: Delivery
@@ -336,6 +339,9 @@ en:
       diaper:
         # diaper=*
         label: Diaper Changing Available
+      display:
+        # display=*
+        label: Display
       dock:
         # dock=*
         label: Type
@@ -1040,6 +1046,9 @@ en:
       supervised:
         # supervised=*
         label: Supervised
+      support:
+        # support=*
+        label: Support
       surface:
         # surface=*
         label: Surface
@@ -1122,6 +1131,16 @@ en:
       vending:
         # vending=*
         label: Type of Goods
+      visibility:
+        # visibility=*
+        label: Visibility
+        options:
+          # visibility=area
+          area: Over 20m (65ft)
+          # visibility=house
+          house: Up to 5m (16ft)
+          # visibility=street
+          street: 5 to 20m (16 to 65ft)
       water:
         # water=*
         label: Type

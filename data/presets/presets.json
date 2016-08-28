@@ -906,6 +906,12 @@
         "name": "Clinic"
     },
     "amenity/clock": {
+        "fields": [
+            "support",
+            "display",
+            "visibility",
+            "date"
+        ],
         "geometry": [
             "point",
             "vertex"
