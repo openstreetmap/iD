@@ -980,6 +980,26 @@
         },
         "name": "Courthouse"
     },
+    "amenity/coworking_space": {
+        "icon": "commercial",
+        "fields": [
+            "address",
+            "building_area",
+            "opening_hours"
+        ],
+        "geometry": [
+            "point",
+            "area"
+        ],
+        "terms": [
+            "coworking",
+            "office"
+        ],
+        "tags": {
+            "amenity": "coworking_space"
+        },
+        "name": "Coworking Space"
+    },
     "amenity/dentist": {
         "icon": "dentist",
         "fields": [

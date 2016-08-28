@@ -1368,6 +1368,11 @@ en:
         # amenity=courthouse
         name: Courthouse
         terms: '<translate with synonyms or related terms for ''Courthouse'', separated by commas>'
+      amenity/coworking_space:
+        # amenity=coworking_space
+        name: Coworking Space
+        # 'terms: coworking,office'
+        terms: '<translate with synonyms or related terms for ''Coworking Space'', separated by commas>'
       amenity/dentist:
         # amenity=dentist
         name: Dentist
