@@ -12309,6 +12309,41 @@
         ]
     },
     {
+        "name": "IBGE Distrito Federal + Mapbox Satellite",
+        "type": "tms",
+        "description": "Addresses data from IBGE on top of Mapbox Satellite imagery",
+        "terms_url": "http://www.mapbox.com/about/maps/",
+        "template": "https://api.mapbox.com/styles/v1/wille/cirnnxni1000jg8nfppc8g7pm/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1Ijoid2lsbGUiLCJhIjoicFNVWk5VWSJ9.hluCd0YGvYHNlFi_utWe2g",
+        "scaleExtent": [
+            0,
+            19
+        ],
+        "polygon": [
+          [
+            [
+              -48.2444,
+              -16.0508
+            ],
+            [
+              -48.2444,
+              -15.5005
+            ],
+            [
+              -47.5695,
+              -15.5005
+            ],
+            [
+              -47.5695,
+              -16.0508
+            ],
+            [
+              -48.2444,
+              -16.0508
+            ]
+          ]
+        ]
+    },
+    {
         "name": "IBGE Mapa de Setores Urbanos",
         "type": "tms",
         "template": "http://{switch:a,b,c}.tiles.mapbox.com/v4/tmpsantos.hgda0m6h/{zoom}/{x}/{y}.png?access_token=pk.eyJ1Ijoib3BlbnN0cmVldG1hcCIsImEiOiJncjlmd0t3In0.DmZsIeOW-3x-C5eX-wAqTw",
