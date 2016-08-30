@@ -27,7 +27,8 @@ function build() {
     cache = bundle;
     bundle.write({
       format: 'iife',
-      dest: 'dist/iD.js'
+      dest: 'dist/iD.js',
+      sourceMap: true
     });
     building = false;
   });
