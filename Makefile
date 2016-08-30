@@ -34,7 +34,7 @@ $(BUILDJS_TARGETS): $(BUILDJS_SOURCES) build.js
 	node build.js
 
 dist/iD.js: $(BUILDJS_TARGETS)
-	./node_modules/.bin/rollup --config=./rollup.config.js --input ./modules/id.js --output dist/iD.js
+	npm run build
 
 dist/iD.min.js: dist/iD.js Makefile
 	@rm -f $@
