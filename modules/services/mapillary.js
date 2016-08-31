@@ -12,8 +12,8 @@ import { utilQsString } from '../util/index';
 
 var mapillary = {},
     apibase = 'https://a.mapillary.com/v2/',
-    viewercss = 'https://npmcdn.com/mapillary-js@1.3.0/dist/mapillary-js.min.css',
-    viewerjs = 'https://npmcdn.com/mapillary-js@1.3.0/dist/mapillary-js.min.js',
+    viewercss = 'https://unpkg.com/mapillary-js@1.3.0/dist/mapillary-js.min.css',
+    viewerjs = 'https://unpkg.com/mapillary-js@1.3.0/dist/mapillary-js.min.js',
     clientId = 'NzNRM2otQkR2SHJzaXJmNmdQWVQ0dzo1ZWYyMmYwNjdmNDdlNmVi',
     maxResults = 1000,
     maxPages = 10,
