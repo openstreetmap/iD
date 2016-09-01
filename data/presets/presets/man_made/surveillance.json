@@ -3,6 +3,9 @@
     "geometry": [
         "point"
     ],
+    "terms": [
+        "cctv"
+    ],
     "tags": {
         "man_made": "surveillance"
     },
