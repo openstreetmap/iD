@@ -31,6 +31,8 @@ function build() {
       sourceMap: true
     });
     building = false;
+  }, function(err) {
+    console.error(err);
   });
 }
 
