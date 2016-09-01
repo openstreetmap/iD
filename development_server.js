@@ -32,6 +32,7 @@ function build() {
     });
     building = false;
   }, function(err) {
+    building = false;
     console.error(err);
   });
 }
