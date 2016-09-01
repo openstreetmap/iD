@@ -38,7 +38,7 @@ function build() {
 
 if (process.argv[2] === 'develop') {
     build();
-    gaze('modules/**.js', function(err, watcher) {
+    gaze('modules/**/**.js', function(err, watcher) {
         watcher.on('all', function() {
             build();
         });

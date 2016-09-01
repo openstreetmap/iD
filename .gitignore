@@ -4,5 +4,6 @@ node_modules
 npm-debug.log
 dist/*.js
 dist/*.css
+dist/*.map
 dist/img/*.svg
 data/data.js
