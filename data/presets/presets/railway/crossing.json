@@ -4,15 +4,16 @@
         "vertex"
     ],
     "tags": {
-        "railway": "level_crossing"
+        "railway": "crossing"
     },
     "terms": [
         "crossing",
+        "pedestrian crossing",
         "railroad crossing",
         "level crossing",
         "grade crossing",
-        "road through railroad",
+        "path through railroad",
         "train crossing"
     ],
-    "name": "Railway Crossing (Road)"
+    "name": "Railway Crossing (Path)"
 }
