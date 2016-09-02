@@ -1,29 +1,69 @@
-var fs = require('fs'),
-    path = require('path'),
-    glob = require('glob'),
-    YAML = require('js-yaml'),
-    _ = require('lodash'),
-    jsonschema = require('jsonschema'),
-    fieldSchema = require('./data/presets/schema/field.json'),
-    presetSchema = require('./data/presets/schema/preset.json'),
-    suggestions = require('name-suggestion-index/name-suggestions.json');
+/* eslint-disable no-console */
 
-function readtxt(f) {
-    return fs.readFileSync(f, 'utf8');
+var _ = require('lodash');
+var fs = require('fs');
+var path = require('path');
+var glob = require('glob');
+var YAML = require('js-yaml');
+var jsonschema = require('jsonschema');
+
+var fieldSchema = require('./data/presets/schema/field.json');
+var presetSchema = require('./data/presets/schema/preset.json');
+var suggestions = require('name-suggestion-index/name-suggestions.json');
+
+// Translation strings
+var tstrings = {
+    categories: {},
+    fields: {},
+    presets: {}
+};
+
+
+// Start clean
+unlink('data/presets/categories.json');
+unlink('data/presets/fields.json');
+unlink('data/presets/presets.json');
+unlink('data/presets.yaml');
+unlink('data/taginfo.json');
+unlink('dist/locales/en.json');
+
+var categories = generateCategories();
+var fields = generateFields();
+var presets = generatePresets();
+var translations = generateTranslations(fields, presets);
+var taginfo = generateTaginfo(presets);
+
+// Additional consistency checks
+validateCategoryPresets(categories, presets);
+validatePresetFields(presets, fields);
+
+// Save individual data files
+fs.writeFileSync('data/presets/categories.json', JSON.stringify(categories, null, 4));
+fs.writeFileSync('data/presets/fields.json', JSON.stringify(fields, null, 4));
+fs.writeFileSync('data/presets/presets.json', JSON.stringify(presets, null, 4));
+fs.writeFileSync('data/presets.yaml', translationsToYAML(translations));
+fs.writeFileSync('data/taginfo.json', JSON.stringify(taginfo, null, 4));
+
+// Push changes from data/core.yaml into en.json
+var core = YAML.load(fs.readFileSync('data/core.yaml', 'utf8'));
+var en = _.merge(core, { en: { presets: tstrings }});
+fs.writeFileSync('dist/locales/en.json', JSON.stringify(en.en, null, 4));
+
+process.exit();
+
+
+function unlink(f) {
+    try { fs.unlinkSync(f); } catch (e) { /* noop */ }
 }
 
 function read(f) {
-    return JSON.parse(readtxt(f));
-}
-
-function r(f) {
-    return read(__dirname + '/data/' + f);
+    return JSON.parse(fs.readFileSync(f, 'utf8'));
 }
 
 function validate(file, instance, schema) {
     var validationErrors = jsonschema.validate(instance, schema).errors;
     if (validationErrors.length) {
-        console.error(file + ": ");
+        console.error(file + ': ');
         validationErrors.forEach(function(error) {
             if (error.property) {
                 console.error(error.property + ' ' + error.message);
@@ -35,19 +75,13 @@ function validate(file, instance, schema) {
     }
 }
 
-var translations = {
-    categories: {},
-    fields: {},
-    presets: {}
-};
-
 function generateCategories() {
     var categories = {};
     glob.sync(__dirname + '/data/presets/categories/*.json').forEach(function(file) {
         var field = read(file),
             id = 'category-' + path.basename(file, '.json');
 
-        translations.categories[id] = {name: field.name};
+        tstrings.categories[id] = {name: field.name};
 
         categories[id] = field;
     });
@@ -62,7 +96,7 @@ function generateFields() {
 
         validate(file, field, fieldSchema);
 
-        var t = translations.fields[id] = {
+        var t = tstrings.fields[id] = {
             label: field.label
         };
 
@@ -143,7 +177,7 @@ function generatePresets() {
 
         validate(file, preset, presetSchema);
 
-        translations.presets[id] = {
+        tstrings.presets[id] = {
             name: preset.name,
             terms: (preset.terms || []).join(',')
         };
@@ -155,10 +189,10 @@ function generatePresets() {
 
 }
 
-function generateTranslate(fields, presets) {
-    var translate = _.cloneDeep(translations);
+function generateTranslations(fields, presets) {
+    var translations = _.cloneDeep(tstrings);
 
-    _.forEach(translate.fields, function(field, id) {
+    _.forEach(translations.fields, function(field, id) {
         var f = fields[id];
         if (f.keys) {
             field['label#'] = _.each(f.keys).map(function(key) { return key + '=*'; }).join(', ');
@@ -185,16 +219,54 @@ function generateTranslate(fields, presets) {
         }
     });
 
-    _.forEach(translate.presets, function(preset, id) {
+    _.forEach(translations.presets, function(preset, id) {
         var p = presets[id];
         if (!_.isEmpty(p.tags))
             preset['name#'] = _.toPairs(p.tags).map(function(pair) { return pair[0] + '=' + pair[1]; }).join(', ');
         if (p.terms && p.terms.length)
             preset['terms#'] = 'terms: ' + p.terms.join();
-        preset.terms = "<translate with synonyms or related terms for '" + preset.name + "', separated by commas>";
+        preset.terms = '<translate with synonyms or related terms for \'' + preset.name + '\', separated by commas>';
     });
 
-    return translate;
+    return translations;
+}
+
+function generateTaginfo(presets) {
+    var taginfo = {
+        'data_format': 1,
+        'data_url': 'https://raw.githubusercontent.com/openstreetmap/iD/master/data/taginfo.json',
+        'project': {
+            'name': 'iD Editor',
+            'description': 'Online editor for OSM data.',
+            'project_url': 'https://github.com/openstreetmap/iD',
+            'doc_url': 'https://github.com/openstreetmap/iD/blob/master/data/presets/README.md',
+            'icon_url': 'https://raw.githubusercontent.com/openstreetmap/iD/master/dist/img/logo.png',
+            'keywords': [
+                'editor'
+            ]
+        },
+        'tags': []
+    };
+
+    _.forEach(presets, function(preset) {
+        if (preset.suggestion)
+            return;
+
+        var keys = Object.keys(preset.tags),
+            last = keys[keys.length - 1],
+            tag = { key: last };
+
+        if (!last)
+            return;
+
+        if (preset.tags[last] !== '*') {
+            tag.value = preset.tags[last];
+        }
+
+        taginfo.tags.push(tag);
+    });
+
+    return taginfo;
 }
 
 function validateCategoryPresets(categories, presets) {
@@ -223,71 +295,14 @@ function validatePresetFields(presets, fields) {
     });
 }
 
-// comment keys end with '#' and should sort immediately before their related key.
-function sortKeys(a, b) {
-    return (a === b + '#') ? -1
-        : (b === a + '#') ? 1
-        : (a > b ? 1 : a < b ? -1 : 0);
-}
-
-var categories = generateCategories(),
-    fields = generateFields(),
-    presets = generatePresets(),
-    translate = generateTranslate(fields, presets);
-
-// additional consistency checks
-validateCategoryPresets(categories, presets);
-validatePresetFields(presets, fields);
-
-// Save individual data files
-fs.writeFileSync('data/presets/categories.json', JSON.stringify(categories, null, 4));
-fs.writeFileSync('data/presets/fields.json', JSON.stringify(fields, null, 4));
-fs.writeFileSync('data/presets/presets.json', JSON.stringify(presets, null, 4));
-fs.writeFileSync('data/presets.yaml',
-    YAML.safeDump({en: {presets: translate}}, {sortKeys: sortKeys, lineWidth: -1})
-        .replace(/\'.*#\':/g, '#')
-);
-
-// Write taginfo data
-var taginfo = {
-    "data_format": 1,
-    "data_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/data/taginfo.json",
-    "project": {
-        "name": "iD Editor",
-        "description": "Online editor for OSM data.",
-        "project_url": "https://github.com/openstreetmap/iD",
-        "doc_url": "https://github.com/openstreetmap/iD/blob/master/data/presets/README.md",
-        "icon_url": "https://raw.githubusercontent.com/openstreetmap/iD/master/dist/img/logo.png",
-        "keywords": [
-            "editor"
-        ]
-    },
-    "tags": []
-};
-
-_.forEach(presets, function(preset) {
-    if (preset.suggestion)
-        return;
-
-    var keys = Object.keys(preset.tags),
-        last = keys[keys.length - 1],
-        tag = {key: last};
-
-    if (!last)
-        return;
-
-    if (preset.tags[last] !== '*') {
-        tag.value = preset.tags[last];
+function translationsToYAML(translations) {
+    // comment keys end with '#' and should sort immediately before their related key.
+    function commentFirst(a, b) {
+        return (a === b + '#') ? -1
+            : (b === a + '#') ? 1
+            : (a > b ? 1 : a < b ? -1 : 0);
     }
 
-    taginfo.tags.push(tag);
-});
-
-fs.writeFileSync('data/taginfo.json', JSON.stringify(taginfo, null, 4));
-
-// Push changes from data/core.yaml into en.json
-var core = YAML.load(fs.readFileSync('data/core.yaml', 'utf8'));
-var presets = {en: {presets: translations}};
-var en = _.merge(core, presets);
-fs.writeFileSync('dist/locales/en.json', JSON.stringify(en.en, null, 4));
-
+    return YAML.safeDump({ en: { presets: translations }}, { sortKeys: commentFirst, lineWidth: -1 })
+        .replace(/\'.*#\':/g, '#');
+}
