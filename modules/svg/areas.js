@@ -75,26 +75,31 @@ export function Areas(projection) {
            .filter(filter)
            .data(data.clip, Entity.key);
 
-        clipPaths.enter()
-           .append('clipPath')
-           .attr('class', 'clipPath')
-           .attr('id', function(entity) { return entity.id + '-clippath'; })
-           .append('path');
-
-        clipPaths.selectAll('path')
-           .attr('d', path);
-
         clipPaths.exit()
            .remove();
+
+        var clipPathsEnter = clipPaths.enter()
+           .append('clipPath')
+           .attr('class', 'clipPath')
+           .attr('id', function(entity) { return entity.id + '-clippath'; });
+
+        clipPathsEnter
+           .append('path');
+
+        clipPaths.merge(clipPathsEnter)
+           .selectAll('path')
+           .attr('d', path);
+
 
         var areagroup = surface
             .selectAll('.layer-areas')
             .selectAll('g.areagroup')
             .data(['fill', 'shadow', 'stroke']);
 
-        areagroup.enter()
+        areagroup = areagroup.enter()
             .append('g')
-            .attr('class', function(d) { return 'layer areagroup area-' + d; });
+            .attr('class', function(d) { return 'layer areagroup area-' + d; })
+            .merge(areagroup);
 
         var paths = areagroup
             .selectAll('path')
@@ -118,8 +123,9 @@ export function Areas(projection) {
             }
         }
 
-        paths.enter()
+        paths = paths.enter()
             .insert('path', sortedByArea)
+            .merge(paths)
             .each(function(entity) {
                 var layer = this.parentNode.__data__;
 
@@ -130,9 +136,7 @@ export function Areas(projection) {
                     setPattern.apply(this, arguments);
                 }
             })
-            .call(TagClasses());
-
-        paths
-            .attr('d', path);
+                .call(TagClasses())
+                .attr('d', path);
     };
 }
