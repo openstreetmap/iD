@@ -115,7 +115,7 @@ export function RawTagEditor(context) {
             .attr('title', function(d) { return d.key; })
             .on('blur', keyChange)
             .on('change', keyChange),
-            function(d) { console.log(d, this); return d.key; }
+            function(d) { return d.key; }
         );
 
         getSetValue($items.select('input.value')

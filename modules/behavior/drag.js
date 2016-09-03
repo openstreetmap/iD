@@ -30,7 +30,7 @@ export function drag() {
         filter = null,
         event_, target, surface;
 
-    event.of = function(thiz, argumentz) {
+    function eventOf(thiz, argumentz) {
       return function(e1) {
         var e0 = e1.sourceEvent = d3.event;
         e1.target = drag;
@@ -63,7 +63,7 @@ export function drag() {
 
     function mousedown() {
         target = this;
-        event_ = event.call('of', target, arguments);
+        event_ = eventOf(target, arguments);
         var eventTarget = d3.event.target,
             touchId = d3.event.touches ? d3.event.changedTouches[0].identifier : null,
             offset,
@@ -192,7 +192,7 @@ export function drag() {
     drag.target = function() {
         if (!arguments.length) return target;
         target = arguments[0];
-        event_ = event.call('of', target, Array.prototype.slice.call(arguments, 1));
+        event_ = eventOf(target, Array.prototype.slice.call(arguments, 1));
         return drag;
     };
 

@@ -9,7 +9,6 @@ var http = require('http');
 var gaze = require('gaze');
 var ecstatic = require('ecstatic');
 
-var cache;
 var building = false;
 
 
@@ -51,7 +50,6 @@ function build() {
 
     rollup.rollup({
         entry: './modules/id.js',
-        cache: cache,
         plugins: [
             nodeResolve({
                 jsnext: true, main: true, browser: false
@@ -62,7 +60,6 @@ function build() {
 
     }).then(function (bundle) {
         console.timeEnd('Rebuilt');
-        cache = bundle;
         bundle.write({
             format: 'iife',
             dest: 'dist/iD.js',
