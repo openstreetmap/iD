@@ -15,13 +15,11 @@ export function d3curtain() {
     function curtain(selection) {
         surface = selection.append('svg')
             .attr('id', 'curtain')
-            .styles({
-                'z-index': 1000,
-                'pointer-events': 'none',
-                'position': 'absolute',
-                'top': 0,
-                'left': 0
-            });
+            .style('z-index', 1000)
+            .style('pointer-events', 'none')
+            .style('position', 'absolute')
+            .style('top', 0)
+            .style('left', 0);
 
         darkness = surface.append('path')
             .attr('x', 0)

@@ -72,11 +72,9 @@ export function d3combobox() {
                     .insert('div', ':first-child')
                     .datum(input.node())
                     .attr('class', 'combobox')
-                    .styles({
-                        position: 'absolute',
-                        display: 'block',
-                        left: '0px'
-                    })
+                    .style('position', 'absolute')
+                    .style('display', 'block')
+                    .style('left', '0px')
                     .on('mousedown', function () {
                         // prevent moving focus out of the text field
                         d3.event.preventDefault();
@@ -233,11 +231,10 @@ export function d3combobox() {
             var node = attachTo ? attachTo.node() : input.node(),
                 rect = node.getBoundingClientRect();
 
-            container.styles({
-                'left': rect.left + 'px',
-                'width': rect.width + 'px',
-                'top': rect.height + rect.top + 'px'
-            });
+            container
+                .style('left', rect.left + 'px')
+                .style('width', rect.width + 'px')
+                .style('top', rect.height + rect.top + 'px');
         }
 
         function select(d, i) {

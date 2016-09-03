@@ -123,9 +123,11 @@ export function tooltip() {
         break;
     }
 
-    tip.styles(pos ?
-      {left: ~~pos.x + 'px', top: ~~pos.y + 'px'} :
-      {left: null, top: null});
+    if (pos) {
+      tip.style('left', ~~pos.x + 'px').style('top', ~~pos.y + 'px');
+    } else {
+      tip.style('left', null).style('top', null);
+    }
 
     this.tooltipVisible = true;
   }
