@@ -3,10 +3,10 @@ describe('iD.actions.Circularize', function () {
 
     function isCircular(id, graph) {
         var points = _.map(graph.childNodes(graph.entity(id)), 'loc').map(projection),
-            centroid = d3.geom.polygon(points).centroid(),
+            centroid = d3.polygonCentroid(points),
             radius = iD.geo.euclideanDistance(centroid, points[0]),
             estArea = Math.PI * radius * radius,
-            trueArea = Math.abs(d3.geom.polygon(points).area()),
+            trueArea = Math.abs(d3.polygonArea(points)),
             pctDiff = (estArea - trueArea) / estArea;
 
         return (pctDiff < 0.025);   // within 2.5% of circular area..
@@ -106,7 +106,7 @@ describe('iD.actions.Circularize', function () {
 
         expect(isCircular('-', graph)).to.be.ok;
         points = _.map(graph.childNodes(graph.entity('-')), 'loc').map(projection);
-        centroid = d3.geom.polygon(points).centroid();
+        centroid = d3.polygonCentroid(points);
 
         for (var i = 0; i < points.length - 1; i++) {
             expect(angle(points[i], points[i+1], centroid)).to.be.lte(20);
@@ -116,7 +116,7 @@ describe('iD.actions.Circularize', function () {
     });
 
     function area(id, graph) {
-        return d3.geom.polygon(_.map(graph.childNodes(graph.entity(id)), 'loc')).area();
+        return d3.polygonArea(_.map(graph.childNodes(graph.entity(id)), 'loc'));
     }
 
     it('leaves clockwise ways clockwise', function () {

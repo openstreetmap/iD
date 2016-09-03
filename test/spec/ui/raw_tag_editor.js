@@ -37,7 +37,7 @@ describe('iD.ui.RawTagEditor', function() {
     });
 
     it('adds tags when clicking the add button', function (done) {
-        element.selectAll('button.add-tag').trigger('click');
+        iD.util.triggerEvent(element.selectAll('button.add-tag'), 'click');
         setTimeout(function() {
             expect(element.select('.tag-list').selectAll('input')[0][2].value).to.be.empty;
             expect(element.select('.tag-list').selectAll('input')[0][3].value).to.be.empty;
@@ -50,7 +50,7 @@ describe('iD.ui.RawTagEditor', function() {
             expect(tags).to.eql({highway: undefined});
             done();
         });
-        element.selectAll('button.remove').trigger('click');
+        iD.util.triggerEvent(element.selectAll('button.remove'), 'click');
     });
 
     it('adds tags when pressing the TAB key on last input.value', function (done) {
