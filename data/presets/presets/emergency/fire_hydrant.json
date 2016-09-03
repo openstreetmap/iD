@@ -1,4 +1,5 @@
 {
+    "icon": "fire-station",
     "fields": [
         "fire_hydrant/type"
     ],

@@ -914,6 +914,9 @@
                     }
                 }
             },
+            "date": {
+                "label": "Date"
+            },
             "delivery": {
                 "label": "Delivery"
             },
@@ -928,6 +931,9 @@
             },
             "diaper": {
                 "label": "Diaper Changing Available"
+            },
+            "display": {
+                "label": "Display"
             },
             "dock": {
                 "label": "Type"
@@ -1499,6 +1505,9 @@
             "supervised": {
                 "label": "Supervised"
             },
+            "support": {
+                "label": "Support"
+            },
             "surface": {
                 "label": "Surface"
             },
@@ -1563,6 +1572,14 @@
             },
             "vending": {
                 "label": "Type of Goods"
+            },
+            "visibility": {
+                "label": "Visibility",
+                "options": {
+                    "house": "Up to 5m (16ft)",
+                    "street": "5 to 20m (16 to 65ft)",
+                    "area": "Over 20m (65ft)"
+                }
             },
             "water_point": {
                 "label": "Water Point"
@@ -1814,6 +1831,10 @@
             "amenity/courthouse": {
                 "name": "Courthouse",
                 "terms": ""
+            },
+            "amenity/coworking_space": {
+                "name": "Coworking Space",
+                "terms": "coworking,office"
             },
             "amenity/dentist": {
                 "name": "Dentist",

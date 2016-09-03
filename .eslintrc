@@ -58,6 +58,7 @@
         "no-warning-comments": "warn",
         "no-with": "error",
         "no-use-before-define": ["off", "nofunc"],
+        "radix": ["error", "always"],
         "semi": ["error", "always"],
         "semi-spacing": "error",
         "space-unary-ops": "error",

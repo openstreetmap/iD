@@ -229,6 +229,10 @@
         },
         {
             "key": "amenity",
+            "value": "coworking_space"
+        },
+        {
+            "key": "amenity",
             "value": "dentist"
         },
         {

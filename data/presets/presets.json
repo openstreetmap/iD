@@ -906,6 +906,12 @@
         "name": "Clinic"
     },
     "amenity/clock": {
+        "fields": [
+            "support",
+            "display",
+            "visibility",
+            "date"
+        ],
         "geometry": [
             "point",
             "vertex"
@@ -979,6 +985,26 @@
             "amenity": "courthouse"
         },
         "name": "Courthouse"
+    },
+    "amenity/coworking_space": {
+        "icon": "commercial",
+        "fields": [
+            "address",
+            "building_area",
+            "opening_hours"
+        ],
+        "geometry": [
+            "point",
+            "area"
+        ],
+        "terms": [
+            "coworking",
+            "office"
+        ],
+        "tags": {
+            "amenity": "coworking_space"
+        },
+        "name": "Coworking Space"
     },
     "amenity/dentist": {
         "icon": "dentist",
@@ -4231,6 +4257,7 @@
         "name": "Defibrillator"
     },
     "emergency/fire_hydrant": {
+        "icon": "fire-station",
         "fields": [
             "fire_hydrant/type"
         ],
@@ -5836,6 +5863,9 @@
     },
     "leisure/garden": {
         "icon": "garden",
+        "fields": [
+            "access_simple"
+        ],
         "geometry": [
             "point",
             "vertex",
@@ -6051,7 +6081,8 @@
         "fields": [
             "surface",
             "hoops",
-            "lit"
+            "lit",
+            "access_simple"
         ],
         "geometry": [
             "point",
@@ -6153,7 +6184,8 @@
         "icon": "tennis",
         "fields": [
             "surface",
-            "lit"
+            "lit",
+            "access_simple"
         ],
         "geometry": [
             "point",

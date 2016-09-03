@@ -147,11 +147,11 @@ _.extend(Way.prototype, {
                 break;
         }
 
-        if (this.tags.lanes) metadata.count = parseInt(this.tags.lanes);
+        if (this.tags.lanes) metadata.count = parseInt(this.tags.lanes, 10);
 
         metadata.oneway = this.isOneWay();
 
-        if (parseInt(this.tags.oneway) === -1) {
+        if (parseInt(this.tags.oneway, 10) === -1) {
             metadata.forward = 0;
             metadata.bothways = 0;
             metadata.backward = metadata.count;
@@ -161,12 +161,12 @@ _.extend(Way.prototype, {
             metadata.bothways = 0;
             metadata.backward = 0;
         } else {
-            metadata.bothways = parseInt(this.tags['lanes:both_ways']) > 0 ? 1 : 0;
-            metadata.forward = parseInt(this.tags['lanes:forward']);
-            metadata.backward = parseInt(this.tags['lanes:backward']);
+            metadata.bothways = parseInt(this.tags['lanes:both_ways'], 10) > 0 ? 1 : 0;
+            metadata.forward = parseInt(this.tags['lanes:forward'], 10);
+            metadata.backward = parseInt(this.tags['lanes:backward'], 10);
 
             if (_.isNaN(metadata.forward) && _.isNaN(metadata.backward)) {
-                metadata.forward = parseInt((metadata.count - metadata.bothways) / 2);
+                metadata.forward = (metadata.count - metadata.bothways) / 2;
                 metadata.backward = metadata.count - metadata.bothways - metadata.forward;
             }
             else if (_.isNaN(metadata.forward)) {
