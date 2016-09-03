@@ -35,7 +35,7 @@ export function drag() {
         e1.target = drag;
         d3.customEvent(e1, event.apply, event, [e1.type, thiz, argumentz]);
       };
-    };
+    }
 
     var d3_event_userSelectProperty = prefixCSSProperty('UserSelect'),
         d3_event_userSelectSuppress = d3_event_userSelectProperty ?

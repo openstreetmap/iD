@@ -1,6 +1,5 @@
 import _ from 'lodash';
 import { t } from '../util/locale';
-import { getDimensions } from '../util/dimensions';
 import { AddEntity, AddMidpoint, AddVertex, MoveNode } from '../actions/index';
 import { Browse, Select } from '../modes/index';
 import { Node, Way } from '../core/index';

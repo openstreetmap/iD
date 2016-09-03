@@ -1,6 +1,5 @@
 import * as d3 from 'd3';
 import { rebind } from '../util/rebind';
-import { getDimensions } from '../util/dimensions';
 import { d3keybinding } from '../../js/lib/d3.keybinding.js';
 import { chooseEdge, euclideanDistance } from '../geo/index';
 import { Edit } from './edit';
