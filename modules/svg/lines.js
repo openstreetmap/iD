@@ -61,25 +61,29 @@ export function Lines(projection) {
             .selectAll('g.layergroup')
             .data(d3.range(-10, 11));
 
-        layergroup.enter()
+        layergroup = layergroup.enter()
             .append('g')
-            .attr('class', function(d) { return 'layer layergroup layer' + String(d); });
+            .attr('class', function(d) { return 'layer layergroup layer' + String(d); })
+                .merge(layergroup);
 
 
         var linegroup = layergroup
             .selectAll('g.linegroup')
             .data(['shadow', 'casing', 'stroke']);
 
-        linegroup.enter()
+        linegroup = linegroup.enter()
             .append('g')
-            .attr('class', function(d) { return 'layer linegroup line-' + d; });
+            .attr('class', function(d) { return 'layer linegroup line-' + d; })
+            .merge(linegroup);
 
 
         var lines = linegroup
             .selectAll('path')
             .filter(filter)
             .data(
-                function() { return pathdata[this.parentNode.parentNode.__data__] || []; },
+                function() {
+                    return pathdata[this.parentNode.__data__] || [];
+                },
                 Entity.key
             );
 
@@ -88,12 +92,11 @@ export function Lines(projection) {
         lines.enter()
             .append('path')
             .attr('class', function(d) { return 'way line ' + this.parentNode.__data__ + ' ' + d.id; })
-            .call(TagClasses());
-
-        lines
-            .sort(waystack)
-            .attr('d', getPath)
-            .call(TagClasses().tags(RelationMemberTags(graph)));
+            .call(TagClasses())
+            .merge(lines)
+                .sort(waystack)
+                .attr('d', getPath)
+                .call(TagClasses().tags(RelationMemberTags(graph)));
 
         lines.exit()
             .remove();

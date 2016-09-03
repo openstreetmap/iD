@@ -212,7 +212,7 @@ export function address(field, context) {
         if (isInitialized) {
             updateTags(tags);
         } else {
-            dispatch.call('on', this, 'init', function () {
+            dispatch.on('init', function () {
                 updateTags(tags);
             });
         }

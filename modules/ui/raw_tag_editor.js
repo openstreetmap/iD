@@ -43,8 +43,9 @@ export function RawTagEditor(context) {
         var $list = $wrap.selectAll('.tag-list')
             .data([0]);
 
-        $list.enter().append('ul')
-            .attr('class', 'tag-list');
+        $list = $list.enter().append('ul')
+            .attr('class', 'tag-list')
+            .merge($list);
 
         var $newTag = $wrap.selectAll('.add-tag')
             .data([0]);
@@ -89,6 +90,8 @@ export function RawTagEditor(context) {
 
         // Update
 
+        $items = $items.merge($enter);
+
         $items.order();
 
         $items.each(function(tag) {
@@ -112,7 +115,7 @@ export function RawTagEditor(context) {
             .attr('title', function(d) { return d.key; })
             .on('blur', keyChange)
             .on('change', keyChange),
-            function(d) { return d.key; }
+            function(d) { console.log(d, this); return d.key; }
         );
 
         getSetValue($items.select('input.value')
