@@ -26,6 +26,9 @@ export function Points(projection, context) {
             .filter(filter)
             .data(points, Entity.key);
 
+        groups.exit()
+            .remove();
+
         var group = groups.enter()
             .append('g')
             .attr('class', function(d) { return 'node point ' + d.id; })
@@ -43,7 +46,9 @@ export function Points(projection, context) {
             .attr('width', '12px')
             .attr('height', '12px');
 
-        groups.attr('transform', PointTransform(projection))
+        groups = groups
+            .merge(group)
+            .attr('transform', PointTransform(projection))
             .call(TagClasses());
 
         // Selecting the following implicitly
@@ -55,8 +60,5 @@ export function Points(projection, context) {
                 var preset = context.presets().match(entity, graph);
                 return preset.icon ? '#' + preset.icon + '-12' : '';
             });
-
-        groups.exit()
-            .remove();
     };
 }
