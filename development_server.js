@@ -22,7 +22,7 @@ if (process.argv[2] === 'develop') {
     });
 
     http.createServer(
-        ecstatic({ root: __dirname })
+        ecstatic({ root: __dirname, cache: 0 })
     ).listen(8080);
 
     console.log('Listening on :8080');

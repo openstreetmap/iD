@@ -60,7 +60,7 @@ export function Move(context, entityIDs, baseGraph) {
 
         context.overwrite(action, annotation);
 
-        var nudge = edge(currMouse, getDimensions(context.map()));
+        var nudge = edge(currMouse, context.map().dimensions());
         if (nudge) startNudge(nudge);
         else stopNudge();
     }

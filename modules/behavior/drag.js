@@ -32,15 +32,8 @@ export function drag() {
 
     function eventOf(thiz, argumentz) {
       return function(e1) {
-        var e0 = e1.sourceEvent = d3.event;
         e1.target = drag;
-        // TODO
-        // d3.event = e1;
-        try {
-          event[e1.type].apply(thiz, argumentz);
-        } finally {
-          // d3.event = e0;
-        }
+        d3.customEvent(e1, event.apply, event, [e1.type, thiz, argumentz]);
       };
     };
 

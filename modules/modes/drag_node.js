@@ -106,7 +106,7 @@ export function DragNode(context) {
 
         var nudge = childOf(context.container().node(),
             d3.event.sourceEvent.toElement) &&
-            edge(d3.event.point, getDimensions(context.map()));
+            edge(d3.event.point, context.map().dimensions());
 
         if (nudge) startNudge(nudge);
         else stopNudge();

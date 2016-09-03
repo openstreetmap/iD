@@ -90,7 +90,7 @@ export function Draw(context) {
     function click() {
         var d = datum();
         if (d.type === 'way') {
-            var dims = getDimensions(context.map()),
+            var dims = context.map().dimensions(),
                 mouse = context.mouse(),
                 pad = 5,
                 trySnap = mouse[0] > pad && mouse[0] < dims[0] - pad &&

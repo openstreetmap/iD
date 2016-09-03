@@ -42,7 +42,7 @@ export function DrawWay(context, wayId, index, mode, baseGraph) {
             loc = datum.loc;
 
         } else if (datum.type === 'way' && datum.id !== segment.id) {
-            var dims = getDimensions(context.map()),
+            var dims = context.map().dimensions(),
                 mouse = context.mouse(),
                 pad = 5,
                 trySnap = mouse[0] > pad && mouse[0] < dims[0] - pad &&
