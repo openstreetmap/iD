@@ -196,10 +196,13 @@ export function init(context) {
 
         var mapDimensions = map.dimensions();
 
-        d3.select(window).on('resize.editor', function() {
+        function onResize() {
             mapDimensions = setDimensions(content, null);
             map.dimensions(mapDimensions);
-        });
+        }
+
+        d3.select(window).on('resize.editor', onResize);
+        onResize();
 
         function pan(d) {
             return function() {
