@@ -209,19 +209,19 @@ export function RawTagEditor(context) {
             tag[kNew] = d.value;
             d.key = kNew; // Maintain DOM identity through the subsequent update.
             this.value = kNew;
-            event.call('change', tag);
+            event.call('change', this, tag);
         }
 
         function valueChange(d) {
             var tag = {};
             tag[d.key] = this.value;
-            event.call('change', tag);
+            event.call('change', this, tag);
         }
 
         function removeTag(d) {
             var tag = {};
             tag[d.key] = undefined;
-            event.call('change', tag);
+            event.call('change', this, tag);
             d3.select(this.parentNode).remove();
         }
 
