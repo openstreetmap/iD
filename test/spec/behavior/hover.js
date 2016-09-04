@@ -30,10 +30,10 @@ describe('iD.behavior.Hover', function() {
                 .enter().append('span').attr('class', function(d) { return d.id; });
 
             container.call(iD.behavior.Hover(context));
-            iD.util.triggerEvent(container.selectAll('.a'), 'mouseover');
+            container.dispatch('mouseover', {hi: true});
 
-            expect(container.selectAll('.a.hover')[0]).to.have.length(2);
-            expect(container.selectAll('.b.hover')[0]).to.have.length(0);
+            expect(container.selectAll('.a.hover').nodes()).to.have.length(2);
+            expect(container.selectAll('.b.hover').nodes()).to.have.length(0);
         });
 
         it('adds the .hover class to all members of a relation', function() {
@@ -42,10 +42,10 @@ describe('iD.behavior.Hover', function() {
                 .enter().append('span').attr('class', function(d) { return d.id; });
 
             container.call(iD.behavior.Hover(context));
-            iD.util.triggerEvent(container.selectAll('.a'), 'mouseover');
+            container.selectAll('.a').dispatch('mouseover');
 
-            expect(container.selectAll('.a.hover')[0]).to.have.length(1);
-            expect(container.selectAll('.b.hover')[0]).to.have.length(1);
+            expect(container.selectAll('.a.hover').nodes()).to.have.length(1);
+            expect(container.selectAll('.b.hover').nodes()).to.have.length(1);
         });
     });
 
@@ -54,9 +54,9 @@ describe('iD.behavior.Hover', function() {
             container.append('span').attr('class', 'hover');
 
             container.call(iD.behavior.Hover(context));
-            iD.util.triggerEvent(container.selectAll('.hover'), 'mouseout');
+            container.selectAll('.hover').dispatch('mouseout');
 
-            expect(container.selectAll('.hover')[0]).to.have.length(0);
+            expect(container.selectAll('.hover').nodes()).to.have.length(0);
         });
     });
 
@@ -67,8 +67,8 @@ describe('iD.behavior.Hover', function() {
             container.call(iD.behavior.Hover(context).altDisables(true));
             happen.keydown(window, {keyCode: 18});
 
-            expect(container.selectAll('.hover')[0]).to.have.length(0);
-            expect(container.selectAll('.hover-suppressed')[0]).to.have.length(1);
+            expect(container.selectAll('.hover').nodes()).to.have.length(0);
+            expect(container.selectAll('.hover-suppressed').nodes()).to.have.length(1);
         });
     });
 
@@ -79,8 +79,8 @@ describe('iD.behavior.Hover', function() {
             container.call(iD.behavior.Hover(context).altDisables(true));
             happen.keyup(window, {keyCode: 18});
 
-            expect(container.selectAll('.hover')[0]).to.have.length(1);
-            expect(container.selectAll('.hover-suppressed')[0]).to.have.length(0);
+            expect(container.selectAll('.hover').nodes()).to.have.length(1);
+            expect(container.selectAll('.hover-suppressed').nodes()).to.have.length(0);
         });
     });
 });
