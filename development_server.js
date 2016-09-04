@@ -59,7 +59,6 @@ function build() {
         ]
 
     }).then(function (bundle) {
-        console.timeEnd('Rebuilt');
         bundle.write({
             format: 'iife',
             dest: 'dist/iD.js',
@@ -67,6 +66,7 @@ function build() {
             useStrict: false
         });
         building = false;
+        console.timeEnd('Rebuilt');
 
     }, function(err) {
         building = false;
