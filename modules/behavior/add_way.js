@@ -4,13 +4,13 @@ import { Browse } from '../modes/index';
 import { Draw } from './draw';
 
 export function AddWay(context) {
-    var event = d3.dispatch('start', 'startFromWay', 'startFromNode'),
+    var dispatch = d3.dispatch('start', 'startFromWay', 'startFromNode'),
         draw = Draw(context);
 
     var addWay = function(surface) {
-        draw.on('click', event.start)
-            .on('clickWay', event.startFromWay)
-            .on('clickNode', event.startFromNode)
+        draw.on('click', function() { dispatch.apply('start', this, arguments); })
+            .on('clickWay', function() { dispatch.apply('startFromWay', this, arguments); })
+            .on('clickNode', function() { dispatch.apply('startFromNode', this, arguments); })
             .on('cancel', addWay.cancel)
             .on('finish', addWay.cancel);
 
@@ -37,5 +37,5 @@ export function AddWay(context) {
         return addWay;
     };
 
-    return rebind(addWay, event, 'on');
+    return rebind(addWay, dispatch, 'on');
 }

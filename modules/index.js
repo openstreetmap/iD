@@ -36,8 +36,10 @@ export { TileLayer } from './renderer/tile_layer';
 import * as data from '../data/index.js';
 
 export var debug = false;
+import * as d3 from 'd3';
 
 export {
+  d3,
   data,
   actions,
   geo,

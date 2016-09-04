@@ -25,7 +25,7 @@
 
         id.ui()(document.getElementById('id-container'));
 
-        d3.select('#about-list').insert('li', '.user-list')
+        iD.d3.select('#about-list').insert('li', '.user-list')
             .attr('class', 'source-switch')
             .call(iD.ui.SourceSwitch(id)
                 .keys([
