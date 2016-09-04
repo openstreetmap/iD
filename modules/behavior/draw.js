@@ -70,12 +70,12 @@ export function Draw(context) {
 
                 click();
             }
-        });
+        }, true);
     }
 
     function mousemove() {
         lastMouse = d3.event;
-        dispatch.call('move', datum());
+        dispatch.call('move', this, datum());
     }
 
     function mouseenter() {
@@ -98,16 +98,16 @@ export function Draw(context) {
             if (trySnap) {
                 var choice = chooseEdge(context.childNodes(d), context.mouse(), context.projection),
                     edge = [d.nodes[choice.index - 1], d.nodes[choice.index]];
-                dispatch.call('clickWay', choice.loc, edge);
+                dispatch.call('clickWay', this, choice.loc, edge);
             } else {
-                dispatch.call('click', context.map().mouseCoordinates());
+                dispatch.call('click', this, context.map().mouseCoordinates());
             }
 
         } else if (d.type === 'node') {
-            dispatch.call('clickNode', d);
+            dispatch.call('clickNode', this, d);
 
         } else {
-            dispatch.call('click', context.map().mouseCoordinates());
+            dispatch.call('click', this, context.map().mouseCoordinates());
         }
     }
 
