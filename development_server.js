@@ -63,7 +63,8 @@ function build() {
         bundle.write({
             format: 'iife',
             dest: 'dist/iD.js',
-            sourceMap: true
+            sourceMap: true,
+            useStrict: false
         });
         building = false;
 
