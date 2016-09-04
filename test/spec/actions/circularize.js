@@ -1,5 +1,5 @@
 describe('iD.actions.Circularize', function () {
-    var projection = d3.geoMercator();
+    var projection = iD.geo.RawMercator();
 
     function isCircular(id, graph) {
         var points = _.map(graph.childNodes(graph.entity(id)), 'loc').map(projection),
