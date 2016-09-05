@@ -40,8 +40,9 @@ export function d3combobox() {
                     .filter(function(d) { return d === input.node(); })
                     .data([input.node()]);
 
-                caret.enter().insert('div', function() { return sibling; })
-                    .attr('class', 'combobox-caret');
+                caret = caret.enter().insert('div', function() { return sibling; })
+                    .attr('class', 'combobox-caret')
+                    .merge(caret);
 
                 caret
                     .on('mousedown', function () {

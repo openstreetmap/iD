@@ -16,6 +16,7 @@ mocha.setup({
 });
 
 expect = chai.expect;
+var d3 = iD.d3;
 
 chai.use(function (chai, utils) {
     var flag = utils.flag;

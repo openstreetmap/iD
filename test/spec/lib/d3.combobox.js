@@ -13,7 +13,10 @@ describe('d3.combobox', function() {
             start = input.property('selectionStart'),
             finis = input.property('selectionEnd');
 
-        happen.keydown(input.node(), {keyCode: keyCode});
+        iD.d3.customEvent(happen.makeEvent({
+            type: 'keydown',
+            keyCode: keyCode
+        }), input.on('keydown.typeahead'));
 
         switch (key) {
             case '⇥':
@@ -69,6 +72,22 @@ describe('d3.combobox', function() {
         body.selectAll('.combobox').remove();
     });
 
+    // it('can simulate events', function(done) {
+    //     var node = d3.select(document.body).append('div');
+    //     node.on('keydown', function() {
+    //         console.log(d3.event);
+    //         expect(d3.event.keyCode).to.equal(30);
+    //         done();
+    //     });
+    //     var keyDownEvent = new KeyboardEvent('keydown', { keyCode: 30 });
+    //     d3.customEvent(keyDownEvent, node.on('keydown'));
+    // });
+    //
+    function focusTypeahead(input) {
+        input.node().focus();
+        d3.customEvent(new FocusEvent('focus'), input.on('focus.typeahead'));
+    }
+
     it('adds the combobox-input class', function() {
         input.call(combobox);
         expect(input).to.be.classed('combobox-input');
@@ -76,14 +95,14 @@ describe('d3.combobox', function() {
 
     it('shows a menu of entries on focus', function() {
         input.call(combobox.data(data));
-        input.node().focus();
-        expect(body.selectAll('.combobox-option').size()).to.equal(3);
+        focusTypeahead(input);
+        expect(body.selectAll('.combobox-option').nodes().length).to.equal(3);
         expect(body.selectAll('.combobox-option').text()).to.equal('foo');
     });
 
     it('filters entries to those matching the value', function() {
         input.property('value', 'b').call(combobox.data(data));
-        input.node().focus();
+        focusTypeahead(input);
         expect(body.selectAll('.combobox-option').size()).to.equal(2);
         expect(body.selectAll('.combobox-option').nodes()[0].text).to.equal('bar');
         expect(body.selectAll('.combobox-option').nodes()[1].text).to.equal('Baz');
@@ -91,33 +110,33 @@ describe('d3.combobox', function() {
 
     it('shows no menu on focus if it would contain only one item', function() {
         input.property('value', 'f').call(combobox.data(data));
-        input.node().focus();
+        focusTypeahead(input);
         expect(body.selectAll('.combobox-option').size()).to.equal(0);
     });
 
     it('shows menu on focus if it would contain at least minItems items', function() {
         combobox.minItems(1);
         input.property('value', 'f').call(combobox.data(data));
-        input.node().focus();
+        focusTypeahead(input);
         expect(body.selectAll('.combobox-option').size()).to.equal(1);
     });
 
     it('shows all entries when clicking on the caret', function() {
         input.property('value', 'foo').call(combobox.data(data));
-        happen.mousedown(body.selectAll('.combobox-caret').node());
+        body.selectAll('.combobox-caret').dispatch('mousedown');
         expect(body.selectAll('.combobox-option').size()).to.equal(3);
         expect(body.selectAll('.combobox-option').text()).to.equal('foo');
     });
 
     it('is initially shown with no selection', function() {
         input.call(combobox.data(data));
-        input.node().focus();
+        focusTypeahead(input);
         expect(body.selectAll('.combobox-option.selected').size()).to.equal(0);
     });
 
     it('selects the first option matching the input', function() {
         input.call(combobox.data(data));
-        input.node().focus();
+        focusTypeahead(input);
         simulateKeypress('b');
         expect(body.selectAll('.combobox-option.selected').size()).to.equal(1);
         expect(body.selectAll('.combobox-option.selected').text()).to.equal('bar');
@@ -125,7 +144,7 @@ describe('d3.combobox', function() {
 
     it('selects the completed portion of the value', function() {
         input.call(combobox.data(data));
-        input.node().focus();
+        focusTypeahead(input);
         simulateKeypress('b');
         expect(input.property('value')).to.equal('bar');
         expect(input.property('selectionStart')).to.equal(1);
@@ -134,7 +153,7 @@ describe('d3.combobox', function() {
 
     it('does not preserve the case of the input portion of the value by default', function() {
         input.call(combobox.data(data));
-        input.node().focus();
+        focusTypeahead(input);
         simulateKeypress('B');
         expect(input.property('value')).to.equal('bar');
         expect(input.property('selectionStart')).to.equal(1);
@@ -144,7 +163,7 @@ describe('d3.combobox', function() {
     it('does preserve the case of the input portion of the value with caseSensitive option', function() {
         combobox.caseSensitive(true);
         input.call(combobox.data(data));
-        input.node().focus();
+        focusTypeahead(input);
         simulateKeypress('B');
         expect(input.property('value')).to.equal('Baz');
         expect(input.property('selectionStart')).to.equal(1);
@@ -153,14 +172,14 @@ describe('d3.combobox', function() {
 
     it('does not select when value is empty', function() {
         input.call(combobox.data(data));
-        input.node().focus();
+        focusTypeahead(input);
         happen.once(input.node(), {type: 'input'});
         expect(body.selectAll('.combobox-option.selected').size()).to.equal(0);
     });
 
     it('does not select when value is not a prefix of any suggestion', function() {
         input.call(combobox.fetcher(function(_, cb) { cb(data); }));
-        input.node().focus();
+        focusTypeahead(input);
         simulateKeypress('b');
         simulateKeypress('i');
         expect(body.selectAll('.combobox-option.selected').size()).to.equal(0);
@@ -168,7 +187,7 @@ describe('d3.combobox', function() {
 
     it('does not select or autocomplete after ⌫', function() {
         input.call(combobox.data(data));
-        input.node().focus();
+        focusTypeahead(input);
         simulateKeypress('b');
         simulateKeypress('⌫');
         expect(body.selectAll('.combobox-option.selected').size()).to.equal(0);
@@ -177,7 +196,7 @@ describe('d3.combobox', function() {
 
     it('does not select or autocomplete after ⌦', function() {
         input.call(combobox.data(data));
-        input.node().focus();
+        focusTypeahead(input);
         simulateKeypress('f');
         simulateKeypress('b');
         simulateKeypress('←');
@@ -189,7 +208,7 @@ describe('d3.combobox', function() {
 
     it('selects and autocompletes the next/prev suggestion on ↓/↑', function() {
         input.call(combobox.data(data));
-        input.node().focus();
+        focusTypeahead(input);
 
         simulateKeypress('↓');
         expect(body.selectAll('.combobox-option.selected').size()).to.equal(1);
@@ -213,7 +232,7 @@ describe('d3.combobox', function() {
             done();
         });
         input.call(combobox.data(data));
-        input.node().focus();
+        focusTypeahead(input);
         simulateKeypress('b');
         simulateKeypress('⇥');
     });
@@ -224,7 +243,7 @@ describe('d3.combobox', function() {
             done();
         });
         input.call(combobox.data(data));
-        input.node().focus();
+        focusTypeahead(input);
         simulateKeypress('b');
         simulateKeypress('↩');
     });
