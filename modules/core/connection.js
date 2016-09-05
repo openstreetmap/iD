@@ -2,7 +2,7 @@ import * as d3 from 'd3';
 import _ from 'lodash';
 import { rebind } from '../util/rebind';
 import { functor } from '../util/index';
-import { d3geoTile } from '../../js/lib/d3.geo.tile';
+import { d3geoTile } from '../lib/d3.geo.tile';
 import { Detect } from '../util/detect';
 import { Entity } from './entity';
 import { Extent } from '../geo/index';

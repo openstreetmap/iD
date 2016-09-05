@@ -1,5 +1,5 @@
 import * as d3 from 'd3';
-import { d3combobox } from '../../js/lib/d3.combobox.js';
+import { d3combobox } from '../lib/d3.combobox.js';
 import { t } from '../util/locale';
 import { Browse, Select } from '../modes/index';
 import { ChangeMember, DeleteMember } from '../actions/index';

@@ -3,7 +3,7 @@ import * as d3 from 'd3';
 import _ from 'lodash';
 import rbush from 'rbush';
 import { rebind } from '../util/rebind';
-import { d3geoTile } from '../../js/lib/d3.geo.tile';
+import { d3geoTile } from '../lib/d3.geo.tile';
 import { Detect } from '../util/detect';
 import { Extent } from '../geo/index';
 import { Icon } from '../svg/index';

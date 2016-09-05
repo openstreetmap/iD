@@ -1,5 +1,5 @@
 import * as d3 from 'd3';
-import { d3keybinding } from '../../js/lib/d3.keybinding.js';
+import { d3keybinding } from '../lib/d3.keybinding.js';
 import { t } from '../util/locale';
 import { Browse, Select } from './index';
 import { Move as MoveAction, Noop } from '../actions/index';

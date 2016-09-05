@@ -8,7 +8,7 @@ describe('d3.combobox', function() {
     ];
 
     function simulateKeypress(key) {
-        var keyCode = d3.keybinding.keyCodes[key],
+        var keyCode = iD.lib.d3keybinding.keyCodes[key],
             value = input.property('value'),
             start = input.property('selectionStart'),
             finis = input.property('selectionEnd');
@@ -61,7 +61,7 @@ describe('d3.combobox', function() {
         body = d3.select('body');
         content = body.append('div');
         input = content.append('input');
-        combobox = d3.combobox();
+        combobox = iD.lib.d3combobox();
     });
 
     afterEach(function() {
@@ -85,8 +85,8 @@ describe('d3.combobox', function() {
         input.property('value', 'b').call(combobox.data(data));
         input.node().focus();
         expect(body.selectAll('.combobox-option').size()).to.equal(2);
-        expect(body.selectAll('.combobox-option')[0][0].text).to.equal('bar');
-        expect(body.selectAll('.combobox-option')[0][1].text).to.equal('Baz');
+        expect(body.selectAll('.combobox-option').nodes()[0].text).to.equal('bar');
+        expect(body.selectAll('.combobox-option').nodes()[1].text).to.equal('Baz');
     });
 
     it('shows no menu on focus if it would contain only one item', function() {

@@ -1,6 +1,6 @@
 import * as d3 from 'd3';
 import _ from 'lodash';
-import { d3combobox } from '../../../js/lib/d3.combobox.js';
+import { d3combobox } from '../../lib/d3.combobox.js';
 import { getSetValue } from '../../util/get_set_value';
 import { rebind } from '../../util/rebind';
 import { t } from '../../util/locale';

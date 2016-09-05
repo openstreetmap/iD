@@ -1,7 +1,7 @@
 import * as d3 from 'd3';
 import _ from 'lodash';
 import { rebind } from '../util/rebind';
-import { d3combobox } from '../../js/lib/d3.combobox.js';
+import { d3combobox } from '../lib/d3.combobox.js';
 import { t } from '../util/locale';
 import { triggerEvent } from '../util/trigger_event';
 import { tooltip } from '../util/tooltip';

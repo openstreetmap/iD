@@ -1,6 +1,6 @@
 import * as d3 from 'd3';
 import { rebind } from '../util/rebind';
-import { d3keybinding } from '../../js/lib/d3.keybinding.js';
+import { d3keybinding } from '../lib/d3.keybinding.js';
 import { Entity } from '../core/index';
 
 /*
@@ -71,7 +71,7 @@ export function Hover() {
 
         var down;
 
-        function mouseover() {
+        function mouseover(evt) {
             if (down) return;
             var target = d3.event.target;
             enter(target ? target.__data__ : null);

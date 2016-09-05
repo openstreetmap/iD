@@ -1,5 +1,5 @@
 import * as d3 from 'd3';
-import { d3keybinding } from '../../js/lib/d3.keybinding.js';
+import { d3keybinding } from '../lib/d3.keybinding.js';
 import { Debug, Gpx } from '../svg/index';
 import { RawMercator } from '../geo/index';
 import { TileLayer } from '../renderer/index';

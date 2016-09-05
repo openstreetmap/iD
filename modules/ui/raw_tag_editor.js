@@ -1,7 +1,7 @@
 import * as d3 from 'd3';
 import { rebind } from '../util/rebind';
 import { getSetValue } from '../util/get_set_value';
-import { d3combobox } from '../../js/lib/d3.combobox.js';
+import { d3combobox } from '../lib/d3.combobox.js';
 import { t } from '../util/locale';
 import { Disclosure } from './disclosure';
 import { Icon } from '../svg/index';

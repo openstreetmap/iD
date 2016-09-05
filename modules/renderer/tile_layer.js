@@ -1,5 +1,5 @@
 import * as d3 from 'd3';
-import { d3geoTile } from '../../js/lib/d3.geo.tile';
+import { d3geoTile } from '../lib/d3.geo.tile';
 import { prefixCSSProperty, functor } from '../util/index';
 
 export function TileLayer(context) {

@@ -8,6 +8,7 @@ import * as services from './services/index';
 import * as svg from './svg/index';
 import * as ui from './ui/index';
 import * as util from './util/index';
+import * as lib from './lib/index';
 import * as validations from './validations/index';
 
 // detect
@@ -50,6 +51,7 @@ export {
   services,
   svg,
   util,
+  lib,
   ui,
   validations
 };
