@@ -2829,6 +2829,10 @@ en:
         # man_made=pipeline
         name: Pipeline
         terms: '<translate with synonyms or related terms for ''Pipeline'', separated by commas>'
+      man_made/pumping_station:
+        # man_made=pumping_station
+        name: Pumping Station
+        terms: '<translate with synonyms or related terms for ''Pumping Station'', separated by commas>'
       man_made/silo:
         # man_made=silo
         name: Silo
