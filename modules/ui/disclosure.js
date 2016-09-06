@@ -12,9 +12,10 @@ export function Disclosure() {
         var $link = selection.selectAll('.hide-toggle')
             .data([0]);
 
-        $link.enter().append('a')
+        $link = $link.enter().append('a')
             .attr('href', '#')
-            .attr('class', 'hide-toggle');
+            .attr('class', 'hide-toggle')
+            .merge($link);
 
         $link.text(title)
             .on('click', toggle)
@@ -23,7 +24,7 @@ export function Disclosure() {
         var $body = selection.selectAll('div')
             .data([0]);
 
-        $body.enter().append('div');
+        $body = $body.enter().append('div').merge($body);
 
         $body.classed('hide', !expanded)
             .call(content);
