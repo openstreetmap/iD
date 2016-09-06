@@ -72,17 +72,6 @@ describe('d3.combobox', function() {
         body.selectAll('.combobox').remove();
     });
 
-    // it('can simulate events', function(done) {
-    //     var node = d3.select(document.body).append('div');
-    //     node.on('keydown', function() {
-    //         console.log(d3.event);
-    //         expect(d3.event.keyCode).to.equal(30);
-    //         done();
-    //     });
-    //     var keyDownEvent = new KeyboardEvent('keydown', { keyCode: 30 });
-    //     d3.customEvent(keyDownEvent, node.on('keydown'));
-    // });
-    //
     function focusTypeahead(input) {
         input.node().focus();
         d3.customEvent(happen.makeEvent('focus'), input.on('focus.typeahead'));
