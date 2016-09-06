@@ -14,7 +14,7 @@ export function access(field) {
 
         var divEnter = wrap.enter().append('div')
             .attr('class', 'cf preset-input-wrap');
-        divEnter.append('ul')
+        divEnter.append('ul');
         wrap = wrap.merge(divEnter);
 
         items = wrap.select('ul').selectAll('li')

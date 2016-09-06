@@ -111,7 +111,7 @@ export function Areas(projection) {
         paths.exit()
             .remove();
 
-        var fills = surface.selectAll('.area-fill path.area')[0];
+        var fills = surface.selectAll('.area-fill path.area').nodes();
 
         var bisect = d3.bisector(function(node) {
             return -node.__data__.area(graph);

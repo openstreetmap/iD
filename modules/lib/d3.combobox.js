@@ -221,7 +221,7 @@ export function d3combobox() {
 
             options
                 .attr('title', function(d) { return d.title; })
-                .classed('selected', function(d, i) { return i == idx; })
+                .classed('selected', function(d, i) { return i === idx; })
                 .on('mouseover', select)
                 .on('click', accept)
                 .order();
@@ -283,7 +283,7 @@ export function d3combobox() {
     };
 
     return rebind(combobox, event, 'on');
-};
+}
 
 d3combobox.off = function(input) {
     input
@@ -300,4 +300,4 @@ d3combobox.off = function(input) {
 
     d3.select(document.body)
         .on('scroll.combobox', null);
-}
+};

@@ -15,7 +15,7 @@ export function d3keybinding(namespace) {
 
     function matches(binding, event) {
         for (var p in binding.event) {
-            if (event[p] != binding.event[p])
+            if (event[p] !== binding.event[p])
                 return false;
         }
         return true;
@@ -37,7 +37,7 @@ export function d3keybinding(namespace) {
 
     function bubble() {
         var tagName = d3.select(d3.event.target).node().tagName;
-        if (tagName == 'INPUT' || tagName == 'SELECT' || tagName == 'TEXTAREA') {
+        if (tagName === 'INPUT' || tagName === 'SELECT' || tagName === 'TEXTAREA') {
             return;
         }
         testBindings(false);
@@ -90,7 +90,7 @@ export function d3keybinding(namespace) {
     };
 
     return keybinding;
-};
+}
 
 d3keybinding.modifierCodes = {
     // Shift key, ⇧
