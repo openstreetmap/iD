@@ -71,7 +71,14 @@ export function Midpoints(projection, context) {
             return false;
         }
 
-        var groups = surface.selectAll('.layer-hit').selectAll('g.midpoint')
+        var layer = surface.selectAll('.layer-hit')
+            .data([0]);
+
+        layer = layer.enter().append('g').attr('class', 'layer-hit')
+            .merge(layer);
+
+        var groups = layer
+            .selectAll('g.midpoint')
             .filter(midpointFilter)
             .data(_.values(midpoints), function(d) { return d.id; });
 

@@ -8,6 +8,11 @@ describe('iD.svg.Areas', function () {
     beforeEach(function () {
         surface = d3.select(document.createElementNS('http://www.w3.org/2000/svg', 'svg'))
             .call(iD.svg.Layers(projection, iD.Context(window)));
+        iD.setAreaKeys({
+            building: {},
+            landuse: {},
+            natural: {}
+        });
     });
 
     it('adds way and area classes', function () {
@@ -127,7 +132,7 @@ describe('iD.svg.Areas', function () {
 
         surface.call(iD.svg.Areas(projection), graph, areas, none);
 
-        expect(surface.selectAll('.stroke')[0].length).to.equal(0);
+        expect(surface.selectAll('.stroke').size()).to.equal(0);
     });
 
     it('renders fill for a multipolygon with tags on the outer way', function() {
@@ -140,8 +145,8 @@ describe('iD.svg.Areas', function () {
 
         surface.call(iD.svg.Areas(projection), graph, [w, r], none);
 
-        expect(surface.selectAll('.way.fill')[0].length).to.equal(0);
-        expect(surface.selectAll('.relation.fill')[0].length).to.equal(1);
+        expect(surface.selectAll('.way.fill').size()).to.equal(0);
+        expect(surface.selectAll('.relation.fill').size()).to.equal(1);
         expect(surface.select('.relation.fill')).to.be.classed('tag-natural-wood');
     });
 
@@ -155,6 +160,6 @@ describe('iD.svg.Areas', function () {
 
         surface.call(iD.svg.Areas(projection), graph, [w, r], none);
 
-        expect(surface.selectAll('.stroke')[0].length).to.equal(0);
+        expect(surface.selectAll('.stroke').size()).to.equal(0);
     });
 });

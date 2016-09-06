@@ -125,6 +125,7 @@ export function Vertices(projection, context) {
             .each(setClass('fill'));
 
         groups
+            .merge(enter)
             .attr('transform', PointTransform(projection))
             .classed('shared', function(entity) { return graph.isShared(entity); })
             .call(setAttributes);
@@ -157,7 +158,12 @@ export function Vertices(projection, context) {
             }
         }
 
-        surface.selectAll('.layer-hit').selectAll('g.vertex.vertex-persistent')
+        var layer = surface.selectAll('.layer-hit')
+            .data([0]);
+        layer = layer.enter().append('g').attr('class', 'layer-hit')
+            .merge(layer);
+
+        layer.selectAll('g.vertex.vertex-persistent')
             .filter(filter)
             .call(draw, vertices, 'vertex-persistent', graph, zoom);
 

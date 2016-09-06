@@ -56,8 +56,15 @@ export function Lines(projection) {
                 .valueOf();
         });
 
-        var layergroup = surface
+        var layer = surface
             .selectAll('.layer-lines')
+            .data([0])
+
+        layer = layer.enter()
+            .append('g').attr('class', 'layer-lines')
+            .merge(layer);
+
+        var layergroup = layer
             .selectAll('g.layergroup')
             .data(d3.range(-10, 11));
 
@@ -106,9 +113,10 @@ export function Lines(projection) {
             .selectAll('g.onewaygroup')
             .data(['oneway']);
 
-        onewaygroup.enter()
+        onewaygroup = onewaygroup.enter()
             .append('g')
-            .attr('class', 'layer onewaygroup');
+            .attr('class', 'layer onewaygroup')
+            .merge(onewaygroup);
 
 
         var oneways = onewaygroup
@@ -119,20 +127,18 @@ export function Lines(projection) {
                 function(d) { return [d.id, d.index]; }
             );
 
-        oneways.enter()
+        oneways.exit()
+            .remove();
+
+        oneways = oneways.enter()
             .append('path')
             .attr('class', 'oneway')
-            .attr('marker-mid', 'url(#oneway-marker)');
-
-        oneways
+            .attr('marker-mid', 'url(#oneway-marker)')
+            .merge(oneways)
             .attr('d', function(d) { return d.d; });
 
         if (Detect().ie) {
             oneways.each(function() { this.parentNode.insertBefore(this, this); });
         }
-
-        oneways.exit()
-            .remove();
-
     };
 }

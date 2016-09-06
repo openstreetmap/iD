@@ -92,7 +92,6 @@ export function Areas(projection) {
 
 
         var areagroup = surface
-            .selectAll('.layer-areas')
             .selectAll('g.areagroup')
             .data(['fill', 'shadow', 'stroke']);
 

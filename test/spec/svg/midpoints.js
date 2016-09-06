@@ -34,7 +34,7 @@ describe('iD.svg.Midpoints', function () {
         context.selectedIDs = function() { return [line.id]; };
         surface.call(iD.svg.Midpoints(projection, context), graph, [line], filter, extent);
 
-        expect(surface.selectAll('.midpoint')[0]).to.have.length(0);
+        expect(surface.selectAll('.midpoint').nodes()).to.have.length(0);
     });
 
     it('doesn\'t create midpoint on segment completely outside of the extent', function () {
@@ -47,7 +47,7 @@ describe('iD.svg.Midpoints', function () {
         context.selectedIDs = function() { return [line.id]; };
         surface.call(iD.svg.Midpoints(projection, context), graph, [line], filter, extent);
 
-        expect(surface.selectAll('.midpoint')[0]).to.have.length(0);
+        expect(surface.selectAll('.midpoint').nodes()).to.have.length(0);
     });
 
     it('creates midpoint on extent edge for segment partially outside of the extent', function () {
@@ -74,7 +74,7 @@ describe('iD.svg.Midpoints', function () {
         context.selectedIDs = function() { return [line.id]; };
         surface.call(iD.svg.Midpoints(projection, context), graph, [line], filter, extent);
 
-        expect(surface.selectAll('.midpoint')[0]).to.have.length(0);
+        expect(surface.selectAll('.midpoint').nodes()).to.have.length(0);
     });
 
 });

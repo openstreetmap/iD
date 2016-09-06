@@ -87,16 +87,16 @@ describe('iD.svg.Lines', function () {
             surface.call(iD.svg.Lines(projection), graph, [graph.entity('lo'), graph.entity('hi')], none);
 
             var selection = surface.selectAll('g.line-stroke > path.line');
-            expect(selection[0][0].__data__.id).to.eql('lo');
-            expect(selection[0][1].__data__.id).to.eql('hi');
+            expect(selection.nodes()[0].__data__.id).to.eql('lo');
+            expect(selection.nodes()[1].__data__.id).to.eql('hi');
         });
 
         it('stacks higher lines above lower ones in a single render (reverse)', function () {
             surface.call(iD.svg.Lines(projection), graph, [graph.entity('hi'), graph.entity('lo')], none);
 
             var selection = surface.selectAll('g.line-stroke > path.line');
-            expect(selection[0][0].__data__.id).to.eql('lo');
-            expect(selection[0][1].__data__.id).to.eql('hi');
+            expect(selection.nodes()[0].__data__.id).to.eql('lo');
+            expect(selection.nodes()[1].__data__.id).to.eql('hi');
         });
 
         it('stacks higher lines above lower ones in separate renders', function () {
@@ -104,8 +104,8 @@ describe('iD.svg.Lines', function () {
             surface.call(iD.svg.Lines(projection), graph, [graph.entity('hi')], none);
 
             var selection = surface.selectAll('g.line-stroke > path.line');
-            expect(selection[0][0].__data__.id).to.eql('lo');
-            expect(selection[0][1].__data__.id).to.eql('hi');
+            expect(selection.nodes()[0].__data__.id).to.eql('lo');
+            expect(selection.nodes()[1].__data__.id).to.eql('hi');
         });
 
         it('stacks higher lines above lower in separate renders (reverse)', function () {
@@ -113,8 +113,8 @@ describe('iD.svg.Lines', function () {
             surface.call(iD.svg.Lines(projection), graph, [graph.entity('lo')], none);
 
             var selection = surface.selectAll('g.line-stroke > path.line');
-            expect(selection[0][0].__data__.id).to.eql('lo');
-            expect(selection[0][1].__data__.id).to.eql('hi');
+            expect(selection.nodes()[0].__data__.id).to.eql('lo');
+            expect(selection.nodes()[1].__data__.id).to.eql('hi');
         });
     });
 

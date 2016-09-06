@@ -17,6 +17,10 @@ import * as services from '../services/index';
 
 export var areaKeys = {};
 
+export function setAreaKeys(value) {
+    areaKeys = value;
+}
+
 export function Context(root) {
     if (!root.locale) {
         root.locale = {
@@ -403,4 +407,3 @@ export function Context(root) {
 
     return rebind(context, dispatch, 'on');
 }
-
