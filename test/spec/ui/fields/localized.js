@@ -10,8 +10,8 @@ describe('localized', function() {
         var localized = iD.ui.fields.localized(field, {});
         selection.call(localized);
         happen.click(selection.selectAll('.localized-add').node());
-        expect(selection.selectAll('.localized-lang').size()).to.equal(1);
-        expect(selection.selectAll('.localized-value').size()).to.equal(1);
+        expect(selection.selectAll('.localized-lang').nodes().length).to.equal(1);
+        expect(selection.selectAll('.localized-value').nodes().length).to.equal(1);
     });
 
     it('doesn\'t create a tag when the value is empty', function() {
@@ -23,7 +23,7 @@ describe('localized', function() {
             expect(tags).to.eql({});
         });
 
-        selection.selectAll('.localized-lang').value('Deutsch');
+        iD.util.getSetValue(selection.selectAll('.localized-lang'), 'Deutsch');
         happen.once(selection.selectAll('.localized-lang').node(), {type: 'change'});
         happen.once(selection.selectAll('.localized-lang').node(), {type: 'blur'});
     });
@@ -37,7 +37,7 @@ describe('localized', function() {
             expect(tags).to.eql({});
         });
 
-        selection.selectAll('.localized-value').value('Value');
+        iD.util.getSetValue(selection.selectAll('.localized-value'), 'Value');
         happen.once(selection.selectAll('.localized-value').node(), {type: 'change'});
         happen.once(selection.selectAll('.localized-value').node(), {type: 'blur'});
     });
@@ -47,14 +47,14 @@ describe('localized', function() {
         selection.call(localized);
         happen.click(selection.selectAll('.localized-add').node());
 
-        selection.selectAll('.localized-lang').value('Deutsch');
+        iD.util.getSetValue(selection.selectAll('.localized-lang'), 'Deutsch');
         happen.once(selection.selectAll('.localized-lang').node(), {type: 'change'});
 
         localized.on('change', function(tags) {
             expect(tags).to.eql({'name:de': 'Value'});
         });
 
-        selection.selectAll('.localized-value').value('Value');
+        iD.util.getSetValue(selection.selectAll('.localized-value'), 'Value');
         happen.once(selection.selectAll('.localized-value').node(), {type: 'change'});
     });
 
@@ -63,14 +63,14 @@ describe('localized', function() {
         selection.call(localized);
         happen.click(selection.selectAll('.localized-add').node());
 
-        selection.selectAll('.localized-value').value('Value');
+        iD.util.getSetValue(selection.selectAll('.localized-value'), 'Value');
         happen.once(selection.selectAll('.localized-value').node(), {type: 'change'});
 
         localized.on('change', function(tags) {
             expect(tags).to.eql({'name:de': 'Value'});
         });
 
-        selection.selectAll('.localized-lang').value('Deutsch');
+        iD.util.getSetValue(selection.selectAll('.localized-lang'), 'Deutsch');
         happen.once(selection.selectAll('.localized-lang').node(), {type: 'change'});
     });
 
@@ -85,7 +85,7 @@ describe('localized', function() {
                 'name:en': 'Value'});
         });
 
-        selection.selectAll('.localized-lang').value('English');
+        iD.util.getSetValue(selection.selectAll('.localized-lang'), 'English');
         happen.once(selection.selectAll('.localized-lang').node(), {type: 'change'});
     });
 
@@ -107,7 +107,7 @@ describe('localized', function() {
             expect(tags).to.eql({'name:de': undefined});
         });
 
-        selection.selectAll('.localized-lang').value('');
+        iD.util.getSetValue(selection.selectAll('.localized-lang'), '');
         happen.once(selection.selectAll('.localized-lang').node(), {type: 'change'});
     });
 
@@ -120,7 +120,7 @@ describe('localized', function() {
             expect(tags).to.eql({'name:de': undefined});
         });
 
-        selection.selectAll('.localized-value').value('');
+        iD.util.getSetValue(selection.selectAll('.localized-value'), '');
         happen.once(selection.selectAll('.localized-value').node(), {type: 'change'});
     });
 });

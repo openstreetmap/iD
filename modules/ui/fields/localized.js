@@ -21,11 +21,12 @@ export function localized(field, context) {
         input = selection.selectAll('.localized-main')
             .data([0]);
 
-        input.enter().append('input')
+        input = input.enter().append('input')
             .attr('type', 'text')
             .attr('id', 'preset-input-' + field.id)
             .attr('class', 'localized-main')
-            .attr('placeholder', field.placeholder());
+            .attr('placeholder', field.placeholder())
+            .merge(input);
 
         if (field.id === 'name') {
             var preset = context.presets().match(entity, context.graph());
@@ -42,14 +43,15 @@ export function localized(field, context) {
         var translateButton = selection.selectAll('.localized-add')
             .data([0]);
 
-        translateButton.enter()
+        translateButton = translateButton.enter()
             .append('button')
             .attr('class', 'button-input-action localized-add minor')
             .attr('tabindex', -1)
             .call(Icon('#icon-plus'))
             .call(tooltip()
                 .title(t('translate.translate'))
-                .placement('left'));
+                .placement('left'))
+            .merge(translateButton);
 
         translateButton
             .on('click', addNew);
@@ -57,8 +59,9 @@ export function localized(field, context) {
         localizedInputs = selection.selectAll('.localized-wrap')
             .data([0]);
 
-        localizedInputs.enter().append('div')
-            .attr('class', 'localized-wrap');
+        localizedInputs = localizedInputs.enter().append('div')
+            .attr('class', 'localized-wrap')
+            .merge(localizedInputs);
     }
 
     function addNew() {

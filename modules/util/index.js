@@ -18,3 +18,4 @@ export { functor } from './util';
 export { SessionMutex } from './session_mutex';
 export { SuggestNames } from './suggest_names';
 export { triggerEvent } from './trigger_event';
+export { getSetValue } from './get_set_value';
