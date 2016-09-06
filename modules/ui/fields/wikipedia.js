@@ -50,11 +50,13 @@ export function wikipedia(field, context) {
         lang = selection.selectAll('input.wiki-lang')
             .data([0]);
 
-        getSetValue(lang.enter().append('input')
+        lang = lang.enter().append('input')
             .attr('type', 'text')
             .attr('class', 'wiki-lang')
-            .attr('placeholder', t('translate.localized_translation_language')),
-            language()[1]);
+            .attr('placeholder', t('translate.localized_translation_language'))
+            .merge(lang);
+
+        getSetValue(lang, language()[1]);
 
         lang
             .call(langcombo)
@@ -64,10 +66,11 @@ export function wikipedia(field, context) {
         title = selection.selectAll('input.wiki-title')
             .data([0]);
 
-        title.enter().append('input')
+        title = title.enter().append('input')
             .attr('type', 'text')
             .attr('class', 'wiki-title')
-            .attr('id', 'preset-input-' + field.id);
+            .attr('id', 'preset-input-' + field.id)
+            .merge(title);
 
         title
             .call(titlecombo)
@@ -77,11 +80,12 @@ export function wikipedia(field, context) {
         link = selection.selectAll('a.wiki-link')
             .data([0]);
 
-        link.enter().append('a')
+        link = link.enter().append('a')
             .attr('class', 'wiki-link button-input-action minor')
             .attr('tabindex', -1)
             .attr('target', '_blank')
-            .call(Icon('#icon-out-link', 'inline'));
+            .call(Icon('#icon-out-link', 'inline'))
+            .merge(link);
     }
 
     function language() {

@@ -34,8 +34,8 @@ describe('wikipedia', function() {
         var wikipedia = iD.ui.fields.wikipedia(field, context);
         selection.call(wikipedia);
         wikipedia.tags({wikipedia: 'en:Title'});
-        expect(selection.selectAll('.wiki-lang').value()).to.equal('English');
-        expect(selection.selectAll('.wiki-title').value()).to.equal('Title');
+        expect(iD.util.getSetValue(selection.selectAll('.wiki-lang'))).to.equal('English');
+        expect(iD.util.getSetValue(selection.selectAll('.wiki-title'))).to.equal('Title');
         expect(selection.selectAll('.wiki-link').attr('href')).to.equal('https://en.wikipedia.org/wiki/Title');
     });
 
@@ -46,7 +46,7 @@ describe('wikipedia', function() {
 
         var spy = sinon.spy();
         wikipedia.on('change.spy', spy);
-        selection.selectAll('.wiki-lang').value('Deutsch');
+        iD.util.getSetValue(selection.selectAll('.wiki-lang'), 'Deutsch');
         happen.once(selection.selectAll('.wiki-lang').node(), { type: 'change' });
         happen.once(selection.selectAll('.wiki-lang').node(), { type: 'blur' });
         expect(spy.callCount).to.equal(2);
@@ -55,7 +55,7 @@ describe('wikipedia', function() {
 
         spy = sinon.spy();
         wikipedia.on('change.spy', spy);
-        selection.selectAll('.wiki-title').value('Title');
+        iD.util.getSetValue(selection.selectAll('.wiki-title'), 'Title');
         happen.once(selection.selectAll('.wiki-title').node(), { type: 'change' });
         happen.once(selection.selectAll('.wiki-title').node(), { type: 'blur' });
         expect(spy.callCount).to.equal(3);
@@ -69,21 +69,21 @@ describe('wikipedia', function() {
         wikipedia.on('change', changeTags);
         selection.call(wikipedia);
 
-        selection.selectAll('.wiki-title').value('http://de.wikipedia.org/wiki/Title');
+        iD.util.getSetValue(selection.selectAll('.wiki-title'), 'http://de.wikipedia.org/wiki/Title');
         happen.once(selection.selectAll('.wiki-title').node(), { type: 'change' });
-        expect(selection.selectAll('.wiki-lang').value()).to.equal('Deutsch');
-        expect(selection.selectAll('.wiki-title').value()).to.equal('Title');
+        expect(iD.util.getSetValue(selection.selectAll('.wiki-lang'))).to.equal('Deutsch');
+        expect(iD.util.getSetValue(selection.selectAll('.wiki-title'))).to.equal('Title');
     });
 
     it('preserves existing language', function() {
         selection.call(iD.ui.fields.wikipedia(field, context));
-        selection.selectAll('.wiki-lang').value('Deutsch');
+        iD.util.getSetValue(selection.selectAll('.wiki-lang'), 'Deutsch');
 
         var wikipedia = iD.ui.fields.wikipedia(field, context);
         selection.call(wikipedia);
         wikipedia.tags({});
 
-        expect(selection.selectAll('.wiki-lang').value()).to.equal('Deutsch');
+        expect(iD.util.getSetValue(selection.selectAll('.wiki-lang'))).to.equal('Deutsch');
     });
 
     it('does not set delayed wikidata tag if wikipedia field has changed', function(done) {
@@ -94,13 +94,13 @@ describe('wikipedia', function() {
 
         var spy = sinon.spy();
         wikipedia.on('change.spy', spy);
-        selection.selectAll('.wiki-lang').value('Deutsch');
-        selection.selectAll('.wiki-title').value('Skip');
+        iD.util.getSetValue(selection.selectAll('.wiki-lang'), 'Deutsch');
+        iD.util.getSetValue(selection.selectAll('.wiki-title'), 'Skip');
         happen.once(selection.selectAll('.wiki-title').node(), { type: 'change' });
         happen.once(selection.selectAll('.wiki-title').node(), { type: 'blur' });
 
         window.setTimeout(function() {
-            selection.selectAll('.wiki-title').value('Title');
+            iD.util.getSetValue(selection.selectAll('.wiki-title'), 'Title');
             happen.once(selection.selectAll('.wiki-title').node(), { type: 'change' });
             happen.once(selection.selectAll('.wiki-title').node(), { type: 'blur' });
         }, 10);
@@ -125,8 +125,8 @@ describe('wikipedia', function() {
 
         var spy = sinon.spy();
         wikipedia.on('change.spy', spy);
-        selection.selectAll('.wiki-lang').value('Deutsch');
-        selection.selectAll('.wiki-title').value('Title');
+        iD.util.getSetValue(selection.selectAll('.wiki-lang'), 'Deutsch');
+        iD.util.getSetValue(selection.selectAll('.wiki-title'), 'Title');
         happen.once(selection.selectAll('.wiki-title').node(), { type: 'change' });
         happen.once(selection.selectAll('.wiki-title').node(), { type: 'blur' });
 
