@@ -9,11 +9,11 @@ describe('access', function() {
     it('creates inputs for a variety of modes of access', function() {
         var access = iD.ui.fields.access(field);
         selection.call(access);
-        expect(selection.selectAll('.preset-access-access')[0].length).to.equal(1);
-        expect(selection.selectAll('.preset-access-foot')[0].length).to.equal(1);
-        expect(selection.selectAll('.preset-access-motor_vehicle')[0].length).to.equal(1);
-        expect(selection.selectAll('.preset-access-bicycle')[0].length).to.equal(1);
-        expect(selection.selectAll('.preset-access-horse')[0].length).to.equal(1);
+        expect(selection.selectAll('.preset-access-access').size()).to.equal(1);
+        expect(selection.selectAll('.preset-access-foot').size()).to.equal(1);
+        expect(selection.selectAll('.preset-access-motor_vehicle').size()).to.equal(1);
+        expect(selection.selectAll('.preset-access-bicycle').size()).to.equal(1);
+        expect(selection.selectAll('.preset-access-horse').size()).to.equal(1);
     });
 
     it('does not include "yes", "designated", "dismount" options for general access (#934), (#2213)', function() {

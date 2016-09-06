@@ -12,9 +12,10 @@ export function access(field) {
         var wrap = selection.selectAll('.preset-input-wrap')
             .data([0]);
 
-        wrap.enter().append('div')
-            .attr('class', 'cf preset-input-wrap')
-            .append('ul');
+        var divEnter = wrap.enter().append('div')
+            .attr('class', 'cf preset-input-wrap');
+        divEnter.append('ul')
+        wrap = wrap.merge(divEnter);
 
         items = wrap.select('ul').selectAll('li')
             .data(field.keys);
@@ -40,6 +41,8 @@ export function access(field) {
                     .call(d3combobox()
                         .data(access.options(d)));
             });
+
+        items = items.merge(enter);
 
         // Update
 
@@ -184,8 +187,8 @@ export function access(field) {
                 return tags.access ? tags.access : field.placeholder();
             });
 
-        // items.selectAll('#preset-input-access-access')
-        //     .attr('placeholder', 'yes');
+        items.selectAll('#preset-input-access-access')
+            .attr('placeholder', 'yes');
 
         _.forEach(placeholders[tags.highway], function(v, k) {
             items.selectAll('#preset-input-access-' + k)
