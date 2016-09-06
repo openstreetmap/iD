@@ -85,7 +85,7 @@ describe('d3.combobox', function() {
     //
     function focusTypeahead(input) {
         input.node().focus();
-        d3.customEvent(new FocusEvent('focus'), input.on('focus.typeahead'));
+        d3.customEvent(happen.makeEvent('focus'), input.on('focus.typeahead'));
     }
 
     it('adds the combobox-input class', function() {
