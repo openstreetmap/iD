@@ -1,5 +1,4 @@
 import { rebind } from '../../modules/util/rebind';
-import 'd3-selection-multi';
 import * as d3 from 'd3';
 
 export function d3combobox() {
@@ -115,7 +114,9 @@ export function d3combobox() {
                    break;
                // tab
                case 9:
-                   container.selectAll('a.selected').each(event.accept);
+                   container.selectAll('a.selected').each(function (d) {
+                       event.call('accept', this, d);
+                   });
                    break;
                // return
                case 13:
@@ -143,7 +144,9 @@ export function d3combobox() {
                     break;
                 // return
                 case 13:
-                    container.selectAll('a.selected').each(event.accept);
+                    container.selectAll('a.selected').each(function (d) {
+                       event.call('accept', this, d);
+                    });
                     hide();
                     break;
             }
@@ -253,7 +256,7 @@ export function d3combobox() {
             input
                 .property('value', d.value)
                 .trigger('change');
-            event.accept(d);
+            event.call('accept', this, d);
             hide();
         }
     };

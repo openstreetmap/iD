@@ -37,8 +37,9 @@ describe('iD.ui.RawTagEditor', function() {
     });
 
     it('adds tags when clicking the add button', function (done) {
-        iD.util.triggerEvent(element.selectAll('button.add-tag'), 'click');
+        happen.click(element.selectAll('button.add-tag').node());
         setTimeout(function() {
+            console.log(element.select('.tag-list').selectAll('input').nodes());
             expect(element.select('.tag-list').selectAll('input').nodes()[2].value).to.be.empty;
             expect(element.select('.tag-list').selectAll('input').nodes()[3].value).to.be.empty;
             done();

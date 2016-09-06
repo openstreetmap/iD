@@ -1,5 +1,4 @@
 import * as d3 from 'd3';
-import 'd3-selection-multi';
 import { getDimensions } from './dimensions';
 import { rebind } from './rebind';
 import { Toggle } from '../ui/toggle';

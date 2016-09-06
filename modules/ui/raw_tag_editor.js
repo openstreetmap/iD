@@ -53,9 +53,9 @@ export function RawTagEditor(context) {
         $newTag.enter()
             .append('button')
             .attr('class', 'add-tag')
-            .call(Icon('#icon-plus', 'light'));
-
-        $newTag.on('click', addTag);
+            .call(Icon('#icon-plus', 'light'))
+            .merge($newTag)
+            .on('click', addTag);
 
         var $items = $list.selectAll('li')
             .data(entries, function(d) { return d.key; });
