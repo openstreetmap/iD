@@ -18,7 +18,7 @@ export function Circularize(wayId
             keyNodes = nodes.filter(function(n) { return graph.parentWays(n).length !== 1; }),
             points = nodes.map(function(n) { return projection(n.loc); }),
             keyPoints = keyNodes.map(function(n) { return projection(n.loc); }),
-            centroid = (points.length === 2) ? interp(points[0], points[1], 0.5) : d3.geoCentroid({ type: 'Polygon', coordinates: [points] }),
+            centroid = (points.length === 2) ? interp(points[0], points[1], 0.5) : d3.polygonCentroid(points),
             radius = d3.median(points, function(p) { return euclideanDistance(centroid, p); }),
             sign = d3.polygonArea(points) > 0 ? 1 : -1,
             ids;
