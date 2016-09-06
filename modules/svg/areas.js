@@ -117,7 +117,7 @@ export function Areas(projection) {
         }).left;
 
         function sortedByArea(entity) {
-            if (this.__data__ === 'fill') {
+            if (this._parent.__data__ === 'fill') {
                 return fills[bisect(fills, -entity.area(graph))];
             }
         }
