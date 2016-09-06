@@ -22,7 +22,13 @@ export function Points(projection, context) {
 
         points.sort(sortY);
 
-        var groups = surface.selectAll('.layer-hit').selectAll('g.point')
+        var layer = surface.selectAll('.layer-hit')
+            .data([0]);
+
+        layer = layer.enter().append('g').attr('class', 'layer-hit')
+            .merge(layer);
+
+        var groups = layer.selectAll('g.point')
             .filter(filter)
             .data(points, Entity.key);
 
