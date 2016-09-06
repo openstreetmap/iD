@@ -30,7 +30,7 @@ describe('iD.behavior.Hover', function() {
                 .enter().append('span').attr('class', function(d) { return d.id; });
 
             container.call(iD.behavior.Hover(context));
-            container.dispatch('mouseover', {hi: true});
+            iD.util.triggerEvent(container.selectAll('.a'), 'mouseover');
 
             expect(container.selectAll('.a.hover').nodes()).to.have.length(2);
             expect(container.selectAll('.b.hover').nodes()).to.have.length(0);
@@ -42,7 +42,7 @@ describe('iD.behavior.Hover', function() {
                 .enter().append('span').attr('class', function(d) { return d.id; });
 
             container.call(iD.behavior.Hover(context));
-            container.selectAll('.a').dispatch('mouseover');
+            iD.util.triggerEvent(container.selectAll('.a'), 'mouseover');
 
             expect(container.selectAll('.a.hover').nodes()).to.have.length(1);
             expect(container.selectAll('.b.hover').nodes()).to.have.length(1);
@@ -54,7 +54,7 @@ describe('iD.behavior.Hover', function() {
             container.append('span').attr('class', 'hover');
 
             container.call(iD.behavior.Hover(context));
-            container.selectAll('.hover').dispatch('mouseout');
+            iD.util.triggerEvent(container.selectAll('.hover'), 'mouseout');
 
             expect(container.selectAll('.hover').nodes()).to.have.length(0);
         });
