@@ -58,7 +58,7 @@ export function Lines(projection) {
 
         var layer = surface
             .selectAll('.layer-lines')
-            .data([0])
+            .data([0]);
 
         layer = layer.enter()
             .append('g').attr('class', 'layer-lines')
