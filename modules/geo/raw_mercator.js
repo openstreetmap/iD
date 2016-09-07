@@ -41,6 +41,14 @@ export function RawMercator() {
         return projection;
     };
 
+    projection.transform = function(_) {
+        if (!arguments.length) return d3.zoomIdentity.translate(x, y).scale(k);
+        x = +_.x;
+        y = +_.y;
+        k = +_.k;
+        return projection;
+    };
+
     projection.stream = d3.geoTransform({
         point: function(x, y) {
             x = projection([x, y]);

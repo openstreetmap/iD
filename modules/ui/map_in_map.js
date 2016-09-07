@@ -6,6 +6,13 @@ import { TileLayer } from '../renderer/index';
 import { setTransform } from '../util/index';
 import { getDimensions } from '../util/dimensions';
 
+function ztok(z) { return 256 * Math.pow(2, z); }
+function ktoz(k) { return Math.log(k) / Math.LN2 - 8; }
+function vecSub(a, b) { return [ a[0] - b[0], a[1] - b[1] ]; }
+function vecScale(a, b) { return [ a[0] * b, a[1] * b ]; }
+var TAU = 2 * Math.PI;
+
+
 export function MapInMap(context) {
     var key = '/';
 
@@ -22,51 +29,51 @@ export function MapInMap(context) {
             panning = false,
             hidden = true,
             zDiff = 6,    // by default, minimap renders at (main zoom - 6)
-            tStart, tLast, tCurr, kLast, kCurr, tiles, viewport, timeoutId;
-
-        function ztok(z) { return 256 * Math.pow(2, z); }
-        function ktoz(k) { return Math.log(k) / Math.LN2 - 8; }
+            tStart, tLast, tiles, viewport, timeoutId;
 
 
         function startMouse() {
             context.surface().on('mouseup.map-in-map-outside', endMouse);
             context.container().on('mouseup.map-in-map-outside', endMouse);
 
-            tStart = tLast = tCurr = projection.translate();
+            tStart = tLast = projection.transform();
             panning = true;
         }
 
 
         function zoomPan() {
-            var e = d3.event.sourceEvent,
-                t = d3.event.translate,
-                k = d3.event.scale,
-                zMain = ktoz(context.projection.scale() * 2 * Math.PI),
-                zMini = ktoz(k);
+            var tCurr = d3.event.transform;
 
-            // restrict minimap zoom to < (main zoom - 3)
-            if (zMini > zMain - 3) {
-                zMini = zMain - 3;
-                zoom.scale(kCurr).translate(tCurr);  // restore last good values
-                return;
+            if (tCurr.x === tStart.x && tCurr.y === tStart.y && tCurr.k === tStart.k) {
+                return;  // no change
             }
 
-            tCurr = t;
-            kCurr = k;
-            zDiff = zMain - zMini;
+            // var zMain = ktoz(context.projection.scale() * TAU),
+            //     zMini = ktoz(tCurr.k * TAU),
+            //     zDiff = zMain - zMini;
 
-            var scale = kCurr / kLast,
-                tX = (tCurr[0] / scale - tLast[0]) * scale,
-                tY = (tCurr[1] / scale - tLast[1]) * scale;
+            // // restrict minimap zoom to < (main zoom - 3)
+            // if (zMini > zMain - 3) {
+            //     zMini = zMain - 3;
+            //     wrap.call(zoom.transform, tLast);
+            //     return;
+            // }
+
+
+            var scale = tCurr.k / tStart.k,
+                tX = (tCurr.x / scale - tStart.x) * scale,
+                tY = (tCurr.y / scale - tStart.y) * scale;
 
             setTransform(tiles, tX, tY, scale);
             setTransform(viewport, 0, 0, scale);
             transformed = true;
+            tLast = tCurr;
 
             queueRedraw();
 
-            e.preventDefault();
-            e.stopPropagation();
+            // var e = d3.event.sourceEvent;
+            // e.preventDefault();
+            // e.stopPropagation();
         }
 
 
@@ -74,56 +81,58 @@ export function MapInMap(context) {
             context.surface().on('mouseup.map-in-map-outside', null);
             context.container().on('mouseup.map-in-map-outside', null);
 
+            var changed = false;
+            if (tLast.x !== tStart.x && tLast.y !== tStart.y) {
+                changed = true;
+            }
+
             updateProjection();
             panning = false;
 
-            if (tCurr[0] !== tStart[0] && tCurr[1] !== tStart[1]) {
+            if (changed) {
                 var dMini = getDimensions(wrap),
-                    cMini = [ dMini[0] / 2, dMini[1] / 2 ];
-
+                cMini = vecScale(dMini, 0.5);
                 context.map().center(projection.invert(cMini));
             }
         }
 
 
         function updateProjection() {
+            zDiff = Math.max(zDiff, 3);
+
             var loc = context.map().center(),
                 dMini = getDimensions(wrap),
-                cMini = [ dMini[0] / 2, dMini[1] / 2 ],
-                tMain = context.projection.translate(),
-                kMain = context.projection.scale(),
-                zMain = ktoz(kMain * 2 * Math.PI),
+                cMini = vecScale(dMini, 0.5),
+                tMain = context.projection.transform(),
+                zMain = ktoz(tMain.k * TAU),
                 zMini = Math.max(zMain - zDiff, 0.5),
-                kMini = ztok(zMini);
+                kMini = ztok(zMini) / TAU;
 
             projection
-                .translate(tMain)
-                .scale(kMini / (2 * Math.PI));
-
-            var s = projection(loc),
-                mouse = panning ? [ tCurr[0] - tStart[0], tCurr[1] - tStart[1] ] : [0, 0],
-                tMini = [
-                    cMini[0] - s[0] + tMain[0] + mouse[0],
-                    cMini[1] - s[1] + tMain[1] + mouse[1]
-                ];
-
-            projection
-                .translate(tMini)
-                .clipExtent([[0, 0], dMini]);
-
-            zoom
-                .center(cMini)
-                .translate(tMini)
+                .translate([tMain.x, tMain.y])
                 .scale(kMini);
 
-            tLast = tCurr = tMini;
-            kLast = kCurr = kMini;
+            var point = projection(loc),
+                mouse = panning ? vecSub(tLast, tStart) : [0, 0],
+                xMini = cMini[0] - point[0] + tMain.x + mouse[0],
+                yMini = cMini[1] - point[1] + tMain.y + mouse[1];
+
+            projection
+                .translate([xMini, yMini])
+                .clipExtent([[0, 0], dMini]);
+
+            tStart = tLast = d3.zoomIdentity.translate(xMini, yMini).scale(kMini);
 
             if (transformed) {
                 setTransform(tiles, 0, 0);
                 setTransform(viewport, 0, 0);
                 transformed = false;
             }
+
+            zoom
+                .scaleExtent([ztok(0.5) / TAU, ztok(zMain - 3) / TAU]);
+
+            wrap.call(zoom.transform, tStart);
         }
 
 
@@ -133,7 +142,7 @@ export function MapInMap(context) {
             updateProjection();
 
             var dMini = getDimensions(wrap),
-                zMini = ktoz(projection.scale() * 2 * Math.PI);
+                zMini = ktoz(projection.scale() * TAU);
 
             // setup tile container
             tiles = wrap
@@ -155,11 +164,10 @@ export function MapInMap(context) {
                 .selectAll('.map-in-map-background')
                 .data([0]);
 
-            background.enter()
+            background = background.enter()
                 .append('div')
-                .attr('class', 'map-in-map-background');
-
-            background
+                .attr('class', 'map-in-map-background')
+                .merge(background)
                 .call(backgroundLayer);
 
 
@@ -180,35 +188,36 @@ export function MapInMap(context) {
                 .selectAll('.map-in-map-overlay')
                 .data([0]);
 
-            overlay.enter()
+            overlay = overlay.enter()
                 .append('div')
-                .attr('class', 'map-in-map-overlay');
+                .attr('class', 'map-in-map-overlay')
+                .merge(overlay);
+
 
             var overlays = overlay
                 .selectAll('div')
                 .data(activeOverlayLayers, function(d) { return d.source().name(); });
 
-            overlays.enter().append('div');
-            overlays.each(function(layer) {
-                d3.select(this).call(layer);
-            });
-
             overlays.exit()
                 .remove();
+
+            overlays = overlays.enter()
+                .append('div')
+                .merge(overlays)
+                .each(function(layer) { d3.select(this).call(layer); });
 
 
             var dataLayers = tiles
                 .selectAll('.map-in-map-data')
                 .data([0]);
 
-            dataLayers.enter()
-                .append('svg')
-                .attr('class', 'map-in-map-data');
-
             dataLayers.exit()
                 .remove();
 
-            dataLayers
+            dataLayers = dataLayers.enter()
+                .append('svg')
+                .attr('class', 'map-in-map-data')
+                .merge(dataLayers)
                 .call(gpxLayer)
                 .call(debugLayer);
 
@@ -221,18 +230,19 @@ export function MapInMap(context) {
                 viewport = wrap.selectAll('.map-in-map-viewport')
                     .data([0]);
 
-                viewport.enter()
+                viewport = viewport.enter()
                     .append('svg')
-                    .attr('class', 'map-in-map-viewport');
+                    .attr('class', 'map-in-map-viewport')
+                    .merge(viewport);
+
 
                 var path = viewport.selectAll('.map-in-map-bbox')
                     .data([bbox]);
 
                 path.enter()
                     .append('path')
-                    .attr('class', 'map-in-map-bbox');
-
-                path
+                    .attr('class', 'map-in-map-bbox')
+                    .merge(path)
                     .attr('d', getPath)
                     .classed('thick', function(d) { return getPath.area(d) < 30; });
             }
@@ -255,22 +265,31 @@ export function MapInMap(context) {
                 .select('input').property('checked', !hidden);
 
             if (hidden) {
-                wrap
+                // selection.selectAll('.map-in-map')
+                //     .style('display', 'none')
+                //     .style('opacity', '0');
+
+                selection.selectAll('.map-in-map')
                     .style('display', 'block')
-                    .style('opacity', 1)
+                    .style('opacity', '1')
                     .transition()
                     .duration(200)
-                    .style('opacity', 0)
+                    .style('opacity', '0')
                     .on('end', function() {
-                        d3.select(this).style('display', 'none');
+                        selection.selectAll('.map-in-map')
+                            .style('display', 'none');
                     });
             } else {
-                wrap
+                // selection.selectAll('.map-in-map')
+                //     .style('display', 'block')
+                //     .style('opacity', '1');
+
+                selection.selectAll('.map-in-map')
                     .style('display', 'block')
-                    .style('opacity', 0)
+                    .style('opacity', '0')
                     .transition()
                     .duration(200)
-                    .style('opacity', 1);
+                    .style('opacity', '1');
 
                 redraw();
             }
@@ -281,9 +300,12 @@ export function MapInMap(context) {
         var wrap = selection.selectAll('.map-in-map')
             .data([0]);
 
-        wrap.enter()
+        wrap = wrap.enter()
             .append('div')
             .attr('class', 'map-in-map')
+            .merge(wrap);
+
+        wrap
             .style('display', (hidden ? 'none' : 'block'))
             .on('mousedown.map-in-map', startMouse)
             .on('mouseup.map-in-map', endMouse)

@@ -16,11 +16,7 @@ export function Map(context) {
         projection = context.projection,
         dblclickEnabled = true,
         redrawEnabled = true,
-        transformStart = {
-            x: 0,
-            y: 0,
-            k: 1
-        },
+        transformStart = projection.transform(),
         transformed = false,
         easing = false,
         minzoom = 0,
@@ -209,6 +205,12 @@ export function Map(context) {
     function zoomPan(manualEvent) {
         var eventTransform = (manualEvent || d3.event).transform;
 
+        if (transformStart.x === eventTransform.x &&
+            transformStart.y === eventTransform.y &&
+            transformStart.k === eventTransform.k) {
+            return;  // no change
+        }
+
         if (ktoz(eventTransform.k * 2 * Math.PI) < minzoom) {
             surface.interrupt();
             flash(context.container())
@@ -220,16 +222,7 @@ export function Map(context) {
             return;
         }
 
-        var t = projection.translate(),
-            k = projection.scale();
-
-        if (t[0] === eventTransform.x && t[1] === eventTransform.y && k === eventTransform.k) {
-            return;  // no change
-        }
-
-        projection
-            .translate([eventTransform.x, eventTransform.y])
-            .scale(eventTransform.k);
+        projection.transform(eventTransform);
 
         var scale = eventTransform.k / transformStart.k,
             tX = (eventTransform.x / scale - transformStart.x) * scale,
@@ -377,8 +370,8 @@ setZoom(_, true);
         t[1] += center[1] - l[1];
         projection.translate(t);
 
-        transformStart = { k: k, x: t[0], y: t[1] };
-        _selection.call(zoom.transform, d3.zoomIdentity.translate(t[0], t[1]).scale(k));
+        transformStart = projection.transform();
+        _selection.call(zoom.transform, transformStart);
         return true;
     }
 
@@ -397,8 +390,8 @@ setZoom(_, true);
         t[1] = t[1] - ll[1] + pxC[1];
         projection.translate(t);
 
-        transformStart = { k: k, x: t[0], y: t[1] };
-        _selection.call(zoom.transform, d3.zoomIdentity.translate(t[0], t[1]).scale(k));
+        transformStart = projection.transform();
+        _selection.call(zoom.transform, transformStart);
         return true;
     }
 
@@ -411,8 +404,8 @@ setZoom(_, true);
         t[1] += d[1];
         projection.translate(t);
 
-        transformStart = { k: k, x: t[0], y: t[1] };
-        _selection.call(zoom.transform, d3.zoomIdentity.translate(t[0], t[1]).scale(k));
+        transformStart = projection.transform();
+        _selection.call(zoom.transform, transformStart);
 
         dispatch.call('move', this, map);
         return redraw();

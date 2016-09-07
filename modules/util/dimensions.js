@@ -1,23 +1,27 @@
-function refresh(target, node) {
+function refresh(selection, node) {
     var cr = node.getBoundingClientRect();
     var prop = [cr.width, cr.height];
-    target.property('__dimensions__', prop);
+    selection.property('__dimensions__', prop);
     return prop;
 }
 
-export function getDimensions (target) {
-    if (!target) return [0, 0];
-    var node = target.node();
-    return target.property('__dimensions__') || refresh(target, node);
+export function getDimensions (selection) {
+    if (!selection || selection.empty()) {
+        return [0, 0];
+    }
+    var node = selection.node();
+    return selection.property('__dimensions__') || refresh(selection, node);
 }
 
-export function setDimensions (target, dimensions) {
-    var node = target.node();
-    if (dimensions === null) {
-        if (!node) return [0,0];
-        return refresh(target, node);
+export function setDimensions (selection, dimensions) {
+    if (!selection || selection.empty()) {
+        return [0, 0];
     }
-    return target
+    var node = selection.node();
+    if (dimensions === null) {
+        return refresh(selection, node);
+    }
+    return selection
         .property('__dimensions__', [dimensions[0], dimensions[1]])
         .attr('width', dimensions[0])
         .attr('height', dimensions[1]);
