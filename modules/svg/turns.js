@@ -1,7 +1,7 @@
 import { angle } from '../geo/index';
 
 export function Turns(projection) {
-    return function drawTurns(surface, graph, turns) {
+    return function drawTurns(selection, graph, turns) {
         function key(turn) {
             return [turn.from.node + turn.via.node + turn.to.node].join('-');
         }
@@ -15,7 +15,7 @@ export function Turns(projection) {
                 (!turn.indirect_restriction && /^only_/.test(restriction) ? 'only' : 'no') + u;
         }
 
-        var groups = surface.selectAll('.layer-hit').selectAll('g.turn')
+        var groups = selection.selectAll('.layer-hit').selectAll('g.turn')
             .data(turns, key);
 
         // Enter

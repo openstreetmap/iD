@@ -252,8 +252,8 @@ export function Labels(projection, context) {
     var rtree = rbush(),
         bboxes = {};
 
-    function drawLabels(surface, graph, entities, filter, dimensions, fullRedraw) {
-        var hidePoints = !surface.selectAll('.node.point').node();
+    function drawLabels(selection, graph, entities, filter, dimensions, fullRedraw) {
+        var hidePoints = !selection.selectAll('.node.point').node();
 
         var labelable = [], i, k, entity;
         for (i = 0; i < label_stack.length; i++) labelable.push([]);
@@ -411,8 +411,8 @@ export function Labels(projection, context) {
             return v;
         }
 
-        var label = surface.selectAll('.layer-label'),
-            halo = surface.selectAll('.layer-halo');
+        var label = selection.selectAll('.layer-label'),
+            halo = selection.selectAll('.layer-halo');
 
         // points
         drawPointLabels(label, labelled.point, filter, 'pointlabel', positions.point);

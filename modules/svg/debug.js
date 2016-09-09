@@ -17,7 +17,7 @@ export function Debug(projection, context) {
         });
     }
 
-    function drawDebug(surface) {
+    function drawDebug(selection) {
         var showsTile = context.getDebug('tile'),
             showsCollision = context.getDebug('collision'),
             showsImagery = context.getDebug('imagery'),
@@ -68,7 +68,7 @@ export function Debug(projection, context) {
             .remove();
 
 
-        var layer = surface.selectAll('.layer-debug')
+        var layer = selection.selectAll('.layer-debug')
             .data(showsImagery || showsImperial || showsDriveLeft ? [0] : []);
 
         layer.enter()

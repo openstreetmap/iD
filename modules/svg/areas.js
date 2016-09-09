@@ -4,7 +4,7 @@ import { Path, TagClasses } from './index';
 import { Entity } from '../core/index';
 import { isSimpleMultipolygonOuterMember } from '../geo/index';
 
-export function Areas(projection) {
+export function Areas(projection, context) {
     // Patterns only work in Firefox when set directly on element.
     // (This is not a bug: https://bugzilla.mozilla.org/show_bug.cgi?id=750632)
     var patterns = {
@@ -33,7 +33,7 @@ export function Areas(projection) {
         this.style.fill = this.style.stroke = '';
     }
 
-    return function drawAreas(surface, graph, entities, filter) {
+    return function drawAreas(selection, graph, entities, filter) {
         var path = Path(projection, graph, true),
             areas = {},
             multipolygon;
@@ -71,7 +71,7 @@ export function Areas(projection) {
             fill: areas
         };
 
-        var clipPaths = surface.selectAll('defs').selectAll('.clipPath')
+        var clipPaths = context.surface().selectAll('defs').selectAll('.clipPath')
            .filter(filter)
            .data(data.clip, Entity.key);
 
@@ -91,13 +91,15 @@ export function Areas(projection) {
            .attr('d', path);
 
 
-        var areagroup = surface
+        var layer = selection.selectAll('.layer-areas');
+
+        var areagroup = layer
             .selectAll('g.areagroup')
             .data(['fill', 'shadow', 'stroke']);
 
         areagroup = areagroup.enter()
             .append('g')
-            .attr('class', function(d) { return 'layer areagroup area-' + d; })
+            .attr('class', function(d) { return 'areagroup area-' + d; })
             .merge(areagroup);
 
         var paths = areagroup
@@ -110,7 +112,7 @@ export function Areas(projection) {
         paths.exit()
             .remove();
 
-        var fills = surface.selectAll('.area-fill path.area').nodes();
+        var fills = selection.selectAll('.area-fill path.area').nodes();
 
         var bisect = d3.bisector(function(node) {
             return -node.__data__.area(graph);
@@ -135,7 +137,7 @@ export function Areas(projection) {
                     setPattern.apply(this, arguments);
                 }
             })
-                .call(TagClasses())
-                .attr('d', path);
+            .call(TagClasses())
+            .attr('d', path);
     };
 }

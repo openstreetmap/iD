@@ -14,19 +14,15 @@ export function Points(projection, context) {
         return b.loc[1] - a.loc[1];
     }
 
-    return function drawPoints(surface, graph, entities, filter) {
-        var wireframe = surface.classed('fill-wireframe'),
+    return function drawPoints(selection, graph, entities, filter) {
+        var wireframe = context.surface().classed('fill-wireframe'),
             points = wireframe ? [] : _.filter(entities, function(e) {
                 return e.geometry(graph) === 'point';
             });
 
         points.sort(sortY);
 
-        var layer = surface.selectAll('.layer-hit')
-            .data([0]);
-
-        layer = layer.enter().append('g').attr('class', 'layer-hit')
-            .merge(layer);
+        var layer = selection.selectAll('.layer-hit');
 
         var groups = layer.selectAll('g.point')
             .filter(filter)

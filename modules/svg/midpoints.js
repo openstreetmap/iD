@@ -3,7 +3,7 @@ import { PointTransform, TagClasses } from './index';
 import { angle, euclideanDistance, interp, lineIntersection } from '../geo/index';
 
 export function Midpoints(projection, context) {
-    return function drawMidpoints(surface, graph, entities, filter, extent) {
+    return function drawMidpoints(selection, graph, entities, filter, extent) {
         var poly = extent.polygon(),
             midpoints = {};
 
@@ -71,11 +71,7 @@ export function Midpoints(projection, context) {
             return false;
         }
 
-        var layer = surface.selectAll('.layer-hit')
-            .data([0]);
-
-        layer = layer.enter().append('g').attr('class', 'layer-hit')
-            .merge(layer);
+        var layer = selection.selectAll('.layer-hit');
 
         var groups = layer
             .selectAll('g.midpoint')

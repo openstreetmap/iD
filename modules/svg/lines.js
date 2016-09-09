@@ -30,7 +30,7 @@ export function Lines(projection) {
         return as - bs;
     }
 
-    return function drawLines(surface, graph, entities, filter) {
+    return function drawLines(selection, graph, entities, filter) {
         var ways = [], pathdata = {}, onewaydata = {},
             getPath = Path(projection, graph);
 
@@ -56,13 +56,7 @@ export function Lines(projection) {
                 .valueOf();
         });
 
-        var layer = surface
-            .selectAll('.layer-lines')
-            .data([0]);
-
-        layer = layer.enter()
-            .append('g').attr('class', 'layer-lines')
-            .merge(layer);
+        var layer = selection.selectAll('.layer-lines');
 
         var layergroup = layer
             .selectAll('g.layergroup')
@@ -70,7 +64,7 @@ export function Lines(projection) {
 
         layergroup = layergroup.enter()
             .append('g')
-            .attr('class', function(d) { return 'layer layergroup layer' + String(d); })
+            .attr('class', function(d) { return 'layergroup layer' + String(d); })
                 .merge(layergroup);
 
 
@@ -80,7 +74,7 @@ export function Lines(projection) {
 
         linegroup = linegroup.enter()
             .append('g')
-            .attr('class', function(d) { return 'layer linegroup line-' + d; })
+            .attr('class', function(d) { return 'linegroup line-' + d; })
             .merge(linegroup);
 
 
@@ -115,7 +109,7 @@ export function Lines(projection) {
 
         onewaygroup = onewaygroup.enter()
             .append('g')
-            .attr('class', 'layer onewaygroup')
+            .attr('class', 'onewaygroup')
             .merge(onewaygroup);
 
 

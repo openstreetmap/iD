@@ -24,7 +24,7 @@ export function Map(context) {
         drawPoints = Points(projection, context),
         drawVertices = Vertices(projection, context),
         drawLines = Lines(projection),
-        drawAreas = Areas(projection),
+        drawAreas = Areas(projection, context),
         drawMidpoints = Midpoints(projection, context),
         drawLabels = Labels(projection, context),
         supersurface,
@@ -95,14 +95,16 @@ export function Map(context) {
             .on('mouseover.vertices', function() {
                 if (map.editable() && !transformed) {
                     var hover = d3.event.target.__data__;
-                    surface.call(drawVertices.drawHover, context.graph(), hover, map.extent(), map.zoom());
+                    surface.selectAll('.data-layer-osm')
+                        .call(drawVertices.drawHover, context.graph(), hover, map.extent(), map.zoom());
                     dispatch.call('drawn', this, {full: false});
                 }
             })
             .on('mouseout.vertices', function() {
                 if (map.editable() && !transformed) {
                     var hover = d3.event.relatedTarget && d3.event.relatedTarget.__data__;
-                    surface.call(drawVertices.drawHover, context.graph(), hover, map.extent(), map.zoom());
+                    surface.selectAll('.data-layer-osm')
+                        .call(drawVertices.drawHover, context.graph(), hover, map.extent(), map.zoom());
                     dispatch.call('drawn', this, {full: false});
                 }
             });
@@ -117,7 +119,7 @@ export function Map(context) {
                     graph = context.graph();
 
                 all = context.features().filter(all, graph);
-                surface
+                surface.selectAll('.data-layer-osm')
                     .call(drawVertices, graph, all, filter, map.extent(), map.zoom())
                     .call(drawMidpoints, graph, all, filter, map.trimmedExtent());
                 dispatch.call('drawn', this, {full: false});
@@ -175,7 +177,7 @@ export function Map(context) {
 
         data = features.filter(data, graph);
 
-        surface
+        surface.selectAll('.data-layer-osm')
             .call(drawVertices, graph, data, filter, map.extent(), map.zoom())
             .call(drawLines, graph, data, filter)
             .call(drawAreas, graph, data, filter)

@@ -36,11 +36,11 @@ export function Gpx(projection, context, dispatch) {
     }
 
 
-    function drawGpx(surface) {
+    function drawGpx(selection) {
         var geojson = Gpx.geojson,
             enabled = Gpx.enabled;
 
-        layer = surface.selectAll('.layer-gpx')
+        layer = selection.selectAll('.layer-gpx')
             .data(enabled ? [0] : []);
 
         layer.enter()

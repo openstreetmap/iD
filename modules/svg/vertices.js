@@ -134,9 +134,9 @@ export function Vertices(projection, context) {
             .remove();
     }
 
-    function drawVertices(surface, graph, entities, filter, extent, zoom) {
+    function drawVertices(selection, graph, entities, filter, extent, zoom) {
         var selected = siblingAndChildVertices(context.selectedIDs(), graph, extent),
-            wireframe = surface.classed('fill-wireframe'),
+            wireframe = context.surface().classed('fill-wireframe'),
             vertices = [];
 
         for (var i = 0; i < entities.length; i++) {
@@ -158,29 +158,26 @@ export function Vertices(projection, context) {
             }
         }
 
-        var layer = surface.selectAll('.layer-hit')
-            .data([0]);
-        layer = layer.enter().append('g').attr('class', 'layer-hit')
-            .merge(layer);
-
+        var layer = selection.selectAll('.layer-hit');
         layer.selectAll('g.vertex.vertex-persistent')
             .filter(filter)
             .call(draw, vertices, 'vertex-persistent', graph, zoom);
 
-        drawHover(surface, graph, extent, zoom);
+        drawHover(selection, graph, extent, zoom);
     }
 
-    function drawHover(surface, graph, extent, zoom) {
+    function drawHover(selection, graph, extent, zoom) {
         var hovered = hover ? siblingAndChildVertices([hover.id], graph, extent) : {};
+        var layer = selection.selectAll('.layer-hit');
 
-        surface.selectAll('.layer-hit').selectAll('g.vertex.vertex-hover')
+        layer.selectAll('g.vertex.vertex-hover')
             .call(draw, d3.values(hovered), 'vertex-hover', graph, zoom);
     }
 
-    drawVertices.drawHover = function(surface, graph, target, extent, zoom) {
+    drawVertices.drawHover = function(selection, graph, target, extent, zoom) {
         if (target === hover) return;
         hover = target;
-        drawHover(surface, graph, extent, zoom);
+        drawHover(selection, graph, extent, zoom);
     };
 
     return drawVertices;
