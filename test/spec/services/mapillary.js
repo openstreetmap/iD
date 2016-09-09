@@ -1,6 +1,10 @@
 describe('iD.services.mapillary', function() {
     var dimensions = [64, 64],
-        context, server, mapillary;
+        ua = navigator.userAgent,
+        isPhantom = (navigator.userAgent.match(/PhantomJS/) !== null),
+        uaMock = function () { return ua; },
+        context, server, mapillary, orig;
+
 
     beforeEach(function() {
         context = iD.Context(window).assetPath('../dist/');
@@ -10,10 +14,28 @@ describe('iD.services.mapillary', function() {
         server = sinon.fakeServer.create();
         mapillary = iD.services.mapillary.init();
         mapillary.reset();
+
+        /* eslint-disable no-native-reassign */
+        /* mock userAgent */
+        if (isPhantom) {
+            orig = navigator;
+            navigator = Object.create(orig, { userAgent: { get: uaMock }});
+        } else {
+            orig = navigator.__lookupGetter__('userAgent');
+            navigator.__defineGetter__('userAgent', uaMock);
+        }
     });
 
     afterEach(function() {
         server.restore();
+
+        /* restore userAgent */
+        if (isPhantom) {
+            navigator = orig;
+        } else {
+            navigator.__defineGetter__('userAgent', orig);
+        }
+        /* eslint-enable no-native-reassign */
     });
 
 
@@ -324,17 +346,13 @@ describe('iD.services.mapillary', function() {
 
     describe('#signsSupported', function() {
         it('returns false for Internet Explorer', function() {
-            var detect = iD.detect;
-            iD.detect = function() { return { ie: true, browser: 'Internet Explorer' }; };
+            ua = 'Trident/7.0; rv:11.0';
             expect(mapillary.signsSupported()).to.be.false;
-            iD.detect = detect;
         });
 
         it('returns false for Safari', function() {
-            var detect = iD.detect;
-            iD.detect = function() { return { ie: false, browser: 'Safari' }; };
+            ua = 'Version/9.1 Safari/601';
             expect(mapillary.signsSupported()).to.be.false;
-            iD.detect = detect;
         });
     });
 

@@ -1,16 +1,28 @@
 describe('iD.ui.cmd', function () {
-    var origNavigator, ua;
+    var orig,
+        ua = navigator.userAgent,
+        isPhantom = (navigator.userAgent.match(/PhantomJS/) !== null),
+        uaMock = function () { return ua; };
 
     beforeEach(function() {
         /* eslint-disable no-native-reassign */
-        origNavigator = navigator;
-        navigator = Object.create(origNavigator, {
-            userAgent: { get: function() { return ua; } }
-        });
+        /* mock userAgent */
+        if (isPhantom) {
+            orig = navigator;
+            navigator = Object.create(orig, { userAgent: { get: uaMock }});
+        } else {
+            orig = navigator.__lookupGetter__('userAgent');
+            navigator.__defineGetter__('userAgent', uaMock);
+        }
     });
 
     afterEach(function() {
-        navigator = origNavigator;
+        /* restore userAgent */
+        if (isPhantom) {
+            navigator = orig;
+        } else {
+            navigator.__defineGetter__('userAgent', orig);
+        }
         /* eslint-enable no-native-reassign */
     });
 
