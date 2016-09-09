@@ -54,7 +54,7 @@ export function restrictions(field, context) {
             .translate([c[0] - s[0], c[1] - s[1]])
             .clipExtent([[0, 0], d]);
 
-        var drawLayers = setDimensions(Layers(projection, context).only('osm'), d),
+        var drawLayers = Layers(projection, context).only('osm').dimensions(d),
             drawVertices = Vertices(projection, context),
             drawLines = Lines(projection, context),
             drawTurns = Turns(projection, context);
@@ -65,9 +65,8 @@ export function restrictions(field, context) {
             .call(hover);
 
 
-        var surface = wrap.selectAll('.surface');
-
-        setDimensions(surface, d)
+        var surface = wrap.selectAll('.surface')
+            .call(setDimensions, d)
             .call(drawVertices, graph, [vertex], filter, extent, z)
             .call(drawLines, graph, intersection.ways, filter)
             .call(drawTurns, graph, intersection.turns(fromNodeID));
