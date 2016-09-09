@@ -1,13 +1,18 @@
 describe('iD.svg.Vertices', function () {
-    var surface,
-        projection = Object,
-        context;
+    var context, surface,
+        projection = d3.geoProjection(function(x, y) { return [x, -y]; })
+            .translate([0, 0])
+            .scale(180 / Math.PI)
+            .clipExtent([[0, 0], [Infinity, Infinity]]);
 
     beforeEach(function () {
         context = iD.Context(window);
-        surface = d3.select(document.createElementNS('http://www.w3.org/2000/svg', 'svg'))
-            .call(iD.svg.Layers(projection, context));
+        d3.select(document.createElement('div'))
+            .attr('id', 'map')
+            .call(context.map());
+        surface = context.surface();
     });
+
 
     it('adds the .shared class to vertices that are members of two or more ways', function () {
         var node = iD.Node({loc: [0, 0]}),

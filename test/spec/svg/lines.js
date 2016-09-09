@@ -1,14 +1,20 @@
 describe('iD.svg.Lines', function () {
-    var surface,
-        projection = d3.geoProjection(function(x, y) { return [x, y]; })
+    var context, surface,
+        projection = d3.geoProjection(function(x, y) { return [x, -y]; })
+            .translate([0, 0])
+            .scale(180 / Math.PI)
             .clipExtent([[0, 0], [Infinity, Infinity]]),
         all = function() { return true; },
         none = function() { return false; };
 
     beforeEach(function () {
-        surface = d3.select(document.createElementNS('http://www.w3.org/2000/svg', 'svg'))
-            .call(iD.svg.Layers(projection, iD.Context(window)));
+        context = iD.Context(window);
+        d3.select(document.createElement('div'))
+            .attr('id', 'map')
+            .call(context.map());
+        surface = context.surface();
     });
+
 
     it('adds way and line classes', function () {
         var a = iD.Node({loc: [0, 0]}),

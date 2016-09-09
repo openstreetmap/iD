@@ -1,6 +1,7 @@
 import * as d3 from 'd3';
 import { d3geoTile } from '../lib/d3.geo.tile';
-import { prefixCSSProperty, functor } from '../util/index';
+import { prefixCSSProperty } from '../util/index';
+import { BackgroundSource } from './background_source.js';
 
 export function TileLayer(context) {
     var tileSize = 256,
@@ -10,7 +11,7 @@ export function TileLayer(context) {
         tileOrigin,
         z,
         transformProp = prefixCSSProperty('Transform'),
-        source = functor('');
+        source = BackgroundSource.None();
 
 
     // blacklist overlay tiles around Null Island..

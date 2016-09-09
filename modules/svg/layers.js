@@ -24,23 +24,25 @@ export function Layers(projection, context) {
         svg = selection.selectAll('.surface')
             .data([0]);
 
-        svg.enter()
+        svg = svg.enter()
             .append('svg')
             .attr('class', 'surface')
+            .merge(svg);
+
+        svg
             .append('defs');
 
         var groups = svg.selectAll('.data-layer')
             .data(layers);
 
-        groups.enter()
-            .append('g')
-            .attr('class', function(d) { return 'data-layer data-layer-' + d.id; });
-
-        groups
-            .each(function(d) { d3.select(this).call(d.layer); });
-
         groups.exit()
             .remove();
+
+        groups.enter()
+            .append('g')
+            .attr('class', function(d) { return 'data-layer data-layer-' + d.id; })
+            .merge(groups)
+            .each(function(d) { d3.select(this).call(d.layer); });
     }
 
     drawLayers.all = function() {

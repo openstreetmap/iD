@@ -64,12 +64,15 @@ export function Midpoints(projection, context) {
             if (midpoints[d.id])
                 return true;
 
-            for (var i = 0; i < d.parents.length; i++)
-                if (filter(d.parents[i]))
+            for (var i = 0; i < d.parents.length; i++) {
+                if (filter(d.parents[i])) {
                     return true;
+                }
+            }
 
             return false;
         }
+
 
         var layer = selection.selectAll('.layer-hit');
 
@@ -77,6 +80,9 @@ export function Midpoints(projection, context) {
             .selectAll('g.midpoint')
             .filter(midpointFilter)
             .data(_.values(midpoints), function(d) { return d.id; });
+
+        groups.exit()
+            .remove();
 
         var enter = groups.enter()
             .insert('g', ':first-child')
@@ -90,11 +96,12 @@ export function Midpoints(projection, context) {
             .attr('points', '-3,4 5,0 -3,-4')
             .attr('class', 'fill');
 
-        groups
+        groups = groups
+            .merge(enter)
             .attr('transform', function(d) {
                 var translate = PointTransform(projection),
-                    a = context.entity(d.edge[0]),
-                    b = context.entity(d.edge[1]),
+                    a = graph.entity(d.edge[0]),
+                    b = graph.entity(d.edge[1]),
                     angleVal = Math.round(angle(a, b, projection) * (180 / Math.PI));
                 return translate(d) + ' rotate(' + angleVal + ')';
             })
@@ -106,7 +113,5 @@ export function Midpoints(projection, context) {
         groups.select('polygon.shadow');
         groups.select('polygon.fill');
 
-        groups.exit()
-            .remove();
     };
 }
