@@ -1861,6 +1861,10 @@
         },
         {
             "key": "railway",
+            "value": "crossing"
+        },
+        {
+            "key": "railway",
             "value": "disused"
         },
         {
