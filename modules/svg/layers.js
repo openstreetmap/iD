@@ -29,8 +29,12 @@ export function Layers(projection, context) {
             .attr('class', 'surface')
             .merge(svg);
 
-        svg
-            .append('defs');
+        var defs = svg.selectAll('.surface-defs')
+            .data([0]);
+
+        defs.enter()
+            .append('defs')
+            .attr('class', 'surface-defs');
 
         var groups = svg.selectAll('.data-layer')
             .data(layers);

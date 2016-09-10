@@ -16,6 +16,13 @@ describe('iD.svg.Layers', function () {
         expect(container.selectAll('svg')).to.be.classed('surface');
     });
 
+    it('creates surface defs', function () {
+        container.call(iD.svg.Layers(projection, context));
+        var nodes = container.selectAll('svg defs').nodes();
+        expect(nodes.length).to.eql(1);
+        expect(d3.select(nodes[0])).to.be.classed('surface-defs');
+    });
+
     it('creates default data layers', function () {
         container.call(iD.svg.Layers(projection, context));
         var nodes = container.selectAll('svg .data-layer').nodes();
