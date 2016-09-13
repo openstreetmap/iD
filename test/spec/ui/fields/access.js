@@ -1,4 +1,4 @@
-describe('access', function() {
+describe('iD.ui.fields.access', function() {
     var selection, field;
     beforeEach(function() {
         selection = d3.select(document.createElement('div'));

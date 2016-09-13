@@ -1,4 +1,4 @@
-describe('localized', function() {
+describe('iD.ui.fields.localized', function() {
     var selection, field;
 
     beforeEach(function() {

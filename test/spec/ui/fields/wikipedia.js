@@ -1,4 +1,4 @@
-describe('wikipedia', function() {
+describe('iD.ui.fields.wikipedia', function() {
     var entity, context, selection, field, selectedId;
 
 
