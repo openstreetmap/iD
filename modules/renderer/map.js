@@ -60,10 +60,7 @@ export function Map(context) {
 
         selection
             .on('dblclick.map', dblClick)
-            .call(zoom, d3.zoomIdentity
-                .translate(projection.translate())
-                .scale(projection.scale())
-            );
+            .call(zoom, projection.transform());
 
         supersurface = selection.append('div')
             .attr('id', 'supersurface')
@@ -260,10 +257,10 @@ export function Map(context) {
             difference = extent = undefined;
         }
 
-        var zoom = String(~~map.zoom());
-        if (surface.attr('data-zoom') !== zoom) {
-            surface.attr('data-zoom', zoom)
-                .classed('low-zoom', zoom <= 16);
+        var z = String(~~map.zoom());
+        if (surface.attr('data-zoom') !== z) {
+            surface.attr('data-zoom', z)
+                .classed('low-zoom', z <= 16);
         }
 
         if (!difference) {
@@ -281,11 +278,7 @@ export function Map(context) {
         wrapper
             .call(drawLayers);
 
-        transformStart = {
-            k: projection.scale(),
-            x: projection.translate()[0],
-            y: projection.translate()[1]
-        };
+        transformStart = projection.transform();
 
         return map;
     }
