@@ -1466,7 +1466,7 @@ describe('iD.Way', function() {
             });
         });
 
-        describe('maxspeed:lanes', function() {
+        describe.only('maxspeed:lanes', function() {
 
             it('should parse correctly', function() {
                 var maxspeedLanes = iD.Way({
@@ -1494,10 +1494,10 @@ describe('iD.Way', function() {
                     }
                 }).lanes().metadata;
                 expect(metadata.maxspeedLanes.forward).to.deep.equal([
-                    'none', 40, 40, 40
+                    null, 40, 40, 40
                 ]);
                 expect(metadata.maxspeedLanes.backward).to.deep.equal([
-                    'none'
+                    null
                 ]);
             });
 
@@ -1511,7 +1511,7 @@ describe('iD.Way', function() {
                     }
                 }).lanes().metadata.maxspeedLanes;
                 expect(maxspeedLanes.unspecified).to.deep.equal([
-                    30, 'none', 'none', 'none'
+                    30, null, null, null
                 ]);
             });
 
@@ -1529,7 +1529,7 @@ describe('iD.Way', function() {
                     }
                 }).lanes();
                 expect(lanes.metadata.maxspeedLanes.unspecified).to.deep.equal([
-                    30, 'none', 'none', 'none'
+                    30, null, null, null
                 ]);
             });
 
@@ -1543,7 +1543,7 @@ describe('iD.Way', function() {
                     }
                 }).lanes().metadata.maxspeedLanes;
                 expect(maxspeedLanes.unspecified).to.deep.equal([
-                    30, 'none', 'none', 'none', 'none'
+                    30, null, null, null, null
                 ]);
                 maxspeedLanes = iD.Way({
                     tags: {
@@ -1565,7 +1565,7 @@ describe('iD.Way', function() {
                     }
                 }).lanes().metadata.maxspeedLanes;
                 expect(maxspeedLanes.unspecified).to.deep.equal([
-                    'none', 40, 40, 40, 40
+                    null, 40, 40, 40, 40
                 ]);
             });
 
@@ -1579,7 +1579,7 @@ describe('iD.Way', function() {
                     }
                 }).lanes().metadata.maxspeedLanes;
                 expect(maxspeedLanes.unspecified).to.deep.equal([
-                    'none', 40, 'unknown', 40, 40
+                    null, 40, 'unknown', 40, 40
                 ]);
                 maxspeedLanes = iD.Way({
                     tags: {
@@ -1591,9 +1591,23 @@ describe('iD.Way', function() {
                 }).lanes().metadata.maxspeedLanes;
 
                 expect(maxspeedLanes.unspecified).to.deep.equal([
-                    'none', 40, 'unknown', 40, 'unknown'
+                    null, 40, 'unknown', 40, 'unknown'
                 ]);
             });
+
+            it('should parse maxspeed when none', function() {
+                var maxspeedLanes = iD.Way({
+                    tags: {
+                        highway: 'residential',
+                        lanes: 5,
+                        'maxspeed:lanes': '30|40|none|40|40'
+                    }
+                }).lanes().metadata.maxspeedLanes;
+                expect(maxspeedLanes.unspecified).to.deep.equal([
+                    30, 40, 'none', 40, 40
+                ]);
+            });
+
             it('fills lanes.unspecified with key \'maxspeed\' correctly', function() {
                 var lanes = iD.Way({
                     tags: {
@@ -1607,7 +1621,7 @@ describe('iD.Way', function() {
                     return l.maxspeed;
                 });
                 expect(maxspeedLanes).to.deep.equal([
-                    'none', 40, 'unknown', 40, 40
+                    null, 40, 'unknown', 40, 40
                 ]);
             });
         });

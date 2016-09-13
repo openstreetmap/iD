@@ -190,8 +190,9 @@ _.extend(Way.prototype, {
             if (!str) return;
             var parsedArray = str.split('|')
                 .map(function (s) {
+                    if (s === 'none') return s;
                     var m = parseInt(s);
-                    if (s === '' || m === maxspeed) return 'none';
+                    if (s === '' || m === maxspeed) return null;
                     return _.isNaN(m) ? 'unknown': m;
                 });
             return parsedArray;
