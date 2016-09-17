@@ -6,12 +6,16 @@ import { Detect } from '../util/detect';
 import { Extent } from '../geo/index';
 import { cmd } from './cmd';
 
+
+
 export function Info(context) {
     var key = cmd('⌘I'),
-        imperial = (Detect().locale.toLowerCase() === 'en-us'),
-        hidden = true;
+        isImperial = (Detect().locale.toLowerCase() === 'en-us'),
+        isHidden = true;
+
 
     function info(selection) {
+
         function radiansToMeters(r) {
             // using WGS84 authalic radius (6371007.1809 m)
             return r * 6371007.1809;
@@ -21,6 +25,7 @@ export function Info(context) {
             // http://gis.stackexchange.com/a/124857/40446
             return r / 12.56637 * 510065621724000;
         }
+
 
         function toLineString(feature) {
             if (feature.type === 'LineString') return feature;
@@ -35,11 +40,12 @@ export function Info(context) {
             return result;
         }
 
+
         function displayLength(m) {
-            var d = m * (imperial ? 3.28084 : 1),
+            var d = m * (isImperial ? 3.28084 : 1),
                 p, unit;
 
-            if (imperial) {
+            if (isImperial) {
                 if (d >= 5280) {
                     d /= 5280;
                     unit = 'mi';
@@ -61,11 +67,12 @@ export function Info(context) {
             return String(d.toFixed(p)) + ' ' + unit;
         }
 
+
         function displayArea(m2) {
-            var d = m2 * (imperial ? 10.7639111056 : 1),
+            var d = m2 * (isImperial ? 10.7639111056 : 1),
                 d1, d2, p1, p2, unit1, unit2;
 
-            if (imperial) {
+            if (isImperial) {
                 if (d >= 6969600) {     // > 0.25mi² show mi²
                     d1 = d / 27878400;
                     unit1 = 'mi²';
@@ -104,7 +111,7 @@ export function Info(context) {
 
 
         function redraw() {
-            if (hidden) return;
+            if (isHidden) return;
 
             var resolver = context.graph(),
                 selected = _.filter(context.selectedIDs(), function(e) { return context.hasEntity(e); }),
@@ -129,14 +136,14 @@ export function Info(context) {
 
             var list = wrap.append('ul');
 
-            // multiple wrap, just display extent center..
+            // multiple features, just display extent center..
             if (!singular) {
                 list.append('li')
                     .text(t('infobox.center') + ': ' + center[0].toFixed(5) + ', ' + center[1].toFixed(5));
                 return;
             }
 
-            // single wrap, display details..
+            // single feature, display details..
             if (!entity) return;
             var geometry = entity.geometry(resolver);
 
@@ -164,14 +171,14 @@ export function Info(context) {
                     .text(t('infobox.centroid') + ': ' + centroid[0].toFixed(5) + ', ' + centroid[1].toFixed(5));
 
 
-                var toggle  = imperial ? 'imperial' : 'metric';
+                var toggle  = isImperial ? 'imperial' : 'metric';
                 wrap.append('a')
                     .text(t('infobox.' + toggle))
                     .attr('href', '#')
                     .attr('class', 'button')
                     .on('click', function() {
                         d3.event.preventDefault();
-                        imperial = !imperial;
+                        isImperial = !isImperial;
                         redraw();
                     });
 
@@ -188,11 +195,13 @@ export function Info(context) {
 
 
         function toggle() {
-            if (d3.event) d3.event.preventDefault();
+            if (d3.event) {
+                d3.event.preventDefault();
+            }
 
-            hidden = !hidden;
+            isHidden = !isHidden;
 
-            if (hidden) {
+            if (isHidden) {
                 wrap
                     .style('display', 'block')
                     .style('opacity', 1)
@@ -208,9 +217,10 @@ export function Info(context) {
                     .style('opacity', 0)
                     .transition()
                     .duration(200)
-                    .style('opacity', 1);
-
-                redraw();
+                    .style('opacity', 1)
+                    .on('end', function() {
+                        redraw();
+                    });
             }
         }
 
@@ -218,10 +228,11 @@ export function Info(context) {
         var wrap = selection.selectAll('.infobox')
             .data([0]);
 
-        wrap.enter()
+        wrap = wrap.enter()
             .append('div')
             .attr('class', 'infobox fillD2')
-            .style('display', (hidden ? 'none' : 'block'));
+            .style('display', (isHidden ? 'none' : 'block'))
+            .merge(wrap);
 
         context.map()
             .on('drawn.info', redraw);
