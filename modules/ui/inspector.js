@@ -3,6 +3,7 @@ import { EntityEditor } from './entity_editor';
 import { PresetList } from './preset_list';
 import { ViewOnOSM } from './view_on_osm';
 
+
 export function Inspector(context) {
     var presetList = PresetList(context),
         entityEditor = EntityEditor(context),
@@ -21,20 +22,24 @@ export function Inspector(context) {
             .entityID(entityID)
             .on('choose', showList);
 
-        var $wrap = selection.selectAll('.panewrap')
+        var wrap = selection.selectAll('.panewrap')
             .data([0]);
 
-        var $enter = $wrap.enter().append('div')
+        var enter = wrap.enter()
+            .append('div')
             .attr('class', 'panewrap');
 
-        $enter.append('div')
+        enter
+            .append('div')
             .attr('class', 'preset-list-pane pane');
 
-        $enter.append('div')
+        enter
+            .append('div')
             .attr('class', 'entity-editor-pane pane');
 
-        var $presetPane = $wrap.select('.preset-list-pane');
-        var $editorPane = $wrap.select('.entity-editor-pane');
+        wrap = wrap.merge(enter);
+        var presetPane = wrap.selectAll('.preset-list-pane');
+        var editorPane = wrap.selectAll('.entity-editor-pane');
 
         var graph = context.graph(),
             entity = context.entity(entityID),
@@ -43,40 +48,42 @@ export function Inspector(context) {
                 entity.isHighwayIntersection(graph);
 
         if (showEditor) {
-            $wrap.style('right', '0%');
-            $editorPane.call(entityEditor);
+            wrap.style('right', '0%');
+            editorPane.call(entityEditor);
         } else {
-            $wrap.style('right', '-100%');
-            $presetPane.call(presetList);
+            wrap.style('right', '-100%');
+            presetPane.call(presetList);
         }
 
-        var $footer = selection.selectAll('.footer')
+        var footer = selection.selectAll('.footer')
             .data([0]);
 
-        $footer.enter().append('div')
+        footer.enter()
+            .append('div')
             .attr('class', 'footer');
 
-        selection.select('.footer')
-            .call(ViewOnOSM(context)
-                .entityID(entityID));
+        selection.selectAll('.footer')
+            .call(ViewOnOSM(context).entityID(entityID));
+
 
         function showList(preset) {
-            $wrap.transition()
+            wrap.transition()
                 .styleTween('right', function() { return d3.interpolate('0%', '-100%'); });
 
-            $presetPane.call(presetList
-                .preset(preset)
-                .autofocus(true));
+            presetPane
+                .call(presetList.preset(preset).autofocus(true));
         }
+
 
         function setPreset(preset) {
-            $wrap.transition()
+            wrap.transition()
                 .styleTween('right', function() { return d3.interpolate('-100%', '0%'); });
 
-            $editorPane.call(entityEditor
-                .preset(preset));
+            editorPane
+                .call(entityEditor.preset(preset));
         }
     }
+
 
     inspector.state = function(_) {
         if (!arguments.length) return state;
@@ -85,11 +92,13 @@ export function Inspector(context) {
         return inspector;
     };
 
+
     inspector.entityID = function(_) {
         if (!arguments.length) return entityID;
         entityID = _;
         return inspector;
     };
+
 
     inspector.newFeature = function(_) {
         if (!arguments.length) return newFeature;

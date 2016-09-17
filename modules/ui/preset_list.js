@@ -9,11 +9,13 @@ import { Icon } from '../svg/index';
 import { PresetIcon } from './preset_icon';
 import { TagReference } from './tag_reference';
 
+
 export function PresetList(context) {
     var dispatch = d3.dispatch('choose'),
         id,
         currentPreset,
         autofocus = false;
+
 
     function presetList(selection) {
         var entity = context.entity(id),
@@ -118,6 +120,7 @@ export function PresetList(context) {
             .call(drawList, context.presets().defaults(geometry, 36));
     }
 
+
     function drawList(list, presets) {
         var collection = presets.collection.map(function(preset) {
             return preset.members ? CategoryItem(preset) : PresetItem(preset);
@@ -126,21 +129,21 @@ export function PresetList(context) {
         var items = list.selectAll('.preset-list-item')
             .data(collection, function(d) { return d.preset.id; });
 
-        items.enter().append('div')
-            .attr('class', function(item) { return 'preset-list-item preset-' + item.preset.id.replace('/', '-'); })
-            .classed('current', function(item) { return item.preset === currentPreset; })
-            .each(function(item) {
-                d3.select(this).call(item);
-            })
-            .style('opacity', 0)
-            .transition()
-            .style('opacity', 1);
-
         items.order();
 
         items.exit()
             .remove();
+
+        items.enter()
+            .append('div')
+            .attr('class', function(item) { return 'preset-list-item preset-' + item.preset.id.replace('/', '-'); })
+            .classed('current', function(item) { return item.preset === currentPreset; })
+            .each(function(item) { d3.select(this).call(item); })
+            .style('opacity', 0)
+            .transition()
+            .style('opacity', 1);
     }
+
 
     function CategoryItem(preset) {
         var box, sublist, shown = false;
@@ -206,6 +209,7 @@ export function PresetList(context) {
         return item;
     }
 
+
     function PresetItem(preset) {
         function item(selection) {
             var wrap = selection.append('div')
@@ -246,11 +250,13 @@ export function PresetList(context) {
         return item;
     }
 
+
     presetList.autofocus = function(_) {
         if (!arguments.length) return autofocus;
         autofocus = _;
         return presetList;
     };
+
 
     presetList.entityID = function(_) {
         if (!arguments.length) return id;
@@ -258,6 +264,7 @@ export function PresetList(context) {
         presetList.preset(context.presets().match(context.entity(id), context.graph()));
         return presetList;
     };
+
 
     presetList.preset = function(_) {
         if (!arguments.length) return currentPreset;

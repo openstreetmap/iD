@@ -3,6 +3,7 @@ import { functor } from '../util/index';
 import { Icon } from '../svg/index';
 import { featureIcons } from '../../data/index';
 
+
 export function PresetIcon() {
     var preset, geometry;
 
@@ -14,10 +15,12 @@ export function PresetIcon() {
         var selection = d3.select(this),
             p = preset.apply(this, arguments),
             geom = geometry.apply(this, arguments),
-            icon = p.icon || (geom === 'line' ? 'other-line' : 'marker-stroked'),
-            maki = featureIcons.hasOwnProperty(icon + '-24');
+            picon = p.icon || (geom === 'line' ? 'other-line' : 'marker-stroked'),
+            isMaki = featureIcons.hasOwnProperty(picon + '-24');
 
-        if (icon === 'dentist') maki = true;  // workaround for dentist icon missing in `maki-sprite.json`
+        if (picon === 'dentist') {
+            isMaki = true;  // workaround for dentist icon missing in `maki-sprite.json`
+        }
 
         function tag_classes(p) {
             var s = '';
@@ -30,52 +33,60 @@ export function PresetIcon() {
             return s;
         }
 
-        var $fill = selection.selectAll('.preset-icon-fill')
+        var fill = selection.selectAll('.preset-icon-fill')
             .data([0]);
 
-        $fill.enter().append('div');
-
-        $fill.attr('class', function() {
-            return 'preset-icon-fill preset-icon-fill-' + geom + tag_classes(p);
-        });
-
-        var $frame = selection.selectAll('.preset-icon-frame')
-            .data([0]);
-
-        $frame.enter()
+        fill = fill.enter()
             .append('div')
-            .call(Icon('#preset-icon-frame'));
+            .merge(fill);
 
-        $frame.attr('class', function() {
-            return 'preset-icon-frame ' + (geom === 'area' ? '' : 'hide');
-        });
-
-
-        var $icon = selection.selectAll('.preset-icon')
-            .data([0]);
-
-        $icon.enter()
-            .append('div')
-            .attr('class', 'preset-icon')
-            .call(Icon(''));
-
-        $icon
-            .attr('class', 'preset-icon preset-icon-' + (maki ? '32' : (geom === 'area' ? '44' : '60')));
-
-        $icon.selectAll('svg')
+        fill
             .attr('class', function() {
-                return 'icon ' + icon + tag_classes(p);
+                return 'preset-icon-fill preset-icon-fill-' + geom + tag_classes(p);
             });
 
-        $icon.selectAll('use')       // workaround: maki parking-24 broken?
-            .attr('href', '#' + icon + (maki ? ( icon === 'parking' ? '-18' : '-24') : ''));
+        var frame = selection.selectAll('.preset-icon-frame')
+            .data([0]);
+
+        frame = frame.enter()
+            .append('div')
+            .call(Icon('#preset-icon-frame'))
+            .merge(frame);
+
+        frame
+            .attr('class', function() {
+                return 'preset-icon-frame ' + (geom === 'area' ? '' : 'hide');
+            });
+
+
+        var icon = selection.selectAll('.preset-icon')
+            .data([0]);
+
+        icon = icon.enter()
+            .append('div')
+            .attr('class', 'preset-icon')
+            .call(Icon(''))
+            .merge(icon);
+
+        icon
+            .attr('class', 'preset-icon preset-icon-' + (isMaki ? '32' : (geom === 'area' ? '44' : '60')));
+
+        icon.selectAll('svg')
+            .attr('class', function() {
+                return 'icon ' + picon + tag_classes(p);
+            });
+
+        icon.selectAll('use')       // workaround: maki parking-24 broken?
+            .attr('href', '#' + picon + (isMaki ? (picon === 'parking' ? '-18' : '-24') : ''));
     }
+
 
     presetIcon.preset = function(_) {
         if (!arguments.length) return preset;
         preset = functor(_);
         return presetIcon;
     };
+
 
     presetIcon.geometry = function(_) {
         if (!arguments.length) return geometry;
