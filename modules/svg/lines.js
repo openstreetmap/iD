@@ -65,7 +65,7 @@ export function Lines(projection) {
         layergroup = layergroup.enter()
             .append('g')
             .attr('class', function(d) { return 'layergroup layer' + String(d); })
-                .merge(layergroup);
+            .merge(layergroup);
 
 
         var linegroup = layergroup
@@ -82,11 +82,12 @@ export function Lines(projection) {
             .selectAll('path')
             .filter(filter)
             .data(
-                function() {
-                    return pathdata[this.parentNode.__data__] || [];
-                },
+                function() { return pathdata[this.parentNode.__data__] || []; },
                 Entity.key
             );
+
+        lines.exit()
+            .remove();
 
         // Optimization: call simple TagClasses only on enter selection. This
         // works because Entity.key is defined to include the entity v attribute.
@@ -98,9 +99,6 @@ export function Lines(projection) {
                 .sort(waystack)
                 .attr('d', getPath)
                 .call(TagClasses().tags(RelationMemberTags(graph)));
-
-        lines.exit()
-            .remove();
 
 
         var onewaygroup = layergroup

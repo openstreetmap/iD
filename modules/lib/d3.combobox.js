@@ -39,9 +39,10 @@ export function d3combobox() {
                     .filter(function(d) { return d === input.node(); })
                     .data([input.node()]);
 
-                caret = caret.enter().insert('div', function() { return sibling; })
+                caret = caret.enter()
+                  .insert('div', function() { return sibling; })
                     .attr('class', 'combobox-caret')
-                    .merge(caret);
+                  .merge(caret);
 
                 caret
                     .on('mousedown', function () {
@@ -218,19 +219,20 @@ export function d3combobox() {
                 .selectAll('a.combobox-option')
                 .data(suggestions, function(d) { return d.value; });
 
-            options.enter().append('a')
-                .attr('class', 'combobox-option')
-                .text(function(d) { return d.value; });
+            options.exit()
+                .remove();
 
-            options
+            options.enter()
+              .append('a')
+                .attr('class', 'combobox-option')
+                .text(function(d) { return d.value; })
+              .merge(options)
                 .attr('title', function(d) { return d.title; })
                 .classed('selected', function(d, i) { return i === idx; })
                 .on('mouseover', select)
                 .on('click', accept)
                 .order();
 
-            options.exit()
-                .remove();
 
             var node = attachTo ? attachTo.node() : input.node(),
                 rect = node.getBoundingClientRect();

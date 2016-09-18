@@ -4,17 +4,20 @@ import { getDimensions, setDimensions } from '../util/dimensions';
 import { PointTransform } from './point_transform';
 import { mapillary as mapillaryService } from '../services/index';
 
+
 export function MapillarySigns(projection, context, dispatch) {
     var debouncedRedraw = _.debounce(function () { dispatch.call('change'); }, 1000),
         minZoom = 12,
         layer = d3.select(null),
         _mapillary;
 
+
     function init() {
         if (MapillarySigns.initialized) return;  // run once
         MapillarySigns.enabled = false;
         MapillarySigns.initialized = true;
     }
+
 
     function getMapillary() {
         if (mapillaryService && !_mapillary) {
@@ -26,24 +29,29 @@ export function MapillarySigns(projection, context, dispatch) {
         return _mapillary;
     }
 
+
     function showLayer() {
         editOn();
         debouncedRedraw();
     }
+
 
     function hideLayer() {
         debouncedRedraw.cancel();
         editOff();
     }
 
+
     function editOn() {
         layer.style('display', 'block');
     }
+
 
     function editOff() {
         layer.selectAll('.icon-sign').remove();
         layer.style('display', 'none');
     }
+
 
     function click(d) {
         var mapillary = getMapillary();
@@ -57,6 +65,7 @@ export function MapillarySigns(projection, context, dispatch) {
             .showViewer();
     }
 
+
     function update() {
         var mapillary = getMapillary(),
             data = (mapillary ? mapillary.signs(projection, getDimensions(layer)) : []),
@@ -65,7 +74,9 @@ export function MapillarySigns(projection, context, dispatch) {
         var signs = layer.selectAll('.icon-sign')
             .data(data, function(d) { return d.key; });
 
-        // Enter
+        signs.exit()
+            .remove();
+
         var enter = signs.enter()
             .append('foreignObject')
             .attr('class', 'icon-sign')
@@ -78,14 +89,11 @@ export function MapillarySigns(projection, context, dispatch) {
             .append('xhtml:body')
             .html(mapillary.signHTML);
 
-        // Exit
-        signs.exit()
-            .remove();
-
-        // Update
         signs
+            .merge(enter)
             .attr('transform', PointTransform(projection));
     }
+
 
     function drawSigns(selection) {
         var enabled = MapillarySigns.enabled,
@@ -94,14 +102,15 @@ export function MapillarySigns(projection, context, dispatch) {
         layer = selection.selectAll('.layer-mapillary-signs')
             .data(mapillary ? [0] : []);
 
-        layer.enter()
+        layer.exit()
+            .remove();
+
+        layer = layer.enter()
             .append('g')
             .attr('class', 'layer-mapillary-signs')
             .style('display', enabled ? 'block' : 'none')
-            .attr('transform', 'translate(-16, -16)');  // center signs on loc
-
-        layer.exit()
-            .remove();
+            .attr('transform', 'translate(-16, -16)')  // center signs on loc
+            .merge(layer);
 
         if (enabled) {
             if (mapillary && ~~context.map().zoom() >= minZoom) {
@@ -113,6 +122,7 @@ export function MapillarySigns(projection, context, dispatch) {
             }
         }
     }
+
 
     drawSigns.enabled = function(_) {
         if (!arguments.length) return MapillarySigns.enabled;
@@ -126,10 +136,12 @@ export function MapillarySigns(projection, context, dispatch) {
         return this;
     };
 
+
     drawSigns.supported = function() {
         var mapillary = getMapillary();
         return (mapillary && mapillary.signsSupported());
     };
+
 
     drawSigns.dimensions = function(_) {
         if (!arguments.length) return getDimensions(layer);

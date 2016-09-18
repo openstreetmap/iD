@@ -8,6 +8,7 @@ import { MapillaryImages } from './mapillary_images';
 import { MapillarySigns } from './mapillary_signs';
 import { Osm } from './osm';
 
+
 export function Layers(projection, context) {
     var dispatch = d3.dispatch('change'),
         svg = d3.select(null),
@@ -49,20 +50,24 @@ export function Layers(projection, context) {
             .each(function(d) { d3.select(this).call(d.layer); });
     }
 
+
     drawLayers.all = function() {
         return layers;
     };
+
 
     drawLayers.layer = function(id) {
         var obj = _.find(layers, function(o) {return o.id === id;});
         return obj && obj.layer;
     };
 
+
     drawLayers.only = function(what) {
         var arr = [].concat(what);
         drawLayers.remove(_.difference(_.map(layers, 'id'), arr));
         return this;
     };
+
 
     drawLayers.remove = function(what) {
         var arr = [].concat(what);
@@ -72,6 +77,7 @@ export function Layers(projection, context) {
         dispatch.call('change');
         return this;
     };
+
 
     drawLayers.add = function(what) {
         var arr = [].concat(what);
@@ -83,6 +89,7 @@ export function Layers(projection, context) {
         dispatch.call('change');
         return this;
     };
+
 
     drawLayers.dimensions = function(_) {
         if (!arguments.length) return getDimensions(svg);

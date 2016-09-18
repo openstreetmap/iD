@@ -2,6 +2,7 @@ import _ from 'lodash';
 import { PointTransform, TagClasses } from './index';
 import { Entity } from '../core/index';
 
+
 export function Points(projection, context) {
     function markerPath(selection, klass) {
         selection
@@ -31,25 +32,25 @@ export function Points(projection, context) {
         groups.exit()
             .remove();
 
-        var group = groups.enter()
+        var enter = groups.enter()
             .append('g')
             .attr('class', function(d) { return 'node point ' + d.id; })
             .order();
 
-        group.append('path')
+        enter.append('path')
             .call(markerPath, 'shadow');
 
-        group.append('path')
+        enter.append('path')
             .call(markerPath, 'stroke');
 
-        group.append('use')
+        enter.append('use')
             .attr('transform', 'translate(-6, -20)')
             .attr('class', 'icon')
             .attr('width', '12px')
             .attr('height', '12px');
 
         groups = groups
-            .merge(group)
+            .merge(enter)
             .attr('transform', PointTransform(projection))
             .call(TagClasses());
 

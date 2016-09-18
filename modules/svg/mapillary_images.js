@@ -17,6 +17,7 @@ export function MapillaryImages(projection, context, dispatch) {
         MapillaryImages.initialized = true;
     }
 
+
     function getMapillary() {
         if (mapillaryService && !_mapillary) {
             _mapillary = mapillaryService.init();
@@ -27,6 +28,7 @@ export function MapillaryImages(projection, context, dispatch) {
 
         return _mapillary;
     }
+
 
     function showLayer() {
         var mapillary = getMapillary();
@@ -43,6 +45,7 @@ export function MapillaryImages(projection, context, dispatch) {
             .on('end', debouncedRedraw);
     }
 
+
     function hideLayer() {
         var mapillary = getMapillary();
         if (mapillary) {
@@ -58,14 +61,17 @@ export function MapillaryImages(projection, context, dispatch) {
             .on('end', editOff);
     }
 
+
     function editOn() {
         layer.style('display', 'block');
     }
+
 
     function editOff() {
         layer.selectAll('.viewfield-group').remove();
         layer.style('display', 'none');
     }
+
 
     function click(d) {
         var mapillary = getMapillary();
@@ -79,11 +85,13 @@ export function MapillaryImages(projection, context, dispatch) {
             .showViewer();
     }
 
+
     function transform(d) {
         var t = PointTransform(projection)(d);
         if (d.ca) t += ' rotate(' + Math.floor(d.ca) + ',0,0)';
         return t;
     }
+
 
     function update() {
         var mapillary = getMapillary(),
@@ -93,7 +101,9 @@ export function MapillaryImages(projection, context, dispatch) {
         var markers = layer.selectAll('.viewfield-group')
             .data(data, function(d) { return d.key; });
 
-        // Enter
+        markers.exit()
+            .remove();
+
         var enter = markers.enter()
             .append('g')
             .attr('class', 'viewfield-group')
@@ -110,14 +120,11 @@ export function MapillaryImages(projection, context, dispatch) {
             .attr('dy', '0')
             .attr('r', '6');
 
-        // Exit
-        markers.exit()
-            .remove();
-
-        // Update
         markers
+            .merge(enter)
             .attr('transform', transform);
     }
+
 
     function drawImages(selection) {
         var enabled = MapillaryImages.enabled,
@@ -126,13 +133,14 @@ export function MapillaryImages(projection, context, dispatch) {
         layer = selection.selectAll('.layer-mapillary-images')
             .data(mapillary ? [0] : []);
 
-        layer.enter()
-            .append('g')
-            .attr('class', 'layer-mapillary-images')
-            .style('display', enabled ? 'block' : 'none');
-
         layer.exit()
             .remove();
+
+        layer = layer.enter()
+            .append('g')
+            .attr('class', 'layer-mapillary-images')
+            .style('display', enabled ? 'block' : 'none')
+            .merge(layer);
 
         if (enabled) {
             if (mapillary && ~~context.map().zoom() >= minZoom) {
@@ -144,6 +152,7 @@ export function MapillaryImages(projection, context, dispatch) {
             }
         }
     }
+
 
     drawImages.enabled = function(_) {
         if (!arguments.length) return MapillaryImages.enabled;
@@ -157,9 +166,11 @@ export function MapillaryImages(projection, context, dispatch) {
         return this;
     };
 
+
     drawImages.supported = function() {
         return !!getMapillary();
     };
+
 
     drawImages.dimensions = function(_) {
         if (!arguments.length) return getDimensions(layer);

@@ -8,6 +8,7 @@ export function Gpx(projection, context, dispatch) {
     var showLabels = true,
         layer;
 
+
     function init() {
         if (Gpx.initialized) return;  // run once
 
@@ -43,24 +44,27 @@ export function Gpx(projection, context, dispatch) {
         layer = selection.selectAll('.layer-gpx')
             .data(enabled ? [0] : []);
 
-        layer.enter()
-            .append('g')
-            .attr('class', 'layer-gpx');
-
         layer.exit()
             .remove();
+
+        layer = layer.enter()
+            .append('g')
+            .attr('class', 'layer-gpx')
+            .merge(layer);
 
 
         var paths = layer
             .selectAll('path')
             .data([geojson]);
 
-        paths.enter()
-            .append('path')
-            .attr('class', 'gpx');
-
         paths.exit()
             .remove();
+
+        paths = paths.enter()
+            .append('path')
+            .attr('class', 'gpx')
+            .merge(paths);
+
 
         var path = d3.geoPath()
             .projection(projection);
@@ -72,12 +76,13 @@ export function Gpx(projection, context, dispatch) {
         var labels = layer.selectAll('text')
             .data(showLabels && geojson.features ? geojson.features : []);
 
-        labels.enter()
-            .append('text')
-            .attr('class', 'gpx');
-
         labels.exit()
             .remove();
+
+        labels = labels.enter()
+            .append('text')
+            .attr('class', 'gpx')
+            .merge(labels);
 
         labels
             .text(function(d) {
@@ -94,15 +99,18 @@ export function Gpx(projection, context, dispatch) {
 
     }
 
+
     function toDom(x) {
         return (new DOMParser()).parseFromString(x, 'text/xml');
     }
+
 
     drawGpx.showLabels = function(_) {
         if (!arguments.length) return showLabels;
         showLabels = _;
         return this;
     };
+
 
     drawGpx.enabled = function(_) {
         if (!arguments.length) return Gpx.enabled;
@@ -111,10 +119,12 @@ export function Gpx(projection, context, dispatch) {
         return this;
     };
 
+
     drawGpx.hasGpx = function() {
         var geojson = Gpx.geojson;
         return (!(_.isEmpty(geojson) || _.isEmpty(geojson.features)));
     };
+
 
     drawGpx.geojson = function(gj) {
         if (!arguments.length) return Gpx.geojson;
@@ -124,6 +134,7 @@ export function Gpx(projection, context, dispatch) {
         return this;
     };
 
+
     drawGpx.url = function(url) {
         d3.text(url, function(err, data) {
             if (!err) {
@@ -132,6 +143,7 @@ export function Gpx(projection, context, dispatch) {
         });
         return this;
     };
+
 
     drawGpx.files = function(fileList) {
         if (!fileList.length) return this;
@@ -145,6 +157,7 @@ export function Gpx(projection, context, dispatch) {
         reader.readAsText(f);
         return this;
     };
+
 
     drawGpx.fitZoom = function() {
         if (!this.hasGpx()) return this;
@@ -164,6 +177,7 @@ export function Gpx(projection, context, dispatch) {
 
         return this;
     };
+
 
     init();
     return drawGpx;

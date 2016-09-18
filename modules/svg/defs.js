@@ -84,7 +84,8 @@ export function Defs(context) {
         // clip paths
         defs.selectAll()
             .data([12, 18, 20, 32, 45])
-            .enter().append('clipPath')
+            .enter()
+            .append('clipPath')
             .attr('id', function (d) {
                 return 'clip-square-' + d;
             })

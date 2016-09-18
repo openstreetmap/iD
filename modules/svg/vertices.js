@@ -50,12 +50,8 @@ export function Vertices(projection, context) {
         return vertices;
     }
 
-    function draw(selection, vertices, klass, graph, zoom) {
-        var icons = {},
-            z = (zoom < 17 ? 0 : zoom < 18 ? 1 : 2);
 
-        var groups = selection
-            .data(vertices, Entity.key);
+    function draw(selection, vertices, klass, graph, zoom) {
 
         function icon(entity) {
             if (entity.id in icons) return icons[entity.id];
@@ -100,6 +96,16 @@ export function Vertices(projection, context) {
                 });
         }
 
+
+        var icons = {},
+            z = (zoom < 17 ? 0 : zoom < 18 ? 1 : 2);
+
+        var groups = selection
+            .data(vertices, Entity.key);
+
+        groups.exit()
+            .remove();
+
         var enter = groups.enter()
             .append('g')
             .attr('class', function(d) { return 'node vertex ' + klass + ' ' + d.id; });
@@ -129,10 +135,8 @@ export function Vertices(projection, context) {
             .attr('transform', PointTransform(projection))
             .classed('shared', function(entity) { return graph.isShared(entity); })
             .call(setAttributes);
-
-        groups.exit()
-            .remove();
     }
+
 
     function drawVertices(selection, graph, entities, filter, extent, zoom) {
         var selected = siblingAndChildVertices(context.selectedIDs(), graph, extent),
@@ -166,6 +170,7 @@ export function Vertices(projection, context) {
         drawHover(selection, graph, extent, zoom);
     }
 
+
     function drawHover(selection, graph, extent, zoom) {
         var hovered = hover ? siblingAndChildVertices([hover.id], graph, extent) : {};
         var layer = selection.selectAll('.layer-hit');
@@ -173,6 +178,7 @@ export function Vertices(projection, context) {
         layer.selectAll('g.vertex.vertex-hover')
             .call(draw, d3.values(hovered), 'vertex-hover', graph, zoom);
     }
+
 
     drawVertices.drawHover = function(selection, graph, target, extent, zoom) {
         if (target === hover) return;

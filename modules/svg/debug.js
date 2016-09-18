@@ -48,35 +48,37 @@ export function Debug(projection, context) {
             .selectAll('.debug-legend')
             .data(debugData.length ? [0] : []);
 
-        legend.enter()
-            .append('div')
-            .attr('class', 'fillD debug-legend');
-
         legend.exit()
             .remove();
+
+        legend = legend.enter()
+            .append('div')
+            .attr('class', 'fillD debug-legend')
+            .merge(legend);
 
 
         var legendItems = legend.selectAll('.debug-legend-item')
             .data(debugData, function(d) { return d.label; });
 
+        legendItems.exit()
+            .remove();
+
         legendItems.enter()
             .append('span')
             .attr('class', function(d) { return 'debug-legend-item ' + d.class; })
-            .text(function(d) { return d.label; });
-
-        legendItems.exit()
-            .remove();
+            .text(function(d) { return d.label; })
 
 
         var layer = selection.selectAll('.layer-debug')
             .data(showsImagery || showsImperial || showsDriveLeft ? [0] : []);
 
-        layer.enter()
-            .append('g')
-            .attr('class', 'layer-debug');
-
         layer.exit()
             .remove();
+
+        layer = layer.enter()
+            .append('g')
+            .attr('class', 'layer-debug')
+            .merge(layer);
 
 
         var extent = context.map().extent(),
@@ -90,42 +92,45 @@ export function Debug(projection, context) {
         var imagery = layer.selectAll('path.debug-imagery')
             .data(showsImagery ? availableImagery : []);
 
+        imagery.exit()
+            .remove();
+
         imagery.enter()
             .append('path')
             .attr('class', 'debug-imagery debug orange');
 
-        imagery.exit()
-            .remove();
 
 
         var imperial = layer
             .selectAll('path.debug-imperial')
             .data(showsImperial ? [imperialData] : []);
 
+        imperial.exit()
+            .remove();
+
         imperial.enter()
             .append('path')
             .attr('class', 'debug-imperial debug cyan');
 
-        imperial.exit()
-            .remove();
 
 
         var driveLeft = layer
             .selectAll('path.debug-drive-left')
             .data(showsDriveLeft ? [driveLeftData] : []);
 
+        driveLeft.exit()
+            .remove();
+
         driveLeft.enter()
             .append('path')
             .attr('class', 'debug-drive-left debug green');
-
-        driveLeft.exit()
-            .remove();
 
 
         // update
         layer.selectAll('path')
             .attr('d', path);
     }
+
 
     // This looks strange because `enabled` methods on other layers are
     // chainable getter/setters, and this one is just a getter.

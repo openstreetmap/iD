@@ -64,7 +64,8 @@ export function Commit(context) {
                .selectAll('a')
                .data(this.value.match(/google/i) ? [true] : []);
 
-            googleWarning.exit().remove();
+            googleWarning.exit()
+                .remove();
 
             googleWarning.enter()
                .append('a')

@@ -25,24 +25,22 @@ export function Background(context) {
             .data([0]);
 
         base.enter()
-            .insert('div', '.layer-data')
-            .attr('class', 'layer layer-background');
-
-        base.call(baseLayer);
+          .insert('div', '.layer-data')
+            .attr('class', 'layer layer-background')
+          .merge(base)
+            .call(baseLayer);
 
         var overlays = selection.selectAll('.layer-overlay')
             .data(overlayLayers, function(d) { return d.source().name(); });
 
-        overlays.enter()
-            .insert('div', '.layer-data')
-            .attr('class', 'layer layer-overlay');
-
-        overlays.each(function(layer) {
-            d3.select(this).call(layer);
-        });
-
         overlays.exit()
             .remove();
+
+        overlays.enter()
+          .insert('div', '.layer-data')
+            .attr('class', 'layer layer-overlay')
+          .merge(overlays)
+            .each(function(layer) { d3.select(this).call(layer); });
     }
 
 

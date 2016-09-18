@@ -97,17 +97,20 @@ export function Labels(projection, context) {
         }
     }
 
+
     function drawLineLabels(group, entities, filter, classes, labels) {
         var texts = group.selectAll('text.' + classes)
             .filter(filter)
             .data(entities, Entity.key);
+
+        texts.exit()
+            .remove();
 
         texts.enter()
             .append('text')
             .attr('class', function(d, i) { return classes + ' ' + labels[i].classes + ' ' + d.id; })
             .append('textPath')
             .attr('class', 'textpath');
-
 
         texts.selectAll('.textpath')
             .filter(filter)
@@ -116,43 +119,50 @@ export function Labels(projection, context) {
             .attr('xlink:href', function(d) { return '#labelpath-' + d.id; })
             .text(displayName);
 
-        texts.exit().remove();
     }
+
 
     function drawLinePaths(group, entities, filter, classes, labels) {
         var halos = group.selectAll('path')
             .filter(filter)
             .data(entities, Entity.key);
 
+        halos.exit()
+            .remove();
+
         halos.enter()
             .append('path')
             .style('stroke-width', get(labels, 'font-size'))
             .attr('id', function(d) { return 'labelpath-' + d.id; })
-            .attr('class', classes);
-
-        halos.attr('d', get(labels, 'lineString'));
-
-        halos.exit().remove();
+            .attr('class', classes)
+            .merge(halos)
+            .attr('d', get(labels, 'lineString'));
     }
+
 
     function drawPointLabels(group, entities, filter, classes, labels) {
         var texts = group.selectAll('text.' + classes)
             .filter(filter)
             .data(entities, Entity.key);
 
-        texts.enter()
-            .append('text')
-            .attr('class', function(d, i) { return classes + ' ' + labels[i].classes + ' ' + d.id; });
+        texts.exit()
+            .remove();
 
-        texts.attr('x', get(labels, 'x'))
+        texts = texts.enter()
+            .append('text')
+            .attr('class', function(d, i) { return classes + ' ' + labels[i].classes + ' ' + d.id; })
+            .merge(texts);
+
+        texts
+            .attr('x', get(labels, 'x'))
             .attr('y', get(labels, 'y'))
             .style('text-anchor', get(labels, 'textAnchor'))
             .text(displayName)
             .each(function(d, i) { textWidth(displayName(d), labels[i].height, this); });
 
-        texts.exit().remove();
         return texts;
     }
+
 
     function drawAreaLabels(group, entities, filter, classes, labels) {
         entities = entities.filter(hasText);
@@ -164,10 +174,14 @@ export function Labels(projection, context) {
         }
     }
 
+
     function drawAreaIcons(group, entities, filter, classes, labels) {
         var icons = group.selectAll('use')
             .filter(filter)
             .data(entities, Entity.key);
+
+        icons.exit()
+            .remove();
 
         icons.enter()
             .append('use')
@@ -180,19 +194,19 @@ export function Labels(projection, context) {
                 var icon = context.presets().match(d, context.graph()).icon;
                 return '#' + icon + (icon === 'hairdresser' ? '-24': '-18');    // workaround: maki hairdresser-18 broken?
             });
-
-
-        icons.exit().remove();
     }
+
 
     function reverse(p) {
         var angle = Math.atan2(p[1][1] - p[0][1], p[1][0] - p[0][0]);
         return !(p[0][0] < p[p.length - 1][0] && angle < Math.PI/2 && angle > -Math.PI/2);
     }
 
+
     function lineString(nodes) {
         return 'M' + nodes.join('L');
     }
+
 
     function subpath(nodes, from, to) {
         function segmentLength(i) {
@@ -229,8 +243,8 @@ export function Labels(projection, context) {
         ret.unshift(start);
         ret.push(end);
         return ret;
-
     }
+
 
     function hideOnMouseover() {
         var layers = d3.select(this)
@@ -248,6 +262,7 @@ export function Labels(projection, context) {
         layers.selectAll('.' + ids.join(', .'))
             .classed('proximate', true);
     }
+
 
     var rtree = rbush(),
         bboxes = {};
@@ -326,6 +341,7 @@ export function Labels(projection, context) {
             }
         }
 
+
         function getPointLabel(entity, width, height) {
             var coord = projection(entity.loc),
                 m = 5,  // margin
@@ -369,6 +385,7 @@ export function Labels(projection, context) {
             }
         }
 
+
         function getAreaLabel(entity, width, height) {
             var centroid = path.centroid(entity.asGeoJSON(graph, true)),
                 extent = entity.extent(graph),
@@ -396,8 +413,8 @@ export function Labels(projection, context) {
             }
 
             if (tryInsert(bbox, entity.id)) return p;
-
         }
+
 
         function tryInsert(bbox, id) {
             // Check that label is visible
@@ -433,12 +450,13 @@ export function Labels(projection, context) {
         var debug = label.selectAll('.layer-label-debug')
             .data(showDebug ? [true] : []);
 
-        debug.enter()
-            .append('g')
-            .attr('class', 'layer-label-debug');
-
         debug.exit()
             .remove();
+
+        debug = debug.enter()
+            .append('g')
+            .attr('class', 'layer-label-debug')
+            .merge(debug);
 
         if (showDebug) {
             var gj = rtree.all().map(function(d) {
@@ -451,19 +469,22 @@ export function Labels(projection, context) {
                 ]]};
             });
 
-            var debugboxes = debug.selectAll('.debug').data(gj);
-
-            debugboxes.enter()
-                .append('path')
-                .attr('class', 'debug yellow');
+            var debugboxes = debug.selectAll('.debug')
+                .data(gj);
 
             debugboxes.exit()
                 .remove();
+
+            debugboxes = debugboxes.enter()
+                .append('path')
+                .attr('class', 'debug yellow')
+                .merge(debugboxes);
 
             debugboxes
                 .attr('d', d3.geoPath().projection(null));
         }
     }
+
 
     drawLabels.supersurface = function(supersurface) {
         supersurface
