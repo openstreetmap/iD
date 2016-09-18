@@ -4,6 +4,7 @@ import { rebind } from '../../util/rebind';
 import { getSetValue } from '../../util/get_set_value';
 import { d3combobox } from '../../lib/d3.combobox.js';
 
+
 export function access(field) {
     var dispatch = d3.dispatch('change'),
         items;
@@ -12,17 +13,18 @@ export function access(field) {
         var wrap = selection.selectAll('.preset-input-wrap')
             .data([0]);
 
-        var divEnter = wrap.enter().append('div')
-            .attr('class', 'cf preset-input-wrap');
-        divEnter.append('ul');
-        wrap = wrap.merge(divEnter);
+        wrap = wrap.enter()
+            .append('div')
+            .attr('class', 'cf preset-input-wrap')
+            .append('ul')
+            .merge(wrap);
 
         items = wrap.select('ul').selectAll('li')
             .data(field.keys);
 
         // Enter
-
-        var enter = items.enter().append('li')
+        var enter = items.enter()
+            .append('li')
             .attr('class', function(d) { return 'cf preset-access-' + d; });
 
         enter.append('span')
@@ -42,20 +44,22 @@ export function access(field) {
                         .data(access.options(d)));
             });
 
-        items = items.merge(enter);
 
         // Update
+        items = items.merge(enter);
 
         wrap.selectAll('.preset-input-access')
             .on('change', change)
             .on('blur', change);
     }
 
+
     function change(d) {
         var tag = {};
         tag[d] = getSetValue(d3.select(this)) || undefined;
         dispatch.call('change', this, tag);
     }
+
 
     access.options = function(type) {
         var options = ['no', 'permissive', 'private', 'destination'];
@@ -76,6 +80,7 @@ export function access(field) {
             };
         });
     };
+
 
     var placeholders = {
         footway: {

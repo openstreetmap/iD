@@ -9,7 +9,7 @@ import { TagReference } from './tag_reference';
 
 
 export function RawTagEditor(context) {
-    var event = d3.dispatch('change'),
+    var dispatch = d3.dispatch('change'),
         showBlank = false,
         state,
         preset,
@@ -61,8 +61,13 @@ export function RawTagEditor(context) {
             .merge(newTag)
             .on('click', addTag);
 
+
         var items = list.selectAll('li')
             .data(entries, function(d) { return d.key; });
+
+        items.exit()
+            .each(unbind)
+            .remove();
 
         // Enter
 
@@ -70,21 +75,24 @@ export function RawTagEditor(context) {
             .append('li')
             .attr('class', 'tag-row cf');
 
-        enter.append('div')
+        enter
+            .append('div')
             .attr('class', 'key-wrap')
             .append('input')
             .property('type', 'text')
             .attr('class', 'key')
             .attr('maxlength', 255);
 
-        enter.append('div')
+        enter
+            .append('div')
             .attr('class', 'input-wrap-position')
             .append('input')
             .property('type', 'text')
             .attr('class', 'value')
             .attr('maxlength', 255);
 
-        enter.append('button')
+        enter
+            .append('button')
             .attr('tabindex', -1)
             .attr('class', 'remove minor')
             .call(Icon('#operation-delete'));
@@ -96,25 +104,26 @@ export function RawTagEditor(context) {
         // Update
 
         items = items.merge(enter);
-
         items.order();
 
-        items.each(function(tag) {
-            var isRelation = (context.entity(id).type === 'relation'),
-                reference;
-            if (isRelation && tag.key === 'type')
-                reference = TagReference({rtype: tag.value}, context);
-            else
-                reference = TagReference({key: tag.key, value: tag.value}, context);
+        items
+            .each(function(tag) {
+                var isRelation = (context.entity(id).type === 'relation'),
+                    reference;
+                if (isRelation && tag.key === 'type') {
+                    reference = TagReference({rtype: tag.value}, context);
+                } else {
+                    reference = TagReference({key: tag.key, value: tag.value}, context);
+                }
 
-            if (state === 'hover') {
-                reference.showing(false);
-            }
+                if (state === 'hover') {
+                    reference.showing(false);
+                }
 
-            d3.select(this)
-                .call(reference.button)
-                .call(reference.body);
-        });
+                d3.select(this)
+                    .call(reference.button)
+                    .call(reference.body);
+            });
 
         getSetValue(items.selectAll('input.key')
             .attr('title', function(d) { return d.key; })
@@ -131,12 +140,8 @@ export function RawTagEditor(context) {
             function(d) { return d.value; }
         );
 
-        items.select('button.remove')
+        items.selectAll('button.remove')
             .on('click', removeTag);
-
-        items.exit()
-            .each(unbind)
-            .remove();
 
 
         function pushMore() {
@@ -218,21 +223,21 @@ export function RawTagEditor(context) {
             tag[kNew] = d.value;
             d.key = kNew; // Maintain DOM identity through the subsequent update.
             this.value = kNew;
-            event.call('change', this, tag);
+            dispatch.call('change', this, tag);
         }
 
 
         function valueChange(d) {
             var tag = {};
             tag[d.key] = this.value;
-            event.call('change', this, tag);
+            dispatch.call('change', this, tag);
         }
 
 
         function removeTag(d) {
             var tag = {};
             tag[d.key] = undefined;
-            event.call('change', this, tag);
+            dispatch.call('change', this, tag);
             d3.select(this.parentNode).remove();
         }
 
@@ -278,5 +283,5 @@ export function RawTagEditor(context) {
     };
 
 
-    return rebind(rawTagEditor, event, 'on');
+    return rebind(rawTagEditor, dispatch, 'on');
 }

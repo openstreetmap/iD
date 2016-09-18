@@ -11,6 +11,7 @@ export function TagReference(tag, context) {
         loaded,
         showing;
 
+
     function findLocal(data) {
         var locale = Detect().locale.toLowerCase(),
             localized;
@@ -35,6 +36,7 @@ export function TagReference(tag, context) {
             return d.lang.toLowerCase() === 'en';
         });
     }
+
 
     function load(param) {
         button.classed('tag-reference-loading', true);
@@ -83,6 +85,7 @@ export function TagReference(tag, context) {
         });
     }
 
+
     function done() {
         loaded = true;
 
@@ -96,6 +99,7 @@ export function TagReference(tag, context) {
         showing = true;
     }
 
+
     function hide(selection) {
         selection = selection || body.transition().duration(200);
 
@@ -106,50 +110,56 @@ export function TagReference(tag, context) {
         showing = false;
     }
 
+
     tagReference.button = function(selection) {
         button = selection.selectAll('.tag-reference-button')
             .data([0]);
 
-        button.enter()
+        button = button.enter()
             .append('button')
+            .on('click', function () {
+                d3.event.stopPropagation();
+                d3.event.preventDefault();
+                if (showing) {
+                    hide();
+                } else if (loaded) {
+                    done();
+                } else {
+                    if (context.taginfo()) {
+                        load(tag);
+                    }
+                }
+            })
             .attr('class', 'tag-reference-button')
             .attr('tabindex', -1)
-            .call(Icon('#icon-inspect'));
-
-        button.on('click', function () {
-            d3.event.stopPropagation();
-            d3.event.preventDefault();
-            if (showing) {
-                hide();
-            } else if (loaded) {
-                done();
-            } else {
-                if (context.taginfo()) {
-                    load(tag);
-                }
-            }
-        });
+            .call(Icon('#icon-inspect'))
+            .merge(button);
     };
+
 
     tagReference.body = function(selection) {
         body = selection.selectAll('.tag-reference-body')
             .data([0]);
 
-        body.enter().append('div')
+        body = body.enter()
+            .append('div')
             .attr('class', 'tag-reference-body cf')
             .style('max-height', '0')
-            .style('opacity', '0');
+            .style('opacity', '0')
+            .merge(body);
 
         if (showing === false) {
             hide(body);
         }
     };
 
+
     tagReference.showing = function(_) {
         if (!arguments.length) return showing;
         showing = _;
         return tagReference;
     };
+
 
     return tagReference;
 }

@@ -26,7 +26,8 @@ export function SourceSwitch(context) {
     }
 
     var sourceSwitch = function(selection) {
-        selection.append('a')
+        selection
+            .append('a')
             .attr('href', '#')
             .text(t('source_switch.live'))
             .classed('live', true)

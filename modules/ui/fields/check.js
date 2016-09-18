@@ -5,12 +5,16 @@ import { oneWayTags } from '../../core/index';
 
 export { check as defaultcheck };
 
+
 export function check(field) {
     var dispatch = d3.dispatch('change'),
         options = field.strings && field.strings.options,
         values = [],
         texts = [],
-        entity, value, box, text, label;
+        box = d3.select(null),
+        text = d3.select(null),
+        label = d3.select(null),
+        entity, value;
 
     if (options) {
         for (var k in options) {
@@ -25,6 +29,7 @@ export function check(field) {
             texts.push(t('inspector.check.no'));
         }
     }
+
 
     var check = function(selection) {
         // hack: pretend oneway field is a oneway_yes field
@@ -43,19 +48,14 @@ export function check(field) {
         label = selection.selectAll('.preset-input-wrap')
             .data([0]);
 
-        var enter = label.enter().append('label')
+        var enter = label.enter()
+            .append('label')
             .attr('class', 'preset-input-wrap');
 
         enter.append('input')
             .property('indeterminate', field.type === 'check')
             .attr('type', 'checkbox')
-            .attr('id', 'preset-input-' + field.id);
-
-        enter.append('span')
-            .text(texts[0])
-            .attr('class', 'value');
-
-        box = label.select('input')
+            .attr('id', 'preset-input-' + field.id)
             .on('click', function() {
                 var t = {};
                 t[field.key] = values[(values.indexOf(value) + 1) % values.length];
@@ -63,14 +63,23 @@ export function check(field) {
                 d3.event.stopPropagation();
             });
 
-        text = label.select('span.value');
+        enter.append('span')
+            .text(texts[0])
+            .attr('class', 'value');
+
+        label = label.merge(enter);
+
+        box = label.selectAll('input');
+        text = label.selectAll('span.value');
     };
+
 
     check.entity = function(_) {
         if (!arguments.length) return entity;
         entity = _;
         return check;
     };
+
 
     check.tags = function(tags) {
         value = tags[field.key];
@@ -79,6 +88,7 @@ export function check(field) {
         text.text(texts[values.indexOf(value)]);
         label.classed('set', !!value);
     };
+
 
     check.focus = function() {
         box.node().focus();

@@ -66,7 +66,7 @@ export function Debug(projection, context) {
         legendItems.enter()
             .append('span')
             .attr('class', function(d) { return 'debug-legend-item ' + d.class; })
-            .text(function(d) { return d.label; })
+            .text(function(d) { return d.label; });
 
 
         var layer = selection.selectAll('.layer-debug')

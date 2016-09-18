@@ -2,7 +2,8 @@ export function Spinner(context) {
     var connection = context.connection();
 
     return function(selection) {
-        var img = selection.append('img')
+        var img = selection
+            .append('img')
             .attr('src', context.imagePath('loader-black.gif'))
             .style('opacity', 0);
 

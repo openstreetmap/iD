@@ -21,6 +21,7 @@ export function address(field, context) {
         postcode: 1/3
     };
 
+
     function getStreets() {
         var extent = entity.extent(context.graph()),
             l = extent.center(),
@@ -46,6 +47,7 @@ export function address(field, context) {
             return d.tags.highway && d.tags.name && d.type === 'way';
         }
     }
+
 
     function getCities() {
         var extent = entity.extent(context.graph()),
@@ -81,6 +83,7 @@ export function address(field, context) {
         }
     }
 
+
     function getPostCodes() {
         var extent = entity.extent(context.graph()),
             l = extent.center(),
@@ -103,20 +106,22 @@ export function address(field, context) {
         }
     }
 
+
     function address(selection) {
         isInitialized = false;
 
         wrap = selection.selectAll('.preset-input-wrap')
             .data([0]);
 
-        // Enter
-
-        wrap.enter()
+        wrap = wrap.enter()
             .append('div')
-            .attr('class', 'preset-input-wrap');
+            .attr('class', 'preset-input-wrap')
+            .merge(wrap);
+
 
         var center = entity.extent(context.graph()).center(),
             addressFormat;
+
         nominatim.init();
         nominatim.countryCode(center, function (err, countryCode) {
             addressFormat = _.find(addressFormats, function (a) {
@@ -152,7 +157,6 @@ export function address(field, context) {
                 .style('width', function (d) { return d.width * 100 + '%'; });
 
             // Update
-
             wrap.selectAll('.addr-street')
                 .call(d3combobox()
                     .fetcher(function(value, callback) {
@@ -183,6 +187,7 @@ export function address(field, context) {
         });
     }
 
+
     function change(onInput) {
         return function() {
             var tags = {};
@@ -196,17 +201,20 @@ export function address(field, context) {
         };
     }
 
+
     function updateTags(tags) {
         getSetValue(wrap.selectAll('input'), function (field) {
             return tags['addr:' + field.id] || '';
         });
     }
 
+
     address.entity = function(_) {
         if (!arguments.length) return entity;
         entity = _;
         return address;
     };
+
 
     address.tags = function(tags) {
         if (isInitialized) {
@@ -218,10 +226,12 @@ export function address(field, context) {
         }
     };
 
+
     address.focus = function() {
         var node = wrap.selectAll('input').node();
         if (node) node.focus();
     };
+
 
     return rebind(address, dispatch, 'on');
 }
