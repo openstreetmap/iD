@@ -10,6 +10,7 @@ import { Icon } from '../svg/index';
 import { TagReference } from './tag_reference';
 import { fields } from './fields/index';
 
+
 export function preset(context) {
     var dispatch = d3.dispatch('change'),
         state,
@@ -67,9 +68,11 @@ export function preset(context) {
         return field;
     }
 
+
     function fieldKey(field) {
         return field.id;
     }
+
 
     function presets(selection) {
         selection.call(Disclosure()
@@ -82,6 +85,7 @@ export function preset(context) {
             context.storage('preset_fields.expanded', expanded);
         }
     }
+
 
     function content(selection) {
         if (!fieldsArr) {
@@ -110,29 +114,37 @@ export function preset(context) {
         var shown = fieldsArr.filter(function(field) { return field.shown(); }),
             notShown = fieldsArr.filter(function(field) { return !field.shown(); });
 
-        var $form = selection.selectAll('.preset-form')
+
+        var form = selection.selectAll('.preset-form')
             .data([0]);
 
-        $form.enter().append('div')
-            .attr('class', 'preset-form inspector-inner fillL3');
+        form = form.enter()
+            .append('div')
+            .attr('class', 'preset-form inspector-inner fillL3')
+            .merge(form);
 
-        var $fields = $form.selectAll('.form-field')
+
+        var fields = form.selectAll('.form-field')
             .data(shown, fieldKey);
 
-        // Enter
+        fields.exit()
+            .remove();
 
-        var $enter = $fields.enter()
+        // Enter
+        var enter = fields.enter()
             .append('div')
             .attr('class', function(field) {
                 return 'form-field form-field-' + field.id;
             });
 
-        var $label = $enter.append('label')
+        var label = enter
+            .append('label')
             .attr('class', 'form-label')
             .attr('for', function(field) { return 'preset-input-' + field.id; })
             .text(function(field) { return field.label(); });
 
-        var wrap = $label.append('div')
+        var wrap = label
+            .append('div')
             .attr('class', 'form-label-button-wrap');
 
         wrap.append('button')
@@ -145,22 +157,21 @@ export function preset(context) {
             .attr('tabindex', -1)
             .call(Icon('#icon-undo'));
 
-        // Update
 
-        $fields.select('.form-label-button-wrap .remove-icon')
+        // Update
+        fields = fields
+            .merge(enter);
+
+        fields.selectAll('.form-label-button-wrap .remove-icon')
             .on('click', remove);
 
-        $fields.select('.modified-icon')
+        fields.selectAll('.modified-icon')
             .on('click', revert);
 
-        $fields
+        fields
             .order()
-            .classed('modified', function(field) {
-                return field.modified();
-            })
-            .classed('present', function(field) {
-                return field.present();
-            })
+            .classed('modified', function(field) { return field.modified(); })
+            .classed('present', function(field) { return field.present(); })
             .each(function(field) {
                 var reference = TagReference(field.reference || {key: field.key}, context);
 
@@ -184,9 +195,6 @@ export function preset(context) {
                 field.input.tags(tags);
             });
 
-        $fields.exit()
-            .remove();
-
         notShown = notShown.map(function(field) {
             return {
                 title: field.label(),
@@ -195,22 +203,35 @@ export function preset(context) {
             };
         });
 
-        var $more = selection.selectAll('.more-fields')
+
+        var more = selection.selectAll('.more-fields')
             .data((notShown.length > 0) ? [0] : []);
 
-        $more.enter().append('div')
+        more.exit()
+            .remove();
+
+        more = more.enter()
+            .append('div')
             .attr('class', 'more-fields')
             .append('label')
-                .text(t('inspector.add_fields'));
+            .text(t('inspector.add_fields'))
+            .merge(more);
 
-        var $input = $more.selectAll('.value')
+
+        var input = more.selectAll('.value')
             .data([0]);
 
-        $input.enter().append('input')
-            .attr('class', 'value')
-            .attr('type', 'text');
+        input.exit()
+            .remove();
 
-        getSetValue($input, '')
+        input = input.enter()
+            .append('input')
+            .attr('class', 'value')
+            .attr('type', 'text')
+            .merge(input);
+
+        input
+            .call(getSetValue, '')
             .attr('placeholder', function() {
                 var placeholder = [];
                 for (var field in notShown) {
@@ -222,11 +243,6 @@ export function preset(context) {
                 .minItems(1)
                 .on('accept', show));
 
-        $more.exit()
-            .remove();
-
-        $input.exit()
-            .remove();
 
         function show(field) {
             field = field.field;
@@ -248,6 +264,7 @@ export function preset(context) {
         }
     }
 
+
     presets.preset = function(_) {
         if (!arguments.length) return preset;
         if (preset && preset.id === _.id) return presets;
@@ -256,11 +273,13 @@ export function preset(context) {
         return presets;
     };
 
+
     presets.state = function(_) {
         if (!arguments.length) return state;
         state = _;
         return presets;
     };
+
 
     presets.tags = function(_) {
         if (!arguments.length) return tags;
@@ -269,6 +288,7 @@ export function preset(context) {
         return presets;
     };
 
+
     presets.entityID = function(_) {
         if (!arguments.length) return id;
         if (id === _) return presets;
@@ -276,6 +296,7 @@ export function preset(context) {
         fieldsArr = null;
         return presets;
     };
+
 
     return rebind(presets, dispatch, 'on');
 }

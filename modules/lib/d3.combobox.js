@@ -257,7 +257,7 @@ export function d3combobox() {
             if (!shown) return;
             input
                 .property('value', d.value)
-                .trigger('change');
+                .dispatch('change');
             event.call('accept', this, d);
             hide();
         }

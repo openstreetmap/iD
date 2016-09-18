@@ -13,6 +13,7 @@ import { RawTagEditor } from './raw_tag_editor';
 import { TagReference } from './tag_reference';
 import { preset } from './preset';
 
+
 export function EntityEditor(context) {
     var dispatch = d3.dispatch('choose'),
         state = 'select',
@@ -28,96 +29,106 @@ export function EntityEditor(context) {
     var rawTagEditor = RawTagEditor(context)
         .on('change', changeTags);
 
+
     function entityEditor(selection) {
         var entity = context.entity(id),
             tags = _.clone(entity.tags);
 
-        var $header = selection.selectAll('.header')
+        var header = selection.selectAll('.header')
             .data([0]);
 
         // Enter
-        var $enter = $header.enter().append('div')
+        var enter = header.enter()
+            .append('div')
             .attr('class', 'header fillL cf');
 
-        $enter.append('button')
+        enter
+            .append('button')
             .attr('class', 'fl preset-reset preset-choose')
             .append('span')
             .html('&#9668;');
 
-        $enter.append('button')
+        enter
+            .append('button')
             .attr('class', 'fr preset-close')
+            .on('click', function() { context.enter(Browse(context)); })
             .call(Icon(modified ? '#icon-apply' : '#icon-close'));
 
-        $enter.append('h3');
+        enter
+            .append('h3');
 
         // Update
-        $header.select('h3')
+        header
+            .merge(enter)
+            .select('h3')
             .text(t('inspector.edit'));
 
-        $header.select('.preset-close')
-            .on('click', function() {
-                context.enter(Browse(context));
-            });
 
-        var $body = selection.selectAll('.inspector-body')
+        var body = selection.selectAll('.inspector-body')
             .data([0]);
 
         // Enter
-        $enter = $body.enter().append('div')
+        enter = body.enter()
+            .append('div')
             .attr('class', 'inspector-body');
 
-        $enter.append('div')
+        enter
+            .append('div')
             .attr('class', 'preset-list-item inspector-inner')
             .append('div')
             .attr('class', 'preset-list-button-wrap')
             .append('button')
             .attr('class', 'preset-list-button preset-reset')
+            .on('click', function() { dispatch.call('choose', this, activePreset); })
             .call(tooltip()
                 .title(t('inspector.back_tooltip'))
                 .placement('bottom'))
             .append('div')
             .attr('class', 'label');
 
-        $body.select('.preset-list-button-wrap')
-            .call(reference.button);
-
-        $body.select('.preset-list-item')
-            .call(reference.body);
-
-        $enter.append('div')
+        enter
+            .append('div')
             .attr('class', 'inspector-border inspector-preset');
 
-        $enter.append('div')
+        enter
+            .append('div')
             .attr('class', 'inspector-border raw-tag-editor inspector-inner');
 
-        $enter.append('div')
+        enter
+            .append('div')
             .attr('class', 'inspector-border raw-member-editor inspector-inner');
 
-        $enter.append('div')
+        enter
+            .append('div')
             .attr('class', 'raw-membership-editor inspector-inner');
 
-        selection.selectAll('.preset-reset')
-            .on('click', function() {
-                dispatch.call('choose', this, activePreset);
-            });
 
         // Update
-        $body.select('.preset-list-item button')
+        body = body
+            .merge(enter);
+
+        body.selectAll('.preset-list-button-wrap')
+            .call(reference.button);
+
+        body.selectAll('.preset-list-item')
+            .call(reference.body);
+
+        body.select('.preset-list-item button')
             .call(PresetIcon()
                 .geometry(context.geometry(id))
                 .preset(activePreset));
 
-        $body.select('.preset-list-item .label')
+        body.select('.preset-list-item .label')
             .text(activePreset.name());
 
-        $body.select('.inspector-preset')
+        body.select('.inspector-preset')
             .call(presetEditor
                 .preset(activePreset)
                 .entityID(id)
                 .tags(tags)
                 .state(state));
 
-        $body.select('.raw-tag-editor')
+        body.select('.raw-tag-editor')
             .call(rawTagEditor
                 .preset(activePreset)
                 .entityID(id)
@@ -125,18 +136,19 @@ export function EntityEditor(context) {
                 .state(state));
 
         if (entity.type === 'relation') {
-            $body.select('.raw-member-editor')
+            body.select('.raw-member-editor')
                 .style('display', 'block')
                 .call(RawMemberEditor(context)
                     .entityID(id));
         } else {
-            $body.select('.raw-member-editor')
+            body.select('.raw-member-editor')
                 .style('display', 'none');
         }
 
-        $body.select('.raw-membership-editor')
+        body.select('.raw-membership-editor')
             .call(RawMembershipEditor(context)
                 .entityID(id));
+
 
         function historyChanged() {
             if (state === 'hide') return;
@@ -153,6 +165,7 @@ export function EntityEditor(context) {
         context.history()
             .on('change.entity-editor', historyChanged);
     }
+
 
     function clean(o) {
 
@@ -194,6 +207,7 @@ export function EntityEditor(context) {
         return out;
     }
 
+
     // Tag changes that fire on input can all get coalesced into a single
     // history operation when the user leaves the field.  #2342
     function changeTags(changed, onInput) {
@@ -214,6 +228,7 @@ export function EntityEditor(context) {
         }
     }
 
+
     entityEditor.modified = function(_) {
         if (!arguments.length) return modified;
         modified = _;
@@ -221,11 +236,13 @@ export function EntityEditor(context) {
             .attr('xlink:href', (modified ? '#icon-apply' : '#icon-close'));
     };
 
+
     entityEditor.state = function(_) {
         if (!arguments.length) return state;
         state = _;
         return entityEditor;
     };
+
 
     entityEditor.entityID = function(_) {
         if (!arguments.length) return id;
@@ -237,6 +254,7 @@ export function EntityEditor(context) {
         return entityEditor;
     };
 
+
     entityEditor.preset = function(_) {
         if (!arguments.length) return activePreset;
         if (_ !== activePreset) {
@@ -246,6 +264,7 @@ export function EntityEditor(context) {
         }
         return entityEditor;
     };
+
 
     return rebind(entityEditor, dispatch, 'on');
 }

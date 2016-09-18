@@ -9,13 +9,16 @@ import { Icon } from '../svg/index';
 import { Select } from '../modes/index';
 import { displayName } from '../util/index';
 
+
 export function RawMembershipEditor(context) {
     var id, showBlank;
+
 
     function selectRelation(d) {
         d3.event.preventDefault();
         context.enter(Select(context, [d.relation.id]));
     }
+
 
     function changeRole(d) {
         var role = d3.select(this).property('value');
@@ -23,6 +26,7 @@ export function RawMembershipEditor(context) {
             ChangeMember(d.relation.id, _.extend({}, d.member, {role: role}), d.index),
             t('operations.change_role.annotation'));
     }
+
 
     function addMembership(d, role) {
         showBlank = false;
@@ -44,11 +48,13 @@ export function RawMembershipEditor(context) {
         }
     }
 
+
     function deleteMembership(d) {
         context.perform(
             DeleteMember(d.relation.id, d.index),
             t('operations.delete_member.annotation'));
     }
+
 
     function relations(q) {
         var newRelation = {
@@ -96,6 +102,7 @@ export function RawMembershipEditor(context) {
         return result;
     }
 
+
     function rawMembershipEditor(selection) {
         var entity = context.entity(id),
             memberships = [];
@@ -114,40 +121,54 @@ export function RawMembershipEditor(context) {
             .on('toggled', toggled)
             .content(content));
 
+
         function toggled(expanded) {
             if (expanded) {
                 selection.node().parentNode.scrollTop += 200;
             }
         }
 
-        function content($wrap) {
-            var $list = $wrap.selectAll('.member-list')
+
+        function content(wrap) {
+            var list = wrap.selectAll('.member-list')
                 .data([0]);
 
-            $list.enter().append('ul')
-                .attr('class', 'member-list');
+            list = list.enter()
+                .append('ul')
+                .attr('class', 'member-list')
+                .merge(list);
 
-            var $items = $list.selectAll('li.member-row-normal')
+
+            var items = list.selectAll('li.member-row-normal')
                 .data(memberships, function(d) { return Entity.key(d.relation) + ',' + d.index; });
 
-            var $enter = $items.enter().append('li')
+            items.exit()
+                .each(unbind)
+                .remove();
+
+            var enter = items.enter()
+                .append('li')
                 .attr('class', 'member-row member-row-normal form-field');
 
-            var $label = $enter.append('label')
+            var label = enter
+                .append('label')
                 .attr('class', 'form-label')
                 .append('a')
                 .attr('href', '#')
                 .on('click', selectRelation);
 
-            $label.append('span')
+            label
+                .append('span')
                 .attr('class', 'member-entity-type')
                 .text(function(d) { return context.presets().match(d.relation, context.graph()).name(); });
 
-            $label.append('span')
+            label
+                .append('span')
                 .attr('class', 'member-entity-name')
                 .text(function(d) { return displayName(d.relation); });
 
-            $enter.append('input')
+            enter
+                .append('input')
                 .attr('class', 'member-role')
                 .property('type', 'text')
                 .attr('maxlength', 255)
@@ -155,71 +176,71 @@ export function RawMembershipEditor(context) {
                 .property('value', function(d) { return d.member.role; })
                 .on('change', changeRole);
 
-            $enter.append('button')
+            enter
+                .append('button')
                 .attr('tabindex', -1)
                 .attr('class', 'remove button-input-action member-delete minor')
                 .on('click', deleteMembership)
                 .call(Icon('#operation-delete'));
 
             if (context.taginfo()) {
-                $enter.each(bindTypeahead);
+                enter.each(bindTypeahead);
             }
 
-            $items.exit()
-                .each(unbind)
-                .remove();
 
             if (showBlank) {
-                var $new = $list.selectAll('.member-row-new')
+                var newrow = list.selectAll('.member-row-new')
                     .data([0]);
 
-                $enter = $new.enter().append('li')
+                enter = newrow.enter()
+                    .append('li')
                     .attr('class', 'member-row member-row-new form-field');
 
-                $enter.append('input')
+                enter
+                    .append('input')
                     .attr('type', 'text')
                     .attr('class', 'member-entity-input')
                     .call(d3combobox()
                         .minItems(1)
-                        .fetcher(function(value, callback) {
-                            callback(relations(value));
-                        })
+                        .fetcher(function(value, callback) { callback(relations(value)); })
                         .on('accept', function(d) {
-                            addMembership(d, $new.select('.member-role').property('value'));
+                            addMembership(d, list.selectAll('.member-row-new .member-role').property('value'));
                         }));
 
-                $enter.append('input')
+                enter
+                    .append('input')
                     .attr('class', 'member-role')
                     .property('type', 'text')
                     .attr('maxlength', 255)
                     .attr('placeholder', t('inspector.role'))
                     .on('change', changeRole);
 
-                $enter.append('button')
+                enter
+                    .append('button')
                     .attr('tabindex', -1)
                     .attr('class', 'remove button-input-action member-delete minor')
                     .on('click', deleteMembership)
                     .call(Icon('#operation-delete'));
 
             } else {
-                $list.selectAll('.member-row-new')
+                list.selectAll('.member-row-new')
                     .remove();
             }
 
-            var $add = $wrap.selectAll('.add-relation')
+
+            var addrel = wrap.selectAll('.add-relation')
                 .data([0]);
 
-            $add.enter()
+            addrel.enter()
                 .append('button')
                 .attr('class', 'add-relation')
-                .call(Icon('#icon-plus', 'light'));
-
-            $wrap.selectAll('.add-relation')
                 .on('click', function() {
                     showBlank = true;
-                    content($wrap);
-                    $list.selectAll('.member-entity-input').node().focus();
-                });
+                    content(wrap);
+                    list.selectAll('.member-entity-input').node().focus();
+                })
+                .call(Icon('#icon-plus', 'light'));
+
 
             function bindTypeahead(d) {
                 var row = d3.select(this),
@@ -261,11 +282,13 @@ export function RawMembershipEditor(context) {
         }
     }
 
+
     rawMembershipEditor.entityID = function(_) {
         if (!arguments.length) return id;
         id = _;
         return rawMembershipEditor;
     };
+
 
     return rawMembershipEditor;
 }

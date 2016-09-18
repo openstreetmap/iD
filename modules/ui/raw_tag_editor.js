@@ -7,6 +7,7 @@ import { Disclosure } from './disclosure';
 import { Icon } from '../svg/index';
 import { TagReference } from './tag_reference';
 
+
 export function RawTagEditor(context) {
     var event = d3.dispatch('change'),
         showBlank = false,
@@ -14,6 +15,7 @@ export function RawTagEditor(context) {
         preset,
         tags,
         id;
+
 
     function rawTagEditor(selection) {
         var count = Object.keys(tags).filter(function(d) { return d; }).length;
@@ -32,7 +34,8 @@ export function RawTagEditor(context) {
         }
     }
 
-    function content($wrap) {
+
+    function content(wrap) {
         var entries = d3.entries(tags);
 
         if (!entries.length || showBlank) {
@@ -40,61 +43,63 @@ export function RawTagEditor(context) {
             entries.push({key: '', value: ''});
         }
 
-        var $list = $wrap.selectAll('.tag-list')
+        var list = wrap.selectAll('.tag-list')
             .data([0]);
 
-        $list = $list.enter().append('ul')
+        list = list.enter()
+            .append('ul')
             .attr('class', 'tag-list')
-            .merge($list);
+            .merge(list);
 
-        var $newTag = $wrap.selectAll('.add-tag')
+        var newTag = wrap.selectAll('.add-tag')
             .data([0]);
 
-        $newTag.enter()
+        newTag.enter()
             .append('button')
             .attr('class', 'add-tag')
             .call(Icon('#icon-plus', 'light'))
-            .merge($newTag)
+            .merge(newTag)
             .on('click', addTag);
 
-        var $items = $list.selectAll('li')
+        var items = list.selectAll('li')
             .data(entries, function(d) { return d.key; });
 
         // Enter
 
-        var $enter = $items.enter().append('li')
+        var enter = items.enter()
+            .append('li')
             .attr('class', 'tag-row cf');
 
-        $enter.append('div')
+        enter.append('div')
             .attr('class', 'key-wrap')
             .append('input')
             .property('type', 'text')
             .attr('class', 'key')
             .attr('maxlength', 255);
 
-        $enter.append('div')
+        enter.append('div')
             .attr('class', 'input-wrap-position')
             .append('input')
             .property('type', 'text')
             .attr('class', 'value')
             .attr('maxlength', 255);
 
-        $enter.append('button')
+        enter.append('button')
             .attr('tabindex', -1)
             .attr('class', 'remove minor')
             .call(Icon('#operation-delete'));
 
         if (context.taginfo()) {
-            $enter.each(bindTypeahead);
+            enter.each(bindTypeahead);
         }
 
         // Update
 
-        $items = $items.merge($enter);
+        items = items.merge(enter);
 
-        $items.order();
+        items.order();
 
-        $items.each(function(tag) {
+        items.each(function(tag) {
             var isRelation = (context.entity(id).type === 'relation'),
                 reference;
             if (isRelation && tag.key === 'type')
@@ -111,14 +116,14 @@ export function RawTagEditor(context) {
                 .call(reference.body);
         });
 
-        getSetValue($items.select('input.key')
+        getSetValue(items.selectAll('input.key')
             .attr('title', function(d) { return d.key; })
             .on('blur', keyChange)
             .on('change', keyChange),
             function(d) { return d.key; }
         );
 
-        getSetValue($items.select('input.value')
+        getSetValue(items.selectAll('input.value')
             .attr('title', function(d) { return d.value; })
             .on('blur', valueChange)
             .on('change', valueChange)
@@ -126,19 +131,21 @@ export function RawTagEditor(context) {
             function(d) { return d.value; }
         );
 
-        $items.select('button.remove')
+        items.select('button.remove')
             .on('click', removeTag);
 
-        $items.exit()
+        items.exit()
             .each(unbind)
             .remove();
 
+
         function pushMore() {
             if (d3.event.keyCode === 9 && !d3.event.shiftKey &&
-                $list.selectAll('li:last-child input.value').node() === this) {
+                list.selectAll('li:last-child input.value').node() === this) {
                 addTag();
             }
         }
+
 
         function bindTypeahead() {
             var row = d3.select(this),
@@ -182,6 +189,7 @@ export function RawTagEditor(context) {
                 }));
         }
 
+
         function unbind() {
             var row = d3.select(this);
 
@@ -191,6 +199,7 @@ export function RawTagEditor(context) {
             row.selectAll('input.value')
                 .call(d3combobox.off);
         }
+
 
         function keyChange(d) {
             var kOld = d.key,
@@ -212,11 +221,13 @@ export function RawTagEditor(context) {
             event.call('change', this, tag);
         }
 
+
         function valueChange(d) {
             var tag = {};
             tag[d.key] = this.value;
             event.call('change', this, tag);
         }
+
 
         function removeTag(d) {
             var tag = {};
@@ -225,17 +236,19 @@ export function RawTagEditor(context) {
             d3.select(this.parentNode).remove();
         }
 
+
         function addTag() {
             // Wrapped in a setTimeout in case it's being called from a blur
             // handler. Without the setTimeout, the call to `content` would
             // wipe out the pending value change.
             setTimeout(function() {
                 showBlank = true;
-                content($wrap);
-                $list.selectAll('li:last-child input.key').node().focus();
+                content(wrap);
+                list.selectAll('li:last-child input.key').node().focus();
             }, 0);
         }
     }
+
 
     rawTagEditor.state = function(_) {
         if (!arguments.length) return state;
@@ -243,11 +256,13 @@ export function RawTagEditor(context) {
         return rawTagEditor;
     };
 
+
     rawTagEditor.preset = function(_) {
         if (!arguments.length) return preset;
         preset = _;
         return rawTagEditor;
     };
+
 
     rawTagEditor.tags = function(_) {
         if (!arguments.length) return tags;
@@ -255,11 +270,13 @@ export function RawTagEditor(context) {
         return rawTagEditor;
     };
 
+
     rawTagEditor.entityID = function(_) {
         if (!arguments.length) return id;
         id = _;
         return rawTagEditor;
     };
+
 
     return rebind(rawTagEditor, event, 'on');
 }
