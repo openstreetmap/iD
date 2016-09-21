@@ -19,11 +19,14 @@ export function preset(context) {
         tags,
         id;
 
+
     function UIField(field, entity, show) {
         field = _.clone(field);
 
         field.input = fields[field.type](field, context)
-            .on('change', dispatch.change);
+            .on('change', function(t, onInput) {
+                dispatch.call('change', field, t, onInput);
+            });
 
         if (field.input.entity) field.input.entity(entity);
 
@@ -254,13 +257,13 @@ export function preset(context) {
         function revert(field) {
             d3.event.stopPropagation();
             d3.event.preventDefault();
-            dispatch.call('change', field.revert());
+            dispatch.call('change', field, field.revert());
         }
 
         function remove(field) {
             d3.event.stopPropagation();
             d3.event.preventDefault();
-            dispatch.call('change', field.remove());
+            dispatch.call('change', field, field.remove());
         }
     }
 
