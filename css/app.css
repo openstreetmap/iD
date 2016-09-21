@@ -1163,8 +1163,10 @@ button.save.has-count .count::before {
     font-weight: bold;
 }
 
-.more-fields label { padding: 5px 10px 5px 0; }
-.more-fields input { width: 50%;}
+.more-fields input {
+    margin-left: 10px;
+    width: 50%;
+}
 
 /* preset form access */
 

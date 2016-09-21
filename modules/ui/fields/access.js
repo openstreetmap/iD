@@ -19,7 +19,15 @@ export function access(field) {
             .append('ul')
             .merge(wrap);
 
-        items = wrap.select('ul').selectAll('li')
+        var list = wrap.selectAll('ul')
+            .data([0]);
+
+        list = list.enter()
+            .append('ul')
+            .merge(list);
+
+
+        items = list.selectAll('li')
             .data(field.keys);
 
         // Enter

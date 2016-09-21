@@ -14,11 +14,16 @@ import {
     wikidata as wikidataService
 } from '../../services/index';
 
+
 export function wikipedia(field, context) {
     var dispatch = d3.dispatch('change'),
         wikipedia = wikipediaService.init(),
         wikidata = wikidataService.init(),
-        link, entity, lang, title;
+        link = d3.select(null),
+        lang = d3.select(null),
+        title = d3.select(null),
+        entity;
+
 
     function wiki(selection) {
         var langcombo = d3combobox()
@@ -47,10 +52,12 @@ export function wikipedia(field, context) {
                 });
             });
 
+
         lang = selection.selectAll('input.wiki-lang')
             .data([0]);
 
-        lang = lang.enter().append('input')
+        lang = lang.enter()
+            .append('input')
             .attr('type', 'text')
             .attr('class', 'wiki-lang')
             .attr('placeholder', t('translate.localized_translation_language'))
@@ -63,10 +70,12 @@ export function wikipedia(field, context) {
             .on('blur', changeLang)
             .on('change', changeLang);
 
+
         title = selection.selectAll('input.wiki-title')
             .data([0]);
 
-        title = title.enter().append('input')
+        title = title.enter()
+            .append('input')
             .attr('type', 'text')
             .attr('class', 'wiki-title')
             .attr('id', 'preset-input-' + field.id)
@@ -77,16 +86,19 @@ export function wikipedia(field, context) {
             .on('blur', blur)
             .on('change', change);
 
+
         link = selection.selectAll('a.wiki-link')
             .data([0]);
 
-        link = link.enter().append('a')
+        link = link.enter()
+            .append('a')
             .attr('class', 'wiki-link button-input-action minor')
             .attr('tabindex', -1)
             .attr('target', '_blank')
             .call(Icon('#icon-out-link', 'inline'))
             .merge(link);
     }
+
 
     function language() {
         var value = getSetValue(lang).toLowerCase();
@@ -100,14 +112,17 @@ export function wikipedia(field, context) {
         }) || localeLanguage || ['English', 'English', 'en'];
     }
 
+
     function changeLang() {
         getSetValue(lang, language()[1]);
         change(true);
     }
 
+
     function blur() {
         change(true);
     }
+
 
     function change(skipWikidata) {
         var value = getSetValue(title),
@@ -173,6 +188,7 @@ export function wikipedia(field, context) {
         });
     }
 
+
     wiki.tags = function(tags) {
         var value = tags[field.key] || '',
             m = value.match(/([^:]+):([^#]+)(?:#(.+))?/),
@@ -204,15 +220,18 @@ export function wikipedia(field, context) {
         }
     };
 
+
     wiki.entity = function(_) {
         if (!arguments.length) return entity;
         entity = _;
         return wiki;
     };
 
+
     wiki.focus = function() {
         title.node().focus();
     };
+
 
     return rebind(wiki, dispatch, 'on');
 }

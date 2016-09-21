@@ -223,12 +223,13 @@ export function combo(field, context) {
         if (isMulti) {
             container = selection.selectAll('ul').data([0]);
 
-            container.enter()
+            container = container.enter()
                 .append('ul')
                 .attr('class', 'form-field-multicombo')
                 .on('click', function() {
                     window.setTimeout(function() { input.node().focus(); }, 10);
-                });
+                })
+                .merge(container);
 
         } else {
             container = selection;
@@ -237,11 +238,12 @@ export function combo(field, context) {
         input = container.selectAll('input')
             .data([0]);
 
-        input.enter()
+        input = input.enter()
             .append('input')
             .attr('type', 'text')
             .attr('id', 'preset-input-' + field.id)
-            .call(initCombo, selection);
+            .call(initCombo, selection)
+            .merge(input);
 
         if (isNetwork) {
             var center = entity.extent(context.graph()).center();

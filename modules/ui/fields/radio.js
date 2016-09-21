@@ -2,9 +2,13 @@ import * as d3 from 'd3';
 import { rebind } from '../../util/rebind';
 import { t } from '../../util/locale';
 
+
 export function radio(field) {
     var dispatch = d3.dispatch('change'),
-        labels, radios, placeholder;
+        placeholder = d3.select(null),
+        labels = d3.select(null),
+        radios = d3.select(null);
+
 
     function radio(selection) {
         selection.classed('preset-radio', true);
@@ -12,18 +16,25 @@ export function radio(field) {
         var wrap = selection.selectAll('.preset-input-wrap')
             .data([0]);
 
-        var buttonWrap = wrap.enter().append('div')
+        var enter = wrap.enter()
+            .append('div')
             .attr('class', 'preset-input-wrap toggle-list');
 
-        buttonWrap.append('span')
+        enter
+            .append('span')
             .attr('class', 'placeholder');
 
-        placeholder = selection.selectAll('.placeholder');
+        wrap = wrap
+            .merge(enter);
+
+
+        placeholder = wrap.selectAll('.placeholder');
 
         labels = wrap.selectAll('label')
             .data(field.options || field.keys);
 
-        var enter = labels.enter().append('label');
+        enter = labels.enter()
+            .append('label');
 
         enter.append('input')
             .attr('type', 'radio')
@@ -34,9 +45,13 @@ export function radio(field) {
         enter.append('span')
             .text(function(d) { return field.t('options.' + d, { 'default': d }); });
 
+        labels = labels
+            .merge(enter);
+
         radios = labels.selectAll('input')
             .on('change', change);
     }
+
 
     function change() {
         var t = {};
@@ -51,6 +66,7 @@ export function radio(field) {
         });
         dispatch.call('change', this, t);
     }
+
 
     radio.tags = function(tags) {
         function checked(d) {
@@ -71,9 +87,11 @@ export function radio(field) {
         }
     };
 
+
     radio.focus = function() {
         radios.node().focus();
     };
+
 
     return rebind(radio, dispatch, 'on');
 }

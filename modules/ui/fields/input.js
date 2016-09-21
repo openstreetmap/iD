@@ -13,10 +13,10 @@ export {
 };
 
 export function url(field, context) {
-
     var dispatch = d3.dispatch('change'),
         input,
         entity;
+
 
     function i(selection) {
         var fieldId = 'preset-input-' + field.id;
@@ -24,10 +24,12 @@ export function url(field, context) {
         input = selection.selectAll('input')
             .data([0]);
 
-        input.enter().append('input')
+        input = input.enter()
+            .append('input')
             .attr('type', field.type)
             .attr('id', fieldId)
-            .attr('placeholder', field.placeholder() || t('inspector.unknown'));
+            .attr('placeholder', field.placeholder() || t('inspector.unknown'))
+            .merge(input);
 
         input
             .on('input', change(true))
@@ -49,18 +51,24 @@ export function url(field, context) {
             var spinControl = selection.selectAll('.spin-control')
                 .data([0]);
 
-            var enter = spinControl.enter().append('div')
+            var enter = spinControl.enter()
+                .append('div')
                 .attr('class', 'spin-control');
 
-            enter.append('button')
+            enter
+                .append('button')
                 .datum(1)
                 .attr('class', 'increment')
                 .attr('tabindex', -1);
 
-            enter.append('button')
+            enter
+                .append('button')
                 .datum(-1)
                 .attr('class', 'decrement')
                 .attr('tabindex', -1);
+
+            spinControl = spinControl
+                .merge(enter);
 
             spinControl.selectAll('button')
                 .on('click', function(d) {
@@ -72,6 +80,7 @@ export function url(field, context) {
         }
     }
 
+
     function change(onInput) {
         return function() {
             var t = {};
@@ -80,15 +89,18 @@ export function url(field, context) {
         };
     }
 
+
     i.entity = function(_) {
         if (!arguments.length) return entity;
         entity = _;
         return i;
     };
 
+
     i.tags = function(tags) {
         getSetValue(input, tags[field.key] || '');
     };
+
 
     i.focus = function() {
         var node = input.node();

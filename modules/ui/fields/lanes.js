@@ -20,9 +20,10 @@ export function lanes(field, context) {
         var wrap = selection.selectAll('.preset-input-wrap')
             .data([0]);
 
-        wrap.enter()
+        wrap = wrap.enter()
             .append('div')
-            .attr('class', 'preset-input-wrap');
+            .attr('class', 'preset-input-wrap')
+            .merge(wrap);
 
         var surface =  wrap.selectAll('.surface')
             .data([0]);
@@ -30,26 +31,33 @@ export function lanes(field, context) {
         var d = getDimensions(wrap);
         var freeSpace = d[0] - lanesData.lanes.length * LANE_WIDTH * 1.5 + LANE_WIDTH * 0.5;
 
-        surface.enter()
+        surface = surface.enter()
             .append('svg')
             .attr('width', d[0])
             .attr('height', 300)
-            .attr('class', 'surface');
+            .attr('class', 'surface')
+            .merge(surface);
+
 
         var lanesSelection = surface.selectAll('.lanes')
             .data([0]);
 
-        lanesSelection.enter()
+        lanesSelection = lanesSelection.enter()
             .append('g')
-            .attr('class', 'lanes');
+            .attr('class', 'lanes')
+            .merge(lanesSelection);
 
         lanesSelection
             .attr('transform', function () {
                 return 'translate(' + (freeSpace / 2) + ', 0)';
             });
 
+
         var lane = lanesSelection.selectAll('.lane')
            .data(lanesData.lanes);
+
+        lane.exit()
+            .remove();
 
         var enter = lane.enter()
             .append('g')
@@ -86,7 +94,9 @@ export function lanes(field, context) {
             .attr('x', 14)
             .text('▼');
 
-        lane.exit().remove();
+
+        lane = lane
+            .merge(enter);
 
         lane
             .attr('transform', function(d) {

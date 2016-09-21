@@ -9,11 +9,13 @@ import { RestrictTurn, UnrestrictTurn,  } from '../../actions/index';
 import { Entity } from '../../core/index';
 import { Hover } from '../../behavior/index';
 
+
 export function restrictions(field, context) {
     var dispatch = d3.dispatch('change'),
         hover = Hover(context),
         vertexID,
         fromNodeID;
+
 
     function restrictions(selection) {
         // if form field is hidden or has detached from dom, clean up.
@@ -65,6 +67,9 @@ export function restrictions(field, context) {
             .call(hover);
 
 
+        wrap = wrap
+            .merge(enter);
+
         var surface = wrap.selectAll('.surface')
             .call(setDimensions, d)
             .call(drawVertices, graph, [vertex], filter, extent, z)
@@ -97,6 +102,7 @@ export function restrictions(field, context) {
                 render();
             });
 
+
         function click() {
             var datum = d3.event.target.__data__;
             if (datum instanceof Entity) {
@@ -114,6 +120,7 @@ export function restrictions(field, context) {
                 }
             }
         }
+
 
         function mouseover() {
             var datum = d3.event.target.__data__;
@@ -137,15 +144,17 @@ export function restrictions(field, context) {
                 wrap.selectAll('.restriction-help')
                     .text(t('operations.restriction.help.' +
                         (datum.restriction ? 'toggle_off' : 'toggle_on'),
-                        {restriction: preset.name()}));
+                        { restriction: preset.name() }));
             }
         }
+
 
         function mouseout() {
             wrap.selectAll('.restriction-help')
                 .text(t('operations.restriction.help.' +
                     (fromNodeID ? 'toggle' : 'select')));
         }
+
 
         function render() {
             if (context.hasEntity(vertexID)) {
@@ -154,6 +163,7 @@ export function restrictions(field, context) {
         }
     }
 
+
     restrictions.entity = function(_) {
         if (!vertexID || vertexID !== _.id) {
             fromNodeID = null;
@@ -161,8 +171,10 @@ export function restrictions(field, context) {
         }
     };
 
+
     restrictions.tags = function() {};
     restrictions.focus = function() {};
+
 
     restrictions.off = function(selection) {
         selection.selectAll('.surface')
@@ -177,6 +189,7 @@ export function restrictions(field, context) {
         d3.select(window)
             .on('resize.restrictions', null);
     };
+
 
     return rebind(restrictions, dispatch, 'on');
 }

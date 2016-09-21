@@ -11,17 +11,22 @@ import { SuggestNames } from '../../util/index';
 import { wikipedia as wikipediaService } from '../../services/index';
 import { suggestions, wikipedia as wikipediaData } from '../../../data/index';
 
+
 export function localized(field, context) {
     var dispatch = d3.dispatch('change', 'input'),
         wikipedia = wikipediaService.init(),
-        input, localizedInputs, wikiTitles,
+        input = d3.select(null),
+        localizedInputs = d3.select(null),
+        wikiTitles,
         entity;
+
 
     function localized(selection) {
         input = selection.selectAll('.localized-main')
             .data([0]);
 
-        input = input.enter().append('input')
+        input = input.enter()
+            .append('input')
             .attr('type', 'text')
             .attr('id', 'preset-input-' + field.id)
             .attr('class', 'localized-main')
@@ -40,6 +45,7 @@ export function localized(field, context) {
             .on('blur', change())
             .on('change', change());
 
+
         var translateButton = selection.selectAll('.localized-add')
             .data([0]);
 
@@ -56,6 +62,7 @@ export function localized(field, context) {
         translateButton
             .on('click', addNew);
 
+
         localizedInputs = selection.selectAll('.localized-wrap')
             .data([0]);
 
@@ -64,6 +71,7 @@ export function localized(field, context) {
             .merge(localizedInputs);
     }
 
+
     function addNew() {
         d3.event.preventDefault();
         var data = localizedInputs.selectAll('div.entry').data();
@@ -71,11 +79,12 @@ export function localized(field, context) {
         var langExists = _.find(data, function(datum) { return datum.lang === defaultLang;});
         var isLangEn = defaultLang.indexOf('en') > -1;
         if (isLangEn || langExists) {
-          defaultLang = '';
+            defaultLang = '';
         }
         data.push({ lang: defaultLang, value: '' });
         localizedInputs.call(render, data);
     }
+
 
     function change(onInput) {
         return function() {
@@ -85,7 +94,11 @@ export function localized(field, context) {
         };
     }
 
-    function key(lang) { return field.key + ':' + lang; }
+
+    function key(lang) {
+        return field.key + ':' + lang;
+    }
+
 
     function changeLang(d) {
         var lang = getSetValue(d3.select(this)),
@@ -114,12 +127,14 @@ export function localized(field, context) {
         dispatch.call('change', this, t);
     }
 
+
     function changeValue(d) {
         if (!d.lang) return;
         var t = {};
         t[key(d.lang)] = getSetValue(d3.select(this)) || undefined;
         dispatch.call('change', this, t);
     }
+
 
     function fetcher(value, cb) {
         var v = value.toLowerCase();
@@ -133,9 +148,18 @@ export function localized(field, context) {
         }));
     }
 
+
     function render(selection, data) {
         var wraps = selection.selectAll('div.entry').
             data(data, function(d) { return d.lang; });
+
+        wraps.exit()
+            .transition()
+            .duration(200)
+            .style('max-height','0px')
+            .style('opacity', '0')
+            .style('top','-10px')
+            .remove();
 
         var innerWrap = wraps.enter()
             .insert('div', ':first-child');
@@ -145,12 +169,14 @@ export function localized(field, context) {
                 var wrap = d3.select(this);
                 var langcombo = d3combobox().fetcher(fetcher).minItems(0);
 
-                var label = wrap.append('label')
+                var label = wrap
+                    .append('label')
                     .attr('class','form-label')
                     .text(t('translate.localized_translation_label'))
                     .attr('for','localized-lang');
 
-                label.append('button')
+                label
+                    .append('button')
                     .attr('class', 'minor remove')
                     .on('click', function(d){
                         d3.event.preventDefault();
@@ -167,7 +193,8 @@ export function localized(field, context) {
                     })
                     .call(Icon('#operation-delete'));
 
-                wrap.append('input')
+                wrap
+                    .append('input')
                     .attr('class', 'localized-lang')
                     .attr('type', 'text')
                     .attr('placeholder',t('translate.localized_translation_language'))
@@ -175,7 +202,8 @@ export function localized(field, context) {
                     .on('change', changeLang)
                     .call(langcombo);
 
-                wrap.append('input')
+                wrap
+                    .append('input')
                     .on('blur', changeValue)
                     .on('change', changeValue)
                     .attr('type', 'text')
@@ -198,13 +226,6 @@ export function localized(field, context) {
                     .style('overflow', 'visible');
             });
 
-        wraps.exit()
-            .transition()
-            .duration(200)
-            .style('max-height','0px')
-            .style('opacity', '0')
-            .style('top','-10px')
-            .remove();
 
         var entry = selection.selectAll('.entry');
 
@@ -216,6 +237,7 @@ export function localized(field, context) {
         getSetValue(entry.select('.localized-value'),
             function(d) { return d.value; });
     }
+
 
     localized.tags = function(tags) {
         // Fetch translations from wikipedia
@@ -242,9 +264,11 @@ export function localized(field, context) {
         localizedInputs.call(render, postfixed.reverse());
     };
 
+
     localized.focus = function() {
         input.node().focus();
     };
+
 
     localized.entity = function(_) {
         if (!arguments.length) return entity;

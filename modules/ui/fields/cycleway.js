@@ -3,47 +3,61 @@ import { rebind } from '../../util/rebind';
 import { getSetValue } from '../../util/get_set_value';
 import { d3combobox } from '../../lib/d3.combobox.js';
 
+
 export function cycleway(field) {
     var dispatch = d3.dispatch('change'),
-        items;
+        items = d3.select(null);
+
 
     function cycleway(selection) {
         var wrap = selection.selectAll('.preset-input-wrap')
             .data([0]);
 
-        wrap.enter().append('div')
+        wrap = wrap.enter()
+            .append('div')
             .attr('class', 'cf preset-input-wrap')
-            .append('ul');
+            .merge(wrap);
 
-        items = wrap.select('ul').selectAll('li')
+
+        var div = wrap.selectAll('ul')
+            .data([0]);
+
+        div = div.enter()
+            .append('ul')
+            .merge(div);
+
+
+        items = div.selectAll('li')
             .data(field.keys);
 
-        // Enter
-        var enter = items.enter().append('li')
+        var enter = items.enter()
+            .append('li')
             .attr('class', function(d) { return 'cf preset-cycleway-' + d; });
 
-        enter.append('span')
+        enter
+            .append('span')
             .attr('class', 'col6 label preset-label-cycleway')
             .attr('for', function(d) { return 'preset-input-cycleway-' + d; })
             .text(function(d) { return field.t('types.' + d); });
 
-        enter.append('div')
+        enter
+            .append('div')
             .attr('class', 'col6 preset-input-cycleway-wrap')
             .append('input')
             .attr('type', 'text')
             .attr('class', 'preset-input-cycleway')
             .attr('id', function(d) { return 'preset-input-cycleway-' + d; })
             .each(function(d) {
-                d3.select(this)
-                    .call(d3combobox()
-                        .data(cycleway.options(d)));
+                d3.select(this).call(d3combobox().data(cycleway.options(d)));
             });
+
 
         // Update
         wrap.selectAll('.preset-input-cycleway')
             .on('change', change)
             .on('blur', change);
     }
+
 
     function change() {
         var inputs = d3.selectAll('.preset-input-cycleway')[0],
@@ -74,6 +88,7 @@ export function cycleway(field) {
         dispatch.call('change', this, tag);
     }
 
+
     cycleway.options = function() {
         return d3.keys(field.strings.options).map(function(option) {
             return {
@@ -82,6 +97,7 @@ export function cycleway(field) {
             };
         });
     };
+
 
     cycleway.tags = function(tags) {
         getSetValue(items.selectAll('.preset-input-cycleway'), function(d) {
@@ -94,10 +110,12 @@ export function cycleway(field) {
             .attr('placeholder', field.placeholder());
     };
 
+
     cycleway.focus = function() {
         items.selectAll('.preset-input-cycleway')
             .node().focus();
     };
+
 
     return rebind(cycleway, dispatch, 'on');
 }

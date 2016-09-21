@@ -223,10 +223,10 @@ export function d3combobox() {
                 .remove();
 
             options.enter()
-              .append('a')
+                .append('a')
                 .attr('class', 'combobox-option')
                 .text(function(d) { return d.value; })
-              .merge(options)
+                .merge(options)
                 .attr('title', function(d) { return d.title; })
                 .classed('selected', function(d, i) { return i === idx; })
                 .on('mouseover', select)

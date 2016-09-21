@@ -3,24 +3,29 @@ import { getSetValue } from '../../util/get_set_value';
 import { rebind } from '../../util/rebind';
 import { t } from '../../util/locale';
 
+
 export function textarea(field) {
     var dispatch = d3.dispatch('change'),
-        input;
+        input = d3.select(null);
+
 
     function textarea(selection) {
         input = selection.selectAll('textarea')
             .data([0]);
 
-        input.enter().append('textarea')
+        input.enter()
+            .append('textarea')
             .attr('id', 'preset-input-' + field.id)
             .attr('placeholder', field.placeholder() || t('inspector.unknown'))
-            .attr('maxlength', 255);
+            .attr('maxlength', 255)
+            .merge(input);
 
         input
             .on('input', change(true))
             .on('blur', change())
             .on('change', change());
     }
+
 
     function change(onInput) {
         return function() {
@@ -30,13 +35,16 @@ export function textarea(field) {
         };
     }
 
+
     textarea.tags = function(tags) {
         getSetValue(input, tags[field.key] || '');
     };
 
+
     textarea.focus = function() {
         input.node().focus();
     };
+
 
     return rebind(textarea, dispatch, 'on');
 }
