@@ -1,6 +1,6 @@
 import * as d3 from 'd3';
 import _ from 'lodash';
-import { t } from './locale';
+import { t, textDirection } from './locale';
 import { utilDetect } from './detect';
 import { remove as removeDiacritics } from 'diacritics';
 
@@ -174,8 +174,8 @@ export function utilFastMouse(container) {
         rectTop = rect.top,
         clientLeft = +container.clientLeft,
         clientTop = +container.clientTop;
-    if (iD.detect().textDirection === 'rtl') {
-      rectLeft = 0;
+    if (textDirection === 'rtl') {
+        rectLeft = 0;
     }
     return function(e) {
         return [

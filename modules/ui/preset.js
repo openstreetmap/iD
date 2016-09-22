@@ -1,7 +1,7 @@
 import * as d3 from 'd3';
 import _ from 'lodash';
 import { d3combobox } from '../lib/d3.combobox.js';
-import { t } from '../util/locale';
+import { t, textDirection } from '../util/locale';
 import { modeBrowse } from '../modes/index';
 import { svgIcon } from '../svg/index';
 import { uiDisclosure } from './disclosure';
@@ -161,7 +161,7 @@ export function uiPreset(context) {
             .attr('class', 'modified-icon')
             .attr('tabindex', -1)
             .call(
-              (iD.detect().textDirection === 'rtl') ? svgIcon('#icon-redo') : svgIcon('#icon-undo')
+                (textDirection === 'rtl') ? svgIcon('#icon-redo') : svgIcon('#icon-undo')
             );
 
 

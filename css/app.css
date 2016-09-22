@@ -3355,15 +3355,15 @@ img.tile-removing {
 
 .mly-wrapper.active {
   visibility: visible;
+}
 
 /* Right-to-left localization settings */
 
-/* sidebar */
 [dir='rtl'] #sidebar {
   float: right;
 }
 
-#sidebar .search-header .icon {
+[dir='rtl'] #sidebar .search-header .icon {
   left: auto;
   right: 10px;
 }
@@ -3542,7 +3542,7 @@ img.tile-removing {
   border-radius: 0 0 4px 0;
 }
 
-[dir='rtl'] .geolocate-control button svg, [dir='rtl'] .list-item-gpx-browse svg {
+[dir='rtl'] .list-item-gpx-browse svg {
   transform: rotateY(180deg);
 }
 

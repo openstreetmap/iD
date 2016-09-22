@@ -1,6 +1,6 @@
 import * as d3 from 'd3';
 import { d3keybinding } from '../lib/d3.keybinding.js';
-import { t } from '../util/locale';
+import { t, textDirection } from '../util/locale';
 import { svgIcon } from '../svg/index';
 import { uiCmd } from './cmd';
 import { uiTooltipHtml } from './tooltipHtml';
@@ -46,12 +46,12 @@ export function uiUndoRedo(context) {
 
         buttons.each(function(d) {
             var iconName = d.id;
-            if (iD.detect().textDirection === 'rtl') {
-              if (iconName === 'undo') {
-                iconName = 'redo';
-              } else if (iconName === 'redo') {
-                iconName = 'undo';
-              }
+            if (textDirection === 'rtl') {
+                if (iconName === 'undo') {
+                    iconName = 'redo';
+                } else if (iconName === 'redo') {
+                    iconName = 'undo';
+                }
             }
             d3.select(this)
                 .call(svgIcon('#icon-' + iconName));

@@ -1,4 +1,4 @@
-import { currentLocale } from './locale';
+import { currentLocale, setTextDirection } from './locale';
 
 export function utilDetect() {
     var detected = {};
@@ -63,6 +63,13 @@ export function utilDetect() {
     if (loadedLocale !== 'en') {
         detected.locale = loadedLocale;
     }
+
+    if (['ar', 'fa', 'iw', 'dv'].indexOf(detected.locale.split('-')[0]) > -1 || window.location.href.indexOf('rtl-test-rtl') > -1) {
+        detected.textDirection = 'rtl';
+    } else {
+        detected.textDirection = 'ltr';
+    }
+    setTextDirection(detected.textDirection);
 
     detected.host = window.location && (window.location.origin + window.location.pathname);
 
