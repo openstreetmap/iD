@@ -115,7 +115,7 @@ export function Lines(projection) {
             .selectAll('path')
             .filter(filter)
             .data(
-                function() { return onewaydata[this.parentNode.parentNode.__data__] || []; },
+                function() { return onewaydata[this.parentNode.__data__] || []; },
                 function(d) { return [d.id, d.index]; }
             );
 
