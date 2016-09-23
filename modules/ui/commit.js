@@ -18,8 +18,7 @@ export function Commit(context) {
         var changes = context.history().changes(),
             summary = context.history().difference().summary();
 
-
-        var header = selection
+        selection
             .append('div')
             .attr('class', 'header fillL')
             .append('h3')
@@ -105,7 +104,7 @@ export function Commit(context) {
             .attr('class', 'changeset-list');
 
         var warningLi = warnings.select('ul').selectAll('li')
-            .data(function(d) { return d; })
+            .data(function(d) { return d; });
 
         warningLi = warningLi.enter()
             .append('li')
@@ -145,19 +144,22 @@ export function Commit(context) {
             var userLink = d3.select(document.createElement('div'));
 
             if (user.image_url) {
-                userLink.append('img')
+                userLink
+                    .append('img')
                     .attr('src', user.image_url)
                     .attr('class', 'icon pre-text user-icon');
             }
 
-            userLink.append('a')
+            userLink
+                .append('a')
                 .attr('class','user-info')
                 .text(user.display_name)
                 .attr('href', context.connection().userURL(user.display_name))
                 .attr('tabindex', -1)
                 .attr('target', '_blank');
 
-            prose.html(t('commit.upload_explanation_with_user', {user: userLink.html()}));
+            prose
+                .html(t('commit.upload_explanation_with_user', { user: userLink.html() }));
         });
 
 
@@ -223,15 +225,11 @@ export function Commit(context) {
 
         li.append('span')
             .attr('class', 'change-type')
-            .text(function(d) {
-                return t('commit.' + d.changeType) + ' ';
-            });
+            .text(function(d) { return t('commit.' + d.changeType) + ' '; });
 
         li.append('strong')
             .attr('class', 'entity-type')
-            .text(function(d) {
-                return context.presets().match(d.entity, d.graph).name();
-            });
+            .text(function(d) { return context.presets().match(d.entity, d.graph).name(); });
 
         li.append('span')
             .attr('class', 'entity-name')

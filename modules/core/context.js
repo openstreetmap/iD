@@ -146,8 +146,9 @@ export function Context(root) {
         features.reset();
         history.reset();
         _.each(services, function(service) {
-            var reset = service().reset;
-            if (reset) reset(context);
+            // TODO: fix access to services  #3324
+            // var reset = service().reset;
+            // if (reset) reset(context);
         });
         return context;
     };
