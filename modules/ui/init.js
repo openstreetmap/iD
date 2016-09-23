@@ -31,6 +31,7 @@ import { UndoRedo } from './undo_redo';
 import { Zoom } from './zoom';
 import { cmd } from './cmd';
 
+
 export function init(context) {
     function render(container) {
         var map = context.map();
@@ -207,7 +208,9 @@ export function init(context) {
         function pan(d) {
             return function() {
                 d3.event.preventDefault();
-                if (!context.inIntro()) context.pan(d);
+                if (!context.inIntro()) {
+                    context.pan(d, 100);
+                }
             };
         }
 
