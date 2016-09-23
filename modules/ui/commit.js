@@ -9,43 +9,37 @@ import { displayName, entityOrMemberSelector } from '../util/index';
 import { Icon } from '../svg/index';
 import { Select } from '../modes/index';
 
+
 export function Commit(context) {
     var dispatch = d3.dispatch('cancel', 'save');
+
 
     function commit(selection) {
         var changes = context.history().changes(),
             summary = context.history().difference().summary();
 
-        function zoomToEntity(change) {
-            var entity = change.entity;
-            if (change.changeType !== 'deleted' &&
-                context.graph().entity(entity.id).geometry(context.graph()) !== 'vertex') {
-                context.map().zoomTo(entity);
-                context.surface().selectAll(
-                    entityOrMemberSelector([entity.id], context.graph()))
-                    .classed('hover', true);
-            }
-        }
 
-        var header = selection.append('div')
-            .attr('class', 'header fillL');
-
-        header.append('h3')
+        var header = selection
+            .append('div')
+            .attr('class', 'header fillL')
+            .append('h3')
             .text(t('commit.title'));
 
-        var body = selection.append('div')
+        var body = selection
+            .append('div')
             .attr('class', 'body');
 
-
-        // Comment Section
-        var commentSection = body.append('div')
+        var commentSection = body
+            .append('div')
             .attr('class', 'modal-section form-field commit-form');
 
-        commentSection.append('label')
+        commentSection
+            .append('label')
             .attr('class', 'form-label')
             .text(t('commit.message_label'));
 
-        var commentField = commentSection.append('textarea')
+        var commentField = commentSection
+            .append('textarea')
             .attr('placeholder', t('commit.description_placeholder'))
             .attr('maxlength', 255)
             .property('value', context.storage('comment') || '')
@@ -55,27 +49,6 @@ export function Commit(context) {
                 context.storage('comment', this.value);
             });
 
-        function checkComment() {
-            d3.selectAll('.save-section .save-button')
-                .attr('disabled', (this.value.length ? null : true));
-
-            var googleWarning = clippyArea
-               .html('')
-               .selectAll('a')
-               .data(this.value.match(/google/i) ? [true] : []);
-
-            googleWarning.exit()
-                .remove();
-
-            googleWarning.enter()
-               .append('a')
-               .attr('target', '_blank')
-               .attr('tabindex', -1)
-               .call(Icon('#icon-alert', 'inline'))
-               .attr('href', t('commit.google_warning_link'))
-               .append('span')
-               .text(t('commit.google_warning'));
-        }
 
         commentField.node().select();
 
@@ -93,12 +66,12 @@ export function Commit(context) {
                 }
             }
 
-            commentField.call(d3combobox().caseSensitive(true).data(comments));
+            commentField
+                .call(d3combobox().caseSensitive(true).data(comments));
         });
 
         var clippyArea = commentSection.append('div')
             .attr('class', 'clippy-area');
-
 
         var changeSetInfo = commentSection.append('div')
             .attr('class', 'changeset-info');
@@ -111,36 +84,42 @@ export function Commit(context) {
             .append('span')
             .text(t('commit.about_changeset_comments'));
 
+
         // Warnings
         var warnings = body.selectAll('div.warning-section')
-            .data([context.history().validate(changes)])
-            .enter()
+            .data([context.history().validate(changes)]);
+
+        warnings = warnings.enter()
             .append('div')
             .attr('class', 'modal-section warning-section fillL2')
             .style('display', function(d) { return _.isEmpty(d) ? 'none' : null; })
-            .style('background', '#ffb');
+            .style('background', '#ffb')
+            .merge(warnings);
 
-        warnings.append('h3')
+        warnings
+            .append('h3')
             .text(t('commit.warnings'));
 
-        var warningLi = warnings.append('ul')
-            .attr('class', 'changeset-list')
-            .selectAll('li')
+        warnings
+            .append('ul')
+            .attr('class', 'changeset-list');
+
+        var warningLi = warnings.select('ul').selectAll('li')
             .data(function(d) { return d; })
-            .enter()
+
+        warningLi = warningLi.enter()
             .append('li')
-            .style()
             .on('mouseover', mouseover)
             .on('mouseout', mouseout)
-            .on('click', warningClick);
+            .on('click', warningClick)
+            .merge(warningLi);
 
         warningLi
             .call(Icon('#icon-alert', 'pre-text'));
 
         warningLi
-            .append('strong').text(function(d) {
-                return d.message;
-            });
+            .append('strong')
+            .text(function(d) { return d.message; });
 
         warningLi.filter(function(d) { return d.tooltip; })
             .call(tooltip()
@@ -150,12 +129,15 @@ export function Commit(context) {
 
 
         // Upload Explanation
-        var saveSection = body.append('div')
+        var saveSection = body
+            .append('div')
             .attr('class','modal-section save-section fillL cf');
 
-        var prose = saveSection.append('p')
+        var prose = saveSection
+            .append('p')
             .attr('class', 'commit-info')
             .html(t('commit.upload_explanation'));
+
 
         context.connection().userDetails(function(err, user) {
             if (err) return;
@@ -180,18 +162,22 @@ export function Commit(context) {
 
 
         // Buttons
-        var buttonSection = saveSection.append('div')
+        var buttonSection = saveSection
+            .append('div')
             .attr('class','buttons fillL cf');
 
-        var cancelButton = buttonSection.append('button')
+        var cancelButton = buttonSection
+            .append('button')
             .attr('class', 'secondary-action col5 button cancel-button')
             .on('click.cancel', function() { dispatch.call('cancel'); });
 
-        cancelButton.append('span')
+        cancelButton
+            .append('span')
             .attr('class', 'label')
             .text(t('commit.cancel'));
 
-        var saveButton = buttonSection.append('button')
+        var saveButton = buttonSection
+            .append('button')
             .attr('class', 'action col5 button save-button')
             .attr('disabled', function() {
                 var n = d3.select('.commit-form textarea').node();
@@ -203,30 +189,32 @@ export function Commit(context) {
                 });
             });
 
-        saveButton.append('span')
+        saveButton
+            .append('span')
             .attr('class', 'label')
             .text(t('commit.save'));
 
 
         // Changes
-        var changeSection = body.selectAll('div.commit-section')
-            .data([0])
-            .enter()
+        var changeSection = body
             .append('div')
             .attr('class', 'commit-section modal-section fillL2');
 
         changeSection.append('h3')
-            .text(t('commit.changes', {count: summary.length}));
+            .text(t('commit.changes', { count: summary.length }));
 
-        var li = changeSection.append('ul')
+        var li = changeSection
+            .append('ul')
             .attr('class', 'changeset-list')
             .selectAll('li')
-            .data(summary)
-            .enter()
+            .data(summary);
+
+        li = li.enter()
             .append('li')
             .on('mouseover', mouseover)
             .on('mouseout', mouseout)
-            .on('click', zoomToEntity);
+            .on('click', zoomToEntity)
+            .merge(li);
 
         li.each(function(d) {
             d3.select(this)
@@ -259,6 +247,11 @@ export function Commit(context) {
             .style('opacity', 1);
 
 
+        // Call checkComment off the bat, in case a changeset
+        // comment is recovered from localStorage
+        triggerEvent(commentField, 'input');
+
+
         function mouseover(d) {
             if (d.entity) {
                 context.surface().selectAll(
@@ -267,10 +260,12 @@ export function Commit(context) {
             }
         }
 
+
         function mouseout() {
             context.surface().selectAll('.hover')
                 .classed('hover', false);
         }
+
 
         function warningClick(d) {
             if (d.entity) {
@@ -281,9 +276,40 @@ export function Commit(context) {
             }
         }
 
-        // Call checkComment off the bat, in case a changeset
-        // comment is recovered from localStorage
-        triggerEvent(commentField, 'input');
+
+        function zoomToEntity(change) {
+            var entity = change.entity;
+            if (change.changeType !== 'deleted' &&
+                context.graph().entity(entity.id).geometry(context.graph()) !== 'vertex') {
+                context.map().zoomTo(entity);
+                context.surface().selectAll(
+                    entityOrMemberSelector([entity.id], context.graph()))
+                    .classed('hover', true);
+            }
+        }
+
+
+        function checkComment() {
+            d3.selectAll('.save-section .save-button')
+                .attr('disabled', (this.value.length ? null : true));
+
+            var googleWarning = clippyArea
+               .html('')
+               .selectAll('a')
+               .data(this.value.match(/google/i) ? [true] : []);
+
+            googleWarning.exit()
+                .remove();
+
+            googleWarning.enter()
+               .append('a')
+               .attr('target', '_blank')
+               .attr('tabindex', -1)
+               .call(Icon('#icon-alert', 'inline'))
+               .attr('href', t('commit.google_warning_link'))
+               .append('span')
+               .text(t('commit.google_warning'));
+        }
     }
 
     return rebind(commit, dispatch, 'on');
