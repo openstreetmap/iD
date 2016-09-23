@@ -3647,3 +3647,20 @@ img.tile-removing {
 [dir='rtl'] #scale text {
   text-anchor: end;
 }
+
+/* increment / decrement control - code by Naoufel Razouane */
+
+[dir='rtl'] .spin-control{
+  margin-left: 0;
+  margin-right: -20%;
+}
+[dir='rtl'] .spin-control button{
+  border-left: 0;
+  border-right: 1px solid #CCC;
+}
+[dir='rtl'] .spin-control button.decrement{
+  border-bottom-right-radius: 0;
+}
+[dir='rtl'] .spin-control button.increment{
+  border-bottom-left-radius: 3px;
+}
