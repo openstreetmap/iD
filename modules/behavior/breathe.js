@@ -1,13 +1,16 @@
 import * as d3 from 'd3';
 import _ from 'lodash';
 
+
 export function Breathe() {
     var duration = 800,
         selector = '.selected.shadow, .selected .shadow',
         selected = d3.select(null),
         classed = '',
         params = {},
-        done;
+        done = false,
+        timer;
+
 
     function reset(selection) {
         selection
@@ -17,6 +20,7 @@ export function Breathe() {
             .style('r', null);
     }
 
+
     function setAnimationParams(transition, fromTo) {
         transition
             .style('stroke-opacity', function(d) { return params[d.id][fromTo].opacity; })
@@ -24,6 +28,7 @@ export function Breathe() {
             .style('fill-opacity', function(d) { return params[d.id][fromTo].opacity; })
             .style('r', function(d) { return params[d.id][fromTo].width; });
     }
+
 
     function calcAnimationParams(selection) {
         selection
@@ -53,18 +58,18 @@ export function Breathe() {
             });
     }
 
+
     function run(surface, fromTo) {
         var toFrom = (fromTo === 'from' ? 'to': 'from'),
             currSelected = surface.selectAll(selector),
-            currClassed = surface.attr('class'),
-            n = 0;
+            currClassed = surface.attr('class');
 
         if (done || currSelected.empty()) {
             selected.call(reset);
             return;
         }
 
-        if (!_.isEqual(currSelected, selected) || currClassed !== classed) {
+        if (!_.isEqual(currSelected.data(), selected.data()) || currClassed !== classed) {
             selected.call(reset);
             classed = currClassed;
             selected = currSelected.call(calcAnimationParams);
@@ -72,37 +77,37 @@ export function Breathe() {
 
         selected
             .transition()
-            .call(setAnimationParams, fromTo)
             .duration(duration)
-            .each(function() { ++n; })
+            .call(setAnimationParams, fromTo)
             .on('end', function() {
-                if (!--n) {  // call once
-                    surface.call(run, toFrom);
-                }
+                surface.call(run, toFrom);
             });
     }
 
+
     var breathe = function(surface) {
         done = false;
-        d3.timer(function() {
-            if (done) return true;
-
-            var currSelected = surface.selectAll(selector);
-            if (currSelected.empty()) return false;
+        timer = d3.timer(function() {
+            // wait for elements to actually become selected
+            if (surface.selectAll(selector).empty()) {
+                return false;
+            }
 
             surface.call(run, 'from');
+            timer.stop();
             return true;
-        }, 200);
+        }, 20);
     };
+
 
     breathe.off = function() {
         done = true;
-        d3.timerFlush();
+        timer.stop();
         selected
-            .transition()
-            .call(reset)
-            .duration(0);
+            .interrupt()
+            .call(reset);
     };
+
 
     return breathe;
 }
