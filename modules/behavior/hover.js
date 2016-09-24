@@ -14,7 +14,8 @@ import { Entity } from '../core/index';
  */
 export function Hover() {
     var dispatch = d3.dispatch('hover'),
-        selection,
+        selection = d3.select(null),
+        buttonDown,
         altDisables,
         target;
 
@@ -69,40 +70,44 @@ export function Hover() {
             }
         }
 
-        var down;
-
-        function mouseover(evt) {
-            if (down) return;
-            var target = d3.event.target;
-            enter(target ? target.__data__ : null);
-        }
-
-        function mouseout() {
-            if (down) return;
-            var target = d3.event.relatedTarget;
-            enter(target ? target.__data__ : null);
-        }
-
-        function mousedown() {
-            down = true;
-            d3.select(window)
-                .on('mouseup.hover', mouseup);
-        }
-
-        function mouseup() {
-            down = false;
-        }
-
         selection
             .on('mouseover.hover', mouseover)
             .on('mouseout.hover', mouseout)
-            .on('mousedown.hover', mousedown)
-            .on('mouseup.hover', mouseup);
+            .on('mousedown.hover', mousedown);
 
         d3.select(window)
             .on('keydown.hover', keydown)
             .on('keyup.hover', keyup);
+
+
+        function mouseover() {
+            if (buttonDown) return;
+            var target = d3.event.target;
+            enter(target ? target.__data__ : null);
+        }
+
+
+        function mouseout() {
+            if (buttonDown) return;
+            var target = d3.event.relatedTarget;
+            enter(target ? target.__data__ : null);
+        }
+
+
+        function mousedown() {
+            buttonDown = true;
+            d3.select(window)
+                .on('mouseup.hover', mouseup, true);
+        }
+
+
+        function mouseup() {
+            buttonDown = false;
+            d3.select(window)
+                .on('mouseup.hover', null, true);
+        }
     };
+
 
     hover.off = function(selection) {
         selection.selectAll('.hover')
@@ -113,20 +118,20 @@ export function Hover() {
         selection
             .on('mouseover.hover', null)
             .on('mouseout.hover', null)
-            .on('mousedown.hover', null)
-            .on('mouseup.hover', null);
+            .on('mousedown.hover', null);
 
         d3.select(window)
             .on('keydown.hover', null)
-            .on('keyup.hover', null)
-            .on('mouseup.hover', null);
+            .on('keyup.hover', null);
     };
+
 
     hover.altDisables = function(_) {
         if (!arguments.length) return altDisables;
         altDisables = _;
         return hover;
     };
+
 
     return rebind(hover, dispatch, 'on');
 }
