@@ -4,12 +4,26 @@ import _ from 'lodash';
 
 export function Breathe() {
     var duration = 800,
+        steps = 4,
         selector = '.selected.shadow, .selected .shadow',
         selected = d3.select(null),
         classed = '',
         params = {},
         done = false,
         timer;
+
+
+    function ratchetyInterpolator(a, b, steps, units) {
+        a = parseFloat(a);
+        b = parseFloat(b);
+        var sample = d3.scaleQuantize()
+            .domain([0, 1])
+            .range(d3.quantize(d3.interpolateNumber(a, b), steps));
+
+        return function(t) {
+            return String(sample(t)) + (units || '');
+        };
+    }
 
 
     function reset(selection) {
@@ -22,11 +36,39 @@ export function Breathe() {
 
 
     function setAnimationParams(transition, fromTo) {
+        var toFrom = (fromTo === 'from' ? 'to' : 'from');
+
         transition
-            .style('stroke-opacity', function(d) { return params[d.id][fromTo].opacity; })
-            .style('stroke-width', function(d) { return params[d.id][fromTo].width; })
-            .style('fill-opacity', function(d) { return params[d.id][fromTo].opacity; })
-            .style('r', function(d) { return params[d.id][fromTo].width; });
+            .styleTween('stroke-opacity', function(d) {
+                return ratchetyInterpolator(
+                    params[d.id][toFrom].opacity,
+                    params[d.id][fromTo].opacity,
+                    steps
+                );
+            })
+            .styleTween('stroke-width', function(d) {
+                return ratchetyInterpolator(
+                    params[d.id][toFrom].width,
+                    params[d.id][fromTo].width,
+                    steps,
+                    'px'
+                );
+            })
+            .styleTween('fill-opacity', function(d) {
+                return ratchetyInterpolator(
+                    params[d.id][toFrom].opacity,
+                    params[d.id][fromTo].opacity,
+                    steps
+                );
+            })
+            .styleTween('r', function(d) {
+                return ratchetyInterpolator(
+                    params[d.id][toFrom].width,
+                    params[d.id][fromTo].width,
+                    steps,
+                    'px'
+                );
+            });
     }
 
 
@@ -60,7 +102,7 @@ export function Breathe() {
 
 
     function run(surface, fromTo) {
-        var toFrom = (fromTo === 'from' ? 'to': 'from'),
+        var toFrom = (fromTo === 'from' ? 'to' : 'from'),
             currSelected = surface.selectAll(selector),
             currClassed = surface.attr('class');
 
