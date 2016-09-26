@@ -3,6 +3,13 @@ import _ from 'lodash';
 import { euclideanDistance, interp } from '../geo/index';
 import { Node } from '../core/index';
 
+import {
+    polygonArea as d3polygonArea,
+    polygonHull as d3polygonHull,
+    polygonCentroid as d3polygonCentroid
+} from 'd3-polygon';
+
+
 export function Circularize(wayId
   , projection, maxAngle) {
     maxAngle = (maxAngle || 20) * Math.PI / 180;
@@ -18,9 +25,9 @@ export function Circularize(wayId
             keyNodes = nodes.filter(function(n) { return graph.parentWays(n).length !== 1; }),
             points = nodes.map(function(n) { return projection(n.loc); }),
             keyPoints = keyNodes.map(function(n) { return projection(n.loc); }),
-            centroid = (points.length === 2) ? interp(points[0], points[1], 0.5) : d3.polygonCentroid(points),
+            centroid = (points.length === 2) ? interp(points[0], points[1], 0.5) : d3polygonCentroid(points),
             radius = d3.median(points, function(p) { return euclideanDistance(centroid, p); }),
-            sign = d3.polygonArea(points) > 0 ? 1 : -1,
+            sign = d3polygonArea(points) > 0 ? 1 : -1,
             ids;
 
         // we need atleast two key nodes for the algorithm to work
@@ -152,8 +159,8 @@ export function Circularize(wayId
         var way = graph.entity(wayId),
             nodes = _.uniq(graph.childNodes(way)),
             points = nodes.map(function(n) { return projection(n.loc); }),
-            sign = d3.polygonArea(points) > 0 ? 1 : -1,
-            hull = d3.polygonHull(points);
+            sign = d3polygonArea(points) > 0 ? 1 : -1,
+            hull = d3polygonHull(points);
 
         // D3 convex hulls go counterclockwise..
         if (sign === -1) {
