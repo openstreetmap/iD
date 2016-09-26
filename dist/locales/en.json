@@ -650,8 +650,7 @@
         },
         "fields": {
             "access_simple": {
-                "label": "Allowed Access",
-                "placeholder": "yes"
+                "label": "Allowed Access"
             },
             "access_toilets": {
                 "label": "Access"

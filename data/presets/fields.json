@@ -3,7 +3,6 @@
         "key": "access",
         "type": "combo",
         "label": "Allowed Access",
-        "placeholder": "yes",
         "options": [
             "permissive",
             "private",

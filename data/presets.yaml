@@ -74,8 +74,6 @@ en:
       access_simple:
         # access=*
         label: Allowed Access
-        # access_simple field placeholder
-        placeholder: 'yes'
       access_toilets:
         # access=*
         label: Access

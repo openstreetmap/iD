@@ -11,6 +11,7 @@ export {
     combo as multiCombo,
     combo as networkCombo
 };
+
 export function combo(field, context) {
     var dispatch = d3.dispatch('change'),
         isMulti = (field.type === 'multiCombo'),
@@ -187,7 +188,8 @@ export function combo(field, context) {
             ph = field.placeholder() || placeholders.slice(0, 3).join(', ');
         }
 
-        input.attr('placeholder', ph + '…');
+        container.selectAll('input')
+            .attr('placeholder', ph + '…');
     }
 
 
