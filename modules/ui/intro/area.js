@@ -1,7 +1,9 @@
 import * as d3 from 'd3';
 import { rebind } from '../../util/rebind';
+import { bindOnce } from '../../util/bind_once';
 import { t } from '../../util/locale';
 import { icon, pad } from './helper';
+
 
 export function area(context, reveal) {
     var dispatch = d3.dispatch('done'),
@@ -10,6 +12,7 @@ export function area(context, reveal) {
     var step = {
         title: 'intro.areas.title'
     };
+
 
     step.enter = function() {
         var playground = [-85.63552, 41.94159],
@@ -20,6 +23,7 @@ export function area(context, reveal) {
             { tooltipClass: 'intro-areas-add' });
 
         context.on('enter.intro', addArea);
+
 
         function addArea(mode) {
             if (mode.id !== 'add-area') return;
@@ -36,6 +40,7 @@ export function area(context, reveal) {
             });
         }
 
+
         function drawArea(mode) {
             if (mode.id !== 'draw-area') return;
             context.on('enter.intro', enterSelect);
@@ -51,6 +56,7 @@ export function area(context, reveal) {
             });
         }
 
+
         function enterSelect(mode) {
             if (mode.id !== 'select') return;
             context.map().on('move.intro', null);
@@ -64,21 +70,26 @@ export function area(context, reveal) {
             }, 500);
         }
 
+
         function keySearch() {
             var first = d3.select('.preset-list-item:first-child');
             if (first.classed('preset-leisure-playground')) {
                 reveal(first.select('.preset-list-button').node(), t('intro.areas.choose'));
-                d3.selection.prototype.one.call(context.history(), 'change.intro', selectedPreset);
+                bindOnce(context.history(), 'change.intro', selectedPreset);
                 d3.select('.preset-search-input').on('keyup.intro', null);
             }
         }
 
+
         function selectedPreset() {
             reveal('.pane',
                 t('intro.areas.describe', { button: icon('#icon-apply', 'pre-text') }));
-            context.on('exit.intro', dispatch.done);
+            context.on('exit.intro', function() {
+                dispatch.call('done');
+            });
         }
     };
+
 
     step.exit = function() {
         window.clearTimeout(timeout);
@@ -88,6 +99,7 @@ export function area(context, reveal) {
         context.map().on('move.intro', null);
         d3.select('.preset-search-input').on('keyup.intro', null);
     };
+
 
     return rebind(step, dispatch, 'on');
 }

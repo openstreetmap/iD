@@ -9,6 +9,7 @@ export function pointBox(point, context) {
      };
 }
 
+
 export function pad(box, padding, context) {
     if (box instanceof Array) {
         var rect = context.surfaceRect();
@@ -25,6 +26,7 @@ export function pad(box, padding, context) {
         height: (box.width || 0) + 2 * padding
     };
 }
+
 
 export function icon(name, svgklass) {
     return '<svg class="icon ' + (svgklass || '') + '">' +

@@ -4,8 +4,8 @@ import { rebind } from '../../util/rebind';
 import { bindOnce } from '../../util/bind_once';
 import { t } from '../../util/locale';
 import { icon, pad } from './helper';
-
 import { DeleteMultiple } from '../../actions/index';
+
 
 export function line(context, reveal) {
     var dispatch = d3.dispatch('done'),
@@ -15,14 +15,17 @@ export function line(context, reveal) {
         title: 'intro.lines.title'
     };
 
+
     function timeout(f, t) {
         timeouts.push(window.setTimeout(f, t));
     }
+
 
     function eventCancel() {
         d3.event.stopPropagation();
         d3.event.preventDefault();
     }
+
 
     step.enter = function() {
         var centroid = [-85.62830, 41.95699];
@@ -36,6 +39,7 @@ export function line(context, reveal) {
             { tooltipClass: 'intro-lines-add' });
 
         context.on('enter.intro', addLine);
+
 
         function addLine(mode) {
             if (mode.id !== 'add-line') return;
@@ -51,6 +55,7 @@ export function line(context, reveal) {
                 reveal(pointBox, t('intro.lines.start'), {duration: 0});
             });
         }
+
 
         function drawLine(mode) {
             if (mode.id !== 'draw-line') return;
@@ -68,6 +73,7 @@ export function line(context, reveal) {
             });
         }
 
+
         // ended line before creating intersection
         function retry(mode) {
             if (mode.id !== 'select') return;
@@ -82,6 +88,7 @@ export function line(context, reveal) {
                 step.enter();
             }, 3000);
         }
+
 
         function addIntersection(changes) {
             if ( _.some(changes.created(), function(d) {
@@ -102,6 +109,7 @@ export function line(context, reveal) {
             }
         }
 
+
         function enterSelect(mode) {
             if (mode.id !== 'select') return;
             context.map().on('move.intro', null);
@@ -111,6 +119,7 @@ export function line(context, reveal) {
             presetCategory();
         }
 
+
         function presetCategory() {
             timeout(function() {
                 d3.select('#curtain').style('pointer-events', 'none');
@@ -119,6 +128,7 @@ export function line(context, reveal) {
                 bindOnce(road, 'click.intro', roadCategory);
             }, 500);
         }
+
 
         function roadCategory() {
             timeout(function() {
@@ -131,6 +141,7 @@ export function line(context, reveal) {
             }, 500);
         }
 
+
         // selected wrong road type
         function retryPreset() {
             timeout(function() {
@@ -140,13 +151,16 @@ export function line(context, reveal) {
             }, 500);
         }
 
+
         function roadDetails() {
             reveal('.pane',
                 t('intro.lines.describe', { button: icon('#icon-apply', 'pre-text') }));
-            context.on('exit.intro', dispatch.done);
+            context.on('exit.intro', function() {
+                dispatch.call('done');
+            });
         }
-
     };
+
 
     step.exit = function() {
         d3.select(window).on('mousedown.intro', null, true);

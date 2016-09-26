@@ -4,6 +4,7 @@ import { t } from '../../util/locale';
 import { icon } from './helper';
 import { modal } from '../modal';
 
+
 export function startEditing(context, reveal) {
     var dispatch = d3.dispatch('done', 'startEditing'),
         modalSelection,
@@ -13,9 +14,11 @@ export function startEditing(context, reveal) {
         title: 'intro.startediting.title'
     };
 
+
     function timeout(f, t) {
         timeouts.push(window.setTimeout(f, t));
     }
+
 
     step.enter = function() {
         reveal('.map-control.help-control',
@@ -39,25 +42,30 @@ export function startEditing(context, reveal) {
 
             var startbutton = modalSelection.select('.content')
                 .attr('class', 'fillL')
-                    .append('button')
-                        .attr('class', 'modal-section huge-modal-button')
-                        .on('click', function() {
-                            modalSelection.remove();
-                        });
+                .append('button')
+                    .attr('class', 'modal-section huge-modal-button')
+                    .on('click', function() {
+                        modalSelection.remove();
+                    });
 
-                startbutton.append('div')
+                startbutton
+                    .append('div')
                     .attr('class','illustration');
-                startbutton.append('h2')
+
+                startbutton
+                    .append('h2')
                     .text(t('intro.startediting.start'));
 
             dispatch.call('startEditing');
         }, 10500);
     };
 
+
     step.exit = function() {
-        if (modalSelection) modalSelection.remove();
+        if (modalSelection) { modalSelection.remove(); }
         timeouts.forEach(window.clearTimeout);
     };
+
 
     return rebind(step, dispatch, 'on');
 }

@@ -4,6 +4,7 @@ import { rebind } from '../../util/rebind';
 import { t } from '../../util/locale';
 import { icon, pointBox } from './helper';
 
+
 export function navigation(context, reveal) {
     var dispatch = d3.dispatch('done'),
         timeouts = [];
@@ -12,14 +13,17 @@ export function navigation(context, reveal) {
         title: 'intro.navigation.title'
     };
 
+
     function set(f, t) {
         timeouts.push(window.setTimeout(f, t));
     }
+
 
     function eventCancel() {
         d3.event.stopPropagation();
         d3.event.preventDefault();
     }
+
 
     step.enter = function() {
         var rect = context.surfaceRect(),
@@ -40,10 +44,11 @@ export function navigation(context, reveal) {
             context.on('enter.intro', inspectTownHall);
         }, 400));
 
+
         function townhall() {
             var hall = [-85.63645945147184, 41.942986488012565];
-
             var point = context.projection(hall);
+
             if (point[0] < 0 || point[0] > rect.width ||
                 point[1] < 0 || point[1] > rect.height) {
                 context.map().center(hall);
@@ -58,6 +63,7 @@ export function navigation(context, reveal) {
             });
         }
 
+
         function inspectTownHall(mode) {
             if (mode.id !== 'select') return;
             context.on('enter.intro', null);
@@ -69,12 +75,15 @@ export function navigation(context, reveal) {
             }, 700);
         }
 
+
         function streetSearch() {
             context.on('exit.intro', null);
             reveal('.search-header input',
                 t('intro.navigation.search', { name: t('intro.graph.spring_st') }));
-            d3.select('.search-header input').on('keyup.intro', searchResult);
+            d3.select('.search-header input')
+                .on('keyup.intro', searchResult);
         }
+
 
         function searchResult() {
             var first = d3.select('.feature-list-item:nth-child(0n+2)'),  // skip No Results item
@@ -90,10 +99,14 @@ export function navigation(context, reveal) {
             }
         }
 
+
         function selectedStreet() {
             var springSt = [-85.63585099140167, 41.942506848938926];
             context.map().center(springSt);
-            context.on('exit.intro', dispatch.done);
+            context.on('exit.intro', function() {
+                dispatch.call('done');
+            });
+
             set(function() {
                 reveal('.entity-editor-pane',
                     t('intro.navigation.chosen', {
@@ -104,6 +117,7 @@ export function navigation(context, reveal) {
         }
     };
 
+
     step.exit = function() {
         timeouts.forEach(window.clearTimeout);
         context.map().on('move.intro', null);
@@ -113,6 +127,7 @@ export function navigation(context, reveal) {
             .on('keydown.intro', null)
             .on('keyup.intro', null);
     };
+
 
     return rebind(step, dispatch, 'on');
 }

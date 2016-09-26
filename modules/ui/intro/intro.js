@@ -2,19 +2,20 @@ import * as d3 from 'd3';
 import { t } from '../../util/locale';
 import { Entity, Graph } from '../../core/index';
 import { Browse } from '../../modes/index';
-import { area } from './area';
-import { line } from './line';
-import { navigation } from './navigation';
-import { point } from './point';
-import { startEditing } from './start_editing';
 import { d3curtain } from '../../util/curtain';
 import { default as introGraphRaw } from '../../../data/intro_graph.json';
 
+import { navigation } from './navigation';
+import { point } from './point';
+import { area } from './area';
+import { line } from './line';
+import { startEditing } from './start_editing';
+
 var sampleIntros = {
-    area: area,
-    line: line,
     navigation: navigation,
     point: point,
+    area: area,
+    line: line,
     startEditing: startEditing
 };
 
@@ -66,8 +67,10 @@ export function intro(context) {
             w17967444: 'east_st',
             w17966984: 'portage_ave'
         };
+
         return features[id] && t('intro.graph.' + features[id]);
     }
+
 
     var introGraph = {};
 
@@ -79,9 +82,8 @@ export function intro(context) {
         }
     }
 
+
     function intro(selection) {
-
-
         context.enter(Browse(context));
 
         // Save current map state
@@ -109,10 +111,14 @@ export function intro(context) {
         var curtain = d3curtain();
         selection.call(curtain);
 
+
         function reveal(box, text, options) {
             options = options || {};
-            if (text) curtain.reveal(box, text, options.tooltipClass, options.duration);
-            else curtain.reveal(box, '', '', options.duration);
+            if (text) {
+                curtain.reveal(box, text, options.tooltipClass, options.duration);
+            } else {
+                curtain.reveal(box, '', '', options.duration);
+            }
         }
 
         var steps = ['navigation', 'point', 'area', 'line', 'startEditing'].map(function(step, i) {
@@ -139,9 +145,12 @@ export function intro(context) {
             context.inIntro(false);
         });
 
-        var navwrap = selection.append('div').attr('class', 'intro-nav-wrap fillD');
+        var navwrap = selection
+            .append('div')
+            .attr('class', 'intro-nav-wrap fillD');
 
-        var buttonwrap = navwrap.append('div')
+        var buttonwrap = navwrap
+            .append('div')
             .attr('class', 'joined')
             .selectAll('button.step');
 
@@ -163,6 +172,7 @@ export function intro(context) {
 
         enter(steps[0]);
 
+
         function enter(newStep) {
             if (step) { step.exit(); }
 
@@ -177,5 +187,7 @@ export function intro(context) {
         }
 
     }
+
+
     return intro;
 }

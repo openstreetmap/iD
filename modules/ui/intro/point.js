@@ -1,7 +1,9 @@
 import * as d3 from 'd3';
+import { bindOnce } from '../../util/bind_once';
 import { rebind } from '../../util/rebind';
 import { t } from '../../util/locale';
 import { icon, pad } from './helper';
+
 
 export function point(context, reveal) {
     var dispatch = d3.dispatch('done'),
@@ -11,14 +13,17 @@ export function point(context, reveal) {
         title: 'intro.points.title'
     };
 
+
     function setTimeout(f, t) {
         timeouts.push(window.setTimeout(f, t));
     }
+
 
     function eventCancel() {
         d3.event.stopPropagation();
         d3.event.preventDefault();
     }
+
 
     step.enter = function() {
         context.map().centerZoom([-85.63279, 41.94394], 19);
@@ -29,6 +34,7 @@ export function point(context, reveal) {
         var corner = [-85.632481,41.944094];
 
         context.on('enter.intro', addPoint);
+
 
         function addPoint(mode) {
             if (mode.id !== 'add-point') return;
@@ -43,6 +49,7 @@ export function point(context, reveal) {
             });
         }
 
+
         function enterSelect(mode) {
             if (mode.id !== 'select') return;
             context.map().on('move.intro', null);
@@ -55,16 +62,18 @@ export function point(context, reveal) {
             }, 500);
         }
 
+
         function keySearch() {
             var first = d3.select('.preset-list-item:first-child');
             if (first.classed('preset-amenity-cafe')) {
                 reveal(first.select('.preset-list-button').node(), t('intro.points.choose'));
-                d3.selection.prototype.one.call(context.history(), 'change.intro', selectedPreset);
+                bindOnce(context.history(), 'change.intro', selectedPreset);
                 d3.select('.preset-search-input')
                     .on('keydown.intro', eventCancel, true)
                     .on('keyup.intro', null);
             }
         }
+
 
         function selectedPreset() {
             setTimeout(function() {
@@ -74,12 +83,14 @@ export function point(context, reveal) {
             }, 400);
         }
 
+
         function closeEditor() {
             d3.select('.preset-search-input').on('keydown.intro', null);
             context.history().on('change.intro', null);
             reveal('.entity-editor-pane',
                 t('intro.points.close', { button: icon('#icon-apply', 'pre-text') }));
         }
+
 
         function selectPoint() {
             context.on('exit.intro', null);
@@ -95,6 +106,7 @@ export function point(context, reveal) {
             });
         }
 
+
         function enterReselect(mode) {
             if (mode.id !== 'select') return;
             context.map().on('move.intro', null);
@@ -106,6 +118,7 @@ export function point(context, reveal) {
                 context.on('exit.intro', deletePoint);
             }, 500);
         }
+
 
         function deletePoint() {
             context.on('exit.intro', null);
@@ -119,6 +132,7 @@ export function point(context, reveal) {
                 reveal(pointBox, t('intro.points.reselect_delete'), {duration: 0});
             });
         }
+
 
         function enterDelete(mode) {
             if (mode.id !== 'select') return;
@@ -136,6 +150,7 @@ export function point(context, reveal) {
             }, 300);
         }
 
+
         function deleted(changed) {
             if (changed.deleted().length) {
                 dispatch.call('done');
@@ -143,6 +158,7 @@ export function point(context, reveal) {
         }
 
     };
+
 
     step.exit = function() {
         timeouts.forEach(window.clearTimeout);
