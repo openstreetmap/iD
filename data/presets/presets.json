@@ -7958,6 +7958,24 @@
         "terms": [],
         "name": "Abandoned Railway"
     },
+    "railway/crossing": {
+        "icon": "cross",
+        "geometry": [
+            "vertex"
+        ],
+        "tags": {
+            "railway": "crossing"
+        },
+        "terms": [
+            "crossing",
+            "railroad crossing",
+            "level crossing",
+            "grade crossing",
+            "pedestrians through railroad",
+            "train crossing"
+        ],
+        "name": "Pedestrian Railway Crossing"
+    },
     "railway/disused": {
         "icon": "railway-disused",
         "geometry": [

@@ -3216,6 +3216,11 @@ en:
         # railway=abandoned
         name: Abandoned Railway
         terms: '<translate with synonyms or related terms for ''Abandoned Railway'', separated by commas>'
+      railway/crossing:
+        # railway=crossing
+        name: Pedestrian Railway Crossing
+        # 'terms: crossing,railroad crossing,level crossing,grade crossing,pedestrians through railroad,train crossing'
+        terms: '<translate with synonyms or related terms for ''Pedestrian Railway Crossing'', separated by commas>'
       railway/disused:
         # railway=disused
         name: Disused Railway
