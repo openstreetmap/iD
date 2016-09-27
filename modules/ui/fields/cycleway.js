@@ -10,6 +10,12 @@ export function cycleway(field) {
 
 
     function cycleway(selection) {
+
+        function stripcolon(s) {
+            return s.replace(':', '');
+        }
+
+
         var wrap = selection.selectAll('.preset-input-wrap')
             .data([0]);
 
@@ -32,12 +38,12 @@ export function cycleway(field) {
 
         var enter = items.enter()
             .append('li')
-            .attr('class', function(d) { return 'cf preset-cycleway-' + d; });
+            .attr('class', function(d) { return 'cf preset-cycleway-' + stripcolon(d); });
 
         enter
             .append('span')
             .attr('class', 'col6 label preset-label-cycleway')
-            .attr('for', function(d) { return 'preset-input-cycleway-' + d; })
+            .attr('for', function(d) { return 'preset-input-cycleway-' + stripcolon(d); })
             .text(function(d) { return field.t('types.' + d); });
 
         enter
@@ -45,8 +51,7 @@ export function cycleway(field) {
             .attr('class', 'col6 preset-input-cycleway-wrap')
             .append('input')
             .attr('type', 'text')
-            .attr('class', 'preset-input-cycleway')
-            .attr('id', function(d) { return 'preset-input-cycleway-' + d; })
+            .attr('class', function(d) { return 'preset-input-cycleway preset-input-' + stripcolon(d); })
             .each(function(d) {
                 d3.select(this).call(d3combobox().data(cycleway.options(d)));
             });
@@ -60,9 +65,8 @@ export function cycleway(field) {
 
 
     function change() {
-        var inputs = d3.selectAll('.preset-input-cycleway')[0],
-            left = getSetValue(d3.select(inputs[0])),
-            right = getSetValue(d3.select(inputs[1])),
+        var left = getSetValue(d3.select('.preset-input-cyclewayleft')),
+            right = getSetValue(d3.select('.preset-input-cyclewayright')),
             tag = {};
 
         if (left === 'none' || left === '') { left = undefined; }
