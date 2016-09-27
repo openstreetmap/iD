@@ -301,7 +301,11 @@ export function combo(field, context) {
 
 
             // Render chips
-            var chips = container.selectAll('.chips').data(multiData);
+            var chips = container.selectAll('.chips')
+                .data(multiData);
+
+            chips.exit()
+                .remove();
 
             var enter = chips.enter()
                 .insert('li', 'input')
@@ -310,6 +314,8 @@ export function combo(field, context) {
             enter.append('span');
             enter.append('a');
 
+            chips = chips.merge(enter);
+
             chips.select('span')
                 .text(function(d) { return d.value; });
 
@@ -317,9 +323,6 @@ export function combo(field, context) {
                 .on('click', removeMultikey)
                 .attr('class', 'remove')
                 .text('×');
-
-            chips.exit()
-                .remove();
 
         } else {
             getSetValue(input, displayValue(tags[field.key]));
