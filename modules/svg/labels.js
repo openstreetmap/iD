@@ -5,6 +5,7 @@ import { displayName, getStyle } from '../util/index';
 import { Entity } from '../core/index';
 import { pathLength } from '../geo/index';
 
+
 export function Labels(projection, context) {
     var path = d3.geoPath().projection(projection);
 
@@ -70,11 +71,13 @@ export function Labels(projection, context) {
         });
     }
 
+
     function get(array, prop) {
         return function(d, i) { return array[i][prop]; };
     }
 
     var textWidthCache = {};
+
 
     function textWidth(text, size, elem) {
         var c = textWidthCache[size];
@@ -98,8 +101,26 @@ export function Labels(projection, context) {
     }
 
 
-    function drawLineLabels(group, entities, filter, classes, labels) {
-        var texts = group.selectAll('text.' + classes)
+    function drawLinePaths(selection, entities, filter, classes, labels) {
+        var paths = selection.selectAll('path')
+            .filter(filter)
+            .data(entities, Entity.key);
+
+        paths.exit()
+            .remove();
+
+        paths.enter()
+            .append('path')
+            .style('stroke-width', get(labels, 'font-size'))
+            .attr('id', function(d) { return 'labelpath-' + d.id; })
+            .attr('class', classes)
+            .merge(paths)
+            .attr('d', get(labels, 'lineString'));
+    }
+
+
+    function drawLineLabels(selection, entities, filter, classes, labels) {
+        var texts = selection.selectAll('text.' + classes)
             .filter(filter)
             .data(entities, Entity.key);
 
@@ -112,36 +133,19 @@ export function Labels(projection, context) {
             .append('textPath')
             .attr('class', 'textpath');
 
+        texts = selection.selectAll('text.' + classes);
+
         texts.selectAll('.textpath')
             .filter(filter)
             .data(entities, Entity.key)
             .attr('startOffset', '50%')
             .attr('xlink:href', function(d) { return '#labelpath-' + d.id; })
             .text(displayName);
-
     }
 
 
-    function drawLinePaths(group, entities, filter, classes, labels) {
-        var halos = group.selectAll('path')
-            .filter(filter)
-            .data(entities, Entity.key);
-
-        halos.exit()
-            .remove();
-
-        halos.enter()
-            .append('path')
-            .style('stroke-width', get(labels, 'font-size'))
-            .attr('id', function(d) { return 'labelpath-' + d.id; })
-            .attr('class', classes)
-            .merge(halos)
-            .attr('d', get(labels, 'lineString'));
-    }
-
-
-    function drawPointLabels(group, entities, filter, classes, labels) {
-        var texts = group.selectAll('text.' + classes)
+    function drawPointLabels(selection, entities, filter, classes, labels) {
+        var texts = selection.selectAll('text.' + classes)
             .filter(filter)
             .data(entities, Entity.key);
 
@@ -150,7 +154,9 @@ export function Labels(projection, context) {
 
         texts = texts.enter()
             .append('text')
-            .attr('class', function(d, i) { return classes + ' ' + labels[i].classes + ' ' + d.id; })
+            .attr('class', function(d, i) {
+                return classes + ' ' + labels[i].classes + ' ' + d.id;
+            })
             .merge(texts);
 
         texts
@@ -158,16 +164,16 @@ export function Labels(projection, context) {
             .attr('y', get(labels, 'y'))
             .style('text-anchor', get(labels, 'textAnchor'))
             .text(displayName)
-            .each(function(d, i) { textWidth(displayName(d), labels[i].height, this); });
-
-        return texts;
+            .each(function(d, i) {
+                textWidth(displayName(d), labels[i].height, this);
+            });
     }
 
 
-    function drawAreaLabels(group, entities, filter, classes, labels) {
+    function drawAreaLabels(selection, entities, filter, classes, labels) {
         entities = entities.filter(hasText);
         labels = labels.filter(hasText);
-        return drawPointLabels(group, entities, filter, classes, labels);
+        drawPointLabels(selection, entities, filter, classes, labels);
 
         function hasText(d, i) {
             return labels[i].hasOwnProperty('x') && labels[i].hasOwnProperty('y');
@@ -175,21 +181,23 @@ export function Labels(projection, context) {
     }
 
 
-    function drawAreaIcons(group, entities, filter, classes, labels) {
-        var icons = group.selectAll('use')
+    function drawAreaIcons(selection, entities, filter, classes, labels) {
+        var icons = selection.selectAll('use')
             .filter(filter)
             .data(entities, Entity.key);
 
         icons.exit()
             .remove();
 
-        icons.enter()
+        icons = icons.enter()
             .append('use')
             .attr('class', 'icon areaicon')
             .attr('width', '18px')
-            .attr('height', '18px');
+            .attr('height', '18px')
+            .merge(icons);
 
-        icons.attr('transform', get(labels, 'transform'))
+        icons
+            .attr('transform', get(labels, 'transform'))
             .attr('xlink:href', function(d) {
                 var icon = context.presets().match(d, context.graph()).icon;
                 return '#' + icon + (icon === 'hairdresser' ? '-24': '-18');    // workaround: maki hairdresser-18 broken?

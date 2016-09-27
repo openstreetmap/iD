@@ -267,6 +267,9 @@ export function Map(context) {
             supersurface.call(context.background());
         }
 
+        wrapper
+            .call(drawLayers);
+
         // OSM
         if (map.editable()) {
             context.loadTiles(projection, dimensions);
@@ -274,9 +277,6 @@ export function Map(context) {
         } else {
             editOff();
         }
-
-        wrapper
-            .call(drawLayers);
 
         transformStart = projection.transform();
 
