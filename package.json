@@ -47,7 +47,7 @@
     "jsonschema": "~1.1.0",
     "maki": "0.5.0",
     "minimist": "~1.2.0",
-    "mocha": "~3.0.2",
+    "mocha": "~3.1.0",
     "mocha-phantomjs-core": "~2.0.1",
     "name-suggestion-index": "0.1.1",
     "phantomjs-prebuilt": "~2.1.11",
