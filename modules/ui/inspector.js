@@ -58,11 +58,12 @@ export function Inspector(context) {
         var footer = selection.selectAll('.footer')
             .data([0]);
 
-        footer.enter()
+        footer = footer.enter()
             .append('div')
-            .attr('class', 'footer');
+            .attr('class', 'footer')
+            .merge(footer);
 
-        selection.selectAll('.footer')
+        footer
             .call(ViewOnOSM(context).entityID(entityID));
 
 

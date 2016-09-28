@@ -57,12 +57,11 @@ export function RawTagEditor(context) {
         newTag.enter()
             .append('button')
             .attr('class', 'add-tag')
-            .call(Icon('#icon-plus', 'light'))
-            .merge(newTag)
-            .on('click', addTag);
+            .on('click', addTag)
+            .call(Icon('#icon-plus', 'light'));
 
 
-        var items = list.selectAll('li')
+        var items = list.selectAll('.tag-row')
             .data(entries, function(d) { return d.key; });
 
         items.exit()
@@ -81,7 +80,9 @@ export function RawTagEditor(context) {
             .append('input')
             .property('type', 'text')
             .attr('class', 'key')
-            .attr('maxlength', 255);
+            .attr('maxlength', 255)
+            .on('blur', keyChange)
+            .on('change', keyChange);
 
         enter
             .append('div')
@@ -89,7 +90,10 @@ export function RawTagEditor(context) {
             .append('input')
             .property('type', 'text')
             .attr('class', 'value')
-            .attr('maxlength', 255);
+            .attr('maxlength', 255)
+            .on('blur', valueChange)
+            .on('change', valueChange)
+            .on('keydown.push-more', pushMore);
 
         enter
             .append('button')
@@ -97,19 +101,30 @@ export function RawTagEditor(context) {
             .attr('class', 'remove minor')
             .call(Icon('#operation-delete'));
 
-        if (context.taginfo()) {
-            enter.each(bindTypeahead);
-        }
 
         // Update
 
-        items = items.merge(enter);
-        items.order();
+        items = items
+            .merge(enter)
+            .sort(function(a, b) {
+                return (a.key === '') ? 1
+                    : (b.key === '') ? -1
+                    : d3.ascending(a.key, b.key);
+            });
 
         items
             .each(function(tag) {
+                var row = d3.select(this),
+                    key = row.select('input.key'),      // propagate bound data to child
+                    value = row.select('input.value');  // propagate bound data to child
+
+                if (context.taginfo()) {
+                    bindTypeahead(key, value);
+                }
+
                 var isRelation = (context.entity(id).type === 'relation'),
                     reference;
+
                 if (isRelation && tag.key === 'type') {
                     reference = TagReference({rtype: tag.value}, context);
                 } else {
@@ -120,25 +135,18 @@ export function RawTagEditor(context) {
                     reference.showing(false);
                 }
 
-                d3.select(this)
+                row
                     .call(reference.button)
                     .call(reference.body);
             });
 
-        getSetValue(items.selectAll('input.key')
+        items.selectAll('input.key')
             .attr('title', function(d) { return d.key; })
-            .on('blur', keyChange)
-            .on('change', keyChange),
-            function(d) { return d.key; }
-        );
+            .call(getSetValue, function(d) { return d.key; });
 
-        getSetValue(items.selectAll('input.value')
+        items.selectAll('input.value')
             .attr('title', function(d) { return d.value; })
-            .on('blur', valueChange)
-            .on('change', valueChange)
-            .on('keydown.push-more', pushMore),
-            function(d) { return d.value; }
-        );
+            .call(getSetValue, function(d) { return d.value; });
 
         items.selectAll('button.remove')
             .on('click', removeTag);
@@ -152,10 +160,7 @@ export function RawTagEditor(context) {
         }
 
 
-        function bindTypeahead() {
-            var row = d3.select(this),
-                key = row.selectAll('input.key'),
-                value = row.selectAll('input.value');
+        function bindTypeahead(key, value) {
 
             function sort(value, data) {
                 var sameletter = [],

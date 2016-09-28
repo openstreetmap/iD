@@ -37,7 +37,6 @@ export function EntityEditor(context) {
         var header = selection.selectAll('.header')
             .data([0]);
 
-        // Enter
         var enter = header.enter()
             .append('div')
             .attr('class', 'header fillL cf');
@@ -45,6 +44,7 @@ export function EntityEditor(context) {
         enter
             .append('button')
             .attr('class', 'fl preset-reset preset-choose')
+            .on('click', function() { dispatch.call('choose', this, activePreset); })
             .append('span')
             .html('&#9668;');
 
@@ -55,19 +55,13 @@ export function EntityEditor(context) {
             .call(Icon(modified ? '#icon-apply' : '#icon-close'));
 
         enter
-            .append('h3');
-
-        // Update
-        header
-            .merge(enter)
-            .select('h3')
+            .append('h3')
             .text(t('inspector.edit'));
 
 
         var body = selection.selectAll('.inspector-body')
             .data([0]);
 
-        // Enter
         enter = body.enter()
             .append('div')
             .attr('class', 'inspector-body');
@@ -150,6 +144,10 @@ export function EntityEditor(context) {
                 .entityID(id));
 
 
+        context.history()
+            .on('change.entity-editor', historyChanged);
+
+
         function historyChanged() {
             if (state === 'hide') return;
 
@@ -161,9 +159,6 @@ export function EntityEditor(context) {
             entityEditor.modified(base !== graph);
             entityEditor(selection);
         }
-
-        context.history()
-            .on('change.entity-editor', historyChanged);
     }
 
 

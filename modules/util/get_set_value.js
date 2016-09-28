@@ -29,5 +29,6 @@ export function getSetValue(selection, value) {
     if (arguments.length === 1) {
         return selection.property('value');
     }
+
     return selection.each(d3_selection_value(value));
 }
