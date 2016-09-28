@@ -13,17 +13,15 @@ export function textarea(field) {
         input = selection.selectAll('textarea')
             .data([0]);
 
-        input.enter()
+        input = input.enter()
             .append('textarea')
             .attr('id', 'preset-input-' + field.id)
             .attr('placeholder', field.placeholder() || t('inspector.unknown'))
             .attr('maxlength', 255)
-            .merge(input);
-
-        input
             .on('input', change(true))
             .on('blur', change())
-            .on('change', change());
+            .on('change', change())
+            .merge(input);
     }
 
 
