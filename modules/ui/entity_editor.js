@@ -208,11 +208,18 @@ export function EntityEditor(context) {
     function changeTags(changed, onInput) {
         var entity = context.entity(id),
             annotation = t('operations.change_tags.annotation'),
-            tags = _.extend({}, entity.tags, changed);
+            tags = _.clone(entity.tags);
+
+        _.forEach(changed, function(v, k) {
+            if (v !== undefined || tags.hasOwnProperty(k)) {
+                tags[k] = v;
+            }
+        });
 
         if (!onInput) {
             tags = clean(tags);
         }
+
         if (!_.isEqual(entity.tags, tags)) {
             if (coalesceChanges) {
                 context.overwrite(ChangeTags(id, tags), annotation);
