@@ -4,10 +4,11 @@ import { qsString } from '../util/index';
 var wikipedia = {},
     endpoint = 'https://en.wikipedia.org/w/api.php?';
 
+
 export function init() {
     wikipedia.search = function(lang, query, callback) {
         if (!query) {
-            callback([]);
+            callback('', []);
             return;
         }
 
@@ -22,16 +23,16 @@ export function init() {
                 callback: '{callback}',
                 srsearch: query
             }), function(data) {
-                if (!data || !data.query || !data.query.search) {
-                    callback([]);
-                    return;
+                if (!data || !data.query || !data.query.search || data.error) {
+                    callback('', []);
+                } else {
+                    var results = data.query.search.map(function(d) { return d.title; });
+                    callback(query, results);
                 }
-                callback(query, data.query.search.map(function(d) {
-                    return d.title;
-                }));
             }
         );
     };
+
 
     wikipedia.suggestions = function(lang, query, callback) {
         if (!query) {
@@ -48,15 +49,16 @@ export function init() {
                 format: 'json',
                 callback: '{callback}',
                 search: query
-            }), function(d) {
-                if (!d || d.error) {
+            }), function(data) {
+                if (!data || data.error) {
                     callback('', []);
-                    return;
+                } else {
+                    callback(data[0], data[1] || []);
                 }
-                callback(d[0], d[1]);
             }
         );
     };
+
 
     wikipedia.translations = function(lang, title, callback) {
         if (!title) {
@@ -72,23 +74,23 @@ export function init() {
                 callback: '{callback}',
                 lllimit: 500,
                 titles: title
-            }), function(d) {
-                if (!d || d.error) {
+            }), function(data) {
+                if (!data || !data.query || !data.query.pages || data.error) {
                     callback({});
-                    return;
-                }
-
-                var list = d.query.pages[Object.keys(d.query.pages)[0]],
-                    translations = {};
-                if (list && list.langlinks) {
-                    list.langlinks.forEach(function(d) {
-                        translations[d.lang] = d['*'];
-                    });
+                } else {
+                    var list = data.query.pages[Object.keys(data.query.pages)[0]],
+                        translations = {};
+                    if (list && list.langlinks) {
+                        list.langlinks.forEach(function(d) {
+                            translations[d.lang] = d['*'];
+                        });
+                    }
                     callback(translations);
                 }
             }
         );
     };
+
 
     return wikipedia;
 }

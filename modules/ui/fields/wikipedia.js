@@ -41,10 +41,11 @@ export function wikipedia(field, context) {
 
         var titlecombo = d3combobox()
             .fetcher(function(value, cb) {
+                if (!value) {
+                    value = context.entity(entity.id).tags.name || '';
+                }
 
-                if (!value) value = context.entity(entity.id).tags.name || '';
                 var searchfn = value.length > 7 ? wikipedia.search : wikipedia.suggestions;
-
                 searchfn(language()[2], value, function(query, data) {
                     cb(data.map(function(d) {
                         return { value: d };
@@ -162,7 +163,10 @@ export function wikipedia(field, context) {
         var initEntityId = entity.id,
             initWikipedia = context.entity(initEntityId).tags.wikipedia;
 
-        wikidata.itemsByTitle(language()[2], value, function (title, data) {
+        wikidata.itemsByTitle(language()[2], value, function(title, data) {
+            if (!data || !Object.keys(data).length) return;
+            var qids = Object.keys(data);
+
             // 1. most recent change was a tag change
             var annotation = t('operations.change_tags.annotation'),
                 currAnnotation = context.history().undoAnnotation();
@@ -174,12 +178,11 @@ export function wikipedia(field, context) {
             if (currEntityId !== initEntityId) return;
 
             // 3. wikipedia value has not changed
-            var currTags = _.clone(context.entity(currEntityId).tags),
-                qids = data && Object.keys(data);
+            var currTags = _.clone(context.entity(currEntityId).tags);
             if (initWikipedia !== currTags.wikipedia) return;
 
             // ok to coalesce the update of wikidata tag into the previous tag change
-            currTags.wikidata = qids && _.find(qids, function (id) {
+            currTags.wikidata = qids && _.find(qids, function(id) {
                 return id.match(/^Q\d+$/);
             });
 

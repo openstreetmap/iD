@@ -4,10 +4,17 @@ import { qsString } from '../util/index';
 var wikidata = {},
     endpoint = 'https://www.wikidata.org/w/api.php?';
 
+
 export function init() {
+
     // Given a Wikipedia language and article title, return an array of
     // corresponding Wikidata entities.
     wikidata.itemsByTitle = function(lang, title, callback) {
+        if (!title) {
+            callback('', {});
+            return;
+        }
+
         lang = lang || 'en';
         jsonpRequest(endpoint + qsString({
             action: 'wbgetentities',
@@ -17,8 +24,14 @@ export function init() {
             languages: 'en', // shrink response by filtering to one language
             callback: '{callback}'
         }), function(data) {
-            callback(title, data.entities || {});
+            if (!data || data.error) {
+                callback('', {});
+            } else {
+                callback(title, data.entities || {});
+            }
         });
     };
+
+
     return wikidata;
 }
