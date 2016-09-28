@@ -3127,6 +3127,10 @@
                 "name": "Pipeline",
                 "terms": ""
             },
+            "man_made/pumping_station": {
+                "name": "Pumping Station",
+                "terms": ""
+            },
             "man_made/silo": {
                 "name": "Silo",
                 "terms": "grain,corn,wheat"
