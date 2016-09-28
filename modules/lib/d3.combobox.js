@@ -118,6 +118,7 @@ export function d3combobox() {
                    container.selectAll('a.selected').each(function (d) {
                        event.call('accept', this, d);
                    });
+                   hide();
                    break;
                // return
                case 13:
