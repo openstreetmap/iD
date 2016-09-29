@@ -7,11 +7,10 @@ import {
     polygonArea as d3polygonArea,
     polygonHull as d3polygonHull,
     polygonCentroid as d3polygonCentroid
-} from 'd3-polygon';
+} from 'd3';
 
 
-export function Circularize(wayId
-  , projection, maxAngle) {
+export function Circularize(wayId, projection, maxAngle) {
     maxAngle = (maxAngle || 20) * Math.PI / 180;
 
     var action = function(graph) {

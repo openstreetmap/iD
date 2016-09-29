@@ -1,5 +1,5 @@
 import * as d3 from 'd3';
-import { transition as d3transition } from 'd3-transition';
+import { transition as d3transition } from 'd3';
 import _ from 'lodash';
 
 
