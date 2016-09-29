@@ -183,17 +183,6 @@ required for this.
 iD will be built to the `dist` directory. This directory is self-contained; you can copy it
 into the public directory of your webserver to deploy iD.
 
-## Live reloading
-
-You can use [live-server](https://www.npmjs.com/package/live-server) *(npm module)* to
-reload the browser automatically whenever there is a change in code.
-
-1. run `npm install -g live-server`
-2. run  `live-server .` or `live-server dist`
- *(You will be automatically redirected to the local server page.)*
-
-*(Note: Sometimes auto reload might not display correctly and you might need to rebuild iD by running `make`.)*
-
 ## Licensing
 
 iD is available under the [ISC License](https://opensource.org/licenses/ISC).
