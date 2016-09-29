@@ -177,8 +177,7 @@ you can install this via homebrew with `brew install phantomjs`. Then:
 
 ## Building / Installing
 
-You can build a concatenated and minified version of iD with the command `make`. Node.js is
-required for this.
+You can build a concatenated and minified version of iD with the command `make && npm run build-min`.
 
 iD will be built to the `dist` directory. This directory is self-contained; you can copy it
 into the public directory of your webserver to deploy iD.
