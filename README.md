@@ -28,7 +28,7 @@ Come on in, the water's lovely. More help? Ping `jfire` or `bhousel` on
 
 ## Prerequisites
 
-* [Node.js](http://nodejs.org/) version 4 or newer
+* [Node.js](http://nodejs.org/) version 4 or newer, ([npm](https://www.npmjs.com/package/npm) version 3 or newer)
 * Command line development tools (`make`, `git`, and a compiler) for your platform
   * Ubuntu:
     * `sudo apt-get install build-essential git`
@@ -54,7 +54,7 @@ To run the current development version of iD on your own computer:
 2. (Windows Only)  Run `fixWinSymlinks.bat`.  This script will prompt for Administrator rights.  see also: http://stackoverflow.com/questions/5917249/git-symlinks-in-windows
 3. Run `npm install`
 4. Run `make`
-5. Start the local web server `npm run-script web`
+5. Run `npm start`
 6. Open `http://localhost:8080/` in a web browser
 
 For guidance on building a packaged version, running tests, and contributing to
