@@ -28,7 +28,7 @@ Come on in, the water's lovely. More help? Ping `jfire` or `bhousel` on
 
 ## Prerequisites
 
-* [Node.js](http://nodejs.org/) version 4 or newer, ([npm](https://www.npmjs.com/package/npm) version 3 or newer)
+* [Node.js](http://nodejs.org/) version 4 or newer
 * Command line development tools (`make`, `git`, and a compiler) for your platform
   * Ubuntu:
     * `sudo apt-get install build-essential git`
