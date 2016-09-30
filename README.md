@@ -54,7 +54,7 @@ To run the current development version of iD on your own computer:
 2. (Windows Only)  Run `fixWinSymlinks.bat`.  This script will prompt for Administrator rights.  see also: http://stackoverflow.com/questions/5917249/git-symlinks-in-windows
 3. Run `npm install`
 4. Run `make`
-5. Start the local web server `npm run-script web`
+5. Run `npm start`
 6. Open `http://localhost:8080/` in a web browser
 
 For guidance on building a packaged version, running tests, and contributing to
