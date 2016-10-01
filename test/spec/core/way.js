@@ -206,6 +206,12 @@ describe('iD.Way', function() {
             expect(iD.Way().layer()).to.equal(0);
         });
 
+        it('returns 0 when the way has a non numeric layer tag', function() {
+            expect(iD.Way({tags: { layer: 'NaN' }}).layer()).to.equal(0);
+            expect(iD.Way({tags: { layer: 'Infinity' }}).layer()).to.equal(0);
+            expect(iD.Way({tags: { layer: 'Foo' }}).layer()).to.equal(0);
+        });
+
         it('returns the layer when the way has an explicit layer tag', function() {
             expect(iD.Way({tags: { layer: '2' }}).layer()).to.equal(2);
             expect(iD.Way({tags: { layer: '-5' }}).layer()).to.equal(-5);
