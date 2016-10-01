@@ -69,7 +69,7 @@ _.extend(Way.prototype, {
 
     layer: function() {
         // explicit layer tag, clamp between -10, 10..
-        if (this.tags.layer !== undefined) {
+        if (isFinite(this.tags.layer)) {
             return Math.max(-10, Math.min(+(this.tags.layer), 10));
         }
 
