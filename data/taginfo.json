@@ -2244,6 +2244,10 @@
         },
         {
             "key": "shop",
+            "value": "pastry"
+        },
+        {
+            "key": "shop",
             "value": "pawnbroker"
         },
         {

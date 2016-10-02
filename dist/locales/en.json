@@ -3871,6 +3871,10 @@
                 "name": "Paint Store",
                 "terms": ""
             },
+            "shop/pastry": {
+                "name": "Pastry Shop",
+                "terms": "patisserie,cake shop,cakery"
+            },
             "shop/pawnbroker": {
                 "name": "Pawn Shop",
                 "terms": ""
