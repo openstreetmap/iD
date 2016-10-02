@@ -3399,6 +3399,16 @@ img.tile-removing {
   border-radius: 3px 0 0 3px;
 }
 
+/* search */
+[dir='rtl'] .feature-list-item .label {
+  text-align: right;
+}
+
+[dir='rtl'] .feature-list-item .entity-name {
+  padding-left: 0;
+  padding-right: 10px;
+}
+
 /* preset form */
 [dir='rtl'] .form-label {
   padding: 5px 10px 5px 0;

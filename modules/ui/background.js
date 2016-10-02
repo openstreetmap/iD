@@ -378,7 +378,8 @@ export function uiBackground(context) {
         /* background switcher */
 
         var backgroundList = content.append('ul')
-            .attr('class', 'layer-list');
+            .attr('class', 'layer-list')
+            .attr('dir', 'auto');
 
         var custom = backgroundList.append('li')
             .attr('class', 'custom_layer')
