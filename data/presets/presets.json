@@ -9860,6 +9860,23 @@
         },
         "name": "Paint Store"
     },
+    "shop/pastry": {
+        "icon": "bakery",
+        "fields": [
+            "operator",
+            "address",
+            "building_area",
+            "opening_hours"
+        ],
+        "geometry": [
+            "point",
+            "area"
+        ],
+        "tags": {
+            "shop": "pastry"
+        },
+        "name": "Pastry Shop"
+    },
     "shop/pawnbroker": {
         "icon": "shop",
         "fields": [

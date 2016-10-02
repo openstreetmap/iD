@@ -3667,6 +3667,10 @@ en:
         # shop=paint
         name: Paint Store
         terms: '<translate with synonyms or related terms for ''Paint Store'', separated by commas>'
+      shop/pastry:
+        # shop=pastry
+        name: Pastry Shop
+        terms: '<translate with synonyms or related terms for ''Pastry Shop'', separated by commas>'
       shop/pawnbroker:
         # shop=pawnbroker
         name: Pawn Shop
