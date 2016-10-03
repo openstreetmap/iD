@@ -9789,6 +9789,11 @@
         "tags": {
             "shop": "pastry"
         },
+        "terms": [
+            "patisserie",
+            "cake shop",
+            "cakery"
+        ],
         "name": "Pastry Shop"
     },
     "shop/pawnbroker": {

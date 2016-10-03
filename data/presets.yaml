@@ -3650,6 +3650,7 @@ en:
       shop/pastry:
         # shop=pastry
         name: Pastry Shop
+        # 'terms: patisserie,cake shop,cakery'
         terms: '<translate with synonyms or related terms for ''Pastry Shop'', separated by commas>'
       shop/pawnbroker:
         # shop=pawnbroker
