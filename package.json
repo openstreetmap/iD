@@ -25,7 +25,7 @@
   "license": "ISC",
   "dependencies": {
     "diacritics": "1.2.3",
-    "lodash": "4.16.2",
+    "lodash": "4.16.3",
     "marked": "0.3.6",
     "osm-auth": "0.2.9",
     "rbush": "2.0.1",
