@@ -821,7 +821,8 @@
     "amenity/charging_station": {
         "icon": "car",
         "fields": [
-            "operator"
+            "operator",
+            "capacity"
         ],
         "geometry": [
             "point",
@@ -5840,6 +5841,29 @@
         ],
         "name": "Firepit"
     },
+    "leisure/fitness_centre": {
+        "icon": "pitch",
+        "fields": [
+            "sport",
+            "address",
+            "building_area",
+            "opening_hours"
+        ],
+        "geometry": [
+            "point",
+            "area"
+        ],
+        "tags": {
+            "leisure": "fitness_centre"
+        },
+        "terms": [
+            "health",
+            "gym",
+            "leisure",
+            "studio"
+        ],
+        "name": "Gym / Fitness Center"
+    },
     "leisure/fitness_centre/yoga": {
         "icon": "pitch",
         "fields": [
@@ -5860,6 +5884,26 @@
             "sport": "yoga"
         },
         "name": "Yoga Studio"
+    },
+    "leisure/fitness_station": {
+        "icon": "pitch",
+        "fields": [
+            "sport",
+            "address",
+            "opening_hours"
+        ],
+        "geometry": [
+            "point",
+            "area"
+        ],
+        "tags": {
+            "leisure": "fitness_station"
+        },
+        "terms": [
+            "fitness",
+            "gym"
+        ],
+        "name": "Outdoor Fitness Station"
     },
     "leisure/garden": {
         "icon": "garden",
@@ -6278,10 +6322,8 @@
         "tags": {
             "leisure": "sports_centre"
         },
-        "terms": [
-            "gym"
-        ],
-        "name": "Sports Center / Gym"
+        "terms": [],
+        "name": "Sports Center / Complex"
     },
     "leisure/sports_centre/swimming": {
         "icon": "swimming",
@@ -6650,6 +6692,9 @@
         "icon": "camera",
         "geometry": [
             "point"
+        ],
+        "terms": [
+            "cctv"
         ],
         "tags": {
             "man_made": "surveillance"
@@ -7958,6 +8003,25 @@
         "terms": [],
         "name": "Abandoned Railway"
     },
+    "railway/crossing": {
+        "icon": "cross",
+        "geometry": [
+            "vertex"
+        ],
+        "tags": {
+            "railway": "crossing"
+        },
+        "terms": [
+            "crossing",
+            "pedestrian crossing",
+            "railroad crossing",
+            "level crossing",
+            "grade crossing",
+            "path through railroad",
+            "train crossing"
+        ],
+        "name": "Railway Crossing (Path)"
+    },
     "railway/disused": {
         "icon": "railway-disused",
         "geometry": [
@@ -8029,7 +8093,7 @@
             "road through railroad",
             "train crossing"
         ],
-        "name": "Railway Crossing"
+        "name": "Railway Crossing (Road)"
     },
     "railway/monorail": {
         "icon": "railway-monorail",
@@ -8091,6 +8155,7 @@
             "structure",
             "gauge",
             "electrified",
+            "maxspeed",
             "service_rail"
         ],
         "terms": [],
@@ -8979,6 +9044,27 @@
             "shop": "dry_cleaning"
         },
         "name": "Dry Cleaner"
+    },
+    "shop/e-cigarette": {
+        "icon": "shop",
+        "fields": [
+            "operator",
+            "address",
+            "building_area",
+            "opening_hours"
+        ],
+        "geometry": [
+            "point",
+            "area"
+        ],
+        "tags": {
+            "shop": "e-cigarette"
+        },
+        "terms": [
+            "electronic",
+            "vapor"
+        ],
+        "name": "E-Cigarette Shop"
     },
     "shop/electronics": {
         "icon": "shop",

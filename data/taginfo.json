@@ -1332,8 +1332,16 @@
             "value": "firepit"
         },
         {
+            "key": "leisure",
+            "value": "fitness_centre"
+        },
+        {
             "key": "sport",
             "value": "yoga"
+        },
+        {
+            "key": "leisure",
+            "value": "fitness_station"
         },
         {
             "key": "leisure",
@@ -1861,6 +1869,10 @@
         },
         {
             "key": "railway",
+            "value": "crossing"
+        },
+        {
+            "key": "railway",
             "value": "disused"
         },
         {
@@ -2077,6 +2089,10 @@
         {
             "key": "shop",
             "value": "dry_cleaning"
+        },
+        {
+            "key": "shop",
+            "value": "e-cigarette"
         },
         {
             "key": "shop",

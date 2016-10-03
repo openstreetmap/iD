@@ -2623,11 +2623,21 @@ en:
         name: Firepit
         # 'terms: fireplace,campfire'
         terms: '<translate with synonyms or related terms for ''Firepit'', separated by commas>'
+      leisure/fitness_centre:
+        # leisure=fitness_centre
+        name: Gym / Fitness Center
+        # 'terms: health,gym,leisure,studio'
+        terms: '<translate with synonyms or related terms for ''Gym / Fitness Center'', separated by commas>'
       leisure/fitness_centre/yoga:
         # 'leisure=fitness_centre, sport=yoga'
         name: Yoga Studio
         # 'terms: studio'
         terms: '<translate with synonyms or related terms for ''Yoga Studio'', separated by commas>'
+      leisure/fitness_station:
+        # leisure=fitness_station
+        name: Outdoor Fitness Station
+        # 'terms: fitness,gym'
+        terms: '<translate with synonyms or related terms for ''Outdoor Fitness Station'', separated by commas>'
       leisure/garden:
         # leisure=garden
         name: Garden
@@ -2728,9 +2738,8 @@ en:
         terms: '<translate with synonyms or related terms for ''Slipway'', separated by commas>'
       leisure/sports_centre:
         # leisure=sports_centre
-        name: Sports Center / Gym
-        # 'terms: gym'
-        terms: '<translate with synonyms or related terms for ''Sports Center / Gym'', separated by commas>'
+        name: Sports Center / Complex
+        terms: '<translate with synonyms or related terms for ''Sports Center / Complex'', separated by commas>'
       leisure/sports_centre/swimming:
         # 'leisure=sports_centre, sport=swimming'
         name: Swimming Pool Facility
@@ -2844,6 +2853,7 @@ en:
       man_made/surveillance:
         # man_made=surveillance
         name: Surveillance
+        # 'terms: cctv'
         terms: '<translate with synonyms or related terms for ''Surveillance'', separated by commas>'
       man_made/survey_point:
         # man_made=survey_point
@@ -3214,6 +3224,11 @@ en:
         # railway=abandoned
         name: Abandoned Railway
         terms: '<translate with synonyms or related terms for ''Abandoned Railway'', separated by commas>'
+      railway/crossing:
+        # railway=crossing
+        name: Railway Crossing (Path)
+        # 'terms: crossing,pedestrian crossing,railroad crossing,level crossing,grade crossing,path through railroad,train crossing'
+        terms: '<translate with synonyms or related terms for ''Railway Crossing (Path)'', separated by commas>'
       railway/disused:
         # railway=disused
         name: Disused Railway
@@ -3230,9 +3245,9 @@ en:
         terms: '<translate with synonyms or related terms for ''Railway Halt'', separated by commas>'
       railway/level_crossing:
         # railway=level_crossing
-        name: Railway Crossing
+        name: Railway Crossing (Road)
         # 'terms: crossing,railroad crossing,level crossing,grade crossing,road through railroad,train crossing'
-        terms: '<translate with synonyms or related terms for ''Railway Crossing'', separated by commas>'
+        terms: '<translate with synonyms or related terms for ''Railway Crossing (Road)'', separated by commas>'
       railway/monorail:
         # railway=monorail
         name: Monorail
@@ -3456,6 +3471,11 @@ en:
         # shop=dry_cleaning
         name: Dry Cleaner
         terms: '<translate with synonyms or related terms for ''Dry Cleaner'', separated by commas>'
+      shop/e-cigarette:
+        # shop=e-cigarette
+        name: E-Cigarette Shop
+        # 'terms: electronic,vapor'
+        terms: '<translate with synonyms or related terms for ''E-Cigarette Shop'', separated by commas>'
       shop/electronics:
         # shop=electronics
         name: Electronics Store
