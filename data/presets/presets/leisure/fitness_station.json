@@ -3,7 +3,6 @@
     "fields": [
         "sport",
         "address",
-        "building_area",
         "opening_hours"
     ],
     "geometry": [
@@ -11,10 +10,11 @@
         "area"
     ],
     "tags": {
-        "leisure": "sports_centre"
+        "leisure": "fitness_station"
     },
     "terms": [
-        "leisure"
+        "fitness",
+        "gym"
     ],
-    "name": "Sports Center / Complex"
+    "name": "Outdoor Fitness Station"
 }

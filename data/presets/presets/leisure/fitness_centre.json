@@ -11,10 +11,13 @@
         "area"
     ],
     "tags": {
-        "leisure": "sports_centre"
+        "leisure": "fitness_centre"
     },
     "terms": [
-        "leisure"
+        "health",
+        "gym",
+        "leisure",
+        "studio"
     ],
-    "name": "Sports Center / Complex"
+    "name": "Gym / Fitness Center"
 }
