@@ -1,14 +1,15 @@
 import * as d3 from 'd3';
 import _ from 'lodash';
-import { rebind } from '../util/rebind';
-import { Extent, metersToOffset, offsetToMeters} from '../geo/index';
-import { qsString, stringQs } from '../util/index';
-import { BackgroundSource } from './background_source';
-import { TileLayer } from './tile_layer';
+import { utilRebind } from '../util/rebind';
+import { geoExtent, geoMetersToOffset, geoOffsetToMeters} from '../geo/index';
+import { utilQsString, utilStringQs } from '../util/index';
+import { rendererBackgroundSource } from './background_source';
+import { rendererTileLayer } from './tile_layer';
 
-export function Background(context) {
+
+export function rendererBackground(context) {
     var dispatch = d3.dispatch('change'),
-        baseLayer = TileLayer(context).projection(context.projection),
+        baseLayer = rendererTileLayer(context).projection(context.projection),
         overlayLayers = [],
         backgroundSources;
 
@@ -47,11 +48,11 @@ export function Background(context) {
     background.updateImagery = function() {
         var b = background.baseLayerSource(),
             o = overlayLayers.map(function (d) { return d.source().id; }).join(','),
-            meters = offsetToMeters(b.offset()),
+            meters = geoOffsetToMeters(b.offset()),
             epsilon = 0.01,
             x = +meters[0].toFixed(2),
             y = +meters[1].toFixed(2),
-            q = stringQs(location.hash.substring(1));
+            q = utilStringQs(location.hash.substring(1));
 
         var id = b.id;
         if (id === 'custom') {
@@ -76,7 +77,7 @@ export function Background(context) {
             delete q.offset;
         }
 
-        location.replace('#' + qsString(q, true));
+        location.replace('#' + utilQsString(q, true));
 
         var imageryUsed = [b.imageryUsed()];
 
@@ -105,11 +106,13 @@ export function Background(context) {
         context.history().imageryUsed(imageryUsed);
     };
 
+
     background.sources = function(extent) {
         return backgroundSources.filter(function(source) {
             return source.intersects(extent);
         });
     };
+
 
     background.dimensions = function(_) {
         if (!_) return;
@@ -120,6 +123,7 @@ export function Background(context) {
         });
     };
 
+
     background.baseLayerSource = function(d) {
         if (!arguments.length) return baseLayer.source();
         baseLayer.source(d);
@@ -128,9 +132,11 @@ export function Background(context) {
         return background;
     };
 
+
     background.bing = function() {
         background.baseLayerSource(findSource('Bing'));
     };
+
 
     background.showsLayer = function(d) {
         return d === baseLayer.source() ||
@@ -138,9 +144,11 @@ export function Background(context) {
             overlayLayers.some(function(l) { return l.source() === d; });
     };
 
+
     background.overlayLayerSources = function() {
         return overlayLayers.map(function (l) { return l.source(); });
     };
+
 
     background.toggleOverlayLayer = function(d) {
         var layer;
@@ -165,12 +173,14 @@ export function Background(context) {
         background.updateImagery();
     };
 
+
     background.nudge = function(d, zoom) {
         baseLayer.source().nudge(d, zoom);
         dispatch.call('change');
         background.updateImagery();
         return background;
     };
+
 
     background.offset = function(d) {
         if (!arguments.length) return baseLayer.source().offset();
@@ -180,24 +190,25 @@ export function Background(context) {
         return background;
     };
 
+
     background.load = function(imagery) {
         function parseMap(qmap) {
             if (!qmap) return false;
             var args = qmap.split('/').map(Number);
             if (args.length < 3 || args.some(isNaN)) return false;
-            return Extent([args[1], args[2]]);
+            return geoExtent([args[1], args[2]]);
         }
 
-        var q = stringQs(location.hash.substring(1)),
+        var q = utilStringQs(location.hash.substring(1)),
             chosen = q.background || q.layer,
             extent = parseMap(q.map),
             best;
 
         backgroundSources = imagery.map(function(source) {
             if (source.type === 'bing') {
-                return BackgroundSource.Bing(source, dispatch);
+                return rendererBackgroundSource.Bing(source, dispatch);
             } else {
-                return BackgroundSource(source);
+                return rendererBackgroundSource(source);
             }
         });
 
@@ -208,7 +219,7 @@ export function Background(context) {
         }
 
         if (chosen && chosen.indexOf('custom:') === 0) {
-            background.baseLayerSource(BackgroundSource.Custom(chosen.replace(/^custom:/, '')));
+            background.baseLayerSource(rendererBackgroundSource.Custom(chosen.replace(/^custom:/, '')));
         } else {
             background.baseLayerSource(findSource(chosen) || best || findSource('Bing') || backgroundSources[1] || backgroundSources[0]);
         }
@@ -242,10 +253,11 @@ export function Background(context) {
             });
 
             if (offset.length === 2) {
-                background.offset(metersToOffset(offset));
+                background.offset(geoMetersToOffset(offset));
             }
         }
     };
 
-    return rebind(background, dispatch, 'on');
+
+    return utilRebind(background, dispatch, 'on');
 }

@@ -1,18 +1,41 @@
 import * as d3 from 'd3';
 import { t } from '../../util/locale';
-import { rebind } from '../../util/rebind';
-import { functor } from '../../util/index';
-import { getDimensions, setDimensions } from '../../util/dimensions';
-import { Extent, Intersection, RawMercator, Turn, inferRestriction } from '../../geo/index';
-import { Layers, Lines, Turns, Vertices } from '../../svg/index';
-import { RestrictTurn, UnrestrictTurn,  } from '../../actions/index';
-import { Entity } from '../../core/index';
-import { Hover } from '../../behavior/index';
+
+import { behaviorHover } from '../../behavior/index';
+import { coreEntity } from '../../core/index';
+
+import {
+    actionRestrictTurn,
+    actionUnrestrictTurn
+} from '../../actions/index';
+
+import {
+    geoExtent,
+    geoIntersection,
+    geoRawMercator,
+    geoTurn,
+    geoInferRestriction
+} from '../../geo/index';
+
+import {
+    svgLayers,
+    svgLines,
+    svgTurns,
+    svgVertices
+} from '../../svg/index';
+
+import { utilRebind } from '../../util/rebind';
+import { utilFunctor } from '../../util/index';
+
+import {
+    utilGetDimensions,
+    utilSetDimensions
+} from '../../util/dimensions';
 
 
-export function restrictions(field, context) {
+export function uiFieldRestrictions(field, context) {
     var dispatch = d3.dispatch('change'),
-        hover = Hover(context),
+        hover = behaviorHover(context),
         vertexID,
         fromNodeID;
 
@@ -36,14 +59,14 @@ export function restrictions(field, context) {
             .attr('class', 'restriction-help');
 
 
-        var intersection = Intersection(context.graph(), vertexID),
+        var intersection = geoIntersection(context.graph(), vertexID),
             graph = intersection.graph,
             vertex = graph.entity(vertexID),
-            filter = functor(true),
-            extent = Extent(),
-            projection = RawMercator();
+            filter = utilFunctor(true),
+            extent = geoExtent(),
+            projection = geoRawMercator();
 
-        var d = getDimensions(wrap),
+        var d = utilGetDimensions(wrap),
             c = [d[0] / 2, d[1] / 2],
             z = 24;
 
@@ -56,10 +79,10 @@ export function restrictions(field, context) {
             .translate([c[0] - s[0], c[1] - s[1]])
             .clipExtent([[0, 0], d]);
 
-        var drawLayers = Layers(projection, context).only('osm').dimensions(d),
-            drawVertices = Vertices(projection, context),
-            drawLines = Lines(projection, context),
-            drawTurns = Turns(projection, context);
+        var drawLayers = svgLayers(projection, context).only('osm').dimensions(d),
+            drawVertices = svgVertices(projection, context),
+            drawLines = svgLines(projection, context),
+            drawTurns = svgTurns(projection, context);
 
         enter
             .call(drawLayers)
@@ -71,7 +94,7 @@ export function restrictions(field, context) {
             .merge(enter);
 
         var surface = wrap.selectAll('.surface')
-            .call(setDimensions, d)
+            .call(utilSetDimensions, d)
             .call(drawVertices, graph, [vertex], filter, extent, z)
             .call(drawLines, graph, intersection.ways, filter)
             .call(drawTurns, graph, intersection.turns(fromNodeID));
@@ -98,25 +121,27 @@ export function restrictions(field, context) {
 
         d3.select(window)
             .on('resize.restrictions', function() {
-                setDimensions(wrap, null);
+                utilSetDimensions(wrap, null);
                 render();
             });
 
 
         function click() {
             var datum = d3.event.target.__data__;
-            if (datum instanceof Entity) {
+            if (datum instanceof coreEntity) {
                 fromNodeID = intersection.adjacentNodeId(datum.id);
                 render();
-            } else if (datum instanceof Turn) {
+            } else if (datum instanceof geoTurn) {
                 if (datum.restriction) {
                     context.perform(
-                        UnrestrictTurn(datum, projection),
-                        t('operations.restriction.annotation.delete'));
+                        actionUnrestrictTurn(datum, projection),
+                        t('operations.restriction.annotation.delete')
+                    );
                 } else {
                     context.perform(
-                        RestrictTurn(datum, projection),
-                        t('operations.restriction.annotation.create'));
+                        actionRestrictTurn(datum, projection),
+                        t('operations.restriction.annotation.create')
+                    );
                 }
             }
         }
@@ -124,7 +149,7 @@ export function restrictions(field, context) {
 
         function mouseover() {
             var datum = d3.event.target.__data__;
-            if (datum instanceof Turn) {
+            if (datum instanceof geoTurn) {
                 var graph = context.graph(),
                     presets = context.presets(),
                     preset;
@@ -133,18 +158,21 @@ export function restrictions(field, context) {
                     preset = presets.match(graph.entity(datum.restriction), graph);
                 } else {
                     preset = presets.item('type/restriction/' +
-                        inferRestriction(
+                        geoInferRestriction(
                             graph,
                             datum.from,
                             datum.via,
                             datum.to,
-                            projection));
+                            projection
+                        )
+                    );
                 }
 
                 wrap.selectAll('.restriction-help')
                     .text(t('operations.restriction.help.' +
                         (datum.restriction ? 'toggle_off' : 'toggle_on'),
-                        { restriction: preset.name() }));
+                        { restriction: preset.name() })
+                    );
             }
         }
 
@@ -152,7 +180,8 @@ export function restrictions(field, context) {
         function mouseout() {
             wrap.selectAll('.restriction-help')
                 .text(t('operations.restriction.help.' +
-                    (fromNodeID ? 'toggle' : 'select')));
+                    (fromNodeID ? 'toggle' : 'select'))
+                );
         }
 
 
@@ -191,5 +220,5 @@ export function restrictions(field, context) {
     };
 
 
-    return rebind(restrictions, dispatch, 'on');
+    return utilRebind(restrictions, dispatch, 'on');
 }

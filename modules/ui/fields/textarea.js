@@ -1,10 +1,10 @@
 import * as d3 from 'd3';
-import { getSetValue } from '../../util/get_set_value';
-import { rebind } from '../../util/rebind';
 import { t } from '../../util/locale';
+import { utilGetSetValue } from '../../util/get_set_value';
+import { utilRebind } from '../../util/rebind';
 
 
-export function textarea(field) {
+export function uiFieldTextarea(field) {
     var dispatch = d3.dispatch('change'),
         input = d3.select(null);
 
@@ -28,14 +28,14 @@ export function textarea(field) {
     function change(onInput) {
         return function() {
             var t = {};
-            t[field.key] = getSetValue(input) || undefined;
+            t[field.key] = utilGetSetValue(input) || undefined;
             dispatch.call('change', this, t, onInput);
         };
     }
 
 
     textarea.tags = function(tags) {
-        getSetValue(input, tags[field.key] || '');
+        utilGetSetValue(input, tags[field.key] || '');
     };
 
 
@@ -44,5 +44,5 @@ export function textarea(field) {
     };
 
 
-    return rebind(textarea, dispatch, 'on');
+    return utilRebind(textarea, dispatch, 'on');
 }

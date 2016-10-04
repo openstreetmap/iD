@@ -1,4 +1,5 @@
-import { DeleteRelation } from './delete_relation';
+import { actionDeleteRelation } from './delete_relation';
+
 
 // Remove the effects of `turn.restriction` on `turn`, which must have the
 // following structure:
@@ -18,8 +19,8 @@ import { DeleteRelation } from './delete_relation';
 // that restriction is also deleted, but at the same time restrictions on
 // the turns other than the first two are created.
 //
-export function UnrestrictTurn(turn) {
+export function actionUnrestrictTurn(turn) {
     return function(graph) {
-        return DeleteRelation(turn.restriction)(graph);
+        return actionDeleteRelation(turn.restriction)(graph);
     };
 }

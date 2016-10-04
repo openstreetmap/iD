@@ -1,4 +1,4 @@
-export function PointTransform(projection) {
+export function svgPointTransform(projection) {
     return function(entity) {
         // http://jsperf.com/short-array-join
         var pt = projection(entity.loc);

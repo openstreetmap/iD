@@ -1,4 +1,4 @@
-export function Icon(name, svgklass, useklass) {
+export function svgIcon(name, svgklass, useklass) {
     return function drawIcon(selection) {
         selection.selectAll('svg')
             .data([0])

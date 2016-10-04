@@ -1,5 +1,5 @@
 // Copies a variable number of methods from source to target.
-export function rebind(target, source) {
+export function utilRebind(target, source) {
     var i = 1, n = arguments.length, method;
     while (++i < n) {
         target[method = arguments[i]] = d3_rebind(target, source, source[method]);

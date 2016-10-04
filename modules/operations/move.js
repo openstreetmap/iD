@@ -1,22 +1,25 @@
 import _ from 'lodash';
 import { t } from '../util/locale';
-import { Extent } from '../geo/index';
-import { Move as MoveAction } from '../actions/index';
-import { Move as MoveMode } from '../modes/index';
+import { geoExtent } from '../geo/index';
+import { actionMove } from '../actions/index';
+import { modeMove } from '../modes/index';
 
-export function Move(selectedIDs, context) {
+
+export function operationMove(selectedIDs, context) {
     var extent = selectedIDs.reduce(function(extent, id) {
             return extent.extend(context.entity(id).extent(context.graph()));
-        }, Extent());
+        }, geoExtent());
 
     var operation = function() {
-        context.enter(MoveMode(context, selectedIDs));
+        context.enter(modeMove(context, selectedIDs));
     };
+
 
     operation.available = function() {
         return selectedIDs.length > 1 ||
             context.entity(selectedIDs[0]).type !== 'node';
     };
+
 
     operation.disabled = function() {
         var reason;
@@ -25,8 +28,10 @@ export function Move(selectedIDs, context) {
         } else if (_.some(selectedIDs, context.hasHiddenConnections)) {
             reason = 'connected_to_hidden';
         }
-        return MoveAction(selectedIDs).disabled(context.graph()) || reason;
+
+        return actionMove(selectedIDs).disabled(context.graph()) || reason;
     };
+
 
     operation.tooltip = function() {
         var disable = operation.disabled();
@@ -35,9 +40,11 @@ export function Move(selectedIDs, context) {
             t('operations.move.description');
     };
 
+
     operation.id = 'move';
     operation.keys = [t('operations.move.key')];
     operation.title = t('operations.move.title');
+
 
     return operation;
 }

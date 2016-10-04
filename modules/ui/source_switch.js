@@ -1,9 +1,11 @@
 import * as d3 from 'd3';
 import { t } from '../util/locale';
-import { Browse } from '../modes/index';
+import { modeBrowse } from '../modes/index';
 
-export function SourceSwitch(context) {
+
+export function uiSourceSwitch(context) {
     var keys;
+
 
     function click() {
         d3.event.preventDefault();
@@ -17,7 +19,7 @@ export function SourceSwitch(context) {
         context.connection()
             .switch(live ? keys[1] : keys[0]);
 
-        context.enter(Browse(context));
+        context.enter(modeBrowse(context));
         context.flush();
 
         d3.select(this)
@@ -35,11 +37,13 @@ export function SourceSwitch(context) {
             .on('click', click);
     };
 
+
     sourceSwitch.keys = function(_) {
         if (!arguments.length) return keys;
         keys = _;
         return sourceSwitch;
     };
+
 
     return sourceSwitch;
 }

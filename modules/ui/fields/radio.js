@@ -1,9 +1,9 @@
 import * as d3 from 'd3';
-import { rebind } from '../../util/rebind';
 import { t } from '../../util/locale';
+import { utilRebind } from '../../util/rebind';
 
 
-export function radio(field) {
+export function uiFieldRadio(field) {
     var dispatch = d3.dispatch('change'),
         placeholder = d3.select(null),
         labels = d3.select(null),
@@ -93,5 +93,5 @@ export function radio(field) {
     };
 
 
-    return rebind(radio, dispatch, 'on');
+    return utilRebind(radio, dispatch, 'on');
 }

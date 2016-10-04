@@ -1,7 +1,7 @@
 import * as d3 from 'd3';
 import _ from 'lodash';
-import { euclideanDistance, interp } from '../geo/index';
-import { Node } from '../core/index';
+import { geoEuclideanDistance, geoInterp } from '../geo/index';
+import { coreNode } from '../core/index';
 
 import {
     polygonArea as d3polygonArea,
@@ -10,8 +10,9 @@ import {
 } from 'd3';
 
 
-export function Circularize(wayId, projection, maxAngle) {
+export function actionCircularize(wayId, projection, maxAngle) {
     maxAngle = (maxAngle || 20) * Math.PI / 180;
+
 
     var action = function(graph) {
         var way = graph.entity(wayId);
@@ -24,8 +25,8 @@ export function Circularize(wayId, projection, maxAngle) {
             keyNodes = nodes.filter(function(n) { return graph.parentWays(n).length !== 1; }),
             points = nodes.map(function(n) { return projection(n.loc); }),
             keyPoints = keyNodes.map(function(n) { return projection(n.loc); }),
-            centroid = (points.length === 2) ? interp(points[0], points[1], 0.5) : d3polygonCentroid(points),
-            radius = d3.median(points, function(p) { return euclideanDistance(centroid, p); }),
+            centroid = (points.length === 2) ? geoInterp(points[0], points[1], 0.5) : d3polygonCentroid(points),
+            radius = d3.median(points, function(p) { return geoEuclideanDistance(centroid, p); }),
             sign = d3polygonArea(points) > 0 ? 1 : -1,
             ids;
 
@@ -64,7 +65,7 @@ export function Circularize(wayId, projection, maxAngle) {
             }
 
             // position this key node
-            distance = euclideanDistance(centroid, keyPoints[i]);
+            distance = geoEuclideanDistance(centroid, keyPoints[i]);
             if (distance === 0) { distance = 1e-4; }
             keyPoints[i] = [
                 centroid[0] + (keyPoints[i][0] - centroid[0]) / distance * radius,
@@ -104,7 +105,7 @@ export function Circularize(wayId, projection, maxAngle) {
                     centroid[0] + Math.cos(angle) * radius,
                     centroid[1] + Math.sin(angle) * radius]);
 
-                node = Node({loc: loc});
+                node = coreNode({loc: loc});
                 graph = graph.replace(node);
 
                 nodes.splice(endNodeIndex + j, 0, node);
@@ -134,7 +135,7 @@ export function Circularize(wayId, projection, maxAngle) {
                             insertAt = startIndex2;
                         }
                         for (j = 0; j < inBetweenNodes.length; j++) {
-                            sharedWay = sharedWay.addNode(inBetweenNodes[j], insertAt + j);
+                            sharedWay = sharedWay.addcoreNode(inBetweenNodes[j], insertAt + j);
                         }
                         graph = graph.replace(sharedWay);
                     }
@@ -153,6 +154,7 @@ export function Circularize(wayId, projection, maxAngle) {
 
         return graph;
     };
+
 
     action.makeConvex = function(graph) {
         var way = graph.entity(wayId),
@@ -178,7 +180,7 @@ export function Circularize(wayId, projection, maxAngle) {
 
             // move interior nodes to the surface of the convex hull..
             for (var j = 1; j < indexRange; j++) {
-                var point = interp(hull[i], hull[i+1], j / indexRange),
+                var point = geoInterp(hull[i], hull[i+1], j / indexRange),
                     node = nodes[(j + startIndex) % nodes.length].move(projection.invert(point));
                 graph = graph.replace(node);
             }
@@ -186,10 +188,12 @@ export function Circularize(wayId, projection, maxAngle) {
         return graph;
     };
 
+
     action.disabled = function(graph) {
         if (!graph.entity(wayId).isClosed())
             return 'not_closed';
     };
+
 
     return action;
 }

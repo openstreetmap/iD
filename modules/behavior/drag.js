@@ -1,9 +1,13 @@
 import * as d3 from 'd3';
-import { rebind } from '../util/rebind';
-import { prefixCSSProperty, prefixDOMProperty } from '../util/index';
+import { utilRebind } from '../util/rebind';
+import {
+    utilPrefixCSSProperty,
+    utilPrefixDOMProperty
+} from '../util/index';
+
 
 /*
-    `iD.behavior.drag` is like `d3.behavior.drag`, with the following differences:
+    `behaviorDrag` is like `d3.behavior.drag`, with the following differences:
 
     * The `origin` function is expected to return an [x, y] tuple rather than an
       {x, y} object.
@@ -18,26 +22,27 @@ import { prefixCSSProperty, prefixDOMProperty } from '../util/index';
     * Delegation is supported via the `delegate` function.
 
  */
-export function drag() {
-    function d3_eventCancel() {
-      d3.event.stopPropagation();
-      d3.event.preventDefault();
-    }
-
+export function behaviorDrag() {
     var event = d3.dispatch('start', 'move', 'end'),
         origin = null,
         selector = '',
         filter = null,
         event_, target, surface;
 
-    function eventOf(thiz, argumentz) {
-      return function(e1) {
-        e1.target = drag;
-        d3.customEvent(e1, event.apply, event, [e1.type, thiz, argumentz]);
-      };
+
+    function d3_eventCancel() {
+        d3.event.stopPropagation();
+        d3.event.preventDefault();
     }
 
-    var d3_event_userSelectProperty = prefixCSSProperty('UserSelect'),
+    function eventOf(thiz, argumentz) {
+        return function(e1) {
+            e1.target = drag;
+            d3.customEvent(e1, event.apply, event, [e1.type, thiz, argumentz]);
+        };
+    }
+
+    var d3_event_userSelectProperty = utilPrefixCSSProperty('UserSelect'),
         d3_event_userSelectSuppress = d3_event_userSelectProperty ?
             function () {
                 var selection = d3.selection(),
@@ -54,9 +59,11 @@ export function drag() {
                 };
             };
 
+
     function mousedown() {
         target = this;
         event_ = eventOf(target, arguments);
+
         var eventTarget = d3.event.target,
             touchId = d3.event.touches ? d3.event.changedTouches[0].identifier : null,
             offset,
@@ -84,8 +91,8 @@ export function drag() {
             })[0] : d3.mouse(p);
         }
 
-        function dragmove() {
 
+        function dragmove() {
             var p = point(),
                 dx = p[0] - origin_[0],
                 dy = p[1] - origin_[1];
@@ -110,6 +117,7 @@ export function drag() {
             });
         }
 
+
         function dragend() {
             if (started) {
                 event_({
@@ -125,14 +133,16 @@ export function drag() {
             selectEnable();
         }
 
+
         function click() {
             d3_eventCancel();
             w.on('click.drag', null);
         }
     }
 
+
     function drag(selection) {
-        var matchesSelector = prefixDOMProperty('matchesSelector'),
+        var matchesSelector = utilPrefixDOMProperty('matchesSelector'),
             delegate = mousedown;
 
         if (selector) {
@@ -152,10 +162,12 @@ export function drag() {
             .on('touchstart.drag' + selector, delegate);
     }
 
+
     drag.off = function(selection) {
         selection.on('mousedown.drag' + selector, null)
             .on('touchstart.drag' + selector, null);
     };
+
 
     drag.delegate = function(_) {
         if (!arguments.length) return selector;
@@ -163,17 +175,20 @@ export function drag() {
         return drag;
     };
 
+
     drag.filter = function(_) {
         if (!arguments.length) return origin;
         filter = _;
         return drag;
     };
 
+
     drag.origin = function (_) {
         if (!arguments.length) return origin;
         origin = _;
         return drag;
     };
+
 
     drag.cancel = function() {
         d3.select(window)
@@ -182,6 +197,7 @@ export function drag() {
         return drag;
     };
 
+
     drag.target = function() {
         if (!arguments.length) return target;
         target = arguments[0];
@@ -189,11 +205,13 @@ export function drag() {
         return drag;
     };
 
+
     drag.surface = function() {
         if (!arguments.length) return surface;
         surface = arguments[0];
         return drag;
     };
 
-    return rebind(drag, event, 'on');
+
+    return utilRebind(drag, event, 'on');
 }

@@ -1,14 +1,16 @@
 import * as d3 from 'd3';
 import * as sexagesimal from 'sexagesimal';
 import { t } from '../util/locale';
-import { Extent, chooseEdge } from '../geo/index';
-import { displayName, entityOrMemberSelector } from '../util/index';
-import { Entity } from '../core/index';
-import { Icon } from '../svg/index';
-import { Select } from '../modes/index';
+import { coreEntity } from '../core/index';
+import { geoExtent, geoChooseEdge } from '../geo/index';
+import { modeSelect } from '../modes/index';
+import { svgIcon } from '../svg/index';
+import { utilDisplayName, utilEntityOrMemberSelector } from '../util/index';
 
-export function FeatureList(context) {
+
+export function uiFeatureList(context) {
     var geocodeResults;
+
 
     function featureList(selection) {
         var header = selection.append('div')
@@ -16,19 +18,6 @@ export function FeatureList(context) {
 
         header.append('h3')
             .text(t('inspector.feature_list'));
-
-        function keypress() {
-            var q = search.property('value'),
-                items = list.selectAll('.feature-list-item');
-            if (d3.event.keyCode === 13 && q.length && items.size()) {
-                click(items.datum());
-            }
-        }
-
-        function inputevent() {
-            geocodeResults = undefined;
-            drawList();
-        }
 
         var searchWrap = selection.append('div')
             .attr('class', 'search-header');
@@ -40,7 +29,7 @@ export function FeatureList(context) {
             .on('input', inputevent);
 
         searchWrap
-            .call(Icon('#icon-search', 'pre-text'));
+            .call(svgIcon('#icon-search', 'pre-text'));
 
         var listWrap = selection.append('div')
             .attr('class', 'inspector-body');
@@ -53,16 +42,34 @@ export function FeatureList(context) {
         context.map()
             .on('drawn.feature-list', mapDrawn);
 
+
+        function keypress() {
+            var q = search.property('value'),
+                items = list.selectAll('.feature-list-item');
+            if (d3.event.keyCode === 13 && q.length && items.size()) {
+                click(items.datum());
+            }
+        }
+
+
+        function inputevent() {
+            geocodeResults = undefined;
+            drawList();
+        }
+
+
         function clearSearch() {
             search.property('value', '');
             drawList();
         }
+
 
         function mapDrawn(e) {
             if (e.full) {
                 drawList();
             }
         }
+
 
         function features() {
             var entities = {},
@@ -102,7 +109,7 @@ export function FeatureList(context) {
 
                 entities[entity.id] = true;
 
-                var name = displayName(entity) || '';
+                var name = utilDisplayName(entity) || '';
                 if (name.toLowerCase().indexOf(q) >= 0) {
                     result.push({
                         id: entity.id,
@@ -127,12 +134,12 @@ export function FeatureList(context) {
                 // https://github.com/openstreetmap/iD/issues/1890
                 if (d.osm_type && d.osm_id) {
                     result.push({
-                        id: Entity.id.fromOSM(d.osm_type, d.osm_id),
+                        id: coreEntity.id.fromOSM(d.osm_type, d.osm_id),
                         geometry: d.osm_type === 'relation' ? 'relation' : d.osm_type === 'way' ? 'line' : 'point',
                         type: d.type !== 'yes' ? (d.type.charAt(0).toUpperCase() + d.type.slice(1)).replace('_', ' ')
                                                : (d.class.charAt(0).toUpperCase() + d.class.slice(1)).replace('_', ' '),
                         name: d.display_name,
-                        extent: new Extent(
+                        extent: new geoExtent(
                             [parseFloat(d.boundingbox[3]), parseFloat(d.boundingbox[0])],
                             [parseFloat(d.boundingbox[2]), parseFloat(d.boundingbox[1])])
                     });
@@ -141,6 +148,7 @@ export function FeatureList(context) {
 
             return result;
         }
+
 
         function drawList() {
             var value = search.property('value'),
@@ -155,7 +163,7 @@ export function FeatureList(context) {
                 .enter().append('button')
                 .property('disabled', true)
                 .attr('class', 'no-results-item')
-                .call(Icon('#icon-alert', 'pre-text'));
+                .call(svgIcon('#icon-alert', 'pre-text'));
 
             resultsIndicator.append('span')
                 .attr('class', 'entity-name');
@@ -200,7 +208,7 @@ export function FeatureList(context) {
 
             label.each(function(d) {
                 d3.select(this)
-                    .call(Icon('#icon-' + d.geometry, 'pre-text'));
+                    .call(svgIcon('#icon-' + d.geometry, 'pre-text'));
             });
 
             label.append('span')
@@ -221,17 +229,20 @@ export function FeatureList(context) {
                 .remove();
         }
 
+
         function mouseover(d) {
             if (d.id === -1) return;
 
-            context.surface().selectAll(entityOrMemberSelector([d.id], context.graph()))
+            context.surface().selectAll(utilEntityOrMemberSelector([d.id], context.graph()))
                 .classed('hover', true);
         }
+
 
         function mouseout() {
             context.surface().selectAll('.hover')
                 .classed('hover', false);
         }
+
 
         function click(d) {
             d3.event.preventDefault();
@@ -243,14 +254,15 @@ export function FeatureList(context) {
                     context.map().center(d.entity.loc);
                 } else if (d.entity.type === 'way') {
                     var center = context.projection(context.map().center()),
-                        edge = chooseEdge(context.childNodes(d.entity), center, context.projection);
+                        edge = geoChooseEdge(context.childNodes(d.entity), center, context.projection);
                     context.map().center(edge.loc);
                 }
-                context.enter(Select(context, [d.entity.id]).suppressMenu(true));
+                context.enter(modeSelect(context, [d.entity.id]).suppressMenu(true));
             } else {
                 context.zoomToEntity(d.id);
             }
         }
+
 
         function geocode() {
             var searchVal = encodeURIComponent(search.property('value'));
@@ -260,6 +272,7 @@ export function FeatureList(context) {
             });
         }
     }
+
 
     return featureList;
 }

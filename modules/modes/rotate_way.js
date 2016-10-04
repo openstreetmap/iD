@@ -2,18 +2,20 @@ import * as d3 from 'd3';
 import _ from 'lodash';
 import { d3keybinding } from '../lib/d3.keybinding.js';
 import { t } from '../util/locale';
-import { Browse, Select } from './index';
-import { Noop, RotateWay as RotateWayAction } from '../actions/index';
-import { Edit } from '../behavior/index';
+import { modeBrowse, modeSelect } from './index';
+import { actionNoop, actionRotateWay } from '../actions/index';
+import { behaviorEdit } from '../behavior/index';
 
-export function RotateWay(context, wayId) {
+
+export function modeRotateWay(context, wayId) {
     var mode = {
         id: 'rotate-way',
         button: 'browse'
     };
 
     var keybinding = d3keybinding('rotate-way'),
-        edit = Edit(context);
+        edit = behaviorEdit(context);
+
 
     mode.enter = function() {
         context.install(edit);
@@ -26,38 +28,9 @@ export function RotateWay(context, wayId) {
             angle;
 
         context.perform(
-            Noop(),
-            annotation);
-
-        function rotate() {
-
-            var mousePoint = context.mouse(),
-                newAngle = Math.atan2(mousePoint[1] - pivot[1], mousePoint[0] - pivot[0]);
-
-            if (typeof angle === 'undefined') angle = newAngle;
-
-            context.replace(
-                RotateWayAction(wayId, pivot, newAngle - angle, context.projection),
-                annotation);
-
-            angle = newAngle;
-        }
-
-        function finish() {
-            d3.event.stopPropagation();
-            context.enter(Select(context, [wayId])
-                .suppressMenu(true));
-        }
-
-        function cancel() {
-            context.pop();
-            context.enter(Select(context, [wayId])
-                .suppressMenu(true));
-        }
-
-        function undone() {
-            context.enter(Browse(context));
-        }
+            actionNoop(),
+            annotation
+        );
 
         context.surface()
             .on('mousemove.rotate-way', rotate)
@@ -72,7 +45,40 @@ export function RotateWay(context, wayId) {
 
         d3.select(document)
             .call(keybinding);
+
+
+        function rotate() {
+            var mousePoint = context.mouse(),
+                newAngle = Math.atan2(mousePoint[1] - pivot[1], mousePoint[0] - pivot[0]);
+
+            if (typeof angle === 'undefined') angle = newAngle;
+
+            context.replace(
+                actionRotateWay(wayId, pivot, newAngle - angle, context.projection),
+                annotation
+            );
+
+            angle = newAngle;
+        }
+
+
+        function finish() {
+            d3.event.stopPropagation();
+            context.enter(modeSelect(context, [wayId]).suppressMenu(true));
+        }
+
+
+        function cancel() {
+            context.pop();
+            context.enter(modeSelect(context, [wayId]).suppressMenu(true));
+        }
+
+
+        function undone() {
+            context.enter(modeBrowse(context));
+        }
     };
+
 
     mode.exit = function() {
         context.uninstall(edit);
@@ -86,6 +92,7 @@ export function RotateWay(context, wayId) {
 
         keybinding.off();
     };
+
 
     return mode;
 }

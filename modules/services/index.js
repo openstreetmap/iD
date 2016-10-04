@@ -1,7 +1,13 @@
-import * as mapillary from './mapillary';
-import * as nominatim from './nominatim';
-import * as taginfo from './taginfo';
-import * as wikidata from './wikidata';
-import * as wikipedia from './wikipedia';
+import * as serviceMapillary from './mapillary';
+import * as serviceNominatim from './nominatim';
+import * as serviceTaginfo from './taginfo';
+import * as serviceWikidata from './wikidata';
+import * as serviceWikipedia from './wikipedia';
 
-export { mapillary, taginfo, nominatim, wikidata, wikipedia};
+export {
+    serviceMapillary,
+    serviceTaginfo,
+    serviceNominatim,
+    serviceWikidata,
+    serviceWikipedia
+};

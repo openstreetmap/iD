@@ -1,20 +1,22 @@
-import { lonToMeters, metersToLon } from '../geo/index';
-import { Detect } from '../util/detect';
+import { geoLonToMeters, geoMetersToLon } from '../geo/index';
+import { utilDetect } from '../util/detect';
 
-export function Scale(context) {
+
+export function uiScale(context) {
     var projection = context.projection,
-        imperial = (Detect().locale.toLowerCase() === 'en-us'),
+        isImperial = (utilDetect().locale.toLowerCase() === 'en-us'),
         maxLength = 180,
         tickHeight = 8;
 
+
     function scaleDefs(loc1, loc2) {
         var lat = (loc2[1] + loc1[1]) / 2,
-            conversion = (imperial ? 3.28084 : 1),
-            dist = lonToMeters(loc2[0] - loc1[0], lat) * conversion,
+            conversion = (isImperial ? 3.28084 : 1),
+            dist = geoLonToMeters(loc2[0] - loc1[0], lat) * conversion,
             scale = { dist: 0, px: 0, text: '' },
             buckets, i, val, dLon;
 
-        if (imperial) {
+        if (isImperial) {
             buckets = [5280000, 528000, 52800, 5280, 500, 50, 5, 1];
         } else {
             buckets = [5000000, 500000, 50000, 5000, 500, 50, 5, 1];
@@ -29,10 +31,10 @@ export function Scale(context) {
             }
         }
 
-        dLon = metersToLon(scale.dist / conversion, lat);
+        dLon = geoMetersToLon(scale.dist / conversion, lat);
         scale.px = Math.round(projection([loc1[0] + dLon, loc1[1]])[0]);
 
-        if (imperial) {
+        if (isImperial) {
             if (scale.dist >= 5280) {
                 scale.dist /= 5280;
                 scale.text = String(scale.dist) + ' mi';
@@ -50,6 +52,7 @@ export function Scale(context) {
 
         return scale;
     }
+
 
     function update(selection) {
         // choose loc1, loc2 along bottom of viewport (near where the scale will be drawn)
@@ -70,7 +73,7 @@ export function Scale(context) {
 
     return function(selection) {
         function switchUnits() {
-            imperial = !imperial;
+            isImperial = !isImperial;
             selection.call(update);
         }
 

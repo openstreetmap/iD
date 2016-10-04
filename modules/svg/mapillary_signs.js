@@ -1,11 +1,11 @@
 import * as d3 from 'd3';
 import _ from 'lodash';
-import { getDimensions, setDimensions } from '../util/dimensions';
-import { PointTransform } from './point_transform';
-import { mapillary as mapillaryService } from '../services/index';
+import { utilGetDimensions, utilSetDimensions } from '../util/dimensions';
+import { svgPointTransform } from './point_transform';
+import { serviceMapillary } from '../services/index';
 
 
-export function MapillarySigns(projection, context, dispatch) {
+export function svgMapillarySigns(projection, context, dispatch) {
     var debouncedRedraw = _.debounce(function () { dispatch.call('change'); }, 1000),
         minZoom = 12,
         layer = d3.select(null),
@@ -13,17 +13,17 @@ export function MapillarySigns(projection, context, dispatch) {
 
 
     function init() {
-        if (MapillarySigns.initialized) return;  // run once
-        MapillarySigns.enabled = false;
-        MapillarySigns.initialized = true;
+        if (svgMapillarySigns.initialized) return;  // run once
+        svgMapillarySigns.enabled = false;
+        svgMapillarySigns.initialized = true;
     }
 
 
     function getMapillary() {
-        if (mapillaryService && !_mapillary) {
-            _mapillary = mapillaryService.init();
+        if (serviceMapillary && !_mapillary) {
+            _mapillary = serviceMapillary.init();
             _mapillary.event.on('loadedSigns', debouncedRedraw);
-        } else if (!mapillaryService && _mapillary) {
+        } else if (!serviceMapillary && _mapillary) {
             _mapillary = null;
         }
         return _mapillary;
@@ -68,7 +68,7 @@ export function MapillarySigns(projection, context, dispatch) {
 
     function update() {
         var mapillary = getMapillary(),
-            data = (mapillary ? mapillary.signs(projection, getDimensions(layer)) : []),
+            data = (mapillary ? mapillary.signs(projection, utilGetDimensions(layer)) : []),
             imageKey = mapillary ? mapillary.getSelectedImage() : null;
 
         var signs = layer.selectAll('.icon-sign')
@@ -91,12 +91,12 @@ export function MapillarySigns(projection, context, dispatch) {
 
         signs
             .merge(enter)
-            .attr('transform', PointTransform(projection));
+            .attr('transform', svgPointTransform(projection));
     }
 
 
     function drawSigns(selection) {
-        var enabled = MapillarySigns.enabled,
+        var enabled = svgMapillarySigns.enabled,
             mapillary = getMapillary();
 
         layer = selection.selectAll('.layer-mapillary-signs')
@@ -116,7 +116,7 @@ export function MapillarySigns(projection, context, dispatch) {
             if (mapillary && ~~context.map().zoom() >= minZoom) {
                 editOn();
                 update();
-                mapillary.loadSigns(context, projection, getDimensions(layer));
+                mapillary.loadSigns(context, projection, utilGetDimensions(layer));
             } else {
                 editOff();
             }
@@ -125,9 +125,9 @@ export function MapillarySigns(projection, context, dispatch) {
 
 
     drawSigns.enabled = function(_) {
-        if (!arguments.length) return MapillarySigns.enabled;
-        MapillarySigns.enabled = _;
-        if (MapillarySigns.enabled) {
+        if (!arguments.length) return svgMapillarySigns.enabled;
+        svgMapillarySigns.enabled = _;
+        if (svgMapillarySigns.enabled) {
             showLayer();
         } else {
             hideLayer();
@@ -144,8 +144,8 @@ export function MapillarySigns(projection, context, dispatch) {
 
 
     drawSigns.dimensions = function(_) {
-        if (!arguments.length) return getDimensions(layer);
-        setDimensions(layer, _);
+        if (!arguments.length) return utilGetDimensions(layer);
+        utilSetDimensions(layer, _);
         return this;
     };
 

@@ -1,49 +1,54 @@
 import * as d3 from 'd3';
 import { d3keybinding } from '../lib/d3.keybinding.js';
 import { t } from '../util/locale';
+import { svgIcon } from '../svg/index';
+import { uiCmd } from './cmd';
+import { uiTooltipHtml } from './tooltipHtml';
 import { tooltip } from '../util/tooltip';
-import { Icon } from '../svg/index';
-import { cmd } from './cmd';
-import { tooltipHtml } from './tooltipHtml';
 
-export function UndoRedo(context) {
+
+export function uiUndoRedo(context) {
     var commands = [{
         id: 'undo',
-        cmd: cmd('⌘Z'),
+        cmd: uiCmd('⌘Z'),
         action: function() { if (!(context.inIntro() || saving())) context.undo(); },
         annotation: function() { return context.history().undoAnnotation(); }
     }, {
         id: 'redo',
-        cmd: cmd('⌘⇧Z'),
+        cmd: uiCmd('⌘⇧Z'),
         action: function() {if (!(context.inIntro() || saving())) context.redo(); },
         annotation: function() { return context.history().redoAnnotation(); }
     }];
 
+
     function saving() {
         return context.mode().id === 'save';
     }
+
 
     return function(selection) {
         var tooltipBehavior = tooltip()
             .placement('bottom')
             .html(true)
             .title(function (d) {
-                return tooltipHtml(d.annotation() ?
+                return uiTooltipHtml(d.annotation() ?
                     t(d.id + '.tooltip', {action: d.annotation()}) :
                     t(d.id + '.nothing'), d.cmd);
             });
 
         var buttons = selection.selectAll('button')
             .data(commands)
-            .enter().append('button')
+            .enter()
+            .append('button')
             .attr('class', 'col6 disabled')
             .on('click', function(d) { return d.action(); })
             .call(tooltipBehavior);
 
-        buttons.each(function(d) {
-            d3.select(this)
-                .call(Icon('#icon-' + d.id));
-        });
+        buttons
+            .each(function(d) {
+                d3.select(this)
+                    .call(svgIcon('#icon-' + d.id));
+            });
 
         var keybinding = d3keybinding('undo')
             .on(commands[0].cmd, function() { d3.event.preventDefault(); commands[0].action(); })

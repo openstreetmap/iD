@@ -1,15 +1,33 @@
 import * as d3 from 'd3';
 import _ from 'lodash';
-import { rebind } from '../util/rebind';
 import { t } from '../util/locale';
-import { bindOnce } from '../util/bind_once';
-import { getDimensions } from '../util/dimensions';
-import { Areas, Labels, Layers, Lines, Midpoints, Points, Vertices } from '../svg/index';
-import { Extent } from '../geo/index';
-import { fastMouse, setTransform, functor } from '../util/index';
-import { flash } from '../ui/index';
 
-export function Map(context) {
+import { utilRebind } from '../util/rebind';
+import { utilBindOnce } from '../util/bind_once';
+import { utilGetDimensions } from '../util/dimensions';
+
+import {
+    svgAreas,
+    svgLabels,
+    svgLayers,
+    svgLines,
+    svgMidpoints,
+    svgPoints,
+    svgVertices
+} from '../svg/index';
+
+import { geoExtent } from '../geo/index';
+
+import {
+    utilFastMouse,
+    utilSetTransform,
+    utilFunctor
+} from '../util/index';
+
+import { uiFlash } from '../ui/index';
+
+
+export function rendererMap(context) {
 
     var dimensions = [1, 1],
         dispatch = d3.dispatch('move', 'drawn'),
@@ -19,13 +37,13 @@ export function Map(context) {
         transformStart = projection.transform(),
         transformed = false,
         minzoom = 0,
-        drawLayers = Layers(projection, context),
-        drawPoints = Points(projection, context),
-        drawVertices = Vertices(projection, context),
-        drawLines = Lines(projection),
-        drawAreas = Areas(projection, context),
-        drawMidpoints = Midpoints(projection, context),
-        drawLabels = Labels(projection, context),
+        drawLayers = svgLayers(projection, context),
+        drawPoints = svgPoints(projection, context),
+        drawVertices = svgVertices(projection, context),
+        drawLines = svgLines(projection),
+        drawAreas = svgAreas(projection, context),
+        drawMidpoints = svgMidpoints(projection, context),
+        drawLabels = svgLabels(projection, context),
         supersurface,
         wrapper,
         surface,
@@ -64,7 +82,7 @@ export function Map(context) {
 
         supersurface = selection.append('div')
             .attr('id', 'supersurface')
-            .call(setTransform, 0, 0);
+            .call(utilSetTransform, 0, 0);
 
         // Need a wrapper div because Opera can't cope with an absolutely positioned
         // SVG element: http://bl.ocks.org/jfirebaugh/6fbfbd922552bf776c16
@@ -112,7 +130,7 @@ export function Map(context) {
         context.on('enter.map', function() {
             if (map.editable() && !transformed) {
                 var all = context.intersects(map.extent()),
-                    filter = functor(true),
+                    filter = utilFunctor(true),
                     graph = context.graph();
 
                 all = context.features().filter(all, graph);
@@ -123,7 +141,7 @@ export function Map(context) {
             }
         });
 
-        map.dimensions(getDimensions(selection));
+        map.dimensions(utilGetDimensions(selection));
 
         drawLabels.supersurface(supersurface);
     }
@@ -168,7 +186,7 @@ export function Map(context) {
 
             } else {
                 data = all;
-                filter = functor(true);
+                filter = utilFunctor(true);
             }
         }
 
@@ -212,7 +230,7 @@ export function Map(context) {
 
         if (ktoz(eventTransform.k * 2 * Math.PI) < minzoom) {
             surface.interrupt();
-            flash(context.container())
+            uiFlash(context.container())
                 .select('.content')
                 .text(t('cannot_zoom'));
             setZoom(context.minEditableZoom(), true);
@@ -228,7 +246,7 @@ export function Map(context) {
             tY = (eventTransform.y / scale - transformStart.y) * scale;
 
         transformed = true;
-        setTransform(supersurface, tX, tY, scale);
+        utilSetTransform(supersurface, tX, tY, scale);
         queueRedraw();
 
         dispatch.call('move', this, map);
@@ -239,7 +257,7 @@ export function Map(context) {
         if (!transformed) return false;
 
         surface.selectAll('.radial-menu').interrupt().remove();
-        setTransform(supersurface, 0, 0);
+        utilSetTransform(supersurface, 0, 0);
         transformed = false;
         return true;
     }
@@ -427,7 +445,7 @@ export function Map(context) {
         drawLayers.dimensions(dimensions);
         context.background().dimensions(dimensions);
         projection.clipExtent([[0, 0], dimensions]);
-        mouse = fastMouse(supersurface.node());
+        mouse = utilFastMouse(supersurface.node());
         setCenter(center);
 
         return redraw();
@@ -469,7 +487,7 @@ export function Map(context) {
 
         if (z2 < minzoom) {
             surface.interrupt();
-            flash(context.container())
+            uiFlash(context.container())
                 .select('.content')
                 .text(t('cannot_zoom'));
             z2 = context.minEditableZoom();
@@ -520,7 +538,7 @@ export function Map(context) {
 
 
     map.startEase = function() {
-        bindOnce(surface, 'mousedown.ease', function() {
+        utilBindOnce(surface, 'mousedown.ease', function() {
             map.cancelEase();
         });
         return map;
@@ -535,10 +553,10 @@ export function Map(context) {
 
     map.extent = function(_) {
         if (!arguments.length) {
-            return new Extent(projection.invert([0, dimensions[1]]),
+            return new geoExtent(projection.invert([0, dimensions[1]]),
                                  projection.invert([dimensions[0], 0]));
         } else {
-            var extent = Extent(_);
+            var extent = geoExtent(_);
             map.centerZoom(extent.center(), map.extentZoom(extent));
         }
     };
@@ -547,10 +565,10 @@ export function Map(context) {
     map.trimmedExtent = function(_) {
         if (!arguments.length) {
             var headerY = 60, footerY = 30, pad = 10;
-            return new Extent(projection.invert([pad, dimensions[1] - footerY - pad]),
-                    projection.invert([dimensions[0] - pad, headerY + pad]));
+            return new geoExtent(projection.invert([pad, dimensions[1] - footerY - pad]),
+                                 projection.invert([dimensions[0] - pad, headerY + pad]));
         } else {
-            var extent = Extent(_);
+            var extent = geoExtent(_);
             map.centerZoom(extent.center(), map.trimmedExtentZoom(extent));
         }
     };
@@ -572,14 +590,14 @@ export function Map(context) {
 
 
     map.extentZoom = function(_) {
-        return calcZoom(Extent(_), dimensions);
+        return calcZoom(geoExtent(_), dimensions);
     };
 
 
     map.trimmedExtentZoom = function(_) {
         var trimY = 120, trimX = 40,
             trimmed = [dimensions[0] - trimX, dimensions[1] - trimY];
-        return calcZoom(Extent(_), trimmed);
+        return calcZoom(geoExtent(_), trimmed);
     };
 
 
@@ -597,5 +615,6 @@ export function Map(context) {
 
     map.layers = drawLayers;
 
-    return rebind(map, dispatch, 'on');
+
+    return utilRebind(map, dispatch, 'on');
 }

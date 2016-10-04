@@ -1,8 +1,16 @@
 import { t } from '../util/locale';
-import { Hover, Lasso, Paste, Select } from '../behavior/index';
-import { DragNode } from './index';
 
-export function Browse(context) {
+import {
+    behaviorHover,
+    behaviorLasso,
+    behaviorPaste,
+    behaviorSelect
+} from '../behavior/index';
+
+import { modeDragNode } from './index';
+
+
+export function modeBrowse(context) {
     var mode = {
         button: 'browse',
         id: 'browse',
@@ -11,12 +19,13 @@ export function Browse(context) {
     }, sidebar;
 
     var behaviors = [
-        Paste(context),
-        Hover(context)
-            .on('hover', context.ui().sidebar.hover),
-        Select(context),
-        Lasso(context),
-        DragNode(context).behavior];
+        behaviorPaste(context),
+        behaviorHover(context).on('hover', context.ui().sidebar.hover),
+        behaviorSelect(context),
+        behaviorLasso(context),
+        modeDragNode(context).behavior
+    ];
+
 
     mode.enter = function() {
         behaviors.forEach(function(behavior) {
@@ -35,6 +44,7 @@ export function Browse(context) {
         }
     };
 
+
     mode.exit = function() {
         context.ui().sidebar.hover.cancel();
         behaviors.forEach(function(behavior) {
@@ -46,11 +56,13 @@ export function Browse(context) {
         }
     };
 
+
     mode.sidebar = function(_) {
         if (!arguments.length) return sidebar;
         sidebar = _;
         return mode;
     };
+
 
     return mode;
 }

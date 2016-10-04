@@ -2,15 +2,14 @@ import * as d3 from 'd3';
 import _ from 'lodash';
 import { d3keybinding } from '../lib/d3.keybinding.js';
 import { t } from '../util/locale';
-import { Detect } from '../util/detect';
-import { Extent } from '../geo/index';
-import { cmd } from './cmd';
+import { geoExtent } from '../geo/index';
+import { utilDetect } from '../util/detect';
+import { uiCmd } from './cmd';
 
 
-
-export function Info(context) {
-    var key = cmd('⌘I'),
-        isImperial = (Detect().locale.toLowerCase() === 'en-us'),
+export function uiInfo(context) {
+    var key = uiCmd('⌘I'),
+        isImperial = (utilDetect().locale.toLowerCase() === 'en-us'),
         isHidden = true;
 
 
@@ -23,7 +22,7 @@ export function Info(context) {
 
         function steradiansToSqmeters(r) {
             // http://gis.stackexchange.com/a/124857/40446
-            return r / 12.56637 * 510065621724000;
+            return r / (4 * Math.PI) * 510065621724000;
         }
 
 
@@ -116,7 +115,7 @@ export function Info(context) {
             var resolver = context.graph(),
                 selected = _.filter(context.selectedIDs(), function(e) { return context.hasEntity(e); }),
                 singular = selected.length === 1 ? selected[0] : null,
-                extent = Extent(),
+                extent = geoExtent(),
                 entity;
 
             wrap.html('');

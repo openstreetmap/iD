@@ -1,12 +1,12 @@
 import * as d3 from 'd3';
-import { rebind } from '../../util/rebind';
+import { utilRebind } from '../../util/rebind';
 import { t } from '../../util/locale';
-import { oneWayTags } from '../../core/index';
+import { coreOneWayTags } from '../../core/index';
 
-export { check as defaultcheck };
+export { uiFieldCheck as uiFieldDefaultcheck };
 
 
-export function check(field) {
+export function uiFieldCheck(field) {
     var dispatch = d3.dispatch('change'),
         options = field.strings && field.strings.options,
         values = [],
@@ -36,7 +36,7 @@ export function check(field) {
         // where implied oneway tag exists (e.g. `junction=roundabout`) #2220, #1841
         if (field.id === 'oneway') {
             for (var key in entity.tags) {
-                if (key in oneWayTags && (entity.tags[key] in oneWayTags[key])) {
+                if (key in coreOneWayTags && (entity.tags[key] in coreOneWayTags[key])) {
                     texts[0] = t('presets.fields.oneway_yes.options.undefined');
                     break;
                 }
@@ -94,5 +94,5 @@ export function check(field) {
         box.node().focus();
     };
 
-    return rebind(check, dispatch, 'on');
+    return utilRebind(check, dispatch, 'on');
 }

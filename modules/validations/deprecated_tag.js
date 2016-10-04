@@ -1,8 +1,10 @@
 import _ from 'lodash';
 import { t } from '../util/locale';
-import { tagText } from '../util/index';
+import { utilTagText } from '../util/index';
 
-export function DeprecatedTag() {
+
+export function validationDeprecatedTag() {
+
     var validation = function(changes) {
         var warnings = [];
         for (var i = 0; i < changes.created.length; i++) {
@@ -10,7 +12,7 @@ export function DeprecatedTag() {
                 deprecatedTags = change.deprecatedTags();
 
             if (!_.isEmpty(deprecatedTags)) {
-                var tags = tagText({ tags: deprecatedTags });
+                var tags = utilTagText({ tags: deprecatedTags });
                 warnings.push({
                     id: 'deprecated_tags',
                     message: t('validations.deprecated_tags', { tags: tags }),
@@ -18,8 +20,10 @@ export function DeprecatedTag() {
                 });
             }
         }
+
         return warnings;
     };
+
 
     return validation;
 }

@@ -1,45 +1,50 @@
 import * as d3 from 'd3';
 import _ from 'lodash';
-import { Extent, cross } from '../geo/index';
-import { Entity } from './entity';
-import { oneWayTags } from './tags';
+import { geoExtent, geoCross } from '../geo/index';
+import { coreEntity } from './entity';
+import { coreOneWayTags } from './tags';
 import { areaKeys } from './context';
 
-export function Way() {
-    if (!(this instanceof Way)) {
-        return (new Way()).initialize(arguments);
+
+export function coreWay() {
+    if (!(this instanceof coreWay)) {
+        return (new coreWay()).initialize(arguments);
     } else if (arguments.length) {
         this.initialize(arguments);
     }
 }
 
-Entity.way = Way;
 
-Way.prototype = Object.create(Entity.prototype);
+coreEntity.way = coreWay;
 
-_.extend(Way.prototype, {
+coreWay.prototype = Object.create(coreEntity.prototype);
+
+
+_.extend(coreWay.prototype, {
     type: 'way',
     nodes: [],
+
 
     copy: function(resolver, copies) {
         if (copies[this.id])
             return copies[this.id];
 
-        var copy = Entity.prototype.copy.call(this, resolver, copies);
+        var copy = coreEntity.prototype.copy.call(this, resolver, copies);
 
         var nodes = this.nodes.map(function(id) {
             return resolver.entity(id).copy(resolver, copies).id;
         });
 
-        copy = copy.update({nodes: nodes});
+        copy = copy.update({ nodes: nodes });
         copies[this.id] = copy;
 
         return copy;
     },
 
+
     extent: function(resolver) {
         return resolver.transient(this, 'extent', function() {
-            var extent = Extent();
+            var extent = geoExtent();
             for (var i = 0; i < this.nodes.length; i++) {
                 var node = resolver.hasEntity(this.nodes[i]);
                 if (node) {
@@ -50,22 +55,27 @@ _.extend(Way.prototype, {
         });
     },
 
+
     first: function() {
         return this.nodes[0];
     },
+
 
     last: function() {
         return this.nodes[this.nodes.length - 1];
     },
 
+
     contains: function(node) {
         return this.nodes.indexOf(node) >= 0;
     },
+
 
     affix: function(node) {
         if (this.nodes[0] === node) return 'prefix';
         if (this.nodes[this.nodes.length - 1] === node) return 'suffix';
     },
+
 
     layer: function() {
         // explicit layer tag, clamp between -10, 10..
@@ -90,6 +100,7 @@ _.extend(Way.prototype, {
         return 0;
     },
 
+
     isOneWay: function() {
         // explicit oneway tag..
         if (['yes', '1', '-1'].indexOf(this.tags.oneway) !== -1) { return true; }
@@ -97,11 +108,12 @@ _.extend(Way.prototype, {
 
         // implied oneway tag..
         for (var key in this.tags) {
-            if (key in oneWayTags && (this.tags[key] in oneWayTags[key]))
+            if (key in coreOneWayTags && (this.tags[key] in coreOneWayTags[key]))
                 return true;
         }
         return false;
     },
+
 
     lanes: function() {
 
@@ -186,9 +198,11 @@ _.extend(Way.prototype, {
         };
     },
 
+
     isClosed: function() {
         return this.nodes.length > 0 && this.first() === this.last();
     },
+
 
     isConvex: function(resolver) {
         if (!this.isClosed() || this.isDegenerate()) return null;
@@ -201,7 +215,7 @@ _.extend(Way.prototype, {
             var o = coords[(i+1) % coords.length],
                 a = coords[i],
                 b = coords[(i+2) % coords.length],
-                res = cross(o, a, b);
+                res = geoCross(o, a, b);
 
             curr = (res > 0) ? 1 : (res < 0) ? -1 : 0;
             if (curr === 0) {
@@ -213,6 +227,7 @@ _.extend(Way.prototype, {
         }
         return true;
     },
+
 
     isArea: function() {
         if (this.tags.area === 'yes')
@@ -227,9 +242,11 @@ _.extend(Way.prototype, {
         return false;
     },
 
+
     isDegenerate: function() {
         return _.uniq(this.nodes).length < (this.isArea() ? 3 : 2);
     },
+
 
     areAdjacent: function(n1, n2) {
         for (var i = 0; i < this.nodes.length; i++) {
@@ -241,11 +258,13 @@ _.extend(Way.prototype, {
         return false;
     },
 
+
     geometry: function(graph) {
         return graph.transient(this, 'geometry', function() {
             return this.isArea() ? 'area' : 'line';
         });
     },
+
 
     addNode: function(id, index) {
         var nodes = this.nodes.slice();
@@ -253,11 +272,13 @@ _.extend(Way.prototype, {
         return this.update({nodes: nodes});
     },
 
+
     updateNode: function(id, index) {
         var nodes = this.nodes.slice();
         nodes.splice(index, 1, id);
         return this.update({nodes: nodes});
     },
+
 
     replaceNode: function(needle, replacement) {
         if (this.nodes.indexOf(needle) < 0)
@@ -271,6 +292,7 @@ _.extend(Way.prototype, {
         }
         return this.update({nodes: nodes});
     },
+
 
     removeNode: function(id) {
         var nodes = [];
@@ -290,13 +312,14 @@ _.extend(Way.prototype, {
         return this.update({nodes: nodes});
     },
 
+
     asJXON: function(changeset_id) {
         var r = {
             way: {
                 '@id': this.osmId(),
                 '@version': this.version || 0,
                 nd: _.map(this.nodes, function(id) {
-                    return { keyAttributes: { ref: Entity.id.toOSM(id) } };
+                    return { keyAttributes: { ref: coreEntity.id.toOSM(id) } };
                 }),
                 tag: _.map(this.tags, function(v, k) {
                     return { keyAttributes: { k: k, v: v } };
@@ -306,6 +329,7 @@ _.extend(Way.prototype, {
         if (changeset_id) r.way['@changeset'] = changeset_id;
         return r;
     },
+
 
     asGeoJSON: function(resolver) {
         return resolver.transient(this, 'GeoJSON', function() {
@@ -323,6 +347,7 @@ _.extend(Way.prototype, {
             }
         });
     },
+
 
     area: function(resolver) {
         return resolver.transient(this, 'area', function() {

@@ -1,8 +1,10 @@
-import { angle } from '../geo/index';
+import { geoAngle } from '../geo/index';
 
 
-export function Turns(projection) {
+export function svgTurns(projection) {
+
     return function drawTurns(selection, graph, turns) {
+
         function key(turn) {
             return [turn.from.node + turn.via.node + turn.to.node].join('-');
         }
@@ -58,7 +60,7 @@ export function Turns(projection) {
             .attr('transform', function (turn) {
                 var v = graph.entity(turn.via.node),
                     t = graph.entity(turn.to.node),
-                    a = angle(v, t, projection),
+                    a = geoAngle(v, t, projection),
                     p = projection(v.loc),
                     r = turn.u ? 0 : 60;
 

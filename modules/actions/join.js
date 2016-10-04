@@ -1,7 +1,8 @@
 import _ from 'lodash';
-import { DeleteWay } from './delete_way';
-import { interestingTag } from '../core/index';
-import { joinWays } from '../geo/index';
+import { actionDeleteWay } from './delete_way';
+import { coreInterestingTag } from '../core/index';
+import { geoJoinWays } from '../geo/index';
+
 
 // Join ways at the end node they share.
 //
@@ -11,12 +12,13 @@ import { joinWays } from '../geo/index';
 //   https://github.com/systemed/potlatch2/blob/master/net/systemeD/halcyon/connection/actions/MergeWaysAction.as
 //   https://github.com/openstreetmap/josm/blob/mirror/src/org/openstreetmap/josm/actions/CombineWayAction.java
 //
-export function Join(ids) {
+export function actionJoin(ids) {
 
     function groupEntitiesByGeometry(graph) {
         var entities = ids.map(function(id) { return graph.entity(id); });
         return _.extend({line: []}, _.groupBy(entities, function(entity) { return entity.geometry(graph); }));
     }
+
 
     var action = function(graph) {
         var ways = ids.map(graph.entity, graph),
@@ -30,7 +32,7 @@ export function Join(ids) {
             }
         }
 
-        var joined = joinWays(ways, graph)[0];
+        var joined = geoJoinWays(ways, graph)[0];
 
         survivor = survivor.update({nodes: _.map(joined.nodes, 'id')});
         graph = graph.replace(survivor);
@@ -46,18 +48,19 @@ export function Join(ids) {
             survivor = survivor.mergeTags(way.tags);
 
             graph = graph.replace(survivor);
-            graph = DeleteWay(way.id)(graph);
+            graph = actionDeleteWay(way.id)(graph);
         });
 
         return graph;
     };
+
 
     action.disabled = function(graph) {
         var geometries = groupEntitiesByGeometry(graph);
         if (ids.length < 2 || ids.length !== geometries.line.length)
             return 'not_eligible';
 
-        var joined = joinWays(ids.map(graph.entity, graph), graph);
+        var joined = geoJoinWays(ids.map(graph.entity, graph), graph);
         if (joined.length > 1)
             return 'not_adjacent';
 
@@ -76,7 +79,7 @@ export function Join(ids) {
             for (var k in way.tags) {
                 if (!(k in tags)) {
                     tags[k] = way.tags[k];
-                } else if (tags[k] && interestingTag(k) && tags[k] !== way.tags[k]) {
+                } else if (tags[k] && coreInterestingTag(k) && tags[k] !== way.tags[k]) {
                     conflicting = true;
                 }
             }
@@ -88,6 +91,7 @@ export function Join(ids) {
         if (conflicting)
             return 'conflicting_tags';
     };
+
 
     return action;
 }

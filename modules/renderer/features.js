@@ -1,9 +1,10 @@
 import * as d3 from 'd3';
 import _ from 'lodash';
-import { rebind } from '../util/rebind';
-import { Entity } from '../core/index';
+import { utilRebind } from '../util/rebind';
+import { coreEntity } from '../core/index';
 
-export function Features(context) {
+
+export function rendererFeatures(context) {
     var traffic_roads = {
         'motorway': true,
         'motorway_link': true,
@@ -55,11 +56,13 @@ export function Features(context) {
         _keys = [],
         _hidden = [];
 
+
     function update() {
         _hidden = features.hidden();
         dispatch.call('change');
         dispatch.call('redraw');
     }
+
 
     function defineFeature(k, filter, max) {
         _keys.push(k);
@@ -170,13 +173,16 @@ export function Features(context) {
 
     function features() {}
 
+
     features.features = function() {
         return _features;
     };
 
+
     features.keys = function() {
         return _keys;
     };
+
 
     features.enabled = function(k) {
         if (!arguments.length) {
@@ -185,12 +191,14 @@ export function Features(context) {
         return _features[k] && _features[k].enabled;
     };
 
+
     features.disabled = function(k) {
         if (!arguments.length) {
             return _.reject(_keys, function(k) { return _features[k].enabled; });
         }
         return _features[k] && !_features[k].enabled;
     };
+
 
     features.hidden = function(k) {
         if (!arguments.length) {
@@ -199,12 +207,14 @@ export function Features(context) {
         return _features[k] && _features[k].hidden();
     };
 
+
     features.autoHidden = function(k) {
         if (!arguments.length) {
             return _.filter(_keys, function(k) { return _features[k].autoHidden(); });
         }
         return _features[k] && _features[k].autoHidden();
     };
+
 
     features.enable = function(k) {
         if (_features[k] && !_features[k].enabled) {
@@ -213,12 +223,14 @@ export function Features(context) {
         }
     };
 
+
     features.disable = function(k) {
         if (_features[k] && _features[k].enabled) {
             _features[k].disable();
             update();
         }
     };
+
 
     features.toggle = function(k) {
         if (_features[k]) {
@@ -227,10 +239,12 @@ export function Features(context) {
         }
     };
 
+
     features.resetStats = function() {
         _.each(_features, function(f) { f.count = 0; });
         dispatch.call('change');
     };
+
 
     features.gatherStats = function(d, resolver, dimensions) {
         var needsRedraw = false,
@@ -264,10 +278,12 @@ export function Features(context) {
         return needsRedraw;
     };
 
+
     features.stats = function() {
         _.each(_keys, function(k) { _stats[k] = _features[k].count; });
         return _stats;
     };
+
 
     features.clear = function(d) {
         for (var i = 0; i < d.length; i++) {
@@ -275,18 +291,21 @@ export function Features(context) {
         }
     };
 
+
     features.clearEntity = function(entity) {
-        delete _cache[Entity.key(entity)];
+        delete _cache[coreEntity.key(entity)];
     };
+
 
     features.reset = function() {
         _cache = {};
     };
 
+
     features.getMatches = function(entity, resolver, geometry) {
         if (geometry === 'vertex' || geometry === 'relation') return {};
 
-        var ent = Entity.key(entity);
+        var ent = coreEntity.key(entity);
         if (!_cache[ent]) {
             _cache[ent] = {};
         }
@@ -312,7 +331,7 @@ export function Features(context) {
                     if (entity.type === 'way') {
                         var parents = features.getParents(entity, resolver, geometry);
                         if (parents.length === 1 && parents[0].isMultipolygon()) {
-                            var pkey = Entity.key(parents[0]);
+                            var pkey = coreEntity.key(parents[0]);
                             if (_cache[pkey] && _cache[pkey].matches) {
                                 matches = _.clone(_cache[pkey].matches);
                                 continue;
@@ -331,10 +350,11 @@ export function Features(context) {
         return _cache[ent].matches;
     };
 
+
     features.getParents = function(entity, resolver, geometry) {
         if (geometry === 'point') return [];
 
-        var ent = Entity.key(entity);
+        var ent = coreEntity.key(entity);
         if (!_cache[ent]) {
             _cache[ent] = {};
         }
@@ -351,6 +371,7 @@ export function Features(context) {
         return _cache[ent].parents;
     };
 
+
     features.isHiddenFeature = function(entity, resolver, geometry) {
         if (!_hidden.length) return false;
         if (!entity.version) return false;
@@ -362,6 +383,7 @@ export function Features(context) {
         }
         return false;
     };
+
 
     features.isHiddenChild = function(entity, resolver, geometry) {
         if (!_hidden.length) return false;
@@ -377,6 +399,7 @@ export function Features(context) {
         }
         return true;
     };
+
 
     features.hasHiddenConnections = function(entity, resolver) {
         if (!_hidden.length) return false;
@@ -400,6 +423,7 @@ export function Features(context) {
         }) : false;
     };
 
+
     features.isHidden = function(entity, resolver, geometry) {
         if (!_hidden.length) return false;
         if (!entity.version) return false;
@@ -407,6 +431,7 @@ export function Features(context) {
         var fn = (geometry === 'vertex' ? features.isHiddenChild : features.isHiddenFeature);
         return fn(entity, resolver, geometry);
     };
+
 
     features.filter = function(d, resolver) {
         if (!_hidden.length) return d;
@@ -421,5 +446,6 @@ export function Features(context) {
         return result;
     };
 
-    return rebind(features, dispatch, 'on');
+
+    return utilRebind(features, dispatch, 'on');
 }

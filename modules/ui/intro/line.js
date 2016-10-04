@@ -1,13 +1,13 @@
 import * as d3 from 'd3';
 import _ from 'lodash';
-import { rebind } from '../../util/rebind';
-import { bindOnce } from '../../util/bind_once';
 import { t } from '../../util/locale';
+import { actionDeleteMultiple } from '../../actions/index';
+import { utilRebind } from '../../util/rebind';
+import { utilBindOnce } from '../../util/bind_once';
 import { icon, pad } from './helper';
-import { DeleteMultiple } from '../../actions/index';
 
 
-export function line(context, reveal) {
+export function uiIntroLine(context, reveal) {
     var dispatch = d3.dispatch('done'),
         timeouts = [];
 
@@ -83,7 +83,7 @@ export function line(context, reveal) {
             d3.select(window).on('mousedown.intro', eventCancel, true);
 
             timeout(function() {
-                context.replace(DeleteMultiple(ids));
+                context.replace(actionDeleteMultiple(ids));
                 step.exit();
                 step.enter();
             }, 3000);
@@ -125,7 +125,7 @@ export function line(context, reveal) {
                 d3.select('#curtain').style('pointer-events', 'none');
                 var road = d3.select('.preset-category-road .preset-list-button');
                 reveal(road.node(), t('intro.lines.road'));
-                bindOnce(road, 'click.intro', roadCategory);
+                utilBindOnce(road, 'click.intro', roadCategory);
             }, 500);
         }
 
@@ -134,9 +134,9 @@ export function line(context, reveal) {
             timeout(function() {
                 var grid = d3.select('.subgrid');
                 reveal(grid.node(), t('intro.lines.residential'));
-                bindOnce(grid.selectAll(':not(.preset-highway-residential) .preset-list-button'),
+                utilBindOnce(grid.selectAll(':not(.preset-highway-residential) .preset-list-button'),
                     'click.intro', retryPreset);
-                bindOnce(grid.selectAll('.preset-highway-residential .preset-list-button'),
+                utilBindOnce(grid.selectAll('.preset-highway-residential .preset-list-button'),
                     'click.intro', roadDetails);
             }, 500);
         }
@@ -147,7 +147,7 @@ export function line(context, reveal) {
             timeout(function() {
                 var preset = d3.select('.entity-editor-pane .preset-list-button');
                 reveal(preset.node(), t('intro.lines.wrong_preset'));
-                bindOnce(preset, 'click.intro', presetCategory);
+                utilBindOnce(preset, 'click.intro', presetCategory);
             }, 500);
         }
 
@@ -172,5 +172,5 @@ export function line(context, reveal) {
         context.history().on('change.intro', null);
     };
 
-    return rebind(step, dispatch, 'on');
+    return utilRebind(step, dispatch, 'on');
 }

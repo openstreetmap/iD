@@ -1,17 +1,17 @@
 import * as d3 from 'd3';
 import _ from 'lodash';
-import { rebind } from '../util/rebind';
-import { getSetValue } from '../util/get_set_value';
 import { d3combobox } from '../lib/d3.combobox.js';
 import { t } from '../util/locale';
-import { Browse } from '../modes/index';
-import { Disclosure } from './disclosure';
-import { Icon } from '../svg/index';
-import { TagReference } from './tag_reference';
-import { fields } from './fields/index';
+import { modeBrowse } from '../modes/index';
+import { svgIcon } from '../svg/index';
+import { uiDisclosure } from './disclosure';
+import { uiFields } from './fields/index';
+import { uiTagReference } from './tag_reference';
+import { utilRebind } from '../util/rebind';
+import { utilGetSetValue } from '../util/get_set_value';
 
 
-export function preset(context) {
+export function uiPreset(context) {
     var dispatch = d3.dispatch('change'),
         state,
         fieldsArr,
@@ -20,6 +20,7 @@ export function preset(context) {
         id;
 
 
+    // Field Constructor
     function UIField(field, entity, show) {
         field = _.clone(field);
 
@@ -78,11 +79,12 @@ export function preset(context) {
 
 
     function presets(selection) {
-        selection.call(Disclosure()
+        selection.call(uiDisclosure()
             .title(t('inspector.all_fields'))
             .expanded(context.storage('preset_fields.expanded') !== 'false')
             .on('toggled', toggled)
-            .content(content));
+            .content(content)
+        );
 
         function toggled(expanded) {
             context.storage('preset_fields.expanded', expanded);
@@ -153,12 +155,12 @@ export function preset(context) {
         wrap.append('button')
             .attr('class', 'remove-icon')
             .attr('tabindex', -1)
-            .call(Icon('#operation-delete'));
+            .call(svgIcon('#operation-delete'));
 
         wrap.append('button')
             .attr('class', 'modified-icon')
             .attr('tabindex', -1)
-            .call(Icon('#icon-undo'));
+            .call(svgIcon('#icon-undo'));
 
 
         // Update
@@ -176,7 +178,7 @@ export function preset(context) {
             .classed('modified', function(field) { return field.modified(); })
             .classed('present', function(field) { return field.present(); })
             .each(function(field) {
-                var reference = TagReference(field.reference || {key: field.key}, context);
+                var reference = uiTagReference(field.reference || { key: field.key }, context);
 
                 if (state === 'hover') {
                     reference.showing(false);
@@ -188,7 +190,7 @@ export function preset(context) {
                     .on('keydown', function() {
                         // if user presses enter, and combobox is not active, accept edits..
                         if (d3.event.keyCode === 13 && d3.select('.combobox').empty()) {
-                            context.enter(Browse(context));
+                            context.enter(modeBrowse(context));
                         }
                     })
                     .call(reference.body)
@@ -234,7 +236,7 @@ export function preset(context) {
             .merge(input);
 
         input
-            .call(getSetValue, '')
+            .call(utilGetSetValue, '')
             .attr('placeholder', function() {
                 var placeholder = [];
                 for (var field in notShown) {
@@ -254,11 +256,13 @@ export function preset(context) {
             field.input.focus();
         }
 
+
         function revert(field) {
             d3.event.stopPropagation();
             d3.event.preventDefault();
             dispatch.call('change', field, field.revert());
         }
+
 
         function remove(field) {
             d3.event.stopPropagation();
@@ -301,5 +305,5 @@ export function preset(context) {
     };
 
 
-    return rebind(presets, dispatch, 'on');
+    return utilRebind(presets, dispatch, 'on');
 }

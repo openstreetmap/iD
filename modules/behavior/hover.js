@@ -1,7 +1,8 @@
 import * as d3 from 'd3';
-import { rebind } from '../util/rebind';
 import { d3keybinding } from '../lib/d3.keybinding.js';
-import { Entity } from '../core/index';
+import { coreEntity } from '../core/index';
+import { utilRebind } from '../util/rebind';
+
 
 /*
    The hover behavior adds the `.hover` class on mouseover to all elements to which
@@ -12,12 +13,13 @@ import { Entity } from '../core/index';
    Only one of these elements can have the :hover pseudo-class, but all of them will
    have the .hover class.
  */
-export function Hover() {
+export function behaviorHover() {
     var dispatch = d3.dispatch('hover'),
         selection = d3.select(null),
         buttonDown,
         altDisables,
         target;
+
 
     function keydown() {
         if (altDisables && d3.event.keyCode === d3keybinding.modifierCodes.alt) {
@@ -28,6 +30,7 @@ export function Hover() {
         }
     }
 
+
     function keyup() {
         if (altDisables && d3.event.keyCode === d3keybinding.modifierCodes.alt) {
             dispatch.call('hover', this, target ? target.id : null);
@@ -36,6 +39,7 @@ export function Hover() {
                 .classed('hover', true);
         }
     }
+
 
     var hover = function(__) {
         selection = __;
@@ -50,7 +54,7 @@ export function Hover() {
             selection.selectAll('.hover-suppressed')
                 .classed('hover-suppressed', false);
 
-            if (target instanceof Entity) {
+            if (target instanceof coreEntity) {
                 var selector = '.' + target.id;
 
                 if (target.type === 'relation') {
@@ -133,5 +137,5 @@ export function Hover() {
     };
 
 
-    return rebind(hover, dispatch, 'on');
+    return utilRebind(hover, dispatch, 'on');
 }

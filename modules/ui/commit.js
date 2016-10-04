@@ -1,16 +1,16 @@
 import * as d3 from 'd3';
 import _ from 'lodash';
-import { rebind } from '../util/rebind';
 import { d3combobox } from '../lib/d3.combobox.js';
 import { t } from '../util/locale';
-import { triggerEvent } from '../util/trigger_event';
+import { modeSelect } from '../modes/index';
+import { svgIcon } from '../svg/index';
 import { tooltip } from '../util/tooltip';
-import { displayName, entityOrMemberSelector } from '../util/index';
-import { Icon } from '../svg/index';
-import { Select } from '../modes/index';
+import { utilDisplayName, utilEntityOrMemberSelector } from '../util/index';
+import { utilRebind } from '../util/rebind';
+import { utilTriggerEvent } from '../util/trigger_event';
 
 
-export function Commit(context) {
+export function uiCommit(context) {
     var dispatch = d3.dispatch('cancel', 'save');
 
 
@@ -78,7 +78,7 @@ export function Commit(context) {
         changeSetInfo.append('a')
             .attr('target', '_blank')
             .attr('tabindex', -1)
-            .call(Icon('#icon-out-link', 'inline'))
+            .call(svgIcon('#icon-out-link', 'inline'))
             .attr('href', t('commit.about_changeset_comments_link'))
             .append('span')
             .text(t('commit.about_changeset_comments'));
@@ -114,7 +114,7 @@ export function Commit(context) {
             .merge(warningLi);
 
         warningLi
-            .call(Icon('#icon-alert', 'pre-text'));
+            .call(svgIcon('#icon-alert', 'pre-text'));
 
         warningLi
             .append('strong')
@@ -220,7 +220,7 @@ export function Commit(context) {
 
         li.each(function(d) {
             d3.select(this)
-                .call(Icon('#icon-' + d.entity.geometry(d.graph), 'pre-text ' + d.changeType));
+                .call(svgIcon('#icon-' + d.entity.geometry(d.graph), 'pre-text ' + d.changeType));
         });
 
         li.append('span')
@@ -234,7 +234,7 @@ export function Commit(context) {
         li.append('span')
             .attr('class', 'entity-name')
             .text(function(d) {
-                var name = displayName(d.entity) || '',
+                var name = utilDisplayName(d.entity) || '',
                     string = '';
                 if (name !== '') string += ':';
                 return string += ' ' + name;
@@ -247,13 +247,13 @@ export function Commit(context) {
 
         // Call checkComment off the bat, in case a changeset
         // comment is recovered from localStorage
-        triggerEvent(commentField, 'input');
+        utilTriggerEvent(commentField, 'input');
 
 
         function mouseover(d) {
             if (d.entity) {
                 context.surface().selectAll(
-                    entityOrMemberSelector([d.entity.id], context.graph())
+                    utilEntityOrMemberSelector([d.entity.id], context.graph())
                 ).classed('hover', true);
             }
         }
@@ -269,8 +269,8 @@ export function Commit(context) {
             if (d.entity) {
                 context.map().zoomTo(d.entity);
                 context.enter(
-                    Select(context, [d.entity.id])
-                        .suppressMenu(true));
+                    modeSelect(context, [d.entity.id]).suppressMenu(true)
+                );
             }
         }
 
@@ -281,7 +281,7 @@ export function Commit(context) {
                 context.graph().entity(entity.id).geometry(context.graph()) !== 'vertex') {
                 context.map().zoomTo(entity);
                 context.surface().selectAll(
-                    entityOrMemberSelector([entity.id], context.graph()))
+                    utilEntityOrMemberSelector([entity.id], context.graph()))
                     .classed('hover', true);
             }
         }
@@ -303,12 +303,12 @@ export function Commit(context) {
                .append('a')
                .attr('target', '_blank')
                .attr('tabindex', -1)
-               .call(Icon('#icon-alert', 'inline'))
+               .call(svgIcon('#icon-alert', 'inline'))
                .attr('href', t('commit.google_warning_link'))
                .append('span')
                .text(t('commit.google_warning'));
         }
     }
 
-    return rebind(commit, dispatch, 'on');
+    return utilRebind(commit, dispatch, 'on');
 }

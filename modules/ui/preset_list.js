@@ -1,16 +1,16 @@
 import * as d3 from 'd3';
-import { rebind } from '../util/rebind';
+import { utilRebind } from '../util/rebind';
 import { d3keybinding } from '../lib/d3.keybinding.js';
 import { t } from '../util/locale';
-import { Browse } from '../modes/index';
-import { ChangePreset } from '../actions/index';
-import { Delete } from '../operations/index';
-import { Icon } from '../svg/index';
-import { PresetIcon } from './preset_icon';
-import { TagReference } from './tag_reference';
+import { actionChangePreset } from '../actions/index';
+import { operationDelete } from '../operations/index';
+import { modeBrowse } from '../modes/index';
+import { svgIcon } from '../svg/index';
+import { uiPresetIcon } from './preset_icon';
+import { uiTagReference } from './tag_reference';
 
 
-export function PresetList(context) {
+export function uiPresetList(context) {
     var dispatch = d3.dispatch('choose'),
         id,
         currentPreset,
@@ -30,25 +30,29 @@ export function PresetList(context) {
 
         selection.html('');
 
-        var messagewrap = selection.append('div')
+        var messagewrap = selection
+            .append('div')
             .attr('class', 'header fillL cf');
 
-        var message = messagewrap.append('h3')
+        var message = messagewrap
+            .append('h3')
             .text(t('inspector.choose'));
 
         if (context.entity(id).isUsed(context.graph())) {
-            messagewrap.append('button')
+            messagewrap
+                .append('button')
                 .attr('class', 'preset-choose')
                 .on('click', function() { dispatch.call('choose', this, currentPreset); })
                 .append('span')
                 .html('&#9658;');
         } else {
-            messagewrap.append('button')
+            messagewrap
+                .append('button')
                 .attr('class', 'close')
                 .on('click', function() {
-                    context.enter(Browse(context));
+                    context.enter(modeBrowse(context));
                 })
-                .call(Icon('#icon-close'));
+                .call(svgIcon('#icon-close'));
         }
 
         function keydown() {
@@ -58,7 +62,7 @@ export function PresetList(context) {
                  d3.event.keyCode === d3keybinding.keyCodes['⌦'])) {
                 d3.event.preventDefault();
                 d3.event.stopPropagation();
-                Delete([id], context)();
+                operationDelete([id], context)();
             } else if (search.property('value').length === 0 &&
                 (d3.event.ctrlKey || d3.event.metaKey) &&
                 d3.event.keyCode === d3keybinding.keyCodes.z) {
@@ -94,10 +98,12 @@ export function PresetList(context) {
             }
         }
 
-        var searchWrap = selection.append('div')
+        var searchWrap = selection
+            .append('div')
             .attr('class', 'search-header');
 
-        var search = searchWrap.append('input')
+        var search = searchWrap
+            .append('input')
             .attr('class', 'preset-search-input')
             .attr('placeholder', t('inspector.search'))
             .attr('type', 'search')
@@ -106,16 +112,18 @@ export function PresetList(context) {
             .on('input', inputevent);
 
         searchWrap
-            .call(Icon('#icon-search', 'pre-text'));
+            .call(svgIcon('#icon-search', 'pre-text'));
 
         if (autofocus) {
             search.node().focus();
         }
 
-        var listWrap = selection.append('div')
+        var listWrap = selection
+            .append('div')
             .attr('class', 'inspector-body');
 
-        var list = listWrap.append('div')
+        var list = listWrap
+            .append('div')
             .attr('class', 'preset-list fillL cf')
             .call(drawList, context.presets().defaults(geometry, 36));
     }
@@ -155,7 +163,7 @@ export function PresetList(context) {
             wrap.append('button')
                 .attr('class', 'preset-list-button')
                 .classed('expanded', false)
-                .call(PresetIcon()
+                .call(uiPresetIcon()
                     .geometry(context.geometry(id))
                     .preset(preset))
                 .on('click', function() {
@@ -217,7 +225,7 @@ export function PresetList(context) {
 
             wrap.append('button')
                 .attr('class', 'preset-list-button')
-                .call(PresetIcon()
+                .call(uiPresetIcon()
                     .geometry(context.geometry(id))
                     .preset(preset))
                 .on('click', item.choose)
@@ -233,8 +241,9 @@ export function PresetList(context) {
             context.presets().choose(preset);
 
             context.perform(
-                ChangePreset(id, currentPreset, preset),
-                t('operations.change_tags.annotation'));
+                actionChangePreset(id, currentPreset, preset),
+                t('operations.change_tags.annotation')
+            );
 
             dispatch.call('choose', this, preset);
         };
@@ -245,7 +254,7 @@ export function PresetList(context) {
         };
 
         item.preset = preset;
-        item.reference = TagReference(preset.reference(context.geometry(id)), context);
+        item.reference = uiTagReference(preset.reference(context.geometry(id)), context);
 
         return item;
     }
@@ -272,5 +281,6 @@ export function PresetList(context) {
         return presetList;
     };
 
-    return rebind(presetList, dispatch, 'on');
+
+    return utilRebind(presetList, dispatch, 'on');
 }

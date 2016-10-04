@@ -1,6 +1,6 @@
 import { t } from '../util/locale';
 
-export function tooltipHtml(text, key) {
+export function uiTooltipHtml(text, key) {
     var s = '<span>' + text + '</span>';
     if (key) {
         s += '<div class="keyhint-wrap">' +

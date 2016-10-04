@@ -2,12 +2,12 @@
 import * as d3 from 'd3';
 import _ from 'lodash';
 import rbush from 'rbush';
-import { rebind } from '../util/rebind';
+import { utilRebind } from '../util/rebind';
 import { d3geoTile } from '../lib/d3.geo.tile';
-import { Detect } from '../util/detect';
-import { Extent } from '../geo/index';
-import { Icon } from '../svg/index';
-import { qsString } from '../util/index';
+import { utilDetect } from '../util/detect';
+import { geoExtent } from '../geo/index';
+import { svgIcon } from '../svg/index';
+import { utilQsString } from '../util/index';
 
 
 var mapillary = {},
@@ -20,6 +20,7 @@ var mapillary = {},
     tileZoom = 14,
     dispatch = d3.dispatch('loadedImages', 'loadedSigns');
 
+
 function loadSignStyles(context) {
     d3.select('head').selectAll('#traffico')
         .data([0])
@@ -29,6 +30,7 @@ function loadSignStyles(context) {
         .attr('rel', 'stylesheet')
         .attr('href', context.asset('traffico/stylesheets/traffico.css'));
 }
+
 
 function loadSignDefs(context) {
     if (mapillary.sign_defs) return;
@@ -42,6 +44,7 @@ function loadSignDefs(context) {
         });
     });
 }
+
 
 function loadViewer() {
     // mapillary-wrap
@@ -59,7 +62,7 @@ function loadViewer() {
         .attr('class', 'thumb-hide')
         .on('click', function () { mapillary.hideViewer(); })
       .append('div')
-        .call(Icon('#icon-close'));
+        .call(svgIcon('#icon-close'));
 
     enter
       .append('div')
@@ -84,6 +87,7 @@ function loadViewer() {
         .attr('id', 'mapillary-viewerjs')
         .attr('src', viewerjs);
 }
+
 
 function initViewer(imageKey, context) {
 
@@ -117,9 +121,11 @@ function initViewer(imageKey, context) {
     }
 }
 
+
 function abortRequest(i) {
     i.abort();
 }
+
 
 function nearNullIsland(x, y, z) {
     if (z >= 7) {
@@ -131,6 +137,7 @@ function nearNullIsland(x, y, z) {
     }
     return false;
 }
+
 
 function getTiles(projection, dimensions) {
     var s = projection.scale() * 2 * Math.PI,
@@ -151,12 +158,14 @@ function getTiles(projection, dimensions) {
 
             return {
                 id: tile.toString(),
-                extent: Extent(
+                extent: geoExtent(
                     projection.invert([x, y + ts]),
-                    projection.invert([x + ts, y]))
+                    projection.invert([x + ts, y])
+                )
             };
         });
 }
+
 
 function loadTiles(which, url, projection, dimensions) {
     var tiles = getTiles(projection, dimensions).filter(function(t) {
@@ -175,6 +184,7 @@ function loadTiles(which, url, projection, dimensions) {
     });
 }
 
+
 function loadTilePage(which, url, tile, page) {
     var cache = mapillary.cache[which],
         id = tile.id + ',' + String(page),
@@ -183,7 +193,7 @@ function loadTilePage(which, url, tile, page) {
     if (cache.loaded[id] || cache.inflight[id]) return;
 
     cache.inflight[id] = d3.json(url +
-        qsString({
+        utilQsString({
             geojson: 'true',
             limit: maxResults,
             page: page,
@@ -223,6 +233,7 @@ function loadTilePage(which, url, tile, page) {
     );
 }
 
+
 // partition viewport into `psize` x `psize` regions
 function partitionViewport(psize, projection, dimensions) {
     psize = psize || 16;
@@ -235,12 +246,13 @@ function partitionViewport(psize, projection, dimensions) {
             var min = [x, y + psize],
                 max = [x + psize, y];
             partitions.push(
-                Extent(projection.invert(min), projection.invert(max)));
+                geoExtent(projection.invert(min), projection.invert(max)));
         });
     });
 
     return partitions;
 }
+
 
 // no more than `limit` results per partition.
 function searchLimited(psize, limit, projection, dimensions, rtree) {
@@ -254,10 +266,12 @@ function searchLimited(psize, limit, projection, dimensions, rtree) {
     })));
 }
 
+
 // this function is only used by test cases
 export function getMapillary() {
     return mapillary;
 }
+
 
 export function init() {
 
@@ -293,7 +307,7 @@ export function init() {
 
 
     mapillary.signsSupported = function() {
-        var detected = Detect();
+        var detected = utilDetect();
         return (!(detected.ie || detected.browser.toLowerCase() === 'safari'));
     };
 
@@ -423,7 +437,7 @@ export function init() {
     }
 
 
-    mapillary.event = rebind(mapillary, dispatch, 'on');
+    mapillary.event = utilRebind(mapillary, dispatch, 'on');
 
     return mapillary;
 }

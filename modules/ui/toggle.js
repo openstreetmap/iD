@@ -4,7 +4,7 @@ import * as d3 from 'd3';
 // hide class, which sets display=none, and a d3 transition for opacity.
 // this will cause blinking when called repeatedly, so check that the
 // value actually changes between calls.
-export function Toggle(show, callback) {
+export function uiToggle(show, callback) {
     return function(selection) {
         selection
             .style('opacity', show ? 0 : 1)

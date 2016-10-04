@@ -1,13 +1,15 @@
 import * as d3 from 'd3';
 import _ from 'lodash';
-import { qsString, stringQs } from '../util/index';
+import { utilQsString, utilStringQs } from '../util/index';
 
-export function Hash(context) {
+
+export function behaviorHash(context) {
     var s0 = null, // cached location.hash
         lat = 90 - 1e-8; // allowable latitude range
 
+
     var parser = function(map, s) {
-        var q = stringQs(s);
+        var q = utilStringQs(s);
         var args = (q.map || '').split('/').map(Number);
         if (args.length < 3 || args.some(isNaN)) {
             return true; // replace bogus hash
@@ -17,12 +19,13 @@ export function Hash(context) {
         }
     };
 
+
     var formatter = function(map) {
         var mode = context.mode(),
             center = map.center(),
             zoom = map.zoom(),
             precision = Math.max(0, Math.ceil(Math.log(zoom) / Math.LN2)),
-            q = _.omit(stringQs(location.hash.substring(1)), 'comment'),
+            q = _.omit(utilStringQs(location.hash.substring(1)), 'comment'),
             newParams = {};
 
         if (mode && mode.id === 'browse') {
@@ -40,8 +43,9 @@ export function Hash(context) {
                 '/' + center[0].toFixed(precision) +
                 '/' + center[1].toFixed(precision);
 
-        return '#' + qsString(_.assign(q, newParams), true);
+        return '#' + utilQsString(_.assign(q, newParams), true);
     };
+
 
     function update() {
         if (context.inIntro()) return;
@@ -49,7 +53,9 @@ export function Hash(context) {
         if (s0 !== s1) location.replace(s0 = s1); // don't recenter the map!
     }
 
+
     var throttledUpdate = _.throttle(update, 500);
+
 
     function hashchange() {
         if (location.hash === s0) return; // ignore spurious hashchange events
@@ -57,6 +63,7 @@ export function Hash(context) {
             update(); // replace bogus hash
         }
     }
+
 
     function hash() {
         context.map()
@@ -69,13 +76,14 @@ export function Hash(context) {
             .on('hashchange.hash', hashchange);
 
         if (location.hash) {
-            var q = stringQs(location.hash.substring(1));
+            var q = utilStringQs(location.hash.substring(1));
             if (q.id) context.zoomToEntity(q.id.split(',')[0], !q.map);
             if (q.comment) context.storage('comment', q.comment);
             hashchange();
             if (q.map) hash.hadHash = true;
         }
     }
+
 
     hash.off = function() {
         throttledUpdate.cancel();
@@ -91,6 +99,7 @@ export function Hash(context) {
 
         location.hash = '';
     };
+
 
     return hash;
 }

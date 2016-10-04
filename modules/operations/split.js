@@ -1,19 +1,21 @@
 import _ from 'lodash';
 import { t } from '../util/locale';
-import { Select } from '../modes/index';
-import { Split as SplitAction } from '../actions/index';
+import { modeSelect } from '../modes/index';
+import { actionSplit } from '../actions/index';
 
-export function Split(selectedIDs, context) {
-    var vertices = _.filter(selectedIDs, function vertex(entityId) {
+
+export function operationSplit(selectedIDs, context) {
+    var vertices = _.filter(selectedIDs, function(entityId) {
         return context.geometry(entityId) === 'vertex';
     });
 
     var entityId = vertices[0],
-        action = SplitAction(entityId);
+        action = actionSplit(entityId);
 
     if (selectedIDs.length > 1) {
         action.limitWays(_.without(selectedIDs, entityId));
     }
+
 
     var operation = function() {
         var annotation;
@@ -26,12 +28,14 @@ export function Split(selectedIDs, context) {
         }
 
         var difference = context.perform(action, annotation);
-        context.enter(Select(context, difference.extantIDs()));
+        context.enter(modeSelect(context, difference.extantIDs()));
     };
+
 
     operation.available = function() {
         return vertices.length === 1;
     };
+
 
     operation.disabled = function() {
         var reason;
@@ -40,6 +44,7 @@ export function Split(selectedIDs, context) {
         }
         return action.disabled(context.graph()) || reason;
     };
+
 
     operation.tooltip = function() {
         var disable = operation.disabled();
@@ -55,9 +60,11 @@ export function Split(selectedIDs, context) {
         }
     };
 
+
     operation.id = 'split';
     operation.keys = [t('operations.split.key')];
     operation.title = t('operations.split.title');
+
 
     return operation;
 }

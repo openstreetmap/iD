@@ -1,7 +1,8 @@
 import * as d3 from 'd3';
-import { getDimensions } from './dimensions';
-import { rebind } from './rebind';
-import { Toggle } from '../ui/toggle';
+import { utilGetDimensions } from './dimensions';
+import { utilRebind } from './rebind';
+import { uiToggle } from '../ui/toggle';
+
 
 // Tooltips and svg mask used to highlight certain features
 export function d3curtain() {
@@ -36,13 +37,15 @@ export function d3curtain() {
 
         resize();
 
+
         function resize() {
             surface
-            .attr('width', window.innerWidth)
-            .attr('height', window.innerHeight);
+                .attr('width', window.innerWidth)
+                .attr('height', window.innerHeight);
             curtain.cut(darkness.datum());
         }
     }
+
 
     curtain.reveal = function(box, text, tooltipclass, duration) {
         if (typeof box === 'string') box = d3.select(box).node();
@@ -56,9 +59,9 @@ export function d3curtain() {
             var html = parts[0] ? '<span>' + parts[0] + '</span>' : '';
             if (parts[1]) html += '<span class="bold">' + parts[1] + '</span>';
 
-            var dimensions = getDimensions(tooltip.classed('in', true)
+            var dimensions = utilGetDimensions(tooltip.classed('in', true)
                 .select('.tooltip-inner')
-                    .html(html));
+                .html(html));
 
             var side, pos;
 
@@ -88,7 +91,7 @@ export function d3curtain() {
 
 
             if (duration !== 0 || !tooltip.classed(side)) {
-                tooltip.call(Toggle(true));
+                tooltip.call(uiToggle(true));
             }
 
             tooltip
@@ -96,12 +99,13 @@ export function d3curtain() {
                 .style('left', pos[0] + 'px')
                 .attr('class', 'curtain-tooltip tooltip in ' + side + ' ' + tooltipclass)
                 .select('.tooltip-inner')
-                    .html(html);
+                .html(html);
 
         } else {
-            tooltip.call(Toggle(false));
+            tooltip.call(uiToggle(false));
         }
     };
+
 
     curtain.cut = function(datum, duration) {
         darkness.datum(datum);
@@ -122,10 +126,12 @@ export function d3curtain() {
             });
     };
 
+
     curtain.remove = function() {
         surface.remove();
         tooltip.remove();
     };
 
-    return rebind(curtain, dispatch, 'on');
+
+    return utilRebind(curtain, dispatch, 'on');
 }

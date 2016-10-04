@@ -1,12 +1,13 @@
 import * as d3 from 'd3';
-import { polygonIntersectsPolygon } from '../geo/index';
+import { geoPolygonIntersectsPolygon } from '../geo/index';
 import {
-    imperial as imperialData,
-    driveLeft as driveLeftData,
-    imagery as imageryData
+    dataImperial as imperialData,
+    dataDriveLeft as driveLeftData,
+    dataImagery as imageryData
 } from '../../data/index';
 
-export function Debug(projection, context) {
+
+export function svgDebug(projection, context) {
 
     function multipolygons(imagery) {
         return imagery.map(function(data) {
@@ -82,10 +83,10 @@ export function Debug(projection, context) {
 
 
         var extent = context.map().extent(),
-            availableImagery = showsImagery && multipolygons(imageryData.filter(function(source) {
+            availableImagery = showsImagery && multipolygons(dataImagery.filter(function(source) {
                 if (!source.polygon) return false;
                 return source.polygon.some(function(polygon) {
-                    return polygonIntersectsPolygon(polygon, extent, true);
+                    return geoPolygonIntersectsPolygon(polygon, extent, true);
                 });
             }));
 
@@ -100,10 +101,9 @@ export function Debug(projection, context) {
             .attr('class', 'debug-imagery debug orange');
 
 
-
         var imperial = layer
             .selectAll('path.debug-imperial')
-            .data(showsImperial ? [imperialData] : []);
+            .data(showsImperial ? [dataImperial] : []);
 
         imperial.exit()
             .remove();
@@ -113,10 +113,9 @@ export function Debug(projection, context) {
             .attr('class', 'debug-imperial debug cyan');
 
 
-
         var driveLeft = layer
             .selectAll('path.debug-drive-left')
-            .data(showsDriveLeft ? [driveLeftData] : []);
+            .data(showsDriveLeft ? [dataDriveLeft] : []);
 
         driveLeft.exit()
             .remove();
@@ -145,6 +144,7 @@ export function Debug(projection, context) {
             return this;
         }
     };
+
 
     return drawDebug;
 }

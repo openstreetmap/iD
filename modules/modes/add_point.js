@@ -1,10 +1,11 @@
 import { t } from '../util/locale';
-import { Browse, Select } from './index';
-import { AddEntity } from '../actions/index';
-import { Draw } from '../behavior/index';
-import { Node } from '../core/index';
+import { modeBrowse, modeSelect } from './index';
+import { actionAddEntity } from '../actions/index';
+import { behaviorDraw } from '../behavior/index';
+import { coreNode } from '../core/index';
 
-export function AddPoint(context) {
+
+export function modeAddPoint(context) {
     var mode = {
         id: 'add-point',
         button: 'point',
@@ -13,7 +14,7 @@ export function AddPoint(context) {
         key: '1'
     };
 
-    var behavior = Draw(context)
+    var behavior = behavriorDraw(context)
         .tail(t('modes.add_point.tail'))
         .on('click', add)
         .on('clickWay', addWay)
@@ -21,38 +22,45 @@ export function AddPoint(context) {
         .on('cancel', cancel)
         .on('finish', cancel);
 
+
     function add(loc) {
-        var node = Node({loc: loc});
+        var node = coreNode({ loc: loc });
 
         context.perform(
-            AddEntity(node),
-            t('operations.add.annotation.point'));
+            actionAddEntity(node),
+            t('operations.add.annotation.point')
+        );
 
         context.enter(
-            Select(context, [node.id])
-                .suppressMenu(true)
-                .newFeature(true));
+            modeSelect(context, [node.id]).suppressMenu(true).newFeature(true)
+        );
     }
+
 
     function addWay(loc) {
         add(loc);
     }
 
+
     function addNode(node) {
         add(node.loc);
     }
 
+
     function cancel() {
-        context.enter(Browse(context));
+        context.enter(modeBrowse(context));
     }
+
 
     mode.enter = function() {
         context.install(behavior);
     };
 
+
     mode.exit = function() {
         context.uninstall(behavior);
     };
+
 
     return mode;
 }

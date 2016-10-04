@@ -1,14 +1,16 @@
 import _ from 'lodash';
-import { Way } from '../core/index';
-import { angle as getAngle } from './index';
+import { coreWay } from '../core/index';
+import { geoAngle } from './index';
 
-export function Turn(turn) {
-    if (!(this instanceof Turn))
-        return new Turn(turn);
+
+export function geoTurn(turn) {
+    if (!(this instanceof geoTurn))
+        return new geoTurn(turn);
     _.extend(this, turn);
 }
 
-export function Intersection(graph, vertexId) {
+
+export function geoIntersection(graph, vertexId) {
     var vertex = graph.entity(vertexId),
         parentWays = graph.parentWays(vertex),
         coincident = [],
@@ -42,14 +44,14 @@ export function Intersection(graph, vertexId) {
             var splitIndex, wayA, wayB, indexA, indexB;
             if (isClosingNode) {
                 splitIndex = Math.ceil(way.nodes.length / 2);  // split at midpoint
-                wayA = Way({id: way.id + '-a', tags: way.tags, nodes: way.nodes.slice(0, splitIndex)});
-                wayB = Way({id: way.id + '-b', tags: way.tags, nodes: way.nodes.slice(splitIndex)});
+                wayA = coreWay({id: way.id + '-a', tags: way.tags, nodes: way.nodes.slice(0, splitIndex)});
+                wayB = coreWay({id: way.id + '-b', tags: way.tags, nodes: way.nodes.slice(splitIndex)});
                 indexA = 1;
                 indexB = way.nodes.length - 2;
             } else {
                 splitIndex = _.indexOf(way.nodes, vertex.id, 1);  // split at vertexid
-                wayA = Way({id: way.id + '-a', tags: way.tags, nodes: way.nodes.slice(0, splitIndex + 1)});
-                wayB = Way({id: way.id + '-b', tags: way.tags, nodes: way.nodes.slice(splitIndex)});
+                wayA = coreWay({id: way.id + '-a', tags: way.tags, nodes: way.nodes.slice(0, splitIndex + 1)});
+                wayB = coreWay({id: way.id + '-b', tags: way.tags, nodes: way.nodes.slice(splitIndex)});
                 indexA = splitIndex - 1;
                 indexB = splitIndex + 1;
             }
@@ -72,11 +74,13 @@ export function Intersection(graph, vertexId) {
         graph: graph
     };
 
+
     intersection.adjacentNodeId = function(fromWayId) {
         return _.find(_.keys(highways), function(k) {
             return highways[k].id === fromWayId;
         });
     };
+
 
     intersection.turns = function(fromNodeId) {
         var start = highways[fromNodeId];
@@ -110,8 +114,9 @@ export function Intersection(graph, vertexId) {
                 }
             });
 
-            return Turn(turn);
+            return geoTurn(turn);
         }
+
 
         var from = {
                 node: fromNodeId,
@@ -167,7 +172,7 @@ export function Intersection(graph, vertexId) {
 }
 
 
-export function inferRestriction(graph, from, via, to, projection) {
+export function geoInferRestriction(graph, from, via, to, projection) {
     var fromWay = graph.entity(from.way),
         fromNode = graph.entity(from.node),
         toWay = graph.entity(to.way),
@@ -177,8 +182,8 @@ export function inferRestriction(graph, from, via, to, projection) {
             (fromWay.tags.oneway === '-1' && fromWay.first() === via.node),
         toOneWay = (toWay.tags.oneway === 'yes' && toWay.first() === via.node) ||
             (toWay.tags.oneway === '-1' && toWay.last() === via.node),
-        angle = getAngle(viaNode, fromNode, projection) -
-                getAngle(viaNode, toNode, projection);
+        angle = geoAngle(viaNode, fromNode, projection) -
+                geoAngle(viaNode, toNode, projection);
 
     angle = angle * 180 / Math.PI;
 

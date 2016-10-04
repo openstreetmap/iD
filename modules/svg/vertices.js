@@ -1,8 +1,9 @@
 import * as d3 from 'd3';
-import { Entity } from '../core/index';
-import { PointTransform } from './index';
+import { coreEntity } from '../core/index';
+import { svgPointTransform } from './index';
 
-export function Vertices(projection, context) {
+
+export function svgVertices(projection, context) {
     var radiuses = {
         //       z16-, z17, z18+, tagged
         shadow: [6,    7.5,   7.5,  11.5],
@@ -101,7 +102,7 @@ export function Vertices(projection, context) {
             z = (zoom < 17 ? 0 : zoom < 18 ? 1 : 2);
 
         var groups = selection
-            .data(vertices, Entity.key);
+            .data(vertices, coreEntity.key);
 
         groups.exit()
             .remove();
@@ -132,7 +133,7 @@ export function Vertices(projection, context) {
 
         groups
             .merge(enter)
-            .attr('transform', PointTransform(projection))
+            .attr('transform', svgPointTransform(projection))
             .classed('shared', function(entity) { return graph.isShared(entity); })
             .call(setAttributes);
     }

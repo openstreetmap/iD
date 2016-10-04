@@ -5,7 +5,8 @@ function refresh(selection, node) {
     return prop;
 }
 
-export function getDimensions (selection) {
+
+export function utilGetDimensions(selection) {
     if (!selection || selection.empty()) {
         return [0, 0];
     }
@@ -13,7 +14,8 @@ export function getDimensions (selection) {
     return selection.property('__dimensions__') || refresh(selection, node);
 }
 
-export function setDimensions (selection, dimensions) {
+
+export function utilSetDimensions(selection, dimensions) {
     if (!selection || selection.empty()) {
         return [0, 0];
     }

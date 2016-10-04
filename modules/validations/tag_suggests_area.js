@@ -1,9 +1,11 @@
 import _ from 'lodash';
 import { t } from '../util/locale';
 
+
 // https://github.com/openstreetmap/josm/blob/mirror/src/org/
 // openstreetmap/josm/data/validation/tests/UnclosedWays.java#L80
-export function TagSuggestsArea() {
+export function validationTagSuggestsArea() {
+
     function tagSuggestsArea(tags) {
         if (_.isEmpty(tags)) return false;
 
@@ -16,6 +18,7 @@ export function TagSuggestsArea() {
 
         if (tags.building && tags.building === 'yes') return 'building=yes';
     }
+
 
     var validation = function(changes, graph) {
         var warnings = [];
@@ -32,8 +35,10 @@ export function TagSuggestsArea() {
                 });
             }
         }
+
         return warnings;
     };
+
 
     return validation;
 }

@@ -1,17 +1,18 @@
 import _ from 'lodash';
-import { Node } from '../core/index';
+import { coreNode } from '../core/index';
 import {
-  chooseEdge,
-  angle as getAngle,
-  interp,
-  pathIntersections,
-  pathLength,
-  sphericalDistance
+  geoChooseEdge,
+  geoAngle,
+  geoInterp,
+  geoPathIntersections,
+  geoPathLength,
+  geoSphericalDistance
 } from '../geo/index';
+
 
 // https://github.com/openstreetmap/josm/blob/mirror/src/org/openstreetmap/josm/command/MoveCommand.java
 // https://github.com/openstreetmap/potlatch2/blob/master/net/systemeD/halcyon/connection/actions/MoveNodeAction.as
-export function Move(moveIds, tryDelta, projection, cache) {
+export function actionMove(moveIds, tryDelta, projection, cache) {
     var delta = tryDelta;
 
     function vecAdd(a, b) { return [a[0] + b[0], a[1] + b[1]]; }
@@ -132,7 +133,7 @@ export function Move(moveIds, tryDelta, projection, cache) {
         var key = wayId + '_' + nodeId,
             orig = cache.replacedVertex[key];
         if (!orig) {
-            orig = Node();
+            orig = coreNode();
             cache.replacedVertex[key] = orig;
             cache.startLoc[orig.id] = cache.startLoc[nodeId];
         }
@@ -146,21 +147,21 @@ export function Move(moveIds, tryDelta, projection, cache) {
         }
         orig = orig.move(end);
 
-        var angle = Math.abs(getAngle(orig, prev, projection) -
-                getAngle(orig, next, projection)) * 180 / Math.PI;
+        var angle = Math.abs(geoAngle(orig, prev, projection) -
+                geoAngle(orig, next, projection)) * 180 / Math.PI;
 
         // Don't add orig vertex if it would just make a straight line..
         if (angle > 175 && angle < 185) return graph;
 
         // Don't add orig vertex if another point is already nearby (within 10m)
-        if (sphericalDistance(prev.loc, orig.loc) < 10 ||
-            sphericalDistance(orig.loc, next.loc) < 10) return graph;
+        if (geoSphericalDistance(prev.loc, orig.loc) < 10 ||
+            geoSphericalDistance(orig.loc, next.loc) < 10) return graph;
 
         // moving forward or backward along way?
         var p1 = [prev.loc, orig.loc, moved.loc, next.loc].map(projection),
             p2 = [prev.loc, moved.loc, orig.loc, next.loc].map(projection),
-            d1 = pathLength(p1),
-            d2 = pathLength(p2),
+            d1 = geoPathLength(p1),
+            d2 = geoPathLength(p2),
             insertAt = (d1 < d2) ? movedIndex : nextIndex;
 
         // moving around closed loop?
@@ -169,6 +170,7 @@ export function Move(moveIds, tryDelta, projection, cache) {
         way = way.addNode(orig.id, insertAt);
         return graph.replace(orig).replace(way);
     }
+
 
     // Reorder nodes around intersections that have moved..
     function unZorroIntersection(intersection, graph) {
@@ -187,17 +189,17 @@ export function Move(moveIds, tryDelta, projection, cache) {
         if (way1.isClosed() && way1.first() === vertex.id) nodes1.push(nodes1[0]);
         if (way2.isClosed() && way2.first() === vertex.id) nodes2.push(nodes2[0]);
 
-        var edge1 = !isEP1 && chooseEdge(nodes1, projection(vertex.loc), projection),
-            edge2 = !isEP2 && chooseEdge(nodes2, projection(vertex.loc), projection),
+        var edge1 = !isEP1 && geoChooseEdge(nodes1, projection(vertex.loc), projection),
+            edge2 = !isEP2 && geoChooseEdge(nodes2, projection(vertex.loc), projection),
             loc;
 
         // snap vertex to nearest edge (or some point between them)..
         if (!isEP1 && !isEP2) {
             var epsilon = 1e-4, maxIter = 10;
             for (var i = 0; i < maxIter; i++) {
-                loc = interp(edge1.loc, edge2.loc, 0.5);
-                edge1 = chooseEdge(nodes1, projection(loc), projection);
-                edge2 = chooseEdge(nodes2, projection(loc), projection);
+                loc = geoInterp(edge1.loc, edge2.loc, 0.5);
+                edge1 = geoChooseEdge(nodes1, projection(loc), projection);
+                edge2 = geoChooseEdge(nodes2, projection(loc), projection);
                 if (Math.abs(edge1.distance - edge2.distance) < epsilon) break;
             }
         } else if (!isEP1) {
@@ -232,6 +234,7 @@ export function Move(moveIds, tryDelta, projection, cache) {
         return graph;
     }
 
+
     // check if moving way endpoint can cross an unmoved way, if so limit delta..
     function limitDelta(graph) {
         _.each(cache.intersection, function(obj) {
@@ -248,11 +251,11 @@ export function Move(moveIds, tryDelta, projection, cache) {
                     function(loc) { return vecAdd(projection(loc), delta); }),
                 unmovedNodes = graph.childNodes(graph.entity(obj.unmovedId)),
                 unmovedPath = _.map(_.map(unmovedNodes, 'loc'), projection),
-                hits = pathIntersections(movedPath, unmovedPath);
+                hits = geoPathIntersections(movedPath, unmovedPath);
 
             for (var i = 0; i < hits.length; i++) {
                 if (_.isEqual(hits[i], end)) continue;
-                var edge = chooseEdge(unmovedNodes, end, projection);
+                var edge = geoChooseEdge(unmovedNodes, end, projection);
                 delta = vecSub(projection(edge.loc), start);
             }
         });
@@ -282,6 +285,7 @@ export function Move(moveIds, tryDelta, projection, cache) {
         return graph;
     };
 
+
     action.disabled = function(graph) {
         function incompleteRelation(id) {
             var entity = graph.entity(id);
@@ -292,9 +296,11 @@ export function Move(moveIds, tryDelta, projection, cache) {
             return 'incomplete_relation';
     };
 
+
     action.delta = function() {
         return delta;
     };
+
 
     return action;
 }

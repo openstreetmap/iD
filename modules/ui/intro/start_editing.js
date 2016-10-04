@@ -1,11 +1,11 @@
 import * as d3 from 'd3';
-import { rebind } from '../../util/rebind';
 import { t } from '../../util/locale';
 import { icon } from './helper';
-import { modal } from '../modal';
+import { uiModal } from '../modal';
+import { utilRebind } from '../../util/rebind';
 
 
-export function startEditing(context, reveal) {
+export function uiIntroStartEditing(context, reveal) {
     var dispatch = d3.dispatch('done', 'startEditing'),
         modalSelection,
         timeouts = [];
@@ -33,7 +33,7 @@ export function startEditing(context, reveal) {
         }, 10000);
 
         timeout(function() {
-            modalSelection = modal(context.container());
+            modalSelection = uiModal(context.container());
 
             modalSelection.select('.modal')
                 .attr('class', 'modal-splash modal col6');
@@ -67,5 +67,5 @@ export function startEditing(context, reveal) {
     };
 
 
-    return rebind(step, dispatch, 'on');
+    return utilRebind(step, dispatch, 'on');
 }

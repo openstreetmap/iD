@@ -1,4 +1,4 @@
-export function Osm() {
+export function svgOsm() {
     return function drawOsm(selection) {
         var layers = selection.selectAll('.layer-osm')
             .data(['areas', 'lines', 'hit', 'halo', 'label']);

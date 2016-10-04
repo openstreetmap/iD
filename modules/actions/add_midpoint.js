@@ -1,7 +1,8 @@
 import _ from 'lodash';
-import { edgeEqual } from '../geo/index';
+import { geoEdgeEqual } from '../geo/index';
 
-export function AddMidpoint(midpoint, node) {
+
+export function actionAddMidpoint(midpoint, node) {
     return function(graph) {
         graph = graph.replace(node.move(midpoint.loc));
 
@@ -11,7 +12,7 @@ export function AddMidpoint(midpoint, node) {
 
         parents.forEach(function(way) {
             for (var i = 0; i < way.nodes.length - 1; i++) {
-                if (edgeEqual([way.nodes[i], way.nodes[i + 1]], midpoint.edge)) {
+                if (geoEdgeEqual([way.nodes[i], way.nodes[i + 1]], midpoint.edge)) {
                     graph = graph.replace(graph.entity(way.id).addNode(node.id, i + 1));
 
                     // Add only one midpoint on doubled-back segments,

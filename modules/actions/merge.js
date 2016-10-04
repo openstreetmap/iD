@@ -1,11 +1,14 @@
 import _ from 'lodash';
 
-export function Merge(ids) {
+
+export function actionMerge(ids) {
+
     function groupEntitiesByGeometry(graph) {
         var entities = ids.map(function(id) { return graph.entity(id); });
         return _.extend({point: [], area: [], line: [], relation: []},
             _.groupBy(entities, function(entity) { return entity.geometry(graph); }));
     }
+
 
     var action = function(graph) {
         var geometries = groupEntitiesByGeometry(graph),
@@ -27,6 +30,7 @@ export function Merge(ids) {
         return graph;
     };
 
+
     action.disabled = function(graph) {
         var geometries = groupEntitiesByGeometry(graph);
         if (geometries.point.length === 0 ||
@@ -34,6 +38,7 @@ export function Merge(ids) {
             geometries.relation.length !== 0)
             return 'not_eligible';
     };
+
 
     return action;
 }

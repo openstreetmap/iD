@@ -1,4 +1,4 @@
-export function Noop() {
+export function actionNoop() {
     return function(graph) {
         return graph;
     };

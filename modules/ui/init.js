@@ -1,191 +1,221 @@
 import * as d3 from 'd3';
 import { d3keybinding } from '../lib/d3.keybinding.js';
 import { t } from '../util/locale';
-import { setDimensions } from '../util/dimensions';
 import { tooltip } from '../util/tooltip';
-import { Defs, Icon } from '../svg/index';
-import { Account } from './account';
-import { Attribution } from './attribution';
-import { Background } from './background';
-import { Browse } from '../modes/index';
-import { Contributors } from './contributors';
-import { Detect } from '../util/detect';
-import { FeatureInfo } from './feature_info';
-import { FullScreen } from './full_screen';
-import { Geolocate } from './geolocate';
-import { Hash } from '../behavior/index';
-import { Help } from './help';
-import { Info } from './info';
-import { Loading } from './loading';
-import { MapData } from './map_data';
-import { MapInMap } from './map_in_map';
-import { Modes } from './modes';
-import { Restore } from './restore';
-import { Save } from './save';
-import { Scale } from './scale';
-import { Sidebar } from './sidebar';
-import { Spinner } from './spinner';
-import { Splash } from './splash';
-import { Status } from './status';
-import { UndoRedo } from './undo_redo';
-import { Zoom } from './zoom';
-import { cmd } from './cmd';
+import { utilDetect } from '../util/detect';
+import { utilSetDimensions } from '../util/dimensions';
+
+import { svgDefs, svgIcon } from '../svg/index';
+import { modeBrowse } from '../modes/index';
+import { behaviorHash } from '../behavior/index';
+
+import { uiAccount } from './account';
+import { uiAttribution } from './attribution';
+import { uiBackground } from './background';
+import { uiContributors } from './contributors';
+import { uiFeatureInfo } from './feature_info';
+import { uiFullScreen } from './full_screen';
+import { uiGeolocate } from './geolocate';
+import { uiHelp } from './help';
+import { uiInfo } from './info';
+import { uiLoading } from './loading';
+import { uiMapData } from './map_data';
+import { uiMapInMap } from './map_in_map';
+import { uiModes } from './modes';
+import { uiRestore } from './restore';
+import { uiSave } from './save';
+import { uiScale } from './scale';
+import { uiSidebar } from './sidebar';
+import { uiSpinner } from './spinner';
+import { uiSplash } from './splash';
+import { uiStatus } from './status';
+import { uiUndoRedo } from './undo_redo';
+import { uiZoom } from './zoom';
+import { uiCmd } from './cmd';
 
 
-export function init(context) {
+export function uiInit(context) {
+
     function render(container) {
         var map = context.map();
 
-        if (Detect().opera) container.classed('opera', true);
+        if (utilDetect().opera) {
+            container.classed('opera', true);
+        }
 
-        var hash = Hash(context);
+        var hash = behaviorHash(context);
         hash();
 
         if (!hash.hadHash) {
             map.centerZoom([0, 0], 2);
         }
 
-        container.append('svg')
+        container
+            .append('svg')
             .attr('id', 'defs')
-            .call(Defs(context));
+            .call(svgDefs(context));
 
-        container.append('div')
+        container
+            .append('div')
             .attr('id', 'sidebar')
             .attr('class', 'col4')
             .call(ui.sidebar);
 
-        var content = container.append('div')
+        var content = container
+            .append('div')
             .attr('id', 'content');
 
-        var bar = content.append('div')
+        var bar = content
+            .append('div')
             .attr('id', 'bar')
             .attr('class', 'fillD');
 
-        content.append('div')
+        content
+            .append('div')
             .attr('id', 'map')
             .call(map);
 
         content
-            .call(MapInMap(context));
+            .call(uiMapInMap(context));
 
-        content.append('div')
-            .call(Info(context));
+        content
+            .append('div')
+            .call(uiInfo(context));
 
-        bar.append('div')
+        bar
+            .append('div')
             .attr('class', 'spacer col4');
 
         var limiter = bar.append('div')
             .attr('class', 'limiter');
 
-        limiter.append('div')
+        limiter
+            .append('div')
             .attr('class', 'button-wrap joined col3')
-            .call(Modes(context), limiter);
+            .call(uiModes(context), limiter);
 
-        limiter.append('div')
+        limiter
+            .append('div')
             .attr('class', 'button-wrap joined col1')
-            .call(UndoRedo(context));
+            .call(uiUndoRedo(context));
 
-        limiter.append('div')
+        limiter
+            .append('div')
             .attr('class', 'button-wrap col1')
-            .call(Save(context));
+            .call(uiSave(context));
 
-        bar.append('div')
+        bar
+            .append('div')
             .attr('class', 'full-screen')
-            .call(FullScreen(context));
+            .call(uiFullScreen(context));
 
-        bar.append('div')
+        bar
+            .append('div')
             .attr('class', 'spinner')
-            .call(Spinner(context));
+            .call(uiSpinner(context));
 
-        var controls = bar.append('div')
+        var controls = bar
+            .append('div')
             .attr('class', 'map-controls');
 
-        controls.append('div')
+        controls
+            .append('div')
             .attr('class', 'map-control zoombuttons')
-            .call(Zoom(context));
+            .call(uiZoom(context));
 
-        controls.append('div')
+        controls
+            .append('div')
             .attr('class', 'map-control geolocate-control')
-            .call(Geolocate(context));
+            .call(uiGeolocate(context));
 
-        controls.append('div')
+        controls
+            .append('div')
             .attr('class', 'map-control background-control')
-            .call(Background(context));
+            .call(uiBackground(context));
 
-        controls.append('div')
+        controls
+            .append('div')
             .attr('class', 'map-control map-data-control')
-            .call(MapData(context));
+            .call(uiMapData(context));
 
-        controls.append('div')
+        controls
+            .append('div')
             .attr('class', 'map-control help-control')
-            .call(Help(context));
+            .call(uiHelp(context));
 
-        var about = content.append('div')
+        var about = content
+            .append('div')
             .attr('id', 'about');
 
-        about.append('div')
+        about
+            .append('div')
             .attr('id', 'attrib')
-            .call(Attribution(context));
+            .call(uiAttribution(context));
 
-        var footer = about.append('div')
+        var footer = about
+            .append('div')
             .attr('id', 'footer')
             .attr('class', 'fillD');
 
-        footer.append('div')
+        footer
+            .append('div')
             .attr('class', 'api-status')
-            .call(Status(context));
+            .call(uiStatus(context));
 
-        footer.append('div')
+        footer
+            .append('div')
             .attr('id', 'scale-block')
-            .call(Scale(context));
+            .call(uiScale(context));
 
-        var aboutList = footer.append('div')
+        var aboutList = footer
+            .append('div')
             .attr('id', 'info-block')
             .append('ul')
             .attr('id', 'about-list');
 
         if (!context.embed()) {
-            aboutList.call(Account(context));
+            aboutList.call(uiAccount(context));
         }
 
-        aboutList.append('li')
+        aboutList
+            .append('li')
             .append('a')
             .attr('target', '_blank')
             .attr('tabindex', -1)
             .attr('href', 'https://github.com/openstreetmap/iD')
             .text(context.version);
 
-        var issueLinks = aboutList.append('li');
+        var issueLinks = aboutList
+            .append('li');
 
-        issueLinks.append('a')
+        issueLinks
+            .append('a')
             .attr('target', '_blank')
             .attr('tabindex', -1)
             .attr('href', 'https://github.com/openstreetmap/iD/issues')
-            .call(Icon('#icon-bug', 'light'))
-            .call(tooltip()
-                .title(t('report_a_bug'))
-                .placement('top')
-            );
+            .call(svgIcon('#icon-bug', 'light'))
+            .call(tooltip().title(t('report_a_bug')).placement('top'));
 
-        issueLinks.append('a')
+        issueLinks
+            .append('a')
             .attr('target', '_blank')
             .attr('tabindex', -1)
             .attr('href', 'https://github.com/openstreetmap/iD/blob/master/CONTRIBUTING.md#translating')
-            .call(Icon('#icon-translate', 'light'))
-            .call(tooltip()
-                .title(t('help_translate'))
-                .placement('top')
-            );
+            .call(svgIcon('#icon-translate', 'light'))
+            .call(tooltip().title(t('help_translate')).placement('top'));
 
-        aboutList.append('li')
+        aboutList
+            .append('li')
             .attr('class', 'feature-warning')
             .attr('tabindex', -1)
-            .call(FeatureInfo(context));
+            .call(uiFeatureInfo(context));
 
-        aboutList.append('li')
+        aboutList
+            .append('li')
             .attr('class', 'user-list')
             .attr('tabindex', -1)
-            .call(Contributors(context));
+            .call(uiContributors(context));
+
 
         window.onbeforeunload = function() {
             return context.save();
@@ -198,11 +228,13 @@ export function init(context) {
         var mapDimensions = map.dimensions();
 
         function onResize() {
-            mapDimensions = setDimensions(content, null);
+            mapDimensions = utilSetDimensions(content, null);
             map.dimensions(mapDimensions);
         }
 
-        d3.select(window).on('resize.editor', onResize);
+        d3.select(window)
+            .on('resize.editor', onResize);
+
         onResize();
 
         function pan(d) {
@@ -227,21 +259,21 @@ export function init(context) {
             .on('⇧↑', pan([0, mapDimensions[1]]))
             .on('⇧→', pan([-mapDimensions[0], 0]))
             .on('⇧↓', pan([0, -mapDimensions[1]]))
-            .on(cmd('⌘←'), pan([mapDimensions[0], 0]))
-            .on(cmd('⌘↑'), pan([0, mapDimensions[1]]))
-            .on(cmd('⌘→'), pan([-mapDimensions[0], 0]))
-            .on(cmd('⌘↓'), pan([0, -mapDimensions[1]]));
+            .on(uiCmd('⌘←'), pan([mapDimensions[0], 0]))
+            .on(uiCmd('⌘↑'), pan([0, mapDimensions[1]]))
+            .on(uiCmd('⌘→'), pan([-mapDimensions[0], 0]))
+            .on(uiCmd('⌘↓'), pan([0, -mapDimensions[1]]));
 
         d3.select(document)
             .call(keybinding);
 
-        context.enter(Browse(context));
+        context.enter(modeBrowse(context));
 
         context.container()
-            .call(Splash(context))
-            .call(Restore(context));
+            .call(uiSplash(context))
+            .call(uiRestore(context));
 
-        var authenticating = Loading(context)
+        var authenticating = uiLoading(context)
             .message(t('loading_auth'));
 
         context.connection()
@@ -254,6 +286,7 @@ export function init(context) {
             });
     }
 
+
     function ui(node) {
         var container = d3.select(node);
         context.container(container);
@@ -262,7 +295,7 @@ export function init(context) {
         });
     }
 
-    ui.sidebar = Sidebar(context);
+    ui.sidebar = uiSidebar(context);
 
     return ui;
 }

@@ -1,10 +1,11 @@
 import * as d3 from 'd3';
 import { d3keybinding } from '../lib/d3.keybinding.js';
-import { Debug, Gpx } from '../svg/index';
-import { RawMercator } from '../geo/index';
-import { TileLayer } from '../renderer/index';
-import { setTransform } from '../util/index';
-import { getDimensions } from '../util/dimensions';
+import { svgDebug, svgGpx } from '../svg/index';
+import { geoRawMercator } from '../geo/index';
+import { rendererTileLayer } from '../renderer/index';
+import { utilSetTransform } from '../util/index';
+import { utilGetDimensions } from '../util/dimensions';
+
 
 var TAU = 2 * Math.PI;
 function ztok(z) { return 256 * Math.pow(2, z) / TAU; }
@@ -13,15 +14,16 @@ function vecSub(a, b) { return [ a[0] - b[0], a[1] - b[1] ]; }
 function vecScale(a, b) { return [ a[0] * b, a[1] * b ]; }
 
 
-export function MapInMap(context) {
+export function uiMapInMap(context) {
     var key = '/';
 
+
     function map_in_map(selection) {
-        var backgroundLayer = TileLayer(context),
+        var backgroundLayer = rendererTileLayer(context),
             overlayLayers = {},
-            projection = RawMercator(),
-            gpxLayer = Gpx(projection, context).showLabels(false),
-            debugLayer = Debug(projection, context),
+            projection = geoRawMercator(),
+            gpxLayer = svgGpx(projection, context).showLabels(false),
+            debugLayer = svgDebug(projection, context),
             zoom = d3.zoom()
                 .scaleExtent([ztok(0.5), ztok(24)])
                 .on('start', zoomStarted)
@@ -69,7 +71,7 @@ export function MapInMap(context) {
                 tX, tY, scale;
 
             if (gesture === 'zoom') {
-                var dMini = getDimensions(wrap),
+                var dMini = utilGetDimensions(wrap),
                     cMini = vecScale(dMini, 0.5);
                 scale = k / tMini.k;
                 tX = (cMini[0] / scale - cMini[0]) * scale;
@@ -81,8 +83,8 @@ export function MapInMap(context) {
                 tY = y - tMini.y;
             }
 
-            setTransform(tiles, tX, tY, scale);
-            setTransform(viewport, 0, 0, scale);
+            utilSetTransform(tiles, tX, tY, scale);
+            utilSetTransform(viewport, 0, 0, scale);
             isTransformed = true;
             tCurr = d3.zoomIdentity.translate(x, y).scale(k);
 
@@ -101,7 +103,7 @@ export function MapInMap(context) {
 
             updateProjection();
             gesture = null;
-            var dMini = getDimensions(wrap),
+            var dMini = utilGetDimensions(wrap),
                 cMini = vecScale(dMini, 0.5);
             context.map().center(projection.invert(cMini));   // recenter main map..
         }
@@ -109,7 +111,7 @@ export function MapInMap(context) {
 
         function updateProjection() {
             var loc = context.map().center(),
-                dMini = getDimensions(wrap),
+                dMini = utilGetDimensions(wrap),
                 cMini = vecScale(dMini, 0.5),
                 tMain = context.projection.transform(),
                 zMain = ktoz(tMain.k),
@@ -132,8 +134,8 @@ export function MapInMap(context) {
             tCurr = projection.transform();
 
             if (isTransformed) {
-                setTransform(tiles, 0, 0);
-                setTransform(viewport, 0, 0);
+                utilSetTransform(tiles, 0, 0);
+                utilSetTransform(viewport, 0, 0);
                 isTransformed = false;
             }
 
@@ -152,7 +154,7 @@ export function MapInMap(context) {
 
             updateProjection();
 
-            var dMini = getDimensions(wrap),
+            var dMini = utilGetDimensions(wrap),
                 zMini = ktoz(projection.scale());
 
             // setup tile container
@@ -300,7 +302,7 @@ export function MapInMap(context) {
         }
 
 
-        MapInMap.toggle = toggle;
+        uiMapInMap.toggle = toggle;
 
         wrap = selection.selectAll('.map-in-map')
             .data([0]);

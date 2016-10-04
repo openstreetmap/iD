@@ -1,11 +1,11 @@
 import * as d3 from 'd3';
-import { bindOnce } from '../../util/bind_once';
-import { rebind } from '../../util/rebind';
 import { t } from '../../util/locale';
+import { utilBindOnce } from '../../util/bind_once';
+import { utilRebind } from '../../util/rebind';
 import { icon, pad } from './helper';
 
 
-export function point(context, reveal) {
+export function uiIntroPoint(context, reveal) {
     var dispatch = d3.dispatch('done'),
         timeouts = [];
 
@@ -67,7 +67,7 @@ export function point(context, reveal) {
             var first = d3.select('.preset-list-item:first-child');
             if (first.classed('preset-amenity-cafe')) {
                 reveal(first.select('.preset-list-button').node(), t('intro.points.choose'));
-                bindOnce(context.history(), 'change.intro', selectedPreset);
+                utilBindOnce(context.history(), 'change.intro', selectedPreset);
                 d3.select('.preset-search-input')
                     .on('keydown.intro', eventCancel, true)
                     .on('keyup.intro', null);
@@ -171,5 +171,5 @@ export function point(context, reveal) {
             .on('keydown.intro', null);
     };
 
-    return rebind(step, dispatch, 'on');
+    return utilRebind(step, dispatch, 'on');
 }

@@ -2,8 +2,9 @@ import * as d3 from 'd3';
 import _ from 'lodash';
 
 
-export function Attribution(context) {
+export function uiAttribution(context) {
     var selection;
+
 
     function attribution(data, klass) {
         var div = selection.selectAll('.' + klass)

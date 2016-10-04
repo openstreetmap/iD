@@ -1,14 +1,14 @@
 import * as d3 from 'd3';
-import { rebind } from '../util/rebind';
-import { getSetValue } from '../util/get_set_value';
 import { d3combobox } from '../lib/d3.combobox.js';
 import { t } from '../util/locale';
-import { Disclosure } from './disclosure';
-import { Icon } from '../svg/index';
-import { TagReference } from './tag_reference';
+import { svgIcon } from '../svg/index';
+import { uiDisclosure } from './disclosure';
+import { uiTagReference } from './tag_reference';
+import { utilGetSetValue } from '../util/get_set_value';
+import { utilRebind } from '../util/rebind';
 
 
-export function RawTagEditor(context) {
+export function uiRawTagEditor(context) {
     var dispatch = d3.dispatch('change'),
         showBlank = false,
         state,
@@ -20,7 +20,7 @@ export function RawTagEditor(context) {
     function rawTagEditor(selection) {
         var count = Object.keys(tags).filter(function(d) { return d; }).length;
 
-        selection.call(Disclosure()
+        selection.call(uiDisclosure()
             .title(t('inspector.all_tags') + ' (' + count + ')')
             .expanded(context.storage('raw_tag_editor.expanded') === 'true' || preset.isFallback())
             .on('toggled', toggled)
@@ -58,7 +58,7 @@ export function RawTagEditor(context) {
             .append('button')
             .attr('class', 'add-tag')
             .on('click', addTag)
-            .call(Icon('#icon-plus', 'light'));
+            .call(svgIcon('#icon-plus', 'light'));
 
 
         var items = list.selectAll('.tag-row')
@@ -99,7 +99,7 @@ export function RawTagEditor(context) {
             .append('button')
             .attr('tabindex', -1)
             .attr('class', 'remove minor')
-            .call(Icon('#operation-delete'));
+            .call(svgIcon('#operation-delete'));
 
 
         // Update
@@ -126,9 +126,9 @@ export function RawTagEditor(context) {
                     reference;
 
                 if (isRelation && tag.key === 'type') {
-                    reference = TagReference({rtype: tag.value}, context);
+                    reference = uiTagReference({ rtype: tag.value }, context);
                 } else {
-                    reference = TagReference({key: tag.key, value: tag.value}, context);
+                    reference = uiTagReference({ key: tag.key, value: tag.value }, context);
                 }
 
                 if (state === 'hover') {
@@ -142,11 +142,11 @@ export function RawTagEditor(context) {
 
         items.selectAll('input.key')
             .attr('title', function(d) { return d.key; })
-            .call(getSetValue, function(d) { return d.key; });
+            .call(utilGetSetValue, function(d) { return d.key; });
 
         items.selectAll('input.value')
             .attr('title', function(d) { return d.value; })
-            .call(getSetValue, function(d) { return d.value; });
+            .call(utilGetSetValue, function(d) { return d.value; });
 
         items.selectAll('button.remove')
             .on('click', removeTag);
@@ -190,7 +190,7 @@ export function RawTagEditor(context) {
                 .fetcher(function(value, callback) {
                     context.taginfo().values({
                         debounce: true,
-                        key: getSetValue(key),
+                        key: utilGetSetValue(key),
                         geometry: context.geometry(id),
                         query: value
                     }, function(err, data) {
@@ -288,5 +288,5 @@ export function RawTagEditor(context) {
     };
 
 
-    return rebind(rawTagEditor, dispatch, 'on');
+    return utilRebind(rawTagEditor, dispatch, 'on');
 }

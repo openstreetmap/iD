@@ -1,15 +1,18 @@
 import * as d3 from 'd3';
 import _ from 'lodash';
-import { Browse, Select as SelectMode } from '../modes/index';
-import { Entity } from '../core/index';
+import { modeBrowse, modeSelect } from '../modes/index';
+import { coreEntity } from '../core/index';
 
-export function Select(context) {
+
+export function behaviorSelect(context) {
+
     function keydown() {
         if (d3.event && d3.event.shiftKey) {
             context.surface()
                 .classed('behavior-multiselect', true);
         }
     }
+
 
     function keyup() {
         if (!d3.event || !d3.event.shiftKey) {
@@ -18,32 +21,32 @@ export function Select(context) {
         }
     }
 
+
     function click() {
         var datum = d3.event.target.__data__,
             lasso = d3.select('#surface .lasso').node(),
             mode = context.mode();
 
-        if (!(datum instanceof Entity)) {
+        if (!(datum instanceof coreEntity)) {
             if (!d3.event.shiftKey && !lasso && mode.id !== 'browse')
-                context.enter(Browse(context));
+                context.enter(modeBrowse(context));
 
         } else if (!d3.event.shiftKey && !lasso) {
             // Avoid re-entering Select mode with same entity.
             if (context.selectedIDs().length !== 1 || context.selectedIDs()[0] !== datum.id) {
-                context.enter(SelectMode(context, [datum.id]));
+                context.enter(modeSelect(context, [datum.id]));
             } else {
                 mode.suppressMenu(false).reselect();
             }
         } else if (context.selectedIDs().indexOf(datum.id) >= 0) {
             var selectedIDs = _.without(context.selectedIDs(), datum.id);
-            context.enter(selectedIDs.length ?
-                SelectMode(context, selectedIDs) :
-                Browse(context));
+            context.enter(selectedIDs.length ? modeSelect(context, selectedIDs) : modeBrowse(context));
 
         } else {
-            context.enter(SelectMode(context, context.selectedIDs().concat([datum.id])));
+            context.enter(modeSelect(context, context.selectedIDs().concat([datum.id])));
         }
     }
+
 
     var behavior = function(selection) {
         d3.select(window)
@@ -55,6 +58,7 @@ export function Select(context) {
         keydown();
     };
 
+
     behavior.off = function(selection) {
         d3.select(window)
             .on('keydown.select', null)
@@ -64,6 +68,7 @@ export function Select(context) {
 
         keyup();
     };
+
 
     return behavior;
 }

@@ -1,7 +1,8 @@
 import * as d3 from 'd3';
-import { pavedTags } from '../core/tags';
+import { corePavedTags } from '../core/tags';
 
-export function TagClasses() {
+
+export function svgTagClasses() {
     var primaries = [
             'building', 'highway', 'railway', 'waterway', 'aeroway',
             'motorway', 'boundary', 'power', 'amenity', 'natural', 'landuse',
@@ -88,8 +89,8 @@ export function TagClasses() {
                 var paved = (t.highway !== 'track');
                 for (k in t) {
                     v = t[k];
-                    if (k in pavedTags) {
-                        paved = !!pavedTags[k][v];
+                    if (k in corePavedTags) {
+                        paved = !!corePavedTags[k][v];
                         break;
                     }
                 }
@@ -105,6 +106,7 @@ export function TagClasses() {
             }
         });
     };
+
 
     tagClasses.tags = function(_) {
         if (!arguments.length) return tags;

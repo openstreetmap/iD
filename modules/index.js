@@ -1,5 +1,6 @@
 import * as actions from './actions/index';
 import * as behavior from './behavior/index';
+import * as data from '../data/index.js';
 import * as geo from './geo/index';
 import * as modes from './modes/index';
 import * as operations from './operations/index';
@@ -11,47 +12,46 @@ import * as util from './util/index';
 import * as lib from './lib/index';
 import * as validations from './validations/index';
 
-// detect
-export { Detect } from './util/detect';
+export { coreConnection as Connection } from './core/connection';
+export { coreContext as Context, setAreaKeys } from './core/context';
+export { coreDifference as Difference } from './core/difference';
+export { coreEntity as Entity } from './core/entity';
+export { coreGraph as Graph } from './core/graph';
+export { coreHistory as History } from './core/history';
+export { coreNode as Node } from './core/node';
+export { coreRelation as Relation } from './core/relation';
+export { coreTree as Tree } from './core/tree';
+export { coreWay as Way } from './core/way';
+export {
+    coreOneWayTags as oneWayTags,
+    corePavedTags as pavedTags,
+    coreInterestingTag as interestingTag
+} from './core/tags';
 
-// core
-export { Connection } from './core/connection';
-export { Context, setAreaKeys } from './core/context';
-export { Difference } from './core/difference';
-export { Entity } from './core/entity';
-export { Graph } from './core/graph';
-export { History } from './core/history';
-export { Node } from './core/node';
-export { Relation } from './core/relation';
-export { oneWayTags, pavedTags, interestingTag } from './core/tags';
-export { Tree } from './core/tree';
-export { Way } from './core/way';
+export { rendererBackgroundSource as BackgroundSource } from './renderer/background_source';
+export { rendererBackground as Background } from './renderer/background';
+export { rendererFeatures as Features } from './renderer/features';
+export { rendererMap as Map } from './renderer/map';
+export { rendererTileLayer as TileLayer } from './renderer/tile_layer';
 
-// renderer
-export { BackgroundSource } from './renderer/background_source';
-export { Background } from './renderer/background';
-export { Features } from './renderer/features';
-export { Map } from './renderer/map';
-export { TileLayer } from './renderer/tile_layer';
-
-import * as data from '../data/index.js';
+export { utilDetect as Detect } from './util/detect';
 
 export var debug = false;
 import * as d3 from 'd3';
 
 export {
-  d3,
-  data,
-  actions,
-  geo,
-  behavior,
-  modes,
-  operations,
-  presets,
-  services,
-  svg,
-  util,
-  lib,
-  ui,
-  validations
+    d3,
+    data,
+    actions,
+    geo,
+    behavior,
+    modes,
+    operations,
+    presets,
+    services,
+    svg,
+    util,
+    lib,
+    ui,
+    validations
 };

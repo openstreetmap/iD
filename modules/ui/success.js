@@ -1,46 +1,55 @@
 import * as d3 from 'd3';
-import { rebind } from '../util/rebind';
 import { t } from '../util/locale';
 import { tooltip } from '../util/tooltip';
-import { Icon } from '../svg/index';
+import { svgIcon } from '../svg/index';
+import { utilRebind } from '../util/rebind';
 
-export function Success(context) {
+
+export function uiSuccess(context) {
     var dispatch = d3.dispatch('cancel'),
         changeset;
+
 
     function success(selection) {
         var message = (changeset.comment || t('success.edited_osm')).substring(0, 130) +
             ' ' + context.connection().changesetURL(changeset.id);
 
-        var header = selection.append('div')
+        var header = selection
+            .append('div')
             .attr('class', 'header fillL');
 
-        header.append('button')
+        header
+            .append('button')
             .attr('class', 'fr')
             .on('click', function() { dispatch.call('cancel'); })
-            .call(Icon('#icon-close'));
+            .call(svgIcon('#icon-close'));
 
-        header.append('h3')
+        header
+            .append('h3')
             .text(t('success.just_edited'));
 
-        var body = selection.append('div')
+        var body = selection
+            .append('div')
             .attr('class', 'body save-success fillL');
 
-        body.append('p')
+        body
+            .append('p')
             .html(t('success.help_html'));
 
-        body.append('a')
+        body
+            .append('a')
             .attr('class', 'details')
             .attr('target', '_blank')
             .attr('tabindex', -1)
-            .call(Icon('#icon-out-link', 'inline'))
+            .call(svgIcon('#icon-out-link', 'inline'))
             .attr('href', t('success.help_link_url'))
             .append('span')
             .text(t('success.help_link_text'));
 
         var changesetURL = context.connection().changesetURL(changeset.id);
 
-        body.append('a')
+        body
+            .append('a')
             .attr('class', 'button col12 osm')
             .attr('target', '_blank')
             .attr('href', changesetURL)
@@ -62,8 +71,9 @@ export function Success(context) {
             .call(tooltip()
                 .title(function(d) { return t('success.' + d.key); })
                 .placement('bottom'))
-            .each(function(d) { d3.select(this).call(Icon('#logo-' + d.key, 'social')); });
+            .each(function(d) { d3.select(this).call(svgIcon('#logo-' + d.key, 'social')); });
     }
+
 
     success.changeset = function(_) {
         if (!arguments.length) return changeset;
@@ -71,5 +81,6 @@ export function Success(context) {
         return success;
     };
 
-    return rebind(success, dispatch, 'on');
+
+    return utilRebind(success, dispatch, 'on');
 }

@@ -1,12 +1,12 @@
 import * as d3 from 'd3';
-import { functor } from './index';
+import { utilFunctor } from './index';
 
 export function tooltip() {
   var tooltip = function(selection) {
       selection.each(setup);
     },
-    animation = functor(false),
-    html = functor(false),
+    animation = utilFunctor(false),
+    html = utilFunctor(false),
     title = function() {
       var title = this.getAttribute('data-original-title');
       if (title) {
@@ -20,11 +20,11 @@ export function tooltip() {
     },
     over = 'mouseenter.tooltip',
     out = 'mouseleave.tooltip',
-    placement = functor('top');
+    placement = utilFunctor('top');
 
   tooltip.title = function(_) {
     if (arguments.length) {
-      title = functor(_);
+      title = utilFunctor(_);
       return tooltip;
     } else {
       return title;
@@ -33,7 +33,7 @@ export function tooltip() {
 
   tooltip.html = function(_) {
     if (arguments.length) {
-      html = functor(_);
+      html = utilFunctor(_);
       return tooltip;
     } else {
       return html;
@@ -42,7 +42,7 @@ export function tooltip() {
 
   tooltip.placement = function(_) {
     if (arguments.length) {
-      placement = functor(_);
+      placement = utilFunctor(_);
       return tooltip;
     } else {
       return placement;

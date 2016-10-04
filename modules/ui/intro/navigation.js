@@ -1,11 +1,11 @@
 import * as d3 from 'd3';
 import _ from 'lodash';
-import { rebind } from '../../util/rebind';
 import { t } from '../../util/locale';
+import { utilRebind } from '../../util/rebind';
 import { icon, pointBox } from './helper';
 
 
-export function navigation(context, reveal) {
+export function uiIntroNavigation(context, reveal) {
     var dispatch = d3.dispatch('done'),
         timeouts = [];
 
@@ -129,5 +129,5 @@ export function navigation(context, reveal) {
     };
 
 
-    return rebind(step, dispatch, 'on');
+    return utilRebind(step, dispatch, 'on');
 }

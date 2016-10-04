@@ -1,10 +1,11 @@
 import * as d3 from 'd3';
 import _ from 'lodash';
 import { t } from '../util/locale';
-import { Detect } from '../util/detect';
-import { Icon } from '../svg/index';
+import { utilDetect } from '../util/detect';
+import { svgIcon } from '../svg/index';
 
-export function TagReference(tag, context) {
+
+export function uiTagReference(tag, context) {
     var tagReference = {},
         button,
         body,
@@ -13,7 +14,7 @@ export function TagReference(tag, context) {
 
 
     function findLocal(data) {
-        var locale = Detect().locale.toLowerCase(),
+        var locale = utilDetect().locale.toLowerCase(),
             localized;
 
         localized = _.find(data, function(d) {
@@ -79,7 +80,7 @@ export function TagReference(tag, context) {
                 .attr('target', '_blank')
                 .attr('tabindex', -1)
                 .attr('href', 'https://wiki.openstreetmap.org/wiki/' + docs.title)
-                .call(Icon('#icon-out-link', 'inline'))
+                .call(svgIcon('#icon-out-link', 'inline'))
                 .append('span')
                 .text(t('inspector.reference'));
         });
@@ -132,7 +133,7 @@ export function TagReference(tag, context) {
             })
             .attr('class', 'tag-reference-button')
             .attr('tabindex', -1)
-            .call(Icon('#icon-inspect'))
+            .call(svgIcon('#icon-inspect'))
             .merge(button);
     };
 

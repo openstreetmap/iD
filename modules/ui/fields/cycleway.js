@@ -1,10 +1,10 @@
 import * as d3 from 'd3';
-import { rebind } from '../../util/rebind';
-import { getSetValue } from '../../util/get_set_value';
 import { d3combobox } from '../../lib/d3.combobox.js';
+import { utilRebind } from '../../util/rebind';
+import { utilGetSetValue } from '../../util/get_set_value';
 
 
-export function cycleway(field) {
+export function uiFieldCycleway(field) {
     var dispatch = d3.dispatch('change'),
         items = d3.select(null);
 
@@ -65,8 +65,8 @@ export function cycleway(field) {
 
 
     function change() {
-        var left = getSetValue(d3.select('.preset-input-cyclewayleft')),
-            right = getSetValue(d3.select('.preset-input-cyclewayright')),
+        var left = utilGetSetValue(d3.select('.preset-input-cyclewayleft')),
+            right = utilGetSetValue(d3.select('.preset-input-cyclewayright')),
             tag = {};
 
         if (left === 'none' || left === '') { left = undefined; }
@@ -104,7 +104,7 @@ export function cycleway(field) {
 
 
     cycleway.tags = function(tags) {
-        getSetValue(items.selectAll('.preset-input-cycleway'), function(d) {
+        utilGetSetValue(items.selectAll('.preset-input-cycleway'), function(d) {
                 // If cycleway is set, always return that
                 if (tags.cycleway) {
                     return tags.cycleway;
@@ -121,5 +121,5 @@ export function cycleway(field) {
     };
 
 
-    return rebind(cycleway, dispatch, 'on');
+    return utilRebind(cycleway, dispatch, 'on');
 }

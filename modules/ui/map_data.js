@@ -2,11 +2,12 @@ import * as d3 from 'd3';
 import _ from 'lodash';
 import { d3keybinding } from '../lib/d3.keybinding.js';
 import { t } from '../util/locale';
+import { svgIcon } from '../svg/index';
+import { uiTooltipHtml } from './tooltipHtml';
 import { tooltip } from '../util/tooltip';
-import { Icon } from '../svg/index';
-import { tooltipHtml } from './tooltipHtml';
 
-export function MapData(context) {
+
+export function uiMapData(context) {
     var key = 'F',
         features = context.features().keys(),
         layers = context.layers(),
@@ -21,18 +22,22 @@ export function MapData(context) {
             return context.features().enabled(d);
         }
 
+
         function autoHiddenFeature(d) {
             return context.features().autoHidden(d);
         }
+
 
         function clickFeature(d) {
             context.features().toggle(d);
             update();
         }
 
+
         function showsFill(d) {
             return fillSelected === d;
         }
+
 
         function setFill(d) {
             _.each(fills, function(opt) {
@@ -47,6 +52,7 @@ export function MapData(context) {
             update();
         }
 
+
         function showsLayer(which) {
             var layer = layers.layer(which);
             if (layer) {
@@ -54,6 +60,7 @@ export function MapData(context) {
             }
             return false;
         }
+
 
         function setLayer(which, enabled) {
             var layer = layers.layer(which);
@@ -63,13 +70,16 @@ export function MapData(context) {
             }
         }
 
+
         function toggleLayer(which) {
             setLayer(which, !showsLayer(which));
         }
 
+
         function clickGpx() {
             toggleLayer('gpx');
         }
+
 
         function clickMapillaryImages() {
             toggleLayer('mapillary-images');
@@ -77,6 +87,7 @@ export function MapData(context) {
                 setLayer('mapillary-signs', false);
             }
         }
+
 
         function clickMapillarySigns() {
             toggleLayer('mapillary-signs');
@@ -95,30 +106,36 @@ export function MapData(context) {
                 .selectAll('.layer-list-mapillary')
                 .data([0]);
 
-            // Enter
-            mapillaryList
-                .enter()
+            mapillaryList = mapillaryList.enter()
                 .append('ul')
-                .attr('class', 'layer-list layer-list-mapillary');
+                .attr('class', 'layer-list layer-list-mapillary')
+                .merge(mapillaryList);
+
 
             var mapillaryImageLayerItem = mapillaryList
                 .selectAll('.list-item-mapillary-images')
                 .data(supportsMapillaryImages ? [0] : []);
 
+            mapillaryImageLayerItem.exit()
+                .remove();
+
             var enterImages = mapillaryImageLayerItem.enter()
                 .append('li')
                 .attr('class', 'list-item-mapillary-images');
 
-            var labelImages = enterImages.append('label')
+            var labelImages = enterImages
+                .append('label')
                 .call(tooltip()
                     .title(t('mapillary_images.tooltip'))
                     .placement('top'));
 
-            labelImages.append('input')
+            labelImages
+                .append('input')
                 .attr('type', 'checkbox')
                 .on('change', clickMapillaryImages);
 
-            labelImages.append('span')
+            labelImages
+                .append('span')
                 .text(t('mapillary_images.title'));
 
 
@@ -126,27 +143,41 @@ export function MapData(context) {
                 .selectAll('.list-item-mapillary-signs')
                 .data(supportsMapillarySigns ? [0] : []);
 
+            mapillarySignLayerItem.exit()
+                .remove();
+
             var enterSigns = mapillarySignLayerItem.enter()
                 .append('li')
                 .attr('class', 'list-item-mapillary-signs');
 
-            var labelSigns = enterSigns.append('label')
+            var labelSigns = enterSigns
+                .append('label')
                 .call(tooltip()
                     .title(t('mapillary_signs.tooltip'))
                     .placement('top'));
 
-            labelSigns.append('input')
+            labelSigns
+                .append('input')
                 .attr('type', 'checkbox')
                 .on('change', clickMapillarySigns);
 
-            labelSigns.append('span')
+            labelSigns
+                .append('span')
                 .text(t('mapillary_signs.title'));
 
-            // Update
+
+            // Updates
+            mapillaryImageLayerItem = mapillaryImageLayerItem
+                .merge(enterImages);
+
             mapillaryImageLayerItem
                 .classed('active', showsMapillaryImages)
                 .selectAll('input')
                 .property('checked', showsMapillaryImages);
+
+
+            mapillarySignLayerItem = mapillarySignLayerItem
+                .merge(enterSigns);
 
             mapillarySignLayerItem
                 .classed('active', showsMapillarySigns)
@@ -157,12 +188,6 @@ export function MapData(context) {
             mapillarySignLayerItem
                 .selectAll('label')
                 .classed('deemphasize', !showsMapillaryImages);
-
-            // Exit
-            mapillaryImageLayerItem.exit()
-                .remove();
-            mapillarySignLayerItem.exit()
-                .remove();
         }
 
 
@@ -175,6 +200,10 @@ export function MapData(context) {
                 .selectAll('.layer-list-gpx')
                 .data(gpx ? [0] : []);
 
+            // Exit
+            gpxLayerItem.exit()
+                .remove();
+
             // Enter
             var enter = gpxLayerItem.enter()
                 .append('ul')
@@ -182,7 +211,8 @@ export function MapData(context) {
                 .append('li')
                 .classed('list-item-gpx', true);
 
-            enter.append('button')
+            enter
+                .append('button')
                 .attr('class', 'list-item-gpx-extent')
                 .call(tooltip()
                     .title(t('gpx.zoom'))
@@ -192,9 +222,10 @@ export function MapData(context) {
                     d3.event.stopPropagation();
                     gpx.fitZoom();
                 })
-                .call(Icon('#icon-search'));
+                .call(svgIcon('#icon-search'));
 
-            enter.append('button')
+            enter
+                .append('button')
                 .attr('class', 'list-item-gpx-browse')
                 .call(tooltip()
                     .title(t('gpx.browse'))
@@ -207,21 +238,26 @@ export function MapData(context) {
                         })
                         .node().click();
                 })
-                .call(Icon('#icon-geolocate'));
+                .call(svgIcon('#icon-geolocate'));
 
-            var labelGpx = enter.append('label')
-                .call(tooltip()
-                    .title(t('gpx.drag_drop'))
-                    .placement('top'));
+            var labelGpx = enter
+                .append('label')
+                .call(tooltip().title(t('gpx.drag_drop')).placement('top'));
 
-            labelGpx.append('input')
+            labelGpx
+                .append('input')
                 .attr('type', 'checkbox')
                 .on('change', clickGpx);
 
-            labelGpx.append('span')
+            labelGpx
+                .append('span')
                 .text(t('gpx.local_layer'));
 
+
             // Update
+            gpxLayerItem = gpxLayerItem
+                .merge(enter);
+
             gpxLayerItem
                 .classed('active', showsGpx)
                 .selectAll('input')
@@ -231,16 +267,16 @@ export function MapData(context) {
             gpxLayerItem
                 .selectAll('label')
                 .classed('deemphasize', !hasGpx);
-
-            // Exit
-            gpxLayerItem.exit()
-                .remove();
         }
 
 
         function drawList(selection, data, type, name, change, active) {
             var items = selection.selectAll('li')
                 .data(data);
+
+            // Exit
+            items.exit()
+                .remove();
 
             // Enter
             var enter = items.enter()
@@ -255,22 +291,28 @@ export function MapData(context) {
                         if (name === 'feature' && autoHiddenFeature(d)) {
                             tip += '<div>' + t('map_data.autohidden') + '</div>';
                         }
-                        return tooltipHtml(tip, key);
+                        return uiTooltipHtml(tip, key);
                     })
                     .placement('top')
                 );
 
-            var label = enter.append('label');
+            var label = enter
+                .append('label');
 
-            label.append('input')
+            label
+                .append('input')
                 .attr('type', type)
                 .attr('name', name)
                 .on('change', change);
 
-            label.append('span')
+            label
+                .append('span')
                 .text(function(d) { return t(name + '.' + d + '.description'); });
 
             // Update
+            items = items
+                .merge(enter);
+
             items
                 .classed('active', active)
                 .selectAll('input')
@@ -278,10 +320,6 @@ export function MapData(context) {
                 .property('indeterminate', function(d) {
                     return (name === 'feature' && autoHiddenFeature(d));
                 });
-
-            // Exit
-            items.exit()
-                .remove();
         }
 
 
@@ -290,19 +328,21 @@ export function MapData(context) {
             dataLayerContainer.call(drawGpxItem);
 
             fillList.call(drawList, fills, 'radio', 'area_fill', setFill, showsFill);
-
             featureList.call(drawList, features, 'checkbox', 'feature', clickFeature, showsFeature);
         }
+
 
         function hidePanel() {
             setVisible(false);
         }
+
 
         function togglePanel() {
             if (d3.event) d3.event.preventDefault();
             tooltipBehavior.hide(button);
             setVisible(!button.classed('active'));
         }
+
 
         function toggleWireframe() {
             if (d3.event) {
@@ -312,6 +352,7 @@ export function MapData(context) {
             setFill((fillSelected === 'wireframe' ? fillDefault : 'wireframe'));
             context.map().pan([0,0]);  // trigger a redraw
         }
+
 
         function setVisible(show) {
             if (show !== shown) {
@@ -343,25 +384,29 @@ export function MapData(context) {
         }
 
 
-        var content = selection.append('div')
+        var content = selection
+                .append('div')
                 .attr('class', 'fillL map-overlay col3 content hide'),
             tooltipBehavior = tooltip()
                 .placement('left')
                 .html(true)
-                .title(tooltipHtml(t('map_data.description'), key)),
-            button = selection.append('button')
+                .title(uiTooltipHtml(t('map_data.description'), key)),
+            button = selection
+                .append('button')
                 .attr('tabindex', -1)
                 .on('click', togglePanel)
-                .call(Icon('#icon-data', 'light'))
+                .call(svgIcon('#icon-data', 'light'))
                 .call(tooltipBehavior),
             shown = false;
 
-        content.append('h4')
+        content
+            .append('h4')
             .text(t('map_data.title'));
 
 
         // data layers
-        content.append('a')
+        content
+            .append('a')
             .text(t('map_data.data_layers'))
             .attr('href', '#')
             .classed('hide-toggle', true)
@@ -373,13 +418,15 @@ export function MapData(context) {
                 d3.event.preventDefault();
             });
 
-        var dataLayerContainer = content.append('div')
+        var dataLayerContainer = content
+            .append('div')
             .attr('class', 'data-data-layers')
             .style('display', 'block');
 
 
         // area fills
-        content.append('a')
+        content
+            .append('a')
             .text(t('map_data.fill_area'))
             .attr('href', '#')
             .classed('hide-toggle', true)
@@ -391,16 +438,19 @@ export function MapData(context) {
                 d3.event.preventDefault();
             });
 
-        var fillContainer = content.append('div')
+        var fillContainer = content
+            .append('div')
             .attr('class', 'data-area-fills')
             .style('display', 'none');
 
-        var fillList = fillContainer.append('ul')
+        var fillList = fillContainer
+            .append('ul')
             .attr('class', 'layer-list layer-fill-list');
 
 
         // feature filters
-        content.append('a')
+        content
+            .append('a')
             .text(t('map_data.map_features'))
             .attr('href', '#')
             .classed('hide-toggle', true)
@@ -412,11 +462,13 @@ export function MapData(context) {
                 d3.event.preventDefault();
             });
 
-        var featureContainer = content.append('div')
+        var featureContainer = content
+            .append('div')
             .attr('class', 'data-feature-filters')
             .style('display', 'none');
 
-        var featureList = featureContainer.append('ul')
+        var featureList = featureContainer
+            .append('ul')
             .attr('class', 'layer-list layer-feature-list');
 
 
@@ -437,6 +489,7 @@ export function MapData(context) {
         context.surface().on('mousedown.map_data-outside', hidePanel);
         context.container().on('mousedown.map_data-outside', hidePanel);
     }
+
 
     return map_data;
 }

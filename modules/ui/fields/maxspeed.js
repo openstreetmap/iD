@@ -1,12 +1,13 @@
 import * as d3 from 'd3';
 import _ from 'lodash';
-import { rebind } from '../../util/rebind';
-import { getSetValue } from '../../util/get_set_value';
 import { d3combobox } from '../../lib/d3.combobox.js';
-import { pointInPolygon } from '../../geo/index';
-import { imperial as imperialData } from '../../../data/index';
+import { dataImperial } from '../../../data/index';
+import { geoPointInPolygon } from '../../geo/index';
+import { utilRebind } from '../../util/rebind';
+import { utilGetSetValue } from '../../util/get_set_value';
 
-export function maxspeed(field, context) {
+
+export function uiFieldMaxspeed(field, context) {
     var dispatch = d3.dispatch('change'),
         entity,
         isImperial,
@@ -40,9 +41,9 @@ export function maxspeed(field, context) {
         var childNodes = context.graph().childNodes(context.entity(entity.id)),
             loc = childNodes[~~(childNodes.length/2)].loc;
 
-        isImperial = _.some(imperialData.features, function(f) {
+        isImperial = _.some(dataImperial.features, function(f) {
             return _.some(f.geometry.coordinates, function(d) {
-                return pointInPolygon(loc, d);
+                return geoPointInPolygon(loc, d);
             });
         });
 
@@ -62,8 +63,8 @@ export function maxspeed(field, context) {
 
 
         function changeUnits() {
-            isImperial = getSetValue(unitInput) === 'mph';
-            getSetValue(unitInput, isImperial ? 'mph' : 'km/h');
+            isImperial = utilGetSetValue(unitInput) === 'mph';
+            utilGetSetValue(unitInput, isImperial ? 'mph' : 'km/h');
             setSuggestions();
             change();
         }
@@ -72,7 +73,7 @@ export function maxspeed(field, context) {
 
     function setSuggestions() {
         combobox.data((isImperial ? imperialValues : metricValues).map(comboValues));
-        getSetValue(unitInput, isImperial ? 'mph' : 'km/h');
+        utilGetSetValue(unitInput, isImperial ? 'mph' : 'km/h');
     }
 
 
@@ -86,7 +87,7 @@ export function maxspeed(field, context) {
 
     function change() {
         var tag = {},
-            value = getSetValue(input);
+            value = utilGetSetValue(input);
 
         if (!value) {
             tag[field.key] = undefined;
@@ -111,7 +112,7 @@ export function maxspeed(field, context) {
         }
 
         setSuggestions();
-        getSetValue(input, value || '');
+        utilGetSetValue(input, value || '');
     };
 
 
@@ -125,5 +126,5 @@ export function maxspeed(field, context) {
     };
 
 
-    return rebind(maxspeed, dispatch, 'on');
+    return utilRebind(maxspeed, dispatch, 'on');
 }

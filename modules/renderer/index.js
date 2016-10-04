@@ -1,5 +1,5 @@
-export { BackgroundSource } from './background_source';
-export { Background } from './background';
-export { Features } from './features';
-export { Map } from './map';
-export { TileLayer } from './tile_layer';
+export { rendererBackgroundSource } from './background_source';
+export { rendererBackground } from './background';
+export { rendererFeatures } from './features';
+export { rendererMap } from './map';
+export { rendererTileLayer } from './tile_layer';

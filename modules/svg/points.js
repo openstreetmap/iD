@@ -1,9 +1,10 @@
 import _ from 'lodash';
-import { PointTransform, TagClasses } from './index';
-import { Entity } from '../core/index';
+import { svgPointTransform, svgTagClasses } from './index';
+import { coreEntity } from '../core/index';
 
 
-export function Points(projection, context) {
+export function svgPoints(projection, context) {
+
     function markerPath(selection, klass) {
         selection
             .attr('class', klass)
@@ -14,6 +15,7 @@ export function Points(projection, context) {
     function sortY(a, b) {
         return b.loc[1] - a.loc[1];
     }
+
 
     return function drawPoints(selection, graph, entities, filter) {
         var wireframe = context.surface().classed('fill-wireframe'),
@@ -27,7 +29,7 @@ export function Points(projection, context) {
 
         var groups = layer.selectAll('g.point')
             .filter(filter)
-            .data(points, Entity.key);
+            .data(points, coreEntity.key);
 
         groups.exit()
             .remove();
@@ -51,8 +53,8 @@ export function Points(projection, context) {
 
         groups = groups
             .merge(enter)
-            .attr('transform', PointTransform(projection))
-            .call(TagClasses());
+            .attr('transform', svgPointTransform(projection))
+            .call(svgTagClasses());
 
         // Selecting the following implicitly
         // sets the data (point entity) on the element

@@ -1,21 +1,24 @@
 import * as d3 from 'd3';
 import _ from 'lodash';
 import { t } from './locale';
-import { Detect } from './detect';
+import { utilDetect } from './detect';
 import { remove as removeDiacritics } from 'diacritics';
 
-export function tagText(entity) {
+
+export function utilTagText(entity) {
     return d3.entries(entity.tags).map(function(e) {
         return e.key + '=' + e.value;
     }).join(', ');
 }
 
-export function entitySelector(ids) {
+
+export function utilEntitySelector(ids) {
     return ids.length ? '.' + ids.join(',.') : 'nothing';
 }
 
-export function entityOrMemberSelector(ids, graph) {
-    var s = entitySelector(ids);
+
+export function utilEntityOrMemberSelector(ids, graph) {
+    var s = utilEntitySelector(ids);
 
     ids.forEach(function(id) {
         var entity = graph.hasEntity(id);
@@ -29,8 +32,9 @@ export function entityOrMemberSelector(ids, graph) {
     return s;
 }
 
-export function displayName(entity) {
-    var localizedNameKey = 'name:' + Detect().locale.toLowerCase().split('-')[0],
+
+export function utilDisplayName(entity) {
+    var localizedNameKey = 'name:' + utilDetect().locale.toLowerCase().split('-')[0],
         name = entity.tags[localizedNameKey] || entity.tags.name || '',
         network = entity.tags.cycle_network || entity.tags.network;
     if (!name && entity.tags.ref) {
@@ -42,7 +46,8 @@ export function displayName(entity) {
     return name;
 }
 
-export function displayType(id) {
+
+export function utilDisplayType(id) {
     return {
         n: t('inspector.node'),
         w: t('inspector.way'),
@@ -50,7 +55,8 @@ export function displayType(id) {
     }[id.charAt(0)];
 }
 
-export function stringQs(str) {
+
+export function utilStringQs(str) {
     return str.split('&').reduce(function(obj, pair){
         var parts = pair.split('=');
         if (parts.length === 2) {
@@ -60,7 +66,8 @@ export function stringQs(str) {
     }, {});
 }
 
-export function qsString(obj, noencode) {
+
+export function utilQsString(obj, noencode) {
     function softEncode(s) {
       // encode everything except special characters used in certain hash parameters:
       // "/" in map states, ":", ",", {" and "}" in background
@@ -72,7 +79,8 @@ export function qsString(obj, noencode) {
     }).join('&');
 }
 
-export function prefixDOMProperty(property) {
+
+export function utilPrefixDOMProperty(property) {
     var prefixes = ['webkit', 'ms', 'moz', 'o'],
         i = -1,
         n = prefixes.length,
@@ -90,7 +98,8 @@ export function prefixDOMProperty(property) {
     return false;
 }
 
-export function prefixCSSProperty(property) {
+
+export function utilPrefixCSSProperty(property) {
     var prefixes = ['webkit', 'ms', 'Moz', 'O'],
         i = -1,
         n = prefixes.length,
@@ -108,7 +117,7 @@ export function prefixCSSProperty(property) {
 
 
 var transformProperty;
-export function setTransform(el, x, y, scale) {
+export function utilSetTransform(el, x, y, scale) {
     var prop = transformProperty = transformProperty || prefixCSSProperty('Transform'),
         translate = Detect().opera ?
             'translate('   + x + 'px,' + y + 'px)' :
@@ -116,7 +125,8 @@ export function setTransform(el, x, y, scale) {
     return el.style(prop, translate + (scale ? ' scale(' + scale + ')' : ''));
 }
 
-export function getStyle(selector) {
+
+export function utilGetStyle(selector) {
     for (var i = 0; i < document.styleSheets.length; i++) {
         var rules = document.styleSheets[i].rules || document.styleSheets[i].cssRules || [];
         for (var k = 0; k < rules.length; k++) {
@@ -128,10 +138,11 @@ export function getStyle(selector) {
     }
 }
 
+
 // Calculates Levenshtein distance between two strings
 // see:  https://en.wikipedia.org/wiki/Levenshtein_distance
 // first converts the strings to lowercase and replaces diacritic marks with ascii equilivants.
-export function editDistance(a, b) {
+export function utilEditDistance(a, b) {
     a = removeDiacritics(a.toLowerCase());
     b = removeDiacritics(b.toLowerCase());
     if (a.length === 0) return b.length;
@@ -153,10 +164,11 @@ export function editDistance(a, b) {
     return matrix[b.length][a.length];
 }
 
+
 // a d3.mouse-alike which
 // 1. Only works on HTML elements, not SVG
 // 2. Does not cause style recalculation
-export function fastMouse(container) {
+export function utilFastMouse(container) {
     var rect = container.getBoundingClientRect(),
         rectLeft = rect.left,
         rectTop = rect.top,
@@ -169,11 +181,13 @@ export function fastMouse(container) {
     };
 }
 
+
 /* eslint-disable no-proto */
-export var getPrototypeOf = Object.getPrototypeOf || function(obj) { return obj.__proto__; };
+export var utilGetPrototypeOf = Object.getPrototypeOf || function(obj) { return obj.__proto__; };
 /* eslint-enable no-proto */
 
-export function asyncMap(inputs, func, callback) {
+
+export function utilAsyncMap(inputs, func, callback) {
     var remaining = inputs.length,
         results = [],
         errors = [];
@@ -188,12 +202,14 @@ export function asyncMap(inputs, func, callback) {
     });
 }
 
+
 // wraps an index to an interval [0..length-1]
-export function wrap(index, length) {
+export function utilWrap(index, length) {
     if (index < 0)
         index += Math.ceil(-index/length)*length;
     return index % length;
 }
+
 
 /**
  * a replacement for functor
@@ -201,7 +217,7 @@ export function wrap(index, length) {
  * @param {*} value any value
  * @returns {Function} a function that returns that value or the value if it's a function
  */
-export function functor(value) {
+export function utilFunctor(value) {
     if (typeof value === 'function') return value;
     return function() {
         return value;

@@ -1,15 +1,18 @@
 import _ from 'lodash';
 import { t } from '../util/locale';
-import { Straighten as StraightenAction } from '../actions/index';
+import { actionStraighten } from '../actions/index';
 
-export function Straighten(selectedIDs, context) {
+
+export function operationStraighten(selectedIDs, context) {
     var entityId = selectedIDs[0],
-        action = StraightenAction(entityId, context.projection);
+        action = actionStraighten(entityId, context.projection);
+
 
     function operation() {
         var annotation = t('operations.straighten.annotation');
         context.perform(action, annotation);
     }
+
 
     operation.available = function() {
         var entity = context.entity(entityId);
@@ -19,6 +22,7 @@ export function Straighten(selectedIDs, context) {
             _.uniq(entity.nodes).length > 2;
     };
 
+
     operation.disabled = function() {
         var reason;
         if (context.hasHiddenConnections(entityId)) {
@@ -27,6 +31,7 @@ export function Straighten(selectedIDs, context) {
         return action.disabled(context.graph()) || reason;
     };
 
+
     operation.tooltip = function() {
         var disable = operation.disabled();
         return disable ?
@@ -34,9 +39,11 @@ export function Straighten(selectedIDs, context) {
             t('operations.straighten.description');
     };
 
+
     operation.id = 'straighten';
     operation.keys = [t('operations.straighten.key')];
     operation.title = t('operations.straighten.title');
+
 
     return operation;
 }

@@ -1,32 +1,34 @@
 import * as d3 from 'd3';
-import { roundCoords } from '../geo/index';
-import { tooltipHtml } from './tooltipHtml';
+import { geoRoundCoords } from '../geo/index';
+import { uiTooltipHtml } from './tooltipHtml';
 
-export function RadialMenu(context, operations) {
+
+export function uiRadialMenu(context, operations) {
     var menu,
         center = [0, 0],
         tooltip;
 
+
     var radialMenu = function(selection) {
-        if (!operations.length)
-            return;
+        if (!operations.length) return;
 
         selection.node().parentNode.focus();
 
         function click(operation) {
             d3.event.stopPropagation();
-            if (operation.disabled())
-                return;
+            if (operation.disabled()) return;
             operation();
             radialMenu.close();
         }
 
-        menu = selection.append('g')
+        menu = selection
+            .append('g')
             .attr('class', 'radial-menu')
             .attr('transform', 'translate(' + center + ')')
             .attr('opacity', 0);
 
-        menu.transition()
+        menu
+            .transition()
             .attr('opacity', 1);
 
         var r = 50,
@@ -34,7 +36,8 @@ export function RadialMenu(context, operations) {
             a0 = -Math.PI / 4,
             a1 = a0 + (operations.length - 1) * a;
 
-        menu.append('path')
+        menu
+            .append('path')
             .attr('class', 'radial-menu-background')
             .attr('d', 'M' + r * Math.sin(a0) + ',' +
                              r * Math.cos(a0) +
@@ -51,19 +54,21 @@ export function RadialMenu(context, operations) {
             .attr('class', function(d) { return 'radial-menu-item radial-menu-item-' + d.id; })
             .classed('disabled', function(d) { return d.disabled(); })
             .attr('transform', function(d, i) {
-                return 'translate(' + roundCoords([
+                return 'translate(' + geoRoundCoords([
                         r * Math.sin(a0 + i * a),
                         r * Math.cos(a0 + i * a)]).join(',') + ')';
             });
 
-        button.append('circle')
+        button
+            .append('circle')
             .attr('r', 15)
             .on('click', click)
             .on('mousedown', mousedown)
             .on('mouseover', mouseover)
             .on('mouseout', mouseout);
 
-        button.append('use')
+        button
+            .append('use')
             .attr('transform', 'translate(-10,-10)')
             .attr('width', '20')
             .attr('height', '20')
@@ -91,7 +96,7 @@ export function RadialMenu(context, operations) {
                 .style('bottom', null)
                 .style('right', null)
                 .style('display', 'block')
-                .html(tooltipHtml(d.tooltip(), d.keys[0]));
+                .html(uiTooltipHtml(d.tooltip(), d.keys[0]));
 
             if (i === 0) {
                 tooltip
@@ -113,6 +118,7 @@ export function RadialMenu(context, operations) {
         }
     };
 
+
     radialMenu.close = function() {
         if (menu) {
             menu
@@ -127,11 +133,13 @@ export function RadialMenu(context, operations) {
         }
     };
 
+
     radialMenu.center = function(_) {
         if (!arguments.length) return center;
         center = _;
         return radialMenu;
     };
+
 
     return radialMenu;
 }

@@ -1,6 +1,7 @@
 import * as d3 from 'd3';
 import _ from 'lodash';
-import { qsString } from '../util/index';
+import { utilQsString } from '../util/index';
+
 
 var taginfo = {},
     endpoint = 'https://taginfo.openstreetmap.org/api/4/',
@@ -31,6 +32,7 @@ var taginfo = {},
         relation: 'count_relation_members_fraction'
     };
 
+
 function sets(parameters, n, o) {
     if (parameters.geometry && o[parameters.geometry]) {
         parameters[n] = o[parameters.geometry];
@@ -38,21 +40,26 @@ function sets(parameters, n, o) {
     return parameters;
 }
 
+
 function setFilter(parameters) {
     return sets(parameters, 'filter', tag_filters);
 }
+
 
 function setSort(parameters) {
     return sets(parameters, 'sortname', tag_sorts);
 }
 
+
 function setSortMembers(parameters) {
     return sets(parameters, 'sortname', tag_sort_members);
 }
 
+
 function clean(parameters) {
     return _.omit(parameters, 'geometry', 'debounce');
 }
+
 
 function filterKeys(type) {
     var count_type = type ? 'count_' + type : 'count_all';
@@ -61,11 +68,13 @@ function filterKeys(type) {
     };
 }
 
+
 function filterMultikeys() {
     return function(d) {
         return (d.key.match(/:/g) || []).length === 1;  // exactly one ':'
     };
 }
+
 
 function filterValues(allowUpperCase) {
     return function(d) {
@@ -75,6 +84,7 @@ function filterValues(allowUpperCase) {
     };
 }
 
+
 function filterRoles(geometry) {
     return function(d) {
         if (d.role === '') return false; // exclude empty role
@@ -83,12 +93,14 @@ function filterRoles(geometry) {
     };
 }
 
+
 function valKey(d) {
     return {
         value: d.key,
         title: d.key
     };
 }
+
 
 function valKeyDescription(d) {
     return {
@@ -97,12 +109,14 @@ function valKeyDescription(d) {
     };
 }
 
+
 function roleKey(d) {
     return {
         value: d.role,
         title: d.role
     };
 }
+
 
 // sort keys with ':' lower than keys without ':'
 function sortKeys(a, b) {
@@ -111,7 +125,9 @@ function sortKeys(a, b) {
         : 0;
 }
 
+
 var debounced = _.debounce(d3.json, 100, true);
+
 
 function request(url, debounce, callback) {
     var cache = taginfo.cache;
@@ -130,12 +146,13 @@ function request(url, debounce, callback) {
     }
 }
 
+
 export function init() {
     taginfo.keys = function(parameters, callback) {
         var debounce = parameters.debounce;
         parameters = clean(setSort(parameters));
         request(endpoint + 'keys/all?' +
-            qsString(_.extend({
+            utilQsString(_.extend({
                 rp: 10,
                 sortname: 'count_all',
                 sortorder: 'desc',
@@ -151,7 +168,7 @@ export function init() {
         var debounce = parameters.debounce;
         parameters = clean(setSort(parameters));
         request(endpoint + 'keys/all?' +
-            qsString(_.extend({
+            utilQsString(_.extend({
                 rp: 25,
                 sortname: 'count_all',
                 sortorder: 'desc',
@@ -167,7 +184,7 @@ export function init() {
         var debounce = parameters.debounce;
         parameters = clean(setSort(setFilter(parameters)));
         request(endpoint + 'key/values?' +
-            qsString(_.extend({
+            utilQsString(_.extend({
                 rp: 25,
                 sortname: 'count_all',
                 sortorder: 'desc',
@@ -184,7 +201,7 @@ export function init() {
         var geometry = parameters.geometry;
         parameters = clean(setSortMembers(parameters));
         request(endpoint + 'relation/roles?' +
-            qsString(_.extend({
+            utilQsString(_.extend({
                 rp: 25,
                 sortname: 'count_all_members',
                 sortorder: 'desc',
@@ -204,7 +221,7 @@ export function init() {
         if (parameters.value) path = 'tag/wiki_pages?';
         else if (parameters.rtype) path = 'relation/wiki_pages?';
 
-        request(endpoint + path + qsString(parameters), debounce, function(err, d) {
+        request(endpoint + path + utilQsString(parameters), debounce, function(err, d) {
             if (err) return callback(err);
             callback(null, d.data);
         });
