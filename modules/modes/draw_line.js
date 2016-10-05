@@ -1,7 +1,7 @@
 import { t } from '../util/locale';
-import { DrawWay } from '../behavior/index';
+import { behaviorDrawWay } from '../behavior/index';
 
-export function DrawLine(context, wayId, baseGraph, affix) {
+export function modeDrawLine(context, wayId, baseGraph, affix) {
     var mode = {
         button: 'line',
         id: 'draw-line'
@@ -9,12 +9,13 @@ export function DrawLine(context, wayId, baseGraph, affix) {
 
     var behavior;
 
+
     mode.enter = function() {
         var way = context.entity(wayId),
             index = (affix === 'prefix') ? 0 : undefined,
             headId = (affix === 'prefix') ? way.first() : way.last();
 
-        behavior = DrawWay(context, wayId, index, mode, baseGraph)
+        behavior = behaviorDrawWay(context, wayId, index, mode, baseGraph)
             .tail(t('modes.draw_line.tail'));
 
         var addNode = behavior.addNode;
@@ -30,13 +31,16 @@ export function DrawLine(context, wayId, baseGraph, affix) {
         context.install(behavior);
     };
 
+
     mode.exit = function() {
         context.uninstall(behavior);
     };
 
+
     mode.selectedIDs = function() {
         return [wayId];
     };
+
 
     return mode;
 }

@@ -1,7 +1,8 @@
 import _ from 'lodash';
-import { editDistance } from '../util/index';
+import { utilEditDistance } from '../util/index';
 
-export function Collection(collection) {
+
+export function presetCollection(collection) {
     var maxSearchResults = 50,
         maxSuggestionResults = 10;
 
@@ -9,17 +10,20 @@ export function Collection(collection) {
 
         collection: collection,
 
+
         item: function(id) {
             return _.find(collection, function(d) {
                 return d.id === id;
             });
         },
 
+
         matchGeometry: function(geometry) {
-            return Collection(collection.filter(function(d) {
+            return presetCollection(collection.filter(function(d) {
                 return d.matchGeometry(geometry);
             }));
         },
+
 
         search: function(value, geometry) {
             if (!value) return this;
@@ -72,7 +76,7 @@ export function Collection(collection) {
             var similar_name = searchable.map(function(a) {
                     return {
                         preset: a,
-                        dist: editDistance(value, a.name())
+                        dist: utilEditDistance(value, a.name())
                     };
                 }).filter(function(a) {
                     return a.dist + Math.min(value.length - a.preset.name().length, 0) < 3;
@@ -85,7 +89,7 @@ export function Collection(collection) {
             // finds close matches to value in preset.terms
             var similar_terms = _.filter(searchable, function(a) {
                     return _.some(a.terms() || [], function(b) {
-                        return editDistance(value, b) + Math.min(value.length - b.length, 0) < 3;
+                        return utilEditDistance(value, b) + Math.min(value.length - b.length, 0) < 3;
                     });
                 });
 
@@ -102,7 +106,7 @@ export function Collection(collection) {
             var similar_suggestions = suggestions.map(function(a) {
                     return {
                         preset: a,
-                        dist: editDistance(value, suggestionName(a.name()))
+                        dist: utilEditDistance(value, suggestionName(a.name()))
                     };
                 }).filter(function(a) {
                     return a.dist + Math.min(value.length - suggestionName(a.preset.name()).length, 0) < 1;
@@ -123,11 +127,10 @@ export function Collection(collection) {
                     similar_suggestions.slice(0, maxSuggestionResults)
                 ).slice(0, maxSearchResults - 1);
 
-            return Collection(_.uniq(
-                    results.concat(other)
-                ));
+            return presetCollection(_.uniq(results.concat(other)));
         }
     };
+
 
     return presets;
 }

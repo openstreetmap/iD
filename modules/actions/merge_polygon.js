@@ -1,8 +1,9 @@
 import _ from 'lodash';
-import { joinWays, polygonContainsPolygon } from '../geo/index';
-import { Relation } from '../core/index';
+import { geoJoinWays, geoPolygonContainsPolygon } from '../geo/index';
+import { coreRelation } from '../core/index';
 
-export function MergePolygon(ids, newRelationId) {
+
+export function actionMergePolygon(ids, newRelationId) {
 
     function groupEntities(graph) {
         var entities = ids.map(function (id) { return graph.entity(id); });
@@ -21,6 +22,7 @@ export function MergePolygon(ids, newRelationId) {
             }));
     }
 
+
     var action = function(graph) {
         var entities = groupEntities(graph);
 
@@ -29,7 +31,7 @@ export function MergePolygon(ids, newRelationId) {
         // Each element is itself an array of objects with an id property, and has a
         // locs property which is an array of the locations forming the polygon.
         var polygons = entities.multipolygon.reduce(function(polygons, m) {
-            return polygons.concat(joinWays(m.members, graph));
+            return polygons.concat(geoJoinWays(m.members, graph));
         }, []).concat(entities.closedWay.map(function(d) {
             var member = [{id: d.id}];
             member.nodes = graph.childNodes(d);
@@ -42,7 +44,7 @@ export function MergePolygon(ids, newRelationId) {
         var contained = polygons.map(function(w, i) {
             return polygons.map(function(d, n) {
                 if (i === n) return null;
-                return polygonContainsPolygon(
+                return geoPolygonContainsPolygon(
                     _.map(d.nodes, 'loc'),
                     _.map(w.nodes, 'loc'));
             });
@@ -83,7 +85,7 @@ export function MergePolygon(ids, newRelationId) {
 
         // Move all tags to one relation
         var relation = entities.multipolygon[0] ||
-            Relation({ id: newRelationId, tags: { type: 'multipolygon' }});
+            coreRelation({ id: newRelationId, tags: { type: 'multipolygon' }});
 
         entities.multipolygon.slice(1).forEach(function(m) {
             relation = relation.mergeTags(m.tags);
@@ -106,6 +108,7 @@ export function MergePolygon(ids, newRelationId) {
         }));
     };
 
+
     action.disabled = function(graph) {
         var entities = groupEntities(graph);
         if (entities.other.length > 0 ||
@@ -114,6 +117,7 @@ export function MergePolygon(ids, newRelationId) {
         if (!entities.multipolygon.every(function(r) { return r.isComplete(graph); }))
             return 'incomplete_relation';
     };
+
 
     return action;
 }

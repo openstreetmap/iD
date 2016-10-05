@@ -1,13 +1,15 @@
 import * as d3 from 'd3';
 import _ from 'lodash';
 import { t } from '../util/locale';
-import { Icon } from '../svg/index';
+import { svgIcon } from '../svg/index';
 
-export function Contributors(context) {
+
+export function uiContributors(context) {
     var debouncedUpdate = _.debounce(function() { update(); }, 1000),
         limit = 4,
         hidden = false,
         wrap = d3.select(null);
+
 
     function update() {
         var users = {},
@@ -21,7 +23,7 @@ export function Contributors(context) {
             subset = u.slice(0, u.length > limit ? limit - 1 : limit);
 
         wrap.html('')
-            .call(Icon('#icon-nearby', 'pre-text light'));
+            .call(svgIcon('#icon-nearby', 'pre-text light'));
 
         var userList = d3.select(document.createElement('span'));
 
@@ -66,6 +68,7 @@ export function Contributors(context) {
                 .style('opacity', 1);
         }
     }
+
 
     return function(selection) {
         wrap = selection;

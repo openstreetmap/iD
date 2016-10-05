@@ -124,7 +124,7 @@
   * Add ability to remove/disable Mapillary layers (#2722)
 * Add expansion arrows to category presets for better usability (#2972, thanks @kepta)
 * Refactor services into iD.services namespace
-  * :warning: This means that `iD.taginfo` is now `iD.services.taginfo`
+  * :warning: This means that `iD.taginfo` is now `iD.serviceTaginfo`
 * Disallow disconnecting that would damage relations (#1714, thanks @jfirebaugh)
 * Allow escape to cancel ⌘-V paste (#2889)
 * Enter should accept input and return to browse mode only on preset input fields (#2912, #2957, #2380)

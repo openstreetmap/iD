@@ -1,6 +1,6 @@
 /* global locale: true */
 /* eslint no-console: 0 */
-describe('iD.actions.MergeRemoteChanges', function () {
+describe('iD.actionMergeRemoteChanges', function () {
     var base = iD.Graph([
             iD.Node({id: 'a', loc: [1, 1], version: '1', tags: {foo: 'foo'}}),
 
@@ -102,7 +102,7 @@ describe('iD.actions.MergeRemoteChanges', function () {
                     remote = base.entity('a').update({tags: remoteTags, version: '2'}),
                     localGraph = makeGraph([local]),
                     remoteGraph = makeGraph([remote]),
-                    action = iD.actions.MergeRemoteChanges('a', localGraph, remoteGraph);
+                    action = iD.actionMergeRemoteChanges('a', localGraph, remoteGraph);
                   var  result = action(localGraph);
 
                 expect(result).to.eql(localGraph);
@@ -115,7 +115,7 @@ describe('iD.actions.MergeRemoteChanges', function () {
                     remote = base.entity('a').update({tags: remoteTags, version: '2'}),
                     localGraph = makeGraph([local]),
                     remoteGraph = makeGraph([remote]),
-                    action = iD.actions.MergeRemoteChanges('a', localGraph, remoteGraph),
+                    action = iD.actionMergeRemoteChanges('a', localGraph, remoteGraph),
                     result = action(localGraph);
 
                 expect(result).to.eql(localGraph);
@@ -128,7 +128,7 @@ describe('iD.actions.MergeRemoteChanges', function () {
                     remote = base.entity('a').update({tags: remoteTags, version: '2'}),
                     localGraph = makeGraph([local]),
                     remoteGraph = makeGraph([remote]),
-                    action = iD.actions.MergeRemoteChanges('a', localGraph, remoteGraph),
+                    action = iD.actionMergeRemoteChanges('a', localGraph, remoteGraph),
                     result = action(localGraph);
 
                 expect(result).to.eql(localGraph);
@@ -141,7 +141,7 @@ describe('iD.actions.MergeRemoteChanges', function () {
                     remote = base.entity('a').update({tags: remoteTags, version: '2'}),
                     localGraph = makeGraph([local]),
                     remoteGraph = makeGraph([remote]),
-                    action = iD.actions.MergeRemoteChanges('a', localGraph, remoteGraph),
+                    action = iD.actionMergeRemoteChanges('a', localGraph, remoteGraph),
                     result = action(localGraph);
 
                 expect(result).to.eql(localGraph);
@@ -155,7 +155,7 @@ describe('iD.actions.MergeRemoteChanges', function () {
                     remote = base.entity('a').update({tags: remoteTags, version: '2'}),
                     localGraph = makeGraph([local]),
                     remoteGraph = makeGraph([remote]),
-                    action = iD.actions.MergeRemoteChanges('a', localGraph, remoteGraph),
+                    action = iD.actionMergeRemoteChanges('a', localGraph, remoteGraph),
                     result = action(localGraph);
 
                 expect(result.entity('a').version).to.eql('2');
@@ -170,7 +170,7 @@ describe('iD.actions.MergeRemoteChanges', function () {
                     remote = base.entity('a').update({tags: remoteTags, version: '2'}),
                     localGraph = makeGraph([local]),
                     remoteGraph = makeGraph([remote]),
-                    action = iD.actions.MergeRemoteChanges('a', localGraph, remoteGraph),
+                    action = iD.actionMergeRemoteChanges('a', localGraph, remoteGraph),
                     result = action(localGraph);
 
                 expect(result.entity('a').version).to.eql('2');
@@ -189,7 +189,7 @@ describe('iD.actions.MergeRemoteChanges', function () {
                     remote = base.entity('a').update({tags: remoteTags, loc: remoteLoc, version: '2'}),
                     localGraph = makeGraph([local]),
                     remoteGraph = makeGraph([remote]),
-                    action = iD.actions.MergeRemoteChanges('a', localGraph, remoteGraph),
+                    action = iD.actionMergeRemoteChanges('a', localGraph, remoteGraph),
                     result = action(localGraph);
 
                 expect(result).to.eql(localGraph);
@@ -205,7 +205,7 @@ describe('iD.actions.MergeRemoteChanges', function () {
                     remote = base.entity('a').update({tags: remoteTags, loc: remoteLoc, version: '2'}),
                     localGraph = makeGraph([local]),
                     remoteGraph = makeGraph([remote]),
-                    action = iD.actions.MergeRemoteChanges('a', localGraph, remoteGraph),
+                    action = iD.actionMergeRemoteChanges('a', localGraph, remoteGraph),
                     result = action(localGraph);
 
                 expect(result.entity('a').version).to.eql('2');
@@ -224,7 +224,7 @@ describe('iD.actions.MergeRemoteChanges', function () {
                     remote = base.entity('w1').update({tags: remoteTags, version: '2'}),
                     localGraph = makeGraph([local]),
                     remoteGraph = makeGraph([remote]),
-                    action = iD.actions.MergeRemoteChanges('w1', localGraph, remoteGraph),
+                    action = iD.actionMergeRemoteChanges('w1', localGraph, remoteGraph),
                     result = action(localGraph);
 
                 expect(result.entity('w1').version).to.eql('2');
@@ -241,7 +241,7 @@ describe('iD.actions.MergeRemoteChanges', function () {
                     remote = base.entity('w1').update({tags: remoteTags, nodes: remoteNodes, version: '2'}),
                     localGraph = makeGraph([local]),
                     remoteGraph = makeGraph([remote, r2, r3]),
-                    action = iD.actions.MergeRemoteChanges('w1', localGraph, remoteGraph),
+                    action = iD.actionMergeRemoteChanges('w1', localGraph, remoteGraph),
                     result = action(localGraph);
 
                 expect(result.entity('w1').version).to.eql('2');
@@ -261,7 +261,7 @@ describe('iD.actions.MergeRemoteChanges', function () {
                     remote = base.entity('w1').update({tags: remoteTags, nodes: remoteNodes, version: '2'}),
                     localGraph = makeGraph([local, r2, r3]),
                     remoteGraph = makeGraph([remote]),
-                    action = iD.actions.MergeRemoteChanges('w1', localGraph, remoteGraph),
+                    action = iD.actionMergeRemoteChanges('w1', localGraph, remoteGraph),
                     result = action(localGraph);
 
                 expect(result.entity('w1').version).to.eql('2');
@@ -280,7 +280,7 @@ describe('iD.actions.MergeRemoteChanges', function () {
                     remote = base.entity('w1').update({tags: remoteTags, nodes: remoteNodes, version: '2'}),
                     localGraph = makeGraph([local, r1, r2]),
                     remoteGraph = makeGraph([remote, r3, r4]),
-                    action = iD.actions.MergeRemoteChanges('w1', localGraph, remoteGraph),
+                    action = iD.actionMergeRemoteChanges('w1', localGraph, remoteGraph),
                     result = action(localGraph);
 
                 expect(result.entity('w1').version).to.eql('2');
@@ -299,7 +299,7 @@ describe('iD.actions.MergeRemoteChanges', function () {
                     remote = base.entity('w1').update({tags: remoteTags, nodes: remoteNodes, version: '2'}),
                     localGraph = makeGraph([local, r1, r2]),
                     remoteGraph = makeGraph([remote, r3, r4]),
-                    action = iD.actions.MergeRemoteChanges('w1', localGraph, remoteGraph),
+                    action = iD.actionMergeRemoteChanges('w1', localGraph, remoteGraph),
                     result = action(localGraph);
 
                 expect(result).to.eql(localGraph);
@@ -312,7 +312,7 @@ describe('iD.actions.MergeRemoteChanges', function () {
                     remote = base.entity('p1').update({loc: remoteLoc, version: '2'}),
                     localGraph = makeGraph([local]),
                     remoteGraph = makeGraph([remote]),
-                    action = iD.actions.MergeRemoteChanges('w1', localGraph, remoteGraph),
+                    action = iD.actionMergeRemoteChanges('w1', localGraph, remoteGraph),
                     result = action(localGraph);
 
                 expect(result.entity('p1').version).to.eql('2');
@@ -326,7 +326,7 @@ describe('iD.actions.MergeRemoteChanges', function () {
                     remote = base.entity('p1').update({loc: remoteLoc, version: '2'}),
                     localGraph = makeGraph([local]),
                     remoteGraph = makeGraph([remote]),
-                    action = iD.actions.MergeRemoteChanges('w1', localGraph, remoteGraph),
+                    action = iD.actionMergeRemoteChanges('w1', localGraph, remoteGraph),
                     result = action(localGraph);
 
                 expect(result).to.eql(localGraph);
@@ -344,7 +344,7 @@ describe('iD.actions.MergeRemoteChanges', function () {
                     remote = base.entity('r').update({tags: remoteTags, members: remoteMembers, version: '2'}),
                     localGraph = makeGraph([local]),
                     remoteGraph = makeGraph([remote, s1, s2, s3, s4, w4]),
-                    action = iD.actions.MergeRemoteChanges('r', localGraph, remoteGraph),
+                    action = iD.actionMergeRemoteChanges('r', localGraph, remoteGraph),
                     result = action(localGraph);
 
                 expect(result).to.eql(localGraph);
@@ -360,7 +360,7 @@ describe('iD.actions.MergeRemoteChanges', function () {
                     remote = base.entity('r').update({tags: remoteTags, members: remoteMembers, version: '2'}),
                     localGraph = makeGraph([local]),
                     remoteGraph = makeGraph([remote]),
-                    action = iD.actions.MergeRemoteChanges('r', localGraph, remoteGraph),
+                    action = iD.actionMergeRemoteChanges('r', localGraph, remoteGraph),
                     result = action(localGraph);
 
                 expect(result.entity('r').version).to.eql('2');
@@ -378,7 +378,7 @@ describe('iD.actions.MergeRemoteChanges', function () {
                     remote = base.entity('a').update({tags: remoteTags, loc: remoteLoc, version: '2'}),
                     localGraph = makeGraph([local]),
                     remoteGraph = makeGraph([remote]),
-                    action = iD.actions.MergeRemoteChanges('a', localGraph, remoteGraph);
+                    action = iD.actionMergeRemoteChanges('a', localGraph, remoteGraph);
                     action(localGraph);
 
                 expect(action.conflicts()).not.to.be.empty;
@@ -398,7 +398,7 @@ describe('iD.actions.MergeRemoteChanges', function () {
                     remote = base.entity('a').update({tags: remoteTags, loc: remoteLoc, version: '2'}),
                     localGraph = makeGraph([local]),
                     remoteGraph = makeGraph([remote]),
-                    action = iD.actions.MergeRemoteChanges('a', localGraph, remoteGraph).withOption('force_local'),
+                    action = iD.actionMergeRemoteChanges('a', localGraph, remoteGraph).withOption('force_local'),
                     result = action(localGraph);
 
                 expect(result.entity('a').version).to.eql('2');
@@ -415,7 +415,7 @@ describe('iD.actions.MergeRemoteChanges', function () {
                     remote = base.entity('a').update({tags: remoteTags, loc: remoteLoc, version: '2'}),
                     localGraph = makeGraph([local]),
                     remoteGraph = makeGraph([remote]),
-                    action = iD.actions.MergeRemoteChanges('a', localGraph, remoteGraph).withOption('force_remote'),
+                    action = iD.actionMergeRemoteChanges('a', localGraph, remoteGraph).withOption('force_remote'),
                     result = action(localGraph);
 
                 expect(result.entity('a').version).to.eql('2');
@@ -435,7 +435,7 @@ describe('iD.actions.MergeRemoteChanges', function () {
                     remote = base.entity('w1').update({tags: remoteTags, nodes: remoteNodes, version: '2'}),
                     localGraph = makeGraph([local, r1, r2]),
                     remoteGraph = makeGraph([remote, r3, r4]),
-                    action = iD.actions.MergeRemoteChanges('w1', localGraph, remoteGraph).withOption('force_local'),
+                    action = iD.actionMergeRemoteChanges('w1', localGraph, remoteGraph).withOption('force_local'),
                     result = action(localGraph);
 
                 expect(result.entity('w1').version).to.eql('2');
@@ -452,7 +452,7 @@ describe('iD.actions.MergeRemoteChanges', function () {
                     remote = base.entity('w1').update({tags: remoteTags, nodes: remoteNodes, version: '2'}),
                     localGraph = makeGraph([local, r1, r2]),
                     remoteGraph = makeGraph([remote, r3, r4]),
-                    action = iD.actions.MergeRemoteChanges('w1', localGraph, remoteGraph).withOption('force_remote'),
+                    action = iD.actionMergeRemoteChanges('w1', localGraph, remoteGraph).withOption('force_remote'),
                     result = action(localGraph);
 
                 expect(result.entity('w1').version).to.eql('2');
@@ -469,7 +469,7 @@ describe('iD.actions.MergeRemoteChanges', function () {
                     remote = base.entity('p1').update({loc: remoteLoc, version: '2'}),
                     localGraph = makeGraph([local]),
                     remoteGraph = makeGraph([remote]),
-                    action = iD.actions.MergeRemoteChanges('w1', localGraph, remoteGraph).withOption('force_local'),
+                    action = iD.actionMergeRemoteChanges('w1', localGraph, remoteGraph).withOption('force_local'),
                     result = action(localGraph);
 
                 expect(result.entity('p1').version).to.eql('2');
@@ -483,7 +483,7 @@ describe('iD.actions.MergeRemoteChanges', function () {
                     remote = base.entity('p1').update({loc: remoteLoc, version: '2'}),
                     localGraph = makeGraph([local]),
                     remoteGraph = makeGraph([remote]),
-                    action = iD.actions.MergeRemoteChanges('w1', localGraph, remoteGraph).withOption('force_remote'),
+                    action = iD.actionMergeRemoteChanges('w1', localGraph, remoteGraph).withOption('force_remote'),
                     result = action(localGraph);
 
                 expect(result.entity('p1').version).to.eql('2');
@@ -498,7 +498,7 @@ describe('iD.actions.MergeRemoteChanges', function () {
                     remote = base.entity('w1').update({nodes: remoteNodes, version: '2'}),
                     localGraph = makeGraph([local, localr1, r2]),
                     remoteGraph = makeGraph([remote, r3, r4]),
-                    action = iD.actions.MergeRemoteChanges('w1', localGraph, remoteGraph).withOption('force_remote'),
+                    action = iD.actionMergeRemoteChanges('w1', localGraph, remoteGraph).withOption('force_remote'),
                     result = action(localGraph);
 
                 expect(result.entity('w1').nodes).to.eql(remoteNodes);
@@ -518,7 +518,7 @@ describe('iD.actions.MergeRemoteChanges', function () {
                     remote = base.entity('r').update({tags: remoteTags, members: remoteMembers, version: '2'}),
                     localGraph = makeGraph([local, r1, r2, r3, r4, w3]),
                     remoteGraph = makeGraph([remote, s1, s2, s3, s4, w4]),
-                    action = iD.actions.MergeRemoteChanges('r', localGraph, remoteGraph).withOption('force_local'),
+                    action = iD.actionMergeRemoteChanges('r', localGraph, remoteGraph).withOption('force_local'),
                     result = action(localGraph);
 
                 expect(result.entity('r').version).to.eql('2');
@@ -535,7 +535,7 @@ describe('iD.actions.MergeRemoteChanges', function () {
                     remote = base.entity('r').update({tags: remoteTags, members: remoteMembers, version: '2'}),
                     localGraph = makeGraph([local, r1, r2, r3, r4, w3]),
                     remoteGraph = makeGraph([remote, s1, s2, s3, s4, w4]),
-                    action = iD.actions.MergeRemoteChanges('r', localGraph, remoteGraph).withOption('force_remote'),
+                    action = iD.actionMergeRemoteChanges('r', localGraph, remoteGraph).withOption('force_remote'),
                     result = action(localGraph);
 
                 expect(result.entity('r').version).to.eql('2');

@@ -1,10 +1,11 @@
 import * as d3 from 'd3';
 import _ from 'lodash';
-import { Path, TagClasses } from './index';
-import { Entity } from '../core/index';
-import { isSimpleMultipolygonOuterMember } from '../geo/index';
+import { svgPath, svgTagClasses } from './index';
+import { coreEntity } from '../core/index';
+import { geoIsSimpleMultipolygonOuterMember } from '../geo/index';
 
-export function Areas(projection, context) {
+
+export function svgAreas(projection, context) {
     // Patterns only work in Firefox when set directly on element.
     // (This is not a bug: https://bugzilla.mozilla.org/show_bug.cgi?id=750632)
     var patterns = {
@@ -23,6 +24,7 @@ export function Areas(projection, context) {
 
     var patternKeys = ['landuse', 'natural', 'amenity'];
 
+
     function setPattern(d) {
         for (var i = 0; i < patternKeys.length; i++) {
             if (patterns.hasOwnProperty(d.tags[patternKeys[i]])) {
@@ -33,8 +35,9 @@ export function Areas(projection, context) {
         this.style.fill = this.style.stroke = '';
     }
 
+
     return function drawAreas(selection, graph, entities, filter) {
-        var path = Path(projection, graph, true),
+        var path = svgPath(projection, graph, true),
             areas = {},
             multipolygon;
 
@@ -42,7 +45,7 @@ export function Areas(projection, context) {
             var entity = entities[i];
             if (entity.geometry(graph) !== 'area') continue;
 
-            multipolygon = isSimpleMultipolygonOuterMember(entity, graph);
+            multipolygon = geoIsSimpleMultipolygonOuterMember(entity, graph);
             if (multipolygon) {
                 areas[multipolygon.id] = {
                     entity: multipolygon.mergeTags(entity.tags),
@@ -73,7 +76,7 @@ export function Areas(projection, context) {
 
         var clipPaths = context.surface().selectAll('defs').selectAll('.clipPath')
            .filter(filter)
-           .data(data.clip, Entity.key);
+           .data(data.clip, coreEntity.key);
 
         clipPaths.exit()
            .remove();
@@ -105,7 +108,7 @@ export function Areas(projection, context) {
         var paths = areagroup
             .selectAll('path')
             .filter(filter)
-            .data(function(layer) { return data[layer]; }, Entity.key);
+            .data(function(layer) { return data[layer]; }, coreEntity.key);
 
         // Remove exiting areas first, so they aren't included in the `fills`
         // array used for sorting below (https://github.com/openstreetmap/iD/issues/1903).
@@ -137,7 +140,7 @@ export function Areas(projection, context) {
                     setPattern.apply(this, arguments);
                 }
             })
-            .call(TagClasses())
+            .call(svgTagClasses())
             .attr('d', path);
     };
 }

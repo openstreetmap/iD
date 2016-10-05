@@ -1,19 +1,21 @@
 import * as d3 from 'd3';
 import _ from 'lodash';
-import { rebind } from '../util/rebind';
 import * as Validations from '../validations/index';
-import { Difference } from './difference';
-import { Entity } from './entity';
-import { Graph } from './graph';
-import { Loading } from '../ui/index';
-import { SessionMutex } from '../util/index';
-import { Tree } from './tree';
+import { coreDifference } from './difference';
+import { coreEntity } from './entity';
+import { coreGraph } from './graph';
+import { coreTree } from './tree';
+import { uiLoading } from '../ui/index';
+import { utilSessionMutex } from '../util/index';
+import { utilRebind } from '../util/rebind';
 
-export function History(context) {
+
+export function coreHistory(context) {
     var stack, index, tree,
         imageryUsed = ['Bing'],
         dispatch = d3.dispatch('change', 'undone', 'redone'),
-        lock = SessionMutex('lock');
+        lock = utilSessionMutex('lock');
+
 
     function perform(actions) {
         actions = Array.prototype.slice.call(actions);
@@ -36,25 +38,31 @@ export function History(context) {
         };
     }
 
+
     function change(previous) {
-        var difference = Difference(previous, history.graph());
+        var difference = coreDifference(previous, history.graph());
         dispatch.call('change', this, difference);
         return difference;
     }
+
 
     // iD uses namespaced keys so multiple installations do not conflict
     function getKey(n) {
         return 'iD_' + window.location.origin + '_' + n;
     }
 
+
     var history = {
+
         graph: function() {
             return stack[index].graph;
         },
 
+
         base: function() {
             return stack[0].graph;
         },
+
 
         merge: function(entities, extent) {
             stack[0].graph.rebase(entities, _.map(stack, 'graph'), false);
@@ -62,6 +70,7 @@ export function History(context) {
 
             dispatch.call('change', this, undefined, extent);
         },
+
 
         perform: function() {
             var previous = stack[index].graph;
@@ -73,6 +82,7 @@ export function History(context) {
             return change(previous);
         },
 
+
         replace: function() {
             var previous = stack[index].graph;
 
@@ -81,6 +91,7 @@ export function History(context) {
 
             return change(previous);
         },
+
 
         pop: function() {
             var previous = stack[index].graph;
@@ -91,6 +102,7 @@ export function History(context) {
                 return change(previous);
             }
         },
+
 
         // Same as calling pop and then perform
         overwrite: function() {
@@ -107,6 +119,7 @@ export function History(context) {
             return change(previous);
         },
 
+
         undo: function() {
             var previous = stack[index].graph;
 
@@ -120,6 +133,7 @@ export function History(context) {
             return change(previous);
         },
 
+
         redo: function() {
             var previous = stack[index].graph;
 
@@ -132,6 +146,7 @@ export function History(context) {
             return change(previous);
         },
 
+
         undoAnnotation: function() {
             var i = index;
             while (i >= 0) {
@@ -139,6 +154,7 @@ export function History(context) {
                 i--;
             }
         },
+
 
         redoAnnotation: function() {
             var i = index + 1;
@@ -148,15 +164,18 @@ export function History(context) {
             }
         },
 
+
         intersects: function(extent) {
             return tree.intersects(extent, stack[index].graph);
         },
 
+
         difference: function() {
             var base = stack[0].graph,
                 head = stack[index].graph;
-            return Difference(base, head);
+            return coreDifference(base, head);
         },
+
 
         changes: function(action) {
             var base = stack[0].graph,
@@ -166,7 +185,7 @@ export function History(context) {
                 head = action(head);
             }
 
-            var difference = Difference(base, head);
+            var difference = coreDifference(base, head);
 
             return {
                 modified: difference.modified(),
@@ -175,6 +194,7 @@ export function History(context) {
             };
         },
 
+
         validate: function(changes) {
             return _(Validations)
                 .map(function(fn) { return fn()(changes, stack[index].graph); })
@@ -182,9 +202,11 @@ export function History(context) {
                 .value();
         },
 
+
         hasChanges: function() {
             return this.difference().length() > 0;
         },
+
 
         imageryUsed: function(sources) {
             if (sources) {
@@ -200,13 +222,15 @@ export function History(context) {
             }
         },
 
+
         reset: function() {
-            stack = [{graph: Graph()}];
+            stack = [{graph: coreGraph()}];
             index = 0;
-            tree = Tree(stack[0].graph);
+            tree = coreTree(stack[0].graph);
             dispatch.call('change');
             return history;
         },
+
 
         toJSON: function() {
             if (!this.hasChanges()) return;
@@ -220,7 +244,7 @@ export function History(context) {
 
                 _.forEach(i.graph.entities, function(entity, id) {
                     if (entity) {
-                        var key = Entity.key(entity);
+                        var key = coreEntity.key(entity);
                         allEntities[key] = entity;
                         modified.push(key);
                     } else {
@@ -255,30 +279,31 @@ export function History(context) {
                 entities: _.values(allEntities),
                 baseEntities: _.values(baseEntities),
                 stack: s,
-                nextIDs: Entity.id.next,
+                nextIDs: coreEntity.id.next,
                 index: index
             });
         },
+
 
         fromJSON: function(json, loadChildNodes) {
             var h = JSON.parse(json),
                 loadComplete = true;
 
-            Entity.id.next = h.nextIDs;
+            coreEntity.id.next = h.nextIDs;
             index = h.index;
 
             if (h.version === 2 || h.version === 3) {
                 var allEntities = {};
 
                 h.entities.forEach(function(entity) {
-                    allEntities[Entity.key(entity)] = Entity(entity);
+                    allEntities[coreEntity.key(entity)] = coreEntity(entity);
                 });
 
                 if (h.version === 3) {
                     // This merges originals for changed entities into the base of
                     // the stack even if the current stack doesn't have them (for
                     // example when iD has been restarted in a different region)
-                    var baseEntities = h.baseEntities.map(function(d) { return Entity(d); });
+                    var baseEntities = h.baseEntities.map(function(d) { return coreEntity(d); });
                     stack[0].graph.rebase(baseEntities, _.map(stack, 'graph'), true);
                     tree.rebase(baseEntities, true);
 
@@ -297,7 +322,7 @@ export function History(context) {
                             loadComplete = false;
                             context.redrawEnable(false);
 
-                            var loading = Loading(context).blocking(true);
+                            var loading = uiLoading(context).blocking(true);
                             context.container().call(loading);
 
                             var childNodesLoaded = function(err, result) {
@@ -345,7 +370,7 @@ export function History(context) {
                     }
 
                     return {
-                        graph: Graph(stack[0].graph).load(entities),
+                        graph: coreGraph(stack[0].graph).load(entities),
                         annotation: d.annotation,
                         imageryUsed: d.imageryUsed
                     };
@@ -357,10 +382,10 @@ export function History(context) {
 
                     for (var i in d.entities) {
                         var entity = d.entities[i];
-                        entities[i] = entity === 'undefined' ? undefined : Entity(entity);
+                        entities[i] = entity === 'undefined' ? undefined : coreEntity(entity);
                     }
 
-                    d.graph = Graph(stack[0].graph).load(entities);
+                    d.graph = coreGraph(stack[0].graph).load(entities);
                     return d;
                 });
             }
@@ -372,10 +397,12 @@ export function History(context) {
             return history;
         },
 
+
         save: function() {
             if (lock.locked()) context.storage(getKey('saved_history'), history.toJSON() || null);
             return history;
         },
+
 
         clearSaved: function() {
             context.debouncedSave.cancel();
@@ -383,19 +410,23 @@ export function History(context) {
             return history;
         },
 
+
         lock: function() {
             return lock.lock();
         },
 
+
         unlock: function() {
             lock.unlock();
         },
+
 
         // is iD not open in another window and it detects that
         // there's a history stored in localStorage that's recoverable?
         restorableChanges: function() {
             return lock.locked() && !!context.storage(getKey('saved_history'));
         },
+
 
         // load history from a version stored in localStorage
         restore: function() {
@@ -405,11 +436,13 @@ export function History(context) {
             if (json) history.fromJSON(json, true);
         },
 
+
         _getKey: getKey
 
     };
 
+
     history.reset();
 
-    return rebind(history, dispatch, 'on');
+    return utilRebind(history, dispatch, 'on');
 }

@@ -1,38 +1,68 @@
-import { check, defaultcheck} from './check';
-import { combo, multiCombo, networkCombo, typeCombo } from './combo';
-import { email, number, tel, text, url } from './input';
+export * from './check';
+export * from './combo';
+export * from './input';
+export * from './access';
+export * from './address';
+export * from './cycleway';
+export * from './lanes';
+export * from './localized';
+export * from './maxspeed';
+export * from './radio';
+export * from './restrictions';
+export * from './textarea';
+export * from './wikipedia';
 
-import { access } from './access';
-import { address } from './address';
-import { cycleway } from './cycleway';
-import { lanes } from './lanes';
-import { localized } from './localized';
-import { maxspeed } from './maxspeed';
-import { radio } from './radio';
-import { restrictions } from './restrictions';
-import { textarea } from './textarea';
-import { wikipedia } from './wikipedia';
+import {
+    uiFieldCheck,
+    uiFieldDefaultcheck
+} from './check';
 
-export var fields = {
-    access: access,
-    address: address,
-    check: check,
-    defaultcheck: defaultcheck,
-    combo: combo,
-    typeCombo: typeCombo,
-    multiCombo: multiCombo,
-    networkCombo: networkCombo,
-    cycleway: cycleway,
-    text: text,
-    url: url,
-    number: number,
-    email: email,
-    tel: tel,
-    localized: localized,
-    lanes: lanes,
-    maxspeed: maxspeed,
-    radio: radio,
-    restrictions: restrictions,
-    textarea: textarea,
-    wikipedia: wikipedia
+import {
+    uiFieldCombo,
+    uiFieldMultiCombo,
+    uiFieldNetworkCombo,
+    uiFieldTypeCombo
+} from './combo';
+
+import {
+    uiFieldEmail,
+    uiFieldNumber,
+    uiFieldTel,
+    uiFieldText,
+    uiFieldUrl
+} from './input';
+
+import { uiFieldAccess } from './access';
+import { uiFieldAddress } from './address';
+import { uiFieldCycleway } from './cycleway';
+import { uiFieldLanes } from './lanes';
+import { uiFieldLocalized } from './localized';
+import { uiFieldMaxspeed } from './maxspeed';
+import { uiFieldRadio } from './radio';
+import { uiFieldRestrictions } from './restrictions';
+import { uiFieldTextarea } from './textarea';
+import { uiFieldWikipedia } from './wikipedia';
+
+export var uiFields = {
+    access: uiFieldAccess,
+    address: uiFieldAddress,
+    check: uiFieldCheck,
+    defaultcheck: uiFieldDefaultcheck,
+    combo: uiFieldCombo,
+    typeCombo: uiFieldTypeCombo,
+    multiCombo: uiFieldMultiCombo,
+    networkCombo: uiFieldNetworkCombo,
+    cycleway: uiFieldCycleway,
+    text: uiFieldText,
+    url: uiFieldUrl,
+    number: uiFieldNumber,
+    email: uiFieldEmail,
+    tel: uiFieldTel,
+    localized: uiFieldLocalized,
+    lanes: uiFieldLanes,
+    maxspeed: uiFieldMaxspeed,
+    radio: uiFieldRadio,
+    restrictions: uiFieldRestrictions,
+    textarea: uiFieldTextarea,
+    wikipedia: uiFieldWikipedia
 };

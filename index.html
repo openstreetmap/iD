@@ -18,16 +18,17 @@
         <div id='id-container'></div>
         <script>
         id = iD.Context(window)
-            .presets(iD.data.presets)
-            .imagery(iD.data.imagery)
-            .taginfo(iD.services.taginfo.init())
+            .presets(iD.dataPresets)
+            .imagery(iD.dataImagery)
+            .taginfo(iD.serviceTaginfo.init())
             .assetPath('dist/');
 
         id.ui()(document.getElementById('id-container'));
 
-        iD.d3.select('#about-list').insert('li', '.user-list')
+        iD.d3.select('#about-list')
+            .insert('li', '.user-list')
             .attr('class', 'source-switch')
-            .call(iD.ui.SourceSwitch(id)
+            .call(iD.uiSourceSwitch(id)
                 .keys([
                     {
                         'url': 'http://www.openstreetmap.org',

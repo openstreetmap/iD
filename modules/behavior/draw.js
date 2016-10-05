@@ -1,25 +1,32 @@
 import * as d3 from 'd3';
-import { rebind } from '../util/rebind';
 import { d3keybinding } from '../lib/d3.keybinding.js';
-import { chooseEdge, euclideanDistance } from '../geo/index';
-import { Edit } from './edit';
-import { Hover } from './hover';
-import { Tail } from './tail';
+import { behaviorEdit } from './edit';
+import { behaviorHover } from './hover';
+import { behaviorTail } from './tail';
+import { geoChooseEdge, geoEuclideanDistance } from '../geo/index';
+import { utilRebind } from '../util/rebind';
 
-export function Draw(context) {
+
+behaviorDraw.usedTails = {};
+behaviorDraw.disableSpace = false;
+behaviorDraw.lastSpace = null;
+
+
+export function behaviorDraw(context) {
     var dispatch = d3.dispatch('move', 'click', 'clickWay',
             'clickNode', 'undo', 'cancel', 'finish'),
         keybinding = d3keybinding('draw'),
-        hover = Hover(context)
+        hover = behaviorHover(context)
             .altDisables(true)
             .on('hover', context.ui().sidebar.hover),
-        tail = Tail(),
-        edit = Edit(context),
+        tail = behaviorTail(),
+        edit = behaviorEdit(context),
         closeTolerance = 4,
         tolerance = 12,
         mouseLeave = false,
         lastMouse = null,
-        cached = Draw;
+        cached = behaviorDraw;
+
 
     function datum() {
         if (d3.event.altKey) return {};
@@ -30,6 +37,7 @@ export function Draw(context) {
             return d3.event.target.__data__ || {};
         }
     }
+
 
     function mousedown() {
 
@@ -50,7 +58,7 @@ export function Draw(context) {
         d3.select(window).on('mouseup.draw', function() {
             var t2 = +new Date(),
                 p2 = point(),
-                dist = euclideanDistance(p1, p2);
+                dist = geoEuclideanDistance(p1, p2);
 
             element.on('mousemove.draw', mousemove);
             d3.select(window).on('mouseup.draw', null);
@@ -73,18 +81,22 @@ export function Draw(context) {
         }, true);
     }
 
+
     function mousemove() {
         lastMouse = d3.event;
         dispatch.call('move', this, datum());
     }
 
+
     function mouseenter() {
         mouseLeave = false;
     }
 
+
     function mouseleave() {
         mouseLeave = true;
     }
+
 
     function click() {
         var d = datum();
@@ -96,7 +108,7 @@ export function Draw(context) {
                     mouse[1] > pad && mouse[1] < dims[1] - pad;
 
             if (trySnap) {
-                var choice = chooseEdge(context.childNodes(d), context.mouse(), context.projection),
+                var choice = geoChooseEdge(context.childNodes(d), context.mouse(), context.projection),
                     edge = [d.nodes[choice.index - 1], d.nodes[choice.index]];
                 dispatch.call('clickWay', this, choice.loc, edge);
             } else {
@@ -111,10 +123,11 @@ export function Draw(context) {
         }
     }
 
+
     function space() {
         var currSpace = context.mouse();
         if (cached.disableSpace && cached.lastSpace) {
-            var dist = euclideanDistance(cached.lastSpace, currSpace);
+            var dist = geoEuclideanDistance(cached.lastSpace, currSpace);
             if (dist > tolerance) {
                 cached.disableSpace = false;
             }
@@ -135,20 +148,24 @@ export function Draw(context) {
         click();
     }
 
+
     function backspace() {
         d3.event.preventDefault();
         dispatch.call('undo');
     }
+
 
     function del() {
         d3.event.preventDefault();
         dispatch.call('cancel');
     }
 
+
     function ret() {
         d3.event.preventDefault();
         dispatch.call('finish');
     }
+
 
     function draw(selection) {
         context.install(hover);
@@ -178,6 +195,7 @@ export function Draw(context) {
         return draw;
     }
 
+
     draw.off = function(selection) {
         context.ui().sidebar.hover.cancel();
         context.uninstall(hover);
@@ -202,14 +220,12 @@ export function Draw(context) {
             .call(keybinding.off);
     };
 
+
     draw.tail = function(_) {
         tail.text(_);
         return draw;
     };
 
-    return rebind(draw, dispatch, 'on');
-}
 
-Draw.usedTails = {};
-Draw.disableSpace = false;
-Draw.lastSpace = null;
+    return utilRebind(draw, dispatch, 'on');
+}

@@ -1,5 +1,6 @@
 import { jsonpRequest } from '../util/jsonp_request';
-import { qsString } from '../util/index';
+import { utilQsString } from '../util/index';
+
 
 var wikidata = {},
     endpoint = 'https://www.wikidata.org/w/api.php?';
@@ -16,7 +17,7 @@ export function init() {
         }
 
         lang = lang || 'en';
-        jsonpRequest(endpoint + qsString({
+        jsonpRequest(endpoint + utilQsString({
             action: 'wbgetentities',
             format: 'json',
             sites: lang.replace(/-/g, '_') + 'wiki',

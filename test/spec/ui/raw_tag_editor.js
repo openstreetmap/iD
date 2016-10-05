@@ -1,9 +1,9 @@
-describe('iD.ui.RawTagEditor', function() {
+describe('iD.uiRawTagEditor', function() {
     var taglist, element,
         entity, context;
 
     function render(tags) {
-        taglist = iD.ui.RawTagEditor(context)
+        taglist = iD.uiRawTagEditor(context)
             .entityID(entity.id)
             .preset({isFallback: function() { return false; }})
             .tags(tags);
@@ -50,7 +50,7 @@ describe('iD.ui.RawTagEditor', function() {
             expect(tags).to.eql({highway: undefined});
             done();
         });
-        iD.util.triggerEvent(element.selectAll('button.remove'), 'click');
+        iD.utilTriggerEvent(element.selectAll('button.remove'), 'click');
     });
 
     it('adds tags when pressing the TAB key on last input.value', function (done) {

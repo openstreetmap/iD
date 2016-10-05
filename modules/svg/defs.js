@@ -4,21 +4,22 @@ import * as d3 from 'd3';
     A standalone SVG element that contains only a `defs` sub-element. To be
     used once globally, since defs IDs must be unique within a document.
 */
-export function Defs(context) {
+export function svgDefs(context) {
 
     function SVGSpriteDefinition(id, href) {
         return function(defs) {
             d3.request(href)
-            .mimeType('image/svg+xml')
-            .response(function(xhr) { return xhr.responseXML; })
+                .mimeType('image/svg+xml')
+                .response(function(xhr) { return xhr.responseXML; })
                 .get(function(err, svg) {
                     if (err) return;
                     defs.node().appendChild(
-                    d3.select(svg.documentElement).attr('id', id).node()
-                );
-            });
+                        d3.select(svg.documentElement).attr('id', id).node()
+                    );
+                });
         };
     }
+
 
     return function drawDefs(selection) {
         var defs = selection.append('defs');

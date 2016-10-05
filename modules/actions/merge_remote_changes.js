@@ -1,13 +1,15 @@
 import _ from 'lodash';
 import { t } from '../util/locale';
-import { DeleteMultiple } from './delete_multiple';
-import { Entity } from '../core/index';
+import { actionDeleteMultiple } from './delete_multiple';
+import { coreEntity } from '../core/index';
 import { diff3_merge } from '../util/diff3';
-import { discarded } from '../../data/index';
+import { dataDiscarded } from '../../data/index';
 
-export function MergeRemoteChanges(id, localGraph, remoteGraph, formatUser) {
+
+export function actionMergeRemoteChanges(id, localGraph, remoteGraph, formatUser) {
     var option = 'safe',  // 'safe', 'force_local', 'force_remote'
         conflicts = [];
+
 
     function user(d) {
         return _.isFunction(formatUser) ? formatUser(d) : d;
@@ -101,14 +103,14 @@ export function MergeRemoteChanges(id, localGraph, remoteGraph, formatUser) {
                 updates.replacements.push(remote);
 
             } else if (option === 'force_local' && local) {
-                target = Entity(local);
+                target = coreEntity(local);
                 if (remote) {
                     target = target.update({ version: remote.version });
                 }
                 updates.replacements.push(target);
 
             } else if (option === 'safe' && local && remote && local.version !== remote.version) {
-                target = Entity(local, { version: remote.version });
+                target = coreEntity(local, { version: remote.version });
                 if (remote.visible) {
                     target = mergeLocation(remote, target);
                 } else {
@@ -129,7 +131,7 @@ export function MergeRemoteChanges(id, localGraph, remoteGraph, formatUser) {
             graph = graph.replace(updates.replacements[i]);
         }
         if (updates.removeIds.length) {
-            graph = DeleteMultiple(updates.removeIds)(graph);
+            graph = actionDeleteMultiple(updates.removeIds)(graph);
         }
         return graph;
     }
@@ -150,7 +152,7 @@ export function MergeRemoteChanges(id, localGraph, remoteGraph, formatUser) {
 
     function mergeTags(base, remote, target) {
         function ignoreKey(k) {
-            return _.includes(discarded, k);
+            return _.includes(dataDiscarded, k);
         }
 
         if (option === 'force_local' || _.isEqual(target.tags, remote.tags)) {
@@ -206,12 +208,12 @@ export function MergeRemoteChanges(id, localGraph, remoteGraph, formatUser) {
             base = graph.base().entities[id],
             local = localGraph.entity(id),
             remote = remoteGraph.entity(id),
-            target = Entity(local, { version: remote.version });
+            target = coreEntity(local, { version: remote.version });
 
         // delete/undelete
         if (!remote.visible) {
             if (option === 'force_remote') {
-                return DeleteMultiple([id])(graph);
+                return actionDeleteMultiple([id])(graph);
 
             } else if (option === 'force_local') {
                 if (target.type === 'way') {
@@ -249,14 +251,17 @@ export function MergeRemoteChanges(id, localGraph, remoteGraph, formatUser) {
         return graph;
     };
 
+
     action.withOption = function(opt) {
         option = opt;
         return action;
     };
 
+
     action.conflicts = function() {
         return conflicts;
     };
+
 
     return action;
 }

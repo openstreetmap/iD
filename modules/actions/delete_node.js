@@ -1,8 +1,9 @@
-import { DeleteRelation } from './delete_relation';
-import { DeleteWay } from './delete_way';
+import { actionDeleteRelation } from './delete_relation';
+import { actionDeleteWay } from './delete_way';
+
 
 // https://github.com/openstreetmap/potlatch2/blob/master/net/systemeD/halcyon/connection/actions/DeleteNodeAction.as
-export function DeleteNode(nodeId) {
+export function actionDeleteNode(nodeId) {
     var action = function(graph) {
         var node = graph.entity(nodeId);
 
@@ -12,7 +13,7 @@ export function DeleteNode(nodeId) {
                 graph = graph.replace(parent);
 
                 if (parent.isDegenerate()) {
-                    graph = DeleteWay(parent.id)(graph);
+                    graph = actionDeleteWay(parent.id)(graph);
                 }
             });
 
@@ -22,16 +23,18 @@ export function DeleteNode(nodeId) {
                 graph = graph.replace(parent);
 
                 if (parent.isDegenerate()) {
-                    graph = DeleteRelation(parent.id)(graph);
+                    graph = actionDeleteRelation(parent.id)(graph);
                 }
             });
 
         return graph.remove(node);
     };
 
+
     action.disabled = function() {
         return false;
     };
+
 
     return action;
 }

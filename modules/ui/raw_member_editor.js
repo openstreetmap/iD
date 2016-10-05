@@ -1,40 +1,42 @@
 import * as d3 from 'd3';
 import { d3combobox } from '../lib/d3.combobox.js';
 import { t } from '../util/locale';
-import { Browse, Select } from '../modes/index';
-import { ChangeMember, DeleteMember } from '../actions/index';
-import { Disclosure } from './disclosure';
-import { Entity } from '../core/index';
-import { Icon } from '../svg/index';
-import { displayName } from '../util/index';
+import { actionChangeMember, actionDeleteMember } from '../actions/index';
+import { coreEntity } from '../core/index';
+import { modeBrowse, modeSelect } from '../modes/index';
+import { svgIcon } from '../svg/index';
+import { uiDisclosure } from './disclosure';
+import { utilDisplayName } from '../util/index';
 
 
-export function RawMemberEditor(context) {
+export function uiRawMemberEditor(context) {
     var id;
 
 
     function selectMember(d) {
         d3.event.preventDefault();
-        context.enter(Select(context, [d.id]));
+        context.enter(modeSelect(context, [d.id]));
     }
 
 
     function changeRole(d) {
         var role = d3.select(this).property('value');
-        var member = {id: d.id, type: d.type, role: role};
+        var member = { id: d.id, type: d.type, role: role };
         context.perform(
-            ChangeMember(d.relation.id, member, d.index),
-            t('operations.change_role.annotation'));
+            actionChangeMember(d.relation.id, member, d.index),
+            t('operations.change_role.annotation')
+        );
     }
 
 
     function deleteMember(d) {
         context.perform(
-            DeleteMember(d.relation.id, d.index),
-            t('operations.delete_member.annotation'));
+            actionDeleteMember(d.relation.id, d.index),
+            t('operations.delete_member.annotation')
+        );
 
         if (!context.hasEntity(d.relation.id)) {
-            context.enter(Browse(context));
+            context.enter(modeBrowse(context));
         }
     }
 
@@ -54,17 +56,20 @@ export function RawMemberEditor(context) {
             });
         });
 
-        selection.call(Disclosure()
+        selection.call(uiDisclosure()
             .title(t('inspector.all_members') + ' (' + memberships.length + ')')
             .expanded(true)
             .on('toggled', toggled)
-            .content(content));
+            .content(content)
+        );
+
 
         function toggled(expanded) {
             if (expanded) {
                 selection.node().parentNode.scrollTop += 200;
             }
         }
+
 
         function content(wrap) {
             var list = wrap.selectAll('.member-list')
@@ -76,8 +81,8 @@ export function RawMemberEditor(context) {
 
             var items = list.selectAll('li')
                 .data(memberships, function(d) {
-                    return Entity.key(d.relation) + ',' + d.index + ',' +
-                        (d.member ? Entity.key(d.member) : 'incomplete');
+                    return coreEntity.key(d.relation) + ',' + d.index + ',' +
+                        (d.member ? coreEntity.key(d.member) : 'incomplete');
                 });
 
             items.exit()
@@ -91,19 +96,19 @@ export function RawMemberEditor(context) {
 
             enter.each(function(d) {
                 if (d.member) {
-                    var $label = d3.select(this).append('label')
+                    var label = d3.select(this).append('label')
                         .attr('class', 'form-label')
                         .append('a')
                         .attr('href', '#')
                         .on('click', selectMember);
 
-                    $label.append('span')
+                    label.append('span')
                         .attr('class', 'member-entity-type')
                         .text(function(d) { return context.presets().match(d.member, context.graph()).name(); });
 
-                    $label.append('span')
+                    label.append('span')
                         .attr('class', 'member-entity-name')
-                        .text(function(d) { return displayName(d.member); });
+                        .text(function(d) { return utilDisplayName(d.member); });
 
                 } else {
                     d3.select(this).append('label')
@@ -112,7 +117,8 @@ export function RawMemberEditor(context) {
                 }
             });
 
-            enter.append('input')
+            enter
+                .append('input')
                 .attr('class', 'member-role')
                 .property('type', 'text')
                 .attr('maxlength', 255)
@@ -120,11 +126,12 @@ export function RawMemberEditor(context) {
                 .property('value', function(d) { return d.role; })
                 .on('change', changeRole);
 
-            enter.append('button')
+            enter
+                .append('button')
                 .attr('tabindex', -1)
                 .attr('class', 'remove button-input-action member-delete minor')
                 .on('click', deleteMember)
-                .call(Icon('#operation-delete'));
+                .call(svgIcon('#operation-delete'));
 
             if (context.taginfo()) {
                 enter.each(bindTypeahead);
@@ -161,6 +168,7 @@ export function RawMemberEditor(context) {
                         });
                     }));
             }
+
 
             function unbind() {
                 var row = d3.select(this);

@@ -1,16 +1,18 @@
 import * as d3 from 'd3';
 import { t } from '../util/locale';
-import { intro } from './intro/index';
-import { modal } from './modal';
+import { uiIntro } from './intro/index';
+import { uiModal } from './modal';
 
-export function Splash(context) {
+
+export function uiSplash(context) {
+
     return function(selection) {
         if (context.storage('sawSplash'))
              return;
 
         context.storage('sawSplash', true);
 
-        var modalSelection = modal(selection);
+        var modalSelection = uiModal(selection);
 
         modalSelection.select('.modal')
             .attr('class', 'modal-splash modal col6');
@@ -19,11 +21,13 @@ export function Splash(context) {
             .append('div')
             .attr('class', 'fillL');
 
-        introModal.append('div')
+        introModal
+            .append('div')
             .attr('class','modal-section cf')
             .append('h3').text(t('splash.welcome'));
 
-        introModal.append('div')
+        introModal
+            .append('div')
             .attr('class','modal-section')
             .append('p')
             .html(t('splash.text', {
@@ -32,22 +36,27 @@ export function Splash(context) {
                 github: '<a href="https://github.com/openstreetmap/iD">github.com</a>'
             }));
 
-        var buttons = introModal.append('div').attr('class', 'modal-actions cf');
+        var buttons = introModal
+            .append('div')
+            .attr('class', 'modal-actions cf');
 
-        buttons.append('button')
+        buttons
+            .append('button')
             .attr('class', 'col6 walkthrough')
             .text(t('splash.walkthrough'))
             .on('click', function() {
-                d3.select(document.body).call(intro(context));
+                d3.select(document.body).call(uiIntro(context));
                 modalSelection.close();
             });
 
-        buttons.append('button')
+        buttons
+            .append('button')
             .attr('class', 'col6 start')
             .text(t('splash.start'))
             .on('click', modalSelection.close);
 
-        modalSelection.select('button.close').attr('class','hide');
+        modalSelection.select('button.close')
+            .attr('class','hide');
 
     };
 }

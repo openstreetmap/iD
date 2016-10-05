@@ -1,11 +1,11 @@
 import * as d3 from 'd3';
 import _ from 'lodash';
-import { rebind } from '../../util/rebind';
-import { getSetValue } from '../../util/get_set_value';
+import { utilRebind } from '../../util/rebind';
+import { utilGetSetValue } from '../../util/get_set_value';
 import { d3combobox } from '../../lib/d3.combobox.js';
 
 
-export function access(field) {
+export function uiFieldAccess(field) {
     var dispatch = d3.dispatch('change'),
         items;
 
@@ -35,12 +35,14 @@ export function access(field) {
             .append('li')
             .attr('class', function(d) { return 'cf preset-access-' + d; });
 
-        enter.append('span')
+        enter
+            .append('span')
             .attr('class', 'col6 label preset-label-access')
             .attr('for', function(d) { return 'preset-input-access-' + d; })
             .text(function(d) { return field.t('types.' + d); });
 
-        enter.append('div')
+        enter
+            .append('div')
             .attr('class', 'col6 preset-input-access-wrap')
             .append('input')
             .attr('type', 'text')
@@ -64,7 +66,7 @@ export function access(field) {
 
     function change(d) {
         var tag = {};
-        tag[d] = getSetValue(d3.select(this)) || undefined;
+        tag[d] = utilGetSetValue(d3.select(this)) || undefined;
         dispatch.call('change', this, tag);
     }
 
@@ -193,8 +195,9 @@ export function access(field) {
         }
     };
 
+
     access.tags = function(tags) {
-        getSetValue(items.selectAll('.preset-input-access'),
+        utilGetSetValue(items.selectAll('.preset-input-access'),
             function(d) { return tags[d] || ''; })
             .attr('placeholder', function() {
                 return tags.access ? tags.access : field.placeholder();
@@ -209,10 +212,12 @@ export function access(field) {
         });
     };
 
+
     access.focus = function() {
         items.selectAll('.preset-input-access')
             .node().focus();
     };
 
-    return rebind(access, dispatch, 'on');
+
+    return utilRebind(access, dispatch, 'on');
 }

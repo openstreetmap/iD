@@ -1,11 +1,11 @@
-describe('iD.modes.AddPoint', function() {
+describe('iD.modeAddPoint', function() {
     var context;
 
     beforeEach(function() {
         var container = d3.select(document.createElement('div'));
 
         context = iD.Context(window)
-            .presets(iD.data.presets)
+            .presets(iD.dataPresets)
             .imagery([])
             .container(container);
 
@@ -16,7 +16,7 @@ describe('iD.modes.AddPoint', function() {
             .attr('class', 'inspector-wrap');
 
         context.map().centerZoom([-77.02271, 38.90085], 20);
-        context.enter(iD.modes.AddPoint(context));
+        context.enter(iD.modeAddPoint(context));
     });
 
     describe('clicking the map', function () {

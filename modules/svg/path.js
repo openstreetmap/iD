@@ -1,6 +1,6 @@
 import * as d3 from 'd3';
 
-export function Path(projection, graph, polygon) {
+export function svgPath(projection, graph, polygon) {
     var cache = {},
         clip = d3.geoClipExtent().extent(projection.clipExtent()).stream,
         project = projection.stream,

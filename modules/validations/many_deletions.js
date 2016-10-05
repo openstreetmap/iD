@@ -1,6 +1,6 @@
 import { t } from '../util/locale';
 
-export function ManyDeletions() {
+export function validationManyDeletions() {
     var threshold = 100;
 
     var validation = function(changes) {
@@ -11,8 +11,10 @@ export function ManyDeletions() {
                 message: t('validations.many_deletions', { n: changes.deleted.length })
             });
         }
+
         return warnings;
     };
+
 
     return validation;
 }

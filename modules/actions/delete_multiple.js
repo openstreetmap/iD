@@ -1,13 +1,15 @@
-import { DeleteNode } from './delete_node';
-import { DeleteRelation } from './delete_relation';
-import { DeleteWay } from './delete_way';
+import { actionDeleteNode } from './delete_node';
+import { actionDeleteRelation } from './delete_relation';
+import { actionDeleteWay } from './delete_way';
 
-export function DeleteMultiple(ids) {
+
+export function actionDeleteMultiple(ids) {
     var actions = {
-        way: DeleteWay,
-        node: DeleteNode,
-        relation: DeleteRelation
+        way: actionDeleteWay,
+        node: actionDeleteNode,
+        relation: actionDeleteRelation
     };
+
 
     var action = function(graph) {
         ids.forEach(function(id) {
@@ -19,6 +21,7 @@ export function DeleteMultiple(ids) {
         return graph;
     };
 
+
     action.disabled = function(graph) {
         for (var i = 0; i < ids.length; i++) {
             var id = ids[i],
@@ -26,6 +29,7 @@ export function DeleteMultiple(ids) {
             if (disabled) return disabled;
         }
     };
+
 
     return action;
 }

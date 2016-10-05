@@ -1,15 +1,16 @@
 import _ from 'lodash';
-import { Relation, Way } from '../core/index';
-import { isSimpleMultipolygonOuterMember, sphericalDistance } from '../geo/index';
-import { AddMember } from './add_member';
-import { wrap as Wrap } from '../util/index';
+import { coreRelation, coreWay } from '../core/index';
+import { geoIsSimpleMultipolygonOuterMember, geoSphericalDistance } from '../geo/index';
+import { actionAddMember } from './add_member';
+import { utilWrap } from '../util/index';
+
 
 // Split a way at the given node.
 //
 // Optionally, split only the given ways, if multiple ways share
 // the given node.
 //
-// This is the inverse of `iD.actions.Join`.
+// This is the inverse of `iD.actionJoin`.
 //
 // For testing convenience, accepts an ID to assign to the new way.
 // Normally, this will be undefined and the way will automatically
@@ -18,7 +19,7 @@ import { wrap as Wrap } from '../util/index';
 // Reference:
 //   https://github.com/systemed/potlatch2/blob/master/net/systemeD/halcyon/connection/actions/SplitWayAction.as
 //
-export function Split(nodeId, newWayIds) {
+export function actionSplit(nodeId, newWayIds) {
     var wayIds;
 
     // if the way is closed, we need to search for a partner node
@@ -39,11 +40,11 @@ export function Split(nodeId, newWayIds) {
             idxB;
 
         function wrap(index) {
-            return Wrap(index, nodes.length);
+            return utilWrap(index, nodes.length);
         }
 
         function dist(nA, nB) {
-            return sphericalDistance(graph.entity(nA).loc, graph.entity(nB).loc);
+            return geoSphericalDistance(graph.entity(nA).loc, graph.entity(nB).loc);
         }
 
         // calculate lengths
@@ -72,12 +73,13 @@ export function Split(nodeId, newWayIds) {
         return idxB;
     }
 
+
     function split(graph, wayA, newWayId) {
-        var wayB = Way({id: newWayId, tags: wayA.tags}),
+        var wayB = coreWay({id: newWayId, tags: wayA.tags}),
             nodesA,
             nodesB,
             isArea = wayA.isArea(),
-            isOuter = isSimpleMultipolygonOuterMember(wayA, graph);
+            isOuter = geoIsSimpleMultipolygonOuterMember(wayA, graph);
 
         if (wayA.isClosed()) {
             var nodes = wayA.nodes.slice(0, -1),
@@ -123,12 +125,12 @@ export function Split(nodeId, newWayIds) {
                     role: relation.memberById(wayA.id).role
                 };
 
-                graph = AddMember(relation.id, member)(graph);
+                graph = actionAddMember(relation.id, member)(graph);
             }
         });
 
         if (!isOuter && isArea) {
-            var multipolygon = Relation({
+            var multipolygon = coreRelation({
                 tags: _.extend({}, wayA.tags, {type: 'multipolygon'}),
                 members: [
                     {id: wayA.id, role: 'outer', type: 'way'},
@@ -143,6 +145,7 @@ export function Split(nodeId, newWayIds) {
         return graph;
     }
 
+
     var action = function(graph) {
         var candidates = action.ways(graph);
         for (var i = 0; i < candidates.length; i++) {
@@ -150,6 +153,7 @@ export function Split(nodeId, newWayIds) {
         }
         return graph;
     };
+
 
     action.ways = function(graph) {
         var node = graph.entity(nodeId),
@@ -177,17 +181,20 @@ export function Split(nodeId, newWayIds) {
         });
     };
 
+
     action.disabled = function(graph) {
         var candidates = action.ways(graph);
         if (candidates.length === 0 || (wayIds && wayIds.length !== candidates.length))
             return 'not_eligible';
     };
 
+
     action.limitWays = function(_) {
         if (!arguments.length) return wayIds;
         wayIds = _;
         return action;
     };
+
 
     return action;
 }

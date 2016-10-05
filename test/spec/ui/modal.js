@@ -1,4 +1,4 @@
-describe('iD.ui.modal', function () {
+describe('iD.uiModal', function () {
     var elem;
 
     beforeEach(function() {
@@ -10,7 +10,7 @@ describe('iD.ui.modal', function () {
     });
 
     it('can be instantiated', function() {
-        var modal = iD.ui.modal(elem)
+        var modal = iD.uiModal(elem)
             .select('.content')
             .text('foo');
         expect(modal).to.be.ok;

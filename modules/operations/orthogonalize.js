@@ -1,18 +1,20 @@
 import _ from 'lodash';
 import { t } from '../util/locale';
-import { Orthogonalize as OrthogonalizeAction } from '../actions/index';
+import { actionOrthogonalize } from '../actions/index';
 
-export function Orthogonalize(selectedIDs, context) {
+
+export function operationOrthogonalize(selectedIDs, context) {
     var entityId = selectedIDs[0],
         entity = context.entity(entityId),
         extent = entity.extent(context.graph()),
         geometry = context.geometry(entityId),
-        action = OrthogonalizeAction(entityId, context.projection);
+        action = actionOrthogonalize(entityId, context.projection);
 
     var operation = function() {
         var annotation = t('operations.orthogonalize.annotation.' + geometry);
         context.perform(action, annotation);
     };
+
 
     operation.available = function() {
         return selectedIDs.length === 1 &&
@@ -20,6 +22,7 @@ export function Orthogonalize(selectedIDs, context) {
             entity.isClosed() &&
             _.uniq(entity.nodes).length > 2;
     };
+
 
     operation.disabled = function() {
         var reason;
@@ -31,6 +34,7 @@ export function Orthogonalize(selectedIDs, context) {
         return action.disabled(context.graph()) || reason;
     };
 
+
     operation.tooltip = function() {
         var disable = operation.disabled();
         return disable ?
@@ -38,9 +42,11 @@ export function Orthogonalize(selectedIDs, context) {
             t('operations.orthogonalize.description.' + geometry);
     };
 
+
     operation.id = 'orthogonalize';
     operation.keys = [t('operations.orthogonalize.key')];
     operation.title = t('operations.orthogonalize.title');
+
 
     return operation;
 }

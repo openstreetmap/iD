@@ -1,13 +1,17 @@
 import _ from 'lodash';
-import { DeleteMultiple } from './delete_multiple';
+import { actionDeleteMultiple } from './delete_multiple';
+
 
 // https://github.com/openstreetmap/potlatch2/blob/master/net/systemeD/halcyon/connection/actions/DeleteRelationAction.as
-export function DeleteRelation(relationId) {
-    function deleteEntity(entity, graph) {
+export function actionDeleteRelation(relationId) {
+
+
+    function canDeleteEntity(entity, graph) {
         return !graph.parentWays(entity).length &&
             !graph.parentRelations(entity).length &&
             !entity.hasInterestingTags();
     }
+
 
     var action = function(graph) {
         var relation = graph.entity(relationId);
@@ -18,7 +22,7 @@ export function DeleteRelation(relationId) {
                 graph = graph.replace(parent);
 
                 if (parent.isDegenerate()) {
-                    graph = DeleteRelation(parent.id)(graph);
+                    graph = actionDeleteRelation(parent.id)(graph);
                 }
             });
 
@@ -26,18 +30,20 @@ export function DeleteRelation(relationId) {
             graph = graph.replace(relation.removeMembersWithID(memberId));
 
             var entity = graph.entity(memberId);
-            if (deleteEntity(entity, graph)) {
-                graph = DeleteMultiple([memberId])(graph);
+            if (canDeleteEntity(entity, graph)) {
+                graph = actionDeleteMultiple([memberId])(graph);
             }
         });
 
         return graph.remove(relation);
     };
 
+
     action.disabled = function(graph) {
         if (!graph.entity(relationId).isComplete(graph))
             return 'incomplete_relation';
     };
+
 
     return action;
 }

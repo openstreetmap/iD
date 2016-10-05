@@ -1,19 +1,20 @@
 import * as d3 from 'd3';
 import _ from 'lodash';
-import { Extent, polygonIntersectsPolygon } from '../geo/index';
-import { Detect } from '../util/detect';
+import { geoExtent, geoPolygonIntersectsPolygon } from '../geo/index';
+import { utilDetect } from '../util/detect';
 import toGeoJSON from 'togeojson';
 
-export function Gpx(projection, context, dispatch) {
+
+export function svgGpx(projection, context, dispatch) {
     var showLabels = true,
         layer;
 
 
     function init() {
-        if (Gpx.initialized) return;  // run once
+        if (svgGpx.initialized) return;  // run once
 
-        Gpx.geojson = {};
-        Gpx.enabled = true;
+        svgGpx.geojson = {};
+        svgGpx.enabled = true;
 
         function over() {
             d3.event.stopPropagation();
@@ -26,20 +27,20 @@ export function Gpx(projection, context, dispatch) {
             .on('drop.localgpx', function() {
                 d3.event.stopPropagation();
                 d3.event.preventDefault();
-                if (!Detect().filedrop) return;
+                if (!utilDetect().filedrop) return;
                 drawGpx.files(d3.event.dataTransfer.files);
             })
             .on('dragenter.localgpx', over)
             .on('dragexit.localgpx', over)
             .on('dragover.localgpx', over);
 
-        Gpx.initialized = true;
+        svgGpx.initialized = true;
     }
 
 
     function drawGpx(selection) {
-        var geojson = Gpx.geojson,
-            enabled = Gpx.enabled;
+        var geojson = svgGpx.geojson,
+            enabled = svgGpx.enabled;
 
         layer = selection.selectAll('.layer-gpx')
             .data(enabled ? [0] : []);
@@ -113,23 +114,23 @@ export function Gpx(projection, context, dispatch) {
 
 
     drawGpx.enabled = function(_) {
-        if (!arguments.length) return Gpx.enabled;
-        Gpx.enabled = _;
+        if (!arguments.length) return svgGpx.enabled;
+        svgGpx.enabled = _;
         dispatch.call('change');
         return this;
     };
 
 
     drawGpx.hasGpx = function() {
-        var geojson = Gpx.geojson;
+        var geojson = svgGpx.geojson;
         return (!(_.isEmpty(geojson) || _.isEmpty(geojson.features)));
     };
 
 
     drawGpx.geojson = function(gj) {
-        if (!arguments.length) return Gpx.geojson;
+        if (!arguments.length) return svgGpx.geojson;
         if (_.isEmpty(gj) || _.isEmpty(gj.features)) return this;
-        Gpx.geojson = gj;
+        svgGpx.geojson = gj;
         dispatch.call('change');
         return this;
     };
@@ -161,7 +162,7 @@ export function Gpx(projection, context, dispatch) {
 
     drawGpx.fitZoom = function() {
         if (!this.hasGpx()) return this;
-        var geojson = Gpx.geojson;
+        var geojson = svgGpx.geojson;
 
         var map = context.map(),
             viewport = map.trimmedExtent().polygon(),
@@ -170,8 +171,8 @@ export function Gpx(projection, context, dispatch) {
                 return _.union(coords, feature.geometry.type === 'Point' ? [c] : c);
             }, []);
 
-        if (!polygonIntersectsPolygon(viewport, coords, true)) {
-            var extent = Extent(d3.geoBounds(geojson));
+        if (!geoPolygonIntersectsPolygon(viewport, coords, true)) {
+            var extent = geoExtent(d3.geoBounds(geojson));
             map.centerZoom(extent.center(), map.trimmedExtentZoom(extent));
         }
 

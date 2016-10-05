@@ -1,4 +1,4 @@
-export function ChangePreset(entityId, oldPreset, newPreset) {
+export function actionChangePreset(entityId, oldPreset, newPreset) {
     return function(graph) {
         var entity = graph.entity(entityId),
             geometry = entity.geometry(graph),

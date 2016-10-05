@@ -1,17 +1,17 @@
-describe('iD.behavior.Hash', function () {
+describe('iD.behaviorHash', function () {
     mocha.globals('__onhashchange.hash');
 
     var hash, context;
 
     beforeEach(function () {
         context = iD.Context(window)
-            .imagery(iD.data.imagery);
+            .imagery(iD.dataImagery);
         context.container(d3.select(document.createElement('div')));
 
         // Neuter connection
         context.connection().loadTiles = function () {};
 
-        hash = iD.behavior.Hash(context);
+        hash = iD.behaviorHash(context);
 
         d3.select(document.createElement('div'))
             .call(context.map());

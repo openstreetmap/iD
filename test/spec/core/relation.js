@@ -133,7 +133,7 @@ describe('iD.Relation', function () {
         it('does not error on self-referencing relations', function () {
             var r = iD.Relation();
             r = r.addMember({id: r.id});
-            expect(r.extent(iD.Graph([r]))).to.eql(iD.geo.Extent());
+            expect(r.extent(iD.Graph([r]))).to.eql(iD.geoExtent());
         });
     });
 

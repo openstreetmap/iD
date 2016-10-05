@@ -1,13 +1,16 @@
-import { DeleteNode } from './delete_node';
+import { actionDeleteNode } from './delete_node';
+
 
 /*
  * Based on https://github.com/openstreetmap/potlatch2/net/systemeD/potlatch2/tools/Straighten.as
  */
-export function Straighten(wayId, projection) {
+export function actionStraighten(wayId, projection) {
+
     function positionAlongWay(n, s, e) {
         return ((n[0] - s[0]) * (e[0] - s[0]) + (n[1] - s[1]) * (e[1] - s[1]))/
                 (Math.pow(e[0] - s[0], 2) + Math.pow(e[1] - s[1], 2));
     }
+
 
     var action = function(graph) {
         var way = graph.entity(wayId),
@@ -30,8 +33,10 @@ export function Straighten(wayId, projection) {
                     p0 = startPoint[0] + u * (endPoint[0] - startPoint[0]),
                     p1 = startPoint[1] + u * (endPoint[1] - startPoint[1]);
 
-                graph = graph.replace(graph.entity(node.id)
+                graph = graph
+                    .replace(graph.entity(node.id)
                     .move(projection.invert([p0, p1])));
+
             } else {
                 // safe to delete
                 if (toDelete.indexOf(node) === -1) {
@@ -41,11 +46,12 @@ export function Straighten(wayId, projection) {
         }
 
         for (i = 0; i < toDelete.length; i++) {
-            graph = DeleteNode(toDelete[i].id)(graph);
+            graph = actionDeleteNode(toDelete[i].id)(graph);
         }
 
         return graph;
     };
+
 
     action.disabled = function(graph) {
         // check way isn't too bendy
@@ -74,6 +80,7 @@ export function Straighten(wayId, projection) {
             }
         }
     };
+
 
     return action;
 }

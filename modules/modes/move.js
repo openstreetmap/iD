@@ -1,18 +1,19 @@
 import * as d3 from 'd3';
 import { d3keybinding } from '../lib/d3.keybinding.js';
 import { t } from '../util/locale';
-import { Browse, Select } from './index';
-import { Move as MoveAction, Noop } from '../actions/index';
-import { Edit } from '../behavior/index';
+import { modeBrowse, modeSelect } from './index';
+import { actionMove, actionNoop } from '../actions/index';
+import { behaviorEdit } from '../behavior/index';
 
-export function Move(context, entityIDs, baseGraph) {
+
+export function modeMove(context, entityIDs, baseGraph) {
     var mode = {
         id: 'move',
         button: 'browse'
     };
 
     var keybinding = d3keybinding('move'),
-        edit = Edit(context),
+        edit = behaviorEdit(context),
         annotation = entityIDs.length === 1 ?
             t('operations.move.annotation.' + context.geometry(entityIDs[0])) :
             t('operations.move.annotation.multiple'),
@@ -20,7 +21,9 @@ export function Move(context, entityIDs, baseGraph) {
         origin,
         nudgeInterval;
 
+
     function vecSub(a, b) { return [a[0] - b[0], a[1] - b[1]]; }
+
 
     function edge(point, size) {
         var pad = [30, 100, 30, 100];
@@ -31,6 +34,7 @@ export function Move(context, entityIDs, baseGraph) {
         return null;
     }
 
+
     function startNudge(nudge) {
         if (nudgeInterval) window.clearInterval(nudgeInterval);
         nudgeInterval = window.setInterval(function() {
@@ -39,23 +43,25 @@ export function Move(context, entityIDs, baseGraph) {
             var currMouse = context.mouse(),
                 origMouse = context.projection(origin),
                 delta = vecSub(vecSub(currMouse, origMouse), nudge),
-                action = MoveAction(entityIDs, delta, context.projection, cache);
+                action = actionMove(entityIDs, delta, context.projection, cache);
 
             context.overwrite(action, annotation);
 
         }, 50);
     }
 
+
     function stopNudge() {
         if (nudgeInterval) window.clearInterval(nudgeInterval);
         nudgeInterval = null;
     }
 
+
     function move() {
         var currMouse = context.mouse(),
             origMouse = context.projection(origin),
             delta = vecSub(currMouse, origMouse),
-            action = MoveAction(entityIDs, delta, context.projection, cache);
+            action = actionMove(entityIDs, delta, context.projection, cache);
 
         context.overwrite(action, annotation);
 
@@ -64,26 +70,30 @@ export function Move(context, entityIDs, baseGraph) {
         else stopNudge();
     }
 
+
     function finish() {
         d3.event.stopPropagation();
-        context.enter(Select(context, entityIDs).suppressMenu(true));
+        context.enter(modeSelect(context, entityIDs).suppressMenu(true));
         stopNudge();
     }
+
 
     function cancel() {
         if (baseGraph) {
             while (context.graph() !== baseGraph) context.pop();
-            context.enter(Browse(context));
+            context.enter(modeBrowse(context));
         } else {
             context.pop();
-            context.enter(Select(context, entityIDs).suppressMenu(true));
+            context.enter(modeSelect(context, entityIDs).suppressMenu(true));
         }
         stopNudge();
     }
 
+
     function undone() {
-        context.enter(Browse(context));
+        context.enter(modeBrowse(context));
     }
+
 
     mode.enter = function() {
         origin = context.map().mouseCoordinates();
@@ -92,8 +102,9 @@ export function Move(context, entityIDs, baseGraph) {
         context.install(edit);
 
         context.perform(
-            Noop(),
-            annotation);
+            actionNoop(),
+            annotation
+        );
 
         context.surface()
             .on('mousemove.move', move)
@@ -110,6 +121,7 @@ export function Move(context, entityIDs, baseGraph) {
             .call(keybinding);
     };
 
+
     mode.exit = function() {
         stopNudge();
 
@@ -124,6 +136,7 @@ export function Move(context, entityIDs, baseGraph) {
 
         keybinding.off();
     };
+
 
     return mode;
 }

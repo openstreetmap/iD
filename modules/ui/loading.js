@@ -1,23 +1,26 @@
-import { modal } from './modal';
+import { uiModal } from './modal';
 
-export function Loading(context) {
+export function uiLoading(context) {
     var message = '',
         blocking = false,
         modalSelection;
 
+
     var loading = function(selection) {
-        modalSelection = modal(selection, blocking);
+        modalSelection = uiModal(selection, blocking);
 
         var loadertext = modalSelection.select('.content')
             .classed('loading-modal', true)
             .append('div')
             .attr('class', 'modal-section fillL');
 
-        loadertext.append('img')
+        loadertext
+            .append('img')
             .attr('class', 'loader')
             .attr('src', context.imagePath('loader-white.gif'));
 
-        loadertext.append('h3')
+        loadertext
+            .append('h3')
             .text(message);
 
         modalSelection.select('button.close')
@@ -26,11 +29,13 @@ export function Loading(context) {
         return loading;
     };
 
+
     loading.message = function(_) {
         if (!arguments.length) return message;
         message = _;
         return loading;
     };
+
 
     loading.blocking = function(_) {
         if (!arguments.length) return blocking;
@@ -38,9 +43,11 @@ export function Loading(context) {
         return loading;
     };
 
+
     loading.close = function() {
         modalSelection.remove();
     };
+
 
     return loading;
 }

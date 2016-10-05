@@ -96,7 +96,7 @@ have `.area` and `.way` classes.
 Elements also receive classes according to certain of the OSM key-value tags that are
 assigned to them.
 
-Tag classes are prefixed with `tag-` (see [`iD.svg.TagClasses`](https://github.com/openstreetmap/iD/blob/master/js/id/svg/tag_classes.js) for details).
+Tag classes are prefixed with `tag-` (see [`iD.svgTagClasses`](https://github.com/openstreetmap/iD/blob/master/js/id/svg/tag_classes.js) for details).
 
 #### Primary
 
@@ -150,8 +150,8 @@ iD can use external presets exclusively or along with the default OpenStreetMap 
 
 var id = iD.Context(window)
   .presets(customPresets)
-  .taginfo(iD.services.taginfo())
-  .imagery(iD.data.imagery);
+  .taginfo(iD.serviceTaginfo())
+  .imagery(iD.dataImagery);
 
 ```
 
@@ -165,7 +165,7 @@ Just like Presets, Imagery can be configured using the `context.imagery` accesso
 
 var id = iD.Context(window)
   .presets(customPresets)
-  .taginfo(iD.services.taginfo())
+  .taginfo(iD.serviceTaginfo())
   .imagery(customImagery);
 
 ```
@@ -181,7 +181,7 @@ The Imagery object should follow the structure defined by [editor-layer-index](h
 
 var id = iD.Context(window)
   .presets(customPresets)
-  .taginfo(iD.services.taginfo().endpoint('url'))
+  .taginfo(iD.serviceTaginfo().endpoint('url'))
   .imagery(customImagery);
 
 ```

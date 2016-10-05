@@ -1,13 +1,20 @@
 import * as d3 from 'd3';
 import _ from 'lodash';
-import { rebind } from '../../util/rebind';
-import { getSetValue } from '../../util/get_set_value';
 import { d3combobox } from '../../lib/d3.combobox.js';
-import { Extent, chooseEdge, sphericalDistance } from '../../geo/index';
-import { nominatim } from '../../services/index';
-import { addressFormats } from '../../../data/index';
+import { dataAddressFormats } from '../../../data/index';
 
-export function address(field, context) {
+import {
+    geoExtent,
+    geoChooseEdge,
+    geoSphericalDistance
+} from '../../geo/index';
+
+import { serviceNominatim } from '../../services/index';
+import { utilRebind } from '../../util/rebind';
+import { utilGetSetValue } from '../../util/get_set_value';
+
+
+export function uiFieldAddress(field, context) {
     var dispatch = d3.dispatch('init', 'change'),
         wrap,
         entity,
@@ -25,7 +32,7 @@ export function address(field, context) {
     function getStreets() {
         var extent = entity.extent(context.graph()),
             l = extent.center(),
-            box = Extent(l).padByMeters(200);
+            box = geoExtent(l).padByMeters(200);
 
         return context.intersects(box)
             .filter(isAddressable)
@@ -33,7 +40,7 @@ export function address(field, context) {
                 var loc = context.projection([
                     (extent[0][0] + extent[1][0]) / 2,
                     (extent[0][1] + extent[1][1]) / 2]),
-                    choice = chooseEdge(context.childNodes(d), loc, context.projection);
+                    choice = geoChooseEdge(context.childNodes(d), loc, context.projection);
                 return {
                     title: d.tags.name,
                     value: d.tags.name,
@@ -52,7 +59,7 @@ export function address(field, context) {
     function getCities() {
         var extent = entity.extent(context.graph()),
             l = extent.center(),
-            box = Extent(l).padByMeters(200);
+            box = geoExtent(l).padByMeters(200);
 
         return context.intersects(box)
             .filter(isAddressable)
@@ -60,7 +67,7 @@ export function address(field, context) {
                 return {
                     title: d.tags['addr:city'] || d.tags.name,
                     value: d.tags['addr:city'] || d.tags.name,
-                    dist: sphericalDistance(d.extent(context.graph()).center(), l)
+                    dist: geoSphericalDistance(d.extent(context.graph()).center(), l)
                 };
             }).sort(function(a, b) {
                 return a.dist - b.dist;
@@ -87,7 +94,7 @@ export function address(field, context) {
     function getPostCodes() {
         var extent = entity.extent(context.graph()),
             l = extent.center(),
-            box = Extent(l).padByMeters(200);
+            box = geoExtent(l).padByMeters(200);
 
         return context.intersects(box)
             .filter(isAddressable)
@@ -95,7 +102,7 @@ export function address(field, context) {
                 return {
                     title: d.tags['addr:postcode'],
                     value: d.tags['addr:postcode'],
-                    dist: sphericalDistance(d.extent(context.graph()).center(), l)
+                    dist: geoSphericalDistance(d.extent(context.graph()).center(), l)
                 };
             }).sort(function(a, b) {
                 return a.dist - b.dist;
@@ -122,11 +129,11 @@ export function address(field, context) {
         var center = entity.extent(context.graph()).center(),
             addressFormat;
 
-        nominatim.init();
-        nominatim.countryCode(center, function (err, countryCode) {
-            addressFormat = _.find(addressFormats, function (a) {
+        serviceNominatim.init();
+        serviceNominatim.countryCode(center, function (err, countryCode) {
+            addressFormat = _.find(dataAddressFormats, function (a) {
                 return a && a.countryCodes && _.includes(a.countryCodes, countryCode);
-            }) || _.first(addressFormats);
+            }) || _.first(dataAddressFormats);
 
             function row(r) {
                 // Normalize widths.
@@ -203,7 +210,7 @@ export function address(field, context) {
 
 
     function updateTags(tags) {
-        getSetValue(wrap.selectAll('input'), function (field) {
+        utilGetSetValue(wrap.selectAll('input'), function (field) {
             return tags['addr:' + field.id] || '';
         });
     }
@@ -233,5 +240,5 @@ export function address(field, context) {
     };
 
 
-    return rebind(address, dispatch, 'on');
+    return utilRebind(address, dispatch, 'on');
 }

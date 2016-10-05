@@ -1,4 +1,4 @@
-describe('iD.actions.RestrictTurn', function() {
+describe('iD.actionRestrictTurn', function() {
     var projection = d3.geoMercator().scale(250 / Math.PI);
 
     it('adds a restriction to an unrestricted turn', function() {
@@ -10,7 +10,7 @@ describe('iD.actions.RestrictTurn', function() {
                 iD.Way({id: '=', nodes: ['u', '*']}),
                 iD.Way({id: '-', nodes: ['*', 'w']})
             ]),
-            action = iD.actions.RestrictTurn({
+            action = iD.actionRestrictTurn({
                 from: {node: 'u', way: '='},
                 via:  {node: '*'},
                 to:   {node: 'w', way: '-'},
@@ -38,7 +38,7 @@ describe('iD.actions.RestrictTurn', function() {
                 iD.Way({id: '=', nodes: ['u', '*', 'w']}),
                 iD.Way({id: '-', nodes: ['*', 'x']})
             ]),
-            action = iD.actions.RestrictTurn({
+            action = iD.actionRestrictTurn({
                 from: {node: 'u', way: '='},
                 via:  {node: '*'},
                 to:   {node: 'x', way: '-'},
@@ -66,7 +66,7 @@ describe('iD.actions.RestrictTurn', function() {
                 iD.Way({id: '=', nodes: ['u', '*', 'w']}),
                 iD.Way({id: '-', nodes: ['*', 'x']})
             ]),
-            action = iD.actions.RestrictTurn({
+            action = iD.actionRestrictTurn({
                 from: {node: 'w', way: '=', newID: '=='},
                 via:  {node: '*'},
                 to:   {node: 'x', way: '-'},
@@ -94,7 +94,7 @@ describe('iD.actions.RestrictTurn', function() {
                 iD.Way({id: '=', nodes: ['u', '*', 'w']}),
                 iD.Way({id: '-', nodes: ['*', 'x']})
             ]),
-            action = iD.actions.RestrictTurn({
+            action = iD.actionRestrictTurn({
                 from: {node: 'u', way: '=', newID: '=='},
                 via:  {node: '*'},
                 to:   {node: 'w', way: '='},
@@ -122,7 +122,7 @@ describe('iD.actions.RestrictTurn', function() {
                 iD.Way({id: '=', nodes: ['w', '*', 'u']}),
                 iD.Way({id: '-', nodes: ['*', 'x']})
             ]),
-            action = iD.actions.RestrictTurn({
+            action = iD.actionRestrictTurn({
                 from: {node: 'u', way: '=', newID: '=='},
                 via:  {node: '*'},
                 to:   {node: 'w', way: '='},
@@ -153,7 +153,7 @@ describe('iD.actions.RestrictTurn', function() {
                 iD.Way({id: '-', nodes: ['*', 'a', 'b', 'c', '*']}),
                 iD.Way({id: '=', nodes: ['*', 'w']})
             ]),
-            action = iD.actions.RestrictTurn({
+            action = iD.actionRestrictTurn({
                 from: {node: 'c', way: '-', newID: '--'},
                 via:  {node: '*'},
                 to:   {node: 'w', way: '='},
@@ -184,7 +184,7 @@ describe('iD.actions.RestrictTurn', function() {
                 iD.Way({id: '-', nodes: ['*', 'a', 'b', 'c', '*']}),
                 iD.Way({id: '=', nodes: ['*', 'w']})
             ]),
-            action = iD.actions.RestrictTurn({
+            action = iD.actionRestrictTurn({
                 from: {node: 'a', way: '-', newID: '--'},
                 via:  {node: '*'},
                 to:   {node: 'c', way: '-'},
@@ -212,7 +212,7 @@ describe('iD.actions.RestrictTurn', function() {
                 iD.Way({id: '=', nodes: ['u', '*', 'w']}),
                 iD.Way({id: '-', nodes: ['*', 'x']})
             ]),
-            action = iD.actions.RestrictTurn({
+            action = iD.actionRestrictTurn({
                 from: {node: 'x', way: '-'},
                 via:  {node: '*'},
                 to:   {node: 'w', way: '=', newID: '=='},
@@ -240,7 +240,7 @@ describe('iD.actions.RestrictTurn', function() {
                 iD.Way({id: '=', nodes: ['u', '*', 'w']}),
                 iD.Way({id: '-', nodes: ['*', 'x']})
             ]),
-            action = iD.actions.RestrictTurn({
+            action = iD.actionRestrictTurn({
                 from: {node: 'x', way: '-'},
                 via:  {node: '*'},
                 to:   {node: 'u', way: '='},
@@ -271,7 +271,7 @@ describe('iD.actions.RestrictTurn', function() {
                 iD.Way({id: '-', nodes: ['*', 'a', 'b', 'c', '*']}),
                 iD.Way({id: '=', nodes: ['*', 'w']})
             ]),
-            action = iD.actions.RestrictTurn({
+            action = iD.actionRestrictTurn({
                 from: {node: 'w', way: '='},
                 via:  {node: '*'},
                 to:   {node: 'c', way: '-', newID: '--'},
@@ -299,7 +299,7 @@ describe('iD.actions.RestrictTurn', function() {
                 iD.Way({id: '=', nodes: ['u', '*', 'w']}),
                 iD.Way({id: '-', nodes: ['*', 'x']})
             ]),
-            action = iD.actions.RestrictTurn({
+            action = iD.actionRestrictTurn({
                 from: {node: 'u', way: '='},
                 via:  {node: '*'},
                 to:   {node: 'u', way: '='},
@@ -327,7 +327,7 @@ describe('iD.actions.RestrictTurn', function() {
                 iD.Way({id: '=', nodes: ['u', '*', 'w']}),
                 iD.Way({id: '-', nodes: ['*', 'x']})
             ]),
-            action = iD.actions.RestrictTurn({
+            action = iD.actionRestrictTurn({
                 from: {node: 'w', way: '=', newID: '=='},
                 via:  {node: '*'},
                 to:   {node: 'w', way: '=', newID: '~~'},
@@ -357,42 +357,42 @@ describe('iD.actions.RestrictTurn', function() {
                 iD.Way({id: '~', nodes: ['*', 'w']})
             ]);
 
-        var r1 = iD.actions.RestrictTurn({
+        var r1 = iD.actionRestrictTurn({
             from: {node: 'u', way: '='},
             via:  {node: '*'},
             to:   {node: 'x', way: '-'}
         }, projection, 'r')(graph);
         expect(r1.entity('r').tags.restriction).to.equal('no_right_turn');
 
-        var r2 = iD.actions.RestrictTurn({
+        var r2 = iD.actionRestrictTurn({
             from: {node: 'x', way: '-'},
             via:  {node: '*'},
             to:   {node: 'w', way: '~'}
         }, projection, 'r')(graph);
         expect(r2.entity('r').tags.restriction).to.equal('no_right_turn');
 
-        var l1 = iD.actions.RestrictTurn({
+        var l1 = iD.actionRestrictTurn({
             from: {node: 'x', way: '-'},
             via:  {node: '*'},
             to:   {node: 'u', way: '='}
         }, projection, 'r')(graph);
         expect(l1.entity('r').tags.restriction).to.equal('no_left_turn');
 
-        var l2 = iD.actions.RestrictTurn({
+        var l2 = iD.actionRestrictTurn({
             from: {node: 'w', way: '~'},
             via:  {node: '*'},
             to:   {node: 'x', way: '-'}
         }, projection, 'r')(graph);
         expect(l2.entity('r').tags.restriction).to.equal('no_left_turn');
 
-        var s = iD.actions.RestrictTurn({
+        var s = iD.actionRestrictTurn({
             from: {node: 'u', way: '='},
             via:  {node: '*'},
             to:   {node: 'w', way: '~'}
         }, projection, 'r')(graph);
         expect(s.entity('r').tags.restriction).to.equal('no_straight_on');
 
-        var u = iD.actions.RestrictTurn({
+        var u = iD.actionRestrictTurn({
             from: {node: 'u', way: '='},
             via:  {node: '*'},
             to:   {node: 'u', way: '='}
@@ -414,7 +414,7 @@ describe('iD.actions.RestrictTurn', function() {
                 iD.Way({id: 'w2', nodes: ['*', 'u'], tags: {oneway: 'yes'}})
             ]);
 
-        var r = iD.actions.RestrictTurn({
+        var r = iD.actionRestrictTurn({
             from: {node: 'x', way: 'w1'},
             via:  {node: '*'},
             to:   {node: 'u', way: 'w2'}
@@ -436,7 +436,7 @@ describe('iD.actions.RestrictTurn', function() {
                 iD.Way({id: 'w2', nodes: ['u', '*'], tags: {oneway: '-1'}})
             ]);
 
-        var r = iD.actions.RestrictTurn({
+        var r = iD.actionRestrictTurn({
             from: {node: 'x', way: 'w1'},
             via:  {node: '*'},
             to:   {node: 'u', way: 'w2'}

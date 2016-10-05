@@ -2,17 +2,18 @@ import * as d3 from 'd3';
 import _ from 'lodash';
 import { d3keybinding } from '../lib/d3.keybinding.js';
 import { t } from '../util/locale';
+import { rendererBackgroundSource } from '../renderer/index';
+import { geoMetersToOffset, geoOffsetToMeters } from '../geo/index';
+import { utilDetect } from '../util/detect';
+import { utilSetTransform } from '../util/index';
+import { svgIcon } from '../svg/index';
+import { uiMapInMap } from './map_in_map';
+import { uiCmd } from './cmd';
+import { uiTooltipHtml } from './tooltipHtml';
 import { tooltip } from '../util/tooltip';
-import { metersToOffset, offsetToMeters } from '../geo/index';
-import { BackgroundSource } from '../renderer/index';
-import { Detect } from '../util/detect';
-import { Icon } from '../svg/index';
-import { MapInMap } from './map_in_map';
-import { cmd } from './cmd';
-import { setTransform } from '../util/index';
-import { tooltipHtml } from './tooltipHtml';
 
-export function Background(context) {
+
+export function uiBackground(context) {
     var key = 'B',
         opacities = [1, 0.75, 0.5, 0.25],
         directions = [
@@ -37,14 +38,15 @@ export function Background(context) {
                 : d3.descending(a.area(), b.area()) || d3.ascending(a.name(), b.name()) || 0;
         }
 
+
         function setOpacity(d) {
             var bg = context.container().selectAll('.layer-background')
                 .transition()
                 .style('opacity', d)
                 .attr('data-opacity', d);
 
-            if (!Detect().opera) {
-                setTransform(bg, 0, 0);
+            if (!utilDetect().opera) {
+                utilSetTransform(bg, 0, 0);
             }
 
             opacityList.selectAll('li')
@@ -52,6 +54,7 @@ export function Background(context) {
 
             context.storage('background-opacity', d);
         }
+
 
         function setTooltips(selection) {
             selection.each(function(d) {
@@ -61,7 +64,7 @@ export function Background(context) {
                         .html(true)
                         .title(function() {
                             var tip = '<div>' + t('background.switch') + '</div>';
-                            return tooltipHtml(tip, cmd('⌘B'));
+                            return uiTooltipHtml(tip, uiCmd('⌘B'));
                         })
                         .placement('top')
                     );
@@ -76,6 +79,7 @@ export function Background(context) {
             });
         }
 
+
         function selectLayer() {
             function active(d) {
                 return context.background().showsLayer(d);
@@ -89,6 +93,7 @@ export function Background(context) {
                 .property('checked', active);
         }
 
+
         function clickSetSource(d) {
             previous = context.background().baseLayerSource();
             d3.event.preventDefault();
@@ -96,6 +101,7 @@ export function Background(context) {
             selectLayer();
             document.activeElement.blur();
         }
+
 
         function editCustom() {
             d3.event.preventDefault();
@@ -110,11 +116,13 @@ export function Background(context) {
             setCustom(template);
         }
 
+
         function setCustom(template) {
-            context.background().baseLayerSource(BackgroundSource.Custom(template));
+            context.background().baseLayerSource(rendererBackgroundSource.Custom(template));
             selectLayer();
             context.storage('background-custom-template', template);
         }
+
 
         function clickSetOverlay(d) {
             d3.event.preventDefault();
@@ -122,6 +130,7 @@ export function Background(context) {
             selectLayer();
             document.activeElement.blur();
         }
+
 
         function drawList(layerList, type, change, filter) {
             var sources = context.background()
@@ -164,6 +173,7 @@ export function Background(context) {
                 .style('display', layerList.selectAll('li.layer').data().length > 0 ? 'block' : 'none');
         }
 
+
         function update() {
             backgroundList.call(drawList, 'radio', clickSetSource, function(d) { return !d.overlay; });
             overlayList.call(drawList, 'checkbox', clickSetOverlay, function(d) { return d.overlay; });
@@ -178,8 +188,9 @@ export function Background(context) {
             updateOffsetVal();
         }
 
+
         function updateOffsetVal() {
-            var meters = offsetToMeters(context.background().offset()),
+            var meters = geoOffsetToMeters(context.background().offset()),
                 x = +meters[0].toFixed(2),
                 y = +meters[1].toFixed(2);
 
@@ -194,15 +205,18 @@ export function Background(context) {
                 });
         }
 
+
         function resetOffset() {
             context.background().offset([0, 0]);
             updateOffsetVal();
         }
 
+
         function nudge(d) {
             context.background().nudge(d, context.map().zoom());
             updateOffsetVal();
         }
+
 
         function buttonOffset(d) {
             var timeout = window.setTimeout(function() {
@@ -218,6 +232,7 @@ export function Background(context) {
 
             nudge(d);
         }
+
 
         function inputOffset() {
             var input = d3.select(this);
@@ -235,9 +250,10 @@ export function Background(context) {
                 return;
             }
 
-            context.background().offset(metersToOffset(d));
+            context.background().offset(geoMetersToOffset(d));
             updateOffsetVal();
         }
+
 
         function dragOffset() {
             var origin = [d3.event.clientX, d3.event.clientY];
@@ -269,9 +285,11 @@ export function Background(context) {
             d3.event.preventDefault();
         }
 
+
         function hide() {
             setVisible(false);
         }
+
 
         function toggle() {
             if (d3.event) d3.event.preventDefault();
@@ -279,11 +297,13 @@ export function Background(context) {
             setVisible(!button.classed('active'));
         }
 
+
         function quickSwitch() {
             if (previous) {
                 clickSetSource(previous);
             }
         }
+
 
         function setVisible(show) {
             if (show !== shown) {
@@ -319,11 +339,11 @@ export function Background(context) {
             tooltipBehavior = tooltip()
                 .placement('left')
                 .html(true)
-                .title(tooltipHtml(t('background.description'), key)),
+                .title(uiTooltipHtml(t('background.description'), key)),
             button = selection.append('button')
                 .attr('tabindex', -1)
                 .on('click', toggle)
-                .call(Icon('#icon-layers', 'light'))
+                .call(svgIcon('#icon-layers', 'light'))
                 .call(tooltipBehavior),
             shown = false;
 
@@ -362,7 +382,7 @@ export function Background(context) {
 
         var custom = backgroundList.append('li')
             .attr('class', 'custom_layer')
-            .datum(BackgroundSource.Custom());
+            .datum(rendererBackgroundSource.Custom());
 
         custom.append('button')
             .attr('class', 'layer-browse')
@@ -370,7 +390,7 @@ export function Background(context) {
                 .title(t('background.custom_button'))
                 .placement('left'))
             .on('click', editCustom)
-            .call(Icon('#icon-search'));
+            .call(svgIcon('#icon-search'));
 
         var label = custom.append('label');
 
@@ -393,7 +413,7 @@ export function Background(context) {
             .append('a')
             .attr('target', '_blank')
             .attr('tabindex', -1)
-            .call(Icon('#icon-out-link', 'inline'))
+            .call(svgIcon('#icon-out-link', 'inline'))
             .attr('href', 'https://github.com/openstreetmap/iD/blob/master/FAQ.md#how-can-i-report-an-issue-with-background-imagery')
             .append('span')
             .text(t('background.imagery_source_faq'));
@@ -411,7 +431,7 @@ export function Background(context) {
             .append('label')
             .call(tooltip()
                 .html(true)
-                .title(tooltipHtml(t('background.minimap.tooltip'), '/'))
+                .title(uiTooltipHtml(t('background.minimap.tooltip'), '/'))
                 .placement('top')
             );
 
@@ -419,7 +439,7 @@ export function Background(context) {
             .append('input')
             .attr('type', 'checkbox')
             .on('change', function() {
-                MapInMap.toggle();
+                uiMapInMap.toggle();
                 d3.event.preventDefault();
             });
 
@@ -477,7 +497,7 @@ export function Background(context) {
             .attr('title', t('background.reset'))
             .attr('class', 'nudge-reset disabled')
             .on('click', resetOffset)
-            .call(Icon('#icon-undo'));
+            .call(svgIcon('#icon-undo'));
 
         context.map()
             .on('move.background-update', _.debounce(update, 1000));
@@ -491,7 +511,7 @@ export function Background(context) {
 
         var keybinding = d3keybinding('background')
             .on(key, toggle)
-            .on(cmd('⌘B'), quickSwitch)
+            .on(uiCmd('⌘B'), quickSwitch)
             .on('F', hide)
             .on('H', hide);
 

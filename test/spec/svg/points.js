@@ -1,4 +1,4 @@
-describe('iD.svg.Points', function () {
+describe('iD.svgPoints', function () {
     var context, surface,
         projection = d3.geoProjection(function(x, y) { return [x, -y]; })
             .translate([0, 0])
@@ -18,7 +18,7 @@ describe('iD.svg.Points', function () {
         var point = iD.Node({tags: {amenity: 'cafe'}, loc: [0, 0]}),
             graph = iD.Graph([point]);
 
-        surface.call(iD.svg.Points(projection, context), graph, [point]);
+        surface.call(iD.svgPoints(projection, context), graph, [point]);
 
         expect(surface.select('.point')).to.be.classed('tag-amenity');
         expect(surface.select('.point')).to.be.classed('tag-amenity-cafe');

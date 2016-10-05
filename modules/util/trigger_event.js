@@ -1,4 +1,4 @@
-export function triggerEvent(target, type) {
+export function utilTriggerEvent(target, type) {
     target.each(function() {
         var evt = document.createEvent('HTMLEvents');
         evt.initEvent(type, true, true);

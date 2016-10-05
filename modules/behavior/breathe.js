@@ -3,7 +3,7 @@ import { transition as d3transition } from 'd3';
 import _ from 'lodash';
 
 
-export function Breathe() {
+export function behaviorBreathe() {
     var duration = 800,
         steps = 4,
         selector = '.selected.shadow, .selected .shadow',

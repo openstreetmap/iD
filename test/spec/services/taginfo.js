@@ -1,9 +1,9 @@
-describe('iD.services.taginfo', function() {
+describe('iD.serviceTaginfo', function() {
     var server, taginfo;
 
     beforeEach(function() {
         server = sinon.fakeServer.create();
-        taginfo = iD.services.taginfo.init();
+        taginfo = iD.serviceTaginfo.init();
         taginfo.reset();
     });
 
@@ -12,7 +12,7 @@ describe('iD.services.taginfo', function() {
     });
 
     function query(url) {
-        return iD.util.stringQs(url.substring(url.indexOf('?') + 1));
+        return iD.utilStringQs(url.substring(url.indexOf('?') + 1));
     }
 
     describe('#keys', function() {

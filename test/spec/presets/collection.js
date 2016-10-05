@@ -1,63 +1,63 @@
-describe('iD.presets.Collection', function() {
+describe('iD.presetCollection', function() {
     var p = {
-        point: iD.presets.Preset('point', {
+        point: iD.presetPreset('point', {
             name: 'Point',
             tags: {},
             geometry: ['point']
         }),
-        line: iD.presets.Preset('line', {
+        line: iD.presetPreset('line', {
             name: 'Line',
             tags: {},
             geometry: ['line']
         }),
-        area: iD.presets.Preset('area', {
+        area: iD.presetPreset('area', {
             name: 'Area',
             tags: {},
             geometry: ['area']
         }),
-        grill: iD.presets.Preset('__test/amenity/bbq', {
+        grill: iD.presetPreset('__test/amenity/bbq', {
             name: 'Grill',
             tags: { amenity: 'bbq' },
             geometry: ['point'],
             terms: []
         }),
-        sandpit: iD.presets.Preset('__test/amenity/grit_bin', {
+        sandpit: iD.presetPreset('__test/amenity/grit_bin', {
             name: 'Sandpit',
             tags: { amenity: 'grit_bin' },
             geometry: ['point'],
             terms: []
         }),
-        residential: iD.presets.Preset('__test/highway/residential', {
+        residential: iD.presetPreset('__test/highway/residential', {
             name: 'Residential Area',
             tags: { highway: 'residential' },
             geometry: ['point', 'area'],
             terms: []
         }),
-        grass1: iD.presets.Preset('__test/landuse/grass1', {
+        grass1: iD.presetPreset('__test/landuse/grass1', {
             name: 'Grass',
             tags: { landuse: 'grass' },
             geometry: ['point', 'area'],
             terms: []
         }),
-        grass2: iD.presets.Preset('__test/landuse/grass2', {
+        grass2: iD.presetPreset('__test/landuse/grass2', {
             name: 'Ğṝȁß',
             tags: { landuse: 'ğṝȁß' },
             geometry: ['point', 'area'],
             terms: []
         }),
-        park: iD.presets.Preset('__test/leisure/park', {
+        park: iD.presetPreset('__test/leisure/park', {
             name: 'Park',
             tags: { leisure: 'park' },
             geometry: ['point', 'area'],
             terms: [ 'grass' ]
         }),
-        soccer: iD.presets.Preset('__test/leisure/pitch/soccer', {
+        soccer: iD.presetPreset('__test/leisure/pitch/soccer', {
             name: 'Soccer Field',
             tags: { leisure: 'pitch', sport: 'soccer' },
             geometry: ['point', 'area'],
             terms: ['fußball']
         }),
-        football: iD.presets.Preset('__test/leisure/pitch/american_football', {
+        football: iD.presetPreset('__test/leisure/pitch/american_football', {
             name: 'Football Field',
             tags: { leisure: 'pitch', sport: 'american_football' },
             geometry: ['point', 'area'],
@@ -66,7 +66,7 @@ describe('iD.presets.Collection', function() {
     };
 
 
-    var c = iD.presets.Collection([
+    var c = iD.presetCollection([
         p.point, p.line, p.area, p.grill, p.sandpit, p.residential,
         p.grass1, p.grass2, p.park, p.soccer, p.football
     ]);
@@ -120,13 +120,13 @@ describe('iD.presets.Collection', function() {
         });
 
         it('excludes presets with searchable: false', function() {
-            var excluded = iD.presets.Preset('__test/excluded', {
+            var excluded = iD.presetPreset('__test/excluded', {
                     name: 'excluded',
                     tags: { amenity: 'excluded' },
                     geometry: ['point'],
                     searchable: false
                 }),
-                collection = iD.presets.Collection([excluded, p.point]);
+                collection = iD.presetCollection([excluded, p.point]);
             expect(collection.search('excluded', 'point').collection).not.to.include(excluded);
         });
     });

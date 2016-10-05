@@ -1,4 +1,4 @@
-export function interestingTag(key) {
+export function coreInterestingTag(key) {
     return key !== 'attribution' &&
         key !== 'created_by' &&
         key !== 'source' &&
@@ -7,7 +7,8 @@ export function interestingTag(key) {
 
 }
 
-export var oneWayTags = {
+
+export var coreOneWayTags = {
     'aerialway': {
         'chair_lift': true,
         'mixed_lift': true,
@@ -39,7 +40,8 @@ export var oneWayTags = {
     }
 };
 
-export var pavedTags = {
+
+export var corePavedTags = {
     'surface': {
         'paved': true,
         'asphalt': true,

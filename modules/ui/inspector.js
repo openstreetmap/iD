@@ -1,15 +1,16 @@
 import * as d3 from 'd3';
-import { EntityEditor } from './entity_editor';
-import { PresetList } from './preset_list';
-import { ViewOnOSM } from './view_on_osm';
+import { uiEntityEditor } from './entity_editor';
+import { uiPresetList } from './preset_list';
+import { uiViewOnOSM } from './view_on_osm';
 
 
-export function Inspector(context) {
-    var presetList = PresetList(context),
-        entityEditor = EntityEditor(context),
+export function uiInspector(context) {
+    var presetList = uiPresetList(context),
+        entityEditor = uiEntityEditor(context),
         state = 'select',
         entityID,
         newFeature = false;
+
 
     function inspector(selection) {
         presetList
@@ -64,7 +65,7 @@ export function Inspector(context) {
             .merge(footer);
 
         footer
-            .call(ViewOnOSM(context).entityID(entityID));
+            .call(uiViewOnOSM(context).entityID(entityID));
 
 
         function showList(preset) {
@@ -106,6 +107,7 @@ export function Inspector(context) {
         newFeature = _;
         return inspector;
     };
+
 
     return inspector;
 }

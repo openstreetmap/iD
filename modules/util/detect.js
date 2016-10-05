@@ -1,6 +1,6 @@
 import { currentLocale } from './locale';
 
-export function Detect() {
+export function utilDetect() {
     var detected = {};
 
     var ua = navigator.userAgent,

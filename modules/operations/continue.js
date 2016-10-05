@@ -1,13 +1,15 @@
 import _ from 'lodash';
 import { t } from '../util/locale';
-import { DrawLine } from '../modes/index';
+import { modeDrawLine } from '../modes/index';
 
-export function Continue(selectedIDs, context) {
+
+export function operationContinue(selectedIDs, context) {
     var graph = context.graph(),
         entities = selectedIDs.map(function(id) { return graph.entity(id); }),
-        geometries = _.extend({line: [], vertex: []},
+        geometries = _.extend({ line: [], vertex: [] },
             _.groupBy(entities, function(entity) { return entity.geometry(graph); })),
         vertex = geometries.vertex[0];
+
 
     function candidateWays() {
         return graph.parentWays(vertex).filter(function(parent) {
@@ -17,19 +19,20 @@ export function Continue(selectedIDs, context) {
         });
     }
 
+
     var operation = function() {
         var candidate = candidateWays()[0];
-        context.enter(DrawLine(
-            context,
-            candidate.id,
-            context.graph(),
-            candidate.affix(vertex.id)));
+        context.enter(
+            modeDrawLine(context, candidate.id, context.graph(), candidate.affix(vertex.id))
+        );
     };
+
 
     operation.available = function() {
         return geometries.vertex.length === 1 && geometries.line.length <= 1 &&
             !context.features().hasHiddenConnections(vertex, context.graph());
     };
+
 
     operation.disabled = function() {
         var candidates = candidateWays();
@@ -39,6 +42,7 @@ export function Continue(selectedIDs, context) {
             return 'multiple';
     };
 
+
     operation.tooltip = function() {
         var disable = operation.disabled();
         return disable ?
@@ -46,9 +50,11 @@ export function Continue(selectedIDs, context) {
             t('operations.continue.description');
     };
 
+
     operation.id = 'continue';
     operation.keys = [t('operations.continue.key')];
     operation.title = t('operations.continue.title');
+
 
     return operation;
 }

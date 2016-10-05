@@ -1,15 +1,17 @@
 import { t } from '../util/locale';
-import { RotateWay } from '../modes/index';
+import { modeRotateWay } from '../modes/index';
 
-export function Rotate(selectedIDs, context) {
+
+export function operationRotate(selectedIDs, context) {
     var entityId = selectedIDs[0],
         entity = context.entity(entityId),
         extent = entity.extent(context.graph()),
         geometry = context.geometry(entityId);
 
     var operation = function() {
-        context.enter(RotateWay(context, entityId));
+        context.enter(modeRotateWay(context, entityId));
     };
+
 
     operation.available = function() {
         if (selectedIDs.length !== 1 || entity.type !== 'way')
@@ -22,6 +24,7 @@ export function Rotate(selectedIDs, context) {
         return false;
     };
 
+
     operation.disabled = function() {
         if (extent.percentContainedIn(context.extent()) < 0.8) {
             return 'too_large';
@@ -32,6 +35,7 @@ export function Rotate(selectedIDs, context) {
         }
     };
 
+
     operation.tooltip = function() {
         var disable = operation.disabled();
         return disable ?
@@ -39,9 +43,11 @@ export function Rotate(selectedIDs, context) {
             t('operations.rotate.description');
     };
 
+
     operation.id = 'rotate';
     operation.keys = [t('operations.rotate.key')];
     operation.title = t('operations.rotate.title');
+
 
     return operation;
 }

@@ -1,15 +1,15 @@
 import * as d3 from 'd3';
 import { t } from '../util/locale';
-import { Entity } from '../core/index';
-import { Icon } from '../svg/index';
-import { Select } from '../modes/index';
-import { displayName } from '../util/index';
+import { coreEntity } from '../core/index';
+import { svgIcon } from '../svg/index';
+import { modeSelect } from '../modes/index';
+import { utilDisplayName } from '../util/index';
 
 
-export function SelectionList(context, selectedIDs) {
+export function uiSelectionList(context, selectedIDs) {
 
     function selectEntity(entity) {
-        context.enter(Select(context, [entity.id]).suppressMenu(true));
+        context.enter(modeSelect(context, [entity.id]).suppressMenu(true));
     }
 
 
@@ -19,7 +19,7 @@ export function SelectionList(context, selectedIDs) {
         if (index > -1) {
             selectedIDs.splice(index, 1);
         }
-        context.enter(Select(context, selectedIDs).suppressMenu(true));
+        context.enter(modeSelect(context, selectedIDs).suppressMenu(true));
     }
 
 
@@ -52,7 +52,7 @@ export function SelectionList(context, selectedIDs) {
                 .filter(function(entity) { return entity; });
 
             var items = list.selectAll('.feature-list-item')
-                .data(entities, Entity.key);
+                .data(entities, coreEntity.key);
 
             items.exit()
                 .remove();
@@ -71,12 +71,12 @@ export function SelectionList(context, selectedIDs) {
                 .append('button')
                 .attr('class', 'close')
                 .on('click', deselectEntity)
-                .call(Icon('#icon-close'));
+                .call(svgIcon('#icon-close'));
 
             label
                 .append('span')
                 .attr('class', 'entity-geom-icon')
-                .call(Icon('', 'pre-text'));
+                .call(svgIcon('', 'pre-text'));
 
             label
                 .append('span')
@@ -99,7 +99,7 @@ export function SelectionList(context, selectedIDs) {
                 .text(function(entity) { return context.presets().match(entity, context.graph()).name(); });
 
             items.selectAll('.entity-name')
-                .text(function(entity) { return displayName(entity); });
+                .text(function(entity) { return utilDisplayName(entity); });
         }
     }
 

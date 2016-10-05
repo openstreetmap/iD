@@ -2,20 +2,24 @@ import _ from 'lodash';
 import { t } from '../util/locale';
 import { areaKeys } from '../core/context';
 
-export function Preset(id, preset, fields) {
+
+export function presetPreset(id, preset, fields) {
     preset = _.clone(preset);
 
     preset.id = id;
     preset.fields = (preset.fields || []).map(getFields);
     preset.geometry = (preset.geometry || []);
 
+
     function getFields(f) {
         return fields[f];
     }
 
+
     preset.matchGeometry = function(geometry) {
         return preset.geometry.indexOf(geometry) >= 0;
     };
+
 
     var matchScore = preset.matchScore || 1;
     preset.matchScore = function(entity) {
@@ -35,9 +39,11 @@ export function Preset(id, preset, fields) {
         return score;
     };
 
+
     preset.t = function(scope, options) {
         return t('presets.presets.' + id + '.' + scope, options);
     };
+
 
     var name = preset.name || '';
     preset.name = function() {
@@ -49,14 +55,17 @@ export function Preset(id, preset, fields) {
         return preset.t('name', {'default': name});
     };
 
+
     preset.terms = function() {
         return preset.t('terms', {'default': ''}).toLowerCase().trim().split(/\s*,+\s*/);
     };
+
 
     preset.isFallback = function() {
         var tagCount = Object.keys(preset.tags).length;
         return tagCount === 0 || (tagCount === 1 && preset.tags.hasOwnProperty('area'));
     };
+
 
     preset.reference = function(geometry) {
         var key = Object.keys(preset.tags)[0],
@@ -78,6 +87,7 @@ export function Preset(id, preset, fields) {
         }
     };
 
+
     var removeTags = preset.removeTags || preset.tags;
     preset.removeTags = function(tags, geometry) {
         tags = _.omit(tags, _.keys(removeTags));
@@ -92,6 +102,7 @@ export function Preset(id, preset, fields) {
         delete tags.area;
         return tags;
     };
+
 
     var applyTags = preset.addTags || preset.tags;
     preset.applyTags = function(tags, geometry) {
@@ -135,6 +146,7 @@ export function Preset(id, preset, fields) {
 
         return tags;
     };
+
 
     return preset;
 }

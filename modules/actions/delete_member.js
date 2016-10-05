@@ -1,6 +1,7 @@
-import { DeleteRelation } from './delete_relation';
+import { actionDeleteRelation } from './delete_relation';
 
-export function DeleteMember(relationId, memberIndex) {
+
+export function actionDeleteMember(relationId, memberIndex) {
     return function(graph) {
         var relation = graph.entity(relationId)
             .removeMember(memberIndex);
@@ -8,7 +9,7 @@ export function DeleteMember(relationId, memberIndex) {
         graph = graph.replace(relation);
 
         if (relation.isDegenerate())
-            graph = DeleteRelation(relation.id)(graph);
+            graph = actionDeleteRelation(relation.id)(graph);
 
         return graph;
     };

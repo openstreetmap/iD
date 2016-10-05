@@ -1,41 +1,51 @@
 import * as d3 from 'd3';
-import { rebind } from '../util/rebind';
-import { Toggle } from './toggle';
+import { utilRebind } from '../util/rebind';
+import { uiToggle } from './toggle';
 
-export function Disclosure() {
+
+export function uiDisclosure() {
     var dispatch = d3.dispatch('toggled'),
         title,
         expanded = false,
         content = function () {};
 
+
     var disclosure = function(selection) {
-        var $link = selection.selectAll('.hide-toggle')
+        var hideToggle = selection.selectAll('.hide-toggle')
             .data([0]);
 
-        $link = $link.enter().append('a')
+        hideToggle = hideToggle.enter()
+            .append('a')
             .attr('href', '#')
             .attr('class', 'hide-toggle')
-            .merge($link);
+            .merge(hideToggle);
 
-        $link.text(title)
+        hideToggle
+            .text(title)
             .on('click', toggle)
             .classed('expanded', expanded);
 
-        var $body = selection.selectAll('div')
+
+        var wrap = selection.selectAll('div')
             .data([0]);
 
-        $body = $body.enter().append('div').merge($body);
+        wrap = wrap.enter()
+            .append('div')
+            .merge(wrap);
 
-        $body.classed('hide', !expanded)
+        wrap
+            .classed('hide', !expanded)
             .call(content);
+
 
         function toggle() {
             expanded = !expanded;
-            $link.classed('expanded', expanded);
-            $body.call(Toggle(expanded));
+            hideToggle.classed('expanded', expanded);
+            wrap.call(uiToggle(expanded));
             dispatch.call('toggled', this, expanded);
         }
     };
+
 
     disclosure.title = function(_) {
         if (!arguments.length) return title;
@@ -43,11 +53,13 @@ export function Disclosure() {
         return disclosure;
     };
 
+
     disclosure.expanded = function(_) {
         if (!arguments.length) return expanded;
         expanded = _;
         return disclosure;
     };
+
 
     disclosure.content = function(_) {
         if (!arguments.length) return content;
@@ -55,5 +67,6 @@ export function Disclosure() {
         return disclosure;
     };
 
-    return rebind(disclosure, dispatch, 'on');
+
+    return utilRebind(disclosure, dispatch, 'on');
 }

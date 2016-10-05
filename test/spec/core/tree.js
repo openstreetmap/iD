@@ -8,14 +8,14 @@ describe('iD.Tree', function() {
             graph.rebase([node], [graph]);
             tree.rebase([node]);
 
-            expect(tree.intersects(iD.geo.Extent([0, 0], [2, 2]), graph)).to.eql([node]);
+            expect(tree.intersects(iD.geoExtent([0, 0], [2, 2]), graph)).to.eql([node]);
         });
 
         it('is idempotent', function() {
             var graph = iD.Graph(),
                 tree = iD.Tree(graph),
                 node = iD.Node({id: 'n', loc: [1, 1]}),
-                extent = iD.geo.Extent([0, 0], [2, 2]);
+                extent = iD.geoExtent([0, 0], [2, 2]);
 
             graph.rebase([node], [graph]);
             tree.rebase([node]);
@@ -33,13 +33,13 @@ describe('iD.Tree', function() {
                 node_ = node.update({loc: [10, 10]}),
                 g = graph.replace(node_);
 
-            expect(tree.intersects(iD.geo.Extent([9, 9], [11, 11]), g)).to.eql([node_]);
+            expect(tree.intersects(iD.geoExtent([9, 9], [11, 11]), g)).to.eql([node_]);
 
             graph.rebase([node], [graph]);
             tree.rebase([node]);
 
-            expect(tree.intersects(iD.geo.Extent([0, 0], [2, 2]), g)).to.eql([]);
-            expect(tree.intersects(iD.geo.Extent([0, 0], [11, 11]), g)).to.eql([node_]);
+            expect(tree.intersects(iD.geoExtent([0, 0], [2, 2]), g)).to.eql([]);
+            expect(tree.intersects(iD.geoExtent([0, 0], [11, 11]), g)).to.eql([node_]);
         });
 
         it('does not error on self-referencing relations', function() {
@@ -54,7 +54,7 @@ describe('iD.Tree', function() {
             graph.rebase([node, relation], [graph]);
             tree.rebase([relation]);
 
-            expect(tree.intersects(iD.geo.Extent([0, 0], [2, 2]), graph)).to.eql([relation]);
+            expect(tree.intersects(iD.geoExtent([0, 0], [2, 2]), graph)).to.eql([relation]);
         });
 
         it('adjusts entities that are force-rebased', function() {
@@ -69,7 +69,7 @@ describe('iD.Tree', function() {
             graph.rebase([node], [graph], true);
             tree.rebase([node], true);
 
-            expect(tree.intersects(iD.geo.Extent([0, 0], [2, 2]), graph)).to.eql([]);
+            expect(tree.intersects(iD.geoExtent([0, 0], [2, 2]), graph)).to.eql([]);
         });
     });
 
@@ -79,7 +79,7 @@ describe('iD.Tree', function() {
                 tree = iD.Tree(graph),
                 n1 = iD.Node({loc: [1, 1]}),
                 n2 = iD.Node({loc: [3, 3]}),
-                extent = iD.geo.Extent([0, 0], [2, 2]);
+                extent = iD.geoExtent([0, 0], [2, 2]);
 
             graph = graph.replace(n1).replace(n2);
             expect(tree.intersects(extent, graph)).to.eql([n1]);
@@ -91,7 +91,7 @@ describe('iD.Tree', function() {
                 n1 = iD.Node({id: 'n1', loc: [0, 0]}),
                 n2 = iD.Node({id: 'n2', loc: [1, 1]}),
                 relation = iD.Relation({id: 'r', members: [{id: 'n1'}, {id: 'n2'}]}),
-                extent = iD.geo.Extent([0.5, 0.5], [1.5, 1.5]);
+                extent = iD.geoExtent([0.5, 0.5], [1.5, 1.5]);
 
             graph.rebase([relation, n1], [graph]);
             tree.rebase([relation, n1]);
@@ -109,7 +109,7 @@ describe('iD.Tree', function() {
                 node = iD.Node({id: 'n', loc: [0.5, 0.5]}),
                 way = iD.Way({nodes: ['n']}),
                 graph = base.replace(way),
-                extent = iD.geo.Extent([0, 0], [1, 1]);
+                extent = iD.geoExtent([0, 0], [1, 1]);
 
             expect(tree.intersects(extent, graph)).to.eql([]);
 
@@ -123,7 +123,7 @@ describe('iD.Tree', function() {
                 tree = iD.Tree(graph),
                 node = iD.Node({id: 'n', loc: [1, 1]}),
                 way = iD.Way({nodes: ['n']}),
-                extent = iD.geo.Extent([0, 0], [2, 2]);
+                extent = iD.geoExtent([0, 0], [2, 2]);
 
             graph = graph.replace(node).replace(way);
             expect(tree.intersects(extent, graph)).to.eql([node, way]);
@@ -137,7 +137,7 @@ describe('iD.Tree', function() {
                 tree = iD.Tree(graph),
                 node = iD.Node({id: 'n', loc: [1, 1]}),
                 relation = iD.Relation({members: [{type: 'node', id: 'n'}]}),
-                extent = iD.geo.Extent([0, 0], [2, 2]);
+                extent = iD.geoExtent([0, 0], [2, 2]);
 
             graph = graph.replace(node).replace(relation);
             expect(tree.intersects(extent, graph)).to.eql([node, relation]);
@@ -152,7 +152,7 @@ describe('iD.Tree', function() {
                 node = iD.Node({id: 'n', loc: [1, 1]}),
                 way = iD.Way({id: 'w', nodes: ['n']}),
                 relation = iD.Relation({members: [{type: 'multipolygon', id: 'w'}]}),
-                extent = iD.geo.Extent([0, 0], [2, 2]);
+                extent = iD.geoExtent([0, 0], [2, 2]);
 
             graph = graph.replace(node).replace(way).replace(relation);
             expect(tree.intersects(extent, graph)).to.eql([node, way, relation]);
@@ -167,7 +167,7 @@ describe('iD.Tree', function() {
                 n1 = iD.Node({id: 'n1', loc: [1, 1]}),
                 n2 = iD.Node({id: 'n2', loc: [3, 3]}),
                 way = iD.Way({nodes: ['n1', 'n2']}),
-                extent = iD.geo.Extent([0, 0], [2, 2]);
+                extent = iD.geoExtent([0, 0], [2, 2]);
 
             graph = graph.replace(n1).replace(n2).replace(way);
             expect(tree.intersects(extent, graph)).to.eql([n1, way]);
@@ -183,7 +183,7 @@ describe('iD.Tree', function() {
                 n1 = iD.Node({id: 'n1', loc: [1, 1]}),
                 n2 = iD.Node({id: 'n2', loc: [3, 3]}),
                 way = iD.Way({nodes: ['n1', 'n2']}),
-                extent = iD.geo.Extent([0, 0], [4, 4]);
+                extent = iD.geoExtent([0, 0], [4, 4]);
 
             graph = graph.replace(n1).replace(n2).replace(way);
             expect(tree.intersects(extent, graph)).to.eql([n1, n2, way]);
@@ -200,7 +200,7 @@ describe('iD.Tree', function() {
             var graph = iD.Graph(),
                 tree = iD.Tree(graph),
                 node = iD.Node({loc: [1, 1]}),
-                extent = iD.geo.Extent([0, 0], [2, 2]);
+                extent = iD.geoExtent([0, 0], [2, 2]);
 
             graph = graph.replace(node);
             expect(tree.intersects(extent, graph)).to.eql([node]);
@@ -213,7 +213,7 @@ describe('iD.Tree', function() {
             var base = iD.Graph(),
                 tree = iD.Tree(base),
                 node = iD.Node({id: 'n', loc: [1, 1]}),
-                extent = iD.geo.Extent([0, 0], [2, 2]);
+                extent = iD.geoExtent([0, 0], [2, 2]);
 
             var graph = base.replace(node).remove(node);
             expect(tree.intersects(extent, graph)).to.eql([]);
@@ -229,7 +229,7 @@ describe('iD.Tree', function() {
                 node = iD.Node({id: 'n', loc: [1, 1]}),
                 r1   = iD.Relation({id: 'r1', members: [{id: 'n'}]}),
                 r2   = iD.Relation({id: 'r2', members: [{id: 'r1'}]}),
-                extent = iD.geo.Extent([0, 0], [2, 2]);
+                extent = iD.geoExtent([0, 0], [2, 2]);
 
             var graph = base.replace(r1).replace(r2);
             expect(tree.intersects(extent, graph)).to.eql([]);

@@ -1,23 +1,23 @@
 import * as d3 from 'd3';
 import _ from 'lodash';
-import { rebind } from '../util/rebind';
-import { getDimensions, setDimensions } from '../util/dimensions';
-import { Debug } from './debug';
-import { Gpx } from './gpx';
-import { MapillaryImages } from './mapillary_images';
-import { MapillarySigns } from './mapillary_signs';
-import { Osm } from './osm';
+import { utilRebind } from '../util/rebind';
+import { utilGetDimensions, utilSetDimensions } from '../util/dimensions';
+import { svgDebug } from './debug';
+import { svgGpx } from './gpx';
+import { svgMapillaryImages } from './mapillary_images';
+import { svgMapillarySigns } from './mapillary_signs';
+import { svgOsm } from './osm';
 
 
-export function Layers(projection, context) {
+export function svgLayers(projection, context) {
     var dispatch = d3.dispatch('change'),
         svg = d3.select(null),
         layers = [
-            { id: 'osm', layer: Osm(projection, context, dispatch) },
-            { id: 'gpx', layer: Gpx(projection, context, dispatch) },
-            { id: 'mapillary-images', layer: MapillaryImages(projection, context, dispatch) },
-            { id: 'mapillary-signs',  layer: MapillarySigns(projection, context, dispatch) },
-            { id: 'debug', layer: Debug(projection, context, dispatch) }
+            { id: 'osm', layer: svgOsm(projection, context, dispatch) },
+            { id: 'gpx', layer: svgGpx(projection, context, dispatch) },
+            { id: 'mapillary-images', layer: svgMapillaryImages(projection, context, dispatch) },
+            { id: 'mapillary-signs',  layer: svgMapillarySigns(projection, context, dispatch) },
+            { id: 'debug', layer: svgDebug(projection, context, dispatch) }
         ];
 
 
@@ -92,8 +92,8 @@ export function Layers(projection, context) {
 
 
     drawLayers.dimensions = function(_) {
-        if (!arguments.length) return getDimensions(svg);
-        setDimensions(svg, _);
+        if (!arguments.length) return utilGetDimensions(svg);
+        utilSetDimensions(svg, _);
         layers.forEach(function(obj) {
             if (obj.layer.dimensions) {
                 obj.layer.dimensions(_);
@@ -103,5 +103,5 @@ export function Layers(projection, context) {
     };
 
 
-    return rebind(drawLayers, dispatch, 'on');
+    return utilRebind(drawLayers, dispatch, 'on');
 }

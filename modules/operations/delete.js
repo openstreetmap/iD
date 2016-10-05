@@ -1,19 +1,20 @@
 import _ from 'lodash';
 import { t } from '../util/locale';
-import { Browse, Select } from '../modes/index';
-import { DeleteMultiple } from '../actions/index';
-import { cmd } from '../ui/index';
-import { sphericalDistance } from '../geo/index';
+import { modeBrowse, modeSelect } from '../modes/index';
+import { actionDeleteMultiple } from '../actions/index';
+import { uiCmd } from '../ui/index';
+import { geoSphericalDistance } from '../geo/index';
 
-export function Delete(selectedIDs, context) {
-    var action = DeleteMultiple(selectedIDs);
+
+export function operationDelete(selectedIDs, context) {
+    var action = actionDeleteMultiple(selectedIDs);
 
     var operation = function() {
         var annotation,
             nextSelectedID;
 
         if (selectedIDs.length > 1) {
-            annotation = t('operations.delete.annotation.multiple', {n: selectedIDs.length});
+            annotation = t('operations.delete.annotation.multiple', { n: selectedIDs.length });
 
         } else {
             var id = selectedIDs[0],
@@ -34,8 +35,8 @@ export function Delete(selectedIDs, context) {
                 } else if (i === nodes.length - 1) {
                     i--;
                 } else {
-                    var a = sphericalDistance(entity.loc, context.entity(nodes[i - 1]).loc),
-                        b = sphericalDistance(entity.loc, context.entity(nodes[i + 1]).loc);
+                    var a = geoSphericalDistance(entity.loc, context.entity(nodes[i - 1]).loc),
+                        b = geoSphericalDistance(entity.loc, context.entity(nodes[i + 1]).loc);
                     i = a < b ? i - 1 : i + 1;
                 }
 
@@ -44,19 +45,19 @@ export function Delete(selectedIDs, context) {
         }
 
         if (nextSelectedID && context.hasEntity(nextSelectedID)) {
-            context.enter(Select(context, [nextSelectedID]));
+            context.enter(modeSelect(context, [nextSelectedID]));
         } else {
-            context.enter(Browse(context));
+            context.enter(modeBrowse(context));
         }
 
-        context.perform(
-            action,
-            annotation);
+        context.perform(action, annotation);
     };
+
 
     operation.available = function() {
         return true;
     };
+
 
     operation.disabled = function() {
         var reason;
@@ -66,6 +67,7 @@ export function Delete(selectedIDs, context) {
         return action.disabled(context.graph()) || reason;
     };
 
+
     operation.tooltip = function() {
         var disable = operation.disabled();
         return disable ?
@@ -73,9 +75,11 @@ export function Delete(selectedIDs, context) {
             t('operations.delete.description');
     };
 
+
     operation.id = 'delete';
-    operation.keys = [cmd('⌘⌫'), cmd('⌘⌦')];
+    operation.keys = [uiCmd('⌘⌫'), uiCmd('⌘⌦')];
     operation.title = t('operations.delete.title');
+
 
     return operation;
 }

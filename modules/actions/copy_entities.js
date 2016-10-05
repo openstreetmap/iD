@@ -1,5 +1,6 @@
-export function CopyEntities(ids, fromGraph) {
+export function actionCopyEntities(ids, fromGraph) {
     var copies = {};
+
 
     var action = function(graph) {
         ids.forEach(function(id) {
@@ -13,9 +14,11 @@ export function CopyEntities(ids, fromGraph) {
         return graph;
     };
 
+
     action.copies = function() {
         return copies;
     };
+
 
     return action;
 }

@@ -1,7 +1,8 @@
 import _ from 'lodash';
 import { t } from '../util/locale';
 
-export function MissingTag() {
+export function validationMissingTag() {
+
     // Slightly stricter check than Entity#isUsed (#3091)
     function hasTags(entity, graph) {
         return _.without(Object.keys(entity.tags), 'area', 'name').length > 0 ||
@@ -23,8 +24,10 @@ export function MissingTag() {
                 });
             }
         }
+
         return warnings;
     };
+
 
     return validation;
 }

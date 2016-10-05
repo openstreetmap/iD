@@ -1,4 +1,4 @@
-describe('iD.actions.Orthogonalize', function () {
+describe('iD.actionOrthogonalize', function () {
     var projection = d3.geoMercator();
 
     it('orthogonalizes a perfect quad', function () {
@@ -10,7 +10,7 @@ describe('iD.actions.Orthogonalize', function () {
                 iD.Way({id: '-', nodes: ['a', 'b', 'c', 'd', 'a']})
             ]);
 
-        graph = iD.actions.Orthogonalize('-', projection)(graph);
+        graph = iD.actionOrthogonalize('-', projection)(graph);
 
         expect(graph.entity('-').nodes).to.have.length(5);
     });
@@ -24,7 +24,7 @@ describe('iD.actions.Orthogonalize', function () {
                 iD.Way({id: '-', nodes: ['a', 'b', 'c', 'd', 'a']})
             ]);
 
-        graph = iD.actions.Orthogonalize('-', projection)(graph);
+        graph = iD.actionOrthogonalize('-', projection)(graph);
 
         expect(graph.entity('-').nodes).to.have.length(5);
     });
@@ -37,7 +37,7 @@ describe('iD.actions.Orthogonalize', function () {
                 iD.Way({id: '-', nodes: ['a', 'b', 'c', 'a']})
             ]);
 
-        graph = iD.actions.Orthogonalize('-', projection)(graph);
+        graph = iD.actionOrthogonalize('-', projection)(graph);
 
         expect(graph.entity('-').nodes).to.have.length(4);
     });
@@ -52,7 +52,7 @@ describe('iD.actions.Orthogonalize', function () {
                 iD.Way({id: '-', nodes: ['a', 'b', 'c', 'd', 'e', 'a']})
             ]);
 
-        graph = iD.actions.Orthogonalize('-', projection)(graph);
+        graph = iD.actionOrthogonalize('-', projection)(graph);
 
         expect(graph.hasEntity('d')).to.eq(undefined);
     });
@@ -67,7 +67,7 @@ describe('iD.actions.Orthogonalize', function () {
                 iD.Way({id: '-', nodes: ['a', 'b', 'c', 'd', 'e', 'a']})
             ]);
 
-        graph = iD.actions.Orthogonalize('-', projection)(graph);
+        graph = iD.actionOrthogonalize('-', projection)(graph);
 
         expect(graph.entity('-').nodes).to.have.length(6);
         expect(graph.hasEntity('d')).to.not.eq(undefined);
@@ -97,12 +97,12 @@ describe('iD.actions.Orthogonalize', function () {
                     iD.Node({id: 'd', loc: tests[i][3]}),
                     iD.Way({id: '-', nodes: ['a', 'b', 'c', 'd', 'a']})
                 ]),
-                initialWidth = iD.geo.sphericalDistance(graph.entity('a').loc, graph.entity('b').loc),
+                initialWidth = iD.geoSphericalDistance(graph.entity('a').loc, graph.entity('b').loc),
                 finalWidth;
 
-            graph = iD.actions.Orthogonalize('-', projection)(graph);
+            graph = iD.actionOrthogonalize('-', projection)(graph);
 
-            finalWidth = iD.geo.sphericalDistance(graph.entity('a').loc, graph.entity('b').loc);
+            finalWidth = iD.geoSphericalDistance(graph.entity('a').loc, graph.entity('b').loc);
             expect(finalWidth / initialWidth).within(0.90, 1.10);
         }
     });
@@ -117,7 +117,7 @@ describe('iD.actions.Orthogonalize', function () {
                 iD.Node({id: 'f', loc: [0, 2]}),
                 iD.Way({id: '-', nodes: ['a', 'b', 'c', 'd', 'e', 'f', 'a']})
             ]),
-            diff = iD.Difference(graph, iD.actions.Orthogonalize('-', projection)(graph));
+            diff = iD.Difference(graph, iD.actionOrthogonalize('-', projection)(graph));
 
         expect(Object.keys(diff.changes()).sort()).to.eql(['a', 'b', 'c', 'f']);
     });

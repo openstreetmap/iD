@@ -274,8 +274,8 @@ describe('iD.History', function () {
     describe('#toJSON', function() {
         it('doesn\'t generate unsaveable changes', function() {
             var node_1 = iD.Node({id: 'n-1'});
-            history.perform(iD.actions.AddEntity(node_1));
-            history.perform(iD.actions.DeleteNode('n-1'));
+            history.perform(iD.actionAddEntity(node_1));
+            history.perform(iD.actionDeleteNode('n-1'));
             expect(history.toJSON()).to.be.not.ok;
         });
 
@@ -285,9 +285,9 @@ describe('iD.History', function () {
                 node2 = iD.Node({id: 'n2'}),
                 node3 = iD.Node({id: 'n3'});
             history.merge([node1, node2, node3]);
-            history.perform(iD.actions.AddEntity(node_1)); // addition
-            history.perform(iD.actions.ChangeTags('n2', {k: 'v'})); // modification
-            history.perform(iD.actions.DeleteNode('n3')); // deletion
+            history.perform(iD.actionAddEntity(node_1)); // addition
+            history.perform(iD.actionChangeTags('n2', {k: 'v'})); // modification
+            history.perform(iD.actionDeleteNode('n3')); // deletion
             var json = JSON.parse(history.toJSON());
             expect(json.version).to.eql(3);
             expect( _.isEqual(json.entities, [node_1, node2.update({tags: {k: 'v'}})]) ).to.be.ok;

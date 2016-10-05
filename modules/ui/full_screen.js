@@ -1,44 +1,52 @@
 import * as d3 from 'd3';
 import { d3keybinding } from '../lib/d3.keybinding.js';
-import { cmd } from './cmd';
+import { uiCmd } from './cmd';
 
-export function FullScreen(context) {
+
+export function uiFullScreen(context) {
     var element = context.container().node(),
         keybinding = d3keybinding('full-screen');
         // button;
+
 
     function getFullScreenFn() {
         if (element.requestFullscreen) {
             return element.requestFullscreen;
         } else if (element.msRequestFullscreen) {
-            return  element.msRequestFullscreen;
+            return element.msRequestFullscreen;
         } else if (element.mozRequestFullScreen) {
-            return  element.mozRequestFullScreen;
+            return element.mozRequestFullScreen;
         } else if (element.webkitRequestFullscreen) {
             return element.webkitRequestFullscreen;
         }
     }
 
+
     function getExitFullScreenFn() {
         if (document.exitFullscreen) {
             return document.exitFullscreen;
         } else if (document.msExitFullscreen) {
-            return  document.msExitFullscreen;
+            return document.msExitFullscreen;
         } else if (document.mozCancelFullScreen) {
-            return  document.mozCancelFullScreen;
+            return document.mozCancelFullScreen;
         } else if (document.webkitExitFullscreen) {
             return document.webkitExitFullscreen;
         }
     }
 
+
     function isFullScreen() {
-        return document.fullscreenElement || document.mozFullScreenElement || document.webkitFullscreenElement ||
+        return document.fullscreenElement ||
+            document.mozFullScreenElement ||
+            document.webkitFullscreenElement ||
             document.msFullscreenElement;
     }
+
 
     function isSupported() {
         return !!getFullScreenFn();
     }
+
 
     function fullScreen() {
         d3.event.preventDefault();
@@ -50,6 +58,7 @@ export function FullScreen(context) {
             getExitFullScreenFn().apply(document);
         }
     }
+
 
     return function() { // selection) {
         if (!isSupported())
@@ -66,7 +75,7 @@ export function FullScreen(context) {
 
         keybinding
             .on('f11', fullScreen)
-            .on(cmd('⌘⇧F'), fullScreen);
+            .on(uiCmd('⌘⇧F'), fullScreen);
 
         d3.select(document)
             .call(keybinding);

@@ -1,18 +1,19 @@
 import _ from 'lodash';
-import { Category } from './category';
-import { Collection } from './collection';
-import { Field } from './field';
-import { Preset } from './preset';
+import { presetCategory } from './category';
+import { presetCollection } from './collection';
+import { presetField } from './field';
+import { presetPreset } from './preset';
 
-export function presets() {
-    // an iD.presets.Collection with methods for
+
+export function presetInit() {
+    // a presetCollection with methods for
     // loading new data and returning defaults
 
-    var all = Collection([]),
+    var all = presetCollection([]),
         defaults = { area: all, line: all, point: all, vertex: all, relation: all },
         fields = {},
         universal = [],
-        recent = Collection([]);
+        recent = presetCollection([]);
 
     // Index of presets by (geometry, tag key).
     var index = {
@@ -99,31 +100,31 @@ export function presets() {
 
         if (d.fields) {
             _.forEach(d.fields, function(d, id) {
-                fields[id] = Field(id, d);
+                fields[id] = presetField(id, d);
                 if (d.universal) universal.push(fields[id]);
             });
         }
 
         if (d.presets) {
             _.forEach(d.presets, function(d, id) {
-                all.collection.push(Preset(id, d, fields));
+                all.collection.push(presetPreset(id, d, fields));
             });
         }
 
         if (d.categories) {
             _.forEach(d.categories, function(d, id) {
-                all.collection.push(Category(id, d, all));
+                all.collection.push(presetCategory(id, d, all));
             });
         }
 
         if (d.defaults) {
             var getItem = _.bind(all.item, all);
             defaults = {
-                area: Collection(d.defaults.area.map(getItem)),
-                line: Collection(d.defaults.line.map(getItem)),
-                point: Collection(d.defaults.point.map(getItem)),
-                vertex: Collection(d.defaults.vertex.map(getItem)),
-                relation: Collection(d.defaults.relation.map(getItem))
+                area: presetCollection(d.defaults.area.map(getItem)),
+                line: presetCollection(d.defaults.line.map(getItem)),
+                point: presetCollection(d.defaults.point.map(getItem)),
+                vertex: presetCollection(d.defaults.vertex.map(getItem)),
+                relation: presetCollection(d.defaults.relation.map(getItem))
             };
         }
 
@@ -153,12 +154,12 @@ export function presets() {
     all.defaults = function(geometry, n) {
         var rec = recent.matchGeometry(geometry).collection.slice(0, 4),
             def = _.uniq(rec.concat(defaults[geometry].collection)).slice(0, n - 1);
-        return Collection(_.uniq(rec.concat(def).concat(all.item(geometry))));
+        return presetCollection(_.uniq(rec.concat(def).concat(all.item(geometry))));
     };
 
     all.choose = function(preset) {
         if (!preset.isFallback()) {
-            recent = Collection(_.uniq([preset].concat(recent.collection)));
+            recent = presetCollection(_.uniq([preset].concat(recent.collection)));
         }
         return all;
     };

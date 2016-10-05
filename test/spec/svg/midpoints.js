@@ -1,4 +1,4 @@
-describe('iD.svg.Midpoints', function () {
+describe('iD.svgMidpoints', function () {
     var context, surface,
         projection = d3.geoProjection(function(x, y) { return [x, -y]; })
             .translate([0, 0])
@@ -20,11 +20,11 @@ describe('iD.svg.Midpoints', function () {
             b = iD.Node({loc: [50, 0]}),
             line = iD.Way({nodes: [a.id, b.id]}),
             graph = iD.Graph([a, b, line]),
-            extent = iD.geo.Extent([0, 0], [100, 100]);
+            extent = iD.geoExtent([0, 0], [100, 100]);
 
         context.selectedIDs = function() { return [line.id]; };
         context.entity = function(id) { return graph.entity(id); };
-        surface.call(iD.svg.Midpoints(projection, context), graph, [line], filter, extent);
+        surface.call(iD.svgMidpoints(projection, context), graph, [line], filter, extent);
 
         expect(surface.selectAll('.midpoint').datum().loc).to.eql([25, 0]);
     });
@@ -34,10 +34,10 @@ describe('iD.svg.Midpoints', function () {
             b = iD.Node({loc: [39, 0]}),
             line = iD.Way({nodes: [a.id, b.id]}),
             graph = iD.Graph([a, b, line]),
-            extent = iD.geo.Extent([0, 0], [100, 100]);
+            extent = iD.geoExtent([0, 0], [100, 100]);
 
         context.selectedIDs = function() { return [line.id]; };
-        surface.call(iD.svg.Midpoints(projection, context), graph, [line], filter, extent);
+        surface.call(iD.svgMidpoints(projection, context), graph, [line], filter, extent);
 
         expect(surface.selectAll('.midpoint').nodes()).to.have.length(0);
     });
@@ -47,10 +47,10 @@ describe('iD.svg.Midpoints', function () {
             b = iD.Node({loc: [-50, 0]}),
             line = iD.Way({nodes: [a.id, b.id]}),
             graph = iD.Graph([a, b, line]),
-            extent = iD.geo.Extent([0, 0], [100, 100]);
+            extent = iD.geoExtent([0, 0], [100, 100]);
 
         context.selectedIDs = function() { return [line.id]; };
-        surface.call(iD.svg.Midpoints(projection, context), graph, [line], filter, extent);
+        surface.call(iD.svgMidpoints(projection, context), graph, [line], filter, extent);
 
         expect(surface.selectAll('.midpoint').nodes()).to.have.length(0);
     });
@@ -60,11 +60,11 @@ describe('iD.svg.Midpoints', function () {
             b = iD.Node({loc: [500, 0]}),
             line = iD.Way({nodes: [a.id, b.id]}),
             graph = iD.Graph([a, b, line]),
-            extent = iD.geo.Extent([0, 0], [100, 100]);
+            extent = iD.geoExtent([0, 0], [100, 100]);
 
         context.selectedIDs = function() { return [line.id]; };
         context.entity = function(id) { return graph.entity(id); };
-        surface.call(iD.svg.Midpoints(projection, context), graph, [line], filter, extent);
+        surface.call(iD.svgMidpoints(projection, context), graph, [line], filter, extent);
 
         expect(surface.selectAll('.midpoint').datum().loc).to.eql([100, 0]);
     });
@@ -74,10 +74,10 @@ describe('iD.svg.Midpoints', function () {
             b = iD.Node({loc: [500, 0]}),
             line = iD.Way({nodes: [a.id, b.id]}),
             graph = iD.Graph([a, b, line]),
-            extent = iD.geo.Extent([0, 0], [100, 100]);
+            extent = iD.geoExtent([0, 0], [100, 100]);
 
         context.selectedIDs = function() { return [line.id]; };
-        surface.call(iD.svg.Midpoints(projection, context), graph, [line], filter, extent);
+        surface.call(iD.svgMidpoints(projection, context), graph, [line], filter, extent);
 
         expect(surface.selectAll('.midpoint').nodes()).to.have.length(0);
     });

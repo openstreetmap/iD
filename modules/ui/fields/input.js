@@ -1,18 +1,19 @@
 import * as d3 from 'd3';
-import { rebind } from '../../util/rebind';
-import { getSetValue } from '../../util/get_set_value';
 import { t } from '../../util/locale';
-import { nominatim as nominatimService } from '../../services/index';
-import { phoneFormats } from '../../../data/index';
+import { serviceNominatim } from '../../services/index';
+import { dataPhoneFormats } from '../../../data/index';
+import { utilRebind } from '../../util/rebind';
+import { utilGetSetValue } from '../../util/get_set_value';
 
 export {
-    url as text,
-    url as number,
-    url as tel,
-    url as email
+    uiFieldText as uiFieldUrl,
+    uiFieldText as uiFieldNumber,
+    uiFieldText as uiFieldTel,
+    uiFieldText as uiFieldEmail
 };
 
-export function url(field, context) {
+
+export function uiFieldText(field, context) {
     var dispatch = d3.dispatch('change'),
         input,
         entity;
@@ -38,11 +39,11 @@ export function url(field, context) {
 
         if (field.type === 'tel') {
             var center = entity.extent(context.graph()).center();
-            nominatimService.init();
-            nominatimService.countryCode(center, function (err, countryCode) {
-                if (err || !phoneFormats[countryCode]) return;
+            serviceNominatim.init();
+            serviceNominatim.countryCode(center, function (err, countryCode) {
+                if (err || !dataPhoneFormats[countryCode]) return;
                 selection.selectAll('#' + fieldId)
-                    .attr('placeholder', phoneFormats[countryCode]);
+                    .attr('placeholder', dataPhoneFormats[countryCode]);
             });
 
         } else if (field.type === 'number') {
@@ -84,7 +85,7 @@ export function url(field, context) {
     function change(onInput) {
         return function() {
             var t = {};
-            t[field.key] = getSetValue(input) || undefined;
+            t[field.key] = utilGetSetValue(input) || undefined;
             dispatch.call('change', this, t, onInput);
         };
     }
@@ -98,7 +99,7 @@ export function url(field, context) {
 
 
     i.tags = function(tags) {
-        getSetValue(input, tags[field.key] || '');
+        utilGetSetValue(input, tags[field.key] || '');
     };
 
 
@@ -107,5 +108,5 @@ export function url(field, context) {
         if (node) node.focus();
     };
 
-    return rebind(i, dispatch, 'on');
+    return utilRebind(i, dispatch, 'on');
 }

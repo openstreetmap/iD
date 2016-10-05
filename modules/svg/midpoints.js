@@ -1,8 +1,19 @@
 import _ from 'lodash';
-import { PointTransform, TagClasses } from './index';
-import { angle, euclideanDistance, interp, lineIntersection } from '../geo/index';
+import {
+    svgPointTransform,
+    svgTagClasses
+} from './index';
 
-export function Midpoints(projection, context) {
+import {
+    geoAngle,
+    geoEuclideanDistance,
+    geoInterp,
+    geoLineIntersection
+} from '../geo/index';
+
+
+export function svgMidpoints(projection, context) {
+
     return function drawMidpoints(selection, graph, entities, filter, extent) {
         var poly = extent.polygon(),
             midpoints = {};
@@ -27,18 +38,18 @@ export function Midpoints(projection, context) {
                 if (midpoints[id]) {
                     midpoints[id].parents.push(entity);
                 } else {
-                    if (euclideanDistance(projection(a.loc), projection(b.loc)) > 40) {
-                        var point = interp(a.loc, b.loc, 0.5),
+                    if (geoEuclideanDistance(projection(a.loc), projection(b.loc)) > 40) {
+                        var point = geoInterp(a.loc, b.loc, 0.5),
                             loc = null;
 
                         if (extent.intersects(point)) {
                             loc = point;
                         } else {
                             for (var k = 0; k < 4; k++) {
-                                point = lineIntersection([a.loc, b.loc], [poly[k], poly[k+1]]);
+                                point = geoLineIntersection([a.loc, b.loc], [poly[k], poly[k + 1]]);
                                 if (point &&
-                                    euclideanDistance(projection(a.loc), projection(point)) > 20 &&
-                                    euclideanDistance(projection(b.loc), projection(point)) > 20)
+                                    geoEuclideanDistance(projection(a.loc), projection(point)) > 20 &&
+                                    geoEuclideanDistance(projection(b.loc), projection(point)) > 20)
                                 {
                                     loc = point;
                                     break;
@@ -59,6 +70,7 @@ export function Midpoints(projection, context) {
                 }
             }
         }
+
 
         function midpointFilter(d) {
             if (midpoints[d.id])
@@ -99,13 +111,13 @@ export function Midpoints(projection, context) {
         groups = groups
             .merge(enter)
             .attr('transform', function(d) {
-                var translate = PointTransform(projection),
+                var translate = svgPointTransform(projection),
                     a = graph.entity(d.edge[0]),
                     b = graph.entity(d.edge[1]),
-                    angleVal = Math.round(angle(a, b, projection) * (180 / Math.PI));
+                    angleVal = Math.round(geoAngle(a, b, projection) * (180 / Math.PI));
                 return translate(d) + ' rotate(' + angleVal + ')';
             })
-            .call(TagClasses().tags(
+            .call(svgTagClasses().tags(
                 function(d) { return d.parents[0].tags; }
             ));
 

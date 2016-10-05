@@ -1,44 +1,21 @@
 import * as d3 from 'd3';
-import { setTransform } from '../util/index';
-import { getDimensions } from '../util/dimensions';
+import { utilSetTransform } from '../util/index';
+import { utilGetDimensions } from '../util/dimensions';
 
-export function Tail() {
+
+export function behaviorTail() {
     var text,
         container,
         xmargin = 25,
         tooltipSize = [0, 0],
         selectionSize = [0, 0];
 
+
     function tail(selection) {
         if (!text) return;
 
         d3.select(window)
-            .on('resize.tail', function() { selectionSize = getDimensions(selection); });
-
-        function show() {
-            container.style('display', 'block');
-            tooltipSize = getDimensions(container);
-        }
-
-        function mousemove() {
-            if (container.style('display') === 'none') show();
-            var xoffset = ((d3.event.clientX + tooltipSize[0] + xmargin) > selectionSize[0]) ?
-                -tooltipSize[0] - xmargin : xmargin;
-            container.classed('left', xoffset > 0);
-            setTransform(container, d3.event.clientX + xoffset, d3.event.clientY);
-        }
-
-        function mouseleave() {
-            if (d3.event.relatedTarget !== container.node()) {
-                container.style('display', 'none');
-            }
-        }
-
-        function mouseenter() {
-            if (d3.event.relatedTarget !== container.node()) {
-                show();
-            }
-        }
+            .on('resize.tail', function() { selectionSize = utilGetDimensions(selection); });
 
         container = d3.select(document.body)
             .append('div')
@@ -56,9 +33,39 @@ export function Tail() {
         container
             .on('mousemove.tail', mousemove);
 
-        tooltipSize = getDimensions(container);
-        selectionSize = getDimensions(selection);
+        tooltipSize = utilGetDimensions(container);
+        selectionSize = utilGetDimensions(selection);
+
+
+        function show() {
+            container.style('display', 'block');
+            tooltipSize = utilGetDimensions(container);
+        }
+
+
+        function mousemove() {
+            if (container.style('display') === 'none') show();
+            var xoffset = ((d3.event.clientX + tooltipSize[0] + xmargin) > selectionSize[0]) ?
+                -tooltipSize[0] - xmargin : xmargin;
+            container.classed('left', xoffset > 0);
+            utilSetTransform(container, d3.event.clientX + xoffset, d3.event.clientY);
+        }
+
+
+        function mouseleave() {
+            if (d3.event.relatedTarget !== container.node()) {
+                container.style('display', 'none');
+            }
+        }
+
+
+        function mouseenter() {
+            if (d3.event.relatedTarget !== container.node()) {
+                show();
+            }
+        }
     }
+
 
     tail.off = function(selection) {
         if (!text) return;
@@ -76,11 +83,13 @@ export function Tail() {
             .on('resize.tail', null);
     };
 
+
     tail.text = function(_) {
         if (!arguments.length) return text;
         text = _;
         return tail;
     };
+
 
     return tail;
 }

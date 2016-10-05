@@ -35,7 +35,7 @@
                     .style('background-color', d3.rgb(v,v,v));
             });
 
-        var infiniteExtent = iD.geo.Extent([0, 0], [Infinity, Infinity]),
+        var infiniteExtent = iD.geoExtent([0, 0], [Infinity, Infinity]),
             projection = function(p) { return p; },
             filter = function() { return true; },
             context = {};
@@ -45,7 +45,7 @@
         };
 
         context.presets = function() {
-            return iD.presets.presets().load({
+            return iD.presetInit().load({
                 presets: {
                     'amenity/restaurant': {
                         geometry: ['point'],
@@ -109,7 +109,7 @@
         var data = [{}, {amenity: 'restaurant'}],
             modes = ['base', 'hover', 'selected'],
             node = iD.Node({loc: [15, 30]}),
-            points = iD.svg.Points(projection, context);
+            points = iD.svgPoints(projection, context);
 
         var row = d3.select('.points').selectAll('tr')
             .data(data)
@@ -131,7 +131,7 @@
             .attr('width', 30)
             .attr('height', 40)
             .attr('data-zoom', function (d) { return d.zoom; })
-            .call(iD.svg.Layers(projection, context))
+            .call(iD.svgLayers(projection, context))
             .each(function (d) {
                 var n = node.update({tags: d}),
                     graph = iD.Graph([n]);
@@ -175,7 +175,7 @@
             modes = ['base', 'hover', 'selected'],
             node = iD.Node({loc: [15, 15]}),
             way = iD.Way({nodes: [node.id]}),
-            vertices = iD.svg.Vertices(projection, context);
+            vertices = iD.svgVertices(projection, context);
 
         var row = d3.select('.vertices').selectAll('tr')
             .data(data)
@@ -199,7 +199,7 @@
             .attr('width', 30)
             .attr('height', 30)
             .attr('data-zoom', function (d) { return d.zoom; })
-            .call(iD.svg.Layers(projection, context))
+            .call(iD.svgLayers(projection, context))
             .each(function (d) {
                 var n = node.update({tags: d.tags}),
                     graph = iD.Graph([n, way]);
@@ -268,9 +268,9 @@
         var a = iD.Node({loc: [15, 15]}),
             b = iD.Node({loc: [185, 15]}),
             way = iD.Way({nodes: [a.id, b.id]}),
-            vertices = iD.svg.Vertices(projection, context),
-            lines = iD.svg.Lines(projection, context),
-            midpoints = iD.svg.Midpoints(projection, context);
+            vertices = iD.svgVertices(projection, context),
+            lines = iD.svgLines(projection, context),
+            midpoints = iD.svgMidpoints(projection, context);
 
         row.selectAll('td')
             .data(function (d) {
@@ -287,7 +287,7 @@
             .attr('width', 200)
             .attr('height', 30)
             .attr('data-zoom', function (d) { return d.zoom; })
-            .call(iD.svg.Layers(projection, context))
+            .call(iD.svgLayers(projection, context))
             .each(function (d) {
                 var highway = way.update({tags: d.tags}),
                     graph = iD.Graph([a, b, highway]);
@@ -334,9 +334,9 @@
             c = iD.Node({loc: [85, 85]}),
             d = iD.Node({loc: [15, 85]}),
             way = iD.Way({nodes: [a.id, b.id, c.id, d.id, a.id]}),
-            vertices = iD.svg.Vertices(projection, context),
-            areas = iD.svg.Areas(projection, context),
-            midpoints = iD.svg.Midpoints(projection, context);
+            vertices = iD.svgVertices(projection, context),
+            areas = iD.svgAreas(projection, context),
+            midpoints = iD.svgMidpoints(projection, context);
 
         row.selectAll('td')
             .data(function (d) {
@@ -349,7 +349,7 @@
             .append('svg')
             .attr('width', 100)
             .attr('height', 100)
-            .call(iD.svg.Layers(projection, context))
+            .call(iD.svgLayers(projection, context))
             .each(function (datum) {
                 var area = way.update({tags: datum.tags}),
                     graph = iD.Graph([a, b, c, d, area]);

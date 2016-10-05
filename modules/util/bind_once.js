@@ -1,4 +1,4 @@
-export function bindOnce(target, type, listener, capture) {
+export function utilBindOnce(target, type, listener, capture) {
     var typeOnce = type + '.once';
     function one() {
         target.on(typeOnce, null);

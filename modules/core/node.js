@@ -1,26 +1,28 @@
 import _ from 'lodash';
-// iD.Node = iD.Entity.node;
-import { Entity } from './entity';
-import { Extent } from '../geo/index';
+import { coreEntity } from './entity';
+import { geoExtent } from '../geo/index';
 
-export function Node() {
-    if (!(this instanceof Node)) {
-        return (new Node()).initialize(arguments);
+export function coreNode() {
+    if (!(this instanceof coreNode)) {
+        return (new coreNode()).initialize(arguments);
     } else if (arguments.length) {
         this.initialize(arguments);
     }
 }
 
-Entity.node = Node;
+coreEntity.node = coreNode;
 
-Node.prototype = Object.create(Entity.prototype);
+coreNode.prototype = Object.create(coreEntity.prototype);
 
-_.extend(Node.prototype, {
+_.extend(coreNode.prototype, {
+
     type: 'node',
 
+
     extent: function() {
-        return new Extent(this.loc);
+        return new geoExtent(this.loc);
     },
+
 
     geometry: function(graph) {
         return graph.transient(this, 'geometry', function() {
@@ -28,9 +30,11 @@ _.extend(Node.prototype, {
         });
     },
 
+
     move: function(loc) {
         return this.update({loc: loc});
     },
+
 
     isIntersection: function(resolver) {
         return resolver.transient(this, 'isIntersection', function() {
@@ -44,6 +48,7 @@ _.extend(Node.prototype, {
         });
     },
 
+
     isHighwayIntersection: function(resolver) {
         return resolver.transient(this, 'isHighwayIntersection', function() {
             return resolver.parentWays(this).filter(function(parent) {
@@ -51,6 +56,7 @@ _.extend(Node.prototype, {
             }).length > 1;
         });
     },
+
 
     isOnAddressLine: function(resolver) {
         return resolver.transient(this, 'isOnAddressLine', function() {
@@ -60,6 +66,7 @@ _.extend(Node.prototype, {
             }).length > 0;
         });
     },
+
 
     asJXON: function(changeset_id) {
         var r = {
@@ -76,6 +83,7 @@ _.extend(Node.prototype, {
         if (changeset_id) r.node['@changeset'] = changeset_id;
         return r;
     },
+
 
     asGeoJSON: function() {
         return {

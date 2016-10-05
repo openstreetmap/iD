@@ -1,11 +1,11 @@
 import * as d3 from 'd3';
-import { rebind } from '../../util/rebind';
-import { bindOnce } from '../../util/bind_once';
 import { t } from '../../util/locale';
+import { utilRebind } from '../../util/rebind';
+import { utilBindOnce } from '../../util/bind_once';
 import { icon, pad } from './helper';
 
 
-export function area(context, reveal) {
+export function uiIntroArea(context, reveal) {
     var dispatch = d3.dispatch('done'),
         timeout;
 
@@ -75,7 +75,7 @@ export function area(context, reveal) {
             var first = d3.select('.preset-list-item:first-child');
             if (first.classed('preset-leisure-playground')) {
                 reveal(first.select('.preset-list-button').node(), t('intro.areas.choose'));
-                bindOnce(context.history(), 'change.intro', selectedPreset);
+                utilBindOnce(context.history(), 'change.intro', selectedPreset);
                 d3.select('.preset-search-input').on('keyup.intro', null);
             }
         }
@@ -101,5 +101,5 @@ export function area(context, reveal) {
     };
 
 
-    return rebind(step, dispatch, 'on');
+    return utilRebind(step, dispatch, 'on');
 }

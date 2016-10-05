@@ -1,11 +1,18 @@
 import * as d3 from 'd3';
 import _ from 'lodash';
-import { OneWaySegments, Path, RelationMemberTags, TagClasses } from './index';
-import { Detect } from '../util/detect';
-import { Entity } from '../core/index';
-import { simpleMultipolygonOuterMember } from '../geo/index';
+import {
+    svgOneWaySegments,
+    svgPath,
+    svgRelationMemberTags,
+    svgTagClasses
+} from './index';
 
-export function Lines(projection) {
+import { utilDetect } from '../util/detect';
+import { coreEntity } from '../core/index';
+import { geoSimpleMultipolygonOuterMember } from '../geo/index';
+
+
+export function svgLines(projection) {
 
     var highway_stack = {
         motorway: 0,
@@ -24,19 +31,19 @@ export function Lines(projection) {
 
     function waystack(a, b) {
         var as = 0, bs = 0;
-
         if (a.tags.highway) { as -= highway_stack[a.tags.highway]; }
         if (b.tags.highway) { bs -= highway_stack[b.tags.highway]; }
         return as - bs;
     }
 
+
     return function drawLines(selection, graph, entities, filter) {
         var ways = [], pathdata = {}, onewaydata = {},
-            getPath = Path(projection, graph);
+            getPath = svgPath(projection, graph);
 
         for (var i = 0; i < entities.length; i++) {
             var entity = entities[i],
-                outer = simpleMultipolygonOuterMember(entity, graph);
+                outer = geoSimpleMultipolygonOuterMember(entity, graph);
             if (outer) {
                 ways.push(entity.mergeTags(outer.tags));
             } else if (entity.geometry(graph) === 'line') {
@@ -51,7 +58,7 @@ export function Lines(projection) {
         _.forOwn(pathdata, function(v, k) {
             onewaydata[k] = _(v)
                 .filter(function(d) { return d.isOneWay(); })
-                .map(OneWaySegments(projection, graph, 35))
+                .map(svgOneWaySegments(projection, graph, 35))
                 .flatten()
                 .valueOf();
         });
@@ -83,22 +90,22 @@ export function Lines(projection) {
             .filter(filter)
             .data(
                 function() { return pathdata[this.parentNode.__data__] || []; },
-                Entity.key
+                coreEntity.key
             );
 
         lines.exit()
             .remove();
 
         // Optimization: call simple TagClasses only on enter selection. This
-        // works because Entity.key is defined to include the entity v attribute.
+        // works because coreEntity.key is defined to include the entity v attribute.
         lines.enter()
             .append('path')
             .attr('class', function(d) { return 'way line ' + this.parentNode.__data__ + ' ' + d.id; })
-            .call(TagClasses())
+            .call(svgTagClasses())
             .merge(lines)
                 .sort(waystack)
                 .attr('d', getPath)
-                .call(TagClasses().tags(RelationMemberTags(graph)));
+                .call(svgTagClasses().tags(svgRelationMemberTags(graph)));
 
 
         var onewaygroup = layergroup
@@ -129,7 +136,7 @@ export function Lines(projection) {
             .merge(oneways)
             .attr('d', function(d) { return d.d; });
 
-        if (Detect().ie) {
+        if (utilDetect().ie) {
             oneways.each(function() { this.parentNode.insertBefore(this, this); });
         }
     };

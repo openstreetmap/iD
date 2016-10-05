@@ -1,13 +1,15 @@
 import * as d3 from 'd3';
-import { rebind } from '../util/rebind';
 import { t } from '../util/locale';
-import { Extent } from '../geo/index';
-import { Icon } from '../svg/index';
-import { entityOrMemberSelector } from '../util/index';
+import { geoExtent } from '../geo/index';
+import { svgIcon } from '../svg/index';
+import { utilEntityOrMemberSelector } from '../util/index';
+import { utilRebind } from '../util/rebind';
 
-export function Conflicts(context) {
+
+export function uiConflicts(context) {
     var dispatch = d3.dispatch('download', 'cancel', 'save'),
         list;
+
 
     function conflicts(selection) {
         var header = selection
@@ -18,7 +20,7 @@ export function Conflicts(context) {
             .append('button')
             .attr('class', 'fr')
             .on('click', function() { dispatch.call('cancel'); })
-            .call(Icon('#icon-close'));
+            .call(svgIcon('#icon-close'));
 
         header
             .append('h3')
@@ -157,8 +159,8 @@ export function Conflicts(context) {
 
         item.exit()
             .remove();
-
     }
+
 
     function addChoices(selection) {
         var choices = selection
@@ -195,6 +197,7 @@ export function Conflicts(context) {
             });
     }
 
+
     function choose(ul, datum) {
         if (d3.event) d3.event.preventDefault();
 
@@ -204,7 +207,7 @@ export function Conflicts(context) {
             .selectAll('input')
             .property('checked', function(d) { return d === datum; });
 
-        var extent = Extent(),
+        var extent = geoExtent(),
             entity;
 
         entity = context.graph().hasEntity(datum.id);
@@ -218,6 +221,7 @@ export function Conflicts(context) {
         zoomToEntity(datum.id, extent);
     }
 
+
     function zoomToEntity(id, extent) {
         context.surface().selectAll('.hover')
             .classed('hover', false);
@@ -230,7 +234,7 @@ export function Conflicts(context) {
                 context.map().zoomTo(entity);
             }
             context.surface().selectAll(
-                entityOrMemberSelector([entity.id], context.graph()))
+                utilEntityOrMemberSelector([entity.id], context.graph()))
                 .classed('hover', true);
         }
     }
@@ -253,5 +257,6 @@ export function Conflicts(context) {
         return conflicts;
     };
 
-    return rebind(conflicts, dispatch, 'on');
+
+    return utilRebind(conflicts, dispatch, 'on');
 }

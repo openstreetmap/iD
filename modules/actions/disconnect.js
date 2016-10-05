@@ -1,4 +1,5 @@
-import { Node } from '../core/index';
+import { coreNode } from '../core/index';
+
 
 // Disconect the ways at the given node.
 //
@@ -8,14 +9,15 @@ import { Node } from '../core/index';
 // Normally, this will be undefined and the way will automatically
 // be assigned a new ID.
 //
-// This is the inverse of `iD.actions.Connect`.
+// This is the inverse of `iD.actionConnect`.
 //
 // Reference:
 //   https://github.com/openstreetmap/potlatch2/blob/master/net/systemeD/halcyon/connection/actions/UnjoinNodeAction.as
 //   https://github.com/openstreetmap/josm/blob/mirror/src/org/openstreetmap/josm/actions/UnGlueAction.java
 //
-export function Disconnect(nodeId, newNodeId) {
+export function actionDisconnect(nodeId, newNodeId) {
     var wayIds;
+
 
     var action = function(graph) {
         var node = graph.entity(nodeId),
@@ -23,7 +25,7 @@ export function Disconnect(nodeId, newNodeId) {
 
         connections.forEach(function(connection) {
             var way = graph.entity(connection.wayID),
-                newNode = Node({id: newNodeId, loc: node.loc, tags: node.tags});
+                newNode = coreNode({id: newNodeId, loc: node.loc, tags: node.tags});
 
             graph = graph.replace(newNode);
             if (connection.index === 0 && way.isArea()) {
@@ -37,6 +39,7 @@ export function Disconnect(nodeId, newNodeId) {
 
         return graph;
     };
+
 
     action.connections = function(graph) {
         var candidates = [],
@@ -61,6 +64,7 @@ export function Disconnect(nodeId, newNodeId) {
 
         return keeping ? candidates : candidates.slice(1);
     };
+
 
     action.disabled = function(graph) {
         var connections = action.connections(graph);
@@ -89,11 +93,13 @@ export function Disconnect(nodeId, newNodeId) {
             return 'relation';
     };
 
+
     action.limitWays = function(_) {
         if (!arguments.length) return wayIds;
         wayIds = _;
         return action;
     };
+
 
     return action;
 }

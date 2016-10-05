@@ -1,9 +1,11 @@
 import * as d3 from 'd3';
 import { t } from '../util/locale';
-import { Icon } from '../svg/index';
+import { svgIcon } from '../svg/index';
 
-export function Account(context) {
+
+export function uiAccount(context) {
     var connection = context.connection();
+
 
     function update(selection) {
         if (!connection.authenticated()) {
@@ -36,7 +38,7 @@ export function Account(context) {
                     .attr('src', details.image_url);
             } else {
                 userLink
-                    .call(Icon('#icon-avatar', 'pre-text light'));
+                    .call(svgIcon('#icon-avatar', 'pre-text light'));
             }
 
             // Add user name
@@ -54,6 +56,7 @@ export function Account(context) {
                 });
         });
     }
+
 
     return function(selection) {
         selection.append('li')

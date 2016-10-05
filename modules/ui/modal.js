@@ -1,8 +1,9 @@
 import * as d3 from 'd3';
 import { d3keybinding } from '../lib/d3.keybinding.js';
-import { Icon } from '../svg/index';
+import { svgIcon } from '../svg/index';
 
-export function modal(selection, blocking) {
+
+export function uiModal(selection, blocking) {
     var keybinding = d3keybinding('modal');
     var previous = selection.select('div.modal');
     var animate = previous.empty();
@@ -23,6 +24,7 @@ export function modal(selection, blocking) {
             .duration(200)
             .style('opacity',0)
             .remove();
+
         modal
             .transition()
             .duration(200)
@@ -32,7 +34,8 @@ export function modal(selection, blocking) {
     };
 
 
-    var modal = shaded.append('div')
+    var modal = shaded
+        .append('div')
         .attr('class', 'modal fillL col6');
 
     if (!blocking) {
@@ -45,16 +48,18 @@ export function modal(selection, blocking) {
         modal.append('button')
             .attr('class', 'close')
             .on('click', shaded.close)
-            .call(Icon('#icon-close'));
+            .call(svgIcon('#icon-close'));
 
         keybinding
             .on('⌫', shaded.close)
             .on('⎋', shaded.close);
 
-        d3.select(document).call(keybinding);
+        d3.select(document)
+            .call(keybinding);
     }
 
-    modal.append('div')
+    modal
+        .append('div')
         .attr('class', 'content');
 
     if (animate) {
@@ -62,6 +67,7 @@ export function modal(selection, blocking) {
     } else {
         shaded.style('opacity', 1);
     }
+
 
     return shaded;
 }

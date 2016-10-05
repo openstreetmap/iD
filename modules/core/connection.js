@@ -1,18 +1,19 @@
 import * as d3 from 'd3';
 import _ from 'lodash';
-import { rebind } from '../util/rebind';
-import { functor } from '../util/index';
+import { utilRebind } from '../util/rebind';
+import { utilFunctor } from '../util/index';
 import { d3geoTile } from '../lib/d3.geo.tile';
-import { Detect } from '../util/detect';
-import { Entity } from './entity';
-import { Extent } from '../geo/index';
+import { geoExtent } from '../geo/index';
+import { utilDetect } from '../util/detect';
+import { coreEntity } from './entity';
+import { coreNode } from './node';
+import { coreRelation } from './relation';
+import { coreWay } from './way';
 import { JXON } from '../util/jxon';
-import { Node } from './node';
-import { Relation } from './relation';
-import { Way } from './way';
 import osmAuth from 'osm-auth';
 
-export function Connection(useHttps) {
+
+export function coreConnection(useHttps) {
     if (typeof useHttps !== 'boolean') {
         useHttps = window.location.protocol === 'https:';
     }
@@ -45,6 +46,7 @@ export function Connection(useHttps) {
         return url + '/changeset/' + changesetId;
     };
 
+
     connection.changesetsURL = function(center, zoom) {
         var precision = Math.max(0, Math.ceil(Math.log(zoom) / Math.LN2));
         return url + '/history#map=' +
@@ -53,13 +55,16 @@ export function Connection(useHttps) {
             center[0].toFixed(precision);
     };
 
+
     connection.entityURL = function(entity) {
         return url + '/' + entity.type + '/' + entity.osmId();
     };
 
+
     connection.userURL = function(username) {
         return url + '/user/' + username;
     };
+
 
     connection.loadFromURL = function(url, callback) {
         function done(err, dom) {
@@ -68,9 +73,10 @@ export function Connection(useHttps) {
         return d3.xml(url).get(done);
     };
 
+
     connection.loadEntity = function(id, callback) {
-        var type = Entity.id.type(id),
-            osmID = Entity.id.toOSM(id);
+        var type = coreEntity.id.type(id),
+            osmID = coreEntity.id.toOSM(id);
 
         connection.loadFromURL(
             url + '/api/0.6/' + type + '/' + osmID + (type !== 'node' ? '/full' : ''),
@@ -79,9 +85,10 @@ export function Connection(useHttps) {
             });
     };
 
+
     connection.loadEntityVersion = function(id, version, callback) {
-        var type = Entity.id.type(id),
-            osmID = Entity.id.toOSM(id);
+        var type = coreEntity.id.type(id),
+            osmID = coreEntity.id.toOSM(id);
 
         connection.loadFromURL(
             url + '/api/0.6/' + type + '/' + osmID + '/' + version,
@@ -90,10 +97,11 @@ export function Connection(useHttps) {
             });
     };
 
+
     connection.loadMultiple = function(ids, callback) {
-        _.each(_.groupBy(_.uniq(ids), Entity.id.type), function(v, k) {
+        _.each(_.groupBy(_.uniq(ids), coreEntity.id.type), function(v, k) {
             var type = k + 's',
-                osmIDs = _.map(v, Entity.id.toOSM);
+                osmIDs = _.map(v, coreEntity.id.toOSM);
 
             _.each(_.chunk(osmIDs, 150), function(arr) {
                 connection.loadFromURL(
@@ -105,19 +113,23 @@ export function Connection(useHttps) {
         });
     };
 
+
     function authenticating() {
         dispatch.call('authenticating');
     }
 
+
     function authenticated() {
         dispatch.call('authenticated');
     }
+
 
     function getLoc(attrs) {
         var lon = attrs.lon && attrs.lon.value,
             lat = attrs.lat && attrs.lat.value;
         return [parseFloat(lon), parseFloat(lat)];
     }
+
 
     function getNodes(obj) {
         var elems = obj.getElementsByTagName(ndStr),
@@ -128,6 +140,7 @@ export function Connection(useHttps) {
         return nodes;
     }
 
+
     function getTags(obj) {
         var elems = obj.getElementsByTagName(tagStr),
             tags = {};
@@ -137,6 +150,7 @@ export function Connection(useHttps) {
         }
         return tags;
     }
+
 
     function getMembers(obj) {
         var elems = obj.getElementsByTagName(memberStr),
@@ -152,15 +166,17 @@ export function Connection(useHttps) {
         return members;
     }
 
+
     function getVisible(attrs) {
         return (!attrs.visible || attrs.visible.value !== 'false');
     }
 
+
     var parsers = {
         node: function nodeData(obj) {
             var attrs = obj.attributes;
-            return new Node({
-                id: Entity.id.fromOSM(nodeStr, attrs.id.value),
+            return new coreNode({
+                id: coreEntity.id.fromOSM(nodeStr, attrs.id.value),
                 loc: getLoc(attrs),
                 version: attrs.version.value,
                 user: attrs.user && attrs.user.value,
@@ -171,8 +187,8 @@ export function Connection(useHttps) {
 
         way: function wayData(obj) {
             var attrs = obj.attributes;
-            return new Way({
-                id: Entity.id.fromOSM(wayStr, attrs.id.value),
+            return new coreWay({
+                id: coreEntity.id.fromOSM(wayStr, attrs.id.value),
                 version: attrs.version.value,
                 user: attrs.user && attrs.user.value,
                 tags: getTags(obj),
@@ -183,8 +199,8 @@ export function Connection(useHttps) {
 
         relation: function relationData(obj) {
             var attrs = obj.attributes;
-            return new Relation({
-                id: Entity.id.fromOSM(relationStr, attrs.id.value),
+            return new coreRelation({
+                id: coreEntity.id.fromOSM(relationStr, attrs.id.value),
                 version: attrs.version.value,
                 user: attrs.user && attrs.user.value,
                 tags: getTags(obj),
@@ -193,6 +209,7 @@ export function Connection(useHttps) {
             });
         }
     };
+
 
     function parse(dom) {
         if (!dom || !dom.childNodes) return;
@@ -212,9 +229,11 @@ export function Connection(useHttps) {
         return entities;
     }
 
+
     connection.authenticated = function() {
         return oauth.authenticated();
     };
+
 
     // Generate Changeset XML. Returns a string.
     connection.changesetJXON = function(tags) {
@@ -230,6 +249,7 @@ export function Connection(useHttps) {
             }
         };
     };
+
 
     // Generate [osmChange](http://wiki.openstreetmap.org/wiki/OsmChange)
     // XML. Returns a string.
@@ -263,8 +283,9 @@ export function Connection(useHttps) {
         };
     };
 
+
     connection.changesetTags = function(version, comment, imageryUsed) {
-        var detected = Detect(),
+        var detected = utilDetect(),
             tags = {
                 created_by: ('iD ' + version).substr(0, 255),
                 imagery_used: imageryUsed.join(';').substr(0, 255),
@@ -278,6 +299,7 @@ export function Connection(useHttps) {
 
         return tags;
     };
+
 
     connection.putChangeset = function(changes, version, comment, imageryUsed, callback) {
         oauth.xhr({
@@ -302,10 +324,11 @@ export function Connection(useHttps) {
                         method: 'PUT',
                         path: '/api/0.6/changeset/' + changeset_id + '/close',
                         options: { header: { 'Content-Type': 'text/xml' } }
-                    }, functor(true));
+                    }, utilFunctor(true));
                 });
             });
     };
+
 
     connection.userDetails = function(callback) {
         if (userDetails) {
@@ -336,6 +359,7 @@ export function Connection(useHttps) {
         oauth.xhr({ method: 'GET', path: '/api/0.6/user/details' }, done);
     };
 
+
     connection.userChangesets = function(callback) {
         connection.userDetails(function(err, user) {
             if (err) return callback(err);
@@ -353,6 +377,7 @@ export function Connection(useHttps) {
         });
     };
 
+
     connection.status = function(callback) {
         function done(capabilities) {
             var apiStatus = capabilities.getElementsByTagName('status');
@@ -363,7 +388,11 @@ export function Connection(useHttps) {
             .on('error', callback);
     };
 
-    function abortRequest(i) { i.abort(); }
+
+    function abortRequest(i) {
+        i.abort();
+    }
+
 
     connection.tileZoom = function(_) {
         if (!arguments.length) return tileZoom;
@@ -371,8 +400,8 @@ export function Connection(useHttps) {
         return connection;
     };
 
-    connection.loadTiles = function(projection, dimensions, callback) {
 
+    connection.loadTiles = function(projection, dimensions, callback) {
         if (off) return;
 
         var s = projection.scale() * 2 * Math.PI,
@@ -393,7 +422,7 @@ export function Connection(useHttps) {
 
                 return {
                     id: tile.toString(),
-                    extent: Extent(
+                    extent: geoExtent(
                         projection.invert([x, y + ts]),
                         projection.invert([x + ts, y]))
                 };
@@ -433,6 +462,7 @@ export function Connection(useHttps) {
         });
     };
 
+
     connection.switch = function(options) {
         url = options.url;
         oauth.options(_.extend({
@@ -444,10 +474,12 @@ export function Connection(useHttps) {
         return connection;
     };
 
+
     connection.toggle = function(_) {
         off = !_;
         return connection;
     };
+
 
     connection.flush = function() {
         userDetails = undefined;
@@ -457,11 +489,13 @@ export function Connection(useHttps) {
         return connection;
     };
 
+
     connection.loadedTiles = function(_) {
         if (!arguments.length) return loadedTiles;
         loadedTiles = _;
         return connection;
     };
+
 
     connection.logout = function() {
         userDetails = undefined;
@@ -469,6 +503,7 @@ export function Connection(useHttps) {
         dispatch.call('auth');
         return connection;
     };
+
 
     connection.authenticate = function(callback) {
         userDetails = undefined;
@@ -479,5 +514,6 @@ export function Connection(useHttps) {
         return oauth.authenticate(done);
     };
 
-    return rebind(connection, dispatch, 'on');
+
+    return utilRebind(connection, dispatch, 'on');
 }

@@ -2,29 +2,37 @@ import * as d3 from 'd3';
 import _ from 'lodash';
 import { d3combobox } from '../lib/d3.combobox.js';
 import { t } from '../util/locale';
-import { AddEntity, AddMember, ChangeMember, DeleteMember } from '../actions/index';
-import { Entity, Relation } from '../core/index';
-import { Disclosure } from './disclosure';
-import { Icon } from '../svg/index';
-import { Select } from '../modes/index';
-import { displayName } from '../util/index';
+
+import {
+    actionAddEntity,
+    actionAddMember,
+    actionChangeMember,
+    actionDeleteMember
+} from '../actions/index';
+
+import { coreEntity, coreRelation } from '../core/index';
+import { modeSelect } from '../modes/index';
+import { svgIcon } from '../svg/index';
+import { uiDisclosure } from './disclosure';
+import { utilDisplayName } from '../util/index';
 
 
-export function RawMembershipEditor(context) {
+export function uiRawMembershipEditor(context) {
     var id, showBlank;
 
 
     function selectRelation(d) {
         d3.event.preventDefault();
-        context.enter(Select(context, [d.relation.id]));
+        context.enter(modeSelect(context, [d.relation.id]));
     }
 
 
     function changeRole(d) {
         var role = d3.select(this).property('value');
         context.perform(
-            ChangeMember(d.relation.id, _.extend({}, d.member, {role: role}), d.index),
-            t('operations.change_role.annotation'));
+            actionChangeMember(d.relation.id, _.extend({}, d.member, { role: role }), d.index),
+            t('operations.change_role.annotation')
+        );
     }
 
 
@@ -33,26 +41,29 @@ export function RawMembershipEditor(context) {
 
         if (d.relation) {
             context.perform(
-                AddMember(d.relation.id, {id: id, type: context.entity(id).type, role: role}),
-                t('operations.add_member.annotation'));
+                actionAddMember(d.relation.id, { id: id, type: context.entity(id).type, role: role }),
+                t('operations.add_member.annotation')
+            );
 
         } else {
-            var relation = Relation();
+            var relation = coreRelation();
 
             context.perform(
-                AddEntity(relation),
-                AddMember(relation.id, {id: id, type: context.entity(id).type, role: role}),
-                t('operations.add.annotation.relation'));
+                actionAddEntity(relation),
+                actionAddMember(relation.id, { id: id, type: context.entity(id).type, role: role }),
+                t('operations.add.annotation.relation')
+            );
 
-            context.enter(Select(context, [relation.id]));
+            context.enter(modeSelect(context, [relation.id]));
         }
     }
 
 
     function deleteMembership(d) {
         context.perform(
-            DeleteMember(d.relation.id, d.index),
-            t('operations.delete_member.annotation'));
+            actionDeleteMember(d.relation.id, d.index),
+            t('operations.delete_member.annotation')
+        );
     }
 
 
@@ -69,7 +80,7 @@ export function RawMembershipEditor(context) {
                 return;
 
             var presetName = context.presets().match(entity, graph).name(),
-                entityName = displayName(entity) || '';
+                entityName = utilDisplayName(entity) || '';
 
             var value = presetName + ' ' + entityName;
             if (q && value.toLowerCase().indexOf(q.toLowerCase()) === -1)
@@ -82,7 +93,7 @@ export function RawMembershipEditor(context) {
         });
 
         result.sort(function(a, b) {
-            return Relation.creationOrder(a.relation, b.relation);
+            return coreRelation.creationOrder(a.relation, b.relation);
         });
 
         // Dedupe identical names by appending relation id - see #2891
@@ -98,7 +109,6 @@ export function RawMembershipEditor(context) {
         });
 
         result.unshift(newRelation);
-
         return result;
     }
 
@@ -115,11 +125,12 @@ export function RawMembershipEditor(context) {
             });
         });
 
-        selection.call(Disclosure()
+        selection.call(uiDisclosure()
             .title(t('inspector.all_relations') + ' (' + memberships.length + ')')
             .expanded(true)
             .on('toggled', toggled)
-            .content(content));
+            .content(content)
+        );
 
 
         function toggled(expanded) {
@@ -140,7 +151,9 @@ export function RawMembershipEditor(context) {
 
 
             var items = list.selectAll('li.member-row-normal')
-                .data(memberships, function(d) { return Entity.key(d.relation) + ',' + d.index; });
+                .data(memberships, function(d) {
+                    return coreEntity.key(d.relation) + ',' + d.index;
+                });
 
             items.exit()
                 .each(unbind)
@@ -160,12 +173,14 @@ export function RawMembershipEditor(context) {
             label
                 .append('span')
                 .attr('class', 'member-entity-type')
-                .text(function(d) { return context.presets().match(d.relation, context.graph()).name(); });
+                .text(function(d) {
+                    return context.presets().match(d.relation, context.graph()).name();
+                });
 
             label
                 .append('span')
                 .attr('class', 'member-entity-name')
-                .text(function(d) { return displayName(d.relation); });
+                .text(function(d) { return utilDisplayName(d.relation); });
 
             enter
                 .append('input')
@@ -181,7 +196,7 @@ export function RawMembershipEditor(context) {
                 .attr('tabindex', -1)
                 .attr('class', 'remove button-input-action member-delete minor')
                 .on('click', deleteMembership)
-                .call(Icon('#operation-delete'));
+                .call(svgIcon('#operation-delete'));
 
             if (context.taginfo()) {
                 enter.each(bindTypeahead);
@@ -205,7 +220,8 @@ export function RawMembershipEditor(context) {
                         .fetcher(function(value, callback) { callback(relations(value)); })
                         .on('accept', function(d) {
                             addMembership(d, list.selectAll('.member-row-new .member-role').property('value'));
-                        }));
+                        })
+                    );
 
                 enter
                     .append('input')
@@ -220,7 +236,7 @@ export function RawMembershipEditor(context) {
                     .attr('tabindex', -1)
                     .attr('class', 'remove button-input-action member-delete minor')
                     .on('click', deleteMembership)
-                    .call(Icon('#operation-delete'));
+                    .call(svgIcon('#operation-delete'));
 
             } else {
                 list.selectAll('.member-row-new')
@@ -239,7 +255,7 @@ export function RawMembershipEditor(context) {
                     content(wrap);
                     list.selectAll('.member-entity-input').node().focus();
                 })
-                .call(Icon('#icon-plus', 'light'));
+                .call(svgIcon('#icon-plus', 'light'));
 
 
             function bindTypeahead(d) {

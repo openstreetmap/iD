@@ -1,4 +1,4 @@
-describe('iD.ui.flash', function () {
+describe('iD.uiFlash', function () {
     var clock;
 
     var elem;
@@ -18,7 +18,7 @@ describe('iD.ui.flash', function () {
     });
 
     it('leaves after 1000 ms', function () {
-        var flash = iD.ui.flash(elem);
+        var flash = iD.uiFlash(elem);
         clock.tick(1610);
         expect(flash.node().parentNode).to.be.null;
     });

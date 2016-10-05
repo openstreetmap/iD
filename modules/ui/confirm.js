@@ -1,8 +1,9 @@
 import { t } from '../util/locale';
-import { modal } from './modal';
+import { uiModal } from './modal';
 
-export function uiconfirm(selection) {
-    var modalSelection = modal(selection);
+
+export function uiConfirm(selection) {
+    var modalSelection = uiModal(selection);
 
     modalSelection.select('.modal')
         .classed('modal-alert', true);
@@ -18,6 +19,7 @@ export function uiconfirm(selection) {
     var buttons = section.append('div')
         .attr('class', 'modal-section buttons cf');
 
+
     modalSelection.okButton = function() {
         buttons
             .append('button')
@@ -29,6 +31,7 @@ export function uiconfirm(selection) {
 
         return modalSelection;
     };
+
 
     return modalSelection;
 }

@@ -1,6 +1,6 @@
-import { editDistance } from './util';
+import { utilEditDistance } from './util';
 
-export function SuggestNames(preset, suggestions) {
+export function utilSuggestNames(preset, suggestions) {
     preset = preset.id.split('/', 2);
     var k = preset[0],
         v = preset[1];
@@ -10,7 +10,7 @@ export function SuggestNames(preset, suggestions) {
         if (value && value.length > 2) {
             if (suggestions[k] && suggestions[k][v]) {
                 for (var sugg in suggestions[k][v]) {
-                    var dist = editDistance(value, sugg.substring(0, value.length));
+                    var dist = utilEditDistance(value, sugg.substring(0, value.length));
                     if (dist < 3) {
                         result.push({
                             title: sugg,

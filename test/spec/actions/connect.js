@@ -1,4 +1,4 @@
-describe('iD.actions.Connect', function() {
+describe('iD.actionConnect', function() {
     it('removes all but the final node', function() {
         var graph = iD.Graph([
                 iD.Node({id: 'a'}),
@@ -6,7 +6,7 @@ describe('iD.actions.Connect', function() {
                 iD.Node({id: 'c'})
             ]);
 
-        graph = iD.actions.Connect(['a', 'b', 'c'])(graph);
+        graph = iD.actionConnect(['a', 'b', 'c'])(graph);
 
         expect(graph.hasEntity('a')).to.be.undefined;
         expect(graph.hasEntity('b')).to.be.undefined;
@@ -38,7 +38,7 @@ describe('iD.actions.Connect', function() {
                 iD.Way({id: '|', nodes: ['d', 'e']})
             ]);
 
-        graph = iD.actions.Connect(['e', 'b'])(graph);
+        graph = iD.actionConnect(['e', 'b'])(graph);
 
         expect(graph.entity('-').nodes).to.eql(['a', 'b', 'c']);
         expect(graph.entity('|').nodes).to.eql(['d', 'b']);
@@ -63,7 +63,7 @@ describe('iD.actions.Connect', function() {
                 iD.Way({id: '=', nodes: ['d', 'e']})
             ]);
 
-        graph = iD.actions.Connect(['a', 'd'])(graph);
+        graph = iD.actionConnect(['a', 'd'])(graph);
 
         expect(graph.entity('-').nodes).to.eql(['d', 'b', 'c', 'd']);
     });
@@ -84,7 +84,7 @@ describe('iD.actions.Connect', function() {
                 iD.Way({id: '-', nodes: ['a', 'b', 'c']})
             ]);
 
-        graph = iD.actions.Connect(['b', 'c'])(graph);
+        graph = iD.actionConnect(['b', 'c'])(graph);
 
         expect(graph.entity('-').nodes).to.eql(['a', 'c']);
         expect(graph.hasEntity('b')).to.be.undefined;
@@ -112,7 +112,7 @@ describe('iD.actions.Connect', function() {
                 iD.Way({id: '|', nodes: ['b', 'd']})
             ]);
 
-        graph = iD.actions.Connect(['b', 'c'])(graph);
+        graph = iD.actionConnect(['b', 'c'])(graph);
 
         expect(graph.entity('-').nodes).to.eql(['a', 'c']);
         expect(graph.entity('|').nodes).to.eql(['c', 'd']);
@@ -130,7 +130,7 @@ describe('iD.actions.Connect', function() {
                 iD.Way({id: '-', nodes: ['a', 'b']})
             ]);
 
-        graph = iD.actions.Connect(['a', 'b'])(graph);
+        graph = iD.actionConnect(['a', 'b'])(graph);
 
         expect(graph.hasEntity('a')).to.be.undefined;
         expect(graph.hasEntity('-')).to.be.undefined;
@@ -143,7 +143,7 @@ describe('iD.actions.Connect', function() {
                 iD.Node({id: 'c', tags: {c: 'c'}})
             ]);
 
-        graph = iD.actions.Connect(['a', 'b', 'c'])(graph);
+        graph = iD.actionConnect(['a', 'b', 'c'])(graph);
 
         expect(graph.entity('c').tags).to.eql({a: 'a', b: 'b', c: 'c'});
     });
@@ -160,7 +160,7 @@ describe('iD.actions.Connect', function() {
                 iD.Relation({id: 'r2', members: [{id: 'b', role: 'r2', type: 'node'}, {id: 'c', role: 'r2', type: 'node'}]})
             ]);
 
-        graph = iD.actions.Connect(['b', 'c'])(graph);
+        graph = iD.actionConnect(['b', 'c'])(graph);
 
         expect(graph.entity('r1').members).to.eql([{id: 'c', role: 'r1', type: 'node'}]);
         expect(graph.entity('r2').members).to.eql([{id: 'c', role: 'r2', type: 'node'}]);

@@ -1,13 +1,15 @@
 import * as d3 from 'd3';
 import _ from 'lodash';
-import { Extent, pointInPolygon } from '../geo/index';
-import { Select } from '../modes/index';
-import { Lasso as uiLasso } from '../ui/index';
+import { geoExtent, geoPointInPolygon } from '../geo/index';
+import { modeSelect } from '../modes/index';
+import { uiLasso } from '../ui/index';
 
-export function Lasso(context) {
+
+export function behaviorLasso(context) {
 
     var behavior = function(selection) {
         var lasso;
+
 
         function mousedown() {
             var button = 0;  // left
@@ -22,6 +24,7 @@ export function Lasso(context) {
             }
         }
 
+
         function mousemove() {
             if (!lasso) {
                 lasso = uiLasso(context);
@@ -31,25 +34,28 @@ export function Lasso(context) {
             lasso.p(context.mouse());
         }
 
+
         function normalize(a, b) {
             return [
                 [Math.min(a[0], b[0]), Math.min(a[1], b[1])],
                 [Math.max(a[0], b[0]), Math.max(a[1], b[1])]];
         }
 
+
         function lassoed() {
             if (!lasso) return [];
 
             var graph = context.graph(),
                 bounds = lasso.extent().map(context.projection.invert),
-                extent = Extent(normalize(bounds[0], bounds[1]));
+                extent = geoExtent(normalize(bounds[0], bounds[1]));
 
             return _.map(context.intersects(extent).filter(function(entity) {
                 return entity.type === 'node' &&
-                    pointInPolygon(context.projection(entity.loc), lasso.coordinates) &&
+                    geoPointInPolygon(context.projection(entity.loc), lasso.coordinates) &&
                     !context.features().isHidden(entity, graph, entity.geometry(graph));
             }), 'id');
         }
+
 
         function mouseup() {
             selection
@@ -62,7 +68,7 @@ export function Lasso(context) {
             lasso.close();
 
             if (ids.length) {
-                context.enter(Select(context, ids));
+                context.enter(modeSelect(context, ids));
             }
         }
 
@@ -70,9 +76,11 @@ export function Lasso(context) {
             .on('mousedown.lasso', mousedown);
     };
 
+
     behavior.off = function(selection) {
         selection.on('mousedown.lasso', null);
     };
+
 
     return behavior;
 }

@@ -1,9 +1,10 @@
 import _ from 'lodash';
-import { Reverse } from '../actions/reverse';
+import { actionReverse } from '../actions/reverse';
+
 
 // For fixing up rendering of multipolygons with tags on the outer member.
 // https://github.com/openstreetmap/iD/issues/613
-export function isSimpleMultipolygonOuterMember(entity, graph) {
+export function geoIsSimpleMultipolygonOuterMember(entity, graph) {
     if (entity.type !== 'way')
         return false;
 
@@ -27,7 +28,8 @@ export function isSimpleMultipolygonOuterMember(entity, graph) {
     return parent;
 }
 
-export function simpleMultipolygonOuterMember(entity, graph) {
+
+export function geoSimpleMultipolygonOuterMember(entity, graph) {
     if (entity.type !== 'way')
         return false;
 
@@ -52,6 +54,7 @@ export function simpleMultipolygonOuterMember(entity, graph) {
     return outerMember && graph.hasEntity(outerMember.id);
 }
 
+
 // Join `array` into sequences of connecting ways.
 //
 // Segments which share identical start/end nodes will, as much as possible,
@@ -67,12 +70,12 @@ export function simpleMultipolygonOuterMember(entity, graph) {
 // used.
 //
 // If an member has a `tags` property, its tags will be reversed via
-// `iD.actions.Reverse` in the output.
+// `iD.actionReverse` in the output.
 //
 // Incomplete members (those for which `graph.hasEntity(element.id)` returns
 // false) and non-way members are ignored.
 //
-export function joinWays(array, graph) {
+export function geoJoinWays(array, graph) {
     var joined = [], member, current, nodes, first, last, i, how, what;
 
     array = array.filter(function(member) {
@@ -84,7 +87,7 @@ export function joinWays(array, graph) {
     }
 
     function reverse(member) {
-        return member.tags ? Reverse(member.id, {reverseOneway: true})(graph).entity(member.id) : member;
+        return member.tags ? actionReverse(member.id, { reverseOneway: true })(graph).entity(member.id) : member;
     }
 
     while (array.length) {

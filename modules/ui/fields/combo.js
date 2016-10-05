@@ -1,18 +1,19 @@
 import * as d3 from 'd3';
 import _ from 'lodash';
 import { t } from '../../util/locale';
-import { rebind } from '../../util/rebind';
-import { getSetValue } from '../../util/get_set_value';
 import { d3combobox } from '../../lib/d3.combobox.js';
-import { nominatim } from '../../services/index';
+import { serviceNominatim } from '../../services/index';
+import { utilRebind } from '../../util/rebind';
+import { utilGetSetValue } from '../../util/get_set_value';
 
 export {
-    combo as typeCombo,
-    combo as multiCombo,
-    combo as networkCombo
+    uiFieldCombo as uiFieldTypeCombo,
+    uiFieldCombo as uiFieldMultiCombo,
+    uiFieldCombo as uiFieldNetworkCombo
 };
 
-export function combo(field, context) {
+
+export function uiFieldCombo(field, context) {
     var dispatch = d3.dispatch('change'),
         isMulti = (field.type === 'multiCombo'),
         isNetwork = (field.type === 'networkCombo'),
@@ -194,13 +195,13 @@ export function combo(field, context) {
 
 
     function change() {
-        var val = tagValue(getSetValue(input)),
+        var val = tagValue(utilGetSetValue(input)),
             t = {};
 
         if (isMulti) {
             if (!val) return;
             container.classed('active', false);
-            getSetValue(input, '');
+            utilGetSetValue(input, '');
             field.keys.push(field.key + val);
             t[field.key + val] = 'yes';
             window.setTimeout(function() { input.node().focus(); }, 10);
@@ -249,8 +250,8 @@ export function combo(field, context) {
 
         if (isNetwork) {
             var center = entity.extent(context.graph()).center();
-            nominatim.init();
-            nominatim.countryCode(center, function (err, code) {
+            serviceNominatim.init();
+            serviceNominatim.countryCode(center, function (err, code) {
                 countryCode = code;
             });
         }
@@ -325,7 +326,7 @@ export function combo(field, context) {
                 .text('×');
 
         } else {
-            getSetValue(input, displayValue(tags[field.key]));
+            utilGetSetValue(input, displayValue(tags[field.key]));
         }
     };
 
@@ -342,5 +343,5 @@ export function combo(field, context) {
     };
 
 
-    return rebind(combo, dispatch, 'on');
+    return utilRebind(combo, dispatch, 'on');
 }

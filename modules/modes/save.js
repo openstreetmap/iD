@@ -1,21 +1,47 @@
 import * as d3 from 'd3';
 import _ from 'lodash';
+
 import { t } from '../util/locale';
-import { Conflicts, uiconfirm, Commit, Loading, Success } from '../ui/index';
-import { DiscardTags, MergeRemoteChanges, Noop, Revert } from '../actions/index';
-import { displayName, displayType } from '../util/index';
-import { Browse } from './index';
-import { Graph } from '../core/index';
+
+import {
+    uiConflicts,
+    uiConfirm,
+    uiCommit,
+    uiLoading,
+    uiSuccess
+} from '../ui/index';
+
+import {
+    actionDiscardTags,
+    actionMergeRemoteChanges,
+    actionNoop,
+    actionRevert
+} from '../actions/index';
+
+import {
+    utilDisplayName,
+    utilDisplayType
+} from '../util/index';
+
+import { modeBrowse } from './index';
+import { coreGraph } from '../core/index';
 import { JXON } from '../util/jxon';
 
-export function Save(context) {
-    var ui = Commit(context)
+
+export function modeSave(context) {
+    var mode = {
+        id: 'save'
+    };
+
+    var ui = uiCommit(context)
             .on('cancel', cancel)
             .on('save', save);
 
+
     function cancel() {
-        context.enter(Browse(context));
+        context.enter(modeBrowse(context));
     }
+
 
     function save(e, tryAgain) {
         function withChildNodes(ids, graph) {
@@ -35,18 +61,18 @@ export function Save(context) {
             }, _.clone(ids)));
         }
 
-        var loading = Loading(context).message(t('save.uploading')).blocking(true),
+        var loading = uiLoading(context).message(t('save.uploading')).blocking(true),
             history = context.history(),
-            origChanges = history.changes(DiscardTags(history.difference())),
+            origChanges = history.changes(actionDiscardTags(history.difference())),
             localGraph = context.graph(),
-            remoteGraph = Graph(history.base(), true),
+            remoteGraph = coreGraph(history.base(), true),
             modified = _.filter(history.difference().summary(), {changeType: 'modified'}),
             toCheck = _.map(_.map(modified, 'entity'), 'id'),
             toLoad = withChildNodes(toCheck, localGraph),
             conflicts = [],
             errors = [];
 
-        if (!tryAgain) history.perform(Noop());  // checkpoint
+        if (!tryAgain) history.perform(actionNoop());  // checkpoint
         context.container().call(loading);
 
         if (toCheck.length) {
@@ -105,7 +131,7 @@ export function Save(context) {
                 return '<a href="' + context.connection().userURL(d) + '" target="_blank">' + d + '</a>';
             }
             function entityName(entity) {
-                return displayName(entity) || (displayType(entity.id) + ' ' + entity.id);
+                return utilDisplayName(entity) || (utilDisplayType(entity.id) + ' ' + entity.id);
             }
 
             function compareVersions(local, remote) {
@@ -131,7 +157,7 @@ export function Save(context) {
 
                 if (compareVersions(local, remote)) return;
 
-                var action = MergeRemoteChanges,
+                var action = actionMergeRemoteChanges,
                     merge = action(id, localGraph, remoteGraph, formatUser);
 
                 history.replace(merge);
@@ -167,7 +193,7 @@ export function Save(context) {
             } else if (errors.length) {
                 showErrors();
             } else {
-                var changes = history.changes(DiscardTags(history.difference()));
+                var changes = history.changes(actionDiscardTags(history.difference()));
                 if (changes.modified.length || changes.created.length || changes.deleted.length) {
                     context.connection().putChangeset(
                         changes,
@@ -208,7 +234,7 @@ export function Save(context) {
 
             loading.close();
 
-            selection.call(Conflicts(context)
+            selection.call(uiConflicts(context)
                 .list(conflicts)
                 .on('download', function() {
                     var data = JXON.stringify(context.connection().osmChangeJXON('CHANGEME', origChanges)),
@@ -226,10 +252,10 @@ export function Save(context) {
                             if (entity && entity.type === 'way') {
                                 var children = _.uniq(entity.nodes);
                                 for (var j = 0; j < children.length; j++) {
-                                    history.replace(Revert(children[j]));
+                                    history.replace(actionRevert(children[j]));
                                 }
                             }
-                            history.replace(Revert(conflicts[i].id));
+                            history.replace(actionRevert(conflicts[i].id));
                         }
                     }
 
@@ -241,7 +267,7 @@ export function Save(context) {
 
 
         function showErrors() {
-            var selection = uiconfirm(context.container());
+            var selection = uiConfirm(context.container());
 
             history.pop();
             loading.close();
@@ -308,20 +334,19 @@ export function Save(context) {
 
 
     function success(e, changeset_id) {
-        context.enter(Browse(context)
-            .sidebar(Success(context)
+        context.enter(modeBrowse(context)
+            .sidebar(uiSuccess(context)
                 .changeset({
                     id: changeset_id,
                     comment: e.comment
                 })
                 .on('cancel', function() {
                     context.ui().sidebar.hide();
-                })));
+                })
+            )
+        );
     }
 
-    var mode = {
-        id: 'save'
-    };
 
     mode.enter = function() {
         context.connection().authenticate(function(err) {
@@ -332,6 +357,7 @@ export function Save(context) {
             }
         });
     };
+
 
     mode.exit = function() {
         context.ui().sidebar.hide();

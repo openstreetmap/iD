@@ -12,8 +12,6 @@
 
         <!--[if !IE]>-->
         <script src='iD.js'></script>
-        <script src='presets.js'></script>
-        <script src='imagery.js'></script>
         <!--<![endif]-->
     </head>
     <body>
@@ -40,12 +38,11 @@
                 document.getElementById('id-container').className = 'unsupported';
             } else {
                 var id = iD.Context(window)
-                  .presets(iD.data.presets)
-                  .imagery(iD.data.imagery)
-                  .taginfo(iD.services.taginfo.init());
+                  .presets(iD.dataPresets)
+                  .imagery(iD.dataImagery)
+                  .taginfo(iD.serviceTaginfo.init());
 
-                d3.select('#id-container')
-                    .call(id.ui());
+                id.ui()(document.getElementById('id-container'));
             }
         </script>
     </body>

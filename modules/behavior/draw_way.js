@@ -1,38 +1,68 @@
 import _ from 'lodash';
 import { t } from '../util/locale';
-import { AddEntity, AddMidpoint, AddVertex, MoveNode } from '../actions/index';
-import { Browse, Select } from '../modes/index';
-import { Node, Way } from '../core/index';
-import { chooseEdge, edgeEqual } from '../geo/index';
-import { Draw } from './draw';
-import { entitySelector, functor } from '../util/index';
 
-export function DrawWay(context, wayId, index, mode, baseGraph) {
+import {
+    actionAddEntity,
+    actionAddMidpoint,
+    actionAddVertex,
+    actionMoveNode
+} from '../actions/index';
+
+import {
+    modeBrowse,
+    modeSelect
+} from '../modes/index';
+
+import {
+    coreNode,
+    coreWay
+} from '../core/index';
+
+import {
+    geoChooseEdge,
+    geoEdgeEqual
+} from '../geo/index';
+
+import {
+    behaviorDraw
+} from './draw';
+
+import {
+    utilEntitySelector,
+    utilFunctor
+} from '../util/index';
+
+
+export function behaviorDrawWay(context, wayId, index, mode, baseGraph) {
+
     var way = context.entity(wayId),
         isArea = context.geometry(wayId) === 'area',
         finished = false,
         annotation = t((way.isDegenerate() ?
             'operations.start.annotation.' :
             'operations.continue.annotation.') + context.geometry(wayId)),
-        draw = Draw(context);
+        draw = behaviorDraw(context);
 
     var startIndex = typeof index === 'undefined' ? way.nodes.length - 1 : 0,
-        start = Node({loc: context.graph().entity(way.nodes[startIndex]).loc}),
-        end = Node({loc: context.map().mouseCoordinates()}),
-        segment = Way({
+        start = coreNode({loc: context.graph().entity(way.nodes[startIndex]).loc}),
+        end = coreNode({loc: context.map().mouseCoordinates()}),
+        segment = coreWay({
             nodes: typeof index === 'undefined' ? [start.id, end.id] : [end.id, start.id],
             tags: _.clone(way.tags)
         });
 
-    var f = context[way.isDegenerate() ? 'replace' : 'perform'];
+    var fn = context[way.isDegenerate() ? 'replace' : 'perform'];
     if (isArea) {
-        f(AddEntity(end),
-            AddVertex(wayId, end.id, index));
+        fn(actionAddEntity(end),
+            actionAddVertex(wayId, end.id, index)
+        );
     } else {
-        f(AddEntity(start),
-            AddEntity(end),
-            AddEntity(segment));
+        fn(actionAddEntity(start),
+            actionAddEntity(end),
+            actionAddEntity(segment)
+        );
     }
+
 
     function move(datum) {
         var loc;
@@ -48,7 +78,7 @@ export function DrawWay(context, wayId, index, mode, baseGraph) {
                     mouse[1] > pad && mouse[1] < dims[1] - pad;
 
             if (trySnap) {
-                loc = chooseEdge(context.childNodes(datum), context.mouse(), context.projection).loc;
+                loc = geoChooseEdge(context.childNodes(datum), context.mouse(), context.projection).loc;
             }
         }
 
@@ -56,19 +86,22 @@ export function DrawWay(context, wayId, index, mode, baseGraph) {
             loc = context.map().mouseCoordinates();
         }
 
-        context.replace(MoveNode(end.id, loc));
+        context.replace(actionMoveNode(end.id, loc));
     }
+
 
     function undone() {
         finished = true;
-        context.enter(Browse(context));
+        context.enter(modeBrowse(context));
     }
+
 
     function setActiveElements() {
         var active = isArea ? [wayId, end.id] : [segment.id, start.id, end.id];
-        context.surface().selectAll(entitySelector(active))
+        context.surface().selectAll(utilEntitySelector(active))
             .classed('active', true);
     }
+
 
     var drawWay = function(surface) {
         draw.on('move', move)
@@ -91,6 +124,7 @@ export function DrawWay(context, wayId, index, mode, baseGraph) {
             .on('undone.draw', undone);
     };
 
+
     drawWay.off = function(surface) {
         if (!finished)
             context.pop();
@@ -105,6 +139,7 @@ export function DrawWay(context, wayId, index, mode, baseGraph) {
         context.history()
             .on('undone.draw', null);
     };
+
 
     function ReplaceTemporaryNode(newNode) {
         return function(graph) {
@@ -123,23 +158,25 @@ export function DrawWay(context, wayId, index, mode, baseGraph) {
         };
     }
 
+
     // Accept the current position of the temporary node and continue drawing.
     drawWay.add = function(loc) {
-
         // prevent duplicate nodes
         var last = context.hasEntity(way.nodes[way.nodes.length - (isArea ? 2 : 1)]);
         if (last && last.loc[0] === loc[0] && last.loc[1] === loc[1]) return;
 
-        var newNode = Node({loc: loc});
+        var newNode = coreNode({loc: loc});
 
         context.replace(
-            AddEntity(newNode),
+            actionAddEntity(newNode),
             ReplaceTemporaryNode(newNode),
-            annotation);
+            annotation
+        );
 
         finished = true;
         context.enter(mode);
     };
+
 
     // Connect the way to an existing way.
     drawWay.addWay = function(loc, edge) {
@@ -148,33 +185,36 @@ export function DrawWay(context, wayId, index, mode, baseGraph) {
             [way.nodes[0], way.nodes[1]];
 
         // Avoid creating duplicate segments
-        if (!isArea && edgeEqual(edge, previousEdge))
+        if (!isArea && geoEdgeEqual(edge, previousEdge))
             return;
 
-        var newNode = Node({ loc: loc });
+        var newNode = coreNode({ loc: loc });
 
         context.perform(
-            AddMidpoint({ loc: loc, edge: edge}, newNode),
+            actionAddMidpoint({ loc: loc, edge: edge}, newNode),
             ReplaceTemporaryNode(newNode),
-            annotation);
+            annotation
+        );
 
         finished = true;
         context.enter(mode);
     };
 
+
     // Connect the way to an existing node and continue drawing.
     drawWay.addNode = function(node) {
-
         // Avoid creating duplicate segments
         if (way.areAdjacent(node.id, way.nodes[way.nodes.length - 1])) return;
 
         context.perform(
             ReplaceTemporaryNode(node),
-            annotation);
+            annotation
+        );
 
         finished = true;
         context.enter(mode);
     };
+
 
     // Finish the draw operation, removing the temporary node. If the way has enough
     // nodes to be valid, it's selected. Otherwise, return to browse mode.
@@ -188,18 +228,18 @@ export function DrawWay(context, wayId, index, mode, baseGraph) {
 
         if (context.hasEntity(wayId)) {
             context.enter(
-                Select(context, [wayId])
-                    .suppressMenu(true)
-                    .newFeature(true));
+                modeSelect(context, [wayId]).suppressMenu(true).newFeature(true)
+            );
         } else {
-            context.enter(Browse(context));
+            context.enter(modeBrowse(context));
         }
     };
+
 
     // Cancel the draw operation and return to browse, deleting everything drawn.
     drawWay.cancel = function() {
         context.perform(
-            functor(baseGraph),
+            utilFunctor(baseGraph),
             t('operations.cancel_draw.annotation'));
 
         window.setTimeout(function() {
@@ -207,13 +247,15 @@ export function DrawWay(context, wayId, index, mode, baseGraph) {
         }, 1000);
 
         finished = true;
-        context.enter(Browse(context));
+        context.enter(modeBrowse(context));
     };
+
 
     drawWay.tail = function(text) {
         draw.tail(text);
         return drawWay;
     };
+
 
     return drawWay;
 }

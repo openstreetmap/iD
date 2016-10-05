@@ -1,14 +1,30 @@
 import * as d3 from 'd3';
 import _ from 'lodash';
 import { t } from '../util/locale';
-import { AddMidpoint, Connect, MoveNode, Noop } from '../actions/index';
-import { Browse, Select } from './index';
-import { Edit, Hover, drag } from '../behavior/index';
-import { Node } from '../core/index';
-import { chooseEdge } from '../geo/index';
-import { entitySelector } from '../util/index';
+import {
+    actionAddMidpoint,
+    actionConnect,
+    actionMoveNode,
+    actionNoop
+} from '../actions/index';
 
-export function DragNode(context) {
+import {
+    behaviorEdit,
+    behaviorHover,
+    behaviorDrag
+} from '../behavior/index';
+
+import {
+    modeBrowse,
+    modeSelect
+} from './index';
+
+import { coreNode } from '../core/index';
+import { geoChooseEdge } from '../geo/index';
+import { utilEntitySelector } from '../util/index';
+
+
+export function modeDragNode(context) {
     var mode = {
         id: 'drag-node',
         button: 'browse'
@@ -17,12 +33,11 @@ export function DragNode(context) {
     var nudgeInterval,
         activeIDs,
         wasMidpoint,
-        cancelled,
+        isCancelled,
         selectedIDs = [],
-        hover = Hover(context)
-            .altDisables(true)
-            .on('hover', context.ui().sidebar.hover),
-        edit = Edit(context);
+        hover = behaviorHover(context).altDisables(true).on('hover', context.ui().sidebar.hover),
+        edit = behaviorEdit(context);
+
 
     function edge(point, size) {
         var pad = [30, 100, 30, 100];
@@ -33,6 +48,7 @@ export function DragNode(context) {
         return null;
     }
 
+
     function startNudge(nudge) {
         if (nudgeInterval) window.clearInterval(nudgeInterval);
         nudgeInterval = window.setInterval(function() {
@@ -40,49 +56,52 @@ export function DragNode(context) {
         }, 50);
     }
 
+
     function stopNudge() {
         if (nudgeInterval) window.clearInterval(nudgeInterval);
         nudgeInterval = null;
     }
 
+
     function moveAnnotation(entity) {
         return t('operations.move.annotation.' + entity.geometry(context.graph()));
     }
+
 
     function connectAnnotation(entity) {
         return t('operations.connect.annotation.' + entity.geometry(context.graph()));
     }
 
+
     function origin(entity) {
         return context.projection(entity.loc);
     }
 
+
     function start(entity) {
-        cancelled = d3.event.sourceEvent.shiftKey ||
+        isCancelled = d3.event.sourceEvent.shiftKey ||
             context.features().hasHiddenConnections(entity, context.graph());
 
-        if (cancelled) return behavior.cancel();
+        if (isCancelled) return behavior.cancel();
 
         wasMidpoint = entity.type === 'midpoint';
         if (wasMidpoint) {
             var midpoint = entity;
-            entity = Node();
-            context.perform(AddMidpoint(midpoint, entity));
+            entity = coreNode();
+            context.perform(actionAddMidpoint(midpoint, entity));
 
-             var vertex = context.surface()
-                .selectAll('.' + entity.id);
-             behavior.target(vertex.node(), entity);
+            var vertex = context.surface().selectAll('.' + entity.id);
+            behavior.target(vertex.node(), entity);
 
         } else {
-            context.perform(
-                Noop());
+            context.perform(actionNoop());
         }
 
         activeIDs = _.map(context.graph().parentWays(entity), 'id');
         activeIDs.push(entity.id);
-
         context.enter(mode);
     }
+
 
     function datum() {
         if (d3.event.sourceEvent.altKey) {
@@ -92,6 +111,7 @@ export function DragNode(context) {
         return d3.event.sourceEvent.target.__data__ || {};
     }
 
+
     // via https://gist.github.com/shawnbot/4166283
     function childOf(p, c) {
         if (p === c) return false;
@@ -99,8 +119,9 @@ export function DragNode(context) {
         return c === p;
     }
 
+
     function move(entity) {
-        if (cancelled) return;
+        if (isCancelled) return;
         d3.event.sourceEvent.stopPropagation();
 
         var nudge = childOf(context.container().node(),
@@ -116,39 +137,45 @@ export function DragNode(context) {
         if (d.type === 'node' && d.id !== entity.id) {
             loc = d.loc;
         } else if (d.type === 'way' && !d3.select(d3.event.sourceEvent.target).classed('fill')) {
-            loc = chooseEdge(context.childNodes(d), context.mouse(), context.projection).loc;
+            loc = geoChooseEdge(context.childNodes(d), context.mouse(), context.projection).loc;
         }
 
         context.replace(
-            MoveNode(entity.id, loc),
-            moveAnnotation(entity));
+            actionMoveNode(entity.id, loc),
+            moveAnnotation(entity)
+        );
     }
 
+
     function end(entity) {
-        if (cancelled) return;
+        if (isCancelled) return;
 
         var d = datum();
 
         if (d.type === 'way') {
-            var choice = chooseEdge(context.childNodes(d), context.mouse(), context.projection);
+            var choice = geoChooseEdge(context.childNodes(d), context.mouse(), context.projection);
             context.replace(
-                AddMidpoint({ loc: choice.loc, edge: [d.nodes[choice.index - 1], d.nodes[choice.index]] }, entity),
-                connectAnnotation(d));
+                actionAddMidpoint({ loc: choice.loc, edge: [d.nodes[choice.index - 1], d.nodes[choice.index]] }, entity),
+                connectAnnotation(d)
+            );
 
         } else if (d.type === 'node' && d.id !== entity.id) {
             context.replace(
-                Connect([d.id, entity.id]),
-                connectAnnotation(d));
+                actionConnect([d.id, entity.id]),
+                connectAnnotation(d)
+            );
 
         } else if (wasMidpoint) {
             context.replace(
-                Noop(),
-                t('operations.add.annotation.vertex'));
+                actionNoop(),
+                t('operations.add.annotation.vertex')
+            );
 
         } else {
             context.replace(
-                Noop(),
-                moveAnnotation(entity));
+                actionNoop(),
+                moveAnnotation(entity)
+            );
         }
 
         var reselection = selectedIDs.filter(function(id) {
@@ -156,31 +183,33 @@ export function DragNode(context) {
         });
 
         if (reselection.length) {
-            context.enter(
-                Select(context, reselection)
-                    .suppressMenu(true));
+            context.enter(modeSelect(context, reselection).suppressMenu(true));
         } else {
-            context.enter(Browse(context));
+            context.enter(modeBrowse(context));
         }
     }
 
+
     function cancel() {
         behavior.cancel();
-        context.enter(Browse(context));
+        context.enter(modeBrowse(context));
     }
 
+
     function setActiveElements() {
-        context.surface().selectAll(entitySelector(activeIDs))
+        context.surface().selectAll(utilEntitySelector(activeIDs))
             .classed('active', true);
     }
 
-    var behavior = drag()
+
+    var behavior = behaviorDrag()
         .delegate('g.node, g.point, g.midpoint')
         .surface(context.surface().node())
         .origin(origin)
         .on('start', start)
         .on('move', move)
         .on('end', end);
+
 
     mode.enter = function() {
         context.install(hover);
@@ -194,6 +223,7 @@ export function DragNode(context) {
 
         setActiveElements();
     };
+
 
     mode.exit = function() {
         context.ui().sidebar.hover.cancel();
@@ -213,13 +243,16 @@ export function DragNode(context) {
         stopNudge();
     };
 
+
     mode.selectedIDs = function(_) {
         if (!arguments.length) return selectedIDs;
         selectedIDs = _;
         return mode;
     };
 
+
     mode.behavior = behavior;
+
 
     return mode;
 }

@@ -1,4 +1,4 @@
-describe('iD.svg.Icon', function () {
+describe('iD.svgIcon', function () {
     var selection;
 
     beforeEach(function () {
@@ -6,13 +6,13 @@ describe('iD.svg.Icon', function () {
     });
 
     it('creates a generic SVG icon', function () {
-        selection.call(iD.svg.Icon('#icon-bug'));
+        selection.call(iD.svgIcon('#icon-bug'));
         expect(selection.select('svg')).to.be.classed('icon');
         expect(selection.select('use').attr('xlink:href')).to.eql('#icon-bug');
     });
 
     it('classes the \'svg\' and \'use\' elements', function () {
-        selection.call(iD.svg.Icon('#icon-bug', 'svg-class', 'use-class'));
+        selection.call(iD.svgIcon('#icon-bug', 'svg-class', 'use-class'));
         expect(selection.select('svg')).to.be.classed('icon svg-class');
         expect(selection.select('use')).to.be.classed('use-class');
     });

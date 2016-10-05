@@ -1,26 +1,35 @@
 import _ from 'lodash';
-import { FeatureList } from './feature_list';
-import { Inspector } from './inspector';
-import { Notice } from './notice';
+import { uiFeatureList } from './feature_list';
+import { uiInspector } from './inspector';
+import { uiNotice } from './notice';
 
-export function Sidebar(context) {
-    var inspector = Inspector(context),
+
+export function uiSidebar(context) {
+    var inspector = uiInspector(context),
         current;
 
+
     function sidebar(selection) {
-        var featureListWrap = selection.append('div')
+        var featureListWrap = selection
+            .append('div')
             .attr('class', 'feature-list-pane')
-            .call(FeatureList(context));
+            .call(uiFeatureList(context));
 
-        selection.call(Notice(context));
+        selection
+            .call(uiNotice(context));
 
-        var inspectorWrap = selection.append('div')
+        var inspectorWrap = selection
+            .append('div')
             .attr('class', 'inspector-hidden inspector-wrap fr');
+
 
         function hover(id) {
             if (!current && context.hasEntity(id)) {
-                featureListWrap.classed('inspector-hidden', true);
-                inspectorWrap.classed('inspector-hidden', false)
+                featureListWrap
+                    .classed('inspector-hidden', true);
+
+                inspectorWrap
+                    .classed('inspector-hidden', false)
                     .classed('inspector-hover', true);
 
                 if (inspector.entityID() !== id || inspector.state() !== 'hover') {
@@ -28,21 +37,31 @@ export function Sidebar(context) {
                         .state('hover')
                         .entityID(id);
 
-                    inspectorWrap.call(inspector);
+                    inspectorWrap
+                        .call(inspector);
                 }
+
             } else if (!current) {
-                featureListWrap.classed('inspector-hidden', false);
-                inspectorWrap.classed('inspector-hidden', true);
-                inspector.state('hide');
+                featureListWrap
+                    .classed('inspector-hidden', false);
+                inspectorWrap
+                    .classed('inspector-hidden', true);
+                inspector
+                    .state('hide');
             }
         }
 
+
         sidebar.hover = _.throttle(hover, 200);
+
 
         sidebar.select = function(id, newFeature) {
             if (!current && id) {
-                featureListWrap.classed('inspector-hidden', true);
-                inspectorWrap.classed('inspector-hidden', false)
+                featureListWrap
+                    .classed('inspector-hidden', true);
+
+                inspectorWrap
+                    .classed('inspector-hidden', false)
                     .classed('inspector-hover', false);
 
                 if (inspector.entityID() !== id || inspector.state() !== 'select') {
@@ -51,31 +70,46 @@ export function Sidebar(context) {
                         .entityID(id)
                         .newFeature(newFeature);
 
-                    inspectorWrap.call(inspector);
+                    inspectorWrap
+                        .call(inspector);
                 }
+
             } else if (!current) {
-                featureListWrap.classed('inspector-hidden', false);
-                inspectorWrap.classed('inspector-hidden', true);
-                inspector.state('hide');
+                featureListWrap
+                    .classed('inspector-hidden', false);
+                inspectorWrap
+                    .classed('inspector-hidden', true);
+                inspector
+                    .state('hide');
             }
         };
 
+
         sidebar.show = function(component) {
-            featureListWrap.classed('inspector-hidden', true);
-            inspectorWrap.classed('inspector-hidden', true);
+            featureListWrap
+                .classed('inspector-hidden', true);
+            inspectorWrap
+                .classed('inspector-hidden', true);
+
             if (current) current.remove();
-            current = selection.append('div')
+            current = selection
+                .append('div')
                 .attr('class', 'sidebar-component')
                 .call(component);
         };
 
+
         sidebar.hide = function() {
-            featureListWrap.classed('inspector-hidden', false);
-            inspectorWrap.classed('inspector-hidden', true);
+            featureListWrap
+                .classed('inspector-hidden', false);
+            inspectorWrap
+                .classed('inspector-hidden', true);
+
             if (current) current.remove();
             current = null;
         };
     }
+
 
     sidebar.hover = function() {};
     sidebar.hover.cancel = function() {};

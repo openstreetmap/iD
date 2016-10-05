@@ -1,22 +1,24 @@
 import * as d3 from 'd3';
-import { functor } from '../util/index';
-import { Icon } from '../svg/index';
-import { featureIcons } from '../../data/index';
+import { dataFeatureIcons } from '../../data/index';
+import { svgIcon } from '../svg/index';
+import { utilFunctor } from '../util/index';
 
 
-export function PresetIcon() {
+export function uiPresetIcon() {
     var preset, geometry;
+
 
     function presetIcon(selection) {
         selection.each(render);
     }
+
 
     function render() {
         var selection = d3.select(this),
             p = preset.apply(this, arguments),
             geom = geometry.apply(this, arguments),
             picon = p.icon || (geom === 'line' ? 'other-line' : 'marker-stroked'),
-            isMaki = featureIcons.hasOwnProperty(picon + '-24');
+            isMaki = dataFeatureIcons.hasOwnProperty(picon + '-24');
 
         if (picon === 'dentist') {
             isMaki = true;  // workaround for dentist icon missing in `maki-sprite.json`
@@ -50,7 +52,7 @@ export function PresetIcon() {
 
         frame = frame.enter()
             .append('div')
-            .call(Icon('#preset-icon-frame'))
+            .call(svgIcon('#preset-icon-frame'))
             .merge(frame);
 
         frame
@@ -65,7 +67,7 @@ export function PresetIcon() {
         icon = icon.enter()
             .append('div')
             .attr('class', 'preset-icon')
-            .call(Icon(''))
+            .call(svgIcon(''))
             .merge(icon);
 
         icon
@@ -83,14 +85,14 @@ export function PresetIcon() {
 
     presetIcon.preset = function(_) {
         if (!arguments.length) return preset;
-        preset = functor(_);
+        preset = utilFunctor(_);
         return presetIcon;
     };
 
 
     presetIcon.geometry = function(_) {
         if (!arguments.length) return geometry;
-        geometry = functor(_);
+        geometry = utilFunctor(_);
         return presetIcon;
     };
 

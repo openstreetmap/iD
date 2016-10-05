@@ -1,5 +1,6 @@
-import { rebind } from '../../modules/util/rebind';
 import * as d3 from 'd3';
+import { utilRebind } from '../../modules/util/rebind';
+
 
 export function d3combobox() {
     var event = d3.dispatch('accept'),
@@ -288,8 +289,9 @@ export function d3combobox() {
         return combobox;
     };
 
-    return rebind(combobox, event, 'on');
+    return utilRebind(combobox, event, 'on');
 }
+
 
 d3combobox.off = function(input) {
     input

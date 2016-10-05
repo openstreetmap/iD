@@ -1,20 +1,20 @@
 import * as d3 from 'd3';
 import _ from 'lodash';
-import { rebind } from '../util/rebind';
 import { t } from '../util/locale';
 import { tooltip } from '../util/tooltip';
-import { Browse } from '../modes/index';
-import { ChangeTags } from '../actions/index';
-import { Icon } from '../svg/index';
-import { PresetIcon } from './preset_icon';
-import { RawMemberEditor } from './raw_member_editor';
-import { RawMembershipEditor } from './raw_membership_editor';
-import { RawTagEditor } from './raw_tag_editor';
-import { TagReference } from './tag_reference';
-import { preset } from './preset';
+import { actionChangeTags } from '../actions/index';
+import { modeBrowse } from '../modes/index';
+import { svgIcon } from '../svg/index';
+import { uiPresetIcon } from './preset_icon';
+import { uiRawMemberEditor } from './raw_member_editor';
+import { uiRawMembershipEditor } from './raw_membership_editor';
+import { uiRawTagEditor } from './raw_tag_editor';
+import { uiTagReference } from './tag_reference';
+import { uiPreset } from './preset';
+import { utilRebind } from '../util/rebind';
 
 
-export function EntityEditor(context) {
+export function uiEntityEditor(context) {
     var dispatch = d3.dispatch('choose'),
         state = 'select',
         coalesceChanges = false,
@@ -24,9 +24,9 @@ export function EntityEditor(context) {
         activePreset,
         reference;
 
-    var presetEditor = preset(context)
+    var presetEditor = uiPreset(context)
         .on('change', changeTags);
-    var rawTagEditor = RawTagEditor(context)
+    var rawTagEditor = uiRawTagEditor(context)
         .on('change', changeTags);
 
 
@@ -51,8 +51,8 @@ export function EntityEditor(context) {
         enter
             .append('button')
             .attr('class', 'fr preset-close')
-            .on('click', function() { context.enter(Browse(context)); })
-            .call(Icon(modified ? '#icon-apply' : '#icon-close'));
+            .on('click', function() { context.enter(modeBrowse(context)); })
+            .call(svgIcon(modified ? '#icon-apply' : '#icon-close'));
 
         enter
             .append('h3')
@@ -108,7 +108,7 @@ export function EntityEditor(context) {
             .call(reference.body);
 
         body.select('.preset-list-item button')
-            .call(PresetIcon()
+            .call(uiPresetIcon()
                 .geometry(context.geometry(id))
                 .preset(activePreset));
 
@@ -132,7 +132,7 @@ export function EntityEditor(context) {
         if (entity.type === 'relation') {
             body.select('.raw-member-editor')
                 .style('display', 'block')
-                .call(RawMemberEditor(context)
+                .call(uiRawMemberEditor(context)
                     .entityID(id));
         } else {
             body.select('.raw-member-editor')
@@ -140,7 +140,7 @@ export function EntityEditor(context) {
         }
 
         body.select('.raw-membership-editor')
-            .call(RawMembershipEditor(context)
+            .call(uiRawMembershipEditor(context)
                 .entityID(id));
 
 
@@ -222,9 +222,9 @@ export function EntityEditor(context) {
 
         if (!_.isEqual(entity.tags, tags)) {
             if (coalesceChanges) {
-                context.overwrite(ChangeTags(id, tags), annotation);
+                context.overwrite(actionChangeTags(id, tags), annotation);
             } else {
-                context.perform(ChangeTags(id, tags), annotation);
+                context.perform(actionChangeTags(id, tags), annotation);
                 coalesceChanges = !!onInput;
             }
         }
@@ -261,12 +261,12 @@ export function EntityEditor(context) {
         if (!arguments.length) return activePreset;
         if (_ !== activePreset) {
             activePreset = _;
-            reference = TagReference(activePreset.reference(context.geometry(id)), context)
+            reference = uiTagReference(activePreset.reference(context.geometry(id)), context)
                 .showing(false);
         }
         return entityEditor;
     };
 
 
-    return rebind(entityEditor, dispatch, 'on');
+    return utilRebind(entityEditor, dispatch, 'on');
 }

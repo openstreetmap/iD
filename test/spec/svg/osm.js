@@ -1,4 +1,4 @@
-describe('iD.svg.Osm', function () {
+describe('iD.svgOsm', function () {
     var container;
 
     beforeEach(function () {
@@ -6,7 +6,7 @@ describe('iD.svg.Osm', function () {
     });
 
     it('creates default osm layers', function () {
-        container.call(iD.svg.Osm());
+        container.call(iD.svgOsm());
         var nodes = container.selectAll('.layer-osm').nodes();
         expect(nodes.length).to.eql(5);
         expect(d3.select(nodes[0])).to.be.classed('layer-areas');

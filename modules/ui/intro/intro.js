@@ -1,26 +1,27 @@
 import * as d3 from 'd3';
 import { t } from '../../util/locale';
-import { Entity, Graph } from '../../core/index';
-import { Browse } from '../../modes/index';
+import { coreEntity, coreGraph } from '../../core/index';
+import { modeBrowse } from '../../modes/index';
 import { d3curtain } from '../../util/curtain';
 import { default as introGraphRaw } from '../../../data/intro_graph.json';
 
-import { navigation } from './navigation';
-import { point } from './point';
-import { area } from './area';
-import { line } from './line';
-import { startEditing } from './start_editing';
+import { uiIntroNavigation } from './navigation';
+import { uiIntroPoint } from './point';
+import { uiIntroArea } from './area';
+import { uiIntroLine } from './line';
+import { uiIntroStartEditing } from './start_editing';
+
 
 var sampleIntros = {
-    navigation: navigation,
-    point: point,
-    area: area,
-    line: line,
-    startEditing: startEditing
+    navigation: uiIntroNavigation,
+    point: uiIntroPoint,
+    area: uiIntroArea,
+    line: uiIntroLine,
+    startEditing: uiIntroStartEditing
 };
 
 
-export function intro(context) {
+export function uiIntro(context) {
     var step;
 
     function localizedName(id) {
@@ -75,7 +76,7 @@ export function intro(context) {
     var introGraph = {};
 
     for (var key in introGraphRaw) {
-        introGraph[key] = Entity(introGraphRaw[key]);
+        introGraph[key] = coreEntity(introGraphRaw[key]);
         var name = localizedName(key);
         if (name) {
             introGraph[key].tags.name = name;
@@ -84,7 +85,7 @@ export function intro(context) {
 
 
     function intro(selection) {
-        context.enter(Browse(context));
+        context.enter(modeBrowse(context));
 
         // Save current map state
         var history = context.history().toJSON(),
@@ -103,7 +104,7 @@ export function intro(context) {
         context.connection().toggle(false).flush();
         context.history().reset();
 
-        context.history().merge(d3.values(Graph().load(introGraph).entities));
+        context.history().merge(d3.values(coreGraph().load(introGraph).entities));
         context.background().bing();
 
         d3.selectAll('#map .layer-background').style('opacity', 1);
@@ -176,7 +177,7 @@ export function intro(context) {
         function enter(newStep) {
             if (step) { step.exit(); }
 
-            context.enter(Browse(context));
+            context.enter(modeBrowse(context));
 
             step = newStep;
             step.enter();

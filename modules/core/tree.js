@@ -1,10 +1,13 @@
 import _ from 'lodash';
-import { Difference } from './difference';
+import { coreDifference } from './difference';
 import rbush from 'rbush';
 
-export function Tree(head) {
+
+export function coreTree(head) {
     var rtree = rbush(),
-        bboxes = {};
+        bboxes = {},
+        tree = {};
+
 
     function entityBBox(entity) {
         var bbox = entity.extent(head).bbox();
@@ -12,6 +15,7 @@ export function Tree(head) {
         bboxes[entity.id] = bbox;
         return bbox;
     }
+
 
     function updateParents(entity, insertions, memo) {
         head.parentWays(entity).forEach(function(way) {
@@ -33,7 +37,6 @@ export function Tree(head) {
         });
     }
 
-    var tree = {};
 
     tree.rebase = function(entities, force) {
         var insertions = {};
@@ -61,9 +64,10 @@ export function Tree(head) {
         return tree;
     };
 
+
     tree.intersects = function(extent, graph) {
         if (graph !== head) {
-            var diff = Difference(head, graph),
+            var diff = coreDifference(head, graph),
                 insertions = {};
 
             head = graph;
@@ -90,6 +94,7 @@ export function Tree(head) {
             return head.entity(bbox.id);
         });
     };
+
 
     return tree;
 }

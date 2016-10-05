@@ -1,6 +1,7 @@
 import * as d3 from 'd3';
 import _ from 'lodash';
 
+
 /*
     iD.Difference represents the difference between two graphs.
     It knows how to calculate the set of entities that were
@@ -9,12 +10,16 @@ import _ from 'lodash';
     of entities that will require a redraw, taking into account
     child and parent relationships.
  */
-export function Difference(base, head) {
-    var changes = {}, length = 0;
+export function coreDifference(base, head) {
+    var changes = {},
+        difference = {},
+        length = 0;
+
 
     function changed(h, b) {
         return h !== b && !_.isEqual(_.omit(h, 'v'), _.omit(b, 'v'));
     }
+
 
     _.each(head.entities, function(h, id) {
         var b = base.entities[id];
@@ -24,6 +29,7 @@ export function Difference(base, head) {
         }
     });
 
+
     _.each(base.entities, function(b, id) {
         var h = head.entities[id];
         if (!changes[id] && changed(h, b)) {
@@ -31,6 +37,7 @@ export function Difference(base, head) {
             length++;
         }
     });
+
 
     function addParents(parents, result) {
         for (var i = 0; i < parents.length; i++) {
@@ -44,15 +51,16 @@ export function Difference(base, head) {
         }
     }
 
-    var difference = {};
 
     difference.length = function() {
         return length;
     };
 
+
     difference.changes = function() {
         return changes;
     };
+
 
     difference.extantIDs = function() {
         var result = [];
@@ -62,6 +70,7 @@ export function Difference(base, head) {
         return result;
     };
 
+
     difference.modified = function() {
         var result = [];
         _.each(changes, function(change) {
@@ -69,6 +78,7 @@ export function Difference(base, head) {
         });
         return result;
     };
+
 
     difference.created = function() {
         var result = [];
@@ -78,6 +88,7 @@ export function Difference(base, head) {
         return result;
     };
 
+
     difference.deleted = function() {
         var result = [];
         _.each(changes, function(change) {
@@ -85,6 +96,7 @@ export function Difference(base, head) {
         });
         return result;
     };
+
 
     difference.summary = function() {
         var relevant = {};
@@ -135,6 +147,7 @@ export function Difference(base, head) {
         return d3.values(relevant);
     };
 
+
     difference.complete = function(extent) {
         var result = {}, id, change;
 
@@ -174,6 +187,7 @@ export function Difference(base, head) {
 
         return result;
     };
+
 
     return difference;
 }

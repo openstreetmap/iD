@@ -1,19 +1,20 @@
 import * as d3 from 'd3';
 import _ from 'lodash';
-import { rebind } from '../util/rebind';
 import { t, addTranslation, setLocale } from '../util/locale';
-import { Background } from '../renderer/background';
-import { Connection } from './connection';
-import { Detect } from '../util/detect';
-import { Features } from '../renderer/features';
-import { History } from './history';
-import { Map } from '../renderer/map';
-import { Select } from '../modes/select';
-import { RawMercator } from '../geo/raw_mercator';
-import { presets as presetsInit } from '../presets/presets';
-import { init as uiInit } from '../ui/init';
-import { locales, en } from '../../data/index';
+import { coreConnection } from './connection';
+import { coreHistory } from './history';
+import { dataLocales, dataEn } from '../../data/index';
+import { geoRawMercator } from '../geo/raw_mercator';
+import { modeSelect } from '../modes/select';
+import { presetInit } from '../presets/init';
+import { rendererBackground } from '../renderer/background';
+import { rendererFeatures } from '../renderer/features';
+import { rendererMap } from '../renderer/map';
 import * as services from '../services/index';
+import { uiInit } from '../ui/init';
+import { utilDetect } from '../util/detect';
+import { utilRebind } from '../util/rebind';
+
 
 export var areaKeys = {};
 
@@ -21,13 +22,14 @@ export function setAreaKeys(value) {
     areaKeys = value;
 }
 
-export function Context(root) {
+
+export function coreContext(root) {
     if (!root.locale) {
         root.locale = {
             current: function(_) { this._current = _; }
         };
     }
-    addTranslation('en', en);
+    addTranslation('en', dataEn);
     setLocale('en');
 
     var dispatch = d3.dispatch('enter', 'exit', 'change'),
@@ -106,7 +108,7 @@ export function Context(root) {
             if (!context.hasEntity(id)) return;
             map.on('drawn.zoomToEntity', null);
             context.on('enter.zoomToEntity', null);
-            context.enter(Select(context, [id]));
+            context.enter(modeSelect(context, [id]));
         });
 
         context.on('enter.zoomToEntity', function() {
@@ -340,7 +342,7 @@ export function Context(root) {
     };
 
     context.loadLocale = function(cb) {
-        if (locale && locale !== 'en' && locales.indexOf(locale) !== -1) {
+        if (locale && locale !== 'en' && dataLocales.indexOf(locale) !== -1) {
             localePath = localePath || context.asset('locales/' + locale + '.json');
             d3.json(localePath, function(err, result) {
                 addTranslation(locale, result);
@@ -354,16 +356,16 @@ export function Context(root) {
 
 
     /* Init */
-    context.version = '2.0.0-alpha.1';
+    context.version = '2.0.0-alpha.2';
 
-    context.projection = RawMercator();
+    context.projection = geoRawMercator();
 
-    locale = Detect().locale;
-    if (locale && locales.indexOf(locale) === -1) {
+    locale = utilDetect().locale;
+    if (locale && dataLocales.indexOf(locale) === -1) {
         locale = locale.split('-')[0];
     }
 
-    history = History(context);
+    history = coreHistory(context);
     context.graph = history.graph;
     context.changes = history.changes;
     context.intersects = history.intersects;
@@ -388,13 +390,12 @@ export function Context(root) {
 
     ui = uiInit(context);
 
-    connection = Connection();
+    connection = coreConnection();
 
-    background = Background(context);
+    background = rendererBackground(context);
+    features = rendererFeatures(context);
 
-    features = Features(context);
-
-    map = Map(context);
+    map = rendererMap(context);
     context.mouse = map.mouse;
     context.extent = map.extent;
     context.pan = map.pan;
@@ -404,7 +405,7 @@ export function Context(root) {
     context.zoomOutFurther = map.zoomOutFurther;
     context.redrawEnable = map.redrawEnable;
 
-    presets = presetsInit();
+    presets = presetInit();
 
-    return rebind(context, dispatch, 'on');
+    return utilRebind(context, dispatch, 'on');
 }

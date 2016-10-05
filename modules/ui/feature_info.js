@@ -1,10 +1,11 @@
 import * as d3 from 'd3';
 import _ from 'lodash';
 import { t } from '../util/locale';
+import { uiTooltipHtml } from './tooltipHtml';
 import { tooltip } from '../util/tooltip';
-import { tooltipHtml } from './tooltipHtml';
 
-export function FeatureInfo(context) {
+
+export function uiFeatureInfo(context) {
     function update(selection) {
         var features = context.features(),
             stats = features.stats(),
@@ -23,7 +24,7 @@ export function FeatureInfo(context) {
                     .placement('top')
                     .html(true)
                     .title(function() {
-                        return tooltipHtml(hiddenList.join('<br/>'));
+                        return uiTooltipHtml(hiddenList.join('<br/>'));
                     });
 
             var warning = selection.append('a')
@@ -41,6 +42,7 @@ export function FeatureInfo(context) {
         selection
             .classed('hide', !hiddenList.length);
     }
+
 
     return function(selection) {
         update(selection);

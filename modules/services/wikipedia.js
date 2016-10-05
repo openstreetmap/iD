@@ -1,5 +1,6 @@
 import { jsonpRequest } from '../util/jsonp_request';
-import { qsString } from '../util/index';
+import { utilQsString } from '../util/index';
+
 
 var wikipedia = {},
     endpoint = 'https://en.wikipedia.org/w/api.php?';
@@ -14,7 +15,7 @@ export function init() {
 
         lang = lang || 'en';
         jsonpRequest(endpoint.replace('en', lang) +
-            qsString({
+            utilQsString({
                 action: 'query',
                 list: 'search',
                 srlimit: '10',
@@ -42,7 +43,7 @@ export function init() {
 
         lang = lang || 'en';
         jsonpRequest(endpoint.replace('en', lang) +
-            qsString({
+            utilQsString({
                 action: 'opensearch',
                 namespace: 0,
                 suggest: '',
@@ -67,7 +68,7 @@ export function init() {
         }
 
         jsonpRequest(endpoint.replace('en', lang) +
-            qsString({
+            utilQsString({
                 action: 'query',
                 prop: 'langlinks',
                 format: 'json',

@@ -1,9 +1,13 @@
 import _ from 'lodash';
-import { metersToLat, metersToLon } from './index';
+import {
+    geoMetersToLat,
+    geoMetersToLon
+} from './index';
 
-export function Extent(min, max) {
-    if (!(this instanceof Extent)) return new Extent(min, max);
-    if (min instanceof Extent) {
+
+export function geoExtent(min, max) {
+    if (!(this instanceof geoExtent)) return new geoExtent(min, max);
+    if (min instanceof geoExtent) {
         return min;
     } else if (min && min.length === 2 && min[0].length === 2 && min[1].length === 2) {
         this[0] = min[0];
@@ -14,9 +18,10 @@ export function Extent(min, max) {
     }
 }
 
-Extent.prototype = new Array(2);
+geoExtent.prototype = new Array(2);
 
-_.extend(Extent.prototype, {
+_.extend(geoExtent.prototype, {
+
     equals: function (obj) {
         return this[0][0] === obj[0][0] &&
             this[0][1] === obj[0][1] &&
@@ -24,13 +29,15 @@ _.extend(Extent.prototype, {
             this[1][1] === obj[1][1];
     },
 
+
     extend: function(obj) {
-        if (!(obj instanceof Extent)) obj = new Extent(obj);
-        return Extent([Math.min(obj[0][0], this[0][0]),
-                              Math.min(obj[0][1], this[0][1])],
-                             [Math.max(obj[1][0], this[1][0]),
-                              Math.max(obj[1][1], this[1][1])]);
+        if (!(obj instanceof geoExtent)) obj = new geoExtent(obj);
+        return geoExtent(
+            [Math.min(obj[0][0], this[0][0]), Math.min(obj[0][1], this[0][1])],
+            [Math.max(obj[1][0], this[1][0]), Math.max(obj[1][1], this[1][1])]
+        );
     },
+
 
     _extend: function(extent) {
         this[0][0] = Math.min(extent[0][0], this[0][0]);
@@ -39,22 +46,27 @@ _.extend(Extent.prototype, {
         this[1][1] = Math.max(extent[1][1], this[1][1]);
     },
 
+
     area: function() {
         return Math.abs((this[1][0] - this[0][0]) * (this[1][1] - this[0][1]));
     },
+
 
     center: function() {
         return [(this[0][0] + this[1][0]) / 2,
                 (this[0][1] + this[1][1]) / 2];
     },
 
+
     rectangle: function() {
         return [this[0][0], this[0][1], this[1][0], this[1][1]];
     },
 
+
     bbox: function() {
         return { minX: this[0][0], minY: this[0][1], maxX: this[1][0], maxY: this[1][1] };
     },
+
 
     polygon: function() {
         return [
@@ -66,32 +78,36 @@ _.extend(Extent.prototype, {
         ];
     },
 
+
     contains: function(obj) {
-        if (!(obj instanceof Extent)) obj = new Extent(obj);
+        if (!(obj instanceof geoExtent)) obj = new geoExtent(obj);
         return obj[0][0] >= this[0][0] &&
                obj[0][1] >= this[0][1] &&
                obj[1][0] <= this[1][0] &&
                obj[1][1] <= this[1][1];
     },
 
+
     intersects: function(obj) {
-        if (!(obj instanceof Extent)) obj = new Extent(obj);
+        if (!(obj instanceof geoExtent)) obj = new geoExtent(obj);
         return obj[0][0] <= this[1][0] &&
                obj[0][1] <= this[1][1] &&
                obj[1][0] >= this[0][0] &&
                obj[1][1] >= this[0][1];
     },
 
+
     intersection: function(obj) {
-        if (!this.intersects(obj)) return new Extent();
-        return new Extent([Math.max(obj[0][0], this[0][0]),
-                                  Math.max(obj[0][1], this[0][1])],
-                                 [Math.min(obj[1][0], this[1][0]),
-                                  Math.min(obj[1][1], this[1][1])]);
+        if (!this.intersects(obj)) return new geoExtent();
+        return new geoExtent(
+            [Math.max(obj[0][0], this[0][0]), Math.max(obj[0][1], this[0][1])],
+            [Math.min(obj[1][0], this[1][0]), Math.min(obj[1][1], this[1][1])]
+        );
     },
 
+
     percentContainedIn: function(obj) {
-        if (!(obj instanceof Extent)) obj = new Extent(obj);
+        if (!(obj instanceof geoExtent)) obj = new geoExtent(obj);
         var a1 = this.intersection(obj).area(),
             a2 = this.area();
 
@@ -102,13 +118,16 @@ _.extend(Extent.prototype, {
         }
     },
 
+
     padByMeters: function(meters) {
-        var dLat = metersToLat(meters),
-            dLon = metersToLon(meters, this.center()[1]);
-        return Extent(
-                [this[0][0] - dLon, this[0][1] - dLat],
-                [this[1][0] + dLon, this[1][1] + dLat]);
+        var dLat = geoMetersToLat(meters),
+            dLon = geoMetersToLon(meters, this.center()[1]);
+        return geoExtent(
+            [this[0][0] - dLon, this[0][1] - dLat],
+            [this[1][0] + dLon, this[1][1] + dLat]
+        );
     },
+
 
     toParam: function() {
         return this.rectangle().join(',');

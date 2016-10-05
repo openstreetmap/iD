@@ -2,12 +2,13 @@ import * as d3 from 'd3';
 import marked from 'marked';
 import { d3keybinding } from '../lib/d3.keybinding.js';
 import { t } from '../util/locale';
+import { svgIcon } from '../svg/index';
+import { uiIntro } from './intro/index';
+import { uiTooltipHtml } from './tooltipHtml';
 import { tooltip } from '../util/tooltip';
-import { Icon } from '../svg/index';
-import { intro } from './intro/index';
-import { tooltipHtml } from './tooltipHtml';
 
-export function Help(context) {
+
+export function uiHelp(context) {
     var key = 'H';
 
     var docKeys = [
@@ -29,17 +30,20 @@ export function Help(context) {
         };
     });
 
+
     function help(selection) {
 
         function hide() {
             setVisible(false);
         }
 
+
         function toggle() {
             if (d3.event) d3.event.preventDefault();
             tooltipBehavior.hide(button);
             setVisible(!button.classed('active'));
         }
+
 
         function setVisible(show) {
             if (show !== shown) {
@@ -67,6 +71,7 @@ export function Help(context) {
                 }
             }
         }
+
 
         function clickHelp(d, i) {
             pane.property('scrollTop', 0);
@@ -98,8 +103,9 @@ export function Help(context) {
             }
         }
 
+
         function clickWalkthrough() {
-            d3.select(document.body).call(intro(context));
+            d3.select(document.body).call(uiIntro(context));
             setVisible(false);
         }
 
@@ -109,11 +115,11 @@ export function Help(context) {
             tooltipBehavior = tooltip()
                 .placement('left')
                 .html(true)
-                .title(tooltipHtml(t('help.title'), key)),
+                .title(uiTooltipHtml(t('help.title'), key)),
             button = selection.append('button')
                 .attr('tabindex', -1)
                 .on('click', toggle)
-                .call(Icon('#icon-help', 'light'))
+                .call(svgIcon('#icon-help', 'light'))
                 .call(tooltipBehavior),
             shown = false;
 
