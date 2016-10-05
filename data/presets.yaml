@@ -3306,6 +3306,7 @@ en:
       shop/anime:
         # shop=anime
         name: Anime Shop
+        # 'terms: manga,japan,cosplay,figurine,dakimakura'
         terms: '<translate with synonyms or related terms for ''Anime Shop'', separated by commas>'
       shop/antiques:
         # shop=antiques
