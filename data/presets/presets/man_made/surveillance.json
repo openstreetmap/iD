@@ -3,8 +3,18 @@
     "geometry": [
         "point"
     ],
+    "fields": [
+        "operator",
+        "surveillance",
+        "surveillance:type",
+        "surveillance:zone"
+    ],
     "terms": [
-        "cctv"
+        "cctv",
+        "security",
+        "camera",
+        "guard",
+        "alpr"
     ],
     "tags": {
         "man_made": "surveillance"
