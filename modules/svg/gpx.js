@@ -114,23 +114,23 @@ export function svgGpx(projection, context, dispatch) {
 
 
     drawGpx.enabled = function(_) {
-        if (!arguments.length) return Gpx.enabled;
-        Gpx.enabled = _;
+        if (!arguments.length) return svgGpx.enabled;
+        svgGpx.enabled = _;
         dispatch.call('change');
         return this;
     };
 
 
     drawGpx.hasGpx = function() {
-        var geojson = Gpx.geojson;
+        var geojson = svgGpx.geojson;
         return (!(_.isEmpty(geojson) || _.isEmpty(geojson.features)));
     };
 
 
     drawGpx.geojson = function(gj) {
-        if (!arguments.length) return Gpx.geojson;
+        if (!arguments.length) return svgGpx.geojson;
         if (_.isEmpty(gj) || _.isEmpty(gj.features)) return this;
-        Gpx.geojson = gj;
+        svgGpx.geojson = gj;
         dispatch.call('change');
         return this;
     };
@@ -162,7 +162,7 @@ export function svgGpx(projection, context, dispatch) {
 
     drawGpx.fitZoom = function() {
         if (!this.hasGpx()) return this;
-        var geojson = Gpx.geojson;
+        var geojson = svgGpx.geojson;
 
         var map = context.map(),
             viewport = map.trimmedExtent().polygon(),

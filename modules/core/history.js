@@ -296,14 +296,14 @@ export function coreHistory(context) {
                 var allEntities = {};
 
                 h.entities.forEach(function(entity) {
-                    allEntities[coreEntity.key(entity)] = Entity(entity);
+                    allEntities[coreEntity.key(entity)] = coreEntity(entity);
                 });
 
                 if (h.version === 3) {
                     // This merges originals for changed entities into the base of
                     // the stack even if the current stack doesn't have them (for
                     // example when iD has been restarted in a different region)
-                    var baseEntities = h.baseEntities.map(function(d) { return Entity(d); });
+                    var baseEntities = h.baseEntities.map(function(d) { return coreEntity(d); });
                     stack[0].graph.rebase(baseEntities, _.map(stack, 'graph'), true);
                     tree.rebase(baseEntities, true);
 
@@ -382,7 +382,7 @@ export function coreHistory(context) {
 
                     for (var i in d.entities) {
                         var entity = d.entities[i];
-                        entities[i] = entity === 'undefined' ? undefined : Entity(entity);
+                        entities[i] = entity === 'undefined' ? undefined : coreEntity(entity);
                     }
 
                     d.graph = coreGraph(stack[0].graph).load(entities);

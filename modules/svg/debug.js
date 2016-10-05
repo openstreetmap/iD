@@ -1,9 +1,9 @@
 import * as d3 from 'd3';
 import { geoPolygonIntersectsPolygon } from '../geo/index';
 import {
-    dataImperial as imperialData,
-    dataDriveLeft as driveLeftData,
-    dataImagery as imageryData
+    dataImperial,
+    dataDriveLeft,
+    dataImagery
 } from '../../data/index';
 
 

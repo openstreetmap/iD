@@ -422,7 +422,7 @@ export function coreConnection(useHttps) {
 
                 return {
                     id: tile.toString(),
-                    extent: Extent(
+                    extent: geoExtent(
                         projection.invert([x, y + ts]),
                         projection.invert([x + ts, y]))
                 };

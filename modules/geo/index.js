@@ -124,7 +124,7 @@ export function geoAngle(a, b, projection) {
 // the closest vertex on that edge. Returns an object with the `index` of the
 // chosen edge, the chosen `loc` on that edge, and the `distance` to to it.
 export function geoChooseEdge(nodes, point, projection) {
-    var dist = euclideanDistance,
+    var dist = geoEuclideanDistance,
         points = nodes.map(function(n) { return projection(n.loc); }),
         min = Infinity,
         idx, loc;
@@ -192,7 +192,7 @@ export function geoLineIntersection(a, b) {
             t = crossProduct(subtractPoints(q, p), s) / denominator;
 
         if ((t >= 0) && (t <= 1) && (u >= 0) && (u <= 1)) {
-            return interp(p, p2, t);
+            return geoInterp(p, p2, t);
         }
     }
 

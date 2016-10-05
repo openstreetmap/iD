@@ -118,8 +118,8 @@ export function utilPrefixCSSProperty(property) {
 
 var transformProperty;
 export function utilSetTransform(el, x, y, scale) {
-    var prop = transformProperty = transformProperty || prefixCSSProperty('Transform'),
-        translate = Detect().opera ?
+    var prop = transformProperty = transformProperty || utilPrefixCSSProperty('Transform'),
+        translate = utilDetect().opera ?
             'translate('   + x + 'px,' + y + 'px)' :
             'translate3d(' + x + 'px,' + y + 'px,0)';
     return el.style(prop, translate + (scale ? ' scale(' + scale + ')' : ''));

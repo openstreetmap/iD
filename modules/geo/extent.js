@@ -32,10 +32,10 @@ _.extend(geoExtent.prototype, {
 
     extend: function(obj) {
         if (!(obj instanceof geoExtent)) obj = new geoExtent(obj);
-        return Extent([Math.min(obj[0][0], this[0][0]),
-                              Math.min(obj[0][1], this[0][1])],
-                             [Math.max(obj[1][0], this[1][0]),
-                              Math.max(obj[1][1], this[1][1])]);
+        return geoExtent(
+            [Math.min(obj[0][0], this[0][0]), Math.min(obj[0][1], this[0][1])],
+            [Math.max(obj[1][0], this[1][0]), Math.max(obj[1][1], this[1][1])]
+        );
     },
 
 
@@ -80,7 +80,7 @@ _.extend(geoExtent.prototype, {
 
 
     contains: function(obj) {
-        if (!(obj instanceof Extent)) obj = new geoExtent(obj);
+        if (!(obj instanceof geoExtent)) obj = new geoExtent(obj);
         return obj[0][0] >= this[0][0] &&
                obj[0][1] >= this[0][1] &&
                obj[1][0] <= this[1][0] &&
@@ -89,7 +89,7 @@ _.extend(geoExtent.prototype, {
 
 
     intersects: function(obj) {
-        if (!(obj instanceof Extent)) obj = new geoExtent(obj);
+        if (!(obj instanceof geoExtent)) obj = new geoExtent(obj);
         return obj[0][0] <= this[1][0] &&
                obj[0][1] <= this[1][1] &&
                obj[1][0] >= this[0][0] &&
@@ -99,15 +99,15 @@ _.extend(geoExtent.prototype, {
 
     intersection: function(obj) {
         if (!this.intersects(obj)) return new geoExtent();
-        return new Extent([Math.max(obj[0][0], this[0][0]),
-                                  Math.max(obj[0][1], this[0][1])],
-                                 [Math.min(obj[1][0], this[1][0]),
-                                  Math.min(obj[1][1], this[1][1])]);
+        return new geoExtent(
+            [Math.max(obj[0][0], this[0][0]), Math.max(obj[0][1], this[0][1])],
+            [Math.min(obj[1][0], this[1][0]), Math.min(obj[1][1], this[1][1])]
+        );
     },
 
 
     percentContainedIn: function(obj) {
-        if (!(obj instanceof Extent)) obj = new geoExtent(obj);
+        if (!(obj instanceof geoExtent)) obj = new geoExtent(obj);
         var a1 = this.intersection(obj).area(),
             a2 = this.area();
 
@@ -122,9 +122,10 @@ _.extend(geoExtent.prototype, {
     padByMeters: function(meters) {
         var dLat = geoMetersToLat(meters),
             dLon = geoMetersToLon(meters, this.center()[1]);
-        return Extent(
-                [this[0][0] - dLon, this[0][1] - dLat],
-                [this[1][0] + dLon, this[1][1] + dLat]);
+        return geoExtent(
+            [this[0][0] - dLon, this[0][1] - dLat],
+            [this[1][0] + dLon, this[1][1] + dLat]
+        );
     },
 
 

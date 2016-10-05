@@ -41,7 +41,7 @@ export function uiDisclosure() {
         function toggle() {
             expanded = !expanded;
             hideToggle.classed('expanded', expanded);
-            div.call(Toggle(expanded));
+            wrap.call(uiToggle(expanded));
             dispatch.call('toggled', this, expanded);
         }
     };

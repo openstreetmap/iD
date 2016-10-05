@@ -163,7 +163,7 @@ export function rendererBackground(context) {
             }
         }
 
-        layer = TileLayer(context)
+        layer = rendererTileLayer(context)
             .source(d)
             .projection(context.projection)
             .dimensions(baseLayer.dimensions());
@@ -212,7 +212,7 @@ export function rendererBackground(context) {
             }
         });
 
-        backgroundSources.unshift(BackgroundSource.None());
+        backgroundSources.unshift(rendererBackgroundSource.None());
 
         if (!chosen && extent) {
             best = _.find(this.sources(extent), function(s) { return s.best(); });

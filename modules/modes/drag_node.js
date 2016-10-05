@@ -88,15 +88,13 @@ export function modeDragNode(context) {
         if (wasMidpoint) {
             var midpoint = entity;
             entity = coreNode();
-            context.perform(AddMidpoint(midpoint, entity));
+            context.perform(actionAddMidpoint(midpoint, entity));
 
-             var vertex = context.surface()
-                .selectAll('.' + entity.id);
-             behavior.target(vertex.node(), entity);
+            var vertex = context.surface().selectAll('.' + entity.id);
+            behavior.target(vertex.node(), entity);
 
         } else {
-            context.perform(
-                actionNoop());
+            context.perform(actionNoop());
         }
 
         activeIDs = _.map(context.graph().parentWays(entity), 'id');

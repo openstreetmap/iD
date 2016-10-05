@@ -213,7 +213,7 @@ export function actionMergeRemoteChanges(id, localGraph, remoteGraph, formatUser
         // delete/undelete
         if (!remote.visible) {
             if (option === 'force_remote') {
-                return DeleteMultiple([id])(graph);
+                return actionDeleteMultiple([id])(graph);
 
             } else if (option === 'force_local') {
                 if (target.type === 'way') {

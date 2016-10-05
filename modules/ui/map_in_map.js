@@ -189,7 +189,7 @@ export function uiMapInMap(context) {
             var activeOverlayLayers = [];
             for (var i = 0; i < overlaySources.length; i++) {
                 if (overlaySources[i].validZoom(zMini)) {
-                    if (!overlayLayers[i]) overlayLayers[i] = TileLayer(context);
+                    if (!overlayLayers[i]) overlayLayers[i] = rendererTileLayer(context);
                     activeOverlayLayers.push(overlayLayers[i]
                         .source(overlaySources[i])
                         .projection(projection)

@@ -70,7 +70,7 @@ export function geoSimpleMultipolygonOuterMember(entity, graph) {
 // used.
 //
 // If an member has a `tags` property, its tags will be reversed via
-// `iD.actions.Reverse` in the output.
+// `iD.actionReverse` in the output.
 //
 // Incomplete members (those for which `graph.hasEntity(element.id)` returns
 // false) and non-way members are ignored.

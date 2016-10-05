@@ -58,7 +58,7 @@ export function svgLines(projection) {
         _.forOwn(pathdata, function(v, k) {
             onewaydata[k] = _(v)
                 .filter(function(d) { return d.isOneWay(); })
-                .map(OneWaySegments(projection, graph, 35))
+                .map(svgOneWaySegments(projection, graph, 35))
                 .flatten()
                 .valueOf();
         });

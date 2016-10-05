@@ -10,7 +10,7 @@ import { actionDeleteNode } from './delete_node';
 // Tags and relation memberships of of non-surviving nodes are merged
 // to the survivor.
 //
-// This is the inverse of `iD.actions.Disconnect`.
+// This is the inverse of `iD.actionDisconnect`.
 //
 // Reference:
 //   https://github.com/openstreetmap/potlatch2/blob/master/net/systemeD/halcyon/connection/actions/MergeNodesAction.as

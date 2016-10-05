@@ -14,7 +14,7 @@ export function modeAddPoint(context) {
         key: '1'
     };
 
-    var behavior = behavriorDraw(context)
+    var behavior = behaviorDraw(context)
         .tail(t('modes.add_point.tail'))
         .on('click', add)
         .on('clickWay', addWay)

@@ -10,7 +10,7 @@ import { utilWrap } from '../util/index';
 // Optionally, split only the given ways, if multiple ways share
 // the given node.
 //
-// This is the inverse of `iD.actions.Join`.
+// This is the inverse of `iD.actionJoin`.
 //
 // For testing convenience, accepts an ID to assign to the new way.
 // Normally, this will be undefined and the way will automatically

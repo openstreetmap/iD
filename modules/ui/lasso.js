@@ -35,7 +35,7 @@ export function uiLasso(context) {
 
     lasso.extent = function () {
         return lasso.coordinates.reduce(function(extent, point) {
-            return extent.extend(Extent(point));
+            return extent.extend(geoExtent(point));
         }, geoExtent());
     };
 

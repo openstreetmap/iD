@@ -6,7 +6,7 @@ import { geoJoinWays } from '../geo/index';
 
 // Join ways at the end node they share.
 //
-// This is the inverse of `iD.actions.Split`.
+// This is the inverse of `iD.actionSplit`.
 //
 // Reference:
 //   https://github.com/systemed/potlatch2/blob/master/net/systemeD/halcyon/connection/actions/MergeWaysAction.as

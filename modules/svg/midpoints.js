@@ -111,7 +111,7 @@ export function svgMidpoints(projection, context) {
         groups = groups
             .merge(enter)
             .attr('transform', function(d) {
-                var translate = PointTransform(projection),
+                var translate = svgPointTransform(projection),
                     a = graph.entity(d.edge[0]),
                     b = graph.entity(d.edge[1]),
                     angleVal = Math.round(geoAngle(a, b, projection) * (180 / Math.PI));

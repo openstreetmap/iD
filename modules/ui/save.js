@@ -43,7 +43,7 @@ export function uiSave(context) {
         var tooltipBehavior = tooltip()
             .placement('bottom')
             .html(true)
-            .title(tooltipHtml(t('save.no_changes'), key));
+            .title(uiTooltipHtml(t('save.no_changes'), key));
 
         var button = selection
             .append('button')
@@ -77,8 +77,8 @@ export function uiSave(context) {
                     return;
                 numChanges = _;
 
-                tooltipBehavior.title(tooltipHtml(t(numChanges > 0 ?
-                        'save.help' : 'save.no_changes'), key));
+                tooltipBehavior.title(uiTooltipHtml(
+                    t(numChanges > 0 ? 'save.help' : 'save.no_changes'), key));
 
                 var background = getBackground(numChanges);
 

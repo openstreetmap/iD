@@ -9,7 +9,7 @@ import { coreNode } from '../core/index';
 // Normally, this will be undefined and the way will automatically
 // be assigned a new ID.
 //
-// This is the inverse of `iD.actions.Connect`.
+// This is the inverse of `iD.actionConnect`.
 //
 // Reference:
 //   https://github.com/openstreetmap/potlatch2/blob/master/net/systemeD/halcyon/connection/actions/UnjoinNodeAction.as
