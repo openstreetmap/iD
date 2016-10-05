@@ -1,8 +1,8 @@
-describe('iD.actions.CopyEntities', function () {
+describe('iD.actionCopyEntities', function () {
     it('copies a node', function () {
         var a = iD.Node({id: 'a'}),
             base = iD.Graph([a]),
-            head = iD.actions.CopyEntities(['a'], base)(base),
+            head = iD.actionCopyEntities(['a'], base)(base),
             diff = iD.Difference(base, head),
             created = diff.created();
 
@@ -15,7 +15,7 @@ describe('iD.actions.CopyEntities', function () {
             b = iD.Node({id: 'b'}),
             w = iD.Way({id: 'w', nodes: ['a', 'b']}),
             base = iD.Graph([a, b, w]),
-            action = iD.actions.CopyEntities(['w'], base),
+            action = iD.actionCopyEntities(['w'], base),
             head = action(base),
             diff = iD.Difference(base, head),
             created = diff.created();
@@ -29,7 +29,7 @@ describe('iD.actions.CopyEntities', function () {
                 iD.Node({id: 'a'}),
                 iD.Node({id: 'b'})
             ]),
-            action = iD.actions.CopyEntities(['a', 'b'], base),
+            action = iD.actionCopyEntities(['a', 'b'], base),
             head = action(base),
             diff = iD.Difference(base, head),
             created = diff.created();
@@ -47,7 +47,7 @@ describe('iD.actions.CopyEntities', function () {
                 iD.Way({id: 'w1', nodes: ['a', 'b']}),
                 iD.Way({id: 'w2', nodes: ['b', 'c']})
             ]),
-            action = iD.actions.CopyEntities(['w1', 'w2'], base),
+            action = iD.actionCopyEntities(['w1', 'w2'], base),
             head = action(base),
             diff = iD.Difference(base, head),
             created = diff.created();
@@ -60,7 +60,7 @@ describe('iD.actions.CopyEntities', function () {
         var a = iD.Node({id: 'a'}),
             old = iD.Graph([a]),
             base = iD.Graph(),
-            action = iD.actions.CopyEntities(['a'], old),
+            action = iD.actionCopyEntities(['a'], old),
             head = action(base),
             diff = iD.Difference(base, head);
             diff.created();

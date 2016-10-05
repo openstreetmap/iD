@@ -1,4 +1,4 @@
-describe('iD.svg.Layers', function () {
+describe('iD.svgLayers', function () {
     var context, container,
         projection = d3.geoProjection(function(x, y) { return [x, -y]; })
             .translate([0, 0])
@@ -12,19 +12,19 @@ describe('iD.svg.Layers', function () {
 
 
     it('creates a surface', function () {
-        container.call(iD.svg.Layers(projection, context));
+        container.call(iD.svgLayers(projection, context));
         expect(container.selectAll('svg')).to.be.classed('surface');
     });
 
     it('creates surface defs', function () {
-        container.call(iD.svg.Layers(projection, context));
+        container.call(iD.svgLayers(projection, context));
         var nodes = container.selectAll('svg defs').nodes();
         expect(nodes.length).to.eql(1);
         expect(d3.select(nodes[0])).to.be.classed('surface-defs');
     });
 
     it('creates default data layers', function () {
-        container.call(iD.svg.Layers(projection, context));
+        container.call(iD.svgLayers(projection, context));
         var nodes = container.selectAll('svg .data-layer').nodes();
         expect(nodes.length).to.eql(5);
         expect(d3.select(nodes[0])).to.be.classed('data-layer-osm');

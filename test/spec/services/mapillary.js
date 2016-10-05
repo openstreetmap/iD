@@ -1,4 +1,4 @@
-describe('iD.services.mapillary', function() {
+describe('iD.serviceMapillary', function() {
     var dimensions = [64, 64],
         ua = navigator.userAgent,
         isPhantom = (navigator.userAgent.match(/PhantomJS/) !== null),
@@ -12,7 +12,7 @@ describe('iD.services.mapillary', function() {
         context.projection.translate([-116508, 0]);  // 10,0
 
         server = sinon.fakeServer.create();
-        mapillary = iD.services.mapillary.init();
+        mapillary = iD.serviceMapillary.init();
         mapillary.reset();
 
         /* eslint-disable no-native-reassign */
@@ -41,12 +41,12 @@ describe('iD.services.mapillary', function() {
 
     describe('Mapillary service', function() {
         it('Initializes cache one time', function() {
-            var cache = iD.services.mapillary.getMapillary().cache;
+            var cache = iD.serviceMapillary.getMapillary().cache;
             expect(cache).to.have.property('images');
             expect(cache).to.have.property('signs');
 
-            iD.services.mapillary.init();
-            var cache2 = iD.services.mapillary.getMapillary().cache;
+            iD.serviceMapillary.init();
+            var cache2 = iD.serviceMapillary.getMapillary().cache;
             expect(cache).to.equal(cache2);
         });
     });
@@ -145,7 +145,7 @@ describe('iD.services.mapillary', function() {
             });
             server.respond();
 
-            var sign_defs = iD.services.mapillary.getMapillary().sign_defs;
+            var sign_defs = iD.serviceMapillary.getMapillary().sign_defs;
 
             expect(sign_defs).to.have.property('au')
                 .that.is.an('object')
@@ -274,7 +274,7 @@ describe('iD.services.mapillary', function() {
                 { minX: 10, minY: 1, maxX: 10, maxY: 1, data: { key: '2', loc: [10,1], ca: 90 } }
             ];
 
-            iD.services.mapillary.getMapillary().cache.images.rtree.load(features);
+            iD.serviceMapillary.getMapillary().cache.images.rtree.load(features);
             var res = mapillary.images(context.projection, dimensions);
 
             expect(res).to.deep.eql([
@@ -292,7 +292,7 @@ describe('iD.services.mapillary', function() {
                 { minX: 10, minY: 0, maxX: 10, maxY: 0, data: { key: '4', loc: [10,0], ca: 90 } }
             ];
 
-            iD.services.mapillary.getMapillary().cache.images.rtree.load(features);
+            iD.serviceMapillary.getMapillary().cache.images.rtree.load(features);
             var res = mapillary.images(context.projection, dimensions);
             expect(res).to.have.length.of.at.most(3);
         });
@@ -313,7 +313,7 @@ describe('iD.services.mapillary', function() {
                     { minX: 10, minY: 1, maxX: 10, maxY: 1, data: { key: '2', loc: [10,1], signs: signs } }
                 ];
 
-            iD.services.mapillary.getMapillary().cache.signs.rtree.load(features);
+            iD.serviceMapillary.getMapillary().cache.signs.rtree.load(features);
             var res = mapillary.signs(context.projection, dimensions);
 
             expect(res).to.deep.eql([
@@ -338,7 +338,7 @@ describe('iD.services.mapillary', function() {
                     { minX: 10, minY: 0, maxX: 10, maxY: 0, data: { key: '4', loc: [10,0], signs: signs } }
                 ];
 
-            iD.services.mapillary.getMapillary().cache.signs.rtree.load(features);
+            iD.serviceMapillary.getMapillary().cache.signs.rtree.load(features);
             var res = mapillary.signs(context.projection, dimensions);
             expect(res).to.have.length.of.at.most(3);
         });
@@ -358,7 +358,7 @@ describe('iD.services.mapillary', function() {
 
     describe('#signHTML', function() {
         it('returns sign HTML', function() {
-            iD.services.mapillary.getMapillary().sign_defs = {
+            iD.serviceMapillary.getMapillary().sign_defs = {
                 us: {'regulatory--maximum-speed-limit-65--us': '<span class="t">65</span>'}
             };
 
@@ -381,25 +381,25 @@ describe('iD.services.mapillary', function() {
     describe('#setSelectedImage', function() {
         it('sets selected image', function() {
             mapillary.setSelectedImage('foo');
-            expect(iD.services.mapillary.getMapillary().image).to.eql('foo');
+            expect(iD.serviceMapillary.getMapillary().image).to.eql('foo');
         });
     });
 
     describe('#getSelectedImage', function() {
         it('gets selected image', function() {
-            iD.services.mapillary.getMapillary().image = 'bar';
+            iD.serviceMapillary.getMapillary().image = 'bar';
             expect(mapillary.getSelectedImage()).to.eql('bar');
         });
     });
 
     describe('#reset', function() {
         it('resets cache and image', function() {
-            iD.services.mapillary.getMapillary().cache.foo = 'bar';
-            iD.services.mapillary.getMapillary().image = 'bar';
+            iD.serviceMapillary.getMapillary().cache.foo = 'bar';
+            iD.serviceMapillary.getMapillary().image = 'bar';
 
             mapillary.reset();
-            expect(iD.services.mapillary.getMapillary().cache).to.not.have.property('foo');
-            expect(iD.services.mapillary.getMapillary().image).to.be.null;
+            expect(iD.serviceMapillary.getMapillary().cache).to.not.have.property('foo');
+            expect(iD.serviceMapillary.getMapillary().image).to.be.null;
         });
     });
 

@@ -1,4 +1,4 @@
-describe('iD.geo.simpleMultipolygonOuterMember', function() {
+describe('iD.geoSimpleMultipolygonOuterMember', function() {
     it('returns the outer member of a simple multipolygon', function() {
         var inner = iD.Way(),
             outer = iD.Way(),
@@ -8,8 +8,8 @@ describe('iD.geo.simpleMultipolygonOuterMember', function() {
             }),
             graph = iD.Graph([inner, outer, relation]);
 
-        expect(iD.geo.simpleMultipolygonOuterMember(inner, graph)).to.equal(outer);
-        expect(iD.geo.simpleMultipolygonOuterMember(outer, graph)).to.equal(outer);
+        expect(iD.geoSimpleMultipolygonOuterMember(inner, graph)).to.equal(outer);
+        expect(iD.geoSimpleMultipolygonOuterMember(outer, graph)).to.equal(outer);
     });
 
     it('returns falsy for a complex multipolygon', function() {
@@ -23,9 +23,9 @@ describe('iD.geo.simpleMultipolygonOuterMember', function() {
             }),
             graph = iD.Graph([inner, outer1, outer2, relation]);
 
-        expect(iD.geo.simpleMultipolygonOuterMember(inner, graph)).not.to.be.ok;
-        expect(iD.geo.simpleMultipolygonOuterMember(outer1, graph)).not.to.be.ok;
-        expect(iD.geo.simpleMultipolygonOuterMember(outer2, graph)).not.to.be.ok;
+        expect(iD.geoSimpleMultipolygonOuterMember(inner, graph)).not.to.be.ok;
+        expect(iD.geoSimpleMultipolygonOuterMember(outer1, graph)).not.to.be.ok;
+        expect(iD.geoSimpleMultipolygonOuterMember(outer2, graph)).not.to.be.ok;
     });
 
     it('handles incomplete relations', function() {
@@ -36,17 +36,17 @@ describe('iD.geo.simpleMultipolygonOuterMember', function() {
             }),
             graph = iD.Graph([way, relation]);
 
-        expect(iD.geo.simpleMultipolygonOuterMember(way, graph)).to.be.undefined;
+        expect(iD.geoSimpleMultipolygonOuterMember(way, graph)).to.be.undefined;
     });
 });
 
-describe('iD.geo.joinWays', function() {
+describe('iD.geoJoinWays', function() {
     it('returns an array of members with nodes properties', function() {
         var node = iD.Node({loc: [0, 0]}),
             way  = iD.Way({nodes: [node.id]}),
             member = {id: way.id, type: 'way'},
             graph = iD.Graph([node, way]),
-            result = iD.geo.joinWays([member], graph);
+            result = iD.geoJoinWays([member], graph);
 
         expect(result.length).to.equal(1);
         expect(result[0].nodes.length).to.equal(1);
@@ -72,7 +72,7 @@ describe('iD.geo.joinWays', function() {
             ]})
         ]);
 
-        var result = iD.geo.joinWays(graph.entity('r').members, graph);
+        var result = iD.geoJoinWays(graph.entity('r').members, graph);
         expect(_.map(result[0], 'id')).to.eql(['=', '-', '~']);
     });
 
@@ -89,7 +89,7 @@ describe('iD.geo.joinWays', function() {
                 iD.Way({id: '=', nodes: ['c', 'b'], tags: {'oneway': 'yes', 'lanes:forward': 2}})
             ]);
 
-        var result = iD.geo.joinWays([graph.entity('-'), graph.entity('=')], graph);
+        var result = iD.geoJoinWays([graph.entity('-'), graph.entity('=')], graph);
         expect(result[0][1].tags).to.eql({'oneway': '-1', 'lanes:backward': 2});
     });
 
@@ -97,12 +97,12 @@ describe('iD.geo.joinWays', function() {
         var node = iD.Node({loc: [0, 0]}),
             member = {id: 'n', type: 'node'},
             graph = iD.Graph([node]);
-        expect(iD.geo.joinWays([member], graph)).to.eql([]);
+        expect(iD.geoJoinWays([member], graph)).to.eql([]);
     });
 
     it('ignores incomplete members', function() {
         var member = {id: 'w', type: 'way'},
             graph = iD.Graph();
-        expect(iD.geo.joinWays([member], graph)).to.eql([]);
+        expect(iD.geoJoinWays([member], graph)).to.eql([]);
     });
 });

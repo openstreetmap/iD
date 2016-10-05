@@ -1,4 +1,4 @@
-describe('iD.svg.Vertices', function () {
+describe('iD.svgVertices', function () {
     var context, surface,
         projection = d3.geoProjection(function(x, y) { return [x, -y]; })
             .translate([0, 0])
@@ -20,7 +20,7 @@ describe('iD.svg.Vertices', function () {
             way2 = iD.Way({nodes: [node.id], tags: {highway: 'residential'}}),
             graph = iD.Graph([node, way1, way2]);
 
-        surface.call(iD.svg.Vertices(projection, context), graph, [node], 17);
+        surface.call(iD.svgVertices(projection, context), graph, [node], 17);
 
         expect(surface.select('.vertex')).to.be.classed('shared');
     });

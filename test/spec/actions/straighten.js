@@ -1,4 +1,4 @@
-describe('iD.actions.Straighten', function () {
+describe('iD.actionStraighten', function () {
     var projection = d3.geoMercator();
 
     describe('#disabled', function () {
@@ -11,7 +11,7 @@ describe('iD.actions.Straighten', function () {
                 iD.Way({id: '-', nodes: ['a', 'b', 'c', 'd']})
             ]);
 
-            expect(iD.actions.Straighten('-', projection).disabled(graph)).not.to.be.ok;
+            expect(iD.actionStraighten('-', projection).disabled(graph)).not.to.be.ok;
         });
 
         it('returns \'too_bendy\' for ways with internal nodes far off centerline', function () {
@@ -23,7 +23,7 @@ describe('iD.actions.Straighten', function () {
                 iD.Way({id: '-', nodes: ['a', 'b', 'c', 'd']})
             ]);
 
-            expect(iD.actions.Straighten('-', projection).disabled(graph)).to.equal('too_bendy');
+            expect(iD.actionStraighten('-', projection).disabled(graph)).to.equal('too_bendy');
         });
 
         it('returns \'too_bendy\' for ways with coincident start/end nodes', function () {
@@ -35,7 +35,7 @@ describe('iD.actions.Straighten', function () {
                 iD.Way({id: '-', nodes: ['a', 'b', 'c', 'd']})
             ]);
 
-            expect(iD.actions.Straighten('-', projection).disabled(graph)).to.equal('too_bendy');
+            expect(iD.actionStraighten('-', projection).disabled(graph)).to.equal('too_bendy');
         });
     });
 
@@ -47,7 +47,7 @@ describe('iD.actions.Straighten', function () {
                 iD.Way({id: '-', nodes: ['a', 'b', 'c']})
             ]);
 
-        graph = iD.actions.Straighten('-', projection)(graph);
+        graph = iD.actionStraighten('-', projection)(graph);
 
         expect(graph.hasEntity('b')).to.eq(undefined);
     });
@@ -60,7 +60,7 @@ describe('iD.actions.Straighten', function () {
                 iD.Way({id: '-', nodes: ['a', 'b', 'c']})
             ]);
 
-        graph = iD.actions.Straighten('-', projection)(graph);
+        graph = iD.actionStraighten('-', projection)(graph);
 
         expect(graph.entity('-').nodes).to.eql(['a', 'b', 'c']);
     });
@@ -75,7 +75,7 @@ describe('iD.actions.Straighten', function () {
                 iD.Way({id: '=', nodes: ['b']})
             ]);
 
-        graph = iD.actions.Straighten('-', projection)(graph);
+        graph = iD.actionStraighten('-', projection)(graph);
 
         expect(graph.entity('-').nodes).to.have.length(3);
     });

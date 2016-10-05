@@ -1,4 +1,4 @@
-describe('iD.actions.Merge', function () {
+describe('iD.actionMerge', function () {
     it('merges multiple points to a line', function () {
         var graph = iD.Graph([
                 iD.Node({id: 'a', tags: {a: 'a'}}),
@@ -6,7 +6,7 @@ describe('iD.actions.Merge', function () {
                 iD.Way({id: 'w'}),
                 iD.Relation({id: 'r', members: [{id: 'a', role: 'r', type: 'node'}]})
             ]),
-            action = iD.actions.Merge(['a', 'b', 'w']);
+            action = iD.actionMerge(['a', 'b', 'w']);
 
         expect(action.disabled(graph)).not.to.be.ok;
 
@@ -25,7 +25,7 @@ describe('iD.actions.Merge', function () {
                 iD.Way({id: 'w', tags: {area: 'yes'}}),
                 iD.Relation({id: 'r', members: [{id: 'a', role: 'r', type: 'node'}]})
             ]),
-            action = iD.actions.Merge(['a', 'b', 'w']);
+            action = iD.actionMerge(['a', 'b', 'w']);
 
         expect(action.disabled(graph)).not.to.be.ok;
 

@@ -1,8 +1,8 @@
-describe('iD.actions.Disconnect', function () {
+describe('iD.actionDisconnect', function () {
     describe('#disabled', function () {
         it('returns \'not_connected\' for a node shared by less than two ways', function () {
             var graph = iD.Graph([iD.Node({id: 'a'})]);
-            expect(iD.actions.Disconnect('a').disabled(graph)).to.equal('not_connected');
+            expect(iD.actionDisconnect('a').disabled(graph)).to.equal('not_connected');
         });
 
         it('returns falsy for the closing node in a closed line', function () {
@@ -16,7 +16,7 @@ describe('iD.actions.Disconnect', function () {
                 iD.Node({id: 'd'}),
                 iD.Way({id: 'w', nodes: ['a', 'b', 'c', 'd', 'a']})
             ]);
-            expect(iD.actions.Disconnect('a').disabled(graph)).not.to.be.ok;
+            expect(iD.actionDisconnect('a').disabled(graph)).not.to.be.ok;
         });
 
         it('returns not_connected for the closing node in a closed area', function () {
@@ -30,7 +30,7 @@ describe('iD.actions.Disconnect', function () {
                 iD.Node({id: 'd'}),
                 iD.Way({id: 'w', nodes: ['a', 'b', 'c', 'd', 'a'], tags: {area: 'yes'}})
             ]);
-            expect(iD.actions.Disconnect('a').disabled(graph)).to.equal('not_connected');
+            expect(iD.actionDisconnect('a').disabled(graph)).to.equal('not_connected');
         });
 
         it('returns falsy for a shared non-closing node in an area', function () {
@@ -46,7 +46,7 @@ describe('iD.actions.Disconnect', function () {
                     iD.Way({id: 'w', nodes: ['a', 'b', 'c', 'd', 'e', 'b', 'a'], tags: {area: 'yes'}})
             ]);
 
-            expect(iD.actions.Disconnect('b').disabled(graph)).not.to.be.ok;
+            expect(iD.actionDisconnect('b').disabled(graph)).not.to.be.ok;
         });
 
         it('returns falsy for a node shared by two or more ways', function () {
@@ -62,7 +62,7 @@ describe('iD.actions.Disconnect', function () {
                     iD.Way({id: '|', nodes: ['d', 'b']})
                 ]);
 
-            expect(iD.actions.Disconnect('b').disabled(graph)).not.to.be.ok;
+            expect(iD.actionDisconnect('b').disabled(graph)).not.to.be.ok;
         });
 
         it('returns falsy for an intersection of two ways with parent way specified', function () {
@@ -78,7 +78,7 @@ describe('iD.actions.Disconnect', function () {
                     iD.Way({id: '|', nodes: ['d', 'b']})
             ]);
 
-            expect(iD.actions.Disconnect('b', ['|']).disabled(graph)).not.to.be.ok;
+            expect(iD.actionDisconnect('b', ['|']).disabled(graph)).not.to.be.ok;
         });
 
         it('returns \'relation\' for a node connecting any two members of the same relation', function () {
@@ -96,7 +96,7 @@ describe('iD.actions.Disconnect', function () {
                 ]})
             ]);
 
-            expect(iD.actions.Disconnect('b').disabled(graph)).to.eql('relation');
+            expect(iD.actionDisconnect('b').disabled(graph)).to.eql('relation');
         });
 
         it('returns falsy for a node connecting two members of an unaffected relation', function () {
@@ -118,7 +118,7 @@ describe('iD.actions.Disconnect', function () {
                 ]})
             ]);
 
-            expect(iD.actions.Disconnect('b').limitWays(['|']).disabled(graph)).not.to.be.ok;
+            expect(iD.actionDisconnect('b').limitWays(['|']).disabled(graph)).not.to.be.ok;
         });
     });
 
@@ -145,7 +145,7 @@ describe('iD.actions.Disconnect', function () {
                 iD.Way({id: '|', nodes: ['d', 'b']})
             ]);
 
-        graph = iD.actions.Disconnect('b', 'e')(graph);
+        graph = iD.actionDisconnect('b', 'e')(graph);
 
         expect(graph.entity('-').nodes).to.eql(['a', 'b', 'c']);
         expect(graph.entity('|').nodes).to.eql(['d', 'e']);
@@ -173,7 +173,7 @@ describe('iD.actions.Disconnect', function () {
                 iD.Way({id: '|', nodes: ['d', 'b']})
             ]);
 
-        graph = iD.actions.Disconnect('b', 'e').limitWays(['-'])(graph);
+        graph = iD.actionDisconnect('b', 'e').limitWays(['-'])(graph);
 
         expect(graph.entity('-').nodes).to.eql(['a', 'e']);
         expect(graph.entity('=').nodes).to.eql(['b', 'c']);
@@ -199,7 +199,7 @@ describe('iD.actions.Disconnect', function () {
                 iD.Node({id: 'c'}),
                 iD.Way({id: 'w', nodes: ['a', 'b', 'c', 'a']})
             ]);
-        graph = iD.actions.Disconnect('a', 'd')(graph);
+        graph = iD.actionDisconnect('a', 'd')(graph);
         expect(graph.entity('w').nodes).to.eql(['a', 'b', 'c', 'd']);
     });
 
@@ -228,7 +228,7 @@ describe('iD.actions.Disconnect', function () {
             iD.Way({id: 'w2', nodes: ['b', 'c', 'd', 'e', 'b']})
         ]);
 
-        graph = iD.actions.Disconnect('b', '*')(graph);
+        graph = iD.actionDisconnect('b', '*')(graph);
 
         expect(graph.entity('w1').nodes).to.eql(['a', 'b']);
         expect(graph.entity('w2').nodes).to.eql(['*', 'c', 'd', 'e', '*']);
@@ -256,7 +256,7 @@ describe('iD.actions.Disconnect', function () {
             iD.Way({id: 'w', nodes: ['a', 'b', 'c', 'd', 'e', 'b', 'a'], tags: {area: 'yes'}})
         ]);
 
-        graph = iD.actions.Disconnect('b', '*')(graph);
+        graph = iD.actionDisconnect('b', '*')(graph);
 
         expect(graph.entity('w').nodes).to.eql(['a', 'b', 'c', 'd', 'e', '*', 'a']);
     });
@@ -288,7 +288,7 @@ describe('iD.actions.Disconnect', function () {
             iD.Way({id: 'w2', nodes: ['b', 'd', 'e', 'b'], tags: {area: 'yes'}})
         ]);
 
-        graph = iD.actions.Disconnect('b', '*')(graph);
+        graph = iD.actionDisconnect('b', '*')(graph);
 
         expect(graph.entity('w1').nodes).to.eql(['a', 'b', 'c', 'a']);
         expect(graph.entity('w2').nodes).to.eql(['*', 'd', 'e', '*']);
@@ -321,7 +321,7 @@ describe('iD.actions.Disconnect', function () {
             iD.Way({id: 'w2', nodes: ['b', 'd', 'e', 'b'], tags: {area: 'yes'}})
         ]);
 
-        graph = iD.actions.Disconnect('b', '*')(graph);
+        graph = iD.actionDisconnect('b', '*')(graph);
 
         expect(graph.entity('w1').nodes).to.eql(['b', 'c', 'a', 'b']);
         expect(graph.entity('w2').nodes).to.eql(['*', 'd', 'e', '*']);
@@ -339,7 +339,7 @@ describe('iD.actions.Disconnect', function () {
                 iD.Way({id: '|', nodes: ['d', 'b']})
             ]);
 
-        graph = iD.actions.Disconnect('b', 'e')(graph);
+        graph = iD.actionDisconnect('b', 'e')(graph);
 
         // Immutable loc => should be shared by identity.
         expect(graph.entity('b').loc).to.equal(loc);

@@ -1,3 +1,17 @@
+export * from './check';
+export * from './combo';
+export * from './input';
+export * from './access';
+export * from './address';
+export * from './cycleway';
+export * from './lanes';
+export * from './localized';
+export * from './maxspeed';
+export * from './radio';
+export * from './restrictions';
+export * from './textarea';
+export * from './wikipedia';
+
 import {
     uiFieldCheck,
     uiFieldDefaultcheck

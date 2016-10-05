@@ -1,11 +1,11 @@
-describe('iD.services.nominatim', function() {
+describe('iD.serviceNominatim', function() {
     var server, nominatim;
 
     beforeEach(function() {
         server = sinon.fakeServer.create();
-        iD.services.nominatim.init();
-        nominatim = iD.services.nominatim;
-        iD.services.nominatim.reset();
+        iD.serviceNominatim.init();
+        nominatim = iD.serviceNominatim;
+        iD.serviceNominatim.reset();
     });
 
     afterEach(function() {
@@ -13,7 +13,7 @@ describe('iD.services.nominatim', function() {
     });
 
     function query(url) {
-        return iD.util.stringQs(url.substring(url.indexOf('?') + 1));
+        return iD.utilStringQs(url.substring(url.indexOf('?') + 1));
     }
 
     describe.skip('#countryCode', function() {

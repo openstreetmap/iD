@@ -129,21 +129,21 @@ var tree = iD.Tree(graph);
 
 // quickly pull all features that intersect with an extent
 var features = tree.intersects(
-    iD.geo.Extent([0, 0], [2, 2]), tree.graph());
+    iD.geoExtent([0, 0], [2, 2]), tree.graph());
 ```
 
 ## Actions
 
 In iD, an _action_ is a function that accepts a graph as input and returns a
 new, modified graph as output. Actions typically need other inputs as well; for
-example, `iD.actions.DeleteNode` also requires the ID of a node to delete. The
+example, `iD.actionDeleteNode` also requires the ID of a node to delete. The
 additional input is passed to the action's constructor:
 
 ```js
 // construct the action: this returns a function that remembers the
 // value `n123456` in a closure so that when it's called, it runs
 // the specified action on the graph
-var action = iD.actions.DeleteNode('n123456');
+var action = iD.actionDeleteNode('n123456');
 
 // apply the action, yielding a new graph. oldGraph is untouched.
 newGraph = action(oldGraph);
@@ -184,10 +184,10 @@ around the map and select and edit entities, and three geometrically-oriented
 drawing modes, which are accessible through the mode buttons in the upper
 toolbar: Point, Line, and Area. In the code, these are broken down a
 little bit more. There are separate modes for when an entity is selected
-(`iD.modes.Select`) versus when nothing is selected (`iD.modes.Browse`), and
+(`iD.modeSelect`) versus when nothing is selected (`iD.modeBrowse`), and
 each of the geometric modes is split into one mode for starting to draw an
 object and one mode for continuing an existing object (with the exception of
-`iD.modes.AddPoint`, which is a single-step operation for obvious reasons).
+`iD.modeAddPoint`, which is a single-step operation for obvious reasons).
 
 The code interface for each mode consists of a pair of methods: `enter` and
 `exit`. In the `enter` method, a mode sets up all the behavior that should be
@@ -205,7 +205,7 @@ Certain behaviors are common to more than one mode. For example, iD indicates
 interactive map elements by drawing a halo around them when you hover over
 them, and this behavior is common to both the browse and draw modes. Instead
 of duplicating the code to implement this behavior in all these modes, we
-extract it to `iD.behavior.Hover`.
+extract it to `iD.behaviorHover`.
 
 _Behaviors_ take their inspiration from [d3's
 behaviors](https://github.com/mbostock/d3/wiki/Behaviors). Like d3's `zoom`
@@ -247,8 +247,8 @@ conditions under which it is enabled.
 To execute an operation, call it as a function, with no arguments. The typical
 operation will perform the appropriate action, creating a new undo state in
 the history, and then enter the appropriate mode. For example,
-`iD.operations.Split` performs `iD.actions.Split`, then enters
-`iD.modes.Select` with the resulting ways selected.
+`iD.operationSplit` performs `iD.actionSplit`, then enters
+`iD.modeSelect` with the resulting ways selected.
 
 ## Map Rendering
 
@@ -270,7 +270,7 @@ entity types of the OSM data model:
   or more ways grouped in a multipolygon relation.
 
 For each of these geometric types, `iD.svg` has a corresponding module:
-`iD.svg.Points`, `iD.svg.Vertices`, `iD.svg.Lines`, and `iD.svg.Areas`. To
+`iD.svgPoints`, `iD.svgVertices`, `iD.svgLines`, and `iD.svgAreas`. To
 render entities on screen, `iD.Map` delegates to these modules. Internally,
 they make heavy use of [d3 joins](http://bost.ocks.org/mike/join/) to
 manipulate the SVG elements that visually represent the map entities. When an
@@ -282,7 +282,7 @@ are updated. And when an entity is deleted (or simply moves offscreen), the
 corresponding SVG element is in the _exit_ selection, and will be removed.
 
 The `iD.svg` modules apply classes to the SVG elements based on the entity
-tags, via `iD.svg.TagClasses`. For example, an entity tagged with
+tags, via `iD.svgTagClasses`. For example, an entity tagged with
 `highway=residential` gets two classes: `tag-highway` and
 `tag-highway-residential`. This allows distinct visual styles to be applied
 via CSS at either the key or key-value levels. SVG elements also receive a
@@ -292,11 +292,11 @@ one corresponding to their geometry type (`point`, `line`, or `area`).
 The `iD.svg` namespace has a few other modules that don't have a one-to-one
 correspondence with entities:
 
-* `iD.svg.Midpoints` renders the small "virtual node" at the midpoint between
+* `iD.svgMidpoints` renders the small "virtual node" at the midpoint between
   two vertices.
-* `iD.svg.Labels` renders the textual
+* `iD.svgLabels` renders the textual
   [labels](http://mapbox.com/osmdev/2013/02/12/labeling-id/).
-* `iD.svg.Layers` sets up a number of layers that ensure that map elements
+* `iD.svgLayers` sets up a number of layers that ensure that map elements
   appear in an appropriate z-order.
 
 ## Other UI
@@ -312,7 +312,7 @@ The implementations for all non-map UI components live in the `iD.ui` namespace.
 Many of the modules in this namespace follow a pattern for reusable d3
 components [originally suggested](http://bost.ocks.org/mike/chart/) by Mike
 Bostock in the context of charts. The entry point to a UI element is a
-constructor function, e.g. `iD.ui.Geocoder()`. The constructor function may
+constructor function, e.g. `iD.uiGeocoder()`. The constructor function may
 require a set of mandatory arguments; for most UI components exactly one
 argument is required, a `context` object produced by the top-level `iD()`
 function.
@@ -326,7 +326,7 @@ render itself:
 var container = d3.select('body').append('div')
     .attr('class', 'map-control geocode-control');
 
-var geocoder = iD.ui.Geocoder(context)(container);
+var geocoder = iD.uiGeocoder(context)(container);
 ```
 
 Alternatively, and more commonly, the same result is accomplished with
@@ -335,7 +335,7 @@ Alternatively, and more commonly, the same result is accomplished with
 ```
 d3.select('body').append('div')
     .attr('class', 'map-control geocode-control')
-    .call(iD.ui.Geocoder(context));
+    .call(iD.uiGeocoder(context));
 ```
 
 Some components are reconfigurable, and some provide functionality beyond
@@ -343,7 +343,7 @@ basic rendering. Both reconfiguration and extended functionality are exposed
 via module functions:
 
 ```
-var inspector = iD.ui.Inspector();
+var inspector = iD.uiInspector();
 inspector(container); // render the inspector
 inspector.tags(); // retrieve the current tags
 inspector.on('change', callback); // get notified when a tag change is made

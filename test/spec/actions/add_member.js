@@ -1,7 +1,7 @@
-describe('iD.actions.AddMember', function() {
+describe('iD.actionAddMember', function() {
     it('adds an member to a relation at the specified index', function() {
         var r = iD.Relation({members: [{id: '1'}, {id: '3'}]}),
-            g = iD.actions.AddMember(r.id, {id: '2'}, 1)(iD.Graph([r]));
+            g = iD.actionAddMember(r.id, {id: '2'}, 1)(iD.Graph([r]));
         expect(g.entity(r.id).members).to.eql([{id: '1'}, {id: '2'}, {id: '3'}]);
     });
 
@@ -18,7 +18,7 @@ describe('iD.actions.AddMember', function() {
                 iD.Relation({id: 'r'})
             ]);
 
-            graph = iD.actions.AddMember('r', {id: '-', type: 'way'})(graph);
+            graph = iD.actionAddMember('r', {id: '-', type: 'way'})(graph);
             expect(members(graph)).to.eql(['-']);
         });
 
@@ -34,7 +34,7 @@ describe('iD.actions.AddMember', function() {
                 iD.Relation({id: 'r', members: [{id: '-', type: 'way'}]})
             ]);
 
-            graph = iD.actions.AddMember('r', {id: '=', type: 'way'})(graph);
+            graph = iD.actionAddMember('r', {id: '=', type: 'way'})(graph);
             expect(members(graph)).to.eql(['-', '=']);
         });
 
@@ -49,7 +49,7 @@ describe('iD.actions.AddMember', function() {
                 iD.Relation({id: 'r', members: [{id: '-', type: 'way'}]})
             ]);
 
-            graph = iD.actions.AddMember('r', {id: '=', type: 'way'})(graph);
+            graph = iD.actionAddMember('r', {id: '=', type: 'way'})(graph);
             expect(members(graph)).to.eql(['-', '=']);
         });
 
@@ -66,7 +66,7 @@ describe('iD.actions.AddMember', function() {
                 iD.Relation({id: 'r', members: [{id: '-', type: 'way'}, {id: '~', type: 'way'}]})
             ]);
 
-            graph = iD.actions.AddMember('r', {id: '=', type: 'way'})(graph);
+            graph = iD.actionAddMember('r', {id: '=', type: 'way'})(graph);
             expect(members(graph)).to.eql(['=', '-', '~']);
         });
 
@@ -83,7 +83,7 @@ describe('iD.actions.AddMember', function() {
                 iD.Relation({id: 'r', members: [{id: '-', type: 'way'}, {id: '~', type: 'way'}]})
             ]);
 
-            graph = iD.actions.AddMember('r', {id: '=', type: 'way'})(graph);
+            graph = iD.actionAddMember('r', {id: '=', type: 'way'})(graph);
             expect(members(graph)).to.eql(['-', '=', '~']);
         });
     });

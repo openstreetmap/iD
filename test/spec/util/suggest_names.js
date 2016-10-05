@@ -1,4 +1,4 @@
-describe('iD.util.SuggestNames', function() {
+describe('iD.utilSuggestNames', function() {
     var suggestions = {
         'key': {
             'value': {
@@ -12,7 +12,7 @@ describe('iD.util.SuggestNames', function() {
         'id': 'key/value'
     };
 
-    var a = iD.util.SuggestNames(preset, suggestions);
+    var a = iD.utilSuggestNames(preset, suggestions);
 
     it('provides suggestions for an entered value', function(done) {
         a('abcd', function(result) {

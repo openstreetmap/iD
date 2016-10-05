@@ -1,14 +1,14 @@
-describe('iD.behavior.Select', function() {
+describe('iD.behaviorSelect', function() {
     var a, b, context, behavior, container;
 
     beforeEach(function() {
         container = d3.select('body').append('div');
-        context = iD.Context(window).imagery(iD.data.imagery).container(container);
+        context = iD.Context(window).imagery(iD.dataImagery).container(container);
 
         a = iD.Node({loc: [0, 0]});
         b = iD.Node({loc: [0, 0]});
 
-        context.perform(iD.actions.AddEntity(a), iD.actions.AddEntity(b));
+        context.perform(iD.actionAddEntity(a), iD.actionAddEntity(b));
 
         container.call(context.map())
             .append('div')
@@ -19,9 +19,9 @@ describe('iD.behavior.Select', function() {
             .enter().append('circle')
             .attr('class', function(d) { return d.id; });
 
-        context.enter(iD.modes.Browse(context));
+        context.enter(iD.modeBrowse(context));
 
-        behavior = iD.behavior.Select(context);
+        behavior = iD.behaviorSelect(context);
         context.install(behavior);
     });
 
@@ -37,31 +37,31 @@ describe('iD.behavior.Select', function() {
     });
 
     specify('click on empty space clears the selection', function() {
-        context.enter(iD.modes.Select(context, [a.id]));
+        context.enter(iD.modeSelect(context, [a.id]));
         happen.click(context.surface().node());
         expect(context.mode().id).to.eql('browse');
     });
 
     specify('shift-click on unselected entity adds it to the selection', function() {
-        context.enter(iD.modes.Select(context, [a.id]));
+        context.enter(iD.modeSelect(context, [a.id]));
         happen.click(context.surface().selectAll('.' + b.id).node(), {shiftKey: true});
         expect(context.selectedIDs()).to.eql([a.id, b.id]);
     });
 
     specify('shift-click on selected entity removes it from the selection', function() {
-        context.enter(iD.modes.Select(context, [a.id, b.id]));
+        context.enter(iD.modeSelect(context, [a.id, b.id]));
         happen.click(context.surface().selectAll('.' + b.id).node(), {shiftKey: true});
         expect(context.selectedIDs()).to.eql([a.id]);
     });
 
     specify('shift-click on last selected entity clears the selection', function() {
-        context.enter(iD.modes.Select(context, [a.id]));
+        context.enter(iD.modeSelect(context, [a.id]));
         happen.click(context.surface().selectAll('.' + a.id).node(), {shiftKey: true});
         expect(context.mode().id).to.eql('browse');
     });
 
     specify('shift-click on empty space leaves the selection unchanged', function() {
-        context.enter(iD.modes.Select(context, [a.id]));
+        context.enter(iD.modeSelect(context, [a.id]));
         happen.click(context.surface().node(), {shiftKey: true});
         expect(context.selectedIDs()).to.eql([a.id]);
     });

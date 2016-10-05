@@ -9,6 +9,8 @@ export * from './presets/index';
 export * from './renderer/index';
 export * from './services/index';
 export * from './svg/index';
+export * from './ui/fields/index';
+export * from './ui/intro/index';
 export * from './ui/index';
 export * from './util/index';
 export * from './lib/index';
@@ -35,4 +37,6 @@ export { utilDetect as Detect } from './util/detect';
 export var debug = false;
 
 import * as d3 from 'd3';
-export { d3 };
+import * as lib from './lib/index';
+
+export { d3, lib };

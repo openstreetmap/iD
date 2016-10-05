@@ -1,4 +1,4 @@
-describe('iD.svg.Areas', function () {
+describe('iD.svgAreas', function () {
     var context, surface,
         projection = d3.geoProjection(function(x, y) { return [x, -y]; })
             .translate([0, 0])
@@ -30,7 +30,7 @@ describe('iD.svg.Areas', function () {
                 iD.Way({id: 'w', tags: {building: 'yes'}, nodes: ['a', 'b', 'c', 'a']})
             ]);
 
-        surface.call(iD.svg.Areas(projection, context), graph, [graph.entity('w')], none);
+        surface.call(iD.svgAreas(projection, context), graph, [graph.entity('w')], none);
 
         expect(surface.select('path.way')).to.be.classed('way');
         expect(surface.select('path.area')).to.be.classed('area');
@@ -45,7 +45,7 @@ describe('iD.svg.Areas', function () {
                 iD.Way({id: 'w', tags: {building: 'yes'}, nodes: ['a', 'b', 'c', 'a']})
             ]);
 
-        surface.call(iD.svg.Areas(projection, context), graph, [graph.entity('w')], none);
+        surface.call(iD.svgAreas(projection, context), graph, [graph.entity('w')], none);
 
         expect(surface.select('.area')).to.be.classed('tag-building');
         expect(surface.select('.area')).to.be.classed('tag-building-yes');
@@ -61,10 +61,10 @@ describe('iD.svg.Areas', function () {
                 iD.Way({id: 'x', tags: {area: 'yes'}, nodes: ['a', 'b', 'd', 'a']})
             ]);
 
-        surface.call(iD.svg.Areas(projection, context), graph, [graph.entity('x')], all);
+        surface.call(iD.svgAreas(projection, context), graph, [graph.entity('x')], all);
         graph = graph.remove(graph.entity('x')).remove(graph.entity('d'));
 
-        surface.call(iD.svg.Areas(projection, context), graph, [graph.entity('w')], all);
+        surface.call(iD.svgAreas(projection, context), graph, [graph.entity('w')], all);
         expect(surface.select('.area').size()).to.equal(1);
     });
 
@@ -83,30 +83,30 @@ describe('iD.svg.Areas', function () {
             ]);
 
         it('stacks smaller areas above larger ones in a single render', function () {
-            surface.call(iD.svg.Areas(projection, context), graph, [graph.entity('s'), graph.entity('l')], none);
+            surface.call(iD.svgAreas(projection, context), graph, [graph.entity('s'), graph.entity('l')], none);
 
             expect(surface.select('.area:nth-child(1)')).to.be.classed('tag-landuse-park');
             expect(surface.select('.area:nth-child(2)')).to.be.classed('tag-building-yes');
         });
 
         it('stacks smaller areas above larger ones in a single render (reverse)', function () {
-            surface.call(iD.svg.Areas(projection, context), graph, [graph.entity('l'), graph.entity('s')], none);
+            surface.call(iD.svgAreas(projection, context), graph, [graph.entity('l'), graph.entity('s')], none);
 
             expect(surface.select('.area:nth-child(1)')).to.be.classed('tag-landuse-park');
             expect(surface.select('.area:nth-child(2)')).to.be.classed('tag-building-yes');
         });
 
         it('stacks smaller areas above larger ones in separate renders', function () {
-            surface.call(iD.svg.Areas(projection, context), graph, [graph.entity('s')], none);
-            surface.call(iD.svg.Areas(projection, context), graph, [graph.entity('l')], none);
+            surface.call(iD.svgAreas(projection, context), graph, [graph.entity('s')], none);
+            surface.call(iD.svgAreas(projection, context), graph, [graph.entity('l')], none);
 
             expect(surface.select('.area:nth-child(1)')).to.be.classed('tag-landuse-park');
             expect(surface.select('.area:nth-child(2)')).to.be.classed('tag-building-yes');
         });
 
         it('stacks smaller areas above larger ones in separate renders (reverse)', function () {
-            surface.call(iD.svg.Areas(projection, context), graph, [graph.entity('l')], none);
-            surface.call(iD.svg.Areas(projection, context), graph, [graph.entity('s')], none);
+            surface.call(iD.svgAreas(projection, context), graph, [graph.entity('l')], none);
+            surface.call(iD.svgAreas(projection, context), graph, [graph.entity('s')], none);
 
             expect(surface.select('.area:nth-child(1)')).to.be.classed('tag-landuse-park');
             expect(surface.select('.area:nth-child(2)')).to.be.classed('tag-building-yes');
@@ -122,7 +122,7 @@ describe('iD.svg.Areas', function () {
             graph = iD.Graph([a, b, c, w, r]),
             areas = [w, r];
 
-        surface.call(iD.svg.Areas(projection, context), graph, areas, none);
+        surface.call(iD.svgAreas(projection, context), graph, areas, none);
 
         expect(surface.select('.fill')).to.be.classed('relation');
     });
@@ -136,7 +136,7 @@ describe('iD.svg.Areas', function () {
             graph = iD.Graph([a, b, c, w, r]),
             areas = [w, r];
 
-        surface.call(iD.svg.Areas(projection, context), graph, areas, none);
+        surface.call(iD.svgAreas(projection, context), graph, areas, none);
 
         expect(surface.selectAll('.stroke').size()).to.equal(0);
     });
@@ -149,7 +149,7 @@ describe('iD.svg.Areas', function () {
             r = iD.Relation({members: [{id: w.id, type: 'way'}], tags: {type: 'multipolygon'}}),
             graph = iD.Graph([a, b, c, w, r]);
 
-        surface.call(iD.svg.Areas(projection, context), graph, [w, r], none);
+        surface.call(iD.svgAreas(projection, context), graph, [w, r], none);
 
         expect(surface.selectAll('.way.fill').size()).to.equal(0);
         expect(surface.selectAll('.relation.fill').size()).to.equal(1);
@@ -164,7 +164,7 @@ describe('iD.svg.Areas', function () {
             r = iD.Relation({members: [{id: w.id, type: 'way'}], tags: {type: 'multipolygon'}}),
             graph = iD.Graph([a, b, c, w, r]);
 
-        surface.call(iD.svg.Areas(projection, context), graph, [w, r], none);
+        surface.call(iD.svgAreas(projection, context), graph, [w, r], none);
 
         expect(surface.selectAll('.stroke').size()).to.equal(0);
     });

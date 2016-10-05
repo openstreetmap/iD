@@ -1,4 +1,4 @@
-describe('iD.presets.presets', function() {
+describe('iD.presetInit', function() {
     var p = {
         point: {
             tags: {},
@@ -22,7 +22,7 @@ describe('iD.presets.presets', function() {
         }
     };
 
-    var c = iD.presets.presets().load({presets: p});
+    var c = iD.presetInit().load({presets: p});
 
     describe('#match', function() {
         it('returns a collection containing presets matching a geometry and tags', function() {
@@ -59,7 +59,7 @@ describe('iD.presets.presets', function() {
     });
 
     describe('#areaKeys', function() {
-        var presets = iD.presets.presets().load({
+        var presets = iD.presetInit().load({
             presets: {
                 'amenity/fuel/shell': {
                     tags: { 'amenity': 'fuel' },
@@ -128,7 +128,7 @@ describe('iD.presets.presets', function() {
         var presets;
 
         before(function() {
-            presets = iD.presets.presets().load(iD.data.presets);
+            presets = iD.presetInit().load(iD.dataPresets);
         });
 
         it('prefers building to multipolygon', function() {

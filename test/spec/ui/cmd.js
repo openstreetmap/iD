@@ -1,4 +1,4 @@
-describe('iD.ui.cmd', function () {
+describe('iD.uiCmd', function () {
     var orig,
         ua = navigator.userAgent,
         isPhantom = (navigator.userAgent.match(/PhantomJS/) !== null),
@@ -28,29 +28,29 @@ describe('iD.ui.cmd', function () {
 
     it('does not overwrite mac keybindings', function () {
         ua = 'Mac';
-        expect(iD.ui.cmd('⌘A')).to.eql('⌘A');
+        expect(iD.uiCmd('⌘A')).to.eql('⌘A');
     });
 
     it('changes keys to linux versions', function () {
         ua = 'Linux';
-        expect(iD.ui.cmd('⌘A')).to.eql('Ctrl+A');
-        expect(iD.ui.cmd('⇧A')).to.eql('Shift+A');
-        expect(iD.ui.cmd('⌘⇧A')).to.eql('Ctrl+Shift+A');
-        expect(iD.ui.cmd('⌘⇧Z')).to.eql('Ctrl+Shift+Z');
+        expect(iD.uiCmd('⌘A')).to.eql('Ctrl+A');
+        expect(iD.uiCmd('⇧A')).to.eql('Shift+A');
+        expect(iD.uiCmd('⌘⇧A')).to.eql('Ctrl+Shift+A');
+        expect(iD.uiCmd('⌘⇧Z')).to.eql('Ctrl+Shift+Z');
     });
 
     it('changes keys to win versions', function () {
         ua = 'Win';
-        expect(iD.ui.cmd('⌘A')).to.eql('Ctrl+A');
-        expect(iD.ui.cmd('⇧A')).to.eql('Shift+A');
-        expect(iD.ui.cmd('⌘⇧A')).to.eql('Ctrl+Shift+A');
-        expect(iD.ui.cmd('⌘⇧Z')).to.eql('Ctrl+Y');  // special case
+        expect(iD.uiCmd('⌘A')).to.eql('Ctrl+A');
+        expect(iD.uiCmd('⇧A')).to.eql('Shift+A');
+        expect(iD.uiCmd('⌘⇧A')).to.eql('Ctrl+Shift+A');
+        expect(iD.uiCmd('⌘⇧Z')).to.eql('Ctrl+Y');  // special case
     });
 
     it('handles multi-character keys', function () {
         ua = 'Win';
-        expect(iD.ui.cmd('f11')).to.eql('f11');
-        expect(iD.ui.cmd('⌘plus')).to.eql('Ctrl+plus');
+        expect(iD.uiCmd('f11')).to.eql('f11');
+        expect(iD.uiCmd('⌘plus')).to.eql('Ctrl+plus');
     });
 
 });

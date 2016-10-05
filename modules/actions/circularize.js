@@ -135,7 +135,7 @@ export function actionCircularize(wayId, projection, maxAngle) {
                             insertAt = startIndex2;
                         }
                         for (j = 0; j < inBetweenNodes.length; j++) {
-                            sharedWay = sharedWay.addcoreNode(inBetweenNodes[j], insertAt + j);
+                            sharedWay = sharedWay.addNode(inBetweenNodes[j], insertAt + j);
                         }
                         graph = graph.replace(sharedWay);
                     }

@@ -1,10 +1,10 @@
-describe('iD.actions.Revert', function() {
+describe('iD.actionRevert', function() {
     describe('basic', function () {
         it('removes a new entity', function() {
             var n1 = iD.Node({id: 'n-1'}),
                 graph = iD.Graph().replace(n1);
 
-            graph = iD.actions.Revert('n-1')(graph);
+            graph = iD.actionRevert('n-1')(graph);
             expect(graph.hasEntity('n-1')).to.be.undefined;
         });
 
@@ -13,7 +13,7 @@ describe('iD.actions.Revert', function() {
                 n1up = n1.update({}),
                 graph = iD.Graph([n1]).replace(n1up);
 
-            graph = iD.actions.Revert('n1')(graph);
+            graph = iD.actionRevert('n1')(graph);
             expect(graph.hasEntity('n1')).to.equal(n1);
         });
 
@@ -21,7 +21,7 @@ describe('iD.actions.Revert', function() {
             var n1 = iD.Node({id: 'n1'}),
                 graph = iD.Graph([n1]).remove(n1);
 
-            graph = iD.actions.Revert('n1')(graph);
+            graph = iD.actionRevert('n1')(graph);
             expect(graph.hasEntity('n1')).to.equal(n1);
         });
     });
@@ -36,7 +36,7 @@ describe('iD.actions.Revert', function() {
                 w1up = w1.addNode('n-3', 2),
                 graph = iD.Graph([n1, n2, w1]).replace(n3).replace(w1up);
 
-            graph = iD.actions.Revert('n-3')(graph);
+            graph = iD.actionRevert('n-3')(graph);
 
             var w1_1 = graph.hasEntity('w1');
             expect(graph.hasEntity('n1'), 'n1 unchanged').to.equal(n1);
@@ -54,7 +54,7 @@ describe('iD.actions.Revert', function() {
                 n1up = n1.update({}),
                 graph = iD.Graph([n1, n2, w1]).replace(n1up);
 
-            graph = iD.actions.Revert('n1')(graph);
+            graph = iD.actionRevert('n1')(graph);
 
             var w1_1 = graph.hasEntity('w1');
             expect(graph.hasEntity('n1'), 'n1 reverted').to.equal(n1);
@@ -73,7 +73,7 @@ describe('iD.actions.Revert', function() {
                 r1up = r1.addMember({id: 'n-2'}, 1),
                 graph = iD.Graph([n1, r1]).replace(n2).replace(r1up);
 
-            graph = iD.actions.Revert('n-2')(graph);
+            graph = iD.actionRevert('n-2')(graph);
 
             var r1_1 = graph.hasEntity('r1');
             expect(graph.hasEntity('n1'), 'n1 unchanged').to.equal(n1);
@@ -89,7 +89,7 @@ describe('iD.actions.Revert', function() {
                 n1up = n1.update({}),
                 graph = iD.Graph([n1, n2, r1]).replace(n1up);
 
-            graph = iD.actions.Revert('n1')(graph);
+            graph = iD.actionRevert('n1')(graph);
 
             var r1_1 = graph.hasEntity('r1');
             expect(graph.hasEntity('n1'), 'n1 reverted').to.equal(n1);
@@ -107,7 +107,7 @@ describe('iD.actions.Revert', function() {
                 w1 = iD.Way({id: 'w-1', nodes: ['n1', 'n-2']}),
                 graph = iD.Graph([n1]).replace(n2).replace(w1);
 
-            graph = iD.actions.Revert('w-1')(graph);
+            graph = iD.actionRevert('w-1')(graph);
             expect(graph.hasEntity('w-1'), 'w-1 removed').to.be.undefined;
             expect(graph.hasEntity('n1'), 'n1 unchanged').to.equal(n1);
             expect(graph.hasEntity('n-2'), 'n-2 unchanged').to.equal(n2);
@@ -122,7 +122,7 @@ describe('iD.actions.Revert', function() {
                 w1up = w1.addNode('n-2', 1),
                 graph = iD.Graph([n1, w1]).replace(n2).replace(w1up);
 
-            graph = iD.actions.Revert('w1')(graph);
+            graph = iD.actionRevert('w1')(graph);
             expect(graph.hasEntity('w1'), 'w1 reverted').to.equal(w1);
             expect(graph.hasEntity('n1'), 'n1 unchanged').to.equal(n1);
             expect(graph.hasEntity('n-2'), 'n-2 unchanged').to.equal(n2);
@@ -137,7 +137,7 @@ describe('iD.actions.Revert', function() {
                 w1up = w1.addNode('n-2', 1),
                 graph = iD.Graph([n1, w1]).replace(n2).replace(w1up).remove(w1up);
 
-            graph = iD.actions.Revert('w1')(graph);
+            graph = iD.actionRevert('w1')(graph);
             expect(graph.hasEntity('w1'), 'w1 reverted').to.equal(w1);
             expect(graph.hasEntity('n1'), 'n1 unchanged').to.equal(n1);
             expect(graph.hasEntity('n-2'), 'n-2 unchanged').to.equal(n2);
@@ -153,7 +153,7 @@ describe('iD.actions.Revert', function() {
                 r1 = iD.Relation({id: 'r-1', members: [{id: 'n1'}, {id: 'n-2'}]}),
                 graph = iD.Graph([n1]).replace(n2).replace(r1);
 
-            graph = iD.actions.Revert('r-1')(graph);
+            graph = iD.actionRevert('r-1')(graph);
             expect(graph.hasEntity('r-1'), 'r-1 removed').to.be.undefined;
             expect(graph.hasEntity('n1'), 'n1 unchanged').to.equal(n1);
             expect(graph.hasEntity('n-2'), 'n-2 unchanged').to.equal(n2);
@@ -168,7 +168,7 @@ describe('iD.actions.Revert', function() {
                 r1up = r1.addMember({id: 'n-2'}, 1),
                 graph = iD.Graph([n1, r1]).replace(n2).replace(r1up);
 
-            graph = iD.actions.Revert('r1')(graph);
+            graph = iD.actionRevert('r1')(graph);
             expect(graph.hasEntity('r1'), 'r1 reverted').to.equal(r1);
             expect(graph.hasEntity('n1'), 'n1 unchanged').to.equal(n1);
             expect(graph.hasEntity('n-2'), 'n-2 unchanged').to.equal(n2);
@@ -183,7 +183,7 @@ describe('iD.actions.Revert', function() {
                 r1up = r1.addMember({id: 'n-2'}, 1),
                 graph = iD.Graph([n1, r1]).replace(n2).replace(r1up).remove(r1up);
 
-            graph = iD.actions.Revert('r1')(graph);
+            graph = iD.actionRevert('r1')(graph);
             expect(graph.hasEntity('r1'), 'r1 reverted').to.equal(r1);
             expect(graph.hasEntity('n1'), 'n1 unchanged').to.equal(n1);
             expect(graph.hasEntity('n-2'), 'n-2 unchanged').to.equal(n2);
