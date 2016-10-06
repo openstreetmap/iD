@@ -26,7 +26,7 @@ export function uiFieldCombo(field, context) {
         container,
         input,
         entity,
-        countryCode;
+        country;
 
     // ensure multiCombo field.key ends with a ':'
     if (isMulti && field.key.match(/:$/) === null) {
@@ -147,9 +147,9 @@ export function uiFieldCombo(field, context) {
     function setTaginfoValues(q, callback) {
         var fn = isMulti ? 'multikeys' : 'values';
         var query = (isMulti ? field.key : '') + q;
-        var hasCountryPrefix = isNetwork && countryCode && countryCode.indexOf(q.toLowerCase()) === 0;
+        var hasCountryPrefix = isNetwork && country && country.indexOf(q.toLowerCase()) === 0;
         if (hasCountryPrefix) {
-            query = countryCode + ':';
+            query = country + ':';
         }
         context.taginfo()[fn]({
             debounce: true,
@@ -160,7 +160,7 @@ export function uiFieldCombo(field, context) {
             if (err) return;
             if (hasCountryPrefix) {
                 data = _.filter(data, function(d) {
-                    return d.value.toLowerCase().indexOf(countryCode + ':') === 0;
+                    return d.value.toLowerCase().indexOf(country + ':') === 0;
                 });
             }
             comboData = _.map(data, function(d) {
@@ -252,7 +252,7 @@ export function uiFieldCombo(field, context) {
             var center = entity.extent(context.graph()).center();
             serviceNominatim.init();
             serviceNominatim.countryCode(center, function (err, code) {
-                countryCode = code;
+                country = code;
             });
         }
 
