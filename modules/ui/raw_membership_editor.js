@@ -47,7 +47,6 @@ export function uiRawMembershipEditor(context) {
 
         } else {
             var relation = coreRelation();
-
             context.perform(
                 actionAddEntity(relation),
                 actionAddMember(relation.id, { id: id, type: context.entity(id).type, role: role }),
@@ -120,7 +119,7 @@ export function uiRawMembershipEditor(context) {
         context.graph().parentRelations(entity).forEach(function(relation) {
             relation.members.forEach(function(member, index) {
                 if (member.id === entity.id) {
-                    memberships.push({relation: relation, member: member, index: index});
+                    memberships.push({ relation: relation, member: member, index: index });
                 }
             });
         });
@@ -203,59 +202,68 @@ export function uiRawMembershipEditor(context) {
             }
 
 
-            if (showBlank) {
-                var newrow = list.selectAll('.member-row-new')
-                    .data([0]);
+            var newrow = list.selectAll('.member-row-new')
+                .data(showBlank ? [0] : []);
 
-                enter = newrow.enter()
-                    .append('li')
-                    .attr('class', 'member-row member-row-new form-field');
+            newrow.exit()
+                .remove();
 
-                enter
-                    .append('input')
-                    .attr('type', 'text')
-                    .attr('class', 'member-entity-input')
-                    .call(d3combobox()
-                        .minItems(1)
-                        .fetcher(function(value, callback) { callback(relations(value)); })
-                        .on('accept', function(d) {
-                            addMembership(d, list.selectAll('.member-row-new .member-role').property('value'));
-                        })
-                    );
+            enter = newrow.enter()
+                .append('li')
+                .attr('class', 'member-row member-row-new form-field');
 
-                enter
-                    .append('input')
-                    .attr('class', 'member-role')
-                    .property('type', 'text')
-                    .attr('maxlength', 255)
-                    .attr('placeholder', t('inspector.role'))
-                    .on('change', changeRole);
+            enter
+                .append('input')
+                .attr('type', 'text')
+                .attr('class', 'member-entity-input');
 
-                enter
-                    .append('button')
-                    .attr('tabindex', -1)
-                    .attr('class', 'remove button-input-action member-delete minor')
-                    .on('click', deleteMembership)
-                    .call(svgIcon('#operation-delete'));
+            enter
+                .append('input')
+                .attr('class', 'member-role')
+                .property('type', 'text')
+                .attr('maxlength', 255)
+                .attr('placeholder', t('inspector.role'))
+                .on('change', changeRole);
 
-            } else {
-                list.selectAll('.member-row-new')
-                    .remove();
-            }
+            enter
+                .append('button')
+                .attr('tabindex', -1)
+                .attr('class', 'remove button-input-action member-delete minor')
+                .on('click', deleteMembership)
+                .call(svgIcon('#operation-delete'));
+
+            newrow = newrow
+                .merge(enter);
+
+            newrow.selectAll('.member-entity-input')
+                .call(d3combobox()
+                    .minItems(1)
+                    .fetcher(function(value, callback) { callback(relations(value)); })
+                    .on('accept', onAccept)
+                );
 
 
             var addrel = wrap.selectAll('.add-relation')
                 .data([0]);
 
-            addrel.enter()
+            addrel = addrel.enter()
                 .append('button')
                 .attr('class', 'add-relation')
+                .merge(addrel);
+
+            addrel
+                .call(svgIcon('#icon-plus', 'light'))
                 .on('click', function() {
                     showBlank = true;
                     content(wrap);
                     list.selectAll('.member-entity-input').node().focus();
-                })
-                .call(svgIcon('#icon-plus', 'light'));
+                });
+
+
+            function onAccept(d) {
+                var role = list.selectAll('.member-row-new .member-role').property('value');
+                addMembership(d, role);
+            }
 
 
             function bindTypeahead(d) {
@@ -288,6 +296,7 @@ export function uiRawMembershipEditor(context) {
                         });
                     }));
             }
+
 
             function unbind() {
                 var row = d3.select(this);

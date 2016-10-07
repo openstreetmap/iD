@@ -94,28 +94,29 @@ export function uiRawMemberEditor(context) {
                 .attr('class', 'member-row form-field')
                 .classed('member-incomplete', function(d) { return !d.member; });
 
-            enter.each(function(d) {
-                if (d.member) {
-                    var label = d3.select(this).append('label')
-                        .attr('class', 'form-label')
-                        .append('a')
-                        .attr('href', '#')
-                        .on('click', selectMember);
+            enter
+                .each(function(d) {
+                    if (d.member) {
+                        var label = d3.select(this).append('label')
+                            .attr('class', 'form-label')
+                            .append('a')
+                            .attr('href', '#')
+                            .on('click', selectMember);
 
-                    label.append('span')
-                        .attr('class', 'member-entity-type')
-                        .text(function(d) { return context.presets().match(d.member, context.graph()).name(); });
+                        label.append('span')
+                            .attr('class', 'member-entity-type')
+                            .text(function(d) { return context.presets().match(d.member, context.graph()).name(); });
 
-                    label.append('span')
-                        .attr('class', 'member-entity-name')
-                        .text(function(d) { return utilDisplayName(d.member); });
+                        label.append('span')
+                            .attr('class', 'member-entity-name')
+                            .text(function(d) { return utilDisplayName(d.member); });
 
-                } else {
-                    d3.select(this).append('label')
-                        .attr('class', 'form-label')
-                        .text(t('inspector.incomplete'));
-                }
-            });
+                    } else {
+                        d3.select(this).append('label')
+                            .attr('class', 'form-label')
+                            .text(t('inspector.incomplete'));
+                    }
+                });
 
             enter
                 .append('input')
