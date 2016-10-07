@@ -5,10 +5,10 @@
     "members": [
         "golf/fairway",
         "golf/green",
-        "golf/lateral_water_hazard",
+        "golf/lateral_water_hazard_area",
         "golf/rough",
         "golf/bunker",
         "golf/tee",
-        "golf/water_hazard"
+        "golf/water_hazard_area"
     ]
 }

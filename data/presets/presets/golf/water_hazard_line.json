@@ -1,12 +1,10 @@
 {
     "icon": "golf",
     "geometry": [
-        "line",
-        "area"
+        "line"
     ],
     "tags": {
-        "golf": "water_hazard",
-        "natural": "water"
+        "golf": "water_hazard"
     },
     "name": "Water Hazard"
 }

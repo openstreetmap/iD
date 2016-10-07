@@ -4422,15 +4422,24 @@
         },
         "name": "Golf Hole"
     },
-    "golf/lateral_water_hazard": {
+    "golf/lateral_water_hazard_area": {
         "icon": "golf",
         "geometry": [
-            "line",
             "area"
         ],
         "tags": {
             "golf": "lateral_water_hazard",
             "natural": "water"
+        },
+        "name": "Lateral Water Hazard"
+    },
+    "golf/lateral_water_hazard_line": {
+        "icon": "golf",
+        "geometry": [
+            "line"
+        ],
+        "tags": {
+            "golf": "lateral_water_hazard"
         },
         "name": "Lateral Water Hazard"
     },
@@ -4459,15 +4468,24 @@
         ],
         "name": "Tee Box"
     },
-    "golf/water_hazard": {
+    "golf/water_hazard_area": {
         "icon": "golf",
         "geometry": [
-            "line",
             "area"
         ],
         "tags": {
             "golf": "water_hazard",
             "natural": "water"
+        },
+        "name": "Water Hazard"
+    },
+    "golf/water_hazard_line": {
+        "icon": "golf",
+        "geometry": [
+            "line"
+        ],
+        "tags": {
+            "golf": "water_hazard"
         },
         "name": "Water Hazard"
     },
