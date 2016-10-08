@@ -4,7 +4,7 @@ import { utilQsString, utilStringQs } from '../util/index';
 
 
 export function behaviorHash(context) {
-    var s0 = null, // cached location.hash
+    var s0 = null, // cached window.location.hash
         lat = 90 - 1e-8; // allowable latitude range
 
 
@@ -25,7 +25,7 @@ export function behaviorHash(context) {
             center = map.center(),
             zoom = map.zoom(),
             precision = Math.max(0, Math.ceil(Math.log(zoom) / Math.LN2)),
-            q = _.omit(utilStringQs(location.hash.substring(1)), 'comment'),
+            q = _.omit(utilStringQs(window.location.hash.substring(1)), 'comment'),
             newParams = {};
 
         if (mode && mode.id === 'browse') {
@@ -50,7 +50,9 @@ export function behaviorHash(context) {
     function update() {
         if (context.inIntro()) return;
         var s1 = formatter(context.map());
-        if (s0 !== s1) location.replace(s0 = s1); // don't recenter the map!
+        if (s0 !== s1) {
+            window.location.replace(s0 = s1);  // don't recenter the map!
+        }
     }
 
 
@@ -58,8 +60,8 @@ export function behaviorHash(context) {
 
 
     function hashchange() {
-        if (location.hash === s0) return; // ignore spurious hashchange events
-        if (parser(context.map(), (s0 = location.hash).substring(1))) {
+        if (window.location.hash === s0) return;  // ignore spurious hashchange events
+        if (parser(context.map(), (s0 = window.location.hash).substring(1))) {
             update(); // replace bogus hash
         }
     }
@@ -75,8 +77,8 @@ export function behaviorHash(context) {
         d3.select(window)
             .on('hashchange.hash', hashchange);
 
-        if (location.hash) {
-            var q = utilStringQs(location.hash.substring(1));
+        if (window.location.hash) {
+            var q = utilStringQs(window.location.hash.substring(1));
             if (q.id) context.zoomToEntity(q.id.split(',')[0], !q.map);
             if (q.comment) context.storage('comment', q.comment);
             hashchange();
@@ -97,7 +99,7 @@ export function behaviorHash(context) {
         d3.select(window)
             .on('hashchange.hash', null);
 
-        location.hash = '';
+        window.location.hash = '';
     };
 
 

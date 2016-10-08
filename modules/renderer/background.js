@@ -52,7 +52,7 @@ export function rendererBackground(context) {
             epsilon = 0.01,
             x = +meters[0].toFixed(2),
             y = +meters[1].toFixed(2),
-            q = utilStringQs(location.hash.substring(1));
+            q = utilStringQs(window.location.hash.substring(1));
 
         var id = b.id;
         if (id === 'custom') {
@@ -77,7 +77,7 @@ export function rendererBackground(context) {
             delete q.offset;
         }
 
-        location.replace('#' + utilQsString(q, true));
+        window.location.replace('#' + utilQsString(q, true));
 
         var imageryUsed = [b.imageryUsed()];
 
@@ -199,7 +199,7 @@ export function rendererBackground(context) {
             return geoExtent([args[1], args[2]]);
         }
 
-        var q = utilStringQs(location.hash.substring(1)),
+        var q = utilStringQs(window.location.hash.substring(1)),
             chosen = q.background || q.layer,
             extent = parseMap(q.map),
             best;
