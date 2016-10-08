@@ -3501,7 +3501,8 @@ img.tile-removing {
 }
 
 /* tags form */
-[dir='rtl'] .tag-row .key-wrap, [dir='rtl'] .tag-row .input-wrap-position {
+[dir='rtl'] .tag-row .key-wrap,
+[dir='rtl'] .tag-row .input-wrap-position {
   float: right;
 }
 
@@ -3544,11 +3545,13 @@ img.tile-removing {
   right: auto;
 }
 
-[dir='rtl'] .background-control button, [dir='rtl'] .zoombuttons button.zoom-in {
+[dir='rtl'] .background-control button,
+[dir='rtl'] .zoombuttons button.zoom-in {
   border-radius: 0 4px 0 0;
 }
 
-[dir='rtl'] .help-control button, [dir='rtl'] .geolocate-control button {
+[dir='rtl'] .help-control button,
+[dir='rtl'] .geolocate-control button {
   border-radius: 0 0 4px 0;
 }
 
@@ -3586,7 +3589,9 @@ img.tile-removing {
 }
 
 /* navbar */
-[dir='rtl'] #bar .spacer, [dir='rtl'] #bar .button-wrap, [dir='rtl'] #bar .button-wrap button {
+[dir='rtl'] #bar .spacer,
+[dir='rtl'] #bar .button-wrap,
+[dir='rtl'] #bar .button-wrap button {
   float: right;
 }
 
