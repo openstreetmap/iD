@@ -1,4 +1,4 @@
-import { t } from '../util/locale';
+import { t, textDirection } from '../util/locale';
 import { tooltip } from '../util/tooltip';
 import { modeBrowse } from '../modes/index';
 import { geoExtent } from '../geo/index';
@@ -54,6 +54,7 @@ export function uiGeolocate(context) {
             .attr('title', t('geolocate.title'))
             .on('click', click)
             .call(svgIcon('#icon-geolocate', 'light'))
-            .call(tooltip().placement('left'));
+            .call(tooltip()
+                .placement((textDirection === 'rtl') ? 'right' : 'left'));
     };
 }

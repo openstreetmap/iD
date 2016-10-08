@@ -1,7 +1,7 @@
 import * as d3 from 'd3';
 import marked from 'marked';
 import { d3keybinding } from '../lib/d3.keybinding.js';
-import { t } from '../util/locale';
+import { t, textDirection } from '../util/locale';
 import { svgIcon } from '../svg/index';
 import { uiIntro } from './intro/index';
 import { uiTooltipHtml } from './tooltipHtml';
@@ -113,7 +113,7 @@ export function uiHelp(context) {
         var pane = selection.append('div')
                 .attr('class', 'help-wrap map-overlay fillL col5 content hide'),
             tooltipBehavior = tooltip()
-                .placement('left')
+                .placement((textDirection === 'rtl') ? 'right' : 'left')
                 .html(true)
                 .title(uiTooltipHtml(t('help.title'), key)),
             button = selection.append('button')

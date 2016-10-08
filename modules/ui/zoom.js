@@ -1,7 +1,7 @@
 import * as d3 from 'd3';
 import _ from 'lodash';
 import { d3keybinding } from '../lib/d3.keybinding.js';
-import { t } from '../util/locale';
+import { t, textDirection } from '../util/locale';
 import { svgIcon } from '../svg/index';
 import { uiCmd } from './cmd';
 import { uiTooltipHtml } from './tooltipHtml';
@@ -57,7 +57,7 @@ export function uiZoom(context) {
             .attr('class', function(d) { return d.id; })
             .on('click.editor', function(d) { d.action(); })
             .call(tooltip()
-                .placement('left')
+                .placement((textDirection === 'rtl') ? 'right' : 'left')
                 .html(true)
                 .title(function(d) {
                     return uiTooltipHtml(d.title, d.key);

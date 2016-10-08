@@ -1,6 +1,7 @@
 var translations = Object.create(null);
 
 export var currentLocale = 'en';
+export var textDirection = 'ltr';
 
 export function setLocale(_) {
     if (translations[_] !== undefined) {
@@ -46,4 +47,14 @@ export function t(s, o, loc) {
     if (typeof console !== 'undefined') console.error(missing); // eslint-disable-line
 
     return missing;
+}
+
+/**
+ * Given string 'ltr' or 'rtl', save that setting
+ *
+ * @param {string} s ltr or rtl
+ */
+
+export function setTextDirection(dir) {
+    textDirection = dir;
 }

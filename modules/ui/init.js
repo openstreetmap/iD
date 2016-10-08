@@ -1,6 +1,6 @@
 import * as d3 from 'd3';
 import { d3keybinding } from '../lib/d3.keybinding.js';
-import { t } from '../util/locale';
+import { t, textDirection } from '../util/locale';
 import { tooltip } from '../util/tooltip';
 import { utilDetect } from '../util/detect';
 import { utilSetDimensions } from '../util/dimensions';
@@ -73,7 +73,12 @@ export function uiInit(context) {
         content
             .append('div')
             .attr('id', 'map')
+            .attr('dir', 'ltr')
             .call(map);
+
+        if (textDirection === 'rtl') {
+            d3.select('body').attr('dir', 'rtl');
+        }
 
         content
             .call(uiMapInMap(context));
@@ -150,6 +155,7 @@ export function uiInit(context) {
         about
             .append('div')
             .attr('id', 'attrib')
+            .attr('dir', 'ltr')
             .call(uiAttribution(context));
 
         var footer = about

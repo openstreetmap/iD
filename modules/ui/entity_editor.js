@@ -1,6 +1,6 @@
 import * as d3 from 'd3';
 import _ from 'lodash';
-import { t } from '../util/locale';
+import { t, textDirection } from '../util/locale';
 import { tooltip } from '../util/tooltip';
 import { actionChangeTags } from '../actions/index';
 import { modeBrowse } from '../modes/index';
@@ -46,7 +46,7 @@ export function uiEntityEditor(context) {
             .attr('class', 'fl preset-reset preset-choose')
             .on('click', function() { dispatch.call('choose', this, activePreset); })
             .append('span')
-            .html('&#9668;');
+            .html((textDirection === 'rtl') ? '&#9658;' : '&#9668;');
 
         enter
             .append('button')

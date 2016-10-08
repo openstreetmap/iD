@@ -1,7 +1,7 @@
 import * as d3 from 'd3';
 import { utilRebind } from '../util/rebind';
 import { d3keybinding } from '../lib/d3.keybinding.js';
-import { t } from '../util/locale';
+import { t, textDirection } from '../util/locale';
 import { actionChangePreset } from '../actions/index';
 import { operationDelete } from '../operations/index';
 import { modeBrowse } from '../modes/index';
@@ -44,7 +44,7 @@ export function uiPresetList(context) {
                 .attr('class', 'preset-choose')
                 .on('click', function() { dispatch.call('choose', this, currentPreset); })
                 .append('span')
-                .html('&#9658;');
+                .html((textDirection === 'rtl') ? '&#9668;' : '&#9658;');
         } else {
             messagewrap
                 .append('button')

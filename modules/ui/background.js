@@ -1,7 +1,7 @@
 import * as d3 from 'd3';
 import _ from 'lodash';
 import { d3keybinding } from '../lib/d3.keybinding.js';
-import { t } from '../util/locale';
+import { t, textDirection } from '../util/locale';
 import { rendererBackgroundSource } from '../renderer/index';
 import { geoMetersToOffset, geoOffsetToMeters } from '../geo/index';
 import { utilDetect } from '../util/detect';
@@ -150,7 +150,7 @@ export function uiBackground(context) {
                 .attr('class', 'best')
                 .call(tooltip()
                     .title(t('background.best_imagery'))
-                    .placement('left'))
+                    .placement((textDirection === 'rtl') ? 'right' : 'left'))
                 .append('span')
                 .html('&#9733;');
 
@@ -337,7 +337,7 @@ export function uiBackground(context) {
         var content = selection.append('div')
                 .attr('class', 'fillL map-overlay col3 content hide'),
             tooltipBehavior = tooltip()
-                .placement('left')
+                .placement((textDirection === 'rtl') ? 'right' : 'left')
                 .html(true)
                 .title(uiTooltipHtml(t('background.description'), key)),
             button = selection.append('button')
@@ -369,7 +369,7 @@ export function uiBackground(context) {
             .on('click.set-opacity', setOpacity)
             .html('<div class="select-box"></div>')
             .call(tooltip()
-                .placement('left'))
+                .placement((textDirection === 'rtl') ? 'right' : 'left'))
             .append('div')
             .attr('class', 'opacity')
             .style('opacity', function(d) { return 1.25 - d; });
@@ -378,7 +378,8 @@ export function uiBackground(context) {
         /* background switcher */
 
         var backgroundList = content.append('ul')
-            .attr('class', 'layer-list');
+            .attr('class', 'layer-list')
+            .attr('dir', 'auto');
 
         var custom = backgroundList.append('li')
             .attr('class', 'custom_layer')
@@ -388,7 +389,7 @@ export function uiBackground(context) {
             .attr('class', 'layer-browse')
             .call(tooltip()
                 .title(t('background.custom_button'))
-                .placement('left'))
+                .placement((textDirection === 'rtl') ? 'right' : 'left'))
             .on('click', editCustom)
             .call(svgIcon('#icon-search'));
 
@@ -497,7 +498,9 @@ export function uiBackground(context) {
             .attr('title', t('background.reset'))
             .attr('class', 'nudge-reset disabled')
             .on('click', resetOffset)
-            .call(svgIcon('#icon-undo'));
+            .call(
+                (textDirection === 'rtl') ? svgIcon('#icon-redo') : svgIcon('#icon-undo')
+            );
 
         context.map()
             .on('move.background-update', _.debounce(update, 1000));
