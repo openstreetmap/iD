@@ -195,6 +195,42 @@ describe('iD.serviceTaginfo', function() {
                 {'value':'US:MD','title':'State highways in the U.S. state of Maryland.'}
             ]);
         });
+
+        it('includes biological genus values with capital letters', function() {
+            var callback = sinon.spy();
+            taginfo.values({key: 'genus', query: 'qu'}, callback);
+
+            server.respondWith('GET', new RegExp('https://taginfo.openstreetmap.org/api/4/key/values'),
+                [200, { 'Content-Type': 'application/json' },
+                    '{"data":[{"value":"Quercus","description":"Oak", "fraction":0.5}]}']);
+            server.respond();
+
+            expect(callback).to.have.been.calledWith(null, [{'value':'Quercus','title':'Oak'}]);
+        });
+
+        it('includes biological taxon values with capital letters', function() {
+            var callback = sinon.spy();
+            taginfo.values({key: 'taxon', query: 'qu'}, callback);
+
+            server.respondWith('GET', new RegExp('https://taginfo.openstreetmap.org/api/4/key/values'),
+                [200, { 'Content-Type': 'application/json' },
+                    '{"data":[{"value":"Quercus robur","description":"Oak", "fraction":0.5}]}']);
+            server.respond();
+
+            expect(callback).to.have.been.calledWith(null, [{'value':'Quercus robur','title':'Oak'}]);
+        });
+
+        it('includes biological species values with capital letters', function() {
+            var callback = sinon.spy();
+            taginfo.values({key: 'species', query: 'qu'}, callback);
+
+            server.respondWith('GET', new RegExp('https://taginfo.openstreetmap.org/api/4/key/values'),
+                [200, { 'Content-Type': 'application/json' },
+                    '{"data":[{"value":"Quercus robur","description":"Oak", "fraction":0.5}]}']);
+            server.respond();
+
+            expect(callback).to.have.been.calledWith(null, [{'value':'Quercus robur','title':'Oak'}]);
+        });
     });
 
     describe('#roles', function() {

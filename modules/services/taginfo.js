@@ -191,7 +191,13 @@ export function init() {
                 page: 1
             }, parameters)), debounce, function(err, d) {
                 if (err) return callback(err);
-                var f = filterValues(parameters.key === 'cycle_network' || parameters.key === 'network');
+                // In most cases we prefer taginfo value results with lowercase letters.
+                // A few OSM keys expect values to contain uppercase values (see #3377).
+                // This is not an exhaustive list (e.g. `name` also has uppercase values)
+                // but these are the fields where taginfo value lookup is most useful.
+                var re = /network|taxon|genus|species/;
+                var allowUpperCase = (parameters.key.match(re) !== null);
+                var f = filterValues(allowUpperCase);
                 callback(null, d.data.filter(f).map(valKeyDescription));
             });
     };
