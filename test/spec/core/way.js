@@ -1472,7 +1472,7 @@ describe('iD.Way', function() {
             });
         });
 
-        describe.only('maxspeed:lanes', function() {
+        describe('maxspeed:lanes', function() {
 
             it('should parse correctly', function() {
                 var maxspeedLanes = iD.Way({
