@@ -762,7 +762,7 @@ describe('iD.Way', function() {
         });
 
         describe('oneway tags', function() {
-            it('correctly returns oneway when tagged as oneway', function() {
+            it('returns correctly oneway when tagged as oneway', function() {
                 expect(iD.Way({tags: { highway: 'residential', oneway: 'yes' }}).lanes().metadata.oneway, 'residential lanes')
                     .to.be.true;
                 expect(iD.Way({tags: { highway: 'residential', oneway: 'no' }}).lanes().metadata.oneway, 'residential lanes')
@@ -771,9 +771,10 @@ describe('iD.Way', function() {
         });
 
         describe('lane direction', function() {
-            it('correctly returns the lane:forward and lane:backward count', function() {
+
+            it('returns correctly the lane:forward and lane:backward count', function() {
                 expect(iD.Way({tags: { highway: 'residential', lanes: 2, 'lanes:forward': 1, 'lanes:backward': 1 }}).lanes().metadata, 'residential lanes')
-                    .to.eql({
+                    .to.include({
                         count: 2,
                         oneway: false,
                         forward: 1,
@@ -781,7 +782,7 @@ describe('iD.Way', function() {
                         bothways: 0
                     });
                 expect(iD.Way({tags: { highway: 'residential', lanes: 4, 'lanes:forward': 3, 'lanes:backward': 1 }}).lanes().metadata, 'residential lanes')
-                    .to.eql({
+                    .to.include({
                         count: 4,
                         oneway: false,
                         forward: 3,
@@ -789,9 +790,10 @@ describe('iD.Way', function() {
                         bothways: 0
                     });
             });
-            it('correctly returns count under total count if erroneous values are supplied', function() {
+
+            it('returns correctly the count if erroneous values are supplied', function() {
                 expect(iD.Way({tags: { highway: 'trunk', lanes: 2, 'lanes:forward': 3 }}).lanes().metadata, 'trunk lanes')
-                    .to.eql({
+                    .to.include({
                         count: 2,
                         oneway: false,
                         forward: 2,
@@ -799,9 +801,10 @@ describe('iD.Way', function() {
                         bothways: 0
                     });
             });
-            it('correctly returns forward count when oneway=yes', function() {
+
+            it('returns correctly forward count when oneway=yes', function() {
                 expect(iD.Way({tags: { highway: 'trunk', lanes: 2, oneway: 'yes' }}).lanes().metadata, 'trunk lanes')
-                    .to.eql({
+                    .to.include({
                         count: 2,
                         oneway: true,
                         forward: 2,
@@ -809,9 +812,10 @@ describe('iD.Way', function() {
                         bothways: 0
                     });
             });
-            it('correctly returns backward count the when oneway=-1', function() {
+
+            it('returns correctly backward count the when oneway=-1', function() {
                 expect(iD.Way({tags: { highway: 'primary', lanes: 4, oneway: '-1' }}).lanes().metadata, 'primary lanes')
-                    .to.eql({
+                    .to.include({
                         count: 4,
                         oneway: true,
                         backward: 4,
@@ -819,9 +823,10 @@ describe('iD.Way', function() {
                         bothways: 0
                     });
             });
+
             it('skips provided lanes:forward value when oneway=yes', function() {
                 expect(iD.Way({tags: { highway: 'trunk', lanes: 2, oneway: 'yes', 'lanes:forward': 1 }}).lanes().metadata, 'trunk lanes')
-                    .to.eql({
+                    .to.include({
                         count: 2,
                         oneway: true,
                         forward: 2,
@@ -829,9 +834,10 @@ describe('iD.Way', function() {
                         bothways: 0
                     });
             });
+
             it('skips provided lanes:backward value when oneway=yes', function() {
                 expect(iD.Way({tags: { highway: 'trunk', lanes: 2, oneway: 'yes', 'lanes:backward': 1 }}).lanes().metadata, 'trunk lanes')
-                    .to.eql({
+                    .to.include({
                         count: 2,
                         oneway: true,
                         forward: 2,
@@ -839,9 +845,10 @@ describe('iD.Way', function() {
                         bothways: 0
                     });
             });
-            it('correctly returns forward count if only backward is supplied', function() {
+
+            it('returns correctly forward count if only backward is supplied', function() {
                 expect(iD.Way({tags: { highway: 'residential', lanes: 3, 'lanes:backward': 1, }}).lanes().metadata, 'residential lanes')
-                    .to.eql({
+                    .to.include({
                         count: 3,
                         oneway: false,
                         forward: 2,
@@ -849,7 +856,7 @@ describe('iD.Way', function() {
                         bothways: 0
                     });
                 expect(iD.Way({tags: { highway: 'residential', lanes: 4, 'lanes:backward': 3, }}).lanes().metadata, 'residential lanes')
-                    .to.eql({
+                    .to.include({
                         count: 4,
                         oneway: false,
                         forward: 1,
@@ -857,9 +864,10 @@ describe('iD.Way', function() {
                         bothways: 0
                     });
             });
-            it('correctly returns backward count if only forward is supplied', function() {
+
+            it('returns correctly backward count if only forward is supplied', function() {
                 expect(iD.Way({tags: { highway: 'residential', lanes: 3, 'lanes:forward': 1, }}).lanes().metadata, 'residential lanes')
-                    .to.eql({
+                    .to.include({
                         count: 3,
                         oneway: false,
                         forward: 1,
@@ -867,7 +875,7 @@ describe('iD.Way', function() {
                         bothways: 0
                     });
                 expect(iD.Way({tags: { highway: 'residential', lanes: 2, 'lanes:forward': 1, }}).lanes().metadata, 'residential lanes')
-                    .to.eql({
+                    .to.include({
                         count: 2,
                         oneway: false,
                         forward: 1,
@@ -875,9 +883,10 @@ describe('iD.Way', function() {
                         bothways: 0
                     });
             });
-            it('correctly returns backward count if forward and both_ways are supplied', function() {
+
+            it('returns correctly backward count if forward and both_ways are supplied', function() {
                 expect(iD.Way({tags: { highway: 'residential', lanes: 3, 'lanes:forward': 1, 'lanes:both_ways': 1 }}).lanes().metadata, 'residential lanes')
-                    .to.eql({
+                    .to.include({
                         count: 3,
                         oneway: false,
                         forward: 1,
@@ -885,7 +894,7 @@ describe('iD.Way', function() {
                         bothways: 1
                     });
                 expect(iD.Way({tags: { highway: 'residential', lanes: 5, 'lanes:forward': 1, 'lanes:both_ways': 1 }}).lanes().metadata, 'residential lanes')
-                    .to.eql({
+                    .to.include({
                         count: 5,
                         oneway: false,
                         forward: 1,
@@ -893,9 +902,10 @@ describe('iD.Way', function() {
                         bothways: 1
                     });
             });
-            it('correctly returns forward count if backward and both_ways are supplied', function() {
+
+            it('returns correctly forward count if backward and both_ways are supplied', function() {
                 expect(iD.Way({tags: { highway: 'residential', lanes: 3, 'lanes:backward': 1, 'lanes:both_ways': 1 }}).lanes().metadata, 'residential lanes')
-                    .to.eql({
+                    .to.include({
                         count: 3,
                         oneway: false,
                         forward: 1,
@@ -903,7 +913,7 @@ describe('iD.Way', function() {
                         bothways: 1
                     });
                 expect(iD.Way({tags: { highway: 'residential', lanes: 5, 'lanes:backward': 1, 'lanes:both_ways': 1 }}).lanes().metadata, 'residential lanes')
-                    .to.eql({
+                    .to.include({
                         count: 5,
                         oneway: false,
                         forward: 3,
@@ -912,9 +922,9 @@ describe('iD.Way', function() {
                     });
             });
 
-            it('correctly returns the lane:both_ways count as 1', function() {
+            it('returns correctly the lane:both_ways count as 1', function() {
                 expect(iD.Way({tags: { highway: 'residential', lanes: 2, 'lanes:forward': 1, 'lanes:both_ways': 1 }}).lanes().metadata, 'residential lanes')
-                    .to.eql({
+                    .to.include({
                         count: 2,
                         oneway: false,
                         forward: 1,
@@ -922,9 +932,10 @@ describe('iD.Way', function() {
                         bothways: 1
                     });
             });
-            it('correctly returns when lane:both_ways>1', function() {
+
+            it('returns correctly when lane:both_ways>1', function() {
                 expect(iD.Way({tags: { highway: 'residential', lanes: 5, 'lanes:forward': 2, 'lanes:both_ways': 2, 'lanes:backward': 2 }}).lanes().metadata, 'residential lanes')
-                    .to.eql({
+                    .to.include({
                         count: 5,
                         oneway: false,
                         forward: 2,
@@ -932,9 +943,10 @@ describe('iD.Way', function() {
                         bothways: 1
                     });
             });
-            it('correctly returns the lane:both_ways as 0 or NaN', function() {
+
+            it('returns correctly when lane:both_ways is 0 or Not a Number', function() {
                 expect(iD.Way({tags: { highway: 'residential', lanes: 5, 'lanes:forward': 2, 'lanes:both_ways': 0, 'lanes:backward': 3 }}).lanes().metadata, 'residential lanes')
-                    .to.eql({
+                    .to.include({
                         count: 5,
                         oneway: false,
                         forward: 2,
@@ -942,13 +954,827 @@ describe('iD.Way', function() {
                         bothways: 0
                     });
                 expect(iD.Way({tags: { highway: 'residential', lanes: 2, 'lanes:forward': 1, 'lanes:both_ways': 'none' }}).lanes().metadata, 'residential lanes')
-                    .to.eql({
+                    .to.include({
                         count: 2,
                         oneway: false,
                         forward: 1,
                         backward: 1,
                         bothways: 0
                     });
+            });
+
+        });
+
+        describe.skip('lanes array', function() {
+          it('should have correct number of direction elements', function() {
+            var lanes = iD.Way({tags: { highway: 'residential', lanes: 5, 'lanes:forward': 2, 'lanes:both_ways': 0, 'lanes:backward': 3 }}).lanes().lanes;
+            var forward = lanes.filter(function(l) {
+              return l.direction === 'forward';
+            });
+            var backward = lanes.filter(function(l) {
+              return l.direction === 'backward';
+            });
+            var bothways = lanes.filter(function(l) {
+              return l.direction === 'bothways';
+            });
+            expect(forward.length).to.eql(2);
+            expect(backward.length).to.eql(3);
+            expect(bothways.length).to.eql(0);
+
+          });
+          it('should have corrent number of direction elements', function() {
+            var lanes = iD.Way({tags: { highway: 'residential', lanes: 5, 'lanes:backward': 1, 'lanes:both_ways': 1 }}).lanes().lanes;
+            var forward = lanes.filter(function(l) {
+              return l.direction === 'forward';
+            });
+            var backward = lanes.filter(function(l) {
+              return l.direction === 'backward';
+            });
+            var bothways = lanes.filter(function(l) {
+              return l.direction === 'bothways';
+            });
+            expect(forward.length).to.eql(3);
+            expect(backward.length).to.eql(1);
+            expect(bothways.length).to.eql(1);
+          });
+        });
+
+        describe('turn lanes', function() {
+            it('returns correctly when oneway=yes', function() {
+                var metadata = iD.Way({
+                    tags: {
+                        highway: 'trunk',
+                        oneway: 'yes',
+                        'turn:lanes': 'none|slight_right'
+                    }
+                }).lanes().metadata;
+                expect(metadata.turnLanes.unspecified)
+                    .to.deep.equal([
+                        ['none'], ['slight_right']
+                    ]);
+            });
+
+            it('returns correctly when oneway=yes and lanes=2', function() {
+                var metadata = iD.Way({
+                    tags: {
+                        highway: 'tertiary',
+                        oneway: 'yes',
+                        lanes: '2',
+                        'turn:lanes': 'none|slight_right'
+                    }
+                }).lanes().metadata;
+
+                expect(metadata.turnLanes.unspecified)
+                    .to.deep.equal([
+                        ['none'], ['slight_right']
+                    ]);
+            });
+
+            it('returns correctly when lanes=5 and both_ways=1', function() {
+                var metadata = iD.Way({
+                    tags: {
+                        highway: 'residential',
+                        lanes: 5,
+                        'lanes:forward': 1,
+                        'lanes:both_ways': 1,
+                        'turn:lanes:forward': 'slight_left',
+                        'turn:lanes:backward': 'none|through|through;slight_right',
+                    }
+                }).lanes().metadata;
+                expect(metadata.turnLanes.forward)
+                    .to.deep.equal([
+                        ['slight_left']
+                    ]);
+                expect(metadata.turnLanes.backward)
+                    .to.deep.equal([
+                        ['none'], ['through'], ['through', 'slight_right']
+                    ]);
+            });
+
+            it('returns correctly when multiple values are present in a lane and oneway=yes', function() {
+                var lanesData = iD.Way({
+                    tags: {
+                        highway: 'tertiary',
+                        lanes: 5,
+                        oneway: 'yes',
+                        'turn:lanes': 'slight_left;reverse;left|slight_left;left;through|through|none|through;right',
+                    }
+                }).lanes();
+
+                expect(lanesData.metadata.turnLanes.unspecified)
+                    .to.deep.equal([
+                        ['slight_left', 'reverse', 'left'],
+                        ['slight_left', 'left', 'through'],
+                        ['through'],
+                        ['none'],
+                        ['through', 'right']
+                    ]);
+            });
+
+            it('returns correctly when multiple values are present in a lane and oneway=no', function() {
+                var lanesData = iD.Way({
+                    tags: {
+                        highway: 'tertiary',
+                        lanes: 5,
+                        oneway: 'no',
+                        'lanes:forward': 3,
+                        'lanes:backward': 2,
+                        'turn:lanes:forward': 'slight_left;reverse;left|slight_left;left;through|through',
+                        'turn:lanes:backward': 'none|through;left'
+                    }
+                }).lanes();
+                expect(lanesData.metadata.turnLanes.forward)
+                    .to.deep.equal([
+                        ['slight_left', 'reverse', 'left'],
+                        ['slight_left', 'left', 'through'],
+                        ['through']
+                    ]);
+                expect(lanesData.metadata.turnLanes.backward)
+                    .to.deep.equal([
+                        ['none'],
+                        ['through', 'left']
+                    ]);
+            });
+
+            it('returns unknown for every invalid value in turn:lanes', function() {
+                var metadata = iD.Way({
+                    tags: {
+                        highway: 'tertiary',
+                        lanes: 3,
+                        oneway: 'yes',
+                        'turn:lanes': '||straight;NO_LEFT',
+                    }
+                }).lanes().metadata;
+                expect(metadata.turnLanes.unspecified)
+                    .to.deep.equal([
+                        ['none'], ['none'], ['unknown', 'unknown']
+                    ]);
+            });
+
+            it('returns unknown for every invalid value in turn:lanes:forward & turn:lanes:backward', function() {
+                var metadata = iD.Way({
+                    tags: {
+                        highway: 'residential',
+                        lanes: 5,
+                        'lanes:forward': 1,
+                        'lanes:both_ways': 1,
+                        'turn:lanes:forward': 'sligh_left',
+                        'turn:lanes:backward': 'none|through|though;slight_right',
+                    }
+                }).lanes().metadata;
+                expect(metadata.turnLanes.forward)
+                    .to.deep.equal([
+                        ['unknown']
+                    ]);
+                expect(metadata.turnLanes.backward)
+                    .to.deep.equal([
+                        ['none'], ['through'], ['unknown', 'slight_right']
+                    ]);
+            });
+
+            it.skip('fills with [\'unknown\'] when given turn:lanes are less than lanes count', function() {
+                var metadata = iD.Way({
+                    tags: {
+                        highway: 'tertiary',
+                        lanes: 5,
+                        oneway: 'yes',
+                        'turn:lanes': 'slight_left|',
+                    }
+                }).lanes().metadata;
+
+                expect(metadata.turnLanes.unspecified)
+                    .to.deep.equal([
+                        ['slight_left'], ['none']
+                    ]);
+            });
+
+            it.skip('fills with [\'unknown\'] when given turn:lanes:forward are less than lanes forward count', function() {
+                var metadata = iD.Way({
+                    tags: {
+                        highway: 'tertiary',
+                        lanes: 5,
+                        oneway: 'no',
+                        'lanes:forward': 3,
+                        'turn:lanes:forward': 'slight_left',
+                        'turn:lanes:backward': 'through',
+                    }
+                }).lanes().metadata;
+
+                expect(metadata.turnLanes.forward)
+                    .to.deep.equal([
+                        ['slight_left'], ['unknown'], ['unknown']
+                    ]);
+                expect(metadata.turnLanes.backward)
+                    .to.deep.equal([
+                        ['through'], ['unknown']
+                    ]);
+            });
+
+            it.skip('clips when turn lane information is more than lane count', function() {
+                var metadata = iD.Way({
+                    tags: {
+                        highway: 'tertiary',
+                        lanes: 2,
+                        oneway: 'yes',
+                        'turn:lanes': 'through|through;slight_right|slight_right',
+                    }
+                }).lanes().metadata;
+
+                expect(metadata.turnLanes)
+                    .to.deep.equal([
+                        ['through'], ['through', 'slight_right']
+                    ]);
+            });
+
+            it('turnLanes is undefined when not present', function() {
+                var metadata = iD.Way({
+                    tags: {
+                        highway: 'tertiary',
+                        lanes: 2,
+                        oneway: 'yes'
+                    }
+                }).lanes().metadata;
+
+                expect(metadata.turnLanes.unspecified)
+                    .to.equal(undefined);
+                expect(metadata.turnLanes.forward)
+                    .to.equal(undefined);
+                expect(metadata.turnLanes.backward)
+                    .to.equal(undefined);
+            });
+
+            it('turnLanes.forward and turnLanes.backward are both undefined when both are not provided', function() {
+                var metadata = iD.Way({
+                    tags: {
+                        highway: 'tertiary',
+                        lanes: 2,
+                        oneway: 'yes',
+                        'turn:lanes': 'through|through;slight_right',
+                    }
+                }).lanes().metadata;
+
+                expect(metadata.turnLanes.unspecified)
+                    .to.deep.equal([['through'], ['through', 'slight_right']]);
+                expect(metadata.turnLanes.forward)
+                    .to.equal(undefined);
+                expect(metadata.turnLanes.backward)
+                    .to.equal(undefined);
+            });
+
+            it('parses turnLane correctly when lanes:both_ways=1', function() {
+                var lanes = iD.Way({
+                    tags: {
+                        highway: 'tertiary',
+                        lanes: 5,
+                        oneway: 'no',
+                        'lanes:forward': 3,
+                        'lanes:both_ways': 1,
+                        'lanes:backward': 1,
+                        'turn:lanes:backward': 'slight_right',
+                        'turn:lanes:forward': 'slight_left||',
+                    }
+                }).lanes();
+                expect(lanes.metadata.turnLanes.backward)
+                    .to.deep.equal([['slight_right']]);
+                expect(lanes.metadata.turnLanes.forward)
+                    .to.deep.equal([['slight_left'], ['none'], ['none']]);
+            });
+
+            it('parses turnLane correctly when lanes:both_ways=1 & lanes:forward < lanes:backward', function() {
+                var lanes = iD.Way({
+                    tags: {
+                        highway: 'tertiary',
+                        lanes: 5,
+                        oneway: 'no',
+                        'lanes:forward': 1,
+                        'lanes:both_ways': 1,
+                        'lanes:backward': 3,
+                        'turn:lanes:forward': 'through',
+                        'turn:lanes:backward': 'slight_left||',
+                    }
+                }).lanes();
+                expect(lanes.metadata.turnLanes.forward)
+                    .to.deep.equal([['through']]);
+                expect(lanes.metadata.turnLanes.backward)
+                    .to.deep.equal([['slight_left'], ['none'], ['none']]);
+            });
+
+            it('parses correctly when turn:lanes= ||x', function() {
+                var metadata = iD.Way({
+                    tags: {
+                        highway: 'tertiary',
+                        lanes: 3,
+                        oneway: 'yes',
+                        'turn:lanes': '||through;slight_right',
+                    }
+                }).lanes().metadata;
+
+                expect(metadata.turnLanes.unspecified)
+                    .to.deep.equal([['none'], ['none'], ['through', 'slight_right']]);
+            });
+
+            it('parses correctly when turn:lanes= |x|', function() {
+                var metadata = iD.Way({
+                    tags: {
+                        highway: 'tertiary',
+                        lanes: 5,
+                        'turn:lanes': '|through|',
+                    }
+                }).lanes().metadata;
+
+                expect(metadata.turnLanes.unspecified)
+                    .to.deep.equal([['none'], ['through'], ['none']]);
+            });
+
+            it('parses correctly when turn:lanes:forward= ||x', function() {
+                var metadata = iD.Way({
+                    tags: {
+                        highway: 'tertiary',
+                        lanes: 4,
+                        oneway: 'no',
+                        'lanes:forward': 3,
+                        'lanes:backward': 1,
+                        'turn:lanes:forward': '||through;slight_right',
+                        'turn:lanes:backward': 'none',
+                    }
+                }).lanes().metadata;
+
+                expect(metadata.turnLanes.forward)
+                    .to.deep.equal([['none'], ['none'], ['through', 'slight_right']]);
+                expect(metadata.turnLanes.backward)
+                    .to.deep.equal([['none']]);
+            });
+
+            it('parses correctly when turn:lanes:backward= |', function() {
+                var metadata = iD.Way({
+                    tags: {
+                        highway: 'tertiary',
+                        lanes: 5,
+                        oneway: 'no',
+                        'lanes:forward': 3,
+                        'lanes:backward': 2,
+                        'turn:lanes:backward': '|',
+                        'turn:lanes:forward': 'slight_left||',
+                    }
+                }).lanes().metadata;
+
+                expect(metadata.turnLanes.forward)
+                    .to.deep.equal([['slight_left'], ['none'], ['none']]);
+                expect(metadata.turnLanes.backward)
+                    .to.deep.equal([['none'], ['none']]);
+            });
+
+            it('fills lanes.unspecified with key \'turnLane\' correctly', function() {
+                var lanes = iD.Way({
+                    tags: {
+                        highway: 'tertiary',
+                        lanes: 5,
+                        oneway: 'yes',
+                        'turn:lanes': 'slight_left||through|through;slight_right|slight_right'
+                    }
+                }).lanes().lanes;
+                var turnLanesUnspecified = lanes.unspecified.map(function(l) { return l.turnLane; });
+                expect(turnLanesUnspecified).to.deep.equal([
+                    ['slight_left'], ['none'], ['through'], ['through', 'slight_right'], ['slight_right']
+                ]);
+                expect(lanes.forward).to.deep.equal([]);
+                expect(lanes.backward).to.deep.equal([]);
+            });
+
+            it('fills lanes.forward & lanes.backward with key \'turnLane\' correctly', function() {
+                var lanes = iD.Way({
+                    tags: {
+                        highway: 'tertiary',
+                        lanes: 5,
+                        'lanes:forward': 3,
+                        'lanes:backward': 2,
+                        'turn:lanes:backward': 'none|slight_right',
+                        'turn:lanes:forward': 'slight_left||',
+                    }
+                }).lanes().lanes;
+                expect(lanes.unspecified).to.deep.equal([]);
+                var turnLanesForward = lanes.forward.map(function(l) { return l.turnLane; });
+                var turnLanesBackward = lanes.backward.map(function(l) { return l.turnLane; });
+                expect(turnLanesForward).to.deep.equal([
+                    ['slight_left'], ['none'], ['none']
+                ]);
+                expect(turnLanesBackward).to.deep.equal([
+                    ['none'], ['slight_right']
+                ]);
+            });
+        });
+
+        describe('maxspeed', function() {
+            it('should parse maxspeed without any units correctly', function() {
+                var maxspeed = iD.Way({
+                    tags: {
+                        highway: 'residential',
+                        lanes: 5,
+                        'maxspeed': '70'
+                    }
+                }).lanes().metadata.maxspeed;
+                expect(maxspeed).to.equal(70);
+                maxspeed = iD.Way({
+                    tags: {
+                        highway: 'residential',
+                        lanes: 5,
+                        'maxspeed': 70
+                    }
+                }).lanes().metadata.maxspeed;
+                expect(maxspeed).to.equal(70);
+            });
+
+            it('should parse maxspeed with km/h correctly', function() {
+                var maxspeed = iD.Way({
+                    tags: {
+                        highway: 'residential',
+                        lanes: 5,
+                        'maxspeed': '70 km/h'
+                    }
+                }).lanes().metadata.maxspeed;
+                expect(maxspeed).to.equal(70);
+            });
+
+            it('should parse maxspeed with kmh correctly', function() {
+                var maxspeed = iD.Way({
+                    tags: {
+                        highway: 'residential',
+                        lanes: 5,
+                        'maxspeed': '70kmh'
+                    }
+                }).lanes().metadata.maxspeed;
+                expect(maxspeed).to.equal(70);
+            });
+
+            it('should parse maxspeed with kph correctly', function() {
+                var maxspeed = iD.Way({
+                    tags: {
+                        highway: 'residential',
+                        lanes: 5,
+                        'maxspeed': '70 kph'
+                    }
+                }).lanes().metadata.maxspeed;
+                expect(maxspeed).to.equal(70);
+            });
+
+            it('should parse maxspeed with mph correctly', function() {
+                var maxspeed = iD.Way({
+                    tags: {
+                        highway: 'residential',
+                        lanes: 5,
+                        'maxspeed': '70mph'
+                    }
+                }).lanes().metadata.maxspeed;
+                expect(maxspeed).to.equal(70);
+            });
+
+            it('should parse maxspeed with knots correctly', function() {
+                var maxspeed = iD.Way({
+                    tags: {
+                        highway: 'residential',
+                        lanes: 5,
+                        'maxspeed': '50knots'
+                    }
+                }).lanes().metadata.maxspeed;
+                expect(maxspeed).to.equal(50);
+            });
+
+            it('should return undefined when incorrect maxspeed unit provided ', function() {
+                var maxspeed = iD.Way({
+                    tags: {
+                        highway: 'residential',
+                        lanes: 5,
+                        'maxspeed': '70km'
+                    }
+                }).lanes().metadata.maxspeed;
+                expect(maxspeed).to.equal(undefined);
+            });
+
+            it('should return undefined when incorrect maxspeed value provided ', function() {
+                var maxspeed = iD.Way({
+                    tags: {
+                        highway: 'residential',
+                        lanes: 5,
+                        'maxspeed': 'a70knots'
+                    }
+                }).lanes().metadata.maxspeed;
+                expect(maxspeed).to.equal(undefined);
+            });
+
+            it('should return undefined when maxspeed not provided ', function() {
+                var maxspeed = iD.Way({
+                    tags: {
+                        highway: 'residential',
+                        lanes: 5,
+                    }
+                }).lanes().metadata.maxspeed;
+                expect(maxspeed).to.equal(undefined);
+            });
+        });
+
+        describe.only('maxspeed:lanes', function() {
+
+            it('should parse correctly', function() {
+                var maxspeedLanes = iD.Way({
+                    tags: {
+                        highway: 'residential',
+                        lanes: 5,
+                        'maxspeed:lanes': '30|40|40|40|40'
+                    }
+                }).lanes().metadata.maxspeedLanes.unspecified;
+                expect(maxspeedLanes).to.deep.equal([
+                    30, 40, 40, 40, 40
+                ]);
+            });
+
+            it('should parse maxspeed:lanes:forward/backward correctly', function() {
+                var metadata = iD.Way({
+                    tags: {
+                        highway: 'residential',
+                        lanes: 5,
+                        maxspeed: 30,
+                        'lanes:forward': 4,
+                        'lanes:backward': 1,
+                        'maxspeed:lanes:forward': '30|40|40|40',
+                        'maxspeed:lanes:backward': '30'
+                    }
+                }).lanes().metadata;
+                expect(metadata.maxspeedLanes.forward).to.deep.equal([
+                    null, 40, 40, 40
+                ]);
+                expect(metadata.maxspeedLanes.backward).to.deep.equal([
+                    null
+                ]);
+            });
+
+            it('should parse correctly when some values maxspeed:lanes are implied by x||y notation', function() {
+                var maxspeedLanes = iD.Way({
+                    tags: {
+                        highway: 'residential',
+                        lanes: 4,
+                        maxspeed: '40kmh',
+                        'maxspeed:lanes': '30|||40'
+                    }
+                }).lanes().metadata.maxspeedLanes;
+                expect(maxspeedLanes.unspecified).to.deep.equal([
+                    30, null, null, null
+                ]);
+            });
+
+            it('should parse correctly when some values maxspeed:lanes are implied by x||| notation', function() {
+                var lanes = iD.Way({
+                    tags: {
+                        highway: 'residential',
+                        lanes: 5,
+                        'lanes:forward': 1,
+                        'lanes:both_ways': 1,
+                        'turn:lanes:forward': 'slight_left',
+                        'turn:lanes:backward': 'none|through|through;slight_right',
+                        maxspeed: '60kmh',
+                        'maxspeed:lanes': '30|||'
+                    }
+                }).lanes();
+                expect(lanes.metadata.maxspeedLanes.unspecified).to.deep.equal([
+                    30, null, null, null
+                ]);
+            });
+
+            it('should return none for each maxspeed:lanes which equals maxspeed', function() {
+                var maxspeedLanes = iD.Way({
+                    tags: {
+                        highway: 'residential',
+                        lanes: 5,
+                        maxspeed: '40kmh',
+                        'maxspeed:lanes': '30|40|40|40|40'
+                    }
+                }).lanes().metadata.maxspeedLanes;
+                expect(maxspeedLanes.unspecified).to.deep.equal([
+                    30, null, null, null, null
+                ]);
+                maxspeedLanes = iD.Way({
+                    tags: {
+                        highway: 'residential',
+                        lanes: 5,
+                        maxspeed: '50kmh',
+                        'maxspeed:lanes': '30|40|40|40|40'
+                    }
+                }).lanes().metadata.maxspeedLanes;
+                expect(maxspeedLanes.unspecified).to.deep.equal([
+                    30, 40, 40, 40, 40
+                ]);
+                maxspeedLanes = iD.Way({
+                    tags: {
+                        highway: 'residential',
+                        lanes: 5,
+                        maxspeed: '30knots',
+                        'maxspeed:lanes': '30|40|40|40|40'
+                    }
+                }).lanes().metadata.maxspeedLanes;
+                expect(maxspeedLanes.unspecified).to.deep.equal([
+                    null, 40, 40, 40, 40
+                ]);
+            });
+
+            it('should return \'unknown\' for every invalid maxspeed:lane value', function() {
+                var maxspeedLanes = iD.Way({
+                    tags: {
+                        highway: 'residential',
+                        lanes: 5,
+                        maxspeed: '30kmh',
+                        'maxspeed:lanes': '30|40|fourty|40|40'
+                    }
+                }).lanes().metadata.maxspeedLanes;
+                expect(maxspeedLanes.unspecified).to.deep.equal([
+                    null, 40, 'unknown', 40, 40
+                ]);
+                maxspeedLanes = iD.Way({
+                    tags: {
+                        highway: 'residential',
+                        lanes: 5,
+                        maxspeed: '30kmh',
+                        'maxspeed:lanes': '30|40|fourty|40|random'
+                    }
+                }).lanes().metadata.maxspeedLanes;
+
+                expect(maxspeedLanes.unspecified).to.deep.equal([
+                    null, 40, 'unknown', 40, 'unknown'
+                ]);
+            });
+
+            it('should parse maxspeed when none', function() {
+                var maxspeedLanes = iD.Way({
+                    tags: {
+                        highway: 'residential',
+                        lanes: 5,
+                        'maxspeed:lanes': '30|40|none|40|40'
+                    }
+                }).lanes().metadata.maxspeedLanes;
+                expect(maxspeedLanes.unspecified).to.deep.equal([
+                    30, 40, 'none', 40, 40
+                ]);
+            });
+
+            it('fills lanes.unspecified with key \'maxspeed\' correctly', function() {
+                var lanes = iD.Way({
+                    tags: {
+                        highway: 'residential',
+                        lanes: 5,
+                        maxspeed: '30kmh',
+                        'maxspeed:lanes': '30|40|fourty|40|40'
+                    }
+                }).lanes().lanes;
+                var maxspeedLanes = lanes.unspecified.map(function (l) {
+                    return l.maxspeed;
+                });
+                expect(maxspeedLanes).to.deep.equal([
+                    null, 40, 'unknown', 40, 40
+                ]);
+            });
+        });
+
+        describe('bicycle lanes', function() {
+            it('should parse bicycle:lanes correctly', function() {
+                var lanes = iD.Way({
+                    tags: {
+                        highway: 'residential',
+                        lanes: 3,
+                        'lanes:bicycleway': 2,
+                        'bicycleway:lanes': 'no|yes|no|designated|no',
+                        maxspeed: '30kmh',
+                        'turn:lanes': 'left|||through|right'
+                    }
+                }).lanes();
+                expect(lanes.metadata.bicyclewayLanes.unspecified).to.deep.equal([
+                    'no','yes','no', 'designated', 'no'
+                ]);
+                var bicyclewayLanes = lanes.lanes.unspecified.map(function(l) {
+                    return l.bicycleway;
+                });
+                expect(bicyclewayLanes).to.deep.equal([
+                    'no','yes','no', 'designated', 'no'
+                ]);
+            });
+
+            it('should parse bicycle:lanes:forward/backward correctly', function() {
+                var lanes = iD.Way({
+                    tags: {
+                        highway: 'residential',
+                        'lanes:forward': 4,
+                        'lanes:backward': 3,
+                        'turn:lanes:forward': 'left;through|left;through|through|right;through|right',
+                        'bicycleway:lanes:forward': 'lane|no|no|no|no',
+                        'bicycleway:lanes:backward': 'lane|no|no|no'
+                    }
+                }).lanes();
+                expect(lanes.metadata.bicyclewayLanes.forward).to.deep.equal([
+                    'lane','no','no', 'no', 'no'
+                ]);
+                expect(lanes.metadata.bicyclewayLanes.backward).to.deep.equal([
+                    'lane','no','no', 'no'
+                ]);
+                var bicyclewayLanesForward = lanes.lanes.forward.map(function(l) {
+                    return l.bicycleway;
+                });
+                expect(bicyclewayLanesForward).to.deep.equal([
+                    'lane','no','no', 'no', 'no'
+                ]);
+                var bicyclewayLanesBackward = lanes.lanes.backward.map(function(l) {
+                    return l.bicycleway;
+                });
+                expect(bicyclewayLanesBackward).to.deep.equal([
+                    'lane','no','no', 'no'
+                ]);
+            });
+
+            it('should replace any invalid value with unknown', function() {
+                var lanes = iD.Way({
+                    tags: {
+                        highway: 'residential',
+                        lanes: 3,
+                        maxspeed: '30kmh',
+                        'bicycleway:lanes': 'no|share|no|designated|no',
+                        'turn:lanes': 'left|||through|right'
+                    }
+                }).lanes();
+                expect(lanes.metadata.bicyclewayLanes.unspecified).to.deep.equal([
+                    'no','unknown','no', 'designated', 'no'
+                ]);
+                var psvLanesForward = lanes.lanes.unspecified.map(function(l) {
+                    return l.bicycleway;
+                });
+                expect(psvLanesForward).to.deep.equal([
+                    'no','unknown','no', 'designated', 'no'
+                ]);
+            });
+        });
+
+        describe('miscellaneous lanes', function() {
+            it('should parse psv:lanes correctly', function() {
+                var lanes = iD.Way({
+                    tags: {
+                        highway: 'residential',
+                        lanes: 5,
+                        maxspeed: '30kmh',
+                        'psv:lanes': 'yes|no||no|no'
+                    }
+                }).lanes();
+                expect(lanes.metadata.psvLanes.unspecified).to.deep.equal([
+                    'yes','no','no', 'no', 'no'
+                ]);
+                var psvLanesForward = lanes.lanes.unspecified.map(function(l) {
+                    return l.psv;
+                });
+                expect(psvLanesForward).to.deep.equal([
+                    'yes','no','no', 'no', 'no'
+                ]);
+            });
+            it('should parse psv:lanes:forward/backward correctly', function() {
+                var lanes = iD.Way({
+                    tags: {
+                        highway: 'residential',
+                        lanes: 5,
+                        maxspeed: '30kmh',
+                        'psv:lanes:forward': 'no|no|',
+                        'psv:lanes:backward': 'yes|designated',
+                    }
+                }).lanes();
+                expect(lanes.metadata.psvLanes.forward).to.deep.equal([
+                    'no','no','no'
+                ]);
+                expect(lanes.metadata.psvLanes.backward).to.deep.equal([
+                    'yes', 'designated'
+                ]);
+                var psvLanesForward = lanes.lanes.forward.map(function(l) {
+                    return l.psv;
+                });
+                var psvLanesBackward = lanes.lanes.backward.map(function(l) {
+                    return l.psv;
+                });
+                expect(psvLanesForward).to.deep.equal([
+                    'no','no','no'
+                ]);
+                expect(psvLanesBackward).to.deep.equal([
+                    'yes', 'designated'
+                ]);
+            });
+            it('should replace any invalid value with unknown', function() {
+                var lanes = iD.Way({
+                    tags: {
+                        highway: 'residential',
+                        lanes: 3,
+                        maxspeed: '30kmh',
+                        'psv:lanes': 'yes|no|garbage'
+                    }
+                }).lanes();
+                expect(lanes.metadata.psvLanes.unspecified).to.deep.equal([
+                    'yes','no', 'unknown'
+                ]);
+                var psvLanesForward = lanes.lanes.unspecified.map(function(l) {
+                    return l.psv;
+                });
+                expect(psvLanesForward).to.deep.equal([
+                    'yes','no', 'unknown'
+                ]);
             });
         });
     });
