@@ -129,7 +129,7 @@ _.extend(coreWay.prototype, {
                     break;
             }
 
-            if (tags.lanes) count = parseInt(tags.lanes);
+            if (tags.lanes) count = parseInt(tags.lanes, 10);
             return count;
         }
 
@@ -139,16 +139,16 @@ _.extend(coreWay.prototype, {
             if (_.isString(maxspeed)) {
                 maxspeed = maxspeed.match(/^([0-9][\.0-9]+?)(?:[ ]?(?:km\/h|kmh|kph|mph|knots))?$/g);
                 if (!maxspeed) return;
-                return parseInt(maxspeed);
+                return parseInt(maxspeed, 10);
             }
         }
 
         function parseLaneDirections() {
-            var forward = parseInt(tags['lanes:forward']);
-            var backward = parseInt(tags['lanes:backward']);
-            var bothways = parseInt(tags['lanes:both_ways']) > 0 ? 1 : 0;
+            var forward = parseInt(tags['lanes:forward'], 10);
+            var backward = parseInt(tags['lanes:backward'], 10);
+            var bothways = parseInt(tags['lanes:both_ways'], 10) > 0 ? 1 : 0;
 
-            if (parseInt(tags.oneway) === -1) {
+            if (parseInt(tags.oneway, 10) === -1) {
                 forward = 0;
                 bothways = 0;
                 backward = laneCount;
@@ -159,7 +159,7 @@ _.extend(coreWay.prototype, {
                 backward = 0;
             }
             else if (_.isNaN(forward) && _.isNaN(backward)) {
-                    backward = parseInt((laneCount - bothways) / 2);
+                    backward = Math.floor((laneCount - bothways) / 2);
                     forward = laneCount - bothways - backward;
             }
             else if (_.isNaN(forward)) {
@@ -205,7 +205,7 @@ _.extend(coreWay.prototype, {
             var parsedArray = str.split('|')
                 .map(function (s) {
                     if (s === 'none') return s;
-                    var m = parseInt(s);
+                    var m = parseInt(s, 10);
                     if (s === '' || m === maxspeed) return null;
                     return _.isNaN(m) ? 'unknown': m;
                 });
