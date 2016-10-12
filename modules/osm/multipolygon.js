@@ -4,7 +4,7 @@ import { actionReverse } from '../actions/reverse';
 
 // For fixing up rendering of multipolygons with tags on the outer member.
 // https://github.com/openstreetmap/iD/issues/613
-export function geoIsSimpleMultipolygonOuterMember(entity, graph) {
+export function osmIsSimpleMultipolygonOuterMember(entity, graph) {
     if (entity.type !== 'way')
         return false;
 
@@ -29,7 +29,7 @@ export function geoIsSimpleMultipolygonOuterMember(entity, graph) {
 }
 
 
-export function geoSimpleMultipolygonOuterMember(entity, graph) {
+export function osmSimpleMultipolygonOuterMember(entity, graph) {
     if (entity.type !== 'way')
         return false;
 
@@ -66,16 +66,16 @@ export function geoSimpleMultipolygonOuterMember(entity, graph) {
 // with appropriate order reversal and start/end coordinate de-duplication.
 //
 // Members of `array` must have, at minimum, `type` and `id` properties.
-// Thus either an array of `iD.Way`s or a relation member array may be
+// Thus either an array of `osmWay`s or a relation member array may be
 // used.
 //
 // If an member has a `tags` property, its tags will be reversed via
-// `iD.actionReverse` in the output.
+// `actionReverse` in the output.
 //
 // Incomplete members (those for which `graph.hasEntity(element.id)` returns
 // false) and non-way members are ignored.
 //
-export function geoJoinWays(array, graph) {
+export function osmJoinWays(array, graph) {
     var joined = [], member, current, nodes, first, last, i, how, what;
 
     array = array.filter(function(member) {

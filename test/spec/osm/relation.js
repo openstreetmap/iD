@@ -1,4 +1,4 @@
-describe('iD.Relation', function () {
+describe('iD.osmRelation', function () {
     if (iD.debug) {
         it('freezes nodes', function () {
             expect(Object.isFrozen(iD.Relation().members)).to.be.true;

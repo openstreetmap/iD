@@ -1,6 +1,6 @@
 import _ from 'lodash';
-import { geoJoinWays, geoPolygonContainsPolygon } from '../geo/index';
-import { osmRelation } from '../osm/index';
+import { geoPolygonContainsPolygon } from '../geo/index';
+import { osmJoinWays, osmRelation } from '../osm/index';
 
 
 export function actionMergePolygon(ids, newRelationId) {
@@ -31,7 +31,7 @@ export function actionMergePolygon(ids, newRelationId) {
         // Each element is itself an array of objects with an id property, and has a
         // locs property which is an array of the locations forming the polygon.
         var polygons = entities.multipolygon.reduce(function(polygons, m) {
-            return polygons.concat(geoJoinWays(m.members, graph));
+            return polygons.concat(osmJoinWays(m.members, graph));
         }, []).concat(entities.closedWay.map(function(d) {
             var member = [{id: d.id}];
             member.nodes = graph.childNodes(d);

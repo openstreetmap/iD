@@ -1,7 +1,6 @@
 import _ from 'lodash';
 import { actionDeleteWay } from './delete_way';
-import { osmIsInterestingTag } from '../osm/index';
-import { geoJoinWays } from '../geo/index';
+import { osmIsInterestingTag, osmJoinWays } from '../osm/index';
 
 
 // Join ways at the end node they share.
@@ -32,7 +31,7 @@ export function actionJoin(ids) {
             }
         }
 
-        var joined = geoJoinWays(ways, graph)[0];
+        var joined = osmJoinWays(ways, graph)[0];
 
         survivor = survivor.update({nodes: _.map(joined.nodes, 'id')});
         graph = graph.replace(survivor);
@@ -60,7 +59,7 @@ export function actionJoin(ids) {
         if (ids.length < 2 || ids.length !== geometries.line.length)
             return 'not_eligible';
 
-        var joined = geoJoinWays(ids.map(graph.entity, graph), graph);
+        var joined = osmJoinWays(ids.map(graph.entity, graph), graph);
         if (joined.length > 1)
             return 'not_adjacent';
 

@@ -1,16 +1,16 @@
 import _ from 'lodash';
-import { geoAngle } from './index';
-import { osmWay } from '../osm/index';
+import { geoAngle } from '../geo/index';
+import { osmWay } from './way';
 
 
-export function geoTurn(turn) {
-    if (!(this instanceof geoTurn))
-        return new geoTurn(turn);
+export function osmTurn(turn) {
+    if (!(this instanceof osmTurn))
+        return new osmTurn(turn);
     _.extend(this, turn);
 }
 
 
-export function geoIntersection(graph, vertexId) {
+export function osmIntersection(graph, vertexId) {
     var vertex = graph.entity(vertexId),
         parentWays = graph.parentWays(vertex),
         coincident = [],
@@ -114,7 +114,7 @@ export function geoIntersection(graph, vertexId) {
                 }
             });
 
-            return geoTurn(turn);
+            return osmTurn(turn);
         }
 
 
@@ -172,7 +172,7 @@ export function geoIntersection(graph, vertexId) {
 }
 
 
-export function geoInferRestriction(graph, from, via, to, projection) {
+export function osmInferRestriction(graph, from, via, to, projection) {
     var fromWay = graph.entity(from.way),
         fromNode = graph.entity(from.node),
         toWay = graph.entity(to.way),

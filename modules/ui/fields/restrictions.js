@@ -2,7 +2,13 @@ import * as d3 from 'd3';
 import { t } from '../../util/locale';
 
 import { behaviorHover } from '../../behavior/index';
-import { osmEntity } from '../../osm/index';
+
+import {
+    osmEntity,
+    osmIntersection,
+    osmInferRestriction,
+    osmTurn
+} from '../../osm/index';
 
 import {
     actionRestrictTurn,
@@ -11,10 +17,7 @@ import {
 
 import {
     geoExtent,
-    geoIntersection,
-    geoRawMercator,
-    geoTurn,
-    geoInferRestriction
+    geoRawMercator
 } from '../../geo/index';
 
 import {
@@ -59,7 +62,7 @@ export function uiFieldRestrictions(field, context) {
             .attr('class', 'restriction-help');
 
 
-        var intersection = geoIntersection(context.graph(), vertexID),
+        var intersection = osmIntersection(context.graph(), vertexID),
             graph = intersection.graph,
             vertex = graph.entity(vertexID),
             filter = utilFunctor(true),
@@ -131,7 +134,7 @@ export function uiFieldRestrictions(field, context) {
             if (datum instanceof osmEntity) {
                 fromNodeID = intersection.adjacentNodeId(datum.id);
                 render();
-            } else if (datum instanceof geoTurn) {
+            } else if (datum instanceof osmTurn) {
                 if (datum.restriction) {
                     context.perform(
                         actionUnrestrictTurn(datum, projection),
@@ -149,7 +152,7 @@ export function uiFieldRestrictions(field, context) {
 
         function mouseover() {
             var datum = d3.event.target.__data__;
-            if (datum instanceof geoTurn) {
+            if (datum instanceof osmTurn) {
                 var graph = context.graph(),
                     presets = context.presets(),
                     preset;
@@ -158,7 +161,7 @@ export function uiFieldRestrictions(field, context) {
                     preset = presets.match(graph.entity(datum.restriction), graph);
                 } else {
                     preset = presets.item('type/restriction/' +
-                        geoInferRestriction(
+                        osmInferRestriction(
                             graph,
                             datum.from,
                             datum.via,

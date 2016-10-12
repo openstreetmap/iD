@@ -1,9 +1,9 @@
 import * as d3 from 'd3';
 import _ from 'lodash';
 import { osmEntity } from './entity';
+import { osmJoinWays } from './multipolygon';
 import {
     geoExtent,
-    geoJoinWays,
     geoPolygonContainsPolygon,
     geoPolygonIntersectsPolygon
 } from '../geo/index';
@@ -263,8 +263,8 @@ _.extend(osmRelation.prototype, {
         var outers = this.members.filter(function(m) { return 'outer' === (m.role || 'outer'); }),
             inners = this.members.filter(function(m) { return 'inner' === m.role; });
 
-        outers = geoJoinWays(outers, resolver);
-        inners = geoJoinWays(inners, resolver);
+        outers = osmJoinWays(outers, resolver);
+        inners = osmJoinWays(inners, resolver);
 
         outers = outers.map(function(outer) { return _.map(outer.nodes, 'loc'); });
         inners = inners.map(function(inner) { return _.map(inner.nodes, 'loc'); });

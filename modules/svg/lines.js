@@ -7,8 +7,7 @@ import {
     svgTagClasses
 } from './index';
 
-import { geoSimpleMultipolygonOuterMember } from '../geo/index';
-import { osmEntity } from '../osm/index';
+import { osmEntity, osmSimpleMultipolygonOuterMember } from '../osm/index';
 import { utilDetect } from '../util/detect';
 
 
@@ -43,7 +42,7 @@ export function svgLines(projection) {
 
         for (var i = 0; i < entities.length; i++) {
             var entity = entities[i],
-                outer = geoSimpleMultipolygonOuterMember(entity, graph);
+                outer = osmSimpleMultipolygonOuterMember(entity, graph);
             if (outer) {
                 ways.push(entity.mergeTags(outer.tags));
             } else if (entity.geometry(graph) === 'line') {

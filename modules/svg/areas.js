@@ -1,7 +1,6 @@
 import * as d3 from 'd3';
 import _ from 'lodash';
-import { geoIsSimpleMultipolygonOuterMember } from '../geo/index';
-import { osmEntity } from '../osm/index';
+import { osmEntity, osmIsSimpleMultipolygonOuterMember } from '../osm/index';
 import { svgPath, svgTagClasses } from './index';
 
 
@@ -45,7 +44,7 @@ export function svgAreas(projection, context) {
             var entity = entities[i];
             if (entity.geometry(graph) !== 'area') continue;
 
-            multipolygon = geoIsSimpleMultipolygonOuterMember(entity, graph);
+            multipolygon = osmIsSimpleMultipolygonOuterMember(entity, graph);
             if (multipolygon) {
                 areas[multipolygon.id] = {
                     entity: multipolygon.mergeTags(entity.tags),

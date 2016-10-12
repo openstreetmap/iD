@@ -1,4 +1,4 @@
-describe('iD.Way', function() {
+describe('iD.osmWay', function() {
     if (iD.debug) {
         it('freezes nodes', function () {
             expect(Object.isFrozen(iD.Way().nodes)).to.be.true;

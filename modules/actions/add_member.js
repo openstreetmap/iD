@@ -1,4 +1,4 @@
-import { geoJoinWays } from '../geo/index';
+import { osmJoinWays } from '../osm/index';
 
 
 export function actionAddMember(relationId, member, memberIndex) {
@@ -9,7 +9,7 @@ export function actionAddMember(relationId, member, memberIndex) {
             var members = relation.indexedMembers();
             members.push(member);
 
-            var joined = geoJoinWays(members, graph);
+            var joined = osmJoinWays(members, graph);
             for (var i = 0; i < joined.length; i++) {
                 var segment = joined[i];
                 for (var j = 0; j < segment.length && segment.length >= 2; j++) {

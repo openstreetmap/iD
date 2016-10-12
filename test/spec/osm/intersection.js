@@ -1,4 +1,4 @@
-describe('iD.geoIntersection', function() {
+describe('iD.osmIntersection', function() {
     describe('highways', function() {
         it('excludes non-highways', function() {
             var graph = iD.Graph([
@@ -8,7 +8,7 @@ describe('iD.geoIntersection', function() {
                 iD.Way({id: '=', nodes: ['u', '*']}),
                 iD.Way({id: '-', nodes: ['*', 'w']})
             ]);
-            expect(iD.geoIntersection(graph, '*').ways).to.eql([]);
+            expect(iD.osmIntersection(graph, '*').ways).to.eql([]);
         });
 
         it('excludes degenerate highways', function() {
@@ -18,7 +18,7 @@ describe('iD.geoIntersection', function() {
                 iD.Way({id: '=', nodes: ['u', '*'], tags: {highway: 'residential'}}),
                 iD.Way({id: '-', nodes: ['*'], tags: {highway: 'residential'}})
             ]);
-            expect(_.map(iD.geoIntersection(graph, '*').ways, 'id')).to.eql(['=']);
+            expect(_.map(iD.osmIntersection(graph, '*').ways, 'id')).to.eql(['=']);
         });
 
         it('excludes coincident highways', function() {
@@ -28,7 +28,7 @@ describe('iD.geoIntersection', function() {
                 iD.Way({id: '=', nodes: ['u', '*'], tags: {highway: 'residential'}}),
                 iD.Way({id: '-', nodes: ['u', '*'], tags: {highway: 'residential'}})
             ]);
-            expect(iD.geoIntersection(graph, '*').ways).to.eql([]);
+            expect(iD.osmIntersection(graph, '*').ways).to.eql([]);
         });
 
         it('includes line highways', function() {
@@ -39,7 +39,7 @@ describe('iD.geoIntersection', function() {
                 iD.Way({id: '=', nodes: ['u', '*'], tags: {highway: 'residential'}}),
                 iD.Way({id: '-', nodes: ['*', 'w']})
             ]);
-            expect(_.map(iD.geoIntersection(graph, '*').ways, 'id')).to.eql(['=']);
+            expect(_.map(iD.osmIntersection(graph, '*').ways, 'id')).to.eql(['=']);
         });
 
         it('excludes area highways', function() {
@@ -49,7 +49,7 @@ describe('iD.geoIntersection', function() {
                 iD.Node({id: 'w'}),
                 iD.Way({id: '=', nodes: ['u', '*', 'w'], tags: {highway: 'pedestrian', area: 'yes'}})
             ]);
-            expect(iD.geoIntersection(graph, '*').ways).to.eql([]);
+            expect(iD.osmIntersection(graph, '*').ways).to.eql([]);
         });
 
         it('auto-splits highways at the intersection', function() {
@@ -59,7 +59,7 @@ describe('iD.geoIntersection', function() {
                 iD.Node({id: 'w'}),
                 iD.Way({id: '=', nodes: ['u', '*', 'w'], tags: {highway: 'residential'}})
             ]);
-            expect(_.map(iD.geoIntersection(graph, '*').ways, 'id')).to.eql(['=-a', '=-b']);
+            expect(_.map(iD.osmIntersection(graph, '*').ways, 'id')).to.eql(['=-a', '=-b']);
         });
     });
 
@@ -73,7 +73,7 @@ describe('iD.geoIntersection', function() {
                     iD.Way({id: '=', nodes: ['u', '*'], tags: {highway: 'residential'}}),
                     iD.Way({id: '-', nodes: ['*', 'w'], tags: {highway: 'residential'}})
                 ]),
-                turns = iD.geoIntersection(graph, '*').turns('u');
+                turns = iD.osmIntersection(graph, '*').turns('u');
 
             expect(turns.length).to.eql(2);
             expect(turns[0]).to.eql({
@@ -92,7 +92,7 @@ describe('iD.geoIntersection', function() {
                     iD.Way({id: '=', nodes: ['u', '*'], tags: {highway: 'residential'}}),
                     iD.Way({id: '-', nodes: ['w', '*'], tags: {highway: 'residential'}})
                 ]),
-                turns = iD.geoIntersection(graph, '*').turns('u');
+                turns = iD.osmIntersection(graph, '*').turns('u');
 
             expect(turns.length).to.eql(2);
             expect(turns[0]).to.eql({
@@ -116,7 +116,7 @@ describe('iD.geoIntersection', function() {
                     iD.Way({id: '=', nodes: ['u', '*'], tags: {highway: 'residential'}}),
                     iD.Way({id: '-', nodes: ['w', '*', 'x'], tags: {highway: 'residential'}})
                 ]),
-                turns = iD.geoIntersection(graph, '*').turns('w');
+                turns = iD.osmIntersection(graph, '*').turns('w');
 
             expect(turns.length).to.eql(3);
             expect(turns[0]).to.eql({
@@ -151,7 +151,7 @@ describe('iD.geoIntersection', function() {
                     iD.Way({id: '=', nodes: ['u', '*'], tags: {highway: 'residential'}}),
                     iD.Way({id: '-', nodes: ['w', '*', 'x'], tags: {highway: 'residential'}})
                 ]),
-                turns = iD.geoIntersection(graph, '*').turns('u');
+                turns = iD.osmIntersection(graph, '*').turns('u');
 
             expect(turns.length).to.eql(3);
             expect(turns[0]).to.eql({
@@ -181,7 +181,7 @@ describe('iD.geoIntersection', function() {
                     iD.Way({id: '=', nodes: ['u', '*'], tags: {highway: 'residential', oneway: 'yes'}}),
                     iD.Way({id: '-', nodes: ['*', 'w'], tags: {highway: 'residential'}})
                 ]),
-                turns = iD.geoIntersection(graph, '*').turns('u');
+                turns = iD.osmIntersection(graph, '*').turns('u');
 
             expect(turns).to.eql([{
                 from: {node: 'u', way: '='},
@@ -199,7 +199,7 @@ describe('iD.geoIntersection', function() {
                     iD.Way({id: '=', nodes: ['*', 'u'], tags: {highway: 'residential', oneway: '-1'}}),
                     iD.Way({id: '-', nodes: ['*', 'w'], tags: {highway: 'residential'}})
                 ]),
-                turns = iD.geoIntersection(graph, '*').turns('u');
+                turns = iD.osmIntersection(graph, '*').turns('u');
 
             expect(turns).to.eql([{
                 from: {node: 'u', way: '='},
@@ -217,7 +217,7 @@ describe('iD.geoIntersection', function() {
                 iD.Way({id: '=', nodes: ['*', 'u'], tags: {highway: 'residential', oneway: 'yes'}}),
                 iD.Way({id: '-', nodes: ['*', 'w'], tags: {highway: 'residential'}})
             ]);
-            expect(iD.geoIntersection(graph, '*').turns('u')).to.eql([]);
+            expect(iD.osmIntersection(graph, '*').turns('u')).to.eql([]);
         });
 
         it('omits turns from a reverse oneway forward', function() {
@@ -229,7 +229,7 @@ describe('iD.geoIntersection', function() {
                 iD.Way({id: '=', nodes: ['u', '*'], tags: {highway: 'residential', oneway: '-1'}}),
                 iD.Way({id: '-', nodes: ['*', 'w'], tags: {highway: 'residential'}})
             ]);
-            expect(iD.geoIntersection(graph, '*').turns('u')).to.eql([]);
+            expect(iD.osmIntersection(graph, '*').turns('u')).to.eql([]);
         });
 
         it('permits turns onto a oneway forward', function() {
@@ -241,7 +241,7 @@ describe('iD.geoIntersection', function() {
                     iD.Way({id: '=', nodes: ['u', '*'], tags: {highway: 'residential'}}),
                     iD.Way({id: '-', nodes: ['*', 'w'], tags: {highway: 'residential', oneway: 'yes'}})
                 ]),
-                turns = iD.geoIntersection(graph, '*').turns('u');
+                turns = iD.osmIntersection(graph, '*').turns('u');
 
             expect(turns.length).to.eql(2);
             expect(turns[0]).to.eql({
@@ -260,7 +260,7 @@ describe('iD.geoIntersection', function() {
                     iD.Way({id: '=', nodes: ['u', '*'], tags: {highway: 'residential'}}),
                     iD.Way({id: '-', nodes: ['w', '*'], tags: {highway: 'residential', oneway: '-1'}})
                 ]),
-                turns = iD.geoIntersection(graph, '*').turns('u');
+                turns = iD.osmIntersection(graph, '*').turns('u');
 
             expect(turns.length).to.eql(2);
             expect(turns[0]).to.eql({
@@ -279,7 +279,7 @@ describe('iD.geoIntersection', function() {
                 iD.Way({id: '=', nodes: ['u', '*'], tags: {highway: 'residential'}}),
                 iD.Way({id: '-', nodes: ['w', '*'], tags: {highway: 'residential', oneway: 'yes'}})
             ]);
-            expect(iD.geoIntersection(graph, '*').turns('u').length).to.eql(1);
+            expect(iD.osmIntersection(graph, '*').turns('u').length).to.eql(1);
         });
 
         it('omits turns onto a reverse oneway forward', function() {
@@ -291,7 +291,7 @@ describe('iD.geoIntersection', function() {
                 iD.Way({id: '=', nodes: ['u', '*'], tags: {highway: 'residential'}}),
                 iD.Way({id: '-', nodes: ['*', 'w'], tags: {highway: 'residential', oneway: '-1'}})
             ]);
-            expect(iD.geoIntersection(graph, '*').turns('u').length).to.eql(1);
+            expect(iD.osmIntersection(graph, '*').turns('u').length).to.eql(1);
         });
 
         it('includes U-turns', function() {
@@ -303,7 +303,7 @@ describe('iD.geoIntersection', function() {
                     iD.Way({id: '=', nodes: ['u', '*'], tags: {highway: 'residential'}}),
                     iD.Way({id: '-', nodes: ['*', 'w'], tags: {highway: 'residential'}})
                 ]),
-                turns = iD.geoIntersection(graph, '*').turns('u');
+                turns = iD.osmIntersection(graph, '*').turns('u');
 
             expect(turns.length).to.eql(2);
             expect(turns[1]).to.eql({
@@ -328,7 +328,7 @@ describe('iD.geoIntersection', function() {
                         {id: '*', role: 'via', type: 'node'}
                     ]})
                 ]),
-                turns = iD.geoIntersection(graph, '*').turns('u');
+                turns = iD.osmIntersection(graph, '*').turns('u');
 
             expect(turns.length).to.eql(2);
             expect(turns[0]).to.eql({
@@ -357,7 +357,7 @@ describe('iD.geoIntersection', function() {
                         {id: '*', role: 'via', type: 'node'}
                     ]})
                 ]),
-                turns = iD.geoIntersection(graph, '*').turns('u');
+                turns = iD.osmIntersection(graph, '*').turns('u');
 
             expect(turns.length).to.eql(3);
             expect(turns[0]).to.eql({
@@ -398,7 +398,7 @@ describe('iD.geoIntersection', function() {
                     iD.Way({id: '-', nodes: ['*', 'a', 'b', 'c', '*'], tags: {highway: 'residential'}}),
                     iD.Way({id: '=', nodes: ['*', 'u'], tags: {highway: 'residential'}})
                 ]),
-                turns = iD.geoIntersection(graph, '*').turns('u');
+                turns = iD.osmIntersection(graph, '*').turns('u');
 
             expect(turns.length).to.eql(3);
             expect(turns[0]).to.eql({
@@ -434,7 +434,7 @@ describe('iD.geoIntersection', function() {
                     iD.Way({id: '-', nodes: ['*', 'a', 'b', 'c', '*'], tags: {highway: 'residential'}}),
                     iD.Way({id: '=', nodes: ['*', 'u'], tags: {highway: 'residential'}})
                 ]),
-                turns = iD.geoIntersection(graph, '*').turns('a');
+                turns = iD.osmIntersection(graph, '*').turns('a');
 
             expect(turns.length).to.eql(3);
             expect(turns[0]).to.eql({
@@ -470,7 +470,7 @@ describe('iD.geoIntersection', function() {
                     iD.Way({id: '-', nodes: ['*', 'a', 'b', 'c', '*'], tags: {highway: 'residential', oneway: 'yes'}}),
                     iD.Way({id: '=', nodes: ['*', 'u'], tags: {highway: 'residential'}})
                 ]),
-                turns = iD.geoIntersection(graph, '*').turns('u');
+                turns = iD.osmIntersection(graph, '*').turns('u');
 
             expect(turns.length).to.eql(2);
             expect(turns[0]).to.eql({
@@ -501,7 +501,7 @@ describe('iD.geoIntersection', function() {
                     iD.Way({id: '-', nodes: ['*', 'a', 'b', 'c', '*'], tags: {highway: 'residential', oneway: '-1'}}),
                     iD.Way({id: '=', nodes: ['*', 'u'], tags: {highway: 'residential'}})
                 ]),
-                turns = iD.geoIntersection(graph, '*').turns('u');
+                turns = iD.osmIntersection(graph, '*').turns('u');
 
             expect(turns.length).to.eql(2);
             expect(turns[0]).to.eql({
@@ -532,7 +532,7 @@ describe('iD.geoIntersection', function() {
                     iD.Way({id: '-', nodes: ['*', 'a', 'b', 'c', '*'], tags: {highway: 'residential', oneway: 'yes'}}),
                     iD.Way({id: '=', nodes: ['*', 'u'], tags: {highway: 'residential'}})
                 ]),
-                turns = iD.geoIntersection(graph, '*').turns('c');
+                turns = iD.osmIntersection(graph, '*').turns('c');
 
             expect(turns.length).to.eql(2);
             expect(turns[0]).to.eql({
@@ -562,7 +562,7 @@ describe('iD.geoIntersection', function() {
                     iD.Way({id: '-', nodes: ['*', 'a', 'b', 'c', '*'], tags: {highway: 'residential', oneway: '-1'}}),
                     iD.Way({id: '=', nodes: ['*', 'u'], tags: {highway: 'residential'}})
                 ]),
-                turns = iD.geoIntersection(graph, '*').turns('a');
+                turns = iD.osmIntersection(graph, '*').turns('a');
 
             expect(turns.length).to.eql(2);
             expect(turns[0]).to.eql({

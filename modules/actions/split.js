@@ -1,6 +1,6 @@
 import _ from 'lodash';
-import { osmRelation, osmWay } from '../osm/index';
-import { geoIsSimpleMultipolygonOuterMember, geoSphericalDistance } from '../geo/index';
+import { osmIsSimpleMultipolygonOuterMember, osmRelation, osmWay } from '../osm/index';
+import { geoSphericalDistance } from '../geo/index';
 import { actionAddMember } from './add_member';
 import { utilWrap } from '../util/index';
 
@@ -79,7 +79,7 @@ export function actionSplit(nodeId, newWayIds) {
             nodesA,
             nodesB,
             isArea = wayA.isArea(),
-            isOuter = geoIsSimpleMultipolygonOuterMember(wayA, graph);
+            isOuter = osmIsSimpleMultipolygonOuterMember(wayA, graph);
 
         if (wayA.isClosed()) {
             var nodes = wayA.nodes.slice(0, -1),

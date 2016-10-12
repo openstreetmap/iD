@@ -1,6 +1,10 @@
 import { actionSplit } from './split';
-import { geoInferRestriction } from '../geo/index';
-import { osmRelation, osmWay } from '../osm/index';
+
+import {
+    osmInferRestriction,
+    osmRelation,
+    osmWay
+} from '../osm/index';
 
 
 // Create a restriction relation for `turn`, which must have the following structure:
@@ -17,7 +21,7 @@ import { osmRelation, osmWay } from '../osm/index';
 // (The action does not check that these entities form a valid intersection.)
 //
 // If `restriction` is not provided, it is automatically determined by
-// geoInferRestriction.
+// osmInferRestriction.
 //
 // If necessary, the `from` and `to` ways are split. In these cases, `from.node`
 // and `to.node` are used to determine which portion of the split ways become
@@ -77,7 +81,7 @@ export function actionRestrictTurn(turn, projection, restrictionId) {
             tags: {
                 type: 'restriction',
                 restriction: turn.restriction ||
-                    geoInferRestriction(
+                    osmInferRestriction(
                         graph,
                         turn.from,
                         turn.via,

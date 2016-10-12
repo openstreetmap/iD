@@ -1,18 +1,6 @@
 import _ from 'lodash';
 
 export { geoExtent } from './extent.js';
-export {
-    geoIntersection,
-    geoTurn,
-    geoInferRestriction
-} from './intersection.js';
-
-export {
-    geoIsSimpleMultipolygonOuterMember,
-    geoSimpleMultipolygonOuterMember,
-    geoJoinWays
-} from './multipolygon.js';
-
 export { geoRawMercator } from './raw_mercator.js';
 
 
