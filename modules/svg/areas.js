@@ -1,8 +1,8 @@
 import * as d3 from 'd3';
 import _ from 'lodash';
-import { svgPath, svgTagClasses } from './index';
-import { coreEntity } from '../core/index';
 import { geoIsSimpleMultipolygonOuterMember } from '../geo/index';
+import { osmEntity } from '../osm/index';
+import { svgPath, svgTagClasses } from './index';
 
 
 export function svgAreas(projection, context) {
@@ -76,7 +76,7 @@ export function svgAreas(projection, context) {
 
         var clipPaths = context.surface().selectAll('defs').selectAll('.clipPath')
            .filter(filter)
-           .data(data.clip, coreEntity.key);
+           .data(data.clip, osmEntity.key);
 
         clipPaths.exit()
            .remove();
@@ -108,7 +108,7 @@ export function svgAreas(projection, context) {
         var paths = areagroup
             .selectAll('path')
             .filter(filter)
-            .data(function(layer) { return data[layer]; }, coreEntity.key);
+            .data(function(layer) { return data[layer]; }, osmEntity.key);
 
         // Remove exiting areas first, so they aren't included in the `fills`
         // array used for sorting below (https://github.com/openstreetmap/iD/issues/1903).

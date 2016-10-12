@@ -1,4 +1,4 @@
-import { coreNode } from '../core/index';
+import { osmNode } from '../osm/node';
 
 
 // Disconect the ways at the given node.
@@ -25,7 +25,7 @@ export function actionDisconnect(nodeId, newNodeId) {
 
         connections.forEach(function(connection) {
             var way = graph.entity(connection.wayID),
-                newNode = coreNode({id: newNodeId, loc: node.loc, tags: node.tags});
+                newNode = osmNode({id: newNodeId, loc: node.loc, tags: node.tags});
 
             graph = graph.replace(newNode);
             if (connection.index === 0 && way.isArea()) {

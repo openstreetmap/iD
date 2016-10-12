@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import { coreNode } from '../core/index';
+import { osmNode } from '../osm/index';
 import {
   geoChooseEdge,
   geoAngle,
@@ -133,7 +133,7 @@ export function actionMove(moveIds, tryDelta, projection, cache) {
         var key = wayId + '_' + nodeId,
             orig = cache.replacedVertex[key];
         if (!orig) {
-            orig = coreNode();
+            orig = osmNode();
             cache.replacedVertex[key] = orig;
             cache.startLoc[orig.id] = cache.startLoc[nodeId];
         }

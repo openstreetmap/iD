@@ -10,8 +10,8 @@ import {
     actionDeleteMember
 } from '../actions/index';
 
-import { coreEntity, coreRelation } from '../core/index';
 import { modeSelect } from '../modes/index';
+import { osmEntity, osmRelation } from '../osm/index';
 import { svgIcon } from '../svg/index';
 import { uiDisclosure } from './disclosure';
 import { utilDisplayName } from '../util/index';
@@ -46,7 +46,7 @@ export function uiRawMembershipEditor(context) {
             );
 
         } else {
-            var relation = coreRelation();
+            var relation = osmRelation();
             context.perform(
                 actionAddEntity(relation),
                 actionAddMember(relation.id, { id: id, type: context.entity(id).type, role: role }),
@@ -92,7 +92,7 @@ export function uiRawMembershipEditor(context) {
         });
 
         result.sort(function(a, b) {
-            return coreRelation.creationOrder(a.relation, b.relation);
+            return osmRelation.creationOrder(a.relation, b.relation);
         });
 
         // Dedupe identical names by appending relation id - see #2891
@@ -151,7 +151,7 @@ export function uiRawMembershipEditor(context) {
 
             var items = list.selectAll('li.member-row-normal')
                 .data(memberships, function(d) {
-                    return coreEntity.key(d.relation) + ',' + d.index;
+                    return osmEntity.key(d.relation) + ',' + d.index;
                 });
 
             items.exit()

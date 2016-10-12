@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import { coreRelation, coreWay } from '../core/index';
+import { osmRelation, osmWay } from '../osm/index';
 import { geoIsSimpleMultipolygonOuterMember, geoSphericalDistance } from '../geo/index';
 import { actionAddMember } from './add_member';
 import { utilWrap } from '../util/index';
@@ -75,7 +75,7 @@ export function actionSplit(nodeId, newWayIds) {
 
 
     function split(graph, wayA, newWayId) {
-        var wayB = coreWay({id: newWayId, tags: wayA.tags}),
+        var wayB = osmWay({id: newWayId, tags: wayA.tags}),
             nodesA,
             nodesB,
             isArea = wayA.isArea(),
@@ -130,7 +130,7 @@ export function actionSplit(nodeId, newWayIds) {
         });
 
         if (!isOuter && isArea) {
-            var multipolygon = coreRelation({
+            var multipolygon = osmRelation({
                 tags: _.extend({}, wayA.tags, {type: 'multipolygon'}),
                 members: [
                     {id: wayA.id, role: 'outer', type: 'way'},

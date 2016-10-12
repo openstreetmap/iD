@@ -1,5 +1,5 @@
 import * as d3 from 'd3';
-import { coreEntity } from '../core/index';
+import { osmEntity } from '../osm/index';
 import { svgPointTransform } from './index';
 
 
@@ -102,7 +102,7 @@ export function svgVertices(projection, context) {
             z = (zoom < 17 ? 0 : zoom < 18 ? 1 : 2);
 
         var groups = selection
-            .data(vertices, coreEntity.key);
+            .data(vertices, osmEntity.key);
 
         groups.exit()
             .remove();

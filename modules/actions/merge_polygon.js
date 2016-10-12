@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import { geoJoinWays, geoPolygonContainsPolygon } from '../geo/index';
-import { coreRelation } from '../core/index';
+import { osmRelation } from '../osm/index';
 
 
 export function actionMergePolygon(ids, newRelationId) {
@@ -85,7 +85,7 @@ export function actionMergePolygon(ids, newRelationId) {
 
         // Move all tags to one relation
         var relation = entities.multipolygon[0] ||
-            coreRelation({ id: newRelationId, tags: { type: 'multipolygon' }});
+            osmRelation({ id: newRelationId, tags: { type: 'multipolygon' }});
 
         entities.multipolygon.slice(1).forEach(function(m) {
             relation = relation.mergeTags(m.tags);

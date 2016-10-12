@@ -19,8 +19,8 @@ import {
     modeSelect
 } from './index';
 
-import { coreNode } from '../core/index';
 import { geoChooseEdge } from '../geo/index';
+import { osmNode } from '../osm/index';
 import { utilEntitySelector } from '../util/index';
 
 
@@ -87,7 +87,7 @@ export function modeDragNode(context) {
         wasMidpoint = entity.type === 'midpoint';
         if (wasMidpoint) {
             var midpoint = entity;
-            entity = coreNode();
+            entity = osmNode();
             context.perform(actionAddMidpoint(midpoint, entity));
 
             var vertex = context.surface().selectAll('.' + entity.id);

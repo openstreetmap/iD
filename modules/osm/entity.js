@@ -1,57 +1,57 @@
 import _ from 'lodash';
 import { debug } from '../index';
-import { coreInterestingTag } from './tags';
+import { osmIsInterestingTag } from './tags';
 import { dataDeprecated } from '../../data/index';
 
 
-export function coreEntity(attrs) {
+export function osmEntity(attrs) {
     // For prototypal inheritance.
-    if (this instanceof coreEntity) return;
+    if (this instanceof osmEntity) return;
 
     // Create the appropriate subtype.
     if (attrs && attrs.type) {
-        return coreEntity[attrs.type].apply(this, arguments);
+        return osmEntity[attrs.type].apply(this, arguments);
     } else if (attrs && attrs.id) {
-        return coreEntity[coreEntity.id.type(attrs.id)].apply(this, arguments);
+        return osmEntity[osmEntity.id.type(attrs.id)].apply(this, arguments);
     }
 
     // Initialize a generic Entity (used only in tests).
-    return (new coreEntity()).initialize(arguments);
+    return (new osmEntity()).initialize(arguments);
 }
 
 
-coreEntity.id = function(type) {
-    return coreEntity.id.fromOSM(type, coreEntity.id.next[type]--);
+osmEntity.id = function(type) {
+    return osmEntity.id.fromOSM(type, osmEntity.id.next[type]--);
 };
 
 
-coreEntity.id.next = {
+osmEntity.id.next = {
     node: -1, way: -1, relation: -1
 };
 
 
-coreEntity.id.fromOSM = function(type, id) {
+osmEntity.id.fromOSM = function(type, id) {
     return type[0] + id;
 };
 
 
-coreEntity.id.toOSM = function(id) {
+osmEntity.id.toOSM = function(id) {
     return id.slice(1);
 };
 
 
-coreEntity.id.type = function(id) {
+osmEntity.id.type = function(id) {
     return { 'n': 'node', 'w': 'way', 'r': 'relation' }[id[0]];
 };
 
 
 // A function suitable for use as the second argument to d3.selection#data().
-coreEntity.key = function(entity) {
+osmEntity.key = function(entity) {
     return entity.id + 'v' + (entity.v || 0);
 };
 
 
-coreEntity.prototype = {
+osmEntity.prototype = {
 
     tags: {},
 
@@ -71,7 +71,7 @@ coreEntity.prototype = {
         }
 
         if (!this.id && this.type) {
-            this.id = coreEntity.id(this.type);
+            this.id = osmEntity.id(this.type);
         }
         if (!this.hasOwnProperty('visible')) {
             this.visible = true;
@@ -94,7 +94,7 @@ coreEntity.prototype = {
         if (copies[this.id])
             return copies[this.id];
 
-        var copy = coreEntity(this, {id: undefined, user: undefined, version: undefined});
+        var copy = osmEntity(this, {id: undefined, user: undefined, version: undefined});
         copies[this.id] = copy;
 
         return copy;
@@ -102,7 +102,7 @@ coreEntity.prototype = {
 
 
     osmId: function() {
-        return coreEntity.id.toOSM(this.id);
+        return osmEntity.id.toOSM(this.id);
     },
 
 
@@ -112,7 +112,7 @@ coreEntity.prototype = {
 
 
     update: function(attrs) {
-        return coreEntity(this, attrs, {v: 1 + (this.v || 0)});
+        return osmEntity(this, attrs, {v: 1 + (this.v || 0)});
     },
 
 
@@ -145,7 +145,7 @@ coreEntity.prototype = {
 
 
     hasInterestingTags: function() {
-        return _.keys(this.tags).some(coreInterestingTag);
+        return _.keys(this.tags).some(osmIsInterestingTag);
     },
 
 

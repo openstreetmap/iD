@@ -2,8 +2,8 @@ import * as d3 from 'd3';
 import { d3combobox } from '../lib/d3.combobox.js';
 import { t } from '../util/locale';
 import { actionChangeMember, actionDeleteMember } from '../actions/index';
-import { coreEntity } from '../core/index';
 import { modeBrowse, modeSelect } from '../modes/index';
+import { osmEntity } from '../osm/index';
 import { svgIcon } from '../svg/index';
 import { uiDisclosure } from './disclosure';
 import { utilDisplayName } from '../util/index';
@@ -81,8 +81,8 @@ export function uiRawMemberEditor(context) {
 
             var items = list.selectAll('li')
                 .data(memberships, function(d) {
-                    return coreEntity.key(d.relation) + ',' + d.index + ',' +
-                        (d.member ? coreEntity.key(d.member) : 'incomplete');
+                    return osmEntity.key(d.relation) + ',' + d.index + ',' +
+                        (d.member ? osmEntity.key(d.member) : 'incomplete');
                 });
 
             items.exit()

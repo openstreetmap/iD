@@ -7,9 +7,9 @@ import {
     svgTagClasses
 } from './index';
 
-import { utilDetect } from '../util/detect';
-import { coreEntity } from '../core/index';
 import { geoSimpleMultipolygonOuterMember } from '../geo/index';
+import { osmEntity } from '../osm/index';
+import { utilDetect } from '../util/detect';
 
 
 export function svgLines(projection) {
@@ -90,14 +90,14 @@ export function svgLines(projection) {
             .filter(filter)
             .data(
                 function() { return pathdata[this.parentNode.__data__] || []; },
-                coreEntity.key
+                osmEntity.key
             );
 
         lines.exit()
             .remove();
 
         // Optimization: call simple TagClasses only on enter selection. This
-        // works because coreEntity.key is defined to include the entity v attribute.
+        // works because osmEntity.key is defined to include the entity v attribute.
         lines.enter()
             .append('path')
             .attr('class', function(d) { return 'way line ' + this.parentNode.__data__ + ' ' + d.id; })

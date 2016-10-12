@@ -1,5 +1,5 @@
 import * as d3 from 'd3';
-import { corePavedTags } from '../core/tags';
+import { osmPavedTags } from '../osm/tags';
 
 
 export function svgTagClasses() {
@@ -89,8 +89,8 @@ export function svgTagClasses() {
                 var paved = (t.highway !== 'track');
                 for (k in t) {
                     v = t[k];
-                    if (k in corePavedTags) {
-                        paved = !!corePavedTags[k][v];
+                    if (k in osmPavedTags) {
+                        paved = !!osmPavedTags[k][v];
                         break;
                     }
                 }

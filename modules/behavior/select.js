@@ -1,7 +1,7 @@
 import * as d3 from 'd3';
 import _ from 'lodash';
 import { modeBrowse, modeSelect } from '../modes/index';
-import { coreEntity } from '../core/index';
+import { osmEntity } from '../osm/index';
 
 
 export function behaviorSelect(context) {
@@ -27,7 +27,7 @@ export function behaviorSelect(context) {
             lasso = d3.select('#surface .lasso').node(),
             mode = context.mode();
 
-        if (!(datum instanceof coreEntity)) {
+        if (!(datum instanceof osmEntity)) {
             if (!d3.event.shiftKey && !lasso && mode.id !== 'browse')
                 context.enter(modeBrowse(context));
 

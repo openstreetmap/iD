@@ -21,9 +21,9 @@ import {
 } from '../geo/index';
 
 import {
-    coreNode,
-    coreWay
-} from '../core/index';
+    osmNode,
+    osmWay
+} from '../osm/index';
 
 import { modeBrowse } from './browse';
 import { modeDragNode } from './drag_node';
@@ -154,9 +154,9 @@ export function modeSelect(context, selectedIDs) {
             var target = d3.select(d3.event.target),
                 datum = target.datum();
 
-            if (datum instanceof coreWay && !target.classed('fill')) {
+            if (datum instanceof osmWay && !target.classed('fill')) {
                 var choice = geoChooseEdge(context.childNodes(datum), context.mouse(), context.projection),
-                    node = coreNode();
+                    node = osmNode();
 
                 var prev = datum.nodes[choice.index - 1],
                     next = datum.nodes[choice.index];

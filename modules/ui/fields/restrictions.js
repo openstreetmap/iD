@@ -2,7 +2,7 @@ import * as d3 from 'd3';
 import { t } from '../../util/locale';
 
 import { behaviorHover } from '../../behavior/index';
-import { coreEntity } from '../../core/index';
+import { osmEntity } from '../../osm/index';
 
 import {
     actionRestrictTurn,
@@ -128,7 +128,7 @@ export function uiFieldRestrictions(field, context) {
 
         function click() {
             var datum = d3.event.target.__data__;
-            if (datum instanceof coreEntity) {
+            if (datum instanceof osmEntity) {
                 fromNodeID = intersection.adjacentNodeId(datum.id);
                 render();
             } else if (datum instanceof geoTurn) {

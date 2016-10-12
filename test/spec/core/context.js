@@ -1,4 +1,4 @@
-describe('iD', function() {
+describe('iD.Context', function() {
     var assets = {
         'iD/img/loader.gif': '/assets/iD/img/loader-b66184b5c4afbccc25f.gif'
     };

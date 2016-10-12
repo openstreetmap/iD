@@ -1,6 +1,6 @@
 import _ from 'lodash';
-import { utilGetPrototypeOf } from '../util/index';
 import { debug } from '../index';
+import { utilGetPrototypeOf } from '../util/index';
 
 
 export function coreGraph(other, mutable) {

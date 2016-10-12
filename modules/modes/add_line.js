@@ -5,9 +5,9 @@ import {
     actionAddVertex
 } from '../actions/index';
 
-import { coreNode, coreWay } from '../core/index';
 import { behaviorAddWay } from '../behavior/index';
 import { modeDrawLine } from './index';
+import { osmNode, osmWay } from '../osm/index';
 
 
 export function modeAddLine(context) {
@@ -28,8 +28,8 @@ export function modeAddLine(context) {
 
     function start(loc) {
         var baseGraph = context.graph(),
-            node = coreNode({ loc: loc }),
-            way = coreWay();
+            node = osmNode({ loc: loc }),
+            way = osmWay();
 
         context.perform(
             actionAddEntity(node),
@@ -43,8 +43,8 @@ export function modeAddLine(context) {
 
     function startFromWay(loc, edge) {
         var baseGraph = context.graph(),
-            node = coreNode({ loc: loc }),
-            way = coreWay();
+            node = osmNode({ loc: loc }),
+            way = osmWay();
 
         context.perform(
             actionAddEntity(node),
@@ -59,7 +59,7 @@ export function modeAddLine(context) {
 
     function startFromNode(node) {
         var baseGraph = context.graph(),
-            way = coreWay();
+            way = osmWay();
 
         context.perform(
             actionAddEntity(way),

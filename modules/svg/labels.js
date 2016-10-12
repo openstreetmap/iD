@@ -1,9 +1,9 @@
 import * as d3 from 'd3';
 import _ from 'lodash';
 import rbush from 'rbush';
-import { utilDisplayName, utilGetStyle } from '../util/index';
-import { coreEntity } from '../core/index';
 import { geoPathLength } from '../geo/index';
+import { osmEntity } from '../osm/index';
+import { utilDisplayName, utilGetStyle } from '../util/index';
 
 
 export function svgLabels(projection, context) {
@@ -104,7 +104,7 @@ export function svgLabels(projection, context) {
     function drawLinePaths(selection, entities, filter, classes, labels) {
         var paths = selection.selectAll('path')
             .filter(filter)
-            .data(entities, coreEntity.key);
+            .data(entities, osmEntity.key);
 
         paths.exit()
             .remove();
@@ -122,7 +122,7 @@ export function svgLabels(projection, context) {
     function drawLineLabels(selection, entities, filter, classes, labels) {
         var texts = selection.selectAll('text.' + classes)
             .filter(filter)
-            .data(entities, coreEntity.key);
+            .data(entities, osmEntity.key);
 
         texts.exit()
             .remove();
@@ -137,7 +137,7 @@ export function svgLabels(projection, context) {
 
         texts.selectAll('.textpath')
             .filter(filter)
-            .data(entities, coreEntity.key)
+            .data(entities, osmEntity.key)
             .attr('startOffset', '50%')
             .attr('xlink:href', function(d) { return '#labelpath-' + d.id; })
             .text(utilDisplayName);
@@ -147,7 +147,7 @@ export function svgLabels(projection, context) {
     function drawPointLabels(selection, entities, filter, classes, labels) {
         var texts = selection.selectAll('text.' + classes)
             .filter(filter)
-            .data(entities, coreEntity.key);
+            .data(entities, osmEntity.key);
 
         texts.exit()
             .remove();
@@ -184,7 +184,7 @@ export function svgLabels(projection, context) {
     function drawAreaIcons(selection, entities, filter, classes, labels) {
         var icons = selection.selectAll('use')
             .filter(filter)
-            .data(entities, coreEntity.key);
+            .data(entities, osmEntity.key);
 
         icons.exit()
             .remove();

@@ -1,7 +1,7 @@
 import * as d3 from 'd3';
 import { utilRebind } from '../../util/rebind';
 import { t } from '../../util/locale';
-import { coreOneWayTags } from '../../core/index';
+import { osmOneWayTags } from '../../osm/index';
 
 export { uiFieldCheck as uiFieldDefaultcheck };
 
@@ -36,7 +36,7 @@ export function uiFieldCheck(field) {
         // where implied oneway tag exists (e.g. `junction=roundabout`) #2220, #1841
         if (field.id === 'oneway') {
             for (var key in entity.tags) {
-                if (key in coreOneWayTags && (entity.tags[key] in coreOneWayTags[key])) {
+                if (key in osmOneWayTags && (entity.tags[key] in osmOneWayTags[key])) {
                     texts[0] = t('presets.fields.oneway_yes.options.undefined');
                     break;
                 }

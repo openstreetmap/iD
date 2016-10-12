@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import { actionDeleteWay } from './delete_way';
-import { coreInterestingTag } from '../core/index';
+import { osmIsInterestingTag } from '../osm/index';
 import { geoJoinWays } from '../geo/index';
 
 
@@ -79,7 +79,7 @@ export function actionJoin(ids) {
             for (var k in way.tags) {
                 if (!(k in tags)) {
                     tags[k] = way.tags[k];
-                } else if (tags[k] && coreInterestingTag(k) && tags[k] !== way.tags[k]) {
+                } else if (tags[k] && osmIsInterestingTag(k) && tags[k] !== way.tags[k]) {
                     conflicting = true;
                 }
             }

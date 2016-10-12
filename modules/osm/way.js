@@ -1,26 +1,26 @@
 import * as d3 from 'd3';
 import _ from 'lodash';
 import { geoExtent, geoCross } from '../geo/index';
-import { coreEntity } from './entity';
-import { coreOneWayTags } from './tags';
-import { areaKeys } from './context';
+import { osmEntity } from './entity';
+import { osmOneWayTags } from './tags';
+import { areaKeys } from '../core/context';
 
 
-export function coreWay() {
-    if (!(this instanceof coreWay)) {
-        return (new coreWay()).initialize(arguments);
+export function osmWay() {
+    if (!(this instanceof osmWay)) {
+        return (new osmWay()).initialize(arguments);
     } else if (arguments.length) {
         this.initialize(arguments);
     }
 }
 
 
-coreEntity.way = coreWay;
+osmEntity.way = osmWay;
 
-coreWay.prototype = Object.create(coreEntity.prototype);
+osmWay.prototype = Object.create(osmEntity.prototype);
 
 
-_.extend(coreWay.prototype, {
+_.extend(osmWay.prototype, {
     type: 'way',
     nodes: [],
 
@@ -29,7 +29,7 @@ _.extend(coreWay.prototype, {
         if (copies[this.id])
             return copies[this.id];
 
-        var copy = coreEntity.prototype.copy.call(this, resolver, copies);
+        var copy = osmEntity.prototype.copy.call(this, resolver, copies);
 
         var nodes = this.nodes.map(function(id) {
             return resolver.entity(id).copy(resolver, copies).id;
@@ -108,7 +108,7 @@ _.extend(coreWay.prototype, {
 
         // implied oneway tag..
         for (var key in this.tags) {
-            if (key in coreOneWayTags && (this.tags[key] in coreOneWayTags[key]))
+            if (key in osmOneWayTags && (this.tags[key] in osmOneWayTags[key]))
                 return true;
         }
         return false;
@@ -466,7 +466,7 @@ _.extend(coreWay.prototype, {
                 '@id': this.osmId(),
                 '@version': this.version || 0,
                 nd: _.map(this.nodes, function(id) {
-                    return { keyAttributes: { ref: coreEntity.id.toOSM(id) } };
+                    return { keyAttributes: { ref: osmEntity.id.toOSM(id) } };
                 }),
                 tag: _.map(this.tags, function(v, k) {
                     return { keyAttributes: { k: k, v: v } };

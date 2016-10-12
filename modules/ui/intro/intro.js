@@ -1,7 +1,8 @@
 import * as d3 from 'd3';
 import { t } from '../../util/locale';
-import { coreEntity, coreGraph } from '../../core/index';
+import { coreGraph } from '../../core/graph';
 import { modeBrowse } from '../../modes/index';
+import { osmEntity } from '../../osm/entity';
 import { d3curtain } from '../../util/curtain';
 import { default as introGraphRaw } from '../../../data/intro_graph.json';
 
@@ -76,7 +77,7 @@ export function uiIntro(context) {
     var introGraph = {};
 
     for (var key in introGraphRaw) {
-        introGraph[key] = coreEntity(introGraphRaw[key]);
+        introGraph[key] = osmEntity(introGraphRaw[key]);
         var name = localizedName(key);
         if (name) {
             introGraph[key].tags.name = name;

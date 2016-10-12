@@ -1,11 +1,6 @@
 export { coreConnection } from './connection';
 export { coreContext } from './context';
 export { coreDifference } from './difference';
-export { coreEntity } from './entity';
 export { coreGraph } from './graph';
 export { coreHistory } from './history';
-export { coreNode } from './node';
-export { coreRelation } from './relation';
-export { coreOneWayTags, corePavedTags, coreInterestingTag } from './tags';
 export { coreTree } from './tree';
-export { coreWay } from './way';

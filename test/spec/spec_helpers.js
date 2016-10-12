@@ -1,6 +1,6 @@
 /* globals chai:false */
 
-// iD.debug = true;
+iD.debug = true;
 
 mocha.setup({
     ui: 'bdd',

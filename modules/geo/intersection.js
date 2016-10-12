@@ -1,6 +1,6 @@
 import _ from 'lodash';
-import { coreWay } from '../core/index';
 import { geoAngle } from './index';
+import { osmWay } from '../osm/index';
 
 
 export function geoTurn(turn) {
@@ -44,14 +44,14 @@ export function geoIntersection(graph, vertexId) {
             var splitIndex, wayA, wayB, indexA, indexB;
             if (isClosingNode) {
                 splitIndex = Math.ceil(way.nodes.length / 2);  // split at midpoint
-                wayA = coreWay({id: way.id + '-a', tags: way.tags, nodes: way.nodes.slice(0, splitIndex)});
-                wayB = coreWay({id: way.id + '-b', tags: way.tags, nodes: way.nodes.slice(splitIndex)});
+                wayA = osmWay({id: way.id + '-a', tags: way.tags, nodes: way.nodes.slice(0, splitIndex)});
+                wayB = osmWay({id: way.id + '-b', tags: way.tags, nodes: way.nodes.slice(splitIndex)});
                 indexA = 1;
                 indexB = way.nodes.length - 2;
             } else {
                 splitIndex = _.indexOf(way.nodes, vertex.id, 1);  // split at vertexid
-                wayA = coreWay({id: way.id + '-a', tags: way.tags, nodes: way.nodes.slice(0, splitIndex + 1)});
-                wayB = coreWay({id: way.id + '-b', tags: way.tags, nodes: way.nodes.slice(splitIndex)});
+                wayA = osmWay({id: way.id + '-a', tags: way.tags, nodes: way.nodes.slice(0, splitIndex + 1)});
+                wayB = osmWay({id: way.id + '-b', tags: way.tags, nodes: way.nodes.slice(splitIndex)});
                 indexA = splitIndex - 1;
                 indexB = splitIndex + 1;
             }

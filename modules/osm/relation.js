@@ -1,6 +1,6 @@
 import * as d3 from 'd3';
 import _ from 'lodash';
-import { coreEntity } from './entity';
+import { osmEntity } from './entity';
 import {
     geoExtent,
     geoJoinWays,
@@ -9,30 +9,30 @@ import {
 } from '../geo/index';
 
 
-export function coreRelation() {
-    if (!(this instanceof coreRelation)) {
-        return (new coreRelation()).initialize(arguments);
+export function osmRelation() {
+    if (!(this instanceof osmRelation)) {
+        return (new osmRelation()).initialize(arguments);
     } else if (arguments.length) {
         this.initialize(arguments);
     }
 }
 
 
-coreEntity.relation = coreRelation;
+osmEntity.relation = osmRelation;
 
-coreRelation.prototype = Object.create(coreEntity.prototype);
+osmRelation.prototype = Object.create(osmEntity.prototype);
 
 
-coreRelation.creationOrder = function(a, b) {
-    var aId = parseInt(coreEntity.id.toOSM(a.id), 10);
-    var bId = parseInt(coreEntity.id.toOSM(b.id), 10);
+osmRelation.creationOrder = function(a, b) {
+    var aId = parseInt(osmEntity.id.toOSM(a.id), 10);
+    var bId = parseInt(osmEntity.id.toOSM(b.id), 10);
 
     if (aId < 0 || bId < 0) return aId - bId;
     return bId - aId;
 };
 
 
-_.extend(coreRelation.prototype, {
+_.extend(osmRelation.prototype, {
     type: 'relation',
     members: [],
 
@@ -41,7 +41,7 @@ _.extend(coreRelation.prototype, {
         if (copies[this.id])
             return copies[this.id];
 
-        var copy = coreEntity.prototype.copy.call(this, resolver, copies);
+        var copy = osmEntity.prototype.copy.call(this, resolver, copies);
 
         var members = this.members.map(function(member) {
             return _.extend({}, member, { id: resolver.entity(member.id).copy(resolver, copies).id });
@@ -188,7 +188,7 @@ _.extend(coreRelation.prototype, {
                         keyAttributes: {
                             type: member.type,
                             role: member.role,
-                            ref: coreEntity.id.toOSM(member.id)
+                            ref: osmEntity.id.toOSM(member.id)
                         }
                     };
                 }),

@@ -1,4 +1,4 @@
-export function coreInterestingTag(key) {
+export function osmIsInterestingTag(key) {
     return key !== 'attribution' &&
         key !== 'created_by' &&
         key !== 'source' &&
@@ -8,7 +8,7 @@ export function coreInterestingTag(key) {
 }
 
 
-export var coreOneWayTags = {
+export var osmOneWayTags = {
     'aerialway': {
         'chair_lift': true,
         'mixed_lift': true,
@@ -41,7 +41,7 @@ export var coreOneWayTags = {
 };
 
 
-export var corePavedTags = {
+export var osmPavedTags = {
     'surface': {
         'paved': true,
         'asphalt': true,

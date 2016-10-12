@@ -1,5 +1,3 @@
-/* global locale: true */
-/* eslint no-console: 0 */
 describe('iD.actionMergeRemoteChanges', function () {
     var base = iD.Graph([
             iD.Node({id: 'a', loc: [1, 1], version: '1', tags: {foo: 'foo'}}),
@@ -55,42 +53,15 @@ describe('iD.actionMergeRemoteChanges', function () {
                 nodes: ['s1', 's2', 's3', 's4', 's1'],
                 version: '1',
                 tags: {foo: 'foo_new', area: 'yes'}
-            }),
+            });
 
-        saved, error;
-
-    // setup mock locale object..
-    beforeEach(function() {
-        saved = locale;
-        error = console.error;
-        console.error = function () {};
-        locale = {
-            _current: 'en',
-            en: {
-                'merge_remote_changes': {
-                    'annotation': 'Merged remote changes from server.',
-                    'conflict': {
-                        'deleted': 'This object has been deleted by {user}.',
-                        'location': 'This object was moved by both you and {user}.',
-                        'nodelist': 'Nodes were changed by both you and {user}.',
-                        'memberlist': 'Relation members were changed by both you and {user}.',
-                        'tags': 'You changed the <b>{tag}</b> tag to \"{local}\" and {user} changed it to \"{remote}\".'
-                    }
-                }
-            }
-        };
-    });
-
-    afterEach(function() {
-        locale = saved;
-        console.error = error;
-    });
 
     function makeGraph(entities) {
         return _.reduce(entities, function(graph, entity) {
             return graph.replace(entity);
         }, iD.Graph(base));
     }
+
 
     describe('non-destuctive merging', function () {
         describe('tags', function() {

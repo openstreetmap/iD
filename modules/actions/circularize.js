@@ -1,7 +1,7 @@
 import * as d3 from 'd3';
 import _ from 'lodash';
 import { geoEuclideanDistance, geoInterp } from '../geo/index';
-import { coreNode } from '../core/index';
+import { osmNode } from '../osm/index';
 
 import {
     polygonArea as d3polygonArea,
@@ -105,7 +105,7 @@ export function actionCircularize(wayId, projection, maxAngle) {
                     centroid[0] + Math.cos(angle) * radius,
                     centroid[1] + Math.sin(angle) * radius]);
 
-                node = coreNode({loc: loc});
+                node = osmNode({loc: loc});
                 graph = graph.replace(node);
 
                 nodes.splice(endNodeIndex + j, 0, node);

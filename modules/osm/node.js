@@ -1,20 +1,20 @@
 import _ from 'lodash';
-import { coreEntity } from './entity';
+import { osmEntity } from './entity';
 import { geoExtent } from '../geo/index';
 
-export function coreNode() {
-    if (!(this instanceof coreNode)) {
-        return (new coreNode()).initialize(arguments);
+export function osmNode() {
+    if (!(this instanceof osmNode)) {
+        return (new osmNode()).initialize(arguments);
     } else if (arguments.length) {
         this.initialize(arguments);
     }
 }
 
-coreEntity.node = coreNode;
+osmEntity.node = osmNode;
 
-coreNode.prototype = Object.create(coreEntity.prototype);
+osmNode.prototype = Object.create(osmEntity.prototype);
 
-_.extend(coreNode.prototype, {
+_.extend(osmNode.prototype, {
 
     type: 'node',
 

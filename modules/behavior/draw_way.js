@@ -14,9 +14,9 @@ import {
 } from '../modes/index';
 
 import {
-    coreNode,
-    coreWay
-} from '../core/index';
+    osmNode,
+    osmWay
+} from '../osm/index';
 
 import {
     geoChooseEdge,
@@ -44,9 +44,9 @@ export function behaviorDrawWay(context, wayId, index, mode, baseGraph) {
         draw = behaviorDraw(context);
 
     var startIndex = typeof index === 'undefined' ? way.nodes.length - 1 : 0,
-        start = coreNode({loc: context.graph().entity(way.nodes[startIndex]).loc}),
-        end = coreNode({loc: context.map().mouseCoordinates()}),
-        segment = coreWay({
+        start = osmNode({loc: context.graph().entity(way.nodes[startIndex]).loc}),
+        end = osmNode({loc: context.map().mouseCoordinates()}),
+        segment = osmWay({
             nodes: typeof index === 'undefined' ? [start.id, end.id] : [end.id, start.id],
             tags: _.clone(way.tags)
         });
@@ -165,7 +165,7 @@ export function behaviorDrawWay(context, wayId, index, mode, baseGraph) {
         var last = context.hasEntity(way.nodes[way.nodes.length - (isArea ? 2 : 1)]);
         if (last && last.loc[0] === loc[0] && last.loc[1] === loc[1]) return;
 
-        var newNode = coreNode({loc: loc});
+        var newNode = osmNode({loc: loc});
 
         context.replace(
             actionAddEntity(newNode),
@@ -188,7 +188,7 @@ export function behaviorDrawWay(context, wayId, index, mode, baseGraph) {
         if (!isArea && geoEdgeEqual(edge, previousEdge))
             return;
 
-        var newNode = coreNode({ loc: loc });
+        var newNode = osmNode({ loc: loc });
 
         context.perform(
             actionAddMidpoint({ loc: loc, edge: edge}, newNode),

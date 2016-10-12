@@ -1,8 +1,8 @@
 import { t } from '../util/locale';
-import { modeBrowse, modeSelect } from './index';
 import { actionAddEntity } from '../actions/index';
 import { behaviorDraw } from '../behavior/index';
-import { coreNode } from '../core/index';
+import { modeBrowse, modeSelect } from './index';
+import { osmNode } from '../osm/index';
 
 
 export function modeAddPoint(context) {
@@ -24,7 +24,7 @@ export function modeAddPoint(context) {
 
 
     function add(loc) {
-        var node = coreNode({ loc: loc });
+        var node = osmNode({ loc: loc });
 
         context.perform(
             actionAddEntity(node),

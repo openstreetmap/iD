@@ -1,16 +1,13 @@
 import * as d3 from 'd3';
 import _ from 'lodash';
-import { utilRebind } from '../util/rebind';
-import { utilFunctor } from '../util/index';
+import osmAuth from 'osm-auth';
+import { JXON } from '../util/jxon';
 import { d3geoTile } from '../lib/d3.geo.tile';
 import { geoExtent } from '../geo/index';
+import { osmEntity, osmNode, osmRelation, osmWay } from '../osm/index';
 import { utilDetect } from '../util/detect';
-import { coreEntity } from './entity';
-import { coreNode } from './node';
-import { coreRelation } from './relation';
-import { coreWay } from './way';
-import { JXON } from '../util/jxon';
-import osmAuth from 'osm-auth';
+import { utilRebind } from '../util/rebind';
+import { utilFunctor } from '../util/index';
 
 
 export function coreConnection(useHttps) {
@@ -75,8 +72,8 @@ export function coreConnection(useHttps) {
 
 
     connection.loadEntity = function(id, callback) {
-        var type = coreEntity.id.type(id),
-            osmID = coreEntity.id.toOSM(id);
+        var type = osmEntity.id.type(id),
+            osmID = osmEntity.id.toOSM(id);
 
         connection.loadFromURL(
             url + '/api/0.6/' + type + '/' + osmID + (type !== 'node' ? '/full' : ''),
@@ -87,8 +84,8 @@ export function coreConnection(useHttps) {
 
 
     connection.loadEntityVersion = function(id, version, callback) {
-        var type = coreEntity.id.type(id),
-            osmID = coreEntity.id.toOSM(id);
+        var type = osmEntity.id.type(id),
+            osmID = osmEntity.id.toOSM(id);
 
         connection.loadFromURL(
             url + '/api/0.6/' + type + '/' + osmID + '/' + version,
@@ -99,9 +96,9 @@ export function coreConnection(useHttps) {
 
 
     connection.loadMultiple = function(ids, callback) {
-        _.each(_.groupBy(_.uniq(ids), coreEntity.id.type), function(v, k) {
+        _.each(_.groupBy(_.uniq(ids), osmEntity.id.type), function(v, k) {
             var type = k + 's',
-                osmIDs = _.map(v, coreEntity.id.toOSM);
+                osmIDs = _.map(v, osmEntity.id.toOSM);
 
             _.each(_.chunk(osmIDs, 150), function(arr) {
                 connection.loadFromURL(
@@ -175,8 +172,8 @@ export function coreConnection(useHttps) {
     var parsers = {
         node: function nodeData(obj) {
             var attrs = obj.attributes;
-            return new coreNode({
-                id: coreEntity.id.fromOSM(nodeStr, attrs.id.value),
+            return new osmNode({
+                id: osmEntity.id.fromOSM(nodeStr, attrs.id.value),
                 loc: getLoc(attrs),
                 version: attrs.version.value,
                 user: attrs.user && attrs.user.value,
@@ -187,8 +184,8 @@ export function coreConnection(useHttps) {
 
         way: function wayData(obj) {
             var attrs = obj.attributes;
-            return new coreWay({
-                id: coreEntity.id.fromOSM(wayStr, attrs.id.value),
+            return new osmWay({
+                id: osmEntity.id.fromOSM(wayStr, attrs.id.value),
                 version: attrs.version.value,
                 user: attrs.user && attrs.user.value,
                 tags: getTags(obj),
@@ -199,8 +196,8 @@ export function coreConnection(useHttps) {
 
         relation: function relationData(obj) {
             var attrs = obj.attributes;
-            return new coreRelation({
-                id: coreEntity.id.fromOSM(relationStr, attrs.id.value),
+            return new osmRelation({
+                id: osmEntity.id.fromOSM(relationStr, attrs.id.value),
                 version: attrs.version.value,
                 user: attrs.user && attrs.user.value,
                 tags: getTags(obj),

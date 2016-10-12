@@ -1,6 +1,6 @@
-import { coreRelation, coreWay } from '../core/index';
 import { actionSplit } from './split';
 import { geoInferRestriction } from '../geo/index';
+import { osmRelation, osmWay } from '../osm/index';
 
 
 // Create a restriction relation for `turn`, which must have the following structure:
@@ -39,7 +39,7 @@ export function actionRestrictTurn(turn, projection, restrictionId) {
         }
 
         function split(toOrFrom) {
-            var newID = toOrFrom.newID || coreWay().id;
+            var newID = toOrFrom.newID || osmWay().id;
             graph = actionSplit(via.id, [newID])
                 .limitWays([toOrFrom.way])(graph);
 
@@ -72,7 +72,7 @@ export function actionRestrictTurn(turn, projection, restrictionId) {
             to = split(turn.to)[0];
         }
 
-        return graph.replace(coreRelation({
+        return graph.replace(osmRelation({
             id: restrictionId,
             tags: {
                 type: 'restriction',
