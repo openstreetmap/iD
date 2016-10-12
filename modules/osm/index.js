@@ -7,13 +7,17 @@ export {
     osmIntersection,
     osmTurn,
     osmInferRestriction
-} from './intersection.js';
+} from './intersection';
+
+export {
+    osmLanes
+} from './lanes';
 
 export {
     osmIsSimpleMultipolygonOuterMember,
     osmSimpleMultipolygonOuterMember,
     osmJoinWays
-} from './multipolygon.js';
+} from './multipolygon';
 
 export {
     osmOneWayTags,
