@@ -3597,7 +3597,7 @@
             },
             "shop/bakery": {
                 "name": "Bakery",
-                "terms": ""
+                "terms": "bread, pastry, cake, sandwitch"
             },
             "shop/bathroom_furnishing": {
                 "name": "Bathroom Furnishing Store",
