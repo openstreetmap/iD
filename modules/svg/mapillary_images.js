@@ -2,7 +2,7 @@ import * as d3 from 'd3';
 import _ from 'lodash';
 import { svgPointTransform } from './point_transform';
 import { utilGetDimensions, utilSetDimensions } from '../util/dimensions';
-import { serviceMapillary } from '../services/index';
+import { services } from '../services/index';
 
 
 export function svgMapillaryImages(projection, context, dispatch) {
@@ -20,10 +20,10 @@ export function svgMapillaryImages(projection, context, dispatch) {
 
 
     function getMapillary() {
-        if (serviceMapillary && !_mapillary) {
-            _mapillary = serviceMapillary.init();
+        if (services.mapillary && !_mapillary) {
+            _mapillary = services.mapillary;
             _mapillary.event.on('loadedImages', debouncedRedraw);
-        } else if (!serviceMapillary && _mapillary) {
+        } else if (!services.mapillary && _mapillary) {
             _mapillary = null;
         }
 
@@ -81,7 +81,7 @@ export function svgMapillaryImages(projection, context, dispatch) {
         context.map().centerEase(d.loc);
 
         mapillary
-            .setSelectedImage(d.key, true)
+            .selectedImage(d.key, true)
             .updateViewer(d.key, context)
             .showViewer();
     }
@@ -97,7 +97,7 @@ export function svgMapillaryImages(projection, context, dispatch) {
     function update() {
         var mapillary = getMapillary(),
             data = (mapillary ? mapillary.images(projection, utilGetDimensions(layer)) : []),
-            imageKey = mapillary ? mapillary.getSelectedImage() : null;
+            imageKey = mapillary ? mapillary.selectedImage() : null;
 
         var markers = layer.selectAll('.viewfield-group')
             .data(data, function(d) { return d.key; });

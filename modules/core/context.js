@@ -10,7 +10,7 @@ import { presetInit } from '../presets/init';
 import { rendererBackground } from '../renderer/background';
 import { rendererFeatures } from '../renderer/features';
 import { rendererMap } from '../renderer/map';
-import * as services from '../services/index';
+import { services } from '../services/index';
 import { uiInit } from '../ui/init';
 import { utilDetect } from '../util/detect';
 import { utilRebind } from '../util/rebind';
@@ -140,19 +140,6 @@ export function coreContext(root) {
         if (inIntro || (mode && mode.id === 'save') || d3.select('.modal').size()) return;
         history.save();
         if (history.hasChanges()) return t('save.unsaved_changes');
-    };
-
-    context.flush = function() {
-        context.debouncedSave.cancel();
-        connection.flush();
-        features.reset();
-        history.reset();
-        _.each(services, function(service) {
-            // TODO: fix access to services  #3324
-            // var reset = service().reset;
-            // if (reset) reset(context);
-        });
-        return context;
     };
 
 
@@ -300,15 +287,6 @@ export function coreContext(root) {
     };
 
 
-    /* Taginfo */
-    var taginfo;
-    context.taginfo = function(_) {
-        if (!arguments.length) return taginfo;
-        taginfo = _;
-        return context;
-    };
-
-
     /* Assets */
     var assetPath = '';
     context.assetPath = function(_) {
@@ -352,6 +330,21 @@ export function coreContext(root) {
         } else {
             cb();
         }
+    };
+
+
+    /* reset (aka flush) */
+    context.reset = context.flush = function() {
+        context.debouncedSave.cancel();
+        connection.flush();
+        features.reset();
+        history.reset();
+        _.each(services, function(service) {
+            if (typeof service.reset === 'function') {
+                service.reset(context);
+            }
+        });
+        return context;
     };
 
 
@@ -406,6 +399,13 @@ export function coreContext(root) {
     context.redrawEnable = map.redrawEnable;
 
     presets = presetInit();
+
+    _.each(services, function(service) {
+        if (typeof service.init === 'function') {
+            service.init(context);
+        }
+    });
+
 
     return utilRebind(context, dispatch, 'on');
 }

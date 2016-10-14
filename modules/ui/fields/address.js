@@ -9,16 +9,17 @@ import {
     geoSphericalDistance
 } from '../../geo/index';
 
-import { serviceNominatim } from '../../services/index';
+import { services } from '../../services/index';
 import { utilRebind } from '../../util/rebind';
 import { utilGetSetValue } from '../../util/get_set_value';
 
 
 export function uiFieldAddress(field, context) {
     var dispatch = d3.dispatch('init', 'change'),
-        wrap,
-        entity,
-        isInitialized;
+        nominatim = services.nominatim,
+        wrap = d3.select(null),
+        isInitialized = false,
+        entity;
 
     var widths = {
         housenumber: 1/3,
@@ -114,6 +115,72 @@ export function uiFieldAddress(field, context) {
     }
 
 
+    function initCallback(err, countryCode) {
+        if (err) return;
+
+        var addressFormat = _.find(dataAddressFormats, function (a) {
+            return a && a.countryCodes && _.includes(a.countryCodes, countryCode);
+        }) || _.first(dataAddressFormats);
+
+        function row(r) {
+            // Normalize widths.
+            var total = _.reduce(r, function(sum, field) {
+                return sum + (widths[field] || 0.5);
+            }, 0);
+
+            return r.map(function (field) {
+                return {
+                    id: field,
+                    width: (widths[field] || 0.5) / total
+                };
+            });
+        }
+
+        wrap.selectAll('div')
+            .data(addressFormat.format)
+            .enter()
+            .append('div')
+            .attr('class', 'addr-row')
+            .selectAll('input')
+            .data(row)
+            .enter()
+            .append('input')
+            .property('type', 'text')
+            .attr('placeholder', function (d) { return field.t('placeholders.' + d.id); })
+            .attr('class', function (d) { return 'addr-' + d.id; })
+            .style('width', function (d) { return d.width * 100 + '%'; });
+
+        // Update
+        wrap.selectAll('.addr-street')
+            .call(d3combobox()
+                .fetcher(function(value, callback) {
+                    callback(getStreets());
+                }));
+
+        wrap.selectAll('.addr-city')
+            .call(d3combobox()
+                .fetcher(function(value, callback) {
+                    callback(getCities());
+                }));
+
+        wrap.selectAll('.addr-postcode')
+            .call(d3combobox()
+                .fetcher(function(value, callback) {
+                    callback(getPostCodes());
+                }));
+
+        wrap.selectAll('input')
+            .on('blur', change())
+            .on('change', change());
+
+        wrap.selectAll('input:not(.combobox-input)')
+            .on('input', change(true));
+
+        dispatch.call('init');
+        isInitialized = true;
+    }
+
+
     function address(selection) {
         isInitialized = false;
 
@@ -126,72 +193,10 @@ export function uiFieldAddress(field, context) {
             .merge(wrap);
 
 
-        var center = entity.extent(context.graph()).center(),
-            addressFormat;
-
-        serviceNominatim.init();
-        serviceNominatim.countryCode(center, function (err, countryCode) {
-            addressFormat = _.find(dataAddressFormats, function (a) {
-                return a && a.countryCodes && _.includes(a.countryCodes, countryCode);
-            }) || _.first(dataAddressFormats);
-
-            function row(r) {
-                // Normalize widths.
-                var total = _.reduce(r, function(sum, field) {
-                    return sum + (widths[field] || 0.5);
-                }, 0);
-
-                return r.map(function (field) {
-                    return {
-                        id: field,
-                        width: (widths[field] || 0.5) / total
-                    };
-                });
-            }
-
-            wrap.selectAll('div')
-                .data(addressFormat.format)
-                .enter()
-                .append('div')
-                .attr('class', 'addr-row')
-                .selectAll('input')
-                .data(row)
-                .enter()
-                .append('input')
-                .property('type', 'text')
-                .attr('placeholder', function (d) { return field.t('placeholders.' + d.id); })
-                .attr('class', function (d) { return 'addr-' + d.id; })
-                .style('width', function (d) { return d.width * 100 + '%'; });
-
-            // Update
-            wrap.selectAll('.addr-street')
-                .call(d3combobox()
-                    .fetcher(function(value, callback) {
-                        callback(getStreets());
-                    }));
-
-            wrap.selectAll('.addr-city')
-                .call(d3combobox()
-                    .fetcher(function(value, callback) {
-                        callback(getCities());
-                    }));
-
-            wrap.selectAll('.addr-postcode')
-                .call(d3combobox()
-                    .fetcher(function(value, callback) {
-                        callback(getPostCodes());
-                    }));
-
-            wrap.selectAll('input')
-                .on('blur', change())
-                .on('change', change());
-
-            wrap.selectAll('input:not(.combobox-input)')
-                .on('input', change(true));
-
-            dispatch.call('init');
-            isInitialized = true;
-        });
+        if (nominatim && entity) {
+            var center = entity.extent(context.graph()).center();
+            nominatim.countryCode(center, initCallback);
+        }
     }
 
 

@@ -1,7 +1,7 @@
 import * as d3 from 'd3';
 import { t } from '../../util/locale';
-import { serviceNominatim } from '../../services/index';
 import { dataPhoneFormats } from '../../../data/index';
+import { services } from '../../services/index';
 import { utilRebind } from '../../util/rebind';
 import { utilGetSetValue } from '../../util/get_set_value';
 
@@ -15,6 +15,7 @@ export {
 
 export function uiFieldText(field, context) {
     var dispatch = d3.dispatch('change'),
+        nominatim = services.nominatim,
         input,
         entity;
 
@@ -37,10 +38,9 @@ export function uiFieldText(field, context) {
             .on('blur', change())
             .on('change', change());
 
-        if (field.type === 'tel') {
+        if (field.type === 'tel' && nominatim && entity) {
             var center = entity.extent(context.graph()).center();
-            serviceNominatim.init();
-            serviceNominatim.countryCode(center, function (err, countryCode) {
+            nominatim.countryCode(center, function (err, countryCode) {
                 if (err || !dataPhoneFormats[countryCode]) return;
                 selection.selectAll('#' + fieldId)
                     .attr('placeholder', dataPhoneFormats[countryCode]);

@@ -3,7 +3,7 @@ describe('iD.serviceTaginfo', function() {
 
     beforeEach(function() {
         server = sinon.fakeServer.create();
-        taginfo = iD.serviceTaginfo.init();
+        taginfo = iD.services.taginfo;
         taginfo.reset();
     });
 

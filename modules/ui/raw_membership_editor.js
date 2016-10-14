@@ -12,13 +12,16 @@ import {
 
 import { modeSelect } from '../modes/index';
 import { osmEntity, osmRelation } from '../osm/index';
+import { services } from '../services/index';
 import { svgIcon } from '../svg/index';
 import { uiDisclosure } from './disclosure';
 import { utilDisplayName } from '../util/index';
 
 
 export function uiRawMembershipEditor(context) {
-    var id, showBlank;
+    var taginfo = services.taginfo,
+        id, showBlank;
+
 
 
     function selectRelation(d) {
@@ -197,7 +200,7 @@ export function uiRawMembershipEditor(context) {
                 .on('click', deleteMembership)
                 .call(svgIcon('#operation-delete'));
 
-            if (context.taginfo()) {
+            if (taginfo) {
                 enter.each(bindTypeahead);
             }
 
@@ -286,7 +289,7 @@ export function uiRawMembershipEditor(context) {
                 role.call(d3combobox()
                     .fetcher(function(role, callback) {
                         var rtype = d.relation.tags.type;
-                        context.taginfo().roles({
+                        taginfo.roles({
                             debounce: true,
                             rtype: rtype || '',
                             geometry: context.geometry(id),

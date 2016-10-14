@@ -1,6 +1,7 @@
 import * as d3 from 'd3';
 import { d3combobox } from '../lib/d3.combobox.js';
 import { t } from '../util/locale';
+import { services } from '../services/index';
 import { svgIcon } from '../svg/index';
 import { uiDisclosure } from './disclosure';
 import { uiTagReference } from './tag_reference';
@@ -9,7 +10,8 @@ import { utilRebind } from '../util/rebind';
 
 
 export function uiRawTagEditor(context) {
-    var dispatch = d3.dispatch('change'),
+    var taginfo = services.taginfo,
+        dispatch = d3.dispatch('change'),
         showBlank = false,
         state,
         preset,
@@ -118,7 +120,7 @@ export function uiRawTagEditor(context) {
                     key = row.select('input.key'),      // propagate bound data to child
                     value = row.select('input.value');  // propagate bound data to child
 
-                if (context.taginfo()) {
+                if (taginfo) {
                     bindTypeahead(key, value);
                 }
 
@@ -177,7 +179,7 @@ export function uiRawTagEditor(context) {
 
             key.call(d3combobox()
                 .fetcher(function(value, callback) {
-                    context.taginfo().keys({
+                    taginfo.keys({
                         debounce: true,
                         geometry: context.geometry(id),
                         query: value
@@ -188,7 +190,7 @@ export function uiRawTagEditor(context) {
 
             value.call(d3combobox()
                 .fetcher(function(value, callback) {
-                    context.taginfo().values({
+                    taginfo.values({
                         debounce: true,
                         key: utilGetSetValue(key),
                         geometry: context.geometry(id),

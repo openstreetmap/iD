@@ -2,12 +2,15 @@ import { jsonpRequest } from '../util/jsonp_request';
 import { utilQsString } from '../util/index';
 
 
-var wikipedia = {},
-    endpoint = 'https://en.wikipedia.org/w/api.php?';
+var endpoint = 'https://en.wikipedia.org/w/api.php?';
+
+export default {
+
+    init: function() {},
+    reset: function() {},
 
 
-export function init() {
-    wikipedia.search = function(lang, query, callback) {
+    search: function(lang, query, callback) {
         if (!query) {
             callback('', []);
             return;
@@ -32,10 +35,10 @@ export function init() {
                 }
             }
         );
-    };
+    },
 
 
-    wikipedia.suggestions = function(lang, query, callback) {
+    suggestions: function(lang, query, callback) {
         if (!query) {
             callback('', []);
             return;
@@ -58,10 +61,10 @@ export function init() {
                 }
             }
         );
-    };
+    },
 
 
-    wikipedia.translations = function(lang, title, callback) {
+    translations: function(lang, title, callback) {
         if (!title) {
             callback({});
             return;
@@ -90,8 +93,6 @@ export function init() {
                 }
             }
         );
-    };
+    }
 
-
-    return wikipedia;
-}
+};

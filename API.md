@@ -150,7 +150,6 @@ iD can use external presets exclusively or along with the default OpenStreetMap 
 
 var id = iD.Context(window)
   .presets(customPresets)
-  .taginfo(iD.serviceTaginfo())
   .imagery(iD.dataImagery);
 
 ```
@@ -165,26 +164,12 @@ Just like Presets, Imagery can be configured using the `context.imagery` accesso
 
 var id = iD.Context(window)
   .presets(customPresets)
-  .taginfo(iD.serviceTaginfo())
   .imagery(customImagery);
 
 ```
 
 The Imagery object should follow the structure defined by [editor-layer-index](https://github.com/osmlab/editor-layer-index/blob/gh-pages/schema.json)
 
-
-### Taginfo
-
-[Taginfo](http://taginfo.openstreetmap.org/) is a service that provides comprehensive documentation about the tags used in OpenStreetMap. iD uses Taginfo to display description and also autocomplete keys and values. This can be completely disabled by removing the `context.taginfo` accessor. To point iD to a different instance of Taginfo other than the default OpenStreetMap instance:
-
-```js
-
-var id = iD.Context(window)
-  .presets(customPresets)
-  .taginfo(iD.serviceTaginfo().endpoint('url'))
-  .imagery(customImagery);
-
-```
 
 ### Minimum Editable Zoom
 

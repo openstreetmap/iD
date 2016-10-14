@@ -3,8 +3,8 @@ import _ from 'lodash';
 import { utilQsString } from '../util/index';
 
 
-var taginfo = {},
-    endpoint = 'https://taginfo.openstreetmap.org/api/4/',
+var endpoint = 'https://taginfo.openstreetmap.org/api/4/',
+    taginfoCache = {},
     tag_sorts = {
         point: 'count_nodes',
         vertex: 'count_nodes',
@@ -130,10 +130,8 @@ var debounced = _.debounce(d3.json, 100, true);
 
 
 function request(url, debounce, callback) {
-    var cache = taginfo.cache;
-
-    if (cache[url]) {
-        callback(null, cache[url]);
+    if (taginfoCache[url]) {
+        callback(null, taginfoCache[url]);
     } else if (debounce) {
         debounced(url, done);
     } else {
@@ -141,14 +139,21 @@ function request(url, debounce, callback) {
     }
 
     function done(err, data) {
-        if (!err) cache[url] = data;
+        if (!err) {
+            taginfoCache[url] = data;
+        }
         callback(err, data);
     }
 }
 
 
-export function init() {
-    taginfo.keys = function(parameters, callback) {
+export default {
+
+    init: function() { taginfoCache = {}; },
+    reset: function() { taginfoCache = {}; },
+
+
+    keys: function(parameters, callback) {
         var debounce = parameters.debounce;
         parameters = clean(setSort(parameters));
         request(endpoint + 'keys/all?' +
@@ -158,13 +163,18 @@ export function init() {
                 sortorder: 'desc',
                 page: 1
             }, parameters)), debounce, function(err, d) {
-                if (err) return callback(err);
-                var f = filterKeys(parameters.filter);
-                callback(null, d.data.filter(f).sort(sortKeys).map(valKey));
-            });
-    };
+                if (err) {
+                    callback(err);
+                } else {
+                    var f = filterKeys(parameters.filter);
+                    callback(null, d.data.filter(f).sort(sortKeys).map(valKey));
+                }
+            }
+        );
+    },
 
-    taginfo.multikeys = function(parameters, callback) {
+
+    multikeys: function(parameters, callback) {
         var debounce = parameters.debounce;
         parameters = clean(setSort(parameters));
         request(endpoint + 'keys/all?' +
@@ -174,13 +184,18 @@ export function init() {
                 sortorder: 'desc',
                 page: 1
             }, parameters)), debounce, function(err, d) {
-                if (err) return callback(err);
-                var f = filterMultikeys();
-                callback(null, d.data.filter(f).map(valKey));
-            });
-    };
+                if (err) {
+                    callback(err);
+                } else {
+                    var f = filterMultikeys();
+                    callback(null, d.data.filter(f).map(valKey));
+                }
+            }
+        );
+    },
 
-    taginfo.values = function(parameters, callback) {
+
+    values: function(parameters, callback) {
         var debounce = parameters.debounce;
         parameters = clean(setSort(setFilter(parameters)));
         request(endpoint + 'key/values?' +
@@ -190,19 +205,24 @@ export function init() {
                 sortorder: 'desc',
                 page: 1
             }, parameters)), debounce, function(err, d) {
-                if (err) return callback(err);
-                // In most cases we prefer taginfo value results with lowercase letters.
-                // A few OSM keys expect values to contain uppercase values (see #3377).
-                // This is not an exhaustive list (e.g. `name` also has uppercase values)
-                // but these are the fields where taginfo value lookup is most useful.
-                var re = /network|taxon|genus|species/;
-                var allowUpperCase = (parameters.key.match(re) !== null);
-                var f = filterValues(allowUpperCase);
-                callback(null, d.data.filter(f).map(valKeyDescription));
-            });
-    };
+                if (err) {
+                    callback(err);
+                } else {
+                    // In most cases we prefer taginfo value results with lowercase letters.
+                    // A few OSM keys expect values to contain uppercase values (see #3377).
+                    // This is not an exhaustive list (e.g. `name` also has uppercase values)
+                    // but these are the fields where taginfo value lookup is most useful.
+                    var re = /network|taxon|genus|species/;
+                    var allowUpperCase = (parameters.key.match(re) !== null);
+                    var f = filterValues(allowUpperCase);
+                    callback(null, d.data.filter(f).map(valKeyDescription));
+                }
+            }
+        );
+    },
 
-    taginfo.roles = function(parameters, callback) {
+
+    roles: function(parameters, callback) {
         var debounce = parameters.debounce;
         var geometry = parameters.geometry;
         parameters = clean(setSortMembers(parameters));
@@ -213,13 +233,18 @@ export function init() {
                 sortorder: 'desc',
                 page: 1
             }, parameters)), debounce, function(err, d) {
-                if (err) return callback(err);
-                var f = filterRoles(geometry);
-                callback(null, d.data.filter(f).map(roleKey));
-            });
-    };
+                if (err) {
+                    callback(err);
+                } else {
+                    var f = filterRoles(geometry);
+                    callback(null, d.data.filter(f).map(roleKey));
+                }
+            }
+        );
+    },
 
-    taginfo.docs = function(parameters, callback) {
+
+    docs: function(parameters, callback) {
         var debounce = parameters.debounce;
         parameters = clean(setSort(parameters));
 
@@ -228,26 +253,19 @@ export function init() {
         else if (parameters.rtype) path = 'relation/wiki_pages?';
 
         request(endpoint + path + utilQsString(parameters), debounce, function(err, d) {
-            if (err) return callback(err);
-            callback(null, d.data);
+            if (err) {
+                callback(err);
+            } else {
+                callback(null, d.data);
+            }
         });
-    };
+    },
 
-    taginfo.endpoint = function(_) {
+
+    endpoint: function(_) {
         if (!arguments.length) return endpoint;
         endpoint = _;
-        return taginfo;
-    };
-
-    taginfo.reset = function() {
-        taginfo.cache = {};
-        return taginfo;
-    };
-
-
-    if (!taginfo.cache) {
-        taginfo.reset();
+        return this;
     }
 
-    return taginfo;
-}
+};

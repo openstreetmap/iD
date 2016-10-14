@@ -2,15 +2,17 @@ import { jsonpRequest } from '../util/jsonp_request';
 import { utilQsString } from '../util/index';
 
 
-var wikidata = {},
-    endpoint = 'https://www.wikidata.org/w/api.php?';
+var endpoint = 'https://www.wikidata.org/w/api.php?';
 
+export default {
 
-export function init() {
+    init: function() {},
+    reset: function() {},
+
 
     // Given a Wikipedia language and article title, return an array of
     // corresponding Wikidata entities.
-    wikidata.itemsByTitle = function(lang, title, callback) {
+    itemsByTitle: function(lang, title, callback) {
         if (!title) {
             callback('', {});
             return;
@@ -31,8 +33,6 @@ export function init() {
                 callback(title, data.entities || {});
             }
         });
-    };
+    }
 
-
-    return wikidata;
-}
+};

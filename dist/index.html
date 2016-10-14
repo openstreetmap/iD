@@ -39,8 +39,7 @@
             } else {
                 var id = iD.Context(window)
                   .presets(iD.dataPresets)
-                  .imagery(iD.dataImagery)
-                  .taginfo(iD.serviceTaginfo.init());
+                  .imagery(iD.dataImagery);
 
                 id.ui()(document.getElementById('id-container'));
             }

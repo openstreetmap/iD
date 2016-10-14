@@ -3,9 +3,8 @@ describe('iD.serviceNominatim', function() {
 
     beforeEach(function() {
         server = sinon.fakeServer.create();
-        iD.serviceNominatim.init();
-        nominatim = iD.serviceNominatim;
-        iD.serviceNominatim.reset();
+        nominatim = iD.services.nominatim;
+        nominatim.reset();
     });
 
     afterEach(function() {
@@ -17,6 +16,7 @@ describe('iD.serviceNominatim', function() {
     }
 
     describe.skip('#countryCode', function() {
+
         it('calls the given callback with the results of the country code query', function() {
             var callback = sinon.spy();
             nominatim.countryCode([16, 48], callback);
@@ -30,6 +30,7 @@ describe('iD.serviceNominatim', function() {
                 {format: 'json', addressdetails: '1', lat: '48', lon: '16'});
             expect(callback).to.have.been.calledWith(null, 'at');
         });
+
         it('should not cache the first country code result', function() {
             var callback = sinon.spy();
             nominatim.countryCode([16, 48], callback);
@@ -57,6 +58,7 @@ describe('iD.serviceNominatim', function() {
                 {format: 'json', addressdetails: '1', lat: '49', lon: '17'});
             expect(callback).to.have.been.calledWith(null, 'cz');
         });
+
         it('should cache the first country code result', function() {
             var callback = sinon.spy();
             nominatim.countryCode([16, 48], callback);
@@ -82,6 +84,7 @@ describe('iD.serviceNominatim', function() {
 
             expect(callback).to.have.been.calledWith(null, 'at');
         });
+
         it('calls the given callback with an error', function() {
             var callback = sinon.spy();
             nominatim.countryCode([1000, 1000], callback);

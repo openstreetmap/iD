@@ -1,13 +1,13 @@
-import * as serviceMapillary from './mapillary';
-import * as serviceNominatim from './nominatim';
-import * as serviceTaginfo from './taginfo';
-import * as serviceWikidata from './wikidata';
-import * as serviceWikipedia from './wikipedia';
+import serviceMapillary from './mapillary';
+import serviceNominatim from './nominatim';
+import serviceTaginfo from './taginfo';
+import serviceWikidata from './wikidata';
+import serviceWikipedia from './wikipedia';
 
-export {
-    serviceMapillary,
-    serviceTaginfo,
-    serviceNominatim,
-    serviceWikidata,
-    serviceWikipedia
+export var services = {
+    mapillary: serviceMapillary,
+    nominatim: serviceNominatim,
+    taginfo: serviceTaginfo,
+    wikidata: serviceWikidata,
+    wikipedia: serviceWikipedia
 };

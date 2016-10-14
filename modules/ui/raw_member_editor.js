@@ -5,12 +5,14 @@ import { actionChangeMember, actionDeleteMember } from '../actions/index';
 import { modeBrowse, modeSelect } from '../modes/index';
 import { osmEntity } from '../osm/index';
 import { svgIcon } from '../svg/index';
+import { services } from '../services/index';
 import { uiDisclosure } from './disclosure';
 import { utilDisplayName } from '../util/index';
 
 
 export function uiRawMemberEditor(context) {
-    var id;
+    var id,
+        taginfo = services.taginfo;
 
 
     function selectMember(d) {
@@ -134,7 +136,7 @@ export function uiRawMemberEditor(context) {
                 .on('click', deleteMember)
                 .call(svgIcon('#operation-delete'));
 
-            if (context.taginfo()) {
+            if (taginfo) {
                 enter.each(bindTypeahead);
             }
 
@@ -159,7 +161,7 @@ export function uiRawMemberEditor(context) {
                 role.call(d3combobox()
                     .fetcher(function(role, callback) {
                         var rtype = entity.tags.type;
-                        context.taginfo().roles({
+                        taginfo.roles({
                             debounce: true,
                             rtype: rtype || '',
                             geometry: context.geometry(d.member.id),

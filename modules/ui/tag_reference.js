@@ -2,11 +2,13 @@ import * as d3 from 'd3';
 import _ from 'lodash';
 import { t } from '../util/locale';
 import { utilDetect } from '../util/detect';
+import { services } from '../services/index';
 import { svgIcon } from '../svg/index';
 
 
 export function uiTagReference(tag, context) {
-    var tagReference = {},
+    var taginfo = services.taginfo,
+        tagReference = {},
         button,
         body,
         loaded,
@@ -40,9 +42,11 @@ export function uiTagReference(tag, context) {
 
 
     function load(param) {
+        if (!taginfo) return;
+
         button.classed('tag-reference-loading', true);
 
-        context.taginfo().docs(param, function show(err, data) {
+        taginfo.docs(param, function show(err, data) {
             var docs;
             if (!err && data) {
                 docs = findLocal(data);
@@ -126,9 +130,7 @@ export function uiTagReference(tag, context) {
                 } else if (loaded) {
                     done();
                 } else {
-                    if (context.taginfo()) {
-                        load(tag);
-                    }
+                    load(tag);
                 }
             })
             .attr('class', 'tag-reference-button')

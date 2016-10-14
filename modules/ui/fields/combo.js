@@ -2,7 +2,7 @@ import * as d3 from 'd3';
 import _ from 'lodash';
 import { t } from '../../util/locale';
 import { d3combobox } from '../../lib/d3.combobox.js';
-import { serviceNominatim } from '../../services/index';
+import { services } from '../../services/index';
 import { utilRebind } from '../../util/rebind';
 import { utilGetSetValue } from '../../util/get_set_value';
 
@@ -15,6 +15,8 @@ export {
 
 export function uiFieldCombo(field, context) {
     var dispatch = d3.dispatch('change'),
+        nominatim = services.nominatim,
+        taginfo = services.taginfo,
         isMulti = (field.type === 'multiCombo'),
         isNetwork = (field.type === 'networkCombo'),
         optstrings = field.strings && field.strings.options,
@@ -108,7 +110,7 @@ export function uiFieldCombo(field, context) {
             selection.call(combobox, attachTo);
             setStaticValues(setPlaceholder);
 
-        } else if (context.taginfo()) {
+        } else if (taginfo) {
             selection.call(combobox.fetcher(setTaginfoValues), attachTo);
             setTaginfoValues('', setPlaceholder);
         }
@@ -151,7 +153,7 @@ export function uiFieldCombo(field, context) {
         if (hasCountryPrefix) {
             query = country + ':';
         }
-        context.taginfo()[fn]({
+        taginfo[fn]({
             debounce: true,
             key: field.key,
             geometry: context.geometry(entity.id),
@@ -248,10 +250,9 @@ export function uiFieldCombo(field, context) {
             .call(initCombo, selection)
             .merge(input);
 
-        if (isNetwork) {
+        if (isNetwork && nominatim && entity) {
             var center = entity.extent(context.graph()).center();
-            serviceNominatim.init();
-            serviceNominatim.countryCode(center, function (err, code) {
+            nominatim.countryCode(center, function (err, code) {
                 country = code;
             });
         }

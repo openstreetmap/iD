@@ -20,7 +20,6 @@
         id = iD.Context(window)
             .presets(iD.dataPresets)
             .imagery(iD.dataImagery)
-            .taginfo(iD.serviceTaginfo.init())
             .assetPath('dist/');
 
         id.ui()(document.getElementById('id-container'));

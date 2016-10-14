@@ -3,7 +3,7 @@ import _ from 'lodash';
 import { t } from '../../util/locale';
 import { d3combobox } from '../../lib/d3.combobox.js';
 import { dataSuggestions, dataWikipedia } from '../../../data/index';
-import { serviceWikipedia } from '../../services/index';
+import { services } from '../../services/index';
 import { svgIcon } from '../../svg/index';
 import { tooltip } from '../../util/tooltip';
 import { utilDetect } from '../../util/detect';
@@ -14,7 +14,7 @@ import { utilSuggestNames } from '../../util/index';
 
 export function uiFieldLocalized(field, context) {
     var dispatch = d3.dispatch('change', 'input'),
-        wikipedia = serviceWikipedia.init(),
+        wikipedia = services.wikipedia,
         input = d3.select(null),
         localizedInputs = d3.select(null),
         wikiTitles,

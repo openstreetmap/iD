@@ -2,7 +2,7 @@ import * as d3 from 'd3';
 import _ from 'lodash';
 import { utilGetDimensions, utilSetDimensions } from '../util/dimensions';
 import { svgPointTransform } from './point_transform';
-import { serviceMapillary } from '../services/index';
+import { services } from '../services/index';
 
 
 export function svgMapillarySigns(projection, context, dispatch) {
@@ -20,10 +20,10 @@ export function svgMapillarySigns(projection, context, dispatch) {
 
 
     function getMapillary() {
-        if (serviceMapillary && !_mapillary) {
-            _mapillary = serviceMapillary.init();
+        if (services.mapillary && !_mapillary) {
+            _mapillary = services.mapillary;
             _mapillary.event.on('loadedSigns', debouncedRedraw);
-        } else if (!serviceMapillary && _mapillary) {
+        } else if (!services.mapillary && _mapillary) {
             _mapillary = null;
         }
         return _mapillary;
@@ -60,7 +60,7 @@ export function svgMapillarySigns(projection, context, dispatch) {
         context.map().centerEase(d.loc);
 
         mapillary
-            .setSelectedImage(d.key, true)
+            .selectedImage(d.key, true)
             .updateViewer(d.key, context)
             .showViewer();
     }
@@ -69,7 +69,7 @@ export function svgMapillarySigns(projection, context, dispatch) {
     function update() {
         var mapillary = getMapillary(),
             data = (mapillary ? mapillary.signs(projection, utilGetDimensions(layer)) : []),
-            imageKey = mapillary ? mapillary.getSelectedImage() : null;
+            imageKey = mapillary ? mapillary.selectedImage() : null;
 
         var signs = layer.selectAll('.icon-sign')
             .data(data, function(d) { return d.key; });

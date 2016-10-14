@@ -4,12 +4,7 @@ import { t } from '../../util/locale';
 import { actionChangeTags } from '../../actions/index';
 import { d3combobox } from '../../lib/d3.combobox.js';
 import { dataWikipedia } from '../../../data/index';
-
-import {
-    serviceWikipedia,
-    serviceWikidata
-} from '../../services/index';
-
+import { services } from '../../services/index';
 import { svgIcon } from '../../svg/index';
 import { utilDetect } from '../../util/detect';
 import { utilGetSetValue } from '../../util/get_set_value';
@@ -18,8 +13,8 @@ import { utilRebind } from '../../util/rebind';
 
 export function uiFieldWikipedia(field, context) {
     var dispatch = d3.dispatch('change'),
-        wikipedia = serviceWikipedia.init(),
-        wikidata = serviceWikidata.init(),
+        wikipedia = services.wikipedia,
+        wikidata = services.wikidata,
         link = d3.select(null),
         lang = d3.select(null),
         title = d3.select(null),
