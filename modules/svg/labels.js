@@ -7,7 +7,9 @@ import { utilDisplayName, utilGetStyle } from '../util/index';
 
 
 export function svgLabels(projection, context) {
-    var path = d3.geoPath().projection(projection);
+    var path = d3.geoPath().projection(projection),
+        rtree = rbush(),
+        bboxes = {};
 
     // Replace with dict and iterate over entities tags instead?
     var label_stack = [
@@ -38,34 +40,28 @@ export function svgLabels(projection, context) {
         ['point', 'name']
     ];
 
-    var default_size = 12;
 
     var font_sizes = label_stack.map(function(d) {
+        var default_size = 12;
         var style = utilGetStyle('text.' + d[0] + '.tag-' + d[1]),
             m = style && style.cssText.match('font-size: ([0-9]{1,2})px;');
-        if (m) return parseInt(m[1], 10);
+        if (m) {
+            return parseInt(m[1], 10);
+        }
 
         style = utilGetStyle('text.' + d[0]);
         m = style && style.cssText.match('font-size: ([0-9]{1,2})px;');
-        if (m) return parseInt(m[1], 10);
+        if (m) {
+            return parseInt(m[1], 10);
+        }
 
         return default_size;
     });
 
-    var iconSize = 18;
-
-    var pointOffsets = [
-        [15, -11, 'start'], // right
-        [10, -11, 'start'], // unused right now
-        [-15, -11, 'end']
-    ];
-
-    var lineOffsets = [50, 45, 55, 40, 60, 35, 65, 30, 70, 25,
-        75, 20, 80, 15, 95, 10, 90, 5, 95];
 
 
-    var noIcons = ['building', 'landuse', 'natural'];
     function blacklisted(preset) {
+        var noIcons = ['building', 'landuse', 'natural'];
         return _.some(noIcons, function(s) {
             return preset.id.indexOf(s) >= 0;
         });
@@ -272,14 +268,13 @@ export function svgLabels(projection, context) {
     }
 
 
-    var rtree = rbush(),
-        bboxes = {};
-
     function drawLabels(selection, graph, entities, filter, dimensions, fullRedraw) {
         var hidePoints = !selection.selectAll('.node.point').node();
 
         var labelable = [], i, k, entity;
-        for (i = 0; i < label_stack.length; i++) labelable.push([]);
+        for (i = 0; i < label_stack.length; i++) {
+            labelable.push([]);
+        }
 
         if (fullRedraw) {
             rtree.clear();
@@ -351,6 +346,12 @@ export function svgLabels(projection, context) {
 
 
         function getPointLabel(entity, width, height) {
+            var pointOffsets = [
+                [15, -11, 'start'], // right
+                [10, -11, 'start'], // unused right now
+                [-15, -11, 'end']
+            ];
+
             var coord = projection(entity.loc),
                 m = 5,  // margin
                 offset = pointOffsets[0],
@@ -361,8 +362,11 @@ export function svgLabels(projection, context) {
                     y: coord[1] + offset[1],
                     textAnchor: offset[2]
                 };
+
             var bbox = { minX: p.x - m, minY: p.y - m, maxX: p.x + width + m, maxY: p.y + height + m };
-            if (tryInsert(bbox, entity.id)) return p;
+            if (tryInsert(bbox, entity.id)) {
+                return p;
+            }
         }
 
 
@@ -371,11 +375,17 @@ export function svgLabels(projection, context) {
                 length = geoPathLength(nodes);
             if (length < width + 20) return;
 
+            // What sorcery is this?
+            var lineOffsets = [50, 45, 55, 40, 60, 35, 65, 30, 70, 25,
+                75, 20, 80, 15, 95, 10, 90, 5, 95];
+
             for (var i = 0; i < lineOffsets.length; i++) {
                 var offset = lineOffsets[i],
                     middle = offset / 100 * length,
-                    start = middle - width/2;
+                    start = middle - width / 2;
+
                 if (start < 0 || start + width > length) continue;
+
                 var sub = subpath(nodes, start, start + width),
                     rev = reverse(sub),
                     bbox = {
@@ -384,12 +394,17 @@ export function svgLabels(projection, context) {
                         maxX: Math.max(sub[0][0], sub[sub.length - 1][0]) + 20,
                         maxY: Math.max(sub[0][1], sub[sub.length - 1][1]) + 30
                     };
-                if (rev) sub = sub.reverse();
-                if (tryInsert(bbox, entity.id)) return {
-                    'font-size': height + 2,
-                    lineString: lineString(sub),
-                    startOffset: offset + '%'
-                };
+
+                if (rev) {
+                    sub = sub.reverse();
+                }
+                if (tryInsert(bbox, entity.id)) {
+                    return {
+                        'font-size': height + 2,
+                        lineString: lineString(sub),
+                        startOffset: offset + '%'
+                    };
+                }
             }
         }
 
@@ -402,13 +417,11 @@ export function svgLabels(projection, context) {
 
             if (isNaN(centroid[0]) || entitywidth < 20) return;
 
-            var iconX = centroid[0] - (iconSize/2),
-                iconY = centroid[1] - (iconSize/2),
-                textOffset = iconSize + 5;
-
-            var p = {
-                transform: 'translate(' + iconX + ',' + iconY + ')'
-            };
+            var iconSize = 18,
+                iconX = centroid[0] - (iconSize / 2),
+                iconY = centroid[1] - (iconSize / 2),
+                textOffset = iconSize + 5,
+                p = { transform: 'translate(' + iconX + ',' + iconY + ')' };
 
             if (width && entitywidth >= width + 20) {
                 p.x = centroid[0];
@@ -420,7 +433,9 @@ export function svgLabels(projection, context) {
                 bbox = { minX: iconX, minY: iconY, maxX: iconX + iconSize, maxY: iconY + iconSize };
             }
 
-            if (tryInsert(bbox, entity.id)) return p;
+            if (tryInsert(bbox, entity.id)) {
+                return p;
+            }
         }
 
 
@@ -504,6 +519,7 @@ export function svgLabels(projection, context) {
                 supersurface.on('mousemove.hidelabels', hideOnMouseover);
             });
     };
+
 
     return drawLabels;
 }
