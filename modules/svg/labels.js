@@ -9,7 +9,8 @@ import { utilDisplayName, utilEntitySelector } from '../util/index';
 
 export function svgLabels(projection, context) {
     var path = d3.geoPath().projection(projection),
-        rtree = rbush(),
+        rdrawn = rbush(),
+        rskipped = rbush(),
         textWidthCache = {},
         bboxes = {};
 
@@ -183,6 +184,50 @@ export function svgLabels(projection, context) {
     }
 
 
+    function drawCollisionBoxes(selection, rtree, which) {
+        var showDebug = true, //context.getDebug('collision'),
+            classes = 'debug ' + which + ' ' +
+                (which === 'debug-skipped' ? 'orange' : 'yellow');
+
+        var debug = selection.selectAll('.layer-label-debug')
+                .data(showDebug ? [true] : []);
+
+        debug.exit()
+            .remove();
+
+        debug = debug.enter()
+            .append('g')
+            .attr('class', 'layer-label-debug')
+            .merge(debug);
+
+        if (showDebug) {
+            var gj = rtree.all().map(function(d) {
+                return { type: 'Polygon', coordinates: [[
+                    [d.minX, d.minY],
+                    [d.maxX, d.minY],
+                    [d.maxX, d.maxY],
+                    [d.minX, d.maxY],
+                    [d.minX, d.minY]
+                ]]};
+            });
+
+            var debugboxes = debug.selectAll('.' + which)
+                .data(gj);
+
+            debugboxes.exit()
+                .remove();
+
+            debugboxes = debugboxes.enter()
+                .append('path')
+                .attr('class', classes)
+                .merge(debugboxes);
+
+            debugboxes
+                .attr('d', d3.geoPath().projection(null));
+        }
+    }
+
+
     function reverse(p) {
         var angle = Math.atan2(p[1][1] - p[0][1], p[1][0] - p[0][0]);
         return !(p[0][0] < p[p.length - 1][0] && angle < Math.PI/2 && angle > -Math.PI/2);
@@ -241,14 +286,21 @@ export function svgLabels(projection, context) {
         }
 
         if (fullRedraw) {
-            rtree.clear();
+            rdrawn.clear();
+            rskipped.clear();
             bboxes = {};
         } else {
             for (i = 0; i < entities.length; i++) {
                 bbox = bboxes[entity.id];
-                if (bbox) rtree.remove(bbox);
+                if (bbox) {
+                    rdrawn.remove(bbox);
+                    rskipped.remove(bbox);
+                }
                 bbox = bboxes[entity.id + 'I'];
-                if (bbox) rtree.remove(bbox);
+                if (bbox) {
+                    rdrawn.remove(bbox);
+                    rskipped.remove(bbox);
+                }
             }
         }
 
@@ -314,12 +366,12 @@ export function svgLabels(projection, context) {
 
         function getPointLabel(entity, width, height) {
             var pointOffsets = {
-                    ltr: [15, -10, 'start'],
-                    rtl: [-15, -10, 'end']
+                    ltr: [15, -12, 'start'],
+                    rtl: [-15, -12, 'end']
                 };
 
             var coord = projection(entity.loc),
-                margin = 5,
+                margin = 2,
                 textDirection = utilDetect().textDirection,
                 offset = pointOffsets[textDirection],
                 p = {
@@ -402,7 +454,7 @@ export function svgLabels(projection, context) {
             var iconSize = 18,
                 iconX = centroid[0] - (iconSize / 2),
                 iconY = centroid[1] - (iconSize / 2),
-                margin = 5,
+                margin = 2,
                 textOffset = iconSize + margin,
                 p = { transform: 'translate(' + iconX + ',' + iconY + ')' };
 
@@ -420,9 +472,9 @@ export function svgLabels(projection, context) {
                         labelY = centroid[1] + textOffset;
 
                     bbox = {
-                        minX: labelX - (width / 2),
+                        minX: labelX - (width / 2) - margin,
                         minY: labelY - (height / 2) - margin,
-                        maxX: labelX + (width / 2),
+                        maxX: labelX + (width / 2) + margin,
                         maxY: labelY + (height / 2) + margin
                     };
 
@@ -441,14 +493,26 @@ export function svgLabels(projection, context) {
 
 
         function tryInsert(bbox, id) {
-            // Check that label is visible
-            if (bbox.minX < 0 || bbox.minY < 0 || bbox.maxX > dimensions[0] || bbox.maxY > dimensions[1]) return false;
-            if (rtree.collides(bbox)) return false;
-
             bbox.id = id;
-            rtree.insert(bbox);
             bboxes[id] = bbox;
-            return true;
+
+            var skipped = false;
+
+            // Check that label is visible
+            if (bbox.minX < 0 || bbox.minY < 0 || bbox.maxX > dimensions[0] || bbox.maxY > dimensions[1]) {
+                skipped = true;
+            }
+            if (rdrawn.collides(bbox)) {
+                skipped = true;
+            }
+
+            if (skipped) {
+                rskipped.insert(bbox);
+            } else {
+                rdrawn.insert(bbox);
+            }
+
+            return !skipped;
         }
 
 
@@ -470,43 +534,8 @@ export function svgLabels(projection, context) {
         drawAreaIcons(label, labelled.area, filter, 'arealabel-icon', positions.area);
 
         // debug
-        var showDebug = true; //context.getDebug('collision');
-        var debug = label.selectAll('.layer-label-debug')
-            .data(showDebug ? [true] : []);
-
-        debug.exit()
-            .remove();
-
-        debug = debug.enter()
-            .append('g')
-            .attr('class', 'layer-label-debug')
-            .merge(debug);
-
-        if (showDebug) {
-            var gj = rtree.all().map(function(d) {
-                return { type: 'Polygon', coordinates: [[
-                    [d.minX, d.minY],
-                    [d.maxX, d.minY],
-                    [d.maxX, d.maxY],
-                    [d.minX, d.maxY],
-                    [d.minX, d.minY]
-                ]]};
-            });
-
-            var debugboxes = debug.selectAll('.debug')
-                .data(gj);
-
-            debugboxes.exit()
-                .remove();
-
-            debugboxes = debugboxes.enter()
-                .append('path')
-                .attr('class', 'debug yellow')
-                .merge(debugboxes);
-
-            debugboxes
-                .attr('d', d3.geoPath().projection(null));
-        }
+        drawCollisionBoxes(label, rskipped, 'debug-skipped');
+        drawCollisionBoxes(label, rdrawn, 'debug-drawn');
     }
 
 
@@ -522,7 +551,7 @@ export function svgLabels(projection, context) {
         var mouse = context.mouse(),
             pad = 20,
             bbox = { minX: mouse[0] - pad, minY: mouse[1] - pad, maxX: mouse[0] + pad, maxY: mouse[1] + pad },
-            ids = _.map(rtree.search(bbox), 'id');
+            ids = _.map(rdrawn.search(bbox), 'id');
 
         layers.selectAll(utilEntitySelector(ids))
             .classed('proximate', true);
