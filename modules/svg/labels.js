@@ -15,7 +15,7 @@ export function svgLabels(projection, context) {
         bboxes = {};
 
     // Replace with dict and iterate over entities tags instead?
-    var label_stack = [
+    var labelStack = [
         ['line', 'aeroway', 12],
         ['line', 'highway', 12],
         ['line', 'railway', 12],
@@ -185,7 +185,7 @@ export function svgLabels(projection, context) {
 
 
     function drawCollisionBoxes(selection, rtree, which) {
-        var showDebug = true, //context.getDebug('collision'),
+        var showDebug = context.getDebug('collision'),
             classes = 'debug ' + which + ' ' +
                 (which === 'debug-skipped' ? 'orange' : 'yellow');
 
@@ -281,7 +281,7 @@ export function svgLabels(projection, context) {
         var hidePoints = !selection.selectAll('.node.point').node();
 
         var labelable = [], i, k, entity, bbox;
-        for (i = 0; i < label_stack.length; i++) {
+        for (i = 0; i < labelStack.length; i++) {
             labelable.push([]);
         }
 
@@ -304,7 +304,7 @@ export function svgLabels(projection, context) {
             }
         }
 
-        // Split entities into groups specified by label_stack
+        // Split entities into groups specified by labelStack
         for (i = 0; i < entities.length; i++) {
             entity = entities[i];
             var geometry = entity.geometry(graph);
@@ -320,8 +320,8 @@ export function svgLabels(projection, context) {
             if (!icon && !utilDisplayName(entity))
                 continue;
 
-            for (k = 0; k < label_stack.length; k++) {
-                if (geometry === label_stack[k][0] && entity.tags[label_stack[k][1]]) {
+            for (k = 0; k < labelStack.length; k++) {
+                if (geometry === labelStack[k][0] && entity.tags[labelStack[k][1]]) {
                     labelable[k].push(entity);
                     break;
                 }
@@ -342,21 +342,21 @@ export function svgLabels(projection, context) {
 
         // Try and find a valid label for labellable entities
         for (k = 0; k < labelable.length; k++) {
-            var font_size = label_stack[k][2];
+            var fontSize = labelStack[k][2];
             for (i = 0; i < labelable[k].length; i++) {
                 entity = labelable[k][i];
                 var name = utilDisplayName(entity),
-                    width = name && textWidth(name, font_size),
+                    width = name && textWidth(name, fontSize),
                     p;
                 if (entity.geometry(graph) === 'point') {
-                    p = getPointLabel(entity, width, font_size);
+                    p = getPointLabel(entity, width, fontSize);
                 } else if (entity.geometry(graph) === 'line') {
-                    p = getLineLabel(entity, width, font_size);
+                    p = getLineLabel(entity, width, fontSize);
                 } else if (entity.geometry(graph) === 'area') {
-                    p = getAreaLabel(entity, width, font_size);
+                    p = getAreaLabel(entity, width, fontSize);
                 }
                 if (p) {
-                    p.classes = entity.geometry(graph) + ' tag-' + label_stack[k][1];
+                    p.classes = entity.geometry(graph) + ' tag-' + labelStack[k][1];
                     positions[entity.geometry(graph)].push(p);
                     labelled[entity.geometry(graph)].push(entity);
                 }
@@ -393,9 +393,9 @@ export function svgLabels(projection, context) {
             } else {
                 bbox = {
                     minX: p.x - margin,
-                    minY: p.y + (height / 2) + margin,
+                    minY: p.y - (height / 2) - margin,
                     maxX: p.x + width + margin,
-                    maxY: p.y - (height / 2) - margin
+                    maxY: p.y + (height / 2) + margin
                 };
             }
 
