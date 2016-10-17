@@ -96,6 +96,7 @@ export function rendererMap(context) {
             .attr('id', 'surface');
 
         surface
+            .call(drawLabels.observe)
             .on('mousedown.zoom', function() {
                 if (d3.event.button === 2) {
                     d3.event.stopPropagation();
@@ -143,7 +144,6 @@ export function rendererMap(context) {
 
         map.dimensions(utilGetDimensions(selection));
 
-        drawLabels.supersurface(supersurface);
     }
 
 

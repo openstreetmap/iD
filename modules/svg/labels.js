@@ -3,7 +3,11 @@ import _ from 'lodash';
 import rbush from 'rbush';
 import { geoPathLength } from '../geo/index';
 import { osmEntity } from '../osm/index';
-import { utilDisplayName, utilGetStyle } from '../util/index';
+import {
+    utilDisplayName,
+    utilEntitySelector,
+    utilGetStyle
+} from '../util/index';
 
 
 export function svgLabels(projection, context) {
@@ -250,24 +254,6 @@ export function svgLabels(projection, context) {
     }
 
 
-    function hideOnMouseover() {
-        var layers = d3.select(this)
-            .selectAll('.layer-label, .layer-halo');
-
-        layers.selectAll('.proximate')
-            .classed('proximate', false);
-
-        var mouse = context.mouse(),
-            pad = 50,
-            bbox = { minX: mouse[0] - pad, minY: mouse[1] - pad, maxX: mouse[0] + pad, maxY: mouse[1] + pad },
-            ids = _.map(rtree.search(bbox), 'id');
-
-        if (!ids.length) return;
-        layers.selectAll('.' + ids.join(', .'))
-            .classed('proximate', true);
-    }
-
-
     function drawLabels(selection, graph, entities, filter, dimensions, fullRedraw) {
         var hidePoints = !selection.selectAll('.node.point').node();
 
@@ -509,15 +495,32 @@ export function svgLabels(projection, context) {
     }
 
 
-    drawLabels.supersurface = function(supersurface) {
-        supersurface
-            .on('mousemove.hidelabels', hideOnMouseover)
-            .on('mousedown.hidelabels', function () {
-                supersurface.on('mousemove.hidelabels', null);
-            })
-            .on('mouseup.hidelabels', function () {
-                supersurface.on('mousemove.hidelabels', hideOnMouseover);
-            });
+    function hideOnMouseover() {
+        if (d3.event.buttons) return;
+
+        var layers = d3.select(this)
+            .selectAll('.layer-label, .layer-halo');
+
+        layers.selectAll('.proximate')
+            .classed('proximate', false);
+
+        var mouse = context.mouse(),
+            pad = 20,
+            bbox = { minX: mouse[0] - pad, minY: mouse[1] - pad, maxX: mouse[0] + pad, maxY: mouse[1] + pad },
+            ids = _.map(rtree.search(bbox), 'id');
+
+        layers.selectAll(utilEntitySelector(ids))
+            .classed('proximate', true);
+    }
+
+
+    drawLabels.observe = function(selection) {
+        selection.on('mousemove.hidelabels', hideOnMouseover);
+    };
+
+
+    drawLabels.off = function(selection) {
+        selection.on('mousemove.hidelabels', null);
     };
 
 
