@@ -331,16 +331,16 @@ export function svgLabels(projection, context) {
             if (textDirection === 'rtl') {
                 bbox = {
                     minX: p.x - width - margin,
-                    minY: p.y - height - margin,
+                    minY: p.y - (height / 2) - margin,
                     maxX: p.x + margin,
-                    maxY: p.y + margin
+                    maxY: p.y + (height / 2) + margin
                 };
             } else {
                 bbox = {
                     minX: p.x - margin,
-                    minY: p.y + margin,
+                    minY: p.y + (height / 2) + margin,
                     maxX: p.x + width + margin,
-                    maxY: p.y - height - margin
+                    maxY: p.y - (height / 2) - margin
                 };
             }
 
@@ -355,7 +355,7 @@ export function svgLabels(projection, context) {
                 length = geoPathLength(nodes);
             if (length < width + 20) return;
 
-            // What sorcery is this?
+            // % along the line to attempt to place the label
             var lineOffsets = [50, 45, 55, 40, 60, 35, 65, 30, 70, 25,
                 75, 20, 80, 15, 95, 10, 90, 5, 95];
 
@@ -400,7 +400,8 @@ export function svgLabels(projection, context) {
             var iconSize = 18,
                 iconX = centroid[0] - (iconSize / 2),
                 iconY = centroid[1] - (iconSize / 2),
-                textOffset = iconSize + 5,
+                margin = 5,
+                textOffset = iconSize + margin,
                 p = { transform: 'translate(' + iconX + ',' + iconY + ')' };
 
             if (width && entitywidth >= width + 20) {
@@ -408,9 +409,19 @@ export function svgLabels(projection, context) {
                 p.y = centroid[1] + textOffset;
                 p.textAnchor = 'middle';
                 p.height = height;
-                bbox = { minX: p.x - width/2, minY: p.y, maxX: p.x + width/2, maxY: p.y + height + textOffset };
+                bbox = {
+                    minX: p.x - (width / 2),
+                    minY: p.y - (height / 2) - margin,
+                    maxX: p.x + (width / 2),
+                    maxY: p.y + (height / 2) + margin
+                };
             } else {
-                bbox = { minX: iconX, minY: iconY, maxX: iconX + iconSize, maxY: iconY + iconSize };
+                bbox = {
+                    minX: iconX,
+                    minY: iconY,
+                    maxX: iconX + iconSize,
+                    maxY: iconY + iconSize
+                };
             }
 
             if (tryInsert(bbox, entity.id)) {
@@ -422,14 +433,14 @@ export function svgLabels(projection, context) {
         function tryInsert(bbox, id) {
             // Check that label is visible
             if (bbox.minX < 0 || bbox.minY < 0 || bbox.maxX > dimensions[0] || bbox.maxY > dimensions[1]) return false;
-            var v = rtree.search(bbox).length === 0;
-            if (v) {
-                bbox.id = id;
-                rtree.insert(bbox);
-                bboxes[id] = bbox;
-            }
-            return v;
+            if (rtree.collides(bbox)) return false;
+
+            bbox.id = id;
+            rtree.insert(bbox);
+            bboxes[id] = bbox;
+            return true;
         }
+
 
         var label = selection.selectAll('.layer-label'),
             halo = selection.selectAll('.layer-halo');

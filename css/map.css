@@ -1310,19 +1310,15 @@ text.pointlabel-halo,
 text.arealabel,
 text.linelabel,
 text.pointlabel {
+    dominant-baseline: middle;
+    text-anchor: middle;
     font-size: 12px;
     font-weight: bold;
     fill: #333;
-    text-anchor: middle;
     pointer-events: none;
     -webkit-transition: opacity 100ms linear;
     transition: opacity 100ms linear;
     -moz-transition: opacity 100ms linear;
-}
-
-.linelabel-halo .textpath,
-.linelabel .textpath {
-  dominant-baseline: middle;
 }
 
 /* Opera doesn't support dominant-baseline. See #715 */
@@ -1344,7 +1340,7 @@ text.proximate {
 }
 
 text.point {
-  font-size: 10px;
+    font-size: 10px;
 }
 
 /* Turns */
