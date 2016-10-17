@@ -235,7 +235,7 @@ export function svgLabels(projection, context) {
     function drawLabels(selection, graph, entities, filter, dimensions, fullRedraw) {
         var hidePoints = !selection.selectAll('.node.point').node();
 
-        var labelable = [], i, k, entity;
+        var labelable = [], i, k, entity, bbox;
         for (i = 0; i < label_stack.length; i++) {
             labelable.push([]);
         }
@@ -245,7 +245,10 @@ export function svgLabels(projection, context) {
             bboxes = {};
         } else {
             for (i = 0; i < entities.length; i++) {
-                rtree.remove(bboxes[entities[i].id]);
+                bbox = bboxes[entity.id];
+                if (bbox) rtree.remove(bbox);
+                bbox = bboxes[entity.id + 'I'];
+                if (bbox) rtree.remove(bbox);
             }
         }
 
@@ -392,8 +395,7 @@ export function svgLabels(projection, context) {
         function getAreaLabel(entity, width, height) {
             var centroid = path.centroid(entity.asGeoJSON(graph, true)),
                 extent = entity.extent(graph),
-                entitywidth = projection(extent[1])[0] - projection(extent[0])[0],
-                bbox;
+                entitywidth = projection(extent[1])[0] - projection(extent[0])[0];
 
             if (isNaN(centroid[0]) || entitywidth < 20) return;
 
@@ -404,27 +406,35 @@ export function svgLabels(projection, context) {
                 textOffset = iconSize + margin,
                 p = { transform: 'translate(' + iconX + ',' + iconY + ')' };
 
-            if (width && entitywidth >= width + 20) {
-                p.x = centroid[0];
-                p.y = centroid[1] + textOffset;
-                p.textAnchor = 'middle';
-                p.height = height;
-                bbox = {
-                    minX: p.x - (width / 2),
-                    minY: p.y - (height / 2) - margin,
-                    maxX: p.x + (width / 2),
-                    maxY: p.y + (height / 2) + margin
-                };
-            } else {
-                bbox = {
-                    minX: iconX,
-                    minY: iconY,
-                    maxX: iconX + iconSize,
-                    maxY: iconY + iconSize
-                };
-            }
+            var bbox = {
+                minX: iconX,
+                minY: iconY,
+                maxX: iconX + iconSize,
+                maxY: iconY + iconSize
+            };
 
-            if (tryInsert(bbox, entity.id)) {
+            // try to add icon
+            if (tryInsert(bbox, entity.id + 'I')) {
+                if (width && entitywidth >= width + 20) {
+                    var labelX = centroid[0],
+                        labelY = centroid[1] + textOffset;
+
+                    bbox = {
+                        minX: labelX - (width / 2),
+                        minY: labelY - (height / 2) - margin,
+                        maxX: labelX + (width / 2),
+                        maxY: labelY + (height / 2) + margin
+                    };
+
+                    // try to add label
+                    if (tryInsert(bbox, entity.id)) {
+                        p.x = labelX;
+                        p.y = labelY;
+                        p.textAnchor = 'middle';
+                        p.height = height;
+                    }
+                }
+
                 return p;
             }
         }
