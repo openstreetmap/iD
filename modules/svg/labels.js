@@ -13,6 +13,7 @@ import {
 export function svgLabels(projection, context) {
     var path = d3.geoPath().projection(projection),
         rtree = rbush(),
+        textWidthCache = {},
         bboxes = {};
 
     // Replace with dict and iterate over entities tags instead?
@@ -75,8 +76,6 @@ export function svgLabels(projection, context) {
     function get(array, prop) {
         return function(d, i) { return array[i][prop]; };
     }
-
-    var textWidthCache = {};
 
 
     function textWidth(text, size, elem) {
@@ -332,24 +331,40 @@ export function svgLabels(projection, context) {
 
 
         function getPointLabel(entity, width, height) {
-            var pointOffsets = [
-                [15, -11, 'start'], // right
-                [10, -11, 'start'], // unused right now
-                [-15, -11, 'end']
-            ];
+            var pointOffsets = {
+                    ltr: [15, -11, 'start'],
+                    rtl: [-15, -11, 'end']
+                };
 
             var coord = projection(entity.loc),
-                m = 5,  // margin
-                offset = pointOffsets[0],
+                margin = 5,
+                textDirection = iD.Detect().textDirection,
+                offset = pointOffsets[textDirection],
                 p = {
                     height: height,
                     width: width,
                     x: coord[0] + offset[0],
                     y: coord[1] + offset[1],
                     textAnchor: offset[2]
-                };
+                },
+                bbox;
 
-            var bbox = { minX: p.x - m, minY: p.y - m, maxX: p.x + width + m, maxY: p.y + height + m };
+            if (textDirection === 'rtl') {
+                bbox = {
+                    minX: p.x - width - margin,
+                    minY: p.y - height - margin,
+                    maxX: p.x + margin,
+                    maxY: p.y + margin
+                };
+            } else {
+                bbox = {
+                    minX: p.x - margin,
+                    minY: p.y + margin,
+                    maxX: p.x + width + margin,
+                    maxY: p.y - height - margin
+                };
+            }
+
             if (tryInsert(bbox, entity.id)) {
                 return p;
             }
@@ -455,7 +470,7 @@ export function svgLabels(projection, context) {
         drawAreaIcons(label, labelled.area, filter, 'arealabel-icon', positions.area);
 
         // debug
-        var showDebug = context.getDebug('collision');
+        var showDebug = true; //context.getDebug('collision');
         var debug = label.selectAll('.layer-label-debug')
             .data(showDebug ? [true] : []);
 
