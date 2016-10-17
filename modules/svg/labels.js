@@ -3,11 +3,8 @@ import _ from 'lodash';
 import rbush from 'rbush';
 import { geoPathLength } from '../geo/index';
 import { osmEntity } from '../osm/index';
-import {
-    utilDisplayName,
-    utilEntitySelector,
-    utilGetStyle
-} from '../util/index';
+import { utilDetect } from '../util/detect';
+import { utilDisplayName, utilEntitySelector } from '../util/index';
 
 
 export function svgLabels(projection, context) {
@@ -18,50 +15,32 @@ export function svgLabels(projection, context) {
 
     // Replace with dict and iterate over entities tags instead?
     var label_stack = [
-        ['line', 'aeroway'],
-        ['line', 'highway'],
-        ['line', 'railway'],
-        ['line', 'waterway'],
-        ['area', 'aeroway'],
-        ['area', 'amenity'],
-        ['area', 'building'],
-        ['area', 'historic'],
-        ['area', 'leisure'],
-        ['area', 'man_made'],
-        ['area', 'natural'],
-        ['area', 'shop'],
-        ['area', 'tourism'],
-        ['point', 'aeroway'],
-        ['point', 'amenity'],
-        ['point', 'building'],
-        ['point', 'historic'],
-        ['point', 'leisure'],
-        ['point', 'man_made'],
-        ['point', 'natural'],
-        ['point', 'shop'],
-        ['point', 'tourism'],
-        ['line', 'name'],
-        ['area', 'name'],
-        ['point', 'name']
+        ['line', 'aeroway', 12],
+        ['line', 'highway', 12],
+        ['line', 'railway', 12],
+        ['line', 'waterway', 12],
+        ['area', 'aeroway', 12],
+        ['area', 'amenity', 12],
+        ['area', 'building', 12],
+        ['area', 'historic', 12],
+        ['area', 'leisure', 12],
+        ['area', 'man_made', 12],
+        ['area', 'natural', 12],
+        ['area', 'shop', 12],
+        ['area', 'tourism', 12],
+        ['point', 'aeroway', 10],
+        ['point', 'amenity', 10],
+        ['point', 'building', 10],
+        ['point', 'historic', 10],
+        ['point', 'leisure', 10],
+        ['point', 'man_made', 10],
+        ['point', 'natural', 10],
+        ['point', 'shop', 10],
+        ['point', 'tourism', 10],
+        ['line', 'name', 12],
+        ['area', 'name', 12],
+        ['point', 'name', 10]
     ];
-
-
-    var font_sizes = label_stack.map(function(d) {
-        var default_size = 12;
-        var style = utilGetStyle('text.' + d[0] + '.tag-' + d[1]),
-            m = style && style.cssText.match('font-size: ([0-9]{1,2})px;');
-        if (m) {
-            return parseInt(m[1], 10);
-        }
-
-        style = utilGetStyle('text.' + d[0]);
-        m = style && style.cssText.match('font-size: ([0-9]{1,2})px;');
-        if (m) {
-            return parseInt(m[1], 10);
-        }
-
-        return default_size;
-    });
 
 
 
@@ -308,7 +287,7 @@ export function svgLabels(projection, context) {
 
         // Try and find a valid label for labellable entities
         for (k = 0; k < labelable.length; k++) {
-            var font_size = font_sizes[k];
+            var font_size = label_stack[k][2];
             for (i = 0; i < labelable[k].length; i++) {
                 entity = labelable[k][i];
                 var name = utilDisplayName(entity),
@@ -332,13 +311,13 @@ export function svgLabels(projection, context) {
 
         function getPointLabel(entity, width, height) {
             var pointOffsets = {
-                    ltr: [15, -11, 'start'],
-                    rtl: [-15, -11, 'end']
+                    ltr: [15, -10, 'start'],
+                    rtl: [-15, -10, 'end']
                 };
 
             var coord = projection(entity.loc),
                 margin = 5,
-                textDirection = iD.Detect().textDirection,
+                textDirection = utilDetect().textDirection,
                 offset = pointOffsets[textDirection],
                 p = {
                     height: height,

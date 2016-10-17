@@ -8,7 +8,6 @@ export { utilQsString } from './util';
 export { utilPrefixDOMProperty } from './util';
 export { utilPrefixCSSProperty } from './util';
 export { utilSetTransform } from './util';
-export { utilGetStyle } from './util';
 export { utilEditDistance } from './util';
 export { utilFastMouse } from './util';
 export { utilGetPrototypeOf } from './util';

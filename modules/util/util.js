@@ -1,5 +1,4 @@
 import * as d3 from 'd3';
-import _ from 'lodash';
 import { t, textDirection } from './locale';
 import { utilDetect } from './detect';
 import { remove as removeDiacritics } from 'diacritics';
@@ -123,19 +122,6 @@ export function utilSetTransform(el, x, y, scale) {
             'translate('   + x + 'px,' + y + 'px)' :
             'translate3d(' + x + 'px,' + y + 'px,0)';
     return el.style(prop, translate + (scale ? ' scale(' + scale + ')' : ''));
-}
-
-
-export function utilGetStyle(selector) {
-    for (var i = 0; i < document.styleSheets.length; i++) {
-        var rules = document.styleSheets[i].rules || document.styleSheets[i].cssRules || [];
-        for (var k = 0; k < rules.length; k++) {
-            var selectorText = rules[k].selectorText && rules[k].selectorText.split(', ');
-            if (_.includes(selectorText, selector)) {
-                return rules[k];
-            }
-        }
-    }
 }
 
 
