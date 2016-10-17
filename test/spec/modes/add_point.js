@@ -1,4 +1,4 @@
-describe('iD.modeAddPoint', function() {
+describe.skip('iD.modeAddPoint', function() {
     var context;
 
     beforeEach(function() {
@@ -39,11 +39,11 @@ describe('iD.modeAddPoint', function() {
 
     // describe('pressing ⎋', function() {
     //     it.skip('exits to browse mode', function(done) {
-            // happen.keydown(document, {keyCode: 27});
-            // window.setTimeout(function() {
-            //     expect(context.mode().id).to.equal('browse');
-            //     done();
-            // }, 200);
-        // });
+    //         happen.keydown(document, {keyCode: 27});
+    //         window.setTimeout(function() {
+    //             expect(context.mode().id).to.equal('browse');
+    //             done();
+    //         }, 200);
+    //     });
     // });
 });
