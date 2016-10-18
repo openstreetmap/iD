@@ -1,7 +1,13 @@
 import * as d3 from 'd3';
 import _ from 'lodash';
 import rbush from 'rbush';
-import { geoEuclideanDistance, geoPathLength } from '../geo/index';
+import {
+    geoExtent,
+    geoEuclideanDistance,
+    geoInterp,
+    geoPolygonIntersectsPolygon,
+    geoPathLength
+} from '../geo/index';
 import { osmEntity } from '../osm/index';
 import { utilDetect } from '../util/detect';
 import { utilDisplayName, utilEntitySelector } from '../util/index';
@@ -348,21 +354,23 @@ export function svgLabels(projection, context) {
                 };
             }
 
-            if (tryInsert([bbox], entity.id)) {
+            if (tryInsert([bbox], entity.id, true)) {
                 return p;
             }
         }
 
 
         function getLineLabel(entity, width, height) {
-            var nodes = _.map(graph.childNodes(entity), 'loc').map(projection),
+            var viewport = geoExtent(context.projection.clipExtent()).polygon(),
+                nodes = _.map(graph.childNodes(entity), 'loc').map(projection),
                 length = geoPathLength(nodes);
+
             if (length < width + 20) return;
 
             // % along the line to attempt to place the label
             var lineOffsets = [50, 45, 55, 40, 60, 35, 65, 30, 70,
                                25, 75, 20, 80, 15, 95, 10, 90, 5, 95];
-            var margin = 2;
+            var margin = 3;
 
             for (var i = 0; i < lineOffsets.length; i++) {
                 var offset = lineOffsets[i],
@@ -371,21 +379,42 @@ export function svgLabels(projection, context) {
 
                 if (start < 0 || start + width > length) continue;
 
+                // generate subpath and ignore paths that are invalid or don't cross viewport.
                 var sub = subpath(nodes, start, start + width);
-                if (!sub) continue;
+                if (!sub || !geoPolygonIntersectsPolygon(viewport, sub, true)) {
+                    continue;
+                }
 
-                var isReverse = reverse(sub),
-                    bbox = {
-                        minX: Math.min(sub[0][0], sub[sub.length - 1][0]) - margin,
-                        minY: Math.min(sub[0][1], sub[sub.length - 1][1]) - margin,
-                        maxX: Math.max(sub[0][0], sub[sub.length - 1][0]) + margin,
-                        maxY: Math.max(sub[0][1], sub[sub.length - 1][1]) + margin
-                    };
-
+                var isReverse = reverse(sub);
                 if (isReverse) {
                     sub = sub.reverse();
                 }
-                if (tryInsert([bbox], entity.id)) {
+
+                var bboxes = [],
+                    boxsize = (height + 2) / 2;
+
+                for (var j = 0; j < sub.length - 1; j++) {
+                    var a = sub[j];
+                    var b = sub[j + 1];
+                    var num = Math.max(1, Math.floor(geoEuclideanDistance(a, b) / boxsize / 2));
+
+                    for (var box = 0; box < num; box++) {
+                        var p = geoInterp(a, b, box / num);
+                        var x0 = p[0] - boxsize - margin;
+                        var y0 = p[1] - boxsize - margin;
+                        var x1 = p[0] + boxsize + margin;
+                        var y1 = p[1] + boxsize + margin;
+
+                        bboxes.push({
+                            minX: Math.min(x0, x1),
+                            minY: Math.min(y0, y1),
+                            maxX: Math.max(x0, x1),
+                            maxY: Math.max(y0, y1)
+                        });
+                    }
+                }
+
+                if (tryInsert(bboxes, entity.id, false)) {
                     return {
                         'font-size': height + 2,
                         lineString: lineString(sub),
@@ -461,7 +490,7 @@ export function svgLabels(projection, context) {
             };
 
             // try to add icon
-            if (tryInsert([bbox], entity.id + 'I')) {
+            if (tryInsert([bbox], entity.id + 'I', true)) {
                 if (width && entitywidth >= width + 20) {
                     var labelX = centroid[0],
                         labelY = centroid[1] + textOffset;
@@ -474,7 +503,7 @@ export function svgLabels(projection, context) {
                     };
 
                     // try to add label
-                    if (tryInsert([bbox], entity.id)) {
+                    if (tryInsert([bbox], entity.id, true)) {
                         p.x = labelX;
                         p.y = labelY;
                         p.textAnchor = 'middle';
@@ -487,7 +516,7 @@ export function svgLabels(projection, context) {
         }
 
 
-        function tryInsert(bboxes, id) {
+        function tryInsert(bboxes, id, saveSkipped) {
             var skipped = false,
                 bbox;
 
@@ -509,7 +538,9 @@ export function svgLabels(projection, context) {
             entitybboxes[id] = bboxes;
 
             if (skipped) {
-                rskipped.load(bboxes);
+                if (saveSkipped) {
+                    rskipped.load(bboxes);
+                }
             } else {
                 rdrawn.load(bboxes);
             }
