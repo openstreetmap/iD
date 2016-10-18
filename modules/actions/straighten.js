@@ -1,4 +1,5 @@
 import { actionDeleteNode } from './delete_node';
+import { geoEuclideanDistance } from '../geo/index';
 
 
 /*
@@ -60,7 +61,7 @@ export function actionStraighten(wayId, projection) {
             points = nodes.map(function(n) { return projection(n.loc); }),
             startPoint = points[0],
             endPoint = points[points.length-1],
-            threshold = 0.2 * Math.sqrt(Math.pow(startPoint[0] - endPoint[0], 2) + Math.pow(startPoint[1] - endPoint[1], 2)),
+            threshold = 0.2 * geoEuclideanDistance(startPoint, endPoint),
             i;
 
         if (threshold === 0) {

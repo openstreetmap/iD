@@ -259,12 +259,9 @@ export function geoPolygonIntersectsPolygon(outer, inner, checkSegments) {
 
 
 export function geoPathLength(path) {
-    var length = 0,
-        dx, dy;
+    var length = 0;
     for (var i = 0; i < path.length - 1; i++) {
-        dx = path[i][0] - path[i + 1][0];
-        dy = path[i][1] - path[i + 1][1];
-        length += Math.sqrt(dx * dx + dy * dy);
+        length += geoEuclideanDistance(path[i], path[i + 1]);
     }
     return length;
 }

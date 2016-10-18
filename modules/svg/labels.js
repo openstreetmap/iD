@@ -1,7 +1,7 @@
 import * as d3 from 'd3';
 import _ from 'lodash';
 import rbush from 'rbush';
-import { geoPathLength } from '../geo/index';
+import { geoEuclideanDistance, geoPathLength } from '../geo/index';
 import { osmEntity } from '../osm/index';
 import { utilDetect } from '../util/detect';
 import { utilDisplayName, utilEntitySelector } from '../util/index';
@@ -42,7 +42,6 @@ export function svgLabels(projection, context) {
         ['area', 'name', 12],
         ['point', 'name', 10]
     ];
-
 
 
     function blacklisted(preset) {
@@ -372,8 +371,10 @@ export function svgLabels(projection, context) {
 
                 if (start < 0 || start + width > length) continue;
 
-                var sub = subpath(nodes, start, start + width),
-                    isReverse = reverse(sub),
+                var sub = subpath(nodes, start, start + width);
+                if (!sub) continue;
+
+                var isReverse = reverse(sub),
                     bbox = {
                         minX: Math.min(sub[0][0], sub[sub.length - 1][0]) - margin,
                         minY: Math.min(sub[0][1], sub[sub.length - 1][1]) - margin,
@@ -403,36 +404,33 @@ export function svgLabels(projection, context) {
             }
 
             function subpath(nodes, from, to) {
-                function segmentLength(i) {
-                    var dx = nodes[i][0] - nodes[i + 1][0];
-                    var dy = nodes[i][1] - nodes[i + 1][1];
-                    return Math.sqrt(dx * dx + dy * dy);
-                }
-
                 var sofar = 0,
                     start, end, i0, i1;
+
                 for (var i = 0; i < nodes.length - 1; i++) {
-                    var current = segmentLength(i);
+                    var a = nodes[i],
+                        b = nodes[i + 1];
+                    var current = geoEuclideanDistance(a, b);
                     var portion;
                     if (!start && sofar + current >= from) {
                         portion = (from - sofar) / current;
                         start = [
-                            nodes[i][0] + portion * (nodes[i + 1][0] - nodes[i][0]),
-                            nodes[i][1] + portion * (nodes[i + 1][1] - nodes[i][1])
+                            a[0] + portion * (b[0] - a[0]),
+                            a[1] + portion * (b[1] - a[1])
                         ];
                         i0 = i + 1;
                     }
                     if (!end && sofar + current >= to) {
                         portion = (to - sofar) / current;
                         end = [
-                            nodes[i][0] + portion * (nodes[i + 1][0] - nodes[i][0]),
-                            nodes[i][1] + portion * (nodes[i + 1][1] - nodes[i][1])
+                            a[0] + portion * (b[0] - a[0]),
+                            a[1] + portion * (b[1] - a[1])
                         ];
                         i1 = i + 1;
                     }
                     sofar += current;
-
                 }
+
                 var ret = nodes.slice(i0, i1);
                 ret.unshift(start);
                 ret.push(end);
