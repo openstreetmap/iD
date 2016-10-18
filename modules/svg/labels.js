@@ -22,31 +22,36 @@ export function svgLabels(projection, context) {
 
     // Listed from highest to lowest priority
     var labelStack = [
-        ['line', 'aeroway', 12],
-        ['line', 'highway', 12],
-        ['line', 'railway', 12],
-        ['line', 'waterway', 12],
-        ['area', 'aeroway', 12],
-        ['area', 'amenity', 12],
-        ['area', 'building', 12],
-        ['area', 'historic', 12],
-        ['area', 'leisure', 12],
-        ['area', 'man_made', 12],
-        ['area', 'natural', 12],
-        ['area', 'shop', 12],
-        ['area', 'tourism', 12],
-        ['point', 'aeroway', 10],
-        ['point', 'amenity', 10],
-        ['point', 'building', 10],
-        ['point', 'historic', 10],
-        ['point', 'leisure', 10],
-        ['point', 'man_made', 10],
-        ['point', 'natural', 10],
-        ['point', 'shop', 10],
-        ['point', 'tourism', 10],
-        ['line', 'name', 12],
-        ['area', 'name', 12],
-        ['point', 'name', 10]
+        ['line', 'aeroway', '*', 12],
+        ['line', 'highway', 'motorway', 12],
+        ['line', 'highway', 'trunk', 12],
+        ['line', 'highway', 'primary', 12],
+        ['line', 'highway', 'secondary', 12],
+        ['line', 'highway', 'tertiary', 12],
+        ['line', 'highway', '*', 12],
+        ['line', 'railway', '*', 12],
+        ['line', 'waterway', '*', 12],
+        ['area', 'aeroway', '*', 12],
+        ['area', 'amenity', '*', 12],
+        ['area', 'building', '*', 12],
+        ['area', 'historic', '*', 12],
+        ['area', 'leisure', '*', 12],
+        ['area', 'man_made', '*', 12],
+        ['area', 'natural', '*', 12],
+        ['area', 'shop', '*', 12],
+        ['area', 'tourism', '*', 12],
+        ['point', 'aeroway', '*', 10],
+        ['point', 'amenity', '*', 10],
+        ['point', 'building', '*', 10],
+        ['point', 'historic', '*', 10],
+        ['point', 'leisure', '*', 10],
+        ['point', 'man_made', '*', 10],
+        ['point', 'natural', '*', 10],
+        ['point', 'shop', '*', 10],
+        ['point', 'tourism', '*', 10],
+        ['line', 'name', '*', 12],
+        ['area', 'name', '*', 12],
+        ['point', 'name', '*', 10]
     ];
 
 
@@ -190,7 +195,7 @@ export function svgLabels(projection, context) {
 
 
     function drawCollisionBoxes(selection, rtree, which) {
-        var showDebug = true, //context.getDebug('collision'),
+        var showDebug = context.getDebug('collision'),
             classes = 'debug ' + which + ' ' +
                 (which === 'debug-skipped' ? 'orange' : 'yellow');
 
@@ -236,7 +241,7 @@ export function svgLabels(projection, context) {
     function drawLabels(selection, graph, entities, filter, dimensions, fullRedraw) {
         var hidePoints = !selection.selectAll('.node.point').node();
 
-        var labelable = [], i, j, k, entity, bbox;
+        var labelable = [], i, j, k, entity;
         for (i = 0; i < labelStack.length; i++) {
             labelable.push([]);
         }
@@ -276,7 +281,12 @@ export function svgLabels(projection, context) {
                 continue;
 
             for (k = 0; k < labelStack.length; k++) {
-                if (geometry === labelStack[k][0] && entity.tags[labelStack[k][1]]) {
+                var matchGeom = labelStack[k][0],
+                    matchKey = labelStack[k][1],
+                    matchVal = labelStack[k][2],
+                    hasVal = entity.tags[matchKey];
+
+                if (geometry === matchGeom && hasVal && (matchVal === '*' || matchVal === hasVal)) {
                     labelable[k].push(entity);
                     break;
                 }
@@ -297,7 +307,7 @@ export function svgLabels(projection, context) {
 
         // Try and find a valid label for labellable entities
         for (k = 0; k < labelable.length; k++) {
-            var fontSize = labelStack[k][2];
+            var fontSize = labelStack[k][3];
             for (i = 0; i < labelable[k].length; i++) {
                 entity = labelable[k][i];
                 var name = utilDisplayName(entity),
