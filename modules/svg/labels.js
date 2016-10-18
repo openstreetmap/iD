@@ -185,7 +185,7 @@ export function svgLabels(projection, context) {
 
 
     function drawCollisionBoxes(selection, rtree, which) {
-        var showDebug = context.getDebug('collision'),
+        var showDebug = true, //context.getDebug('collision'),
             classes = 'debug ' + which + ' ' +
                 (which === 'debug-skipped' ? 'orange' : 'yellow');
 
@@ -291,6 +291,7 @@ export function svgLabels(projection, context) {
             bboxes = {};
         } else {
             for (i = 0; i < entities.length; i++) {
+                entity = entities[i];
                 bbox = bboxes[entity.id];
                 if (bbox) {
                     rdrawn.remove(bbox);
@@ -411,8 +412,9 @@ export function svgLabels(projection, context) {
             if (length < width + 20) return;
 
             // % along the line to attempt to place the label
-            var lineOffsets = [50, 45, 55, 40, 60, 35, 65, 30, 70, 25,
-                75, 20, 80, 15, 95, 10, 90, 5, 95];
+            var lineOffsets = [50, 45, 55, 40, 60, 35, 65, 30, 70,
+                               25, 75, 20, 80, 15, 95, 10, 90, 5, 95];
+            var margin = 2;
 
             for (var i = 0; i < lineOffsets.length; i++) {
                 var offset = lineOffsets[i],
@@ -424,10 +426,10 @@ export function svgLabels(projection, context) {
                 var sub = subpath(nodes, start, start + width),
                     rev = reverse(sub),
                     bbox = {
-                        minX: Math.min(sub[0][0], sub[sub.length - 1][0]) - 10,
-                        minY: Math.min(sub[0][1], sub[sub.length - 1][1]) - 10,
-                        maxX: Math.max(sub[0][0], sub[sub.length - 1][0]) + 20,
-                        maxY: Math.max(sub[0][1], sub[sub.length - 1][1]) + 30
+                        minX: Math.min(sub[0][0], sub[sub.length - 1][0]) - margin,
+                        minY: Math.min(sub[0][1], sub[sub.length - 1][1]) - margin,
+                        maxX: Math.max(sub[0][0], sub[sub.length - 1][0]) + margin,
+                        maxY: Math.max(sub[0][1], sub[sub.length - 1][1]) + margin
                     };
 
                 if (rev) {
