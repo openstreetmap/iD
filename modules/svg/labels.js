@@ -12,9 +12,9 @@ export function svgLabels(projection, context) {
         rdrawn = rbush(),
         rskipped = rbush(),
         textWidthCache = {},
-        bboxes = {};
+        entitybboxes = {};
 
-    // Replace with dict and iterate over entities tags instead?
+    // Listed from highest to lowest priority
     var labelStack = [
         ['line', 'aeroway', 12],
         ['line', 'highway', 12],
@@ -228,59 +228,10 @@ export function svgLabels(projection, context) {
     }
 
 
-    function reverse(p) {
-        var angle = Math.atan2(p[1][1] - p[0][1], p[1][0] - p[0][0]);
-        return !(p[0][0] < p[p.length - 1][0] && angle < Math.PI/2 && angle > -Math.PI/2);
-    }
-
-
-    function lineString(nodes) {
-        return 'M' + nodes.join('L');
-    }
-
-
-    function subpath(nodes, from, to) {
-        function segmentLength(i) {
-            var dx = nodes[i][0] - nodes[i + 1][0];
-            var dy = nodes[i][1] - nodes[i + 1][1];
-            return Math.sqrt(dx * dx + dy * dy);
-        }
-
-        var sofar = 0,
-            start, end, i0, i1;
-        for (var i = 0; i < nodes.length - 1; i++) {
-            var current = segmentLength(i);
-            var portion;
-            if (!start && sofar + current >= from) {
-                portion = (from - sofar) / current;
-                start = [
-                    nodes[i][0] + portion * (nodes[i + 1][0] - nodes[i][0]),
-                    nodes[i][1] + portion * (nodes[i + 1][1] - nodes[i][1])
-                ];
-                i0 = i + 1;
-            }
-            if (!end && sofar + current >= to) {
-                portion = (to - sofar) / current;
-                end = [
-                    nodes[i][0] + portion * (nodes[i + 1][0] - nodes[i][0]),
-                    nodes[i][1] + portion * (nodes[i + 1][1] - nodes[i][1])
-                ];
-                i1 = i + 1;
-            }
-            sofar += current;
-
-        }
-        var ret = nodes.slice(i0, i1);
-        ret.unshift(start);
-        ret.push(end);
-        return ret;
-    }
-
-
     function drawLabels(selection, graph, entities, filter, dimensions, fullRedraw) {
         var hidePoints = !selection.selectAll('.node.point').node();
 
-        var labelable = [], i, k, entity, bbox;
+        var labelable = [], i, j, k, entity, bbox;
         for (i = 0; i < labelStack.length; i++) {
             labelable.push([]);
         }
@@ -288,19 +239,17 @@ export function svgLabels(projection, context) {
         if (fullRedraw) {
             rdrawn.clear();
             rskipped.clear();
-            bboxes = {};
+            entitybboxes = {};
         } else {
             for (i = 0; i < entities.length; i++) {
                 entity = entities[i];
-                bbox = bboxes[entity.id];
-                if (bbox) {
-                    rdrawn.remove(bbox);
-                    rskipped.remove(bbox);
-                }
-                bbox = bboxes[entity.id + 'I'];
-                if (bbox) {
-                    rdrawn.remove(bbox);
-                    rskipped.remove(bbox);
+                var toRemove = []
+                    .concat(entitybboxes[entity.id] || [])
+                    .concat(entitybboxes[entity.id + 'I'] || []);
+
+                for (j = 0; j < toRemove.length; j++) {
+                    rdrawn.remove(toRemove[j]);
+                    rskipped.remove(toRemove[j]);
                 }
             }
         }
@@ -400,7 +349,7 @@ export function svgLabels(projection, context) {
                 };
             }
 
-            if (tryInsert(bbox, entity.id)) {
+            if (tryInsert([bbox], entity.id)) {
                 return p;
             }
         }
@@ -424,7 +373,7 @@ export function svgLabels(projection, context) {
                 if (start < 0 || start + width > length) continue;
 
                 var sub = subpath(nodes, start, start + width),
-                    rev = reverse(sub),
+                    isReverse = reverse(sub),
                     bbox = {
                         minX: Math.min(sub[0][0], sub[sub.length - 1][0]) - margin,
                         minY: Math.min(sub[0][1], sub[sub.length - 1][1]) - margin,
@@ -432,16 +381,62 @@ export function svgLabels(projection, context) {
                         maxY: Math.max(sub[0][1], sub[sub.length - 1][1]) + margin
                     };
 
-                if (rev) {
+                if (isReverse) {
                     sub = sub.reverse();
                 }
-                if (tryInsert(bbox, entity.id)) {
+                if (tryInsert([bbox], entity.id)) {
                     return {
                         'font-size': height + 2,
                         lineString: lineString(sub),
                         startOffset: offset + '%'
                     };
                 }
+            }
+
+            function reverse(p) {
+                var angle = Math.atan2(p[1][1] - p[0][1], p[1][0] - p[0][0]);
+                return !(p[0][0] < p[p.length - 1][0] && angle < Math.PI/2 && angle > -Math.PI/2);
+            }
+
+            function lineString(nodes) {
+                return 'M' + nodes.join('L');
+            }
+
+            function subpath(nodes, from, to) {
+                function segmentLength(i) {
+                    var dx = nodes[i][0] - nodes[i + 1][0];
+                    var dy = nodes[i][1] - nodes[i + 1][1];
+                    return Math.sqrt(dx * dx + dy * dy);
+                }
+
+                var sofar = 0,
+                    start, end, i0, i1;
+                for (var i = 0; i < nodes.length - 1; i++) {
+                    var current = segmentLength(i);
+                    var portion;
+                    if (!start && sofar + current >= from) {
+                        portion = (from - sofar) / current;
+                        start = [
+                            nodes[i][0] + portion * (nodes[i + 1][0] - nodes[i][0]),
+                            nodes[i][1] + portion * (nodes[i + 1][1] - nodes[i][1])
+                        ];
+                        i0 = i + 1;
+                    }
+                    if (!end && sofar + current >= to) {
+                        portion = (to - sofar) / current;
+                        end = [
+                            nodes[i][0] + portion * (nodes[i + 1][0] - nodes[i][0]),
+                            nodes[i][1] + portion * (nodes[i + 1][1] - nodes[i][1])
+                        ];
+                        i1 = i + 1;
+                    }
+                    sofar += current;
+
+                }
+                var ret = nodes.slice(i0, i1);
+                ret.unshift(start);
+                ret.push(end);
+                return ret;
             }
         }
 
@@ -468,7 +463,7 @@ export function svgLabels(projection, context) {
             };
 
             // try to add icon
-            if (tryInsert(bbox, entity.id + 'I')) {
+            if (tryInsert([bbox], entity.id + 'I')) {
                 if (width && entitywidth >= width + 20) {
                     var labelX = centroid[0],
                         labelY = centroid[1] + textOffset;
@@ -481,7 +476,7 @@ export function svgLabels(projection, context) {
                     };
 
                     // try to add label
-                    if (tryInsert(bbox, entity.id)) {
+                    if (tryInsert([bbox], entity.id)) {
                         p.x = labelX;
                         p.y = labelY;
                         p.textAnchor = 'middle';
@@ -494,24 +489,31 @@ export function svgLabels(projection, context) {
         }
 
 
-        function tryInsert(bbox, id) {
-            bbox.id = id;
-            bboxes[id] = bbox;
+        function tryInsert(bboxes, id) {
+            var skipped = false,
+                bbox;
 
-            var skipped = false;
+            for (var i = 0; i < bboxes.length; i++) {
+                bbox = bboxes[i];
+                bbox.id = id;
 
-            // Check that label is visible
-            if (bbox.minX < 0 || bbox.minY < 0 || bbox.maxX > dimensions[0] || bbox.maxY > dimensions[1]) {
-                skipped = true;
+                // Check that label is visible
+                if (bbox.minX < 0 || bbox.minY < 0 || bbox.maxX > dimensions[0] || bbox.maxY > dimensions[1]) {
+                    skipped = true;
+                    break;
+                }
+                if (rdrawn.collides(bbox)) {
+                    skipped = true;
+                    break;
+                }
             }
-            if (rdrawn.collides(bbox)) {
-                skipped = true;
-            }
+
+            entitybboxes[id] = bboxes;
 
             if (skipped) {
-                rskipped.insert(bbox);
+                rskipped.load(bboxes);
             } else {
-                rdrawn.insert(bbox);
+                rdrawn.load(bboxes);
             }
 
             return !skipped;
