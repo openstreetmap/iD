@@ -6,7 +6,7 @@ import { services } from '../services/index';
 import { svgIcon } from '../svg/index';
 
 
-export function uiTagReference(tag, context) {
+export function uiTagReference(tag) {
     var taginfo = services.taginfo,
         tagReference = {},
         button,
