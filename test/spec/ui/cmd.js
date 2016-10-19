@@ -28,11 +28,13 @@ describe('iD.uiCmd', function () {
 
     it('does not overwrite mac keybindings', function () {
         ua = 'Mac';
+        iD.Detect(true);  // force redetection
         expect(iD.uiCmd('⌘A')).to.eql('⌘A');
     });
 
     it('changes keys to linux versions', function () {
         ua = 'Linux';
+        iD.Detect(true);  // force redetection
         expect(iD.uiCmd('⌘A')).to.eql('Ctrl+A');
         expect(iD.uiCmd('⇧A')).to.eql('Shift+A');
         expect(iD.uiCmd('⌘⇧A')).to.eql('Ctrl+Shift+A');
@@ -41,6 +43,7 @@ describe('iD.uiCmd', function () {
 
     it('changes keys to win versions', function () {
         ua = 'Win';
+        iD.Detect(true);  // force redetection
         expect(iD.uiCmd('⌘A')).to.eql('Ctrl+A');
         expect(iD.uiCmd('⇧A')).to.eql('Shift+A');
         expect(iD.uiCmd('⌘⇧A')).to.eql('Ctrl+Shift+A');
@@ -49,6 +52,7 @@ describe('iD.uiCmd', function () {
 
     it('handles multi-character keys', function () {
         ua = 'Win';
+        iD.Detect(true);  // force redetection
         expect(iD.uiCmd('f11')).to.eql('f11');
         expect(iD.uiCmd('⌘plus')).to.eql('Ctrl+plus');
     });

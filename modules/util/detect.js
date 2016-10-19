@@ -3,8 +3,8 @@ import { utilStringQs } from './index';
 
 var detected;
 
-export function utilDetect() {
-    if (detected) return detected;
+export function utilDetect(force) {
+    if (detected && !force) return detected;
     detected = {};
 
     var ua = navigator.userAgent,

@@ -358,11 +358,13 @@ describe('iD.serviceMapillary', function() {
     describe('#signsSupported', function() {
         it('returns false for Internet Explorer', function() {
             ua = 'Trident/7.0; rv:11.0';
+            iD.Detect(true);  // force redetection
             expect(mapillary.signsSupported()).to.be.false;
         });
 
         it('returns false for Safari', function() {
             ua = 'Version/9.1 Safari/601';
+            iD.Detect(true);  // force redetection
             expect(mapillary.signsSupported()).to.be.false;
         });
     });
