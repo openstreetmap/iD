@@ -1,7 +1,6 @@
 import * as d3 from 'd3';
 import _ from 'lodash';
 import { t, addTranslation, setLocale } from '../util/locale';
-import { coreConnection } from './connection';
 import { coreHistory } from './history';
 import { dataLocales, dataEn } from '../../data/index';
 import { geoRawMercator } from '../geo/raw_mercator';
@@ -336,14 +335,13 @@ export function coreContext(root) {
     /* reset (aka flush) */
     context.reset = context.flush = function() {
         context.debouncedSave.cancel();
-        connection.flush();
-        features.reset();
-        history.reset();
         _.each(services, function(service) {
             if (typeof service.reset === 'function') {
                 service.reset(context);
             }
         });
+        features.reset();
+        history.reset();
         return context;
     };
 
@@ -383,7 +381,7 @@ export function coreContext(root) {
 
     ui = uiInit(context);
 
-    connection = coreConnection();
+    connection = services.osm;
 
     background = rendererBackground(context);
     features = rendererFeatures(context);

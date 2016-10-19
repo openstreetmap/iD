@@ -18,7 +18,9 @@ export * from './lib/index';
 export * from './validations/index';
 
 /* export some legacy symbols: */
-export { coreConnection as Connection } from './core/connection';
+import { services } from './services/index';
+var Connection = services.osm;
+export { Connection };
 export { coreContext as Context, setAreaKeys } from './core/context';
 export { coreDifference as Difference } from './core/difference';
 export { coreGraph as Graph } from './core/graph';

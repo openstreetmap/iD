@@ -8,13 +8,13 @@ export function uiSpinner(context) {
             .attr('src', context.imagePath('loader-black.gif'))
             .style('opacity', 0);
 
-        connection
+        connection.event
             .on('loading.spinner', function() {
                 img.transition()
                     .style('opacity', 1);
             });
 
-        connection
+        connection.event
             .on('loaded.spinner', function() {
                 img.transition()
                     .style('opacity', 0);
