@@ -15,6 +15,8 @@ import { utilDisplayName, utilEntitySelector } from '../util/index';
 
 export function svgLabels(projection, context) {
     var path = d3.geoPath().projection(projection),
+        detected = utilDetect(),
+        baselineHack = (detected.ie || detected.browser.toLowerCase() === 'edge'),
         rdrawn = rbush(),
         rskipped = rbush(),
         textWidthCache = {},
@@ -119,6 +121,7 @@ export function svgLabels(projection, context) {
         texts.enter()
             .append('text')
             .attr('class', function(d, i) { return classes + ' ' + labels[i].classes + ' ' + d.id; })
+            .attr('dy', baselineHack ? '0.35em' : null)
             .append('textPath')
             .attr('class', 'textpath');
 

@@ -2,12 +2,11 @@ import * as d3 from 'd3';
 import { d3keybinding } from '../lib/d3.keybinding.js';
 import { t, textDirection } from '../util/locale';
 import { tooltip } from '../util/tooltip';
-import { utilDetect } from '../util/detect';
-import { utilSetDimensions } from '../util/dimensions';
 
 import { svgDefs, svgIcon } from '../svg/index';
 import { modeBrowse } from '../modes/index';
 import { behaviorHash } from '../behavior/index';
+import { utilSetDimensions } from '../util/dimensions';
 
 import { uiAccount } from './account';
 import { uiAttribution } from './attribution';
@@ -38,10 +37,6 @@ export function uiInit(context) {
 
     function render(container) {
         var map = context.map();
-
-        if (utilDetect().opera) {
-            container.classed('opera', true);
-        }
 
         var hash = behaviorHash(context);
         hash();
