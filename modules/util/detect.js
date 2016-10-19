@@ -1,9 +1,11 @@
 import { currentLocale, setTextDirection } from './locale';
 import { utilStringQs } from './index';
 
+var detected;
 
 export function utilDetect() {
-    var detected = {};
+    if (detected) return detected;
+    detected = {};
 
     var ua = navigator.userAgent,
         m = null;

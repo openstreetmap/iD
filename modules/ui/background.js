@@ -15,6 +15,7 @@ import { tooltip } from '../util/tooltip';
 
 export function uiBackground(context) {
     var key = 'B',
+        detected = utilDetect(),
         opacities = [1, 0.75, 0.5, 0.25],
         directions = [
             ['right', [0.5, 0]],
@@ -45,7 +46,7 @@ export function uiBackground(context) {
                 .style('opacity', d)
                 .attr('data-opacity', d);
 
-            if (!utilDetect().opera) {
+            if (!detected.opera) {
                 utilSetTransform(bg, 0, 0);
             }
 

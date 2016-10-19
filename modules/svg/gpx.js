@@ -7,6 +7,7 @@ import toGeoJSON from 'togeojson';
 
 export function svgGpx(projection, context, dispatch) {
     var showLabels = true,
+        detected = utilDetect(),
         layer;
 
 
@@ -27,7 +28,7 @@ export function svgGpx(projection, context, dispatch) {
             .on('drop.localgpx', function() {
                 d3.event.stopPropagation();
                 d3.event.preventDefault();
-                if (!utilDetect().filedrop) return;
+                if (!detected.filedrop) return;
                 drawGpx.files(d3.event.dataTransfer.files);
             })
             .on('dragenter.localgpx', over)

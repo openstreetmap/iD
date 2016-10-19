@@ -340,7 +340,7 @@ export function svgLabels(projection, context) {
 
             var coord = projection(entity.loc),
                 margin = 2,
-                textDirection = utilDetect().textDirection,
+                textDirection = detected.textDirection,
                 offset = pointOffsets[textDirection],
                 p = {
                     height: height,

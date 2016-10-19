@@ -12,6 +12,7 @@ import { utilDetect } from '../util/detect';
 
 
 export function svgLines(projection) {
+    var detected = utilDetect();
 
     var highway_stack = {
         motorway: 0,
@@ -135,7 +136,7 @@ export function svgLines(projection) {
             .merge(oneways)
             .attr('d', function(d) { return d.d; });
 
-        if (utilDetect().ie) {
+        if (detected.ie) {
             oneways.each(function() { this.parentNode.insertBefore(this, this); });
         }
     };
