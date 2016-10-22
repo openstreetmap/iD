@@ -7,18 +7,18 @@ import { geoExtent } from '../geo/index';
 import { osmEntity, osmNode, osmRelation, osmWay } from '../osm/index';
 import { utilDetect } from '../util/detect';
 import { utilRebind } from '../util/rebind';
-import { utilFunctor } from '../util/index';
 
 
 var dispatch = d3.dispatch('authenticating', 'authenticated', 'auth', 'loading', 'loaded'),
     useHttps = window.location.protocol === 'https:',
     protocol = useHttps ? 'https:' : 'http:',
-    url = protocol + '//www.openstreetmap.org',
+    apiroot = protocol + '//api.openstreetmap.org',
+    wwwroot = protocol + '//www.openstreetmap.org',
     inflight = {},
     loadedTiles = {},
     tileZoom = 16,
     oauth = osmAuth({
-        url: protocol + '//www.openstreetmap.org',
+        url: apiroot,
         oauth_consumer_key: '5A043yRSEugj4DJ5TljuapfnrflWDte8jTOcWLlT',
         oauth_secret: 'aB3jKq1TRsCOUrfOIZ6oQMEDmv2ptV76PA54NGLL',
         loading: authenticating,
@@ -166,13 +166,13 @@ export default {
 
 
     changesetURL: function(changesetId) {
-        return url + '/changeset/' + changesetId;
+        return wwwroot + '/changeset/' + changesetId;
     },
 
 
     changesetsURL: function(center, zoom) {
         var precision = Math.max(0, Math.ceil(Math.log(zoom) / Math.LN2));
-        return url + '/history#map=' +
+        return wwwroot + '/history#map=' +
             Math.floor(zoom) + '/' +
             center[1].toFixed(precision) + '/' +
             center[0].toFixed(precision);
@@ -180,20 +180,25 @@ export default {
 
 
     entityURL: function(entity) {
-        return url + '/' + entity.type + '/' + entity.osmId();
+        return wwwroot + '/' + entity.type + '/' + entity.osmId();
     },
 
 
     userURL: function(username) {
-        return url + '/user/' + username;
+        return wwwroot + '/user/' + username;
     },
 
 
-    loadFromURL: function(url, callback) {
+    loadFromAPI: function(path, callback) {
         function done(err, dom) {
             return callback(err, parse(dom));
         }
-        return d3.xml(url).get(done);
+        if (this.authenticated()) {
+            return oauth.xhr({ method: 'GET', path: path }, done);
+        else {
+            var url = apiroot + path;
+            return d3.xml(url).get(done);
+        }
     },
 
 
@@ -201,11 +206,12 @@ export default {
         var type = osmEntity.id.type(id),
             osmID = osmEntity.id.toOSM(id);
 
-        this.loadFromURL(
-            url + '/api/0.6/' + type + '/' + osmID + (type !== 'node' ? '/full' : ''),
+        this.loadFromAPI(
+            '/api/0.6/' + type + '/' + osmID + (type !== 'node' ? '/full' : ''),
             function(err, entities) {
-                if (callback) callback(err, {data: entities});
-            });
+                if (callback) callback(err, { data: entities });
+            }
+        );
     },
 
 
@@ -213,11 +219,12 @@ export default {
         var type = osmEntity.id.type(id),
             osmID = osmEntity.id.toOSM(id);
 
-        this.loadFromURL(
-            url + '/api/0.6/' + type + '/' + osmID + '/' + version,
+        this.loadFromAPI(
+            '/api/0.6/' + type + '/' + osmID + '/' + version,
             function(err, entities) {
-                if (callback) callback(err, {data: entities});
-            });
+                if (callback) callback(err, { data: entities });
+            }
+        );
     },
 
 
@@ -228,11 +235,12 @@ export default {
                 osmIDs = _.map(v, osmEntity.id.toOSM);
 
             _.each(_.chunk(osmIDs, 150), function(arr) {
-                that.loadFromURL(
-                    url + '/api/0.6/' + type + '?' + type + '=' + arr.join(),
+                that.loadFromAPI(
+                    '/api/0.6/' + type + '?' + type + '=' + arr.join(),
                     function(err, entities) {
-                        if (callback) callback(err, {data: entities});
-                    });
+                        if (callback) callback(err, { data: entities });
+                    }
+                );
             });
         });
     },
@@ -333,7 +341,7 @@ export default {
                         method: 'PUT',
                         path: '/api/0.6/changeset/' + changeset_id + '/close',
                         options: { header: { 'Content-Type': 'text/xml' } }
-                    }, utilFunctor(true));
+                    }, function() { return true; });
                 });
             });
     },
@@ -380,7 +388,7 @@ export default {
                     }));
             }
 
-            d3.xml(url + '/api/0.6/changesets?user=' + user.id).get()
+            d3.xml(apiroot + '/api/0.6/changesets?user=' + user.id).get()
                 .on('load', done)
                 .on('error', callback);
         });
@@ -392,7 +400,7 @@ export default {
             var apiStatus = capabilities.getElementsByTagName('status');
             callback(undefined, apiStatus[0].getAttribute('api'));
         }
-        d3.xml(url + '/api/capabilities').get()
+        d3.xml(apiroot + '/api/capabilities').get()
             .on('load', done)
             .on('error', callback);
     },
@@ -414,7 +422,8 @@ export default {
             ts = 256 * Math.pow(2, z - tileZoom),
             origin = [
                 s / 2 - projection.translate()[0],
-                s / 2 - projection.translate()[1]];
+                s / 2 - projection.translate()[1]
+            ];
 
         var tiles = d3geoTile()
             .scaleExtent([tileZoom, tileZoom])
@@ -433,10 +442,6 @@ export default {
                 };
             });
 
-        function bboxUrl(tile) {
-            return url + '/api/0.6/map?bbox=' + tile.extent.toParam();
-        }
-
         _.filter(inflight, function(v, i) {
             var wanted = _.find(tiles, function(tile) {
                 return i === tile.id;
@@ -454,11 +459,15 @@ export default {
                 dispatch.call('loading');
             }
 
-            inflight[id] = that.loadFromURL(bboxUrl(tile), function(err, parsed) {
+            function bboxPath(tile) {
+                return '/api/0.6/map?bbox=' + tile.extent.toParam();
+            }
+
+            inflight[id] = that.loadFromAPI(bboxPath(tile), function(err, parsed) {
                 loadedTiles[id] = true;
                 delete inflight[id];
 
-                if (callback) callback(err, _.extend({data: parsed}, tile));
+                if (callback) callback(err, _.extend({ data: parsed }, tile));
 
                 if (_.isEmpty(inflight)) {
                     dispatch.call('loaded');
