@@ -10,13 +10,9 @@
         "point",
         "area"
     ],
-    "terms": [
-        "manicure",
-        "pedicure"
-    ],
     "tags": {
         "shop": "beauty",
-        "beauty": "nails"
+        "beauty": "tanning"
     },
-    "name": "Nail Salon"
+    "name": "Tanning Salon"
 }

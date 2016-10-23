@@ -222,6 +222,11 @@
         "type": "typeCombo",
         "label": "Type"
     },
+    "beauty": {
+        "key": "beauty",
+        "type": "combo",
+        "label": "Shop Type"
+    },
     "bench": {
         "key": "bench",
         "type": "check",

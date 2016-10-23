@@ -780,6 +780,9 @@
             "barrier": {
                 "label": "Type"
             },
+            "beauty": {
+                "label": "Shop Type"
+            },
             "bench": {
                 "label": "Bench"
             },
@@ -3609,7 +3612,11 @@
             },
             "shop/beauty/nails": {
                 "name": "Nail Salon",
-                "terms": "Nail Salon,nails"
+                "terms": "manicure,pedicure"
+            },
+            "shop/beauty/tanning": {
+                "name": "Tanning Salon",
+                "terms": ""
             },
             "shop/bed": {
                 "name": "Bedding/Mattress Store",

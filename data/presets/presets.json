@@ -8488,7 +8488,8 @@
             "operator",
             "address",
             "building_area",
-            "opening_hours"
+            "opening_hours",
+            "beauty"
         ],
         "geometry": [
             "point",
@@ -8507,9 +8508,9 @@
     "shop/beauty/nails": {
         "icon": "shop",
         "fields": [
-            "shop",
-            "building_area",
+            "operator",
             "address",
+            "building_area",
             "opening_hours"
         ],
         "geometry": [
@@ -8517,14 +8518,32 @@
             "area"
         ],
         "terms": [
-            "Nail Salon",
-            "nails"
+            "manicure",
+            "pedicure"
         ],
         "tags": {
             "shop": "beauty",
             "beauty": "nails"
         },
         "name": "Nail Salon"
+    },
+    "shop/beauty/tanning": {
+        "icon": "shop",
+        "fields": [
+            "operator",
+            "address",
+            "building_area",
+            "opening_hours"
+        ],
+        "geometry": [
+            "point",
+            "area"
+        ],
+        "tags": {
+            "shop": "beauty",
+            "beauty": "tanning"
+        },
+        "name": "Tanning Salon"
     },
     "shop/bed": {
         "icon": "lodging",
