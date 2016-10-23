@@ -8495,7 +8495,6 @@
             "area"
         ],
         "terms": [
-            "nail spa",
             "spa",
             "salon",
             "tanning"
@@ -8504,6 +8503,28 @@
             "shop": "beauty"
         },
         "name": "Beauty Shop"
+    },
+    "shop/beauty/nails": {
+        "icon": "shop",
+        "fields": [
+            "shop",
+            "building_area",
+            "address",
+            "opening_hours"
+        ],
+        "geometry": [
+            "point",
+            "area"
+        ],
+        "terms": [
+            "Nail Salon",
+            "nails"
+        ],
+        "tags": {
+            "shop": "beauty",
+            "beauty": "nails"
+        },
+        "name": "Nail Salon"
     },
     "shop/bed": {
         "icon": "lodging",

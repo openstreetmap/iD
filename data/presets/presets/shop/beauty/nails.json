@@ -1,9 +1,10 @@
+
 {
     "icon": "shop",
     "fields": [
-        "operator",
-        "address",
+    	"shop",
         "building_area",
+        "address",
         "opening_hours"
     ],
     "geometry": [
@@ -11,12 +12,12 @@
         "area"
     ],
     "terms": [
-        "spa",
-        "salon",
-        "tanning"
+        "Nail Salon",
+        "nails"
     ],
     "tags": {
-        "shop": "beauty"
+        "shop": "beauty",
+        "beauty": "nails"
     },
-    "name": "Beauty Shop"
+    "name": "Nail Salon"
 }

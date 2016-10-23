@@ -3345,8 +3345,13 @@ en:
       shop/beauty:
         # shop=beauty
         name: Beauty Shop
-        # 'terms: nail spa,spa,salon,tanning'
+        # 'terms: spa,salon,tanning'
         terms: '<translate with synonyms or related terms for ''Beauty Shop'', separated by commas>'
+      shop/beauty/nails:
+        # 'shop=beauty, beauty=nails'
+        name: Nail Salon
+        # 'terms: Nail Salon,nails'
+        terms: '<translate with synonyms or related terms for ''Nail Salon'', separated by commas>'
       shop/bed:
         # shop=bed
         name: Bedding/Mattress Store
