@@ -14,7 +14,7 @@ export function uiFieldServiceBicycle(field) {
             return s.replace(/:/g, '');
         }
 
-        wrap = selection.selectAll('.preset-input-wrap')
+        var wrap = selection.selectAll('.preset-input-wrap')
             .data([0]);
 
         wrap = wrap.enter()
