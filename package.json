@@ -27,7 +27,7 @@
     "diacritics": "1.2.3",
     "lodash": "4.16.4",
     "marked": "0.3.6",
-    "osm-auth": "0.2.9",
+    "osm-auth": "1.0.0",
     "rbush": "2.0.1",
     "sexagesimal": "0.5.0",
     "togeojson": "0.16.0",
