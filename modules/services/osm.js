@@ -464,20 +464,20 @@ export default {
                 dispatch.call('loading');
             }
 
-            function bboxPath(tile) {
-                return '/api/0.6/map?bbox=' + tile.extent.toParam();
-            }
+            inflight[id] = that.loadFromAPI(
+                '/api/0.6/map?bbox=' + tile.extent.toParam(),
+                function(err, parsed) {
+                    loadedTiles[id] = true;
+                    delete inflight[id];
 
-            inflight[id] = that.loadFromAPI(bboxPath(tile), function(err, parsed) {
-                loadedTiles[id] = true;
-                delete inflight[id];
+                    if (callback) {
+                        callback(err, _.extend({ data: parsed }, tile));
+                    }
 
-                if (callback) callback(err, _.extend({ data: parsed }, tile));
-
-                if (_.isEmpty(inflight)) {
-                    dispatch.call('loaded');
-                }
-            });
+                    if (_.isEmpty(inflight)) {
+                        dispatch.call('loaded');
+                    }
+                });
         });
     },
 
