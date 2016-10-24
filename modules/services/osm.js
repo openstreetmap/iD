@@ -12,13 +12,12 @@ import { utilRebind } from '../util/rebind';
 var dispatch = d3.dispatch('authenticating', 'authenticated', 'auth', 'loading', 'loaded'),
     useHttps = window.location.protocol === 'https:',
     protocol = useHttps ? 'https:' : 'http:',
-    apiroot = protocol + '//api.openstreetmap.org',
-    wwwroot = protocol + '//www.openstreetmap.org',
+    urlroot = protocol + '//www.openstreetmap.org',
     inflight = {},
     loadedTiles = {},
     tileZoom = 16,
     oauth = osmAuth({
-        url: apiroot,
+        url: urlroot,
         oauth_consumer_key: '5A043yRSEugj4DJ5TljuapfnrflWDte8jTOcWLlT',
         oauth_secret: 'aB3jKq1TRsCOUrfOIZ6oQMEDmv2ptV76PA54NGLL',
         loading: authenticating,
@@ -166,13 +165,13 @@ export default {
 
 
     changesetURL: function(changesetId) {
-        return wwwroot + '/changeset/' + changesetId;
+        return urlroot + '/changeset/' + changesetId;
     },
 
 
     changesetsURL: function(center, zoom) {
         var precision = Math.max(0, Math.ceil(Math.log(zoom) / Math.LN2));
-        return wwwroot + '/history#map=' +
+        return urlroot + '/history#map=' +
             Math.floor(zoom) + '/' +
             center[1].toFixed(precision) + '/' +
             center[0].toFixed(precision);
@@ -180,12 +179,12 @@ export default {
 
 
     entityURL: function(entity) {
-        return wwwroot + '/' + entity.type + '/' + entity.osmId();
+        return urlroot + '/' + entity.type + '/' + entity.osmId();
     },
 
 
     userURL: function(username) {
-        return wwwroot + '/user/' + username;
+        return urlroot + '/user/' + username;
     },
 
 
@@ -195,8 +194,8 @@ export default {
         }
         if (this.authenticated()) {
             return oauth.xhr({ method: 'GET', path: path }, done);
-        else {
-            var url = apiroot + path;
+        } else {
+            var url = urlroot + path;
             return d3.xml(url).get(done);
         }
     },
@@ -379,18 +378,24 @@ export default {
 
     userChangesets: function(callback) {
         this.userDetails(function(err, user) {
-            if (err) return callback(err);
-
-            function done(changesets) {
-                callback(undefined, Array.prototype.map.call(changesets.getElementsByTagName('changeset'),
-                    function (changeset) {
-                        return { tags: getTags(changeset) };
-                    }));
+            if (err) {
+                callback(err);
+                return;
             }
 
-            d3.xml(apiroot + '/api/0.6/changesets?user=' + user.id).get()
-                .on('load', done)
-                .on('error', callback);
+            function done(err, changesets) {
+                if (err) {
+                    callback(err);
+                } else {
+                    callback(undefined, Array.prototype.map.call(changesets.getElementsByTagName('changeset'),
+                        function (changeset) {
+                            return { tags: getTags(changeset) };
+                        }
+                    ));
+                }
+            }
+
+            oauth.xhr({ method: 'GET', path: '/api/0.6/changesets?user=' + user.id }, done);
         });
     },
 
@@ -400,7 +405,7 @@ export default {
             var apiStatus = capabilities.getElementsByTagName('status');
             callback(undefined, apiStatus[0].getAttribute('api'));
         }
-        d3.xml(apiroot + '/api/capabilities').get()
+        d3.xml(urlroot + '/api/capabilities').get()
             .on('load', done)
             .on('error', callback);
     },
@@ -478,8 +483,10 @@ export default {
 
 
     switch: function(options) {
-        url = options.url;
+        urlroot = options.urlroot;
+
         oauth.options(_.extend({
+            url: urlroot,
             loading: authenticating,
             done: authenticated
         }, options));
