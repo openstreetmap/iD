@@ -1196,6 +1196,36 @@
             }
         }
     },
+    "service_bicycle": {
+        "keys": [
+            "service:bicycle:retail",
+            "service:bicycle:repair",
+            "service:bicycle:rental"
+        ],
+        "reference": {
+            "key": "service"
+        },
+        "type": "serviceBicycle",
+        "label": "Services",
+        "placeholder": "Unknown",
+        "strings": {
+            "types": {
+                "service:bicycle:retail": "Retail",
+                "service:bicycle:repair": "Repair",
+                "service:bicycle:rental": "Rental"
+            },
+            "options": {
+                "yes": {
+                    "title": "Yes",
+                    "description": "Shop offers this service"
+                },
+                "no": {
+                    "title": "No",
+                    "description": "Shop doesn't offer this service"
+                }
+            }
+        }
+    },
     "service_rail": {
         "key": "service",
         "type": "combo",

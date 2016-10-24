@@ -9,6 +9,7 @@ export * from './localized';
 export * from './maxspeed';
 export * from './radio';
 export * from './restrictions';
+export * from './serviceBicycle';
 export * from './textarea';
 export * from './wikipedia';
 
@@ -40,6 +41,7 @@ import { uiFieldLocalized } from './localized';
 import { uiFieldMaxspeed } from './maxspeed';
 import { uiFieldRadio } from './radio';
 import { uiFieldRestrictions } from './restrictions';
+import { uiFieldServiceBicycle } from './serviceBicycle';
 import { uiFieldTextarea } from './textarea';
 import { uiFieldWikipedia } from './wikipedia';
 
@@ -63,6 +65,7 @@ export var uiFields = {
     maxspeed: uiFieldMaxspeed,
     radio: uiFieldRadio,
     restrictions: uiFieldRestrictions,
+    serviceBicycle: uiFieldServiceBicycle,
     textarea: uiFieldTextarea,
     wikipedia: uiFieldWikipedia
 };

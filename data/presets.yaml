@@ -930,6 +930,24 @@ en:
           undefined: Assumed to be No
           # 'service:bicycle:pump=yes'
           'yes': 'Yes'
+      service_bicycle:
+        # 'service:bicycle:retail=*, service:bicycle:repair=*, service:bicycle:rental=*'
+        label: Services
+        options:
+          # no=yes
+          'no':
+            description: Shop doesn't offer this service
+            title: 'No'
+          # yes=yes
+          'yes':
+            description: Shop offers this service
+            title: 'Yes'
+        # service_bicycle field placeholder
+        placeholder: Unknown
+        types:
+          'service:bicycle:rental': Rental
+          'service:bicycle:repair': Repair
+          'service:bicycle:retail': Retail
       service_rail:
         # service=*
         label: Service Type
