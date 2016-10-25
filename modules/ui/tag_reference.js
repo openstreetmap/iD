@@ -54,7 +54,8 @@ export function uiTagReference(tag) {
 
             body.html('');
 
-            if (!docs || !docs.description) {
+
+            if (!docs || !docs.title) {
                 if (param.hasOwnProperty('value')) {
                     load(_.omit(param, 'value'));   // retry with key only
                 } else {
@@ -63,6 +64,7 @@ export function uiTagReference(tag) {
                 }
                 return;
             }
+
 
             if (docs.image && docs.image.thumb_url_prefix) {
                 body
@@ -77,7 +79,7 @@ export function uiTagReference(tag) {
 
             body
                 .append('p')
-                .text(docs.description);
+                .text(docs.description || t('inspector.documentation_redirect'));
 
             body
                 .append('a')
