@@ -34,9 +34,11 @@ export function uiEntityEditor(context) {
         var entity = context.entity(id),
             tags = _.clone(entity.tags);
 
+        // Header
         var header = selection.selectAll('.header')
             .data([0]);
 
+        // Enter
         var enter = header.enter()
             .append('div')
             .attr('class', 'header fillL cf');
@@ -44,7 +46,6 @@ export function uiEntityEditor(context) {
         enter
             .append('button')
             .attr('class', 'fl preset-reset preset-choose')
-            .on('click', function() { dispatch.call('choose', this, activePreset); })
             .append('span')
             .html((textDirection === 'rtl') ? '&#9658;' : '&#9668;');
 
@@ -58,10 +59,19 @@ export function uiEntityEditor(context) {
             .append('h3')
             .text(t('inspector.edit'));
 
+        // Update
+        header = header
+            .merge(enter);
 
+        header.selectAll('.preset-reset')
+            .on('click', function() { dispatch.call('choose', this, activePreset); });
+
+
+        // Body
         var body = selection.selectAll('.inspector-body')
             .data([0]);
 
+        // Enter
         enter = body.enter()
             .append('div')
             .attr('class', 'inspector-body');
@@ -73,10 +83,7 @@ export function uiEntityEditor(context) {
             .attr('class', 'preset-list-button-wrap')
             .append('button')
             .attr('class', 'preset-list-button preset-reset')
-            .on('click', function() { dispatch.call('choose', this, activePreset); })
-            .call(tooltip()
-                .title(t('inspector.back_tooltip'))
-                .placement('bottom'))
+            .call(tooltip().title(t('inspector.back_tooltip')).placement('bottom'))
             .append('div')
             .attr('class', 'label');
 
@@ -96,7 +103,6 @@ export function uiEntityEditor(context) {
             .append('div')
             .attr('class', 'raw-membership-editor inspector-inner');
 
-
         // Update
         body = body
             .merge(enter);
@@ -106,6 +112,9 @@ export function uiEntityEditor(context) {
 
         body.selectAll('.preset-list-item')
             .call(reference.body);
+
+        body.selectAll('.preset-reset')
+            .on('click', function() { dispatch.call('choose', this, activePreset); });
 
         body.select('.preset-list-item button')
             .call(uiPresetIcon()

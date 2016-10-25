@@ -122,6 +122,12 @@ export function uiTagReference(tag) {
 
         button = button.enter()
             .append('button')
+            .attr('class', 'tag-reference-button')
+            .attr('tabindex', -1)
+            .call(svgIcon('#icon-inspect'))
+            .merge(button);
+
+        button
             .on('click', function () {
                 d3.event.stopPropagation();
                 d3.event.preventDefault();
@@ -132,11 +138,7 @@ export function uiTagReference(tag) {
                 } else {
                     load(tag);
                 }
-            })
-            .attr('class', 'tag-reference-button')
-            .attr('tabindex', -1)
-            .call(svgIcon('#icon-inspect'))
-            .merge(button);
+            });
     };
 
 
