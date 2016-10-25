@@ -35,6 +35,7 @@ describe('iD.uiCmd', function () {
     it('changes keys to linux versions', function () {
         ua = 'Linux';
         iD.Detect(true);  // force redetection
+        expect(iD.uiCmd('⌘⌫')).to.eql('Ctrl+Backspace');
         expect(iD.uiCmd('⌘A')).to.eql('Ctrl+A');
         expect(iD.uiCmd('⇧A')).to.eql('Shift+A');
         expect(iD.uiCmd('⌘⇧A')).to.eql('Ctrl+Shift+A');
@@ -44,6 +45,7 @@ describe('iD.uiCmd', function () {
     it('changes keys to win versions', function () {
         ua = 'Win';
         iD.Detect(true);  // force redetection
+        expect(iD.uiCmd('⌘⌫')).to.eql('Ctrl+Backspace');
         expect(iD.uiCmd('⌘A')).to.eql('Ctrl+A');
         expect(iD.uiCmd('⇧A')).to.eql('Shift+A');
         expect(iD.uiCmd('⌘⇧A')).to.eql('Ctrl+Shift+A');

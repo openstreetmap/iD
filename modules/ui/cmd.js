@@ -25,7 +25,7 @@ export function uiCmd(code) {
 
     for (var i = 0; i < code.length; i++) {
         if (code[i] in replacements) {
-            result += replacements[code[i]] + '+';
+            result += replacements[code[i]] + (i < code.length - 1 ? '+' : '');
         } else {
             result += code[i];
         }

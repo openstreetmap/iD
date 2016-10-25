@@ -77,7 +77,7 @@ export function operationDelete(selectedIDs, context) {
 
 
     operation.id = 'delete';
-    operation.keys = [uiCmd('⌘⌫'), uiCmd('⌘⌦')];
+    operation.keys = [uiCmd('⌘⌫'), uiCmd('⌘⌦'), uiCmd('⌦')];
     operation.title = t('operations.delete.title');
 
 
