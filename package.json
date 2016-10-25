@@ -8,11 +8,21 @@
     "test": "test"
   },
   "scripts": {
+    "all": "npm run clean && npm run build-assets && npm run build && npm run build-min",
     "build": "node build.js && node development_server.js",
-    "build-min": "npm run build && uglifyjs dist/iD.js -c -m -o dist/iD.min.js",
+    "build-assets": "npm run build-css && npm run build-svg",
+    "build-css": "cat css/reset.css css/map.css css/app.css > dist/iD.css",
+    "build-min": "uglifyjs dist/iD.js -c -m -o dist/iD.min.js",
+    "build-svg": "npm run build-svg-maki && npm run build-svg-id",
+    "build-svg-maki": "svg-sprite --symbol --symbol-dest . --symbol-sprite dist/img/maki-sprite.svg node_modules/maki/src/*.svg",
+    "build-svg-id": "node svg/spriteify.js --svg svg/iD-sprite.src.svg --json svg/iD-sprite.json > dist/img/iD-sprite.svg",
+    "clean": "rm -f dist/*.js dist/*.map dist/*.css dist/img/*.svg",
+    "imagery": "node data/update_imagery",
     "lint": "eslint *.js js/id test/spec modules",
+    "prepublish": "npm run all",
     "start": "node development_server.js develop",
-    "test": "npm run lint && npm run build && phantomjs node_modules/mocha-phantomjs-core/mocha-phantomjs-core.js test/index.html spec"
+    "test": "npm run lint && npm run build && phantomjs node_modules/mocha-phantomjs-core/mocha-phantomjs-core.js test/index.html spec",
+    "translations": "node data/update_locales"
   },
   "repository": {
     "type": "git",

@@ -22,26 +22,19 @@
   * Stable mirror of `release` branch:  http://openstreetmap.us/iD/release
   * Development mirror of `master` branch:  http://openstreetmap.us/iD/master
 
-Come on in, the water's lovely. More help? Ping `jfire` or `bhousel` on
-[OpenStreetMap IRC](http://wiki.openstreetmap.org/wiki/IRC)
-(`irc.oftc.net`, in `#iD` or `#osm-dev` or `#osm`) or on the [OpenStreetMap `dev` mailing list](http://wiki.openstreetmap.org/wiki/Mailing_lists).
+Come on in, the water's lovely. More help? Ping `jfire` or `bhousel` on:
+* [OpenStreetMap US Slack](https://osmus-slack.herokuapp.com/)
+(`#dev` or `#general` channels)
+* [OpenStreetMap IRC](http://wiki.openstreetmap.org/wiki/IRC)
+(`irc.oftc.net`, in `#iD` or `#osm-dev` or `#osm`)
+* [OpenStreetMap `dev` mailing list](http://wiki.openstreetmap.org/wiki/Mailing_lists)
 
 ## Prerequisites
 
 * [Node.js](http://nodejs.org/) version 4 or newer
-* Command line development tools (`make`, `git`, and a compiler) for your platform
-  * Ubuntu:
-    * `sudo apt-get install build-essential git`
-  * macOS:
-    * Run `xcode-select --install` from a command line or install [Xcode](https://developer.apple.com/xcode/)
-  * Windows (Cygwin):
-    * Install [Git for Windows](https://git-scm.com/downloads)
-    * Install [Cygwin](https://cygwin.com/install.html) - choose default packages + `make`, `wget`, `apache2` (needed for updated mime type list)
-    * Optionally, install [apt-cyg](https://github.com/transcode-open/apt-cyg) for managing your Cygwin packages
-    * Edit `~/.bashrc`:<br/>
-      Put Git for Windows before Cygwin in PATH, otherwise `npm install` may [fail to fetch git repositories](https://github.com/npm/npm/issues/7456)<br/><pre>
-      export PATH=/cygdrive/c/Program\ Files/Git/mingw64/bin/:$PATH</pre>
-    * Edit `~/.gitconfig`:<br/>
+* [`git`](https://www.atlassian.com/git/tutorials/install-git/) for your platform
+  * Note for Windows users:
+    * Edit `$HOME\.gitconfig`:<br/>
       Add these lines to avoid checking in files with CRLF newlines<br><pre>
       [core]
           autocrlf = input</pre>
@@ -52,10 +45,9 @@ To run the current development version of iD on your own computer:
 
 1. Create a local `git clone` of the project, then `cd` into the project folder
 2. (Windows Only)  Run `fixWinSymlinks.bat`.  This script will prompt for Administrator rights.  see also: http://stackoverflow.com/questions/5917249/git-symlinks-in-windows
-3. Run `npm install`
-4. Run `make`
-5. Run `npm start`
-6. Open `http://localhost:8080/` in a web browser
+3. Run `npm install`  (this will run the `prepublish` script that builds everything)
+4. Run `npm start`
+5. Open `http://localhost:8080/` in a web browser
 
 For guidance on building a packaged version, running tests, and contributing to
 development, see [CONTRIBUTING.md](CONTRIBUTING.md).

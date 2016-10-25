@@ -13,21 +13,19 @@
 
 ### Update master branch
 - [ ] git checkout master
-- [ ] make translations
-- [ ] git add . && git commit -m 'make translations'
-- [ ] make imagery
-- [ ] git add . && git commit -m 'make imagery'
-- [ ] make suggestions
-- [ ] git add . && git commit -m 'make suggestions'
+- [ ] npm run translations
+- [ ] git add . && git commit -m 'npm run translations'
+- [ ] npm run imagery
+- [ ] git add . && git commit -m 'npm run imagery'
 - [ ] Update `CHANGELOG.md`
-- [ ] Update version number in `id.js`, `package.json`
+- [ ] Update version number in `modules/core/context.js`, `package.json`
 - [ ] git add . && git commit -m 'A.B.C'
 - [ ] git push origin master
 
 ### Update and tag release branch
 - [ ] git checkout release
 - [ ] git reset --hard master
-- [ ] make
+- [ ] npm run all
 - [ ] git add -f dist/*.css dist/*.js dist/img/*.svg dist/locales/*.json
 - [ ] git commit -m 'Check in build'
 - [ ] git tag vA.B.C
