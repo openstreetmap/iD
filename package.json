@@ -3,10 +3,12 @@
   "version": "2.0.0-beta.1",
   "description": "A friendly editor for OpenStreetMap",
   "main": "iD.js",
-  "directories": {
-    "doc": "docs",
-    "test": "test"
-  },
+  "repository": "openstreetmap/iD",
+  "keywords": [
+    "editor",
+    "openstreetmap"
+  ],
+  "license": "ISC",
   "scripts": {
     "all": "npm run clean && npm run build-assets && npm run build && npm run build-min",
     "build": "node build.js && node development_server.js",
@@ -24,15 +26,6 @@
     "test": "npm run lint && npm run build && phantomjs node_modules/mocha-phantomjs-core/mocha-phantomjs-core.js test/index.html spec",
     "translations": "node data/update_locales"
   },
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/openstreetmap/iD.git"
-  },
-  "keywords": [
-    "editor",
-    "openstreetmap"
-  ],
-  "license": "ISC",
   "dependencies": {
     "diacritics": "1.2.3",
     "lodash": "4.16.4",
