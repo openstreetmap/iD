@@ -1,9 +1,9 @@
 .DS_Store
-transifex.auth
-node_modules
-npm-debug.log
+data/data.js
 dist/*.js
 dist/*.css
 dist/*.map
 dist/img/*.svg
-data/data.js
+node_modules/
+npm-debug.log
+transifex.auth

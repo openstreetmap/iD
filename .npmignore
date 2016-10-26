@@ -1,5 +1,6 @@
 .DS_Store
-transifex.auth
-node_modules
-npm-debug.log
+.travis.yml
 data/data.js
+node_modules/
+npm-debug.log
+transifex.auth
