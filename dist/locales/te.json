@@ -1,641 +1,753 @@
 {
-    "modes": {
-        "add_area": {
-            "title": "ప్రదేశం",
-            "description": "పార్కులను, కట్టడాలను, సరస్సులను లేదా ఇతర ప్రదేశాలను పటంలో చేర్చండి.",
-            "tail": "పార్కు, సరస్సు, భవంతి లేదా వేరే ఏదైన కట్టడం గీయుటకు మ్యాప్ మీద క్లిక్ చేయండి"
-        },
-        "add_line": {
-            "title": "గీత",
-            "tail": "రోడ్డు గీయుటకు మ్యాప్ మీద క్లిక్ చేయండి"
-        },
-        "add_point": {
-            "title": "బిందువు",
-            "description": "హోటెల్, పోస్ట్ బాక్స్ ఇతరత్రా ప్రదేశాలను మ్యాప్ కి జతపరచండి",
-            "tail": "కొత్త పాయంట్ గీయుటకు మ్యాప్ మీద క్లిక్ చేయండి"
-        },
-        "browse": {
-            "title": "బ్రౌస్"
-        }
-    },
-    "operations": {
-        "add": {
-            "annotation": {
-                "point": "ఒక బిందువును చేర్చారు."
-            }
-        },
-        "start": {
-            "annotation": {
-                "line": "ఒక గీతను మొదలుపెట్టారు.",
-                "area": "ఒక ప్రదేశాన్ని మొదలుపెట్టారు."
-            }
-        },
-        "continue": {
-            "key": "ఏ",
-            "title": "కొనసాగించు",
-            "description": "ఈ గీతను కొనసాగించండి.",
-            "not_eligible": "గీతను ఇక్కడకు కొనసాగించలేరు.",
-            "annotation": {
-                "line": "ఒక గీతను కొనసాగించారు.",
-                "area": "ఒక ప్రదేశాన్ని కొనసాగించారు."
-            }
-        },
-        "cancel_draw": {
-            "annotation": "గీయడాన్ని రద్దుచేసారు."
-        },
-        "circularize": {
-            "description": {
-                "line": "ఈ గీతను వృత్తంగా చేయి.",
-                "area": "ఈ ప్రదేశాన్ని వృత్తంగా చేయి."
+    "te": {
+        "modes": {
+            "add_area": {
+                "title": "ప్రదేశం",
+                "description": "పార్కులను, కట్టడాలను, సరస్సులను లేదా ఇతర ప్రదేశాలను పటంలో చేర్చండి.",
+                "tail": "పార్కు, సరస్సు, భవంతి లేదా వేరే ఏదైన కట్టడం గీయుటకు మ్యాప్ మీద క్లిక్ చేయండి"
             },
-            "key": "ఓ",
-            "annotation": {
-                "line": "గీత సర్కల్ గా మార్చబడింది",
-                "area": "ఒక స్థలం సర్కల్ గా మార్చబడింది"
-            }
-        },
-        "orthogonalize": {
-            "title": "చతురస్రం",
-            "description": {
-                "area": "ఈ ప్రదేశపు మూలలను చదరంగా చేయండి."
+            "add_line": {
+                "title": "గీత",
+                "description": "రహదారులను, వీధులను, పాదచారుల దారులను, కాలువలను లేక ఇతర గీతలను పటంలో చేర్చండి.",
+                "tail": "రోడ్డు గీయుటకు మ్యాప్ మీద క్లిక్ చేయండి"
             },
-            "key": "ఎస్",
-            "not_squarish": "ఇది పలకలుగా లేదు కనుక దీన్ని చదరంగా చెయ్యడం కుదరదు."
-        },
-        "straighten": {
-            "title": "తిన్నగాచేయి",
-            "description": "ఈ గీతను తిన్నగా చేయి.",
-            "key": "ఎస్",
-            "annotation": "గీతను తిన్నగా చేసారు.",
-            "too_bendy": "ఇది బాగా వంగి ఉన్నందున దీన్ని తిన్నగా చెయ్యడం కుదరదు."
-        },
-        "delete": {
-            "title": "తొలగించు",
-            "annotation": {
-                "point": "ఒక బిందువును తొలగించారు.",
-                "line": "గీత తొలగించబడింది",
-                "area": "స్థలం తొలగించబడింది",
-                "relation": "సంబంధం తొలగించబడింది",
-                "multiple": "{n} వస్తువులు తొలగించబడ్డాయి"
-            }
-        },
-        "connect": {
-            "annotation": {
-                "point": "పాయంట్ ఒక దారికి కలపబడింది",
-                "vertex": "ఒక దారి మరొక దారితో కలపబడింది",
-                "line": "గీత ఒక దారికి కలపబడింది",
-                "area": "స్థలము ఒక దారికి కలపబడింది"
-            }
-        },
-        "disconnect": {
-            "key": "డీ"
-        },
-        "merge": {
-            "title": "విలీనం చెయ్యు",
-            "key": "సీ",
-            "not_eligible": "ఈ విశేషాలు విలీనానికి చేయబడలేవు"
-        },
-        "move": {
-            "title": "తరలించు",
-            "description": "దీన్ని వేరే చోటకు తరలించండి.",
-            "key": "ఎమ్",
-            "annotation": {
-                "point": "ఒక బిందువు తరలించబడింది",
-                "line": "ఒక గీత తరలించబడింది",
-                "area": "ఒక ప్రదేశం తరలించబడింది",
-                "multiple": "పలు వస్తువులు తరలించబడ్డాయి"
-            }
-        },
-        "rotate": {
-            "title": "తిప్పు",
-            "description": "ఈ అంశాన్ని దాని కేంద్ర బిందువు చుట్టూ తిప్పండి.",
-            "key": "ఆర్",
-            "annotation": {
-                "line": "ఒక గీత తిప్పబడింది",
-                "area": "ఒక స్థలం తిప్పబడింది"
-            }
-        },
-        "reverse": {
-            "description": "ఈ గీతను వ్యతిరేక దిశగా పంపు",
-            "key": "వీ"
-        },
-        "split": {
-            "title": "విడగొట్టు",
-            "description": {
-                "area": "ఈ స్థల సరిహద్దుని రెండుగా విడగొట్టు."
+            "add_point": {
+                "title": "బిందువు",
+                "description": "హోటెల్, పోస్ట్ బాక్స్ ఇతరత్రా ప్రదేశాలను మ్యాప్ కి జతపరచండి",
+                "tail": "కొత్త పాయంట్ గీయుటకు మ్యాప్ మీద క్లిక్ చేయండి"
             },
-            "key": "ఎక్స్",
-            "annotation": {
-                "line": "గీతను విడగొట్టు",
-                "area": "స్థలం సరిహద్దును విడగొట్టు",
-                "multiple": "{n} గీతలను/స్థలాలను విడగొట్టు"
+            "browse": {
+                "title": "బ్రౌస్",
+                "description": "పటాన్ని జూమ్ చేయండి మరియు విస్తరించండి."
             },
-            "not_eligible": "గీత మొదలు లేదా ఆఖరిన విడగొట్టడానికి వీలు లేదు.",
-            "multiple_ways": "చాలా గీతాలు ఉన్నందు వల్ల విడగొట్టడం కుదరదు."
-        }
-    },
-    "translate": {
-        "translate": "అనువదించండి",
-        "localized_translation_label": "బహుభాషా పేరు",
-        "localized_translation_language": "భాషను ఎంచుకోండి",
-        "localized_translation_name": "పేరు"
-    },
-    "zoom_in_edit": "మార్చడానికి దగ్గరగా వీక్షించు",
-    "logout": "నిష్క్రమించు",
-    "loading_auth": "ఓపెన్‌స్ట్రీట్‌మ్యాపుకి అనుసంధానిస్తున్నాం…",
-    "commit": {
-        "title": "మార్పులను భద్రపరచు",
-        "upload_explanation": "మీరు ఎక్కించే మార్పులు ఓపెన్‌స్ట్రీట్‌మ్యాప్ డేటాను వాడే పటాలన్నింటిలోనూ కనిపిస్తాయి.",
-        "save": "భద్రపరచు",
-        "cancel": "రద్దుచేయి",
-        "warnings": "హెచ్చరికలు",
-        "modified": "మార్చబడింది",
-        "deleted": "తొలగించబడింది",
-        "created": "సృష్టించబడింది"
-    },
-    "contributors": {
-        "list": "మార్పులు చేసిన {users}",
-        "truncated_list": "మార్పులు చేసినవారు {users} మరియు {count} మంది"
-    },
-    "geocoder": {
-        "search": "విశ్వవ్యాప్తంగా వెతుకు",
-        "no_results_visible": "కనిపిస్తూన్న పటంలో ఫలితాలు ఏమీ లేవు",
-        "no_results_worldwide": "ఫలితాలు ఏమీ లేవు"
-    },
-    "geolocate": {
-        "title": "నా ప్రాంతాన్ని చూపించు"
-    },
-    "inspector": {
-        "no_documentation_combination": "ఈ ట్యాగ్ కాంబినేషన్ కి సంబంధించి ఎటువంటి సమాధానము లేదు",
-        "no_documentation_key": "ఈ కీకి సంబంధించి ఎటువంటి సమాధానము లేదు",
-        "show_more": "మరింత చూపించు",
-        "view_on_osm": "openstreetmap.org లో చూడండి",
-        "all_tags": "అన్ని ట్యాగులు",
-        "all_members": "అందరు సభ్యులు",
-        "all_relations": "అన్ని సంబంధాలు",
-        "new_relation": "కొత్త సంబంధం...",
-        "role": "పాత్ర",
-        "choose": "విశేష రకాన్ని ఎంచుకోండి",
-        "results": "{search} కి {n} ఫలితాలు",
-        "reference": "OpenStreetMap వికీలో చూడండి",
-        "back_tooltip": "విశేషం మార్పు",
-        "remove": "తొలగించు",
-        "search": "వెతుకు",
-        "multiselect": "ఎన్నుకున్న అంశాలు",
-        "unknown": "గుర్తు తెలియని",
-        "feature_list": "విశేషాలు వెతుకు",
-        "edit": "విశేషం మార్చు",
-        "none": "ఏవీ కాదు",
-        "way": "దారి",
-        "relation": "సంబంధం",
-        "location": "ప్రాంతం"
-    },
-    "background": {
-        "title": "వెనుతలం",
-        "description": "వెనుతలపు అమరికలు",
-        "none": "ఏవీ కాదు"
-    },
-    "restore": {
-        "heading": "భద్రపరచని మార్పులు ఉన్నాయి",
-        "restore": "పునరుద్ధరించు"
-    },
-    "save": {
-        "title": "భద్రపరచు",
-        "no_changes": "భద్రపరచాల్సిన మార్పులేమీ లేవు.",
-        "unsaved_changes": "భద్రపరచని మార్పులు ఉన్నాయి"
-    },
-    "success": {
-        "just_edited": "మీరు ఇప్పుడే OpenStreetMapను మార్చారు",
-        "view_on_osm": "OSM/ఓఎస్ఎం లో వీక్షించు",
-        "facebook": "ఫేస్‌బుక్‌లో పంచుకోండి",
-        "twitter": "ట్విట్టర్లో పంచుకోండి",
-        "google": "గూగుల్+లో పంచుకోండి"
-    },
-    "confirm": {
-        "okay": "సరే"
-    },
-    "splash": {
-        "walkthrough": "దర్శన మొదలుపెట్టు",
-        "start": "ఇప్పుడే సవరించండి"
-    },
-    "tag_reference": {
-        "description": "వివరణ"
-    },
-    "zoom": {
-        "in": "దగ్గరగా వీక్షించు",
-        "out": "దూరంగా వీక్షించు"
-    },
-    "help": {
-        "title": "సహాయం"
-    },
-    "intro": {
-        "points": {
-            "title": "బిందువులు",
-            "choose": "జాబితా నుండి కఫే ఎంచుకోండి"
+            "draw_area": {
+                "tail": "మీ ప్రదేశంలో నోడ్‌లను చేర్చడానికి క్లిక్ చేయండి. ప్రదేశం పూర్తి చేయడానికి మొదటి నోడ్‌ను క్లిక్ చేయండి."
+            },
+            "draw_line": {
+                "tail": "గీతకు మరిన్ని నోడ్‌లను చేర్చడానికి క్లిక్ చేయండి. వాటిని కలుపుటకు ఇతర గీతలపై క్లిక్ చేయండి, గీత ముగించడానికి డబుల్-క్లిక్ చేయండి."
+            }
         },
-        "areas": {
-            "title": "ప్రదేశాలు",
-            "search": "**'{name}' కొరకు వెతుకు**",
-            "choose": "జాబితా నుండి మైదానం ఎంచుకోండి"
-        },
-        "lines": {
-            "title": "గీతలు",
-            "road": "జాబితా నుండి రోడ్డు ఎంచుకోండి"
-        },
-        "startediting": {
-            "title": "కూర్పు మొదలుపెట్టు",
-            "save": "మీరు మార్చిన విశేషాలను భద్రపరచడం మరచిపోకండి!",
-            "start": "మ్యాప్ చేయడం మొదలుపెట్టు"
-        }
-    },
-    "presets": {
-        "fields": {
-            "access": {
-                "options": {
-                    "destination": {
-                        "title": "గమ్యం"
-                    }
+        "operations": {
+            "add": {
+                "annotation": {
+                    "point": "ఒక బిందువును చేర్చారు.",
+                    "vertex": "దారిలో ఒక నోడ్ చేర్చబడింది.",
+                    "relation": "ఒక సంబంధం చేర్చబడింది."
+                }
+            },
+            "start": {
+                "annotation": {
+                    "line": "ఒక గీతను మొదలుపెట్టారు.",
+                    "area": "ఒక ప్రదేశాన్ని మొదలుపెట్టారు."
+                }
+            },
+            "continue": {
+                "key": "ఏ",
+                "title": "కొనసాగించు",
+                "description": "ఈ గీతను కొనసాగించండి.",
+                "not_eligible": "గీతను ఇక్కడకు కొనసాగించలేరు.",
+                "multiple": "అనేక గీతాలు ఇక్కడ కొనసాగగలవు. ఒక గీతను ఎంచుకోవడానికి, షిఫ్ట్ కీ ను వొత్తి ఆ గీతపై క్లిక్ చేయండి.",
+                "annotation": {
+                    "line": "ఒక గీతను కొనసాగించారు.",
+                    "area": "ఒక ప్రదేశాన్ని కొనసాగించారు."
+                }
+            },
+            "cancel_draw": {
+                "annotation": "గీయడాన్ని రద్దుచేసారు."
+            },
+            "change_role": {
+                "annotation": "ఒక సంబంధ అంశం యొక్క పాత్ర మార్చబడింది."
+            },
+            "change_tags": {
+                "annotation": "ట్యాగ్లు మార్చబడ్డాయి."
+            },
+            "circularize": {
+                "title": "వృత్తీకరించు",
+                "description": {
+                    "line": "ఈ గీతను వృత్తంగా చేయి.",
+                    "area": "ఈ ప్రదేశాన్ని వృత్తంగా చేయి."
                 },
-                "types": {
-                    "bicycle": "సైకిళ్ళు",
-                    "horse": "గుర్రాలు"
+                "key": "ఓ",
+                "annotation": {
+                    "line": "గీత సర్కల్ గా మార్చబడింది",
+                    "area": "ఒక స్థలం సర్కల్ గా మార్చబడింది"
+                },
+                "not_closed": "దీనిని వృత్తీకరించలేము ఎందుకంటే ఇది చుట్టుకొనిలేదు.",
+                "too_large": "దీనిని వృత్తీకరించలేము ఎందుకంటే దీనికి సరిపడినంత దృశ్యత లేదు.",
+                "connected_to_hidden": "దీనిని వృత్తీకరించలేము ఎందుకంటే ఇది ఒక దాగిన లక్షణానికి కలిపి ఉంది."
+            },
+            "orthogonalize": {
+                "title": "చతురస్రం",
+                "description": {
+                    "line": "గీత మూలల్ని చతురస్రీకరించండి.",
+                    "area": "ఈ ప్రదేశపు మూలలను చదరంగా చేయండి."
+                },
+                "key": "ఎస్",
+                "annotation": {
+                    "line": "గీత మూలలు చతురస్రీకరించ బడ్డాయి.",
+                    "area": "ప్రదేశం మూలలు చతురస్రీకరించ బడ్డాయి."
+                },
+                "not_squarish": "ఇది పలకలుగా లేదు కనుక దీన్ని చదరంగా చెయ్యడం కుదరదు.",
+                "too_large": "దీనిని చతురస్రం చేయలేము ఎందుకంటే దీనికి సరిపడినంత దృశ్యత లేదు.",
+                "connected_to_hidden": "దీనిని చతురస్రం చేయలేము ఎందుకంటే ఇది ఒక దాగిన లక్షణానికి కలిపి ఉంది."
+            },
+            "straighten": {
+                "title": "తిన్నగాచేయి",
+                "description": "ఈ గీతను తిన్నగా చేయి.",
+                "key": "ఎస్",
+                "annotation": "గీతను తిన్నగా చేసారు.",
+                "too_bendy": "ఇది బాగా వంగి ఉన్నందున దీన్ని తిన్నగా చెయ్యడం కుదరదు.",
+                "connected_to_hidden": "ఈ గీతను నిఠారుపరచలేము ఎందుకంటే  ఇది ఒక దాగిన లక్షణానికి కలిపి ఉంది."
+            },
+            "delete": {
+                "title": "తొలగించు",
+                "description": "వస్తువును శాశ్వతంగా తొలగించండి.",
+                "annotation": {
+                    "point": "ఒక బిందువును తొలగించారు.",
+                    "vertex": "దారిలో నుండి ఒక నోడ్‌ను తొలగించండి.",
+                    "line": "గీత తొలగించబడింది",
+                    "area": "స్థలం తొలగించబడింది",
+                    "relation": "సంబంధం తొలగించబడింది",
+                    "multiple": "{n} వస్తువులు తొలగించబడ్డాయి"
+                },
+                "incomplete_relation": "ఈ లక్షణం తొలగించబడదు ఎందుకంటే ఇది పూర్తిగా డౌన్‌లోడ్ కాలేదు.",
+                "part_of_relation": "ఈ లక్షణం తొలగించబడదు ఎందుకంటే అది మరో పెద్ద సంబంధంలో భాగం. ముందుగా ఆ సంబంధంను తొలగించాలి.",
+                "connected_to_hidden": "ఇది తొలగించబడదు ఎందుకంటే ఇది ఒక దాగిన లక్షణానికి కలిపి ఉంది."
+            },
+            "add_member": {
+                "annotation": "సంబంధంలోనకు ఒక అంశం చేర్చబడింది."
+            },
+            "delete_member": {
+                "annotation": "సంబంధం నుండి ఒక అంశం తొలగించబడింది."
+            },
+            "connect": {
+                "annotation": {
+                    "point": "పాయంట్ ఒక దారికి కలపబడింది",
+                    "vertex": "ఒక దారి మరొక దారితో కలపబడింది",
+                    "line": "గీత ఒక దారికి కలపబడింది",
+                    "area": "స్థలము ఒక దారికి కలపబడింది"
                 }
             },
-            "address": {
-                "label": "చిరునామా",
-                "placeholders": {
-                    "city": "నగరం",
-                    "street": "వీధి"
-                }
+            "disconnect": {
+                "title": "విడదీయు",
+                "description": "ఈ గీతలను/ప్రదేశాలను ఒకదాని నుండి మరొకదానిని విడదీయండి.",
+                "key": "డీ",
+                "annotation": "గీతలు/ప్రదేశాలు విడదీయబడ్డాయి.",
+                "not_connected": "విడదీయడానికి తగినన్ని గీతలు/ప్రదేశాలు లేవు.",
+                "connected_to_hidden": "ఇది విడదీయబడదు ఎందుకంటే ఇది ఒక దాగిన లక్షణానికి కలిపి ఉంది.",
+                "relation": "ఇది విడదీయబడదు ఎందుకంటే ఇది ఒక సంబంధంలోని అంశాన్ని కలుపుతోంది."
             },
-            "aeroway": {
-                "label": "రకం"
+            "merge": {
+                "title": "విలీనం చెయ్యు",
+                "description": "ఈ లక్షణాలను విలీనించండి.",
+                "key": "సీ",
+                "annotation": "{n} లక్షణాలు విలీనించబడ్డాయి.",
+                "not_eligible": "ఈ విశేషాలు విలీనానికి చేయబడలేవు",
+                "not_adjacent": "ఈ లక్షణాలు విలీనింపబడవు ఎందుకంటే అవి కలిపిలేవు.",
+                "restriction": "ఈ లక్షణాలు విలీనింపబడవు ఎందుకంటే కనీసం ఒకటి \"{relation}\" సంబంధంలో అంశం.",
+                "incomplete_relation": "ఈ లక్షణాలు విలీనింపబడవు ఎందుకంటే కనీసం ఒక లక్షణం పూర్తిగా డౌన్‌లోడ్ కాలేదు.",
+                "conflicting_tags": "ఈ లక్షణాలు విలీనింపబడవు ఎందుకంటే వాటిలో కొన్ని ట్యాగ్‌లకు విలువలు విరుద్ధంగా ఉన్నాయి. "
             },
-            "amenity": {
-                "label": "రకం"
+            "move": {
+                "title": "తరలించు",
+                "description": "దీన్ని వేరే చోటకు తరలించండి.",
+                "key": "ఎమ్",
+                "annotation": {
+                    "point": "ఒక బిందువు తరలించబడింది",
+                    "vertex": "దారిలో ఒక నోడ్ కదిలించబడింది.",
+                    "line": "ఒక గీత తరలించబడింది",
+                    "area": "ఒక ప్రదేశం తరలించబడింది",
+                    "multiple": "పలు వస్తువులు తరలించబడ్డాయి"
+                },
+                "incomplete_relation": "ఈ లక్షణం కదిలించబడదు ఎందుకంటే ఇది పూర్తిగా డౌన్‌లోడ్ కాలేదు.",
+                "too_large": "ఇది కదిలించబడదు ఎందుకంటే దీనికి సరిపడినంత దృశ్యత లేదు.",
+                "connected_to_hidden": "ఇది కదిలించబడదు ఎందుకంటే ఇది ఒక దాగిన లక్షణానికి కలిపి ఉంది."
             },
-            "artwork_type": {
-                "label": "రకం"
+            "rotate": {
+                "title": "తిప్పు",
+                "description": "ఈ అంశాన్ని దాని కేంద్ర బిందువు చుట్టూ తిప్పండి.",
+                "key": "ఆర్",
+                "annotation": {
+                    "line": "ఒక గీత తిప్పబడింది",
+                    "area": "ఒక స్థలం తిప్పబడింది"
+                },
+                "too_large": "ఇది గుండ్రంగా తిప్పబడదు ఎందుకంటే దీనికి సరిపడినంత దృశ్యత లేదు.",
+                "connected_to_hidden": "ఇది గుండ్రంగా తిప్పబడదు ఎందుకంటే ఇది ఒక దాగిన లక్షణానికి కలిపి ఉంది."
             },
-            "barrier": {
-                "label": "రకం"
+            "reverse": {
+                "description": "ఈ గీతను వ్యతిరేక దిశగా పంపు",
+                "key": "వీ"
             },
-            "bicycle_parking": {
-                "label": "రకం"
+            "split": {
+                "title": "విడగొట్టు",
+                "description": {
+                    "area": "ఈ స్థల సరిహద్దుని రెండుగా విడగొట్టు."
+                },
+                "key": "ఎక్స్",
+                "annotation": {
+                    "line": "గీతను విడగొట్టు",
+                    "area": "స్థలం సరిహద్దును విడగొట్టు",
+                    "multiple": "{n} గీతలను/స్థలాలను విడగొట్టు"
+                },
+                "not_eligible": "గీత మొదలు లేదా ఆఖరిన విడగొట్టడానికి వీలు లేదు.",
+                "multiple_ways": "చాలా గీతాలు ఉన్నందు వల్ల విడగొట్టడం కుదరదు."
+            }
+        },
+        "tooltip_keyhint": "సత్వరమార్గం:",
+        "browser_notice": "ఈ సవరికకు Firefox, Chrome, Safari, Opera మరియు Internet Explorer 11 ఆపై మాత్రమే మద్దుతు ఇస్తాయి. పటాన్ని సవరించడానికి మీ బ్రౌజరును నవీకరించండి లేదా Potlatch 2 వాడండి.",
+        "translate": {
+            "translate": "అనువదించండి",
+            "localized_translation_label": "బహుభాషా పేరు",
+            "localized_translation_language": "భాషను ఎంచుకోండి",
+            "localized_translation_name": "పేరు"
+        },
+        "zoom_in_edit": "మార్చడానికి దగ్గరగా వీక్షించు",
+        "logout": "నిష్క్రమించు",
+        "loading_auth": "ఓపెన్‌స్ట్రీట్‌మ్యాపుకి అనుసంధానిస్తున్నాం…",
+        "help_translate": "అనువాదనకు సహకరించండి",
+        "feature_info": {
+            "hidden_warning": "{count} దాగివున్న లక్షణాలు"
+        },
+        "commit": {
+            "title": "మార్పులను భద్రపరచు",
+            "upload_explanation": "మీరు ఎక్కించే మార్పులు ఓపెన్‌స్ట్రీట్‌మ్యాప్ డేటాను వాడే పటాలన్నింటిలోనూ కనిపిస్తాయి.",
+            "save": "భద్రపరచు",
+            "cancel": "రద్దుచేయి",
+            "warnings": "హెచ్చరికలు",
+            "modified": "మార్చబడింది",
+            "deleted": "తొలగించబడింది",
+            "created": "సృష్టించబడింది"
+        },
+        "contributors": {
+            "list": "మార్పులు చేసిన {users}",
+            "truncated_list": "మార్పులు చేసినవారు {users} మరియు {count} మంది"
+        },
+        "infobox": {
+            "geometry": "రేఖాగణితం",
+            "closed": "మూసివున్న",
+            "center": "కేంద్రము",
+            "perimeter": "చుట్టుకొలత",
+            "length": "పొడవు",
+            "area": "ప్రాంతం",
+            "location": "ప్రదేశం",
+            "metric": "మెట్రిక్",
+            "imperial": "ఇంపీరియల్"
+        },
+        "geometry": {
+            "point": "బిందువు",
+            "vertex": "శీర్షం",
+            "line": "గీత"
+        },
+        "geocoder": {
+            "search": "విశ్వవ్యాప్తంగా వెతుకు",
+            "no_results_visible": "కనిపిస్తూన్న పటంలో ఫలితాలు ఏమీ లేవు",
+            "no_results_worldwide": "ఫలితాలు ఏమీ లేవు"
+        },
+        "geolocate": {
+            "title": "నా ప్రాంతాన్ని చూపించు"
+        },
+        "inspector": {
+            "no_documentation_combination": "ఈ ట్యాగ్ కాంబినేషన్ కి సంబంధించి ఎటువంటి సమాధానము లేదు",
+            "no_documentation_key": "ఈ కీకి సంబంధించి ఎటువంటి సమాధానము లేదు",
+            "show_more": "మరింత చూపించు",
+            "view_on_osm": "openstreetmap.org లో చూడండి",
+            "all_tags": "అన్ని ట్యాగులు",
+            "all_members": "అందరు సభ్యులు",
+            "all_relations": "అన్ని సంబంధాలు",
+            "new_relation": "కొత్త సంబంధం...",
+            "role": "పాత్ర",
+            "choose": "విశేష రకాన్ని ఎంచుకోండి",
+            "results": "{search} కి {n} ఫలితాలు",
+            "reference": "OpenStreetMap వికీలో చూడండి",
+            "back_tooltip": "విశేషం మార్పు",
+            "remove": "తొలగించు",
+            "search": "వెతుకు",
+            "multiselect": "ఎన్నుకున్న అంశాలు",
+            "unknown": "గుర్తు తెలియని",
+            "feature_list": "విశేషాలు వెతుకు",
+            "edit": "విశేషం మార్చు",
+            "none": "ఏవీ కాదు",
+            "way": "దారి",
+            "relation": "సంబంధం",
+            "location": "ప్రాంతం"
+        },
+        "background": {
+            "title": "వెనుతలం",
+            "description": "వెనుతలపు అమరికలు",
+            "none": "ఏవీ కాదు"
+        },
+        "restore": {
+            "heading": "భద్రపరచని మార్పులు ఉన్నాయి",
+            "restore": "పునరుద్ధరించు"
+        },
+        "save": {
+            "title": "భద్రపరచు",
+            "no_changes": "భద్రపరచాల్సిన మార్పులేమీ లేవు.",
+            "unsaved_changes": "భద్రపరచని మార్పులు ఉన్నాయి"
+        },
+        "success": {
+            "just_edited": "మీరు ఇప్పుడే OpenStreetMapను మార్చారు",
+            "view_on_osm": "OSM/ఓఎస్ఎం లో వీక్షించు",
+            "facebook": "ఫేస్‌బుక్‌లో పంచుకోండి",
+            "twitter": "ట్విట్టర్లో పంచుకోండి",
+            "google": "గూగుల్+లో పంచుకోండి"
+        },
+        "confirm": {
+            "okay": "సరే"
+        },
+        "splash": {
+            "walkthrough": "దర్శన మొదలుపెట్టు",
+            "start": "ఇప్పుడే సవరించండి"
+        },
+        "tag_reference": {
+            "description": "వివరణ"
+        },
+        "zoom": {
+            "in": "దగ్గరగా వీక్షించు",
+            "out": "దూరంగా వీక్షించు"
+        },
+        "help": {
+            "title": "సహాయం"
+        },
+        "intro": {
+            "graph": {
+                "city_hall": "పెద్దపల్లి పురపాలక కేంద్రం",
+                "fire_department": "పెద్దపల్లి అగ్నిమాపక కేంద్రం",
+                "memory_isle_park": "రావు జ్ఞాపక పార్కు",
+                "riverwalk_trail": "కొలను ఒడ్డు కాలిబాట దారి",
+                "w_michigan_ave": "కృష్ణపట్నం పడమర కూడలి",
+                "e_michigan_ave": "కృష్ణపట్నం తూర్పు కూడలి",
+                "spring_st": "షావుకారు వీధి",
+                "scidmore_park": "పక్కపాలెం తోట",
+                "petting_zoo": "పక్కపాలెం వనం జంతుశాల",
+                "n_andrews_st": "శ్రీనగర్ ఉత్తర వీధి",
+                "s_andrews_st": "శ్రీనగర్ దక్షిణ వీధి",
+                "n_constantine_st": "రామాపురం ఉత్తర వీధి",
+                "s_constantine_st": "రామాపురం దక్షిణ వీధి",
+                "rocky_river": "సెలయేరు",
+                "railroad_dr": "రైలుపట్టాల తోవ",
+                "conrail_rr": "తూ.కో.రైల్వే పట్టాలు",
+                "st_joseph_river": "కృష్ణా నది",
+                "n_main_st": "2nd మెయిన్ రోడ్డు",
+                "s_main_st": "3rd మెయిన్ రోడ్డు",
+                "water_st": "మేదర వీధి",
+                "foster_st": "కందుకూరి మార్గం",
+                "portage_river": "పెద్దపాలెం ఏరు",
+                "flower_st": "కోటదుర్గ అమ్మవారి వీధి",
+                "elm_st": "ప్రభుత్వ కాలేజి స్ట్రీట్",
+                "walnut_st": "ముడునూరి స్ట్రీట్",
+                "morris_ave": "బి.ఆర్.పి రోడ్డు",
+                "east_st": "ఈస్ట్ బైపాస్ రోడ్డు",
+                "portage_ave": "పెద్దపాలం కూడలి"
             },
-            "boundary": {
-                "label": "రకం"
+            "points": {
+                "title": "బిందువులు",
+                "choose": "జాబితా నుండి కఫే ఎంచుకోండి"
             },
-            "building": {
-                "label": "కట్టడం"
+            "areas": {
+                "title": "ప్రదేశాలు",
+                "search": "**'{name}' కొరకు వెతుకు**",
+                "choose": "జాబితా నుండి మైదానం ఎంచుకోండి"
             },
-            "building_area": {
-                "label": "కట్టడం"
+            "lines": {
+                "title": "గీతలు",
+                "road": "జాబితా నుండి రోడ్డు ఎంచుకోండి"
             },
-            "capacity": {
-                "label": "సామర్థ్యం",
-                "placeholder": "50, 100, 200..."
-            },
-            "cardinal_direction": {
-                "label": "దిశ"
-            },
-            "clock_direction": {
-                "label": "దిశ"
-            },
-            "construction": {
-                "label": "రకం"
-            },
-            "country": {
-                "label": "దేశం"
-            },
-            "crossing": {
-                "label": "రకం"
-            },
-            "description": {
-                "label": "వివరణ"
-            },
-            "emergency": {
-                "label": "అత్యవసరం"
-            },
-            "entrance": {
-                "label": "రకం"
-            },
-            "fire_hydrant/type": {
-                "label": "రకం"
-            },
-            "generator/type": {
-                "label": "రకం"
-            },
-            "highway": {
-                "label": "రకం"
-            },
-            "historic": {
-                "label": "రకం"
-            },
-            "landuse": {
-                "label": "రకం"
-            },
-            "lanes": {
-                "placeholder": "1, 2, 3..."
-            },
-            "layer": {
-                "label": "పొర"
-            },
-            "leisure": {
-                "label": "రకం"
-            },
-            "levels": {
-                "label": "స్థాయిలు"
-            },
-            "man_made": {
-                "label": "రకం"
-            },
-            "maxspeed": {
-                "label": "వేగ పరిమితి"
-            },
-            "name": {
-                "label": "పేరు",
-                "placeholder": "మామూలు పేరు (ఉంటే)"
-            },
-            "note": {
-                "label": "గమనిక"
-            },
-            "office": {
-                "label": "రకం"
-            },
-            "opening_hours": {
-                "label": "గంటలు"
-            },
-            "parking": {
-                "label": "రకం"
-            },
-            "phone": {
-                "label": "ఫోన్"
-            },
-            "place": {
-                "label": "రకం"
-            },
-            "power": {
-                "label": "రకం"
-            },
-            "railway": {
-                "label": "రకం"
-            },
-            "relation": {
-                "label": "రకం"
-            },
-            "religion": {
-                "label": "మతం"
-            },
-            "restriction": {
-                "label": "రకం"
-            },
-            "route": {
-                "label": "రకం"
-            },
-            "route_master": {
-                "label": "రకం"
-            },
-            "service": {
-                "label": "రకం"
-            },
-            "shop": {
-                "label": "రకం"
-            },
-            "source": {
-                "label": "మూలం"
-            },
-            "sport": {
-                "label": "క్రీడ"
-            },
-            "structure": {
-                "options": {
-                    "bridge": "వంతెన",
-                    "tunnel": "సొరంగం"
-                }
-            },
-            "surface": {
-                "label": "ఉపరితలం"
-            },
-            "tourism": {
-                "label": "రకం"
-            },
-            "water": {
-                "label": "రకం"
-            },
-            "waterway": {
-                "label": "రకం"
-            },
-            "website": {
-                "label": "జాలగూడు"
-            },
-            "wetland": {
-                "label": "రకం"
-            },
-            "wikipedia": {
-                "label": "వికీపీడియా"
+            "startediting": {
+                "title": "కూర్పు మొదలుపెట్టు",
+                "save": "మీరు మార్చిన విశేషాలను భద్రపరచడం మరచిపోకండి!",
+                "start": "మ్యాప్ చేయడం మొదలుపెట్టు"
             }
         },
         "presets": {
-            "address": {
-                "name": "చిరునామా",
-                "terms": "చిరునామా"
+            "fields": {
+                "access": {
+                    "options": {
+                        "destination": {
+                            "title": "గమ్యం"
+                        }
+                    },
+                    "types": {
+                        "bicycle": "సైకిళ్ళు",
+                        "horse": "గుర్రాలు"
+                    }
+                },
+                "address": {
+                    "label": "చిరునామా",
+                    "placeholders": {
+                        "city": "నగరం",
+                        "street": "వీధి"
+                    }
+                },
+                "aeroway": {
+                    "label": "రకం"
+                },
+                "amenity": {
+                    "label": "రకం"
+                },
+                "artwork_type": {
+                    "label": "రకం"
+                },
+                "barrier": {
+                    "label": "రకం"
+                },
+                "bicycle_parking": {
+                    "label": "రకం"
+                },
+                "boundary": {
+                    "label": "రకం"
+                },
+                "building": {
+                    "label": "కట్టడం"
+                },
+                "building_area": {
+                    "label": "కట్టడం"
+                },
+                "capacity": {
+                    "label": "సామర్థ్యం",
+                    "placeholder": "50, 100, 200..."
+                },
+                "cardinal_direction": {
+                    "label": "దిశ"
+                },
+                "clock_direction": {
+                    "label": "దిశ"
+                },
+                "construction": {
+                    "label": "రకం"
+                },
+                "country": {
+                    "label": "దేశం"
+                },
+                "crossing": {
+                    "label": "రకం"
+                },
+                "description": {
+                    "label": "వివరణ"
+                },
+                "emergency": {
+                    "label": "అత్యవసరం"
+                },
+                "entrance": {
+                    "label": "రకం"
+                },
+                "fire_hydrant/type": {
+                    "label": "రకం"
+                },
+                "generator/type": {
+                    "label": "రకం"
+                },
+                "highway": {
+                    "label": "రకం"
+                },
+                "historic": {
+                    "label": "రకం"
+                },
+                "landuse": {
+                    "label": "రకం"
+                },
+                "lanes": {
+                    "placeholder": "1, 2, 3..."
+                },
+                "layer": {
+                    "label": "పొర"
+                },
+                "leisure": {
+                    "label": "రకం"
+                },
+                "levels": {
+                    "label": "స్థాయిలు"
+                },
+                "man_made": {
+                    "label": "రకం"
+                },
+                "maxspeed": {
+                    "label": "వేగ పరిమితి"
+                },
+                "name": {
+                    "label": "పేరు",
+                    "placeholder": "మామూలు పేరు (ఉంటే)"
+                },
+                "note": {
+                    "label": "గమనిక"
+                },
+                "office": {
+                    "label": "రకం"
+                },
+                "opening_hours": {
+                    "label": "గంటలు"
+                },
+                "parking": {
+                    "label": "రకం"
+                },
+                "phone": {
+                    "label": "ఫోన్"
+                },
+                "place": {
+                    "label": "రకం"
+                },
+                "power": {
+                    "label": "రకం"
+                },
+                "railway": {
+                    "label": "రకం"
+                },
+                "relation": {
+                    "label": "రకం"
+                },
+                "religion": {
+                    "label": "మతం"
+                },
+                "restriction": {
+                    "label": "రకం"
+                },
+                "route": {
+                    "label": "రకం"
+                },
+                "route_master": {
+                    "label": "రకం"
+                },
+                "service": {
+                    "label": "రకం"
+                },
+                "shop": {
+                    "label": "రకం"
+                },
+                "source": {
+                    "label": "మూలం"
+                },
+                "sport": {
+                    "label": "క్రీడ"
+                },
+                "structure": {
+                    "options": {
+                        "bridge": "వంతెన",
+                        "tunnel": "సొరంగం"
+                    }
+                },
+                "surface": {
+                    "label": "ఉపరితలం"
+                },
+                "tourism": {
+                    "label": "రకం"
+                },
+                "water": {
+                    "label": "రకం"
+                },
+                "waterway": {
+                    "label": "రకం"
+                },
+                "website": {
+                    "label": "జాలగూడు"
+                },
+                "wetland": {
+                    "label": "రకం"
+                },
+                "wikipedia": {
+                    "label": "వికీపీడియా"
+                }
             },
-            "aeroway/aerodrome": {
-                "name": "విమానాశ్రయం",
-                "terms": "విమానాశ్రయం"
-            },
-            "amenity/bank": {
-                "name": "బ్యాంకు",
-                "terms": "బ్యాంకు"
-            },
-            "amenity/cinema": {
-                "name": "సినిమా హాలు"
-            },
-            "amenity/drinking_water": {
-                "name": "తాగే నీరు"
-            },
-            "amenity/grave_yard": {
-                "name": "స్మశానం"
-            },
-            "amenity/library": {
-                "name": "గ్రంథాలయం"
-            },
-            "amenity/pharmacy": {
-                "name": "మందుల షాపు"
-            },
-            "amenity/place_of_worship/buddhist": {
-                "name": "బౌద్ధ ఆలయం"
-            },
-            "amenity/place_of_worship/christian": {
-                "name": "చర్చి",
-                "terms": "చర్చి, చర్చ్"
-            },
-            "amenity/place_of_worship/muslim": {
-                "name": "మసీదు",
-                "terms": "మసీదు, మాస్క్"
-            },
-            "amenity/police": {
-                "name": "పోలీసు"
-            },
-            "amenity/post_office": {
-                "name": "తపాలా కార్యాలయం"
-            },
-            "amenity/pub": {
-                "name": "పబ్"
-            },
-            "amenity/restaurant": {
-                "name": "రెస్టారెంట్"
-            },
-            "amenity/swimming_pool": {
-                "name": "ఈత కొలను"
-            },
-            "amenity/toilets": {
-                "name": "మరుగుదొడ్లు"
-            },
-            "barrier/fence": {
-                "name": "కంచె"
-            },
-            "barrier/wall": {
-                "name": "గోడ"
-            },
-            "building": {
-                "name": "కట్టడం"
-            },
-            "building/house": {
-                "name": "ఇల్లు"
-            },
-            "building/hut": {
-                "name": "గుడిసె"
-            },
-            "highway/footway": {
-                "name": "కాల్దారి"
-            },
-            "highway/path": {
-                "name": "దారి"
-            },
-            "highway/primary_link": {
-                "name": "ముఖ్య లంకె"
-            },
-            "highway/steps": {
-                "name": "మెట్లు"
-            },
-            "highway/traffic_signals": {
-                "name": "ట్రాఫిక్ సిగ్నళ్ళు"
-            },
-            "historic": {
-                "name": "చారిత్రక ప్రదేశం"
-            },
-            "landuse/forest": {
-                "name": "అడవి"
-            },
-            "landuse/grass": {
-                "name": "పచ్చిక"
-            },
-            "leisure/garden": {
-                "name": "తోట"
-            },
-            "leisure/park": {
-                "name": "పార్కు"
-            },
-            "leisure/pitch/tennis": {
-                "name": "టెన్నిస్ కోర్టు"
-            },
-            "leisure/playground": {
-                "name": "ఆటమైదానం"
-            },
-            "leisure/swimming_pool": {
-                "name": "ఈత కొలను"
-            },
-            "line": {
-                "name": "గీత"
-            },
-            "natural/tree": {
-                "name": "చెట్టు"
-            },
-            "natural/water": {
-                "name": "నీళ్ళు"
-            },
-            "natural/water/lake": {
-                "name": "చెరువు"
-            },
-            "natural/water/pond": {
-                "name": "సరస్సు"
-            },
-            "natural/wetland": {
-                "name": "తడినేల"
-            },
-            "office": {
-                "name": "కార్యాలయం"
-            },
-            "place/city": {
-                "name": "నగరం"
-            },
-            "place/town": {
-                "name": "పట్టణం"
-            },
-            "place/village": {
-                "name": "గ్రామం"
-            },
-            "point": {
-                "name": "బిందువు"
-            },
-            "power/pole": {
-                "name": "కరెంటు స్తంభం"
-            },
-            "railway": {
-                "name": "రైల్వే"
-            },
-            "relation": {
-                "name": "సంబంధం"
-            },
-            "shop/supermarket": {
-                "name": "సుపర్ మార్కెట్"
-            },
-            "shop/toys": {
-                "name": "బొమ్మల కొట్టు"
-            },
-            "shop/vacant": {
-                "name": "ఖాళీ దుకాణం"
-            },
-            "tourism/hotel": {
-                "name": "హోటెల్"
-            },
-            "tourism/information": {
-                "name": "సమాచారం"
-            },
-            "tourism/museum": {
-                "name": "మ్యూజియం"
-            },
-            "tourism/zoo": {
-                "name": "జూ"
-            },
-            "type/boundary/administrative": {
-                "name": "పరిపాలనా సరిహద్దు"
-            },
-            "type/route/foot": {
-                "name": "కాలి బాట"
-            },
-            "vertex": {
-                "name": "ఇతర"
-            },
-            "waterway/canal": {
-                "name": "కాలువ",
-                "terms": "కాలువ"
-            },
-            "waterway/dam": {
-                "name": "ఆనకట్ట",
-                "terms": "ఆనకట్ట"
-            },
-            "waterway/river": {
-                "name": "నది",
-                "terms": "నది"
-            },
-            "waterway/riverbank": {
-                "name": "నది ఒడ్డు"
-            },
-            "waterway/stream": {
-                "name": "కాలువ"
+            "presets": {
+                "address": {
+                    "name": "చిరునామా",
+                    "terms": "చిరునామా"
+                },
+                "aeroway/aerodrome": {
+                    "name": "విమానాశ్రయం",
+                    "terms": "విమానాశ్రయం"
+                },
+                "amenity/bank": {
+                    "name": "బ్యాంకు",
+                    "terms": "బ్యాంకు"
+                },
+                "amenity/cinema": {
+                    "name": "సినిమా హాలు"
+                },
+                "amenity/drinking_water": {
+                    "name": "తాగే నీరు"
+                },
+                "amenity/grave_yard": {
+                    "name": "స్మశానం"
+                },
+                "amenity/library": {
+                    "name": "గ్రంథాలయం"
+                },
+                "amenity/pharmacy": {
+                    "name": "మందుల షాపు"
+                },
+                "amenity/place_of_worship/buddhist": {
+                    "name": "బౌద్ధ ఆలయం"
+                },
+                "amenity/place_of_worship/christian": {
+                    "name": "చర్చి",
+                    "terms": "చర్చి, చర్చ్"
+                },
+                "amenity/place_of_worship/muslim": {
+                    "name": "మసీదు",
+                    "terms": "మసీదు, మాస్క్"
+                },
+                "amenity/police": {
+                    "name": "పోలీసు"
+                },
+                "amenity/post_office": {
+                    "name": "తపాలా కార్యాలయం"
+                },
+                "amenity/pub": {
+                    "name": "పబ్"
+                },
+                "amenity/restaurant": {
+                    "name": "రెస్టారెంట్"
+                },
+                "amenity/swimming_pool": {
+                    "name": "ఈత కొలను"
+                },
+                "amenity/toilets": {
+                    "name": "మరుగుదొడ్లు"
+                },
+                "barrier/fence": {
+                    "name": "కంచె"
+                },
+                "barrier/wall": {
+                    "name": "గోడ"
+                },
+                "building": {
+                    "name": "కట్టడం"
+                },
+                "building/house": {
+                    "name": "ఇల్లు"
+                },
+                "building/hut": {
+                    "name": "గుడిసె"
+                },
+                "highway/footway": {
+                    "name": "కాల్దారి"
+                },
+                "highway/path": {
+                    "name": "దారి"
+                },
+                "highway/primary_link": {
+                    "name": "ముఖ్య లంకె"
+                },
+                "highway/steps": {
+                    "name": "మెట్లు"
+                },
+                "highway/traffic_signals": {
+                    "name": "ట్రాఫిక్ సిగ్నళ్ళు"
+                },
+                "historic": {
+                    "name": "చారిత్రక ప్రదేశం"
+                },
+                "landuse/forest": {
+                    "name": "అడవి"
+                },
+                "landuse/grass": {
+                    "name": "పచ్చిక"
+                },
+                "leisure/garden": {
+                    "name": "తోట"
+                },
+                "leisure/park": {
+                    "name": "పార్కు"
+                },
+                "leisure/pitch/tennis": {
+                    "name": "టెన్నిస్ కోర్టు"
+                },
+                "leisure/playground": {
+                    "name": "ఆటమైదానం"
+                },
+                "leisure/swimming_pool": {
+                    "name": "ఈత కొలను"
+                },
+                "line": {
+                    "name": "గీత"
+                },
+                "natural/tree": {
+                    "name": "చెట్టు"
+                },
+                "natural/water": {
+                    "name": "నీళ్ళు"
+                },
+                "natural/water/lake": {
+                    "name": "చెరువు"
+                },
+                "natural/water/pond": {
+                    "name": "సరస్సు"
+                },
+                "natural/wetland": {
+                    "name": "తడినేల"
+                },
+                "office": {
+                    "name": "కార్యాలయం"
+                },
+                "place/city": {
+                    "name": "నగరం"
+                },
+                "place/town": {
+                    "name": "పట్టణం"
+                },
+                "place/village": {
+                    "name": "గ్రామం"
+                },
+                "point": {
+                    "name": "బిందువు"
+                },
+                "power/pole": {
+                    "name": "కరెంటు స్తంభం"
+                },
+                "railway": {
+                    "name": "రైల్వే"
+                },
+                "relation": {
+                    "name": "సంబంధం"
+                },
+                "shop/supermarket": {
+                    "name": "సుపర్ మార్కెట్"
+                },
+                "shop/toys": {
+                    "name": "బొమ్మల కొట్టు"
+                },
+                "shop/vacant": {
+                    "name": "ఖాళీ దుకాణం"
+                },
+                "tourism/hotel": {
+                    "name": "హోటెల్"
+                },
+                "tourism/information": {
+                    "name": "సమాచారం"
+                },
+                "tourism/museum": {
+                    "name": "మ్యూజియం"
+                },
+                "tourism/zoo": {
+                    "name": "జూ"
+                },
+                "type/boundary/administrative": {
+                    "name": "పరిపాలనా సరిహద్దు"
+                },
+                "type/route/foot": {
+                    "name": "కాలి బాట"
+                },
+                "vertex": {
+                    "name": "ఇతర"
+                },
+                "waterway/canal": {
+                    "name": "కాలువ",
+                    "terms": "కాలువ"
+                },
+                "waterway/dam": {
+                    "name": "ఆనకట్ట",
+                    "terms": "ఆనకట్ట"
+                },
+                "waterway/river": {
+                    "name": "నది",
+                    "terms": "నది"
+                },
+                "waterway/riverbank": {
+                    "name": "నది ఒడ్డు"
+                },
+                "waterway/stream": {
+                    "name": "కాలువ"
+                }
             }
         }
     }

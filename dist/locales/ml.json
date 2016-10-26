@@ -1,44 +1,46 @@
 {
-    "modes": {
-        "add_area": {
-            "title": "പ്രദേശം"
+    "ml": {
+        "modes": {
+            "add_area": {
+                "title": "പ്രദേശം"
+            },
+            "add_line": {
+                "title": "രേഖ"
+            },
+            "add_point": {
+                "title": "ബിന്ദു"
+            }
         },
-        "add_line": {
-            "title": "രേഖ"
+        "operations": {
+            "continue": {
+                "title": "തുടരുക"
+            }
         },
-        "add_point": {
-            "title": "ബിന്ദു"
-        }
-    },
-    "operations": {
-        "continue": {
-            "title": "തുടരുക"
-        }
-    },
-    "presets": {
-        "fields": {
-            "access": {
-                "types": {
-                    "access": "എല്ലാം",
-                    "bicycle": "സൈക്കിളുകള്‍",
-                    "horse": "കുതിരകള്‍"
+        "presets": {
+            "fields": {
+                "access": {
+                    "types": {
+                        "access": "എല്ലാം",
+                        "bicycle": "സൈക്കിളുകള്‍",
+                        "horse": "കുതിരകള്‍"
+                    }
+                },
+                "address": {
+                    "placeholders": {
+                        "city": "നഗരം",
+                        "country": "രാജ്യം",
+                        "district": "ജില്ല",
+                        "place": "പ്രദേശം",
+                        "postcode": "പോസ്റ്റ്കോഡ്",
+                        "state": "സംസ്ഥാനം"
+                    }
+                },
+                "aerialway": {
+                    "label": "തരം"
+                },
+                "atm": {
+                    "label": "എടിഎം"
                 }
-            },
-            "address": {
-                "placeholders": {
-                    "city": "നഗരം",
-                    "country": "രാജ്യം",
-                    "district": "ജില്ല",
-                    "place": "പ്രദേശം",
-                    "postcode": "പോസ്റ്റ്കോഡ്",
-                    "state": "സംസ്ഥാനം"
-                }
-            },
-            "aerialway": {
-                "label": "തരം"
-            },
-            "atm": {
-                "label": "എടിഎം"
             }
         }
     }

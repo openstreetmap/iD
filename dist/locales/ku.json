@@ -1,0 +1,78 @@
+{
+    "ku": {
+        "modes": {
+            "add_area": {
+                "title": "ناوچە"
+            },
+            "add_line": {
+                "title": "هێڵ"
+            },
+            "add_point": {
+                "title": "خاڵ"
+            }
+        },
+        "tooltip_keyhint": "کورتبڕ:",
+        "translate": {
+            "translate": "وەرگێڕان",
+            "localized_translation_language": "هەڵبژاردنی زمان",
+            "localized_translation_name": "ناو"
+        },
+        "logout": "دەرچوون",
+        "report_a_bug": "ناردنی هەڵە",
+        "help_translate": "یارمەتیدان بۆ وەرگێڕان",
+        "commit": {
+            "save": "پاشەکەوتکردن",
+            "cancel": "پاشگەزبوونەوە",
+            "deleted": "سڕایەوە",
+            "created": "دروستکرا"
+        },
+        "infobox": {
+            "closed": "داخرا",
+            "center": "ناوەند",
+            "length": "درێژی",
+            "area": "ناوچە",
+            "location": "شوێن"
+        },
+        "geometry": {
+            "point": "خاڵ",
+            "line": "هێڵ",
+            "area": "ناوچە"
+        },
+        "inspector": {
+            "remove": "لابردن",
+            "search": "گەڕان",
+            "check": {
+                "yes": "بەڵێ",
+                "no": "نەخێر"
+            },
+            "add": "زیادکردن",
+            "none": "هیچ"
+        },
+        "background": {
+            "none": "هیچ"
+        },
+        "feature": {
+            "points": {
+                "description": "خاڵەکان"
+            }
+        },
+        "save": {
+            "title": "پاشەکەوتکردن",
+            "conflict": {
+                "previous": "<پێشتر",
+                "next": "دواتر>"
+            }
+        },
+        "success": {
+            "help_link_text": "وردەکارییەکان"
+        },
+        "help": {
+            "title": "یارمەتی"
+        },
+        "intro": {
+            "startediting": {
+                "title": "دەستپێکردنی دەستکاری"
+            }
+        }
+    }
+}

@@ -1,5 +1,5 @@
 {
-    "dataLocales": [
+    "locales": [
         "af",
         "sq",
         "ar",
@@ -36,6 +36,7 @@
         "ja",
         "kn",
         "ko",
+        "ku",
         "lv",
         "lij",
         "lt",

@@ -1,754 +1,756 @@
 {
-    "modes": {
-        "add_area": {
-            "title": "பரப்பளவு",
-            "description": "வரைப்படத்தில் பூங்காக்கள், கட்டிடங்கள், ஏரிகள் அல்லது மற்ற பகுதிகளை சேர்க்கவும்.",
-            "tail": "பூங்கா, ஏரி, அல்லது கட்டிடம் வரைய வரைப்படத்தை கிளிக் செய்க."
-        },
-        "add_line": {
-            "title": "கோடு",
-            "description": "வரைப்படத்தில் நெடுஞ்சாலைகள், தெருக்கள், பாதசாரி பாதைகள், கால்வாய்கள் அல்லது மற்ற கோடுகளை சேர்க்கவும்.",
-            "tail": "சாலை, பாதை, அல்லது இந்த வரைபடத்தை கிளிக் செய்க."
-        },
-        "add_point": {
-            "title": "புள்ளி",
-            "description": "வரைபடத்தை உணவகங்கள், நினைவு சின்னங்கள், தபால் பெட்டிகள் அல்லது மற்ற சேர்க்கவும்.",
-            "tail": "ஒரு புள்ளி சேர்க்க வரைபடத்தை கிளிக் செய்க."
-        },
-        "browse": {
-            "title": "உலவ"
-        }
-    },
-    "operations": {
-        "add": {
-            "annotation": {
-                "point": "ஒரு புள்ளி சேர்க்கப்பட்டது.",
-                "vertex": "ஒரு வழியில் ஒரு முனை சேர்க்கப்பட்டது."
-            }
-        },
-        "start": {
-            "annotation": {
-                "line": "வரி தொடங்கியது",
-                "area": "பகுதி தொடங்கியது"
-            }
-        },
-        "continue": {
-            "key": "A",
-            "title": "ஒரு உறவு சேர்க்கப்பட்டது.",
-            "annotation": {
-                "line": "வரி தொ ங்கியது"
-            }
-        },
-        "cancel_draw": {
-            "annotation": "வரைவது தவிர்கபட்டது "
-        },
-        "circularize": {
-            "description": {
-                "line": "கோட்டினை வட்டமாக்கு"
+    "ta": {
+        "modes": {
+            "add_area": {
+                "title": "பரப்பளவு",
+                "description": "வரைப்படத்தில் பூங்காக்கள், கட்டிடங்கள், ஏரிகள் அல்லது மற்ற பகுதிகளை சேர்க்கவும்.",
+                "tail": "பூங்கா, ஏரி, அல்லது கட்டிடம் வரைய வரைப்படத்தை கிளிக் செய்க."
             },
-            "key": "O",
-            "annotation": {
-                "line": "கோடு வட்டமாக்கப்பட்டது."
+            "add_line": {
+                "title": "கோடு",
+                "description": "வரைப்படத்தில் நெடுஞ்சாலைகள், தெருக்கள், பாதசாரி பாதைகள், கால்வாய்கள் அல்லது மற்ற கோடுகளை சேர்க்கவும்.",
+                "tail": "சாலை, பாதை, அல்லது இந்த வரைபடத்தை கிளிக் செய்க."
+            },
+            "add_point": {
+                "title": "புள்ளி",
+                "description": "வரைபடத்தை உணவகங்கள், நினைவு சின்னங்கள், தபால் பெட்டிகள் அல்லது மற்ற சேர்க்கவும்.",
+                "tail": "ஒரு புள்ளி சேர்க்க வரைபடத்தை கிளிக் செய்க."
+            },
+            "browse": {
+                "title": "உலவ"
             }
         },
-        "orthogonalize": {
-            "title": "சதுரம்",
-            "key": "S"
-        },
-        "straighten": {
-            "key": "S"
-        },
-        "delete": {
-            "title": "நீக்கு",
-            "annotation": {
-                "point": "புள்ளி நீக்கப்பட்டது.",
-                "line": "கோடு நீக்கப்பட்டது.",
-                "area": "பரப்பளவு நீக்கப்பட்டது.",
-                "multiple": "பொருள் {} நீக்கப்பட்டது."
-            }
-        },
-        "disconnect": {
-            "title": "தொடர்பை -துண்டி",
-            "key": "D"
-        },
-        "merge": {
-            "title": "இணை",
-            "key": "C"
-        },
-        "move": {
-            "title": "நகர்த்து",
-            "key": "M",
-            "annotation": {
-                "point": "புள்ளி நகர்த்தப்பட்டது",
-                "line": "கோடு நகர்த்தப்பட்டது.",
-                "area": "பரப்பை நகர்த்தபட்டது "
-            }
-        },
-        "rotate": {
-            "title": "திருப்பு",
-            "key": "R"
-        },
-        "reverse": {
-            "title": "தலைகீழாக்கு",
-            "key": "V"
-        },
-        "split": {
-            "title": "பிரி",
-            "key": "X"
-        }
-    },
-    "tooltip_keyhint": "குறுக்கு வழி:",
-    "translate": {
-        "translate": "மொழிமாற்றம் செய்",
-        "localized_translation_label": "பன்மொழிப் பெயர்",
-        "localized_translation_language": "மொழியை தேர்ந்தெடு",
-        "localized_translation_name": "பெயர்"
-    },
-    "logout": "விடுபதிகை",
-    "help_translate": "மொழிப்பெயர்க்க  உதவவும்.",
-    "commit": {
-        "title": "மாற்றங்களைச் சேமி",
-        "save": "சேமி",
-        "cancel": "ரத்து",
-        "changes": "{எண்ணிக்கை} மாற்றங்கள்",
-        "deleted": "நீக்கப்பட்டது",
-        "created": "உருவாக்கப்பட்டது"
-    },
-    "infobox": {
-        "selected": "{n} தேர்ந்தெடுக்கப் பட்டுள்ளது",
-        "closed": "மூடப்பட்டுள்ளது",
-        "center": "நடு பகுதி",
-        "length": "நீளம்",
-        "area": "பரப்பளவு",
-        "location": "இடம்"
-    },
-    "geometry": {
-        "line": "கோடு",
-        "area": "பரப்பளவு",
-        "relation": "தொடர்பு"
-    },
-    "inspector": {
-        "new_relation": "புது தொடர்பு...",
-        "remove": "நீக்கு",
-        "search": "தேடு",
-        "incomplete": "<பதிவிறக்கம் செய்யப்படவில்லை>",
-        "check": {
-            "yes": "ஆம்"
-        },
-        "way": "வழி",
-        "relation": "தொடர்பு",
-        "location": "இடம்"
-    },
-    "feature": {
-        "points": {
-            "description": "புள்ளிகள்"
-        }
-    },
-    "save": {
-        "title": "சேமி"
-    },
-    "confirm": {
-        "okay": "சரி",
-        "cancel": "ரத்து"
-    },
-    "help": {
-        "title": "உதவி"
-    },
-    "intro": {
-        "lines": {
-            "title": "கோடுகள்"
-        },
-        "startediting": {
-            "title": "திருத்தம் செய்ய தொடங்கவும் ",
-            "start": "மேப் செய்ய தொடங்கவும்! "
-        }
-    },
-    "presets": {
-        "fields": {
-            "access": {
-                "label": "அனுமதிக்கப்பட்ட அணுகல்",
-                "options": {
-                    "destination": {
-                        "title": "Destination"
-                    },
-                    "no": {
-                        "description": "பொதுமக்களுக்கு அணுகல் அனுமதி இல்லை",
-                        "title": "தடை செய்யப்பட்ட"
-                    },
-                    "private": {
-                        "title": "தனியார்"
-                    },
-                    "yes": {
-                        "title": "அனுமதிக்கப்படுகிறது"
-                    }
+        "operations": {
+            "add": {
+                "annotation": {
+                    "point": "ஒரு புள்ளி சேர்க்கப்பட்டது.",
+                    "vertex": "ஒரு வழியில் ஒரு முனை சேர்க்கப்பட்டது."
+                }
+            },
+            "start": {
+                "annotation": {
+                    "line": "வரி தொடங்கியது",
+                    "area": "பகுதி தொடங்கியது"
+                }
+            },
+            "continue": {
+                "key": "A",
+                "title": "ஒரு உறவு சேர்க்கப்பட்டது.",
+                "annotation": {
+                    "line": "வரி தொ ங்கியது"
+                }
+            },
+            "cancel_draw": {
+                "annotation": "வரைவது தவிர்கபட்டது "
+            },
+            "circularize": {
+                "description": {
+                    "line": "கோட்டினை வட்டமாக்கு"
                 },
-                "types": {
-                    "horse": "குதிரைகள்"
+                "key": "O",
+                "annotation": {
+                    "line": "கோடு வட்டமாக்கப்பட்டது."
                 }
             },
-            "access_simple": {
-                "label": "அனுமதிக்கப்பட்ட அணுகல்"
+            "orthogonalize": {
+                "title": "சதுரம்",
+                "key": "S"
             },
-            "address": {
-                "label": "முகவரி",
-                "placeholders": {
-                    "city": "மாநகரம்",
-                    "street": "தெரு"
+            "straighten": {
+                "key": "S"
+            },
+            "delete": {
+                "title": "நீக்கு",
+                "annotation": {
+                    "point": "புள்ளி நீக்கப்பட்டது.",
+                    "line": "கோடு நீக்கப்பட்டது.",
+                    "area": "பரப்பளவு நீக்கப்பட்டது.",
+                    "multiple": "பொருள் {} நீக்கப்பட்டது."
                 }
             },
-            "aerialway": {
-                "label": "வகை"
-            },
-            "aerialway/capacity": {
-                "placeholder": "500, 2500, 5000..."
-            },
-            "aerialway/duration": {
-                "placeholder": "1, 2, 3..."
-            },
-            "aerialway/occupancy": {
-                "placeholder": "2, 4, 8..."
-            },
-            "aeroway": {
-                "label": "வகை"
-            },
-            "amenity": {
-                "label": "வகை"
-            },
-            "artwork_type": {
-                "label": "வகை"
-            },
-            "atm": {
-                "label": "ஏ.டி.எம்"
-            },
-            "barrier": {
-                "label": "வகை"
-            },
-            "bicycle_parking": {
-                "label": "வகை"
-            },
-            "boundary": {
-                "label": "வகை"
-            },
-            "building": {
-                "label": "கட்டிடம்"
-            },
-            "building_area": {
-                "label": "கட்டிடம்"
-            },
-            "capacity": {
-                "label": "கொள்ளளவு",
-                "placeholder": "50, 100, 200..."
-            },
-            "cardinal_direction": {
-                "label": "திசை"
-            },
-            "clock_direction": {
-                "label": "திசை"
-            },
-            "construction": {
-                "label": "வகை"
-            },
-            "country": {
-                "label": "நாடு"
-            },
-            "crossing": {
-                "label": "வகை"
-            },
-            "emergency": {
-                "label": "அவசரநிலை"
-            },
-            "entrance": {
-                "label": "வகை"
-            },
-            "fax": {
-                "label": "தொலைநகல்",
-                "placeholder": "+31 42 123 4567"
-            },
-            "fire_hydrant/type": {
-                "label": "வகை"
-            },
-            "fixme": {
-                "label": "என்னை சரிபடுத்து"
-            },
-            "generator/source": {
-                "label": "மூலம்"
-            },
-            "generator/type": {
-                "label": "வகை"
-            },
-            "handicap": {
-                "placeholder": "1-18"
-            },
-            "highway": {
-                "label": "வகை"
-            },
-            "historic": {
-                "label": "வகை"
-            },
-            "information": {
-                "label": "வகை"
-            },
-            "internet_access": {
-                "label": "இணைய அணுகல்"
-            },
-            "landuse": {
-                "label": "வகை"
-            },
-            "lanes": {
-                "label": "சந்துகள்",
-                "placeholder": "1, 2, 3..."
-            },
-            "layer": {
-                "label": "அடுக்கு"
-            },
-            "leisure": {
-                "label": "வகை"
-            },
-            "levels": {
-                "label": "நிலைகள்",
-                "placeholder": "2, 4, 6..."
-            },
-            "location": {
-                "label": "இடம்"
-            },
-            "man_made": {
-                "label": "வகை"
-            },
-            "maxspeed": {
-                "label": "வேக எல்லை",
-                "placeholder": "40, 50, 60..."
-            },
-            "name": {
-                "label": "பெயர்"
-            },
-            "natural": {
-                "label": "இயற்கையான"
-            },
-            "network": {
-                "label": "நெட்வொர்க்"
-            },
-            "note": {
-                "label": "குறிப்பு"
-            },
-            "office": {
-                "label": "வகை"
-            },
-            "oneway": {
-                "label": "ஒரு வழி"
-            },
-            "oneway_yes": {
-                "label": "ஒரு வழி"
-            },
-            "opening_hours": {
-                "label": "மணிநேரங்கள்"
-            },
-            "operator": {
-                "label": "இயக்குபவர்"
-            },
-            "par": {
-                "placeholder": "3, 4, 5..."
-            },
-            "parking": {
-                "label": "வகை"
-            },
-            "phone": {
-                "label": "தொலைபேசி",
-                "placeholder": "+31 42 123 4567"
-            },
-            "piste/type": {
-                "label": "வகை"
-            },
-            "place": {
-                "label": "வகை"
-            },
-            "power": {
-                "label": "வகை"
-            },
-            "railway": {
-                "label": "வகை"
-            },
-            "relation": {
-                "label": "வகை"
-            },
-            "religion": {
-                "label": "மதம்"
-            },
-            "restriction": {
-                "label": "வகை"
-            },
-            "route": {
-                "label": "வகை"
-            },
-            "route_master": {
-                "label": "வகை"
-            },
-            "service": {
-                "label": "வகை"
-            },
-            "shelter_type": {
-                "label": "வகை"
-            },
-            "shop": {
-                "label": "வகை"
-            },
-            "source": {
-                "label": "மூலம்"
-            },
-            "sport": {
-                "label": "விளையாட்டு"
-            },
-            "structure": {
-                "options": {
-                    "bridge": "பாலம்"
+            "disconnect": {
+                "title": "தொடர்பை -துண்டி",
+                "key": "D"
+            },
+            "merge": {
+                "title": "இணை",
+                "key": "C"
+            },
+            "move": {
+                "title": "நகர்த்து",
+                "key": "M",
+                "annotation": {
+                    "point": "புள்ளி நகர்த்தப்பட்டது",
+                    "line": "கோடு நகர்த்தப்பட்டது.",
+                    "area": "பரப்பை நகர்த்தபட்டது "
                 }
             },
-            "tourism": {
-                "label": "வகை"
+            "rotate": {
+                "title": "திருப்பு",
+                "key": "R"
             },
-            "water": {
-                "label": "வகை"
+            "reverse": {
+                "title": "தலைகீழாக்கு",
+                "key": "V"
             },
-            "waterway": {
-                "label": "வகை"
+            "split": {
+                "title": "பிரி",
+                "key": "X"
+            }
+        },
+        "tooltip_keyhint": "குறுக்கு வழி:",
+        "translate": {
+            "translate": "மொழிமாற்றம் செய்",
+            "localized_translation_label": "பன்மொழிப் பெயர்",
+            "localized_translation_language": "மொழியை தேர்ந்தெடு",
+            "localized_translation_name": "பெயர்"
+        },
+        "logout": "விடுபதிகை",
+        "help_translate": "மொழிப்பெயர்க்க  உதவவும்.",
+        "commit": {
+            "title": "மாற்றங்களைச் சேமி",
+            "save": "சேமி",
+            "cancel": "ரத்து",
+            "changes": "{எண்ணிக்கை} மாற்றங்கள்",
+            "deleted": "நீக்கப்பட்டது",
+            "created": "உருவாக்கப்பட்டது"
+        },
+        "infobox": {
+            "selected": "{n} தேர்ந்தெடுக்கப் பட்டுள்ளது",
+            "closed": "மூடப்பட்டுள்ளது",
+            "center": "நடு பகுதி",
+            "length": "நீளம்",
+            "area": "பரப்பளவு",
+            "location": "இடம்"
+        },
+        "geometry": {
+            "line": "கோடு",
+            "area": "பரப்பளவு",
+            "relation": "தொடர்பு"
+        },
+        "inspector": {
+            "new_relation": "புது தொடர்பு...",
+            "remove": "நீக்கு",
+            "search": "தேடு",
+            "incomplete": "<பதிவிறக்கம் செய்யப்படவில்லை>",
+            "check": {
+                "yes": "ஆம்"
             },
-            "website": {
-                "label": "இணையதளம்",
-                "placeholder": "http://example.com/"
+            "way": "வழி",
+            "relation": "தொடர்பு",
+            "location": "இடம்"
+        },
+        "feature": {
+            "points": {
+                "description": "புள்ளிகள்"
+            }
+        },
+        "save": {
+            "title": "சேமி"
+        },
+        "confirm": {
+            "okay": "சரி",
+            "cancel": "ரத்து"
+        },
+        "help": {
+            "title": "உதவி"
+        },
+        "intro": {
+            "lines": {
+                "title": "கோடுகள்"
             },
-            "wetland": {
-                "label": "வகை"
-            },
-            "wikipedia": {
-                "label": "விக்கிப்பீடியா"
+            "startediting": {
+                "title": "திருத்தம் செய்ய தொடங்கவும் ",
+                "start": "மேப் செய்ய தொடங்கவும்! "
             }
         },
         "presets": {
-            "address": {
-                "name": "முகவரி"
-            },
-            "aeroway/aerodrome": {
-                "name": "விமானநிலையம்"
-            },
-            "aeroway/helipad": {
-                "name": "சிறு விமானம் இறங்கும் தளம்"
-            },
-            "amenity/bank": {
-                "name": "வங்கி"
-            },
-            "amenity/bicycle_parking": {
-                "name": "ஈருருளை நிறுத்தகம்"
-            },
-            "amenity/bicycle_rental": {
-                "name": "சைக்கிள் வாடகை"
-            },
-            "amenity/cafe": {
-                "name": "டீக்கடை"
-            },
-            "amenity/cinema": {
-                "name": "சினிமா"
-            },
-            "amenity/clock": {
-                "name": "கடிகாரம்"
-            },
-            "amenity/fire_station": {
-                "name": "தீயணைப்பு நிலையம்"
-            },
-            "amenity/grave_yard": {
-                "name": "இடுகாடு"
-            },
-            "amenity/hospital": {
-                "name": "மருத்துவமனை "
-            },
-            "amenity/library": {
-                "name": "புத்தகச்சாலை"
-            },
-            "amenity/marketplace": {
-                "name": "பஜார்"
-            },
-            "amenity/parking": {
-                "name": "கார் பார்க்கிங்"
-            },
-            "amenity/pharmacy": {
-                "name": "மருந்தகம்"
-            },
-            "amenity/place_of_worship": {
-                "name": "வழிபாட்டு இடம்"
-            },
-            "amenity/place_of_worship/muslim": {
-                "name": "தர்கா"
-            },
-            "amenity/police": {
-                "name": "காவல்"
-            },
-            "amenity/post_box": {
-                "name": "அஞ்சல்பெட்டி"
-            },
-            "amenity/post_office": {
-                "name": "அஞ்சலகம்"
-            },
-            "amenity/restaurant": {
-                "name": "உணவகம்"
-            },
-            "amenity/school": {
-                "name": "பள்ளி மைதானத்தில்"
-            },
-            "amenity/swimming_pool": {
-                "name": "நீச்சல் குளம்"
-            },
-            "amenity/telephone": {
-                "name": "தொலைபேசி"
-            },
-            "amenity/theatre": {
-                "name": "திரையரங்கம்"
-            },
-            "amenity/toilets": {
-                "name": "கழிவறைகள்"
-            },
-            "amenity/townhall": {
-                "name": "நகராட்சிமன்றம்"
-            },
-            "area": {
-                "name": "பரப்பளவு"
-            },
-            "barrier/entrance": {
-                "name": "நுழைவுவாயில்"
-            },
-            "barrier/fence": {
-                "name": "வேலி"
-            },
-            "barrier/gate": {
-                "name": "கதவு"
-            },
-            "barrier/wall": {
-                "name": "சுவர்"
-            },
-            "building": {
-                "name": "கட்டடம்"
-            },
-            "building/apartments": {
-                "name": "அபார்ட்மண்டுகள்"
-            },
-            "building/house": {
-                "name": "வீடு"
-            },
-            "craft/painter": {
-                "name": "ஓவியர்"
-            },
-            "entrance": {
-                "name": "நுழைவு / வெளியேறு"
-            },
-            "highway/bus_stop": {
-                "name": "பேருந்து நிலையம்"
-            },
-            "highway/footway": {
-                "name": "நடைபாதை"
-            },
-            "highway/path": {
-                "name": "வழி"
-            },
-            "highway/steps": {
-                "name": "படிகட்டுகள்"
-            },
-            "historic/castle": {
-                "name": "கோட்டை"
-            },
-            "landuse/construction": {
-                "name": "கட்டுமானம்"
-            },
-            "landuse/farmyard": {
-                "name": "பண்ணை"
-            },
-            "landuse/forest": {
-                "name": "காடு"
-            },
-            "landuse/grass": {
-                "name": "புல்வெளி"
-            },
-            "leisure/marina": {
-                "name": "மரினா"
-            },
-            "leisure/park": {
-                "name": "பூங்கா"
-            },
-            "leisure/pitch/soccer": {
-                "name": "காற்பந்து அரங்கம்"
-            },
-            "leisure/pitch/tennis": {
-                "name": "டென்னிசு அரங்கம்"
-            },
-            "leisure/playground": {
-                "name": "விளையாட்டுத் திடல்"
-            },
-            "leisure/stadium": {
-                "name": "விளையாட்டு அரங்கம்"
-            },
-            "leisure/swimming_pool": {
-                "name": "நீச்சல் குளம்"
-            },
-            "line": {
-                "name": "கோடு"
-            },
-            "man_made": {
-                "name": "மனிதனால் கட்டப்பட்டது"
-            },
-            "man_made/lighthouse": {
-                "name": "கலங்கரை விளக்கம்"
-            },
-            "man_made/water_tower": {
-                "name": "தண்ணீர்த் தொட்டி"
-            },
-            "natural": {
-                "name": "இயற்கையான"
-            },
-            "natural/beach": {
-                "name": "கடற்கரை"
-            },
-            "natural/coastline": {
-                "name": "கடற்கரை"
-            },
-            "natural/glacier": {
-                "name": "பனிப் பாறை"
-            },
-            "natural/peak": {
-                "name": "மலை உச்சி"
-            },
-            "natural/tree": {
-                "name": "மரம்"
-            },
-            "natural/water": {
-                "name": "தண்ணீர்"
-            },
-            "natural/water/lake": {
-                "name": "ஏரி"
-            },
-            "natural/water/pond": {
-                "name": "குளம்"
-            },
-            "natural/water/reservoir": {
-                "name": "நீர்த் தேக்கம்"
-            },
-            "natural/wood": {
-                "name": "மரம்"
-            },
-            "office": {
-                "name": "அலுவலகம்"
-            },
-            "office/newspaper": {
-                "name": "செய்தித்தாள்"
-            },
-            "place": {
-                "name": "இடம்"
-            },
-            "place/city": {
-                "name": "மாநகரம்"
-            },
-            "place/island": {
-                "name": "தீவு"
-            },
-            "place/town": {
-                "name": "நகரம்"
-            },
-            "place/village": {
-                "name": "கிராமம்"
-            },
-            "point": {
-                "name": "புள்ளி"
-            },
-            "railway": {
-                "name": "இரயில்வே"
-            },
-            "railway/abandoned": {
-                "name": "பயன்படுத்தப்படாத இரயில்வே"
-            },
-            "railway/disused": {
-                "name": "பயன்படுத்தப்படாத இரயில்வே"
-            },
-            "railway/monorail": {
-                "name": "மோனோ இரயில்"
-            },
-            "railway/platform": {
-                "name": "இரயில்வே நடைமேடை"
-            },
-            "railway/rail": {
-                "name": "இரயில்"
-            },
-            "railway/station": {
-                "name": "இரயில் நிலையம்"
-            },
-            "railway/subway": {
-                "name": "சுரங்கப்பாதை"
-            },
-            "railway/subway_entrance": {
-                "name": "சுரங்கப்பாதை நுழைவுவாயில்"
-            },
-            "relation": {
-                "name": "தொடர்பு"
-            },
-            "shop": {
-                "name": "கடை"
-            },
-            "shop/alcohol": {
-                "name": "மதுபானக் கடை"
-            },
-            "shop/car": {
-                "name": "வாகன விற்பனையகம்"
-            },
-            "shop/clothes": {
-                "name": "ஜவுளிக் கடை"
-            },
-            "shop/computer": {
-                "name": "கணினி விற்பனையகம்"
-            },
-            "shop/florist": {
-                "name": "பூக்கடை"
-            },
-            "shop/laundry": {
-                "name": "சலவையகம்"
-            },
-            "shop/shoes": {
-                "name": "காலணியகம்"
-            },
-            "tourism": {
-                "name": "சுற்றுலா"
-            },
-            "tourism/artwork": {
-                "name": "ஓவியம்"
-            },
-            "tourism/hotel": {
-                "name": "உணவகம்"
-            },
-            "tourism/information": {
-                "name": "தகவல்"
-            },
-            "tourism/museum": {
-                "name": "அருங்காட்சியகம்"
-            },
-            "tourism/zoo": {
-                "name": "உயிரியல் பூங்கா"
-            },
-            "type/boundary": {
-                "name": "எல்லை"
-            },
-            "type/route": {
-                "name": "வழி"
-            },
-            "type/route/bus": {
-                "name": "பேருந்து தடம்"
-            },
-            "vertex": {
-                "name": "பிற"
-            },
-            "waterway/canal": {
-                "name": "கால்வாய்"
-            },
-            "waterway/dam": {
-                "name": "அணை"
-            },
-            "waterway/river": {
-                "name": "ஆறு"
-            },
-            "waterway/riverbank": {
-                "name": "ஆற்றாங்கரை"
+            "fields": {
+                "access": {
+                    "label": "அனுமதிக்கப்பட்ட அணுகல்",
+                    "options": {
+                        "destination": {
+                            "title": "Destination"
+                        },
+                        "no": {
+                            "description": "பொதுமக்களுக்கு அணுகல் அனுமதி இல்லை",
+                            "title": "தடை செய்யப்பட்ட"
+                        },
+                        "private": {
+                            "title": "தனியார்"
+                        },
+                        "yes": {
+                            "title": "அனுமதிக்கப்படுகிறது"
+                        }
+                    },
+                    "types": {
+                        "horse": "குதிரைகள்"
+                    }
+                },
+                "access_simple": {
+                    "label": "அனுமதிக்கப்பட்ட அணுகல்"
+                },
+                "address": {
+                    "label": "முகவரி",
+                    "placeholders": {
+                        "city": "மாநகரம்",
+                        "street": "தெரு"
+                    }
+                },
+                "aerialway": {
+                    "label": "வகை"
+                },
+                "aerialway/capacity": {
+                    "placeholder": "500, 2500, 5000..."
+                },
+                "aerialway/duration": {
+                    "placeholder": "1, 2, 3..."
+                },
+                "aerialway/occupancy": {
+                    "placeholder": "2, 4, 8..."
+                },
+                "aeroway": {
+                    "label": "வகை"
+                },
+                "amenity": {
+                    "label": "வகை"
+                },
+                "artwork_type": {
+                    "label": "வகை"
+                },
+                "atm": {
+                    "label": "ஏ.டி.எம்"
+                },
+                "barrier": {
+                    "label": "வகை"
+                },
+                "bicycle_parking": {
+                    "label": "வகை"
+                },
+                "boundary": {
+                    "label": "வகை"
+                },
+                "building": {
+                    "label": "கட்டிடம்"
+                },
+                "building_area": {
+                    "label": "கட்டிடம்"
+                },
+                "capacity": {
+                    "label": "கொள்ளளவு",
+                    "placeholder": "50, 100, 200..."
+                },
+                "cardinal_direction": {
+                    "label": "திசை"
+                },
+                "clock_direction": {
+                    "label": "திசை"
+                },
+                "construction": {
+                    "label": "வகை"
+                },
+                "country": {
+                    "label": "நாடு"
+                },
+                "crossing": {
+                    "label": "வகை"
+                },
+                "emergency": {
+                    "label": "அவசரநிலை"
+                },
+                "entrance": {
+                    "label": "வகை"
+                },
+                "fax": {
+                    "label": "தொலைநகல்",
+                    "placeholder": "+31 42 123 4567"
+                },
+                "fire_hydrant/type": {
+                    "label": "வகை"
+                },
+                "fixme": {
+                    "label": "என்னை சரிபடுத்து"
+                },
+                "generator/source": {
+                    "label": "மூலம்"
+                },
+                "generator/type": {
+                    "label": "வகை"
+                },
+                "handicap": {
+                    "placeholder": "1-18"
+                },
+                "highway": {
+                    "label": "வகை"
+                },
+                "historic": {
+                    "label": "வகை"
+                },
+                "information": {
+                    "label": "வகை"
+                },
+                "internet_access": {
+                    "label": "இணைய அணுகல்"
+                },
+                "landuse": {
+                    "label": "வகை"
+                },
+                "lanes": {
+                    "label": "சந்துகள்",
+                    "placeholder": "1, 2, 3..."
+                },
+                "layer": {
+                    "label": "அடுக்கு"
+                },
+                "leisure": {
+                    "label": "வகை"
+                },
+                "levels": {
+                    "label": "நிலைகள்",
+                    "placeholder": "2, 4, 6..."
+                },
+                "location": {
+                    "label": "இடம்"
+                },
+                "man_made": {
+                    "label": "வகை"
+                },
+                "maxspeed": {
+                    "label": "வேக எல்லை",
+                    "placeholder": "40, 50, 60..."
+                },
+                "name": {
+                    "label": "பெயர்"
+                },
+                "natural": {
+                    "label": "இயற்கையான"
+                },
+                "network": {
+                    "label": "நெட்வொர்க்"
+                },
+                "note": {
+                    "label": "குறிப்பு"
+                },
+                "office": {
+                    "label": "வகை"
+                },
+                "oneway": {
+                    "label": "ஒரு வழி"
+                },
+                "oneway_yes": {
+                    "label": "ஒரு வழி"
+                },
+                "opening_hours": {
+                    "label": "மணிநேரங்கள்"
+                },
+                "operator": {
+                    "label": "இயக்குபவர்"
+                },
+                "par": {
+                    "placeholder": "3, 4, 5..."
+                },
+                "parking": {
+                    "label": "வகை"
+                },
+                "phone": {
+                    "label": "தொலைபேசி",
+                    "placeholder": "+31 42 123 4567"
+                },
+                "piste/type": {
+                    "label": "வகை"
+                },
+                "place": {
+                    "label": "வகை"
+                },
+                "power": {
+                    "label": "வகை"
+                },
+                "railway": {
+                    "label": "வகை"
+                },
+                "relation": {
+                    "label": "வகை"
+                },
+                "religion": {
+                    "label": "மதம்"
+                },
+                "restriction": {
+                    "label": "வகை"
+                },
+                "route": {
+                    "label": "வகை"
+                },
+                "route_master": {
+                    "label": "வகை"
+                },
+                "service": {
+                    "label": "வகை"
+                },
+                "shelter_type": {
+                    "label": "வகை"
+                },
+                "shop": {
+                    "label": "வகை"
+                },
+                "source": {
+                    "label": "மூலம்"
+                },
+                "sport": {
+                    "label": "விளையாட்டு"
+                },
+                "structure": {
+                    "options": {
+                        "bridge": "பாலம்"
+                    }
+                },
+                "tourism": {
+                    "label": "வகை"
+                },
+                "water": {
+                    "label": "வகை"
+                },
+                "waterway": {
+                    "label": "வகை"
+                },
+                "website": {
+                    "label": "இணையதளம்",
+                    "placeholder": "http://example.com/"
+                },
+                "wetland": {
+                    "label": "வகை"
+                },
+                "wikipedia": {
+                    "label": "விக்கிப்பீடியா"
+                }
+            },
+            "presets": {
+                "address": {
+                    "name": "முகவரி"
+                },
+                "aeroway/aerodrome": {
+                    "name": "விமானநிலையம்"
+                },
+                "aeroway/helipad": {
+                    "name": "சிறு விமானம் இறங்கும் தளம்"
+                },
+                "amenity/bank": {
+                    "name": "வங்கி"
+                },
+                "amenity/bicycle_parking": {
+                    "name": "ஈருருளை நிறுத்தகம்"
+                },
+                "amenity/bicycle_rental": {
+                    "name": "சைக்கிள் வாடகை"
+                },
+                "amenity/cafe": {
+                    "name": "டீக்கடை"
+                },
+                "amenity/cinema": {
+                    "name": "சினிமா"
+                },
+                "amenity/clock": {
+                    "name": "கடிகாரம்"
+                },
+                "amenity/fire_station": {
+                    "name": "தீயணைப்பு நிலையம்"
+                },
+                "amenity/grave_yard": {
+                    "name": "இடுகாடு"
+                },
+                "amenity/hospital": {
+                    "name": "மருத்துவமனை "
+                },
+                "amenity/library": {
+                    "name": "புத்தகச்சாலை"
+                },
+                "amenity/marketplace": {
+                    "name": "பஜார்"
+                },
+                "amenity/parking": {
+                    "name": "கார் பார்க்கிங்"
+                },
+                "amenity/pharmacy": {
+                    "name": "மருந்தகம்"
+                },
+                "amenity/place_of_worship": {
+                    "name": "வழிபாட்டு இடம்"
+                },
+                "amenity/place_of_worship/muslim": {
+                    "name": "தர்கா"
+                },
+                "amenity/police": {
+                    "name": "காவல்"
+                },
+                "amenity/post_box": {
+                    "name": "அஞ்சல்பெட்டி"
+                },
+                "amenity/post_office": {
+                    "name": "அஞ்சலகம்"
+                },
+                "amenity/restaurant": {
+                    "name": "உணவகம்"
+                },
+                "amenity/school": {
+                    "name": "பள்ளி மைதானத்தில்"
+                },
+                "amenity/swimming_pool": {
+                    "name": "நீச்சல் குளம்"
+                },
+                "amenity/telephone": {
+                    "name": "தொலைபேசி"
+                },
+                "amenity/theatre": {
+                    "name": "திரையரங்கம்"
+                },
+                "amenity/toilets": {
+                    "name": "கழிவறைகள்"
+                },
+                "amenity/townhall": {
+                    "name": "நகராட்சிமன்றம்"
+                },
+                "area": {
+                    "name": "பரப்பளவு"
+                },
+                "barrier/entrance": {
+                    "name": "நுழைவுவாயில்"
+                },
+                "barrier/fence": {
+                    "name": "வேலி"
+                },
+                "barrier/gate": {
+                    "name": "கதவு"
+                },
+                "barrier/wall": {
+                    "name": "சுவர்"
+                },
+                "building": {
+                    "name": "கட்டடம்"
+                },
+                "building/apartments": {
+                    "name": "அபார்ட்மண்டுகள்"
+                },
+                "building/house": {
+                    "name": "வீடு"
+                },
+                "craft/painter": {
+                    "name": "ஓவியர்"
+                },
+                "entrance": {
+                    "name": "நுழைவு / வெளியேறு"
+                },
+                "highway/bus_stop": {
+                    "name": "பேருந்து நிலையம்"
+                },
+                "highway/footway": {
+                    "name": "நடைபாதை"
+                },
+                "highway/path": {
+                    "name": "வழி"
+                },
+                "highway/steps": {
+                    "name": "படிகட்டுகள்"
+                },
+                "historic/castle": {
+                    "name": "கோட்டை"
+                },
+                "landuse/construction": {
+                    "name": "கட்டுமானம்"
+                },
+                "landuse/farmyard": {
+                    "name": "பண்ணை"
+                },
+                "landuse/forest": {
+                    "name": "காடு"
+                },
+                "landuse/grass": {
+                    "name": "புல்வெளி"
+                },
+                "leisure/marina": {
+                    "name": "மரினா"
+                },
+                "leisure/park": {
+                    "name": "பூங்கா"
+                },
+                "leisure/pitch/soccer": {
+                    "name": "காற்பந்து அரங்கம்"
+                },
+                "leisure/pitch/tennis": {
+                    "name": "டென்னிசு அரங்கம்"
+                },
+                "leisure/playground": {
+                    "name": "விளையாட்டுத் திடல்"
+                },
+                "leisure/stadium": {
+                    "name": "விளையாட்டு அரங்கம்"
+                },
+                "leisure/swimming_pool": {
+                    "name": "நீச்சல் குளம்"
+                },
+                "line": {
+                    "name": "கோடு"
+                },
+                "man_made": {
+                    "name": "மனிதனால் கட்டப்பட்டது"
+                },
+                "man_made/lighthouse": {
+                    "name": "கலங்கரை விளக்கம்"
+                },
+                "man_made/water_tower": {
+                    "name": "தண்ணீர்த் தொட்டி"
+                },
+                "natural": {
+                    "name": "இயற்கையான"
+                },
+                "natural/beach": {
+                    "name": "கடற்கரை"
+                },
+                "natural/coastline": {
+                    "name": "கடற்கரை"
+                },
+                "natural/glacier": {
+                    "name": "பனிப் பாறை"
+                },
+                "natural/peak": {
+                    "name": "மலை உச்சி"
+                },
+                "natural/tree": {
+                    "name": "மரம்"
+                },
+                "natural/water": {
+                    "name": "தண்ணீர்"
+                },
+                "natural/water/lake": {
+                    "name": "ஏரி"
+                },
+                "natural/water/pond": {
+                    "name": "குளம்"
+                },
+                "natural/water/reservoir": {
+                    "name": "நீர்த் தேக்கம்"
+                },
+                "natural/wood": {
+                    "name": "மரம்"
+                },
+                "office": {
+                    "name": "அலுவலகம்"
+                },
+                "office/newspaper": {
+                    "name": "செய்தித்தாள்"
+                },
+                "place": {
+                    "name": "இடம்"
+                },
+                "place/city": {
+                    "name": "மாநகரம்"
+                },
+                "place/island": {
+                    "name": "தீவு"
+                },
+                "place/town": {
+                    "name": "நகரம்"
+                },
+                "place/village": {
+                    "name": "கிராமம்"
+                },
+                "point": {
+                    "name": "புள்ளி"
+                },
+                "railway": {
+                    "name": "இரயில்வே"
+                },
+                "railway/abandoned": {
+                    "name": "பயன்படுத்தப்படாத இரயில்வே"
+                },
+                "railway/disused": {
+                    "name": "பயன்படுத்தப்படாத இரயில்வே"
+                },
+                "railway/monorail": {
+                    "name": "மோனோ இரயில்"
+                },
+                "railway/platform": {
+                    "name": "இரயில்வே நடைமேடை"
+                },
+                "railway/rail": {
+                    "name": "இரயில்"
+                },
+                "railway/station": {
+                    "name": "இரயில் நிலையம்"
+                },
+                "railway/subway": {
+                    "name": "சுரங்கப்பாதை"
+                },
+                "railway/subway_entrance": {
+                    "name": "சுரங்கப்பாதை நுழைவுவாயில்"
+                },
+                "relation": {
+                    "name": "தொடர்பு"
+                },
+                "shop": {
+                    "name": "கடை"
+                },
+                "shop/alcohol": {
+                    "name": "மதுபானக் கடை"
+                },
+                "shop/car": {
+                    "name": "வாகன விற்பனையகம்"
+                },
+                "shop/clothes": {
+                    "name": "ஜவுளிக் கடை"
+                },
+                "shop/computer": {
+                    "name": "கணினி விற்பனையகம்"
+                },
+                "shop/florist": {
+                    "name": "பூக்கடை"
+                },
+                "shop/laundry": {
+                    "name": "சலவையகம்"
+                },
+                "shop/shoes": {
+                    "name": "காலணியகம்"
+                },
+                "tourism": {
+                    "name": "சுற்றுலா"
+                },
+                "tourism/artwork": {
+                    "name": "ஓவியம்"
+                },
+                "tourism/hotel": {
+                    "name": "உணவகம்"
+                },
+                "tourism/information": {
+                    "name": "தகவல்"
+                },
+                "tourism/museum": {
+                    "name": "அருங்காட்சியகம்"
+                },
+                "tourism/zoo": {
+                    "name": "உயிரியல் பூங்கா"
+                },
+                "type/boundary": {
+                    "name": "எல்லை"
+                },
+                "type/route": {
+                    "name": "வழி"
+                },
+                "type/route/bus": {
+                    "name": "பேருந்து தடம்"
+                },
+                "vertex": {
+                    "name": "பிற"
+                },
+                "waterway/canal": {
+                    "name": "கால்வாய்"
+                },
+                "waterway/dam": {
+                    "name": "அணை"
+                },
+                "waterway/river": {
+                    "name": "ஆறு"
+                },
+                "waterway/riverbank": {
+                    "name": "ஆற்றாங்கரை"
+                }
             }
         }
     }

@@ -1,561 +1,563 @@
 {
-    "modes": {
-        "add_area": {
-            "title": "Suprafață",
-            "description": "Adaugă hărți: parcuri, clădiri, lacuri sau alte suprafețe",
-            "tail": "Apasă pe hartă pentru a incepe trasarea unei suprafețe precum: parc, lac sau cladire"
-        },
-        "add_line": {
-            "title": "Linie",
-            "description": "Adaugă hărți: autostrăzi, străzi, cai pietonale, canale sau alte linii.",
-            "tail": "Apasă pe hartă pentru a trasa o stradă, o cale sau o rută."
-        },
-        "add_point": {
-            "title": "Punct",
-            "description": "Adauga restaurante, monumente, cutii poștale sau alte puncte pe hartă.",
-            "tail": "Apasă pe hartă pentru a adauga un punct."
-        },
-        "browse": {
-            "title": "Navighează",
-            "description": "Mișcă și mărește harta."
-        }
-    },
-    "operations": {
-        "add": {
-            "annotation": {
-                "point": "Am adăugat un punct.",
-                "vertex": "Am adăugat un nod la o cale",
-                "relation": "Am adăugat o relație."
-            }
-        },
-        "start": {
-            "annotation": {
-                "line": "Am pornit o linie.",
-                "area": "Am pornit o suprafață."
-            }
-        },
-        "continue": {
-            "key": "A",
-            "title": "Continuă",
-            "description": "Continuă linia",
-            "not_eligible": "Nicio linie nu poate fi continuată aici",
-            "annotation": {
-                "line": "Am continuat o linie.",
-                "area": "Am continuat o suprafață. "
-            }
-        },
-        "cancel_draw": {
-            "annotation": "Am anulat desenul."
-        },
-        "change_tags": {
-            "annotation": "Tag-uri schimbate."
-        },
-        "circularize": {
-            "description": {
-                "line": "Fă această linie circulară.",
-                "area": "Fă această suprafață circulară."
+    "ro": {
+        "modes": {
+            "add_area": {
+                "title": "Suprafață",
+                "description": "Adaugă hărți: parcuri, clădiri, lacuri sau alte suprafețe",
+                "tail": "Apasă pe hartă pentru a incepe trasarea unei suprafețe precum: parc, lac sau cladire"
             },
-            "key": "O",
-            "annotation": {
-                "line": "Am făcut linia circulară.",
-                "area": "Am facut suprafața circulară."
+            "add_line": {
+                "title": "Linie",
+                "description": "Adaugă hărți: autostrăzi, străzi, cai pietonale, canale sau alte linii.",
+                "tail": "Apasă pe hartă pentru a trasa o stradă, o cale sau o rută."
+            },
+            "add_point": {
+                "title": "Punct",
+                "description": "Adauga restaurante, monumente, cutii poștale sau alte puncte pe hartă.",
+                "tail": "Apasă pe hartă pentru a adauga un punct."
+            },
+            "browse": {
+                "title": "Navighează",
+                "description": "Mișcă și mărește harta."
             }
         },
-        "orthogonalize": {
-            "key": "S"
-        },
-        "straighten": {
-            "title": "Întărește ",
-            "key": "S"
-        },
-        "delete": {
-            "title": "Șterge",
-            "description": "Șterge obiectul definitiv.",
-            "annotation": {
-                "point": "Șterge un punct.",
-                "vertex": "Șterge un nod dintr-o cale.",
-                "line": "Șterge o linie.",
-                "area": "Șterge o suprafață.",
-                "relation": "Șterge o relație.",
-                "multiple": "Am șters {n} obiecte."
-            }
-        },
-        "add_member": {
-            "annotation": "Am adăugat un membru dintr-o relație."
-        },
-        "delete_member": {
-            "annotation": "Am șters un membru dintr-o relație."
-        },
-        "connect": {
-            "annotation": {
-                "point": "Am conectat o cale cu un punct.",
-                "vertex": "Am conectat o cale cu alta.",
-                "line": "Am conectat o cale la o linie.",
-                "area": "Am conectat o cale la o suprafață."
-            }
-        },
-        "disconnect": {
-            "title": "Deconectează",
-            "description": "Deconectează aceste linii/suprafețe de ele insele.",
-            "key": "D",
-            "annotation": "Am deconectat liniile/suprafețele."
-        },
-        "merge": {
-            "title": "Unește",
-            "key": "C"
-        },
-        "move": {
-            "title": "Mută",
-            "description": "Mută la o locație noua.",
-            "key": "M",
-            "annotation": {
-                "point": "Am mutat un punct.",
-                "vertex": "Am mutat un nod intr-o cale.",
-                "line": "Am mutat o linie.",
-                "area": "Am mutat o suprafață.",
-                "multiple": "Am mutat mai multe obiecte."
-            }
-        },
-        "rotate": {
-            "title": "Rotește",
-            "key": "R",
-            "annotation": {
-                "line": "Am rotit o linie.",
-                "area": "Am rotit o suprafață."
-            }
-        },
-        "reverse": {
-            "title": "Întoarce",
-            "description": "Fă această linie să se indrepte in direcția opusă.",
-            "key": "V",
-            "annotation": "Am întors o linie."
-        },
-        "split": {
-            "title": "Separă",
-            "key": "X",
-            "annotation": {
-                "line": "Separă linia",
-                "area": "Sparge limitele unei suprafețe"
-            }
-        }
-    },
-    "tooltip_keyhint": "Scurtătură:",
-    "translate": {
-        "translate": "Traduce",
-        "localized_translation_language": "Alege limba",
-        "localized_translation_name": "Nume"
-    },
-    "logout": "logout",
-    "loading_auth": "Conectare la OpenStreetMap..",
-    "feature_info": {
-        "hidden_warning": "{count} funcționalități ascunse"
-    },
-    "commit": {
-        "title": "Salveaza modificarile",
-        "save": "Salveaza",
-        "cancel": "Renunță",
-        "changes": "{count} Modificări",
-        "warnings": "Atenționări",
-        "modified": "Modificat",
-        "deleted": "Șters",
-        "created": "Creat"
-    },
-    "contributors": {
-        "list": "Editări făcute de {user}",
-        "truncated_list": "Editat de {users} si alți {count} de editori"
-    },
-    "infobox": {
-        "selected": "{n} selectate",
-        "geometry": "Geometrie",
-        "closed": "închis ",
-        "center": "Centru",
-        "perimeter": "Perimetru",
-        "length": "Lungime",
-        "area": "Suprafață",
-        "location": "Locație ",
-        "metric": "Metric",
-        "imperial": "Imperial"
-    },
-    "geometry": {
-        "point": "punct",
-        "vertex": "vertex",
-        "line": "linie",
-        "area": "suprafață",
-        "relation": "relație "
-    },
-    "geocoder": {
-        "no_results_worldwide": "Nu s-a găsit nici un rezultat"
-    },
-    "geolocate": {
-        "title": "Arată locația mea "
-    },
-    "inspector": {
-        "no_documentation_combination": "Nu este documentație disponibilă pentru combinația de tag-uri (cuvinte cheie)",
-        "no_documentation_key": "Nu este documentație pentru această cheie.",
-        "show_more": "Arată mai mult",
-        "view_on_osm": "Vezi pe openstreetmap.org",
-        "all_members": "Toți membrii",
-        "all_relations": "Toate relațiile",
-        "new_relation": "Relație nouă",
-        "role": "Rol",
-        "results": "{n} rezultate pentru {search}",
-        "back_tooltip": "Schimbă trăsătură",
-        "remove": "Şterge",
-        "search": "Caută",
-        "unknown": "Necunoscut",
-        "check": {
-            "yes": "Da",
-            "no": "Nu"
-        },
-        "node": "Nod",
-        "location": "Locație"
-    },
-    "background": {
-        "title": "Fundal",
-        "description": "Setări fundal",
-        "percent_brightness": "{opacity}% luminozitate",
-        "reset": "resetează"
-    },
-    "map_data": {
-        "map_features": "Funcționalitățile Hărții"
-    },
-    "feature": {
-        "points": {
-            "description": "Puncte",
-            "tooltip": "Puncte de interes"
-        },
-        "paths": {
-            "description": "Poteci",
-            "tooltip": "Trotuare, Poteci, Piste de biciclete, etc"
-        },
-        "buildings": {
-            "description": "Clădiri",
-            "tooltip": "Clădiri, Adăposturi, Garaje, etc."
-        }
-    },
-    "restore": {
-        "heading": "Ai modificări nesalvate.",
-        "description": "Dorești să revii la modificările nesalvate din sesiunea anterioară de editare? ",
-        "restore": "Restabilește.",
-        "reset": "Resetează"
-    },
-    "save": {
-        "title": "Salveaza",
-        "help": "Salvează modificările pe OpenSteetMap, făcându-le disponibile către alți utilizatori.",
-        "no_changes": "Nici o modificare de salvat.",
-        "uploading": "Încarcă modificările in OpenStreetMap",
-        "unsaved_changes": "Ai modificări nesalvate."
-    },
-    "success": {
-        "view_on_osm": "Vezi pe OSM",
-        "facebook": "Distribuie pe Facebook",
-        "twitter": "Distribuie pe Twitter",
-        "google": "Distribuie pe Google+"
-    },
-    "splash": {
-        "welcome": "Bine ai venit în editorul iD OpenStreetMap",
-        "walkthrough": "Începe ghidul",
-        "start": "Editează acum"
-    },
-    "source_switch": {
-        "live": "live",
-        "lose_changes": "Ai modificări nesalvate. Schimbând serverul de harți, le vei pierde. Ești sigur(ă) ca vrei să schimbi serverele ?",
-        "dev": "dev"
-    },
-    "tag_reference": {
-        "description": "Descriere",
-        "on_wiki": "{tag} pe wiki.osm.org",
-        "used_with": "folosit cu {type}"
-    },
-    "validations": {
-        "untagged_point": "Punct neetichetat",
-        "untagged_line": "Linie fară tag-uri (cuvinte cheie)",
-        "untagged_area": "Suprafața fară tag-uri",
-        "many_deletions": "Șteregi {n} obiecte. Ești sigur(ă) ? Le vei șterge de pe harta pe care toată lumea o vede pe opensteetmap.org. ",
-        "tag_suggests_area": "Tag-ul {tag} sugerează că linia trebuie sa fie o suprafață, dar nu e.",
-        "deprecated_tags": "Tag-uri învechite: {tags}"
-    },
-    "zoom": {
-        "in": "Mareste",
-        "out": "Micsoreaza"
-    },
-    "gpx": {
-        "local_layer": "Fișier GPX local"
-    },
-    "help": {
-        "title": "Ajutor"
-    },
-    "intro": {
-        "navigation": {
-            "title": "Navigare",
-            "select": "Trăsăturile hărții sunt reprezentate in trei moduri: folosind puncte, linii sau suprafețe. Toate trăsăturile pot fi selectate apăsând pe ele. **Apasă pe un punct pentru al selecta.** "
-        },
-        "points": {
-            "title": "Puncte"
-        },
-        "areas": {
-            "title": "Suprafețe",
-            "search": "**Caută {name}.**"
-        },
-        "lines": {
-            "title": "Linii",
-            "road": "**Selectează drumul din listă**"
-        },
-        "startediting": {
-            "title": "Începe editarea",
-            "save": "Nu uita să salvezi periodic modificările. ",
-            "start": "Începe cartografierea!"
-        }
-    },
-    "presets": {
-        "fields": {
-            "address": {
-                "label": "Adresă",
-                "placeholders": {
-                    "city": "Oraș",
-                    "street": "Stradă"
+        "operations": {
+            "add": {
+                "annotation": {
+                    "point": "Am adăugat un punct.",
+                    "vertex": "Am adăugat un nod la o cale",
+                    "relation": "Am adăugat o relație."
                 }
             },
-            "aeroway": {
-                "label": "Tip"
-            },
-            "amenity": {
-                "label": "Tip"
-            },
-            "atm": {
-                "label": "ATM"
-            },
-            "bicycle_parking": {
-                "label": "Tip"
-            },
-            "building": {
-                "label": "Clădire"
-            },
-            "building_area": {
-                "label": "Clădire"
-            },
-            "capacity": {
-                "label": "Capacitate"
-            },
-            "construction": {
-                "label": "Tip"
-            },
-            "crossing": {
-                "label": "Tip"
-            },
-            "denomination": {
-                "label": "Denominare"
-            },
-            "emergency": {
-                "label": "Urgență"
-            },
-            "entrance": {
-                "label": "Tip"
-            },
-            "fax": {
-                "label": "Fax"
-            },
-            "fee": {
-                "label": "Taxă"
-            },
-            "highway": {
-                "label": "Tip"
-            },
-            "historic": {
-                "label": "Tip"
-            },
-            "internet_access": {
-                "label": "Acces internet",
-                "options": {
-                    "terminal": "Terminal",
-                    "wired": "Conectat",
-                    "wlan": "Wifi"
+            "start": {
+                "annotation": {
+                    "line": "Am pornit o linie.",
+                    "area": "Am pornit o suprafață."
                 }
             },
-            "landuse": {
-                "label": "Tip"
+            "continue": {
+                "key": "A",
+                "title": "Continuă",
+                "description": "Continuă linia",
+                "not_eligible": "Nicio linie nu poate fi continuată aici",
+                "annotation": {
+                    "line": "Am continuat o linie.",
+                    "area": "Am continuat o suprafață. "
+                }
             },
-            "layer": {
-                "label": "Strat"
+            "cancel_draw": {
+                "annotation": "Am anulat desenul."
             },
-            "leisure": {
-                "label": "Tip"
+            "change_tags": {
+                "annotation": "Tag-uri schimbate."
             },
-            "levels": {
-                "label": "Nivele"
+            "circularize": {
+                "description": {
+                    "line": "Fă această linie circulară.",
+                    "area": "Fă această suprafață circulară."
+                },
+                "key": "O",
+                "annotation": {
+                    "line": "Am făcut linia circulară.",
+                    "area": "Am facut suprafața circulară."
+                }
             },
-            "man_made": {
-                "label": "Tip"
+            "orthogonalize": {
+                "key": "S"
             },
-            "maxspeed": {
-                "label": "Limită de viteză"
+            "straighten": {
+                "title": "Întărește ",
+                "key": "S"
             },
-            "natural": {
-                "label": "Natural"
+            "delete": {
+                "title": "Șterge",
+                "description": "Șterge obiectul definitiv.",
+                "annotation": {
+                    "point": "Șterge un punct.",
+                    "vertex": "Șterge un nod dintr-o cale.",
+                    "line": "Șterge o linie.",
+                    "area": "Șterge o suprafață.",
+                    "relation": "Șterge o relație.",
+                    "multiple": "Am șters {n} obiecte."
+                }
             },
-            "network": {
-                "label": "Rețea"
+            "add_member": {
+                "annotation": "Am adăugat un membru dintr-o relație."
             },
-            "note": {
-                "label": "Notă"
+            "delete_member": {
+                "annotation": "Am șters un membru dintr-o relație."
             },
-            "office": {
-                "label": "Tip"
+            "connect": {
+                "annotation": {
+                    "point": "Am conectat o cale cu un punct.",
+                    "vertex": "Am conectat o cale cu alta.",
+                    "line": "Am conectat o cale la o linie.",
+                    "area": "Am conectat o cale la o suprafață."
+                }
             },
-            "oneway": {
-                "label": "Sens unic"
+            "disconnect": {
+                "title": "Deconectează",
+                "description": "Deconectează aceste linii/suprafețe de ele insele.",
+                "key": "D",
+                "annotation": "Am deconectat liniile/suprafețele."
             },
-            "opening_hours": {
-                "label": "Ore"
+            "merge": {
+                "title": "Unește",
+                "key": "C"
             },
-            "operator": {
-                "label": "Operator"
+            "move": {
+                "title": "Mută",
+                "description": "Mută la o locație noua.",
+                "key": "M",
+                "annotation": {
+                    "point": "Am mutat un punct.",
+                    "vertex": "Am mutat un nod intr-o cale.",
+                    "line": "Am mutat o linie.",
+                    "area": "Am mutat o suprafață.",
+                    "multiple": "Am mutat mai multe obiecte."
+                }
             },
-            "phone": {
-                "label": "Telefon"
+            "rotate": {
+                "title": "Rotește",
+                "key": "R",
+                "annotation": {
+                    "line": "Am rotit o linie.",
+                    "area": "Am rotit o suprafață."
+                }
             },
-            "place": {
-                "label": "Tip"
+            "reverse": {
+                "title": "Întoarce",
+                "description": "Fă această linie să se indrepte in direcția opusă.",
+                "key": "V",
+                "annotation": "Am întors o linie."
             },
-            "railway": {
-                "label": "Tip"
+            "split": {
+                "title": "Separă",
+                "key": "X",
+                "annotation": {
+                    "line": "Separă linia",
+                    "area": "Sparge limitele unei suprafețe"
+                }
+            }
+        },
+        "tooltip_keyhint": "Scurtătură:",
+        "translate": {
+            "translate": "Traduce",
+            "localized_translation_language": "Alege limba",
+            "localized_translation_name": "Nume"
+        },
+        "logout": "logout",
+        "loading_auth": "Conectare la OpenStreetMap..",
+        "feature_info": {
+            "hidden_warning": "{count} funcționalități ascunse"
+        },
+        "commit": {
+            "title": "Salveaza modificarile",
+            "save": "Salveaza",
+            "cancel": "Renunță",
+            "changes": "{count} Modificări",
+            "warnings": "Atenționări",
+            "modified": "Modificat",
+            "deleted": "Șters",
+            "created": "Creat"
+        },
+        "contributors": {
+            "list": "Editări făcute de {user}",
+            "truncated_list": "Editat de {users} si alți {count} de editori"
+        },
+        "infobox": {
+            "selected": "{n} selectate",
+            "geometry": "Geometrie",
+            "closed": "închis ",
+            "center": "Centru",
+            "perimeter": "Perimetru",
+            "length": "Lungime",
+            "area": "Suprafață",
+            "location": "Locație ",
+            "metric": "Metric",
+            "imperial": "Imperial"
+        },
+        "geometry": {
+            "point": "punct",
+            "vertex": "vertex",
+            "line": "linie",
+            "area": "suprafață",
+            "relation": "relație "
+        },
+        "geocoder": {
+            "no_results_worldwide": "Nu s-a găsit nici un rezultat"
+        },
+        "geolocate": {
+            "title": "Arată locația mea "
+        },
+        "inspector": {
+            "no_documentation_combination": "Nu este documentație disponibilă pentru combinația de tag-uri (cuvinte cheie)",
+            "no_documentation_key": "Nu este documentație pentru această cheie.",
+            "show_more": "Arată mai mult",
+            "view_on_osm": "Vezi pe openstreetmap.org",
+            "all_members": "Toți membrii",
+            "all_relations": "Toate relațiile",
+            "new_relation": "Relație nouă",
+            "role": "Rol",
+            "results": "{n} rezultate pentru {search}",
+            "back_tooltip": "Schimbă trăsătură",
+            "remove": "Şterge",
+            "search": "Caută",
+            "unknown": "Necunoscut",
+            "check": {
+                "yes": "Da",
+                "no": "Nu"
             },
-            "religion": {
-                "label": "Religie"
+            "node": "Nod",
+            "location": "Locație"
+        },
+        "background": {
+            "title": "Fundal",
+            "description": "Setări fundal",
+            "percent_brightness": "{opacity}% luminozitate",
+            "reset": "resetează"
+        },
+        "map_data": {
+            "map_features": "Funcționalitățile Hărții"
+        },
+        "feature": {
+            "points": {
+                "description": "Puncte",
+                "tooltip": "Puncte de interes"
             },
-            "service": {
-                "label": "Tip"
+            "paths": {
+                "description": "Poteci",
+                "tooltip": "Trotuare, Poteci, Piste de biciclete, etc"
             },
-            "shelter": {
-                "label": "Adăpost"
+            "buildings": {
+                "description": "Clădiri",
+                "tooltip": "Clădiri, Adăposturi, Garaje, etc."
+            }
+        },
+        "restore": {
+            "heading": "Ai modificări nesalvate.",
+            "description": "Dorești să revii la modificările nesalvate din sesiunea anterioară de editare? ",
+            "restore": "Restabilește.",
+            "reset": "Resetează"
+        },
+        "save": {
+            "title": "Salveaza",
+            "help": "Salvează modificările pe OpenSteetMap, făcându-le disponibile către alți utilizatori.",
+            "no_changes": "Nici o modificare de salvat.",
+            "uploading": "Încarcă modificările in OpenStreetMap",
+            "unsaved_changes": "Ai modificări nesalvate."
+        },
+        "success": {
+            "view_on_osm": "Vezi pe OSM",
+            "facebook": "Distribuie pe Facebook",
+            "twitter": "Distribuie pe Twitter",
+            "google": "Distribuie pe Google+"
+        },
+        "splash": {
+            "welcome": "Bine ai venit în editorul iD OpenStreetMap",
+            "walkthrough": "Începe ghidul",
+            "start": "Editează acum"
+        },
+        "source_switch": {
+            "live": "live",
+            "lose_changes": "Ai modificări nesalvate. Schimbând serverul de harți, le vei pierde. Ești sigur(ă) ca vrei să schimbi serverele ?",
+            "dev": "dev"
+        },
+        "tag_reference": {
+            "description": "Descriere",
+            "on_wiki": "{tag} pe wiki.osm.org",
+            "used_with": "folosit cu {type}"
+        },
+        "validations": {
+            "untagged_point": "Punct neetichetat",
+            "untagged_line": "Linie fară tag-uri (cuvinte cheie)",
+            "untagged_area": "Suprafața fară tag-uri",
+            "many_deletions": "Șteregi {n} obiecte. Ești sigur(ă) ? Le vei șterge de pe harta pe care toată lumea o vede pe opensteetmap.org. ",
+            "tag_suggests_area": "Tag-ul {tag} sugerează că linia trebuie sa fie o suprafață, dar nu e.",
+            "deprecated_tags": "Tag-uri învechite: {tags}"
+        },
+        "zoom": {
+            "in": "Mareste",
+            "out": "Micsoreaza"
+        },
+        "gpx": {
+            "local_layer": "Fișier GPX local"
+        },
+        "help": {
+            "title": "Ajutor"
+        },
+        "intro": {
+            "navigation": {
+                "title": "Navigare",
+                "select": "Trăsăturile hărții sunt reprezentate in trei moduri: folosind puncte, linii sau suprafețe. Toate trăsăturile pot fi selectate apăsând pe ele. **Apasă pe un punct pentru al selecta.** "
             },
-            "shop": {
-                "label": "Tip"
+            "points": {
+                "title": "Puncte"
             },
-            "source": {
-                "label": "Sursă"
+            "areas": {
+                "title": "Suprafețe",
+                "search": "**Caută {name}.**"
             },
-            "sport": {
-                "label": "Sport"
+            "lines": {
+                "title": "Linii",
+                "road": "**Selectează drumul din listă**"
             },
-            "surface": {
-                "label": "Suprafață"
-            },
-            "tourism": {
-                "label": "Tip"
-            },
-            "water": {
-                "label": "Tip"
-            },
-            "waterway": {
-                "label": "Tip"
-            },
-            "website": {
-                "label": "Website"
-            },
-            "wetland": {
-                "label": "Tip"
-            },
-            "wikipedia": {
-                "label": "Wikipedia"
+            "startediting": {
+                "title": "Începe editarea",
+                "save": "Nu uita să salvezi periodic modificările. ",
+                "start": "Începe cartografierea!"
             }
         },
         "presets": {
-            "aeroway": {
-                "name": "Aeroway"
+            "fields": {
+                "address": {
+                    "label": "Adresă",
+                    "placeholders": {
+                        "city": "Oraș",
+                        "street": "Stradă"
+                    }
+                },
+                "aeroway": {
+                    "label": "Tip"
+                },
+                "amenity": {
+                    "label": "Tip"
+                },
+                "atm": {
+                    "label": "ATM"
+                },
+                "bicycle_parking": {
+                    "label": "Tip"
+                },
+                "building": {
+                    "label": "Clădire"
+                },
+                "building_area": {
+                    "label": "Clădire"
+                },
+                "capacity": {
+                    "label": "Capacitate"
+                },
+                "construction": {
+                    "label": "Tip"
+                },
+                "crossing": {
+                    "label": "Tip"
+                },
+                "denomination": {
+                    "label": "Denominare"
+                },
+                "emergency": {
+                    "label": "Urgență"
+                },
+                "entrance": {
+                    "label": "Tip"
+                },
+                "fax": {
+                    "label": "Fax"
+                },
+                "fee": {
+                    "label": "Taxă"
+                },
+                "highway": {
+                    "label": "Tip"
+                },
+                "historic": {
+                    "label": "Tip"
+                },
+                "internet_access": {
+                    "label": "Acces internet",
+                    "options": {
+                        "terminal": "Terminal",
+                        "wired": "Conectat",
+                        "wlan": "Wifi"
+                    }
+                },
+                "landuse": {
+                    "label": "Tip"
+                },
+                "layer": {
+                    "label": "Strat"
+                },
+                "leisure": {
+                    "label": "Tip"
+                },
+                "levels": {
+                    "label": "Nivele"
+                },
+                "man_made": {
+                    "label": "Tip"
+                },
+                "maxspeed": {
+                    "label": "Limită de viteză"
+                },
+                "natural": {
+                    "label": "Natural"
+                },
+                "network": {
+                    "label": "Rețea"
+                },
+                "note": {
+                    "label": "Notă"
+                },
+                "office": {
+                    "label": "Tip"
+                },
+                "oneway": {
+                    "label": "Sens unic"
+                },
+                "opening_hours": {
+                    "label": "Ore"
+                },
+                "operator": {
+                    "label": "Operator"
+                },
+                "phone": {
+                    "label": "Telefon"
+                },
+                "place": {
+                    "label": "Tip"
+                },
+                "railway": {
+                    "label": "Tip"
+                },
+                "religion": {
+                    "label": "Religie"
+                },
+                "service": {
+                    "label": "Tip"
+                },
+                "shelter": {
+                    "label": "Adăpost"
+                },
+                "shop": {
+                    "label": "Tip"
+                },
+                "source": {
+                    "label": "Sursă"
+                },
+                "sport": {
+                    "label": "Sport"
+                },
+                "surface": {
+                    "label": "Suprafață"
+                },
+                "tourism": {
+                    "label": "Tip"
+                },
+                "water": {
+                    "label": "Tip"
+                },
+                "waterway": {
+                    "label": "Tip"
+                },
+                "website": {
+                    "label": "Website"
+                },
+                "wetland": {
+                    "label": "Tip"
+                },
+                "wikipedia": {
+                    "label": "Wikipedia"
+                }
             },
-            "aeroway/aerodrome": {
-                "name": "Aeroport"
-            },
-            "amenity/bank": {
-                "name": "Banca"
-            },
-            "amenity/bar": {
-                "name": "Bar"
-            },
-            "amenity/bicycle_parking": {
-                "name": "Parcare biciclete"
-            },
-            "amenity/bicycle_rental": {
-                "name": "Închiriere biciclete"
-            },
-            "amenity/cafe": {
-                "name": "Cafenea"
-            },
-            "amenity/cinema": {
-                "name": "Cinema"
-            },
-            "amenity/fast_food": {
-                "name": "Fast Food"
-            },
-            "amenity/fire_station": {
-                "name": "Pompieri"
-            },
-            "amenity/grave_yard": {
-                "name": "Cimitir"
-            },
-            "amenity/library": {
-                "name": "Librărie"
-            },
-            "amenity/pharmacy": {
-                "name": "Farmacie"
-            },
-            "amenity/place_of_worship/christian": {
-                "name": "Biserică"
-            },
-            "amenity/place_of_worship/jewish": {
-                "name": "Sinagogă"
-            },
-            "amenity/place_of_worship/muslim": {
-                "name": "Moschee"
-            },
-            "amenity/police": {
-                "name": "Poliție"
-            },
-            "amenity/post_box": {
-                "name": "Cutie Poștală"
-            },
-            "amenity/post_office": {
-                "name": "Oficiul Poștal"
-            },
-            "amenity/pub": {
-                "name": "Pub"
-            },
-            "amenity/restaurant": {
-                "name": "Restaurant"
-            },
-            "amenity/toilets": {
-                "name": "Toaletă"
-            },
-            "amenity/townhall": {
-                "name": "Primărie"
-            },
-            "building": {
-                "name": "Clădire"
-            },
-            "highway": {
-                "name": "Autostradă"
-            },
-            "highway/bus_stop": {
-                "name": "Stație de autobuz"
-            },
-            "highway/cycleway": {
-                "name": "Pistă biciclete"
-            },
-            "highway/footway": {
-                "name": "Potecă"
-            },
-            "highway/primary": {
-                "name": "Drum principal"
-            },
-            "highway/residential": {
-                "name": "Drum rezidențial"
-            },
-            "highway/secondary": {
-                "name": "Drum secundar"
-            },
-            "highway/steps": {
-                "name": "Scări"
+            "presets": {
+                "aeroway": {
+                    "name": "Aeroway"
+                },
+                "aeroway/aerodrome": {
+                    "name": "Aeroport"
+                },
+                "amenity/bank": {
+                    "name": "Banca"
+                },
+                "amenity/bar": {
+                    "name": "Bar"
+                },
+                "amenity/bicycle_parking": {
+                    "name": "Parcare biciclete"
+                },
+                "amenity/bicycle_rental": {
+                    "name": "Închiriere biciclete"
+                },
+                "amenity/cafe": {
+                    "name": "Cafenea"
+                },
+                "amenity/cinema": {
+                    "name": "Cinema"
+                },
+                "amenity/fast_food": {
+                    "name": "Fast Food"
+                },
+                "amenity/fire_station": {
+                    "name": "Pompieri"
+                },
+                "amenity/grave_yard": {
+                    "name": "Cimitir"
+                },
+                "amenity/library": {
+                    "name": "Librărie"
+                },
+                "amenity/pharmacy": {
+                    "name": "Farmacie"
+                },
+                "amenity/place_of_worship/christian": {
+                    "name": "Biserică"
+                },
+                "amenity/place_of_worship/jewish": {
+                    "name": "Sinagogă"
+                },
+                "amenity/place_of_worship/muslim": {
+                    "name": "Moschee"
+                },
+                "amenity/police": {
+                    "name": "Poliție"
+                },
+                "amenity/post_box": {
+                    "name": "Cutie Poștală"
+                },
+                "amenity/post_office": {
+                    "name": "Oficiul Poștal"
+                },
+                "amenity/pub": {
+                    "name": "Pub"
+                },
+                "amenity/restaurant": {
+                    "name": "Restaurant"
+                },
+                "amenity/toilets": {
+                    "name": "Toaletă"
+                },
+                "amenity/townhall": {
+                    "name": "Primărie"
+                },
+                "building": {
+                    "name": "Clădire"
+                },
+                "highway": {
+                    "name": "Autostradă"
+                },
+                "highway/bus_stop": {
+                    "name": "Stație de autobuz"
+                },
+                "highway/cycleway": {
+                    "name": "Pistă biciclete"
+                },
+                "highway/footway": {
+                    "name": "Potecă"
+                },
+                "highway/primary": {
+                    "name": "Drum principal"
+                },
+                "highway/residential": {
+                    "name": "Drum rezidențial"
+                },
+                "highway/secondary": {
+                    "name": "Drum secundar"
+                },
+                "highway/steps": {
+                    "name": "Scări"
+                }
             }
         }
     }

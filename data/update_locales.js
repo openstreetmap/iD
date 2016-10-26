@@ -40,7 +40,7 @@ asyncMap(resources, getResource, function(err, locales) {
         if (i === 'en' || _.isEmpty(locale[i])) continue;
         data.locales.push(i);
         var obj = {};
-        obj.locale[i] = locale[i];
+        obj[i] = locale[i];
         fs.writeFileSync(outdir + i + '.json', JSON.stringify(obj, null, 4));
     }
 

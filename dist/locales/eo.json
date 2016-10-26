@@ -1,330 +1,367 @@
 {
-    "modes": {
-        "add_area": {
-            "title": "Areo",
-            "description": "Aldoni parkoj, konstruaĵoj, lagoj aŭ aliaj areoj por la mapo.",
-            "tail": "Klaku sur la mapo por komenci desegni areo, kiel parko, lago, aŭ konstruaĵo."
-        },
-        "add_line": {
-            "title": "linio",
-            "description": "Aldoni ŝoseoj, stratoj, piediranto vojoj, kanaloj aŭ aliajn liniojn al la mapo.",
-            "tail": "Klaku sur la mapo por komenci desegni vojo, vojo, aŭ itinero."
-        },
-        "add_point": {
-            "title": "punkto",
-            "description": "Aldoni restoracioj, monumentoj, bildkartoj skatoloj aŭ aliaj punktoj al la mapo.",
-            "tail": "Klaku sur la mapo por aldoni punkton."
-        },
-        "browse": {
-            "title": "Foliumi",
-            "description": "Pan kaj zomi la mapon."
-        },
-        "draw_area": {
-            "tail": "Klaku por aldoni nodoj al via areo. Klaku la unuan nodo fini la areo."
-        },
-        "draw_line": {
-            "tail": "Klaku por aldoni pli nodoj al la linio. Klaku sur aliaj linioj por konekti al ili, kaj duoble klaki por fino la linion."
-        }
-    },
-    "operations": {
-        "add": {
-            "annotation": {
-                "point": "Aldonita punkto.",
-                "vertex": "Aldonita nodon al vojo.",
-                "relation": "Aldonita rilato."
-            }
-        },
-        "start": {
-            "annotation": {
-                "line": "Komenciĝis linion.",
-                "area": "Komenciĝis areon."
-            }
-        },
-        "continue": {
-            "key": "A",
-            "title": "Daŭrigu",
-            "description": "Daŭrigu tiun linion.",
-            "not_eligible": "Neniu linio povas esti daŭrigita tien.",
-            "multiple": "Pluraj linioj povas esti daŭrigita tien. Elekti linion, premu la klavo Shift kaj klaku sur ĝi por elekti ĝin.",
-            "annotation": {
-                "line": "Daŭre linion.",
-                "area": "Daŭre areo."
-            }
-        },
-        "cancel_draw": {
-            "annotation": "Nuligita desegno."
-        },
-        "change_role": {
-            "annotation": "Ŝanĝis la rolo de rilato membron."
-        },
-        "change_tags": {
-            "annotation": "Ŝanĝita etikedojn."
-        },
-        "circularize": {
-            "title": "Circularize",
-            "description": {
-                "line": "Faru ĉi linio cirkuli.",
-                "area": "Faru ĉi areon cirkuli."
+    "eo": {
+        "modes": {
+            "add_area": {
+                "title": "Areo",
+                "description": "Aldoni parkoj, konstruaĵoj, lagoj aŭ aliaj areoj por la mapo.",
+                "tail": "Klaku sur la mapo por komenci desegni areo, kiel parko, lago, aŭ konstruaĵo."
             },
-            "key": "O",
-            "annotation": {
-                "line": "Farita cirkulero de linio.",
-                "area": "Farita cirkulero de areo."
-            }
-        },
-        "orthogonalize": {
-            "title": "Kvadrata",
-            "description": {
-                "line": "Kvadrata la anguloj de ĉi tiu linio.",
-                "area": "Kvadrata la anguloj de ĉi tiu areo."
+            "add_line": {
+                "title": "Linio",
+                "description": "Aldoni ŝoseoj, stratoj, piediranto vojoj, kanaloj aŭ aliajn liniojn al la mapo.",
+                "tail": "Klaku sur la mapo por komenci desegni vojo, vojo, aŭ itinero."
             },
-            "key": "S"
-        },
-        "straighten": {
-            "key": "S"
-        },
-        "delete": {
-            "title": "Forigi",
-            "annotation": {
-                "point": "Forigita punkton.",
-                "line": "Forigita linion."
+            "add_point": {
+                "title": "Punkto",
+                "description": "Aldoni restoracioj, monumentoj, bildkartoj skatoloj aŭ aliaj punktoj al la mapo.",
+                "tail": "Klaku sur la mapo por aldoni punkton."
+            },
+            "browse": {
+                "title": "Foliumi",
+                "description": "Pan kaj zomi la mapon."
+            },
+            "draw_area": {
+                "tail": "Klaku por aldoni nodoj al via areo. Klaku la unuan nodo fini la areo."
+            },
+            "draw_line": {
+                "tail": "Klaku por aldoni pli nodoj al la linio. Klaku sur aliaj linioj por konekti al ili, kaj duoble klaki por fino la linion."
             }
         },
-        "disconnect": {
-            "title": "Malkonekti"
-        },
-        "move": {
-            "key": "M"
-        },
-        "rotate": {
-            "title": "Rotacio",
-            "description": "Rotacii tiu objekto ĉirkaŭ ĝia centra punkto.",
-            "annotation": {
-                "line": "Turnita linion."
-            }
-        },
-        "reverse": {
-            "title": "dorsflanko",
-            "key": "V"
-        },
-        "split": {
-            "key": "X"
-        }
-    },
-    "translate": {
-        "translate": "Traduki",
-        "localized_translation_label": "Multlingva nomon"
-    },
-    "commit": {
-        "changes": "{count} ŝanĝoj"
-    },
-    "inspector": {
-        "reference": "Vidi en la vikio de OpenStreetMap",
-        "check": {
-            "yes": "Jes",
-            "no": "Ne"
-        },
-        "way": "Vojo"
-    },
-    "feature": {
-        "others": {
-            "description": "Aliaj"
-        }
-    },
-    "help": {
-        "title": "Helpo"
-    },
-    "intro": {
-        "navigation": {
-            "title": "Navigado"
-        },
-        "points": {
-            "title": "Punktoj"
-        },
-        "areas": {
-            "title": "Areoj",
-            "choose": "**Rifo Korto de la listo.**"
-        },
-        "lines": {
-            "title": "Linioj",
-            "road": "**Selektas Ŝoseon de la listo**",
-            "wrong_preset": "Vi ne selektis la Residencial vojo tipo. ** Klaku tie ĉi por elekti denove **"
-        },
-        "startediting": {
-            "title": "Komenco Redaktado",
-            "save": "Ne forgesu regule savu viajn ŝanĝojn!",
-            "start": "Starti surĵeto!"
-        }
-    },
-    "presets": {
-        "fields": {
-            "access": {
-                "options": {
-                    "designated": {
-                        "description": "Aliro rajtis laŭ signoj aŭ specifaj lokaj leĝoj",
-                        "title": "Nomita"
-                    },
-                    "destination": {
-                        "description": " Aliro rajtis nur al atingi cellokon ",
-                        "title": "Celloko"
-                    },
-                    "dismount": {
-                        "description": "Aliro rajtis sed rajdanto dev elseliĝ",
-                        "title": "Elseliĝ"
-                    },
-                    "no": {
-                        "description": "Aliro ne rajtita al la publiko",
-                        "title": "Malpermesita"
-                    },
-                    "permissive": {
-                        "description": "Aliro rajtis ĝis tiam, kiam la posedanto revok la permeso"
-                    },
-                    "yes": {
-                        "title": "Permesita"
-                    }
+        "operations": {
+            "add": {
+                "annotation": {
+                    "point": "Aldonita punkto.",
+                    "vertex": "Aldonita nodon al vojo.",
+                    "relation": "Aldonita rilato."
+                }
+            },
+            "start": {
+                "annotation": {
+                    "line": "Komenciĝis linion.",
+                    "area": "Komenciĝis areon."
+                }
+            },
+            "continue": {
+                "key": "A",
+                "title": "Daŭrigu",
+                "description": "Daŭrigu tiun linion.",
+                "not_eligible": "Neniu linio povas esti daŭrigita tien.",
+                "multiple": "Pluraj linioj povas esti daŭrigita tien. Elekti linion, premu la klavo Shift kaj klaku sur ĝi por elekti ĝin.",
+                "annotation": {
+                    "line": "Daŭre linion.",
+                    "area": "Daŭre areo."
+                }
+            },
+            "cancel_draw": {
+                "annotation": "Nuligita desegno."
+            },
+            "change_role": {
+                "annotation": "Ŝanĝis la rolo de rilato membron."
+            },
+            "change_tags": {
+                "annotation": "Ŝanĝita etikedojn."
+            },
+            "circularize": {
+                "title": "Circularize",
+                "description": {
+                    "line": "Faru ĉi linio cirkuli.",
+                    "area": "Faru ĉi areon cirkuli."
                 },
-                "types": {
-                    "bicycle": "Bicikloj",
-                    "foot": "Piedo",
-                    "horse": "Ĉevaloj",
-                    "motor_vehicle": "Aŭtomobiloj"
+                "key": "O",
+                "annotation": {
+                    "line": "Farita cirkulero de linio.",
+                    "area": "Farita cirkulero de areo."
                 }
             },
-            "access_simple": {
-                "placeholder": "jes"
+            "orthogonalize": {
+                "title": "Kvadrata",
+                "description": {
+                    "line": "Kvadrata la anguloj de ĉi tiu linio.",
+                    "area": "Kvadrata la anguloj de ĉi tiu areo."
+                },
+                "key": "S",
+                "annotation": {
+                    "line": "Kvadratigis angulojn de linio.",
+                    "area": "Kvadratigis angulojn de areo."
+                },
+                "not_squarish": "Ĉi tiu ne povas esti kvadratigita ĉar ĝi ne estas kvadratema."
             },
-            "access_toilets": {
-                "label": "Aliro"
+            "straighten": {
+                "title": "Rektigi",
+                "description": "Rektigi ĉi tiun linion.",
+                "key": "S",
+                "annotation": "Rektigis linion.",
+                "too_bendy": "Ĉi tiu linio ne povas esti rektigita ĉar ĝi multe kurbiĝas.",
+                "connected_to_hidden": "Ĉi tiu linio ne povas esti rektigita ĉar ĝi estis konektita al kaŝita aĵo."
             },
-            "address": {
-                "label": "Adreso",
-                "placeholders": {
-                    "city": "Urbo",
-                    "conscriptionnumber": "123",
-                    "country": "Lando",
-                    "district": "Distrikto",
-                    "housenumber": "123",
-                    "province": "Provinco",
-                    "street": "Strato"
+            "delete": {
+                "title": "Forigi",
+                "description": "Forigi objekton permanente.",
+                "annotation": {
+                    "point": "Forigis punkton.",
+                    "vertex": "Forigis nodon el vojo.",
+                    "line": "Forigita linion.",
+                    "area": "Forigis areon.",
+                    "relation": "Forigis rilaton.",
+                    "multiple": "Forigis {n} objektojn."
+                },
+                "incomplete_relation": "Ĉi tiu aĵo ne povas esti forigita ĉar ĝi ne estas jam tute elŝutita."
+            },
+            "connect": {
+                "annotation": {
+                    "point": "Konektigis vojon al punkto.",
+                    "vertex": "Konektigis vojon al alia vojo.",
+                    "line": "Konektigis vojon al linio.",
+                    "area": "Konektigis vojon al areo."
                 }
             },
-            "aerialway/capacity": {
-                "placeholder": "500, 2500, 5000..."
+            "disconnect": {
+                "title": "Malkonekti",
+                "annotation": "Malkonektitaj linioj/areoj."
             },
-            "aerialway/duration": {
-                "placeholder": "1, 2, 3..."
-            },
-            "aerialway/occupancy": {
-                "placeholder": "2, 4, 8..."
-            },
-            "artist": {
-                "label": "Artisto"
-            },
-            "country": {
-                "label": "Lando"
-            },
-            "electrified": {
-                "options": {
-                    "no": "Ne"
+            "move": {
+                "title": "Movi",
+                "description": "Movi ĉi tio al malsama loko.",
+                "key": "M",
+                "annotation": {
+                    "point": "Movis punkton.",
+                    "vertex": "Movis nodon en vojo.",
+                    "line": "Movis linion.",
+                    "area": "Movis areon.",
+                    "multiple": "Movis multajn objektojn."
                 }
             },
-            "fax": {
-                "placeholder": "+31 42 123 4567"
-            },
-            "gender": {
-                "placeholder": "Nekonata"
-            },
-            "golf_hole": {
-                "label": "Referenco"
-            },
-            "handicap": {
-                "placeholder": "1-18"
-            },
-            "hoops": {
-                "placeholder": "1, 2, 4..."
-            },
-            "iata": {
-                "label": "IATA"
-            },
-            "icao": {
-                "label": "ICAO"
-            },
-            "internet_access": {
-                "options": {
-                    "no": "Ne",
-                    "wlan": "Wi-Fi",
-                    "yes": "Jes"
+            "rotate": {
+                "title": "Rotacio",
+                "description": "Rotacii tiu objekto ĉirkaŭ ĝia centra punkto.",
+                "annotation": {
+                    "line": "Turnita linion."
                 }
             },
-            "lanes": {
-                "placeholder": "1, 2, 3..."
+            "reverse": {
+                "title": "dorsflanko",
+                "key": "V"
             },
-            "levels": {
-                "placeholder": "2, 4, 6..."
+            "split": {
+                "key": "X"
+            }
+        },
+        "translate": {
+            "translate": "Traduki",
+            "localized_translation_label": "Multlingva nomon"
+        },
+        "commit": {
+            "changes": "{count} ŝanĝoj"
+        },
+        "inspector": {
+            "reference": "Vidi en la vikio de OpenStreetMap",
+            "check": {
+                "yes": "Jes",
+                "no": "Ne"
             },
-            "maxspeed": {
-                "placeholder": "40, 50, 60..."
+            "way": "Vojo"
+        },
+        "feature": {
+            "points": {
+                "description": "Punktoj",
+                "tooltip": "Interesigantaj punktoj"
             },
-            "mtb/scale": {
-                "placeholder": "0, 1, 2, 3..."
+            "others": {
+                "description": "Aliaj"
+            }
+        },
+        "help": {
+            "title": "Helpo"
+        },
+        "intro": {
+            "navigation": {
+                "title": "Navigado"
             },
-            "mtb/scale/imba": {
-                "options": {
-                    "1": "Facila (verda rondo)"
-                }
+            "points": {
+                "title": "Punktoj"
             },
-            "name": {
-                "label": "Nomo"
+            "areas": {
+                "title": "Areoj",
+                "choose": "**Rifo Korto el la listo.**"
             },
-            "note": {
-                "label": "Noto"
+            "lines": {
+                "title": "Linioj",
+                "road": "**Selektas Ŝoseon de la listo**",
+                "wrong_preset": "Vi ne selektis la Residencial vojo tipo. ** Klaku tie ĉi por elekti denove **"
             },
-            "oneway": {
-                "options": {
-                    "no": "Ne",
-                    "yes": "Jes"
-                }
-            },
-            "oneway_yes": {
-                "options": {
-                    "no": "Ne",
-                    "yes": "Jes"
-                }
-            },
-            "opening_hours": {
-                "label": "Horoj"
-            },
-            "par": {
-                "placeholder": "3, 4, 5..."
-            },
-            "phone": {
-                "label": "Telefono",
-                "placeholder": "+31 42 1231 4567"
-            },
-            "ref": {
-                "label": "Referenco"
-            },
-            "religion": {
-                "label": "Religio"
-            },
-            "source": {
-                "label": "Fonto"
-            },
-            "structure": {
-                "options": {
-                    "bridge": "Ponto"
-                }
-            },
-            "trail_visibility": {
-                "placeholder": "Bonega, Bona, Malbona..."
-            },
-            "website": {
-                "placeholder": "http://example.com/"
+            "startediting": {
+                "title": "Komenco Redaktado",
+                "save": "Ne forgesu regule savu viajn ŝanĝojn!",
+                "start": "Starti surĵeto!"
             }
         },
         "presets": {
-            "building/house": {
-                "name": "Domo"
+            "fields": {
+                "access": {
+                    "options": {
+                        "designated": {
+                            "description": "Aliro rajtis laŭ signoj aŭ specifaj lokaj leĝoj",
+                            "title": "Nomita"
+                        },
+                        "destination": {
+                            "description": " Aliro rajtis nur al atingi cellokon ",
+                            "title": "Celloko"
+                        },
+                        "dismount": {
+                            "description": "Aliro rajtis sed rajdanto dev elseliĝ",
+                            "title": "Elseliĝ"
+                        },
+                        "no": {
+                            "description": "Aliro ne rajtita al la publiko",
+                            "title": "Malpermesita"
+                        },
+                        "permissive": {
+                            "description": "Aliro rajtis ĝis tiam, kiam la posedanto revok la permeso"
+                        },
+                        "yes": {
+                            "title": "Permesita"
+                        }
+                    },
+                    "types": {
+                        "bicycle": "Bicikloj",
+                        "foot": "Piedo",
+                        "horse": "Ĉevaloj",
+                        "motor_vehicle": "Aŭtomobiloj"
+                    }
+                },
+                "access_toilets": {
+                    "label": "Aliro"
+                },
+                "address": {
+                    "label": "Adreso",
+                    "placeholders": {
+                        "city": "Urbo",
+                        "conscriptionnumber": "123",
+                        "country": "Lando",
+                        "district": "Distrikto",
+                        "housenumber": "123",
+                        "province": "Provinco",
+                        "street": "Strato"
+                    }
+                },
+                "aerialway/capacity": {
+                    "placeholder": "500, 2500, 5000..."
+                },
+                "aerialway/duration": {
+                    "placeholder": "1, 2, 3..."
+                },
+                "aerialway/occupancy": {
+                    "placeholder": "2, 4, 8..."
+                },
+                "artist": {
+                    "label": "Artisto"
+                },
+                "country": {
+                    "label": "Lando"
+                },
+                "electrified": {
+                    "options": {
+                        "no": "Ne"
+                    }
+                },
+                "fax": {
+                    "placeholder": "+31 42 123 4567"
+                },
+                "gender": {
+                    "placeholder": "Nekonata"
+                },
+                "golf_hole": {
+                    "label": "Referenco"
+                },
+                "handicap": {
+                    "placeholder": "1-18"
+                },
+                "hoops": {
+                    "placeholder": "1, 2, 4..."
+                },
+                "iata": {
+                    "label": "IATA"
+                },
+                "icao": {
+                    "label": "ICAO"
+                },
+                "internet_access": {
+                    "options": {
+                        "no": "Ne",
+                        "wlan": "Wi-Fi",
+                        "yes": "Jes"
+                    }
+                },
+                "lanes": {
+                    "placeholder": "1, 2, 3..."
+                },
+                "levels": {
+                    "placeholder": "2, 4, 6..."
+                },
+                "maxspeed": {
+                    "placeholder": "40, 50, 60..."
+                },
+                "mtb/scale": {
+                    "placeholder": "0, 1, 2, 3..."
+                },
+                "mtb/scale/imba": {
+                    "options": {
+                        "1": "Facila (verda rondo)"
+                    }
+                },
+                "name": {
+                    "label": "Nomo"
+                },
+                "note": {
+                    "label": "Noto"
+                },
+                "oneway": {
+                    "options": {
+                        "no": "Ne",
+                        "yes": "Jes"
+                    }
+                },
+                "oneway_yes": {
+                    "options": {
+                        "no": "Ne",
+                        "yes": "Jes"
+                    }
+                },
+                "opening_hours": {
+                    "label": "Horoj"
+                },
+                "par": {
+                    "placeholder": "3, 4, 5..."
+                },
+                "phone": {
+                    "label": "Telefono",
+                    "placeholder": "+31 42 1231 4567"
+                },
+                "ref": {
+                    "label": "Referenco"
+                },
+                "religion": {
+                    "label": "Religio"
+                },
+                "source": {
+                    "label": "Fonto"
+                },
+                "structure": {
+                    "options": {
+                        "bridge": "Ponto"
+                    }
+                },
+                "trail_visibility": {
+                    "placeholder": "Bonega, Bona, Malbona..."
+                },
+                "website": {
+                    "placeholder": "http://example.com/"
+                }
+            },
+            "presets": {
+                "building/house": {
+                    "name": "Domo"
+                }
             }
         }
     }

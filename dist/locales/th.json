@@ -1,73 +1,75 @@
 {
-    "modes": {
-        "add_area": {
-            "title": "พื้นที่",
-            "description": "เพิ่ม สวนสาธารณะ, อาคาร, แม่น้ำหรือพื้นที่อื่นๆ ลงบนแผนที่"
-        },
-        "add_line": {
-            "title": "เส้น",
-            "description": "เพิ่มทางด่วน, ถนน, ทางเท้า, อุโมงค์หรือเส้นอื่นๆ ลงบนแผนที่",
-            "tail": "คลิ๊กบนแผนที่เพื่อเริ่มต้นวาดถนนหรือเส้นทาง"
-        },
-        "add_point": {
-            "title": "จุด",
-            "tail": "คลิ๊กบนแผนที่เพื่อเพิ่มจุด"
-        },
-        "browse": {
-            "title": "ดู",
-            "description": "เลื่อนและปรับขนาดแผนที่"
-        }
-    },
-    "operations": {
-        "orthogonalize": {
-            "title": "สี่เหลี่ยมจตุรัส"
-        },
-        "delete": {
-            "title": "ลบ",
-            "description": "ลบวัตถุอย่างถาวร",
-            "annotation": {
-                "point": "ลบจุด",
-                "line": "ลบเส้น",
-                "area": "ลบพื้นที่",
-                "relation": "ลบความสัมพันธ์",
-                "multiple": "ลบ {n} วัตถุ"
+    "th": {
+        "modes": {
+            "add_area": {
+                "title": "พื้นที่",
+                "description": "เพิ่ม สวนสาธารณะ, อาคาร, แม่น้ำหรือพื้นที่อื่นๆ ลงบนแผนที่"
+            },
+            "add_line": {
+                "title": "เส้น",
+                "description": "เพิ่มทางด่วน, ถนน, ทางเท้า, อุโมงค์หรือเส้นอื่นๆ ลงบนแผนที่",
+                "tail": "คลิ๊กบนแผนที่เพื่อเริ่มต้นวาดถนนหรือเส้นทาง"
+            },
+            "add_point": {
+                "title": "จุด",
+                "tail": "คลิ๊กบนแผนที่เพื่อเพิ่มจุด"
+            },
+            "browse": {
+                "title": "ดู",
+                "description": "เลื่อนและปรับขนาดแผนที่"
             }
         },
-        "add_member": {
-            "annotation": "เพิ่มสมาชิกลงในความสัมพันธ์"
+        "operations": {
+            "orthogonalize": {
+                "title": "สี่เหลี่ยมจตุรัส"
+            },
+            "delete": {
+                "title": "ลบ",
+                "description": "ลบวัตถุอย่างถาวร",
+                "annotation": {
+                    "point": "ลบจุด",
+                    "line": "ลบเส้น",
+                    "area": "ลบพื้นที่",
+                    "relation": "ลบความสัมพันธ์",
+                    "multiple": "ลบ {n} วัตถุ"
+                }
+            },
+            "add_member": {
+                "annotation": "เพิ่มสมาชิกลงในความสัมพันธ์"
+            },
+            "delete_member": {
+                "annotation": "นำสมาชิกออกจากความสัมพันธ์"
+            },
+            "disconnect": {
+                "title": "ตัดการเชื่อมต่อ"
+            },
+            "merge": {
+                "title": "เชื่อม"
+            },
+            "move": {
+                "title": "ขยับ"
+            }
         },
-        "delete_member": {
-            "annotation": "นำสมาชิกออกจากความสัมพันธ์"
+        "infobox": {
+            "area": "พื้นที่"
         },
-        "disconnect": {
-            "title": "ตัดการเชื่อมต่อ"
+        "intro": {
+            "startediting": {
+                "title": "เริ่มแก้ไข",
+                "start": "เริ่มการทำแผนที่"
+            }
         },
-        "merge": {
-            "title": "เชื่อม"
-        },
-        "move": {
-            "title": "ขยับ"
-        }
-    },
-    "infobox": {
-        "area": "พื้นที่"
-    },
-    "intro": {
-        "startediting": {
-            "title": "เริ่มแก้ไข",
-            "start": "เริ่มการทำแผนที่"
-        }
-    },
-    "presets": {
         "presets": {
-            "area": {
-                "name": "พื้นที่"
-            },
-            "line": {
-                "name": "เส้น"
-            },
-            "point": {
-                "name": "จุด"
+            "presets": {
+                "area": {
+                    "name": "พื้นที่"
+                },
+                "line": {
+                    "name": "เส้น"
+                },
+                "point": {
+                    "name": "จุด"
+                }
             }
         }
     }

@@ -1,18 +1,20 @@
 {
-    "modes": {
-        "browse": {
-            "title": "Circa"
-        }
-    },
-    "operations": {
-        "delete": {
-            "title": "Boga"
+    "sc": {
+        "modes": {
+            "browse": {
+                "title": "Circa"
+            }
         },
-        "move": {
-            "title": "Movi"
-        },
-        "split": {
-            "title": "Sperra"
+        "operations": {
+            "delete": {
+                "title": "Boga"
+            },
+            "move": {
+                "title": "Movi"
+            },
+            "split": {
+                "title": "Sperra"
+            }
         }
     }
 }
