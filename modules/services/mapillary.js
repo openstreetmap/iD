@@ -18,7 +18,6 @@ var apibase = 'https://a.mapillary.com/v2/',
     maxPages = 10,
     tileZoom = 14,
     dispatch = d3.dispatch('loadedImages', 'loadedSigns'),
-    detected = utilDetect(),
     mapillaryCache,
     mapillaryClicks,
     mapillaryImage,
@@ -299,6 +298,7 @@ export default {
 
 
     signsSupported: function() {
+        var detected = utilDetect();
         return (!(detected.ie || detected.browser.toLowerCase() === 'safari'));
     },
 
