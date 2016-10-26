@@ -165,7 +165,7 @@ function suggestionsToPresets(presets) {
 }
 
 function stripLeadingUnderscores(str) {
-    return str.split('/').map(function(s) {return s.replace(/^_/,''); }).join('/');
+    return str.split('/').map(function(s) { return s.replace(/^_/,''); }).join('/');
 }
 
 function generatePresets() {
@@ -223,9 +223,13 @@ function generateTranslations(fields, presets) {
         var p = presets[id];
         if (!_.isEmpty(p.tags))
             preset['name#'] = _.toPairs(p.tags).map(function(pair) { return pair[0] + '=' + pair[1]; }).join(', ');
-        if (p.terms && p.terms.length)
-            preset['terms#'] = 'terms: ' + p.terms.join();
-        preset.terms = '<translate with synonyms or related terms for \'' + preset.name + '\', separated by commas>';
+        if (p.searchable !== false) {
+            if (p.terms && p.terms.length)
+                preset['terms#'] = 'terms: ' + p.terms.join();
+            preset.terms = '<translate with synonyms or related terms for \'' + preset.name + '\', separated by commas>';
+        } else {
+            delete preset.terms;
+        }
     });
 
     return translations;

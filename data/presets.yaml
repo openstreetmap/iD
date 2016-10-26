@@ -1176,8 +1176,6 @@ en:
       aerialway:
         # aerialway=*
         name: Aerialway
-        # 'terms: ski lift,funifor,funitel'
-        terms: '<translate with synonyms or related terms for ''Aerialway'', separated by commas>'
       aerialway/cable_car:
         # aerialway=cable_car
         name: Cable Car
@@ -1220,7 +1218,6 @@ en:
       aeroway:
         # aeroway=*
         name: Aeroway
-        terms: '<translate with synonyms or related terms for ''Aeroway'', separated by commas>'
       aeroway/aerodrome:
         # aeroway=aerodrome
         name: Airport
@@ -1261,7 +1258,6 @@ en:
       amenity:
         # amenity=*
         name: Amenity
-        terms: '<translate with synonyms or related terms for ''Amenity'', separated by commas>'
       amenity/arts_centre:
         # amenity=arts_centre
         name: Arts Center
@@ -1575,7 +1571,6 @@ en:
       amenity/register_office:
         # amenity=register_office
         name: Register Office
-        terms: '<translate with synonyms or related terms for ''Register Office'', separated by commas>'
       amenity/restaurant:
         # amenity=restaurant
         name: Restaurant
@@ -1622,7 +1617,6 @@ en:
       amenity/swimming_pool:
         # amenity=swimming_pool
         name: Swimming Pool
-        terms: '<translate with synonyms or related terms for ''Swimming Pool'', separated by commas>'
       amenity/taxi:
         # amenity=taxi
         name: Taxi Stand
@@ -1760,7 +1754,6 @@ en:
       barrier/entrance:
         # barrier=entrance
         name: Entrance
-        terms: '<translate with synonyms or related terms for ''Entrance'', separated by commas>'
       barrier/fence:
         # barrier=fence
         name: Fence
@@ -1816,7 +1809,6 @@ en:
       building/bunker:
         # building=bunker
         name: Bunker
-        terms: '<translate with synonyms or related terms for ''Bunker'', separated by commas>'
       building/cabin:
         # building=cabin
         name: Cabin
@@ -1858,7 +1850,6 @@ en:
       building/entrance:
         # building=entrance
         name: Entrance/Exit
-        terms: '<translate with synonyms or related terms for ''Entrance/Exit'', separated by commas>'
       building/garage:
         # building=garage
         name: Garage
@@ -1943,7 +1934,6 @@ en:
       building/train_station:
         # building=train_station
         name: Train Station
-        terms: '<translate with synonyms or related terms for ''Train Station'', separated by commas>'
       building/university:
         # building=university
         name: University Building
@@ -2041,7 +2031,6 @@ en:
       craft/jeweler:
         # craft=jeweler
         name: Jeweler
-        terms: '<translate with synonyms or related terms for ''Jeweler'', separated by commas>'
       craft/key_cutter:
         # craft=key_cutter
         name: Key Cutter
@@ -2049,7 +2038,6 @@ en:
       craft/locksmith:
         # craft=locksmith
         name: Locksmith
-        terms: '<translate with synonyms or related terms for ''Locksmith'', separated by commas>'
       craft/metal_construction:
         # craft=metal_construction
         name: Metal Construction
@@ -2057,7 +2045,6 @@ en:
       craft/optician:
         # craft=optician
         name: Optician
-        terms: '<translate with synonyms or related terms for ''Optician'', separated by commas>'
       craft/painter:
         # craft=painter
         name: Painter
@@ -2131,8 +2118,6 @@ en:
       craft/tailor:
         # craft=tailor
         name: Tailor
-        # 'terms: clothes,suit'
-        terms: '<translate with synonyms or related terms for ''Tailor'', separated by commas>'
       craft/tiler:
         # craft=tiler
         name: Tiler
@@ -2175,11 +2160,9 @@ en:
       emergency/designated:
         # emergency=designated
         name: Emergency Access Designated
-        terms: '<translate with synonyms or related terms for ''Emergency Access Designated'', separated by commas>'
       emergency/destination:
         # emergency=destination
         name: Emergency Access Destination
-        terms: '<translate with synonyms or related terms for ''Emergency Access Destination'', separated by commas>'
       emergency/fire_hydrant:
         # emergency=fire_hydrant
         name: Fire Hydrant
@@ -2187,11 +2170,9 @@ en:
       emergency/no:
         # emergency=no
         name: Emergency Access No
-        terms: '<translate with synonyms or related terms for ''Emergency Access No'', separated by commas>'
       emergency/official:
         # emergency=official
         name: Emergency Access Official
-        terms: '<translate with synonyms or related terms for ''Emergency Access Official'', separated by commas>'
       emergency/phone:
         # emergency=phone
         name: Emergency Phone
@@ -2199,11 +2180,9 @@ en:
       emergency/private:
         # emergency=private
         name: Emergency Access Private
-        terms: '<translate with synonyms or related terms for ''Emergency Access Private'', separated by commas>'
       emergency/yes:
         # emergency=yes
         name: Emergency Access Yes
-        terms: '<translate with synonyms or related terms for ''Emergency Access Yes'', separated by commas>'
       entrance:
         # entrance=*
         name: Entrance/Exit
@@ -2275,7 +2254,6 @@ en:
       highway:
         # highway=*
         name: Highway
-        terms: '<translate with synonyms or related terms for ''Highway'', separated by commas>'
       highway/bridleway:
         # highway=bridleway
         name: Bridle Path
@@ -2533,7 +2511,6 @@ en:
       landuse/farm:
         # landuse=farm
         name: Farmland
-        terms: '<translate with synonyms or related terms for ''Farmland'', separated by commas>'
       landuse/farmland:
         # landuse=farmland
         name: Farmland
@@ -2805,7 +2782,6 @@ en:
       man_made/embankment:
         # man_made=embankment
         name: Embankment
-        terms: '<translate with synonyms or related terms for ''Embankment'', separated by commas>'
       man_made/flagpole:
         # man_made=flagpole
         name: Flagpole
@@ -3127,7 +3103,6 @@ en:
       office/travel_agent:
         # office=travel_agent
         name: Travel Agency
-        terms: '<translate with synonyms or related terms for ''Travel Agency'', separated by commas>'
       piste:
         # 'piste:type=*'
         name: Piste/Ski Trail
@@ -3136,7 +3111,6 @@ en:
       place:
         # place=*
         name: Place
-        terms: '<translate with synonyms or related terms for ''Place'', separated by commas>'
       place/city:
         # place=city
         name: City
@@ -3186,7 +3160,6 @@ en:
       power:
         # power=*
         name: Power
-        terms: '<translate with synonyms or related terms for ''Power'', separated by commas>'
       power/generator:
         # power=generator
         name: Power Generator
@@ -3206,7 +3179,6 @@ en:
       power/sub_station:
         # power=sub_station
         name: Substation
-        terms: '<translate with synonyms or related terms for ''Substation'', separated by commas>'
       power/substation:
         # power=substation
         name: Substation
@@ -3230,7 +3202,6 @@ en:
       railway:
         # railway=*
         name: Railway
-        terms: '<translate with synonyms or related terms for ''Railway'', separated by commas>'
       railway/abandoned:
         # railway=abandoned
         name: Abandoned Railway
@@ -3300,7 +3271,6 @@ en:
       roundabout:
         # junction=roundabout
         name: Roundabout
-        terms: '<translate with synonyms or related terms for ''Roundabout'', separated by commas>'
       route/ferry:
         # route=ferry
         name: Ferry Route
@@ -3524,7 +3494,6 @@ en:
       shop/fishmonger:
         # shop=fishmonger
         name: Fishmonger
-        terms: '<translate with synonyms or related terms for ''Fishmonger'', separated by commas>'
       shop/florist:
         # shop=florist
         name: Florist
@@ -3791,7 +3760,6 @@ en:
       shop/vacant:
         # shop=vacant
         name: Vacant Shop
-        terms: '<translate with synonyms or related terms for ''Vacant Shop'', separated by commas>'
       shop/vacuum_cleaner:
         # shop=vacuum_cleaner
         name: Vacuum Cleaner Store
@@ -3936,7 +3904,6 @@ en:
       type/multipolygon:
         # type=multipolygon
         name: Multipolygon
-        terms: '<translate with synonyms or related terms for ''Multipolygon'', separated by commas>'
       type/restriction:
         # type=restriction
         name: Restriction
@@ -4035,7 +4002,6 @@ en:
       waterway:
         # waterway=*
         name: Waterway
-        terms: '<translate with synonyms or related terms for ''Waterway'', separated by commas>'
       waterway/boatyard:
         # waterway=boatyard
         name: Boatyard
