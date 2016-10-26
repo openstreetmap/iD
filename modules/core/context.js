@@ -322,7 +322,7 @@ export function coreContext(root) {
         if (locale && locale !== 'en' && dataLocales.indexOf(locale) !== -1) {
             localePath = localePath || context.asset('locales/' + locale + '.json');
             d3.json(localePath, function(err, result) {
-                addTranslation(locale, result);
+                addTranslation(locale, result[locale]);
                 setLocale(locale);
                 cb();
             });

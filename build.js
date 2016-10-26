@@ -38,16 +38,16 @@ validateCategoryPresets(categories, presets);
 validatePresetFields(presets, fields);
 
 // Save individual data files
-fs.writeFileSync('data/presets/categories.json', JSON.stringify(categories, null, 4));
-fs.writeFileSync('data/presets/fields.json', JSON.stringify(fields, null, 4));
-fs.writeFileSync('data/presets/presets.json', JSON.stringify(presets, null, 4));
+fs.writeFileSync('data/presets/categories.json', JSON.stringify({ categories: categories }, null, 4));
+fs.writeFileSync('data/presets/fields.json', JSON.stringify({ fields: fields }, null, 4));
+fs.writeFileSync('data/presets/presets.json', JSON.stringify({ presets: presets }, null, 4));
 fs.writeFileSync('data/presets.yaml', translationsToYAML(translations));
 fs.writeFileSync('data/taginfo.json', JSON.stringify(taginfo, null, 4));
 
 // Push changes from data/core.yaml into en.json
 var core = YAML.load(fs.readFileSync('data/core.yaml', 'utf8'));
 var en = _.merge(core, { en: { presets: tstrings }});
-fs.writeFileSync('dist/locales/en.json', JSON.stringify(en.en, null, 4));
+fs.writeFileSync('dist/locales/en.json', JSON.stringify(en, null, 4));
 
 process.exit();
 

@@ -4,7 +4,7 @@ import { coreGraph } from '../../core/graph';
 import { modeBrowse } from '../../modes/index';
 import { osmEntity } from '../../osm/entity';
 import { d3curtain } from '../../util/curtain';
-import { default as introGraphRaw } from '../../../data/intro_graph.json';
+import { dataIntroGraph } from '../../../data/intro_graph.json';
 
 import { uiIntroNavigation } from './navigation';
 import { uiIntroPoint } from './point';
@@ -76,8 +76,8 @@ export function uiIntro(context) {
 
     var introGraph = {};
 
-    for (var key in introGraphRaw) {
-        introGraph[key] = osmEntity(introGraphRaw[key]);
+    for (var key in dataIntroGraph) {
+        introGraph[key] = osmEntity(dataIntroGraph[key]);
         var name = localizedName(key);
         if (name) {
             introGraph[key].tags.name = name;
