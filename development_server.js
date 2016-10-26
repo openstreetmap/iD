@@ -15,7 +15,7 @@ var building = false;
 if (process.argv[2] === 'develop') {
     build();
 
-    gaze('modules/**/**.js', function(err, watcher) {
+    gaze(['modules/**/*.js', 'data/**/*.{js,json}'], function(err, watcher) {
         watcher.on('all', function() {
             build();
         });
