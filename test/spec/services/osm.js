@@ -1,69 +1,70 @@
-describe('iD.Connection', function () {
-    var c;
+describe('iD.serviceOsm', function () {
+    var connection;
 
     beforeEach(function () {
-        c = new iD.Connection();
+        connection = iD.services.osm;
+        connection.switch({ urlroot: 'http://www.openstreetmap.org'});
+        connection.reset();
     });
 
     it('is instantiated', function () {
-        expect(c).to.be.ok;
+        expect(connection).to.be.ok;
     });
 
     it('allows insecure connections', function () {
-        expect(c.changesetURL(2)).to.match(/^http:/);
-
-        c = new iD.Connection(false);
-        expect(c.changesetURL(2)).to.match(/^http:/);
+        expect(connection.changesetURL(2)).to.match(/^http:/);
     });
 
     it('allows secure connections', function () {
-        c = new iD.Connection(true);
-        expect(c.changesetURL(2)).to.match(/^https:/);
+        connection.switch({ urlroot: 'https://www.openstreetmap.org'});
+        expect(connection.changesetURL(2)).to.match(/^https:/);
     });
 
     describe('#changesetUrl', function() {
         it('provides a changeset url', function() {
-            expect(c.changesetURL(2)).to.eql('http://www.openstreetmap.org/changeset/2');
+            expect(connection.changesetURL(2)).to.eql('http://www.openstreetmap.org/changeset/2');
         });
     });
 
     describe('#userURL', function() {
         it('provides a user url', function() {
-            expect(c.userURL('bob')).to.eql('http://www.openstreetmap.org/user/bob');
+            expect(connection.userURL('bob')).to.eql('http://www.openstreetmap.org/user/bob');
         });
     });
 
-    describe('#flush', function() {
-        it('flushes the connection', function() {
-            expect(c.flush()).to.eql(c);
+    describe('#reset', function() {
+        it('resets the connection', function() {
+            expect(connection.reset()).to.eql(connection);
         });
     });
 
     describe('#switch', function() {
         it('changes the URL', function() {
-            c.switch({
-                url: 'http://example.com'
-            });
-            expect(c.changesetURL(1)).to.equal('http://example.com/changeset/1');
+            connection.switch({ urlroot: 'http://example.com' });
+            expect(connection.changesetURL(1)).to.equal('http://example.com/changeset/1');
         });
 
         it('emits an auth event', function(done) {
-            c.on('auth', function() {
+            connection.on('auth', function() {
+                connection.on('auth', null);
                 done();
             });
-            c.switch({
-                url: 'http://example.com'
-            });
+            connection.switch({ urlroot: 'http://example.com' });
         });
     });
 
-    describe('#loadFromURL', function () {
+    describe('#loadFromAPI', function () {
+        beforeEach(function() {
+            // force loading locally via d3.xml
+            connection.switch({ urlroot: '' }).logout();
+        });
+
         it('loads test data', function (done) {
-            c.loadFromURL('data/node.xml', done);
+            connection.loadFromAPI('data/node.xml', done);
         });
 
         it('returns an object', function (done) {
-            c.loadFromURL('data/node.xml', function (err, graph) {
+            connection.loadFromAPI('data/node.xml', function (err, graph) {
                 expect(err).to.not.be.ok;
                 expect(typeof graph).to.eql('object');
                 done();
@@ -71,14 +72,14 @@ describe('iD.Connection', function () {
         });
 
         it('parses a node', function (done) {
-            c.loadFromURL('data/node.xml', function (err, entities) {
+            connection.loadFromAPI('data/node.xml', function (err, entities) {
                 expect(entities[0]).to.be.instanceOf(iD.Entity);
                 done();
             });
         });
 
         it('parses a way', function (done) {
-            c.loadFromURL('data/way.xml', function (err, entities) {
+            connection.loadFromAPI('data/way.xml', function (err, entities) {
                 expect(entities[0]).to.be.instanceOf(iD.Entity);
                 done();
             });
@@ -105,7 +106,7 @@ describe('iD.Connection', function () {
 
         it('loads a node', function(done) {
             var id = 'n1';
-            c.loadEntity(id, function(err, result) {
+            connection.loadEntity(id, function(err, result) {
                 var entity = _.find(result.data, function(e) { return e.id === id; });
                 expect(entity).to.be.an.instanceOf(iD.Node);
                 done();
@@ -118,7 +119,7 @@ describe('iD.Connection', function () {
 
         it('loads a way', function(done) {
             var id = 'w1';
-            c.loadEntity(id, function(err, result) {
+            connection.loadEntity(id, function(err, result) {
                 var entity = _.find(result.data, function(e) { return e.id === id; });
                 expect(entity).to.be.an.instanceOf(iD.Way);
                 done();
@@ -149,7 +150,7 @@ describe('iD.Connection', function () {
 
         it('loads a node', function(done) {
             var id = 'n1';
-            c.loadEntityVersion(id, 1, function(err, result) {
+            connection.loadEntityVersion(id, 1, function(err, result) {
                 var entity = _.find(result.data, function(e) { return e.id === id; });
                 expect(entity).to.be.an.instanceOf(iD.Node);
                 done();
@@ -162,7 +163,7 @@ describe('iD.Connection', function () {
 
         it('loads a way', function(done) {
             var id = 'w1';
-            c.loadEntityVersion(id, 1, function(err, result) {
+            connection.loadEntityVersion(id, 1, function(err, result) {
                 var entity = _.find(result.data, function(e) { return e.id === id; });
                 expect(entity).to.be.an.instanceOf(iD.Way);
                 done();
@@ -192,7 +193,7 @@ describe('iD.Connection', function () {
 
     describe('#osmChangeJXON', function() {
         it('converts change data to JXON', function() {
-            var jxon = c.osmChangeJXON('1234', {created: [], modified: [], deleted: []});
+            var jxon = connection.osmChangeJXON('1234', {created: [], modified: [], deleted: []});
 
             expect(jxon).to.eql({
                 osmChange: {
@@ -210,7 +211,7 @@ describe('iD.Connection', function () {
                 w = iD.Way(),
                 r = iD.Relation(),
                 changes = {created: [r, w, n], modified: [], deleted: []},
-                jxon = c.osmChangeJXON('1234', changes);
+                jxon = connection.osmChangeJXON('1234', changes);
 
             expect(d3.entries(jxon.osmChange.create)).to.eql([
                 {key: 'node', value: [n.asJXON('1234').node]},
@@ -224,7 +225,7 @@ describe('iD.Connection', function () {
                 w = iD.Way(),
                 r = iD.Relation(),
                 changes = {created: [], modified: [r, w, n], deleted: []},
-                jxon = c.osmChangeJXON('1234', changes);
+                jxon = connection.osmChangeJXON('1234', changes);
 
             expect(jxon.osmChange.modify).to.eql({
                 node: [n.asJXON('1234').node],
@@ -238,7 +239,7 @@ describe('iD.Connection', function () {
                 w = iD.Way(),
                 r = iD.Relation(),
                 changes = {created: [], modified: [], deleted: [n, w, r]},
-                jxon = c.osmChangeJXON('1234', changes);
+                jxon = connection.osmChangeJXON('1234', changes);
 
             expect(d3.entries(jxon.osmChange.delete)).to.eql([
                 {key: 'relation', value: [r.asJXON('1234').relation]},
@@ -251,6 +252,7 @@ describe('iD.Connection', function () {
 
     describe('#userChangesets', function() {
         var server,
+            userDetailsFn,
             changesetsXML = '<?xml version="1.0" encoding="UTF-8"?><osm>' +
                 '<changeset id="36777543" user="Steve" uid="1" created_at="2016-01-24T15:02:06Z" closed_at="2016-01-24T15:02:07Z" open="false" min_lat="39.3823819" min_lon="-104.8639728" max_lat="39.3834184" max_lon="-104.8618622" comments_count="0">' +
                 '<tag k="comment" v="Caprice Court has been extended"/>' +
@@ -260,18 +262,26 @@ describe('iD.Connection', function () {
 
         beforeEach(function() {
             server = sinon.fakeServer.create();
+            userDetailsFn = connection.userDetails;
+            connection.userDetails = function (callback) {
+                callback(undefined, { id: 1, displayName: 'Steve' });
+            };
         });
 
         afterEach(function() {
             server.restore();
+            connection.userDetails = userDetailsFn;
         });
 
         it('loads user changesets', function(done) {
-            c.userDetails = function (callback) {
-                callback(undefined, { id: 1 });
-            };
-
-            c.userChangesets(function(err, changesets) {
+            // preauthenticate, otherwise callback will be called with "not authenticated" err
+            connection.switch({
+                oauth_consumer_key: '5A043yRSEugj4DJ5TljuapfnrflWDte8jTOcWLlT',
+                oauth_secret: 'aB3jKq1TRsCOUrfOIZ6oQMEDmv2ptV76PA54NGLL',
+                oauth_token: 'foo',
+                oauth_token_secret: 'foo'
+            });
+            connection.userChangesets(function(err, changesets) {
                 expect(changesets).to.deep.equal([{
                     tags: {
                         comment: 'Caprice Court has been extended',
@@ -289,7 +299,7 @@ describe('iD.Connection', function () {
 
     describe('#changesetTags', function() {
         it('omits comment when empty', function() {
-            expect(c.changesetTags('2.0.0', '', [])).not.to.have.property('comment');
+            expect(connection.changesetTags('2.0.0', '', [])).not.to.have.property('comment');
         });
     });
 });
