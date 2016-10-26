@@ -77,9 +77,11 @@ export function uiRawMemberEditor(context) {
             var list = wrap.selectAll('.member-list')
                 .data([0]);
 
-            list.enter()
+            list = list.enter()
                 .append('ul')
-                .attr('class', 'member-list');
+                .attr('class', 'member-list')
+                .merge(list);
+
 
             var items = list.selectAll('li')
                 .data(memberships, function(d) {
@@ -116,7 +118,7 @@ export function uiRawMemberEditor(context) {
                     } else {
                         d3.select(this).append('label')
                             .attr('class', 'form-label')
-                            .text(t('inspector.incomplete'));
+                            .text(t('inspector.incomplete', { id: d.id }));
                     }
                 });
 

@@ -23,7 +23,6 @@ export function uiRawMembershipEditor(context) {
         id, showBlank;
 
 
-
     function selectRelation(d) {
         d3.event.preventDefault();
         context.enter(modeSelect(context, [d.relation.id]));
