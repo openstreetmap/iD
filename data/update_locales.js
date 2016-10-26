@@ -30,7 +30,7 @@ asyncMap(resources, getResource, function(err, locales) {
     if (err) return console.log(err);
 
     var locale = _.merge(sourceCore, sourcePresets),
-        data = { locales: [] };
+        codes = [];
 
     locales.forEach(function(l) {
         locale = _.merge(locale, l);
@@ -38,13 +38,13 @@ asyncMap(resources, getResource, function(err, locales) {
 
     for (var i in locale) {
         if (i === 'en' || _.isEmpty(locale[i])) continue;
-        data.locales.push(i);
+        codes.push(i);
         var obj = {};
         obj[i] = locale[i];
         fs.writeFileSync(outdir + i + '.json', JSON.stringify(obj, null, 4));
     }
 
-    fs.writeFileSync('data/locales.json', JSON.stringify(data, null, 4));
+    fs.writeFileSync('data/locales.json', JSON.stringify({ dataLocales: codes }, null, 4));
 });
 
 function getResource(resource, callback) {
