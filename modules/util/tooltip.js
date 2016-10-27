@@ -22,6 +22,7 @@ export function tooltip() {
     out = 'mouseleave.tooltip',
     placement = utilFunctor('top');
 
+
   tooltip.title = function(_) {
     if (arguments.length) {
       title = utilFunctor(_);
@@ -30,6 +31,7 @@ export function tooltip() {
       return title;
     }
   };
+
 
   tooltip.html = function(_) {
     if (arguments.length) {
@@ -40,6 +42,7 @@ export function tooltip() {
     }
   };
 
+
   tooltip.placement = function(_) {
     if (arguments.length) {
       placement = utilFunctor(_);
@@ -49,17 +52,21 @@ export function tooltip() {
     }
   };
 
+
   tooltip.show = function(selection) {
     selection.each(show);
   };
+
 
   tooltip.hide = function(selection) {
     selection.each(hide);
   };
 
+
   tooltip.toggle = function(selection) {
     selection.each(toggle);
   };
+
 
   tooltip.destroy = function(selection) {
     selection
@@ -69,24 +76,34 @@ export function tooltip() {
         return this.getAttribute('data-original-title') || this.getAttribute('title');
       })
       .attr('data-original-title', null)
-      .select('.tooltip')
+      .selectAll('.tooltip')
       .remove();
   };
+
 
   function setup() {
     var root = d3.select(this),
         animate = animation.apply(this, arguments),
-        tip = root.append('div')
-          .attr('class', 'tooltip');
+        tip = root.selectAll('.tooltip').data([0]);
+
+    var enter = tip.enter()
+      .append('div')
+      .attr('class', 'tooltip');
+
+    enter
+      .append('div')
+      .attr('class', 'tooltip-arrow');
+
+    enter
+      .append('div')
+      .attr('class', 'tooltip-inner');
+
+    tip = enter
+      .merge(tip);
 
     if (animate) {
       tip.classed('fade', true);
     }
-
-    tip.append('div')
-      .attr('class', 'tooltip-arrow');
-    tip.append('div')
-      .attr('class', 'tooltip-inner');
 
     var place = placement.apply(this, arguments);
     tip.classed(place, true);
@@ -95,13 +112,15 @@ export function tooltip() {
     root.on(out, hide);
   }
 
+
   function show() {
     var root = d3.select(this),
       content = title.apply(this, arguments),
-      tip = root.select('.tooltip')
+      tip = root.selectAll('.tooltip')
         .classed('in', true),
       markup = html.apply(this, arguments);
-    tip.select('.tooltip-inner')[markup ? 'html' : 'text'](content);
+
+    tip.selectAll('.tooltip-inner')[markup ? 'html' : 'text'](content);
     var place = placement.apply(this, arguments),
       outer = getPosition(root.node()),
       inner = getPosition(tip.node()),
@@ -131,12 +150,14 @@ export function tooltip() {
     this.tooltipVisible = true;
   }
 
+
   function hide() {
-    d3.select(this).select('.tooltip')
+    d3.select(this).selectAll('.tooltip')
       .classed('in', false);
 
     this.tooltipVisible = false;
   }
+
 
   function toggle() {
     if (this.tooltipVisible) {
@@ -148,6 +169,7 @@ export function tooltip() {
 
   return tooltip;
 }
+
 
 function getPosition(node) {
   var mode = d3.select(node).style('position');
