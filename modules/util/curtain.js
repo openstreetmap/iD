@@ -8,9 +8,9 @@ import { uiToggle } from '../ui/toggle';
 export function d3curtain() {
 
     var dispatch = d3.dispatch(),
-        surface,
-        tooltip,
-        darkness;
+        surface = d3.select(null),
+        tooltip = d3.select(null),
+        darkness = d3.select(null);
 
     function curtain(selection) {
         surface = selection
@@ -122,7 +122,8 @@ export function d3curtain() {
 
 
     curtain.cut = function(datum, duration) {
-        darkness.datum(datum);
+        darkness.datum(datum)
+            .interrupt();
 
         (duration === 0 ? darkness : darkness.transition().duration(duration || 600))
             .attr('d', function(d) {

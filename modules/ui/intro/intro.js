@@ -119,7 +119,7 @@ export function uiIntro(context) {
             curtain.reveal(box,
                 text || '',
                 options.tooltipClass || '',
-                options.duration || 0
+                options.duration
             );
         }
 
