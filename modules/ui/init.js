@@ -6,7 +6,7 @@ import { tooltip } from '../util/tooltip';
 import { svgDefs, svgIcon } from '../svg/index';
 import { modeBrowse } from '../modes/index';
 import { behaviorHash } from '../behavior/index';
-import { utilSetDimensions } from '../util/dimensions';
+import { utilGetDimensions } from '../util/dimensions';
 
 import { uiAccount } from './account';
 import { uiAttribution } from './attribution';
@@ -229,7 +229,7 @@ export function uiInit(context) {
         var mapDimensions = map.dimensions();
 
         function onResize() {
-            mapDimensions = utilSetDimensions(content, null);
+            mapDimensions = utilGetDimensions(content, true);
             map.dimensions(mapDimensions);
         }
 

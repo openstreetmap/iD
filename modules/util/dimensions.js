@@ -5,23 +5,24 @@ function refresh(selection, node) {
     return prop;
 }
 
-
-export function utilGetDimensions(selection) {
+export function utilGetDimensions(selection, force) {
     if (!selection || selection.empty()) {
         return [0, 0];
     }
-    var node = selection.node();
-    return selection.property('__dimensions__') || refresh(selection, node);
+    var node = selection.node(),
+        cached = selection.property('__dimensions__');
+    return (!cached || force) ? refresh(selection, node) : cached;
 }
 
 
 export function utilSetDimensions(selection, dimensions) {
     if (!selection || selection.empty()) {
-        return [0, 0];
+        return selection;
     }
     var node = selection.node();
     if (dimensions === null) {
-        return refresh(selection, node);
+        refresh(selection, node);
+        return selection;
     }
     return selection
         .property('__dimensions__', [dimensions[0], dimensions[1]])
