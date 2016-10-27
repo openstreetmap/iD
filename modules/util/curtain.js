@@ -13,7 +13,8 @@ export function d3curtain() {
         darkness;
 
     function curtain(selection) {
-        surface = selection.append('svg')
+        surface = selection
+            .append('svg')
             .attr('id', 'curtain')
             .style('z-index', 1000)
             .style('pointer-events', 'none')
@@ -32,8 +33,13 @@ export function d3curtain() {
             .attr('class', 'tooltip')
             .style('z-index', 1002);
 
-        tooltip.append('div').attr('class', 'tooltip-arrow');
-        tooltip.append('div').attr('class', 'tooltip-inner');
+        tooltip
+            .append('div')
+            .attr('class', 'tooltip-arrow');
+
+        tooltip
+            .append('div')
+            .attr('class', 'tooltip-inner');
 
         resize();
 
@@ -59,26 +65,37 @@ export function d3curtain() {
             var html = parts[0] ? '<span>' + parts[0] + '</span>' : '';
             if (parts[1]) html += '<span class="bold">' + parts[1] + '</span>';
 
-            var dimensions = utilGetDimensions(tooltip.classed('in', true)
-                .select('.tooltip-inner')
-                .html(html));
+            var selection = tooltip
+                .classed('in', true)
+                .selectAll('.tooltip-inner')
+                .html(html);
 
-            var side, pos;
+            var dimensions = utilGetDimensions(selection, true),
+                w = window.innerWidth,
+                h = window.innerHeight,
+                side, pos;
 
-            var w = window.innerWidth,
-                h = window.innerHeight;
+            // trim box dimensions to just the portion that fits in the window..
+            if (box.top + box.height > h) {
+                box.height -= (box.top + box.height - h);
+            }
+            if (box.left + box.width > w) {
+                box.width -= (box.left + box.width - w);
+            }
 
+            // determine tooltip placement..
             if (box.top + box.height < Math.min(100, box.width + box.left)) {
                 side = 'bottom';
-                pos = [box.left + box.width / 2 - dimensions[0]/ 2, box.top + box.height];
+                pos = [box.left + box.width / 2 - dimensions[0] / 2, box.top + box.height];
 
-            } else if (box.left + box.width + 300 < window.innerWidth) {
+            } else if (box.left + box.width + 300 < w) {
                 side = 'right';
                 pos = [box.left + box.width, box.top + box.height / 2 - dimensions[1] / 2];
 
             } else if (box.left > 300) {
                 side = 'left';
                 pos = [box.left - 200, box.top + box.height / 2 - dimensions[1] / 2];
+
             } else {
                 side = 'bottom';
                 pos = [box.left, box.top + box.height];
@@ -89,7 +106,6 @@ export function d3curtain() {
                 Math.min(Math.max(10, pos[1]), h - dimensions[1] - 10)
             ];
 
-
             if (duration !== 0 || !tooltip.classed(side)) {
                 tooltip.call(uiToggle(true));
             }
@@ -97,9 +113,7 @@ export function d3curtain() {
             tooltip
                 .style('top', pos[1] + 'px')
                 .style('left', pos[0] + 'px')
-                .attr('class', 'curtain-tooltip tooltip in ' + side + ' ' + tooltipclass)
-                .select('.tooltip-inner')
-                .html(html);
+                .attr('class', 'curtain-tooltip tooltip in ' + side + ' ' + tooltipclass);
 
         } else {
             tooltip.call(uiToggle(false));

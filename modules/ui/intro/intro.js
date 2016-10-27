@@ -102,7 +102,7 @@ export function uiIntro(context) {
         context.inIntro(true);
 
         // Load semi-real data used in intro
-        context.connection().toggle(false).flush();
+        context.connection().toggle(false).reset();
         context.history().reset();
 
         context.history().merge(d3.values(coreGraph().load(introGraph).entities));
@@ -116,11 +116,11 @@ export function uiIntro(context) {
 
         function reveal(box, text, options) {
             options = options || {};
-            if (text) {
-                curtain.reveal(box, text, options.tooltipClass, options.duration);
-            } else {
-                curtain.reveal(box, '', '', options.duration);
-            }
+            curtain.reveal(box,
+                text || '',
+                options.tooltipClass || '',
+                options.duration || 0
+            );
         }
 
         var steps = ['navigation', 'point', 'area', 'line', 'startEditing'].map(function(step, i) {
@@ -138,7 +138,7 @@ export function uiIntro(context) {
             curtain.remove();
             navwrap.remove();
             d3.selectAll('#map .layer-background').style('opacity', opacity);
-            context.connection().toggle(true).flush().loadedTiles(loadedTiles);
+            context.connection().toggle(true).reset().loadedTiles(loadedTiles);
             context.history().reset().merge(d3.values(baseEntities));
             context.background().baseLayerSource(background);
             if (history) context.history().fromJSON(history, false);
