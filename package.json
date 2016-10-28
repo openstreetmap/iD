@@ -15,6 +15,7 @@
     "clean": "shx rm -f dist/*.js dist/*.map dist/*.css dist/img/*.svg",
     "dist": "npm-run-all -p dist:**",
     "dist:css": "shx cat css/reset.css css/map.css css/app.css > dist/iD.css",
+    "dist:mapillary": "shx mkdir -p dist/mapillary-js && shx cp -R node_modules/mapillary-js/dist/* dist/mapillary-js/",
     "dist:min": "uglifyjs dist/iD.js -c -m -o dist/iD.min.js",
     "dist:svg:maki": "svg-sprite --symbol --symbol-dest . --symbol-sprite dist/img/maki-sprite.svg node_modules/maki/src/*.svg",
     "dist:svg:id": "node svg/spriteify.js --svg svg/iD-sprite.src.svg --json svg/iD-sprite.json > dist/img/iD-sprite.svg",
@@ -29,7 +30,6 @@
   "dependencies": {
     "diacritics": "1.2.3",
     "lodash": "4.16.4",
-    "mapillary-js": "2.0.0",
     "marked": "0.3.6",
     "osm-auth": "1.0.1",
     "rbush": "2.0.1",
@@ -50,6 +50,7 @@
     "js-yaml": "~3.6.1",
     "jsonschema": "~1.1.0",
     "maki": "0.5.0",
+    "mapillary-js": "2.0.0",
     "minimist": "~1.2.0",
     "mocha": "~3.1.0",
     "mocha-phantomjs-core": "~2.0.1",
