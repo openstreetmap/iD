@@ -35,7 +35,7 @@ export function svgMapillaryImages(projection, context, dispatch) {
         var mapillary = getMapillary();
         if (!mapillary) return;
 
-        mapillary.loadViewer();
+        mapillary.loadViewer(context);
         editOn();
 
         layer

@@ -11,8 +11,9 @@ import { utilQsString } from '../util/index';
 
 
 var apibase = 'https://a.mapillary.com/v2/',
-    viewercss = 'https://unpkg.com/mapillary-js@1.3.0/dist/mapillary-js.min.css',
-    viewerjs = 'https://unpkg.com/mapillary-js@1.3.0/dist/mapillary-js.min.js',
+    viewercss = 'mapillary-js/mapillary.min.css',
+    viewerjs = 'mapillary-js/mapillary.min.js',
+    trafficocss = 'traffico/stylesheets/traffico.css',
     clientId = 'NzNRM2otQkR2SHJzaXJmNmdQWVQ0dzo1ZWYyMmYwNjdmNDdlNmVi',
     maxResults = 1000,
     maxPages = 10,
@@ -23,31 +24,6 @@ var apibase = 'https://a.mapillary.com/v2/',
     mapillaryImage,
     mapillarySignDefs,
     mapillaryViewer;
-
-
-function loadSignStyles(context) {
-    d3.select('head').selectAll('#traffico')
-        .data([0])
-        .enter()
-        .append('link')
-        .attr('id', 'traffico')
-        .attr('rel', 'stylesheet')
-        .attr('href', context.asset('traffico/stylesheets/traffico.css'));
-}
-
-
-function loadSignDefs(context) {
-    if (mapillarySignDefs) return;
-    mapillarySignDefs = {};
-
-    _.each(['au', 'br', 'ca', 'de', 'us'], function(region) {
-        d3.json(context.asset('traffico/string-maps/' + region + '-map.json'), function(err, data) {
-            if (err) return;
-            if (region === 'de') region = 'eu';
-            mapillarySignDefs[region] = data;
-        });
-    });
-}
 
 
 function abortRequest(i) {
@@ -228,63 +204,6 @@ export default {
     },
 
 
-    loadImages: function(projection, dimensions) {
-        var url = apibase + 'search/im/geojson?';
-        loadTiles('images', url, projection, dimensions);
-    },
-
-
-    loadSigns: function(context, projection, dimensions) {
-        var url = apibase + 'search/im/geojson/or?';
-        loadSignStyles(context);
-        loadSignDefs(context);
-        loadTiles('signs', url, projection, dimensions);
-    },
-
-
-    loadViewer: function() {
-        var that = this;
-        var wrap = d3.select('#content').selectAll('.mapillary-wrap')
-            .data([0]);
-
-        var enter = wrap.enter()
-          .append('div')
-            .attr('class', 'mapillary-wrap')
-            .classed('al', true)       // 'al'=left,  'ar'=right
-            .classed('hidden', true);
-
-        enter
-          .append('button')
-            .attr('class', 'thumb-hide')
-            .on('click', function () { that.hideViewer(); })
-          .append('div')
-            .call(svgIcon('#icon-close'));
-
-        enter
-          .append('div')
-            .attr('id', 'mly')
-            .attr('class', 'mly-wrapper')
-            .classed('active', false);
-
-        // mapillary-viewercss
-        d3.select('head').selectAll('#mapillary-viewercss')
-            .data([0])
-            .enter()
-          .append('link')
-            .attr('id', 'mapillary-viewercss')
-            .attr('rel', 'stylesheet')
-            .attr('href', viewercss);
-
-        // mapillary-viewerjs
-        d3.select('head').selectAll('#mapillary-viewerjs')
-            .data([0])
-            .enter()
-          .append('script')
-            .attr('id', 'mapillary-viewerjs')
-            .attr('src', viewerjs);
-    },
-
-
     images: function(projection, dimensions) {
         var psize = 16, limit = 3;
         return searchLimited(psize, limit, projection, dimensions, mapillaryCache.images.rtree);
@@ -314,11 +233,87 @@ export default {
     },
 
 
+    loadImages: function(projection, dimensions) {
+        var url = apibase + 'search/im/geojson?';
+        loadTiles('images', url, projection, dimensions);
+    },
+
+
+    loadSigns: function(context, projection, dimensions) {
+        var url = apibase + 'search/im/geojson/or?';
+        loadTiles('signs', url, projection, dimensions);
+
+        // load traffico css
+        d3.select('head').selectAll('#traffico')
+            .data([0])
+            .enter()
+            .append('link')
+            .attr('id', 'traffico')
+            .attr('rel', 'stylesheet')
+            .attr('href', context.asset(trafficocss));
+
+        // load traffico sign defs
+        if (!mapillarySignDefs) {
+            mapillarySignDefs = {};
+            _.each(['au', 'br', 'ca', 'de', 'us'], function(region) {
+                d3.json(context.asset('traffico/string-maps/' + region + '-map.json'), function(err, data) {
+                    if (err) return;
+                    if (region === 'de') region = 'eu';
+                    mapillarySignDefs[region] = data;
+                });
+            });
+        }
+    },
+
+
+    loadViewer: function(context) {
+        var that = this;
+        var wrap = d3.select('#content').selectAll('.mapillary-wrap')
+            .data([0]);
+
+        var enter = wrap.enter()
+            .append('div')
+            .attr('class', 'mapillary-wrap')
+            .classed('al', true)       // 'al'=left,  'ar'=right
+            .classed('hidden', true);
+
+        enter
+            .append('button')
+            .attr('class', 'thumb-hide')
+            .on('click', function () { that.hideViewer(); })
+            .append('div')
+            .call(svgIcon('#icon-close'));
+
+        enter
+            .append('div')
+            .attr('id', 'mly')
+            .attr('class', 'mly-wrapper')
+            .classed('active', false);
+
+        // load mapillary-viewercss
+        d3.select('head').selectAll('#mapillary-viewercss')
+            .data([0])
+            .enter()
+            .append('link')
+            .attr('id', 'mapillary-viewercss')
+            .attr('rel', 'stylesheet')
+            .attr('href', context.asset(viewercss));
+
+        // load mapillary-viewerjs
+        d3.select('head').selectAll('#mapillary-viewerjs')
+            .data([0])
+            .enter()
+            .append('script')
+            .attr('id', 'mapillary-viewerjs')
+            .attr('src', context.asset(viewerjs));
+    },
+
+
     showViewer: function() {
         d3.select('#content')
-          .selectAll('.mapillary-wrap')
+            .selectAll('.mapillary-wrap')
             .classed('hidden', false)
-          .selectAll('.mly-wrapper')
+            .selectAll('.mly-wrapper')
             .classed('active', true);
 
         return this;
@@ -327,9 +322,9 @@ export default {
 
     hideViewer: function() {
         d3.select('#content')
-          .selectAll('.mapillary-wrap')
+            .selectAll('.mapillary-wrap')
             .classed('hidden', true)
-          .selectAll('.mly-wrapper')
+            .selectAll('.mly-wrapper')
             .classed('active', false);
 
         d3.selectAll('.layer-mapillary-images .viewfield-group, .layer-mapillary-signs .icon-sign')
@@ -358,17 +353,14 @@ export default {
         if (Mapillary && imageKey) {
             var opts = {
                 baseImageSize: 320,
-                cover: false,
-                cache: true,
-                debug: false,
-                imagePlane: true,
-                loading: true,
-                sequence: true
+                component: {
+                    cover: false,
+                    keyboard: false
+                }
             };
 
             mapillaryViewer = new Mapillary.Viewer('mly', clientId, imageKey, opts);
             mapillaryViewer.on('nodechanged', nodeChanged);
-            mapillaryViewer.on('loadingchanged', loadingChanged);
         }
 
         function nodeChanged(node) {
@@ -377,35 +369,10 @@ export default {
             if (index > -1) {    // nodechange initiated from clicking on a marker..
                 clicks.splice(index, 1);
             } else {             // nodechange initiated from the Mapillary viewer controls..
-                var loc = node.apiNavImIm ? [node.apiNavImIm.lon, node.apiNavImIm.lat] : [node.latLon.lon, node.latLon.lat];
+                var loc = node.computedLatLon ? [node.computedLatLon.lon, node.computedLatLon.lat] : [node.latLon.lon, node.latLon.lat];
                 context.map().centerEase(loc);
                 that.selectedImage(node.key, false);
             }
-        }
-
-        function loadingChanged(loading) {
-            var canvas = d3.select('#content')
-                .selectAll('.mly-wrapper canvas');
-
-            if (canvas.empty()) return;   // viewer not loaded yet
-
-            var cover = d3.select('#content')
-                .selectAll('.mly-wrapper .Cover');
-
-            cover.classed('CoverDone', !loading);
-
-            var button = cover.selectAll('.CoverButton')
-                .data(loading ? [0] : []);
-
-            button.exit()
-                .remove();
-
-            button.enter()
-              .append('div')
-                .attr('class', 'CoverButton')
-              .append('div')
-                .attr('class', 'uil-ripple-css')
-              .append('div');
         }
     },
 
