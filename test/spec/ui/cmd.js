@@ -5,7 +5,7 @@ describe('iD.uiCmd', function () {
         uaMock = function () { return ua; };
 
     beforeEach(function() {
-        /* eslint-disable no-native-reassign */
+        /* eslint-disable no-global-assign */
         /* mock userAgent */
         if (isPhantom) {
             orig = navigator;
@@ -23,7 +23,7 @@ describe('iD.uiCmd', function () {
         } else {
             navigator.__defineGetter__('userAgent', orig);
         }
-        /* eslint-enable no-native-reassign */
+        /* eslint-enable no-global-assign */
     });
 
     it('does not overwrite mac keybindings', function () {

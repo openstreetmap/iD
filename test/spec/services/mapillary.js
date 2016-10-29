@@ -15,7 +15,7 @@ describe('iD.serviceMapillary', function() {
         mapillary = iD.services.mapillary;
         mapillary.reset();
 
-        /* eslint-disable no-native-reassign */
+        /* eslint-disable no-global-assign */
         /* mock userAgent */
         if (isPhantom) {
             orig = navigator;
@@ -35,7 +35,7 @@ describe('iD.serviceMapillary', function() {
         } else {
             navigator.__defineGetter__('userAgent', orig);
         }
-        /* eslint-enable no-native-reassign */
+        /* eslint-enable no-global-assign */
     });
 
 
