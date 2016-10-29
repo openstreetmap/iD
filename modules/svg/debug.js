@@ -24,7 +24,7 @@ export function svgDebug(projection, context) {
             showsImagery = context.getDebug('imagery'),
             showsImperial = context.getDebug('imperial'),
             showsDriveLeft = context.getDebug('driveLeft'),
-            path = d3.geoPath().projection(projection);
+            path = d3.geoPath(projection);
 
 
         var debugData = [];

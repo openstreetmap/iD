@@ -9,7 +9,7 @@ export function svgOneWaySegments(projection, graph, dt) {
             i = 0,
             offset = dt,
             segments = [],
-            clip = d3.geoClipExtent().extent(projection.clipExtent()).stream,
+            clip = d3.geoIdentity().clipExtent(projection.clipExtent()).stream,
             coordinates = graph.childNodes(entity).map(function(n) {
                 return n.loc;
             });

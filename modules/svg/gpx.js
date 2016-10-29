@@ -68,8 +68,7 @@ export function svgGpx(projection, context, dispatch) {
             .merge(paths);
 
 
-        var path = d3.geoPath()
-            .projection(projection);
+        var path = d3.geoPath(projection);
 
         paths
             .attr('d', path);

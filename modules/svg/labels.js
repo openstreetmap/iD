@@ -14,7 +14,7 @@ import { utilDisplayName, utilEntitySelector } from '../util/index';
 
 
 export function svgLabels(projection, context) {
-    var path = d3.geoPath().projection(projection),
+    var path = d3.geoPath(projection),
         detected = utilDetect(),
         baselineHack = (detected.ie || detected.browser.toLowerCase() === 'edge'),
         rdrawn = rbush(),
@@ -236,7 +236,7 @@ export function svgLabels(projection, context) {
                 .merge(debugboxes);
 
             debugboxes
-                .attr('d', d3.geoPath().projection(null));
+                .attr('d', d3.geoPath());
         }
     }
 

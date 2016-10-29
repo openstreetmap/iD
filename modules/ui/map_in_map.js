@@ -237,7 +237,7 @@ export function uiMapInMap(context) {
 
             // redraw viewport bounding box
             if (gesture !== 'pan') {
-                var getPath = d3.geoPath().projection(projection),
+                var getPath = d3.geoPath(projection),
                     bbox = { type: 'Polygon', coordinates: [context.map().extent().polygon()] };
 
                 viewport = wrap.selectAll('.map-in-map-viewport')
