@@ -15,7 +15,7 @@ describe('iD.serviceMapillary', function() {
         mapillary = iD.services.mapillary;
         mapillary.reset();
 
-        /* eslint-disable no-native-reassign */
+        /* eslint-disable no-global-assign */
         /* mock userAgent */
         if (isPhantom) {
             orig = navigator;
@@ -35,7 +35,7 @@ describe('iD.serviceMapillary', function() {
         } else {
             navigator.__defineGetter__('userAgent', orig);
         }
-        /* eslint-enable no-native-reassign */
+        /* eslint-enable no-global-assign */
     });
 
 
@@ -362,10 +362,16 @@ describe('iD.serviceMapillary', function() {
             expect(mapillary.signsSupported()).to.be.false;
         });
 
-        it('returns false for Safari', function() {
+        it('returns false for Safari 9', function() {
             ua = 'Version/9.1 Safari/601';
             iD.Detect(true);  // force redetection
             expect(mapillary.signsSupported()).to.be.false;
+        });
+
+        it('returns true for Safari 10', function() {
+            ua = 'Version/10.0 Safari/602';
+            iD.Detect(true);  // force redetection
+            expect(mapillary.signsSupported()).to.be.true;
         });
     });
 

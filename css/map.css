@@ -1529,7 +1529,7 @@ text.gpx {
     pointer-events: none;
 }
 
-.layer-mapillary-signs .icon-sign body {
+.layer-mapillary-signs .icon-sign .icon-sign-body {
     min-width: 20px;
     height: 28px;
     width: 28px;
@@ -1538,14 +1538,15 @@ text.gpx {
     cursor: pointer; /* Opera */
     cursor: url(img/cursor-select-mapillary.png) 6 1, pointer; /* FF */
     z-index: 70;
+    overflow: visible;
 }
 
-.layer-mapillary-signs .icon-sign:hover body {
+.layer-mapillary-signs .icon-sign:hover .icon-sign-body {
     border: 2px solid rgba(255,198,0,0.8);
     z-index: 80;
  }
 
-.layer-mapillary-signs .icon-sign.selected body {
+.layer-mapillary-signs .icon-sign.selected .icon-sign-body {
     border: 2px solid rgba(255,0,0,0.8);
     z-index: 80;
  }
@@ -1553,7 +1554,6 @@ text.gpx {
 .layer-mapillary-signs .icon-sign .t {
     font-size: 28px;
     z-index: 70;
-    position: absolute;
 }
 
 .layer-mapillary-signs .icon-sign:hover .t,
