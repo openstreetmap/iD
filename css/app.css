@@ -3331,15 +3331,6 @@ img.tile-removing {
     visibility: hidden;
 }
 
-.mapillary-wrap .uil-ripple-css {
-  top: -9px;
-  left: -15px;
-}
-
-.mapillary-wrap .uil-ripple-css div {
-    top: 38px;
-}
-
 .mapillary-wrap button.thumb-hide {
     border-radius: 0;
     padding: 5px;
@@ -3350,11 +3341,13 @@ img.tile-removing {
 }
 
 .mly-wrapper {
-  visibility: hidden;
+    visibility: hidden;
+    width: 100%;
+    height: 100%;
 }
 
 .mly-wrapper.active {
-  visibility: visible;
+    visibility: visible;
 }
 
 /* Right-to-left localization settings */
