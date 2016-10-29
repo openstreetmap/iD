@@ -1,7 +1,6 @@
 import * as d3 from 'd3';
 import _ from 'lodash';
 import { utilGetDimensions, utilSetDimensions } from '../util/dimensions';
-import { svgPointTransform } from './point_transform';
 import { services } from '../services/index';
 
 
@@ -87,11 +86,13 @@ export function svgMapillarySigns(projection, context, dispatch) {
 
         enter
             .append('xhtml:body')
+            .attr('class', 'icon-sign-body')
             .html(mapillary.signHTML);
 
         signs
             .merge(enter)
-            .attr('transform', svgPointTransform(projection));
+            .attr('x', function(d) { return projection(d.loc)[0] - 16; })   // offset by -16px to
+            .attr('y', function(d) { return projection(d.loc)[1] - 16; });  // center signs on loc
     }
 
 
@@ -109,7 +110,6 @@ export function svgMapillarySigns(projection, context, dispatch) {
             .append('g')
             .attr('class', 'layer-mapillary-signs')
             .style('display', enabled ? 'block' : 'none')
-            .attr('transform', 'translate(-16, -16)')  // center signs on loc
             .merge(layer);
 
         if (enabled) {

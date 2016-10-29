@@ -218,7 +218,9 @@ export default {
 
     signsSupported: function() {
         var detected = utilDetect();
-        return (!(detected.ie || detected.browser.toLowerCase() === 'safari'));
+        if (detected.ie) return false;
+        if ((detected.browser.toLowerCase() === 'safari') && (parseFloat(detected.version) < 10)) return false;
+        return true;
     },
 
 
