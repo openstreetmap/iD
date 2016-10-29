@@ -8,6 +8,7 @@ import { services } from '../services/index';
 export function svgMapillaryImages(projection, context, dispatch) {
     var debouncedRedraw = _.debounce(function () { dispatch.call('change'); }, 1000),
         minZoom = 12,
+        minViewfieldZoom = 16,
         layer = d3.select(null),
         _mapillary;
 
@@ -111,19 +112,30 @@ export function svgMapillaryImages(projection, context, dispatch) {
             .classed('selected', function(d) { return d.key === imageKey; })
             .on('click', click);
 
-        enter.append('path')
+        markers
+            .merge(enter)
+            .attr('transform', transform);
+
+
+       var viewfields = markers.selectAll('.viewfield')
+            .data(~~context.map().zoom() >= minViewfieldZoom ? [0] : []);
+
+        viewfields.exit()
+            .remove();
+
+        viewfields.enter()
+            .append('path')
             .attr('class', 'viewfield')
             .attr('transform', 'scale(1.5,1.5),translate(-8, -13)')
             .attr('d', 'M 6,9 C 8,8.4 8,8.4 10,9 L 16,-2 C 12,-5 4,-5 0,-2 z');
 
-        enter.append('circle')
+        markers.selectAll('circle')
+            .data([0])
+            .enter()
+            .append('circle')
             .attr('dx', '0')
             .attr('dy', '0')
             .attr('r', '6');
-
-        markers
-            .merge(enter)
-            .attr('transform', transform);
     }
 
 
