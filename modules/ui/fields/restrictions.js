@@ -1,7 +1,10 @@
 import * as d3 from 'd3';
 import { t } from '../../util/locale';
 
-import { behaviorHover } from '../../behavior/index';
+import {
+    behaviorBreathe,
+    behaviorHover
+} from '../../behavior/index';
 
 import {
     osmEntity,
@@ -38,6 +41,7 @@ import {
 
 export function uiFieldRestrictions(field, context) {
     var dispatch = d3.dispatch('change'),
+        breathe = behaviorBreathe(context),
         hover = behaviorHover(context),
         vertexID,
         fromNodeID;
@@ -88,15 +92,20 @@ export function uiFieldRestrictions(field, context) {
             drawTurns = svgTurns(projection, context);
 
         enter
-            .call(drawLayers)
-            .selectAll('.surface')
-            .call(hover);
-
+            .call(drawLayers);
 
         wrap = wrap
             .merge(enter);
 
-        var surface = wrap.selectAll('.surface')
+        var surface = wrap.selectAll('.surface');
+
+        if (!enter.empty()) {
+            surface
+                .call(breathe)
+                .call(hover);
+        }
+
+        surface
             .call(utilSetDimensions, d)
             .call(drawVertices, graph, [vertex], filter, extent, z)
             .call(drawLines, graph, intersection.ways, filter)
@@ -130,6 +139,10 @@ export function uiFieldRestrictions(field, context) {
 
 
         function click() {
+            surface
+                .call(breathe.off)
+                .call(breathe);
+
             var datum = d3.event.target.__data__;
             if (datum instanceof osmEntity) {
                 fromNodeID = intersection.adjacentNodeId(datum.id);
@@ -211,6 +224,7 @@ export function uiFieldRestrictions(field, context) {
     restrictions.off = function(selection) {
         selection.selectAll('.surface')
             .call(hover.off)
+            .call(breathe.off)
             .on('click.restrictions', null)
             .on('mouseover.restrictions', null)
             .on('mouseout.restrictions', null);

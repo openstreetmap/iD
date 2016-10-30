@@ -44,36 +44,6 @@ export function behaviorHover() {
     var hover = function(__) {
         selection = __;
 
-        function enter(d) {
-            if (d === target) return;
-
-            target = d;
-
-            selection.selectAll('.hover')
-                .classed('hover', false);
-            selection.selectAll('.hover-suppressed')
-                .classed('hover-suppressed', false);
-
-            if (target instanceof osmEntity) {
-                var selector = '.' + target.id;
-
-                if (target.type === 'relation') {
-                    target.members.forEach(function(member) {
-                        selector += ', .' + member.id;
-                    });
-                }
-
-                var suppressed = altDisables && d3.event && d3.event.altKey;
-
-                selection.selectAll(selector)
-                    .classed(suppressed ? 'hover-suppressed' : 'hover', true);
-
-                dispatch.call('hover', this, target.id);
-            } else {
-                dispatch.call('hover', this, null);
-            }
-        }
-
         selection
             .on('mouseover.hover', mouseover)
             .on('mouseout.hover', mouseout)
@@ -110,6 +80,37 @@ export function behaviorHover() {
             d3.select(window)
                 .on('mouseup.hover', null, true);
         }
+
+
+        function enter(d) {
+            if (d === target) return;
+            target = d;
+
+            selection.selectAll('.hover')
+                .classed('hover', false);
+            selection.selectAll('.hover-suppressed')
+                .classed('hover-suppressed', false);
+
+            if (target instanceof osmEntity) {
+                var selector = '.' + target.id;
+
+                if (target.type === 'relation') {
+                    target.members.forEach(function(member) {
+                        selector += ', .' + member.id;
+                    });
+                }
+
+                var suppressed = altDisables && d3.event && d3.event.altKey;
+
+                selection.selectAll(selector)
+                    .classed(suppressed ? 'hover-suppressed' : 'hover', true);
+
+                dispatch.call('hover', this, target.id);
+            } else {
+                dispatch.call('hover', this, null);
+            }
+        }
+
     };
 
 
