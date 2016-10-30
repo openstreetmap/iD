@@ -69,7 +69,7 @@ export function uiFieldRestrictions(field, context) {
             extent = geoExtent(),
             projection = geoRawMercator();
 
-        var d = utilGetDimensions(wrap),
+        var d = utilGetDimensions(wrap.merge(enter)),
             c = [d[0] / 2, d[1] / 2],
             z = 24;
 

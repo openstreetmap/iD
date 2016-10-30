@@ -55,8 +55,10 @@ export function svgTurns(projection) {
             .attr('height', '32');
 
 
+        groups = groups
+            .merge(enter);
+
         groups
-            .merge(enter)
             .attr('transform', function (turn) {
                 var v = graph.entity(turn.via.node),
                     t = graph.entity(turn.to.node),
