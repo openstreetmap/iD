@@ -109,8 +109,6 @@ export function svgAreas(projection, context) {
             .filter(filter)
             .data(function(layer) { return data[layer]; }, osmEntity.key);
 
-        // Remove exiting areas first, so they aren't included in the `fills`
-        // array used for sorting below (https://github.com/openstreetmap/iD/issues/1903).
         paths.exit()
             .remove();
 
