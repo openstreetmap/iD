@@ -288,6 +288,7 @@ describe('iD.serviceOsm', function () {
                         created_by: 'iD 2.0.0'
                     }
                 }]);
+                connection.logout();
                 done();
             });
 
