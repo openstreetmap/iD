@@ -186,7 +186,7 @@ export function rendererFeatures(context) {
 
     features.enabled = function(k) {
         if (!arguments.length) {
-            return _.filter(_keys, function(k) { return _features[k].enabled; });
+            return _keys.filter(function(k) { return _features[k].enabled; });
         }
         return _features[k] && _features[k].enabled;
     };
@@ -194,7 +194,7 @@ export function rendererFeatures(context) {
 
     features.disabled = function(k) {
         if (!arguments.length) {
-            return _.reject(_keys, function(k) { return _features[k].enabled; });
+            return _keys.filter(function(k) { return !_features[k].enabled; });
         }
         return _features[k] && !_features[k].enabled;
     };
@@ -202,7 +202,7 @@ export function rendererFeatures(context) {
 
     features.hidden = function(k) {
         if (!arguments.length) {
-            return _.filter(_keys, function(k) { return _features[k].hidden(); });
+            return _keys.filter(function(k) { return _features[k].hidden(); });
         }
         return _features[k] && _features[k].hidden();
     };
@@ -210,7 +210,7 @@ export function rendererFeatures(context) {
 
     features.autoHidden = function(k) {
         if (!arguments.length) {
-            return _.filter(_keys, function(k) { return _features[k].autoHidden(); });
+            return _keys.filter(function(k) { return _features[k].autoHidden(); });
         }
         return _features[k] && _features[k].autoHidden();
     };
@@ -241,7 +241,9 @@ export function rendererFeatures(context) {
 
 
     features.resetStats = function() {
-        _.each(_features, function(f) { f.count = 0; });
+        for (var i = 0; i < _keys.length; i++) {
+            _features[_keys[i]].count = 0;
+        }
         dispatch.call('change');
     };
 
@@ -250,19 +252,21 @@ export function rendererFeatures(context) {
         var needsRedraw = false,
             type = _.groupBy(d, function(ent) { return ent.type; }),
             entities = [].concat(type.relation || [], type.way || [], type.node || []),
-            currHidden, geometry, matches;
+            currHidden, geometry, matches, i, j;
 
-        _.each(_features, function(f) { f.count = 0; });
+        for (i = 0; i < _keys.length; i++) {
+            _features[_keys[i]].count = 0;
+        }
 
         // adjust the threshold for point/building culling based on viewport size..
         // a _cullFactor of 1 corresponds to a 1000x1000px viewport..
         _cullFactor = dimensions[0] * dimensions[1] / 1000000;
 
-        for (var i = 0; i < entities.length; i++) {
+        for (i = 0; i < entities.length; i++) {
             geometry = entities[i].geometry(resolver);
             if (!(geometry === 'vertex' || geometry === 'relation')) {
                 matches = Object.keys(features.getMatches(entities[i], resolver, geometry));
-                for (var j = 0; j < matches.length; j++) {
+                for (j = 0; j < matches.length; j++) {
                     _features[matches[j]].count++;
                 }
             }
@@ -280,7 +284,10 @@ export function rendererFeatures(context) {
 
 
     features.stats = function() {
-        _.each(_keys, function(k) { _stats[k] = _features[k].count; });
+        for (var i = 0; i < _keys.length; i++) {
+            _stats[_keys[i]] = _features[_keys[i]].count;
+        }
+
         return _stats;
     };
 
