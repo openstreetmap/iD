@@ -5,8 +5,7 @@
         "brand",
         "opening_hours",
         "fee",
-        "service/bicycle/chain_tool",
-        "service/bicycle/pump"
+        "service/bicycle"
     ],
     "geometry": [
         "point",

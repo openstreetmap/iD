@@ -910,26 +910,9 @@ en:
       service:
         # service=*
         label: Type
-      service/bicycle/chain_tool:
-        # 'service:bicycle:chain_tool=*'
-        label: Chain Tool
-        options:
-          # 'service:bicycle:chain_tool=no'
-          'no': 'No'
-          # 'service:bicycle:chain_tool=undefined'
-          undefined: Assumed to be No
-          # 'service:bicycle:chain_tool=yes'
-          'yes': 'Yes'
-      service/bicycle/pump:
-        # 'service:bicycle:pump=*'
-        label: Air Pump
-        options:
-          # 'service:bicycle:pump=no'
-          'no': 'No'
-          # 'service:bicycle:pump=undefined'
-          undefined: Assumed to be No
-          # 'service:bicycle:pump=yes'
-          'yes': 'Yes'
+      service/bicycle:
+        # 'service:bicycle:=*'
+        label: Services
       service_rail:
         # service=*
         label: Service Type

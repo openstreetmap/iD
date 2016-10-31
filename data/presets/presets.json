@@ -653,8 +653,7 @@
                 "brand",
                 "opening_hours",
                 "fee",
-                "service/bicycle/chain_tool",
-                "service/bicycle/pump"
+                "service/bicycle"
             ],
             "geometry": [
                 "point",
@@ -8624,7 +8623,8 @@
                 "operator",
                 "address",
                 "building_area",
-                "opening_hours"
+                "opening_hours",
+                "service/bicycle"
             ],
             "geometry": [
                 "point",

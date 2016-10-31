@@ -1409,21 +1409,8 @@
                 "service": {
                     "label": "Type"
                 },
-                "service/bicycle/chain_tool": {
-                    "label": "Chain Tool",
-                    "options": {
-                        "undefined": "Assumed to be No",
-                        "yes": "Yes",
-                        "no": "No"
-                    }
-                },
-                "service/bicycle/pump": {
-                    "label": "Air Pump",
-                    "options": {
-                        "undefined": "Assumed to be No",
-                        "yes": "Yes",
-                        "no": "No"
-                    }
+                "service/bicycle": {
+                    "label": "Services"
                 },
                 "shelter_type": {
                     "label": "Type"

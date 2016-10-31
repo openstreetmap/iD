@@ -1222,29 +1222,10 @@
                 "drive-through"
             ]
         },
-        "service/bicycle/chain_tool": {
-            "key": "service:bicycle:chain_tool",
-            "type": "check",
-            "label": "Chain Tool",
-            "strings": {
-                "options": {
-                    "undefined": "Assumed to be No",
-                    "yes": "Yes",
-                    "no": "No"
-                }
-            }
-        },
-        "service/bicycle/pump": {
-            "key": "service:bicycle:pump",
-            "type": "check",
-            "label": "Air Pump",
-            "strings": {
-                "options": {
-                    "undefined": "Assumed to be No",
-                    "yes": "Yes",
-                    "no": "No"
-                }
-            }
+        "service/bicycle": {
+            "key": "service:bicycle:",
+            "type": "multiCombo",
+            "label": "Services"
         },
         "shelter_type": {
             "key": "shelter_type",
