@@ -69,9 +69,12 @@ function filterKeys(type) {
 }
 
 
-function filterMultikeys() {
+function filterMultikeys(prefix) {
     return function(d) {
-        return (d.key.match(/:/g) || []).length === 1;  // exactly one ':'
+        // d.key begins with prefix, and d.key contains no additional ':'s
+        var re = new RegExp('^' + prefix + '(.*)$');
+        var matches = d.key.match(re) || [];
+        return (matches.length === 2 && matches[1].indexOf(':') === -1);
     };
 }
 
@@ -177,6 +180,7 @@ export default {
     multikeys: function(parameters, callback) {
         var debounce = parameters.debounce;
         parameters = clean(setSort(parameters));
+        var prefix = parameters.query;
         request(endpoint + 'keys/all?' +
             utilQsString(_.extend({
                 rp: 25,
@@ -187,7 +191,7 @@ export default {
                 if (err) {
                     callback(err);
                 } else {
-                    var f = filterMultikeys();
+                    var f = filterMultikeys(prefix);
                     callback(null, d.data.filter(f).map(valKey));
                 }
             }

@@ -102,15 +102,28 @@ describe('iD.serviceTaginfo', function() {
 
         it('excludes multikeys with extra colons', function() {
             var callback = sinon.spy();
-            taginfo.multikeys({query: 'recycling:'}, callback);
+            taginfo.multikeys({query: 'service:bicycle:'}, callback);
 
             server.respondWith('GET', new RegExp('https://taginfo.openstreetmap.org/api/4/keys/all'),
                 [200, { 'Content-Type': 'application/json' },
-                    '{"data":[{"count_all":69593,"key":"recycling:glass","count_all_fraction":0.0},'
-                              + '{"count_all":22,"key":"recycling:glass:color","count_all_fraction":0.0}]}']);
+                    '{"data":[{"count_all":4426,"key":"service:bicycle:retail","count_all_fraction":0.0},'
+                            + '{"count_all":22,"key":"service:bicycle:retail:ebikes","count_all_fraction":0.0}]}']);
             server.respond();
 
-            expect(callback).to.have.been.calledWith(null, [{'title':'recycling:glass', 'value':'recycling:glass'}]);
+            expect(callback).to.have.been.calledWith(null, [{'title':'service:bicycle:retail', 'value':'service:bicycle:retail'}]);
+        });
+
+        it('excludes multikeys with wrong prefix', function() {
+            var callback = sinon.spy();
+            taginfo.multikeys({query: 'service:bicycle:'}, callback);
+
+            server.respondWith('GET', new RegExp('https://taginfo.openstreetmap.org/api/4/keys/all'),
+                [200, { 'Content-Type': 'application/json' },
+                    '{"data":[{"count_all":4426,"key":"service:bicycle:retail","count_all_fraction":0.0},'
+                            + '{"count_all":22,"key":"disused:service:bicycle","count_all_fraction":0.0}]}']);
+            server.respond();
+
+            expect(callback).to.have.been.calledWith(null, [{'title':'service:bicycle:retail', 'value':'service:bicycle:retail'}]);
         });
     });
 
