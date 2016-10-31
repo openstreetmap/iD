@@ -157,6 +157,21 @@
             "matchScore": 0.2,
             "name": "Address"
         },
+        "advertising/billboard": {
+            "fields": [
+                "parallel_direction",
+                "lit"
+            ],
+            "geometry": [
+                "point",
+                "vertex",
+                "line"
+            ],
+            "tags": {
+                "advertising": "billboard"
+            },
+            "name": "Billboard"
+        },
         "aerialway/cable_car": {
             "geometry": [
                 "line"

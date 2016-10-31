@@ -44,6 +44,10 @@
             "key": "addr:housenumber"
         },
         {
+            "key": "advertising",
+            "value": "billboard"
+        },
+        {
             "key": "aerialway",
             "value": "cable_car"
         },

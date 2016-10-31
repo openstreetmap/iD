@@ -1173,6 +1173,10 @@ en:
         # 'addr:housenumber=*'
         name: Address
         terms: '<translate with synonyms or related terms for ''Address'', separated by commas>'
+      advertising/billboard:
+        # advertising=billboard
+        name: Billboard
+        terms: '<translate with synonyms or related terms for ''Billboard'', separated by commas>'
       aerialway:
         # aerialway=*
         name: Aerialway

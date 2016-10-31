@@ -1652,6 +1652,10 @@
                     "name": "Address",
                     "terms": ""
                 },
+                "advertising/billboard": {
+                    "name": "Billboard",
+                    "terms": ""
+                },
                 "aerialway/cable_car": {
                     "name": "Cable Car",
                     "terms": "tramway,ropeway"
