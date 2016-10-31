@@ -12,10 +12,11 @@
         "area"
     ],
     "terms": [
-        "Tent"
+        "tent",
+        "rv"
     ],
     "tags": {
         "tourism": "camp_site"
     },
-    "name": "Camp Site"
+    "name": "Campground"
 }

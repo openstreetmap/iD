@@ -3805,9 +3805,9 @@ en:
         terms: '<translate with synonyms or related terms for ''Tourist Attraction'', separated by commas>'
       tourism/camp_site:
         # tourism=camp_site
-        name: Camp Site
-        # 'terms: Tent'
-        terms: '<translate with synonyms or related terms for ''Camp Site'', separated by commas>'
+        name: Campground
+        # 'terms: tent,rv'
+        terms: '<translate with synonyms or related terms for ''Campground'', separated by commas>'
       tourism/caravan_site:
         # tourism=caravan_site
         name: RV Park

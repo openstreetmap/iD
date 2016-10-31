@@ -4044,8 +4044,8 @@
                     "terms": ""
                 },
                 "tourism/camp_site": {
-                    "name": "Camp Site",
-                    "terms": "Tent"
+                    "name": "Campground",
+                    "terms": "tent,rv"
                 },
                 "tourism/caravan_site": {
                     "name": "RV Park",
