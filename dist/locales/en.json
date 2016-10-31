@@ -2327,6 +2327,10 @@
                     "name": "Warehouse",
                     "terms": ""
                 },
+                "camp_site/camp_pitch": {
+                    "name": "Camp Pitch",
+                    "terms": "tent,rv"
+                },
                 "craft": {
                     "name": "Craft",
                     "terms": ""

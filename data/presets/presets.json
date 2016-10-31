@@ -3302,6 +3302,24 @@
             "matchScore": 0.5,
             "name": "Warehouse"
         },
+        "camp_site/camp_pitch": {
+            "icon": "campsite",
+            "fields": [
+                "ref"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "terms": [
+                "tent",
+                "rv"
+            ],
+            "tags": {
+                "camp_site": "camp_pitch"
+            },
+            "name": "Camp Pitch"
+        },
         "craft": {
             "icon": "marker-stroked",
             "fields": [

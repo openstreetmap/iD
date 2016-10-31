@@ -729,6 +729,10 @@
             "value": "warehouse"
         },
         {
+            "key": "camp_site",
+            "value": "camp_pitch"
+        },
+        {
             "key": "craft"
         },
         {
