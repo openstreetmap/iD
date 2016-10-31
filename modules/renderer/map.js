@@ -63,17 +63,17 @@ export function rendererMap(context) {
         _selection = selection;
 
         context
-            .on('change.map', redraw);
+            .on('change.map', immediateRedraw);
         context.history()
-            .on('change.map', redraw);
+            .on('change.map', immediateRedraw);
         context.background()
-            .on('change.map', redraw);
+            .on('change.map', immediateRedraw);
         context.features()
-            .on('redraw.map', redraw);
+            .on('redraw.map', immediateRedraw);
         drawLayers
             .on('change.map', function() {
                 context.background().updateImagery();
-                redraw();
+                immediateRedraw();
             });
 
         selection
@@ -103,7 +103,7 @@ export function rendererMap(context) {
                 }
             }, true)
             .on('mouseup.zoom', function() {
-                if (resetTransform()) redraw();
+                if (resetTransform()) immediateRedraw();
             })
             .on('mousemove.map', function() {
                 mousemove = d3.event;
@@ -300,7 +300,13 @@ export function rendererMap(context) {
     }
 
 
-    var queueRedraw = _.debounce(redraw, 750);
+    var queueRedraw = _.throttle(redraw, 750);
+
+
+    var immediateRedraw = function(difference, extent) {
+        if (!difference && !extent) queueRedraw.cancel();
+        redraw(difference, extent);
+    };
 
 
     function pointLocation(p) {
@@ -426,7 +432,7 @@ export function rendererMap(context) {
             transformStart = projection.transform();
             _selection.call(zoom.transform, transformStart);
             dispatch.call('move', this, map);
-            redraw();
+            immediateRedraw();
         }
 
         return map;
@@ -443,7 +449,8 @@ export function rendererMap(context) {
         mouse = utilFastMouse(supersurface.node());
         setCenter(center);
 
-        return redraw();
+        queueRedraw();
+        return map;
     };
 
 
@@ -471,7 +478,8 @@ export function rendererMap(context) {
             dispatch.call('move', this, map);
         }
 
-        return redraw();
+        queueRedraw();
+        return map;
     };
 
 
@@ -492,7 +500,8 @@ export function rendererMap(context) {
             dispatch.call('move', this, map);
         }
 
-        return redraw();
+        queueRedraw();
+        return map;
     };
 
 
@@ -514,7 +523,8 @@ export function rendererMap(context) {
             dispatch.call('move', this, map);
         }
 
-        return redraw();
+        queueRedraw();
+        return map;
     };
 
 
