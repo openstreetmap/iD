@@ -1711,6 +1711,11 @@ en:
         name: Garbage Dumpster
         # 'terms: rubbish,litter,trash'
         terms: '<translate with synonyms or related terms for ''Garbage Dumpster'', separated by commas>'
+      amenity/waste_transfer_station:
+        # amenity=waste_transfer_station
+        name: Waste Transfer Station
+        # 'terms: dump,garbage,recycling,scrap,trash'
+        terms: '<translate with synonyms or related terms for ''Waste Transfer Station'', separated by commas>'
       amenity/water_point:
         # amenity=water_point
         name: RV Drinking Water

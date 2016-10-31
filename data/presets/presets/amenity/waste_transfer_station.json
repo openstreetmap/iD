@@ -1,0 +1,23 @@
+{
+    "icon": "waste-basket",
+    "fields": [
+        "operator",
+        "address",
+        "opening_hours"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "dump",
+        "garbage",
+        "recycling",
+        "scrap",
+        "trash"
+    ],
+    "tags": {
+        "amenity": "waste_transfer_station"
+    },
+    "name": "Waste Transfer Station"
+}

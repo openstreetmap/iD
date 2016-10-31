@@ -497,6 +497,10 @@
         },
         {
             "key": "amenity",
+            "value": "waste_transfer_station"
+        },
+        {
+            "key": "amenity",
             "value": "water_point"
         },
         {

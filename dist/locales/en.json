@@ -2104,6 +2104,10 @@
                     "name": "Garbage Dumpster",
                     "terms": "rubbish,litter,trash"
                 },
+                "amenity/waste_transfer_station": {
+                    "name": "Waste Transfer Station",
+                    "terms": "dump,garbage,recycling,scrap,trash"
+                },
                 "amenity/water_point": {
                     "name": "RV Drinking Water",
                     "terms": ""
