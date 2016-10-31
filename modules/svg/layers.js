@@ -94,11 +94,6 @@ export function svgLayers(projection, context) {
     drawLayers.dimensions = function(_) {
         if (!arguments.length) return utilGetDimensions(svg);
         utilSetDimensions(svg, _);
-        layers.forEach(function(obj) {
-            if (obj.layer.dimensions) {
-                obj.layer.dimensions(_);
-            }
-        });
         return this;
     };
 

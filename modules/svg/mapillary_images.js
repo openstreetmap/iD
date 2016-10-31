@@ -1,12 +1,11 @@
 import * as d3 from 'd3';
 import _ from 'lodash';
 import { svgPointTransform } from './point_transform';
-import { utilGetDimensions, utilSetDimensions } from '../util/dimensions';
 import { services } from '../services/index';
 
 
 export function svgMapillaryImages(projection, context, dispatch) {
-    var debouncedRedraw = _.debounce(function () { dispatch.call('change'); }, 1000),
+    var throttledRedraw = _.throttle(function () { dispatch.call('change'); }, 1000),
         minZoom = 12,
         minViewfieldZoom = 16,
         layer = d3.select(null),
@@ -23,7 +22,7 @@ export function svgMapillaryImages(projection, context, dispatch) {
     function getMapillary() {
         if (services.mapillary && !_mapillary) {
             _mapillary = services.mapillary;
-            _mapillary.event.on('loadedImages', debouncedRedraw);
+            _mapillary.event.on('loadedImages', throttledRedraw);
         } else if (!services.mapillary && _mapillary) {
             _mapillary = null;
         }
@@ -44,7 +43,7 @@ export function svgMapillaryImages(projection, context, dispatch) {
             .transition()
             .duration(500)
             .style('opacity', 1)
-            .on('end', debouncedRedraw);
+            .on('end', function () { dispatch.call('change'); });
     }
 
 
@@ -54,7 +53,7 @@ export function svgMapillaryImages(projection, context, dispatch) {
             mapillary.hideViewer();
         }
 
-        debouncedRedraw.cancel();
+        throttledRedraw.cancel();
 
         layer
             .transition()
@@ -97,7 +96,7 @@ export function svgMapillaryImages(projection, context, dispatch) {
 
     function update() {
         var mapillary = getMapillary(),
-            data = (mapillary ? mapillary.images(projection, utilGetDimensions(layer)) : []),
+            data = (mapillary ? mapillary.images(projection) : []),
             imageKey = mapillary ? mapillary.selectedImage() : null;
 
         var markers = layer.selectAll('.viewfield-group')
@@ -112,7 +111,7 @@ export function svgMapillaryImages(projection, context, dispatch) {
             .classed('selected', function(d) { return d.key === imageKey; })
             .on('click', click);
 
-        markers
+        markers = markers
             .merge(enter)
             .attr('transform', transform);
 
@@ -159,7 +158,7 @@ export function svgMapillaryImages(projection, context, dispatch) {
             if (mapillary && ~~context.map().zoom() >= minZoom) {
                 editOn();
                 update();
-                mapillary.loadImages(projection, utilGetDimensions(layer));
+                mapillary.loadImages(projection);
             } else {
                 editOff();
             }
@@ -184,12 +183,6 @@ export function svgMapillaryImages(projection, context, dispatch) {
         return !!getMapillary();
     };
 
-
-    drawImages.dimensions = function(_) {
-        if (!arguments.length) return utilGetDimensions(layer);
-        utilSetDimensions(layer, _);
-        return this;
-    };
 
     init();
     return drawImages;

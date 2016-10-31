@@ -43,7 +43,7 @@ function nearNullIsland(x, y, z) {
 }
 
 
-function getTiles(projection, dimensions) {
+function getTiles(projection) {
     var s = projection.scale() * 2 * Math.PI,
         z = Math.max(Math.log(s) / Math.log(2) - 8, 0),
         ts = 256 * Math.pow(2, z - tileZoom),
@@ -54,7 +54,7 @@ function getTiles(projection, dimensions) {
     return d3geoTile()
         .scaleExtent([tileZoom, tileZoom])
         .scale(s)
-        .size(dimensions)
+        .size(projection.clipExtent()[1])
         .translate(projection.translate())()
         .map(function(tile) {
             var x = tile[0] * ts - origin[0],
@@ -71,8 +71,8 @@ function getTiles(projection, dimensions) {
 }
 
 
-function loadTiles(which, url, projection, dimensions) {
-    var tiles = getTiles(projection, dimensions).filter(function(t) {
+function loadTiles(which, url, projection) {
+    var tiles = getTiles(projection).filter(function(t) {
           var xyz = t.id.split(',');
           return !nearNullIsland(xyz[0], xyz[1], xyz[2]);
         });
@@ -139,7 +139,8 @@ function loadTilePage(which, url, tile, page) {
 
 
 // partition viewport into `psize` x `psize` regions
-function partitionViewport(psize, projection, dimensions) {
+function partitionViewport(psize, projection) {
+    var dimensions = projection.clipExtent()[1];
     psize = psize || 16;
     var cols = d3.range(0, dimensions[0], psize),
         rows = d3.range(0, dimensions[1], psize),
@@ -159,10 +160,10 @@ function partitionViewport(psize, projection, dimensions) {
 
 
 // no more than `limit` results per partition.
-function searchLimited(psize, limit, projection, dimensions, rtree) {
+function searchLimited(psize, limit, projection, rtree) {
     limit = limit || 3;
 
-    var partitions = partitionViewport(psize, projection, dimensions);
+    var partitions = partitionViewport(psize, projection);
     return _.flatten(_.compact(_.map(partitions, function(extent) {
         return rtree.search(extent.bbox())
             .slice(0, limit)
@@ -204,15 +205,15 @@ export default {
     },
 
 
-    images: function(projection, dimensions) {
+    images: function(projection) {
         var psize = 16, limit = 3;
-        return searchLimited(psize, limit, projection, dimensions, mapillaryCache.images.rtree);
+        return searchLimited(psize, limit, projection, mapillaryCache.images.rtree);
     },
 
 
-    signs: function(projection, dimensions) {
+    signs: function(projection) {
         var psize = 32, limit = 3;
-        return searchLimited(psize, limit, projection, dimensions, mapillaryCache.signs.rtree);
+        return searchLimited(psize, limit, projection, mapillaryCache.signs.rtree);
     },
 
 
@@ -235,15 +236,15 @@ export default {
     },
 
 
-    loadImages: function(projection, dimensions) {
+    loadImages: function(projection) {
         var url = apibase + 'search/im/geojson?';
-        loadTiles('images', url, projection, dimensions);
+        loadTiles('images', url, projection);
     },
 
 
-    loadSigns: function(context, projection, dimensions) {
+    loadSigns: function(context, projection) {
         var url = apibase + 'search/im/geojson/or?';
-        loadTiles('signs', url, projection, dimensions);
+        loadTiles('signs', url, projection);
 
         // load traffico css
         d3.select('head').selectAll('#traffico')

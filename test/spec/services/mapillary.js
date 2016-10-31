@@ -8,8 +8,10 @@ describe('iD.serviceMapillary', function() {
 
     beforeEach(function() {
         context = iD.Context(window).assetPath('../dist/');
-        context.projection.scale(667544.214430109);  // z14
-        context.projection.translate([-116508, 0]);  // 10,0
+        context.projection
+            .scale(667544.214430109)  // z14
+            .translate([-116508, 0])  // 10,0
+            .clipExtent([[0,0], dimensions]);
 
         server = sinon.fakeServer.create();
         mapillary = iD.services.mapillary;
@@ -66,7 +68,7 @@ describe('iD.serviceMapillary', function() {
         it('fires loadedImages when images are loaded', function() {
             var spy = sinon.spy();
             mapillary.on('loadedImages', spy);
-            mapillary.loadImages(context.projection, dimensions);
+            mapillary.loadImages(context.projection);
 
             var match = /search\/im\/geojson/,
                 features = [{
@@ -87,7 +89,7 @@ describe('iD.serviceMapillary', function() {
             var spy = sinon.spy();
             context.projection.translate([0,0]);
             mapillary.on('loadedImages', spy);
-            mapillary.loadImages(context.projection, dimensions);
+            mapillary.loadImages(context.projection);
 
             var match = /search\/im\/geojson/,
                 features = [{
@@ -107,7 +109,7 @@ describe('iD.serviceMapillary', function() {
         it.skip('loads multiple pages of image results', function() {
             var spy = sinon.spy();
             mapillary.on('loadedImages', spy);
-            mapillary.loadImages(context.projection, dimensions);
+            mapillary.loadImages(context.projection);
 
             var features0 = [],
                 features1 = [],
@@ -145,7 +147,7 @@ describe('iD.serviceMapillary', function() {
 
     describe('#loadSigns', function() {
        it('loads sign_defs', function() {
-            mapillary.loadSigns(context, context.projection, dimensions);
+            mapillary.loadSigns(context, context.projection);
 
             var base = 'regulatory--maximum-speed-limit-65--',
                 match = /traffico\/string-maps\/(\w+)-map.json/;
@@ -178,7 +180,7 @@ describe('iD.serviceMapillary', function() {
         it('fires loadedSigns when signs are loaded', function() {
             var spy = sinon.spy();
             mapillary.on('loadedSigns', spy);
-            mapillary.loadSigns(context, context.projection, dimensions);
+            mapillary.loadSigns(context, context.projection);
 
             var match = /search\/im\/geojson\/or/,
                 rects = [{
@@ -206,7 +208,7 @@ describe('iD.serviceMapillary', function() {
             var spy = sinon.spy();
             context.projection.translate([0,0]);
             mapillary.on('loadedSigns', spy);
-            mapillary.loadSigns(context, context.projection, dimensions);
+            mapillary.loadSigns(context, context.projection);
 
             var match = /search\/im\/geojson\/or/,
                 rects = [{
@@ -233,7 +235,7 @@ describe('iD.serviceMapillary', function() {
         it.skip('loads multiple pages of signs results', function() {
             var spy = sinon.spy();
             mapillary.on('loadedSigns', spy);
-            mapillary.loadSigns(context, context.projection, dimensions);
+            mapillary.loadSigns(context, context.projection);
 
             var rects = [{
                     'package': 'trafficsign_us_3.0',
@@ -286,7 +288,7 @@ describe('iD.serviceMapillary', function() {
             ];
 
             mapillary.cache().images.rtree.load(features);
-            var res = mapillary.images(context.projection, dimensions);
+            var res = mapillary.images(context.projection);
 
             expect(res).to.deep.eql([
                 { key: '0', loc: [10,0], ca: 90 },
@@ -304,7 +306,7 @@ describe('iD.serviceMapillary', function() {
             ];
 
             mapillary.cache().images.rtree.load(features);
-            var res = mapillary.images(context.projection, dimensions);
+            var res = mapillary.images(context.projection);
             expect(res).to.have.length.of.at.most(3);
         });
     });
@@ -325,7 +327,7 @@ describe('iD.serviceMapillary', function() {
                 ];
 
             mapillary.cache().signs.rtree.load(features);
-            var res = mapillary.signs(context.projection, dimensions);
+            var res = mapillary.signs(context.projection);
 
             expect(res).to.deep.eql([
                 { key: '0', loc: [10,0], signs: signs },
@@ -350,7 +352,7 @@ describe('iD.serviceMapillary', function() {
                 ];
 
             mapillary.cache().signs.rtree.load(features);
-            var res = mapillary.signs(context.projection, dimensions);
+            var res = mapillary.signs(context.projection);
             expect(res).to.have.length.of.at.most(3);
         });
     });
