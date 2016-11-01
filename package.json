@@ -72,9 +72,8 @@
     "xmlbuilder": "~8.2.2"
   },
   "greenkeeper": {
-    "ignore": [
-      "maki"
-    ]
+    "ignore": ["maki"],
+    "label": "chore-greenkeeper"
   },
   "engines": {
     "node": ">=4.0.0"
