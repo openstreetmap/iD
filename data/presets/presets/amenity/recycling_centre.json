@@ -3,22 +3,26 @@
     "fields": [
         "operator",
         "address",
-        "opening_hours"
+        "opening_hours",
+        "recycling_accepts"
     ],
     "geometry": [
         "point",
         "area"
     ],
     "terms": [
+        "bottle",
+        "can",
         "dump",
+        "glass",
         "garbage",
-        "recycling",
         "rubbish",
         "scrap",
         "trash"
     ],
     "tags": {
-        "amenity": "waste_transfer_station"
+        "amenity": "recycling",
+        "recycling_type": "centre"
     },
-    "name": "Waste Transfer Station"
+    "name": "Recycling Center"
 }

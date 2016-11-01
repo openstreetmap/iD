@@ -384,6 +384,10 @@
             "value": "ranger_station"
         },
         {
+            "key": "recycling_type",
+            "value": "centre"
+        },
+        {
             "key": "amenity",
             "value": "recycling"
         },

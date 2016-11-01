@@ -1346,6 +1346,13 @@
                 "recycling_accepts": {
                     "label": "Accepts"
                 },
+                "recycling_type": {
+                    "label": "Recycling Type",
+                    "options": {
+                        "container": "Container",
+                        "centre": "Recycling Center"
+                    }
+                },
                 "ref": {
                     "label": "Reference"
                 },
@@ -1979,9 +1986,13 @@
                     "name": "Ranger Station",
                     "terms": "visitor center,visitor centre,permit center,permit centre,backcountry office,warden office,warden center"
                 },
+                "amenity/recycling_centre": {
+                    "name": "Recycling Center",
+                    "terms": "bottle,can,dump,glass,garbage,rubbish,scrap,trash"
+                },
                 "amenity/recycling": {
                     "name": "Recycling",
-                    "terms": "can,bottle,garbage,scrap,trash"
+                    "terms": "bin,can,bottle,glass,garbage,rubbish,scrap,trash"
                 },
                 "amenity/restaurant": {
                     "name": "Restaurant",
@@ -2089,15 +2100,15 @@
                 },
                 "amenity/waste_basket": {
                     "name": "Waste Basket",
-                    "terms": "bin,rubbish,litter,trash,garbage"
+                    "terms": "bin,garbage,rubbish,litter,trash"
                 },
                 "amenity/waste_disposal": {
                     "name": "Garbage Dumpster",
-                    "terms": "rubbish,litter,trash"
+                    "terms": "garbage,rubbish,litter,trash"
                 },
                 "amenity/waste_transfer_station": {
                     "name": "Waste Transfer Station",
-                    "terms": "dump,garbage,recycling,scrap,trash"
+                    "terms": "dump,garbage,recycling,rubbish,scrap,trash"
                 },
                 "amenity/water_point": {
                     "name": "RV Drinking Water",

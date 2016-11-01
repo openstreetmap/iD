@@ -1,13 +1,18 @@
 {
     "icon": "waste-basket",
+    "fields": [
+        "collection_times"
+    ],
     "geometry": [
         "point",
-        "vertex"
+        "vertex",
+        "area"
     ],
     "tags": {
         "amenity": "waste_disposal"
     },
     "terms": [
+        "garbage",
         "rubbish",
         "litter",
         "trash"

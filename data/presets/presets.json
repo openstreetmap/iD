@@ -1637,8 +1637,8 @@
             "icon": "museum",
             "fields": [
                 "operator",
-                "building_area",
                 "address",
+                "building_area",
                 "opening_hours"
             ],
             "geometry": [
@@ -1813,11 +1813,12 @@
             },
             "name": "Ranger Station"
         },
-        "amenity/recycling": {
+        "amenity/recycling_centre": {
             "icon": "waste-basket",
             "fields": [
                 "operator",
                 "address",
+                "opening_hours",
                 "recycling_accepts"
             ],
             "geometry": [
@@ -1825,9 +1826,39 @@
                 "area"
             ],
             "terms": [
+                "bottle",
+                "can",
+                "dump",
+                "glass",
+                "garbage",
+                "rubbish",
+                "scrap",
+                "trash"
+            ],
+            "tags": {
+                "amenity": "recycling",
+                "recycling_type": "centre"
+            },
+            "name": "Recycling Center"
+        },
+        "amenity/recycling": {
+            "icon": "waste-basket",
+            "fields": [
+                "recycling_type",
+                "recycling_accepts",
+                "collection_times"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "terms": [
+                "bin",
                 "can",
                 "bottle",
+                "glass",
                 "garbage",
+                "rubbish",
                 "scrap",
                 "trash"
             ],
@@ -2405,32 +2436,41 @@
         },
         "amenity/waste_basket": {
             "icon": "waste-basket",
+            "fields": [
+                "collection_times"
+            ],
             "geometry": [
                 "point",
-                "vertex"
+                "vertex",
+                "area"
             ],
             "tags": {
                 "amenity": "waste_basket"
             },
             "terms": [
                 "bin",
+                "garbage",
                 "rubbish",
                 "litter",
-                "trash",
-                "garbage"
+                "trash"
             ],
             "name": "Waste Basket"
         },
         "amenity/waste_disposal": {
             "icon": "waste-basket",
+            "fields": [
+                "collection_times"
+            ],
             "geometry": [
                 "point",
-                "vertex"
+                "vertex",
+                "area"
             ],
             "tags": {
                 "amenity": "waste_disposal"
             },
             "terms": [
+                "garbage",
                 "rubbish",
                 "litter",
                 "trash"
@@ -2452,6 +2492,7 @@
                 "dump",
                 "garbage",
                 "recycling",
+                "rubbish",
                 "scrap",
                 "trash"
             ],

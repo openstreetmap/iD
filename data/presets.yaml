@@ -848,6 +848,14 @@ en:
       recycling_accepts:
         # 'recycling:=*'
         label: Accepts
+      recycling_type:
+        # recycling_type=*
+        label: Recycling Type
+        options:
+          # recycling_type=centre
+          centre: Recycling Center
+          # recycling_type=container
+          container: Container
       ref:
         # ref=*
         label: Reference
@@ -1553,8 +1561,13 @@ en:
       amenity/recycling:
         # amenity=recycling
         name: Recycling
-        # 'terms: can,bottle,garbage,scrap,trash'
+        # 'terms: bin,can,bottle,glass,garbage,rubbish,scrap,trash'
         terms: '<translate with synonyms or related terms for ''Recycling'', separated by commas>'
+      amenity/recycling_centre:
+        # 'amenity=recycling, recycling_type=centre'
+        name: Recycling Center
+        # 'terms: bottle,can,dump,glass,garbage,rubbish,scrap,trash'
+        terms: '<translate with synonyms or related terms for ''Recycling Center'', separated by commas>'
       amenity/register_office:
         # amenity=register_office
         name: Register Office
@@ -1691,17 +1704,17 @@ en:
       amenity/waste_basket:
         # amenity=waste_basket
         name: Waste Basket
-        # 'terms: bin,rubbish,litter,trash,garbage'
+        # 'terms: bin,garbage,rubbish,litter,trash'
         terms: '<translate with synonyms or related terms for ''Waste Basket'', separated by commas>'
       amenity/waste_disposal:
         # amenity=waste_disposal
         name: Garbage Dumpster
-        # 'terms: rubbish,litter,trash'
+        # 'terms: garbage,rubbish,litter,trash'
         terms: '<translate with synonyms or related terms for ''Garbage Dumpster'', separated by commas>'
       amenity/waste_transfer_station:
         # amenity=waste_transfer_station
         name: Waste Transfer Station
-        # 'terms: dump,garbage,recycling,scrap,trash'
+        # 'terms: dump,garbage,recycling,rubbish,scrap,trash'
         terms: '<translate with synonyms or related terms for ''Waste Transfer Station'', separated by commas>'
       amenity/water_point:
         # amenity=water_point

@@ -2,8 +2,8 @@
     "icon": "museum",
     "fields": [
         "operator",
-        "building_area",
         "address",
+        "building_area",
         "opening_hours"
     ],
     "geometry": [

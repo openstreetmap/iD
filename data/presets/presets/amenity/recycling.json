@@ -1,18 +1,21 @@
 {
     "icon": "waste-basket",
     "fields": [
-        "operator",
-        "address",
-        "recycling_accepts"
+        "recycling_type",
+        "recycling_accepts",
+        "collection_times"
     ],
     "geometry": [
         "point",
         "area"
     ],
     "terms": [
+        "bin",
         "can",
         "bottle",
+        "glass",
         "garbage",
+        "rubbish",
         "scrap",
         "trash"
     ],
