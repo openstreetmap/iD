@@ -30,12 +30,14 @@ unlink('dist/locales/en.json');
 var categories = generateCategories();
 var fields = generateFields();
 var presets = generatePresets();
+var defaults = read('data/presets/defaults.json');
 var translations = generateTranslations(fields, presets);
 var taginfo = generateTaginfo(presets);
 
 // Additional consistency checks
 validateCategoryPresets(categories, presets);
 validatePresetFields(presets, fields);
+validateDefaults(defaults, categories, presets);
 
 // Save individual data files
 fs.writeFileSync('data/presets/categories.json', JSON.stringify({ categories: categories }, null, 4));
@@ -296,6 +298,17 @@ function validatePresetFields(presets, fields) {
                 }
             });
         }
+    });
+}
+
+function validateDefaults (defaults, categories, presets) {
+    _.forEach(defaults.defaults, function (members, name) {
+        members.forEach(function (id) {
+            if (!presets[id] && !categories[id]) {
+                console.error('Unknown category or preset: ' + id + ' in default ' + name);
+                process.exit(1);
+            }
+        });
     });
 }
 
