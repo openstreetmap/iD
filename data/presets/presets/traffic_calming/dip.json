@@ -8,12 +8,11 @@
         "line"
     ],
     "terms": [
-        "hump",
         "speed",
         "slow"
     ],
     "tags": {
-        "traffic_calming": "bump"
+        "traffic_calming": "dip"
     },
-    "name": "Speed Bump"
+    "name": "Dip"
 }

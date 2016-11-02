@@ -10946,48 +10946,167 @@
             },
             "name": "Zoo"
         },
-        "traffic_calming/bump": {
+        "traffic_calming": {
             "fields": [
-                "surface"
+                "traffic_calming",
+                "parallel_direction"
             ],
             "geometry": [
-                "vertex"
+                "vertex",
+                "line"
+            ],
+            "tags": {
+                "traffic_calming": "*"
+            },
+            "terms": [
+                "bump",
+                "hump",
+                "slow",
+                "speed"
+            ],
+            "name": "Traffic Calming"
+        },
+        "traffic_calming/bump": {
+            "fields": [
+                "surface",
+                "parallel_direction"
+            ],
+            "geometry": [
+                "vertex",
+                "line"
+            ],
+            "terms": [
+                "hump",
+                "speed",
+                "slow"
             ],
             "tags": {
                 "traffic_calming": "bump"
             },
-            "terms": [
-                "speed hump"
-            ],
             "name": "Speed Bump"
+        },
+        "traffic_calming/chicane": {
+            "fields": [
+                "parallel_direction"
+            ],
+            "geometry": [
+                "vertex",
+                "line"
+            ],
+            "terms": [
+                "driveway link",
+                "speed",
+                "slow"
+            ],
+            "tags": {
+                "traffic_calming": "chicane"
+            },
+            "name": "Traffic Chicane"
+        },
+        "traffic_calming/choker": {
+            "fields": [
+                "parallel_direction"
+            ],
+            "geometry": [
+                "vertex",
+                "line"
+            ],
+            "terms": [
+                "speed",
+                "slow"
+            ],
+            "tags": {
+                "traffic_calming": "choker"
+            },
+            "name": "Traffic Choker"
+        },
+        "traffic_calming/cushion": {
+            "fields": [
+                "surface",
+                "parallel_direction"
+            ],
+            "geometry": [
+                "vertex",
+                "line"
+            ],
+            "terms": [
+                "bump",
+                "hump",
+                "speed",
+                "slow"
+            ],
+            "tags": {
+                "traffic_calming": "cushion"
+            },
+            "name": "Speed Cushion"
+        },
+        "traffic_calming/dip": {
+            "fields": [
+                "surface",
+                "parallel_direction"
+            ],
+            "geometry": [
+                "vertex",
+                "line"
+            ],
+            "terms": [
+                "speed",
+                "slow"
+            ],
+            "tags": {
+                "traffic_calming": "dip"
+            },
+            "name": "Dip"
         },
         "traffic_calming/hump": {
             "fields": [
-                "surface"
+                "surface",
+                "parallel_direction"
             ],
             "geometry": [
-                "vertex"
+                "vertex",
+                "line"
+            ],
+            "terms": [
+                "bump",
+                "speed",
+                "slow"
             ],
             "tags": {
                 "traffic_calming": "hump"
             },
-            "terms": [
-                "speed bump"
-            ],
             "name": "Speed Hump"
         },
-        "traffic_calming/rumble_strip": {
+        "traffic_calming/island": {
             "geometry": [
                 "vertex"
+            ],
+            "terms": [
+                "circle",
+                "roundabout",
+                "slow"
+            ],
+            "tags": {
+                "traffic_calming": "island"
+            },
+            "name": "Traffic Island"
+        },
+        "traffic_calming/rumble_strip": {
+            "fields": [
+                "parallel_direction"
+            ],
+            "geometry": [
+                "vertex",
+                "line"
+            ],
+            "terms": [
+                "audible lines",
+                "sleeper lines",
+                "growlers"
             ],
             "tags": {
                 "traffic_calming": "rumble_strip"
             },
-            "terms": [
-                "sleeper lines",
-                "audible lines",
-                "growlers"
-            ],
             "name": "Rumble Strip"
         },
         "traffic_calming/table": {
@@ -10995,16 +11114,19 @@
                 "surface"
             ],
             "geometry": [
-                "vertex"
+                "vertex",
+                "line"
+            ],
+            "terms": [
+                "flat top",
+                "hump",
+                "speed",
+                "slow"
             ],
             "tags": {
                 "highway": "crossing",
                 "traffic_calming": "table"
             },
-            "terms": [
-                "speed table",
-                "flat top hump"
-            ],
             "name": "Raised Pedestrian Crossing"
         },
         "type/multipolygon": {

@@ -1,0 +1,20 @@
+{
+    "fields": [
+        "traffic_calming",
+        "parallel_direction"
+    ],
+    "geometry": [
+        "vertex",
+        "line"
+    ],
+    "tags": {
+        "traffic_calming": "*"
+    },
+    "terms": [
+        "bump",
+        "hump",
+        "slow",
+        "speed"
+    ],
+    "name": "Traffic Calming"
+}

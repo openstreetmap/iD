@@ -1471,6 +1471,11 @@
                 }
             }
         },
+        "traffic_calming": {
+            "key": "traffic_calming",
+            "type": "typeCombo",
+            "label": "Type"
+        },
         "traffic_signals": {
             "key": "traffic_signals",
             "type": "combo",

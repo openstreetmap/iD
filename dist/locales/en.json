@@ -1547,6 +1547,9 @@
                         "grade5": "Soft: soil/sand/grass"
                     }
                 },
+                "traffic_calming": {
+                    "label": "Type"
+                },
                 "traffic_signals": {
                     "label": "Type"
                 },
@@ -4114,21 +4117,45 @@
                     "name": "Zoo",
                     "terms": ""
                 },
+                "traffic_calming": {
+                    "name": "Traffic Calming",
+                    "terms": "bump,hump,slow,speed"
+                },
                 "traffic_calming/bump": {
                     "name": "Speed Bump",
-                    "terms": "speed hump"
+                    "terms": "hump,speed,slow"
+                },
+                "traffic_calming/chicane": {
+                    "name": "Traffic Chicane",
+                    "terms": "driveway link,speed,slow"
+                },
+                "traffic_calming/choker": {
+                    "name": "Traffic Choker",
+                    "terms": "speed,slow"
+                },
+                "traffic_calming/cushion": {
+                    "name": "Speed Cushion",
+                    "terms": "bump,hump,speed,slow"
+                },
+                "traffic_calming/dip": {
+                    "name": "Dip",
+                    "terms": "speed,slow"
                 },
                 "traffic_calming/hump": {
                     "name": "Speed Hump",
-                    "terms": "speed bump"
+                    "terms": "bump,speed,slow"
+                },
+                "traffic_calming/island": {
+                    "name": "Traffic Island",
+                    "terms": "circle,roundabout,slow"
                 },
                 "traffic_calming/rumble_strip": {
                     "name": "Rumble Strip",
-                    "terms": "sleeper lines,audible lines,growlers"
+                    "terms": "audible lines,sleeper lines,growlers"
                 },
                 "traffic_calming/table": {
                     "name": "Raised Pedestrian Crossing",
-                    "terms": "speed table,flat top hump"
+                    "terms": "flat top,hump,speed,slow"
                 },
                 "type/multipolygon": {
                     "name": "Multipolygon",

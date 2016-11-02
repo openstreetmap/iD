@@ -8,12 +8,13 @@
         "line"
     ],
     "terms": [
+        "bump",
         "hump",
         "speed",
         "slow"
     ],
     "tags": {
-        "traffic_calming": "bump"
+        "traffic_calming": "cushion"
     },
-    "name": "Speed Bump"
+    "name": "Speed Cushion"
 }

@@ -2486,12 +2486,35 @@
             "value": "zoo"
         },
         {
+            "key": "traffic_calming"
+        },
+        {
             "key": "traffic_calming",
             "value": "bump"
         },
         {
             "key": "traffic_calming",
+            "value": "chicane"
+        },
+        {
+            "key": "traffic_calming",
+            "value": "choker"
+        },
+        {
+            "key": "traffic_calming",
+            "value": "cushion"
+        },
+        {
+            "key": "traffic_calming",
+            "value": "dip"
+        },
+        {
+            "key": "traffic_calming",
             "value": "hump"
+        },
+        {
+            "key": "traffic_calming",
+            "value": "island"
         },
         {
             "key": "traffic_calming",

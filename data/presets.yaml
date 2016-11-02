@@ -1093,6 +1093,9 @@ en:
           grade5: 'Soft: soil/sand/grass'
         # tracktype field placeholder
         placeholder: 'Solid, Mostly Solid, Soft...'
+      traffic_calming:
+        # traffic_calming=*
+        label: Type
       traffic_signals:
         # traffic_signals=*
         label: Type
@@ -3883,25 +3886,55 @@ en:
         # tourism=zoo
         name: Zoo
         terms: '<translate with synonyms or related terms for ''Zoo'', separated by commas>'
+      traffic_calming:
+        # traffic_calming=*
+        name: Traffic Calming
+        # 'terms: bump,hump,slow,speed'
+        terms: '<translate with synonyms or related terms for ''Traffic Calming'', separated by commas>'
       traffic_calming/bump:
         # traffic_calming=bump
         name: Speed Bump
-        # 'terms: speed hump'
+        # 'terms: hump,speed,slow'
         terms: '<translate with synonyms or related terms for ''Speed Bump'', separated by commas>'
+      traffic_calming/chicane:
+        # traffic_calming=chicane
+        name: Traffic Chicane
+        # 'terms: driveway link,speed,slow'
+        terms: '<translate with synonyms or related terms for ''Traffic Chicane'', separated by commas>'
+      traffic_calming/choker:
+        # traffic_calming=choker
+        name: Traffic Choker
+        # 'terms: speed,slow'
+        terms: '<translate with synonyms or related terms for ''Traffic Choker'', separated by commas>'
+      traffic_calming/cushion:
+        # traffic_calming=cushion
+        name: Speed Cushion
+        # 'terms: bump,hump,speed,slow'
+        terms: '<translate with synonyms or related terms for ''Speed Cushion'', separated by commas>'
+      traffic_calming/dip:
+        # traffic_calming=dip
+        name: Dip
+        # 'terms: speed,slow'
+        terms: '<translate with synonyms or related terms for ''Dip'', separated by commas>'
       traffic_calming/hump:
         # traffic_calming=hump
         name: Speed Hump
-        # 'terms: speed bump'
+        # 'terms: bump,speed,slow'
         terms: '<translate with synonyms or related terms for ''Speed Hump'', separated by commas>'
+      traffic_calming/island:
+        # traffic_calming=island
+        name: Traffic Island
+        # 'terms: circle,roundabout,slow'
+        terms: '<translate with synonyms or related terms for ''Traffic Island'', separated by commas>'
       traffic_calming/rumble_strip:
         # traffic_calming=rumble_strip
         name: Rumble Strip
-        # 'terms: sleeper lines,audible lines,growlers'
+        # 'terms: audible lines,sleeper lines,growlers'
         terms: '<translate with synonyms or related terms for ''Rumble Strip'', separated by commas>'
       traffic_calming/table:
         # 'highway=crossing, traffic_calming=table'
         name: Raised Pedestrian Crossing
-        # 'terms: speed table,flat top hump'
+        # 'terms: flat top,hump,speed,slow'
         terms: '<translate with synonyms or related terms for ''Raised Pedestrian Crossing'', separated by commas>'
       type/boundary:
         # type=boundary

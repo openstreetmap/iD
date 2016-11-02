@@ -1,6 +1,5 @@
 {
     "fields": [
-        "surface",
         "parallel_direction"
     ],
     "geometry": [
@@ -8,12 +7,11 @@
         "line"
     ],
     "terms": [
-        "hump",
         "speed",
         "slow"
     ],
     "tags": {
-        "traffic_calming": "bump"
+        "traffic_calming": "choker"
     },
-    "name": "Speed Bump"
+    "name": "Traffic Choker"
 }

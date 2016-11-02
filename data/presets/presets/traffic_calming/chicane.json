@@ -1,6 +1,5 @@
 {
     "fields": [
-        "surface",
         "parallel_direction"
     ],
     "geometry": [
@@ -8,12 +7,12 @@
         "line"
     ],
     "terms": [
-        "hump",
+        "driveway link",
         "speed",
         "slow"
     ],
     "tags": {
-        "traffic_calming": "bump"
+        "traffic_calming": "chicane"
     },
-    "name": "Speed Bump"
+    "name": "Traffic Chicane"
 }
