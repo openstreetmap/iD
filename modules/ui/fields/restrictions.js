@@ -43,6 +43,7 @@ export function uiFieldRestrictions(field, context) {
     var dispatch = d3.dispatch('change'),
         breathe = behaviorBreathe(context),
         hover = behaviorHover(context),
+        initialized = false,
         vertexID,
         fromNodeID;
 
@@ -100,6 +101,7 @@ export function uiFieldRestrictions(field, context) {
         var surface = wrap.selectAll('.surface');
 
         if (!enter.empty()) {
+            initialized = true;
             surface
                 .call(breathe)
                 .call(hover);
@@ -222,6 +224,8 @@ export function uiFieldRestrictions(field, context) {
 
 
     restrictions.off = function(selection) {
+        if (!initialized) return;
+
         selection.selectAll('.surface')
             .call(hover.off)
             .call(breathe.off)
