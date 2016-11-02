@@ -32,6 +32,9 @@ import { uiRadialMenu, uiSelectionList } from '../ui/index';
 import { utilEntityOrMemberSelector } from '../util/index';
 
 
+var selectedLastParent;
+
+
 export function modeSelect(context, selectedIDs) {
     var mode = {
         id: 'select',
@@ -52,7 +55,9 @@ export function modeSelect(context, selectedIDs) {
         inspector,
         radialMenu,
         newFeature = false,
-        suppressMenu = false;
+        suppressMenu = false,
+        follow = false;
+
 
     var wrap = context.container()
         .select('.inspector-wrap');
@@ -62,6 +67,53 @@ export function modeSelect(context, selectedIDs) {
         if (selectedIDs.length === 1) {
             return context.hasEntity(selectedIDs[0]);
         }
+    }
+
+
+    // find the common parent ways for nextNode, previousNode
+    function commonParents() {
+        var graph = context.graph(),
+            commonParents = [];
+
+        for (var i = 0; i < selectedIDs.length; i++) {
+            var entity = context.hasEntity(selectedIDs[i]);
+            if (!entity || entity.geometry(graph) !== 'vertex') {
+                return [];  // selection includes some not vertexes
+            }
+
+            var currParents = _.map(graph.parentWays(entity), 'id');
+            if (!commonParents.length) {
+                commonParents = currParents;
+                continue;
+            }
+
+            commonParents = _.intersection(commonParents, currParents);
+            if (!commonParents.length) {
+                return [];
+            }
+        }
+
+        return commonParents;
+    }
+
+
+    function singularParent() {
+        var parents = commonParents();
+        if (!parents) return;
+
+        // selectedLastParent is used when we visit a vertex with multiple
+        // parents, and we want to remember which parent line we started on.
+
+        if (parents.length === 1) {
+            selectedLastParent = parents[0];  // remember this parent for later
+            return selectedLastParent;
+        }
+
+        if (parents.indexOf(selectedLastParent) !== -1) {
+            return selectedLastParent;   // prefer the previously seen parent
+        }
+
+        return parents[0];
     }
 
 
@@ -139,6 +191,13 @@ export function modeSelect(context, selectedIDs) {
     };
 
 
+    mode.follow = function(_) {
+        if (!arguments.length) return follow;
+        follow = _;
+        return mode;
+    };
+
+
     mode.enter = function() {
 
         function update() {
@@ -200,6 +259,78 @@ export function modeSelect(context, selectedIDs) {
         }
 
 
+        function firstNode() {
+            d3.event.preventDefault();
+            var parent = singularParent();
+            if (parent) {
+                var way = context.entity(parent);
+                context.enter(
+                    modeSelect(context, [way.first()]).follow(true)
+                );
+            }
+        }
+
+
+        function lastNode() {
+            d3.event.preventDefault();
+            var parent = singularParent();
+            if (parent) {
+                var way = context.entity(parent);
+                context.enter(
+                    modeSelect(context, [way.last()]).follow(true)
+                );
+            }
+        }
+
+
+        function previousNode() {
+            d3.event.preventDefault();
+            var parent = singularParent();
+            if (!parent) return;
+
+            var way = context.entity(parent),
+                length = way.nodes.length,
+                curr = way.nodes.indexOf(selectedIDs[0]),
+                index = -1;
+
+            if (curr > 0) {
+                index = curr - 1;
+            } else if (way.isClosed()) {
+                index = length - 2;
+            }
+
+            if (index !== -1) {
+                context.enter(
+                    modeSelect(context, [way.nodes[index]]).follow(true)
+                );
+            }
+        }
+
+
+        function nextNode() {
+            d3.event.preventDefault();
+            var parent = singularParent();
+            if (!parent) return;
+
+            var way = context.entity(parent),
+                length = way.nodes.length,
+                curr = way.nodes.indexOf(selectedIDs[0]),
+                index = -1;
+
+            if (curr < length - 1) {
+                index = curr + 1;
+            } else if (way.isClosed()) {
+                index = 0;
+            }
+
+            if (index !== -1) {
+                context.enter(
+                    modeSelect(context, [way.nodes[index]]).follow(true)
+                );
+            }
+        }
+
+
         behaviors.forEach(function(behavior) {
             context.install(behavior);
         });
@@ -211,6 +342,10 @@ export function modeSelect(context, selectedIDs) {
         operations.unshift(Operations.operationDelete(selectedIDs, context));
 
         keybinding
+            .on('[', previousNode)
+            .on(']', nextNode)
+            .on('⌘[', firstNode)
+            .on('⌘]', lastNode)
             .on('⎋', esc, true)
             .on('space', toggleMenu);
 
@@ -246,6 +381,18 @@ export function modeSelect(context, selectedIDs) {
 
         if (show) {
             positionMenu();
+        }
+
+        if (follow) {
+            var extent = geoExtent(),
+                graph = context.graph();
+            selectedIDs.forEach(function(id) {
+                var entity = context.entity(id);
+                extent._extend(entity.extent(graph));
+            });
+
+            var loc = extent.center();
+            context.map().centerEase(loc);
         }
 
         timeout = window.setTimeout(function() {
