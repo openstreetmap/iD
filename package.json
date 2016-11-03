@@ -57,7 +57,7 @@
     "name-suggestion-index": "0.1.1",
     "npm-run-all": "~3.1.1",
     "phantomjs-prebuilt": "~2.1.11",
-    "request": "~2.76.0",
+    "request": "~2.78.0",
     "rollup": "0.36.3",
     "rollup-plugin-commonjs": "5.0.5",
     "rollup-plugin-json": "2.0.2",
