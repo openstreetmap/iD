@@ -342,10 +342,10 @@ export function modeSelect(context, selectedIDs) {
         operations.unshift(Operations.operationDelete(selectedIDs, context));
 
         keybinding
-            .on('[', previousNode)
-            .on(']', nextNode)
-            .on('⌘[', firstNode)
-            .on('⌘]', lastNode)
+            .on(['[','pgup'], previousNode)
+            .on([']', 'pgdown'], nextNode)
+            .on(['⌘[', 'home'], firstNode)
+            .on(['⌘]', 'end'], lastNode)
             .on('⎋', esc, true)
             .on('space', toggleMenu);
 
