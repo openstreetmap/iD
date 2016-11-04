@@ -29,6 +29,7 @@ import { modeBrowse } from './browse';
 import { modeDragNode } from './drag_node';
 import * as Operations from '../operations/index';
 import { uiRadialMenu, uiSelectionList } from '../ui/index';
+import { uiCmd } from '../ui/cmd';
 import { utilEntityOrMemberSelector } from '../util/index';
 
 
@@ -344,8 +345,8 @@ export function modeSelect(context, selectedIDs) {
         keybinding
             .on(['[','pgup'], previousNode)
             .on([']', 'pgdown'], nextNode)
-            .on(['⌘[', 'home'], firstNode)
-            .on(['⌘]', 'end'], lastNode)
+            .on([uiCmd('⌘['), 'home'], firstNode)
+            .on([uiCmd('⌘]'), 'end'], lastNode)
             .on('⎋', esc, true)
             .on('space', toggleMenu);
 
