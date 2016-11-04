@@ -48,7 +48,7 @@
   * OSM API calls are now authenticated for logged in users (helps with (#3519, #2262)
   * When reversing a way, reverse tags on its child nodes (#3076, thanks @Psigio)
   * Support Right to Left interface for some languages 'ar', 'fa', 'iw', 'dv' (#3007, #3087, thanks @mapmeld)
-  * All user to click an 'X' to remove an item from the selection list (#2950, thanks @ebrelsford)
+  * Allow user to click an 'X' to remove an item from the selection list (#2950, thanks @ebrelsford)
   * Bundled Mapillary JS plugin upgraded to v2.0 (#3496)
   * Allow `Del` key as a without modifier as a Delete shortcut (#3455)
   * Remove diacritics (accented chars) when doing fuzzy searches (#3159)
@@ -67,8 +67,6 @@
   * Clip area polygons and clippaths to padded viewport (#3529)
   * Throttled redrawing (#3360, thanks @guillaume)
   * Use fewer steps for interpolated breathe behavior (#2911)
-
-
 
 ## 1.9.7
 ##### Jul 16, 2016
