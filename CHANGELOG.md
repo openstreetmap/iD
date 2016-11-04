@@ -1,5 +1,75 @@
 :warning: = Breaking change, may affect downstream projects or sites that embed iD.
 
+## 2.0.0
+##### (coming soon)
+* :warning: iD is now written in a modular code style using ES6 `import`/`export` and [rollup.js](http://rollupjs.org/) as a build tool (#3118, #3179, #3180)
+  * Many thanks to @tmcw, @kepta, @tyrasd, @beaugunderson, @davidchouse
+* :warning: Flattened namespace means that all functions have changed names (#3479)
+  * e.g. `iD.actions.Move` -> `iD.actionMove`, `iD.geo.Extent` -> `iD.geoExtent`
+  * Many deprecated names are still exported as symbols, e.g. `iD.Context` - we will remove these eventually
+* :warning: iD has upgraded to the latest released versions of d3, lodash, rbush, etc.
+  * d3 no longer adds itself to the global namespace, but can now be accessed via `iD.d3`
+* :warning: iD now uses `npm` scripts for all build processes
+  * iD requires Node v4 or higher, but does not require `make` anymore
+  * Update install instructions and prerequisites (#3466, thanks @tyrasd)
+* Many preset improvements:
+  * Add Waste Transfer preset (#3387)
+  * Add Billboard preset (#3386)
+  * Improve traffic calming presets (#3218)
+  * Improve waste and recycling presets (#2689)
+  * Rename Camp Site to Campground, and add preset for individual camp pitches (#3385)
+  * Multiselect field for Bike Shop services (#3517, thanks @willemarcel)
+  * Add presets for Nail Salon, Tanning Salon (#3516, thanks @skorasaurus)
+  * Split golf water_hazard presets into separate line and area presets (#3483)
+  * Update terms lists for Anime preset (#3478, thanks @mbrickn)
+  * Add Pastry Shop preset (#3444, thanks @Dgleish)
+  * Add maxspeed field to Railway preset (#3458, thanks @boothym)
+  * Add E-Cigarette Shop preset (#3457, thanks @boothym)
+  * Add capacity field to Charging Station preset (#3458, thanks @boothym)
+  * Add Pumping Station preset (#3384, thanks @kepta)
+  * Improve Railway crossing presets (#3395, thanks @boothym)
+  * Improve Gym and Sports Center presets (#3352, thanks @boothym)
+  * Add Coworking Space preset (#3381, thanks @willemarcel)
+  * Add access_simple field for Basketball, Tennis, Garden presets (#3336, thanks @Psigio)
+  * Add icon to fire hydrant preset (#3380, thanks @bagage)
+  * Add Yoga Studio preset (#3352, thanks @Psigio)
+  * Add Bowling Green preset (#3363, thanks @boothym)
+  * Add more fields ("support", "display", "visibility", "date") to Clock preset (#3318, thanks @HolgerJeromin)
+  * Add more values to the speed limit field (#3316, thanks @1ec5)
+  * Add network combo field for route relations (#3302, thanks @1ec5)
+  * Add Blood Donor Center preset (#3285, thanks @M1dgard)
+  * Add indoor yes/no field for Defibrillator preset (#3284, thanks @M1dgard)
+  * Add Miniature Golf preset (#3279, thanks @boothym)
+  * Add second_hand field for shop=car preset (#3274, thanks @skorasaurus)
+  * Add Planetarium preset (#3268, thanks @willemarcel)
+  * Add Ice Cream Shop preset (#3253, thanks @ankit-m)
+  * Add Taiwan address format to Address field (#3261, thanks @david082321)
+* New Features:
+  * OSM API calls are now authenticated for logged in users (helps with (#3519, #2262)
+  * When reversing a way, reverse tags on its child nodes (#3076, thanks @Psigio)
+  * Support Right to Left interface for some languages 'ar', 'fa', 'iw', 'dv' (#3007, #3087, thanks @mapmeld)
+  * All user to click an 'X' to remove an item from the selection list (#2950, thanks @ebrelsford)
+  * Bundled Mapillary JS plugin upgraded to v2.0 (#3496)
+  * Allow `Del` key as a without modifier as a Delete shortcut (#3455)
+  * Remove diacritics (accented chars) when doing fuzzy searches (#3159)
+* Bugfixes:
+  * Don't include terms for non-searchable presets in translation source (#3323)
+  * Let user know if the documentation points to a redirect page (#3337)
+  * Fix line labeling placement for IE11, Edge (#3020)
+  * Better label placement, use smaller collision boxes (#1645)
+  * Allow "network", "genus", "taxon", "species" taginfo lookups to expect uppercase values (#3377)
+  * Fix way disappearing due to invalid "layer" tag (#3405, thanks @edpop)
+  * Add radix parameter for all `parseInt` calls (#3399, thanks @HolgerJeromin)
+  * Don't limit movement of vertex that combines two endpoints (#2731)
+  * Don't use checks in walkthrough navigation (#3247)
+  * Default Wikipedia language field to user's language, not English (#3265)
+* Performance improvements:
+  * Clip area polygons and clippaths to padded viewport (#3529)
+  * Throttled redrawing (#3360, thanks @guillaume)
+  * Use fewer steps for interpolated breathe behavior (#2911)
+
+
+
 ## 1.9.7
 ##### Jul 16, 2016
 * Treat features on `addr:interpolation` lines as points, not vertices (#3241)
