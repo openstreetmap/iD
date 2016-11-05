@@ -106,11 +106,14 @@ en:
       not_connected: There aren't enough lines/areas here to disconnect.
       connected_to_hidden: This can't be disconnected because it is connected to a hidden feature.
       relation: This can't be disconnected because it connects members of a relation.
-    flip:
+    flipHorizontal:
       title: Flip Horizontal
       description: Flip this area horizontally.
-      key: F
       annotation: Flipped an area horizontally.
+    flipVertical:
+      title: Flip Vertical
+      description: Flip this area vertically.
+      annotation: Flipped an area vertically.
     merge:
       title: Merge
       description: Merge these features.
