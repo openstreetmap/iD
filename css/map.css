@@ -408,6 +408,18 @@ path.stroke.tag-landuse-farmland {
     background-color: rgba(140, 208, 95, 0.2);
 }
 
+path.stroke.tag-landuse-farmyard {
+    stroke: rgb(245, 220, 186);
+}
+path.fill.tag-landuse-farmyard {
+    stroke: rgba(245, 220, 186, 0.3);
+    fill: rgba(245, 220, 186, 0.3);
+}
+.preset-icon-fill-area.tag-landuse-farmyard {
+    border-color: rgb(245, 220, 186);
+    background: rgba(245, 220, 186, 0.3);
+}
+
 .pattern-color-cemetery,
 .pattern-color-orchard {
     fill: rgba(140, 208, 95, 0.2);
