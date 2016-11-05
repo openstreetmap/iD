@@ -7,7 +7,7 @@ export function operationFlip(selectedIDs, context) {
 
     var operation = function() {
         context.perform(
-            actionFlip(entityId),
+            actionFlip(entityId, false, context.projection),
             t('operations.flip.annotation')
         );
     };
