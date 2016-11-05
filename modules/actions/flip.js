@@ -32,8 +32,8 @@ export function actionFlip(wayId, isVertical, projection) {
                     node.loc[1] - midPoint :
                     node.loc[0] - midPoint;
                 return isVertical ?
-                    node.move(projection.translate(0, delta)) :
-                    node.move(projection.translate(delta, 0));
+                    node.move([node.loc[0], node.loc[1]-(2*delta)]) :
+                    node.move([node.loc[0]-(2*delta), node.loc[1]]);
             })
             // Chain together consecutive updates to the graph for each updated node and return
             .reduce(function (accGraph, value) {
