@@ -19,7 +19,7 @@ export function actionFlip(wayId, isVertical, projection) {
         const leftOrTop = isVertical ? boundingRect[1] : boundingRect[0];
         const rightOrBottom = isVertical ? boundingRect[3] : boundingRect[2];
         // Determine the mid-point that we will flip on
-        const midPoint = leftOrTop + (rightOrBottom - leftOrTop);
+        const midPoint = leftOrTop + ((rightOrBottom - leftOrTop) / 2);
 
         // Obtain all of the nodes on the way, iterate over them to translate then aggreate up
         return _(targetWay.nodes)
