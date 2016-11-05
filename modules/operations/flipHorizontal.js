@@ -1,5 +1,6 @@
 import { t } from '../util/locale';
 import { actionFlip } from '../actions/index';
+import { uiCmd } from '../ui/index';
 
 export function operationFlipHorizontal(selectedIDs, context) {
     var entityId = selectedIDs[0];
@@ -25,7 +26,7 @@ export function operationFlipHorizontal(selectedIDs, context) {
     };
 
     operation.id = 'flipHorizontal';
-    operation.keys = [t('operations.flipHorizontal.key')];
+    operation.keys = [uiCmd('⌥H')]; // Alt-H
     operation.title = t('operations.flipHorizontal.title');
 
     return operation;

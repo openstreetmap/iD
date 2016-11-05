@@ -1,5 +1,6 @@
 import { t } from '../util/locale';
 import { actionFlip } from '../actions/index';
+import { uiCmd } from '../ui/index';
 
 export function operationFlipVertical(selectedIDs, context) {
     var entityId = selectedIDs[0];
@@ -25,7 +26,7 @@ export function operationFlipVertical(selectedIDs, context) {
     };
 
     operation.id = 'flipVertical';
-    operation.keys = [t('operations.flipVertical.key')];
+    operation.keys = [uiCmd('⌥V')]; // Alt-V
     operation.title = t('operations.flipVertical.title');
 
     return operation;
