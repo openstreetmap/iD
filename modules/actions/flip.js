@@ -27,8 +27,10 @@ export function actionFlip(wayId, isVertical, projection) {
             .map(function (nodeId) {
                 return graph.entity(nodeId);
             })
+            // Only process each node once, as the first node will be listed twice in the way
+            .uniqBy(function (node) { return node.id; })
+            // Get distance from midPoint and produce a translated node
             .map(function (node) {
-                // Get distance from midPoint
                 const delta = isVertical ?
                     node.loc[1] - midPoint :
                     node.loc[0] - midPoint;
