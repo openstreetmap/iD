@@ -137,6 +137,12 @@
                 "connected_to_hidden": "This can't be disconnected because it is connected to a hidden feature.",
                 "relation": "This can't be disconnected because it connects members of a relation."
             },
+            "flip": {
+                "title": "Flip Horizontal",
+                "description": "Flip this area horizontally.",
+                "key": "F",
+                "annotation": "Flipped an area horizontally."
+            },
             "merge": {
                 "title": "Merge",
                 "description": "Merge these features.",
