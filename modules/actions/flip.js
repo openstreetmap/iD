@@ -5,8 +5,9 @@ Only operates on "area" ways
 
 export function actionFlip(wayId, isVertical, projection) {
 
-    return function (graph) {
+    return function (graph) {        
         const targetWay = graph.entity(wayId);
+
         // If the way is not an area, we will not process it
         if (!targetWay.isArea()) {
             // return input graph without changes
