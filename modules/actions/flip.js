@@ -3,7 +3,7 @@ import _ from 'lodash';
 Only operates on "area" ways
 */
 
-export function actionFlip(wayId, isVertical, projection) {
+export function actionFlip(wayId, isVertical) {
 
     return function (graph) {        
         const targetWay = graph.entity(wayId);
