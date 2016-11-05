@@ -73,4 +73,68 @@ describe('iD.actionFlip', function() {
         expect(graph.entity('c').loc[0]).to.equal(2); // C should be 2,0 now
         expect(graph.entity('d').loc[0]).to.equal(0); // D should be 0,0 now
     });
+
+    it('does not flip horizontally if not an area - does not alter x value', function () {
+        var graph = iD.Graph([
+                iD.Node({id: 'a', loc: [0, 0]}),
+                iD.Node({id: 'b', loc: [2, 0]}),
+                iD.Node({id: 'c', loc: [2, 2]}),
+                iD.Node({id: 'd', loc: [0, 2]}),
+                iD.Way({id: '-', nodes: ['a', 'b', 'c', 'd', 'a']})
+            ]);
+        graph = iD.actionFlip('-', false)(graph);
+        // should be no change
+        expect(graph.entity('a').loc[0]).to.equal(0); 
+        expect(graph.entity('b').loc[0]).to.equal(2); 
+        expect(graph.entity('c').loc[0]).to.equal(2); 
+        expect(graph.entity('d').loc[0]).to.equal(0); 
+    });
+
+     it('does not flip horizontally if not an area - does not alter y value', function () {
+        var graph = iD.Graph([
+                iD.Node({id: 'a', loc: [0, 0]}),
+                iD.Node({id: 'b', loc: [2, 0]}),
+                iD.Node({id: 'c', loc: [2, 2]}),
+                iD.Node({id: 'd', loc: [0, 2]}),
+                iD.Way({id: '-', nodes: ['a', 'b', 'c', 'd', 'a']})
+            ]);
+        graph = iD.actionFlip('-', false)(graph);
+        // should be no change
+        expect(graph.entity('a').loc[1]).to.equal(0); 
+        expect(graph.entity('b').loc[1]).to.equal(0); 
+        expect(graph.entity('c').loc[1]).to.equal(2); 
+        expect(graph.entity('d').loc[1]).to.equal(2); 
+    });
+    
+    it('does not flip vertically if not an area - does not alter x value', function () {
+        var graph = iD.Graph([
+                iD.Node({id: 'a', loc: [0, 0]}),
+                iD.Node({id: 'b', loc: [2, 0]}),
+                iD.Node({id: 'c', loc: [2, 2]}),
+                iD.Node({id: 'd', loc: [0, 2]}),
+                iD.Way({id: '-', nodes: ['a', 'b', 'c', 'd', 'a']})
+            ]);
+        graph = iD.actionFlip('-', true)(graph);
+        // should be no change
+        expect(graph.entity('a').loc[0]).to.equal(0); 
+        expect(graph.entity('b').loc[0]).to.equal(2); 
+        expect(graph.entity('c').loc[0]).to.equal(2); 
+        expect(graph.entity('d').loc[0]).to.equal(0); 
+    });
+
+    it('does not flip vertically if not an area - does not alter y value', function () {
+        var graph = iD.Graph([
+                iD.Node({id: 'a', loc: [0, 0]}),
+                iD.Node({id: 'b', loc: [2, 0]}),
+                iD.Node({id: 'c', loc: [2, 2]}),
+                iD.Node({id: 'd', loc: [0, 2]}),
+                iD.Way({id: '-', nodes: ['a', 'b', 'c', 'd', 'a']})
+            ]);
+        graph = iD.actionFlip('-', true)(graph);
+        // should be no change
+        expect(graph.entity('a').loc[1]).to.equal(0); 
+        expect(graph.entity('b').loc[1]).to.equal(0); 
+        expect(graph.entity('c').loc[1]).to.equal(2); 
+        expect(graph.entity('d').loc[1]).to.equal(2); 
+    });
 });
