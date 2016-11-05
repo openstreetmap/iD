@@ -2423,6 +2423,10 @@
         },
         {
             "key": "tourism",
+            "value": "apartment"
+        },
+        {
+            "key": "tourism",
             "value": "artwork"
         },
         {

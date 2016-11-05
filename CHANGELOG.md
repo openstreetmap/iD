@@ -13,6 +13,7 @@
   * iD requires Node v4 or higher, but does not require `make` anymore
   * Update install instructions and prerequisites (#3466, thanks @tyrasd)
 * Many preset improvements:
+  * Add Guest Apartment / Condo preset (#3548)
   * Add Waste Transfer preset (#3387)
   * Add Billboard preset (#3386)
   * Improve traffic calming presets (#3218)

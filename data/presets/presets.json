@@ -10629,6 +10629,26 @@
             },
             "name": "Alpine Hut"
         },
+        "tourism/apartment": {
+            "icon": "lodging",
+            "fields": [
+                "operator",
+                "address",
+                "building_area",
+                "smoking",
+                "rooms",
+                "internet_access",
+                "internet_access/fee"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "tags": {
+                "tourism": "apartment"
+            },
+            "name": "Guest Apartment / Condo"
+        },
         "tourism/artwork": {
             "icon": "art-gallery",
             "fields": [

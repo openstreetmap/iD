@@ -3815,6 +3815,10 @@ en:
         # tourism=alpine_hut
         name: Alpine Hut
         terms: '<translate with synonyms or related terms for ''Alpine Hut'', separated by commas>'
+      tourism/apartment:
+        # tourism=apartment
+        name: Guest Apartment / Condo
+        terms: '<translate with synonyms or related terms for ''Guest Apartment / Condo'', separated by commas>'
       tourism/artwork:
         # tourism=artwork
         name: Artwork

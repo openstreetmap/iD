@@ -4053,6 +4053,10 @@
                     "name": "Alpine Hut",
                     "terms": ""
                 },
+                "tourism/apartment": {
+                    "name": "Guest Apartment / Condo",
+                    "terms": ""
+                },
                 "tourism/artwork": {
                     "name": "Artwork",
                     "terms": "mural,sculpture,statue"
