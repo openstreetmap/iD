@@ -31,4 +31,4 @@ export { actionRotateWay } from './rotate_way';
 export { actionSplit } from './split';
 export { actionStraighten } from './straighten';
 export { actionUnrestrictTurn } from './unrestrict_turn';
-export { actionFlip } from './flip';
+export { actionReflect } from './flip';

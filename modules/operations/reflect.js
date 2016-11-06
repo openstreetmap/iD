@@ -1,14 +1,13 @@
 import { t } from '../util/locale';
-import { actionFlip } from '../actions/index';
-import { uiCmd } from '../ui/index';
+import { actionReflect } from '../actions/index';
 
-export function operationFlipHorizontal(selectedIDs, context) {
+export function operationReflect(selectedIDs, context) {
     var entityId = selectedIDs[0];
 
     var operation = function() {
         context.perform(
-            actionFlip(entityId, false),
-            t('operations.flipHorizontal.annotation')
+            actionReflect(entityId, false),
+            t('operations.reflect.annotation')
         );
     };
 
@@ -22,12 +21,12 @@ export function operationFlipHorizontal(selectedIDs, context) {
     };
 
     operation.tooltip = function() {
-        return t('operations.flipHorizontal.description');
+        return t('operations.reflect.description');
     };
 
     operation.id = 'flipHorizontal';
-    operation.keys = [uiCmd('⌥H')]; // Alt-H
-    operation.title = t('operations.flipHorizontal.title');
+    operation.keys = [t('operations.reflect.key')];
+    operation.title = t('operations.reflect.title');
 
     return operation;
 }
