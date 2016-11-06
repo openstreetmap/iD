@@ -1,6 +1,9 @@
 {
+    "icon": "lighthouse",
     "fields": [
-        "towertype"
+        "tower/type",
+        "tower/construction",
+        "height"
     ],
     "geometry": [
         "point",
