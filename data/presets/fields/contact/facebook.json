@@ -1,0 +1,8 @@
+{
+    "key": "contact:facebook",
+    "type": "url",
+    "icon": "website",
+    "placeholder": "http://example.com/",
+    "universal": true,
+    "label": "Facebook Profile"
+}

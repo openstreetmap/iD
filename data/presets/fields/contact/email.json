@@ -1,0 +1,8 @@
+{
+    "key": "contact:email",
+    "type": "email",
+    "icon": "website",
+    "placeholder": "user@example.com",
+    "universal": true,
+    "label": "E-mail"
+}
