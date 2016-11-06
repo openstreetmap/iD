@@ -1,4 +1,5 @@
 {
+    "icon": "ice-cream",
     "fields": [
         "operator",
         "payment_multi",

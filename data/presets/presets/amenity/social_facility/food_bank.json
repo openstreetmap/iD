@@ -1,4 +1,5 @@
 {
+    "icon": "fast-food",
     "fields": [
         "operator",
         "address",

@@ -1,4 +1,5 @@
 {
+    "icon": "veterinary",
     "fields": [
         "operator",
         "fee",

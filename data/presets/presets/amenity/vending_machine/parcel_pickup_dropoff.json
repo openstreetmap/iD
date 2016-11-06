@@ -1,4 +1,5 @@
 {
+    "icon": "post",
     "fields": [
         "operator",
         "payment_multi",
