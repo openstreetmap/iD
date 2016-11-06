@@ -3,9 +3,23 @@
     "fields": [
         "cuisine",
         "internet_access",
+        "internet_access/fee",
+        "internet_access/wlan/ssid",
         "address",
         "building_area",
         "opening_hours",
+        "lunch/menu",
+        "lunch/buffet",
+        "phone",
+        "website",
+        "contact/facebook",
+        "contact/twitter",
+        "contact/instagram",
+        "contact/linkedin",
+        "contact/email",
+        "contact/vk",
+        "contact/google_plus",
+        "outdoor_seating",
         "smoking"
     ],
     "geometry": [

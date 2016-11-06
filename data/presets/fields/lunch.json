@@ -1,0 +1,7 @@
+{
+    "key": "lunch",
+    "type": "combo",
+    "label": "Daily Lunch (Unknown Kind)",
+    "default": "no",
+    "placeholder": "Yes, No, <Lunch Hours>"
+}
