@@ -30,10 +30,13 @@ export function operationReflect(selectedIDs, context) {
     };
 
     operation.tooltip = function() {
-        return t('operations.reflect.description');
+        var disable = operation.disabled();
+        return disable ?
+            t('operations.reflect.' + disable) :
+            t('operations.reflect.description');
     };
 
-    operation.id = 'flipHorizontal';
+    operation.id = 'reflect';
     operation.keys = [t('operations.reflect.key')];
     operation.title = t('operations.reflect.title');
 
