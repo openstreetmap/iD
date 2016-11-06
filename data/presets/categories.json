@@ -64,11 +64,11 @@
                 "highway/pedestrian",
                 "footway/crosswalk",
                 "footway/sidewalk",
+                "highway/steps",
+                "highway/path",
                 "highway/footway",
                 "highway/cycleway",
-                "highway/bridleway",
-                "highway/path",
-                "highway/steps"
+                "highway/bridleway"
             ]
         },
         "category-rail": {
@@ -110,14 +110,14 @@
                 "highway/primary",
                 "highway/secondary",
                 "highway/tertiary",
+                "highway/unclassified",
                 "highway/service",
+                "highway/track",
                 "highway/motorway_link",
                 "highway/trunk_link",
                 "highway/primary_link",
                 "highway/secondary_link",
                 "highway/tertiary_link",
-                "highway/unclassified",
-                "highway/track",
                 "highway/road"
             ]
         },
