@@ -1,9 +1,15 @@
 .DS_Store
+data/presets.yaml
+data/presets/categories.json
+data/presets/fields.json
+data/presets/presets.json
 data/data.js
+data/taginfo.json
 dist/*.js
 dist/*.css
 dist/*.map
 dist/img/*.svg
+dist/locales/en.json
 dist/mapillary-js/
 node_modules/
 npm-debug.log
