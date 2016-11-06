@@ -1,0 +1,11 @@
+{
+    "icon": "circle-stroked",
+    "geometry": [
+        "point"
+    ],
+    "tags": {
+        "highway": "traffic_mirror"
+    },
+    "terms": [],
+    "name": "Traffic Mirror"
+}
