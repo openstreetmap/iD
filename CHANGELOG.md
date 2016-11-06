@@ -13,6 +13,7 @@
   * iD requires Node v4 or higher, but does not require `make` anymore
   * Update install instructions and prerequisites (#3466, thanks @tyrasd)
 * Many preset improvements:
+  * Improve styling of Farmyards (#3556, thanks @Thue)
   * Add Guest Apartment / Condo preset (#3548)
   * Add Waste Transfer preset (#3387)
   * Add Billboard preset (#3386)
@@ -46,6 +47,7 @@
   * Add Ice Cream Shop preset (#3253, thanks @ankit-m)
   * Add Taiwan address format to Address field (#3261, thanks @david082321)
 * New Features:
+  * Address field improvements - eliminate duplicates, more dropdowns for address fields (#3553)
   * OSM API calls are now authenticated for logged in users (helps with (#3519, #2262)
   * When reversing a way, reverse tags on its child nodes (#3076, thanks @Psigio)
   * Support Right to Left interface for some languages 'ar', 'fa', 'iw', 'dv' (#3007, #3087, thanks @mapmeld)
