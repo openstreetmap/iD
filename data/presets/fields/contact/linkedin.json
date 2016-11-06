@@ -1,0 +1,8 @@
+{
+    "key": "contact:linkedin",
+    "type": "url",
+    "icon": "website",
+    "placeholder": "http://example.com/",
+    "universal": true,
+    "label": "LinkedIn Account"
+}

@@ -4,6 +4,20 @@
         "address",
         "building_area",
         "opening_hours",
+        "sport",
+        "lunch/menu",
+        "internet_access",
+        "internet_access/wlan/ssid",
+        "phone",
+        "website",
+        "contact/facebook",
+        "contact/twitter",
+        "contact/instagram",
+        "contact/linkedin",
+        "contact/email",
+        "contact/vk",
+        "contact/google_plus",
+        "outdoor_seating",
         "smoking"
     ],
     "geometry": [
@@ -14,6 +28,8 @@
         "amenity": "pub"
     },
     "terms": [
+        "alcohol",
+        "drink",
         "dive",
         "beer",
         "bier",

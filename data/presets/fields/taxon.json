@@ -1,0 +1,6 @@
+{
+    "key": "taxon",
+    "type": "localized",
+    "label": "Taxonomical Name of Species",
+    "placeholder": "Scientific & Localized Names"
+}

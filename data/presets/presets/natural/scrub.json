@@ -1,4 +1,9 @@
 {
+    "icon": "wetland",
+    "fields": [
+        "taxon/genus",
+        "taxon"
+    ],
     "geometry": [
         "area"
     ],

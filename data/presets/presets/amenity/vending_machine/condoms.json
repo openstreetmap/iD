@@ -1,4 +1,5 @@
 {
+    "icon": "heart",
     "fields": [
         "operator",
         "payment_multi",

@@ -1,0 +1,8 @@
+{
+    "key": "contact:google_plus",
+    "type": "url",
+    "icon": "website",
+    "placeholder": "http://example.com/",
+    "universal": true,
+    "label": "Google+ Account"
+}

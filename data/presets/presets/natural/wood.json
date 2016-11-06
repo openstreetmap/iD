@@ -1,6 +1,8 @@
 {
     "icon": "park2",
     "fields": [
+        "taxon/genus",
+        "taxon",
         "leaf_type",
         "leaf_cycle"
     ],

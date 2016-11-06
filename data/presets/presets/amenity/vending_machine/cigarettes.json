@@ -1,4 +1,5 @@
 {
+    "icon": "fire-station",
     "fields": [
         "operator",
         "payment_multi",

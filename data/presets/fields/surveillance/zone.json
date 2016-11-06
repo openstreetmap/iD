@@ -1,0 +1,6 @@
+{
+    "key": "surveillance:zone",
+    "type": "combo",
+    "label": "Zone",
+    "placeholder": "Town, Parking, Traffic, Shop, Building"
+}

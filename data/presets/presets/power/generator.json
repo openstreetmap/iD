@@ -1,4 +1,5 @@
 {
+    "icon": "danger",
     "fields": [
         "operator",
         "generator/source",

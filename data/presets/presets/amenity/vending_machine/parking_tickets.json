@@ -1,4 +1,5 @@
 {
+    "icon": "parking-garage",
     "fields": [
         "operator",
         "payment_multi",
