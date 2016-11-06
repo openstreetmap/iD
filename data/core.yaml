@@ -134,6 +134,8 @@ en:
       description: Reflect this area on the vertical axis.
       key: T
       annotation: Reflected an area.
+      too_large: This can't be reflected because not enough of it is currently visible.
+      connected_to_hidden: This can't be reflected because it is connected to a hidden feature.
     rotate:
       title: Rotate
       description: Rotate this object around its center point.

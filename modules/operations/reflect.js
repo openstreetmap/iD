@@ -2,11 +2,14 @@ import { t } from '../util/locale';
 import { actionReflect } from '../actions/index';
 
 export function operationReflect(selectedIDs, context) {
-    var entityId = selectedIDs[0];
+    const entityId = selectedIDs[0];
+    const entity = context.entity(entityId);
+    const extent = entity.extent(context.graph());
+    const action = actionReflect(entityId);
 
     var operation = function() {
         context.perform(
-            actionReflect(entityId, false),
+            action,
             t('operations.reflect.annotation')
         );
     };
@@ -17,7 +20,13 @@ export function operationReflect(selectedIDs, context) {
     };
 
     operation.disabled = function() {
-        return false;
+        if (extent.percentContainedIn(context.extent()) < 0.8) {
+            return 'too_large';
+        } else if (context.hasHiddenConnections(entityId)) {
+            return 'connected_to_hidden';
+        } else {
+            return false;
+        }
     };
 
     operation.tooltip = function() {
