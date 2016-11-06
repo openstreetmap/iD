@@ -125,7 +125,7 @@ The complete JSON schema for fields can be found in [`data/presets/schema/field.
 * `cycleway` - Block of dropdowns for adding `cycleway:left` and `cycleway:right` tags on a highway
 * `maxspeed` - Numeric text field for speed and dropdown for "mph/kph"
 * `restrictions` - Graphical field for editing turn restrictions
-* `wikipedia` - Block of fields for selecting a wiki language and wikipedia page
+* `wikipedia` - Block of fields for selecting a wiki language and Wikipedia page
 
 
 #### Field Properties
@@ -147,7 +147,7 @@ one of `point`, `vertex`, `line`, `area`.
 
 ##### `default`
 
-The default value for the field.  For exmaple, the `building_area.json` field
+The default value for the field.  For example, the `building_area.json` field
 will automatically add the tag `building=yes` to certain presets that are
 associated with building features (but only if drawn as a closed area).
 
@@ -179,8 +179,9 @@ The user can pick from any of the options, or type their own value.
 
 Combo field types can accept name-value pairs in the `strings` property.
 This is helpful when the field has a fixed number of options and you want to be
-able to provide a translateable description of each option.  When using `strings`,
+able to provide a translatable description of each option.  When using `strings`,
 the user can not type their own value, they must choose one of the given values.
+
 ```js
 {
     "key": "smoothness",
