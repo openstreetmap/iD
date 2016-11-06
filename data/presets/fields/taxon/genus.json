@@ -1,0 +1,6 @@
+{
+    "key": "taxon:genus",
+    "type": "text",
+    "label": "Taxonomic Genus of Species",
+    "placeholder": "Scientific Name of Genus"
+}
