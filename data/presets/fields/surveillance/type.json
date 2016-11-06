@@ -1,0 +1,7 @@
+{
+    "key": "surveillance:type",
+    "type": "combo",
+    "label": "What is watching",
+    "default": "camera",
+    "placeholder": "Camera, Guard, ALPR"
+}

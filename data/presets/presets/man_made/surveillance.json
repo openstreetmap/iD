@@ -3,7 +3,24 @@
     "geometry": [
         "point"
     ],
+    "fields": [
+        "surveillance",
+        "surveillance/type",
+        "camera/type",
+        "camera/mount",
+        "surveillance/zone",
+        "height",
+        "camera/features",
+        "contact/webcam",
+        "operator"
+     ],
     "terms": [
+        "security",
+        "camera",
+        "guard",
+        "video",
+        "webcam",
+        "alpr",
         "cctv"
     ],
     "tags": {

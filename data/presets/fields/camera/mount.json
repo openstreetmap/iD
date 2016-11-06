@@ -1,0 +1,6 @@
+{
+    "key": "camera:mount",
+    "type": "combo",
+    "label": "Camera mount",
+    "placeholder": "Wall, Pole"
+}

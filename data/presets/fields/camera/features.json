@@ -1,0 +1,6 @@
+{
+    "key": "camera:features",
+    "type": "combo",
+    "label": "Camera features",
+    "placeholder": "Webcam, Microphone, Nightvision, Heatvision, Zoom, Motion, Wireless"
+}

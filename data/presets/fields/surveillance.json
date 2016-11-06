@@ -1,0 +1,7 @@
+{
+    "key": "surveillance",
+    "type": "combo",
+    "label": "Surveillance kind",
+    "default": "outdoor",
+    "placeholder": "Public, Outdoor, Indoor"
+}
