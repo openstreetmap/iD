@@ -5557,6 +5557,7 @@
             "name": "Ruins"
         },
         "historic/wayside_cross": {
+            "icon": "religious-christian",
             "geometry": [
                 "point",
                 "vertex",
