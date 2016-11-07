@@ -2805,6 +2805,10 @@
                     "name": "Turning Circle",
                     "terms": "cul-de-sac"
                 },
+                "highway/turning_loop": {
+                    "name": "Turning Loop (Island)",
+                    "terms": "cul-de-sac"
+                },
                 "highway/unclassified": {
                     "name": "Minor/Unclassified Road",
                     "terms": ""

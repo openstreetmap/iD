@@ -1196,6 +1196,10 @@
         },
         {
             "key": "highway",
+            "value": "turning_loop"
+        },
+        {
+            "key": "highway",
             "value": "unclassified"
         },
         {

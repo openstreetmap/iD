@@ -2453,6 +2453,11 @@ en:
         name: Turning Circle
         # 'terms: cul-de-sac'
         terms: '<translate with synonyms or related terms for ''Turning Circle'', separated by commas>'
+      highway/turning_loop:
+        # highway=turning_loop
+        name: Turning Loop (Island)
+        # 'terms: cul-de-sac'
+        terms: '<translate with synonyms or related terms for ''Turning Loop (Island)'', separated by commas>'
       highway/unclassified:
         # highway=unclassified
         name: Minor/Unclassified Road

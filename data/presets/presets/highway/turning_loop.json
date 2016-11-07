@@ -1,13 +1,13 @@
 {
-    "icon": "circle-stroked",
+    "icon": "circle",
     "geometry": [
         "vertex"
     ],
     "tags": {
-        "highway": "turning_circle"
+        "highway": "turning_loop"
     },
     "terms": [
         "cul-de-sac"
     ],
-    "name": "Turning Circle"
+    "name": "Turning Loop (Island)"
 }

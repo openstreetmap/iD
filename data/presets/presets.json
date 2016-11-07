@@ -3647,7 +3647,6 @@
             "name": "Caterer"
         },
         "craft/clockmaker": {
-            "icon": "circle-stroked",
             "fields": [
                 "operator",
                 "address",
@@ -4200,7 +4199,6 @@
             "name": "Upholsterer"
         },
         "craft/watchmaker": {
-            "icon": "circle-stroked",
             "fields": [
                 "operator",
                 "address",
@@ -4817,6 +4815,7 @@
             "name": "Living Street"
         },
         "highway/mini_roundabout": {
+            "icon": "circle-stroked",
             "geometry": [
                 "vertex"
             ],
@@ -5433,7 +5432,7 @@
             "name": "Trunk Road"
         },
         "highway/turning_circle": {
-            "icon": "circle",
+            "icon": "circle-stroked",
             "geometry": [
                 "vertex"
             ],
@@ -5444,6 +5443,19 @@
                 "cul-de-sac"
             ],
             "name": "Turning Circle"
+        },
+        "highway/turning_loop": {
+            "icon": "circle",
+            "geometry": [
+                "vertex"
+            ],
+            "tags": {
+                "highway": "turning_loop"
+            },
+            "terms": [
+                "cul-de-sac"
+            ],
+            "name": "Turning Loop (Island)"
         },
         "highway/unclassified": {
             "icon": "highway-unclassified",
@@ -11124,6 +11136,7 @@
             "name": "Speed Hump"
         },
         "traffic_calming/island": {
+            "icon": "circle",
             "geometry": [
                 "vertex"
             ],
