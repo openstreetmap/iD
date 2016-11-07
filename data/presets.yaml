@@ -441,6 +441,9 @@ en:
       handrail:
         # handrail=*
         label: Handrail
+      height:
+        # height=*
+        label: Height (meters)
       highway:
         # highway=*
         label: Type
@@ -1074,9 +1077,14 @@ en:
       tourism:
         # tourism=*
         label: Type
-      towertype:
+      tower/construction:
+        # 'tower:construction=*'
+        label: Construction
+        # tower/construction field placeholder
+        placeholder: 'Guyed, Lattice, Concealed, ...'
+      tower/type:
         # 'tower:type=*'
-        label: Tower type
+        label: Type
       tracktype:
         # tracktype=*
         label: Track Type

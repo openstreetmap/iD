@@ -615,6 +615,11 @@
             "type": "check",
             "label": "Handrail"
         },
+        "height": {
+            "key": "height",
+            "type": "number",
+            "label": "Height (meters)"
+        },
         "highway": {
             "key": "highway",
             "type": "typeCombo",
@@ -1451,10 +1456,16 @@
             "type": "typeCombo",
             "label": "Type"
         },
-        "towertype": {
+        "tower/construction": {
+            "key": "tower:construction",
+            "type": "combo",
+            "label": "Construction",
+            "placeholder": "Guyed, Lattice, Concealed, ..."
+        },
+        "tower/type": {
             "key": "tower:type",
             "type": "combo",
-            "label": "Tower type"
+            "label": "Type"
         },
         "tracktype": {
             "key": "tracktype",

@@ -1024,6 +1024,9 @@
                 "handrail": {
                     "label": "Handrail"
                 },
+                "height": {
+                    "label": "Height (meters)"
+                },
                 "highway": {
                     "label": "Type"
                 },
@@ -1533,8 +1536,12 @@
                 "tourism": {
                     "label": "Type"
                 },
-                "towertype": {
-                    "label": "Tower type"
+                "tower/construction": {
+                    "label": "Construction",
+                    "placeholder": "Guyed, Lattice, Concealed, ..."
+                },
+                "tower/type": {
+                    "label": "Type"
                 },
                 "tracktype": {
                     "label": "Track Type",

@@ -6711,6 +6711,11 @@
             "name": "Lighthouse"
         },
         "man_made/mast": {
+            "fields": [
+                "tower/type",
+                "tower/construction",
+                "height"
+            ],
             "geometry": [
                 "point"
             ],
@@ -6870,7 +6875,9 @@
         },
         "man_made/tower": {
             "fields": [
-                "towertype"
+                "tower/type",
+                "tower/construction",
+                "height"
             ],
             "geometry": [
                 "point",

@@ -1,6 +1,6 @@
 {
     "key": "tower:construction",
     "type": "combo",
-    "label": "Tower construction",
+    "label": "Construction",
     "placeholder": "Guyed, Lattice, Concealed, ..."
 }
