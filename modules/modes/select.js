@@ -243,7 +243,10 @@ export function modeSelect(context, selectedIDs) {
                     .selectAll(utilEntityOrMemberSelector(selectedIDs, context.graph()));
 
             if (selection.empty()) {
-                if (drawn) {  // Exit mode if selected DOM elements have disappeared..
+                // Return to browse mode if selected DOM elements have
+                // disappeared because the user moved them out of view..
+                var source = d3.event && d3.event.type === 'zoom' && d3.event.sourceEvent;
+                if (drawn && source && (source.type === 'mousemove' || source.type === 'touchmove')) {
                     context.enter(modeBrowse(context));
                 }
             } else {
