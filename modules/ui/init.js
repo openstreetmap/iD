@@ -256,14 +256,10 @@ export function uiInit(context) {
             .on('↑', pan([0, pa]))
             .on('→', pan([-pa, 0]))
             .on('↓', pan([0, -pa]))
-            .on('⇧←', pan([mapDimensions[0], 0]))
-            .on('⇧↑', pan([0, mapDimensions[1]]))
-            .on('⇧→', pan([-mapDimensions[0], 0]))
-            .on('⇧↓', pan([0, -mapDimensions[1]]))
-            .on(uiCmd('⌘←'), pan([mapDimensions[0], 0]))
-            .on(uiCmd('⌘↑'), pan([0, mapDimensions[1]]))
-            .on(uiCmd('⌘→'), pan([-mapDimensions[0], 0]))
-            .on(uiCmd('⌘↓'), pan([0, -mapDimensions[1]]));
+            .on(['⇧←', uiCmd('⌘←')], pan([mapDimensions[0], 0]))
+            .on(['⇧↑', uiCmd('⌘↑')], pan([0, mapDimensions[1]]))
+            .on(['⇧→', uiCmd('⌘→')], pan([-mapDimensions[0], 0]))
+            .on(['⇧↓', uiCmd('⌘↓')], pan([0, -mapDimensions[1]]));
 
         d3.select(document)
             .call(keybinding);

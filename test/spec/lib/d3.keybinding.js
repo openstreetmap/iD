@@ -38,6 +38,16 @@ describe('d3.keybinding', function() {
             expect(spy).to.have.been.calledOnce;
         });
 
+        it('adds multiple bindings given an array of keys', function () {
+            d3.select(document).call(keybinding.on(['A','B'], spy));
+
+            happen.keydown(document, {keyCode: 65});
+            expect(spy).to.have.been.calledOnce;
+
+            happen.keydown(document, {keyCode: 66});
+            expect(spy).to.have.been.calledTwice;
+        });
+
         it('does not dispatch when focus is in input elements by default', function () {
             d3.select(document).call(keybinding.on('A', spy));
 
