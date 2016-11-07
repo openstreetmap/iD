@@ -318,16 +318,22 @@ export function coreContext(root) {
         return context;
     };
 
-    context.loadLocale = function(cb) {
+    context.loadLocale = function(callback) {
         if (locale && locale !== 'en' && dataLocales.indexOf(locale) !== -1) {
             localePath = localePath || context.asset('locales/' + locale + '.json');
             d3.json(localePath, function(err, result) {
-                addTranslation(locale, result[locale]);
-                setLocale(locale);
-                cb();
+                if (!err) {
+                    addTranslation(locale, result[locale]);
+                    setLocale(locale);
+                }
+                if (callback) {
+                    callback(err);
+                }
             });
         } else {
-            cb();
+            if (callback) {
+                callback();
+            }
         }
     };
 

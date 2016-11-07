@@ -284,11 +284,16 @@ export function uiInit(context) {
     }
 
 
-    function ui(node) {
+    function ui(node, callback) {
         var container = d3.select(node);
         context.container(container);
-        context.loadLocale(function() {
-            render(container);
+        context.loadLocale(function(err) {
+            if (!err) {
+                render(container);
+            }
+            if (callback) {
+                callback(err);
+            }
         });
     }
 
