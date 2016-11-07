@@ -50,6 +50,12 @@
   * Add Ice Cream Shop preset (#3253, thanks @ankit-m)
   * Add Taiwan address format to Address field (#3261, thanks @david082321)
 * New Features:
+  * Vertex keyboard navigation (#1917, #3539)
+    * `[` or `pageup` - jump to previous vertex
+    * `]` or `pagedown` - jump to next vertex
+    * `⌘[` or `home` - jump to first vertex
+    * `⌘]` or `end` - jump to last vertex
+    * `\` or `pause-break` - select next parent, if at intersection
   * Address field improvements - eliminate duplicates, more dropdowns for address fields (#3553)
   * OSM API calls are now authenticated for logged in users (helps with (#3519, #2262)
   * When reversing a way, reverse tags on its child nodes (#3076, thanks @Psigio)
