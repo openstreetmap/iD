@@ -50,6 +50,7 @@
   * Add Ice Cream Shop preset (#3253, thanks @ankit-m)
   * Add Taiwan address format to Address field (#3261, thanks @david082321)
 * New Features:
+  * `ui()` initializer now accepts a callback that will be called when loadLocale is finished (#3550)
   * Vertex keyboard navigation (#1917, #3539)
     * `[` or `pageup` - jump to previous vertex
     * `]` or `pagedown` - jump to next vertex
