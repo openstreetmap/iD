@@ -37,6 +37,7 @@ g.point .shadow {
     stroke-opacity: 0;
 }
 
+g.point.related:not(.selected) .shadow,
 g.point.hover:not(.selected) .shadow {
     stroke-opacity: 0.5;
 }
@@ -104,7 +105,9 @@ g.vertex.vertex-hover {
     display: block;
 }
 
+g.vertex.related:not(.selected) .shadow,
 g.vertex.hover:not(.selected) .shadow,
+g.midpoint.related:not(.selected) .shadow,
 g.midpoint.hover:not(.selected) .shadow {
     fill-opacity: 0.5;
 }
@@ -144,6 +147,7 @@ path.shadow {
     stroke-opacity: 0;
 }
 
+path.shadow.related:not(.selected),
 path.shadow.hover:not(.selected) {
     stroke-opacity: 0.4;
 }
@@ -1600,6 +1604,7 @@ text.gpx {
     stroke-width: 8;
 }
 
+.fill-wireframe path.shadow.related:not(.selected),
 .fill-wireframe path.shadow.hover:not(.selected) {
     stroke-opacity: 0.4;
 }
