@@ -1311,6 +1311,32 @@
             },
             "name": "Ice Cream Shop"
         },
+        "amenity/internet_cafe": {
+            "fields": [
+                "operator",
+                "address",
+                "building_area",
+                "opening_hours",
+                "smoking"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "terms": [
+                "cybercafe",
+                "taxiphone",
+                "teleboutique",
+                "coffee",
+                "cafe",
+                "net",
+                "lanhouse"
+            ],
+            "tags": {
+                "amenity": "internet_cafe"
+            },
+            "name": "Internet Cafe"
+        },
         "amenity/kindergarten": {
             "icon": "school",
             "fields": [

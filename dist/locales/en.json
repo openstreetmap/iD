@@ -1901,6 +1901,10 @@
                     "name": "Ice Cream Shop",
                     "terms": "gelato,sorbet,sherbet,frozen,yogurt"
                 },
+                "amenity/internet_cafe": {
+                    "name": "Internet Cafe",
+                    "terms": "cybercafe,taxiphone,teleboutique,coffee,cafe,net,lanhouse"
+                },
                 "amenity/kindergarten": {
                     "name": "Preschool/Kindergarten Grounds",
                     "terms": "kindergarden,pre-school"

@@ -13,6 +13,7 @@
   * iD requires Node v4 or higher, but does not require `make` anymore
   * Update install instructions and prerequisites (#3466, thanks @tyrasd)
 * Many preset improvements:
+  * Add Internet Cafe preset (#3559)
   * Improve styling of Farmyards (#3556, thanks @Thue)
   * Add Guest Apartment / Condo preset (#3548)
   * Add Waste Transfer preset (#3387)
