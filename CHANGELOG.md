@@ -13,6 +13,7 @@
   * iD requires Node v4 or higher, but does not require `make` anymore
   * Update install instructions and prerequisites (#3466, thanks @tyrasd)
 * Many preset improvements:
+  * Add Construction and Tower Type fields to Mast and Tower presets (#3561, thanks @bkil)
   * Add Turning Loop (Island) preset, adjust icons for traversable/nontraversable features (#3557)
   * Add Internet Cafe preset (#3559)
   * Improve styling of Farmyards (#3556, thanks @Thue)
