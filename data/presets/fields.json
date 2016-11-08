@@ -696,6 +696,11 @@
             "type": "check",
             "label": "Internet Access Fee"
         },
+        "internet_access/ssid": {
+            "key": "internet_access:ssid",
+            "type": "text",
+            "label": "SSID (Network Name)"
+        },
         "kerb": {
             "key": "kerb",
             "type": "combo",
@@ -805,6 +810,25 @@
             "key": "location",
             "type": "combo",
             "label": "Location"
+        },
+        "lunch": {
+            "key": "lunch",
+            "type": "combo",
+            "label": "Daily Lunch (Unknown Kind)",
+            "default": "no",
+            "placeholder": "Yes, No, <Lunch Hours>"
+        },
+        "lunch/buffet": {
+            "key": "lunch:buffet",
+            "type": "combo",
+            "label": "Daily Buffet Lunch (All You Can Eat)",
+            "placeholder": "Yes, No, <Lunch Hours>"
+        },
+        "lunch/menu": {
+            "key": "lunch:menu",
+            "type": "combo",
+            "label": "Daily Menu Lunch (Mass Prepared, Inexpensive)",
+            "placeholder": "Yes, No, <Lunch Hours>"
         },
         "man_made": {
             "key": "man_made",
@@ -1002,6 +1026,11 @@
             "key": "operator",
             "type": "text",
             "label": "Operator"
+        },
+        "outdoor_seating": {
+            "key": "outdoor_seating",
+            "type": "combo",
+            "label": "Outdoor Seating"
         },
         "par": {
             "key": "par",
