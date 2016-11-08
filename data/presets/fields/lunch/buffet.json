@@ -1,0 +1,6 @@
+{
+    "key": "lunch:buffet",
+    "type": "combo",
+    "label": "Daily Buffet Lunch (All You Can Eat)",
+    "placeholder": "Yes, No, <Lunch Hours>"
+}
