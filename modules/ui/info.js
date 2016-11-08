@@ -6,6 +6,11 @@ import { geoExtent } from '../geo/index';
 import { utilDetect } from '../util/detect';
 import { uiCmd } from './cmd';
 
+import {
+    geoLength as d3GeoLength,
+    geoCentroid as d3GeoCentroid
+} from 'd3';
+
 
 export function uiInfo(context) {
     var key = uiCmd('⌘I'),
@@ -149,9 +154,9 @@ export function uiInfo(context) {
             if (geometry === 'line' || geometry === 'area') {
                 var closed = (entity.type === 'relation') || (entity.isClosed() && !entity.isDegenerate()),
                     feature = entity.asGeoJSON(resolver),
-                    length = radiansToMeters(d3.geoLength(toLineString(feature))),
+                    length = radiansToMeters(d3GeoLength(toLineString(feature))),
                     lengthLabel = t('infobox.' + (closed ? 'perimeter' : 'length')),
-                    centroid = d3.geoCentroid(feature);
+                    centroid = d3GeoCentroid(feature);
 
                 list.append('li')
                     .text(t('infobox.geometry') + ': ' +
