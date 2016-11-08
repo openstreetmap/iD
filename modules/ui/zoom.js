@@ -75,7 +75,7 @@ export function uiZoom(context) {
             keybinding.on([key, '⇧' + key], zoomIn);
             keybinding.on([uiCmd('⌘' + key), uiCmd('⌘⇧' + key)], zoomInFurther);
         });
-        _.each(['-','ffminus','_','dash'], function(key) {
+        _.each(['-','ffminus','dash'], function(key) {
             keybinding.on([key, '⇧' + key], zoomOut);
             keybinding.on([uiCmd('⌘' + key), uiCmd('⌘⇧' + key)], zoomOutFurther);
         });
