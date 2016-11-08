@@ -1,0 +1,7 @@
+{
+    "key": "contact:webcam",
+    "type": "url",
+    "icon": "website",
+    "label": "Webcam feed URL",
+    "placeholder": "http://example.com/"
+}
