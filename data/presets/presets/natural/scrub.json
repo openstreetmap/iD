@@ -1,4 +1,8 @@
 {
+    "fields": [
+        "taxon/genus",
+        "taxon"
+    ],
     "geometry": [
         "area"
     ],

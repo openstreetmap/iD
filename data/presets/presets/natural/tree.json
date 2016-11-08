@@ -1,5 +1,8 @@
 {
     "fields": [
+        "taxon/genus",
+        "taxon",
+        "height",
         "leaf_type_singular",
         "leaf_cycle_singular",
         "denotation"
