@@ -171,7 +171,6 @@ d3keybinding.keyCodes = {
     ',': 188, comma: 188,
     // Dash / Underscore key
     'dash': 189,
-    '_': 189, 'underscore': 189,
     // Period, or ., or full-stop
     '.': 190, period: 190, 'full-stop': 190,
     // Slash, or /, or forward-slash
