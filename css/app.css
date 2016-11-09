@@ -2613,6 +2613,9 @@ img.tile-removing {
 .api-status-login {
     color: #aaf;
 }
+.api-status-login:hover {
+    color: #ccf;
+}
 
 /* Modals
 ------------------------------------------------------- */
