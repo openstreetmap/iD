@@ -1,8 +1,10 @@
 describe('iD.serviceOsm', function () {
-    var connection;
+    var context, connection;
+
 
     beforeEach(function () {
-        connection = iD.services.osm;
+        context = iD.Context(window);
+        connection = context.connection();
         connection.switch({ urlroot: 'http://www.openstreetmap.org'});
         connection.reset();
     });
