@@ -64,6 +64,8 @@ export function rendererMap(context) {
 
         context
             .on('change.map', immediateRedraw);
+        context.connection()
+            .on('change.map', immediateRedraw);
         context.history()
             .on('change.map', immediateRedraw);
         context.background()

@@ -9,7 +9,7 @@ import { utilDetect } from '../util/detect';
 import { utilRebind } from '../util/rebind';
 
 
-var dispatch = d3.dispatch('authenticating', 'authenticated', 'auth', 'loading', 'loaded'),
+var dispatch = d3.dispatch('authLoading', 'authDone', 'change', 'loading', 'loaded'),
     useHttps = window.location.protocol === 'https:',
     protocol = useHttps ? 'https:' : 'http:',
     urlroot = protocol + '//www.openstreetmap.org',
@@ -20,25 +20,28 @@ var dispatch = d3.dispatch('authenticating', 'authenticated', 'auth', 'loading',
         url: urlroot,
         oauth_consumer_key: '5A043yRSEugj4DJ5TljuapfnrflWDte8jTOcWLlT',
         oauth_secret: 'aB3jKq1TRsCOUrfOIZ6oQMEDmv2ptV76PA54NGLL',
-        loading: authenticating,
-        done: authenticated
+        loading: authLoading,
+        done: authDone
     }),
+    rateLimitError,
     userDetails,
     off;
 
 
-function authenticating() {
-    dispatch.call('authenticating');
+function authLoading() {
+    dispatch.call('authLoading');
 }
 
 
-function authenticated() {
-    dispatch.call('authenticated');
+function authDone() {
+    dispatch.call('authDone');
 }
 
 
 function abortRequest(i) {
-    i.abort();
+    if (i) {
+        i.abort();
+    }
 }
 
 
@@ -129,10 +132,10 @@ var parsers = {
 };
 
 
-function parse(dom) {
-    if (!dom || !dom.childNodes) return;
+function parse(xml) {
+    if (!xml || !xml.childNodes) return;
 
-    var root = dom.childNodes[0],
+    var root = xml.childNodes[0],
         children = root.childNodes,
         entities = [];
 
@@ -151,7 +154,7 @@ function parse(dom) {
 export default {
 
     init: function() {
-        this.event = utilRebind(this, dispatch, 'on');
+        utilRebind(this, dispatch, 'on');
     },
 
 
@@ -189,9 +192,34 @@ export default {
 
 
     loadFromAPI: function(path, callback) {
-        function done(err, dom) {
-            return callback(err, parse(dom));
+        var that = this;
+
+        function done(err, xml) {
+            var isAuthenticated = that.authenticated();
+
+            // 400 Bad Request, 401 Unauthorized, 403 Forbidden
+            // Logout and retry the request..
+            if (isAuthenticated && err &&
+                    (err.status === 400 || err.status === 401 || err.status === 403)) {
+                that.logout();
+                that.loadFromAPI(path, callback);
+
+            // else, no retry..
+            } else {
+                // 509 Bandwidth Limit Exceeded, 429 Too Many Requests
+                // Set the rateLimitError flag and trigger a warning..
+                if (!isAuthenticated && !rateLimitError && err &&
+                        (err.status === 509 || err.status === 429)) {
+                    rateLimitError = err;
+                    dispatch.call('change');
+                }
+
+                if (callback) {
+                    callback(err, parse(xml));
+                }
+            }
         }
+
         if (this.authenticated()) {
             return oauth.xhr({ method: 'GET', path: path }, done);
         } else {
@@ -402,8 +430,13 @@ export default {
 
     status: function(callback) {
         function done(capabilities) {
-            var apiStatus = capabilities.getElementsByTagName('status');
-            callback(undefined, apiStatus[0].getAttribute('api'));
+            if (rateLimitError) {
+                callback(rateLimitError, 'rateLimited');
+            } else {
+                var apiStatus = capabilities.getElementsByTagName('status'),
+                    val = apiStatus[0].getAttribute('api');
+                callback(undefined, val);
+            }
         }
         d3.xml(urlroot + '/api/capabilities').get()
             .on('load', done)
@@ -467,8 +500,10 @@ export default {
             inflight[id] = that.loadFromAPI(
                 '/api/0.6/map?bbox=' + tile.extent.toParam(),
                 function(err, parsed) {
-                    loadedTiles[id] = true;
                     delete inflight[id];
+                    if (!err) {
+                        loadedTiles[id] = true;
+                    }
 
                     if (callback) {
                         callback(err, _.extend({ data: parsed }, tile));
@@ -477,7 +512,8 @@ export default {
                     if (_.isEmpty(inflight)) {
                         dispatch.call('loaded');
                     }
-                });
+                }
+            );
         });
     },
 
@@ -487,10 +523,10 @@ export default {
 
         oauth.options(_.extend({
             url: urlroot,
-            loading: authenticating,
-            done: authenticated
+            loading: authLoading,
+            done: authDone
         }, options));
-        dispatch.call('auth');
+        dispatch.call('change');
         this.reset();
         return this;
     },
@@ -512,7 +548,7 @@ export default {
     logout: function() {
         userDetails = undefined;
         oauth.logout();
-        dispatch.call('auth');
+        dispatch.call('change');
         return this;
     },
 
@@ -520,7 +556,8 @@ export default {
     authenticate: function(callback) {
         userDetails = undefined;
         function done(err, res) {
-            dispatch.call('auth');
+            rateLimitError = undefined;
+            dispatch.call('change');
             if (callback) callback(err, res);
         }
         return oauth.authenticate(done);

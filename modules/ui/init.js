@@ -271,14 +271,15 @@ export function uiInit(context) {
             .call(uiRestore(context));
 
         var authenticating = uiLoading(context)
-            .message(t('loading_auth'));
+            .message(t('loading_auth'))
+            .blocking(true);
 
         context.connection()
-            .on('authenticating.ui', function() {
+            .on('authLoading.ui', function() {
                 context.container()
                     .call(authenticating);
             })
-            .on('authenticated.ui', function() {
+            .on('authDone.ui', function() {
                 authenticating.close();
             });
     }

@@ -2601,12 +2601,17 @@ img.tile-removing {
     text-align: right;
     width: 100%;
     padding: 0px 10px;
+    color: #eee;
 }
 
 .api-status.offline,
 .api-status.readonly,
 .api-status.error {
-    background: red;
+    background: #a22;
+}
+
+.api-status-login {
+    color: #aaf;
 }
 
 /* Modals

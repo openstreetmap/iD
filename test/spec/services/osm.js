@@ -44,9 +44,9 @@ describe('iD.serviceOsm', function () {
             expect(connection.changesetURL(1)).to.equal('http://example.com/changeset/1');
         });
 
-        it('emits an auth event', function(done) {
-            connection.on('auth', function() {
-                connection.on('auth', null);
+        it('emits a change event', function(done) {
+            connection.on('change', function() {
+                connection.on('change', null);
                 done();
             });
             connection.switch({ urlroot: 'http://example.com' });
