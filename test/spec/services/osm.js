@@ -1,13 +1,30 @@
 describe('iD.serviceOsm', function () {
-    var context, connection;
+    var context, connection, spy;
 
+    function login() {
+        if (!connection) return;
+        connection.switch({
+            urlroot: 'http://www.openstreetmap.org',
+            oauth_consumer_key: '5A043yRSEugj4DJ5TljuapfnrflWDte8jTOcWLlT',
+            oauth_secret: 'aB3jKq1TRsCOUrfOIZ6oQMEDmv2ptV76PA54NGLL',
+            oauth_token: 'foo',
+            oauth_token_secret: 'foo'
+        });
+    }
+
+    function logout() {
+        if (!connection) return;
+        connection.logout();
+    }
 
     beforeEach(function () {
         context = iD.Context(window);
         connection = context.connection();
-        connection.switch({ urlroot: 'http://www.openstreetmap.org'});
+        connection.switch({ urlroot: 'http://www.openstreetmap.org' });
         connection.reset();
+        spy = sinon.spy();
     });
+
 
     it('is instantiated', function () {
         expect(connection).to.be.ok;
@@ -46,46 +63,169 @@ describe('iD.serviceOsm', function () {
             expect(connection.changesetURL(1)).to.equal('http://example.com/changeset/1');
         });
 
-        it('emits a change event', function(done) {
-            connection.on('change', function() {
-                connection.on('change', null);
-                done();
-            });
+        it('emits a change event', function() {
+            connection.on('change', spy);
             connection.switch({ urlroot: 'http://example.com' });
+            expect(spy).to.have.been.calledOnce;
         });
     });
 
     describe('#loadFromAPI', function () {
+        var server,
+            path = '/api/0.6/map?bbox=-74.542,40.655,-74.541,40.656',
+            response = '<?xml version="1.0" encoding="UTF-8"?>' +
+                '<osm version="0.6">' +
+                '  <bounds minlat="40.655" minlon="-74.542" maxlat="40.656" maxlon="-74.541' +
+                '  <node id="105340439" visible="true" version="2" changeset="2880013" timestamp="2009-10-18T07:47:39Z" user="woodpeck_fixbot" uid="147510" lat="40.6555" lon="-74.5415"/>' +
+                '  <node id="105340442" visible="true" version="2" changeset="2880013" timestamp="2009-10-18T07:47:39Z" user="woodpeck_fixbot" uid="147510" lat="40.6556" lon="-74.5416"/>' +
+                '  <way id="40376199" visible="true" version="1" changeset="2403012" timestamp="2009-09-07T16:01:13Z" user="NJDataUploads" uid="148169">' +
+                '    <nd ref="105340439"/>' +
+                '    <nd ref="105340442"/>' +
+                '    <tag k="highway" v="residential"/>' +
+                '    <tag k="name" v="Potomac Drive"/>' +
+                '  </way>' +
+                '</osm>';
+
         beforeEach(function() {
-            // force loading locally via d3.xml
-            connection.switch({ urlroot: '' }).logout();
+            connection.reset();
+            server = sinon.fakeServer.create();
+            spy = sinon.spy();
         });
 
-        it('loads test data', function (done) {
-            connection.loadFromAPI('data/node.xml', done);
+        afterEach(function() {
+            server.restore();
         });
+
 
         it('returns an object', function (done) {
-            connection.loadFromAPI('data/node.xml', function (err, graph) {
+            connection.loadFromAPI(path, function (err, xml) {
                 expect(err).to.not.be.ok;
-                expect(typeof graph).to.eql('object');
+                expect(typeof xml).to.eql('object');
                 done();
             });
+
+            server.respondWith('GET', 'http://www.openstreetmap.org' + path,
+                [200, { 'Content-Type': 'text/xml' }, response]);
+            server.respond();
         });
 
-        it('parses a node', function (done) {
-            connection.loadFromAPI('data/node.xml', function (err, entities) {
-                expect(entities[0]).to.be.instanceOf(iD.Entity);
+        it('retries an authenticated call unauthenticated if 400 Bad Request', function (done) {
+            login();
+            connection.loadFromAPI(path, function (err, xml) {
+                expect(err).to.be.not.ok;
+                expect(typeof xml).to.eql('object');
+                expect(connection.authenticated()).to.be.not.ok;
                 done();
             });
+
+            server.respondWith('GET', 'http://www.openstreetmap.org' + path,
+                function(request) {
+                    if (connection.authenticated()) {
+                        return request.respond(400, {});
+                    } else {
+                        return request.respond(200, { 'Content-Type': 'text/xml' }, response);
+                    }
+                }
+            );
+            server.respond();
+            server.respond();
         });
 
-        it('parses a way', function (done) {
-            connection.loadFromAPI('data/way.xml', function (err, entities) {
-                expect(entities[0]).to.be.instanceOf(iD.Entity);
+        it('retries an authenticated call unauthenticated if 401 Unauthorized', function (done) {
+            login();
+            connection.loadFromAPI(path, function (err, xml) {
+                expect(err).to.be.not.ok;
+                expect(typeof xml).to.eql('object');
+                expect(connection.authenticated()).to.be.not.ok;
                 done();
             });
+
+            server.respondWith('GET', 'http://www.openstreetmap.org' + path,
+                function(request) {
+                    if (connection.authenticated()) {
+                        return request.respond(401, {});
+                    } else {
+                        return request.respond(200, { 'Content-Type': 'text/xml' }, response);
+                    }
+                }
+            );
+            server.respond();
+            server.respond();
         });
+
+        it('retries an authenticated call unauthenticated if 403 Forbidden', function (done) {
+            login();
+            connection.loadFromAPI(path, function (err, xml) {
+                expect(err).to.be.not.ok;
+                expect(typeof xml).to.eql('object');
+                expect(connection.authenticated()).to.be.not.ok;
+                done();
+            });
+
+            server.respondWith('GET', 'http://www.openstreetmap.org' + path,
+                function(request) {
+                    if (connection.authenticated()) {
+                        return request.respond(403, {});
+                    } else {
+                        return request.respond(200, { 'Content-Type': 'text/xml' }, response);
+                    }
+                }
+            );
+            server.respond();
+            server.respond();
+        });
+
+
+        it('dispatches change event if 509 Bandwidth Limit Exceeded', function (done) {
+            logout();
+            connection.on('change', spy);
+            connection.loadFromAPI(path, function (err) {
+                expect(err).to.have.property('status', 509);
+                expect(spy).to.have.been.calledOnce;
+                done();
+            });
+
+            server.respondWith('GET', 'http://www.openstreetmap.org' + path,
+                function(request) {
+                    if (!connection.authenticated()) {
+                        // workaround: sinon.js seems to call error handler with a
+                        // sinon.Event instead of the target XMLHttpRequest object..
+                        var orig = request.onreadystatechange;
+                        request.onreadystatechange = function(o) { orig((o && o.target) || o); };
+                        return request.respond(509, {});
+                    } else {
+                        return request.respond(200, { 'Content-Type': 'text/xml' }, response);
+                    }
+                }
+            );
+            server.respond();
+        });
+
+        it('dispatches change event if 429 Too Many Requests', function (done) {
+            logout();
+            connection.on('change', spy);
+            connection.loadFromAPI(path, function (err) {
+                expect(err).to.have.property('status', 429);
+                expect(spy).to.have.been.calledOnce;
+                done();
+            });
+
+            server.respondWith('GET', 'http://www.openstreetmap.org' + path,
+                function(request) {
+                    if (!connection.authenticated()) {
+                        // workaround: sinon.js seems to call error handler with a
+                        // sinon.Event instead of the target XMLHttpRequest object..
+                        var orig = request.onreadystatechange;
+                        request.onreadystatechange = function(o) { orig((o && o.target) || o); };
+                        return request.respond(429, {});
+                    } else {
+                        return request.respond(200, { 'Content-Type': 'text/xml' }, response);
+                    }
+                }
+            );
+            server.respond();
+        });
+
     });
 
     describe('#loadEntity', function () {
