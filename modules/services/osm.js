@@ -160,6 +160,7 @@ export default {
 
     reset: function() {
         userDetails = undefined;
+        rateLimitError = undefined;
         _.forEach(inflight, abortRequest);
         loadedTiles = {};
         inflight = {};
