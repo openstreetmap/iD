@@ -2474,6 +2474,22 @@
             "value": "information"
         },
         {
+            "key": "information",
+            "value": "board"
+        },
+        {
+            "key": "information",
+            "value": "guidepost"
+        },
+        {
+            "key": "information",
+            "value": "map"
+        },
+        {
+            "key": "information",
+            "value": "office"
+        },
+        {
             "key": "tourism",
             "value": "motel"
         },

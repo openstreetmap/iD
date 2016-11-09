@@ -805,6 +805,9 @@
                         "stemcells": "stem cell samples"
                     }
                 },
+                "board_type": {
+                    "label": "Type"
+                },
                 "boundary": {
                     "label": "Type"
                 },
@@ -1146,6 +1149,12 @@
                     "label": "Location"
                 },
                 "man_made": {
+                    "label": "Type"
+                },
+                "map_size": {
+                    "label": "Coverage"
+                },
+                "map_type": {
                     "label": "Type"
                 },
                 "maxspeed": {
@@ -4112,6 +4121,22 @@
                 },
                 "tourism/information": {
                     "name": "Information",
+                    "terms": ""
+                },
+                "tourism/information/board": {
+                    "name": "Information Board",
+                    "terms": ""
+                },
+                "tourism/information/guidepost": {
+                    "name": "Guidepost",
+                    "terms": ""
+                },
+                "tourism/information/map": {
+                    "name": "Map",
+                    "terms": ""
+                },
+                "tourism/information/office": {
+                    "name": "Tourist Information Office",
                     "terms": ""
                 },
                 "tourism/motel": {

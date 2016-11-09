@@ -256,6 +256,11 @@
                 }
             }
         },
+        "board_type": {
+            "key": "board_type",
+            "type": "typeCombo",
+            "label": "Type"
+        },
         "boundary": {
             "key": "boundary",
             "type": "combo",
@@ -803,6 +808,16 @@
         },
         "man_made": {
             "key": "man_made",
+            "type": "typeCombo",
+            "label": "Type"
+        },
+        "map_size": {
+            "key": "map_size",
+            "type": "typeCombo",
+            "label": "Coverage"
+        },
+        "map_type": {
+            "key": "map_type",
             "type": "typeCombo",
             "label": "Type"
         },

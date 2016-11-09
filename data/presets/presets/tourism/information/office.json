@@ -1,0 +1,17 @@
+{
+    "fields": [
+        "operator",
+        "address",
+        "building_area"
+    ],
+    "geometry": [
+        "point",
+        "vertex",
+        "area"
+    ],
+    "tags": {
+        "tourism": "information",
+        "information": "office"
+    },
+    "name": "Tourist Information Office"
+}

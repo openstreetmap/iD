@@ -191,6 +191,9 @@ en:
           stemcells: stem cell samples
           # 'blood:=whole'
           whole: whole blood
+      board_type:
+        # board_type=*
+        label: Type
       boundary:
         # boundary=*
         label: Type
@@ -582,6 +585,12 @@ en:
         label: Location
       man_made:
         # man_made=*
+        label: Type
+      map_size:
+        # map_size=*
+        label: Coverage
+      map_type:
+        # map_type=*
         label: Type
       maxspeed:
         # maxspeed=*
@@ -3882,6 +3891,22 @@ en:
         # tourism=information
         name: Information
         terms: '<translate with synonyms or related terms for ''Information'', separated by commas>'
+      tourism/information/board:
+        # 'tourism=information, information=board'
+        name: Information Board
+        terms: '<translate with synonyms or related terms for ''Information Board'', separated by commas>'
+      tourism/information/guidepost:
+        # 'tourism=information, information=guidepost'
+        name: Guidepost
+        terms: '<translate with synonyms or related terms for ''Guidepost'', separated by commas>'
+      tourism/information/map:
+        # 'tourism=information, information=map'
+        name: Map
+        terms: '<translate with synonyms or related terms for ''Map'', separated by commas>'
+      tourism/information/office:
+        # 'tourism=information, information=office'
+        name: Tourist Information Office
+        terms: '<translate with synonyms or related terms for ''Tourist Information Office'', separated by commas>'
       tourism/motel:
         # tourism=motel
         name: Motel

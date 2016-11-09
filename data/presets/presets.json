@@ -10903,6 +10903,69 @@
             },
             "name": "Information"
         },
+        "tourism/information/board": {
+            "fields": [
+                "operator",
+                "board_type"
+            ],
+            "geometry": [
+                "point",
+                "vertex"
+            ],
+            "tags": {
+                "tourism": "information",
+                "information": "board"
+            },
+            "name": "Information Board"
+        },
+        "tourism/information/guidepost": {
+            "fields": [
+                "operator",
+                "ref"
+            ],
+            "geometry": [
+                "point",
+                "vertex"
+            ],
+            "tags": {
+                "tourism": "information",
+                "information": "guidepost"
+            },
+            "name": "Guidepost"
+        },
+        "tourism/information/map": {
+            "fields": [
+                "operator",
+                "map_type",
+                "map_size"
+            ],
+            "geometry": [
+                "point",
+                "vertex"
+            ],
+            "tags": {
+                "tourism": "information",
+                "information": "map"
+            },
+            "name": "Map"
+        },
+        "tourism/information/office": {
+            "fields": [
+                "operator",
+                "address",
+                "building_area"
+            ],
+            "geometry": [
+                "point",
+                "vertex",
+                "area"
+            ],
+            "tags": {
+                "tourism": "information",
+                "information": "office"
+            },
+            "name": "Tourist Information Office"
+        },
         "tourism/motel": {
             "icon": "lodging",
             "fields": [
