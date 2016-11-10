@@ -1,6 +1,6 @@
 import * as d3 from 'd3';
 import _ from 'lodash';
-import { t, addTranslation, setLocale } from '../util/locale';
+import { t, currentLocale, addTranslation, setLocale } from '../util/locale';
 import { coreHistory } from './history';
 import { dataLocales, dataEn } from '../../data/index';
 import { geoRawMercator } from '../geo/raw_mercator';
@@ -22,12 +22,7 @@ export function setAreaKeys(value) {
 }
 
 
-export function coreContext(root) {
-    if (!root.locale) {
-        root.locale = {
-            current: function(_) { this._current = _; }
-        };
-    }
+export function coreContext() {
     addTranslation('en', dataEn);
     setLocale('en');
 
@@ -310,9 +305,14 @@ export function coreContext(root) {
         return context.asset('img/' + _);
     };
 
+
+    /* locales */
+    // `locale` variable contains a "requested locale".
+    // It won't become the `currentLocale` until after loadLocale() is called.
     var locale, localePath;
+
     context.locale = function(loc, path) {
-        if (!arguments.length) return locale;
+        if (!arguments.length) return currentLocale;
         locale = loc;
         localePath = path;
         return context;
@@ -325,12 +325,17 @@ export function coreContext(root) {
                 if (!err) {
                     addTranslation(locale, result[locale]);
                     setLocale(locale);
+                    utilDetect(true);
                 }
                 if (callback) {
                     callback(err);
                 }
             });
         } else {
+            if (locale) {
+                setLocale(locale);
+                utilDetect(true);
+            }
             if (callback) {
                 callback();
             }
