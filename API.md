@@ -8,8 +8,8 @@ iD supports several URL parameters. When constructing a URL to a standalone inst
 of iD (e.g. `http://openstreetmap.us/iD/release/`), the following parameters are available
 in the hash portion of the URL:
 
-* `map` - A slash separated `zoom/longitude/latitude`.  Example:
-  `map=20.00/-77.02271/38.90085`
+* `map` - A slash separated `zoom/latitude/longitude`.  Example:
+  `map=20.00/38.90085/-77.02271`
 * `id` - The character 'n', 'w', or 'r', followed by the OSM ID of a node,
    way or relation, respectively. Selects the specified entity, and, unless
    a `map` parameter is also provided, centers the map on it.
@@ -35,8 +35,7 @@ When constructing a URL to an instance of iD embedded in the OpenStreetMap Rails
 Port (e.g. `http://www.openstreetmap.org/edit?editor=id`), the following parameters
 are available as regular URL query parameters:
 
-* `map` - slash separated `zoom/latitude/longitude`.  Example:
-  `map=20.00/38.90085/-77.02271`.
+* `map` - same as standalone
 * `lat`, `lon`, `zoom` - Self-explanatory.
 * `node`, `way`, `relation` - Select the specified entity.
 * `background` - same as standalone
