@@ -2,7 +2,7 @@ describe('iD.uiFieldAccess', function() {
     var selection, field;
     beforeEach(function() {
         selection = d3.select(document.createElement('div'));
-        field = iD.Context(window)
+        field = iD.Context()
             .presets(iD.dataPresets).presets().field('access');
     });
 

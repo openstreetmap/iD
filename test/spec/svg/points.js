@@ -6,7 +6,7 @@ describe('iD.svgPoints', function () {
             .clipExtent([[0, 0], [Infinity, Infinity]]);
 
     beforeEach(function () {
-        context = iD.Context(window);
+        context = iD.Context();
         d3.select(document.createElement('div'))
             .attr('id', 'map')
             .call(context.map());

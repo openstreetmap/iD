@@ -11,7 +11,7 @@ describe('iD.uiFieldWikipedia', function() {
     beforeEach(function() {
         entity = iD.Node({id: 'n12345'});
         selectedId = entity.id;
-        context = iD.Context(window);
+        context = iD.Context();
         context.history().merge([entity]);
         selection = d3.select(document.createElement('div'));
         field = context.presets(iD.dataPresets).presets().field('wikipedia');

@@ -147,7 +147,7 @@ iD can use external presets exclusively or along with the default OpenStreetMap 
 
 ```js
 
-var id = iD.Context(window)
+var id = iD.Context()
   .presets(customPresets)
   .imagery(iD.dataImagery);
 
@@ -161,7 +161,7 @@ Just like Presets, Imagery can be configured using the `context.imagery` accesso
 
 ```js
 
-var id = iD.Context(window)
+var id = iD.Context()
   .presets(customPresets)
   .imagery(customImagery);
 
@@ -176,7 +176,7 @@ The minimum zoom at which iD enters the edit mode is configured using the `conte
 
 ```js
 
-var id = iD.Context(window).
+var id = iD.Context()
   .minEditableZoom(zoom_level)
 
 ```

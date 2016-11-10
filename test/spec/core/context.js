@@ -5,7 +5,7 @@ describe('iD.Context', function() {
 
     describe('#assetPath', function() {
         it('sets and gets assetPath', function() {
-            var context = iD.Context(window);
+            var context = iD.Context();
             expect(context.assetPath()).to.eql('');
 
             context.assetPath('iD/');
@@ -15,7 +15,7 @@ describe('iD.Context', function() {
 
     describe('#assetMap', function() {
         it('sets and gets assetMap', function() {
-            var context = iD.Context(window);
+            var context = iD.Context();
             expect(context.assetMap()).to.eql({});
 
             context.assetMap(assets);
@@ -26,7 +26,7 @@ describe('iD.Context', function() {
     describe('#asset', function() {
         var context;
         beforeEach(function() {
-            context = iD.Context(window).assetPath('iD/').assetMap(assets);
+            context = iD.Context().assetPath('iD/').assetMap(assets);
         });
 
         it('looks first in assetMap', function() {
@@ -40,7 +40,7 @@ describe('iD.Context', function() {
     describe('#imagePath', function() {
         var context;
         beforeEach(function() {
-            context = iD.Context(window).assetPath('iD/').assetMap(assets);
+            context = iD.Context().assetPath('iD/').assetMap(assets);
         });
 
         it('looks first in assetMap', function() {
@@ -91,7 +91,7 @@ describe('iD.Context', function() {
                 }
             };
 
-            var context = iD.Context(window).presets(presetsCollection),
+            var context = iD.Context().presets(presetsCollection),
                 way = iD.Way({tags: {concession: 'mining', area: 'yes'}}),
                 graph = iD.Graph([way]);
 
@@ -101,7 +101,7 @@ describe('iD.Context', function() {
 
     describe('#debug', function() {
         it('sets and gets debug flags', function() {
-            var context = iD.Context(window),
+            var context = iD.Context(),
                 flags = {
                     tile: false,
                     collision: false,

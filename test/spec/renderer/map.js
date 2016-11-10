@@ -2,7 +2,7 @@ describe('iD.Map', function() {
     var context, map;
 
     beforeEach(function() {
-        context = iD.Context(window).imagery(iD.dataImagery);
+        context = iD.Context().imagery(iD.dataImagery);
         context.container(d3.select(document.createElement('div')));
         map = context.map();
         d3.select(document.createElement('div'))

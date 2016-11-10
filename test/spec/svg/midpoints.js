@@ -7,7 +7,7 @@ describe('iD.svgMidpoints', function () {
         filter = function() { return true; };
 
     beforeEach(function () {
-        context = iD.Context(window);
+        context = iD.Context();
         d3.select(document.createElement('div'))
             .attr('id', 'map')
             .call(context.map());

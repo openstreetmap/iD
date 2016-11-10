@@ -8,7 +8,7 @@ describe('iD.svgLines', function () {
         none = function() { return false; };
 
     beforeEach(function () {
-        context = iD.Context(window);
+        context = iD.Context();
         d3.select(document.createElement('div'))
             .attr('id', 'map')
             .call(context.map());

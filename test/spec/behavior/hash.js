@@ -4,7 +4,7 @@ describe('iD.behaviorHash', function () {
     var hash, context;
 
     beforeEach(function () {
-        context = iD.Context(window);
+        context = iD.Context();
         context.container(d3.select(document.createElement('div')));
 
         // Neuter connection

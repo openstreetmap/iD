@@ -236,7 +236,7 @@ iD supports deployments which use a custom set of presets. You can supply preset
 the `presets` accessor:
 
 ```js
-var id = iD.Context(window).presets({
+var id = iD.Context().presets({
     presets: { ... },
     fields: { ... },
     defaults: { ... },
