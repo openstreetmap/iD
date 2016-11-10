@@ -286,7 +286,7 @@ _.extend(osmRelation.prototype, {
 
             for (o = 0; o < outers.length; o++) {
                 outer = outers[o];
-                if (geoPolygonIntersectsPolygon(outer, inner))
+                if (geoPolygonIntersectsPolygon(outer, inner, false))
                     return o;
             }
         }
