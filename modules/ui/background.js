@@ -208,6 +208,7 @@ export function uiBackground(context) {
 
 
         function resetOffset() {
+            if (d3.event.button !== 0) return;
             context.background().offset([0, 0]);
             updateOffsetVal();
         }
@@ -220,22 +221,30 @@ export function uiBackground(context) {
 
 
         function buttonOffset(d) {
+            if (d3.event.button !== 0) return;
             var timeout = window.setTimeout(function() {
                     interval = window.setInterval(nudge.bind(null, d), 100);
                 }, 500),
                 interval;
 
-            d3.select(window).on('mouseup', function() {
-                window.clearInterval(interval);
+            function doneNudge() {
                 window.clearTimeout(timeout);
-                d3.select(window).on('mouseup', null);
-            });
+                window.clearInterval(interval);
+                d3.select(window)
+                    .on('mouseup.buttonoffset', null, true)
+                    .on('mousedown.buttonoffset', null, true);
+            }
+
+            d3.select(window)
+                .on('mouseup.buttonoffset', doneNudge, true)
+                .on('mousedown.buttonoffset', doneNudge, true);
 
             nudge(d);
         }
 
 
         function inputOffset() {
+            if (d3.event.button !== 0) return;
             var input = d3.select(this);
             var d = input.node().value;
 
@@ -257,6 +266,7 @@ export function uiBackground(context) {
 
 
         function dragOffset() {
+            if (d3.event.button !== 0) return;
             var origin = [d3.event.clientX, d3.event.clientY];
 
             context.container()
@@ -275,6 +285,7 @@ export function uiBackground(context) {
                     nudge(d);
                 })
                 .on('mouseup.offset', function() {
+                    if (d3.event.button !== 0) return;
                     d3.selectAll('.nudge-surface')
                         .remove();
 
@@ -313,7 +324,7 @@ export function uiBackground(context) {
 
                 if (show) {
                     selection.on('mousedown.background-inside', function() {
-                        return d3.event.stopPropagation();
+                        d3.event.stopPropagation();
                     });
                     content.style('display', 'block')
                         .style('right', '-300px')
@@ -460,6 +471,7 @@ export function uiBackground(context) {
             .classed('hide-toggle', true)
             .classed('expanded', false)
             .on('click', function() {
+                if (d3.event.button !== 0) return;
                 var exp = d3.select(this).classed('expanded');
                 nudgeContainer.style('display', exp ? 'none' : 'block');
                 d3.select(this).classed('expanded', !exp);
@@ -483,6 +495,7 @@ export function uiBackground(context) {
             .append('input')
             .on('change', inputOffset)
             .on('mousedown', function() {
+                if (d3.event.button !== 0) return;
                 d3.event.stopPropagation();
             });
 
@@ -492,6 +505,7 @@ export function uiBackground(context) {
             .append('button')
             .attr('class', function(d) { return d[0] + ' nudge'; })
             .on('mousedown', function(d) {
+                if (d3.event.button !== 0) return;
                 buttonOffset(d[1]);
             });
 

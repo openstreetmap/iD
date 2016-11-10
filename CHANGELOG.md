@@ -67,6 +67,7 @@
   * Allow `Del` key as a without modifier as a Delete shortcut (#3455)
   * Remove diacritics (accented chars) when doing fuzzy searches (#3159)
 * Bugfixes:
+  * Prevent imagery offset nudging buttons from getting stuck if user clicks again (#3576)
   * Don't include terms for non-searchable presets in translation source (#3323)
   * Let user know if the documentation points to a redirect page (#3337)
   * Fix line labeling placement for IE11, Edge (#3020)
