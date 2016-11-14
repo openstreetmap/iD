@@ -59,7 +59,7 @@ export function uiBackground(context) {
 
         function setTooltips(selection) {
             selection.each(function(d, i, nodes) {
-                var item = d3.select(this),
+                var item = d3.select(this).select('label'),
                     placement = (i < nodes.length / 2) ? 'bottom' : 'top';
 
                 if (d === previous) {
@@ -76,8 +76,8 @@ export function uiBackground(context) {
                         .placement(placement)
                         .title(d.description)
                     );
-                // } else {
-                //     item.call(tooltip().destroy);
+                } else {
+                    item.call(tooltip().destroy);
                 }
             });
         }
