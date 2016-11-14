@@ -137,9 +137,79 @@ class.
 
 Elements that are currently selected shall have the `.selected` class.
 
+
 ## Customized Deployments
 
-iD is used to edit data outside of the OpenStreetMap environment. There are some basic configuration steps to introduce custom presets, imagery and tag information.
+iD may be used to edit maps in a non-OpenStreetMap environment.  This requires
+certain parts of the iD code to be replaced at runtime by custom code or data.
+
+iD is written in a modular style and bundled with [rollup.js](http://rollupjs.org/),
+which makes hot code replacement tricky.  (ES6 module exports are
+[immutable bindings](http://www.2ality.com/2015/07/es6-module-exports.html)).
+Because of this, the parts of iD which are designed for customization are exported
+as live bound objects that can be overriden at runtime _before initializing the iD context_.
+
+### Services
+
+The `iD.services` object includes code that talks to other web services.
+
+To replace the OSM service with a custom service that exactly mimics the default OSM service:
+```js
+iD.services.osm = serviceMyOSM;
+```
+
+Some services may be removed entirely.  For example, to remove the Mapillary service:
+```js
+iD.services.mapillary = undefined;
+// or
+delete iD.services.mapillary;
+```
+
+
+### Background Imagery
+
+iD's background imagery database is stored in the `iD.data.imagery` array and can be
+overridden.  (Note that the "None" and "Custom" options will always be shown in the list)
+
+To remove all imagery from iD:
+```js
+iD.data.imagery = [];
+```
+
+To replace all imagery with a single source:
+```js
+iD.data.imagery = [{
+    "id": "ExampleImagery",
+    "name": "My Imagery",
+    "type": "tms",
+    "template": "http://{switch:a,b,c}.tiles.example.com/{z}/{x}/{y}.png"
+}];
+```
+
+Each imagery source should have the following properties:
+* `id` - Unique identifier for this source (also used as a url paramater)
+* `name` - Display name for the source
+* `type` - Source type, currently only `tms` is supported
+* `template` - Url template, valid replacement tokens include:
+  * `{z}`, `{x}`, `{y}` - for Z/X/Y scheme
+  * `{-y}` or `{ty}` - for flipped Y
+  * `{u}` - for quadtile scheme
+  * `{switch:a,b,c}` - for parts of the url that can be cycled for connection parallelization
+
+Optional properties:
+* `description` - A longer source description which, if included, will be displayed in a popup when viewing the background imagery list
+* `overlay` - If `true`, this is an overlay layer (a transparent layer rendered above base imagery layer). Defaults to `false`
+* `scaleExtent` - Allowable min and max zoom levels, defaults to `[0, 20]`
+* `polygon` - Array of coordinate rings within which imagery is valid.  If omitted, imagery is assumed to be valid worldwide
+* `overzoom` - Can this imagery be scaled up when zooming in beyond the max zoom?  Defaults to `true`
+* `terms_url` - Url to link to when displaying the imagery terms
+* `terms_html` - Html content to display in the imagery terms
+* `terms_text` - Text content to display in the imagery terms
+* `best` - If set to `true`, this imagery is considered "better than Bing" and may be chosen by default when iD starts.  Will display with a star in the background imagery list.  Defaults to `false`
+
+For more details about the `iD.data.imagery` structure, see
+[`update_imagery.js`](https://github.com/openstreetmap/iD/blob/master/data/update_imagery.js).
+
 
 ### Presets
 
@@ -148,26 +218,11 @@ iD can use external presets exclusively or along with the default OpenStreetMap 
 ```js
 
 var id = iD.Context()
-  .presets(customPresets)
-  .imagery(iD.dataImagery);
+  .presets(customPresets);
 
 ```
 
 The format of the Preset object is [documented here](https://github.com/openstreetmap/iD/tree/master/data/presets#custom-presets).
-
-### Imagery
-
-Just like Presets, Imagery can be configured using the `context.imagery` accessor:
-
-```js
-
-var id = iD.Context()
-  .presets(customPresets)
-  .imagery(customImagery);
-
-```
-
-The Imagery object should follow the structure defined by [editor-layer-index](https://github.com/osmlab/editor-layer-index/blob/gh-pages/schema.json)
 
 
 ### Minimum Editable Zoom

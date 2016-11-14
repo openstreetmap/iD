@@ -17,9 +17,9 @@
     <body>
         <div id='id-container'></div>
         <script>
+
         id = iD.Context()
             .presets(iD.dataPresets)
-            .imagery(iD.dataImagery)
             .assetPath('dist/');
 
         id.ui()(document.getElementById('id-container'), function() {

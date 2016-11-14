@@ -5,7 +5,6 @@ export { default as dataSuggestions } from 'name-suggestion-index/name-suggestio
 export { dataAddressFormats } from './address-formats.json';
 export { dataDeprecated } from './deprecated.json';
 export { dataDiscarded } from './discarded.json';
-export { dataImagery } from './imagery.json';
 export { dataLocales } from './locales.json';
 export { dataPhoneFormats } from './phone-formats.json';
 
@@ -23,4 +22,9 @@ export var dataPresets = {
     defaults: defaults,
     categories: categories,
     fields: fields
+};
+
+import { dataImagery } from './imagery.json';
+export var data = {
+    imagery: dataImagery
 };

@@ -1,6 +1,7 @@
 /* globals chai:false */
 
 iD.debug = true;
+iD.data.imagery = [];
 
 mocha.setup({
     ui: 'bdd',

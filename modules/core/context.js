@@ -259,13 +259,6 @@ export function coreContext() {
     };
 
 
-    /* Imagery */
-    context.imagery = function(_) {
-        background.load(_);
-        return context;
-    };
-
-
     /* Container */
     var container, embed;
     context.container = function(_) {
@@ -347,7 +340,7 @@ export function coreContext() {
     context.reset = context.flush = function() {
         context.debouncedSave.cancel();
         _.each(services, function(service) {
-            if (typeof service.reset === 'function') {
+            if (service && typeof service.reset === 'function') {
                 service.reset(context);
             }
         });
@@ -407,10 +400,11 @@ export function coreContext() {
     context.zoomOutFurther = map.zoomOutFurther;
     context.redrawEnable = map.redrawEnable;
 
+    background.init();
     presets = presetInit();
 
     _.each(services, function(service) {
-        if (typeof service.init === 'function') {
+        if (service && typeof service.init === 'function') {
             service.init(context);
         }
     });

@@ -1,9 +1,9 @@
 import * as d3 from 'd3';
 import { geoPolygonIntersectsPolygon } from '../geo/index';
 import {
+    data,
     dataImperial,
-    dataDriveLeft,
-    dataImagery
+    dataDriveLeft
 } from '../../data/index';
 
 
@@ -83,6 +83,7 @@ export function svgDebug(projection, context) {
 
 
         var extent = context.map().extent(),
+            dataImagery = data.imagery || [],
             availableImagery = showsImagery && multipolygons(dataImagery.filter(function(source) {
                 if (!source.polygon) return false;
                 return source.polygon.some(function(polygon) {

@@ -6,7 +6,6 @@ describe.skip('iD.modeAddPoint', function() {
 
         context = iD.Context()
             .presets(iD.dataPresets)
-            .imagery([])
             .container(container);
 
         context.loadTiles = function () {};

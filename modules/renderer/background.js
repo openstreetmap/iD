@@ -1,10 +1,11 @@
 import * as d3 from 'd3';
 import _ from 'lodash';
-import { utilRebind } from '../util/rebind';
+import { data } from '../../data/index';
 import { geoExtent, geoMetersToOffset, geoOffsetToMeters} from '../geo/index';
-import { utilQsString, utilStringQs } from '../util/index';
 import { rendererBackgroundSource } from './background_source';
 import { rendererTileLayer } from './tile_layer';
+import { utilQsString, utilStringQs } from '../util/index';
+import { utilRebind } from '../util/rebind';
 
 
 export function rendererBackground(context) {
@@ -191,7 +192,7 @@ export function rendererBackground(context) {
     };
 
 
-    background.load = function(imagery) {
+    background.init = function() {
         function parseMap(qmap) {
             if (!qmap) return false;
             var args = qmap.split('/').map(Number);
@@ -199,12 +200,13 @@ export function rendererBackground(context) {
             return geoExtent([args[1], args[2]]);
         }
 
-        var q = utilStringQs(window.location.hash.substring(1)),
+        var dataImagery = data.imagery || [],
+            q = utilStringQs(window.location.hash.substring(1)),
             chosen = q.background || q.layer,
             extent = parseMap(q.map),
             best;
 
-        backgroundSources = imagery.map(function(source) {
+        backgroundSources = dataImagery.map(function(source) {
             if (source.type === 'bing') {
                 return rendererBackgroundSource.Bing(source, dispatch);
             } else {
