@@ -58,24 +58,26 @@ export function uiBackground(context) {
 
 
         function setTooltips(selection) {
-            selection.each(function(d) {
-                var item = d3.select(this);
+            selection.each(function(d, i, nodes) {
+                var item = d3.select(this),
+                    placement = (i < nodes.length / 2) ? 'bottom' : 'top';
+
                 if (d === previous) {
                     item.call(tooltip()
+                        .placement(placement)
                         .html(true)
                         .title(function() {
                             var tip = '<div>' + t('background.switch') + '</div>';
                             return uiTooltipHtml(tip, uiCmd('⌘B'));
                         })
-                        .placement('top')
                     );
                 } else if (d.description) {
                     item.call(tooltip()
+                        .placement(placement)
                         .title(d.description)
-                        .placement('top')
                     );
-                } else {
-                    item.call(tooltip().destroy);
+                // } else {
+                //     item.call(tooltip().destroy);
                 }
             });
         }
@@ -96,8 +98,8 @@ export function uiBackground(context) {
 
 
         function clickSetSource(d) {
-            previous = context.background().baseLayerSource();
             d3.event.preventDefault();
+            previous = context.background().baseLayerSource();
             context.background().baseLayerSource(d);
             selectLayer();
             document.activeElement.blur();
@@ -119,9 +121,10 @@ export function uiBackground(context) {
 
 
         function setCustom(template) {
-            context.background().baseLayerSource(rendererBackgroundSource.Custom(template));
-            selectLayer();
             context.storage('background-custom-template', template);
+            var d = rendererBackgroundSource.Custom(template);
+            content.selectAll('.custom_layer').datum(d);
+            clickSetSource(d);
         }
 
 
@@ -141,6 +144,9 @@ export function uiBackground(context) {
             var layerLinks = layerList.selectAll('li.layer')
                 .data(sources, function(d) { return d.name(); });
 
+            layerLinks.exit()
+                .remove();
+
             var enter = layerLinks.enter()
                 .insert('li', '.custom_layer')
                 .attr('class', 'layer')
@@ -155,19 +161,19 @@ export function uiBackground(context) {
                 .append('span')
                 .html('&#9733;');
 
-            var label = enter.append('label');
+            var label = enter
+                .append('label');
 
-            label.append('input')
+            label
+                .append('input')
                 .attr('type', type)
                 .attr('name', 'layers')
                 .on('change', change);
 
-            label.append('span')
+            label
+                .append('span')
                 .text(function(d) { return d.name(); });
 
-
-            layerLinks.exit()
-                .remove();
 
             layerList.selectAll('li.layer')
                 .sort(sortSources)
@@ -326,13 +332,15 @@ export function uiBackground(context) {
                     selection.on('mousedown.background-inside', function() {
                         d3.event.stopPropagation();
                     });
-                    content.style('display', 'block')
+                    content
+                        .style('display', 'block')
                         .style('right', '-300px')
                         .transition()
                         .duration(200)
                         .style('right', '0px');
                 } else {
-                    content.style('display', 'block')
+                    content
+                        .style('display', 'block')
                         .style('right', '0px')
                         .transition()
                         .duration(200)
@@ -346,13 +354,15 @@ export function uiBackground(context) {
         }
 
 
-        var content = selection.append('div')
+        var content = selection
+                .append('div')
                 .attr('class', 'fillL map-overlay col3 content hide'),
             tooltipBehavior = tooltip()
                 .placement((textDirection === 'rtl') ? 'right' : 'left')
                 .html(true)
                 .title(uiTooltipHtml(t('background.description'), key)),
-            button = selection.append('button')
+            button = selection
+                .append('button')
                 .attr('tabindex', -1)
                 .on('click', toggle)
                 .call(svgIcon('#icon-layers', 'light'))
@@ -362,13 +372,16 @@ export function uiBackground(context) {
 
         /* opacity switcher */
 
-        var opa = content.append('div')
+        var opawrap = content
+                .append('div')
                 .attr('class', 'opacity-options-wrapper');
 
-        opa.append('h4')
+        opawrap
+            .append('h4')
             .text(t('background.title'));
 
-        var opacityList = opa.append('ul')
+        var opacityList = opawrap
+            .append('ul')
             .attr('class', 'opacity-options');
 
         opacityList.selectAll('div.opacity')
@@ -389,15 +402,18 @@ export function uiBackground(context) {
 
         /* background switcher */
 
-        var backgroundList = content.append('ul')
+        var backgroundList = content
+            .append('ul')
             .attr('class', 'layer-list')
             .attr('dir', 'auto');
 
-        var custom = backgroundList.append('li')
+        var custom = backgroundList
+            .append('li')
             .attr('class', 'custom_layer')
             .datum(rendererBackgroundSource.Custom());
 
-        custom.append('button')
+        custom
+            .append('button')
             .attr('class', 'layer-browse')
             .call(tooltip()
                 .title(t('background.custom_button'))
@@ -405,9 +421,11 @@ export function uiBackground(context) {
             .on('click', editCustom)
             .call(svgIcon('#icon-search'));
 
-        var label = custom.append('label');
+        var label = custom
+            .append('label');
 
-        label.append('input')
+        label
+            .append('input')
             .attr('type', 'radio')
             .attr('name', 'layers')
             .on('change', function () {
@@ -418,10 +436,12 @@ export function uiBackground(context) {
                 }
             });
 
-        label.append('span')
+        label
+            .append('span')
             .text(t('background.custom'));
 
-        content.append('div')
+        content
+            .append('div')
             .attr('class', 'imagery-faq')
             .append('a')
             .attr('target', '_blank')
@@ -431,10 +451,12 @@ export function uiBackground(context) {
             .append('span')
             .text(t('background.imagery_source_faq'));
 
-        var overlayList = content.append('ul')
+        var overlayList = content
+            .append('ul')
             .attr('class', 'layer-list');
 
-        var controls = content.append('div')
+        var controls = content
+            .append('div')
             .attr('class', 'controls-list');
 
 
@@ -448,7 +470,8 @@ export function uiBackground(context) {
                 .placement('top')
             );
 
-        minimapLabel.classed('minimap-toggle', true)
+        minimapLabel
+            .classed('minimap-toggle', true)
             .append('input')
             .attr('type', 'checkbox')
             .on('change', function() {
@@ -456,16 +479,19 @@ export function uiBackground(context) {
                 d3.event.preventDefault();
             });
 
-        minimapLabel.append('span')
+        minimapLabel
+            .append('span')
             .text(t('background.minimap.description'));
 
 
         /* imagery offset controls */
 
-        var adjustments = content.append('div')
+        var adjustments = content
+            .append('div')
             .attr('class', 'adjustments');
 
-        adjustments.append('a')
+        adjustments
+            .append('a')
             .text(t('background.fix_misalignment'))
             .attr('href', '#')
             .classed('hide-toggle', true)
@@ -478,19 +504,23 @@ export function uiBackground(context) {
                 d3.event.preventDefault();
             });
 
-        var nudgeContainer = adjustments.append('div')
+        var nudgeContainer = adjustments
+            .append('div')
             .attr('class', 'nudge-container cf')
             .style('display', 'none');
 
-        nudgeContainer.append('div')
+        nudgeContainer
+            .append('div')
             .attr('class', 'nudge-instructions')
             .text(t('background.offset'));
 
-        var nudgeRect = nudgeContainer.append('div')
+        var nudgeRect = nudgeContainer
+            .append('div')
             .attr('class', 'nudge-outer-rect')
             .on('mousedown', dragOffset);
 
-        nudgeRect.append('div')
+        nudgeRect
+            .append('div')
             .attr('class', 'nudge-inner-rect')
             .append('input')
             .on('change', inputOffset)
@@ -499,7 +529,8 @@ export function uiBackground(context) {
                 d3.event.stopPropagation();
             });
 
-        nudgeContainer.append('div')
+        nudgeContainer
+            .append('div')
             .selectAll('button')
             .data(directions).enter()
             .append('button')
@@ -509,7 +540,8 @@ export function uiBackground(context) {
                 buttonOffset(d[1]);
             });
 
-        nudgeContainer.append('button')
+        nudgeContainer
+            .append('button')
             .attr('title', t('background.reset'))
             .attr('class', 'nudge-reset disabled')
             .on('click', resetOffset)
