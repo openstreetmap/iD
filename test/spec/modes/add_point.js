@@ -5,7 +5,6 @@ describe.skip('iD.modeAddPoint', function() {
         var container = d3.select(document.createElement('div'));
 
         context = iD.Context()
-            .presets(iD.dataPresets)
             .container(container);
 
         context.loadTiles = function () {};

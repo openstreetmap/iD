@@ -318,7 +318,7 @@ describe('iD.osmWay', function() {
 
     describe('#isArea', function() {
         before(function() {
-            iD.Context().presets(iD.dataPresets);
+            iD.Context();
         });
 
         it('returns false when the way has no tags', function() {

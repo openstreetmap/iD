@@ -145,7 +145,7 @@ certain parts of the iD code to be replaced at runtime by custom code or data.
 
 iD is written in a modular style and bundled with [rollup.js](http://rollupjs.org/),
 which makes hot code replacement tricky.  (ES6 module exports are
-[immutable bindings](http://www.2ality.com/2015/07/es6-module-exports.html)).
+[immutable live bindings](http://www.2ality.com/2015/07/es6-module-exports.html)).
 Because of this, the parts of iD which are designed for customization are exported
 as live bound objects that can be overriden at runtime _before initializing the iD context_.
 
@@ -169,7 +169,9 @@ delete iD.services.mapillary;
 ### Background Imagery
 
 iD's background imagery database is stored in the `iD.data.imagery` array and can be
-overridden.  (Note that the "None" and "Custom" options will always be shown in the list)
+overridden or modified prior to creating the iD context.
+
+Note that the "None" and "Custom" options will always be shown in the list.
 
 To remove all imagery from iD:
 ```js
@@ -213,16 +215,59 @@ For more details about the `iD.data.imagery` structure, see
 
 ### Presets
 
-iD can use external presets exclusively or along with the default OpenStreetMap presets. This is configured using the `context.presets` accessor. To use external presets alone, initialize the iD context with a custom `Presets` object:
+iD's preset database is stored in the `iD.data.presets` object and can be overridden
+or modified prior to creating the iD context.
 
+The format of the `presets` object is
+[documented here](https://github.com/openstreetmap/iD/tree/master/data/presets#custom-presets).
+
+To add a new preset to iD's existing preset database.
 ```js
-
-var id = iD.Context()
-  .presets(customPresets);
-
+iD.data.presets.presets["aerialway/zipline"] = {
+    geometry: ["line"],
+    fields: ["incline"],
+    tags: { "aerialway": "zip_line" },
+    name: "Zipline"
+};
 ```
 
-The format of the Preset object is [documented here](https://github.com/openstreetmap/iD/tree/master/data/presets#custom-presets).
+To completely replace iD's default presets with your own:
+```js
+iD.data.presets = myPresets;
+```
+
+To run iD with the minimal set of presets that only match basic geometry types:
+```js
+iD.data.presets = {
+    presets: {
+        "area": {
+            "name": "Area",
+            "tags": {},
+            "geometry": ["area"]
+        },
+        "line": {
+            "name": "Line",
+            "tags": {},
+            "geometry": ["line"]
+        },
+        "point": {
+            "name": "Point",
+            "tags": {},
+            "geometry": ["point"]
+        },
+        "vertex": {
+            "name": "Vertex",
+            "tags": {},
+            "geometry": ["vertex"]
+        },
+        "relation": {
+            "name": "Relation",
+            "tags": {},
+            "geometry": ["relation"]
+        }
+    }
+};
+```
 
 
 ### Minimum Editable Zoom

@@ -5,7 +5,7 @@ import { coreHistory } from './history';
 import { dataLocales, dataEn } from '../../data/index';
 import { geoRawMercator } from '../geo/raw_mercator';
 import { modeSelect } from '../modes/select';
-import { presetInit } from '../presets/init';
+import { presetIndex } from '../presets/index';
 import { rendererBackground } from '../renderer/background';
 import { rendererFeatures } from '../renderer/features';
 import { rendererMap } from '../renderer/map';
@@ -212,6 +212,11 @@ export function coreContext() {
     };
 
 
+    /* Presets */
+    var presets;
+    context.presets = function() { return presets; };
+
+
     /* Map */
     var map;
     context.map = function() { return map; };
@@ -246,16 +251,6 @@ export function coreContext() {
     };
     context.getDebug = function(flag) {
         return flag && debugFlags[flag];
-    };
-
-
-    /* Presets */
-    var presets;
-    context.presets = function(_) {
-        if (!arguments.length) return presets;
-        presets.load(_);
-        areaKeys = presets.areaKeys();
-        return context;
     };
 
 
@@ -389,6 +384,7 @@ export function coreContext() {
 
     background = rendererBackground(context);
     features = rendererFeatures(context);
+    presets = presetIndex();
 
     map = rendererMap(context);
     context.mouse = map.mouse;
@@ -401,7 +397,8 @@ export function coreContext() {
     context.redrawEnable = map.redrawEnable;
 
     background.init();
-    presets = presetInit();
+    presets.init();
+    areaKeys = presets.areaKeys();
 
     _.each(services, function(service) {
         if (service && typeof service.init === 'function') {

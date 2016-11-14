@@ -5,7 +5,11 @@ import { geoExtent, geoChooseEdge } from '../geo/index';
 import { modeSelect } from '../modes/index';
 import { osmEntity } from '../osm/index';
 import { svgIcon } from '../svg/index';
-import { utilDisplayName, utilEntityOrMemberSelector } from '../util/index';
+import {
+    utilDisplayName,
+    utilDisplayType,
+    utilEntityOrMemberSelector
+} from '../util/index';
 
 
 export function uiFeatureList(context) {
@@ -111,11 +115,13 @@ export function uiFeatureList(context) {
 
                 var name = utilDisplayName(entity) || '';
                 if (name.toLowerCase().indexOf(q) >= 0) {
+                    var matched = context.presets().match(entity, graph),
+                        type = (matched && matched.name()) || utilDisplayType(entity.id);
                     result.push({
                         id: entity.id,
                         entity: entity,
                         geometry: context.geometry(entity.id),
-                        type: context.presets().match(entity, graph).name(),
+                        type: type,
                         name: name
                     });
                 }

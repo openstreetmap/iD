@@ -1,8 +1,7 @@
 describe('iD.actionSplit', function () {
 
     beforeEach(function () {
-        iD.areaKeys = iD.Context()
-            .presets(iD.dataPresets).presets().areaKeys();
+        iD.areaKeys = iD.Context().presets().areaKeys();
     });
 
     describe('#disabled', function () {

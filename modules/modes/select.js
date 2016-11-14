@@ -244,10 +244,11 @@ export function modeSelect(context, selectedIDs) {
                 return;
             }
 
-            var parent = singularParent();
-            if (parent) {
-                surface.selectAll('.related')
-                    .classed('related', false);
+            surface.selectAll('.related')
+                .classed('related', false);
+
+            singularParent();
+            if (relatedParent) {
                 surface.selectAll(utilEntitySelector([relatedParent]))
                     .classed('related', true);
             }
@@ -363,8 +364,11 @@ export function modeSelect(context, selectedIDs) {
             var surface = context.surface();
             surface.selectAll('.related')
                 .classed('related', false);
-            surface.selectAll(utilEntitySelector([relatedParent]))
-                .classed('related', true);
+
+            if (relatedParent) {
+                surface.selectAll(utilEntitySelector([relatedParent]))
+                    .classed('related', true);
+            }
         }
 
 

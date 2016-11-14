@@ -7,6 +7,9 @@
 * :warning: Flattened namespace means that all functions have changed names (#3479)
   * e.g. `iD.actions.Move` -> `iD.actionMove`, `iD.geo.Extent` -> `iD.geoExtent`
   * Many deprecated names are still exported as symbols, e.g. `iD.Context` - we will remove these eventually
+* :warning: Customized iD deployments can manipulate live objects, rather than iD.Context accessors
+  * No longer need to call things like `presets()`, `imagery()`, `taginfo()` when creating `iD.Context`
+  * See [API.md](https://github.com/openstreetmap/iD/blob/master/API.md#customized-deployments) for details on customized deployments
 * :warning: iD has upgraded to the latest released versions of d3, lodash, rbush, etc.
   * d3 no longer adds itself to the global namespace, but can now be accessed via `iD.d3`
 * :warning: iD now uses `npm` scripts for all build processes

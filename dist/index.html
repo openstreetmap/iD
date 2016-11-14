@@ -37,9 +37,7 @@
                 document.getElementById('id-container').innerHTML = 'Sorry, your browser is not currently supported. Please use Potlatch 2 to edit the map.';
                 document.getElementById('id-container').className = 'unsupported';
             } else {
-                var id = iD.Context()
-                  .presets(iD.dataPresets);
-
+                var id = iD.Context();
                 id.ui()(document.getElementById('id-container'));
             }
         </script>

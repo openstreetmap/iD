@@ -2,8 +2,7 @@ describe('iD.uiFieldAccess', function() {
     var selection, field;
     beforeEach(function() {
         selection = d3.select(document.createElement('div'));
-        field = iD.Context()
-            .presets(iD.dataPresets).presets().field('access');
+        field = iD.Context().presets().field('access');
     });
 
     it('creates inputs for a variety of modes of access', function() {

@@ -7,7 +7,7 @@ import { osmEntity } from '../osm/index';
 import { svgIcon } from '../svg/index';
 import { services } from '../services/index';
 import { uiDisclosure } from './disclosure';
-import { utilDisplayName } from '../util/index';
+import { utilDisplayName, utilDisplayType } from '../util/index';
 
 
 export function uiRawMemberEditor(context) {
@@ -109,7 +109,10 @@ export function uiRawMemberEditor(context) {
 
                         label.append('span')
                             .attr('class', 'member-entity-type')
-                            .text(function(d) { return context.presets().match(d.member, context.graph()).name(); });
+                            .text(function(d) {
+                                var matched = context.presets().match(d.member, context.graph());
+                                return (matched && matched.name()) || utilDisplayType(d.member.id);
+                            });
 
                         label.append('span')
                             .attr('class', 'member-entity-name')

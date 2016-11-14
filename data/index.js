@@ -12,19 +12,18 @@ export { default as dataImperial } from './imperial.json';
 export { default as dataDriveLeft } from './drive-left.json';
 export { en as dataEn } from '../dist/locales/en.json';
 
+import { dataImagery } from './imagery.json';
 import { presets } from './presets/presets.json';
 import { defaults } from './presets/defaults.json';
 import { categories } from './presets/categories.json';
 import { fields } from './presets/fields.json';
 
-export var dataPresets = {
-    presets: presets,
-    defaults: defaults,
-    categories: categories,
-    fields: fields
-};
-
-import { dataImagery } from './imagery.json';
 export var data = {
-    imagery: dataImagery
+    imagery: dataImagery,
+    presets: {
+        presets: presets,
+        defaults: defaults,
+        categories: categories,
+        fields: fields
+    }
 };

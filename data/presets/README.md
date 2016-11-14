@@ -274,6 +274,12 @@ For example:
     "tags": {},
     "geometry": ["vertex"],
     "matchScore": 0.1
+},
+"relation": {
+    "name": "Relation",
+    "tags": {},
+    "geometry": ["relation"],
+    "matchScore": 0.1
 }
 ```
 
