@@ -1331,22 +1331,6 @@
                 "service": {
                     "label": "Тип проезда"
                 },
-                "service/bicycle/chain_tool": {
-                    "label": "Имеется инструмент для починки велосипедной цепи",
-                    "options": {
-                        "no": "Нет",
-                        "undefined": "Предполагается «нет»",
-                        "yes": "Да"
-                    }
-                },
-                "service/bicycle/pump": {
-                    "label": "Насос",
-                    "options": {
-                        "no": "Нет",
-                        "undefined": "Предполагается «нет»",
-                        "yes": "Да"
-                    }
-                },
                 "service_rail": {
                     "label": "Тип подъездной дороги",
                     "options": {
@@ -1459,9 +1443,6 @@
                 },
                 "tourism": {
                     "label": "Тип"
-                },
-                "towertype": {
-                    "label": "Тип башни"
                 },
                 "tracktype": {
                     "label": "Тип просёлочных дорог",
@@ -2923,6 +2904,9 @@
                     "name": "Трубопровод",
                     "terms": "трубопровод"
                 },
+                "man_made/pumping_station": {
+                    "name": "Насосная станция"
+                },
                 "man_made/silo": {
                     "name": "Силос (склад сыпучего)",
                     "terms": "зерно, пшеница, мука"
@@ -3780,10 +3764,6 @@
                 "tourism/attraction": {
                     "name": "Достопримечательность",
                     "terms": "Достопримечательность"
-                },
-                "tourism/camp_site": {
-                    "name": "Кемпинг палаточный",
-                    "terms": "лагерь, палаточный лагерь, турбаза, место для лагеря"
                 },
                 "tourism/caravan_site": {
                     "name": "Стоянка автодомов",

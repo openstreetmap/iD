@@ -1280,22 +1280,6 @@
                 "service": {
                     "label": "유형"
                 },
-                "service/bicycle/chain_tool": {
-                    "label": "체인 공구",
-                    "options": {
-                        "no": "아니오",
-                        "undefined": "아니오로 간주",
-                        "yes": "예"
-                    }
-                },
-                "service/bicycle/pump": {
-                    "label": "공기 펌프",
-                    "options": {
-                        "no": "아니오",
-                        "undefined": "아니오로 간주",
-                        "yes": "예"
-                    }
-                },
                 "service_rail": {
                     "label": "취부 유형"
                 },
@@ -1393,9 +1377,6 @@
                 },
                 "tourism": {
                     "label": "유형"
-                },
-                "towertype": {
-                    "label": "탑 유형"
                 },
                 "tracktype": {
                     "label": "트랙 유형",
@@ -2879,9 +2860,6 @@
                 },
                 "tourism/attraction": {
                     "name": "관광 명소"
-                },
-                "tourism/camp_site": {
-                    "name": "캠프장"
                 },
                 "tourism/caravan_site": {
                     "name": "RV 공원"

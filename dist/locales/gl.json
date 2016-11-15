@@ -1160,9 +1160,6 @@
                 "tourism": {
                     "label": "Tipo"
                 },
-                "towertype": {
-                    "label": "Tipo de torre"
-                },
                 "trail_visibility": {
                     "label": "Visibilidade do sendeiro"
                 },
@@ -1876,9 +1873,6 @@
                 },
                 "tourism/attraction": {
                     "name": "Atracción turística"
-                },
-                "tourism/camp_site": {
-                    "name": "Cámping"
                 },
                 "tourism/caravan_site": {
                     "name": "Parque de Caravanas"

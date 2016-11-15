@@ -814,18 +814,6 @@
                 "service": {
                     "label": "Вид"
                 },
-                "service/bicycle/chain_tool": {
-                    "options": {
-                        "no": "Не",
-                        "yes": "Да"
-                    }
-                },
-                "service/bicycle/pump": {
-                    "options": {
-                        "no": "Не",
-                        "yes": "Да"
-                    }
-                },
                 "shelter": {
                     "label": "Навес"
                 },
@@ -862,9 +850,6 @@
                 },
                 "tourism": {
                     "label": "Вид"
-                },
-                "towertype": {
-                    "label": "Вид кула"
                 },
                 "trail_visibility": {
                     "label": "Видимост на туристическата пътека"
@@ -1624,9 +1609,6 @@
                 },
                 "tourism/attraction": {
                     "name": "Туристическа атракция"
-                },
-                "tourism/camp_site": {
-                    "name": "Къмпинг"
                 },
                 "tourism/caravan_site": {
                     "name": "Паркинг за каравани"

@@ -1105,18 +1105,6 @@
                 "service": {
                     "label": "ವಿಧ"
                 },
-                "service/bicycle/chain_tool": {
-                    "options": {
-                        "no": "ಇಲ್ಲ",
-                        "yes": "ಹೌದು"
-                    }
-                },
-                "service/bicycle/pump": {
-                    "options": {
-                        "no": "ಇಲ್ಲ",
-                        "yes": "ಹೌದು"
-                    }
-                },
                 "shelter": {
                     "label": "ಆಶ್ರಯ"
                 },

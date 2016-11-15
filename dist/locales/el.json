@@ -1135,22 +1135,6 @@
                 "service": {
                     "label": "Τύπος"
                 },
-                "service/bicycle/chain_tool": {
-                    "label": "Εξωλκέας Αλυσίδας",
-                    "options": {
-                        "no": "Όχι",
-                        "undefined": "Υποθετικά Όχι",
-                        "yes": "Ναι"
-                    }
-                },
-                "service/bicycle/pump": {
-                    "label": "Τρόμπα Αέρος",
-                    "options": {
-                        "no": "Όχι",
-                        "undefined": "Υποθετικά Όχι",
-                        "yes": "Ναι"
-                    }
-                },
                 "service_rail": {
                     "options": {
                         "crossover": "Σύνδεση Παραλλήλων Γραμμών"
@@ -1227,9 +1211,6 @@
                 },
                 "tourism": {
                     "label": "Τύπος"
-                },
-                "towertype": {
-                    "label": "Τύπος Πύργου"
                 },
                 "trail_visibility": {
                     "label": "Ορατότητα Μονοπατιού",
@@ -2833,10 +2814,6 @@
                 "tourism/attraction": {
                     "name": "Τ",
                     "terms": "Τουριστικό Αξιοθέατο"
-                },
-                "tourism/camp_site": {
-                    "name": "Χώρος Κατασκήνωσης",
-                    "terms": "Χώρος κατασκήνωσης, Κάμπινγκ"
                 },
                 "tourism/caravan_site": {
                     "name": "Πάρκο τροχόσπιτων",

@@ -988,19 +988,6 @@
                 "service": {
                     "label": "Tip"
                 },
-                "service/bicycle/chain_tool": {
-                    "options": {
-                        "no": "Hayır",
-                        "undefined": "Tahminen Hayir",
-                        "yes": "Evet"
-                    }
-                },
-                "service/bicycle/pump": {
-                    "options": {
-                        "no": "Hayır",
-                        "undefined": "Tahminen Hayir"
-                    }
-                },
                 "shelter": {
                     "label": "Barınak"
                 },
@@ -1063,9 +1050,6 @@
                 },
                 "tourism": {
                     "label": "Tip"
-                },
-                "towertype": {
-                    "label": "Kule tipi"
                 },
                 "tracktype": {
                     "label": "Toprak yolunun tipi"
@@ -2183,9 +2167,6 @@
                 },
                 "tourism/attraction": {
                     "name": "Turistik yer"
-                },
-                "tourism/camp_site": {
-                    "name": "Kamp Alanı"
                 },
                 "tourism/chalet": {
                     "name": "Yayla evi"

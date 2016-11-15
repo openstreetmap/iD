@@ -1282,22 +1282,6 @@
                 "service": {
                     "label": "Typ"
                 },
-                "service/bicycle/chain_tool": {
-                    "label": "Oprava reťaze",
-                    "options": {
-                        "no": "Nie",
-                        "undefined": "Pravdepodobne nie",
-                        "yes": "Áno"
-                    }
-                },
-                "service/bicycle/pump": {
-                    "label": "Vzduchová pumpa",
-                    "options": {
-                        "no": "Nie",
-                        "undefined": "Pravdepodobne nie",
-                        "yes": "Áno"
-                    }
-                },
                 "service_rail": {
                     "label": "Typ koľaje",
                     "options": {
@@ -1417,9 +1401,6 @@
                 },
                 "tourism": {
                     "label": "Typ"
-                },
-                "towertype": {
-                    "label": "Typ veže"
                 },
                 "tracktype": {
                     "label": "Typ lesnej cesty",
@@ -3750,10 +3731,6 @@
                 "tourism/attraction": {
                     "name": "Turistická atrakcia",
                     "terms": "turisticka atrakcia,atrakcia,turistické miesto,turisticke miesto"
-                },
-                "tourism/camp_site": {
-                    "name": "Kemping",
-                    "terms": "táborisko,taborisko,camping,kemping,kempovisko"
                 },
                 "tourism/caravan_site": {
                     "name": "Parkovisko pre karavany",

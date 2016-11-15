@@ -1153,20 +1153,6 @@
                 "service": {
                     "label": "Vrsta"
                 },
-                "service/bicycle/chain_tool": {
-                    "options": {
-                        "no": "Ne",
-                        "undefined": "Predpostavljeno: NE",
-                        "yes": "Da"
-                    }
-                },
-                "service/bicycle/pump": {
-                    "options": {
-                        "no": "Ne",
-                        "undefined": "Predpostavljeno: NE",
-                        "yes": "Da"
-                    }
-                },
                 "service_rail": {
                     "label": "Vrsta storitve"
                 },
@@ -1269,9 +1255,6 @@
                 },
                 "tourism": {
                     "label": "Vrsta"
-                },
-                "towertype": {
-                    "label": "Vrsta stolpa"
                 },
                 "tracktype": {
                     "label": "Tip kolovoza",
@@ -3327,10 +3310,6 @@
                 "tourism/attraction": {
                     "name": "Turistična znamenitost",
                     "terms": "privlačno za turiste,turistična točka"
-                },
-                "tourism/camp_site": {
-                    "name": "Kamp",
-                    "terms": "prostor za kampiranje"
                 },
                 "tourism/caravan_site": {
                     "name": "Parkirišče za avtodome",

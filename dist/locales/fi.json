@@ -1266,22 +1266,6 @@
                 "service": {
                     "label": "Tyyppi"
                 },
-                "service/bicycle/chain_tool": {
-                    "label": "Ketjutyökalu",
-                    "options": {
-                        "no": "Ei",
-                        "undefined": "Oletettavasti ei",
-                        "yes": "Kyllä"
-                    }
-                },
-                "service/bicycle/pump": {
-                    "label": "Rengaspainepumppu",
-                    "options": {
-                        "no": "Ei",
-                        "undefined": "Oletettavasti ei",
-                        "yes": "Kyllä"
-                    }
-                },
                 "service_rail": {
                     "label": "Käyttötarkoitus",
                     "options": {
@@ -1379,9 +1363,6 @@
                 },
                 "tourism": {
                     "label": "Tyyppi"
-                },
-                "towertype": {
-                    "label": "Tornin tyyppi"
                 },
                 "trail_visibility": {
                     "label": "Havaittavuus",
@@ -3277,9 +3258,6 @@
                 },
                 "tourism/attraction": {
                     "name": "Turistikohde"
-                },
-                "tourism/camp_site": {
-                    "name": "Leirintäalue"
                 },
                 "tourism/caravan_site": {
                     "name": "Asuntoautopysäköinti"

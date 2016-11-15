@@ -962,18 +962,6 @@
                 "service": {
                     "label": "Տեսակ"
                 },
-                "service/bicycle/chain_tool": {
-                    "options": {
-                        "no": "Ոչ",
-                        "yes": "Այո"
-                    }
-                },
-                "service/bicycle/pump": {
-                    "options": {
-                        "no": "Ոչ",
-                        "yes": "Այո"
-                    }
-                },
                 "service_rail": {
                     "label": "Սպասարկման տեսակ"
                 },
@@ -1000,9 +988,6 @@
                 },
                 "tourism": {
                     "label": "Տեսակ"
-                },
-                "towertype": {
-                    "label": "Աշտարակի տեսակ"
                 },
                 "tracktype": {
                     "label": "Արահետի Տեսակ"

@@ -713,9 +713,6 @@
                 "tourism": {
                     "label": "Vrsta"
                 },
-                "towertype": {
-                    "label": "Tip tornja"
-                },
                 "trail_visibility": {
                     "label": "Vidljivost traga"
                 },
@@ -2049,10 +2046,6 @@
                 "tourism/attraction": {
                     "name": "Turistička atrakcija",
                     "terms": "turistička atrakcija,spomenici kulture i prirode"
-                },
-                "tourism/camp_site": {
-                    "name": "Kamp",
-                    "terms": "kamp,autokamp"
                 },
                 "tourism/caravan_site": {
                     "name": "Kamp park",

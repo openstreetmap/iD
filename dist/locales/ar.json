@@ -1094,20 +1094,6 @@
                 "service": {
                     "label": "النوع"
                 },
-                "service/bicycle/chain_tool": {
-                    "options": {
-                        "no": "لا",
-                        "undefined": "يفترض أنها لا",
-                        "yes": "نعم"
-                    }
-                },
-                "service/bicycle/pump": {
-                    "options": {
-                        "no": "لا",
-                        "undefined": "يفترض أنها لا",
-                        "yes": "نعم"
-                    }
-                },
                 "shelter": {
                     "label": "ملجأ"
                 },
@@ -1166,14 +1152,18 @@
                 "tourism": {
                     "label": "النوع"
                 },
-                "towertype": {
-                    "label": "نوع البرج"
+                "tracktype": {
+                    "label": "صنف الدرب"
                 },
                 "traffic_signals": {
                     "label": "النوع"
                 },
                 "trail_visibility": {
-                    "label": "وضوحية الطريق"
+                    "label": "وضوحية الطريق",
+                    "placeholder": "ممتاز، جيد، رديء ..."
+                },
+                "trees": {
+                    "label": "أشجار"
                 },
                 "tunnel": {
                     "label": "نفق"
@@ -1183,6 +1173,9 @@
                 },
                 "water": {
                     "label": "النوع"
+                },
+                "water_point": {
+                    "label": "نقطة مياه"
                 },
                 "waterway": {
                     "label": "النوع"
@@ -1352,6 +1345,9 @@
                     "name": "أرض مستشفى",
                     "terms": "أرض مستشفى"
                 },
+                "amenity/internet_cafe": {
+                    "name": "مقهى الإنترنت"
+                },
                 "amenity/library": {
                     "name": "مكتبة",
                     "terms": "مكتبة"
@@ -1433,6 +1429,9 @@
                     "name": "مأوى",
                     "terms": "مأوى, ملجأ, ملاذ, سقيفة, وقاء"
                 },
+                "amenity/social_facility/food_bank": {
+                    "name": "بنك غذاء"
+                },
                 "amenity/studio": {
                     "name": "أستوديو"
                 },
@@ -1462,6 +1461,9 @@
                 "amenity/university": {
                     "name": "أرض جامعة",
                     "terms": "أرض جامعة, حرم جامعي"
+                },
+                "amenity/vending_machine/cigarettes": {
+                    "name": "آلة بيع السجائر"
                 },
                 "amenity/vending_machine/parking_tickets": {
                     "name": "ماكينة بيع تذاكر وقوف",
@@ -1561,6 +1563,15 @@
                     "name": "جراج",
                     "terms": "مَرْأب , كراج, تصليح سيارات"
                 },
+                "building/greenhouse": {
+                    "name": "بيت بلاستيكي"
+                },
+                "building/hospital": {
+                    "name": "مبنى المستشفى"
+                },
+                "building/hotel": {
+                    "name": "مبنى فندق"
+                },
                 "building/house": {
                     "name": "منزل",
                     "terms": "منزل, بيت"
@@ -1573,9 +1584,36 @@
                     "name": "مبنى صناعي",
                     "terms": "مبنى صناعي"
                 },
+                "building/public": {
+                    "name": "مبنى عمومي"
+                },
                 "building/residential": {
                     "name": "مبنى سكني",
                     "terms": "مبنى سكني"
+                },
+                "building/roof": {
+                    "name": "سقف"
+                },
+                "building/train_station": {
+                    "name": "محطة قطار"
+                },
+                "building/university": {
+                    "name": "مبنى جامعي"
+                },
+                "craft/carpenter": {
+                    "name": "نجار"
+                },
+                "craft/jeweler": {
+                    "name": "بائع مجوهرات"
+                },
+                "craft/photographer": {
+                    "name": "مصور"
+                },
+                "craft/plumber": {
+                    "name": "سمكري"
+                },
+                "craft/shoemaker": {
+                    "name": "إسكافي"
                 },
                 "emergency/ambulance_station": {
                     "name": "محطة إسعاف",
@@ -1623,6 +1661,9 @@
                 "highway/motorway": {
                     "name": "طريق سريع",
                     "terms": "طريق سريع"
+                },
+                "highway/motorway_junction": {
+                    "name": "محول طريق سيار / مخرج"
                 },
                 "highway/motorway_link": {
                     "name": "رابط لطريق سريع",
@@ -1687,6 +1728,9 @@
                 "highway/stop": {
                     "name": "إشارة توقف",
                     "terms": "إشارة توقف، ممنوع الوقوف، قف"
+                },
+                "highway/street_lamp": {
+                    "name": "مصباح الشارع"
                 },
                 "highway/tertiary": {
                     "name": "طريق ثالثي",
@@ -1938,6 +1982,9 @@
                     "name": "خط أنابيب",
                     "terms": "خط أنابيب"
                 },
+                "man_made/pumping_station": {
+                    "name": "محطة ضخ"
+                },
                 "man_made/storage_tank": {
                     "name": "خزان"
                 },
@@ -1963,6 +2010,9 @@
                 "man_made/water_works": {
                     "name": "محطة مياه",
                     "terms": "محطة مياه"
+                },
+                "military/checkpoint": {
+                    "name": "نقطة تفتيش"
                 },
                 "military/danger_area": {
                     "name": "منطقة خطرة",
@@ -2509,10 +2559,6 @@
                 "tourism/attraction": {
                     "name": "معلم سياحي",
                     "terms": "معلم سياحي, مكان سياحي"
-                },
-                "tourism/camp_site": {
-                    "name": "موقع مخيم",
-                    "terms": "موقع تخييم"
                 },
                 "tourism/caravan_site": {
                     "name": "موقف عربات كبيرة",

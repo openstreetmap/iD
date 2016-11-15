@@ -294,6 +294,7 @@
         "inspector": {
             "no_documentation_combination": "Nie ma dokumentacji dla tej kombinacji znaczników",
             "no_documentation_key": "Nie ma dokumentacji dla tego klucza",
+            "documentation_redirect": "Ta dokumentacja została przeniesiona na nową stronę",
             "show_more": "Wyświetl więcej",
             "view_on_osm": "Wyświetl na openstreetmap.org",
             "all_fields": "Wszystkie pola",
@@ -780,6 +781,9 @@
                 },
                 "barrier": {
                     "label": "Typ"
+                },
+                "beauty": {
+                    "label": "Typ sklepu"
                 },
                 "bench": {
                     "label": "Ławka"
@@ -1315,8 +1319,10 @@
                     "options": {
                         "downhill": "Downhill",
                         "hike": "Turystyka piesza",
+                        "ice_skate": "Łyżwiarstwo",
                         "nordic": "Kombinacja norweska",
                         "playground": "Nauka jazdy na nartach",
+                        "skitour": "Skitour",
                         "sled": "Tor saneczkowy",
                         "sleigh": "Sanie",
                         "snow_park": "Snowpark"
@@ -1339,6 +1345,13 @@
                 },
                 "recycling_accepts": {
                     "label": "Przyjmuje"
+                },
+                "recycling_type": {
+                    "label": "Rodzaj recyklingu",
+                    "options": {
+                        "centre": "Miejsce recyklingu",
+                        "container": "Kontener"
+                    }
                 },
                 "ref": {
                     "label": "Numer referencyjny"
@@ -1365,7 +1378,10 @@
                     "label": "Typ"
                 },
                 "sac_scale": {
-                    "label": "Stopień trudności turystyki pieszej"
+                    "label": "Stopień trudności turystyki pieszej",
+                    "options": {
+                        "hiking": "T1: Wędrówki"
+                    }
                 },
                 "sanitary_dump_station": {
                     "label": "Miejsce opróżniania toalety"
@@ -1385,21 +1401,8 @@
                 "service": {
                     "label": "Typ"
                 },
-                "service/bicycle/chain_tool": {
-                    "label": "Skuwacz łańcucha",
-                    "options": {
-                        "no": "Nie",
-                        "undefined": "Domyślnie nie",
-                        "yes": "Tak"
-                    }
-                },
-                "service/bicycle/pump": {
-                    "label": "Pompowanie",
-                    "options": {
-                        "no": "Nie",
-                        "undefined": "Domyślnie nie",
-                        "yes": "Tak"
-                    }
+                "service/bicycle": {
+                    "label": "Usługi"
                 },
                 "service_rail": {
                     "label": "Typ Usługi",
@@ -1524,9 +1527,6 @@
                 "tourism": {
                     "label": "Typ"
                 },
-                "towertype": {
-                    "label": "Typ wieży"
-                },
                 "tracktype": {
                     "label": "Spoistość drogi, zazwyczaj leśnej lub polnej (tracktype)",
                     "options": {
@@ -1600,6 +1600,10 @@
                 "address": {
                     "name": "Adres",
                     "terms": "namiar, numer"
+                },
+                "advertising/billboard": {
+                    "name": "Billboard",
+                    "terms": "Reklama"
                 },
                 "aerialway": {
                     "name": "Wyciąg narciarski"
@@ -1941,6 +1945,10 @@
                 "amenity/recycling": {
                     "name": "Recykling",
                     "terms": "Recykling, Recyklizacja"
+                },
+                "amenity/recycling_centre": {
+                    "name": "Centrum przetwarzania odpadów (recycling)",
+                    "terms": "centrum przetwarzania odpadów, centrum recyclingu"
                 },
                 "amenity/register_office": {
                     "name": "Urząd stanu cywilnego"
@@ -2884,6 +2892,10 @@
                     "name": "Miejsce na ognisko",
                     "terms": "ognisko"
                 },
+                "leisure/fitness_centre": {
+                    "name": "Fitness",
+                    "terms": "fitness, centrum fitness"
+                },
                 "leisure/fitness_centre/yoga": {
                     "name": "Szkoła Yogi",
                     "terms": "yoga, szkoła yogi, centrum yogi, praktyka yogi"
@@ -2978,6 +2990,10 @@
                 "leisure/slipway": {
                     "name": "Pochylnia okrętowa",
                     "terms": "pochylnia"
+                },
+                "leisure/sports_centre": {
+                    "name": "centrum sportowe",
+                    "terms": "centrum sportowe, ośrodek sportowy, ośrodek sportów"
                 },
                 "leisure/sports_centre/swimming": {
                     "name": "Pływalnia",
@@ -3429,6 +3445,10 @@
                     "name": "Rozebrany tor",
                     "terms": "rozebrany tor"
                 },
+                "railway/crossing": {
+                    "name": "przejście kolejowe (ścieżka)",
+                    "terms": "przejście kolejowe"
+                },
                 "railway/disused": {
                     "name": "Nieużywany tor",
                     "terms": "nieużywany tor"
@@ -3440,6 +3460,10 @@
                 "railway/halt": {
                     "name": "Stacja kolejowa",
                     "terms": "stacja,przystanek,kolej,kolejowa"
+                },
+                "railway/level_crossing": {
+                    "name": "przejazd kolejowy (jezdnia)",
+                    "terms": "przejazd kolejowy"
                 },
                 "railway/monorail": {
                     "name": "Kolej jednoszynowa",
@@ -3523,6 +3547,14 @@
                 "shop/beauty": {
                     "name": "Salon piękności",
                     "terms": "kosmetyczka, wizaż"
+                },
+                "shop/beauty/nails": {
+                    "name": "Manicure/pedicure",
+                    "terms": "manicure, pedicure"
+                },
+                "shop/beauty/tanning": {
+                    "name": "Solarium",
+                    "terms": "solarium"
                 },
                 "shop/bed": {
                     "name": "Sklep z łóżkami/materacami",
@@ -3950,10 +3982,6 @@
                     "name": "Atrakcja turystyczna",
                     "terms": "atrakcja turystyczna"
                 },
-                "tourism/camp_site": {
-                    "name": "Kemping",
-                    "terms": "Camping"
-                },
                 "tourism/caravan_site": {
                     "name": "Kemping dla kamperów",
                     "terms": "kemping dla samochodów kempingowych"
@@ -4010,9 +4038,21 @@
                     "name": "Próg zwalniający",
                     "terms": "próg zwalniający"
                 },
+                "traffic_calming/cushion": {
+                    "name": "Poduszka",
+                    "terms": "poduszka, wyspowy próg spowalniający"
+                },
+                "traffic_calming/dip": {
+                    "name": "Zagłębienie",
+                    "terms": "Zagłębienie, spadek"
+                },
                 "traffic_calming/hump": {
                     "name": "Wysepka zwalniająca",
                     "terms": "wysepka zwalniająca"
+                },
+                "traffic_calming/island": {
+                    "name": "Wysepka",
+                    "terms": "wysepka"
                 },
                 "traffic_calming/rumble_strip": {
                     "name": "Linia wibracyjna",

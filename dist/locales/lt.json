@@ -1132,21 +1132,6 @@
                 "service": {
                     "label": "Tipas"
                 },
-                "service/bicycle/chain_tool": {
-                    "options": {
-                        "no": "Ne",
-                        "undefined": "Numatytai, kad Ne",
-                        "yes": "Taip"
-                    }
-                },
-                "service/bicycle/pump": {
-                    "label": "Oro pompa",
-                    "options": {
-                        "no": "Ne",
-                        "undefined": "Manoma, kad Ne",
-                        "yes": "Taip"
-                    }
-                },
                 "service_rail": {
                     "label": "Tarnybos tipas",
                     "options": {
@@ -1231,9 +1216,6 @@
                 },
                 "tourism": {
                     "label": "Tipas"
-                },
-                "towertype": {
-                    "label": "Bokšto tipas"
                 },
                 "tracktype": {
                     "label": "Kelio tipas",
@@ -2915,9 +2897,6 @@
                 },
                 "tourism/attraction": {
                     "name": "Turistų traukos vieta"
-                },
-                "tourism/camp_site": {
-                    "name": "Stovyklavietė"
                 },
                 "tourism/chalet": {
                     "name": "Sodyba",

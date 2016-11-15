@@ -1396,22 +1396,6 @@
                 "service": {
                     "label": "類別"
                 },
-                "service/bicycle/chain_tool": {
-                    "label": "鎖鏈工具",
-                    "options": {
-                        "no": "否",
-                        "undefined": "假設為沒有",
-                        "yes": "有"
-                    }
-                },
-                "service/bicycle/pump": {
-                    "label": "泵氣設備",
-                    "options": {
-                        "no": "否",
-                        "undefined": "假設為沒有",
-                        "yes": "有"
-                    }
-                },
                 "service_rail": {
                     "label": "服務類型",
                     "options": {
@@ -1534,9 +1518,6 @@
                 },
                 "tourism": {
                     "label": "類"
-                },
-                "towertype": {
-                    "label": "塔類"
                 },
                 "tracktype": {
                     "label": "路徑種類",
@@ -4001,10 +3982,6 @@
                 "tourism/attraction": {
                     "name": "觀光名勝",
                     "terms": "Tourist Attraction,旅行名勝,旅遊名勝,觀光點,觀光景點"
-                },
-                "tourism/camp_site": {
-                    "name": "營地",
-                    "terms": "Camp Site,營地,露營區"
                 },
                 "tourism/caravan_site": {
                     "name": "露營車營地",

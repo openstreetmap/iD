@@ -1315,22 +1315,6 @@
                 "service": {
                     "label": "Type"
                 },
-                "service/bicycle/chain_tool": {
-                    "label": "Chain Tool",
-                    "options": {
-                        "no": "No",
-                        "undefined": "Assumed to be No",
-                        "yes": "Yes"
-                    }
-                },
-                "service/bicycle/pump": {
-                    "label": "Air Pump",
-                    "options": {
-                        "no": "No",
-                        "undefined": "Assumed to be No",
-                        "yes": "Yes"
-                    }
-                },
                 "service_rail": {
                     "label": "Service Type",
                     "options": {
@@ -1555,7 +1539,7 @@
                     "name": "Shoe Shop"
                 },
                 "tourism/camp_site": {
-                    "terms": "camping"
+                    "name": "Camp Site"
                 },
                 "tourism/caravan_site": {
                     "name": "Caravan Park"
