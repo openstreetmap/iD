@@ -337,7 +337,7 @@
             "switch": "Switch back to this background",
             "custom": "Custom",
             "custom_button": "Edit custom background",
-            "custom_prompt": "Enter a tile URL template. Valid tokens are {z}, {x}, {y} for Z/X/Y scheme and {u} for quadtile scheme.",
+            "custom_prompt": "Enter a tile URL template. Valid tokens are {zoom}, {x}, {y} for Z/X/Y scheme and {u} for quadtile scheme.",
             "fix_misalignment": "Adjust imagery offset",
             "imagery_source_faq": "Where does this imagery come from?",
             "reset": "reset",
