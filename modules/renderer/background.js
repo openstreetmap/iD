@@ -197,7 +197,7 @@ export function rendererBackground(context) {
             if (!qmap) return false;
             var args = qmap.split('/').map(Number);
             if (args.length < 3 || args.some(isNaN)) return false;
-            return geoExtent([args[1], args[2]]);
+            return geoExtent([args[2], args[1]]);
         }
 
         var dataImagery = data.imagery || [],
