@@ -26,7 +26,7 @@
 - [ ] git checkout release
 - [ ] git reset --hard master
 - [ ] npm run all
-- [ ] git add -f dist/*.css dist/*.js dist/img/*.svg dist/locales/*.json
+- [ ] git add -f dist/*.css dist/*.js dist/img/*.svg dist/locales/*.json dist/mapillary-js/
 - [ ] git commit -m 'Check in build'
 - [ ] git tag vA.B.C
 - [ ] git push origin -f release vA.B.C
