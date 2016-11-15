@@ -1,7 +1,7 @@
 :warning: = Breaking change, may affect downstream projects or sites that embed iD.
 
 ## 2.0.0
-##### (coming soon)
+##### Nov 15, 2016
 * :warning: iD is now written in a modular code style using ES6 `import`/`export` and [rollup.js](http://rollupjs.org/) as a build tool (#3118, #3179, #3180)
   * Many thanks to @tmcw, @kepta, @tyrasd, @beaugunderson, @davidchouse
 * :warning: Flattened namespace means that all functions have changed names (#3479)
