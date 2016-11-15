@@ -16,6 +16,8 @@
   * iD requires Node v4 or higher, but does not require `make` anymore
   * Update install instructions and prerequisites (#3466, thanks @tyrasd)
 * :warning: iD url hash map order has changed to `zoom/latitude/longitude` to match OSM and others (#3554)
+* :warning: Authentication methods like `context.preauth`, `connection.switch`, `iD.uiSourceSwitch.keys` options have changed
+  * `url` option has been renamed to `urlroot`
 * Many preset improvements:
   * Add Construction and Tower Type fields to Mast and Tower presets (#3561, thanks @bkil)
   * Add Turning Loop (Island) preset, adjust icons for traversable/nontraversable features (#3557)
