@@ -1,10 +1,12 @@
 :warning: = Breaking change, may affect downstream projects or sites that embed iD.
 
 ## 2.0.1
-##### coming soon
+##### Nov 17, 2016
 * Bugfixes:
-  * When starting iD with an object selected, the map should focus on that object (#3588)
+  * When starting iD with an object selected, the map should focus on that object (#3588, thanks @tyrasd)
   * Fix for "Best" imagery not being automatically selected (#3586)
+* Performance improvements:
+  * Adjust max Mapillary pages fetched per zoom, adjust min viewfield zoom
 
 ## 2.0.0
 ##### Nov 15, 2016
