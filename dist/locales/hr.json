@@ -337,7 +337,7 @@
             "switch": "Vrati nazad na ovu pozadinu",
             "custom": "Podesivo",
             "custom_button": "Uredi prilagođenu pozadinu",
-            "custom_prompt": "Unesi URL predložak za popločavanje. Ispravni znakovi su {z}, {x}, {y} za Z/X/Y shemu i {u} za quadtile shemu.",
+            "custom_prompt": "Unesi URL predložak sličica karte. Ispravne oznake su {zoom}, {x}, {y} za Z/X/Y shemu i {u} za quadtile shemu.",
             "fix_misalignment": "Popravi odstupanje snimaka",
             "imagery_source_faq": "Koji je izvornik snimaka?",
             "reset": "resetiraj",

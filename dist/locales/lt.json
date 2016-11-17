@@ -315,7 +315,6 @@
             "none": "Jokio",
             "custom": "Savas",
             "custom_button": "Redaguoti pasirinktiną foną",
-            "custom_prompt": "Įveskite kaladėlių URL šabloną. Galimi ženklai yra {z}, {x}, {y} Z/X/Y schemai ir {u} quadtile schemai.",
             "reset": "iš naujo",
             "minimap": {
                 "description": "Minižemėlapis",

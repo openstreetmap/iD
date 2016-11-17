@@ -337,7 +337,7 @@
             "switch": "切換回此背景",
             "custom": "客製化",
             "custom_button": "編輯自訂的背景",
-            "custom_prompt": "輸入地圖影像區塊的URL模版。以 Z/X/Y 方式存取區塊的伺服器，可在模版中使用{z}, {x}, {y}作參數，而以quadtile存取區塊的伺服器，則可使用{u}作參數。",
+            "custom_prompt": "輸入地圖影像區塊的 URL 模版。以 Z/X/Y 方式存取區塊的伺服器，可在模版中使用 {z}, {x}, {y} 作參數，而以 quadtile 存取區塊的伺服器，則可使用 {u} 作參數。",
             "fix_misalignment": "調整影像偏移",
             "imagery_source_faq": "影像是從那裡來的呢？",
             "reset": "重設",

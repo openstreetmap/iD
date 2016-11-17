@@ -335,7 +335,6 @@
             "switch": "Wróć do tego podkładu",
             "custom": "Własne",
             "custom_button": "Edycja własnego podkładu",
-            "custom_prompt": "Wprowadź szablon URL dla kafelków. Dozwolone elementy to {z}, {x}, {y} dla schematu Z/X/Y oraz {u} dla schematu quadtile.",
             "fix_misalignment": "Przesunięcie podkładu",
             "imagery_source_faq": "Skąd pochodzi ta warstwa?",
             "reset": "Przywraca ustawienia",
@@ -803,6 +802,9 @@
                         "whole": "krew"
                     }
                 },
+                "board_type": {
+                    "label": "Typ"
+                },
                 "boundary": {
                     "label": "Typ"
                 },
@@ -1024,6 +1026,9 @@
                 "handrail": {
                     "label": "Poręcz"
                 },
+                "height": {
+                    "label": "Wysokość (m)"
+                },
                 "highway": {
                     "label": "Typ"
                 },
@@ -1141,6 +1146,12 @@
                     "label": "Lokalizacja"
                 },
                 "man_made": {
+                    "label": "Typ"
+                },
+                "map_size": {
+                    "label": "Zasięg mapy"
+                },
+                "map_type": {
                     "label": "Typ"
                 },
                 "maxspeed": {
@@ -1527,6 +1538,13 @@
                 "tourism": {
                     "label": "Typ"
                 },
+                "tower/construction": {
+                    "label": "Typ konstrukcji",
+                    "placeholder": "Odciągowa, krata stalowa, ukryta"
+                },
+                "tower/type": {
+                    "label": "Typ"
+                },
                 "tracktype": {
                     "label": "Spoistość drogi, zazwyczaj leśnej lub polnej (tracktype)",
                     "options": {
@@ -1537,6 +1555,9 @@
                         "grade5": "Ziemia/piasek/trawa, bez dodatku materiałów utwardzonych; często słabo widoczna"
                     },
                     "placeholder": "Utwardzona, nieubita..."
+                },
+                "traffic_calming": {
+                    "label": "Typ"
                 },
                 "traffic_signals": {
                     "label": "Typ"
@@ -1854,6 +1875,10 @@
                     "name": "Lodziarnia",
                     "terms": "sklep z lodami"
                 },
+                "amenity/internet_cafe": {
+                    "name": "Kafejka Internetowa",
+                    "terms": "Internet"
+                },
                 "amenity/kindergarten": {
                     "name": "Teren przedszkola",
                     "terms": "Teren żłobka"
@@ -2067,6 +2092,10 @@
                 "amenity/waste_disposal": {
                     "name": "Śmietnik",
                     "terms": "śmietnik"
+                },
+                "amenity/waste_transfer_station": {
+                    "name": "Stacja Przeróbki Odpadów",
+                    "terms": "odpady"
                 },
                 "amenity/water_point": {
                     "name": "Woda pitna dla kamperów",
@@ -3676,6 +3705,10 @@
                     "name": "Pralnia chemiczna",
                     "terms": "pralnia chemiczna"
                 },
+                "shop/e-cigarette": {
+                    "name": "Sklep z e-papierosami",
+                    "terms": "e-papierosy"
+                },
                 "shop/electronics": {
                     "name": "Sklep RTV/AGD",
                     "terms": "EuroRTVAgd,MediaExpert,Saturn,MediaMarkt"
@@ -4009,6 +4042,14 @@
                 "tourism/information": {
                     "name": "Informacja",
                     "terms": "informacja dla turystów"
+                },
+                "tourism/information/board": {
+                    "name": "Tablica Informacyjna",
+                    "terms": "informacja, obwieszczenia"
+                },
+                "tourism/information/map": {
+                    "name": "Mapa",
+                    "terms": "plan, mapa, "
                 },
                 "tourism/motel": {
                     "name": "Motel",

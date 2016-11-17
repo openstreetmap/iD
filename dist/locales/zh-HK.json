@@ -334,7 +334,6 @@
             "switch": "切換回這個背景",
             "custom": "自訂",
             "custom_button": "編輯自訂背景",
-            "custom_prompt": "輪入區塊範本的網址。有效的標記是以 {z}, {x}, {y} 作為 Z/X/Y 標記系統 Z/X/Y scheme 和 {u} 作為四分位數標記系統 quadtile scheme。",
             "fix_misalignment": "校正對位誤差",
             "imagery_source_faq": "這個背景影像來自何處？",
             "reset": "重設",

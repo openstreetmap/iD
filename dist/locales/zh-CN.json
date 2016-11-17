@@ -227,6 +227,7 @@
             "localized_translation_name": "名称"
         },
         "zoom_in_edit": "放大地图以编辑",
+        "login": "登录",
         "logout": "退出",
         "loading_auth": "正在连接OpenStreetMap...",
         "report_a_bug": "报告漏洞",
@@ -238,7 +239,8 @@
         "status": {
             "error": "无法连接到 API。",
             "offline": "API 已下线，请稍后再尝试编辑。",
-            "readonly": "API 目前处于只读状态，您需要等候一段时间才能保存您的更改。"
+            "readonly": "API 目前处于只读状态，您需要等候一段时间才能保存您的更改。",
+            "rateLimit": "该接口是限制匿名连接的。你可以通过登录来解决这个问题。"
         },
         "commit": {
             "title": "保存变更",
@@ -335,7 +337,6 @@
             "switch": "切换回该底图",
             "custom": "自定义",
             "custom_button": "编辑自定义背景",
-            "custom_prompt": "输入瓦片模板。Z/X/Y方案的有效标记是{z}，{x}，{y}，quadtile方案的有效标记是{u}。",
             "fix_misalignment": "调整影像偏移",
             "imagery_source_faq": "该影像的来源是？",
             "reset": "重置",
@@ -1027,6 +1028,9 @@
                 "handrail": {
                     "label": "扶手"
                 },
+                "height": {
+                    "label": "高度(米)"
+                },
                 "highway": {
                     "label": "类型"
                 },
@@ -1145,6 +1149,9 @@
                 },
                 "man_made": {
                     "label": "类型"
+                },
+                "map_size": {
+                    "label": "范围"
                 },
                 "map_type": {
                     "label": "类型"
@@ -4060,6 +4067,14 @@
                 "tourism/information": {
                     "name": "问询处",
                     "terms": "问讯处,问询处,信息中心,游客中心"
+                },
+                "tourism/information/guidepost": {
+                    "name": "路标",
+                    "terms": "路标,路牌"
+                },
+                "tourism/information/map": {
+                    "name": "地图",
+                    "terms": "地图"
                 },
                 "tourism/information/office": {
                     "name": "旅游咨询处",

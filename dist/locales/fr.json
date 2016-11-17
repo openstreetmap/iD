@@ -337,7 +337,6 @@
             "switch": "Revenir à cet arrière-plan",
             "custom": "Personnalisé",
             "custom_button": "Modifier le fond personnalisé",
-            "custom_prompt": "Saisir un template d'URL de tuile. Les symboles sont {z}, {x}, {y} pour la structure Z/X/Y et {u} pour la balance des domaines.",
             "fix_misalignment": "Ajuster le décalage de l'imagerie",
             "imagery_source_faq": "D'où provient cette imagerie ?",
             "reset": "réinitialiser",

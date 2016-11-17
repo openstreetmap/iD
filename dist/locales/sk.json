@@ -334,7 +334,6 @@
             "switch": "Prepnúť späť na toto pozadie",
             "custom": "Voliteľné",
             "custom_button": "Upraviť volitelné pozadie",
-            "custom_prompt": "Zadajte URL pre vzor mapového podkladu. Platné znaky sú {z}, {x}, {y} pre Z/X/Y schému a {u} pre quadtile schému.",
             "fix_misalignment": "Upraviť posun obrázkov",
             "imagery_source_faq": "Odkiaľ pochádzajú tieto obrázky?",
             "reset": "vynulovať",

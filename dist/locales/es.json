@@ -337,7 +337,7 @@
             "switch": "Volver a este fondo",
             "custom": "Personalizado",
             "custom_button": "Editar fondo personalizado",
-            "custom_prompt": "Introduzca un patrón de URL de teselas. Los símbolos válidos son {z}, {x}, {y} para el esquema Z/X/Y y {u} para el esquema quadtile.",
+            "custom_prompt": "Introduzca una plantilla URL de tesela. Los símbolos válidos son {zoom}, {x}, {y} para el esquema Z/X/Y y {u} para el esquema cuadrático.",
             "fix_misalignment": "Ajustar desplazamiento de imágenes",
             "imagery_source_faq": "¿De dónde vienen estas imágenes?",
             "reset": "reiniciar",
@@ -4090,13 +4090,20 @@
                     "terms": "información, información turística, oficina de información"
                 },
                 "tourism/information/board": {
-                    "name": "Tablero de información"
+                    "name": "Tablero de información",
+                    "terms": "Tablero de información, información turística, cartel"
+                },
+                "tourism/information/guidepost": {
+                    "name": "Poste guía",
+                    "terms": "Poste guía, columna, carteles, información"
                 },
                 "tourism/information/map": {
-                    "name": "Mapa"
+                    "name": "Mapa",
+                    "terms": "Mapa, mapa turístico, información"
                 },
                 "tourism/information/office": {
-                    "name": "Oficina de información turística"
+                    "name": "Oficina de información turística",
+                    "terms": "Oficina de Información turística, Información turística, Información, Guía, turismo"
                 },
                 "tourism/motel": {
                     "name": "Motel",

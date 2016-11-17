@@ -323,7 +323,6 @@
             "best_imagery": "Paras ilmakuvalähde tälle sijainnille",
             "custom": "Mukautettu",
             "custom_button": "Muokkaa omaa taustaa",
-            "custom_prompt": "Kirjoita tiilen verkko-osoitemallinne. Kelvollisia merkkejä ovat {z}, {x}, {y} Z/X/Y-skeemalle ja {u} quadtile-skeemalle.",
             "fix_misalignment": "Korjaa ilmakuvavirhe",
             "imagery_source_faq": "Mikä tämän ilmakuvan lähde on?",
             "reset": "palauta",

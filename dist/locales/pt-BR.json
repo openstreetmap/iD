@@ -337,7 +337,7 @@
             "switch": "Voltar para este fundo de tela",
             "custom": "Customizado",
             "custom_button": "Editar fundo de tela personalizado",
-            "custom_prompt": "Informe um modelo de URL de quadrículas. Tokens válidos são {z}, {x}, {y} para o esquema Z/X/Y e {u} para o esquema quadtile.",
+            "custom_prompt": "Insira um modelo de URL de uma camada de tiles. São tokens válidos: {zoom}, {x}, {y} para o esquema Z/X/Y e {u} para o esquema quadtile.",
             "fix_misalignment": "Ajustar o deslocamento da imagem",
             "imagery_source_faq": "De onde essa imagem de satélite vem?",
             "reset": "redefinir",
@@ -1548,7 +1548,8 @@
                     "label": "Tipo"
                 },
                 "tower/construction": {
-                    "label": "Construção"
+                    "label": "Construção",
+                    "placeholder": "Içado, Malha, Camuflado, ..."
                 },
                 "tower/type": {
                     "label": "Tipo"
@@ -2781,6 +2782,10 @@
                 "highway/turning_circle": {
                     "name": "Balão de Retorno",
                     "terms": "Balão de Retorno"
+                },
+                "highway/turning_loop": {
+                    "name": "Balão de retorno",
+                    "terms": "Retorno"
                 },
                 "highway/unclassified": {
                     "name": "Via local ou Estrada vicinal",

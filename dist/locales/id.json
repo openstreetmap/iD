@@ -331,7 +331,6 @@
             "switch": "Beralih ke latar belakang ini",
             "custom": "Custom",
             "custom_button": "Ubah tampilan latar kustom",
-            "custom_prompt": "Masukkan template URL. Token yang diperbolehkan adalah  {z}, {x}, {y} untuk skema Z/X/Y dan {u} untuk skema quadtile.",
             "fix_misalignment": "Setel offset citra",
             "imagery_source_faq": "Dari mana citra ini diperoleh?",
             "reset": "ulang",

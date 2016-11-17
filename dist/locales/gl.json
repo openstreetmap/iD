@@ -314,7 +314,6 @@
             "none": "Ningún",
             "custom": "Personalizado",
             "custom_button": "Editar fondo personalizado",
-            "custom_prompt": "Introduce a URL dun modelo de teselas. Os símbolos válidos son {z}, {x}, {y} para o esquema Z/X/Y e {u} para o esquema quadtile.",
             "reset": "reiniciar",
             "minimap": {
                 "description": "Mapa pequeno",

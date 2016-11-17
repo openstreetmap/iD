@@ -337,7 +337,7 @@
             "switch": "Zu diesem Hintergrund zurück wechseln",
             "custom": "Benutzerdefiniert",
             "custom_button": "Benutzerdefinierten Hintergrund bearbeiten",
-            "custom_prompt": "Gib eine Vorlage für eine Kachel-URL ein. Gültige Platzhalter sind {z}, {x}, {y} für das Z/X/Y Schema und {u} für das „quadtile“-Schema.",
+            "custom_prompt": "Gib ein URL tile template ein. Gültige Token sind {zoom}, {x}, {y} für das z/x/y Schema oder {u} für das quadtile Schema.",
             "fix_misalignment": "Bildmaterial-Versatz anpassen",
             "imagery_source_faq": "Woher kommt dieses Bildmaterial?",
             "reset": "Zurücksetzen",

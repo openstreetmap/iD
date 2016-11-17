@@ -337,7 +337,6 @@
             "switch": "Selecteer terug deze achtergrond",
             "custom": "Aangepast",
             "custom_button": "Aangepaste achtergrond aanpassen",
-            "custom_prompt": "Voeg een tegel-URL-sjabloon toe. Geldige placeholders zijn {z}, {x}, {y} voor het Z/X/Y-schema en {u} voor het quadtile-schema.",
             "fix_misalignment": "Verplaatsing van luchtfoto aanpassen",
             "imagery_source_faq": "Waar komen deze afbeeldingen vandaan? (Engels)",
             "reset": "Standaard herstellen",

@@ -334,7 +334,6 @@
             "switch": "轉返去爾個背景",
             "custom": "自訂",
             "custom_button": "改自訂背景",
-            "custom_prompt": "入個格網址模。有效字符係{z}、{x}、{y}對應Z/X/Y制及{u}對應四分格制。",
             "fix_misalignment": "校正背圖對位誤差",
             "imagery_source_faq": "相邊度來？",
             "reset": "重設",

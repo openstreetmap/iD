@@ -337,7 +337,6 @@
             "switch": "背景に切り替え",
             "custom": "カスタム",
             "custom_button": "カスタム背景の編集",
-            "custom_prompt": "タイルURLのテンプレートを入力してください。有効なトークンは、Z/X/Y方式ならば{z}, {x} , {y}、quadtile方式ならば{u}です。",
             "fix_misalignment": "画像の位置を調整",
             "imagery_source_faq": "この写真の出典元",
             "reset": "設定リセット",

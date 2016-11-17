@@ -335,7 +335,6 @@
             "switch": "Senyals de trànsit ",
             "custom": "Personalitzar",
             "custom_button": "Editar el fons personalitzat",
-            "custom_prompt": "Introduïu una plantilla d'URL de casella. Els paràmetres vàlids són {z}, {x}, {y} per a l'esquema Z/X/Y i  {u} per a l'esquema quadtile.",
             "fix_misalignment": "Ajusta la alineació de la imatgeria",
             "imagery_source_faq": "D'on prové aquesta imatgeria?",
             "reset": "reiniciar",

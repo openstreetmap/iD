@@ -337,7 +337,7 @@
             "switch": "Visszaváltás erre a háttérre",
             "custom": "Egyéni",
             "custom_button": "Egyedi háttér szerkesztése",
-            "custom_prompt": "Adj meg egy csempe URL sablont. Érvényes tokenek: {z}, {x}, {y} a Z/X/Y rendszerű URL-ekhez és {u} a kvadratikusakhoz.",
+            "custom_prompt": "Adj meg egy csempe URL sablont. Az érvényes tokenek a következőek: {zoom}, {x}, {y} a Z/X/Y sémához, és {u} a quadtile sémához.",
             "fix_misalignment": "Légifelvétel elcsúszásának korrigálása",
             "imagery_source_faq": "Honnan jön ez a légifelvétel?",
             "reset": "visszavonás",

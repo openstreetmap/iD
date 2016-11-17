@@ -337,7 +337,6 @@
             "switch": "Växla tillbaka till denna bakgrund",
             "custom": "Anpassa",
             "custom_button": "Ändra anpassad bakgrund",
-            "custom_prompt": "Ange en URL-mall för plattor. Giltiga symboler är  {z}, {x}, {y} för Z/X/Y-schema och {u} för quadtile-schema.",
             "fix_misalignment": "Justera bildplacering",
             "imagery_source_faq": "Var kommer dessa flygfoton från?",
             "reset": "ta bort",

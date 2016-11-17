@@ -227,6 +227,7 @@
             "localized_translation_name": "Tên"
         },
         "zoom_in_edit": "Phong to để Sửa đổi",
+        "login": "đăng nhập",
         "logout": "đăng xuất",
         "loading_auth": "Đang kết nối với OpenStreetMap…",
         "report_a_bug": "Báo cáo lỗi",
@@ -238,7 +239,8 @@
         "status": {
             "error": "Không thể kết nối đến API.",
             "offline": "API đang ngoại tuyến. Xin vui lòng thử lại sau.",
-            "readonly": "API đang ở chế độ chỉ-đọc. Bạn cần phải đợi để lưu các thay đổi."
+            "readonly": "API đang ở chế độ chỉ-đọc. Bạn cần phải đợi để lưu các thay đổi.",
+            "rateLimit": "API hạn chế các kết nối vô danh. Hãy đăng nhập để khắc phục hạn chế này."
         },
         "commit": {
             "title": "Lưu các Thay đổi",
@@ -335,7 +337,7 @@
             "switch": "Quay về hình nền này",
             "custom": "Tùy biến",
             "custom_button": "Sửa hình nền tùy biến",
-            "custom_prompt": "Nhập định dạng URL của các mảnh bản đồ. Bạn có thể sử dụng các dấu hiệu {z}, {x}, {y} cho định dạng Z/X/Y hoặc {u} cho định dạng quadtile.",
+            "custom_prompt": "Nhập định dạng URL của các mảnh bản đồ. Bạn có thể sử dụng các dấu hiệu {zoom}, {x}, {y} cho định dạng Z/X/Y hoặc {u} cho định dạng quadtile.",
             "fix_misalignment": "Chỉnh độ lệch hình ảnh",
             "imagery_source_faq": "Hình ảnh này được lấy từ đâu?",
             "reset": "đặt lại",
@@ -803,6 +805,9 @@
                         "whole": "máu toàn phần"
                     }
                 },
+                "board_type": {
+                    "label": "Kiểu"
+                },
                 "boundary": {
                     "label": "Kiểu"
                 },
@@ -1145,6 +1150,12 @@
                 },
                 "man_made": {
                     "label": "Loại"
+                },
+                "map_size": {
+                    "label": "Phạm vi"
+                },
+                "map_type": {
+                    "label": "Kiểu"
                 },
                 "maxspeed": {
                     "label": "Tốc độ Tối đa",
@@ -4077,6 +4088,22 @@
                 "tourism/information": {
                     "name": "Thông tin",
                     "terms": "bảng thông tin, biển thông tin, trạm thông tin, bàn thông tin, bang thong tin, bien thong tin, tram thong tin, ban thong tin"
+                },
+                "tourism/information/board": {
+                    "name": "Bảng Thông tin",
+                    "terms": "bảng thông tin, biển thông tin, bang thong tin, bien thong tin"
+                },
+                "tourism/information/guidepost": {
+                    "name": "Cột Chỉ đường",
+                    "terms": "cột chỉ đường, bảng chỉ đường, biển chỉ đường, cot chi duong, bang chi duong, bien chi duong"
+                },
+                "tourism/information/map": {
+                    "name": "Bản đồ",
+                    "terms": "bản đồ, ban do"
+                },
+                "tourism/information/office": {
+                    "name": "Văn phòng Hướng dẫn Du lịch",
+                    "terms": "văn phòng hướng dẫn du lịch, văn phòng du lịch, văn phòng hướng dẫn tham quan, văn phòng du khách, văn phòng hướng dẫn du khách, van phong huong dan du lich, van phong du lich, van phong huong dan tham quan, van phong du khach, van phong huong dan du khach"
                 },
                 "tourism/motel": {
                     "name": "Khách sạn Dọc đường",

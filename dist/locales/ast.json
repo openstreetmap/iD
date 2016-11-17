@@ -334,7 +334,6 @@
             "switch": "Volver a esti fondu",
             "custom": "Personalizáu",
             "custom_button": "Editar fondu personalizáu",
-            "custom_prompt": "Escribi una plantía d'URL de títulu. Los parámetros válidos son {z}, {x}, {y} pal esquema Z/X/Y y {u} pal esquema QuadTiles.",
             "fix_misalignment": "Axustar el desplazamientu de les imáxenes",
             "imagery_source_faq": "¿D'aú vienen estes imáxenes?",
             "reset": "reaniciar",

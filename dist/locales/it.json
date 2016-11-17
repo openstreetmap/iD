@@ -337,7 +337,7 @@
             "switch": "Ritorna a questo sfondo",
             "custom": "Personalizzato",
             "custom_button": "Modifica sfondo personalizzato",
-            "custom_prompt": "Inserisci l'URL dello schema dei tasselli. Valori validi sono {z}, {x}, {y} per lo schema Z/X/Y e {u} per lo schema QuadTile.",
+            "custom_prompt": "Inserisci l'URL dello schema dei tasselli. Valori validi sono {zoom}, {x}, {y} per lo schema Z/X/Y e {u} per lo schema QuadTile.",
             "fix_misalignment": "Correggi spostamento immagini",
             "imagery_source_faq": "Da dove vengono queste immagini?",
             "reset": "reset",

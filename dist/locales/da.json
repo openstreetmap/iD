@@ -337,7 +337,7 @@
             "switch": "Skift tilbage til denne baggrund",
             "custom": "Brugerdefineret",
             "custom_button": "Rediger brugerdefineret baggrund",
-            "custom_prompt": "Angiv en URL-skabelon for fliser. Gyldige værdier er {z}, {x}, {y} for Z/X/Y-systemet og {u} for quadtile-systemet. ",
+            "custom_prompt": "Indtast en tile URL template. Valide opsætning er  {zoom}, {x}, {y} for Z/X/Y skema og {u} for kvartile skema.",
             "fix_misalignment": "Justerer billedets offset",
             "imagery_source_faq": "Hvem er ophavsmand til luftfotoet?",
             "reset": "nulstil",

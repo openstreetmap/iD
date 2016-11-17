@@ -337,7 +337,6 @@
             "switch": "Přepnout zpět na toto pozadí",
             "custom": "Vlastní",
             "custom_button": "Editovat vlastní pozadí",
-            "custom_prompt": "Vložte šablonu adres dlaždic. Lze použít tokeny {z}, {x}, {y} pro schéma Z/X/Y a {u} pro hierarchické schéma quadtile.",
             "fix_misalignment": "Zarovnat podklad",
             "imagery_source_faq": "Odkud jsou tyto podklady?",
             "reset": "vrátit na začátek",
@@ -4054,6 +4053,9 @@
                 "tourism/information": {
                     "name": "Informace",
                     "terms": "informace,údaje,údaj,cedule,tabule"
+                },
+                "tourism/information/guidepost": {
+                    "name": "Rozcestník"
                 },
                 "tourism/motel": {
                     "name": "Motel",

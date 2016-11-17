@@ -335,7 +335,6 @@
             "switch": "Mudar para este fundo",
             "custom": "Personalizado",
             "custom_button": "Editar fundo personalizando",
-            "custom_prompt": "Introduzir um URL válido. Tokens válidos são {z}, {x}, {y} para esquemas Z/X/Y e {u} para esquemas QuadTile.",
             "fix_misalignment": "Corrigir o alinhamento da imagem",
             "imagery_source_faq": "Qual é a origem desta imagem?",
             "reset": "reiniciar",

@@ -331,7 +331,6 @@
             "switch": "이 배경으로 복귀하다",
             "custom": "사용자 지정",
             "custom_button": "사용자 지정 배경 편집",
-            "custom_prompt": "타일 URL 템플릿을 입력하세요. 올바른 토큰은 Z/X/Y scheme에 대해 {z}, {x}, {y}이고 quadtile scheme에 대해 {u}입니다.",
             "fix_misalignment": "영상 오정렬 값을 조절하다",
             "imagery_source_faq": "이 영상의 출처는 어딥니까?",
             "reset": "재설정",
