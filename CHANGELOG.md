@@ -1,5 +1,11 @@
 :warning: = Breaking change, may affect downstream projects or sites that embed iD.
 
+## 2.0.1
+##### coming soon
+* Bugfixes:
+  * When starting iD with an object selected, the map should focus on that object (#3588)
+  * Fix for "Best" imagery not being automatically selected (#3586)
+
 ## 2.0.0
 ##### Nov 15, 2016
 * :warning: iD is now written in a modular code style using ES6 `import`/`export` and [rollup.js](http://rollupjs.org/) as a build tool (#3118, #3179, #3180)
