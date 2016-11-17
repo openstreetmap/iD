@@ -47,7 +47,7 @@ export function rendererBackgroundSource(data) {
 
 
     source.imageryUsed = function() {
-        return source.id || name;
+        return name || source.id;
     };
 
 
@@ -91,7 +91,7 @@ export function rendererBackgroundSource(data) {
 
 
     source.isLocatorOverlay = function() {
-        return name === 'Locator Overlay';
+        return source.id === 'mapbox_locator_overlay';
     };
 
 

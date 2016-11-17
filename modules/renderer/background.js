@@ -27,9 +27,9 @@ export function rendererBackground(context) {
             .data([0]);
 
         base.enter()
-          .insert('div', '.layer-data')
+            .insert('div', '.layer-data')
             .attr('class', 'layer layer-background')
-          .merge(base)
+            .merge(base)
             .call(baseLayer);
 
         var overlays = selection.selectAll('.layer-overlay')
@@ -39,16 +39,19 @@ export function rendererBackground(context) {
             .remove();
 
         overlays.enter()
-          .insert('div', '.layer-data')
+            .insert('div', '.layer-data')
             .attr('class', 'layer layer-overlay')
-          .merge(overlays)
+            .merge(overlays)
             .each(function(layer) { d3.select(this).call(layer); });
     }
 
 
     background.updateImagery = function() {
         var b = background.baseLayerSource(),
-            o = overlayLayers.map(function (d) { return d.source().id; }).join(','),
+            o = overlayLayers
+                .filter(function (d) { return !d.source().isLocatorOverlay(); })
+                .map(function (d) { return d.source().id; })
+                .join(','),
             meters = geoOffsetToMeters(b.offset()),
             epsilon = 0.01,
             x = +meters[0].toFixed(2),
@@ -82,12 +85,9 @@ export function rendererBackground(context) {
 
         var imageryUsed = [b.imageryUsed()];
 
-        overlayLayers.forEach(function (d) {
-            var source = d.source();
-            if (!source.isLocatorOverlay()) {
-                imageryUsed.push(source.imageryUsed());
-            }
-        });
+        overlayLayers
+            .filter(function (d) { return !d.source().isLocatorOverlay(); })
+            .forEach(function (d) { imageryUsed.push(d.source().imageryUsed()); });
 
         var gpx = context.layers().layer('gpx');
         if (gpx && gpx.enabled() && gpx.hasGpx()) {

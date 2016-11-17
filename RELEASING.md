@@ -15,7 +15,10 @@
 - [ ] git checkout master
 - [ ] npm run translations
 - [ ] git add . && git commit -m 'npm run translations'
+- [ ] rm -rf node_modules/editor-layer-index/
+- [ ] npm install
 - [ ] npm run imagery
+- [ ] npm run all
 - [ ] git add . && git commit -m 'npm run imagery'
 - [ ] Update `CHANGELOG.md`
 - [ ] Update version number in `modules/core/context.js`, `package.json`
