@@ -7,7 +7,7 @@ import { services } from '../services/index';
 export function svgMapillaryImages(projection, context, dispatch) {
     var throttledRedraw = _.throttle(function () { dispatch.call('change'); }, 1000),
         minZoom = 12,
-        minViewfieldZoom = 16,
+        minViewfieldZoom = 17,
         layer = d3.select(null),
         _mapillary;
 

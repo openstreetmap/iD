@@ -16,7 +16,6 @@ var apibase = 'https://a.mapillary.com/v2/',
     trafficocss = 'traffico/stylesheets/traffico.css',
     clientId = 'NzNRM2otQkR2SHJzaXJmNmdQWVQ0dzo1ZWYyMmYwNjdmNDdlNmVi',
     maxResults = 1000,
-    maxPages = 10,
     tileZoom = 14,
     dispatch = d3.dispatch('loadedImages', 'loadedSigns'),
     mapillaryCache,
@@ -43,6 +42,16 @@ function nearNullIsland(x, y, z) {
 }
 
 
+function maxPageAtZoom(z) {
+    if (z < 15)   return 2;
+    if (z === 15) return 5;
+    if (z === 16) return 10;
+    if (z === 17) return 20;
+    if (z === 18) return 40;
+    if (z > 18)   return 80;
+}
+
+
 function getTiles(projection) {
     var s = projection.scale() * 2 * Math.PI,
         z = Math.max(Math.log(s) / Math.log(2) - 8, 0),
@@ -62,6 +71,7 @@ function getTiles(projection) {
 
             return {
                 id: tile.toString(),
+                xyz: tile,
                 extent: geoExtent(
                     projection.invert([x, y + ts]),
                     projection.invert([x + ts, y])
@@ -72,9 +82,11 @@ function getTiles(projection) {
 
 
 function loadTiles(which, url, projection) {
+    var s = projection.scale() * 2 * Math.PI,
+        currZoom = Math.floor(Math.max(Math.log(s) / Math.log(2) - 8, 0));
+
     var tiles = getTiles(projection).filter(function(t) {
-          var xyz = t.id.split(',');
-          return !nearNullIsland(xyz[0], xyz[1], xyz[2]);
+            return !nearNullIsland(t.xyz[0], t.xyz[1], t.xyz[2]);
         });
 
     _.filter(which.inflight, function(v, k) {
@@ -84,23 +96,27 @@ function loadTiles(which, url, projection) {
     }).map(abortRequest);
 
     tiles.forEach(function(tile) {
-        loadTilePage(which, url, tile, 0);
+        loadNextTilePage(which, currZoom, url, tile);
     });
 }
 
 
-function loadTilePage(which, url, tile, page) {
+function loadNextTilePage(which, currZoom, url, tile) {
     var cache = mapillaryCache[which],
-        id = tile.id + ',' + String(page),
-        rect = tile.extent.rectangle();
+        rect = tile.extent.rectangle(),
+        maxPages = maxPageAtZoom(currZoom),
+        nextPage = cache.nextPage[tile.id] || 0;
 
+    if (nextPage > maxPages) return;
+
+    var id = tile.id + ',' + String(nextPage);
     if (cache.loaded[id] || cache.inflight[id]) return;
 
     cache.inflight[id] = d3.json(url +
         utilQsString({
             geojson: 'true',
             limit: maxResults,
-            page: page,
+            page: nextPage,
             client_id: clientId,
             min_lon: rect[0],
             min_lat: rect[1],
@@ -112,7 +128,6 @@ function loadTilePage(which, url, tile, page) {
             if (err || !data.features || !data.features.length) return;
 
             var features = [],
-                nextPage = page + 1,
                 feature, loc, d;
 
             for (var i = 0; i < data.features.length; i++) {
@@ -130,8 +145,11 @@ function loadTilePage(which, url, tile, page) {
             if (which === 'images') dispatch.call('loadedImages');
             if (which === 'signs') dispatch.call('loadedSigns');
 
-            if (data.features.length === maxResults && nextPage < maxPages) {
-                loadTilePage(which, url, tile, nextPage);
+            if (data.features.length === maxResults) {  // more pages to load
+                cache.nextPage[tile.id] = nextPage + 1;
+                loadNextTilePage(which, currZoom, url, tile);
+            } else {
+                cache.nextPage[tile.id] = Infinity;     // no more pages to load
             }
         }
     );
@@ -196,8 +214,8 @@ export default {
         }
 
         mapillaryCache = {
-            images: { inflight: {}, loaded: {}, rtree: rbush() },
-            signs:  { inflight: {}, loaded: {}, rtree: rbush() }
+            images: { inflight: {}, loaded: {}, nextPage: {}, rtree: rbush() },
+            signs:  { inflight: {}, loaded: {}, nextPage: {}, rtree: rbush() }
         };
 
         mapillaryImage = null;
