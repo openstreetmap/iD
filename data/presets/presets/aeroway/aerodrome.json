@@ -4,16 +4,19 @@
         "point",
         "area"
     ],
-    "terms": [
-        "airplane",
-        "airport",
-        "aerodrome"
-    ],
     "fields": [
         "ref",
         "iata",
         "icao",
-        "operator"
+        "operator",
+        "internet_access",
+        "internet_access/fee",
+        "internet_access/ssid"
+    ],
+    "terms": [
+        "airplane",
+        "airport",
+        "aerodrome"
     ],
     "tags": {
         "aeroway": "aerodrome"

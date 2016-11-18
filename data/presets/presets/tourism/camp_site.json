@@ -4,7 +4,10 @@
         "operator",
         "address",
         "capacity",
-        "fee"
+        "fee",
+        "internet_access",
+        "internet_access/fee",
+        "internet_access/ssid"
     ],
     "geometry": [
         "point",

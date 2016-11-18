@@ -1180,6 +1180,10 @@
         },
         {
             "key": "highway",
+            "value": "traffic_mirror"
+        },
+        {
+            "key": "highway",
             "value": "traffic_signals"
         },
         {

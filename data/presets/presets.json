@@ -318,16 +318,19 @@
                 "point",
                 "area"
             ],
-            "terms": [
-                "airplane",
-                "airport",
-                "aerodrome"
-            ],
             "fields": [
                 "ref",
                 "iata",
                 "icao",
-                "operator"
+                "operator",
+                "internet_access",
+                "internet_access/fee",
+                "internet_access/ssid"
+            ],
+            "terms": [
+                "airplane",
+                "airport",
+                "aerodrome"
             ],
             "tags": {
                 "aeroway": "aerodrome"
@@ -553,7 +556,8 @@
                 "address",
                 "building_area",
                 "opening_hours",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "geometry": [
                 "point",
@@ -677,7 +681,8 @@
                 "address",
                 "building_area",
                 "opening_hours",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "geometry": [
                 "point",
@@ -729,7 +734,10 @@
             "icon": "bus",
             "fields": [
                 "building_area",
-                "operator"
+                "operator",
+                "internet_access",
+                "internet_access/fee",
+                "internet_access/ssid"
             ],
             "geometry": [
                 "point",
@@ -744,11 +752,14 @@
             "icon": "cafe",
             "fields": [
                 "cuisine",
-                "internet_access",
                 "address",
                 "building_area",
                 "opening_hours",
-                "smoking"
+                "internet_access",
+                "internet_access/fee",
+                "internet_access/ssid",
+                "smoking",
+                "outdoor_seating"
             ],
             "geometry": [
                 "point",
@@ -941,7 +952,9 @@
             "icon": "college",
             "fields": [
                 "operator",
-                "address"
+                "address",
+                "internet_access",
+                "internet_access/ssid"
             ],
             "geometry": [
                 "point",
@@ -1007,7 +1020,10 @@
             "fields": [
                 "address",
                 "building_area",
-                "opening_hours"
+                "opening_hours",
+                "internet_access",
+                "internet_access/fee",
+                "internet_access/ssid"
             ],
             "geometry": [
                 "point",
@@ -1123,7 +1139,8 @@
                 "takeaway",
                 "delivery",
                 "drive_through",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "geometry": [
                 "point",
@@ -1280,7 +1297,13 @@
                 "vertex",
                 "area"
             ],
-            "terms": [],
+            "terms": [
+                "game",
+                "lookout",
+                "shoot",
+                "wild",
+                "watch"
+            ],
             "tags": {
                 "amenity": "hunting_stand"
             },
@@ -1293,7 +1316,8 @@
                 "building_area",
                 "opening_hours",
                 "takeaway",
-                "delivery"
+                "delivery",
+                "outdoor_seating"
             ],
             "geometry": [
                 "point",
@@ -1317,7 +1341,11 @@
                 "address",
                 "building_area",
                 "opening_hours",
-                "smoking"
+                "internet_access",
+                "internet_access/fee",
+                "internet_access/ssid",
+                "smoking",
+                "outdoor_seating"
             ],
             "geometry": [
                 "point",
@@ -1362,7 +1390,10 @@
                 "operator",
                 "building_area",
                 "address",
-                "opening_hours"
+                "opening_hours",
+                "internet_access",
+                "internet_access/fee",
+                "internet_access/ssid"
             ],
             "geometry": [
                 "point",
@@ -1776,7 +1807,8 @@
                 "address",
                 "building_area",
                 "opening_hours",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "geometry": [
                 "point",
@@ -1786,6 +1818,8 @@
                 "amenity": "pub"
             },
             "terms": [
+                "alcohol",
+                "drink",
                 "dive",
                 "beer",
                 "bier",
@@ -1903,7 +1937,8 @@
                 "capacity",
                 "takeaway",
                 "delivery",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "geometry": [
                 "point",
@@ -2068,7 +2103,10 @@
                 "building_area",
                 "opening_hours",
                 "wheelchair",
-                "social_facility_for"
+                "social_facility_for",
+                "internet_access",
+                "internet_access/fee",
+                "internet_access/ssid"
             ],
             "geometry": [
                 "point",
@@ -2222,7 +2260,9 @@
             "icon": "college",
             "fields": [
                 "operator",
-                "address"
+                "address",
+                "internet_access",
+                "internet_access/ssid"
             ],
             "geometry": [
                 "point",
@@ -5371,6 +5411,26 @@
             ],
             "name": "Unmaintained Track Road"
         },
+        "highway/traffic_mirror": {
+            "geometry": [
+                "point"
+            ],
+            "tags": {
+                "highway": "traffic_mirror"
+            },
+            "terms": [
+                "blind spot",
+                "convex",
+                "corner",
+                "curved",
+                "roadside",
+                "round",
+                "safety",
+                "sphere",
+                "visibility"
+            ],
+            "name": "Traffic Mirror"
+        },
         "highway/traffic_signals": {
             "geometry": [
                 "vertex"
@@ -6126,7 +6186,9 @@
                 "fee",
                 "sanitary_dump_station",
                 "power_supply",
-                "internet_access"
+                "internet_access",
+                "internet_access/fee",
+                "internet_access/ssid"
             ],
             "geometry": [
                 "point",
@@ -6853,7 +6915,18 @@
                 "point"
             ],
             "terms": [
-                "cctv"
+                "anpr",
+                "alpr",
+                "camera",
+                "car plate recognition",
+                "cctv",
+                "guard",
+                "license plate recognition",
+                "monitoring",
+                "number plate recognition",
+                "security",
+                "video",
+                "webcam"
             ],
             "tags": {
                 "man_made": "surveillance"
@@ -8328,7 +8401,10 @@
                 "network",
                 "operator",
                 "address",
-                "building_area"
+                "building_area",
+                "internet_access",
+                "internet_access/fee",
+                "internet_access/ssid"
             ],
             "geometry": [
                 "point",
@@ -8770,7 +8846,10 @@
                 "operator",
                 "address",
                 "building_area",
-                "opening_hours"
+                "opening_hours",
+                "internet_access",
+                "internet_access/fee",
+                "internet_access/ssid"
             ],
             "geometry": [
                 "point",
@@ -10664,7 +10743,10 @@
             "fields": [
                 "operator",
                 "address",
-                "building_area"
+                "building_area",
+                "internet_access",
+                "internet_access/fee",
+                "internet_access/ssid"
             ],
             "geometry": [
                 "point",
@@ -10684,7 +10766,8 @@
                 "smoking",
                 "rooms",
                 "internet_access",
-                "internet_access/fee"
+                "internet_access/fee",
+                "internet_access/ssid"
             ],
             "geometry": [
                 "point",
@@ -10738,7 +10821,10 @@
                 "operator",
                 "address",
                 "capacity",
-                "fee"
+                "fee",
+                "internet_access",
+                "internet_access/fee",
+                "internet_access/ssid"
             ],
             "geometry": [
                 "point",
@@ -10763,7 +10849,9 @@
                 "fee",
                 "sanitary_dump_station",
                 "power_supply",
-                "internet_access"
+                "internet_access",
+                "internet_access/fee",
+                "internet_access/ssid"
             ],
             "geometry": [
                 "point",
@@ -10785,7 +10873,10 @@
                 "operator",
                 "address",
                 "building_area",
-                "smoking"
+                "smoking",
+                "internet_access",
+                "internet_access/fee",
+                "internet_access/ssid"
             ],
             "geometry": [
                 "point",
@@ -10830,7 +10921,8 @@
                 "smoking",
                 "rooms",
                 "internet_access",
-                "internet_access/fee"
+                "internet_access/fee",
+                "internet_access/ssid"
             ],
             "geometry": [
                 "point",
@@ -10854,7 +10946,8 @@
                 "smoking",
                 "rooms",
                 "internet_access",
-                "internet_access/fee"
+                "internet_access/fee",
+                "internet_access/ssid"
             ],
             "geometry": [
                 "point",
@@ -10875,7 +10968,8 @@
                 "stars",
                 "rooms",
                 "internet_access",
-                "internet_access/fee"
+                "internet_access/fee",
+                "internet_access/ssid"
             ],
             "geometry": [
                 "point",
@@ -10975,7 +11069,8 @@
                 "smoking",
                 "rooms",
                 "internet_access",
-                "internet_access/fee"
+                "internet_access/fee",
+                "internet_access/ssid"
             ],
             "geometry": [
                 "point",
@@ -15123,7 +15218,8 @@
                 "address",
                 "building_area",
                 "opening_hours",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -15142,7 +15238,8 @@
                 "address",
                 "building_area",
                 "opening_hours",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -15161,7 +15258,8 @@
                 "address",
                 "building_area",
                 "opening_hours",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -15180,7 +15278,8 @@
                 "address",
                 "building_area",
                 "opening_hours",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -15199,7 +15298,8 @@
                 "address",
                 "building_area",
                 "opening_hours",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -15218,7 +15318,8 @@
                 "address",
                 "building_area",
                 "opening_hours",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -15237,7 +15338,8 @@
                 "address",
                 "building_area",
                 "opening_hours",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -15256,7 +15358,8 @@
                 "address",
                 "building_area",
                 "opening_hours",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -15275,7 +15378,8 @@
                 "address",
                 "building_area",
                 "opening_hours",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -15294,7 +15398,8 @@
                 "address",
                 "building_area",
                 "opening_hours",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -15313,7 +15418,8 @@
                 "address",
                 "building_area",
                 "opening_hours",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -15332,7 +15438,8 @@
                 "address",
                 "building_area",
                 "opening_hours",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -15351,7 +15458,8 @@
                 "address",
                 "building_area",
                 "opening_hours",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -15370,7 +15478,8 @@
                 "address",
                 "building_area",
                 "opening_hours",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -15389,7 +15498,8 @@
                 "address",
                 "building_area",
                 "opening_hours",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -15408,7 +15518,8 @@
                 "address",
                 "building_area",
                 "opening_hours",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -15427,7 +15538,8 @@
                 "address",
                 "building_area",
                 "opening_hours",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -15446,7 +15558,8 @@
                 "address",
                 "building_area",
                 "opening_hours",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -15465,7 +15578,8 @@
                 "address",
                 "building_area",
                 "opening_hours",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -15484,7 +15598,8 @@
                 "address",
                 "building_area",
                 "opening_hours",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -15503,7 +15618,8 @@
                 "address",
                 "building_area",
                 "opening_hours",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -15522,7 +15638,8 @@
                 "address",
                 "building_area",
                 "opening_hours",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -15541,7 +15658,8 @@
                 "address",
                 "building_area",
                 "opening_hours",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -15560,7 +15678,8 @@
                 "address",
                 "building_area",
                 "opening_hours",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -15579,7 +15698,8 @@
                 "address",
                 "building_area",
                 "opening_hours",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -15598,7 +15718,8 @@
                 "address",
                 "building_area",
                 "opening_hours",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -15617,7 +15738,8 @@
                 "address",
                 "building_area",
                 "opening_hours",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -15636,7 +15758,8 @@
                 "address",
                 "building_area",
                 "opening_hours",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -15655,7 +15778,8 @@
                 "address",
                 "building_area",
                 "opening_hours",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -15674,7 +15798,8 @@
                 "address",
                 "building_area",
                 "opening_hours",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -15693,7 +15818,8 @@
                 "address",
                 "building_area",
                 "opening_hours",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -15712,7 +15838,8 @@
                 "address",
                 "building_area",
                 "opening_hours",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -15731,7 +15858,8 @@
                 "address",
                 "building_area",
                 "opening_hours",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -15750,7 +15878,8 @@
                 "address",
                 "building_area",
                 "opening_hours",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -15769,7 +15898,8 @@
                 "address",
                 "building_area",
                 "opening_hours",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -15788,7 +15918,8 @@
                 "address",
                 "building_area",
                 "opening_hours",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -15807,7 +15938,8 @@
                 "address",
                 "building_area",
                 "opening_hours",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -15826,7 +15958,8 @@
                 "address",
                 "building_area",
                 "opening_hours",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -15845,7 +15978,8 @@
                 "address",
                 "building_area",
                 "opening_hours",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -15864,7 +15998,8 @@
                 "address",
                 "building_area",
                 "opening_hours",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -15883,7 +16018,8 @@
                 "address",
                 "building_area",
                 "opening_hours",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -15902,7 +16038,8 @@
                 "address",
                 "building_area",
                 "opening_hours",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -15921,7 +16058,8 @@
                 "address",
                 "building_area",
                 "opening_hours",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -15940,7 +16078,8 @@
                 "address",
                 "building_area",
                 "opening_hours",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -15959,7 +16098,8 @@
                 "address",
                 "building_area",
                 "opening_hours",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -15983,7 +16123,8 @@
                 "takeaway",
                 "delivery",
                 "drive_through",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -16008,7 +16149,8 @@
                 "takeaway",
                 "delivery",
                 "drive_through",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -16033,7 +16175,8 @@
                 "takeaway",
                 "delivery",
                 "drive_through",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -16058,7 +16201,8 @@
                 "takeaway",
                 "delivery",
                 "drive_through",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -16082,7 +16226,8 @@
                 "takeaway",
                 "delivery",
                 "drive_through",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -16107,7 +16252,8 @@
                 "takeaway",
                 "delivery",
                 "drive_through",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -16131,7 +16277,8 @@
                 "takeaway",
                 "delivery",
                 "drive_through",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -16156,7 +16303,8 @@
                 "takeaway",
                 "delivery",
                 "drive_through",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -16181,7 +16329,8 @@
                 "takeaway",
                 "delivery",
                 "drive_through",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -16205,7 +16354,8 @@
                 "takeaway",
                 "delivery",
                 "drive_through",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -16229,7 +16379,8 @@
                 "takeaway",
                 "delivery",
                 "drive_through",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -16253,7 +16404,8 @@
                 "takeaway",
                 "delivery",
                 "drive_through",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -16277,7 +16429,8 @@
                 "takeaway",
                 "delivery",
                 "drive_through",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -16302,7 +16455,8 @@
                 "takeaway",
                 "delivery",
                 "drive_through",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -16326,7 +16480,8 @@
                 "takeaway",
                 "delivery",
                 "drive_through",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -16350,7 +16505,8 @@
                 "takeaway",
                 "delivery",
                 "drive_through",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -16375,7 +16531,8 @@
                 "takeaway",
                 "delivery",
                 "drive_through",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -16399,7 +16556,8 @@
                 "takeaway",
                 "delivery",
                 "drive_through",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -16423,7 +16581,8 @@
                 "takeaway",
                 "delivery",
                 "drive_through",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -16447,7 +16606,8 @@
                 "takeaway",
                 "delivery",
                 "drive_through",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -16471,7 +16631,8 @@
                 "takeaway",
                 "delivery",
                 "drive_through",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -16495,7 +16656,8 @@
                 "takeaway",
                 "delivery",
                 "drive_through",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -16519,7 +16681,8 @@
                 "takeaway",
                 "delivery",
                 "drive_through",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -16543,7 +16706,8 @@
                 "takeaway",
                 "delivery",
                 "drive_through",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -16567,7 +16731,8 @@
                 "takeaway",
                 "delivery",
                 "drive_through",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -16591,7 +16756,8 @@
                 "takeaway",
                 "delivery",
                 "drive_through",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -16616,7 +16782,8 @@
                 "takeaway",
                 "delivery",
                 "drive_through",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -16640,7 +16807,8 @@
                 "takeaway",
                 "delivery",
                 "drive_through",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -16664,7 +16832,8 @@
                 "takeaway",
                 "delivery",
                 "drive_through",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -16688,7 +16857,8 @@
                 "takeaway",
                 "delivery",
                 "drive_through",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -16712,7 +16882,8 @@
                 "takeaway",
                 "delivery",
                 "drive_through",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -16736,7 +16907,8 @@
                 "takeaway",
                 "delivery",
                 "drive_through",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -16761,7 +16933,8 @@
                 "takeaway",
                 "delivery",
                 "drive_through",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -16786,7 +16959,8 @@
                 "takeaway",
                 "delivery",
                 "drive_through",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -16810,7 +16984,8 @@
                 "takeaway",
                 "delivery",
                 "drive_through",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -16835,7 +17010,8 @@
                 "takeaway",
                 "delivery",
                 "drive_through",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -16860,7 +17036,8 @@
                 "takeaway",
                 "delivery",
                 "drive_through",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -16884,7 +17061,8 @@
                 "takeaway",
                 "delivery",
                 "drive_through",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -16909,7 +17087,8 @@
                 "takeaway",
                 "delivery",
                 "drive_through",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -16933,7 +17112,8 @@
                 "takeaway",
                 "delivery",
                 "drive_through",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -16957,7 +17137,8 @@
                 "takeaway",
                 "delivery",
                 "drive_through",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -16982,7 +17163,8 @@
                 "takeaway",
                 "delivery",
                 "drive_through",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -17006,7 +17188,8 @@
                 "takeaway",
                 "delivery",
                 "drive_through",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -17031,7 +17214,8 @@
                 "takeaway",
                 "delivery",
                 "drive_through",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -17057,7 +17241,8 @@
                 "takeaway",
                 "delivery",
                 "drive_through",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -17081,7 +17266,8 @@
                 "takeaway",
                 "delivery",
                 "drive_through",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -17105,7 +17291,8 @@
                 "takeaway",
                 "delivery",
                 "drive_through",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -17129,7 +17316,8 @@
                 "takeaway",
                 "delivery",
                 "drive_through",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -17153,7 +17341,8 @@
                 "takeaway",
                 "delivery",
                 "drive_through",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -17177,7 +17366,8 @@
                 "takeaway",
                 "delivery",
                 "drive_through",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -17203,7 +17393,8 @@
                 "takeaway",
                 "delivery",
                 "drive_through",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -17227,7 +17418,8 @@
                 "takeaway",
                 "delivery",
                 "drive_through",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -17251,7 +17443,8 @@
                 "takeaway",
                 "delivery",
                 "drive_through",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -17276,7 +17469,8 @@
                 "takeaway",
                 "delivery",
                 "drive_through",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -17300,7 +17494,8 @@
                 "takeaway",
                 "delivery",
                 "drive_through",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -17324,7 +17519,8 @@
                 "takeaway",
                 "delivery",
                 "drive_through",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -17348,7 +17544,8 @@
                 "takeaway",
                 "delivery",
                 "drive_through",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -17372,7 +17569,8 @@
                 "takeaway",
                 "delivery",
                 "drive_through",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -17396,7 +17594,8 @@
                 "takeaway",
                 "delivery",
                 "drive_through",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -17421,7 +17620,8 @@
                 "takeaway",
                 "delivery",
                 "drive_through",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -17446,7 +17646,8 @@
                 "takeaway",
                 "delivery",
                 "drive_through",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -17470,7 +17671,8 @@
                 "takeaway",
                 "delivery",
                 "drive_through",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -17494,7 +17696,8 @@
                 "takeaway",
                 "delivery",
                 "drive_through",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -17518,7 +17721,8 @@
                 "takeaway",
                 "delivery",
                 "drive_through",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -17542,7 +17746,8 @@
                 "takeaway",
                 "delivery",
                 "drive_through",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -17566,7 +17771,8 @@
                 "takeaway",
                 "delivery",
                 "drive_through",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -17590,7 +17796,8 @@
                 "takeaway",
                 "delivery",
                 "drive_through",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -17615,7 +17822,8 @@
                 "takeaway",
                 "delivery",
                 "drive_through",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -17639,7 +17847,8 @@
                 "takeaway",
                 "delivery",
                 "drive_through",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -17663,7 +17872,8 @@
                 "takeaway",
                 "delivery",
                 "drive_through",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -17687,7 +17897,8 @@
                 "takeaway",
                 "delivery",
                 "drive_through",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -17712,7 +17923,8 @@
                 "takeaway",
                 "delivery",
                 "drive_through",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -17737,7 +17949,8 @@
                 "takeaway",
                 "delivery",
                 "drive_through",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -17761,7 +17974,8 @@
                 "takeaway",
                 "delivery",
                 "drive_through",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -17785,7 +17999,8 @@
                 "takeaway",
                 "delivery",
                 "drive_through",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -17809,7 +18024,8 @@
                 "capacity",
                 "takeaway",
                 "delivery",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -17832,7 +18048,8 @@
                 "capacity",
                 "takeaway",
                 "delivery",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -17855,7 +18072,8 @@
                 "capacity",
                 "takeaway",
                 "delivery",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -17878,7 +18096,8 @@
                 "capacity",
                 "takeaway",
                 "delivery",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -17901,7 +18120,8 @@
                 "capacity",
                 "takeaway",
                 "delivery",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -17924,7 +18144,8 @@
                 "capacity",
                 "takeaway",
                 "delivery",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -17947,7 +18168,8 @@
                 "capacity",
                 "takeaway",
                 "delivery",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -17970,7 +18192,8 @@
                 "capacity",
                 "takeaway",
                 "delivery",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -17993,7 +18216,8 @@
                 "capacity",
                 "takeaway",
                 "delivery",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -18016,7 +18240,8 @@
                 "capacity",
                 "takeaway",
                 "delivery",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -18039,7 +18264,8 @@
                 "capacity",
                 "takeaway",
                 "delivery",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -18062,7 +18288,8 @@
                 "capacity",
                 "takeaway",
                 "delivery",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -18085,7 +18312,8 @@
                 "capacity",
                 "takeaway",
                 "delivery",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -18108,7 +18336,8 @@
                 "capacity",
                 "takeaway",
                 "delivery",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -18131,7 +18360,8 @@
                 "capacity",
                 "takeaway",
                 "delivery",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -18154,7 +18384,8 @@
                 "capacity",
                 "takeaway",
                 "delivery",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -18177,7 +18408,8 @@
                 "capacity",
                 "takeaway",
                 "delivery",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -18200,7 +18432,8 @@
                 "capacity",
                 "takeaway",
                 "delivery",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -18223,7 +18456,8 @@
                 "capacity",
                 "takeaway",
                 "delivery",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -18246,7 +18480,8 @@
                 "capacity",
                 "takeaway",
                 "delivery",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -18269,7 +18504,8 @@
                 "capacity",
                 "takeaway",
                 "delivery",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -18292,7 +18528,8 @@
                 "capacity",
                 "takeaway",
                 "delivery",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -18315,7 +18552,8 @@
                 "capacity",
                 "takeaway",
                 "delivery",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -18338,7 +18576,8 @@
                 "capacity",
                 "takeaway",
                 "delivery",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -18361,7 +18600,8 @@
                 "capacity",
                 "takeaway",
                 "delivery",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -18384,7 +18624,8 @@
                 "capacity",
                 "takeaway",
                 "delivery",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -18407,7 +18648,8 @@
                 "capacity",
                 "takeaway",
                 "delivery",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -18430,7 +18672,8 @@
                 "capacity",
                 "takeaway",
                 "delivery",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -18453,7 +18696,8 @@
                 "capacity",
                 "takeaway",
                 "delivery",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -18476,7 +18720,8 @@
                 "capacity",
                 "takeaway",
                 "delivery",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -18499,7 +18744,8 @@
                 "capacity",
                 "takeaway",
                 "delivery",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -18522,7 +18768,8 @@
                 "capacity",
                 "takeaway",
                 "delivery",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -18545,7 +18792,8 @@
                 "capacity",
                 "takeaway",
                 "delivery",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -18568,7 +18816,8 @@
                 "capacity",
                 "takeaway",
                 "delivery",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -18591,7 +18840,8 @@
                 "capacity",
                 "takeaway",
                 "delivery",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -18614,7 +18864,8 @@
                 "capacity",
                 "takeaway",
                 "delivery",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -18637,7 +18888,8 @@
                 "capacity",
                 "takeaway",
                 "delivery",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -18660,7 +18912,8 @@
                 "capacity",
                 "takeaway",
                 "delivery",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -18683,7 +18936,8 @@
                 "capacity",
                 "takeaway",
                 "delivery",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -18706,7 +18960,8 @@
                 "capacity",
                 "takeaway",
                 "delivery",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -18729,7 +18984,8 @@
                 "capacity",
                 "takeaway",
                 "delivery",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -18752,7 +19008,8 @@
                 "capacity",
                 "takeaway",
                 "delivery",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -18775,7 +19032,8 @@
                 "capacity",
                 "takeaway",
                 "delivery",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -18798,7 +19056,8 @@
                 "capacity",
                 "takeaway",
                 "delivery",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -18821,7 +19080,8 @@
                 "capacity",
                 "takeaway",
                 "delivery",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -18844,7 +19104,8 @@
                 "capacity",
                 "takeaway",
                 "delivery",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -18867,7 +19128,8 @@
                 "capacity",
                 "takeaway",
                 "delivery",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -18890,7 +19152,8 @@
                 "capacity",
                 "takeaway",
                 "delivery",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -18913,7 +19176,8 @@
                 "capacity",
                 "takeaway",
                 "delivery",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -18936,7 +19200,8 @@
                 "capacity",
                 "takeaway",
                 "delivery",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -18959,7 +19224,8 @@
                 "capacity",
                 "takeaway",
                 "delivery",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -18982,7 +19248,8 @@
                 "capacity",
                 "takeaway",
                 "delivery",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -19005,7 +19272,8 @@
                 "capacity",
                 "takeaway",
                 "delivery",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -19028,7 +19296,8 @@
                 "capacity",
                 "takeaway",
                 "delivery",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -19051,7 +19320,8 @@
                 "capacity",
                 "takeaway",
                 "delivery",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -19074,7 +19344,8 @@
                 "capacity",
                 "takeaway",
                 "delivery",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -19097,7 +19368,8 @@
                 "capacity",
                 "takeaway",
                 "delivery",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -19120,7 +19392,8 @@
                 "capacity",
                 "takeaway",
                 "delivery",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -19143,7 +19416,8 @@
                 "capacity",
                 "takeaway",
                 "delivery",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -19166,7 +19440,8 @@
                 "capacity",
                 "takeaway",
                 "delivery",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -19189,7 +19464,8 @@
                 "capacity",
                 "takeaway",
                 "delivery",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -19212,7 +19488,8 @@
                 "capacity",
                 "takeaway",
                 "delivery",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -19235,7 +19512,8 @@
                 "capacity",
                 "takeaway",
                 "delivery",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -19258,7 +19536,8 @@
                 "capacity",
                 "takeaway",
                 "delivery",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -19281,7 +19560,8 @@
                 "capacity",
                 "takeaway",
                 "delivery",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -19304,7 +19584,8 @@
                 "capacity",
                 "takeaway",
                 "delivery",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -19327,7 +19608,8 @@
                 "capacity",
                 "takeaway",
                 "delivery",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -19350,7 +19632,8 @@
                 "capacity",
                 "takeaway",
                 "delivery",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -19373,7 +19656,8 @@
                 "capacity",
                 "takeaway",
                 "delivery",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -19396,7 +19680,8 @@
                 "capacity",
                 "takeaway",
                 "delivery",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -19419,7 +19704,8 @@
                 "capacity",
                 "takeaway",
                 "delivery",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -19442,7 +19728,8 @@
                 "capacity",
                 "takeaway",
                 "delivery",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -19465,7 +19752,8 @@
                 "capacity",
                 "takeaway",
                 "delivery",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -19488,7 +19776,8 @@
                 "capacity",
                 "takeaway",
                 "delivery",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -19511,7 +19800,8 @@
                 "capacity",
                 "takeaway",
                 "delivery",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -19534,7 +19824,8 @@
                 "capacity",
                 "takeaway",
                 "delivery",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -19557,7 +19848,8 @@
                 "capacity",
                 "takeaway",
                 "delivery",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -19580,7 +19872,8 @@
                 "capacity",
                 "takeaway",
                 "delivery",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -19603,7 +19896,8 @@
                 "capacity",
                 "takeaway",
                 "delivery",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -19626,7 +19920,8 @@
                 "capacity",
                 "takeaway",
                 "delivery",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -19649,7 +19944,8 @@
                 "capacity",
                 "takeaway",
                 "delivery",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -19672,7 +19968,8 @@
                 "capacity",
                 "takeaway",
                 "delivery",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -19695,7 +19992,8 @@
                 "capacity",
                 "takeaway",
                 "delivery",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -19718,7 +20016,8 @@
                 "capacity",
                 "takeaway",
                 "delivery",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -19741,7 +20040,8 @@
                 "capacity",
                 "takeaway",
                 "delivery",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -19764,7 +20064,8 @@
                 "capacity",
                 "takeaway",
                 "delivery",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -19787,7 +20088,8 @@
                 "capacity",
                 "takeaway",
                 "delivery",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -19810,7 +20112,8 @@
                 "capacity",
                 "takeaway",
                 "delivery",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -19833,7 +20136,8 @@
                 "capacity",
                 "takeaway",
                 "delivery",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -19856,7 +20160,8 @@
                 "capacity",
                 "takeaway",
                 "delivery",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -19879,7 +20184,8 @@
                 "capacity",
                 "takeaway",
                 "delivery",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -19902,7 +20208,8 @@
                 "capacity",
                 "takeaway",
                 "delivery",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -19925,7 +20232,8 @@
                 "capacity",
                 "takeaway",
                 "delivery",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -19948,7 +20256,8 @@
                 "capacity",
                 "takeaway",
                 "delivery",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -19971,7 +20280,8 @@
                 "capacity",
                 "takeaway",
                 "delivery",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -19994,7 +20304,8 @@
                 "capacity",
                 "takeaway",
                 "delivery",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -20017,7 +20328,8 @@
                 "capacity",
                 "takeaway",
                 "delivery",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -20040,7 +20352,8 @@
                 "capacity",
                 "takeaway",
                 "delivery",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -20063,7 +20376,8 @@
                 "capacity",
                 "takeaway",
                 "delivery",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -20086,7 +20400,8 @@
                 "capacity",
                 "takeaway",
                 "delivery",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -20109,7 +20424,8 @@
                 "capacity",
                 "takeaway",
                 "delivery",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -20132,7 +20448,8 @@
                 "capacity",
                 "takeaway",
                 "delivery",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -20155,7 +20472,8 @@
                 "capacity",
                 "takeaway",
                 "delivery",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -20179,7 +20497,8 @@
                 "capacity",
                 "takeaway",
                 "delivery",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -20202,7 +20521,8 @@
                 "capacity",
                 "takeaway",
                 "delivery",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -20225,7 +20545,8 @@
                 "capacity",
                 "takeaway",
                 "delivery",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -20248,7 +20569,8 @@
                 "capacity",
                 "takeaway",
                 "delivery",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -20271,7 +20593,8 @@
                 "capacity",
                 "takeaway",
                 "delivery",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -20294,7 +20617,8 @@
                 "capacity",
                 "takeaway",
                 "delivery",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -20317,7 +20641,8 @@
                 "capacity",
                 "takeaway",
                 "delivery",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -20340,7 +20665,8 @@
                 "capacity",
                 "takeaway",
                 "delivery",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -20363,7 +20689,8 @@
                 "capacity",
                 "takeaway",
                 "delivery",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -20386,7 +20713,8 @@
                 "capacity",
                 "takeaway",
                 "delivery",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -20409,7 +20737,8 @@
                 "capacity",
                 "takeaway",
                 "delivery",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -20432,7 +20761,8 @@
                 "capacity",
                 "takeaway",
                 "delivery",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -20455,7 +20785,8 @@
                 "capacity",
                 "takeaway",
                 "delivery",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -20478,7 +20809,8 @@
                 "capacity",
                 "takeaway",
                 "delivery",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -20501,7 +20833,8 @@
                 "capacity",
                 "takeaway",
                 "delivery",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -20524,7 +20857,8 @@
                 "capacity",
                 "takeaway",
                 "delivery",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -20547,7 +20881,8 @@
                 "capacity",
                 "takeaway",
                 "delivery",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -20570,7 +20905,8 @@
                 "capacity",
                 "takeaway",
                 "delivery",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -20593,7 +20929,8 @@
                 "capacity",
                 "takeaway",
                 "delivery",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -20616,7 +20953,8 @@
                 "capacity",
                 "takeaway",
                 "delivery",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -20639,7 +20977,8 @@
                 "capacity",
                 "takeaway",
                 "delivery",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -20662,7 +21001,8 @@
                 "capacity",
                 "takeaway",
                 "delivery",
-                "smoking"
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -27571,11 +27911,14 @@
             ],
             "fields": [
                 "cuisine",
-                "internet_access",
                 "address",
                 "building_area",
                 "opening_hours",
-                "smoking"
+                "internet_access",
+                "internet_access/fee",
+                "internet_access/ssid",
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -27592,11 +27935,14 @@
             ],
             "fields": [
                 "cuisine",
-                "internet_access",
                 "address",
                 "building_area",
                 "opening_hours",
-                "smoking"
+                "internet_access",
+                "internet_access/fee",
+                "internet_access/ssid",
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -27613,11 +27959,14 @@
             ],
             "fields": [
                 "cuisine",
-                "internet_access",
                 "address",
                 "building_area",
                 "opening_hours",
-                "smoking"
+                "internet_access",
+                "internet_access/fee",
+                "internet_access/ssid",
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -27634,11 +27983,14 @@
             ],
             "fields": [
                 "cuisine",
-                "internet_access",
                 "address",
                 "building_area",
                 "opening_hours",
-                "smoking"
+                "internet_access",
+                "internet_access/fee",
+                "internet_access/ssid",
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -27655,11 +28007,14 @@
             ],
             "fields": [
                 "cuisine",
-                "internet_access",
                 "address",
                 "building_area",
                 "opening_hours",
-                "smoking"
+                "internet_access",
+                "internet_access/fee",
+                "internet_access/ssid",
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -27676,11 +28031,14 @@
             ],
             "fields": [
                 "cuisine",
-                "internet_access",
                 "address",
                 "building_area",
                 "opening_hours",
-                "smoking"
+                "internet_access",
+                "internet_access/fee",
+                "internet_access/ssid",
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -27697,11 +28055,14 @@
             ],
             "fields": [
                 "cuisine",
-                "internet_access",
                 "address",
                 "building_area",
                 "opening_hours",
-                "smoking"
+                "internet_access",
+                "internet_access/fee",
+                "internet_access/ssid",
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -27719,11 +28080,14 @@
             ],
             "fields": [
                 "cuisine",
-                "internet_access",
                 "address",
                 "building_area",
                 "opening_hours",
-                "smoking"
+                "internet_access",
+                "internet_access/fee",
+                "internet_access/ssid",
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -27740,11 +28104,14 @@
             ],
             "fields": [
                 "cuisine",
-                "internet_access",
                 "address",
                 "building_area",
                 "opening_hours",
-                "smoking"
+                "internet_access",
+                "internet_access/fee",
+                "internet_access/ssid",
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -27761,11 +28128,14 @@
             ],
             "fields": [
                 "cuisine",
-                "internet_access",
                 "address",
                 "building_area",
                 "opening_hours",
-                "smoking"
+                "internet_access",
+                "internet_access/fee",
+                "internet_access/ssid",
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -27782,11 +28152,14 @@
             ],
             "fields": [
                 "cuisine",
-                "internet_access",
                 "address",
                 "building_area",
                 "opening_hours",
-                "smoking"
+                "internet_access",
+                "internet_access/fee",
+                "internet_access/ssid",
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -27803,11 +28176,14 @@
             ],
             "fields": [
                 "cuisine",
-                "internet_access",
                 "address",
                 "building_area",
                 "opening_hours",
-                "smoking"
+                "internet_access",
+                "internet_access/fee",
+                "internet_access/ssid",
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -27824,11 +28200,14 @@
             ],
             "fields": [
                 "cuisine",
-                "internet_access",
                 "address",
                 "building_area",
                 "opening_hours",
-                "smoking"
+                "internet_access",
+                "internet_access/fee",
+                "internet_access/ssid",
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -27846,11 +28225,14 @@
             ],
             "fields": [
                 "cuisine",
-                "internet_access",
                 "address",
                 "building_area",
                 "opening_hours",
-                "smoking"
+                "internet_access",
+                "internet_access/fee",
+                "internet_access/ssid",
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -27867,11 +28249,14 @@
             ],
             "fields": [
                 "cuisine",
-                "internet_access",
                 "address",
                 "building_area",
                 "opening_hours",
-                "smoking"
+                "internet_access",
+                "internet_access/fee",
+                "internet_access/ssid",
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -27888,11 +28273,14 @@
             ],
             "fields": [
                 "cuisine",
-                "internet_access",
                 "address",
                 "building_area",
                 "opening_hours",
-                "smoking"
+                "internet_access",
+                "internet_access/fee",
+                "internet_access/ssid",
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -27909,11 +28297,14 @@
             ],
             "fields": [
                 "cuisine",
-                "internet_access",
                 "address",
                 "building_area",
                 "opening_hours",
-                "smoking"
+                "internet_access",
+                "internet_access/fee",
+                "internet_access/ssid",
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -27931,11 +28322,14 @@
             ],
             "fields": [
                 "cuisine",
-                "internet_access",
                 "address",
                 "building_area",
                 "opening_hours",
-                "smoking"
+                "internet_access",
+                "internet_access/fee",
+                "internet_access/ssid",
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -27952,11 +28346,14 @@
             ],
             "fields": [
                 "cuisine",
-                "internet_access",
                 "address",
                 "building_area",
                 "opening_hours",
-                "smoking"
+                "internet_access",
+                "internet_access/fee",
+                "internet_access/ssid",
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -27973,11 +28370,14 @@
             ],
             "fields": [
                 "cuisine",
-                "internet_access",
                 "address",
                 "building_area",
                 "opening_hours",
-                "smoking"
+                "internet_access",
+                "internet_access/fee",
+                "internet_access/ssid",
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -27994,11 +28394,14 @@
             ],
             "fields": [
                 "cuisine",
-                "internet_access",
                 "address",
                 "building_area",
                 "opening_hours",
-                "smoking"
+                "internet_access",
+                "internet_access/fee",
+                "internet_access/ssid",
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -28015,11 +28418,14 @@
             ],
             "fields": [
                 "cuisine",
-                "internet_access",
                 "address",
                 "building_area",
                 "opening_hours",
-                "smoking"
+                "internet_access",
+                "internet_access/fee",
+                "internet_access/ssid",
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -28036,11 +28442,14 @@
             ],
             "fields": [
                 "cuisine",
-                "internet_access",
                 "address",
                 "building_area",
                 "opening_hours",
-                "smoking"
+                "internet_access",
+                "internet_access/fee",
+                "internet_access/ssid",
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -28057,11 +28466,14 @@
             ],
             "fields": [
                 "cuisine",
-                "internet_access",
                 "address",
                 "building_area",
                 "opening_hours",
-                "smoking"
+                "internet_access",
+                "internet_access/fee",
+                "internet_access/ssid",
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -28078,11 +28490,14 @@
             ],
             "fields": [
                 "cuisine",
-                "internet_access",
                 "address",
                 "building_area",
                 "opening_hours",
-                "smoking"
+                "internet_access",
+                "internet_access/fee",
+                "internet_access/ssid",
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -28100,11 +28515,14 @@
             ],
             "fields": [
                 "cuisine",
-                "internet_access",
                 "address",
                 "building_area",
                 "opening_hours",
-                "smoking"
+                "internet_access",
+                "internet_access/fee",
+                "internet_access/ssid",
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -28121,11 +28539,14 @@
             ],
             "fields": [
                 "cuisine",
-                "internet_access",
                 "address",
                 "building_area",
                 "opening_hours",
-                "smoking"
+                "internet_access",
+                "internet_access/fee",
+                "internet_access/ssid",
+                "smoking",
+                "outdoor_seating"
             ],
             "suggestion": true
         },
@@ -37958,7 +38379,10 @@
                 "operator",
                 "address",
                 "building_area",
-                "opening_hours"
+                "opening_hours",
+                "internet_access",
+                "internet_access/fee",
+                "internet_access/ssid"
             ],
             "suggestion": true
         },
@@ -37977,7 +38401,10 @@
                 "operator",
                 "address",
                 "building_area",
-                "opening_hours"
+                "opening_hours",
+                "internet_access",
+                "internet_access/fee",
+                "internet_access/ssid"
             ],
             "suggestion": true
         },
@@ -37996,7 +38423,10 @@
                 "operator",
                 "address",
                 "building_area",
-                "opening_hours"
+                "opening_hours",
+                "internet_access",
+                "internet_access/fee",
+                "internet_access/ssid"
             ],
             "suggestion": true
         },
@@ -38015,7 +38445,10 @@
                 "operator",
                 "address",
                 "building_area",
-                "opening_hours"
+                "opening_hours",
+                "internet_access",
+                "internet_access/fee",
+                "internet_access/ssid"
             ],
             "suggestion": true
         },
@@ -38034,7 +38467,10 @@
                 "operator",
                 "address",
                 "building_area",
-                "opening_hours"
+                "opening_hours",
+                "internet_access",
+                "internet_access/fee",
+                "internet_access/ssid"
             ],
             "suggestion": true
         },
@@ -38053,7 +38489,10 @@
                 "operator",
                 "address",
                 "building_area",
-                "opening_hours"
+                "opening_hours",
+                "internet_access",
+                "internet_access/fee",
+                "internet_access/ssid"
             ],
             "suggestion": true
         },
@@ -38072,7 +38511,10 @@
                 "operator",
                 "address",
                 "building_area",
-                "opening_hours"
+                "opening_hours",
+                "internet_access",
+                "internet_access/fee",
+                "internet_access/ssid"
             ],
             "suggestion": true
         },

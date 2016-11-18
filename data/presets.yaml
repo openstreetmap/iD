@@ -498,6 +498,9 @@ en:
       internet_access/fee:
         # 'internet_access:fee=*'
         label: Internet Access Fee
+      internet_access/ssid:
+        # 'internet_access:ssid=*'
+        label: SSID (Network Name)
       kerb:
         # kerb=*
         label: Curb Ramp
@@ -742,6 +745,9 @@ en:
       operator:
         # operator=*
         label: Operator
+      outdoor_seating:
+        # outdoor_seating=*
+        label: Outdoor Seating
       par:
         # par=*
         label: Par
@@ -1467,6 +1473,7 @@ en:
       amenity/hunting_stand:
         # amenity=hunting_stand
         name: Hunting Stand
+        # 'terms: game,lookout,shoot,wild,watch'
         terms: '<translate with synonyms or related terms for ''Hunting Stand'', separated by commas>'
       amenity/ice_cream:
         # amenity=ice_cream
@@ -1571,7 +1578,7 @@ en:
       amenity/pub:
         # amenity=pub
         name: Pub
-        # 'terms: dive,beer,bier,booze'
+        # 'terms: alcohol,drink,dive,beer,bier,booze'
         terms: '<translate with synonyms or related terms for ''Pub'', separated by commas>'
       amenity/public_bookcase:
         # amenity=public_bookcase
@@ -2451,6 +2458,11 @@ en:
         name: Unmaintained Track Road
         # 'terms: woods road,forest road,logging road,fire road,farm road,agricultural road,ranch road,carriage road,primitive,unmaintained,rut,offroad,4wd,4x4,four wheel drive,atv,quad,jeep,double track,two track'
         terms: '<translate with synonyms or related terms for ''Unmaintained Track Road'', separated by commas>'
+      highway/traffic_mirror:
+        # highway=traffic_mirror
+        name: Traffic Mirror
+        # 'terms: blind spot,convex,corner,curved,roadside,round,safety,sphere,visibility'
+        terms: '<translate with synonyms or related terms for ''Traffic Mirror'', separated by commas>'
       highway/traffic_signals:
         # highway=traffic_signals
         name: Traffic Signals
@@ -2880,7 +2892,7 @@ en:
       man_made/surveillance:
         # man_made=surveillance
         name: Surveillance
-        # 'terms: cctv'
+        # 'terms: anpr,alpr,camera,car plate recognition,cctv,guard,license plate recognition,monitoring,number plate recognition,security,video,webcam'
         terms: '<translate with synonyms or related terms for ''Surveillance'', separated by commas>'
       man_made/survey_point:
         # man_made=survey_point

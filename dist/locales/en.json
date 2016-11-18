@@ -1077,6 +1077,9 @@
                 "internet_access/fee": {
                     "label": "Internet Access Fee"
                 },
+                "internet_access/ssid": {
+                    "label": "SSID (Network Name)"
+                },
                 "kerb": {
                     "label": "Curb Ramp"
                 },
@@ -1270,6 +1273,9 @@
                 },
                 "operator": {
                     "label": "Operator"
+                },
+                "outdoor_seating": {
+                    "label": "Outdoor Seating"
                 },
                 "par": {
                     "label": "Par",
@@ -1913,7 +1919,7 @@
                 },
                 "amenity/hunting_stand": {
                     "name": "Hunting Stand",
-                    "terms": ""
+                    "terms": "game,lookout,shoot,wild,watch"
                 },
                 "amenity/ice_cream": {
                     "name": "Ice Cream Shop",
@@ -2001,7 +2007,7 @@
                 },
                 "amenity/pub": {
                     "name": "Pub",
-                    "terms": "dive,beer,bier,booze"
+                    "terms": "alcohol,drink,dive,beer,bier,booze"
                 },
                 "amenity/public_bookcase": {
                     "name": "Public Bookcase",
@@ -2807,6 +2813,10 @@
                     "name": "Unmaintained Track Road",
                     "terms": "woods road,forest road,logging road,fire road,farm road,agricultural road,ranch road,carriage road,primitive,unmaintained,rut,offroad,4wd,4x4,four wheel drive,atv,quad,jeep,double track,two track"
                 },
+                "highway/traffic_mirror": {
+                    "name": "Traffic Mirror",
+                    "terms": "blind spot,convex,corner,curved,roadside,round,safety,sphere,visibility"
+                },
                 "highway/traffic_signals": {
                     "name": "Traffic Signals",
                     "terms": "light,stoplight,traffic light"
@@ -3201,7 +3211,7 @@
                 },
                 "man_made/surveillance": {
                     "name": "Surveillance",
-                    "terms": "cctv"
+                    "terms": "anpr,alpr,camera,car plate recognition,cctv,guard,license plate recognition,monitoring,number plate recognition,security,video,webcam"
                 },
                 "man_made/survey_point": {
                     "name": "Survey Point",

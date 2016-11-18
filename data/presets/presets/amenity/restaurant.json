@@ -8,7 +8,8 @@
         "capacity",
         "takeaway",
         "delivery",
-        "smoking"
+        "smoking",
+        "outdoor_seating"
     ],
     "geometry": [
         "point",

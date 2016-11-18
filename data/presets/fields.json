@@ -696,6 +696,11 @@
             "type": "check",
             "label": "Internet Access Fee"
         },
+        "internet_access/ssid": {
+            "key": "internet_access:ssid",
+            "type": "text",
+            "label": "SSID (Network Name)"
+        },
         "kerb": {
             "key": "kerb",
             "type": "combo",
@@ -1002,6 +1007,11 @@
             "key": "operator",
             "type": "text",
             "label": "Operator"
+        },
+        "outdoor_seating": {
+            "key": "outdoor_seating",
+            "type": "combo",
+            "label": "Outdoor Seating"
         },
         "par": {
             "key": "par",
