@@ -603,6 +603,12 @@
             "type": "combo",
             "label": "Type"
         },
+        "genus": {
+            "key": "genus",
+            "type": "localized",
+            "label": "Biological Genus",
+            "placeholder": "Scientific Name"
+        },
         "golf_hole": {
             "key": "ref",
             "type": "text",
@@ -1352,6 +1358,12 @@
             "universal": true,
             "label": "Source"
         },
+        "species": {
+            "key": "species",
+            "type": "localized",
+            "label": "Biological Species",
+            "placeholder": "Scientific Name"
+        },
         "sport_ice": {
             "key": "sport",
             "type": "combo",
@@ -1462,6 +1474,18 @@
                     "only": "Takeaway Only"
                 }
             }
+        },
+        "taxon": {
+            "key": "taxon",
+            "type": "localized",
+            "label": "Taxonomical Name of Species",
+            "placeholder": "Scientific & Localized Names"
+        },
+        "taxon/genus": {
+            "key": "taxon:genus",
+            "type": "text",
+            "label": "Taxonomic Genus of Species",
+            "placeholder": "Scientific Name of Genus"
         },
         "toilets/disposal": {
             "key": "toilets:disposal",

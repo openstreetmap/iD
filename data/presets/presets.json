@@ -2728,6 +2728,10 @@
             "name": "Gate"
         },
         "barrier/hedge": {
+            "fields": [
+                "taxon/genus",
+                "taxon"
+            ],
             "geometry": [
                 "line",
                 "area"
@@ -5785,6 +5789,8 @@
         "landuse/forest": {
             "icon": "park2",
             "fields": [
+                "taxon/genus",
+                "taxon",
                 "leaf_type",
                 "leaf_cycle"
             ],
@@ -7306,6 +7312,10 @@
             "name": "Grassland"
         },
         "natural/heath": {
+            "fields": [
+                "taxon/genus",
+                "taxon"
+            ],
             "geometry": [
                 "area"
             ],
@@ -7376,6 +7386,10 @@
             "name": "Scree"
         },
         "natural/scrub": {
+            "fields": [
+                "taxon/genus",
+                "taxon"
+            ],
             "geometry": [
                 "area"
             ],
@@ -7401,6 +7415,9 @@
         },
         "natural/tree_row": {
             "fields": [
+                "taxon/genus",
+                "taxon",
+                "height",
                 "leaf_type",
                 "leaf_cycle",
                 "denotation"
@@ -7417,6 +7434,9 @@
         },
         "natural/tree": {
             "fields": [
+                "taxon/genus",
+                "taxon",
+                "height",
                 "leaf_type_singular",
                 "leaf_cycle_singular",
                 "denotation"
@@ -7526,6 +7546,8 @@
         "natural/wood": {
             "icon": "park2",
             "fields": [
+                "taxon/genus",
+                "taxon",
                 "leaf_type",
                 "leaf_cycle"
             ],
