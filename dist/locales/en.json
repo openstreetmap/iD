@@ -820,6 +820,16 @@
                 "building": {
                     "label": "Building"
                 },
+                "camera/direction": {
+                    "label": "Camera direction",
+                    "placeholder": "90 (degrees clockwise)"
+                },
+                "camera/mount": {
+                    "label": "Camera mount"
+                },
+                "camera/type": {
+                    "label": "Camera type"
+                },
                 "capacity": {
                     "label": "Capacity",
                     "placeholder": "50, 100, 200..."
@@ -857,6 +867,10 @@
                 },
                 "construction": {
                     "label": "Type"
+                },
+                "contact/webcam": {
+                    "label": "Webcam feed URL",
+                    "placeholder": "http://example.com/"
                 },
                 "content": {
                     "label": "Contents"
@@ -1535,6 +1549,15 @@
                 },
                 "surface": {
                     "label": "Surface"
+                },
+                "surveillance": {
+                    "label": "Surveillance kind"
+                },
+                "surveillance/type": {
+                    "label": "What is watching"
+                },
+                "surveillance/zone": {
+                    "label": "Zone"
                 },
                 "tactile_paving": {
                     "label": "Tactile Paving"
