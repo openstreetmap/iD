@@ -431,6 +431,11 @@ en:
       generator/type:
         # 'generator:type=*'
         label: Type
+      genus:
+        # genus=*
+        label: Biological Genus
+        # genus field placeholder
+        placeholder: Scientific Name
       golf_hole:
         # ref=*
         label: Reference
@@ -1011,6 +1016,11 @@ en:
       source:
         # source=*
         label: Source
+      species:
+        # species=*
+        label: Biological Species
+        # species field placeholder
+        placeholder: Scientific Name
       sport:
         # sport=*
         label: Sport
@@ -1077,6 +1087,16 @@ en:
           'yes': 'Yes'
         # takeaway field placeholder
         placeholder: 'Yes, No, Takeaway Only...'
+      taxon:
+        # taxon=*
+        label: Taxonomical Name of Species
+        # taxon field placeholder
+        placeholder: Scientific & Localized Names
+      taxon/genus:
+        # 'taxon:genus=*'
+        label: Taxonomic Genus of Species
+        # taxon/genus field placeholder
+        placeholder: Scientific Name of Genus
       toilets/disposal:
         # 'toilets:disposal=*'
         label: Disposal

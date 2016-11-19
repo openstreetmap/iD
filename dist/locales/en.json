@@ -1018,6 +1018,10 @@
                 "generator/type": {
                     "label": "Type"
                 },
+                "genus": {
+                    "label": "Biological Genus",
+                    "placeholder": "Scientific Name"
+                },
                 "golf_hole": {
                     "label": "Reference",
                     "placeholder": "Hole number (1-18)"
@@ -1484,6 +1488,10 @@
                 "source": {
                     "label": "Source"
                 },
+                "species": {
+                    "label": "Biological Species",
+                    "placeholder": "Scientific Name"
+                },
                 "sport_ice": {
                     "label": "Sport"
                 },
@@ -1540,6 +1548,14 @@
                         "no": "No",
                         "only": "Takeaway Only"
                     }
+                },
+                "taxon": {
+                    "label": "Taxonomical Name of Species",
+                    "placeholder": "Scientific & Localized Names"
+                },
+                "taxon/genus": {
+                    "label": "Taxonomic Genus of Species",
+                    "placeholder": "Scientific Name of Genus"
                 },
                 "toilets/disposal": {
                     "label": "Disposal",
