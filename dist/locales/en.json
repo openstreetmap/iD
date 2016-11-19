@@ -2997,6 +2997,10 @@
                     "name": "Common",
                     "terms": "open space"
                 },
+                "leisure/dance": {
+                    "name": "Dance Hall",
+                    "terms": "ballroom,jive,swing,tango,waltz"
+                },
                 "leisure/dog_park": {
                     "name": "Dog Park",
                     "terms": ""
@@ -3096,6 +3100,10 @@
                 "leisure/playground": {
                     "name": "Playground",
                     "terms": "jungle gym,play area"
+                },
+                "leisure/resort": {
+                    "name": "Resort",
+                    "terms": ""
                 },
                 "leisure/running_track": {
                     "name": "Running Track",
@@ -4093,6 +4101,10 @@
                     "name": "Guest Apartment / Condo",
                     "terms": ""
                 },
+                "tourism/aquarium": {
+                    "name": "Aquarium",
+                    "terms": "fish,sea,water"
+                },
                 "tourism/artwork": {
                     "name": "Artwork",
                     "terms": "mural,sculpture,statue"
@@ -4171,7 +4183,7 @@
                 },
                 "tourism/zoo": {
                     "name": "Zoo",
-                    "terms": ""
+                    "terms": "animal"
                 },
                 "traffic_calming": {
                     "name": "Traffic Calming",

@@ -1,8 +1,9 @@
 {
-    "icon": "zoo",
+    "icon": "water",
     "fields": [
         "operator",
         "address",
+        "building_area",
         "opening_hours"
     ],
     "geometry": [
@@ -10,10 +11,12 @@
         "area"
     ],
     "terms": [
-        "animal"
+        "fish",
+        "sea",
+        "water"
     ],
     "tags": {
-        "tourism": "zoo"
+        "tourism": "aquarium"
     },
-    "name": "Zoo"
+    "name": "Aquarium"
 }

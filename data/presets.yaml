@@ -2654,6 +2654,11 @@ en:
         name: Common
         # 'terms: open space'
         terms: '<translate with synonyms or related terms for ''Common'', separated by commas>'
+      leisure/dance:
+        # leisure=dance
+        name: Dance Hall
+        # 'terms: ballroom,jive,swing,tango,waltz'
+        terms: '<translate with synonyms or related terms for ''Dance Hall'', separated by commas>'
       leisure/dog_park:
         # leisure=dog_park
         name: Dog Park
@@ -2767,6 +2772,10 @@ en:
         name: Playground
         # 'terms: jungle gym,play area'
         terms: '<translate with synonyms or related terms for ''Playground'', separated by commas>'
+      leisure/resort:
+        # leisure=resort
+        name: Resort
+        terms: '<translate with synonyms or related terms for ''Resort'', separated by commas>'
       leisure/running_track:
         # 'leisure=track, sport=running'
         name: Running Track
@@ -3858,6 +3867,11 @@ en:
         # tourism=apartment
         name: Guest Apartment / Condo
         terms: '<translate with synonyms or related terms for ''Guest Apartment / Condo'', separated by commas>'
+      tourism/aquarium:
+        # tourism=aquarium
+        name: Aquarium
+        # 'terms: fish,sea,water'
+        terms: '<translate with synonyms or related terms for ''Aquarium'', separated by commas>'
       tourism/artwork:
         # tourism=artwork
         name: Artwork
@@ -3944,6 +3958,7 @@ en:
       tourism/zoo:
         # tourism=zoo
         name: Zoo
+        # 'terms: animal'
         terms: '<translate with synonyms or related terms for ''Zoo'', separated by commas>'
       traffic_calming:
         # traffic_calming=*

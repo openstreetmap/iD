@@ -1,8 +1,8 @@
 {
-    "icon": "zoo",
     "fields": [
         "operator",
         "address",
+        "building_area",
         "opening_hours"
     ],
     "geometry": [
@@ -10,10 +10,14 @@
         "area"
     ],
     "terms": [
-        "animal"
+        "ballroom",
+        "jive",
+        "swing",
+        "tango",
+        "waltz"
     ],
     "tags": {
-        "tourism": "zoo"
+        "leisure": "dance"
     },
-    "name": "Zoo"
+    "name": "Dance Hall"
 }

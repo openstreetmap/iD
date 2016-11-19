@@ -1,5 +1,4 @@
 {
-    "icon": "zoo",
     "fields": [
         "operator",
         "address",
@@ -9,11 +8,8 @@
         "point",
         "area"
     ],
-    "terms": [
-        "animal"
-    ],
     "tags": {
-        "tourism": "zoo"
+        "leisure": "resort"
     },
-    "name": "Zoo"
+    "name": "Resort"
 }

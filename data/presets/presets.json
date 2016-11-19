@@ -6029,6 +6029,29 @@
             },
             "name": "Common"
         },
+        "leisure/dance": {
+            "fields": [
+                "operator",
+                "address",
+                "building_area",
+                "opening_hours"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "terms": [
+                "ballroom",
+                "jive",
+                "swing",
+                "tango",
+                "waltz"
+            ],
+            "tags": {
+                "leisure": "dance"
+            },
+            "name": "Dance Hall"
+        },
         "leisure/dog_park": {
             "icon": "dog-park",
             "geometry": [
@@ -6489,6 +6512,21 @@
                 "leisure": "playground"
             },
             "name": "Playground"
+        },
+        "leisure/resort": {
+            "fields": [
+                "operator",
+                "address",
+                "opening_hours"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "tags": {
+                "leisure": "resort"
+            },
+            "name": "Resort"
         },
         "leisure/running_track": {
             "icon": "pitch",
@@ -10778,6 +10816,28 @@
             },
             "name": "Guest Apartment / Condo"
         },
+        "tourism/aquarium": {
+            "icon": "water",
+            "fields": [
+                "operator",
+                "address",
+                "building_area",
+                "opening_hours"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "terms": [
+                "fish",
+                "sea",
+                "water"
+            ],
+            "tags": {
+                "tourism": "aquarium"
+            },
+            "name": "Aquarium"
+        },
         "tourism/artwork": {
             "icon": "art-gallery",
             "fields": [
@@ -11164,6 +11224,9 @@
             "geometry": [
                 "point",
                 "area"
+            ],
+            "terms": [
+                "animal"
             ],
             "tags": {
                 "tourism": "zoo"
