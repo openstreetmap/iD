@@ -1163,6 +1163,10 @@
                 "map_type": {
                     "label": "Type"
                 },
+                "maxheight": {
+                    "label": "Max Height",
+                    "placeholder": "4, 4.5, 5, 14'0\", 14'6\", 15'0\""
+                },
                 "maxspeed": {
                     "label": "Speed Limit",
                     "placeholder": "40, 50, 60..."

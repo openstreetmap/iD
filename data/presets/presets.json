@@ -4857,7 +4857,9 @@
                 "maxspeed",
                 "structure",
                 "access",
+                "lanes",
                 "surface",
+                "maxheight",
                 "cycleway"
             ],
             "geometry": [
@@ -4900,7 +4902,9 @@
                 "maxspeed",
                 "structure",
                 "access",
+                "lanes",
                 "surface",
+                "maxheight",
                 "ref"
             ],
             "geometry": [
@@ -4933,6 +4937,7 @@
                 "access",
                 "lanes",
                 "surface",
+                "maxheight",
                 "ref"
             ],
             "geometry": [
@@ -5001,7 +5006,9 @@
                 "maxspeed",
                 "structure",
                 "access",
+                "lanes",
                 "surface",
+                "maxheight",
                 "ref",
                 "cycleway"
             ],
@@ -5027,6 +5034,7 @@
                 "access",
                 "lanes",
                 "surface",
+                "maxheight",
                 "ref",
                 "cycleway"
             ],
@@ -5071,7 +5079,9 @@
                 "maxspeed",
                 "structure",
                 "access",
+                "lanes",
                 "surface",
+                "maxheight",
                 "cycleway"
             ],
             "geometry": [
@@ -5104,7 +5114,9 @@
                 "maxspeed",
                 "structure",
                 "access",
-                "surface"
+                "lanes",
+                "surface",
+                "maxheight"
             ],
             "geometry": [
                 "line"
@@ -5122,7 +5134,9 @@
                 "maxspeed",
                 "structure",
                 "access",
+                "lanes",
                 "surface",
+                "maxheight",
                 "ref",
                 "cycleway"
             ],
@@ -5148,6 +5162,7 @@
                 "access",
                 "lanes",
                 "surface",
+                "maxheight",
                 "ref",
                 "cycleway"
             ],
@@ -5169,7 +5184,7 @@
                 "structure",
                 "access",
                 "surface",
-                "cycleway"
+                "maxheight"
             ],
             "geometry": [
                 "line"
@@ -5184,8 +5199,11 @@
             "icon": "highway-service",
             "fields": [
                 "oneway",
+                "maxspeed",
+                "structure",
                 "access",
-                "surface"
+                "surface",
+                "maxheight"
             ],
             "geometry": [
                 "line"
@@ -5200,8 +5218,11 @@
             "icon": "highway-service",
             "fields": [
                 "oneway",
+                "maxspeed",
+                "structure",
                 "access",
-                "surface"
+                "surface",
+                "maxheight"
             ],
             "geometry": [
                 "line"
@@ -5216,8 +5237,11 @@
             "icon": "highway-service",
             "fields": [
                 "oneway",
+                "maxspeed",
+                "structure",
                 "access",
-                "surface"
+                "surface",
+                "maxheight"
             ],
             "geometry": [
                 "line"
@@ -5232,8 +5256,11 @@
             "icon": "highway-service",
             "fields": [
                 "oneway",
+                "maxspeed",
+                "structure",
                 "access",
-                "surface"
+                "surface",
+                "maxheight"
             ],
             "geometry": [
                 "line"
@@ -5248,8 +5275,11 @@
             "icon": "highway-service",
             "fields": [
                 "oneway",
+                "maxspeed",
+                "structure",
                 "access",
-                "surface"
+                "surface",
+                "maxheight"
             ],
             "geometry": [
                 "line"
@@ -5343,7 +5373,9 @@
                 "maxspeed",
                 "structure",
                 "access",
+                "lanes",
                 "surface",
+                "maxheight",
                 "ref",
                 "cycleway"
             ],
@@ -5369,6 +5401,7 @@
                 "access",
                 "lanes",
                 "surface",
+                "maxheight",
                 "ref",
                 "cycleway"
             ],
@@ -5469,7 +5502,9 @@
                 "maxspeed",
                 "structure",
                 "access",
+                "lanes",
                 "surface",
+                "maxheight",
                 "ref"
             ],
             "geometry": [
@@ -5494,6 +5529,7 @@
                 "access",
                 "lanes",
                 "surface",
+                "maxheight",
                 "ref"
             ],
             "geometry": [
@@ -5538,7 +5574,9 @@
                 "maxspeed",
                 "structure",
                 "access",
+                "lanes",
                 "surface",
+                "maxheight",
                 "cycleway"
             ],
             "geometry": [

@@ -7,6 +7,7 @@
         "access",
         "lanes",
         "surface",
+        "maxheight",
         "ref",
         "cycleway"
     ],

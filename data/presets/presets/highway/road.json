@@ -5,7 +5,9 @@
         "maxspeed",
         "structure",
         "access",
-        "surface"
+        "lanes",
+        "surface",
+        "maxheight"
     ],
     "geometry": [
         "line"
