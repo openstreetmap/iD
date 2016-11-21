@@ -2669,6 +2669,9 @@
         },
         "barrier/city_wall": {
             "icon": "prison",
+            "fields": [
+                "height"
+            ],
             "geometry": [
                 "line",
                 "area"
@@ -2704,6 +2707,10 @@
         },
         "barrier/fence": {
             "icon": "prison",
+            "fields": [
+                "fence_type",
+                "height"
+            ],
             "geometry": [
                 "line"
             ],
@@ -2728,6 +2735,9 @@
             "name": "Gate"
         },
         "barrier/hedge": {
+            "fields": [
+                "height"
+            ],
             "geometry": [
                 "line",
                 "area"
@@ -2803,6 +2813,10 @@
         },
         "barrier/wall": {
             "icon": "prison",
+            "fields": [
+                "wall",
+                "height"
+            ],
             "geometry": [
                 "line",
                 "area"

@@ -979,6 +979,9 @@
                 "fee": {
                     "label": "Fee"
                 },
+                "fence_type": {
+                    "label": "Type"
+                },
                 "fire_hydrant/type": {
                     "label": "Type",
                     "options": {
@@ -1605,6 +1608,9 @@
                         "street": "5 to 20m (16 to 65ft)",
                         "area": "Over 20m (65ft)"
                     }
+                },
+                "wall": {
+                    "label": "Type"
                 },
                 "water_point": {
                     "label": "Water Point"

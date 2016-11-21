@@ -386,6 +386,9 @@ en:
       fee:
         # fee=*
         label: Fee
+      fence_type:
+        # fence=*
+        label: Type
       fire_hydrant/type:
         # 'fire_hydrant:type=*'
         label: Type
@@ -1159,6 +1162,9 @@ en:
           house: Up to 5m (16ft)
           # visibility=street
           street: 5 to 20m (16 to 65ft)
+      wall:
+        # wall=*
+        label: Type
       water:
         # water=*
         label: Type

@@ -1,4 +1,7 @@
 {
+    "fields": [
+        "height"
+    ],
     "geometry": [
         "line",
         "area"

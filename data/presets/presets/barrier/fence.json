@@ -1,5 +1,9 @@
 {
     "icon": "prison",
+    "fields": [
+        "fence_type",
+        "height"
+    ],
     "geometry": [
         "line"
     ],

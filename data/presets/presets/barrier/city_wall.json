@@ -1,5 +1,8 @@
 {
     "icon": "prison",
+    "fields": [
+        "height"
+    ],
     "geometry": [
         "line",
         "area"
