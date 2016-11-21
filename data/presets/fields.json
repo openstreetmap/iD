@@ -538,7 +538,7 @@
             "label": "Fee"
         },
         "fence_type": {
-            "key": "fence",
+            "key": "fence_type",
             "type": "combo",
             "label": "Type"
         },

@@ -387,7 +387,7 @@ en:
         # fee=*
         label: Fee
       fence_type:
-        # fence=*
+        # fence_type=*
         label: Type
       fire_hydrant/type:
         # 'fire_hydrant:type=*'
