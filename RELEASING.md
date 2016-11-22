@@ -29,7 +29,7 @@
 - [ ] git checkout release
 - [ ] git reset --hard master
 - [ ] npm run all
-- [ ] git add -f dist/*.css dist/*.js dist/img/*.svg dist/locales/*.json dist/mapillary-js/
+- [ ] git add -f dist/\*.css dist/\*.js dist/img/\*.svg dist/mapillary-js/
 - [ ] git commit -m 'Check in build'
 - [ ] git tag vA.B.C
 - [ ] git push origin -f release vA.B.C
@@ -48,7 +48,7 @@
 - [ ] git reset --hard upstream/master
 - [ ] git checkout -b iD-A.B.C
 - [ ] bundle install
-- [ ] rm -rf vendor/assets/iD/* && vendorer
+- [ ] rm -rf vendor/assets/iD/\* && vendorer
 - [ ] git add . && git commit -m 'Update to iD vA.B.C'
 - [ ] git push osmlab
 - [ ] Open pull request
