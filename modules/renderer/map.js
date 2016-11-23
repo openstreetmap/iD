@@ -51,9 +51,9 @@ export function rendererMap(context) {
         mousemove;
 
     var zoom = d3.zoom()
-            .scaleExtent([ztok(2), ztok(24)])   // TODO: uncomment interpolate when d3.zoom 1.0.4 avail:
-            // .interpolate(d3.interpolate)     // https://github.com/d3/d3-zoom/issues/54
-            .on('zoom', zoomPan);               // default zoom interpolator does a fly-out-in
+            .scaleExtent([ztok(2), ztok(24)])
+            .interpolate(d3.interpolate)
+            .on('zoom', zoomPan);
 
     var _selection = d3.select(null);
 
