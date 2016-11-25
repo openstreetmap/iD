@@ -44,7 +44,7 @@
     "ecstatic": "~2.1.0",
     "editor-layer-index": "osmlab/editor-layer-index.git#gh-pages",
     "gaze": "~1.1.1",
-    "eslint": "~3.10.0",
+    "eslint": "~3.11.0",
     "glob": "~7.1.0",
     "happen": "~0.3.1",
     "js-yaml": "~3.7.0",
