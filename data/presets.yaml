@@ -1421,6 +1421,11 @@ en:
         name: Coworking Space
         # 'terms: coworking,office'
         terms: '<translate with synonyms or related terms for ''Coworking Space'', separated by commas>'
+      amenity/crematorium:
+        # amenity=crematorium
+        name: Crematorium
+        # 'terms: cemetery,funeral'
+        terms: '<translate with synonyms or related terms for ''Crematorium'', separated by commas>'
       amenity/dentist:
         # amenity=dentist
         name: Dentist
@@ -1458,6 +1463,11 @@ en:
         # amenity=fire_station
         name: Fire Station
         terms: '<translate with synonyms or related terms for ''Fire Station'', separated by commas>'
+      amenity/food_court:
+        # amenity=food_court
+        name: Food Court
+        # 'terms: fast food,restaurant,food'
+        terms: '<translate with synonyms or related terms for ''Food Court'', separated by commas>'
       amenity/fountain:
         # amenity=fountain
         name: Fountain

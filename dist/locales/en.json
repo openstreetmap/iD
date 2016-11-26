@@ -1875,6 +1875,10 @@
                     "name": "Coworking Space",
                     "terms": "coworking,office"
                 },
+                "amenity/crematorium": {
+                    "name": "Crematorium",
+                    "terms": "cemetery,funeral"
+                },
                 "amenity/dentist": {
                     "name": "Dentist",
                     "terms": "tooth,teeth"
@@ -1906,6 +1910,10 @@
                 "amenity/fire_station": {
                     "name": "Fire Station",
                     "terms": ""
+                },
+                "amenity/food_court": {
+                    "name": "Food Court",
+                    "terms": "fast food,restaurant,food"
                 },
                 "amenity/fountain": {
                     "name": "Fountain",
