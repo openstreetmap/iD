@@ -237,6 +237,10 @@
         },
         {
             "key": "amenity",
+            "value": "crematorium"
+        },
+        {
+            "key": "amenity",
             "value": "dentist"
         },
         {
@@ -266,6 +270,10 @@
         {
             "key": "amenity",
             "value": "fire_station"
+        },
+        {
+            "key": "amenity",
+            "value": "food_court"
         },
         {
             "key": "amenity",

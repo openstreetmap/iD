@@ -1038,6 +1038,27 @@
             },
             "name": "Coworking Space"
         },
+        "amenity/crematorium": {
+            "icon": "cemetery",
+            "fields": [
+                "website",
+                "phone",
+                "opening_hours",
+                "wheelchair"
+            ],
+            "geometry": [
+                "area",
+                "point"
+            ],
+            "tags": {
+                "amenity": "crematorium"
+            },
+            "terms": [
+                "cemetery",
+                "funeral"
+            ],
+            "name": "Crematorium"
+        },
         "amenity/dentist": {
             "icon": "dentist",
             "fields": [
@@ -1190,6 +1211,30 @@
                 "amenity": "fire_station"
             },
             "name": "Fire Station"
+        },
+        "amenity/food_court": {
+            "icon": "restaurant",
+            "fields": [
+                "operator",
+                "address",
+                "building_area",
+                "opening_hours",
+                "smoking",
+                "outdoor_seating"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "terms": [
+                "fast food",
+                "restaurant",
+                "food"
+            ],
+            "tags": {
+                "amenity": "food_court"
+            },
+            "name": "Food Court"
         },
         "amenity/fountain": {
             "geometry": [
