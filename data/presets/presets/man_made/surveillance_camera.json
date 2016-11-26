@@ -6,7 +6,11 @@
     "fields": [
         "surveillance",
         "surveillance/type",
-        "surveillance/zone"
+        "camera/type",
+        "camera/mount",
+        "camera/direction",
+        "surveillance/zone",
+        "contact/webcam"
      ],
     "terms": [
         "anpr",
@@ -23,7 +27,8 @@
         "webcam"
     ],
     "tags": {
-        "man_made": "surveillance"
+        "man_made": "surveillance",
+        "surveillance:type": "camera"
     },
-    "name": "Surveillance"
+    "name": "Surveillance Camera"
 }

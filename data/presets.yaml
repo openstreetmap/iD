@@ -208,15 +208,22 @@ en:
         label: Building
       camera/direction:
         # 'camera:direction=*'
-        label: Camera direction
+        label: Direction (Degrees Clockwise)
         # camera/direction field placeholder
-        placeholder: 90 (degrees clockwise)
+        placeholder: '45, 90, 180, 270'
       camera/mount:
         # 'camera:mount=*'
-        label: Camera mount
+        label: Camera Mount
       camera/type:
         # 'camera:type=*'
-        label: Camera type
+        label: Camera Type
+        options:
+          # 'camera:type=dome'
+          dome: Dome
+          # 'camera:type=fixed'
+          fixed: Fixed
+          # 'camera:type=panning'
+          panning: Panning
       capacity:
         # capacity=*
         label: Capacity
@@ -274,7 +281,7 @@ en:
         label: Type
       contact/webcam:
         # 'contact:webcam=*'
-        label: Webcam feed URL
+        label: Webcam URL
         # contact/webcam field placeholder
         placeholder: 'http://example.com/'
       content:
@@ -1088,13 +1095,20 @@ en:
         label: Surface
       surveillance:
         # surveillance=*
-        label: Surveillance kind
+        label: Surveillance Kind
       surveillance/type:
         # 'surveillance:type=*'
-        label: What is watching
+        label: Surveillance Type
+        options:
+          # 'surveillance:type=ALPR'
+          ALPR: Automatic License Plate Reader
+          # 'surveillance:type=camera'
+          camera: Camera
+          # 'surveillance:type=guard'
+          guard: Guard
       surveillance/zone:
         # 'surveillance:zone=*'
-        label: Zone
+        label: Surveillance Zone
       tactile_paving:
         # tactile_paving=*
         label: Tactile Paving
@@ -2949,6 +2963,11 @@ en:
         name: Surveillance
         # 'terms: anpr,alpr,camera,car plate recognition,cctv,guard,license plate recognition,monitoring,number plate recognition,security,video,webcam'
         terms: '<translate with synonyms or related terms for ''Surveillance'', separated by commas>'
+      man_made/surveillance_camera:
+        # 'man_made=surveillance, surveillance:type=camera'
+        name: Surveillance Camera
+        # 'terms: anpr,alpr,camera,car plate recognition,cctv,guard,license plate recognition,monitoring,number plate recognition,security,video,webcam'
+        terms: '<translate with synonyms or related terms for ''Surveillance Camera'', separated by commas>'
       man_made/survey_point:
         # man_made=survey_point
         name: Survey Point

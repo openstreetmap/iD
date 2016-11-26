@@ -1,6 +1,5 @@
 {
     "key": "surveillance",
     "type": "combo",
-    "label": "Surveillance kind",
-    "options": ["outdoor", "public", "indoor"]
+    "label": "Surveillance Kind"
 }

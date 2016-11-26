@@ -1,6 +1,5 @@
 {
     "key": "camera:mount",
     "type": "combo",
-    "label": "Camera mount",
-    "options": [ "pole", "wall", "ceiling", "roof", "gantry" ]
+    "label": "Camera Mount"
 }

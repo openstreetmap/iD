@@ -821,14 +821,19 @@
                     "label": "Building"
                 },
                 "camera/direction": {
-                    "label": "Camera direction",
-                    "placeholder": "90 (degrees clockwise)"
+                    "label": "Direction (Degrees Clockwise)",
+                    "placeholder": "45, 90, 180, 270"
                 },
                 "camera/mount": {
-                    "label": "Camera mount"
+                    "label": "Camera Mount"
                 },
                 "camera/type": {
-                    "label": "Camera type"
+                    "label": "Camera Type",
+                    "options": {
+                        "fixed": "Fixed",
+                        "panning": "Panning",
+                        "dome": "Dome"
+                    }
                 },
                 "capacity": {
                     "label": "Capacity",
@@ -869,7 +874,7 @@
                     "label": "Type"
                 },
                 "contact/webcam": {
-                    "label": "Webcam feed URL",
+                    "label": "Webcam URL",
                     "placeholder": "http://example.com/"
                 },
                 "content": {
@@ -1551,13 +1556,18 @@
                     "label": "Surface"
                 },
                 "surveillance": {
-                    "label": "Surveillance kind"
+                    "label": "Surveillance Kind"
                 },
                 "surveillance/type": {
-                    "label": "What is watching"
+                    "label": "Surveillance Type",
+                    "options": {
+                        "camera": "Camera",
+                        "guard": "Guard",
+                        "ALPR": "Automatic License Plate Reader"
+                    }
                 },
                 "surveillance/zone": {
-                    "label": "Zone"
+                    "label": "Surveillance Zone"
                 },
                 "tactile_paving": {
                     "label": "Tactile Paving"
@@ -3257,6 +3267,10 @@
                 "man_made/storage_tank": {
                     "name": "Storage Tank",
                     "terms": "water,oil,gas,petrol"
+                },
+                "man_made/surveillance_camera": {
+                    "name": "Surveillance Camera",
+                    "terms": "anpr,alpr,camera,car plate recognition,cctv,guard,license plate recognition,monitoring,number plate recognition,security,video,webcam"
                 },
                 "man_made/surveillance": {
                     "name": "Surveillance",

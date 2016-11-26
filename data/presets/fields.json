@@ -286,30 +286,25 @@
         "camera/direction": {
             "key": "camera:direction",
             "type": "number",
-            "label": "Camera direction",
-            "placeholder": "90 (degrees clockwise)"
+            "label": "Direction (Degrees Clockwise)",
+            "placeholder": "45, 90, 180, 270"
         },
         "camera/mount": {
             "key": "camera:mount",
             "type": "combo",
-            "label": "Camera mount",
-            "options": [
-                "pole",
-                "wall",
-                "ceiling",
-                "roof",
-                "gantry"
-            ]
+            "label": "Camera Mount"
         },
         "camera/type": {
             "key": "camera:type",
             "type": "combo",
-            "label": "Camera type",
-            "options": [
-                "fixed",
-                "panning",
-                "dome"
-            ]
+            "label": "Camera Type",
+            "strings": {
+                "options": {
+                    "fixed": "Fixed",
+                    "panning": "Panning",
+                    "dome": "Dome"
+                }
+            }
         },
         "capacity": {
             "key": "capacity",
@@ -367,7 +362,7 @@
             "key": "contact:webcam",
             "type": "url",
             "icon": "website",
-            "label": "Webcam feed URL",
+            "label": "Webcam URL",
             "placeholder": "http://example.com/"
         },
         "content": {
@@ -1495,35 +1490,24 @@
         "surveillance": {
             "key": "surveillance",
             "type": "combo",
-            "label": "Surveillance kind",
-            "options": [
-                "outdoor",
-                "public",
-                "indoor"
-            ]
+            "label": "Surveillance Kind"
         },
         "surveillance/type": {
             "key": "surveillance:type",
             "type": "combo",
-            "label": "What is watching",
-            "options": [
-                "camera",
-                "guard",
-                "alpr"
-            ]
+            "label": "Surveillance Type",
+            "strings": {
+                "options": {
+                    "camera": "Camera",
+                    "guard": "Guard",
+                    "ALPR": "Automatic License Plate Reader"
+                }
+            }
         },
         "surveillance/zone": {
             "key": "surveillance:zone",
             "type": "combo",
-            "label": "Zone",
-            "options": [
-                "traffic",
-                "building",
-                "town",
-                "parking",
-                "shop",
-                "bank"
-            ]
+            "label": "Surveillance Zone"
         },
         "tactile_paving": {
             "key": "tactile_paving",

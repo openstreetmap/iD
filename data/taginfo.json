@@ -1583,6 +1583,10 @@
             "value": "storage_tank"
         },
         {
+            "key": "surveillance:type",
+            "value": "camera"
+        },
+        {
             "key": "man_made",
             "value": "surveillance"
         },

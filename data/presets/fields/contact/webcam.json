@@ -2,6 +2,6 @@
     "key": "contact:webcam",
     "type": "url",
     "icon": "website",
-    "label": "Webcam feed URL",
+    "label": "Webcam URL",
     "placeholder": "http://example.com/"
 }

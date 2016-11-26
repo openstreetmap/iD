@@ -1,6 +1,5 @@
 {
     "key": "surveillance:zone",
     "type": "combo",
-    "label": "Zone",
-    "options": ["traffic", "building", "town", "parking", "shop", "bank"]
+    "label": "Surveillance Zone"
 }
