@@ -206,6 +206,17 @@ en:
       building_area:
         # building=*
         label: Building
+      camera/direction:
+        # 'camera:direction=*'
+        label: Camera direction
+        # camera/direction field placeholder
+        placeholder: 90 (degrees clockwise)
+      camera/mount:
+        # 'camera:mount=*'
+        label: Camera mount
+      camera/type:
+        # 'camera:type=*'
+        label: Camera type
       capacity:
         # capacity=*
         label: Capacity
@@ -261,6 +272,11 @@ en:
       construction:
         # construction=*
         label: Type
+      contact/webcam:
+        # 'contact:webcam=*'
+        label: Webcam feed URL
+        # contact/webcam field placeholder
+        placeholder: 'http://example.com/'
       content:
         # content=*
         label: Contents
@@ -1070,6 +1086,15 @@ en:
       surface:
         # surface=*
         label: Surface
+      surveillance:
+        # surveillance=*
+        label: Surveillance kind
+      surveillance/type:
+        # 'surveillance:type=*'
+        label: What is watching
+      surveillance/zone:
+        # 'surveillance:zone=*'
+        label: Zone
       tactile_paving:
         # tactile_paving=*
         label: Tactile Paving

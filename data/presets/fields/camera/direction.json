@@ -1,0 +1,6 @@
+{
+    "key": "camera:direction",
+    "type": "number",
+    "label": "Camera direction",
+    "placeholder": "90 (degrees clockwise)"
+}

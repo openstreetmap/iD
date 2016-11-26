@@ -7049,6 +7049,15 @@
             "geometry": [
                 "point"
             ],
+            "fields": [
+                "surveillance",
+                "surveillance/type",
+                "camera/type",
+                "camera/mount",
+                "camera/direction",
+                "surveillance/zone",
+                "contact/webcam"
+            ],
             "terms": [
                 "anpr",
                 "alpr",

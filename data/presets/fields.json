@@ -283,6 +283,34 @@
             "type": "combo",
             "label": "Building"
         },
+        "camera/direction": {
+            "key": "camera:direction",
+            "type": "number",
+            "label": "Camera direction",
+            "placeholder": "90 (degrees clockwise)"
+        },
+        "camera/mount": {
+            "key": "camera:mount",
+            "type": "combo",
+            "label": "Camera mount",
+            "options": [
+                "pole",
+                "wall",
+                "ceiling",
+                "roof",
+                "gantry"
+            ]
+        },
+        "camera/type": {
+            "key": "camera:type",
+            "type": "combo",
+            "label": "Camera type",
+            "options": [
+                "fixed",
+                "panning",
+                "dome"
+            ]
+        },
         "capacity": {
             "key": "capacity",
             "type": "number",
@@ -334,6 +362,13 @@
             "key": "construction",
             "type": "combo",
             "label": "Type"
+        },
+        "contact/webcam": {
+            "key": "contact:webcam",
+            "type": "url",
+            "icon": "website",
+            "label": "Webcam feed URL",
+            "placeholder": "http://example.com/"
         },
         "content": {
             "key": "content",
@@ -1456,6 +1491,39 @@
             "key": "surface",
             "type": "combo",
             "label": "Surface"
+        },
+        "surveillance": {
+            "key": "surveillance",
+            "type": "combo",
+            "label": "Surveillance kind",
+            "options": [
+                "outdoor",
+                "public",
+                "indoor"
+            ]
+        },
+        "surveillance/type": {
+            "key": "surveillance:type",
+            "type": "combo",
+            "label": "What is watching",
+            "options": [
+                "camera",
+                "guard",
+                "alpr"
+            ]
+        },
+        "surveillance/zone": {
+            "key": "surveillance:zone",
+            "type": "combo",
+            "label": "Zone",
+            "options": [
+                "traffic",
+                "building",
+                "town",
+                "parking",
+                "shop",
+                "bank"
+            ]
         },
         "tactile_paving": {
             "key": "tactile_paving",
