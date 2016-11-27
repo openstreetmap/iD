@@ -1,5 +1,6 @@
 import { t } from '../util/locale';
 import { actionReflect } from '../actions/index';
+import _ from 'lodash';
 
 export function operationReflect(selectedIDs, context) {
     const entityId = selectedIDs[0];
@@ -15,8 +16,12 @@ export function operationReflect(selectedIDs, context) {
     };
 
     operation.available = function() {
-        return selectedIDs.length === 1 &&
-            context.geometry(entityId) === 'area';
+        // For the passed selectIDs, filter out those relating to area geometries
+        const areaCount = _(selectedIDs)
+            .filter(function(s) { return context.geometry(s) === 'area';})
+            // Only allow reflection if exactly 1 area is selected
+            .size();
+        return areaCount === 1;
     };
 
     operation.disabled = function() {
