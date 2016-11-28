@@ -337,6 +337,7 @@
             "switch": "Selecteer terug deze achtergrond",
             "custom": "Aangepast",
             "custom_button": "Aangepaste achtergrond aanpassen",
+            "custom_prompt": "Geef een tegel-URL-sjabloon op. Geldige placeholders zijn {zoom}, {x}, {y} voor het Z/X/Y-schema en {u} voor het quadtile-schema.",
             "fix_misalignment": "Verplaatsing van luchtfoto aanpassen",
             "imagery_source_faq": "Waar komen deze afbeeldingen vandaan? (Engels)",
             "reset": "Standaard herstellen",
@@ -978,6 +979,9 @@
                 "fee": {
                     "label": "Betalend"
                 },
+                "fence_type": {
+                    "label": "Type"
+                },
                 "fire_hydrant/type": {
                     "label": "TYpe",
                     "options": {
@@ -1076,6 +1080,9 @@
                 "internet_access/fee": {
                     "label": "Internettoegang is betalend"
                 },
+                "internet_access/ssid": {
+                    "label": "SSID (netwerknaam)"
+                },
                 "kerb": {
                     "label": "Stoeprand"
                 },
@@ -1150,8 +1157,15 @@
                 "man_made": {
                     "label": "Type"
                 },
+                "map_size": {
+                    "label": "Dekkingsgebied"
+                },
                 "map_type": {
                     "label": "Type"
+                },
+                "maxheight": {
+                    "label": "Maximale hoogte",
+                    "placeholder": "4, 4.5, 5"
                 },
                 "maxspeed": {
                     "label": "Snelheidsbeperking",
@@ -1266,6 +1280,9 @@
                 },
                 "operator": {
                     "label": "Uitbatende organisatie"
+                },
+                "outdoor_seating": {
+                    "label": "Buitenzitjes"
                 },
                 "par": {
                     "label": "Par",
@@ -1595,6 +1612,9 @@
                         "house": "Minder dan 5 meter",
                         "street": "5 tot 20 meter"
                     }
+                },
+                "wall": {
+                    "label": "Type"
                 },
                 "water": {
                     "label": "Type"
@@ -2295,6 +2315,10 @@
                     "name": "Opslagplaats",
                     "terms": "magazijn,warenhuis"
                 },
+                "camp_site/camp_pitch": {
+                    "name": "Individueel kampeerveld of sta-plaats op camping",
+                    "terms": "kampeerveldje,sta-plaats,staplaats"
+                },
                 "craft": {
                     "name": "Vakmanschap",
                     "terms": "stiel,kunde,handwerk"
@@ -2532,6 +2556,14 @@
                     "name": "Golf Hole",
                     "terms": "gat,doel"
                 },
+                "golf/lateral_water_hazard_area": {
+                    "name": "Zijdelingse waterpartij (golf)",
+                    "terms": "golf,water"
+                },
+                "golf/lateral_water_hazard_line": {
+                    "name": "Zijdelingse waterpartij (golf)",
+                    "terms": "golf,water"
+                },
                 "golf/rough": {
                     "name": "Rough",
                     "terms": "golf"
@@ -2539,6 +2571,14 @@
                 "golf/tee": {
                     "name": "Tee-Box",
                     "terms": "golf"
+                },
+                "golf/water_hazard_area": {
+                    "name": "Waterpartij (golf)",
+                    "terms": "golf,water"
+                },
+                "golf/water_hazard_line": {
+                    "name": "Waterpartij (golf)",
+                    "terms": "golf,water"
                 },
                 "healthcare/blood_donation": {
                     "name": "Bloeddonorcentrum",
@@ -2671,6 +2711,10 @@
                 },
                 "highway/track": {
                     "name": "Veld- of bosweg"
+                },
+                "highway/traffic_mirror": {
+                    "name": "Verkeersspiegel",
+                    "terms": "spiegel,dodehoeksspiegel,kruispuntspiegel"
                 },
                 "highway/traffic_signals": {
                     "name": "Verkeerslichten",
@@ -2838,6 +2882,10 @@
                 "leisure/common": {
                     "name": "Gemeenschappelijk"
                 },
+                "leisure/dance": {
+                    "name": "Danszaal",
+                    "terms": "ballroom,jive,swing,tango,wals"
+                },
                 "leisure/dog_park": {
                     "name": "Hondenpark"
                 },
@@ -2924,6 +2972,10 @@
                 "leisure/playground": {
                     "name": "Speeltuin",
                     "terms": "speelplaats,speelterrein"
+                },
+                "leisure/resort": {
+                    "name": "Resort",
+                    "terms": "vakantiepark,hotel"
                 },
                 "leisure/running_track": {
                     "name": "Looppiste",
@@ -3820,6 +3872,9 @@
                     "name": "Vakantieappartement",
                     "terms": "gastenappartement,verhuurd appartement,zomerappartement,vakantieflat,gastenflat,gastappartement,gastflat,verhuurde flat,zomerflat"
                 },
+                "tourism/aquarium": {
+                    "name": "Aquarium"
+                },
                 "tourism/artwork": {
                     "name": "Kunstwerk",
                     "terms": "kunst,object,kunstobject"
@@ -3858,6 +3913,22 @@
                     "name": "Informatie",
                     "terms": "i,info,vvv,touristeninformatie,office de tourisme,tourismekantoor"
                 },
+                "tourism/information/board": {
+                    "name": "Informatiebord",
+                    "terms": "uitlegbord,informatie"
+                },
+                "tourism/information/guidepost": {
+                    "name": "Wandel-, fiets-, e.d. -wegwijzer",
+                    "terms": "wegwijzer,wandelroutewegwijzer,fietsroutewegwijzer,routewegwijzer,route,wandelwegwijzer,fietswegwijzer"
+                },
+                "tourism/information/map": {
+                    "name": "Kaart",
+                    "terms": "plan,plattegrond,informatie"
+                },
+                "tourism/information/office": {
+                    "name": "Toerismekantoor",
+                    "terms": "bezoekerscentrum,informatiecentrum,vvv-kantoor,office du tourisme,informatie"
+                },
                 "tourism/motel": {
                     "name": "Motel"
                 },
@@ -3895,6 +3966,9 @@
                 },
                 "traffic_calming/cushion": {
                     "name": "Verkeerskussen"
+                },
+                "traffic_calming/dip": {
+                    "name": "Verkeersremmende greppel"
                 },
                 "traffic_calming/hump": {
                     "name": "Verkeersdrempel, 2 meter of langer",

@@ -337,6 +337,7 @@
             "switch": "Växla tillbaka till denna bakgrund",
             "custom": "Anpassa",
             "custom_button": "Ändra anpassad bakgrund",
+            "custom_prompt": "Ange en URL-mall för plattor. Giltiga symboler är {zoom}, {x} och {y} för Z/X/Y-scheman och {u} för QuadTile-scheman.",
             "fix_misalignment": "Justera bildplacering",
             "imagery_source_faq": "Var kommer dessa flygfoton från?",
             "reset": "ta bort",
@@ -804,6 +805,9 @@
                         "whole": "helt blod"
                     }
                 },
+                "board_type": {
+                    "label": "Typ"
+                },
                 "boundary": {
                     "label": "Typ"
                 },
@@ -975,6 +979,9 @@
                 "fee": {
                     "label": "Avgift"
                 },
+                "fence_type": {
+                    "label": "Typ"
+                },
                 "fire_hydrant/type": {
                     "label": "Typ",
                     "options": {
@@ -1025,6 +1032,9 @@
                 "handrail": {
                     "label": "Ledstång"
                 },
+                "height": {
+                    "label": "Höjd (meter)"
+                },
                 "highway": {
                     "label": "Typ"
                 },
@@ -1069,6 +1079,9 @@
                 },
                 "internet_access/fee": {
                     "label": "Avgift för internetåtkomst"
+                },
+                "internet_access/ssid": {
+                    "label": "SSID (Nätverksnamn)"
                 },
                 "kerb": {
                     "label": "Trottoarkant"
@@ -1143,6 +1156,12 @@
                 },
                 "man_made": {
                     "label": "Typ"
+                },
+                "map_type": {
+                    "label": "Typ"
+                },
+                "maxheight": {
+                    "label": "Maxhöjd"
                 },
                 "maxspeed": {
                     "label": "Hastighetsbegränsning",
@@ -1534,6 +1553,9 @@
                 "tourism": {
                     "label": "Typ"
                 },
+                "tower/type": {
+                    "label": "Typ"
+                },
                 "tracktype": {
                     "label": "Typ av bruksväg",
                     "options": {
@@ -1579,6 +1601,9 @@
                         "house": "Upp till 5 m (16 ft)",
                         "street": "5 till 20 m (16 till 65 ft)"
                     }
+                },
+                "wall": {
+                    "label": "Typ"
                 },
                 "water": {
                     "label": "Typ"
@@ -1863,6 +1888,10 @@
                 "amenity/ice_cream": {
                     "name": "Glassaffär",
                     "terms": "Glassaffär, glass, glasskiosk, kulglass, mjukglass,gelato,sorbet,sherbet,frozen,yogurt"
+                },
+                "amenity/internet_cafe": {
+                    "name": "Internetkafé",
+                    "terms": "Internetcafé, internetcafe, internetcaffe, cybercafé, internetkafé"
                 },
                 "amenity/kindergarten": {
                     "name": "Förskoleområde",
@@ -2742,6 +2771,10 @@
                 "highway/track": {
                     "name": "Ej underhållen bruksväg",
                     "terms": "Bruksväg, traktorväg, skogsväg, åkerväg, virkesväg, timmerväg, traktor, skogsmaskin, åker, timmer, jordbruk, brandväg, brandgata"
+                },
+                "highway/traffic_mirror": {
+                    "name": "Trafikspegel",
+                    "terms": "Trafikspegel, vägspegel, utfartspegel"
                 },
                 "highway/traffic_signals": {
                     "name": "Trafiksignaler",

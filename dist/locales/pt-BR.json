@@ -1077,6 +1077,9 @@
                 "internet_access/fee": {
                     "label": "Taxa para acesso à Internet"
                 },
+                "internet_access/ssid": {
+                    "label": "SSID (Nome da Rede)"
+                },
                 "kerb": {
                     "label": "Meio-fio"
                 },

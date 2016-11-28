@@ -820,6 +820,21 @@
                 "building_area": {
                     "label": "Edificio"
                 },
+                "camera/direction": {
+                    "label": "Direzione (gradi in senso orario)",
+                    "placeholder": "45, 90, 180, 270"
+                },
+                "camera/mount": {
+                    "label": "Supporto della telecamera"
+                },
+                "camera/type": {
+                    "label": "Tipo di telecamera",
+                    "options": {
+                        "dome": "A cupola",
+                        "fixed": "Fissa",
+                        "panning": "Panoramica"
+                    }
+                },
                 "capacity": {
                     "label": "Capienza",
                     "placeholder": "50, 100, 200..."
@@ -857,6 +872,10 @@
                 },
                 "construction": {
                     "label": "Tipo"
+                },
+                "contact/webcam": {
+                    "label": "URL webcam",
+                    "placeholder": "http://example.com/"
                 },
                 "content": {
                     "label": "Contenuto"
@@ -979,6 +998,9 @@
                 "fee": {
                     "label": "Tariffa"
                 },
+                "fence_type": {
+                    "label": "Tipo"
+                },
                 "fire_hydrant/type": {
                     "label": "Tipo",
                     "options": {
@@ -1077,6 +1099,9 @@
                 "internet_access/fee": {
                     "label": "Accesso ad Internet a pagamento"
                 },
+                "internet_access/ssid": {
+                    "label": "SSID (Nome della rete)"
+                },
                 "kerb": {
                     "label": "Rampa sul cordolo"
                 },
@@ -1156,6 +1181,10 @@
                 },
                 "map_type": {
                     "label": "Tipo"
+                },
+                "maxheight": {
+                    "label": "Altezza massima",
+                    "placeholder": "4, 4.5, 5, 14'0\", 14'6\", 15'0\", ..."
                 },
                 "maxspeed": {
                     "label": "Limite di velocità",
@@ -1270,6 +1299,9 @@
                 },
                 "operator": {
                     "label": "Operatore"
+                },
+                "outdoor_seating": {
+                    "label": "Seduta all'aperto"
                 },
                 "par": {
                     "label": "Par",
@@ -1523,6 +1555,20 @@
                 "surface": {
                     "label": "Superficie"
                 },
+                "surveillance": {
+                    "label": "Ambiente di sorveglianza"
+                },
+                "surveillance/type": {
+                    "label": "Tipo di sorveglianza",
+                    "options": {
+                        "ALPR": "Lettore automatico di targhe",
+                        "camera": "Telecamera",
+                        "guard": "Vigilanza"
+                    }
+                },
+                "surveillance/zone": {
+                    "label": "Zona sorvegliata"
+                },
                 "tactile_paving": {
                     "label": "Pavimento tattile"
                 },
@@ -1599,6 +1645,9 @@
                         "house": "Fino a 5 m (16 ft)",
                         "street": "Da 5 a 20 m (da 16 a 65 ft)"
                     }
+                },
+                "wall": {
+                    "label": "Tipo"
                 },
                 "water": {
                     "label": "Tipo"
@@ -1823,6 +1872,10 @@
                 "amenity/coworking_space": {
                     "name": "Spazio in coworking",
                     "terms": "coworking,ufficio"
+                },
+                "amenity/crematorium": {
+                    "name": "Forno crematorio",
+                    "terms": "cimitero,funerale,forno,cremazione,ceneri"
                 },
                 "amenity/dentist": {
                     "name": "Dentista",
@@ -2767,6 +2820,10 @@
                     "name": "Strada ad uso agricolo / forestale",
                     "terms": "strada sterrata,strada forestale,strada agricola,abbandonata,fuoristrada,4x4,quattro ruote motrici,quad,atv,jeep"
                 },
+                "highway/traffic_mirror": {
+                    "name": "Specchio stradale",
+                    "terms": "specchio,parabola,stradale,punto cieco,convesso,curvo"
+                },
                 "highway/traffic_signals": {
                     "name": "Semaforo",
                     "terms": "semaforo,luce semaforica,lanterna semaforica"
@@ -2946,6 +3003,10 @@
                     "name": "Luogo pubblico",
                     "terms": "beni comuni,comune,pubblico,spazio pubblico,spazio comune,libero accesso"
                 },
+                "leisure/dance": {
+                    "name": "Sala da ballo",
+                    "terms": "ballo,danza,jive,swing,tango,valzer,balera"
+                },
                 "leisure/dog_park": {
                     "name": "Area per cani",
                     "terms": "Area cani"
@@ -3045,6 +3106,10 @@
                 "leisure/playground": {
                     "name": "Parco giochi",
                     "terms": "area giochi,scivolo,parco,giochi"
+                },
+                "leisure/resort": {
+                    "name": "Resort",
+                    "terms": "resort"
                 },
                 "leisure/running_track": {
                     "name": "Pista di atletica",
@@ -3160,6 +3225,10 @@
                 "man_made/surveillance": {
                     "name": "Sorveglianza",
                     "terms": "telecamera,vigilanza"
+                },
+                "man_made/surveillance_camera": {
+                    "name": "Telecamera di sorveglianza",
+                    "terms": "anpr,alpr,telecamera,circuito fisso,guardia,monitor,sicurezza,video,webcam,impianto,cctv,tutor"
                 },
                 "man_made/survey_point": {
                     "name": "Punto geodetico",
@@ -4048,6 +4117,10 @@
                 "tourism/apartment": {
                     "name": "Affittacamere",
                     "terms": "Affittacamere,Bed & breakfast,Appartamenti"
+                },
+                "tourism/aquarium": {
+                    "name": "Acquario",
+                    "terms": "pesci,marino,mare,acqua,acquafan"
                 },
                 "tourism/artwork": {
                     "name": "Opera d'arte",

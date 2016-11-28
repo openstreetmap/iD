@@ -213,6 +213,7 @@
             "upload_explanation": "మీరు ఎక్కించే మార్పులు ఓపెన్‌స్ట్రీట్‌మ్యాప్ డేటాను వాడే పటాలన్నింటిలోనూ కనిపిస్తాయి.",
             "save": "భద్రపరచు",
             "cancel": "రద్దుచేయి",
+            "changes": "{count} మార్పులు",
             "warnings": "హెచ్చరికలు",
             "modified": "మార్చబడింది",
             "deleted": "తొలగించబడింది",
@@ -223,6 +224,7 @@
             "truncated_list": "మార్పులు చేసినవారు {users} మరియు {count} మంది"
         },
         "infobox": {
+            "selected": "{n} ఎంచుకున్నారు",
             "geometry": "రేఖాగణితం",
             "closed": "మూసివున్న",
             "center": "కేంద్రము",
@@ -236,7 +238,8 @@
         "geometry": {
             "point": "బిందువు",
             "vertex": "శీర్షం",
-            "line": "గీత"
+            "line": "గీత",
+            "relation": "సంబంధం"
         },
         "geocoder": {
             "search": "విశ్వవ్యాప్తంగా వెతుకు",
@@ -266,6 +269,11 @@
             "unknown": "గుర్తు తెలియని",
             "feature_list": "విశేషాలు వెతుకు",
             "edit": "విశేషం మార్చు",
+            "check": {
+                "yes": "అవును",
+                "no": "కాదు"
+            },
+            "add": "చేర్చు",
             "none": "ఏవీ కాదు",
             "way": "దారి",
             "relation": "సంబంధం",
@@ -276,6 +284,38 @@
             "description": "వెనుతలపు అమరికలు",
             "none": "ఏవీ కాదు"
         },
+        "map_data": {
+            "map_features": "పటపు విశేషాలు"
+        },
+        "feature": {
+            "points": {
+                "description": "బిందువులు"
+            },
+            "traffic_roads": {
+                "tooltip": "రహదార్లు, వీధులు, మొదలైనవి."
+            },
+            "paths": {
+                "description": "దారులు",
+                "tooltip": "కాలిబాటలు, సైకిల్ తోవలు, మొదలైనవి."
+            },
+            "buildings": {
+                "description": "కట్టడాలు"
+            },
+            "boundaries": {
+                "description": "సరిహద్దులు",
+                "tooltip": "పరిపాలనా సరిహద్దులు"
+            },
+            "water": {
+                "description": "నీటి విశేషాలు",
+                "tooltip": "నదులు, చెరువులు, పల్లపు ప్రాంతాలు, మొదలైనవి."
+            },
+            "rail": {
+                "tooltip": "రైల్వేలు"
+            },
+            "others": {
+                "description": "ఇతరాలు"
+            }
+        },
         "restore": {
             "heading": "భద్రపరచని మార్పులు ఉన్నాయి",
             "restore": "పునరుద్ధరించు"
@@ -283,17 +323,26 @@
         "save": {
             "title": "భద్రపరచు",
             "no_changes": "భద్రపరచాల్సిన మార్పులేమీ లేవు.",
-            "unsaved_changes": "భద్రపరచని మార్పులు ఉన్నాయి"
+            "unsaved_changes": "భద్రపరచని మార్పులు ఉన్నాయి",
+            "conflict": {
+                "previous": "< మునుపటి",
+                "next": "తదుపరి >",
+                "keep_local": "నావి ఉంచు",
+                "keep_remote": "వాళ్ళవి వాడు",
+                "restore": "పునరుద్ధరించు"
+            }
         },
         "success": {
             "just_edited": "మీరు ఇప్పుడే OpenStreetMapను మార్చారు",
             "view_on_osm": "OSM/ఓఎస్ఎం లో వీక్షించు",
             "facebook": "ఫేస్‌బుక్‌లో పంచుకోండి",
             "twitter": "ట్విట్టర్లో పంచుకోండి",
-            "google": "గూగుల్+లో పంచుకోండి"
+            "google": "గూగుల్+లో పంచుకోండి",
+            "help_link_text": "వివరాలు"
         },
         "confirm": {
-            "okay": "సరే"
+            "okay": "సరే",
+            "cancel": "రద్దుచేయి"
         },
         "splash": {
             "walkthrough": "దర్శన మొదలుపెట్టు",

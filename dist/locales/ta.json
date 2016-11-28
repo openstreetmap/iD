@@ -371,6 +371,9 @@
                         "suburb": "புறநகர்"
                     }
                 },
+                "admin_level": {
+                    "label": "அட்மின் நிலை"
+                },
                 "aerialway": {
                     "label": "வகை"
                 },
@@ -401,6 +404,7 @@
                     "placeholder": "2, 4, 8..."
                 },
                 "aerialway/summer/access": {
+                    "label": "அனுமதி (வெயில் காலம்)",
                     "options": {
                         "both": "இரண்டும்",
                         "entry": "நுழைவு",
@@ -439,6 +443,13 @@
                 },
                 "bin": {
                     "label": "குப்பைத்தொட்டி"
+                },
+                "blood_components": {
+                    "label": "இரத்த பாகங்கள் ",
+                    "options": {
+                        "plasma": "பிளாஸ்மா",
+                        "platelets": "பிலேட்லெட்டுகள் "
+                    }
                 },
                 "board_type": {
                     "label": "வகை"
@@ -518,9 +529,14 @@
                     "label": "பிணையம்"
                 },
                 "cycleway": {
+                    "label": "ஈருருளை சந்துகள்",
                     "options": {
                         "none": {
+                            "description": "ஈருருளை இல்லா சந்துகள்",
                             "title": "எதுவுமில்லை"
+                        },
+                        "shared_lane": {
+                            "title": "பகிர்ந்த ஈருருளை சந்துகள்"
                         },
                         "track": {
                             "title": "பைக் பாதை"
@@ -538,6 +554,9 @@
                 "delivery": {
                     "label": "பட்டுவாடா"
                 },
+                "denomination": {
+                    "label": "மதிப்பு "
+                },
                 "description": {
                     "label": "விளக்கம்"
                 },
@@ -552,6 +571,7 @@
                     "options": {
                         "contact_line": "தொடர்பு வரி",
                         "no": "இல்லை",
+                        "rail": "மின்மயமாக்கப்பட்ட இரயில் ",
                         "yes": "ஆம் (குறிப்பிடப்படவில்லை)"
                     }
                 },
@@ -570,6 +590,9 @@
                 },
                 "fee": {
                     "label": "Fee"
+                },
+                "fence_type": {
+                    "label": "வகை"
                 },
                 "fire_hydrant/type": {
                     "label": "வகை",
@@ -716,6 +739,10 @@
                 "map_type": {
                     "label": "வகை"
                 },
+                "maxheight": {
+                    "label": "அதிகபட்ச உயரம் ",
+                    "placeholder": "4, 4.5, 5, 14'0\", 14'6\", 15'0\""
+                },
                 "maxspeed": {
                     "label": "வேக எல்லை",
                     "placeholder": "40, 50, 60..."
@@ -836,7 +863,8 @@
                 "piste/type": {
                     "label": "வகை",
                     "options": {
-                        "playground": "விடையாட்டு மைதானம்"
+                        "playground": "விடையாட்டு மைதானம்",
+                        "snow_park": "பனி பூங்கா "
                     }
                 },
                 "place": {
@@ -880,10 +908,17 @@
                         "no": "இல்லை",
                         "only": "மட்டும்",
                         "yes": "ஆம்"
-                    }
+                    },
+                    "placeholder": "ஆம். இல்லை. மட்டும் "
                 },
                 "service": {
                     "label": "வகை"
+                },
+                "service/bicycle": {
+                    "label": "சேவைகள்"
+                },
+                "service_rail": {
+                    "label": "சேவை வகை "
                 },
                 "shelter_type": {
                     "label": "வகை"
@@ -962,6 +997,9 @@
                 "visibility": {
                     "label": "பார்க்கூடிய நிலை"
                 },
+                "wall": {
+                    "label": "வகை"
+                },
                 "water": {
                     "label": "வகை"
                 },
@@ -994,11 +1032,20 @@
                     "name": "பில்போர்ட்",
                     "terms": "துண்டு விளம்பரங்கள் ஒட்டப்படும் பலகை"
                 },
+                "aerialway/cable_car": {
+                    "name": "கேபிள்  கார் "
+                },
                 "aeroway/aerodrome": {
                     "name": "விமானநிலையம்"
                 },
                 "aeroway/helipad": {
                     "name": "சிறு விமானம் இறங்கும் தளம்"
+                },
+                "aeroway/terminal": {
+                    "name": "விமான நிலையம்"
+                },
+                "amenity/arts_centre": {
+                    "name": "கலையரங்கம் "
                 },
                 "amenity/atm": {
                     "name": "ஏ.டி.எம்"
@@ -1006,11 +1053,20 @@
                 "amenity/bank": {
                     "name": "வங்கி"
                 },
+                "amenity/bar": {
+                    "name": "மதுபானக் கடை "
+                },
+                "amenity/bench": {
+                    "name": "விசுப்பலகை"
+                },
                 "amenity/bicycle_parking": {
                     "name": "ஈருருளை நிறுத்தகம்"
                 },
                 "amenity/bicycle_rental": {
                     "name": "சைக்கிள் வாடகை"
+                },
+                "amenity/bus_station": {
+                    "name": "பேருந்து நிலையம் "
                 },
                 "amenity/cafe": {
                     "name": "டீக்கடை"
@@ -1020,6 +1076,15 @@
                 },
                 "amenity/clock": {
                     "name": "கடிகாரம்"
+                },
+                "amenity/dentist": {
+                    "name": "பல் மருத்துவர் "
+                },
+                "amenity/doctors": {
+                    "name": "மருத்துவர் "
+                },
+                "amenity/drinking_water": {
+                    "name": "குடிநீர் "
                 },
                 "amenity/fire_station": {
                     "name": "தீயணைப்பு நிலையம்"
@@ -1045,8 +1110,14 @@
                 "amenity/place_of_worship": {
                     "name": "வழிபாட்டு இடம்"
                 },
+                "amenity/place_of_worship/christian": {
+                    "name": "தேவாலயம் "
+                },
                 "amenity/place_of_worship/muslim": {
                     "name": "தர்கா"
+                },
+                "amenity/planetarium": {
+                    "name": "கோளரங்கம் "
                 },
                 "amenity/police": {
                     "name": "காவல்"
@@ -1056,6 +1127,9 @@
                 },
                 "amenity/post_office": {
                     "name": "அஞ்சலகம்"
+                },
+                "amenity/pub": {
+                    "name": "பப் "
                 },
                 "amenity/restaurant": {
                     "name": "உணவகம்"

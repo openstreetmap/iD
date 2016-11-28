@@ -337,6 +337,7 @@
             "switch": "Revenir à cet arrière-plan",
             "custom": "Personnalisé",
             "custom_button": "Modifier le fond personnalisé",
+            "custom_prompt": "Entrez un modèle d'URL de tuile. Les jetons valides sont {zoom}, {x}, {y} pour le schéma Z/X/Y et {u} pour le schéma quadtile.",
             "fix_misalignment": "Ajuster le décalage de l'imagerie",
             "imagery_source_faq": "D'où provient cette imagerie ?",
             "reset": "réinitialiser",
@@ -430,7 +431,7 @@
             "no_changes": "Aucune modification à sauvegarder",
             "error": "Des erreurs sont survenues en tentant de sauvegarder",
             "status_code": "Le serveur a renvoyé le code de statut {code}",
-            "unknown_error_details": "S'il vous plaît, assurez-vous d'être connecté à l'internet.",
+            "unknown_error_details": "Veuillez vérifier que votre ordinateur est connecté au réseau.",
             "uploading": "Envoi des modifications vers OpenStreetMap.",
             "unsaved_changes": "Vous avez des modifications non enregistrées",
             "conflict": {
@@ -569,7 +570,7 @@
                 "title": "Navigation",
                 "drag": "La vue principale montre les données OpenStreetMap par dessus un fond de carte. Vous pouvez naviguer au sein de la vue en faisant du cliquer-glisser, ou avec les barres de navigation, comme n'importe quelle carte sur Internet. **Faites glisser la carte !**",
                 "select": "Les éléments cartographiques sont de trois types : les points, les lignes et les polygones. Chaque élément peut être sélectionné en cliquant dessus. **Cliquez sur le point pour le sélectionner.**",
-                "pane": "Lorsqu'un élément est sélectionné, l'éditeur d'éléments est affiché. L'entête nous indique que le type d'élément et le panneau principal nous montre les attributs de l'élément, tels que son nom et son adresse. **Fermez l'éditeur d'éléments en cliquant sur le {button} bouton de fermeture en haut à droite.**",
+                "pane": "Lorsqu'un élément est sélectionné, l'éditeur d'éléments est affiché. L'entête nous indique le type d'élément et le panneau principal nous montre les attributs de l'élément, tels que son nom et son adresse. **Fermez l'éditeur d'éléments en cliquant sur le {button} bouton de fermeture en haut à droite.**",
                 "search": "Vous pouvez aussi rechercher des éléments pour la vue courante, ou le monde entier. **Recherchez '{name}'**",
                 "choose": "** Choisissez {name} depuis la liste pour le selectionner. ** ",
                 "chosen": "Super ! {name} est sélectionné. **Fermer l'éditeur d'élément en cliquant sur le bouton {button}.**"
@@ -579,7 +580,7 @@
                 "add": "Les points sont utilisés pour représenter des éléments tels que des magasins, des restaurants ou des monuments. Ils indiquent une position précise, et décrivent ce qui s'y trouve. **Clickez sur le {button} bouton Point pour ajouter un nouveau point.**",
                 "place": "Le point peut être placé en cliquant sur la carte. **Cliquez sur la carte pour positionner le nouveau point sur le bâtiment.**",
                 "search": "De nombreux éléments peuvent être représentés par des points. Le point que vous venez d'ajouter est un café. \n**Cherchez '{name}'**",
-                "choose": "**Choisi Café dans la liste.**",
+                "choose": "**Choisissez Café dans la liste.**",
                 "describe": "Le point est désormais marqué comme étant un café. Nous pouvons ajouter davantage d'informations grâce à l'éditeur d'élément. **Ajoutez un nom au café.**",
                 "close": "L'éditeur d'élément enregistre automatiquement tous vos changements. Quand vous éditez une caractéristique, the bouton fermer se transforme en coche. **Cliquez sur le {button} bouton pour fermer l'éditeur d'élément.\"",
                 "reselect": "En général, les points existent déjà, mais sont incomplets ou contiennent des erreurs. Il est possible de modifier un point existant. **Cliquez pour sélectionner le point que vous venez de créer.**",
@@ -819,6 +820,19 @@
                 "building_area": {
                     "label": "Bâtiment"
                 },
+                "camera/direction": {
+                    "label": "Direction (en degrés dans le sens horaire)",
+                    "placeholder": "45, 90, 180, 270"
+                },
+                "camera/mount": {
+                    "label": "Support de caméra"
+                },
+                "camera/type": {
+                    "label": "Type de caméra",
+                    "options": {
+                        "panning": "Panoramique"
+                    }
+                },
                 "capacity": {
                     "label": "Capacité",
                     "placeholder": "50, 100, 200..."
@@ -856,6 +870,10 @@
                 },
                 "construction": {
                     "label": "Type"
+                },
+                "contact/webcam": {
+                    "label": "URL de la Webcam",
+                    "placeholder": "http://example.com/"
                 },
                 "content": {
                     "label": "Contenu"
@@ -947,7 +965,7 @@
                     "label": "Type"
                 },
                 "drive_through": {
-                    "label": "Drive-in"
+                    "label": "Service Drive"
                 },
                 "electrified": {
                     "label": "Électrification",
@@ -977,6 +995,9 @@
                 },
                 "fee": {
                     "label": "Prix"
+                },
+                "fence_type": {
+                    "label": "Type"
                 },
                 "fire_hydrant/type": {
                     "label": "Type",
@@ -1076,6 +1097,9 @@
                 "internet_access/fee": {
                     "label": "Frais d'accès à Internet"
                 },
+                "internet_access/ssid": {
+                    "label": "SSID (Nom du réseau)"
+                },
                 "kerb": {
                     "label": "Bateau de trottoir"
                 },
@@ -1155,6 +1179,10 @@
                 },
                 "map_type": {
                     "label": "Type"
+                },
+                "maxheight": {
+                    "label": "Hauteur maximum",
+                    "placeholder": "4, 4.5, 5, 14'0\", 14'6\", 15'0\""
                 },
                 "maxspeed": {
                     "label": "Vitesse maximale autorisée",
@@ -1269,6 +1297,9 @@
                 },
                 "operator": {
                     "label": "Exploitant"
+                },
+                "outdoor_seating": {
+                    "label": "Places en Terasse"
                 },
                 "par": {
                     "label": "Par",
@@ -1522,6 +1553,15 @@
                 "surface": {
                     "label": "Revêtement"
                 },
+                "surveillance": {
+                    "label": "Type de surveillance"
+                },
+                "surveillance/type": {
+                    "label": "Type de surveillance",
+                    "options": {
+                        "guard": "Gardien"
+                    }
+                },
                 "tactile_paving": {
                     "label": "Équipement de voirie podotactile"
                 },
@@ -1547,7 +1587,8 @@
                     "label": "Type"
                 },
                 "tower/construction": {
-                    "label": "Construction"
+                    "label": "Construction",
+                    "placeholder": "Aubans, Treillis, Dissimulée, …"
                 },
                 "tower/type": {
                     "label": "Type"
@@ -1597,6 +1638,9 @@
                         "house": "Jusqu'à 5m (16ft)",
                         "street": "5 à 20m (16 à 65ft)"
                     }
+                },
+                "wall": {
+                    "label": "Type"
                 },
                 "water": {
                     "label": "Type"
@@ -1822,6 +1866,9 @@
                     "name": "Espace de bureaux partagés",
                     "terms": "Espace de coworking,Lieu de coworking,Coworking,Espace de travail collaboratif"
                 },
+                "amenity/crematorium": {
+                    "name": "Crématorium"
+                },
                 "amenity/dentist": {
                     "name": "Dentiste",
                     "terms": "Dentiste, Cabinet dentaire"
@@ -1853,6 +1900,10 @@
                 "amenity/fire_station": {
                     "name": "Caserne de pompiers",
                     "terms": "Station de pompiers, Caserne de pompiers"
+                },
+                "amenity/food_court": {
+                    "name": "Zone de restauration",
+                    "terms": "Aire de restauration"
                 },
                 "amenity/fountain": {
                     "name": "Fontaine",
@@ -2591,10 +2642,12 @@
                     "terms": "Trou de golf"
                 },
                 "golf/lateral_water_hazard_area": {
-                    "name": "Obstacle d'eau latéral"
+                    "name": "Obstacle d'eau latéral",
+                    "terms": "zone d'eau latéral"
                 },
                 "golf/lateral_water_hazard_line": {
-                    "name": "Obstacle d'eau latéral"
+                    "name": "Obstacle d'eau latéral",
+                    "terms": "ligne d'eau latéral"
                 },
                 "golf/rough": {
                     "name": "Hautes herbes (golf)",
@@ -2605,10 +2658,12 @@
                     "terms": "Tertre de départ"
                 },
                 "golf/water_hazard_area": {
-                    "name": "Obstacle d'eau"
+                    "name": "Obstacle d'eau",
+                    "terms": "zone d'eau"
                 },
                 "golf/water_hazard_line": {
-                    "name": "Obstacle d'eau"
+                    "name": "Obstacle d'eau",
+                    "terms": "ligne d'eau"
                 },
                 "healthcare/blood_donation": {
                     "name": "Centre de don du sang",
@@ -2718,7 +2773,7 @@
                     "terms": "Allée"
                 },
                 "highway/service/drive-through": {
-                    "name": "Drive-in",
+                    "name": "Service Drive",
                     "terms": "service au comptoir,service au volant,point retrait"
                 },
                 "highway/service/driveway": {
@@ -2761,6 +2816,10 @@
                     "name": "Piste agricole ou forestière",
                     "terms": "route forestière,piste pare-feu, chemin d'exploitation, chemin agricole,chemin non entretenu"
                 },
+                "highway/traffic_mirror": {
+                    "name": "Miroir routier",
+                    "terms": "Miroir de sécurité"
+                },
                 "highway/traffic_signals": {
                     "name": "Feux tricolores",
                     "terms": "Feux de circulation, Feux tricolores, Feux rouges"
@@ -2778,7 +2837,8 @@
                     "terms": "Point de retournement"
                 },
                 "highway/turning_loop": {
-                    "name": "Boucle de retournement"
+                    "name": "Boucle de retournement (Irlande)",
+                    "terms": "Boucle de manœuvre (Irelande)"
                 },
                 "highway/unclassified": {
                     "name": "Route mineure ou non classifiée",
@@ -2939,6 +2999,10 @@
                     "name": "Terrain communal",
                     "terms": "Terrain communal, bien communal, bois communal, pré communal"
                 },
+                "leisure/dance": {
+                    "name": "Salle de danse",
+                    "terms": "piste de danse,salle de bal,dancing"
+                },
                 "leisure/dog_park": {
                     "name": "Parc canin",
                     "terms": "Parc canin, parc à chiens"
@@ -3038,6 +3102,10 @@
                 "leisure/playground": {
                     "name": "Jeux pour enfants",
                     "terms": "Aire de Jeu, Cour de récréation"
+                },
+                "leisure/resort": {
+                    "name": "Relaxation",
+                    "terms": "SPA,sona,détente"
                 },
                 "leisure/running_track": {
                     "name": "Piste de course à pied",
@@ -3153,6 +3221,9 @@
                 "man_made/surveillance": {
                     "name": "Caméra de surveillance",
                     "terms": "caméra, vidéo"
+                },
+                "man_made/surveillance_camera": {
+                    "name": "Caméra de surveillance"
                 },
                 "man_made/survey_point": {
                     "name": "Borne géodésique",
@@ -3502,7 +3573,8 @@
                     "terms": "Voie ferrée abandonnée"
                 },
                 "railway/crossing": {
-                    "name": "Passage à niveau (piétons)"
+                    "name": "Passage à niveau (piétons)",
+                    "terms": "Passage à niveau (chemin)"
                 },
                 "railway/disused": {
                     "name": "Voie ferrée désaffectée",
@@ -3517,7 +3589,8 @@
                     "terms": "Arrêt ferroviaire, Arrêt"
                 },
                 "railway/level_crossing": {
-                    "name": "Passage à niveau (route)"
+                    "name": "Passage à niveau (route)",
+                    "terms": "Passage à niveau (voiture)"
                 },
                 "railway/monorail": {
                     "name": "Monorail",
@@ -4037,7 +4110,12 @@
                     "terms": "Refuge de montagne, cabane"
                 },
                 "tourism/apartment": {
-                    "name": "Location de vacances"
+                    "name": "Location de vacances",
+                    "terms": "appartement d'invité,condo,condominium"
+                },
+                "tourism/aquarium": {
+                    "name": "Aquarium",
+                    "terms": "aquarium"
                 },
                 "tourism/artwork": {
                     "name": "Œuvre d'art",

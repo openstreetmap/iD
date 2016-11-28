@@ -213,6 +213,7 @@
             "localized_translation_name": "ಹೆಸರು"
         },
         "zoom_in_edit": "ಸಂಪಾದಿಸಲು ಜೂಮ್ ಇನ್ ಮಾಡಿ",
+        "login": "ಲಾಗಿನ್",
         "logout": "ಲಾಗ್ ಔಟ್",
         "loading_auth": "ಓಪನ್ ಸ್ಟ್ರೀಟ್ ಮ್ಯಾಪ್ ಗೆ ಸಂಪರ್ಕಿಸಲಾಗುತ್ತಿದೆ.....",
         "report_a_bug": "ದೋಷವನ್ನು ವಿವರಿಸಿ. ",
@@ -237,6 +238,7 @@
             "modified": "ಮಾರ್ಪಡಿಸು",
             "deleted": "ಅಳಿಸಲಾಯಿತು",
             "created": "ರಚಿಸಲಾಯಿತು",
+            "about_changeset_comments": "‍‍‍ಚೇಂಜ್‌ಸೆಟ್ ಅಭಿಪ್ರಾಯದ ಬಗ್ಗೆ",
             "google_warning": "ನೀವು ಈ ಹೇಳಿಕೆಯಲ್ಲಿ ಗೂಗಲ್ ಅನ್ನು ಉಲ್ಲೇಖಿಸಿದ್ದೀರ. ಗೂಗಲ್ ಮಾಪ್ಸ್ ನಿಂದ ಮಾಹಿತಿ ಪಡೆಯುವುದು ನಿಷೇಧಿಸಿದೆ. "
         },
         "contributors": {
@@ -306,6 +308,7 @@
             "description": "ಹಿನ್ನಲೆ ವ್ಯವಸ್ತೆಗಳು",
             "none": "‍‍ಯಾವುದೂ ಇಲ್ಲ",
             "custom": "ಅನುಸರಣ",
+            "imagery_source_faq": "‍",
             "reset": "ಮರುಹೊಂದಿಸು",
             "minimap": {
                 "description": "ಚಿಕ್ಕ ನಕ್ಷೆ"
@@ -314,7 +317,8 @@
         "map_data": {
             "title": "ನಕ್ಷೆ ಮಾಹಿತಿ.",
             "description": "ನಕ್ಷೆ ಮಾಹಿತಿ.",
-            "fill_area": "ಪ್ರದೇಶಗಳನ್ನು ತುಂಬು"
+            "fill_area": "ಪ್ರದೇಶಗಳನ್ನು ತುಂಬು",
+            "map_features": "‍ನಕ್ಷೆಯ ವೈಶಿಷ್ಟ್ಯತೆಗಳು"
         },
         "feature": {
             "points": {
@@ -428,13 +432,23 @@
         "validations": {
             "untagged_point": "ಹೆಸರುಪಟ್ಟಿಯಿಲ್ಲದ ಚುಕ್ಕೆ. ",
             "untagged_line": "ಹೆಸರುಪಟ್ಟಿಯಿಲ್ಲದ ಗೆರೆ. ",
-            "untagged_area": "ಹೆಸರುಪಟ್ಟಿಯಿಲ್ಲದ ಕ್ಷೇತ್ರ."
+            "untagged_area": "ಹೆಸರುಪಟ್ಟಿಯಿಲ್ಲದ ಕ್ಷೇತ್ರ.",
+            "deprecated_tags": "‍"
         },
         "zoom": {
             "in": "ಹಿಗ್ಗಿಸು",
             "out": "ಕುಗ್ಗಿಸು"
         },
         "full_screen": "‍ಪೂರ್ಣ ಪರದೆಗೆ ಹಿಂದಿರುಗು",
+        "mapillary_images": {
+            "title": "ಚಿತ್ರಗಳ ಹೊ‍ದಿಕೆ (Mapillary)"
+        },
+        "mapillary_signs": {
+            "title": "‍‍‍ಸಂಚಾರಿ ಚಿಹ್ನೆಯ ಹೊ‍ದಿಕೆ (Mapillary)"
+        },
+        "mapillary": {
+            "view_on_mapillary": "ಈ ಚಿತ್ರವನ್ನು Mapillary ನಲ್ಲಿ ನೋಡಿ"
+        },
         "help": {
             "title": "ಸಹಾಯ"
         },

@@ -227,6 +227,7 @@
             "localized_translation_name": "Nome"
         },
         "zoom_in_edit": "Averar pa editar",
+        "login": "aniciu de sesión",
         "logout": "zarrar sesión",
         "loading_auth": "Coneutando con OpenStreetMap...",
         "report_a_bug": "Informar d'un fallu",
@@ -238,7 +239,8 @@
         "status": {
             "error": "Nun se pue coneutar cola API.",
             "offline": "La API ta desconeutada. Intente la edición más sero.",
-            "readonly": "La API ta en mou de sólo llectura. Tendrá d'esperar pa guardar los cambios."
+            "readonly": "La API ta en mou de sólo llectura. Tendrá d'esperar pa guardar los cambios.",
+            "rateLimit": "La API tien llendaes les conexones anónimes.  Puedes igualo aniciando sesión."
         },
         "commit": {
             "title": "Guardar cambios",
@@ -294,6 +296,7 @@
         "inspector": {
             "no_documentation_combination": "Nun hai documentación disponible pa esta combinación d'etiquetes",
             "no_documentation_key": "Nun hai documentación disponible pa esta clave",
+            "documentation_redirect": "Esta documentación redirixóse a una páxina nueva",
             "show_more": "Ver más",
             "view_on_osm": "Ver en openstreetmap.org",
             "all_fields": "Tolos campos",

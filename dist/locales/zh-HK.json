@@ -227,6 +227,7 @@
             "localized_translation_name": "名稱"
         },
         "zoom_in_edit": "放大以編輯",
+        "login": "登入",
         "logout": "登出",
         "loading_auth": "正在連接 OpenStreetMap...",
         "report_a_bug": "報告錯誤",
@@ -238,7 +239,8 @@
         "status": {
             "error": "未能連接至應用程式介面。",
             "offline": "應用程式介面現在離線。請稍後再編輯。",
-            "readonly": "應用程式介面處於唯讀模式。如要儲存變更需要稍等。"
+            "readonly": "應用程式介面處於唯讀模式。如要儲存變更需要稍等。",
+            "rateLimit": "這個應用程式介面限制匿名連接，你可登入來解決這個問題。"
         },
         "commit": {
             "title": "儲存變更",
@@ -294,6 +296,7 @@
         "inspector": {
             "no_documentation_combination": "沒有這個標籤組合的相關文件",
             "no_documentation_key": "沒有這個鍵值的相關文件",
+            "documentation_redirect": "這份文件已轉至新一頁",
             "show_more": "顯示更多",
             "view_on_osm": "在 openstreetmap.org 中檢視",
             "all_fields": "所有資料",
@@ -334,6 +337,7 @@
             "switch": "切換回這個背景",
             "custom": "自訂",
             "custom_button": "編輯自訂背景",
+            "custom_prompt": "輸入區塊範本的網址。有效的標記是以 {z}, {x}, {y} 作為 Z/X/Y 標記系統 Z/X/Y scheme 和 {u} 作為四分位數標記系統 quadtile scheme。",
             "fix_misalignment": "校正對位誤差",
             "imagery_source_faq": "這個背景影像來自何處？",
             "reset": "重設",
@@ -757,10 +761,10 @@
                     }
                 },
                 "aeroway": {
-                    "label": "類"
+                    "label": "種類"
                 },
                 "amenity": {
-                    "label": "類"
+                    "label": "種類"
                 },
                 "area/highway": {
                     "label": "種類"
@@ -769,7 +773,7 @@
                     "label": "藝人"
                 },
                 "artwork_type": {
-                    "label": "類"
+                    "label": "種類"
                 },
                 "atm": {
                     "label": "提款機"
@@ -778,13 +782,16 @@
                     "label": "長椅"
                 },
                 "barrier": {
-                    "label": "類"
+                    "label": "種類"
+                },
+                "beauty": {
+                    "label": "商店種類"
                 },
                 "bench": {
                     "label": "長椅"
                 },
                 "bicycle_parking": {
-                    "label": "類"
+                    "label": "種類"
                 },
                 "bin": {
                     "label": "垃圾筒"
@@ -798,8 +805,11 @@
                         "whole": "全血"
                     }
                 },
+                "board_type": {
+                    "label": "種類"
+                },
                 "boundary": {
-                    "label": "類"
+                    "label": "種類"
                 },
                 "brand": {
                     "label": "品牌"
@@ -846,7 +856,7 @@
                     "label": "收集時間"
                 },
                 "construction": {
-                    "label": "類"
+                    "label": "種類"
                 },
                 "content": {
                     "label": "內容"
@@ -864,7 +874,7 @@
                     "label": "裁剪"
                 },
                 "crossing": {
-                    "label": "類"
+                    "label": "種類"
                 },
                 "cuisine": {
                     "label": "菜系"
@@ -957,7 +967,7 @@
                     "label": "急症室"
                 },
                 "entrance": {
-                    "label": "類"
+                    "label": "種類"
                 },
                 "except": {
                     "label": "例外"
@@ -968,6 +978,9 @@
                 },
                 "fee": {
                     "label": "費用"
+                },
+                "fence_type": {
+                    "label": "種類"
                 },
                 "fire_hydrant/type": {
                     "label": "類",
@@ -1006,7 +1019,7 @@
                     "label": "來源"
                 },
                 "generator/type": {
-                    "label": "類"
+                    "label": "種類"
                 },
                 "golf_hole": {
                     "label": "參攷",
@@ -1019,11 +1032,14 @@
                 "handrail": {
                     "label": "扶手"
                 },
+                "height": {
+                    "label": "高度 (米)"
+                },
                 "highway": {
-                    "label": "類別"
+                    "label": "種類"
                 },
                 "historic": {
-                    "label": "類別"
+                    "label": "種類"
                 },
                 "hoops": {
                     "label": "籃框數量",
@@ -1049,7 +1065,7 @@
                     "label": "室內"
                 },
                 "information": {
-                    "label": "類"
+                    "label": "種類"
                 },
                 "internet_access": {
                     "label": "用到互聯網",
@@ -1063,6 +1079,9 @@
                 },
                 "internet_access/fee": {
                     "label": "互聯網費用"
+                },
+                "internet_access/ssid": {
+                    "label": "SSID (網絡名稱)"
                 },
                 "kerb": {
                     "label": "下斜路緣"
@@ -1137,6 +1156,16 @@
                 },
                 "man_made": {
                     "label": "類別"
+                },
+                "map_size": {
+                    "label": "覆蓋範圍"
+                },
+                "map_type": {
+                    "label": "種類"
+                },
+                "maxheight": {
+                    "label": "最大高度",
+                    "placeholder": "4, 4.5, 5, 14'0\", 14'6\", 15'0\""
                 },
                 "maxspeed": {
                     "label": "速度限制",
@@ -1252,6 +1281,9 @@
                 "operator": {
                     "label": "營辦商"
                 },
+                "outdoor_seating": {
+                    "label": "室外座位"
+                },
                 "par": {
                     "label": "標準桿",
                     "placeholder": "3, 4, 5..."
@@ -1340,6 +1372,13 @@
                 },
                 "recycling_accepts": {
                     "label": "接受"
+                },
+                "recycling_type": {
+                    "label": "回收種類",
+                    "options": {
+                        "centre": "回收中心",
+                        "container": "回收箱"
+                    }
                 },
                 "ref": {
                     "label": "參考"
@@ -1518,6 +1557,9 @@
                 "tourism": {
                     "label": "類"
                 },
+                "tower/type": {
+                    "label": "種類"
+                },
                 "tracktype": {
                     "label": "路徑種類",
                     "options": {
@@ -1528,6 +1570,9 @@
                         "grade5": "柔性：土壤/砂粒/草"
                     },
                     "placeholder": "實心、接近實心、柔性..."
+                },
+                "traffic_calming": {
+                    "label": "種類"
                 },
                 "traffic_signals": {
                     "label": "訊號種類"
@@ -1560,6 +1605,9 @@
                         "house": "到 5 米 (16 呎)",
                         "street": "5 至 20米 (16 至 65呎)"
                     }
+                },
+                "wall": {
+                    "label": "種類"
                 },
                 "water": {
                     "label": "類"
@@ -2708,6 +2756,10 @@
                     "name": "無保養道路",
                     "terms": "未舖設路面的路"
                 },
+                "highway/traffic_mirror": {
+                    "name": "廣角鏡",
+                    "terms": "Traffic Mirror, 魚眼鏡"
+                },
                 "highway/traffic_signals": {
                     "name": "交通燈",
                     "terms": "Traffic Signals,交通燈,紅綠燈"
@@ -2723,6 +2775,10 @@
                 "highway/turning_circle": {
                     "name": "迴車處",
                     "terms": "Turning Circle,回轉圈,迴車場,迴車圓環,車輛迴轉處,車輛迴旋處"
+                },
+                "highway/turning_loop": {
+                    "name": "迴車處 (島式)",
+                    "terms": "Turning Loop, 迴車圈"
                 },
                 "highway/unclassified": {
                     "name": "次級/未分類道路",
@@ -3974,6 +4030,10 @@
                     "name": "高山小屋",
                     "terms": "Alpine Hut,高山小屋,高山屋仔"
                 },
+                "tourism/aquarium": {
+                    "name": "水族館",
+                    "terms": "Aquarium, 水族館"
+                },
                 "tourism/artwork": {
                     "name": "藝術品",
                     "terms": "Artwork,藝術品"
@@ -4009,6 +4069,14 @@
                 "tourism/information": {
                     "name": "旅遊資訊",
                     "terms": "Information,資訊,資訊處"
+                },
+                "tourism/information/map": {
+                    "name": "地圖",
+                    "terms": "Map, 地圖"
+                },
+                "tourism/information/office": {
+                    "name": "遊客中心",
+                    "terms": "Tourist Information Office, 旅客中心, 遊客中心, 旅客諮詢中心"
                 },
                 "tourism/motel": {
                     "name": "汽車酒店",

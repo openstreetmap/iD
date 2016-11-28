@@ -820,6 +820,21 @@
                 "building_area": {
                     "label": "Épület"
                 },
+                "camera/direction": {
+                    "label": "Irány (szög az óra járása szerint)",
+                    "placeholder": "45, 90, 180, 270"
+                },
+                "camera/mount": {
+                    "label": "Kamera tartó"
+                },
+                "camera/type": {
+                    "label": "Kamera típus",
+                    "options": {
+                        "dome": "Kupola",
+                        "fixed": "Fix",
+                        "panning": "Pásztázó"
+                    }
+                },
                 "capacity": {
                     "label": "Kapacitás",
                     "placeholder": "50, 100, 200..."
@@ -857,6 +872,10 @@
                 },
                 "construction": {
                     "label": "Típus"
+                },
+                "contact/webcam": {
+                    "label": "Webkamera URL",
+                    "placeholder": "http://example.com/"
                 },
                 "content": {
                     "label": "Tartalom"
@@ -979,6 +998,9 @@
                 "fee": {
                     "label": "Fizetős"
                 },
+                "fence_type": {
+                    "label": "Típus"
+                },
                 "fire_hydrant/type": {
                     "label": "Típus",
                     "options": {
@@ -1077,6 +1099,9 @@
                 "internet_access/fee": {
                     "label": "Internetelérés díja"
                 },
+                "internet_access/ssid": {
+                    "label": "SSID (Hálózatnév)"
+                },
                 "kerb": {
                     "label": "Járdaszegély rámpa"
                 },
@@ -1156,6 +1181,10 @@
                 },
                 "map_type": {
                     "label": "Típus"
+                },
+                "maxheight": {
+                    "label": "Max. magasság",
+                    "placeholder": "4, 4.5, 5"
                 },
                 "maxspeed": {
                     "label": "Sebességhatár",
@@ -1523,6 +1552,20 @@
                 "surface": {
                     "label": "Felület"
                 },
+                "surveillance": {
+                    "label": "Megfigyelés fajtája"
+                },
+                "surveillance/type": {
+                    "label": "Megfigyelés típusa",
+                    "options": {
+                        "ALPR": "Automatikus rendszámtábla-leolvasó",
+                        "camera": "Kamera",
+                        "guard": "Őr"
+                    }
+                },
+                "surveillance/zone": {
+                    "label": "Megfigyelt terület"
+                },
                 "tactile_paving": {
                     "label": "Taktilis útburkolati jel - vakok és gyengénlátók számára"
                 },
@@ -1599,6 +1642,9 @@
                         "street": "5 és 20 m között"
                     }
                 },
+                "wall": {
+                    "label": "Típus"
+                },
                 "water": {
                     "label": "Típus"
                 },
@@ -1610,7 +1656,7 @@
                 },
                 "website": {
                     "label": "Weboldal",
-                    "placeholder": "http://peldaoldal.hu/"
+                    "placeholder": "http://example.com/"
                 },
                 "wetland": {
                     "label": "Típus"
@@ -1823,6 +1869,10 @@
                     "name": "Közösségi munkatér",
                     "terms": "coworking,közösségi,munka"
                 },
+                "amenity/crematorium": {
+                    "name": "Krematórium",
+                    "terms": "krematórium"
+                },
                 "amenity/dentist": {
                     "name": "Fogorvos",
                     "terms": "Fogorvos, Fogász, Fogászat"
@@ -1884,7 +1934,8 @@
                     "terms": "fagyibolt, fagyis, fagylaltos, fagylaltüzlet"
                 },
                 "amenity/internet_cafe": {
-                    "name": "Internetkávézó"
+                    "name": "Internetkávézó",
+                    "terms": "internetkávézó"
                 },
                 "amenity/kindergarten": {
                     "name": "bölcsőde - óvoda",
@@ -2765,6 +2816,10 @@
                     "name": "Nem karbantartott földút",
                     "terms": "földút,nem karbantartott"
                 },
+                "highway/traffic_mirror": {
+                    "name": "Közlekedési tükör",
+                    "terms": "közlekedési tükör"
+                },
                 "highway/traffic_signals": {
                     "name": "Jelzőlámpa",
                     "terms": "Közlekedési lámpa"
@@ -2940,6 +2995,9 @@
                     "name": "Közterület",
                     "terms": "Közterület"
                 },
+                "leisure/dance": {
+                    "name": "Táncterem"
+                },
                 "leisure/dog_park": {
                     "name": "Kutyafuttató",
                     "terms": "Kutyasétáltató"
@@ -3039,6 +3097,9 @@
                 "leisure/playground": {
                     "name": "Játszótér",
                     "terms": "Játszótér"
+                },
+                "leisure/resort": {
+                    "name": "Üdülő"
                 },
                 "leisure/running_track": {
                     "name": "Futópálya",
@@ -3154,6 +3215,9 @@
                 "man_made/surveillance": {
                     "name": "Videomegfigyelő",
                     "terms": "térfigyelő kamera, biztonsági kamera"
+                },
+                "man_made/surveillance_camera": {
+                    "name": "Megfigyelő kamera"
                 },
                 "man_made/survey_point": {
                     "name": "Földmérési alappont",
@@ -4042,13 +4106,17 @@
                 "tourism/apartment": {
                     "name": "Apartman"
                 },
+                "tourism/aquarium": {
+                    "name": "Akvárium",
+                    "terms": "akvárium"
+                },
                 "tourism/artwork": {
                     "name": "Műalkotás",
                     "terms": "Művészeti alkotás, szobor, fafaragás, "
                 },
                 "tourism/attraction": {
                     "name": "Turistalátványosság",
-                    "terms": "Túrista látványosság"
+                    "terms": "Turista látványosság"
                 },
                 "tourism/camp_site": {
                     "name": "Tábor",
@@ -4083,16 +4151,20 @@
                     "terms": "Infomáció"
                 },
                 "tourism/information/board": {
-                    "name": "Információs tábla"
+                    "name": "Információs tábla",
+                    "terms": "információs tábla"
                 },
                 "tourism/information/guidepost": {
-                    "name": "Irányjelző"
+                    "name": "Irányjelző",
+                    "terms": "irányjelző"
                 },
                 "tourism/information/map": {
-                    "name": "Térkép"
+                    "name": "Térkép",
+                    "terms": "térkép"
                 },
                 "tourism/information/office": {
-                    "name": "Turistainformációs iroda"
+                    "name": "Turistainformációs iroda",
+                    "terms": "turista információs iroda, turistairoda"
                 },
                 "tourism/motel": {
                     "name": "Motel",

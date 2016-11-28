@@ -820,6 +820,21 @@
                 "building_area": {
                     "label": "Tòa nhà"
                 },
+                "camera/direction": {
+                    "label": "Hướng (Độ theo Chiều Kim Đồng hồ)",
+                    "placeholder": "45, 90, 180, 270"
+                },
+                "camera/mount": {
+                    "label": "Hỗ trợ Camera"
+                },
+                "camera/type": {
+                    "label": "Loại Camera",
+                    "options": {
+                        "dome": "Vòm",
+                        "fixed": "Cố định",
+                        "panning": "Cuộn"
+                    }
+                },
                 "capacity": {
                     "label": "Sức chứa",
                     "placeholder": "50, 100, 200…"
@@ -857,6 +872,10 @@
                 },
                 "construction": {
                     "label": "Kiểu"
+                },
+                "contact/webcam": {
+                    "label": "URL Webcam",
+                    "placeholder": "http://example.com/"
                 },
                 "content": {
                     "label": "Đồ Chứa đựng"
@@ -979,6 +998,9 @@
                 "fee": {
                     "label": "Phí"
                 },
+                "fence_type": {
+                    "label": "Kiểu"
+                },
                 "fire_hydrant/type": {
                     "label": "Kiểu",
                     "options": {
@@ -1077,6 +1099,9 @@
                 "internet_access/fee": {
                     "label": "Phí Truy cập Internet"
                 },
+                "internet_access/ssid": {
+                    "label": "SSID (Tên Mạng)"
+                },
                 "kerb": {
                     "label": "Bờ Lề đường"
                 },
@@ -1156,6 +1181,10 @@
                 },
                 "map_type": {
                     "label": "Kiểu"
+                },
+                "maxheight": {
+                    "label": "Chiều cao Tối đa",
+                    "placeholder": "4, 4.5, 5, 14'0\", 14'6\", 15'0\""
                 },
                 "maxspeed": {
                     "label": "Tốc độ Tối đa",
@@ -1270,6 +1299,9 @@
                 },
                 "operator": {
                     "label": "Cơ quan Chủ quản"
+                },
+                "outdoor_seating": {
+                    "label": "Ngồi ở Ngoài"
                 },
                 "par": {
                     "label": "Điểm chuẩn",
@@ -1523,6 +1555,20 @@
                 "surface": {
                     "label": "Mặt"
                 },
+                "surveillance": {
+                    "label": "Vị trí Quan sát"
+                },
+                "surveillance/type": {
+                    "label": "Chế độ Quan sát",
+                    "options": {
+                        "ALPR": "Hệ thống Nhận dạng Bảng số Xe Tự động",
+                        "camera": "Camera",
+                        "guard": "Nhân viên"
+                    }
+                },
+                "surveillance/zone": {
+                    "label": "Phạm vi Quan sát"
+                },
                 "tactile_paving": {
                     "label": "Gạch dành cho Người Khiếm thị"
                 },
@@ -1599,6 +1645,9 @@
                         "house": "Tới 5 m (16 ft)",
                         "street": "5 đến 20 m (16 đến 65 ft)"
                     }
+                },
+                "wall": {
+                    "label": "Kiểu"
                 },
                 "water": {
                     "label": "Loại"
@@ -1824,6 +1873,10 @@
                     "name": "Văn phòng Làm việc Chung",
                     "terms": "văn phòng làm việc chung, không gian làm việc chung, van phong lam viec chung, khong gian lam viec chung"
                 },
+                "amenity/crematorium": {
+                    "name": "Lò Thiêu",
+                    "terms": "lò thiêu, lò hỏa táng, lò hoả táng, lo thieu, lo hoa tang"
+                },
                 "amenity/dentist": {
                     "name": "Nha sĩ",
                     "terms": "văn phòng nha sĩ, văn phòng nha sỹ, văn phòng bác sĩ nha khoa, văn phòng bác sỹ nha khoa, văn phòng chữa răng, van phong nha si, van phong nha sy, van phong bac si nha khoa, van phong bac sy nha khoa, van phong chua rang"
@@ -1855,6 +1908,10 @@
                 "amenity/fire_station": {
                     "name": "Trạm Cứu hỏa",
                     "terms": "trạm cứu hỏa, cứu hỏa, trạm cứu hoả, cứu hoả, trạm chữa cháy, chữa cháy, tram cuu hoa, cuu hoa, tram chua chay, chua chay"
+                },
+                "amenity/food_court": {
+                    "name": "Trung tâm Ẩm thực",
+                    "terms": "trung tâm ẩm thực, khu ẩm thực, phố ẩm thực, nhà hàng ăn nhanh, quán ăn nhanh, trung tam am thuc, khu am thuc, pho am thuc, nha hang an nhanh, quan an nhanh"
                 },
                 "amenity/fountain": {
                     "name": "Vòi nước",
@@ -2661,7 +2718,7 @@
                 },
                 "highway/mini_roundabout": {
                     "name": "Bùng binh Nhỏ",
-                    "terms": "bùng binh nhỏ, đường vòng nhỏ, bung binh nho, duong vong nho"
+                    "terms": "bùng binh nhỏ, đường vòng nhỏ, vòng xuyến nhỏ, bung binh nho, duong vong nho, vong xuyen nho"
                 },
                 "highway/motorway": {
                     "name": "Đường Cao tốc",
@@ -2766,6 +2823,10 @@
                 "highway/track": {
                     "name": "Đường gom",
                     "terms": "đường gom, đường mòn, đường nông thôn, đường lâm nghiệp, đường bỏ hoang, duong gom, duong mon, duong nong thon, duong lam nghiep, duong bo hoang"
+                },
+                "highway/traffic_mirror": {
+                    "name": "Gương Giao thông",
+                    "terms": "gương giao thông, guong giao thong"
                 },
                 "highway/traffic_signals": {
                     "name": "Đèn Giao thông",
@@ -2946,6 +3007,10 @@
                     "name": "Đất công",
                     "terms": "đất công, mảnh đất công, đất công cộng, dat cong, manh dat cong, dat cong cong"
                 },
+                "leisure/dance": {
+                    "name": "Phòng Khiêu vũ",
+                    "terms": "phòng khiêu vũ, phòng nhảy, phong khieu vu, phong nhay"
+                },
                 "leisure/dog_park": {
                     "name": "Công viên dành cho Chó",
                     "terms": "công viên chó, công viên cho chó, công viên dành cho chó, công viên chó chạy nhảy, cong vien cho, cong vien cho cho, cong vien danh cho cho, cong vien cho chay nhay"
@@ -3045,6 +3110,10 @@
                 "leisure/playground": {
                     "name": "Sân chơi",
                     "terms": "sân chơi, khu vui chơi, khu vui chơi trẻ em, đồ chơi, công viên trẻ em, cầu tuột, đu, xích đu, thang leo, san choi, khu vui choi, khu vui choi tre em, do choi, cong vien tre em, cau tuot, du, xich du, thang leo"
+                },
+                "leisure/resort": {
+                    "name": "Khu Nghỉ dưỡng",
+                    "terms": "khu nghỉ dưỡng, khu nghỉ ngơi, khu nghỉ hè, resort, khu nghi duong, khu nghi ngoi, khu nghi he"
                 },
                 "leisure/running_track": {
                     "name": "Đường Chạy",
@@ -3160,6 +3229,10 @@
                 "man_made/surveillance": {
                     "name": "Camera Giám sát",
                     "terms": "camera giám sát, máy ảnh giám sát, giám sát, camera giam sat, may anh giam sat, giam sat"
+                },
+                "man_made/surveillance_camera": {
+                    "name": "Camera Quan sát",
+                    "terms": "camera quan sát, camêra quan sát, máy ảnh quan sát, camera giám sát, camêra giám sát, máy ảnh giám sát, camera an ninh, camêra an ninh, máy ảnh an ninh, cctv, camera quan sat, may anh quan sat, camera giam sat, may anh giam sat, camera an ninh, may anh an ninh"
                 },
                 "man_made/survey_point": {
                     "name": "Điểm Khảo sát",
@@ -4048,6 +4121,10 @@
                 "tourism/apartment": {
                     "name": "Khu chung cư Nghỉ dưỡng",
                     "terms": "khu chung cư nghỉ dưỡng, khu chung cư nghỉ mát, khu chung cu nghi duong, khu chung cu nghi mat"
+                },
+                "tourism/aquarium": {
+                    "name": "Thủy cung",
+                    "terms": "thủy cung, thuỷ cung, vườn thủy cung, vườn thuỷ cung, công viên thủy sinh, công viên thuỷ sinh, vườn thủy sinh, vườn thuỷ sinh, công viên cá, công viên hải dương học, thuy cung, vuon thuy cung, cong vien thuy sinh, vuon thuy sinh, cong vien ca, cong vien hai duong hoc"
                 },
                 "tourism/artwork": {
                     "name": "Nghệ phẩm",

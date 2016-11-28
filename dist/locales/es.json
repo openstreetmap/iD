@@ -979,6 +979,9 @@
                 "fee": {
                     "label": "Tarifado"
                 },
+                "fence_type": {
+                    "label": "Tipo"
+                },
                 "fire_hydrant/type": {
                     "label": "Tipo",
                     "options": {
@@ -1077,6 +1080,9 @@
                 "internet_access/fee": {
                     "label": "Pago por acceso a Internet"
                 },
+                "internet_access/ssid": {
+                    "label": "SSID (nombre de red)"
+                },
                 "kerb": {
                     "label": "Rampa de bordillo/cordón"
                 },
@@ -1152,10 +1158,14 @@
                     "label": "Tipo"
                 },
                 "map_size": {
-                    "label": "Covertura"
+                    "label": "Cobertura"
                 },
                 "map_type": {
                     "label": "Tipo"
+                },
+                "maxheight": {
+                    "label": "Altura máxima",
+                    "placeholder": "4, 4.5, 5, 14'0\", 14'6\", 15'0\""
                 },
                 "maxspeed": {
                     "label": "Límite de velocidad",
@@ -1270,6 +1280,9 @@
                 },
                 "operator": {
                     "label": "Operador"
+                },
+                "outdoor_seating": {
+                    "label": "Asientos al aire libre"
                 },
                 "par": {
                     "label": "Par",
@@ -1599,6 +1612,9 @@
                         "house": "Hasta 5 m (16 ft)",
                         "street": "5 a 20 m (16 a 65 ft)"
                     }
+                },
+                "wall": {
+                    "label": "Tipo"
                 },
                 "water": {
                     "label": "Tipo"
@@ -2767,6 +2783,10 @@
                     "name": "Pista o camino rural",
                     "terms": "camino, senda, sendero, calle, vía, pista, rural, forestal, agrícola, campo, sin mantenimiento, offroad, jeep, doble tracción, tractor, 4x4, atv, cuadrimotor, quadratrack, con huella"
                 },
+                "highway/traffic_mirror": {
+                    "name": "Espejo de tráfico",
+                    "terms": "espejo, convexo, cóncavo, curvo, redondo, circular, esférico, espejo de esquina, espejo de visibilidad, espejo de intersección"
+                },
                 "highway/traffic_signals": {
                     "name": "Semáforos",
                     "terms": "semáforo, señal de tráfico, luces de tráfico, luces de señalización, luces de parado, señal, tráfico, tránsito, control"
@@ -2946,6 +2966,10 @@
                     "name": "Tierras comunes -Reino Unido-",
                     "terms": "tierras comunales, terreno comunal, comunal, tierras comunes"
                 },
+                "leisure/dance": {
+                    "name": "Salón de baile",
+                    "terms": "sala de baile, pista de baile, baile de salón, bolero, conga, cha-cha-chá, fox-trot, mambo, son cubano, meregue, milonga, pasodoble, polka, rock and roll, rumba, swing, tango, vals, jive"
+                },
                 "leisure/dog_park": {
                     "name": "Parque canino",
                     "terms": "perro, can, parque de perros"
@@ -3045,6 +3069,10 @@
                 "leisure/playground": {
                     "name": "Zona de juegos",
                     "terms": "parque infantil, área de juegos, zona de juegos, juegos, infantil, niños, niñas, plaza, parque"
+                },
+                "leisure/resort": {
+                    "name": "Complejo turístico",
+                    "terms": "resort, estación turística, resort de destino, estación de esquí, balneario, estación de todo incluido, turismo"
                 },
                 "leisure/running_track": {
                     "name": "Pista de atletismo",
@@ -4049,6 +4077,10 @@
                     "name": "Apartamento de huéspedes",
                     "terms": "apartamento, piso, condominio, bloque, huéspedes, invitados"
                 },
+                "tourism/aquarium": {
+                    "name": "Acuario",
+                    "terms": "acuario público, peces, océano, agua"
+                },
                 "tourism/artwork": {
                     "name": "Obra de arte",
                     "terms": "obra de arte, pieza de arte, pintura, escultura, mural, pintada, estatua"
@@ -4091,19 +4123,19 @@
                 },
                 "tourism/information/board": {
                     "name": "Tablero de información",
-                    "terms": "Tablero de información, información turística, cartel"
+                    "terms": "tabla, tablón, cuadro, cartel, información, informativo, información turística"
                 },
                 "tourism/information/guidepost": {
                     "name": "Poste guía",
-                    "terms": "Poste guía, columna, carteles, información"
+                    "terms": "poste indicador, cartel, información, dirección, indicación"
                 },
                 "tourism/information/map": {
                     "name": "Mapa",
-                    "terms": "Mapa, mapa turístico, información"
+                    "terms": "plano, croquis, cartel, información, indicación"
                 },
                 "tourism/information/office": {
                     "name": "Oficina de información turística",
-                    "terms": "Oficina de Información turística, Información turística, Información, Guía, turismo"
+                    "terms": "oficina, guía, caseta, puesto, turismo, información turística, información turismo, información cultural, actividad turística, actividad de recreación, actividad de ocio"
                 },
                 "tourism/motel": {
                     "name": "Motel",

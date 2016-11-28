@@ -227,6 +227,7 @@
             "localized_translation_name": "Nazwa"
         },
         "zoom_in_edit": "Przybliż, aby edytować",
+        "login": "login",
         "logout": "wyloguj",
         "loading_auth": "Łączenie z OpenStreetMap...",
         "report_a_bug": "Zgłoś błąd",
@@ -238,7 +239,8 @@
         "status": {
             "error": "Nie można nawiązać połączenia z API.",
             "offline": "API jest offline. Proszę spróbować edytować później.",
-            "readonly": "API jest w trybie tylko do odczytu. Musisz poczekać, żeby zapisać swoje zmiany."
+            "readonly": "API jest w trybie tylko do odczytu. Musisz poczekać, żeby zapisać swoje zmiany.",
+            "rateLimit": "API ogranicza anonimowe połączenia. Możesz je ominąć logując się."
         },
         "commit": {
             "title": "Zapisz zmiany",
@@ -335,6 +337,7 @@
             "switch": "Wróć do tego podkładu",
             "custom": "Własne",
             "custom_button": "Edycja własnego podkładu",
+            "custom_prompt": "Podaj adres URL kafelka mapy. Poprawne adresy posiadają {zoom}, {x}, {y}  dla współrzędnych Z/X/Y oraz {u} dla każdego kwartyla mapy.",
             "fix_misalignment": "Przesunięcie podkładu",
             "imagery_source_faq": "Skąd pochodzi ta warstwa?",
             "reset": "Przywraca ustawienia",
@@ -976,6 +979,9 @@
                 "fee": {
                     "label": "Opłata"
                 },
+                "fence_type": {
+                    "label": "Rodzaj"
+                },
                 "fire_hydrant/type": {
                     "label": "Typ",
                     "options": {
@@ -1074,6 +1080,9 @@
                 "internet_access/fee": {
                     "label": "Płatny dostęp do Internetu"
                 },
+                "internet_access/ssid": {
+                    "label": "SSID (Nazwa Sieci)"
+                },
                 "kerb": {
                     "label": "Krawężnik"
                 },
@@ -1153,6 +1162,10 @@
                 },
                 "map_type": {
                     "label": "Typ"
+                },
+                "maxheight": {
+                    "label": "Maksymalna Wysokość",
+                    "placeholder": "4, 4.5, 5, 14'0\", 14'6\", 15'0\""
                 },
                 "maxspeed": {
                     "label": "Ograniczenie prędkości",
@@ -1267,6 +1280,9 @@
                 },
                 "operator": {
                     "label": "Operator"
+                },
+                "outdoor_seating": {
+                    "label": "Ogródek Restauracyjny"
                 },
                 "par": {
                     "label": "Par",
@@ -1391,8 +1407,14 @@
                 "sac_scale": {
                     "label": "Stopień trudności turystyki pieszej",
                     "options": {
-                        "hiking": "T1: Wędrówki"
-                    }
+                        "alpine_hiking": "T4: Wspinaczka Alpejska",
+                        "demanding_alpine_hiking": "T5: Wymagająca Wspinaczka Alpejska",
+                        "demanding_mountain_hiking": "T3: Wymagająca Wspinaczka Górska",
+                        "difficult_alpine_hiking": "T6: Trudna Wspinaczka Alpejska",
+                        "hiking": "T1: Wędrówki",
+                        "mountain_hiking": "T2: Wspinaczka Górska"
+                    },
+                    "placeholder": "Wspinaczka Górska, Wspinaczka Alpejska..."
                 },
                 "sanitary_dump_station": {
                     "label": "Miejsce opróżniania toalety"
@@ -1590,6 +1612,9 @@
                         "house": "Do 5m",
                         "street": "Od 5 do 20m"
                     }
+                },
+                "wall": {
+                    "label": "Typ"
                 },
                 "water": {
                     "label": "Typ"
@@ -2579,6 +2604,12 @@
                     "name": "dołek na polu golfowym ",
                     "terms": "dołek golfowy"
                 },
+                "golf/lateral_water_hazard_area": {
+                    "name": "Przeszkoda Wodna Boczna"
+                },
+                "golf/lateral_water_hazard_line": {
+                    "name": "Przeszkoda Wodna Boczna"
+                },
                 "golf/rough": {
                     "name": "rough",
                     "terms": "rough"
@@ -2586,6 +2617,12 @@
                 "golf/tee": {
                     "name": "rzutnia",
                     "terms": "tee box"
+                },
+                "golf/water_hazard_area": {
+                    "name": "Przeszkoda Wodna"
+                },
+                "golf/water_hazard_line": {
+                    "name": "Przeszkoda Wodna"
                 },
                 "healthcare/blood_donation": {
                     "name": "Centrum Dawców Krwi",
@@ -2738,6 +2775,10 @@
                     "name": "Droga polna lub leśna",
                     "terms": "trakt leśny"
                 },
+                "highway/traffic_mirror": {
+                    "name": "Lustro drogowe",
+                    "terms": "lustro przy ulicy"
+                },
                 "highway/traffic_signals": {
                     "name": "Sygnalizacja świetlna",
                     "terms": "światła,sygnalizacja świetlna,sygnalizator"
@@ -2753,6 +2794,9 @@
                 "highway/turning_circle": {
                     "name": "Miejsce do zawracania",
                     "terms": "miejsce,zawracania,zawracanie"
+                },
+                "highway/turning_loop": {
+                    "name": "Węzeł Do Zawracania (Z Wyspą)"
                 },
                 "highway/unclassified": {
                     "name": "Droga czwartorzędna",
@@ -2913,6 +2957,9 @@
                     "name": "Teren rekreacyjny ogólnodostępny",
                     "terms": "wspólnota gruntowa"
                 },
+                "leisure/dance": {
+                    "name": "Sala Taneczna"
+                },
                 "leisure/dog_park": {
                     "name": "Park dla psów",
                     "terms": "psi park"
@@ -3011,6 +3058,9 @@
                 "leisure/playground": {
                     "name": "Plac zabaw",
                     "terms": "plac zabaw"
+                },
+                "leisure/resort": {
+                    "name": "Resort"
                 },
                 "leisure/running_track": {
                     "name": "Bieżnia",
@@ -4007,6 +4057,10 @@
                     "name": "Chata górska",
                     "terms": "chata alpejska"
                 },
+                "tourism/aquarium": {
+                    "name": "Akwarium",
+                    "terms": "akwarium"
+                },
                 "tourism/artwork": {
                     "name": "Rzeźba",
                     "terms": "dzieło sztuki"
@@ -4047,9 +4101,17 @@
                     "name": "Tablica Informacyjna",
                     "terms": "informacja, obwieszczenia"
                 },
+                "tourism/information/guidepost": {
+                    "name": "Drogowskaz",
+                    "terms": "drogowskaz"
+                },
                 "tourism/information/map": {
                     "name": "Mapa",
                     "terms": "plan, mapa, "
+                },
+                "tourism/information/office": {
+                    "name": "Informacja Turystyczna",
+                    "terms": "informacja turystyka, turystyka"
                 },
                 "tourism/motel": {
                     "name": "Motel",
@@ -4078,6 +4140,10 @@
                 "traffic_calming/bump": {
                     "name": "Próg zwalniający",
                     "terms": "próg zwalniający"
+                },
+                "traffic_calming/chicane": {
+                    "name": "Szykana drogowa",
+                    "terms": "Szykany"
                 },
                 "traffic_calming/cushion": {
                     "name": "Poduszka",
