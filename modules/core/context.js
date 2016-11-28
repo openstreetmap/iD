@@ -307,7 +307,7 @@ export function coreContext() {
     };
 
     context.loadLocale = function(callback) {
-        if (locale && locale !== 'en' && dataLocales.indexOf(locale) !== -1) {
+        if (locale && locale !== 'en' && dataLocales.hasOwnProperty(locale)) {
             localePath = localePath || context.asset('locales/' + locale + '.json');
             d3.json(localePath, function(err, result) {
                 if (!err) {
@@ -351,7 +351,7 @@ export function coreContext() {
     context.projection = geoRawMercator();
 
     locale = utilDetect().locale;
-    if (locale && dataLocales.indexOf(locale) === -1) {
+    if (locale && !dataLocales.hasOwnProperty(locale)) {
         locale = locale.split('-')[0];
     }
 

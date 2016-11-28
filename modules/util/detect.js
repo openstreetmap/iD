@@ -1,4 +1,5 @@
 import { currentLocale, setTextDirection } from './locale';
+import { dataLocales } from '../../data/index';
 import { utilStringQs } from './index';
 
 var detected;
@@ -70,7 +71,8 @@ export function utilDetect(force) {
 
     // detect text direction
     var q = utilStringQs(window.location.hash.substring(1));
-    if (['ar', 'fa', 'iw', 'he', 'dv'].indexOf(detected.locale.split('-')[0]) > -1 || q.hasOwnProperty('rtl')) {
+    var lang = dataLocales[detected.locale];
+    if ((lang && lang.rtl) || q.hasOwnProperty('rtl')) {
         detected.textDirection = 'rtl';
     } else {
         detected.textDirection = 'ltr';
