@@ -1,15 +1,34 @@
 /* eslint-disable no-console */
 
-var _ = require('lodash');
-var fs = require('fs');
-var path = require('path');
-var glob = require('glob');
-var YAML = require('js-yaml');
-var jsonschema = require('jsonschema');
+const _ = require('lodash');
+const fs = require('fs');
+const glob = require('glob');
+const jsonschema = require('jsonschema');
+const path = require('path');
+const shell = require('shelljs');
+const YAML = require('js-yaml');
 
-var fieldSchema = require('./data/presets/schema/field.json');
-var presetSchema = require('./data/presets/schema/preset.json');
-var suggestions = require('name-suggestion-index/name-suggestions.json');
+const fieldSchema = require('./data/presets/schema/field.json');
+const presetSchema = require('./data/presets/schema/preset.json');
+const suggestions = require('name-suggestion-index/name-suggestions.json');
+
+
+// Create symlinks if necessary..  { 'target': 'source' }
+const symlinks = {
+    'land.html': 'dist/land.html',
+    'img': 'dist/img',
+    'css/img': '../dist/img',
+    'test/css': '../css',
+    'test/img': '../dist/img'
+};
+
+for (const target of Object.keys(symlinks)) {
+    if (!shell.test('-L', target)) {
+        console.log(`Creating symlink:  ${target} -> ${symlinks[target]}`);
+        shell.ln('-sf', symlinks[target], target);
+    }
+}
+
 
 // Translation strings
 var tstrings = {
@@ -20,12 +39,14 @@ var tstrings = {
 
 
 // Start clean
-unlink('data/presets/categories.json');
-unlink('data/presets/fields.json');
-unlink('data/presets/presets.json');
-unlink('data/presets.yaml');
-unlink('data/taginfo.json');
-unlink('dist/locales/en.json');
+shell.rm('-f', [
+    'data/presets/categories.json',
+    'data/presets/fields.json',
+    'data/presets/presets.json',
+    'data/presets.yaml',
+    'data/taginfo.json',
+    'dist/locales/en.json'
+]);
 
 var categories = generateCategories();
 var fields = generateFields();
@@ -53,10 +74,6 @@ fs.writeFileSync('dist/locales/en.json', JSON.stringify(en, null, 4));
 
 process.exit();
 
-
-function unlink(f) {
-    try { fs.unlinkSync(f); } catch (e) { /* noop */ }
-}
 
 function read(f) {
     return JSON.parse(fs.readFileSync(f, 'utf8'));
