@@ -4763,8 +4763,7 @@
                 "network",
                 "operator",
                 "bench",
-                "shelter",
-                "covered"
+                "shelter"
             ],
             "geometry": [
                 "point",
