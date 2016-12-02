@@ -41,6 +41,9 @@ Come on in, the water's lovely. More help? Ping `jfire` or `bhousel` on:
 
 ## Installation
 
+Note: Windows users should run these steps in a shell started with "Run as administrator".
+This is only necessary the first time so that the build process can create symbolic links.
+
 To run the current development version of iD on your own computer:
 
 1. Create a local `git clone` of the project, then `cd` into the project folder
