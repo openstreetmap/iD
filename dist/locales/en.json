@@ -726,12 +726,12 @@
                         "district!vn": "Arrondissement/Town/District",
                         "city!vn": "City/Town",
                         "province!jp": "Prefecture",
-                        "city!jp": "Municipality (incl. Tokyo Special Wards)",
-                        "suburb!jp": "Ward (excl. Tokyo Special Wards)",
-                        "quarter!jp": "Ōaza/Machi (not Municipality)",
+                        "city!jp": "City/Town/Village/Tokyo Special Ward",
+                        "suburb!jp": "Ward",
+                        "quarter!jp": "Ōaza/Machi",
                         "neighbourhood!jp": "Chōme/Aza/Koaza",
-                        "block_number!jp": "Block Number (Ban/Banchi)",
-                        "housenumber!jp": "Building Number/Lot Number (with extensions)"
+                        "block_number!jp": "Block No.",
+                        "housenumber!jp": "Building No./Lot No."
                     }
                 },
                 "admin_level": {

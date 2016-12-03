@@ -82,9 +82,9 @@ en:
         label: Address
         placeholders:
           block_number: Block Number
-          block_number!jp: Block Number (Ban/Banchi)
+          block_number!jp: Block No.
           city: City
-          city!jp: Municipality (incl. Tokyo Special Wards)
+          city!jp: City/Town/Village/Tokyo Special Ward
           city!vn: City/Town
           conscriptionnumber: '123'
           country: Country
@@ -94,7 +94,7 @@ en:
           hamlet: Hamlet
           housename: Housename
           housenumber: '123'
-          housenumber!jp: Building Number/Lot Number (with extensions)
+          housenumber!jp: Building No./Lot No.
           neighbourhood: Neighbourhood
           neighbourhood!jp: Chōme/Aza/Koaza
           place: Place
@@ -103,13 +103,13 @@ en:
           province: Province
           province!jp: Prefecture
           quarter: Quarter
-          quarter!jp: Ōaza/Machi (not Municipality)
+          quarter!jp: Ōaza/Machi
           state: State
           street: Street
           subdistrict: Subdistrict
           subdistrict!vn: Ward/Commune/Townlet
           suburb: Suburb
-          suburb!jp: Ward (excl. Tokyo Special Wards)
+          suburb!jp: Ward
       admin_level:
         # admin_level=*
         label: Admin Level
