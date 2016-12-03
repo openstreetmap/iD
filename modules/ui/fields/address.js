@@ -130,11 +130,12 @@ export function uiFieldAddress(field, context) {
             return a && a.countryCodes && _.includes(a.countryCodes, countryCode);
         }) || _.first(dataAddressFormats);
 
-        //Specific tags with custom placeholders. Proporty HAS to be a country code, its value has to be an array with
-        var customPlaceholders = {us:["postcode"],
-        jp:["province", "city", "suburb", "quarter", "neighbourhood", "block_number", "housenumber"],
-        vn:["subdistrict", "district", "city"]
-        }
+        // Country specific addr:* placeholders.
+        var customPlaceholders = {
+          us: ["postcode"],
+          jp: ["province", "city", "suburb", "quarter", "neighbourhood", "block_number", "housenumber"],
+          vn: ["subdistrict", "district", "city"]
+        };
 
         function row(r) {
             // Normalize widths.
@@ -149,6 +150,7 @@ export function uiFieldAddress(field, context) {
                 };
             });
         }
+
         wrap.selectAll('div')
             .data(addressFormat.format)
             .enter()
@@ -163,7 +165,6 @@ export function uiFieldAddress(field, context) {
               var countryInserter = ""
               if (customPlaceholders[countryCode].indexOf(d.id) != -1) { countryInserter = "!" + countryCode; }
               return field.t('placeholders.' + d.id + countryInserter); })
-            // d.id = * in addr:*
             .attr('class', function (d) { return 'addr-' + d.id; })
             .style('width', function (d) { return d.width * 100 + '%'; });
 
