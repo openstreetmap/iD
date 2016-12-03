@@ -38,12 +38,23 @@
           "neighbourhood": "Neighbourhood",
           "place": "Place",
           "postcode": "Postcode",
+          "postcode!us": "ZIP Code",
           "province": "Province",
           "quarter": "Quarter",
           "state": "State",
           "street": "Street",
           "subdistrict": "Subdistrict",
-          "suburb": "Suburb"
+          "suburb": "Suburb",
+          "subdistrict!vn": "Ward/Commune/Townlet",
+          "district!vn": "Arrondissement/Town/District",
+          "city!vn": "City/Town",
+          "province!jp": "Prefecture",
+          "city!jp": "Municipality (incl. Tokyo Special Wards)",
+          "suburb!jp": "Ward (excl. Tokyo Special Wards)",
+          "quarter!jp": "Ōaza/Machi (not Municipality)",
+          "neighbourhood!jp": "Chōme/Aza/Koaza",
+          "block_number!jp": "Block Number (Ban/Banchi)",
+          "housenumber!jp": "Building Number/Lot Number (with extensions)"
         }
     }
 }
