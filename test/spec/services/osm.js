@@ -445,4 +445,58 @@ describe('iD.serviceOsm', function () {
             expect(connection.changesetTags('2.0.0', '', [])).not.to.have.property('comment');
         });
     });
+
+    describe('API capabilities', function() {
+        var server,
+            capabilitiesXML = '<?xml version="1.0" encoding="UTF-8"?><osm>' +
+            '<api>' +
+            '<version minimum="0.6" maximum="0.6"/>' +
+            '<area maximum="0.25"/>' +
+            '<tracepoints per_page="5000"/>' +
+            '<waynodes maximum="2000"/>' +
+            '<changesets maximum_elements="50000"/>' +
+            '<timeout seconds="300"/>' +
+            '<status database="online" api="online" gpx="online"/>' +
+            '</api>' +
+            '<policy><imagery><blacklist regex=".*\.google(apis)?\..*/(vt|kh)[\?/].*([xyz]=.*){3}.*"/></imagery></policy>' +
+            '</osm>';
+
+
+        beforeEach(function() {
+            server = sinon.fakeServer.create();
+            // connection.reset();
+        });
+
+        afterEach(function() {
+            server.restore();
+        });
+
+        describe('#status', function() {
+            it('gets API status', function(done) {
+                connection.status(function(err, val) {
+                    expect(val).to.eql('online');
+                    done();
+                });
+
+                server.respondWith('GET', 'http://www.openstreetmap.org/api/capabilities',
+                    [200, { 'Content-Type': 'text/xml' }, capabilitiesXML]);
+                server.respond();
+            });
+        });
+
+        describe('#imageryBlacklists', function() {
+            it('gets imagery blacklists', function(done) {
+                connection.imageryBlacklists(function(err, val) {
+                    expect(val).to.eql(['.*\.google(apis)?\..*/(vt|kh)[\?/].*([xyz]=.*){3}.*']);
+                    done();
+                });
+
+                server.respondWith('GET', 'http://www.openstreetmap.org/api/capabilities',
+                    [200, { 'Content-Type': 'text/xml' }, capabilitiesXML]);
+                server.respond();
+            });
+        });
+
+    });
+
 });
