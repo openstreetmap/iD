@@ -12,6 +12,8 @@ export function rendererBackground(context) {
     var dispatch = d3.dispatch('change'),
         baseLayer = rendererTileLayer(context).projection(context.projection),
         overlayLayers = [],
+        defaultBlacklist = '.*\.google(apis)?\..*/(vt|kh)[\?/].*([xyz]=.*){3}.*',
+        blacklists = [defaultBlacklist],
         backgroundSources;
 
 
@@ -127,7 +129,34 @@ export function rendererBackground(context) {
 
     background.baseLayerSource = function(d) {
         if (!arguments.length) return baseLayer.source();
-        baseLayer.source(d);
+
+        // // test source against OSM imagery blacklists..
+        // context.connection().imageryBlacklists(function(err, val) {
+        //     if (!err) blacklists = val;
+        // });
+
+        var fail = false,
+            tested = 0,
+            regex, i;
+
+        for (i = 0; i < blacklists; i++) {
+            try {
+                regex = new RegExp(blacklists[i]);
+                fail = regex.test(d.template);
+                tested++;
+                if (fail) break;
+            } catch (e) {
+                /* noop */
+            }
+        }
+
+        // ensure at least one test was run.
+        if (!tested) {
+            regex = new RegExp(defaultBlacklist);
+            fail = regex.test(d.template);
+        }
+
+        baseLayer.source(!fail ? d : rendererBackgroundSource.None());
         dispatch.call('change');
         background.updateImagery();
         return background;
