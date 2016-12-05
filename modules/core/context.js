@@ -86,6 +86,7 @@ export function coreContext() {
     function entitiesLoaded(err, result) {
         if (!err) history.merge(result.data, result.extent);
     }
+    context.entitiesLoaded = entitiesLoaded;
 
     context.preauth = function(options) {
         connection.switch(options);

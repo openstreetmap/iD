@@ -1,6 +1,7 @@
 import * as d3 from 'd3';
 import _ from 'lodash';
 import { geoExtent, geoPolygonIntersectsPolygon } from '../geo/index';
+import { osmEntity, osmNode, osmRelation, osmWay } from '../osm/index';
 import { utilDetect } from '../util/detect';
 import toGeoJSON from 'togeojson';
 import fromEsri from 'esri-to-geojson';
@@ -61,15 +62,37 @@ export function svgEsri(projection, context, dispatch) {
 
         paths.exit()
             .remove();
+        
+        var entities = [];
 
         paths = paths.enter()
             .append('path')
             .attr('class', function(d) {
+                // console.log(d);
+                entities.push(new osmNode({
+                    id: 'esri_' + d.properties.OBJECTID,
+                    loc: d.geometry.coordinates,
+                    version: 1, // attrs.version.value,
+                    user: 'mapmeld', // attrs.user && attrs.user.value,
+                    tags: d.properties, // getTags(obj),
+                    visible: true // getVisible(attrs)
+                }));
+                /*
                 var type = d.geometry.type.toLowerCase();
                 return 'esri esri-' + type;
+                */
             })
             .merge(paths);
-
+        
+        if (entities.length) {
+            context.entitiesLoaded(null, {
+                data: entities,
+                extent: context.map().trimmedExtent()
+            });
+        }
+        
+        return this;
+/*
         var path = d3.geoPath(projection);
 
         paths
@@ -98,6 +121,7 @@ export function svgEsri(projection, context, dispatch) {
                 var centroid = path.centroid(d);
                 return centroid[1];
             });
+            */
 
     }
 
@@ -143,10 +167,10 @@ export function svgEsri(projection, context, dispatch) {
         
         var bounds = context.map().trimmedExtent().bbox();
         var bounds = JSON.stringify({
-            xmin: bounds.minX,
-			ymin: bounds.minY,
-			xmax: bounds.maxX,
-			ymax: bounds.maxY,
+            xmin: bounds.minX.toFixed(6),
+			ymin: bounds.minY.toFixed(6),
+			xmax: bounds.maxX.toFixed(6),
+			ymax: bounds.maxY.toFixed(6),
 			spatialReference: {
 			  wkid: 4326
 		    }
