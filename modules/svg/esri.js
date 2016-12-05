@@ -68,113 +68,67 @@ export function svgEsri(projection, context, dispatch) {
         paths = paths.enter()
             .append('path')
             .attr('class', function(d) {
-                // console.log(d);
-                if (d.geometry.type === 'Point') {
-                    entities.push(new osmNode({
-                         id: 'esri_node_' + d.properties.OBJECTID,
-                         loc: d.geometry.coordinates,
-                         version: 1, // attrs.version.value,
-                         user: 'mapmeld', // attrs.user && attrs.user.value,
-                         tags: d.properties, // getTags(obj),
-                         visible: true // getVisible(attrs)
-                     }));
-                } else if (d.geometry.type === 'LineString') {
+                function makeEntity(id, loc_or_nodes) {
+                    var props = {
+                        id: id
+                        version: 1,
+                        user: 'mapmeld',
+                        tags: d.properties,
+                        visible: true
+                    };
+                    if (loc_or_nodes.length && (typeof loc_or_nodes[0] === 'string')) {
+                        props.nodes = loc_or_nodes;
+                    } else {
+                        props.loc = loc_or_nodes;
+                    }
+                    return props;
+                }
+                
+                function makeMiniNodes(pts, ln) {
+                    ln = ln || 0;
                     var nodes = [];
-                    var pts = d.geometry.coordinates;
                     for (var p = 0; p < pts.length; p++) {
                         var mininode_id = 'n' + ln + '' + p + '000' + d.properties.OBJECTID;
                         nodes.push(mininode_id);
-                        entities.push(new osmNode({
-                            id: mininode_id,
-                            loc: pts[p],
-                            version: 1,
-                            user: 'mapmeld',
-                            tags: {},
-                            visible: true
-                        }));
+                        var props = makeEntity(mininode_id, pts[p]);
+                        props.tags = {};
+                        entities.push(new osmNode(props));
                     }
-                    entities.push(new osmWay({
-                        id: 'esri_way_' + d.properties.OBJECTID,
-			    		version: 1,
-					    user: 'mapmeld',
-					    tags: d.properties,
-					    nodes: nodes,
-					    visible: true
-					}));
+                    return nodes;
+                }
+                
+                if (d.geometry.type === 'Point') {
+                    var props = makeEntity('esri_n_' + d.properties.OBJECTID, d.geometry.coordinates);
+                    entities.push(new osmNode(props));
+                    
+                } else if (d.geometry.type === 'LineString') {
+                    var pts = d.geometry.coordinates;
+                    var nodes = makeMiniNodes(pts);
+                    var props = makeEntity('esri_w_' + d.properties.OBJECTID, nodes);
+                    entities.push(new osmWay(props, nodes));
+                    
 				} else if (d.geometry.type === 'MultiLineString') {
 				    for (var ln = 0; ln < d.geometry.coordinates.length; ln++) {
-                        var nodes = [];
                         var pts = d.geometry.coordinates[ln];
-                        for (var p = 0; p < pts.length; p++) {
-                            var mininode_id = 'n' + ln + '' + p + '000' + d.properties.OBJECTID;
-                            nodes.push(mininode_id);
-                            entities.push(new osmNode({
-                                id: mininode_id,
-                                loc: pts[p],
-                                version: 1,
-                                user: 'mapmeld',
-                                tags: {},
-                                visible: true
-                            }));
-                        }
-                        entities.push(new osmWay({
-                            id: 'esri_way_' + ln + '_' + d.properties.OBJECTID,
-			        		version: 1,
-			    		    user: 'mapmeld',
-				    	    tags: d.properties,
-			    		    nodes: nodes,
-					        visible: true
-					    }));
+                        var nodes = makeMiniNodes(pts, ln);
+                        var props = makeEntity('esri_w_' + ln + '_' + d.properties.OBJECTID, nodes);
+                        entities.push(new osmWay(props));
 					}
+					
 				} else if (d.geometry.type === 'Polygon') {
 				    d.properties.area = d.properties.area || 'yes';
-                    var nodes = [];
                     var pts = d.geometry.coordinates[0];
-                    for (var p = 0; p < pts.length; p++) {
-                        var mininode_id = 'n' + p + '000' + d.properties.OBJECTID;
-                        nodes.push(mininode_id);
-                        entities.push(new osmNode({
-                            id: mininode_id,
-                            loc: pts[p],
-                            version: 1,
-                            user: 'mapmeld',
-                            tags: {},
-                            visible: true
-                        }));
-                    }
-                    entities.push(new osmWay({
-                        id: 'esri_way_' + d.properties.OBJECTID,
-		    			version: 1,
-			    		user: 'mapmeld',
-				    	tags: d.properties,
-					    nodes: nodes,
-					    visible: true
-					}));
+                    var nodes = makeMiniNodes(pts);
+                    var props = makeEntity('esri_w_' + d.properties.OBJECTID, nodes);
+                    entities.push(new osmWay(props));
+					
                 } else if (d.geometry.type === 'MultiPolygon') {
                     d.properties.area = d.properties.area || 'yes';
 				    for (var ln = 0; ln < d.geometry.coordinates.length; ln++) {
-                        var nodes = [];
                         var pts = d.geometry.coordinates[ln][0];
-                        for (var p = 0; p < pts.length; p++) {
-                            var mininode_id = 'n' + ln + '' + p + '000' + d.properties.OBJECTID;
-                            nodes.push(mininode_id);
-                            entities.push(new osmNode({
-                                id: mininode_id,
-                                loc: pts[p],
-                                version: 1,
-                                user: 'mapmeld',
-                                tags: {},
-                                visible: true
-                            }));
-                        }
-                        entities.push(new osmWay({
-                            id: 'esri_way_' + ln + '_' + d.properties.OBJECTID,
-			        		version: 1,
-			    		    user: 'mapmeld',
-				    	    tags: d.properties,
-			    		    nodes: nodes,
-					        visible: true
-					    }));
+                        var nodes = makeMiniNodes(pts, ln);
+                        var props = makeEntity('esri_w_' + ln + '_' + d.properties.OBJECTID, nodes);
+                        entities.push(new osmWay(props));
 					}
 				}
             })
