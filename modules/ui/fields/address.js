@@ -21,15 +21,6 @@ export function uiFieldAddress(field, context) {
         isInitialized = false,
         entity;
 
-    var widths = {
-        housenumber: 1/3,
-        street: 2/3,
-        city: 2/3,
-        state: 1/4,
-        postcode: 1/3
-    };
-
-
     function getNearStreets() {
         var extent = entity.extent(context.graph()),
             l = extent.center(),
@@ -98,7 +89,6 @@ export function uiFieldAddress(field, context) {
         }
     }
 
-
     function getNearValues(key) {
         var extent = entity.extent(context.graph()),
             l = extent.center(),
@@ -129,6 +119,9 @@ export function uiFieldAddress(field, context) {
         var addressFormat = _.find(dataAddressFormats, function (a) {
             return a && a.countryCodes && _.includes(a.countryCodes, countryCode);
         }) || _.first(dataAddressFormats);
+
+        if (typeof addressFormat.widths != "undefined") { var widths = addressFormat.widths; }
+        else { var widths = {housenumber: 1/3, street: 2/3, city: 2/3, state: 1/4, postcode: 1/3}; }
 
         function row(r) {
             // Normalize widths.

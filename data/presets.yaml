@@ -88,6 +88,8 @@ en:
           city!vn: City/Town
           conscriptionnumber: '123'
           country: Country
+          county: County
+          county!jp: District
           district: District
           district!vn: Arrondissement/Town/District
           floor: Floor

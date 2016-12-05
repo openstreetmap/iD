@@ -43,9 +43,10 @@
         },
         {
             "countryCodes": ["jp"],
-            "format": [["postcode", "province", "district"], ["city", "suburb"], ["quarter", "neighbourhood"], ["block_number", "housenumber"]],
-            "customPlaceholders": ["province", "city", "suburb", "quarter", "neighbourhood", "block_number", "housenumber"],
-            "dropdowns": ["postcode", "province", "district", "city", "suburb", "quarter", "neighbourhood", "block_number"]
+            "format": [["postcode", "province", "county"], ["city", "suburb"], ["quarter", "neighbourhood"], ["block_number", "housenumber"]],
+            "customPlaceholders": ["province", "county", "city", "suburb", "quarter", "neighbourhood", "block_number", "housenumber"],
+            "dropdowns": ["postcode", "province", "county", "city", "suburb", "quarter", "neighbourhood", "block_number"],
+            "widths": {"postcode": 0.3, "province": 0.35, "county": 0.35, "city": 0.65, "suburb": 0.35, "quarter": 0.5, "neighbourhood": 0.5, "block_number": 0.5}
         }
     ]
 }
