@@ -57,22 +57,23 @@ export function svgEsri(projection, context, dispatch) {
 
         var paths = layer
             .selectAll('path')
-            .data([geojson]);
+            .data(geojson.features || []);
 
         paths.exit()
             .remove();
 
         paths = paths.enter()
             .append('path')
-            .attr('class', 'esri')
+            .attr('class', function(d) {
+                var type = d.geometry.type.toLowerCase();
+                return 'esri esri-' + type;
+            })
             .merge(paths);
-
 
         var path = d3.geoPath(projection);
 
         paths
             .attr('d', path);
-
 
         var labels = layer.selectAll('text')
             .data(showLabels && geojson.features ? geojson.features : []);
@@ -132,6 +133,12 @@ export function svgEsri(projection, context, dispatch) {
 
 
     drawEsri.url = function(url) {
+        if (url.indexOf('outSR') === -1) {
+            url += '&outSR=4326';
+        }
+        if (url.indexOf('&f=') === -1) {
+            url += '&f=json';
+        }
         d3.text(url, function(err, data) {
             if (err) {
                 console.log('Esri service URL did not load');

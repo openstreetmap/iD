@@ -1495,6 +1495,11 @@ path.esri {
     fill: none;
 }
 
+path.esri-polygon, path.esri-multipolygon {
+    fill: #FF26D4;
+    fill-opacity: 0.18;
+}
+
 text.esri {
     fill: #FF26D4;
 }
