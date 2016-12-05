@@ -68,9 +68,10 @@ export function svgEsri(projection, context, dispatch) {
         paths = paths.enter()
             .append('path')
             .attr('class', function(d) {
+                var props, nodes, pts, ln;
                 function makeEntity(id, loc_or_nodes) {
-                    var props = {
-                        id: id
+                    props = {
+                        id: id,
                         version: 1,
                         user: 'mapmeld',
                         tags: d.properties,
@@ -90,7 +91,7 @@ export function svgEsri(projection, context, dispatch) {
                     for (var p = 0; p < pts.length; p++) {
                         var mininode_id = 'n' + ln + '' + p + '000' + d.properties.OBJECTID;
                         nodes.push(mininode_id);
-                        var props = makeEntity(mininode_id, pts[p]);
+                        props = makeEntity(mininode_id, pts[p]);
                         props.tags = {};
                         entities.push(new osmNode(props));
                     }
@@ -98,39 +99,39 @@ export function svgEsri(projection, context, dispatch) {
                 }
                 
                 if (d.geometry.type === 'Point') {
-                    var props = makeEntity('esri_n_' + d.properties.OBJECTID, d.geometry.coordinates);
+                    props = makeEntity('esri_n_' + d.properties.OBJECTID, d.geometry.coordinates);
                     entities.push(new osmNode(props));
                     
                 } else if (d.geometry.type === 'LineString') {
-                    var pts = d.geometry.coordinates;
-                    var nodes = makeMiniNodes(pts);
-                    var props = makeEntity('esri_w_' + d.properties.OBJECTID, nodes);
+                    pts = d.geometry.coordinates;
+                    nodes = makeMiniNodes(pts);
+                    props = makeEntity('esri_w_' + d.properties.OBJECTID, nodes);
                     entities.push(new osmWay(props, nodes));
                     
-				} else if (d.geometry.type === 'MultiLineString') {
-				    for (var ln = 0; ln < d.geometry.coordinates.length; ln++) {
-                        var pts = d.geometry.coordinates[ln];
-                        var nodes = makeMiniNodes(pts, ln);
-                        var props = makeEntity('esri_w_' + ln + '_' + d.properties.OBJECTID, nodes);
+                } else if (d.geometry.type === 'MultiLineString') {
+                    for (ln = 0; ln < d.geometry.coordinates.length; ln++) {
+                        pts = d.geometry.coordinates[ln];
+                        nodes = makeMiniNodes(pts, ln);
+                        props = makeEntity('esri_w_' + ln + '_' + d.properties.OBJECTID, nodes);
                         entities.push(new osmWay(props));
-					}
-					
-				} else if (d.geometry.type === 'Polygon') {
-				    d.properties.area = d.properties.area || 'yes';
-                    var pts = d.geometry.coordinates[0];
-                    var nodes = makeMiniNodes(pts);
-                    var props = makeEntity('esri_w_' + d.properties.OBJECTID, nodes);
+                    }
+                    
+                } else if (d.geometry.type === 'Polygon') {
+                    d.properties.area = d.properties.area || 'yes';
+                    pts = d.geometry.coordinates[0];
+                    nodes = makeMiniNodes(pts);
+                    props = makeEntity('esri_w_' + d.properties.OBJECTID, nodes);
                     entities.push(new osmWay(props));
-					
+                    
                 } else if (d.geometry.type === 'MultiPolygon') {
                     d.properties.area = d.properties.area || 'yes';
-				    for (var ln = 0; ln < d.geometry.coordinates.length; ln++) {
-                        var pts = d.geometry.coordinates[ln][0];
-                        var nodes = makeMiniNodes(pts, ln);
-                        var props = makeEntity('esri_w_' + ln + '_' + d.properties.OBJECTID, nodes);
+                    for (ln = 0; ln < d.geometry.coordinates.length; ln++) {
+                        pts = d.geometry.coordinates[ln][0];
+                        nodes = makeMiniNodes(pts, ln);
+                        props = makeEntity('esri_w_' + ln + '_' + d.properties.OBJECTID, nodes);
                         entities.push(new osmWay(props));
-					}
-				}
+                    }
+                }
             })
             .merge(paths);
         
@@ -185,23 +186,23 @@ export function svgEsri(projection, context, dispatch) {
         }        
         
         var bounds = context.map().trimmedExtent().bbox();
-        var bounds = JSON.stringify({
+        bounds = JSON.stringify({
             xmin: bounds.minX.toFixed(6),
-			ymin: bounds.minY.toFixed(6),
-			xmax: bounds.maxX.toFixed(6),
-			ymax: bounds.maxY.toFixed(6),
-			spatialReference: {
-			  wkid: 4326
-		    }
-		});
-		if (this.lastBounds === bounds) {
-		    // unchanged
-		    return this;
-		}
-		this.lastBounds = bounds;
-		
-		if (url.indexOf('spatialRel') === -1) {
-		    // don't overwrite a spatial query
+            ymin: bounds.minY.toFixed(6),
+            xmax: bounds.maxX.toFixed(6),
+            ymax: bounds.maxY.toFixed(6),
+            spatialReference: {
+              wkid: 4326
+            }
+        });
+        if (this.lastBounds === bounds) {
+            // unchanged
+            return this;
+        }
+        this.lastBounds = bounds;
+        
+        if (url.indexOf('spatialRel') === -1) {
+            // don't overwrite a spatial query
             url += '&geometry=' + this.lastBounds;
             url += '&geometryType=esriGeometryEnvelope';
             url += '&spatialRel=esriSpatialRelIntersects';

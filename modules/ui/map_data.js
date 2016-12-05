@@ -214,18 +214,18 @@ export function uiMapData(context) {
                 .append('li')
                 .classed('list-item-esri', true);
         
-			var labelEsri = enter
-			  .append('label')
-			  .call(tooltip().title('Enter an Esri service URL').placement('top'));
+            var labelEsri = enter
+              .append('label')
+              .call(tooltip().title('Enter an Esri service URL').placement('top'));
 
-			labelEsri.append('button')
-				.attr('class', 'layer-browse')
-				.on('click', editEsriLayer)
-				.call(svgIcon('#icon-search'));
+            labelEsri.append('button')
+                .attr('class', 'layer-browse')
+                .on('click', editEsriLayer)
+                .call(svgIcon('#icon-search'));
 
-			labelEsri
-				.append('span')
-				.text('Input Esri layer');
+            labelEsri
+                .append('span')
+                .text('Input Esri layer');
         }
         
         function editEsriLayer() {
@@ -240,8 +240,6 @@ export function uiMapData(context) {
 
         function setEsriLayer(template) {
             context.storage('esriLayerUrl', template);
-            // var d = rendererBackgroundSource.Custom(template);
-            // content.selectAll('.custom_layer').datum(d);
             var esriLayer = context.layers().layer('esri');
             esriLayer.url(template);
         }
@@ -253,8 +251,8 @@ export function uiMapData(context) {
 
             content.selectAll('.layer, .custom_layer')
                 .classed('active', active)
-                .classed('switch', function(d) { return d === previous; })
-                .call(setTooltips)
+                .classed('switch', true) // function(d) { return d === previous; })
+                // .call(setTooltips)
                 .selectAll('input')
                 .property('checked', active);
         }
