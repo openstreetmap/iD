@@ -139,10 +139,7 @@ export function svgEsri(projection, context, dispatch) {
         }
         if (url.indexOf('&f=') === -1) {
             url += '&f=json';
-        }
-        
-        url += '&inSR=4326';
-        
+        }        
         
         var bounds = context.map().trimmedExtent().bbox();
         var bounds = JSON.stringify({
@@ -159,9 +156,14 @@ export function svgEsri(projection, context, dispatch) {
 		    return this;
 		}
 		this.lastBounds = bounds;
-        url += '&geometry=' + this.lastBounds;
-        url += '&geometryType=esriGeometryEnvelope';
-        url += '&spatialRel=esriSpatialRelIntersects';
+		
+		if (url.indexOf('spatialRel') === -1) {
+		    // don't overwrite a spatial query
+            url += '&geometry=' + this.lastBounds;
+            url += '&geometryType=esriGeometryEnvelope';
+            url += '&spatialRel=esriSpatialRelIntersects';
+            url += '&inSR=4326';
+        }
         
         d3.text(url, function(err, data) {
             if (err) {
