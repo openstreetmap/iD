@@ -83,6 +83,7 @@
                 "addr:block_number",
                 "addr:conscriptionnumber",
                 "addr:country",
+                "addr:county",
                 "addr:district",
                 "addr:floor",
                 "addr:hamlet",
