@@ -381,7 +381,6 @@ export function coreContext() {
     ui = uiInit(context);
 
     connection = services.osm;
-
     background = rendererBackground(context);
     features = rendererFeatures(context);
     presets = presetIndex();
@@ -396,15 +395,15 @@ export function coreContext() {
     context.zoomOutFurther = map.zoomOutFurther;
     context.redrawEnable = map.redrawEnable;
 
-    background.init();
-    presets.init();
-    areaKeys = presets.areaKeys();
-
     _.each(services, function(service) {
         if (service && typeof service.init === 'function') {
             service.init(context);
         }
     });
+
+    background.init();
+    presets.init();
+    areaKeys = presets.areaKeys();
 
 
     return utilRebind(context, dispatch, 'on');

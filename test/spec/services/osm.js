@@ -458,13 +458,15 @@ describe('iD.serviceOsm', function () {
             '<timeout seconds="300"/>' +
             '<status database="online" api="online" gpx="online"/>' +
             '</api>' +
-            '<policy><imagery><blacklist regex=".*\.google(apis)?\..*/(vt|kh)[\?/].*([xyz]=.*){3}.*"/></imagery></policy>' +
+            '<policy><imagery>' +
+            '<blacklist regex="\.foo\.com"/>' +
+            '<blacklist regex="\.bar\.org"/>' +
+            '</imagery></policy>' +
             '</osm>';
 
 
         beforeEach(function() {
             server = sinon.fakeServer.create();
-            // connection.reset();
         });
 
         afterEach(function() {
@@ -485,9 +487,10 @@ describe('iD.serviceOsm', function () {
         });
 
         describe('#imageryBlacklists', function() {
-            it('gets imagery blacklists', function(done) {
-                connection.imageryBlacklists(function(err, val) {
-                    expect(val).to.eql(['.*\.google(apis)?\..*/(vt|kh)[\?/].*([xyz]=.*){3}.*']);
+            it('updates imagery blacklists', function(done) {
+                connection.status(function() {
+                    var blacklists = connection.imageryBlacklists();
+                    expect(blacklists).to.deep.equal(['\.foo\.com','\.bar\.org']);
                     done();
                 });
 

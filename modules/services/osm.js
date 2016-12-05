@@ -13,6 +13,7 @@ var dispatch = d3.dispatch('authLoading', 'authDone', 'change', 'loading', 'load
     useHttps = window.location.protocol === 'https:',
     protocol = useHttps ? 'https:' : 'http:',
     urlroot = protocol + '//www.openstreetmap.org',
+    blacklists = ['.*\.google(apis)?\..*/(vt|kh)[\?/].*([xyz]=.*){3}.*'],
     inflight = {},
     loadedTiles = {},
     tileZoom = 16,
@@ -25,7 +26,6 @@ var dispatch = d3.dispatch('authLoading', 'authDone', 'change', 'loading', 'load
     }),
     rateLimitError,
     userDetails,
-    capabilities,
     off;
 
 
@@ -162,7 +162,6 @@ export default {
     reset: function() {
         userDetails = undefined;
         rateLimitError = undefined;
-        capabilities = undefined;
         _.forEach(inflight, abortRequest);
         loadedTiles = {};
         inflight = {};
@@ -431,15 +430,26 @@ export default {
     },
 
 
-    // `status` will always request the `api/capabilities` resource..
     status: function(callback) {
         function done(xml) {
-            capabilities = xml;
+            // update blacklists
+            var elements = xml.getElementsByTagName('blacklist'),
+                regexes = [];
+            for (var i = 0; i < elements.length; i++) {
+                var regex = elements[i].getAttribute('regex');  // needs unencode?
+                if (regex) {
+                    regexes.push(regex);
+                }
+            }
+            if (regexes.length) {
+                blacklists = regexes;
+            }
+
 
             if (rateLimitError) {
                 callback(rateLimitError, 'rateLimited');
             } else {
-                var apiStatus = capabilities.getElementsByTagName('status'),
+                var apiStatus = xml.getElementsByTagName('status'),
                     val = apiStatus[0].getAttribute('api');
 
                 callback(undefined, val);
@@ -452,30 +462,8 @@ export default {
     },
 
 
-    // `imageryBlacklists` will reuse the previous `api/capabilities` result, if available..
-    imageryBlacklists: function(callback) {
-        function done(xml) {
-            capabilities = xml;
-
-            var elements = capabilities.getElementsByTagName('blacklist'),
-                blacklists = [];
-            for (var i = 0; i < elements.length; i++) {
-                var regex = elements[i].getAttribute('regex');  // needs unencode?
-                if (regex) {
-                    blacklists.push(regex);
-                }
-            }
-
-            callback(undefined, blacklists);
-        }
-
-        if (capabilities) {
-            done(capabilities);
-        } else {
-            d3.xml(urlroot + '/api/capabilities').get()
-                .on('load', done)
-                .on('error', callback);
-        }
+    imageryBlacklists: function() {
+        return blacklists;
     },
 
 
