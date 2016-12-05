@@ -127,7 +127,32 @@ export function rendererBackground(context) {
 
     background.baseLayerSource = function(d) {
         if (!arguments.length) return baseLayer.source();
-        baseLayer.source(d);
+
+        // test source against OSM imagery blacklists..
+        var blacklists = context.connection().imageryBlacklists();
+
+        var fail = false,
+            tested = 0,
+            regex, i;
+
+        for (i = 0; i < blacklists; i++) {
+            try {
+                regex = new RegExp(blacklists[i]);
+                fail = regex.test(d.template);
+                tested++;
+                if (fail) break;
+            } catch (e) {
+                /* noop */
+            }
+        }
+
+        // ensure at least one test was run.
+        if (!tested) {
+            regex = new RegExp('.*\.google(apis)?\..*/(vt|kh)[\?/].*([xyz]=.*){3}.*');
+            fail = regex.test(d.template);
+        }
+
+        baseLayer.source(!fail ? d : rendererBackgroundSource.None());
         dispatch.call('change');
         background.updateImagery();
         return background;
@@ -140,9 +165,8 @@ export function rendererBackground(context) {
 
 
     background.showsLayer = function(d) {
-        return d === baseLayer.source() ||
-            (d.id === 'custom' && baseLayer.source().id === 'custom') ||
-            overlayLayers.some(function(l) { return l.source() === d; });
+        return d.id === baseLayer.source().id ||
+            overlayLayers.some(function(layer) { return d.id === layer.source().id; });
     };
 
 

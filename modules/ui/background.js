@@ -109,14 +109,11 @@ export function uiBackground(context) {
         function editCustom() {
             d3.event.preventDefault();
             var template = window.prompt(t('background.custom_prompt'), customTemplate);
-            if (!template ||
-                template.indexOf('google.com') !== -1 ||
-                template.indexOf('googleapis.com') !== -1 ||
-                template.indexOf('google.ru') !== -1) {
+            if (template) {
+                setCustom(template);
+            } else {
                 selectLayer();
-                return;
             }
-            setCustom(template);
         }
 
 
