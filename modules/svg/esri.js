@@ -116,7 +116,7 @@ export function svgEsri(projection, context, dispatch) {
     };
 
 
-    drawEsri.hasEsri = function() {
+    drawEsri.hasData = function() {
         var geojson = svgEsri.geojson;
         return (!(_.isEmpty(geojson) || _.isEmpty(geojson.features)));
     };
@@ -144,7 +144,7 @@ export function svgEsri(projection, context, dispatch) {
     };
 
     drawEsri.fitZoom = function() {
-        if (!this.hasEsri()) return this;
+        if (!this.hasData()) return this;
         var geojson = svgEsri.geojson;
 
         var map = context.map(),

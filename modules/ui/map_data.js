@@ -9,6 +9,7 @@ import { tooltip } from '../util/tooltip';
 
 export function uiMapData(context) {
     var key = t('map_data.key'),
+        esriLayerUrl = context.storage('esriLayerUrl') || '',
         features = context.features().keys(),
         layers = context.layers(),
         fills = ['wireframe', 'partial', 'full'],
@@ -194,9 +195,9 @@ export function uiMapData(context) {
 
         function drawEsriItem(selection) {
             var esriLayer = layers.layer('esri'),
-                hasEsri = esriLayer && esriLayer.hasEsri(),
-                showsEsri = hasEsri && esriLayer.enabled();
-
+                hasData = esriLayer && esriLayer.hasData(),
+                showsEsri = hasData && esriLayer.enabled();
+            
             var esriLayerItem = selection
                 .selectAll('.layer-list-esri')
                 .data(esriLayer ? [0] : []);
@@ -206,52 +207,56 @@ export function uiMapData(context) {
                 .remove();
 
             // Enter
+            
             var enter = esriLayerItem.enter()
                 .append('ul')
                 .attr('class', 'layer-list layer-list-esri')
                 .append('li')
                 .classed('list-item-esri', true);
+        
+			var labelEsri = enter
+			  .append('label')
+			  .call(tooltip().title('Enter an Esri service URL').placement('top'));
 
-            enter
-                .append('button')
-                .attr('class', 'list-item-esri-extent')
-                .call(tooltip()
-                    .title('Zoom to Esri layer')
-                    .placement((textDirection === 'rtl') ? 'right' : 'left'))
-                .on('click', function() {
-                    d3.event.preventDefault();
-                    d3.event.stopPropagation();
-                    esriLayer.fitZoom();
-                })
-                .call(svgIcon('#icon-search'));
+			labelEsri.append('button')
+				.attr('class', 'layer-browse')
+				.on('click', editEsriLayer)
+				.call(svgIcon('#icon-search'));
 
-            var labelEsri = enter
-                .append('label')
-                .call(tooltip().title('Enter an Esri service URL').placement('top'));
+			labelEsri
+				.append('span')
+				.text('Input Esri layer');
+        }
+        
+        function editEsriLayer() {
+            d3.event.preventDefault();
+            var template = window.prompt('Enter an Esri service URL', esriLayerUrl);
+            if (template) {
+                setEsriLayer(template);
+            } else {
+                selectEsriLayer();
+            }
+        }
 
-            labelEsri
-                .append('input')
-                .attr('type', 'checkbox')
-                .on('change', clickEsri);
+        function setEsriLayer(template) {
+            context.storage('esriLayerUrl', template);
+            // var d = rendererBackgroundSource.Custom(template);
+            // content.selectAll('.custom_layer').datum(d);
+            var esriLayer = context.layers().layer('esri');
+            esriLayer.url(template);
+        }
+        
+        function selectEsriLayer() {
+            function active(d) {
+                return context.background().showsLayer(d);
+            }
 
-            labelEsri
-                .append('input')
-                .attr('placeholder', 'Enter an Esri service URL');
-
-
-            // Update
-            esriLayerItem = esriLayerItem
-                .merge(enter);
-
-            esriLayerItem
-                .classed('active', showsEsri)
+            content.selectAll('.layer, .custom_layer')
+                .classed('active', active)
+                .classed('switch', function(d) { return d === previous; })
+                .call(setTooltips)
                 .selectAll('input')
-                .property('disabled', !hasEsri)
-                .property('checked', showsEsri);
-
-            esriLayerItem
-                .selectAll('label')
-                .classed('deemphasize', !hasEsri);
+                .property('checked', active);
         }
 
         function drawGpxItem(selection) {

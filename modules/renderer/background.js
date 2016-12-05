@@ -92,7 +92,7 @@ export function rendererBackground(context) {
             .forEach(function (d) { imageryUsed.push(d.source().imageryUsed()); });
 
         var esriLayer = context.layers().layer('esri');
-        if (esriLayer && esriLayer.enabled() && esriLayer.hasEsri()) {
+        if (esriLayer && esriLayer.enabled() && esriLayer.hasData()) {
             imageryUsed.push('Esri Service');
         }
 
