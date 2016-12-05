@@ -3,6 +3,7 @@ import _ from 'lodash';
 import { utilRebind } from '../util/rebind';
 import { utilGetDimensions, utilSetDimensions } from '../util/dimensions';
 import { svgDebug } from './debug';
+import { svgEsri } from './esri';
 import { svgGpx } from './gpx';
 import { svgMapillaryImages } from './mapillary_images';
 import { svgMapillarySigns } from './mapillary_signs';
@@ -14,6 +15,7 @@ export function svgLayers(projection, context) {
         svg = d3.select(null),
         layers = [
             { id: 'osm', layer: svgOsm(projection, context, dispatch) },
+            { id: 'esri', layer: svgEsri(projection, context, dispatch) },
             { id: 'gpx', layer: svgGpx(projection, context, dispatch) },
             { id: 'mapillary-images', layer: svgMapillaryImages(projection, context, dispatch) },
             { id: 'mapillary-signs',  layer: svgMapillarySigns(projection, context, dispatch) },

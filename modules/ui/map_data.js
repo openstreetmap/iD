@@ -75,11 +75,13 @@ export function uiMapData(context) {
             setLayer(which, !showsLayer(which));
         }
 
+        function clickEsri() {
+            toggleLayer('esri');
+        }
 
         function clickGpx() {
             toggleLayer('gpx');
         }
-
 
         function clickMapillaryImages() {
             toggleLayer('mapillary-images');
@@ -190,6 +192,67 @@ export function uiMapData(context) {
                 .classed('deemphasize', !showsMapillaryImages);
         }
 
+        function drawEsriItem(selection) {
+            var esriLayer = layers.layer('esri'),
+                hasEsri = esriLayer && esriLayer.hasEsri(),
+                showsEsri = hasEsri && esriLayer.enabled();
+
+            var esriLayerItem = selection
+                .selectAll('.layer-list-esri')
+                .data(esriLayer ? [0] : []);
+
+            // Exit
+            esriLayerItem.exit()
+                .remove();
+
+            // Enter
+            var enter = esriLayerItem.enter()
+                .append('ul')
+                .attr('class', 'layer-list layer-list-esri')
+                .append('li')
+                .classed('list-item-esri', true);
+
+            enter
+                .append('button')
+                .attr('class', 'list-item-esri-extent')
+                .call(tooltip()
+                    .title('Zoom to Esri layer')
+                    .placement((textDirection === 'rtl') ? 'right' : 'left'))
+                .on('click', function() {
+                    d3.event.preventDefault();
+                    d3.event.stopPropagation();
+                    esriLayer.fitZoom();
+                })
+                .call(svgIcon('#icon-search'));
+
+            var labelEsri = enter
+                .append('label')
+                .call(tooltip().title('Enter an Esri service URL').placement('top'));
+
+            labelEsri
+                .append('input')
+                .attr('type', 'checkbox')
+                .on('change', clickEsri);
+
+            labelEsri
+                .append('input')
+                .attr('placeholder', 'Enter an Esri service URL');
+
+
+            // Update
+            esriLayerItem = esriLayerItem
+                .merge(enter);
+
+            esriLayerItem
+                .classed('active', showsEsri)
+                .selectAll('input')
+                .property('disabled', !hasEsri)
+                .property('checked', showsEsri);
+
+            esriLayerItem
+                .selectAll('label')
+                .classed('deemphasize', !hasEsri);
+        }
 
         function drawGpxItem(selection) {
             var gpx = layers.layer('gpx'),
@@ -325,6 +388,7 @@ export function uiMapData(context) {
 
         function update() {
             dataLayerContainer.call(drawMapillaryItems);
+            dataLayerContainer.call(drawEsriItem);
             dataLayerContainer.call(drawGpxItem);
 
             fillList.call(drawList, fills, 'radio', 'area_fill', setFill, showsFill);

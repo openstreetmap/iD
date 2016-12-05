@@ -91,6 +91,11 @@ export function rendererBackground(context) {
             .filter(function (d) { return !d.source().isLocatorOverlay(); })
             .forEach(function (d) { imageryUsed.push(d.source().imageryUsed()); });
 
+        var esriLayer = context.layers().layer('esri');
+        if (esriLayer && esriLayer.enabled() && esriLayer.hasEsri()) {
+            imageryUsed.push('Esri Service');
+        }
+
         var gpx = context.layers().layer('gpx');
         if (gpx && gpx.enabled() && gpx.hasGpx()) {
             imageryUsed.push('Local GPX');
@@ -267,6 +272,13 @@ export function rendererBackground(context) {
                 background.toggleOverlayLayer(overlay);
             }
         });
+
+        if (q.esri) {
+            var esriLayer = context.layers().layer('esri');
+            if (esriLayer) {
+                esriLayer.url(q.esri);
+            }
+        }
 
         if (q.gpx) {
             var gpx = context.layers().layer('gpx');

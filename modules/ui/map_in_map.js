@@ -1,7 +1,7 @@
 import * as d3 from 'd3';
 import { d3keybinding } from '../lib/d3.keybinding.js';
 import { t } from '../util/locale';
-import { svgDebug, svgGpx } from '../svg/index';
+import { svgDebug, svgEsri, svgGpx } from '../svg/index';
 import { geoRawMercator } from '../geo/index';
 import { rendererTileLayer } from '../renderer/index';
 import { utilSetTransform } from '../util/index';
@@ -22,6 +22,7 @@ export function uiMapInMap(context) {
         var backgroundLayer = rendererTileLayer(context),
             overlayLayers = {},
             projection = geoRawMercator(),
+            esriLayer = svgEsri(projection, context).showLabels(false),
             gpxLayer = svgGpx(projection, context).showLabels(false),
             debugLayer = svgDebug(projection, context),
             zoom = d3.zoom()
@@ -232,6 +233,7 @@ export function uiMapInMap(context) {
                 .attr('class', 'map-in-map-data')
                 .merge(dataLayers)
                 .call(gpxLayer)
+                .call(esriLayer)
                 .call(debugLayer);
 
 
