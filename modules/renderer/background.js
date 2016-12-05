@@ -165,9 +165,8 @@ export function rendererBackground(context) {
 
 
     background.showsLayer = function(d) {
-        return d === baseLayer.source() ||
-            (d.id === 'custom' && baseLayer.source().id === 'custom') ||
-            overlayLayers.some(function(l) { return l.source() === d; });
+        return d.id === baseLayer.source().id ||
+            overlayLayers.some(function(layer) { return d.id === layer.source().id; });
     };
 
 
