@@ -69,18 +69,114 @@ export function svgEsri(projection, context, dispatch) {
             .append('path')
             .attr('class', function(d) {
                 // console.log(d);
-                entities.push(new osmNode({
-                    id: 'esri_' + d.properties.OBJECTID,
-                    loc: d.geometry.coordinates,
-                    version: 1, // attrs.version.value,
-                    user: 'mapmeld', // attrs.user && attrs.user.value,
-                    tags: d.properties, // getTags(obj),
-                    visible: true // getVisible(attrs)
-                }));
-                /*
-                var type = d.geometry.type.toLowerCase();
-                return 'esri esri-' + type;
-                */
+                if (d.geometry.type === 'Point') {
+                    entities.push(new osmNode({
+                         id: 'esri_node_' + d.properties.OBJECTID,
+                         loc: d.geometry.coordinates,
+                         version: 1, // attrs.version.value,
+                         user: 'mapmeld', // attrs.user && attrs.user.value,
+                         tags: d.properties, // getTags(obj),
+                         visible: true // getVisible(attrs)
+                     }));
+                } else if (d.geometry.type === 'LineString') {
+                    var nodes = [];
+                    var pts = d.geometry.coordinates;
+                    for (var p = 0; p < pts.length; p++) {
+                        var mininode_id = 'n' + ln + '' + p + '000' + d.properties.OBJECTID;
+                        nodes.push(mininode_id);
+                        entities.push(new osmNode({
+                            id: mininode_id,
+                            loc: pts[p],
+                            version: 1,
+                            user: 'mapmeld',
+                            tags: {},
+                            visible: true
+                        }));
+                    }
+                    entities.push(new osmWay({
+                        id: 'esri_way_' + d.properties.OBJECTID,
+			    		version: 1,
+					    user: 'mapmeld',
+					    tags: d.properties,
+					    nodes: nodes,
+					    visible: true
+					}));
+				} else if (d.geometry.type === 'MultiLineString') {
+				    for (var ln = 0; ln < d.geometry.coordinates.length; ln++) {
+                        var nodes = [];
+                        var pts = d.geometry.coordinates[ln];
+                        for (var p = 0; p < pts.length; p++) {
+                            var mininode_id = 'n' + ln + '' + p + '000' + d.properties.OBJECTID;
+                            nodes.push(mininode_id);
+                            entities.push(new osmNode({
+                                id: mininode_id,
+                                loc: pts[p],
+                                version: 1,
+                                user: 'mapmeld',
+                                tags: {},
+                                visible: true
+                            }));
+                        }
+                        entities.push(new osmWay({
+                            id: 'esri_way_' + ln + '_' + d.properties.OBJECTID,
+			        		version: 1,
+			    		    user: 'mapmeld',
+				    	    tags: d.properties,
+			    		    nodes: nodes,
+					        visible: true
+					    }));
+					}
+				} else if (d.geometry.type === 'Polygon') {
+				    d.properties.area = d.properties.area || 'yes';
+                    var nodes = [];
+                    var pts = d.geometry.coordinates[0];
+                    for (var p = 0; p < pts.length; p++) {
+                        var mininode_id = 'n' + p + '000' + d.properties.OBJECTID;
+                        nodes.push(mininode_id);
+                        entities.push(new osmNode({
+                            id: mininode_id,
+                            loc: pts[p],
+                            version: 1,
+                            user: 'mapmeld',
+                            tags: {},
+                            visible: true
+                        }));
+                    }
+                    entities.push(new osmWay({
+                        id: 'esri_way_' + d.properties.OBJECTID,
+		    			version: 1,
+			    		user: 'mapmeld',
+				    	tags: d.properties,
+					    nodes: nodes,
+					    visible: true
+					}));
+                } else if (d.geometry.type === 'MultiPolygon') {
+                    d.properties.area = d.properties.area || 'yes';
+				    for (var ln = 0; ln < d.geometry.coordinates.length; ln++) {
+                        var nodes = [];
+                        var pts = d.geometry.coordinates[ln][0];
+                        for (var p = 0; p < pts.length; p++) {
+                            var mininode_id = 'n' + ln + '' + p + '000' + d.properties.OBJECTID;
+                            nodes.push(mininode_id);
+                            entities.push(new osmNode({
+                                id: mininode_id,
+                                loc: pts[p],
+                                version: 1,
+                                user: 'mapmeld',
+                                tags: {},
+                                visible: true
+                            }));
+                        }
+                        entities.push(new osmWay({
+                            id: 'esri_way_' + ln + '_' + d.properties.OBJECTID,
+			        		version: 1,
+			    		    user: 'mapmeld',
+				    	    tags: d.properties,
+			    		    nodes: nodes,
+					        visible: true
+					    }));
+					}
+				}
             })
             .merge(paths);
         
@@ -92,37 +188,6 @@ export function svgEsri(projection, context, dispatch) {
         }
         
         return this;
-/*
-        var path = d3.geoPath(projection);
-
-        paths
-            .attr('d', path);
-
-        var labels = layer.selectAll('text')
-            .data(showLabels && geojson.features ? geojson.features : []);
-
-        labels.exit()
-            .remove();
-
-        labels = labels.enter()
-            .append('text')
-            .attr('class', 'esri')
-            .merge(labels);
-
-        labels
-            .text(function(d) {
-                return d.properties.desc || d.properties.name;
-            })
-            .attr('x', function(d) {
-                var centroid = path.centroid(d);
-                return centroid[0] + 7;
-            })
-            .attr('y', function(d) {
-                var centroid = path.centroid(d);
-                return centroid[1];
-            });
-            */
-
     }
 
 
