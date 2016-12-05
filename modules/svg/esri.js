@@ -132,13 +132,37 @@ export function svgEsri(projection, context, dispatch) {
     };
 
 
-    drawEsri.url = function(url) {
+    drawEsri.url = function(true_url) {
+        var url = true_url;
         if (url.indexOf('outSR') === -1) {
             url += '&outSR=4326';
         }
         if (url.indexOf('&f=') === -1) {
             url += '&f=json';
         }
+        
+        url += '&inSR=4326';
+        
+        
+        var bounds = context.map().trimmedExtent().bbox();
+        var bounds = JSON.stringify({
+            xmin: bounds.minX,
+			ymin: bounds.minY,
+			xmax: bounds.maxX,
+			ymax: bounds.maxY,
+			spatialReference: {
+			  wkid: 4326
+		    }
+		});
+		if (this.lastBounds === bounds) {
+		    // unchanged
+		    return this;
+		}
+		this.lastBounds = bounds;
+        url += '&geometry=' + this.lastBounds;
+        url += '&geometryType=esriGeometryEnvelope';
+        url += '&spatialRel=esriSpatialRelIntersects';
+        
         d3.text(url, function(err, data) {
             if (err) {
                 console.log('Esri service URL did not load');
@@ -147,6 +171,16 @@ export function svgEsri(projection, context, dispatch) {
                 drawEsri.geojson(fromEsri.fromEsri(JSON.parse(data)));
             }
         });
+        
+        context.map().on('move', function() {
+            if (this.timeout) {
+               clearTimeout(this.timeout);
+            }
+            this.timeout = setTimeout(function() {
+                this.url(true_url);
+            }.bind(this), 500);
+        }.bind(this));
+        
         return this;
     };
 
