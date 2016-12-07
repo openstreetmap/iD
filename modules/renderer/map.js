@@ -53,6 +53,7 @@ export function rendererMap(context) {
     var zoom = d3.zoom()
             .scaleExtent([ztok(2), ztok(24)])
             .interpolate(d3.interpolate)
+            .filter(zoomEventFilter)
             .on('zoom', zoomPan);
 
     var _selection = d3.select(null);
@@ -145,7 +146,40 @@ export function rendererMap(context) {
         });
 
         map.dimensions(utilGetDimensions(selection));
+    }
 
+
+    function zoomEventFilter() {
+        // Fix for #2151, (see also d3/d3-zoom#60, d3/d3-brush#18)
+        // Intercept `mousedown` and check if there is an orphaned zoom gesture.
+        // This can happen if a previous `mousedown` occurred without a `mouseup`.
+        // If we detect this, dispatch `mouseup` to complete the orphaned gesture,
+        // so that d3-zoom won't stop propagation of new `mousedown` events.
+        if (d3.event.type === 'mousedown') {
+            var hasOrphan = false;
+            var listeners = window.__on;
+            for (var i = 0; i < listeners.length; i++) {
+                var listener = listeners[i];
+                if (listener.name === 'zoom' && listener.type === 'mouseup') {
+                    hasOrphan = true;
+                    break;
+                }
+            }
+            if (hasOrphan) {
+                var event = window.CustomEvent;
+                if (event) {
+                    event = new event('mouseup');
+                } else {
+                    event = window.document.createEvent('Event');
+                    event.initEvent('mouseup', false, false);
+                }
+                // Event needs to be dispatched with an event.view property.
+                event.view = window;
+                window.dispatchEvent(event);
+            }
+        }
+
+        return d3.event.button !== 2;   // ignore right clicks
     }
 
 
