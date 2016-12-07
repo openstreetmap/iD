@@ -584,35 +584,65 @@ export function svgLabels(projection, context) {
         // debug
         drawCollisionBoxes(label, rskipped, 'debug-skipped');
         drawCollisionBoxes(label, rdrawn, 'debug-drawn');
+
+        selection.call(filterLabels);
     }
 
 
-    function hideOnMouseover() {
-        if (d3.event.buttons) return;
-
-        var layers = d3.select(this)
+    function filterLabels(selection) {
+        var layers = selection
             .selectAll('.layer-label, .layer-halo');
 
         layers.selectAll('.proximate')
             .classed('proximate', false);
 
         var mouse = context.mouse(),
-            pad = 20,
-            bbox = { minX: mouse[0] - pad, minY: mouse[1] - pad, maxX: mouse[0] + pad, maxY: mouse[1] + pad },
-            ids = _.map(rdrawn.search(bbox), 'id');
+            graph = context.graph(),
+            selectedIDs = context.selectedIDs(),
+            ids = [],
+            pad, bbox;
+
+        // hide labels near the mouse
+        if (mouse) {
+            pad = 20;
+            bbox = { minX: mouse[0] - pad, minY: mouse[1] - pad, maxX: mouse[0] + pad, maxY: mouse[1] + pad };
+            ids.push.apply(ids, _.map(rdrawn.search(bbox), 'id'));
+        }
+
+        // hide labels along selected ways, or near selected vertices
+        for (var i = 0; i < selectedIDs.length; i++) {
+            var entity = graph.entity(selectedIDs[i]);
+            var geometry = entity.geometry(graph);
+
+            if (geometry === 'line') {
+                ids.push(selectedIDs[i]);
+            } else if (geometry === 'vertex') {
+                var point = context.projection(entity.loc);
+                pad = 10;
+                bbox = { minX: point[0] - pad, minY: point[1] - pad, maxX: point[0] + pad, maxY: point[1] + pad };
+                ids.push.apply(ids, _.map(rdrawn.search(bbox), 'id'));
+            }
+        }
 
         layers.selectAll(utilEntitySelector(ids))
             .classed('proximate', true);
     }
 
 
+    var throttleFilterLabels = _.throttle(filterLabels, 100);
+
+
     drawLabels.observe = function(selection) {
-        selection.on('mousemove.hidelabels', hideOnMouseover);
+        var listener = function() { throttleFilterLabels(selection); };
+        selection.on('mousemove.hidelabels', listener);
+        context.on('enter.hidelabels', listener);
     };
 
 
     drawLabels.off = function(selection) {
+        throttleFilterLabels.cancel();
         selection.on('mousemove.hidelabels', null);
+        context.on('enter.hidelabels', null);
     };
 
 

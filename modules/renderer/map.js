@@ -360,9 +360,13 @@ export function rendererMap(context) {
 
 
     map.mouse = function() {
-        var e = mousemove || d3.event, s;
-        while ((s = e.sourceEvent)) e = s;
-        return mouse(e);
+        var event = mousemove || d3.event;
+        if (event) {
+            var s;
+            while ((s = event.sourceEvent)) { event = s; }
+            return mouse(event);
+        }
+        return null;
     };
 
 
