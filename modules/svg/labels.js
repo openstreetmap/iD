@@ -244,9 +244,9 @@ export function svgLabels(projection, context) {
 
 
     function drawLabels(selection, graph, entities, filter, dimensions, fullRedraw) {
-        var hidePoints = !selection.selectAll('.node.point').node();
+        var lowZoom = context.surface().classed('low-zoom');
 
-        var labelable = [], i, j, k, entity;
+        var labelable = [], i, j, k, entity, geometry;
         for (i = 0; i < labelStack.length; i++) {
             labelable.push([]);
         }
@@ -272,12 +272,8 @@ export function svgLabels(projection, context) {
         // Split entities into groups specified by labelStack
         for (i = 0; i < entities.length; i++) {
             entity = entities[i];
-            var geometry = entity.geometry(graph);
-
-            if (geometry === 'vertex')
-                continue;
-            if (hidePoints && geometry === 'point')
-                continue;
+            geometry = entity.geometry(graph);
+            if (geometry === 'vertex') { geometry = 'point'; }  // treat vertex like point
 
             var preset = geometry === 'area' && context.presets().match(entity, graph),
                 icon = preset && !blacklisted(preset) && preset.icon;
@@ -315,29 +311,37 @@ export function svgLabels(projection, context) {
             var fontSize = labelStack[k][3];
             for (i = 0; i < labelable[k].length; i++) {
                 entity = labelable[k][i];
+                geometry = entity.geometry(graph);
+
                 var name = utilDisplayName(entity),
                     width = name && textWidth(name, fontSize),
                     p;
-                if (entity.geometry(graph) === 'point') {
-                    p = getPointLabel(entity, width, fontSize);
-                } else if (entity.geometry(graph) === 'line') {
+                if (geometry === 'point') {
+                    p = getPointLabel(entity, width, fontSize, geometry);
+                } else if (geometry === 'vertex' && !lowZoom) {
+                    // don't label vertices at low zoom because they don't have icons
+                    p = getPointLabel(entity, width, fontSize, geometry);
+                } else if (geometry === 'line') {
                     p = getLineLabel(entity, width, fontSize);
-                } else if (entity.geometry(graph) === 'area') {
+                } else if (geometry === 'area') {
                     p = getAreaLabel(entity, width, fontSize);
                 }
+
                 if (p) {
-                    p.classes = entity.geometry(graph) + ' tag-' + labelStack[k][1];
-                    positions[entity.geometry(graph)].push(p);
-                    labelled[entity.geometry(graph)].push(entity);
+                    if (geometry === 'vertex') { geometry = 'point'; }  // treat vertex like point
+                    p.classes = geometry + ' tag-' + labelStack[k][1];
+                    positions[geometry].push(p);
+                    labelled[geometry].push(entity);
                 }
             }
         }
 
 
-        function getPointLabel(entity, width, height) {
-            var pointOffsets = {
-                    ltr: [15, -12, 'start'],
-                    rtl: [-15, -12, 'end']
+        function getPointLabel(entity, width, height, geometry) {
+            var y = (geometry === 'point' ? -12 : 0),
+                pointOffsets = {
+                    ltr: [15, y, 'start'],
+                    rtl: [-15, y, 'end']
                 };
 
             var coord = projection(entity.loc),
