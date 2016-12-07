@@ -19,6 +19,8 @@ export function uiFieldAddress(field, context) {
         nominatim = services.nominatim,
         wrap = d3.select(null),
         isInitialized = false,
+        widths,
+        addrTags,
         entity;
 
     function getNearStreets() {
@@ -120,8 +122,8 @@ export function uiFieldAddress(field, context) {
             return a && a.countryCodes && _.includes(a.countryCodes, countryCode);
         }) || _.first(dataAddressFormats);
 
-        if (typeof addressFormat.widths != "undefined") { var widths = addressFormat.widths; }
-        else { var widths = {housenumber: 1/3, street: 2/3, city: 2/3, state: 1/4, postcode: 1/3}; }
+        if (typeof addressFormat.widths !== 'undefined') { widths = addressFormat.widths; }
+        else { widths = {housenumber: 1/3, street: 2/3, city: 2/3, state: 1/4, postcode: 1/3}; }
 
         function row(r) {
             // Normalize widths.
@@ -148,16 +150,16 @@ export function uiFieldAddress(field, context) {
             .append('input')
             .property('type', 'text')
             .attr('placeholder', function (d) {
-              var countryInserter = "";
-              if (addressFormat.customPlaceholders.indexOf(d.id) != -1) { countryInserter = "!" + countryCode; }
+              var countryInserter = '';
+              if (addressFormat.customPlaceholders.indexOf(d.id) !== -1) { countryInserter = '!' + countryCode; }
               return field.t('placeholders.' + d.id + countryInserter); })
             .attr('class', function (d) { return 'addr-' + d.id; })
             .style('width', function (d) { return d.width * 100 + '%'; });
 
         // Update
         // setup dropdowns for common address tags
-        if (typeof addressFormat.dropdowns != "undefined") { var addrTags = addressFormat.dropdowns; }
-        else { var addrTags = [
+        if (typeof addressFormat.dropdowns !== 'undefined') { addrTags = addressFormat.dropdowns; }
+        else { addrTags = [
             'street', 'city', 'state', 'province', 'district',
             'subdistrict', 'suburb', 'place', 'postcode']; }
 
