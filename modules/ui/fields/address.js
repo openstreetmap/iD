@@ -21,15 +21,6 @@ export function uiFieldAddress(field, context) {
         isInitialized = false,
         entity;
 
-    var widths = {
-        housenumber: 1/3,
-        street: 2/3,
-        city: 2/3,
-        state: 1/4,
-        postcode: 1/3
-    };
-
-
     function getNearStreets() {
         var extent = entity.extent(context.graph()),
             l = extent.center(),
@@ -51,6 +42,7 @@ export function uiFieldAddress(field, context) {
             .sort(function(a, b) {
                 return a.dist - b.dist;
             });
+
         return _.uniqBy(streets, 'value');
 
         function isAddressable(d) {
@@ -76,6 +68,7 @@ export function uiFieldAddress(field, context) {
             .sort(function(a, b) {
                 return a.dist - b.dist;
             });
+
         return _.uniqBy(cities, 'value');
 
 
@@ -96,49 +89,27 @@ export function uiFieldAddress(field, context) {
         }
     }
 
-
     function getNearValues(key) {
         var extent = entity.extent(context.graph()),
             l = extent.center(),
             box = geoExtent(l).padByMeters(200);
 
         var results = context.intersects(box)
-            .filter(function hasTag(d) { return d.tags[key]; })
-            .map(function(d) { return {
-                    title: d.tags[key],
-                    value: d.tags[key],
-                    dist: geoSphericalDistance(d.extent(context.graph()).center(), l)
-                }; })
-            .sort(function(a, b) { return a.dist - b.dist; });
-        alert("Values: " + key + ": " + JSON.stringify(_.uniqBy(results, 'value')));
-        return _.uniqBy(results, 'value');
-    }
-
-    function getNearPlaces(addrKey, placeValues) {
-        var extent = entity.extent(context.graph()),
-            l = extent.center(),
-            box = geoExtent(l).padByMeters(200);
-
-        var places = context.intersects(box)
-            .filter(isAddressable)
+            .filter(function hasTag(d) {
+                return d.tags[key];
+            })
             .map(function(d) {
                 return {
-                    title: d.tags['addr' + addrKey] || d.tags.name,
-                    value: d.tags['addr' + addrKey] || d.tags.name,
+                    title: d.tags[key],
+                    value: d.tags[key],
                     dist: geoSphericalDistance(d.extent(context.graph()).center(), l)
                 };
             })
             .sort(function(a, b) {
                 return a.dist - b.dist;
             });
-        alert("Places: " + addrKey + ": " + JSON.stringify(_.uniqBy(places, "value")));
-        return _.uniqBy(places, 'value');
 
-        function isAddressable(d) {
-            if (d.tags.place && d.tags.name && (placeValues.indexOf(d.tags.place) != -1)) { return true; }
-            else if (d.tags["addr" + addrKey]) { return true; }
-            else { return false; }
-        }
+        return _.uniqBy(results, 'value');
     }
 
 
@@ -148,6 +119,9 @@ export function uiFieldAddress(field, context) {
         var addressFormat = _.find(dataAddressFormats, function (a) {
             return a && a.countryCodes && _.includes(a.countryCodes, countryCode);
         }) || _.first(dataAddressFormats);
+
+        if (typeof addressFormat.widths != "undefined") { var widths = addressFormat.widths; }
+        else { var widths = {housenumber: 1/3, street: 2/3, city: 2/3, state: 1/4, postcode: 1/3}; }
 
         function row(r) {
             // Normalize widths.
@@ -182,18 +156,15 @@ export function uiFieldAddress(field, context) {
 
         // Update
         // setup dropdowns for common address tags
-        if (typeof addressFormat.dropdowns == "object") { var addrTags = addressFormat.dropdowns; }
+        if (typeof addressFormat.dropdowns != "undefined") { var addrTags = addressFormat.dropdowns; }
         else { var addrTags = [
             'street', 'city', 'state', 'province', 'district',
             'subdistrict', 'suburb', 'place', 'postcode']; }
 
-        alert("placeKeys: " + JSON.stringify(addressFormat.placeKeys))
-
         addrTags.forEach(function(tag) {
-            var nearValues = (typeof addressFormat.placeKeys.tag == "object") ? getNearPlaces(tag, addressFormat.placeKeys.tag)
-              : (tag === "street") ? getNearStreets()
-              : (tag === "city") ? getNearCities()
-              : getNearValues(tag);
+            var nearValues = (tag === 'street') ? getNearStreets
+                    : (tag === 'city') ? getNearCities
+                    : getNearValues;
 
             wrap.selectAll('.addr-' + tag)
                 .call(d3combobox()
