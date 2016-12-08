@@ -6,6 +6,8 @@ import { utilDetect } from '../util/detect';
 import toGeoJSON from 'togeojson';
 import fromEsri from 'esri-to-geojson';
 
+layerImports = {};
+
 export function svgEsri(projection, context, dispatch) {
     var showLabels = true,
         detected = utilDetect(),
@@ -214,7 +216,43 @@ export function svgEsri(projection, context, dispatch) {
                 console.log('Esri service URL did not load');
                 console.error(err);
             } else {
-                drawEsri.geojson(fromEsri.fromEsri(JSON.parse(data)));
+                var jsondl = fromEsri.fromEsri(JSON.parse(data));
+                if (jsondl.features.length) {
+                    var samplefeature = jsondl.features[0];
+                    var keys = Object.keys(samplefeature.properties);
+                    function doKey(r) {
+                        if (r >= keys.length) {
+                            return;
+                        }
+                        var row = d3.selectAll('.esri-table').append('tr');
+                        row.append('td').text(keys[r]);
+                        var outfield = row.append('td').append('input');
+                        outfield.attr('type', 'text')
+                            .attr('name', keys[r])
+                            .attr('placeholder', (layerImports[keys[r]] || samplefeature.properties[keys[r]]))
+                            .on('change', function() {
+                                //console.log(this.name + ' -> ' + this.value);
+                                layerImports[this.name] = this.value;
+                            });
+                        doKey(r + 1);
+                    }
+                    doKey(0);
+                    
+                    var convertedKeys = Object.keys(layerImports);
+                    for (var f = 0; f < jsondl.features.length; f++) {
+                        samplefeature = jsondl.features[f];
+                        for (var k = 0; k < convertedKeys.length; k++) {
+                            var kv = samplefeature.properties[convertedKeys[k]];
+                            if (kv) {
+                                samplefeature.properties[layerImports[convertedKeys[k]]] = kv;
+                                delete samplefeature.properties[convertedKeys[k]];
+                            }
+                        }
+                    }
+                } else {
+                    console.log('no feature to build table from');
+                }
+                drawEsri.geojson(jsondl);
             }
         });
         

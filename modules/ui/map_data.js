@@ -226,6 +226,43 @@ export function uiMapData(context) {
             labelEsri
                 .append('span')
                 .text('Input Esri layer');
+            
+            if (this.pane) {
+                // create pane only once
+                return;
+            }
+            // console.log('making new pane');
+            
+            this.pane = d3.select('.map-controls').append('div')
+                .attr('class', 'help-wrap map-overlay fillL col5 content hide esri-pane');
+                        
+            this.pane.append('button')
+                .attr('tabindex', -1)
+                .on('click', toggle)
+                .call(svgIcon('#icon-close'));
+            var content = this.pane.append('div')
+                .attr('class', 'left-content');
+
+            var doctitle = content.append('h3')
+                .text('Importing Esri Layer...');
+            
+            var body = content.append('div')
+                .attr('class', 'body')
+                .append('table')
+                    .attr('border', '1')
+                    .attr('class', 'esri-table');
+            
+            this.pane.append('button')
+                .on('click', function() {
+                    // refresh
+                    setEsriLayer(context.storage('esriLayerUrl'));
+                })
+                .text('Save')
+                .call(svgIcon('#icon-refresh'));
+        }
+        
+        function toggle() {
+            d3.selectAll('.esri-pane').classed('hide', !d3.selectAll('.esri-pane').classed('hide'));
         }
         
         function editEsriLayer() {
@@ -242,6 +279,9 @@ export function uiMapData(context) {
             context.storage('esriLayerUrl', template);
             var esriLayer = context.layers().layer('esri');
             esriLayer.url(template);
+            
+            this.pane.property('scrollTop', 0);
+            toggle();
         }
         
         function selectEsriLayer() {

@@ -1504,6 +1504,10 @@ text.esri {
     fill: #FF26D4;
 }
 
+.esri button {
+    float: right;
+}
+
 /* GPX Paths */
 .layer-gpx {
     pointer-events: none;
