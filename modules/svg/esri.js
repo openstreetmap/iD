@@ -216,6 +216,8 @@ export function svgEsri(projection, context, dispatch) {
                 console.log('Esri service URL did not load');
                 console.error(err);
             } else {
+                var esriTable = d3.selectAll('.esri-table').html('');
+                
                 var jsondl = fromEsri.fromEsri(JSON.parse(data));
                 if (jsondl.features.length) {
                     var samplefeature = jsondl.features[0];
@@ -224,7 +226,7 @@ export function svgEsri(projection, context, dispatch) {
                         if (r >= keys.length) {
                             return;
                         }
-                        var row = d3.selectAll('.esri-table').append('tr');
+                        var row = esriTable.append('tr');
                         row.append('td').text(keys[r]);
                         var outfield = row.append('td').append('input');
                         outfield.attr('type', 'text')
@@ -239,19 +241,23 @@ export function svgEsri(projection, context, dispatch) {
                     doKey(0);
                     
                     var convertedKeys = Object.keys(layerImports);
-                    for (var f = 0; f < jsondl.features.length; f++) {
-                        samplefeature = jsondl.features[f];
-                        for (var k = 0; k < convertedKeys.length; k++) {
-                            var kv = samplefeature.properties[convertedKeys[k]];
-                            if (kv) {
-                                samplefeature.properties[layerImports[convertedKeys[k]]] = kv;
-                                delete samplefeature.properties[convertedKeys[k]];
+                    if (convertedKeys.length) {
+                        for (var f = 0; f < jsondl.features.length; f++) {
+                            samplefeature = jsondl.features[f];
+                            var outprops = {};
+                            for (var k = 0; k < convertedKeys.length; k++) {
+                                var kv = samplefeature.properties[convertedKeys[k]];
+                                if (kv) {
+                                    outprops[layerImports[convertedKeys[k]]] = kv;
+                                }
                             }
+                            jsondl.features[f].properties = outprops;
                         }
                     }
                 } else {
                     console.log('no feature to build table from');
                 }
+                // console.log(jsondl);
                 drawEsri.geojson(jsondl);
             }
         });
