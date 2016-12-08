@@ -100,7 +100,7 @@ export function behaviorHover() {
                     });
                 }
 
-                var suppressed = altDisables && d3.event && d3.event.altKey;
+	            var suppressed = d3.event && ((altDisables && d3.event.altKey) || d3.event.shiftKey);
 
                 selection.selectAll(selector)
                     .classed(suppressed ? 'hover-suppressed' : 'hover', true);

@@ -2,6 +2,7 @@ import _ from 'lodash';
 
 export { geoExtent } from './extent.js';
 export { geoRawMercator } from './raw_mercator.js';
+export { calcShiftPoint } from './pretty_angles';
 
 
 export function geoRoundCoords(c) {
