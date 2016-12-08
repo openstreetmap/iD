@@ -22,7 +22,7 @@ import {
 import {
     geoChooseEdge,
     geoEdgeEqual,
-	calcShiftPoint
+    calcShiftPoint
 } from '../geo/index';
 
 import {
