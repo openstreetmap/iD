@@ -226,16 +226,17 @@ export function uiMapData(context) {
             labelEsri
                 .append('span')
                 .text('Input Esri layer');
-            
+
+            // create ESRI layer edit pane only once            
             if (this.pane) {
-                // create pane only once
                 return;
             }
-            // console.log('making new pane');
             
+            // based on the help pane            
             this.pane = d3.select('.map-controls').append('div')
                 .attr('class', 'help-wrap map-overlay fillL col5 content hide esri-pane');
                         
+            // exit button
             this.pane.append('button')
                 .attr('tabindex', -1)
                 .on('click', toggle)
@@ -243,59 +244,54 @@ export function uiMapData(context) {
             
             var content = this.pane.append('div')
                 .attr('class', 'left-content');
-
             var doctitle = content.append('h3')
                 .text('Importing Esri Layer...');
-            
             var body = content.append('div')
                 .attr('class', 'body')
                 .append('table')
                     .attr('border', '1')
                     .attr('class', 'esri-table');
             
+            // save button should make changes effective on existing and new data
             this.pane.append('button')
                 .on('click', function() {
-                    // refresh
+                    // TODO: remove all existing data
                     setEsriLayer(context.storage('esriLayerUrl'));
                 })
                 .text('Save')
+                
+                // todo: real save icon
                 .call(svgIcon('#icon-reload'));
         }
         
         function toggle() {
+            // show and hide Esri data import pane
             d3.selectAll('.esri-pane')
                 .classed('hide', !d3.selectAll('.esri-pane').classed('hide'));
         }
         
         function editEsriLayer() {
+            // prompt the user to enter an ArcGIS layer
             d3.event.preventDefault();
             var template = window.prompt('Enter an Esri service URL', esriLayerUrl);
             if (template) {
                 setEsriLayer(template);
             } else {
-                selectEsriLayer();
+                // TODO: prepare for user to enter no URL or invalid URL
             }
         }
 
         function setEsriLayer(template) {
+            // remember Esri service URL for future visits
             context.storage('esriLayerUrl', template);
+            
+            // start loading data onto the map
             var esriLayer = context.layers().layer('esri');
             esriLayer.url(template);
             
+            // scroll pane to top and make visible
             this.pane.property('scrollTop', 0);
             toggle();
-        }
-        
-        function selectEsriLayer() {
-            function active(d) {
-                return context.background().showsLayer(d);
-            }
-
-            content.selectAll('.layer, .custom_layer')
-                .classed('active', active)
-                .classed('switch', true) // function(d) { return d === previous; })
-                .selectAll('input')
-                .property('checked', active);
         }
 
         function drawGpxItem(selection) {

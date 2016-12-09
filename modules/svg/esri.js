@@ -10,8 +10,11 @@ import { utilDetect } from '../util/detect';
 import toGeoJSON from 'togeojson';
 import fromEsri from 'esri-to-geojson';
 
-layerImports = {};
-knownObjectIds = {};
+// dictionary matching geo-properties to OpenStreetMap tags 1:1
+window.layerImports = {};
+
+// prevent re-downloading and re-adding the same feature
+window.knownObjectIds = {};
 
 export function svgEsri(projection, context, dispatch) {
     var showLabels = true,
@@ -51,24 +54,12 @@ export function svgEsri(projection, context, dispatch) {
         var geojson = svgEsri.geojson,
             enabled = svgEsri.enabled;
 
-        layer = selection.selectAll('.layer-esri')
-            .data(enabled ? [0] : []);
-
-        layer.exit();
-            //.remove();
-
-        layer = layer.enter()
-            .append('g')
-            .attr('class', 'layer-esri')
-            .merge(layer);
-
-        var entities = [];
         (geojson.features || []).map(function(d) {
             // don't reload the same objects over again
-            if (knownObjectIds[d.properties.OBJECTID]) {
+            if (d.properties.OBJECTID && window.knownObjectIds[d.properties.OBJECTID]) {
                 return;
             }
-            knownObjectIds[d.properties.OBJECTID] = true;
+            window.knownObjectIds[d.properties.OBJECTID] = true;
         
             var props, nodes, ln, way;
             function makeEntity(loc_or_nodes) {
@@ -80,6 +71,7 @@ export function svgEsri(projection, context, dispatch) {
                 // don't bring the service's OBJECTID any further
                 delete props.tags.OBJECTID;
                 
+                // allows this helper method to work on nodes and ways
                 if (loc_or_nodes.length && (typeof loc_or_nodes[0] === 'string')) {
                     props.nodes = loc_or_nodes;
                 } else {
@@ -89,6 +81,7 @@ export function svgEsri(projection, context, dispatch) {
             }
                 
             function makeMiniNodes(pts) {
+                // generates the nodes which make up a longer way
                 var nodes = [];
                 for (var p = 0; p < pts.length; p++) {
                     props = makeEntity(pts[p]);
@@ -102,7 +95,8 @@ export function svgEsri(projection, context, dispatch) {
                 }
                 return nodes;
             }
-                
+            
+            // importing different GeoJSON geometries
             if (d.geometry.type === 'Point') {
                 props = makeEntity(d.geometry.coordinates);
                 var node = new osmNode(props);
@@ -121,6 +115,7 @@ export function svgEsri(projection, context, dispatch) {
                 );
                     
             } else if (d.geometry.type === 'MultiLineString') {
+                // TODO: represent as a relation and not as multiple disconnected ways
                 for (ln = 0; ln < d.geometry.coordinates.length; ln++) {
                     nodes = makeMiniNodes(d.geometry.coordinates[ln]);
                     props = makeEntity(nodes);
@@ -132,6 +127,7 @@ export function svgEsri(projection, context, dispatch) {
                 }
                     
             } else if (d.geometry.type === 'Polygon') {
+                // TODO: allow donut hole polygons using relations and GeoJSON rings
                 d.properties.area = d.properties.area || 'yes';
                 nodes = makeMiniNodes(d.geometry.coordinates[0]);
                 props = makeEntity(nodes);
@@ -142,6 +138,8 @@ export function svgEsri(projection, context, dispatch) {
                 );
                     
             } else if (d.geometry.type === 'MultiPolygon') {
+                // TODO: allow donut hole polygons using relations and GeoJSON rings
+                // TODO: represent as a relation and not as multiple disconnected Polygons
                 d.properties.area = d.properties.area || 'yes';
                 for (ln = 0; ln < d.geometry.coordinates.length; ln++) {
                     nodes = makeMiniNodes(d.geometry.coordinates[ln][0]);
@@ -156,14 +154,25 @@ export function svgEsri(projection, context, dispatch) {
         
         return this;
     }
-
-
-    drawEsri.showLabels = function(_) {
-        if (!arguments.length) return showLabels;
-        showLabels = _;
-        return this;
-    };
-
+    
+    // iterate through keys, adding a row describing each
+    // user can set a new property name for each row
+    function doKey(r, keys, samplefeature, esriTable) {
+        if (r >= keys.length) {
+            return;
+        }
+        var row = esriTable.append('tr');
+        row.append('td').text(keys[r]);
+        var outfield = row.append('td').append('input');
+        outfield.attr('type', 'text')
+            .attr('name', keys[r])
+            .attr('placeholder', (window.layerImports[keys[r]] || samplefeature.properties[keys[r]]))
+            .on('change', function() {
+                // properties with this.name renamed to this.value
+                window.layerImports[this.name] = this.value;
+            });
+        doKey(r + 1, keys, esriTable);
+    }
 
     drawEsri.enabled = function(_) {
         if (!arguments.length) return svgEsri.enabled;
@@ -187,8 +196,8 @@ export function svgEsri(projection, context, dispatch) {
         return this;
     };
 
-
     drawEsri.url = function(true_url) {
+        // add necessary URL parameters to the user's URL
         var url = true_url;
         if (url.indexOf('outSR') === -1) {
             url += '&outSR=4326';
@@ -197,6 +206,7 @@ export function svgEsri(projection, context, dispatch) {
             url += '&f=json';
         }        
         
+        // turn iD Editor bounds into a query
         var bounds = context.map().trimmedExtent().bbox();
         bounds = JSON.stringify({
             xmin: bounds.minX.toFixed(6),
@@ -207,14 +217,17 @@ export function svgEsri(projection, context, dispatch) {
               wkid: 4326
             }
         });
-        if (this.lastBounds === bounds) {
-            // unchanged
+        if (this.lastBounds === bounds && this.lastProps === JSON.stringify(window.layerImports)) {
+            // unchanged bounds, unchanged import parameters, so unchanged data
             return this;
         }
-        this.lastBounds = bounds;
         
+        // data has changed - make a query
+        this.lastBounds = bounds;
+        this.lastProps = JSON.stringify(window.layerImports);
+
+        // make a spatial query within the user viewport (unless the user made their own spatial query)       
         if (url.indexOf('spatialRel') === -1) {
-            // don't overwrite a spatial query
             url += '&geometry=' + this.lastBounds;
             url += '&geometryType=esriGeometryEnvelope';
             url += '&spatialRel=esriSpatialRelIntersects';
@@ -228,38 +241,31 @@ export function svgEsri(projection, context, dispatch) {
             } else {
                 var esriTable = d3.selectAll('.esri-table').html('');
                 
+                // convert EsriJSON to GeoJSON here
                 var jsondl = fromEsri.fromEsri(JSON.parse(data));
+                
                 if (jsondl.features.length) {
+                    // make a row for each GeoJSON property
+                    // existing name appears as a label
+                    // sample data appears as a text input placeholder
+                    // adding text over the sample data makes it into an OSM tag
+                    // TODO: target tags (addresses, roads, bike lanes)
                     var samplefeature = jsondl.features[0];
                     var keys = Object.keys(samplefeature.properties);
-                    function doKey(r) {
-                        if (r >= keys.length) {
-                            return;
-                        }
-                        var row = esriTable.append('tr');
-                        row.append('td').text(keys[r]);
-                        var outfield = row.append('td').append('input');
-                        outfield.attr('type', 'text')
-                            .attr('name', keys[r])
-                            .attr('placeholder', (layerImports[keys[r]] || samplefeature.properties[keys[r]]))
-                            .on('change', function() {
-                                //console.log(this.name + ' -> ' + this.value);
-                                layerImports[this.name] = this.value;
-                            });
-                        doKey(r + 1);
-                    }
-                    doKey(0);
+                    doKey(0, keys, samplefeature, esriTable);
                     
-                    var convertedKeys = Object.keys(layerImports);
+                    // if any import properties were added, make these mods and reject all other properties
+                    var convertedKeys = Object.keys(window.layerImports);
                     if (convertedKeys.length) {
                         jsondl.features.map(function(selectfeature) {
+                            // keep the OBJECTID to make sure we don't download the same data multiple times
                             var outprops = {
                                 OBJECTID: selectfeature.properties.OBJECTID
                             };
                             for (var k = 0; k < convertedKeys.length; k++) {
                                 var kv = selectfeature.properties[convertedKeys[k]];
                                 if (kv) {
-                                    outprops[layerImports[convertedKeys[k]]] = kv;
+                                    outprops[window.layerImports[convertedKeys[k]]] = kv;
                                 }
                             }
                             selectfeature.properties = outprops;
@@ -269,24 +275,25 @@ export function svgEsri(projection, context, dispatch) {
                 } else {
                     console.log('no feature to build table from');
                 }
-                // console.log(jsondl);
                 drawEsri.geojson(jsondl);
             }
         });
         
+        // whenever map is moved, start 0.7s timer to re-download data from ArcGIS service
         context.map().on('move', function() {
             if (this.timeout) {
                clearTimeout(this.timeout);
             }
             this.timeout = setTimeout(function() {
                 this.url(true_url);
-            }.bind(this), 500);
+            }.bind(this), 700);
         }.bind(this));
         
         return this;
     };
 
     drawEsri.fitZoom = function() {
+        // todo: implement
         if (!this.hasData()) return this;
         var geojson = svgEsri.geojson;
 
