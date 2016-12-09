@@ -122,7 +122,7 @@ export function uiFieldAddress(field, context) {
             return a && a.countryCodes && _.includes(a.countryCodes, countryCode);
         }) || _.first(dataAddressFormats);
 
-        if (typeof addressFormat.widths != 'undefined') { widths = addressFormat.widths; }
+        if (typeof addressFormat.widths !== 'undefined') { widths = addressFormat.widths; }
         else { widths = {housenumber: 1/3, street: 2/3, city: 2/3, state: 1/4, postcode: 1/3}; }
 
         function row(r) {
@@ -158,7 +158,7 @@ export function uiFieldAddress(field, context) {
 
         // Update
         // setup dropdowns for common address tags
-        if (typeof addressFormat.dropdowns != "undefined") { addrTags = addressFormat.dropdowns; }
+        if (typeof addressFormat.dropdowns !== 'undefined') { addrTags = addressFormat.dropdowns; }
         else { addrTags = [
             'street', 'city', 'state', 'province', 'district',
             'subdistrict', 'suburb', 'place', 'postcode']; }
