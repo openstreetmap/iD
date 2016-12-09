@@ -7,6 +7,7 @@ import toGeoJSON from 'togeojson';
 import fromEsri from 'esri-to-geojson';
 
 layerImports = {};
+knownObjectIds = {};
 
 export function svgEsri(projection, context, dispatch) {
     var showLabels = true,
@@ -49,8 +50,8 @@ export function svgEsri(projection, context, dispatch) {
         layer = selection.selectAll('.layer-esri')
             .data(enabled ? [0] : []);
 
-        layer.exit()
-            .remove();
+        layer.exit();
+            //.remove();
 
         layer = layer.enter()
             .append('g')
@@ -58,84 +59,82 @@ export function svgEsri(projection, context, dispatch) {
             .merge(layer);
 
 
-        var paths = layer
-            .selectAll('path')
-            .data(geojson.features || []);
-
-        paths.exit()
-            .remove();
-        
+        //var paths = layer
+        //    .selectAll('path')
+        //    .data(geojson.features || []);
         var entities = [];
-
-        paths = paths.enter()
-            .append('path')
-            .attr('class', function(d) {
-                var props, nodes, pts, ln;
-                function makeEntity(id, loc_or_nodes) {
-                    props = {
-                        id: id,
-                        version: 1,
-                        user: 'mapmeld',
-                        tags: d.properties,
-                        visible: true
-                    };
-                    if (loc_or_nodes.length && (typeof loc_or_nodes[0] === 'string')) {
-                        props.nodes = loc_or_nodes;
-                    } else {
-                        props.loc = loc_or_nodes;
-                    }
-                    return props;
+        (geojson.features || []).map(function(d) {
+            if (knownObjectIds[d.properties.OBJECTID]) {
+                return;
+            }
+            knownObjectIds[d.properties.OBJECTID] = true;
+        
+            var props, nodes, pts, ln;
+            function makeEntity(id, loc_or_nodes) {
+                props = {
+                    id: id,
+                    version: 1,
+                    user: 'mapmeld',
+                    tags: d.properties,
+                    visible: true
+                };
+                delete props.tags.OBJECTID;
+                if (loc_or_nodes.length && (typeof loc_or_nodes[0] === 'string')) {
+                    props.nodes = loc_or_nodes;
+                } else {
+                    props.loc = loc_or_nodes;
                 }
+                return props;
+            }
                 
-                function makeMiniNodes(pts, ln) {
-                    ln = ln || 0;
-                    var nodes = [];
-                    for (var p = 0; p < pts.length; p++) {
-                        var mininode_id = 'n' + ln + '' + p + '000' + d.properties.OBJECTID;
-                        nodes.push(mininode_id);
-                        props = makeEntity(mininode_id, pts[p]);
-                        props.tags = {};
-                        entities.push(new osmNode(props));
-                    }
-                    return nodes;
-                }
-                
-                if (d.geometry.type === 'Point') {
-                    props = makeEntity('esri_n_' + d.properties.OBJECTID, d.geometry.coordinates);
+            function makeMiniNodes(pts, ln) {
+                ln = ln || 0;
+                var nodes = [];
+                for (var p = 0; p < pts.length; p++) {
+                    var mininode_id = 'n' + ln + '' + p + '000' + d.properties.OBJECTID;
+                    nodes.push(mininode_id);
+                    props = makeEntity(mininode_id, pts[p]);
+                    props.tags = {};
                     entities.push(new osmNode(props));
-                    
-                } else if (d.geometry.type === 'LineString') {
-                    pts = d.geometry.coordinates;
-                    nodes = makeMiniNodes(pts);
-                    props = makeEntity('esri_w_' + d.properties.OBJECTID, nodes);
-                    entities.push(new osmWay(props, nodes));
-                    
-                } else if (d.geometry.type === 'MultiLineString') {
-                    for (ln = 0; ln < d.geometry.coordinates.length; ln++) {
-                        pts = d.geometry.coordinates[ln];
-                        nodes = makeMiniNodes(pts, ln);
-                        props = makeEntity('esri_w_' + ln + '_' + d.properties.OBJECTID, nodes);
-                        entities.push(new osmWay(props));
-                    }
-                    
-                } else if (d.geometry.type === 'Polygon') {
-                    d.properties.area = d.properties.area || 'yes';
-                    pts = d.geometry.coordinates[0];
-                    nodes = makeMiniNodes(pts);
-                    props = makeEntity('esri_w_' + d.properties.OBJECTID, nodes);
-                    entities.push(new osmWay(props));
-                    
-                } else if (d.geometry.type === 'MultiPolygon') {
-                    d.properties.area = d.properties.area || 'yes';
-                    for (ln = 0; ln < d.geometry.coordinates.length; ln++) {
-                        pts = d.geometry.coordinates[ln][0];
-                        nodes = makeMiniNodes(pts, ln);
-                        props = makeEntity('esri_w_' + ln + '_' + d.properties.OBJECTID, nodes);
-                        entities.push(new osmWay(props));
-                    }
                 }
-            })
-            .merge(paths);
+                return nodes;
+            }
+                
+            if (d.geometry.type === 'Point') {
+                props = makeEntity('esri_n_' + d.properties.OBJECTID, d.geometry.coordinates);
+                entities.push(new osmNode(props));
+                    
+            } else if (d.geometry.type === 'LineString') {
+                pts = d.geometry.coordinates;
+                nodes = makeMiniNodes(pts);
+                props = makeEntity('esri_w_' + d.properties.OBJECTID, nodes);
+                entities.push(new osmWay(props, nodes));
+                    
+            } else if (d.geometry.type === 'MultiLineString') {
+                for (ln = 0; ln < d.geometry.coordinates.length; ln++) {
+                    pts = d.geometry.coordinates[ln];
+                    nodes = makeMiniNodes(pts, ln);
+                    props = makeEntity('esri_w_' + ln + '_' + d.properties.OBJECTID, nodes);
+                    entities.push(new osmWay(props));
+                }
+                    
+            } else if (d.geometry.type === 'Polygon') {
+                d.properties.area = d.properties.area || 'yes';
+                pts = d.geometry.coordinates[0];
+                nodes = makeMiniNodes(pts);
+                props = makeEntity('esri_w_' + d.properties.OBJECTID, nodes);
+                entities.push(new osmWay(props));
+                    
+            } else if (d.geometry.type === 'MultiPolygon') {
+                d.properties.area = d.properties.area || 'yes';
+                for (ln = 0; ln < d.geometry.coordinates.length; ln++) {
+                    pts = d.geometry.coordinates[ln][0];
+                    nodes = makeMiniNodes(pts, ln);
+                    props = makeEntity('esri_w_' + ln + '_' + d.properties.OBJECTID, nodes);
+                    entities.push(new osmWay(props));
+                }
+            }
+        });
         
         if (entities.length) {
             context.entitiesLoaded(null, {
@@ -143,6 +142,15 @@ export function svgEsri(projection, context, dispatch) {
                 extent: context.map().trimmedExtent()
             });
         }
+        
+        return this;
+
+        paths.exit()
+            .remove();
+        
+        paths = paths.enter()
+            .append('path')
+            .merge(paths);
         
         return this;
     }
@@ -242,17 +250,19 @@ export function svgEsri(projection, context, dispatch) {
                     
                     var convertedKeys = Object.keys(layerImports);
                     if (convertedKeys.length) {
-                        for (var f = 0; f < jsondl.features.length; f++) {
-                            samplefeature = jsondl.features[f];
-                            var outprops = {};
+                        jsondl.features.map(function(selectfeature) {
+                            var outprops = {
+                                OBJECTID: selectfeature.properties.OBJECTID
+                            };
                             for (var k = 0; k < convertedKeys.length; k++) {
-                                var kv = samplefeature.properties[convertedKeys[k]];
+                                var kv = selectfeature.properties[convertedKeys[k]];
                                 if (kv) {
                                     outprops[layerImports[convertedKeys[k]]] = kv;
                                 }
                             }
-                            jsondl.features[f].properties = outprops;
-                        }
+                            selectfeature.properties = outprops;
+                            return selectfeature;
+                        });
                     }
                 } else {
                     console.log('no feature to build table from');

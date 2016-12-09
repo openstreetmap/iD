@@ -240,6 +240,7 @@ export function uiMapData(context) {
                 .attr('tabindex', -1)
                 .on('click', toggle)
                 .call(svgIcon('#icon-close'));
+            
             var content = this.pane.append('div')
                 .attr('class', 'left-content');
 
@@ -258,11 +259,12 @@ export function uiMapData(context) {
                     setEsriLayer(context.storage('esriLayerUrl'));
                 })
                 .text('Save')
-                .call(svgIcon('#icon-refresh'));
+                .call(svgIcon('#icon-reload'));
         }
         
         function toggle() {
-            d3.selectAll('.esri-pane').classed('hide', !d3.selectAll('.esri-pane').classed('hide'));
+            d3.selectAll('.esri-pane')
+                .classed('hide', !d3.selectAll('.esri-pane').classed('hide'));
         }
         
         function editEsriLayer() {
@@ -292,7 +294,6 @@ export function uiMapData(context) {
             content.selectAll('.layer, .custom_layer')
                 .classed('active', active)
                 .classed('switch', true) // function(d) { return d === previous; })
-                // .call(setTooltips)
                 .selectAll('input')
                 .property('checked', active);
         }
