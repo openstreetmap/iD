@@ -26,7 +26,7 @@ export function operationDelete(selectedIDs, context) {
             annotation = t('operations.delete.annotation.' + geometry);
 
             // Select the next closest node in the way.
-            if (geometry === 'vertex' && parents.length === 1 && parent.nodes.length > 2) {
+            if (geometry === 'vertex' && parent.nodes.length > 2) {
                 var nodes = parent.nodes,
                     i = nodes.indexOf(id);
 
