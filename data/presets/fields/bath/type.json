@@ -1,0 +1,12 @@
+{
+  "key": "bath:type",
+  "type": "combo",
+  "label": "Bath amenity",
+  "strings": {
+    "options": {
+      "onsen": "Onsen",
+      "foot_bath": "Foot Bath",
+      "hot_spring": "Hot Spring"
+    }
+  }
+}

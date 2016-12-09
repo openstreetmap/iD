@@ -784,6 +784,20 @@
                 "barrier": {
                     "label": "Type"
                 },
+                "bath/open_air": {
+                    "label": "Open air bath"
+                },
+                "bath/sand_bath": {
+                    "label": "Sand bath"
+                },
+                "bath/type": {
+                    "label": "Bath amenity",
+                    "options": {
+                        "onsen": "Onsen",
+                        "foot_bath": "Foot Bath",
+                        "hot_spring": "Hot Spring"
+                    }
+                },
                 "beauty": {
                     "label": "Shop Type"
                 },
@@ -2059,6 +2073,10 @@
                 "amenity/pub": {
                     "name": "Pub",
                     "terms": "alcohol,drink,dive,beer,bier,booze"
+                },
+                "amenity/public_bath": {
+                    "name": "Public bath",
+                    "terms": "onsen,foot bath,hot springs"
                 },
                 "amenity/public_bookcase": {
                     "name": "Public Bookcase",
