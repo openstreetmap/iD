@@ -44,13 +44,14 @@ export function operationDelete(selectedIDs, context) {
             }
         }
 
+        context.perform(action, annotation);
+
         if (nextSelectedID && context.hasEntity(nextSelectedID)) {
             context.enter(modeSelect(context, [nextSelectedID]));
         } else {
             context.enter(modeBrowse(context));
         }
 
-        context.perform(action, annotation);
     };
 
 
