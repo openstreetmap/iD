@@ -11,7 +11,7 @@ export function uiFieldCheck(field) {
         options = field.strings && field.strings.options,
         values = [],
         texts = [],
-        box = d3.select(null),
+        input = d3.select(null),
         text = d3.select(null),
         label = d3.select(null),
         entity, value;
@@ -52,25 +52,28 @@ export function uiFieldCheck(field) {
             .append('label')
             .attr('class', 'preset-input-wrap');
 
-        enter.append('input')
+        enter
+            .append('input')
             .property('indeterminate', field.type === 'check')
             .attr('type', 'checkbox')
-            .attr('id', 'preset-input-' + field.id)
+            .attr('id', 'preset-input-' + field.id);
+
+        enter
+            .append('span')
+            .text(texts[0])
+            .attr('class', 'value');
+
+        label = label.merge(enter);
+        input = label.selectAll('input');
+        text = label.selectAll('span.value');
+
+        input
             .on('click', function() {
                 var t = {};
                 t[field.key] = values[(values.indexOf(value) + 1) % values.length];
                 dispatch.call('change', this, t);
                 d3.event.stopPropagation();
             });
-
-        enter.append('span')
-            .text(texts[0])
-            .attr('class', 'value');
-
-        label = label.merge(enter);
-
-        box = label.selectAll('input');
-        text = label.selectAll('span.value');
     };
 
 
@@ -83,15 +86,15 @@ export function uiFieldCheck(field) {
 
     check.tags = function(tags) {
         value = tags[field.key];
-        box.property('indeterminate', field.type === 'check' && !value);
-        box.property('checked', value === 'yes');
+        input.property('indeterminate', field.type === 'check' && !value);
+        input.property('checked', value === 'yes');
         text.text(texts[values.indexOf(value)]);
         label.classed('set', !!value);
     };
 
 
     check.focus = function() {
-        box.node().focus();
+        input.node().focus();
     };
 
     return utilRebind(check, dispatch, 'on');
