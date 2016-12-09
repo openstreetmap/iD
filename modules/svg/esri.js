@@ -62,113 +62,97 @@ export function svgEsri(projection, context, dispatch) {
             .attr('class', 'layer-esri')
             .merge(layer);
 
-
-        //var paths = layer
-        //    .selectAll('path')
-        //    .data(geojson.features || []);
         var entities = [];
         (geojson.features || []).map(function(d) {
+            // don't reload the same objects over again
             if (knownObjectIds[d.properties.OBJECTID]) {
                 return;
             }
             knownObjectIds[d.properties.OBJECTID] = true;
         
-            var props, nodes, pts, ln;
-            function makeEntity(id, loc_or_nodes) {
+            var props, nodes, ln, way;
+            function makeEntity(loc_or_nodes) {
                 props = {
-                    // id: id,
-                    // version: 1,
-                    // user: 'mapmeld',
                     tags: d.properties,
                     visible: true
                 };
+            
+                // don't bring the service's OBJECTID any further
                 delete props.tags.OBJECTID;
+                
                 if (loc_or_nodes.length && (typeof loc_or_nodes[0] === 'string')) {
                     props.nodes = loc_or_nodes;
                 } else {
                     props.loc = loc_or_nodes;
-                    /*
-                    if (props.id[0] !== 'n') {
-                        props.id = 'n' + id;
-                    }
-                    */
                 }
                 return props;
             }
                 
-            function makeMiniNodes(pts, ln) {
-                ln = ln || 0;
+            function makeMiniNodes(pts) {
                 var nodes = [];
                 for (var p = 0; p < pts.length; p++) {
-                    var mininode_id = 'n' + ln + '' + p + '000' + d.properties.OBJECTID;
-                    nodes.push(mininode_id);
-                    props = makeEntity(mininode_id, pts[p]);
+                    props = makeEntity(pts[p]);
                     props.tags = {};
-                    entities.push(new osmNode(props));
+                    var node = new osmNode(props);
+                    context.perform(
+                        actionAddEntity(node),
+                        'adding node inside a way'
+                    );
+                    nodes.push(node.id);
                 }
                 return nodes;
             }
                 
             if (d.geometry.type === 'Point') {
-                props = makeEntity('esri_n_' + d.properties.OBJECTID, d.geometry.coordinates);
+                props = makeEntity(d.geometry.coordinates);
                 var node = new osmNode(props);
-                // entities.push(node);
                 context.perform(
                     actionAddEntity(node),
                     'adding point'
                 );
-
-                context.enter(
-                    modeSelect(context, [node.id]).suppressMenu(true).newFeature(true)
-                );
-                    
+                  
             } else if (d.geometry.type === 'LineString') {
-                pts = d.geometry.coordinates;
-                nodes = makeMiniNodes(pts);
-                props = makeEntity('esri_w_' + d.properties.OBJECTID, nodes);
-                entities.push(new osmWay(props, nodes));
+                nodes = makeMiniNodes(d.geometry.coordinates);
+                props = makeEntity(nodes);
+                way = new osmWay(props, nodes);
+                context.perform(
+                    actionAddEntity(way),
+                    'adding way'
+                );
                     
             } else if (d.geometry.type === 'MultiLineString') {
                 for (ln = 0; ln < d.geometry.coordinates.length; ln++) {
-                    pts = d.geometry.coordinates[ln];
-                    nodes = makeMiniNodes(pts, ln);
-                    props = makeEntity('esri_w_' + ln + '_' + d.properties.OBJECTID, nodes);
-                    entities.push(new osmWay(props));
+                    nodes = makeMiniNodes(d.geometry.coordinates[ln]);
+                    props = makeEntity(nodes);
+                    way = new osmWay(props);
+                    context.perform(
+                        actionAddEntity(way),
+                        'adding way within MultiLineString'
+                    );
                 }
                     
             } else if (d.geometry.type === 'Polygon') {
                 d.properties.area = d.properties.area || 'yes';
-                pts = d.geometry.coordinates[0];
-                nodes = makeMiniNodes(pts);
-                props = makeEntity('esri_w_' + d.properties.OBJECTID, nodes);
-                entities.push(new osmWay(props));
+                nodes = makeMiniNodes(d.geometry.coordinates[0]);
+                props = makeEntity(nodes);
+                way = new osmWay(props);
+                context.perform(
+                    actionAddEntity(way),
+                    'adding way within Polygon'
+                );
                     
             } else if (d.geometry.type === 'MultiPolygon') {
                 d.properties.area = d.properties.area || 'yes';
                 for (ln = 0; ln < d.geometry.coordinates.length; ln++) {
-                    pts = d.geometry.coordinates[ln][0];
-                    nodes = makeMiniNodes(pts, ln);
-                    props = makeEntity('esri_w_' + ln + '_' + d.properties.OBJECTID, nodes);
-                    entities.push(new osmWay(props));
+                    nodes = makeMiniNodes(d.geometry.coordinates[ln][0]);
+                    props = makeEntity(nodes);
+                    context.perform(
+                        actionAddEntity(way),
+                        'adding way within MultiPolygon'
+                    );
                 }
             }
         });
-        
-        if (entities.length) {
-            context.entitiesLoaded(null, {
-                data: entities,
-                extent: context.map().trimmedExtent()
-            });
-        }
-        
-        return this;
-
-        paths.exit()
-            .remove();
-        
-        paths = paths.enter()
-            .append('path')
-            .merge(paths);
         
         return this;
     }
