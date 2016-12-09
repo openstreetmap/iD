@@ -31,6 +31,18 @@ describe('iD.behaviorSelect', function() {
         container.remove();
     });
 
+    specify('refuse to enter select mode with no ids', function() {
+        context.enter(iD.modeSelect(context, []));
+        expect(context.mode().id, 'empty array').to.eql('browse');
+        context.enter(iD.modeSelect(context, undefined));
+        expect(context.mode().id, 'undefined').to.eql('browse');
+    });
+
+    specify('refuse to enter select mode with nonexistent ids', function() {
+        context.enter(iD.modeSelect(context, ['w-1']));
+        expect(context.mode().id).to.eql('browse');
+    });
+
     specify('click on entity selects the entity', function() {
         happen.click(context.surface().selectAll('.' + a.id).node());
         expect(context.selectedIDs()).to.eql([a.id]);

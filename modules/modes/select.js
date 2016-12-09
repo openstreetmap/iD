@@ -71,6 +71,23 @@ export function modeSelect(context, selectedIDs) {
     }
 
 
+    function checkSelectedIDs() {
+        var ids = [];
+        if (Array.isArray(selectedIDs)) {
+            ids = selectedIDs.filter(function(id) {
+                return context.hasEntity(id);
+            });
+        }
+
+        if (ids.length) {
+            selectedIDs = ids;
+        } else {
+            context.enter(modeBrowse(context));
+        }
+        return !!ids.length;
+    }
+
+
     // find the common parent ways for nextVertex, previousVertex
     function commonParents() {
         var graph = context.graph(),
@@ -171,6 +188,8 @@ export function modeSelect(context, selectedIDs) {
 
 
     mode.reselect = function() {
+        if (!checkSelectedIDs()) return;
+
         var surfaceNode = context.surface().node();
         if (surfaceNode.focus) {   // FF doesn't support it
             surfaceNode.focus();
@@ -206,10 +225,7 @@ export function modeSelect(context, selectedIDs) {
 
         function update() {
             closeMenu();
-            if (_.some(selectedIDs, function(id) { return !context.hasEntity(id); })) {
-                // Exit mode if selected entity gets undone
-                context.enter(modeBrowse(context));
-            }
+            checkSelectedIDs();
         }
 
 
@@ -236,6 +252,8 @@ export function modeSelect(context, selectedIDs) {
 
 
         function selectElements(drawn) {
+            if (!checkSelectedIDs()) return;
+
             var surface = context.surface(),
                 entity = singular();
 
@@ -371,6 +389,8 @@ export function modeSelect(context, selectedIDs) {
             }
         }
 
+
+        if (!checkSelectedIDs()) return;
 
         behaviors.forEach(function(behavior) {
             context.install(behavior);

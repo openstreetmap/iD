@@ -152,7 +152,9 @@ export function behaviorBreathe() {
 
     breathe.off = function() {
         done = true;
-        timer.stop();
+        if (timer) {
+            timer.stop();
+        }
         selected
             .interrupt()
             .call(reset);
