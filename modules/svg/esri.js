@@ -2,6 +2,10 @@ import * as d3 from 'd3';
 import _ from 'lodash';
 import { geoExtent, geoPolygonIntersectsPolygon } from '../geo/index';
 import { osmEntity, osmNode, osmRelation, osmWay } from '../osm/index';
+
+import { actionAddEntity } from '../actions/index';
+import { modeSelect } from '../modes/index';
+
 import { utilDetect } from '../util/detect';
 import toGeoJSON from 'togeojson';
 import fromEsri from 'esri-to-geojson';
@@ -72,9 +76,9 @@ export function svgEsri(projection, context, dispatch) {
             var props, nodes, pts, ln;
             function makeEntity(id, loc_or_nodes) {
                 props = {
-                    id: id,
-                    version: 1,
-                    user: 'mapmeld',
+                    // id: id,
+                    // version: 1,
+                    // user: 'mapmeld',
                     tags: d.properties,
                     visible: true
                 };
@@ -83,6 +87,11 @@ export function svgEsri(projection, context, dispatch) {
                     props.nodes = loc_or_nodes;
                 } else {
                     props.loc = loc_or_nodes;
+                    /*
+                    if (props.id[0] !== 'n') {
+                        props.id = 'n' + id;
+                    }
+                    */
                 }
                 return props;
             }
@@ -102,7 +111,16 @@ export function svgEsri(projection, context, dispatch) {
                 
             if (d.geometry.type === 'Point') {
                 props = makeEntity('esri_n_' + d.properties.OBJECTID, d.geometry.coordinates);
-                entities.push(new osmNode(props));
+                var node = new osmNode(props);
+                // entities.push(node);
+                context.perform(
+                    actionAddEntity(node),
+                    'adding point'
+                );
+
+                context.enter(
+                    modeSelect(context, [node.id]).suppressMenu(true).newFeature(true)
+                );
                     
             } else if (d.geometry.type === 'LineString') {
                 pts = d.geometry.coordinates;

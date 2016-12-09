@@ -173,6 +173,9 @@ export function uiEntityEditor(context) {
     function clean(o) {
 
         function cleanVal(k, v) {
+            // a number value from service should be converted to a string
+            v = v + '';
+
             function keepSpaces(k) {
                 return k.match(/_hours|_times/) !== null;
             }
