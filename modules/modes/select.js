@@ -301,7 +301,7 @@ export function modeSelect(context, selectedIDs) {
             if (parent) {
                 var way = context.entity(parent);
                 context.enter(
-                    modeSelect(context, [way.first()]).follow(true)
+                    modeSelect(context, [way.first()]).follow(true).suppressMenu(true)
                 );
             }
         }
@@ -313,7 +313,7 @@ export function modeSelect(context, selectedIDs) {
             if (parent) {
                 var way = context.entity(parent);
                 context.enter(
-                    modeSelect(context, [way.last()]).follow(true)
+                    modeSelect(context, [way.last()]).follow(true).suppressMenu(true)
                 );
             }
         }
@@ -337,7 +337,7 @@ export function modeSelect(context, selectedIDs) {
 
             if (index !== -1) {
                 context.enter(
-                    modeSelect(context, [way.nodes[index]]).follow(true)
+                    modeSelect(context, [way.nodes[index]]).follow(true).suppressMenu(true)
                 );
             }
         }
@@ -361,7 +361,7 @@ export function modeSelect(context, selectedIDs) {
 
             if (index !== -1) {
                 context.enter(
-                    modeSelect(context, [way.nodes[index]]).follow(true)
+                    modeSelect(context, [way.nodes[index]]).follow(true).suppressMenu(true)
                 );
             }
         }
