@@ -25,7 +25,8 @@
         },
         {
             "countryCodes": ["vn"],
-            "format": [["housenumber", "street"], ["subdistrict"], ["district"], ["city"], ["province", "postcode"]]
+            "format": [["housenumber", "street"], ["subdistrict"], ["district"], ["city"], ["province", "postcode"]],
+            "customPlaceholders": ["subdistrict", "district", "city"]
         },
         {
             "countryCodes": ["us"],
@@ -38,6 +39,13 @@
         {
             "countryCodes": ["tw"],
             "format": [["postcode", "city", "district"], ["place", "street"], ["housenumber", "floor"]]
+        },
+        {
+            "countryCodes": ["jp"],
+            "format": [["postcode", "province", "county"], ["city", "suburb"], ["quarter", "neighbourhood"], ["block_number", "housenumber"]],
+            "customPlaceholders": ["province", "county", "city", "suburb", "quarter", "neighbourhood", "block_number", "housenumber"],
+            "dropdowns": ["postcode", "province", "county", "city", "suburb", "quarter", "neighbourhood", "block_number"],
+            "widths": {"postcode": 0.3, "province": 0.35, "county": 0.35, "city": 0.65, "suburb": 0.35, "quarter": 0.5, "neighbourhood": 0.5, "block_number": 0.5}
         }
     ]
 }
