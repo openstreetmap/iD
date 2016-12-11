@@ -225,21 +225,21 @@
         },
         "bath/open_air": {
             "key": "bath:open_air",
-            "label": "Open air bath",
+            "label": "Open Air",
             "type": "check"
         },
         "bath/sand_bath": {
             "key": "bath:sand_bath",
-            "label": "Sand bath",
+            "label": "Sand Bath",
             "type": "check"
         },
         "bath/type": {
             "key": "bath:type",
             "type": "combo",
-            "label": "Bath amenity",
+            "label": "Specialty",
             "strings": {
                 "options": {
-                    "onsen": "Onsen",
+                    "onsen": "Japanese Onsen",
                     "foot_bath": "Foot Bath",
                     "hot_spring": "Hot Spring"
                 }

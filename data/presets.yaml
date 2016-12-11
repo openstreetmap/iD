@@ -169,20 +169,20 @@ en:
         label: Type
       bath/open_air:
         # 'bath:open_air=*'
-        label: Open air bath
+        label: Open Air
       bath/sand_bath:
         # 'bath:sand_bath=*'
-        label: Sand bath
+        label: Sand Bath
       bath/type:
         # 'bath:type=*'
-        label: Bath amenity
+        label: Specialty
         options:
           # 'bath:type=foot_bath'
           foot_bath: Foot Bath
           # 'bath:type=hot_spring'
           hot_spring: Hot Spring
           # 'bath:type=onsen'
-          onsen: Onsen
+          onsen: Japanese Onsen
       beauty:
         # beauty=*
         label: Shop Type
@@ -1658,9 +1658,9 @@ en:
         terms: '<translate with synonyms or related terms for ''Pub'', separated by commas>'
       amenity/public_bath:
         # amenity=public_bath
-        name: Public bath
+        name: Public Bath
         # 'terms: onsen,foot bath,hot springs'
-        terms: '<translate with synonyms or related terms for ''Public bath'', separated by commas>'
+        terms: '<translate with synonyms or related terms for ''Public Bath'', separated by commas>'
       amenity/public_bookcase:
         # amenity=public_bookcase
         name: Public Bookcase

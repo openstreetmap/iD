@@ -1894,7 +1894,7 @@
                 "foot bath",
                 "hot springs"
             ],
-            "name": "Public bath"
+            "name": "Public Bath"
         },
         "amenity/public_bookcase": {
             "icon": "library",

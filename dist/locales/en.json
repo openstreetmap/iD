@@ -785,15 +785,15 @@
                     "label": "Type"
                 },
                 "bath/open_air": {
-                    "label": "Open air bath"
+                    "label": "Open Air"
                 },
                 "bath/sand_bath": {
-                    "label": "Sand bath"
+                    "label": "Sand Bath"
                 },
                 "bath/type": {
-                    "label": "Bath amenity",
+                    "label": "Specialty",
                     "options": {
-                        "onsen": "Onsen",
+                        "onsen": "Japanese Onsen",
                         "foot_bath": "Foot Bath",
                         "hot_spring": "Hot Spring"
                     }
@@ -2075,7 +2075,7 @@
                     "terms": "alcohol,drink,dive,beer,bier,booze"
                 },
                 "amenity/public_bath": {
-                    "name": "Public bath",
+                    "name": "Public Bath",
                     "terms": "onsen,foot bath,hot springs"
                 },
                 "amenity/public_bookcase": {
