@@ -80,16 +80,20 @@
             "type": "address",
             "keys": [
                 "addr:city",
+                "addr:block_number",
                 "addr:conscriptionnumber",
                 "addr:country",
+                "addr:county",
                 "addr:district",
                 "addr:floor",
                 "addr:hamlet",
                 "addr:housename",
                 "addr:housenumber",
+                "addr:neighbourhood",
                 "addr:place",
                 "addr:postcode",
                 "addr:province",
+                "addr:quarter",
                 "addr:state",
                 "addr:street",
                 "addr:subdistrict",
@@ -104,20 +108,36 @@
             "strings": {
                 "placeholders": {
                     "city": "City",
+                    "block_number": "Block Number",
                     "conscriptionnumber": "123",
                     "country": "Country",
+                    "county": "County",
                     "district": "District",
                     "floor": "Floor",
                     "hamlet": "Hamlet",
                     "housename": "Housename",
                     "housenumber": "123",
+                    "neighbourhood": "Neighbourhood",
                     "place": "Place",
                     "postcode": "Postcode",
+                    "postcode!us": "ZIP Code",
                     "province": "Province",
+                    "quarter": "Quarter",
                     "state": "State",
                     "street": "Street",
                     "subdistrict": "Subdistrict",
-                    "suburb": "Suburb"
+                    "suburb": "Suburb",
+                    "subdistrict!vn": "Ward/Commune/Townlet",
+                    "district!vn": "Arrondissement/Town/District",
+                    "city!vn": "City/Town",
+                    "province!jp": "Prefecture",
+                    "county!jp": "District",
+                    "city!jp": "City/Town/Village/Tokyo Special Ward",
+                    "suburb!jp": "Ward",
+                    "quarter!jp": "Ōaza/Machi",
+                    "neighbourhood!jp": "Chōme/Aza/Koaza",
+                    "block_number!jp": "Block No.",
+                    "housenumber!jp": "Building No./Lot No."
                 }
             }
         },
@@ -222,6 +242,28 @@
             "key": "barrier",
             "type": "typeCombo",
             "label": "Type"
+        },
+        "bath/open_air": {
+            "key": "bath:open_air",
+            "label": "Open air bath",
+            "type": "check"
+        },
+        "bath/sand_bath": {
+            "key": "bath:sand_bath",
+            "label": "Sand bath",
+            "type": "check"
+        },
+        "bath/type": {
+            "key": "bath:type",
+            "type": "combo",
+            "label": "Bath amenity",
+            "strings": {
+                "options": {
+                    "onsen": "Onsen",
+                    "foot_bath": "Foot Bath",
+                    "hot_spring": "Hot Spring"
+                }
+            }
         },
         "beauty": {
             "key": "beauty",

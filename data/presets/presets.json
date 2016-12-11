@@ -1872,6 +1872,30 @@
             ],
             "name": "Pub"
         },
+        "amenity/public_bath": {
+            "icon": "water",
+            "fields": [
+                "bath/type",
+                "bath/open_air",
+                "bath/sand_bath",
+                "address",
+                "building_area",
+                "opening_hours"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "tags": {
+                "amenity": "public_bath"
+            },
+            "terms": [
+                "onsen",
+                "foot bath",
+                "hot springs"
+            ],
+            "name": "Public bath"
+        },
         "amenity/public_bookcase": {
             "icon": "library",
             "fields": [
