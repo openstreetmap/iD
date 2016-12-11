@@ -26,6 +26,9 @@ export function coreHistory(context) {
             annotation = actions.pop();
         }
 
+        stack[index].transform = context.projection.transform();
+        stack[index].selectedIDs = context.selectedIDs();
+
         var graph = stack[index].graph;
         for (var i = 0; i < actions.length; i++) {
             graph = actions[i](graph);
@@ -129,7 +132,7 @@ export function coreHistory(context) {
                 if (stack[index].annotation) break;
             }
 
-            dispatch.call('undone');
+            dispatch.call('undone', this, stack[index]);
             return change(previous);
         },
 
@@ -142,7 +145,7 @@ export function coreHistory(context) {
                 if (stack[index].annotation) break;
             }
 
-            dispatch.call('redone');
+            dispatch.call('redone', this, stack[index]);
             return change(previous);
         },
 

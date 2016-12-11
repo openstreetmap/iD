@@ -1,10 +1,12 @@
 describe('iD.Features', function() {
     var dimensions = [1000, 1000],
-        context,
-        features;
+        context, features;
 
     beforeEach(function() {
         context = iD.Context();
+        d3.select(document.createElement('div'))
+            .attr('id', 'map')
+            .call(context.map());
         context.map().zoom(16);
         features = iD.Features(context);
     });
