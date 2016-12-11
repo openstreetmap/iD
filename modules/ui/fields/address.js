@@ -21,15 +21,6 @@ export function uiFieldAddress(field, context) {
         isInitialized = false,
         entity;
 
-    var widths = {
-        housenumber: 1/3,
-        street: 2/3,
-        city: 2/3,
-        state: 1/4,
-        postcode: 1/3
-    };
-
-
     function getNearStreets() {
         var extent = entity.extent(context.graph()),
             l = extent.center(),
@@ -98,7 +89,6 @@ export function uiFieldAddress(field, context) {
         }
     }
 
-
     function getNearValues(key) {
         var extent = entity.extent(context.graph()),
             l = extent.center(),
@@ -130,6 +120,9 @@ export function uiFieldAddress(field, context) {
             return a && a.countryCodes && _.includes(a.countryCodes, countryCode);
         }) || _.first(dataAddressFormats);
 
+        if (typeof addressFormat.widths != "undefined") { var widths = addressFormat.widths; }
+        else { var widths = {housenumber: 1/3, street: 2/3, city: 2/3, state: 1/4, postcode: 1/3}; }
+
         function row(r) {
             // Normalize widths.
             var total = _.reduce(r, function(sum, field) {
@@ -154,16 +147,19 @@ export function uiFieldAddress(field, context) {
             .enter()
             .append('input')
             .property('type', 'text')
-            .attr('placeholder', function (d) { return field.t('placeholders.' + d.id); })
+            .attr('placeholder', function (d) {
+              var countryInserter = "";
+              if (addressFormat.customPlaceholders.indexOf(d.id) != -1) { countryInserter = "!" + countryCode; }
+              return field.t('placeholders.' + d.id + countryInserter); })
             .attr('class', function (d) { return 'addr-' + d.id; })
             .style('width', function (d) { return d.width * 100 + '%'; });
 
         // Update
         // setup dropdowns for common address tags
-        var addrTags = [
+        if (typeof addressFormat.dropdowns != "undefined") { var addrTags = addressFormat.dropdowns; }
+        else { var addrTags = [
             'street', 'city', 'state', 'province', 'district',
-            'subdistrict', 'suburb', 'place', 'postcode'
-        ];
+            'subdistrict', 'suburb', 'place', 'postcode']; }
 
         addrTags.forEach(function(tag) {
             var nearValues = (tag === 'street') ? getNearStreets

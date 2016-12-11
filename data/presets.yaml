@@ -78,24 +78,40 @@ en:
         # access=*
         label: Access
       address:
-        # 'addr:city=*, addr:conscriptionnumber=*, addr:country=*, addr:district=*, addr:floor=*, addr:hamlet=*, addr:housename=*, addr:housenumber=*, addr:place=*, addr:postcode=*, addr:province=*, addr:state=*, addr:street=*, addr:subdistrict=*, addr:suburb=*'
+        # 'addr:city=*, addr:block_number=*, addr:conscriptionnumber=*, addr:country=*, addr:county=*, addr:district=*, addr:floor=*, addr:hamlet=*, addr:housename=*, addr:housenumber=*, addr:neighbourhood=*, addr:place=*, addr:postcode=*, addr:province=*, addr:quarter=*, addr:state=*, addr:street=*, addr:subdistrict=*, addr:suburb=*'
         label: Address
         placeholders:
+          block_number: Block Number
+          block_number!jp: Block No.
           city: City
+          city!jp: City/Town/Village/Tokyo Special Ward
+          city!vn: City/Town
           conscriptionnumber: '123'
           country: Country
+          county: County
+          county!jp: District
           district: District
+          district!vn: Arrondissement/Town/District
           floor: Floor
           hamlet: Hamlet
           housename: Housename
           housenumber: '123'
+          housenumber!jp: Building No./Lot No.
+          neighbourhood: Neighbourhood
+          neighbourhood!jp: Chōme/Aza/Koaza
           place: Place
           postcode: Postcode
+          postcode!us: ZIP Code
           province: Province
+          province!jp: Prefecture
+          quarter: Quarter
+          quarter!jp: Ōaza/Machi
           state: State
           street: Street
           subdistrict: Subdistrict
+          subdistrict!vn: Ward/Commune/Townlet
           suburb: Suburb
+          suburb!jp: Ward
       admin_level:
         # admin_level=*
         label: Admin Level
@@ -167,6 +183,22 @@ en:
       barrier:
         # barrier=*
         label: Type
+      bath/open_air:
+        # 'bath:open_air=*'
+        label: Open air bath
+      bath/sand_bath:
+        # 'bath:sand_bath=*'
+        label: Sand bath
+      bath/type:
+        # 'bath:type=*'
+        label: Bath amenity
+        options:
+          # 'bath:type=foot_bath'
+          foot_bath: Foot Bath
+          # 'bath:type=hot_spring'
+          hot_spring: Hot Spring
+          # 'bath:type=onsen'
+          onsen: Onsen
       beauty:
         # beauty=*
         label: Shop Type
@@ -1640,6 +1672,11 @@ en:
         name: Pub
         # 'terms: alcohol,drink,dive,beer,bier,booze'
         terms: '<translate with synonyms or related terms for ''Pub'', separated by commas>'
+      amenity/public_bath:
+        # amenity=public_bath
+        name: Public bath
+        # 'terms: onsen,foot bath,hot springs'
+        terms: '<translate with synonyms or related terms for ''Public bath'', separated by commas>'
       amenity/public_bookcase:
         # amenity=public_bookcase
         name: Public Bookcase
