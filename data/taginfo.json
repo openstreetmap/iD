@@ -389,6 +389,10 @@
         },
         {
             "key": "amenity",
+            "value": "public_bath"
+        },
+        {
+            "key": "amenity",
             "value": "public_bookcase"
         },
         {

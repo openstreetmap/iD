@@ -223,6 +223,28 @@
             "type": "typeCombo",
             "label": "Type"
         },
+        "bath/open_air": {
+            "key": "bath:open_air",
+            "label": "Open air bath",
+            "type": "check"
+        },
+        "bath/sand_bath": {
+            "key": "bath:sand_bath",
+            "label": "Sand bath",
+            "type": "check"
+        },
+        "bath/type": {
+            "key": "bath:type",
+            "type": "combo",
+            "label": "Bath amenity",
+            "strings": {
+                "options": {
+                    "onsen": "Onsen",
+                    "foot_bath": "Foot Bath",
+                    "hot_spring": "Hot Spring"
+                }
+            }
+        },
         "beauty": {
             "key": "beauty",
             "type": "combo",

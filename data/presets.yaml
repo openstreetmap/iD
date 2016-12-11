@@ -167,6 +167,22 @@ en:
       barrier:
         # barrier=*
         label: Type
+      bath/open_air:
+        # 'bath:open_air=*'
+        label: Open air bath
+      bath/sand_bath:
+        # 'bath:sand_bath=*'
+        label: Sand bath
+      bath/type:
+        # 'bath:type=*'
+        label: Bath amenity
+        options:
+          # 'bath:type=foot_bath'
+          foot_bath: Foot Bath
+          # 'bath:type=hot_spring'
+          hot_spring: Hot Spring
+          # 'bath:type=onsen'
+          onsen: Onsen
       beauty:
         # beauty=*
         label: Shop Type
@@ -1640,6 +1656,11 @@ en:
         name: Pub
         # 'terms: alcohol,drink,dive,beer,bier,booze'
         terms: '<translate with synonyms or related terms for ''Pub'', separated by commas>'
+      amenity/public_bath:
+        # amenity=public_bath
+        name: Public bath
+        # 'terms: onsen,foot bath,hot springs'
+        terms: '<translate with synonyms or related terms for ''Public bath'', separated by commas>'
       amenity/public_bookcase:
         # amenity=public_bookcase
         name: Public Bookcase
