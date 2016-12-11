@@ -612,6 +612,21 @@ en:
       location:
         # location=*
         label: Location
+      lunch:
+        # lunch=*
+        label: Daily Lunch (Unknown Kind)
+        # lunch field placeholder
+        placeholder: 'Yes, No, <Lunch Hours>'
+      lunch/buffet:
+        # 'lunch:buffet=*'
+        label: Daily Buffet Lunch (All You Can Eat)
+        # lunch/buffet field placeholder
+        placeholder: 'Yes, No, <Lunch Hours>'
+      lunch/menu:
+        # 'lunch:menu=*'
+        label: 'Daily Menu Lunch (Mass Prepared, Inexpensive)'
+        # lunch/menu field placeholder
+        placeholder: 'Yes, No, <Lunch Hours>'
       man_made:
         # man_made=*
         label: Type

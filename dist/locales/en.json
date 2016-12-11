@@ -1173,6 +1173,18 @@
                 "location": {
                     "label": "Location"
                 },
+                "lunch": {
+                    "label": "Daily Lunch (Unknown Kind)",
+                    "placeholder": "Yes, No, <Lunch Hours>"
+                },
+                "lunch/buffet": {
+                    "label": "Daily Buffet Lunch (All You Can Eat)",
+                    "placeholder": "Yes, No, <Lunch Hours>"
+                },
+                "lunch/menu": {
+                    "label": "Daily Menu Lunch (Mass Prepared, Inexpensive)",
+                    "placeholder": "Yes, No, <Lunch Hours>"
+                },
                 "man_made": {
                     "label": "Type"
                 },

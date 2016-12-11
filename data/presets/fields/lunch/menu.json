@@ -1,0 +1,6 @@
+{
+    "key": "lunch:menu",
+    "type": "combo",
+    "label": "Daily Menu Lunch (Mass Prepared, Inexpensive)",
+    "placeholder": "Yes, No, <Lunch Hours>"
+}
