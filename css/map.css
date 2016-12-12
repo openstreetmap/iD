@@ -1506,13 +1506,18 @@ text.esri {
 
 .esri-pane button {
     float: right;
+    background: #ccc;
+    padding-left: 14px;
+    padding-right: 14px;
+    margin-top: 5px;
 }
 
-.esri-pane button {
-  background: #ccc;
-  padding-left: 14px;
-  padding-right: 14px;
-  margin-top: 5px;
+.esri-pane button.no-float {
+    float: none;
+}
+
+.esri-pane .inspector-inner {
+    padding: 0;
 }
 
 .esri-pane th {

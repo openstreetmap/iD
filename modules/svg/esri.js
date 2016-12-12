@@ -162,9 +162,11 @@ export function svgEsri(projection, context, dispatch) {
             return;
         }
         var row = esriTable.append('tr');
-        row.append('td').text(keys[r]);
+          //.attr('class', 'tag-row');
+        row.append('td').text(keys[r]); // .attr('class', 'key-wrap');
         var outfield = row.append('td').append('input');
         outfield.attr('type', 'text')
+            //.attr('class', 'input-wrap-position')
             .attr('name', keys[r])
             .attr('placeholder', (window.layerImports[keys[r]] || samplefeature.properties[keys[r]]))
             .on('change', function() {
@@ -239,45 +241,53 @@ export function svgEsri(projection, context, dispatch) {
                 console.log('Esri service URL did not load');
                 console.error(err);
             } else {
-                d3.selectAll('.esri-table h3').text('Set import attributes');
-
-                var esriTable = d3.selectAll('.esri-table');
-                esriTable.html('<thead><th>Esri Service</th><th>OSM tag</th></thead>')
-                
                 // convert EsriJSON to GeoJSON here
                 var jsondl = fromEsri.fromEsri(JSON.parse(data));
+
+                d3.selectAll('.esri-pane h3').text('Set import attributes');
+                var esriTable = d3.selectAll('.esri-table');
                 
-                if (jsondl.features.length) {
-                    // make a row for each GeoJSON property
-                    // existing name appears as a label
-                    // sample data appears as a text input placeholder
-                    // adding text over the sample data makes it into an OSM tag
-                    // TODO: target tags (addresses, roads, bike lanes)
-                    var samplefeature = jsondl.features[0];
-                    var keys = Object.keys(samplefeature.properties);
-                    doKey(0, keys, samplefeature, esriTable);
-                    
+                var convertedKeys = Object.keys(window.layerImports);              
+                if (!convertedKeys.length) {
+                    esriTable.html('<thead class="tag-row"><th>Esri Service</th><th>OSM tag</th></thead>');
+                
+                    if (jsondl.features.length) {
+                        // make a row for each GeoJSON property
+                        // existing name appears as a label
+                        // sample data appears as a text input placeholder
+                        // adding text over the sample data makes it into an OSM tag
+                        // TODO: target tags (addresses, roads, bike lanes)
+                        var samplefeature = jsondl.features[0];
+                        var keys = Object.keys(samplefeature.properties);
+                        doKey(0, keys, samplefeature, esriTable);
+                    } else {
+                        console.log('no feature to build table from');
+                    }
+                } else {
                     // if any import properties were added, make these mods and reject all other properties
-                    var convertedKeys = Object.keys(window.layerImports);
-                    if (convertedKeys.length) {
-                        jsondl.features.map(function(selectfeature) {
-                            // keep the OBJECTID to make sure we don't download the same data multiple times
-                            var outprops = {
-                                OBJECTID: selectfeature.properties.OBJECTID
-                            };
-                            for (var k = 0; k < convertedKeys.length; k++) {
+                    jsondl.features.map(function(selectfeature) {
+                        // keep the OBJECTID to make sure we don't download the same data multiple times
+                        var outprops = {
+                            OBJECTID: selectfeature.properties.OBJECTID
+                        };
+                        
+                        // convert the rest of the layer's properties
+                        for (var k = 0; k < convertedKeys.length; k++) {
+                            if (convertedKeys[k].indexOf('add_') === 0) {
+                                outprops[convertedKeys[k].substring(4)] = window.layerImports[convertedKeys[k]];
+                            } else {
                                 var kv = selectfeature.properties[convertedKeys[k]];
                                 if (kv) {
                                     outprops[window.layerImports[convertedKeys[k]]] = kv;
                                 }
                             }
-                            selectfeature.properties = outprops;
-                            return selectfeature;
-                        });
-                    }
-                } else {
-                    console.log('no feature to build table from');
+                        }
+                        selectfeature.properties = outprops;
+                        return selectfeature;
+                    });
                 }
+                
+                // send the modified geo-features to the draw layer
                 drawEsri.geojson(jsondl);
             }
         });

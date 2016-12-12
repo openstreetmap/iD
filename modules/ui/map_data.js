@@ -247,12 +247,48 @@ export function uiMapData(context) {
             var doctitle = content.append('h3')
                 .text('Downloading Esri Layer...');
             var body = content.append('div')
-                .attr('class', 'body')
-                .append('table')
+                .attr('class', 'body');
+            body.append('table')
                     .attr('border', '1')
-                    .attr('class', 'esri-table');
+                    .attr('class', 'esri-table'); // tag-list
             
-            // save button should make changes effective on existing and new data
+            // this button adds a new field to data brought in from the Esri service
+            // for example you can add addr:state=VA to a Virginia city's addresses which otherwise wouldn't have this repetitive field
+            body.append('div')
+                .attr('class', 'inspector-inner')
+                .append('button')
+                    .attr('class', 'add-tag')
+                    .call(svgIcon('#icon-plus', 'icon light'))
+                    .on('click', function() {
+                      var row = d3.selectAll('.esri-table').append('tr');
+                      var uniqNum = Math.floor(Math.random() * 10000);
+
+                      // the field setting the add-on key
+                      var keyfield = row.append('td').append('input')
+                        //.attr('type', 'text')
+                        .attr('class', 'import-key-' + uniqNum)
+                        .on('change', function() {
+                          if (this.name) {
+                            window.layerImports['add_' + this.value] = window.layerImports['add_' + this.name];
+                            delete window.layerImports['add_' + this.name];
+                          } else {
+                            window.layerImports['add_' + this.value] = '';
+                          }
+                          this.name = this.value;
+                          d3.selectAll('.osm-key-' + uniqNum).attr('name', this.value);
+                        });
+                    
+                      // the field setting the add-on value
+                      var outfield = row.append('td').append('input')
+                        .attr('type', 'text')
+                        .attr('class', 'osm-key-' + uniqNum)
+                        .on('change', function() {
+                          // properties with this.name renamed to this.value
+                          window.layerImports['add_' + this.name] = this.value;
+                        });
+                    });
+            
+            // save button makes changes to existing and new import data
             this.pane.append('button')
                 .on('click', function() {
                     context.flush();
@@ -261,7 +297,8 @@ export function uiMapData(context) {
                       setEsriLayer(context.storage('esriLayerUrl'));
                     }, 400);
                 })
-                .call(svgIcon('#icon-save'))
+                .attr('class', 'no-float')
+                .call(svgIcon('#icon-save', 'icon light'))
                 .text('Save');
         }
         
@@ -275,7 +312,7 @@ export function uiMapData(context) {
             // prompt the user to enter an ArcGIS layer
             d3.event.preventDefault();
 
-            var esriLayer = layers.layer('esri')
+            var esriLayer = layers.layer('esri');
             if (esriLayer.hasData()) {
               toggle();
               return;
