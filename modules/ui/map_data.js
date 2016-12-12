@@ -255,8 +255,11 @@ export function uiMapData(context) {
             // save button should make changes effective on existing and new data
             this.pane.append('button')
                 .on('click', function() {
-                    // TODO: remove all existing data
-                    setEsriLayer(context.storage('esriLayerUrl'));
+                    context.flush();
+                    window.knownObjectIds = {};
+                    setTimeout(function() {
+                      setEsriLayer(context.storage('esriLayerUrl'));
+                    }, 400);
                 })
                 .text('Save')
                 

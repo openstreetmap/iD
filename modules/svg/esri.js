@@ -56,7 +56,7 @@ export function svgEsri(projection, context, dispatch) {
 
         (geojson.features || []).map(function(d) {
             // don't reload the same objects over again
-            if (d.properties.OBJECTID && window.knownObjectIds[d.properties.OBJECTID]) {
+            if (window.knownObjectIds[d.properties.OBJECTID]) {
                 return;
             }
             window.knownObjectIds[d.properties.OBJECTID] = true;
@@ -171,7 +171,7 @@ export function svgEsri(projection, context, dispatch) {
                 // properties with this.name renamed to this.value
                 window.layerImports[this.name] = this.value;
             });
-        doKey(r + 1, keys, esriTable);
+        doKey(r + 1, keys, samplefeature, esriTable);
     }
 
     drawEsri.enabled = function(_) {
@@ -239,7 +239,8 @@ export function svgEsri(projection, context, dispatch) {
                 console.log('Esri service URL did not load');
                 console.error(err);
             } else {
-                var esriTable = d3.selectAll('.esri-table').html('');
+                var esriTable = d3.selectAll('.esri-table');
+                esriTable.html('');
                 
                 // convert EsriJSON to GeoJSON here
                 var jsondl = fromEsri.fromEsri(JSON.parse(data));
