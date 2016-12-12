@@ -245,7 +245,7 @@ export function uiMapData(context) {
             var content = this.pane.append('div')
                 .attr('class', 'left-content');
             var doctitle = content.append('h3')
-                .text('Importing Esri Layer...');
+                .text('Downloading Esri Layer...');
             var body = content.append('div')
                 .attr('class', 'body')
                 .append('table')
@@ -261,10 +261,8 @@ export function uiMapData(context) {
                       setEsriLayer(context.storage('esriLayerUrl'));
                     }, 400);
                 })
-                .text('Save')
-                
-                // todo: real save icon
-                .call(svgIcon('#icon-reload'));
+                .call(svgIcon('#icon-save'))
+                .text('Save');
         }
         
         function toggle() {
@@ -276,6 +274,13 @@ export function uiMapData(context) {
         function editEsriLayer() {
             // prompt the user to enter an ArcGIS layer
             d3.event.preventDefault();
+
+            var esriLayer = layers.layer('esri')
+            if (esriLayer.hasData()) {
+              toggle();
+              return;
+            }
+            
             var template = window.prompt('Enter an Esri service URL', esriLayerUrl);
             if (template) {
                 setEsriLayer(template);

@@ -1508,6 +1508,17 @@ text.esri {
     float: right;
 }
 
+.esri-pane button {
+  background: #ccc;
+  padding-left: 14px;
+  padding-right: 14px;
+  margin-top: 5px;
+}
+
+.esri-pane th {
+  font-weight: bold;
+}
+
 /* GPX Paths */
 .layer-gpx {
     pointer-events: none;

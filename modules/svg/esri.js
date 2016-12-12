@@ -239,8 +239,10 @@ export function svgEsri(projection, context, dispatch) {
                 console.log('Esri service URL did not load');
                 console.error(err);
             } else {
+                d3.selectAll('.esri-table h3').text('Set import attributes');
+
                 var esriTable = d3.selectAll('.esri-table');
-                esriTable.html('');
+                esriTable.html('<thead><th>Esri Service</th><th>OSM tag</th></thead>')
                 
                 // convert EsriJSON to GeoJSON here
                 var jsondl = fromEsri.fromEsri(JSON.parse(data));
