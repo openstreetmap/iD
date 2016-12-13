@@ -127,18 +127,52 @@ export function svgEsri(projection, context, dispatch) {
                 }
                     
             } else if (d.geometry.type === 'Polygon') {
-                // TODO: allow donut hole polygons using relations and GeoJSON rings
                 d.properties.area = d.properties.area || 'yes';
-                nodes = makeMiniNodes(d.geometry.coordinates[0]);
-                props = makeEntity(nodes);
-                way = new osmWay(props);
-                context.perform(
-                    actionAddEntity(way),
-                    'adding way within Polygon'
-                );
+                if (d.geometry.coordinates.length > 1) {
+                    // donut hole polygons (e.g. building with courtyard) must be a relation
+                    // example data: Hartford, CT building footprints
+                    // TODO: rings within rings
+
+                    // generate each ring                    
+                    var componentRings = [];
+                    for (ln = 0; ln < d.geometry.coordinates.length; ln++) {
+                        nodes = makeMiniNodes(d.geometry.coordinates[ln]);
+                        props = makeEntity(nodes);
+                        // props.tags = {};
+                        way = new osmWay(props);
+                        context.perform(
+                            actionAddEntity(way),
+                            'adding single-ring Polygon'
+                        );
+                        componentRings.push({
+                            id: way.id,
+                            role: (ln === 0 ? 'outer' : 'inner')
+                        });
+                    }
+                    
+                    // generate a relation
+                    var rel = new osmRelation({
+                        tags: {
+                            type: 'MultiPolygon'
+                        },
+                        members: componentRings
+                    });
+                    context.perform(
+                        actionAddEntity(rel),
+                        'adding multiple-ring Polygon'
+                    );
+                } else {
+                    nodes = makeMiniNodes(d.geometry.coordinates[0]);
+                    props = makeEntity(nodes);
+                    way = new osmWay(props);
+                    context.perform(
+                        actionAddEntity(way),
+                        'adding single-ring Polygon'
+                    );
+                }
                     
             } else if (d.geometry.type === 'MultiPolygon') {
-                // TODO: allow donut hole polygons using relations and GeoJSON rings
+                // TODO: allow donut hole polygons similar to above ^^
                 // TODO: represent as a relation and not as multiple disconnected Polygons
                 d.properties.area = d.properties.area || 'yes';
                 for (ln = 0; ln < d.geometry.coordinates.length; ln++) {
@@ -149,6 +183,8 @@ export function svgEsri(projection, context, dispatch) {
                         'adding way within MultiPolygon'
                     );
                 }
+            } else {
+                console.log('Did not recognize Geometry Type: ' + d.geometry.type);
             }
         });
         
