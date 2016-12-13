@@ -10,5 +10,6 @@
     "tags": {
         "barrier": "fence"
     },
-    "name": "Fence"
+    "name": "Fence",
+    "matchScore": 0.25
 }
