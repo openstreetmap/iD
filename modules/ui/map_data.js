@@ -10,6 +10,7 @@ import { tooltip } from '../util/tooltip';
 export function uiMapData(context) {
     var key = t('map_data.key'),
         esriLayerUrl = context.storage('esriLayerUrl') || '',
+        esriDownloadAll = true,
         features = context.features().keys(),
         layers = context.layers(),
         fills = ['wireframe', 'partial', 'full'],
@@ -245,17 +246,42 @@ export function uiMapData(context) {
             var content = this.pane.append('div')
                 .attr('class', 'left-content');
             var doctitle = content.append('h3')
-                .text('Downloading Esri Layer...');
+                //.text('Downloading Esri Layer...');
+                .text('Import an Esri service by URL');
             var body = content.append('div')
                 .attr('class', 'body');
+                
+            // replacing the window.prompt with an in-browser window
+            var urlEntry = body.append('div')
+                .attr('class', 'topurl');
+            urlEntry.append('input')
+                .attr('type', 'text')
+                .attr('placeholder', 'Esri service URL')
+                .attr('value', context.storage('esriLayerUrl') || '');
+            urlEntry.append('button')
+                .attr('class', 'url')
+                .text('Download View')
+                .on('click', function() {
+                    esriDownloadAll = false;
+                    setEsriLayer(this.parentElement.firstChild.value, esriDownloadAll);
+                });
+            urlEntry.append('button')
+                .attr('class', 'url')
+                .attr('style', 'margin-right: 10px')
+                .text('Download All')
+                .on('click', function() {
+                    esriDownloadAll = true;
+                    setEsriLayer(this.parentElement.firstChild.value, esriDownloadAll);
+                });
+            
             body.append('table')
                     .attr('border', '1')
-                    .attr('class', 'esri-table'); // tag-list
+                    .attr('class', 'esri-table hide'); // tag-list
             
             // this button adds a new field to data brought in from the Esri service
-            // for example you can add addr:state=VA to a Virginia city's addresses which otherwise wouldn't have this repetitive field
+            // for example you can add addr:state=VA to a city's addresses which otherwise wouldn't have this repeated field
             body.append('div')
-                .attr('class', 'inspector-inner')
+                .attr('class', 'inspector-inner hide')
                 .append('button')
                     .attr('class', 'add-tag')
                     .call(svgIcon('#icon-plus', 'icon light'))
@@ -294,10 +320,10 @@ export function uiMapData(context) {
                     context.flush();
                     window.knownObjectIds = {};
                     setTimeout(function() {
-                      setEsriLayer(context.storage('esriLayerUrl'));
+                      refreshEsriLayer(context.storage('esriLayerUrl'), esriDownloadAll);
                     }, 400);
                 })
-                .attr('class', 'no-float')
+                .attr('class', 'no-float hide')
                 .call(svgIcon('#icon-save', 'icon light'))
                 .text('Save');
         }
@@ -313,30 +339,37 @@ export function uiMapData(context) {
             d3.event.preventDefault();
 
             var esriLayer = layers.layer('esri');
-            if (esriLayer.hasData()) {
-              toggle();
-              return;
-            }
             
-            var template = window.prompt('Enter an Esri service URL', esriLayerUrl);
-            if (template) {
-                setEsriLayer(template);
+            // if the Esri layer is already loaded, resume editing that data
+            if (esriLayer.hasData()) {
+                toggle();
             } else {
-                // TODO: prepare for user to enter no URL or invalid URL
+                // this will open up an HTML/CSS window to enter the service URL
+                // and begin adding notes
+                toggle();            
             }
         }
 
-        function setEsriLayer(template) {
+        function setEsriLayer(template, downloadMax) {
             // remember Esri service URL for future visits
             context.storage('esriLayerUrl', template);
             
+            // un-hide Esri pane and buttons
+            d3.selectAll('.esri-pane, .esri-pane .hide').classed('hide', false);
+            this.pane.property('scrollTop', 0);
+
+            // hide Esri Service URL input
+            d3.selectAll('.topurl').classed('hide', true);
+            
+            refreshEsriLayer(template, downloadMax);
+        }
+        
+        function refreshEsriLayer(template, downloadMax) {
             // start loading data onto the map
             var esriLayer = context.layers().layer('esri');
-            esriLayer.url(template);
+            esriLayer.url(template, downloadMax);
             
-            // scroll pane to top and make visible
-            this.pane.property('scrollTop', 0);
-            toggle();
+            d3.selectAll('.esri-pane').classed('hide', false);
         }
 
         function drawGpxItem(selection) {

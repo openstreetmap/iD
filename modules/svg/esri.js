@@ -198,7 +198,7 @@ export function svgEsri(projection, context, dispatch) {
         return this;
     };
 
-    drawEsri.url = function(true_url) {
+    drawEsri.url = function(true_url, downloadMax) {
         // add necessary URL parameters to the user's URL
         var url = true_url;
         if (url.indexOf('outSR') === -1) {
@@ -229,7 +229,7 @@ export function svgEsri(projection, context, dispatch) {
         this.lastProps = JSON.stringify(window.layerImports);
 
         // make a spatial query within the user viewport (unless the user made their own spatial query)       
-        if (url.indexOf('spatialRel') === -1) {
+        if (!downloadMax && (url.indexOf('spatialRel') === -1)) {
             url += '&geometry=' + this.lastBounds;
             url += '&geometryType=esriGeometryEnvelope';
             url += '&spatialRel=esriSpatialRelIntersects';
@@ -265,7 +265,7 @@ export function svgEsri(projection, context, dispatch) {
                     }
                 } else {
                     // if any import properties were added, make these mods and reject all other properties
-                    jsondl.features.map(function(selectfeature) {
+                    var processGeoFeature = function (selectfeature) {
                         // keep the OBJECTID to make sure we don't download the same data multiple times
                         var outprops = {
                             OBJECTID: selectfeature.properties.OBJECTID
@@ -284,7 +284,10 @@ export function svgEsri(projection, context, dispatch) {
                         }
                         selectfeature.properties = outprops;
                         return selectfeature;
-                    });
+                    };
+                    for (var ft = 0; ft < jsondl.features.length; ft++) {
+                        jsondl.features[ft] = processGeoFeature(jsondl.features[ft]);
+                    }
                 }
                 
                 // send the modified geo-features to the draw layer
@@ -293,14 +296,17 @@ export function svgEsri(projection, context, dispatch) {
         });
         
         // whenever map is moved, start 0.7s timer to re-download data from ArcGIS service
-        context.map().on('move', function() {
-            if (this.timeout) {
-               clearTimeout(this.timeout);
-            }
-            this.timeout = setTimeout(function() {
-                this.url(true_url);
-            }.bind(this), 700);
-        }.bind(this));
+        // unless we are downloading everything we can anyway
+        if (!downloadMax) {
+            context.map().on('move', function() {
+                if (this.timeout) {
+                    clearTimeout(this.timeout);
+                }
+                this.timeout = setTimeout(function() {
+                    this.url(true_url, downloadMax);
+                }.bind(this), 700);
+            }.bind(this));
+        }
         
         return this;
     };

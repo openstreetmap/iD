@@ -1550,6 +1550,15 @@ text.esri {
     margin-top: 0;
 }
 
+.esri-pane button.url {
+    border-radius: 0 0 4px 4px;
+    margin-top: 0;
+}
+
+.esri-pane .topurl input {
+    margin-top: 10px;
+}
+
 /* GPX Paths */
 .layer-gpx {
     pointer-events: none;
