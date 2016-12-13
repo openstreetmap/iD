@@ -1521,7 +1521,33 @@ text.esri {
 }
 
 .esri-pane th {
-  font-weight: bold;
+    font-weight: bold;
+}
+
+.esri-pane td:first-child, .esri-pane th:first-child {
+    border: 1px solid #ccc;
+    padding-left: 7px;
+    border-right: none;
+}
+
+.esri-pane table input {
+    border-radius: 0 4px 4px 0;
+    padding-left: 2px;
+    border-bottom: none;
+}
+
+.esri-pane th:first-child {
+    border: none;
+}
+
+.esri-pane tr:last-child input {
+    border-bottom: 1px solid rgb(204, 204, 204);
+    margin-bottom: -1px;
+    border-radius: 0 4px 0 0;
+}
+
+.esri-pane button.add-tag {
+    margin-top: 0;
 }
 
 /* GPX Paths */
