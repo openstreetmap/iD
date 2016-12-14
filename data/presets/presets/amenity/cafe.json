@@ -2,11 +2,14 @@
     "icon": "cafe",
     "fields": [
         "cuisine",
-        "internet_access",
         "address",
         "building_area",
         "opening_hours",
-        "smoking"
+        "internet_access",
+        "internet_access/fee",
+        "internet_access/ssid",
+        "smoking",
+        "outdoor_seating"
     ],
     "geometry": [
         "point",

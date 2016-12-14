@@ -67,7 +67,9 @@ export function uiAccount(context) {
             .attr('id', 'userLink')
             .classed('hide', true);
 
-        connection.event.on('auth.account', function() { update(selection); });
+        connection
+            .on('change.account', function() { update(selection); });
+
         update(selection);
     };
 }

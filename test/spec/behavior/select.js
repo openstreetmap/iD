@@ -3,7 +3,7 @@ describe('iD.behaviorSelect', function() {
 
     beforeEach(function() {
         container = d3.select('body').append('div');
-        context = iD.Context(window).imagery(iD.dataImagery).container(container);
+        context = iD.Context().container(container);
 
         a = iD.Node({loc: [0, 0]});
         b = iD.Node({loc: [0, 0]});
@@ -29,6 +29,18 @@ describe('iD.behaviorSelect', function() {
         context.uninstall(behavior);
         context.mode().exit();
         container.remove();
+    });
+
+    specify('refuse to enter select mode with no ids', function() {
+        context.enter(iD.modeSelect(context, []));
+        expect(context.mode().id, 'empty array').to.eql('browse');
+        context.enter(iD.modeSelect(context, undefined));
+        expect(context.mode().id, 'undefined').to.eql('browse');
+    });
+
+    specify('refuse to enter select mode with nonexistent ids', function() {
+        context.enter(iD.modeSelect(context, ['w-1']));
+        expect(context.mode().id).to.eql('browse');
     });
 
     specify('click on entity selects the entity', function() {

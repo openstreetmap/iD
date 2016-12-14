@@ -1,0 +1,19 @@
+{
+    "icon": "cemetery",
+    "fields": [
+        "website",
+        "phone",
+        "opening_hours",
+        "wheelchair"
+
+    ],
+    "geometry": [
+        "area", 
+        "point"
+    ],
+    "tags": {
+        "amenity": "crematorium"
+    },
+    "terms": ["cemetery","funeral"],
+    "name": "Crematorium"
+}

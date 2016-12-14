@@ -227,6 +227,7 @@
             "localized_translation_name": "Name"
         },
         "zoom_in_edit": "Hineinzoomen, um zu bearbeiten",
+        "login": "Login",
         "logout": "Abmelden",
         "loading_auth": "Mit OpenStreetMap verbinden …",
         "report_a_bug": "Fehler melden",
@@ -238,7 +239,8 @@
         "status": {
             "error": "Verbindungsaufbau zur API nicht möglich.",
             "offline": "Die API ist offline. Bitte versuche es später noch einmal.",
-            "readonly": "Die API ist im „Nur-Lese“-Modus. Änderungen können zur Zeit nicht gespeichert werden."
+            "readonly": "Die API ist im „Nur-Lese“-Modus. Änderungen können zur Zeit nicht gespeichert werden.",
+            "rateLimit": "Der API-Zugang limitiert anonyme Verbindungen. Du kannst das Limit durch einloggen umgehen."
         },
         "commit": {
             "title": "Änderungen speichern",
@@ -335,7 +337,7 @@
             "switch": "Zu diesem Hintergrund zurück wechseln",
             "custom": "Benutzerdefiniert",
             "custom_button": "Benutzerdefinierten Hintergrund bearbeiten",
-            "custom_prompt": "Gib eine Vorlage für eine Kachel-URL ein. Gültige Platzhalter sind {z}, {x}, {y} für das Z/X/Y Schema und {u} für das „quadtile“-Schema.",
+            "custom_prompt": "Gib ein URL tile template ein. Gültige Token sind {zoom}, {x}, {y} für das z/x/y Schema oder {u} für das quadtile Schema.",
             "fix_misalignment": "Bildmaterial-Versatz anpassen",
             "imagery_source_faq": "Woher kommt dieses Bildmaterial?",
             "reset": "Zurücksetzen",
@@ -803,6 +805,9 @@
                         "whole": "Vollblut"
                     }
                 },
+                "board_type": {
+                    "label": "Typ"
+                },
                 "boundary": {
                     "label": "Typ"
                 },
@@ -814,6 +819,21 @@
                 },
                 "building_area": {
                     "label": "Gebäude"
+                },
+                "camera/direction": {
+                    "label": "Ausrichtung (Winkel Im Uhrzeigersinn) ",
+                    "placeholder": "45, 90, 180, 270"
+                },
+                "camera/mount": {
+                    "label": "Kameramontagtyp"
+                },
+                "camera/type": {
+                    "label": "Art der Kamera",
+                    "options": {
+                        "dome": "Dom",
+                        "fixed": "fix installiert",
+                        "panning": "schwenkend"
+                    }
                 },
                 "capacity": {
                     "label": "Kapazität",
@@ -852,6 +872,10 @@
                 },
                 "construction": {
                     "label": "Typ"
+                },
+                "contact/webcam": {
+                    "label": "Webcam URL",
+                    "placeholder": "http://example.com/"
                 },
                 "content": {
                     "label": "Inhalte"
@@ -943,7 +967,7 @@
                     "label": "Typ"
                 },
                 "drive_through": {
-                    "label": "Durchfahrtslokal"
+                    "label": "Durchfahrts-Service"
                 },
                 "electrified": {
                     "label": "Elektrifizierung",
@@ -973,6 +997,9 @@
                 },
                 "fee": {
                     "label": "Gebühr"
+                },
+                "fence_type": {
+                    "label": "Typ"
                 },
                 "fire_hydrant/type": {
                     "label": "Typ",
@@ -1024,6 +1051,9 @@
                 "handrail": {
                     "label": "Geländer"
                 },
+                "height": {
+                    "label": "Höhe (Meter)"
+                },
                 "highway": {
                     "label": "Typ"
                 },
@@ -1068,6 +1098,9 @@
                 },
                 "internet_access/fee": {
                     "label": "Internetzugangsgebühr"
+                },
+                "internet_access/ssid": {
+                    "label": "SSID (Netzwerk Name)"
                 },
                 "kerb": {
                     "label": "Bordsteinabsenkung"
@@ -1142,6 +1175,16 @@
                 },
                 "man_made": {
                     "label": "Typ"
+                },
+                "map_size": {
+                    "label": "Abdeckung"
+                },
+                "map_type": {
+                    "label": "Typ"
+                },
+                "maxheight": {
+                    "label": "Maximale Höhe",
+                    "placeholder": "4, 4.5, 5, 14'0\", 14'6\", 15'0\""
                 },
                 "maxspeed": {
                     "label": "Höchstgeschwindigkeit",
@@ -1257,6 +1300,9 @@
                 "operator": {
                     "label": "Betreiber"
                 },
+                "outdoor_seating": {
+                    "label": "Außengastronomie"
+                },
                 "par": {
                     "label": "Par",
                     "placeholder": "3, 4, 5, 6"
@@ -1346,6 +1392,13 @@
                 "recycling_accepts": {
                     "label": "akzeptiert"
                 },
+                "recycling_type": {
+                    "label": "Recycling Typ",
+                    "options": {
+                        "centre": "Wertstoffhof",
+                        "container": "Container"
+                    }
+                },
                 "ref": {
                     "label": "Referenz"
                 },
@@ -1400,21 +1453,8 @@
                 "service": {
                     "label": "Typ"
                 },
-                "service/bicycle/chain_tool": {
-                    "label": "Kettennietdrücker",
-                    "options": {
-                        "no": "Nein",
-                        "undefined": "Standardwert Nein",
-                        "yes": "Ja"
-                    }
-                },
-                "service/bicycle/pump": {
-                    "label": "Luftpumpe",
-                    "options": {
-                        "no": "Nein",
-                        "undefined": "Standardwert Nein",
-                        "yes": "Ja"
-                    }
+                "service/bicycle": {
+                    "label": "Fahrradservice"
                 },
                 "service_rail": {
                     "label": "Gleistyp",
@@ -1422,7 +1462,7 @@
                         "crossover": "Überleitgleis",
                         "siding": "Überhol-/Ausweichgleis",
                         "spur": "Anschluss-/Ladegleis",
-                        "yard": "Rangier-/Abstellgleis"
+                        "yard": "Nebengleich (Rangier-/Abstellgleis)"
                     }
                 },
                 "shelter": {
@@ -1515,6 +1555,20 @@
                 "surface": {
                     "label": "Oberfläche"
                 },
+                "surveillance": {
+                    "label": "Überwachungsort"
+                },
+                "surveillance/type": {
+                    "label": "Überwachungstyp",
+                    "options": {
+                        "ALPR": "Automatischer Kennzeichner-Leser",
+                        "camera": "Kamera",
+                        "guard": "Wachmann"
+                    }
+                },
+                "surveillance/zone": {
+                    "label": "Überwachungszone"
+                },
                 "tactile_paving": {
                     "label": "Oberfläche mit Blindenleitsystem"
                 },
@@ -1539,8 +1593,12 @@
                 "tourism": {
                     "label": "Typ"
                 },
-                "towertype": {
-                    "label": "Turmart"
+                "tower/construction": {
+                    "label": "Baustelle",
+                    "placeholder": "Abgespannt, ummantelte oder Gittertrüme."
+                },
+                "tower/type": {
+                    "label": "Typ"
                 },
                 "tracktype": {
                     "label": "Wegzustand des Feld-/Waldweges",
@@ -1552,6 +1610,9 @@
                         "grade5": "Weich: Erde/Sand/Gras"
                     },
                     "placeholder": "Fest, Großenteils fest, Weich …"
+                },
+                "traffic_calming": {
+                    "label": "Typ"
                 },
                 "traffic_signals": {
                     "label": "Typ"
@@ -1585,6 +1646,9 @@
                         "street": "5 bis 20 Meter (16 bis 65 Fuß)"
                     }
                 },
+                "wall": {
+                    "label": "Typ"
+                },
                 "water": {
                     "label": "Typ"
                 },
@@ -1615,6 +1679,10 @@
                 "address": {
                     "name": "Adresse",
                     "terms": "Adresse"
+                },
+                "advertising/billboard": {
+                    "name": "Plakatwand",
+                    "terms": "Werbetafel,Anschlagtafel,Reklametafel,Anschlagbrett"
                 },
                 "aerialway": {
                     "name": "Seilbahn"
@@ -1805,6 +1873,10 @@
                     "name": "Coworking Platz",
                     "terms": "Coworking Platz, Coworking Büro, Coworking Firma"
                 },
+                "amenity/crematorium": {
+                    "name": "Krematorium",
+                    "terms": "Krematorium, Feuerhalle, Einäscherungshalle"
+                },
                 "amenity/dentist": {
                     "name": "Zahnarzt",
                     "terms": "Zahnarzt, Dentist, Stomatologe"
@@ -1837,6 +1909,10 @@
                     "name": "Feuerwehrhaus",
                     "terms": "Feuerwehr,Feuerwehrstation,Feuerwache,Feuerwehrhaus,Feuerwehrgerätehaus,Feuerwehrstandort"
                 },
+                "amenity/food_court": {
+                    "name": "Gemeinschafts-Gastgarten",
+                    "terms": "Gemeinschafts-Gastgarten, gemeinsamer Gastgarten, Selbstbedienungs-Gastgarten für mehrere Lokale"
+                },
                 "amenity/fountain": {
                     "name": "Springbrunnen",
                     "terms": "Springbrunnen, Wasserspiel"
@@ -1864,6 +1940,10 @@
                 "amenity/ice_cream": {
                     "name": "Eisgeschäft",
                     "terms": "Eisgeschäft, Eisladen, Schleckeisladen, Schleckeishändler"
+                },
+                "amenity/internet_cafe": {
+                    "name": "Internetcafé",
+                    "terms": "Internetcafé, Cybercafé"
                 },
                 "amenity/kindergarten": {
                     "name": "Kindergarten",
@@ -1956,6 +2036,10 @@
                 "amenity/recycling": {
                     "name": "Recycling",
                     "terms": "Recyclingcontainer, Abfallwiederverwertung, Container, Abfall, Müll"
+                },
+                "amenity/recycling_centre": {
+                    "name": "Wertstoffhof",
+                    "terms": "Recycling Zentrum, Abfallwirtschaftszentrum, Abfallsammelstelle, Abfallwirtschaftshof"
                 },
                 "amenity/register_office": {
                     "name": "Standesamt"
@@ -2074,6 +2158,10 @@
                 "amenity/waste_disposal": {
                     "name": "Müllcontainer",
                     "terms": "Müllcontainer, Müllkübel, Abfallcontainer, Abfallkübel"
+                },
+                "amenity/waste_transfer_station": {
+                    "name": "Müllumladestation",
+                    "terms": "Müllumladestation, Müllzwischenlager"
                 },
                 "amenity/water_point": {
                     "name": "Camping-Trinkwasser",
@@ -2299,6 +2387,10 @@
                     "name": "Lagerhalle",
                     "terms": "Lagerhaus, Lagergebäude"
                 },
+                "camp_site/camp_pitch": {
+                    "name": "Camping Stellplatz",
+                    "terms": "Campingplatz, Zeltplatz, Stellplatz"
+                },
                 "craft": {
                     "name": "Handwerker",
                     "terms": "Kunsthandwerk"
@@ -2344,8 +2436,8 @@
                     "terms": "Uhrmacher"
                 },
                 "craft/confectionery": {
-                    "name": "Konditorei",
-                    "terms": "Konditorei, Feinbäckerei, Süßwarengeschäft"
+                    "name": "Süßwarengeschäft",
+                    "terms": "Pralinengeschäft,Süßwarengeschäft,Bonbonladen"
                 },
                 "craft/dressmaker": {
                     "name": "Damenschneiderei",
@@ -2732,6 +2824,10 @@
                     "name": "Feld-/Waldweg",
                     "terms": "Wirtschaftsweg, Feldweg, Waldweg, Forststraße, primitive Straße, nicht ausgebaute Straße, verfallene Straße"
                 },
+                "highway/traffic_mirror": {
+                    "name": "Verkehrsspiegel",
+                    "terms": "Verkehrsspiegel, Trixi-Spiegel"
+                },
                 "highway/traffic_signals": {
                     "name": "Eine oder mehrere Ampeln",
                     "terms": "Ampel, Ampeln, Lichtzeichenanlage, Lichtsignalanlage, Verkehrslichtsignalanlage"
@@ -2747,6 +2843,10 @@
                 "highway/turning_circle": {
                     "name": "Wendestelle",
                     "terms": "Wendekreis, Wendeplatz, Wendehammer, Wendestelle"
+                },
+                "highway/turning_loop": {
+                    "name": "Wendeschleife (Insel)",
+                    "terms": "Wendeschleife (mit Mittelinsel), Wendekreis mit nicht überfahrbarere Mittelinsel"
                 },
                 "highway/unclassified": {
                     "name": "Nebenstraße/Verbindungsstraße",
@@ -2907,6 +3007,10 @@
                     "name": "öffentliche Fläche, Allmende",
                     "terms": "öffentliche Grünfläche, Allmende, Allmeind"
                 },
+                "leisure/dance": {
+                    "name": "Tanzsaal",
+                    "terms": "Tanzlokal, Tanzhalle, Tanzboden, Tanzdiele, Tanzpalast, Tanzsaal, Tanzhaus"
+                },
                 "leisure/dog_park": {
                     "name": "Hundepark",
                     "terms": "Hundefreilaufzone, Hundeauslaufzone, Hundezone, Hundeauslaufplatz"
@@ -3006,6 +3110,10 @@
                 "leisure/playground": {
                     "name": "Spielplatz",
                     "terms": "Spielplatz, Kinderspielplatz"
+                },
+                "leisure/resort": {
+                    "name": "Resort",
+                    "terms": "Resort, touristische Hotelanlage"
                 },
                 "leisure/running_track": {
                     "name": "Laufbahn",
@@ -3121,6 +3229,10 @@
                 "man_made/surveillance": {
                     "name": "Überwachungskamera",
                     "terms": "Überwachungskamera, Überwachungseinrichtung"
+                },
+                "man_made/surveillance_camera": {
+                    "name": "Überwachungskamera",
+                    "terms": "Überwachungskamera, Alarmkamera"
                 },
                 "man_made/survey_point": {
                     "name": "Vermessungspunkt",
@@ -4004,7 +4116,15 @@
                 },
                 "tourism/alpine_hut": {
                     "name": "Berghütte",
-                    "terms": "Berghütte,Almhütte,Alm,Schutzhütte,Schutzhaus,Hospiz,Winterraum"
+                    "terms": "Alpenvereinshütte,Berghütte,Schutzhütte,Schutzhaus,Hospiz,"
+                },
+                "tourism/apartment": {
+                    "name": "Ferienwohnung",
+                    "terms": "Ferienwohnung, Gästewohnung, Gästeapartment"
+                },
+                "tourism/aquarium": {
+                    "name": "Aquarium",
+                    "terms": "Aquarium, Aquarienhaus"
                 },
                 "tourism/artwork": {
                     "name": "Kunst",
@@ -4015,8 +4135,8 @@
                     "terms": "Touristenattraktion"
                 },
                 "tourism/camp_site": {
-                    "name": "Zelt-Campingplatz",
-                    "terms": "Campingplatz, Zeltplatz"
+                    "name": "Campingplatz",
+                    "terms": "Camping Lager, Zeltplatz, Campingplatz"
                 },
                 "tourism/caravan_site": {
                     "name": "Wohnwagen-Campingplatz",
@@ -4024,7 +4144,7 @@
                 },
                 "tourism/chalet": {
                     "name": "Ferienhaus",
-                    "terms": "Landhaus, Ferienhaus, Sennhütte, Chalet"
+                    "terms": "Ferienhaus, Chalet"
                 },
                 "tourism/gallery": {
                     "name": "Kunstgallerie",
@@ -4045,6 +4165,22 @@
                 "tourism/information": {
                     "name": "Information",
                     "terms": "Information"
+                },
+                "tourism/information/board": {
+                    "name": "Informationstafel",
+                    "terms": "Informationsbrett, Infotafel, Infobrett"
+                },
+                "tourism/information/guidepost": {
+                    "name": "Wegweiser",
+                    "terms": "Hinweistafel, Schild, Beschilderung"
+                },
+                "tourism/information/map": {
+                    "name": "Karte",
+                    "terms": "Landkarte, Touristeninformationskarte, Sehenswürdigkeitenkarte"
+                },
+                "tourism/information/office": {
+                    "name": "Tourismusbüro",
+                    "terms": "Touristeninfo, Touristeninformationsbüro"
                 },
                 "tourism/motel": {
                     "name": "Motel",
@@ -4070,13 +4206,37 @@
                     "name": "Zoo",
                     "terms": "Zoo"
                 },
+                "traffic_calming": {
+                    "name": "Verkehrsberuhigung",
+                    "terms": "Verkehrsberuhigung, Verkehrsberuhigungsmaßnahme"
+                },
                 "traffic_calming/bump": {
                     "name": "Bremsschwelle (schmal)",
                     "terms": "Temposchwelle, Bodenschwelle, Beruhigungsschwelle, Rüttelschwelle, Fahrbahnhöcker, Bremsschwelle, Bremshügel, Drempel"
                 },
+                "traffic_calming/chicane": {
+                    "name": "Schikane",
+                    "terms": "Schikane, Verkehrsverschwenkung, Verkehrsschikane"
+                },
+                "traffic_calming/choker": {
+                    "name": "Fahrbahnverengung",
+                    "terms": "Fahrbahnverengung"
+                },
+                "traffic_calming/cushion": {
+                    "name": "Bodenwelle mit Lücken",
+                    "terms": "Bodenwelle mit Lücken"
+                },
+                "traffic_calming/dip": {
+                    "name": "Bodensenke",
+                    "terms": "Bodensenke"
+                },
                 "traffic_calming/hump": {
                     "name": "Bremsschwelle (breit)",
                     "terms": "Temposchwelle, Bodenschwelle, Beruhigungsschwelle, Rüttelschwelle, Fahrbahnhöcker, Bremsschwelle, Bremshügel, Drempel"
+                },
+                "traffic_calming/island": {
+                    "name": "Verkehrsinsel",
+                    "terms": "Verkehrsinsel, Fahrbahnteiler"
                 },
                 "traffic_calming/rumble_strip": {
                     "name": "Rüttelstreifen",

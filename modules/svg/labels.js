@@ -244,9 +244,9 @@ export function svgLabels(projection, context) {
 
 
     function drawLabels(selection, graph, entities, filter, dimensions, fullRedraw) {
-        var hidePoints = !selection.selectAll('.node.point').node();
+        var lowZoom = context.surface().classed('low-zoom');
 
-        var labelable = [], i, j, k, entity;
+        var labelable = [], i, j, k, entity, geometry;
         for (i = 0; i < labelStack.length; i++) {
             labelable.push([]);
         }
@@ -272,12 +272,8 @@ export function svgLabels(projection, context) {
         // Split entities into groups specified by labelStack
         for (i = 0; i < entities.length; i++) {
             entity = entities[i];
-            var geometry = entity.geometry(graph);
-
-            if (geometry === 'vertex')
-                continue;
-            if (hidePoints && geometry === 'point')
-                continue;
+            geometry = entity.geometry(graph);
+            if (geometry === 'vertex') { geometry = 'point'; }  // treat vertex like point
 
             var preset = geometry === 'area' && context.presets().match(entity, graph),
                 icon = preset && !blacklisted(preset) && preset.icon;
@@ -315,29 +311,37 @@ export function svgLabels(projection, context) {
             var fontSize = labelStack[k][3];
             for (i = 0; i < labelable[k].length; i++) {
                 entity = labelable[k][i];
+                geometry = entity.geometry(graph);
+
                 var name = utilDisplayName(entity),
                     width = name && textWidth(name, fontSize),
                     p;
-                if (entity.geometry(graph) === 'point') {
-                    p = getPointLabel(entity, width, fontSize);
-                } else if (entity.geometry(graph) === 'line') {
+                if (geometry === 'point') {
+                    p = getPointLabel(entity, width, fontSize, geometry);
+                } else if (geometry === 'vertex' && !lowZoom) {
+                    // don't label vertices at low zoom because they don't have icons
+                    p = getPointLabel(entity, width, fontSize, geometry);
+                } else if (geometry === 'line') {
                     p = getLineLabel(entity, width, fontSize);
-                } else if (entity.geometry(graph) === 'area') {
+                } else if (geometry === 'area') {
                     p = getAreaLabel(entity, width, fontSize);
                 }
+
                 if (p) {
-                    p.classes = entity.geometry(graph) + ' tag-' + labelStack[k][1];
-                    positions[entity.geometry(graph)].push(p);
-                    labelled[entity.geometry(graph)].push(entity);
+                    if (geometry === 'vertex') { geometry = 'point'; }  // treat vertex like point
+                    p.classes = geometry + ' tag-' + labelStack[k][1];
+                    positions[geometry].push(p);
+                    labelled[geometry].push(entity);
                 }
             }
         }
 
 
-        function getPointLabel(entity, width, height) {
-            var pointOffsets = {
-                    ltr: [15, -12, 'start'],
-                    rtl: [-15, -12, 'end']
+        function getPointLabel(entity, width, height, geometry) {
+            var y = (geometry === 'point' ? -12 : 0),
+                pointOffsets = {
+                    ltr: [15, y, 'start'],
+                    rtl: [-15, y, 'end']
                 };
 
             var coord = projection(entity.loc),
@@ -584,35 +588,66 @@ export function svgLabels(projection, context) {
         // debug
         drawCollisionBoxes(label, rskipped, 'debug-skipped');
         drawCollisionBoxes(label, rdrawn, 'debug-drawn');
+
+        selection.call(filterLabels);
     }
 
 
-    function hideOnMouseover() {
-        if (d3.event.buttons) return;
-
-        var layers = d3.select(this)
+    function filterLabels(selection) {
+        var layers = selection
             .selectAll('.layer-label, .layer-halo');
 
         layers.selectAll('.proximate')
             .classed('proximate', false);
 
         var mouse = context.mouse(),
-            pad = 20,
-            bbox = { minX: mouse[0] - pad, minY: mouse[1] - pad, maxX: mouse[0] + pad, maxY: mouse[1] + pad },
-            ids = _.map(rdrawn.search(bbox), 'id');
+            graph = context.graph(),
+            selectedIDs = context.selectedIDs(),
+            ids = [],
+            pad, bbox;
+
+        // hide labels near the mouse
+        if (mouse) {
+            pad = 20;
+            bbox = { minX: mouse[0] - pad, minY: mouse[1] - pad, maxX: mouse[0] + pad, maxY: mouse[1] + pad };
+            ids.push.apply(ids, _.map(rdrawn.search(bbox), 'id'));
+        }
+
+        // hide labels along selected ways, or near selected vertices
+        for (var i = 0; i < selectedIDs.length; i++) {
+            var entity = graph.hasEntity(selectedIDs[i]);
+            if (!entity) continue;
+            var geometry = entity.geometry(graph);
+
+            if (geometry === 'line') {
+                ids.push(selectedIDs[i]);
+            } else if (geometry === 'vertex') {
+                var point = context.projection(entity.loc);
+                pad = 10;
+                bbox = { minX: point[0] - pad, minY: point[1] - pad, maxX: point[0] + pad, maxY: point[1] + pad };
+                ids.push.apply(ids, _.map(rdrawn.search(bbox), 'id'));
+            }
+        }
 
         layers.selectAll(utilEntitySelector(ids))
             .classed('proximate', true);
     }
 
 
+    var throttleFilterLabels = _.throttle(filterLabels, 100);
+
+
     drawLabels.observe = function(selection) {
-        selection.on('mousemove.hidelabels', hideOnMouseover);
+        var listener = function() { throttleFilterLabels(selection); };
+        selection.on('mousemove.hidelabels', listener);
+        context.on('enter.hidelabels', listener);
     };
 
 
     drawLabels.off = function(selection) {
+        throttleFilterLabels.cancel();
         selection.on('mousemove.hidelabels', null);
+        context.on('enter.hidelabels', null);
     };
 
 

@@ -1,0 +1,30 @@
+{
+    "fields": [
+        "operator",
+        "address",
+        "building_area",
+        "opening_hours",
+        "internet_access",
+        "internet_access/fee",
+        "internet_access/ssid",
+        "smoking",
+        "outdoor_seating"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "cybercafe",
+        "taxiphone",
+        "teleboutique",
+        "coffee",
+        "cafe",
+        "net",
+        "lanhouse"
+     ],
+    "tags": {
+        "amenity": "internet_cafe"
+    },
+    "name": "Internet Cafe"
+}

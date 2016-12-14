@@ -1,10 +1,15 @@
 {
     "icon": "prison",
+    "fields": [
+        "fence_type",
+        "height"
+    ],
     "geometry": [
         "line"
     ],
     "tags": {
         "barrier": "fence"
     },
-    "name": "Fence"
+    "name": "Fence",
+    "matchScore": 0.25
 }

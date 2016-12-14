@@ -80,7 +80,8 @@ export function uiRawMembershipEditor(context) {
             if (entity.type !== 'relation' || entity.id === id)
                 return;
 
-            var presetName = context.presets().match(entity, graph).name(),
+            var matched = context.presets().match(entity, graph),
+                presetName = (matched && matched.name()) || t('inspector.relation'),
                 entityName = utilDisplayName(entity) || '';
 
             var value = presetName + ' ' + entityName;
@@ -175,7 +176,8 @@ export function uiRawMembershipEditor(context) {
                 .append('span')
                 .attr('class', 'member-entity-type')
                 .text(function(d) {
-                    return context.presets().match(d.relation, context.graph()).name();
+                    var matched = context.presets().match(d.relation, context.graph());
+                    return (matched && matched.name()) || t('inspector.relation');
                 });
 
             label

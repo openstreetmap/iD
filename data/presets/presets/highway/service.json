@@ -7,7 +7,7 @@
         "structure",
         "access",
         "surface",
-        "cycleway"
+        "maxheight"
     ],
     "geometry": [
         "line"

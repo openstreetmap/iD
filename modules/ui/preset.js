@@ -95,9 +95,14 @@ export function uiPreset(context) {
     function content(selection) {
         if (!fieldsArr) {
             var entity = context.entity(id),
-                geometry = context.geometry(id);
+                geometry = context.geometry(id),
+                presets = context.presets();
 
-            fieldsArr = [UIField(context.presets().field('name'), entity)];
+            fieldsArr = [];
+
+            if (presets.field('name')) {
+                fieldsArr.push(UIField(presets.field('name'), entity));
+            }
 
             preset.fields.forEach(function(field) {
                 if (field.matchGeometry(geometry)) {
@@ -105,11 +110,11 @@ export function uiPreset(context) {
                 }
             });
 
-            if (entity.isHighwayIntersection(context.graph())) {
-                fieldsArr.push(UIField(context.presets().field('restrictions'), entity, true));
+            if (entity.isHighwayIntersection(context.graph()) && presets.field('restrictions')) {
+                fieldsArr.push(UIField(presets.field('restrictions'), entity, true));
             }
 
-            context.presets().universal().forEach(function(field) {
+            presets.universal().forEach(function(field) {
                 if (preset.fields.indexOf(field) < 0) {
                     fieldsArr.push(UIField(field, entity));
                 }

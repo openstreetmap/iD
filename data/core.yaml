@@ -187,6 +187,7 @@ en:
     localized_translation_language: Choose language
     localized_translation_name: Name
   zoom_in_edit: Zoom in to Edit
+  login: login
   logout: logout
   loading_auth: "Connecting to OpenStreetMap..."
   report_a_bug: Report a bug
@@ -198,6 +199,7 @@ en:
     error: Unable to connect to API.
     offline: The API is offline. Please try editing later.
     readonly: The API is read-only. You will need to wait to save your changes.
+    rateLimit: The API is limiting anonymous connections.  You can fix this by logging in.
   commit:
     title: Save Changes
     description_placeholder: Brief description of your contributions (required)
@@ -285,7 +287,7 @@ en:
     switch: Switch back to this background
     custom: Custom
     custom_button: Edit custom background
-    custom_prompt: "Enter a tile URL template. Valid tokens are {z}, {x}, {y} for Z/X/Y scheme and {u} for quadtile scheme."
+    custom_prompt: "Enter a tile URL template. Valid tokens are {zoom}, {x}, {y} for Z/X/Y scheme and {u} for quadtile scheme."
     fix_misalignment: Adjust imagery offset
     imagery_source_faq: Where does this imagery come from?
     reset: reset

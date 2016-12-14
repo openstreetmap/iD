@@ -167,6 +167,22 @@ en:
       barrier:
         # barrier=*
         label: Type
+      bath/open_air:
+        # 'bath:open_air=*'
+        label: Open Air
+      bath/sand_bath:
+        # 'bath:sand_bath=*'
+        label: Sand Bath
+      bath/type:
+        # 'bath:type=*'
+        label: Specialty
+        options:
+          # 'bath:type=foot_bath'
+          foot_bath: Foot Bath
+          # 'bath:type=hot_spring'
+          hot_spring: Hot Spring
+          # 'bath:type=onsen'
+          onsen: Japanese Onsen
       beauty:
         # beauty=*
         label: Shop Type
@@ -191,6 +207,9 @@ en:
           stemcells: stem cell samples
           # 'blood:=whole'
           whole: whole blood
+      board_type:
+        # board_type=*
+        label: Type
       boundary:
         # boundary=*
         label: Type
@@ -203,6 +222,24 @@ en:
       building_area:
         # building=*
         label: Building
+      camera/direction:
+        # 'camera:direction=*'
+        label: Direction (Degrees Clockwise)
+        # camera/direction field placeholder
+        placeholder: '45, 90, 180, 270'
+      camera/mount:
+        # 'camera:mount=*'
+        label: Camera Mount
+      camera/type:
+        # 'camera:type=*'
+        label: Camera Type
+        options:
+          # 'camera:type=dome'
+          dome: Dome
+          # 'camera:type=fixed'
+          fixed: Fixed
+          # 'camera:type=panning'
+          panning: Panning
       capacity:
         # capacity=*
         label: Capacity
@@ -258,6 +295,11 @@ en:
       construction:
         # construction=*
         label: Type
+      contact/webcam:
+        # 'contact:webcam=*'
+        label: Webcam URL
+        # contact/webcam field placeholder
+        placeholder: 'http://example.com/'
       content:
         # content=*
         label: Contents
@@ -383,6 +425,9 @@ en:
       fee:
         # fee=*
         label: Fee
+      fence_type:
+        # fence_type=*
+        label: Type
       fire_hydrant/type:
         # 'fire_hydrant:type=*'
         label: Type
@@ -441,6 +486,9 @@ en:
       handrail:
         # handrail=*
         label: Handrail
+      height:
+        # height=*
+        label: Height (Meters)
       highway:
         # highway=*
         label: Type
@@ -492,6 +540,9 @@ en:
       internet_access/fee:
         # 'internet_access:fee=*'
         label: Internet Access Fee
+      internet_access/ssid:
+        # 'internet_access:ssid=*'
+        label: SSID (Network Name)
       kerb:
         # kerb=*
         label: Curb Ramp
@@ -580,6 +631,17 @@ en:
       man_made:
         # man_made=*
         label: Type
+      map_size:
+        # map_size=*
+        label: Coverage
+      map_type:
+        # map_type=*
+        label: Type
+      maxheight:
+        # maxheight=*
+        label: Max Height
+        # maxheight field placeholder
+        placeholder: '4, 4.5, 5, 14''0", 14''6", 15''0"'
       maxspeed:
         # maxspeed=*
         label: Speed Limit
@@ -730,6 +792,9 @@ en:
       operator:
         # operator=*
         label: Operator
+      outdoor_seating:
+        # outdoor_seating=*
+        label: Outdoor Seating
       par:
         # par=*
         label: Par
@@ -1044,6 +1109,22 @@ en:
       surface:
         # surface=*
         label: Surface
+      surveillance:
+        # surveillance=*
+        label: Surveillance Kind
+      surveillance/type:
+        # 'surveillance:type=*'
+        label: Surveillance Type
+        options:
+          # 'surveillance:type=ALPR'
+          ALPR: Automatic License Plate Reader
+          # 'surveillance:type=camera'
+          camera: Camera
+          # 'surveillance:type=guard'
+          guard: Guard
+      surveillance/zone:
+        # 'surveillance:zone=*'
+        label: Surveillance Zone
       tactile_paving:
         # tactile_paving=*
         label: Tactile Paving
@@ -1074,9 +1155,14 @@ en:
       tourism:
         # tourism=*
         label: Type
-      towertype:
+      tower/construction:
+        # 'tower:construction=*'
+        label: Construction
+        # tower/construction field placeholder
+        placeholder: 'Guyed, Lattice, Concealed, ...'
+      tower/type:
         # 'tower:type=*'
-        label: Tower type
+        label: Type
       tracktype:
         # tracktype=*
         label: Track Type
@@ -1136,6 +1222,9 @@ en:
           house: Up to 5m (16ft)
           # visibility=street
           street: 5 to 20m (16 to 65ft)
+      wall:
+        # wall=*
+        label: Type
       water:
         # water=*
         label: Type
@@ -1387,6 +1476,11 @@ en:
         name: Coworking Space
         # 'terms: coworking,office'
         terms: '<translate with synonyms or related terms for ''Coworking Space'', separated by commas>'
+      amenity/crematorium:
+        # amenity=crematorium
+        name: Crematorium
+        # 'terms: cemetery,funeral'
+        terms: '<translate with synonyms or related terms for ''Crematorium'', separated by commas>'
       amenity/dentist:
         # amenity=dentist
         name: Dentist
@@ -1424,6 +1518,11 @@ en:
         # amenity=fire_station
         name: Fire Station
         terms: '<translate with synonyms or related terms for ''Fire Station'', separated by commas>'
+      amenity/food_court:
+        # amenity=food_court
+        name: Food Court
+        # 'terms: fast food,restaurant,food'
+        terms: '<translate with synonyms or related terms for ''Food Court'', separated by commas>'
       amenity/fountain:
         # amenity=fountain
         name: Fountain
@@ -1450,12 +1549,18 @@ en:
       amenity/hunting_stand:
         # amenity=hunting_stand
         name: Hunting Stand
+        # 'terms: game,lookout,shoot,wild,watch'
         terms: '<translate with synonyms or related terms for ''Hunting Stand'', separated by commas>'
       amenity/ice_cream:
         # amenity=ice_cream
         name: Ice Cream Shop
         # 'terms: gelato,sorbet,sherbet,frozen,yogurt'
         terms: '<translate with synonyms or related terms for ''Ice Cream Shop'', separated by commas>'
+      amenity/internet_cafe:
+        # amenity=internet_cafe
+        name: Internet Cafe
+        # 'terms: cybercafe,taxiphone,teleboutique,coffee,cafe,net,lanhouse'
+        terms: '<translate with synonyms or related terms for ''Internet Cafe'', separated by commas>'
       amenity/kindergarten:
         # amenity=kindergarten
         name: Preschool/Kindergarten Grounds
@@ -1549,8 +1654,13 @@ en:
       amenity/pub:
         # amenity=pub
         name: Pub
-        # 'terms: dive,beer,bier,booze'
+        # 'terms: alcohol,drink,dive,beer,bier,booze'
         terms: '<translate with synonyms or related terms for ''Pub'', separated by commas>'
+      amenity/public_bath:
+        # amenity=public_bath
+        name: Public Bath
+        # 'terms: onsen,foot bath,hot springs'
+        terms: '<translate with synonyms or related terms for ''Public Bath'', separated by commas>'
       amenity/public_bookcase:
         # amenity=public_bookcase
         name: Public Bookcase
@@ -2429,6 +2539,11 @@ en:
         name: Unmaintained Track Road
         # 'terms: woods road,forest road,logging road,fire road,farm road,agricultural road,ranch road,carriage road,primitive,unmaintained,rut,offroad,4wd,4x4,four wheel drive,atv,quad,jeep,double track,two track'
         terms: '<translate with synonyms or related terms for ''Unmaintained Track Road'', separated by commas>'
+      highway/traffic_mirror:
+        # highway=traffic_mirror
+        name: Traffic Mirror
+        # 'terms: blind spot,convex,corner,curved,roadside,round,safety,sphere,visibility'
+        terms: '<translate with synonyms or related terms for ''Traffic Mirror'', separated by commas>'
       highway/traffic_signals:
         # highway=traffic_signals
         name: Traffic Signals
@@ -2448,6 +2563,11 @@ en:
         name: Turning Circle
         # 'terms: cul-de-sac'
         terms: '<translate with synonyms or related terms for ''Turning Circle'', separated by commas>'
+      highway/turning_loop:
+        # highway=turning_loop
+        name: Turning Loop (Island)
+        # 'terms: cul-de-sac'
+        terms: '<translate with synonyms or related terms for ''Turning Loop (Island)'', separated by commas>'
       highway/unclassified:
         # highway=unclassified
         name: Minor/Unclassified Road
@@ -2615,6 +2735,11 @@ en:
         name: Common
         # 'terms: open space'
         terms: '<translate with synonyms or related terms for ''Common'', separated by commas>'
+      leisure/dance:
+        # leisure=dance
+        name: Dance Hall
+        # 'terms: ballroom,jive,swing,tango,waltz'
+        terms: '<translate with synonyms or related terms for ''Dance Hall'', separated by commas>'
       leisure/dog_park:
         # leisure=dog_park
         name: Dog Park
@@ -2728,6 +2853,10 @@ en:
         name: Playground
         # 'terms: jungle gym,play area'
         terms: '<translate with synonyms or related terms for ''Playground'', separated by commas>'
+      leisure/resort:
+        # leisure=resort
+        name: Resort
+        terms: '<translate with synonyms or related terms for ''Resort'', separated by commas>'
       leisure/running_track:
         # 'leisure=track, sport=running'
         name: Running Track
@@ -2853,8 +2982,13 @@ en:
       man_made/surveillance:
         # man_made=surveillance
         name: Surveillance
-        # 'terms: cctv'
+        # 'terms: anpr,alpr,camera,car plate recognition,cctv,guard,license plate recognition,monitoring,number plate recognition,security,video,webcam'
         terms: '<translate with synonyms or related terms for ''Surveillance'', separated by commas>'
+      man_made/surveillance_camera:
+        # 'man_made=surveillance, surveillance:type=camera'
+        name: Surveillance Camera
+        # 'terms: anpr,alpr,camera,car plate recognition,cctv,guard,license plate recognition,monitoring,number plate recognition,security,video,webcam'
+        terms: '<translate with synonyms or related terms for ''Surveillance Camera'', separated by commas>'
       man_made/survey_point:
         # man_made=survey_point
         name: Survey Point
@@ -3815,6 +3949,15 @@ en:
         # tourism=alpine_hut
         name: Alpine Hut
         terms: '<translate with synonyms or related terms for ''Alpine Hut'', separated by commas>'
+      tourism/apartment:
+        # tourism=apartment
+        name: Guest Apartment / Condo
+        terms: '<translate with synonyms or related terms for ''Guest Apartment / Condo'', separated by commas>'
+      tourism/aquarium:
+        # tourism=aquarium
+        name: Aquarium
+        # 'terms: fish,sea,water'
+        terms: '<translate with synonyms or related terms for ''Aquarium'', separated by commas>'
       tourism/artwork:
         # tourism=artwork
         name: Artwork
@@ -3860,6 +4003,22 @@ en:
         # tourism=information
         name: Information
         terms: '<translate with synonyms or related terms for ''Information'', separated by commas>'
+      tourism/information/board:
+        # 'tourism=information, information=board'
+        name: Information Board
+        terms: '<translate with synonyms or related terms for ''Information Board'', separated by commas>'
+      tourism/information/guidepost:
+        # 'tourism=information, information=guidepost'
+        name: Guidepost
+        terms: '<translate with synonyms or related terms for ''Guidepost'', separated by commas>'
+      tourism/information/map:
+        # 'tourism=information, information=map'
+        name: Map
+        terms: '<translate with synonyms or related terms for ''Map'', separated by commas>'
+      tourism/information/office:
+        # 'tourism=information, information=office'
+        name: Tourist Information Office
+        terms: '<translate with synonyms or related terms for ''Tourist Information Office'', separated by commas>'
       tourism/motel:
         # tourism=motel
         name: Motel
@@ -3885,6 +4044,7 @@ en:
       tourism/zoo:
         # tourism=zoo
         name: Zoo
+        # 'terms: animal'
         terms: '<translate with synonyms or related terms for ''Zoo'', separated by commas>'
       traffic_calming:
         # traffic_calming=*
@@ -4098,6 +4258,11 @@ en:
         # waterway=water_point
         name: Marine Drinking Water
         terms: '<translate with synonyms or related terms for ''Marine Drinking Water'', separated by commas>'
+      waterway/waterfall:
+        # waterway=waterfall
+        name: Waterfall
+        # 'terms: fall'
+        terms: '<translate with synonyms or related terms for ''Waterfall'', separated by commas>'
       waterway/weir:
         # waterway=weir
         name: Weir

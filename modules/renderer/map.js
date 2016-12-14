@@ -17,6 +17,7 @@ import {
 } from '../svg/index';
 
 import { geoExtent } from '../geo/index';
+import { modeSelect } from '../modes/select';
 
 import {
     utilFastMouse,
@@ -44,16 +45,17 @@ export function rendererMap(context) {
         drawAreas = svgAreas(projection, context),
         drawMidpoints = svgMidpoints(projection, context),
         drawLabels = svgLabels(projection, context),
-        supersurface,
-        wrapper,
-        surface,
+        supersurface = d3.select(null),
+        wrapper = d3.select(null),
+        surface = d3.select(null),
         mouse,
         mousemove;
 
     var zoom = d3.zoom()
-            .scaleExtent([ztok(2), ztok(24)])   // TODO: uncomment interpolate when d3.zoom 1.0.4 avail:
-            // .interpolate(d3.interpolate)     // https://github.com/d3/d3-zoom/issues/54
-            .on('zoom', zoomPan);               // default zoom interpolator does a fly-out-in
+            .scaleExtent([ztok(2), ztok(24)])
+            .interpolate(d3.interpolate)
+            .filter(zoomEventFilter)
+            .on('zoom', zoomPan);
 
     var _selection = d3.select(null);
 
@@ -64,12 +66,31 @@ export function rendererMap(context) {
 
         context
             .on('change.map', immediateRedraw);
-        context.history()
+
+        context.connection()
             .on('change.map', immediateRedraw);
+
+        context.history()
+            .on('change.map', immediateRedraw)
+            .on('undone.context redone.context', function(stack) {
+                var followSelected = false;
+                if (Array.isArray(stack.selectedIDs)) {
+                    followSelected = (stack.selectedIDs.length === 1 && stack.selectedIDs[0][0] === 'n');
+                    context.enter(
+                        modeSelect(context, stack.selectedIDs).suppressMenu(true).follow(followSelected)
+                    );
+                }
+                if (!followSelected && stack.transform) {
+                    map.transformEase(stack.transform);
+                }
+            });
+
         context.background()
             .on('change.map', immediateRedraw);
+
         context.features()
             .on('redraw.map', immediateRedraw);
+
         drawLayers
             .on('change.map', function() {
                 context.background().updateImagery();
@@ -143,7 +164,40 @@ export function rendererMap(context) {
         });
 
         map.dimensions(utilGetDimensions(selection));
+    }
 
+
+    function zoomEventFilter() {
+        // Fix for #2151, (see also d3/d3-zoom#60, d3/d3-brush#18)
+        // Intercept `mousedown` and check if there is an orphaned zoom gesture.
+        // This can happen if a previous `mousedown` occurred without a `mouseup`.
+        // If we detect this, dispatch `mouseup` to complete the orphaned gesture,
+        // so that d3-zoom won't stop propagation of new `mousedown` events.
+        if (d3.event.type === 'mousedown') {
+            var hasOrphan = false;
+            var listeners = window.__on;
+            for (var i = 0; i < listeners.length; i++) {
+                var listener = listeners[i];
+                if (listener.name === 'zoom' && listener.type === 'mouseup') {
+                    hasOrphan = true;
+                    break;
+                }
+            }
+            if (hasOrphan) {
+                var event = window.CustomEvent;
+                if (event) {
+                    event = new event('mouseup');
+                } else {
+                    event = window.document.createEvent('Event');
+                    event.initEvent('mouseup', false, false);
+                }
+                // Event needs to be dispatched with an event.view property.
+                event.view = window;
+                window.dispatchEvent(event);
+            }
+        }
+
+        return d3.event.button !== 2;   // ignore right clicks
     }
 
 
@@ -264,7 +318,7 @@ export function rendererMap(context) {
 
 
     function redraw(difference, extent) {
-        if (!surface || !redrawEnabled) return;
+        if (surface.empty() || !redrawEnabled) return;
 
         // If we are in the middle of a zoom/pan, we can't do differenced redraws.
         // It would result in artifacts where differenced entities are redrawn with
@@ -324,9 +378,13 @@ export function rendererMap(context) {
 
 
     map.mouse = function() {
-        var e = mousemove || d3.event, s;
-        while ((s = e.sourceEvent)) e = s;
-        return mouse(e);
+        var event = mousemove || d3.event;
+        if (event) {
+            var s;
+            while ((s = event.sourceEvent)) { event = s; }
+            return mouse(event);
+        }
+        return null;
     };
 
 
@@ -347,6 +405,26 @@ export function rendererMap(context) {
         redrawEnabled = _;
         return map;
     };
+
+
+    function setTransform(t2, duration, force) {
+        var t = projection.transform();
+        if (!force && t2.k === t.k && t2.x === t.x && t2.y === t.y) {
+            return false;
+        }
+
+        if (duration) {
+            _selection
+                .transition()
+                .duration(duration)
+                .on('start', function() { map.startEase(); })
+                .call(zoom.transform, d3.zoomIdentity.translate(t2.x, t2.y).scale(t2.k));
+        } else {
+            projection.transform(t2);
+            transformStart = t2;
+            _selection.call(zoom.transform, transformStart);
+        }
+    }
 
 
     function setZoom(z2, force, duration) {
@@ -538,6 +616,13 @@ export function rendererMap(context) {
     map.zoomEase = function(z2, duration) {
         duration = duration || 250;
         setZoom(z2, false, duration);
+        return map;
+    };
+
+
+    map.transformEase = function(t2, duration) {
+        duration = duration || 250;
+        setTransform(t2, duration, false);
         return map;
     };
 

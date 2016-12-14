@@ -227,6 +227,7 @@
             "localized_translation_name": "Nombre"
         },
         "zoom_in_edit": "Acercar para editar",
+        "login": "iniciar sesión",
         "logout": "Cerrar sesión",
         "loading_auth": "Conectando a OpenStreetMap...",
         "report_a_bug": "Reportar un error",
@@ -238,7 +239,8 @@
         "status": {
             "error": "No se puede conectar con la API.",
             "offline": "La API está desconectada. Intente editar más tarde.",
-            "readonly": "El API está en modo de sólo lectura. Tendrá que esperar para guardar sus cambios."
+            "readonly": "El API está en modo de sólo lectura. Tendrá que esperar para guardar sus cambios.",
+            "rateLimit": "La API está limitando las conexiones anónimas. Puede solucionar esto conectándose."
         },
         "commit": {
             "title": "Guardar cambios",
@@ -294,6 +296,7 @@
         "inspector": {
             "no_documentation_combination": "No hay documentación disponible para esta combinación de etiquetas",
             "no_documentation_key": "No hay documentación disponible para esta etiqueta",
+            "documentation_redirect": "Esta documentación ha sido redireccionada a una nueva página",
             "show_more": "Ver más",
             "view_on_osm": "Ver en openstreetmap.org",
             "all_fields": "Todos los campos",
@@ -334,7 +337,7 @@
             "switch": "Volver a este fondo",
             "custom": "Personalizado",
             "custom_button": "Editar fondo personalizado",
-            "custom_prompt": "Introduzca un patrón de URL de teselas. Los símbolos válidos son {z}, {x}, {y} para el esquema Z/X/Y y {u} para el esquema quadtile.",
+            "custom_prompt": "Introduzca una plantilla URL de tesela. Los símbolos válidos son {zoom}, {x}, {y} para el esquema Z/X/Y y {u} para el esquema cuadrático.",
             "fix_misalignment": "Ajustar desplazamiento de imágenes",
             "imagery_source_faq": "¿De dónde vienen estas imágenes?",
             "reset": "reiniciar",
@@ -781,6 +784,9 @@
                 "barrier": {
                     "label": "Tipo"
                 },
+                "beauty": {
+                    "label": "Tipo de tienda"
+                },
                 "bench": {
                     "label": "Banco"
                 },
@@ -798,6 +804,9 @@
                         "stemcells": "muestras de células madre",
                         "whole": "sangre pura"
                     }
+                },
+                "board_type": {
+                    "label": "Tipo"
                 },
                 "boundary": {
                     "label": "Tipo"
@@ -970,6 +979,9 @@
                 "fee": {
                     "label": "Tarifado"
                 },
+                "fence_type": {
+                    "label": "Tipo"
+                },
                 "fire_hydrant/type": {
                     "label": "Tipo",
                     "options": {
@@ -1020,6 +1032,9 @@
                 "handrail": {
                     "label": "Pasamanos"
                 },
+                "height": {
+                    "label": "Altura (metros)"
+                },
                 "highway": {
                     "label": "Tipo"
                 },
@@ -1064,6 +1079,9 @@
                 },
                 "internet_access/fee": {
                     "label": "Pago por acceso a Internet"
+                },
+                "internet_access/ssid": {
+                    "label": "SSID (nombre de red)"
                 },
                 "kerb": {
                     "label": "Rampa de bordillo/cordón"
@@ -1138,6 +1156,16 @@
                 },
                 "man_made": {
                     "label": "Tipo"
+                },
+                "map_size": {
+                    "label": "Cobertura"
+                },
+                "map_type": {
+                    "label": "Tipo"
+                },
+                "maxheight": {
+                    "label": "Altura máxima",
+                    "placeholder": "4, 4.5, 5, 14'0\", 14'6\", 15'0\""
                 },
                 "maxspeed": {
                     "label": "Límite de velocidad",
@@ -1253,6 +1281,9 @@
                 "operator": {
                     "label": "Operador"
                 },
+                "outdoor_seating": {
+                    "label": "Asientos al aire libre"
+                },
                 "par": {
                     "label": "Par",
                     "placeholder": "3, 4, 5..."
@@ -1342,6 +1373,13 @@
                 "recycling_accepts": {
                     "label": "Acepta"
                 },
+                "recycling_type": {
+                    "label": "Tipo de reciclaje",
+                    "options": {
+                        "centre": "Centro de reciclaje",
+                        "container": "Contenedor"
+                    }
+                },
                 "ref": {
                     "label": "Referencia"
                 },
@@ -1396,21 +1434,8 @@
                 "service": {
                     "label": "Tipo"
                 },
-                "service/bicycle/chain_tool": {
-                    "label": "Trochacadena",
-                    "options": {
-                        "no": "No",
-                        "undefined": "Asume que No",
-                        "yes": "Si"
-                    }
-                },
-                "service/bicycle/pump": {
-                    "label": "Bomba de aire",
-                    "options": {
-                        "no": "No",
-                        "undefined": "Asume que Si",
-                        "yes": "Sí"
-                    }
+                "service/bicycle": {
+                    "label": "Servicios"
                 },
                 "service_rail": {
                     "label": "Tipo de servicio",
@@ -1535,8 +1560,12 @@
                 "tourism": {
                     "label": "Tipo"
                 },
-                "towertype": {
-                    "label": "Tipo de torre"
+                "tower/construction": {
+                    "label": "Construcción",
+                    "placeholder": "Guía de alambre, enrejada, oculta/disfrazada, ..."
+                },
+                "tower/type": {
+                    "label": "Tipo"
                 },
                 "tracktype": {
                     "label": "Tipo de pista",
@@ -1548,6 +1577,9 @@
                         "grade5": "Suave: tierra/arena/césped"
                     },
                     "placeholder": "Sólido, Mayormente sólido, Suave..."
+                },
+                "traffic_calming": {
+                    "label": "Tipo"
                 },
                 "traffic_signals": {
                     "label": "Tipo"
@@ -1581,6 +1613,9 @@
                         "street": "5 a 20 m (16 a 65 ft)"
                     }
                 },
+                "wall": {
+                    "label": "Tipo"
+                },
                 "water": {
                     "label": "Tipo"
                 },
@@ -1611,6 +1646,10 @@
                 "address": {
                     "name": "Dirección",
                     "terms": "dirección, domicilio, señas, residencia"
+                },
+                "advertising/billboard": {
+                    "name": "Panel publicitario",
+                    "terms": "panel, cartel, cartelera, valla, publicitario, publicidad"
                 },
                 "aerialway": {
                     "name": "Transporte por cable"
@@ -1861,6 +1900,10 @@
                     "name": "Heladería",
                     "terms": "nevería, helado, sorbete, nieve, raspadillo, frozen, yogur, copas, tarta helada, postre"
                 },
+                "amenity/internet_cafe": {
+                    "name": "Internet café",
+                    "terms": "internet, terminales, cafe, cyber, cyber cafe, cybercafe, ciber, ciber café, cibercafé, juegos, juegos en red"
+                },
                 "amenity/kindergarten": {
                     "name": "Terreno de preescolar o jardín de infancia",
                     "terms": "terreno, área, suelo, preescolar, preprimaria, jardín de infancia, jardín de niños, kinder, parvulario, párvulos"
@@ -1952,6 +1995,10 @@
                 "amenity/recycling": {
                     "name": "Contenedor de reciclado",
                     "terms": "reciclaje, reciclado"
+                },
+                "amenity/recycling_centre": {
+                    "name": "Centro de reciclaje",
+                    "terms": "reciclaje, acopio, basura, botella, lata, vidrio, desecho, chatarra, cartón"
                 },
                 "amenity/register_office": {
                     "name": "Oficina de registro"
@@ -2070,6 +2117,10 @@
                 "amenity/waste_disposal": {
                     "name": "Contenedor de residuos",
                     "terms": "residuo, basura, desperdicio, contenedor, depósito, basurero, contenedor de basuras, papelera"
+                },
+                "amenity/waste_transfer_station": {
+                    "name": "Estación de transferencia de residuos",
+                    "terms": "intercambio residuos, vertedero, basura, reciclaje, desecho, chatarra"
                 },
                 "amenity/water_point": {
                     "name": "Recarga de agua potable para autocaravanas",
@@ -2294,6 +2345,10 @@
                 "building/warehouse": {
                     "name": "Almacén",
                     "terms": "almacén, depósito, bodega, lonja, nave"
+                },
+                "camp_site/camp_pitch": {
+                    "name": "Cancha de acampar",
+                    "terms": "lugar, patio, cancha, terreno, camping, cámping, campamento, acampe, tienda, carpa, rv, motorhome, motor home, caravana, autocaravana, "
                 },
                 "craft": {
                     "name": "Oficio",
@@ -2728,6 +2783,10 @@
                     "name": "Pista o camino rural",
                     "terms": "camino, senda, sendero, calle, vía, pista, rural, forestal, agrícola, campo, sin mantenimiento, offroad, jeep, doble tracción, tractor, 4x4, atv, cuadrimotor, quadratrack, con huella"
                 },
+                "highway/traffic_mirror": {
+                    "name": "Espejo de tráfico",
+                    "terms": "espejo, convexo, cóncavo, curvo, redondo, circular, esférico, espejo de esquina, espejo de visibilidad, espejo de intersección"
+                },
                 "highway/traffic_signals": {
                     "name": "Semáforos",
                     "terms": "semáforo, señal de tráfico, luces de tráfico, luces de señalización, luces de parado, señal, tráfico, tránsito, control"
@@ -2743,6 +2802,10 @@
                 "highway/turning_circle": {
                     "name": "Círculo de giro",
                     "terms": "círculo de giro, cul de sac"
+                },
+                "highway/turning_loop": {
+                    "name": "Bucle de giro (Isla)",
+                    "terms": "bucle de giro, cul-de-sac, cul de sac, calle sin salida, callejón sin salida"
                 },
                 "highway/unclassified": {
                     "name": "Camino menor / sin clasificación",
@@ -2903,6 +2966,10 @@
                     "name": "Tierras comunes -Reino Unido-",
                     "terms": "tierras comunales, terreno comunal, comunal, tierras comunes"
                 },
+                "leisure/dance": {
+                    "name": "Salón de baile",
+                    "terms": "sala de baile, pista de baile, baile de salón, bolero, conga, cha-cha-chá, fox-trot, mambo, son cubano, meregue, milonga, pasodoble, polka, rock and roll, rumba, swing, tango, vals, jive"
+                },
                 "leisure/dog_park": {
                     "name": "Parque canino",
                     "terms": "perro, can, parque de perros"
@@ -3002,6 +3069,10 @@
                 "leisure/playground": {
                     "name": "Zona de juegos",
                     "terms": "parque infantil, área de juegos, zona de juegos, juegos, infantil, niños, niñas, plaza, parque"
+                },
+                "leisure/resort": {
+                    "name": "Complejo turístico",
+                    "terms": "resort, estación turística, resort de destino, estación de esquí, balneario, estación de todo incluido, turismo"
                 },
                 "leisure/running_track": {
                     "name": "Pista de atletismo",
@@ -3568,6 +3639,14 @@
                     "name": "Salón de belleza",
                     "terms": "salón de belleza, estética, belleza, cuidado personal, embellecimiento"
                 },
+                "shop/beauty/nails": {
+                    "name": "Salón de manicura",
+                    "terms": "manicura, pedicura, uñas, manos, pies, salón de uñas, arreglo de uñas, salón de belleza"
+                },
+                "shop/beauty/tanning": {
+                    "name": "Salón de bronceado",
+                    "terms": "cama solar, salón de bronceo, rayos uva, rayos ultravioleta, centro de bronceado"
+                },
                 "shop/bed": {
                     "name": "Tienda de ropa de cama/colchón",
                     "terms": "almohada, sábanas, cama, colchón, ropa de cama"
@@ -3994,6 +4073,14 @@
                     "name": "Cabaña alpina",
                     "terms": "Refugio de montaña, refugio alpino, refugio,  cabaña, choza, caseta, chabola, cabina, cobertizo"
                 },
+                "tourism/apartment": {
+                    "name": "Apartamento de huéspedes",
+                    "terms": "apartamento, piso, condominio, bloque, huéspedes, invitados"
+                },
+                "tourism/aquarium": {
+                    "name": "Acuario",
+                    "terms": "acuario público, peces, océano, agua"
+                },
                 "tourism/artwork": {
                     "name": "Obra de arte",
                     "terms": "obra de arte, pieza de arte, pintura, escultura, mural, pintada, estatua"
@@ -4003,8 +4090,8 @@
                     "terms": "punto de interés, interés turístico, atracción turística, atracciones turísticas, atractivos turísticos, lugares turísticos"
                 },
                 "tourism/camp_site": {
-                    "name": "Camping",
-                    "terms": "camping, campings, acampada, lugar de acampada, campamento"
+                    "name": "Terreno de acampar",
+                    "terms": "terreno, área, lugar, camping, cámping, campamento, acampe, tienda, carpa, rv, motorhome, motor home, caravana, autocaravana"
                 },
                 "tourism/caravan_site": {
                     "name": "Parque de autocaravanas",
@@ -4034,6 +4121,22 @@
                     "name": "Información turística",
                     "terms": "información, información turística, oficina de información"
                 },
+                "tourism/information/board": {
+                    "name": "Tablero de información",
+                    "terms": "tabla, tablón, cuadro, cartel, información, informativo, información turística"
+                },
+                "tourism/information/guidepost": {
+                    "name": "Poste guía",
+                    "terms": "poste indicador, cartel, información, dirección, indicación"
+                },
+                "tourism/information/map": {
+                    "name": "Mapa",
+                    "terms": "plano, croquis, cartel, información, indicación"
+                },
+                "tourism/information/office": {
+                    "name": "Oficina de información turística",
+                    "terms": "oficina, guía, caseta, puesto, turismo, información turística, información turismo, información cultural, actividad turística, actividad de recreación, actividad de ocio"
+                },
                 "tourism/motel": {
                     "name": "Motel",
                     "terms": "motel, alojamiento"
@@ -4058,13 +4161,37 @@
                     "name": "Zoológico",
                     "terms": "zoo, zoológico "
                 },
+                "traffic_calming": {
+                    "name": "Pacificador de tráfico",
+                    "terms": "moderador de tráfico, apaciguador de tráfico, calmado de tráfico, reductor de velocidad, tráfico, tránsito, circulación, chichón, joroba, velocidad, guardias tumbados, policías acostados, badén"
+                },
                 "traffic_calming/bump": {
                     "name": "Reductor de velocidad estrecho",
                     "terms": "badén, guardia tumbado, lomo de burro, lomo de toro, resalto, resalte, tope, rompemuelle, túmulo, calmado de tráfico, reductor de velocidad"
                 },
+                "traffic_calming/chicane": {
+                    "name": "Chicana de tráfico",
+                    "terms": "chicane, chicana, curvas, frenar, velocidad, reductor de velocidad"
+                },
+                "traffic_calming/choker": {
+                    "name": "Gargantas de tráfico",
+                    "terms": "garganta, estrangulamiento, estrechamiento, frenar, velocidad, reductor de velocidad"
+                },
+                "traffic_calming/cushion": {
+                    "name": "Banda de frenado",
+                    "terms": "banda de frenado, cojines de frenado, almohadas de frenado, frenar, velocidad, reductor de velocidad"
+                },
+                "traffic_calming/dip": {
+                    "name": "Cuneta/Badén",
+                    "terms": "cuneta, badén, depresión, canalizador de agua, frenar, velocidad, reductor de velocidad"
+                },
                 "traffic_calming/hump": {
                     "name": "Reductor de velocidad ancho",
                     "terms": "badén, guardia tumbado, lomo de burro, lomo de toro, resalto, resalte, tope, rompemuelle, túmulo, calmado de tráfico, reductor de velocidad"
+                },
+                "traffic_calming/island": {
+                    "name": "Isleta de tráfico",
+                    "terms": "círculo, rotonda, frenar, velocidad, reductor de velocidad"
                 },
                 "traffic_calming/rumble_strip": {
                     "name": "Banda sonora reductora de velocidad",

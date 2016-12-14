@@ -9,7 +9,8 @@
         "takeaway",
         "delivery",
         "drive_through",
-        "smoking"
+        "smoking",
+        "outdoor_seating"
     ],
     "geometry": [
         "point",

@@ -1,0 +1,12 @@
+{
+    "key": "surveillance:type",
+    "type": "combo",
+    "label": "Surveillance Type",
+    "strings": {
+        "options": {
+            "camera": "Camera",
+            "guard": "Guard",
+            "ALPR": "Automatic License Plate Reader"
+        }
+    }
+}

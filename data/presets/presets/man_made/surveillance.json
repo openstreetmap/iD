@@ -3,8 +3,24 @@
     "geometry": [
         "point"
     ],
+    "fields": [
+        "surveillance",
+        "surveillance/type",
+        "surveillance/zone"
+     ],
     "terms": [
-        "cctv"
+        "anpr",
+        "alpr",
+        "camera",
+        "car plate recognition",
+        "cctv",
+        "guard",
+        "license plate recognition",
+        "monitoring",
+        "number plate recognition",
+        "security",
+        "video",
+        "webcam"
     ],
     "tags": {
         "man_made": "surveillance"

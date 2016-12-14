@@ -1,0 +1,34 @@
+{
+    "icon": "camera",
+    "geometry": [
+        "point"
+    ],
+    "fields": [
+        "surveillance",
+        "surveillance/type",
+        "camera/type",
+        "camera/mount",
+        "camera/direction",
+        "surveillance/zone",
+        "contact/webcam"
+     ],
+    "terms": [
+        "anpr",
+        "alpr",
+        "camera",
+        "car plate recognition",
+        "cctv",
+        "guard",
+        "license plate recognition",
+        "monitoring",
+        "number plate recognition",
+        "security",
+        "video",
+        "webcam"
+    ],
+    "tags": {
+        "man_made": "surveillance",
+        "surveillance:type": "camera"
+    },
+    "name": "Surveillance Camera"
+}

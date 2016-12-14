@@ -58,39 +58,44 @@ export function d3keybinding(namespace) {
         return keybinding;
     };
 
-    keybinding.on = function(code, callback, capture) {
-        var binding = {
-            event: {
-                keyCode: 0,
-                shiftKey: false,
-                ctrlKey: false,
-                altKey: false,
-                metaKey: false
-            },
-            capture: capture,
-            callback: callback
-        };
+    keybinding.on = function(codes, callback, capture) {
+        var arr = [].concat(codes);
+        for (var i = 0; i < arr.length; i++) {
+            var code = arr[i];
+            var binding = {
+                event: {
+                    keyCode: 0,
+                    shiftKey: false,
+                    ctrlKey: false,
+                    altKey: false,
+                    metaKey: false
+                },
+                capture: capture,
+                callback: callback
+            };
 
-        code = code.toLowerCase().match(/(?:(?:[^+⇧⌃⌥⌘])+|[⇧⌃⌥⌘]|\+\+|^\+$)/g);
+            code = code.toLowerCase().match(/(?:(?:[^+⇧⌃⌥⌘])+|[⇧⌃⌥⌘]|\+\+|^\+$)/g);
 
-        for (var i = 0; i < code.length; i++) {
-            // Normalise matching errors
-            if (code[i] === '++') code[i] = '+';
+            for (var j = 0; j < code.length; j++) {
+                // Normalise matching errors
+                if (code[j] === '++') code[i] = '+';
 
-            if (code[i] in d3keybinding.modifierCodes) {
-                binding.event[d3keybinding.modifierProperties[d3keybinding.modifierCodes[code[i]]]] = true;
-            } else if (code[i] in d3keybinding.keyCodes) {
-                binding.event.keyCode = d3keybinding.keyCodes[code[i]];
+                if (code[j] in d3keybinding.modifierCodes) {
+                    binding.event[d3keybinding.modifierProperties[d3keybinding.modifierCodes[code[j]]]] = true;
+                } else if (code[j] in d3keybinding.keyCodes) {
+                    binding.event.keyCode = d3keybinding.keyCodes[code[j]];
+                }
             }
-        }
 
-        bindings.push(binding);
+            bindings.push(binding);
+        }
 
         return keybinding;
     };
 
     return keybinding;
 }
+
 
 d3keybinding.modifierCodes = {
     // Shift key, ⇧
@@ -164,7 +169,8 @@ d3keybinding.keyCodes = {
     '=': 187, 'equals': 187,
     // Comma, or ,
     ',': 188, comma: 188,
-    'dash': 189, //???
+    // Dash / Underscore key
+    'dash': 189,
     // Period, or ., or full-stop
     '.': 190, period: 190, 'full-stop': 190,
     // Slash, or /, or forward-slash

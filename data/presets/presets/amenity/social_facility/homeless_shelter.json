@@ -5,7 +5,10 @@
         "building_area",
         "opening_hours",
         "wheelchair",
-        "social_facility_for"
+        "social_facility_for",
+        "internet_access",
+        "internet_access/fee",
+        "internet_access/ssid"
     ],
     "geometry": [
         "point",

@@ -4,7 +4,13 @@
         "vertex",
         "area"
     ],
-    "terms": [],
+    "terms": [
+        "game",
+        "lookout",
+        "shoot",
+        "wild",
+        "watch"
+    ],
     "tags": {
         "amenity": "hunting_stand"
     },

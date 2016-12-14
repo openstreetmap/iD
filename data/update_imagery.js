@@ -7,36 +7,29 @@ var cutoffDate = new Date();
 cutoffDate.setFullYear(cutoffDate.getFullYear() - 20);
 
 var blacklist = {
-    "2u": true,
-    "Hike & Bike": true,
-    "OpenStreetMap (German Language)": true,
-    "OpenStreetMap (German Style)": true,
-    "OpenStreetMap (Sorbian Language)": true,
-    "OpenStreetMap (Standard Black & White)": true,
-    "Skobbler": true,
+    'hike_n_bike': true,                  // 'Hike & Bike'
+    'osm-mapnik-german_style': true,      // 'OpenStreetMap (German Style)'
+    'osm-mapnik-black_and_white': true,   // 'OpenStreetMap (Standard Black & White)'
+    'skobbler': true,                     // 'Skobbler'
+    'openpt_map': true,                   // 'OpenPT Map (overlay)'
+    'tf-cycle': true,                     // 'Thunderforest OpenCycleMap'
+    'qa_no_address': true,                // 'QA No Address'
 
-    "Public Transport (\u00d6PNV)": true, // https://github.com/osmlab/editor-imagery-index/issues/15
+    'OSM-US-TIGER-Roads_Overlay-2012': true,
 
-    "TIGER 2012 Roads Overlay": true, // https://github.com/openstreetmap/iD/pull/2010,
+    'Waymarked_Trails-Cycling': true,
+    'Waymarked_Trails-Hiking': true,
+    'Waymarked_Trails-MTB': true,
+    'Waymarked_Trails-Skating': true,
+    'Waymarked_Trails-Winter_Sports': true,
 
-    "Thunderforest OpenCycleMap": true,
-
-    "Waymarked Trails: Cycling": true,
-    "Waymarked Trails: Hiking": true,
-    "Waymarked Trails: MTB": true,
-    "Waymarked Trails: Skating": true,
-    "Waymarked Trails: Winter Sports": true,
-
-    "OSM Inspector: Geometry": true,
-    "OSM Inspector: Highways": true,
-    "OSM Inspector: Multipolygon": true,
-    "OSM Inspector: Places": true,
-    "OSM Inspector: Tagging": true,
-    "OSM Inspector: Addresses (EU)": true,
-    "OSM Inspector: Boundaries (EU)": true,
-    "OSM Inspector: Routing (EU)": true,
-
-    "QA No Address": true
+    'OSM_Inspector-Addresses': true,
+    'OSM_Inspector-Geometry': true,
+    'OSM_Inspector-Highways': true,
+    'OSM_Inspector-Multipolygon': true,
+    'OSM_Inspector-Places': true,
+    'OSM_Inspector-Routing': true,
+    'OSM_Inspector-Tagging': true
 };
 
 var whitelist = [
@@ -44,14 +37,14 @@ var whitelist = [
 ];
 
 var descriptions = {
-    'Mapbox Satellite': 'Satellite and aerial imagery.',
-    'Bing aerial imagery': 'Satellite and aerial imagery.',
-    'OpenStreetMap (Standard)': 'The default OpenStreetMap layer.'
+    'Bing': 'Satellite and aerial imagery.',
+    'Mapbox': 'Satellite and aerial imagery.',
+    'MAPNIK': 'The default OpenStreetMap layer.'
 };
 
 sources.concat(whitelist).forEach(function(source) {
     if (source.type !== 'tms' && source.type !== 'bing') return;
-    if (source.name in blacklist) return;
+    if (source.id in blacklist) return;
 
     if (source.end_date) {
         var endDate = new Date(source.end_date),
@@ -60,14 +53,14 @@ sources.concat(whitelist).forEach(function(source) {
     }
 
     var im = {
+        id: source.id,
         name: source.name,
-        type: source.type
+        type: source.type,
+        template: source.url
     };
 
-    var description = source.description || descriptions[im.name];
+    var description = source.description || descriptions[im.id];
     if (description) im.description = description;
-
-    im.template = source.url;
 
     var extent = source.extent || {};
     if (extent.min_zoom || extent.max_zoom) {
@@ -89,7 +82,7 @@ sources.concat(whitelist).forEach(function(source) {
         ]];
     }
 
-    if (source.name === 'Locator Overlay') {
+    if (source.id === 'mapbox_locator_overlay') {
         im.overzoom = false;
     }
 
@@ -104,7 +97,7 @@ sources.concat(whitelist).forEach(function(source) {
         im.terms_html = attribution.html;
     }
 
-    ['id', 'default', 'overlay', 'best'].forEach(function(a) {
+    ['default', 'overlay', 'best'].forEach(function(a) {
         if (source[a]) {
             im[a] = source[a];
         }

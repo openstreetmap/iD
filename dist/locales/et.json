@@ -699,9 +699,6 @@
                 "surface": {
                     "label": "Pinnakate"
                 },
-                "towertype": {
-                    "label": "Torni tüüp"
-                },
                 "website": {
                     "label": "Veebileht",
                     "placeholder": "http://näidis24.ee/"

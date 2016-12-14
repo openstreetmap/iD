@@ -284,13 +284,16 @@
             "no_results_worldwide": "Hasil pencarian tidak ditemukan"
         },
         "geolocate": {
-            "title": "Tunjukan Lokasi Saya"
+            "title": "Tunjukan Lokasi Saya",
+            "locating": "Sedang mencari, mohon tunggu..."
         },
         "inspector": {
             "no_documentation_combination": "Tidak ada dokumentasi yang tersedia untuk kombinasi tag ini",
             "no_documentation_key": "Tidak ada dokumentasi tersedia untuk kunci ini",
+            "documentation_redirect": "Dokumen ini telah diarahkan ke halaman baru",
             "show_more": "Tampilkan Lainnya",
             "view_on_osm": "Lihat di openstreetmap.org",
+            "all_fields": "Semua wilayah",
             "all_tags": "Semua tag",
             "all_members": "Semua anggota",
             "all_relations": "Semua relasi",
@@ -325,9 +328,9 @@
             "percent_brightness": "{opacity}% kecerahan",
             "none": "Tidak ada",
             "best_imagery": "Sumber citra terbaik yang diketahui untuk lokasi ini",
+            "switch": "Beralih ke latar belakang ini",
             "custom": "Custom",
             "custom_button": "Ubah tampilan latar kustom",
-            "custom_prompt": "Masukkan template URL. Token yang diperbolehkan adalah  {z}, {x}, {y} untuk skema Z/X/Y dan {u} untuk skema quadtile.",
             "fix_misalignment": "Setel offset citra",
             "imagery_source_faq": "Dari mana citra ini diperoleh?",
             "reset": "ulang",
@@ -349,6 +352,10 @@
             "points": {
                 "description": "Titik",
                 "tooltip": "Lokasi Pusat Perhatian"
+            },
+            "traffic_roads": {
+                "description": "Jalan lalu lintas",
+                "tooltip": "Jalan raya, Jalan, dll."
             },
             "paths": {
                 "description": "Jalan Kecil",
@@ -445,7 +452,8 @@
             "view_on_osm": "Lihat di OSM",
             "facebook": "Bagikan di Facebook",
             "twitter": "Bagikan di Twitter",
-            "google": "Bagikan di Google+"
+            "google": "Bagikan di Google+",
+            "help_link_text": "detail"
         },
         "confirm": {
             "okay": "Baiklah",
@@ -503,13 +511,19 @@
             "buildings": "# Bangunan\n\nOpenStreetMap ialah database terbesar dunia untuk bangunan. Kamu dapat membuat\ndan memperbaiki database ini.\n\n## Memilih\n\nKamu dapat memilih sebuah bangunan dengan mengklik pada batasnya. Hal ini akan membedakan\nbangunannya dan membuka sebuah alat kecil menu dan di sisi samping menampilkan informasi lebih lanjut\ntentang bangunan tersebut.\n\n### Mengubah\n\nTerkadang bangunan tidak diletakan pada tempatnya atau memiliki tags yang salah.\n\nUntuk memindahkan seluruh bangunan, pilih, lalu klik alat 'Move'. Geser\ntetikus kamu untuk memindahkan bangunan, dan klik ketika sudah sesuai tempatnya.\n\nUntuk memperbaiki bentuk sebuah gedung, klik dan geser sebuah sudut yang membentuk\nbatasnya ke tempat yang sesuai.\n\n### Membuat\n\nSatu pertanyaan utama terkait menambahkan bangunan ke dalam suatu peta adalah\nOpenStreetMap mencatat gedung baik dalam bentuk luasan dan titik.\n"
         },
         "intro": {
+            "done": "selesai",
+            "graph": {
+                "spring_st": "jalan spring"
+            },
             "navigation": {
                 "title": "Navigasi",
                 "drag": "Area peta utama menampilkan data OpenStreetMap pada bagian atas dari latar. Anda dapat bernavigasi dengan menggeser dan mengskrol, seperti peta web lainnya. **Geser petanya!**",
-                "select": "Fitur peta dapat diwakili dengan tiga cara: dengan titik, garis, atau area. Semua fitur dapat dipilih dengan mengklik mereka. **Klik sebuah titik untuk memilihnya.**"
+                "select": "Fitur peta dapat diwakili dengan tiga cara: dengan titik, garis, atau area. Semua fitur dapat dipilih dengan mengklik mereka. **Klik sebuah titik untuk memilihnya.**",
+                "pane": "Ketika sebuah fitur dipilih, fitur editor disembunyikan. Bagian kepala menunjukkan tipe fitur dan jendela utama atribut dari fitur tersebut, seperti nama dan alamat. ** Tutup fitur editor dengan menekan {tombol} tombol di kanan atas.**"
             },
             "points": {
                 "title": "Titik",
+                "place": "Penanda dapat di tempatkan dengan cara meng-klik peta. **Klik peta untuk meletakkan penanda baru pada atap bangunan**",
                 "search": "Terdapat banyak fitur berbeda yang dapat diwakili oleh titik. Titik yang baru anda tambahkan adalah Cafe. **Pencarian untuk '{name}'**",
                 "choose": "**Pilih Kafe dari daftar.**",
                 "describe": "Kini titik bisa ditandai sebagai cafe. Gunakan penyunting fitur, kita dapat tambahkan informasi lebih tentang fitur. **Tambahkan sebuah nama**"
@@ -1043,21 +1057,6 @@
                 "service": {
                     "label": "Tipe"
                 },
-                "service/bicycle/chain_tool": {
-                    "options": {
-                        "no": "Tidak",
-                        "undefined": "Dianggap Tidak",
-                        "yes": "Ya"
-                    }
-                },
-                "service/bicycle/pump": {
-                    "label": "Pompa Angin",
-                    "options": {
-                        "no": "Tidak",
-                        "undefined": "Dianggap Tidak",
-                        "yes": "Ya"
-                    }
-                },
                 "service_rail": {
                     "label": "Jenis pelayanan",
                     "options": {
@@ -1127,9 +1126,6 @@
                 },
                 "tourism": {
                     "label": "Tipe"
-                },
-                "towertype": {
-                    "label": "Tipe Tower"
                 },
                 "tracktype": {
                     "label": "Tipe Trek",
@@ -2716,9 +2712,6 @@
                 "tourism/attraction": {
                     "name": "Objek Wisata",
                     "terms": "Atraksi Wisata"
-                },
-                "tourism/camp_site": {
-                    "name": "Tempat Berkemah"
                 },
                 "tourism/guest_house": {
                     "name": "Rumah Tamu"

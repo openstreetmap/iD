@@ -237,6 +237,10 @@
         },
         {
             "key": "amenity",
+            "value": "crematorium"
+        },
+        {
+            "key": "amenity",
             "value": "dentist"
         },
         {
@@ -269,6 +273,10 @@
         },
         {
             "key": "amenity",
+            "value": "food_court"
+        },
+        {
+            "key": "amenity",
             "value": "fountain"
         },
         {
@@ -294,6 +302,10 @@
         {
             "key": "amenity",
             "value": "ice_cream"
+        },
+        {
+            "key": "amenity",
+            "value": "internet_cafe"
         },
         {
             "key": "amenity",
@@ -374,6 +386,10 @@
         {
             "key": "amenity",
             "value": "pub"
+        },
+        {
+            "key": "amenity",
+            "value": "public_bath"
         },
         {
             "key": "amenity",
@@ -1176,6 +1192,10 @@
         },
         {
             "key": "highway",
+            "value": "traffic_mirror"
+        },
+        {
+            "key": "highway",
             "value": "traffic_signals"
         },
         {
@@ -1189,6 +1209,10 @@
         {
             "key": "highway",
             "value": "turning_circle"
+        },
+        {
+            "key": "highway",
+            "value": "turning_loop"
         },
         {
             "key": "highway",
@@ -1349,6 +1373,10 @@
         },
         {
             "key": "leisure",
+            "value": "dance"
+        },
+        {
+            "key": "leisure",
             "value": "dog_park"
         },
         {
@@ -1446,6 +1474,10 @@
         {
             "key": "leisure",
             "value": "playground"
+        },
+        {
+            "key": "leisure",
+            "value": "resort"
         },
         {
             "key": "sport",
@@ -1553,6 +1585,10 @@
         {
             "key": "man_made",
             "value": "storage_tank"
+        },
+        {
+            "key": "surveillance:type",
+            "value": "camera"
         },
         {
             "key": "man_made",
@@ -2423,6 +2459,14 @@
         },
         {
             "key": "tourism",
+            "value": "apartment"
+        },
+        {
+            "key": "tourism",
+            "value": "aquarium"
+        },
+        {
+            "key": "tourism",
             "value": "artwork"
         },
         {
@@ -2460,6 +2504,22 @@
         {
             "key": "tourism",
             "value": "information"
+        },
+        {
+            "key": "information",
+            "value": "board"
+        },
+        {
+            "key": "information",
+            "value": "guidepost"
+        },
+        {
+            "key": "information",
+            "value": "map"
+        },
+        {
+            "key": "information",
+            "value": "office"
         },
         {
             "key": "tourism",
@@ -2675,6 +2735,10 @@
         {
             "key": "waterway",
             "value": "water_point"
+        },
+        {
+            "key": "waterway",
+            "value": "waterfall"
         },
         {
             "key": "waterway",

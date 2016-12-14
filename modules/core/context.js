@@ -1,11 +1,11 @@
 import * as d3 from 'd3';
 import _ from 'lodash';
-import { t, addTranslation, setLocale } from '../util/locale';
+import { t, currentLocale, addTranslation, setLocale } from '../util/locale';
 import { coreHistory } from './history';
 import { dataLocales, dataEn } from '../../data/index';
 import { geoRawMercator } from '../geo/raw_mercator';
 import { modeSelect } from '../modes/select';
-import { presetInit } from '../presets/init';
+import { presetIndex } from '../presets/index';
 import { rendererBackground } from '../renderer/background';
 import { rendererFeatures } from '../renderer/features';
 import { rendererMap } from '../renderer/map';
@@ -22,12 +22,7 @@ export function setAreaKeys(value) {
 }
 
 
-export function coreContext(root) {
-    if (!root.locale) {
-        root.locale = {
-            current: function(_) { this._current = _; }
-        };
-    }
+export function coreContext() {
     addTranslation('en', dataEn);
     setLocale('en');
 
@@ -217,6 +212,11 @@ export function coreContext(root) {
     };
 
 
+    /* Presets */
+    var presets;
+    context.presets = function() { return presets; };
+
+
     /* Map */
     var map;
     context.map = function() { return map; };
@@ -251,23 +251,6 @@ export function coreContext(root) {
     };
     context.getDebug = function(flag) {
         return flag && debugFlags[flag];
-    };
-
-
-    /* Presets */
-    var presets;
-    context.presets = function(_) {
-        if (!arguments.length) return presets;
-        presets.load(_);
-        areaKeys = presets.areaKeys();
-        return context;
-    };
-
-
-    /* Imagery */
-    context.imagery = function(_) {
-        background.load(_);
-        return context;
     };
 
 
@@ -310,24 +293,40 @@ export function coreContext(root) {
         return context.asset('img/' + _);
     };
 
+
+    /* locales */
+    // `locale` variable contains a "requested locale".
+    // It won't become the `currentLocale` until after loadLocale() is called.
     var locale, localePath;
+
     context.locale = function(loc, path) {
-        if (!arguments.length) return locale;
+        if (!arguments.length) return currentLocale;
         locale = loc;
         localePath = path;
         return context;
     };
 
-    context.loadLocale = function(cb) {
-        if (locale && locale !== 'en' && dataLocales.indexOf(locale) !== -1) {
+    context.loadLocale = function(callback) {
+        if (locale && locale !== 'en' && dataLocales.hasOwnProperty(locale)) {
             localePath = localePath || context.asset('locales/' + locale + '.json');
             d3.json(localePath, function(err, result) {
-                addTranslation(locale, result[locale]);
-                setLocale(locale);
-                cb();
+                if (!err) {
+                    addTranslation(locale, result[locale]);
+                    setLocale(locale);
+                    utilDetect(true);
+                }
+                if (callback) {
+                    callback(err);
+                }
             });
         } else {
-            cb();
+            if (locale) {
+                setLocale(locale);
+                utilDetect(true);
+            }
+            if (callback) {
+                callback();
+            }
         }
     };
 
@@ -336,7 +335,7 @@ export function coreContext(root) {
     context.reset = context.flush = function() {
         context.debouncedSave.cancel();
         _.each(services, function(service) {
-            if (typeof service.reset === 'function') {
+            if (service && typeof service.reset === 'function') {
                 service.reset(context);
             }
         });
@@ -347,12 +346,12 @@ export function coreContext(root) {
 
 
     /* Init */
-    context.version = '2.0.0-beta.1';
+    context.version = '2.0.1';
 
     context.projection = geoRawMercator();
 
     locale = utilDetect().locale;
-    if (locale && dataLocales.indexOf(locale) === -1) {
+    if (locale && !dataLocales.hasOwnProperty(locale)) {
         locale = locale.split('-')[0];
     }
 
@@ -382,9 +381,9 @@ export function coreContext(root) {
     ui = uiInit(context);
 
     connection = services.osm;
-
     background = rendererBackground(context);
     features = rendererFeatures(context);
+    presets = presetIndex();
 
     map = rendererMap(context);
     context.mouse = map.mouse;
@@ -396,13 +395,15 @@ export function coreContext(root) {
     context.zoomOutFurther = map.zoomOutFurther;
     context.redrawEnable = map.redrawEnable;
 
-    presets = presetInit();
-
     _.each(services, function(service) {
-        if (typeof service.init === 'function') {
+        if (service && typeof service.init === 'function') {
             service.init(context);
         }
     });
+
+    background.init();
+    presets.init();
+    areaKeys = presets.areaKeys();
 
 
     return utilRebind(context, dispatch, 'on');

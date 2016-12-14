@@ -577,9 +577,6 @@
                 "tourism": {
                     "label": "类型"
                 },
-                "towertype": {
-                    "label": "塔型"
-                },
                 "trail_visibility": {
                     "label": "路径可见度"
                 },
@@ -1317,9 +1314,6 @@
                 },
                 "tourism/attraction": {
                     "name": "旅游景点"
-                },
-                "tourism/camp_site": {
-                    "name": "露营区"
                 },
                 "tourism/caravan_site": {
                     "name": "房车营地"

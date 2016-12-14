@@ -8,8 +8,8 @@ iD supports several URL parameters. When constructing a URL to a standalone inst
 of iD (e.g. `http://openstreetmap.us/iD/release/`), the following parameters are available
 in the hash portion of the URL:
 
-* `map` - A slash separated `zoom/longitude/latitude`.  Example:
-  `map=20.00/-77.02271/38.90085`
+* `map` - A slash separated `zoom/latitude/longitude`.  Example:
+  `map=20.00/38.90085/-77.02271`
 * `id` - The character 'n', 'w', or 'r', followed by the OSM ID of a node,
    way or relation, respectively. Selects the specified entity, and, unless
    a `map` parameter is also provided, centers the map on it.
@@ -35,8 +35,7 @@ When constructing a URL to an instance of iD embedded in the OpenStreetMap Rails
 Port (e.g. `http://www.openstreetmap.org/edit?editor=id`), the following parameters
 are available as regular URL query parameters:
 
-* `map` - slash separated `zoom/latitude/longitude`.  Example:
-  `map=20.00/38.90085/-77.02271`.
+* `map` - same as standalone
 * `lat`, `lon`, `zoom` - Self-explanatory.
 * `node`, `way`, `relation` - Select the specified entity.
 * `background` - same as standalone
@@ -138,37 +137,137 @@ class.
 
 Elements that are currently selected shall have the `.selected` class.
 
+
 ## Customized Deployments
 
-iD is used to edit data outside of the OpenStreetMap environment. There are some basic configuration steps to introduce custom presets, imagery and tag information.
+iD may be used to edit maps in a non-OpenStreetMap environment.  This requires
+certain parts of the iD code to be replaced at runtime by custom code or data.
+
+iD is written in a modular style and bundled with [rollup.js](http://rollupjs.org/),
+which makes hot code replacement tricky.  (ES6 module exports are
+[immutable live bindings](http://www.2ality.com/2015/07/es6-module-exports.html)).
+Because of this, the parts of iD which are designed for customization are exported
+as live bound objects that can be overriden at runtime _before initializing the iD context_.
+
+### Services
+
+The `iD.services` object includes code that talks to other web services.
+
+To replace the OSM service with a custom service that exactly mimics the default OSM service:
+```js
+iD.services.osm = serviceMyOSM;
+```
+
+Some services may be removed entirely.  For example, to remove the Mapillary service:
+```js
+iD.services.mapillary = undefined;
+// or
+delete iD.services.mapillary;
+```
+
+
+### Background Imagery
+
+iD's background imagery database is stored in the `iD.data.imagery` array and can be
+overridden or modified prior to creating the iD context.
+
+Note that the "None" and "Custom" options will always be shown in the list.
+
+To remove all imagery from iD:
+```js
+iD.data.imagery = [];
+```
+
+To replace all imagery with a single source:
+```js
+iD.data.imagery = [{
+    "id": "ExampleImagery",
+    "name": "My Imagery",
+    "type": "tms",
+    "template": "http://{switch:a,b,c}.tiles.example.com/{z}/{x}/{y}.png"
+}];
+```
+
+Each imagery source should have the following properties:
+* `id` - Unique identifier for this source (also used as a url paramater)
+* `name` - Display name for the source
+* `type` - Source type, currently only `tms` is supported
+* `template` - Url template, valid replacement tokens include:
+  * `{z}`, `{x}`, `{y}` - for Z/X/Y scheme
+  * `{-y}` or `{ty}` - for flipped Y
+  * `{u}` - for quadtile scheme
+  * `{switch:a,b,c}` - for parts of the url that can be cycled for connection parallelization
+
+Optional properties:
+* `description` - A longer source description which, if included, will be displayed in a popup when viewing the background imagery list
+* `overlay` - If `true`, this is an overlay layer (a transparent layer rendered above base imagery layer). Defaults to `false`
+* `scaleExtent` - Allowable min and max zoom levels, defaults to `[0, 20]`
+* `polygon` - Array of coordinate rings within which imagery is valid.  If omitted, imagery is assumed to be valid worldwide
+* `overzoom` - Can this imagery be scaled up when zooming in beyond the max zoom?  Defaults to `true`
+* `terms_url` - Url to link to when displaying the imagery terms
+* `terms_html` - Html content to display in the imagery terms
+* `terms_text` - Text content to display in the imagery terms
+* `best` - If set to `true`, this imagery is considered "better than Bing" and may be chosen by default when iD starts.  Will display with a star in the background imagery list.  Defaults to `false`
+
+For more details about the `iD.data.imagery` structure, see
+[`update_imagery.js`](https://github.com/openstreetmap/iD/blob/master/data/update_imagery.js).
+
 
 ### Presets
 
-iD can use external presets exclusively or along with the default OpenStreetMap presets. This is configured using the `context.presets` accessor. To use external presets alone, initialize the iD context with a custom `Presets` object:
+iD's preset database is stored in the `iD.data.presets` object and can be overridden
+or modified prior to creating the iD context.
 
+The format of the `presets` object is
+[documented here](https://github.com/openstreetmap/iD/tree/master/data/presets#custom-presets).
+
+To add a new preset to iD's existing preset database.
 ```js
-
-var id = iD.Context(window)
-  .presets(customPresets)
-  .imagery(iD.dataImagery);
-
+iD.data.presets.presets["aerialway/zipline"] = {
+    geometry: ["line"],
+    fields: ["incline"],
+    tags: { "aerialway": "zip_line" },
+    name: "Zipline"
+};
 ```
 
-The format of the Preset object is [documented here](https://github.com/openstreetmap/iD/tree/master/data/presets#custom-presets).
-
-### Imagery
-
-Just like Presets, Imagery can be configured using the `context.imagery` accessor:
-
+To completely replace iD's default presets with your own:
 ```js
-
-var id = iD.Context(window)
-  .presets(customPresets)
-  .imagery(customImagery);
-
+iD.data.presets = myPresets;
 ```
 
-The Imagery object should follow the structure defined by [editor-layer-index](https://github.com/osmlab/editor-layer-index/blob/gh-pages/schema.json)
+To run iD with the minimal set of presets that only match basic geometry types:
+```js
+iD.data.presets = {
+    presets: {
+        "area": {
+            "name": "Area",
+            "tags": {},
+            "geometry": ["area"]
+        },
+        "line": {
+            "name": "Line",
+            "tags": {},
+            "geometry": ["line"]
+        },
+        "point": {
+            "name": "Point",
+            "tags": {},
+            "geometry": ["point"]
+        },
+        "vertex": {
+            "name": "Vertex",
+            "tags": {},
+            "geometry": ["vertex"]
+        },
+        "relation": {
+            "name": "Relation",
+            "tags": {},
+            "geometry": ["relation"]
+        }
+    }
+};
+```
 
 
 ### Minimum Editable Zoom
@@ -177,7 +276,7 @@ The minimum zoom at which iD enters the edit mode is configured using the `conte
 
 ```js
 
-var id = iD.Context(window).
+var id = iD.Context()
   .minEditableZoom(zoom_level)
 
 ```

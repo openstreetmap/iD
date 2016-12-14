@@ -323,7 +323,6 @@
             "best_imagery": "Paras ilmakuvalähde tälle sijainnille",
             "custom": "Mukautettu",
             "custom_button": "Muokkaa omaa taustaa",
-            "custom_prompt": "Kirjoita tiilen verkko-osoitemallinne. Kelvollisia merkkejä ovat {z}, {x}, {y} Z/X/Y-skeemalle ja {u} quadtile-skeemalle.",
             "fix_misalignment": "Korjaa ilmakuvavirhe",
             "imagery_source_faq": "Mikä tämän ilmakuvan lähde on?",
             "reset": "palauta",
@@ -774,6 +773,9 @@
                 "bin": {
                     "label": "Jäteastia"
                 },
+                "board_type": {
+                    "label": "Tyyppi"
+                },
                 "boundary": {
                     "label": "Tyyppi"
                 },
@@ -895,6 +897,9 @@
                 "description": {
                     "label": "Kuvaus"
                 },
+                "dock": {
+                    "label": "Tyyppi"
+                },
                 "drive_through": {
                     "label": "Autokaista"
                 },
@@ -1015,6 +1020,9 @@
                         "wlan": "WLAN",
                         "yes": "Kyllä"
                     }
+                },
+                "internet_access/fee": {
+                    "label": "Internet-yhteyden maksullisuus"
                 },
                 "lamp_type": {
                     "label": "Tyyppi"
@@ -1155,6 +1163,9 @@
                     "label": "Lyöntimääräsuositus",
                     "placeholder": "3, 4, 5..."
                 },
+                "parallel_direction": {
+                    "label": "Vaikuttaa kulkusuunnassa"
+                },
                 "park_ride": {
                     "label": "Autoparkki"
                 },
@@ -1169,6 +1180,9 @@
                         "surface": "Pysäköintikenttä",
                         "underground": "Pysäköintiluola"
                     }
+                },
+                "payment_multi": {
+                    "label": "Maksutavat"
                 },
                 "phone": {
                     "label": "Puhelinnumero",
@@ -1266,22 +1280,6 @@
                 "service": {
                     "label": "Tyyppi"
                 },
-                "service/bicycle/chain_tool": {
-                    "label": "Ketjutyökalu",
-                    "options": {
-                        "no": "Ei",
-                        "undefined": "Oletettavasti ei",
-                        "yes": "Kyllä"
-                    }
-                },
-                "service/bicycle/pump": {
-                    "label": "Rengaspainepumppu",
-                    "options": {
-                        "no": "Ei",
-                        "undefined": "Oletettavasti ei",
-                        "yes": "Kyllä"
-                    }
-                },
                 "service_rail": {
                     "label": "Käyttötarkoitus",
                     "options": {
@@ -1298,6 +1296,9 @@
                     "label": "Tyyppi"
                 },
                 "shop": {
+                    "label": "Tyyppi"
+                },
+                "site": {
                     "label": "Tyyppi"
                 },
                 "smoking": {
@@ -1340,6 +1341,9 @@
                 "sport_racing": {
                     "label": "Urheilulaji"
                 },
+                "stop": {
+                    "label": "Pysähtymissuunnat"
+                },
                 "structure": {
                     "label": "Rakenne",
                     "options": {
@@ -1350,6 +1354,12 @@
                         "tunnel": "Tunneli"
                     },
                     "placeholder": "Tuntematon"
+                },
+                "studio": {
+                    "label": "Tyyppi"
+                },
+                "substation": {
+                    "label": "Tyyppi"
                 },
                 "supervised": {
                     "label": "Valvonta"
@@ -1380,8 +1390,14 @@
                 "tourism": {
                     "label": "Tyyppi"
                 },
-                "towertype": {
-                    "label": "Tornin tyyppi"
+                "tower/type": {
+                    "label": "Tyyppi"
+                },
+                "traffic_calming": {
+                    "label": "Tyyppi"
+                },
+                "traffic_signals": {
+                    "label": "Tyyppi"
                 },
                 "trail_visibility": {
                     "label": "Havaittavuus",
@@ -2867,6 +2883,10 @@
                 "railway/abandoned": {
                     "name": "Hylätty rautatie"
                 },
+                "railway/crossing": {
+                    "name": "Kevyenliikenteen tasoristeys",
+                    "terms": "tasoristeys, ylityspaikka, rautatie, radanylitys, jalankulku, pyöräily, jalan, pyörällä, pyörä, polkupyörä, polkupyörien, polkupyörän, pyörien, pyörän, suojatie"
+                },
                 "railway/disused": {
                     "name": "Käyttämätön rautatie"
                 },
@@ -2877,6 +2897,10 @@
                 "railway/halt": {
                     "name": "Seisake",
                     "terms": "rautatie, juna, junarata, pysäkki, asema, rautatieasema, VR"
+                },
+                "railway/level_crossing": {
+                    "name": "Moottoriajoneuvoliikenteen tasoristeys",
+                    "terms": "tasoristeys, ylityspaikka, rautatie, radanylitys, ajoneuvo, tie, katu, moottoriajoneuvo, ajoneuvo, auto"
                 },
                 "railway/monorail": {
                     "name": "Monorail"
@@ -3278,9 +3302,6 @@
                 "tourism/attraction": {
                     "name": "Turistikohde"
                 },
-                "tourism/camp_site": {
-                    "name": "Leirintäalue"
-                },
                 "tourism/caravan_site": {
                     "name": "Asuntoautopysäköinti"
                 },
@@ -3320,6 +3341,10 @@
                 },
                 "tourism/zoo": {
                     "name": "Eläintarha"
+                },
+                "traffic_calming": {
+                    "name": "Hidaste",
+                    "terms": "hidastetöyssy, töyssy, kumpare, kumpu, raita, hidastus, hidaste, korotettu, korotus"
                 },
                 "traffic_calming/bump": {
                     "name": "Hidastustöyssy"

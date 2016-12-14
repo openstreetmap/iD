@@ -880,20 +880,6 @@
                 "service": {
                     "label": "Type"
                 },
-                "service/bicycle/chain_tool": {
-                    "options": {
-                        "no": "Nei",
-                        "undefined": "Antatt til å være Nei",
-                        "yes": "Ja"
-                    }
-                },
-                "service/bicycle/pump": {
-                    "options": {
-                        "no": "Nei",
-                        "undefined": "Antatt til å være Nei",
-                        "yes": "Ja"
-                    }
-                },
                 "shelter": {
                     "label": "Skur"
                 },
@@ -945,9 +931,6 @@
                 },
                 "tourism": {
                     "label": "Type"
-                },
-                "towertype": {
-                    "label": "Tårntype"
                 },
                 "traffic_signals": {
                     "label": "Type"
@@ -2340,9 +2323,6 @@
                 },
                 "tourism/attraction": {
                     "name": "Turistattraksjon"
-                },
-                "tourism/camp_site": {
-                    "name": "Campingplass"
                 },
                 "tourism/chalet": {
                     "name": "Hytte"

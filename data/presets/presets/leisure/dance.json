@@ -1,0 +1,23 @@
+{
+    "fields": [
+        "operator",
+        "address",
+        "building_area",
+        "opening_hours"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "ballroom",
+        "jive",
+        "swing",
+        "tango",
+        "waltz"
+    ],
+    "tags": {
+        "leisure": "dance"
+    },
+    "name": "Dance Hall"
+}

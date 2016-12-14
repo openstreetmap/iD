@@ -53,7 +53,7 @@ and [configure](https://github.com/openstreetmap/openstreetmap-website/blob/mast
 an instance of the Rails Port, the server that runs the OpenStreetMap website and API.
 
 Once you have the Rails Port running, you may edit as normal using the version of iD that
-is bundled with it. Your changes will be saved to your own database. To use a standalone iD with your own api, you may edit the [connection.js](https://github.com/openstreetmap/iD/blob/master/js/id/core/connection.js) file.
+is bundled with it. Your changes will be saved to your own database. To use a standalone iD with your own api, you may edit the [osm.js](https://github.com/openstreetmap/iD/blob/master/modules/services/osm.js) file.
 
 Depending on your requirements, you may also want to set up [cgimap](https://github.com/openstreetmap/cgimap)
 and/or a tile rendering stack, but neither of these are required for editing with iD.

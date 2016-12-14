@@ -1,18 +1,37 @@
 :warning: = Breaking change, may affect downstream projects or sites that embed iD.
 
+## 2.0.1
+##### Nov 17, 2016
+* Bugfixes:
+  * When starting iD with an object selected, the map should focus on that object (#3588, thanks @tyrasd)
+  * Fix for "Best" imagery not being automatically selected (#3586)
+* Performance improvements:
+  * Adjust max Mapillary pages fetched per zoom, adjust min viewfield zoom
+
 ## 2.0.0
-##### (coming soon)
+##### Nov 15, 2016
 * :warning: iD is now written in a modular code style using ES6 `import`/`export` and [rollup.js](http://rollupjs.org/) as a build tool (#3118, #3179, #3180)
   * Many thanks to @tmcw, @kepta, @tyrasd, @beaugunderson, @davidchouse
 * :warning: Flattened namespace means that all functions have changed names (#3479)
   * e.g. `iD.actions.Move` -> `iD.actionMove`, `iD.geo.Extent` -> `iD.geoExtent`
   * Many deprecated names are still exported as symbols, e.g. `iD.Context` - we will remove these eventually
+* :warning: Customized iD deployments can manipulate live objects, rather than iD.Context accessors
+  * No longer need to call things like `presets()`, `imagery()`, `taginfo()` when creating `iD.Context`
+  * See [API.md](https://github.com/openstreetmap/iD/blob/master/API.md#customized-deployments) for details on customized deployments
 * :warning: iD has upgraded to the latest released versions of d3, lodash, rbush, etc.
   * d3 no longer adds itself to the global namespace, but can now be accessed via `iD.d3`
 * :warning: iD now uses `npm` scripts for all build processes
   * iD requires Node v4 or higher, but does not require `make` anymore
   * Update install instructions and prerequisites (#3466, thanks @tyrasd)
+* :warning: iD url hash map order has changed to `zoom/latitude/longitude` to match OSM and others (#3554)
+* :warning: Authentication methods like `context.preauth`, `connection.switch`, `iD.uiSourceSwitch.keys` options have changed
+  * `url` option has been renamed to `urlroot`
 * Many preset improvements:
+  * Add Construction and Tower Type fields to Mast and Tower presets (#3561, thanks @bkil)
+  * Add Turning Loop (Island) preset, adjust icons for traversable/nontraversable features (#3557)
+  * Add Internet Cafe preset (#3559)
+  * Improve styling of Farmyards (#3556, thanks @Thue)
+  * Add Guest Apartment / Condo preset (#3548)
   * Add Waste Transfer preset (#3387)
   * Add Billboard preset (#3386)
   * Improve traffic calming presets (#3218)
@@ -45,6 +64,14 @@
   * Add Ice Cream Shop preset (#3253, thanks @ankit-m)
   * Add Taiwan address format to Address field (#3261, thanks @david082321)
 * New Features:
+  * `ui()` initializer now accepts a callback that will be called when loadLocale is finished (#3550)
+  * Vertex keyboard navigation (#1917, #3539)
+    * `[` or `pageup` - jump to previous vertex
+    * `]` or `pagedown` - jump to next vertex
+    * `⌘[` or `home` - jump to first vertex
+    * `⌘]` or `end` - jump to last vertex
+    * `\` or `pause-break` - select next parent, if at intersection
+  * Address field improvements - eliminate duplicates, more dropdowns for address fields (#3553)
   * OSM API calls are now authenticated for logged in users (helps with (#3519, #2262)
   * When reversing a way, reverse tags on its child nodes (#3076, thanks @Psigio)
   * Support Right to Left interface for some languages 'ar', 'fa', 'iw', 'dv' (#3007, #3087, thanks @mapmeld)
@@ -53,6 +80,7 @@
   * Allow `Del` key as a without modifier as a Delete shortcut (#3455)
   * Remove diacritics (accented chars) when doing fuzzy searches (#3159)
 * Bugfixes:
+  * Prevent imagery offset nudging buttons from getting stuck if user clicks again (#3576)
   * Don't include terms for non-searchable presets in translation source (#3323)
   * Let user know if the documentation points to a redirect page (#3337)
   * Fix line labeling placement for IE11, Edge (#3020)

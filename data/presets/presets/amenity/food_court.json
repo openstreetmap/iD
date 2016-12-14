@@ -1,0 +1,25 @@
+{
+    "icon": "restaurant",
+    "fields": [
+        "operator",
+        "address",
+        "building_area",
+        "opening_hours",
+        "smoking",
+        "outdoor_seating"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "fast food",
+        "restaurant",
+        "food"
+    ],
+    "tags": {
+        "amenity": "food_court"
+    },
+    "name": "Food Court"
+}
+

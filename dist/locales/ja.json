@@ -157,7 +157,7 @@
                     "vertex": "ウェイ上のノードを移動",
                     "line": "ラインの移動",
                     "area": "エリアの移動",
-                    "multiple": "Moved multiple objects."
+                    "multiple": "複数オブジェクトの移動"
                 },
                 "incomplete_relation": "地物全体がダウンロードされていないため、移動させることができません。",
                 "too_large": "ウェイの一部がダウンロードされていないため、移動させることができません。",
@@ -212,7 +212,7 @@
         },
         "undo": {
             "tooltip": "もとに戻す: {action}",
-            "nothing": "やり直す変更点がありません"
+            "nothing": "もとに直す変更点がありません"
         },
         "redo": {
             "tooltip": "再実行: {action}",
@@ -227,6 +227,7 @@
             "localized_translation_name": "名称"
         },
         "zoom_in_edit": "編集するには地図を拡大してください",
+        "login": "ログイン",
         "logout": "ログアウト",
         "loading_auth": "OpenStreetMapへ接続中...",
         "report_a_bug": "バグ報告",
@@ -238,7 +239,8 @@
         "status": {
             "error": "APIサーバへの接続が失敗しました",
             "offline": "APIがオフラインです。しばらくしてからもう一度お試しください。",
-            "readonly": "APIは読み込み専用モードです。変更内容の保存はしばらく時間を置いてから行なってください。"
+            "readonly": "APIは読み込み専用モードです。変更内容の保存はしばらく時間を置いてから行なってください。",
+            "rateLimit": "APIは匿名の接続を制限しています。修正するにはログインしてください。"
         },
         "commit": {
             "title": "編集結果を保存",
@@ -294,6 +296,7 @@
         "inspector": {
             "no_documentation_combination": "このタグの組み合わせに関する解説はありません",
             "no_documentation_key": "このキーに対する解説はありません",
+            "documentation_redirect": "文書は新しいページにリダイレクトされました",
             "show_more": "次を表示",
             "view_on_osm": "openstreetmap.orgで確認",
             "all_fields": "すべての項目",
@@ -334,7 +337,6 @@
             "switch": "背景に切り替え",
             "custom": "カスタム",
             "custom_button": "カスタム背景の編集",
-            "custom_prompt": "タイルURLのテンプレートを入力してください。有効なトークンは、Z/X/Y方式ならば{z}, {x} , {y}、quadtile方式ならば{u}です。",
             "fix_misalignment": "画像の位置を調整",
             "imagery_source_faq": "この写真の出典元",
             "reset": "設定リセット",
@@ -471,7 +473,7 @@
         },
         "splash": {
             "welcome": "iD 起動中",
-            "text": "iDは、世界に例を見ない自由な地図を編集するにあたり、馴染みやすく、かつ使い勝手をそこなわないことを目的に開発されています。現在のバージョンは {version} です。詳細は {website} で公開中です。バグ報告は {github} で受け付けています。",
+            "text": "iDは、世界でもっとも優れた自由な世界地図を編集するためのツールで、馴染みやすく、かつ高機能です。現在のバージョンは {version} です。詳細は {website} で公開中です。バグ報告は {github} で受け付けています。",
             "walkthrough": "チュートリアルを開始",
             "start": "編集開始"
         },
@@ -646,7 +648,7 @@
                     "name": "水域"
                 },
                 "category-water-line": {
-                    "name": "流水"
+                    "name": "水路関連"
                 }
             },
             "fields": {
@@ -781,6 +783,9 @@
                 "barrier": {
                     "label": "タイプ"
                 },
+                "beauty": {
+                    "label": "店舗種類"
+                },
                 "bench": {
                     "label": "ベンチ"
                 },
@@ -791,11 +796,16 @@
                     "label": "ゴミ箱"
                 },
                 "blood_components": {
+                    "label": "献血種類",
                     "options": {
                         "plasma": "血しょう成分献血",
                         "platelets": "血小板成分献血",
+                        "stemcells": "骨髄サンプル",
                         "whole": "全血献血"
                     }
+                },
+                "board_type": {
+                    "label": "タイプ"
                 },
                 "boundary": {
                     "label": "タイプ"
@@ -909,6 +919,9 @@
                         "cycleway:right": "右側"
                     }
                 },
+                "date": {
+                    "label": "日付"
+                },
                 "delivery": {
                     "label": "配達"
                 },
@@ -923,6 +936,9 @@
                 },
                 "diaper": {
                     "label": "おむつ交換台の利用可否"
+                },
+                "display": {
+                    "label": "表示盤の種類"
                 },
                 "dock": {
                     "label": "タイプ"
@@ -1009,6 +1025,9 @@
                 "handrail": {
                     "label": "手すり"
                 },
+                "height": {
+                    "label": "高さ (メートル)"
+                },
                 "highway": {
                     "label": "道路区分"
                 },
@@ -1034,6 +1053,9 @@
                         "down": "下",
                         "up": "上"
                     }
+                },
+                "indoor": {
+                    "label": "室内"
                 },
                 "information": {
                     "label": "タイプ"
@@ -1124,6 +1146,12 @@
                 },
                 "man_made": {
                     "label": "種類"
+                },
+                "map_size": {
+                    "label": "地図の範囲"
+                },
+                "map_type": {
+                    "label": "タイプ"
                 },
                 "maxspeed": {
                     "label": "最高速度",
@@ -1327,6 +1355,13 @@
                 "recycling_accepts": {
                     "label": "リサイクル可能な素材"
                 },
+                "recycling_type": {
+                    "label": "リサイクル設備の種類",
+                    "options": {
+                        "centre": "リサイクルセンター",
+                        "container": "コンテナ"
+                    }
+                },
                 "ref": {
                     "label": "管理番号"
                 },
@@ -1381,21 +1416,8 @@
                 "service": {
                     "label": "種類"
                 },
-                "service/bicycle/chain_tool": {
-                    "label": "チェーンツール",
-                    "options": {
-                        "no": "いいえ",
-                        "undefined": "おそらくいいえ",
-                        "yes": "はい"
-                    }
-                },
-                "service/bicycle/pump": {
-                    "label": "エアパルプ",
-                    "options": {
-                        "no": "無し",
-                        "undefined": "たぶん無し",
-                        "yes": "有り"
-                    }
+                "service/bicycle": {
+                    "label": "サービス"
                 },
                 "service_rail": {
                     "label": "サービスの種類",
@@ -1422,10 +1444,10 @@
                     "label": "喫煙の可否",
                     "options": {
                         "dedicated": "喫煙者向け（例: スモーカーズクラブ）",
-                        "isolated": "室内喫煙（分煙）",
+                        "isolated": "完全分煙",
                         "no": "禁煙",
                         "outside": "屋外のみ喫煙可",
-                        "separated": "室内喫煙（未分煙）",
+                        "separated": "同室内分煙",
                         "yes": "喫煙可"
                     },
                     "placeholder": "いいえ、分けた、はい..."
@@ -1460,6 +1482,9 @@
                 "sport_racing": {
                     "label": "スポーツ"
                 },
+                "stars": {
+                    "label": "星の数"
+                },
                 "stop": {
                     "label": "一時停止の種類",
                     "options": {
@@ -1485,7 +1510,10 @@
                     "label": "タイプ"
                 },
                 "supervised": {
-                    "label": "管理"
+                    "label": "監視"
+                },
+                "support": {
+                    "label": "設置場所･支持素材"
                 },
                 "surface": {
                     "label": "路面状態"
@@ -1514,8 +1542,12 @@
                 "tourism": {
                     "label": "種類"
                 },
-                "towertype": {
-                    "label": "塔の用途"
+                "tower/construction": {
+                    "label": "工事中",
+                    "placeholder": "支線塔、格子塔、擬態させた塔、etc"
+                },
+                "tower/type": {
+                    "label": "タイプ"
                 },
                 "tracktype": {
                     "label": "トラック種別",
@@ -1527,6 +1559,9 @@
                         "grade5": "軟質: 土／砂／草"
                     },
                     "placeholder": "硬質, 大部分が硬質, 軟質…"
+                },
+                "traffic_calming": {
+                    "label": "タイプ"
                 },
                 "traffic_signals": {
                     "label": "タイプ"
@@ -1553,6 +1588,7 @@
                     "label": "販売商品の種別"
                 },
                 "visibility": {
+                    "label": "見える範囲",
                     "options": {
                         "area": "20m（65フィート）超",
                         "house": "5m（16フィート）以下",
@@ -1589,6 +1625,9 @@
                 "address": {
                     "name": "住所",
                     "terms": "住所"
+                },
+                "advertising/billboard": {
+                    "name": "広告用看板"
                 },
                 "aerialway": {
                     "name": "索道"
@@ -1828,7 +1867,7 @@
                     "terms": "砂箱, 氷結防止"
                 },
                 "amenity/hospital": {
-                    "name": "病院の敷地",
+                    "name": "大規模病院の敷地",
                     "terms": "病院の敷地"
                 },
                 "amenity/hunting_stand": {
@@ -1838,6 +1877,9 @@
                 "amenity/ice_cream": {
                     "name": "アイスクリーム店",
                     "terms": "アイスクリームパーラー"
+                },
+                "amenity/internet_cafe": {
+                    "name": "インターネットカフェ"
                 },
                 "amenity/kindergarten": {
                     "name": "保育園/幼稚園の敷地",
@@ -1931,6 +1973,9 @@
                     "name": "リサイクルボックス",
                     "terms": "リサイクルボックス, 回収箱, リサイクル"
                 },
+                "amenity/recycling_centre": {
+                    "name": "リサイクルセンター"
+                },
                 "amenity/register_office": {
                     "name": "登記所"
                 },
@@ -2018,6 +2063,7 @@
                     "terms": "新聞, 自動販売機, 自販機"
                 },
                 "amenity/vending_machine/parcel_pickup_dropoff": {
+                    "name": "集荷･引取 自動販売機",
                     "terms": "自動販売機, 自販機"
                 },
                 "amenity/vending_machine/parking_tickets": {
@@ -2047,6 +2093,10 @@
                 "amenity/waste_disposal": {
                     "name": "ゴミ収集ボックス",
                     "terms": "ゴミステーション, ゴミ集積所, ゴミ捨て場, ゴミ置き場, ゴミ, ゴミ箱, ゴミコンテナ, ゴミ回収, ダストボックス"
+                },
+                "amenity/waste_transfer_station": {
+                    "name": "ゴミ集積場",
+                    "terms": "ゴミ集積場,ゴミ積替所"
                 },
                 "amenity/water_point": {
                     "name": "キャンピングカー用の給水施設",
@@ -2272,6 +2322,10 @@
                     "name": "倉庫",
                     "terms": "倉庫, 蔵"
                 },
+                "camp_site/camp_pitch": {
+                    "name": "キャンプサイト",
+                    "terms": "キャンプサイト"
+                },
                 "craft": {
                     "name": "工房",
                     "terms": "工房"
@@ -2476,6 +2530,9 @@
                     "name": "緊急電話",
                     "terms": "緊急電話"
                 },
+                "emergency/yes": {
+                    "name": "緊急時の利用可"
+                },
                 "entrance": {
                     "name": "出入口",
                     "terms": "出入口, 入口, 出口"
@@ -2512,6 +2569,14 @@
                     "name": "ゴルフホール",
                     "terms": "ホール"
                 },
+                "golf/lateral_water_hazard_area": {
+                    "name": "ラテラルウォーターハザード",
+                    "terms": "池ポチャ, ウォーターハザード"
+                },
+                "golf/lateral_water_hazard_line": {
+                    "name": "ラテラルウォーターハザード",
+                    "terms": "池ポチャ, ウォーターハザード"
+                },
                 "golf/rough": {
                     "name": "ラフ",
                     "terms": "ラフ"
@@ -2519,6 +2584,14 @@
                 "golf/tee": {
                     "name": "ティー",
                     "terms": "ティー"
+                },
+                "golf/water_hazard_area": {
+                    "name": "ウォーターハザード",
+                    "terms": "池ポチャ, ウォーターハザード"
+                },
+                "golf/water_hazard_line": {
+                    "name": "ウォーターハザード",
+                    "terms": "池ポチャ, ウォーターハザード"
                 },
                 "healthcare/blood_donation": {
                     "name": "献血ルーム",
@@ -2686,6 +2759,9 @@
                 "highway/turning_circle": {
                     "name": "転回場",
                     "terms": "転回場, 車回し"
+                },
+                "highway/turning_loop": {
+                    "name": "転回所(交通島あり)"
                 },
                 "highway/unclassified": {
                     "name": "一般道（2車線未満）"
@@ -2859,6 +2935,9 @@
                 "leisure/fitness_centre/yoga": {
                     "name": "ヨガスタジオ"
                 },
+                "leisure/fitness_station": {
+                    "name": "屋外健康器具"
+                },
                 "leisure/garden": {
                     "name": "庭園",
                     "terms": "庭園"
@@ -2907,6 +2986,9 @@
                     "name": "バスケットボール場",
                     "terms": "バスケットボール場"
                 },
+                "leisure/pitch/bowls": {
+                    "name": "ローンボウルズ"
+                },
                 "leisure/pitch/rugby_league": {
                     "name": "ラグビーリーグ場",
                     "terms": "ラグビー場, ラグビー, リーグ"
@@ -2942,6 +3024,9 @@
                 "leisure/slipway": {
                     "name": "進水路",
                     "terms": "進水路, スリップウェイ"
+                },
+                "leisure/sports_centre": {
+                    "name": "スポーツセンター/複合施設"
                 },
                 "leisure/sports_centre/swimming": {
                     "name": "スイミングプール施設",
@@ -3246,6 +3331,9 @@
                     "name": "行政機関事務所",
                     "terms": "行政機関事務所"
                 },
+                "office/government/register_office": {
+                    "name": "イギリス等の出生、結婚、死亡などの登録所"
+                },
                 "office/insurance": {
                     "name": "保険代理店",
                     "terms": "保険代理店"
@@ -3389,6 +3477,9 @@
                     "name": "線路跡",
                     "terms": "鉄道跡, 線路跡, 廃線跡"
                 },
+                "railway/crossing": {
+                    "name": "踏切(歩道)"
+                },
                 "railway/disused": {
                     "name": "休止線路",
                     "terms": "休止線路, 廃線"
@@ -3400,6 +3491,9 @@
                 "railway/halt": {
                     "name": "鉄道駅（停留場）",
                     "terms": "停留所, 停留場, 駅, 鉄道駅"
+                },
+                "railway/level_crossing": {
+                    "name": "踏切(車道)"
                 },
                 "railway/monorail": {
                     "name": "モノレール",
@@ -3483,6 +3577,12 @@
                 "shop/beauty": {
                     "name": "美容サービス",
                     "terms": "美容サービス, エステサロン, ネイルサロン"
+                },
+                "shop/beauty/nails": {
+                    "name": "ネイルサロン"
+                },
+                "shop/beauty/tanning": {
+                    "name": "日焼けサロン"
                 },
                 "shop/bed": {
                     "name": "ベッド/マットレス専門店",
@@ -3603,6 +3703,9 @@
                 "shop/dry_cleaning": {
                     "name": "クリーニング店",
                     "terms": "クリーニング, ドライクリーニング店, 洗濯屋"
+                },
+                "shop/e-cigarette": {
+                    "name": "電子タバコ店"
                 },
                 "shop/electronics": {
                     "name": "家電販売店",
@@ -3771,6 +3874,9 @@
                     "name": "塗料店",
                     "terms": "塗料店"
                 },
+                "shop/pastry": {
+                    "name": "焼菓子店"
+                },
                 "shop/pawnbroker": {
                     "name": "質店",
                     "terms": "質屋, 質店"
@@ -3902,6 +4008,9 @@
                     "name": "山小屋",
                     "terms": "山小屋"
                 },
+                "tourism/apartment": {
+                    "name": "リゾートマンション"
+                },
                 "tourism/artwork": {
                     "name": "芸術作品",
                     "terms": "芸術作品"
@@ -3911,8 +4020,7 @@
                     "terms": "観光名所, 見どころ"
                 },
                 "tourism/camp_site": {
-                    "name": "キャンプ場",
-                    "terms": "キャンプ場"
+                    "name": "キャンプ場"
                 },
                 "tourism/caravan_site": {
                     "name": "オートキャンプ場",
@@ -3942,6 +4050,18 @@
                     "name": "観光案内",
                     "terms": "観光案内, 案内, 案内板, 案内所, インフォメーション"
                 },
+                "tourism/information/board": {
+                    "name": "情報掲示板"
+                },
+                "tourism/information/guidepost": {
+                    "name": "ガイドポスト"
+                },
+                "tourism/information/map": {
+                    "name": "地図"
+                },
+                "tourism/information/office": {
+                    "name": "観光案内所"
+                },
                 "tourism/motel": {
                     "name": "モーテル",
                     "terms": "モーテル"
@@ -3966,13 +4086,25 @@
                     "name": "動物園",
                     "terms": "動物園"
                 },
+                "traffic_calming": {
+                    "name": "減速帯"
+                },
                 "traffic_calming/bump": {
                     "name": "スピードバンプ",
                     "terms": "スピードバンプ"
                 },
+                "traffic_calming/chicane": {
+                    "name": "シケイン"
+                },
+                "traffic_calming/choker": {
+                    "name": "狭隘路"
+                },
                 "traffic_calming/hump": {
                     "name": "スピードハンプ",
                     "terms": "スピードハンプ"
+                },
+                "traffic_calming/island": {
+                    "name": "交通島"
                 },
                 "traffic_calming/rumble_strip": {
                     "name": "ランブルストリップ",
@@ -4131,6 +4263,9 @@
                 "waterway/stream": {
                     "name": "小川",
                     "terms": "小川, せせらぎ, 川"
+                },
+                "waterway/water_point": {
+                    "name": "ボートのタンクに飲料水をくむための場所"
                 },
                 "waterway/weir": {
                     "name": "堰",

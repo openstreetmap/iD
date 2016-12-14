@@ -1,8 +1,9 @@
 /* Downloads the latest translations from Transifex */
 
-var request = require('request').defaults({maxSockets: 1}),
+var request = require('request').defaults({ maxSockets: 1 }),
     yaml = require('js-yaml'),
     fs = require('fs'),
+    stringify = require('json-stable-stringify'),
     _ = require('lodash');
 
 var resources = ['core', 'presets'];
@@ -26,26 +27,38 @@ var auth = JSON.parse(fs.readFileSync('./transifex.auth', 'utf8'));
 var sourceCore = yaml.load(fs.readFileSync('./data/core.yaml', 'utf8')),
     sourcePresets = yaml.load(fs.readFileSync('./data/presets.yaml', 'utf8'));
 
+
 asyncMap(resources, getResource, function(err, locales) {
     if (err) return console.log(err);
 
     var locale = _.merge(sourceCore, sourcePresets),
-        codes = [];
+        dataLocales = {};
 
     locales.forEach(function(l) {
         locale = _.merge(locale, l);
     });
 
-    for (var i in locale) {
-        if (i === 'en' || _.isEmpty(locale[i])) continue;
-        codes.push(i);
-        var obj = {};
-        obj[i] = locale[i];
-        fs.writeFileSync(outdir + i + '.json', JSON.stringify(obj, null, 4));
-    }
-
-    fs.writeFileSync('data/locales.json', JSON.stringify({ dataLocales: codes }, null, 4));
+    asyncMap(Object.keys(locale),
+        function(code, done) {
+            if (code === 'en' || _.isEmpty(locale[code])) {
+                done();
+            } else {
+                var obj = {};
+                obj[code] = locale[code];
+                fs.writeFileSync(outdir + code + '.json', JSON.stringify(obj, null, 4));
+                getLanguageInfo(code, function(err, info) {
+                    dataLocales[code] = { rtl: info && info.rtl };
+                    done();
+                });
+            }
+        }, function(err) {
+            if (!err) {
+                fs.writeFileSync('data/locales.json', stringify({ dataLocales: dataLocales }, { space: 4 }));
+            }
+        }
+    );
 });
+
 
 function getResource(resource, callback) {
     resource = project + 'resource/' + resource + '/';
@@ -65,6 +78,7 @@ function getResource(resource, callback) {
     });
 }
 
+
 function getLanguage(resource) {
     return function(code, callback) {
         code = code.replace(/-/g, '_');
@@ -77,6 +91,18 @@ function getLanguage(resource) {
         });
     };
 }
+
+
+function getLanguageInfo(code, callback) {
+    code = code.replace(/-/g, '_');
+    var url = api + 'language/' + code;
+    request.get(url, { auth : auth }, function(err, resp, body) {
+        if (err) return callback(err);
+        console.log(resp.statusCode + ': ' + url);
+        callback(null, JSON.parse(body));
+    });
+}
+
 
 function getLanguages(resource, callback) {
     var url = resource + '?details';
@@ -91,6 +117,7 @@ function getLanguages(resource, callback) {
         }));
     });
 }
+
 
 function asyncMap(inputs, func, callback) {
     var remaining = inputs.length,

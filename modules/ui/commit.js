@@ -1,11 +1,15 @@
 import * as d3 from 'd3';
 import _ from 'lodash';
-import { d3combobox } from '../lib/d3.combobox.js';
 import { t } from '../util/locale';
+import { d3combobox } from '../lib/d3.combobox.js';
 import { modeSelect } from '../modes/index';
 import { svgIcon } from '../svg/index';
 import { tooltip } from '../util/tooltip';
-import { utilDisplayName, utilEntityOrMemberSelector } from '../util/index';
+import {
+    utilDisplayName,
+    utilDisplayType,
+    utilEntityOrMemberSelector
+} from '../util/index';
 import { utilRebind } from '../util/rebind';
 import { utilTriggerEvent } from '../util/trigger_event';
 
@@ -229,7 +233,10 @@ export function uiCommit(context) {
 
         li.append('strong')
             .attr('class', 'entity-type')
-            .text(function(d) { return context.presets().match(d.entity, d.graph).name(); });
+            .text(function(d) {
+                var matched = context.presets().match(d.entity, d.graph);
+                return (matched && matched.name()) || utilDisplayType(d.entity.id);
+            });
 
         li.append('span')
             .attr('class', 'entity-name')

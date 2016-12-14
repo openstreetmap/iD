@@ -256,14 +256,10 @@ export function uiInit(context) {
             .on('↑', pan([0, pa]))
             .on('→', pan([-pa, 0]))
             .on('↓', pan([0, -pa]))
-            .on('⇧←', pan([mapDimensions[0], 0]))
-            .on('⇧↑', pan([0, mapDimensions[1]]))
-            .on('⇧→', pan([-mapDimensions[0], 0]))
-            .on('⇧↓', pan([0, -mapDimensions[1]]))
-            .on(uiCmd('⌘←'), pan([mapDimensions[0], 0]))
-            .on(uiCmd('⌘↑'), pan([0, mapDimensions[1]]))
-            .on(uiCmd('⌘→'), pan([-mapDimensions[0], 0]))
-            .on(uiCmd('⌘↓'), pan([0, -mapDimensions[1]]));
+            .on(['⇧←', uiCmd('⌘←')], pan([mapDimensions[0], 0]))
+            .on(['⇧↑', uiCmd('⌘↑')], pan([0, mapDimensions[1]]))
+            .on(['⇧→', uiCmd('⌘→')], pan([-mapDimensions[0], 0]))
+            .on(['⇧↓', uiCmd('⌘↓')], pan([0, -mapDimensions[1]]));
 
         d3.select(document)
             .call(keybinding);
@@ -275,24 +271,30 @@ export function uiInit(context) {
             .call(uiRestore(context));
 
         var authenticating = uiLoading(context)
-            .message(t('loading_auth'));
+            .message(t('loading_auth'))
+            .blocking(true);
 
         context.connection()
-            .on('authenticating.ui', function() {
+            .on('authLoading.ui', function() {
                 context.container()
                     .call(authenticating);
             })
-            .on('authenticated.ui', function() {
+            .on('authDone.ui', function() {
                 authenticating.close();
             });
     }
 
 
-    function ui(node) {
+    function ui(node, callback) {
         var container = d3.select(node);
         context.container(container);
-        context.loadLocale(function() {
-            render(container);
+        context.loadLocale(function(err) {
+            if (!err) {
+                render(container);
+            }
+            if (callback) {
+                callback(err);
+            }
         });
     }
 

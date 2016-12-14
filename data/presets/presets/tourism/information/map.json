@@ -1,0 +1,16 @@
+{
+    "fields": [
+        "operator",
+        "map_type",
+        "map_size"
+    ],
+    "geometry": [
+        "point",
+        "vertex"
+    ],
+    "tags": {
+        "tourism": "information",
+        "information": "map"
+    },
+    "name": "Map"
+}

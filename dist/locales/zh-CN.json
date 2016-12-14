@@ -227,6 +227,7 @@
             "localized_translation_name": "名称"
         },
         "zoom_in_edit": "放大地图以编辑",
+        "login": "登录",
         "logout": "退出",
         "loading_auth": "正在连接OpenStreetMap...",
         "report_a_bug": "报告漏洞",
@@ -238,7 +239,8 @@
         "status": {
             "error": "无法连接到 API。",
             "offline": "API 已下线，请稍后再尝试编辑。",
-            "readonly": "API 目前处于只读状态，您需要等候一段时间才能保存您的更改。"
+            "readonly": "API 目前处于只读状态，您需要等候一段时间才能保存您的更改。",
+            "rateLimit": "该接口是限制匿名连接的。你可以通过登录来解决这个问题。"
         },
         "commit": {
             "title": "保存变更",
@@ -294,6 +296,7 @@
         "inspector": {
             "no_documentation_combination": "这个标签组合没有可用的说明",
             "no_documentation_key": "这个键值没有可用的说明",
+            "documentation_redirect": "这个文档被重定向到一个新的页面",
             "show_more": "显示更多",
             "view_on_osm": "在openstreetmap.org上查看",
             "all_fields": "所有字段",
@@ -334,7 +337,6 @@
             "switch": "切换回该底图",
             "custom": "自定义",
             "custom_button": "编辑自定义背景",
-            "custom_prompt": "输入瓦片模板。Z/X/Y方案的有效标记是{z}，{x}，{y}，quadtile方案的有效标记是{u}。",
             "fix_misalignment": "调整影像偏移",
             "imagery_source_faq": "该影像的来源是？",
             "reset": "重置",
@@ -781,6 +783,9 @@
                 "barrier": {
                     "label": "类型"
                 },
+                "beauty": {
+                    "label": "商店类型"
+                },
                 "bench": {
                     "label": "长凳"
                 },
@@ -798,6 +803,9 @@
                         "stemcells": "干细胞样本",
                         "whole": "全血"
                     }
+                },
+                "board_type": {
+                    "label": "类型"
                 },
                 "boundary": {
                     "label": "类型"
@@ -1020,6 +1028,9 @@
                 "handrail": {
                     "label": "扶手"
                 },
+                "height": {
+                    "label": "高度(米)"
+                },
                 "highway": {
                     "label": "类型"
                 },
@@ -1137,6 +1148,12 @@
                     "label": "位置"
                 },
                 "man_made": {
+                    "label": "类型"
+                },
+                "map_size": {
+                    "label": "范围"
+                },
+                "map_type": {
                     "label": "类型"
                 },
                 "maxspeed": {
@@ -1342,6 +1359,12 @@
                 "recycling_accepts": {
                     "label": "接受"
                 },
+                "recycling_type": {
+                    "options": {
+                        "centre": "回收站",
+                        "container": "回收容器"
+                    }
+                },
                 "ref": {
                     "label": "参考"
                 },
@@ -1395,22 +1418,6 @@
                 },
                 "service": {
                     "label": "类型"
-                },
-                "service/bicycle/chain_tool": {
-                    "label": "链条维修工具",
-                    "options": {
-                        "no": "否",
-                        "undefined": "假定为否",
-                        "yes": "是"
-                    }
-                },
-                "service/bicycle/pump": {
-                    "label": "气泵",
-                    "options": {
-                        "no": "否",
-                        "undefined": "假定为否",
-                        "yes": " 是"
-                    }
                 },
                 "service_rail": {
                     "label": "服务类型",
@@ -1535,8 +1542,8 @@
                 "tourism": {
                     "label": "类型"
                 },
-                "towertype": {
-                    "label": "塔型"
+                "tower/type": {
+                    "label": "类型"
                 },
                 "tracktype": {
                     "label": "道路铺设种类",
@@ -1548,6 +1555,9 @@
                         "grade5": "柔性铺面：只有土壤，砂土与草地"
                     },
                     "placeholder": "坚硬地面，硬物铺面，软铺面"
+                },
+                "traffic_calming": {
+                    "label": "类型"
                 },
                 "traffic_signals": {
                     "label": "类型"
@@ -1611,6 +1621,10 @@
                 "address": {
                     "name": "地址",
                     "terms": "地址,址"
+                },
+                "advertising/billboard": {
+                    "name": "广告牌",
+                    "terms": "广告牌,广告,牌"
                 },
                 "aerialway": {
                     "name": "缆车线路"
@@ -1782,8 +1796,8 @@
                     "terms": "时钟,钟表,钟"
                 },
                 "amenity/college": {
-                    "name": "大专院校校园",
-                    "terms": "大专校园"
+                    "name": "学院",
+                    "terms": "学院,大专校园,大学,学校"
                 },
                 "amenity/community_centre": {
                     "name": "社区活动中心",
@@ -1860,6 +1874,10 @@
                 "amenity/ice_cream": {
                     "name": "冰淇淋店",
                     "terms": "冰淇淋店,冷饮店"
+                },
+                "amenity/internet_cafe": {
+                    "name": "网吧",
+                    "terms": "网吧,上网咖啡馆,上网咖啡厅"
                 },
                 "amenity/kindergarten": {
                     "name": "学前班/幼儿园用地",
@@ -1953,6 +1971,10 @@
                     "name": "资源回收设施",
                     "terms": "回收,循环利用,再造"
                 },
+                "amenity/recycling_centre": {
+                    "name": "回收站",
+                    "terms": "回收站,回收中心,循环中心,资源回收中心"
+                },
                 "amenity/register_office": {
                     "name": "民政登记处"
                 },
@@ -2016,8 +2038,8 @@
                     "terms": "市政府,市政厅,大会堂"
                 },
                 "amenity/university": {
-                    "name": "大学校园",
-                    "terms": "大学校园,大学场地"
+                    "name": "大学",
+                    "terms": "大学,学院,学校"
                 },
                 "amenity/vending_machine/cigarettes": {
                     "name": "香烟售货机",
@@ -2070,6 +2092,10 @@
                 "amenity/waste_disposal": {
                     "name": "大型垃圾箱",
                     "terms": "大型垃圾箱,垃圾箱"
+                },
+                "amenity/waste_transfer_station": {
+                    "name": "垃圾中转站",
+                    "terms": "垃圾中转站,垃圾,中转站"
                 },
                 "amenity/water_point": {
                     "name": "直饮水",
@@ -2186,8 +2212,8 @@
                     "terms": "教堂建筑"
                 },
                 "building/college": {
-                    "name": "大专院校建筑",
-                    "terms": "大专院校建筑"
+                    "name": "学院建筑",
+                    "terms": "学院建筑,大专院校建筑,大学建筑,学校建筑"
                 },
                 "building/commercial": {
                     "name": "商业建筑物",
@@ -2289,7 +2315,7 @@
                 },
                 "building/university": {
                     "name": "大学建筑",
-                    "terms": "大学建筑"
+                    "terms": "大学建筑,学院建筑,学校建筑"
                 },
                 "building/warehouse": {
                     "name": "仓库",
@@ -2743,6 +2769,10 @@
                 "highway/turning_circle": {
                     "name": "环岛",
                     "terms": "环岛"
+                },
+                "highway/turning_loop": {
+                    "name": "回车场 (O形)",
+                    "terms": "回车场 (O形),回车场,路末环岛"
                 },
                 "highway/unclassified": {
                     "name": "小型/未分级道路",
@@ -3568,6 +3598,14 @@
                     "name": "美容店",
                     "terms": "美容院"
                 },
+                "shop/beauty/nails": {
+                    "name": "美甲店",
+                    "terms": "美甲店,美甲沙龙"
+                },
+                "shop/beauty/tanning": {
+                    "name": "日光浴沙龙",
+                    "terms": "日光浴沙龙,阳光浴房"
+                },
                 "shop/bed": {
                     "name": "床上用品店",
                     "terms": "床上用品店"
@@ -4002,10 +4040,6 @@
                     "name": "旅游名胜",
                     "terms": "旅游名胜"
                 },
-                "tourism/camp_site": {
-                    "name": "宿营地",
-                    "terms": "露营区"
-                },
                 "tourism/caravan_site": {
                     "name": "房车营地",
                     "terms": "房车营地"
@@ -4034,6 +4068,18 @@
                     "name": "问询处",
                     "terms": "问讯处,问询处,信息中心,游客中心"
                 },
+                "tourism/information/guidepost": {
+                    "name": "路标",
+                    "terms": "路标,路牌"
+                },
+                "tourism/information/map": {
+                    "name": "地图",
+                    "terms": "地图"
+                },
+                "tourism/information/office": {
+                    "name": "旅游咨询处",
+                    "terms": "旅游咨询处,旅游问询处,旅游问询中心,旅游咨询中心,旅游咨询服务中心,旅游信息咨询处"
+                },
                 "tourism/motel": {
                     "name": "汽车旅馆",
                     "terms": "汽车旅馆"
@@ -4058,13 +4104,37 @@
                     "name": "动物园",
                     "terms": "动物园"
                 },
+                "traffic_calming": {
+                    "name": "交通稳静化",
+                    "terms": "交通稳静化,交通静稳化,车辆减速措施"
+                },
                 "traffic_calming/bump": {
                     "name": "减速带",
                     "terms": "减速带"
                 },
+                "traffic_calming/chicane": {
+                    "name": "曲折车行道",
+                    "terms": "曲折车行道,减速弯道"
+                },
+                "traffic_calming/choker": {
+                    "name": "窄化路面",
+                    "terms": "窄化路面,瓶颈化交叉口,窄点"
+                },
+                "traffic_calming/cushion": {
+                    "name": "减速垫",
+                    "terms": "减速垫,减速板,减速带,减速胶"
+                },
+                "traffic_calming/dip": {
+                    "name": "路凹",
+                    "terms": "路凹,减速路凹,减速坑"
+                },
                 "traffic_calming/hump": {
                     "name": "减速台",
                     "terms": "减速台"
+                },
+                "traffic_calming/island": {
+                    "name": "交通岛",
+                    "terms": "交通岛,导流岛,安全岛,中心岛,交通稳静化"
                 },
                 "traffic_calming/rumble_strip": {
                     "name": "路肩警示带",

@@ -4,7 +4,8 @@
         "address",
         "building_area",
         "opening_hours",
-        "smoking"
+        "smoking",
+        "outdoor_seating"
     ],
     "geometry": [
         "point",
@@ -14,6 +15,8 @@
         "amenity": "pub"
     },
     "terms": [
+        "alcohol",
+        "drink",
         "dive",
         "beer",
         "bier",

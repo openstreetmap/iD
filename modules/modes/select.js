@@ -29,7 +29,11 @@ import { modeBrowse } from './browse';
 import { modeDragNode } from './drag_node';
 import * as Operations from '../operations/index';
 import { uiRadialMenu, uiSelectionList } from '../ui/index';
-import { utilEntityOrMemberSelector } from '../util/index';
+import { uiCmd } from '../ui/cmd';
+import { utilEntityOrMemberSelector, utilEntitySelector } from '../util/index';
+
+
+var relatedParent;
 
 
 export function modeSelect(context, selectedIDs) {
@@ -52,7 +56,9 @@ export function modeSelect(context, selectedIDs) {
         inspector,
         radialMenu,
         newFeature = false,
-        suppressMenu = false;
+        suppressMenu = false,
+        follow = false;
+
 
     var wrap = context.container()
         .select('.inspector-wrap');
@@ -62,6 +68,73 @@ export function modeSelect(context, selectedIDs) {
         if (selectedIDs.length === 1) {
             return context.hasEntity(selectedIDs[0]);
         }
+    }
+
+
+    function checkSelectedIDs() {
+        var ids = [];
+        if (Array.isArray(selectedIDs)) {
+            ids = selectedIDs.filter(function(id) {
+                return context.hasEntity(id);
+            });
+        }
+
+        if (ids.length) {
+            selectedIDs = ids;
+        } else {
+            context.enter(modeBrowse(context));
+        }
+        return !!ids.length;
+    }
+
+
+    // find the common parent ways for nextVertex, previousVertex
+    function commonParents() {
+        var graph = context.graph(),
+            commonParents = [];
+
+        for (var i = 0; i < selectedIDs.length; i++) {
+            var entity = context.hasEntity(selectedIDs[i]);
+            if (!entity || entity.geometry(graph) !== 'vertex') {
+                return [];  // selection includes some not vertexes
+            }
+
+            var currParents = _.map(graph.parentWays(entity), 'id');
+            if (!commonParents.length) {
+                commonParents = currParents;
+                continue;
+            }
+
+            commonParents = _.intersection(commonParents, currParents);
+            if (!commonParents.length) {
+                return [];
+            }
+        }
+
+        return commonParents;
+    }
+
+
+    function singularParent() {
+        var parents = commonParents();
+        if (!parents) {
+            relatedParent = null;
+            return null;
+        }
+
+        // relatedParent is used when we visit a vertex with multiple
+        // parents, and we want to remember which parent line we started on.
+
+        if (parents.length === 1) {
+            relatedParent = parents[0];  // remember this parent for later
+            return relatedParent;
+        }
+
+        if (parents.indexOf(relatedParent) !== -1) {
+            return relatedParent;   // prefer the previously seen parent
+        }
+
+        return parents[0];
     }
 
 
@@ -115,6 +188,8 @@ export function modeSelect(context, selectedIDs) {
 
 
     mode.reselect = function() {
+        if (!checkSelectedIDs()) return;
+
         var surfaceNode = context.surface().node();
         if (surfaceNode.focus) {   // FF doesn't support it
             surfaceNode.focus();
@@ -139,14 +214,18 @@ export function modeSelect(context, selectedIDs) {
     };
 
 
+    mode.follow = function(_) {
+        if (!arguments.length) return follow;
+        follow = _;
+        return mode;
+    };
+
+
     mode.enter = function() {
 
         function update() {
             closeMenu();
-            if (_.some(selectedIDs, function(id) { return !context.hasEntity(id); })) {
-                // Exit mode if selected entity gets undone
-                context.enter(modeBrowse(context));
-            }
+            checkSelectedIDs();
         }
 
 
@@ -173,17 +252,33 @@ export function modeSelect(context, selectedIDs) {
 
 
         function selectElements(drawn) {
-            var entity = singular();
+            if (!checkSelectedIDs()) return;
+
+            var surface = context.surface(),
+                entity = singular();
+
             if (entity && context.geometry(entity.id) === 'relation') {
                 suppressMenu = true;
                 return;
             }
 
+            surface.selectAll('.related')
+                .classed('related', false);
+
+            singularParent();
+            if (relatedParent) {
+                surface.selectAll(utilEntitySelector([relatedParent]))
+                    .classed('related', true);
+            }
+
             var selection = context.surface()
-                    .selectAll(utilEntityOrMemberSelector(selectedIDs, context.graph()));
+                .selectAll(utilEntityOrMemberSelector(selectedIDs, context.graph()));
 
             if (selection.empty()) {
-                if (drawn) {  // Exit mode if selected DOM elements have disappeared..
+                // Return to browse mode if selected DOM elements have
+                // disappeared because the user moved them out of view..
+                var source = d3.event && d3.event.type === 'zoom' && d3.event.sourceEvent;
+                if (drawn && source && (source.type === 'mousemove' || source.type === 'touchmove')) {
                     context.enter(modeBrowse(context));
                 }
             } else {
@@ -200,6 +295,103 @@ export function modeSelect(context, selectedIDs) {
         }
 
 
+        function firstVertex() {
+            d3.event.preventDefault();
+            var parent = singularParent();
+            if (parent) {
+                var way = context.entity(parent);
+                context.enter(
+                    modeSelect(context, [way.first()]).follow(true).suppressMenu(true)
+                );
+            }
+        }
+
+
+        function lastVertex() {
+            d3.event.preventDefault();
+            var parent = singularParent();
+            if (parent) {
+                var way = context.entity(parent);
+                context.enter(
+                    modeSelect(context, [way.last()]).follow(true).suppressMenu(true)
+                );
+            }
+        }
+
+
+        function previousVertex() {
+            d3.event.preventDefault();
+            var parent = singularParent();
+            if (!parent) return;
+
+            var way = context.entity(parent),
+                length = way.nodes.length,
+                curr = way.nodes.indexOf(selectedIDs[0]),
+                index = -1;
+
+            if (curr > 0) {
+                index = curr - 1;
+            } else if (way.isClosed()) {
+                index = length - 2;
+            }
+
+            if (index !== -1) {
+                context.enter(
+                    modeSelect(context, [way.nodes[index]]).follow(true).suppressMenu(true)
+                );
+            }
+        }
+
+
+        function nextVertex() {
+            d3.event.preventDefault();
+            var parent = singularParent();
+            if (!parent) return;
+
+            var way = context.entity(parent),
+                length = way.nodes.length,
+                curr = way.nodes.indexOf(selectedIDs[0]),
+                index = -1;
+
+            if (curr < length - 1) {
+                index = curr + 1;
+            } else if (way.isClosed()) {
+                index = 0;
+            }
+
+            if (index !== -1) {
+                context.enter(
+                    modeSelect(context, [way.nodes[index]]).follow(true).suppressMenu(true)
+                );
+            }
+        }
+
+
+        function nextParent() {
+            d3.event.preventDefault();
+            var parents = _.uniq(commonParents());
+            if (!parents || parents.length < 2) return;
+
+            var index = parents.indexOf(relatedParent);
+            if (index < 0 || index > parents.length - 2) {
+                relatedParent = parents[0];
+            } else {
+                relatedParent = parents[index + 1];
+            }
+
+            var surface = context.surface();
+            surface.selectAll('.related')
+                .classed('related', false);
+
+            if (relatedParent) {
+                surface.selectAll(utilEntitySelector([relatedParent]))
+                    .classed('related', true);
+            }
+        }
+
+
+        if (!checkSelectedIDs()) return;
+
         behaviors.forEach(function(behavior) {
             context.install(behavior);
         });
@@ -211,6 +403,11 @@ export function modeSelect(context, selectedIDs) {
         operations.unshift(Operations.operationDelete(selectedIDs, context));
 
         keybinding
+            .on(['[','pgup'], previousVertex)
+            .on([']', 'pgdown'], nextVertex)
+            .on([uiCmd('⌘['), 'home'], firstVertex)
+            .on([uiCmd('⌘]'), 'end'], lastVertex)
+            .on(['\\', 'pause'], nextParent)
             .on('⎋', esc, true)
             .on('space', toggleMenu);
 
@@ -248,6 +445,18 @@ export function modeSelect(context, selectedIDs) {
             positionMenu();
         }
 
+        if (follow) {
+            var extent = geoExtent(),
+                graph = context.graph();
+            selectedIDs.forEach(function(id) {
+                var entity = context.entity(id);
+                extent._extend(entity.extent(graph));
+            });
+
+            var loc = extent.center();
+            context.map().centerEase(loc);
+        }
+
         timeout = window.setTimeout(function() {
             if (show) {
                 showMenu();
@@ -281,10 +490,18 @@ export function modeSelect(context, selectedIDs) {
             .on('undone.select', null)
             .on('redone.select', null);
 
-        context.surface()
-            .on('dblclick.select', null)
+        var surface = context.surface();
+
+        surface
+            .on('dblclick.select', null);
+
+        surface
             .selectAll('.selected')
             .classed('selected', false);
+
+        surface
+            .selectAll('.related')
+            .classed('related', false);
 
         context.map().on('drawn.select', null);
         context.ui().sidebar.hide();

@@ -549,9 +549,6 @@
                 "tourism": {
                     "label": "Tipe"
                 },
-                "towertype": {
-                    "label": "Toring tipe"
-                },
                 "trail_visibility": {
                     "label": "Sigbaarheid van voetslaanpad"
                 },
@@ -1336,9 +1333,6 @@
                 },
                 "tourism/attraction": {
                     "name": "Toerismeaantreklikheid"
-                },
-                "tourism/camp_site": {
-                    "name": "Kamppeer Plek"
                 },
                 "tourism/caravan_site": {
                     "name": "RV Park"

@@ -1,0 +1,15 @@
+{
+    "fields": [
+        "operator",
+        "address",
+        "opening_hours"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "leisure": "resort"
+    },
+    "name": "Resort"
+}

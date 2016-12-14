@@ -1,18 +1,36 @@
+import * as d3 from 'd3';
 import { t } from '../util/locale';
+import { svgIcon } from '../svg/index';
+
 
 export function uiStatus(context) {
-    var connection = context.connection(),
-        errCount = 0;
+    var connection = context.connection();
 
     return function(selection) {
 
         function update() {
             connection.status(function(err, apiStatus) {
                 selection.html('');
-                if (err && errCount++ < 2) return;
 
                 if (err) {
-                    selection.text(t('status.error'));
+                    if (apiStatus === 'rateLimited') {
+                        selection
+                            .text(t('status.rateLimit'))
+                            .append('a')
+                            .attr('class', 'api-status-login')
+                            .attr('target', '_blank')
+                            .call(svgIcon('#icon-out-link', 'inline'))
+                            .append('span')
+                            .text(t('login'))
+                            .on('click.login', function() {
+                                d3.event.preventDefault();
+                                connection.authenticate();
+                            });
+                    } else {
+                        // TODO: nice messages for different error types
+                        selection.text(t('status.error'));
+                    }
+
                 } else if (apiStatus === 'readonly') {
                     selection.text(t('status.readonly'));
                 } else if (apiStatus === 'offline') {
@@ -20,12 +38,11 @@ export function uiStatus(context) {
                 }
 
                 selection.attr('class', 'api-status ' + (err ? 'error' : apiStatus));
-                if (!err) errCount = 0;
             });
         }
 
         connection
-            .on('auth', function() { update(selection); });
+            .on('change', function() { update(selection); });
 
         window.setInterval(update, 90000);
         update(selection);

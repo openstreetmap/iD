@@ -334,7 +334,6 @@
             "switch": "Switch back to this background",
             "custom": "Custom",
             "custom_button": "Edit custom background",
-            "custom_prompt": "Enter a tile URL template. Valid tokens are {z}, {x}, {y} for Z/X/Y scheme and {u} for quadtile scheme.",
             "fix_misalignment": "Adjust imagery offset",
             "imagery_source_faq": "Where does this imagery come from?",
             "reset": "reset",
@@ -1315,22 +1314,6 @@
                 "service": {
                     "label": "Type"
                 },
-                "service/bicycle/chain_tool": {
-                    "label": "Chain Tool",
-                    "options": {
-                        "no": "No",
-                        "undefined": "Assumed to be No",
-                        "yes": "Yes"
-                    }
-                },
-                "service/bicycle/pump": {
-                    "label": "Air Pump",
-                    "options": {
-                        "no": "No",
-                        "undefined": "Assumed to be No",
-                        "yes": "Yes"
-                    }
-                },
                 "service_rail": {
                     "label": "Service Type",
                     "options": {
@@ -1555,7 +1538,7 @@
                     "name": "Shoe Shop"
                 },
                 "tourism/camp_site": {
-                    "terms": "camping"
+                    "name": "Camp Site"
                 },
                 "tourism/caravan_site": {
                     "name": "Caravan Park"

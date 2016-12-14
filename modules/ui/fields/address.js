@@ -30,12 +30,12 @@ export function uiFieldAddress(field, context) {
     };
 
 
-    function getStreets() {
+    function getNearStreets() {
         var extent = entity.extent(context.graph()),
             l = extent.center(),
             box = geoExtent(l).padByMeters(200);
 
-        return context.intersects(box)
+        var streets = context.intersects(box)
             .filter(isAddressable)
             .map(function(d) {
                 var loc = context.projection([
@@ -47,9 +47,12 @@ export function uiFieldAddress(field, context) {
                     value: d.tags.name,
                     dist: choice.distance
                 };
-            }).sort(function(a, b) {
+            })
+            .sort(function(a, b) {
                 return a.dist - b.dist;
             });
+
+        return _.uniqBy(streets, 'value');
 
         function isAddressable(d) {
             return d.tags.highway && d.tags.name && d.type === 'way';
@@ -57,12 +60,12 @@ export function uiFieldAddress(field, context) {
     }
 
 
-    function getCities() {
+    function getNearCities() {
         var extent = entity.extent(context.graph()),
             l = extent.center(),
             box = geoExtent(l).padByMeters(200);
 
-        return context.intersects(box)
+        var cities = context.intersects(box)
             .filter(isAddressable)
             .map(function(d) {
                 return {
@@ -70,9 +73,13 @@ export function uiFieldAddress(field, context) {
                     value: d.tags['addr:city'] || d.tags.name,
                     dist: geoSphericalDistance(d.extent(context.graph()).center(), l)
                 };
-            }).sort(function(a, b) {
+            })
+            .sort(function(a, b) {
                 return a.dist - b.dist;
             });
+
+        return _.uniqBy(cities, 'value');
+
 
         function isAddressable(d) {
             if (d.tags.name &&
@@ -92,26 +99,27 @@ export function uiFieldAddress(field, context) {
     }
 
 
-    function getPostCodes() {
+    function getNearValues(key) {
         var extent = entity.extent(context.graph()),
             l = extent.center(),
             box = geoExtent(l).padByMeters(200);
 
-        return context.intersects(box)
-            .filter(isAddressable)
+        var results = context.intersects(box)
+            .filter(function hasTag(d) {
+                return d.tags[key];
+            })
             .map(function(d) {
                 return {
-                    title: d.tags['addr:postcode'],
-                    value: d.tags['addr:postcode'],
+                    title: d.tags[key],
+                    value: d.tags[key],
                     dist: geoSphericalDistance(d.extent(context.graph()).center(), l)
                 };
-            }).sort(function(a, b) {
+            })
+            .sort(function(a, b) {
                 return a.dist - b.dist;
             });
 
-        function isAddressable(d) {
-            return d.tags['addr:postcode'];
-        }
+        return _.uniqBy(results, 'value');
     }
 
 
@@ -151,23 +159,24 @@ export function uiFieldAddress(field, context) {
             .style('width', function (d) { return d.width * 100 + '%'; });
 
         // Update
-        wrap.selectAll('.addr-street')
-            .call(d3combobox()
-                .fetcher(function(value, callback) {
-                    callback(getStreets());
-                }));
+        // setup dropdowns for common address tags
+        var addrTags = [
+            'street', 'city', 'state', 'province', 'district',
+            'subdistrict', 'suburb', 'place', 'postcode'
+        ];
 
-        wrap.selectAll('.addr-city')
-            .call(d3combobox()
-                .fetcher(function(value, callback) {
-                    callback(getCities());
-                }));
+        addrTags.forEach(function(tag) {
+            var nearValues = (tag === 'street') ? getNearStreets
+                    : (tag === 'city') ? getNearCities
+                    : getNearValues;
 
-        wrap.selectAll('.addr-postcode')
-            .call(d3combobox()
-                .fetcher(function(value, callback) {
-                    callback(getPostCodes());
-                }));
+            wrap.selectAll('.addr-' + tag)
+                .call(d3combobox()
+                    .minItems(1)
+                    .fetcher(function(value, callback) {
+                        callback(nearValues('addr:' + tag));
+                    }));
+        });
 
         wrap.selectAll('input')
             .on('blur', change())

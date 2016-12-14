@@ -227,6 +227,7 @@
             "localized_translation_name": "Namn"
         },
         "zoom_in_edit": "Zooma in för att redigera",
+        "login": "Logga in",
         "logout": "logga ut",
         "loading_auth": "Ansluter till OpenStreetMap...",
         "report_a_bug": "Rapportera ett fel",
@@ -238,7 +239,8 @@
         "status": {
             "error": "Kan inte ansluta till API:et.",
             "offline": "API:et är inte tillgängligt. Vänligen försök redigera senare.",
-            "readonly": "API:et är skrivskyddat. Du måste vänta innan du kan spara dina ändringar."
+            "readonly": "API:et är skrivskyddat. Du måste vänta innan du kan spara dina ändringar.",
+            "rateLimit": "API:t är begränsat för anonyma anslutningar. Du kan fixa detta genom att logga in."
         },
         "commit": {
             "title": "Spara ändringar",
@@ -294,6 +296,7 @@
         "inspector": {
             "no_documentation_combination": "Det finns ingen dokumentation för denna tagg-kombination",
             "no_documentation_key": "Det finns ingen dokumentation för denna nyckel.",
+            "documentation_redirect": "Denna dokumentation har dirigerats om till en ny sida",
             "show_more": "Visa mer",
             "view_on_osm": "Visa på openstreetmap.org",
             "all_fields": "Alla egenskaper",
@@ -334,7 +337,7 @@
             "switch": "Växla tillbaka till denna bakgrund",
             "custom": "Anpassa",
             "custom_button": "Ändra anpassad bakgrund",
-            "custom_prompt": "Ange en URL-mall för plattor. Giltiga symboler är  {z}, {x}, {y} för Z/X/Y-schema och {u} för quadtile-schema.",
+            "custom_prompt": "Ange en URL-mall för plattor. Giltiga symboler är {zoom}, {x} och {y} för Z/X/Y-scheman och {u} för QuadTile-scheman.",
             "fix_misalignment": "Justera bildplacering",
             "imagery_source_faq": "Var kommer dessa flygfoton från?",
             "reset": "ta bort",
@@ -802,6 +805,9 @@
                         "whole": "helt blod"
                     }
                 },
+                "board_type": {
+                    "label": "Typ"
+                },
                 "boundary": {
                     "label": "Typ"
                 },
@@ -973,6 +979,9 @@
                 "fee": {
                     "label": "Avgift"
                 },
+                "fence_type": {
+                    "label": "Typ"
+                },
                 "fire_hydrant/type": {
                     "label": "Typ",
                     "options": {
@@ -1023,6 +1032,9 @@
                 "handrail": {
                     "label": "Ledstång"
                 },
+                "height": {
+                    "label": "Höjd (meter)"
+                },
                 "highway": {
                     "label": "Typ"
                 },
@@ -1067,6 +1079,9 @@
                 },
                 "internet_access/fee": {
                     "label": "Avgift för internetåtkomst"
+                },
+                "internet_access/ssid": {
+                    "label": "SSID (Nätverksnamn)"
                 },
                 "kerb": {
                     "label": "Trottoarkant"
@@ -1141,6 +1156,12 @@
                 },
                 "man_made": {
                     "label": "Typ"
+                },
+                "map_type": {
+                    "label": "Typ"
+                },
+                "maxheight": {
+                    "label": "Maxhöjd"
                 },
                 "maxspeed": {
                     "label": "Hastighetsbegränsning",
@@ -1345,6 +1366,13 @@
                 "recycling_accepts": {
                     "label": "Accepterar"
                 },
+                "recycling_type": {
+                    "label": "Återvinningstyp",
+                    "options": {
+                        "centre": "Återvinningscentral",
+                        "container": "Container"
+                    }
+                },
                 "ref": {
                     "label": "Referens"
                 },
@@ -1399,21 +1427,8 @@
                 "service": {
                     "label": "Typ"
                 },
-                "service/bicycle/chain_tool": {
-                    "label": "Kedjebrytare",
-                    "options": {
-                        "no": "Nej",
-                        "undefined": "Förväntas vara Nej",
-                        "yes": "Ja"
-                    }
-                },
-                "service/bicycle/pump": {
-                    "label": "Cykelpump",
-                    "options": {
-                        "no": "Nej",
-                        "undefined": "Förväntas vara Nej",
-                        "yes": "Ja"
-                    }
+                "service/bicycle": {
+                    "label": "Tjänster"
                 },
                 "service_rail": {
                     "label": "Användningsområde ",
@@ -1538,8 +1553,8 @@
                 "tourism": {
                     "label": "Typ"
                 },
-                "towertype": {
-                    "label": "Typ av torn"
+                "tower/type": {
+                    "label": "Typ"
                 },
                 "tracktype": {
                     "label": "Typ av bruksväg",
@@ -1551,6 +1566,9 @@
                         "grade5": "Mjukt: jord/sand/gräs"
                     },
                     "placeholder": "Fast, Mestadels fast, Mjuk ..."
+                },
+                "traffic_calming": {
+                    "label": "Typ"
                 },
                 "traffic_signals": {
                     "label": "Typ"
@@ -1584,6 +1602,9 @@
                         "street": "5 till 20 m (16 till 65 ft)"
                     }
                 },
+                "wall": {
+                    "label": "Typ"
+                },
                 "water": {
                     "label": "Typ"
                 },
@@ -1614,6 +1635,10 @@
                 "address": {
                     "name": "Adress",
                     "terms": "Adress, husnummer, destination, gatuadress, postnummer, postort, postadress"
+                },
+                "advertising/billboard": {
+                    "name": "Annonstavla",
+                    "terms": "Annonstavla, reklamtavla, reklam, reklamskylt,  affisch,  affischtavla"
                 },
                 "aerialway": {
                     "name": "Linbana"
@@ -1864,6 +1889,10 @@
                     "name": "Glassaffär",
                     "terms": "Glassaffär, glass, glasskiosk, kulglass, mjukglass,gelato,sorbet,sherbet,frozen,yogurt"
                 },
+                "amenity/internet_cafe": {
+                    "name": "Internetkafé",
+                    "terms": "Internetcafé, internetcafe, internetcaffe, cybercafé, internetkafé"
+                },
                 "amenity/kindergarten": {
                     "name": "Förskoleområde",
                     "terms": "Förskola, dagis, daghem, lekskola, kindergarten, lekis, lekplats, "
@@ -1955,6 +1984,10 @@
                 "amenity/recycling": {
                     "name": "Återvinning",
                     "terms": "återvinning, återbruk, återvinningsstation, sopstation, burkar, flaskor, skrot, skräp"
+                },
+                "amenity/recycling_centre": {
+                    "name": "Återvinningscentral",
+                    "terms": "återvinning,återbruk,återvinningsstation,sopstation,burkar,flaskor,skrot,skräp,burkar,dumpa,glas,skrot,sopor"
                 },
                 "amenity/register_office": {
                     "name": "Registreringsbyrå"
@@ -2073,6 +2106,10 @@
                 "amenity/waste_disposal": {
                     "name": "Soptunna (hushålls- eller industrisopor)",
                     "terms": "Soptunna, avfallstunna, sopkärl, sopor, hushållssopor, industrisopor, avfall, avfallskärl, avfallskontainer"
+                },
+                "amenity/waste_transfer_station": {
+                    "name": "Avfallscentral",
+                    "terms": "Avfallscentral, dumpa, skräp, återvinning, skrot, skräp"
                 },
                 "amenity/water_point": {
                     "name": "Dricksvatten för campingfordon",
@@ -2297,6 +2334,10 @@
                 "building/warehouse": {
                     "name": "Lagerhus",
                     "terms": "Lagerhus, lager, upplag, magasin, depå, packhus, lada"
+                },
+                "camp_site/camp_pitch": {
+                    "name": "Tältplats/husvagnsplats",
+                    "terms": "Tältplats, husvagnsplats, camping, Campingplats, camping, husvagn, tält"
                 },
                 "craft": {
                     "name": "Hantverk",
@@ -2731,6 +2772,10 @@
                     "name": "Ej underhållen bruksväg",
                     "terms": "Bruksväg, traktorväg, skogsväg, åkerväg, virkesväg, timmerväg, traktor, skogsmaskin, åker, timmer, jordbruk, brandväg, brandgata"
                 },
+                "highway/traffic_mirror": {
+                    "name": "Trafikspegel",
+                    "terms": "Trafikspegel, vägspegel, utfartspegel"
+                },
                 "highway/traffic_signals": {
                     "name": "Trafiksignaler",
                     "terms": "Trafikljus, trafiksignal, stoppljus, signalljus, ljus, stoppljus, trafikljus"
@@ -2913,6 +2958,10 @@
                 "leisure/firepit": {
                     "name": "Eldstad",
                     "terms": "Eldstad, eldgrop, lägerplats, lägereld, brasa, grill, grillplats, grillning, eldning, campingbrasa"
+                },
+                "leisure/fitness_centre": {
+                    "name": "Gym / Fitnesscenter",
+                    "terms": "gym, Fitnesscenter, träning, styrketräning, konditionsträning, motionsinstitut, styrketräningslokal, träningslokal"
                 },
                 "leisure/fitness_centre/yoga": {
                     "name": "Yogastudio",
@@ -3976,10 +4025,6 @@
                 "tourism/attraction": {
                     "name": "Turistattraktion",
                     "terms": "Turistattraktion, sevärdhet, sevärdighet"
-                },
-                "tourism/camp_site": {
-                    "name": "Campingplats",
-                    "terms": "Campingplats, camping, husvagn, tält, campinganläggning"
                 },
                 "tourism/caravan_site": {
                     "name": "Ställplats",

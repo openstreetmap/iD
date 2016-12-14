@@ -223,6 +223,28 @@
             "type": "typeCombo",
             "label": "Type"
         },
+        "bath/open_air": {
+            "key": "bath:open_air",
+            "label": "Open Air",
+            "type": "check"
+        },
+        "bath/sand_bath": {
+            "key": "bath:sand_bath",
+            "label": "Sand Bath",
+            "type": "check"
+        },
+        "bath/type": {
+            "key": "bath:type",
+            "type": "combo",
+            "label": "Specialty",
+            "strings": {
+                "options": {
+                    "onsen": "Japanese Onsen",
+                    "foot_bath": "Foot Bath",
+                    "hot_spring": "Hot Spring"
+                }
+            }
+        },
         "beauty": {
             "key": "beauty",
             "type": "combo",
@@ -256,6 +278,11 @@
                 }
             }
         },
+        "board_type": {
+            "key": "board_type",
+            "type": "typeCombo",
+            "label": "Type"
+        },
         "boundary": {
             "key": "boundary",
             "type": "combo",
@@ -277,6 +304,29 @@
             "key": "building",
             "type": "combo",
             "label": "Building"
+        },
+        "camera/direction": {
+            "key": "camera:direction",
+            "type": "number",
+            "label": "Direction (Degrees Clockwise)",
+            "placeholder": "45, 90, 180, 270"
+        },
+        "camera/mount": {
+            "key": "camera:mount",
+            "type": "combo",
+            "label": "Camera Mount"
+        },
+        "camera/type": {
+            "key": "camera:type",
+            "type": "combo",
+            "label": "Camera Type",
+            "strings": {
+                "options": {
+                    "fixed": "Fixed",
+                    "panning": "Panning",
+                    "dome": "Dome"
+                }
+            }
         },
         "capacity": {
             "key": "capacity",
@@ -329,6 +379,13 @@
             "key": "construction",
             "type": "combo",
             "label": "Type"
+        },
+        "contact/webcam": {
+            "key": "contact:webcam",
+            "type": "url",
+            "icon": "website",
+            "label": "Webcam URL",
+            "placeholder": "http://example.com/"
         },
         "content": {
             "key": "content",
@@ -532,6 +589,11 @@
             "type": "check",
             "label": "Fee"
         },
+        "fence_type": {
+            "key": "fence_type",
+            "type": "combo",
+            "label": "Type"
+        },
         "fire_hydrant/type": {
             "key": "fire_hydrant:type",
             "type": "combo",
@@ -615,6 +677,11 @@
             "type": "check",
             "label": "Handrail"
         },
+        "height": {
+            "key": "height",
+            "type": "number",
+            "label": "Height (Meters)"
+        },
         "highway": {
             "key": "highway",
             "type": "typeCombo",
@@ -685,6 +752,11 @@
             "key": "internet_access:fee",
             "type": "check",
             "label": "Internet Access Fee"
+        },
+        "internet_access/ssid": {
+            "key": "internet_access:ssid",
+            "type": "text",
+            "label": "SSID (Network Name)"
         },
         "kerb": {
             "key": "kerb",
@@ -800,6 +872,23 @@
             "key": "man_made",
             "type": "typeCombo",
             "label": "Type"
+        },
+        "map_size": {
+            "key": "map_size",
+            "type": "typeCombo",
+            "label": "Coverage"
+        },
+        "map_type": {
+            "key": "map_type",
+            "type": "typeCombo",
+            "label": "Type"
+        },
+        "maxheight": {
+            "key": "maxheight",
+            "type": "combo",
+            "label": "Max Height",
+            "placeholder": "4, 4.5, 5, 14'0\", 14'6\", 15'0\"",
+            "snake_case": false
         },
         "maxspeed": {
             "key": "maxspeed",
@@ -982,6 +1071,11 @@
             "key": "operator",
             "type": "text",
             "label": "Operator"
+        },
+        "outdoor_seating": {
+            "key": "outdoor_seating",
+            "type": "combo",
+            "label": "Outdoor Seating"
         },
         "par": {
             "key": "par",
@@ -1415,6 +1509,28 @@
             "type": "combo",
             "label": "Surface"
         },
+        "surveillance": {
+            "key": "surveillance",
+            "type": "combo",
+            "label": "Surveillance Kind"
+        },
+        "surveillance/type": {
+            "key": "surveillance:type",
+            "type": "combo",
+            "label": "Surveillance Type",
+            "strings": {
+                "options": {
+                    "camera": "Camera",
+                    "guard": "Guard",
+                    "ALPR": "Automatic License Plate Reader"
+                }
+            }
+        },
+        "surveillance/zone": {
+            "key": "surveillance:zone",
+            "type": "combo",
+            "label": "Surveillance Zone"
+        },
         "tactile_paving": {
             "key": "tactile_paving",
             "type": "check",
@@ -1451,10 +1567,16 @@
             "type": "typeCombo",
             "label": "Type"
         },
-        "towertype": {
+        "tower/construction": {
+            "key": "tower:construction",
+            "type": "combo",
+            "label": "Construction",
+            "placeholder": "Guyed, Lattice, Concealed, ..."
+        },
+        "tower/type": {
             "key": "tower:type",
             "type": "combo",
-            "label": "Tower type"
+            "label": "Type"
         },
         "tracktype": {
             "key": "tracktype",
@@ -1524,6 +1646,11 @@
                     "area": "Over 20m (65ft)"
                 }
             }
+        },
+        "wall": {
+            "key": "wall",
+            "type": "combo",
+            "label": "Type"
         },
         "water_point": {
             "key": "water_point",

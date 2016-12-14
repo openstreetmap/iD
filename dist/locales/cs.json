@@ -227,6 +227,7 @@
             "localized_translation_name": "Název"
         },
         "zoom_in_edit": "Pro editaci přibližte mapu",
+        "login": "přihlášení",
         "logout": "odhlásit",
         "loading_auth": "Připojování na OpenStreetMap…",
         "report_a_bug": "Nahlásit chybu",
@@ -238,7 +239,8 @@
         "status": {
             "error": "Nepodařilo se připojit k API.",
             "offline": "API je offline. Zkuste prosím editaci později.",
-            "readonly": "API je ve stavu \"pouze pro čtení\", takže vaše úpravy nelze uložit. Zkuste to znovu později."
+            "readonly": "API je ve stavu \"pouze pro čtení\", takže vaše úpravy nelze uložit. Zkuste to znovu později.",
+            "rateLimit": "API omezuje anonymní připojení. Můžete to vyřešit tím, že se přihlásíte."
         },
         "commit": {
             "title": "Uložit změny",
@@ -294,6 +296,7 @@
         "inspector": {
             "no_documentation_combination": "K této kombinaci vlastností není k dispozici dokumentace",
             "no_documentation_key": "K tomuto klíči není k dispozici dokumentace",
+            "documentation_redirect": "Tato dokumentace byla přesměrována na novou stránku",
             "show_more": "Zobrazit víc",
             "view_on_osm": "Zobrazit na openstreetmap.org",
             "all_fields": "Všechna pole",
@@ -334,7 +337,6 @@
             "switch": "Přepnout zpět na toto pozadí",
             "custom": "Vlastní",
             "custom_button": "Editovat vlastní pozadí",
-            "custom_prompt": "Vložte šablonu adres dlaždic. Lze použít tokeny {z}, {x}, {y} pro schéma Z/X/Y a {u} pro hierarchické schéma quadtile.",
             "fix_misalignment": "Zarovnat podklad",
             "imagery_source_faq": "Odkud jsou tyto podklady?",
             "reset": "vrátit na začátek",
@@ -781,6 +783,9 @@
                 "barrier": {
                     "label": "Typ"
                 },
+                "beauty": {
+                    "label": "Druh obchodu"
+                },
                 "bench": {
                     "label": "Lavička"
                 },
@@ -798,6 +803,9 @@
                         "stemcells": "vzorek kmenových buněk",
                         "whole": "krev"
                     }
+                },
+                "board_type": {
+                    "label": "Typ"
                 },
                 "boundary": {
                     "label": "Typ"
@@ -1020,6 +1028,9 @@
                 "handrail": {
                     "label": "Zábradlí"
                 },
+                "height": {
+                    "label": "Výška (metry)"
+                },
                 "highway": {
                     "label": "Typ"
                 },
@@ -1137,6 +1148,12 @@
                     "label": "Umístění"
                 },
                 "man_made": {
+                    "label": "Typ"
+                },
+                "map_size": {
+                    "label": "Pokrytí"
+                },
+                "map_type": {
                     "label": "Typ"
                 },
                 "maxspeed": {
@@ -1342,6 +1359,13 @@
                 "recycling_accepts": {
                     "label": "Určení"
                 },
+                "recycling_type": {
+                    "label": "Druh recyklace",
+                    "options": {
+                        "centre": "Recyklační centrum",
+                        "container": "Kontejner"
+                    }
+                },
                 "ref": {
                     "label": "Označení"
                 },
@@ -1396,21 +1420,8 @@
                 "service": {
                     "label": "Typ"
                 },
-                "service/bicycle/chain_tool": {
-                    "label": "Nýtovač řetězu",
-                    "options": {
-                        "no": "Ne",
-                        "undefined": "Implicitně Ne",
-                        "yes": "Ano"
-                    }
-                },
-                "service/bicycle/pump": {
-                    "label": "Pumpička",
-                    "options": {
-                        "no": "Ne",
-                        "undefined": "Implicitně Ne",
-                        "yes": "Ano"
-                    }
+                "service/bicycle": {
+                    "label": "Služby"
                 },
                 "service_rail": {
                     "label": "Typ manipulační koleje",
@@ -1535,8 +1546,11 @@
                 "tourism": {
                     "label": "Typ"
                 },
-                "towertype": {
-                    "label": "Typ věže"
+                "tower/construction": {
+                    "label": "Konstrukce"
+                },
+                "tower/type": {
+                    "label": "Typ"
                 },
                 "tracktype": {
                     "label": "Klasifikace povrchu",
@@ -1548,6 +1562,9 @@
                         "grade5": "5: Nezpevněný písek, hlína, bahno, tráva"
                     },
                     "placeholder": "Pevný, převážně pevný, měkký povrch"
+                },
+                "traffic_calming": {
+                    "label": "Typ"
                 },
                 "traffic_signals": {
                     "label": "Typ"
@@ -1611,6 +1628,10 @@
                 "address": {
                     "name": "Adresa",
                     "terms": "adresa,PSČ,ulice"
+                },
+                "advertising/billboard": {
+                    "name": "Reklamní poutač",
+                    "terms": "reklama,billboard,plakát"
                 },
                 "aerialway": {
                     "name": "Lanovka/vlek"
@@ -1861,6 +1882,9 @@
                     "name": "Zmrzlina",
                     "terms": "zmrzlina,prodejna zmrzliny,zmrzlinářství,nanuk,mražený jogurt,gelato,sorbet"
                 },
+                "amenity/internet_cafe": {
+                    "name": "Internetová kavárna"
+                },
                 "amenity/kindergarten": {
                     "name": "Prostor školky/jeslí",
                     "terms": "jesle,školka,kindergarten,předškolní,mateřská školka"
@@ -1952,6 +1976,9 @@
                 "amenity/recycling": {
                     "name": "Recyklační místo",
                     "terms": "recyklace,kontejner,recyklační centrum,sběr,sběrna,sběrné suroviny,sběrna odpadu,sběr odpadu,odpad,odpadky,popelnice"
+                },
+                "amenity/recycling_centre": {
+                    "name": "Recyklační centrum"
                 },
                 "amenity/register_office": {
                     "name": "Matriční úřad"
@@ -2070,6 +2097,9 @@
                 "amenity/waste_disposal": {
                     "name": "Kontejner na směsný odpad",
                     "terms": "kontejner,popelnice,odpad,odpadky"
+                },
+                "amenity/waste_transfer_station": {
+                    "name": "Překládací stanice odpadu"
                 },
                 "amenity/water_point": {
                     "name": "Pitná voda pro karavany",
@@ -2294,6 +2324,9 @@
                 "building/warehouse": {
                     "name": "Skladiště",
                     "terms": "skladiště,sklad,překladiště,hala,silo,repozitář"
+                },
+                "camp_site/camp_pitch": {
+                    "name": "Stanoviště v kempu"
                 },
                 "craft": {
                     "name": "Řemeslník",
@@ -2553,6 +2586,14 @@
                     "name": "Dráha do jamky",
                     "terms": "jamka,dráha od odpaliště,dráha do jamkoviště,dráha"
                 },
+                "golf/lateral_water_hazard_area": {
+                    "name": "Podélná vodní překážka",
+                    "terms": "voda,podélná voda,podélná překážka,červená voda"
+                },
+                "golf/lateral_water_hazard_line": {
+                    "name": "Podélná vodní překážka",
+                    "terms": "voda,podélná voda,podélná překážka,červená voda"
+                },
                 "golf/rough": {
                     "name": "Rough",
                     "terms": "rough,vysoká tráva"
@@ -2560,6 +2601,14 @@
                 "golf/tee": {
                     "name": "Odpaliště",
                     "terms": "odpaliště,tee,týčko,tee box"
+                },
+                "golf/water_hazard_area": {
+                    "name": "Vodní překážka",
+                    "terms": "voda,příčná voda,příčná překážka,žlutá voda"
+                },
+                "golf/water_hazard_line": {
+                    "name": "Vodní překážka",
+                    "terms": "voda,příčná voda,příčná překážka,žlutá voda"
                 },
                 "healthcare/blood_donation": {
                     "name": "Odběr krve",
@@ -2727,6 +2776,10 @@
                 "highway/turning_circle": {
                     "name": "Obratiště",
                     "terms": "místo k otočení"
+                },
+                "highway/turning_loop": {
+                    "name": "Obratiště s ostrůvkem",
+                    "terms": "obratiště,smyčka,ostrůvek"
                 },
                 "highway/unclassified": {
                     "name": "Silnice bez klasifikace",
@@ -3436,6 +3489,9 @@
                     "name": "Opuštěná železnice",
                     "terms": "opuštěná železnice,opuštěná trať,nepoužívaná"
                 },
+                "railway/crossing": {
+                    "name": "Železniční přejezd (přes cestu)"
+                },
                 "railway/disused": {
                     "name": "Nepoužívaná železnice",
                     "terms": "nepoužívaná železnice, nepoužívaná železniční dráha"
@@ -3447,6 +3503,9 @@
                 "railway/halt": {
                     "name": "Železniční zastávka",
                     "terms": "železniční zastávka, železniční stanice, vlaková zastávka, vlaková stanice, nádraží, železniční nástupiště, vlakové nástupiště"
+                },
+                "railway/level_crossing": {
+                    "name": "Železniční přejezd (přes silnici)"
                 },
                 "railway/monorail": {
                     "name": "Jednokolejka",
@@ -3530,6 +3589,12 @@
                 "shop/beauty": {
                     "name": "Kosmetický salón",
                     "terms": "kosmetický salón,kadeřnictví,vizážista,kosmetika,salón krásy,nehty,kosmetika,depilace"
+                },
+                "shop/beauty/nails": {
+                    "name": "Nehtový salón"
+                },
+                "shop/beauty/tanning": {
+                    "name": "Solarium"
                 },
                 "shop/bed": {
                     "name": "Prodejna postelí",
@@ -3961,10 +4026,6 @@
                     "name": "Pamětihodnost",
                     "terms": "pamětihodnost,turistická atrakce,turistická zajímavost,turistické lákadlo,atrakce,zajímavost,lákadlo"
                 },
-                "tourism/camp_site": {
-                    "name": "Kemp",
-                    "terms": "kemp,camp,camping,kamp,kamping,stan,přívěs,karavan,tábořiště,tábor"
-                },
                 "tourism/caravan_site": {
                     "name": "Místo pro karavany",
                     "terms": "místo pro karavany,kemp,camp,camping,karavan"
@@ -3992,6 +4053,9 @@
                 "tourism/information": {
                     "name": "Informace",
                     "terms": "informace,údaje,údaj,cedule,tabule"
+                },
+                "tourism/information/guidepost": {
+                    "name": "Rozcestník"
                 },
                 "tourism/motel": {
                     "name": "Motel",

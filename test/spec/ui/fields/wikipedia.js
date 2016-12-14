@@ -11,10 +11,10 @@ describe('iD.uiFieldWikipedia', function() {
     beforeEach(function() {
         entity = iD.Node({id: 'n12345'});
         selectedId = entity.id;
-        context = iD.Context(window);
+        context = iD.Context();
         context.history().merge([entity]);
         selection = d3.select(document.createElement('div'));
-        field = context.presets(iD.dataPresets).presets().field('wikipedia');
+        field = context.presets().field('wikipedia');
         window.JSONP_DELAY = 0;
         window.JSONP_FIX = {
             entities: {
@@ -114,7 +114,7 @@ describe('iD.uiFieldWikipedia', function() {
             // skip delayed wikidata for 'Skip'                                                              // 'Skip' wikidata +20ms
             expect(spy.getCall(4)).to.have.been.calledWith({ wikipedia: 'de:Title', wikidata: 'Q216353' });  // 'Title' wikidata +40ms
             done();
-        }, 50);
+        }, 100);
     });
 
     it('does not set delayed wikidata tag if selected entity has changed', function(done) {
@@ -140,7 +140,7 @@ describe('iD.uiFieldWikipedia', function() {
             expect(spy.getCall(1)).to.have.been.calledWith({ wikipedia: 'de:Title' });                       // 'Title' on blur
             // wikidata tag not changed because another entity is now selected
             done();
-        }, 50);
+        }, 100);
     });
 
 });

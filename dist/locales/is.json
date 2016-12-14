@@ -746,9 +746,6 @@
                 "tourism": {
                     "label": "Tegund"
                 },
-                "towertype": {
-                    "label": "Turntegund"
-                },
                 "trail_visibility": {
                     "label": "Sýnileiki"
                 },
@@ -1766,9 +1763,6 @@
                 },
                 "tourism/attraction": {
                     "name": "Ferðamannagildra"
-                },
-                "tourism/camp_site": {
-                    "name": "Tjaldsvæði"
                 },
                 "tourism/caravan_site": {
                     "name": "Hjólhýsagarður"

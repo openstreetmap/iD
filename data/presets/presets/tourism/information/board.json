@@ -1,0 +1,15 @@
+{
+    "fields": [
+        "operator",
+        "board_type"
+    ],
+    "geometry": [
+        "point",
+        "vertex"
+    ],
+    "tags": {
+        "tourism": "information",
+        "information": "board"
+    },
+    "name": "Information Board"
+}

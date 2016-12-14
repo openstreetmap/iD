@@ -4,9 +4,7 @@ describe.skip('iD.modeAddPoint', function() {
     beforeEach(function() {
         var container = d3.select(document.createElement('div'));
 
-        context = iD.Context(window)
-            .presets(iD.dataPresets)
-            .imagery([])
+        context = iD.Context()
             .container(container);
 
         context.loadTiles = function () {};

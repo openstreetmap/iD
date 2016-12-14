@@ -28,6 +28,8 @@ export function uiScale(context) {
             if (dist >= val) {
                 scale.dist = Math.floor(dist / val) * val;
                 break;
+            } else {
+                scale.dist = +dist.toFixed(2);
             }
         }
 

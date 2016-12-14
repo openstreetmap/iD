@@ -5,7 +5,9 @@
         "maxspeed",
         "structure",
         "access",
+        "lanes",
         "surface",
+        "maxheight",
         "cycleway"
     ],
     "geometry": [

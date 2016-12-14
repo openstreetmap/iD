@@ -334,7 +334,6 @@
             "switch": "Prepnúť späť na toto pozadie",
             "custom": "Voliteľné",
             "custom_button": "Upraviť volitelné pozadie",
-            "custom_prompt": "Zadajte URL pre vzor mapového podkladu. Platné znaky sú {z}, {x}, {y} pre Z/X/Y schému a {u} pre quadtile schému.",
             "fix_misalignment": "Upraviť posun obrázkov",
             "imagery_source_faq": "Odkiaľ pochádzajú tieto obrázky?",
             "reset": "vynulovať",
@@ -1282,22 +1281,6 @@
                 "service": {
                     "label": "Typ"
                 },
-                "service/bicycle/chain_tool": {
-                    "label": "Oprava reťaze",
-                    "options": {
-                        "no": "Nie",
-                        "undefined": "Pravdepodobne nie",
-                        "yes": "Áno"
-                    }
-                },
-                "service/bicycle/pump": {
-                    "label": "Vzduchová pumpa",
-                    "options": {
-                        "no": "Nie",
-                        "undefined": "Pravdepodobne nie",
-                        "yes": "Áno"
-                    }
-                },
                 "service_rail": {
                     "label": "Typ koľaje",
                     "options": {
@@ -1417,9 +1400,6 @@
                 },
                 "tourism": {
                     "label": "Typ"
-                },
-                "towertype": {
-                    "label": "Typ veže"
                 },
                 "tracktype": {
                     "label": "Typ lesnej cesty",
@@ -3750,10 +3730,6 @@
                 "tourism/attraction": {
                     "name": "Turistická atrakcia",
                     "terms": "turisticka atrakcia,atrakcia,turistické miesto,turisticke miesto"
-                },
-                "tourism/camp_site": {
-                    "name": "Kemping",
-                    "terms": "táborisko,taborisko,camping,kemping,kempovisko"
                 },
                 "tourism/caravan_site": {
                     "name": "Parkovisko pre karavany",

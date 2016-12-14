@@ -227,6 +227,7 @@
             "localized_translation_name": "Ime"
         },
         "zoom_in_edit": "Povećaj prikaz za uređivanje",
+        "login": "prijava",
         "logout": "odjava",
         "loading_auth": "Spajanje na OpenStreetMap...",
         "report_a_bug": "Prijavi grešku",
@@ -238,7 +239,8 @@
         "status": {
             "error": "Onemogućeno spajanje na API.",
             "offline": "API je izvan mreže. Molim pokušaj uređivanje kasnije.",
-            "readonly": "API je \"samo za čitanje\". Moraš pričekati za spremanje svojih promjena."
+            "readonly": "API je \"samo za čitanje\". Moraš pričekati za spremanje svojih promjena.",
+            "rateLimit": "API ograničava anonimne konekcije. Možeš se prijaviti da bi zaobišao ovaj problem."
         },
         "commit": {
             "title": "Spremi promjene",
@@ -294,6 +296,7 @@
         "inspector": {
             "no_documentation_combination": "Ne postoji dokumentacija za ovu kombinaciju oznaka",
             "no_documentation_key": "Ne postoji dokumentacija za ovaj ključ.",
+            "documentation_redirect": "Ova dokumentacija je preusmjerena na novu stranicu",
             "show_more": "Prikaži više",
             "view_on_osm": "Pogledaj na openstreetmap.org",
             "all_fields": "Sva polja",
@@ -334,7 +337,7 @@
             "switch": "Vrati nazad na ovu pozadinu",
             "custom": "Podesivo",
             "custom_button": "Uredi prilagođenu pozadinu",
-            "custom_prompt": "Unesi URL predložak za popločavanje. Ispravni znakovi su {z}, {x}, {y} za Z/X/Y shemu i {u} za quadtile shemu.",
+            "custom_prompt": "Unesi URL predložak sličica karte. Ispravne oznake su {zoom}, {x}, {y} za Z/X/Y shemu i {u} za quadtile shemu.",
             "fix_misalignment": "Popravi odstupanje snimaka",
             "imagery_source_faq": "Koji je izvornik snimaka?",
             "reset": "resetiraj",
@@ -1298,22 +1301,6 @@
                 "service": {
                     "label": "Vrsta"
                 },
-                "service/bicycle/chain_tool": {
-                    "label": "Alat za lanac",
-                    "options": {
-                        "no": "Ne",
-                        "undefined": "Pretpostavlja se da je Ne",
-                        "yes": "Da"
-                    }
-                },
-                "service/bicycle/pump": {
-                    "label": "Zračna pumpa",
-                    "options": {
-                        "no": "Ne",
-                        "undefined": "Pretpostavlja se da je Ne",
-                        "yes": "Da"
-                    }
-                },
                 "service_rail": {
                     "label": "Vrsta usluge",
                     "options": {
@@ -1420,9 +1407,6 @@
                 },
                 "tourism": {
                     "label": "Vrsta"
-                },
-                "towertype": {
-                    "label": "Vrsta tornja"
                 },
                 "tracktype": {
                     "label": "Vrsta poljskog ili šumskog puta",
@@ -3309,10 +3293,6 @@
                 "tourism/attraction": {
                     "name": "Turistička atrakcija",
                     "terms": "turistička atrakcija,turistička znamenitost,atrakcija,znamenitost,turizam,turistička"
-                },
-                "tourism/camp_site": {
-                    "name": "Kamp",
-                    "terms": "autokamp,kamp,park za kampiranje"
                 },
                 "tourism/caravan_site": {
                     "name": "Parkiralište za kamp kućice",

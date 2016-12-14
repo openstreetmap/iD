@@ -977,18 +977,6 @@
                 "service": {
                     "label": "Врста"
                 },
-                "service/bicycle/chain_tool": {
-                    "options": {
-                        "no": "Не",
-                        "yes": "Да"
-                    }
-                },
-                "service/bicycle/pump": {
-                    "options": {
-                        "no": "Не",
-                        "yes": "Да"
-                    }
-                },
                 "service_rail": {
                     "label": "Врста сервиса"
                 },
@@ -1073,9 +1061,6 @@
                 },
                 "tourism": {
                     "label": "Врста"
-                },
-                "towertype": {
-                    "label": "Врста торња"
                 },
                 "tracktype": {
                     "label": "Врста стазе"
@@ -2105,6 +2090,9 @@
                 "place/city": {
                     "name": "Град"
                 },
+                "place/farm": {
+                    "name": "Фарма"
+                },
                 "place/hamlet": {
                     "name": "Засеок"
                 },
@@ -2416,9 +2404,6 @@
                 },
                 "tourism/attraction": {
                     "name": "Туристичка атракција"
-                },
-                "tourism/camp_site": {
-                    "name": "Камповалиште"
                 },
                 "tourism/caravan_site": {
                     "name": "Камп-парк"

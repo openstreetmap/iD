@@ -227,6 +227,7 @@
             "localized_translation_name": "Nome"
         },
         "zoom_in_edit": "Aproxime para Editar",
+        "login": "login",
         "logout": "Terminar sessão",
         "loading_auth": "A fazer a ligação ao OpenStreetMap...",
         "report_a_bug": "Reportar um bug.",
@@ -334,7 +335,6 @@
             "switch": "Mudar para este fundo",
             "custom": "Personalizado",
             "custom_button": "Editar fundo personalizando",
-            "custom_prompt": "Introduzir um URL válido. Tokens válidos são {z}, {x}, {y} para esquemas Z/X/Y e {u} para esquemas QuadTile.",
             "fix_misalignment": "Corrigir o alinhamento da imagem",
             "imagery_source_faq": "Qual é a origem desta imagem?",
             "reset": "reiniciar",
@@ -781,6 +781,9 @@
                 "barrier": {
                     "label": "Tipo"
                 },
+                "beauty": {
+                    "label": "Tipo de loja"
+                },
                 "bench": {
                     "label": "Banco de Sentar"
                 },
@@ -798,6 +801,9 @@
                         "stemcells": "amostras de células estaminais",
                         "whole": "sangue todo"
                     }
+                },
+                "board_type": {
+                    "label": "Tipo"
                 },
                 "boundary": {
                     "label": "Tipo"
@@ -1020,6 +1026,9 @@
                 "handrail": {
                     "label": "Corrimão"
                 },
+                "height": {
+                    "label": "Altura (metros)"
+                },
                 "highway": {
                     "label": "Tipo"
                 },
@@ -1137,6 +1146,12 @@
                     "label": "Localização"
                 },
                 "man_made": {
+                    "label": "Tipo"
+                },
+                "map_size": {
+                    "label": "CObertura"
+                },
+                "map_type": {
                     "label": "Tipo"
                 },
                 "maxspeed": {
@@ -1342,6 +1357,13 @@
                 "recycling_accepts": {
                     "label": "Aceita"
                 },
+                "recycling_type": {
+                    "label": "Tipo de Reciclagem",
+                    "options": {
+                        "centre": "Centro de Reciclagem",
+                        "container": "Contentor"
+                    }
+                },
                 "ref": {
                     "label": "Referência"
                 },
@@ -1396,21 +1418,8 @@
                 "service": {
                     "label": "Tipo"
                 },
-                "service/bicycle/chain_tool": {
-                    "label": "Ferramenta para Correia",
-                    "options": {
-                        "no": "Não",
-                        "undefined": "Assumido que seja \"Não\"",
-                        "yes": "Sim"
-                    }
-                },
-                "service/bicycle/pump": {
-                    "label": "Bomba de encher pneus",
-                    "options": {
-                        "no": "Não",
-                        "undefined": "Assumido que seja \"Não\"",
-                        "yes": "Sim"
-                    }
+                "service/bicycle": {
+                    "label": "Serviços"
                 },
                 "service_rail": {
                     "label": "Tipo de serviço",
@@ -1535,8 +1544,12 @@
                 "tourism": {
                     "label": "Tipo"
                 },
-                "towertype": {
-                    "label": "Tipo de torre"
+                "tower/construction": {
+                    "label": "Tipo de estrutura",
+                    "placeholder": "Com arames, treliça, parabólica..."
+                },
+                "tower/type": {
+                    "label": "Tipo"
                 },
                 "tracktype": {
                     "label": "Tipo de superfície ",
@@ -1548,6 +1561,9 @@
                         "grade5": "5 - Macia: Terra, erva ou areia"
                     },
                     "placeholder": "Sólido, intermédio, macio..."
+                },
+                "traffic_calming": {
+                    "label": "Tipo"
                 },
                 "traffic_signals": {
                     "label": "Tipo"
@@ -1611,6 +1627,10 @@
                 "address": {
                     "name": "Morada",
                     "terms": "Endereço, morada"
+                },
+                "advertising/billboard": {
+                    "name": "Outdoor",
+                    "terms": "Billboard, publicidade"
                 },
                 "aerialway": {
                     "name": "Transporte aéreo por cabo"
@@ -1861,6 +1881,10 @@
                     "name": "Geladaria",
                     "terms": "Ice Cream Shop, Gelataria, Sorveteira"
                 },
+                "amenity/internet_cafe": {
+                    "name": "Internet Cafe",
+                    "terms": "Cyber café"
+                },
                 "amenity/kindergarten": {
                     "name": "Jardim Infantil / Infantário",
                     "terms": "Preschool/Kindergarten Grounds, Pré-Escola, Pré Escola"
@@ -1952,6 +1976,10 @@
                 "amenity/recycling": {
                     "name": "Reciclagem",
                     "terms": "Recycling, Reutilizar, Reciclar, Ecoponto, Vidrão, Papelão, Embalão, Pilhão, Oleão"
+                },
+                "amenity/recycling_centre": {
+                    "name": "Centro de Reciclagem",
+                    "terms": "Centro de Reciclagem, Ecocentro, Eco-centro, Eco centro"
                 },
                 "amenity/register_office": {
                     "name": "Conservatória"
@@ -3549,8 +3577,16 @@
                     "terms": "Bathroom Furnishing Store, Casa de Banho, Casas de banho, WC, W.C."
                 },
                 "shop/beauty": {
-                    "name": "Loja de produtos de beleza",
-                    "terms": "Loja de Beleza"
+                    "name": "Centro de estética",
+                    "terms": "Beauty Shop, Loja de Beleza, Loja de Produtos de Beleza"
+                },
+                "shop/beauty/nails": {
+                    "name": "Estetica de unhas",
+                    "terms": "Nail Salon"
+                },
+                "shop/beauty/tanning": {
+                    "name": "Solário",
+                    "terms": "Tanning Salon, Bronzeamento"
                 },
                 "shop/bed": {
                     "name": "Loja de camas / colchões",
@@ -3986,10 +4022,6 @@
                     "name": "Atração turística",
                     "terms": "Atração Turística"
                 },
-                "tourism/camp_site": {
-                    "name": "Parque de campismo",
-                    "terms": "Acampamento, Campismo"
-                },
                 "tourism/caravan_site": {
                     "name": "Parque de Caravanas",
                     "terms": "RV Park, caravanas, caravana"
@@ -4017,6 +4049,14 @@
                 "tourism/information": {
                     "name": "Informação turística",
                     "terms": "Informação, Turismo, guia"
+                },
+                "tourism/information/map": {
+                    "name": "Mapa",
+                    "terms": "Mapa"
+                },
+                "tourism/information/office": {
+                    "name": "Posto de Turismo",
+                    "terms": "Posto de Turismo, Posto Turístico, Posto de Informação, Posto de Informações"
                 },
                 "tourism/motel": {
                     "name": "Motel",

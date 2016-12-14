@@ -334,7 +334,6 @@
             "switch": "轉返去爾個背景",
             "custom": "自訂",
             "custom_button": "改自訂背景",
-            "custom_prompt": "入個格網址模。有效字符係{z}、{x}、{y}對應Z/X/Y制及{u}對應四分格制。",
             "fix_misalignment": "校正背圖對位誤差",
             "imagery_source_faq": "相邊度來？",
             "reset": "重設",
@@ -1396,22 +1395,6 @@
                 "service": {
                     "label": "類"
                 },
-                "service/bicycle/chain_tool": {
-                    "label": "鏈架生",
-                    "options": {
-                        "no": "無",
-                        "undefined": "當無",
-                        "yes": "有"
-                    }
-                },
-                "service/bicycle/pump": {
-                    "label": "氣泵",
-                    "options": {
-                        "no": "無",
-                        "undefined": "當無",
-                        "yes": "有"
-                    }
-                },
                 "service_rail": {
                     "label": "服務類",
                     "options": {
@@ -1534,9 +1517,6 @@
                 },
                 "tourism": {
                     "label": "類"
-                },
-                "towertype": {
-                    "label": "塔類"
                 },
                 "tracktype": {
                     "label": "道類",
@@ -2889,10 +2869,6 @@
                 "tourism/attraction": {
                     "name": "旅行名勝",
                     "terms": "Tourist Attraction,旅行名勝,旅遊名勝,觀光點"
-                },
-                "tourism/camp_site": {
-                    "name": "營地",
-                    "terms": "Camp Site,營地,露營區"
                 },
                 "tourism/caravan_site": {
                     "name": "露營車營地",

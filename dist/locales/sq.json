@@ -304,7 +304,6 @@
             "none": "Asnjë",
             "custom": "E personalizuar",
             "custom_button": "Redakto sfondin të personalizuar",
-            "custom_prompt": "Shtypni një shabllon URL pllakëve. Argumentet vlefshme janë {z}, {x}, {y} për skemë Z/X/Y dhe {u} për skemë quadtile.",
             "reset": "Rikthe vlerat",
             "minimap": {
                 "description": "Minihartë",

@@ -2,7 +2,9 @@
     "icon": "college",
     "fields": [
         "operator",
-        "address"
+        "address",
+        "internet_access",
+        "internet_access/ssid"
     ],
     "geometry": [
         "point",
