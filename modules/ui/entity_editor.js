@@ -13,6 +13,7 @@ import { uiTagReference } from './tag_reference';
 import { uiPreset } from './preset';
 import { utilRebind } from '../util';
 
+import { operationDelete } from '../operations/index';
 
 export function uiEntityEditor(context) {
     var dispatch = d3.dispatch('choose'),
@@ -22,7 +23,8 @@ export function uiEntityEditor(context) {
         base,
         id,
         activePreset,
-        reference;
+        reference,
+        deleter;
 
     var presetEditor = uiPreset(context)
         .on('change', changeTags);
@@ -74,6 +76,27 @@ export function uiEntityEditor(context) {
         enter = body.enter()
             .append('div')
             .attr('class', 'inspector-body');
+        
+        // import one-by-one approval
+        // TODO: add icons, better button UI
+        var importApprove = enter
+            .append('div')
+            .attr('class', 'inspector-border import-approve');
+        importApprove.append('button')
+            .text('Approve')
+            .on('click', function() {
+                entity.approvedForEdit = true;
+            });
+        
+        this.deleter = entity.id;
+        console.log('setting deletion to ' + this.deleter);
+        
+        importApprove.append('button')
+            .text('Delete')
+            .on('click', (function() {
+                operationDelete([this.deleter], context)();
+            }).bind(this));
+        d3.selectAll('.import-approve').classed('hide', entity.approvedForEdit);
 
         enter
             .append('div')
@@ -89,7 +112,7 @@ export function uiEntityEditor(context) {
         enter
             .append('div')
             .attr('class', 'inspector-border inspector-preset');
-
+        
         enter
             .append('div')
             .attr('class', 'inspector-border raw-tag-editor inspector-inner');

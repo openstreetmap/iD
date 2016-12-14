@@ -1559,6 +1559,26 @@ text.esri {
     margin-top: 10px;
 }
 
+/* more importer stuff */
+
+.import-approve {
+    text-align: center;
+}
+
+.import-approve button {
+    margin: 6px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.import-approve button:first-child {
+    background-color: green;
+}
+
+.import-approve button:last-child {
+    background-color: red;
+}
+
 /* GPX Paths */
 .layer-gpx {
     pointer-events: none;

@@ -319,6 +319,7 @@ export function uiMapData(context) {
                 .on('click', function() {
                     context.flush();
                     window.knownObjectIds = {};
+                    window.importedEntities = [];
                     setTimeout(function() {
                       refreshEsriLayer(context.storage('esriLayerUrl'), esriDownloadAll);
                     }, 400);

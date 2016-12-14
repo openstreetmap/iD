@@ -16,6 +16,9 @@ window.layerImports = {};
 // prevent re-downloading and re-adding the same feature
 window.knownObjectIds = {};
 
+// keeping track of added OSM entities
+window.importedEntities = [];
+
 export function svgEsri(projection, context, dispatch) {
     var showLabels = true,
         detected = utilDetect(),
@@ -87,11 +90,13 @@ export function svgEsri(projection, context, dispatch) {
                     props = makeEntity(pts[p]);
                     props.tags = {};
                     var node = new osmNode(props);
+                    node.approvedForEdit = false;
                     context.perform(
                         actionAddEntity(node),
                         'adding node inside a way'
                     );
                     nodes.push(node.id);
+                    window.importedEntities.push(node);
                 }
                 return nodes;
             }
@@ -100,10 +105,12 @@ export function svgEsri(projection, context, dispatch) {
                 nodes = makeMiniNodes(coords);
                 props = makeEntity(nodes);
                 way = new osmWay(props, nodes);
+                way.approvedForEdit = false;
                 context.perform(
                     actionAddEntity(way),
                     'adding way'
                 );
+                window.importedEntities.push(way);
                 return way;
             }
             
@@ -117,14 +124,8 @@ export function svgEsri(projection, context, dispatch) {
                     // generate each ring                    
                     var componentRings = [];
                     for (var ring = 0; ring < coords.length; ring++) {
-                        nodes = makeMiniNodes(coords[ring]);
-                        props = makeEntity(nodes);
                         // props.tags = {};
-                        way = new osmWay(props);
-                        context.perform(
-                            actionAddEntity(way),
-                            'ring of a Polygon/MultiPolygon relation'
-                        );
+                        way = mapLine(d, coords[ring]);
                         componentRings.push({
                             id: way.id,
                             role: (ring === 0 ? 'outer' : 'inner')
@@ -138,19 +139,16 @@ export function svgEsri(projection, context, dispatch) {
                         },
                         members: componentRings
                     });
+                    rel.approvedForEdit = false;
                     context.perform(
                         actionAddEntity(rel),
                         'adding multiple-ring Polygon'
                     );
+                    window.importedEntities.push(rel);
                     return rel;
                 } else {
-                    nodes = makeMiniNodes(coords[0]);
-                    props = makeEntity(nodes);
-                    way = new osmWay(props);
-                    context.perform(
-                        actionAddEntity(way),
-                        'adding single-ring Polygon'
-                    );
+                    // polygon with one single ring
+                    way = mapLine(d, coords[0]);
                     return way;
                 }
             }
@@ -159,10 +157,12 @@ export function svgEsri(projection, context, dispatch) {
             if (d.geometry.type === 'Point') {
                 props = makeEntity(d.geometry.coordinates);
                 var node = new osmNode(props);
+                node.approvedForEdit = false;
                 context.perform(
                     actionAddEntity(node),
                     'adding point'
                 );
+                window.importedEntities.push(node);
                   
             } else if (d.geometry.type === 'LineString') {
                 mapLine(d, d.geometry.coordinates);
@@ -183,10 +183,12 @@ export function svgEsri(projection, context, dispatch) {
                     },
                     members: lines
                 });
+                rel.approvedForEdit = false;
                 context.perform(
                     actionAddEntity(rel),
                     'adding multiple Lines as a Relation'
                 );
+                window.importedEntities.push(rel);
                 
                     
             } else if (d.geometry.type === 'Polygon') {
@@ -208,10 +210,12 @@ export function svgEsri(projection, context, dispatch) {
                     },
                     members: polygons
                 });
+                rel.approvedForEdit = false;
                 context.perform(
                     actionAddEntity(rel),
                     'adding multiple Polygons as a Relation'
                 );
+                window.importedEntities.push(rel);
 
             } else {
                 console.log('Did not recognize Geometry Type: ' + d.geometry.type);
@@ -227,6 +231,12 @@ export function svgEsri(projection, context, dispatch) {
         if (r >= keys.length) {
             return;
         }
+        
+        // don't allow user to change how OBJECTID works
+        if (keys[r] === 'OBJECTID') {
+            return doKey(r + 1, keys, samplefeature, esriTable);
+        }
+        
         var row = esriTable.append('tr');
           //.attr('class', 'tag-row');
         row.append('td').text(keys[r]); // .attr('class', 'key-wrap');
@@ -366,7 +376,8 @@ export function svgEsri(projection, context, dispatch) {
                 drawEsri.geojson(jsondl);
             }
         });
-        
+
+/*        
         // whenever map is moved, start 0.7s timer to re-download data from ArcGIS service
         // unless we are downloading everything we can anyway
         if (!downloadMax) {
@@ -379,7 +390,7 @@ export function svgEsri(projection, context, dispatch) {
                 }.bind(this), 700);
             }.bind(this));
         }
-        
+*/        
         return this;
     };
 
