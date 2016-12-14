@@ -96,7 +96,6 @@ export function svgEsri(projection, context, dispatch) {
                         'adding node inside a way'
                     );
                     nodes.push(node.id);
-                    window.importedEntities.push(node);
                 }
                 return nodes;
             }
@@ -110,7 +109,6 @@ export function svgEsri(projection, context, dispatch) {
                     actionAddEntity(way),
                     'adding way'
                 );
-                window.importedEntities.push(way);
                 return way;
             }
             
@@ -144,7 +142,6 @@ export function svgEsri(projection, context, dispatch) {
                         actionAddEntity(rel),
                         'adding multiple-ring Polygon'
                     );
-                    window.importedEntities.push(rel);
                     return rel;
                 } else {
                     // polygon with one single ring
@@ -165,22 +162,18 @@ export function svgEsri(projection, context, dispatch) {
                 window.importedEntities.push(node);
                   
             } else if (d.geometry.type === 'LineString') {
-                mapLine(d, d.geometry.coordinates);
+                window.importedEntities.push(mapLine(d, d.geometry.coordinates));
                     
             } else if (d.geometry.type === 'MultiLineString') {
                 var lines = [];
-                console.log('beginning lines');
                 for (ln = 0; ln < d.geometry.coordinates.length; ln++) {
                     lines.push({
                         id: mapLine(d, d.geometry.coordinates[ln]).id,
                         role: '' // todo roles: this empty string assumes the lines make up a route
                     });
-                    console.log(ln);
                 }
                 
                 // generate a relation
-                console.log('finished lines');
-                /*
                 rel = new osmRelation({
                     tags: {
                         type: 'route' // todo multilinestring and multipolygon types
@@ -193,11 +186,10 @@ export function svgEsri(projection, context, dispatch) {
                     'adding multiple Lines as a Relation'
                 );
                 window.importedEntities.push(rel);
-                */
                 
                     
             } else if (d.geometry.type === 'Polygon') {
-                mapPolygon(d, d.geometry.coordinates);
+                window.importedEntities.push(mapPolygon(d, d.geometry.coordinates));
 
             } else if (d.geometry.type === 'MultiPolygon') {
                 var polygons = [];
