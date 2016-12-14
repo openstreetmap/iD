@@ -2,10 +2,10 @@ import { t } from '../util/locale';
 import { actionReflect } from '../actions/index';
 
 export function operationReflect(selectedIDs, context) {
-    const entityId = selectedIDs[0];
-    const entity = context.entity(entityId);
-    const extent = entity.extent(context.graph());
-    const action = actionReflect(entityId);
+    var entityId = selectedIDs[0];
+    var entity = context.entity(entityId);
+    var extent = entity.extent(context.graph());
+    var action = actionReflect(entityId, context.projection);
 
     var operation = function() {
         context.perform(
