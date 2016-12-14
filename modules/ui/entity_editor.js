@@ -23,8 +23,7 @@ export function uiEntityEditor(context) {
         base,
         id,
         activePreset,
-        reference,
-        deleter;
+        reference;
 
     var presetEditor = uiPreset(context)
         .on('change', changeTags);
@@ -82,19 +81,20 @@ export function uiEntityEditor(context) {
         var importApprove = enter
             .append('div')
             .attr('class', 'inspector-border import-approve');
+
+        this.focusEntity = entity;
         importApprove.append('button')
             .text('Approve')
             .on('click', function() {
-                entity.approvedForEdit = true;
-            });
-        
-        this.deleter = entity.id;
-        console.log('setting deletion to ' + this.deleter);
+                this.focusEntity.approvedForEdit = true;
+                // apply a CSS class to any point / line / polygon approved
+                d3.selectAll('.layer-osm .' + this.focusEntity.id).classed('import-approved', true);
+            }.bind(this));
         
         importApprove.append('button')
             .text('Delete')
             .on('click', (function() {
-                operationDelete([this.deleter], context)();
+                operationDelete([this.focusEntity.id], context)();
             }).bind(this));
         d3.selectAll('.import-approve').classed('hide', entity.approvedForEdit);
 

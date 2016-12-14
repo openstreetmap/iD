@@ -28,11 +28,21 @@ import {
 } from '../util';
 
 
+import { operationDelete } from '../operations/index';
 
 export function modeSave(context) {
     var mode = {
         id: 'save'
     };
+    
+    // when clicking the save button, filter out entities which were not approved manually
+    var deletions = [];
+    _.map(window.importedEntities, function(entity) {
+        if (!entity.approvedForEdit) {
+            deletions.push(entity.id); 
+        }
+    });
+    operationDelete(deletions, context)();
 
     var commit = uiCommit(context)
             .on('cancel', cancel)

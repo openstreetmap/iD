@@ -1579,6 +1579,18 @@ text.esri {
     background-color: red;
 }
 
+g.point.import-approved .stroke {
+    fill: green;
+}
+
+path.import-approved.way {
+    stroke: green;
+}
+
+path.import-approved.way.area {
+    stroke: rgba(0, 255, 0, 0.3);
+}
+
 /* GPX Paths */
 .layer-gpx {
     pointer-events: none;
