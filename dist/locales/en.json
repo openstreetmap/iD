@@ -1066,7 +1066,7 @@
                     "label": "Handrail"
                 },
                 "height": {
-                    "label": "Height (meters)"
+                    "label": "Height (Meters)"
                 },
                 "highway": {
                     "label": "Type"
@@ -4453,6 +4453,10 @@
                 "waterway/water_point": {
                     "name": "Marine Drinking Water",
                     "terms": ""
+                },
+                "waterway/waterfall": {
+                    "name": "Waterfall",
+                    "terms": "fall"
                 },
                 "waterway/weir": {
                     "name": "Weir",

@@ -1,0 +1,17 @@
+{
+    "icon": "water",
+    "fields": [
+        "height",
+        "width"
+    ],
+    "geometry": [
+        "vertex"
+    ],
+    "terms": [
+        "fall"
+    ],
+    "tags": {
+        "waterway": "waterfall"
+    },
+    "name": "Waterfall"
+}

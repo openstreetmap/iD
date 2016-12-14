@@ -12207,6 +12207,23 @@
             },
             "name": "Marine Drinking Water"
         },
+        "waterway/waterfall": {
+            "icon": "water",
+            "fields": [
+                "height",
+                "width"
+            ],
+            "geometry": [
+                "vertex"
+            ],
+            "terms": [
+                "fall"
+            ],
+            "tags": {
+                "waterway": "waterfall"
+            },
+            "name": "Waterfall"
+        },
         "waterway/weir": {
             "icon": "dam",
             "geometry": [

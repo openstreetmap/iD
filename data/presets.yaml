@@ -488,7 +488,7 @@ en:
         label: Handrail
       height:
         # height=*
-        label: Height (meters)
+        label: Height (Meters)
       highway:
         # highway=*
         label: Type
@@ -4258,6 +4258,11 @@ en:
         # waterway=water_point
         name: Marine Drinking Water
         terms: '<translate with synonyms or related terms for ''Marine Drinking Water'', separated by commas>'
+      waterway/waterfall:
+        # waterway=waterfall
+        name: Waterfall
+        # 'terms: fall'
+        terms: '<translate with synonyms or related terms for ''Waterfall'', separated by commas>'
       waterway/weir:
         # waterway=weir
         name: Weir
