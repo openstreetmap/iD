@@ -167,7 +167,7 @@ export function presetIndex() {
     };
 
     all.defaults = function(geometry, n) {
-        var rec = recent.matchGeometry(geometry).collection.slice(0, 4),
+        var rec = recent.collection.slice(0, 4),  // .matchGeometry(geometry)
             def = _.uniq(rec.concat(defaults[geometry].collection)).slice(0, n - 1);
         return presetCollection(_.uniq(rec.concat(def).concat(all.item(geometry))));
     };

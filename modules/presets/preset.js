@@ -8,8 +8,7 @@ export function presetPreset(id, preset, fields) {
 
     preset.id = id;
     preset.fields = (preset.fields || []).map(getFields);
-    preset.geometry = (preset.geometry || []);
-
+    preset.geometry = ['point', 'vertex', 'line', 'area', 'relation']; //(preset.geometry || []);
 
     function getFields(f) {
         return fields[f];

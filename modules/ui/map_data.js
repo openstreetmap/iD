@@ -353,24 +353,30 @@ export function uiMapData(context) {
         
         function toggle() {
             // show and hide Esri data import pane
+            var hideMe = !d3.selectAll('.esri-pane').classed('hide');
             d3.selectAll('.esri-pane')
-                .classed('hide', !d3.selectAll('.esri-pane').classed('hide'));
+                .classed('hide', hideMe);
+            
+            // show autocomplete of presets
+            var esriLayer = layers.layer('esri');
+            if (!esriLayer.hasData()) {
+                d3.selectAll('.feature-list-pane').classed('inspector-hidden editor-overwrite', !hideMe);
+                if (!hideMe) {
+                    //console.log('show Esri, remove inspector-hidden, add editor-overwrite');
+                    d3.selectAll('.inspector-wrap, .preset-list-pane, .entity-editor-pane')
+                        .classed('inspector-hidden', hideMe)
+                } else {
+                    //console.log('hide Esri, remove editor-overwrite');
+                }
+                d3.selectAll('.inspector-wrap, .preset-list-pane, .entity-editor-pane')
+                    .classed('editor-overwrite', !hideMe);
+            }
         }
         
         function editEsriLayer() {
-            // prompt the user to enter an ArcGIS layer
+            // window allows user to enter an ArcGIS layer
             d3.event.preventDefault();
-
-            var esriLayer = layers.layer('esri');
-            
-            // if the Esri layer is already loaded, resume editing that data
-            if (esriLayer.hasData()) {
-                toggle();
-            } else {
-                // this will open up an HTML/CSS window to enter the service URL
-                // and begin adding notes
-                toggle();            
-            }
+            toggle();
         }
 
         function setEsriLayer(template, downloadMax) {
