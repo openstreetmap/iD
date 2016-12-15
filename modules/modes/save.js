@@ -35,14 +35,20 @@ export function modeSave(context) {
         id: 'save'
     };
     
-    // when clicking the save button, filter out entities which were not approved manually
-    var deletions = [];
-    _.map(window.importedEntities, function(entity) {
-        if (!entity.approvedForEdit) {
-            deletions.push(entity.id); 
-        }
-    });
-    operationDelete(deletions, context)();
+    if (d3.select('input[name="approvalProcess"]:checked').property('value') === 'individual') {
+        // when clicking the save button, filter out entities which were not approved manually
+        var deletions = [];
+        _.map(window.importedEntities, function(entity) {
+            try {
+                if (!entity.approvedForEdit && context.entity(entity.id)) {
+                    deletions.push(entity.id); 
+                }
+            } catch (e) {
+                // entity was already deleted, can't be removed here
+            }
+        });
+        operationDelete(deletions, context)();
+    }
 
     var commit = uiCommit(context)
             .on('cancel', cancel)

@@ -1555,8 +1555,19 @@ text.esri {
     margin-top: 0;
 }
 
-.esri-pane .topurl input {
+.esri-pane .topurl input[type='text'] {
     margin-top: 10px;
+}
+
+.esri-pane .import-approval {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 11px;
+  margin-top: 50px;
+}
+
+.esri-pane .import-approval label {
+    display: block;
 }
 
 /* more importer stuff */
@@ -1572,23 +1583,23 @@ text.esri {
 }
 
 .import-approve button:first-child {
-    background-color: green;
+    background-color: #a6f3a6;
 }
 
 .import-approve button:last-child {
-    background-color: red;
+    background-color: #ff6c6c;
 }
 
 g.point.import-approved .stroke {
-    fill: green;
+    fill: #a6f3a6;
 }
 
 path.import-approved.way {
-    stroke: green;
+    stroke: #a6f3a6;
 }
 
 path.import-approved.way.area {
-    stroke: rgba(0, 255, 0, 0.3);
+    stroke: rgba(90, 225, 90, 0.3);
 }
 
 /* GPX Paths */

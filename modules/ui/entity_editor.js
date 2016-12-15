@@ -96,7 +96,7 @@ export function uiEntityEditor(context) {
             .on('click', (function() {
                 operationDelete([this.focusEntity.id], context)();
             }).bind(this));
-        d3.selectAll('.import-approve').classed('hide', entity.approvedForEdit);
+        d3.selectAll('.import-approve').classed('hide', entity.approvedForEdit || (d3.select('input[name="approvalProcess"]:checked').property('value') === 'all'));
 
         enter
             .append('div')

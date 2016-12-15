@@ -274,6 +274,28 @@ export function uiMapData(context) {
                     setEsriLayer(this.parentElement.firstChild.value, esriDownloadAll);
                 });
             
+            // radio buttons to decide how data is finalized on OSM
+            var approvalPhase = urlEntry.append('div')
+                .attr('class', 'import-approval');
+            approvalPhase.append('h4').text('Review data before importing?');
+            
+            var individualApproval = approvalPhase.append('label');
+            individualApproval.append('input')
+                .attr('class', 'approval-individual')
+                .attr('type', 'radio')
+                .attr('name', 'approvalProcess')
+                .attr('value', 'individual')
+                .property('checked', true);
+            individualApproval.append('span').text('Manually select import features');
+            
+            var allApproval = approvalPhase.append('label');
+            allApproval.append('input')
+                .attr('class', 'approval-all')
+                .attr('type', 'radio')
+                .attr('name', 'approvalProcess')
+                .attr('value', 'all');
+            allApproval.append('span').text('Import all features by default');
+            
             body.append('table')
                     .attr('border', '1')
                     .attr('class', 'esri-table hide'); // tag-list
