@@ -63,50 +63,54 @@ export function actionReflect(wayId, projection) {
         }
 
 
-// lol hacky debug
         var ssr = getSmallestSurroundingRectangle(graph, targetWay);
-        var nodes = targetWay.nodes;
-        for (var d = 0; d < nodes.length - 1; d++) {
-            var node = graph.entity(nodes[d]);
-            if (d < 4) {
-                node = node.move(projection.invert(ssr.poly[d]));
-                graph = graph.replace(node);
-            } else {
-                graph = graph.remove(node);
-            }
+        var nodes = targetWay.nodes,
+            p, q;
+
+        // choose line pq = axis of symmetry
+        var angle = ssr.angle * (180 / Math.PI);
+        if (angle < 0) angle += 180;
+        var isVertical = (angle > 60 && angle < 120);
+
+console.log('angle=' + angle + ', isVertical = ' + isVertical);
+        if (isVertical) {
+            p = [
+                (ssr.poly[0][0] + ssr.poly[1][0]) / 2,
+                (ssr.poly[0][1] + ssr.poly[1][1]) / 2
+            ];
+            q = [
+                (ssr.poly[2][0] + ssr.poly[3][0]) / 2,
+                (ssr.poly[2][1] + ssr.poly[3][1]) / 2
+            ];
+        } else {
+            p = [
+                (ssr.poly[3][0] + ssr.poly[4][0]) / 2,
+                (ssr.poly[3][1] + ssr.poly[4][1]) / 2
+            ];
+            q = [
+                (ssr.poly[1][0] + ssr.poly[2][0]) / 2,
+                (ssr.poly[1][1] + ssr.poly[2][1]) / 2
+            ];
         }
-        graph = graph.replace(targetWay.update(
-            { nodes: [nodes[0], nodes[1], nodes[2], nodes[3], nodes[0]] })
-        );
+
+        // reflect c across pq
+        // http://math.stackexchange.com/questions/65503/point-reflection-over-a-line
+        var dx = q[0] - p[0];
+        var dy = q[1] - p[1];
+        var a = (dx * dx - dy * dy) / (dx * dx + dy * dy);
+        var b = 2 * dx * dy / (dx * dx + dy * dy);
+        for (var i = 0; i < nodes.length - 1; i++) {
+            var node = graph.entity(nodes[i]);
+            var c = projection(node.loc);
+            var c2 = [
+                a * (c[0] - p[0]) + b * (c[1] - p[1]) + p[0],
+                b * (c[0] - p[0]) - a * (c[1] - p[1]) + p[1]
+            ];
+            node = node.move(projection.invert(c2));
+            graph = graph.replace(node);
+        }
 
         return graph;
-// end debug
-
-        // Get the bounding rectangle of the area
-        var boundingRect = targetWay.extent(graph).rectangle();
-        // rectangle returned as [ lon (x) top left, lat (y) top left, lon (x) bottom right, lat (y) bottom right]
-        // Obtain the left and right lonlat's
-        var left = boundingRect[0];
-        var right = boundingRect[2];
-        // Determine the mid-point that we will flip on
-        var midPoint = left + ((right - left) / 2);
-
-        // Obtain all of the nodes on the way, iterate over them to translate then aggreate up
-        return _(targetWay.nodes)
-            .map(function (nodeId) {
-                return graph.entity(nodeId);
-            })
-            // Only process each node once, as the first node will be listed twice in the way
-            .uniqBy(function (node) { return node.id; })
-            // Get distance from midPoint and produce a translated node
-            .map(function (node) {
-                var delta = node.loc[0] - midPoint;
-                return node.move([node.loc[0]-(2*delta), node.loc[1]]);
-            })
-            // Chain together consecutive updates to the graph for each updated node and return
-            .reduce(function (accGraph, value) {
-                return accGraph.replace(value);
-            }, graph);
 
     };
 }
