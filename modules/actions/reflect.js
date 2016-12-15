@@ -4,11 +4,15 @@ import {
     polygonCentroid as d3polygonCentroid
 } from 'd3';
 
-import { geoExtent } from '../geo/extent';
+import {
+    geoEuclideanDistance,
+    geoExtent
+} from '../geo';
 
 
-/* Flip the provided way horizontally. Only operates on "area" ways */
+/* Reflect the given area around its axis of symmetry */
 export function actionReflect(wayId, projection) {
+    var useLongAxis = true;
 
     function rotatePolygon(polygon, angle, centroid) {
         return polygon.map(function(point) {
@@ -56,7 +60,7 @@ export function actionReflect(wayId, projection) {
     }
 
 
-    return function (graph) {
+    var action = function (graph) {
         var targetWay = graph.entity(wayId);
         if (!targetWay.isArea()) {
             return graph;
@@ -67,30 +71,21 @@ export function actionReflect(wayId, projection) {
         var nodes = targetWay.nodes,
             p, q;
 
-        // choose line pq = axis of symmetry
-        var angle = ssr.angle * (180 / Math.PI);
-        if (angle < 0) angle += 180;
-        var isVertical = (angle > 60 && angle < 120);
+        // Choose line pq = axis of symmetry
+        // The shape's surrounding rectangle has 2 axes of symmetry
+        // By default we reflect across the longer axis.
+        p1 = [(ssr.poly[0][0] + ssr.poly[1][0]) / 2, (ssr.poly[0][1] + ssr.poly[1][1]) / 2 ];
+        q1 = [(ssr.poly[2][0] + ssr.poly[3][0]) / 2, (ssr.poly[2][1] + ssr.poly[3][1]) / 2 ];
+        p2 = [(ssr.poly[3][0] + ssr.poly[4][0]) / 2, (ssr.poly[3][1] + ssr.poly[4][1]) / 2 ];
+        q2 = [(ssr.poly[1][0] + ssr.poly[2][0]) / 2, (ssr.poly[1][1] + ssr.poly[2][1]) / 2 ];
 
-console.log('angle=' + angle + ', isVertical = ' + isVertical);
-        if (isVertical) {
-            p = [
-                (ssr.poly[0][0] + ssr.poly[1][0]) / 2,
-                (ssr.poly[0][1] + ssr.poly[1][1]) / 2
-            ];
-            q = [
-                (ssr.poly[2][0] + ssr.poly[3][0]) / 2,
-                (ssr.poly[2][1] + ssr.poly[3][1]) / 2
-            ];
+        var isLong = (geoEuclideanDistance(p1, q1) > geoEuclideanDistance(p2, q2));
+        if ((useLongAxis && isLong) || (!useLongAxis && !isLong)) {
+            p = p1;
+            q = q1;
         } else {
-            p = [
-                (ssr.poly[3][0] + ssr.poly[4][0]) / 2,
-                (ssr.poly[3][1] + ssr.poly[4][1]) / 2
-            ];
-            q = [
-                (ssr.poly[1][0] + ssr.poly[2][0]) / 2,
-                (ssr.poly[1][1] + ssr.poly[2][1]) / 2
-            ];
+            p = p2;
+            q = q2;
         }
 
         // reflect c across pq
@@ -111,6 +106,15 @@ console.log('angle=' + angle + ', isVertical = ' + isVertical);
         }
 
         return graph;
-
     };
+
+
+    action.longAxis = function(_) {
+        if (!arguments.length) return useLongAxis;
+        useLongAxis = _;
+        return action;
+    };
+
+
+    return action;
 }

@@ -1,6 +1,7 @@
 import { t } from '../util/locale';
 import { actionReflect } from '../actions/index';
 
+
 export function operationReflect(selectedIDs, context) {
     var entityId = selectedIDs[0];
     var entity = context.entity(entityId);
