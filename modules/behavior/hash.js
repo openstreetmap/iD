@@ -31,8 +31,10 @@ export function behaviorHash(context) {
         if (mode && mode.id === 'browse') {
             delete q.id;
         } else {
-            var selected = context.selectedIDs().filter(function(id) {
-                return !context.entity(id).isNew();
+            var selected = context.selectedIDs().filter(function(id) { 
+                var entity = context.hasEntity(id);
+                if (entity) return !entity.isNew();
+                return false;
             });
             if (selected.length) {
                 newParams.id = selected.join(',');
