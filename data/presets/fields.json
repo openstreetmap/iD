@@ -1198,6 +1198,11 @@
             "type": "typeCombo",
             "label": "Type"
         },
+        "product": {
+            "key": "product",
+            "type": "combo",
+            "label": "Product"
+        },
         "railway": {
             "key": "railway",
             "type": "typeCombo",

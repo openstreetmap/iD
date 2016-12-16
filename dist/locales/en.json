@@ -1417,6 +1417,9 @@
                 "power": {
                     "label": "Type"
                 },
+                "product": {
+                    "label": "Product"
+                },
                 "railway": {
                     "label": "Type"
                 },
@@ -3336,8 +3339,8 @@
                     "terms": ""
                 },
                 "man_made/works": {
-                    "name": "Works",
-                    "terms": "car assembly plant,aluminium processing plant,brewery,furniture manufacture factory,oil refinery,plastic recycling"
+                    "name": "Factory",
+                    "terms": "assembly,build,brewery,car,plant,plastic,processing,manufacture,refinery"
                 },
                 "military/airfield": {
                     "name": "Airfield",
