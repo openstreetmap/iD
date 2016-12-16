@@ -414,6 +414,7 @@ export function modeSelect(context, selectedIDs) {
         operations.forEach(function(operation) {
             operation.keys.forEach(function(key) {
                 keybinding.on(key, function() {
+                    d3.event.preventDefault();
                     if (!(context.inIntro() || operation.disabled())) {
                         operation();
                     }

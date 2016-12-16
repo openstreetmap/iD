@@ -1,78 +1,79 @@
 describe('iD.actionReflect', function() {
+    var projection = d3.geoMercator();
 
-     it('reflects horizontally - does not change graph length', function () {
+    it('does not create or remove nodes', function () {
         var graph = iD.Graph([
                 iD.Node({id: 'a', loc: [0, 0]}),
-                iD.Node({id: 'b', loc: [2, 0]}),
-                iD.Node({id: 'c', loc: [2, 2]}),
-                iD.Node({id: 'd', loc: [0, 2]}),
+                iD.Node({id: 'b', loc: [4, 0]}),
+                iD.Node({id: 'c', loc: [4, 2]}),
+                iD.Node({id: 'd', loc: [1, 2]}),
                 iD.Way({id: '-', nodes: ['a', 'b', 'c', 'd', 'a'], tags: { area: 'yes'}})
             ]);
-
-        graph = iD.actionReflect('-')(graph);
-
+        graph = iD.actionReflect('-', projection)(graph);
         expect(graph.entity('-').nodes).to.have.length(5);
-     });
-
-     it('reflects horizontally - alters x value', function () {
-        var graph = iD.Graph([
-                iD.Node({id: 'a', loc: [0, 0]}),
-                iD.Node({id: 'b', loc: [2, 0]}),
-                iD.Node({id: 'c', loc: [2, 2]}),
-                iD.Node({id: 'd', loc: [0, 2]}),
-                iD.Way({id: '-', nodes: ['a', 'b', 'c', 'd', 'a'], tags: { area: 'yes'}})
-            ]);
-        graph = iD.actionReflect('-')(graph);
-        expect(graph.entity('a').loc[0]).to.equal(2); // A should be 2,0 now
-        expect(graph.entity('b').loc[0]).to.equal(0); // B should be 0,0 now
-        expect(graph.entity('c').loc[0]).to.equal(0); // C should be 0,2 now
-        expect(graph.entity('d').loc[0]).to.equal(2); // D should be 2,2 now
     });
 
-     it('reflects horizontally - does not alter y value', function () {
-        var graph = iD.Graph([
-                iD.Node({id: 'a', loc: [0, 0]}),
-                iD.Node({id: 'b', loc: [2, 0]}),
-                iD.Node({id: 'c', loc: [2, 2]}),
-                iD.Node({id: 'd', loc: [0, 2]}),
-                iD.Way({id: '-', nodes: ['a', 'b', 'c', 'd', 'a'], tags: { area: 'yes'}})
-            ]);
-        graph = iD.actionReflect('-')(graph);
-        expect(graph.entity('a').loc[1]).to.equal(0); // A should be 2,0 now
-        expect(graph.entity('b').loc[1]).to.equal(0); // B should be 0,0 now
-        expect(graph.entity('c').loc[1]).to.equal(2); // C should be 0,2 now
-        expect(graph.entity('d').loc[1]).to.equal(2); // D should be 2,2 now
-    });
 
-    it('does not flip horizontally if not an area - does not alter x value', function () {
+    it('only operates on areas', function () {
         var graph = iD.Graph([
                 iD.Node({id: 'a', loc: [0, 0]}),
-                iD.Node({id: 'b', loc: [2, 0]}),
-                iD.Node({id: 'c', loc: [2, 2]}),
-                iD.Node({id: 'd', loc: [0, 2]}),
+                iD.Node({id: 'b', loc: [4, 0]}),
+                iD.Node({id: 'c', loc: [4, 2]}),
+                iD.Node({id: 'd', loc: [1, 2]}),
                 iD.Way({id: '-', nodes: ['a', 'b', 'c', 'd', 'a']})
             ]);
-        graph = iD.actionReflect('-')(graph);
-        // should be no change
-        expect(graph.entity('a').loc[0]).to.equal(0); 
-        expect(graph.entity('b').loc[0]).to.equal(2); 
-        expect(graph.entity('c').loc[0]).to.equal(2); 
-        expect(graph.entity('d').loc[0]).to.equal(0); 
+        var graph2 = iD.actionReflect('-', projection)(graph);
+        expect(graph2).to.deep.equal(graph);
     });
 
-     it('does not flip horizontally if not an area - does not alter y value', function () {
+
+    it('reflects across long axis', function () {
+        //
+        //    d -- c      a ---- b
+        //   /     |  ->   \     |
+        //  a ---- b        d -- c
+        //
         var graph = iD.Graph([
                 iD.Node({id: 'a', loc: [0, 0]}),
-                iD.Node({id: 'b', loc: [2, 0]}),
-                iD.Node({id: 'c', loc: [2, 2]}),
-                iD.Node({id: 'd', loc: [0, 2]}),
-                iD.Way({id: '-', nodes: ['a', 'b', 'c', 'd', 'a']})
+                iD.Node({id: 'b', loc: [4, 0]}),
+                iD.Node({id: 'c', loc: [4, 2]}),
+                iD.Node({id: 'd', loc: [1, 2]}),
+                iD.Way({id: '-', nodes: ['a', 'b', 'c', 'd', 'a'], tags: { area: 'yes'}})
             ]);
-        graph = iD.actionReflect('-')(graph);
-        // should be no change
-        expect(graph.entity('a').loc[1]).to.equal(0); 
-        expect(graph.entity('b').loc[1]).to.equal(0); 
-        expect(graph.entity('c').loc[1]).to.equal(2); 
-        expect(graph.entity('d').loc[1]).to.equal(2); 
+        graph = iD.actionReflect('-', projection)(graph);
+        expect(graph.entity('a').loc[0]).to.be.closeTo(0, 1e-6);
+        expect(graph.entity('a').loc[1]).to.be.closeTo(2, 1e-6);
+        expect(graph.entity('b').loc[0]).to.be.closeTo(4, 1e-6);
+        expect(graph.entity('b').loc[1]).to.be.closeTo(2, 1e-6);
+        expect(graph.entity('c').loc[0]).to.be.closeTo(4, 1e-6);
+        expect(graph.entity('c').loc[1]).to.be.closeTo(0, 1e-6);
+        expect(graph.entity('d').loc[0]).to.be.closeTo(1, 1e-6);
+        expect(graph.entity('d').loc[1]).to.be.closeTo(0, 1e-6);
     });
+
+
+    it('reflects across short axis', function () {
+        //
+        //    d -- c      c -- d
+        //   /     |  ->  |     \
+        //  a ---- b      b ---- a
+        //
+        var graph = iD.Graph([
+                iD.Node({id: 'a', loc: [0, 0]}),
+                iD.Node({id: 'b', loc: [4, 0]}),
+                iD.Node({id: 'c', loc: [4, 2]}),
+                iD.Node({id: 'd', loc: [1, 2]}),
+                iD.Way({id: '-', nodes: ['a', 'b', 'c', 'd', 'a'], tags: { area: 'yes'}})
+            ]);
+        graph = iD.actionReflect('-', projection).useLongAxis(false)(graph);
+        expect(graph.entity('a').loc[0]).to.be.closeTo(4, 1e-6);
+        expect(graph.entity('a').loc[1]).to.be.closeTo(0, 1e-6);
+        expect(graph.entity('b').loc[0]).to.be.closeTo(0, 1e-6);
+        expect(graph.entity('b').loc[1]).to.be.closeTo(0, 1e-6);
+        expect(graph.entity('c').loc[0]).to.be.closeTo(0, 1e-6);
+        expect(graph.entity('c').loc[1]).to.be.closeTo(2, 1e-6);
+        expect(graph.entity('d').loc[0]).to.be.closeTo(3, 1e-6);
+        expect(graph.entity('d').loc[1]).to.be.closeTo(2, 1e-6);
+    });
+
 });

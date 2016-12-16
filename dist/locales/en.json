@@ -169,7 +169,10 @@
                     "long": "Reflect this object across its long axis.",
                     "short": "Reflect this object across its short axis."
                 },
-                "key": "T",
+                "key": {
+                    "long": "T",
+                    "short": "Y"
+                },
                 "annotation": {
                     "long": "Reflected an area across its long axis.",
                     "short": "Reflected an area across its short axis."

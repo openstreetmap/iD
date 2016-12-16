@@ -2,12 +2,24 @@ import { t } from '../util/locale';
 import { actionReflect } from '../actions/index';
 
 
-export function operationReflect(selectedIDs, context) {
+export function operationReflectShort(selectedIDs, context) {
+    return operationReflect(selectedIDs, context, 'short');
+}
+
+
+export function operationReflectLong(selectedIDs, context) {
+    return operationReflect(selectedIDs, context, 'long');
+}
+
+
+export function operationReflect(selectedIDs, context, axis) {
+    axis = axis || 'long';
     var entityId = selectedIDs[0];
     var entity = context.entity(entityId);
     var extent = entity.extent(context.graph());
-    var action = actionReflect(entityId, context.projection);
-    var axis = 'long';
+    var action = actionReflect(entityId, context.projection)
+        .useLongAxis(Boolean(axis === 'long'));
+
 
     var operation = function() {
         context.perform(
@@ -39,7 +51,7 @@ export function operationReflect(selectedIDs, context) {
     };
 
     operation.id = 'reflect-' + axis;
-    operation.keys = [t('operations.reflect.key')];
+    operation.keys = [t('operations.reflect.key.' + axis)];
     operation.title = t('operations.reflect.title');
 
     return operation;

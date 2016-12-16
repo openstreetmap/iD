@@ -66,18 +66,17 @@ export function actionReflect(wayId, projection) {
             return graph;
         }
 
+        var ssr = getSmallestSurroundingRectangle(graph, targetWay),
+            nodes = targetWay.nodes;
 
-        var ssr = getSmallestSurroundingRectangle(graph, targetWay);
-        var nodes = targetWay.nodes,
+        // Choose line pq = axis of symmetry.
+        // The shape's surrounding rectangle has 2 axes of symmetry.
+        // Reflect across the longer axis by default.
+        var p1 = [(ssr.poly[0][0] + ssr.poly[1][0]) / 2, (ssr.poly[0][1] + ssr.poly[1][1]) / 2 ],
+            q1 = [(ssr.poly[2][0] + ssr.poly[3][0]) / 2, (ssr.poly[2][1] + ssr.poly[3][1]) / 2 ],
+            p2 = [(ssr.poly[3][0] + ssr.poly[4][0]) / 2, (ssr.poly[3][1] + ssr.poly[4][1]) / 2 ],
+            q2 = [(ssr.poly[1][0] + ssr.poly[2][0]) / 2, (ssr.poly[1][1] + ssr.poly[2][1]) / 2 ],
             p, q;
-
-        // Choose line pq = axis of symmetry
-        // The shape's surrounding rectangle has 2 axes of symmetry
-        // By default we reflect across the longer axis.
-        p1 = [(ssr.poly[0][0] + ssr.poly[1][0]) / 2, (ssr.poly[0][1] + ssr.poly[1][1]) / 2 ];
-        q1 = [(ssr.poly[2][0] + ssr.poly[3][0]) / 2, (ssr.poly[2][1] + ssr.poly[3][1]) / 2 ];
-        p2 = [(ssr.poly[3][0] + ssr.poly[4][0]) / 2, (ssr.poly[3][1] + ssr.poly[4][1]) / 2 ];
-        q2 = [(ssr.poly[1][0] + ssr.poly[2][0]) / 2, (ssr.poly[1][1] + ssr.poly[2][1]) / 2 ];
 
         var isLong = (geoEuclideanDistance(p1, q1) > geoEuclideanDistance(p2, q2));
         if ((useLongAxis && isLong) || (!useLongAxis && !isLong)) {
@@ -109,7 +108,7 @@ export function actionReflect(wayId, projection) {
     };
 
 
-    action.longAxis = function(_) {
+    action.useLongAxis = function(_) {
         if (!arguments.length) return useLongAxis;
         useLongAxis = _;
         return action;
