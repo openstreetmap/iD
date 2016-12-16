@@ -410,9 +410,19 @@ describe('iD.osmWay', function() {
     });
 
     describe('#addNode', function () {
-        it('adds a node to the end of a way', function () {
+        it('adds a node to the end of a way when index is undefined', function () {
+            var w = iD.Way({nodes: ['a', 'b']});
+            expect(w.addNode('c').nodes).to.eql(['a', 'b', 'c']);
+        });
+
+        it('adds a node to an empty way', function () {
             var w = iD.Way();
             expect(w.addNode('a').nodes).to.eql(['a']);
+        });
+
+        it('adds a node to the end of a way at a index greater than length', function () {
+            var w = iD.Way({nodes: ['a', 'b']});
+            expect(w.addNode('c',3).nodes).to.eql(['a', 'b', 'c']);
         });
 
         it('adds a node to a way at index 0', function () {
@@ -429,6 +439,36 @@ describe('iD.osmWay', function() {
             var w = iD.Way({nodes: ['a', 'b']});
             expect(w.addNode('c', -1).nodes).to.eql(['a', 'c', 'b']);
         });
+        
+        it('prevents duplicate consecutive nodes when adding in front of', function () {
+            var w = iD.Way({nodes: ['a', 'b']});
+            expect(w.addNode('b', 1).nodes).to.eql(['a', 'b']);
+        });
+
+        it('prevents duplicate consecutive nodes when adding behind', function () {
+            var w = iD.Way({nodes: ['a', 'b']});
+            expect(w.addNode('a', 1).nodes).to.eql(['a', 'b']);
+        });
+        
+        it('prevents duplicate consecutive nodes at index 0', function () {
+            var w = iD.Way({nodes: ['a', 'b']});
+            expect(w.addNode('a', 0).nodes).to.eql(['a', 'b']);
+        });
+        
+        it('prevents duplicate consecutive nodes at a negative index', function () {
+            var w = iD.Way({nodes: ['a', 'b']});
+            expect(w.addNode('a', -1).nodes).to.eql(['a', 'b']);
+        });
+        
+        it('prevents duplicate consecutive nodes at a index equal to length', function () {
+            var w = iD.Way({nodes: ['a', 'b']});
+            expect(w.addNode('b', 2).nodes).to.eql(['a', 'b']);
+        });
+
+        it('prevents duplicate consecutive nodes when index is undefined', function () {
+            var w = iD.Way({nodes: ['a', 'b']});
+            expect(w.addNode('b').nodes).to.eql(['a', 'b']);
+        });
     });
 
     describe('#updateNode', function () {
@@ -436,8 +476,74 @@ describe('iD.osmWay', function() {
             var w = iD.Way({nodes: ['a', 'b', 'c']});
             expect(w.updateNode('d', 1).nodes).to.eql(['a', 'd', 'c']);
         });
+        
+        it('prevents duplicate consecutive nodes', function () {
+            var w = iD.Way({nodes: ['a', 'b', 'c', 'd','e']});
+            expect(w.updateNode('b',2).nodes).to.eql(['a', 'b', 'd','e']);
+            w = iD.Way({nodes: ['a', 'b', 'c', 'd','e']});
+            expect(w.updateNode('d',2).nodes).to.eql(['a', 'b', 'd','e']);
+            w = iD.Way({nodes: ['a', 'b', 'c', 'b','e']});
+            expect(w.updateNode('b',2).nodes).to.eql(['a', 'b','e']);
+        });
+
+        it('preserves duplicate non-consecutive nodes', function () {
+            var w = iD.Way({nodes: ['a', 'b', 'c', 'b','e']});
+            expect(w.updateNode('d',2).nodes).to.eql(['a', 'b', 'd', 'b','e']);
+        });
+
+        it('replaces a single one of duplicate nodes', function () {
+            var w = iD.Way({nodes: ['a', 'b', 'c', 'b','e']});
+            expect(w.updateNode('d',1).nodes).to.eql(['a', 'd', 'c', 'b','e']);
+            w = iD.Way({nodes: ['a', 'b', 'b', 'c','e']});
+            expect(w.updateNode('d',2).nodes).to.eql(['a', 'b', 'd', 'c','e']);
+        });
+
+        it('removes existing duplicate consecutive nodes', function () {
+            var w = iD.Way({nodes: ['a', 'b', 'b', 'd', 'b', 'e']});
+            expect(w.updateNode('c',5).nodes).to.eql(['a', 'b', 'd', 'b','c']);
+            w = iD.Way({nodes: ['a', 'b', 'b', 'd', 'b', 'e']});
+            expect(w.updateNode('c',3).nodes).to.eql(['a', 'b', 'c', 'b', 'e']);
+        });
     });
 
+    describe('#replaceNode', function () {
+        it('replaces the node', function () {
+            var w = iD.Way({nodes: ['a']});
+            expect(w.replaceNode('a','b').nodes).to.eql(['b']);
+            w = iD.Way({nodes: ['a', 'b', 'c']});
+            expect(w.replaceNode('b', 'd').nodes).to.eql(['a', 'd', 'c']);
+        });
+        
+        it('prevents duplicate consecutive nodes', function () {
+            var w = iD.Way({nodes: ['a', 'b', 'c', 'd','e']});
+            expect(w.replaceNode('c','b').nodes).to.eql(['a', 'b', 'd','e']);
+            w = iD.Way({nodes: ['a', 'b', 'c', 'd','e']});
+            expect(w.replaceNode('c','d').nodes).to.eql(['a', 'b', 'd','e']);
+            w = iD.Way({nodes: ['a', 'b', 'c', 'b','e']});
+            expect(w.replaceNode('c','b').nodes).to.eql(['a', 'b','e']);
+        });
+
+        it('preserves duplicate non-consecutive nodes', function () {
+            var w = iD.Way({nodes: ['a', 'b', 'c', 'b','e']});
+            expect(w.replaceNode('c','d').nodes).to.eql(['a', 'b', 'd', 'b','e']);
+        });
+
+        it('replaces duplicate non-consecutive nodes', function () {
+            var w = iD.Way({nodes: ['a', 'b', 'c', 'b','e']});
+            expect(w.replaceNode('b','d').nodes).to.eql(['a', 'd', 'c', 'd','e']);
+        });
+
+        it('removes existing duplicate consecutive nodes', function () {
+            var w = iD.Way({nodes: ['a', 'b', 'b', 'd', 'b', 'e']});
+            expect(w.replaceNode('e','c').nodes).to.eql(['a', 'b', 'd', 'b','c']);
+            w = iD.Way({nodes: ['a', 'b', 'b', 'd', 'b', 'e']});
+            expect(w.replaceNode('d','c').nodes).to.eql(['a', 'b', 'c', 'b', 'e']);
+            w = iD.Way({nodes: ['a', 'b', 'b', 'c', 'b', 'e']});
+            expect(w.replaceNode('b','d').nodes).to.eql(['a', 'd', 'c', 'd', 'e']);
+        });
+    });
+    
+    
     describe('#removeNode', function () {
         it('removes the node', function () {
             var w = iD.Way({nodes: ['a']});
@@ -457,6 +563,14 @@ describe('iD.osmWay', function() {
         it('prevents duplicate consecutive nodes when preserving circularity', function () {
             var w = iD.Way({nodes: ['a', 'b', 'c', 'd', 'b', 'a']});
             expect(w.removeNode('a').nodes).to.eql(['b', 'c', 'd', 'b']);
+            w = iD.Way({nodes: ['a', 'b', 'a']});
+            expect(w.removeNode('b').nodes).to.eql(['a']);
+        });
+        it('removes existing duplicate consecutive nodes', function () {
+            var w = iD.Way({nodes: ['a', 'b', 'b', 'd', 'b', 'e']});
+            expect(w.removeNode('e').nodes).to.eql(['a', 'b', 'd', 'b']);
+            w = iD.Way({nodes: ['a', 'b', 'b', 'd', 'b', 'e']});
+            expect(w.removeNode('b').nodes).to.eql(['a', 'd', 'e']);
         });
     });
 
