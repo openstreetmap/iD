@@ -2,7 +2,7 @@ import * as d3 from 'd3';
 import _ from 'lodash';
 import { geoExtent, geoPolygonIntersectsPolygon } from '../geo/index';
 import { utilDetect } from '../util/detect';
-import toGeoJSON from 'togeojson';
+import toGeoJSON from '@mapbox/togeojson';
 
 
 export function svgGpx(projection, context, dispatch) {
