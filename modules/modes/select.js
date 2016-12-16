@@ -72,6 +72,32 @@ export function modeSelect(context, selectedIDs) {
         }
     }
 
+    function loadSelectedIDs() {
+        function callback() {
+            loadCount -= 1;
+            if  (!loadCount) mode.enter2();
+        }
+        var ids = [];
+        var loadCount=0;
+        if (Array.isArray(selectedIDs)) {
+            ids = selectedIDs.filter(function(id) {
+                return !context.hasEntity(id);
+            });
+        }
+
+        loadCount = ids.length;
+        if (loadCount) {
+            ids.forEach(
+                function (id) {
+                    context.loadEntity(id, callback);
+                }
+            );
+        } else {
+            mode.enter2();
+        }
+    }
+
+
     function checkSelectedIDs() {
         var ids = [];
         if (Array.isArray(selectedIDs)) {
@@ -315,6 +341,11 @@ export function modeSelect(context, selectedIDs) {
 
 
     mode.enter = function() {
+        loadSelectedIDs();
+    };     
+        
+        
+    mode.enter2 = function() {
 
         function update() {
             closeMenu();
