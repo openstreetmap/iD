@@ -7,11 +7,12 @@ export function operationReflect(selectedIDs, context) {
     var entity = context.entity(entityId);
     var extent = entity.extent(context.graph());
     var action = actionReflect(entityId, context.projection);
+    var axis = 'long';
 
     var operation = function() {
         context.perform(
             action,
-            t('operations.reflect.annotation')
+            t('operations.reflect.annotation.' + axis)
         );
     };
 
@@ -34,10 +35,10 @@ export function operationReflect(selectedIDs, context) {
         var disable = operation.disabled();
         return disable ?
             t('operations.reflect.' + disable) :
-            t('operations.reflect.description');
+            t('operations.reflect.description.' + axis);
     };
 
-    operation.id = 'reflect';
+    operation.id = 'reflect-' + axis;
     operation.keys = [t('operations.reflect.key')];
     operation.title = t('operations.reflect.title');
 
