@@ -13,12 +13,10 @@ import { tooltip } from '../util/tooltip';
 import { uiTooltipHtml } from './tooltipHtml';
 import { uiDisclosure } from './disclosure';
 import { utilDisplayName } from '../util/index';
-//import { relatedParent} from '../modes/select';
-
+import { utilEntityOrMemberSelector, utilEntitySelector } from '../util/index';
 
 export function uiRawParentWayEditor(context) {
     var id;
-
 
     function selectWay(d) {
         d3.event.preventDefault();
@@ -26,6 +24,7 @@ export function uiRawParentWayEditor(context) {
     }
 
 
+    
 
     function jumpVertex(way, index) { 
         if (index >= 0 && index < way.nodes.length) {
@@ -39,7 +38,35 @@ export function uiRawParentWayEditor(context) {
     function jumpPreviousVertex(d) { if (d.index>0) jumpVertex(d.way, d.index - 1); }
     function jumpNextVertex(d) { if (d.index + 1 < d.len) jumpVertex(d.way, d.index + 1); }
     function jumpLastVertex(d) { if (d.len>0) jumpVertex(d.way, d.len-1); }
+
+    function mouseout() {
+        d3.event.preventDefault();
+        var surface = context.surface();
+        surface.selectAll('.hover')
+        .classed('hover', false);
+    }    
+        
+    function mouseover(d) {
+        d3.event.preventDefault();
+        var surface = context.surface();
+        surface.selectAll(utilEntitySelector([d.way.id]))
+        .classed('hover', true);      
+    }
     
+    function mouseoverVertex(way, index) { 
+        if (index >= 0 && index < way.nodes.length) {
+            d3.event.preventDefault();
+        var surface = context.surface();
+        surface.selectAll(utilEntitySelector([way.nodes[index]]))
+        .classed('hover', true);      
+        }
+    }
+    
+    function mouseoverFirstVertex(d) { mouseoverVertex(d.way, 0); }
+    function mouseoverPreviousVertex(d) { if (d.index>0) mouseoverVertex(d.way, d.index - 1); }
+    function mouseoverNextVertex(d) { if (d.index + 1 < d.len) mouseoverVertex(d.way, d.index + 1); }
+    function mouseoverLastVertex(d) { if (d.len>0) mouseoverVertex(d.way, d.len-1); }
+
 
     function rawParentWayEditor(selection) {
         var entity = context.entity(id);
@@ -125,7 +152,9 @@ export function uiRawParentWayEditor(context) {
                 .attr('class', 'form-label')
                 .append('a')
                 .attr('href', '#')
-                .on('click', selectWay);
+                .on('click', selectWay)
+                .on('mouseover', mouseover)
+                .on('mouseout', mouseout);
 
             label
                 .append('span')
@@ -157,6 +186,8 @@ export function uiRawParentWayEditor(context) {
                 .text(function(d) {return (d.index>0)? '1' : '';})
             
                 .on('click', jumpFirstVertex)
+                .on('mouseover', mouseoverFirstVertex)
+                .on('mouseout', mouseout)
                 .call(tooltip()
                     .placement('bottom')
                     .html(true)
@@ -172,6 +203,8 @@ export function uiRawParentWayEditor(context) {
                 .text(function(d) {return (d.index>0)? '◄' : '';})
         
                 .on('click', jumpPreviousVertex)
+                .on('mouseover', mouseoverPreviousVertex)
+                .on('mouseout', mouseout)
                 .call(tooltip()
                     .placement('bottom')
                     .html(true)
@@ -187,6 +220,8 @@ export function uiRawParentWayEditor(context) {
                       + ' rp-'+d.way.id+'-'+d.index+( d.related ? ' rp-active' : '')); } )
                 .text(function(d) { return (d.index+1);})              
                 .on('click', jumpThisVertex)
+                .on('mouseover', mouseover) // hover style the potential next related way
+                .on('mouseout', mouseout)
                 .call(tooltip()
                     .placement('bottom')
                     .html(true)
@@ -200,13 +235,15 @@ export function uiRawParentWayEditor(context) {
                 .attr('class', 'button-parent-way-vertex parent-way-next-vertex minor')
                 .text(function(d) {return (d.index + 1 < d.len)? '►' : '';})
                 .on('click', jumpNextVertex)
-            .call(tooltip()
-                .placement('bottom')
-                .html(true)
-                .title(function() {
-                    return uiTooltipHtml('Jump to next vertex', 'PgDn');
-                    })
-                );
+                .on('mouseover', mouseoverNextVertex)
+                .on('mouseout', mouseout)
+                .call(tooltip()
+                    .placement('bottom')
+                    .html(true)
+                    .title(function() {
+                        return uiTooltipHtml('Jump to next vertex', 'PgDn');
+                        })
+                    );
             
             enter
                 .append('button')
@@ -214,6 +251,8 @@ export function uiRawParentWayEditor(context) {
                 .attr('class', 'button-parent-way-vertex parent-way-last-vertex minor')
                 .text(function(d) {return (d.index + 1 < d.len)? d.len : '';})
                 .on('click', jumpLastVertex)
+                .on('mouseover', mouseoverLastVertex)
+                .on('mouseout', mouseout)
                 .call(tooltip()
                     .placement('bottom')
                     .html(true)
