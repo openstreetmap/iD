@@ -34,6 +34,8 @@ import { utilEntityOrMemberSelector, utilEntitySelector } from '../util/index';
 
 
 var relatedParent;
+var previousSelectedIDs;
+
 
 
 export function modeSelect(context, selectedIDs) {
@@ -41,6 +43,8 @@ export function modeSelect(context, selectedIDs) {
         id: 'select',
         button: 'browse'
     };
+    
+    var nextRelatedParent;
 
     var keybinding = d3keybinding('select'),
         timeout = null,
@@ -59,17 +63,14 @@ export function modeSelect(context, selectedIDs) {
         suppressMenu = false,
         follow = false;
 
-
     var wrap = context.container()
         .select('.inspector-wrap');
-
 
     function singular() {
         if (selectedIDs.length === 1) {
             return context.hasEntity(selectedIDs[0]);
         }
     }
-
 
     function checkSelectedIDs() {
         var ids = [];
@@ -87,9 +88,8 @@ export function modeSelect(context, selectedIDs) {
         return !!ids.length;
     }
 
-
     // find the common parent ways for nextVertex, previousVertex
-    function commonParents() {
+    function commonParentWays() {
         var graph = context.graph(),
             commonParents = [];
 
@@ -114,30 +114,117 @@ export function modeSelect(context, selectedIDs) {
         return commonParents;
     }
 
+    function updateRelatedParent() {
 
-    function singularParent() {
-        var parents = commonParents();
-        if (!parents || parents.length === 0) {
-            relatedParent = null;
+
+        function singularParent() {
+            function nodeIndex(parentId, childIndex) {
+                if (selectedIDs.length !== 1) return null;
+                var way = context.entity(parentId);
+                if (childIndex&&way.nodes[childIndex] === selectedIDs[0] ) return childIndex;
+                var index = way.nodes.indexOf(selectedIDs[0]);
+                if (index !== -1) return index;
+                return null;
+            }
+            function memberIndex(parentId, childIndex) {
+                var relation = context.entity(parentId);
+                if (childIndex && relation.members[childIndex].id === selectedIDs[0] ) return childIndex;
+                var member = relation.memberById(selectedIDs[0]);
+                if (member) return member.id;
+                return null;
+            }
+            
+            if (!selectedIDs || selectedIDs.length < 1) return null;
+            
+            var relatedParentEntity,
+                member,
+                index;
+            if (relatedParent) relatedParentEntity = context.hasEntity(relatedParent.id);
+            // if the entity does no longer exist, related parent will be cleared
+            if (!relatedParentEntity) relatedParent = null;
+            
+            // When a related parent has been explicitly set, we want to use it.
+            if (nextRelatedParent) {
+                var nextRelatedParentEntity = context.hasEntity(nextRelatedParent.id);
+                // if the entity does no longer exist, related parent will be cleared
+                if (!nextRelatedParentEntity) relatedParent = null;
+                if (!relatedParent || nextRelatedParent.index != null || relatedParent.index == null || relatedParent.id !== nextRelatedParent.id) {
+                    if (nextRelatedParent.id[0] === 'r') {
+                        return {id: nextRelatedParent.id, index: memberIndex(nextRelatedParent.id, nextRelatedParent.index)};
+                    } else { 
+                        return {id: nextRelatedParent.id, index: nodeIndex(nextRelatedParent.id, nextRelatedParent.index)};
+                    }
+                } else {
+                    // Don't overwrite current index when switching to the same parent without given index.
+                    if (nextRelatedParent.id[0] === 'r') {
+                        return {id: relatedParent.id, index: memberIndex(relatedParent.id, relatedParent.index)};
+                    } else { 
+                        return {id: relatedParent.id, index: nodeIndex(relatedParent.id, relatedParent.index)};
+                    }
+                }
+            }
+    
+            var parentways = commonParentWays();
+            if (relatedParent) {
+                if (relatedParent.id[0] === 'r') {
+                    // Keep the related parent relation if the first selected entity is member of the relation
+                    if (selectedIDs[0] === relatedParentEntity.members[relatedParent.index].id) return relatedParent;
+                    member = relatedParentEntity.memberById(selectedIDs[0]);
+                    if (member) return {id: relatedParent.id, index: member.index}; 
+                } else {
+                    // When we visit a vertex with multiple parents, we want to remember which parent line we started on.
+                    // In addition we wan't to remember the index of the vertex in case it is contained in the way more than one time.
+                    // Therefore, we also use this condition when visiting a vertex with the remembered parent being the single parent.
+                    // This condition is also used when the related parent has been explicitly set by virtex navigation.        
+                    
+                    if (parentways && parentways.indexOf(relatedParent.id) !== -1) {                    
+                        return {id: relatedParent.id, index: nodeIndex(relatedParent.id, relatedParent.index)};   // prefer the previously seen parent
+                    }
+                }   
+            }
+            
+            if (previousSelectedIDs && previousSelectedIDs.length === 1) {
+                var id = previousSelectedIDs[0];
+                var entity = context.hasEntity(id); // check if entity does still exist.
+                if (entity) {
+                    if (id[0] === 'r' & selectedIDs.length === 1) {
+                        // When we visit a relation and one of its members afterward, we want to use this way as the related parent.
+                        member = entity.memberById(selectedIDs[0]);
+                        if (member) {
+                            mode.follow(true);
+                            return {id: id, index: member.index }; // prefer the previously selected entity as parent
+                        }
+                    } else {
+                        // When we visit a way and one of its vertices afterward, we want to use this way as the related parent.        
+                        if (parentways && parentways.indexOf(id) !== -1) {
+                            if (selectedIDs.length > 1) {
+                                return {id: id, index:null};
+                            } else {
+                                index = entity.nodes.indexOf(selectedIDs[0]);
+                                if (index !== -1) {
+                                    mode.follow(true);
+                                    return {id: id, index: index }; // prefer the previously selected entity as parent
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+                
+            // When we visit a vertex with a single parent way, it is clear which parent to use.
+            if (parentways && parentways.length === 1) {
+                return {id:parentways[0], index: null };
+            }
+           
+            // If it is not clear which parent to use, we won't use any parent. 
             return null;
         }
 
-        // relatedParent is used when we visit a vertex with multiple
-        // parents, and we want to remember which parent line we started on.
-
-        if (parents.length === 1) {
-            relatedParent = parents[0];  // remember this parent for later
-            return relatedParent;
-        }
-
-        if (parents.indexOf(relatedParent) !== -1) {
-            return relatedParent;   // prefer the previously seen parent
-        }
-
-        return parents[0];
+        var parent = singularParent();
+        relatedParent = parent;
     }
-
-
+   
+   
     function closeMenu() {
         if (radialMenu) {
             context.surface().call(radialMenu.close);
@@ -181,11 +268,17 @@ export function modeSelect(context, selectedIDs) {
         }
     }
 
-
     mode.selectedIDs = function() {
         return selectedIDs;
     };
 
+    
+    mode.relatedParent = function(_) {
+        if (!arguments.length) return relatedParent;
+        nextRelatedParent = _;
+        return mode;
+    };
+    
 
     mode.reselect = function() {
         if (!checkSelectedIDs()) return;
@@ -265,9 +358,8 @@ export function modeSelect(context, selectedIDs) {
             surface.selectAll('.related')
                 .classed('related', false);
 
-            singularParent();
             if (relatedParent) {
-                surface.selectAll(utilEntitySelector([relatedParent]))
+                surface.selectAll(utilEntitySelector([relatedParent.id]))
                     .classed('related', true);
             }
 
@@ -285,8 +377,11 @@ export function modeSelect(context, selectedIDs) {
                 selection
                     .classed('selected', true);
             }
+            
+            
+           var sel=d3.selectAll('parent-way-vertex-index');
+           sel.classed('parent-way-vertex-related', true);
         }
-
 
         function esc() {
             if (!context.inIntro()) {
@@ -294,101 +389,155 @@ export function modeSelect(context, selectedIDs) {
             }
         }
 
-
         function firstVertex() {
+            var id,
+                child;
             d3.event.preventDefault();
-            var parent = singularParent();
-            if (parent) {
-                var way = context.entity(parent);
-                context.enter(
-                    modeSelect(context, [way.first()]).follow(true).suppressMenu(true)
-                );
+            if (relatedParent) {
+                id = relatedParent.id;
+            } else {
+                id = selectedIDs[0];
+                if (selectedIDs.length !== 1||id[0] === 'n') return;
             }
-        }
+            var parent = context.entity(id);
 
+            if (id[0] === 'r') {
+                child = parent.members[0].id;
+            } else {
+                child = parent.nodes[0];
+            }
+            
+            context.enter(
+                modeSelect(context, [child]).relatedParent({id: id, index: 0}).follow(true).suppressMenu(true)
+            );
+        }
 
         function lastVertex() {
+            var id,
+                child;
             d3.event.preventDefault();
-            var parent = singularParent();
-            if (parent) {
-                var way = context.entity(parent);
-                context.enter(
-                    modeSelect(context, [way.last()]).follow(true).suppressMenu(true)
-                );
+            if (relatedParent) {
+                id = relatedParent.id;
+            } else {
+                id = selectedIDs[0];
+                if (selectedIDs.length !== 1||id[0] === 'n') return;
             }
+            var parent = context.entity(id),
+                length;
+    
+            if (id[0] === 'r') {
+                length = parent.members.length;
+                child = parent.members[length-1].id;
+            } else {
+                length = parent.nodes.length;
+                child = parent.nodes[length-1];
+            }
+            
+            context.enter(
+                modeSelect(context, [child]).relatedParent({id: id, index: length-1}).follow(true).suppressMenu(true)
+            );
         }
-
 
         function previousVertex() {
+            if (!relatedParent) {
+                lastVertex(); // Reuse the logic of lastVertex if the selected entity is the potential parent itself (e.g. a way).
+                return;
+            }
             d3.event.preventDefault();
-            var parent = singularParent();
-            if (!parent) return;
 
-            var way = context.entity(parent),
-                length = way.nodes.length,
-                curr = way.nodes.indexOf(selectedIDs[0]),
-                index = -1;
-
-            if (curr > 0) {
-                index = curr - 1;
-            } else if (way.isClosed()) {
-                index = length - 2;
-            }
-
-            if (index !== -1) {
-                context.enter(
-                    modeSelect(context, [way.nodes[index]]).follow(true).suppressMenu(true)
-                );
-            }
+            var parent = context.entity(relatedParent.id),
+                curr = relatedParent.index,
+                index = -1,
+                length;
+            
+            if (curr == null) return;
+            if (relatedParent.id[0]==='r') {
+                length = parent.members.length;
+                if (curr > 0) {
+                    index = curr - 1;
+                }
+                if (index >= 0) {
+                    context.enter(
+                        modeSelect(context, [parent.members[index].id]).relatedParent({id: relatedParent.id, index: index}).follow(true)
+                    );
+                }
+            } else {
+                length = parent.nodes.length;
+                if (curr > 0) {
+                    index = curr - 1;
+                } else if (parent.isClosed()) {
+                    index = length - 2;
+                }
+                if (index >= 0) {
+                    context.enter(
+                        modeSelect(context, [parent.nodes[index]]).relatedParent({id: relatedParent.id, index: index}).follow(true).suppressMenu(true)
+                    );
+                }
+            }    
         }
-
 
         function nextVertex() {
+            if (!relatedParent) {
+                firstVertex(); // Reuse the logic of firstVertex if the selected entity is the potential parent itself (e.g. a way). 
+                return;
+            }
             d3.event.preventDefault();
-            var parent = singularParent();
-            if (!parent) return;
 
-            var way = context.entity(parent),
-                length = way.nodes.length,
-                curr = way.nodes.indexOf(selectedIDs[0]),
-                index = -1;
-
-            if (curr < length - 1) {
-                index = curr + 1;
-            } else if (way.isClosed()) {
-                index = 0;
-            }
-
-            if (index !== -1) {
-                context.enter(
-                    modeSelect(context, [way.nodes[index]]).follow(true).suppressMenu(true)
-                );
-            }
+            var parent = context.entity(relatedParent.id),
+                curr = relatedParent.index,
+                index = -1,
+                length;
+            
+            if (curr == null) return;
+            if (relatedParent.id[0]==='r') {
+                length = parent.members.length;
+                if (curr < length - 1) {
+                    index = curr + 1;
+                }
+                if (index >= 0) {
+                    context.enter(
+                        modeSelect(context, [parent.members[index].id]).relatedParent({id: relatedParent.id, index: index}).follow(true)
+                    );
+                }
+            } else {
+                length = parent.nodes.length;
+                if (curr < length - 1) {
+                    index = curr + 1;
+                } else if (parent.isClosed()) {
+                    index = 0;
+                }
+                if (index >= 0) {
+                    context.enter(
+                        modeSelect(context, [parent.nodes[index]]).relatedParent({id: relatedParent.id, index: index}).follow(true).suppressMenu(true)
+                    );
+                }
+            }    
         }
-
 
         function nextParent() {
             d3.event.preventDefault();
-            var parents = _.uniq(commonParents());
-            if (!parents || parents.length < 2) return;
+            var parents = _.uniq(commonParentWays()),
+                nextParent;
+            if (!parents || !parents.length) return;
 
-            var index = parents.indexOf(relatedParent);
+            var index = -1;
+            if (relatedParent) index = parents.indexOf(relatedParent.id);
             if (index < 0 || index > parents.length - 2) {
-                relatedParent = parents[0];
+                nextParent = parents[0];
             } else {
-                relatedParent = parents[index + 1];
+                nextParent = parents[index + 1];
+            }
+            if (relatedParent && relatedParent.id === nextParent ) {
+                context.enter(
+                    modeSelect(context, selectedIDs).relatedParent(relatedParent).follow(true)
+                );
+            } else {
+                context.enter(
+                    modeSelect(context, selectedIDs).relatedParent({id: nextParent, index: index}).follow(true)
+                );
             }
 
-            var surface = context.surface();
-            surface.selectAll('.related')
-                .classed('related', false);
-
-            if (relatedParent) {
-                surface.selectAll(utilEntitySelector([relatedParent]))
-                    .classed('related', true);
-            }
-        }
-
+        } 
 
         if (!checkSelectedIDs()) return;
 
@@ -396,10 +545,12 @@ export function modeSelect(context, selectedIDs) {
             context.install(behavior);
         });
 
+        updateRelatedParent(); // update relatedParent early
+        
         var operations = _.without(d3.values(Operations), Operations.operationDelete)
                 .map(function(o) { return o(selectedIDs, context); })
                 .filter(function(o) { return o.available(); });
-
+        
         operations.unshift(Operations.operationDelete(selectedIDs, context));
 
         keybinding
@@ -471,6 +622,12 @@ export function modeSelect(context, selectedIDs) {
             var entities = uiSelectionList(context, selectedIDs);
             context.ui().sidebar.show(entities);
         }
+ 
+        if (relatedParent) {
+            d3.select(document).selectAll('.rp-'+relatedParent.id+'-'+relatedParent.index)
+                .classed('rp-active', true);
+        }
+        
     };
 
 
@@ -486,7 +643,9 @@ export function modeSelect(context, selectedIDs) {
         keybinding.off();
         closeMenu();
         radialMenu = undefined;
-
+        
+        if (Array.isArray(selectedIDs)) previousSelectedIDs = selectedIDs.slice();
+        
         context.history()
             .on('undone.select', null)
             .on('redone.select', null);
@@ -503,6 +662,11 @@ export function modeSelect(context, selectedIDs) {
         surface
             .selectAll('.related')
             .classed('related', false);
+            
+        d3.select(document)
+            .selectAll('.rp-active')
+            .classed('rp-active', false);
+            
 
         context.map().on('drawn.select', null);
         context.ui().sidebar.hide();
