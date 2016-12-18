@@ -8,6 +8,7 @@ import { svgIcon } from '../svg/index';
 import { uiPresetIcon } from './preset_icon';
 import { uiRawMemberEditor } from './raw_member_editor';
 import { uiRawMembershipEditor } from './raw_membership_editor';
+import { uiRawParentWayEditor } from './raw_parent_way_editor';
 import { uiRawTagEditor } from './raw_tag_editor';
 import { uiTagReference } from './tag_reference';
 import { uiPreset } from './preset';
@@ -94,6 +95,10 @@ export function uiEntityEditor(context) {
         enter
             .append('div')
             .attr('class', 'inspector-border raw-tag-editor inspector-inner');
+ 
+        enter
+            .append('div')
+            .attr('class', 'raw-parent-way-editor inspector-inner');
 
         enter
             .append('div')
@@ -137,6 +142,16 @@ export function uiEntityEditor(context) {
                 .entityID(id)
                 .tags(tags)
                 .state(state));
+
+        if (entity.type === 'node') {
+        body.select('.raw-parent-way-editor')
+                .style('display', 'block')
+                .call(uiRawParentWayEditor(context)
+                .entityID(id));
+        } else {
+            body.select('.raw-parent-way-editor')
+            .style('display', 'none');
+        }
 
         if (entity.type === 'relation') {
             body.select('.raw-member-editor')

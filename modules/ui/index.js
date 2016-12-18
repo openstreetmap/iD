@@ -32,6 +32,7 @@ export { uiPresetList } from './preset_list';
 export { uiRadialMenu } from './radial_menu';
 export { uiRawMemberEditor } from './raw_member_editor';
 export { uiRawMembershipEditor } from './raw_membership_editor';
+export { uiRawParentWayEditor } from './raw_parent_way_editor';
 export { uiRawTagEditor } from './raw_tag_editor';
 export { uiRestore } from './restore';
 export { uiSave } from './save';
