@@ -242,6 +242,7 @@ export function uiFieldAddress(field, context) {
             updateTags(tags);
         } else {
             dispatch.on('init', function () {
+                dispatch.on('init', null);
                 updateTags(tags);
             });
         }
