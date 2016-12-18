@@ -1717,22 +1717,52 @@ img.wiki-image {
     margin-bottom: 20px;
 }
 
-/* Raw relation membership editor */
+/* Raw relation membership editor and parent way editor*/
 
 .raw-member-editor .member-list li:first-child,
-.raw-membership-editor .member-list li:first-child {
+.raw-membership-editor .member-list li:first-child,
+.raw-parent-way-editor .parent-way-list li:first-child {
     padding-top: 10px;
 }
 
 .raw-member-editor .member-row,
-.raw-membership-editor .member-row {
+.raw-membership-editor .member-row,
+.raw-parent-way-editor .parent-way-row {
     position: relative;
 }
 
 .raw-member-editor .member-row .member-entity-name,
-.raw-membership-editor .member-row .member-entity-name {
+.raw-membership-editor .member-row .member-entity-name,
+.raw-parent-way-editor .parent-way-row .parent-way-entity-name {
     font-weight: normal;
     padding-left: 10px;
+}
+
+.raw-parent-way-editor .entity-geom-icon-hidden,
+.raw-parent-way-editor .parent-way-repeated .form-label {
+    display: none;
+}
+
+.raw-parent-way-editor .button-parent-way-vertex {
+    position: relative;
+    right: 1px;
+    width: 10%;
+    border: 1px solid #CCC;
+    border-top-width: 0;
+    border-right-width: 0;
+    border-radius: 0 0 0 0;
+    height: 30px;
+    vertical-align: top;
+}
+
+.raw-parent-way-editor .parent-way-vertex-index {
+    border-radius: 15px 15px 15px 15px;
+    border: 3px solid #cfcfcf;
+    width: 15%;
+}
+
+.raw-parent-way-editor .rp-active {
+    background: rgba(0,0,0,.5);
 }
 
 .member-incomplete .member-delete {
