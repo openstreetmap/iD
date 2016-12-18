@@ -117,7 +117,7 @@ export function modeSelect(context, selectedIDs) {
 
     function singularParent() {
         var parents = commonParents();
-        if (!parents) {
+        if (!parents || parents.length === 0) {
             relatedParent = null;
             return null;
         }
