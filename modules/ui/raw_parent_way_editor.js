@@ -145,8 +145,8 @@ export function uiRawParentWayEditor(context) {
             var enter = items.enter()
                 .append('li')
                 .attr('class', function(d) { 
-                    return  ( d.repeated ? 'parent-way-repeated ' : '') + 'parent-way-row form-field'; } );
-
+                    return  ( d.repeated ? 'parent-way-repeated ' : '') + 'parent-way-row form-field'
+                        + ' rp-'+d.way.id+'-'+d.index+( d.related ? ' rp-active' : ''); } );
             var label = enter
                 .append('label')
                 .attr('class', 'form-label')
@@ -213,12 +213,10 @@ export function uiRawParentWayEditor(context) {
                     })
                 );    
             
-            enter
+            var button = enter
                 .append('button')
                 .attr('tabindex', -1)
-                .attr('class', function(d) { return ('button-parent-way-vertex parent-way-vertex-index minor' 
-                      + ' rp-'+d.way.id+'-'+d.index+( d.related ? ' rp-active' : '')); } )
-                .text(function(d) { return (d.index+1);})              
+                .attr('class', function(d) { return ('button-parent-way-vertex parent-way-vertex-index minor'); } ) 
                 .on('click', jumpThisVertex)
                 .on('mouseover', mouseover) // hover style the potential next related way
                 .on('mouseout', mouseout)
@@ -228,7 +226,13 @@ export function uiRawParentWayEditor(context) {
                     .title(function() {
                         return uiTooltipHtml('Make this the way to stay on', 'End');
                     })
-                );    
+                );
+            
+            button
+                .append('span')
+                .attr('class', 'button-parent-way-vertex-border' )
+                .text(function(d) { return (d.index+1);});
+            
             enter
                 .append('button')
                 .attr('tabindex', -1)

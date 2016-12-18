@@ -1756,14 +1756,36 @@ img.wiki-image {
 }
 
 .raw-parent-way-editor .parent-way-vertex-index {
-    border-radius: 15px 15px 15px 15px;
-    border: 3px solid #cfcfcf;
     width: 15%;
+    padding: 0px;
 }
 
-.raw-parent-way-editor .rp-active {
-    background: rgba(0,0,0,.5);
+.raw-parent-way-editor .button-parent-way-vertex-border {
+    border-radius: 15px 15px 15px 15px;
+    border: 3px solid #cfcfcf;
+    padding: 4px;
+    width: 100%;
+    min-width: 34px;
 }
+
+.raw-parent-way-editor .rp-active .button-parent-way-vertex-border {
+    background: rgba(0,0,0,.5);
+    color:  white;
+}
+
+.raw-parent-way-editor .rp-active .button-parent-way-vertex:hover .button-parent-way-vertex-border {
+    background: rgba(0,0,0,.8);
+}
+
+.raw-parent-way-editor .button-parent-way-vertex .tooltip {
+    display: none;
+}
+
+.raw-parent-way-editor .rp-active .button-parent-way-vertex:hover .tooltip {
+    display: block;
+    transition: display 0s 2s;
+}
+
 
 .member-incomplete .member-delete {
     display: none;
