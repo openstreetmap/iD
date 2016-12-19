@@ -1,10 +1,10 @@
 {
+    "icon": "power-line",
     "geometry": [
         "line"
     ],
     "tags": {
         "power": "line"
     },
-    "name": "Power Line",
-    "icon": "power-line"
+    "name": "Power Line"
 }

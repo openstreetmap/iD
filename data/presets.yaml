@@ -3322,6 +3322,11 @@ en:
         # power=minor_line
         name: Minor Power Line
         terms: '<translate with synonyms or related terms for ''Minor Power Line'', separated by commas>'
+      power/plant:
+        # power=plant
+        name: Power Station Grounds
+        # 'terms: coal,gas,generat*,hydro,nuclear,power,station'
+        terms: '<translate with synonyms or related terms for ''Power Station Grounds'', separated by commas>'
       power/pole:
         # power=pole
         name: Power Pole

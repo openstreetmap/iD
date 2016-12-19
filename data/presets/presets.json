@@ -5784,6 +5784,7 @@
             "tags": {
                 "landuse": "*"
             },
+            "matchScore": 0.9,
             "name": "Land Use"
         },
         "landuse/farm": {
@@ -5953,6 +5954,7 @@
                 "landuse": "industrial"
             },
             "terms": [],
+            "matchScore": 0.9,
             "name": "Industrial Area"
         },
         "landuse/landfill": {
@@ -8338,24 +8340,54 @@
             "name": "Power Generator"
         },
         "power/line": {
+            "icon": "power-line",
             "geometry": [
                 "line"
             ],
             "tags": {
                 "power": "line"
             },
-            "name": "Power Line",
-            "icon": "power-line"
+            "name": "Power Line"
         },
         "power/minor_line": {
+            "icon": "power-line",
             "geometry": [
                 "line"
             ],
             "tags": {
                 "power": "minor_line"
             },
-            "name": "Minor Power Line",
-            "icon": "power-line"
+            "name": "Minor Power Line"
+        },
+        "power/plant": {
+            "icon": "industrial",
+            "fields": [
+                "operator"
+            ],
+            "geometry": [
+                "area"
+            ],
+            "tags": {
+                "power": "plant"
+            },
+            "addTags": {
+                "power": "plant",
+                "landuse": "industrial"
+            },
+            "removeTags": {
+                "power": "plant",
+                "landuse": "industrial"
+            },
+            "terms": [
+                "coal",
+                "gas",
+                "generat*",
+                "hydro",
+                "nuclear",
+                "power",
+                "station"
+            ],
+            "name": "Power Station Grounds"
         },
         "power/pole": {
             "geometry": [
