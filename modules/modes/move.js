@@ -1,9 +1,19 @@
 import * as d3 from 'd3';
 import { d3keybinding } from '../lib/d3.keybinding.js';
 import { t } from '../util/locale';
-import { modeBrowse, modeSelect } from './index';
-import { actionMove, actionNoop } from '../actions/index';
+
+import { actionMove } from '../actions/index';
 import { behaviorEdit } from '../behavior/index';
+
+import {
+    modeBrowse,
+    modeSelect
+} from './index';
+
+import {
+    operationReflectLong,
+    operationReflectShort
+} from '../operations/index';
 
 
 export function modeMove(context, entityIDs, baseGraph) {
@@ -13,25 +23,62 @@ export function modeMove(context, entityIDs, baseGraph) {
     };
 
     var keybinding = d3keybinding('move'),
-        edit = behaviorEdit(context),
+        behaviors = [
+            behaviorEdit(context),
+            operationReflectLong(entityIDs, context).behavior,
+            operationReflectShort(entityIDs, context).behavior,
+        ],
         annotation = entityIDs.length === 1 ?
             t('operations.move.annotation.' + context.geometry(entityIDs[0])) :
             t('operations.move.annotation.multiple'),
+        prevGraph,
         cache,
         origin,
         nudgeInterval;
 
 
-    function vecSub(a, b) { return [a[0] - b[0], a[1] - b[1]]; }
+    function vecSub(a, b) {
+        return [a[0] - b[0], a[1] - b[1]];
+    }
 
 
     function edge(point, size) {
-        var pad = [30, 100, 30, 100];
-        if (point[0] > size[0] - pad[0]) return [-10, 0];
-        else if (point[0] < pad[2]) return [10, 0];
-        else if (point[1] > size[1] - pad[1]) return [0, -10];
-        else if (point[1] < pad[3]) return [0, 10];
-        return null;
+        var pad = [30, 100, 30, 100],
+            x = 0,
+            y = 0;
+
+        if (point[0] > size[0] - pad[0])
+            x = -10;
+        if (point[0] < pad[2])
+            x = 10;
+        if (point[1] > size[1] - pad[1])
+            y = -10;
+        if (point[1] < pad[3])
+            y = 10;
+
+        if (x || y) return [x, y];
+        else return null;
+    }
+
+
+    function doMove(nudge) {
+        nudge = nudge || [0, 0];
+
+        var fn;
+        if (prevGraph !== context.graph()) {
+            cache = {};
+            origin = context.map().mouseCoordinates();
+            fn = context.perform;
+        } else {
+            fn = context.overwrite;
+        }
+
+        var currMouse = context.mouse(),
+            origMouse = context.projection(origin),
+            delta = vecSub(vecSub(currMouse, origMouse), nudge);
+
+        fn(actionMove(entityIDs, delta, context.projection, cache), annotation);
+        prevGraph = context.graph();
     }
 
 
@@ -39,14 +86,7 @@ export function modeMove(context, entityIDs, baseGraph) {
         if (nudgeInterval) window.clearInterval(nudgeInterval);
         nudgeInterval = window.setInterval(function() {
             context.pan(nudge);
-
-            var currMouse = context.mouse(),
-                origMouse = context.projection(origin),
-                delta = vecSub(vecSub(currMouse, origMouse), nudge),
-                action = actionMove(entityIDs, delta, context.projection, cache);
-
-            context.overwrite(action, annotation);
-
+            doMove(nudge);
         }, 50);
     }
 
@@ -58,14 +98,8 @@ export function modeMove(context, entityIDs, baseGraph) {
 
 
     function move() {
-        var currMouse = context.mouse(),
-            origMouse = context.projection(origin),
-            delta = vecSub(currMouse, origMouse),
-            action = actionMove(entityIDs, delta, context.projection, cache);
-
-        context.overwrite(action, annotation);
-
-        var nudge = edge(currMouse, context.map().dimensions());
+        doMove();
+        var nudge = edge(context.mouse(), context.map().dimensions());
         if (nudge) startNudge(nudge);
         else stopNudge();
     }
@@ -97,14 +131,12 @@ export function modeMove(context, entityIDs, baseGraph) {
 
     mode.enter = function() {
         origin = context.map().mouseCoordinates();
+        prevGraph = null;
         cache = {};
 
-        context.install(edit);
-
-        context.perform(
-            actionNoop(),
-            annotation
-        );
+        behaviors.forEach(function(behavior) {
+            context.install(behavior);
+        });
 
         context.surface()
             .on('mousemove.move', move)
@@ -125,7 +157,9 @@ export function modeMove(context, entityIDs, baseGraph) {
     mode.exit = function() {
         stopNudge();
 
-        context.uninstall(edit);
+        behaviors.forEach(function(behavior) {
+            context.uninstall(behavior);
+        });
 
         context.surface()
             .on('mousemove.move', null)
