@@ -249,8 +249,8 @@ export function uiPresetList(context) {
         item.choose = function() {
             context.presets().choose(preset);
             
-            // avoid editing the last-selected option, if we are actually picking the Esri import preset
-            if (!d3.selectAll('.esri-pane').classed('hide') && !d3.selectAll('.esri-pane .topurl').classed('hide')) {
+            // avoid editing the last-selected option, if we are using preset UI for an Esri import
+            if (d3.selectAll('.esri-pane').classed('hide') || d3.selectAll('.esri-pane .topurl').classed('hide')) {
                 context.perform(
                     actionChangePreset(id, currentPreset, preset),
                     t('operations.change_tags.annotation')

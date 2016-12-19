@@ -77,10 +77,6 @@ export function uiMapData(context) {
             setLayer(which, !showsLayer(which));
         }
 
-        function clickEsri() {
-            toggleLayer('esri');
-        }
-
         function clickGpx() {
             toggleLayer('gpx');
         }
@@ -245,9 +241,11 @@ export function uiMapData(context) {
             
             var content = this.pane.append('div')
                 .attr('class', 'left-content');
-            var doctitle = content.append('h3')
-                //.text('Downloading Esri Layer...');
+            
+            // title
+            content.append('h3')
                 .text('Import an Esri service by URL');
+            
             var body = content.append('div')
                 .attr('class', 'body');
                 
@@ -318,8 +316,8 @@ export function uiMapData(context) {
                       var row = d3.selectAll('.esri-table').append('tr');
                       var uniqNum = Math.floor(Math.random() * 10000);
 
-                      // the field setting the add-on key
-                      var keyfield = row.append('td').append('input')
+                      // the 'key' field, showing the new OSM tag key
+                      row.append('td').append('input')
                         //.attr('type', 'text')
                         .attr('class', 'import-key-' + uniqNum)
                         .on('change', function() {
@@ -333,8 +331,8 @@ export function uiMapData(context) {
                           d3.selectAll('.osm-key-' + uniqNum).attr('name', this.value);
                         });
                     
-                      // the field setting the add-on value
-                      var outfield = row.append('td').append('input')
+                      // the 'value' field setting the new OSM tag default value
+                      row.append('td').append('input')
                         .attr('type', 'text')
                         .attr('class', 'osm-key-' + uniqNum)
                         .on('change', function() {
@@ -372,7 +370,6 @@ export function uiMapData(context) {
                     //console.log('show Esri, remove inspector-hidden, add editor-overwrite');
                     d3.selectAll('.inspector-wrap, .preset-list-pane, .entity-editor-pane')
                         .classed('inspector-hidden', false)
-                    d3.selectAll('.inspector-wrap, .preset-list-pane, .entity-editor-pane')
                         .classed('editor-overwrite', true);
                 }
             }
@@ -399,6 +396,20 @@ export function uiMapData(context) {
 
             // hide Esri Service URL input
             d3.selectAll('.topurl').classed('hide', true);
+            d3.selectAll('.editor-overwrite').classed('editor-overwrite', false);
+            
+            // if there is an OSM preset, add it to set tags
+            window.layerImports = {};
+            var presetType = d3.selectAll('.esri-pane .preset span').text();
+            if (presetType) {
+                var setPreset = context.presets().item(presetType);
+                
+                // set tags
+                var tags = Object.keys(setPreset.tags);
+                for (var t = 0; t < tags.length; t++) {
+                    window.layerImports['add_' + tags[t]] = setPreset.tags[tags[t]];
+                }
+            }
             
             refreshEsriLayer(template, downloadMax);
         }

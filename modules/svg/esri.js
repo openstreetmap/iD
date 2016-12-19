@@ -1,13 +1,11 @@
 import * as d3 from 'd3';
 import _ from 'lodash';
 import { geoExtent, geoPolygonIntersectsPolygon } from '../geo/index';
-import { osmEntity, osmNode, osmRelation, osmWay } from '../osm/index';
+import { osmNode, osmRelation, osmWay } from '../osm/index';
 
 import { actionAddEntity } from '../actions/index';
-import { modeSelect } from '../modes/index';
 
 import { utilDetect } from '../util/detect';
-import toGeoJSON from 'togeojson';
 import fromEsri from 'esri-to-geojson';
 
 // dictionary matching geo-properties to OpenStreetMap tags 1:1
@@ -20,10 +18,7 @@ window.knownObjectIds = {};
 window.importedEntities = [];
 
 export function svgEsri(projection, context, dispatch) {
-    var showLabels = true,
-        detected = utilDetect(),
-        layer;
-
+    var detected = utilDetect();
 
     function init() {
         if (svgEsri.initialized) return;  // run once
@@ -221,33 +216,6 @@ export function svgEsri(projection, context, dispatch) {
         
         return this;
     }
-    
-    // iterate through keys, adding a row describing each
-    // user can set a new property name for each row
-    function doKey(r, keys, samplefeature, esriTable) {
-        if (r >= keys.length) {
-            return;
-        }
-        
-        // don't allow user to change how OBJECTID works
-        if (keys[r] === 'OBJECTID') {
-            return doKey(r + 1, keys, samplefeature, esriTable);
-        }
-        
-        var row = esriTable.append('tr');
-          //.attr('class', 'tag-row');
-        row.append('td').text(keys[r]); // .attr('class', 'key-wrap');
-        var outfield = row.append('td').append('input');
-        outfield.attr('type', 'text')
-            //.attr('class', 'input-wrap-position')
-            .attr('name', keys[r])
-            .attr('placeholder', (window.layerImports[keys[r]] || samplefeature.properties[keys[r]]))
-            .on('change', function() {
-                // properties with this.name renamed to this.value
-                window.layerImports[this.name] = this.value;
-            });
-        doKey(r + 1, keys, samplefeature, esriTable);
-    }
 
     drawEsri.enabled = function(_) {
         if (!arguments.length) return svgEsri.enabled;
@@ -338,7 +306,33 @@ export function svgEsri(projection, context, dispatch) {
                         // TODO: target tags (addresses, roads, bike lanes)
                         var samplefeature = jsondl.features[0];
                         var keys = Object.keys(samplefeature.properties);
-                        doKey(0, keys, samplefeature, esriTable);
+                        
+                        // iterate through keys, adding a row describing each
+                        // user can set a new property name for each row
+                        var doKey = function(r) {
+                            if (r >= keys.length) {
+                                return;
+                            }
+        
+                            // don't allow user to change how OBJECTID works
+                            if (keys[r] === 'OBJECTID') {
+                                return doKey(r + 1);
+                            }
+        
+                            var row = esriTable.append('tr');
+                            row.append('td').text(keys[r]); // .attr('class', 'key-wrap');
+                            var outfield = row.append('td').append('input');
+                            outfield.attr('type', 'text')
+                                .attr('name', keys[r])
+                                .attr('placeholder', (window.layerImports[keys[r]] || samplefeature.properties[keys[r]]))
+                                .on('change', function() {
+                                    // properties with this.name renamed to this.value
+                                    window.layerImports[this.name] = this.value;
+                                });
+                            doKey(r + 1);
+                        };
+                        
+                        doKey(0);
                     } else {
                         console.log('no feature to build table from');
                     }
