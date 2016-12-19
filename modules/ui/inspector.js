@@ -82,11 +82,20 @@ export function uiInspector(context) {
 
 
         function setPreset(preset) {
-            wrap.transition()
-                .styleTween('right', function() { return d3.interpolate('-100%', '0%'); });
+            var esriLayer = context.layers().layer('esri');
+            if (!esriLayer.hasData() && !d3.selectAll('.esri-pane').classed('hide')) {
+                // appear to be calling for this to be my preset
+                // TODO: better UI/UX
+                d3.selectAll('.esri-pane .preset label').text('OpenStreetMap preset: ');
+                d3.selectAll('.esri-pane .preset span').text(preset.id);
+            } else {
+                // standard preset behavior
+                wrap.transition()
+                    .styleTween('right', function() { return d3.interpolate('-100%', '0%'); });
 
-            editorPane
-                .call(entityEditor.preset(preset));
+                editorPane
+                    .call(entityEditor.preset(preset));
+            }
         }
     }
 

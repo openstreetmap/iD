@@ -274,6 +274,13 @@ export function uiMapData(context) {
                     setEsriLayer(this.parentElement.firstChild.value, esriDownloadAll);
                 });
             
+            // known iD presets
+            var preset = urlEntry.append('div')
+                .attr('class', 'preset');
+            preset.append('label')
+                .text('OpenStreetMap preset (select at left)');
+            preset.append('span');
+            
             // radio buttons to decide how data is finalized on OSM
             var approvalPhase = urlEntry.append('div')
                 .attr('class', 'import-approval');
@@ -364,12 +371,15 @@ export function uiMapData(context) {
                 if (!hideMe) {
                     //console.log('show Esri, remove inspector-hidden, add editor-overwrite');
                     d3.selectAll('.inspector-wrap, .preset-list-pane, .entity-editor-pane')
-                        .classed('inspector-hidden', hideMe)
-                } else {
-                    //console.log('hide Esri, remove editor-overwrite');
+                        .classed('inspector-hidden', false)
+                    d3.selectAll('.inspector-wrap, .preset-list-pane, .entity-editor-pane')
+                        .classed('editor-overwrite', true);
                 }
-                d3.selectAll('.inspector-wrap, .preset-list-pane, .entity-editor-pane')
-                    .classed('editor-overwrite', !hideMe);
+            }
+            if (hideMe) {
+                //console.log('hide Esri, remove editor-overwrite');
+                // allow normal menu use
+                d3.selectAll('.editor-overwrite').classed('editor-overwrite', false);
             }
         }
         

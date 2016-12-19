@@ -1559,11 +1559,16 @@ text.esri {
     margin-top: 10px;
 }
 
+.esri-pane .preset {
+  margin-top: 50px;
+  font-weight: bold;
+}
+
 .esri-pane .import-approval {
   border: 1px solid #ccc;
   border-radius: 8px;
   padding: 11px;
-  margin-top: 50px;
+  margin-top: 10px;
 }
 
 .esri-pane .import-approval label {
