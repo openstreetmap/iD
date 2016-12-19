@@ -376,6 +376,9 @@ export function uiMapData(context) {
                     d3.selectAll('.inspector-wrap, .preset-list-pane, .entity-editor-pane')
                         .classed('inspector-hidden', false)
                         .classed('editor-overwrite', true);
+                    if (window.presetReloadFunction) {
+                        (window.presetReloadFunction)(true);
+                    }
                 }
             }
             if (hideMe) {
@@ -389,6 +392,11 @@ export function uiMapData(context) {
             // window allows user to enter an ArcGIS layer
             d3.event.preventDefault();
             toggle();
+            
+            // test that function has all geo-s
+            if (window.presetReloadFunction) {
+                (window.presetReloadFunction)(true);
+            }
         }
 
         function setEsriLayer(template, downloadMax) {

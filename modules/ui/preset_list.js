@@ -9,6 +9,8 @@ import { uiPresetIcon } from './preset_icon';
 import { uiTagReference } from './tag_reference';
 import { utilNoAuto, utilRebind } from '../util';
 
+// TODO: make this less of a hack
+window.presetReloadFunction = null;
 
 export function uiPresetList(context) {
     var dispatch = d3.dispatch('choose'),
@@ -17,7 +19,7 @@ export function uiPresetList(context) {
         autofocus = false;
 
 
-    function presetList(selection) {
+    function presetList(selection, seeAllGeos) {
         var entity = context.entity(id),
             geometry = context.geometry(id);
 
@@ -26,7 +28,15 @@ export function uiPresetList(context) {
             geometry = 'point';
         }
 
-        var presets = context.presets().matchGeometry(geometry);
+        var presets = context.presets();
+        
+        // when the import menu is activated, show every kind of preset, regardless of geometry
+        if (!seeAllGeos && (d3.selectAll('.esri-pane').classed('hide') || d3.selectAll('.esri-pane .topurl').classed('hide'))) {
+            presets = presets.matchGeometry(geometry);
+        }
+        window.presetReloadFunction = function(seeAllGeos) {
+            presetList(selection, seeAllGeos);
+        };
 
         selection.html('');
 
