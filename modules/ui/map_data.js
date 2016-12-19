@@ -6,7 +6,6 @@ import { svgIcon } from '../svg/index';
 import { uiTooltipHtml } from './tooltipHtml';
 import { tooltip } from '../util/tooltip';
 
-
 export function uiMapData(context) {
     var key = t('map_data.key'),
         esriLayerUrl = context.storage('esriLayerUrl') || '',
@@ -278,6 +277,12 @@ export function uiMapData(context) {
             preset.append('label')
                 .text('OpenStreetMap preset (select at left)');
             preset.append('span');
+            
+            /*
+            // test having an import function
+            urlEntry.append('pre').append('code').text('function(osm) {\n  return "hello world";\n}');
+            hljs.initHighlightingOnLoad();
+            */
             
             // radio buttons to decide how data is finalized on OSM
             var approvalPhase = urlEntry.append('div')
