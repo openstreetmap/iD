@@ -1,5 +1,6 @@
 import { t } from '../util/locale';
 import { actionReflect } from '../actions/index';
+import { behaviorOperation } from '../behavior/index';
 
 
 export function operationReflectShort(selectedIDs, context) {
@@ -22,16 +23,14 @@ export function operationReflect(selectedIDs, context, axis) {
 
 
     var operation = function() {
-        context.perform(
-            action,
-            t('operations.reflect.annotation.' + axis)
-        );
+        context.perform(action, t('operations.reflect.annotation.' + axis));
     };
 
+
     operation.available = function() {
-        return selectedIDs.length === 1 &&
-            context.geometry(entityId) === 'area';
+        return selectedIDs.length === 1 && context.geometry(entityId) === 'area';
     };
+
 
     operation.disabled = function() {
         if (extent.percentContainedIn(context.extent()) < 0.8) {
@@ -43,6 +42,7 @@ export function operationReflect(selectedIDs, context, axis) {
         }
     };
 
+
     operation.tooltip = function() {
         var disable = operation.disabled();
         return disable ?
@@ -50,9 +50,12 @@ export function operationReflect(selectedIDs, context, axis) {
             t('operations.reflect.description.' + axis);
     };
 
+
     operation.id = 'reflect-' + axis;
     operation.keys = [t('operations.reflect.key.' + axis)];
     operation.title = t('operations.reflect.title');
+    operation.behavior = behaviorOperation(context).which(operation);
+
 
     return operation;
 }
