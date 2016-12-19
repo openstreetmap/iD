@@ -9,3 +9,4 @@ export { modeMove } from './move';
 export { modeRotateWay } from './rotate_way';
 export { modeSave } from './save';
 export { modeSelect } from './select';
+export { modePostPaste} from './post_paste';

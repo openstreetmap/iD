@@ -13,7 +13,7 @@ import {
     geoPointInPolygon
 } from '../geo/index';
 
-import { modeMove } from '../modes/index';
+import { modePostPaste } from '../modes/index';
 import { uiCmd } from '../ui/index';
 
 
@@ -75,7 +75,7 @@ export function behaviorPaste(context) {
             delta = [ mouse[0] - center[0], mouse[1] - center[1] ];
 
         context.perform(actionMove(newIDs, delta, projection));
-        context.enter(modeMove(context, newIDs, baseGraph));
+        context.enter(modePostPaste(context, newIDs));
     }
 
 
