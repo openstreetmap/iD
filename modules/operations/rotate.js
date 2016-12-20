@@ -1,5 +1,5 @@
 import { t } from '../util/locale';
-import { modeRotateWay } from '../modes/index';
+import { modeRotate } from '../modes/index';
 import { behaviorOperation } from '../behavior/index';
 
 
@@ -11,7 +11,7 @@ export function operationRotate(selectedIDs, context) {
 
 
     var operation = function() {
-        context.enter(modeRotateWay(context, entityId));
+        context.enter(modeRotate(context, entityId));
     };
 
 

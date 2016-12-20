@@ -7,13 +7,13 @@ import { actionNoop, actionRotateWay } from '../actions/index';
 import { behaviorEdit } from '../behavior/index';
 
 
-export function modeRotateWay(context, wayId) {
+export function modeRotate(context, wayId) {
     var mode = {
-        id: 'rotate-way',
+        id: 'rotate',
         button: 'browse'
     };
 
-    var keybinding = d3keybinding('rotate-way'),
+    var keybinding = d3keybinding('rotate'),
         edit = behaviorEdit(context);
 
 
@@ -33,11 +33,11 @@ export function modeRotateWay(context, wayId) {
         );
 
         context.surface()
-            .on('mousemove.rotate-way', rotate)
-            .on('click.rotate-way', finish);
+            .on('mousemove.rotate', rotate)
+            .on('click.rotate', finish);
 
         context.history()
-            .on('undone.rotate-way', undone);
+            .on('undone.rotate', undone);
 
         keybinding
             .on('⎋', cancel)
@@ -84,11 +84,11 @@ export function modeRotateWay(context, wayId) {
         context.uninstall(edit);
 
         context.surface()
-            .on('mousemove.rotate-way', null)
-            .on('click.rotate-way', null);
+            .on('mousemove.rotate', null)
+            .on('click.rotate', null);
 
         context.history()
-            .on('undone.rotate-way', null);
+            .on('undone.rotate', null);
 
         keybinding.off();
     };
