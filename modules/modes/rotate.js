@@ -2,9 +2,27 @@ import * as d3 from 'd3';
 import _ from 'lodash';
 import { d3keybinding } from '../lib/d3.keybinding.js';
 import { t } from '../util/locale';
-import { modeBrowse, modeSelect } from './index';
-import { actionNoop, actionRotateWay } from '../actions/index';
+
+import {
+    actionNoop,
+    actionRotateWay
+} from '../actions/index';
+
 import { behaviorEdit } from '../behavior/index';
+
+import {
+    modeBrowse,
+    modeSelect
+} from './index';
+
+import {
+    operationCircularize,
+    operationDelete,
+    operationMove,
+    operationOrthogonalize,
+    operationReflectLong,
+    operationReflectShort
+} from '../operations/index';
 
 
 export function modeRotate(context, wayId) {
@@ -14,26 +32,37 @@ export function modeRotate(context, wayId) {
     };
 
     var keybinding = d3keybinding('rotate'),
-        edit = behaviorEdit(context);
+        behaviors = [
+            behaviorEdit(context),
+            operationCircularize([wayId], context).behavior,
+            operationDelete([wayId], context).behavior,
+            operationMove([wayId], context).behavior,
+            operationOrthogonalize([wayId], context).behavior,
+            operationReflectLong([wayId], context).behavior,
+            operationReflectShort([wayId], context).behavior
+        ],
+        prevGraph,
+        prevAngle,
+        pivot;
 
 
     mode.enter = function() {
-        context.install(edit);
-
-        var annotation = t('operations.rotate.annotation.' + context.geometry(wayId)),
-            way = context.graph().entity(wayId),
+        var way = context.graph().entity(wayId),
             nodes = _.uniq(context.graph().childNodes(way)),
-            points = nodes.map(function(n) { return context.projection(n.loc); }),
-            pivot = d3.polygonCentroid(points),
-            angle;
+            points = nodes.map(function(n) { return context.projection(n.loc); });
 
-        context.perform(
-            actionNoop(),
-            annotation
-        );
+        pivot = d3.polygonCentroid(points);
+
+        behaviors.forEach(function(behavior) {
+            context.install(behavior);
+        });
+
+        var annotation = t('operations.rotate.annotation.' + context.geometry(wayId));
+
+        context.perform(actionNoop(), annotation);
 
         context.surface()
-            .on('mousemove.rotate', rotate)
+            .on('mousemove.rotate', doRotate)
             .on('click.rotate', finish);
 
         context.history()
@@ -47,18 +76,23 @@ export function modeRotate(context, wayId) {
             .call(keybinding);
 
 
-        function rotate() {
-            var mousePoint = context.mouse(),
-                newAngle = Math.atan2(mousePoint[1] - pivot[1], mousePoint[0] - pivot[0]);
+        function doRotate() {
+            var fn;
+            if (prevGraph !== context.graph()) {
+                fn = context.perform;
+            } else {
+                fn = context.replace;
+            }
 
-            if (typeof angle === 'undefined') angle = newAngle;
+            var currMouse = context.mouse(),
+                currAngle = Math.atan2(currMouse[1] - pivot[1], currMouse[0] - pivot[0]);
 
-            context.replace(
-                actionRotateWay(wayId, pivot, newAngle - angle, context.projection),
-                annotation
-            );
+            if (typeof prevAngle === 'undefined') prevAngle = currAngle;
+            var delta = currAngle - prevAngle;
 
-            angle = newAngle;
+            fn(actionRotateWay(wayId, pivot, delta, context.projection), annotation);
+            prevAngle = currAngle;
+            prevGraph = context.graph();
         }
 
 
@@ -81,7 +115,9 @@ export function modeRotate(context, wayId) {
 
 
     mode.exit = function() {
-        context.uninstall(edit);
+        behaviors.forEach(function(behavior) {
+            context.uninstall(behavior);
+        });
 
         context.surface()
             .on('mousemove.rotate', null)
