@@ -56,6 +56,5 @@ export function operationReflect(selectedIDs, context, axis) {
     operation.title = t('operations.reflect.title');
     operation.behavior = behaviorOperation(context).which(operation);
 
-
     return operation;
 }

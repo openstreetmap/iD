@@ -1,5 +1,6 @@
 import { t } from '../util/locale';
 import { modeRotateWay } from '../modes/index';
+import { behaviorOperation } from '../behavior/index';
 
 
 export function operationRotate(selectedIDs, context) {
@@ -7,6 +8,7 @@ export function operationRotate(selectedIDs, context) {
         entity = context.entity(entityId),
         extent = entity.extent(context.graph()),
         geometry = context.geometry(entityId);
+
 
     var operation = function() {
         context.enter(modeRotateWay(context, entityId));
@@ -47,7 +49,7 @@ export function operationRotate(selectedIDs, context) {
     operation.id = 'rotate';
     operation.keys = [t('operations.rotate.key')];
     operation.title = t('operations.rotate.title');
-
+    operation.behavior = behaviorOperation(context).which(operation);
 
     return operation;
 }

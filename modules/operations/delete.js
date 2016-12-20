@@ -1,9 +1,10 @@
 import _ from 'lodash';
 import { t } from '../util/locale';
-import { modeBrowse, modeSelect } from '../modes/index';
 import { actionDeleteMultiple } from '../actions/index';
-import { uiCmd } from '../ui/index';
+import { behaviorOperation } from '../behavior/index';
 import { geoSphericalDistance } from '../geo/index';
+import { modeBrowse, modeSelect } from '../modes/index';
+import { uiCmd } from '../ui/index';
 
 
 export function operationDelete(selectedIDs, context) {
@@ -82,7 +83,7 @@ export function operationDelete(selectedIDs, context) {
     operation.id = 'delete';
     operation.keys = [uiCmd('⌘⌫'), uiCmd('⌘⌦'), uiCmd('⌦')];
     operation.title = t('operations.delete.title');
-
+    operation.behavior = behaviorOperation(context).which(operation);
 
     return operation;
 }

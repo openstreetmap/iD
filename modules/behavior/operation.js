@@ -12,7 +12,7 @@ export function behaviorOperation(context) {
             keybinding = d3keybinding('behavior.key.' + which.id);
             keybinding.on(which.keys, function() {
                 d3.event.preventDefault();
-                if (!(context.inIntro() || which.disabled())) {
+                if (which.available() && !which.disabled() && !context.inIntro()) {
                     which();
                 }
             });

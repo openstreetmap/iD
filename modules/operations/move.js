@@ -1,7 +1,8 @@
 import _ from 'lodash';
 import { t } from '../util/locale';
-import { geoExtent } from '../geo/index';
 import { actionMove } from '../actions/index';
+import { behaviorOperation } from '../behavior/index';
+import { geoExtent } from '../geo/index';
 import { modeMove } from '../modes/index';
 
 
@@ -9,6 +10,7 @@ export function operationMove(selectedIDs, context) {
     var extent = selectedIDs.reduce(function(extent, id) {
             return extent.extend(context.entity(id).extent(context.graph()));
         }, geoExtent());
+
 
     var operation = function() {
         context.enter(modeMove(context, selectedIDs));
@@ -44,7 +46,7 @@ export function operationMove(selectedIDs, context) {
     operation.id = 'move';
     operation.keys = [t('operations.move.key')];
     operation.title = t('operations.move.title');
-
+    operation.behavior = behaviorOperation(context).which(operation);
 
     return operation;
 }

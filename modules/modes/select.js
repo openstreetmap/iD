@@ -392,15 +392,21 @@ export function modeSelect(context, selectedIDs) {
 
         if (!checkSelectedIDs()) return;
 
-        behaviors.forEach(function(behavior) {
-            context.install(behavior);
-        });
-
         var operations = _.without(d3.values(Operations), Operations.operationDelete)
                 .map(function(o) { return o(selectedIDs, context); })
                 .filter(function(o) { return o.available(); });
 
         operations.unshift(Operations.operationDelete(selectedIDs, context));
+
+        operations.forEach(function(operation) {
+            if (operation.behavior) {
+                behaviors.push(operation.behavior);
+            }
+        });
+
+        behaviors.forEach(function(behavior) {
+            context.install(behavior);
+        });
 
         keybinding
             .on(['[','pgup'], previousVertex)
@@ -410,17 +416,6 @@ export function modeSelect(context, selectedIDs) {
             .on(['\\', 'pause'], nextParent)
             .on('⎋', esc, true)
             .on('space', toggleMenu);
-
-        operations.forEach(function(operation) {
-            operation.keys.forEach(function(key) {
-                keybinding.on(key, function() {
-                    d3.event.preventDefault();
-                    if (!(context.inIntro() || operation.disabled())) {
-                        operation();
-                    }
-                });
-            });
-        });
 
         d3.select(document)
             .call(keybinding);

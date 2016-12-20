@@ -1,6 +1,7 @@
 import _ from 'lodash';
 import { t } from '../util/locale';
 import { actionOrthogonalize } from '../actions/index';
+import { behaviorOperation } from '../behavior/index';
 
 
 export function operationOrthogonalize(selectedIDs, context) {
@@ -10,9 +11,9 @@ export function operationOrthogonalize(selectedIDs, context) {
         geometry = context.geometry(entityId),
         action = actionOrthogonalize(entityId, context.projection);
 
+
     var operation = function() {
-        var annotation = t('operations.orthogonalize.annotation.' + geometry);
-        context.perform(action, annotation);
+        context.perform(action, t('operations.orthogonalize.annotation.' + geometry));
     };
 
 
@@ -46,7 +47,7 @@ export function operationOrthogonalize(selectedIDs, context) {
     operation.id = 'orthogonalize';
     operation.keys = [t('operations.orthogonalize.key')];
     operation.title = t('operations.orthogonalize.title');
-
+    operation.behavior = behaviorOperation(context).which(operation);
 
     return operation;
 }

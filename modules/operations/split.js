@@ -1,7 +1,8 @@
 import _ from 'lodash';
 import { t } from '../util/locale';
-import { modeSelect } from '../modes/index';
 import { actionSplit } from '../actions/index';
+import { behaviorOperation } from '../behavior/index';
+import { modeSelect } from '../modes/index';
 
 
 export function operationSplit(selectedIDs, context) {
@@ -64,7 +65,7 @@ export function operationSplit(selectedIDs, context) {
     operation.id = 'split';
     operation.keys = [t('operations.split.key')];
     operation.title = t('operations.split.title');
-
+    operation.behavior = behaviorOperation(context).which(operation);
 
     return operation;
 }
