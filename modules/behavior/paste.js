@@ -59,15 +59,29 @@ export function behaviorPaste(context) {
         context.perform(action);
 
         var copies = action.copies();
+        var originals = _.invert(_.mapValues(copies, 'id'));
         for (var id in copies) {
             var oldEntity = oldGraph.entity(id),
                 newEntity = copies[id];
 
             extent._extend(oldEntity.extent(oldGraph));
-            newIDs.push(newEntity.id);
             context.perform(
                 actionChangeTags(newEntity.id, _.omit(newEntity.tags, omitTag))
             );
+
+            // Exclude child nodes from newIDs if their parent way was also copied.
+            var parents = context.graph().parentWays(newEntity),
+                parentCopied = false;
+            for (var i = 0; i < parents.length; i++) {
+                if (originals[parents[i].id]) {
+                    parentCopied = true;
+                    break;
+                }
+            }
+
+            if (!parentCopied) {
+                newIDs.push(newEntity.id);
+            }
         }
 
         // Put pasted objects where mouse pointer is..
