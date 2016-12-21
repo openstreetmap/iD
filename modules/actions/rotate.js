@@ -1,7 +1,7 @@
 import _ from 'lodash';
 
 
-export function actionRotateWay(wayId, pivot, angle, projection) {
+export function actionRotate(wayId, pivot, angle, projection) {
     return function(graph) {
         return graph.update(function(graph) {
             var way = graph.entity(wayId);

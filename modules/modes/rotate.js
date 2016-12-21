@@ -5,7 +5,7 @@ import { t } from '../util/locale';
 
 import {
     actionNoop,
-    actionRotateWay
+    actionRotate
 } from '../actions/index';
 
 import { behaviorEdit } from '../behavior/index';
@@ -90,7 +90,7 @@ export function modeRotate(context, wayId) {
             if (typeof prevAngle === 'undefined') prevAngle = currAngle;
             var delta = currAngle - prevAngle;
 
-            fn(actionRotateWay(wayId, pivot, delta, context.projection), annotation);
+            fn(actionRotate(wayId, pivot, delta, context.projection), annotation);
             prevAngle = currAngle;
             prevGraph = context.graph();
         }
