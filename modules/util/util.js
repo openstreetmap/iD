@@ -32,6 +32,30 @@ export function utilEntityOrMemberSelector(ids, graph) {
 }
 
 
+export function utilGetAllNodes(ids, graph) {
+    var seen = {};
+    var nodes = [];
+    ids.forEach(getNodes);
+    return nodes;
+
+    function getNodes(id) {
+        if (seen[id]) return;
+        seen[id] = true;
+
+        var entity = graph.hasEntity(id);
+        if (!entity) return;
+
+        if (entity.type === 'node') {
+            nodes.push(entity);
+        } else if (entity.type === 'way') {
+            entity.nodes.forEach(getNodes);
+        } else {
+            entity.members.map(function(member) { return member.id; }).forEach(getNodes);
+        }
+    }
+}
+
+
 export function utilDisplayName(entity) {
     var localizedNameKey = 'name:' + utilDetect().locale.toLowerCase().split('-')[0],
         name = entity.tags[localizedNameKey] || entity.tags.name || '',
