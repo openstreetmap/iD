@@ -7,6 +7,7 @@ export { geoExtent } from './extent.js';
 export { geoInterp } from './geo.js';
 export { geoRawMercator } from './raw_mercator.js';
 export { geoRoundCoords } from './geo.js';
+export { geoRotate } from './geo.js';
 export { geoLatToMeters } from './geo.js';
 export { geoLineIntersection } from './geo.js';
 export { geoLonToMeters } from './geo.js';

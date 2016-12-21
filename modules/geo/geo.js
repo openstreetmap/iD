@@ -104,6 +104,18 @@ export function geoAngle(a, b, projection) {
 }
 
 
+// Rotate all points counterclockwise around a pivot point by given angle
+export function geoRotate(points, angle, around) {
+    return points.map(function(point) {
+        var radial = [point[0] - around[0], point[1] - around[1]];
+        return [
+            radial[0] * Math.cos(angle) - radial[1] * Math.sin(angle) + around[0],
+            radial[0] * Math.sin(angle) + radial[1] * Math.cos(angle) + around[1]
+        ];
+    });
+}
+
+
 // Choose the edge with the minimal distance from `point` to its orthogonal
 // projection onto that edge, if such a projection exists, or the distance to
 // the closest vertex on that edge. Returns an object with the `index` of the

@@ -6,7 +6,8 @@ import {
 
 import {
     geoEuclideanDistance,
-    geoExtent
+    geoExtent,
+    geoRotate
 } from '../geo';
 
 
@@ -14,15 +15,6 @@ import {
 export function actionReflect(wayId, projection) {
     var useLongAxis = true;
 
-    function rotatePolygon(polygon, angle, centroid) {
-        return polygon.map(function(point) {
-            var radial = [point[0] - centroid[0], point[1] - centroid[1]];
-            return [
-                radial[0] * Math.cos(angle) - radial[1] * Math.sin(angle) + centroid[0],
-                radial[0] * Math.sin(angle) + radial[1] * Math.cos(angle) + centroid[1]
-            ];
-        });
-    }
 
     // http://gis.stackexchange.com/questions/22895/finding-minimum-area-rectangle-for-given-points
     // http://gis.stackexchange.com/questions/3739/generalisation-strategies-for-building-outlines/3756#3756
@@ -39,7 +31,7 @@ export function actionReflect(wayId, projection) {
         for (var i = 0; i < hull.length - 1; i++) {
             var c2 = hull[i + 1],
                 angle = Math.atan2(c2[1] - c1[1], c2[0] - c1[0]),
-                poly = rotatePolygon(hull, -angle, centroid),
+                poly = geoRotate(hull, -angle, centroid),
                 extent = poly.reduce(function(extent, point) {
                         return extent.extend(geoExtent(point));
                     }, geoExtent()),
@@ -54,7 +46,7 @@ export function actionReflect(wayId, projection) {
         }
 
         return {
-            poly: rotatePolygon(ssrExtent.polygon(), ssrAngle, centroid),
+            poly: geoRotate(ssrExtent.polygon(), ssrAngle, centroid),
             angle: ssrAngle
         };
     }
