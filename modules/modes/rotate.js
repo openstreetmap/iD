@@ -45,7 +45,7 @@ export function modeRotate(context, entityIDs) {
         ],
         annotation = entityIDs.length === 1 ?
             t('operations.rotate.annotation.' + context.geometry(entityIDs[0])) :
-            t('operations.move.annotation.multiple'),
+            t('operations.rotate.annotation.multiple'),
         prevGraph,
         prevAngle,
         prevTransform,

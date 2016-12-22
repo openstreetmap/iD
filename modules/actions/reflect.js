@@ -1,4 +1,3 @@
-import _ from 'lodash';
 import {
     polygonHull as d3polygonHull,
     polygonCentroid as d3polygonCentroid
@@ -10,17 +9,18 @@ import {
     geoRotate
 } from '../geo';
 
+import { utilGetAllNodes } from '../util';
+
 
 /* Reflect the given area around its axis of symmetry */
-export function actionReflect(wayId, projection) {
+export function actionReflect(reflectIds, projection) {
     var useLongAxis = true;
 
 
     // http://gis.stackexchange.com/questions/22895/finding-minimum-area-rectangle-for-given-points
     // http://gis.stackexchange.com/questions/3739/generalisation-strategies-for-building-outlines/3756#3756
-    function getSmallestSurroundingRectangle(graph, way) {
-        var nodes = _.uniq(graph.childNodes(way)),
-            points = nodes.map(function(n) { return projection(n.loc); }),
+    function getSmallestSurroundingRectangle(graph, nodes) {
+        var points = nodes.map(function(n) { return projection(n.loc); }),
             hull = d3polygonHull(points),
             centroid = d3polygonCentroid(hull),
             minArea = Infinity,
@@ -52,14 +52,9 @@ export function actionReflect(wayId, projection) {
     }
 
 
-    var action = function (graph) {
-        var targetWay = graph.entity(wayId);
-        if (!targetWay.isArea()) {
-            return graph;
-        }
-
-        var ssr = getSmallestSurroundingRectangle(graph, targetWay),
-            nodes = targetWay.nodes;
+    var action = function(graph) {
+        var nodes = utilGetAllNodes(reflectIds, graph),
+            ssr = getSmallestSurroundingRectangle(graph, nodes);
 
         // Choose line pq = axis of symmetry.
         // The shape's surrounding rectangle has 2 axes of symmetry.
@@ -85,8 +80,8 @@ export function actionReflect(wayId, projection) {
         var dy = q[1] - p[1];
         var a = (dx * dx - dy * dy) / (dx * dx + dy * dy);
         var b = 2 * dx * dy / (dx * dx + dy * dy);
-        for (var i = 0; i < nodes.length - 1; i++) {
-            var node = graph.entity(nodes[i]);
+        for (var i = 0; i < nodes.length; i++) {
+            var node = nodes[i];
             var c = projection(node.loc);
             var c2 = [
                 a * (c[0] - p[0]) + b * (c[1] - p[1]) + p[0],

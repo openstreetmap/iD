@@ -6,7 +6,8 @@ import { modeRotate } from '../modes/index';
 
 
 export function operationRotate(selectedIDs, context) {
-    var extent = selectedIDs.reduce(function(extent, id) {
+    var multi = (selectedIDs.length === 1 ? 'single' : 'multiple'),
+        extent = selectedIDs.reduce(function(extent, id) {
             return extent.extend(context.entity(id).extent(context.graph()));
         }, geoExtent());
 
@@ -35,7 +36,7 @@ export function operationRotate(selectedIDs, context) {
 
         function incompleteRelation(id) {
             var entity = context.entity(id);
-            return entity.type === 'relation' && !entity.isComplete(graph);
+            return entity.type === 'relation' && !entity.isComplete(context.graph());
         }
     };
 
@@ -43,8 +44,8 @@ export function operationRotate(selectedIDs, context) {
     operation.tooltip = function() {
         var disable = operation.disabled();
         return disable ?
-            t('operations.rotate.' + disable) :
-            t('operations.rotate.description.' + (selectedIDs.length === 1 ? 'single' : 'multiple'));
+            t('operations.rotate.' + disable + '.' + multi) :
+            t('operations.rotate.description.' + multi);
     };
 
 
