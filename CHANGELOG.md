@@ -1,5 +1,32 @@
 :warning: = Breaking change, may affect downstream projects or sites that embed iD.
 
+## 2.0.2
+##### Dec 22, 2016
+* Bugfixes:
+  * Update imageryBlacklists function to use blacklists from OSM API (#3623)
+  * Better checks for invalid ids in Select mode (#3640)
+  * Unable to toggle oneway=yes on highways (#3638)
+  * Hide labels along selected ways or near selected vertices (#3636)
+  * Windows/Chrome bug: missing mouseup was getting users stuck and unable to select features (#2151)
+  * Fix map moving with middle mouse click (#3612)
+* New Features:
+  * Pull LTR/RTL list from Transifex instead of hardcoding it (#3489)
+  * Refocus map and selectedIDs on undo/redo (#2204)
+  * Display labels for vertices (#2709)
+* Presets:
+  * Add Waterfall Preset (#3608)
+  * Adjust matchscores so that barrier doesn't take priority over other features (#3647)
+  * Add Public Bath Preset (#3642, thanks @Natsuyasumi)
+  * Remove "Covered" field from Bus Stop preset (#3627)
+  * Add surveillance and camera related presets (#3599, thanks @bkil)
+  * Add amenity=food_court and amenity=crematorium (#3621, thanks @samely)
+  * Add maxheight field and add it to many highway presets (#3605)
+  * Add fence and wall type fields, add height field to some barriers (#3602)
+  * Add presets for Aquarium, Resort, Dance Hall (#3579)
+  * Add Internet Access fields to many presets (#3568, thanks @bkil)
+  * Add highway=traffic_mirror preset (#3568, thanks @bkil)
+  * Improvements to Mast/Tower presets (#3561, thanks @bkil)
+
 ## 2.0.1
 ##### Nov 17, 2016
 * Bugfixes:
