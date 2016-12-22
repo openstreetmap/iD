@@ -31,8 +31,13 @@ export function operationReflect(selectedIDs, context, axis) {
 
 
     operation.available = function() {
-        return selectedIDs.length > 1 ||
-            context.entity(selectedIDs[0]).type !== 'node';
+        return _.some(selectedIDs, hasArea);
+
+        function hasArea(id) {
+            var entity = context.entity(id);
+            return (entity.type === 'way' && entity.isClosed()) ||
+                (entity.type ==='relation' && entity.isMultipolygon());
+        }
     };
 
 
