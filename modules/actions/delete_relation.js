@@ -39,11 +39,5 @@ export function actionDeleteRelation(relationId) {
     };
 
 
-    action.disabled = function(graph) {
-        if (!graph.entity(relationId).isComplete(graph))
-            return 'incomplete_relation';
-    };
-
-
     return action;
 }

@@ -1,6 +1,7 @@
 import _ from 'lodash';
 import { t } from '../util/locale';
 import { actionCircularize } from '../actions/index';
+import { behaviorOperation } from '../behavior/index';
 
 
 export function operationCircularize(selectedIDs, context) {
@@ -10,9 +11,9 @@ export function operationCircularize(selectedIDs, context) {
         geometry = context.geometry(entityId),
         action = actionCircularize(entityId, context.projection);
 
+
     var operation = function() {
-        var annotation = t('operations.circularize.annotation.' + geometry);
-        context.perform(action, annotation);
+        context.perform(action, t('operations.circularize.annotation.' + geometry));
     };
 
 
@@ -45,7 +46,7 @@ export function operationCircularize(selectedIDs, context) {
     operation.id = 'circularize';
     operation.keys = [t('operations.circularize.key')];
     operation.title = t('operations.circularize.title');
-
+    operation.behavior = behaviorOperation(context).which(operation);
 
     return operation;
 }

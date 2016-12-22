@@ -1,29 +1,30 @@
 describe('iD.actionMove', function() {
     var projection = d3.geoMercator().scale(250 / Math.PI);
 
-    describe('#disabled', function() {
-        it('returns falsy by default', function() {
-            var node  = iD.Node({loc: [0, 0]}),
-                action = iD.actionMove([node.id], [0, 0], projection),
-                graph = iD.Graph([node]);
-            expect(action.disabled(graph)).not.to.be.ok;
-        });
+    // This was moved to operationMove.  We should test operations and move this test there.
+    // describe('#disabled', function() {
+    //     it('returns falsy by default', function() {
+    //         var node  = iD.Node({loc: [0, 0]}),
+    //             action = iD.actionMove([node.id], [0, 0], projection),
+    //             graph = iD.Graph([node]);
+    //         expect(action.disabled(graph)).not.to.be.ok;
+    //     });
 
-        it('returns \'incomplete_relation\' for an incomplete relation', function() {
-            var relation = iD.Relation({members: [{id: 1}]}),
-                action = iD.actionMove([relation.id], [0, 0], projection),
-                graph = iD.Graph([relation]);
-            expect(action.disabled(graph)).to.equal('incomplete_relation');
-        });
+    //     it('returns \'incomplete_relation\' for an incomplete relation', function() {
+    //         var relation = iD.Relation({members: [{id: 1}]}),
+    //             action = iD.actionMove([relation.id], [0, 0], projection),
+    //             graph = iD.Graph([relation]);
+    //         expect(action.disabled(graph)).to.equal('incomplete_relation');
+    //     });
 
-        it('returns falsy for a complete relation', function() {
-            var node  = iD.Node({loc: [0, 0]}),
-                relation = iD.Relation({members: [{id: node.id}]}),
-                action = iD.actionMove([relation.id], [0, 0], projection),
-                graph = iD.Graph([node, relation]);
-            expect(action.disabled(graph)).not.to.be.ok;
-        });
-    });
+    //     it('returns falsy for a complete relation', function() {
+    //         var node  = iD.Node({loc: [0, 0]}),
+    //             relation = iD.Relation({members: [{id: node.id}]}),
+    //             action = iD.actionMove([relation.id], [0, 0], projection),
+    //             graph = iD.Graph([node, relation]);
+    //         expect(action.disabled(graph)).not.to.be.ok;
+    //     });
+    // });
 
     it('moves all nodes in a way by the given amount', function() {
         var node1  = iD.Node({loc: [0, 0]}),

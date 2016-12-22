@@ -8,6 +8,7 @@ export { behaviorEdit } from './edit';
 export { behaviorHash } from './hash';
 export { behaviorHover } from './hover';
 export { behaviorLasso } from './lasso';
+export { behaviorOperation } from './operation';
 export { behaviorPaste } from './paste';
 export { behaviorSelect } from './select';
 export { behaviorTail } from './tail';

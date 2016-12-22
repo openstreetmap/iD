@@ -5,6 +5,7 @@ import {
     actionMergePolygon
 } from '../actions/index';
 
+import { behaviorOperation } from '../behavior/index';
 import { modeSelect } from '../modes/index';
 
 
@@ -68,7 +69,7 @@ export function operationMerge(selectedIDs, context) {
     operation.id = 'merge';
     operation.keys = [t('operations.merge.key')];
     operation.title = t('operations.merge.title');
-
+    operation.behavior = behaviorOperation(context).which(operation);
 
     return operation;
 }

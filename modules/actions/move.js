@@ -286,17 +286,6 @@ export function actionMove(moveIds, tryDelta, projection, cache) {
     };
 
 
-    action.disabled = function(graph) {
-        function incompleteRelation(id) {
-            var entity = graph.entity(id);
-            return entity.type === 'relation' && !entity.isComplete(graph);
-        }
-
-        if (_.some(moveIds, incompleteRelation))
-            return 'incomplete_relation';
-    };
-
-
     action.delta = function() {
         return delta;
     };

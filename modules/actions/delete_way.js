@@ -39,20 +39,5 @@ export function actionDeleteWay(wayId) {
     };
 
 
-    action.disabled = function(graph) {
-        var disabled = false;
-
-        graph.parentRelations(graph.entity(wayId)).forEach(function(parent) {
-            var type = parent.tags.type,
-                role = parent.memberById(wayId).role || 'outer';
-            if (type === 'route' || type === 'boundary' || (type === 'multipolygon' && role === 'outer')) {
-                disabled = 'part_of_relation';
-            }
-        });
-
-        return disabled;
-    };
-
-
     return action;
 }
