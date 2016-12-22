@@ -163,6 +163,23 @@
                 "too_large": "Nie można przesunąć tego obiektu, ponieważ nie jest on wystarczająco widoczny.",
                 "connected_to_hidden": "Nie można przesunąć tego obiektu, ponieważ jest on połączony z innym niewidocznym obiektem lub jego cechą. "
             },
+            "reflect": {
+                "title": "odbij",
+                "description": {
+                    "long": "Odbij wzdłuż dłuższego boku.",
+                    "short": "Odbij wzdłuż krótszego boku."
+                },
+                "key": {
+                    "long": "T",
+                    "short": "Y"
+                },
+                "annotation": {
+                    "long": "Odbito obszar wzdłuż dłuższego boku.",
+                    "short": "Odbito obszar wzdłuż krótszego boku."
+                },
+                "too_large": "Odbicie nie powiodło się - obiekt nie jest widoczny w całości.",
+                "connected_to_hidden": "Odbicie nie powiodło się - obiekt jest połączony z niewidocznym obiektem."
+            },
             "rotate": {
                 "title": "Obróć",
                 "description": "Obróć ten obiekt względem jego środka.",
@@ -784,6 +801,20 @@
                 "barrier": {
                     "label": "Typ"
                 },
+                "bath/open_air": {
+                    "label": "Zewnątrz"
+                },
+                "bath/sand_bath": {
+                    "label": "Kąpiele Piaskowe"
+                },
+                "bath/type": {
+                    "label": "Typ",
+                    "options": {
+                        "foot_bath": "Mycie Nóg",
+                        "hot_spring": "Gorące Źródła",
+                        "onsen": "Japoński Onsen"
+                    }
+                },
                 "beauty": {
                     "label": "Typ sklepu"
                 },
@@ -819,6 +850,21 @@
                 },
                 "building_area": {
                     "label": "Budynek"
+                },
+                "camera/direction": {
+                    "label": "Kierunek (w stopniach, zgodnie z ruchem wskazówek zegara)",
+                    "placeholder": "45, 90, 180, 270"
+                },
+                "camera/mount": {
+                    "label": "Mocowanie Kamery"
+                },
+                "camera/type": {
+                    "label": "Typ Kamery",
+                    "options": {
+                        "dome": "Kopułkowa",
+                        "fixed": "Stacjonarna",
+                        "panning": "Obrotowa"
+                    }
                 },
                 "capacity": {
                     "label": "Pojemność",
@@ -857,6 +903,10 @@
                 },
                 "construction": {
                     "label": "Typ"
+                },
+                "contact/webcam": {
+                    "label": "Adres webcam",
+                    "placeholder": "http://przyklad.pl/"
                 },
                 "content": {
                     "label": "Zawartość"
@@ -1033,7 +1083,7 @@
                     "label": "Poręcz"
                 },
                 "height": {
-                    "label": "Wysokość (m)"
+                    "label": "Wysokość (metry)"
                 },
                 "highway": {
                     "label": "Typ"
@@ -1367,6 +1417,9 @@
                 "power_supply": {
                     "label": "Zasilacz"
                 },
+                "product": {
+                    "label": "Produkt"
+                },
                 "railway": {
                     "label": "Typ"
                 },
@@ -1535,6 +1588,20 @@
                 },
                 "surface": {
                     "label": "Nawierzchnia"
+                },
+                "surveillance": {
+                    "label": "Inwigilacja"
+                },
+                "surveillance/type": {
+                    "label": "Typ monitoringu",
+                    "options": {
+                        "ALPR": "Automatyczne rozpoznanie tablicy rejestracyjnej",
+                        "camera": "Kamera",
+                        "guard": "Strażnik"
+                    }
+                },
+                "surveillance/zone": {
+                    "label": "Obszar Dozoru"
                 },
                 "tactile_paving": {
                     "label": "Wypustki dla niewidomych"
@@ -1840,6 +1907,10 @@
                     "name": "Centrum Coworkingu",
                     "terms": "coworking"
                 },
+                "amenity/crematorium": {
+                    "name": "Krematorium",
+                    "terms": "Krematorium"
+                },
                 "amenity/dentist": {
                     "name": "Dentysta",
                     "terms": "stomatolog, gabinet stomatologiczny"
@@ -1871,6 +1942,10 @@
                 "amenity/fire_station": {
                     "name": "Remiza strażacka",
                     "terms": "straż,osp,psp,ochotnicza straż pożarna"
+                },
+                "amenity/food_court": {
+                    "name": "Food Court",
+                    "terms": "food court"
                 },
                 "amenity/fountain": {
                     "name": "Fontanna",
@@ -1983,6 +2058,10 @@
                 "amenity/pub": {
                     "name": "Pub",
                     "terms": "pub,piwo,wino"
+                },
+                "amenity/public_bath": {
+                    "name": "Łaźnie Publiczne",
+                    "terms": "Łazienki, mycie,"
                 },
                 "amenity/public_bookcase": {
                     "name": "Półka bookcrossingowa",
@@ -2346,6 +2425,10 @@
                     "name": "Magazyn",
                     "terms": "Magazyn"
                 },
+                "camp_site/camp_pitch": {
+                    "name": "Miejsce na Kempingu",
+                    "terms": "miejsce na namiot"
+                },
                 "craft": {
                     "name": "Rzemiosło",
                     "terms": "rzemieślnicy"
@@ -2605,10 +2688,12 @@
                     "terms": "dołek golfowy"
                 },
                 "golf/lateral_water_hazard_area": {
-                    "name": "Przeszkoda Wodna Boczna"
+                    "name": "Przeszkoda Wodna Boczna",
+                    "terms": "przeszkoda wodna boczna"
                 },
                 "golf/lateral_water_hazard_line": {
-                    "name": "Przeszkoda Wodna Boczna"
+                    "name": "Przeszkoda Wodna Boczna",
+                    "terms": "przeszkoda wodna boczna"
                 },
                 "golf/rough": {
                     "name": "rough",
@@ -2619,10 +2704,12 @@
                     "terms": "tee box"
                 },
                 "golf/water_hazard_area": {
-                    "name": "Przeszkoda Wodna"
+                    "name": "Przeszkoda Wodna",
+                    "terms": "przeszkoda wodna"
                 },
                 "golf/water_hazard_line": {
-                    "name": "Przeszkoda Wodna"
+                    "name": "Przeszkoda Wodna",
+                    "terms": "przeszkoda wodna"
                 },
                 "healthcare/blood_donation": {
                     "name": "Centrum Dawców Krwi",
@@ -2796,7 +2883,8 @@
                     "terms": "miejsce,zawracania,zawracanie"
                 },
                 "highway/turning_loop": {
-                    "name": "Węzeł Do Zawracania (Z Wyspą)"
+                    "name": "Węzeł Do Zawracania (Z Wyspą)",
+                    "terms": "zawracanie"
                 },
                 "highway/unclassified": {
                     "name": "Droga czwartorzędna",
@@ -2958,7 +3046,8 @@
                     "terms": "wspólnota gruntowa"
                 },
                 "leisure/dance": {
-                    "name": "Sala Taneczna"
+                    "name": "Sala Taneczna",
+                    "terms": "dyskoteka"
                 },
                 "leisure/dog_park": {
                     "name": "Park dla psów",
@@ -2977,7 +3066,8 @@
                     "terms": "yoga, szkoła yogi, centrum yogi, praktyka yogi"
                 },
                 "leisure/fitness_station": {
-                    "name": "Przyrządy do ćwiczeń"
+                    "name": "Przyrządy do ćwiczeń",
+                    "terms": "siłownia zewnętrzna"
                 },
                 "leisure/garden": {
                     "name": "Ogród",
@@ -3060,7 +3150,8 @@
                     "terms": "plac zabaw"
                 },
                 "leisure/resort": {
-                    "name": "Resort"
+                    "name": "Resort",
+                    "terms": "ośrodek wczasowy"
                 },
                 "leisure/running_track": {
                     "name": "Bieżnia",
@@ -3177,6 +3268,10 @@
                     "name": "Monitoring",
                     "terms": "ochrona monitoringowa"
                 },
+                "man_made/surveillance_camera": {
+                    "name": "Kamera monitoringu",
+                    "terms": "monitoring"
+                },
                 "man_made/survey_point": {
                     "name": "Punkt geodezyjny",
                     "terms": "punkt geodezyjny"
@@ -3202,8 +3297,8 @@
                     "terms": "Filtracja wody,wodociągi"
                 },
                 "man_made/works": {
-                    "name": "Fabryka/zakład pracy",
-                    "terms": "fabryka, zakład"
+                    "name": "Fabryka",
+                    "terms": "zakład produkcyjny"
                 },
                 "military/airfield": {
                     "name": "Lotnisko wojskowe",
@@ -4326,6 +4421,10 @@
                 "waterway/water_point": {
                     "name": "Miejsce poboru wody (dla łodzi)",
                     "terms": "pobór wody"
+                },
+                "waterway/waterfall": {
+                    "name": "Wodospad",
+                    "terms": "siklawa"
                 },
                 "waterway/weir": {
                     "name": "Jaz",

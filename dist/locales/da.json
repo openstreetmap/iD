@@ -163,6 +163,23 @@
                 "too_large": "Dette kan ikke flyttes, da kortudsnittet ikke viser nok af objektet.",
                 "connected_to_hidden": "Dette kan ikke flyttes, da det er forbundet til et skjult objekt."
             },
+            "reflect": {
+                "title": "reflektere",
+                "description": {
+                    "long": "Reflektere dette objekt på tværs af sin lange akse.",
+                    "short": "Reflektere dette objekt på tværs af sin korte akse."
+                },
+                "key": {
+                    "long": "T",
+                    "short": "Y"
+                },
+                "annotation": {
+                    "long": "Reflektere et område på tværs af sin lange akse.",
+                    "short": "Reflektere et område på tværs af sin korte akse."
+                },
+                "too_large": "Dette kan ikke blive reflekteret pga der er ikke nok område synligt.",
+                "connected_to_hidden": "Dette kan ikke blive reflekteret pga det er forbindet til et skjult objekt."
+            },
             "rotate": {
                 "title": "Rotér",
                 "description": "Roterer dette objekt omkring dets centerpunkt.",
@@ -784,6 +801,20 @@
                 "barrier": {
                     "label": "Type"
                 },
+                "bath/open_air": {
+                    "label": "Friluftsbad"
+                },
+                "bath/sand_bath": {
+                    "label": "Mudderbad"
+                },
+                "bath/type": {
+                    "label": "Specialitet",
+                    "options": {
+                        "foot_bath": "Fodbad",
+                        "hot_spring": "Varme bade",
+                        "onsen": "Japansk varmebade"
+                    }
+                },
                 "beauty": {
                     "label": "Butikstype"
                 },
@@ -1385,6 +1416,9 @@
                 },
                 "power_supply": {
                     "label": "Eltransformator"
+                },
+                "product": {
+                    "label": "Produkt"
                 },
                 "railway": {
                     "label": "Type"
@@ -2024,6 +2058,10 @@
                 "amenity/pub": {
                     "name": "Værtshus",
                     "terms": "Værtshus, Pub, Ølstue"
+                },
+                "amenity/public_bath": {
+                    "name": "Offentligt bad",
+                    "terms": "Offentligt bad"
                 },
                 "amenity/public_bookcase": {
                     "name": "Bogkasse",
@@ -3260,7 +3298,7 @@
                 },
                 "man_made/works": {
                     "name": "Fabrik",
-                    "terms": "Fabrik, Produktionsvirksomhed"
+                    "terms": "Fabrik, Fremstillingsvirksomhed, Produktionsvirksomhed"
                 },
                 "military/airfield": {
                     "name": "Flyveplads",
@@ -4403,6 +4441,10 @@
                 "waterway/water_point": {
                     "name": "Havnedrikkevand",
                     "terms": "Havnedrikkevand, Ferskvand"
+                },
+                "waterway/waterfall": {
+                    "name": "Vandfald",
+                    "terms": "Vandfald"
                 },
                 "waterway/weir": {
                     "name": "Stemmeværk",

@@ -163,6 +163,23 @@
                 "too_large": "Objekt není možné přesunout, protože není vidět dostatečně velká část.",
                 "connected_to_hidden": "Objekt není možné přesunout, protože je napojen na skrytý objekt."
             },
+            "reflect": {
+                "title": "zrcadlit",
+                "description": {
+                    "long": "Zrcadlit tento objekt podle jeho delší osy.",
+                    "short": "Zrcadlit tento objekt podle jeho kratší osy."
+                },
+                "key": {
+                    "long": "T",
+                    "short": "Y"
+                },
+                "annotation": {
+                    "long": "Plocha ozrcadlena podle delší osy.",
+                    "short": "Plocha ozrcadlena podle kratší osy."
+                },
+                "too_large": "Tento objekt nelze zrcadlit, protože z něj není vidět dostatečně velká část.",
+                "connected_to_hidden": "Tento objekt nelze zrcadlit, protože je spojen se skrytým objektem."
+            },
             "rotate": {
                 "title": "Otočit",
                 "description": "Otočit tento objekt okolo středu.",
@@ -337,6 +354,7 @@
             "switch": "Přepnout zpět na toto pozadí",
             "custom": "Vlastní",
             "custom_button": "Editovat vlastní pozadí",
+            "custom_prompt": "Vložte šablonu pro URL dlaždic. Platné proměnné jsou {zoom}, {x}, {y} u schématu Z/X/Y a {u} u schématu hierarchicky čtvrcených dlaždic.",
             "fix_misalignment": "Zarovnat podklad",
             "imagery_source_faq": "Odkud jsou tyto podklady?",
             "reset": "vrátit na začátek",
@@ -1027,9 +1045,6 @@
                 },
                 "handrail": {
                     "label": "Zábradlí"
-                },
-                "height": {
-                    "label": "Výška (metry)"
                 },
                 "highway": {
                     "label": "Typ"
@@ -3165,10 +3180,6 @@
                 "man_made/water_works": {
                     "name": "Vodárna",
                     "terms": "vodárna,úpravna vody"
-                },
-                "man_made/works": {
-                    "name": "Továrna",
-                    "terms": "továrna,automobilka,ocelárna,železárna,hliníkárna,pivovar,rafinérie,zpracování,průmysl,recyklace,manufaktura"
                 },
                 "military/airfield": {
                     "name": "Vojenské letiště",

@@ -163,6 +163,23 @@
                 "too_large": "Không thể di chuyển đối tượng này vì chỉ có thấy được một phần rất nhỏ.",
                 "connected_to_hidden": "Không thể di chuyển đối tượng này vì nó nối liền với một đối tượng ẩn."
             },
+            "reflect": {
+                "title": "phản chiếu",
+                "description": {
+                    "long": "Phản chiếu đối tượng này qua trục dài.",
+                    "short": "Phản chiếu đối tượng này qua trục ngắn."
+                },
+                "key": {
+                    "long": "P",
+                    "short": "N"
+                },
+                "annotation": {
+                    "long": "phản chiếu vùng qua trục dài",
+                    "short": "phản chiếu vùng qua trục ngắn"
+                },
+                "too_large": "Không thể phản chiếu đối tượng này vì chỉ có thấy được một phần rất nhỏ.",
+                "connected_to_hidden": "Không thể phản chiếu đối tượng này vì nó nối liền với một đối tượng ẩn."
+            },
             "rotate": {
                 "title": "Xoay",
                 "description": "Xoay đối tượng này quanh điểm trung tâm.",
@@ -784,6 +801,20 @@
                 "barrier": {
                     "label": "Kiểu"
                 },
+                "bath/open_air": {
+                    "label": "Ngoài trời"
+                },
+                "bath/sand_bath": {
+                    "label": "Tắm Cát"
+                },
+                "bath/type": {
+                    "label": "Nét Đặc biệt",
+                    "options": {
+                        "foot_bath": "Ngâm Chân",
+                        "hot_spring": "Suối Nước Nóng",
+                        "onsen": "Suối Nước Nóng Nhật"
+                    }
+                },
                 "beauty": {
                     "label": "Loại Tiệm"
                 },
@@ -1385,6 +1416,9 @@
                 },
                 "power_supply": {
                     "label": "Nguồn Điện"
+                },
+                "product": {
+                    "label": "Sản phẩm"
                 },
                 "railway": {
                     "label": "Kiểu"
@@ -2024,6 +2058,10 @@
                 "amenity/pub": {
                     "name": "Quán rượu Pub",
                     "terms": "quán rượu pub, quán nhậu pub, tiệm rượu pub, tiệm nhậu pub, pub, quan ruou pub, quan nhau pub, tiem ruou pub, tiem nhau pub"
+                },
+                "amenity/public_bath": {
+                    "name": "Nơi Tắm Công cộng",
+                    "terms": "nơi tắm công cộng, nhà tắm công cộng, phòng tắm công cộng, hồ tắm công cộng, noi tam cong cong, nha tam cong cong, phong tam cong cong, ho tam cong cong"
                 },
                 "amenity/public_bookcase": {
                     "name": "Tủ sách Công cộng",
@@ -3260,7 +3298,7 @@
                 },
                 "man_made/works": {
                     "name": "Nhà máy",
-                    "terms": "nhà máy, hãng, xưởng, nha may, hang, xuong"
+                    "terms": "nhà máy, xí nghiệp, xưởng, hãng, nha may, xi nghiep, xuong, hang"
                 },
                 "military/airfield": {
                     "name": "Căn cứ Không quân",
@@ -3546,6 +3584,10 @@
                 "power/minor_line": {
                     "name": "Đường Dây điện Hạ/Trung thế",
                     "terms": "đường dây điện trung thế, đường dây điện hạ thế, đường dây điện trung áp, đường dây điện hạ áp, duong day dien trung the, duong day dien ha the, duong day dien trung ap, duong day dien ha ap"
+                },
+                "power/plant": {
+                    "name": "Khu Nhà máy Điện",
+                    "terms": "khu nhà máy điện, khu nha may dien"
                 },
                 "power/pole": {
                     "name": "Cột điện",
@@ -4403,6 +4445,10 @@
                 "waterway/water_point": {
                     "name": "Vòi Nước uống dành cho Tàu biển",
                     "terms": "vòi nước uống dành cho tàu biển, máy nước uống dành cho tàu biển, trạm nước uống dành cho tàu biển, voi nuoc uong danh cho tau bien, may nuoc uong danh cho tau bien, tram nuoc uong danh cho tau bien"
+                },
+                "waterway/waterfall": {
+                    "name": "Tháp nước",
+                    "terms": "tháp nước, thap nuoc"
                 },
                 "waterway/weir": {
                     "name": "Đập Tràn",

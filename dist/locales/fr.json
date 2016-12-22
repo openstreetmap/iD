@@ -830,6 +830,8 @@
                 "camera/type": {
                     "label": "Type de caméra",
                     "options": {
+                        "dome": "Dôme",
+                        "fixed": "Fixée",
                         "panning": "Panoramique"
                     }
                 },
@@ -1048,9 +1050,6 @@
                 },
                 "handrail": {
                     "label": "Rampe - à main"
-                },
-                "height": {
-                    "label": "Hauteur (mètres)"
                 },
                 "highway": {
                     "label": "Type"
@@ -1384,6 +1383,9 @@
                 "power_supply": {
                     "label": "Source de courant"
                 },
+                "product": {
+                    "label": "Production"
+                },
                 "railway": {
                     "label": "Type"
                 },
@@ -1559,8 +1561,13 @@
                 "surveillance/type": {
                     "label": "Type de surveillance",
                     "options": {
+                        "ALPR": "Lecteur de plaque d'immatriculation automatique",
+                        "camera": "Caméra de surveillance",
                         "guard": "Gardien"
                     }
+                },
+                "surveillance/zone": {
+                    "label": "Zone de surveillance"
                 },
                 "tactile_paving": {
                     "label": "Équipement de voirie podotactile"
@@ -1867,7 +1874,8 @@
                     "terms": "Espace de coworking,Lieu de coworking,Coworking,Espace de travail collaboratif"
                 },
                 "amenity/crematorium": {
-                    "name": "Crématorium"
+                    "name": "Crématorium",
+                    "terms": "Crématorium"
                 },
                 "amenity/dentist": {
                     "name": "Dentiste",
@@ -1914,7 +1922,7 @@
                     "terms": "Station essence, Station service"
                 },
                 "amenity/grave_yard": {
-                    "name": "Cimetière",
+                    "name": "Petit Cimetière",
                     "terms": "Cimetière"
                 },
                 "amenity/grit_bin": {
@@ -2016,6 +2024,9 @@
                 "amenity/pub": {
                     "name": "Pub",
                     "terms": "Pub"
+                },
+                "amenity/public_bath": {
+                    "name": "Bain public"
                 },
                 "amenity/public_bookcase": {
                     "name": "Microbibliothèque",
@@ -2329,7 +2340,7 @@
                     "terms": "Crèche,Halte-garderie,Jardin d'enfants,École maternelle,École enfantine"
                 },
                 "building/public": {
-                    "name": "Établissement public",
+                    "name": "Bâtiment public",
                     "terms": "Bâtiment public"
                 },
                 "building/residential": {
@@ -3104,15 +3115,15 @@
                     "terms": "Aire de Jeu, Cour de récréation"
                 },
                 "leisure/resort": {
-                    "name": "Relaxation",
-                    "terms": "SPA,sona,détente"
+                    "name": "Complexe hôtelier",
+                    "terms": "Complexe hôtelier, Complexe touristique, Spa, détente, Relaxation, Station thermale."
                 },
                 "leisure/running_track": {
                     "name": "Piste de course à pied",
                     "terms": "Piste de course à pied"
                 },
                 "leisure/slipway": {
-                    "name": "Mise à l'eau",
+                    "name": "Cale de mise à l'eau",
                     "terms": "Cale de lancement, Cale, Cale de mise à l'eau, Rampe de mise à l'eau"
                 },
                 "leisure/sports_centre": {
@@ -3223,7 +3234,8 @@
                     "terms": "caméra, vidéo"
                 },
                 "man_made/surveillance_camera": {
-                    "name": "Caméra de surveillance"
+                    "name": "Caméra de surveillance",
+                    "terms": "Caméra,Vidéosurveillance,Vidéoprotection"
                 },
                 "man_made/survey_point": {
                     "name": "Borne géodésique",
@@ -3251,7 +3263,7 @@
                 },
                 "man_made/works": {
                     "name": "Usine",
-                    "terms": "usine, site industriel"
+                    "terms": "Usine"
                 },
                 "military/airfield": {
                     "name": "Aérodrome",
@@ -3406,8 +3418,8 @@
                     "terms": "Bureau d'entreprise, Siège social"
                 },
                 "office/educational_institution": {
-                    "name": "Établissement d'enseignement",
-                    "terms": "Établissement d'enseignement"
+                    "name": "Bureau de l'établissement d'enseignement",
+                    "terms": "Bureau de l'établissement d'enseignement"
                 },
                 "office/employment_agency": {
                     "name": "Agence pour l'emploi",
@@ -3422,7 +3434,7 @@
                     "terms": "Bureau financier"
                 },
                 "office/government": {
-                    "name": "Établissement public",
+                    "name": "Administration publique",
                     "terms": "Bureau du gouvernement"
                 },
                 "office/government/register_office": {
@@ -3537,6 +3549,10 @@
                 "power/minor_line": {
                     "name": "Ligne électrique mineure",
                     "terms": "Ligne électrique mineure"
+                },
+                "power/plant": {
+                    "name": "Centrale électrique",
+                    "terms": "Centrale électrique"
                 },
                 "power/pole": {
                     "name": "Poteau électrique",
@@ -3688,7 +3704,7 @@
                     "terms": "Vente de literie, Vente de matelas"
                 },
                 "shop/beverages": {
-                    "name": "Vente de boissons alcolisées",
+                    "name": "Magasin de boissons",
                     "terms": "Magasin de vins et spiritueux"
                 },
                 "shop/bicycle": {
@@ -3764,7 +3780,7 @@
                     "terms": "Confiserie"
                 },
                 "shop/convenience": {
-                    "name": "Supérette",
+                    "name": "Épicerie / Supérette ",
                     "terms": "Supérette, Petite épicerie du coin"
                 },
                 "shop/copyshop": {
@@ -3772,8 +3788,8 @@
                     "terms": "Photocopies, Impression"
                 },
                 "shop/cosmetics": {
-                    "name": "Parfumerie",
-                    "terms": "Vente de cosmétiques"
+                    "name": "Magasin de cosmétiques",
+                    "terms": "Vente de cosmétiques, Parfumerie"
                 },
                 "shop/craft": {
                     "name": "Magasin d'arts et loisirs créatifs",
@@ -4394,6 +4410,10 @@
                 "waterway/water_point": {
                     "name": "Eau potable",
                     "terms": "Eau potable"
+                },
+                "waterway/waterfall": {
+                    "name": "Cascade",
+                    "terms": "Cascade, Chute d'eau"
                 },
                 "waterway/weir": {
                     "name": "Seuil",

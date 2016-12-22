@@ -1708,6 +1708,10 @@
                 "amenity/hospital": {
                     "name": "Ligoninės kiemas"
                 },
+                "amenity/kindergarten": {
+                    "name": "Vaikų darželio plotas",
+                    "terms": "vaikų darželis,darželio plotas"
+                },
                 "amenity/library": {
                     "name": "Biblioteka",
                     "terms": "biblioteka,skaitykla"
@@ -1955,7 +1959,8 @@
                     "terms": "pramoninis,pastatas,statinys,gamykla,įmonė"
                 },
                 "building/kindergarten": {
-                    "name": "Vaikų daržėlio pastatas"
+                    "name": "Vaikų darželio pastatas",
+                    "terms": "vaikų darželis,darželio pastatas"
                 },
                 "building/public": {
                     "name": "Viešasis pastatas",

@@ -817,6 +817,21 @@
                 "building_area": {
                     "label": "Edifício"
                 },
+                "camera/direction": {
+                    "label": "Direção (Graus no sentido dos ponteiros do relógio)",
+                    "placeholder": "45, 90, 180, 270"
+                },
+                "camera/mount": {
+                    "label": "Suporte para câmara"
+                },
+                "camera/type": {
+                    "label": "Tipo de câmara",
+                    "options": {
+                        "dome": "Teto / Domo",
+                        "fixed": "Fixa",
+                        "panning": "Móvel"
+                    }
+                },
                 "capacity": {
                     "label": "Capacidade",
                     "placeholder": "50, 100, 200..."
@@ -854,6 +869,10 @@
                 },
                 "construction": {
                     "label": "Tipo"
+                },
+                "contact/webcam": {
+                    "label": "URL da webcam",
+                    "placeholder": "http://example.com/"
                 },
                 "content": {
                     "label": "Conteúdos"
@@ -976,6 +995,9 @@
                 "fee": {
                     "label": "Taxa"
                 },
+                "fence_type": {
+                    "label": "Tipo"
+                },
                 "fire_hydrant/type": {
                     "label": "Tipo",
                     "options": {
@@ -1026,9 +1048,6 @@
                 "handrail": {
                     "label": "Corrimão"
                 },
-                "height": {
-                    "label": "Altura (metros)"
-                },
                 "highway": {
                     "label": "Tipo"
                 },
@@ -1073,6 +1092,9 @@
                 },
                 "internet_access/fee": {
                     "label": "Taxa de acesso à internet"
+                },
+                "internet_access/ssid": {
+                    "label": "SSID (Nome da rede)"
                 },
                 "kerb": {
                     "label": "Rampa"
@@ -1153,6 +1175,10 @@
                 },
                 "map_type": {
                     "label": "Tipo"
+                },
+                "maxheight": {
+                    "label": "Altura máxima",
+                    "placeholder": "4, 4.5, 5, 14'0\", 14'6\", 15'0\""
                 },
                 "maxspeed": {
                     "label": "Limite de velocidade",
@@ -1267,6 +1293,9 @@
                 },
                 "operator": {
                     "label": "Empresa Operadora"
+                },
+                "outdoor_seating": {
+                    "label": "Cadeiras exteriores"
                 },
                 "par": {
                     "label": "Par",
@@ -1520,6 +1549,20 @@
                 "surface": {
                     "label": "Tipo de superfície "
                 },
+                "surveillance": {
+                    "label": "Gênero de videovigilância"
+                },
+                "surveillance/type": {
+                    "label": "Tipo de videovigilância",
+                    "options": {
+                        "ALPR": "Leitor automático de matrícula",
+                        "camera": "Câmara",
+                        "guard": "Guarda"
+                    }
+                },
+                "surveillance/zone": {
+                    "label": "Zona de videovigilância"
+                },
                 "tactile_paving": {
                     "label": "Pavimento tátil para invisuais"
                 },
@@ -1596,6 +1639,9 @@
                         "house": "Até 5m (16ft)",
                         "street": "5 a 20m (16 a 65ft)"
                     }
+                },
+                "wall": {
+                    "label": "Tipo"
                 },
                 "water": {
                     "label": "Tipo"
@@ -1821,6 +1867,10 @@
                     "name": "Espaço de Trabalho Compartilhado",
                     "terms": "Coworking, Co-working, Escritório Compartilhado, Incubadora"
                 },
+                "amenity/crematorium": {
+                    "name": "Crematório",
+                    "terms": "Crematorium"
+                },
                 "amenity/dentist": {
                     "name": "Dentista",
                     "terms": "Dentist, Dentes, Dente, Ortodontia"
@@ -1852,6 +1902,10 @@
                 "amenity/fire_station": {
                     "name": "Quartel de bombeiros",
                     "terms": "Bombeiros, Quartel, Quartel dos Bombeiros, Quartel de Bombeiros, Bombeiros, Bombeiros Voluntários, BV"
+                },
+                "amenity/food_court": {
+                    "name": "Praça de alimentação",
+                    "terms": "Food Court, comida"
                 },
                 "amenity/fountain": {
                     "name": "Fonte decorativa",
@@ -2099,6 +2153,10 @@
                     "name": "Contentor de lixo",
                     "terms": "Garbage Dumpster"
                 },
+                "amenity/waste_transfer_station": {
+                    "name": "Estação de transferência de lixo",
+                    "terms": "Waste Transfer Station"
+                },
                 "amenity/water_point": {
                     "name": "Água potável para veículos recreativos",
                     "terms": "RV Drinking Water, Água, Caravana, Autocaravana"
@@ -2322,6 +2380,10 @@
                 "building/warehouse": {
                     "name": "Armazém",
                     "terms": "Warehouse, Arrecadação"
+                },
+                "camp_site/camp_pitch": {
+                    "name": "Sítio de acampamento",
+                    "terms": "Camp Pitch"
                 },
                 "craft": {
                     "name": "Artesão",
@@ -2581,6 +2643,14 @@
                     "name": "Buraco de golfe",
                     "terms": "Golf Hole"
                 },
+                "golf/lateral_water_hazard_area": {
+                    "name": "Perigo de água lateral",
+                    "terms": "Lateral Water Hazard"
+                },
+                "golf/lateral_water_hazard_line": {
+                    "name": "Perigo de água lateral",
+                    "terms": "Lateral Water Hazard"
+                },
                 "golf/rough": {
                     "name": "Rough",
                     "terms": "Rough"
@@ -2588,6 +2658,14 @@
                 "golf/tee": {
                     "name": "Tee",
                     "terms": "Tee Box"
+                },
+                "golf/water_hazard_area": {
+                    "name": "Perigo de água",
+                    "terms": "Water Hazard"
+                },
+                "golf/water_hazard_line": {
+                    "name": "Perigo de água",
+                    "terms": "Water Hazard"
                 },
                 "healthcare/blood_donation": {
                     "name": "Banco de sangue ",
@@ -2740,6 +2818,10 @@
                     "name": "Estrada florestal / agrícola",
                     "terms": "Estrada de terra, estrada agrícola"
                 },
+                "highway/traffic_mirror": {
+                    "name": "Espelho convexo de estrada",
+                    "terms": "Traffic Mirror"
+                },
                 "highway/traffic_signals": {
                     "name": "Semáforos",
                     "terms": "Semáforo, Vermelho, Verde, Amarelo, Sinal, Sinal de Trânsito"
@@ -2755,6 +2837,10 @@
                 "highway/turning_circle": {
                     "name": "Circulo de viragem",
                     "terms": "Inversão de Marcha"
+                },
+                "highway/turning_loop": {
+                    "name": "Anel",
+                    "terms": "Turning Loop (Island)'"
                 },
                 "highway/unclassified": {
                     "name": "Estrada menor / sem classificação",
@@ -2915,6 +3001,10 @@
                     "name": "Terreno Baldio",
                     "terms": "Common, Baldio, Baldios"
                 },
+                "leisure/dance": {
+                    "name": "Salão de dança",
+                    "terms": "Dance Hall"
+                },
                 "leisure/dog_park": {
                     "name": "Parque de cães",
                     "terms": "Parque para Cães, Dog Park"
@@ -3014,6 +3104,10 @@
                 "leisure/playground": {
                     "name": "Parque infantil",
                     "terms": "Infantil, Escorrega, Baloiço, Escorregas, Baloiços"
+                },
+                "leisure/resort": {
+                    "name": "Restort",
+                    "terms": "Resort, resorte, centro de férias, estação turística, estância turística ou hotel de lazer"
                 },
                 "leisure/running_track": {
                     "name": "Pista de corrida de atletismo",
@@ -3130,6 +3224,10 @@
                     "name": "Câmara de Vigilância",
                     "terms": "Surveillance, CCTV"
                 },
+                "man_made/surveillance_camera": {
+                    "name": "Câmara de videovigilância",
+                    "terms": "Surveillance Camera"
+                },
                 "man_made/survey_point": {
                     "name": "Vértice geodésico / Talefe",
                     "terms": "Survey Point"
@@ -3153,10 +3251,6 @@
                 "man_made/water_works": {
                     "name": "Estação de captação e tratamento de águas",
                     "terms": "Water Works, Captação de água"
-                },
-                "man_made/works": {
-                    "name": "Fábrica",
-                    "terms": "Works, Fabrico, Manofatura"
                 },
                 "military/airfield": {
                     "name": "Base aérea militar",
@@ -4013,6 +4107,14 @@
                 "tourism/alpine_hut": {
                     "name": "Albergue de montanha",
                     "terms": "Alpine Hut"
+                },
+                "tourism/apartment": {
+                    "name": "Apartamento de hóspedes",
+                    "terms": "Guest Apartment / Condo"
+                },
+                "tourism/aquarium": {
+                    "name": "Aquário público",
+                    "terms": "Aquarium, Oceanário"
                 },
                 "tourism/artwork": {
                     "name": "Obra de arte",

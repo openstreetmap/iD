@@ -32,7 +32,7 @@
                 "annotation": {
                     "point": "Legg til et punkt.",
                     "vertex": "Legg til et punkt til veien.",
-                    "relation": "La til en relasjo"
+                    "relation": "La til en relasjon."
                 }
             },
             "start": {
@@ -54,6 +54,9 @@
             },
             "cancel_draw": {
                 "annotation": "Avbrøt tegning."
+            },
+            "change_role": {
+                "annotation": "Endret rollen til et relasjonsmedlem."
             },
             "change_tags": {
                 "annotation": "Endret egenskaper."
@@ -1792,9 +1795,6 @@
                 },
                 "man_made/water_works": {
                     "name": "Vannfiltreringsanlegg"
-                },
-                "man_made/works": {
-                    "name": "Anleggsarbeid"
                 },
                 "military/airfield": {
                     "name": "Flyplass / lufthavn"

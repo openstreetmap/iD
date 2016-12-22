@@ -163,6 +163,23 @@
                 "too_large": "由於目前可視部分太少了，所以無法移動該物件。",
                 "connected_to_hidden": "這個沒辦法移動，因為與其他隱藏的圖徵相連."
             },
+            "reflect": {
+                "title": "映射",
+                "description": {
+                    "long": "以其長軸映射物件。",
+                    "short": "以其短軸映射物件。"
+                },
+                "key": {
+                    "long": "T",
+                    "short": "Y"
+                },
+                "annotation": {
+                    "long": "以其長軸映設區域。",
+                    "short": "以其短軸映射區域。"
+                },
+                "too_large": "目前可見的部份不夠多，所以無法被映射。",
+                "connected_to_hidden": "因為其與隱藏特徵相連，所以無法被映射。"
+            },
             "rotate": {
                 "title": "旋轉",
                 "description": "以物件中心點為軸心旋轉物件",
@@ -784,6 +801,20 @@
                 "barrier": {
                     "label": "種類"
                 },
+                "bath/open_air": {
+                    "label": "露天浴場"
+                },
+                "bath/sand_bath": {
+                    "label": "沙浴"
+                },
+                "bath/type": {
+                    "label": "專業",
+                    "options": {
+                        "foot_bath": "泡腳",
+                        "hot_spring": "熱溫泉",
+                        "onsen": "日式溫泉"
+                    }
+                },
                 "beauty": {
                     "label": "商店類型"
                 },
@@ -1052,7 +1083,7 @@
                     "label": "扶手"
                 },
                 "height": {
-                    "label": "高度（公尺）"
+                    "label": "高度 (公尺)"
                 },
                 "highway": {
                     "label": "種類"
@@ -1385,6 +1416,9 @@
                 },
                 "power_supply": {
                     "label": "電源供應器"
+                },
+                "product": {
+                    "label": "產品"
                 },
                 "railway": {
                     "label": "種類"
@@ -1911,7 +1945,7 @@
                 },
                 "amenity/food_court": {
                     "name": "美食街",
-                    "terms": "美食街,美食中心"
+                    "terms": "美食街,美食中心,食堂"
                 },
                 "amenity/fountain": {
                     "name": "噴水池",
@@ -2024,6 +2058,10 @@
                 "amenity/pub": {
                     "name": "Pub",
                     "terms": "酒館"
+                },
+                "amenity/public_bath": {
+                    "name": "公共澡堂",
+                    "terms": "公共浴池,錢湯,公共浴場"
                 },
                 "amenity/public_bookcase": {
                     "name": "漂書站",
@@ -3260,7 +3298,7 @@
                 },
                 "man_made/works": {
                     "name": "工廠",
-                    "terms": "工廠"
+                    "terms": "工廠,加工廠,Factory"
                 },
                 "military/airfield": {
                     "name": "軍用機場",
@@ -3546,6 +3584,10 @@
                 "power/minor_line": {
                     "name": "次要電纜",
                     "terms": "次要電纜"
+                },
+                "power/plant": {
+                    "name": "發電廠用地",
+                    "terms": "發電廠用地,發電廠廠區,發電廠範圍,Power Station Grounds"
                 },
                 "power/pole": {
                     "name": "電線桿",
@@ -4403,6 +4445,10 @@
                 "waterway/water_point": {
                     "name": "海洋飲用水",
                     "terms": "海洋飲用水"
+                },
+                "waterway/waterfall": {
+                    "name": "瀑布",
+                    "terms": "Waterfall,瀑布,跌水"
                 },
                 "waterway/weir": {
                     "name": "水壩",

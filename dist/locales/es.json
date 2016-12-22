@@ -163,6 +163,23 @@
                 "too_large": "Esto no puede ser movido porque no está completamente visible.",
                 "connected_to_hidden": "Esto no puede ser movido porque está conectado a un elemento oculto."
             },
+            "reflect": {
+                "title": "reflejar",
+                "description": {
+                    "long": "Reflejar este objeto a través de su eje largo.",
+                    "short": "Reflejar este objeto a través de su eje corto."
+                },
+                "key": {
+                    "long": "T",
+                    "short": "Y"
+                },
+                "annotation": {
+                    "long": "Se reflejó un área a través de su eje largo.",
+                    "short": "Se reflejó un área a través de su eje corto."
+                },
+                "too_large": "Esto no puede reflejarse porque no está completamente visible.",
+                "connected_to_hidden": "Esto no puede reflejarse porque está conectado a un elemento oculto."
+            },
             "rotate": {
                 "title": "Rotar",
                 "description": "Rota este objeto alrededor de su punto central.",
@@ -784,6 +801,20 @@
                 "barrier": {
                     "label": "Tipo"
                 },
+                "bath/open_air": {
+                    "label": "Aire libre"
+                },
+                "bath/sand_bath": {
+                    "label": "Baño de arena"
+                },
+                "bath/type": {
+                    "label": "Especialidad",
+                    "options": {
+                        "foot_bath": "Baño de pies",
+                        "hot_spring": "Fuente termal natural",
+                        "onsen": "Onsen japonés"
+                    }
+                },
                 "beauty": {
                     "label": "Tipo de tienda"
                 },
@@ -819,6 +850,21 @@
                 },
                 "building_area": {
                     "label": "Edificio"
+                },
+                "camera/direction": {
+                    "label": "Dirección (grados en sentido horario)",
+                    "placeholder": "45, 90, 180, 270"
+                },
+                "camera/mount": {
+                    "label": "Soporte de cámara"
+                },
+                "camera/type": {
+                    "label": "Tipo de cámara",
+                    "options": {
+                        "dome": "Domo",
+                        "fixed": "Fija",
+                        "panning": "Toma panorámica"
+                    }
                 },
                 "capacity": {
                     "label": "Capacidad",
@@ -857,6 +903,10 @@
                 },
                 "construction": {
                     "label": "Tipo"
+                },
+                "contact/webcam": {
+                    "label": "Cámara web URL",
+                    "placeholder": "http://ejemplo.com/"
                 },
                 "content": {
                     "label": "Contenido"
@@ -1367,6 +1417,9 @@
                 "power_supply": {
                     "label": "Fuente de energía"
                 },
+                "product": {
+                    "label": "Producto"
+                },
                 "railway": {
                     "label": "Tipo"
                 },
@@ -1535,6 +1588,20 @@
                 },
                 "surface": {
                     "label": "Superficie"
+                },
+                "surveillance": {
+                    "label": "Tipo de vigilancia"
+                },
+                "surveillance/type": {
+                    "label": "Clase de vigilancia",
+                    "options": {
+                        "ALPR": "Lector automático de matrículas",
+                        "camera": "Cámara",
+                        "guard": "Guardia"
+                    }
+                },
+                "surveillance/zone": {
+                    "label": "Zona de vigilancia"
                 },
                 "tactile_paving": {
                     "label": "Pavimento táctil"
@@ -1840,6 +1907,10 @@
                     "name": "Espacio de trabajo compartido",
                     "terms": "oficina de trabajo compartido, espacio de coworking, coworking, cotrabajo"
                 },
+                "amenity/crematorium": {
+                    "name": "Crematorio",
+                    "terms": "cremación, cenizas de huesos, cementerio, horno crematorio, incineración, incinerar restos, incinerador, horno, funeral"
+                },
                 "amenity/dentist": {
                     "name": "Dentista",
                     "terms": "dentista, odontólogo"
@@ -1871,6 +1942,10 @@
                 "amenity/fire_station": {
                     "name": "Estación de bomberos",
                     "terms": "Estación de Bomberos, Bomberos, parque de bomberos"
+                },
+                "amenity/food_court": {
+                    "name": "Plaza de comida",
+                    "terms": "patio de comida, almuerzo rápido, comida rápida, zona de comida, aŕea de restaurantes, feria de comidas"
                 },
                 "amenity/fountain": {
                     "name": "Fuente o surtidor ornamental",
@@ -1984,6 +2059,10 @@
                     "name": "Pub",
                     "terms": "cervecería, pub, club, bar"
                 },
+                "amenity/public_bath": {
+                    "name": "Baño público",
+                    "terms": "baño público, baño de pies, aguas termales, fuente termal"
+                },
                 "amenity/public_bookcase": {
                     "name": "Biblioteca libre",
                     "terms": "biblioteca, estante, anaquel, libro, público, pública, libre, abierta"
@@ -2083,8 +2162,8 @@
                     "terms": "excremento, caca, bolsa, expendedor"
                 },
                 "amenity/vending_machine/news_papers": {
-                    "name": "Máquina expendedora de periódicos",
-                    "terms": "periódico, diario, semanario, revista, expendedor"
+                    "name": "Máquina expendedora de periódico",
+                    "terms": "periódico, diario, semanario, revista, expendedor automático"
                 },
                 "amenity/vending_machine/parcel_pickup_dropoff": {
                     "name": "Máquina expendedora recoger/dejar paquetes",
@@ -3189,6 +3268,10 @@
                     "name": "Vigilancia",
                     "terms": "vigilancia, observación, supervisión, cámara, control, seguridad, cctv"
                 },
+                "man_made/surveillance_camera": {
+                    "name": "Cámara de vigilancia",
+                    "terms": "vigilancia, cámara, seguridad, protección, matrícula, patente, reconocimiento automático, placas de autos, matrículas de autos, monitoreo, webcam, vídeo, guardia, circuito cerrado vídeo, cctv"
+                },
                 "man_made/survey_point": {
                     "name": "Punto geodésico",
                     "terms": "vértice geodésico, punto geodésico"
@@ -3215,7 +3298,7 @@
                 },
                 "man_made/works": {
                     "name": "Fábrica",
-                    "terms": "fábrica, factoría, manofactura, industria, taller, emsamblaje"
+                    "terms": "factoría, manofactura, industria, taller, ensamblaje, planta, materia prima, fabricado, producción, fabricación, ingenio, procesadora, refinería, cervecería, azucarera"
                 },
                 "military/airfield": {
                     "name": "Base aérea militar",
@@ -3407,7 +3490,7 @@
                 },
                 "office/newspaper": {
                     "name": "Periódico",
-                    "terms": "Periódico, diario"
+                    "terms": "periódico, diario, semanario, revista"
                 },
                 "office/ngo": {
                     "name": "ONG",
@@ -3501,6 +3584,10 @@
                 "power/minor_line": {
                     "name": "Línea eléctrica de media tensión",
                     "terms": "media tensión, baja tensión"
+                },
+                "power/plant": {
+                    "name": "Terreno de central eléctrica",
+                    "terms": "Carbón, gas, generación, hidro, hidroelectrica, nuclear, estación, electricidad, eléctrico, eléctrica"
                 },
                 "power/pole": {
                     "name": "Poste eléctrico",
@@ -3859,8 +3946,8 @@
                     "terms": "joyería, joyero, argentería, orfebrería, orfebre, platero, joyas, alhajas"
                 },
                 "shop/kiosk": {
-                    "name": "Quiosco de diarios",
-                    "terms": "diarios, noticias, quisco, kiosco"
+                    "name": "Quiosco",
+                    "terms": "kiosco, periódico, diario, semanario, revista, cigarrillo, snack, bocadillo, dulce, pastilla, bebida, jugo"
                 },
                 "shop/kitchen": {
                     "name": "Tienda de diseño de cocinas",
@@ -3915,8 +4002,8 @@
                     "terms": "música, audio, instrumento, instrumento musical, instrumento de música"
                 },
                 "shop/newsagent": {
-                    "name": "Puesto de Periódicos / Revistas",
-                    "terms": "periódico, periodico, revista, diario, Tienda de Periódicos, Tienda de Revistas, puesto de diarios, puesto de periódicos"
+                    "name": "Puesto de periódicos / revistas",
+                    "terms": "periódico, diario, semanario, revista, puesto de diarios, puesto de periódicos, vendedor de diarios, vendedor de periódicos, tienda, negocio"
                 },
                 "shop/nutrition_supplements": {
                     "name": "Tienda de suplementos nutricionales",
@@ -4358,6 +4445,10 @@
                 "waterway/water_point": {
                     "name": "Recarga de agua potable para embarcaciones",
                     "terms": "agua potable, agua, puerto, embarcación, puerto deportivo, marina, barco"
+                },
+                "waterway/waterfall": {
+                    "name": "Cascada",
+                    "terms": "catarata, caída de agua, salto de agua, torrente"
                 },
                 "waterway/weir": {
                     "name": "Represa",

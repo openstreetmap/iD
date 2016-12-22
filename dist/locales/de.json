@@ -163,6 +163,23 @@
                 "too_large": "Dieses Objekt kann nicht bewegt werden, da nicht genug davon sichtbar ist.",
                 "connected_to_hidden": "Dieses Objekt kann nicht verschoben werden, da es mit einem versteckten Objekt verbunden ist."
             },
+            "reflect": {
+                "title": "spiegeln",
+                "description": {
+                    "long": "Spiegle dieses Objekt über die lange Achse.",
+                    "short": "Spiegle dieses Objekt über die kurze Achse."
+                },
+                "key": {
+                    "long": "T",
+                    "short": "Y"
+                },
+                "annotation": {
+                    "long": "Fläche über die lange Achse gespiegelt.",
+                    "short": "Fläche über die kurze Achse gespiegelt."
+                },
+                "too_large": "Dieses Objekt kann nicht gespiegelt weden weil es nicht ausreichend sichtbar ist.",
+                "connected_to_hidden": "Dieses Objekt kann nicht gespiegelt weden weil es ein verstecktes Objekt enthält."
+            },
             "rotate": {
                 "title": "Drehen",
                 "description": "Dieses Objekt um seinen Mittelpunkt drehen.",
@@ -784,6 +801,20 @@
                 "barrier": {
                     "label": "Typ"
                 },
+                "bath/open_air": {
+                    "label": "Im Freien"
+                },
+                "bath/sand_bath": {
+                    "label": "Sandbad"
+                },
+                "bath/type": {
+                    "label": "Spezialität",
+                    "options": {
+                        "foot_bath": "Fußbad",
+                        "hot_spring": "Therme",
+                        "onsen": "Japanische heiße Quelle Onsen"
+                    }
+                },
                 "beauty": {
                     "label": "Geschäftstyp"
                 },
@@ -825,7 +856,7 @@
                     "placeholder": "45, 90, 180, 270"
                 },
                 "camera/mount": {
-                    "label": "Kameramontagtyp"
+                    "label": "Kameramontage"
                 },
                 "camera/type": {
                     "label": "Art der Kamera",
@@ -1052,7 +1083,7 @@
                     "label": "Geländer"
                 },
                 "height": {
-                    "label": "Höhe (Meter)"
+                    "label": "Höhe (in Meter)"
                 },
                 "highway": {
                     "label": "Typ"
@@ -1386,6 +1417,9 @@
                 "power_supply": {
                     "label": "Stromversorgung"
                 },
+                "product": {
+                    "label": "Produkt"
+                },
                 "railway": {
                     "label": "Typ"
                 },
@@ -1561,7 +1595,7 @@
                 "surveillance/type": {
                     "label": "Überwachungstyp",
                     "options": {
-                        "ALPR": "Automatischer Kennzeichner-Leser",
+                        "ALPR": "Automatischer Kennzeichenleser",
                         "camera": "Kamera",
                         "guard": "Wachmann"
                     }
@@ -1910,8 +1944,8 @@
                     "terms": "Feuerwehr,Feuerwehrstation,Feuerwache,Feuerwehrhaus,Feuerwehrgerätehaus,Feuerwehrstandort"
                 },
                 "amenity/food_court": {
-                    "name": "Gemeinschafts-Gastgarten",
-                    "terms": "Gemeinschafts-Gastgarten, gemeinsamer Gastgarten, Selbstbedienungs-Gastgarten für mehrere Lokale"
+                    "name": "Gemeinschaftlicher Gastronomiebereich",
+                    "terms": "Food Court, gemeinsamer Gastronomiebereich, Selbstbedienung- und Sitzbereich für mehrere Lokale"
                 },
                 "amenity/fountain": {
                     "name": "Springbrunnen",
@@ -2025,9 +2059,13 @@
                     "name": "Kneipe",
                     "terms": "Kneipe, Pub"
                 },
+                "amenity/public_bath": {
+                    "name": "Öffentliches Bad",
+                    "terms": "Badehaus, Badestube, Badhaus, Volksbad"
+                },
                 "amenity/public_bookcase": {
-                    "name": "öffentlicher Bücherschrank",
-                    "terms": "öffentlicher Bücherschrank, öffentlicher Bücherkasten"
+                    "name": "Offentlicher Bücherschrank",
+                    "terms": "Öffentlicher Bücherschrank, öffentlicher Bücherkasten"
                 },
                 "amenity/ranger_station": {
                     "name": "Ranger-Station",
@@ -2282,7 +2320,7 @@
                     "terms": "Schulgebäude"
                 },
                 "building/commercial": {
-                    "name": "Geschäftshaus",
+                    "name": "Gewerbegebäude",
                     "terms": "Gewerbehaus,gewerblich genutztes Gebäude,"
                 },
                 "building/construction": {
@@ -2290,7 +2328,7 @@
                     "terms": "Gebäude im Bau"
                 },
                 "building/detached": {
-                    "name": "Einzelhaus",
+                    "name": "Freistehendes Einfamiliehaus",
                     "terms": "alleinstehendes Haus, freistehendes Haus, Einfamilienhaus"
                 },
                 "building/dormitory": {
@@ -3195,8 +3233,8 @@
                     "terms": "Leuchtturm"
                 },
                 "man_made/mast": {
-                    "name": "Sendemast",
-                    "terms": "Sendemast, Radiomast"
+                    "name": "Mast",
+                    "terms": "Sendemast, Radiomast, Flutlichtmast"
                 },
                 "man_made/observation": {
                     "name": "Aussichtsturm",
@@ -3260,7 +3298,7 @@
                 },
                 "man_made/works": {
                     "name": "Fabrik",
-                    "terms": "Fabrik, Werk, Betrieb, Werksanlage, Industrieproduktion "
+                    "terms": "Fabrik, Werk, Betrieb, Fabriksanlage, Produktionsstätte, Fertigungsanlage"
                 },
                 "military/airfield": {
                     "name": "Militärflugplatz",
@@ -4403,6 +4441,10 @@
                 "waterway/water_point": {
                     "name": "Marine Frischwasser",
                     "terms": "Frischwasser, Trinkwasser"
+                },
+                "waterway/waterfall": {
+                    "name": "Wasserfall",
+                    "terms": "Wasserfall"
                 },
                 "waterway/weir": {
                     "name": "Wehr",

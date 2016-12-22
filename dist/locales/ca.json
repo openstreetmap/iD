@@ -2945,9 +2945,6 @@
                 "man_made/water_works": {
                     "name": "Planta potabilitzadora"
                 },
-                "man_made/works": {
-                    "name": "Obres"
-                },
                 "military/airfield": {
                     "name": "Aeròdrom militar"
                 },

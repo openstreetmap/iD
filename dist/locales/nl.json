@@ -163,6 +163,23 @@
                 "too_large": "Dit kan niet verplaatst worden omdat slechts een te klein deel ervan momenteel zichtbaar is.",
                 "connected_to_hidden": "Dit kan niet verplaatst worden omdat het verbonden is met een verborgen object."
             },
+            "reflect": {
+                "title": "spiegel",
+                "description": {
+                    "long": "Spiegel dit object langs zijn lange as.",
+                    "short": "Spiegel dit object langs zijn korte as."
+                },
+                "key": {
+                    "long": "T",
+                    "short": "Y"
+                },
+                "annotation": {
+                    "long": "Vlak gespiegeld langs lange as.",
+                    "short": "Vlak gespiegeld langs korte as."
+                },
+                "too_large": "Dit vlak kan niet gespiegeld worden omdat slechts een te klein deel ervan momenteel zichtbaar is.",
+                "connected_to_hidden": "Dit vlak kan niet gespiegeld worden omdat het verbonden is met een verborgen object."
+            },
             "rotate": {
                 "title": "Draai",
                 "description": "Draai dit object rond zijn middelpunt.",
@@ -784,6 +801,20 @@
                 "barrier": {
                     "label": "Type"
                 },
+                "bath/open_air": {
+                    "label": "Openlucht"
+                },
+                "bath/sand_bath": {
+                    "label": "Japans zandbad"
+                },
+                "bath/type": {
+                    "label": "Type",
+                    "options": {
+                        "foot_bath": "Voetbad",
+                        "hot_spring": "Warmwaterbron",
+                        "onsen": "Japanse onsen"
+                    }
+                },
                 "beauty": {
                     "label": "Winkeltype"
                 },
@@ -819,6 +850,21 @@
                 },
                 "building_area": {
                     "label": "Gebouw"
+                },
+                "camera/direction": {
+                    "label": "Richting (in graden met de klok mee)",
+                    "placeholder": "45, 90, 180, 270"
+                },
+                "camera/mount": {
+                    "label": "Bevestiging van camera"
+                },
+                "camera/type": {
+                    "label": "Cameratype",
+                    "options": {
+                        "dome": "Koepel",
+                        "fixed": "Vast",
+                        "panning": "Bewegend"
+                    }
                 },
                 "capacity": {
                     "label": "Capaciteit",
@@ -857,6 +903,10 @@
                 },
                 "construction": {
                     "label": "Type"
+                },
+                "contact/webcam": {
+                    "label": "Webcam-URL",
+                    "placeholder": "http://example.com/"
                 },
                 "content": {
                     "label": "Inhoud"
@@ -1367,6 +1417,9 @@
                 "power_supply": {
                     "label": "Stroomvoorziening"
                 },
+                "product": {
+                    "label": "Product"
+                },
                 "railway": {
                     "label": "Type"
                 },
@@ -1535,6 +1588,20 @@
                 },
                 "surface": {
                     "label": "Oppervlak"
+                },
+                "surveillance": {
+                    "label": "Soort bewaking"
+                },
+                "surveillance/type": {
+                    "label": "Type bewaking",
+                    "options": {
+                        "ALPR": "Automatische kentekenplaat herkening",
+                        "camera": "Camera",
+                        "guard": "Wachter"
+                    }
+                },
+                "surveillance/zone": {
+                    "label": "Bewaakte zone"
                 },
                 "tactile_paving": {
                     "label": "Voetpad met Aanraakbare Aanwijzingen voor Blinden"
@@ -1752,8 +1819,8 @@
                     "terms": "huren,fietsen"
                 },
                 "amenity/bicycle_repair_station": {
-                    "name": "Openbare fietsgereedschappen",
-                    "terms": "fietsherstelplaats"
+                    "name": "Openbaar fietsgereedschap",
+                    "terms": "fietsgereedschappen,fietsherstelplaats,fietspomp,pomp,kettinggereedschap,fietsbanden,onderhoud,doe-het-zelf-fietsenmaker"
                 },
                 "amenity/biergarten": {
                     "name": "Biergarten",
@@ -1769,7 +1836,7 @@
                 },
                 "amenity/bus_station": {
                     "name": "Busstation",
-                    "terms": "bushalte,station,bus,openbaar vervoer"
+                    "terms": "bushalte,station,bus,openbaar vervoer,OV"
                 },
                 "amenity/cafe": {
                     "name": "Cafetaria",
@@ -1831,6 +1898,9 @@
                     "name": "Coworking-omgeving",
                     "terms": "samenwerken,coworking,coworking-kantoor,kantoor,gedeeld kantoor"
                 },
+                "amenity/crematorium": {
+                    "name": "Crematorium"
+                },
                 "amenity/dentist": {
                     "name": "Tandarts",
                     "terms": "tandheelkundige,mond,tanden"
@@ -1860,6 +1930,10 @@
                 },
                 "amenity/fire_station": {
                     "name": "Brandweerkazerne"
+                },
+                "amenity/food_court": {
+                    "name": "Eetplaats omringd door fastfoodzaken",
+                    "terms": "food court,fastfood,fast food,restaurants,voedselhal"
                 },
                 "amenity/fountain": {
                     "name": "Fontein",
@@ -1912,16 +1986,16 @@
                     "terms": "dancing,bar,uitgaan,disco"
                 },
                 "amenity/parking": {
-                    "name": "Autoparking",
-                    "terms": "parking,parkeerplaats,garage,parkeergarage,parkeergebouw"
+                    "name": "Parkeergelegenheid voor meerdere voertuigen",
+                    "terms": "parking,parkeerplaats,garage,parkeergarage,parkeergebouw,autoparking"
                 },
                 "amenity/parking_entrance": {
-                    "name": "Ingang/Uitgang van Parkingcomplex",
+                    "name": "Ingang/Uitgang van parkeergelegenheid",
                     "terms": "inrit,uitrit"
                 },
                 "amenity/parking_space": {
                     "name": "Parkeerplaats binnen parkeergelegenheid",
-                    "terms": "individuele parkeerplaats"
+                    "terms": "individuele parkeerplaats, parkeervak"
                 },
                 "amenity/pharmacy": {
                     "name": "Apotheek",
@@ -1970,9 +2044,12 @@
                     "name": "Café",
                     "terms": "bar,kroeg,bierhuis,bier"
                 },
+                "amenity/public_bath": {
+                    "name": "Publiek bad"
+                },
                 "amenity/public_bookcase": {
-                    "name": "Openbare Boekenkast",
-                    "terms": "boeken,literatuur,bibliotheek"
+                    "name": "Openbare boekenkast",
+                    "terms": "boeken,literatuur,bibliotheek,publieke boekenkast"
                 },
                 "amenity/ranger_station": {
                     "name": "Boswachtershut"
@@ -2079,7 +2156,7 @@
                 },
                 "amenity/vending_machine/public_transport_tickets": {
                     "name": "Automaat voor tickets voor openbaar vervoer",
-                    "terms": "openbaarvervoerticketsautomaat,ticketautomaat,automaat"
+                    "terms": "openbaarvervoerticketautomaat,ticketautomaat,automaat,OV-ticketautomaat,OV-kaartjesautomaat,tramkaartautomaat,buskaartautomaat,treinbiljetautomaat,biljetautomaat"
                 },
                 "amenity/vending_machine/sweets": {
                     "name": "Snackautomaat",
@@ -2215,7 +2292,8 @@
                     "terms": "bso,buo,buso,vmbo,speciaal onderwijs,bijzonder onderwijs,onderwijs,middelbaar,secundair onderwijs"
                 },
                 "building/commercial": {
-                    "name": "Kantoorgebouw"
+                    "name": "Kantoorgebouw",
+                    "terms": "bedrijf,vestiging"
                 },
                 "building/construction": {
                     "name": "Gebouw in opbouw",
@@ -2267,8 +2345,8 @@
                     "name": "Gebouw van Crèche/Kleuterschool"
                 },
                 "building/public": {
-                    "name": "Openbaar Gebouw",
-                    "terms": "publiek"
+                    "name": "Openbaar gebouw",
+                    "terms": "publiek gebouw"
                 },
                 "building/residential": {
                     "name": "Woongebouw",
@@ -2343,7 +2421,7 @@
                 },
                 "craft/brewery": {
                     "name": "Brouwerij",
-                    "terms": "bier,wijn"
+                    "terms": "bier,wijn,alcohol"
                 },
                 "craft/carpenter": {
                     "name": "Timmerman",
@@ -2791,8 +2869,8 @@
                     "terms": "begraafplaats,zerk,kerk,dood,graf"
                 },
                 "landuse/commercial": {
-                    "name": "Commercieel Gebied",
-                    "terms": "kantoren,bedrijven"
+                    "name": "Commercieel gebied",
+                    "terms": "kantoren,bedrijven,bedrijvenpark"
                 },
                 "landuse/construction": {
                     "name": "Bouwterrein",
@@ -3085,6 +3163,10 @@
                     "name": "Bewaking",
                     "terms": "bewakingscamera,cctv"
                 },
+                "man_made/surveillance_camera": {
+                    "name": "Bewakingscamera",
+                    "terms": "camera,surveillance,cctv,webcam"
+                },
                 "man_made/survey_point": {
                     "name": "Landmeetkundig referentiepunt"
                 },
@@ -3106,7 +3188,7 @@
                 },
                 "man_made/works": {
                     "name": "Fabriek",
-                    "terms": "fabricagefaciliteit,autofabriek,aluminiumverwerking,meubelfabriek,olieraffinaderij,plasticrecyclage"
+                    "terms": "assemblage,brouwerij,autofabriek,productie,industrie,raffinaderij"
                 },
                 "military/airfield": {
                     "name": "Vliegveld",
@@ -3356,6 +3438,10 @@
                 "power/minor_line": {
                     "name": "Kleine Elektriciteitsleiding",
                     "terms": "stroomkabel,kabel,laagspanningskabel,laagspanningsleiding,elektriciteitsnet,elektriciteitskabel"
+                },
+                "power/plant": {
+                    "name": "Gebied van elektriciteitscentrale",
+                    "terms": "elektriciteitscentrale,koolcentrale,kolencentrale,stoomcentrale,STEG-centrale,oliecentrale,gascentrale,biomassacentrale,geothermische centrale,waterkrachtcentrale,kerncentrale,krachtcentrale,energiecentrale"
                 },
                 "power/pole": {
                     "name": "Elektriciteitspaal",
@@ -3811,7 +3897,8 @@
                     "name": "Tattoozetter"
                 },
                 "shop/tea": {
-                    "name": "thee winkel"
+                    "name": "Theewinkel",
+                    "terms": "theehuis"
                 },
                 "shop/ticket": {
                     "name": "Ticketverkoop",
@@ -4120,6 +4207,10 @@
                 "waterway/water_point": {
                     "name": "Waterpunt voor boten",
                     "terms": "drinkwatertank,watertank"
+                },
+                "waterway/waterfall": {
+                    "name": "Waterval",
+                    "terms": "cascade"
                 },
                 "waterway/weir": {
                     "name": "Stuw",

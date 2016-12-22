@@ -163,6 +163,23 @@
                 "too_large": "Nem lehet áthelyezni, mert nem látszik az egész alakzat.",
                 "connected_to_hidden": "Nem helyezhető át, mert egy rejtett elemhez csatlakozik."
             },
+            "reflect": {
+                "title": "tükrözés",
+                "description": {
+                    "long": "Objektum tükrözése a hosszanti tengelyére.",
+                    "short": "Objektum tükrözése az oldalirányú tengelyére."
+                },
+                "key": {
+                    "long": "T",
+                    "short": "Y"
+                },
+                "annotation": {
+                    "long": "Terület tükrözve a hosszanti tengelyére.",
+                    "short": "Terület tükrözve az oldalirányú tengelyére."
+                },
+                "too_large": "Nem lehet tükrözni, mert nem látszik az egész alakzat.",
+                "connected_to_hidden": "Nem lehet tükrözni, mert egy rejtett elemhez csatalakozik."
+            },
             "rotate": {
                 "title": "Forgatás",
                 "description": "Objektum elforgatása a középpontja körül.",
@@ -784,6 +801,20 @@
                 "barrier": {
                     "label": "Típus"
                 },
+                "bath/open_air": {
+                    "label": "Kültéri"
+                },
+                "bath/sand_bath": {
+                    "label": "Homokfürdő"
+                },
+                "bath/type": {
+                    "label": "Különlegesség",
+                    "options": {
+                        "foot_bath": "Lábfürdő",
+                        "hot_spring": "Melegforrás",
+                        "onsen": "Japán onsen"
+                    }
+                },
                 "beauty": {
                     "label": "Bolttípus"
                 },
@@ -1052,7 +1083,7 @@
                     "label": "Korlát"
                 },
                 "height": {
-                    "label": "Magasság (méter)"
+                    "label": "Magasság (méterben)"
                 },
                 "highway": {
                     "label": "Típus"
@@ -1300,6 +1331,9 @@
                 "operator": {
                     "label": "Üzemeltető"
                 },
+                "outdoor_seating": {
+                    "label": "Szabadtéri asztalok"
+                },
                 "par": {
                     "label": "Golfpálya par száma",
                     "placeholder": "3, 4, 5..."
@@ -1382,6 +1416,9 @@
                 },
                 "power_supply": {
                     "label": "Áramszolgáltatás"
+                },
+                "product": {
+                    "label": "Termék"
                 },
                 "railway": {
                     "label": "Típus"
@@ -1591,7 +1628,8 @@
                     "label": "Típus"
                 },
                 "tower/construction": {
-                    "label": "Építkezés"
+                    "label": "Építkezés",
+                    "placeholder": "Kikötött, rács, rejtett, …"
                 },
                 "tower/type": {
                     "label": "Típus"
@@ -2016,6 +2054,10 @@
                 "amenity/pub": {
                     "name": "Kocsma",
                     "terms": "italmérés, késdobáló, csehó, borozó, poharazó, italbolt, ivó, talponálló, kricsmi, piálda, söntés, csapszék, söröző, sörház"
+                },
+                "amenity/public_bath": {
+                    "name": "Nyilvános fürdő",
+                    "terms": "nyilvános fürdő,közfürdő,fürdő"
                 },
                 "amenity/public_bookcase": {
                     "name": "Közösségi könyvespolc",
@@ -3217,7 +3259,8 @@
                     "terms": "térfigyelő kamera, biztonsági kamera"
                 },
                 "man_made/surveillance_camera": {
-                    "name": "Megfigyelő kamera"
+                    "name": "Megfigyelő kamera",
+                    "terms": "térfigyelő kamera,biztonsági kamera"
                 },
                 "man_made/survey_point": {
                     "name": "Földmérési alappont",
@@ -3245,7 +3288,7 @@
                 },
                 "man_made/works": {
                     "name": "Gyár",
-                    "terms": "művek"
+                    "terms": "gyár,üzem,kombinát,manufaktúra,művek "
                 },
                 "military/airfield": {
                     "name": "Katonai repülőtér",
@@ -3531,6 +3574,9 @@
                 "power/minor_line": {
                     "name": "Elektromos vezeték",
                     "terms": "távvezeték, villanyvezeték, kisfesztültségű vezeték"
+                },
+                "power/plant": {
+                    "name": "Erőműterület"
                 },
                 "power/pole": {
                     "name": "Villanyoszlop",
@@ -4370,6 +4416,10 @@
                 "waterway/water_point": {
                     "name": "Tengeri ivóvíz",
                     "terms": "csónak,hajó,vízijármű,víz,ivóvíz"
+                },
+                "waterway/waterfall": {
+                    "name": "Vízesés",
+                    "terms": "vízesés,zuhatag,zúgó"
                 },
                 "waterway/weir": {
                     "name": "Bukógát",

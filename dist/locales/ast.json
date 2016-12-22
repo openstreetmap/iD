@@ -2778,9 +2778,6 @@
                 "man_made/water_works": {
                     "name": "Captación d'agua"
                 },
-                "man_made/works": {
-                    "name": "Fábrica"
-                },
                 "military/airfield": {
                     "name": "Campu d'aviación",
                     "terms": "Aeródromu, Campu d'aviación"

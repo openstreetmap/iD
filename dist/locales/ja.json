@@ -819,6 +819,21 @@
                 "building_area": {
                     "label": "建物"
                 },
+                "camera/direction": {
+                    "label": "監視カメラの向き(時計回りの角度)",
+                    "placeholder": "45, 90, 180, 270"
+                },
+                "camera/mount": {
+                    "label": "監視カメラの設置位置"
+                },
+                "camera/type": {
+                    "label": "監視カメラの種類",
+                    "options": {
+                        "dome": "ドーム型",
+                        "fixed": "固定式",
+                        "panning": "可動式"
+                    }
+                },
                 "capacity": {
                     "label": "収容数",
                     "placeholder": "50, 100, 200..."
@@ -975,6 +990,9 @@
                 "fee": {
                     "label": "利用料金"
                 },
+                "fence_type": {
+                    "label": "柵の種類"
+                },
                 "fire_hydrant/type": {
                     "label": "タイプ",
                     "options": {
@@ -1009,7 +1027,7 @@
                     "label": "方式"
                 },
                 "generator/source": {
-                    "label": "情報参照元"
+                    "label": "エネルギー源"
                 },
                 "generator/type": {
                     "label": "タイプ"
@@ -1024,9 +1042,6 @@
                 },
                 "handrail": {
                     "label": "手すり"
-                },
-                "height": {
-                    "label": "高さ (メートル)"
                 },
                 "highway": {
                     "label": "道路区分"
@@ -1072,6 +1087,9 @@
                 },
                 "internet_access/fee": {
                     "label": "インターネット接続利用料金"
+                },
+                "internet_access/ssid": {
+                    "label": "SSID (ネットワーク名)"
                 },
                 "kerb": {
                     "label": "縁石の段差"
@@ -1152,6 +1170,9 @@
                 },
                 "map_type": {
                     "label": "タイプ"
+                },
+                "maxheight": {
+                    "label": "高さ制限"
                 },
                 "maxspeed": {
                     "label": "最高速度",
@@ -1265,6 +1286,9 @@
                 },
                 "operator": {
                     "label": "管理主体"
+                },
+                "outdoor_seating": {
+                    "label": "テラス席"
                 },
                 "par": {
                     "label": "パー",
@@ -1517,6 +1541,13 @@
                 },
                 "surface": {
                     "label": "路面状態"
+                },
+                "surveillance/type": {
+                    "label": "監視方法",
+                    "options": {
+                        "camera": "監視カメラ",
+                        "guard": "警備員"
+                    }
                 },
                 "tactile_paving": {
                     "label": "点字ブロック"
@@ -1910,8 +1941,8 @@
                     "terms": "駐車場の出入口"
                 },
                 "amenity/parking_space": {
-                    "name": "駐車場",
-                    "terms": "駐車場, 駐車スペース"
+                    "name": "駐車区画",
+                    "terms": "駐車区画, 駐車スペース"
                 },
                 "amenity/pharmacy": {
                     "name": "薬局",
@@ -3154,10 +3185,6 @@
                 "man_made/water_works": {
                     "name": "浄水場",
                     "terms": "浄水場"
-                },
-                "man_made/works": {
-                    "name": "工場",
-                    "terms": "プラント"
                 },
                 "military/airfield": {
                     "name": "軍用飛行場",

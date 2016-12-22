@@ -163,6 +163,23 @@
                 "too_large": "Questo elemento non può essere mosso perché non è del tutto visibile.",
                 "connected_to_hidden": "Questo elemento non può essere mosso perché è connesso ad un elemento nascosto."
             },
+            "reflect": {
+                "title": "rifletti",
+                "description": {
+                    "long": "Rifletti questo oggetto lungo il suo asse maggiore.",
+                    "short": "Rifletti questo oggetto lungo il suo asse minore."
+                },
+                "key": {
+                    "long": "T",
+                    "short": "Y"
+                },
+                "annotation": {
+                    "long": "Riflessa un area lungo il suo lato maggiore.",
+                    "short": "Riflessa un area lungo il suo asse minore."
+                },
+                "too_large": "Non può essere riflesso perché non è del tutto visibile.",
+                "connected_to_hidden": "Non può essere riflesso perché è collegato a un elemento nascosto."
+            },
             "rotate": {
                 "title": "Ruota",
                 "description": "Ruota questo oggetto attorno al suo punto centrale.",
@@ -1385,6 +1402,9 @@
                 },
                 "power_supply": {
                     "label": "Alimentazione"
+                },
+                "product": {
+                    "label": "Prodotto"
                 },
                 "railway": {
                     "label": "Tipo"
@@ -3543,6 +3563,10 @@
                     "name": "Linea elettrica minore",
                     "terms": "corrente,elettricità,elettrodotto,cavo elettrico"
                 },
+                "power/plant": {
+                    "name": "Area della Centrale elettrica",
+                    "terms": "carbone,gas,generatore,idroelettrico,nucleare,energia,elettric*,centrale"
+                },
                 "power/pole": {
                     "name": "Palo della luce",
                     "terms": "Pilone elettricità"
@@ -4399,6 +4423,10 @@
                 "waterway/water_point": {
                     "name": "Acqua potabile per barche",
                     "terms": "colonnina,acqua,barca,nave"
+                },
+                "waterway/waterfall": {
+                    "name": "Cascata",
+                    "terms": "cascata,salto,acqua,rotte,rapide"
                 },
                 "waterway/weir": {
                     "name": "Sbarramento",

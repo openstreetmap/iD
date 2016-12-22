@@ -1498,8 +1498,14 @@
                 "leisure/pitch/baseball": {
                     "name": "Baseball"
                 },
+                "leisure/pitch/rugby_league": {
+                    "name": "Rugby League Pitch"
+                },
+                "leisure/pitch/rugby_union": {
+                    "name": "Rugby Union Pitch"
+                },
                 "leisure/pitch/soccer": {
-                    "name": "Football Field"
+                    "name": "Football Pitch"
                 },
                 "leisure/playground": {
                     "name": "Playground"

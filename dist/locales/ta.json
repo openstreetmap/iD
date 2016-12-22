@@ -636,9 +636,6 @@
                     "label": "ஊனமுற்றோர்",
                     "placeholder": "1-18"
                 },
-                "height": {
-                    "label": "￼உயரம் (மீட்டர்)"
-                },
                 "highway": {
                     "label": "வகை"
                 },
