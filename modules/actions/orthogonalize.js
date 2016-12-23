@@ -22,7 +22,7 @@ export function actionOrthogonalize(wayId, projection) {
             epsilon = 1e-4,
             node, loc, score, motions, i, j;
 
-        if (nodes.length === 4) {
+        if (points.length === 3) {   // move only one vertex for right triangle
             for (i = 0; i < 1000; i++) {
                 motions = points.map(calcMotion);
                 points[corner.i] = addPoints(points[corner.i], motions[corner.i]);
