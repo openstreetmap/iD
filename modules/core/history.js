@@ -17,7 +17,7 @@ export function coreHistory(context) {
         lock = utilSessionMutex('lock');
 
 
-    function perform(actions) {
+    function perform(actions, t) {
         actions = Array.prototype.slice.call(actions);
 
         var annotation;
@@ -31,7 +31,7 @@ export function coreHistory(context) {
 
         var graph = stack[index].graph;
         for (var i = 0; i < actions.length; i++) {
-            graph = actions[i](graph);
+            graph = actions[i](graph, t);
         }
 
         return {
@@ -76,13 +76,58 @@ export function coreHistory(context) {
 
 
         perform: function() {
-            var previous = stack[index].graph;
+            // complete any transition already in progress
+            d3.select(document)
+                .interrupt('history.perform');
 
-            stack = stack.slice(0, index + 1);
-            stack.push(perform(arguments));
-            index++;
+            var transitionable = false;
+            if (arguments.length === 1 ||
+                arguments.length === 2 && !_.isFunction(arguments[1])) {
+                transitionable = !!arguments[0].transitionable;
+            }
 
-            return change(previous);
+            if (transitionable) {
+                var origArguments = arguments;
+                d3.select(document)
+                    .transition('history.perform')
+                    .duration(150)
+                    .ease(d3.easeLinear)
+                    .tween('history.tween', function() {
+                        return function(t) {
+                            if (t < 1) _doOverwrite([origArguments[0]], t);
+                        };
+                    })
+                    .on('start', function() {
+                        _doPerform([origArguments[0]], 0);
+                    })
+                    .on('end interrupt', function() {
+                        _doOverwrite(origArguments, 1);
+                    });
+
+            } else {
+                return _doPerform(arguments);
+            }
+
+
+            function _doPerform(args, t) {
+                var previous = stack[index].graph;
+                stack = stack.slice(0, index + 1);
+                stack.push(perform(args, t));
+                index++;
+                return change(previous);
+            }
+
+            function _doOverwrite(args, t) {
+                var previous = stack[index].graph;
+                if (index > 0) {
+                    index--;
+                    stack.pop();
+                }
+                stack = stack.slice(0, index + 1);
+                stack.push(perform(args, t));
+                index++;
+                return change(previous);
+            }
         },
 
 
