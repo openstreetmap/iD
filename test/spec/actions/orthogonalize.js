@@ -11,7 +11,6 @@ describe('iD.actionOrthogonalize', function () {
             ]);
 
         graph = iD.actionOrthogonalize('-', projection)(graph);
-
         expect(graph.entity('-').nodes).to.have.length(5);
     });
 
@@ -25,7 +24,6 @@ describe('iD.actionOrthogonalize', function () {
             ]);
 
         graph = iD.actionOrthogonalize('-', projection)(graph);
-
         expect(graph.entity('-').nodes).to.have.length(5);
     });
 
@@ -38,7 +36,6 @@ describe('iD.actionOrthogonalize', function () {
             ]);
 
         graph = iD.actionOrthogonalize('-', projection)(graph);
-
         expect(graph.entity('-').nodes).to.have.length(4);
     });
 
@@ -53,7 +50,6 @@ describe('iD.actionOrthogonalize', function () {
             ]);
 
         graph = iD.actionOrthogonalize('-', projection)(graph);
-
         expect(graph.hasEntity('d')).to.eq(undefined);
     });
 
@@ -68,7 +64,6 @@ describe('iD.actionOrthogonalize', function () {
             ]);
 
         graph = iD.actionOrthogonalize('-', projection)(graph);
-
         expect(graph.entity('-').nodes).to.have.length(6);
         expect(graph.hasEntity('d')).to.not.eq(undefined);
     });
@@ -121,4 +116,69 @@ describe('iD.actionOrthogonalize', function () {
 
         expect(Object.keys(diff.changes()).sort()).to.eql(['a', 'b', 'c', 'f']);
     });
+
+
+    describe('transitions', function () {
+        it('is transitionable', function() {
+            expect(iD.actionOrthogonalize().transitionable).to.be.true;
+        });
+
+        it('orthogonalize at t = 0', function() {
+           var graph = iD.Graph([
+                    iD.Node({id: 'a', loc: [0, 0]}),
+                    iD.Node({id: 'b', loc: [1, 0.01], tags: {foo: 'bar'}}),
+                    iD.Node({id: 'c', loc: [2, -0.01]}),
+                    iD.Node({id: 'd', loc: [3, 0]}),
+                    iD.Node({id: 'e', loc: [3, 1]}),
+                    iD.Node({id: 'f', loc: [0, 1]}),
+                    iD.Way({id: '-', nodes: ['a', 'b', 'c', 'd', 'e', 'f', 'a']})
+                ]);
+
+            graph = iD.actionOrthogonalize('-', projection)(graph, 0);
+            expect(graph.entity('-').nodes).to.eql(['a', 'b', 'c', 'd', 'e', 'f', 'a']);
+            expect(graph.entity('b').loc[0]).to.be.closeTo(1, 1e-6);
+            expect(graph.entity('b').loc[1]).to.be.closeTo(0.01, 1e-6);
+            expect(graph.entity('c').loc[0]).to.be.closeTo(2, 1e-6);
+            expect(graph.entity('c').loc[1]).to.be.closeTo(-0.01, 1e-6);
+
+        });
+
+        it('orthogonalize at t = 0.5', function() {
+           var graph = iD.Graph([
+                    iD.Node({id: 'a', loc: [0, 0]}),
+                    iD.Node({id: 'b', loc: [1, 0.01], tags: {foo: 'bar'}}),
+                    iD.Node({id: 'c', loc: [2, -0.01]}),
+                    iD.Node({id: 'd', loc: [3, 0]}),
+                    iD.Node({id: 'e', loc: [3, 1]}),
+                    iD.Node({id: 'f', loc: [0, 1]}),
+                    iD.Way({id: '-', nodes: ['a', 'b', 'c', 'd', 'e', 'f', 'a']})
+                ]);
+
+            graph = iD.actionOrthogonalize('-', projection)(graph, 0.5);
+            expect(graph.entity('-').nodes).to.eql(['a', 'b', 'c', 'd', 'e', 'f', 'a']);
+            expect(graph.entity('b').loc[0]).to.be.closeTo(1, 1e-3);
+            expect(graph.entity('b').loc[1]).to.be.closeTo(0.005, 1e-3);
+            expect(graph.entity('c').loc[0]).to.be.closeTo(2, 1e-3);
+            expect(graph.entity('c').loc[1]).to.be.closeTo(-0.005, 1e-3);
+        });
+
+        it('orthogonalize at t = 1', function() {
+           var graph = iD.Graph([
+                    iD.Node({id: 'a', loc: [0, 0]}),
+                    iD.Node({id: 'b', loc: [1, 0.01], tags: {foo: 'bar'}}),
+                    iD.Node({id: 'c', loc: [2, -0.01]}),
+                    iD.Node({id: 'd', loc: [3, 0]}),
+                    iD.Node({id: 'e', loc: [3, 1]}),
+                    iD.Node({id: 'f', loc: [0, 1]}),
+                    iD.Way({id: '-', nodes: ['a', 'b', 'c', 'd', 'e', 'f', 'a']})
+                ]);
+
+            graph = iD.actionOrthogonalize('-', projection)(graph, 1);
+            expect(graph.entity('-').nodes).to.eql(['a', 'b', 'd', 'e', 'f', 'a']);
+            expect(graph.entity('b').loc[0]).to.be.closeTo(1, 2e-3);
+            expect(graph.entity('b').loc[1]).to.be.closeTo(0, 2e-3);
+            expect(graph.hasEntity('c')).to.eq(undefined);
+        });
+    });
+
 });
