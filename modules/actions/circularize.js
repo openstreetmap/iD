@@ -67,7 +67,7 @@ export function actionCircularize(wayId, projection, maxAngle) {
                 nearNodes = {},
                 inBetweenNodes = [],
                 startAngle, endAngle, totalAngle, eachAngle,
-                angle, loc, node, origNode, j, k;
+                angle, loc, node, origNode, j;
 
             if (indexRange < 0) {
                 indexRange += nodes.length;
