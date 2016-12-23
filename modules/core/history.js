@@ -11,13 +11,15 @@ import { utilRebind } from '../util/rebind';
 
 
 export function coreHistory(context) {
-    var stack, index, tree,
-        imageryUsed = ['Bing'],
+    var imageryUsed = ['Bing'],
         dispatch = d3.dispatch('change', 'undone', 'redone'),
-        lock = utilSessionMutex('lock');
+        lock = utilSessionMutex('lock'),
+        duration = 150,
+        stack, index, tree;
 
 
-    function perform(actions, t) {
+    // internal _act, accepts list of actions and eased time
+    function _act(actions, t) {
         actions = Array.prototype.slice.call(actions);
 
         var annotation;
@@ -42,6 +44,40 @@ export function coreHistory(context) {
     }
 
 
+    // internal _perform with eased time
+    function _perform(args, t) {
+        var previous = stack[index].graph;
+        stack = stack.slice(0, index + 1);
+        stack.push(_act(args, t));
+        index++;
+        return change(previous);
+    }
+
+
+    // internal _replace with eased time
+    function _replace(args, t) {
+        var previous = stack[index].graph;
+        // assert(index == stack.length - 1)
+        stack[index] = _act(args, t);
+        return change(previous);
+    }
+
+
+    // internal _overwrite with eased time
+    function _overwrite(args, t) {
+        var previous = stack[index].graph;
+        if (index > 0) {
+            index--;
+            stack.pop();
+        }
+        stack = stack.slice(0, index + 1);
+        stack.push(_act(args, t));
+        index++;
+        return change(previous);
+    }
+
+
+    // determine diffrence and dispatch a change event
     function change(previous) {
         var difference = coreDifference(previous, history.graph());
         dispatch.call('change', this, difference);
@@ -80,64 +116,46 @@ export function coreHistory(context) {
             d3.select(document)
                 .interrupt('history.perform');
 
-            var transitionable = false;
+            var transitionable = false,
+                action0 = arguments[0];
+
             if (arguments.length === 1 ||
                 arguments.length === 2 && !_.isFunction(arguments[1])) {
-                transitionable = !!arguments[0].transitionable;
+                transitionable = !!action0.transitionable;
             }
 
             if (transitionable) {
                 var origArguments = arguments;
                 d3.select(document)
                     .transition('history.perform')
-                    .duration(150)
+                    .duration(duration)
                     .ease(d3.easeLinear)
                     .tween('history.tween', function() {
                         return function(t) {
-                            if (t < 1) _doOverwrite([origArguments[0]], t);
+                            if (t < 1) _overwrite([action0], t);
                         };
                     })
                     .on('start', function() {
-                        _doPerform([origArguments[0]], 0);
+                        _perform([action0], 0);
                     })
                     .on('end interrupt', function() {
-                        _doOverwrite(origArguments, 1);
+                        _overwrite(origArguments, 1);
                     });
 
             } else {
-                return _doPerform(arguments);
-            }
-
-
-            function _doPerform(args, t) {
-                var previous = stack[index].graph;
-                stack = stack.slice(0, index + 1);
-                stack.push(perform(args, t));
-                index++;
-                return change(previous);
-            }
-
-            function _doOverwrite(args, t) {
-                var previous = stack[index].graph;
-                if (index > 0) {
-                    index--;
-                    stack.pop();
-                }
-                stack = stack.slice(0, index + 1);
-                stack.push(perform(args, t));
-                index++;
-                return change(previous);
+                return _perform(arguments);
             }
         },
 
 
         replace: function() {
-            var previous = stack[index].graph;
+            return _replace(arguments, 1);
+        },
 
-            // assert(index == stack.length - 1)
-            stack[index] = perform(arguments);
 
-            return change(previous);
+        // Same as calling pop and then perform
+        overwrite: function() {
+            return _overwrite(arguments, 1);
         },
 
 
@@ -149,22 +167,6 @@ export function coreHistory(context) {
                 stack.pop();
                 return change(previous);
             }
-        },
-
-
-        // Same as calling pop and then perform
-        overwrite: function() {
-            var previous = stack[index].graph;
-
-            if (index > 0) {
-                index--;
-                stack.pop();
-            }
-            stack = stack.slice(0, index + 1);
-            stack.push(perform(arguments));
-            index++;
-
-            return change(previous);
         },
 
 
