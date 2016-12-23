@@ -271,4 +271,53 @@ describe('iD.actionCircularize', function () {
         expect(isCircular('-', graph)).to.be.ok;
     });
 
+
+    describe('transitions', function () {
+        it('is transitionable', function() {
+            expect(iD.actionCircularize().transitionable).to.be.true;
+        });
+
+        it('circularize at t = 0', function() {
+            var graph = iD.Graph([
+                    iD.Node({id: 'a', loc: [0, 0]}),
+                    iD.Node({id: 'b', loc: [2, 0]}),
+                    iD.Node({id: 'c', loc: [2, 2]}),
+                    iD.Node({id: 'd', loc: [0, 2]}),
+                    iD.Way({id: '-', nodes: ['a', 'b', 'c', 'd', 'a']})
+                ]);
+            graph = iD.actionCircularize('-', projection)(graph, 0);
+            expect(isCircular('-', graph)).to.be.not.ok;
+            expect(graph.entity('-').nodes).to.have.length(20);
+            expect(area('-', graph)).to.be.closeTo(-4, 1e-2);
+        });
+
+        it('circularize at t = 0.5', function() {
+            var graph = iD.Graph([
+                    iD.Node({id: 'a', loc: [0, 0]}),
+                    iD.Node({id: 'b', loc: [2, 0]}),
+                    iD.Node({id: 'c', loc: [2, 2]}),
+                    iD.Node({id: 'd', loc: [0, 2]}),
+                    iD.Way({id: '-', nodes: ['a', 'b', 'c', 'd', 'a']})
+                ]);
+            graph = iD.actionCircularize('-', projection)(graph, 0.5);
+            expect(isCircular('-', graph)).to.be.not.ok;
+            expect(graph.entity('-').nodes).to.have.length(20);
+            expect(area('-', graph)).to.be.closeTo(-4.812, 1e-2);
+        });
+
+        it('circularize at t = 1', function() {
+            var graph = iD.Graph([
+                    iD.Node({id: 'a', loc: [0, 0]}),
+                    iD.Node({id: 'b', loc: [2, 0]}),
+                    iD.Node({id: 'c', loc: [2, 2]}),
+                    iD.Node({id: 'd', loc: [0, 2]}),
+                    iD.Way({id: '-', nodes: ['a', 'b', 'c', 'd', 'a']})
+                ]);
+            graph = iD.actionCircularize('-', projection)(graph, 1);
+            expect(isCircular('-', graph)).to.be.ok;
+            expect(graph.entity('-').nodes).to.have.length(20);
+            expect(area('-', graph)).to.be.closeTo(-6.168, 1e-2);
+        });
+    });
+
 });
