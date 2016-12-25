@@ -1183,6 +1183,11 @@
             "type": "typeCombo",
             "label": "Type"
         },
+        "plant": {
+            "key": "plant",
+            "type": "combo",
+            "label": "Plant"
+        },
         "population": {
             "key": "population",
             "type": "text",

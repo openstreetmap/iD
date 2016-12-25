@@ -5790,6 +5790,7 @@
         "landuse/farm": {
             "icon": "farm",
             "fields": [
+                "operator",
                 "crop"
             ],
             "geometry": [
@@ -5883,6 +5884,7 @@
         "landuse/farmland": {
             "icon": "farm",
             "fields": [
+                "operator",
                 "crop"
             ],
             "geometry": [
@@ -5891,12 +5893,17 @@
             "tags": {
                 "landuse": "farmland"
             },
-            "terms": [],
+            "terms": [
+                "crop",
+                "grow",
+                "plant"
+            ],
             "name": "Farmland"
         },
         "landuse/farmyard": {
             "icon": "farm",
             "fields": [
+                "operator",
                 "crop"
             ],
             "geometry": [
@@ -5905,7 +5912,11 @@
             "tags": {
                 "landuse": "farmyard"
             },
-            "terms": [],
+            "terms": [
+                "crop",
+                "grow",
+                "plant"
+            ],
             "name": "Farmyard"
         },
         "landuse/forest": {
@@ -5992,6 +6003,7 @@
         "landuse/orchard": {
             "icon": "park2",
             "fields": [
+                "operator",
                 "trees"
             ],
             "geometry": [
@@ -6000,22 +6012,27 @@
             "tags": {
                 "landuse": "orchard"
             },
-            "terms": [],
+            "terms": [
+                "fruit"
+            ],
             "name": "Orchard"
         },
         "landuse/plant_nursery": {
             "icon": "garden",
             "fields": [
-                "name"
+                "operator",
+                "plant"
             ],
             "geometry": [
-                "point",
                 "area"
             ],
             "tags": {
                 "landuse": "plant_nursery"
             },
             "terms": [
+                "flower",
+                "garden",
+                "grow",
                 "vivero"
             ],
             "name": "Plant Nursery"
@@ -6064,13 +6081,19 @@
             "name": "Retail Area"
         },
         "landuse/vineyard": {
+            "fields": [
+                "operator"
+            ],
             "geometry": [
                 "area"
             ],
             "tags": {
                 "landuse": "vineyard"
             },
-            "terms": [],
+            "terms": [
+                "grape",
+                "wine"
+            ],
             "name": "Vineyard"
         },
         "leisure": {

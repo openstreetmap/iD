@@ -1,10 +1,16 @@
 {
+    "fields": [
+        "operator"
+    ],
     "geometry": [
         "area"
     ],
     "tags": {
         "landuse": "vineyard"
     },
-    "terms": [],
+    "terms": [
+        "grape",
+        "wine"
+    ],
     "name": "Vineyard"
 }

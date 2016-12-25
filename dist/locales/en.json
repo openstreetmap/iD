@@ -1468,6 +1468,9 @@
                 "place": {
                     "label": "Type"
                 },
+                "plant": {
+                    "label": "Plant"
+                },
                 "population": {
                     "label": "Population"
                 },
@@ -3064,11 +3067,11 @@
                 },
                 "landuse/farmland": {
                     "name": "Farmland",
-                    "terms": ""
+                    "terms": "crop,grow,plant"
                 },
                 "landuse/farmyard": {
                     "name": "Farmyard",
-                    "terms": ""
+                    "terms": "crop,grow,plant"
                 },
                 "landuse/forest": {
                     "name": "Forest",
@@ -3100,11 +3103,11 @@
                 },
                 "landuse/orchard": {
                     "name": "Orchard",
-                    "terms": ""
+                    "terms": "fruit"
                 },
                 "landuse/plant_nursery": {
                     "name": "Plant Nursery",
-                    "terms": "vivero"
+                    "terms": "flower,garden,grow,vivero"
                 },
                 "landuse/quarry": {
                     "name": "Quarry",
@@ -3124,7 +3127,7 @@
                 },
                 "landuse/vineyard": {
                     "name": "Vineyard",
-                    "terms": ""
+                    "terms": "grape,wine"
                 },
                 "leisure": {
                     "name": "Leisure",

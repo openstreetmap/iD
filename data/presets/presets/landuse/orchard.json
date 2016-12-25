@@ -1,6 +1,7 @@
 {
     "icon": "park2",
     "fields": [
+        "operator",
         "trees"
     ],
     "geometry": [
@@ -9,6 +10,8 @@
     "tags": {
         "landuse": "orchard"
     },
-    "terms": [],
+    "terms": [
+        "fruit"
+    ],
     "name": "Orchard"
 }

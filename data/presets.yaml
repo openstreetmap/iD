@@ -898,6 +898,9 @@ en:
       place:
         # place=*
         label: Type
+      plant:
+        # plant=*
+        label: Plant
       population:
         # population=*
         label: Population
@@ -2650,10 +2653,12 @@ en:
       landuse/farmland:
         # landuse=farmland
         name: Farmland
+        # 'terms: crop,grow,plant'
         terms: '<translate with synonyms or related terms for ''Farmland'', separated by commas>'
       landuse/farmyard:
         # landuse=farmyard
         name: Farmyard
+        # 'terms: crop,grow,plant'
         terms: '<translate with synonyms or related terms for ''Farmyard'', separated by commas>'
       landuse/forest:
         # landuse=forest
@@ -2688,11 +2693,12 @@ en:
       landuse/orchard:
         # landuse=orchard
         name: Orchard
+        # 'terms: fruit'
         terms: '<translate with synonyms or related terms for ''Orchard'', separated by commas>'
       landuse/plant_nursery:
         # landuse=plant_nursery
         name: Plant Nursery
-        # 'terms: vivero'
+        # 'terms: flower,garden,grow,vivero'
         terms: '<translate with synonyms or related terms for ''Plant Nursery'', separated by commas>'
       landuse/quarry:
         # landuse=quarry
@@ -2714,6 +2720,7 @@ en:
       landuse/vineyard:
         # landuse=vineyard
         name: Vineyard
+        # 'terms: grape,wine'
         terms: '<translate with synonyms or related terms for ''Vineyard'', separated by commas>'
       leisure:
         # leisure=*
