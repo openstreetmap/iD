@@ -1,11 +1,13 @@
 {
     "geometry": [
-        "point",
         "area"
     ],
-    "terms": [],
     "tags": {
         "natural": "grassland"
     },
+    "terms": [
+        "prairie",
+        "savanna"
+    ],
     "name": "Grassland"
 }

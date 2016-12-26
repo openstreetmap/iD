@@ -3445,13 +3445,17 @@
                     "name": "Natural",
                     "terms": ""
                 },
+                "natural/bare_rock": {
+                    "name": "Bare Rock",
+                    "terms": "rock"
+                },
                 "natural/bay": {
                     "name": "Bay",
                     "terms": ""
                 },
                 "natural/beach": {
                     "name": "Beach",
-                    "terms": ""
+                    "terms": "shore"
                 },
                 "natural/cave_entrance": {
                     "name": "Cave Entrance",
@@ -3459,7 +3463,7 @@
                 },
                 "natural/cliff": {
                     "name": "Cliff",
-                    "terms": ""
+                    "terms": "escarpment"
                 },
                 "natural/coastline": {
                     "name": "Coastline",
@@ -3475,7 +3479,7 @@
                 },
                 "natural/grassland": {
                     "name": "Grassland",
-                    "terms": ""
+                    "terms": "prairie,savanna"
                 },
                 "natural/heath": {
                     "name": "Heath",
@@ -3485,9 +3489,17 @@
                     "name": "Peak",
                     "terms": "acme,aiguille,alp,climax,crest,crown,hill,mount,mountain,pinnacle,summit,tip,top"
                 },
+                "natural/ridge": {
+                    "name": "Ridge",
+                    "terms": "crest"
+                },
                 "natural/saddle": {
                     "name": "Saddle",
                     "terms": "pass,mountain pass,top"
+                },
+                "natural/sand": {
+                    "name": "Sand",
+                    "terms": "desert"
                 },
                 "natural/scree": {
                     "name": "Scree",

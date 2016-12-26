@@ -7402,15 +7402,27 @@
             },
             "name": "Natural"
         },
+        "natural/bare_rock": {
+            "geometry": [
+                "area"
+            ],
+            "tags": {
+                "natural": "bare_rock"
+            },
+            "terms": [
+                "rock"
+            ],
+            "name": "Bare Rock"
+        },
         "natural/bay": {
             "geometry": [
                 "point",
                 "area"
             ],
-            "terms": [],
             "tags": {
                 "natural": "bay"
             },
+            "terms": [],
             "name": "Bay"
         },
         "natural/beach": {
@@ -7421,10 +7433,12 @@
                 "point",
                 "area"
             ],
-            "terms": [],
             "tags": {
                 "natural": "beach"
             },
+            "terms": [
+                "shore"
+            ],
             "name": "Beach"
         },
         "natural/cave_entrance": {
@@ -7436,6 +7450,9 @@
                 "fee",
                 "access_simple"
             ],
+            "tags": {
+                "natural": "cave_entrance"
+            },
             "terms": [
                 "cavern",
                 "hollow",
@@ -7443,9 +7460,6 @@
                 "shelter",
                 "cavity"
             ],
-            "tags": {
-                "natural": "cave_entrance"
-            },
             "name": "Cave Entrance"
         },
         "natural/cliff": {
@@ -7455,63 +7469,67 @@
                 "line",
                 "area"
             ],
-            "terms": [],
             "tags": {
                 "natural": "cliff"
             },
+            "terms": [
+                "escarpment"
+            ],
             "name": "Cliff"
         },
         "natural/coastline": {
             "geometry": [
                 "line"
             ],
-            "terms": [
-                "shore"
-            ],
             "tags": {
                 "natural": "coastline"
             },
+            "terms": [
+                "shore"
+            ],
             "name": "Coastline"
         },
         "natural/fell": {
             "geometry": [
                 "area"
             ],
-            "terms": [],
             "tags": {
                 "natural": "fell"
             },
+            "terms": [],
             "name": "Fell"
         },
         "natural/glacier": {
             "geometry": [
                 "area"
             ],
-            "terms": [],
             "tags": {
                 "natural": "glacier"
             },
+            "terms": [],
             "name": "Glacier"
         },
         "natural/grassland": {
             "geometry": [
-                "point",
                 "area"
             ],
-            "terms": [],
             "tags": {
                 "natural": "grassland"
             },
+            "terms": [
+                "prairie",
+                "savanna"
+            ],
             "name": "Grassland"
         },
         "natural/heath": {
             "geometry": [
                 "area"
             ],
-            "terms": [],
             "tags": {
                 "natural": "heath"
             },
+            "terms": [],
             "name": "Heath"
         },
         "natural/peak": {
@@ -7543,6 +7561,18 @@
             ],
             "name": "Peak"
         },
+        "natural/ridge": {
+            "geometry": [
+                "line"
+            ],
+            "tags": {
+                "natural": "ridge"
+            },
+            "terms": [
+                "crest"
+            ],
+            "name": "Ridge"
+        },
         "natural/saddle": {
             "icon": "triangle-stroked",
             "fields": [
@@ -7561,6 +7591,18 @@
                 "top"
             ],
             "name": "Saddle"
+        },
+        "natural/sand": {
+            "geometry": [
+                "area"
+            ],
+            "tags": {
+                "natural": "sand"
+            },
+            "terms": [
+                "desert"
+            ],
+            "name": "Sand"
         },
         "natural/scree": {
             "geometry": [
@@ -7592,43 +7634,43 @@
                 "point",
                 "vertex"
             ],
-            "terms": [],
             "tags": {
                 "natural": "spring"
             },
+            "terms": [],
             "name": "Spring"
         },
         "natural/tree_row": {
+            "icon": "park",
             "fields": [
                 "leaf_type",
                 "leaf_cycle",
                 "denotation"
             ],
-            "icon": "park",
             "geometry": [
                 "line"
             ],
-            "terms": [],
             "tags": {
                 "natural": "tree_row"
             },
+            "terms": [],
             "name": "Tree row"
         },
         "natural/tree": {
+            "icon": "park",
             "fields": [
                 "leaf_type_singular",
                 "leaf_cycle_singular",
                 "denotation"
             ],
-            "icon": "park",
             "geometry": [
                 "point",
                 "vertex"
             ],
-            "terms": [],
             "tags": {
                 "natural": "tree"
             },
+            "terms": [],
             "name": "Tree"
         },
         "natural/volcano": {
@@ -7650,6 +7692,7 @@
             "name": "Volcano"
         },
         "natural/water": {
+            "icon": "water",
             "fields": [
                 "water"
             ],
@@ -7659,10 +7702,10 @@
             "tags": {
                 "natural": "water"
             },
-            "icon": "water",
             "name": "Water"
         },
         "natural/water/lake": {
+            "icon": "water",
             "geometry": [
                 "area"
             ],
@@ -7675,10 +7718,10 @@
                 "loch",
                 "mere"
             ],
-            "icon": "water",
             "name": "Lake"
         },
         "natural/water/pond": {
+            "icon": "water",
             "geometry": [
                 "area"
             ],
@@ -7693,10 +7736,10 @@
                 "pool",
                 "mere"
             ],
-            "icon": "water",
             "name": "Pond"
         },
         "natural/water/reservoir": {
+            "icon": "water",
             "geometry": [
                 "area"
             ],
@@ -7704,7 +7747,6 @@
                 "natural": "water",
                 "water": "reservoir"
             },
-            "icon": "water",
             "name": "Reservoir"
         },
         "natural/wetland": {

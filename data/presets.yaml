@@ -3069,6 +3069,11 @@ en:
         # natural=*
         name: Natural
         terms: '<translate with synonyms or related terms for ''Natural'', separated by commas>'
+      natural/bare_rock:
+        # natural=bare_rock
+        name: Bare Rock
+        # 'terms: rock'
+        terms: '<translate with synonyms or related terms for ''Bare Rock'', separated by commas>'
       natural/bay:
         # natural=bay
         name: Bay
@@ -3076,6 +3081,7 @@ en:
       natural/beach:
         # natural=beach
         name: Beach
+        # 'terms: shore'
         terms: '<translate with synonyms or related terms for ''Beach'', separated by commas>'
       natural/cave_entrance:
         # natural=cave_entrance
@@ -3085,6 +3091,7 @@ en:
       natural/cliff:
         # natural=cliff
         name: Cliff
+        # 'terms: escarpment'
         terms: '<translate with synonyms or related terms for ''Cliff'', separated by commas>'
       natural/coastline:
         # natural=coastline
@@ -3102,6 +3109,7 @@ en:
       natural/grassland:
         # natural=grassland
         name: Grassland
+        # 'terms: prairie,savanna'
         terms: '<translate with synonyms or related terms for ''Grassland'', separated by commas>'
       natural/heath:
         # natural=heath
@@ -3112,11 +3120,21 @@ en:
         name: Peak
         # 'terms: acme,aiguille,alp,climax,crest,crown,hill,mount,mountain,pinnacle,summit,tip,top'
         terms: '<translate with synonyms or related terms for ''Peak'', separated by commas>'
+      natural/ridge:
+        # natural=ridge
+        name: Ridge
+        # 'terms: crest'
+        terms: '<translate with synonyms or related terms for ''Ridge'', separated by commas>'
       natural/saddle:
         # natural=saddle
         name: Saddle
         # 'terms: pass,mountain pass,top'
         terms: '<translate with synonyms or related terms for ''Saddle'', separated by commas>'
+      natural/sand:
+        # natural=sand
+        name: Sand
+        # 'terms: desert'
+        terms: '<translate with synonyms or related terms for ''Sand'', separated by commas>'
       natural/scree:
         # natural=scree
         name: Scree

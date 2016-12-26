@@ -1663,6 +1663,10 @@
         },
         {
             "key": "natural",
+            "value": "bare_rock"
+        },
+        {
+            "key": "natural",
             "value": "bay"
         },
         {
@@ -1703,7 +1707,15 @@
         },
         {
             "key": "natural",
+            "value": "ridge"
+        },
+        {
+            "key": "natural",
             "value": "saddle"
+        },
+        {
+            "key": "natural",
+            "value": "sand"
         },
         {
             "key": "natural",
