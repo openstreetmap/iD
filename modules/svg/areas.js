@@ -8,17 +8,18 @@ export function svgAreas(projection, context) {
     // Patterns only work in Firefox when set directly on element.
     // (This is not a bug: https://bugzilla.mozilla.org/show_bug.cgi?id=750632)
     var patterns = {
-        wetland: 'wetland',
         beach: 'beach',
-        scrub: 'scrub',
-        construction: 'construction',
-        military: 'construction',
         cemetery: 'cemetery',
-        grave_yard: 'cemetery',
-        meadow: 'meadow',
+        construction: 'construction',
         farm: 'farmland',
         farmland: 'farmland',
-        orchard: 'orchard'
+        grave_yard: 'cemetery',
+        meadow: 'meadow',
+        military: 'construction',
+        orchard: 'orchard',
+        sand: 'beach',
+        scrub: 'scrub',
+        wetland: 'wetland',
     };
 
     var patternKeys = ['landuse', 'natural', 'amenity'];

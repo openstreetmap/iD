@@ -311,13 +311,19 @@ path.fill.tag-power-plant {
     background-color: rgba(228, 164, 245, 0.3);
 }
 
+path.stroke.tag-natural-bare_rock,
+path.stroke.tag-natural-scree,
 path.stroke.tag-landuse-quarry {
     stroke: rgb(166, 149, 123);
 }
+path.fill.tag-natural-bare_rock,
+path.fill.tag-natural-scree,
 path.fill.tag-landuse-quarry {
     stroke: rgba(166, 149, 123, 0.2);
     fill: rgba(166, 149, 123, 0.2);
 }
+.preset-icon-fill-area.tag-natural-bare_rock,
+.preset-icon-fill-area.tag-natural-scree,
 .preset-icon-fill-area.tag-landuse-quarry {
     border-color: rgb(166, 149, 123);
     background-color: rgba(166, 149, 123, 0.2);
@@ -380,13 +386,16 @@ path.stroke.tag-landuse-meadow {
     background-color: rgba(182, 225, 153, 0.2);
 }
 
-.pattern-color-beach {
+.pattern-color-beach,
+.pattern-color-sand {
     fill: rgba(255, 255, 126, 0.2);
 }
-path.stroke.tag-natural-beach {
+path.stroke.tag-natural-beach,
+path.stroke.tag-natural-sand {
     stroke: rgb(255, 255, 126);
 }
-.preset-icon-fill-area.tag-natural-beach {
+.preset-icon-fill-area.tag-natural-beach,
+.preset-icon-fill-area.tag-natural-sand {
     border-color: rgb(255, 255, 126);
     background-color: rgba(255, 255, 126, 0.2);
 }
