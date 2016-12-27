@@ -305,6 +305,11 @@
             "type": "combo",
             "label": "Building"
         },
+        "bunker_type": {
+            "key": "bunker_type",
+            "type": "combo",
+            "label": "Type"
+        },
         "camera/direction": {
             "key": "camera:direction",
             "type": "number",

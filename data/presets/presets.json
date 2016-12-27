@@ -1344,8 +1344,10 @@
             ],
             "terms": [
                 "game",
+                "gun",
                 "lookout",
-                "shoot",
+                "rifle",
+                "shoot*",
                 "wild",
                 "watch"
             ],
@@ -5998,7 +6000,376 @@
                 "landuse": "military"
             },
             "terms": [],
+            "matchScore": 0.9,
             "name": "Military Area"
+        },
+        "landuse/military/airfield": {
+            "icon": "airfield",
+            "fields": [
+                "ref",
+                "iata",
+                "icao"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "tags": {
+                "military": "airfield"
+            },
+            "addTags": {
+                "landuse": "military",
+                "military": "airfield"
+            },
+            "removeTags": {
+                "landuse": "military",
+                "military": "airfield"
+            },
+            "terms": [
+                "air force",
+                "army",
+                "base",
+                "bomb",
+                "fight",
+                "force",
+                "guard",
+                "heli*",
+                "jet",
+                "marine",
+                "navy",
+                "plane",
+                "troop",
+                "war"
+            ],
+            "name": "Military Airfield"
+        },
+        "landuse/military/barracks": {
+            "fields": [
+                "building_area"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "tags": {
+                "military": "barracks"
+            },
+            "addTags": {
+                "landuse": "military",
+                "military": "barracks"
+            },
+            "removeTags": {
+                "landuse": "military",
+                "military": "barracks"
+            },
+            "terms": [
+                "air force",
+                "army",
+                "base",
+                "fight",
+                "force",
+                "guard",
+                "marine",
+                "navy",
+                "troop",
+                "war"
+            ],
+            "name": "Barracks"
+        },
+        "landuse/military/bunker": {
+            "fields": [
+                "bunker_type",
+                "building_area"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "tags": {
+                "military": "bunker"
+            },
+            "addTags": {
+                "building": "bunker",
+                "landuse": "military",
+                "military": "bunker"
+            },
+            "removeTags": {
+                "building": "bunker",
+                "landuse": "military",
+                "military": "bunker"
+            },
+            "terms": [
+                "air force",
+                "army",
+                "base",
+                "fight",
+                "force",
+                "guard",
+                "marine",
+                "navy",
+                "troop",
+                "war"
+            ],
+            "name": "Military Bunker"
+        },
+        "landuse/military/checkpoint": {
+            "geometry": [
+                "point",
+                "vertex",
+                "area"
+            ],
+            "tags": {
+                "military": "checkpoint"
+            },
+            "addTags": {
+                "landuse": "military",
+                "military": "checkpoint"
+            },
+            "removeTags": {
+                "landuse": "military",
+                "military": "checkpoint"
+            },
+            "terms": [
+                "air force",
+                "army",
+                "base",
+                "force",
+                "guard",
+                "marine",
+                "navy",
+                "troop",
+                "war"
+            ],
+            "name": "Checkpoint"
+        },
+        "landuse/military/danger_area": {
+            "icon": "danger",
+            "geometry": [
+                "point",
+                "vertex",
+                "area"
+            ],
+            "tags": {
+                "military": "danger_area"
+            },
+            "addTags": {
+                "landuse": "military",
+                "military": "danger_area"
+            },
+            "removeTags": {
+                "landuse": "military",
+                "military": "danger_area"
+            },
+            "terms": [
+                "air force",
+                "army",
+                "base",
+                "blast",
+                "bomb",
+                "explo*",
+                "force",
+                "guard",
+                "mine",
+                "marine",
+                "navy",
+                "troop",
+                "war"
+            ],
+            "name": "Danger Area"
+        },
+        "landuse/military/naval_base": {
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "tags": {
+                "military": "naval_base"
+            },
+            "addTags": {
+                "landuse": "military",
+                "military": "naval_base"
+            },
+            "removeTags": {
+                "landuse": "military",
+                "military": "naval_base"
+            },
+            "terms": [
+                "base",
+                "fight",
+                "force",
+                "guard",
+                "marine",
+                "navy",
+                "ship",
+                "sub",
+                "troop",
+                "war"
+            ],
+            "name": "Naval Base"
+        },
+        "landuse/military/nuclear_explosion_site": {
+            "icon": "danger",
+            "geometry": [
+                "point",
+                "vertex",
+                "area"
+            ],
+            "tags": {
+                "military": "nuclear_explosion_site"
+            },
+            "addTags": {
+                "landuse": "military",
+                "military": "nuclear_explosion_site"
+            },
+            "removeTags": {
+                "landuse": "military",
+                "military": "nuclear_explosion_site"
+            },
+            "terms": [
+                "atom",
+                "blast",
+                "bomb",
+                "detonat*",
+                "nuke",
+                "site",
+                "test"
+            ],
+            "name": "Nuclear Explosion Site"
+        },
+        "landuse/military/obstacle_course": {
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "tags": {
+                "military": "obstacle_course"
+            },
+            "addTags": {
+                "landuse": "military",
+                "military": "obstacle_course"
+            },
+            "removeTags": {
+                "landuse": "military",
+                "military": "obstacle_course"
+            },
+            "terms": [
+                "army",
+                "base",
+                "force",
+                "guard",
+                "marine",
+                "navy",
+                "troop",
+                "war"
+            ],
+            "name": "Obstacle Course"
+        },
+        "landuse/military/office": {
+            "fields": [
+                "building_area"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "tags": {
+                "military": "office"
+            },
+            "addTags": {
+                "landuse": "military",
+                "military": "office"
+            },
+            "removeTags": {
+                "landuse": "military",
+                "military": "office"
+            },
+            "terms": [
+                "air force",
+                "army",
+                "base",
+                "enlist",
+                "fight",
+                "force",
+                "guard",
+                "marine",
+                "navy",
+                "recruit",
+                "troop",
+                "war"
+            ],
+            "name": "Military Office"
+        },
+        "landuse/military/range": {
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "tags": {
+                "military": "range"
+            },
+            "addTags": {
+                "landuse": "military",
+                "military": "range"
+            },
+            "removeTags": {
+                "landuse": "military",
+                "military": "range"
+            },
+            "terms": [
+                "air force",
+                "army",
+                "base",
+                "fight",
+                "fire",
+                "force",
+                "guard",
+                "gun",
+                "marine",
+                "navy",
+                "rifle",
+                "shoot*",
+                "snip*",
+                "train",
+                "troop",
+                "war"
+            ],
+            "name": "Military Range"
+        },
+        "landuse/military/training_area": {
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "tags": {
+                "military": "training_area"
+            },
+            "addTags": {
+                "landuse": "military",
+                "military": "training_area"
+            },
+            "removeTags": {
+                "landuse": "military",
+                "military": "training_area"
+            },
+            "terms": [
+                "air force",
+                "army",
+                "base",
+                "fight",
+                "fire",
+                "force",
+                "guard",
+                "gun",
+                "marine",
+                "navy",
+                "rifle",
+                "shoot*",
+                "snip*",
+                "train",
+                "troop",
+                "war"
+            ],
+            "name": "Training Area"
         },
         "landuse/orchard": {
             "icon": "park2",
@@ -7278,115 +7649,6 @@
                 "man_made": "works"
             },
             "name": "Factory"
-        },
-        "military/airfield": {
-            "icon": "airfield",
-            "geometry": [
-                "point",
-                "vertex",
-                "area"
-            ],
-            "terms": [],
-            "tags": {
-                "military": "airfield"
-            },
-            "name": "Airfield"
-        },
-        "military/barracks": {
-            "geometry": [
-                "point",
-                "vertex",
-                "area"
-            ],
-            "terms": [],
-            "tags": {
-                "military": "barracks"
-            },
-            "name": "Barracks"
-        },
-        "military/bunker": {
-            "geometry": [
-                "point",
-                "vertex",
-                "area"
-            ],
-            "terms": [],
-            "tags": {
-                "military": "bunker"
-            },
-            "name": "Bunker"
-        },
-        "military/checkpoint": {
-            "geometry": [
-                "point",
-                "vertex",
-                "area"
-            ],
-            "terms": [],
-            "tags": {
-                "military": "checkpoint"
-            },
-            "name": "Checkpoint"
-        },
-        "military/danger_area": {
-            "geometry": [
-                "point",
-                "vertex",
-                "area"
-            ],
-            "terms": [],
-            "tags": {
-                "military": "danger_area"
-            },
-            "name": "Danger Area"
-        },
-        "military/naval_base": {
-            "geometry": [
-                "point",
-                "vertex",
-                "area"
-            ],
-            "terms": [],
-            "tags": {
-                "military": "naval_base"
-            },
-            "name": "Naval Base"
-        },
-        "military/obstacle_course": {
-            "geometry": [
-                "point",
-                "vertex",
-                "area"
-            ],
-            "terms": [],
-            "tags": {
-                "military": "obstacle_course"
-            },
-            "name": "Obstacle Course"
-        },
-        "military/range": {
-            "geometry": [
-                "point",
-                "vertex",
-                "area"
-            ],
-            "terms": [],
-            "tags": {
-                "military": "range"
-            },
-            "name": "Military Range"
-        },
-        "military/training_area": {
-            "geometry": [
-                "point",
-                "vertex",
-                "area"
-            ],
-            "terms": [],
-            "tags": {
-                "military": "training_area"
-            },
-            "name": "Training area"
         },
         "natural": {
             "fields": [

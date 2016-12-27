@@ -352,13 +352,16 @@ path.stroke.tag-landuse.tag-status {
     background-color: rgba(196, 189, 25, 0.2);
 }
 
+path.stroke.tag-military,
 path.stroke.tag-landuse-military {
     stroke: rgb(214, 136, 26);
 }
+path.fill.tag-military,
 path.fill.tag-landuse-military {
     stroke: rgba(214, 136, 26, 0.2);
     fill: rgba(214, 136, 26, 0.2);
 }
+.preset-icon-fill-area.tag-military,
 .preset-icon-fill-area.tag-landuse-military {
     border-color: rgb(214, 136, 26);
     background-color: rgba(214, 136, 26, 0.2);

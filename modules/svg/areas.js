@@ -27,6 +27,8 @@ export function svgAreas(projection, context) {
 
     function setPattern(d) {
         for (var i = 0; i < patternKeys.length; i++) {
+            if (d.tags.building && d.tags.building !== 'no') continue;
+
             if (patterns.hasOwnProperty(d.tags[patternKeys[i]])) {
                 this.style.fill = this.style.stroke = 'url("#pattern-' + patterns[d.tags[patternKeys[i]]] + '")';
                 return;

@@ -1325,6 +1325,50 @@
             "value": "military"
         },
         {
+            "key": "military",
+            "value": "airfield"
+        },
+        {
+            "key": "military",
+            "value": "barracks"
+        },
+        {
+            "key": "military",
+            "value": "bunker"
+        },
+        {
+            "key": "military",
+            "value": "checkpoint"
+        },
+        {
+            "key": "military",
+            "value": "danger_area"
+        },
+        {
+            "key": "military",
+            "value": "naval_base"
+        },
+        {
+            "key": "military",
+            "value": "nuclear_explosion_site"
+        },
+        {
+            "key": "military",
+            "value": "obstacle_course"
+        },
+        {
+            "key": "military",
+            "value": "office"
+        },
+        {
+            "key": "military",
+            "value": "range"
+        },
+        {
+            "key": "military",
+            "value": "training_area"
+        },
+        {
             "key": "landuse",
             "value": "orchard"
         },
@@ -1621,42 +1665,6 @@
         {
             "key": "man_made",
             "value": "works"
-        },
-        {
-            "key": "military",
-            "value": "airfield"
-        },
-        {
-            "key": "military",
-            "value": "barracks"
-        },
-        {
-            "key": "military",
-            "value": "bunker"
-        },
-        {
-            "key": "military",
-            "value": "checkpoint"
-        },
-        {
-            "key": "military",
-            "value": "danger_area"
-        },
-        {
-            "key": "military",
-            "value": "naval_base"
-        },
-        {
-            "key": "military",
-            "value": "obstacle_course"
-        },
-        {
-            "key": "military",
-            "value": "range"
-        },
-        {
-            "key": "military",
-            "value": "training_area"
         },
         {
             "key": "natural"

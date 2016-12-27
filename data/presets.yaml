@@ -222,6 +222,9 @@ en:
       building_area:
         # building=*
         label: Building
+      bunker_type:
+        # bunker_type=*
+        label: Type
       camera/direction:
         # 'camera:direction=*'
         label: Direction (Degrees Clockwise)
@@ -1555,7 +1558,7 @@ en:
       amenity/hunting_stand:
         # amenity=hunting_stand
         name: Hunting Stand
-        # 'terms: game,lookout,shoot,wild,watch'
+        # 'terms: game,gun,lookout,rifle,shoot*,wild,watch'
         terms: '<translate with synonyms or related terms for ''Hunting Stand'', separated by commas>'
       amenity/ice_cream:
         # amenity=ice_cream
@@ -2690,6 +2693,61 @@ en:
         # landuse=military
         name: Military Area
         terms: '<translate with synonyms or related terms for ''Military Area'', separated by commas>'
+      landuse/military/airfield:
+        # military=airfield
+        name: Military Airfield
+        # 'terms: air force,army,base,bomb,fight,force,guard,heli*,jet,marine,navy,plane,troop,war'
+        terms: '<translate with synonyms or related terms for ''Military Airfield'', separated by commas>'
+      landuse/military/barracks:
+        # military=barracks
+        name: Barracks
+        # 'terms: air force,army,base,fight,force,guard,marine,navy,troop,war'
+        terms: '<translate with synonyms or related terms for ''Barracks'', separated by commas>'
+      landuse/military/bunker:
+        # military=bunker
+        name: Military Bunker
+        # 'terms: air force,army,base,fight,force,guard,marine,navy,troop,war'
+        terms: '<translate with synonyms or related terms for ''Military Bunker'', separated by commas>'
+      landuse/military/checkpoint:
+        # military=checkpoint
+        name: Checkpoint
+        # 'terms: air force,army,base,force,guard,marine,navy,troop,war'
+        terms: '<translate with synonyms or related terms for ''Checkpoint'', separated by commas>'
+      landuse/military/danger_area:
+        # military=danger_area
+        name: Danger Area
+        # 'terms: air force,army,base,blast,bomb,explo*,force,guard,mine,marine,navy,troop,war'
+        terms: '<translate with synonyms or related terms for ''Danger Area'', separated by commas>'
+      landuse/military/naval_base:
+        # military=naval_base
+        name: Naval Base
+        # 'terms: base,fight,force,guard,marine,navy,ship,sub,troop,war'
+        terms: '<translate with synonyms or related terms for ''Naval Base'', separated by commas>'
+      landuse/military/nuclear_explosion_site:
+        # military=nuclear_explosion_site
+        name: Nuclear Explosion Site
+        # 'terms: atom,blast,bomb,detonat*,nuke,site,test'
+        terms: '<translate with synonyms or related terms for ''Nuclear Explosion Site'', separated by commas>'
+      landuse/military/obstacle_course:
+        # military=obstacle_course
+        name: Obstacle Course
+        # 'terms: army,base,force,guard,marine,navy,troop,war'
+        terms: '<translate with synonyms or related terms for ''Obstacle Course'', separated by commas>'
+      landuse/military/office:
+        # military=office
+        name: Military Office
+        # 'terms: air force,army,base,enlist,fight,force,guard,marine,navy,recruit,troop,war'
+        terms: '<translate with synonyms or related terms for ''Military Office'', separated by commas>'
+      landuse/military/range:
+        # military=range
+        name: Military Range
+        # 'terms: air force,army,base,fight,fire,force,guard,gun,marine,navy,rifle,shoot*,snip*,train,troop,war'
+        terms: '<translate with synonyms or related terms for ''Military Range'', separated by commas>'
+      landuse/military/training_area:
+        # military=training_area
+        name: Training Area
+        # 'terms: air force,army,base,fight,fire,force,guard,gun,marine,navy,rifle,shoot*,snip*,train,troop,war'
+        terms: '<translate with synonyms or related terms for ''Training Area'', separated by commas>'
       landuse/orchard:
         # landuse=orchard
         name: Orchard
@@ -3029,42 +3087,6 @@ en:
         name: Factory
         # 'terms: assembly,build,brewery,car,plant,plastic,processing,manufacture,refinery'
         terms: '<translate with synonyms or related terms for ''Factory'', separated by commas>'
-      military/airfield:
-        # military=airfield
-        name: Airfield
-        terms: '<translate with synonyms or related terms for ''Airfield'', separated by commas>'
-      military/barracks:
-        # military=barracks
-        name: Barracks
-        terms: '<translate with synonyms or related terms for ''Barracks'', separated by commas>'
-      military/bunker:
-        # military=bunker
-        name: Bunker
-        terms: '<translate with synonyms or related terms for ''Bunker'', separated by commas>'
-      military/checkpoint:
-        # military=checkpoint
-        name: Checkpoint
-        terms: '<translate with synonyms or related terms for ''Checkpoint'', separated by commas>'
-      military/danger_area:
-        # military=danger_area
-        name: Danger Area
-        terms: '<translate with synonyms or related terms for ''Danger Area'', separated by commas>'
-      military/naval_base:
-        # military=naval_base
-        name: Naval Base
-        terms: '<translate with synonyms or related terms for ''Naval Base'', separated by commas>'
-      military/obstacle_course:
-        # military=obstacle_course
-        name: Obstacle Course
-        terms: '<translate with synonyms or related terms for ''Obstacle Course'', separated by commas>'
-      military/range:
-        # military=range
-        name: Military Range
-        terms: '<translate with synonyms or related terms for ''Military Range'', separated by commas>'
-      military/training_area:
-        # military=training_area
-        name: Training area
-        terms: '<translate with synonyms or related terms for ''Training area'', separated by commas>'
       natural:
         # natural=*
         name: Natural

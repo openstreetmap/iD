@@ -911,6 +911,9 @@
                 "building": {
                     "label": "Building"
                 },
+                "bunker_type": {
+                    "label": "Type"
+                },
                 "camera/direction": {
                     "label": "Direction (Degrees Clockwise)",
                     "placeholder": "45, 90, 180, 270"
@@ -2067,7 +2070,7 @@
                 },
                 "amenity/hunting_stand": {
                     "name": "Hunting Stand",
-                    "terms": "game,lookout,shoot,wild,watch"
+                    "terms": "game,gun,lookout,rifle,shoot*,wild,watch"
                 },
                 "amenity/ice_cream": {
                     "name": "Ice Cream Shop",
@@ -3101,6 +3104,50 @@
                     "name": "Military Area",
                     "terms": ""
                 },
+                "landuse/military/airfield": {
+                    "name": "Military Airfield",
+                    "terms": "air force,army,base,bomb,fight,force,guard,heli*,jet,marine,navy,plane,troop,war"
+                },
+                "landuse/military/barracks": {
+                    "name": "Barracks",
+                    "terms": "air force,army,base,fight,force,guard,marine,navy,troop,war"
+                },
+                "landuse/military/bunker": {
+                    "name": "Military Bunker",
+                    "terms": "air force,army,base,fight,force,guard,marine,navy,troop,war"
+                },
+                "landuse/military/checkpoint": {
+                    "name": "Checkpoint",
+                    "terms": "air force,army,base,force,guard,marine,navy,troop,war"
+                },
+                "landuse/military/danger_area": {
+                    "name": "Danger Area",
+                    "terms": "air force,army,base,blast,bomb,explo*,force,guard,mine,marine,navy,troop,war"
+                },
+                "landuse/military/naval_base": {
+                    "name": "Naval Base",
+                    "terms": "base,fight,force,guard,marine,navy,ship,sub,troop,war"
+                },
+                "landuse/military/nuclear_explosion_site": {
+                    "name": "Nuclear Explosion Site",
+                    "terms": "atom,blast,bomb,detonat*,nuke,site,test"
+                },
+                "landuse/military/obstacle_course": {
+                    "name": "Obstacle Course",
+                    "terms": "army,base,force,guard,marine,navy,troop,war"
+                },
+                "landuse/military/office": {
+                    "name": "Military Office",
+                    "terms": "air force,army,base,enlist,fight,force,guard,marine,navy,recruit,troop,war"
+                },
+                "landuse/military/range": {
+                    "name": "Military Range",
+                    "terms": "air force,army,base,fight,fire,force,guard,gun,marine,navy,rifle,shoot*,snip*,train,troop,war"
+                },
+                "landuse/military/training_area": {
+                    "name": "Training Area",
+                    "terms": "air force,army,base,fight,fire,force,guard,gun,marine,navy,rifle,shoot*,snip*,train,troop,war"
+                },
                 "landuse/orchard": {
                     "name": "Orchard",
                     "terms": "fruit"
@@ -3404,42 +3451,6 @@
                 "man_made/works": {
                     "name": "Factory",
                     "terms": "assembly,build,brewery,car,plant,plastic,processing,manufacture,refinery"
-                },
-                "military/airfield": {
-                    "name": "Airfield",
-                    "terms": ""
-                },
-                "military/barracks": {
-                    "name": "Barracks",
-                    "terms": ""
-                },
-                "military/bunker": {
-                    "name": "Bunker",
-                    "terms": ""
-                },
-                "military/checkpoint": {
-                    "name": "Checkpoint",
-                    "terms": ""
-                },
-                "military/danger_area": {
-                    "name": "Danger Area",
-                    "terms": ""
-                },
-                "military/naval_base": {
-                    "name": "Naval Base",
-                    "terms": ""
-                },
-                "military/obstacle_course": {
-                    "name": "Obstacle Course",
-                    "terms": ""
-                },
-                "military/range": {
-                    "name": "Military Range",
-                    "terms": ""
-                },
-                "military/training_area": {
-                    "name": "Training area",
-                    "terms": ""
                 },
                 "natural": {
                     "name": "Natural",

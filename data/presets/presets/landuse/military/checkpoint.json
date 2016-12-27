@@ -1,0 +1,30 @@
+{
+    "geometry": [
+        "point",
+        "vertex",
+        "area"
+    ],
+    "tags": {
+        "military": "checkpoint"
+    },
+    "addTags": {
+        "landuse": "military",
+        "military": "checkpoint"
+    },
+    "removeTags": {
+        "landuse": "military",
+        "military": "checkpoint"
+    },
+    "terms": [
+        "air force",
+        "army",
+        "base",
+        "force",
+        "guard",
+        "marine",
+        "navy",
+        "troop",
+        "war"
+    ],
+    "name": "Checkpoint"
+}
