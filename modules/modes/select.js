@@ -247,6 +247,15 @@ export function modeSelect(context, selectedIDs) {
 
                 d3.event.preventDefault();
                 d3.event.stopPropagation();
+            } else if (datum.type === 'midpoint') {
+                var node = osmNode();
+
+                context.perform(
+                    actionAddMidpoint({loc: datum.loc, edge: datum.edge}, node),
+                    t('operations.add.annotation.vertex'));
+
+                d3.event.preventDefault();
+                d3.event.stopPropagation();
             }
         }
 
