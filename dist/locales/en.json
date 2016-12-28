@@ -205,11 +205,11 @@
                 },
                 "annotation": {
                     "long": {
-                        "area": "Reflected an area across its long axis.",
+                        "single": "Reflected an object across its long axis.",
                         "multiple": "Reflected multiple objects across their long axis."
                     },
                     "short": {
-                        "area": "Reflected an area across its short axis.",
+                        "single": "Reflected an object across its short axis.",
                         "multiple": "Reflected multiple objects across their short axis."
                     }
                 },
