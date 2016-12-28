@@ -954,6 +954,9 @@
                         "NNW": "North-northwest"
                     }
                 },
+                "castle_type": {
+                    "label": "Type"
+                },
                 "clock_direction": {
                     "label": "Direction",
                     "options": {

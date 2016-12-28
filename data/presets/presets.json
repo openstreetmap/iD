@@ -5699,6 +5699,10 @@
             "name": "Boundary Stone"
         },
         "historic/castle": {
+            "fields": [
+                "castle_type",
+                "building_area"
+            ],
             "geometry": [
                 "point",
                 "area"

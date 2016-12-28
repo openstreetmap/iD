@@ -284,6 +284,9 @@ en:
           WNW: West-northwest
           # direction=WSW
           WSW: West-southwest
+      castle_type:
+        # castle_type=*
+        label: Type
       clock_direction:
         # direction=*
         label: Direction

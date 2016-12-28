@@ -364,6 +364,11 @@
                 }
             }
         },
+        "castle_type": {
+            "key": "castle_type",
+            "type": "combo",
+            "label": "Type"
+        },
         "clock_direction": {
             "key": "direction",
             "type": "combo",
