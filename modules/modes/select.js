@@ -235,23 +235,19 @@ export function modeSelect(context, selectedIDs) {
 
             if (datum instanceof osmWay && !target.classed('fill')) {
                 var choice = geoChooseEdge(context.childNodes(datum), context.mouse(), context.projection),
-                    node = osmNode();
-
-                var prev = datum.nodes[choice.index - 1],
+                    prev = datum.nodes[choice.index - 1],
                     next = datum.nodes[choice.index];
 
                 context.perform(
-                    actionAddMidpoint({loc: choice.loc, edge: [prev, next]}, node),
+                    actionAddMidpoint({loc: choice.loc, edge: [prev, next]}, osmNode()),
                     t('operations.add.annotation.vertex')
                 );
 
                 d3.event.preventDefault();
                 d3.event.stopPropagation();
             } else if (datum.type === 'midpoint') {
-                var node = osmNode();
-
                 context.perform(
-                    actionAddMidpoint({loc: datum.loc, edge: datum.edge}, node),
+                    actionAddMidpoint({loc: datum.loc, edge: datum.edge}, osmNode()),
                     t('operations.add.annotation.vertex'));
 
                 d3.event.preventDefault();
