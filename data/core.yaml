@@ -159,10 +159,10 @@ en:
         short: Y
       annotation:
         long:
-          area: Reflected an area across its long axis.
+          single: Reflected an object across its long axis.
           multiple: Reflected multiple objects across their long axis.
         short:
-          area: Reflected an area across its short axis.
+          single: Reflected an object across its short axis.
           multiple: Reflected multiple objects across their short axis.
       incomplete_relation:
         single: This object can't be reflected because it hasn't been fully downloaded.
