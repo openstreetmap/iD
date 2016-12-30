@@ -78,24 +78,24 @@ en:
     delete:
       title: Delete
       description:
-        single: Delete this object permanently.
-        multiple: Delete these objects permanently.
+        single: Delete this feature permanently.
+        multiple: Delete these features permanently.
       annotation:
         point: Deleted a point.
         vertex: Deleted a node from a way.
         line: Deleted a line.
         area: Deleted an area.
         relation: Deleted a relation.
-        multiple: "Deleted {n} objects."
+        multiple: "Deleted {n} features."
       incomplete_relation:
-        single: This object can't be deleted because it hasn't been fully downloaded.
-        multiple: These objects can't be deleted because they haven't been fully downloaded.
+        single: This feature can't be deleted because it hasn't been fully downloaded.
+        multiple: These features can't be deleted because they haven't been fully downloaded.
       part_of_relation:
-        single: This object can't be deleted because it is part of a larger relation. You must remove it from the relation first.
-        multiple: These objects can't be deleted because they are part of larger relations. You must remove them from the relations first.
+        single: This feature can't be deleted because it is part of a larger relation. You must remove it from the relation first.
+        multiple: These features can't be deleted because they are part of larger relations. You must remove them from the relations first.
       connected_to_hidden:
-        single: This object can't be deleted because it is connected to a hidden feature.
-        multiple: These objects can't be deleted because some are connected to hidden features.
+        single: This feature can't be deleted because it is connected to a hidden feature.
+        multiple: These features can't be deleted because some are connected to hidden features.
     add_member:
       annotation: Added a member to a relation.
     delete_member:
@@ -127,71 +127,71 @@ en:
     move:
       title: Move
       description:
-        single: Move this object to a different location.
-        multiple: Move these objects to a different location.
+        single: Move this feature to a different location.
+        multiple: Move these features to a different location.
       key: M
       annotation:
         point: Moved a point.
         vertex: Moved a node in a way.
         line: Moved a line.
         area: Moved an area.
-        multiple: Moved multiple objects.
+        multiple: Moved multiple features.
       incomplete_relation:
-        single: This object can't be moved because it hasn't been fully downloaded.
-        multiple: These objects can't be moved because they haven't been fully downloaded.
+        single: This feature can't be moved because it hasn't been fully downloaded.
+        multiple: These features can't be moved because they haven't been fully downloaded.
       too_large:
-        single: This object can't be moved because not enough of it is currently visible.
-        multiple: These objects can't be moved because not enough of them are currently visible.
+        single: This feature can't be moved because not enough of it is currently visible.
+        multiple: These features can't be moved because not enough of them are currently visible.
       connected_to_hidden:
-        single: This object can't be moved because it is connected to a hidden feature.
-        multiple: These objects can't be moved because some are connected to hidden features.
+        single: This feature can't be moved because it is connected to a hidden feature.
+        multiple: These features can't be moved because some are connected to hidden features.
     reflect:
       title: reflect
       description:
         long:
-          single: Reflect this object across its long axis.
-          multiple: Reflect these objects across their long axis.
+          single: Reflect this feature across its long axis.
+          multiple: Reflect these features across their long axis.
         short:
-          single: Reflect this object across its short axis.
-          multiple: Reflect these objects across their short axis.
+          single: Reflect this feature across its short axis.
+          multiple: Reflect these features across their short axis.
       key:
         long: T
         short: Y
       annotation:
         long:
-          single: Reflected an object across its long axis.
-          multiple: Reflected multiple objects across their long axis.
+          single: Reflected an feature across its long axis.
+          multiple: Reflected multiple features across their long axis.
         short:
-          single: Reflected an object across its short axis.
-          multiple: Reflected multiple objects across their short axis.
+          single: Reflected an feature across its short axis.
+          multiple: Reflected multiple features across their short axis.
       incomplete_relation:
-        single: This object can't be reflected because it hasn't been fully downloaded.
-        multiple: These objects can't be reflected because they haven't been fully downloaded.
+        single: This feature can't be reflected because it hasn't been fully downloaded.
+        multiple: These features can't be reflected because they haven't been fully downloaded.
       too_large:
-        single: This object can't be reflected because not enough of it is currently visible.
-        multiple: These objects can't be reflected because not enough of them are currently visible.
+        single: This feature can't be reflected because not enough of it is currently visible.
+        multiple: These features can't be reflected because not enough of them are currently visible.
       connected_to_hidden:
-        single: This object can't be reflected because it is connected to a hidden feature.
-        multiple: These objects can't be reflected because some are connected to hidden features.
+        single: This feature can't be reflected because it is connected to a hidden feature.
+        multiple: These features can't be reflected because some are connected to hidden features.
     rotate:
       title: Rotate
       description:
-        single: Rotate this object around its center point.
-        multiple: Rotate these objects around their center point.
+        single: Rotate this feature around its center point.
+        multiple: Rotate these features around their center point.
       key: R
       annotation:
         line: Rotated a line.
         area: Rotated an area.
-        multiple: Rotated multiple objects.
+        multiple: Rotated multiple features.
       incomplete_relation:
-        single: This object can't be rotated because it hasn't been fully downloaded.
-        multiple: These objects can't be rotated because they haven't been fully downloaded.
+        single: This feature can't be rotated because it hasn't been fully downloaded.
+        multiple: These features can't be rotated because they haven't been fully downloaded.
       too_large:
-        single: This object can't be rotated because not enough of it is currently visible.
-        multiple: These objects can't be rotated because not enough of them are currently visible.
+        single: This feature can't be rotated because not enough of it is currently visible.
+        multiple: These features can't be rotated because not enough of them are currently visible.
       connected_to_hidden:
-        single: This object can't be rotated because it is connected to a hidden feature.
-        multiple: These objects can't be rotated because some are connected to hidden features.
+        single: This feature can't be rotated because it is connected to a hidden feature.
+        multiple: These features can't be rotated because some are connected to hidden features.
     reverse:
       title: Reverse
       description: Make this line go in the opposite direction.
@@ -310,7 +310,7 @@ en:
     back_tooltip: Change feature
     remove: Remove
     search: Search
-    multiselect: Selected items
+    multiselect: Selected features
     unknown: Unknown
     incomplete: <not downloaded>
     feature_list: Search features
@@ -423,12 +423,12 @@ en:
       done: "All conflicts resolved!"
       help: |
         Another user changed some of the same map features you changed.
-        Click on each item below for more details about the conflict, and choose whether to keep
+        Click on each feature below for more details about the conflict, and choose whether to keep
         your changes or the other user's changes.
   merge_remote_changes:
     conflict:
-      deleted: 'This object has been deleted by {user}.'
-      location: 'This object was moved by both you and {user}.'
+      deleted: 'This feature has been deleted by {user}.'
+      location: 'This feature was moved by both you and {user}.'
       nodelist: 'Nodes were changed by both you and {user}.'
       memberlist: 'Relation members were changed by both you and {user}.'
       tags: 'You changed the <b>{tag}</b> tag to "{local}" and {user} changed it to "{remote}".'
@@ -462,7 +462,7 @@ en:
     untagged_point: Untagged point
     untagged_line: Untagged line
     untagged_area: Untagged area
-    many_deletions: "You're deleting {n} objects. Are you sure you want to do this? This will delete them from the map that everyone else sees on openstreetmap.org."
+    many_deletions: "You're deleting {n} features. Are you sure you want to do this? This will delete them from the map that everyone else sees on openstreetmap.org."
     tag_suggests_area: "The tag {tag} suggests line should be area, but it is not an area"
     untagged_point_tooltip: "Select a feature type that describes what this point is."
     untagged_line_tooltip: "Select a feature type that describes what this line is."
