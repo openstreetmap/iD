@@ -27,7 +27,10 @@ export function operationMerge(selectedIDs, context) {
         }
 
         context.perform(action, annotation);
-        var ids = selectedIDs.filter(function(id) { return context.hasEntity(id); });
+        var ids = selectedIDs.filter(function(id) {
+            var entity = context.hasEntity(id);
+            return entity && entity.type !== 'node';
+        });
         context.enter(modeSelect(context, ids).suppressMenu(true));
     };
 
