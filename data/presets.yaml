@@ -1062,11 +1062,12 @@ en:
           very_horrible: 'Specialized off-road: tractor, ATV'
         # smoothness field placeholder
         placeholder: 'Thin Rollers, Wheels, Off-Road...'
+      social_facility:
+        # social_facility=*
+        label: Type
       social_facility_for:
         # 'social_facility:for=*'
-        label: People served
-        # social_facility_for field placeholder
-        placeholder: 'Homeless, Disabled, Child, etc'
+        label: People Served
       source:
         # source=*
         label: Source

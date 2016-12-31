@@ -5,10 +5,9 @@
         "phone",
         "opening_hours",
         "wheelchair"
-
     ],
     "geometry": [
-        "area", 
+        "area",
         "point"
     ],
     "tags": {

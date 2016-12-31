@@ -2109,9 +2109,10 @@
                 "operator",
                 "address",
                 "building_area",
+                "social_facility",
+                "social_facility_for",
                 "opening_hours",
-                "wheelchair",
-                "social_facility_for"
+                "wheelchair"
             ],
             "geometry": [
                 "point",
@@ -2128,8 +2129,9 @@
                 "operator",
                 "address",
                 "building_area",
-                "opening_hours",
-                "social_facility_for"
+                "social_facility",
+                "social_facility_for",
+                "opening_hours"
             ],
             "geometry": [
                 "point",
@@ -2147,9 +2149,10 @@
                 "operator",
                 "address",
                 "building_area",
+                "social_facility",
+                "social_facility_for",
                 "opening_hours",
-                "wheelchair",
-                "social_facility_for"
+                "wheelchair"
             ],
             "geometry": [
                 "point",
@@ -2172,9 +2175,10 @@
                 "operator",
                 "address",
                 "building_area",
+                "social_facility",
+                "social_facility_for",
                 "opening_hours",
                 "wheelchair",
-                "social_facility_for",
                 "internet_access",
                 "internet_access/fee",
                 "internet_access/ssid"

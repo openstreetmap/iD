@@ -1607,8 +1607,10 @@
                     }
                 },
                 "social_facility_for": {
-                    "label": "People served",
-                    "placeholder": "Homeless, Disabled, Child, etc"
+                    "label": "People Served"
+                },
+                "social_facility": {
+                    "label": "Type"
                 },
                 "source": {
                     "label": "Source"

@@ -3,8 +3,9 @@
         "operator",
         "address",
         "building_area",
-        "opening_hours",
-        "social_facility_for"
+        "social_facility",
+        "social_facility_for",
+        "opening_hours"
     ],
     "geometry": [
         "point",
