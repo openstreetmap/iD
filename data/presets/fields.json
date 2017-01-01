@@ -604,6 +604,19 @@
             "type": "combo",
             "label": "Type"
         },
+        "fire_hydrant/position": {
+            "key": "fire_hydrant:position",
+            "type": "combo",
+            "label": "Position",
+            "strings": {
+                "options": {
+                    "lane": "Lane",
+                    "parking_lot": "Parking Lot",
+                    "sidewalk": "Sidewalk",
+                    "green": "Green"
+                }
+            }
+        },
         "fire_hydrant/type": {
             "key": "fire_hydrant:type",
             "type": "combo",

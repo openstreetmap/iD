@@ -434,6 +434,18 @@ en:
       fence_type:
         # fence_type=*
         label: Type
+      fire_hydrant/position:
+        # 'fire_hydrant:position=*'
+        label: Position
+        options:
+          # 'fire_hydrant:position=green'
+          green: Green
+          # 'fire_hydrant:position=lane'
+          lane: Lane
+          # 'fire_hydrant:position=parking_lot'
+          parking_lot: Parking Lot
+          # 'fire_hydrant:position=sidewalk'
+          sidewalk: Sidewalk
       fire_hydrant/type:
         # 'fire_hydrant:type=*'
         label: Type
@@ -2302,6 +2314,7 @@ en:
       emergency/fire_hydrant:
         # emergency=fire_hydrant
         name: Fire Hydrant
+        # 'terms: fire plug'
         terms: '<translate with synonyms or related terms for ''Fire Hydrant'', separated by commas>'
       emergency/no:
         # emergency=no

@@ -1098,6 +1098,15 @@
                 "fence_type": {
                     "label": "Type"
                 },
+                "fire_hydrant/position": {
+                    "label": "Position",
+                    "options": {
+                        "lane": "Lane",
+                        "parking_lot": "Parking Lot",
+                        "sidewalk": "Sidewalk",
+                        "green": "Green"
+                    }
+                },
                 "fire_hydrant/type": {
                     "label": "Type",
                     "options": {
@@ -2759,7 +2768,7 @@
                 },
                 "emergency/fire_hydrant": {
                     "name": "Fire Hydrant",
-                    "terms": ""
+                    "terms": "fire plug"
                 },
                 "emergency/phone": {
                     "name": "Emergency Phone",
