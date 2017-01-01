@@ -7,6 +7,7 @@ import { geoExtent } from '../geo/index';
 import { osmEntity, osmNode, osmRelation, osmWay } from '../osm/index';
 import { utilDetect } from '../util/detect';
 import { utilRebind } from '../util/rebind';
+import { fixTextForSvg } from '../core/fix-string';
 
 
 var dispatch = d3.dispatch('authLoading', 'authDone', 'change', 'loading', 'loaded'),
@@ -69,6 +70,11 @@ function getTags(obj) {
     for (var i = 0, l = elems.length; i < l; i++) {
         var attrs = elems[i].attributes;
         tags[attrs.k.value] = attrs.v.value;
+    }
+    var isFirefox = navigator.userAgent.toLowerCase().indexOf('firefox') > -1
+    if(tags.name && tags.highway && !isFirefox){
+        tags.real_name = tags.name;
+        tags.name = fixTextForSvg(tags.real_name);            
     }
     return tags;
 }
@@ -347,6 +353,30 @@ export default {
 
 
     putChangeset: function(changes, version, comment, imageryUsed, callback) {
+        if(changes.modified && changes.modified.length > 0){
+            for(var i = 0, l = changes.modified.length; i < l; i++){
+                if(changes.modified[i].tags.highway && changes.modified[i].tags.real_name){
+                    changes.modified[i].tags.name = changes.modified[i].tags.real_name; 
+                    delete changes.modified[i].tags.real_name;
+                }
+            }
+        }
+        if(changes.created && changes.created.length > 0){
+            for(var i = 0, l = changes.created.length; i < l; i++){
+                if(changes.created[i].tags.highway && changes.created[i].tags.real_name){
+                    changes.created[i].tags.name = changes.created[i].tags.real_name; 
+                    delete changes.created[i].tags.real_name;
+                }
+            }
+        }
+        if(changes.deleted && changes.deleted.length > 0){
+            for(var i = 0, l = changes.deleted.length; i < l; i++){
+                if(changes.deleted[i].tags.highway && changes.deleted[i].tags.real_name){
+                    changes.deleted[i].tags.name = changes.deleted[i].tags.real_name; 
+                    delete changes.deleted[i].tags.real_name;
+                }
+            }
+        }
         var that = this;
         oauth.xhr({
                 method: 'PUT',
