@@ -1,7 +1,8 @@
 {
     "icon": "fire-station",
     "fields": [
-        "fire_hydrant/type"
+        "fire_hydrant/type",
+        "fire_hydrant/position"
     ],
     "geometry": [
         "point",
