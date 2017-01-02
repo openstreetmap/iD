@@ -229,7 +229,19 @@ export function svgEsri(projection, context, dispatch) {
         var geojson = svgEsri.geojson;
         return (!(_.isEmpty(geojson) || _.isEmpty(geojson.features)));
     };
-
+    
+    drawEsri.windowOpen = function() {
+        return !d3.selectAll('.esri-pane').classed('hide');
+    };
+    
+    drawEsri.awaitingUrl = function() {
+        return this.windowOpen() && (!d3.selectAll('.esri-pane .topurl').classed('hide'));
+    };
+    
+    drawEsri.setPreset = function(preset) {
+        d3.selectAll('.esri-pane .preset label').text('OpenStreetMap preset: ');
+        d3.selectAll('.esri-pane .preset span').text(preset.id);
+    };
 
     drawEsri.geojson = function(gj) {
         if (!arguments.length) return svgEsri.geojson;

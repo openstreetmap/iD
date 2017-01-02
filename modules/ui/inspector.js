@@ -83,11 +83,9 @@ export function uiInspector(context) {
 
         function setPreset(preset) {
             var esriLayer = context.layers().layer('esri');
-            if (!esriLayer.hasData() && !d3.selectAll('.esri-pane').classed('hide')) {
+            if (!esriLayer.hasData() && esriLayer.windowOpen()) {
                 // appear to be calling for this to be my preset
-                // TODO: better UI/UX
-                d3.selectAll('.esri-pane .preset label').text('OpenStreetMap preset: ');
-                d3.selectAll('.esri-pane .preset span').text(preset.id);
+                esriLayer.setPreset(preset);
             } else {
                 // standard preset behavior
                 wrap.transition()

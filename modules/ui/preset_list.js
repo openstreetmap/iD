@@ -29,9 +29,10 @@ export function uiPresetList(context) {
         }
 
         var presets = context.presets();
+        var esriLayer = context.layers().layer('esri');
         
         // when the import menu is activated, show every kind of preset, regardless of geometry
-        if (!seeAllGeos && (d3.selectAll('.esri-pane').classed('hide') || d3.selectAll('.esri-pane .topurl').classed('hide'))) {
+        if (!seeAllGeos && (!esriLayer.windowOpen() || !esriLayer.awaitingUrl())) {
             presets = presets.matchGeometry(geometry);
         }
         window.presetReloadFunction = function(seeAllGeos) {
@@ -260,7 +261,8 @@ export function uiPresetList(context) {
             context.presets().choose(preset);
             
             // avoid editing the last-selected option, if we are using preset UI for an Esri import
-            if (d3.selectAll('.esri-pane').classed('hide') || d3.selectAll('.esri-pane .topurl').classed('hide')) {
+            var esriLayer = context.layers().layer('esri');
+            if (!esriLayer.windowOpen() || !esriLayer.awaitingUrl()) {
                 context.perform(
                     actionChangePreset(id, currentPreset, preset),
                     t('operations.change_tags.annotation')
