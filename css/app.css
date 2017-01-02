@@ -11,7 +11,10 @@ html, body {
 }
 
 body {
-    font:normal 12px/1.6667 'Helvetica Neue', Arial, sans-serif;
+    font: normal 12px/1.6667 -apple-system, BlinkMacSystemFont,
+        "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell",
+        "Fira Sans", "Droid Sans", "Helvetica Neue", "Arial",
+        sans-serif;
     margin:0;
     padding:0;
     min-width: 768px;
@@ -148,7 +151,10 @@ a:hover {
 
 textarea  {
     resize: vertical;
-    font:normal 12px/20px 'Helvetica Neue', Arial, sans-serif;
+    font:normal 12px/20px -apple-system, BlinkMacSystemFont,
+        "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell",
+        "Fira Sans", "Droid Sans", "Helvetica Neue", "Arial",
+        sans-serif;
 }
 
 textarea,
