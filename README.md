@@ -31,6 +31,39 @@ Come on in, the water's lovely. More help? Ping `jfire` or `bhousel` on:
 (`irc.oftc.net`, in `#iD` or `#osm-dev` or `#osm`)
 * [OpenStreetMap `dev` mailing list](http://wiki.openstreetmap.org/wiki/Mailing_lists)
 
+## ArcGIS Online import branch
+
+In this branch, we are developing a tool to import authoritative data from an ArcGIS map service
+into iD and OpenStreetMap.
+
+### Sample ArcGIS services
+
+* <a href='https://maps.cityofmadison.com/arcgis/rest/services/Public/OPEN_DATA_TRANS/MapServer/18/query?outFields=*&where=1>0&outSR=4326&f=json'>Madison, WI - bus lines</a>
+* <a href='http://orfmaps.norfolk.gov/orfgis/rest/services/OpenData/Property_Information/MapServer/0/query?outFields=*&where=1%3D1&outSR=4326&f=json'>Norfolk, VA - addresses</a>
+* <a href='http://orfmaps.norfolk.gov/orfgis/rest/services/OpenData/Property_Information/MapServer/2/query?outFields=*&where=1%3D1&outSR=4326&f=json'>Norfolk, VA - parcels</a>
+* <a href='http://gis1.hartford.gov/arcgis/rest/services/OpenData_Community/MapServer/41/query?outFields=*&where=1%3D1'>Hartford, CT - complex buildings / OSM relations</a>
+* <a href='https://webdmz.starkcountyohio.gov/arcgis/rest/services/RPC/RideStarkOnRoadBikeLane/MapServer/0/query?outFields=*&where=1%3D1'>Stark County / Canton, OH - bike lanes</a>
+
+### Editing Process
+
+In the right menubar, select Map Data (as if you are importing a GPX layer)
+
+Click on 'Import Esri Layer'
+
+Use the iD editor's preset menu on the left to set a target import (for example, a building or address).
+
+Paste the Esri layer URL into the text field (it is also possible to add a service to iD automatically by including &esri=(escaped URL) in a link URL).
+
+Select to Download Viewport (for large datasets) or Download All data into the browser.
+
+Depending on your settings you can either approve individual additions to OSM, or include all data by default.
+
+A table in the Esri layer now gives you the option to map Esri fields to OSM tags.
+
+* You can change the name of the tag in your Esri layer 
+* You can add new fields - for example, addresses in Norfolk, Virginia should have ```addr:city=Norfolk``` and ```addr:state=VA``` which are ignored as redundant in the city's data
+* Fields which you do not map are removed from the data before import
+
 ## Prerequisites
 
 * [Node.js](https://nodejs.org/) version 4 or newer
