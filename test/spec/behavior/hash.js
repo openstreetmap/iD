@@ -5,14 +5,12 @@ describe('iD.behaviorHash', function () {
 
     beforeEach(function () {
         context = iD.Context();
-        context.container(d3.select(document.createElement('div')));
+        context.connection().loadTiles = function () {};   // Neuter connection
 
-        // Neuter connection
-        context.connection().loadTiles = function () {};
-
+        var container = d3.select(document.createElement('div'));
+        context.container(container);
+        container.call(context.map());
         hash = iD.behaviorHash(context);
-        d3.select(document.createElement('div'))
-            .call(context.map());
     });
 
     afterEach(function () {

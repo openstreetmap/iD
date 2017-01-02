@@ -615,7 +615,8 @@ export function svgLabels(projection, context) {
 
         // hide labels along selected ways, or near selected vertices
         for (var i = 0; i < selectedIDs.length; i++) {
-            var entity = graph.entity(selectedIDs[i]);
+            var entity = graph.hasEntity(selectedIDs[i]);
+            if (!entity) continue;
             var geometry = entity.geometry(graph);
 
             if (geometry === 'line') {
