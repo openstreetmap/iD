@@ -78,20 +78,24 @@ en:
         # access=*
         label: Access
       address:
-        # 'addr:city=*, addr:conscriptionnumber=*, addr:country=*, addr:district=*, addr:floor=*, addr:hamlet=*, addr:housename=*, addr:housenumber=*, addr:place=*, addr:postcode=*, addr:province=*, addr:state=*, addr:street=*, addr:subdistrict=*, addr:suburb=*'
+        # 'addr:block_number=*, addr:city=*, addr:conscriptionnumber=*, addr:county=*, addr:country=*, addr:district=*, addr:floor=*, addr:hamlet=*, addr:housename=*, addr:housenumber=*, addr:neighbourhood=*, addr:place=*, addr:postcode=*, addr:province=*, addr:quarter=*, addr:state=*, addr:street=*, addr:subdistrict=*, addr:suburb=*'
         label: Address
         placeholders:
+          block_number: Block number
           city: City
           conscriptionnumber: '123'
           country: Country
+          county: County
           district: District
           floor: Floor
           hamlet: Hamlet
           housename: Housename
           housenumber: '123'
+          neighbourhood: Neighbourhood
           place: Place
           postcode: Postcode
           province: Province
+          quarter: Quarter
           state: State
           street: Street
           subdistrict: Subdistrict
