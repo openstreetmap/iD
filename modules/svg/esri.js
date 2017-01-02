@@ -8,6 +8,10 @@ import { actionAddEntity } from '../actions/index';
 import { utilDetect } from '../util/detect';
 import fromEsri from 'esri-to-geojson';
 
+import polygonArea from 'area-polygon';
+import polygonIntersect from 'turf-intersect';
+import polygonBuffer from 'turf-buffer';
+
 // dictionary matching geo-properties to OpenStreetMap tags 1:1
 window.layerImports = {};
 
@@ -158,6 +162,8 @@ export function svgEsri(projection, context, dispatch) {
                   
             } else if (d.geometry.type === 'LineString') {
                 window.importedEntities.push(mapLine(d, d.geometry.coordinates));
+                var buffagon = polygonBuffer(d, 15, 'meters');
+                console.log(buffagon);
                     
             } else if (d.geometry.type === 'MultiLineString') {
                 var lines = [];
@@ -166,6 +172,15 @@ export function svgEsri(projection, context, dispatch) {
                         id: mapLine(d, d.geometry.coordinates[ln]).id,
                         role: '' // todo roles: this empty string assumes the lines make up a route
                     });
+                    
+                    var buffagon = polygonBuffer({
+                      type: 'Feature',
+                      geometry: {
+                        type: 'LineString',
+                        coordinates: d.geometry.coordinates[ln]
+                      }
+                    }, 15, 'meters');
+                    console.log(buffagon);
                 }
                 
                 // generate a relation

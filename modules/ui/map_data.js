@@ -422,7 +422,7 @@ export function uiMapData(context) {
             
             // if there is an OSM preset, add it to set tags
             window.layerImports = {};
-            var presetType = esriLayer.preset();
+            var presetType = context.layers().layer('esri').preset();
             if (presetType) {
                 var setPreset = context.presets().item(presetType);
                 
