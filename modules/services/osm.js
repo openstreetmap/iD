@@ -7,7 +7,7 @@ import { geoExtent } from '../geo/index';
 import { osmEntity, osmNode, osmRelation, osmWay } from '../osm/index';
 import { utilDetect } from '../util/detect';
 import { utilRebind } from '../util/rebind';
-import { fixTextForSvg } from '../core/fix-string';
+import { fixArabicScriptTextForSvg } from '../util/svg_paths_arabic_fix';
 
 
 var dispatch = d3.dispatch('authLoading', 'authDone', 'change', 'loading', 'loaded'),
@@ -71,10 +71,11 @@ function getTags(obj) {
         var attrs = elems[i].attributes;
         tags[attrs.k.value] = attrs.v.value;
     }
-    var isFirefox = navigator.userAgent.toLowerCase().indexOf('firefox') > -1
-    if(tags.name && tags.highway && !isFirefox){
+    var isFirefox = utilDetect().browser.toLowerCase().indexOf('firefox') > -1
+    var arabicRegex = /[\u0600-\u06FF]/g
+    if(tags.name && tags.highway && !isFirefox && arabicRegex.test(tags.name)){        
         tags.real_name = tags.name;
-        tags.name = fixTextForSvg(tags.real_name);            
+        tags.name = fixArabicScriptTextForSvg(tags.real_name);            
     }
     return tags;
 }

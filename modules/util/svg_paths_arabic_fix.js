@@ -34,13 +34,13 @@ const chars = {
     5000: {initial: "ﻻ", isolated: "ﻻ", medial: "", final: "ﻼ" }
 };
 
-export function fixTextForSvg(inputText){
+export function fixArabicScriptTextForSvg(inputText){
     return inputText.split(' ').reverse().map(function(w){
-        return fixWordForSvg(w);
+        return fixArabicScriptWordForSvg(w);
     }).join(' ');
 }
 
-export function fixWordForSvg(inputWord){    
+export function fixArabicScriptWordForSvg(inputWord){    
     let context = true;
     let ret = [];
     //const inputWord = inputWord.split('');
