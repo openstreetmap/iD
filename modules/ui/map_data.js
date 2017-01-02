@@ -278,6 +278,15 @@ export function uiMapData(context) {
                 .text('OpenStreetMap preset (select at left)');
             preset.append('span');
             
+            // click to remove a preset
+            preset.append('button')
+                .attr('class', 'hide')
+                .attr('style', 'float: none !important')
+                .text('x')
+                .on('click', function() {
+                    context.layers().layer('esri').preset(null);
+                });
+            
             /*
             // test having an import function
             urlEntry.append('pre').append('code').text('function(osm) {\n  return "hello world";\n}');
@@ -413,7 +422,7 @@ export function uiMapData(context) {
             
             // if there is an OSM preset, add it to set tags
             window.layerImports = {};
-            var presetType = d3.selectAll('.esri-pane .preset span').text();
+            var presetType = esriLayer.preset();
             if (presetType) {
                 var setPreset = context.presets().item(presetType);
                 

@@ -238,9 +238,21 @@ export function svgEsri(projection, context, dispatch) {
         return this.windowOpen() && (!d3.selectAll('.esri-pane .topurl').classed('hide'));
     };
     
-    drawEsri.setPreset = function(preset) {
-        d3.selectAll('.esri-pane .preset label').text('OpenStreetMap preset: ');
-        d3.selectAll('.esri-pane .preset span').text(preset.id);
+    drawEsri.preset = function(preset) {
+        // get / set an individual preset, or reset to null
+        if (preset) {
+            d3.selectAll('.esri-pane .preset label').text('OpenStreetMap preset: ');
+            d3.selectAll('.esri-pane .preset span').text(preset.id);
+            d3.selectAll('.esri-pane .preset button').classed('hide', false);
+            this.internalPreset = preset;
+        } else if (preset === null) {
+            d3.selectAll('.esri-pane .preset label').text('OpenStreetMap preset (select at left)')
+            d3.selectAll('.esri-pane .preset span').text('');
+            d3.selectAll('.esri-pane .preset button').classed('hide', true);
+            this.internalPreset = null;
+        } else {
+            return this.internalPreset;
+        }
     };
 
     drawEsri.geojson = function(gj) {

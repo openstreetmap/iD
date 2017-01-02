@@ -85,7 +85,7 @@ export function uiInspector(context) {
             var esriLayer = context.layers().layer('esri');
             if (!esriLayer.hasData() && esriLayer.windowOpen()) {
                 // appear to be calling for this to be my preset
-                esriLayer.setPreset(preset);
+                esriLayer.preset(preset);
             } else {
                 // standard preset behavior
                 wrap.transition()
