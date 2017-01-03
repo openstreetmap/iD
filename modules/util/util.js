@@ -69,7 +69,7 @@ export function utilDisplayName(entity) {
     
     var isFirefox = utilDetect().browser.toLowerCase().indexOf('firefox') > -1
     var arabicRegex = /[\u0600-\u06FF]/g
-    if(!isFirefox && name && entity.tags.highway && arabicRegex.test(name)){
+    if(!isFirefox && name && (entity.tags.highway || entity.tags.railway) && arabicRegex.test(name)){
         name = fixArabicScriptTextForSvg(name);            
     }
     
