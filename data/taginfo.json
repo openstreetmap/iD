@@ -233,10 +233,6 @@
         },
         {
             "key": "amenity",
-            "value": "coworking_space"
-        },
-        {
-            "key": "amenity",
             "value": "crematorium"
         },
         {
@@ -1795,6 +1791,10 @@
         {
             "key": "office",
             "value": "company"
+        },
+        {
+            "key": "office",
+            "value": "coworking"
         },
         {
             "key": "office",
