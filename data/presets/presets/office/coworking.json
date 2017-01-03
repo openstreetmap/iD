@@ -17,7 +17,7 @@
         "office"
     ],
     "tags": {
-        "amenity": "coworking_space"
+        "office": "coworking"
     },
     "name": "Coworking Space"
 }
