@@ -1,4 +1,4 @@
-const chars = {
+var chars = {
     // madda above alef
     1570: { initial: 'آ‎', isolated: 'ﺁ', medial: 'ﺁ', final: 'ﺂ' },
 
@@ -61,13 +61,13 @@ const chars = {
 
 
 export function fixArabicScriptTextForSvg(inputText) {
-    let context = true;
-    let ret = '';
-    let rtlBuffer = [];
+    var context = true;
+    var ret = '';
+    var rtlBuffer = [];
 
-    for (let i = 0, l = inputText.length; i < l; i++) {
-        let code = inputText[i].charCodeAt(0);
-        let nextCode = inputText[i + 1] ? inputText[i + 1].charCodeAt(0) : 0;
+    for (var i = 0, l = inputText.length; i < l; i++) {
+        var code = inputText[i].charCodeAt(0);
+        var nextCode = inputText[i + 1] ? inputText[i + 1].charCodeAt(0) : 0;
 
         if (!chars[code]) {
             if (code === 32 && rtlBuffer.length) {
