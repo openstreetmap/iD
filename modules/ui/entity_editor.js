@@ -12,8 +12,6 @@ import { uiRawTagEditor } from './raw_tag_editor';
 import { uiTagReference } from './tag_reference';
 import { uiPreset } from './preset';
 import { utilRebind } from '../util/rebind';
-import { fixArabicScriptTextForSvg } from '../util/svg_paths_arabic_fix';
-
 
 export function uiEntityEditor(context) {
     var dispatch = d3.dispatch('choose'),
@@ -225,14 +223,6 @@ export function uiEntityEditor(context) {
                 tags[k] = v;
             }
         });
-        var arabicRegex = /[\u0600-\u06FF]/g
-        if(tags.highway && tags.real_name){
-            if(arabicRegex.test(tags.real_name)){
-                tags.name = fixArabicScriptTextForSvg(tags.real_name);
-            } else{
-                tags.name = tags.real_name;
-            }
-        }
 
         if (!onInput) {
             tags = clean(tags);

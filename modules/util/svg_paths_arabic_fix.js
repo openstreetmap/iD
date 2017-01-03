@@ -1,11 +1,21 @@
 const chars = {
+    // madda above alef
+    1570: {initial: "آ‎", isolated: "ﺁ", medial: "ﺁ", final: "ﺂ" },
+    
+    // hamza above and below alef
+    1571: { initial: "أ", isolated: "ﺃ", medial: "", final: "ﺄ" },
+    // 1572 is ؤ
+    1573: { initial: "إ", isolated: "ﺇ", medial: "", final: "ﺈ" },
+    // 1574 is ئ
     1575: {initial: "ا", isolated: "ا", medial: "", final: "ﺎ" },
     1576: {initial: "ﺑ", isolated: "ﺏ", medial: "ﺒ", final: "ﺐ" },
-    1662: {initial: "ﭘ", isolated: "ﭖ", medial: "ﭙ", final: "ﭗ" },
+
+    // 1577 ة
+    1577: {initial: "", isolated: "ة", medial: "", final: "ﺔ" },
+
     1578: {initial: "ﺗ", isolated: "ﺕ", medial: "ﺘ", final: "ﺖ" },
     1579: {initial: "ﺛ", isolated: "ﺙ", medial: "ﺜ", final: "ﺚ" },
     1580: {initial: "ﺟ", isolated: "ﺝ", medial: "ﺠ", final: "ﺞ" },
-    1670: {initial: "ﭼ", isolated: "ﭺ", medial: "ﭽ", final: "ﭻ" },
     1581: {initial: "ﺣ", isolated: "ﺡ", medial: "ﺤ", final: "ﺢ" },
     1582: {initial: "ﺧ", isolated: "ﺥ", medial: "ﺨ", final: "ﺦ" },
     1583: {initial: "ﺩ", isolated: "ﺩ", medial: "", final: "ﺪ" },
@@ -21,15 +31,28 @@ const chars = {
     1592: {initial: "ﻇ", isolated: "ﻅ", medial: "ﻈ", final: "ﻆ" },
     1593: {initial: "ﻋ", isolated: "ﻉ", medial: "ﻌ", final: "ﻊ" },
     1594: {initial: "ﻏ", isolated: "ﻍ", medial: "ﻐ", final: "ﻎ" },
+
+// 1595 ػ - may be very rare
+
     1601: {initial: "ﻓ", isolated: "ﻑ", medial: "ﻔ", final: "ﻒ" },
     1602: {initial: "ﻗ", isolated: "ﻕ", medial: "ﻘ", final: "ﻖ" },
-    1705: {initial: "ﻛ", isolated: "ﮎ", medial: "ﻜ", final: "ﮏ" },
-    1711: {initial: "ﮔ", isolated: "ﮒ", medial: "ﮕ", final: "ﮓ" },
     1604: {initial: "ﻟ", isolated: "ﻝ", medial: "ﻠ", final: "ﻞ" },
     1605: {initial: "ﻣ", isolated: "ﻡ", medial: "ﻤ", final: "ﻢ" },
     1606: {initial: "ﻧ", isolated: "ﻥ", medial: "ﻨ", final: "ﻦ" },
-    1608: {initial: "ﻭ", isolated: "ﻭ", medial: "", final: "ﻮ" },
     1607: {initial: "ﻫ", isolated: "ﻩ", medial: "ﻬ", final: "ﻪ" },
+    1608: {initial: "ﻭ", isolated: "ﻭ", medial: "", final: "ﻮ" },
+    
+    // 1609 ى
+    1609: {initial: "ﯨ", isolated: "ﻯ", medial: "ﯩ", final: "ﻰ" }, 
+    // 1610 ي
+    1610: {initial: "ﻳ", isolated: "ﻱ", medial: "ﻴ", final: "ﻲ" },
+    // short vowel sounds / tashkil markings
+
+    1662: {initial: "ﭘ", isolated: "ﭖ", medial: "ﭙ", final: "ﭗ" },
+    
+    1670: {initial: "ﭼ", isolated: "ﭺ", medial: "ﭽ", final: "ﭻ" },    
+    1705: {initial: "ﻛ", isolated: "ﮎ", medial: "ﻜ", final: "ﮏ" },
+    1711: {initial: "ﮔ", isolated: "ﮒ", medial: "ﮕ", final: "ﮓ" },
     1740: {initial: "ﻳ", isolated: "ﻯ", medial: "ﻴ", final: "ﻰ" },
     5000: {initial: "ﻻ", isolated: "ﻻ", medial: "", final: "ﻼ" }
 };
