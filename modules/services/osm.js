@@ -347,30 +347,6 @@ export default {
 
 
     putChangeset: function(changes, version, comment, imageryUsed, callback) {
-        if(changes.modified && changes.modified.length > 0){
-            for(var i = 0, l = changes.modified.length; i < l; i++){
-                if((changes.modified[i].tags.highway || changes.modified[i].tags.railway) && changes.modified[i].tags.real_name){
-                    changes.modified[i].tags.name = changes.modified[i].tags.real_name; 
-                    delete changes.modified[i].tags.real_name;
-                }
-            }
-        }
-        if(changes.created && changes.created.length > 0){
-            for(var i = 0, l = changes.created.length; i < l; i++){
-                if((changes.modified[i].tags.highway || changes.modified[i].tags.railway) && changes.created[i].tags.real_name){
-                    changes.created[i].tags.name = changes.created[i].tags.real_name; 
-                    delete changes.created[i].tags.real_name;
-                }
-            }
-        }
-        if(changes.deleted && changes.deleted.length > 0){
-            for(var i = 0, l = changes.deleted.length; i < l; i++){
-                if((changes.modified[i].tags.highway || changes.modified[i].tags.railway) && changes.deleted[i].tags.real_name){
-                    changes.deleted[i].tags.name = changes.deleted[i].tags.real_name; 
-                    delete changes.deleted[i].tags.real_name;
-                }
-            }
-        }
         var that = this;
         oauth.xhr({
                 method: 'PUT',
