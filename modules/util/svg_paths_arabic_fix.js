@@ -59,56 +59,59 @@ const chars = {
 };
 
 export function fixArabicScriptTextForSvg(inputText){
-    return inputText.split(' ').reverse().map(function(w){
-        return fixArabicScriptWordForSvg(w);
-    }).join(' ');
-}
-
-export function fixArabicScriptWordForSvg(inputWord){    
     let context = true;
-    let ret = [];
-    //const inputWord = inputWord.split('');
-    for(let i = 0, l = inputWord.length; i < l; i++){
-        let code = inputWord[i].charCodeAt(0);
-        let nextCode = inputWord[i + 1] ? inputWord[i + 1].charCodeAt(0) : 0;
-        if(!chars[code]){             
-            ret.push(inputWord[i]);
+    let ret = '';
+    let rtlBuffer = [];
+
+    for(let i = 0, l = inputText.length; i < l; i++){
+        let code = inputText[i].charCodeAt(0);
+        let nextCode = inputText[i + 1] ? inputText[i + 1].charCodeAt(0) : 0;
+        if(!chars[code]){
+            if (code === 32 && rtlBuffer.length) {
+              // whitespace
+              rtlBuffer = [rtlBuffer.reverse().join('') + ' '];
+            } else {
+              // non-RTL character
+              ret += rtlBuffer.reverse().join('') + inputText[i];
+              rtlBuffer = [];
+            }
             continue;
         }                
         if(context){            
             if(i == l - 1){                
-                ret.push(chars[code].isolated);
+                rtlBuffer.push(chars[code].isolated);
             } else {
                 // special case for لا
                 if(code == 1604 && nextCode == 1575){
-                    ret.push(chars[5000].initial);
+                    rtlBuffer.push(chars[5000].initial);
                     i++;
                     context = true;
                     continue;
                 }
 
-                ret.push(chars[code].initial);
+                rtlBuffer.push(chars[code].initial);
             }            
         } else {
             if(i == l - 1){                
-                ret.push(chars[code].final);
+                rtlBuffer.push(chars[code].final);
             } else {
                 // special case for ﻼ
                 if(code == 1604 && nextCode == 1575){
-                    ret.push(chars[5000].final);
+                    rtlBuffer.push(chars[5000].final);
                     i++;
                     context = true;
                     continue;
                 }
                 if(chars[code].medial == ''){                    
-                    ret.push(chars[code].final);
+                    rtlBuffer.push(chars[code].final);
                 } else{                    
-                    ret.push(chars[code].medial);
+                    rtlBuffer.push(chars[code].medial);
                 }                
             }
         }        
         context = (chars[code].medial == '');        
     }   
+    ret += rtlBuffer.reverse().join('');
     
-    return ret.reverse().join('');
+    return ret;
 }
