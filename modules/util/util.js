@@ -2,7 +2,8 @@ import * as d3 from 'd3';
 import { t, textDirection } from './locale';
 import { utilDetect } from './detect';
 import { remove as removeDiacritics } from 'diacritics';
-import { fixArabicScriptTextForSvg } from '../util/svg_paths_arabic_fix';
+import { fixArabicScriptTextForSvg } from './svg_paths_arabic_fix';
+
 
 export function utilTagText(entity) {
     return d3.entries(entity.tags).map(function(e) {
@@ -60,19 +61,20 @@ export function utilDisplayName(entity) {
     var localizedNameKey = 'name:' + utilDetect().locale.toLowerCase().split('-')[0],
         name = entity.tags[localizedNameKey] || entity.tags.name || '',
         network = entity.tags.cycle_network || entity.tags.network;
+
     if (!name && entity.tags.ref) {
         name = entity.tags.ref;
         if (network) {
             name = network + ' ' + name;
         }
     }
-    
-    var isFirefox = utilDetect().browser.toLowerCase().indexOf('firefox') > -1
-    var arabicRegex = /[\u0600-\u06FF]/g
-    if(!isFirefox && name && (entity.tags.highway || entity.tags.railway) && arabicRegex.test(name)){
-        name = fixArabicScriptTextForSvg(name);            
+
+    var isFirefox = utilDetect().browser.toLowerCase().indexOf('firefox') > -1;
+    var arabicRegex = /[\u0600-\u06FF]/g;
+    if (!isFirefox && name && (entity.tags.highway || entity.tags.railway) && arabicRegex.test(name)) {
+        name = fixArabicScriptTextForSvg(name);
     }
-    
+
     return name;
 }
 
