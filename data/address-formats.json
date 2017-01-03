@@ -41,7 +41,7 @@
         },
         {
             "countryCodes": ["jp"],
-            "format": [["province", "county"], ["city", "suburb", "quarter"], ["neighbourhood", "block_number", "housenumber"]]
+            "format": [["postcode", "province", "county"], ["city", "suburb", "quarter"], ["neighbourhood", "block_number", "housenumber"]]
         }
     ]
 }
