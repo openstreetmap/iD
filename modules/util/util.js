@@ -69,9 +69,16 @@ export function utilDisplayName(entity) {
         }
     }
 
+    return name;
+}
+
+
+export function utilDisplayNameForPath(entity) {
+    var name = utilDisplayName(entity);
     var isFirefox = utilDetect().browser.toLowerCase().indexOf('firefox') > -1;
     var arabicRegex = /[\u0600-\u06FF]/g;
-    if (!isFirefox && name && (entity.tags.highway || entity.tags.railway) && arabicRegex.test(name)) {
+
+    if (!isFirefox && name && arabicRegex.test(name)) {
         name = fixArabicScriptTextForSvg(name);
     }
 

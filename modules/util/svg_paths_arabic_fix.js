@@ -1,3 +1,6 @@
+// see https://github.com/openstreetmap/iD/pull/3707
+// https://gist.github.com/mapmeld/556b09ddec07a2044c76e1ef45f01c60
+
 var chars = {
     // madda above alef
     1570: { initial: 'آ‎', isolated: 'ﺁ', medial: 'ﺁ', final: 'ﺂ' },
