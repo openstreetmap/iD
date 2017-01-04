@@ -113,8 +113,7 @@ export function coreHistory(context) {
 
         perform: function() {
             // complete any transition already in progress
-            d3.select(document)
-                .interrupt('history.perform');
+            d3.select(document).interrupt('history.perform');
 
             var transitionable = false,
                 action0 = arguments[0];
@@ -149,19 +148,22 @@ export function coreHistory(context) {
 
 
         replace: function() {
+            d3.select(document).interrupt('history.perform');
             return _replace(arguments, 1);
         },
 
 
         // Same as calling pop and then perform
         overwrite: function() {
+            d3.select(document).interrupt('history.perform');
             return _overwrite(arguments, 1);
         },
 
 
         pop: function() {
-            var previous = stack[index].graph;
+            d3.select(document).interrupt('history.perform');
 
+            var previous = stack[index].graph;
             if (index > 0) {
                 index--;
                 stack.pop();
@@ -171,6 +173,8 @@ export function coreHistory(context) {
 
 
         undo: function() {
+            d3.select(document).interrupt('history.perform');
+
             var previous = stack[index].graph;
 
             // Pop to the next annotated state.
@@ -185,8 +189,9 @@ export function coreHistory(context) {
 
 
         redo: function() {
-            var previous = stack[index].graph;
+            d3.select(document).interrupt('history.perform');
 
+            var previous = stack[index].graph;
             while (index < stack.length - 1) {
                 index++;
                 if (stack[index].annotation) break;
