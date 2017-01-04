@@ -9,5 +9,6 @@
     "tags": {
         "barrier": "hedge"
     },
-    "name": "Hedge"
+    "name": "Hedge",
+    "matchScore": 0.25
 }

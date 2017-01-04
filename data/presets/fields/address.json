@@ -1,9 +1,11 @@
 {
     "type": "address",
     "keys": [
+        "addr:block_number",
         "addr:city",
         "addr:block_number",
         "addr:conscriptionnumber",
+        "addr:county",
         "addr:country",
         "addr:county",
         "addr:district",
@@ -27,9 +29,11 @@
     "label": "Address",
     "strings": {
         "placeholders": {
+          "block_number": "Block number",
           "city": "City",
           "block_number": "Block Number",
           "conscriptionnumber": "123",
+          "county": "County",
           "country": "Country",
           "county": "County",
           "district": "District",

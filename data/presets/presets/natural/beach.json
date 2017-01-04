@@ -6,9 +6,11 @@
         "point",
         "area"
     ],
-    "terms": [],
     "tags": {
         "natural": "beach"
     },
+    "terms": [
+        "shore"
+    ],
     "name": "Beach"
 }

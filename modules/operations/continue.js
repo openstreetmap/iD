@@ -1,6 +1,7 @@
 import _ from 'lodash';
 import { t } from '../util/locale';
 import { modeDrawLine } from '../modes/index';
+import { behaviorOperation } from '../behavior/index';
 
 
 export function operationContinue(selectedIDs, context) {
@@ -54,7 +55,7 @@ export function operationContinue(selectedIDs, context) {
     operation.id = 'continue';
     operation.keys = [t('operations.continue.key')];
     operation.title = t('operations.continue.title');
-
+    operation.behavior = behaviorOperation(context).which(operation);
 
     return operation;
 }

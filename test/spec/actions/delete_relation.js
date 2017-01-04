@@ -82,12 +82,13 @@ describe('iD.actionDeleteRelation', function () {
         expect(graph.hasEntity(parent.id)).to.be.undefined;
     });
 
-    describe('#disabled', function() {
-        it('returns \'incomplete_relation\' if the relation is incomplete', function() {
-            var relation = iD.Relation({members: [{id: 'w'}]}),
-                graph    = iD.Graph([relation]),
-                action   = iD.actionDeleteRelation(relation.id);
-            expect(action.disabled(graph)).to.equal('incomplete_relation');
-        });
-    });
+    // This was moved to operationDelete.  We should test operations and move this test there.
+    // describe('#disabled', function() {
+    //     it('returns \'incomplete_relation\' if the relation is incomplete', function() {
+    //         var relation = iD.Relation({members: [{id: 'w'}]}),
+    //             graph    = iD.Graph([relation]),
+    //             action   = iD.actionDeleteRelation(relation.id);
+    //         expect(action.disabled(graph)).to.equal('incomplete_relation');
+    //     });
+    // });
 });

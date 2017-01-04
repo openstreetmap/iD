@@ -1,13 +1,16 @@
 import _ from 'lodash';
 import { t } from '../util/locale';
-import { modeBrowse, modeSelect } from '../modes/index';
 import { actionDeleteMultiple } from '../actions/index';
-import { uiCmd } from '../ui/index';
+import { behaviorOperation } from '../behavior/index';
 import { geoSphericalDistance } from '../geo/index';
+import { modeBrowse, modeSelect } from '../modes/index';
+import { uiCmd } from '../ui/index';
 
 
 export function operationDelete(selectedIDs, context) {
-    var action = actionDeleteMultiple(selectedIDs);
+    var multi = (selectedIDs.length === 1 ? 'single' : 'multiple'),
+        action = actionDeleteMultiple(selectedIDs);
+
 
     var operation = function() {
         var annotation,
@@ -66,23 +69,49 @@ export function operationDelete(selectedIDs, context) {
         var reason;
         if (_.some(selectedIDs, context.hasHiddenConnections)) {
             reason = 'connected_to_hidden';
+        } else if (_.some(selectedIDs, protectedMember)) {
+            reason = 'part_of_relation';
+        } else if (_.some(selectedIDs, incompleteRelation)) {
+            reason = 'incomplete_relation';
         }
-        return action.disabled(context.graph()) || reason;
+        return reason;
+
+        function incompleteRelation(id) {
+            var entity = context.entity(id);
+            return entity.type === 'relation' && !entity.isComplete(context.graph());
+        }
+
+        function protectedMember(id) {
+            var entity = context.entity(id);
+            if (entity.type !== 'way') return false;
+
+            var parents = context.graph().parentRelations(entity);
+            for (var i = 0; i < parents.length; i++) {
+                var parent = parents[i],
+                    type = parent.tags.type,
+                    role = parent.memberById(id).role || 'outer';
+                if (type === 'route' || type === 'boundary' || (type === 'multipolygon' && role === 'outer')) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
     };
 
 
     operation.tooltip = function() {
         var disable = operation.disabled();
         return disable ?
-            t('operations.delete.' + disable) :
-            t('operations.delete.description');
+            t('operations.delete.' + disable + '.' + multi) :
+            t('operations.delete.description' + '.' + multi);
     };
 
 
     operation.id = 'delete';
     operation.keys = [uiCmd('⌘⌫'), uiCmd('⌘⌦'), uiCmd('⌦')];
     operation.title = t('operations.delete.title');
-
+    operation.behavior = behaviorOperation(context).which(operation);
 
     return operation;
 }

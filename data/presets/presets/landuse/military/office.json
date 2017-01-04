@@ -1,0 +1,35 @@
+{
+    "fields": [
+        "building_area"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "military": "office"
+    },
+    "addTags": {
+        "landuse": "military",
+        "military": "office"
+    },
+    "removeTags": {
+        "landuse": "military",
+        "military": "office"
+    },
+    "terms": [
+        "air force",
+        "army",
+        "base",
+        "enlist",
+        "fight",
+        "force",
+        "guard",
+        "marine",
+        "navy",
+        "recruit",
+        "troop",
+        "war"
+    ],
+    "name": "Military Office"
+}

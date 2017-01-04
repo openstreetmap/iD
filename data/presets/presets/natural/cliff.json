@@ -5,9 +5,11 @@
         "line",
         "area"
     ],
-    "terms": [],
     "tags": {
         "natural": "cliff"
     },
+    "terms": [
+        "escarpment"
+    ],
     "name": "Cliff"
 }

@@ -185,6 +185,54 @@ describe('iD.geo', function() {
         });
     });
 
+    describe('geoEdgeEqual', function() {
+        it('returns false for inequal edges', function() {
+            expect(iD.geoEdgeEqual(['a','b'], ['a','c'])).to.be.false;
+        });
+
+        it('returns true for equal edges along same direction', function() {
+            expect(iD.geoEdgeEqual(['a','b'], ['a','b'])).to.be.true;
+        });
+
+        it('returns true for equal edges along opposite direction', function() {
+            expect(iD.geoEdgeEqual(['a','b'], ['b','a'])).to.be.true;
+        });
+    });
+
+    describe('geoAngle', function() {
+        it('returns angle between a and b', function() {
+            var projection = function (_) { return _; };
+            expect(iD.geoAngle({loc:[0, 0]}, {loc:[1, 0]}, projection)).to.be.closeTo(0, 1e-6);
+            expect(iD.geoAngle({loc:[0, 0]}, {loc:[0, 1]}, projection)).to.be.closeTo(Math.PI / 2, 1e-6);
+            expect(iD.geoAngle({loc:[0, 0]}, {loc:[-1, 0]}, projection)).to.be.closeTo(Math.PI, 1e-6);
+            expect(iD.geoAngle({loc:[0, 0]}, {loc:[0, -1]}, projection)).to.be.closeTo(-Math.PI / 2, 1e-6);
+        });
+    });
+
+    describe('geoRotate', function() {
+        it('rotates points around [0, 0]', function() {
+            var points = [[5, 0], [5, 1]],
+                angle = Math.PI,
+                around = [0, 0],
+                result = iD.geoRotate(points, angle, around);
+            expect(result[0][0]).to.be.closeTo(-5, 1e-6);
+            expect(result[0][1]).to.be.closeTo(0, 1e-6);
+            expect(result[1][0]).to.be.closeTo(-5, 1e-6);
+            expect(result[1][1]).to.be.closeTo(-1, 1e-6);
+        });
+
+        it('rotates points around [3, 0]', function() {
+            var points = [[5, 0], [5, 1]],
+                angle = Math.PI,
+                around = [3, 0],
+                result = iD.geoRotate(points, angle, around);
+            expect(result[0][0]).to.be.closeTo(1, 1e-6);
+            expect(result[0][1]).to.be.closeTo(0, 1e-6);
+            expect(result[1][0]).to.be.closeTo(1, 1e-6);
+            expect(result[1][1]).to.be.closeTo(-1, 1e-6);
+        });
+    });
+
     describe('geoChooseEdge', function() {
         var projection = function (l) { return l; };
         projection.invert = projection;

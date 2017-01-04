@@ -233,10 +233,6 @@
         },
         {
             "key": "amenity",
-            "value": "coworking_space"
-        },
-        {
-            "key": "amenity",
             "value": "crematorium"
         },
         {
@@ -386,6 +382,10 @@
         {
             "key": "amenity",
             "value": "pub"
+        },
+        {
+            "key": "amenity",
+            "value": "public_bath"
         },
         {
             "key": "amenity",
@@ -1321,6 +1321,50 @@
             "value": "military"
         },
         {
+            "key": "military",
+            "value": "airfield"
+        },
+        {
+            "key": "military",
+            "value": "barracks"
+        },
+        {
+            "key": "military",
+            "value": "bunker"
+        },
+        {
+            "key": "military",
+            "value": "checkpoint"
+        },
+        {
+            "key": "military",
+            "value": "danger_area"
+        },
+        {
+            "key": "military",
+            "value": "naval_base"
+        },
+        {
+            "key": "military",
+            "value": "nuclear_explosion_site"
+        },
+        {
+            "key": "military",
+            "value": "obstacle_course"
+        },
+        {
+            "key": "military",
+            "value": "office"
+        },
+        {
+            "key": "military",
+            "value": "range"
+        },
+        {
+            "key": "military",
+            "value": "training_area"
+        },
+        {
             "key": "landuse",
             "value": "orchard"
         },
@@ -1619,43 +1663,11 @@
             "value": "works"
         },
         {
-            "key": "military",
-            "value": "airfield"
-        },
-        {
-            "key": "military",
-            "value": "barracks"
-        },
-        {
-            "key": "military",
-            "value": "bunker"
-        },
-        {
-            "key": "military",
-            "value": "checkpoint"
-        },
-        {
-            "key": "military",
-            "value": "danger_area"
-        },
-        {
-            "key": "military",
-            "value": "naval_base"
-        },
-        {
-            "key": "military",
-            "value": "obstacle_course"
-        },
-        {
-            "key": "military",
-            "value": "range"
-        },
-        {
-            "key": "military",
-            "value": "training_area"
-        },
-        {
             "key": "natural"
+        },
+        {
+            "key": "natural",
+            "value": "bare_rock"
         },
         {
             "key": "natural",
@@ -1699,7 +1711,15 @@
         },
         {
             "key": "natural",
+            "value": "ridge"
+        },
+        {
+            "key": "natural",
             "value": "saddle"
+        },
+        {
+            "key": "natural",
+            "value": "sand"
         },
         {
             "key": "natural",
@@ -1771,6 +1791,10 @@
         {
             "key": "office",
             "value": "company"
+        },
+        {
+            "key": "office",
+            "value": "coworking"
         },
         {
             "key": "office",
@@ -1894,6 +1918,10 @@
         {
             "key": "power",
             "value": "minor_line"
+        },
+        {
+            "key": "power",
+            "value": "plant"
         },
         {
             "key": "power",
@@ -2731,6 +2759,10 @@
         {
             "key": "waterway",
             "value": "water_point"
+        },
+        {
+            "key": "waterway",
+            "value": "waterfall"
         },
         {
             "key": "waterway",

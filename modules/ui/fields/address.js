@@ -160,9 +160,12 @@ export function uiFieldAddress(field, context) {
         // setup dropdowns for common address tags
         if (typeof addressFormat.dropdowns !== 'undefined') { addrTags = addressFormat.dropdowns; }
         else { addrTags = [
-            'street', 'city', 'state', 'province', 'district',
-            'subdistrict', 'suburb', 'place', 'postcode']; }
+            'city', 'county', 'country', 'district', 'hamlet',
+            'neighbourhood', 'place', 'postcode', 'province',
+            'quarter', 'state', 'street', 'subdistrict', 'suburb'
+        ]; }
 
+        // If fields exist for any of these tags, create dropdowns to pick nearby values..
         addrTags.forEach(function(tag) {
             var nearValues = (tag === 'street') ? getNearStreets
                     : (tag === 'city') ? getNearCities
@@ -240,6 +243,7 @@ export function uiFieldAddress(field, context) {
             updateTags(tags);
         } else {
             dispatch.on('init', function () {
+                dispatch.on('init', null);
                 updateTags(tags);
             });
         }

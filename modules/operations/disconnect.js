@@ -1,6 +1,7 @@
 import _ from 'lodash';
 import { t } from '../util/locale';
 import { actionDisconnect } from '../actions/index';
+import { behaviorOperation } from '../behavior/index';
 
 
 export function operationDisconnect(selectedIDs, context) {
@@ -14,6 +15,7 @@ export function operationDisconnect(selectedIDs, context) {
     if (selectedIDs.length > 1) {
         action.limitWays(_.without(selectedIDs, entityId));
     }
+
 
     var operation = function() {
         context.perform(action, t('operations.disconnect.annotation'));
@@ -45,7 +47,7 @@ export function operationDisconnect(selectedIDs, context) {
     operation.id = 'disconnect';
     operation.keys = [t('operations.disconnect.key')];
     operation.title = t('operations.disconnect.title');
-
+    operation.behavior = behaviorOperation(context).which(operation);
 
     return operation;
 }
