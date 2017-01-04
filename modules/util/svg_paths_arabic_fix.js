@@ -84,7 +84,7 @@ export function fixArabicScriptTextForSvg(inputText) {
             continue;
         }
         if (context) {
-            if (i === l - 1) {
+            if (i === l - 1 || nextCode === 32) {
                 rtlBuffer.push(chars[code].isolated);
             } else {
                 // special case for لا
@@ -94,11 +94,10 @@ export function fixArabicScriptTextForSvg(inputText) {
                     context = true;
                     continue;
                 }
-
                 rtlBuffer.push(chars[code].initial);
             }
         } else {
-            if (i === l - 1){
+            if (i === l - 1 || nextCode === 32){
                 rtlBuffer.push(chars[code].final);
             } else {
                 // special case for ﻼ
@@ -115,7 +114,7 @@ export function fixArabicScriptTextForSvg(inputText) {
                 }
             }
         }
-        context = (chars[code].medial === '');
+        context = (chars[code].medial === '') || nextCode === 32;
     }
 
     ret += rtlBuffer.reverse().join('');
