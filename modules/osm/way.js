@@ -188,17 +188,16 @@ _.extend(osmWay.prototype, {
     },
 
     // Adds a node (id) in front of the node which is currently at position index.
-    // If index is negative, it will be counted from the end of the way.
-    // If index is 0 or < -length, the node (id) will be added at the start of the way.
-    // If index is undefined or >= length, the node (id) will be added at the end of the way.
+    // If index equals length, the node (id) will be added at the end of the way.
+    // If index is negative or > length, it will throw an error.
     // Generating consecutive duplicates is silently prevented
     
     addNode: function(id, index) {
         var nodes = this.nodes.slice(),
             spliceIndex = index === undefined ? nodes.length : index;
-        if (spliceIndex > nodes.length) spliceIndex = nodes.length;
-        if (spliceIndex < 0) spliceIndex = nodes.length + index;
-        if (spliceIndex < 0) spliceIndex = 0;
+        if (spliceIndex > nodes.length || spliceIndex < 0) {
+            throw new Error('addNode: index ' + spliceIndex + ' is invalid');
+        }
         if (nodes[spliceIndex] !== id&& nodes[spliceIndex-1] !== id) {
             nodes.splice(spliceIndex, 0, id);
         }
@@ -206,14 +205,15 @@ _.extend(osmWay.prototype, {
     },
 
     // Replaces the node which is currently at position index with the given node (id). 
-    // If index is negative, it will be counted from the end of the way.
-    
+    // If index is negative or >= length, it will throw an error.   
     // Consecutive duplicates are eliminated including existing ones.
 
     updateNode: function(id, index) {
         var nodes = [];
         
-        if (index < 0) index = this.nodes.length + index;
+        if (index === undefined || index >= this.nodes.length || index < 0) {
+            throw new Error('updateNode: index ' + index + ' is invalid');
+        }
 
         for (var i = 0; i < this.nodes.length; i++) {
             var node = this.nodes[i];

@@ -420,9 +420,9 @@ describe('iD.osmWay', function() {
             expect(w.addNode('a').nodes).to.eql(['a']);
         });
 
-        it('adds a node to the end of a way at a index greater than length', function () {
+        it('throws when using a index greater than length', function () {
             var w = iD.Way({nodes: ['a', 'b']});
-            expect(w.addNode('c',3).nodes).to.eql(['a', 'b', 'c']);
+            expect(function() { w.addNode('c',3); }).to.throw;
         });
 
         it('adds a node to a way at index 0', function () {
@@ -435,9 +435,9 @@ describe('iD.osmWay', function() {
             expect(w.addNode('c', 1).nodes).to.eql(['a', 'c', 'b']);
         });
 
-        it('adds a node to a way at a negative index', function () {
+        it('throws when using a negative index', function () {
             var w = iD.Way({nodes: ['a', 'b']});
-            expect(w.addNode('c', -1).nodes).to.eql(['a', 'c', 'b']);
+            expect(function() { w.addNode('c', -1); }).to.throw;
         });
         
         it('prevents duplicate consecutive nodes when adding in front of', function () {
@@ -455,11 +455,6 @@ describe('iD.osmWay', function() {
             expect(w.addNode('a', 0).nodes).to.eql(['a', 'b']);
         });
         
-        it('prevents duplicate consecutive nodes at a negative index', function () {
-            var w = iD.Way({nodes: ['a', 'b']});
-            expect(w.addNode('a', -1).nodes).to.eql(['a', 'b']);
-        });
-        
         it('prevents duplicate consecutive nodes at a index equal to length', function () {
             var w = iD.Way({nodes: ['a', 'b']});
             expect(w.addNode('b', 2).nodes).to.eql(['a', 'b']);
@@ -475,6 +470,13 @@ describe('iD.osmWay', function() {
         it('updates the node id at the specified index', function () {
             var w = iD.Way({nodes: ['a', 'b', 'c']});
             expect(w.updateNode('d', 1).nodes).to.eql(['a', 'd', 'c']);
+        });
+        it('throws at an invalid index', function () {
+            var w = iD.Way({nodes: ['a', 'b', 'c']});
+            expect(function() { w.updateNode('d', -1); }).to.throw;
+            expect(function() { w.updateNode('d'); }).to.throw;
+            expect(function() { w.updateNode('d', 5); }).to.throw;
+            expect(function() { w.updateNode('d', 3); }).to.throw;
         });
         
         it('prevents duplicate consecutive nodes', function () {
