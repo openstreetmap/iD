@@ -1503,6 +1503,9 @@ en:
         # amenity=courthouse
         name: Courthouse
         terms: '<translate with synonyms or related terms for ''Courthouse'', separated by commas>'
+      amenity/coworking_space:
+        # office=coworking
+        name: Coworking Space
       amenity/crematorium:
         # amenity=crematorium
         name: Crematorium

@@ -1909,6 +1909,10 @@
                     "name": "Airport terminal",
                     "terms": "airport,aerodrome"
                 },
+                "amenity/coworking_space": {
+                    "name": "Coworking Space",
+                    "terms": ""
+                },
                 "amenity/register_office": {
                     "name": "Register Office",
                     "terms": ""
