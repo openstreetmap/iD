@@ -8619,6 +8619,16 @@
             ],
             "name": "Neighborhood"
         },
+        "place/square": {
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "tags": {
+                "place": "square"
+            },
+            "name": "Square"
+        },
         "place/suburb": {
             "icon": "triangle-stroked",
             "fields": [

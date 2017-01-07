@@ -3367,6 +3367,10 @@ en:
         name: Neighborhood
         # 'terms: neighbourhood'
         terms: '<translate with synonyms or related terms for ''Neighborhood'', separated by commas>'
+      place/square:
+        # place=square
+        name: Square
+        terms: '<translate with synonyms or related terms for ''Square'', separated by commas>'
       place/suburb:
         # place=suburb
         name: Borough

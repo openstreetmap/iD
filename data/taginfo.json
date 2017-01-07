@@ -1897,6 +1897,10 @@
         },
         {
             "key": "place",
+            "value": "square"
+        },
+        {
+            "key": "place",
             "value": "suburb"
         },
         {

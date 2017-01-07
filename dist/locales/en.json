@@ -3705,6 +3705,10 @@
                     "name": "Neighborhood",
                     "terms": "neighbourhood"
                 },
+                "place/square": {
+                    "name": "Square",
+                    "terms": ""
+                },
                 "place/suburb": {
                     "name": "Borough",
                     "terms": "Boro,Quarter"
