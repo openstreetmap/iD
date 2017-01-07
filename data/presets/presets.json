@@ -2710,6 +2710,21 @@
             },
             "name": "Bollard"
         },
+        "barrier/border_control": {
+            "icon": "roadblock",
+            "fields": [
+                "access",
+                "building_area"
+            ],
+            "geometry": [
+                "vertex",
+                "area"
+            ],
+            "tags": {
+                "barrier": "border_control"
+            },
+            "name": "Border Control"
+        },
         "barrier/cattle_grid": {
             "icon": "prison",
             "geometry": [

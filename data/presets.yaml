@@ -1877,6 +1877,10 @@ en:
         # barrier=bollard
         name: Bollard
         terms: '<translate with synonyms or related terms for ''Bollard'', separated by commas>'
+      barrier/border_control:
+        # barrier=border_control
+        name: Border Control
+        terms: '<translate with synonyms or related terms for ''Border Control'', separated by commas>'
       barrier/cattle_grid:
         # barrier=cattle_grid
         name: Cattle Grid

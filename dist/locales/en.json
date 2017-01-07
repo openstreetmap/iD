@@ -2338,6 +2338,10 @@
                     "name": "Bollard",
                     "terms": ""
                 },
+                "barrier/border_control": {
+                    "name": "Border Control",
+                    "terms": ""
+                },
                 "barrier/cattle_grid": {
                     "name": "Cattle Grid",
                     "terms": ""

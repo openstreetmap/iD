@@ -547,6 +547,10 @@
         },
         {
             "key": "barrier",
+            "value": "border_control"
+        },
+        {
+            "key": "barrier",
             "value": "cattle_grid"
         },
         {
