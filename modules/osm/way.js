@@ -187,86 +187,90 @@ _.extend(osmWay.prototype, {
         });
     },
 
+
     // Adds a node (id) in front of the node which is currently at position index.
-    // If index is negative, it will be counted from the end of the way.
-    // If index is 0 or < -length, the node (id) will be added at the start of the way.
-    // If index is undefined or >= length, the node (id) will be added at the end of the way.
-    // Generating consecutive duplicates is silently prevented
-    
+    // If index is undefined, the node will be added to the end of the way for linear ways,
+    //   or just before the final connecting node for circular ways.
+    // Consecutive duplicates are eliminated including existing ones.
+    // Circularity is always preserved when adding a node.
     addNode: function(id, index) {
         var nodes = this.nodes.slice(),
-            spliceIndex = index === undefined ? nodes.length : index;
-        if (spliceIndex > nodes.length) spliceIndex = nodes.length;
-        if (spliceIndex < 0) spliceIndex = nodes.length + index;
-        if (spliceIndex < 0) spliceIndex = 0;
-        if (nodes[spliceIndex] !== id&& nodes[spliceIndex-1] !== id) {
-            nodes.splice(spliceIndex, 0, id);
-        }
-        return this.update({nodes: nodes});
-    },
+            isClosed = this.isClosed(),
+            max = isClosed ? nodes.length - 1 : nodes.length;
 
-    // Replaces the node which is currently at position index with the given node (id). 
-    // If index is negative, it will be counted from the end of the way.
-    
-    // Consecutive duplicates are eliminated including existing ones.
-
-    updateNode: function(id, index) {
-        var nodes = [];
-        
-        if (index < 0) index = this.nodes.length + index;
-
-        for (var i = 0; i < this.nodes.length; i++) {
-            var node = this.nodes[i];
-            if (i === index) {
-                if (nodes[nodes.length - 1] !== id)
-                    nodes.push(id);
-            } else {
-                if (nodes[nodes.length - 1] !== node)
-                    nodes.push(node);
-            }    
+        if (index === undefined) {
+            index = max;
         }
 
-        return this.update({nodes: nodes});
-    },
-
-    // Replaces each occurrence of node id needle with replacement. 
-    // Consecutive duplicates are eliminated including existing ones.
-
-    replaceNode: function(needle, replacement) {
-        var nodes = [];
-
-        for (var i = 0; i < this.nodes.length; i++) {
-            var node = this.nodes[i];
-            if (node === needle) {
-                if (nodes[nodes.length - 1] !== replacement)
-                    nodes.push(replacement);
-            } else {
-                if (nodes[nodes.length - 1] !== node)
-                    nodes.push(node);
-            }    
+        if (index < 0 || index > max) {
+            throw new RangeError('index ' + index + ' out of range 0..' + max);
         }
 
-        return this.update({nodes: nodes});
-    },
-
-    // Removes each occurrence of node id needle with replacement. 
-    // Consecutive duplicates are eliminated. Circularity is preserved.
-
-    removeNode: function(id) {
-        var nodes = [];
-
-        for (var i = 0; i < this.nodes.length; i++) {
-            var node = this.nodes[i];
-            if (node !== id && nodes[nodes.length - 1] !== node) {
-                nodes.push(node);
+        // Will this change the connecting node?  If so, pop the old connecting node(s).
+        if (isClosed && index === 0 && id !== this.first()) {
+            while (nodes.length > 1 && nodes[nodes.length - 1] === this.first()) {
+                nodes.pop();
             }
         }
 
-        // Preserve circularity
-        if (this.nodes.length > 1 && this.first() === id && this.last() === id && nodes[nodes.length - 1] !== nodes[0]) {
+        nodes.splice(index, 0, id);
+        nodes = nodes.filter(noRepeatNodes);
+
+        // If the way was closed before, add a connecting node to keep it closed..
+        if (isClosed && (nodes.length === 1 || nodes[0] !== nodes[nodes.length - 1])) {
             nodes.push(nodes[0]);
         }
 
+        return this.update({ nodes: nodes });
+    },
+
+
+    // Replaces the node which is currently at position index with the given node (id).
+    // Consecutive duplicates are eliminated including existing ones.
+    // Circularity is not preserved when updating a node.
+    updateNode: function(id, index) {
+        var nodes = this.nodes.slice(),
+            isClosed = this.isClosed(),
+            max = nodes.length - 1;
+
+        if (index === undefined || index < 0 || index > max) {
+            throw new RangeError('index ' + index + ' out of range 0..' + max);
+        }
+
+        nodes.splice(index, 1, id);
+        nodes = nodes.filter(noRepeatNodes);
+
+        return this.update({nodes: nodes});
+    },
+
+
+    // Replaces each occurrence of node id needle with replacement.
+    // Consecutive duplicates are eliminated including existing ones.
+    replaceNode: function(needle, replacement) {
+        var nodes = this.nodes.slice();
+
+        for (var i = 0; i < nodes.length; i++) {
+            if (nodes[i] === needle) {
+                nodes[i] = replacement;
+            }
+        }
+
+        nodes = nodes.filter(noRepeatNodes);
+        checkCircular(this, nodes);
+        return this.update({nodes: nodes});
+    },
+
+
+    // Removes each occurrence of node id needle with replacement.
+    // Consecutive duplicates are eliminated including existing ones.
+    // Circularity is preserved.
+    removeNode: function(id) {
+        var nodes = this.nodes.slice();
+
+        nodes = nodes.filter(function(node, i, arr) {
+            return node !== id && noRepeatNodes(node, i, arr);
+        });
+        checkCircular(this, nodes);
         return this.update({nodes: nodes});
     },
 
@@ -284,7 +288,9 @@ _.extend(osmWay.prototype, {
                 })
             }
         };
-        if (changeset_id) r.way['@changeset'] = changeset_id;
+        if (changeset_id) {
+            r.way['@changeset'] = changeset_id;
+        }
         return r;
     },
 
@@ -333,3 +339,16 @@ _.extend(osmWay.prototype, {
         });
     }
 });
+
+
+// Filter function to eliminate consecutive duplicates.
+function noRepeatNodes(node, i, arr) {
+    return i === 0 || node !== arr[i - 1];
+}
+
+// If the nodelist was circular before, keep it circular.
+function keepCircular(nodes) {
+    if ((nodes.length === 1 || nodes[0] !== nodes[nodes.length - 1])) {
+        nodes.push(nodes[0]);
+    }
+}
