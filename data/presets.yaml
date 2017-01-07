@@ -2865,6 +2865,11 @@ en:
         name: Golf Course
         # 'terms: links'
         terms: '<translate with synonyms or related terms for ''Golf Course'', separated by commas>'
+      leisure/horse_riding:
+        # leisure=horse_riding
+        name: Horseback Riding Facility
+        # 'terms: equestrian,stable'
+        terms: '<translate with synonyms or related terms for ''Horseback Riding Facility'', separated by commas>'
       leisure/ice_rink:
         # leisure=ice_rink
         name: Ice Rink

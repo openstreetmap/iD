@@ -6714,6 +6714,26 @@
             },
             "name": "Golf Course"
         },
+        "leisure/horse_riding": {
+            "fields": [
+                "access_simple",
+                "operator",
+                "address",
+                "building"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "terms": [
+                "equestrian",
+                "stable"
+            ],
+            "tags": {
+                "leisure": "horse_riding"
+            },
+            "name": "Horseback Riding Facility"
+        },
         "leisure/ice_rink": {
             "icon": "pitch",
             "fields": [

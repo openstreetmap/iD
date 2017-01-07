@@ -3249,6 +3249,10 @@
                     "name": "Golf Course",
                     "terms": "links"
                 },
+                "leisure/horse_riding": {
+                    "name": "Horseback Riding Facility",
+                    "terms": "equestrian,stable"
+                },
                 "leisure/ice_rink": {
                     "name": "Ice Rink",
                     "terms": "hockey,skating,curling"

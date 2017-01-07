@@ -1449,6 +1449,10 @@
         },
         {
             "key": "leisure",
+            "value": "horse_riding"
+        },
+        {
+            "key": "leisure",
             "value": "ice_rink"
         },
         {
