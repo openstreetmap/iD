@@ -2857,10 +2857,12 @@
         "barrier/toll_booth": {
             "icon": "roadblock",
             "fields": [
-                "access"
+                "access",
+                "building_area"
             ],
             "geometry": [
-                "vertex"
+                "vertex",
+                "area"
             ],
             "tags": {
                 "barrier": "toll_booth"
