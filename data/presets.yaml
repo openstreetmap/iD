@@ -1181,6 +1181,9 @@ en:
           flush: Flush
           # 'toilets:disposal=pitlatrine'
           pitlatrine: Pit/Latrine
+      toll:
+        # toll=*
+        label: Toll
       tourism:
         # tourism=*
         label: Type
@@ -2455,6 +2458,7 @@ en:
       highway/motorway:
         # highway=motorway
         name: Motorway
+        # 'terms: autobahn,expressway,freeway,highway,interstate,parkway,thruway,turnpike'
         terms: '<translate with synonyms or related terms for ''Motorway'', separated by commas>'
       highway/motorway_junction:
         # highway=motorway_junction

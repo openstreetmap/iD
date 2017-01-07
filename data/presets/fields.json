@@ -1591,6 +1591,11 @@
                 }
             }
         },
+        "toll": {
+            "key": "toll",
+            "type": "check",
+            "label": "Toll"
+        },
         "tourism": {
             "key": "tourism",
             "type": "typeCombo",

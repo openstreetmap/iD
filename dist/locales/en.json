@@ -1708,6 +1708,9 @@
                         "bucket": "Bucket"
                     }
                 },
+                "toll": {
+                    "label": "Toll"
+                },
                 "tourism": {
                     "label": "Type"
                 },
@@ -2892,7 +2895,7 @@
                 },
                 "highway/motorway": {
                     "name": "Motorway",
-                    "terms": ""
+                    "terms": "autobahn,expressway,freeway,highway,interstate,parkway,thruway,turnpike"
                 },
                 "highway/path": {
                     "name": "Path",

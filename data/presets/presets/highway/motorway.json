@@ -8,6 +8,7 @@
         "lanes",
         "surface",
         "maxheight",
+        "toll",
         "ref"
     ],
     "geometry": [
@@ -16,6 +17,15 @@
     "tags": {
         "highway": "motorway"
     },
-    "terms": [],
+    "terms": [
+        "autobahn",
+        "expressway",
+        "freeway",
+        "highway",
+        "interstate",
+        "parkway",
+        "thruway",
+        "turnpike"
+    ],
     "name": "Motorway"
 }

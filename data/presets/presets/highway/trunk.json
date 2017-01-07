@@ -8,6 +8,7 @@
         "lanes",
         "surface",
         "maxheight",
+        "toll",
         "ref"
     ],
     "geometry": [
