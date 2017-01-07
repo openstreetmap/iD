@@ -5477,12 +5477,12 @@
         "highway/track": {
             "icon": "highway-track",
             "fields": [
+                "tracktype",
                 "surface",
                 "width",
                 "structure",
                 "access",
                 "incline",
-                "tracktype",
                 "smoothness",
                 "mtb/scale",
                 "mtb/scale/uphill",
