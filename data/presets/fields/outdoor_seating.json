@@ -1,5 +1,12 @@
 {
     "key": "outdoor_seating",
     "type": "combo",
-    "label": "Outdoor Seating"
+    "label": "Outdoor Seating",
+    "placeholder": "Yes, No...",
+    "strings": {
+        "options": {
+            "no": "No outdoor seating",
+            "yes": "Outdoor seating is possible"
+        }
+    }
 }
