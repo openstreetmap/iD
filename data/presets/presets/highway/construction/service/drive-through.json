@@ -1,0 +1,20 @@
+{
+    "icon": "highway-service",
+    "fields": [
+        "oneway",
+        "structure"
+    ],
+    "geometry": [
+        "line"
+    ],
+    "tags": {
+        "highway": "construction",
+        "construction": "service",
+        "service": "drive-through"
+    },
+    "matchScore": 0.5,
+    "terms": [
+        "construction"
+    ],
+    "name": "Drive-Through Under Construction"
+}
