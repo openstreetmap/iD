@@ -1,0 +1,16 @@
+{
+    "fields": [
+        "construction"
+    ],
+    "geometry": [
+        "point",
+        "vertex",
+        "line",
+        "area"
+    ],
+    "tags": {
+        "highway": "construction"
+    },
+    "searchable": false,
+    "name": "Highway Under Construction"
+}
