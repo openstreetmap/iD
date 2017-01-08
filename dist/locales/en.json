@@ -2849,6 +2849,10 @@
                     "name": "Blood Donor Center",
                     "terms": "blood bank,blood donation,blood transfusion,apheresis,plasmapheresis,plateletpheresis,stem cell donation"
                 },
+                "highway/construction": {
+                    "name": "Highway Under Construction",
+                    "terms": ""
+                },
                 "highway/bridleway": {
                     "name": "Bridle Path",
                     "terms": "bridleway,equestrian,horse"
@@ -2856,6 +2860,98 @@
                 "highway/bus_stop": {
                     "name": "Bus Stop",
                     "terms": ""
+                },
+                "highway/construction/bridleway": {
+                    "name": "Bridle Path Under Construction",
+                    "terms": "bridleway,equestrian,horse,construction"
+                },
+                "highway/construction/cycleway": {
+                    "name": "Cycle Path Under Construction",
+                    "terms": "bike,construction"
+                },
+                "highway/construction/footway": {
+                    "name": "Foot Path Under Construction",
+                    "terms": "hike,hiking,trackway,trail,walk,construction"
+                },
+                "highway/construction/motorway_link": {
+                    "name": "Motorway Link Under Construction",
+                    "terms": "ramp,on ramp,off ramp,construction"
+                },
+                "highway/construction/motorway": {
+                    "name": "Motorway Under Construction",
+                    "terms": "autobahn,expressway,freeway,highway,interstate,parkway,thruway,turnpike,construction"
+                },
+                "highway/construction/path": {
+                    "name": "Path Under Construction",
+                    "terms": "hike,hiking,trackway,trail,walk,construction"
+                },
+                "highway/construction/primary_link": {
+                    "name": "Primary Link Under Construction",
+                    "terms": "ramp,on ramp,off ramp,construction"
+                },
+                "highway/construction/primary": {
+                    "name": "Primary Road Under Construction",
+                    "terms": "construction"
+                },
+                "highway/construction/residential": {
+                    "name": "Residential Road Under Construction",
+                    "terms": "construction"
+                },
+                "highway/construction/road": {
+                    "name": "Unknown Road Under Construction",
+                    "terms": "construction"
+                },
+                "highway/construction/secondary_link": {
+                    "name": "Secondary Link Under Construction",
+                    "terms": "ramp,on ramp,off ramp,construction"
+                },
+                "highway/construction/secondary": {
+                    "name": "Secondary Road Under Construction",
+                    "terms": "construction"
+                },
+                "highway/construction/service": {
+                    "name": "Service Road Under Construction",
+                    "terms": "construction"
+                },
+                "highway/construction/service/alley": {
+                    "name": "Alley Under Construction",
+                    "terms": "construction"
+                },
+                "highway/construction/service/drive-through": {
+                    "name": "Drive-Through Under Construction",
+                    "terms": "construction"
+                },
+                "highway/construction/service/driveway": {
+                    "name": "Driveway Under Construction",
+                    "terms": "construction"
+                },
+                "highway/construction/service/emergency_access": {
+                    "name": "Emergency Access Under Construction",
+                    "terms": "construction"
+                },
+                "highway/construction/service/parking_aisle": {
+                    "name": "Parking Aisle Under Construction",
+                    "terms": "construction"
+                },
+                "highway/construction/tertiary_link": {
+                    "name": "Tertiary Link Under Construction",
+                    "terms": "ramp,on ramp,off ramp,construction"
+                },
+                "highway/construction/tertiary": {
+                    "name": "Tertiary Road Under Construction",
+                    "terms": "construction"
+                },
+                "highway/construction/trunk_link": {
+                    "name": "Trunk Link Under Construction",
+                    "terms": "ramp,on ramp,off ramp,construction"
+                },
+                "highway/construction/trunk": {
+                    "name": "Trunk Road Under Construction",
+                    "terms": "construction"
+                },
+                "highway/construction/unclassified": {
+                    "name": "Minor/Unclassified Road Under Construction",
+                    "terms": "construction"
                 },
                 "highway/corridor": {
                     "name": "Indoor Corridor",

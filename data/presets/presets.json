@@ -4789,6 +4789,22 @@
             },
             "name": "Blood Donor Center"
         },
+        "highway/construction": {
+            "fields": [
+                "construction"
+            ],
+            "geometry": [
+                "point",
+                "vertex",
+                "line",
+                "area"
+            ],
+            "tags": {
+                "highway": "construction"
+            },
+            "searchable": false,
+            "name": "Highway Under Construction"
+        },
         "highway/bridleway": {
             "fields": [
                 "surface",
@@ -4827,6 +4843,513 @@
             },
             "terms": [],
             "name": "Bus Stop"
+        },
+        "highway/construction/bridleway": {
+            "fields": [
+                "structure"
+            ],
+            "icon": "highway-bridleway",
+            "geometry": [
+                "line"
+            ],
+            "tags": {
+                "highway": "construction",
+                "construction": "bridleway"
+            },
+            "matchScore": 0.5,
+            "terms": [
+                "bridleway",
+                "equestrian",
+                "horse",
+                "construction"
+            ],
+            "name": "Bridle Path Under Construction"
+        },
+        "highway/construction/cycleway": {
+            "icon": "highway-cycleway",
+            "fields": [
+                "oneway",
+                "structure"
+            ],
+            "geometry": [
+                "line"
+            ],
+            "tags": {
+                "highway": "construction",
+                "construction": "cycleway"
+            },
+            "matchScore": 0.5,
+            "terms": [
+                "bike",
+                "construction"
+            ],
+            "name": "Cycle Path Under Construction"
+        },
+        "highway/construction/footway": {
+            "icon": "highway-footway",
+            "fields": [
+                "structure"
+            ],
+            "geometry": [
+                "line",
+                "area"
+            ],
+            "terms": [
+                "hike",
+                "hiking",
+                "trackway",
+                "trail",
+                "walk",
+                "construction"
+            ],
+            "tags": {
+                "highway": "construction",
+                "construction": "footway"
+            },
+            "matchScore": 0.5,
+            "name": "Foot Path Under Construction"
+        },
+        "highway/construction/motorway_link": {
+            "icon": "highway-motorway-link",
+            "fields": [
+                "oneway_yes",
+                "structure",
+                "ref"
+            ],
+            "geometry": [
+                "line"
+            ],
+            "tags": {
+                "highway": "construction",
+                "construction": "motorway_link"
+            },
+            "addTags": {
+                "highway": "construction",
+                "construction": "motorway_link",
+                "oneway": "yes"
+            },
+            "removeTags": {
+                "highway": "construction",
+                "construction": "motorway_link",
+                "oneway": "yes"
+            },
+            "matchScore": 0.5,
+            "terms": [
+                "ramp",
+                "on ramp",
+                "off ramp",
+                "construction"
+            ],
+            "name": "Motorway Link Under Construction"
+        },
+        "highway/construction/motorway": {
+            "icon": "highway-motorway",
+            "fields": [
+                "oneway_yes",
+                "structure",
+                "ref"
+            ],
+            "geometry": [
+                "line"
+            ],
+            "tags": {
+                "highway": "construction",
+                "construction": "motorway"
+            },
+            "matchScore": 0.5,
+            "terms": [
+                "autobahn",
+                "expressway",
+                "freeway",
+                "highway",
+                "interstate",
+                "parkway",
+                "thruway",
+                "turnpike",
+                "construction"
+            ],
+            "name": "Motorway Under Construction"
+        },
+        "highway/construction/path": {
+            "icon": "highway-path",
+            "fields": [
+                "structure",
+                "incline",
+                "ref"
+            ],
+            "geometry": [
+                "line"
+            ],
+            "matchScore": 0.5,
+            "terms": [
+                "hike",
+                "hiking",
+                "trackway",
+                "trail",
+                "walk",
+                "construction"
+            ],
+            "tags": {
+                "highway": "construction",
+                "construction": "path"
+            },
+            "name": "Path Under Construction"
+        },
+        "highway/construction/primary_link": {
+            "icon": "highway-primary-link",
+            "fields": [
+                "oneway",
+                "structure",
+                "ref",
+                "cycleway"
+            ],
+            "geometry": [
+                "line"
+            ],
+            "tags": {
+                "highway": "construction",
+                "construction": "primary_link"
+            },
+            "matchScore": 0.5,
+            "terms": [
+                "ramp",
+                "on ramp",
+                "off ramp",
+                "construction"
+            ],
+            "name": "Primary Link Under Construction"
+        },
+        "highway/construction/primary": {
+            "icon": "highway-primary",
+            "fields": [
+                "oneway",
+                "structure",
+                "ref",
+                "cycleway"
+            ],
+            "geometry": [
+                "line"
+            ],
+            "tags": {
+                "highway": "construction",
+                "construction": "primary"
+            },
+            "matchScore": 0.5,
+            "terms": [
+                "construction"
+            ],
+            "name": "Primary Road Under Construction"
+        },
+        "highway/construction/residential": {
+            "icon": "highway-residential",
+            "fields": [
+                "oneway",
+                "structure",
+                "cycleway"
+            ],
+            "geometry": [
+                "line"
+            ],
+            "tags": {
+                "highway": "construction",
+                "construction": "residential"
+            },
+            "matchScore": 0.5,
+            "terms": [
+                "construction"
+            ],
+            "name": "Residential Road Under Construction"
+        },
+        "highway/construction/road": {
+            "icon": "highway-road",
+            "fields": [
+                "oneway",
+                "structure"
+            ],
+            "geometry": [
+                "line"
+            ],
+            "tags": {
+                "highway": "construction",
+                "construction": "road"
+            },
+            "matchScore": 0.5,
+            "terms": [
+                "construction"
+            ],
+            "name": "Unknown Road Under Construction"
+        },
+        "highway/construction/secondary_link": {
+            "icon": "highway-secondary-link",
+            "fields": [
+                "oneway",
+                "structure",
+                "ref",
+                "cycleway"
+            ],
+            "geometry": [
+                "line"
+            ],
+            "tags": {
+                "highway": "construction",
+                "construction": "secondary_link"
+            },
+            "matchScore": 0.5,
+            "terms": [
+                "ramp",
+                "on ramp",
+                "off ramp",
+                "construction"
+            ],
+            "name": "Secondary Link Under Construction"
+        },
+        "highway/construction/secondary": {
+            "icon": "highway-secondary",
+            "fields": [
+                "oneway",
+                "structure",
+                "cycleway"
+            ],
+            "geometry": [
+                "line"
+            ],
+            "tags": {
+                "highway": "construction",
+                "construction": "secondary"
+            },
+            "matchScore": 0.5,
+            "terms": [
+                "construction"
+            ],
+            "name": "Secondary Road Under Construction"
+        },
+        "highway/construction/service": {
+            "icon": "highway-service",
+            "fields": [
+                "service",
+                "oneway",
+                "structure"
+            ],
+            "geometry": [
+                "line"
+            ],
+            "tags": {
+                "highway": "construction",
+                "construction": "service"
+            },
+            "matchScore": 0.5,
+            "terms": [
+                "construction"
+            ],
+            "name": "Service Road Under Construction"
+        },
+        "highway/construction/service/alley": {
+            "icon": "highway-service",
+            "fields": [
+                "oneway",
+                "structure"
+            ],
+            "geometry": [
+                "line"
+            ],
+            "tags": {
+                "highway": "construction",
+                "construction": "service",
+                "service": "alley"
+            },
+            "matchScore": 0.5,
+            "terms": [
+                "construction"
+            ],
+            "name": "Alley Under Construction"
+        },
+        "highway/construction/service/drive-through": {
+            "icon": "highway-service",
+            "fields": [
+                "oneway",
+                "structure"
+            ],
+            "geometry": [
+                "line"
+            ],
+            "tags": {
+                "highway": "construction",
+                "construction": "service",
+                "service": "drive-through"
+            },
+            "matchScore": 0.5,
+            "terms": [
+                "construction"
+            ],
+            "name": "Drive-Through Under Construction"
+        },
+        "highway/construction/service/driveway": {
+            "icon": "highway-service",
+            "fields": [
+                "oneway",
+                "structure"
+            ],
+            "geometry": [
+                "line"
+            ],
+            "tags": {
+                "highway": "construction",
+                "construction": "service",
+                "service": "driveway"
+            },
+            "matchScore": 0.5,
+            "terms": [
+                "construction"
+            ],
+            "name": "Driveway Under Construction"
+        },
+        "highway/construction/service/emergency_access": {
+            "icon": "highway-service",
+            "fields": [
+                "oneway",
+                "structure"
+            ],
+            "geometry": [
+                "line"
+            ],
+            "tags": {
+                "highway": "construction",
+                "construction": "service",
+                "service": "emergency_access"
+            },
+            "matchScore": 0.5,
+            "terms": [
+                "construction"
+            ],
+            "name": "Emergency Access Under Construction"
+        },
+        "highway/construction/service/parking_aisle": {
+            "icon": "highway-service",
+            "fields": [
+                "oneway",
+                "structure"
+            ],
+            "geometry": [
+                "line"
+            ],
+            "tags": {
+                "highway": "construction",
+                "construction": "service",
+                "service": "parking_aisle"
+            },
+            "matchScore": 0.5,
+            "terms": [
+                "construction"
+            ],
+            "name": "Parking Aisle Under Construction"
+        },
+        "highway/construction/tertiary_link": {
+            "icon": "highway-tertiary-link",
+            "fields": [
+                "oneway",
+                "structure",
+                "ref",
+                "cycleway"
+            ],
+            "geometry": [
+                "line"
+            ],
+            "tags": {
+                "highway": "construction",
+                "construction": "tertiary_link"
+            },
+            "matchScore": 0.5,
+            "terms": [
+                "ramp",
+                "on ramp",
+                "off ramp",
+                "construction"
+            ],
+            "name": "Tertiary Link Under Construction"
+        },
+        "highway/construction/tertiary": {
+            "icon": "highway-tertiary",
+            "fields": [
+                "oneway",
+                "structure",
+                "ref",
+                "cycleway"
+            ],
+            "geometry": [
+                "line"
+            ],
+            "tags": {
+                "highway": "construction",
+                "construction": "tertiary"
+            },
+            "matchScore": 0.5,
+            "terms": [
+                "construction"
+            ],
+            "name": "Tertiary Road Under Construction"
+        },
+        "highway/construction/trunk_link": {
+            "icon": "highway-trunk",
+            "fields": [
+                "oneway",
+                "structure",
+                "ref"
+            ],
+            "geometry": [
+                "line"
+            ],
+            "tags": {
+                "highway": "construction",
+                "construction": "trunk_link"
+            },
+            "terms": [
+                "ramp",
+                "on ramp",
+                "off ramp",
+                "construction"
+            ],
+            "matchScore": 0.5,
+            "name": "Trunk Link Under Construction"
+        },
+        "highway/construction/trunk": {
+            "icon": "highway-trunk",
+            "fields": [
+                "oneway",
+                "structure",
+                "ref"
+            ],
+            "geometry": [
+                "line"
+            ],
+            "tags": {
+                "highway": "construction",
+                "construction": "trunk"
+            },
+            "matchScore": 0.5,
+            "terms": [
+                "construction"
+            ],
+            "name": "Trunk Road Under Construction"
+        },
+        "highway/construction/unclassified": {
+            "icon": "highway-unclassified",
+            "fields": [
+                "oneway",
+                "structure",
+                "cycleway"
+            ],
+            "geometry": [
+                "line"
+            ],
+            "tags": {
+                "highway": "construction",
+                "construction": "unclassified"
+            },
+            "terms": [
+                "construction"
+            ],
+            "matchScore": 0.5,
+            "name": "Minor/Unclassified Road Under Construction"
         },
         "highway/corridor": {
             "icon": "highway-footway",

@@ -1052,11 +1052,107 @@
         },
         {
             "key": "highway",
+            "value": "construction"
+        },
+        {
+            "key": "highway",
             "value": "bridleway"
         },
         {
             "key": "highway",
             "value": "bus_stop"
+        },
+        {
+            "key": "construction",
+            "value": "bridleway"
+        },
+        {
+            "key": "construction",
+            "value": "cycleway"
+        },
+        {
+            "key": "construction",
+            "value": "footway"
+        },
+        {
+            "key": "construction",
+            "value": "motorway_link"
+        },
+        {
+            "key": "construction",
+            "value": "motorway"
+        },
+        {
+            "key": "construction",
+            "value": "path"
+        },
+        {
+            "key": "construction",
+            "value": "primary_link"
+        },
+        {
+            "key": "construction",
+            "value": "primary"
+        },
+        {
+            "key": "construction",
+            "value": "residential"
+        },
+        {
+            "key": "construction",
+            "value": "road"
+        },
+        {
+            "key": "construction",
+            "value": "secondary_link"
+        },
+        {
+            "key": "construction",
+            "value": "secondary"
+        },
+        {
+            "key": "construction",
+            "value": "service"
+        },
+        {
+            "key": "service",
+            "value": "alley"
+        },
+        {
+            "key": "service",
+            "value": "drive-through"
+        },
+        {
+            "key": "service",
+            "value": "driveway"
+        },
+        {
+            "key": "service",
+            "value": "emergency_access"
+        },
+        {
+            "key": "service",
+            "value": "parking_aisle"
+        },
+        {
+            "key": "construction",
+            "value": "tertiary_link"
+        },
+        {
+            "key": "construction",
+            "value": "tertiary"
+        },
+        {
+            "key": "construction",
+            "value": "trunk_link"
+        },
+        {
+            "key": "construction",
+            "value": "trunk"
+        },
+        {
+            "key": "construction",
+            "value": "unclassified"
         },
         {
             "key": "highway",
