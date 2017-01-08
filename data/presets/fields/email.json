@@ -1,0 +1,7 @@
+{
+    "key": "email",
+    "type": "email",
+    "placeholder": "example@example.com",
+    "universal": true,
+    "label": "Email"
+}

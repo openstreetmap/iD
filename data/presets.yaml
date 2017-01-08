@@ -418,6 +418,11 @@ en:
       elevation:
         # ele=*
         label: Elevation
+      email:
+        # email=*
+        label: Email
+        # email field placeholder
+        placeholder: example@example.com
       emergency:
         # emergency=*
         label: Emergency

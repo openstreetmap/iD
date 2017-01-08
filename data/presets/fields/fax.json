@@ -2,5 +2,6 @@
     "key": "fax",
     "type": "tel",
     "label": "Fax",
+    "universal": true,
     "placeholder":"+31 42 123 4567"
 }
