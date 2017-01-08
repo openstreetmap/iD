@@ -116,6 +116,10 @@
             "value": "terminal"
         },
         {
+            "key": "office",
+            "value": "coworking"
+        },
+        {
             "key": "amenity",
             "value": "register_office"
         },

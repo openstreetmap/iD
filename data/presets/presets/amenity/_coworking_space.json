@@ -1,0 +1,20 @@
+{
+    "icon": "commercial",
+    "fields": [
+        "address",
+        "building_area",
+        "opening_hours",
+        "internet_access",
+        "internet_access/fee",
+        "internet_access/ssid"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "office": "coworking"
+    },
+    "name": "Coworking Space",
+    "searchable": false
+}
