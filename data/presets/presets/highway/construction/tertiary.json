@@ -1,0 +1,21 @@
+{
+    "icon": "highway-tertiary",
+    "fields": [
+        "oneway",
+        "structure",
+        "ref",
+        "cycleway"
+    ],
+    "geometry": [
+        "line"
+    ],
+    "tags": {
+        "highway": "construction",
+        "construction": "tertiary"
+    },
+    "matchScore": 0.5,
+    "terms": [
+        "construction"
+    ],
+    "name": "Tertiary Road Under Construction"
+}

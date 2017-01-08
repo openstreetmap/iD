@@ -1,0 +1,20 @@
+{
+    "icon": "highway-secondary",
+    "fields": [
+        "oneway",
+        "structure",
+        "cycleway"
+    ],
+    "geometry": [
+        "line"
+    ],
+    "tags": {
+        "highway": "construction",
+        "construction": "secondary"
+    },
+    "matchScore": 0.5,
+    "terms": [
+        "construction"
+    ],
+    "name": "Secondary Road Under Construction"
+}

@@ -1,0 +1,28 @@
+{
+    "icon": "highway-motorway",
+    "fields": [
+        "oneway_yes",
+        "structure",
+        "ref"
+    ],
+    "geometry": [
+        "line"
+    ],
+    "tags": {
+        "highway": "construction",
+        "construction": "motorway"
+    },
+    "matchScore": 0.5,
+    "terms": [
+        "autobahn",
+        "expressway",
+        "freeway",
+        "highway",
+        "interstate",
+        "parkway",
+        "thruway",
+        "turnpike",
+        "construction"
+    ],
+    "name": "Motorway Under Construction"
+}

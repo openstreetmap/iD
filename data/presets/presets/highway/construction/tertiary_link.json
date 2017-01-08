@@ -1,0 +1,24 @@
+{
+    "icon": "highway-tertiary-link",
+    "fields": [
+        "oneway",
+        "structure",
+        "ref",
+        "cycleway"
+    ],
+    "geometry": [
+        "line"
+    ],
+    "tags": {
+        "highway": "construction",
+        "construction": "tertiary_link"
+    },
+    "matchScore": 0.5,
+    "terms": [
+        "ramp",
+        "on ramp",
+        "off ramp",
+        "construction"
+    ],
+    "name": "Tertiary Link Under Construction"
+}

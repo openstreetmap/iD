@@ -1,0 +1,33 @@
+{
+    "icon": "highway-motorway-link",
+    "fields": [
+        "oneway_yes",
+        "structure",
+        "ref"
+    ],
+    "geometry": [
+        "line"
+    ],
+    "tags": {
+        "highway": "construction",
+        "construction": "motorway_link"
+    },
+    "addTags": {
+        "highway": "construction",
+        "construction": "motorway_link",
+        "oneway": "yes"
+    },
+    "removeTags": {
+        "highway": "construction",
+        "construction": "motorway_link",
+        "oneway": "yes"
+    },
+    "matchScore": 0.5,
+    "terms": [
+        "ramp",
+        "on ramp",
+        "off ramp",
+        "construction"
+    ],
+    "name": "Motorway Link Under Construction"
+}
