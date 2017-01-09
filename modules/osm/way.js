@@ -315,9 +315,9 @@ _.extend(osmWay.prototype, {
         var nodes = this.nodes.slice(),
             isClosed = this.isClosed();
 
-        nodes = nodes.filter(function(node, i, arr) {
-            return node !== id && noRepeatNodes(node, i, arr);
-        });
+        nodes = nodes
+            .filter(function(node, i, arr) { return node !== id })
+            .filter(noRepeatNodes);
 
         // If the way was closed before, append a connector node to keep it closed..
         if (isClosed && (nodes.length === 1 || nodes[0] !== nodes[nodes.length - 1])) {
