@@ -445,6 +445,26 @@
             },
             "name": "Airport terminal"
         },
+        "amenity/coworking_space": {
+            "icon": "commercial",
+            "fields": [
+                "address",
+                "building_area",
+                "opening_hours",
+                "internet_access",
+                "internet_access/fee",
+                "internet_access/ssid"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "tags": {
+                "office": "coworking"
+            },
+            "name": "Coworking Space",
+            "searchable": false
+        },
         "amenity/register_office": {
             "icon": "town-hall",
             "fields": [
@@ -1015,29 +1035,6 @@
             },
             "name": "Courthouse"
         },
-        "amenity/coworking_space": {
-            "icon": "commercial",
-            "fields": [
-                "address",
-                "building_area",
-                "opening_hours",
-                "internet_access",
-                "internet_access/fee",
-                "internet_access/ssid"
-            ],
-            "geometry": [
-                "point",
-                "area"
-            ],
-            "terms": [
-                "coworking",
-                "office"
-            ],
-            "tags": {
-                "amenity": "coworking_space"
-            },
-            "name": "Coworking Space"
-        },
         "amenity/crematorium": {
             "icon": "cemetery",
             "fields": [
@@ -1344,8 +1341,10 @@
             ],
             "terms": [
                 "game",
+                "gun",
                 "lookout",
-                "shoot",
+                "rifle",
+                "shoot*",
                 "wild",
                 "watch"
             ],
@@ -1872,6 +1871,30 @@
             ],
             "name": "Pub"
         },
+        "amenity/public_bath": {
+            "icon": "water",
+            "fields": [
+                "bath/type",
+                "bath/open_air",
+                "bath/sand_bath",
+                "address",
+                "building_area",
+                "opening_hours"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "tags": {
+                "amenity": "public_bath"
+            },
+            "terms": [
+                "onsen",
+                "foot bath",
+                "hot springs"
+            ],
+            "name": "Public Bath"
+        },
         "amenity/public_bookcase": {
             "icon": "library",
             "fields": [
@@ -2083,9 +2106,10 @@
                 "operator",
                 "address",
                 "building_area",
+                "social_facility",
+                "social_facility_for",
                 "opening_hours",
-                "wheelchair",
-                "social_facility_for"
+                "wheelchair"
             ],
             "geometry": [
                 "point",
@@ -2102,8 +2126,9 @@
                 "operator",
                 "address",
                 "building_area",
-                "opening_hours",
-                "social_facility_for"
+                "social_facility",
+                "social_facility_for",
+                "opening_hours"
             ],
             "geometry": [
                 "point",
@@ -2121,9 +2146,10 @@
                 "operator",
                 "address",
                 "building_area",
+                "social_facility",
+                "social_facility_for",
                 "opening_hours",
-                "wheelchair",
-                "social_facility_for"
+                "wheelchair"
             ],
             "geometry": [
                 "point",
@@ -2146,9 +2172,10 @@
                 "operator",
                 "address",
                 "building_area",
+                "social_facility",
+                "social_facility_for",
                 "opening_hours",
                 "wheelchair",
-                "social_facility_for",
                 "internet_access",
                 "internet_access/fee",
                 "internet_access/ssid"
@@ -2660,7 +2687,8 @@
             "fields": [
                 "barrier"
             ],
-            "name": "Barrier"
+            "name": "Barrier",
+            "matchScore": 0.4
         },
         "barrier/entrance": {
             "icon": "entrance",
@@ -2701,6 +2729,21 @@
                 "barrier": "bollard"
             },
             "name": "Bollard"
+        },
+        "barrier/border_control": {
+            "icon": "roadblock",
+            "fields": [
+                "access",
+                "building_area"
+            ],
+            "geometry": [
+                "vertex",
+                "area"
+            ],
+            "tags": {
+                "barrier": "border_control"
+            },
+            "name": "Border Control"
         },
         "barrier/cattle_grid": {
             "icon": "prison",
@@ -2748,7 +2791,8 @@
             "tags": {
                 "barrier": "ditch"
             },
-            "name": "Trench"
+            "name": "Trench",
+            "matchScore": 0.25
         },
         "barrier/fence": {
             "icon": "prison",
@@ -2762,7 +2806,8 @@
             "tags": {
                 "barrier": "fence"
             },
-            "name": "Fence"
+            "name": "Fence",
+            "matchScore": 0.25
         },
         "barrier/gate": {
             "icon": "prison",
@@ -2790,7 +2835,8 @@
             "tags": {
                 "barrier": "hedge"
             },
-            "name": "Hedge"
+            "name": "Hedge",
+            "matchScore": 0.25
         },
         "barrier/kissing_gate": {
             "icon": "prison",
@@ -2846,10 +2892,12 @@
         "barrier/toll_booth": {
             "icon": "roadblock",
             "fields": [
-                "access"
+                "access",
+                "building_area"
             ],
             "geometry": [
-                "vertex"
+                "vertex",
+                "area"
             ],
             "tags": {
                 "barrier": "toll_booth"
@@ -2869,7 +2917,8 @@
             "tags": {
                 "barrier": "wall"
             },
-            "name": "Wall"
+            "name": "Wall",
+            "matchScore": 0.25
         },
         "boundary/administrative": {
             "name": "Administrative Boundary",
@@ -2897,7 +2946,7 @@
             "tags": {
                 "building": "*"
             },
-            "matchScore": 0.4,
+            "matchScore": 0.6,
             "terms": [],
             "name": "Building"
         },
@@ -4480,11 +4529,15 @@
         "emergency/fire_hydrant": {
             "icon": "fire-station",
             "fields": [
-                "fire_hydrant/type"
+                "fire_hydrant/type",
+                "fire_hydrant/position"
             ],
             "geometry": [
                 "point",
                 "vertex"
+            ],
+            "terms": [
+                "fire plug"
             ],
             "tags": {
                 "emergency": "fire_hydrant"
@@ -4982,6 +5035,7 @@
                 "lanes",
                 "surface",
                 "maxheight",
+                "toll",
                 "ref"
             ],
             "geometry": [
@@ -4990,7 +5044,16 @@
             "tags": {
                 "highway": "motorway"
             },
-            "terms": [],
+            "terms": [
+                "autobahn",
+                "expressway",
+                "freeway",
+                "highway",
+                "interstate",
+                "parkway",
+                "thruway",
+                "turnpike"
+            ],
             "name": "Motorway"
         },
         "highway/path": {
@@ -5461,12 +5524,12 @@
         "highway/track": {
             "icon": "highway-track",
             "fields": [
+                "tracktype",
                 "surface",
                 "width",
                 "structure",
                 "access",
                 "incline",
-                "tracktype",
                 "smoothness",
                 "mtb/scale",
                 "mtb/scale/uphill",
@@ -5574,6 +5637,7 @@
                 "lanes",
                 "surface",
                 "maxheight",
+                "toll",
                 "ref"
             ],
             "geometry": [
@@ -5668,6 +5732,10 @@
             "name": "Boundary Stone"
         },
         "historic/castle": {
+            "fields": [
+                "castle_type",
+                "building_area"
+            ],
             "geometry": [
                 "point",
                 "area"
@@ -5755,11 +5823,13 @@
             "tags": {
                 "landuse": "*"
             },
+            "matchScore": 0.9,
             "name": "Land Use"
         },
         "landuse/farm": {
             "icon": "farm",
             "fields": [
+                "operator",
                 "crop"
             ],
             "geometry": [
@@ -5853,6 +5923,7 @@
         "landuse/farmland": {
             "icon": "farm",
             "fields": [
+                "operator",
                 "crop"
             ],
             "geometry": [
@@ -5861,12 +5932,17 @@
             "tags": {
                 "landuse": "farmland"
             },
-            "terms": [],
+            "terms": [
+                "crop",
+                "grow",
+                "plant"
+            ],
             "name": "Farmland"
         },
         "landuse/farmyard": {
             "icon": "farm",
             "fields": [
+                "operator",
                 "crop"
             ],
             "geometry": [
@@ -5875,7 +5951,11 @@
             "tags": {
                 "landuse": "farmyard"
             },
-            "terms": [],
+            "terms": [
+                "crop",
+                "grow",
+                "plant"
+            ],
             "name": "Farmyard"
         },
         "landuse/forest": {
@@ -5924,6 +6004,7 @@
                 "landuse": "industrial"
             },
             "terms": [],
+            "matchScore": 0.9,
             "name": "Industrial Area"
         },
         "landuse/landfill": {
@@ -5956,11 +6037,381 @@
                 "landuse": "military"
             },
             "terms": [],
+            "matchScore": 0.9,
             "name": "Military Area"
+        },
+        "landuse/military/airfield": {
+            "icon": "airfield",
+            "fields": [
+                "ref",
+                "iata",
+                "icao"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "tags": {
+                "military": "airfield"
+            },
+            "addTags": {
+                "landuse": "military",
+                "military": "airfield"
+            },
+            "removeTags": {
+                "landuse": "military",
+                "military": "airfield"
+            },
+            "terms": [
+                "air force",
+                "army",
+                "base",
+                "bomb",
+                "fight",
+                "force",
+                "guard",
+                "heli*",
+                "jet",
+                "marine",
+                "navy",
+                "plane",
+                "troop",
+                "war"
+            ],
+            "name": "Military Airfield"
+        },
+        "landuse/military/barracks": {
+            "fields": [
+                "building_area"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "tags": {
+                "military": "barracks"
+            },
+            "addTags": {
+                "landuse": "military",
+                "military": "barracks"
+            },
+            "removeTags": {
+                "landuse": "military",
+                "military": "barracks"
+            },
+            "terms": [
+                "air force",
+                "army",
+                "base",
+                "fight",
+                "force",
+                "guard",
+                "marine",
+                "navy",
+                "troop",
+                "war"
+            ],
+            "name": "Barracks"
+        },
+        "landuse/military/bunker": {
+            "fields": [
+                "bunker_type",
+                "building_area"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "tags": {
+                "military": "bunker"
+            },
+            "addTags": {
+                "building": "bunker",
+                "landuse": "military",
+                "military": "bunker"
+            },
+            "removeTags": {
+                "building": "bunker",
+                "landuse": "military",
+                "military": "bunker"
+            },
+            "terms": [
+                "air force",
+                "army",
+                "base",
+                "fight",
+                "force",
+                "guard",
+                "marine",
+                "navy",
+                "troop",
+                "war"
+            ],
+            "name": "Military Bunker"
+        },
+        "landuse/military/checkpoint": {
+            "geometry": [
+                "point",
+                "vertex",
+                "area"
+            ],
+            "tags": {
+                "military": "checkpoint"
+            },
+            "addTags": {
+                "landuse": "military",
+                "military": "checkpoint"
+            },
+            "removeTags": {
+                "landuse": "military",
+                "military": "checkpoint"
+            },
+            "terms": [
+                "air force",
+                "army",
+                "base",
+                "force",
+                "guard",
+                "marine",
+                "navy",
+                "troop",
+                "war"
+            ],
+            "name": "Checkpoint"
+        },
+        "landuse/military/danger_area": {
+            "icon": "danger",
+            "geometry": [
+                "point",
+                "vertex",
+                "area"
+            ],
+            "tags": {
+                "military": "danger_area"
+            },
+            "addTags": {
+                "landuse": "military",
+                "military": "danger_area"
+            },
+            "removeTags": {
+                "landuse": "military",
+                "military": "danger_area"
+            },
+            "terms": [
+                "air force",
+                "army",
+                "base",
+                "blast",
+                "bomb",
+                "explo*",
+                "force",
+                "guard",
+                "mine",
+                "marine",
+                "navy",
+                "troop",
+                "war"
+            ],
+            "name": "Danger Area"
+        },
+        "landuse/military/naval_base": {
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "tags": {
+                "military": "naval_base"
+            },
+            "addTags": {
+                "landuse": "military",
+                "military": "naval_base"
+            },
+            "removeTags": {
+                "landuse": "military",
+                "military": "naval_base"
+            },
+            "terms": [
+                "base",
+                "fight",
+                "force",
+                "guard",
+                "marine",
+                "navy",
+                "ship",
+                "sub",
+                "troop",
+                "war"
+            ],
+            "name": "Naval Base"
+        },
+        "landuse/military/nuclear_explosion_site": {
+            "icon": "danger",
+            "geometry": [
+                "point",
+                "vertex",
+                "area"
+            ],
+            "tags": {
+                "military": "nuclear_explosion_site"
+            },
+            "addTags": {
+                "landuse": "military",
+                "military": "nuclear_explosion_site"
+            },
+            "removeTags": {
+                "landuse": "military",
+                "military": "nuclear_explosion_site"
+            },
+            "terms": [
+                "atom",
+                "blast",
+                "bomb",
+                "detonat*",
+                "nuke",
+                "site",
+                "test"
+            ],
+            "name": "Nuclear Explosion Site"
+        },
+        "landuse/military/obstacle_course": {
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "tags": {
+                "military": "obstacle_course"
+            },
+            "addTags": {
+                "landuse": "military",
+                "military": "obstacle_course"
+            },
+            "removeTags": {
+                "landuse": "military",
+                "military": "obstacle_course"
+            },
+            "terms": [
+                "army",
+                "base",
+                "force",
+                "guard",
+                "marine",
+                "navy",
+                "troop",
+                "war"
+            ],
+            "name": "Obstacle Course"
+        },
+        "landuse/military/office": {
+            "fields": [
+                "building_area"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "tags": {
+                "military": "office"
+            },
+            "addTags": {
+                "landuse": "military",
+                "military": "office"
+            },
+            "removeTags": {
+                "landuse": "military",
+                "military": "office"
+            },
+            "terms": [
+                "air force",
+                "army",
+                "base",
+                "enlist",
+                "fight",
+                "force",
+                "guard",
+                "marine",
+                "navy",
+                "recruit",
+                "troop",
+                "war"
+            ],
+            "name": "Military Office"
+        },
+        "landuse/military/range": {
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "tags": {
+                "military": "range"
+            },
+            "addTags": {
+                "landuse": "military",
+                "military": "range"
+            },
+            "removeTags": {
+                "landuse": "military",
+                "military": "range"
+            },
+            "terms": [
+                "air force",
+                "army",
+                "base",
+                "fight",
+                "fire",
+                "force",
+                "guard",
+                "gun",
+                "marine",
+                "navy",
+                "rifle",
+                "shoot*",
+                "snip*",
+                "train",
+                "troop",
+                "war"
+            ],
+            "name": "Military Range"
+        },
+        "landuse/military/training_area": {
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "tags": {
+                "military": "training_area"
+            },
+            "addTags": {
+                "landuse": "military",
+                "military": "training_area"
+            },
+            "removeTags": {
+                "landuse": "military",
+                "military": "training_area"
+            },
+            "terms": [
+                "air force",
+                "army",
+                "base",
+                "fight",
+                "fire",
+                "force",
+                "guard",
+                "gun",
+                "marine",
+                "navy",
+                "rifle",
+                "shoot*",
+                "snip*",
+                "train",
+                "troop",
+                "war"
+            ],
+            "name": "Training Area"
         },
         "landuse/orchard": {
             "icon": "park2",
             "fields": [
+                "operator",
                 "trees"
             ],
             "geometry": [
@@ -5969,22 +6420,27 @@
             "tags": {
                 "landuse": "orchard"
             },
-            "terms": [],
+            "terms": [
+                "fruit"
+            ],
             "name": "Orchard"
         },
         "landuse/plant_nursery": {
             "icon": "garden",
             "fields": [
-                "name"
+                "operator",
+                "plant"
             ],
             "geometry": [
-                "point",
                 "area"
             ],
             "tags": {
                 "landuse": "plant_nursery"
             },
             "terms": [
+                "flower",
+                "garden",
+                "grow",
                 "vivero"
             ],
             "name": "Plant Nursery"
@@ -6033,13 +6489,19 @@
             "name": "Retail Area"
         },
         "landuse/vineyard": {
+            "fields": [
+                "operator"
+            ],
             "geometry": [
                 "area"
             ],
             "tags": {
                 "landuse": "vineyard"
             },
-            "terms": [],
+            "terms": [
+                "grape",
+                "wine"
+            ],
             "name": "Vineyard"
         },
         "leisure": {
@@ -6271,6 +6733,26 @@
                 "leisure": "golf_course"
             },
             "name": "Golf Course"
+        },
+        "leisure/horse_riding": {
+            "fields": [
+                "access_simple",
+                "operator",
+                "address",
+                "building"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "terms": [
+                "equestrian",
+                "stable"
+            ],
+            "tags": {
+                "leisure": "horse_riding"
+            },
+            "name": "Horseback Riding Facility"
         },
         "leisure/ice_rink": {
             "icon": "pitch",
@@ -7198,131 +7680,32 @@
             "name": "Water Works"
         },
         "man_made/works": {
+            "icon": "industrial",
+            "fields": [
+                "operator",
+                "address",
+                "building_area",
+                "product"
+            ],
             "geometry": [
                 "point",
                 "area"
             ],
             "terms": [
-                "car assembly plant",
-                "aluminium processing plant",
+                "assembly",
+                "build",
                 "brewery",
-                "furniture manufacture factory",
-                "oil refinery",
-                "plastic recycling"
+                "car",
+                "plant",
+                "plastic",
+                "processing",
+                "manufacture",
+                "refinery"
             ],
             "tags": {
                 "man_made": "works"
             },
-            "name": "Works"
-        },
-        "military/airfield": {
-            "icon": "airfield",
-            "geometry": [
-                "point",
-                "vertex",
-                "area"
-            ],
-            "terms": [],
-            "tags": {
-                "military": "airfield"
-            },
-            "name": "Airfield"
-        },
-        "military/barracks": {
-            "geometry": [
-                "point",
-                "vertex",
-                "area"
-            ],
-            "terms": [],
-            "tags": {
-                "military": "barracks"
-            },
-            "name": "Barracks"
-        },
-        "military/bunker": {
-            "geometry": [
-                "point",
-                "vertex",
-                "area"
-            ],
-            "terms": [],
-            "tags": {
-                "military": "bunker"
-            },
-            "name": "Bunker"
-        },
-        "military/checkpoint": {
-            "geometry": [
-                "point",
-                "vertex",
-                "area"
-            ],
-            "terms": [],
-            "tags": {
-                "military": "checkpoint"
-            },
-            "name": "Checkpoint"
-        },
-        "military/danger_area": {
-            "geometry": [
-                "point",
-                "vertex",
-                "area"
-            ],
-            "terms": [],
-            "tags": {
-                "military": "danger_area"
-            },
-            "name": "Danger Area"
-        },
-        "military/naval_base": {
-            "geometry": [
-                "point",
-                "vertex",
-                "area"
-            ],
-            "terms": [],
-            "tags": {
-                "military": "naval_base"
-            },
-            "name": "Naval Base"
-        },
-        "military/obstacle_course": {
-            "geometry": [
-                "point",
-                "vertex",
-                "area"
-            ],
-            "terms": [],
-            "tags": {
-                "military": "obstacle_course"
-            },
-            "name": "Obstacle Course"
-        },
-        "military/range": {
-            "geometry": [
-                "point",
-                "vertex",
-                "area"
-            ],
-            "terms": [],
-            "tags": {
-                "military": "range"
-            },
-            "name": "Military Range"
-        },
-        "military/training_area": {
-            "geometry": [
-                "point",
-                "vertex",
-                "area"
-            ],
-            "terms": [],
-            "tags": {
-                "military": "training_area"
-            },
-            "name": "Training area"
+            "name": "Factory"
         },
         "natural": {
             "fields": [
@@ -7338,15 +7721,27 @@
             },
             "name": "Natural"
         },
+        "natural/bare_rock": {
+            "geometry": [
+                "area"
+            ],
+            "tags": {
+                "natural": "bare_rock"
+            },
+            "terms": [
+                "rock"
+            ],
+            "name": "Bare Rock"
+        },
         "natural/bay": {
             "geometry": [
                 "point",
                 "area"
             ],
-            "terms": [],
             "tags": {
                 "natural": "bay"
             },
+            "terms": [],
             "name": "Bay"
         },
         "natural/beach": {
@@ -7357,10 +7752,12 @@
                 "point",
                 "area"
             ],
-            "terms": [],
             "tags": {
                 "natural": "beach"
             },
+            "terms": [
+                "shore"
+            ],
             "name": "Beach"
         },
         "natural/cave_entrance": {
@@ -7372,6 +7769,9 @@
                 "fee",
                 "access_simple"
             ],
+            "tags": {
+                "natural": "cave_entrance"
+            },
             "terms": [
                 "cavern",
                 "hollow",
@@ -7379,9 +7779,6 @@
                 "shelter",
                 "cavity"
             ],
-            "tags": {
-                "natural": "cave_entrance"
-            },
             "name": "Cave Entrance"
         },
         "natural/cliff": {
@@ -7391,63 +7788,67 @@
                 "line",
                 "area"
             ],
-            "terms": [],
             "tags": {
                 "natural": "cliff"
             },
+            "terms": [
+                "escarpment"
+            ],
             "name": "Cliff"
         },
         "natural/coastline": {
             "geometry": [
                 "line"
             ],
-            "terms": [
-                "shore"
-            ],
             "tags": {
                 "natural": "coastline"
             },
+            "terms": [
+                "shore"
+            ],
             "name": "Coastline"
         },
         "natural/fell": {
             "geometry": [
                 "area"
             ],
-            "terms": [],
             "tags": {
                 "natural": "fell"
             },
+            "terms": [],
             "name": "Fell"
         },
         "natural/glacier": {
             "geometry": [
                 "area"
             ],
-            "terms": [],
             "tags": {
                 "natural": "glacier"
             },
+            "terms": [],
             "name": "Glacier"
         },
         "natural/grassland": {
             "geometry": [
-                "point",
                 "area"
             ],
-            "terms": [],
             "tags": {
                 "natural": "grassland"
             },
+            "terms": [
+                "prairie",
+                "savanna"
+            ],
             "name": "Grassland"
         },
         "natural/heath": {
             "geometry": [
                 "area"
             ],
-            "terms": [],
             "tags": {
                 "natural": "heath"
             },
+            "terms": [],
             "name": "Heath"
         },
         "natural/peak": {
@@ -7479,6 +7880,18 @@
             ],
             "name": "Peak"
         },
+        "natural/ridge": {
+            "geometry": [
+                "line"
+            ],
+            "tags": {
+                "natural": "ridge"
+            },
+            "terms": [
+                "crest"
+            ],
+            "name": "Ridge"
+        },
         "natural/saddle": {
             "icon": "triangle-stroked",
             "fields": [
@@ -7497,6 +7910,18 @@
                 "top"
             ],
             "name": "Saddle"
+        },
+        "natural/sand": {
+            "geometry": [
+                "area"
+            ],
+            "tags": {
+                "natural": "sand"
+            },
+            "terms": [
+                "desert"
+            ],
+            "name": "Sand"
         },
         "natural/scree": {
             "geometry": [
@@ -7528,43 +7953,43 @@
                 "point",
                 "vertex"
             ],
-            "terms": [],
             "tags": {
                 "natural": "spring"
             },
+            "terms": [],
             "name": "Spring"
         },
         "natural/tree_row": {
+            "icon": "park",
             "fields": [
                 "leaf_type",
                 "leaf_cycle",
                 "denotation"
             ],
-            "icon": "park",
             "geometry": [
                 "line"
             ],
-            "terms": [],
             "tags": {
                 "natural": "tree_row"
             },
+            "terms": [],
             "name": "Tree row"
         },
         "natural/tree": {
+            "icon": "park",
             "fields": [
                 "leaf_type_singular",
                 "leaf_cycle_singular",
                 "denotation"
             ],
-            "icon": "park",
             "geometry": [
                 "point",
                 "vertex"
             ],
-            "terms": [],
             "tags": {
                 "natural": "tree"
             },
+            "terms": [],
             "name": "Tree"
         },
         "natural/volcano": {
@@ -7586,6 +8011,7 @@
             "name": "Volcano"
         },
         "natural/water": {
+            "icon": "water",
             "fields": [
                 "water"
             ],
@@ -7595,10 +8021,10 @@
             "tags": {
                 "natural": "water"
             },
-            "icon": "water",
             "name": "Water"
         },
         "natural/water/lake": {
+            "icon": "water",
             "geometry": [
                 "area"
             ],
@@ -7611,10 +8037,10 @@
                 "loch",
                 "mere"
             ],
-            "icon": "water",
             "name": "Lake"
         },
         "natural/water/pond": {
+            "icon": "water",
             "geometry": [
                 "area"
             ],
@@ -7629,10 +8055,10 @@
                 "pool",
                 "mere"
             ],
-            "icon": "water",
             "name": "Pond"
         },
         "natural/water/reservoir": {
+            "icon": "water",
             "geometry": [
                 "area"
             ],
@@ -7640,7 +8066,6 @@
                 "natural": "water",
                 "water": "reservoir"
             },
-            "icon": "water",
             "name": "Reservoir"
         },
         "natural/wetland": {
@@ -7787,6 +8212,29 @@
             },
             "terms": [],
             "name": "Company Office"
+        },
+        "office/coworking": {
+            "icon": "commercial",
+            "fields": [
+                "address",
+                "building_area",
+                "opening_hours",
+                "internet_access",
+                "internet_access/fee",
+                "internet_access/ssid"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "terms": [
+                "coworking",
+                "office"
+            ],
+            "tags": {
+                "office": "coworking"
+            },
+            "name": "Coworking Space"
         },
         "office/educational_institution": {
             "icon": "commercial",
@@ -8211,6 +8659,16 @@
             ],
             "name": "Neighborhood"
         },
+        "place/square": {
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "tags": {
+                "place": "square"
+            },
+            "name": "Square"
+        },
         "place/suburb": {
             "icon": "triangle-stroked",
             "fields": [
@@ -8299,24 +8757,54 @@
             "name": "Power Generator"
         },
         "power/line": {
+            "icon": "power-line",
             "geometry": [
                 "line"
             ],
             "tags": {
                 "power": "line"
             },
-            "name": "Power Line",
-            "icon": "power-line"
+            "name": "Power Line"
         },
         "power/minor_line": {
+            "icon": "power-line",
             "geometry": [
                 "line"
             ],
             "tags": {
                 "power": "minor_line"
             },
-            "name": "Minor Power Line",
-            "icon": "power-line"
+            "name": "Minor Power Line"
+        },
+        "power/plant": {
+            "icon": "industrial",
+            "fields": [
+                "operator"
+            ],
+            "geometry": [
+                "area"
+            ],
+            "tags": {
+                "power": "plant"
+            },
+            "addTags": {
+                "power": "plant",
+                "landuse": "industrial"
+            },
+            "removeTags": {
+                "power": "plant",
+                "landuse": "industrial"
+            },
+            "terms": [
+                "coal",
+                "gas",
+                "generat*",
+                "hydro",
+                "nuclear",
+                "power",
+                "station"
+            ],
+            "name": "Power Station Grounds"
         },
         "power/pole": {
             "geometry": [
@@ -12177,6 +12665,23 @@
                 "waterway": "water_point"
             },
             "name": "Marine Drinking Water"
+        },
+        "waterway/waterfall": {
+            "icon": "water",
+            "fields": [
+                "height",
+                "width"
+            ],
+            "geometry": [
+                "vertex"
+            ],
+            "terms": [
+                "fall"
+            ],
+            "tags": {
+                "waterway": "waterfall"
+            },
+            "name": "Waterfall"
         },
         "waterway/weir": {
             "icon": "dam",

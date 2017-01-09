@@ -13,7 +13,6 @@ import { uiTagReference } from './tag_reference';
 import { uiPreset } from './preset';
 import { utilRebind } from '../util/rebind';
 
-
 export function uiEntityEditor(context) {
     var dispatch = d3.dispatch('choose'),
         state = 'select',

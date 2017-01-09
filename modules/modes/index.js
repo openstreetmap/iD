@@ -6,6 +6,6 @@ export { modeDragNode } from './drag_node';
 export { modeDrawArea } from './draw_area';
 export { modeDrawLine } from './draw_line';
 export { modeMove } from './move';
-export { modeRotateWay } from './rotate_way';
+export { modeRotate } from './rotate';
 export { modeSave } from './save';
 export { modeSelect } from './select';

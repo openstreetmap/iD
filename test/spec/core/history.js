@@ -51,6 +51,7 @@ describe('iD.History', function () {
             history.on('change', spy);
             var difference = history.perform(action);
             expect(spy).to.have.been.calledWith(difference);
+            expect(spy.callCount).to.eql(1);
         });
 
         it('performs multiple actions', function () {
@@ -60,6 +61,17 @@ describe('iD.History', function () {
             expect(action1).to.have.been.called;
             expect(action2).to.have.been.called;
             expect(history.undoAnnotation()).to.equal('annotation');
+        });
+
+        it('performs transitionable actions in a transition', function (done) {
+            var action1 = function() { return iD.Graph(); };
+            action1.transitionable = true;
+            history.on('change', spy);
+            history.perform(action1);
+            window.setTimeout(function() {
+                expect(spy.callCount).to.be.above(2);
+                done();
+            }, 300);
         });
     });
 

@@ -296,25 +296,34 @@ path.fill.tag-landuse-commercial {
     background-color: rgba(214, 136, 26, 0.3);
 }
 
-path.stroke.tag-landuse-industrial {
+path.stroke.tag-landuse-industrial,
+path.stroke.tag-power-plant {
     stroke: rgb(228, 164, 245);
 }
-path.fill.tag-landuse-industrial {
+path.fill.tag-landuse-industrial,
+path.fill.tag-power-plant {
     stroke: rgba(228, 164, 245, 0.3);
     fill: rgba(228, 164, 245, 0.3);
 }
-.preset-icon-fill-area.tag-landuse-industrial {
+.preset-icon-fill-area.tag-landuse-industrial,
+.preset-icon-fill-area.tag-power-plant {
     border-color: rgb(228, 164, 245);
     background-color: rgba(228, 164, 245, 0.3);
 }
 
+path.stroke.tag-natural-bare_rock,
+path.stroke.tag-natural-scree,
 path.stroke.tag-landuse-quarry {
     stroke: rgb(166, 149, 123);
 }
+path.fill.tag-natural-bare_rock,
+path.fill.tag-natural-scree,
 path.fill.tag-landuse-quarry {
     stroke: rgba(166, 149, 123, 0.2);
     fill: rgba(166, 149, 123, 0.2);
 }
+.preset-icon-fill-area.tag-natural-bare_rock,
+.preset-icon-fill-area.tag-natural-scree,
 .preset-icon-fill-area.tag-landuse-quarry {
     border-color: rgb(166, 149, 123);
     background-color: rgba(166, 149, 123, 0.2);
@@ -343,13 +352,16 @@ path.stroke.tag-landuse.tag-status {
     background-color: rgba(196, 189, 25, 0.2);
 }
 
+path.stroke.tag-military,
 path.stroke.tag-landuse-military {
     stroke: rgb(214, 136, 26);
 }
+path.fill.tag-military,
 path.fill.tag-landuse-military {
     stroke: rgba(214, 136, 26, 0.2);
     fill: rgba(214, 136, 26, 0.2);
 }
+.preset-icon-fill-area.tag-military,
 .preset-icon-fill-area.tag-landuse-military {
     border-color: rgb(214, 136, 26);
     background-color: rgba(214, 136, 26, 0.2);
@@ -377,13 +389,16 @@ path.stroke.tag-landuse-meadow {
     background-color: rgba(182, 225, 153, 0.2);
 }
 
-.pattern-color-beach {
+.pattern-color-beach,
+.pattern-color-sand {
     fill: rgba(255, 255, 126, 0.2);
 }
-path.stroke.tag-natural-beach {
+path.stroke.tag-natural-beach,
+path.stroke.tag-natural-sand {
     stroke: rgb(255, 255, 126);
 }
-.preset-icon-fill-area.tag-natural-beach {
+.preset-icon-fill-area.tag-natural-beach,
+.preset-icon-fill-area.tag-natural-sand {
     border-color: rgb(255, 255, 126);
     background-color: rgba(255, 255, 126, 0.2);
 }

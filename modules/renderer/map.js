@@ -17,6 +17,7 @@ import {
 } from '../svg/index';
 
 import { geoExtent } from '../geo/index';
+import { modeSelect } from '../modes/select';
 
 import {
     utilFastMouse,
@@ -44,9 +45,9 @@ export function rendererMap(context) {
         drawAreas = svgAreas(projection, context),
         drawMidpoints = svgMidpoints(projection, context),
         drawLabels = svgLabels(projection, context),
-        supersurface,
-        wrapper,
-        surface,
+        supersurface = d3.select(null),
+        wrapper = d3.select(null),
+        surface = d3.select(null),
         mouse,
         mousemove;
 
@@ -65,14 +66,31 @@ export function rendererMap(context) {
 
         context
             .on('change.map', immediateRedraw);
+
         context.connection()
             .on('change.map', immediateRedraw);
+
         context.history()
-            .on('change.map', immediateRedraw);
+            .on('change.map', immediateRedraw)
+            .on('undone.context redone.context', function(stack) {
+                var followSelected = false;
+                if (Array.isArray(stack.selectedIDs)) {
+                    followSelected = (stack.selectedIDs.length === 1 && stack.selectedIDs[0][0] === 'n');
+                    context.enter(
+                        modeSelect(context, stack.selectedIDs).suppressMenu(true).follow(followSelected)
+                    );
+                }
+                if (!followSelected && stack.transform) {
+                    map.transformEase(stack.transform);
+                }
+            });
+
         context.background()
             .on('change.map', immediateRedraw);
+
         context.features()
             .on('redraw.map', immediateRedraw);
+
         drawLayers
             .on('change.map', function() {
                 context.background().updateImagery();
@@ -300,7 +318,7 @@ export function rendererMap(context) {
 
 
     function redraw(difference, extent) {
-        if (!surface || !redrawEnabled) return;
+        if (surface.empty() || !redrawEnabled) return;
 
         // If we are in the middle of a zoom/pan, we can't do differenced redraws.
         // It would result in artifacts where differenced entities are redrawn with
@@ -387,6 +405,26 @@ export function rendererMap(context) {
         redrawEnabled = _;
         return map;
     };
+
+
+    function setTransform(t2, duration, force) {
+        var t = projection.transform();
+        if (!force && t2.k === t.k && t2.x === t.x && t2.y === t.y) {
+            return false;
+        }
+
+        if (duration) {
+            _selection
+                .transition()
+                .duration(duration)
+                .on('start', function() { map.startEase(); })
+                .call(zoom.transform, d3.zoomIdentity.translate(t2.x, t2.y).scale(t2.k));
+        } else {
+            projection.transform(t2);
+            transformStart = t2;
+            _selection.call(zoom.transform, transformStart);
+        }
+    }
 
 
     function setZoom(z2, force, duration) {
@@ -578,6 +616,13 @@ export function rendererMap(context) {
     map.zoomEase = function(z2, duration) {
         duration = duration || 250;
         setZoom(z2, false, duration);
+        return map;
+    };
+
+
+    map.transformEase = function(t2, duration) {
+        duration = duration || 250;
+        setTransform(t2, duration, false);
         return map;
     };
 

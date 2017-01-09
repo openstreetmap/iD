@@ -1,4 +1,5 @@
 {
+    "icon": "water",
     "geometry": [
         "area"
     ],
@@ -11,6 +12,5 @@
         "loch",
         "mere"
     ],
-    "icon": "water",
     "name": "Lake"
 }

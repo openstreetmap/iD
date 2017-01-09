@@ -8,7 +8,6 @@ import { osmEntity, osmNode, osmRelation, osmWay } from '../osm/index';
 import { utilDetect } from '../util/detect';
 import { utilRebind } from '../util/rebind';
 
-
 var dispatch = d3.dispatch('authLoading', 'authDone', 'change', 'loading', 'loaded'),
     useHttps = window.location.protocol === 'https:',
     protocol = useHttps ? 'https:' : 'http:',
@@ -70,6 +69,7 @@ function getTags(obj) {
         var attrs = elems[i].attributes;
         tags[attrs.k.value] = attrs.v.value;
     }
+    
     return tags;
 }
 

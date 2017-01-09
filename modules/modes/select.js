@@ -71,6 +71,23 @@ export function modeSelect(context, selectedIDs) {
     }
 
 
+    function checkSelectedIDs() {
+        var ids = [];
+        if (Array.isArray(selectedIDs)) {
+            ids = selectedIDs.filter(function(id) {
+                return context.hasEntity(id);
+            });
+        }
+
+        if (ids.length) {
+            selectedIDs = ids;
+        } else {
+            context.enter(modeBrowse(context));
+        }
+        return !!ids.length;
+    }
+
+
     // find the common parent ways for nextVertex, previousVertex
     function commonParents() {
         var graph = context.graph(),
@@ -100,7 +117,7 @@ export function modeSelect(context, selectedIDs) {
 
     function singularParent() {
         var parents = commonParents();
-        if (!parents) {
+        if (!parents || parents.length === 0) {
             relatedParent = null;
             return null;
         }
@@ -171,6 +188,8 @@ export function modeSelect(context, selectedIDs) {
 
 
     mode.reselect = function() {
+        if (!checkSelectedIDs()) return;
+
         var surfaceNode = context.surface().node();
         if (surfaceNode.focus) {   // FF doesn't support it
             surfaceNode.focus();
@@ -206,10 +225,7 @@ export function modeSelect(context, selectedIDs) {
 
         function update() {
             closeMenu();
-            if (_.some(selectedIDs, function(id) { return !context.hasEntity(id); })) {
-                // Exit mode if selected entity gets undone
-                context.enter(modeBrowse(context));
-            }
+            checkSelectedIDs();
         }
 
 
@@ -219,15 +235,20 @@ export function modeSelect(context, selectedIDs) {
 
             if (datum instanceof osmWay && !target.classed('fill')) {
                 var choice = geoChooseEdge(context.childNodes(datum), context.mouse(), context.projection),
-                    node = osmNode();
-
-                var prev = datum.nodes[choice.index - 1],
+                    prev = datum.nodes[choice.index - 1],
                     next = datum.nodes[choice.index];
 
                 context.perform(
-                    actionAddMidpoint({loc: choice.loc, edge: [prev, next]}, node),
+                    actionAddMidpoint({loc: choice.loc, edge: [prev, next]}, osmNode()),
                     t('operations.add.annotation.vertex')
                 );
+
+                d3.event.preventDefault();
+                d3.event.stopPropagation();
+            } else if (datum.type === 'midpoint') {
+                context.perform(
+                    actionAddMidpoint({loc: datum.loc, edge: datum.edge}, osmNode()),
+                    t('operations.add.annotation.vertex'));
 
                 d3.event.preventDefault();
                 d3.event.stopPropagation();
@@ -236,6 +257,8 @@ export function modeSelect(context, selectedIDs) {
 
 
         function selectElements(drawn) {
+            if (!checkSelectedIDs()) return;
+
             var surface = context.surface(),
                 entity = singular();
 
@@ -283,7 +306,7 @@ export function modeSelect(context, selectedIDs) {
             if (parent) {
                 var way = context.entity(parent);
                 context.enter(
-                    modeSelect(context, [way.first()]).follow(true)
+                    modeSelect(context, [way.first()]).follow(true).suppressMenu(true)
                 );
             }
         }
@@ -295,7 +318,7 @@ export function modeSelect(context, selectedIDs) {
             if (parent) {
                 var way = context.entity(parent);
                 context.enter(
-                    modeSelect(context, [way.last()]).follow(true)
+                    modeSelect(context, [way.last()]).follow(true).suppressMenu(true)
                 );
             }
         }
@@ -319,7 +342,7 @@ export function modeSelect(context, selectedIDs) {
 
             if (index !== -1) {
                 context.enter(
-                    modeSelect(context, [way.nodes[index]]).follow(true)
+                    modeSelect(context, [way.nodes[index]]).follow(true).suppressMenu(true)
                 );
             }
         }
@@ -343,7 +366,7 @@ export function modeSelect(context, selectedIDs) {
 
             if (index !== -1) {
                 context.enter(
-                    modeSelect(context, [way.nodes[index]]).follow(true)
+                    modeSelect(context, [way.nodes[index]]).follow(true).suppressMenu(true)
                 );
             }
         }
@@ -372,15 +395,23 @@ export function modeSelect(context, selectedIDs) {
         }
 
 
-        behaviors.forEach(function(behavior) {
-            context.install(behavior);
-        });
+        if (!checkSelectedIDs()) return;
 
         var operations = _.without(d3.values(Operations), Operations.operationDelete)
                 .map(function(o) { return o(selectedIDs, context); })
                 .filter(function(o) { return o.available(); });
 
         operations.unshift(Operations.operationDelete(selectedIDs, context));
+
+        operations.forEach(function(operation) {
+            if (operation.behavior) {
+                behaviors.push(operation.behavior);
+            }
+        });
+
+        behaviors.forEach(function(behavior) {
+            context.install(behavior);
+        });
 
         keybinding
             .on(['[','pgup'], previousVertex)
@@ -390,16 +421,6 @@ export function modeSelect(context, selectedIDs) {
             .on(['\\', 'pause'], nextParent)
             .on('⎋', esc, true)
             .on('space', toggleMenu);
-
-        operations.forEach(function(operation) {
-            operation.keys.forEach(function(key) {
-                keybinding.on(key, function() {
-                    if (!(context.inIntro() || operation.disabled())) {
-                        operation();
-                    }
-                });
-            });
-        });
 
         d3.select(document)
             .call(keybinding);

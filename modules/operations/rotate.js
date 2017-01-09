@@ -1,37 +1,47 @@
+import _ from 'lodash';
 import { t } from '../util/locale';
-import { modeRotateWay } from '../modes/index';
+import { behaviorOperation } from '../behavior/index';
+import { geoExtent } from '../geo/index';
+import { modeRotate } from '../modes/index';
 
 
 export function operationRotate(selectedIDs, context) {
-    var entityId = selectedIDs[0],
-        entity = context.entity(entityId),
-        extent = entity.extent(context.graph()),
-        geometry = context.geometry(entityId);
+    var multi = (selectedIDs.length === 1 ? 'single' : 'multiple'),
+        extent = selectedIDs.reduce(function(extent, id) {
+            return extent.extend(context.entity(id).extent(context.graph()));
+        }, geoExtent());
+
 
     var operation = function() {
-        context.enter(modeRotateWay(context, entityId));
+        context.enter(modeRotate(context, selectedIDs));
     };
 
 
     operation.available = function() {
-        if (selectedIDs.length !== 1 || entity.type !== 'way')
-            return false;
-        if (geometry === 'area')
-            return true;
-        if (entity.isClosed() &&
-            context.graph().parentRelations(entity).some(function(r) { return r.isMultipolygon(); }))
-            return true;
-        return false;
+        return _.some(selectedIDs, hasArea);
+
+        function hasArea(id) {
+            var entity = context.entity(id);
+            return (entity.type === 'way' && entity.isClosed()) ||
+                (entity.type ==='relation' && entity.isMultipolygon());
+        }
     };
 
 
     operation.disabled = function() {
-        if (extent.percentContainedIn(context.extent()) < 0.8) {
-            return 'too_large';
-        } else if (context.hasHiddenConnections(entityId)) {
-            return 'connected_to_hidden';
-        } else {
-            return false;
+        var reason;
+        if (extent.area() && extent.percentContainedIn(context.extent()) < 0.8) {
+            reason = 'too_large';
+        } else if (_.some(selectedIDs, context.hasHiddenConnections)) {
+            reason = 'connected_to_hidden';
+        } else if (_.some(selectedIDs, incompleteRelation)) {
+            reason = 'incomplete_relation';
+        }
+        return reason;
+
+        function incompleteRelation(id) {
+            var entity = context.entity(id);
+            return entity.type === 'relation' && !entity.isComplete(context.graph());
         }
     };
 
@@ -39,15 +49,15 @@ export function operationRotate(selectedIDs, context) {
     operation.tooltip = function() {
         var disable = operation.disabled();
         return disable ?
-            t('operations.rotate.' + disable) :
-            t('operations.rotate.description');
+            t('operations.rotate.' + disable + '.' + multi) :
+            t('operations.rotate.description.' + multi);
     };
 
 
     operation.id = 'rotate';
     operation.keys = [t('operations.rotate.key')];
     operation.title = t('operations.rotate.title');
-
+    operation.behavior = behaviorOperation(context).which(operation);
 
     return operation;
 }

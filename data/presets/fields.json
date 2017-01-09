@@ -79,17 +79,21 @@
         "address": {
             "type": "address",
             "keys": [
+                "addr:block_number",
                 "addr:city",
                 "addr:conscriptionnumber",
+                "addr:county",
                 "addr:country",
                 "addr:district",
                 "addr:floor",
                 "addr:hamlet",
                 "addr:housename",
                 "addr:housenumber",
+                "addr:neighbourhood",
                 "addr:place",
                 "addr:postcode",
                 "addr:province",
+                "addr:quarter",
                 "addr:state",
                 "addr:street",
                 "addr:subdistrict",
@@ -103,17 +107,21 @@
             "label": "Address",
             "strings": {
                 "placeholders": {
+                    "block_number": "Block number",
                     "city": "City",
                     "conscriptionnumber": "123",
+                    "county": "County",
                     "country": "Country",
                     "district": "District",
                     "floor": "Floor",
                     "hamlet": "Hamlet",
                     "housename": "Housename",
                     "housenumber": "123",
+                    "neighbourhood": "Neighbourhood",
                     "place": "Place",
                     "postcode": "Postcode",
                     "province": "Province",
+                    "quarter": "Quarter",
                     "state": "State",
                     "street": "Street",
                     "subdistrict": "Subdistrict",
@@ -223,6 +231,28 @@
             "type": "typeCombo",
             "label": "Type"
         },
+        "bath/open_air": {
+            "key": "bath:open_air",
+            "label": "Open Air",
+            "type": "check"
+        },
+        "bath/sand_bath": {
+            "key": "bath:sand_bath",
+            "label": "Sand Bath",
+            "type": "check"
+        },
+        "bath/type": {
+            "key": "bath:type",
+            "type": "combo",
+            "label": "Specialty",
+            "strings": {
+                "options": {
+                    "onsen": "Japanese Onsen",
+                    "foot_bath": "Foot Bath",
+                    "hot_spring": "Hot Spring"
+                }
+            }
+        },
         "beauty": {
             "key": "beauty",
             "type": "combo",
@@ -283,6 +313,11 @@
             "type": "combo",
             "label": "Building"
         },
+        "bunker_type": {
+            "key": "bunker_type",
+            "type": "combo",
+            "label": "Type"
+        },
         "camera/direction": {
             "key": "camera:direction",
             "type": "number",
@@ -336,6 +371,11 @@
                     "NNW": "North-northwest"
                 }
             }
+        },
+        "castle_type": {
+            "key": "castle_type",
+            "type": "combo",
+            "label": "Type"
         },
         "clock_direction": {
             "key": "direction",
@@ -572,6 +612,19 @@
             "type": "combo",
             "label": "Type"
         },
+        "fire_hydrant/position": {
+            "key": "fire_hydrant:position",
+            "type": "combo",
+            "label": "Position",
+            "strings": {
+                "options": {
+                    "lane": "Lane",
+                    "parking_lot": "Parking Lot",
+                    "sidewalk": "Sidewalk",
+                    "green": "Green"
+                }
+            }
+        },
         "fire_hydrant/type": {
             "key": "fire_hydrant:type",
             "type": "combo",
@@ -658,7 +711,7 @@
         "height": {
             "key": "height",
             "type": "number",
-            "label": "Height (meters)"
+            "label": "Height (Meters)"
         },
         "highway": {
             "key": "highway",
@@ -1161,6 +1214,11 @@
             "type": "typeCombo",
             "label": "Type"
         },
+        "plant": {
+            "key": "plant",
+            "type": "combo",
+            "label": "Plant"
+        },
         "population": {
             "key": "population",
             "type": "text",
@@ -1175,6 +1233,11 @@
             "key": "power",
             "type": "typeCombo",
             "label": "Type"
+        },
+        "product": {
+            "key": "product",
+            "type": "combo",
+            "label": "Product"
         },
         "railway": {
             "key": "railway",
@@ -1367,25 +1430,13 @@
         },
         "social_facility_for": {
             "key": "social_facility:for",
-            "type": "radio",
-            "label": "People served",
-            "placeholder": "Homeless, Disabled, Child, etc",
-            "options": [
-                "abused",
-                "child",
-                "disabled",
-                "diseased",
-                "drug_addicted",
-                "homeless",
-                "juvenile",
-                "mental_health",
-                "migrant",
-                "orphan",
-                "senior",
-                "underprivileged",
-                "unemployed",
-                "victim"
-            ]
+            "type": "combo",
+            "label": "People Served"
+        },
+        "social_facility": {
+            "key": "social_facility",
+            "type": "combo",
+            "label": "Type"
         },
         "source": {
             "key": "source",
@@ -1539,6 +1590,11 @@
                     "bucket": "Bucket"
                 }
             }
+        },
+        "toll": {
+            "key": "toll",
+            "type": "check",
+            "label": "Toll"
         },
         "tourism": {
             "key": "tourism",

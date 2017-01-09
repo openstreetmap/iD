@@ -1,4 +1,8 @@
 {
+    "fields": [
+        "castle_type",
+        "building_area"
+    ],
     "geometry": [
         "point",
         "area"

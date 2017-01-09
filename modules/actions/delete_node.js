@@ -31,10 +31,5 @@ export function actionDeleteNode(nodeId) {
     };
 
 
-    action.disabled = function() {
-        return false;
-    };
-
-
     return action;
 }
