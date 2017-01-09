@@ -79,17 +79,21 @@
         "address": {
             "type": "address",
             "keys": [
+                "addr:block_number",
                 "addr:city",
                 "addr:conscriptionnumber",
+                "addr:county",
                 "addr:country",
                 "addr:district",
                 "addr:floor",
                 "addr:hamlet",
                 "addr:housename",
                 "addr:housenumber",
+                "addr:neighbourhood",
                 "addr:place",
                 "addr:postcode",
                 "addr:province",
+                "addr:quarter",
                 "addr:state",
                 "addr:street",
                 "addr:subdistrict",
@@ -103,17 +107,21 @@
             "label": "Address",
             "strings": {
                 "placeholders": {
+                    "block_number": "Block number",
                     "city": "City",
                     "conscriptionnumber": "123",
+                    "county": "County",
                     "country": "Country",
                     "district": "District",
                     "floor": "Floor",
                     "hamlet": "Hamlet",
                     "housename": "Housename",
                     "housenumber": "123",
+                    "neighbourhood": "Neighbourhood",
                     "place": "Place",
                     "postcode": "Postcode",
                     "province": "Province",
+                    "quarter": "Quarter",
                     "state": "State",
                     "street": "Street",
                     "subdistrict": "Subdistrict",
@@ -364,6 +372,11 @@
                 }
             }
         },
+        "castle_type": {
+            "key": "castle_type",
+            "type": "combo",
+            "label": "Type"
+        },
         "clock_direction": {
             "key": "direction",
             "type": "combo",
@@ -598,6 +611,19 @@
             "key": "fence_type",
             "type": "combo",
             "label": "Type"
+        },
+        "fire_hydrant/position": {
+            "key": "fire_hydrant:position",
+            "type": "combo",
+            "label": "Position",
+            "strings": {
+                "options": {
+                    "lane": "Lane",
+                    "parking_lot": "Parking Lot",
+                    "sidewalk": "Sidewalk",
+                    "green": "Green"
+                }
+            }
         },
         "fire_hydrant/type": {
             "key": "fire_hydrant:type",
@@ -1404,25 +1430,13 @@
         },
         "social_facility_for": {
             "key": "social_facility:for",
-            "type": "radio",
-            "label": "People served",
-            "placeholder": "Homeless, Disabled, Child, etc",
-            "options": [
-                "abused",
-                "child",
-                "disabled",
-                "diseased",
-                "drug_addicted",
-                "homeless",
-                "juvenile",
-                "mental_health",
-                "migrant",
-                "orphan",
-                "senior",
-                "underprivileged",
-                "unemployed",
-                "victim"
-            ]
+            "type": "combo",
+            "label": "People Served"
+        },
+        "social_facility": {
+            "key": "social_facility",
+            "type": "combo",
+            "label": "Type"
         },
         "source": {
             "key": "source",
@@ -1576,6 +1590,11 @@
                     "bucket": "Bucket"
                 }
             }
+        },
+        "toll": {
+            "key": "toll",
+            "type": "check",
+            "label": "Toll"
         },
         "tourism": {
             "key": "tourism",

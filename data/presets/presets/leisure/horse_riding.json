@@ -1,0 +1,20 @@
+{
+    "fields": [
+        "access_simple",
+        "operator",
+        "address",
+        "building"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "equestrian",
+        "stable"
+    ],
+    "tags": {
+        "leisure": "horse_riding"
+    },
+    "name": "Horseback Riding Facility"
+}

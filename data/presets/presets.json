@@ -445,6 +445,26 @@
             },
             "name": "Airport terminal"
         },
+        "amenity/coworking_space": {
+            "icon": "commercial",
+            "fields": [
+                "address",
+                "building_area",
+                "opening_hours",
+                "internet_access",
+                "internet_access/fee",
+                "internet_access/ssid"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "tags": {
+                "office": "coworking"
+            },
+            "name": "Coworking Space",
+            "searchable": false
+        },
         "amenity/register_office": {
             "icon": "town-hall",
             "fields": [
@@ -1014,29 +1034,6 @@
                 "amenity": "courthouse"
             },
             "name": "Courthouse"
-        },
-        "amenity/coworking_space": {
-            "icon": "commercial",
-            "fields": [
-                "address",
-                "building_area",
-                "opening_hours",
-                "internet_access",
-                "internet_access/fee",
-                "internet_access/ssid"
-            ],
-            "geometry": [
-                "point",
-                "area"
-            ],
-            "terms": [
-                "coworking",
-                "office"
-            ],
-            "tags": {
-                "amenity": "coworking_space"
-            },
-            "name": "Coworking Space"
         },
         "amenity/crematorium": {
             "icon": "cemetery",
@@ -2109,9 +2106,10 @@
                 "operator",
                 "address",
                 "building_area",
+                "social_facility",
+                "social_facility_for",
                 "opening_hours",
-                "wheelchair",
-                "social_facility_for"
+                "wheelchair"
             ],
             "geometry": [
                 "point",
@@ -2128,8 +2126,9 @@
                 "operator",
                 "address",
                 "building_area",
-                "opening_hours",
-                "social_facility_for"
+                "social_facility",
+                "social_facility_for",
+                "opening_hours"
             ],
             "geometry": [
                 "point",
@@ -2147,9 +2146,10 @@
                 "operator",
                 "address",
                 "building_area",
+                "social_facility",
+                "social_facility_for",
                 "opening_hours",
-                "wheelchair",
-                "social_facility_for"
+                "wheelchair"
             ],
             "geometry": [
                 "point",
@@ -2172,9 +2172,10 @@
                 "operator",
                 "address",
                 "building_area",
+                "social_facility",
+                "social_facility_for",
                 "opening_hours",
                 "wheelchair",
-                "social_facility_for",
                 "internet_access",
                 "internet_access/fee",
                 "internet_access/ssid"
@@ -2729,6 +2730,21 @@
             },
             "name": "Bollard"
         },
+        "barrier/border_control": {
+            "icon": "roadblock",
+            "fields": [
+                "access",
+                "building_area"
+            ],
+            "geometry": [
+                "vertex",
+                "area"
+            ],
+            "tags": {
+                "barrier": "border_control"
+            },
+            "name": "Border Control"
+        },
         "barrier/cattle_grid": {
             "icon": "prison",
             "geometry": [
@@ -2876,10 +2892,12 @@
         "barrier/toll_booth": {
             "icon": "roadblock",
             "fields": [
-                "access"
+                "access",
+                "building_area"
             ],
             "geometry": [
-                "vertex"
+                "vertex",
+                "area"
             ],
             "tags": {
                 "barrier": "toll_booth"
@@ -4511,11 +4529,15 @@
         "emergency/fire_hydrant": {
             "icon": "fire-station",
             "fields": [
-                "fire_hydrant/type"
+                "fire_hydrant/type",
+                "fire_hydrant/position"
             ],
             "geometry": [
                 "point",
                 "vertex"
+            ],
+            "terms": [
+                "fire plug"
             ],
             "tags": {
                 "emergency": "fire_hydrant"
@@ -5013,6 +5035,7 @@
                 "lanes",
                 "surface",
                 "maxheight",
+                "toll",
                 "ref"
             ],
             "geometry": [
@@ -5021,7 +5044,16 @@
             "tags": {
                 "highway": "motorway"
             },
-            "terms": [],
+            "terms": [
+                "autobahn",
+                "expressway",
+                "freeway",
+                "highway",
+                "interstate",
+                "parkway",
+                "thruway",
+                "turnpike"
+            ],
             "name": "Motorway"
         },
         "highway/path": {
@@ -5492,12 +5524,12 @@
         "highway/track": {
             "icon": "highway-track",
             "fields": [
+                "tracktype",
                 "surface",
                 "width",
                 "structure",
                 "access",
                 "incline",
-                "tracktype",
                 "smoothness",
                 "mtb/scale",
                 "mtb/scale/uphill",
@@ -5605,6 +5637,7 @@
                 "lanes",
                 "surface",
                 "maxheight",
+                "toll",
                 "ref"
             ],
             "geometry": [
@@ -5699,6 +5732,10 @@
             "name": "Boundary Stone"
         },
         "historic/castle": {
+            "fields": [
+                "castle_type",
+                "building_area"
+            ],
             "geometry": [
                 "point",
                 "area"
@@ -6696,6 +6733,26 @@
                 "leisure": "golf_course"
             },
             "name": "Golf Course"
+        },
+        "leisure/horse_riding": {
+            "fields": [
+                "access_simple",
+                "operator",
+                "address",
+                "building"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "terms": [
+                "equestrian",
+                "stable"
+            ],
+            "tags": {
+                "leisure": "horse_riding"
+            },
+            "name": "Horseback Riding Facility"
         },
         "leisure/ice_rink": {
             "icon": "pitch",
@@ -8156,6 +8213,29 @@
             "terms": [],
             "name": "Company Office"
         },
+        "office/coworking": {
+            "icon": "commercial",
+            "fields": [
+                "address",
+                "building_area",
+                "opening_hours",
+                "internet_access",
+                "internet_access/fee",
+                "internet_access/ssid"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "terms": [
+                "coworking",
+                "office"
+            ],
+            "tags": {
+                "office": "coworking"
+            },
+            "name": "Coworking Space"
+        },
         "office/educational_institution": {
             "icon": "commercial",
             "fields": [
@@ -8578,6 +8658,16 @@
                 "neighbourhood"
             ],
             "name": "Neighborhood"
+        },
+        "place/square": {
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "tags": {
+                "place": "square"
+            },
+            "name": "Square"
         },
         "place/suburb": {
             "icon": "triangle-stroked",

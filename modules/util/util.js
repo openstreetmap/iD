@@ -2,6 +2,7 @@ import * as d3 from 'd3';
 import { t, textDirection } from './locale';
 import { utilDetect } from './detect';
 import { remove as removeDiacritics } from 'diacritics';
+import { fixArabicScriptTextForSvg } from './svg_paths_arabic_fix';
 
 
 export function utilTagText(entity) {
@@ -60,12 +61,27 @@ export function utilDisplayName(entity) {
     var localizedNameKey = 'name:' + utilDetect().locale.toLowerCase().split('-')[0],
         name = entity.tags[localizedNameKey] || entity.tags.name || '',
         network = entity.tags.cycle_network || entity.tags.network;
+
     if (!name && entity.tags.ref) {
         name = entity.tags.ref;
         if (network) {
             name = network + ' ' + name;
         }
     }
+
+    return name;
+}
+
+
+export function utilDisplayNameForPath(entity) {
+    var name = utilDisplayName(entity);
+    var isFirefox = utilDetect().browser.toLowerCase().indexOf('firefox') > -1;
+    var arabicRegex = /[\u0600-\u06FF]/g;
+
+    if (!isFirefox && name && arabicRegex.test(name)) {
+        name = fixArabicScriptTextForSvg(name);
+    }
+
     return name;
 }
 

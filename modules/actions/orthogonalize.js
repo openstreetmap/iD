@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import { actionDeleteNode } from './delete_node';
-import { geoEuclideanDistance } from '../geo/index';
+import { geoEuclideanDistance, geoInterp } from '../geo/index';
 
 /*
  * Based on https://github.com/openstreetmap/potlatch2/blob/master/net/systemeD/potlatch2/tools/Quadrilateralise.as
@@ -11,26 +11,30 @@ export function actionOrthogonalize(wayId, projection) {
         upperThreshold = Math.cos(threshold * Math.PI / 180);
 
 
-    var action = function(graph) {
+    var action = function(graph, t) {
+        if (t === null || !isFinite(t)) t = 1;
+        t = Math.min(Math.max(+t, 0), 1);
+
         var way = graph.entity(wayId),
             nodes = graph.childNodes(way),
             points = _.uniq(nodes).map(function(n) { return projection(n.loc); }),
             corner = {i: 0, dotp: 1},
             epsilon = 1e-4,
-            i, j, score, motions;
+            node, loc, score, motions, i, j;
 
-        if (nodes.length === 4) {
+        if (points.length === 3) {   // move only one vertex for right triangle
             for (i = 0; i < 1000; i++) {
                 motions = points.map(calcMotion);
-                points[corner.i] = addPoints(points[corner.i],motions[corner.i]);
+                points[corner.i] = addPoints(points[corner.i], motions[corner.i]);
                 score = corner.dotp;
                 if (score < epsilon) {
                     break;
                 }
             }
 
-            graph = graph.replace(graph.entity(nodes[corner.i].id)
-                .move(projection.invert(points[corner.i])));
+            node = graph.entity(nodes[corner.i].id);
+            loc = projection.invert(points[corner.i]);
+            graph = graph.replace(node.move(geoInterp(node.loc, loc, t)));
 
         } else {
             var best,
@@ -57,25 +61,25 @@ export function actionOrthogonalize(wayId, projection) {
             for (i = 0; i < points.length; i++) {
                 // only move the points that actually moved
                 if (originalPoints[i][0] !== points[i][0] || originalPoints[i][1] !== points[i][1]) {
-                    graph = graph.replace(graph.entity(nodes[i].id)
-                        .move(projection.invert(points[i])));
+                    loc = projection.invert(points[i]);
+                    node = graph.entity(nodes[i].id);
+                    graph = graph.replace(node.move(geoInterp(node.loc, loc, t)));
                 }
             }
 
             // remove empty nodes on straight sections
-            for (i = 0; i < points.length; i++) {
-                var node = nodes[i];
+            for (i = 0; t === 1 && i < points.length; i++) {
+                node = graph.entity(nodes[i].id);
 
                 if (graph.parentWays(node).length > 1 ||
                     graph.parentRelations(node).length ||
                     node.hasInterestingTags()) {
-
                     continue;
                 }
 
                 var dotp = normalizedDotProduct(i, points);
                 if (dotp < -1 + epsilon) {
-                    graph = actionDeleteNode(nodes[i].id)(graph);
+                    graph = actionDeleteNode(node.id)(graph);
                 }
             }
         }
@@ -180,6 +184,9 @@ export function actionOrthogonalize(wayId, projection) {
 
         return 'not_squarish';
     };
+
+
+    action.transitionable = true;
 
 
     return action;

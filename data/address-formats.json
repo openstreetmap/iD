@@ -38,6 +38,14 @@
         {
             "countryCodes": ["tw"],
             "format": [["postcode", "city", "district"], ["place", "street"], ["housenumber", "floor"]]
+        },
+        {
+            "countryCodes": ["jp"],
+            "format": [["postcode", "province", "county"], ["city", "suburb", "quarter"], ["neighbourhood", "block_number", "housenumber"]]
+        },
+        {
+            "countryCodes": ["tr"],
+            "format": [["neighbourhood"], ["street", "housenumber"], ["postcode", "district", "city"]]
         }
     ]
 }

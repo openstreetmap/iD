@@ -1,6 +1,7 @@
 import * as d3 from 'd3';
 import _ from 'lodash';
 import rbush from 'rbush';
+
 import {
     geoExtent,
     geoEuclideanDistance,
@@ -8,9 +9,15 @@ import {
     geoPolygonIntersectsPolygon,
     geoPathLength
 } from '../geo/index';
+
 import { osmEntity } from '../osm/index';
 import { utilDetect } from '../util/detect';
-import { utilDisplayName, utilEntitySelector } from '../util/index';
+
+import {
+    utilDisplayName,
+    utilDisplayNameForPath,
+    utilEntitySelector
+} from '../util/index';
 
 
 export function svgLabels(projection, context) {
@@ -134,7 +141,7 @@ export function svgLabels(projection, context) {
             .data(entities, osmEntity.key)
             .attr('startOffset', '50%')
             .attr('xlink:href', function(d) { return '#labelpath-' + d.id; })
-            .text(utilDisplayName);
+            .text(utilDisplayNameForPath);
     }
 
 
@@ -313,9 +320,11 @@ export function svgLabels(projection, context) {
                 entity = labelable[k][i];
                 geometry = entity.geometry(graph);
 
-                var name = utilDisplayName(entity),
+                var getName = (geometry === 'line') ? utilDisplayNameForPath : utilDisplayName,
+                    name = getName(entity),
                     width = name && textWidth(name, fontSize),
                     p;
+
                 if (geometry === 'point') {
                     p = getPointLabel(entity, width, fontSize, geometry);
                 } else if (geometry === 'vertex' && !lowZoom) {

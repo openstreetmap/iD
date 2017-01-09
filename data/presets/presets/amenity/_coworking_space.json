@@ -12,12 +12,9 @@
         "point",
         "area"
     ],
-    "terms": [
-        "coworking",
-        "office"
-    ],
     "tags": {
-        "amenity": "coworking_space"
+        "office": "coworking"
     },
-    "name": "Coworking Space"
+    "name": "Coworking Space",
+    "searchable": false
 }

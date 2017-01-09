@@ -9,7 +9,7 @@
         "area"
     ],
     "tags": {
-        "barrier": "toll_booth"
+        "barrier": "border_control"
     },
-    "name": "Toll Booth"
+    "name": "Border Control"
 }

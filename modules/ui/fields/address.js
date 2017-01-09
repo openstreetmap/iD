@@ -159,12 +159,13 @@ export function uiFieldAddress(field, context) {
             .style('width', function (d) { return d.width * 100 + '%'; });
 
         // Update
-        // setup dropdowns for common address tags
         var addrTags = [
-            'street', 'city', 'state', 'province', 'district',
-            'subdistrict', 'suburb', 'place', 'postcode'
+            'city', 'county', 'country', 'district', 'hamlet',
+            'neighbourhood', 'place', 'postcode', 'province',
+            'quarter', 'state', 'street', 'subdistrict', 'suburb'
         ];
 
+        // If fields exist for any of these tags, create dropdowns to pick nearby values..
         addrTags.forEach(function(tag) {
             var nearValues = (tag === 'street') ? getNearStreets
                     : (tag === 'city') ? getNearCities

@@ -27,7 +27,9 @@ export function behaviorSelect(context) {
             lasso = d3.select('#surface .lasso').node(),
             mode = context.mode();
 
-        if (!(datum instanceof osmEntity)) {
+        if (datum.type === 'midpoint') {
+            // do nothing
+        } else if (!(datum instanceof osmEntity)) {
             if (!d3.event.shiftKey && !lasso && mode.id !== 'browse')
                 context.enter(modeBrowse(context));
 

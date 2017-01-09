@@ -6,6 +6,7 @@ import {
 import {
     geoEuclideanDistance,
     geoExtent,
+    geoInterp,
     geoRotate
 } from '../geo';
 
@@ -52,7 +53,10 @@ export function actionReflect(reflectIds, projection) {
     }
 
 
-    var action = function(graph) {
+    var action = function(graph, t) {
+        if (t === null || !isFinite(t)) t = 1;
+        t = Math.min(Math.max(+t, 0), 1);
+
         var nodes = utilGetAllNodes(reflectIds, graph),
             ssr = getSmallestSurroundingRectangle(graph, nodes);
 
@@ -87,7 +91,8 @@ export function actionReflect(reflectIds, projection) {
                 a * (c[0] - p[0]) + b * (c[1] - p[1]) + p[0],
                 b * (c[0] - p[0]) - a * (c[1] - p[1]) + p[1]
             ];
-            node = node.move(projection.invert(c2));
+            var loc2 = projection.invert(c2);
+            node = node.move(geoInterp(node.loc, loc2, t));
             graph = graph.replace(node);
         }
 
@@ -100,6 +105,9 @@ export function actionReflect(reflectIds, projection) {
         useLongAxis = _;
         return action;
     };
+
+
+    action.transitionable = true;
 
 
     return action;
