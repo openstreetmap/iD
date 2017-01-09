@@ -122,7 +122,7 @@ _.extend(osmWay.prototype, {
 
 
     isClosed: function() {
-        return this.nodes.length > 0 && this.first() === this.last();
+        return this.nodes.length > 1 && this.first() === this.last();
     },
 
 
@@ -286,8 +286,10 @@ _.extend(osmWay.prototype, {
 
     // Replaces each occurrence of node id needle with replacement.
     // Consecutive duplicates are eliminated including existing ones.
+    // Circularity is preserved.
     replaceNode: function(needle, replacement) {
-        var nodes = this.nodes.slice();
+        var nodes = this.nodes.slice(),
+            isClosed = this.isClosed();
 
         for (var i = 0; i < nodes.length; i++) {
             if (nodes[i] === needle) {
@@ -296,7 +298,12 @@ _.extend(osmWay.prototype, {
         }
 
         nodes = nodes.filter(noRepeatNodes);
-        // checkCircular(this, nodes);
+
+        // If the way was closed before, append a connector node to keep it closed..
+        if (isClosed && (nodes.length === 1 || nodes[0] !== nodes[nodes.length - 1])) {
+            nodes.push(nodes[0]);
+        }
+
         return this.update({nodes: nodes});
     },
 
@@ -305,12 +312,18 @@ _.extend(osmWay.prototype, {
     // Consecutive duplicates are eliminated including existing ones.
     // Circularity is preserved.
     removeNode: function(id) {
-        var nodes = this.nodes.slice();
+        var nodes = this.nodes.slice(),
+            isClosed = this.isClosed();
 
         nodes = nodes.filter(function(node, i, arr) {
             return node !== id && noRepeatNodes(node, i, arr);
         });
-        // checkCircular(this, nodes);
+
+        // If the way was closed before, append a connector node to keep it closed..
+        if (isClosed && (nodes.length === 1 || nodes[0] !== nodes[nodes.length - 1])) {
+            nodes.push(nodes[0]);
+        }
+
         return this.update({nodes: nodes});
     },
 
@@ -384,11 +397,4 @@ _.extend(osmWay.prototype, {
 // Filter function to eliminate consecutive duplicates.
 function noRepeatNodes(node, i, arr) {
     return i === 0 || node !== arr[i - 1];
-}
-
-// If the nodelist was circular before, keep it circular.
-function keepCircular(nodes) {
-    if ((nodes.length === 1 || nodes[0] !== nodes[nodes.length - 1])) {
-        nodes.push(nodes[0]);
-    }
 }

@@ -127,16 +127,24 @@ describe('iD.osmWay', function() {
     });
 
     describe('#isClosed', function() {
-        it('returns false when the way has no nodes', function() {
-            expect(iD.Way().isClosed()).to.equal(false);
+        it('returns false when the way contains no nodes', function() {
+            expect(iD.Way().isClosed()).to.be.false;
+        });
+
+        it('returns false when the way contains a single node', function() {
+            expect(iD.Way({ nodes: 'a'.split('') }).isClosed()).to.be.false;
         });
 
         it('returns false when the way ends are not equal', function() {
-            expect(iD.Way({nodes: ['n1', 'n2']}).isClosed()).to.equal(false);
+            expect(iD.Way({ nodes: 'abc'.split('') }).isClosed()).to.be.false;
         });
 
         it('returns true when the way ends are equal', function() {
-            expect(iD.Way({nodes: ['n1', 'n2', 'n1']}).isClosed()).to.equal(true);
+            expect(iD.Way({ nodes: 'aba'.split('') }).isClosed()).to.be.true;
+        });
+
+        it('returns true when the way contains two of the same node', function() {
+            expect(iD.Way({ nodes: 'aa'.split('') }).isClosed()).to.be.true;
         });
     });
 
@@ -697,39 +705,62 @@ describe('iD.osmWay', function() {
 
 
     describe('#replaceNode', function () {
-        it('replaces the node', function () {
-            var w = iD.Way({nodes: ['a']});
-            expect(w.replaceNode('a','b').nodes).to.eql(['b']);
-            w = iD.Way({nodes: ['a', 'b', 'c']});
-            expect(w.replaceNode('b', 'd').nodes).to.eql(['a', 'd', 'c']);
+        it('replaces a node', function () {
+            var w1 = iD.Way({ nodes: 'a'.split('') });
+            expect(w1.replaceNode('a','b').nodes.join('')).to.eql('b', 'single replace, single node');
+            var w2 = iD.Way({ nodes: 'abc'.split('') });
+            expect(w2.replaceNode('b','d').nodes.join('')).to.eql('adc', 'single replace, linear');
+            var w2 = iD.Way({ nodes: 'abca'.split('') });
+            expect(w2.replaceNode('b','d').nodes.join('')).to.eql('adca', 'single replace, circular');
         });
 
-        it('prevents duplicate consecutive nodes', function () {
-            var w = iD.Way({nodes: ['a', 'b', 'c', 'd','e']});
-            expect(w.replaceNode('c','b').nodes).to.eql(['a', 'b', 'd','e']);
-            w = iD.Way({nodes: ['a', 'b', 'c', 'd','e']});
-            expect(w.replaceNode('c','d').nodes).to.eql(['a', 'b', 'd','e']);
-            w = iD.Way({nodes: ['a', 'b', 'c', 'b','e']});
-            expect(w.replaceNode('c','b').nodes).to.eql(['a', 'b','e']);
+        it('replaces multiply occurring nodes', function () {
+            var w1 = iD.Way({ nodes: 'abcb'.split('') });
+            expect(w1.replaceNode('b','d').nodes.join('')).to.eql('adcd', 'multiple replace, linear');
+            var w2 = iD.Way({ nodes: 'abca'.split('') });
+            expect(w2.replaceNode('a','d').nodes.join('')).to.eql('dbcd', 'multiple replace, circular');
+            var w3 = iD.Way({ nodes: 'aa'.split('') });
+            expect(w3.replaceNode('a','d').nodes.join('')).to.eql('dd', 'multiple replace, single node circular');
         });
 
-        it('preserves duplicate non-consecutive nodes', function () {
-            var w = iD.Way({nodes: ['a', 'b', 'c', 'b','e']});
-            expect(w.replaceNode('c','d').nodes).to.eql(['a', 'b', 'd', 'b','e']);
+        it('eliminates duplicate consecutive nodes when replacing along a linear way', function () {
+            var w1 = iD.Way({ nodes: 'abbcd'.split('') });
+            expect(w1.replaceNode('c','b').nodes.join('')).to.eql('abd', 'duplicate before');
+            var w2 = iD.Way({ nodes: 'abcdd'.split('') });
+            expect(w2.replaceNode('c','d').nodes.join('')).to.eql('abd', 'duplicate after');
+            var w3 = iD.Way({ nodes: 'abbcbb'.split('')});
+            expect(w3.replaceNode('c','b').nodes.join('')).to.eql('ab', 'duplicate before and after');
         });
 
-        it('replaces duplicate non-consecutive nodes', function () {
-            var w = iD.Way({nodes: ['a', 'b', 'c', 'b','e']});
-            expect(w.replaceNode('b','d').nodes).to.eql(['a', 'd', 'c', 'd','e']);
+        it('eliminates duplicate consecutive nodes when replacing internal nodes along a circular way', function () {
+            var w1 = iD.Way({ nodes: 'abbcda'.split('') });
+            expect(w1.replaceNode('c','b').nodes.join('')).to.eql('abda', 'duplicate before');
+            var w2 = iD.Way({ nodes: 'abcdda'.split('') });
+            expect(w2.replaceNode('c','d').nodes.join('')).to.eql('abda', 'duplicate after');
+            var w3 = iD.Way({ nodes: 'abbcbba'.split('')});
+            expect(w3.replaceNode('c','b').nodes.join('')).to.eql('aba', 'duplicate before and after');
         });
 
-        it('removes existing duplicate consecutive nodes', function () {
-            var w = iD.Way({nodes: ['a', 'b', 'b', 'd', 'b', 'e']});
-            expect(w.replaceNode('e','c').nodes).to.eql(['a', 'b', 'd', 'b','c']);
-            w = iD.Way({nodes: ['a', 'b', 'b', 'd', 'b', 'e']});
-            expect(w.replaceNode('d','c').nodes).to.eql(['a', 'b', 'c', 'b', 'e']);
-            w = iD.Way({nodes: ['a', 'b', 'b', 'c', 'b', 'e']});
-            expect(w.replaceNode('b','d').nodes).to.eql(['a', 'd', 'c', 'd', 'e']);
+        it('eliminates duplicate consecutive nodes when replacing adjacent to connecting nodes along a circular way', function () {
+            var w1 = iD.Way({ nodes: 'abcda'.split('') });
+            expect(w1.replaceNode('d','a').nodes.join('')).to.eql('abca', 'before single end connector');
+            var w2 = iD.Way({ nodes: 'abcda'.split('') });
+            expect(w2.replaceNode('b','a').nodes.join('')).to.eql('acda', 'after single beginning connector');
+            var w3 = iD.Way({ nodes: 'abcdaa'.split('') });
+            expect(w3.replaceNode('d','a').nodes.join('')).to.eql('abca', 'before duplicate end connector');
+            var w4 = iD.Way({ nodes: 'aabcda'.split('') });
+            expect(w4.replaceNode('b','a').nodes.join('')).to.eql('acda', 'after duplicate beginning connector');
+        });
+
+        it('eliminates duplicate consecutive nodes when replacing connecting nodes along a circular way', function () {
+            var w1 = iD.Way({ nodes: 'abcaa'.split('') });
+            expect(w1.replaceNode('a','d').nodes.join('')).to.eql('dbcd', 'duplicate end connector');
+            var w2 = iD.Way({ nodes: 'aabca'.split('') });
+            expect(w2.replaceNode('a','d').nodes.join('')).to.eql('dbcd', 'duplicate beginning connector');
+            var w3 = iD.Way({ nodes: 'aabcaa'.split('') });
+            expect(w3.replaceNode('a','d').nodes.join('')).to.eql('dbcd', 'duplicate beginning and end connectors');
+            var w4 = iD.Way({ nodes: 'aabaacaa'.split('') });
+            expect(w4.replaceNode('a','d').nodes.join('')).to.eql('dbdcd', 'duplicates multiple places');
         });
     });
 
