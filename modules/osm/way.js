@@ -206,17 +206,31 @@ _.extend(osmWay.prototype, {
             throw new RangeError('index ' + index + ' out of range 0..' + max);
         }
 
-        // Will this change the connecting node?  If so, pop the old connecting node(s).
-        if (isClosed && index === 0 && id !== this.first()) {
-            while (nodes.length > 1 && nodes[nodes.length - 1] === this.first()) {
-                nodes.pop();
+        // If this is a closed way, remove all connector nodes except the first one
+        // (there may be duplicates)
+        if (isClosed) {
+            var connector = this.first();
+
+            // leading connectors..
+            var i = 1;
+            while (i < nodes.length && nodes.length > 2 && nodes[i] === connector) {
+                nodes.splice(i, 1);
+                if (index > i) index--;
+            }
+
+            // trailing connectors..
+            i = nodes.length - 1;
+            while (i > 0 && nodes.length > 1 && nodes[i] === connector) {
+                nodes.splice(i, 1);
+                if (index > i) index--;
+                i = nodes.length - 1;
             }
         }
 
         nodes.splice(index, 0, id);
         nodes = nodes.filter(noRepeatNodes);
 
-        // If the way was closed before, add a connecting node to keep it closed..
+        // If the way was closed before, append a connector node to keep it closed..
         if (isClosed && (nodes.length === 1 || nodes[0] !== nodes[nodes.length - 1])) {
             nodes.push(nodes[0]);
         }
@@ -227,7 +241,7 @@ _.extend(osmWay.prototype, {
 
     // Replaces the node which is currently at position index with the given node (id).
     // Consecutive duplicates are eliminated including existing ones.
-    // Circularity is not preserved when updating a node.
+    // Circularity is preserved when updating a node.
     updateNode: function(id, index) {
         var nodes = this.nodes.slice(),
             isClosed = this.isClosed(),
@@ -237,8 +251,34 @@ _.extend(osmWay.prototype, {
             throw new RangeError('index ' + index + ' out of range 0..' + max);
         }
 
+        // If this is a closed way, remove all connector nodes except the first one
+        // (there may be duplicates)
+        if (isClosed) {
+            var connector = this.first();
+
+            // leading connectors..
+            var i = 1;
+            while (i < nodes.length && nodes.length > 2 && nodes[i] === connector) {
+                nodes.splice(i, 1);
+                if (index > i) index--;
+            }
+
+            // trailing connectors..
+            i = nodes.length - 1;
+            while (i > 0 && nodes.length > 1 && nodes[i] === connector) {
+                nodes.splice(i, 1);
+                if (index === i) index = 0;  // update leading connector instead
+                i = nodes.length - 1;
+            }
+        }
+
         nodes.splice(index, 1, id);
         nodes = nodes.filter(noRepeatNodes);
+
+        // If the way was closed before, append a connector node to keep it closed..
+        if (isClosed && (nodes.length === 1 || nodes[0] !== nodes[nodes.length - 1])) {
+            nodes.push(nodes[0]);
+        }
 
         return this.update({nodes: nodes});
     },
@@ -256,7 +296,7 @@ _.extend(osmWay.prototype, {
         }
 
         nodes = nodes.filter(noRepeatNodes);
-        checkCircular(this, nodes);
+        // checkCircular(this, nodes);
         return this.update({nodes: nodes});
     },
 
@@ -270,7 +310,7 @@ _.extend(osmWay.prototype, {
         nodes = nodes.filter(function(node, i, arr) {
             return node !== id && noRepeatNodes(node, i, arr);
         });
-        checkCircular(this, nodes);
+        // checkCircular(this, nodes);
         return this.update({nodes: nodes});
     },
 
