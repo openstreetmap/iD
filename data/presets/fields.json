@@ -1113,15 +1113,8 @@
         },
         "outdoor_seating": {
             "key": "outdoor_seating",
-            "type": "combo",
-            "label": "Outdoor Seating",
-            "placeholder": "Yes, No...",
-            "strings": {
-                "options": {
-                    "no": "No outdoor seating",
-                    "yes": "Outdoor seating is possible"
-                }
-            }
+            "type": "check",
+            "label": "Outdoor Seating"
         },
         "par": {
             "key": "par",
