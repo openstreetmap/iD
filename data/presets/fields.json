@@ -1105,7 +1105,7 @@
         },
         "outdoor_seating": {
             "key": "outdoor_seating",
-            "type": "combo",
+            "type": "check",
             "label": "Outdoor Seating"
         },
         "par": {
