@@ -7,8 +7,6 @@ import {
     behaviorSelect
 } from '../behavior/index';
 
-import { modeDragNode } from './index';
-
 
 export function modeBrowse(context) {
     var mode = {
@@ -22,8 +20,7 @@ export function modeBrowse(context) {
         behaviorPaste(context),
         behaviorHover(context).on('hover', context.ui().sidebar.hover),
         behaviorSelect(context),
-        behaviorLasso(context),
-        modeDragNode(context).behavior
+        behaviorLasso(context)
     ];
 
 
