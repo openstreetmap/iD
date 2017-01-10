@@ -188,6 +188,36 @@ _.extend(osmWay.prototype, {
     },
 
 
+    // If this way is not closed, append the beginning node to the end of the nodelist to close it.
+    close: function() {
+        if (this.isClosed() || !this.nodes.length) return this;
+
+        var nodes = this.nodes.slice();
+        nodes.push(nodes[0]);
+        nodes = nodes.filter(noRepeatNodes);
+        return this.update({ nodes: nodes });
+    },
+
+
+    // If this way is closed, remove any connector nodes from the end of the nodelist to unclose it.
+    unclose: function() {
+        if (!this.isClosed()) return this;
+
+        var nodes = this.nodes.slice(),
+            connector = this.first(),
+            i = nodes.length - 1;
+
+        // remove trailing connectors..
+        while (i > 0 && nodes.length > 1 && nodes[i] === connector) {
+            nodes.splice(i, 1);
+            i = nodes.length - 1;
+        }
+
+        nodes = nodes.filter(noRepeatNodes);
+        return this.update({ nodes: nodes });
+    },
+
+
     // Adds a node (id) in front of the node which is currently at position index.
     // If index is undefined, the node will be added to the end of the way for linear ways,
     //   or just before the final connecting node for circular ways.
@@ -207,7 +237,7 @@ _.extend(osmWay.prototype, {
         }
 
         // If this is a closed way, remove all connector nodes except the first one
-        // (there may be duplicates)
+        // (there may be duplicates) and adjust index if necessary..
         if (isClosed) {
             var connector = this.first();
 
@@ -252,7 +282,7 @@ _.extend(osmWay.prototype, {
         }
 
         // If this is a closed way, remove all connector nodes except the first one
-        // (there may be duplicates)
+        // (there may be duplicates) and adjust index if necessary..
         if (isClosed) {
             var connector = this.first();
 
@@ -316,7 +346,7 @@ _.extend(osmWay.prototype, {
             isClosed = this.isClosed();
 
         nodes = nodes
-            .filter(function(node, i, arr) { return node !== id })
+            .filter(function(node) { return node !== id; })
             .filter(noRepeatNodes);
 
         // If the way was closed before, append a connector node to keep it closed..
