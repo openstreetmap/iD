@@ -417,6 +417,72 @@ describe('iD.osmWay', function() {
         });
     });
 
+    describe('#close', function () {
+        it('returns self for empty way', function () {
+            var w = iD.Way();
+            expect(w.close()).to.deep.equal(w);
+        });
+
+        it('returns self for already closed way', function () {
+            var w1 = iD.Way({ nodes: 'aba'.split('') });
+            expect(w1.close()).to.deep.equal(w1);
+            var w2 = iD.Way({ nodes: 'aa'.split('') });
+            expect(w2.close()).to.deep.equal(w2);
+        });
+
+        it('closes a way', function () {
+            var w = iD.Way({ nodes: 'ab'.split('') });
+            expect(w.close().nodes.join('')).to.eql('aba');
+        });
+
+        it('eliminates duplicate consecutive nodes when closing a linear way', function () {
+            var w1 = iD.Way({ nodes: 'abb'.split('') });
+            expect(w1.close().nodes.join('')).to.eql('aba', 'duplicate at end');
+            var w2 = iD.Way({ nodes: 'abbc'.split('') });
+            expect(w2.close().nodes.join('')).to.eql('abca', 'duplicate in middle');
+            var w3 = iD.Way({ nodes: 'aabc'.split('') });
+            expect(w3.close().nodes.join('')).to.eql('abca', 'duplicate at beginning');
+            var w4 = iD.Way({ nodes: 'abbbcbb'.split('') });
+            expect(w4.close().nodes.join('')).to.eql('abcba', 'duplicates multiple places');
+        });
+    });
+
+    describe('#unclose', function () {
+        it('returns self for empty way', function () {
+            var w = iD.Way();
+            expect(w.unclose()).to.deep.equal(w);
+        });
+
+        it('returns self for already unclosed way', function () {
+            var w1 = iD.Way({ nodes: 'a'.split('') });
+            expect(w1.unclose()).to.deep.equal(w1);
+            var w2 = iD.Way({ nodes: 'ab'.split('') });
+            expect(w2.unclose()).to.deep.equal(w2);
+        });
+
+        it('uncloses a circular way', function () {
+            var w = iD.Way({ nodes: 'aba'.split('') });
+            expect(w.unclose().nodes.join('')).to.eql('ab');
+        });
+
+        it('eliminates duplicate consecutive nodes when unclosing a circular way', function () {
+            var w1 = iD.Way({ nodes: 'abcca'.split('') });
+            expect(w1.unclose().nodes.join('')).to.eql('abc', 'duplicate internal node at end');
+            var w2 = iD.Way({ nodes: 'abbca'.split('') });
+            expect(w2.unclose().nodes.join('')).to.eql('abc', 'duplicate internal node in middle');
+            var w3 = iD.Way({ nodes: 'aabca'.split('') });
+            expect(w3.unclose().nodes.join('')).to.eql('abc', 'duplicate connector node at beginning');
+            var w4 = iD.Way({ nodes: 'abcaa'.split('') });
+            expect(w4.unclose().nodes.join('')).to.eql('abc', 'duplicate connector node at end');
+            var w5 = iD.Way({ nodes: 'abbbcbba'.split('') });
+            expect(w5.unclose().nodes.join('')).to.eql('abcb', 'duplicates multiple places');
+            var w6 = iD.Way({ nodes: 'aa'.split('') });
+            expect(w6.unclose().nodes.join('')).to.eql('a', 'single node circular');
+            var w7 = iD.Way({ nodes: 'aaa'.split('') });
+            expect(w7.unclose().nodes.join('')).to.eql('a', 'single node circular with duplicates');
+        });
+    });
+
     describe('#addNode', function () {
         it('adds a node to an empty way', function () {
             var w = iD.Way();
@@ -560,7 +626,6 @@ describe('iD.osmWay', function() {
             var w7 = iD.Way({ nodes: 'aaa'.split('') });
             expect(w7.addNode('d', 0).nodes.join('')).to.eql('dad', 'single node circular with duplicates');
         });
-
     });
 
     describe('#updateNode', function () {
@@ -703,7 +768,6 @@ describe('iD.osmWay', function() {
         });
     });
 
-
     describe('#replaceNode', function () {
         it('replaces a node', function () {
             var w1 = iD.Way({ nodes: 'a'.split('') });
@@ -764,7 +828,6 @@ describe('iD.osmWay', function() {
         });
     });
 
-
     describe('#removeNode', function () {
         it('removes a node', function () {
             var w1 = iD.Way({ nodes: 'a'.split('') });
@@ -820,7 +883,6 @@ describe('iD.osmWay', function() {
             expect(w4.removeNode('a').nodes.join('')).to.eql('bcb', 'duplicates multiple places');
         });
     });
-
 
     describe('#asJXON', function () {
         it('converts a way to jxon', function() {
