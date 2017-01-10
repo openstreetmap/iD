@@ -1083,6 +1083,10 @@
                 "elevation": {
                     "label": "Elevation"
                 },
+                "email": {
+                    "label": "Email",
+                    "placeholder": "example@example.com"
+                },
                 "emergency": {
                     "label": "Emergency"
                 },
