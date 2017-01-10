@@ -1640,6 +1640,9 @@
                 "stars": {
                     "label": "Stars"
                 },
+                "step_count": {
+                    "label": "Number of Steps"
+                },
                 "stop": {
                     "label": "Stop Type",
                     "options": {

@@ -1099,6 +1099,9 @@ en:
       stars:
         # stars=*
         label: Stars
+      step_count:
+        # step_count=*
+        label: Number of Steps
       stop:
         # stop=*
         label: Stop Type
