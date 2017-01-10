@@ -1489,6 +1489,11 @@
             "type": "number",
             "label": "Stars"
         },
+        "step_count": {
+            "key": "step_count",
+            "type": "number",
+            "label": "Number of Steps"
+        },
         "stop": {
             "key": "stop",
             "type": "combo",
