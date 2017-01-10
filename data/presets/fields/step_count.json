@@ -1,0 +1,5 @@
+{
+    "key": "step_count",
+    "type": "number",
+    "label": "Number of Steps"
+}
