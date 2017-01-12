@@ -431,8 +431,10 @@ describe('iD.osmWay', function() {
         });
 
         it('closes a way', function () {
-            var w = iD.Way({ nodes: 'ab'.split('') });
-            expect(w.close().nodes.join('')).to.eql('aba');
+            var w1 = iD.Way({ nodes: 'ab'.split('') });
+            expect(w1.close().nodes.join('')).to.eql('aba', 'multiple');
+            var w2 = iD.Way({ nodes: 'a'.split('') });
+            expect(w2.close().nodes.join('')).to.eql('aa', 'single');
         });
 
         it('eliminates duplicate consecutive nodes when closing a linear way', function () {
@@ -461,8 +463,10 @@ describe('iD.osmWay', function() {
         });
 
         it('uncloses a circular way', function () {
-            var w = iD.Way({ nodes: 'aba'.split('') });
-            expect(w.unclose().nodes.join('')).to.eql('ab');
+            var w1 = iD.Way({ nodes: 'aba'.split('') });
+            expect(w1.unclose().nodes.join('')).to.eql('ab', 'multiple');
+            var w2 = iD.Way({ nodes: 'aa'.split('') });
+            expect(w2.unclose().nodes.join('')).to.eql('a', 'single');
         });
 
         it('eliminates duplicate consecutive nodes when unclosing a circular way', function () {

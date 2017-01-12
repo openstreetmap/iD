@@ -193,8 +193,8 @@ _.extend(osmWay.prototype, {
         if (this.isClosed() || !this.nodes.length) return this;
 
         var nodes = this.nodes.slice();
-        nodes.push(nodes[0]);
         nodes = nodes.filter(noRepeatNodes);
+        nodes.push(nodes[0]);
         return this.update({ nodes: nodes });
     },
 
