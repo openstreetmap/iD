@@ -41,20 +41,24 @@ export function behaviorDrawWay(context, wayId, index, mode, baseGraph) {
         annotation = t((way.isDegenerate() ?
             'operations.start.annotation.' :
             'operations.continue.annotation.') + context.geometry(wayId)),
-        draw = behaviorDraw(context);
+        draw = behaviorDraw(context),
+        end = osmNode({ loc: context.map().mouseCoordinates() }),
+        startIndex, start, segment;
 
-    var startIndex = typeof index === 'undefined' ? way.nodes.length - 1 : 0,
-        start = osmNode({loc: context.graph().entity(way.nodes[startIndex]).loc}),
-        end = osmNode({loc: context.map().mouseCoordinates()}),
+    if (!isArea) {
+        startIndex = typeof index === 'undefined' ? way.nodes.length - 1 : 0;
+        start = osmNode({ loc: context.entity(way.nodes[startIndex]).loc });
         segment = osmWay({
             nodes: typeof index === 'undefined' ? [start.id, end.id] : [end.id, start.id],
             tags: _.clone(way.tags)
         });
+    }
+
 
     var fn = context[way.isDegenerate() ? 'replace' : 'perform'];
     if (isArea) {
         fn(actionAddEntity(end),
-            actionAddVertex(wayId, end.id, index)
+            actionAddVertex(wayId, end.id)
         );
     } else {
         fn(actionAddEntity(start),
@@ -70,7 +74,7 @@ export function behaviorDrawWay(context, wayId, index, mode, baseGraph) {
         if (datum.type === 'node' && datum.id !== end.id) {
             loc = datum.loc;
 
-        } else if (datum.type === 'way' && datum.id !== segment.id) {
+        } else if (datum.type === 'way') { // && (segment || datum.id !== segment.id)) {
             var dims = context.map().dimensions(),
                 mouse = context.mouse(),
                 pad = 5,
@@ -145,9 +149,8 @@ export function behaviorDrawWay(context, wayId, index, mode, baseGraph) {
         return function(graph) {
             if (isArea) {
                 return graph
-                    .replace(way.addNode(newNode.id, index))
+                    .replace(way.addNode(newNode.id))
                     .remove(end);
-
             } else {
                 return graph
                     .replace(graph.entity(wayId).addNode(newNode.id, index))
@@ -165,13 +168,19 @@ export function behaviorDrawWay(context, wayId, index, mode, baseGraph) {
         var last = context.hasEntity(way.nodes[way.nodes.length - (isArea ? 2 : 1)]);
         if (last && last.loc[0] === loc[0] && last.loc[1] === loc[1]) return;
 
-        var newNode = osmNode({loc: loc});
-
-        context.replace(
-            actionAddEntity(newNode),
-            ReplaceTemporaryNode(newNode),
-            annotation
-        );
+        if (isArea) {
+            context.replace(
+                actionMoveNode(end.id, loc),
+                annotation
+            );
+        } else {
+            var newNode = osmNode({loc: loc});
+            context.replace(
+                actionAddEntity(newNode),
+                ReplaceTemporaryNode(newNode),
+                annotation
+            );
+        }
 
         finished = true;
         context.enter(mode);
@@ -180,21 +189,28 @@ export function behaviorDrawWay(context, wayId, index, mode, baseGraph) {
 
     // Connect the way to an existing way.
     drawWay.addWay = function(loc, edge) {
-        var previousEdge = startIndex ?
-            [way.nodes[startIndex], way.nodes[startIndex - 1]] :
-            [way.nodes[0], way.nodes[1]];
 
-        // Avoid creating duplicate segments
-        if (!isArea && geoEdgeEqual(edge, previousEdge))
-            return;
+        if (isArea) {
+            context.perform(
+                actionAddMidpoint({ loc: loc, edge: edge}, end),
+                annotation
+            );
+        } else {
+            var previousEdge = startIndex ?
+                [way.nodes[startIndex], way.nodes[startIndex - 1]] :
+                [way.nodes[0], way.nodes[1]];
 
-        var newNode = osmNode({ loc: loc });
+            // Avoid creating duplicate segments
+            if (geoEdgeEqual(edge, previousEdge))
+                return;
 
-        context.perform(
-            actionAddMidpoint({ loc: loc, edge: edge}, newNode),
-            ReplaceTemporaryNode(newNode),
-            annotation
-        );
+            var newNode = osmNode({ loc: loc });
+            context.perform(
+                actionAddMidpoint({ loc: loc, edge: edge}, newNode),
+                ReplaceTemporaryNode(newNode),
+                annotation
+            );
+        }
 
         finished = true;
         context.enter(mode);
