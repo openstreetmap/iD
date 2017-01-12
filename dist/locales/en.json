@@ -1856,12 +1856,24 @@
                     "name": "Chair Lift",
                     "terms": ""
                 },
+                "aerialway/drag_lift": {
+                    "name": "Drag Lift",
+                    "terms": ""
+                },
                 "aerialway/gondola": {
                     "name": "Gondola",
                     "terms": ""
                 },
+                "aerialway/goods": {
+                    "name": "Goods",
+                    "terms": ""
+                },
                 "aerialway/magic_carpet": {
                     "name": "Magic Carpet Lift",
+                    "terms": ""
+                },
+                "aerialway/mixed_lift": {
+                    "name": "Mixed Lift",
                     "terms": ""
                 },
                 "aerialway/platter": {
