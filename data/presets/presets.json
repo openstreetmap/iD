@@ -207,6 +207,19 @@
             },
             "name": "Chair Lift"
         },
+        "aerialway/drag_lift": {
+            "geometry": [
+                "line"
+            ],
+            "fields": [
+                "aerialway/capacity",
+                "aerialway/duration"
+            ],
+            "tags": {
+                "aerialway": "drag_lift"
+            },
+            "name": "Drag Lift"
+        },
         "aerialway/gondola": {
             "geometry": [
                 "line"
@@ -223,6 +236,19 @@
             },
             "name": "Gondola"
         },
+        "aerialway/goods": {
+            "geometry": [
+                "line"
+            ],
+            "fields": [
+                "aerialway/capacity",
+                "aerialway/duration"
+            ],
+            "tags": {
+                "aerialway": "goods"
+            },
+            "name": "Goods"
+        },
         "aerialway/magic_carpet": {
             "geometry": [
                 "line"
@@ -236,6 +262,22 @@
                 "aerialway": "magic_carpet"
             },
             "name": "Magic Carpet Lift"
+        },
+        "aerialway/mixed_lift": {
+            "geometry": [
+                "line"
+            ],
+            "fields": [
+                "aerialway/occupancy",
+                "aerialway/capacity",
+                "aerialway/duration",
+                "aerialway/bubble",
+                "aerialway/heating"
+            ],
+            "tags": {
+                "aerialway": "mixed_lift"
+            },
+            "name": "Mixed Lift"
         },
         "aerialway/platter": {
             "geometry": [

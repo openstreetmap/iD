@@ -1312,14 +1312,26 @@ en:
         # aerialway=chair_lift
         name: Chair Lift
         terms: '<translate with synonyms or related terms for ''Chair Lift'', separated by commas>'
+      aerialway/drag_lift:
+        # aerialway=drag_lift
+        name: Drag Lift
+        terms: '<translate with synonyms or related terms for ''Drag Lift'', separated by commas>'
       aerialway/gondola:
         # aerialway=gondola
         name: Gondola
         terms: '<translate with synonyms or related terms for ''Gondola'', separated by commas>'
+      aerialway/goods:
+        # aerialway=goods
+        name: Goods
+        terms: '<translate with synonyms or related terms for ''Goods'', separated by commas>'
       aerialway/magic_carpet:
         # aerialway=magic_carpet
         name: Magic Carpet Lift
         terms: '<translate with synonyms or related terms for ''Magic Carpet Lift'', separated by commas>'
+      aerialway/mixed_lift:
+        # aerialway=mixed_lift
+        name: Mixed Lift
+        terms: '<translate with synonyms or related terms for ''Mixed Lift'', separated by commas>'
       aerialway/platter:
         # aerialway=platter
         name: Platter Lift
