@@ -6779,6 +6779,7 @@
             "name": "Golf Course"
         },
         "leisure/horse_riding": {
+            "icon": "horse-riding",
             "fields": [
                 "access_simple",
                 "operator",
