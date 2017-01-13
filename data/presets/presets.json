@@ -1159,7 +1159,7 @@
             "name": "Dojo / Martial Arts Academy"
         },
         "amenity/drinking_water": {
-            "icon": "water",
+            "icon": "drinking-water",
             "geometry": [
                 "point"
             ],
@@ -2682,7 +2682,7 @@
             "name": "Waste Transfer Station"
         },
         "amenity/water_point": {
-            "icon": "water",
+            "icon": "drinking-water",
             "geometry": [
                 "area",
                 "vertex",
