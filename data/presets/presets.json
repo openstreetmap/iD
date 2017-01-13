@@ -11773,6 +11773,7 @@
             "name": "Map"
         },
         "tourism/information/office": {
+            "icon": "information",
             "fields": [
                 "operator",
                 "address",
