@@ -1552,7 +1552,7 @@
             "name": "Nightclub"
         },
         "amenity/parking_entrance": {
-            "icon": "entrance",
+            "icon": "entrance-alt1",
             "fields": [
                 "access_simple",
                 "ref"
@@ -2733,7 +2733,7 @@
             "matchScore": 0.4
         },
         "barrier/entrance": {
-            "icon": "entrance",
+            "icon": "entrance-alt1",
             "geometry": [
                 "vertex"
             ],
@@ -3008,7 +3008,7 @@
             "searchable": false
         },
         "building/entrance": {
-            "icon": "entrance",
+            "icon": "entrance-alt1",
             "geometry": [
                 "vertex"
             ],
@@ -4601,7 +4601,7 @@
             "name": "Emergency Phone"
         },
         "entrance": {
-            "icon": "entrance",
+            "icon": "entrance-alt1",
             "geometry": [
                 "vertex"
             ],
