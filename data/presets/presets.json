@@ -2837,7 +2837,7 @@
             "matchScore": 0.25
         },
         "barrier/fence": {
-            "icon": "barrier",
+            "icon": "fence",
             "fields": [
                 "fence_type",
                 "height"
