@@ -56,15 +56,6 @@
                 "landuse/military"
             ]
         },
-        "category-natual-line": {
-            "geometry": "line",
-            "name": "Natural Features",
-            "icon": "natural",
-            "members": [
-                "natural/coastline",
-                "natural/tree_row"
-            ]
-        },
         "category-natural-area": {
             "geometry": "area",
             "name": "Natural Features",
@@ -80,6 +71,15 @@
                 "natural/beach",
                 "natural/cave_entrance",
                 "natural/glacier"
+            ]
+        },
+        "category-natural-line": {
+            "geometry": "line",
+            "name": "Natural Features",
+            "icon": "natural",
+            "members": [
+                "natural/coastline",
+                "natural/tree_row"
             ]
         },
         "category-natural-point": {
