@@ -50,7 +50,7 @@
     "js-yaml": "~3.7.0",
     "jsonschema": "~1.1.0",
     "json-stable-stringify": "~1.0.1",
-    "maki": "0.5.0",
+    "maki": "^2.1.0",
     "mapillary-js": "2.2.0",
     "minimist": "~1.2.0",
     "mocha": "~3.2.0",
