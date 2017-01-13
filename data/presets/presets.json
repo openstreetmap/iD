@@ -4227,7 +4227,7 @@
             "name": "Sailmaker"
         },
         "craft/sawmill": {
-            "icon": "park",
+            "icon": "logging",
             "fields": [
                 "operator",
                 "address",
@@ -6002,7 +6002,7 @@
             "name": "Farmyard"
         },
         "landuse/forest": {
-            "icon": "park2",
+            "icon": "park-alt1",
             "fields": [
                 "leaf_type",
                 "leaf_cycle"
@@ -6452,7 +6452,7 @@
             "name": "Training Area"
         },
         "landuse/orchard": {
-            "icon": "park2",
+            "icon": "park-alt1",
             "fields": [
                 "operator",
                 "trees"
@@ -8127,7 +8127,7 @@
             "name": "Wetland"
         },
         "natural/wood": {
-            "icon": "park2",
+            "icon": "park-alt1",
             "fields": [
                 "leaf_type",
                 "leaf_cycle"
