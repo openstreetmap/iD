@@ -71,7 +71,7 @@ export function uiPresetIcon() {
 
         icon.selectAll('svg')
             .attr('class', function() {
-                return 'icon ' + picon + tag_classes(p);
+                return 'icon ' + picon + (isMaki ? '' : tag_classes(p));
             });
 
         icon.selectAll('use')
