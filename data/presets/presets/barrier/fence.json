@@ -1,5 +1,5 @@
 {
-    "icon": "barrier",
+    "icon": "fence",
     "fields": [
         "fence_type",
         "height"
