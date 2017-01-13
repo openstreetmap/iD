@@ -42,7 +42,7 @@
         "category-landuse": {
             "geometry": "area",
             "name": "Land Use Features",
-            "icon": "land-use",
+            "icon": "landuse",
             "members": [
                 "landuse/residential",
                 "landuse/industrial",
