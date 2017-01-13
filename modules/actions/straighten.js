@@ -1,5 +1,5 @@
 import { actionDeleteNode } from './delete_node';
-import { geoEuclideanDistance } from '../geo/index';
+import { geoEuclideanDistance, geoInterp } from '../geo/index';
 
 
 /*
@@ -8,12 +8,15 @@ import { geoEuclideanDistance } from '../geo/index';
 export function actionStraighten(wayId, projection) {
 
     function positionAlongWay(n, s, e) {
-        return ((n[0] - s[0]) * (e[0] - s[0]) + (n[1] - s[1]) * (e[1] - s[1]))/
+        return ((n[0] - s[0]) * (e[0] - s[0]) + (n[1] - s[1]) * (e[1] - s[1])) /
                 (Math.pow(e[0] - s[0], 2) + Math.pow(e[1] - s[1], 2));
     }
 
 
-    var action = function(graph) {
+    var action = function(graph, t) {
+        if (t === null || !isFinite(t)) t = 1;
+        t = Math.min(Math.max(+t, 0), 1);
+
         var way = graph.entity(wayId),
             nodes = graph.childNodes(way),
             points = nodes.map(function(n) { return projection(n.loc); }),
@@ -26,17 +29,18 @@ export function actionStraighten(wayId, projection) {
             var node = nodes[i],
                 point = points[i];
 
-            if (graph.parentWays(node).length > 1 ||
+            if (t < 1 || graph.parentWays(node).length > 1 ||
                 graph.parentRelations(node).length ||
                 node.hasInterestingTags()) {
 
                 var u = positionAlongWay(point, startPoint, endPoint),
-                    p0 = startPoint[0] + u * (endPoint[0] - startPoint[0]),
-                    p1 = startPoint[1] + u * (endPoint[1] - startPoint[1]);
+                    p = [
+                        startPoint[0] + u * (endPoint[0] - startPoint[0]),
+                        startPoint[1] + u * (endPoint[1] - startPoint[1])
+                    ],
+                    loc2 = projection.invert(p);
 
-                graph = graph
-                    .replace(graph.entity(node.id)
-                    .move(projection.invert([p0, p1])));
+                graph = graph.replace(node.move(geoInterp(node.loc, loc2, t)));
 
             } else {
                 // safe to delete
@@ -81,6 +85,9 @@ export function actionStraighten(wayId, projection) {
             }
         }
     };
+
+
+    action.transitionable = true;
 
 
     return action;

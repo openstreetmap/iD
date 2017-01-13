@@ -1,0 +1,30 @@
+{
+    "icon": "industry",
+    "fields": [
+        "operator"
+    ],
+    "geometry": [
+        "area"
+    ],
+    "tags": {
+        "power": "plant"
+    },
+    "addTags": {
+        "power": "plant",
+        "landuse": "industrial"
+    },
+    "removeTags": {
+        "power": "plant",
+        "landuse": "industrial"
+    },
+    "terms": [
+        "coal",
+        "gas",
+        "generat*",
+        "hydro",
+        "nuclear",
+        "power",
+        "station"
+    ],
+    "name": "Power Station Grounds"
+}

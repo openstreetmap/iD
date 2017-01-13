@@ -5,6 +5,7 @@ import {
     actionMergePolygon
 } from '../actions/index';
 
+import { behaviorOperation } from '../behavior/index';
 import { modeSelect } from '../modes/index';
 
 
@@ -26,7 +27,10 @@ export function operationMerge(selectedIDs, context) {
         }
 
         context.perform(action, annotation);
-        var ids = selectedIDs.filter(function(id) { return context.hasEntity(id); });
+        var ids = selectedIDs.filter(function(id) {
+            var entity = context.hasEntity(id);
+            return entity && entity.type !== 'node';
+        });
         context.enter(modeSelect(context, ids).suppressMenu(true));
     };
 
@@ -68,7 +72,7 @@ export function operationMerge(selectedIDs, context) {
     operation.id = 'merge';
     operation.keys = [t('operations.merge.key')];
     operation.title = t('operations.merge.title');
-
+    operation.behavior = behaviorOperation(context).which(operation);
 
     return operation;
 }

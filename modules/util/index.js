@@ -1,7 +1,9 @@
 export { utilTagText } from './util';
 export { utilEntitySelector } from './util';
 export { utilEntityOrMemberSelector } from './util';
+export { utilGetAllNodes } from './util';
 export { utilDisplayName } from './util';
+export { utilDisplayNameForPath } from './util';
 export { utilDisplayType } from './util';
 export { utilStringQs } from './util';
 export { utilQsString } from './util';

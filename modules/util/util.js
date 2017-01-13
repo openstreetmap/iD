@@ -2,6 +2,7 @@ import * as d3 from 'd3';
 import { t, textDirection } from './locale';
 import { utilDetect } from './detect';
 import { remove as removeDiacritics } from 'diacritics';
+import { fixArabicScriptTextForSvg } from './svg_paths_arabic_fix';
 
 
 export function utilTagText(entity) {
@@ -32,16 +33,55 @@ export function utilEntityOrMemberSelector(ids, graph) {
 }
 
 
+export function utilGetAllNodes(ids, graph) {
+    var seen = {};
+    var nodes = [];
+    ids.forEach(getNodes);
+    return nodes;
+
+    function getNodes(id) {
+        if (seen[id]) return;
+        seen[id] = true;
+
+        var entity = graph.hasEntity(id);
+        if (!entity) return;
+
+        if (entity.type === 'node') {
+            nodes.push(entity);
+        } else if (entity.type === 'way') {
+            entity.nodes.forEach(getNodes);
+        } else {
+            entity.members.map(function(member) { return member.id; }).forEach(getNodes);
+        }
+    }
+}
+
+
 export function utilDisplayName(entity) {
     var localizedNameKey = 'name:' + utilDetect().locale.toLowerCase().split('-')[0],
         name = entity.tags[localizedNameKey] || entity.tags.name || '',
         network = entity.tags.cycle_network || entity.tags.network;
+
     if (!name && entity.tags.ref) {
         name = entity.tags.ref;
         if (network) {
             name = network + ' ' + name;
         }
     }
+
+    return name;
+}
+
+
+export function utilDisplayNameForPath(entity) {
+    var name = utilDisplayName(entity);
+    var isFirefox = utilDetect().browser.toLowerCase().indexOf('firefox') > -1;
+    var arabicRegex = /[\u0600-\u06FF]/g;
+
+    if (!isFirefox && name && arabicRegex.test(name)) {
+        name = fixArabicScriptTextForSvg(name);
+    }
+
     return name;
 }
 

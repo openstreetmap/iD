@@ -130,6 +130,14 @@
     </g>
   </g>
   <g id="operations">
+    <g id="operation-reflect-short">
+      <path d="M489,398 L491,398 L491,382 L489,382 L489,398 z" fill="#7092FF" id="operation-reflect-short-shape2"/>
+      <path d="M487,387 L480,387 L480,392 L482,392 L482,389 L487,389 M493,389 L498,389 L498,392 L500,392 L500,387 L493,387" fill="#000000" id="operation-reflect-short-shape"/>
+    </g>
+    <g id="operation-reflect-long">
+      <path d="M469,398 L471,398 L471,382 L469,382 L469,398 z" fill="#7092FF" id="operation-reflect-long-shape2"/>
+      <path d="M473,394 L473,386 L478,386 L478,388 L475,388 L475,394 M465,394 L465,388 L462,388 L462,386 L467,386 L467,394" fill="#000000" id="operation-reflect-long-shape"/>
+    </g>
     <g id="operation-continue">
       <path d="M454,384 C450.686,384 448,386.686 448,390 C448,393.314 450.686,396 454,396 C457.314,396 460,393.314 460,390 C460,386.686 457.314,384 454,384 z M453,386 L455,386 L455,389 L458,389 L458,391 L455,391 L455,394 L453,394 L453,391 L450,391 L450,389 L453,389 L453,386 z M445,389 L445,391 L447,391 L447,389 L445,389 z" fill="#7092FF" id="operation-continue-shape2"/>
       <path d="M442,388 C440.895,388 440,388.895 440,390 C440,391.105 440.895,392 442,392 C443.105,392 444,391.105 444,390 C444,388.895 443.105,388 442,388 z" fill="#000000" id="operation-continue-shape"/>

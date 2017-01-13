@@ -1,5 +1,5 @@
 {
-    "icon": "prison",
+    "icon": "fence",
     "fields": [
         "fence_type",
         "height"
@@ -10,5 +10,6 @@
     "tags": {
         "barrier": "fence"
     },
-    "name": "Fence"
+    "name": "Fence",
+    "matchScore": 0.25
 }
