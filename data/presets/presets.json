@@ -4551,6 +4551,7 @@
             "name": "Ambulance Station"
         },
         "emergency/defibrillator": {
+            "icon": "defibrillator",
             "fields": [
                 "access",
                 "opening_hours",
