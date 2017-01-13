@@ -17,7 +17,7 @@
     "dist:css": "shx cat css/reset.css css/map.css css/app.css > dist/iD.css",
     "dist:mapillary": "shx mkdir -p dist/mapillary-js && shx cp -R node_modules/mapillary-js/dist/* dist/mapillary-js/",
     "dist:min": "uglifyjs dist/iD.js -c -m -o dist/iD.min.js",
-    "dist:svg:maki": "svg-sprite --symbol --symbol-dest . --symbol-sprite dist/img/maki-sprite.svg node_modules/maki/src/*.svg",
+    "dist:svg:maki": "svg-sprite --symbol --symbol-dest . --symbol-sprite dist/img/maki-sprite.svg node_modules/maki/icons/*.svg",
     "dist:svg:id": "node svg/spriteify.js --svg svg/iD-sprite.src.svg --json svg/iD-sprite.json > dist/img/iD-sprite.svg",
     "imagery": "node data/update_imagery",
     "lint": "eslint *.js js/id test/spec modules",
