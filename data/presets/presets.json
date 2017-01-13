@@ -7827,6 +7827,7 @@
             "name": "Cave Entrance"
         },
         "natural/cliff": {
+            "icon": "triangle",
             "geometry": [
                 "point",
                 "vertex",
