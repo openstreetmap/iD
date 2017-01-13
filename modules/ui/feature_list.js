@@ -5,6 +5,8 @@ import { geoExtent, geoChooseEdge } from '../geo/index';
 import { modeSelect } from '../modes/index';
 import { osmEntity } from '../osm/index';
 import { svgIcon } from '../svg/index';
+import { services } from '../services/index';
+
 import {
     utilDisplayName,
     utilDisplayType,
@@ -181,7 +183,7 @@ export function uiFeatureList(context) {
                 .data([0])
                 .enter().append('button')
                 .attr('class', 'geocode-item')
-                .on('click', geocode)
+                .on('click', geocoderSearch)
                 .append('div')
                 .attr('class', 'label')
                 .append('span')
@@ -270,9 +272,8 @@ export function uiFeatureList(context) {
         }
 
 
-        function geocode() {
-            var searchVal = encodeURIComponent(search.property('value'));
-            d3.json('https://nominatim.openstreetmap.org/search/' + searchVal + '?limit=10&format=json', function(err, resp) {
+        function geocoderSearch() {
+            services.geocoder.search(search.property('value'), function (err, resp) {
                 geocodeResults = resp || [];
                 drawList();
             });
