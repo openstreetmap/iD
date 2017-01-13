@@ -42,16 +42,19 @@ export function behaviorDrawWay(context, wayId, index, mode, baseGraph) {
             'operations.start.annotation.' :
             'operations.continue.annotation.') + context.geometry(wayId)),
         draw = behaviorDraw(context),
-        end = osmNode({ loc: context.map().mouseCoordinates() }),
-        startIndex, start, segment;
+        startIndex, start, end, segment;
+
 
     if (!isArea) {
         startIndex = typeof index === 'undefined' ? way.nodes.length - 1 : 0;
-        start = osmNode({ loc: context.entity(way.nodes[startIndex]).loc });
-        segment = osmWay({
+        start = osmNode({ id: 'nStart', loc: context.entity(way.nodes[startIndex]).loc });
+        end = osmNode({ id: 'nEnd', loc: context.map().mouseCoordinates() });
+        segment = osmWay({ id: 'wTemp',
             nodes: typeof index === 'undefined' ? [start.id, end.id] : [end.id, start.id],
             tags: _.clone(way.tags)
         });
+    } else {
+        end = osmNode({ loc: context.map().mouseCoordinates() });
     }
 
 
