@@ -18,11 +18,7 @@ export function uiPresetIcon() {
             p = preset.apply(this, arguments),
             geom = geometry.apply(this, arguments),
             picon = p.icon || (geom === 'line' ? 'other-line' : 'marker-stroked'),
-            isMaki = dataFeatureIcons.hasOwnProperty(picon + '-24');
-
-        if (picon === 'dentist') {
-            isMaki = true;  // workaround for dentist icon missing in `maki-sprite.json`
-        }
+            isMaki = dataFeatureIcons.indexOf(picon) !== -1;
 
         function tag_classes(p) {
             var s = '';
@@ -75,11 +71,11 @@ export function uiPresetIcon() {
 
         icon.selectAll('svg')
             .attr('class', function() {
-                return 'icon ' + picon + tag_classes(p);
+                return 'icon ' + picon + (isMaki ? '' : tag_classes(p));
             });
 
-        icon.selectAll('use')       // workaround: maki parking-24 broken?
-            .attr('href', '#' + picon + (isMaki ? (picon === 'parking' ? '-18' : '-24') : ''));
+        icon.selectAll('use')
+            .attr('href', '#' + picon + (isMaki ? '-15' : ''));
     }
 
 

@@ -707,6 +707,15 @@
                 "category-landuse": {
                     "name": "Land Use Features"
                 },
+                "category-natural-area": {
+                    "name": "Natural Features"
+                },
+                "category-natural-line": {
+                    "name": "Natural Features"
+                },
+                "category-natural-point": {
+                    "name": "Natural Features"
+                },
                 "category-path": {
                     "name": "Path Features"
                 },

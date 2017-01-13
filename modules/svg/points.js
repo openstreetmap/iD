@@ -46,10 +46,10 @@ export function svgPoints(projection, context) {
             .call(markerPath, 'stroke');
 
         enter.append('use')
-            .attr('transform', 'translate(-6, -20)')
+            .attr('transform', 'translate(-5, -19)')
             .attr('class', 'icon')
-            .attr('width', '12px')
-            .attr('height', '12px');
+            .attr('width', '11px')
+            .attr('height', '11px');
 
         groups = groups
             .merge(enter)
@@ -63,7 +63,7 @@ export function svgPoints(projection, context) {
         groups.select('.icon')
             .attr('xlink:href', function(entity) {
                 var preset = context.presets().match(entity, graph);
-                return (preset && preset.icon) ? '#' + preset.icon + '-12' : '';
+                return (preset && preset.icon) ? '#' + preset.icon + '-11' : '';
             });
     };
 }
