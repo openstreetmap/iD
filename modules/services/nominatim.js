@@ -43,6 +43,11 @@ export default {
                 callback(null, result.address.country_code);
             }
         );
+    },
+
+    search: function (val, callback) {
+        var searchVal = encodeURIComponent(val);
+        d3.json('https://nominatim.openstreetmap.org/search/' + searchVal + '?limit=10&format=json', callback);
     }
 
 };
