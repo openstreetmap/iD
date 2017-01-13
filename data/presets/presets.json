@@ -4065,7 +4065,7 @@
             "name": "Painter"
         },
         "craft/photographer": {
-            "icon": "camera",
+            "icon": "attraction",
             "fields": [
                 "operator",
                 "address",
@@ -4082,7 +4082,7 @@
             "name": "Photographer"
         },
         "craft/photographic_laboratory": {
-            "icon": "camera",
+            "icon": "attraction",
             "fields": [
                 "operator",
                 "address",
@@ -7569,7 +7569,7 @@
             "name": "Storage Tank"
         },
         "man_made/surveillance_camera": {
-            "icon": "camera",
+            "icon": "attraction",
             "geometry": [
                 "point"
             ],
@@ -7603,7 +7603,7 @@
             "name": "Surveillance Camera"
         },
         "man_made/surveillance": {
-            "icon": "camera",
+            "icon": "attraction",
             "geometry": [
                 "point"
             ],
@@ -10914,7 +10914,7 @@
             "name": "Pet Store"
         },
         "shop/photo": {
-            "icon": "camera",
+            "icon": "attraction",
             "fields": [
                 "operator",
                 "address",
