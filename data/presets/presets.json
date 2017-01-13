@@ -2788,7 +2788,7 @@
             "name": "Border Control"
         },
         "barrier/cattle_grid": {
-            "icon": "prison",
+            "icon": "barrier",
             "geometry": [
                 "vertex"
             ],
@@ -2798,7 +2798,7 @@
             "name": "Cattle Grid"
         },
         "barrier/city_wall": {
-            "icon": "prison",
+            "icon": "barrier",
             "fields": [
                 "height"
             ],
@@ -2837,7 +2837,7 @@
             "matchScore": 0.25
         },
         "barrier/fence": {
-            "icon": "prison",
+            "icon": "barrier",
             "fields": [
                 "fence_type",
                 "height"
@@ -2852,7 +2852,7 @@
             "matchScore": 0.25
         },
         "barrier/gate": {
-            "icon": "prison",
+            "icon": "barrier",
             "fields": [
                 "access"
             ],
@@ -2881,7 +2881,7 @@
             "matchScore": 0.25
         },
         "barrier/kissing_gate": {
-            "icon": "prison",
+            "icon": "barrier",
             "fields": [
                 "access"
             ],
@@ -2947,7 +2947,7 @@
             "name": "Toll Booth"
         },
         "barrier/wall": {
-            "icon": "prison",
+            "icon": "barrier",
             "fields": [
                 "wall",
                 "height"
