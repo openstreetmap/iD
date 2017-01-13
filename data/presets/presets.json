@@ -4587,7 +4587,7 @@
             "name": "Fire Hydrant"
         },
         "emergency/phone": {
-            "icon": "emergency-telephone",
+            "icon": "emergency-phone",
             "fields": [
                 "operator"
             ],
@@ -10645,7 +10645,7 @@
             "name": "Medical Supply Store"
         },
         "shop/mobile_phone": {
-            "icon": "mobilephone",
+            "icon": "mobile-phone",
             "fields": [
                 "operator",
                 "address",
@@ -41277,7 +41277,7 @@
                 "shop": "mobile_phone"
             },
             "name": "Билайн",
-            "icon": "mobilephone",
+            "icon": "mobile-phone",
             "geometry": [
                 "point",
                 "area"
@@ -41296,7 +41296,7 @@
                 "shop": "mobile_phone"
             },
             "name": "ソフトバンクショップ (SoftBank shop)",
-            "icon": "mobilephone",
+            "icon": "mobile-phone",
             "geometry": [
                 "point",
                 "area"
@@ -41315,7 +41315,7 @@
                 "shop": "mobile_phone"
             },
             "name": "Vodafone",
-            "icon": "mobilephone",
+            "icon": "mobile-phone",
             "geometry": [
                 "point",
                 "area"
@@ -41334,7 +41334,7 @@
                 "shop": "mobile_phone"
             },
             "name": "O2",
-            "icon": "mobilephone",
+            "icon": "mobile-phone",
             "geometry": [
                 "point",
                 "area"
@@ -41353,7 +41353,7 @@
                 "shop": "mobile_phone"
             },
             "name": "Carphone Warehouse",
-            "icon": "mobilephone",
+            "icon": "mobile-phone",
             "geometry": [
                 "point",
                 "area"
@@ -41372,7 +41372,7 @@
                 "shop": "mobile_phone"
             },
             "name": "Orange",
-            "icon": "mobilephone",
+            "icon": "mobile-phone",
             "geometry": [
                 "point",
                 "area"
@@ -41391,7 +41391,7 @@
                 "shop": "mobile_phone"
             },
             "name": "Verizon Wireless",
-            "icon": "mobilephone",
+            "icon": "mobile-phone",
             "geometry": [
                 "point",
                 "area"
@@ -41410,7 +41410,7 @@
                 "shop": "mobile_phone"
             },
             "name": "Sprint",
-            "icon": "mobilephone",
+            "icon": "mobile-phone",
             "geometry": [
                 "point",
                 "area"
@@ -41429,7 +41429,7 @@
                 "shop": "mobile_phone"
             },
             "name": "T-Mobile",
-            "icon": "mobilephone",
+            "icon": "mobile-phone",
             "geometry": [
                 "point",
                 "area"
@@ -41448,7 +41448,7 @@
                 "shop": "mobile_phone"
             },
             "name": "МТС",
-            "icon": "mobilephone",
+            "icon": "mobile-phone",
             "geometry": [
                 "point",
                 "area"
@@ -41467,7 +41467,7 @@
                 "shop": "mobile_phone"
             },
             "name": "Евросеть",
-            "icon": "mobilephone",
+            "icon": "mobile-phone",
             "geometry": [
                 "point",
                 "area"
@@ -41486,7 +41486,7 @@
                 "shop": "mobile_phone"
             },
             "name": "Bell",
-            "icon": "mobilephone",
+            "icon": "mobile-phone",
             "geometry": [
                 "point",
                 "area"
@@ -41505,7 +41505,7 @@
                 "shop": "mobile_phone"
             },
             "name": "The Phone House",
-            "icon": "mobilephone",
+            "icon": "mobile-phone",
             "geometry": [
                 "point",
                 "area"
@@ -41524,7 +41524,7 @@
                 "shop": "mobile_phone"
             },
             "name": "SFR",
-            "icon": "mobilephone",
+            "icon": "mobile-phone",
             "geometry": [
                 "point",
                 "area"
@@ -41543,7 +41543,7 @@
                 "shop": "mobile_phone"
             },
             "name": "Связной",
-            "icon": "mobilephone",
+            "icon": "mobile-phone",
             "geometry": [
                 "point",
                 "area"
@@ -41562,7 +41562,7 @@
                 "shop": "mobile_phone"
             },
             "name": "Мегафон",
-            "icon": "mobilephone",
+            "icon": "mobile-phone",
             "geometry": [
                 "point",
                 "area"
@@ -41581,7 +41581,7 @@
                 "shop": "mobile_phone"
             },
             "name": "AT&T",
-            "icon": "mobilephone",
+            "icon": "mobile-phone",
             "geometry": [
                 "point",
                 "area"
@@ -41600,7 +41600,7 @@
                 "shop": "mobile_phone"
             },
             "name": "ドコモショップ (docomo shop)",
-            "icon": "mobilephone",
+            "icon": "mobile-phone",
             "geometry": [
                 "point",
                 "area"
@@ -41619,7 +41619,7 @@
                 "shop": "mobile_phone"
             },
             "name": "au",
-            "icon": "mobilephone",
+            "icon": "mobile-phone",
             "geometry": [
                 "point",
                 "area"
@@ -41638,7 +41638,7 @@
                 "shop": "mobile_phone"
             },
             "name": "Movistar",
-            "icon": "mobilephone",
+            "icon": "mobile-phone",
             "geometry": [
                 "point",
                 "area"
@@ -41657,7 +41657,7 @@
                 "shop": "mobile_phone"
             },
             "name": "Bitė",
-            "icon": "mobilephone",
+            "icon": "mobile-phone",
             "geometry": [
                 "point",
                 "area"
