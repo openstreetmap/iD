@@ -9,9 +9,9 @@ en:
         name: Golf Features
       category-landuse:
         name: Land Use Features
-      category-natual-line:
-        name: Natural Features
       category-natural-area:
+        name: Natural Features
+      category-natural-line:
         name: Natural Features
       category-natural-point:
         name: Natural Features
