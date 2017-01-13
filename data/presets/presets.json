@@ -9127,7 +9127,7 @@
             "name": "Railway Station"
         },
         "railway/subway_entrance": {
-            "icon": "rail-metro",
+            "icon": "entrance",
             "geometry": [
                 "point"
             ],
