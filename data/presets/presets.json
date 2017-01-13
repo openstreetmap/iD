@@ -637,6 +637,7 @@
             "name": "Bar"
         },
         "amenity/bbq": {
+            "icon": "bbq",
             "fields": [
                 "covered",
                 "fuel"
