@@ -1,9 +1,0 @@
-{
-    "geometry": "line",
-    "name": "Natural Features",
-    "icon": "natural",
-    "members": [
-        "natural/coastline",
-        "natural/tree_row"
-    ]
-}
