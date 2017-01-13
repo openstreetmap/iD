@@ -1,12 +1,17 @@
 {
-  "name": "iD",
+  "name": "@digidem/id",
   "version": "2.0.1",
-  "description": "A friendly editor for OpenStreetMap",
+  "description": "iD Editor for osm-p2p & mapeo-desktop",
   "main": "iD.js",
-  "repository": "openstreetmap/iD",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/digidem/iD-mapeo.git"
+  },
   "keywords": [
     "editor",
-    "openstreetmap"
+    "openstreetmap",
+    "mapeo",
+    "osm-p2p"
   ],
   "license": "ISC",
   "scripts": {
@@ -43,7 +48,7 @@
     "chai": "~3.5.0",
     "d3": "4.4.1",
     "ecstatic": "~2.1.0",
-    "editor-layer-index": "osmlab/editor-layer-index.git#gh-pages",
+    "editor-layer-index": "github:osmlab/editor-layer-index#gh-pages",
     "gaze": "~1.1.1",
     "eslint": "~3.13.0",
     "glob": "~7.1.0",
@@ -74,10 +79,21 @@
     "xmlbuilder": "~8.2.2"
   },
   "greenkeeper": {
-    "ignore": ["@mapbox/maki"],
+    "ignore": [
+      "@mapbox/maki"
+    ],
     "label": "chore-greenkeeper"
   },
   "engines": {
     "node": ">=4.0.0"
-  }
+  },
+  "bugs": {
+    "url": "https://github.com/digidem/iD-mapeo/issues"
+  },
+  "homepage": "https://github.com/digidem/iD-mapeo#readme",
+  "directories": {
+    "doc": "docs",
+    "test": "test"
+  },
+  "author": ""
 }
