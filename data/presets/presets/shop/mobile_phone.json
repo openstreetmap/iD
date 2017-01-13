@@ -1,5 +1,5 @@
 {
-    "icon": "mobilephone",
+    "icon": "mobile-phone",
     "fields": [
         "operator",
         "address",

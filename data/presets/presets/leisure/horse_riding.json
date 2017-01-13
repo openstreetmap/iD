@@ -1,4 +1,5 @@
 {
+    "icon": "horse-riding",
     "fields": [
         "access_simple",
         "operator",

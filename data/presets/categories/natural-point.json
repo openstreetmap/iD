@@ -1,0 +1,11 @@
+{
+    "geometry": "point",
+    "name": "Natural Features",
+    "icon": "natural",
+    "members": [
+        "natural/peak",
+        "natural/cliff",
+        "natural/beach",
+        "natural/cave_entrance"
+    ]
+}

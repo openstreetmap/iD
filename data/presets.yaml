@@ -9,6 +9,12 @@ en:
         name: Golf Features
       category-landuse:
         name: Land Use Features
+      category-natural-area:
+        name: Natural Features
+      category-natural-line:
+        name: Natural Features
+      category-natural-point:
+        name: Natural Features
       category-path:
         name: Path Features
       category-rail:
@@ -418,6 +424,11 @@ en:
       elevation:
         # ele=*
         label: Elevation
+      email:
+        # email=*
+        label: Email
+        # email field placeholder
+        placeholder: example@example.com
       emergency:
         # emergency=*
         label: Emergency
@@ -1099,6 +1110,9 @@ en:
       stars:
         # stars=*
         label: Stars
+      step_count:
+        # step_count=*
+        label: Number of Steps
       stop:
         # stop=*
         label: Stop Type
@@ -1304,14 +1318,26 @@ en:
         # aerialway=chair_lift
         name: Chair Lift
         terms: '<translate with synonyms or related terms for ''Chair Lift'', separated by commas>'
+      aerialway/drag_lift:
+        # aerialway=drag_lift
+        name: Drag Lift
+        terms: '<translate with synonyms or related terms for ''Drag Lift'', separated by commas>'
       aerialway/gondola:
         # aerialway=gondola
         name: Gondola
         terms: '<translate with synonyms or related terms for ''Gondola'', separated by commas>'
+      aerialway/goods:
+        # aerialway=goods
+        name: Goods
+        terms: '<translate with synonyms or related terms for ''Goods'', separated by commas>'
       aerialway/magic_carpet:
         # aerialway=magic_carpet
         name: Magic Carpet Lift
         terms: '<translate with synonyms or related terms for ''Magic Carpet Lift'', separated by commas>'
+      aerialway/mixed_lift:
+        # aerialway=mixed_lift
+        name: Mixed Lift
+        terms: '<translate with synonyms or related terms for ''Mixed Lift'', separated by commas>'
       aerialway/platter:
         # aerialway=platter
         name: Platter Lift

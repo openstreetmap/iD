@@ -707,6 +707,15 @@
                 "category-landuse": {
                     "name": "Land Use Features"
                 },
+                "category-natural-area": {
+                    "name": "Natural Features"
+                },
+                "category-natural-line": {
+                    "name": "Natural Features"
+                },
+                "category-natural-point": {
+                    "name": "Natural Features"
+                },
                 "category-path": {
                     "name": "Path Features"
                 },
@@ -1082,6 +1091,10 @@
                 },
                 "elevation": {
                     "label": "Elevation"
+                },
+                "email": {
+                    "label": "Email",
+                    "placeholder": "example@example.com"
                 },
                 "emergency": {
                     "label": "Emergency"
@@ -1640,6 +1653,9 @@
                 "stars": {
                     "label": "Stars"
                 },
+                "step_count": {
+                    "label": "Number of Steps"
+                },
                 "stop": {
                     "label": "Stop Type",
                     "options": {
@@ -1849,12 +1865,24 @@
                     "name": "Chair Lift",
                     "terms": ""
                 },
+                "aerialway/drag_lift": {
+                    "name": "Drag Lift",
+                    "terms": ""
+                },
                 "aerialway/gondola": {
                     "name": "Gondola",
                     "terms": ""
                 },
+                "aerialway/goods": {
+                    "name": "Goods",
+                    "terms": ""
+                },
                 "aerialway/magic_carpet": {
                     "name": "Magic Carpet Lift",
+                    "terms": ""
+                },
+                "aerialway/mixed_lift": {
+                    "name": "Mixed Lift",
                     "terms": ""
                 },
                 "aerialway/platter": {

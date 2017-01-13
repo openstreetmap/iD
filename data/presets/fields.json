@@ -581,6 +581,13 @@
             "universal": true,
             "label": "Elevation"
         },
+        "email": {
+            "key": "email",
+            "type": "email",
+            "placeholder": "example@example.com",
+            "universal": true,
+            "label": "Email"
+        },
         "emergency": {
             "key": "emergency",
             "type": "check",
@@ -600,6 +607,7 @@
             "key": "fax",
             "type": "tel",
             "label": "Fax",
+            "universal": true,
             "placeholder": "+31 42 123 4567"
         },
         "fee": {
@@ -1105,7 +1113,7 @@
         },
         "outdoor_seating": {
             "key": "outdoor_seating",
-            "type": "combo",
+            "type": "check",
             "label": "Outdoor Seating"
         },
         "par": {
@@ -1480,6 +1488,11 @@
             "key": "stars",
             "type": "number",
             "label": "Stars"
+        },
+        "step_count": {
+            "key": "step_count",
+            "type": "number",
+            "label": "Number of Steps"
         },
         "stop": {
             "key": "stop",

@@ -42,7 +42,7 @@
         "category-landuse": {
             "geometry": "area",
             "name": "Land Use Features",
-            "icon": "land-use",
+            "icon": "landuse",
             "members": [
                 "landuse/residential",
                 "landuse/industrial",
@@ -54,6 +54,43 @@
                 "landuse/meadow",
                 "landuse/cemetery",
                 "landuse/military"
+            ]
+        },
+        "category-natural-area": {
+            "geometry": "area",
+            "name": "Natural Features",
+            "icon": "natural",
+            "members": [
+                "natural/water",
+                "natural/wood",
+                "natural/scrub",
+                "natural/wetland",
+                "natural/grassland",
+                "natural/heath",
+                "natural/bare_rock",
+                "natural/beach",
+                "natural/cave_entrance",
+                "natural/glacier"
+            ]
+        },
+        "category-natural-line": {
+            "geometry": "line",
+            "name": "Natural Features",
+            "icon": "natural",
+            "members": [
+                "natural/coastline",
+                "natural/tree_row"
+            ]
+        },
+        "category-natural-point": {
+            "geometry": "point",
+            "name": "Natural Features",
+            "icon": "natural",
+            "members": [
+                "natural/peak",
+                "natural/cliff",
+                "natural/beach",
+                "natural/cave_entrance"
             ]
         },
         "category-path": {

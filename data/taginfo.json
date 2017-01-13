@@ -57,11 +57,23 @@
         },
         {
             "key": "aerialway",
+            "value": "drag_lift"
+        },
+        {
+            "key": "aerialway",
             "value": "gondola"
         },
         {
             "key": "aerialway",
+            "value": "goods"
+        },
+        {
+            "key": "aerialway",
             "value": "magic_carpet"
+        },
+        {
+            "key": "aerialway",
+            "value": "mixed_lift"
         },
         {
             "key": "aerialway",

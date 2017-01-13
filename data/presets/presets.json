@@ -207,6 +207,19 @@
             },
             "name": "Chair Lift"
         },
+        "aerialway/drag_lift": {
+            "geometry": [
+                "line"
+            ],
+            "fields": [
+                "aerialway/capacity",
+                "aerialway/duration"
+            ],
+            "tags": {
+                "aerialway": "drag_lift"
+            },
+            "name": "Drag Lift"
+        },
         "aerialway/gondola": {
             "geometry": [
                 "line"
@@ -223,6 +236,19 @@
             },
             "name": "Gondola"
         },
+        "aerialway/goods": {
+            "geometry": [
+                "line"
+            ],
+            "fields": [
+                "aerialway/capacity",
+                "aerialway/duration"
+            ],
+            "tags": {
+                "aerialway": "goods"
+            },
+            "name": "Goods"
+        },
         "aerialway/magic_carpet": {
             "geometry": [
                 "line"
@@ -236,6 +262,22 @@
                 "aerialway": "magic_carpet"
             },
             "name": "Magic Carpet Lift"
+        },
+        "aerialway/mixed_lift": {
+            "geometry": [
+                "line"
+            ],
+            "fields": [
+                "aerialway/occupancy",
+                "aerialway/capacity",
+                "aerialway/duration",
+                "aerialway/bubble",
+                "aerialway/heating"
+            ],
+            "tags": {
+                "aerialway": "mixed_lift"
+            },
+            "name": "Mixed Lift"
         },
         "aerialway/platter": {
             "geometry": [
@@ -595,6 +637,7 @@
             "name": "Bar"
         },
         "amenity/bbq": {
+            "icon": "bbq",
             "fields": [
                 "covered",
                 "fuel"
@@ -1117,7 +1160,7 @@
             "name": "Dojo / Martial Arts Academy"
         },
         "amenity/drinking_water": {
-            "icon": "water",
+            "icon": "drinking-water",
             "geometry": [
                 "point"
             ],
@@ -1510,7 +1553,7 @@
             "name": "Nightclub"
         },
         "amenity/parking_entrance": {
-            "icon": "entrance",
+            "icon": "entrance-alt1",
             "fields": [
                 "access_simple",
                 "ref"
@@ -2273,7 +2316,7 @@
             "name": "Theater"
         },
         "amenity/toilets": {
-            "icon": "toilets",
+            "icon": "toilet",
             "fields": [
                 "toilets/disposal",
                 "operator",
@@ -2640,7 +2683,7 @@
             "name": "Waste Transfer Station"
         },
         "amenity/water_point": {
-            "icon": "water",
+            "icon": "drinking-water",
             "geometry": [
                 "area",
                 "vertex",
@@ -2691,7 +2734,7 @@
             "matchScore": 0.4
         },
         "barrier/entrance": {
-            "icon": "entrance",
+            "icon": "entrance-alt1",
             "geometry": [
                 "vertex"
             ],
@@ -2746,7 +2789,7 @@
             "name": "Border Control"
         },
         "barrier/cattle_grid": {
-            "icon": "prison",
+            "icon": "barrier",
             "geometry": [
                 "vertex"
             ],
@@ -2756,7 +2799,7 @@
             "name": "Cattle Grid"
         },
         "barrier/city_wall": {
-            "icon": "prison",
+            "icon": "barrier",
             "fields": [
                 "height"
             ],
@@ -2795,7 +2838,7 @@
             "matchScore": 0.25
         },
         "barrier/fence": {
-            "icon": "prison",
+            "icon": "fence",
             "fields": [
                 "fence_type",
                 "height"
@@ -2810,7 +2853,7 @@
             "matchScore": 0.25
         },
         "barrier/gate": {
-            "icon": "prison",
+            "icon": "barrier",
             "fields": [
                 "access"
             ],
@@ -2839,7 +2882,7 @@
             "matchScore": 0.25
         },
         "barrier/kissing_gate": {
-            "icon": "prison",
+            "icon": "barrier",
             "fields": [
                 "access"
             ],
@@ -2905,7 +2948,7 @@
             "name": "Toll Booth"
         },
         "barrier/wall": {
-            "icon": "prison",
+            "icon": "barrier",
             "fields": [
                 "wall",
                 "height"
@@ -2966,7 +3009,7 @@
             "searchable": false
         },
         "building/entrance": {
-            "icon": "entrance",
+            "icon": "entrance-alt1",
             "geometry": [
                 "vertex"
             ],
@@ -3277,7 +3320,7 @@
             "name": "Hut"
         },
         "building/industrial": {
-            "icon": "industrial",
+            "icon": "industry",
             "fields": [
                 "address",
                 "levels"
@@ -4023,7 +4066,7 @@
             "name": "Painter"
         },
         "craft/photographer": {
-            "icon": "camera",
+            "icon": "attraction",
             "fields": [
                 "operator",
                 "address",
@@ -4040,7 +4083,7 @@
             "name": "Photographer"
         },
         "craft/photographic_laboratory": {
-            "icon": "camera",
+            "icon": "attraction",
             "fields": [
                 "operator",
                 "address",
@@ -4185,7 +4228,7 @@
             "name": "Sailmaker"
         },
         "craft/sawmill": {
-            "icon": "park",
+            "icon": "logging",
             "fields": [
                 "operator",
                 "address",
@@ -4509,6 +4552,7 @@
             "name": "Ambulance Station"
         },
         "emergency/defibrillator": {
+            "icon": "defibrillator",
             "fields": [
                 "access",
                 "opening_hours",
@@ -4545,7 +4589,7 @@
             "name": "Fire Hydrant"
         },
         "emergency/phone": {
-            "icon": "emergency-telephone",
+            "icon": "emergency-phone",
             "fields": [
                 "operator"
             ],
@@ -4559,7 +4603,7 @@
             "name": "Emergency Phone"
         },
         "entrance": {
-            "icon": "entrance",
+            "icon": "entrance-alt1",
             "geometry": [
                 "vertex"
             ],
@@ -5419,7 +5463,8 @@
                 "lit",
                 "width",
                 "incline_steps",
-                "handrail"
+                "handrail",
+                "step_count"
             ],
             "icon": "highway-steps",
             "geometry": [
@@ -5959,7 +6004,7 @@
             "name": "Farmyard"
         },
         "landuse/forest": {
-            "icon": "park2",
+            "icon": "park-alt1",
             "fields": [
                 "leaf_type",
                 "leaf_cycle"
@@ -5996,7 +6041,7 @@
             "name": "Grass"
         },
         "landuse/industrial": {
-            "icon": "industrial",
+            "icon": "industry",
             "geometry": [
                 "area"
             ],
@@ -6409,7 +6454,7 @@
             "name": "Training Area"
         },
         "landuse/orchard": {
-            "icon": "park2",
+            "icon": "park-alt1",
             "fields": [
                 "operator",
                 "trees"
@@ -6735,6 +6780,7 @@
             "name": "Golf Course"
         },
         "leisure/horse_riding": {
+            "icon": "horse-riding",
             "fields": [
                 "access_simple",
                 "operator",
@@ -7526,7 +7572,7 @@
             "name": "Storage Tank"
         },
         "man_made/surveillance_camera": {
-            "icon": "camera",
+            "icon": "attraction",
             "geometry": [
                 "point"
             ],
@@ -7560,7 +7606,7 @@
             "name": "Surveillance Camera"
         },
         "man_made/surveillance": {
-            "icon": "camera",
+            "icon": "attraction",
             "geometry": [
                 "point"
             ],
@@ -7680,7 +7726,7 @@
             "name": "Water Works"
         },
         "man_made/works": {
-            "icon": "industrial",
+            "icon": "industry",
             "fields": [
                 "operator",
                 "address",
@@ -7782,6 +7828,7 @@
             "name": "Cave Entrance"
         },
         "natural/cliff": {
+            "icon": "triangle",
             "geometry": [
                 "point",
                 "vertex",
@@ -8084,7 +8131,7 @@
             "name": "Wetland"
         },
         "natural/wood": {
-            "icon": "park2",
+            "icon": "park-alt1",
             "fields": [
                 "leaf_type",
                 "leaf_cycle"
@@ -8777,7 +8824,7 @@
             "name": "Minor Power Line"
         },
         "power/plant": {
-            "icon": "industrial",
+            "icon": "industry",
             "fields": [
                 "operator"
             ],
@@ -9082,7 +9129,7 @@
             "name": "Railway Station"
         },
         "railway/subway_entrance": {
-            "icon": "rail-metro",
+            "icon": "entrance",
             "geometry": [
                 "point"
             ],
@@ -10602,7 +10649,7 @@
             "name": "Medical Supply Store"
         },
         "shop/mobile_phone": {
-            "icon": "mobilephone",
+            "icon": "mobile-phone",
             "fields": [
                 "operator",
                 "address",
@@ -10871,7 +10918,7 @@
             "name": "Pet Store"
         },
         "shop/photo": {
-            "icon": "camera",
+            "icon": "attraction",
             "fields": [
                 "operator",
                 "address",
@@ -11727,6 +11774,7 @@
             "name": "Map"
         },
         "tourism/information/office": {
+            "icon": "information",
             "fields": [
                 "operator",
                 "address",
@@ -41234,7 +41282,7 @@
                 "shop": "mobile_phone"
             },
             "name": "Билайн",
-            "icon": "mobilephone",
+            "icon": "mobile-phone",
             "geometry": [
                 "point",
                 "area"
@@ -41253,7 +41301,7 @@
                 "shop": "mobile_phone"
             },
             "name": "ソフトバンクショップ (SoftBank shop)",
-            "icon": "mobilephone",
+            "icon": "mobile-phone",
             "geometry": [
                 "point",
                 "area"
@@ -41272,7 +41320,7 @@
                 "shop": "mobile_phone"
             },
             "name": "Vodafone",
-            "icon": "mobilephone",
+            "icon": "mobile-phone",
             "geometry": [
                 "point",
                 "area"
@@ -41291,7 +41339,7 @@
                 "shop": "mobile_phone"
             },
             "name": "O2",
-            "icon": "mobilephone",
+            "icon": "mobile-phone",
             "geometry": [
                 "point",
                 "area"
@@ -41310,7 +41358,7 @@
                 "shop": "mobile_phone"
             },
             "name": "Carphone Warehouse",
-            "icon": "mobilephone",
+            "icon": "mobile-phone",
             "geometry": [
                 "point",
                 "area"
@@ -41329,7 +41377,7 @@
                 "shop": "mobile_phone"
             },
             "name": "Orange",
-            "icon": "mobilephone",
+            "icon": "mobile-phone",
             "geometry": [
                 "point",
                 "area"
@@ -41348,7 +41396,7 @@
                 "shop": "mobile_phone"
             },
             "name": "Verizon Wireless",
-            "icon": "mobilephone",
+            "icon": "mobile-phone",
             "geometry": [
                 "point",
                 "area"
@@ -41367,7 +41415,7 @@
                 "shop": "mobile_phone"
             },
             "name": "Sprint",
-            "icon": "mobilephone",
+            "icon": "mobile-phone",
             "geometry": [
                 "point",
                 "area"
@@ -41386,7 +41434,7 @@
                 "shop": "mobile_phone"
             },
             "name": "T-Mobile",
-            "icon": "mobilephone",
+            "icon": "mobile-phone",
             "geometry": [
                 "point",
                 "area"
@@ -41405,7 +41453,7 @@
                 "shop": "mobile_phone"
             },
             "name": "МТС",
-            "icon": "mobilephone",
+            "icon": "mobile-phone",
             "geometry": [
                 "point",
                 "area"
@@ -41424,7 +41472,7 @@
                 "shop": "mobile_phone"
             },
             "name": "Евросеть",
-            "icon": "mobilephone",
+            "icon": "mobile-phone",
             "geometry": [
                 "point",
                 "area"
@@ -41443,7 +41491,7 @@
                 "shop": "mobile_phone"
             },
             "name": "Bell",
-            "icon": "mobilephone",
+            "icon": "mobile-phone",
             "geometry": [
                 "point",
                 "area"
@@ -41462,7 +41510,7 @@
                 "shop": "mobile_phone"
             },
             "name": "The Phone House",
-            "icon": "mobilephone",
+            "icon": "mobile-phone",
             "geometry": [
                 "point",
                 "area"
@@ -41481,7 +41529,7 @@
                 "shop": "mobile_phone"
             },
             "name": "SFR",
-            "icon": "mobilephone",
+            "icon": "mobile-phone",
             "geometry": [
                 "point",
                 "area"
@@ -41500,7 +41548,7 @@
                 "shop": "mobile_phone"
             },
             "name": "Связной",
-            "icon": "mobilephone",
+            "icon": "mobile-phone",
             "geometry": [
                 "point",
                 "area"
@@ -41519,7 +41567,7 @@
                 "shop": "mobile_phone"
             },
             "name": "Мегафон",
-            "icon": "mobilephone",
+            "icon": "mobile-phone",
             "geometry": [
                 "point",
                 "area"
@@ -41538,7 +41586,7 @@
                 "shop": "mobile_phone"
             },
             "name": "AT&T",
-            "icon": "mobilephone",
+            "icon": "mobile-phone",
             "geometry": [
                 "point",
                 "area"
@@ -41557,7 +41605,7 @@
                 "shop": "mobile_phone"
             },
             "name": "ドコモショップ (docomo shop)",
-            "icon": "mobilephone",
+            "icon": "mobile-phone",
             "geometry": [
                 "point",
                 "area"
@@ -41576,7 +41624,7 @@
                 "shop": "mobile_phone"
             },
             "name": "au",
-            "icon": "mobilephone",
+            "icon": "mobile-phone",
             "geometry": [
                 "point",
                 "area"
@@ -41595,7 +41643,7 @@
                 "shop": "mobile_phone"
             },
             "name": "Movistar",
-            "icon": "mobilephone",
+            "icon": "mobile-phone",
             "geometry": [
                 "point",
                 "area"
@@ -41614,7 +41662,7 @@
                 "shop": "mobile_phone"
             },
             "name": "Bitė",
-            "icon": "mobilephone",
+            "icon": "mobile-phone",
             "geometry": [
                 "point",
                 "area"
