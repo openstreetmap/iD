@@ -7,7 +7,7 @@ import serviceWikipedia from './wikipedia';
 
 export var services = {
     mapillary: serviceMapillary,
-    nominatim: serviceNominatim,
+    geocoder: serviceNominatim,
     osm: serviceOsm,
     taginfo: serviceTaginfo,
     wikidata: serviceWikidata,
