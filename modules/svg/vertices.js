@@ -120,7 +120,7 @@ export function svgVertices(projection, context) {
         // Vertices with icons get a `use`.
         enter.filter(function(d) { return icon(d); })
             .append('use')
-            .attr('transform', 'translate(-6, -6)')
+            .attr('transform', 'translate(-5, -6)')
             .attr('xlink:href', function(d) { return '#' + icon(d) + '-11'; })
             .attr('width', '11px')
             .attr('height', '11px')

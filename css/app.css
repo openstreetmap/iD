@@ -855,16 +855,28 @@ button.save.has-count .count::before {
     height: 44px;
 }
 
-.preset-icon-32 {
+.preset-icon-28 {
     position: absolute;
-    top: 14px;
-    left: 13px;   /* Maki icons off center? */
+    top: 16px;
+    left: 16px;
     margin: auto;
 }
 
-.preset-icon-32 .icon {
-    width: 32px;
-    height: 32px;
+.preset-icon-28 .icon {
+    width: 28px;
+    height: 28px;
+}
+
+.preset-icon-24 {
+    position: absolute;
+    top: 18px;
+    left: 18px;
+    margin: auto;
+}
+
+.preset-icon-24 .icon {
+    width: 24px;
+    height: 24px;
 }
 
 .preset-list-button .label {

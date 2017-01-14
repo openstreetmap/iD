@@ -193,8 +193,8 @@ export function svgLabels(projection, context) {
         icons = icons.enter()
             .append('use')
             .attr('class', 'icon areaicon')
-            .attr('width', '15px')
-            .attr('height', '15px')
+            .attr('width', '18px')
+            .attr('height', '18px')
             .merge(icons);
 
         icons

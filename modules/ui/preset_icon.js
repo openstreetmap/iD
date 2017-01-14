@@ -67,7 +67,9 @@ export function uiPresetIcon() {
             .merge(icon);
 
         icon
-            .attr('class', 'preset-icon preset-icon-' + (isMaki ? '32' : (geom === 'area' ? '44' : '60')));
+            .attr('class', 'preset-icon preset-icon-' +
+                (isMaki ? (geom === 'area' ? '24' : '28') : (geom === 'area' ? '44' : '60'))
+            );
 
         icon.selectAll('svg')
             .attr('class', function() {

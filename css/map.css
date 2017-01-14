@@ -1375,6 +1375,10 @@ text.point {
     font-size: 10px;
 }
 
+.icon.areaicon {
+    opacity: 0.7;
+}
+
 /* Turns */
 
 g.turn rect,
