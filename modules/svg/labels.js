@@ -193,15 +193,15 @@ export function svgLabels(projection, context) {
         icons = icons.enter()
             .append('use')
             .attr('class', 'icon areaicon')
-            .attr('width', '18px')
-            .attr('height', '18px')
+            .attr('width', '15px')
+            .attr('height', '15px')
             .merge(icons);
 
         icons
             .attr('transform', get(labels, 'transform'))
             .attr('xlink:href', function(d) {
                 var icon = context.presets().match(d, context.graph()).icon;
-                return '#' + icon + (icon === 'hairdresser' ? '-24': '-18');    // workaround: maki hairdresser-18 broken?
+                return '#' + icon + '-15';
             });
     }
 
