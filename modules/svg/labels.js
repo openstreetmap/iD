@@ -183,7 +183,7 @@ export function svgLabels(projection, context) {
 
 
     function drawAreaIcons(selection, entities, filter, classes, labels) {
-        var icons = selection.selectAll('use')
+        var icons = selection.selectAll('use.' + classes)
             .filter(filter)
             .data(entities, osmEntity.key);
 
@@ -192,9 +192,9 @@ export function svgLabels(projection, context) {
 
         icons = icons.enter()
             .append('use')
-            .attr('class', 'icon areaicon')
-            .attr('width', '18px')
-            .attr('height', '18px')
+            .attr('class', 'icon ' + classes)
+            .attr('width', '17px')
+            .attr('height', '17px')
             .merge(icons);
 
         icons
@@ -503,7 +503,7 @@ export function svgLabels(projection, context) {
 
             if (isNaN(centroid[0]) || entitywidth < 20) return;
 
-            var iconSize = 18,
+            var iconSize = 20,
                 iconX = centroid[0] - (iconSize / 2),
                 iconY = centroid[1] - (iconSize / 2),
                 margin = 2,
@@ -592,7 +592,8 @@ export function svgLabels(projection, context) {
         // areas
         drawAreaLabels(label, labelled.area, filter, 'arealabel', positions.area);
         drawAreaLabels(halo, labelled.area, filter, 'arealabel-halo', positions.area);
-        drawAreaIcons(label, labelled.area, filter, 'arealabel-icon', positions.area);
+        drawAreaIcons(label, labelled.area, filter, 'areaicon', positions.area);
+        drawAreaIcons(halo, labelled.area, filter, 'areaicon-halo', positions.area);
 
         // debug
         drawCollisionBoxes(label, rskipped, 'debug-skipped');
