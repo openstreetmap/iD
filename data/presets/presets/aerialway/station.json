@@ -1,4 +1,5 @@
 {
+    "icon": "aerialway",
     "geometry": [
         "point",
         "vertex"

@@ -1,4 +1,5 @@
 {
+    "icon": "bus",
     "fields": [
         "ref",
         "network",

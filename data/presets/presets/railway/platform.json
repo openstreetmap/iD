@@ -1,4 +1,5 @@
 {
+    "icon": "rail",
     "geometry": [
         "point",
         "vertex",

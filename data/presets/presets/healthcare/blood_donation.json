@@ -1,5 +1,5 @@
 {
-    "icon": "hospital",
+    "icon": "blood-bank",
     "fields": [
         "operator",
         "address",
@@ -25,4 +25,3 @@
     },
     "name": "Blood Donor Center"
 }
- 

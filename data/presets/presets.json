@@ -327,6 +327,7 @@
             "name": "Rope Tow Lift"
         },
         "aerialway/station": {
+            "icon": "aerialway",
             "geometry": [
                 "point",
                 "vertex"
@@ -407,7 +408,7 @@
             "tags": {
                 "aeroway": "gate"
             },
-            "name": "Airport gate"
+            "name": "Airport Gate"
         },
         "aeroway/hangar": {
             "geometry": [
@@ -426,6 +427,9 @@
             "geometry": [
                 "point",
                 "area"
+            ],
+            "fields": [
+                "ref"
             ],
             "terms": [
                 "helicopter",
@@ -470,6 +474,7 @@
             "name": "Taxiway"
         },
         "aeroway/terminal": {
+            "icon": "airport",
             "geometry": [
                 "point",
                 "area"
@@ -485,7 +490,7 @@
             "tags": {
                 "aeroway": "terminal"
             },
-            "name": "Airport terminal"
+            "name": "Airport Terminal"
         },
         "amenity/coworking_space": {
             "icon": "commercial",
@@ -1672,7 +1677,7 @@
             "name": "Place of Worship"
         },
         "amenity/place_of_worship/buddhist": {
-            "icon": "place-of-worship",
+            "icon": "buddhism",
             "fields": [
                 "denomination",
                 "building_area",
@@ -2013,7 +2018,7 @@
             "name": "Recycling Center"
         },
         "amenity/recycling": {
-            "icon": "waste-basket",
+            "icon": "recycling",
             "fields": [
                 "recycling_type",
                 "recycling_accepts",
@@ -2125,6 +2130,7 @@
             "name": "School Grounds"
         },
         "amenity/shelter": {
+            "icon": "shelter",
             "fields": [
                 "shelter_type",
                 "bin"
@@ -2240,7 +2246,7 @@
             "name": "Homeless Shelter"
         },
         "amenity/studio": {
-            "icon": "music",
+            "icon": "karaoke",
             "fields": [
                 "studio",
                 "address",
@@ -2593,7 +2599,7 @@
             "name": "Vending Machine"
         },
         "amenity/veterinary": {
-            "icon": "dog-park",
+            "icon": "veterinary",
             "fields": [
                 "operator",
                 "address",
@@ -3820,7 +3826,7 @@
             "name": "Carpet Layer"
         },
         "craft/caterer": {
-            "icon": "bakery",
+            "icon": "restaurant",
             "fields": [
                 "cuisine",
                 "operator",
@@ -4807,7 +4813,7 @@
             "name": "Water Hazard"
         },
         "healthcare/blood_donation": {
-            "icon": "hospital",
+            "icon": "blood-bank",
             "fields": [
                 "operator",
                 "address",
@@ -5777,6 +5783,7 @@
             "name": "Boundary Stone"
         },
         "historic/castle": {
+            "icon": "castle",
             "fields": [
                 "castle_type",
                 "building_area"
@@ -5838,6 +5845,7 @@
             "name": "Wayside Cross"
         },
         "historic/wayside_shrine": {
+            "icon": "landmark",
             "geometry": [
                 "point",
                 "vertex",
@@ -5902,6 +5910,7 @@
             "name": "Community Garden"
         },
         "landuse/basin": {
+            "icon": "water",
             "geometry": [
                 "area"
             ],
@@ -6501,6 +6510,7 @@
             "name": "Quarry"
         },
         "landuse/recreation_ground": {
+            "icon": "pitch",
             "geometry": [
                 "area"
             ],
@@ -6920,6 +6930,7 @@
             "name": "Park"
         },
         "leisure/picnic_table": {
+            "icon": "picnic-site",
             "geometry": [
                 "point"
             ],
@@ -7389,14 +7400,14 @@
             "name": "Cut line"
         },
         "man_made/flagpole": {
+            "icon": "embassy",
             "geometry": [
                 "point"
             ],
             "tags": {
                 "man_made": "flagpole"
             },
-            "name": "Flagpole",
-            "icon": "embassy"
+            "name": "Flagpole"
         },
         "man_made/gasometer": {
             "geometry": [
@@ -7698,6 +7709,7 @@
             "name": "Water Tower"
         },
         "man_made/water_well": {
+            "icon": "water",
             "fields": [
                 "operator"
             ],
@@ -7899,7 +7911,7 @@
             "name": "Heath"
         },
         "natural/peak": {
-            "icon": "triangle",
+            "icon": "mountain",
             "fields": [
                 "elevation"
             ],
@@ -8040,7 +8052,7 @@
             "name": "Tree"
         },
         "natural/volcano": {
-            "icon": "triangle",
+            "icon": "volcano",
             "fields": [
                 "elevation"
             ],
@@ -8898,6 +8910,7 @@
             "name": "Transformer"
         },
         "public_transport/platform": {
+            "icon": "bus",
             "fields": [
                 "ref",
                 "network",
@@ -8980,6 +8993,7 @@
             "name": "Disused Railway"
         },
         "railway/funicular": {
+            "icon": "railway-rail",
             "geometry": [
                 "line"
             ],
@@ -8998,7 +9012,6 @@
             "tags": {
                 "railway": "funicular"
             },
-            "icon": "railway-rail",
             "name": "Funicular"
         },
         "railway/halt": {
@@ -9074,6 +9087,7 @@
             "name": "Narrow Gauge Rail"
         },
         "railway/platform": {
+            "icon": "rail",
             "geometry": [
                 "point",
                 "vertex",
@@ -10165,7 +10179,7 @@
             "name": "Fashion Store"
         },
         "shop/florist": {
-            "icon": "shop",
+            "icon": "florist",
             "fields": [
                 "operator",
                 "address",
@@ -10273,7 +10287,7 @@
             "name": "Furniture Store"
         },
         "shop/garden_centre": {
-            "icon": "shop",
+            "icon": "garden-center",
             "fields": [
                 "operator",
                 "address",
@@ -11186,7 +11200,7 @@
             "name": "Tattoo Parlor"
         },
         "shop/tea": {
-            "icon": "cafe",
+            "icon": "teahouse",
             "fields": [
                 "operator",
                 "address",
@@ -11322,7 +11336,7 @@
             "name": "Variety Store"
         },
         "shop/video_games": {
-            "icon": "shop",
+            "icon": "gaming",
             "fields": [
                 "operator",
                 "address",
@@ -11487,7 +11501,7 @@
             "name": "Guest Apartment / Condo"
         },
         "tourism/aquarium": {
-            "icon": "water",
+            "icon": "aquarium",
             "fields": [
                 "operator",
                 "address",
@@ -11711,6 +11725,7 @@
             "name": "Hotel"
         },
         "tourism/information": {
+            "icon": "information",
             "fields": [
                 "information",
                 "operator",
@@ -11728,6 +11743,7 @@
             "name": "Information"
         },
         "tourism/information/board": {
+            "icon": "information",
             "fields": [
                 "operator",
                 "board_type"
@@ -11743,6 +11759,7 @@
             "name": "Information Board"
         },
         "tourism/information/guidepost": {
+            "icon": "information",
             "fields": [
                 "operator",
                 "ref"
@@ -11758,6 +11775,7 @@
             "name": "Guidepost"
         },
         "tourism/information/map": {
+            "icon": "information",
             "fields": [
                 "operator",
                 "map_type",
@@ -11841,7 +11859,7 @@
             "name": "Museum"
         },
         "tourism/picnic_site": {
-            "icon": "park",
+            "icon": "picnic_site",
             "fields": [
                 "operator",
                 "address",
@@ -11861,6 +11879,7 @@
             "name": "Picnic Site"
         },
         "tourism/theme_park": {
+            "icon": "amusement-park",
             "fields": [
                 "operator",
                 "address",
@@ -12703,7 +12722,7 @@
             "name": "Stream"
         },
         "waterway/water_point": {
-            "icon": "water",
+            "icon": "drinking-water",
             "geometry": [
                 "area",
                 "vertex",

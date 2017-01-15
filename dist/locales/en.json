@@ -1914,7 +1914,7 @@
                     "terms": "ramp"
                 },
                 "aeroway/gate": {
-                    "name": "Airport gate",
+                    "name": "Airport Gate",
                     "terms": ""
                 },
                 "aeroway/hangar": {
@@ -1934,7 +1934,7 @@
                     "terms": ""
                 },
                 "aeroway/terminal": {
-                    "name": "Airport terminal",
+                    "name": "Airport Terminal",
                     "terms": "airport,aerodrome"
                 },
                 "amenity/coworking_space": {

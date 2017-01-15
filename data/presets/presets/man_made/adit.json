@@ -6,10 +6,12 @@
     "fields": [
         "operator"
     ],
-    "terms": ["entrance",
+    "terms": [
+        "entrance",
         "underground",
         "mine",
-        "cave"],
+        "cave"
+    ],
     "tags": {
         "man_made": "adit"
     },

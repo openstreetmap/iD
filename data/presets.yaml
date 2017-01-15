@@ -1375,8 +1375,8 @@ en:
         terms: '<translate with synonyms or related terms for ''Apron'', separated by commas>'
       aeroway/gate:
         # aeroway=gate
-        name: Airport gate
-        terms: '<translate with synonyms or related terms for ''Airport gate'', separated by commas>'
+        name: Airport Gate
+        terms: '<translate with synonyms or related terms for ''Airport Gate'', separated by commas>'
       aeroway/hangar:
         # aeroway=hangar
         name: Hangar
@@ -1397,9 +1397,9 @@ en:
         terms: '<translate with synonyms or related terms for ''Taxiway'', separated by commas>'
       aeroway/terminal:
         # aeroway=terminal
-        name: Airport terminal
+        name: Airport Terminal
         # 'terms: airport,aerodrome'
-        terms: '<translate with synonyms or related terms for ''Airport terminal'', separated by commas>'
+        terms: '<translate with synonyms or related terms for ''Airport Terminal'', separated by commas>'
       amenity:
         # amenity=*
         name: Amenity

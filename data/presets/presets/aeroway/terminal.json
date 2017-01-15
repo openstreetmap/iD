@@ -1,4 +1,5 @@
 {
+    "icon": "airport",
     "geometry": [
         "point",
         "area"
@@ -14,5 +15,5 @@
     "tags": {
         "aeroway": "terminal"
     },
-    "name": "Airport terminal"
+    "name": "Airport Terminal"
 }

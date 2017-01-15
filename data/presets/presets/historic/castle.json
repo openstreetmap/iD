@@ -1,4 +1,5 @@
 {
+    "icon": "castle",
     "fields": [
         "castle_type",
         "building_area"
