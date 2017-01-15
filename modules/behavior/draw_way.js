@@ -1,3 +1,4 @@
+import * as d3 from 'd3';
 import _ from 'lodash';
 import { t } from '../util/locale';
 
@@ -20,7 +21,8 @@ import {
 
 import {
     geoChooseEdge,
-    geoEdgeEqual
+    geoEdgeEqual,
+    calcShiftPoint
 } from '../geo/index';
 
 import {
@@ -83,7 +85,11 @@ export function behaviorDrawWay(context, wayId, index, mode, baseGraph) {
         }
 
         if (!loc) {
-            loc = context.map().mouseCoordinates();
+            if (d3.event.shiftKey) {
+                loc = calcShiftPoint(context.map().mouseCoordinates(), way.nodes, isArea, context);
+            } else {
+                loc = context.map().mouseCoordinates();
+            }
         }
 
         context.replace(actionMoveNode(end.id, loc));
@@ -164,6 +170,10 @@ export function behaviorDrawWay(context, wayId, index, mode, baseGraph) {
         // prevent duplicate nodes
         var last = context.hasEntity(way.nodes[way.nodes.length - (isArea ? 2 : 1)]);
         if (last && last.loc[0] === loc[0] && last.loc[1] === loc[1]) return;
+
+        if (d3.event.shiftKey) {
+            loc = calcShiftPoint(loc, way.nodes, isArea, context);
+        }
 
         var newNode = osmNode({loc: loc});
 

@@ -29,7 +29,7 @@ export function behaviorDraw(context) {
 
 
     function datum() {
-        if (d3.event.altKey) return {};
+        if (d3.event.altKey || d3.event.shiftKey) return {};
 
         if (d3.event.type === 'keydown') {
             return (lastMouse && lastMouse.target.__data__) || {};

@@ -104,7 +104,7 @@ export function modeDragNode(context) {
 
 
     function datum() {
-        if (d3.event.sourceEvent.altKey) {
+        if (d3.event.sourceEvent.altKey || d3.event.sourceEvent.shiftKey) {
             return {};
         }
 
