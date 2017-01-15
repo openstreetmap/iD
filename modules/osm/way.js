@@ -187,34 +187,70 @@ _.extend(osmWay.prototype, {
         });
     },
 
-
+    // Adds a node (id) in front of the node which is currently at position index.
+    // If index equals length, the node (id) will be added at the end of the way.
+    // If index is negative or > length, it will throw an error.
+    // Generating consecutive duplicates is silently prevented
+    
     addNode: function(id, index) {
-        var nodes = this.nodes.slice();
-        nodes.splice(index === undefined ? nodes.length : index, 0, id);
-        return this.update({nodes: nodes});
-    },
-
-
-    updateNode: function(id, index) {
-        var nodes = this.nodes.slice();
-        nodes.splice(index, 1, id);
-        return this.update({nodes: nodes});
-    },
-
-
-    replaceNode: function(needle, replacement) {
-        if (this.nodes.indexOf(needle) < 0)
-            return this;
-
-        var nodes = this.nodes.slice();
-        for (var i = 0; i < nodes.length; i++) {
-            if (nodes[i] === needle) {
-                nodes[i] = replacement;
-            }
+        var nodes = this.nodes.slice(),
+            spliceIndex = index === undefined ? nodes.length : index;
+        if (spliceIndex > nodes.length || spliceIndex < 0) {
+            throw new Error('addNode: index ' + spliceIndex + ' is invalid');
+        }
+        if (nodes[spliceIndex] !== id&& nodes[spliceIndex-1] !== id) {
+            nodes.splice(spliceIndex, 0, id);
         }
         return this.update({nodes: nodes});
     },
 
+    // Replaces the node which is currently at position index with the given node (id). 
+    // If index is negative or >= length, it will throw an error.   
+    // Consecutive duplicates are eliminated including existing ones.
+
+    updateNode: function(id, index) {
+        var nodes = [];
+        
+        if (index === undefined || index >= this.nodes.length || index < 0) {
+            throw new Error('updateNode: index ' + index + ' is invalid');
+        }
+
+        for (var i = 0; i < this.nodes.length; i++) {
+            var node = this.nodes[i];
+            if (i === index) {
+                if (nodes[nodes.length - 1] !== id)
+                    nodes.push(id);
+            } else {
+                if (nodes[nodes.length - 1] !== node)
+                    nodes.push(node);
+            }    
+        }
+
+        return this.update({nodes: nodes});
+    },
+
+    // Replaces each occurrence of node id needle with replacement. 
+    // Consecutive duplicates are eliminated including existing ones.
+
+    replaceNode: function(needle, replacement) {
+        var nodes = [];
+
+        for (var i = 0; i < this.nodes.length; i++) {
+            var node = this.nodes[i];
+            if (node === needle) {
+                if (nodes[nodes.length - 1] !== replacement)
+                    nodes.push(replacement);
+            } else {
+                if (nodes[nodes.length - 1] !== node)
+                    nodes.push(node);
+            }    
+        }
+
+        return this.update({nodes: nodes});
+    },
+
+    // Removes each occurrence of node id needle with replacement. 
+    // Consecutive duplicates are eliminated. Circularity is preserved.
 
     removeNode: function(id) {
         var nodes = [];
