@@ -97,10 +97,14 @@ export function modeDragNode(context) {
             var vertex = context.surface().selectAll('.' + entity.id);
             behavior.target(vertex.node(), entity);
 
+            activeIDs = _.map(context.graph().parentWays(entity), 'id');
+            activeIDs.push(entity.id);
+
         } else {
             context.perform(actionNoop());
         }
 
+        setActiveElements();
         context.enter(mode);
     }
 
