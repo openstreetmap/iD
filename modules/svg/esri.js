@@ -11,6 +11,7 @@ import fromEsri from 'esri-to-geojson';
 import polygonArea from 'area-polygon';
 import polygonIntersect from 'turf-intersect';
 import polygonBuffer from 'turf-buffer';
+import { d3combobox } from '../lib/d3.combobox.js';
 
 // dictionary matching geo-properties to OpenStreetMap tags 1:1
 window.layerImports = {};
@@ -378,8 +379,25 @@ export function svgEsri(projection, context, dispatch) {
                     var samplefeature = jsondl.features[0];
                     var keys = Object.keys(samplefeature.properties);
                     esriTable.html('<thead class="tag-row"><th>Esri Service</th><th>OSM tag</th></thead>');
+                    
+                    
+                    // suggested keys
+                    var setPreset = that.preset();
+                    var fetcher = function(value, cb) {
+                        var v = value.toLowerCase();
+                        var suggestedTags = [];
+                        if (setPreset) {
+                            _.map(setPreset.fields, function(field) {
+                                 suggestedTags = suggestedTags.concat(_.map(field.keys, function(key) {
+                                     return { value: key };
+                                 }));
+                            });
+                        }
+                        cb(suggestedTags.filter(function(d) {
+                            return d.value.toLowerCase().indexOf(v) >= 0;
+                        }));
+                    };
 
-                        
                     // iterate through keys, adding a row describing each
                     // user can set a new property name for each row
                     var doKey = function(r) {
@@ -394,10 +412,13 @@ export function svgEsri(projection, context, dispatch) {
         
                         var row = esriTable.append('tr');
                         row.append('td').text(keys[r]); // .attr('class', 'key-wrap');
+                        
+                        var suggestedKeys = d3combobox().fetcher(fetcher).minItems(0);
                         var outfield = row.append('td').append('input');
                         outfield.attr('type', 'text')
                             .attr('name', keys[r])
                             .attr('placeholder', (window.layerImports[keys[r]] || samplefeature.properties[keys[r]]))
+                            .call(suggestedKeys)
                             .on('change', function() {
                                 // properties with this.name renamed to this.value
                                 window.layerImports[this.name] = this.value;
