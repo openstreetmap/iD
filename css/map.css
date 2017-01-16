@@ -1611,6 +1611,23 @@ text.esri {
     z-index: 9 !important;
 }
 
+.esri-pane .preset-icon-fill, .esri-pane .preset-icon {
+    display: inline-block;
+    margin: 0;
+    left: auto;
+    top: auto;
+    position: static;
+}
+
+.esri-pane .preset-icon-fill {
+    margin-bottom: -20px;
+}
+
+.esri-pane .preset-icon {
+    margin-left: -36px;
+    margin-right: 20px;
+}
+
 /* more importer stuff */
 
 .import-approve {

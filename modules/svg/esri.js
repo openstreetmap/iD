@@ -162,8 +162,8 @@ export function svgEsri(projection, context, dispatch) {
                   
             } else if (d.geometry.type === 'LineString') {
                 window.importedEntities.push(mapLine(d, d.geometry.coordinates));
-                var buffagon = polygonBuffer(d, 15, 'meters');
-                console.log(buffagon);
+                // var buffagon = polygonBuffer(d, 15, 'meters');
+                // console.log(buffagon);
                     
             } else if (d.geometry.type === 'MultiLineString') {
                 var lines = [];
@@ -173,6 +173,7 @@ export function svgEsri(projection, context, dispatch) {
                         role: '' // todo roles: this empty string assumes the lines make up a route
                     });
                     
+                    /*
                     var buffagon = polygonBuffer({
                       type: 'Feature',
                       geometry: {
@@ -181,6 +182,7 @@ export function svgEsri(projection, context, dispatch) {
                       }
                     }, 15, 'meters');
                     console.log(buffagon);
+                    */
                 }
                 
                 // generate a relation
@@ -256,14 +258,26 @@ export function svgEsri(projection, context, dispatch) {
     drawEsri.preset = function(preset) {
         // get / set an individual preset, or reset to null
         if (preset) {
+            console.log(preset);
+            
+            // goal:  svg class icon building tag-landuse tag-landuse-residential
+            // tag-landuse tag-landuse-residential
+            // preset.icon: building
+            var tag = preset.icon + ' tag-' + preset.id.split('/')[0] + ' tag-' + preset.id.replace('/', '-');
+            
             d3.selectAll('.esri-pane .preset label').text('OpenStreetMap preset: ');
             d3.selectAll('.esri-pane .preset span').text(preset.id);
+            d3.selectAll('.esri-pane .preset-icon-fill').attr('class', 'preset-icon-fill preset-icon-fill-area ' + tag);
+            d3.selectAll('.esri-pane .preset-icon-fill').classed('hide', false);
+            d3.selectAll('.esri-pane .preset svg')
+                .attr('class', 'icon ' + tag)
+                .html('<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#' + preset.icon + '-24"></use>');
             d3.selectAll('.esri-pane .preset button').classed('hide', false);
             this.internalPreset = preset;
         } else if (preset === null) {
             d3.selectAll('.esri-pane .preset label').text('OpenStreetMap preset (select at left)')
-            d3.selectAll('.esri-pane .preset span').text('');
-            d3.selectAll('.esri-pane .preset button').classed('hide', true);
+            d3.selectAll('.esri-pane .preset span, .esri-pane .preset svg').html('');
+            d3.selectAll('.esri-pane .preset button, .esri-pane .preset-icon-fill').classed('hide', true);
             this.internalPreset = null;
         } else {
             return this.internalPreset;

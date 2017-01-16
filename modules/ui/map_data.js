@@ -297,6 +297,8 @@ export function uiMapData(context) {
                 .attr('class', 'preset');
             preset.append('label')
                 .text('OpenStreetMap preset (select at left)');
+            preset.append('div').attr('class', 'preset-icon-fill preset-icon-fill-area hide');
+            preset.append('div').attr('class', 'preset-icon preset-icon-32').append('svg');
             preset.append('span');
             
             // click to remove a preset
