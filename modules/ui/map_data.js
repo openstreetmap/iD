@@ -4,6 +4,7 @@ import { d3keybinding } from '../lib/d3.keybinding.js';
 import { t, textDirection } from '../util/locale';
 import { svgIcon } from '../svg/index';
 import { uiTooltipHtml } from './tooltipHtml';
+
 import { tooltip } from '../util/tooltip';
 
 export function uiMapData(context) {
@@ -392,6 +393,10 @@ export function uiMapData(context) {
                 .attr('class', 'no-float hide')
                 .call(svgIcon('#icon-save', 'icon light'))
                 .text('Save');
+            
+            // TODO: make the sidebar fill itself up with things
+            // not working
+            context.ui().sidebar.boot();
         }
         
         function toggle() {

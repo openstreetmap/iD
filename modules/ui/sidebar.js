@@ -108,6 +108,15 @@ export function uiSidebar(context) {
             if (current) current.remove();
             current = null;
         };
+        
+        sidebar.boot = function() {
+            //inspector.state('hover');
+            /*
+            inspector
+                .state('select')
+                .entityID(id);
+            */
+        };
     }
 
 
