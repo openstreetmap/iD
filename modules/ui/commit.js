@@ -58,24 +58,18 @@ export function uiCommit(context) {
         context.connection().userChangesets(function (err, changesets) {
             if (err) return;
 
-            var comments = [];
-            var addedComments = [];
-
-            for (var i = 0; i < changesets.length; i++) {
-                if (changesets[i].tags.comment) {
-                    if (addedComments.indexOf(changesets[i].tags.comment) === -1) {
-                        comments.push({
-                            title: changesets[i].tags.comment,
-                            value: changesets[i].tags.comment
-                        });
-
-                        addedComments.push(changesets[i].tags.comment);
-                    }
-                }
-            }
+            var comments = changesets.map(function(changeset) {
+                return {
+                    title: changeset.tags.comment,
+                    value: changeset.tags.comment
+                };
+            });
 
             commentField
-                .call(d3combobox().caseSensitive(true).data(comments));
+                .call(d3combobox()
+                    .caseSensitive(true)
+                    .data(_.uniqBy(comments, 'title'))
+                );
         });
 
         var clippyArea = commentSection.append('div')
