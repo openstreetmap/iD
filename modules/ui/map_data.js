@@ -244,7 +244,7 @@ export function uiMapData(context) {
             */
             
             // based on the help pane            
-            this.pane = d3.select('#content').append('div')
+            this.pane = d3.selectAll('#content').append('div')
                 .attr('class', 'shaded hide esri-pane')
                 .append('div').attr('class', 'modal fillL col8')
                 .append('div').attr('class', 'cf')
@@ -374,8 +374,8 @@ export function uiMapData(context) {
                         .attr('type', 'text')
                         .attr('class', 'osm-key-' + uniqNum)
                         .on('change', function() {
-                          // properties with this.name renamed to this.value
-                          window.layerImports['add_' + this.name] = this.value;
+                            // properties with this.name renamed to this.value
+                            window.layerImports['add_' + this.name] = this.value;
                         });
                     });
             
@@ -396,9 +396,9 @@ export function uiMapData(context) {
         
         function toggle() {
             // show and hide Esri data import pane
-            var hideMe = !d3.selectAll('.esri-pane').classed('hide');
-            d3.selectAll('.esri-pane')
-                .classed('hide', hideMe);
+            var esriPane = layers.layer('esri').pane();
+            var hideMe = !esriPane.classed('hide');
+            esriPane.classed('hide', hideMe);
             
             // show autocomplete of presets
             var esriLayer = layers.layer('esri');
@@ -437,24 +437,31 @@ export function uiMapData(context) {
             context.storage('esriLayerUrl', template);
             
             // un-hide Esri pane and buttons
-            d3.selectAll('.esri-pane, .esri-pane .hide').classed('hide', false);
-            this.pane.property('scrollTop', 0);
+            var esriLayer = layers.layer('esri');
+            esriLayer.pane()
+                .classed('hide', false)
+                .property('scrollTop', 0)
+                .selectAll('.hide').classed('hide', false);
 
             // hide Esri Service URL input
-            d3.selectAll('.topurl').classed('hide', true);
+            esriLayer.pane().selectAll('.topurl').classed('hide', true);
             d3.selectAll('.editor-overwrite').classed('editor-overwrite', false);
             
             // if there is an OSM preset, add it to set tags
             window.layerImports = {};
-            var presetType = context.layers().layer('esri').preset();
-            if (presetType) {
-                var setPreset = context.presets().item(presetType);
-                
-                // set tags
+            var setPreset = context.layers().layer('esri').preset();
+            if (setPreset) {
+                // set standard tags
                 var tags = Object.keys(setPreset.tags);
                 for (var t = 0; t < tags.length; t++) {
                     window.layerImports['add_' + tags[t]] = setPreset.tags[tags[t]];
                 }
+                
+                // suggest additional OSM tags
+                var suggestedTags = [];
+                _.map(setPreset.fields, function(field) {
+                    suggestedTags = suggestedTags.concat(field.keys);
+                });
             }
             
             refreshEsriLayer(template, downloadMax);
@@ -465,7 +472,7 @@ export function uiMapData(context) {
             var esriLayer = context.layers().layer('esri');
             esriLayer.url(template, downloadMax);
             
-            d3.selectAll('.esri-pane').classed('hide', false);
+            esriLayer.pane().classed('hide', false);
         }
 
         function drawGpxItem(selection) {

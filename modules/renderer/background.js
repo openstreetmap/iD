@@ -274,10 +274,12 @@ export function rendererBackground(context) {
         });
 
         if (q.esri) {
-            var esriLayer = context.layers().layer('esri');
-            if (esriLayer) {
-                esriLayer.url(q.esri);
-            }
+            setTimeout(function() {
+                var esriLayer = context.layers().layer('esri');
+                if (esriLayer) {
+                    esriLayer.url(q.esri);
+                }
+            }, 500);
         }
 
         if (q.gpx) {

@@ -51,7 +51,6 @@ export function svgEsri(projection, context, dispatch) {
         svgEsri.initialized = true;
     }
 
-
     function drawEsri(selection) {
         var geojson = svgEsri.geojson,
             enabled = svgEsri.enabled;
@@ -233,6 +232,13 @@ export function svgEsri(projection, context, dispatch) {
         
         return this;
     }
+    
+    drawEsri.pane = function() {
+        if (!this.esripane) {
+            this.esripane = d3.selectAll('.esri-pane');
+        }
+        return this.esripane;
+    };
 
     drawEsri.enabled = function(_) {
         if (!arguments.length) return svgEsri.enabled;
@@ -248,36 +254,47 @@ export function svgEsri(projection, context, dispatch) {
     };
     
     drawEsri.windowOpen = function() {
-        return !d3.selectAll('.esri-pane').classed('hide');
+        return !this.pane().classed('hide');
     };
     
     drawEsri.awaitingUrl = function() {
-        return this.windowOpen() && (!d3.selectAll('.esri-pane .topurl').classed('hide'));
+        return this.windowOpen() && (!this.pane().selectAll('.topurl').classed('hide'));
     };
     
     drawEsri.preset = function(preset) {
         // get / set an individual preset, or reset to null
         if (preset) {
-            console.log(preset);
+            // console.log(preset)
+            // preset.tags { }
+            // preset.fields[{ keys: [], strings: { placeholders: { } } }]
             
-            // goal:  svg class icon building tag-landuse tag-landuse-residential
-            // tag-landuse tag-landuse-residential
-            // preset.icon: building
+            var presetBox = this.pane().selectAll('.preset');
+            if (!preset.icon) {
+                preset.icon = 'marker-stroked';
+            }
             var tag = preset.icon + ' tag-' + preset.id.split('/')[0] + ' tag-' + preset.id.replace('/', '-');
             
-            d3.selectAll('.esri-pane .preset label').text('OpenStreetMap preset: ');
-            d3.selectAll('.esri-pane .preset span').text(preset.id);
-            d3.selectAll('.esri-pane .preset-icon-fill').attr('class', 'preset-icon-fill preset-icon-fill-area preset-icon-fill-line' + tag);
-            d3.selectAll('.esri-pane .preset-icon-fill, .esri-pane .preset-icon').classed('hide', false);
-            d3.selectAll('.esri-pane .preset svg')
+            presetBox.selectAll('label').text('OpenStreetMap preset: ');
+            presetBox.selectAll('span').text(preset.id);
+            presetBox.selectAll('.preset-icon-fill')
+                .attr('class', 'preset-icon-fill preset-icon-fill-area preset-icon-fill-line' + tag);
+            presetBox.selectAll('.preset-icon-fill, .preset-icon')
+                .classed('hide', false);
+            presetBox.selectAll('.preset svg')
                 .attr('class', 'icon ' + tag)
                 .html('<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#' + preset.icon + '"></use><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#' + preset.icon + '-24"></use>');
-            d3.selectAll('.esri-pane .preset button').classed('hide', false);
+            presetBox.selectAll('button').classed('hide', false);
             this.internalPreset = preset;
+            
         } else if (preset === null) {
-            d3.selectAll('.esri-pane .preset label').text('OpenStreetMap preset (select at left)')
-            d3.selectAll('.esri-pane .preset span, .esri-pane .preset svg').html('');
-            d3.selectAll('.esri-pane .preset button, .esri-pane .preset-icon-fill, .esri-pane .preset-icon').classed('hide', true);
+            // removing preset status
+            presetBox.selectAll('.preset label')
+                .text('OpenStreetMap preset (select at left)');
+            presetBox.selectAll('.preset span, .preset svg')
+                .html('');
+            presetBox.selectAll('.preset button, .preset-icon-fill, .preset-icon')
+                .classed('hide', true);
+
             this.internalPreset = null;
         } else {
             return this.internalPreset;
@@ -309,10 +326,10 @@ export function svgEsri(projection, context, dispatch) {
         // turn iD Editor bounds into a query
         var bounds = context.map().trimmedExtent().bbox();
         bounds = JSON.stringify({
-            xmin: bounds.minX.toFixed(6),
-            ymin: bounds.minY.toFixed(6),
-            xmax: bounds.maxX.toFixed(6),
-            ymax: bounds.maxY.toFixed(6),
+            xmin: bounds.minX.toFixed(6) * 1,
+            ymin: bounds.minY.toFixed(6) * 1,
+            xmax: bounds.maxX.toFixed(6) * 1,
+            ymax: bounds.maxY.toFixed(6) * 1,
             spatialReference: {
               wkid: 4326
             }
@@ -334,6 +351,7 @@ export function svgEsri(projection, context, dispatch) {
             url += '&inSR=4326';
         }
         
+        var that = this;
         d3.text(url, function(err, data) {
             if (err) {
                 console.log('Esri service URL did not load');
@@ -348,52 +366,51 @@ export function svgEsri(projection, context, dispatch) {
                     window.alert('Service returned first ' + data.features.length + ' results (maximum)');
                 }
 
-                d3.selectAll('.esri-pane h3').text('Set import attributes');
+                that.pane().selectAll('h3').text('Set import attributes');
                 var esriTable = d3.selectAll('.esri-table');
                 
-                var convertedKeys = Object.keys(window.layerImports);              
-                if (!convertedKeys.length) {
+                var convertedKeys = Object.keys(window.layerImports);                              
+                if (jsondl.features.length) {
+                    // make a row for each GeoJSON property
+                    // existing name appears as a label
+                    // sample data appears as a text input placeholder
+                    // adding text over the sample data makes it into an OSM tag
+                    var samplefeature = jsondl.features[0];
+                    var keys = Object.keys(samplefeature.properties);
                     esriTable.html('<thead class="tag-row"><th>Esri Service</th><th>OSM tag</th></thead>');
-                
-                    if (jsondl.features.length) {
-                        // make a row for each GeoJSON property
-                        // existing name appears as a label
-                        // sample data appears as a text input placeholder
-                        // adding text over the sample data makes it into an OSM tag
-                        // TODO: target tags (addresses, roads, bike lanes)
-                        var samplefeature = jsondl.features[0];
-                        var keys = Object.keys(samplefeature.properties);
+
                         
-                        // iterate through keys, adding a row describing each
-                        // user can set a new property name for each row
-                        var doKey = function(r) {
-                            if (r >= keys.length) {
-                                return;
-                            }
+                    // iterate through keys, adding a row describing each
+                    // user can set a new property name for each row
+                    var doKey = function(r) {
+                        if (r >= keys.length) {
+                            return;
+                        }
+
+                        // don't allow user to change how OBJECTID works
+                        if (keys[r] === 'OBJECTID') {
+                            return doKey(r + 1);
+                        }
         
-                            // don't allow user to change how OBJECTID works
-                            if (keys[r] === 'OBJECTID') {
-                                return doKey(r + 1);
-                            }
-        
-                            var row = esriTable.append('tr');
-                            row.append('td').text(keys[r]); // .attr('class', 'key-wrap');
-                            var outfield = row.append('td').append('input');
-                            outfield.attr('type', 'text')
-                                .attr('name', keys[r])
-                                .attr('placeholder', (window.layerImports[keys[r]] || samplefeature.properties[keys[r]]))
-                                .on('change', function() {
-                                    // properties with this.name renamed to this.value
-                                    window.layerImports[this.name] = this.value;
-                                });
-                            doKey(r + 1);
-                        };
+                        var row = esriTable.append('tr');
+                        row.append('td').text(keys[r]); // .attr('class', 'key-wrap');
+                        var outfield = row.append('td').append('input');
+                        outfield.attr('type', 'text')
+                            .attr('name', keys[r])
+                            .attr('placeholder', (window.layerImports[keys[r]] || samplefeature.properties[keys[r]]))
+                            .on('change', function() {
+                                // properties with this.name renamed to this.value
+                                window.layerImports[this.name] = this.value;
+                            });
+                        doKey(r + 1);
+                    };
                         
-                        doKey(0);
-                    } else {
-                        console.log('no feature to build table from');
-                    }
+                    doKey(0);
                 } else {
+                    console.log('no feature to build table from');
+                }
+                
+                if (convertedKeys.length) {
                     // if any import properties were added, make these mods and reject all other properties
                     var processGeoFeature = function (selectfeature) {
                         // keep the OBJECTID to make sure we don't download the same data multiple times
