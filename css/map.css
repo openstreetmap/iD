@@ -1603,8 +1603,8 @@ text.esri {
     right: auto !important;
 }
 
-.esri-table.hide {
-    display: none;
+.esri-table.hide, .esri-pane .hide {
+    display: none !important;
 }
 
 .esri-pane.shaded {

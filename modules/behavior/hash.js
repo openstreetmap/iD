@@ -51,6 +51,11 @@ export function behaviorHash(context) {
         newParams.map = zoom.toFixed(2) +
             '/' + center[1].toFixed(precision) +
             '/' + center[0].toFixed(precision);
+        
+        var esriLayer = context.layers().layer('esri').originalURL;
+        if (esriLayer) {
+            q.esri = esriLayer;
+        }
 
         return '#' + utilQsString(_.assign(q, newParams), true);
     };

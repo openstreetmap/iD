@@ -267,17 +267,17 @@ export function svgEsri(projection, context, dispatch) {
             
             d3.selectAll('.esri-pane .preset label').text('OpenStreetMap preset: ');
             d3.selectAll('.esri-pane .preset span').text(preset.id);
-            d3.selectAll('.esri-pane .preset-icon-fill').attr('class', 'preset-icon-fill preset-icon-fill-area ' + tag);
-            d3.selectAll('.esri-pane .preset-icon-fill').classed('hide', false);
+            d3.selectAll('.esri-pane .preset-icon-fill').attr('class', 'preset-icon-fill preset-icon-fill-area preset-icon-fill-line' + tag);
+            d3.selectAll('.esri-pane .preset-icon-fill, .esri-pane .preset-icon').classed('hide', false);
             d3.selectAll('.esri-pane .preset svg')
                 .attr('class', 'icon ' + tag)
-                .html('<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#' + preset.icon + '-24"></use>');
+                .html('<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#' + preset.icon + '"></use><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#' + preset.icon + '-24"></use>');
             d3.selectAll('.esri-pane .preset button').classed('hide', false);
             this.internalPreset = preset;
         } else if (preset === null) {
             d3.selectAll('.esri-pane .preset label').text('OpenStreetMap preset (select at left)')
             d3.selectAll('.esri-pane .preset span, .esri-pane .preset svg').html('');
-            d3.selectAll('.esri-pane .preset button, .esri-pane .preset-icon-fill').classed('hide', true);
+            d3.selectAll('.esri-pane .preset button, .esri-pane .preset-icon-fill, .esri-pane .preset-icon').classed('hide', true);
             this.internalPreset = null;
         } else {
             return this.internalPreset;
@@ -293,6 +293,10 @@ export function svgEsri(projection, context, dispatch) {
     };
 
     drawEsri.url = function(true_url, downloadMax) {
+        if (!this.originalURL) {
+            this.originalURL = true_url;
+        }
+    
         // add necessary URL parameters to the user's URL
         var url = true_url;
         if (url.indexOf('outSR') === -1) {
