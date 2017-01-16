@@ -228,9 +228,30 @@ export function uiMapData(context) {
                 return;
             }
             
+            /*
+            <div class="shaded" style="opacity: 1;">
+              <div class="modal fillL col6">
+                <div class="cf">
+                  <div class="modal-section">
+                    <h3>Title</h3>
+                  </div>
+                  <div class="modal-section">
+                    <p>Body</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            */
+            
             // based on the help pane            
-            this.pane = d3.select('.map-controls').append('div')
+            this.pane = d3.select('#content').append('div')
+                .attr('class', 'shaded hide esri-pane')
+                .append('div').attr('class', 'modal fillL col8')
+                .append('div').attr('class', 'cf')
+                .append('div').attr('class', 'modal-section');
+            /*
                 .attr('class', 'help-wrap map-overlay fillL col5 content hide esri-pane');
+            */
                         
             // exit button
             this.pane.append('button')
@@ -317,7 +338,8 @@ export function uiMapData(context) {
             
             body.append('table')
                     .attr('border', '1')
-                    .attr('class', 'esri-table hide'); // tag-list
+                    .attr('class', 'esri-table hide') // tag-list
+                    .append('img').attr('src', '/img/loader-white.gif');
             
             // this button adds a new field to data brought in from the Esri service
             // for example you can add addr:state=VA to a city's addresses which otherwise wouldn't have this repeated field

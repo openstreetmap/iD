@@ -1603,6 +1603,14 @@ text.esri {
     right: auto !important;
 }
 
+.esri-table.hide {
+    display: none;
+}
+
+.esri-pane.shaded {
+    z-index: 9 !important;
+}
+
 /* more importer stuff */
 
 .import-approve {
