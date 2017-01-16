@@ -298,6 +298,19 @@ export function uiInit(context) {
         });
     }
 
+    ui.restart = function(arg) {
+        context.container().selectAll('*').remove();   
+        context.locale(arg);
+        context.loadLocale(function(err) {
+            if (!err) {
+                context.history().unlock();
+                render(context.container());
+            }
+        });
+    };
+
+    window.restart = ui.restart;
+   
     ui.sidebar = uiSidebar(context);
 
     return ui;
