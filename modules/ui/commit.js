@@ -59,13 +59,18 @@ export function uiCommit(context) {
             if (err) return;
 
             var comments = [];
+            var addedComments = [];
 
             for (var i = 0; i < changesets.length; i++) {
                 if (changesets[i].tags.comment) {
-                    comments.push({
-                        title: changesets[i].tags.comment,
-                        value: changesets[i].tags.comment
-                    });
+                    if (addedComments.indexOf(changesets[i].tags.comment) === -1) {
+                        comments.push({
+                            title: changesets[i].tags.comment,
+                            value: changesets[i].tags.comment
+                        });
+
+                        addedComments.push(changesets[i].tags.comment);
+                    }
                 }
             }
 
