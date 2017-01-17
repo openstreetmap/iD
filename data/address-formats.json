@@ -24,7 +24,12 @@
             ]
         },
         {
-            "countryCodes": ["ad", "at", "ba", "be", "ch", "cz", "de", "dk", "es", "fi", "gr", "hr", "is", "it", "li", "nl", "no", "pl", "pt", "se", "si", "sk", "sm", "va"],
+            "countryCodes": [
+                "ad", "at", "ba", "be", "ch", "cz",
+                "de", "dk", "es", "fi", "gr", "hr",
+                "is", "it", "li", "nl", "no", "pl",
+                "pt", "se", "si", "sk", "sm", "va"
+            ],
             "format": [
                 ["street", "housenumber"],
                 ["postcode", "city"]
@@ -53,8 +58,7 @@
                 ["district"],
                 ["city"],
                 ["province", "postcode"]
-            ],
-            "customPlaceholders": ["subdistrict", "district", "city"]
+            ]
         },
         {
             "countryCodes": ["us"],
@@ -86,13 +90,17 @@
                 ["quarter", "neighbourhood"],
                 ["block_number", "housenumber"]
             ],
-            "customPlaceholders": ["province", "county", "city", "suburb", "quarter", "neighbourhood", "block_number", "housenumber"],
-            "dropdowns": ["postcode", "province", "county", "city", "suburb", "quarter", "neighbourhood", "block_number"],
+            "dropdowns": [
+                "postcode", "province", "county",
+                "city", "suburb",
+                "quarter", "neighbourhood",
+                "block_number"
+            ],
             "widths": {
                 "postcode": 0.3, "province": 0.35, "county": 0.35,
                 "city": 0.65, "suburb": 0.35,
                 "quarter": 0.5, "neighbourhood": 0.5,
-                "block_number": 0.5
+                "block_number": 0.5, "housenumber": 0.5
             }
         },
         {
