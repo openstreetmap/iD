@@ -3,7 +3,7 @@ describe('iD.serviceNominatim', function() {
 
     beforeEach(function() {
         server = sinon.fakeServer.create();
-        nominatim = iD.services.nominatim;
+        nominatim = iD.services.geocoder;
         nominatim.reset();
     });
 
