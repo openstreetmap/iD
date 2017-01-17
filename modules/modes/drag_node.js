@@ -79,12 +79,16 @@ export function modeDragNode(context) {
 
 
     function start(entity) {
+        activeIDs = _.map(context.graph().parentWays(entity), 'id');
+        activeIDs.push(entity.id);
+        wasMidpoint = entity.type === 'midpoint';
+
         isCancelled = d3.event.sourceEvent.shiftKey ||
+            !(wasMidpoint || _.some(activeIDs, function (activeID) { return selectedIDs.indexOf(activeID) !== -1; })) ||
             context.features().hasHiddenConnections(entity, context.graph());
 
         if (isCancelled) return behavior.cancel();
 
-        wasMidpoint = entity.type === 'midpoint';
         if (wasMidpoint) {
             var midpoint = entity;
             entity = osmNode();
@@ -93,12 +97,14 @@ export function modeDragNode(context) {
             var vertex = context.surface().selectAll('.' + entity.id);
             behavior.target(vertex.node(), entity);
 
+            activeIDs = _.map(context.graph().parentWays(entity), 'id');
+            activeIDs.push(entity.id);
+
         } else {
             context.perform(actionNoop());
         }
 
-        activeIDs = _.map(context.graph().parentWays(entity), 'id');
-        activeIDs.push(entity.id);
+        setActiveElements();
         context.enter(mode);
     }
 

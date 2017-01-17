@@ -15,7 +15,7 @@ export {
 
 export function uiFieldCombo(field, context) {
     var dispatch = d3.dispatch('change'),
-        nominatim = services.nominatim,
+        nominatim = services.geocoder,
         taginfo = services.taginfo,
         isMulti = (field.type === 'multiCombo'),
         isNetwork = (field.type === 'networkCombo'),

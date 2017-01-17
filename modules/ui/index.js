@@ -1,5 +1,4 @@
 export { uiInit } from './init';
-export { uiFields } from './fields/index';
 export { uiAccount } from './account';
 export { uiAttribution } from './attribution';
 export { uiBackground } from './background';
@@ -18,7 +17,6 @@ export { uiGeolocate } from './geolocate';
 export { uiHelp } from './help';
 export { uiInfo } from './info';
 export { uiInspector } from './inspector';
-export { uiIntro } from './intro';
 export { uiLasso } from './lasso';
 export { uiLoading } from './loading';
 export { uiMapData } from './map_data';

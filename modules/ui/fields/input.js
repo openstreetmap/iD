@@ -15,7 +15,7 @@ export {
 
 export function uiFieldText(field, context) {
     var dispatch = d3.dispatch('change'),
-        nominatim = services.nominatim,
+        nominatim = services.geocoder,
         input,
         entity;
 

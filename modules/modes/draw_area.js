@@ -11,17 +11,18 @@ export function modeDrawArea(context, wayId, baseGraph) {
 
 
     mode.enter = function() {
-        var way = context.entity(wayId),
-            headId = way.nodes[way.nodes.length - 2],
-            tailId = way.first();
+        var way = context.entity(wayId);
 
-        behavior = behaviorDrawWay(context, wayId, -1, mode, baseGraph)
+        behavior = behaviorDrawWay(context, wayId, undefined, mode, baseGraph)
             .tail(t('modes.draw_area.tail'));
 
         var addNode = behavior.addNode;
 
         behavior.addNode = function(node) {
-            if (node.id === headId || node.id === tailId) {
+            var length = way.nodes.length,
+                penultimate = length > 2 ? way.nodes[length - 2] : null;
+
+            if (node.id === way.first() || node.id === penultimate) {
                 behavior.finish();
             } else {
                 addNode(node);
