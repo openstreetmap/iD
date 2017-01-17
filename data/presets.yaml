@@ -84,7 +84,7 @@ en:
         # access=*
         label: Access
       address:
-        # 'addr:block_number=*, addr:city=*, addr:conscriptionnumber=*, addr:county=*, addr:country=*, addr:district=*, addr:floor=*, addr:hamlet=*, addr:housename=*, addr:housenumber=*, addr:neighbourhood=*, addr:place=*, addr:postcode=*, addr:province=*, addr:quarter=*, addr:state=*, addr:street=*, addr:subdistrict=*, addr:suburb=*'
+        # 'addr:block_number=*, addr:city=*, addr:block_number=*, addr:conscriptionnumber=*, addr:county=*, addr:country=*, addr:county=*, addr:district=*, addr:floor=*, addr:hamlet=*, addr:housename=*, addr:housenumber=*, addr:neighbourhood=*, addr:place=*, addr:postcode=*, addr:province=*, addr:quarter=*, addr:state=*, addr:street=*, addr:subdistrict=*, addr:suburb=*'
         label: Address
         placeholders:
           block_number: Block Number
@@ -110,12 +110,7 @@ en:
           province: Province
           province!jp: Prefecture
           quarter: Quarter
-          quarter!jp: Ōaza/Mach
-          neighbourhood: Neighbourhood
-          place: Place
-          postcode: Postcode
-          province: Province
-          quarter: Quarte
+          quarter!jp: Ōaza/Machi
           state: State
           street: Street
           subdistrict: Subdistrict

@@ -16,11 +16,9 @@ import { utilGetSetValue } from '../../util/get_set_value';
 
 export function uiFieldAddress(field, context) {
     var dispatch = d3.dispatch('init', 'change'),
-        nominatim = services.nominatim,
+        nominatim = services.geocoder,
         wrap = d3.select(null),
         isInitialized = false,
-        widths,
-        addrTags,
         entity;
 
     function getNearStreets() {
@@ -122,8 +120,10 @@ export function uiFieldAddress(field, context) {
             return a && a.countryCodes && _.includes(a.countryCodes, countryCode);
         }) || _.first(dataAddressFormats);
 
-        if (typeof addressFormat.widths !== 'undefined') { widths = addressFormat.widths; }
-        else { widths = {housenumber: 1/3, street: 2/3, city: 2/3, state: 1/4, postcode: 1/3}; }
+        var widths = addressFormat.widths || {
+            housenumber: 1/3, street: 2/3,
+            city: 2/3, state: 1/4, postcode: 1/3
+        };
 
         function row(r) {
             // Normalize widths.
@@ -150,23 +150,24 @@ export function uiFieldAddress(field, context) {
             .append('input')
             .property('type', 'text')
             .attr('placeholder', function (d) {
-              var countryInserter = '';
-              if (addressFormat.customPlaceholders.indexOf(d.id) !== -1) { countryInserter = '!' + countryCode; }
-              return field.t('placeholders.' + d.id + countryInserter); })
+                var localkey = d.id + '!' + countryCode,
+                    tkey = field.strings.placeholders[localkey] ? localkey : d.id;
+                return field.t('placeholders.' + tkey);
+            })
             .attr('class', function (d) { return 'addr-' + d.id; })
             .style('width', function (d) { return d.width * 100 + '%'; });
 
         // Update
+
         // setup dropdowns for common address tags
-        if (typeof addressFormat.dropdowns !== 'undefined') { addrTags = addressFormat.dropdowns; }
-        else { addrTags = [
+        var dropdowns = addressFormat.dropdowns || [
             'city', 'county', 'country', 'district', 'hamlet',
             'neighbourhood', 'place', 'postcode', 'province',
             'quarter', 'state', 'street', 'subdistrict', 'suburb'
-        ]; }
+        ];
 
         // If fields exist for any of these tags, create dropdowns to pick nearby values..
-        addrTags.forEach(function(tag) {
+        dropdowns.forEach(function(tag) {
             var nearValues = (tag === 'street') ? getNearStreets
                     : (tag === 'city') ? getNearCities
                     : getNearValues;
@@ -201,7 +202,6 @@ export function uiFieldAddress(field, context) {
             .append('div')
             .attr('class', 'preset-input-wrap')
             .merge(wrap);
-
 
         if (nominatim && entity) {
             var center = entity.extent(context.graph()).center();
