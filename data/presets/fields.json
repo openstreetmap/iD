@@ -81,9 +81,11 @@
             "keys": [
                 "addr:block_number",
                 "addr:city",
+                "addr:block_number",
                 "addr:conscriptionnumber",
                 "addr:county",
                 "addr:country",
+                "addr:county",
                 "addr:district",
                 "addr:floor",
                 "addr:hamlet",
@@ -109,9 +111,11 @@
                 "placeholders": {
                     "block_number": "Block number",
                     "city": "City",
+                    "block_number": "Block Number",
                     "conscriptionnumber": "123",
                     "county": "County",
                     "country": "Country",
+                    "county": "County",
                     "district": "District",
                     "floor": "Floor",
                     "hamlet": "Hamlet",
@@ -125,7 +129,18 @@
                     "state": "State",
                     "street": "Street",
                     "subdistrict": "Subdistrict",
-                    "suburb": "Suburb"
+                    "suburb": "Suburb",
+                    "subdistrict!vn": "Ward/Commune/Townlet",
+                    "district!vn": "Arrondissement/Town/District",
+                    "city!vn": "City/Town",
+                    "province!jp": "Prefecture",
+                    "county!jp": "District",
+                    "city!jp": "City/Town/Village/Tokyo Special Ward",
+                    "suburb!jp": "Ward",
+                    "quarter!jp": "Ōaza/Machi",
+                    "neighbourhood!jp": "Chōme/Aza/Koaza",
+                    "block_number!jp": "Block No.",
+                    "housenumber!jp": "Building No./Lot No."
                 }
             }
         },
