@@ -1221,6 +1221,51 @@ button.save.has-count .count::before {
     border-bottom-right-radius: 4px;
 }
 
+/* lanes */
+
+.form-field-lanes {
+    
+}
+
+.form-field-lanes > .lanes-info {
+    margin-bottom: 10px;
+}
+
+
+
+.lane-tags > label {
+    position: relative;
+    padding: 5px 10px;
+    display: block;
+    height: 30px;
+    background-color: white;
+    color: #7092FF;
+    cursor: pointer;
+}
+
+.lane-tags > label:hover {
+    background-color: #ececec;
+}
+
+.lane-tags > label:not(:last-child) {
+    border-bottom: 1px solid #ccc;
+}
+
+.lane-tags > label:last-child {
+    border-radius: 0 0 3px 3px;
+}
+
+.lane-tags label > span {
+    display: block;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.lane-tags > label.active {
+    background: #E8EBFF;
+}
+
 /* preset form multicombo */
 
 .form-field-multicombo {

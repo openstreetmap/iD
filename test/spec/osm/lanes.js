@@ -1,4 +1,4 @@
-describe('iD.Lanes', function() {
+describe.only('iD.Lanes', function() {
 
     describe('default lane tags', function() {
 
@@ -271,6 +271,7 @@ describe('iD.Lanes', function() {
                     backward: 0,
                     bothways: 0
                 });
+               
         });
 
         it('skips provided lanes:backward value when oneway=yes', function() {
@@ -624,7 +625,7 @@ describe('iD.Lanes', function() {
                 ]);
         });
 
-        it('turnLanes is undefined when not present', function() {
+        it('turnLanes is [] when not present', function() {
             var metadata = iD.Way({
                 tags: {
                     highway: 'tertiary',
@@ -634,14 +635,14 @@ describe('iD.Lanes', function() {
             }).lanes().metadata;
 
             expect(metadata.turnLanes.unspecified)
-                .to.equal(undefined);
+                .to.deep.equal([]);
             expect(metadata.turnLanes.forward)
-                .to.equal(undefined);
+                .to.deep.equal([]);
             expect(metadata.turnLanes.backward)
-                .to.equal(undefined);
+                .to.deep.equal([]);
         });
 
-        it('turnLanes.forward and turnLanes.backward are both undefined when both are not provided', function() {
+        it('turnLanes.forward and turnLanes.backward are both [] when both are not provided', function() {
             var metadata = iD.Way({
                 tags: {
                     highway: 'tertiary',
@@ -654,9 +655,9 @@ describe('iD.Lanes', function() {
             expect(metadata.turnLanes.unspecified)
                 .to.deep.equal([['through'], ['through', 'slight_right']]);
             expect(metadata.turnLanes.forward)
-                .to.equal(undefined);
+                .to.deep.equal([]);
             expect(metadata.turnLanes.backward)
-                .to.equal(undefined);
+                .to.deep.equal([]);
         });
 
         it('parses turnLane correctly when lanes:both_ways=1', function() {
