@@ -228,6 +228,7 @@ export function uiInit(context) {
 
         var mapDimensions = map.dimensions();
 
+
         function onResize() {
             mapDimensions = utilGetDimensions(content, true);
             map.dimensions(mapDimensions);
@@ -246,6 +247,7 @@ export function uiInit(context) {
                 }
             };
         }
+
 
         // pan amount
         var pa = 10;
@@ -285,7 +287,10 @@ export function uiInit(context) {
     }
 
 
+    var initCallback;
+
     function ui(node, callback) {
+        initCallback = callback;
         var container = d3.select(node);
         context.container(container);
         context.loadLocale(function(err) {
@@ -298,19 +303,21 @@ export function uiInit(context) {
         });
     }
 
+
     ui.restart = function(arg) {
-        context.container().selectAll('*').remove();   
         context.locale(arg);
         context.loadLocale(function(err) {
             if (!err) {
+                context.container().selectAll('*').remove();
                 context.history().unlock();
                 render(context.container());
+                if (initCallback) initCallback();
             }
         });
     };
 
     window.restart = ui.restart;
-   
+
     ui.sidebar = uiSidebar(context);
 
     return ui;

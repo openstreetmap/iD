@@ -99,7 +99,8 @@ export function rendererMap(context) {
 
         selection
             .on('dblclick.map', dblClick)
-            .call(zoom, projection.transform());
+            .call(zoom)
+            .call(zoom.transform, projection.transform());
 
         supersurface = selection.append('div')
             .attr('id', 'supersurface')
