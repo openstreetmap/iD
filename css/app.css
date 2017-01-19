@@ -1251,6 +1251,12 @@ button.save.has-count .count::before {
     border-bottom: 0;
 }
 
+.form-field-lanes .entry {
+    margin-top: 10px;
+    opacity: 1;
+    overflow: visible;
+}
+
 .lane-tags > label {
     position: relative;
     padding: 5px 10px;

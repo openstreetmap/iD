@@ -64,14 +64,12 @@ export function uiFieldLanes(field, context) {
             .attr('id', function(d) { return 'preset-input-lanes-' + d; })
             .each(function(d) {
                     this.value = metadata[d];
-                   
                 });
 
         // Update
         items = items.merge(enter);
         items.selectAll('input')
             .property('value', function (d) {
-                console.log('there');
                 return metadata[d];
             });
 
@@ -85,19 +83,15 @@ export function uiFieldLanes(field, context) {
                 .data([0])
                 .enter()
                 .append('label')
-                .attr('class','form-label')
+                .attr('class','form-label entry')
                 .text('Turn Lanes');
 
         var wrap = selection.selectAll('.preset-input-wrap')
             .data([0]);
-        var metadata = lanesData.metadata;
             
          wrap = wrap.enter()
             .append('div')
-            .attr('class', 'preset-input-wrap checkselect')
-        //     .append('ul');
-        //     // .merge(wrap);
-        
+            .attr('class', 'lane-tags preset-input-wrap checkselect')
 
 
         var label = wrap.selectAll('.label')
@@ -117,11 +111,55 @@ export function uiFieldLanes(field, context) {
             .text(function (d) { return d;})
             .attr('class', 'value');
 
-        // label = label.merge(labelEnter);
-
-        selection.selectAll('input').property('checked', function () {
+        var input = selection.selectAll('input');
+        input.property('checked', function () {
             return Math.random() > 0.4;
         });
+
+        input.on('click', function() {
+            var key = utilGetSetValue(d3.select(this)) || undefined;
+            console.log(key);
+            d3.event.stopPropagation();
+        });
+    }
+
+    function laneSelectorUI(selection) {
+        var items;
+        selection.selectAll('.form-label')
+                .data([0])
+                .enter()
+                .append('label')
+                .attr('class','form-label entry')
+                .text('Select Lane');
+
+        var wrap = selection.selectAll('.preset-input-wrap')
+            .data([0]);
+            
+         wrap = wrap.enter()
+            .append('div')
+            .attr('class', 'lane-tags preset-input-wrap checkselect')
+            .merge(wrap);
+        
+        var list = wrap.selectAll('ul')
+            .data([0]);
+
+        list = list.enter()
+            .append('ul')
+            .merge(list);
+
+        items = list.selectAll('li')
+            .data(_.fill(Array(lanesData.metadata.count), 0).map(function (n, i) {
+                return i;
+            }));
+        
+       items.enter()
+            .append('li')
+            .append('span').text(function (d) {
+                return d;
+            });
+
+        items.exit().remove();
+        
     }
 
 
@@ -140,19 +178,26 @@ export function uiFieldLanes(field, context) {
             .append('div')
             .attr('class', 'lanes-info')
             .merge(lanesInfo);
-        console.log('called', lanesData.metadata);
-        lanesInfoUI(lanesInfo);
+        lanesInfo.call(lanesInfoUI);
+
+        var laneSelector = selection.selectAll('.lanes-selector').data([0]);
+
+        laneSelector = laneSelector.enter()
+            .append('div')
+            .attr('class', 'lanes-selector localized-wrap')
+            .merge(laneSelector);
+        
+        laneSelector.call(laneSelectorUI);
+
 
         var turnLanes = selection.selectAll('.turn-lanes').data([0]);
         turnLanes = turnLanes.enter()
             .append('div')
             .attr('class', 'turn-lanes localized-wrap')
-            // .append('div')
-            // .attr('class', 'entry')
-            // .attr('style', 'margin-top: 10px;opacity: 1;overflow: visible;')
             .merge(turnLanes);
+        turnLanes.call(turnLanesUI);
 
-        turnLanesUI(turnLanes);
+
 
         var wrap = selection.selectAll('.lane-input-wrap')
             .data([0]);
