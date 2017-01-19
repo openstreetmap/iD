@@ -32,10 +32,15 @@ import { uiUndoRedo } from './undo_redo';
 import { uiZoom } from './zoom';
 import { uiCmd } from './cmd';
 
+var uiInitCounter = 0;
+
 
 export function uiInit(context) {
 
     function render(container) {
+        container
+            .attr('dir', textDirection);
+
         var map = context.map();
 
         var hash = behaviorHash(context);
@@ -68,12 +73,8 @@ export function uiInit(context) {
         content
             .append('div')
             .attr('id', 'map')
-            .attr('dir', 'ltr')
+            // .attr('dir', 'ltr')
             .call(map);
-
-        if (textDirection === 'rtl') {
-            d3.select('body').attr('dir', 'rtl');
-        }
 
         content
             .call(uiMapInMap(context));
@@ -268,9 +269,11 @@ export function uiInit(context) {
 
         context.enter(modeBrowse(context));
 
-        context.container()
-            .call(uiSplash(context))
-            .call(uiRestore(context));
+        if (!uiInitCounter++) {
+            context.container()
+                .call(uiSplash(context))
+                .call(uiRestore(context));
+        }
 
         var authenticating = uiLoading(context)
             .message(t('loading_auth'))
@@ -284,6 +287,8 @@ export function uiInit(context) {
             .on('authDone.ui', function() {
                 authenticating.close();
             });
+
+        uiInitCounter++;
     }
 
 
@@ -315,6 +320,7 @@ export function uiInit(context) {
             }
         });
     };
+
 
     window.restart = ui.restart;
 
