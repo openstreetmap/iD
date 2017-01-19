@@ -1227,11 +1227,29 @@ button.save.has-count .count::before {
     
 }
 
-.form-field-lanes > .lanes-info {
+.form-field-lanes .lanes-info {
     margin-bottom: 10px;
 }
 
+.form-field-lanes .preset-input-wrap input {
+    border-radius: 0;
+    border-width: 0;
+    border-bottom-width: 1px;
+}
 
+.form-field-lanes .preset-input-lanes-wrap input {
+    border-radius: 0;
+    border-width: 0;
+    border-left-width: 1px;
+}
+
+.form-field-lanes .preset-input-wrap li {
+    border-bottom: 1px solid #CCC;
+}
+
+.form-field-lanes .preset-input-wrap li:last-child {
+    border-bottom: 0;
+}
 
 .lane-tags > label {
     position: relative;

@@ -7,17 +7,17 @@ import { d3combobox } from '../../lib/d3.combobox.js';
 import { utilGetSetValue } from '../../util/get_set_value';
 
 
-function validLanes() {
-    return [
+var validLanes = [
         'left', 'slight_left', 'sharp_left', 'through', 'right', 'slight_right',
         'sharp_right', 'reverse', 'merge_to_left', 'merge_to_right', 'none'
     ];
-}
+
 
 export function uiFieldLanes(field, context) {
     var dispatch = d3.dispatch('change'),
         LANE_WIDTH = 40,
         LANE_HEIGHT = 200,
+        currentLane = 0,
         wayID,
         lanesData;
     
@@ -29,7 +29,7 @@ export function uiFieldLanes(field, context) {
 
         wrap = wrap.enter()
             .append('div')
-            .attr('class', 'cf preset-input-wrap')
+            .attr('class', 'preset-input-wrap')
             .append('ul')
             .merge(wrap);
 
@@ -51,17 +51,17 @@ export function uiFieldLanes(field, context) {
 
         enter
             .append('span')
-            .attr('class', 'col6 label preset-label-access')
-            .attr('for', function(d) { return 'preset-input-access-' + d; })
+            .attr('class', 'col6 label preset-label-')
+            .attr('for', function(d) { return 'preset-input-' + d; })
             .text(function(d) { return d; });
 
         enter
             .append('div')
-            .attr('class', 'col6 preset-input-access-wrap')
+            .attr('class', 'col6 preset-input-lanes-wrap')
             .append('input')
             .attr('type', 'text')
-            .attr('class', 'preset-input-access')
-            .attr('id', function(d) { return 'preset-input-access-' + d; })
+            .attr('class', 'preset-input-lanes')
+            .attr('id', function(d) { return 'preset-input-lanes-' + d; })
             .each(function(d) {
                     this.value = metadata[d];
                    
@@ -71,6 +71,7 @@ export function uiFieldLanes(field, context) {
         items = items.merge(enter);
         items.selectAll('input')
             .property('value', function (d) {
+                console.log('there');
                 return metadata[d];
             });
 
@@ -80,62 +81,27 @@ export function uiFieldLanes(field, context) {
     }
 
     function turnLanesUI(selection) {
-        
-   
-        var laneTags = selection.selectAll('.lane-tags').data([0]);
-
-       
-         laneTags
+        selection.selectAll('.form-label')
+                .data([0])
                 .enter()
                 .append('label')
                 .attr('class','form-label')
                 .text('Turn Lanes');
 
-        var laneTagsEnter = laneTags
-            .enter()
-            .append('div')
-            .attr('class', 'lane-tags cf preset-input-wrap')
-            .classed('checkselect', 'true');
-
-        var inputNumber = laneTagsEnter.append('input')
-            .attr('type', 'field.type')
-            .attr('id', 'fieldId')
-            .attr('placeholder', 'inspector.unknown')
-            .attr('type', 'text');
-
-        var spinControl = laneTagsEnter.selectAll('.spin-control')
+        var wrap = selection.selectAll('.preset-input-wrap')
             .data([0]);
-
-        var spinControlEnter = spinControl.enter()
+        var metadata = lanesData.metadata;
+            
+         wrap = wrap.enter()
             .append('div')
-            .attr('class', 'spin-control');
-
-        spinControlEnter
-            .append('button')
-            .datum(1)
-            .attr('class', 'increment')
-            .attr('tabindex', -1);
-
-        spinControlEnter
-            .append('button')
-            .datum(-1)
-            .attr('class', 'decrement')
-            .attr('tabindex', -1);
-
-        spinControl = spinControl
-            .merge(spinControlEnter);
-
-        spinControl.selectAll('button')
-            .on('click', function(d) {
-                d3.event.preventDefault();
-                var num = parseInt(inputNumber.node().value || 0, 10);
-                if (!isNaN(num) && num + d > 0 && num + d <= lanesData.metadata.count) inputNumber.node().value = num + d;
-            });
+            .attr('class', 'preset-input-wrap checkselect')
+        //     .append('ul');
+        //     // .merge(wrap);
+        
 
 
-
-        var label = laneTagsEnter.selectAll('.label')
-            .data(validLanes());
+        var label = wrap.selectAll('.label')
+            .data(validLanes);
 
         var labelEnter = label.enter()
             .append('label');
@@ -151,7 +117,11 @@ export function uiFieldLanes(field, context) {
             .text(function (d) { return d;})
             .attr('class', 'value');
 
-        label = label.merge(labelEnter);
+        // label = label.merge(labelEnter);
+
+        selection.selectAll('input').property('checked', function () {
+            return Math.random() > 0.4;
+        });
     }
 
 
@@ -176,8 +146,12 @@ export function uiFieldLanes(field, context) {
         var turnLanes = selection.selectAll('.turn-lanes').data([0]);
         turnLanes = turnLanes.enter()
             .append('div')
-            .attr('class', 'turn-lanes')
+            .attr('class', 'turn-lanes localized-wrap')
+            // .append('div')
+            // .attr('class', 'entry')
+            // .attr('style', 'margin-top: 10px;opacity: 1;overflow: visible;')
             .merge(turnLanes);
+
         turnLanesUI(turnLanes);
 
         var wrap = selection.selectAll('.lane-input-wrap')
@@ -200,6 +174,7 @@ export function uiFieldLanes(field, context) {
     }
 
     function change(d) {
+        console.log('hola')
         var tag = {};
         if (d === 'count') {
             tag.lanes = utilGetSetValue(d3.select(this)) || undefined;
@@ -225,7 +200,9 @@ export function uiFieldLanes(field, context) {
         }
     };
 
-    lanes.tags = function() {};
+    lanes.tags = function(tags) {
+        console.log(tags, field.key, 'lolololoxsxs');
+    };
     lanes.focus = function() {};
     lanes.off = function() {};
 
