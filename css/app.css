@@ -1257,6 +1257,42 @@ button.save.has-count .count::before {
     overflow: visible;
 }
 
+.lane-selector ul {
+    display: flex;
+    flex-direction: row;
+    
+}
+
+.lane-selector .lane-item {
+    cursor: pointer;
+    display: flex;
+    flex-grow: 1;
+    border-right: 1px solid #ccc;
+    border-bottom: 0;
+    flex-direction: column;
+    align-items: center;
+    background-color: white;
+}
+
+.lane-selector .lane-item.active {
+    background-color: #E8EBFF;
+}
+.lane-selector .lane-item.active:hover {
+    background-color: #E8EBFF;
+}
+.lane-selector .lane-item:hover {
+    background-color: #ececec;
+}
+
+.lane-selector .lane-item:last-child {
+    border-right: 0;
+}
+
+.lane-selector .lane-item span {
+    height: 30px;
+    padding: 5px 10px 5px 10px;
+}
+
 .lane-tags > label {
     position: relative;
     padding: 5px 10px;

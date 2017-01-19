@@ -89,7 +89,9 @@ export function osmLanes(entity) {
             taxiLanes: taxiLanes,
             hovLanes: hovLanes,
             hgvLanes: hgvLanes,
-            bicyclewayLanes: bicyclewayLanes
+            bicyclewayLanes: bicyclewayLanes,
+            leftHandDrive: false,
+            reverse: parseInt(tags.oneway, 10) === -1
         },
         lanes: lanesObj,
         lanesArray: flattenLanesArray(lanesArray(
@@ -107,7 +109,9 @@ export function osmLanes(entity) {
             taxiLanes: taxiLanes,
             hovLanes: hovLanes,
             hgvLanes: hgvLanes,
-            bicyclewayLanes: bicyclewayLanes
+            bicyclewayLanes: bicyclewayLanes,
+            leftHandDrive: false,
+            reverse: parseInt(tags.oneway, 10) === -1
         }))
     };
 }
