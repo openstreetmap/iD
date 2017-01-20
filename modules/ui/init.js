@@ -32,10 +32,10 @@ import { uiUndoRedo } from './undo_redo';
 import { uiZoom } from './zoom';
 import { uiCmd } from './cmd';
 
-var uiInitCounter = 0;
-
 
 export function uiInit(context) {
+    var uiInitCounter = 0;
+
 
     function render(container) {
         container
@@ -73,7 +73,6 @@ export function uiInit(context) {
         content
             .append('div')
             .attr('id', 'map')
-            // .attr('dir', 'ltr')
             .call(map);
 
         content
@@ -292,10 +291,10 @@ export function uiInit(context) {
     }
 
 
-    var initCallback;
+    var renderCallback;
 
     function ui(node, callback) {
-        initCallback = callback;
+        renderCallback = callback;
         var container = d3.select(node);
         context.container(container);
         context.loadLocale(function(err) {
@@ -314,15 +313,12 @@ export function uiInit(context) {
         context.loadLocale(function(err) {
             if (!err) {
                 context.container().selectAll('*').remove();
-                context.history().unlock();
                 render(context.container());
-                if (initCallback) initCallback();
+                if (renderCallback) renderCallback();
             }
         });
     };
 
-
-    window.restart = ui.restart;
 
     ui.sidebar = uiSidebar(context);
 
