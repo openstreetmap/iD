@@ -51,7 +51,7 @@
     "js-yaml": "~3.7.0",
     "jsonschema": "~1.1.0",
     "json-stable-stringify": "~1.0.1",
-    "mapillary-js": "2.3.0",
+    "mapillary-js": "2.4.0",
     "minimist": "~1.2.0",
     "mocha": "~3.2.0",
     "mocha-phantomjs-core": "~2.1.0",
