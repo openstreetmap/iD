@@ -19,10 +19,12 @@ export function uiTagReference(tag) {
         var locale = utilDetect().locale.toLowerCase(),
             localized;
 
-        localized = _.find(data, function(d) {
-            return d.lang.toLowerCase() === locale;
-        });
-        if (localized) return localized;
+        if (locale !== 'pt-br') {  // see #3776, prefer 'pt' over 'pt-br'
+            localized = _.find(data, function(d) {
+                return d.lang.toLowerCase() === locale;
+            });
+            if (localized) return localized;
+        }
 
         // try the non-regional version of a language, like
         // 'en' if the language is 'en-US'
