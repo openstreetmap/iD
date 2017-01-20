@@ -41,7 +41,7 @@
     "@mapbox/maki": "^4.0.0",
     "brfs": "1.4.3",
     "chai": "~3.5.0",
-    "d3": "4.4.1",
+    "d3": "4.4.2",
     "ecstatic": "~2.1.0",
     "editor-layer-index": "osmlab/editor-layer-index.git#gh-pages",
     "gaze": "~1.1.1",
