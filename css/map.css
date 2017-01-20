@@ -1628,6 +1628,14 @@ text.esri {
     margin-right: 20px;
 }
 
+.esri-pane .point-in-polygon, .esri-pane .merge-lines {
+    display: none;
+}
+
+.esri-pane .must-show {
+    display: block !important;
+}
+
 /* more importer stuff */
 
 .import-approve {

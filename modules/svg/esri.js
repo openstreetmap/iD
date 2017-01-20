@@ -11,6 +11,7 @@ import fromEsri from 'esri-to-geojson';
 import polygonArea from 'area-polygon';
 import polygonIntersect from 'turf-intersect';
 import polygonBuffer from 'turf-buffer';
+import pointInside from 'turf-inside';
 import { d3combobox } from '../lib/d3.combobox.js';
 
 // dictionary matching geo-properties to OpenStreetMap tags 1:1
@@ -55,6 +56,24 @@ export function svgEsri(projection, context, dispatch) {
     function drawEsri(selection) {
         var geojson = svgEsri.geojson,
             enabled = svgEsri.enabled;
+        
+        var gjids = {};
+        var pointInPolygon = false;
+        try {
+            pointInPolygon = d3.selectAll('.point-in-polygon input').property('checked');
+        } catch(e) {
+        }
+        
+        function fetchBuildings(callback) {
+            var buildings = d3.selectAll('path.tag-building');
+            _.map(buildings, function (buildinglist2) {
+                _.map(buildinglist2, function (buildinglist) {
+                    _.map(buildinglist, function (building) {
+                        callback(building);
+                    })
+                });
+            });
+        }
 
         _.map(geojson.features || [], function(d) {
             // don't reload the same objects over again
@@ -116,7 +135,7 @@ export function svgEsri(projection, context, dispatch) {
                 if (coords.length > 1) {
                     // donut hole polygons (e.g. building with courtyard) must be a relation
                     // example data: Hartford, CT building footprints
-                    // TODO: rings within rings
+                    // TODO: rings within rings?
 
                     // generate each ring                    
                     var componentRings = [];
@@ -152,13 +171,61 @@ export function svgEsri(projection, context, dispatch) {
             // importing different GeoJSON geometries
             if (d.geometry.type === 'Point') {
                 props = makeEntity(d.geometry.coordinates);
-                var node = new osmNode(props);
-                node.approvedForEdit = false;
-                context.perform(
-                    actionAddEntity(node),
-                    'adding point'
-                );
-                window.importedEntities.push(node);
+                
+                if (pointInPolygon) {
+                    fetchBuildings(function(building) {
+                        var wayid = d3.select(building).attr('class').split(' ')[3];
+                        var ent;
+                        if (!gjids[wayid]) {
+                            var nodes = [];
+                            ent = context.entity(wayid);
+                            _.map(ent.nodes, function(nodeid) {
+                                var node = context.entity(nodeid);
+                                nodes.push(node.loc);
+                            });
+                            
+                            gjids[wayid] = {
+                                type: 'Feature',
+                                geometry: {
+                                    type: 'Polygon',
+                                    coordinates: [nodes]
+                                }
+                            };
+                        }
+                                
+                        var isInside = pointInside(d, gjids[wayid]);
+                        if (isInside) {
+                            // console.log('found a match!!');
+                            ent = ent || context.entity(wayid);
+                            // ent.mergeTags(d.properties);
+                            
+                            console.log(props);
+                            var keys = Object.keys(d.properties);
+                            _.map(keys, function(key) {
+                                console.log(key + ' = ' + d.properties[key]);
+                                ent.tags[key] = d.properties[key];
+                            });
+                            //ent.update({ tags: ent.tags });
+                        }
+                        
+                        /*
+                        context.loadEntity(wayid, function(err, result) {
+                            console.log(err || result);
+                        });
+                        */
+                    });
+                    // block this after the first address
+                    // pointInPolygon = false;
+                    
+                } else {
+                    var node = new osmNode(props);
+                    node.approvedForEdit = false;
+                    context.perform(
+                        actionAddEntity(node),
+                        'adding point'
+                    );
+                    window.importedEntities.push(node);
+                }
                   
             } else if (d.geometry.type === 'LineString') {
                 window.importedEntities.push(mapLine(d, d.geometry.coordinates));
@@ -262,7 +329,7 @@ export function svgEsri(projection, context, dispatch) {
         return this.windowOpen() && (!this.pane().selectAll('.topurl').classed('hide'));
     };
     
-    drawEsri.preset = function(preset) {
+    drawEsri.preset = function(preset) {    
         // get / set an individual preset, or reset to null
         if (preset) {
             // console.log(preset)
@@ -275,8 +342,8 @@ export function svgEsri(projection, context, dispatch) {
             }
             var tag = preset.icon + ' tag-' + preset.id.split('/')[0] + ' tag-' + preset.id.replace('/', '-');
             
-            presetBox.selectAll('label').text('OpenStreetMap preset: ');
-            presetBox.selectAll('span').text(preset.id);
+            presetBox.selectAll('label.preset-prompt').text('OpenStreetMap preset: ');
+            presetBox.selectAll('span.preset-prompt').text(preset.id);
             presetBox.selectAll('.preset-icon-fill')
                 .attr('class', 'preset-icon-fill preset-icon-fill-area preset-icon-fill-line' + tag);
             presetBox.selectAll('.preset-icon-fill, .preset-icon')
@@ -287,11 +354,20 @@ export function svgEsri(projection, context, dispatch) {
             presetBox.selectAll('button').classed('hide', false);
             this.internalPreset = preset;
             
+            // special geo circumstances
+            if (preset.id === 'address') {
+                return d3.selectAll('.point-in-polygon').classed('must-show', true);
+            } else if (preset.id === 'bike_lane') {
+                return d3.selectAll('.merge-lines').classed('must-show', true);
+            } else {
+                console.log(preset.id);
+            }
+            
         } else if (preset === null) {
             // removing preset status
-            presetBox.selectAll('.preset label')
-                .text('OpenStreetMap preset (select at left)');
-            presetBox.selectAll('.preset span, .preset svg')
+            presetBox.selectAll('.preset label.preset-prompt')
+                .text('OpenStreetMap preset (select from left)');
+            presetBox.selectAll('.preset span.preset-prompt, .preset svg')
                 .html('');
             presetBox.selectAll('.preset button, .preset-icon-fill, .preset-icon')
                 .classed('hide', true);
@@ -300,6 +376,12 @@ export function svgEsri(projection, context, dispatch) {
         } else {
             return this.internalPreset;
         }
+        
+        // reset UI for point-in-polygon and merge-lines
+        d3.selectAll('.point-in-polygon, .merge-lines')
+            .classed('must-show', false)
+            .selectAll('input')
+                .property('checked', false);
     };
 
     drawEsri.geojson = function(gj) {
@@ -351,7 +433,7 @@ export function svgEsri(projection, context, dispatch) {
             url += '&spatialRel=esriSpatialRelIntersects';
             url += '&inSR=4326';
         }
-        
+                
         var that = this;
         d3.text(url, function(err, data) {
             if (err) {
@@ -370,7 +452,8 @@ export function svgEsri(projection, context, dispatch) {
                 that.pane().selectAll('h3').text('Set import attributes');
                 var esriTable = d3.selectAll('.esri-table');
                 
-                var convertedKeys = Object.keys(window.layerImports);                              
+                var convertedKeys = Object.keys(window.layerImports);
+                
                 if (jsondl.features.length) {
                     // make a row for each GeoJSON property
                     // existing name appears as a label
@@ -431,7 +514,9 @@ export function svgEsri(projection, context, dispatch) {
                     console.log('no feature to build table from');
                 }
                 
-                if (convertedKeys.length) {
+                var presetKeysLength = that.preset() ? that.preset() : 0;
+                
+                if (convertedKeys.length > 0) {
                     // if any import properties were added, make these mods and reject all other properties
                     var processGeoFeature = function (selectfeature) {
                         // keep the OBJECTID to make sure we don't download the same data multiple times
@@ -441,21 +526,36 @@ export function svgEsri(projection, context, dispatch) {
                         
                         // convert the rest of the layer's properties
                         for (var k = 0; k < convertedKeys.length; k++) {
+                            var osmk = null;
+                            var osmv = null;
+                            
                             if (convertedKeys[k].indexOf('add_') === 0) {
-                                outprops[convertedKeys[k].substring(4)] = window.layerImports[convertedKeys[k]];
+                                osmk = convertedKeys[k].substring(4);
+                                osmv = window.layerImports[convertedKeys[k]];
                             } else {
-                                var kv = selectfeature.properties[convertedKeys[k]];
-                                if (kv) {
-                                    outprops[window.layerImports[convertedKeys[k]]] = kv;
+                                osmv = selectfeature.properties[convertedKeys[k]];
+                                if (osmv) {
+                                    osmk = window.layerImports[convertedKeys[k]];
+                                }
+                            }
+                            
+                            if (osmk) {
+                                if (convertedKeys.length > presetKeysLength) {
+                                    // user directs any transferred keys
+                                    outprops[osmk] = osmv;
+                                } else {
+                                    // merge keys
+                                    selectfeature.properties[osmk] = osmv;
                                 }
                             }
                         }
-                        selectfeature.properties = outprops;
+                        if (Object.keys(outprops).length > 1) {
+                            selectfeature.properties = outprops;
+                        }
+                        
                         return selectfeature;
                     };
-                    for (var ft = 0; ft < jsondl.features.length; ft++) {
-                        jsondl.features[ft] = processGeoFeature(jsondl.features[ft]);
-                    }
+                    _.map(jsondl.features, processGeoFeature);
                 }
                 
                 // send the modified geo-features to the draw layer

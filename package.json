@@ -38,6 +38,7 @@
     "@mapbox/sexagesimal": "1.0.0",
     "@mapbox/togeojson": "0.16.0",
     "turf-buffer": "^3.0.12",
+    "turf-inside": "^3.0.12",
     "turf-intersect": "^3.0.12",
     "wmf-sitematrix": "0.1.4"
   },

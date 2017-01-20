@@ -297,10 +297,11 @@ export function uiMapData(context) {
             var preset = urlEntry.append('div')
                 .attr('class', 'preset');
             preset.append('label')
-                .text('OpenStreetMap preset (select at left)');
+                .attr('class', 'preset-prompt')
+                .text('OpenStreetMap preset (select from left)');
             preset.append('div').attr('class', 'preset-icon-fill preset-icon-fill-area hide');
             preset.append('div').attr('class', 'preset-icon preset-icon-32 hide').append('svg');
-            preset.append('span');
+            preset.append('span').attr('class', 'preset-prompt');
             
             // click to remove a preset
             preset.append('button')
@@ -310,6 +311,27 @@ export function uiMapData(context) {
                 .on('click', function() {
                     context.layers().layer('esri').preset(null);
                 });
+            
+            // point-in-polygon, merge line options
+            var pip = preset.append('div')
+                .attr('class', 'point-in-polygon')
+                .append('label');
+            pip.append('input')
+                .attr('type', 'checkbox')
+                .attr('name', 'point-in-polygon')
+                .property('checked', false);
+            pip.append('span')
+                .text('Add addresses to buildings');
+            
+            var ml = preset.append('div')
+                .attr('class', 'merge-lines')
+                .append('label');
+            ml.append('input')
+                .attr('type', 'checkbox')
+                .attr('name', 'merge-lines')
+                .property('checked', false);
+            ml.append('span')
+                .text('Add data to roads');
             
             /*
             // test having an import function
