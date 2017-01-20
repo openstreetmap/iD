@@ -342,7 +342,7 @@ export function uiMapData(context) {
             body.append('table')
                     .attr('border', '1')
                     .attr('class', 'esri-table hide') // tag-list
-                    .append('img').attr('src', '/img/loader-white.gif');
+                    .append('img').attr('src', 'img/loader-white.gif');
             
             // this button adds a new field to data brought in from the Esri service
             // for example you can add addr:state=VA to a city's addresses which otherwise wouldn't have this repeated field
