@@ -3501,8 +3501,12 @@ img.tile-removing {
   right: auto;
 }
 
-[dir='rtl'] .preset-list-button-wrap .preset-icon-32 {
-  right: 15px;
+[dir='rtl'] .preset-list-button-wrap .preset-icon-28 {
+  right: 16px;
+}
+
+[dir='rtl'] .preset-list-button-wrap .preset-icon-24 {
+  right: 18px;
 }
 
 [dir='rtl'] .form-field .maxspeed-unit {
