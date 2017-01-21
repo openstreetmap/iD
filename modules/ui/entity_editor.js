@@ -180,7 +180,6 @@ export function uiEntityEditor(context) {
 
             var blacklist = ['description', 'note', 'fixme'];
             if (_.some(blacklist, function(s) { return k.indexOf(s) !== -1; })) return v;
-
             var cleaned = v.split(';')
                 .map(function(s) { return s.trim(); })
                 .join(keepSpaces(k) ? '; ' : ';');

@@ -93,27 +93,8 @@ export function osmLanes(entity) {
             leftHandDrive: false,
             reverse: parseInt(tags.oneway, 10) === -1
         },
-        lanes: lanesObj,
-        lanesArray: flattenLanesArray(lanesArray(
-            {
-            count: laneCount,
-            oneway: isOneWay,
-            forward: forward,
-            backward: backward,
-            bothways: bothways,
-            turnLanes: turnLanes,
-            maxspeed: maxspeed,
-            maxspeedLanes: maxspeedLanes,
-            psvLanes: psvLanes,
-            busLanes: busLanes,
-            taxiLanes: taxiLanes,
-            hovLanes: hovLanes,
-            hgvLanes: hgvLanes,
-            bicyclewayLanes: bicyclewayLanes,
-            leftHandDrive: false,
-            reverse: parseInt(tags.oneway, 10) === -1
-        }))
-    };
+        lanes: lanesObj
+        };
 }
 
 
@@ -266,15 +247,6 @@ function mapToLanesObj(lanesObj, data, key) {
         if (!lanesObj.unspecified[i]) lanesObj.unspecified[i] = {};
         lanesObj.unspecified[i][key] = l;
     });
-}
-
-function flattenLanesArray(lanes) {
-    var order = ['backward', 'forward'];
-    var ret = [].concat(lanes[order[0]], lanes[order[1]]);
-    for (var i = 0; i < ret.length; i++) {
-        ret[i] = _.assign(ret[i] || {}, lanes.unspecified[i]);
-    }
-    return ret;
 }
 
 function lanesArray(lanesData) {

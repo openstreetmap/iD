@@ -17,7 +17,7 @@
     "rules": {
         "dot-notation": "error",
         "eqeqeq": ["error", "smart"],
-        "indent": ["error", 4],
+        "indent": ["off", 4],
         "keyword-spacing": "error",
         "linebreak-style": ["error", "unix"],
         "no-caller": "error",
