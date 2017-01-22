@@ -349,13 +349,21 @@ export function modeSave(context) {
 
 
     mode.enter = function() {
-        context.connection().authenticate(function(err) {
-            if (err) {
-                cancel();
-            } else {
-                context.ui().sidebar.show(ui);
-            }
-        });
+        function done() {
+            context.ui().sidebar.show(ui);
+        }
+
+        if (context.connection().authenticated()) {
+            done();
+        } else {
+            context.connection().authenticate(function(err) {
+                if (err) {
+                    cancel();
+                } else {
+                    done();
+                }
+            });
+        }
     };
 
 

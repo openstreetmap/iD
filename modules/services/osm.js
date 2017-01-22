@@ -24,6 +24,7 @@ var dispatch = d3.dispatch('authLoading', 'authDone', 'change', 'loading', 'load
         done: authDone
     }),
     rateLimitError,
+    userChangesets,
     userDetails,
     off;
 
@@ -69,7 +70,7 @@ function getTags(obj) {
         var attrs = elems[i].attributes;
         tags[attrs.k.value] = attrs.v.value;
     }
-    
+
     return tags;
 }
 
@@ -160,6 +161,7 @@ export default {
 
 
     reset: function() {
+        userChangesets = undefined;
         userDetails = undefined;
         rateLimitError = undefined;
         _.forEach(inflight, abortRequest);
@@ -407,6 +409,11 @@ export default {
 
 
     userChangesets: function(callback) {
+        if (userChangesets) {
+            callback(undefined, userChangesets);
+            return;
+        }
+
         this.userDetails(function(err, user) {
             if (err) {
                 callback(err);
@@ -417,11 +424,13 @@ export default {
                 if (err) {
                     callback(err);
                 } else {
-                    callback(undefined, Array.prototype.map.call(changesets.getElementsByTagName('changeset'),
+                    userChangesets = Array.prototype.map.call(
+                        changesets.getElementsByTagName('changeset'),
                         function (changeset) {
                             return { tags: getTags(changeset) };
                         }
-                    ));
+                    );
+                    callback(undefined, userChangesets);
                 }
             }
 
@@ -549,8 +558,10 @@ export default {
             loading: authLoading,
             done: authDone
         }, options));
+
         dispatch.call('change');
         this.reset();
+        this.userChangesets(function() {});  // eagerly load user details/changesets
         return this;
     },
 
@@ -569,6 +580,7 @@ export default {
 
 
     logout: function() {
+        userChangesets = undefined;
         userDetails = undefined;
         oauth.logout();
         dispatch.call('change');
@@ -577,12 +589,17 @@ export default {
 
 
     authenticate: function(callback) {
+        var that = this;
+        userChangesets = undefined;
         userDetails = undefined;
+
         function done(err, res) {
             rateLimitError = undefined;
             dispatch.call('change');
             if (callback) callback(err, res);
+            that.userChangesets(function() {});  // eagerly load user details/changesets
         }
+
         return oauth.authenticate(done);
     }
 };
