@@ -131,10 +131,25 @@ export function coreContext() {
     };
 
     context.save = function() {
+        // no history save, no message onbeforeunload
         if (inIntro || d3.select('.modal').size()) return;
-        if (!(mode && mode.id === 'save'))
+
+        var canSave;
+        if (mode && mode.id === 'save')
+            canSave = false;
+        else {
+            canSave = context.selectedIDs().every(function(id) {
+                var entity = context.hasEntity(id);
+                return entity && !entity.isDegenerate();
+            });
+        }
+
+        if (canSave) {
             history.save();
-        if (history.hasChanges()) return t('save.unsaved_changes');
+        }
+        if (history.hasChanges()) {
+            return t('save.unsaved_changes');
+        }
     };
 
 
