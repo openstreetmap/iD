@@ -135,9 +135,9 @@ export function coreContext() {
         if (inIntro || d3.select('.modal').size()) return;
 
         var canSave;
-        if (mode && mode.id === 'save')
+        if (mode && mode.id === 'save') {
             canSave = false;
-        else {
+        } else {
             canSave = context.selectedIDs().every(function(id) {
                 var entity = context.hasEntity(id);
                 return entity && !entity.isDegenerate();
