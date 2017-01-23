@@ -79,6 +79,32 @@ describe('iD.osmNode', function () {
         });
     });
 
+    describe('#isDegenerate', function () {
+        it('returns true if node has invalid loc', function () {
+            expect(iD.Node().isDegenerate()).to.be.equal(true, 'no loc');
+            expect(iD.Node({loc: ''}).isDegenerate()).to.be.equal(true, 'empty string loc');
+            expect(iD.Node({loc: []}).isDegenerate()).to.be.equal(true, 'empty array loc');
+            expect(iD.Node({loc: [0]}).isDegenerate()).to.be.equal(true, '1-array loc');
+            expect(iD.Node({loc: [0, 0, 0]}).isDegenerate()).to.be.equal(true, '3-array loc');
+            expect(iD.Node({loc: [-181, 0]}).isDegenerate()).to.be.equal(true, '< min lon');
+            expect(iD.Node({loc: [181, 0]}).isDegenerate()).to.be.equal(true, '> max lon');
+            expect(iD.Node({loc: [0, -91]}).isDegenerate()).to.be.equal(true, '< min lat');
+            expect(iD.Node({loc: [0, 91]}).isDegenerate()).to.be.equal(true, '> max lat');
+            expect(iD.Node({loc: [Infinity, 0]}).isDegenerate()).to.be.equal(true, 'Infinity lon');
+            expect(iD.Node({loc: [0, Infinity]}).isDegenerate()).to.be.equal(true, 'Infinity lat');
+            expect(iD.Node({loc: [NaN, 0]}).isDegenerate()).to.be.equal(true, 'NaN lon');
+            expect(iD.Node({loc: [0, NaN]}).isDegenerate()).to.be.equal(true, 'NaN lat');
+        });
+
+        it('returns false if node has valid loc', function () {
+            expect(iD.Node({loc: [0, 0]}).isDegenerate()).to.be.equal(false, '2-array loc');
+            expect(iD.Node({loc: [-180, 0]}).isDegenerate()).to.be.equal(false, 'min lon');
+            expect(iD.Node({loc: [180, 0]}).isDegenerate()).to.be.equal(false, 'max lon');
+            expect(iD.Node({loc: [0, -90]}).isDegenerate()).to.be.equal(false, 'min lat');
+            expect(iD.Node({loc: [0, 90]}).isDegenerate()).to.be.equal(false, 'max lat');
+        });
+    });
+
     describe('#asJXON', function () {
         it('converts a node to jxon', function() {
             var node = iD.Node({id: 'n-1', loc: [-77, 38], tags: {amenity: 'cafe'}});

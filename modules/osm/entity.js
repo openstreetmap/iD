@@ -153,6 +153,9 @@ osmEntity.prototype = {
         return false;
     },
 
+    isDegenerate: function() {
+        return true;
+    },
 
     deprecatedTags: function() {
         var tags = _.toPairs(this.tags);

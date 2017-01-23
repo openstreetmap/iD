@@ -36,6 +36,15 @@ _.extend(osmNode.prototype, {
     },
 
 
+    isDegenerate: function() {
+        return !(
+            Array.isArray(this.loc) && this.loc.length === 2 &&
+            this.loc[0] >= -180 && this.loc[0] <= 180 &&
+            this.loc[1] >= -90 && this.loc[1] <= 90
+        );
+    },
+
+
     isIntersection: function(resolver) {
         return resolver.transient(this, 'isIntersection', function() {
             return resolver.parentWays(this).filter(function(parent) {
