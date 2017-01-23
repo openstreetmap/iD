@@ -1339,8 +1339,8 @@ en:
         terms: '<translate with synonyms or related terms for ''Gondola'', separated by commas>'
       aerialway/goods:
         # aerialway=goods
-        name: Goods
-        terms: '<translate with synonyms or related terms for ''Goods'', separated by commas>'
+        name: Goods Aerialway
+        terms: '<translate with synonyms or related terms for ''Goods Aerialway'', separated by commas>'
       aerialway/magic_carpet:
         # aerialway=magic_carpet
         name: Magic Carpet Lift

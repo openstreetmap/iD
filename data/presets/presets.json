@@ -247,7 +247,7 @@
             "tags": {
                 "aerialway": "goods"
             },
-            "name": "Goods"
+            "name": "Goods Aerialway"
         },
         "aerialway/magic_carpet": {
             "geometry": [
