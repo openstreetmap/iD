@@ -131,8 +131,9 @@ export function coreContext() {
     };
 
     context.save = function() {
-        if (inIntro || (mode && mode.id === 'save') || d3.select('.modal').size()) return;
-        history.save();
+        if (inIntro || d3.select('.modal').size()) return;
+        if (!(mode && mode.id === 'save'))
+            history.save();
         if (history.hasChanges()) return t('save.unsaved_changes');
     };
 
