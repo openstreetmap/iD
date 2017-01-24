@@ -76,6 +76,12 @@ export function svgVertices(projection, context) {
                         var i = z && icon(entity),
                             c = i ? 0.5 : 0,
                             r = rads[i ? 3 : z];
+
+                        // slightly increase the size of unconnected endpoints #3775
+                        if (entity.isEndpoint(graph) && !graph.isShared(entity)) {
+                            r += 1.5;
+                        }
+
                         this.setAttribute('cx', c);
                         this.setAttribute('cy', -c);
                         this.setAttribute('r', r);
