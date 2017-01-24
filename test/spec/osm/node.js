@@ -43,6 +43,30 @@ describe('iD.osmNode', function () {
         });
     });
 
+    describe('#isEndpoint', function () {
+        it('returns true for a node at an endpoint along a linear way', function () {
+            var a = iD.Node({id: 'a'}),
+                b = iD.Node({id: 'b'}),
+                c = iD.Node({id: 'c'}),
+                w = iD.Way({nodes: ['a', 'b', 'c']}),
+                graph = iD.Graph([a, b, c, w]);
+            expect(a.isEndpoint(graph)).to.equal(true, 'linear way, beginning node');
+            expect(b.isEndpoint(graph)).to.equal(false, 'linear way, middle node');
+            expect(c.isEndpoint(graph)).to.equal(true, 'linear way, ending node');
+        });
+
+        it('returns false for nodes along a circular way', function () {
+            var a = iD.Node({id: 'a'}),
+                b = iD.Node({id: 'b'}),
+                c = iD.Node({id: 'c'}),
+                w = iD.Way({nodes: ['a', 'b', 'c', 'a']}),
+                graph = iD.Graph([a, b, c, w]);
+            expect(a.isEndpoint(graph)).to.equal(false, 'circular way, connector node');
+            expect(b.isEndpoint(graph)).to.equal(false, 'circular way, middle node');
+            expect(c.isEndpoint(graph)).to.equal(false, 'circular way, ending node');
+        });
+    });
+
     describe('#isIntersection', function () {
         it('returns true for a node shared by more than one highway', function () {
             var node = iD.Node(),

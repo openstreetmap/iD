@@ -45,6 +45,16 @@ _.extend(osmNode.prototype, {
     },
 
 
+    isEndpoint: function(resolver) {
+        return resolver.transient(this, 'isEndpoint', function() {
+            var id = this.id;
+            return resolver.parentWays(this).filter(function(parent) {
+                return !parent.isClosed() && !!parent.affix(id);
+            }).length > 0;
+        });
+    },
+
+
     isIntersection: function(resolver) {
         return resolver.transient(this, 'isIntersection', function() {
             return resolver.parentWays(this).filter(function(parent) {
