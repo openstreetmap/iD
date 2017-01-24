@@ -67,6 +67,41 @@ describe('iD.osmNode', function () {
         });
     });
 
+    describe('#isConnected', function () {
+        it('returns true for a node with more than one parent way', function () {
+            var node = iD.Node(),
+                w1 = iD.Way({nodes: [node.id]}),
+                w2 = iD.Way({nodes: [node.id]}),
+                graph = iD.Graph([node, w1, w2]);
+            expect(node.isConnected(graph)).to.equal(true);
+        });
+
+        it('returns false for a standalone node on a single parent way', function () {
+            var node = iD.Node(),
+                way = iD.Way({nodes: [node.id]}),
+                graph = iD.Graph([node, way]);
+            expect(node.isConnected(graph)).to.equal(false);
+        });
+
+        it('returns true for a self-intersecting node on a single parent way', function () {
+            var a = iD.Node({id: 'a'}),
+                b = iD.Node({id: 'b'}),
+                c = iD.Node({id: 'c'}),
+                w = iD.Way({nodes: ['a', 'b', 'c', 'b']}),
+                graph = iD.Graph([a, b, c, w]);
+            expect(b.isConnected(graph)).to.equal(true);
+        });
+
+        it('returns false for the connecting node of a closed way', function () {
+            var a = iD.Node({id: 'a'}),
+                b = iD.Node({id: 'b'}),
+                c = iD.Node({id: 'c'}),
+                w = iD.Way({nodes: ['a', 'b', 'c', 'a']}),
+                graph = iD.Graph([a, b, c, w]);
+            expect(a.isConnected(graph)).to.equal(false);
+        });
+    });
+
     describe('#isIntersection', function () {
         it('returns true for a node shared by more than one highway', function () {
             var node = iD.Node(),

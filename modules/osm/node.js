@@ -55,6 +55,28 @@ _.extend(osmNode.prototype, {
     },
 
 
+    isConnected: function(resolver) {
+        return resolver.transient(this, 'isConnected', function() {
+            var parents = resolver.parentWays(this);
+
+            // vertex is connected to multiple parent ways
+            if (parents.length > 1) {
+                return true;
+
+            } else if (parents.length === 1) {
+                var way = parents[0],
+                    nodes = way.nodes.slice();
+                if (way.isClosed()) { nodes.pop(); }  // ignore connecting node if closed
+
+                // return true if vertex appears multiple times (way is self intersecting)
+                return nodes.indexOf(this.id) !== nodes.lastIndexOf(this.id);
+            }
+
+            return false;
+        });
+    },
+
+
     isIntersection: function(resolver) {
         return resolver.transient(this, 'isIntersection', function() {
             return resolver.parentWays(this).filter(function(parent) {
