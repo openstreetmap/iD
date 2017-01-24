@@ -135,6 +135,7 @@ export function svgVertices(projection, context) {
             .merge(enter)
             .attr('transform', svgPointTransform(projection))
             .classed('shared', function(entity) { return graph.isShared(entity); })
+            .classed('endpoint', function(entity) { return entity.isEndpoint(graph); })
             .call(setAttributes);
     }
 

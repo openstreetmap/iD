@@ -124,18 +124,20 @@ indicating a bumpy surface.
 
 ### Special classes
 
-A node that is a member of two or more ways shall have the `.shared` class.
+- A node that is a member of two or more ways shall have the `.shared` class.
 
-Two or more nodes at identical coordinates shall each have an `.overlapped` class. (TODO)
+- A node that is an endpoint of a linear way shall have the `.endpoint` class.
 
-Elements comprising the entity currently under the cursor shall have the `.hover` class.
+- Two or more nodes at identical coordinates shall each have an `.overlapped` class. (TODO)
+
+- Elements comprising the entity currently under the cursor shall have the `.hover` class.
 (The `:hover` psuedo-class is insufficient when an entity's visual representation consists
 of several elements, only one of which can be `:hover`ed.)
 
-Elements that are currently active (being clicked or dragged) shall have the `.active`
+- Elements that are currently active (being clicked or dragged) shall have the `.active`
 class.
 
-Elements that are currently selected shall have the `.selected` class.
+- Elements that are currently selected shall have the `.selected` class.
 
 
 ## Customized Deployments
