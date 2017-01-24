@@ -320,12 +320,12 @@
             "rateLimit": "The API is limiting anonymous connections.  You can fix this by logging in."
         },
         "commit": {
-            "title": "Save Changes",
+            "title": "Upload to OpenStreetMap",
             "description_placeholder": "Brief description of your contributions (required)",
-            "message_label": "Changeset comment",
+            "message_label": "Changeset Comment",
             "upload_explanation": "The changes you upload will be visible on all maps that use OpenStreetMap data.",
             "upload_explanation_with_user": "The changes you upload as {user} will be visible on all maps that use OpenStreetMap data.",
-            "save": "Save",
+            "save": "Upload",
             "cancel": "Cancel",
             "changes": "{count} Changes",
             "warnings": "Warnings",

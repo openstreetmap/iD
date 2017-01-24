@@ -41,6 +41,20 @@ body {
     height: 100%;
 }
 
+#content.active {
+    -webkit-filter: none !important;
+    filter: none !important;
+    -webkit-duration: 200ms;
+    transition-duration: 200ms;
+}
+
+#content.inactive {
+    -webkit-filter: grayscale(80%) brightness(80%);
+    filter: grayscale(80%) brightness(80%);
+    -webkit-duration: 200ms;
+    transition-duration: 200ms;
+}
+
 #defs {
     /* Can't be display: none or the clippaths are ignored. */
     position: absolute;

@@ -353,6 +353,9 @@ export function modeSave(context) {
             context.ui().sidebar.show(ui);
         }
 
+        context.container().selectAll('#content')
+            .attr('class', 'inactive');
+
         if (context.connection().authenticated()) {
             done();
         } else {
@@ -368,6 +371,9 @@ export function modeSave(context) {
 
 
     mode.exit = function() {
+        context.container().selectAll('#content')
+            .attr('class', 'active');
+
         context.ui().sidebar.hide();
     };
 
