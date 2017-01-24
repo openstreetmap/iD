@@ -158,6 +158,7 @@ export function svgVertices(projection, context) {
 
             if (entity.id in selected ||
                 entity.hasInterestingTags() ||
+                entity.isEndpoint(graph) ||
                 entity.isIntersection(graph)) {
                 vertices.push(entity);
             }
