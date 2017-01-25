@@ -3082,6 +3082,18 @@ img.tile-removing {
 }
 
 
+/* Shortcuts Modal
+------------------------------------------------------- */
+.modal-shortcuts {
+    padding-bottom: 20px;
+}
+
+.modal-shortcuts kbd {
+    padding: 2px 4px;
+    background: #eee;
+    margin-right: 4px;
+}
+
 /* Save Mode
 ------------------------------------------------------- */
 .mode-save a.user-info {

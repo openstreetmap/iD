@@ -1,0 +1,95 @@
+{
+    "dataShortcuts": [
+        {
+            "desc": "Changing the display",
+            "shortcuts": [
+                {
+                    "keys": ["↓", "↑", "←", "→"],
+                    "desc": "Pan map"
+                },
+                {
+                    "keys": ["⇧↓", "⇧↑", "⇧←", "⇧→"],
+                    "desc": "Pan map by one screenful"
+                },
+                {
+                    "keys": ["+", "-"],
+                    "desc": "Zoom in / Zoom out"
+                },
+                {
+                    "keys": ["⌘+", "⌘-"],
+                    "desc": "Zoom in / Zoom out by a lot"
+                },
+                {
+                    "keys": ["B"],
+                    "desc": "Display background layer switcher"
+                },
+                {
+                    "keys": ["⌘B"],
+                    "desc": "Switch between previous and current backgrounds"
+                },
+                {
+                    "keys": ["W"],
+                    "desc": "Toggle wireframe mode"
+                },
+                {
+                    "keys": ["H"],
+                    "desc": "Show in-editor help/documentation"
+                },
+                {
+                    "keys": ["/"],
+                    "desc": "Toggle minimap"
+                },
+                {
+                    "keys": ["⌘I"],
+                    "desc": "Toggle info/measurements box"
+                },
+                {
+                    "keys": ["Spacebar"],
+                    "desc": "Toggle radial menu for currently selected object"
+                }
+            ]
+        },
+        {
+            "desc": "Editing mode",
+            "shortcuts": [
+                {
+                    "keys": ["1"],
+                    "desc": "Switch to 'add point' mode"
+                },
+                {
+                    "keys": ["2"],
+                    "desc": "Switch to 'add line' mode"
+                },
+                {
+                    "keys": ["3"],
+                    "desc": "Switch to 'add area' mode"
+                },
+                {
+                    "keys": ["A"],
+                    "desc": "Continue drawing a line at the selected node"
+                },
+                {
+                    "keys": ["↵ Enter", "Esc"],
+                    "desc": "Stop drawing of a line or area"
+                }
+            ]
+        },
+        {
+            "desc": "Undoing or saving changes",
+            "shortcuts": [
+                {
+                    "keys": ["⌘Z"],
+                    "desc": "Undo last action"
+                },
+                {
+                    "keys": ["⌘⇧Z"],
+                    "desc": "Redo last action"
+                },
+                {
+                    "keys": ["⌘S"],
+                    "desc": "Save changes"
+                }
+            ]
+        }
+    ]
+}
