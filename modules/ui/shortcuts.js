@@ -55,7 +55,7 @@ export function uiShortcuts(context) {
             var description  = p
                 .append('span')
                 .attr('class', 'col8')
-                .text(function(d) { return d.desc });
+                .text(function(d) { return d.desc; });
         }
 
         var keybinding = d3keybinding('shortcuts')
