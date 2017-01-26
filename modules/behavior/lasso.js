@@ -16,7 +16,7 @@ export function behaviorLasso(context) {
             if (d3.event.button === button && d3.event.shiftKey === true) {
                 lasso = null;
 
-                selection
+                d3.select(window)
                     .on('mousemove.lasso', mousemove)
                     .on('mouseup.lasso', mouseup);
 
@@ -58,7 +58,7 @@ export function behaviorLasso(context) {
 
 
         function mouseup() {
-            selection
+            d3.select(window)
                 .on('mousemove.lasso', null)
                 .on('mouseup.lasso', null);
 
