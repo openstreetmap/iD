@@ -43,8 +43,7 @@ export function uiPresetList(context) {
                 .append('button')
                 .attr('class', 'preset-choose')
                 .on('click', function() { dispatch.call('choose', this, currentPreset); })
-                .append('span')
-                .html((textDirection === 'rtl') ? '&#9668;' : '&#9658;');
+                .call(svgIcon((textDirection === 'rtl') ? '#icon-backward' : '#icon-forward'));
         } else {
             messagewrap
                 .append('button')

@@ -2,6 +2,7 @@ import * as d3 from 'd3';
 import { d3keybinding } from '../lib/d3.keybinding.js';
 import { t } from '../util/locale';
 import { modeSave } from '../modes/index';
+import { svgIcon } from '../svg/index';
 import { uiCmd } from './cmd';
 import { uiTooltipHtml } from './tooltipHtml';
 import { tooltip } from '../util/tooltip';
@@ -53,6 +54,7 @@ export function uiSave(context) {
             .call(tooltipBehavior);
 
         button
+            .call(svgIcon('#icon-save', 'pre-text'))
             .append('span')
             .attr('class', 'label')
             .text(t('save.title'));
@@ -62,7 +64,7 @@ export function uiSave(context) {
             .attr('class', 'count')
             .text('0');
 
-        var keybinding = d3keybinding('undo-redo')
+        var keybinding = d3keybinding('save')
             .on(key, save, true);
 
         d3.select(document)

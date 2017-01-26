@@ -526,7 +526,7 @@ button.save.has-count .count::before {
 }
 
 .icon.pre-text {
-    margin-right: 3px;
+    margin-right: 5px;
 }
 
 .icon.light {
@@ -3481,7 +3481,7 @@ img.tile-removing {
 }
 
 [dir='rtl'] .icon.pre-text {
-  margin-left: 3px;
+  margin-left: 5px;
   margin-right: 0;
 }
 

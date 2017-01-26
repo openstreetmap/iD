@@ -45,8 +45,7 @@ export function uiEntityEditor(context) {
         enter
             .append('button')
             .attr('class', 'fl preset-reset preset-choose')
-            .append('span')
-            .html((textDirection === 'rtl') ? '&#9658;' : '&#9668;');
+            .call(svgIcon((textDirection === 'rtl') ? '#icon-forward' : '#icon-backward'));
 
         enter
             .append('button')
