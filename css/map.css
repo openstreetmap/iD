@@ -265,7 +265,7 @@ path.fill.tag-amenity-university {
 .preset-icon-fill-area.tag-amenity-school,
 .preset-icon-fill-area.tag-amenity-college,
 .preset-icon-fill-area.tag-amenity-university {
-    border-color: rgb(255, 255, 148);
+    border-color: rgb(232, 232, 0);
     background-color: rgba(255, 255, 148, 0.15);
 }
 
