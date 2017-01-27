@@ -84,7 +84,7 @@ export function modeDragNode(context) {
         var editableIDs = [ entity.id ];
 	    context.graph().parentWays(entity).forEach(function (parentWay) {
             editableIDs.push(parentWay.id);
-            editableIDs.concat(_.map(context.graph().parentRelations(parentWay), 'id'));
+		    editableIDs = editableIDs.concat(_.map(context.graph().parentRelations(parentWay), 'id'));
 	    });
 
         isCancelled = d3.event.sourceEvent.shiftKey ||
