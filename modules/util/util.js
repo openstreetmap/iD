@@ -167,7 +167,7 @@ export function utilSetTransform(el, x, y, scale) {
 
 // Calculates Levenshtein distance between two strings
 // see:  https://en.wikipedia.org/wiki/Levenshtein_distance
-// first converts the strings to lowercase and replaces diacritic marks with ascii equilivants.
+// first converts the strings to lowercase and replaces diacritic marks with ascii equivalents.
 export function utilEditDistance(a, b) {
     a = removeDiacritics(a.toLowerCase());
     b = removeDiacritics(b.toLowerCase());
