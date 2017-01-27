@@ -41,6 +41,32 @@ export function uiSave(context) {
 
 
     return function(selection) {
+        var numChanges = 0;
+
+        function updateCount() {
+            var _ = history.difference().summary().length;
+            if (_ === numChanges) return;
+            numChanges = _;
+
+            tooltipBehavior
+                .title(uiTooltipHtml(
+                    t(numChanges > 0 ? 'save.help' : 'save.no_changes'), key)
+                );
+
+            var background = getBackground(numChanges);
+
+            button
+                .classed('disabled', numChanges === 0)
+                .classed('has-count', numChanges > 0)
+                .style('background', background);
+
+            button.select('span.count')
+                .text(numChanges)
+                .style('background', background)
+                .style('border-color', background);
+        }
+
+
         var tooltipBehavior = tooltip()
             .placement('bottom')
             .html(true)
@@ -64,36 +90,17 @@ export function uiSave(context) {
             .attr('class', 'count')
             .text('0');
 
+        updateCount();
+
+
         var keybinding = d3keybinding('save')
             .on(key, save, true);
 
         d3.select(document)
             .call(keybinding);
 
-        var numChanges = 0;
-
         context.history()
-            .on('change.save', function() {
-                var _ = history.difference().summary().length;
-                if (_ === numChanges)
-                    return;
-                numChanges = _;
-
-                tooltipBehavior.title(uiTooltipHtml(
-                    t(numChanges > 0 ? 'save.help' : 'save.no_changes'), key));
-
-                var background = getBackground(numChanges);
-
-                button
-                    .classed('disabled', numChanges === 0)
-                    .classed('has-count', numChanges > 0)
-                    .style('background', background);
-
-                button.select('span.count')
-                    .text(numChanges)
-                    .style('background', background)
-                    .style('border-color', background);
-            });
+            .on('change.save', updateCount);
 
         context
             .on('enter.save', function() {
