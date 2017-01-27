@@ -79,12 +79,16 @@ export function modeDragNode(context) {
 
 
     function start(entity) {
-        activeIDs = _.map(context.graph().parentWays(entity), 'id');
-        activeIDs.push(entity.id);
-        wasMidpoint = entity.type === 'midpoint';
+	    wasMidpoint = entity.type === 'midpoint';
+
+        var editableIDs = [ entity.id ];
+	    context.graph().parentWays(entity).forEach(function (parentWay) {
+            editableIDs.push(parentWay.id);
+            editableIDs.concat(_.map(context.graph().parentRelations(parentWay), 'id'));
+	    });
 
         isCancelled = d3.event.sourceEvent.shiftKey ||
-            !(wasMidpoint || _.some(activeIDs, function (activeID) { return selectedIDs.indexOf(activeID) !== -1; })) ||
+            !(wasMidpoint || _.some(editableIDs, function (editableID) { return selectedIDs.indexOf(editableID) !== -1; })) ||
             context.features().hasHiddenConnections(entity, context.graph());
 
         if (isCancelled) return behavior.cancel();
@@ -97,12 +101,12 @@ export function modeDragNode(context) {
             var vertex = context.surface().selectAll('.' + entity.id);
             behavior.target(vertex.node(), entity);
 
-            activeIDs = _.map(context.graph().parentWays(entity), 'id');
-            activeIDs.push(entity.id);
-
         } else {
             context.perform(actionNoop());
         }
+
+	    activeIDs = _.map(context.graph().parentWays(entity), 'id');
+	    activeIDs.push(entity.id);
 
         setActiveElements();
         context.enter(mode);
