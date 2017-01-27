@@ -81,17 +81,18 @@ export function modeDragNode(context) {
     function start(entity) {
         wasMidpoint = entity.type === 'midpoint';
 
-        var editableIDs = [ entity.id ];
-        context.graph().parentWays(entity).forEach(function (parentWay) {
-            editableIDs.push(parentWay.id);
-            editableIDs = editableIDs.concat(_.map(context.graph().parentRelations(parentWay), 'id'));
-        });
+        // vertices classed "sibling" include:  (see svg/vertices.js)
+        // - children of selected ways or multipolygons
+        // - vertices sharing a way with selected vertices
+        var selection = d3.selectAll('g.' + entity.id),
+            isSibling = !selection.empty() && selection.classed('sibling');
 
-        isCancelled = d3.event.sourceEvent.shiftKey ||
-            !(wasMidpoint || _.some(editableIDs, function (editableID) { return selectedIDs.indexOf(editableID) !== -1; })) ||
+        isCancelled = d3.event.sourceEvent.shiftKey || !(wasMidpoint || isSibling) ||
             context.features().hasHiddenConnections(entity, context.graph());
 
-        if (isCancelled) return behavior.cancel();
+        if (isCancelled) {
+            return behavior.cancel();
+        }
 
         if (wasMidpoint) {
             var midpoint = entity;
@@ -105,10 +106,12 @@ export function modeDragNode(context) {
             context.perform(actionNoop());
         }
 
+        // activeIDs generate no pointer events.  This prevents the node or vertex
+        // being dragged from trying to connect to itself or its parent element.
         activeIDs = _.map(context.graph().parentWays(entity), 'id');
         activeIDs.push(entity.id);
-
         setActiveElements();
+
         context.enter(mode);
     }
 

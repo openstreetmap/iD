@@ -53,7 +53,7 @@ export function svgVertices(projection, context) {
     }
 
 
-    function draw(selection, vertices, klass, graph, zoom) {
+    function draw(selection, vertices, klass, graph, zoom, siblings) {
 
         function icon(entity) {
             if (entity.id in icons) return icons[entity.id];
@@ -105,6 +105,8 @@ export function svgVertices(projection, context) {
         }
 
 
+        siblings = siblings || {};
+
         var icons = {},
             z = (zoom < 17 ? 0 : zoom < 18 ? 1 : 2);
 
@@ -141,6 +143,7 @@ export function svgVertices(projection, context) {
         groups
             .merge(enter)
             .attr('transform', svgPointTransform(projection))
+            .classed('sibling', function(entity) { return entity.id in siblings; })
             .classed('shared', function(entity) { return graph.isShared(entity); })
             .classed('endpoint', function(entity) { return entity.isEndpoint(graph); })
             .call(setAttributes);
@@ -148,7 +151,7 @@ export function svgVertices(projection, context) {
 
 
     function drawVertices(selection, graph, entities, filter, extent, zoom) {
-        var selected = siblingAndChildVertices(context.selectedIDs(), graph, extent),
+        var siblings = siblingAndChildVertices(context.selectedIDs(), graph, extent),
             wireframe = context.surface().classed('fill-wireframe'),
             vertices = [];
 
@@ -164,7 +167,7 @@ export function svgVertices(projection, context) {
             if (geometry !== 'vertex')
                 continue;
 
-            if (entity.id in selected ||
+            if (entity.id in siblings ||
                 entity.hasInterestingTags() ||
                 entity.isEndpoint(graph) ||
                 entity.isConnected(graph)) {
@@ -175,7 +178,7 @@ export function svgVertices(projection, context) {
         var layer = selection.selectAll('.layer-hit');
         layer.selectAll('g.vertex.vertex-persistent')
             .filter(filter)
-            .call(draw, vertices, 'vertex-persistent', graph, zoom);
+            .call(draw, vertices, 'vertex-persistent', graph, zoom, siblings);
 
         drawHover(selection, graph, extent, zoom);
     }
