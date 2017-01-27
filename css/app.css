@@ -470,10 +470,6 @@ button.secondary-action:hover {
     background: #cccccc;
 }
 
-button.save.has-count {
-    padding: 9px;
-}
-
 button.save .count {
     display: none;
 }
@@ -491,7 +487,7 @@ button.save.has-count .count {
     line-height: 12px;
     border-radius: 4px;
     margin: auto;
-    margin-left: 8.3333%;
+    margin-left: 9.3333%;
 }
 
 button.save.has-count .count::before {
