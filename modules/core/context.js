@@ -23,6 +23,24 @@ export function setAreaKeys(value) {
 
 
 export function coreContext() {
+
+    // create a special translation that contains the keys in place of the strings
+    var tkeys = _.cloneDeep(dataEn);
+    var parents = [];
+
+    function traverser(v, k, obj) {
+        parents.push(k);
+        if (_.isObject(v)) {
+            _.forOwn(v, traverser);
+        } else if (_.isString(v)) {
+            obj[k] = parents.join('.');
+        }
+        parents.pop();
+    }
+
+    _.forOwn(tkeys, traverser);
+    addTranslation('_tkeys_', tkeys);
+
     addTranslation('en', dataEn);
     setLocale('en');
 
