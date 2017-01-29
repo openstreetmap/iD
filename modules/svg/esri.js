@@ -56,14 +56,6 @@ export function svgEsri(projection, context, dispatch) {
     var calledRecently = false;
 
     function drawEsri(selection) {
-        if (calledRecently) {
-            return;
-        }
-        calledRecently = true;
-        setTimeout(function() {
-            calledRecently = false;
-        }, 200);
-        
         var geojson = svgEsri.geojson,
             enabled = svgEsri.enabled,
             gjids = {},
@@ -112,7 +104,7 @@ export function svgEsri(projection, context, dispatch) {
                 var area = 0;
                 if (polygon.geometry.type === 'MultiPolygon') {
                     _.map(polygon.geometry.coordinates, function(section) {
-                        area += polygonArea(section);
+                        area += polygonArea(section[0]);
                     });
                 } else {
                     area += polygonArea(polygon.geometry.coordinates[0]);
@@ -334,15 +326,67 @@ export function svgEsri(projection, context, dispatch) {
             } else if (d.geometry.type === 'MultiLineString') {
                 var lines = [];
                 for (ln = 0; ln < d.geometry.coordinates.length; ln++) {
-                    lines.push({
-                        id: mapLine(d, d.geometry.coordinates[ln]).id,
-                        role: '' // todo roles: this empty string assumes the lines make up a route
-                    });
-                    
                     if (mergeLines) {
-                        // TODO: implement mergeLine features from regular LineString
-                        // need to send fake GeoJSON -single- LineString, d.geometry.coordinates[ln]
+                        // test each part of the MultiLineString for merge-ability
+                        var madeMerge = false;
+                        fetchRoads(function(road) {
+                            var wayid = d3.select(road).attr('class').split(' ')[3];
+                            if (1 * wayid.substring(1) < 0) {
+                                // don't apply to new drawn roads
+                                return;
+                            }
+                            var ent;
+                        
+                            // fetch existing, or load a GeoJSON representation of the road
+                            if (!gjids[wayid]) {
+                                var nodes = [];
+                                ent = context.entity(wayid);
+                                _.map(ent.nodes, function(nodeid) {
+                                    var node = context.entity(nodeid);
+                                    nodes.push(node.loc);
+                                });
+                            
+                                gjids[wayid] = {
+                                    type: 'Feature',
+                                    geometry: {
+                                        type: 'LineString',
+                                        coordinates: nodes
+                                    }
+                                };
+                            }
+                            
+                            var importPart = {
+                                type: 'Feature',
+                                geometry: {
+                                    type: 'LineString',
+                                    coordinates: d.geometry.coordinates[ln]
+                                }
+                            };
+                            var isAligned = linesMatch(importPart, gjids[wayid]);
+                            if (isAligned > 0.75) {
+                                console.log('line match found: ' + wayid + '[' + ln + '] val: ' + isAligned);
+                                madeMerge = true;
+
+                                // TODO register changes
+                                ent = ent || context.entity(wayid);
+                                var keys = Object.keys(d.properties);
+                                _.map(keys, function(key) {
+                                    ent.tags[key] = d.properties[key];
+                                });
+                            }
+                        });
+                        if (!madeMerge) {
+                            // TODO: what if part or all of the MultiLineString does not have a place to merge to?
+                        }
+                    } else {
+                        lines.push({
+                            id: mapLine(d, d.geometry.coordinates[ln]).id,
+                            role: '' // todo roles: this empty string assumes the lines make up a route
+                        });
                     }
+                }
+                if (mergeLines) {
+                    return;
                 }
                 
                 // generate a relation

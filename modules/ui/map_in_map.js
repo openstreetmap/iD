@@ -22,7 +22,7 @@ export function uiMapInMap(context) {
         var backgroundLayer = rendererTileLayer(context),
             overlayLayers = {},
             projection = geoRawMercator(),
-            esriLayer = svgEsri(projection, context),
+            // esriLayer = svgEsri(projection, context),
             gpxLayer = svgGpx(projection, context).showLabels(false),
             debugLayer = svgDebug(projection, context),
             zoom = d3.zoom()
