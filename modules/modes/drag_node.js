@@ -103,9 +103,10 @@ export function modeDragNode(context) {
         // - children of selected ways or multipolygons
         // - vertices sharing a way with selected vertices
         var selection = d3.selectAll('g.' + entity.id),
-            isSibling = !selection.empty() && selection.classed('sibling');
+            isSelected = !selection.empty() &&
+                (selection.classed('selected') || selection.classed('sibling'));
 
-        isCancelled = d3.event.sourceEvent.shiftKey || !(wasMidpoint || isSibling) ||
+        isCancelled = d3.event.sourceEvent.shiftKey || !(wasMidpoint || isSelected) ||
             context.features().hasHiddenConnections(entity, context.graph());
 
         if (isCancelled) {
