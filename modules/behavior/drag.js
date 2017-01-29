@@ -60,7 +60,7 @@ export function behaviorDrag() {
             };
 
 
-    function mousedown() {
+    function dragstart() {
         target = this;
         event_ = eventOf(target, arguments);
 
@@ -84,8 +84,9 @@ export function behaviorDrag() {
 
         if (touchId === null) d3.event.stopPropagation();
 
+
         function point() {
-            var p = target.parentNode || surface;
+            var p = surface || target.parentNode;
             return touchId !== null ? d3.touches(p).filter(function(p) {
                 return p.identifier === touchId;
             })[0] : d3.mouse(p);
@@ -143,7 +144,7 @@ export function behaviorDrag() {
 
     function drag(selection) {
         var matchesSelector = utilPrefixDOMProperty('matchesSelector'),
-            delegate = mousedown;
+            delegate = dragstart;
 
         if (selector) {
             delegate = function() {
@@ -152,7 +153,7 @@ export function behaviorDrag() {
                 for (; target && target !== root; target = target.parentNode) {
                     if (target[matchesSelector](selector) &&
                             (!filter || filter(target.__data__))) {
-                        return mousedown.call(target, target.__data__);
+                        return dragstart.call(target, target.__data__);
                     }
                 }
             };

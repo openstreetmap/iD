@@ -152,11 +152,6 @@ export function modeDragNode(context) {
             loc = context.projection.invert(currMouse),
             d = datum();
 
-console.log('event.point = ' + (d3.event && d3.event.point) +
-    ', currMouse = ' + currMouse +
-    ', context.mouse = ' + context.mouse()
-);
-
         if (d.type === 'node' && d.id !== entity.id) {
             loc = d.loc;
         } else if (d.type === 'way' && !d3.select(d3.event.sourceEvent.target).classed('fill')) {
@@ -241,7 +236,7 @@ console.log('event.point = ' + (d3.event && d3.event.point) +
 
     var behavior = behaviorDrag()
         .delegate('g.node, g.point, g.midpoint')
-        .surface(context.surface().node())
+        .surface(d3.select('#map').node())
         .origin(origin)
         .on('start', start)
         .on('move', move)
