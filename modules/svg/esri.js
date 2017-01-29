@@ -69,7 +69,7 @@ export function svgEsri(projection, context, dispatch) {
             mergeLines = d3.selectAll('.merge-lines input').property('checked');
         } catch(e) { }
 
-        function fetchBuildings(callback) {
+        function fetchVisibleBuildings(callback) {
             var buildings = d3.selectAll('path.tag-building');
             _.map(buildings, function (buildinglist2) {
                 _.map(buildinglist2, function (buildinglist) {
@@ -80,7 +80,7 @@ export function svgEsri(projection, context, dispatch) {
             });
         }
         
-        function fetchRoads(callback) {
+        function fetchVisibleRoads(callback) {
             var paths = d3.selectAll('path.tag-highway');
             _.map(paths, function (pathlist2) {
                 _.map(pathlist2, function (pathlist) {
@@ -215,13 +215,56 @@ export function svgEsri(projection, context, dispatch) {
                 }
             }
             
+            function matchingRoads(importLine) {
+                var matches = [];
+                fetchVisibleRoads(function(road) {
+                    var wayid = d3.select(road).attr('class').split(' ')[3];
+                    if (1 * wayid.substring(1) < 0) {
+                        // don't apply to new drawn roads
+                        return;
+                    }
+                    var ent;
+                        
+                    // fetch existing, or load a GeoJSON representation of the road
+                    if (!gjids[wayid]) {
+                        var nodes = [];
+                        ent = context.entity(wayid);
+                        _.map(ent.nodes, function(nodeid) {
+                            var node = context.entity(nodeid);
+                            nodes.push(node.loc);
+                        });
+                        gjids[wayid] = {
+                            type: 'Feature',
+                            geometry: {
+                                type: 'LineString',
+                                coordinates: nodes
+                            }
+                        };
+                    }
+                    var isAligned = linesMatch(importLine, gjids[wayid]);
+                    if (isAligned > 0.75) {
+                        matches.push(wayid);
+                        console.log('line match found: ' + wayid + ' (possible segment) val: ' + isAligned);
+                        madeMerge = true;
+
+                        // TODO register changes
+                        ent = ent || context.entity(wayid);
+                        var keys = Object.keys(d.properties);
+                        _.map(keys, function(key) {
+                            ent.tags[key] = d.properties[key];
+                        });
+                    }
+                });
+                return matches;
+            }
+            
             // importing different GeoJSON geometries
             if (d.geometry.type === 'Point') {
                 props = makeEntity(d.geometry.coordinates);
                 
                 // user is merging points to polygons (example: addresses to buildings)
                 if (pointInPolygon) {
-                    fetchBuildings(function(building) {
+                    fetchVisibleBuildings(function(building) {
                         // retrieve GeoJSON for this building if it isn't already stored in gjids { }
                         var wayid = d3.select(building).attr('class').split(' ')[3];
                         var ent;
@@ -275,47 +318,13 @@ export function svgEsri(projection, context, dispatch) {
                   
             } else if (d.geometry.type === 'LineString') {                
                 if (mergeLines) {
-                    var madeMerge = false;
-                    fetchRoads(function(road) {
-                        var wayid = d3.select(road).attr('class').split(' ')[3];
-                        if (1 * wayid.substring(1) < 0) {
-                            // don't apply to new drawn roads
-                            return;
-                        }
-                        var ent;
-                        
-                        // fetch existing, or load a GeoJSON representation of the road
-                        if (!gjids[wayid]) {
-                            var nodes = [];
-                            ent = context.entity(wayid);
-                            _.map(ent.nodes, function(nodeid) {
-                                var node = context.entity(nodeid);
-                                nodes.push(node.loc);
-                            });
-                            
-                            gjids[wayid] = {
-                                type: 'Feature',
-                                geometry: {
-                                    type: 'LineString',
-                                    coordinates: nodes
-                                }
-                            };
-                        }
-
-                        var isAligned = linesMatch(d, gjids[wayid]);
-                        if (isAligned > 0.75) {
-                            // console.log('line match found: ' + wayid + ' val: ' + isAligned);
-                            madeMerge = true;
-
-                            // TODO register changes
-                            ent = ent || context.entity(wayid);
-                            var keys = Object.keys(d.properties);
-                            _.map(keys, function(key) {
-                                ent.tags[key] = d.properties[key];
-                            });
-                        }
+                    var mergeRoads = matchingRoads(d);
+                    /*
+                    _.map(mergeRoads, function(mergeRoadWayId) {    
                     });
-                    if (!madeMerge) {
+                    */
+                    
+                    if (!mergeRoads.length) {
                         // none of the roads overlapped
                         window.importedEntities.push(mapLine(d, d.geometry.coordinates));
                     }
@@ -328,54 +337,24 @@ export function svgEsri(projection, context, dispatch) {
                 for (ln = 0; ln < d.geometry.coordinates.length; ln++) {
                     if (mergeLines) {
                         // test each part of the MultiLineString for merge-ability
-                        var madeMerge = false;
-                        fetchRoads(function(road) {
-                            var wayid = d3.select(road).attr('class').split(' ')[3];
-                            if (1 * wayid.substring(1) < 0) {
-                                // don't apply to new drawn roads
-                                return;
-                            }
-                            var ent;
                         
-                            // fetch existing, or load a GeoJSON representation of the road
-                            if (!gjids[wayid]) {
-                                var nodes = [];
-                                ent = context.entity(wayid);
-                                _.map(ent.nodes, function(nodeid) {
-                                    var node = context.entity(nodeid);
-                                    nodes.push(node.loc);
-                                });
-                            
-                                gjids[wayid] = {
-                                    type: 'Feature',
-                                    geometry: {
-                                        type: 'LineString',
-                                        coordinates: nodes
-                                    }
-                                };
+                        // this fragment of the MultiLineString should be compared
+                        var importPart = {
+                            type: 'Feature',
+                            geometry: {
+                                type: 'LineString',
+                                coordinates: d.geometry.coordinates[ln]
                             }
-                            
-                            var importPart = {
-                                type: 'Feature',
-                                geometry: {
-                                    type: 'LineString',
-                                    coordinates: d.geometry.coordinates[ln]
-                                }
-                            };
-                            var isAligned = linesMatch(importPart, gjids[wayid]);
-                            if (isAligned > 0.75) {
-                                console.log('line match found: ' + wayid + '[' + ln + '] val: ' + isAligned);
-                                madeMerge = true;
-
-                                // TODO register changes
-                                ent = ent || context.entity(wayid);
-                                var keys = Object.keys(d.properties);
-                                _.map(keys, function(key) {
-                                    ent.tags[key] = d.properties[key];
-                                });
-                            }
+                        };
+                        var mergeRoads = matchingRoads(importPart);
+                        
+                        /*
+                        _.map(mergeRoads, function(mergeRoadWayId) {
+                        
                         });
-                        if (!madeMerge) {
+                        */
+                        
+                        if (!mergeRoads.length) {
                             // TODO: what if part or all of the MultiLineString does not have a place to merge to?
                         }
                     } else {
@@ -385,6 +364,8 @@ export function svgEsri(projection, context, dispatch) {
                         });
                     }
                 }
+                
+                // don't add geodata if we are busy merging lines
                 if (mergeLines) {
                     return;
                 }
