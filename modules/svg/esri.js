@@ -55,15 +55,18 @@ export function svgEsri(projection, context, dispatch) {
 
     function drawEsri(selection) {
         var geojson = svgEsri.geojson,
-            enabled = svgEsri.enabled;
-        
-        var gjids = {};
-        var pointInPolygon = false;
+            enabled = svgEsri.enabled,
+            gjids = {},
+            pointInPolygon = false,
+            mergeLines = false;
+
         try {
             pointInPolygon = d3.selectAll('.point-in-polygon input').property('checked');
-        } catch(e) {
-        }
-        
+        } catch(e) { }
+        try {
+            mergeLines = d3.selectAll('.merge-lines input').property('checked');
+        } catch(e) { }
+
         function fetchBuildings(callback) {
             var buildings = d3.selectAll('path.tag-building');
             _.map(buildings, function (buildinglist2) {
@@ -73,6 +76,48 @@ export function svgEsri(projection, context, dispatch) {
                     })
                 });
             });
+        }
+        
+        function fetchRoads(callback) {
+            var paths = d3.selectAll('path.tag-highway');
+            _.map(paths, function (pathlist2) {
+                _.map(pathlist2, function (pathlist) {
+                    _.map(pathlist, function (path) {
+                        callback(path);
+                    })
+                });
+            });
+        }
+        
+        function linesMatch(importLine, roadLine) {
+            var importPoly = polygonBuffer(importLine, 10, 'meters');
+            var roadPoly = polygonBuffer(roadLine, 3, 'meters');
+            
+            var intersectPoly = polygonIntersect(importPoly, roadPoly);
+            if (!intersectPoly) {
+                return 0;
+            }
+            
+            function areaFix(polygon) {
+                var area = 0;
+                if (polygon.geometry.type === 'MultiPolygon') {
+                    _.map(polygon.geometry.coordinates, function(section) {
+                        area += polygonArea(section);
+                    });
+                } else {
+                    area += polygonArea(polygon.geometry.coordinates[0]);
+                }
+                return area;
+            }
+            
+            var intersect = areaFix(intersectPoly);
+            var overlap1 = intersect / areaFix(importPoly);
+            var overlap2 = intersect / areaFix(roadPoly);
+            
+            // how much of line 1 is in line 2?  how much of line 2 is in line 1?
+            // either score could indicate a good fit
+
+            return Math.max(overlap1, overlap2);
         }
 
         _.map(geojson.features || [], function(d) {
@@ -172,8 +217,10 @@ export function svgEsri(projection, context, dispatch) {
             if (d.geometry.type === 'Point') {
                 props = makeEntity(d.geometry.coordinates);
                 
+                // user is merging points to polygons (example: addresses to buildings)
                 if (pointInPolygon) {
                     fetchBuildings(function(building) {
+                        // retrieve GeoJSON for this building if it isn't already stored in gjids { }
                         var wayid = d3.select(building).attr('class').split(' ')[3];
                         var ent;
                         if (!gjids[wayid]) {
@@ -192,20 +239,19 @@ export function svgEsri(projection, context, dispatch) {
                                 }
                             };
                         }
-                                
+
                         var isInside = pointInside(d, gjids[wayid]);
                         if (isInside) {
-                            // console.log('found a match!!');
+                            // TODO: looking for best way to merge new tags and notify change is happening
                             ent = ent || context.entity(wayid);
-                            // ent.mergeTags(d.properties);
+                            //ent.mergeTags(d.properties);
                             
-                            console.log(props);
                             var keys = Object.keys(d.properties);
                             _.map(keys, function(key) {
-                                console.log(key + ' = ' + d.properties[key]);
                                 ent.tags[key] = d.properties[key];
                             });
-                            //ent.update({ tags: ent.tags });
+                            
+                            //ent.update({ tags: ent.tags });                            
                         }
                         
                         /*
@@ -214,8 +260,6 @@ export function svgEsri(projection, context, dispatch) {
                         });
                         */
                     });
-                    // block this after the first address
-                    // pointInPolygon = false;
                     
                 } else {
                     var node = new osmNode(props);
@@ -227,10 +271,55 @@ export function svgEsri(projection, context, dispatch) {
                     window.importedEntities.push(node);
                 }
                   
-            } else if (d.geometry.type === 'LineString') {
-                window.importedEntities.push(mapLine(d, d.geometry.coordinates));
-                // var buffagon = polygonBuffer(d, 15, 'meters');
-                // console.log(buffagon);
+            } else if (d.geometry.type === 'LineString') {                
+                if (mergeLines) {
+                    var madeMerge = false;
+                    fetchRoads(function(road) {
+                        var wayid = d3.select(road).attr('class').split(' ')[3];
+                        if (1 * wayid.substring(1) < 0) {
+                            // don't apply to new drawn roads
+                            return;
+                        }
+                        var ent;
+                        
+                        // fetch existing, or load a GeoJSON representation of the road
+                        if (!gjids[wayid]) {
+                            var nodes = [];
+                            ent = context.entity(wayid);
+                            _.map(ent.nodes, function(nodeid) {
+                                var node = context.entity(nodeid);
+                                nodes.push(node.loc);
+                            });
+                            
+                            gjids[wayid] = {
+                                type: 'Feature',
+                                geometry: {
+                                    type: 'LineString',
+                                    coordinates: nodes
+                                }
+                            };
+                        }
+
+                        var isAligned = linesMatch(d, gjids[wayid]);
+                        if (isAligned > 0.75) {
+                            console.log('line match found: ' + wayid + ' val: ' + isAligned);
+                            madeMerge = true;
+
+                            // TODO register changes
+                            ent = ent || context.entity(wayid);
+                            var keys = Object.keys(d.properties);
+                            _.map(keys, function(key) {
+                                ent.tags[key] = d.properties[key];
+                            });
+                        }
+                    });
+                    if (!madeMerge) {
+                        // none of the roads overlapped
+                        window.importedEntities.push(mapLine(d, d.geometry.coordinates));
+                    }
+                } else {
+                    window.importedEntities.push(mapLine(d, d.geometry.coordinates));
+                }
                     
             } else if (d.geometry.type === 'MultiLineString') {
                 var lines = [];
@@ -240,16 +329,10 @@ export function svgEsri(projection, context, dispatch) {
                         role: '' // todo roles: this empty string assumes the lines make up a route
                     });
                     
-                    /*
-                    var buffagon = polygonBuffer({
-                      type: 'Feature',
-                      geometry: {
-                        type: 'LineString',
-                        coordinates: d.geometry.coordinates[ln]
-                      }
-                    }, 15, 'meters');
-                    console.log(buffagon);
-                    */
+                    if (mergeLines) {
+                        // TODO: implement mergeLine features from regular LineString
+                        // need to send fake GeoJSON -single- LineString, d.geometry.coordinates[ln]
+                    }
                 }
                 
                 // generate a relation
@@ -357,7 +440,7 @@ export function svgEsri(projection, context, dispatch) {
             // special geo circumstances
             if (preset.id === 'address') {
                 return d3.selectAll('.point-in-polygon').classed('must-show', true);
-            } else if (preset.id === 'bike_lane') {
+            } else if (preset.id.indexOf('cycle') > -1) {
                 return d3.selectAll('.merge-lines').classed('must-show', true);
             } else {
                 console.log(preset.id);
