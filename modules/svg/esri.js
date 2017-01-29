@@ -52,8 +52,18 @@ export function svgEsri(projection, context, dispatch) {
 
         svgEsri.initialized = true;
     }
+    
+    var calledRecently = false;
 
     function drawEsri(selection) {
+        if (calledRecently) {
+            return;
+        }
+        calledRecently = true;
+        setTimeout(function() {
+            calledRecently = false;
+        }, 200);
+        
         var geojson = svgEsri.geojson,
             enabled = svgEsri.enabled,
             gjids = {},
@@ -90,8 +100,8 @@ export function svgEsri(projection, context, dispatch) {
         }
         
         function linesMatch(importLine, roadLine) {
-            var importPoly = polygonBuffer(importLine, 10, 'meters');
-            var roadPoly = polygonBuffer(roadLine, 3, 'meters');
+            var importPoly = polygonBuffer(importLine, 5, 'meters');
+            var roadPoly = polygonBuffer(roadLine, 5, 'meters');
             
             var intersectPoly = polygonIntersect(importPoly, roadPoly);
             if (!intersectPoly) {
@@ -302,7 +312,7 @@ export function svgEsri(projection, context, dispatch) {
 
                         var isAligned = linesMatch(d, gjids[wayid]);
                         if (isAligned > 0.75) {
-                            console.log('line match found: ' + wayid + ' val: ' + isAligned);
+                            // console.log('line match found: ' + wayid + ' val: ' + isAligned);
                             madeMerge = true;
 
                             // TODO register changes
