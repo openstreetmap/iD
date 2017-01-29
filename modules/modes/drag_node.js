@@ -167,6 +167,8 @@ console.log('event.point = ' + (d3.event && d3.event.point) +
             actionMoveNode(entity.id, loc),
             moveAnnotation(entity)
         );
+
+        lastLoc = loc;
     }
 
 
