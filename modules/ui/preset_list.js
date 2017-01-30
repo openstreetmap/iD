@@ -184,7 +184,7 @@ export function uiPresetList(context) {
             label
                 .call(svgIcon((textDirection === 'rtl' ? '#icon-backward' : '#icon-forward'), 'inline'))
                 .append('span')
-                .text(function() { return preset.name(); });
+                .html(function() { return preset.name() + '&hellip;'; });
 
             box = selection.append('div')
                 .attr('class', 'subgrid col12')
