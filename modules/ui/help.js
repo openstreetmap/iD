@@ -74,8 +74,10 @@ export function uiHelp(context) {
 
 
         function clickHelp(d, i) {
+            var rtl = (textDirection === 'rtl');
             pane.property('scrollTop', 0);
             doctitle.html(d.title);
+
             body.html(d.html);
             body.selectAll('a')
                 .attr('target', '_blank');
@@ -84,22 +86,44 @@ export function uiHelp(context) {
             });
 
             nav.html('');
-
-            if (i > 0) {
-                var prevLink = nav.append('a')
-                    .attr('class', 'previous')
-                    .on('click', function() {
-                        clickHelp(docs[i - 1], i - 1);
-                    });
-                prevLink.append('span').html('&#9668; ' + docs[i - 1].title);
+            if (rtl) {
+                nav.call(drawNext).call(drawPrevious);
+            } else {
+                nav.call(drawPrevious).call(drawNext);
             }
-            if (i < docs.length - 1) {
-                var nextLink = nav.append('a')
-                    .attr('class', 'next')
-                    .on('click', function() {
-                        clickHelp(docs[i + 1], i + 1);
-                    });
-                nextLink.append('span').html(docs[i + 1].title + ' &#9658;');
+
+
+            function drawNext(selection) {
+                if (i < docs.length - 1) {
+                    var nextLink = selection
+                        .append('a')
+                        .attr('class', 'next')
+                        .on('click', function() {
+                            clickHelp(docs[i + 1], i + 1);
+                        });
+
+                    nextLink
+                        .append('span')
+                        .text(docs[i + 1].title)
+                        .call(svgIcon((rtl ? '#icon-backward' : '#icon-forward'), 'inline'));
+                }
+            }
+
+
+            function drawPrevious(selection) {
+                if (i > 0) {
+                    var prevLink = selection
+                        .append('a')
+                        .attr('class', 'previous')
+                        .on('click', function() {
+                            clickHelp(docs[i - 1], i - 1);
+                        });
+
+                    prevLink
+                        .call(svgIcon((rtl ? '#icon-forward' : '#icon-backward'), 'inline'))
+                        .append('span')
+                        .text(docs[i - 1].title);
+                }
             }
         }
 
