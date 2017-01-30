@@ -159,7 +159,8 @@ export function uiPresetList(context) {
             var wrap = selection.append('div')
                 .attr('class', 'preset-list-button-wrap category col12');
 
-            wrap.append('button')
+            var button = wrap
+                .append('button')
                 .attr('class', 'preset-list-button')
                 .classed('expanded', false)
                 .call(uiPresetIcon()
@@ -167,16 +168,23 @@ export function uiPresetList(context) {
                     .preset(preset))
                 .on('click', function() {
                     var isExpanded = d3.select(this).classed('expanded');
-                    var triangle = isExpanded ? '▶ ' :  '▼ ';
-                    d3.select(this).classed('expanded', !isExpanded);
-                    d3.select(this).selectAll('.label').text(triangle + preset.name());
+                    var iconName = isExpanded ?
+                        (textDirection === 'rtl' ? '#icon-backward' : '#icon-forward') : '#icon-down';
+                    d3.select(this)
+                        .classed('expanded', !isExpanded);
+                    d3.select(this).selectAll('div.label svg.icon use')
+                        .attr('href', iconName);
                     item.choose();
-                })
-                .append('div')
-                .attr('class', 'label')
-                .text(function() {
-                  return '▶ ' + preset.name();
                 });
+
+            var label = button
+                .append('div')
+                .attr('class', 'label');
+
+            label
+                .call(svgIcon((textDirection === 'rtl' ? '#icon-backward' : '#icon-forward'), 'inline'))
+                .append('span')
+                .text(function() { return preset.name(); });
 
             box = selection.append('div')
                 .attr('class', 'subgrid col12')
@@ -189,6 +197,7 @@ export function uiPresetList(context) {
             sublist = box.append('div')
                 .attr('class', 'preset-list fillL3 cf fl');
         }
+
 
         item.choose = function() {
             if (!box || !sublist) return;
