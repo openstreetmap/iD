@@ -25,7 +25,7 @@ export function uiRawMembershipEditor(context) {
 
     function selectRelation(d) {
         d3.event.preventDefault();
-        context.enter(modeSelect(context, [d.relation.id]));
+        context.enter(modeSelect(context, [d.relation.id]).suppressMenu(true));
     }
 
 
@@ -55,7 +55,7 @@ export function uiRawMembershipEditor(context) {
                 t('operations.add.annotation.relation')
             );
 
-            context.enter(modeSelect(context, [relation.id]));
+            context.enter(modeSelect(context, [relation.id]).suppressMenu(true));
         }
     }
 
