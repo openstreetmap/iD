@@ -85,7 +85,7 @@ export function uiFieldLanes(field, context) {
             var keysConsidered = ['count', 'forward', 'backward', 'reverse'];
             
             var metadata = lanesData.metadata;
-
+            window.metadata = metadata;
             wrap = wrap.enter()
                 .append('div')
                 .attr('class', 'preset-input-wrap')
@@ -250,8 +250,8 @@ export function uiFieldLanes(field, context) {
             var items;
             var metadata = lanesData.metadata;
             var oneway = metadata.oneway;
-            var len;
-
+            var len = metadata.count;
+            // TODO: clean up this mess of vvvvv
             if (oneway) len = metadata.count;
             else len = metadata.forward + metadata.backward;
 

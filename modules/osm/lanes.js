@@ -14,7 +14,14 @@ export function osmLanes(entity) {
     var forward = laneDirections.forward;
     var backward = laneDirections.backward;
     var bothways = laneDirections.bothways;
+    
+    // sometimes just forward and backward are available
+    laneCount = laneDirections.laneCount; 
+    // TODO: if you change the forward backward and click on trash at top, 
+    // laneCount and forward/backward goes out of sync
 
+    // TODO: sometimes people just do turn:lanes:backward=|||| and dont mention
+    // any kind of count. need to handle it
     // parse the piped string 'x|y|z' format
     var turnLanes = {};
     turnLanes.unspecified = parseTurnLanes(tags['turn:lanes']);
@@ -74,8 +81,7 @@ export function osmLanes(entity) {
 
     // TODO: need to make sure forward lanes is consistent across all tags,
     // eg if psv:lanes:forward is 3 and lanes:forward is 2, changes lanes:forward =3,
-    return {
-        metadata: {
+    var metadata = {
             count: laneCount,
             oneway: isOneWay,
             forward: forward,
@@ -92,9 +98,12 @@ export function osmLanes(entity) {
             bicyclewayLanes: bicyclewayLanes,
             leftHandDrive: false,
             reverse: parseInt(tags.oneway, 10) === -1
-        },
+    };
+    return {
+        metadata: metadata,
+        accessSeq: makeAccessSeq(metadata, true),
         lanes: lanesObj
-        };
+    };
 }
 
 
@@ -137,7 +146,7 @@ function parseLaneDirections(tags, isOneWay, laneCount) {
     var forward = parseInt(tags['lanes:forward'], 10);
     var backward = parseInt(tags['lanes:backward'], 10);
     var bothways = parseInt(tags['lanes:both_ways'], 10) > 0 ? 1 : 0;
-
+    var count = laneCount;
     if (parseInt(tags.oneway, 10) === -1) {
         forward = 0;
         bothways = 0;
@@ -164,10 +173,12 @@ function parseLaneDirections(tags, isOneWay, laneCount) {
         }
         backward = laneCount - bothways - forward;
     }
+
     return {
         forward: forward,
         backward: backward,
-        bothways: bothways
+        bothways: bothways,
+        laneCount: forward + backward+ bothways
     };
 }
 
@@ -275,3 +286,37 @@ function lanesArray(lanesData) {
     
     return obj;
 }
+
+function makeAccessSeq(metadata, leftHand) {
+    if (metadata.oneway) {
+        return _.fill(Array(metadata.count), 0).map(function (n, i) {
+            return {
+                dir: 'unspecified',
+                index: i
+            };
+        });
+    }
+        
+    var forward = metadata.forward;
+    var backward = metadata.backward;
+
+    var forSeq = _.fill(Array(forward), 0).map(function (n, i) {
+        return {
+            dir: 'forward',
+            index: i
+        };
+    });
+    var backSeq = _.fill(Array(backward), 0).map(function (n, i) {
+         return {
+            dir: 'backward',
+            index:  backward - i - 1
+        };
+    });
+   
+    if (leftHand) {
+        return [].concat(forSeq, backSeq);
+    }
+    return [].concat(backSeq, forSeq);
+}
+
+window.makeAccessSeq = makeAccessSeq;

@@ -27,7 +27,7 @@ export function svgMidpoints(projection, context) {
                 continue;
             if (context.selectedIDs().indexOf(entity.id) < 0)
                 continue;
-
+            console.log(context.selectedIDs().indexOf(entity.id));
             var nodes = graph.childNodes(entity);
             for (var j = 0; j < nodes.length - 1; j++) {
 
