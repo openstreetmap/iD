@@ -139,7 +139,7 @@ export function uiFieldAddress(field, context) {
             });
         }
 
-        wrap.selectAll('div')
+        wrap.selectAll('div.addr-row')
             .data(addressFormat.format)
             .enter()
             .append('div')
@@ -172,7 +172,7 @@ export function uiFieldAddress(field, context) {
                     : (tag === 'city') ? getNearCities
                     : getNearValues;
 
-            wrap.selectAll('.addr-' + tag)
+            wrap.selectAll('input.addr-' + tag)
                 .call(d3combobox()
                     .minItems(1)
                     .fetcher(function(value, callback) {
