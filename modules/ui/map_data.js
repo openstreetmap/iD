@@ -81,6 +81,11 @@ export function uiMapData(context) {
         }
 
 
+        function clickGeoJson() {
+            toggleLayer('geojson');
+        }
+
+
         function clickMapillaryImages() {
             toggleLayer('mapillary-images');
             if (!showsLayer('mapillary-images')) {
@@ -270,6 +275,86 @@ export function uiMapData(context) {
         }
 
 
+
+        function drawGeoJsonItem(selection) {
+            var geojson = layers.layer('geojson'),
+                hasGeojson = geojson && geojson.hasGeojson(),
+                showsGeojson = hasGeojson && geojson.enabled();
+
+            var geojsonLayerItem = selection
+                .selectAll('.layer-list-geojson')
+                .data(geojson ? [0] : []);
+
+            // Exit
+            geojsonLayerItem.exit()
+                .remove();
+
+            // Enter
+            var enter = geojsonLayerItem.enter()
+                .append('ul')
+                .attr('class', 'layer-list layer-list-geojson')
+                .append('li')
+                .classed('list-item-geojson', true);
+
+            enter
+                .append('button')
+                .attr('class', 'list-item-geojson-extent')
+                .call(tooltip()
+                    .title(t('geojson.zoom'))
+                    .placement((textDirection === 'rtl') ? 'right' : 'left'))
+                .on('click', function() {
+                    d3.event.preventDefault();
+                    d3.event.stopPropagation();
+                    geojson.fitZoom();
+                })
+                .call(svgIcon('#icon-search'));
+
+            enter
+                .append('button')
+                .attr('class', 'list-item-geojson-browse')
+                .call(tooltip()
+                    .title(t('geojson.browse'))
+                    .placement((textDirection === 'rtl') ? 'right' : 'left'))
+                .on('click', function() {
+                    d3.select(document.createElement('input'))
+                        .attr('type', 'file')
+                        .on('change', function() {
+                            geojson.files(d3.event.target.files);
+                        })
+                        .node().click();
+                })
+                .call(svgIcon('#icon-geolocate'));
+
+            var labelGeojson = enter
+                .append('label')
+                .call(tooltip().title(t('geojson.drag_drop')).placement('top'));
+
+            labelGeojson
+                .append('input')
+                .attr('type', 'checkbox')
+                .on('change', clickGeoJson);
+
+            labelGeojson
+                .append('span')
+                .text(t('geojson.local_layer'));
+
+
+            // Update
+            geojsonLayerItem = geojsonLayerItem
+                .merge(enter);
+
+            geojsonLayerItem
+                .classed('active', showsGeojson)
+                .selectAll('input')
+                .property('disabled', !hasGeojson)
+                .property('checked', showsGeojson);
+
+            geojsonLayerItem
+                .selectAll('label')
+                .classed('deemphasize', !hasGeojson);
+        }
+
+
         function drawList(selection, data, type, name, change, active) {
             var items = selection.selectAll('li')
                 .data(data);
@@ -326,6 +411,7 @@ export function uiMapData(context) {
         function update() {
             dataLayerContainer.call(drawMapillaryItems);
             dataLayerContainer.call(drawGpxItem);
+            dataLayerContainer.call(drawGeoJsonItem);
 
             fillList.call(drawList, fills, 'radio', 'area_fill', setFill, showsFill);
             featureList.call(drawList, features, 'checkbox', 'feature', clickFeature, showsFeature);

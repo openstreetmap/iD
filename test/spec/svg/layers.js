@@ -26,12 +26,13 @@ describe('iD.svgLayers', function () {
     it('creates default data layers', function () {
         container.call(iD.svgLayers(projection, context));
         var nodes = container.selectAll('svg .data-layer').nodes();
-        expect(nodes.length).to.eql(5);
+        expect(nodes.length).to.eql(6);
         expect(d3.select(nodes[0])).to.be.classed('data-layer-osm');
         expect(d3.select(nodes[1])).to.be.classed('data-layer-gpx');
-        expect(d3.select(nodes[2])).to.be.classed('data-layer-mapillary-images');
-        expect(d3.select(nodes[3])).to.be.classed('data-layer-mapillary-signs');
-        expect(d3.select(nodes[4])).to.be.classed('data-layer-debug');
+        expect(d3.select(nodes[2])).to.be.classed('data-layer-geojson');
+        expect(d3.select(nodes[3])).to.be.classed('data-layer-mapillary-images');
+        expect(d3.select(nodes[4])).to.be.classed('data-layer-mapillary-signs');
+        expect(d3.select(nodes[5])).to.be.classed('data-layer-debug');
     });
 
 });

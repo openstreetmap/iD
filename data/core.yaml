@@ -480,6 +480,11 @@ en:
     drag_drop: "Drag and drop a .gpx file on the page, or click the button to the right to browse"
     zoom: "Zoom to GPX track"
     browse: "Browse for a .gpx file"
+  geojson:
+    local_layer: "Local GEOJSON file"
+    drag_drop: "Drag and drop a .geojson file on the page, or click the button to the right to browse"
+    zoom: "Zoom to GEOJSON"
+    browse: "Browse for a .geojson file"
   mapillary_images:
     tooltip: "Street-level photos from Mapillary"
     title: "Photo Overlay (Mapillary)"

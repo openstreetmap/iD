@@ -1,6 +1,6 @@
 import * as d3 from 'd3';
 import { d3keybinding } from '../lib/d3.keybinding.js';
-import { svgDebug, svgGpx } from '../svg/index';
+import { svgDebug, svgGpx, svgGeoJson } from '../svg/index';
 import { geoRawMercator } from '../geo/index';
 import { rendererTileLayer } from '../renderer/index';
 import { utilSetTransform } from '../util/index';
@@ -23,6 +23,7 @@ export function uiMapInMap(context) {
             overlayLayers = {},
             projection = geoRawMercator(),
             gpxLayer = svgGpx(projection, context).showLabels(false),
+            geojsonLayer = svgGeoJson(projection, context).showLabels(false),
             debugLayer = svgDebug(projection, context),
             zoom = d3.zoom()
                 .scaleExtent([ztok(0.5), ztok(24)])
@@ -232,6 +233,7 @@ export function uiMapInMap(context) {
                 .attr('class', 'map-in-map-data')
                 .merge(dataLayers)
                 .call(gpxLayer)
+                .call(geojsonLayer)
                 .call(debugLayer);
 
 
