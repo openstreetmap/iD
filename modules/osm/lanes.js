@@ -174,7 +174,7 @@ function parseLaneDirections(tags, isOneWay, laneCount) {
 
 function parseTurnLanes(tag){
     if (!tag) return [];
-
+    // TODO: need to add reverse_left and reverse_right
     var validValues = [
         'left', 'slight_left', 'sharp_left', 'through', 'right', 'slight_right',
         'sharp_right', 'reverse', 'merge_to_left', 'merge_to_right', 'none'

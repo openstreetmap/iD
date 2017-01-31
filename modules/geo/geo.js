@@ -103,6 +103,10 @@ export function geoAngle(a, b, projection) {
     return Math.atan2(b[1] - a[1], b[0] - a[0]);
 }
 
+function geoAngle2(a, b) {
+    return (Math.atan2(b[1] - a[1], b[0] - a[0]) * 180)/Math.PI;
+}
+
 
 // Rotate all points counterclockwise around a pivot point by given angle
 export function geoRotate(points, angle, around) {
@@ -273,4 +277,22 @@ export function geoPathLength(path) {
         length += geoEuclideanDistance(path[i], path[i + 1]);
     }
     return length;
+}
+
+export function geoPointOnLine(point, nodes, projection) {
+    var dist = geoEuclideanDistance,
+        points = nodes.map(function(n) { return projection(n.loc); }),
+        min = Infinity,
+        idx, loc;
+
+    for (var i = 0; i < points.length - 1; i++) {
+        console.log(point, points[i+1], points[i]);
+        var cross = geoAngle2(point, points[i], projection) - geoAngle2(point, points[i+1], projection);
+        var segmentLen = dist(points[i], points[i+1]);
+        var splitLen = dist(points[i], point) + dist(points[i+1], point);
+        console.log(cross);
+        if (cross.toFixed(5) === 0 && segmentLen.toFixed(5) === splitLen.toFixed(5)) {
+            return nodes[i];
+        }
+    }
 }

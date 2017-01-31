@@ -28,7 +28,7 @@ import {
 import { modeBrowse } from './browse';
 import { modeDragNode } from './drag_node';
 import * as Operations from '../operations/index';
-import { uiRadialMenu, uiSelectionList } from '../ui/index';
+import { uiRadialMenu, uiLaneVisualizer, uiSelectionList } from '../ui/index';
 import { uiCmd } from '../ui/cmd';
 import { utilEntityOrMemberSelector, utilEntitySelector } from '../util/index';
 
@@ -54,6 +54,7 @@ export function modeSelect(context, selectedIDs) {
             modeDragNode(context).selectedIDs(selectedIDs).behavior
         ],
         inspector,
+        laneVisualizer,
         radialMenu,
         newFeature = false,
         suppressMenu = false,
@@ -142,13 +143,22 @@ export function modeSelect(context, selectedIDs) {
         if (radialMenu) {
             context.surface().call(radialMenu.close);
         }
+        if (laneVisualizer) {
+            context.surface().call(laneVisualizer.close);
+        }
     }
 
 
     function positionMenu() {
+        var entity = singular();
+        
+        if (entity && laneVisualizer && entity.type === 'way') {
+             laneVisualizer.center(context.mouse());
+             laneVisualizer.wayID(entity.id);
+        }
+
         if (suppressMenu || !radialMenu) { return; }
 
-        var entity = singular();
         if (entity && context.geometry(entity.id) === 'relation') {
             suppressMenu = true;
         } else if (entity && entity.type === 'node') {
@@ -158,10 +168,12 @@ export function modeSelect(context, selectedIDs) {
                 viewport = geoExtent(context.projection.clipExtent()).polygon();
             if (geoPointInPolygon(point, viewport)) {
                 radialMenu.center(point);
+               
             } else {
                 suppressMenu = true;
             }
         }
+        console.log(entity);
     }
 
 
@@ -169,6 +181,9 @@ export function modeSelect(context, selectedIDs) {
         closeMenu();
         if (!suppressMenu && radialMenu) {
             context.surface().call(radialMenu);
+        }
+        if (laneVisualizer) {
+            context.surface().call(laneVisualizer);
         }
     }
 
@@ -427,6 +442,8 @@ export function modeSelect(context, selectedIDs) {
 
         radialMenu = uiRadialMenu(context, operations);
 
+        laneVisualizer = uiLaneVisualizer(context);
+
         context.ui().sidebar
             .select(singular() ? singular().id : null, newFeature);
 
@@ -486,6 +503,7 @@ export function modeSelect(context, selectedIDs) {
         keybinding.off();
         closeMenu();
         radialMenu = undefined;
+        laneVisualizer = undefined;
 
         context.history()
             .on('undone.select', null)

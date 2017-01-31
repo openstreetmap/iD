@@ -8,8 +8,8 @@ export function uiRadialMenu(context, operations) {
         center = [0, 0],
         tooltip;
 
-
     var radialMenu = function(selection) {
+        if (operations) return;
         if (!operations.length) return;
 
         selection.node().parentNode.focus();
@@ -47,6 +47,7 @@ export function uiRadialMenu(context, operations) {
             .attr('stroke-width', 50)
             .attr('stroke-linecap', 'round');
 
+        console.log(operations);
         var button = menu.selectAll()
             .data(operations)
             .enter()

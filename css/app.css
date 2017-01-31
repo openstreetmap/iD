@@ -1326,6 +1326,14 @@ button.save.has-count .count::before {
     background: #E8EBFF;
 }
 
+/*lane-visualizer*/
+
+.lane-visualizer-background {
+    fill: #000;
+    fill-opacity: 0.5;
+}
+
+
 /* preset form multicombo */
 
 .form-field-multicombo {

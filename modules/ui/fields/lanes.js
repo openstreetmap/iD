@@ -16,7 +16,6 @@ var validLanes = [
 export function uiFieldLanes(field, context) {
     var dispatch = d3.dispatch('change'),
         LANE_WIDTH = 40,
-        LANE_HEIGHT = 200,
         // TODO: currentLane if big like 6 goes crazy if other wayID has less than 6 lanes
         currentLane = 0,
         curDirection = 'unspecified',
@@ -24,9 +23,7 @@ export function uiFieldLanes(field, context) {
         lanesData;
 
     function lanes(selection) {
-        console.log('hollaa mee', currentLane, curDirection)
         lanesData = context.entity(wayID).lanes();
-        var lanesArray = lanesData.lanesArray;
         window.lanesData = lanesData;
         window.currentLane = currentLane;
         window.curDirection = curDirection;

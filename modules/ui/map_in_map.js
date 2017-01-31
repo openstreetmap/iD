@@ -237,27 +237,36 @@ export function uiMapInMap(context) {
 
             // redraw viewport bounding box
             if (gesture !== 'pan') {
-                var getPath = d3.geoPath(projection),
-                    bbox = { type: 'Polygon', coordinates: [context.map().extent().polygon()] };
+                    // var getPath = d3.geoPath(projection),
+                var    bbox = { type: 'Polygon', coordinates: [context.map().extent().polygon()] };
 
                 viewport = wrap.selectAll('.map-in-map-viewport')
                     .data([0]);
 
                 viewport = viewport.enter()
-                    .append('svg')
-                    .attr('class', 'map-in-map-viewport')
+                    .append('canvas')
+                    // .attr('class', 'map-in-map-viewport')
+                    .attr('height', 300)
+                    .attr('width', 300)
                     .merge(viewport);
 
 
-                var path = viewport.selectAll('.map-in-map-bbox')
+                var path2 = viewport.selectAll('.map-in-map-bbox')
                     .data([bbox]);
 
-                path.enter()
-                    .append('path')
-                    .attr('class', 'map-in-map-bbox')
-                    .merge(path)
-                    .attr('d', getPath)
-                    .classed('thick', function(d) { return getPath.area(d) < 30; });
+                var ctx = d3.select('canvas').node().getContext('2d');
+                var path = d3.geoPath()
+                    .projection(projection)
+                    .context(ctx);
+                ctx.beginPath();
+                path(bbox);
+                ctx.stroke();
+                // path.enter()
+                //     .append('path')
+                //     .attr('class', 'map-in-map-bbox')
+                //     .merge(path)
+                //     .attr('d', getPath)
+                //     .classed('thick', function(d) { return getPath.area(d) < 30; });
             }
         }
 
