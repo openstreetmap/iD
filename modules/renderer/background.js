@@ -94,6 +94,11 @@ export function rendererBackground(context) {
             imageryUsed.push('Local GPX');
         }
 
+        var geojson = context.layers().layer('geojson');
+        if (geojson && geojson.enabled() && geojson.hasGeojson()) {
+            imageryUsed.push('Local GEOJSON');
+        }
+
         var mapillary_images = context.layers().layer('mapillary-images');
         if (mapillary_images && mapillary_images.enabled()) {
             imageryUsed.push('Mapillary Images');

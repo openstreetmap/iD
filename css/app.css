@@ -3588,7 +3588,8 @@ img.tile-removing {
   border-radius: 0 0 4px 0;
 }
 
-[dir='rtl'] .list-item-gpx-browse svg {
+[dir='rtl'] .list-item-gpx-browse svg,
+[dir='rtl'] .list-item-geojson-browse svg {
   transform: rotateY(180deg);
 }
 

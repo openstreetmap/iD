@@ -1529,6 +1529,21 @@ text.gpx {
     fill: #FF26D4;
 }
 
+/* GEOJSON Paths */
+.layer-geojson {
+    pointer-events: none;
+}
+
+path.geojson {
+    stroke: #2ECCFA;
+    stroke-width: 2;
+    fill: none;
+}
+
+text.geojson {
+    fill: #2ECCFA;
+}
+
 /* Mapillary Image Layer */
 
 .layer-mapillary-images {
