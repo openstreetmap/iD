@@ -1668,6 +1668,14 @@ path.import-approved.way.area {
     stroke: rgba(90, 225, 90, 0.3);
 }
 
+path.import-edited.way {
+    stroke: #a6a6f3;
+}
+
+path.import-edited.way.area {
+    stroke: rgba(90, 90, 225, 0.3);
+}
+
 /* GPX Paths */
 .layer-gpx {
     pointer-events: none;

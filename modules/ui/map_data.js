@@ -374,32 +374,32 @@ export function uiMapData(context) {
                     .attr('class', 'add-tag')
                     .call(svgIcon('#icon-plus', 'icon light'))
                     .on('click', function() {
-                      var row = d3.selectAll('.esri-table').append('tr');
-                      var uniqNum = Math.floor(Math.random() * 10000);
+                        var row = d3.selectAll('.esri-table').append('tr');
+                        var uniqNum = Math.floor(Math.random() * 10000);
 
-                      // the 'key' field, showing the new OSM tag key
-                      row.append('td').append('input')
-                        //.attr('type', 'text')
-                        .attr('class', 'import-key-' + uniqNum)
-                        .on('change', function() {
-                          if (this.name) {
-                            window.layerImports['add_' + this.value] = window.layerImports['add_' + this.name];
-                            delete window.layerImports['add_' + this.name];
-                          } else {
-                            window.layerImports['add_' + this.value] = '';
-                          }
-                          this.name = this.value;
-                          d3.selectAll('.osm-key-' + uniqNum).attr('name', this.value);
-                        });
+                        // the 'key' field, showing the new OSM tag key
+                        row.append('td').append('input')
+                            //.attr('type', 'text')
+                            .attr('class', 'import-key-' + uniqNum)
+                            .on('change', function() {
+                                if (this.name) {
+                                    window.layerImports['add_' + this.value] = window.layerImports['add_' + this.name];
+                                    delete window.layerImports['add_' + this.name];
+                                } else {
+                                    window.layerImports['add_' + this.value] = '';
+                                }
+                                this.name = this.value;
+                                d3.selectAll('.osm-key-' + uniqNum).attr('name', this.value);
+                            });
                     
-                      // the 'value' field setting the new OSM tag default value
-                      row.append('td').append('input')
-                        .attr('type', 'text')
-                        .attr('class', 'osm-key-' + uniqNum)
-                        .on('change', function() {
-                            // properties with this.name renamed to this.value
-                            window.layerImports['add_' + this.name] = this.value;
-                        });
+                        // the 'value' field setting the new OSM tag default value
+                        row.append('td').append('input')
+                            .attr('type', 'text')
+                            .attr('class', 'osm-key-' + uniqNum)
+                            .on('change', function() {
+                                // properties with this.name renamed to this.value
+                                window.layerImports['add_' + this.name] = this.value;
+                            });
                     });
             
             // save button makes changes to existing and new import data
@@ -408,9 +408,10 @@ export function uiMapData(context) {
                     context.flush();
                     window.knownObjectIds = {};
                     window.importedEntities = [];
-                    setTimeout(function() {
-                      refreshEsriLayer(context.storage('esriLayerUrl'), esriDownloadAll);
-                    }, 400);
+                    window.onOSMreload = function() {
+                        window.onOSMreload = null;
+                        refreshEsriLayer(context.storage('esriLayerUrl'), esriDownloadAll);
+                    };
                 })
                 .attr('class', 'no-float hide')
                 .call(svgIcon('#icon-save', 'icon light'))

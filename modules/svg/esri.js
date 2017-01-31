@@ -3,7 +3,7 @@ import _ from 'lodash';
 import { geoExtent, geoPolygonIntersectsPolygon } from '../geo/index';
 import { osmNode, osmRelation, osmWay } from '../osm/index';
 
-import { actionAddEntity } from '../actions/index';
+import { actionAddEntity, actionChangeTags } from '../actions/index';
 
 import { utilDetect } from '../util/detect';
 import fromEsri from 'esri-to-geojson';
@@ -53,8 +53,6 @@ export function svgEsri(projection, context, dispatch) {
         svgEsri.initialized = true;
     }
     
-    var calledRecently = false;
-
     function drawEsri(selection) {
         var geojson = svgEsri.geojson,
             enabled = svgEsri.enabled,
@@ -69,8 +67,8 @@ export function svgEsri(projection, context, dispatch) {
             mergeLines = d3.selectAll('.merge-lines input').property('checked');
         } catch(e) { }
 
-        function fetchVisibleBuildings(callback) {
-            var buildings = d3.selectAll('path.tag-building');
+        function fetchVisibleBuildings(callback, selector) {
+            var buildings = d3.selectAll(selector || 'path.tag-building');
             _.map(buildings, function (buildinglist2) {
                 _.map(buildinglist2, function (buildinglist) {
                     _.map(buildinglist, function (building) {
@@ -81,14 +79,7 @@ export function svgEsri(projection, context, dispatch) {
         }
         
         function fetchVisibleRoads(callback) {
-            var paths = d3.selectAll('path.tag-highway');
-            _.map(paths, function (pathlist2) {
-                _.map(pathlist2, function (pathlist) {
-                    _.map(pathlist, function (path) {
-                        callback(path);
-                    })
-                });
-            });
+            return fetchVisibleBuildings(callback, 'path.tag-highway');
         }
         
         function linesMatch(importLine, roadLine) {
@@ -214,6 +205,32 @@ export function svgEsri(projection, context, dispatch) {
                     return way;
                 }
             }
+                        
+            function mergeImportTags(wayid) {
+                // merge the active import GeoJSON attributes (d.properties) into item with wayid
+                var ent = context.entity(wayid);
+                ent.approvedForEdit = false;
+                if (!ent.importOriginal) {
+                    ent.importOriginal = _.clone(ent.tags);
+                }
+                
+                var originalProperties = _.clone(ent.tags);
+                
+                var keys = Object.keys(d.properties);
+                _.map(keys, function(key) {
+                    originalProperties[key] = d.properties[key];
+                });
+
+                var adjustedFeature = processGeoFeature({ properties: originalProperties }, esriLayer = context.layers().layer('esri').preset());
+                
+                context.perform(
+                    actionChangeTags(wayid, adjustedFeature.properties),
+                    'merged import item tags'
+                );
+                setTimeout(function() {
+                    d3.selectAll('.layer-osm .' + wayid).classed('import-edited', true);
+                }, 250);
+            }
             
             function matchingRoads(importLine) {
                 var matches = [];
@@ -246,13 +263,7 @@ export function svgEsri(projection, context, dispatch) {
                         matches.push(wayid);
                         console.log('line match found: ' + wayid + ' (possible segment) val: ' + isAligned);
                         madeMerge = true;
-
-                        // TODO register changes
-                        ent = ent || context.entity(wayid);
-                        var keys = Object.keys(d.properties);
-                        _.map(keys, function(key) {
-                            ent.tags[key] = d.properties[key];
-                        });
+                        mergeImportTags(wayid);
                     }
                 });
                 return matches;
@@ -264,6 +275,7 @@ export function svgEsri(projection, context, dispatch) {
                 
                 // user is merging points to polygons (example: addresses to buildings)
                 if (pointInPolygon) {
+                    var matched = false;
                     fetchVisibleBuildings(function(building) {
                         // retrieve GeoJSON for this building if it isn't already stored in gjids { }
                         var wayid = d3.select(building).attr('class').split(' ')[3];
@@ -287,24 +299,21 @@ export function svgEsri(projection, context, dispatch) {
 
                         var isInside = pointInside(d, gjids[wayid]);
                         if (isInside) {
-                            // TODO: looking for best way to merge new tags and notify change is happening
-                            ent = ent || context.entity(wayid);
-                            //ent.mergeTags(d.properties);
-                            
-                            var keys = Object.keys(d.properties);
-                            _.map(keys, function(key) {
-                                ent.tags[key] = d.properties[key];
-                            });
-                            
-                            //ent.update({ tags: ent.tags });                            
+                            matched = true;
+                            mergeImportTags(wayid);
                         }
-                        
-                        /*
-                        context.loadEntity(wayid, function(err, result) {
-                            console.log(err || result);
-                        });
-                        */
                     });
+                    
+                    if (!matched) {
+                        // add address point independently of existing buildings
+                        var node = new osmNode(props);
+                        node.approvedForEdit = false;
+                        context.perform(
+                            actionAddEntity(node),
+                            'adding point'
+                        );
+                        window.importedEntities.push(node);
+                    }
                     
                 } else {
                     var node = new osmNode(props);
@@ -418,6 +427,48 @@ export function svgEsri(projection, context, dispatch) {
         
         return this;
     }
+    
+    function processGeoFeature(selectfeature, preset) {
+        // when importing an object, accept users' changes to keys
+        var convertedKeys = Object.keys(window.layerImports);
+        var presetKeysLength = preset || 0;
+        
+        // keep the OBJECTID to make sure we don't download the same data multiple times
+        var outprops = {
+            OBJECTID: selectfeature.properties.OBJECTID
+        };
+
+        // convert the rest of the layer's properties
+        for (var k = 0; k < convertedKeys.length; k++) {
+            var osmk = null;
+            var osmv = null;
+
+            if (convertedKeys[k].indexOf('add_') === 0) {
+                osmk = convertedKeys[k].substring(4);
+                osmv = window.layerImports[convertedKeys[k]];
+            } else {
+                osmv = selectfeature.properties[convertedKeys[k]];
+                if (osmv) {
+                    osmk = window.layerImports[convertedKeys[k]];
+                }
+            }
+                
+            if (osmk) {
+                if (convertedKeys.length > presetKeysLength) {
+                    // user directs any transferred keys
+                    outprops[osmk] = osmv;
+                } else {
+                    // merge keys
+                    selectfeature.properties[osmk] = osmv;
+                }
+            }
+        }
+        if (Object.keys(outprops).length > 1) {
+            selectfeature.properties = outprops;
+        }
+        return selectfeature;
+    }
+
     
     drawEsri.pane = function() {
         if (!this.esripane) {
@@ -631,49 +682,12 @@ export function svgEsri(projection, context, dispatch) {
                 } else {
                     console.log('no feature to build table from');
                 }
-                
-                var presetKeysLength = that.preset() ? that.preset() : 0;
-                
+                                
                 if (convertedKeys.length > 0) {
                     // if any import properties were added, make these mods and reject all other properties
-                    var processGeoFeature = function (selectfeature) {
-                        // keep the OBJECTID to make sure we don't download the same data multiple times
-                        var outprops = {
-                            OBJECTID: selectfeature.properties.OBJECTID
-                        };
-                        
-                        // convert the rest of the layer's properties
-                        for (var k = 0; k < convertedKeys.length; k++) {
-                            var osmk = null;
-                            var osmv = null;
-                            
-                            if (convertedKeys[k].indexOf('add_') === 0) {
-                                osmk = convertedKeys[k].substring(4);
-                                osmv = window.layerImports[convertedKeys[k]];
-                            } else {
-                                osmv = selectfeature.properties[convertedKeys[k]];
-                                if (osmv) {
-                                    osmk = window.layerImports[convertedKeys[k]];
-                                }
-                            }
-                            
-                            if (osmk) {
-                                if (convertedKeys.length > presetKeysLength) {
-                                    // user directs any transferred keys
-                                    outprops[osmk] = osmv;
-                                } else {
-                                    // merge keys
-                                    selectfeature.properties[osmk] = osmv;
-                                }
-                            }
-                        }
-                        if (Object.keys(outprops).length > 1) {
-                            selectfeature.properties = outprops;
-                        }
-                        
-                        return selectfeature;
-                    };
-                    _.map(jsondl.features, processGeoFeature);
+                    _.map(jsondl.features, function(selectfeature) {
+                        return processGeoFeature(selectfeature, that.preset());
+                    });
                 }
                 
                 // send the modified geo-features to the draw layer

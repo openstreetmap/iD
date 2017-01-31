@@ -235,6 +235,10 @@ export default {
                     rateLimitError = err;
                     dispatch.call('change');
                 }
+                
+                if (window.onOSMreload && typeof window.onOSMreload === 'function') {
+                    (window.onOSMreload)();
+                }
 
                 if (callback) {
                     callback(err, parse(xml));

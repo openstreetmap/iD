@@ -83,6 +83,7 @@ export function uiEntityEditor(context) {
             .attr('class', 'inspector-border import-approve');
 
         this.focusEntity = entity;
+                
         importApprove.append('button')
             .text('Approve')
             .on('click', function() {
@@ -91,12 +92,29 @@ export function uiEntityEditor(context) {
                 d3.selectAll('.layer-osm .' + this.focusEntity.id).classed('import-approved', true);
             }.bind(this));
         
-        importApprove.append('button')
-            .text('Delete')
+        var deleteButton = importApprove.append('button')
             .on('click', (function() {
-                operationDelete([this.focusEntity.id], context)();
+                if (this.focusEntity && this.focusEntity.importOriginal) {
+                    // modified object: delete button restores original tags
+                    delete this.focusEntity.approvedForEdit;
+                    context.perform(
+                        actionChangeTags(this.focusEntity.id, this.focusEntity.importOriginal),
+                        'merged import item tags'
+                    );
+                    d3.selectAll('.layer-osm .' + this.focusEntity.id).classed('import-edited', false);
+                } else {
+                    // 100% new object: delete button removes the entity
+                    operationDelete([this.focusEntity.id], context)();
+                }
             }).bind(this));
+        
+        // show import approval section?
         d3.selectAll('.import-approve').classed('hide', entity.approvedForEdit || (d3.select('input[name="approvalProcess"]:checked').property('value') === 'all'));
+        
+        // delete button should appear differently when properties were merged
+        deleteButton.text(
+            (this.focusEntity && this.focusEntity.importOriginal) ? 'Undo Changes' : 'Delete'
+        );
 
         enter
             .append('div')
