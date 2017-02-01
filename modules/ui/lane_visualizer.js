@@ -1,6 +1,9 @@
 import * as d3 from 'd3';
 import _ from 'lodash';
 import { geoAngle, geoChooseEdge, geoPointOnLine } from '../geo/index';
+import { getLayoutSeq } from '../osm/lanes';
+import { dataDriveLeft } from '../../data';
+import { geoPointInPolygon } from '../geo';
 
 export function uiLaneVisualizer(context) {
     var menu,
@@ -8,23 +11,29 @@ export function uiLaneVisualizer(context) {
         wayId,
         center = [0, 0],
         tooltip,
-        metadata;
+        metadata,
+        driveLeft;
 
     var laneVisualizer = function (selection) {
-        var leftHand = false;
-
         if (!wayId) return;
         metadata = context.entity(wayId).lanes().metadata;
         if (!metadata) return;
 
-        var seq = context.entity(wayId).lanes().accessSeq;
-        
         const iconWidth = 40;
         const count = metadata.count;
 
         var projection = context.projection;
         var graph = context.graph();
         var way = graph.entity(wayId);
+
+        var loc = way.extent(context.graph()).center();
+        driveLeft = _.some(dataDriveLeft.features, function(f) {
+            return _.some(f.geometry.coordinates, function(d) {
+                return geoPointInPolygon(loc, d);
+            });
+        });
+
+        var layout = getLayoutSeq(metadata, driveLeft);
 
         var nodes = _.uniq(graph.childNodes(way));
         var choice = geoChooseEdge(nodes, context.mouse(), context.projection);
@@ -64,7 +73,7 @@ export function uiLaneVisualizer(context) {
             .attr('height', iconWidth);
 
         var button = menu.selectAll()
-            .data(seq)
+            .data(layout)
             .enter()
             .append('g')
             .attr('class', 'radial-menu-item radial-menu-item-move')

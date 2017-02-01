@@ -3,9 +3,7 @@ import { utilRebind } from '../../util/rebind';
 import { utilGetDimensions } from '../../util/dimensions';
 import { uiFieldCheck } from './check';
 import _ from 'lodash';
-import { d3combobox } from '../../lib/d3.combobox.js';
 import { utilGetSetValue } from '../../util/get_set_value';
-
 
 var validLanes = [
     'left', 'slight_left', 'sharp_left', 'through', 'right', 'slight_right',
@@ -20,18 +18,21 @@ export function uiFieldLanes(field, context) {
         currentLane = 0,
         curDirection = 'unspecified',
         wayID,
-        lanesData;
+        lanesData,
+        driveLeft;
+        
 
     function lanes(selection) {
         lanesData = context.entity(wayID).lanes();
         window.lanesData = lanesData;
         window.currentLane = currentLane;
         window.curDirection = curDirection;
-
+    
         if (!d3.select('.inspector-wrap.inspector-hidden').empty() || !selection.node().parentNode) {
             selection.call(lanes.off);
             return;
         }
+
 
         var lanesInfo = selection.selectAll('.lanes-info').data([0]);
         lanesInfo = lanesInfo.enter()

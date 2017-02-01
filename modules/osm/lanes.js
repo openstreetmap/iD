@@ -96,12 +96,10 @@ export function osmLanes(entity) {
             hovLanes: hovLanes,
             hgvLanes: hgvLanes,
             bicyclewayLanes: bicyclewayLanes,
-            leftHandDrive: false,
             reverse: parseInt(tags.oneway, 10) === -1
     };
     return {
         metadata: metadata,
-        accessSeq: makeAccessSeq(metadata, true),
         lanes: lanesObj
     };
 }
@@ -287,7 +285,7 @@ function lanesArray(lanesData) {
     return obj;
 }
 
-function makeAccessSeq(metadata, leftHand) {
+export function getLayoutSeq(metadata, leftHand) {
     if (metadata.oneway) {
         return _.fill(Array(metadata.count), 0).map(function (n, i) {
             return {
@@ -319,4 +317,4 @@ function makeAccessSeq(metadata, leftHand) {
     return [].concat(backSeq, forSeq);
 }
 
-window.makeAccessSeq = makeAccessSeq;
+window.getLayoutSeq = getLayoutSeq;
