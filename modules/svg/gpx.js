@@ -106,6 +106,33 @@ export function svgGpx(projection, context, dispatch) {
     }
 
 
+    function getExtension(file) {
+        if (_.isUndefined(file)) {
+            return '';
+        }
+
+        var lastDotIndex = file.name.lastIndexOf('.');
+        if (lastDotIndex < 0) {
+            return '';
+        }
+
+        return file.name.substr(lastDotIndex);
+    }
+
+
+    function parseSaveAndZoom(extension, data) {
+        if (extension === '.gpx') {
+            drawGpx.geojson(toGeoJSON.gpx(toDom(data))).fitZoom();
+        }
+        else if (extension === '.kml') {
+            drawGpx.geojson(toGeoJSON.kml(toDom(data))).fitZoom();
+        }
+        else if (extension === '.geojson') {
+            drawGpx.geojson(JSON.parse(data)).fitZoom();
+        }
+    }
+
+
     drawGpx.showLabels = function(_) {
         if (!arguments.length) return showLabels;
         showLabels = _;
@@ -139,7 +166,8 @@ export function svgGpx(projection, context, dispatch) {
     drawGpx.url = function(url) {
         d3.text(url, function(err, data) {
             if (!err) {
-                drawGpx.geojson(toGeoJSON.gpx(toDom(data)));
+                var extension = getExtension(url);
+                parseSaveAndZoom(extension, data);
             }
         });
         return this;
@@ -151,9 +179,13 @@ export function svgGpx(projection, context, dispatch) {
         var f = fileList[0],
             reader = new FileReader();
 
-        reader.onload = function(e) {
-            drawGpx.geojson(toGeoJSON.gpx(toDom(e.target.result))).fitZoom();
-        };
+        reader.onload = (function(file) {
+            var extension = getExtension(file);
+
+            return function (e) {
+                parseSaveAndZoom(extension, e.target.result);
+            };
+        })(f); 
 
         reader.readAsText(f);
         return this;
