@@ -18,26 +18,29 @@ import { geoPointInPolygon } from '../geo';
 export function svgLanes(projection, context) {
 
     return function drawMidpoints(selection, graph, entities, filter, extent, mapCenter) {
-        // return ;
+        // return;
         var entity = getEntity();
         var showLanes = [];
         var metadata;
         var iconPosition;
         var driveLeft;
         var layoutSeq;
-    
+        const iconWidth = 40;
+
         if (entity) {
             metadata = entity.lanes().metadata;
             iconPosition = findPosition();
             driveLeft = isDriveLeft();
             layoutSeq = getLayoutSeq(metadata, driveLeft, 'turnLanes');
             layer = selection.selectAll('.layer-hit');
-            showLanes = [0];
+            if (iconPosition) {
+                showLanes = [0];
+            }
         }
         var layer = selection.selectAll('.layer-hit');
 
         var groups = layer
-            .selectAll('g.midpoint')
+            .selectAll('g.lanes-visual')
             .data(showLanes);
 
         groups.exit()
@@ -45,11 +48,28 @@ export function svgLanes(projection, context) {
 
         var enter = groups.enter()
             .insert('g', ':first-child')
-            .attr('class', 'midpoint');
+            .attr('class', 'lanes-visual');
 
-        enter.append('polygon')
-            .attr('points', '-6,8 10,0 -6,-8')
-            .attr('class', 'shadow');
+        enter
+            .append('g')
+            .attr('class', 'lanes-visual-wrapper')
+            .append('rect')
+            .attr('class', 'lane-visual-background');
+
+        layer
+            .selectAll('.lanes-visual-wrapper')
+            .attr('transform', function() {
+                return 'translate(' + metadata.count*iconWidth/(-2) + ', 0)';
+            });
+            
+
+        selection.selectAll('rect')
+             .attr('width', function() {
+                 return metadata.count* iconWidth;
+             })
+             .attr('height', function() {
+                 return iconWidth;
+             });
 
         enter.append('polygon')
             .attr('points', '-3,4 5,0 -3,-4')
@@ -61,7 +81,7 @@ export function svgLanes(projection, context) {
                 var translate = svgPointTransform(projection),
                     a = graph.entity(iconPosition.edge[0]),
                     b = graph.entity(iconPosition.edge[1]);
-                var angleVal = Math.round(geoAngle(a, b, projection) * (180 / Math.PI));
+                var angleVal = Math.round(geoAngle(a, b, projection) * (180 / Math.PI)) + 90;
                 return  translate(iconPosition)+ ' rotate(' + angleVal + ')';
             })
             .call(svgTagClasses().tags(
