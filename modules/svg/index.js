@@ -5,6 +5,7 @@ export { svgGpx } from './gpx.js';
 export { svgIcon } from './icon.js';
 export { svgLabels } from './labels.js';
 export { svgLayers } from './layers.js';
+export { svgLanes } from './lanes.js';
 export { svgLines } from './lines.js';
 export { svgMapillaryImages } from './mapillary_images.js';
 export { svgMapillarySigns } from './mapillary_signs.js';

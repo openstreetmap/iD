@@ -11,6 +11,11 @@ export function geoInterp(p1, p2, t) {
             p1[1] + (p2[1] - p1[1]) * t];
 }
 
+// returns a point which divides the line joining p1, p2
+// in the ratio m:n
+export function geoDivideSegment(p1, p2, m, n) {
+    return [(p2[0]*n + p2[0]*m)/(m+n), (p2[1]*n + p2[1]*m)/(m+n)];
+}
 
 // 2D cross product of OA and OB vectors, i.e. z-component of their 3D cross product.
 // Returns a positive value, if OAB makes a counter-clockwise turn,
@@ -102,11 +107,6 @@ export function geoAngle(a, b, projection) {
     b = projection(b.loc);
     return Math.atan2(b[1] - a[1], b[0] - a[0]);
 }
-
-function geoAngle2(a, b) {
-    return (Math.atan2(b[1] - a[1], b[0] - a[0]) * 180)/Math.PI;
-}
-
 
 // Rotate all points counterclockwise around a pivot point by given angle
 export function geoRotate(points, angle, around) {
@@ -277,22 +277,4 @@ export function geoPathLength(path) {
         length += geoEuclideanDistance(path[i], path[i + 1]);
     }
     return length;
-}
-
-export function geoPointOnLine(point, nodes, projection) {
-    var dist = geoEuclideanDistance,
-        points = nodes.map(function(n) { return projection(n.loc); }),
-        min = Infinity,
-        idx, loc;
-
-    for (var i = 0; i < points.length - 1; i++) {
-        console.log(point, points[i+1], points[i]);
-        var cross = geoAngle2(point, points[i], projection) - geoAngle2(point, points[i+1], projection);
-        var segmentLen = dist(points[i], points[i+1]);
-        var splitLen = dist(points[i], point) + dist(points[i+1], point);
-        console.log(cross);
-        if (cross.toFixed(5) === 0 && segmentLen.toFixed(5) === splitLen.toFixed(5)) {
-            return nodes[i];
-        }
-    }
 }

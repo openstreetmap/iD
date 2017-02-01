@@ -285,11 +285,13 @@ function lanesArray(lanesData) {
     return obj;
 }
 
-export function getLayoutSeq(metadata, leftHand) {
+export function getLayoutSeq(metadata, leftHand, kind) {
+    if (!metadata) return [];
     if (metadata.oneway) {
         return _.fill(Array(metadata.count), 0).map(function (n, i) {
             return {
                 dir: 'unspecified',
+                lanes: metadata[kind].unspecified,
                 index: i
             };
         });
@@ -301,12 +303,14 @@ export function getLayoutSeq(metadata, leftHand) {
     var forSeq = _.fill(Array(forward), 0).map(function (n, i) {
         return {
             dir: 'forward',
+            lanes: metadata[kind].forward,
             index: i
         };
     });
     var backSeq = _.fill(Array(backward), 0).map(function (n, i) {
          return {
             dir: 'backward',
+            lanes: metadata[kind].backward,
             index:  backward - i - 1
         };
     });

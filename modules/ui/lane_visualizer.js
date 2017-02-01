@@ -1,6 +1,6 @@
 import * as d3 from 'd3';
 import _ from 'lodash';
-import { geoAngle, geoChooseEdge, geoPointOnLine } from '../geo/index';
+import { geoAngle, geoChooseEdge } from '../geo/index';
 import { getLayoutSeq } from '../osm/lanes';
 import { dataDriveLeft } from '../../data';
 import { geoPointInPolygon } from '../geo';
@@ -16,6 +16,7 @@ export function uiLaneVisualizer(context) {
 
     var laneVisualizer = function (selection) {
         if (!wayId) return;
+        return;
         metadata = context.entity(wayId).lanes().metadata;
         if (!metadata) return;
 

@@ -10,6 +10,7 @@ import {
     svgAreas,
     svgLabels,
     svgLayers,
+    svgLanes,
     svgLines,
     svgMidpoints,
     svgPoints,
@@ -44,6 +45,7 @@ export function rendererMap(context) {
         drawLines = svgLines(projection),
         drawAreas = svgAreas(projection, context),
         drawMidpoints = svgMidpoints(projection, context),
+        drawLanes = svgLanes(projection, context),
         drawLabels = svgLabels(projection, context),
         supersurface = d3.select(null),
         wrapper = d3.select(null),
@@ -159,7 +161,8 @@ export function rendererMap(context) {
                 all = context.features().filter(all, graph);
                 surface.selectAll('.data-layer-osm')
                     .call(drawVertices, graph, all, filter, map.extent(), map.zoom())
-                    .call(drawMidpoints, graph, all, filter, map.trimmedExtent());
+                    .call(drawMidpoints, graph, all, filter, map.trimmedExtent())
+                    .call(drawLanes, graph, all, filter, map.trimmedExtent(), map.center());
                 dispatch.call('drawn', this, {full: false});
             }
         });
@@ -252,6 +255,7 @@ export function rendererMap(context) {
             .call(drawLines, graph, data, filter)
             .call(drawAreas, graph, data, filter)
             .call(drawMidpoints, graph, data, filter, map.trimmedExtent())
+            .call(drawLanes, graph, data, filter, map.trimmedExtent(), map.center())
             .call(drawLabels, graph, data, filter, dimensions, !difference && !extent)
             .call(drawPoints, graph, data, filter);
 
