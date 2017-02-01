@@ -17,78 +17,123 @@ import { geoPointInPolygon } from '../geo';
 
 export function svgLanes(projection, context) {
 
-    return function drawMidpoints(selection, graph, entities, filter, extent, mapCenter) {
-        // return;
+    return function drawLanes(selection, graph, entities, filter, extent, mapCenter) {
         var entity = getEntity();
-        var showLanes = [];
         var metadata;
-        var iconPosition;
         var driveLeft;
         var layoutSeq = [];
-        const iconWidth = 40;
+        var iconWidth = 40;
+
         // TODO: on removing map features svgLanes stays there
         if (entity) {
             metadata = entity.lanes().metadata;
-            iconPosition = findPosition();
             driveLeft = isDriveLeft();
             layoutSeq = getLayoutSeq(metadata, driveLeft, 'turnLanes');
-            layer = selection.selectAll('.layer-hit');
-            if (iconPosition) {
-                showLanes = [0];
-            }
         }
-        var layer = selection.selectAll('.layer-hit');
 
-        var groups = layer
-            .selectAll('g.lanes-visual')
-            .data(showLanes);
+        var wrapperData = findPosition();
 
-        groups.exit()
+        // wrapper DATA BIND
+        // `wrapperData` is an array set up how we want the DOM to look.
+        // Always think about data first when working with D3!
+        // The `data` bind matches DOM nodes to wrapperData array elements
+        // Each DOM node bound to data will have a special __data__ property
+        // you can see it in Chrome developer tools
+        var wrapper = selection.selectAll('.layer-hit')
+            .selectAll('.lanes-wrapper')
+            .data(wrapperData ? [wrapperData] : []);
+
+        // wrapper EXIT
+        // exit selection includes existing DOM nodes with no match in wrapperData
+        // if you don't remove them, they just stay around forever.
+        wrapper.exit()
             .remove();
 
-        var enter = groups.enter()
+        // wrapper ENTER
+        // enter selection includes wrapperData with no match to DOM nodes
+        // the normal thing to do here is create the missing DOM nodes
+        var enter = wrapper.enter()
             .insert('g', ':first-child')
-            .attr('class', 'lanes-visual');
+            .attr('class', 'lanes-wrapper');
 
-        var wrapper = enter
+        enter
+            .append('rect')
+            .attr('class', 'lanes-background');
+
+        // enter.append('polygon')
+        //     .attr('points', '-3,4 5,0 -3,-4')
+        //     .attr('class', 'fill');
+
+
+        // wrapper UPDATE
+        // update selection runs every time for all the matched DOM elements.
+        // `merge` brings in the nodes that were just entered
+        // Assignment is important here because selections are immutable,
+        //  so we need to replace wrapper with the new wrapper before using it.
+        wrapper = wrapper
+            .merge(enter);
+
+        wrapper
+            .attr('transform', function (d) {
+                var p = projection(d.loc),
+                    a = graph.entity(d.edge[0]),
+                    b = graph.entity(d.edge[1]),
+                    ang = Math.round(geoAngle(a, b, projection) * (180 / Math.PI)) + 90;
+
+                p[0] -= metadata.count * iconWidth / 2;
+                return 'translate(' + p[0] + ',' + p[1] + ') rotate(' + ang + ')';
+            });
+
+        wrapper.selectAll('.lanes-background')
+            .attr('width', function () { return metadata.count * iconWidth; })
+            .attr('height', function () { return iconWidth; });
+
+
+
+        // lanes DATA BIND
+        var lanes = wrapper.selectAll('.lanes-lane')
+            .data(layoutSeq);
+
+        // lanes EXIT
+        lanes.exit()
+            .remove();
+
+        // lanes ENTER
+        enter = lanes.enter()
             .append('g')
-            .attr('class', 'lanes-visual-wrapper');
+            .attr('class', 'lanes-lane');
 
-        wrapper.append('rect')
-            .attr('class', 'lane-visual-background');
-
-        wrapper.append('g')
-            .attr('class', 'lane-visual-items');
-
-        layer
-            .selectAll('.lanes-visual-wrapper')
-            .attr('transform', function () {
-                return 'translate(' + metadata.count * iconWidth / (-2) + ', 0)';
-            });
-
-        selection.selectAll('rect')
-            .attr('width', function () {
-                return metadata.count * iconWidth;
-            })
-            .attr('height', function () {
-                return iconWidth;
-            });
-
-        var button = groups.selectAll('lane-visual-items')
-            .data(layoutSeq)
-            .enter()
-            .append('g')
-            .attr('class', 'lane-visual-items radial-menu-item radial-menu-item-move')
-            .attr('transform', function (d, i) {
-                var reverse = 0;
-                if (d.dir === 'backward') {
-                    reverse = 180;
-                }
-                return 'translate(' + [iconWidth / 2 + i * iconWidth, (iconWidth / 2)] + ') rotate(' + reverse + ')';
-            });
-
-        button
+        enter
             .append('circle')
+            .attr('class', 'lanes-circle')
+            .attr('r', 15);
+
+        enter
+            .append('use')
+            .attr('transform', 'translate(-10,-13)')
+            .attr('width', '20')
+            .attr('height', '20')
+            .attr('xlink:href', function (d) {
+                // return '#lane-' + createSVGLink(d);
+                return '#icon-up';
+            });
+
+        // lanes UPDATE
+        lanes = lanes
+            .merge(enter);
+
+        lanes
+            .attr('transform', function (d, i) {
+                var transform = 'translate(' + [iconWidth / 2 + i * iconWidth, (iconWidth / 2)] + ')';
+                if (d.dir === 'backward') { transform += ' rotate(180)'; }
+                return transform;
+            });
+
+        // Watch out!  `select` here not only selects the first .lanes-circle node,
+        // but it also propagates __data__ from lanes down to that circle.  In this
+        // situation, it's the behavior we want, so we can style the circle based on `d.dir`.
+        // `select` propagates __data__ to children, `selectAll` does not.
+        lanes.select('.lanes-circle')
             .style('fill', function (d) {
                 switch (d.dir) {
                     case 'forward':
@@ -96,42 +141,11 @@ export function svgLanes(projection, context) {
                     case 'backward':
                         return '#ffd8d8';
                     default:
-                        return '';
+                        return '#d8d8d8';
                 }
-            })
-            .attr('r', 15);
-
-        button
-            .append('use')
-            .attr('transform', 'translate(-15,-12)')
-            .attr('width', '20')
-            .attr('height', '20')
-            .attr('xlink:href', function (d) {
-                console.log(d);
-                return '#lane-' + createSVGLink(d);
             });
 
-        enter.append('polygon')
-            .attr('points', '-3,4 5,0 -3,-4')
-            .attr('class', 'fill');
 
-        groups = groups
-            .merge(enter)
-            .attr('transform', function (d) {
-                var translate = svgPointTransform(projection),
-                    a = graph.entity(iconPosition.edge[0]),
-                    b = graph.entity(iconPosition.edge[1]);
-                var angleVal = Math.round(geoAngle(a, b, projection) * (180 / Math.PI)) + 90;
-                return translate(iconPosition) + ' rotate(' + angleVal + ')';
-            })
-            .call(svgTagClasses().tags(
-                // TODO: what if entity is null
-                function () { return entity && entity.tags; }
-            ));
-
-        // Propagate data bindings.
-        groups.select('polygon.shadow');
-        groups.select('polygon.fill');
 
         function isDriveLeft() {
             return _.some(dataDriveLeft.features, function (f) {
@@ -140,6 +154,7 @@ export function svgLanes(projection, context) {
                 });
             });
         }
+
 
         function getEntity() {
             if (context.selectedIDs().length !== 1) return null;
@@ -151,14 +166,11 @@ export function svgLanes(projection, context) {
             return entity;
         }
 
+
         function findPosition() {
             var loc;
-            if (!entity) {
-                return {
-                    loc: undefined,
-                    edge: []
-                };
-            }
+            if (!entity) return;
+
             var nodes = graph.childNodes(entity);
             var poly = extent.polygon();
 
@@ -189,21 +201,23 @@ export function svgLanes(projection, context) {
                 }
             }
         }
-        function createSVGLink(d) {
-            var directions;
-            console.log(d.dir);
-            directions = metadata.turnLanes[d.dir][d.index];
 
-            // TODO: fix this vv
-            if (!directions) return '';
-            var dir = directions.sort(function (a, b) {
-                return a.charCodeAt(0) - b.charCodeAt(0);
-            });
-            dir = dir.join('-');
-            if (dir.indexOf('unknown') > -1 || dir.length === 0) return 'unknown';
 
-            return dir;
-        }
+        // function createSVGLink(d) {
+        //     var directions;
+        //     console.log(d.dir);
+        //     directions = metadata.turnLanes[d.dir][d.index];
+
+        //     // TODO: fix this vv
+        //     if (!directions) return '';
+        //     var dir = directions.sort(function (a, b) {
+        //         return a.charCodeAt(0) - b.charCodeAt(0);
+        //     });
+        //     dir = dir.join('-');
+        //     if (dir.indexOf('unknown') > -1 || dir.length === 0) return 'unknown';
+
+        //     return dir;
+        // }
     };
 
 }
