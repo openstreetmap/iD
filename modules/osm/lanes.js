@@ -23,6 +23,10 @@ export function osmLanes(entity) {
     // TODO: sometimes people just do turn:lanes:backward=|||| and dont mention
     // any kind of count. need to handle it
     // parse the piped string 'x|y|z' format
+
+    // TODO: if you add 8 forward turn lanes and thrn put forward count as 4
+    // goes out of sync. Reducing the number of forward turn lanes doesnt reduce turn lanes
+    // forward
     var turnLanes = {};
     turnLanes.unspecified = parseTurnLanes(tags['turn:lanes']);
     turnLanes.forward = parseTurnLanes(tags['turn:lanes:forward']);

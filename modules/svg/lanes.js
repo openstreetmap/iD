@@ -24,9 +24,9 @@ export function svgLanes(projection, context) {
         var metadata;
         var iconPosition;
         var driveLeft;
-        var layoutSeq;
+        var layoutSeq = [];
         const iconWidth = 40;
-
+        // TODO: on removing map features svgLanes stays there
         if (entity) {
             metadata = entity.lanes().metadata;
             iconPosition = findPosition();
@@ -50,26 +50,66 @@ export function svgLanes(projection, context) {
             .insert('g', ':first-child')
             .attr('class', 'lanes-visual');
 
-        enter
+        var wrapper = enter
             .append('g')
-            .attr('class', 'lanes-visual-wrapper')
-            .append('rect')
+            .attr('class', 'lanes-visual-wrapper');
+
+        wrapper.append('rect')
             .attr('class', 'lane-visual-background');
+
+        wrapper.append('g')
+            .attr('class', 'lane-visual-items');
 
         layer
             .selectAll('.lanes-visual-wrapper')
-            .attr('transform', function() {
-                return 'translate(' + metadata.count*iconWidth/(-2) + ', 0)';
+            .attr('transform', function () {
+                return 'translate(' + metadata.count * iconWidth / (-2) + ', 0)';
             });
-            
 
         selection.selectAll('rect')
-             .attr('width', function() {
-                 return metadata.count* iconWidth;
-             })
-             .attr('height', function() {
-                 return iconWidth;
-             });
+            .attr('width', function () {
+                return metadata.count * iconWidth;
+            })
+            .attr('height', function () {
+                return iconWidth;
+            });
+
+        var button = groups.selectAll('lane-visual-items')
+            .data(layoutSeq)
+            .enter()
+            .append('g')
+            .attr('class', 'lane-visual-items radial-menu-item radial-menu-item-move')
+            .attr('transform', function (d, i) {
+                var reverse = 0;
+                if (d.dir === 'backward') {
+                    reverse = 180;
+                }
+                return 'translate(' + [iconWidth / 2 + i * iconWidth, (iconWidth / 2)] + ') rotate(' + reverse + ')';
+            });
+
+        button
+            .append('circle')
+            .style('fill', function (d) {
+                switch (d.dir) {
+                    case 'forward':
+                        return '#dfffdf';
+                    case 'backward':
+                        return '#ffd8d8';
+                    default:
+                        return '';
+                }
+            })
+            .attr('r', 15);
+
+        button
+            .append('use')
+            .attr('transform', 'translate(-15,-12)')
+            .attr('width', '20')
+            .attr('height', '20')
+            .attr('xlink:href', function (d) {
+                console.log(d);
+                return '#lane-' + createSVGLink(d);
+            });
 
         enter.append('polygon')
             .attr('points', '-3,4 5,0 -3,-4')
@@ -82,7 +122,7 @@ export function svgLanes(projection, context) {
                     a = graph.entity(iconPosition.edge[0]),
                     b = graph.entity(iconPosition.edge[1]);
                 var angleVal = Math.round(geoAngle(a, b, projection) * (180 / Math.PI)) + 90;
-                return  translate(iconPosition)+ ' rotate(' + angleVal + ')';
+                return translate(iconPosition) + ' rotate(' + angleVal + ')';
             })
             .call(svgTagClasses().tags(
                 // TODO: what if entity is null
@@ -121,7 +161,7 @@ export function svgLanes(projection, context) {
             }
             var nodes = graph.childNodes(entity);
             var poly = extent.polygon();
-            
+
             for (var j = nodes.length - 1; j > 0; j--) {
                 var a = nodes[j - 1];
                 var b = nodes[j];
@@ -148,6 +188,21 @@ export function svgLanes(projection, context) {
                     }
                 }
             }
+        }
+        function createSVGLink(d) {
+            var directions;
+            console.log(d.dir);
+            directions = metadata.turnLanes[d.dir][d.index];
+
+            // TODO: fix this vv
+            if (!directions) return '';
+            var dir = directions.sort(function (a, b) {
+                return a.charCodeAt(0) - b.charCodeAt(0);
+            });
+            dir = dir.join('-');
+            if (dir.indexOf('unknown') > -1 || dir.length === 0) return 'unknown';
+
+            return dir;
         }
     };
 
