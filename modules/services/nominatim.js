@@ -1,4 +1,5 @@
 import * as d3 from 'd3';
+import _ from 'lodash';
 import rbush from 'rbush';
 import { geoExtent } from '../geo/index';
 import { utilQsString } from '../util/index';
@@ -36,7 +37,7 @@ export default {
                     return callback(result.error);
 
                 var extent = geoExtent(location).padByMeters(1000);
-                nominatimCache.insert(Object.assign(extent.bbox(),
+                nominatimCache.insert(_.assign(extent.bbox(),
                     { data: result.address.country_code }
                 ));
 
