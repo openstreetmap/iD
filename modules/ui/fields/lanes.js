@@ -3,12 +3,7 @@ import { utilRebind } from '../../util/rebind';
 import { utilGetDimensions } from '../../util/dimensions';
 import _ from 'lodash';
 import { utilGetSetValue } from '../../util/get_set_value';
-
-var validLanes = [
-    'left', 'slight_left', 'sharp_left', 'through', 'right', 'slight_right',
-    'sharp_right', 'reverse', 'merge_to_left', 'merge_to_right', 'none'
-];
-
+import { validTurnLanes } from '../../osm/lanes';
 
 export function uiFieldLanes(field, context) {
     var dispatch = d3.dispatch('change'),
@@ -17,21 +12,17 @@ export function uiFieldLanes(field, context) {
         currentLane = 0,
         curDirection = 'unspecified',
         wayID,
-        lanesData,
-        driveLeft;
+        lanesData;
         
 
     function lanes(selection) {
         lanesData = context.entity(wayID).lanes();
         window.lanesData = lanesData;
-        window.currentLane = currentLane;
-        window.curDirection = curDirection;
-    
+
         if (!d3.select('.inspector-wrap.inspector-hidden').empty() || !selection.node().parentNode) {
             selection.call(lanes.off);
             return;
         }
-
 
         var lanesInfo = selection.selectAll('.lanes-info').data([0]);
         lanesInfo = lanesInfo.enter()
@@ -59,17 +50,11 @@ export function uiFieldLanes(field, context) {
         var wrap = selection.selectAll('.lane-input-wrap')
                 .data([0]);
 
-        wrap = wrap.enter()
+        wrap.enter()
                 .append('div')
                 .attr('class', 'lane-input-wrap')
                 .merge(wrap);
                 
-        var surface =  wrap.selectAll('.surface')
-                .data([0]);
-
-        var d = utilGetDimensions(wrap);
-        var freeSpace = d[0] - lanesData.metadata.count * LANE_WIDTH * 1.5 + LANE_WIDTH * 0.5;
-
         function render() {
             if (context.hasEntity(wayID)) {
                 lanes(selection);
@@ -192,7 +177,7 @@ export function uiFieldLanes(field, context) {
 
 
             var label = wrap.selectAll('.label')
-                .data(validLanes);
+                .data(validTurnLanes);
 
             var labelEnter = label.enter()
                 .append('label');

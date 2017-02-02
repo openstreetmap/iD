@@ -17,12 +17,13 @@ import { geoPointInPolygon } from '../geo';
 
 export function svgLanes(projection, context) {
 
-    return function drawLanes(selection, graph, entities, filter, extent, mapCenter) {
+    return function drawLanes(selection, graph, entities, filter, extent, zoom, mapCenter) {
         var entity = getEntity();
         var metadata;
         var driveLeft;
         var layoutSeq = [];
         var iconWidth = 40;
+        var zoomLimit = zoom >= 18;
 
         // TODO: on removing map features svgLanes stays there
         if (entity) {
@@ -41,7 +42,7 @@ export function svgLanes(projection, context) {
         // you can see it in Chrome developer tools
         var wrapper = selection.selectAll('.layer-hit')
             .selectAll('.lanes-wrapper')
-            .data(wrapperData ? [wrapperData] : []);
+            .data(wrapperData && zoomLimit ? [wrapperData] : []);
 
         // wrapper EXIT
         // exit selection includes existing DOM nodes with no match in wrapperData
@@ -122,12 +123,13 @@ export function svgLanes(projection, context) {
         lanes
             .attr('transform', function (d, i) {
                 var transform = 'translate(' + [iconWidth / 2 + i * iconWidth -  metadata.count * iconWidth / (2) , (iconWidth / 2)] + ')';
+                transform += d.turnLanes.indexOf('right') > -1 ? ' scale(-1, 1)' : '';
                 if (d.dir === 'backward') { transform += ' rotate(180)'; }
                 return transform;
             })
             .select('use')
             .attr('xlink:href', function (d) {
-                return '#lane-' + d.turnLanes;
+                return '#lane-' + d.turnLanes.split('right').join('left');
             });
 
         // Watch out!  `select` here not only selects the first .lanes-circle node,

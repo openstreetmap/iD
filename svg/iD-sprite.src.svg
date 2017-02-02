@@ -210,12 +210,12 @@
       <path d="M5,8.29a0.08,0.08,0,0,0,0,.12l3.38,4.51a0.47,0.47,0,0,0,.83-0.27L9.17,9.9l1.74-2.16A0.46,0.46,0,0,0,10.45,7Z"/>
     </g>
     
-    <g id="lane-reverse_left">
+    <g id="lane-reverse">
         <path d="M7.8,23A0.1,0.1,0,0,0,8,23l3.72-5.69A0.56,0.56,0,0,0,11,16.45L7.88,17.53,4.72,16.44a0.56,0.56,0,0,0-.64.82Z"/>
         <path d="M18,23V13c0-8-10.08-7.77-10.12.1v5.42" fill="none" stroke="#000" stroke-miterlimit="10" stroke-width="3"/>
     </g>
     
-    <g id="lane-reverse_left-left-slight_left-through">
+    <g id="lane-left-reverse-slight_left-through">
         <line x1="19" y1="4" x2="19" y2="23" fill="none" stroke="#000" stroke-miterlimit="10" stroke-width="2"/>
         <path d="M7.21,12h5.5A15.61,15.61,0,0,1,19,13" fill="none" stroke="#000" stroke-miterlimit="10" stroke-width="2"/>
         <path d="M13.7,5.85S19,9.23,19,15" fill="none" stroke="#000" stroke-miterlimit="10" stroke-width="2"/>
@@ -225,7 +225,7 @@
         <path d="M10,23.06a0.07,0.07,0,0,0,.1,0l2.45-3.76a0.37,0.37,0,0,0-.42-0.55L10,19.48l-2.09-.71a0.37,0.37,0,0,0-.42.54Z"/>
         <path d="M19,16c0-5.42-9-4.84-9,0l0,3.48" fill="none" stroke="#000" stroke-miterlimit="10" stroke-width="2"/>
     </g>
-    <g id="lane-reverse_left-through">
+    <g id="lane-reverse-through">
       <path d="M8.36,23a0.08,0.08,0,0,0,.13,0l3.08-4.72A0.47,0.47,0,0,0,11,17.56l-2.62.9-2.62-.9a0.46,0.46,0,0,0-.53.68Z"/>
       <line x1="17" y1="23.19" x2="17" y2="6.08" fill="none" stroke="#000" stroke-miterlimit="10" stroke-width="2.5"/>
       <path d="M17.06,1.57a0.08,0.08,0,0,0-.13,0L13.85,6.29a0.47,0.47,0,0,0,.53.69L17,6.08,19.62,7a0.46,0.46,0,0,0,.53-0.68Z"/>

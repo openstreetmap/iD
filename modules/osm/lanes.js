@@ -1,5 +1,9 @@
 import _ from 'lodash';
 
+export var validTurnLanes = [
+    'left', 'slight_left', 'sharp_left', 'through', 'right', 'slight_right',
+    'sharp_right', 'reverse', 'merge_to_left', 'merge_to_right', 'none'
+];
 
 export function osmLanes(entity) {
     if (entity.type !== 'way') return null;
@@ -188,17 +192,13 @@ function parseLaneDirections(tags, isOneWay, laneCount) {
 function parseTurnLanes(tag){
     if (!tag) return [];
     // TODO: need to add reverse_left and reverse_right
-    var validValues = [
-        'left', 'slight_left', 'sharp_left', 'through', 'right', 'slight_right',
-        'sharp_right', 'reverse', 'merge_to_left', 'merge_to_right', 'none'
-    ];
 
     return tag.split('|')
         .map(function (s) {
             if (s === '') s = 'none';
             return s.split(';')
                 .map(function (d) {
-                    return validValues.indexOf(d) === -1 ? 'unknown': d;
+                    return validTurnLanes.indexOf(d) === -1 ? 'unknown': d;
                 });
         });
 }
