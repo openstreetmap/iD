@@ -1857,6 +1857,10 @@
             "value": "lawyer"
         },
         {
+            "key": "lawyer",
+            "value": "notary"
+        },
+        {
             "key": "office",
             "value": "newspaper"
         },

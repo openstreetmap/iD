@@ -3343,6 +3343,11 @@ en:
         # office=lawyer
         name: Law Office
         terms: '<translate with synonyms or related terms for ''Law Office'', separated by commas>'
+      office/lawyer/notary:
+        # 'office=lawyer, lawyer=notary'
+        name: Notary Office
+        # 'terms: clerk,signature,wills,deeds,estate'
+        terms: '<translate with synonyms or related terms for ''Notary Office'', separated by commas>'
       office/newspaper:
         # office=newspaper
         name: Newspaper
