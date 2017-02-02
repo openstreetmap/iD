@@ -335,11 +335,11 @@ export function uiFieldLanes(field, context) {
                 tag['turn:lanes:forward'] = undefined;
                 tag['turn:lanes:backward'] = undefined;
             } else {
-                tag.lanes = (metadata.forward + metadata.backward) + '';
+                tag.lanes = (metadata.forward + metadata.backward) + ''; //TODO: add bothways
 
                 tag['lanes:forward'] = metadata.forward + '';
                 tag['lanes:backward'] = metadata.backward + '';
-
+                
                 tag['turn:lanes'] = undefined;
                 tag['turn:lanes:forward'] = formPipes(metadata.turnLanes.forward, metadata.forward, 'none');
                 tag['turn:lanes:backward'] = formPipes(metadata.turnLanes.backward, metadata.backward, 'none');
@@ -349,6 +349,8 @@ export function uiFieldLanes(field, context) {
             console.log('turn:lane ===',tag['turn:lanes']);
             console.log('turn:lane;forward ==',tag['turn:lanes:forward']);
             console.log('turn:lane;backward ==',tag['turn:lanes:backward']);
+
+            // TODO: need to prune unwanted things, and lane:forward,backward would be zero if oneway
             dispatch.call('change', this, tag);
         }
 

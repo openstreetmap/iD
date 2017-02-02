@@ -14,13 +14,6 @@ export function osmLanes(entity) {
     var laneCount = getLaneCount(tags, isOneWay);
     var maxspeed = parseMaxspeed(tags);
 
-    var laneDirections = parseLaneDirections(tags, isOneWay, laneCount);
-    var forward = laneDirections.forward;
-    var backward = laneDirections.backward;
-    var bothways = laneDirections.bothways;
-    
-    // sometimes just forward and backward are available
-    laneCount = laneDirections.laneCount; 
     // TODO: if you change the forward backward and click on trash at top, 
     // laneCount and forward/backward goes out of sync
 
@@ -71,47 +64,59 @@ export function osmLanes(entity) {
     bicyclewayLanes.forward = parseBicycleWay(tags['bicycleway:lanes:forward']);
     bicyclewayLanes.backward = parseBicycleWay(tags['bicycleway:lanes:backward']);
 
-    var lanesObj = {
-        forward: [],
-        backward: [],
-        unspecified: []
-    };
-
-    // map forward/backward/unspecified of each lane type to lanesObj
-    mapToLanesObj(lanesObj, turnLanes, 'turnLane');
-    mapToLanesObj(lanesObj, maxspeedLanes, 'maxspeed');
-    mapToLanesObj(lanesObj, psvLanes, 'psv');
-    mapToLanesObj(lanesObj, busLanes, 'bus');
-    mapToLanesObj(lanesObj, taxiLanes, 'taxi');
-    mapToLanesObj(lanesObj, hovLanes, 'hov');
-    mapToLanesObj(lanesObj, hgvLanes, 'hgv');
-    mapToLanesObj(lanesObj, bicyclewayLanes, 'bicycleway');
-
     // TODO: need to make sure forward lanes is consistent across all tags,
     // eg if psv:lanes:forward is 3 and lanes:forward is 2, changes lanes:forward =3,
     var metadata = {
-            count: laneCount,
-            oneway: isOneWay,
-            forward: forward,
-            backward: backward,
-            bothways: bothways,
-            turnLanes: turnLanes,
-            maxspeed: maxspeed,
-            maxspeedLanes: maxspeedLanes,
-            psvLanes: psvLanes,
-            busLanes: busLanes,
-            taxiLanes: taxiLanes,
-            hovLanes: hovLanes,
-            hgvLanes: hgvLanes,
-            bicyclewayLanes: bicyclewayLanes,
-            reverse: parseInt(tags.oneway, 10) === -1
+        count: laneCount,
+        oneway: isOneWay,
+        turnLanes: turnLanes,
+        maxspeedLanes: maxspeedLanes,
+        psvLanes: psvLanes,
+        busLanes: busLanes,
+        taxiLanes: taxiLanes,
+        hovLanes: hovLanes,
+        hgvLanes: hgvLanes,
+        bicyclewayLanes: bicyclewayLanes,
+        reverse: parseInt(tags.oneway, 10) === -1
     };
+
+    tallyLaneCount(metadata);
+    parseLaneDirections(tags, isOneWay, metadata);
+
     return {
         metadata: metadata,
-        lanes: lanesObj
+        getLayoutSeq: getLayoutSeq
     };
 }
 
+// Overides the lanes, lanes:forward, lanes:backward
+// if the other lane tags dont tally.
+function tallyLaneCount(metadata) {
+    var consideredLaneTags = ['busLanes', 'hgvLanes', 'hovLanes', 'psvLanes', 'taxiLanes', 'turnLanes'];
+    var maxUnspecified = 0;
+    var maxForward = 0;
+    var maxBackward = 0;
+
+    consideredLaneTags.forEach(function (tag) {
+        if (metadata[tag].unspecified.length > maxUnspecified)
+            maxUnspecified = metadata[tag].unspecified.length;
+
+        if (metadata[tag].forward.length > maxForward)
+            maxForward = metadata[tag].forward.length;
+
+        if (metadata[tag].backward.length > maxBackward)
+            maxBackward = metadata[tag].backward.length;
+    });
+
+    if (metadata.oneway) {
+        metadata.count = maxUnspecified > metadata.count ? maxUnspecified : metadata.count;
+    } else {
+        metadata.forward = maxForward > 0 ? maxForward : undefined;
+        metadata.backward = maxBackward > 0 ? maxBackward : undefined;
+    }
+    // TODO: how to update if they decrease metadata.forward and the array would be bigger
+    // this function would override it.
+}
 
 function getLaneCount(tags, isOneWay) {
     var count;
@@ -121,7 +126,6 @@ function getLaneCount(tags, isOneWay) {
             return count;
         }
     }
-
 
     switch (tags.highway) {
         case 'trunk':
@@ -136,7 +140,7 @@ function getLaneCount(tags, isOneWay) {
     return count;
 }
 
-
+// TODO: needs fix, difference between maxspeed and lane:maxspeed
 function parseMaxspeed(tags) {
     var maxspeed = tags.maxspeed;
     if (_.isNumber(maxspeed)) return maxspeed;
@@ -147,23 +151,22 @@ function parseMaxspeed(tags) {
     }
 }
 
-
-function parseLaneDirections(tags, isOneWay, laneCount) {
-    var forward = parseInt(tags['lanes:forward'], 10);
-    var backward = parseInt(tags['lanes:backward'], 10);
+// gives priority to '*:lanes:direction' over 'lanes:direction'
+function parseLaneDirections(tags, isOneWay, metadata) {
+    var laneCount = metadata.count;
+    var forward = metadata.forward || parseInt(tags['lanes:forward'], 10);
+    var backward = metadata.backward || parseInt(tags['lanes:backward'], 10);
     var bothways = parseInt(tags['lanes:both_ways'], 10) > 0 ? 1 : 0;
-    var count = laneCount;
-    if (parseInt(tags.oneway, 10) === -1) {
-        forward = 0;
-        bothways = 0;
-        backward = laneCount;
+
+    // should just rely on lane count
+    if (isOneWay) {
+        metadata.forward = 0;
+        metadata.bothways = 0;
+        metadata.backward = 0;
+        return;
     }
-    else if (isOneWay) {
-        forward = laneCount;
-        bothways = 0;
-        backward = 0;
-    }
-    else if (_.isNaN(forward) && _.isNaN(backward)) {
+
+    if (_.isNaN(forward) && _.isNaN(backward)) {
         backward = Math.floor((laneCount - bothways) / 2);
         forward = laneCount - bothways - backward;
     }
@@ -179,17 +182,15 @@ function parseLaneDirections(tags, isOneWay, laneCount) {
         }
         backward = laneCount - bothways - forward;
     }
+    metadata.forward = forward;
+    metadata.bothways = bothways;
+    metadata.backward = backward;
+    metadata.count = forward + backward + bothways;
 
-    return {
-        forward: forward,
-        backward: backward,
-        bothways: bothways,
-        laneCount: forward + backward+ bothways
-    };
+    return;
 }
 
-
-function parseTurnLanes(tag){
+function parseTurnLanes(tag) {
     if (!tag) return [];
     // TODO: need to add reverse_left and reverse_right
 
@@ -198,7 +199,7 @@ function parseTurnLanes(tag){
             if (s === '') s = 'none';
             return s.split(';')
                 .map(function (d) {
-                    return validTurnLanes.indexOf(d) === -1 ? 'unknown': d;
+                    return validTurnLanes.indexOf(d) === -1 ? 'unknown' : d;
                 });
         });
 }
@@ -212,7 +213,7 @@ function parseMaxspeedLanes(tag, maxspeed) {
             if (s === 'none') return s;
             var m = parseInt(s, 10);
             if (s === '' || m === maxspeed) return null;
-            return _.isNaN(m) ? 'unknown': m;
+            return _.isNaN(m) ? 'unknown' : m;
         });
 }
 
@@ -227,7 +228,7 @@ function parseMiscLanes(tag) {
     return tag.split('|')
         .map(function (s) {
             if (s === '') s = 'no';
-            return validValues.indexOf(s) === -1 ? 'unknown': s;
+            return validValues.indexOf(s) === -1 ? 'unknown' : s;
         });
 }
 
@@ -242,103 +243,71 @@ function parseBicycleWay(tag) {
     return tag.split('|')
         .map(function (s) {
             if (s === '') s = 'no';
-            return validValues.indexOf(s) === -1 ? 'unknown': s;
+            return validValues.indexOf(s) === -1 ? 'unknown' : s;
         });
 }
 
+// TODO: exporting it directly since parameter leftHand is needed
+export function getLayoutSeq(metadata, leftHand) {
 
-function mapToLanesObj(lanesObj, data, key) {
-    if (data.forward) data.forward.forEach(function(l, i) {
-        if (!lanesObj.forward[i]) lanesObj.forward[i] = {};
-        lanesObj.forward[i][key] = l;
-    });
-    if (data.backward) data.backward.forEach(function(l, i) {
-        if (!lanesObj.backward[i]) lanesObj.backward[i] = {};
-        lanesObj.backward[i][key] = l;
-    });
-    if (data.unspecified) data.unspecified.forEach(function(l, i) {
-        if (!lanesObj.unspecified[i]) lanesObj.unspecified[i] = {};
-        lanesObj.unspecified[i][key] = l;
-    });
-}
+    function turnLanesSeq(obj) {
+        var dir = obj.dir;
+        var index = obj.index;
+        // will be '' if array goes out of bound
+        obj.turnLanes = createSVGLink(metadata.turnLanes[dir][index]);
+        return obj;
+    }
 
-function lanesArray(lanesData) {
-    var metadata = _.cloneDeep(lanesData);
-    // var arr = new Array(metadata.count);
-    var consideredLaneTags = [ 'busLanes', 'hgvLanes', 'hovLanes',  'maxspeedLanes', 'psvLanes', 'taxiLanes', 'turnLanes' ]; 
-    var obj = {};
-
-    obj.forward = new Array(metadata.forward);
-    obj.backward =  new Array(metadata.backward);
-    // obj.bothways = new Array(metadata.bothways); // jo
-    obj.unspecified = new Array(metadata.count); //_.fill(Array(metadata.count), { });
-
-    consideredLaneTags.forEach(function (laneTag) {
-       var lane  = metadata[laneTag];
-       Object.keys(lane).forEach(function (direction) {
-        lane[direction]
-            .forEach(function (tag, i) {
-                if (!obj[direction][i]) obj[direction][i] = {};
-                if (i < obj[direction].length) {
-                    obj[direction][i][laneTag] = tag;
-                }
-            });
-       });
-    });
-    
-    return obj;
-}
-
-export function getLayoutSeq(metadata, leftHand, kind) {
     if (!metadata) return [];
+
+    var seq = [];
+
     if (metadata.oneway) {
-        return _.fill(Array(metadata.count), 0).map(function (n, i) {
+        seq = _.fill(Array(metadata.count), 0)
+            .map(function (n, i) {
+                return {
+                    dir: 'unspecified',
+                    index: i
+                };
+            });
+    } else {
+        var forward = metadata.forward;
+        var backward = metadata.backward;
+
+        var forSeq = _.fill(Array(forward), 0).map(function (n, i) {
             return {
-                dir: 'unspecified',
-                turnLanes: createSVGLink(metadata.turnLanes.unspecified[i]),
+                dir: 'forward',
                 index: i
             };
         });
-    }
-        
-    var forward = metadata.forward;
-    var backward = metadata.backward;
+        // backward seq is always reversed in any hand drive.
+        // eg: turn:lanes:backward=0|1|2|3, turn:lanes:forward=0|1|2 
+        // LHD = 0,1,2<divider>3,2,1,0; RHD= 3,2,1,0<divider>0,1,2
+        var backSeq = _.fill(Array(backward), 0).map(function (n, i) {
+            return {
+                dir: 'backward',
+                index: backward - i - 1
+            };
+        });
 
-    var forSeq = _.fill(Array(forward), 0).map(function (n, i) {
-        return {
-            dir: 'forward',
-            turnLanes: createSVGLink(metadata.turnLanes.forward[i]),
-            index: i
-        };
-    });
-    var backSeq = _.fill(Array(backward), 0).map(function (n, i) {
-         return {
-            dir: 'backward',
-            turnLanes: createSVGLink(metadata.turnLanes.backward[backward - i - 1]),
-            index:  backward - i - 1
-        };
-    });
-   
-    if (leftHand) {
-        return [].concat(forSeq, backSeq);
+        seq = leftHand ? [].concat(forSeq, backSeq)
+            : [].concat(backSeq, forSeq);
     }
-    return [].concat(backSeq, forSeq);
+
+    seq = seq
+        .map(turnLanesSeq);
+
+    return seq;
 }
 
-function createSVGLink(dirArray) {
-            var directions =_.cloneDeep(dirArray);
-            // console.log(d.dir);
-            // directions = metadata.turnLanes[d.dir][d.index];
+function createSVGLink(directions) {
+    if (!directions || !_.isArray(directions)) return '';
+    var dir = _.cloneDeep(directions).sort(function (a, b) {
+        // lane icons are sorted in lexical order
+        return a.charCodeAt(0) - b.charCodeAt(0);
+    });
+    dir = dir.join('-');
+    if (dir.indexOf('unknown') > -1 || dir.length === 0) return 'unknown';
 
-            // TODO: fix this vv
-            if (!directions) return '';
-            var dir = directions.sort(function (a, b) {
-                return a.charCodeAt(0) - b.charCodeAt(0);
-            });
-            dir = dir.join('-');
-            if (dir.indexOf('unknown') > -1 || dir.length === 0) return 'unknown';
-
-            return dir;
-        }
-
-window.getLayoutSeq = getLayoutSeq;
+    return dir;
+}
