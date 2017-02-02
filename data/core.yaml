@@ -478,10 +478,10 @@ en:
   cannot_zoom: "Cannot zoom out further in current mode."
   full_screen: Toggle Full Screen
   gpx:
-    local_layer: "Local GPX file"
-    drag_drop: "Drag and drop a .gpx file on the page, or click the button to the right to browse"
-    zoom: "Zoom to GPX track"
-    browse: "Browse for a .gpx file"
+    local_layer: "Local file"
+    drag_drop: "Drag and drop a .gpx, .geojson or .kml file on the page, or click the button to the right to browse"
+    zoom: "Zoom to layer"
+    browse: "Browse for a file"
   mapillary_images:
     tooltip: "Street-level photos from Mapillary"
     title: "Photo Overlay (Mapillary)"
