@@ -295,7 +295,7 @@ export function getLayoutSeq(metadata, leftHand, kind) {
         return _.fill(Array(metadata.count), 0).map(function (n, i) {
             return {
                 dir: 'unspecified',
-                lanes: metadata[kind].unspecified,
+                turnLanes: createSVGLink(metadata.turnLanes.unspecified[i]),
                 index: i
             };
         });
@@ -307,14 +307,14 @@ export function getLayoutSeq(metadata, leftHand, kind) {
     var forSeq = _.fill(Array(forward), 0).map(function (n, i) {
         return {
             dir: 'forward',
-            lanes: metadata[kind].forward,
+            turnLanes: createSVGLink(metadata.turnLanes.forward[i]),
             index: i
         };
     });
     var backSeq = _.fill(Array(backward), 0).map(function (n, i) {
          return {
             dir: 'backward',
-            lanes: metadata[kind].backward,
+            turnLanes: createSVGLink(metadata.turnLanes.backward[backward - i - 1]),
             index:  backward - i - 1
         };
     });
@@ -324,5 +324,21 @@ export function getLayoutSeq(metadata, leftHand, kind) {
     }
     return [].concat(backSeq, forSeq);
 }
+
+function createSVGLink(dirArray) {
+            var directions =_.cloneDeep(dirArray);
+            // console.log(d.dir);
+            // directions = metadata.turnLanes[d.dir][d.index];
+
+            // TODO: fix this vv
+            if (!directions) return '';
+            var dir = directions.sort(function (a, b) {
+                return a.charCodeAt(0) - b.charCodeAt(0);
+            });
+            dir = dir.join('-');
+            if (dir.indexOf('unknown') > -1 || dir.length === 0) return 'unknown';
+
+            return dir;
+        }
 
 window.getLayoutSeq = getLayoutSeq;

@@ -17,7 +17,7 @@ export function svgMidpoints(projection, context) {
     return function drawMidpoints(selection, graph, entities, filter, extent) {
         var poly = extent.polygon(),
             midpoints = {};
-        return;
+
         for (var i = 0; i < entities.length; i++) {
             var entity = entities[i];
 

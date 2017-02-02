@@ -79,12 +79,13 @@ export function svgLanes(projection, context) {
                     a = graph.entity(d.edge[0]),
                     b = graph.entity(d.edge[1]),
                     ang = Math.round(geoAngle(a, b, projection) * (180 / Math.PI)) + 90;
-
-                p[0] -= metadata.count * iconWidth / 2;
                 return 'translate(' + p[0] + ',' + p[1] + ') rotate(' + ang + ')';
             });
 
         wrapper.selectAll('.lanes-background')
+            .attr('transform', function () {
+                return 'translate(' + metadata.count * iconWidth / (-2) + ', 0)';
+            })
             .attr('width', function () { return metadata.count * iconWidth; })
             .attr('height', function () { return iconWidth; });
 
@@ -112,11 +113,7 @@ export function svgLanes(projection, context) {
             .append('use')
             .attr('transform', 'translate(-10,-13)')
             .attr('width', '20')
-            .attr('height', '20')
-            .attr('xlink:href', function (d) {
-                // return '#lane-' + createSVGLink(d);
-                return '#icon-up';
-            });
+            .attr('height', '20');
 
         // lanes UPDATE
         lanes = lanes
@@ -124,9 +121,13 @@ export function svgLanes(projection, context) {
 
         lanes
             .attr('transform', function (d, i) {
-                var transform = 'translate(' + [iconWidth / 2 + i * iconWidth, (iconWidth / 2)] + ')';
+                var transform = 'translate(' + [iconWidth / 2 + i * iconWidth -  metadata.count * iconWidth / (2) , (iconWidth / 2)] + ')';
                 if (d.dir === 'backward') { transform += ' rotate(180)'; }
                 return transform;
+            })
+            .select('use')
+            .attr('xlink:href', function (d) {
+                return '#lane-' + d.turnLanes;
             });
 
         // Watch out!  `select` here not only selects the first .lanes-circle node,
@@ -201,23 +202,6 @@ export function svgLanes(projection, context) {
                 }
             }
         }
-
-
-        // function createSVGLink(d) {
-        //     var directions;
-        //     console.log(d.dir);
-        //     directions = metadata.turnLanes[d.dir][d.index];
-
-        //     // TODO: fix this vv
-        //     if (!directions) return '';
-        //     var dir = directions.sort(function (a, b) {
-        //         return a.charCodeAt(0) - b.charCodeAt(0);
-        //     });
-        //     dir = dir.join('-');
-        //     if (dir.indexOf('unknown') > -1 || dir.length === 0) return 'unknown';
-
-        //     return dir;
-        // }
     };
 
 }

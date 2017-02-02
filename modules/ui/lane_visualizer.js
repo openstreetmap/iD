@@ -16,7 +16,6 @@ export function uiLaneVisualizer(context) {
 
     var laneVisualizer = function (selection) {
         if (!wayId) return;
-        return;
         metadata = context.entity(wayId).lanes().metadata;
         if (!metadata) return;
 

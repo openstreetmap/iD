@@ -1,7 +1,6 @@
 import * as d3 from 'd3';
 import { utilRebind } from '../../util/rebind';
 import { utilGetDimensions } from '../../util/dimensions';
-import { uiFieldCheck } from './check';
 import _ from 'lodash';
 import { utilGetSetValue } from '../../util/get_set_value';
 
