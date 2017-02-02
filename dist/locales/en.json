@@ -3696,6 +3696,10 @@
                     "name": "Law Office",
                     "terms": ""
                 },
+                "office/lawyer/notary": {
+                    "name": "Notary Office",
+                    "terms": "clerk,signature,wills,deeds,estate"
+                },
                 "office/newspaper": {
                     "name": "Newspaper",
                     "terms": ""
