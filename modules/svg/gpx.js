@@ -127,7 +127,7 @@ export function svgGpx(projection, context, dispatch) {
         else if (extension === '.kml') {
             drawGpx.geojson(toGeoJSON.kml(toDom(data))).fitZoom();
         }
-        else if (extension === '.geojson') {
+        else if (extension === '.geojson' || extension === '.json') {
             drawGpx.geojson(JSON.parse(data)).fitZoom();
         }
     }
@@ -185,7 +185,7 @@ export function svgGpx(projection, context, dispatch) {
             return function (e) {
                 parseSaveAndZoom(extension, e.target.result);
             };
-        })(f); 
+        })(f);
 
         reader.readAsText(f);
         return this;
