@@ -4,7 +4,7 @@ import { geoExtent } from '../geo/index';
 import { utilQsString } from '../util/index';
 
 
-var endpoint = 'https://nominatim.openstreetmap.org/reverse?',
+var apibase = 'https://nominatim.openstreetmap.org/',
     nominatimCache;
 
 
@@ -23,7 +23,7 @@ export default {
             return callback(null, countryCodes[0].data);
         }
 
-        d3.json(endpoint +
+        d3.json(apibase + 'reverse?' +
             utilQsString({
                 format: 'json',
                 addressdetails: 1,
@@ -45,9 +45,10 @@ export default {
         );
     },
 
+
     search: function (val, callback) {
         var searchVal = encodeURIComponent(val);
-        d3.json('https://nominatim.openstreetmap.org/search/' + searchVal + '?limit=10&format=json', callback);
+        d3.json(apibase + 'search/' + searchVal + '?limit=10&format=json', callback);
     }
 
 };
