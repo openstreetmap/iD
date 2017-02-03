@@ -2982,7 +2982,7 @@
             ]
         },
         "building": {
-            "icon": "building",
+            "icon": "home",
             "fields": [
                 "building",
                 "levels",
@@ -3044,7 +3044,7 @@
             "searchable": false
         },
         "building/apartments": {
-            "icon": "commercial",
+            "icon": "building",
             "fields": [
                 "address",
                 "levels"
@@ -3059,7 +3059,7 @@
             "name": "Apartments"
         },
         "building/barn": {
-            "icon": "building",
+            "icon": "farm",
             "fields": [
                 "address",
                 "levels"
@@ -3074,7 +3074,7 @@
             "name": "Barn"
         },
         "building/cabin": {
-            "icon": "building",
+            "icon": "home",
             "fields": [
                 "address",
                 "levels"
@@ -3183,7 +3183,7 @@
             "name": "Building Under Construction"
         },
         "building/detached": {
-            "icon": "building",
+            "icon": "home",
             "fields": [
                 "address",
                 "levels"
@@ -3249,7 +3249,7 @@
             "name": "Garages"
         },
         "building/greenhouse": {
-            "icon": "building",
+            "icon": "garden-center",
             "fields": [
                 "address",
                 "levels"
@@ -3295,7 +3295,7 @@
             "name": "Hotel Building"
         },
         "building/house": {
-            "icon": "building",
+            "icon": "home",
             "fields": [
                 "address",
                 "levels"
@@ -3376,7 +3376,7 @@
             "name": "Public Building"
         },
         "building/residential": {
-            "icon": "building",
+            "icon": "residential-community",
             "fields": [
                 "address",
                 "levels"
@@ -3391,7 +3391,7 @@
             "name": "Residential Building"
         },
         "building/retail": {
-            "icon": "building",
+            "icon": "commercial",
             "fields": [
                 "address",
                 "levels",
@@ -3407,7 +3407,7 @@
             "name": "Retail Building"
         },
         "building/roof": {
-            "icon": "building",
+            "icon": "shelter",
             "fields": [
                 "address"
             ],
@@ -3442,7 +3442,7 @@
             "name": "School Building"
         },
         "building/semidetached_house": {
-            "icon": "building",
+            "icon": "home",
             "fields": [
                 "address",
                 "levels"
@@ -3466,7 +3466,7 @@
             "name": "Semi-Detached House"
         },
         "building/shed": {
-            "icon": "building",
+            "icon": "home",
             "fields": [
                 "address",
                 "levels"
@@ -3481,7 +3481,7 @@
             "name": "Shed"
         },
         "building/stable": {
-            "icon": "building",
+            "icon": "horse-riding",
             "fields": [
                 "address",
                 "levels"
@@ -3496,7 +3496,7 @@
             "name": "Stable"
         },
         "building/static_caravan": {
-            "icon": "building",
+            "icon": "home",
             "fields": [
                 "address",
                 "levels"
@@ -11884,7 +11884,7 @@
             "name": "Museum"
         },
         "tourism/picnic_site": {
-            "icon": "picnic_site",
+            "icon": "picnic-site",
             "fields": [
                 "operator",
                 "address",
