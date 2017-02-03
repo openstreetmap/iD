@@ -33,7 +33,6 @@ export function svgLanes(projection, context) {
         }
 
         var wrapperData = findPosition();
-
         // wrapper DATA BIND
         // `wrapperData` is an array set up how we want the DOM to look.
         // Always think about data first when working with D3!
@@ -160,6 +159,7 @@ export function svgLanes(projection, context) {
 
 
         function getEntity() {
+            // TODO: fails if I trash the current way selected
             if (context.selectedIDs().length !== 1) return null;
             var entity = graph.entity(context.selectedIDs()[0]);
 

@@ -95,6 +95,7 @@ function tallyLaneCount(metadata) {
     var consideredLaneTags = ['busLanes', 'hgvLanes', 'hovLanes', 'psvLanes', 'taxiLanes', 'turnLanes'];
     var maxUnspecified = 0;
     var maxForward = 0;
+
     var maxBackward = 0;
 
     consideredLaneTags.forEach(function (tag) {
