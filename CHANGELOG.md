@@ -1,5 +1,65 @@
 :warning: = Breaking change, may affect downstream projects or sites that embed iD.
 
+## 2.1.0
+##### Feb 3, 2017
+* Bugfixes:
+  * Improve tests for line joins in walkthrough (#3695)
+  * Fix country code lookup / address,phone fields on IE11 (Object.assign issue)
+  * Show "You have unsaved changes" message also in save mode (#3788, thanks @tyrasd)
+  * Eliminate duplicates from commit message dropdown (#3759, thanks @Abbe98)
+  * Don't create extra combobox caret divs in the address field (#3715)
+  * Fix issue with mouse coordinates while dragging and nudging/zooming (#3594)
+  * Fix for lasso behavior missing mouseup event (#3800)
+  * Fix spinner position when UI is RTL (#3794)
+  * Don't write history while user is in draw_line/draw_way, etc (#3750)
+  * Don't show radial menu when selecting entity from member/membership editor
+  * More checks to prevent duplicate consecutive nodes (#3676, #1296)
+  * Fix RTL languages along linestring paths on Chrome and Safari (#3707, thanks @miladkdz)
+  * When merging node to area, preserve original node if possible (#3683)
+  * Allow double-clicking on midpoints to create vertex (#3687, thanks @edpop)
+  * Don't jump cursor to end of line when editing housenumber (#3650)
+* New Features:
+  * Warn if user creates an untagged relation (#3812)
+  * Add kml and geojson support to gpx layer (#3811, thanks @mertemin)
+  * Add language debugging mode that shows translation keys (#3755)
+  * Add ability to restart ui and change locale on the fly (#3764, thanks @kepta)
+  * Improve save flow so user knows there is more to do after clicking Save (#3777, #2378)
+    * Desaturate the map to call attention to upload pane
+    * Don't show two save buttons, rename one to Upload
+    * Show icon with the Save button
+  * Use 'pt' wiki pages in 'pt-BR' iD localization (#3776)
+  * Upgrade to latest maki icons (#3024, #3756, thanks @ajithranka)
+    * Includes icon for tourism information objects (#3573)
+    * Includes icon for subway_entrance (#3255)
+  * Support replacing the geocoder service (#3754, thanks @kepta)
+    * :warning: `iD.services.nominatim` is now `iD.services.geocoder`
+  * User must select nodes before dragging them (#3739, thanks @edpop)
+  * Support smoothly transitioned actions (#3659)
+  * Add Reflect Long / Reflect Short operations (#3555, #3375, thanks @Psigio)
+  * Improved address field customization, allow country-specific placeholders (#3643, thanks @Natsuyasumi)
+* Performance:
+  * Use the same ids for temporary nodes and ways created in draw modes (#1369)
+* Presets:
+  * Add Notary preset (#3813, thanks @Zverik)
+  * Add additional aerialway presets (#3733, thanks @ajithranka)
+  * Add natural features category (#2843, thanks @ajithranka)
+  * Add step_count field to Steps preset (#3740, thanks @boothym)
+  * Add universal email and fax fields (#3735, thanks @M1dgard)
+  * Show tracktype as first field for Track preset (#3718)
+  * Add preset for place=square (#3658)
+  * Add preset for leisure=horse_riding (#3619)
+  * Add presets for barrier=toll_booth, barrier=border_control (#3719)
+  * Improve Social Facility presets (#3702)
+  * Improve military presets (#3663)
+  * Add presets for natural Bare Rock, Ridge, Sand (#3646)
+  * Add outdoor_seating checkbox (#3730, thanks @mertemin)
+  * Improve Turkish address scheme (#3729, thanks @mertemin)
+  * Prefer office=coworking over amenity=coworking_space (#3714, thanks @iandees)
+  * Improve Japanese address scheme (#3712, thanks @Natsuyasumi)
+  * Add fire_hydrant:position field to presets (#3708, thanks @wopfel)
+  * Add Castle Type field to Castle preset (#3685, thanks @abdeldjalil09)
+  * Add Taiwan phone format (#3655, thanks @Supaplextw)
+
 ## 2.0.2
 ##### Dec 22, 2016
 * Bugfixes:
