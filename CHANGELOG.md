@@ -18,23 +18,26 @@
   * When merging node to area, preserve original node if possible (#3683)
   * Allow double-clicking on midpoints to create vertex (#3687, thanks @edpop)
   * Don't jump cursor to end of line when editing housenumber (#3650)
-* New Features:
+* Usability improvements:
   * Warn if user creates an untagged relation (#3812)
-  * Add kml and geojson support to gpx layer (#3811, thanks @mertemin)
-  * Add language debugging mode that shows translation keys (#3755)
-  * Upgrade to MapillaryJS viewer v2.4
-  * Add ability to restart ui and change locale on the fly (#3764, thanks @kepta)
   * Improve save flow so user knows there is more to do after clicking Save (#3777, #2378)
     * Desaturate the map to call attention to upload pane
     * Don't show two save buttons, rename one to Upload
     * Show icon with the Save button
+  * Warn if user creates an unconneted highway (#3786)
+  * Draw slightly larger circles for unconneted vertices (#3775)
   * Use 'pt' wiki pages in 'pt-BR' iD localization (#3776)
+  * User must select nodes before dragging them (#3739, thanks @edpop)
+* New Features:
+  * Add kml and geojson support to gpx layer (#3811, thanks @mertemin)
+  * Add language debugging mode that shows translation keys (#3755)
+  * Upgrade to MapillaryJS viewer v2.4
+  * Add ability to restart ui and change locale on the fly (#3764, thanks @kepta)
   * Upgrade to latest maki icons (#3024, #3756, thanks @ajithranka)
     * Includes icon for tourism information objects (#3573)
     * Includes icon for subway_entrance (#3255)
   * Support replacing the geocoder service (#3754, thanks @kepta)
     * :warning: `iD.services.nominatim` is now `iD.services.geocoder`
-  * User must select nodes before dragging them (#3739, thanks @edpop)
   * Support smoothly transitioned actions (#3659)
   * Add Reflect Long / Reflect Short operations (#3555, #3375, thanks @Psigio)
   * Improved address field customization, allow country-specific placeholders (#3643, thanks @Natsuyasumi)
