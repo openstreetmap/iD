@@ -12,66 +12,94 @@ export function uiLaneInfo() {
         // TODO: make this thing dynamic and show keysConsidered
         // wrt to oneway.
         var keysConsidered = ['count', 'forward', 'backward', 'reverse'];
-        var s = selection.selectAll('.lanes-info').data([0]);
-        s = s.enter()
-            .append('div')
-            .attr('class', 'lanes-info')
-            .merge(s);
-
-        var wrap = s.selectAll('.preset-input-wrap')
+        var wrapper = selection
+            .selectAll('.lanes-info')
             .data([0]);
 
-        wrap = wrap.enter()
+        var enter = wrapper.enter()
             .append('div')
-            .attr('class', 'preset-input-wrap')
-            .append('ul')
-            .merge(wrap);
+            .attr('class', 'lanes-info lanes-wrap preset-input-wrap');
 
-        var list = wrap.selectAll('ul')
-            .data([0]);
-
-        list = list.enter()
-            .append('ul')
-            .merge(list);
-
-
-        var items = list.selectAll('li')
-            .data(keysConsidered);
-
-        // Enter
-        var enter = items.enter()
-            .append('li')
-            .attr('class', function (d) { return 'cf preset-access-' + d; });
-
-        enter
-            .append('span')
-            .attr('class', 'col6 label preset-label-')
-            .attr('for', function (d) { return 'preset-input-' + d; })
-            .text(function (d) { return d; });
-
-        enter
-            .append('div')
-            .attr('class', 'col6 preset-input-lanes-wrap')
+        var input = enter
             .append('input')
-            .attr('type', 'text')
-            .attr('class', 'preset-input-lanes')
-            .attr('id', function (d) { return 'preset-input-lanes-' + d; })
-            .each(function (d) {
-                this.value = metadata[d];
-            });
-
-        // Update
-        items = items.merge(enter);
-        items.selectAll('input')
-            .property('value', function (d) {
-                return metadata[d];
-            });
-
-        var input = items.selectAll('input');
+            .attr('class', 'lanes-info')
+            .attr('type', 'lane-count')
+            .attr('id', '23231')
+            .attr('placeholder', 'Lane count'); 
 
         input
-            .on('change', change)
-            .on('blur', change);
+            .on('input', change(true))
+            .on('blur', change())
+            .on('change', change());
+
+        var spinControl = enter
+            .append('div')
+            .attr('class', 'spin-control');
+    
+        // var enter = spinControl.enter()
+        //     .append('div')
+        //     .attr('class', 'spin-control');
+
+        spinControl
+            .append('button')
+            .datum(1)
+            .attr('class', 'increment')
+            .attr('tabindex', -1);
+
+        spinControl
+            .append('button')
+            .datum(-1)
+            .attr('class', 'decrement')
+            .attr('tabindex', -1);
+
+        // spinControl = spinControl
+        //     .merge(enter);
+
+        spinControl.selectAll('button')
+            .on('click', function (d) {
+                d3.event.preventDefault();
+                var num = parseInt(input.node().value || 0, 10);
+                if (!isNaN(num)) input.node().value = num + d;
+                change()();
+            });
+
+        // var items = list.selectAll('li')
+        //     .data(keysConsidered);
+
+        // Enter
+        // var enter = items.enter()
+        //     .append('li')
+        //     .attr('class', function (d) { return 'cf preset-access-' + d; });
+
+        // enter
+        //     .append('span')
+        //     .attr('class', 'col6 label preset-label-')
+        //     .attr('for', function (d) { return 'preset-input-' + d; })
+        //     .text(function (d) { return d; });
+
+        // enter
+        //     .append('div')
+        //     .attr('class', 'col6 preset-input-lanes-wrap')
+        //     .append('input')
+        //     .attr('type', 'text')
+        //     .attr('class', 'preset-input-lanes')
+        //     .attr('id', function (d) { return 'preset-input-lanes-' + d; })
+        //     .each(function (d) {
+        //         this.value = metadata[d];
+        //     });
+
+        // // Update
+        // items = items.merge(enter);
+        // items.selectAll('input')
+        //     .property('value', function (d) {
+        //         return metadata[d];
+        //     });
+
+        // var input = items.selectAll('input');
+
+        // input
+        //     .on('change', change)
+        //     .on('blur', change);
 
         function change(d) {
             var tag = {};

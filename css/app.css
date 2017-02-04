@@ -1227,22 +1227,40 @@ button.save.has-count .count::before {
     
 }
 
-.form-field-lanes .lanes-info {
-    margin-bottom: 10px;
+.form-field-lanes .lanes-info input {
+    min-height: 30px;
 }
+ /*.form-field-lanes input {
+    border: 1px solid #ccc;
+    min-height: 30px;
+    border-top: 0;
+    border-radius: 0 0 4px 4px;
+    overflow: hidden;
+ }*/
 
-.form-field-lanes .preset-input-wrap input {
+
+.form-field-lanes .lane-field  {
     border-radius: 0;
     border-width: 0;
     border-bottom-width: 1px;
+    padding: 5px 10px;
+    width: 100%;
+    border: 1px solid #CCC;
+    border-top: 0
 }
 
+
+.form-field-lanes .preset-input-lanes-wrap input {
+    border-top: 0
+}
+
+/*
 .form-field-lanes .preset-input-lanes-wrap input {
     border-radius: 0;
     border-width: 0;
     border-left-width: 1px;
 }
-
+*/
 .form-field-lanes .preset-input-wrap li {
     border-bottom: 1px solid #CCC;
 }
