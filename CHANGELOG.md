@@ -1,7 +1,7 @@
 :warning: = Breaking change, may affect downstream projects or sites that embed iD.
 
 ## 2.1.0
-##### Feb 3, 2017
+##### Feb 4, 2017
 * Bugfixes:
   * Improve tests for line joins in walkthrough (#3695)
   * Fix country code lookup / address,phone fields on IE11 (Object.assign issue)
@@ -22,6 +22,7 @@
   * Warn if user creates an untagged relation (#3812)
   * Add kml and geojson support to gpx layer (#3811, thanks @mertemin)
   * Add language debugging mode that shows translation keys (#3755)
+  * Upgrade to MapillaryJS viewer v2.4
   * Add ability to restart ui and change locale on the fly (#3764, thanks @kepta)
   * Improve save flow so user knows there is more to do after clicking Save (#3777, #2378)
     * Desaturate the map to call attention to upload pane
