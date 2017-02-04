@@ -101,18 +101,13 @@
             },
             "delete": {
                 "title": "Kustuta",
-                "description": "Kustuta objekt lõplikult.",
                 "annotation": {
                     "point": "Punkt kustutatud.",
                     "vertex": "Punkt kustutatud joonelt.",
                     "line": "Joon kustutatud.",
                     "area": "Ala kustutatud.",
-                    "relation": "Seos kustutatud.",
-                    "multiple": "{n} objekti kustutatud."
-                },
-                "incomplete_relation": "Seda objekti ei saa kustutada, kuna see ei ole täielikult laetud.",
-                "part_of_relation": "Seda objekti ei saa kustutada, kuna ta on osa suuremast relatsioonist. Sa pead eelnevalt selle relatsioonist eemaldama.",
-                "connected_to_hidden": "Seda ei saa kustutada, kuna see on ühendatud peidetud objektiga."
+                    "relation": "Seos kustutatud."
+                }
             },
             "add_member": {
                 "annotation": "Lisatud relatsiooni liige."
@@ -144,22 +139,16 @@
             },
             "move": {
                 "title": "Liiguta",
-                "description": "Liiguta see teise asukohta.",
                 "key": "M",
                 "annotation": {
                     "point": "Punkt nihutatud.",
                     "vertex": "Nihutatud Joone punkti.",
                     "line": "Nihutatud joont.",
-                    "area": "Nihutatud ala.",
-                    "multiple": "Nihutatud mitut objekti."
-                },
-                "incomplete_relation": "Seda objekti ei saa nihutada, kuna ta pole täielikult laetud.",
-                "too_large": "Seda objekti ei saa nihutada, kuna see pole piisavalt nähtav.",
-                "connected_to_hidden": "Seda objekti ei saa nihutada, kuna ta on ühendatud peidetud objektiga."
+                    "area": "Nihutatud ala."
+                }
             },
             "rotate": {
                 "title": "Pööra",
-                "description": "Pööra objekti ümber tema keskpunkti.",
                 "key": "R",
                 "annotation": {
                     "line": "Pööratud joont.",
@@ -205,11 +194,8 @@
         "logout": "Logi välja",
         "loading_auth": "OpenStreetMap'iga ühendamine...",
         "commit": {
-            "title": "Salvesta muudatused",
-            "message_label": "Muutuskogumi kommentaar",
             "upload_explanation": "Su salvestatavad muudatused on nähtaval kõikidel kaartidel mis kasutavad OpenStreetMap-i andmeid.",
             "upload_explanation_with_user": "Su kasutajana {user} salvestatavad muudatused on nähtaval kõikidel kaartidel, mis kasutavad OpenStreetMap-i andmeid.",
-            "save": "Salvesta",
             "cancel": "Tühista",
             "changes": "{count} Muudatust",
             "warnings": "Hoiatused",
@@ -265,7 +251,6 @@
             "back_tooltip": "Muuda objekti",
             "remove": "Eemalda",
             "search": "Otsi",
-            "multiselect": "Valitud objektid",
             "unknown": "Teadmata",
             "incomplete": "<alla laadimata>",
             "feature_list": "Otsi objekte",
@@ -382,14 +367,11 @@
                 "restore": "Taasta",
                 "delete": "Jäta kustutatuna",
                 "download_changes": "Või lae alla oma muudatused.",
-                "done": "Kõik konfliktid lahendatud!",
-                "help": "Teine kasutaja muutis kaardil samu objekte mida sinagi.\nKlikkides allolevatele objektidele näed konflikti detaile ning saad valida\nkas säilitada sinu või teise tasutaja muudatused.\n"
+                "done": "Kõik konfliktid lahendatud!"
             }
         },
         "merge_remote_changes": {
             "conflict": {
-                "deleted": "See objekt on kustutatud {user} poolt.",
-                "location": "See objekt on nii sinu kui {user} poolt liigutatud.",
                 "nodelist": "Sõlmi on muudetud nii sinu kui ka {user} poolt.",
                 "memberlist": "Seose liikmeid on muudetud nii sinu kui ka {user} poolt.",
                 "tags": "Sina määrasid <b>{tag}</b> lipiku väärtuseks \"{local}\", {user} aga määras \"{remote}\"."
@@ -427,18 +409,12 @@
             "untagged_point": "Sildistamata punkt",
             "untagged_line": "Sildistamata joon",
             "untagged_area": "Sildistamata ala",
-            "many_deletions": "Sa oled kustutamas {n} objkti. Oled sa kindel, et soovid seda teha. See kustutab need kaardilt, mida kõik teised näevad openstreetmap.org lehel.",
             "tag_suggests_area": "Silt {tag} viitab, et joon peaks olema ala, kuid see pole ala.",
             "deprecated_tags": "Iganenud sildid: {tags}"
         },
         "zoom": {
             "in": "Suurenda sisse",
             "out": "Suurenda välja"
-        },
-        "gpx": {
-            "local_layer": "Kohalik GPX fail",
-            "zoom": "Suurenda GPX jälg sisse",
-            "browse": "Vali .gpx fail"
         },
         "mapillary": {
             "view_on_mapillary": "Vaata seda fotot Mapillary's"
@@ -728,9 +704,6 @@
                 },
                 "aeroway/taxiway": {
                     "name": "Ruleerimistee"
-                },
-                "aeroway/terminal": {
-                    "name": "Lennujaama terminal"
                 },
                 "amenity/atm": {
                     "name": "Pangaautomaat"
@@ -1276,14 +1249,6 @@
                 "man_made/water_well": {
                     "name": "Veekaev",
                     "terms": "Kaev"
-                },
-                "military/airfield": {
-                    "name": "Lennuväli",
-                    "terms": "Lennuväljak"
-                },
-                "military/bunker": {
-                    "name": "Varjend",
-                    "terms": "Punker"
                 },
                 "natural": {
                     "name": "Looduslik"

@@ -101,18 +101,13 @@
             },
             "delete": {
                 "title": "Desaniciar",
-                "description": "Desaniciar l'oxetu de mou permanente.",
                 "annotation": {
                     "point": "Desaniciáu un puntu.",
                     "vertex": "Desaniciáu un nuedu d'una vía.",
                     "line": "Desaniciada una llinia.",
                     "area": "Dresaniciáu un área.",
-                    "relation": "Desaniciada una rellación.",
-                    "multiple": "Desaniciaos {n} oxetos."
-                },
-                "incomplete_relation": "Esta carauterística nun pue desaniciase porque nun se descargó completamente.",
-                "part_of_relation": "Esta carauterística nun pue desaniciase porque ye parte d'una rellación mayor. Tienes primero que quitala de la rellación.",
-                "connected_to_hidden": "Nun pue desaniciase porque ta coneutao a una carauterística tapecida."
+                    "relation": "Desaniciada una rellación."
+                }
             },
             "add_member": {
                 "annotation": "Amestáu un miembru a una rellación."
@@ -150,29 +145,21 @@
             },
             "move": {
                 "title": "Mover",
-                "description": "Mover esto a un llugar distintu.",
                 "key": "M",
                 "annotation": {
                     "point": "Movíu un puntu.",
                     "vertex": "Movíu un nuedu d'una vía.",
                     "line": "Movida una llinia.",
-                    "area": "Movíu un área.",
-                    "multiple": "Movíos múltiples oxetos."
-                },
-                "incomplete_relation": "Esta carauterística nun pue movese porque nun se descargó completamente.",
-                "too_large": "Nun pue movese porque anguaño nun ye visible una parte bastante d'ello.",
-                "connected_to_hidden": "Nun pue movese porque ta coneutao a una carauterística tapecida."
+                    "area": "Movíu un área."
+                }
             },
             "rotate": {
                 "title": "Xirar",
-                "description": "Xirar esti oxetu alredor del puntu central.",
                 "key": "R",
                 "annotation": {
                     "line": "Xirada una llinia.",
                     "area": "Xiráu un área."
-                },
-                "too_large": "Nun pue xirase porque anguaño nun ye visible una parte bastante d'ello.",
-                "connected_to_hidden": "Nun pue xirase porque ta coneutao a una carauterística tapecida."
+                }
             },
             "reverse": {
                 "title": "Invertir",
@@ -243,12 +230,9 @@
             "rateLimit": "La API tien llendaes les conexones anónimes.  Puedes igualo aniciando sesión."
         },
         "commit": {
-            "title": "Guardar cambios",
             "description_placeholder": "Descripción curtia de les collaboraciones (riquío)",
-            "message_label": "Comentariu del conxuntu de cambios",
             "upload_explanation": "Los cambios que xuba tarán visibles en tolos mapes qu'usen los datos d'OpenStreetMap.",
             "upload_explanation_with_user": "Los cambios que xubas como {user} tarán visibles en tolos mapes qu'usen datos d'OpenStreetMap.",
-            "save": "Guardar",
             "cancel": "Encaboxar",
             "changes": "{count} cambios",
             "warnings": "Avisos",
@@ -311,7 +295,6 @@
             "back_tooltip": "Camudar carauterística",
             "remove": "Desaniciar",
             "search": "Guetar",
-            "multiselect": "Elementos seleicionaos",
             "unknown": "Desconocíu",
             "incomplete": "<non descargao>",
             "feature_list": "Buscar carauterístiques",
@@ -478,19 +461,12 @@
             "untagged_point": "Puntu ensin etiquetar",
             "untagged_line": "Llinia ensin etiquetar",
             "untagged_area": "Área ensin etiquetar",
-            "many_deletions": "Va desaniciar {n} oxetos. ¿Ta seguru de que ye esto lo que quier facer? Esto desaniciarálos del mapa que ve tol mundu en openstreetmap.org.",
             "tag_suggests_area": "La etiqueta {tag} suxer que la llinia tendría de ser un área, pero nun ye un area",
             "deprecated_tags": "Etiquetes anticuaes: {tags}"
         },
         "zoom": {
             "in": "Averar",
             "out": "Alloñar"
-        },
-        "gpx": {
-            "local_layer": "Ficheru GPX llocal",
-            "drag_drop": "Abasne y suelte un ficheru .gpx na páxina, o faiga clic nel botón de la drecha pa restolar",
-            "zoom": "Ampliar a la traza GPX",
-            "browse": "Restolar por un ficheru .gpx"
         },
         "mapillary": {
             "view_on_mapillary": "Ver esta imaxe'n Mapillary"
@@ -1367,10 +1343,6 @@
                     },
                     "placeholder": "Patinos, ruedes, too terrén"
                 },
-                "social_facility_for": {
-                    "label": "Persones atendíes",
-                    "placeholder": "Sin techo, minusválidos, neños, etc"
-                },
                 "source": {
                     "label": "Fonte"
                 },
@@ -1565,9 +1537,6 @@
                 "aeroway/apron": {
                     "name": "Aparcamientu d'aviones"
                 },
-                "aeroway/gate": {
-                    "name": "Puerta d'aeropuertu"
-                },
                 "aeroway/hangar": {
                     "name": "Hangar"
                 },
@@ -1580,9 +1549,6 @@
                 },
                 "aeroway/taxiway": {
                     "name": "Cai de rodaxe"
-                },
-                "aeroway/terminal": {
-                    "name": "Terminal d'aeropuertu"
                 },
                 "amenity": {
                     "name": "Infraestructures"
@@ -1680,9 +1646,6 @@
                 },
                 "amenity/courthouse": {
                     "name": "Xulgáu"
-                },
-                "amenity/coworking_space": {
-                    "name": "Espaciu de trabayu compartíu"
                 },
                 "amenity/dentist": {
                     "name": "Dentista",
@@ -2777,39 +2740,6 @@
                 },
                 "man_made/water_works": {
                     "name": "Captación d'agua"
-                },
-                "man_made/works": {
-                    "name": "Fábrica"
-                },
-                "military/airfield": {
-                    "name": "Campu d'aviación",
-                    "terms": "Aeródromu, Campu d'aviación"
-                },
-                "military/barracks": {
-                    "name": "Cuartel",
-                    "terms": "Campamentu militar"
-                },
-                "military/bunker": {
-                    "name": "Bunker"
-                },
-                "military/checkpoint": {
-                    "name": "Puntu de control",
-                    "terms": "Puestu de control"
-                },
-                "military/danger_area": {
-                    "name": "Área de peligru",
-                    "terms": "Peligru, Área peligrosa"
-                },
-                "military/naval_base": {
-                    "name": "Base naval",
-                    "terms": "Arsenal"
-                },
-                "military/obstacle_course": {
-                    "name": "Recorríu d'obstáculos"
-                },
-                "military/range": {
-                    "name": "Campu de tiru",
-                    "terms": "Campu de maniobres"
                 },
                 "natural": {
                     "name": "Natural"

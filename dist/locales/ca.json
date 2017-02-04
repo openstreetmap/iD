@@ -101,18 +101,30 @@
             },
             "delete": {
                 "title": "Eliminar",
-                "description": "Eliminar permanentment l'objecte",
+                "description": {
+                    "single": "Eliminar aquesta característica permanentment",
+                    "multiple": "Eliminar aquestes característiques permanentment"
+                },
                 "annotation": {
                     "point": "Heu eliminat un punt.",
                     "vertex": "Heu eliminat un node d'una via.",
                     "line": "Heu eliminat una línia.",
                     "area": "Heu eliminat una àrea.",
                     "relation": "Heu eliminat una relació.",
-                    "multiple": "Heu eliminat {n} objectes."
+                    "multiple": "S'han eliminat {n} característiques."
                 },
-                "incomplete_relation": "No es pot eliminar aquesta característica ja que no s'ha baixat completament.",
-                "part_of_relation": "Aquesta característica no es pot eliminar perquè forma part d'una relació més extensa. Heu d'eliminar-la de la relació primer.",
-                "connected_to_hidden": "No es pot esborrar perquè està connectat a una característica oculta."
+                "incomplete_relation": {
+                    "single": "Aquesta característica no es pot eliminar perquè no ha estat descarregada del tot.",
+                    "multiple": "Aquestes característiques no es poden eliminar perquè no han estat descarregades del tot."
+                },
+                "part_of_relation": {
+                    "single": "Aquesta característica no pot ser eliminada perquè forma part d'una relació més gran. Has d'eliminar-la primer de la relació.",
+                    "multiple": "Aquestes característiques no poden ser eliminades perquè formen part d'una relació més gran. Has d'eliminar-les primer de la relació."
+                },
+                "connected_to_hidden": {
+                    "single": "Aquesta característica no pot ser eliminada perquè està connectada a una característica oculta.",
+                    "multiple": "Aquestes característiques no poden ser eliminades perquè algunes estan connectades a característiques ocultes."
+                }
             },
             "add_member": {
                 "annotation": "Heu afegit un membre a la relació."
@@ -150,29 +162,65 @@
             },
             "move": {
                 "title": "Moure",
-                "description": "Moveu això a una ubicació diferent.",
+                "description": {
+                    "single": "Mou aquesta característica a una ubicació diferent.",
+                    "multiple": "Mou aquestes característiques a una ubicació diferent."
+                },
                 "key": "M",
                 "annotation": {
                     "point": "Heu mogut un punt.",
                     "vertex": "Heu mogut un node d'una via.",
                     "line": "Heu mogut una línia.",
                     "area": "Heu mogut una àrea.",
-                    "multiple": "Heu mogut múltiples objectes."
+                    "multiple": "S'han mogut diverses característiques."
                 },
-                "incomplete_relation": "Aquesta característica no es pot desplaçar ja que no s'ha descarregat completament.",
-                "too_large": "Això no es pot desplaçar perquè no hi ha la suficient superfície visible.",
-                "connected_to_hidden": "No es pot moure perquè està connectat a una característica oculta."
+                "incomplete_relation": {
+                    "single": "Aquesta característica no es pot moure perquè no s'ha descarregat del tot.",
+                    "multiple": "Aquestes característiques no es poden moure perquè no s'han descarregat del tot."
+                },
+                "too_large": {
+                    "single": "Aquesta característica no es pot moure perquè no hi ha suficient visibilitat d'aquesta. ",
+                    "multiple": "Aquestes característiques no es poden moure perquè no n'hi ha suficients amb visibilitat."
+                },
+                "connected_to_hidden": {
+                    "single": "Aquesta característica no es pot moure perquè està connectada a una característica oculta.",
+                    "multiple": "Aquestes característiques no es poden moure perquè algunes d'elles estan connectades a característiques ocultes."
+                }
+            },
+            "reflect": {
+                "title": "reflecteix",
+                "description": {
+                    "long": {
+                        "single": "Reflecteix aquesta característica pel seu eix llarg.",
+                        "multiple": "Reflecteix aquestes característiques pel seus eixos llargs."
+                    },
+                    "short": {
+                        "single": "Reflecteix aquesta característica pel seu eix curt.",
+                        "multiple": "Reflecteix aquestes característiques pel seus eixos curts."
+                    }
+                },
+                "key": {
+                    "long": "T",
+                    "short": "Y"
+                },
+                "annotation": {
+                    "long": {
+                        "single": "S'ha reflectit una característica pel seu eix llarg.",
+                        "multiple": "S'han reflectit diverses característiques pels seus eixos llargs."
+                    },
+                    "short": {
+                        "single": "S'ha reflectit una característica pel seu eix curt.",
+                        "multiple": "S'han reflectit diverses característiques pels seus eixos curts."
+                    }
+                }
             },
             "rotate": {
                 "title": "Girar-ho",
-                "description": "Gireu aquest objecte al voltant del seu centre",
                 "key": "R",
                 "annotation": {
                     "line": "Heu girat una línia.",
                     "area": "Heu girat una àrea."
-                },
-                "too_large": "Això no es pot girar perquè no hi ha la suficient superfície visible.",
-                "connected_to_hidden": "No es pot rotar perquè està connectat a una característica oculta."
+                }
             },
             "reverse": {
                 "title": "Revertir",
@@ -227,6 +275,7 @@
             "localized_translation_name": "Nom"
         },
         "zoom_in_edit": "Apropeu-vos més per editar",
+        "login": "inicia sessió",
         "logout": "Tancar la sessió",
         "loading_auth": "Connectant a OpenStreetMap...",
         "report_a_bug": "Informa d'un error",
@@ -238,15 +287,13 @@
         "status": {
             "error": "No es pot connectar amb l'API.",
             "offline": "l'API està fora de línia. Si us plau proveu d'editar més tard.",
-            "readonly": "L'API es troba en mode només lectura. Us haureu d'esperar per desar els vostres canvis."
+            "readonly": "L'API es troba en mode només lectura. Us haureu d'esperar per desar els vostres canvis.",
+            "rateLimit": "L'API està limitant connexions anònimes. Pots arreglar això iniciant sessió."
         },
         "commit": {
-            "title": "Desa els canvis",
             "description_placeholder": "Breu descripció de les teves contribucions (necessari)",
-            "message_label": "Comentari de conjunt de canvis",
             "upload_explanation": "Els canvis que deseu seran visibles a tots els mapes que utilitzin dades d'OpenStreetMap.",
             "upload_explanation_with_user": "Els canvis que deseu com a {user} seran visibles en tots els mapes que utilitzin dades d'OpenStreetMap.",
-            "save": "Desa",
             "cancel": "Cancel·lar",
             "changes": "{count} canvis",
             "warnings": "Avisos",
@@ -309,7 +356,7 @@
             "back_tooltip": "Canviar la característica",
             "remove": "Eliminar",
             "search": "Cercar",
-            "multiselect": "Els ítems seleccionats",
+            "multiselect": "Característiques seleccionades",
             "unknown": "Desconegut",
             "incomplete": "<no baixat>",
             "feature_list": "Cercar característiques",
@@ -441,14 +488,13 @@
                 "restore": "Restaurar",
                 "delete": "Deixar eliminat",
                 "download_changes": "O bé descarregueu els vostres canvis.",
-                "done": "Tots els conflictes resolts!",
-                "help": "Un altre usuari ha canviat algunes característiques del mapa que també heu canviat.\nCliqueu a cada ítem dels d'aquí sota per saber més detalls dels conflictes, i escolliu si manteniu\nels vostres canvis o bé els canvis de l'altre usuari.\n\n"
+                "done": "Tots els conflictes resolts!"
             }
         },
         "merge_remote_changes": {
             "conflict": {
-                "deleted": "Aquest objecte ha estat eliminat per {user}.",
-                "location": "Tant tu com {user} vau moure aquest objecte.",
+                "deleted": "Aquesta característica ha estat eliminada per {user}.",
+                "location": "Aquesta característica ha estat moguda tant per tu com per {user}.",
                 "nodelist": "Tant tu com {user} vau canviar els nodes.",
                 "memberlist": "Tant tu com {user} vau canviar els membres de la relació.",
                 "tags": "Heu canviat l'etiqueta <b>{tag}</b> a \"{local}\" i {user} ho ha canviat  a \"{remote}\"."
@@ -489,7 +535,7 @@
             "untagged_point": "Punt sense etiquetar",
             "untagged_line": "Línia sense etiquetar",
             "untagged_area": "Àrea sense etiquetar",
-            "many_deletions": "Esteu eliminant {n} objectes. Esteu segurs que voleu fer-ho? Això els eliminarà dels mapes que tothom veu a openstreetmap.org",
+            "many_deletions": "Estàs eliminant  {n} característiques. Segur que ho vols fer? Això les eliminarà del mapa que tothom veu a openstreetmap.org",
             "tag_suggests_area": "L'etiqueta {tag} suggereix que la línia hauria de ser una àrea, però no és una àrea",
             "untagged_point_tooltip": "Seleccioneu un tipus de característica que descrigui aquest punt.",
             "untagged_line_tooltip": "Seleccioneu un tipus de característica que descrigui aquesta línia.",
@@ -502,12 +548,6 @@
         },
         "cannot_zoom": "No es pot allunyar més la vista al mode actual.",
         "full_screen": "Passar a pantalla completa",
-        "gpx": {
-            "local_layer": "Fitxer GPX local",
-            "drag_drop": "Arrosegueu i deixeu un fitxer .gpx a la pàgina, o bé cliqueu el botó que es troba a la dreta per navegar pel vostre sistema.",
-            "zoom": "Ajusta la vista a la traça GPX",
-            "browse": "Buscar el fitxer .gpx"
-        },
         "mapillary_images": {
             "tooltip": "Fotos a peu de carrer de Mapillary",
             "title": "Superposició de fotos (Mapillary)"
@@ -781,6 +821,20 @@
                 "barrier": {
                     "label": "Tipus"
                 },
+                "bath/open_air": {
+                    "label": "Aire Lliure"
+                },
+                "bath/sand_bath": {
+                    "label": "Bany de sorra"
+                },
+                "bath/type": {
+                    "label": "Especialitat",
+                    "options": {
+                        "foot_bath": "Bany de peus",
+                        "hot_spring": "Font Càlida",
+                        "onsen": "Onsen japonès"
+                    }
+                },
                 "beauty": {
                     "label": "Tipus de botiga"
                 },
@@ -802,6 +856,9 @@
                         "whole": "sang total"
                     }
                 },
+                "board_type": {
+                    "label": "Tipus"
+                },
                 "boundary": {
                     "label": "Tipus"
                 },
@@ -813,6 +870,24 @@
                 },
                 "building_area": {
                     "label": "Edifici"
+                },
+                "bunker_type": {
+                    "label": "Tipus"
+                },
+                "camera/direction": {
+                    "label": "Direcció (graus en sentit horari)",
+                    "placeholder": "45, 90, 180, 270"
+                },
+                "camera/mount": {
+                    "label": "Muntatge de càmera"
+                },
+                "camera/type": {
+                    "label": "Tipus de càmera",
+                    "options": {
+                        "dome": "Cúpula",
+                        "fixed": "Fixe",
+                        "panning": "Panoràmica"
+                    }
                 },
                 "capacity": {
                     "label": "Capacitat",
@@ -839,6 +914,9 @@
                         "WSW": "Oest-sud-oest"
                     }
                 },
+                "castle_type": {
+                    "label": "Tipus"
+                },
                 "clock_direction": {
                     "label": "Direcció",
                     "options": {
@@ -851,6 +929,10 @@
                 },
                 "construction": {
                     "label": "Tipus"
+                },
+                "contact/webcam": {
+                    "label": "URL de la webcam",
+                    "placeholder": "http://example.com/"
                 },
                 "content": {
                     "label": "Continguts"
@@ -973,6 +1055,9 @@
                 "fee": {
                     "label": "Pagament"
                 },
+                "fence_type": {
+                    "label": "Tipus"
+                },
                 "fire_hydrant/type": {
                     "label": "Tipus",
                     "options": {
@@ -1023,6 +1108,9 @@
                 "handrail": {
                     "label": "Barana"
                 },
+                "height": {
+                    "label": "Altura (metres)"
+                },
                 "highway": {
                     "label": "Tipus"
                 },
@@ -1067,6 +1155,9 @@
                 },
                 "internet_access/fee": {
                     "label": "Taxa d'accés a Internet"
+                },
+                "internet_access/ssid": {
+                    "label": "SSID (nom de la xarxa)"
                 },
                 "kerb": {
                     "label": "Rebaix de vorada"
@@ -1141,6 +1232,16 @@
                 },
                 "man_made": {
                     "label": "Tipus"
+                },
+                "map_size": {
+                    "label": "Cobertura"
+                },
+                "map_type": {
+                    "label": "Tipus"
+                },
+                "maxheight": {
+                    "label": "Altura màxima",
+                    "placeholder": "4, 4.5, 5, 14'0\", 14'6\", 15'0\""
                 },
                 "maxspeed": {
                     "label": "Límit de velocitat",
@@ -1256,6 +1357,9 @@
                 "operator": {
                     "label": "Operador"
                 },
+                "outdoor_seating": {
+                    "label": "Seient a l'aire lliure"
+                },
                 "par": {
                     "label": "Par",
                     "placeholder": "3, 4, 5..."
@@ -1330,6 +1434,9 @@
                 "place": {
                     "label": "Tipus"
                 },
+                "plant": {
+                    "label": "Planta"
+                },
                 "population": {
                     "label": "Població"
                 },
@@ -1338,6 +1445,9 @@
                 },
                 "power_supply": {
                     "label": "Abastament elèctric"
+                },
+                "product": {
+                    "label": "Producte"
                 },
                 "railway": {
                     "label": "Tipus"
@@ -1456,9 +1566,8 @@
                     },
                     "placeholder": "Rodetes, Rodes, Tot terreny..."
                 },
-                "social_facility_for": {
-                    "label": "Persones ateses",
-                    "placeholder": "Indigents, Invàlids, Infants, etc"
+                "social_facility": {
+                    "label": "Tipus"
                 },
                 "source": {
                     "label": "Font"
@@ -1654,10 +1763,6 @@
                     "name": "Àrea d'aparcament",
                     "terms": "Àrea d'embarcament d'avions, Àrea d'aparcament d'avions"
                 },
-                "aeroway/gate": {
-                    "name": "Porta de terminal d'aeroport",
-                    "terms": "Porta d'aeroport, Accés per a l'embarcament d' avions,  Àrea d'embarcament d'avions "
-                },
                 "aeroway/hangar": {
                     "name": "Hàngar",
                     "terms": "dipòsit, drassana, magatzem, nau."
@@ -1673,10 +1778,6 @@
                 "aeroway/taxiway": {
                     "name": "Plataforma de rodada",
                     "terms": "Plataforma de Rodada, Carrer de Taxi, Pista de Taxi, Carrer de Rodament, Carrer de Rodatge, Carril de Rodada, Carril de Rodatge"
-                },
-                "aeroway/terminal": {
-                    "name": "Terminal d'aeroport",
-                    "terms": "Terminal aeroportuària, Terminal d'aeroport, Terminal d'aeròdrom"
                 },
                 "amenity": {
                     "name": "Instal·lació"
@@ -1773,9 +1874,6 @@
                 "amenity/courthouse": {
                     "name": "Jutjat",
                     "terms": "Jutjats, Palau de justícia"
-                },
-                "amenity/coworking_space": {
-                    "name": "Espai de Coworking"
                 },
                 "amenity/dentist": {
                     "name": "Dentista"
@@ -2944,36 +3042,6 @@
                 },
                 "man_made/water_works": {
                     "name": "Planta potabilitzadora"
-                },
-                "man_made/works": {
-                    "name": "Obres"
-                },
-                "military/airfield": {
-                    "name": "Aeròdrom militar"
-                },
-                "military/barracks": {
-                    "name": "Caserna militar"
-                },
-                "military/bunker": {
-                    "name": "Búnquer"
-                },
-                "military/checkpoint": {
-                    "name": "Punt de control"
-                },
-                "military/danger_area": {
-                    "name": "Àrea de perill"
-                },
-                "military/naval_base": {
-                    "name": "Base Naval"
-                },
-                "military/obstacle_course": {
-                    "name": "Cursa d'obstacles"
-                },
-                "military/range": {
-                    "name": "Terreny per a usos militars"
-                },
-                "military/training_area": {
-                    "name": "Àrea d'entrenament"
                 },
                 "natural": {
                     "name": "Natural"

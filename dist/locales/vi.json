@@ -101,7 +101,10 @@
             },
             "delete": {
                 "title": "Xóa",
-                "description": "Xóa đối tượng vĩnh viễn.",
+                "description": {
+                    "single": "Xóa đối tượng này vĩnh viễn.",
+                    "multiple": "Xóa các đối tượng này vĩnh viễn."
+                },
                 "annotation": {
                     "point": "xóa địa điểm",
                     "vertex": "xóa nốt khỏi lối",
@@ -110,9 +113,18 @@
                     "relation": "xóa quan hệ",
                     "multiple": "xóa {n} đối tượng"
                 },
-                "incomplete_relation": "Không thể xóa đối tượng chưa được tải về hoàn toàn.",
-                "part_of_relation": "Không thể xóa đối tượng này vì nó trực thuộc một quan hệ lớn hơn. Bạn phải gỡ nó khỏi quan hệ trước tiên.",
-                "connected_to_hidden": "Không thể xóa đối tượng này vì nó nối liền với một đối tượng ẩn."
+                "incomplete_relation": {
+                    "single": "Không thể xóa đối tượng này vì nó chưa được tải về hoàn toàn.",
+                    "multiple": "Không thể xóa các đối tượng này vì chúng chưa được tải về hoàn toàn."
+                },
+                "part_of_relation": {
+                    "single": "Không thể xóa đối tượng này vì nó trực thuộc một quan hệ lớn hơn. Bạn phải gỡ nó khỏi quan hệ trước tiên.",
+                    "multiple": "Không thể xóa các đối tượng này vì chúng trực thuộc các quan hệ lớn hơn. Bạn phải gỡ chúng khỏi các quan hệ trước tiên."
+                },
+                "connected_to_hidden": {
+                    "single": "Không thể xóa đối tượng này vì nó nối liền với một đối tượng ẩn.",
+                    "multiple": "Không thể xóa các đối tượng này vì một số nối liền với đối tượng ẩn."
+                }
             },
             "add_member": {
                 "annotation": "thêm thành viên vào quan hệ"
@@ -150,7 +162,10 @@
             },
             "move": {
                 "title": "Di chuyển",
-                "description": "Di chuyển đối tượng này sang chỗ khác.",
+                "description": {
+                    "single": "Di chuyển đối tượng này sang chỗ khác.",
+                    "multiple": "Di chuyển các đối tượng này sang chỗ khác."
+                },
                 "key": "D",
                 "annotation": {
                     "point": "di chuyển địa điểm",
@@ -159,20 +174,82 @@
                     "area": "di chuyển vùng",
                     "multiple": "di chuyển hơn một đối tượng"
                 },
-                "incomplete_relation": "Không thể di chuyển đối tượng chưa được tải về hoàn toàn.",
-                "too_large": "Không thể di chuyển đối tượng này vì chỉ có thấy được một phần rất nhỏ.",
-                "connected_to_hidden": "Không thể di chuyển đối tượng này vì nó nối liền với một đối tượng ẩn."
+                "incomplete_relation": {
+                    "single": "Không thể di chuyển đối tượng này vì nó chưa được tải về hoàn toàn.",
+                    "multiple": "Không thể di chuyển các đối tượng này vì chúng chưa được tải về hoàn toàn."
+                },
+                "too_large": {
+                    "single": "Không thể di chuyển đối tượng này vì chỉ có thấy được một phần rất nhỏ.",
+                    "multiple": "Không thể di chuyển các đối tượng này vì chỉ có thấy được một phần rất nhỏ."
+                },
+                "connected_to_hidden": {
+                    "single": "Không thể di chuyển đối tượng này vì nó nối liền với một đối tượng ẩn.",
+                    "multiple": "Không thể di chuyển các đối tượng này vì một số nối liền với đối tượng ẩn."
+                }
+            },
+            "reflect": {
+                "title": "phản chiếu",
+                "description": {
+                    "long": {
+                        "single": "Phản chiếu đối tượng này qua trục dài.",
+                        "multiple": "Phản chiếu các đối tượng này qua trục dài."
+                    },
+                    "short": {
+                        "single": "Phản chiếu đối tượng này qua trục ngắn.",
+                        "multiple": "Phản chiếu các đối tượng này qua trục ngắn."
+                    }
+                },
+                "key": {
+                    "long": "P",
+                    "short": "N"
+                },
+                "annotation": {
+                    "long": {
+                        "single": "phản chiếu đối tượng qua trục dài",
+                        "multiple": "phản chiếu hơn một đối tượng qua trục dài"
+                    },
+                    "short": {
+                        "single": "phản chiếu đối tượng qua trục ngắn",
+                        "multiple": "phản chiếu hơn một đối tượng qua trục ngắn"
+                    }
+                },
+                "incomplete_relation": {
+                    "single": "Không thể phản chiếu đối tượng này vì nó chưa được tải về hoàn toàn.",
+                    "multiple": "Không thể phản chiếu các đối tượng này vì chúng chưa được tải về hoàn toàn."
+                },
+                "too_large": {
+                    "single": "Không thể phản chiếu đối tượng này vì chỉ có thấy được một phần rất nhỏ.",
+                    "multiple": "Không thể phản chiếu các đối tượng này vì chỉ có thấy được một phần rất nhỏ."
+                },
+                "connected_to_hidden": {
+                    "single": "Không thể phản chiếu đối tượng này vì nó nối liền với một đối tượng ẩn.",
+                    "multiple": "Không thể phản chiếu các đối tượng này vì một số nối liền với đối tượng ẩn."
+                }
             },
             "rotate": {
                 "title": "Xoay",
-                "description": "Xoay đối tượng này quanh điểm trung tâm.",
+                "description": {
+                    "single": "Xoay đối tượng này quanh điểm trung tâm.",
+                    "multiple": "Xoay các đối tượng này quanh điểm trung tâm."
+                },
                 "key": "X",
                 "annotation": {
                     "line": "xoay đường kẻ",
-                    "area": "xoay vùng"
+                    "area": "xoay vùng",
+                    "multiple": "xoay hơn một đối tượng"
                 },
-                "too_large": "Không thể xoay đối tượng này vì chỉ có thấy được một phần rất nhỏ.",
-                "connected_to_hidden": "Không thể xoay đối tượng này vì nó nối liền với một đối tượng ẩn."
+                "incomplete_relation": {
+                    "single": "Không thể xoay đối tượng này vì nó chưa được tải về hoàn toàn.",
+                    "multiple": "Không thể xoay các đối tượng này vì chúng chưa được tải về hoàn toàn."
+                },
+                "too_large": {
+                    "single": "Không thể xoay đối tượng này vì chỉ có thấy được một phần rất nhỏ.",
+                    "multiple": "Không thể xoay các đối tượng này vì chỉ có thấy được một phần rất nhỏ."
+                },
+                "connected_to_hidden": {
+                    "single": "Không thể xoay đối tượng này vì nó nối liền với một đối tượng ẩn.",
+                    "multiple": "Không thể xoay các đối tượng này vì một số nối liền với đối tượng ẩn."
+                }
             },
             "reverse": {
                 "title": "Đảo ngược",
@@ -243,12 +320,12 @@
             "rateLimit": "API hạn chế các kết nối vô danh. Hãy đăng nhập để khắc phục hạn chế này."
         },
         "commit": {
-            "title": "Lưu các Thay đổi",
+            "title": "Tải lên OpenStreetMap",
             "description_placeholder": "Tóm lược các đóng góp của bạn (bắt buộc)",
-            "message_label": "Tóm lược sửa đổi",
+            "message_label": "Tóm lược Sửa đổi",
             "upload_explanation": "Các thay đổi bạn thực hiện sẽ xuất hiện trên tất cả các bản đồ sử dụng dữ liệu OpenStreetMap.",
             "upload_explanation_with_user": "Các thay đổi bạn thực hiện dưới tên {user} sẽ xuất hiện trên tất cả các bản đồ sử dụng dữ liệu OpenStreetMap.",
-            "save": "Lưu",
+            "save": "Tải lên",
             "cancel": "Hủy bỏ",
             "changes": "{count} Thay đổi",
             "warnings": "Cảnh báo",
@@ -489,14 +566,18 @@
             "used_with": "được sử dụng với {type}"
         },
         "validations": {
+            "disconnected_highway": "Đường không nối liền",
+            "disconnected_highway_tooltip": "Đường phải nối liền với mạng lưới đường sá.",
             "untagged_point": "Địa điểm không có thẻ",
             "untagged_line": "Đường kẻ không có thẻ",
             "untagged_area": "Vùng không có thẻ",
+            "untagged_relation": "Quan hệ không có thẻ",
             "many_deletions": "Bạn có chắc chắn muốn xóa {n} đối tượng? Các đối tượng này sẽ bị xóa khỏi bản đồ công cộng tại openstreetmap.org.",
             "tag_suggests_area": "Thẻ {tag} có lẽ dành cho vùng nhưng được gắn vào đường kẻ",
             "untagged_point_tooltip": "Chọn loại điểm.",
             "untagged_line_tooltip": "Chọn loại đường kẻ.",
             "untagged_area_tooltip": "Chọn loại vùng.",
+            "untagged_relation_tooltip": "Chọn loại quan hệ.",
             "deprecated_tags": "Không khuyến khích sử dụng các thẻ: {tags}"
         },
         "zoom": {
@@ -506,10 +587,10 @@
         "cannot_zoom": "Không thể thu nhỏ hơn trong chế độ hiện tại.",
         "full_screen": "Bật/tắt Chế độ Toàn màn hình",
         "gpx": {
-            "local_layer": "Tập tin GPX địa phương",
-            "drag_drop": "Kéo thả một tập tin .gpx vào trang hoặc bấm nút bên phải để duyệt",
-            "zoom": "Phóng vừa tuyến đường GPX",
-            "browse": "Chọn một tập tin .gpx"
+            "local_layer": "Tập tin địa phương",
+            "drag_drop": "Kéo thả một tập tin .gpx, .geojson, hoặc .kml vào trang hoặc bấm nút bên phải để duyệt",
+            "zoom": "Phóng vừa lớp",
+            "browse": "Duyệt tập tin"
         },
         "mapillary_images": {
             "tooltip": "Hình ảnh từ con đường do Mapillary cung cấp",
@@ -630,6 +711,15 @@
                 "category-landuse": {
                     "name": "Liên quan đến Sử dụng Đất"
                 },
+                "category-natural-area": {
+                    "name": "Liên quan đến Thiên nhiên"
+                },
+                "category-natural-line": {
+                    "name": "Liên quan đến Thiên nhiên"
+                },
+                "category-natural-point": {
+                    "name": "Liên quan đến Thiên nhiên"
+                },
                 "category-path": {
                     "name": "Liên quan đến Đường mòn"
                 },
@@ -703,21 +793,36 @@
                 "address": {
                     "label": "Địa chỉ",
                     "placeholders": {
+                        "block_number": "Số Ô phố",
+                        "block_number!jp": "Số Ô phố",
                         "city": "Thành phố/thị xã",
+                        "city!jp": "Thành phố/Thị trấn/Làng/Quận Đặc biệt Tokyo",
+                        "city!vn": "Thành phố/Thị xã",
                         "conscriptionnumber": "123",
                         "country": "Quốc gia",
+                        "county": "Huyện",
+                        "county!jp": "Huyện",
                         "district": "Quận/thị xã/huyện",
+                        "district!vn": "Quận/Thị xã/Huyện",
                         "floor": "Lầu",
                         "hamlet": "Thôn",
                         "housename": "Tên nhà",
                         "housenumber": "123",
+                        "housenumber!jp": "Số Nhà",
+                        "neighbourhood": "Xóm/Phó khu",
+                        "neighbourhood!jp": "Khu phố/Phân khu",
                         "place": "Địa phương",
                         "postcode": "Mã bưu chính",
                         "province": "Tỉnh",
+                        "province!jp": "Tỉnh",
+                        "quarter": "Khu",
+                        "quarter!jp": "Khu phố/Thị trấn",
                         "state": "Tiểu bang",
                         "street": "Đường",
                         "subdistrict": "Phường/xã/thị trấn",
-                        "suburb": "Khu phố"
+                        "subdistrict!vn": "Phường/Xã/Thị trấn",
+                        "suburb": "Khu phố",
+                        "suburb!jp": "Quận"
                     }
                 },
                 "admin_level": {
@@ -784,6 +889,20 @@
                 "barrier": {
                     "label": "Kiểu"
                 },
+                "bath/open_air": {
+                    "label": "Ngoài trời"
+                },
+                "bath/sand_bath": {
+                    "label": "Tắm Cát"
+                },
+                "bath/type": {
+                    "label": "Nét Đặc biệt",
+                    "options": {
+                        "foot_bath": "Ngâm Chân",
+                        "hot_spring": "Suối Nước Nóng",
+                        "onsen": "Suối Nước Nóng Nhật"
+                    }
+                },
                 "beauty": {
                     "label": "Loại Tiệm"
                 },
@@ -819,6 +938,9 @@
                 },
                 "building_area": {
                     "label": "Tòa nhà"
+                },
+                "bunker_type": {
+                    "label": "Kiểu"
                 },
                 "camera/direction": {
                     "label": "Hướng (Độ theo Chiều Kim Đồng hồ)",
@@ -859,6 +981,9 @@
                         "WNW": "Tây Tây Bắc",
                         "WSW": "Tây Tây Nam"
                     }
+                },
+                "castle_type": {
+                    "label": "Kiểu"
                 },
                 "clock_direction": {
                     "label": "Chiều",
@@ -982,6 +1107,10 @@
                 "elevation": {
                     "label": "Cao độ"
                 },
+                "email": {
+                    "label": "Thư điện tử",
+                    "placeholder": "vidu@example.com"
+                },
                 "emergency": {
                     "label": "Khẩn cấp"
                 },
@@ -1000,6 +1129,15 @@
                 },
                 "fence_type": {
                     "label": "Kiểu"
+                },
+                "fire_hydrant/position": {
+                    "label": "Vị trí",
+                    "options": {
+                        "green": "Cỏ",
+                        "lane": "Làn Đường",
+                        "parking_lot": "Bãi Đậu xe",
+                        "sidewalk": "Lề đường"
+                    }
                 },
                 "fire_hydrant/type": {
                     "label": "Kiểu",
@@ -1377,6 +1515,9 @@
                 "place": {
                     "label": "Kiểu"
                 },
+                "plant": {
+                    "label": "Cây"
+                },
                 "population": {
                     "label": "Dân số"
                 },
@@ -1385,6 +1526,9 @@
                 },
                 "power_supply": {
                     "label": "Nguồn Điện"
+                },
+                "product": {
+                    "label": "Sản phẩm"
                 },
                 "railway": {
                     "label": "Kiểu"
@@ -1503,9 +1647,11 @@
                     },
                     "placeholder": "Bánh xe Trượt, Bánh xe, Xa đường…"
                 },
+                "social_facility": {
+                    "label": "Kiểu"
+                },
                 "social_facility_for": {
-                    "label": "Dân được phục vụ",
-                    "placeholder": "Vô gia cư, Khuyết tật, Trẻ em, v.v."
+                    "label": "Dân được Phục vụ"
                 },
                 "source": {
                     "label": "Nguồn"
@@ -1521,6 +1667,9 @@
                 },
                 "stars": {
                     "label": "Số Sao"
+                },
+                "step_count": {
+                    "label": "Số Bước"
                 },
                 "stop": {
                     "label": "Các Đường Phải Dừng lại",
@@ -1589,6 +1738,9 @@
                         "flush": "Bấm",
                         "pitlatrine": "Mương"
                     }
+                },
+                "toll": {
+                    "label": "Thu phí"
                 },
                 "tourism": {
                     "label": "Loại"
@@ -1695,13 +1847,25 @@
                     "name": "Ghế Cáp treo",
                     "terms": "ghế cáp treo, thang kéo ngồi ghế, thang kéo ghế, ghe cap treo, thang keo ngoi ghe, thang keo ghe"
                 },
+                "aerialway/drag_lift": {
+                    "name": "Đường Cáp Kéo",
+                    "terms": "đường cáp kéo, thang kéo trượt tuyết, thang kéo xki, duong cao keo, thang keo truot tuyet, thang keo xki"
+                },
                 "aerialway/gondola": {
                     "name": "Xe Cáp treo Nhỏ",
                     "terms": "xe cáp treo nhỏ, toa cáp treo nhỏ, xe cap treo nho, toa cap treo nho"
                 },
+                "aerialway/goods": {
+                    "name": "Cáp Kéo Hàng",
+                    "terms": "cáp kéo hàng, thang kéo hàng, cao keo hang, thang keo hang"
+                },
                 "aerialway/magic_carpet": {
                     "name": "Băng chuyền Trượt tuyết",
                     "terms": "băng chuyền trượt tuyết, băng tải trượt tuyết, bang chuyen truot tuyet, bang tai truot tuyet"
+                },
+                "aerialway/mixed_lift": {
+                    "name": "Xe/Ghế Cáp treo",
+                    "terms": "xe/ghế cáp treo, xe ghế cáp treo, xe và ghế cáp treo, xe cáp treo, ghế cáp treo,  xe/ghe cap treo, xe ghe cap treo, xe va ghe cap treo, xe cap treo, ghe cap treo"
                 },
                 "aerialway/platter": {
                     "name": "Đĩa Treo",
@@ -1756,7 +1920,7 @@
                 },
                 "aeroway/terminal": {
                     "name": "Ga Sân bay",
-                    "terms": "sân bay, phi trường, cảng hàng không, không cảng, nhà ga, san bay, phi truong, cang hang khong, khong cang, nha ga"
+                    "terms": "ga sân bay, ga phi trường, nhà ga sân bay, nhà ga phi trường, ga san bay, ga phi truong, nha ga san bay, nha ga phi truong"
                 },
                 "amenity": {
                     "name": "Tiện nghi"
@@ -1870,8 +2034,7 @@
                     "terms": "tòa án, tòa, toà án, toà, toa an, toa"
                 },
                 "amenity/coworking_space": {
-                    "name": "Văn phòng Làm việc Chung",
-                    "terms": "văn phòng làm việc chung, không gian làm việc chung, van phong lam viec chung, khong gian lam viec chung"
+                    "name": "Văn phòng Làm việc Chung"
                 },
                 "amenity/crematorium": {
                     "name": "Lò Thiêu",
@@ -2024,6 +2187,10 @@
                 "amenity/pub": {
                     "name": "Quán rượu Pub",
                     "terms": "quán rượu pub, quán nhậu pub, tiệm rượu pub, tiệm nhậu pub, pub, quan ruou pub, quan nhau pub, tiem ruou pub, tiem nhau pub"
+                },
+                "amenity/public_bath": {
+                    "name": "Nơi Tắm Công cộng",
+                    "terms": "nơi tắm công cộng, nhà tắm công cộng, phòng tắm công cộng, hồ tắm công cộng, noi tam cong cong, nha tam cong cong, phong tam cong cong, ho tam cong cong"
                 },
                 "amenity/public_bookcase": {
                     "name": "Tủ sách Công cộng",
@@ -2186,6 +2353,10 @@
                 "barrier/bollard": {
                     "name": "Cột Bê tông",
                     "terms": "cột bê tông, cột be-tông, cot be tong, cot be tong"
+                },
+                "barrier/border_control": {
+                    "name": "Trạm Kiểm soát Biên giới",
+                    "terms": "trạm kiểm soát biên giới, trạm kiểm soát ranh giới, điểm kiểm soát biên giới, điểm kiểm soát ranh giới, tram kiem soat bien gioi, tram kiem soat ranh gioi, diem kiem soat bien gioi, diem kiem soat ranh gioi"
                 },
                 "barrier/cattle_grid": {
                     "name": "Bẫy Trâu bò Trên đường",
@@ -2959,6 +3130,50 @@
                     "name": "Đất Quân đội",
                     "terms": "đất quân đội, căn cứ quân đội, khu vực quân đội, vùng quân đội, căn cứ không quân, đất không quân, căn cứ hải quân, đất hải quân, đất quân sự, khu vực quân sự, vùng quân sự, lính, bộ đội, dat quan doi, can cu quan doi, khu vuc quan doi, vung quan doi, can cu khong quan, dat khong quan, can cu hai quan, dat hai quan, dat quan su, khu vuc quan su, vung quan su, linh, bo doi"
                 },
+                "landuse/military/airfield": {
+                    "name": "Căn cứ Không quân",
+                    "terms": "căn cứ không quân, sân bay quân sự, trạm không quân, cơ sở lực lượng không quân, can cu khong quan, san bay quan su, tram khong quan, co so luc luong khong quan"
+                },
+                "landuse/military/barracks": {
+                    "name": "Trại lính",
+                    "terms": "trại lính, doanh trại, trai linh, doanh trai"
+                },
+                "landuse/military/bunker": {
+                    "name": "Boong Ke",
+                    "terms": "boong ke, boong-ke, boongke"
+                },
+                "landuse/military/checkpoint": {
+                    "name": "Trạm Kiểm soát",
+                    "terms": "trạm kiểm soát, tram kiem soat"
+                },
+                "landuse/military/danger_area": {
+                    "name": "Khu vực Nguy hiểm",
+                    "terms": "khu vực nguy hiểm, vùng nguy hiểm, khu vuc nguy hiem, vung nguy hiem"
+                },
+                "landuse/military/naval_base": {
+                    "name": "Căn cứ Hải quân",
+                    "terms": "căn cứ hải quân, trạm hải quân, can cu hai quan, tram hai quan"
+                },
+                "landuse/military/nuclear_explosion_site": {
+                    "name": "Nơi Nổ Vũ khí Hạt nhân",
+                    "terms": "nơi nổ vũ khí hạt nhân, nơi nổ bom hạt nhân, noi no vu khi hat nhan, noi no bom hat nhan"
+                },
+                "landuse/military/obstacle_course": {
+                    "name": "Đường Chạy vượt Chướng ngại vật",
+                    "terms": "đường chạy vượt chướng ngại vật, duong chay vuot chuong ngai vat"
+                },
+                "landuse/military/office": {
+                    "name": "Văn phòng Quân sự",
+                    "terms": "văn phòng quân sự, văn phòng quân đội, văn phòng hải quân, văn phòng không quân, van phong quan su, van phong quan doi, van phong hai quan, van phong khong quan"
+                },
+                "landuse/military/range": {
+                    "name": "Tầm đạn",
+                    "terms": "tầm đạn, tầm súng, tam dan, tam sung"
+                },
+                "landuse/military/training_area": {
+                    "name": "Khu Tập luyện",
+                    "terms": "khu tập luyện, khu luyện tập, khu tap luyen, khu luyen tap"
+                },
                 "landuse/orchard": {
                     "name": "Vườn Cây",
                     "terms": "vườn cây, vườn trồng cây, vườn cây ăn trái, vườn cây ăn quả, vườn trái cây, vuon cay, vuon trong cay, vuon cay an trai, vuon cay an qua, vuon trai cay"
@@ -3038,6 +3253,10 @@
                 "leisure/golf_course": {
                     "name": "Sân Golf",
                     "terms": "sân golf, sân gôn, san golf, san gon"
+                },
+                "leisure/horse_riding": {
+                    "name": "Khu Cưỡi ngựa",
+                    "terms": "khu cưỡi ngựa, trung tâm cưỡi ngựa, sân cưỡi ngựa, nơi cưỡi ngựa, khu cuoi ngua, trung tam cuoi ngua, san cuoi ngua, noi cuoi ngua"
                 },
                 "leisure/ice_rink": {
                     "name": "Sân Băng",
@@ -3260,47 +3479,15 @@
                 },
                 "man_made/works": {
                     "name": "Nhà máy",
-                    "terms": "nhà máy, hãng, xưởng, nha may, hang, xuong"
-                },
-                "military/airfield": {
-                    "name": "Căn cứ Không quân",
-                    "terms": "căn cứ không quân, sân bay, phi trường, trường bay, can cu khong quan, san bay, phi truong, truong bay"
-                },
-                "military/barracks": {
-                    "name": "Trại lính",
-                    "terms": "trại lính, doanh trại, trai linh, doanh trai"
-                },
-                "military/bunker": {
-                    "name": "Boong ke",
-                    "terms": "boong ke, boong-ke, boongke"
-                },
-                "military/checkpoint": {
-                    "name": "Trạm Kiểm soát",
-                    "terms": "trạm kiểm soát, tram kiem soat"
-                },
-                "military/danger_area": {
-                    "name": "Khu vực Nguy hiểm",
-                    "terms": "khu vực nguy hiểm, vùng nguy hiểm, khu vuc nguy hiem, vung nguy hiem"
-                },
-                "military/naval_base": {
-                    "name": "Căn cứ Hải quân",
-                    "terms": "căn cứ hải quân, can cu hai quan"
-                },
-                "military/obstacle_course": {
-                    "name": "Đường Chạy vượt Chướng ngại vật",
-                    "terms": "đường chạy vượt chướng ngại vật, duong chay vuot chuong ngai vat"
-                },
-                "military/range": {
-                    "name": "Tầm đạn",
-                    "terms": "tầm đạn, tầm súng, tam dan, tam sung"
-                },
-                "military/training_area": {
-                    "name": "Khu Tập luyện",
-                    "terms": "khu tập luyện, khu luyện tập, khu tap luyen, khu luyen tap"
+                    "terms": "nhà máy, xí nghiệp, xưởng, hãng, nha may, xi nghiep, xuong, hang"
                 },
                 "natural": {
                     "name": "Thiên nhiên",
                     "terms": "thiên nhiên, tự nhiên, thien nhien, tu nhien"
+                },
+                "natural/bare_rock": {
+                    "name": "Hòn đá Không",
+                    "terms": "hòn đá không, hon da khong"
                 },
                 "natural/bay": {
                     "name": "Vịnh",
@@ -3342,9 +3529,17 @@
                     "name": "Đỉnh núi",
                     "terms": "đồi, núi, đỉnh núi, đỉnh, chỏm núi, chỏm, chóp núi, chóp, chỏm chóp, doi, nui, dinh nui, dinh, chom nui, chom, chop nui, chop, chom chop"
                 },
+                "natural/ridge": {
+                    "name": "Dãy đồi",
+                    "terms": "dãy đồi, dãy núi, dãy gò, day doi, day noi, day go"
+                },
                 "natural/saddle": {
                     "name": "Đèo núi",
                     "terms": "đèo núi, deo nui"
+                },
+                "natural/sand": {
+                    "name": "Cát",
+                    "terms": "cát"
                 },
                 "natural/scree": {
                     "name": "Sườn Núi Đá",
@@ -3413,6 +3608,10 @@
                 "office/company": {
                     "name": "Văn phòng Công ty",
                     "terms": "văn phòng công ty, văn phòng công ti, văn phòng cty, trụ sở công ty, trụ sở công ti, trụ sở cty, van phong cong ty, van phong cong ti, van phong cty, tru so cong ty, tru so cong ti, tru so cty"
+                },
+                "office/coworking": {
+                    "name": "Văn phòng Làm việc Chung",
+                    "terms": "văn phòng làm việc chung, không gian làm việc chung, van phong lam viec chung, khong gian lam viec chung"
                 },
                 "office/educational_institution": {
                     "name": "Trường học",
@@ -3516,6 +3715,10 @@
                     "name": "Hàng xóm",
                     "terms": "hàng xóm, khu phố, hang xom, khu pho"
                 },
+                "place/square": {
+                    "name": "Quảng trường",
+                    "terms": "quảng trường, quang truong"
+                },
                 "place/suburb": {
                     "name": "Quận",
                     "terms": "quận, ngoại ô, phố, quan, ngoai o, pho"
@@ -3546,6 +3749,10 @@
                 "power/minor_line": {
                     "name": "Đường Dây điện Hạ/Trung thế",
                     "terms": "đường dây điện trung thế, đường dây điện hạ thế, đường dây điện trung áp, đường dây điện hạ áp, duong day dien trung the, duong day dien ha the, duong day dien trung ap, duong day dien ha ap"
+                },
+                "power/plant": {
+                    "name": "Khu Nhà máy Điện",
+                    "terms": "khu nhà máy điện, khu nha may dien"
                 },
                 "power/pole": {
                     "name": "Cột điện",
@@ -4403,6 +4610,10 @@
                 "waterway/water_point": {
                     "name": "Vòi Nước uống dành cho Tàu biển",
                     "terms": "vòi nước uống dành cho tàu biển, máy nước uống dành cho tàu biển, trạm nước uống dành cho tàu biển, voi nuoc uong danh cho tau bien, may nuoc uong danh cho tau bien, tram nuoc uong danh cho tau bien"
+                },
+                "waterway/waterfall": {
+                    "name": "Tháp nước",
+                    "terms": "tháp nước, thap nuoc"
                 },
                 "waterway/weir": {
                     "name": "Đập Tràn",

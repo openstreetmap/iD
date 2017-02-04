@@ -101,18 +101,13 @@
             },
             "delete": {
                 "title": "Vymaž",
-                "description": "Vymazať objekt natrvalo.",
                 "annotation": {
                     "point": "Odstránenie bodu.",
                     "vertex": "Odstránenie uzla z cesty.",
                     "line": "Odstránenie čiary.",
                     "area": "Odstránenie plochy.",
-                    "relation": "Odstránenie relácie.",
-                    "multiple": "Odstránenie {n} objektov."
-                },
-                "incomplete_relation": "Tento objekt nemožno vymazať, pretože nebol úplne stiahnutý.",
-                "part_of_relation": "Tento objekt nemôže byť vymazaný, pretože je súčasťou väčšej relácie. Musíte ho najskôr z tejto relácie odobrať.",
-                "connected_to_hidden": "Tento objekt nemožno vymazať, pretože je spojený so skrytým objektom."
+                    "relation": "Odstránenie relácie."
+                }
             },
             "add_member": {
                 "annotation": "Pridanie člena do relácie."
@@ -150,29 +145,21 @@
             },
             "move": {
                 "title": "Presunúť",
-                "description": "Presunúť tento objekt na iné miesto.",
                 "key": "M",
                 "annotation": {
                     "point": "Presunutie bodu.",
                     "vertex": "Presunutie uzla cesty.",
                     "line": "Presunutie čiary.",
-                    "area": "Presunutie plochy.",
-                    "multiple": "Presunutie viacerých objektov."
-                },
-                "incomplete_relation": "Tento objekt nemožno presunúť, pretože nebol úplne stiahnutý.",
-                "too_large": "Tento objekt nemôže byť presunutý, pretože niektoré jeho časti nie sú viditeľné.",
-                "connected_to_hidden": "Tento objekt nemôže byť presunutý, pretože je spojený so skrytým objektom."
+                    "area": "Presunutie plochy."
+                }
             },
             "rotate": {
                 "title": "Otočiť",
-                "description": "Otočiť objekt okolo jeho stredového bodu.",
                 "key": "R",
                 "annotation": {
                     "line": "Otočenie čiary.",
                     "area": "Otočenie plochy."
-                },
-                "too_large": "Tento objekt nemôže byť otočený, pretože niektoré jeho časti nie sú viditeľné.",
-                "connected_to_hidden": "Tento objekt nemôže byť otočený, pretože je spojený so skrytým objektom."
+                }
             },
             "reverse": {
                 "title": "Obráiť",
@@ -241,12 +228,9 @@
             "readonly": "API je iba na čítanie. Budete musieť počkať, aby ste mohli uložiť vaše zmeny."
         },
         "commit": {
-            "title": "Ukladanie zmien",
             "description_placeholder": "Krátky popis vašich príspevkov (potrebný)",
-            "message_label": "Komentár k súboru zmien",
             "upload_explanation": "Zmeny, ktoré nahráte, budú viditeľné na všetkých mapách, ktoré používajú údaje z OpenStreetMap.",
             "upload_explanation_with_user": "Zmeny, ktoré nahráte ako {user}, budú viditeľné na všetkých mapách, ktoré používajú údaje z OpenStreetMap.",
-            "save": "Uložiť",
             "cancel": "Zrušiť",
             "changes": "Počet zmien: {count}",
             "warnings": "Upozornenia",
@@ -308,7 +292,6 @@
             "back_tooltip": "Zmeň typ objektu",
             "remove": "Odstráň",
             "search": "Hľadaj",
-            "multiselect": "Vybrané položky",
             "unknown": "Neznámy",
             "incomplete": "<nebolo stiahnuté>",
             "feature_list": "Hľadaj objekty",
@@ -439,14 +422,11 @@
                 "restore": "Obnov",
                 "delete": "Ponechaj vymazané",
                 "download_changes": "Alebo stiahni moje zmeny",
-                "done": "Všetky konflikty sú vyriešené!",
-                "help": "Iný používateľ pozmenil niektoré z objektov, ktoré ste zmenili aj vy.\nPre viac detajlov o konflikte, kliknite na každú položku nižšie a vyberte, či chcete ponechať\nvaše zmeny alebo zmeny iných užívateľov.\n"
+                "done": "Všetky konflikty sú vyriešené!"
             }
         },
         "merge_remote_changes": {
             "conflict": {
-                "deleted": "Tento objekt bol vymazaný používateľom {user}.",
-                "location": "Tento objekt bol posunutý vami a tiež používateľom {user}.",
                 "nodelist": "Body boli zmenené vami a tiež používateľom {user}.",
                 "memberlist": "Členy relácie boli zmenené vami a tiež používateľom {user}.",
                 "tags": "Zmenili ste označenie <b>{tag}</b> na \"{local}\" a {user} ho zmenil na \"{remote}\"."
@@ -486,7 +466,6 @@
             "untagged_point": "Neoznačený bod",
             "untagged_line": "Neoznačená čiara",
             "untagged_area": "Neoznačená plocha",
-            "many_deletions": "Vymazávate {n} objektov. Ste si naozaj istý? Týmto ich vymažete z mapy na openstreetmap.org, ktorú používajú ďalší používatelia.",
             "tag_suggests_area": "Označenie {tag} predpokladá, že objekt by mal byť plochou a nie čiarou.",
             "untagged_point_tooltip": "Vyberte typ objektu, ktorý popisuje, čo je tento bod.",
             "untagged_line_tooltip": "Vyberte typ objektu, ktorý popisuje, čo je táto línia.",
@@ -499,12 +478,6 @@
         },
         "cannot_zoom": "V tomto móde nemožno viac oddialiť.",
         "full_screen": "Prepni na plnú obrazovku",
-        "gpx": {
-            "local_layer": "Lokálny GPX súbor",
-            "drag_drop": "Pretiahnite a pustite .gpx súbor na stránku, alebo ckliknite na tlačítko napravo pre výber",
-            "zoom": "Priblížiť na GPX stopu",
-            "browse": "Vyber .gpx súbor"
-        },
         "mapillary_images": {
             "tooltip": "Fotografie ulíc z Mapillary",
             "title": "Vrstva fotografií (Mapillary)"
@@ -1328,10 +1301,6 @@
                     },
                     "placeholder": "Malé kolieska, kolesá, off-road..."
                 },
-                "social_facility_for": {
-                    "label": "Služby poskytované pre",
-                    "placeholder": "Bezdomovcov, postihnutých, deti, atď."
-                },
                 "source": {
                     "label": "Zdroj"
                 },
@@ -1517,10 +1486,6 @@
                     "name": "Odbavovacia plocha",
                     "terms": "Letisko,pristávacia plocha,terminál,príletová hala,odbavovacia plocha"
                 },
-                "aeroway/gate": {
-                    "name": "Letiskový východ",
-                    "terms": "Letisko,pristávacia plocha,terminál,príletová hala,odbavovacia plocha"
-                },
                 "aeroway/hangar": {
                     "name": "Hangár",
                     "terms": "hangar,hangár,letisko"
@@ -1536,10 +1501,6 @@
                 "aeroway/taxiway": {
                     "name": "Rolovacia dráha",
                     "terms": "rolovanie, rolovacia draha, rolovacia dráha"
-                },
-                "aeroway/terminal": {
-                    "name": "Letiskový terminál",
-                    "terms": "letisko,terminal,terminál,letiskový terminál,letiskovy terminal"
                 },
                 "amenity": {
                     "name": "Občianska vybavenosť"
@@ -2902,42 +2863,6 @@
                 "man_made/water_works": {
                     "name": "Vodojem",
                     "terms": "vodáreň,vodaren,vodný zdroj,vodny zdroj,prameň,pramen"
-                },
-                "military/airfield": {
-                    "name": "Vojenské letisko",
-                    "terms": "vojenske letisko,pristávacia plocha,pristavacia plocha"
-                },
-                "military/barracks": {
-                    "name": "Kasárne",
-                    "terms": "kasarne,barak,vojenská ubytovňa,vojenska ubytovna"
-                },
-                "military/bunker": {
-                    "name": "Bunker",
-                    "terms": "opevnenie,vojenské opevnenie,vojenske opevnenie"
-                },
-                "military/checkpoint": {
-                    "name": "Kontrolné stanovište",
-                    "terms": "kontrolne stanoviste,vojenske stanoviste,vojenské stanovište,vojenska kontrola,vojenská kontrola"
-                },
-                "military/danger_area": {
-                    "name": "Nebezpečná zóna",
-                    "terms": "bezpecna zona,zakazana zona,zakázaná zóna,nebezpecenstvo,nebezpečenstvo"
-                },
-                "military/naval_base": {
-                    "name": "Námorná základňa",
-                    "terms": "namorna zakladna,ponorkova zakladna,ponorková základňa,ponorky,lode"
-                },
-                "military/obstacle_course": {
-                    "name": "Prekážková dráha",
-                    "terms": "cvičisko s prekážkami,cvicisko s prekazkami,prekazkova draha,prekážková dráha,vojenské cvicisko,vojenské cvičisko"
-                },
-                "military/range": {
-                    "name": "Vojenská strelnica",
-                    "terms": "vojenska strelnica,cvičisko,cvicisko"
-                },
-                "military/training_area": {
-                    "name": "Cvičisko",
-                    "terms": "cvicisko,vojenske cvicisko,vojenské cvičisko "
                 },
                 "natural": {
                     "name": "Prírodné",

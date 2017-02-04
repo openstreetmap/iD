@@ -101,18 +101,13 @@
             },
             "delete": {
                 "title": "Burahin",
-                "description": "Permanenteng burahin ito. ",
                 "annotation": {
                     "point": "Binura ang isang point o tuldok.",
                     "vertex": "Binura ang isang node mula sa way o linya.",
                     "line": "Binura ang isang linya.",
                     "area": "Binary ang isang area o poligon.",
-                    "relation": "Binura ang isang \"relation\".",
-                    "multiple": "Binura ang {n} bagay sa mapa."
-                },
-                "incomplete_relation": "Hindi maaring mabura dahil ito ay hindi pa ganap na nai-download.",
-                "part_of_relation": "Hindi mabura dahil bahagi ito ng isang malaking relation.  Alising munu ito sa ralation bago burahin.",
-                "connected_to_hidden": "Hindi mabura dahil may nakatagong feature na konektado dito."
+                    "relation": "Binura ang isang \"relation\"."
+                }
             },
             "add_member": {
                 "annotation": "Dinagdag ang kasapi o miyembro ng relation."
@@ -150,29 +145,21 @@
             },
             "move": {
                 "title": "Ilipat ng posisyon",
-                "description": "Ilipat ang posisyon.",
                 "key": "M",
                 "annotation": {
                     "point": "Inilipat ang posisyon ng isang punto o tuldok.",
                     "vertex": "Inilipat ang posisyon ng isang \"node\" na sa isang \"way\".",
                     "line": "Inilipat ang posisyon ng isang linya.",
-                    "area": "Inilipat ang posisyon ng isang area o poligon.",
-                    "multiple": "Inilipat ang posisyon ang maraming bagay."
-                },
-                "incomplete_relation": "Hindi maaring ilipat ng posisyon dahil ito ay hindi pa ganap na nai-download.",
-                "too_large": "Hindi mailipat ng lokasyon dahil hindi kita sa mapa ang buong features.",
-                "connected_to_hidden": "Hindi mailipat ng lokasyon dahil dahil may nakatagong feature na konektado dito."
+                    "area": "Inilipat ang posisyon ng isang area o poligon."
+                }
             },
             "rotate": {
                 "title": "Paikutin",
-                "description": "Paikutin ang bagay na ito mula sa kanyang \"center point\".",
                 "key": "R",
                 "annotation": {
                     "line": "Pinaikot ang linya.",
                     "area": "Pinaikot ang area o poligon."
-                },
-                "too_large": "Hindi mapaikot dahil hindi kita sa mapa ang buong features.",
-                "connected_to_hidden": "Hindi mapaikot dahil dahil may nakatagong feature na konektado dito."
+                }
             },
             "reverse": {
                 "title": "Baliktarin",
@@ -241,12 +228,9 @@
             "readonly": "Kasalukuyang nasa read-only ang API. Kailangan mong maghintay upang i-save ang iyong mga pagbabago."
         },
         "commit": {
-            "title": "I-save ang mga binago.",
             "description_placeholder": "Maikling paglalarawan ng iyong mga kontribusyon (kailangan)",
-            "message_label": "Komento sa changeset",
             "upload_explanation": "Ang mga pagbabagong na-upload ay makikita sa lahat ng mapang gumagamit ng datos ng OpenStreetMap.",
             "upload_explanation_with_user": "Ang mga pagbabagong na-upload bilang {user} ay makikita sa lahat ng mapang gumagamit ng datos ng OpenStreetMap.",
-            "save": "I-save",
             "cancel": "Kanselahin",
             "changes": "{count} Changes",
             "warnings": "Mga babala",
@@ -289,7 +273,6 @@
             "back_tooltip": "Baguhin ang \"feature\"",
             "remove": "Alisin",
             "search": "Mag-search",
-            "multiselect": "Napiling mga item",
             "unknown": "Unknown",
             "incomplete": "<not downloaded>",
             "feature_list": "Mag-hanap ng \"feature\"",
@@ -363,7 +346,6 @@
             "untagged_point": "Walang tag na punto o tuldok",
             "untagged_line": "Walang tag na linya",
             "untagged_area": "Walang tag na area o poligon",
-            "many_deletions": "Nagbura ka ng {n} bagay sa mapa. Sigurado ka bang gusto mong gawin ito? Ito ay tatanggalin sa mapa na nakikita sa openstreetmap.org.",
             "tag_suggests_area": "Ang tag na {tag} ay kalimitang para sa mga area o poligon sublait ito ay nasa linya lamang.",
             "untagged_point_tooltip": "Pumili ng uri ng tampok na naglalarawan kung ano ang puntong ito.",
             "untagged_line_tooltip": "Pumili ng uri ng tampok na naglalarawan kung ano ang linyang ito.",
@@ -375,12 +357,6 @@
             "out": "I-zoom out"
         },
         "cannot_zoom": "Hindi na pwedeng mag-zoom out sa kasalukuyang \"mode\".",
-        "gpx": {
-            "local_layer": "Lokal na GPX file",
-            "drag_drop": "I-drag at i-drop ang .gpx file mula sa inyong \"computer\" sa pahinang ito, o i-click ang button sa kanan upang mag-browse",
-            "zoom": "I-zoom sa GPX track",
-            "browse": "Mag-browse ng .gpx file"
-        },
         "help": {
             "title": "Tulong"
         },

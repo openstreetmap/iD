@@ -32,7 +32,7 @@
                 "annotation": {
                     "point": "Legg til et punkt.",
                     "vertex": "Legg til et punkt til veien.",
-                    "relation": "La til en relasjo"
+                    "relation": "La til en relasjon."
                 }
             },
             "start": {
@@ -54,6 +54,9 @@
             },
             "cancel_draw": {
                 "annotation": "Avbrøt tegning."
+            },
+            "change_role": {
+                "annotation": "Endret rollen til et relasjonsmedlem."
             },
             "change_tags": {
                 "annotation": "Endret egenskaper."
@@ -93,18 +96,22 @@
                 "description": "Gjør denne linjen rett.",
                 "key": "S",
                 "annotation": "Gjorde en linje rett.",
-                "too_bendy": "Denne kan ikke rettes ut fordi den er for bøyet."
+                "too_bendy": "Denne kan ikke rettes ut fordi den er for bøyet.",
+                "connected_to_hidden": "Denne linjen kan ikke rettes fordi den er koblet til en skjult kartegenskap."
             },
             "delete": {
                 "title": "Fjern",
-                "description": "Ta vekk objektet permanent.",
+                "description": {
+                    "single": "Slett denne kartegenskapen permanent.",
+                    "multiple": "Slett disse kartegenskapene permanent."
+                },
                 "annotation": {
                     "point": "Fjern et punkt.",
                     "vertex": "Fjernet en node fra veien.",
                     "line": "Fjernet en linje.",
                     "area": "Fjernet et areal.",
                     "relation": "Fjernet en relasjon.",
-                    "multiple": "Fjernet {n} objekter."
+                    "multiple": "Slettet {n} kartegenskaper."
                 }
             },
             "add_member": {
@@ -124,25 +131,38 @@
             "disconnect": {
                 "title": "Kobl fra",
                 "description": "Koble disse linjene/areane fra hverandre",
-                "key": "D"
+                "key": "D",
+                "annotation": "Frakoblet linjer/områder.",
+                "not_connected": "Det er ikke nok linjer/områder her for å kunne frakoble.",
+                "connected_to_hidden": "Denne kan ikke frakobles fordi den er koblet til en skjult kartegenskap.",
+                "relation": "Denne kan ikke frakobles fordi den kobler sammen flere medlemmer av en relasjon."
             },
             "merge": {
                 "title": "Knytt sammen",
                 "description": "Slå sammen disse kartegenskapene.",
                 "key": "C",
                 "annotation": "{n} kartegenskaper er slått sammen.",
-                "incomplete_relation": "Disse funksjonene kan ikke bli knyttet sammen fordi hvertfall én av dem er ikke ferdig nedlastet."
+                "not_eligible": "Disse kartegenskapene kan ikke bli slått sammen.",
+                "not_adjacent": "Disse kartegenskapene kan ikke bli slått sammen fordi de ikke er sammenkoblet.",
+                "restriction": "Disse kartegenskapene kan ikke bli slått sammen fordi minst en er et medlem av en \"{relation}\" relasjon.",
+                "incomplete_relation": "Disse funksjonene kan ikke bli knyttet sammen fordi hvertfall én av dem er ikke ferdig nedlastet.",
+                "conflicting_tags": "Disse kartegenskapene kan ikke bli slått sammen fordi noen av deres merker har konfliktskapende verdier."
             },
             "move": {
                 "title": "Flytt",
-                "description": "Flytt dette til et annet sted.",
                 "key": "M",
                 "annotation": {
                     "point": "Flyttet et punkt.",
                     "vertex": "Flyttet en node til en vei.",
                     "line": "Flyttet en linje.",
-                    "area": "Flyttet et areal.",
-                    "multiple": "Flyttet flere objekter."
+                    "area": "Flyttet et areal."
+                }
+            },
+            "reflect": {
+                "title": "reflektere",
+                "key": {
+                    "long": "T",
+                    "short": "Y"
                 }
             },
             "rotate": {
@@ -185,9 +205,6 @@
         "report_a_bug": "Rapporter feil",
         "help_translate": "Hjelp til med oversettelse",
         "commit": {
-            "title": "Lagre endringer",
-            "message_label": "Kommentar til endringssettet",
-            "save": "Lagre",
             "cancel": "Avbryt",
             "changes": "{count} endringer",
             "warnings": "Advarsler",
@@ -365,18 +382,12 @@
         "validations": {
             "untagged_line": "Utagget linje",
             "untagged_area": "Utagget areal",
-            "many_deletions": "Du skal slette {n} objekter. Er du sikker på at du vil gjøre dette? Dette vil slette dem fra kartet som alle andre ser på openstreetmap.org.",
             "tag_suggests_area": "Taggen {tag} anbefaler at linje bør være et areal, men dette er ikke et areal",
             "deprecated_tags": "Utgående tagger: {tags}"
         },
         "zoom": {
             "in": "Forstørr",
             "out": "Forminsk"
-        },
-        "gpx": {
-            "local_layer": "Lokal GPX-fil",
-            "zoom": "Zoom inn til GPX-spor",
-            "browse": "Finn .gpx-fil"
         },
         "help": {
             "title": "Hjelp"
@@ -403,17 +414,32 @@
         },
         "presets": {
             "categories": {
+                "category-barrier": {
+                    "name": "Hinderrelaterte egenskaper"
+                },
                 "category-building": {
                     "name": "Bygingsrelatert"
                 },
                 "category-golf": {
                     "name": "Golfrelatert"
                 },
+                "category-landuse": {
+                    "name": "Arealbrukrelaterte egenskaper"
+                },
+                "category-path": {
+                    "name": "Stirelaterte egenskaper"
+                },
                 "category-rail": {
                     "name": "Togsporrelaterte egenskaper"
                 },
+                "category-restriction": {
+                    "name": "Restriksjonsrelaterte egenskaper"
+                },
                 "category-road": {
                     "name": "Veirelatert"
+                },
+                "category-route": {
+                    "name": "Ruterelaterte egenskaper"
                 },
                 "category-water-area": {
                     "name": "Vannrelaterte egenskaper"
@@ -427,7 +453,8 @@
                     "label": "Tillatt for",
                     "options": {
                         "designated": {
-                            "description": "Tilgang tillatt i henhold til skilt eller spesifike lokale lover"
+                            "description": "Tilgang tillatt i henhold til skilt eller spesifike lokale lover",
+                            "title": "Utpekt"
                         },
                         "destination": {
                             "description": "Tilgang kun tillatt for å nå et mål",
@@ -452,6 +479,7 @@
                     },
                     "placeholder": "Ikke spesifisert",
                     "types": {
+                        "access": "Alle",
                         "bicycle": "Sykler",
                         "foot": "Fot",
                         "horse": "Hester",
@@ -461,6 +489,9 @@
                 "access_simple": {
                     "label": "Tillatt for"
                 },
+                "access_toilets": {
+                    "label": "Tilgang"
+                },
                 "address": {
                     "label": "Adresse",
                     "placeholders": {
@@ -468,6 +499,7 @@
                         "conscriptionnumber": "123",
                         "country": "Land",
                         "district": "Distrikt",
+                        "floor": "Gulv",
                         "hamlet": "Bosetning",
                         "housename": "Husnavn",
                         "housenumber": "123",
@@ -487,17 +519,22 @@
                     "label": "Type"
                 },
                 "aerialway/access": {
+                    "label": "Tilgang",
                     "options": {
                         "both": "Begge",
                         "entry": "Inngang",
                         "exit": "Utgang"
                     }
                 },
+                "aerialway/bubble": {
+                    "label": "Boble"
+                },
                 "aerialway/capacity": {
                     "label": "Kapasitet (per time)",
                     "placeholder": "500, 2500, 5000..."
                 },
                 "aerialway/duration": {
+                    "label": "Varighet (minutter)",
                     "placeholder": "1, 2, 3..."
                 },
                 "aerialway/heating": {
@@ -507,6 +544,7 @@
                     "placeholder": "2, 4, 8..."
                 },
                 "aerialway/summer/access": {
+                    "label": "Tilgang (sommer)",
                     "options": {
                         "both": "Begge",
                         "entry": "Inngang",
@@ -522,19 +560,43 @@
                 "area/highway": {
                     "label": "Type"
                 },
+                "artist": {
+                    "label": "Artist"
+                },
                 "artwork_type": {
                     "label": "Type"
                 },
                 "atm": {
                     "label": "Minibank"
                 },
+                "backrest": {
+                    "label": "Ryggstøtte"
+                },
                 "barrier": {
                     "label": "Type"
+                },
+                "bath/sand_bath": {
+                    "label": "Sandbad"
+                },
+                "bath/type": {
+                    "label": "Spesialitet",
+                    "options": {
+                        "foot_bath": "Fotbad"
+                    }
+                },
+                "beauty": {
+                    "label": "Butikktype"
                 },
                 "bench": {
                     "label": "Benk"
                 },
                 "bicycle_parking": {
+                    "label": "Type"
+                },
+                "bin": {
+                    "label": "Søppelkasse"
+                },
+                "board_type": {
                     "label": "Type"
                 },
                 "boundary": {
@@ -548,6 +610,16 @@
                 },
                 "building_area": {
                     "label": "Bygning"
+                },
+                "camera/direction": {
+                    "label": "Retning (Grader med klokken)",
+                    "placeholder": "45, 90, 180, 270"
+                },
+                "camera/type": {
+                    "label": "Kameratype",
+                    "options": {
+                        "fixed": "Fikset"
+                    }
                 },
                 "capacity": {
                     "label": "Kapasitet",
@@ -712,6 +784,9 @@
                 "handrail": {
                     "label": "Gelender"
                 },
+                "height": {
+                    "label": "Høyde (meter)"
+                },
                 "highway": {
                     "label": "Type"
                 },
@@ -736,6 +811,9 @@
                         "up": "Opp"
                     }
                 },
+                "indoor": {
+                    "label": "Innendørs"
+                },
                 "information": {
                     "label": "Type"
                 },
@@ -748,6 +826,12 @@
                         "wlan": "Trådløs",
                         "yes": "Ja"
                     }
+                },
+                "internet_access/fee": {
+                    "label": "Internettilgangsavgift"
+                },
+                "internet_access/ssid": {
+                    "label": "SSID (Nettverksnavn)"
                 },
                 "lamp_type": {
                     "label": "Type"
@@ -774,16 +858,37 @@
                     }
                 },
                 "leaf_type": {
+                    "label": "Bladtype",
                     "options": {
-                        "mixed": "Blandet"
+                        "broadleaved": "Løvtre",
+                        "leafless": "Bladløs",
+                        "mixed": "Blandet",
+                        "needleleaved": "Nåltre"
+                    }
+                },
+                "leaf_type_singular": {
+                    "label": "Bladtype",
+                    "options": {
+                        "broadleaved": "Løvtre",
+                        "leafless": "Bladløs",
+                        "needleleaved": "Nåltre"
                     }
                 },
                 "leisure": {
                     "label": "Type"
                 },
+                "length": {
+                    "label": "Lengde (meter)"
+                },
+                "level": {
+                    "label": "Etasje"
+                },
                 "levels": {
                     "label": "Etasjer",
                     "placeholder": "2, 4, 6..."
+                },
+                "lit": {
+                    "label": "Belyst"
                 },
                 "location": {
                     "label": "Sted"
@@ -791,9 +896,42 @@
                 "man_made": {
                     "label": "Type"
                 },
+                "map_type": {
+                    "label": "Type"
+                },
+                "maxheight": {
+                    "label": "Maks høyde",
+                    "placeholder": "4, 4.5, 5, 14'0\", 14'6\", 15'0\""
+                },
                 "maxspeed": {
                     "label": "Fartsgrense",
                     "placeholder": "40, 50, 60..."
+                },
+                "mtb/scale": {
+                    "options": {
+                        "0": "0: Solid grus/hardpakket jord, ingen hindringer, lange svinger",
+                        "1": "1: Noen løse overflater, Små hindringer, lange svinger",
+                        "2": "2: Mange løse overflater, store hindringer, enkle hårnålssvinger",
+                        "3": "3: Glatt overflate, store hindringer, vanskelige hårnålssvinger",
+                        "4": "4: Løse overflater eller steinrøyser, farlige hårnålssvinger",
+                        "5": "5: Maksimum vanskelighet, masser av steinrøyser, ras",
+                        "6": "6: Ikke kjørbart med mindre man er en av de beste sykkelkjørere."
+                    },
+                    "placeholder": "0, 1, 2, 3..."
+                },
+                "mtb/scale/imba": {
+                    "label": "IMBA Bakkevanskelighet",
+                    "options": {
+                        "0": "Enklest (hvit sirkel)",
+                        "1": "Enkel (grønn sirkel)",
+                        "2": "Middels (blå kvadrat)",
+                        "3": "Vanskelig (svart diamant)",
+                        "4": "Ekstremt Vanskelig (dobbel svart diamant)"
+                    },
+                    "placeholder": "Enkel, Middels, Vanskelig..."
+                },
+                "mtb/scale/uphill": {
+                    "placeholder": "0, 1, 2, 3..."
                 },
                 "name": {
                     "label": "Navn",
@@ -803,6 +941,39 @@
                     "label": "Naturlig"
                 },
                 "network": {
+                    "label": "Nettverk"
+                },
+                "network_bicycle": {
+                    "label": "Nettverkstype",
+                    "options": {
+                        "icn": "Internasjonal",
+                        "lcn": "Lokal",
+                        "ncn": "Nasjonal",
+                        "rcn": "Regional"
+                    },
+                    "placeholder": "Lokal, Regional, Nasjonal, Internasjonal"
+                },
+                "network_foot": {
+                    "label": "Nettverkstype",
+                    "options": {
+                        "iwn": "Internasjonal",
+                        "lwn": "Lokal",
+                        "nwn": "Nasjonal",
+                        "rwn": "Regional"
+                    },
+                    "placeholder": "Lokal, Regional, Nasjonal, Internasjonal"
+                },
+                "network_horse": {
+                    "label": "Nettverkstype",
+                    "options": {
+                        "ihn": "Internasjonal",
+                        "lhn": "Lokal",
+                        "nhn": "Nasjonal",
+                        "rhn": "Regional"
+                    },
+                    "placeholder": "Lokal, Regional, Nasjonal, Internasjonal"
+                },
+                "network_road": {
                     "label": "Nettverk"
                 },
                 "note": {
@@ -823,6 +994,7 @@
                     "label": "Enveis",
                     "options": {
                         "no": "Nei",
+                        "undefined": "Antatt til å være Ja",
                         "yes": "Ja"
                     }
                 },
@@ -831,6 +1003,16 @@
                 },
                 "operator": {
                     "label": "Betjener"
+                },
+                "par": {
+                    "placeholder": "3, 4, 5..."
+                },
+                "parallel_direction": {
+                    "label": "Retning",
+                    "options": {
+                        "backward": "Bakover",
+                        "forward": "Fremover"
+                    }
                 },
                 "park_ride": {
                     "label": "Park & Ride"
@@ -843,9 +1025,19 @@
                         "underground": "Under overflaten"
                     }
                 },
+                "payment_multi": {
+                    "label": "Betalingstyper"
+                },
                 "phone": {
                     "label": "Telefon",
                     "placeholder": "+47 22 12 34 56"
+                },
+                "piste/difficulty": {
+                    "label": "Vanskelighet",
+                    "options": {
+                        "advanced": "Avansert (svart diamant)",
+                        "easy": "Enkel (grønn sirkel)"
+                    }
                 },
                 "piste/type": {
                     "label": "Type"
@@ -963,16 +1155,14 @@
             },
             "presets": {
                 "address": {
-                    "name": "Adresse"
+                    "name": "Adresse",
+                    "terms": "adresse, husnummer, adresser, gate, gateadresse"
                 },
                 "aeroway": {
                     "name": "Taksebane"
                 },
                 "aeroway/aerodrome": {
                     "name": "Flyplass"
-                },
-                "aeroway/gate": {
-                    "name": "Flyplassgate"
                 },
                 "aeroway/hangar": {
                     "name": "Hangar"
@@ -985,9 +1175,6 @@
                 },
                 "aeroway/taxiway": {
                     "name": "Taxibane"
-                },
-                "aeroway/terminal": {
-                    "name": "Flyplassterminal"
                 },
                 "amenity": {
                     "name": "Fasilitet"
@@ -1793,36 +1980,6 @@
                 "man_made/water_works": {
                     "name": "Vannfiltreringsanlegg"
                 },
-                "man_made/works": {
-                    "name": "Anleggsarbeid"
-                },
-                "military/airfield": {
-                    "name": "Flyplass / lufthavn"
-                },
-                "military/barracks": {
-                    "name": "Militærforlegning"
-                },
-                "military/bunker": {
-                    "name": "Bunker"
-                },
-                "military/checkpoint": {
-                    "name": "Sjekkpunkt"
-                },
-                "military/danger_area": {
-                    "name": "Farlig område"
-                },
-                "military/naval_base": {
-                    "name": "Marinebase"
-                },
-                "military/obstacle_course": {
-                    "name": "Hinderløype"
-                },
-                "military/range": {
-                    "name": "Militær skytebane"
-                },
-                "military/training_area": {
-                    "name": "Militært skytefelt"
-                },
                 "natural": {
                     "name": "Naturlig"
                 },
@@ -1946,8 +2103,14 @@
                 "power/line": {
                     "name": "Høyspentlinje"
                 },
+                "power/minor_line": {
+                    "terms": "stolpe, ledning, strøm, strømlinje, linje, elektrisitet"
+                },
                 "power/pole": {
                     "name": "Høyspentmast"
+                },
+                "power/tower": {
+                    "name": "Høyspent tårn"
                 },
                 "power/transformer": {
                     "name": "Transformator"

@@ -101,18 +101,13 @@
             },
             "delete": {
                 "title": "刪",
-                "description": "物體刪走無回頭。",
                 "annotation": {
                     "point": "刪咗處。",
                     "vertex": "道度刪咗節。",
                     "line": "刪咗綫。",
                     "area": "刪咗範圍。",
-                    "relation": "刪咗關聯。",
-                    "multiple": "刪咗物體{n}個。"
-                },
-                "incomplete_relation": "此地貌無得刪走，皆因佢未傳晒落來。",
-                "part_of_relation": "呢個地貌無得刪，佢喺大關聯之中。你要撤去關聯先。",
-                "connected_to_hidden": "無得刪走，佢連咗去隠藏地貌。"
+                    "relation": "刪咗關聯。"
+                }
             },
             "add_member": {
                 "annotation": "加咗成員入關聯。"
@@ -150,29 +145,21 @@
             },
             "move": {
                 "title": "搬",
-                "description": "搬爾個去另第度。",
                 "key": "M",
                 "annotation": {
                     "point": "搬一點",
                     "vertex": "道度搬咗節。",
                     "line": "搬咗條綫。",
-                    "area": "搬咗範圍。",
-                    "multiple": "搬物體幾個。"
-                },
-                "incomplete_relation": "此地貌無得搬，皆因佢未傳晒落來。",
-                "too_large": "無得郁，睇到嘅部份唔夠做。",
-                "connected_to_hidden": "無得郁，佢連咗去隠藏地貌。"
+                    "area": "搬咗範圍。"
+                }
             },
             "rotate": {
                 "title": "擰轉",
-                "description": "圍住中心點，擰轉爾個物體。",
                 "key": "R",
                 "annotation": {
                     "line": "條綫擰轉咗。",
                     "area": "範圍擰轉咗。"
-                },
-                "too_large": "無得轉，睇到嘅部份唔夠做。",
-                "connected_to_hidden": "無得轉，佢連咗去隠藏地貌。"
+                }
             },
             "reverse": {
                 "title": "倒向。",
@@ -241,12 +228,9 @@
             "readonly": "程式接口，只讀不寫。你要等下先記到你修改。"
         },
         "commit": {
-            "title": "記低修改",
             "description_placeholder": "簡述你做過啲乜（必填）",
-            "message_label": "變更留言",
             "upload_explanation": "你嘅修改，傳咗上去公家街圖。凢用公家街圖資料，地圖都會見到。",
             "upload_explanation_with_user": "你以{user}名義，修改傳咗上去公家街圖。凢用公家街圖資料，地圖都會見到。",
-            "save": "記",
             "cancel": "唔記",
             "changes": "變更 {count} 個",
             "warnings": "警告",
@@ -308,7 +292,6 @@
             "back_tooltip": "轉地貌",
             "remove": "移走",
             "search": "搵",
-            "multiselect": "揀咗嘅項目",
             "unknown": "未知",
             "incomplete": "<無傳落來>",
             "feature_list": "搵地貌",
@@ -440,14 +423,11 @@
                 "restore": "囘復",
                 "delete": "由佢唔要",
                 "download_changes": "或者下載你改嘅。",
-                "done": "衝突通通解決！",
-                "help": "你改咗嘅地貌，咁啱另一用戶改咗。\n撳下以嘅嘢，睇下衝突明細，睇下跟自己改，\n定跟人哋改。\n"
+                "done": "衝突通通解決！"
             }
         },
         "merge_remote_changes": {
             "conflict": {
-                "deleted": "{user} 刪走此項。",
-                "location": "{user} 同你搬過此項。",
                 "nodelist": "{user} 同你改過此項。",
                 "memberlist": "{user} 同你改過關聯細項。",
                 "tags": "你改<b>{tag}</b>做「{local}」，而 {user} 改佢做「{remote}」。"
@@ -488,7 +468,6 @@
             "untagged_point": "未有籤嘅點",
             "untagged_line": "冇籤嘅綫",
             "untagged_area": "冇籤嘅範圍",
-            "many_deletions": "你要刪走物件{n}個。你真係想咁做？咁人人用開嘅公家街圖入便，都會刪走埋。",
             "tag_suggests_area": "{tag}籤話條綫係範圍，實情佢唔係。",
             "untagged_point_tooltip": "揀種地貌，兼且寫呢處係乜來。",
             "untagged_line_tooltip": "揀種地貌，兼且寫呢綫係乜來。",
@@ -501,12 +480,6 @@
         },
         "cannot_zoom": "今下模式，無得再縮。",
         "full_screen": "來回全螢幕",
-        "gpx": {
-            "local_layer": "本地 GPX 檔案",
-            "drag_drop": "拉個 .gpx檔案入來爾版。或者，撳右邊粒掣揀檔案。",
-            "zoom": "校到GPX路徑大細",
-            "browse": "望下有乜 .gpx 檔案"
-        },
         "mapillary_images": {
             "tooltip": "拎輿兵嘅街相",
             "title": "疊相（輿兵）"
@@ -1442,10 +1415,6 @@
                     },
                     "placeholder": "轆仔、有轆、越野⋯⋯"
                 },
-                "social_facility_for": {
-                    "label": "接待",
-                    "placeholder": "無家、傷殘、細蚊等等"
-                },
                 "source": {
                     "label": "來源"
                 },
@@ -1630,10 +1599,6 @@
                     "name": "停機坪",
                     "terms": "Apron,停機坪"
                 },
-                "aeroway/gate": {
-                    "name": "機場閘口",
-                    "terms": "Airport gate,機場閘口,登機閘口,落機閘口,閘口"
-                },
                 "aeroway/hangar": {
                     "name": "飛機庫",
                     "terms": "Hangar,機庫,飛機庫"
@@ -1649,10 +1614,6 @@
                 "aeroway/taxiway": {
                     "name": "滑行道",
                     "terms": "Taxiway,滑行道"
-                },
-                "aeroway/terminal": {
-                    "name": "飛機場大樓",
-                    "terms": "Airport terminal,機場大堂,機場大樓,機場客運大樓,機場航站樓,飛機場大樓"
                 },
                 "amenity": {
                     "name": "便利設施"
@@ -2332,22 +2293,6 @@
                 "man_made/water_works": {
                     "name": "供水廠",
                     "terms": "Water Works,供水廠,水務設施"
-                },
-                "military/airfield": {
-                    "name": "飛機場",
-                    "terms": "Airfield,機場,飛機場"
-                },
-                "military/barracks": {
-                    "name": "兵房",
-                    "terms": "Barracks,兵房,兵營,營房,軍營"
-                },
-                "military/bunker": {
-                    "name": "地堡",
-                    "terms": "Bunker,地堡,暗堡"
-                },
-                "military/range": {
-                    "name": "操炮區",
-                    "terms": "Military Range,操炮區,軍事範圍"
                 },
                 "natural": {
                     "name": "天然",

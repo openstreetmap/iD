@@ -101,7 +101,10 @@
             },
             "delete": {
                 "title": "Slet",
-                "description": "Slet objekt permanent.",
+                "description": {
+                    "single": "Slet dette objekt permanent.",
+                    "multiple": "Slet disse objekter permanent."
+                },
                 "annotation": {
                     "point": "Slettede et punkt.",
                     "vertex": "Slettede et punkt fra en vej.",
@@ -110,9 +113,18 @@
                     "relation": "Slettede en relation.",
                     "multiple": "Slettede {n} objekter."
                 },
-                "incomplete_relation": "Dette objekt kan ikke slettes, da det ikke er blevet downloadet helt.",
-                "part_of_relation": "Dette objekt kan ikke slettes fordi det er en del af en større relation. Du er nødt til at fjerne det fra relationen først.",
-                "connected_to_hidden": "Dette kan ikke slettes da det er forbundet til et skjult objekt."
+                "incomplete_relation": {
+                    "single": "Dette objekt kan ikke slettes, da det ikke er blevet downloadet helt.",
+                    "multiple": "Disse objekter kan ikke slettes, da de ikke er blevet downloadet helt."
+                },
+                "part_of_relation": {
+                    "single": "Dette objekt kan ikke slettes fordi det er en del af en større relation. Du er nødt til at fjerne det fra relationen først.",
+                    "multiple": "Disse objekter kan ikke slettes fordi de er en del af en større relation. Du er nødt til at fjerne dem fra relationen først."
+                },
+                "connected_to_hidden": {
+                    "single": "Dette objekt kan ikke slettes da det er forbundet til et skjult objekt.",
+                    "multiple": "Disse objekter kan ikke blive slettet da nogle af dem er forbundet til skjulte features."
+                }
             },
             "add_member": {
                 "annotation": "Tilføjede et medlem til en relation."
@@ -150,7 +162,10 @@
             },
             "move": {
                 "title": "Flyt",
-                "description": "Flyt dette til et andet sted.",
+                "description": {
+                    "single": "Flyt dette objekt til anden lokalitet.",
+                    "multiple": "Flyt disse objekter til anden lokalitet."
+                },
                 "key": "M",
                 "annotation": {
                     "point": "Flyttede et punkt.",
@@ -159,20 +174,82 @@
                     "area": "Flyttede et område.",
                     "multiple": "Flyttede flere objekter."
                 },
-                "incomplete_relation": "Dette objekt kan ikke flyttes, fordi det ikke er helt downloadet.",
-                "too_large": "Dette kan ikke flyttes, da kortudsnittet ikke viser nok af objektet.",
-                "connected_to_hidden": "Dette kan ikke flyttes, da det er forbundet til et skjult objekt."
+                "incomplete_relation": {
+                    "single": "Dette objekt kan ikke flyttes, fordi det ikke er helt downloadet.",
+                    "multiple": "Disse objekter kan ikke flyttes da de ikke er helt downloadet endnu."
+                },
+                "too_large": {
+                    "single": "Dette objekt kan ikke blive flyttet da ikke nok af det er synligt.",
+                    "multiple": "Disse objekter kan ikke flyttes da der ikke er nok af dem i synligt område."
+                },
+                "connected_to_hidden": {
+                    "single": "Dette objekt kan ikke flyttes da det er forbundet til en skjult feature.",
+                    "multiple": "Disse objekter kan ikke flyttes da nogle af dem er forbundet til skjulte features."
+                }
+            },
+            "reflect": {
+                "title": "reflektere",
+                "description": {
+                    "long": {
+                        "single": "Reflektere dette objekt på tværs af dens lange akse.",
+                        "multiple": "Reflekter disse objekter på tværs af deres lange akse."
+                    },
+                    "short": {
+                        "single": "Reflektere dette objekt på tværs af dens kort akse.",
+                        "multiple": "Reflekter disse objekter på tværs af deres korte akse."
+                    }
+                },
+                "key": {
+                    "long": "T",
+                    "short": "Y"
+                },
+                "annotation": {
+                    "long": {
+                        "single": "Reflekterede et objekt på tværs af dens lange akse.",
+                        "multiple": "Reflekterede flere objekter på tværs af deres lange akse."
+                    },
+                    "short": {
+                        "single": "Reflekterede et objekt på tværs af sin korte akse.",
+                        "multiple": "Reflekterede flere objekter på tværs af deres korte akse."
+                    }
+                },
+                "incomplete_relation": {
+                    "single": "Dette objekt kan ikke reflekteret da det ikke er blevet downloadet helt.",
+                    "multiple": "Disse objekter kan ikke blive reflekteret da de ikke er blevet downloadet helt."
+                },
+                "too_large": {
+                    "single": "Dette objekt kan ikke blive reflekteret pga der er ikke nok område synligt.",
+                    "multiple": "Disse objekter kan ikke blive reflekteret da der ikke er nok af dem i synligt område."
+                },
+                "connected_to_hidden": {
+                    "single": "Dette objekt kan ikke blive reflekteret da det er forbundet til en skjult feature.",
+                    "multiple": "Disse objekter kan ikke blive reflekteret da nogle af dem er forbundet til skjulte features."
+                }
             },
             "rotate": {
                 "title": "Rotér",
-                "description": "Roterer dette objekt omkring dets centerpunkt.",
+                "description": {
+                    "single": "Roterer dette objekt omkring dens centerpunkt.",
+                    "multiple": "Roterer disse objekter omkring deres centerpunkt."
+                },
                 "key": "R",
                 "annotation": {
                     "line": "Roterede en linje.",
-                    "area": "Roterede et område."
+                    "area": "Roterede et område.",
+                    "multiple": "Roterede flere objekter."
                 },
-                "too_large": "Dette kan ikke roteres, da kortudsnittet ikke viser nok af objektet.",
-                "connected_to_hidden": "Dette kan ikke roteres, da det er forbundet til et skjult objekt."
+                "incomplete_relation": {
+                    "single": "Dette objekt kan ikke roteres da det ikke er helt downloadet endnu.",
+                    "multiple": "Disse objekter kan ikke roteres da de ikke er helt downloadet endnu."
+                },
+                "too_large": {
+                    "single": "Dette objekt kan ikke roteres da ikke nok af det er synligt.",
+                    "multiple": "Disse objekter kan ikke roteres da der ikke er nok af dem i synligt område."
+                },
+                "connected_to_hidden": {
+                    "single": "Dette objekt kan ikke roteres da det er forbundet til en skjult feature-",
+                    "multiple": "Disse objekter kan ikke blive roteret da nogle af dem er forbundet til skjulte features."
+                }
             },
             "reverse": {
                 "title": "Vend om",
@@ -243,12 +320,12 @@
             "rateLimit": "Dette er API er begrænset ved annonym forbindelse. Du kan ordne dette ved at være logget ind."
         },
         "commit": {
-            "title": "Gem ændringer",
+            "title": "Upload til OpenStreetMap",
             "description_placeholder": "Skriv en kort beskrivelse af dit bidrag (påkrævet)",
-            "message_label": "Ændringssætkommentar",
+            "message_label": "Ændringssætkommentarer",
             "upload_explanation": "De ændringer du uploader vil blive synlige på alle kort der bruger OpenStreetMap-data.",
             "upload_explanation_with_user": "Ændringer du uploader under brugernavnet {user} vil blive synlige på alle kort der bruger OpenStreetMap-data.",
-            "save": "Gem",
+            "save": "Upload",
             "cancel": "Annuller",
             "changes": "{count} ændringer",
             "warnings": "Advarsler",
@@ -445,12 +522,12 @@
                 "delete": "Behold slettet",
                 "download_changes": "Eller download dine ændringer.",
                 "done": "Alle konflikter løst!",
-                "help": "En anden bruger ændrede nogle af de kortobjekter du ændrede.\nKlik på hvert af dem for flere oplysninger om konflikten og vælg om dine eller den anden brugers ændringer skal beholdes.\n"
+                "help": "En anden bruger har ændret nogle af de samme kortobjekter som du har ændret\n\nKlik på hvert objekt nedenfor for flere detaljer om konflikten og vælg dem der skal bibeholde\n\ndine ændringer eller den anden brugers ændringer.\n"
             }
         },
         "merge_remote_changes": {
             "conflict": {
-                "deleted": "Dette objekt blev slettet af {user}.",
+                "deleted": "Dette objekt er blevet slettet af {user}.",
                 "location": "Dette objekt blev flyttet af både dig og {user}.",
                 "nodelist": "Punkter blev ændret af både dig og {user}.",
                 "memberlist": "Relationsmedlemmer blev ændret af både dig og {user}.",
@@ -489,10 +566,11 @@
             "used_with": "brugt med {type}"
         },
         "validations": {
+            "disconnected_highway": "Ej forbundet vejsegment",
             "untagged_point": "Punkt uden tags",
             "untagged_line": "Linje uden tags",
             "untagged_area": "Område uden tags",
-            "many_deletions": "Du er ved at slette {n} objekter. Er du sikker på du ønsker at gøre dette? Det vil slette dem fra det kort som alle andre ser på openstreetmap.org.",
+            "many_deletions": "Du er ved at slette {n} objekter. Er du sikker på du vil dette? Dette vil slette dem fra kortet som alle andre ser på openstreetmap.org.",
             "tag_suggests_area": "Tagget {tag} antyder at linjen skulle være et område, men den er ikke et område",
             "untagged_point_tooltip": "Vælg en objekttype der beskriver hvad dette punkt er.",
             "untagged_line_tooltip": "Vælg en objekttype der beskriver hvad slags linje dette er.",
@@ -505,12 +583,6 @@
         },
         "cannot_zoom": "Kan ikke zoome længere ud i nuværende tilstand.",
         "full_screen": "Skift fuld skærmtilstand",
-        "gpx": {
-            "local_layer": "Lokal GPX-fil",
-            "drag_drop": "Træk og slip en .gpx-fil på siden eller klik på knappen til højre for at lede efter en",
-            "zoom": "Zoom til GPX-spor",
-            "browse": "Vælg en .gpx-fil"
-        },
         "mapillary_images": {
             "tooltip": "Gadeniveau billeder fra Mapillary",
             "title": "Billedelag (Mapillary)"
@@ -630,6 +702,15 @@
                 "category-landuse": {
                     "name": "Arealanvendelsesegenskaber"
                 },
+                "category-natural-area": {
+                    "name": "Naturobjekter"
+                },
+                "category-natural-line": {
+                    "name": "Naturobjekter"
+                },
+                "category-natural-point": {
+                    "name": "Naturobjekter"
+                },
                 "category-path": {
                     "name": "Stiegenskaber"
                 },
@@ -703,17 +784,24 @@
                 "address": {
                     "label": "Adresse",
                     "placeholders": {
+                        "block_number": "Bloknummer",
+                        "block_number!jp": "Bloknr.",
                         "city": "By",
+                        "city!vn": "City/By",
                         "conscriptionnumber": "123",
                         "country": "Land",
+                        "county": "Region",
                         "district": "Bydel",
                         "floor": "Etage",
                         "hamlet": "Lille landsby",
                         "housename": "Husnavn",
                         "housenumber": "123",
+                        "housenumber!jp": "Bygningsnr. /Etage nr.",
+                        "neighbourhood": "Kvarter",
                         "place": "Sted",
                         "postcode": "Postnummer",
                         "province": "Landsdel",
+                        "quarter": "Bydel",
                         "state": "Delstat",
                         "street": "Gade",
                         "subdistrict": "Kvarter",
@@ -784,6 +872,20 @@
                 "barrier": {
                     "label": "Type"
                 },
+                "bath/open_air": {
+                    "label": "Friluftsbad"
+                },
+                "bath/sand_bath": {
+                    "label": "Mudderbad"
+                },
+                "bath/type": {
+                    "label": "Specialitet",
+                    "options": {
+                        "foot_bath": "Fodbad",
+                        "hot_spring": "Varme bade",
+                        "onsen": "Japansk varmebade"
+                    }
+                },
                 "beauty": {
                     "label": "Butikstype"
                 },
@@ -819,6 +921,9 @@
                 },
                 "building_area": {
                     "label": "Bygning"
+                },
+                "bunker_type": {
+                    "label": "Type"
                 },
                 "camera/direction": {
                     "label": "Retning (grader urets retning)",
@@ -859,6 +964,9 @@
                         "WNW": "Vest-nordvest",
                         "WSW": "Vest-sydvest"
                     }
+                },
+                "castle_type": {
+                    "label": "Type"
                 },
                 "clock_direction": {
                     "label": "Retning",
@@ -982,6 +1090,10 @@
                 "elevation": {
                     "label": "Højde over havet"
                 },
+                "email": {
+                    "label": "E-mail",
+                    "placeholder": "example@example.com"
+                },
                 "emergency": {
                     "label": "Skadestue"
                 },
@@ -1000,6 +1112,15 @@
                 },
                 "fence_type": {
                     "label": "Type"
+                },
+                "fire_hydrant/position": {
+                    "label": "Placering",
+                    "options": {
+                        "green": "Græsplæne",
+                        "lane": "Vejbane",
+                        "parking_lot": "Parkeringsbås",
+                        "sidewalk": "Fortov"
+                    }
                 },
                 "fire_hydrant/type": {
                     "label": "Type",
@@ -1377,6 +1498,9 @@
                 "place": {
                     "label": "Type"
                 },
+                "plant": {
+                    "label": "Kraftstation"
+                },
                 "population": {
                     "label": "Befolkning"
                 },
@@ -1385,6 +1509,9 @@
                 },
                 "power_supply": {
                     "label": "Eltransformator"
+                },
+                "product": {
+                    "label": "Produkt"
                 },
                 "railway": {
                     "label": "Type"
@@ -1503,9 +1630,11 @@
                     },
                     "placeholder": "Tynde hjul, hjul, offroad..."
                 },
+                "social_facility": {
+                    "label": "Type"
+                },
                 "social_facility_for": {
-                    "label": "Klientel",
-                    "placeholder": "Hjemløse, handicappede, børn, osv."
+                    "label": "Serviceret gruppe"
                 },
                 "source": {
                     "label": "Kilde"
@@ -1521,6 +1650,9 @@
                 },
                 "stars": {
                     "label": "Stjerner"
+                },
+                "step_count": {
+                    "label": "Antal trappetrin"
                 },
                 "stop": {
                     "label": "Stoptype",
@@ -1589,6 +1721,9 @@
                         "flush": "Træk & slip",
                         "pitlatrine": "Latrin"
                     }
+                },
+                "toll": {
+                    "label": "Afgift"
                 },
                 "tourism": {
                     "label": "Type"
@@ -1695,6 +1830,10 @@
                     "name": "Skilift",
                     "terms": "Skilift, Stolelift"
                 },
+                "aerialway/drag_lift": {
+                    "name": "Træklift",
+                    "terms": "Træklift"
+                },
                 "aerialway/gondola": {
                     "name": "Gondol",
                     "terms": "Gondol"
@@ -1702,6 +1841,10 @@
                 "aerialway/magic_carpet": {
                     "name": "Rullebane",
                     "terms": "Rullebane, Skirullebane"
+                },
+                "aerialway/mixed_lift": {
+                    "name": "Blandet lift",
+                    "terms": "Blandet lift"
                 },
                 "aerialway/platter": {
                     "name": "Knaplift",
@@ -1736,7 +1879,7 @@
                 },
                 "aeroway/gate": {
                     "name": "Lufthavnsgate",
-                    "terms": "Lufthavns gate"
+                    "terms": "Lufthavnsgate"
                 },
                 "aeroway/hangar": {
                     "name": "Hangar",
@@ -1870,8 +2013,7 @@
                     "terms": "Domstolsbygning, Domstol, Retsbygning"
                 },
                 "amenity/coworking_space": {
-                    "name": "Kontorfællesskab",
-                    "terms": "Kontorfællesskab"
+                    "name": "Kontorfællesskab"
                 },
                 "amenity/crematorium": {
                     "name": "Krematorium",
@@ -2024,6 +2166,10 @@
                 "amenity/pub": {
                     "name": "Værtshus",
                     "terms": "Værtshus, Pub, Ølstue"
+                },
+                "amenity/public_bath": {
+                    "name": "Offentligt bad",
+                    "terms": "Offentligt bad"
                 },
                 "amenity/public_bookcase": {
                     "name": "Bogkasse",
@@ -2186,6 +2332,10 @@
                 "barrier/bollard": {
                     "name": "Pullert",
                     "terms": "Pullert"
+                },
+                "barrier/border_control": {
+                    "name": "Grænsekontrol",
+                    "terms": "Grænsekontrol, Landegrænsekontrol"
                 },
                 "barrier/cattle_grid": {
                     "name": "Kreaturrist",
@@ -2959,6 +3109,50 @@
                     "name": "Militært område",
                     "terms": "Militært område, Militærbase, Øvelsesterræn"
                 },
+                "landuse/military/airfield": {
+                    "name": "Militærflyveplads",
+                    "terms": "Militærflyveplads, Flyvebase"
+                },
+                "landuse/military/barracks": {
+                    "name": "Barakker",
+                    "terms": "Barakker, Militærbarakker"
+                },
+                "landuse/military/bunker": {
+                    "name": "Militærbunker",
+                    "terms": "Militærbunker, bunker"
+                },
+                "landuse/military/checkpoint": {
+                    "name": "Checkpunkt",
+                    "terms": "Checkpunkt"
+                },
+                "landuse/military/danger_area": {
+                    "name": "Farligt område",
+                    "terms": "Farligt område, Farligt militærområde"
+                },
+                "landuse/military/naval_base": {
+                    "name": "Flådestation",
+                    "terms": "Flådestation, Søværnsbase"
+                },
+                "landuse/military/nuclear_explosion_site": {
+                    "name": "Atomspræningsomårde",
+                    "terms": "Atomspræningsomårde"
+                },
+                "landuse/military/obstacle_course": {
+                    "name": "Forhindringsbane",
+                    "terms": "Forhindringsbane, Militærforhindringsbane"
+                },
+                "landuse/military/office": {
+                    "name": "Militærkontor",
+                    "terms": "Militærkontor"
+                },
+                "landuse/military/range": {
+                    "name": "Militærskydebane",
+                    "terms": "Militærskydebane, Skydebane"
+                },
+                "landuse/military/training_area": {
+                    "name": "Træningsområde",
+                    "terms": "Træningsområde, Militærtræningsområde"
+                },
                 "landuse/orchard": {
                     "name": "Frugtplantage",
                     "terms": "Frugtplantage, Æbleplantage"
@@ -3038,6 +3232,10 @@
                 "leisure/golf_course": {
                     "name": "Golfbane",
                     "terms": "Golfbane, Golfkurser"
+                },
+                "leisure/horse_riding": {
+                    "name": "Ridningsfaciliteter",
+                    "terms": "Ridningsfaciliteter, Hesteridningsfaciliteter"
                 },
                 "leisure/ice_rink": {
                     "name": "Skøjtebane",
@@ -3260,47 +3458,15 @@
                 },
                 "man_made/works": {
                     "name": "Fabrik",
-                    "terms": "Fabrik, Produktionsvirksomhed"
-                },
-                "military/airfield": {
-                    "name": "Flyveplads",
-                    "terms": "Flyveplads"
-                },
-                "military/barracks": {
-                    "name": "Kaserne",
-                    "terms": "Kaserne, barakker"
-                },
-                "military/bunker": {
-                    "name": "Bunker",
-                    "terms": "Bunker, Beskyttelsesrum"
-                },
-                "military/checkpoint": {
-                    "name": "Militært checkpoint",
-                    "terms": "Militært chechpoint, Militæradgangsunkt"
-                },
-                "military/danger_area": {
-                    "name": "Farligt militærområde",
-                    "terms": "Farligt militærområde"
-                },
-                "military/naval_base": {
-                    "name": "Flådebase",
-                    "terms": "Flådebase, Flådestation"
-                },
-                "military/obstacle_course": {
-                    "name": "Forhindringsbane",
-                    "terms": "Forhindringsbane, Militærforhindringsbane"
-                },
-                "military/range": {
-                    "name": "Skydebane",
-                    "terms": "Skydebane, Skydeplads, Militærskydebane"
-                },
-                "military/training_area": {
-                    "name": "Militært træningsområde",
-                    "terms": "Militært træningsområde, Øvelsesterræn"
+                    "terms": "Fabrik, Fremstillingsvirksomhed, Produktionsvirksomhed"
                 },
                 "natural": {
                     "name": "Naturlig",
                     "terms": "Naturlig"
+                },
+                "natural/bare_rock": {
+                    "name": "Klippe",
+                    "terms": "Klippe, Klippeområde"
                 },
                 "natural/bay": {
                     "name": "Bugt",
@@ -3342,9 +3508,17 @@
                     "name": "Højdedrag",
                     "terms": "Højdedrag, Bakketop, Bjergtop"
                 },
+                "natural/ridge": {
+                    "name": "Højderyg",
+                    "terms": "Højderyg, Bjergryg, Bjergkam, Bakkekam"
+                },
                 "natural/saddle": {
                     "name": "Sadel",
                     "terms": "Sadel"
+                },
+                "natural/sand": {
+                    "name": "Sand",
+                    "terms": "Sand"
                 },
                 "natural/scree": {
                     "name": "Talus",
@@ -3413,6 +3587,10 @@
                 "office/company": {
                     "name": "Firmakontor",
                     "terms": "Firmakontor, Selskabskonto"
+                },
+                "office/coworking": {
+                    "name": "Kontorfællesskab",
+                    "terms": "Kontorfællesskab, Fællesskabsarbejdsplads"
                 },
                 "office/educational_institution": {
                     "name": "Uddannelsesinstitution",
@@ -3516,6 +3694,10 @@
                     "name": "Nabolag",
                     "terms": "Nabolag"
                 },
+                "place/square": {
+                    "name": "Plads",
+                    "terms": "Plads, Bytorv"
+                },
                 "place/suburb": {
                     "name": "Bydel",
                     "terms": "Bydel"
@@ -3546,6 +3728,10 @@
                 "power/minor_line": {
                     "name": "Elledning",
                     "terms": "Elledning"
+                },
+                "power/plant": {
+                    "name": "Transformatorgrund",
+                    "terms": "Transformatorgrund, strømtransformatorstationsgrunde"
                 },
                 "power/pole": {
                     "name": "Elmast (telefonmast)",
@@ -4403,6 +4589,10 @@
                 "waterway/water_point": {
                     "name": "Havnedrikkevand",
                     "terms": "Havnedrikkevand, Ferskvand"
+                },
+                "waterway/waterfall": {
+                    "name": "Vandfald",
+                    "terms": "Vandfald"
                 },
                 "waterway/weir": {
                     "name": "Stemmeværk",

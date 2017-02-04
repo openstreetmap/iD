@@ -3,231 +3,787 @@
         "modes": {
             "add_area": {
                 "title": "Areo",
-                "description": "Aldoni parkoj, konstruaĵoj, lagoj aŭ aliaj areoj por la mapo.",
-                "tail": "Klaku sur la mapo por komenci desegni areo, kiel parko, lago, aŭ konstruaĵo."
+                "description": "Aldoni parkojn, konstruaĵojn, lagojn aŭ aliajn areojn al la mapo.",
+                "tail": "Klaku sur la mapo por komenci desegni areon, kiel parkon, lagon aŭ konstruaĵon."
             },
             "add_line": {
                 "title": "Linio",
-                "description": "Aldoni ŝoseoj, stratoj, piediranto vojoj, kanaloj aŭ aliajn liniojn al la mapo.",
-                "tail": "Klaku sur la mapo por komenci desegni vojo, vojo, aŭ itinero."
+                "description": "Aldoni ŝoseojn, stratojn, piedirantajn vojojn, akvovojojn aŭ aliajn liniojn al la mapo.",
+                "tail": "Klaku sur la mapo por komenci desegni straton, vojeton aŭ kurson."
             },
             "add_point": {
                 "title": "Punkto",
-                "description": "Aldoni restoracioj, monumentoj, bildkartoj skatoloj aŭ aliaj punktoj al la mapo.",
+                "description": "Aldoni restoraciojn, monumentojn, poŝtkestojn aŭ aliajn punktojn al la mapo.",
                 "tail": "Klaku sur la mapo por aldoni punkton."
             },
             "browse": {
                 "title": "Foliumi",
-                "description": "Pan kaj zomi la mapon."
+                "description": "Aldirekti kaj pligrandigi la mapon."
             },
             "draw_area": {
-                "tail": "Klaku por aldoni nodoj al via areo. Klaku la unuan nodo fini la areo."
+                "tail": "Klaku por aldoni nodojn al via areo. Klaku la unuan nodo por finigi la areon."
             },
             "draw_line": {
-                "tail": "Klaku por aldoni pli nodoj al la linio. Klaku sur aliaj linioj por konekti al ili, kaj duoble klaki por fino la linion."
+                "tail": "Klaku por aldoni pliajn nodojn al la linio. Klaku sur aliaj linioj por konekti al ili, kaj duoble klaku por finigi la linion."
             }
         },
         "operations": {
             "add": {
                 "annotation": {
-                    "point": "Aldonita punkto.",
-                    "vertex": "Aldonita nodon al vojo.",
-                    "relation": "Aldonita rilato."
+                    "point": "Aldonis punkton.",
+                    "vertex": "Aldonis nodon al linio/areo.",
+                    "relation": "Aldonis rilaton."
                 }
             },
             "start": {
                 "annotation": {
-                    "line": "Komenciĝis linion.",
-                    "area": "Komenciĝis areon."
+                    "line": "Ekigis linion.",
+                    "area": "Ekigis areon."
                 }
             },
             "continue": {
                 "key": "A",
-                "title": "Daŭrigu",
-                "description": "Daŭrigu tiun linion.",
-                "not_eligible": "Neniu linio povas esti daŭrigita tien.",
-                "multiple": "Pluraj linioj povas esti daŭrigita tien. Elekti linion, premu la klavo Shift kaj klaku sur ĝi por elekti ĝin.",
+                "title": "Pluigi",
+                "description": "Pluigi ĉi tiun linion.",
+                "not_eligible": "Neniu linio povas esti pluigita ĉi tie.",
+                "multiple": "Kelkaj linioj povas esti pluigitaj ĉi tie. Por elekti linion, premu la majuskligan klavon kaj klaku linion por ĝin elekti.",
                 "annotation": {
-                    "line": "Daŭre linion.",
-                    "area": "Daŭre areo."
+                    "line": "Pluigis linion.",
+                    "area": "Pluigis areon."
                 }
             },
             "cancel_draw": {
-                "annotation": "Nuligita desegno."
+                "annotation": "Nuligis desegnadon."
             },
             "change_role": {
-                "annotation": "Ŝanĝis la rolo de rilato membron."
+                "annotation": "Ŝanĝis rolon de ano de rilato."
             },
             "change_tags": {
-                "annotation": "Ŝanĝita etikedojn."
+                "annotation": "Ŝanĝis etikedojn."
             },
             "circularize": {
-                "title": "Circularize",
+                "title": "Rondigi",
                 "description": {
-                    "line": "Faru ĉi linio cirkuli.",
-                    "area": "Faru ĉi areon cirkuli."
+                    "line": "Fari ĉi tiun linion ronda.",
+                    "area": "Fari ĉi tiun areon ronda."
                 },
                 "key": "O",
                 "annotation": {
-                    "line": "Farita cirkulero de linio.",
-                    "area": "Farita cirkulero de areo."
-                }
+                    "line": "Rondigis linion.",
+                    "area": "Rondigis areon."
+                },
+                "not_closed": "Ĉi tiu ne povas esti rondigita, ĉar ĝi ne estas cikla.",
+                "too_large": "Ĉi tiu ne povas esti rondigita,  ĉar malsufiĉa parto de ĝi estas nune videbla.",
+                "connected_to_hidden": "Ĉi tiu ne povas esti rondigita, ĉar ĝi estas kunigita al kaŝita objekto."
             },
             "orthogonalize": {
-                "title": "Kvadrata",
+                "title": "Kvadratigi",
                 "description": {
-                    "line": "Kvadrata la anguloj de ĉi tiu linio.",
-                    "area": "Kvadrata la anguloj de ĉi tiu areo."
+                    "line": "Kvadratigi angulojn de ĉi tiu linio.",
+                    "area": "Kvadratigi angulojn de ĉi tiu areo."
                 },
                 "key": "S",
                 "annotation": {
                     "line": "Kvadratigis angulojn de linio.",
                     "area": "Kvadratigis angulojn de areo."
                 },
-                "not_squarish": "Ĉi tiu ne povas esti kvadratigita ĉar ĝi ne estas kvadratema."
+                "not_squarish": "Ĉi tiu ne povas esti kvadratigita, ĉar ĝi ne estas kvadratema.",
+                "too_large": "Ĉi tiu ne povas esti kvadratigita,  ĉar malsufiĉa parto de ĝi estas nune videbla.",
+                "connected_to_hidden": "Ĉi tiu ne povas esti kvadratigita, ĉar ĝi estas kunigita al kaŝita objekto."
             },
             "straighten": {
                 "title": "Rektigi",
                 "description": "Rektigi ĉi tiun linion.",
                 "key": "S",
                 "annotation": "Rektigis linion.",
-                "too_bendy": "Ĉi tiu linio ne povas esti rektigita ĉar ĝi multe kurbiĝas.",
-                "connected_to_hidden": "Ĉi tiu linio ne povas esti rektigita ĉar ĝi estis konektita al kaŝita aĵo."
+                "too_bendy": "Ĉi tiu linio ne povas esti rektigita, ĉar ĝi tro multe kurbiĝas.",
+                "connected_to_hidden": "Ĉi tiu linio ne povas esti rektigita, ĉar ĝi estis kunigita al kaŝita objekto."
             },
             "delete": {
                 "title": "Forigi",
-                "description": "Forigi objekton permanente.",
+                "description": {
+                    "single": "Forigi ĉi tiun objekton neinversigeble.",
+                    "multiple": "Forigi ĉi tiujn objektojn neinversigeble."
+                },
                 "annotation": {
                     "point": "Forigis punkton.",
-                    "vertex": "Forigis nodon el vojo.",
-                    "line": "Forigita linion.",
+                    "vertex": "Forigis nodon el linio/areo.",
+                    "line": "Forigis linion.",
                     "area": "Forigis areon.",
                     "relation": "Forigis rilaton.",
                     "multiple": "Forigis {n} objektojn."
                 },
-                "incomplete_relation": "Ĉi tiu aĵo ne povas esti forigita ĉar ĝi ne estas jam tute elŝutita."
+                "incomplete_relation": {
+                    "single": "Ĉi tiu objekto ne povas esti forigita, ĉar ĝi ne estas elŝutita tute.",
+                    "multiple": "Ĉi tiuj objektoj ne povas esti forigitaj, ĉar ili ne estas elŝutitaj tute."
+                },
+                "part_of_relation": {
+                    "single": "Ĉi tiu objekto ne povas esti forigita, ĉar ĝi estas parto de pli granda rilato. Vi devas unue forigi ĝin el la rilato.",
+                    "multiple": "Ĉi tiuj objektoj ne povas esti forigitaj, ĉar ili estas partoj de pli grandaj rilatoj. Vi devas unue forigi ilin el la rilatoj."
+                },
+                "connected_to_hidden": {
+                    "single": "Ĉi tiu objekto ne povas esti forigita, ĉar ĝi estas kunigita al kaŝita objekto.",
+                    "multiple": "Ĉi tiuj objektoj ne povas esti forigitaj, ĉar ili estas kunigitaj al kaŝitaj objektoj."
+                }
+            },
+            "add_member": {
+                "annotation": "Aldonis anon al rilato."
+            },
+            "delete_member": {
+                "annotation": "Forigis anon el rilato."
             },
             "connect": {
                 "annotation": {
-                    "point": "Konektigis vojon al punkto.",
-                    "vertex": "Konektigis vojon al alia vojo.",
-                    "line": "Konektigis vojon al linio.",
-                    "area": "Konektigis vojon al areo."
+                    "point": "Kunigis linion/areon al punkto.",
+                    "vertex": "Kunigis linion/areon al alia linio.",
+                    "line": "Kunigis linion/areon al linio.",
+                    "area": "Kunigis linion/areon al areo."
                 }
             },
             "disconnect": {
-                "title": "Malkonekti",
-                "annotation": "Malkonektitaj linioj/areoj."
+                "title": "Malkunigi",
+                "description": "Malkunigi ĉi tiujn liniojn/areojn aparten.",
+                "key": "D",
+                "annotation": "Malkunigis liniojn/areojn.",
+                "not_connected": "Ĉi tie ne estas sufiĉe da linioj/areoj por malkunigi.",
+                "connected_to_hidden": "Ĉi tiu ne povas esti malkunigita, ĉar ĝi estas kunigita al kaŝita objekto.",
+                "relation": "Ĉi tiu ne povas esti malkunigita, ĉar ĝi kunigas anoj de rilato."
+            },
+            "merge": {
+                "title": "Kunfandi",
+                "description": "Kunfandi ĉi tiujn objektojn.",
+                "key": "C",
+                "annotation": "Kunfandis {n} objektojn.",
+                "not_eligible": "Ĉi tiuj objektoj ne povas esti kunfanditaj.",
+                "not_adjacent": "Ĉi tiuj objektoj ne povas esti kunfanditaj, ĉar ili ne estas kunigitaj.",
+                "restriction": "Ĉi tiuj objektoj ne povas esti kunfanditaj, ĉar almenaŭ unu estas ano de rilato \"{relation}\".",
+                "incomplete_relation": "Ĉi tiuj objektoj ne povas esti kunfanditaj, ĉar almenaŭ unu ne estas elŝutita tute.",
+                "conflicting_tags": "Ĉi tiuj objektoj ne povas esti kunfanditaj, ĉar iuj el iliaj etikedoj havas konfliktajn valorojn."
             },
             "move": {
                 "title": "Movi",
-                "description": "Movi ĉi tio al malsama loko.",
+                "description": {
+                    "single": "Movi ĉi tiun objekton al alia loko.",
+                    "multiple": "Movi ĉi tiujn objektojn al alia loko."
+                },
                 "key": "M",
                 "annotation": {
                     "point": "Movis punkton.",
-                    "vertex": "Movis nodon en vojo.",
+                    "vertex": "Movis nodon en linio/areo.",
                     "line": "Movis linion.",
                     "area": "Movis areon.",
-                    "multiple": "Movis multajn objektojn."
+                    "multiple": "Movis kelkajn objektojn."
+                },
+                "incomplete_relation": {
+                    "single": "Ĉi tiu objekto ne povas esti movita, ĉar ĝi ne estas elŝutita tute.",
+                    "multiple": "Ĉi tiuj objektoj ne povas esti movitaj, ĉar ili ne estas elŝutitaj tute."
+                },
+                "too_large": {
+                    "single": "Ĉi tiu objekto ne povas esti movita, ĉar malsufiĉa parto de ĝi estas nune videbla.",
+                    "multiple": "Ĉi tiuj objektoj ne povas esti movitaj, ĉar malsufiĉaj partoj de ili estas nune videblaj."
+                },
+                "connected_to_hidden": {
+                    "single": "Ĉi tiu objekto en povas esti movita, ĉar ĝi estas kunigita al kaŝita objekto.",
+                    "multiple": "Ĉi tiuj objektoj ne povas esti movitaj, ĉar ili estas kunigitaj al kaŝitaj objektoj."
+                }
+            },
+            "reflect": {
+                "title": "speguli",
+                "description": {
+                    "long": {
+                        "single": "Speguli ĉi tiun objekton laŭ ĝia longa akso.",
+                        "multiple": "Speguli ĉi tiujn objektojn laŭ iliaj longaj aksoj."
+                    },
+                    "short": {
+                        "single": "Speguli ĉi tiun objekton laŭ ĝia mallonga akso.",
+                        "multiple": "Speguli ĉi tiujn objektojn laŭ iliajn mallongaj aksoj."
+                    }
+                },
+                "key": {
+                    "long": "T",
+                    "short": "Y"
+                },
+                "annotation": {
+                    "long": {
+                        "single": "Spegulis objekton laŭ ĝia longa akso.",
+                        "multiple": "Spegulis kelkajn objektojn laŭ iliaj longaj aksoj."
+                    },
+                    "short": {
+                        "single": "Spegulis objekton laŭ ĝia mallonga akso.",
+                        "multiple": "Spegulis kelkajn objektojn laŭ iliaj mallongaj aksoj."
+                    }
+                },
+                "incomplete_relation": {
+                    "single": "Ĉi tiu objekto ne povas esti spegulita, ĉar ĝi ne estas elŝutita tute.",
+                    "multiple": "Ĉi tiuj objektoj ne povas esti spegulitaj, ĉar ili ne estas elŝutitaj tute."
+                },
+                "too_large": {
+                    "single": "Ĉi tiu objekto ne povas esti spegulita, ĉar malsufiĉa parto de ĝi estas nune videbla.",
+                    "multiple": "Ĉi tiuj objektoj ne povas esti spegulitaj, ĉar malsufiĉaj partoj de ili estas nune videblaj."
+                },
+                "connected_to_hidden": {
+                    "single": "Ĉi tiu objekto ne povas esti spegulita, ĉar ĝi estas kunigita al kaŝita objekto.",
+                    "multiple": "Ĉi tiuj objektoj ne povas esti spegulitaj, ĉar ili estas kunigitaj al kaŝitaj objektoj."
                 }
             },
             "rotate": {
-                "title": "Rotacio",
-                "description": "Rotacii tiu objekto ĉirkaŭ ĝia centra punkto.",
+                "title": "Turni",
+                "description": {
+                    "single": "Turni ĉi tiun objekton laŭ ĝia centra punkto.",
+                    "multiple": "Turni ĉi tiujn objektojn laŭ iliaj centraj punktoj."
+                },
+                "key": "R",
                 "annotation": {
-                    "line": "Turnita linion."
+                    "line": "Turnis linion.",
+                    "area": "Turnis areon.",
+                    "multiple": "Turnis kelkajn objektojn."
+                },
+                "incomplete_relation": {
+                    "single": "Ĉi tiu objekto ne povas esti turnita, ĉar ĝi ne estas elŝutita tute.",
+                    "multiple": "Ĉi tiuj objektoj ne povas esti turnitaj, ĉar ili ne estas elŝutitaj tute."
+                },
+                "too_large": {
+                    "single": "Ĉi tiu objekto ne povas esti turnita, ĉar malsufiĉa parto de ĝi estas nune videbla.",
+                    "multiple": "Ĉi tiuj objektoj ne povas esti turnitaj, ĉar malsufiĉaj partoj de ili estas nune videblaj."
+                },
+                "connected_to_hidden": {
+                    "single": "Ĉi tiu objekto en povas esti turnita, ĉar ĝi estas kunigita al kaŝita objekto.",
+                    "multiple": "Ĉi tiuj objektoj ne povas esti turnitaj, ĉar ili estas kunigitaj al kaŝitaj objektoj."
                 }
             },
             "reverse": {
-                "title": "dorsflanko",
-                "key": "V"
+                "title": "Inversigi",
+                "description": "Igi ĉi tiun linion direkti al inversa direkto.",
+                "key": "V",
+                "annotation": "Inversigis linion."
             },
             "split": {
-                "key": "X"
+                "title": "Dividi",
+                "description": {
+                    "line": "Disduigi ĉi tiun linion el ĉi tiu nodo.",
+                    "area": "Disduigi limon de ĉi tiu areo.",
+                    "multiple": "Disduigi liniojn aŭ limojn de areo el ĉi tiu nodo."
+                },
+                "key": "X",
+                "annotation": {
+                    "line": "Disduigis linion.",
+                    "area": "Disduigis limon de areo.",
+                    "multiple": "Disduigis {n} liniojn aŭ limojn de areo."
+                },
+                "not_eligible": "Linioj ne povas esti dividitaj ĉe siaj komencoj aŭ finoj.",
+                "multiple_ways": "Ĉi tie estas tro multe da linioj por dividi.",
+                "connected_to_hidden": "Ĉi tiu ne povas esti dividita, ĉar ĝi estas kunigita al kaŝita objekto."
+            },
+            "restriction": {
+                "help": {
+                    "select": "Klaku por elekti segmenton de vojo.",
+                    "toggle": "Klaku por baskuligi turnaj limigojn.",
+                    "toggle_on": "Klaku por aldoni limigon \"{restriction}\".",
+                    "toggle_off": "Klaku por forigi limigon \"{restriction}\"."
+                },
+                "annotation": {
+                    "create": "Aldonis turnan limigon.",
+                    "delete": "Forigis turnan limigon."
+                }
             }
         },
+        "undo": {
+            "tooltip": "Malfari: {action}",
+            "nothing": "Nenio por malfari."
+        },
+        "redo": {
+            "tooltip": "Refari: {action}",
+            "nothing": "Nenio por refari."
+        },
+        "tooltip_keyhint": "Fulmoklavo:",
+        "browser_notice": "Ĉi tiu redaktilo estas subtenata en Firefox, Chrome, Safari, Opera, kaj Internet Explorer 11 kaj pli novaj. Bonvolu ĝisdatigi vian foliumilon aŭ uzu map-redaktilon Potlatch 2.",
         "translate": {
             "translate": "Traduki",
-            "localized_translation_label": "Multlingva nomon"
+            "localized_translation_label": "Plurlingva nomo",
+            "localized_translation_language": "Elektu nomon",
+            "localized_translation_name": "Nomo"
+        },
+        "zoom_in_edit": "Pligrandigu por redakti",
+        "login": "ensaluti",
+        "logout": "elsaluti",
+        "loading_auth": "Konektado al OpenStreetMap...",
+        "report_a_bug": "Raporti eraron",
+        "help_translate": "Helpi traduki",
+        "feature_info": {
+            "hidden_warning": "{count} kaŝitaj objektoj",
+            "hidden_details": "Ĉi tiuj objektoj estas nune kaŝitaj: {details}"
+        },
+        "status": {
+            "error": "Ne povas konekti al API.",
+            "offline": "API estas nekonektita. Bonvolu reprovi poste.",
+            "readonly": "API estas nurlega. Vi devos atendi por konservi ŝanĝojn.",
+            "rateLimit": "API limigas anonimajn konektojn. Vi povas preventi tion per ensaluti."
         },
         "commit": {
-            "changes": "{count} ŝanĝoj"
+            "title": "Alŝuti al OpenStreetMap",
+            "description_placeholder": "Konciza priskribo de viaj kontribuaĵoj (nepra)",
+            "message_label": "Ŝanĝara komento",
+            "upload_explanation": "Ŝanĝoj alŝutotaj de vi estos videblaj sur ĉiuj mapoj, kiuj uzas datumojn de OpenStreetMap.",
+            "upload_explanation_with_user": "Ŝanĝoj alŝutataj kiel {user} estos videblaj sur ĉiuj mapoj, kiuj uzas datumojn de OpenStreetMap.",
+            "save": "Alŝuti",
+            "cancel": "Nuligi",
+            "changes": "{count} ŝanĝoj",
+            "warnings": "Avertoj",
+            "modified": "Ŝanĝita",
+            "deleted": "Forigita",
+            "created": "Kreita",
+            "about_changeset_comments": "Pri ŝanĝaraj komentoj",
+            "google_warning": "Vi menciis Google en ĉi tiu komento: memoru ke kopiado de datumoj el Google Maps estas absolute malpermesata.",
+            "google_warning_link": "http://www.openstreetmap.org/copyright/eo"
+        },
+        "contributors": {
+            "list": "Redaktita de {users}",
+            "truncated_list": "Redaktita de {users} kaj {count} aliaj"
+        },
+        "infobox": {
+            "selected": "{n} elektitaj",
+            "geometry": "Geometrio",
+            "closed": "fermita",
+            "center": "Centro",
+            "perimeter": "Ĉirkaŭmezuro",
+            "length": "Longo",
+            "area": "Areo",
+            "centroid": "Pezcentro",
+            "location": "Pozicio",
+            "metric": "Metraj",
+            "imperial": "Imperiaj"
+        },
+        "geometry": {
+            "point": "punkto",
+            "vertex": "vertico",
+            "line": "linio",
+            "area": "areo",
+            "relation": "rilato"
+        },
+        "geocoder": {
+            "search": "Serĉi tutmonde...",
+            "no_results_visible": "Neniuj rezultoj en videbla map-areo",
+            "no_results_worldwide": "Neniuj rezultoj trovitaj"
+        },
+        "geolocate": {
+            "title": "Montri mian pozicion",
+            "locating": "Trovado de pozicio, bonvolu atendi..."
         },
         "inspector": {
+            "no_documentation_combination": "Estas neniu disponebla dokumentaro pri ĉi tiu kombino de etikedoj",
+            "no_documentation_key": "Estas neniu disponebla dokumentaro pri ĉi tiu ŝlosilo",
+            "documentation_redirect": "Ĉi tiu dokumentara paĝo estis movita al nova loko",
+            "show_more": "Montri pli",
+            "view_on_osm": "Vidi en openstreetmap.org",
+            "all_fields": "Ĉiuj kampoj",
+            "all_tags": "Ĉiuj etikedoj",
+            "all_members": "Ĉiuj anoj",
+            "all_relations": "Ĉiuj rilatoj",
+            "new_relation": "Nova rilato...",
+            "role": "Rolo",
+            "choose": "Elektu specon de objekto",
+            "results": "{n} rezultoj por {search}",
             "reference": "Vidi en la vikio de OpenStreetMap",
+            "back_tooltip": "Ŝanĝi objekton",
+            "remove": "Forigi",
+            "search": "Serĉi",
+            "multiselect": "Elektitaj objektoj",
+            "unknown": "Nekonata",
+            "incomplete": "<ne elŝutita>",
+            "feature_list": "Serĉi objektojn",
+            "edit": "Redakti objekton",
             "check": {
                 "yes": "Jes",
                 "no": "Ne"
             },
-            "way": "Vojo"
+            "add": "Aldoni",
+            "none": "Neniu",
+            "node": "Nodo",
+            "way": "Linio",
+            "relation": "Rilato",
+            "location": "Pozicio",
+            "add_fields": "Aldoni kampon:"
+        },
+        "background": {
+            "title": "Fono",
+            "description": "Fonaj agordoj",
+            "percent_brightness": "Heleco {opacity}%",
+            "none": "Neniu",
+            "best_imagery": "Plej bona fonto de fotaro por ĉi tiu loko",
+            "switch": "Baskuli reen al ĉi tiu fono",
+            "custom": "Propra",
+            "custom_button": "Redakti propran fonon",
+            "custom_prompt": "Entajpu URL-on de kaheloj. Ĝustaj ĵetonoj enhavas {zoom}, {x}, {y} por Z/X/Y koordinatoj kaj {u} por ĉiu map-kvarilo.",
+            "fix_misalignment": "Ĝustigi fotaran deŝovon",
+            "imagery_source_faq": "De kie ĉi tiu fotaro devenas?",
+            "reset": "restarigi",
+            "offset": "Trenu ie ajn ene griza kampo sube por korekti fotaran deŝovon aŭ entajpu valorojn de deŝovo en metroj.",
+            "minimap": {
+                "description": "Mapeto",
+                "tooltip": "Montri malgrandigitan mapon por helpi trovi nune montratan areon."
+            }
+        },
+        "map_data": {
+            "title": "Map-datumoj",
+            "description": "Map-datumoj",
+            "data_layers": "Datum-tavoloj",
+            "fill_area": "Plenigi areojn",
+            "map_features": "Map-objektoj",
+            "autohidden": "Ĉi tiuj objektoj estis aŭtomate kaŝitaj, ĉar tro multe da ili montriĝus sur ekrano. Vi povas pligrandigi por redakti ilin."
         },
         "feature": {
             "points": {
                 "description": "Punktoj",
-                "tooltip": "Interesigantaj punktoj"
+                "tooltip": "Interesaj ejoj"
+            },
+            "traffic_roads": {
+                "description": "Trafikaj vojoj",
+                "tooltip": "Aŭtovojoj, stratoj, ktp."
+            },
+            "service_roads": {
+                "description": "Aliraj vojoj",
+                "tooltip": "Aliraj vojoj, alveturoj al parkumejoj, kampaj vojoj, ktp."
+            },
+            "paths": {
+                "description": "Vojetoj",
+                "tooltip": "Trotuaroj, irejoj, biciklaj vojoj, ktp."
+            },
+            "buildings": {
+                "description": "Konstruaĵoj",
+                "tooltip": "Konstruaĵoj, ŝirmejoj, garaĝoj, ktp."
+            },
+            "landuse": {
+                "description": "Utilkampoj",
+                "tooltip": "Arbaroj, agrokulturaj terenoj, parkoj, privatdomaj aŭ oficejaj terenoj, ktp."
+            },
+            "boundaries": {
+                "description": "Limoj",
+                "tooltip": "Administraj limoj"
+            },
+            "water": {
+                "description": "Akvejoj",
+                "tooltip": "Riveroj, lagoj, lagetoj, basenoj, ktp."
+            },
+            "rail": {
+                "description": "Fervojoj",
+                "tooltip": "Fervojoj"
+            },
+            "power": {
+                "description": "Elektrejoj",
+                "tooltip": "Elektraj kondukiloj, elektrocentraloj, elektrosubcentraloj, ktp."
+            },
+            "past_future": {
+                "description": "Malestantaj",
+                "tooltip": "Proponitaj, dum konstruado, forlasitaj, ruinigitaj, ktp."
             },
             "others": {
-                "description": "Aliaj"
+                "description": "Aliaj",
+                "tooltip": "Ĉiuj aliaj"
             }
         },
+        "area_fill": {
+            "wireframe": {
+                "description": "Nenia plenigo (krado)",
+                "tooltip": "Aktivigo de krada reĝimo igas vidon de fona fotaro pli facila."
+            },
+            "partial": {
+                "description": "Parta plenigo",
+                "tooltip": "Areoj estas bildigataj plenigitaj nur ĉirkaŭ iliaj enaj randoj. (konsilinda por komencantaj mapigantoj)"
+            },
+            "full": {
+                "description": "Plena plenigo",
+                "tooltip": "Areoj estas bildigataj tute plenigitaj."
+            }
+        },
+        "restore": {
+            "heading": "Vi havas nekonservitajn ŝanĝojn",
+            "description": "Ĉu vi volas restarigi nekonservitajn ŝanĝojn de antaŭa redaktada seanco?",
+            "restore": "Restarigi",
+            "reset": "Rekomencigi"
+        },
+        "save": {
+            "title": "Konservi",
+            "help": "Konservi ŝanĝojn al OpenStreetMap kaj igi ilin videblaj por aliaj uzantoj.",
+            "no_changes": "Neniuj ŝanĝoj por konservi.",
+            "error": "Eraroj okazis dum provado de konservado",
+            "status_code": "Servilo revenigis statan kodon {code}",
+            "unknown_error_details": "Bonvolu certiĝi, ke vi estas konektita al la Interreto.",
+            "uploading": "Alŝutado de ŝanĝoj al OpenStreetMap.",
+            "unsaved_changes": "Vi havas nekonservitajn ŝanĝojn",
+            "conflict": {
+                "header": "Solvi konfliktajn redaktojn",
+                "count": "Konflikto {num} el {total}",
+                "previous": "< Antaŭa",
+                "next": "Sekva >",
+                "keep_local": "Konservi miajn",
+                "keep_remote": "Uzi iliajn",
+                "restore": "Restarigi",
+                "delete": "Lasi forigitajn",
+                "download_changes": "Aŭ elŝuti viajn ŝanĝojn.",
+                "done": "Ĉiuj konfliktoj solvitaj!",
+                "help": "Alia uzanto ŝanĝis iujn de samaj map-objektoj kiel vi.\nKlaku ĉiun objekton sube por pli da detaloj pri konflikto kaj decidu ĉu vi volas teni viajn ŝanĝojn aŭ ĉu ŝanĝojn de alia uzanto.\n"
+            }
+        },
+        "merge_remote_changes": {
+            "conflict": {
+                "deleted": "Ĉi tiu objekto estas forigita de {user}.",
+                "location": "Ĉi tiu objekto estas movita de ambaŭ vi kaj {user}.",
+                "nodelist": "Nodoj estas ŝanĝitaj de ambaŭ vi kaj {user}.",
+                "memberlist": "Anoj de rilato estas ŝanĝitaj de ambaŭ vi kaj {user}.",
+                "tags": "Vi ŝanĝis la etikedon <b>{tag}</b> al \"{local}\" kaj {user} ŝanĝis ĝin al \"{remote}\"."
+            }
+        },
+        "success": {
+            "edited_osm": "Redaktis OSM!",
+            "just_edited": "Vi ĵus redaktis OpenStreetMap!",
+            "view_on_osm": "Montri en OSM",
+            "facebook": "Kunhavigi per Fejsbuko",
+            "twitter": "Kunhavigi per Twitter",
+            "google": "Kunhavigi per Google+",
+            "help_html": "Viaj ŝanĝoj povos aperi en \"Norma\" tavolo post kelkaj minutoj. Aktualigo de aliaj tavoloj kaj aliaj elementoj povus okupiĝi pli da tempo.",
+            "help_link_text": "Detaloj"
+        },
+        "confirm": {
+            "okay": "Bone",
+            "cancel": "Nuligi"
+        },
+        "splash": {
+            "welcome": "Bonvenon al la OpenStreetMap-redaktilo 'iD'",
+            "text": "La redaktilo 'iD' estas afabla, sed potenca ilo por kontribui al la plej bona libera mondmapo. Ĉi tiu estas versio {version}. Por pli da informoj vidu {website} kaj bonvolu raporti erarojn per {github}.",
+            "walkthrough": "Malfermi gvidilon",
+            "start": "Redakti nun"
+        },
+        "source_switch": {
+            "live": "viva",
+            "lose_changes": "Vi havas nekonservitajn ŝanĝojn. Kiam vi ŝanĝos map-servilon, la ŝanĝoj ne konserviĝos. Ĉu vi certe volas ŝanĝi servilon?",
+            "dev": "disvolvata"
+        },
+        "tag_reference": {
+            "description": "Priskribo",
+            "on_wiki": "{tag} en OSM-vikio",
+            "used_with": "uzata kun {type}"
+        },
+        "validations": {
+            "disconnected_highway": "Nekonektita vojo",
+            "disconnected_highway_tooltip": "Vojoj devas esti konektitaj al aliaj vojoj.",
+            "untagged_point": "Senetikeda punkto",
+            "untagged_line": "Senetikeda linio",
+            "untagged_area": "Senetikeda areo",
+            "untagged_relation": "Senetikeda rilato",
+            "many_deletions": "Vi forigas {n} elementojn. Ĉu vi certe volas fari ĉi tion? Ĉi tio forigos ilin el la mapo, kiun ĉiuj vidas je openstreetmap.org.",
+            "tag_suggests_area": "La etikedo {tag} indikas, ke linio estu areo, sed ĝi ne estas areo",
+            "untagged_point_tooltip": "Elektu specon de objekto, kiu priskribas ĉi tiun punkton.",
+            "untagged_line_tooltip": "Elektu specon de objekto, kiu priskribas ĉi tiun linion.",
+            "untagged_area_tooltip": "Elektu specon de objekto, kiu priskribas ĉi tiun areon.",
+            "untagged_relation_tooltip": "Elektu specon de objekto, kiu priskribas ĉi tiun rilaton.",
+            "deprecated_tags": "Evitindaj etikedoj: {tags}"
+        },
+        "zoom": {
+            "in": "Pligrandigi",
+            "out": "Malgrandigi"
+        },
+        "cannot_zoom": "Ne povas plie plibonigi en nuna reĝimo.",
+        "full_screen": "Baskuligi plenekranon",
+        "gpx": {
+            "local_layer": "Loka dosiero",
+            "drag_drop": "Ŝovu kaj demetu .gpx, geojson aŭ .kml dosieron sur la paĝon, aŭ klaku la butonon dekstre por foliumi",
+            "zoom": "Pligrandigi tavolon",
+            "browse": "Esplori por dosieron"
+        },
+        "mapillary_images": {
+            "tooltip": "Strat-nivelaj fotoj el Mapillary",
+            "title": "Fotara surtavolo (Mapillary)"
+        },
+        "mapillary_signs": {
+            "tooltip": "Trafiksignoj el Mapillary (postulas 'fotaran surtavolon' aktivan)",
+            "title": "Trafiksigna surtavolo (Mapillary)"
+        },
+        "mapillary": {
+            "view_on_mapillary": "Montri ĉi tiun bildon en Mapillary"
+        },
         "help": {
-            "title": "Helpo"
+            "title": "Helpo",
+            "help": "# Helpo\n\nĈi tiu estas redaktilo de [OpenStreetMap](http://www.openstreetmap.org/) - la libera kaj redaktebla mondmapo. Vi povas ĝin uzi por aldoni kaj ĝisdatigi datumojn pri via ĉirkaŭaĵo, farante malfermkodan kaj malferm-datuman mapon de la mondo pli bona por ĉiuj.\n\nRedaktoj, kiujn vi faras sur ĉi tiu mapo estos videblaj por ĉiu, kiu uzas OpenStreetMap. Por fari redakton, vi devos [ensaluti](https://www.openstreetmap.org/login).\n\nLa [redaktilo 'iD'](http://ideditor.com/) estas kunlabora projekto, kies [fontkodo estas disponebla en GitHub](https://github.com/openstreetmap/iD).\n",
+            "editing_saving": "# Redaktado kaj konservado\n\nĈi tiu redaktilo estas destinita por labori ĝenerale enrete, kaj vi nun uzas ĝin per retejo.\n\n### Elektado de objektoj\n\nPor elekti map-objekton - kiel vojon aŭ interesejon - klaku ĝin sur la mapo. Tio ĉi markos elektitan objekton, malfermos panelon kun detaloj pri ĝi, kaj montros menuon de agoj pri objekto.\n\nPor elekti kelkajn objektojn, premtenu 'majusklan' klavon. Tiam aŭ klaku objektojn, kiujn vi volas elekti, aŭ trenu sur mapo por desegni rektangulon. Tiel vi desegnos zonon kaj elektos ĉiujn punktojn ene.\n\n### Konservado de redaktoj\n\nKiam vi estas ŝanĝanta ion, kiel redakti vojojn, konstruaĵojn kaj lokoj, tiuj ŝanĝoj estas konservataj loke antaŭ vi konservos ilin en servilo. Ne klopodu, se vi eraras - vi povas malfari ŝanĝojn klakante butonon 'malfari' kaj refari klakante butonon 'refari'.\n\nKlaku 'Konservi' por fini grupon da redaktoj, ekzemple vi fine mapigis terenon de urbo kaj vi volas komenci novan terenon. Vi havos ŝancon por kontroli kion vi estos farinta kaj la redaktilo montros uzeblajn konsilojn se io povus esti malĝusta.\n\nSe ĉio ŝajnos ĝuste, vi povos entajpi etan komenton eksplikantan faritajn ŝanĝojn, klaku 'Konservi' por publikigi viajn redaktojn al [OpenStreetMap.org](http://www.openstreetmap.org/), kie ili estos videblaj por ĉiuj aliaj uzantoj kaj pretaj por plia plibonigo.\n\nSe vi ne povas fini viajn redaktojn dum unufoje, vi povas fermi fenestron kun redaktilo, kaj reveni poste (ĉe sama foliumilo kaj komputilo) kaj la redaktilo restarigos vian laboron.\n\n### Uzado de redaktilo\n\nListon de disponeblaj fulmoklavoj oni trovos [ĉi tie](http://wiki.openstreetmap.org/wiki/ID/Shortcuts).\n",
+            "roads": "# Vojoj\n\nVi povas krei, korekti kaj forigi vojojn per ĉi tiu redaktilo. Vojo povas esti de iu ajn speco: piediradaj vojetoj, aŭtovojoj, biciklvojoj, kaj pli - ĉiu regule uzata vojo estas mapiginda.\n\n### Elektado\n\nKlaku vojon por ĝin elekti. Ĝia konturo ekvidebliĝos, kune kun eta ilara menuo sur la mapo kaj flanka breto montranta pli da informoj pri la vojo.\n\n### Redaktado\n\nOfte vi vidos vojojn, kiuj ne estos alĝustigitaj al la malantaŭa fotaro aŭ al GPS-spuro. Vi povas korekti tiujn vojojn, do ili troviĝos en ĝusta loko.\n\nUnue klaku vojon, kiun vi volas ŝanĝi. Tio ĉi markos ĝin kaj montros kontrolpunktojn laŭlonge de ĝi, kiujn vi povas treni al pli bonaj lokoj. Se vi volas aldoni novan kontrolpunkton por plidetaligi, duoble klaku parton de vojo sen nodo kaj ĝi estos aldonita.\n\nSe vojo estas konektita al alia vojo, sed ili ne ĝuste kunigitaj sur la mapo, vi povas treni unu el iliaj kontrolpunktoj sur alian vojon por kunigi ilin. Konektado de vojoj estas grava por la mapo kaj necesa por liveri navigadon.\n\nVi ankaŭ povas klaki ilon 'Movi' aŭ premu fulmoklavon 'M' por movi la tutan vojon per unu fojo kaj klaki denove por konservi ĉi tiun agon.\n\n### Forigado\n\nSe vojo estas tute erara - vi vidas, ke ĝi ne ekzistas sur satelita fotaro kaj eĉ vi konfirmis enloke, ke ĝi ne ekzistas - vi povas ĝin forigi el la mapo. Estu singarda dum forigado de objektoj - kiel ĉiu alia redakto, rezultoj estos videblaj al ĉiuj kaj sputinika fotaro estas ofte neĝisdata, do vojo simple povus esti ĵus konstruita.\n\nVi povas forigi vojon per klaki ĝin por ĝin elekti, sekve klaku piktogramon de rubujo aŭ premu forigan klavon.\n\n### Kreado\n\nEble vi trovis, ke ie povas esti vojon, tamen ĝi ne troviĝas sur la mapo? Klaku piktogramon de linio ĉe supra maldekstra angulo aŭ premu fulmoklavon '2' por komenci desegni linion.\n\nKlaku komencon de la vojo sur mapo por komenci desegni. Se vojo disiĝas el ekzistanta vojo, komencu per klaki lokon, kie ili konektiĝas.\n\nSekve klaku punktojn laŭlonge de vojo tiel, kiel ili formiĝas ĝusta kurso laŭ satelita fotaro aŭ GPS. Se desegnata vojo interkruciĝas kun alia vojo, konektu ilin per klaki sekcopunkton. Kiam vi finos desegni, duoble klaku aŭ premu enen-klavon.\n",
+            "gps": "# GPS\n\nKolektitaj GPS-spuroj estas valoraj fontoj de datumoj por OpenStreetMap. Ĉi tiu redaktilo subtenas lokajn spurojn - .gpx dosierojn en via loka komputilo. Vi povas kolekti tiajn GPS-spurojn per multe da poŝtelefonaj aplikaĵoj aŭ per persona GPS-a aparato.\n\nPor pli da informoj kiel fari GPS-an esploron, legu [mapigado per poŝtelefono, GPS aŭ papero](http://learnosm.org/en/mobile-mapping/) (malesperante).\n\nPor uzi GPX-spuron por mapigadon, ŝovu kaj demetu GPX-dosieron sur la map-redaktilon. Se ĝi estos rekonita, ĝi estos aldonita al la mapo kiel helpurpura linio. Klaku menuon 'Map-datumoj' ĉe dekstre  por aktivigi, malaktivigi aŭ pligrandigi al ĉi tiu nova GPX-a tavolo.\n\nGPX-spuro ne estas rekte alŝutita al OpenStreetMap - la plej bona maniero por uzi ĝin estas vidiĝi ĝin sur la mapo por desegni iujn objektojn kaj ankaŭ [alŝuti ĝin al OpenStreetMap](http://www.openstreetmap.org/trace/create)por ke aliaj uzantoj povos uzi ĝin.\n",
+            "imagery": "# Fotaro\n\nAerfotaro estas grava fonto por mapigado. Kombino de aerfotoj, satelitaj fotoj kaj libere kreeblaj fontoj estas disponebla en la redaktilo per menuo 'Fonaj agordoj' ĉe dekstre.\n\nImplicite satelita tavolo de [Bing Mapoj](http://www.bing.com/maps/) estas montrata en la redaktilo, tamen kiam vi aldirektas kaj pligrandigas al aliaj lokoj, novaj fontoj iĝos disponeblaj. Por kelkaj landoj - kiel Usono, Francujo aŭ Danujo - tre altkvalita fotaro estas disponebla por iuj areoj.\n\nFotaro estas iam deŝovita de map-datumoj pro eraro rilatanta al retejo de liveranto. Se vi vidas multe da vojoj deŝovitaj de fono, ne abrupte movi ilin laŭ la fono. Anstataŭ vi povas alĝustigi fotaron tiel, ke ĝi kongruos kun ekzistaj datumoj per klaki 'Ĝustigi fotaran deŝovon' ĉe malsupro de menuo de fonaj agordoj.\n",
+            "addresses": "# Adresoj\n\nAdresoj estas ĝenerale la plej utilaj informoj sur la mapo.\n\nKvankam adresoj ofte figuras kiel partoj de stratoj, en OpenStreetMap ili figuras kiel atribuoj de konstruaĵoj kaj ejoj laŭlonge de stratoj.\n\nVi povas aldoni informojn pri adresoj al mapigitaj ejoj, kiel konstruaĵaj konturoj kaj ankaŭ kiel apartaj punktoj. La plej bona fonto de adresaj datumoj estas loka esploro aŭ persona scio - simile kiel pri aliaj objektoj, kopiado de komercaj fontoj kiel 'Google Mapoj' estas absolute malpermesata.\n",
+            "inspector": "# Uzado de kontrolilo\n\nLa kontrolilo troviĝas ĉe maldekstra flanko de paĝo kaj ebligas al vi redakti detalojn pri elektita objekto.\n\n### Elektado de objekta speco\n\nKiam vi aldonos punkton, linion aŭ areon, vi povas elekti specon de objekto, kiel ĉu ĝi estas ŝoseo aŭ loka vojo, superbazaro aŭ kafejo. La kontrolilo montros butonojn por kutimaj specoj de objektoj kaj vi povas serĉi aliajn per tajpi kiun vi serĉas en serĉkampo.\n\nKlaku 'i' ĉe malsupra dekstra angulo de butono de objekta speco por pli da informoj. Klaku butonon por ŝanĝi tiun specon.\n\n### Uzado de formularoj kaj redaktado de etikedoj\n\nKiam vi elektos objektan specon aŭ kiam vi elektos objekton, kiu jam havas atribuitan specon, la kontrolilo montros kampojn kun detaloj pri la objekto kiel ĝian nomon akj adreson.\n\nSube videblaj kampoj, vi povas klaki menuon 'Aldoni kampon' por aldoni aliajn detalojn, kiel Vikipedian ligilon, rulseĝan alireblon, kaj pli.\n\nĈe malsupro de kontrolilo, klaku 'Ekstraj etikedoj' por aldoni aliajn malneprajn etikedojn al la objekto. [Taginfo](http://taginfo.openstreetmap.org/) estas bonega ejo por lerni pli pri popularaj kombinoj de etikedoj.\n\nŜanĝoj faritaj per la kontrolilo estas aŭtomate aplikitaj al la mapo. Vi povas malfari ilin ĉiam per klaki la butonon 'Malfari'.\n",
+            "buildings": "# Konstruaĵoj\n\nOpenStreetMap estas la plej ampleksa tutmonda datumbazo de konstruaĵoj. Vi povas kontribui al ĉi tiu datumbazo.\n\n### Elektado\n\nVi povas elekti konstruaĵon per klaki ĝian konturon. Ĉi tio markos la konstruaĵon kaj malfermos etan ilaran menuon kaj flankan breton montrantan pli da informoj pri la konstruaĵo.\n\n### Redaktado\n\nIam konstruaĵoj estas malĝuste lokigita aŭ havas malĝustajn etikedojn.\n\nPor movi tutan konstruaĵon, elektu ĝin, sekve klaku ilon 'Movi'. Trenu vian muson por movi la konstruaĵon kaj klaku kiam ĝi estos en ĝusta loko.\n\nPor ripari konstruaĵan figuron, klaku kaj trenu nodojn, kiuj formas ĝian konturon al pli ĝustaj pozicioj.\n\n### Kreado\n\nIu el fundamentaj demandoj pri aldonado de konstruaĵoj al la mapo estas ke OpenStreetMap registras ilin ambaŭ kiel figurojn kaj punktojn. Oni konsilas _mapigi konstruaĵojn kiel figurojn ĉiam, kiam tio eblas_ kaj mapigi firmaojn, domojn, servojn kaj aliajn aĵojn kiuj funkcias sendepende de konstruaĵoj kiel punktojn en konstruaĵa figuro.\n\nKomenci desegni konstruaĵon kiel figuron per klaki butonon 'Areo' supre maldekstre de fasado kaj finigi ĝin aŭ premante enen-klavon aŭ klakante komencan nodon por finigi ĝian konturon.\n\n### Forigado\n\nSe konstruaĵo estas sendube erara - vi vidas, ke ĝi ne ekzistas en satelita fotara kaj vi eĉ konfirmis loke, ke ĝi ne ekzistas - vi povas forigi ĝin el la mapo. Estu singarda dum forigado de objektoj - kiel iu ajn redakto, rezultoj estos videblaj por ĉiuj kaj satelita fotaro estas ofte neĝisdata, do simple konstruaĵo povus esti ĵus konstruita.\n\nVi povas forigi konstruaĵon per klaki ĝin por ĝin elekti, sekve klaku piktogramon de rubujo aŭ premu forigan klavon.\n",
+            "relations": "# Rilatoj\n\nRilato estas speciala tipo de OpenStreetMap-a objekto, kiu grupigas aliajn objektojn. Ekzemplo: du komunajn specoj de rilatoj estas *kursaj rilatoj*, kiuj grupigas segmentojn de vojo kiuj apartenas al specifa kurso kaj *plurangularoj*, kiuj grupigas kelkajn liniojn por difini kompleksan areon (konsistanta el kelkaj pecoj aŭ enhavanta truojn).\n\nGrupo da objektoj en rilato nomiĝas *anoj*. Sur flanka breto vi povas vidi de kiu rilato ano apartenas al, kaj klaku rilaton tie por elekti ĝin. Kiam la rilato estas elektita, vi povas vidi ĉiujn ĝiajn anojn listigitajn en flanka breto kaj markitajn sur la mapo.\n\nPlejofte la redaktilo aŭtomate zorgos pri rilatoj dum redaktado. La plej grava afero pri kiu vi devus konscia estas, ke se vi forigos segmenton de redesegni ĝin pli akurate, vi devos certiĝi, ke nova segmento estos ano de sama rilato kiel la originala.\n\n## Redaktado de rilatoj\n\nSe vi volas redakti rilatojn, jen komencoj.\n\nPor aldoni objekton al rilato, elektu objekton, klaku la butonon '+' en sekcio 'Ĉiuj rilatoj' de flanka breto, kaj elektu/entajpu nomon por la rilato.\n\nPor krei novan rilaton, unue elektu objekton, kiu iĝos ano, klaku la butonon '+' en sekcio 'Ĉiuj rilatoj' kaj elektu 'Nova rilato...'.\n\nPor forigi objekton el rilato, elektu la objekton kaj klaku rubujan butonon ĉe rilato, el kiu vi volas ĝin forigi.\n\nVi povas krei plurangularojn kun truojn per ilo 'Kunfandi'. Desegnu du areojn (enan kaj eksteran), premtenu majusklan klavon kaj klaku ĉiun por elekti ilin ambaŭ kaj klaku la butonon 'Kunfandi' (+).\n"
         },
         "intro": {
+            "done": "farita",
+            "graph": {
+                "city_hall": "Urbodomo de Krokodilurbo",
+                "fire_department": "Fajrobrigadejo de Krokodilurbo",
+                "memory_isle_park": "Verda Parko",
+                "riverwalk_trail": "Apudrivera vojeto",
+                "w_michigan_ave": "Okcident-avenuo de Krokodilurbo",
+                "e_michigan_ave": "Orient-avenuo de Krokodilurbo",
+                "spring_st": "Printempa",
+                "scidmore_park": "Ŝlejera Parko",
+                "petting_zoo": "Bestoĝardeno en Krokodilurbo",
+                "n_andrews_st": "Zamenhof-strato",
+                "s_andrews_st": "Zamenhof-strato",
+                "n_constantine_st": "Finvenkism-strato",
+                "s_constantine_st": "Raŭmism-strato",
+                "rocky_river": "Ŝtonoza Rivero",
+                "railroad_dr": "Fervoja strato",
+                "conrail_rr": "Fervojlinio Mallanta",
+                "st_joseph_river": "Rivero de Onklo Zam",
+                "n_main_st": "Norda strato de Verda Stelo",
+                "s_main_st": "Suda strato de Verda Stelo",
+                "water_st": "Sensencaĵa strato",
+                "foster_st": "Senesperaĵa strato",
+                "portage_river": "Maltrinkejo",
+                "flower_st": "Flora strato",
+                "elm_st": "Kampeja strato",
+                "walnut_st": "Kalocsay-strato",
+                "morris_ave": "Vojo de Dek Bovinoj",
+                "east_st": "Bonantagula strato",
+                "portage_ave": "Kielvifartasula strato"
+            },
             "navigation": {
-                "title": "Navigado"
+                "title": "Navigado",
+                "drag": "Ĉefa areo de la mapo montras OpenStreetMap-ajn datumojn sur fono. Vi povas navigadi per treni kaj rulumi, simile kiel ian interretan mapon. **Trenu la mapon!**",
+                "select": "Map-objektoj estas reprezentataj tri-maniere: per punktoj, linioj aŭ areoj. Ĉiuj objektoj elekteblas per klaki ilin. **Klaku la punkton por ĝin elekti.**",
+                "pane": "Kiam objekto estas elektita, la objekt-redaktilo montriĝas. La kapo montros specon de objekto kaj la ĉefa panelo montros atribuojn de objekto, kiel nomon kaj adreson. **Fermi la objekt-redaktilon per premi la butonon {button} ĉe supra dekstro.**",
+                "search": "Vi ankaŭ povas serĉi objektojn en nuna vido aŭ en la tuta mondo. **Serĉu '{name}'.**",
+                "choose": "**Elektu '{name}' el la listo por ĝin elekti.**",
+                "chosen": "Bonege! {name} estas nun elektita. **Fermu la objekt-redaktilon per premi la butonon {button}.**"
             },
             "points": {
-                "title": "Punktoj"
+                "title": "Punktoj",
+                "add": "Punktoj estas uzataj por reprezenti objektojn kiel vendejojn, restoraciojn kaj monumentojn. Ili markas difinan lokon kaj priskribas kio estas tie. **Klaku la butonon '{button} Punkto' por aldoni novan punkton.**",
+                "place": "Punkton oni povas meti per klaki sur la mapo. **Klaku sur mapo por meti novan punkton al la konstruaĵo.**",
+                "search": "Multe da diversaj objektoj estas reprezentataj per punktoj. La ĵus-aldonita punkto estas kafejo. **Serĉi '{name}'-n.**",
+                "choose": "**Elektu kafejon el la listo.**",
+                "describe": "La punkto estas nun markita kiel kafejon. Per la objekt-redaktilo vi povas aldoni pli da informoj pri la objekto. **Nomu ĝin.**",
+                "close": "La objekt-redaktilo aŭtomate memoros ĉiujn viajn ŝanĝojn. Kiam vi ŝanĝos objekton, la fermobutono ŝanĝiĝos al hoketsigno. **Klaku la butonon {button} por fermi la objekt-redaktilon.**",
+                "reselect": "Ofte punktoj jam ekzistas, tamen ili havas erarojn aŭ estas nekompletaj. Oni povas redakti ekzistajn punktojn. **Klaku por elekti la ĵus-aldonitan punkton.**",
+                "fixname": "**Ŝanĝu ĝian nomon kaj klaku la butonon {button} por fermi la objekt-redaktilon.**",
+                "reselect_delete": "Ĉiun objekton sur la mapo oni povas forigi. **Klaku por elekti la punkton aldonitan de vi.**",
+                "delete": "Menuo ĉe la punkto enhavas agojn, kiujn oni povas fari al ĝi, inkluzive forigi. **Klaku la butonon {button} por forigi la punkton.**"
             },
             "areas": {
                 "title": "Areoj",
-                "choose": "**Rifo Korto el la listo.**"
+                "add": "Areoj estas uzataj por reprezenti konturojn de objektoj kiel lagoj, konstruaĵoj kaj privatdomaj terenoj. Oni povas ilin uzi por pli detale mapigi multe da objektoj, kiujn oni kutime mapigas kiel punktojn. **Klaku la butonon '{button} Areo' por aldoni novan areon.**",
+                "corner": "Oni povas desegni areojn per enmeti nodojn markantajn limojn de la areo. **Klaku por enmeti komencan nodon al unu el anguloj de infana ludejo.**",
+                "place": "Desegnu la areon per enmeti pliajn nodojn. Finigi la areon per klaki la komencan nodon. **Desegnu areon por la infana ludejo.**",
+                "search": "**Serĉu '{name}'-n.**",
+                "choose": "**Elektu infanan ludejon el la listo.**",
+                "describe": "**Aldonu nomon, sekve klaku la butonon {button} por fermi la objekt-redaktilon.**"
             },
             "lines": {
                 "title": "Linioj",
-                "road": "**Selektas Ŝoseon de la listo**",
-                "wrong_preset": "Vi ne selektis la Residencial vojo tipo. ** Klaku tie ĉi por elekti denove **"
+                "add": "Linioj estas uzataj reprezenti objektojn kiel vojojn, fervojojn kaj riverojn. **Klaku la butonon '{button} Linioj' por aldoni novan linion.**",
+                "start": "**Ekigi linion per klaki finon de vojo.**",
+                "intersect": "Klaku por aldoni pliajn nodojn al la linio. Vi povas treni la mapon dum desegnado laŭvole. Vojoj kaj kelkaj aliaj specoj de linioj estas parto de pli ampleksa reto. Estas grave por ke ĉi tiuj linioj estu ĝuste konektitaj por navigadaj aplikaĵoj funkcias. **Klaku '{name}'-n por krei sekcopunkton, kiu kunigas la ambaŭajn liniojn.**",
+                "finish": "Liniojn oni povas finigi per reklaki la finan nodon. **Finigu desegni la vojon.**",
+                "road": "**Elektu vojon el la listo.**",
+                "residential": "Estas diversaj specoj de vojoj disponeblaj, la plej kutima estas 'loka vojo'. **Elektu specon 'loka vojo'.**",
+                "describe": "**Nomu la vojon, sekve klaku la butonon {button} por fermi la objekt-redaktilon.**",
+                "restart": "La vojo devas kruciĝi sekci '{name}'-n.",
+                "wrong_preset": "Vi ne elektis la 'lokan vojon'. *Klaku ĉi tie por reelekti.*"
             },
             "startediting": {
-                "title": "Komenco Redaktado",
-                "save": "Ne forgesu regule savu viajn ŝanĝojn!",
-                "start": "Starti surĵeto!"
+                "title": "Komenci redaktadon",
+                "help": "Vi povas reludi ĉi tiun gvidilon aŭ vidi pli da dokumentaro per klaki la butonon '{button} Helpo'.",
+                "save": "Ne forgesu regule konservi viajn ŝanĝojn!",
+                "start": "Ekigi mapigadon!"
             }
         },
         "presets": {
+            "categories": {
+                "category-barrier": {
+                    "name": "Bariloj"
+                },
+                "category-building": {
+                    "name": "Konstruaĵoj"
+                },
+                "category-golf": {
+                    "name": "Golfludejo"
+                },
+                "category-landuse": {
+                    "name": "Utilkampoj"
+                },
+                "category-natural-area": {
+                    "name": "Naturo"
+                },
+                "category-natural-line": {
+                    "name": "Naturo"
+                },
+                "category-natural-point": {
+                    "name": "Naturo"
+                },
+                "category-path": {
+                    "name": "Vojetoj"
+                },
+                "category-rail": {
+                    "name": "Fervojoj"
+                },
+                "category-restriction": {
+                    "name": "Ebloj pri aliro"
+                },
+                "category-road": {
+                    "name": "Vojoj"
+                },
+                "category-route": {
+                    "name": "Kursoj"
+                },
+                "category-water-area": {
+                    "name": "Akvejoj"
+                },
+                "category-water-line": {
+                    "name": "Akvofluoj"
+                }
+            },
             "fields": {
                 "access": {
+                    "label": "Aliro permesata",
                     "options": {
                         "designated": {
-                            "description": "Aliro rajtis laŭ signoj aŭ specifaj lokaj leĝoj",
-                            "title": "Nomita"
+                            "description": "Aliro permesata laŭ signoj aŭ specifaj lokaj leĝoj",
+                            "title": "Adaptita"
                         },
                         "destination": {
-                            "description": " Aliro rajtis nur al atingi cellokon ",
+                            "description": " Aliro permesata nur por atingi cellokon",
                             "title": "Celloko"
                         },
                         "dismount": {
-                            "description": "Aliro rajtis sed rajdanto dev elseliĝ",
-                            "title": "Elseliĝ"
+                            "description": "Aliro permesata sed rajdanto devas deseliĝi de ĉevalo/motorciklo",
+                            "title": "Deseliĝi"
                         },
                         "no": {
-                            "description": "Aliro ne rajtita al la publiko",
-                            "title": "Malpermesita"
+                            "description": "Aliro malpermesata al ĝenerala trafiko",
+                            "title": "Malpermesata"
                         },
                         "permissive": {
-                            "description": "Aliro rajtis ĝis tiam, kiam la posedanto revok la permeso"
+                            "description": "Aliro estas permesata ĝis la posedanto revokos konsenton",
+                            "title": "Verŝajne permesata"
+                        },
+                        "private": {
+                            "description": "Aliro estas permesata nur laŭ individua permeso de la posedanto",
+                            "title": "Privata"
                         },
                         "yes": {
-                            "title": "Permesita"
+                            "description": "Aliro permesata laŭ leĝo",
+                            "title": "Permesata"
                         }
                     },
+                    "placeholder": "Nedifinita",
                     "types": {
+                        "access": "Ĉiuj",
                         "bicycle": "Bicikloj",
-                        "foot": "Piedo",
+                        "foot": "Piedirantoj",
                         "horse": "Ĉevaloj",
                         "motor_vehicle": "Aŭtomobiloj"
                     }
+                },
+                "access_simple": {
+                    "label": "Aliro permesata"
                 },
                 "access_toilets": {
                     "label": "Aliro"
@@ -259,6 +815,9 @@
                 "country": {
                     "label": "Lando"
                 },
+                "description": {
+                    "label": "Priskribo"
+                },
                 "electrified": {
                     "options": {
                         "no": "Ne"
@@ -288,7 +847,7 @@
                 "internet_access": {
                     "options": {
                         "no": "Ne",
-                        "wlan": "Wi-Fi",
+                        "wlan": "Sendrata",
                         "yes": "Jes"
                     }
                 },
@@ -313,7 +872,7 @@
                     "label": "Nomo"
                 },
                 "note": {
-                    "label": "Noto"
+                    "label": "Rimarko"
                 },
                 "oneway": {
                     "options": {
@@ -328,7 +887,7 @@
                     }
                 },
                 "opening_hours": {
-                    "label": "Horoj"
+                    "label": "Malfermaj horoj"
                 },
                 "par": {
                     "placeholder": "3, 4, 5..."
@@ -352,15 +911,33 @@
                     }
                 },
                 "trail_visibility": {
-                    "placeholder": "Bonega, Bona, Malbona..."
+                    "placeholder": "Bonega, bona, malbona..."
                 },
                 "website": {
-                    "placeholder": "http://example.com/"
+                    "placeholder": "http://ekzemplo.com/"
                 }
             },
             "presets": {
+                "amenity/cafe": {
+                    "name": "Kafejo"
+                },
+                "amenity/fire_station": {
+                    "name": "Fajrobrigadejo"
+                },
+                "amenity/townhall": {
+                    "name": "Urbodomo"
+                },
                 "building/house": {
                     "name": "Domo"
+                },
+                "highway/residential": {
+                    "name": "Loka vojo"
+                },
+                "leisure/playground": {
+                    "name": "Infana ludejo"
+                },
+                "tourism/zoo": {
+                    "name": "Bestoĝardeno"
                 }
             }
         }

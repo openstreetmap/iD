@@ -101,18 +101,13 @@
             },
             "delete": {
                 "title": "Hapus",
-                "description": "Hapus objek secara permanen.",
                 "annotation": {
                     "point": "Menghapus sebuah titik.",
                     "vertex": "Menghapus sebuah simpul dari jalan.",
                     "line": "Mengapus sebuah jalan.",
                     "area": "Menghapus sebuah area.",
-                    "relation": "Menghapus sebuah relasi.",
-                    "multiple": "Menghapus {n} obyek."
-                },
-                "incomplete_relation": "Fitur ini tidak bisa dihapus karena belum sepenuhnya terunduh.",
-                "part_of_relation": "Fitur ini tidak dapat dihapus karena merupakan bagian dari relasi lebih besar. Anda harus melepasnya dahulu dari relasi tersebut.",
-                "connected_to_hidden": "Tidak bisa dihapus karena terhubung dengan fitur tersembunyi."
+                    "relation": "Menghapus sebuah relasi."
+                }
             },
             "add_member": {
                 "annotation": "Tambahkan anggota ke sebuah relasi"
@@ -149,29 +144,21 @@
             },
             "move": {
                 "title": "Geser",
-                "description": "Geser ini ke lokasi lain.",
                 "key": "M",
                 "annotation": {
                     "point": "Menggeser sebuah titik.",
                     "vertex": "Menggeser simpul dari sebuah jalan.",
                     "line": "Menggeser sebuah garis.",
-                    "area": "Menggeser sebuah area.",
-                    "multiple": "Menggeser beberapa obyek."
-                },
-                "incomplete_relation": "Fitur ini tidak bisa dipindahkan karena belum sepenuhnya terunduh.",
-                "too_large": "Objek ini tidak dapat dipindahkan karena baru separuhnya yang tampak di layar.",
-                "connected_to_hidden": "Tidak bisa dipindah karena terhubung dengan fitur tersembunyi."
+                    "area": "Menggeser sebuah area."
+                }
             },
             "rotate": {
                 "title": "Putar",
-                "description": "Putar obyek ini berdasar titik pusatnya.",
                 "key": "R",
                 "annotation": {
                     "line": "Memutar sebuah garis.",
                     "area": "Memutar sebuah area."
-                },
-                "too_large": "Objek ini tidak dapat diputar karena baru separuhnya yang tampak di layar.",
-                "connected_to_hidden": "Tidak bisa diputar karena terhubung dengan fitur tersembunyi."
+                }
             },
             "reverse": {
                 "title": "Balik",
@@ -239,12 +226,9 @@
             "readonly": "API dalam kondisi hanya-baca. Anda perlu menunggu untuk menyimpan perubahan."
         },
         "commit": {
-            "title": "Simpan Perubahan",
             "description_placeholder": "Penjelasan singkat dari kontribusi Anda (harus diisi)",
-            "message_label": "Komentar set perubahan",
             "upload_explanation": "Perubahan yang anda unggah akan tampil di seluruh peta yang menggunakan data OpenStreetMap.",
             "upload_explanation_with_user": "Perubahan yang anda unggah sebagai {user} akan tampil di seluruh peta yang menggunakan data OpenStreetMap.",
-            "save": "Simpan",
             "cancel": "Batal",
             "changes": "{count} Perubahan",
             "warnings": "Peringatan",
@@ -305,7 +289,6 @@
             "back_tooltip": "Ubah Fitur",
             "remove": "Buang",
             "search": "Cari",
-            "multiselect": "Item terpilih",
             "unknown": "Tidak diketahui",
             "incomplete": "<tak terunduh>",
             "feature_list": "Cari fitur",
@@ -433,14 +416,11 @@
                 "restore": "Kembalikan",
                 "delete": "Biarkan Terhapus",
                 "download_changes": "Atau unduh perubahan Anda.",
-                "done": "Semua konflik terselesaikan!",
-                "help": "Pengguna lain mengubah beberapa fitur peta yang sama dengan yang Anda ubah.\nKlik pada tiap butir di bawah untuk penjelasan lebih tentang konfliknya, dan memilih untuk menyimpan\nperubahan Anda atau perubahan pengguna tersebut.\n"
+                "done": "Semua konflik terselesaikan!"
             }
         },
         "merge_remote_changes": {
             "conflict": {
-                "deleted": "Objek ini telah dihapus oleh {user}.",
-                "location": "Objek ini dipindahkan oleh Anda dan {user}.",
                 "nodelist": "Titik-titik diubah oleh Anda dan {user}.",
                 "memberlist": "Anggota relasi diubah Anda dan {user}.",
                 "tags": "Anda mengubah tag <b>{tag}</b> menjadi \"{local}\" dan {user} mengubahnya menjadi \"{remote}\"."
@@ -479,7 +459,6 @@
             "untagged_point": "Titik tanpa tag",
             "untagged_line": "Garis tanpa tag",
             "untagged_area": "Area tanpa tag",
-            "many_deletions": "Anda menghapus {n} obyek. Apakah anda yakin? Ini akan menghapus dari peta yang semua orang lihat pada openstreetmap.org.",
             "tag_suggests_area": "Penanda {tag} menyarankan garis sebaiknya dalam bentuk area, tapi ini bukan sebuah area",
             "untagged_point_tooltip": "Pilih tipe fitur yang menjelaskan apa identitas poin ini.",
             "untagged_line_tooltip": "Pilih tipe fitur yang menjelaskan apa identitas garis ini.",
@@ -492,12 +471,6 @@
         },
         "cannot_zoom": "Tidak bisa memperbesar tampilan lebih jauh dengan mode ini.",
         "full_screen": "Tombol Layar Penuh",
-        "gpx": {
-            "local_layer": "File GPX lokal",
-            "drag_drop": "Geser dan letakan sebuah berkas .gpx di halaman, atau klik tombol ke kanan untuk menjelajah",
-            "zoom": "Perbesar ke jejak GPX",
-            "browse": "Telusuri untuk file .gpx"
-        },
         "mapillary": {
             "view_on_mapillary": "Lihat gambar ini di Mapillary"
         },
@@ -1085,9 +1058,6 @@
                     },
                     "placeholder": "Tidak, Terpisah, Ya..."
                 },
-                "social_facility_for": {
-                    "placeholder": "Tunawisma, Disabilitas, Anak-anak, dll"
-                },
                 "source": {
                     "label": "Sumber"
                 },
@@ -1192,9 +1162,6 @@
                     "name": "Pelataran pesawat",
                     "terms": "Apron, Parkir Pesawat"
                 },
-                "aeroway/gate": {
-                    "name": "Gerbang Bandar Udara"
-                },
                 "aeroway/hangar": {
                     "name": "Hanggar"
                 },
@@ -1208,9 +1175,6 @@
                 "aeroway/taxiway": {
                     "name": "Landas hubung",
                     "terms": "Landas gelinding, Jalan rayap, Landas ancang"
-                },
-                "aeroway/terminal": {
-                    "name": "Terminal Bandara"
                 },
                 "amenity": {
                     "name": "Keramahan"
@@ -2118,18 +2082,6 @@
                 "man_made/water_well": {
                     "name": "Sumur",
                     "terms": "Perigi"
-                },
-                "military/barracks": {
-                    "name": "Barak"
-                },
-                "military/bunker": {
-                    "name": "Tempat berlindung"
-                },
-                "military/danger_area": {
-                    "name": "Wilayah Bahaya"
-                },
-                "military/range": {
-                    "name": "Lingkup Militer"
                 },
                 "natural": {
                     "name": "Alami"

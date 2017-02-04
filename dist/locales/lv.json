@@ -79,8 +79,7 @@
                     "vertex": "Mezgls dzests.",
                     "line": "Līnija dzēsta.",
                     "area": "Apgabals dzēsts.",
-                    "relation": "Relācija dzēsta.",
-                    "multiple": "{n} objekti dzēsti."
+                    "relation": "Relācija dzēsta."
                 }
             },
             "connect": {
@@ -104,16 +103,13 @@
             },
             "move": {
                 "title": "Pārvietot",
-                "description": "Pārvieto objektu.",
                 "key": "M",
                 "annotation": {
                     "point": "Punkts pārvietots.",
                     "vertex": "Mezgls pārvietots.",
                     "line": "Līnija pārvietota.",
-                    "area": "Apgabals pārvietots.",
-                    "multiple": "Vairāki objekti pārvietoti."
-                },
-                "incomplete_relation": "Šo objektu nevar pārvietot, jo tas nav pilnībā lejuplādēts."
+                    "area": "Apgabals pārvietots."
+                }
             },
             "rotate": {
                 "title": "Pagriezt",
@@ -162,8 +158,6 @@
             "error": "Nevarēja savienoties ar API."
         },
         "commit": {
-            "title": "Saglabāt izmaiņas",
-            "save": "Saglabāt",
             "cancel": "Atcelt",
             "warnings": "Brīdinājumi",
             "modified": "Mainīts",
@@ -260,16 +254,12 @@
         "validations": {
             "untagged_line": "Neapzīmēta līnija",
             "untagged_area": "Neapzīmēts apgabals",
-            "many_deletions": "Jūs dzēšat {n} objektus. Vai tiešām vēlaties to darīt? Tie tiks izdzēsti no kartes, ko visi var aplūkt openstreetmap.org.",
             "tag_suggests_area": "Apzīmējums {tag} parasti tiek lietots apgabaliem, bet objekts nav apgabals",
             "deprecated_tags": "Novecojuši apzīmējumi: {tags}"
         },
         "zoom": {
             "in": "Pietuvināt",
             "out": "Attālināt"
-        },
-        "gpx": {
-            "local_layer": "Vietējais GPX fails"
         },
         "help": {
             "title": "Palīdzība"

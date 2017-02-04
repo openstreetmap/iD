@@ -101,18 +101,30 @@
             },
             "delete": {
                 "title": "Excluir",
-                "description": "Remover objeto permanentemente",
+                "description": {
+                    "single": "Excluir este elemento permanentemente.",
+                    "multiple": "Excluir estes elementos permanentemente."
+                },
                 "annotation": {
                     "point": "Excluído um ponto.",
                     "vertex": "Excluído um pondo de uma linha.",
                     "line": "Excluída uma linha.",
                     "area": "Excluída uma área.",
                     "relation": "Excluída uma relação.",
-                    "multiple": "Excluídos {n} objetos."
+                    "multiple": "Excluídos {n} elementos."
                 },
-                "incomplete_relation": "Este elemento não pode ser excluído porque não foi ainda totalmente baixado.",
-                "part_of_relation": "Este recurso não pode ser excluído porque ele é parte de uma relação maior. Você deve removê-lo da primeira relação",
-                "connected_to_hidden": "Não pode ser deletado por estar conectado a um elemento oculto."
+                "incomplete_relation": {
+                    "single": "Este elemento não pode ser excluído porque não foi ainda totalmente baixado.",
+                    "multiple": "Estes elementos não podem ser excluídos porque não foram ainda totalmente baixados."
+                },
+                "part_of_relation": {
+                    "single": "Este elemento não pode ser excluído porque ele é parte de uma relação maior. Você deve primeiro removê-lo da relação.",
+                    "multiple": "Estes elementos não podem ser excluídos porque eles são parte de uma relação maior. Você deve primeiro removê-los da relação."
+                },
+                "connected_to_hidden": {
+                    "single": "Este elemento não pode ser excluído pois está conectado a um elemento oculto.",
+                    "multiple": "Estes elementos não podem ser excluídos pois alguns estão conectados a elementos ocultos."
+                }
             },
             "add_member": {
                 "annotation": "Adicionado um membro à relação."
@@ -150,29 +162,94 @@
             },
             "move": {
                 "title": "Mover",
-                "description": "Mover isto para um lugar diferente.",
+                "description": {
+                    "single": "Mover este elemento para um lugar diferente.",
+                    "multiple": "Mover estes elementos para um lugar diferente."
+                },
                 "key": "M",
                 "annotation": {
                     "point": "Ponto movido.",
                     "vertex": "Moveu um ponto numa linha.",
                     "line": "Moveu uma linha.",
                     "area": "Moveu uma área.",
-                    "multiple": "Moveu múltiplos objetos."
+                    "multiple": "Moveu vários elementos."
                 },
-                "incomplete_relation": "Este elemento não pode ser movido porque ainda não foi totalmente baixado.",
-                "too_large": "Não pode ser movido porque não há o suficiente disso visível no momento.",
-                "connected_to_hidden": "Não pode ser movido por estar conectado a um elemento oculto."
+                "incomplete_relation": {
+                    "single": "Este elemento não pode ser movido porque ainda não foi totalmente baixado.",
+                    "multiple": "Estes elementos não podem ser movidos porque ainda não foram totalmente baixados."
+                },
+                "too_large": {
+                    "single": "Este elemento não pode ser movido porque não há o suficiente dele visível no momento.",
+                    "multiple": "Estes elementos não podem ser movidos porque não há o suficiente deles visível no momento."
+                },
+                "connected_to_hidden": {
+                    "single": "Este elemento não pode ser movido pois está conectado a um elemento oculto.",
+                    "multiple": "Estes elementos não podem ser movidos pois estão conectados a elementos ocultos."
+                }
+            },
+            "reflect": {
+                "title": "refletir",
+                "description": {
+                    "long": {
+                        "single": "Refletir este elemento ao longo de seu eixo mais longo.",
+                        "multiple": "Refletir estes elementos ao longo de seu eixo mais longo."
+                    },
+                    "short": {
+                        "single": "Refletir este elemento ao longo de seu eixo mais curto.",
+                        "multiple": "Refletir estes elementos ao longo de seu eixo mais curto."
+                    }
+                },
+                "key": {
+                    "long": "T",
+                    "short": "Y"
+                },
+                "annotation": {
+                    "long": {
+                        "single": "Refletiu um elemento ao longo de seu eixo mais longo.",
+                        "multiple": "Refletiu vários elementos ao longo de seu eixo mais longo."
+                    },
+                    "short": {
+                        "single": "Refletiu um elemento ao longo de seu eixo mais curto.",
+                        "multiple": "Refletiu vários elementos ao longo de seu eixo mais curto."
+                    }
+                },
+                "incomplete_relation": {
+                    "single": "Este elemento não pode ser refletido porque não foi ainda totalmente baixado.",
+                    "multiple": "Estes elementos não podem ser refletidos porque não foram ainda totalmente baixados."
+                },
+                "too_large": {
+                    "single": "Este elemento não pode ser refletido porque não há o suficiente dele visível no momento.",
+                    "multiple": "Estes elementos não podem ser refletidos porque não há o suficiente deles visível no momento."
+                },
+                "connected_to_hidden": {
+                    "single": "Este elemento não pode ser refletido pois está conectado a um elemento oculto.",
+                    "multiple": "Estes elementos não podem ser refletidos pois alguns estão conectados a elementos ocultos."
+                }
             },
             "rotate": {
                 "title": "Girar",
-                "description": "Girar este objeto em torno de seu ponto central.",
+                "description": {
+                    "single": "Girar este elemento em torno de seu ponto central.",
+                    "multiple": "Girar estes elementos em torno de seu ponto central."
+                },
                 "key": "R",
                 "annotation": {
                     "line": "Girou uma linha.",
-                    "area": "Girou uma área."
+                    "area": "Girou uma área.",
+                    "multiple": "Girou vários elementos."
                 },
-                "too_large": "Não pode ser rotacionado porque não há o suficiente disso visível no momento.",
-                "connected_to_hidden": "Não pode ser rotacionado pois está conectado a um elememto oculto."
+                "incomplete_relation": {
+                    "single": "Este elemento não pode ser girado porque ainda não foi totalmente baixado.",
+                    "multiple": "Estes elementos não podem ser girados porque ainda não foram totalmente baixados."
+                },
+                "too_large": {
+                    "single": "Este elemento não pode ser girado porque não há o suficiente dele visível no momento.",
+                    "multiple": "Estes elementos não podem ser girados porque não há o suficiente deles visível no momento."
+                },
+                "connected_to_hidden": {
+                    "single": "Este elemento não pode ser girado pois está conectado a um elemento oculto.",
+                    "multiple": "Estes elementos não podem ser girados pois alguns estão conectados a elementos ocultos."
+                }
             },
             "reverse": {
                 "title": "Inverter",
@@ -243,12 +320,12 @@
             "rateLimit": "A API está limitando conexões anônimas.  Você pode corrigir isso fazendo login."
         },
         "commit": {
-            "title": "Salvar Alterações",
+            "title": "Enviar para o OpenStreetMap",
             "description_placeholder": "Breve descrição de suas contribuições (obrigatório)",
-            "message_label": "Comentário para o conjunto de alterações",
+            "message_label": "Comentário sobre as Alterações",
             "upload_explanation": "As alterações que você enviar ficarão visíveis em todos os mapas que usam dados do OpenStreetMap. Atenção: NÃO é permitido copiar nomes de ruas do Google Maps, Bing, mapas impressos ou quaisquer fontes que possuam copyright.",
             "upload_explanation_with_user": "As alterações que você enviar como {user} estarão visíveis em todos os mapas que usam os dados do OpenStreetMap.<br><br>\n<strong>Atenção:</strong> NÃO é permitido copiar nomes de ruas do Google Maps, Bing, mapas impressos ou quaisquer fontes que possuam copyright.",
-            "save": "Salvar",
+            "save": "Enviar",
             "cancel": "Cancelar",
             "changes": "{count} mudanças",
             "warnings": "Alertas",
@@ -311,7 +388,7 @@
             "back_tooltip": "Alterar elemento",
             "remove": "Remover",
             "search": "Procurar",
-            "multiselect": "Itens Selecionados",
+            "multiselect": "Elementos selecionados",
             "unknown": "Desconhecido",
             "incomplete": "<não baixado>",
             "feature_list": "Buscar elementos",
@@ -442,16 +519,16 @@
                 "keep_local": "Manter o meu",
                 "keep_remote": "Usar o dele",
                 "restore": "Restaurar",
-                "delete": "Manter removido",
+                "delete": "Manter Excluído",
                 "download_changes": "Ou baixar suas alterações.",
                 "done": "Todos os conflitos foram resolvidos!",
-                "help": "Outro usuário alterou alguns dos mesmos itens do mapa que você alterou.\nClique em cada item abaixo para mais detalhes sobre o conflito, e escolha se quer manter as suas alterações ou as do outro usuário.\n"
+                "help": "Outro usuário alterou alguns dos mesmos elementos que você alterou.\nClique em cada elemento abaixo para mais detalhes sobre o conflito, e escolha se você quer manter as suas alterações ou as do outro usuário.\n"
             }
         },
         "merge_remote_changes": {
             "conflict": {
-                "deleted": "Este objeto foi excluído por {user}.",
-                "location": "Este objeto foi movido tanto por você quanto pelo(a) {user}",
+                "deleted": "Este elemento foi excluído por {user}.",
+                "location": "Este elemento foi movido tanto por você quanto por {user}.",
                 "nodelist": "Os pontos foram modificados tanto por você quanto pelo(a) {user}.",
                 "memberlist": "Os membros da relação foram modificados tanto por você quanto por {user}.",
                 "tags": "Você mudou a etiqueta <b>{tag}</b> para \"{local}\" e o/a {user} mudou-a para \"{remote}\"."
@@ -489,10 +566,12 @@
             "used_with": "usado com {type}"
         },
         "validations": {
+            "disconnected_highway": "Estrada desconectada",
+            "disconnected_highway_tooltip": "Estradas devem estar conectadas a outras estradas.",
             "untagged_point": "Ponto sem etiquetas",
             "untagged_line": "Linha sem etiquetas",
             "untagged_area": "Área sem etiquetas",
-            "many_deletions": "Você está excluíndo {n} objetos. Tem certeza disto? Isto os excluirá do mapa que todos veem no openstreetmap.org.",
+            "many_deletions": "Você está excluindo {n} elementos.  Você tem certeza de que quer fazer isso?  Isso irá excluí-los do mapa que todo mundo vê no openstreetmap.org.",
             "tag_suggests_area": "A etiqueta {tag} sugere que seja utilizada numa área, mas essa linha não é uma área",
             "untagged_point_tooltip": "Selecionar um tipo de elemento que descreva o que este ponto é.",
             "untagged_line_tooltip": "Selecionar um tipo de elemento que descreva o que esta linha é.",
@@ -505,12 +584,6 @@
         },
         "cannot_zoom": "Não é possível afastar mais no modo atual.",
         "full_screen": "Alterar para Tela Cheia",
-        "gpx": {
-            "local_layer": "Arquivo GPX local",
-            "drag_drop": "Arraste e solte um arquivo .gpx na página, ou clique no botão à direita para procurar",
-            "zoom": "Aproximar para a trilha GPX",
-            "browse": "Procurar um arquivo .gpx"
-        },
         "mapillary_images": {
             "tooltip": "Fotos a nível de rua do Mapillary",
             "title": "Camada de Fotos (Mapillary)"
@@ -526,13 +599,13 @@
             "title": "Ajuda",
             "help": "# Ajuda\n\nEste é um editor para [OpenStreetMap](http://www.openstreetmap.org/), o mapa mundial livre e editável. Você pode usá-lo para adicionar e atualizar de dados em sua área,  tornando um mapa mundi de código aberto melhor para todos.\n\nAs edições que você fizer nesse mapa serão visíveis para todos que usam OpenStreetMap. Para fazer uma edição você precisará se [identificar](https://www.openstreetmap.org/login).\n\nO [editor iD](http://ideditor.com/) é um projeto colaborativo com o [código fonte disponível no GitHub](https://github.com/openstreetmap/iD).\n",
             "editing_saving": "# Editando e Salvando\n\nEsse editor é feito para trabalhar on-line e você está neste momento\nacessando-o através de uma página na Internet.\n\n### Selecionando Elementos\n\nPara selecionar um elemento do mapa, como uma estrada ou um ponto de\ninteresse, clique sobre ele. Isso vai pôr o elemento selecionado em destaque,\nabrir um painel com detalhes sobre ele e mostrar um menu de coisas que podem\nser feitas com ele.\n\nMúltiplos elementos podem ser selecionados segurando a\ntecla \"Shift\" e clicando nos quais você quer selecionar ou arrastando no mapa\npara desenhar um retângulo. Isso vai selecionar todos os elementos que\nestiverem dentro da caixa que foi desenhada.\n\n### Salvando Edições\n\nQuando você faz alterações como editar ruas, prédios e locais, elas são\nguardadas localmente até que você as envie para o servidor. Não se preocupe\nse você cometer algum deslize - você pode desfazer alterações clicando no\nbotão de desfazer e também refazer as alterações clicando no botão de refazer.\n\nClique em \"Salvar\" para finalizar um conjunto de alterações. Por exemplo, você\ncompletou uma área de uma cidade e gostaria de começar a editar uma outra\nárea. Você terá a chance de revisar o que foi feito até o momento e o editor\nmostrará sugestões e dicas se alguma coisa parecer estar errada com as suas\nalterações.\n\nSe tudo parecer estar OK, você pode inserir um breve comentário explicando\nas mudanças que você fez e clicar em \"Salvar\" de novo para enviar as mudanças\npara o [OpenStreetMap](http://www.openstreetmap.org/), onde elas estarão\nvisíveis para todos os outros usuários.\n\nSe você não conseguir concluir uma sessão de edição, você pode fechar a\njanela do editor e voltar mais tarde (no mesmo navegador e computador) que\no editor irá oferecer a possibilidade de restaurar o seu trabalho.\n\n### Usando o editor\n\nUma lista com os atalhos de teclado disponíveis pode ser encontrada [aqui](http://wiki.openstreetmap.org/wiki/ID/Shortcuts).\n",
-            "roads": "# Estradas\n\nVocê pode criar, corrigir e excluir estradas com este editor. Estradas\npodem ser de vários tipos: caminhos, estradas, trilhas, ciclovias e\nmuito mais - qualquer segmento onde se passa, mesmo que às vezes,\npode ser mapeado.\n\n### Selecionando\n\nClique em uma estrada para selecioná-la. Um esboço deve tornar-se\nvisível, junto com um pequeno menu de ferramentas no mapa e uma\nbarra lateral mostrando mais informações sobre a estrada.\n\n### Modificando\n\nMuitas vezes você vai encontrar estradas que não estão alinhadas\ncom as imagens por trás delas ou com uma faixa de GPS. Você\npode ajustar estas estradas para que elas fiquem no lugar certo.\n\nPrimeiro clique no caminho que você deseja alterar. Isso irá\ndestacá-lo e mostrar pontos de controle ao longo dela que você\npode arrastar para locais melhores. Se o que você deseja é\nadicionar novos pontos de controle para obter mais detalhes,\nclique duas vezes em uma parte da estrada sem um ponto, e\num ponto será adicionado.\n\nSe a estrada se conecta a uma outra estrada, mas não está\ncorretamente conectada no mapa, você pode arrastar um de\nseus pontos de controle para a outra estrada a fim de juntá-las.\nTer estradas que se conectam é importante para o mapa e\nessencial para fornecer instruções de direção.\n\nVocê também pode clicar na ferramenta 'Mover' ou pressione a\ntecla 'M' para mover o caminho inteiro de uma vez, e em seguida,\nclique novamente para salvar esse movimento.\n\n### Apagando\n\nSe uma estrada está completamente errada - você pode ver que ela\nnão existe nas imagens de satélite e, junto a isso, ter confirmado\nlocalmente que ela não existe - você pode apagá-la do mapa.\nSeja cauteloso ao excluir objetos - como qualquer outra edição, os\nresultados são vistos por todos, e como as imagens de satélite\npodem estar desatualizadas, a estrada pode simplesmente ser\nrecém-construída.\n\nVocê pode excluir um caminho, clicando sobre ele para selecioná-lo, em\nseguida, clicar no ícone de lixeira ou pressionando a tecla 'Delete'.\n\n### Criando\n\nEncontrou um lugar onde deveria ter uma estrada, mas não tem? Clique\nno botão 'Linha' no canto superior esquerdo do editor ou pressione a\ntecla de atalho '2' para começar a desenhar uma linha.\n\nClique no início da estrada no mapa para começar a desenhar. Se a\nestrada se ramifica de uma estrada existente, comece clicando sobre\no lugar onde eles se conectam.\n\nEm seguida, clique em pontos ao longo da estrada para que ela siga\no caminho certo, de acordo com imagens de satélite ou GPS. Se a\nestrada que você está desenhando atravessa outra estrada, ligue-as\nclicando sobre o ponto de intersecção. Quando você terminar de\ndesenhar, clique duas vezes ou pressione 'Voltar' ou 'Enter' no seu teclado.\n",
+            "roads": "# Estradas\n\nVocê pode criar, corrigir e excluir estradas com este editor. Estradas podem ser de vários tipos: caminhos, estradas, trilhas, ciclovias e muito mais - qualquer segmento onde se passa, mesmo que às vezes, pode ser mapeado.\n\n### Selecionando\n\nClique em uma estrada para selecioná-la. Um esboço deve tornar-se visível, junto com um pequeno menu de ferramentas no mapa e uma barra lateral mostrando mais informações sobre a estrada.\n\n### Modificando\n\nMuitas vezes você vai encontrar estradas que não estão alinhadas com as imagens por trás delas ou com uma faixa de GPS. Você pode ajustar estas estradas para que elas fiquem no lugar certo.\n\nPrimeiro clique no caminho que você deseja alterar. Isso irá destacá-lo e mostrar pontos de controle ao longo dela que você pode arrastar para locais melhores. Se o que você deseja é adicionar novos pontos de controle para obter mais detalhes, clique duas vezes em uma parte da estrada sem um ponto, e um ponto será adicionado.\n\nSe a estrada se conecta a uma outra estrada, mas não está corretamente conectada no mapa, você pode arrastar um de seus pontos de controle para a outra estrada a fim de juntá-las. Ter estradas que se conectam é importante para o mapa e essencial para fornecer instruções de direção.\n\nVocê também pode clicar na ferramenta 'Mover' ou pressione a tecla 'M' para mover o caminho inteiro de uma vez, e em seguida, clique novamente para salvar esse movimento.\n\n### Apagando\n\nSe uma estrada está completamente errada - você pode ver que ela não existe nas imagens de satélite e, junto a isso, ter confirmado localmente que ela não existe - você pode apagá-la do mapa. Seja cauteloso ao excluir objetos - como qualquer outra edição, os resultados são vistos por todos, e como as imagens de satélite podem estar desatualizadas, a estrada pode simplesmente ser recém-construída.\n\nVocê pode excluir um caminho, clicando sobre ele para selecioná-lo, em seguida, clicar no ícone de lixeira ou pressionando a tecla 'Delete'.\n\n### Criando\n\nEncontrou um lugar onde deveria ter uma estrada, mas não tem? Clique no botão 'Linha' no canto superior esquerdo do editor ou pressione a tecla de atalho '2' para começar a desenhar uma linha.\n\nClique no início da estrada no mapa para começar a desenhar. Se a estrada se ramifica de uma estrada existente, comece clicando sobre o lugar onde eles se conectam.\n\nEm seguida, clique em pontos ao longo da estrada para que ela siga o caminho certo, de acordo com imagens de satélite ou GPS. Se a estrada que você está desenhando atravessa outra estrada, ligue-as clicando sobre o ponto de intersecção. Quando você terminar de desenhar, clique duas vezes ou pressione 'Voltar' ou 'Enter' no seu teclado.\n",
             "gps": "# GPS\n\nOs dados de GPS são as fontes mais confiáveis do OpenStreetMap. Este editor suporta trilhas locais - arquivos '.gpx'. Você pode utilizar aplicativos de celular ou aparelhos de GPS para coletar esse tipo de trilha. Para informações sobre como realizar levantamento com GPS, leia [Mapeando com smartphone, GPS ou papel](http://learnosm.org/pt/mobile-mapping/).\n\nPara usar uma trilha GPX para mapeamento, arraste e solte o arquivo GPX no editor de mapa iD. Caso seja reconhecida, será adicionada ao mapa como linhas roxo-claras. Clique no menu 'Dados do Mapa', no lado direito, para ativar, desativar ou focar o zoom nesta nova camada alimentada pelo GPX.\n\nA trilha GPX não é diretamente enviada ao OpenStreetMap - a melhor maneira para usá-la é desenhar no mapa, usando-a como um guia para os novos elementos que você adicionar, e também [enviá-lo ao OpenStreetMap](http://www.openstreetmap.org/trace/create) para que outros usuários possam usá-la.\n",
             "imagery": "# Imagens Aéreas\n\nAs imagens aéreas são um recurso muito importante para o mapeamento.\nFotos de avião, de satélite e de outras fontes livre estão disponíveis no editor,\nno menu \"Configurações da Imagem de Fundo\", no lado esquerdo.\n\nPor padrão as imagens de satélite do [Bing Maps](http://www.bing.com/maps/)\nestão habilitadas no editor, mas ao mover e aproximar o mapa para certas áreas,\nnovas fontes de imagens estarão disponíveis. Alguns países, tais como os EUA, a\nFrança e a Dinamarca, têm imagens aéreas de alta qualidade em algumas áreas.\n\nAtenção: as imagens aéreas algumas vezes não batem exatamente com o\nque há em terra, isto é, têm algum deslocamento por causa de algum erro por\nparte de quem as gerou. Se você notar que muitas ruas estão deslocadas\nem comparação com a imagem de fundo, não as alinhe imediatamente com\na imagem. Em vez disso ajuste a imagem para que ela se alinhe com as ruas\natravés do botão \"Corrigir desalinhamento\" no final do painel de Configurações\nda Imagem de Fundo.\n",
             "addresses": "# Endereços\n\nOs endereços são uma das informações mais úteis do mapa.\n\nApesar de os endereços serem representados como parte de uma rua,\nno OpenStreetMap eles também são gravados como atributos de prédios\ne outros lugares ao longo das ruas.\n\nVocê pode adicionar informações de endereço nos locais mapeados como\nárea de edifícios ou mapeados como pontos. A melhor fonte de informações\nsobre endereços é a que vem de pesquisas de campo ou conhecimento\npessoal do local - assim como qualquer outra informação, copiar de fontes\ncomerciais como o Google Maps é estritamente proibido.\n",
             "inspector": "# Usando o Inspetor\n\nO inspetor é a seção no lado esquerdo da página que aparece quando um recurso é selecionado e permite que você edite seus detalhes.\n\n### Selecionando um tipo de recurso\n\nDepois de adicionar um ponto, linha ou área, você pode escolher que tipo de característica ele tem, como por exemplo se é uma autoestrada ou via residencial, supermercado ou cafeteria.\nO inspetor mostrará botões para os tipos de recursos mais comuns, e você pode encontrar outros, digitando o que você está procurando na caixa de pesquisa.\n\nClique no botão \"i\" no canto direito de um botão de recurso para aprender mais sobre ele. Clique em um botão para alterar o tipo.\n\n### Usando formas e editando etiquetas\n\nDepois de escolher um tipo de recurso, ou quando você seleciona um recurso que já tem um tipo atribuído, o inspetor vai exibir campos com detalhes sobre o recurso como seu nome e endereço. Abaixo dos campos que você vê, você pode clicar nos ícones para adicionar outros detalhes, como link da Wikipédia, acesso para cadeirantes, entre outros. Na parte inferior do inspetor, você pode clicar em 'Etiquetas adicionais' para adicionar outras etiquetas ao elemento. O [Taginfo](http://taginfo.openstreetmap.org/) é um excelente recurso para aprender mais sobre as combinações de etiquetas mais populares. As alterações feitas no Inspetor são automaticamente aplicadas ao mapa. Você pode desfazê-los a qualquer momento, clicando no botão 'Desfazer'.\n",
             "buildings": "# Edifícios\n\nO OpenStreetMap é a maior base de dados de edifícios do mundo. Você\npode criar e melhorar esta base de dados.\n\n### Selecionando\n\nVocê pode selecionar um edifício clicando em sua borda. Isto vai destacar\no edifício, abrir um pequeno menu de ferramentas e uma barra lateral,\nmostrando mais informações sobre o edifício.objeto\n\n### Modificando\n\nÀs vezes um edifício está no lugar errado ou tem etiquetas erradas.\n\nPara mover um edifício inteiro, selecione-o, e clique na ferramenta 'Mover'.\nMova o mouse para deslocar o edifício, e clique novamente quando ele\nestiver no local certo.\n\nPara corrigir o formato de um edifício, clique e arraste os pontos que\nformam as bordas para o lugar apropriado.\n\n### Criando\n\nUma das principais questões sobre adicionar edifícios ao mapa é que o\nOpenStreetMap registra-os tanto como formas quanto como pontos. A\nregra geral é _mapeie um edifício como uma forma sempre que possível_,\ne mapeie empresas, casas, serviços, e outros locais que operam fora de\num edifício como pontos dentro da forma do edifício.\n\nComece desenhando um edifício como forma clicando no botão 'Área' no\ncanto superior esquerdo da interface, e finalize pressionando 'Enter' no\nteclado ou clicando no primeiro ponto que você desenhou para fechar a forma.\n\n### Excluindo\n\nSe um edifício estiver totalmente errado - você vê que ele não existe na\nimagem de satélite e também confirmou pessoalmente que ele não está\nlá - você pode excluí-lo, removendo-o do mapa. Seja cuidadoso ao remover\ncoisas - assim como qualquer outra edição, os resultados são vistos por\ntodos, e as imagens de satélite podem estar desatualizadas, ou seja,\npode ser que o edifício seja bem recente.\n\nVocê pode remover um edifício clicando nele para selecioná-lo, e depois\nclicando  na lixeira ou pressionando a tecla 'Delete'.\n",
-            "relations": "# Relações\n\nUma relação é um tipo especial de objeto do OpenStreetMap que agrupa\noutros objetos.\nPor exemplo, dois tipos comuns de relações são as *relações de rotas*,\nque agrupam trecho de vias que pertecem a uma mesma estrada ou rodovia,\ne as *relações de  multipolígonos*, que agrupam várias linhas para definir\náreas complexas, que podem conter áreas não contínuas ou vazios dentro\nde áreas.\n\nOs objetos agrupados numa relação são chamados de *membros*. Na\nbarra lateral, você pode ver de qual relação um objeto é membro, e\nclicar em uma destas relações para selecioná-la. Quando uma relação\né selecionada, você pode ver todos os seus membros listados na barra\nlateral e selecionados no mapa.\n\nPara a maioria dos casos, o iD vai cuidar automaticamente das relações\nenquanto você edita. O mais importante a se levar em conta é que se\nvocê deletar um trecho de via que faz parte de uma relação para\nredesenhá-lo, você terá que adicioná-lo novamente como membro\nda relação original.\n\n## Editando Relações\n\nSe você quer editar relações, aqui estão instruções básicas.\n\nPara adicionar um objeto a uma relação, clique no botão \"+\" na seção\n\"Todas relações\" da barra lateral, e selecione ou digite o nome da relação.\n\nPara criar uma nova relação, primeiro selecione o objeto que deverá ser\num membro, depois clique no botão \"+\" da seção \"Todas relações\" e\nselecione \"Nova relação...\".\n\nPara remover um objeto de uma relação, selecione ela e clique no botão\nde lixeira próximo à relação da qual você quer fazer a remoção.\n\nVocê pode criar multipolígonos com vazios usando a ferramenta\n\"Mesclar\". Desenhe duas áreas (interior e exterior), segure a tecla Shift,\nclique em cada uma dessas áreas para selecioná-las e clique no\nbotão \"Mesclar\" (+).\n\n"
+            "relations": "# Relações\n\nUma relação é um tipo especial de objeto do OpenStreetMap que agrupa outros objetos.\nPor exemplo, dois tipos comuns de relações são as *relações de rotas*, que agrupam trecho de vias que pertencem a uma mesma estrada ou rodovia, e as *relações de multipolígonos*, que agrupam várias linhas para definir áreas complexas, que podem conter áreas não contínuas ou vazios dentro de áreas.\n\nOs objetos agrupados numa relação são chamados de *membros*. Na barra lateral, você pode ver de qual relação um objeto é membro, e clicar em uma destas relações para selecioná-la. Quando uma relação é selecionada, você pode ver todos os seus membros listados na barra lateral e selecionados no mapa.\n\nPara a maioria dos casos, o iD vai cuidar automaticamente das relações enquanto você edita. O mais importante a se levar em conta é que se você excluir um trecho de via que faz parte de uma relação para redesenhá-lo, você terá que adicioná-lo novamente como membro da relação original.\n\n## Editando Relações\n\nSe você quer editar relações, aqui estão instruções básicas.\n\nPara adicionar um objeto a uma relação, clique no botão \"+\" na seção \"Todas relações\" da barra lateral, e selecione ou digite o nome da relação.\n\nPara criar uma nova relação, primeiro selecione o objeto que deverá ser um membro, depois clique no botão \"+\" da seção \"Todas relações\" e selecione \"Nova relação...\".\n\nPara remover um objeto de uma relação, selecione ela e clique no botão de lixeira próximo à relação da qual você quer fazer a remoção.\n\nVocê pode criar multipolígonos com vazios usando a ferramenta \"Mesclar\". Desenhe duas áreas (interior e exterior), segure a tecla Shift, clique em cada uma dessas áreas para selecioná-las e clique no botão \"Mesclar\" (+).\n\n"
         },
         "intro": {
             "done": "feito",
@@ -625,10 +698,19 @@
                     "name": "Tipos de Edificações"
                 },
                 "category-golf": {
-                    "name": "Clubes de Golf"
+                    "name": "Elementos de Golf"
                 },
                 "category-landuse": {
                     "name": "Tipos de Uso do Solo"
+                },
+                "category-natural-area": {
+                    "name": "Elementos Naturais"
+                },
+                "category-natural-line": {
+                    "name": "Elementos Naturais"
+                },
+                "category-natural-point": {
+                    "name": "Elementos Naturais"
                 },
                 "category-path": {
                     "name": "Ciclovias e vias para pedestres"
@@ -703,17 +785,24 @@
                 "address": {
                     "label": "Endereço",
                     "placeholders": {
+                        "block_number": "Número do Bloco",
+                        "block_number!jp": "Num. do Bloco",
                         "city": "Município",
                         "conscriptionnumber": "123",
                         "country": "País",
+                        "county": "Condado",
+                        "county!jp": "Distrito",
                         "district": "Distrito",
                         "floor": "Andar/piso",
                         "hamlet": "Lugarejo",
                         "housename": "Nome da casa",
                         "housenumber": "123",
+                        "neighbourhood": "Bairro",
                         "place": "Local",
                         "postcode": "CEP",
                         "province": "Província",
+                        "province!jp": "Prefeitura",
+                        "quarter": "Quadra",
                         "state": "Estado",
                         "street": "Rua",
                         "subdistrict": "Sub-Bairro",
@@ -784,6 +873,20 @@
                 "barrier": {
                     "label": "Tipo"
                 },
+                "bath/open_air": {
+                    "label": "Céu Aberto"
+                },
+                "bath/sand_bath": {
+                    "label": "Banho de Areia"
+                },
+                "bath/type": {
+                    "label": "Especialidade",
+                    "options": {
+                        "foot_bath": "Lava pés",
+                        "hot_spring": "Fonte Termal",
+                        "onsen": "Águas Termais (Onsen)"
+                    }
+                },
                 "beauty": {
                     "label": "Tipo de Loja"
                 },
@@ -820,6 +923,24 @@
                 "building_area": {
                     "label": "Edifício"
                 },
+                "bunker_type": {
+                    "label": "Tipo"
+                },
+                "camera/direction": {
+                    "label": "Direção (Graus Sentido Horário)",
+                    "placeholder": "45, 90, 180, 270"
+                },
+                "camera/mount": {
+                    "label": "Suporte da câmera"
+                },
+                "camera/type": {
+                    "label": "Tipo de Câmera",
+                    "options": {
+                        "dome": "Dome",
+                        "fixed": "Fixa",
+                        "panning": "Panorâmica"
+                    }
+                },
                 "capacity": {
                     "label": "Capacidade",
                     "placeholder": "50, 100, 200..."
@@ -845,6 +966,9 @@
                         "WSW": "Oeste-sudoeste"
                     }
                 },
+                "castle_type": {
+                    "label": "Tipo"
+                },
                 "clock_direction": {
                     "label": "Direção",
                     "options": {
@@ -857,6 +981,10 @@
                 },
                 "construction": {
                     "label": "Tipo"
+                },
+                "contact/webcam": {
+                    "label": "URL da Webcam",
+                    "placeholder": "http://exemplo.com.br/"
                 },
                 "content": {
                     "label": "Conteúdo"
@@ -963,6 +1091,10 @@
                 "elevation": {
                     "label": "Altitude"
                 },
+                "email": {
+                    "label": "Email",
+                    "placeholder": "example@example.com"
+                },
                 "emergency": {
                     "label": "Emergência"
                 },
@@ -978,6 +1110,18 @@
                 },
                 "fee": {
                     "label": "Taxa"
+                },
+                "fence_type": {
+                    "label": "Tipo"
+                },
+                "fire_hydrant/position": {
+                    "label": "Posição",
+                    "options": {
+                        "green": "Grama",
+                        "lane": "Via",
+                        "parking_lot": "Estacionamento",
+                        "sidewalk": "Calçada"
+                    }
                 },
                 "fire_hydrant/type": {
                     "label": "Tipo",
@@ -1030,7 +1174,7 @@
                     "label": "Corrimão"
                 },
                 "height": {
-                    "label": "Altura (metros)"
+                    "label": "Altura (Metros)"
                 },
                 "highway": {
                     "label": "Tipo"
@@ -1160,6 +1304,10 @@
                 "map_type": {
                     "label": "Tipo"
                 },
+                "maxheight": {
+                    "label": "Altura Máxima",
+                    "placeholder": "4, 4.5, 5, 14'0\", 14'6\", 15'0\""
+                },
                 "maxspeed": {
                     "label": "Limite de Velocidade",
                     "placeholder": "40, 50, 60..."
@@ -1274,6 +1422,9 @@
                 "operator": {
                     "label": "Operador"
                 },
+                "outdoor_seating": {
+                    "label": "Mesas externas"
+                },
                 "par": {
                     "label": "Par",
                     "placeholder": "3, 4, 5..."
@@ -1348,6 +1499,9 @@
                 "place": {
                     "label": "Tipo"
                 },
+                "plant": {
+                    "label": "Planta"
+                },
                 "population": {
                     "label": "População"
                 },
@@ -1356,6 +1510,9 @@
                 },
                 "power_supply": {
                     "label": "Fonte de Energia"
+                },
+                "product": {
+                    "label": "Produto"
                 },
                 "railway": {
                     "label": "Tipo"
@@ -1474,9 +1631,11 @@
                     },
                     "placeholder": "Rodinhas Estreitas, Rodas, Off-Road..."
                 },
+                "social_facility": {
+                    "label": "Tipo"
+                },
                 "social_facility_for": {
-                    "label": "Pessoas atendidas",
-                    "placeholder": "Moradores de rua, deficientes, crianças, etc"
+                    "label": "Público Alvo"
                 },
                 "source": {
                     "label": "Fonte"
@@ -1492,6 +1651,9 @@
                 },
                 "stars": {
                     "label": "Estrelas"
+                },
+                "step_count": {
+                    "label": "Número de Degraus"
                 },
                 "stop": {
                     "label": "Tipo de parada obrigatória",
@@ -1526,6 +1688,20 @@
                 "surface": {
                     "label": "Superfície"
                 },
+                "surveillance": {
+                    "label": "Espécie de vigilância"
+                },
+                "surveillance/type": {
+                    "label": "Tipo de vigilância",
+                    "options": {
+                        "ALPR": "Leitor automático de placas veiculares",
+                        "camera": "Câmera",
+                        "guard": "Guarda"
+                    }
+                },
+                "surveillance/zone": {
+                    "label": "Zona de vigilância"
+                },
                 "tactile_paving": {
                     "label": "Piso Tátil"
                 },
@@ -1546,6 +1722,9 @@
                         "flush": "Descarga",
                         "pitlatrine": "Fossa/Latrina"
                     }
+                },
+                "toll": {
+                    "label": "Pedágio"
                 },
                 "tourism": {
                     "label": "Tipo"
@@ -1603,6 +1782,9 @@
                         "street": "5 a 20m (16 a 65 pés)"
                     }
                 },
+                "wall": {
+                    "label": "Tipo"
+                },
                 "water": {
                     "label": "Tipo"
                 },
@@ -1649,6 +1831,10 @@
                     "name": "Teleférico do tipo cadeira",
                     "terms": "Teleférico de cadeira, telecadeira"
                 },
+                "aerialway/drag_lift": {
+                    "name": "Telesqui",
+                    "terms": "T-bar, elevador de arrasto, teleféricos de superfície, J-bar"
+                },
                 "aerialway/gondola": {
                     "name": "Gôndola",
                     "terms": "Gôndola, Bondinho"
@@ -1656,6 +1842,10 @@
                 "aerialway/magic_carpet": {
                     "name": "Esteira de Ski",
                     "terms": "Esteira, Esteira de Ski"
+                },
+                "aerialway/mixed_lift": {
+                    "name": "Teleférico misto",
+                    "terms": "Teleférico, bondinho, telecabine, telecadeira"
                 },
                 "aerialway/platter": {
                     "name": "Telesqui de prato",
@@ -1689,8 +1879,7 @@
                     "terms": "Pátio de Aeródromo"
                 },
                 "aeroway/gate": {
-                    "name": "Portão de Embarque",
-                    "terms": "Portão de aeroporto"
+                    "name": "Portão de Embarque"
                 },
                 "aeroway/hangar": {
                     "name": "Hangar",
@@ -1707,10 +1896,6 @@
                 "aeroway/taxiway": {
                     "name": "Pista de taxiamento",
                     "terms": "Taxiway"
-                },
-                "aeroway/terminal": {
-                    "name": "Terminal de Aeroporto",
-                    "terms": "Terminal aeroportuário"
                 },
                 "amenity": {
                     "name": "Serviço"
@@ -1824,8 +2009,11 @@
                     "terms": "Tribunal, Fórum, justiça"
                 },
                 "amenity/coworking_space": {
-                    "name": "Escritório Compartilhado",
-                    "terms": "Espaço de Trabalho Compartilhado, Incubadora"
+                    "name": "Espaço de Coworking"
+                },
+                "amenity/crematorium": {
+                    "name": "Crematório",
+                    "terms": "Funeral, cemitério, cremação"
                 },
                 "amenity/dentist": {
                     "name": "Dentista",
@@ -1858,6 +2046,10 @@
                 "amenity/fire_station": {
                     "name": "Posto de Bombeiros",
                     "terms": "Posto de Bombeiros, Bombeiros, Central de Bombeiros"
+                },
+                "amenity/food_court": {
+                    "name": "Praça de Alimentação",
+                    "terms": "praça de alimentação, área de alimentação, comida, alimentação"
                 },
                 "amenity/fountain": {
                     "name": "Chafariz",
@@ -1970,6 +2162,10 @@
                 "amenity/pub": {
                     "name": "Bar",
                     "terms": "Pub, botequim, boteco, buteco"
+                },
+                "amenity/public_bath": {
+                    "name": "Banho Público",
+                    "terms": "águas termais, fonte termal, onsen, banho turco, banho japonês, chuveiro público"
                 },
                 "amenity/public_bookcase": {
                     "name": "Biblioteca ao Ar Livre",
@@ -2132,6 +2328,9 @@
                 "barrier/bollard": {
                     "name": "Pilarete",
                     "terms": "Pilar, Poste, Cabeço, Pedestal, Estaca, frade"
+                },
+                "barrier/border_control": {
+                    "name": "Controle de fronteira"
                 },
                 "barrier/cattle_grid": {
                     "name": "Mata-burro",
@@ -2770,6 +2969,10 @@
                     "name": "Estrada Agrícola",
                     "terms": "Estrada de fazenda, Fazenda, Estrada em Floresta, Floresta"
                 },
+                "highway/traffic_mirror": {
+                    "name": "Espelho de Tráfego",
+                    "terms": "Espelho, côncavo, convexo, segurança, visão, retrovisor"
+                },
                 "highway/traffic_signals": {
                     "name": "Semáforo",
                     "terms": "Semáforo"
@@ -2901,6 +3104,47 @@
                     "name": "Área militar",
                     "terms": "Zona militar, militar"
                 },
+                "landuse/military/airfield": {
+                    "name": "Aeródromo Militar",
+                    "terms": "Aeroporto Militar, Campo de Pouso Militar"
+                },
+                "landuse/military/barracks": {
+                    "name": "Quartel",
+                    "terms": "Quartel, Caserna"
+                },
+                "landuse/military/bunker": {
+                    "name": "Bunker Militar"
+                },
+                "landuse/military/checkpoint": {
+                    "name": "Posto de Controle",
+                    "terms": "Checkpoint, Ponto de Verificação"
+                },
+                "landuse/military/danger_area": {
+                    "name": "Área Perigosa",
+                    "terms": "Área de Perigo, Área Perigosa, Perigo"
+                },
+                "landuse/military/naval_base": {
+                    "name": "Base Naval",
+                    "terms": "Base Naval, Base da Marinha"
+                },
+                "landuse/military/nuclear_explosion_site": {
+                    "name": "Local de Explosão Nuclear"
+                },
+                "landuse/military/obstacle_course": {
+                    "name": "Percurso de Obstáculos",
+                    "terms": "Pista de Obstáculos"
+                },
+                "landuse/military/office": {
+                    "name": "Escritório Militar"
+                },
+                "landuse/military/range": {
+                    "name": "Estande de Tiro Militar",
+                    "terms": "Tiro Militar, Estande Militar"
+                },
+                "landuse/military/training_area": {
+                    "name": "Área de Treinamento",
+                    "terms": "Área de Treino, CT, Campo de Treinamento"
+                },
                 "landuse/orchard": {
                     "name": "Pomar",
                     "terms": "Pomar, Plantação de Frutas, Frutas"
@@ -2948,6 +3192,10 @@
                 "leisure/common": {
                     "name": "Área Comunitária",
                     "terms": "Comum, Habitual, Frequente"
+                },
+                "leisure/dance": {
+                    "name": "Danceteria",
+                    "terms": "Balada, boate"
                 },
                 "leisure/dog_park": {
                     "name": "Cachorródromo",
@@ -3048,6 +3296,10 @@
                 "leisure/playground": {
                     "name": "Parque Infantil",
                     "terms": "Parquinho, Playground"
+                },
+                "leisure/resort": {
+                    "name": "Resort",
+                    "terms": "Hotel, Complexo hoteleiro, Parque aquático, Férias, Hospedagem"
                 },
                 "leisure/running_track": {
                     "name": "Pista de Atletismo",
@@ -3164,6 +3416,10 @@
                     "name": "Câmera de Segurança",
                     "terms": "Câmera de Monitoramento, Segurança, Policiamento, Supervisão"
                 },
+                "man_made/surveillance_camera": {
+                    "name": "Câmera de vigilância",
+                    "terms": "câmera de segurança"
+                },
                 "man_made/survey_point": {
                     "name": "Ponto de Levantamento Geográfico",
                     "terms": "Marco Geodésico, Equipamento de GPS Diferencial"
@@ -3189,44 +3445,7 @@
                     "terms": "Tratamento de Água"
                 },
                 "man_made/works": {
-                    "name": "Planta Industrial",
-                    "terms": "Chão de fábrica, planta de produção industrial, fábrica, indústria"
-                },
-                "military/airfield": {
-                    "name": "Aeródromo",
-                    "terms": "aeródromo, campo de aviação"
-                },
-                "military/barracks": {
-                    "name": "Quartel",
-                    "terms": "quartel, caserna"
-                },
-                "military/bunker": {
-                    "name": "Casamata",
-                    "terms": "casamata, bunker, fortificação"
-                },
-                "military/checkpoint": {
-                    "name": "Posto de controle de segurança",
-                    "terms": "Checkpoint, Ponto de Verificação"
-                },
-                "military/danger_area": {
-                    "name": "Área Perigosa",
-                    "terms": "Área de Perigo, Perigo"
-                },
-                "military/naval_base": {
-                    "name": "Base Naval",
-                    "terms": "Base da Marinha"
-                },
-                "military/obstacle_course": {
-                    "name": "Percurso de obstáculos",
-                    "terms": "Pista de obstáculos"
-                },
-                "military/range": {
-                    "name": "Estande de Tiro Militar",
-                    "terms": "tiro, estande"
-                },
-                "military/training_area": {
-                    "name": "Área de treinamento",
-                    "terms": "Área de treino, CT, Campo de treinamento"
+                    "name": "Fábrica"
                 },
                 "natural": {
                     "name": "Natural",
@@ -3272,9 +3491,16 @@
                     "name": "Cume",
                     "terms": "Pico, Topo de Montanha, Serra, Montanha, Monte"
                 },
+                "natural/ridge": {
+                    "name": "Cumeeira",
+                    "terms": "Serra, Tergo, cumeadas, crista, inha de festo, linha de cumeada, eixo de cordilheira"
+                },
                 "natural/saddle": {
                     "name": "Passo de Montanha",
                     "terms": "<translate with synonyms or related terms for 'Saddle', separated by commas>"
+                },
+                "natural/sand": {
+                    "name": "Areia"
                 },
                 "natural/scree": {
                     "name": "Pedregulhos",
@@ -3343,6 +3569,10 @@
                 "office/company": {
                     "name": "Escritório",
                     "terms": "Escritório da Empresa"
+                },
+                "office/coworking": {
+                    "name": "Espaço de Coworking",
+                    "terms": "Escritório compartilhado, coworking, lugar de coworking"
                 },
                 "office/educational_institution": {
                     "name": "Instituição Educacional",
@@ -3446,6 +3676,9 @@
                     "name": "Vizinhança",
                     "terms": "Vizinhança, Bairro"
                 },
+                "place/square": {
+                    "name": "Praça"
+                },
                 "place/suburb": {
                     "name": "Bairro",
                     "terms": "Distrito Municipal"
@@ -3476,6 +3709,9 @@
                 "power/minor_line": {
                     "name": "Linha de Distribuição",
                     "terms": "Linha de Subtransmissão, Linha de Transmissão Secundária"
+                },
+                "power/plant": {
+                    "name": "Área de Usina Elétrica"
                 },
                 "power/pole": {
                     "name": "Poste de Transmissão",
@@ -4052,6 +4288,10 @@
                     "name": "Apartamento de Temporada",
                     "terms": "Apartamento, Condomínio, Temporada, Aluguel de Temporada, Apartamento de férias"
                 },
+                "tourism/aquarium": {
+                    "name": "Aquário",
+                    "terms": "Peixes, animais, zoológico"
+                },
                 "tourism/artwork": {
                     "name": "Obra de Arte",
                     "terms": "Obra de Arte"
@@ -4329,6 +4569,10 @@
                 "waterway/water_point": {
                     "name": "Local de Água Potável em Marinas",
                     "terms": "Água Potável Marinha"
+                },
+                "waterway/waterfall": {
+                    "name": "Cachoeira",
+                    "terms": "Queda d'água, Cascata, Catarata, Rio"
                 },
                 "waterway/weir": {
                     "name": "Vertedouro",

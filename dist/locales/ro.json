@@ -71,14 +71,12 @@
             },
             "delete": {
                 "title": "Șterge",
-                "description": "Șterge obiectul definitiv.",
                 "annotation": {
                     "point": "Șterge un punct.",
                     "vertex": "Șterge un nod dintr-o cale.",
                     "line": "Șterge o linie.",
                     "area": "Șterge o suprafață.",
-                    "relation": "Șterge o relație.",
-                    "multiple": "Am șters {n} obiecte."
+                    "relation": "Șterge o relație."
                 }
             },
             "add_member": {
@@ -107,14 +105,12 @@
             },
             "move": {
                 "title": "Mută",
-                "description": "Mută la o locație noua.",
                 "key": "M",
                 "annotation": {
                     "point": "Am mutat un punct.",
                     "vertex": "Am mutat un nod intr-o cale.",
                     "line": "Am mutat o linie.",
-                    "area": "Am mutat o suprafață.",
-                    "multiple": "Am mutat mai multe obiecte."
+                    "area": "Am mutat o suprafață."
                 }
             },
             "rotate": {
@@ -152,8 +148,6 @@
             "hidden_warning": "{count} funcționalități ascunse"
         },
         "commit": {
-            "title": "Salveaza modificarile",
-            "save": "Salveaza",
             "cancel": "Renunță",
             "changes": "{count} Modificări",
             "warnings": "Atenționări",
@@ -272,16 +266,12 @@
             "untagged_point": "Punct neetichetat",
             "untagged_line": "Linie fară tag-uri (cuvinte cheie)",
             "untagged_area": "Suprafața fară tag-uri",
-            "many_deletions": "Șteregi {n} obiecte. Ești sigur(ă) ? Le vei șterge de pe harta pe care toată lumea o vede pe opensteetmap.org. ",
             "tag_suggests_area": "Tag-ul {tag} sugerează că linia trebuie sa fie o suprafață, dar nu e.",
             "deprecated_tags": "Tag-uri învechite: {tags}"
         },
         "zoom": {
             "in": "Mareste",
             "out": "Micsoreaza"
-        },
-        "gpx": {
-            "local_layer": "Fișier GPX local"
         },
         "help": {
             "title": "Ajutor"

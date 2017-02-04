@@ -71,8 +71,7 @@
                     "vertex": "Verwyder 'n punt van 'n weg.",
                     "line": "'n Lyn is verwyder.",
                     "area": "'n Area is verwyder.",
-                    "relation": "'n Verhouding is verwyder.",
-                    "multiple": "{n} stukke is verwyder."
+                    "relation": "'n Verhouding is verwyder."
                 }
             },
             "connect": {
@@ -97,16 +96,13 @@
             },
             "move": {
                 "title": "Skuif",
-                "description": "Skuif na 'n ander plek.",
                 "key": "M",
                 "annotation": {
                     "point": "'n Punt is geskuif.",
                     "vertex": "'n Punt in weg is geskuif.",
                     "line": "'n Lyn is geskuif.",
-                    "area": "'n Area is geskuif.",
-                    "multiple": "Verskeie stukke is geskuif."
-                },
-                "incomplete_relation": "Hierdie item kan nie geskuif word nie want dit is nie volledig afgelaai nie."
+                    "area": "'n Area is geskuif."
+                }
             },
             "rotate": {
                 "title": "Draai",
@@ -153,8 +149,6 @@
             "readonly": "Die API is lees alleenliks. Jy sal so bietjie moet wag voordat jy verandering kan bêre."
         },
         "commit": {
-            "title": "Bêre veranderinge",
-            "save": "Bȇre",
             "cancel": "Kanseleer",
             "warnings": "Waarskuwings",
             "modified": "Verander",
@@ -216,7 +210,6 @@
             "untagged_point": "Punt sonder eienskappe",
             "untagged_line": "Lyn het geen kenmerk",
             "untagged_area": "Area het geen kenmerk",
-            "many_deletions": "Jy verwyder items van die kaart. Dit affekteer die kaart wat almal sien op openstreetmap.org. Maak asseblief seker dit is wat jy wil doen.",
             "tag_suggests_area": "Die kenmerk {tag} is geoormerk vir 'n area nie vir 'n lyn nie.",
             "deprecated_tags": "Vervalde kenmerke: {tags}"
         },
@@ -225,9 +218,6 @@
             "out": "Zoom uit"
         },
         "cannot_zoom": "Kan nie verder uitzoom in die huidige mode nie.",
-        "gpx": {
-            "local_layer": "Plaaslike GPX leer"
-        },
         "help": {
             "title": "Help"
         },
@@ -585,9 +575,6 @@
                 "aeroway/apron": {
                     "name": "Laaiblad"
                 },
-                "aeroway/gate": {
-                    "name": "Lughawehek"
-                },
                 "aeroway/hangar": {
                     "name": "Loods"
                 },
@@ -599,9 +586,6 @@
                 },
                 "aeroway/taxiway": {
                     "name": "Rolbaan"
-                },
-                "aeroway/terminal": {
-                    "name": "Lughaweterminaal"
                 },
                 "amenity": {
                     "name": "Geriewe"

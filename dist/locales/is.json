@@ -99,16 +99,13 @@
             },
             "delete": {
                 "title": "Eyða",
-                "description": "Eyða hlut endanlega.",
                 "annotation": {
                     "point": "Eyddi punkti.",
                     "vertex": "Eyddi hnút af leið.",
                     "line": "Eyddi línu.",
                     "area": "Eyddi svæði.",
-                    "relation": "Eyddi tengslum.",
-                    "multiple": "Eyddi {n} hlutum."
-                },
-                "incomplete_relation": "Ekki er hægt að eyða þessum hlut því að hann er ekki fullhlaðinn."
+                    "relation": "Eyddi tengslum."
+                }
             },
             "add_member": {
                 "annotation": "Bætti við vensl"
@@ -139,26 +136,21 @@
             },
             "move": {
                 "title": "Færa",
-                "description": "Færa þetta á annan stað.",
                 "key": "M",
                 "annotation": {
                     "point": "Færði punkt.",
                     "vertex": "Færði hnút á leið.",
                     "line": "Færði línu.",
-                    "area": "Færði svæði.",
-                    "multiple": "Færði marga hluti."
-                },
-                "incomplete_relation": "Ekki er hægt að færa þennan hlut því að hann er ekki fullhlaðinn."
+                    "area": "Færði svæði."
+                }
             },
             "rotate": {
                 "title": "Snúa",
-                "description": "Snúa þessu um miðpunkt sinn.",
                 "key": "R",
                 "annotation": {
                     "line": "Snéri línu.",
                     "area": "Snéri svæði."
-                },
-                "too_large": "Ekki er hægt að snúa þessu þar sem hluti þess er utan sjónsviðs."
+                }
             },
             "reverse": {
                 "title": "Öfugt",
@@ -212,10 +204,8 @@
             "readonly": "API er í lesham. Þú þarft að bíða með að vista breytingar."
         },
         "commit": {
-            "title": "Vista breytingar",
             "upload_explanation": "Breytingarnar sem þú gerir verða sýnilegar á öllum kortum sem nota OpenStreetMap gögn.",
             "upload_explanation_with_user": "Breytingarnar sem þú gerir sem {user} verða sýnilegar á öllum kortum sem nota OpenStreetMap gögn.",
-            "save": "Vista",
             "cancel": "Hætta við",
             "changes": "{count} breytingar",
             "warnings": "Aðvaranir",
@@ -251,7 +241,6 @@
             "back_tooltip": "Breyta eigindi",
             "remove": "Fjarlægja",
             "search": "Leita",
-            "multiselect": "Valdir hlutir",
             "unknown": "Óþekkt",
             "incomplete": "<ekki hlaðið niður>",
             "feature_list": "Leitareigindi",
@@ -348,7 +337,6 @@
             "untagged_point": "Ómerktur punktur",
             "untagged_line": "Ómerkt lína",
             "untagged_area": "Ómerkt svæði",
-            "many_deletions": "Þú ert að eyða {n} hlutum. Viltu gera þetta? Þetta mun eyða þeim af kortinu sem allir nota á openstreetmap.org.",
             "tag_suggests_area": "Merkingin {tag} þýðir að línan ætti að vera svæði, en hún er ekki svæði",
             "deprecated_tags": "Úrelt merki: {tags}"
         },
@@ -357,12 +345,6 @@
             "out": "Þysja út"
         },
         "cannot_zoom": "Get ekki þysjað lengra út í núverandi ham.",
-        "gpx": {
-            "local_layer": "Staðvær GPX-skrá",
-            "drag_drop": "Dragðu og slepptu .gpx skrá á síðuna eða smelltu á takkann til hægri til að fletta",
-            "zoom": "Þysja að GPX-slóð",
-            "browse": "Finna .gpx skrá"
-        },
         "mapillary": {
             "view_on_mapillary": "Skoða þessa mynd á Mapillary"
         },
@@ -790,9 +772,6 @@
                 "aeroway/apron": {
                     "name": "Tengibrú"
                 },
-                "aeroway/gate": {
-                    "name": "Flugvallarhlið"
-                },
                 "aeroway/hangar": {
                     "name": "Flugskýli"
                 },
@@ -805,9 +784,6 @@
                 },
                 "aeroway/taxiway": {
                     "name": "Flugrein"
-                },
-                "aeroway/terminal": {
-                    "name": "Flugstöð"
                 },
                 "amenity": {
                     "name": "Þjónusta"
@@ -1411,9 +1387,6 @@
                 },
                 "man_made/water_works": {
                     "name": "Vatnsveita"
-                },
-                "military/barracks": {
-                    "name": "Herbúðir"
                 },
                 "natural": {
                     "name": "Náttúrulegt"

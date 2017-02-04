@@ -101,18 +101,30 @@
             },
             "delete": {
                 "title": "Cancella",
-                "description": "Cancella l'oggetto irreversibilmente.",
+                "description": {
+                    "single": "Cancella questo elemento irreversibilmente.",
+                    "multiple": "Cancella questi elementi irreversibilmente."
+                },
                 "annotation": {
                     "point": "Cancellato un punto.",
                     "vertex": "Cancellato un punto da una way.",
                     "line": "Cancellata una linea.",
                     "area": "Cancellata un'area.",
                     "relation": "Cancellata una relazione.",
-                    "multiple": "Cancellati {n} oggetti."
+                    "multiple": "Cancellati {n} elementi."
                 },
-                "incomplete_relation": "Questo elemento non può essere cancellato perché non è stato completamente scaricato.",
-                "part_of_relation": "Questo elemento non può essere eliminato perché fa parte di una relazione. Devi prima rimuoverlo dalla relazione.",
-                "connected_to_hidden": "Questo elemento non può essere cancellato perché è connesso ad un elemento nascosto."
+                "incomplete_relation": {
+                    "single": "Questo elemento non può essere cancellato perché non è stato completamente scaricato.",
+                    "multiple": "Questi elementi non possono essere cancellati perché non sono stati completamente scaricati."
+                },
+                "part_of_relation": {
+                    "single": "Questo elemento non può essere eliminato perché fa parte di una relazione. Devi prima rimuoverlo dalla relazione.",
+                    "multiple": "Questi elementi non possono essere eliminati perché fanno parte di una relazione. Devi prima rimuoverli dalla relazione."
+                },
+                "connected_to_hidden": {
+                    "single": "Questo elemento non può essere cancellato perché è connesso ad un elemento nascosto.",
+                    "multiple": "Questi elementi non possono essere cancellati perché sono connessi a degli elementi nascosti."
+                }
             },
             "add_member": {
                 "annotation": "Aggiunto membro alla relazione"
@@ -150,29 +162,94 @@
             },
             "move": {
                 "title": "Muovi",
-                "description": "Muovi questo in una posizione differente.",
+                "description": {
+                    "single": "Muovi questo elemento in una posizione differente.",
+                    "multiple": "Muovi questi elementi in una posizione differente."
+                },
                 "key": "M",
                 "annotation": {
                     "point": "Mosso un punto.",
                     "vertex": "Mosso un nodo su una way.",
                     "line": "Mossa una linea.",
                     "area": "Mossa un'area.",
-                    "multiple": "Spostati diversi oggetti."
+                    "multiple": "Spostati diversi elementi."
                 },
-                "incomplete_relation": "Questo elemento non può essere spostato perché non è ancora stato scaricato completamente.",
-                "too_large": "Questo elemento non può essere mosso perché non è del tutto visibile.",
-                "connected_to_hidden": "Questo elemento non può essere mosso perché è connesso ad un elemento nascosto."
+                "incomplete_relation": {
+                    "single": "Questo elemento non può essere spostato perché non è ancora stato scaricato completamente.",
+                    "multiple": "Questi elementi non possono essere spostati perché non sono ancora stati scaricati completamente."
+                },
+                "too_large": {
+                    "single": "Questo elemento non può essere spostato perché non è del tutto visibile.",
+                    "multiple": "Questi elementi non possono essere spostati perché non tutti sono visibili."
+                },
+                "connected_to_hidden": {
+                    "single": "Questo elemento non può essere spostato perché è connesso ad un elemento nascosto.",
+                    "multiple": "Questi elementi non possono essere spostati perché sono connessi a degli elementi nascosti."
+                }
+            },
+            "reflect": {
+                "title": "rifletti",
+                "description": {
+                    "long": {
+                        "single": "Rifletti questo elemento lungo il suo asse maggiore.",
+                        "multiple": "Rifletti questi elementi lungo il loro asse maggiore."
+                    },
+                    "short": {
+                        "single": "Rifletti questo elemento lungo il suo asse minore.",
+                        "multiple": "Rifletti questi elementi lungo il loro asse minore."
+                    }
+                },
+                "key": {
+                    "long": "T",
+                    "short": "Y"
+                },
+                "annotation": {
+                    "long": {
+                        "single": "Riflesso un elemento lungo il suo lato maggiore.",
+                        "multiple": "Riflessi più elementi lungo il loro asse maggiore."
+                    },
+                    "short": {
+                        "single": "Riflesso un elemento lungo il suo lato minore.",
+                        "multiple": "Riflessi più elementi lungo il loro asse minore."
+                    }
+                },
+                "incomplete_relation": {
+                    "single": "Questo elemento non può essere riflesso perché non è stato completamente scaricato.",
+                    "multiple": "Questi elementi non possono essere riflessi perché non sono stati completamente scaricati."
+                },
+                "too_large": {
+                    "single": "Questo elemento non può essere riflesso perché non è del tutto visibile.",
+                    "multiple": "Questi elementi non possono essere riflessi perché non tutti sono visibili."
+                },
+                "connected_to_hidden": {
+                    "single": "Questo elemento non può essere riflesso perché è connesso ad un elemento nascosto.",
+                    "multiple": "Questi elementi non possono essere riflessi perché sono connessi a degli elementi nascosti."
+                }
             },
             "rotate": {
                 "title": "Ruota",
-                "description": "Ruota questo oggetto attorno al suo punto centrale.",
+                "description": {
+                    "single": "Ruota questo elemento attorno al suo punto centrale.",
+                    "multiple": "Ruota questi elementi attorno al loro punto centrale."
+                },
                 "key": "R",
                 "annotation": {
                     "line": "Ruotata una linea.",
-                    "area": "Ruotata un'area."
+                    "area": "Ruotata un'area.",
+                    "multiple": "Ruotati diversi elementi."
                 },
-                "too_large": "Questo elemento non può essere ruotato perché non è del tutto visibile.",
-                "connected_to_hidden": "Questo elemento non può essere ruotato perché è connesso ad un elemento nascosto."
+                "incomplete_relation": {
+                    "single": "Questo elemento non può essere ruotato perché non è ancora stato scaricato completamente.",
+                    "multiple": "Questi elementi non possono essere ruotati perché non sono ancora stati scaricati completamente."
+                },
+                "too_large": {
+                    "single": "Questo elemento non può essere ruotato perché non è del tutto visibile.",
+                    "multiple": "Questi elementi non possono essere ruotati perché non tutti sono visibili."
+                },
+                "connected_to_hidden": {
+                    "single": "Questo elemento non può essere ruotato perché è connesso ad un elemento nascosto.",
+                    "multiple": "Questi elementi non possono essere ruotati perché sono connessi a degli elementi nascosti."
+                }
             },
             "reverse": {
                 "title": "Inverti Direzione",
@@ -243,12 +320,12 @@
             "rateLimit": "L'API limita le connessioni anonime. Puoi evitare questi limiti accedendo."
         },
         "commit": {
-            "title": "Salva le modifiche",
+            "title": "Carica su OpenStreetMap",
             "description_placeholder": "Una breve descrizione delle tue modifiche (obbligatoria)",
             "message_label": "Commento al gruppo di modifiche",
             "upload_explanation": "Le modifiche che carichi saranno visibili su tutte le mappe che usano i dati di OpenStreetMap.",
             "upload_explanation_with_user": "Le modifiche che carichi come {user} saranno visibili su tutte le mappe che usano i dati di OpenStreetMap.",
-            "save": "Salva",
+            "save": "Carica",
             "cancel": "Annulla",
             "changes": "{count} Cambiamenti",
             "warnings": "Avvertimenti",
@@ -450,8 +527,8 @@
         },
         "merge_remote_changes": {
             "conflict": {
-                "deleted": "Questo oggetto è stato cancellato da {user}.",
-                "location": "Questo oggetto è stato spostato sia da te che da {user}.",
+                "deleted": "Questo elemento è stato cancellato da {user}.",
+                "location": "Questo elemento è stato spostato sia da te che da {user}.",
                 "nodelist": "Nodi modificati sia da te che da {user}.",
                 "memberlist": "Membri di relazioni modificati sia da te che da {user}.",
                 "tags": "Hai modificato il tag <b>{tag}</b> in \"{local}\" e {user} l'ha modificato in \"{remote}\"."
@@ -489,14 +566,18 @@
             "used_with": "usato con {type}"
         },
         "validations": {
+            "disconnected_highway": "Percorso scollegato",
+            "disconnected_highway_tooltip": "I percorsi dovrebbero essere connessi ad altri percorsi.",
             "untagged_point": "Punto senta tag",
             "untagged_line": "Linea senza tag",
             "untagged_area": "Area senza tag",
-            "many_deletions": "You're deleting {n} objects. Are you sure you want to do this? This will delete them from the map that everyone else sees on openstreetmap.org.",
+            "untagged_relation": "Relazione senza tag",
+            "many_deletions": "Stai per cancellare {n} elementi. Sei sicuro di volerlo fare? Questo li cancellerà dalla mappa che chiunque altro vede su openstreetmap.org.",
             "tag_suggests_area": "Il tag {tag} fa pensare che la linea sia un'area, ma non rappresenta un'area",
             "untagged_point_tooltip": "Seleziona un tipo di elemento che descriva cos'è questo punto.",
             "untagged_line_tooltip": "Seleziona un tipo di elemento che descriva cos'è questa linea.",
             "untagged_area_tooltip": "Seleziona un tipo di elemento che descriva cos'è quest'area.",
+            "untagged_relation_tooltip": "Seleziona un tipo di elemento che descriva di che relazione si tratta.",
             "deprecated_tags": "Tag deprecati: {tags}"
         },
         "zoom": {
@@ -506,10 +587,10 @@
         "cannot_zoom": "Impossibile fare zooCannot zoom out further in current mode.",
         "full_screen": "Passa a schermo intero",
         "gpx": {
-            "local_layer": "File GPX locale",
-            "drag_drop": "Trascina e rilascia un file .gpx sulla pagina o clicca il bottone a destra per sceglierne uno",
-            "zoom": "Zoom su traccia GPX",
-            "browse": "Scegli un file .gpx"
+            "local_layer": "File locale",
+            "drag_drop": "Trascina e rilascia un file .gpx, .geojson o .kml sulla pagina o clicca il pulsante a destra per sceglierne uno",
+            "zoom": "Zoom sul livello",
+            "browse": "Scegli un file"
         },
         "mapillary_images": {
             "tooltip": "Fotografie stradali da Mapillary",
@@ -630,6 +711,15 @@
                 "category-landuse": {
                     "name": "Caratteristiche degli Utilizzi del terreno"
                 },
+                "category-natural-area": {
+                    "name": "Elementi naturali"
+                },
+                "category-natural-line": {
+                    "name": "Elementi naturali"
+                },
+                "category-natural-point": {
+                    "name": "Elementi naturali"
+                },
                 "category-path": {
                     "name": "Caratteristiche dei Sentieri"
                 },
@@ -703,17 +793,23 @@
                 "address": {
                     "label": "Indirizzo",
                     "placeholders": {
+                        "block_number": "Blocco",
+                        "block_number!jp": "Num. blocco",
                         "city": "Città",
                         "conscriptionnumber": "123",
                         "country": "Nazione",
+                        "county": "Contea (in Italia NON usare)",
                         "district": "Distretto",
                         "floor": "Piano",
                         "hamlet": "Borgo",
                         "housename": "Numero civico",
                         "housenumber": "123",
+                        "housenumber!jp": "Num. edificio/Num. lotto",
+                        "neighbourhood": "Quartiere",
                         "place": "Luogo",
                         "postcode": "Codice postale",
                         "province": "Provincia",
+                        "quarter": "Circoscrizione",
                         "state": "Stato/Regione",
                         "street": "Strada",
                         "subdistrict": "Sottodistretto",
@@ -820,6 +916,9 @@
                 "building_area": {
                     "label": "Edificio"
                 },
+                "bunker_type": {
+                    "label": "Tipo"
+                },
                 "camera/direction": {
                     "label": "Direzione (gradi in senso orario)",
                     "placeholder": "45, 90, 180, 270"
@@ -859,6 +958,9 @@
                         "WNW": "Ovest-nordovest",
                         "WSW": "Ovest-sudovest"
                     }
+                },
+                "castle_type": {
+                    "label": "Tipo"
                 },
                 "clock_direction": {
                     "label": "Direzione",
@@ -982,6 +1084,10 @@
                 "elevation": {
                     "label": "Altitudine"
                 },
+                "email": {
+                    "label": "Email",
+                    "placeholder": "esempio@esempio.com"
+                },
                 "emergency": {
                     "label": "Emergenza"
                 },
@@ -1000,6 +1106,15 @@
                 },
                 "fence_type": {
                     "label": "Tipo"
+                },
+                "fire_hydrant/position": {
+                    "label": "Posizione",
+                    "options": {
+                        "green": "Prato",
+                        "lane": "Strada",
+                        "parking_lot": "Parcheggio",
+                        "sidewalk": "Marciapiede"
+                    }
                 },
                 "fire_hydrant/type": {
                     "label": "Tipo",
@@ -1377,6 +1492,9 @@
                 "place": {
                     "label": "Tipo"
                 },
+                "plant": {
+                    "label": "Pianta"
+                },
                 "population": {
                     "label": "Popolazione"
                 },
@@ -1385,6 +1503,9 @@
                 },
                 "power_supply": {
                     "label": "Alimentazione"
+                },
+                "product": {
+                    "label": "Prodotto"
                 },
                 "railway": {
                     "label": "Tipo"
@@ -1503,9 +1624,11 @@
                     },
                     "placeholder": "Rotelle, Ruote, Fuoristrada..."
                 },
+                "social_facility": {
+                    "label": "Tipo"
+                },
                 "social_facility_for": {
-                    "label": "Tipo di utenza",
-                    "placeholder": "Senza dimora, disabili, minori, ..."
+                    "label": "Tipo di utenza"
                 },
                 "source": {
                     "label": "Fonte"
@@ -1521,6 +1644,9 @@
                 },
                 "stars": {
                     "label": "Stelle"
+                },
+                "step_count": {
+                    "label": "Numero di gradini"
                 },
                 "stop": {
                     "label": "Tipo di Stop",
@@ -1589,6 +1715,9 @@
                         "flush": "Sciaquone",
                         "pitlatrine": "Fossa/Latrina"
                     }
+                },
+                "toll": {
+                    "label": "Pedaggio"
                 },
                 "tourism": {
                     "label": "Tipo"
@@ -1695,13 +1824,25 @@
                     "name": "Seggiovia",
                     "terms": "seggiovia"
                 },
+                "aerialway/drag_lift": {
+                    "name": "Sciovia",
+                    "terms": "sci,teleferica,skilift,lift"
+                },
                 "aerialway/gondola": {
                     "name": "Cabinovia",
                     "terms": "cabinovia"
                 },
+                "aerialway/goods": {
+                    "name": "Teleferica",
+                    "terms": "funivia,cavo,gru,merci"
+                },
                 "aerialway/magic_carpet": {
                     "name": "Tapis roulant",
                     "terms": "tappeto rollante"
+                },
+                "aerialway/mixed_lift": {
+                    "name": "Seggio-cabinovia",
+                    "terms": "seggiovia,cabinovia,telecombi,telemix"
                 },
                 "aerialway/platter": {
                     "name": "Skilift",
@@ -1736,7 +1877,7 @@
                 },
                 "aeroway/gate": {
                     "name": "Gate aeroportuale",
-                    "terms": "gate dell'aeroporto,uscita,cancello,imbarco,aeroporto"
+                    "terms": "gate dell'aeroporto,uscita,cancello,imbarco,aeroporto,varco"
                 },
                 "aeroway/hangar": {
                     "name": "Hangar",
@@ -1755,8 +1896,8 @@
                     "terms": "rullaggio,pista,aeroporto,manovra"
                 },
                 "aeroway/terminal": {
-                    "name": "Terminale di aeroporto",
-                    "terms": "aeroporto,aerodromo"
+                    "name": "Terminal aeroportuale",
+                    "terms": "aeroporto,aerodromo,terminale"
                 },
                 "amenity": {
                     "name": "Servizi"
@@ -1870,8 +2011,7 @@
                     "terms": "Palazzo di Giustizia"
                 },
                 "amenity/coworking_space": {
-                    "name": "Spazio in coworking",
-                    "terms": "coworking,ufficio"
+                    "name": "Spazio di Coworking"
                 },
                 "amenity/crematorium": {
                     "name": "Forno crematorio",
@@ -2182,6 +2322,10 @@
                 "barrier/bollard": {
                     "name": "Colonnina",
                     "terms": "Colonnina"
+                },
+                "barrier/border_control": {
+                    "name": "Controllo frontaliero",
+                    "terms": "frontiera,controllo,dogana,barriera,polizia di frontiera"
                 },
                 "barrier/cattle_grid": {
                     "name": "grata blocca-bestiame",
@@ -2955,6 +3099,50 @@
                     "name": "Area militare",
                     "terms": "base,militare,forze dell'ordine,soldati,caserma,fanteria,artiglieria"
                 },
+                "landuse/military/airfield": {
+                    "name": "Aeroporto militare",
+                    "terms": "aviazione,aeronautica,base,bombe,forze,aeree,caccia,jet,elicotteri"
+                },
+                "landuse/military/barracks": {
+                    "name": "Caserma",
+                    "terms": "militari,leva,casermone,esercito,reclutamento,base,forze,armate,soldati"
+                },
+                "landuse/military/bunker": {
+                    "name": "Bunker militare",
+                    "terms": "nascondiglio,soldati,caserma"
+                },
+                "landuse/military/checkpoint": {
+                    "name": "Posto di controllo",
+                    "terms": "checkpoint,check point,posto di blocco"
+                },
+                "landuse/military/danger_area": {
+                    "name": "Zona militare pericolosa",
+                    "terms": "militari,pericolo,soldati,esercito"
+                },
+                "landuse/military/naval_base": {
+                    "name": "Base navale",
+                    "terms": "base,navi,marina,marina militare"
+                },
+                "landuse/military/nuclear_explosion_site": {
+                    "name": "Sito per esplosioni nucleari",
+                    "terms": "bomba,atomica,poligono,tiro,lancio,missil*,test,nucleare"
+                },
+                "landuse/military/obstacle_course": {
+                    "name": "Percorso ad ostacoli",
+                    "terms": "Percorso a ostacoli"
+                },
+                "landuse/military/office": {
+                    "name": "Ufficio militare",
+                    "terms": "base,militare,forze dell'ordine,soldati,caserma,fanteria,artiglieria,uffici,amministrazione"
+                },
+                "landuse/military/range": {
+                    "name": "Poligono di tiro militare",
+                    "terms": "poligono,militare,tiro,lancio,bombe,missil*"
+                },
+                "landuse/military/training_area": {
+                    "name": "Area di addestramento",
+                    "terms": "campo di addestramento,addestramento,militare"
+                },
                 "landuse/orchard": {
                     "name": "Frutteto",
                     "terms": "Frutteto"
@@ -3034,6 +3222,10 @@
                 "leisure/golf_course": {
                     "name": "Campo da Golf",
                     "terms": "Campo da golf"
+                },
+                "leisure/horse_riding": {
+                    "name": "Centro equestre",
+                    "terms": "cavall*,equestre,circolo,ippica,club"
                 },
                 "leisure/ice_rink": {
                     "name": "Pista di Ghiaccio",
@@ -3258,45 +3450,13 @@
                     "name": "Fabbrica",
                     "terms": "industria,manifattura,officina,opificio,stabilimento,laboratorio"
                 },
-                "military/airfield": {
-                    "name": "Campo d'aviazione",
-                    "terms": "aviazione militare,militari,esercito,campovolo,aeroporto,areoporto,eliporto"
-                },
-                "military/barracks": {
-                    "name": "Caserma",
-                    "terms": "militari,leva,casermone,esercito,reclutamento"
-                },
-                "military/bunker": {
-                    "name": "Bunker",
-                    "terms": "bunker,casamatta"
-                },
-                "military/checkpoint": {
-                    "name": "Posto di controllo",
-                    "terms": "checkpoint,check point,posto di blocco"
-                },
-                "military/danger_area": {
-                    "name": "Area pericolosa",
-                    "terms": "militari,pericolo,soldati,esercito"
-                },
-                "military/naval_base": {
-                    "name": "Base navale",
-                    "terms": "base,navi,marina,marina militare"
-                },
-                "military/obstacle_course": {
-                    "name": "Percorso ad ostacoli",
-                    "terms": "Percorso a ostacoli"
-                },
-                "military/range": {
-                    "name": "Poligono di tiro militare",
-                    "terms": "Poligono militare"
-                },
-                "military/training_area": {
-                    "name": "Area di addestramento",
-                    "terms": "campo di addestramento,addestramento"
-                },
                 "natural": {
                     "name": "Naturale",
                     "terms": "Elemento naturale"
+                },
+                "natural/bare_rock": {
+                    "name": "Roccia",
+                    "terms": "roccia,sassi,pietre,viva,nuda"
                 },
                 "natural/bay": {
                     "name": "Baia",
@@ -3338,9 +3498,17 @@
                     "name": "Picco",
                     "terms": "culmine,guglia,alpe,apice,cresta,sommità,cima,cocuzzolo,collina,monte,montagna,pinnacolo,estremità,vertice,vetta,piz"
                 },
+                "natural/ridge": {
+                    "name": "Crinale",
+                    "terms": "cresta"
+                },
                 "natural/saddle": {
                     "name": "Sella",
                     "terms": "passo,valico,sella,forcella"
+                },
+                "natural/sand": {
+                    "name": "Sabbia",
+                    "terms": "deserto"
                 },
                 "natural/scree": {
                     "name": "Ghiaione",
@@ -3410,6 +3578,10 @@
                     "name": "Ufficio aziendale",
                     "terms": "Ufficio"
                 },
+                "office/coworking": {
+                    "name": "Ufficio in Coworking",
+                    "terms": "collaborazione,open,space,coworking"
+                },
                 "office/educational_institution": {
                     "name": "Istituto d'Istruzione",
                     "terms": "Istituzione educativa,istituto di istruzione,istituzione preposta all'istruzione"
@@ -3445,6 +3617,10 @@
                 "office/lawyer": {
                     "name": "Studio legale",
                     "terms": "ufficio legale,legale,avvocato,avvocatura,magistrato,difensore,azzeccagarbugli"
+                },
+                "office/lawyer/notary": {
+                    "name": "Ufficio notarile",
+                    "terms": "firma,notaio,stato,burocrazia"
                 },
                 "office/newspaper": {
                     "name": "Giornale",
@@ -3512,6 +3688,10 @@
                     "name": "Vicinanze",
                     "terms": "Quartiere,Zona"
                 },
+                "place/square": {
+                    "name": "Piazza",
+                    "terms": "piazz*,spiazzo,slargo"
+                },
                 "place/suburb": {
                     "name": "Sobborgo",
                     "terms": "sobborgo,quartiere,circoscrizione"
@@ -3542,6 +3722,10 @@
                 "power/minor_line": {
                     "name": "Linea elettrica minore",
                     "terms": "corrente,elettricità,elettrodotto,cavo elettrico"
+                },
+                "power/plant": {
+                    "name": "Area della Centrale elettrica",
+                    "terms": "carbone,gas,generatore,idroelettrico,nucleare,energia,elettric*,centrale"
                 },
                 "power/pole": {
                     "name": "Palo della luce",
@@ -4399,6 +4583,10 @@
                 "waterway/water_point": {
                     "name": "Acqua potabile per barche",
                     "terms": "colonnina,acqua,barca,nave"
+                },
+                "waterway/waterfall": {
+                    "name": "Cascata",
+                    "terms": "cascata,salto,acqua,rotte,rapide"
                 },
                 "waterway/weir": {
                     "name": "Sbarramento",

@@ -101,18 +101,30 @@
             },
             "delete": {
                 "title": "Törlés",
-                "description": "Az objektum végleges törlése",
+                "description": {
+                    "single": "Az elem végleges törlése.",
+                    "multiple": "Az elemek végleges törlése."
+                },
                 "annotation": {
                     "point": "Pont törölve.",
                     "vertex": "Pont törölve egy vonalból.",
                     "line": "Vonal törölve.",
                     "area": "Terület törölve.",
                     "relation": "Kapcsolat törölve.",
-                    "multiple": "{n} objektum törölve."
+                    "multiple": "{n} elem törölve."
                 },
-                "incomplete_relation": "Az elem nem törölhető, mert nem lett teljesen letöltve.",
-                "part_of_relation": "Ezt az elemet nem lehet törölni, mert egy nagyobb kapcsolat része. Elsőként el kell távolítanod a kapcsolatból.",
-                "connected_to_hidden": "Nem törölhető, mert egy rejtett elemhez csatlakozik."
+                "incomplete_relation": {
+                    "single": "Az elem nem törölhető, mert nem lett teljesen letöltve.",
+                    "multiple": "Az elemek nem törölhetőek, mert nem lettek teljesen letöltve."
+                },
+                "part_of_relation": {
+                    "single": "Ezt az elemet nem lehet törölni, mert egy nagyobb kapcsolat része. Elsőként el kell távolítanod a kapcsolatból.",
+                    "multiple": "Ezeket az elemeket nem lehet törölni, mert egy nagyobb kapcsolat részei. Elsőként el kell távolítanod őket a kapcsolatokból."
+                },
+                "connected_to_hidden": {
+                    "single": "Az elem nem törölhető, mert egy rejtett elemhez csatlakozik.",
+                    "multiple": "Az elemek nem törölhetőek, mert rejtett elemekhez csatlakoznak."
+                }
             },
             "add_member": {
                 "annotation": "Tag hozzáadva a kapcsolathoz"
@@ -150,29 +162,94 @@
             },
             "move": {
                 "title": "Mozgatás",
-                "description": "Elem mozgatása más helyre.",
+                "description": {
+                    "single": "Elem mozgatása más helyre.",
+                    "multiple": "Elemek mozgatása más helyre."
+                },
                 "key": "M",
                 "annotation": {
                     "point": "Pont elmozgatva.",
                     "vertex": "A vonal egy pontjának elmozgatva.",
                     "line": "Vonal elmozgatva.",
                     "area": "Terület elmozgatva.",
-                    "multiple": "Több objektum elmozgatva."
+                    "multiple": "Több elem elmozgatva."
                 },
-                "incomplete_relation": "Az elem nem mozgatható el, mert nem lett teljesen letöltve.",
-                "too_large": "Nem lehet áthelyezni, mert nem látszik az egész alakzat.",
-                "connected_to_hidden": "Nem helyezhető át, mert egy rejtett elemhez csatlakozik."
+                "incomplete_relation": {
+                    "single": "Az elem nem mozgatható el, mert nem lett teljesen letöltve.",
+                    "multiple": "Az elemek nem mozgathatóak el, mert nem lettek teljesen letöltve."
+                },
+                "too_large": {
+                    "single": "Az elem nem mozgatható el, mert nem látszik az egész alakzat.",
+                    "multiple": "Az elemek nem mozgathatóak el, mert nem látszik az alakzatuk."
+                },
+                "connected_to_hidden": {
+                    "single": "Az elem nem mozgatható el, mert egy rejtett elemhez csatlakozik.",
+                    "multiple": "Az elemek nem mozgathatóak el, mert rejtett elemekhez csatlakoznak."
+                }
+            },
+            "reflect": {
+                "title": "tükrözés",
+                "description": {
+                    "long": {
+                        "single": "Elem tükrözése a hosszanti tengelyére.",
+                        "multiple": "Elemek tükrözése a hosszanti tengelyükre."
+                    },
+                    "short": {
+                        "single": "Elem tükrözése az oldalirányú tengelyére.",
+                        "multiple": "Elemek tükrözése az oldalirányú tengelyükre."
+                    }
+                },
+                "key": {
+                    "long": "T",
+                    "short": "Y"
+                },
+                "annotation": {
+                    "long": {
+                        "single": "Elem tükrözve a hosszanti tengelyére.",
+                        "multiple": "Elemek tükrözve a hosszanti tengelyükre."
+                    },
+                    "short": {
+                        "single": "Elem tükrözve az oldalirányú tengelyére.",
+                        "multiple": "Elemek tükrözve az oldalirányú tengelyükre."
+                    }
+                },
+                "incomplete_relation": {
+                    "single": "Az elem nem tükrözhető, mert nem lett teljesen letöltve.",
+                    "multiple": "Az elemek nem tükrözhetőek, mert nem lettek teljesen letöltve."
+                },
+                "too_large": {
+                    "single": "Az elem nem tükrözhető, mert nem látszik az egész alakzat.",
+                    "multiple": "Az elemek nem tükrözhetőek, mert nem látszik az egész alakzatuk."
+                },
+                "connected_to_hidden": {
+                    "single": "Az elem nem tükrözhető, mert egy rejtett elemhez csatlakozik.",
+                    "multiple": "Az elemek nem tükrözhetőek, mert egy rejtett elemekhez csatlakoznak."
+                }
             },
             "rotate": {
                 "title": "Forgatás",
-                "description": "Objektum elforgatása a középpontja körül.",
+                "description": {
+                    "single": "Elem elforgatása a középpontja körül.",
+                    "multiple": "Elemek elforgatása a középpontjuk körül."
+                },
                 "key": "R",
                 "annotation": {
                     "line": "Vonal elforgatva.",
-                    "area": "Terület elforgatása."
+                    "area": "Terület elforgatása.",
+                    "multiple": "Több elem elforgatva."
                 },
-                "too_large": "Nem lehet elforgatni, mert nem látszik az egész alakzat.",
-                "connected_to_hidden": "Nem lehet elforgatni, mert egy rejtett elemhez csatlakozik."
+                "incomplete_relation": {
+                    "single": "Az elem nem forgatható el, mert nem lett teljesen letöltve.",
+                    "multiple": "Az elemek nem forgathatóak el, mert nem lettek teljesen letöltve."
+                },
+                "too_large": {
+                    "single": "Az elem nem forgatható el, mert nem látszik az egész alakzat.",
+                    "multiple": "Az elemek nem forgathatóak el, mert nem látszik az alakzatuk."
+                },
+                "connected_to_hidden": {
+                    "single": "Az elem nem forgatható el, mert egy rejtett elemhez csatlakozik.",
+                    "multiple": "Az elemek nem forgathatóak el, mert rejtett elemekhez csatlakoznak."
+                }
             },
             "reverse": {
                 "title": "Megfordítás",
@@ -243,12 +320,12 @@
             "rateLimit": "Az API korlátozza az anonim kapcsolatokat. Ezt megoldhatod azzal, hogy bejelentkezel."
         },
         "commit": {
-            "title": "Módosítások mentése",
+            "title": "Feltöltés az OpenStreetMapre",
             "description_placeholder": "A közreműködéseid rövid leírása (kötelező)",
-            "message_label": "Módosításcsomag megjegyzés",
+            "message_label": "Módosításcsomag megjegyzése",
             "upload_explanation": "Az általad feltöltött változtatások minden OpenStreetMapet használó térképen láthatóak lesznek.",
             "upload_explanation_with_user": "Az általad {user} néven feltöltött változtatások minden OpenStreetMapet használó térképen láthatóak lesznek.",
-            "save": "Mentés",
+            "save": "Feltöltés",
             "cancel": "Mégsem",
             "changes": "{count} módosítás",
             "warnings": "Figyelmeztetések",
@@ -445,13 +522,13 @@
                 "delete": "Hagyja törölve",
                 "download_changes": "Vagy töltsd le változtatásaidat.",
                 "done": "Minden ütközés feloldva!",
-                "help": "Valaki más is változtatott azon a térképrészleten, amin te is dolgoztál.\nKattints az alábbi elemekre, hogy megtudj többet az ütközésekről és eldöntsd, hogy a te vagy\naz ő változtatásait szeretnéd-e megtartani.\n"
+                "help": "Egy másik felhasználó módosított néhány térképelemet, amelyet te is.\nKattints minden egyes elemre lent hogy többet tudj meg a konfliktusról, és válaszd ki, hogy\na saját vagy a másik felhasználó módosításait tartod meg.\n"
             }
         },
         "merge_remote_changes": {
             "conflict": {
-                "deleted": "Ezt az objektumot {user} törölte.",
-                "location": "Ezt az objektumot te és {user} is áthelyezte.",
+                "deleted": "Ezt az elemet törölte a következő felhasználó: {user}.",
+                "location": "Ez az elem egyszerre lett elmozgatva általad és {user} által.",
                 "nodelist": "Az adott pontok egyszerre kerültek módosításra általad és {user} - által.",
                 "memberlist": "A kapcsolat elemei egyszerre kerültek módosításra általad és {user} által.",
                 "tags": "Te megváltoztattad a(z) <b>{tag}</b> címkét erre: \"{local}\", {user} pedig erre: \"{remote}\"."
@@ -489,14 +566,18 @@
             "used_with": "használd mint {type}"
         },
         "validations": {
+            "disconnected_highway": "Nem összekapcsolt autópálya",
+            "disconnected_highway_tooltip": "Az utakat össze kell kötni más utakkal.",
             "untagged_point": "Címkézetlen pont",
             "untagged_line": "Címkézetlen vonal",
             "untagged_area": "Címkézetlen terület",
-            "many_deletions": "{n} objektum törlésére készülsz. Biztos vagy benne? Ez törli őket a térképről, amit mindenki más lát az openstreetmap.org-on.",
+            "untagged_relation": "Címkézetlen kapcsolat",
+            "many_deletions": "{n} elem törlésére készülsz. Biztosan ezt szeretnéd? Ez törli őket arról a térképről, amelyet mindenki más is lát az openstreetmap.org oldalon.",
             "tag_suggests_area": "A(z) {tag} címke alapján a vonal terület kéne legyen, de ez nem terület",
             "untagged_point_tooltip": "Jelöld ki azt az elemtípust, amely leírja, hogy mi ez a pont.",
             "untagged_line_tooltip": "Jelöld ki azt az elemtípust, amely leírja, hogy mi ez a vonal.",
             "untagged_area_tooltip": "Jelöld ki azt az elemtípust, amely leírja, hogy mi ez a terület.",
+            "untagged_relation_tooltip": "Válasszon egy elemtípust, amely leírja, hogy mi ez a kapcsolat.",
             "deprecated_tags": "Elavult címkék: {tags}"
         },
         "zoom": {
@@ -506,10 +587,9 @@
         "cannot_zoom": "Nem lehet jobban távolítani ebben a módban.",
         "full_screen": "Váltás teljes képernyőre",
         "gpx": {
-            "local_layer": "Helyi GPX fájl",
-            "drag_drop": "Húzz egy .gpx fájlt az oldalra, vagy kattints a gombra a tallózáshoz.",
-            "zoom": "Nagyítás a GPX nyomvonalra",
-            "browse": ".gpx fájl tallózása"
+            "local_layer": "Helyi fájl",
+            "zoom": "Nagyítás a rétegre",
+            "browse": "Tallózzon egy fájlt"
         },
         "mapillary_images": {
             "tooltip": "Utcafotók a Mapillary-ből",
@@ -630,6 +710,15 @@
                 "category-landuse": {
                     "name": "Területi elemek"
                 },
+                "category-natural-area": {
+                    "name": "Természeti elemek"
+                },
+                "category-natural-line": {
+                    "name": "Természeti elemek"
+                },
+                "category-natural-point": {
+                    "name": "Természeti elemek"
+                },
                 "category-path": {
                     "name": "Útvonal elemek"
                 },
@@ -706,6 +795,7 @@
                         "city": "Város",
                         "conscriptionnumber": "123",
                         "country": "Ország",
+                        "county": "Megye",
                         "district": "Kerület",
                         "floor": "Padló",
                         "hamlet": "Falucska",
@@ -784,6 +874,20 @@
                 "barrier": {
                     "label": "Típus"
                 },
+                "bath/open_air": {
+                    "label": "Kültéri"
+                },
+                "bath/sand_bath": {
+                    "label": "Homokfürdő"
+                },
+                "bath/type": {
+                    "label": "Különlegesség",
+                    "options": {
+                        "foot_bath": "Lábfürdő",
+                        "hot_spring": "Melegforrás",
+                        "onsen": "Japán onsen"
+                    }
+                },
                 "beauty": {
                     "label": "Bolttípus"
                 },
@@ -819,6 +923,9 @@
                 },
                 "building_area": {
                     "label": "Épület"
+                },
+                "bunker_type": {
+                    "label": "Típus"
                 },
                 "camera/direction": {
                     "label": "Irány (szög az óra járása szerint)",
@@ -859,6 +966,9 @@
                         "WNW": "Nyugat-északnyugat",
                         "WSW": "Nyugat-délnyugat"
                     }
+                },
+                "castle_type": {
+                    "label": "Típus"
                 },
                 "clock_direction": {
                     "label": "Irány",
@@ -982,6 +1092,10 @@
                 "elevation": {
                     "label": "Tengerszint feletti magasság"
                 },
+                "email": {
+                    "label": "E-mail",
+                    "placeholder": "example@example.com"
+                },
                 "emergency": {
                     "label": "Vészhelyzet"
                 },
@@ -1000,6 +1114,15 @@
                 },
                 "fence_type": {
                     "label": "Típus"
+                },
+                "fire_hydrant/position": {
+                    "label": "Elhelyezkedés",
+                    "options": {
+                        "green": "Zöldterület",
+                        "lane": "Sáv",
+                        "parking_lot": "Parkoló",
+                        "sidewalk": "Járda"
+                    }
                 },
                 "fire_hydrant/type": {
                     "label": "Típus",
@@ -1052,7 +1175,7 @@
                     "label": "Korlát"
                 },
                 "height": {
-                    "label": "Magasság (méter)"
+                    "label": "Magasság (méterben)"
                 },
                 "highway": {
                     "label": "Típus"
@@ -1300,6 +1423,9 @@
                 "operator": {
                     "label": "Üzemeltető"
                 },
+                "outdoor_seating": {
+                    "label": "Szabadtéri asztalok"
+                },
                 "par": {
                     "label": "Golfpálya par száma",
                     "placeholder": "3, 4, 5..."
@@ -1374,6 +1500,9 @@
                 "place": {
                     "label": "Típus"
                 },
+                "plant": {
+                    "label": "Növény"
+                },
                 "population": {
                     "label": "Lakosság"
                 },
@@ -1382,6 +1511,9 @@
                 },
                 "power_supply": {
                     "label": "Áramszolgáltatás"
+                },
+                "product": {
+                    "label": "Termék"
                 },
                 "railway": {
                     "label": "Típus"
@@ -1500,9 +1632,11 @@
                     },
                     "placeholder": "Gördeszkás, kerekes, terepjárós"
                 },
+                "social_facility": {
+                    "label": "Típus"
+                },
                 "social_facility_for": {
-                    "label": "Szociálisan rászorultak",
-                    "placeholder": "Hajléktalanok, sérültek, gyermekek, stb."
+                    "label": "Kiszolgált emberek"
                 },
                 "source": {
                     "label": "Forrás"
@@ -1518,6 +1652,9 @@
                 },
                 "stars": {
                     "label": "Csillagok"
+                },
+                "step_count": {
+                    "label": "Lépcsők száma"
                 },
                 "stop": {
                     "label": "Elsőbbségadás típusa",
@@ -1591,7 +1728,8 @@
                     "label": "Típus"
                 },
                 "tower/construction": {
-                    "label": "Építkezés"
+                    "label": "Építkezés",
+                    "placeholder": "Kikötött, rács, rejtett, …"
                 },
                 "tower/type": {
                     "label": "Típus"
@@ -1730,10 +1868,6 @@
                     "name": "Forgalmi előtér",
                     "terms": "Forgalmi előtér"
                 },
-                "aeroway/gate": {
-                    "name": "Reptér kapu",
-                    "terms": "reptéri kapu"
-                },
                 "aeroway/hangar": {
                     "name": "Hangár",
                     "terms": "hangár"
@@ -1749,10 +1883,6 @@
                 "aeroway/taxiway": {
                     "name": "Gurulóút",
                     "terms": "Gurulóút"
-                },
-                "aeroway/terminal": {
-                    "name": "Utasterminál",
-                    "terms": "terminál"
                 },
                 "amenity": {
                     "name": "Ismeretlen típusú szolgáltatás"
@@ -1866,8 +1996,7 @@
                     "terms": "Törvényszék, Kúria , Ítélőtábla, Bírósági Hivatal, ítélőszék"
                 },
                 "amenity/coworking_space": {
-                    "name": "Közösségi munkatér",
-                    "terms": "coworking,közösségi,munka"
+                    "name": "Közösségi munkatér"
                 },
                 "amenity/crematorium": {
                     "name": "Krematórium",
@@ -2016,6 +2145,10 @@
                 "amenity/pub": {
                     "name": "Kocsma",
                     "terms": "italmérés, késdobáló, csehó, borozó, poharazó, italbolt, ivó, talponálló, kricsmi, piálda, söntés, csapszék, söröző, sörház"
+                },
+                "amenity/public_bath": {
+                    "name": "Nyilvános fürdő",
+                    "terms": "nyilvános fürdő,közfürdő,fürdő"
                 },
                 "amenity/public_bookcase": {
                     "name": "Közösségi könyvespolc",
@@ -2947,6 +3080,50 @@
                     "name": "Katonai terület",
                     "terms": "Lőtér,  Gyakorló terep"
                 },
+                "landuse/military/airfield": {
+                    "name": "Katonai repülőtér",
+                    "terms": "katonai reptér,repülőbázis,légibázis"
+                },
+                "landuse/military/barracks": {
+                    "name": "Katonai barakk",
+                    "terms": "laktanya,kaszárnya"
+                },
+                "landuse/military/bunker": {
+                    "name": "Katonai bunker",
+                    "terms": "bunker,óvóhely"
+                },
+                "landuse/military/checkpoint": {
+                    "name": "Katonai ellenőrzőpont",
+                    "terms": "ellenőrzőpont"
+                },
+                "landuse/military/danger_area": {
+                    "name": "Veszélyes terület",
+                    "terms": "veszély,veszélyes,terület"
+                },
+                "landuse/military/naval_base": {
+                    "name": "Haditengerészeti bázis",
+                    "terms": "tengerészeti,haditengerészeti,bázis"
+                },
+                "landuse/military/nuclear_explosion_site": {
+                    "name": "Nukleáris robbantás helyszíne",
+                    "terms": "atom,robbantás,bomba,kísérlet,helyszín"
+                },
+                "landuse/military/obstacle_course": {
+                    "name": "Akadálypálya",
+                    "terms": "katonai,bázis,hadsereg,akadály,pálya"
+                },
+                "landuse/military/office": {
+                    "name": "Katonai hivatal",
+                    "terms": "katonai,honvédéségi,hivatal,iroda"
+                },
+                "landuse/military/range": {
+                    "name": "Katonai lőtér",
+                    "terms": "katonai,honvédségi,lőtér"
+                },
+                "landuse/military/training_area": {
+                    "name": "Kiképzési terület",
+                    "terms": "katonai,honvédségi,kiképző,terület"
+                },
                 "landuse/orchard": {
                     "name": "Gyümölcsös terület",
                     "terms": "Gyümölcsöskert"
@@ -3217,7 +3394,8 @@
                     "terms": "térfigyelő kamera, biztonsági kamera"
                 },
                 "man_made/surveillance_camera": {
-                    "name": "Megfigyelő kamera"
+                    "name": "Megfigyelő kamera",
+                    "terms": "térfigyelő kamera,biztonsági kamera"
                 },
                 "man_made/survey_point": {
                     "name": "Földmérési alappont",
@@ -3245,47 +3423,15 @@
                 },
                 "man_made/works": {
                     "name": "Gyár",
-                    "terms": "művek"
-                },
-                "military/airfield": {
-                    "name": "Katonai repülőtér",
-                    "terms": "Katonai repülőtér"
-                },
-                "military/barracks": {
-                    "name": "Katonai barakk",
-                    "terms": "Laktanya"
-                },
-                "military/bunker": {
-                    "name": "Katonai bunker",
-                    "terms": "Bunker"
-                },
-                "military/checkpoint": {
-                    "name": "Ellenőrzőpont",
-                    "terms": "ellenőrzőpont"
-                },
-                "military/danger_area": {
-                    "name": "Veszélyes terület",
-                    "terms": "veszély,veszélyes,terület"
-                },
-                "military/naval_base": {
-                    "name": "Haditengerészeti bázis",
-                    "terms": "tengerészeti,haditengerészeti,bázis"
-                },
-                "military/obstacle_course": {
-                    "name": "Akadálypálya",
-                    "terms": "akadálypálya"
-                },
-                "military/range": {
-                    "name": "Katonai lőtér",
-                    "terms": "Katonai terület"
-                },
-                "military/training_area": {
-                    "name": "Kiképzési terület",
-                    "terms": "kiképzőterület"
+                    "terms": "gyár,üzem,kombinát,manufaktúra,művek "
                 },
                 "natural": {
                     "name": "Természet",
                     "terms": "Természet"
+                },
+                "natural/bare_rock": {
+                    "name": "Csupasz szikla",
+                    "terms": "szikla,kő"
                 },
                 "natural/bay": {
                     "name": "Öböl",
@@ -3327,9 +3473,17 @@
                     "name": "Hegycsúcs",
                     "terms": "Hegycsúcs, hegytető, csúcs"
                 },
+                "natural/ridge": {
+                    "name": "Hegygerinc",
+                    "terms": "hegy,gerinc,tető"
+                },
                 "natural/saddle": {
                     "name": "Hegygerinc",
                     "terms": "gerinc, hágó"
+                },
+                "natural/sand": {
+                    "name": "Homok",
+                    "terms": "homok,föveny"
                 },
                 "natural/scree": {
                     "name": "Kőtörmelék",
@@ -3398,6 +3552,9 @@
                 "office/company": {
                     "name": "Cég",
                     "terms": "vállalkozás, iroda, magánvállalkozás, vállalat"
+                },
+                "office/coworking": {
+                    "name": "Közösségi munkatér"
                 },
                 "office/educational_institution": {
                     "name": "Oktatási hivatal",
@@ -3531,6 +3688,9 @@
                 "power/minor_line": {
                     "name": "Elektromos vezeték",
                     "terms": "távvezeték, villanyvezeték, kisfesztültségű vezeték"
+                },
+                "power/plant": {
+                    "name": "Erőműterület"
                 },
                 "power/pole": {
                     "name": "Villanyoszlop",
@@ -4370,6 +4530,10 @@
                 "waterway/water_point": {
                     "name": "Tengeri ivóvíz",
                     "terms": "csónak,hajó,vízijármű,víz,ivóvíz"
+                },
+                "waterway/waterfall": {
+                    "name": "Vízesés",
+                    "terms": "vízesés,zuhatag,zúgó"
                 },
                 "waterway/weir": {
                     "name": "Bukógát",

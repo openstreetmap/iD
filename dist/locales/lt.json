@@ -101,18 +101,13 @@
             },
             "delete": {
                 "title": "Ištrinti",
-                "description": "Ištrinti objektą visam.",
                 "annotation": {
                     "point": "Taškas ištrintas.",
                     "vertex": "Viršūnė pašalinta iš kelio.",
                     "line": "Linija ištrinta.",
                     "area": "Teritorija ištrinta.",
-                    "relation": "Pašalintas ryšys.",
-                    "multiple": "Pašalinta {n} objektų."
-                },
-                "incomplete_relation": "Šio objekto negalima panaikinti, nes jis nebuvo pilnai atsiųstas.",
-                "part_of_relation": "Šis objektas negali būti ištrintas, nes jis yra didesnio ryšio dalis. Visų pirma turite jį pašalinti iš ryšio.",
-                "connected_to_hidden": "Tai negali būti panaikinta, nes yra prijungta prie paslėpto objekto."
+                    "relation": "Pašalintas ryšys."
+                }
             },
             "add_member": {
                 "annotation": "Narys pridėtas prie ryšio."
@@ -150,29 +145,21 @@
             },
             "move": {
                 "title": "Perkelti",
-                "description": "Perkelti tai į kitą vietą.",
                 "key": "M",
                 "annotation": {
                     "point": "Taškas perkeltas.",
                     "vertex": "Perkeltas taškas kelyje.",
                     "line": "Linija perkelta.",
-                    "area": "Perkeltas plotas.",
-                    "multiple": "Perkelti keli objektai."
-                },
-                "incomplete_relation": "Šio geoobjekto negalima perkelti, nes jis nėra pilnai atsiųstas.",
-                "too_large": "Negalima perkelti, nes nepilnai matomas.",
-                "connected_to_hidden": "Tai negali būti perkelta, nes yra prijungta prie paslėpto objekto."
+                    "area": "Perkeltas plotas."
+                }
             },
             "rotate": {
                 "title": "Pasukti",
-                "description": "Pasukti šį objektą ties centro tašku.",
                 "key": "R",
                 "annotation": {
                     "line": "Linija pasukta.",
                     "area": "Pasuktas plotas."
-                },
-                "too_large": "Negalima sukti, nes nepilnai matomas.",
-                "connected_to_hidden": "Tai negali būti pasukta, nes yra prijungta prie paslėpto objekto."
+                }
             },
             "reverse": {
                 "title": "Atstatyti",
@@ -243,12 +230,9 @@
             "rateLimit": "API riboja anoniminius prisijungimus. Galite tai išspręsti prisijungdami."
         },
         "commit": {
-            "title": "Išsaugoti pakeitimus",
             "description_placeholder": "Trumpas jūsų indėlio aprašymas (privalomas)",
-            "message_label": "Pakeitimo komentaras",
             "upload_explanation": "Jūsų įkeliami pakeitimai bus matomi visuose žemėlapiuose, naudojančiuose OpenStreetMap duomenis.",
             "upload_explanation_with_user": "Pakeitimai, kuriuos jūs įkeliate kaip naudotojas {user} bus matomi visuose žemėlapiuose, naudojančiuose OpenStreetMap duomenis.",
-            "save": "Išsaugoti",
             "cancel": "Atšaukti",
             "changes": "{count} Pakeitimai",
             "warnings": "Įspėjimai",
@@ -311,7 +295,6 @@
             "back_tooltip": "Keisti objektą",
             "remove": "Pašalinti",
             "search": "Ieškoti",
-            "multiselect": "Pažymėti elementai",
             "unknown": "Nežinoma",
             "incomplete": "<neatsiųsta>",
             "feature_list": "Ieškoti objektų",
@@ -444,14 +427,11 @@
                 "restore": "Atstatyti",
                 "delete": "Palikti ištrintus",
                 "download_changes": "Arba atsisiųskite jūsų pakeitimus.",
-                "done": "Visi konfliktai išspręsti!",
-                "help": "Kitas naudotojas pakeitė kai kuriuos žemėlapio objektus, kuriuos ir jūs keitėte. Spauskite kiekvieną žemiau esantį elementą, kad gautumėte daugiau informacijos apie konfliktą ir parinkite ar palikti\njūsų pakeitimus, ar naudoti kito naudotojo pakeitimus.\n"
+                "done": "Visi konfliktai išspręsti!"
             }
         },
         "merge_remote_changes": {
             "conflict": {
-                "deleted": "Šį objektą ištrynė {user}.",
-                "location": "Objektą perkėlėte ir jūs, ir {user}.",
                 "nodelist": "Taškus pakeitėte ir jūs, ir {user}.",
                 "memberlist": "Ryšio narius pakeitėte ir jūs, ir {user}.",
                 "tags": "Jūs pakeitėte <b>{tag}</b> žymą į „{local}“, o {user} pakeitė ją į „{remote}“."
@@ -492,7 +472,6 @@
             "untagged_point": "Taškas be žymų",
             "untagged_line": "Linija be žymų",
             "untagged_area": "Plotas be žymų",
-            "many_deletions": "Jūs naikinate {n} objektų. Ar tikrai norite tai padaryti? Tai panaikins objektus iš žemėlapio, kurį visi mato svetainėje openstreetmap.org.",
             "tag_suggests_area": "Žyma {tag} rodo, kad linija turėtų būti plotas, bet ji nėra plotas",
             "untagged_point_tooltip": "Pasirinkite objekto tipą, kuris apibūdina, koks tai taškas yra.",
             "untagged_line_tooltip": "Pasirinkite objekto tipą, kuris apibūdina, kokia tai linija yra.",
@@ -505,12 +484,6 @@
         },
         "cannot_zoom": "Negalima atitolinti šiame režime.",
         "full_screen": "Perjungti pilną ekraną",
-        "gpx": {
-            "local_layer": "Vietinis GPX failas",
-            "drag_drop": "Atitempkite ir numeskite .gpx failą ant puslapio arba spauskite naršymo mygtuką dešinėje",
-            "zoom": "Rodyti GPX pėdsako plotą",
-            "browse": "Naršyti .gpx failo"
-        },
         "mapillary_images": {
             "tooltip": "Gatvės lygio nuotraukos iš Mapillary",
             "title": "Nuotraukų perdanga (Mapillary)"
@@ -1401,10 +1374,6 @@
                         "impassable": "Nepravažiuojama / jokiam ratuotam transportui"
                     }
                 },
-                "social_facility_for": {
-                    "label": "Aptarnaujama žmonių",
-                    "placeholder": "Benamiai, neįgalūs, vaikai ir pan."
-                },
                 "source": {
                     "label": "Šaltinis"
                 },
@@ -1554,10 +1523,6 @@
                     "name": "Oro uostas",
                     "terms": "Oro uostas"
                 },
-                "aeroway/gate": {
-                    "name": "Oro uosto vartai",
-                    "terms": "oro uosto vartai,vartai"
-                },
                 "aeroway/hangar": {
                     "name": "Angaras",
                     "terms": "Angaras"
@@ -1569,10 +1534,6 @@
                 "aeroway/runway": {
                     "name": "Pakilimo takas",
                     "terms": "pakilimo takas"
-                },
-                "aeroway/terminal": {
-                    "name": "Oro uosto terminalas",
-                    "terms": "Oro uostas,Terminalas"
                 },
                 "amenity": {
                     "name": "Paslaugos"
@@ -1707,6 +1668,10 @@
                 },
                 "amenity/hospital": {
                     "name": "Ligoninės kiemas"
+                },
+                "amenity/kindergarten": {
+                    "name": "Vaikų darželio plotas",
+                    "terms": "vaikų darželis,darželio plotas"
                 },
                 "amenity/library": {
                     "name": "Biblioteka",
@@ -1955,7 +1920,8 @@
                     "terms": "pramoninis,pastatas,statinys,gamykla,įmonė"
                 },
                 "building/kindergarten": {
-                    "name": "Vaikų daržėlio pastatas"
+                    "name": "Vaikų darželio pastatas",
+                    "terms": "vaikų darželis,darželio pastatas"
                 },
                 "building/public": {
                     "name": "Viešasis pastatas",
@@ -2523,23 +2489,6 @@
                 },
                 "man_made/water_well": {
                     "name": "Vandens šulinys"
-                },
-                "military/airfield": {
-                    "name": "Aerodromas",
-                    "terms": "aerodromas"
-                },
-                "military/bunker": {
-                    "name": "Bunkeris"
-                },
-                "military/danger_area": {
-                    "name": "Pavojinga vieta"
-                },
-                "military/naval_base": {
-                    "name": "Karinio jūrų laivyno bazė"
-                },
-                "military/range": {
-                    "name": "Karinis poligonas",
-                    "terms": "šaudykla,poligonas"
                 },
                 "natural": {
                     "name": "Natūralus"

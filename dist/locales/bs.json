@@ -101,10 +101,8 @@
                     "vertex": "Izbrisan čvor sa putanje.",
                     "line": "Izbrisana linija.",
                     "area": "Izbrisano područje.",
-                    "relation": "Izbrisana relacija.",
-                    "multiple": "Izbrisano objekata: {n}."
-                },
-                "incomplete_relation": "Ova značajka se ne može izbrisati zato što nije u cijelosti preuzeta."
+                    "relation": "Izbrisana relacija."
+                }
             },
             "add_member": {
                 "annotation": "Dodan član relacije."
@@ -134,20 +132,16 @@
             },
             "move": {
                 "title": "Pomaknite",
-                "description": "Pomaknite ovo na drugu lokaciju.",
                 "key": "M",
                 "annotation": {
                     "point": "Pomaknuta tačka.",
                     "vertex": "Pomaknut čvor u putanji.",
                     "line": "Pomaknuta linija.",
-                    "area": "Pomaknuto područje.",
-                    "multiple": "Pomaknuto više objekata."
-                },
-                "incomplete_relation": "Ova značajka se ne može pomaknuti zato što nije u cijelosti preuzeta."
+                    "area": "Pomaknuto područje."
+                }
             },
             "rotate": {
                 "title": "Rotirajte",
-                "description": "Rotirajte ovaj objekat oko njegove centralne tačke.",
                 "key": "R",
                 "annotation": {
                     "line": "Rotirana linija.",
@@ -201,10 +195,8 @@
             "readonly": "API je samo za čitanje. Moraćete sačekati da sačuvate Vaše promjene."
         },
         "commit": {
-            "title": "Sačuvajte izmjene",
             "upload_explanation": "Promjene koje postavite će biti vidljive na svim kartama koje koriste OpenStreetMap podatke.",
             "upload_explanation_with_user": "Promjene koje postavite kao {user} će biti vidljive na svim kartama koje koriste OpenStreetMap podatke.",
-            "save": "Sačuvajte",
             "cancel": "Otkažite",
             "warnings": "Upozorenja",
             "modified": "Izmijenjeno",
@@ -239,7 +231,6 @@
             "back_tooltip": "Promijeniti značajku",
             "remove": "Uklonite",
             "search": "Pretraga",
-            "multiselect": "Odabrane stavke",
             "unknown": "Nepoznato",
             "incomplete": "<nije preuzeto>",
             "feature_list": "Značajke pretrage",
@@ -298,7 +289,6 @@
             "untagged_point": "Neoznačena tačka",
             "untagged_line": "Neoznačena linija",
             "untagged_area": "Neoznačeno područje",
-            "many_deletions": "Broj objekata koje brišete: {n}. Sigurni ste da to želite uraditi? Ovo će iste izbrisati sa karte koju svako drugi vidi na adresi openstreetmap.org.",
             "tag_suggests_area": "Oznaka {tag} ukazuje da bi linija trebala biti područje, ali nije područje",
             "deprecated_tags": "Zastarjele oznake: {tags}"
         },
@@ -307,12 +297,6 @@
             "out": "Umanjiti"
         },
         "cannot_zoom": "Ne može se umanjiti više u trenutnom načinu.",
-        "gpx": {
-            "local_layer": "Lokalna GPX datoteka",
-            "drag_drop": "Povući i spustiti .gpx datoteku na stranicu, ili kliknuti na dugme na desnoj strani za pregled",
-            "zoom": "Zumirati na GPX trasu",
-            "browse": "Tražiti .gpx datoteku"
-        },
         "help": {
             "title": "Pomoć",
             "roads": "# Putevi\n\nMožete crtati, popravljati, i brisati puteve sa ovim uređivačem. Putevi mogu biti svih\nvrsta: staze, ceste, tragovi, biciklističke staze, i više - bilo koji često prelaženi\nsegment bi trebao biti moguć za ucrtavanje.\n\n### Odabir\n\nKliknite na put da ga odaberete. vanjska linija bi trebala postati vidljiva, zajedno\nsa malim menijem alata na karti i bočnom trakom koja pokazuje više informacija\no putu.\n\n### Izmjena\n\nČesto ćete vidjeti puteve koji nisu poravnati da satelistskim slikama iza njih\nili sa GPS trasom. Možete podesiti ove puteve tako da su na pravom\nmjestu.\n\nPrvi klik na put koji želite mijenjati. Ovo će ga označiti i pokazati\nkontrolne tačke uz njega koje možete pomjerati na bolje lokacije. Ukoliko\nželite dodati nove kontrolne tačke za više detalja, dva puta kliknite na dio\nputa bez čvora, i jedan će biti dodan.\n\nUkoliko se put povezuje na drugi put, ali se neprikladno povezuje na\nkartu, možete povući jednu od njegovih kontnrolnih tačaka na drugi put u\nnamjeri da ih spojite. Održavanje puteva povezanim je važno za kartu\ni od vitalnoj je značaja za obezbjeđivanje uputa za vožnju.\n\nMožete takođe kliknuti na alat 'Pomjeriti' ili pritisnuti 'M' tipku koja je prečica da pomičete cijeli put\nistovremeno, i onda kliknete opet da spasite to pomicanje.\n\n### Brisanje\n\nUkoliko je put u potpunosti netačan - možete vidjeti da ne postoji na satelitskoj\nslici i idealno bi bilo da potvrdite da nije prisutan lokalno - možete ga izbrisati,\nšto ga uklanja sa karte. Budite pažljivi kada brišete značajke -\nkao i svako drugo uređivanje, rezultati su vidljivi svima i satelitske slike\nsu često stare, tako da bi put mogao ustvari biti novoizgrađeni.\n\nMožete izbrisati put klikom na njega da ga odaberete, i onda klikajući na\nikonu kante za smeće ili pritiskom na tipku 'Delete'.\n\n### Pravljenje\n\nNašli ste negdje da bi tu trebao biti put ali ga nema? Kliknite ikonu 'Linija'\nu donjem lijevom uglu uređivača ili pritisnite tipku`2` da bi započeli crtanje\nlinije.\n\nKliknite na početak puta na kartu da započnete crtanje. Ukoliko se put\ngranan sa postojećeg puta, započnite sa mjesta gdje se povezuju.\n\nOnda kliknite na tačke uzduž puta tako da slijedi pravu putanju, prema\nsatelitskim slikama ili prema GPS-u. Ukoliko se put koji crtate križa sa drugim putem, povežite\nga klikom na tačku križanja. Kada završite crtanje, dva puta kliknite\nili pritisnite 'Backspace' ili 'Enter' na Vašoj tastaturi.\n",
@@ -761,10 +745,6 @@
                     "name": "Stajanka",
                     "terms": "stajanka,betonirani teren aerodroma"
                 },
-                "aeroway/gate": {
-                    "name": "Aerodromski ulaz",
-                    "terms": "vrata,ulaz u avion i izlaz iz aviona"
-                },
                 "aeroway/hangar": {
                     "name": "Hangar",
                     "terms": "hangar"
@@ -780,10 +760,6 @@
                 "aeroway/taxiway": {
                     "name": "Staza za vožnju",
                     "terms": "rulna staza,staza za vožnju aviona"
-                },
-                "aeroway/terminal": {
-                    "name": "Aerodromski terminal",
-                    "terms": "zračni terminal,aerodromski terminal"
                 },
                 "amenity": {
                     "name": "Pogodnost"
@@ -1537,22 +1513,6 @@
                 "man_made/water_works": {
                     "name": "Vodosnadbjevanje",
                     "terms": "vodosnadbjevanje,snadbjevanje vodom"
-                },
-                "military/airfield": {
-                    "name": "Uzletište",
-                    "terms": "uzletište,uzletište za avione,aerodrom"
-                },
-                "military/barracks": {
-                    "name": "Kasarna",
-                    "terms": "kasarna,zgrada kasarne"
-                },
-                "military/bunker": {
-                    "name": "Bunker",
-                    "terms": "bunker,sklonište"
-                },
-                "military/range": {
-                    "name": "Strelište",
-                    "terms": "strelište,vojni poligon,poligon za vojne vježbe"
                 },
                 "natural": {
                     "name": "Prirodno područje",

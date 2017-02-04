@@ -101,18 +101,22 @@
             },
             "delete": {
                 "title": "Smazat",
-                "description": "Smazat objekt trvale.",
+                "description": {
+                    "single": "Smazat trvale tento objekt",
+                    "multiple": "Smazat trvale tyto objekty."
+                },
                 "annotation": {
                     "point": "Smazán uzel.",
                     "vertex": "Smazán uzel z čáry.",
                     "line": "Smazána čára.",
                     "area": "Smazána plocha.",
                     "relation": "Smazána relace.",
-                    "multiple": "Bylo smazáno {n} objektů."
+                    "multiple": "Smazat {n} objektů."
                 },
-                "incomplete_relation": "Objekt nelze smazat, protože je stažený jen částečně.",
-                "part_of_relation": "Objekt nelze smazat, protože je součástí rozsáhlejší relace. Musíte ho napřed z této relace vyřadit.",
-                "connected_to_hidden": "Objekt nelze smazat, protože je napojen na skrytý objekt."
+                "incomplete_relation": {
+                    "single": "tento objekt nemohl být smazán, neboť nebyl zcela stažen.",
+                    "multiple": "Tyto objekty nemohly být smazány, neboť nebyly zcela staženy."
+                }
             },
             "add_member": {
                 "annotation": "Přidán člen do relace."
@@ -150,29 +154,31 @@
             },
             "move": {
                 "title": "Posunout",
-                "description": "Posunout objekt na jiné místo.",
+                "description": {
+                    "single": "Přesunout tento objekt na jiné místo."
+                },
                 "key": "M",
                 "annotation": {
                     "point": "Posunut uzel.",
                     "vertex": "Posunut uzel v čáře.",
                     "line": "Posunuta čára.",
-                    "area": "Posunuta plocha.",
-                    "multiple": "Posunuty objekty."
-                },
-                "incomplete_relation": "Tento objekt nelze posunout, protože je stažený jen částečně.",
-                "too_large": "Objekt není možné přesunout, protože není vidět dostatečně velká část.",
-                "connected_to_hidden": "Objekt není možné přesunout, protože je napojen na skrytý objekt."
+                    "area": "Posunuta plocha."
+                }
+            },
+            "reflect": {
+                "title": "zrcadlit",
+                "key": {
+                    "long": "T",
+                    "short": "Y"
+                }
             },
             "rotate": {
                 "title": "Otočit",
-                "description": "Otočit tento objekt okolo středu.",
                 "key": "R",
                 "annotation": {
                     "line": "Čára byla otočena.",
                     "area": "Plocha byla pootočena."
-                },
-                "too_large": "Objekt nelze otočit, protože není vidět dostatečně velká část.",
-                "connected_to_hidden": "Objekt nelze otočit, protože je napojen na skrytý objekt."
+                }
             },
             "reverse": {
                 "title": "Převrátit",
@@ -243,12 +249,9 @@
             "rateLimit": "API omezuje anonymní připojení. Můžete to vyřešit tím, že se přihlásíte."
         },
         "commit": {
-            "title": "Uložit změny",
             "description_placeholder": "Stručný popis vašich úprav (povinné)",
-            "message_label": "Komentář ke změnám",
             "upload_explanation": "Vámi provedené změny budou viditelné na všech mapách postavených na datech z OpenStreetMap.",
             "upload_explanation_with_user": "Změny provedené pod jménem {user} budou viditelné na všech mapách postavených na datech z OpenStreetMap.",
-            "save": "Uložit",
             "cancel": "Storno",
             "changes": "{count} změn",
             "warnings": "Varování",
@@ -311,7 +314,6 @@
             "back_tooltip": "Změnit objekt",
             "remove": "Odstranit",
             "search": "Hledat",
-            "multiselect": "Zvolené objekty",
             "unknown": "Není známo",
             "incomplete": "<nebylo staženo>",
             "feature_list": "Hledat objekty",
@@ -337,6 +339,7 @@
             "switch": "Přepnout zpět na toto pozadí",
             "custom": "Vlastní",
             "custom_button": "Editovat vlastní pozadí",
+            "custom_prompt": "Vložte šablonu pro URL dlaždic. Platné proměnné jsou {zoom}, {x}, {y} u schématu Z/X/Y a {u} u schématu hierarchicky čtvrcených dlaždic.",
             "fix_misalignment": "Zarovnat podklad",
             "imagery_source_faq": "Odkud jsou tyto podklady?",
             "reset": "vrátit na začátek",
@@ -443,14 +446,11 @@
                 "restore": "Obnovit",
                 "delete": "Nechat smazané",
                 "download_changes": "Nebo stáhnout vaše úpravy.",
-                "done": "Všechny konflikty vyřešeny!",
-                "help": "Jiný uživatel upravil některé z objektů, které jste editoval/a i vy.\nProjděte prosím detailně níže uvedené položky a vyberte, jestli chcete nechat v platnosti vaše nebo cizí úpravy.\n"
+                "done": "Všechny konflikty vyřešeny!"
             }
         },
         "merge_remote_changes": {
             "conflict": {
-                "deleted": "Tento objekt smazal uživatel {user}.",
-                "location": "Tento objekt přesunul uživatel {user} i vy.",
                 "nodelist": "Uzly upravil uživatel {user} i vy.",
                 "memberlist": "Členy relace upravil uživatel {user} i vy.",
                 "tags": "Nastavil/a jste vlastnost <b>{tag}</b> na \"{local}\", zatímco uživatel {user} ji změnil na \"{remote}\"."
@@ -491,7 +491,6 @@
             "untagged_point": "Neoznačený bod",
             "untagged_line": "Neoznačená čára",
             "untagged_area": "Neoznačená plocha",
-            "many_deletions": "Pokoušíte se smazat {n} objektů. Opravdu to chcete provést? Odstranilo by je z globální mapy na openstreetmap.org.",
             "tag_suggests_area": "Vlastnost {tag} obvykle označuje plochu, ale zvolený objekt není plocha",
             "untagged_point_tooltip": "Zvolte typ vlastnosti popisující, co je tento bod zač.",
             "untagged_line_tooltip": "Zvolte typ vlastnosti popisující, co je tato čára zač.",
@@ -504,12 +503,6 @@
         },
         "cannot_zoom": "Aktuální nastavení nedovoluje větší zvětšení.",
         "full_screen": "Na celou obrazovku",
-        "gpx": {
-            "local_layer": "Vlastní GPX soubor",
-            "drag_drop": "Přetáhněte do editoru soubor .gpx nebo klikněte na tlačítko vpravo a zvolte soubor pomocí dialogu.",
-            "zoom": "Zvětšit na stopu GPX",
-            "browse": "Zvolit .gpx soubor v dialogu"
-        },
         "mapillary_images": {
             "tooltip": "Fotografie z úrovně ulice z Mapillary",
             "title": "Vrstva fotografií (Mapillary)"
@@ -1028,9 +1021,6 @@
                 "handrail": {
                     "label": "Zábradlí"
                 },
-                "height": {
-                    "label": "Výška (metry)"
-                },
                 "highway": {
                     "label": "Typ"
                 },
@@ -1470,10 +1460,6 @@
                     },
                     "placeholder": "Tenká kolečka, Běžná kola, Terénní kola..."
                 },
-                "social_facility_for": {
-                    "label": "Zákazníci",
-                    "placeholder": "Bezdomovec, Postižený ..."
-                },
                 "source": {
                     "label": "Zdroj"
                 },
@@ -1683,10 +1669,6 @@
                     "name": "Odbavovací plocha",
                     "terms": "apron,stojánka,odbavovací plocha"
                 },
-                "aeroway/gate": {
-                    "name": "Letištní gate",
-                    "terms": "letadlo,letiště,přistávací dráha,terminál"
-                },
                 "aeroway/hangar": {
                     "name": "Hangár",
                     "terms": "hangár,garáž,letadlo,letiště"
@@ -1702,10 +1684,6 @@
                 "aeroway/taxiway": {
                     "name": "Pojezdová dráha",
                     "terms": "pojezdová dráha,taxiway,letiště"
-                },
-                "aeroway/terminal": {
-                    "name": "Letištní terminál",
-                    "terms": "letiště,terminál"
                 },
                 "amenity": {
                     "name": "Zařízení"
@@ -1817,10 +1795,6 @@
                 "amenity/courthouse": {
                     "name": "Soud",
                     "terms": "soud,soudní budova,soudní dvůr"
-                },
-                "amenity/coworking_space": {
-                    "name": "Prostor pro coworking",
-                    "terms": "prostor pro pracovní spolupráci, coworkingové centrum, kancelář pro coworking, sdílený pracovní prostor"
                 },
                 "amenity/dentist": {
                     "name": "Zubař",
@@ -3165,46 +3139,6 @@
                 "man_made/water_works": {
                     "name": "Vodárna",
                     "terms": "vodárna,úpravna vody"
-                },
-                "man_made/works": {
-                    "name": "Továrna",
-                    "terms": "továrna,automobilka,ocelárna,železárna,hliníkárna,pivovar,rafinérie,zpracování,průmysl,recyklace,manufaktura"
-                },
-                "military/airfield": {
-                    "name": "Vojenské letiště",
-                    "terms": "vojenské letiště,letiště,letecká základna"
-                },
-                "military/barracks": {
-                    "name": "Kasárny",
-                    "terms": "kasárny,kasárna,armáda"
-                },
-                "military/bunker": {
-                    "name": "Opevnění",
-                    "terms": "bunkr,opevnění,fortifikace,šance,řopík"
-                },
-                "military/checkpoint": {
-                    "name": "Vojenská kontrola",
-                    "terms": "checkpoint,kontrola,stanoviště"
-                },
-                "military/danger_area": {
-                    "name": "Nebezpečná oblast",
-                    "terms": "nebezpečí,nebezpečná oblast,vstup zakázán,zákaz vstupu,vojenská oblast"
-                },
-                "military/naval_base": {
-                    "name": "Vojenská námořní základna",
-                    "terms": "vojenská základna,námořní základna"
-                },
-                "military/obstacle_course": {
-                    "name": "Vojenská překážková dráha",
-                    "terms": "překážková dráha,opičí dráha"
-                },
-                "military/range": {
-                    "name": "Vojenská střelnice",
-                    "terms": "střelnice,vojenská střelnice"
-                },
-                "military/training_area": {
-                    "name": "Vojenský výcvikový prostor",
-                    "terms": "vojenský,výcvikový,prostor,újezd"
                 },
                 "natural": {
                     "name": "Přírodní objekt",

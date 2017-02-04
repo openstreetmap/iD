@@ -98,14 +98,12 @@
             },
             "delete": {
                 "title": "ಅಳಿಸು",
-                "description": "ಈ ವಸ್ತು / ಬಗೆಯನ್ನು ಶಾಸ್ವತವಾಗಿ ಅಳಿಸು.",
                 "annotation": {
                     "point": "ಬಿಂದುವನ್ನು ಅಳಿಸಲಾಯಿತು.",
                     "vertex": "ಜಾಲಘಟಕವನ್ನು ಈ ದಾರಿಯಿಂದ ಅಳಿಸಲಾಗಿದೆ.  ",
                     "line": "ರೇಖೆಯನ್ನು ಅಳಿಸಲಾಯಿತು.",
                     "area": "ಪ್ರದೇಶವನ್ನು ಅಳಿಸಲಾಯಿತು.",
-                    "relation": "‍ರಿಲೇಷನ್ ಅನ್ನು ಅಳಿಸಲಾಗಿದೆ.",
-                    "multiple": "{n} ವಸ್ತುಗಳನ್ನು ಅಳಿಸಲಾಯಿತು."
+                    "relation": "‍ರಿಲೇಷನ್ ಅನ್ನು ಅಳಿಸಲಾಗಿದೆ."
                 }
             },
             "add_member": {
@@ -142,19 +140,16 @@
             },
             "move": {
                 "title": "ಸರಿಸು",
-                "description": "ಇದನ್ನು ಬೇರೆ ಸ್ಠಳಕ್ಕೆ ಸರಿಸು",
                 "key": "M",
                 "annotation": {
                     "point": "ಒಂದು ಬಿಂದುವನ್ನು ಸರಿಸಲಾಯಿತು.",
                     "vertex": "ದಾರಿಯಲ್ಲಿರುವ ಒಂದು ಚುಕ್ಕೆಯನ್ನು ಸರಿಸಲಾಯಿತು. ",
                     "line": "ರೇಖೆಯನ್ನು ಸರಿಸಲಾಯಿತು.",
-                    "area": "ಪ್ರದೇಶವನ್ನು ಸರಿಸಲಾಯಿತು.",
-                    "multiple": "ಬಹುವಿಧದ ವಸ್ತುಗಳನ್ನು ಸರಿಸಲಾಯಿತು"
+                    "area": "ಪ್ರದೇಶವನ್ನು ಸರಿಸಲಾಯಿತು."
                 }
             },
             "rotate": {
                 "title": "ತಿರುಗಿಸು",
-                "description": "ಈ ವಸ್ತುವನ್ನು ಅದರ ಮದ್ಯದಿಂದ ತಿರುಗಿಸಿ. ",
                 "key": "R",
                 "annotation": {
                     "line": "ರೇಖೆಯನ್ನು ತಿರುಗಿಸು",
@@ -226,12 +221,9 @@
             "error": "ಎ ಪಿ ಐ ಗೆ ಈಗ ಸಂಪರ್ಕ ಮಾಡಲಾಗುವುದಿಲ್ಲ."
         },
         "commit": {
-            "title": "ಬದಲಾವಣೆಯನ್ನು ಉಳಿಸು",
             "description_placeholder": "ನೀವು ಮಾಡಿದ ಬದಲಾವಣೆಗಳ ಬಗ್ಗೆ ಒಂದು ಚಿಕ್ಕ ವಿವರಣೆ (ಅವಶ್ಯಕ).",
-            "message_label": "ಬದಲಾವಣೆಗಳ ಸಾರಾಂಶ",
             "upload_explanation": "ನೀವು ಉಪ್ಲೋಡ್ ಮಾಡುವ ಎಲ್ಲ ಮಾಹಿತಿ ಆಥಾವ ಬದಲಾವಣೆಗಳು ಓಪನ್ಸ್ಟ್ರೀಟ್ಮ್ಯಾಪ್ ಮಾಹಿತಿ ಉಪಯೋಗಿಸುವ ಎಲ್ಲ ನಕ್ಷೆಗಲ್ಲಿ ವ್ಯಕ್ತವಾಗುತ್ತದೆ. ",
             "upload_explanation_with_user": "{ನಿಮ್ಮ ಹೆಸರಿನಿಲ್ಲಿ} ಉಪ್ಲೋಡ್ ಮಾಡುವ ಎಲ್ಲ ಮಾಹಿತಿ ಆಥಾವ ಬದಲಾವಣೆಗಳು ಓಪನ್ಸ್ಟ್ರೀಟ್ಮ್ಯಾಪ್ ಮಾಹಿತಿ ಉಪಯೋಗಿಸುವ ಎಲ್ಲ ನಕ್ಷೆಗಲ್ಲಿ ವ್ಯಕ್ತವಾಗುತ್ತದೆ. ",
-            "save": "ಉಳಿಸು",
             "cancel": "ರದ್ದು ಮಾಡು",
             "changes": "{count} ಬದಲಾವಣೆಗಳು",
             "warnings": "ಎಚ್ಚರಿಕೆಗಳು",
@@ -286,7 +278,6 @@
             "back_tooltip": "ಲಕ್ಷಣವನ್ನು ಬದಲಿಸು",
             "remove": "ತೆಗೆದುಹಾಕು",
             "search": "ಹುಡುಕು",
-            "multiselect": "ಆಯ್ಕೆಮಾಡಿದ ವಸ್ತುಗಳು",
             "unknown": "ತಿಳಿಯದ",
             "incomplete": "<not downloaded>",
             "feature_list": "‍‍ವೈಶಿಷ್ಟ್ಯಗಳನ್ನು ಹುಡುಕು",
@@ -404,8 +395,7 @@
                 "keep_local": "ನನ್ನ ಬದಲಾವಣೆಗಳನ್ನು ಉಳಿಸಿ. ",
                 "keep_remote": "ಅವರ ಬದಲಾವಣೆಗಳನ್ನು ಉಳಿಸಿ",
                 "restore": "ಪುನಃಸ್ಥಾಪನೆ",
-                "done": "ಎಲ್ಲ ವಿರೋಧಗಳನ್ನು ಪರಿಹರಿಸಲಾಗಿದೆ! ",
-                "help": "ಇನ್ನೋಬರು ನೀವು ಬದಲಾಯಿಸಿದೆ ವಸ್ತುಗಳನ್ನೇ ಮಾರ್ಪಡಿಸಿದರೆ.\nವಿರೋಧದ ಬಗ್ಗೆ ವಿವರ ಬೇಕಾದಲ್ಲಿ ಕೆಳಗಿರುವ ಎಲ್ಲ ಬದಲಾಯಿಸಿದೆ ವಸ್ತುಗಳನ್ನು ಒತ್ತಿ ಮತ್ತು ನೀವು ಮಾಡಿರುವ ಬದಲಾವಣೆ ಉಳಿಸುತ್ತೀರೋ ಅಥವಾ ಆವರು ಮಾಡಿದ ಬದಲಾವಣೆಗಳನ್ನು ಉಳಿಸುತ್ತಿರೋ ನಿರ್ಧರಿಸಿ.\n"
+                "done": "ಎಲ್ಲ ವಿರೋಧಗಳನ್ನು ಪರಿಹರಿಸಲಾಗಿದೆ! "
             }
         },
         "success": {
@@ -1222,10 +1212,6 @@
                 "aeroway/aerodrome": {
                     "name": "ವಿಮಾನ ನಿಲ್ದಾಣ"
                 },
-                "aeroway/gate": {
-                    "name": "ವಿಮಾನ ನಿಲ್ದಾಣ ಗೇಟ್",
-                    "terms": "<translate with synonyms or related terms for 'Airport gate', separated by commas>"
-                },
                 "aeroway/hangar": {
                     "terms": "<translate with synonyms or related terms for 'Hangar', separated by commas>"
                 },
@@ -1238,9 +1224,6 @@
                 },
                 "aeroway/taxiway": {
                     "terms": "<translate with synonyms or related terms for 'Taxiway', separated by commas>"
-                },
-                "aeroway/terminal": {
-                    "terms": "<translate with synonyms or related terms for 'Airport terminal', separated by commas>"
                 },
                 "amenity": {
                     "name": "ಸೌಕರ್ಯ"
@@ -1510,12 +1493,6 @@
                 },
                 "man_made/petroleum_well": {
                     "name": "ತೈಲ ಬಾವಿ"
-                },
-                "military/range": {
-                    "name": "ಸೇನಾ ವಲಯ"
-                },
-                "military/training_area": {
-                    "name": "ತರಬೇತಿ ಪ್ರದೇಶ"
                 },
                 "natural": {
                     "name": "ನೈಸರ್ಗಿಕ"

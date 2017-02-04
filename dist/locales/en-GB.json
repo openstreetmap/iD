@@ -101,18 +101,13 @@
             },
             "delete": {
                 "title": "Delete",
-                "description": "Delete object permanently.",
                 "annotation": {
                     "point": "Deleted a point.",
                     "vertex": "Deleted a node from a way.",
                     "line": "Deleted a line.",
                     "area": "Deleted an area.",
-                    "relation": "Deleted a relation.",
-                    "multiple": "Deleted {n} objects."
-                },
-                "incomplete_relation": "This feature can't be deleted because it hasn't been fully downloaded.",
-                "part_of_relation": "This feature can't be deleted because it's part of a larger relation. You must remove it from the relation first.",
-                "connected_to_hidden": "This can't be deleted because it is connected to a hidden feature."
+                    "relation": "Deleted a relation."
+                }
             },
             "add_member": {
                 "annotation": "Added a member to a relation."
@@ -150,29 +145,21 @@
             },
             "move": {
                 "title": "Move",
-                "description": "Move this to a different location.",
                 "key": "M",
                 "annotation": {
                     "point": "Moved a point.",
                     "vertex": "Moved a node in a way.",
                     "line": "Moved a line.",
-                    "area": "Moved an area.",
-                    "multiple": "Moved multiple objects."
-                },
-                "incomplete_relation": "This feature can't be moved because it hasn't been fully downloaded.",
-                "too_large": "This can't be moved because not enough of it is currently visible.",
-                "connected_to_hidden": "This can't be moved because it is connected to a hidden feature."
+                    "area": "Moved an area."
+                }
             },
             "rotate": {
                 "title": "Rotate",
-                "description": "Rotate this object around its centre point.",
                 "key": "R",
                 "annotation": {
                     "line": "Rotated a line.",
                     "area": "Rotated an area."
-                },
-                "too_large": "This can't be rotated because not enough of it is currently visible.",
-                "connected_to_hidden": "This can't be rotated because it is connected to a hidden feature."
+                }
             },
             "reverse": {
                 "title": "Reverse",
@@ -241,12 +228,9 @@
             "readonly": "The API is read-only. You will need to wait to save your changes."
         },
         "commit": {
-            "title": "Save Changes",
             "description_placeholder": "Brief description of your contributions (required)",
-            "message_label": "Changeset comment",
             "upload_explanation": "The changes you upload will be visible on all maps that use OpenStreetMap data.",
             "upload_explanation_with_user": "The changes you upload as {user} will be visible on all maps that use OpenStreetMap data.",
-            "save": "Save",
             "cancel": "Cancel",
             "changes": "{count} Changes",
             "warnings": "Warnings",
@@ -308,7 +292,6 @@
             "back_tooltip": "Change feature",
             "remove": "Remove",
             "search": "Search",
-            "multiselect": "Selected items",
             "unknown": "Unknown",
             "incomplete": "<not downloaded>",
             "feature_list": "Search features",
@@ -440,14 +423,11 @@
                 "restore": "Restore",
                 "delete": "Leave Deleted",
                 "download_changes": "Or download your changes.",
-                "done": "All conflicts resolved!",
-                "help": "Another user changed some of the same map features you changed.\nClick on each item below for more details about the conflict, and choose whether to keep\nyour changes or the other user's changes.\n"
+                "done": "All conflicts resolved!"
             }
         },
         "merge_remote_changes": {
             "conflict": {
-                "deleted": "This object has been deleted by {user}.",
-                "location": "This object was moved by both you and {user}.",
                 "nodelist": "Nodes were changed by both you and {user}.",
                 "memberlist": "Relation members were changed by both you and {user}.",
                 "tags": "You changed the <b>{tag}</b> tag to \"{local}\" and {user} changed it to \"{remote}\"."
@@ -488,7 +468,6 @@
             "untagged_point": "Untagged point",
             "untagged_line": "Untagged line",
             "untagged_area": "Untagged area",
-            "many_deletions": "You're deleting {n} objects. Are you sure you want to do this? This will delete them from the map that everyone else sees on openstreetmap.org.",
             "tag_suggests_area": "The tag {tag} suggests line should be area, but it is not an area",
             "untagged_point_tooltip": "Select a feature type that describes what this point is.",
             "untagged_line_tooltip": "Select a feature type that describes what this line is.",
@@ -501,12 +480,6 @@
         },
         "cannot_zoom": "Cannot zoom out further in current mode.",
         "full_screen": "Toggle Full Screen",
-        "gpx": {
-            "local_layer": "Local GPX file",
-            "drag_drop": "Drag and drop a .gpx file on the page, or click the button to the right to browse",
-            "zoom": "Zoom to GPX track",
-            "browse": "Browse for a .gpx file"
-        },
         "mapillary_images": {
             "tooltip": "Street-level photos from Mapillary",
             "title": "Photo Overlay (Mapillary)"
@@ -1272,6 +1245,11 @@
                 "recycling_accepts": {
                     "label": "Accepts"
                 },
+                "recycling_type": {
+                    "options": {
+                        "centre": "Recycling Centre"
+                    }
+                },
                 "ref": {
                     "label": "Reference"
                 },
@@ -1360,10 +1338,6 @@
                         "very_horrible": "Specialised off-road: tractor, ATV"
                     },
                     "placeholder": "Thin Rollers, Wheels, Off-Road..."
-                },
-                "social_facility_for": {
-                    "label": "People served",
-                    "placeholder": "Homeless, Disabled, Child, etc"
                 },
                 "source": {
                     "label": "Source"
@@ -1465,6 +1439,9 @@
                 "amenity/ranger_station": {
                     "name": "Warden Station"
                 },
+                "amenity/recycling_centre": {
+                    "name": "Recycling Centre"
+                },
                 "amenity/theatre": {
                     "name": "Theatre"
                 },
@@ -1495,14 +1472,29 @@
                 "landuse/allotments": {
                     "name": "Allotments"
                 },
+                "leisure/adult_gaming_centre": {
+                    "name": "Adult Gaming Centre"
+                },
+                "leisure/fitness_centre": {
+                    "name": "Gym / Fitness Centre"
+                },
                 "leisure/pitch/baseball": {
                     "name": "Baseball"
                 },
+                "leisure/pitch/rugby_league": {
+                    "name": "Rugby League Pitch"
+                },
+                "leisure/pitch/rugby_union": {
+                    "name": "Rugby Union Pitch"
+                },
                 "leisure/pitch/soccer": {
-                    "name": "Football Field"
+                    "name": "Football Pitch"
                 },
                 "leisure/playground": {
                     "name": "Playground"
+                },
+                "leisure/sports_centre": {
+                    "name": "Sports Centre / Complex"
                 },
                 "office/estate_agent": {
                     "name": "Estate Agent"

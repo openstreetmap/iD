@@ -100,18 +100,13 @@
             },
             "delete": {
                 "title": "Fshij",
-                "description": "Fshij objektin përgjithmonë.",
                 "annotation": {
                     "point": "U fshi një pik.",
                     "vertex": "U fshi një nyjë nga një linjë.",
                     "line": "U fshi një vijë.",
                     "area": "U fshi një sipërfaqe.",
-                    "relation": "U fshi një lidhje.",
-                    "multiple": "U fshin {n} objekta."
-                },
-                "incomplete_relation": "Ky tipar nuk mund të fshihet sepse nuk është shkarkuar plotësisht.",
-                "part_of_relation": "Ky tipar nuk mund të fshihet sepse mer pjesë në një lidhje më të madhë. Njerë duhet ta heqësh nga lidhja.",
-                "connected_to_hidden": "Kjo nuk mund të fshihet sepse është lidhur me një tipar të fshehur."
+                    "relation": "U fshi një lidhje."
+                }
             },
             "connect": {
                 "annotation": {
@@ -137,29 +132,21 @@
             },
             "move": {
                 "title": "Lëviz",
-                "description": "Lëvizni këtë në një vend tjeter.",
                 "key": "M",
                 "annotation": {
                     "point": "U lëviz një pik.",
                     "vertex": "U lëviz një njyë në një linjë.",
                     "line": "U lëviz një vijë.",
-                    "area": "U lëviz një sipërfaqe.",
-                    "multiple": "U lëvizën disa objekte."
-                },
-                "incomplete_relation": "Ky tipar nuk mund të lëvizet sepse nuk është shkarkuar plotësisht.",
-                "too_large": "Kjo nuk mund të lëvizet sepse nuk ështe mjaftueshmërisht e dukshme.",
-                "connected_to_hidden": "Kjo nuk mund të lëvizet sepse është lidhur me një tipar të fshehur."
+                    "area": "U lëviz një sipërfaqe."
+                }
             },
             "rotate": {
                 "title": "Rotullo",
-                "description": "Rotullo këtë objekt rreth pikën e qendrës të saj.",
                 "key": "R",
                 "annotation": {
                     "line": "U rotullua një vijë.",
                     "area": "U rotullua një sipërfaqe."
-                },
-                "too_large": "Kjo nuk mund të rotullohet sepse nuk është mjaftueshmërisht e dukshme.",
-                "connected_to_hidden": "Kjo nuk mund të rotullohet është lidhur me një tipar të fshehur."
+                }
             },
             "reverse": {
                 "title": "Kthej mbrapsht",
@@ -223,10 +210,8 @@
             "readonly": "API-ja është vetëm për lexim. Duhet prisni për të kryer ndryshimet."
         },
         "commit": {
-            "title": "Kryej Ndryshimet",
             "upload_explanation": "Redaktimet qe ju ngarkoni do jen të dukshëm në të gjithë hartat që përdorin të dhëna OpenStreetMap.",
             "upload_explanation_with_user": "Redaktimet qe ju ngarkoni si {user} do jen të dukshëm në të gjithë hartat që përdorin të dhëna OpenStreetMap.",
-            "save": "Ruaj",
             "cancel": "Anullo",
             "changes": "{count} Ndryshime",
             "warnings": "Paralajmërime",
@@ -282,7 +267,6 @@
             "back_tooltip": "Ndrysho tiparin",
             "remove": "Hiq",
             "search": "Kërko",
-            "multiselect": "Zgjidh artikuj",
             "unknown": "I panjohur",
             "feature_list": "Kërko tiparet",
             "edit": "Redakto tiparin",
@@ -445,6 +429,9 @@
                 }
             },
             "presets": {
+                "place/city": {
+                    "name": "Qytet"
+                },
                 "power/transformer": {
                     "name": "Transformator"
                 },
