@@ -13,7 +13,7 @@
   * Fix spinner position when UI is RTL (#3794)
   * Don't write history while user is in draw_line/draw_way, etc (#3750)
   * Don't show radial menu when selecting entity from member/membership editor
-  * More checks to prevent duplicate consecutive nodes (#3676, #1296)
+  * More checks to prevent duplicate consecutive nodes (#3676, #1296, thanks @slhh)
   * Fix RTL languages along linestring paths on Chrome and Safari (#3707, thanks @miladkdz)
   * When merging node to area, preserve original node if possible (#3683)
   * Allow double-clicking on midpoints to create vertex (#3687, thanks @edpop)
