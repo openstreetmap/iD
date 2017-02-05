@@ -8161,7 +8161,7 @@
             "name": "Wood"
         },
         "noexit/yes": {
-            "icon": "roadblock",
+            "icon": "barrier",
             "geometry": [
                 "vertex"
             ],
