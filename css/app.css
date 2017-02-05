@@ -1231,9 +1231,14 @@ button.save.has-count .count::before {
     min-height: 30px;
     padding: 5px 10px;
     width: 100%;
-    border: 0;
+    border-radius: 0;
+    border-width: 0;
+    border-left-width: 1px;
 }
-
+.form-field-lanes .spin-control button{
+    height: 30px;
+    right: 0;
+}
 .form-field-lanes .lane-field  {
     border-radius: 0;
     border-width: 0;
@@ -1244,10 +1249,11 @@ button.save.has-count .count::before {
     border-top: 0
 }
 
-
+/*
 .form-field-lanes .preset-input-lanes-wrap input {
-    border-top: 0
-}
+    border-top: 0;
+    border-left-width: 1px;
+}*/
 
 /*
 .form-field-lanes .preset-input-lanes-wrap input {
@@ -1281,7 +1287,6 @@ button.save.has-count .count::before {
     display: flex;
     flex-grow: 1;
     border-right: 1px solid #ccc;
-    border-bottom: 0;
     flex-direction: column;
     align-items: center;
     background-color: white;
@@ -1303,7 +1308,7 @@ button.save.has-count .count::before {
 
 .lane-selector .lane-item span {
     height: 30px;
-    padding: 5px 10px 5px 10px;
+    line-height: 30px;
 }
 
 .lane-tags > label {
@@ -3353,7 +3358,6 @@ img.tile-removing {
 
 /* Scrollbars
  ----------------------------------------------------- */
-
 ::-webkit-scrollbar {
     height: 20px;
     overflow: visible;
