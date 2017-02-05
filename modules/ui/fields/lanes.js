@@ -1,13 +1,11 @@
 import * as d3 from 'd3';
-import { utilRebind } from '../../util/rebind';
 import _ from 'lodash';
-import { utilGetSetValue } from '../../util/get_set_value';
+import { utilRebind } from '../../util/rebind';
 import { uiTurnLanes } from './lanes/turn';
 import { uiLaneInfo } from './lanes/laneInfo';
 
 export function uiFieldLanes(field, context) {
     var dispatch = d3.dispatch('change'),
-        // TODO: currentLane if big like 6 goes crazy if other wayID has less than 6 lanes
         curLane = 0,
         curDir = 'unspecified',
         wayID,

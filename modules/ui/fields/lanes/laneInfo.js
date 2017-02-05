@@ -1,14 +1,12 @@
 import * as d3 from 'd3';
-import { validTurnLanes } from '../../../osm/lanes';
 import { utilRebind } from '../../../util/rebind';
-import { formPipes } from '../lanes';
 import { utilGetSetValue } from '../../../util/get_set_value';
 
 import _ from 'lodash';
 
 export function uiLaneInfo() {
     var dispatch = d3.dispatch('change');
-    function laneInfo(selection, metadata, curDirection, curLane) {
+    function laneInfo(selection, metadata) {
         var s = selection.selectAll('.lanes-info').data([0]);
         s = s.enter()
             .append('div')
@@ -35,6 +33,7 @@ export function uiLaneInfo() {
             .data(metadata.oneway ? ['count'] : ['forward', 'backward']);
 
         items.exit().remove();
+
         // Enter
         var enter = items.enter()
             .append('li')
@@ -66,8 +65,6 @@ export function uiLaneInfo() {
             .datum(-1)
             .attr('class', 'decrement')
             .attr('tabindex', -1);
-
-
 
         // Update
         items = items.merge(enter);
