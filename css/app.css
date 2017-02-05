@@ -1233,14 +1233,6 @@ button.save.has-count .count::before {
     width: 100%;
     border: 0;
 }
- /*.form-field-lanes input {
-    border: 1px solid #ccc;
-    min-height: 30px;
-    border-top: 0;
-    border-radius: 0 0 4px 4px;
-    overflow: hidden;
- }*/
-
 
 .form-field-lanes .lane-field  {
     border-radius: 0;

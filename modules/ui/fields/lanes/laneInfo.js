@@ -11,6 +11,8 @@ export function uiLaneInfo() {
     function laneInfo(selection, metadata, curDirection, curLane) {
         // TODO: make this thing dynamic and show keysConsidered
         // wrt to oneway.
+        var oneway = metadata.oneway;
+
         var wrapper = selection
             .selectAll('.lanes-info')
             .data([0]);
@@ -21,9 +23,19 @@ export function uiLaneInfo() {
 
         wrapper = wrapper
             .merge(enter);
-
+        
         var input = wrapper.selectAll('.lanes-info')
-            .data([0]);
+            .data(oneway ? [{
+                text: 'Lanes',
+                dir: 'oneway'
+            }] : [{
+                text: 'Forward Lanes',
+                dir: 'forward'
+            },
+            {
+                text: 'Backward Lanes',
+                dir: 'backward'
+            }]);
     
         input.exit()
             .remove();
@@ -32,45 +44,49 @@ export function uiLaneInfo() {
             .append('input')
             .attr('class', 'lanes-info')
             .attr('type', 'lane-count')
-            .attr('placeholder', 'Lane count')
             .merge(input); 
         
         input
+            .attr('placeholder', function (d) {
+                return d.text;
+            })
+            .attr('direction', function (d) {
+                return d.dir;
+            })
             .on('input', change)
             .on('blur', change)
-            .on('change', change);
-            // .each(() => this.value = metadata.count);
+            .on('change', change)
+            .each(function (d) {
+                if (d.dir === 'oneway') {
+                    this.value = metadata.count;
+                    return; 
+                }
+                this.value = metadata[d.dir];
+            });
 
-        input.node().value = metadata.count;
 
         var spinControl = wrapper.selectAll('.spin-control')
             .data([0]);
 
 
-        var senter = spinControl.enter()
+        var spinEnter = spinControl.enter()
             .append('div')
             .attr('class', 'spin-control');
 
-        // console.log(wrapper.selectAll('input').node().value(metadata.count));
-        // utilGetSetValue(wrapper.selectAll('input'), metadata.count || '');
-        // var enter = spinControl.enter()
-        //     .append('div')
-        //     .attr('class', 'spin-control');
-
-        senter
+        spinEnter
             .append('button')
             .datum(1)
             .attr('class', 'increment')
             .attr('tabindex', -1);
 
-        senter
+        spinEnter
             .append('button')
             .datum(-1)
             .attr('class', 'decrement')
             .attr('tabindex', -1);
 
         spinControl = spinControl
-            .merge(senter);
+            .merge(spinEnter);
 
         spinControl.selectAll('button')
             .on('click', function (d) {
