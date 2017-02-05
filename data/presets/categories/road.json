@@ -9,6 +9,7 @@
         "highway/primary",
         "highway/secondary",
         "highway/tertiary",
+        "highway/living_street",
         "highway/unclassified",
         "highway/service",
         "highway/track",
