@@ -10,8 +10,8 @@ import { utilGetDimensions } from '../util/dimensions';
 var TAU = 2 * Math.PI;
 function ztok(z) { return 256 * Math.pow(2, z) / TAU; }
 function ktoz(k) { return Math.log(k * TAU) / Math.LN2 - 8; }
-function vecSub(a, b) { return [ a[0] - b[0], a[1] - b[1] ]; }
-function vecScale(a, b) { return [ a[0] * b, a[1] * b ]; }
+function vecSub(a, b) { return [a[0] - b[0], a[1] - b[1]]; }
+function vecScale(a, b) { return [a[0] * b, a[1] * b]; }
 
 
 export function uiMapInMap(context) {
@@ -209,7 +209,7 @@ export function uiMapInMap(context) {
 
             var overlays = overlay
                 .selectAll('div')
-                .data(activeOverlayLayers, function(d) { return d.source().name(); });
+                .data(activeOverlayLayers, function (d) { return d.source().name(); });
 
             overlays.exit()
                 .remove();
@@ -217,7 +217,7 @@ export function uiMapInMap(context) {
             overlays = overlays.enter()
                 .append('div')
                 .merge(overlays)
-                .each(function(layer) { d3.select(this).call(layer); });
+                .each(function (layer) { d3.select(this).call(layer); });
 
 
             var dataLayers = tiles
@@ -237,43 +237,34 @@ export function uiMapInMap(context) {
 
             // redraw viewport bounding box
             if (gesture !== 'pan') {
-                    // var getPath = d3.geoPath(projection),
-                var    bbox = { type: 'Polygon', coordinates: [context.map().extent().polygon()] };
+                var getPath = d3.geoPath(projection),
+                    bbox = { type: 'Polygon', coordinates: [context.map().extent().polygon()] };
 
                 viewport = wrap.selectAll('.map-in-map-viewport')
                     .data([0]);
 
                 viewport = viewport.enter()
-                    .append('canvas')
-                    // .attr('class', 'map-in-map-viewport')
-                    .attr('height', 300)
-                    .attr('width', 300)
+                    .append('svg')
+                    .attr('class', 'map-in-map-viewport')
                     .merge(viewport);
 
 
-                var path2 = viewport.selectAll('.map-in-map-bbox')
+                var path = viewport.selectAll('.map-in-map-bbox')
                     .data([bbox]);
 
-                var ctx = d3.select('canvas').node().getContext('2d');
-                var path = d3.geoPath()
-                    .projection(projection)
-                    .context(ctx);
-                ctx.beginPath();
-                path(bbox);
-                ctx.stroke();
-                // path.enter()
-                //     .append('path')
-                //     .attr('class', 'map-in-map-bbox')
-                //     .merge(path)
-                //     .attr('d', getPath)
-                //     .classed('thick', function(d) { return getPath.area(d) < 30; });
+                path.enter()
+                    .append('path')
+                    .attr('class', 'map-in-map-bbox')
+                    .merge(path)
+                    .attr('d', getPath)
+                    .classed('thick', function (d) { return getPath.area(d) < 30; });
             }
         }
 
 
         function queueRedraw() {
             clearTimeout(timeoutId);
-            timeoutId = setTimeout(function() { redraw(); }, 750);
+            timeoutId = setTimeout(function () { redraw(); }, 750);
         }
 
 
@@ -293,7 +284,7 @@ export function uiMapInMap(context) {
                     .transition()
                     .duration(200)
                     .style('opacity', '0')
-                    .on('end', function() {
+                    .on('end', function () {
                         selection.selectAll('.map-in-map')
                             .style('display', 'none');
                     });
@@ -304,7 +295,7 @@ export function uiMapInMap(context) {
                     .transition()
                     .duration(200)
                     .style('opacity', '1')
-                    .on('end', function() {
+                    .on('end', function () {
                         redraw();
                     });
             }
@@ -325,7 +316,7 @@ export function uiMapInMap(context) {
             .merge(wrap);
 
         context.map()
-            .on('drawn.map-in-map', function(drawn) {
+            .on('drawn.map-in-map', function (drawn) {
                 if (drawn.full === true) {
                     redraw();
                 }

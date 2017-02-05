@@ -146,9 +146,9 @@ export function modeSelect(context, selectedIDs) {
 
 
     function positionMenu() {
-        var entity = singular();
         if (suppressMenu || !radialMenu) { return; }
 
+        var entity = singular();
         if (entity && context.geometry(entity.id) === 'relation') {
             suppressMenu = true;
         } else if (entity && entity.type === 'node') {
@@ -158,12 +158,10 @@ export function modeSelect(context, selectedIDs) {
                 viewport = geoExtent(context.projection.clipExtent()).polygon();
             if (geoPointInPolygon(point, viewport)) {
                 radialMenu.center(point);
-               
             } else {
                 suppressMenu = true;
             }
         }
-        console.log(entity);
     }
 
 

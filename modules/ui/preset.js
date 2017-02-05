@@ -23,6 +23,7 @@ export function uiPreset(context) {
     // Field Constructor
     function UIField(field, entity, show) {
         field = _.clone(field);
+
         field.input = uiFields[field.type](field, context)
             .on('change', function(t, onInput) {
                 dispatch.call('change', field, t, onInput);

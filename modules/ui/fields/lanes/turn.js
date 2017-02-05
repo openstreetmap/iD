@@ -1,7 +1,7 @@
 import * as d3 from 'd3';
 import { utilRebind } from '../../../util/rebind';
-import _ from 'lodash';
 import { svgIcon } from '../../../svg/index';
+import { t } from '../../../util/locale';
 
 var validTurnLanes = [
     'left', 'right', 'slight_left', 'slight_right', 'sharp_left',
@@ -48,17 +48,10 @@ export function uiTurnLanes() {
             .append('ul')
             .attr('class', 'turn-lane-tags preset-input-wrap checkselect');
 
+        // Update
         wrapper = wrapper
             .merge(enter);
 
-
-        // Updatoe
-        // wrapper
-        //     .selectAll('.form-label')
-        //     .text(function (d) {
-        //         return 'Turn Lane  #' + (curLane + 1);
-        //     });
-    
         wrapper.selectAll('.remove-icon')
             .on('click', remove);
 
@@ -72,7 +65,7 @@ export function uiTurnLanes() {
             .enter()
             .append('li')
             .attr('class', 'label col6 turn-lanes-direction')
-            .text(function (d, i) { return d.dir; });
+            .text(function (d) { return t('lanes.turn.' + d.dir); });
 
         dirWrapper = dirWrapper
             .merge(row);

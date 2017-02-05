@@ -1223,14 +1223,10 @@ button.save.has-count .count::before {
 
 /* lanes */
 
-.form-field-lanes {
-    
-}
-
 .form-field-lanes .lanes-info input {
     min-height: 30px;
-    padding: 5px 10px;
-    width: 100%;
+    /*padding: 5px 10px;
+    width: 100%;*/
     border-radius: 0;
     border-width: 0;
     border-left-width: 1px;
@@ -1249,19 +1245,6 @@ button.save.has-count .count::before {
     border-top: 0
 }
 
-/*
-.form-field-lanes .preset-input-lanes-wrap input {
-    border-top: 0;
-    border-left-width: 1px;
-}*/
-
-/*
-.form-field-lanes .preset-input-lanes-wrap input {
-    border-radius: 0;
-    border-width: 0;
-    border-left-width: 1px;
-}
-*/
 .form-field-lanes .preset-input-wrap li {
     border-bottom: 1px solid #CCC;
 }
@@ -1279,7 +1262,6 @@ button.save.has-count .count::before {
 .lane-selector ul {
     display: flex;
     flex-direction: row;
-    
 }
 
 .lane-selector .lane-index {

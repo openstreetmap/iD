@@ -8,6 +8,7 @@ export function uiRadialMenu(context, operations) {
         center = [0, 0],
         tooltip;
 
+
     var radialMenu = function(selection) {
         if (!operations.length) return;
 

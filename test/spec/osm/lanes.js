@@ -1,4 +1,4 @@
-describe.only('iD.Lanes', function () {
+describe('iD.Lanes', function () {
 
     describe('default lane tags', function () {
 

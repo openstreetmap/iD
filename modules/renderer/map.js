@@ -63,7 +63,6 @@ export function rendererMap(context) {
 
 
     function map(selection) {
-
         _selection = selection;
 
         context
@@ -162,7 +161,7 @@ export function rendererMap(context) {
                 surface.selectAll('.data-layer-osm')
                     .call(drawVertices, graph, all, filter, map.extent(), map.zoom())
                     .call(drawMidpoints, graph, all, filter, map.trimmedExtent())
-                    .call(drawLanes, graph, all, filter, map.trimmedExtent(), map.zoom(), map.center());
+                    .call(drawLanes, graph, all, filter, dimensions, map.zoom(), map.center());
                 dispatch.call('drawn', this, {full: false});
             }
         });
@@ -255,7 +254,7 @@ export function rendererMap(context) {
             .call(drawLines, graph, data, filter)
             .call(drawAreas, graph, data, filter)
             .call(drawMidpoints, graph, data, filter, map.trimmedExtent())
-            .call(drawLanes, graph, data, filter, map.trimmedExtent(), map.zoom(), map.center())
+            .call(drawLanes, graph, data, filter, dimensions, map.zoom(), map.center())
             .call(drawLabels, graph, data, filter, dimensions, !difference && !extent)
             .call(drawPoints, graph, data, filter);
 

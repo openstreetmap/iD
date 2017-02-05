@@ -27,6 +27,7 @@ export function svgMidpoints(projection, context) {
                 continue;
             if (context.selectedIDs().indexOf(entity.id) < 0)
                 continue;
+
             var nodes = graph.childNodes(entity);
             for (var j = 0; j < nodes.length - 1; j++) {
 
@@ -91,6 +92,7 @@ export function svgMidpoints(projection, context) {
             .selectAll('g.midpoint')
             .filter(midpointFilter)
             .data(_.values(midpoints), function(d) { return d.id; });
+
         groups.exit()
             .remove();
 

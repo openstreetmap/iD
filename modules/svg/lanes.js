@@ -1,8 +1,5 @@
 import _ from 'lodash';
-import {
-    svgPointTransform,
-    svgTagClasses
-} from './index';
+
 
 import {
     geoAngle,
@@ -12,12 +9,11 @@ import {
 } from '../geo/index';
 import { getLayoutSeq } from '../osm/lanes';
 import { dataDriveLeft } from '../../data';
-import { geoPointInPolygon } from '../geo';
+import { geoPointInPolygon, geoExtent } from '../geo';
 
 
 export function svgLanes(projection, context) {
-
-    return function drawLanes(selection, graph, entities, filter, extent, zoom, mapCenter) {
+    return function drawLanes(selection, graph, entities, filter, dimensions, zoom, mapCenter) {
         var entity = getEntity();
         var metadata;
         var driveLeft;
@@ -55,12 +51,6 @@ export function svgLanes(projection, context) {
         var enter = wrapper.enter()
             .insert('g', ':first-child')
             .attr('class', 'lanes-svg-wrapper');
-
-
-
-        // enter.append('polygon')
-        //     .attr('points', '-3,4 5,0 -3,-4')
-        //     .attr('class', 'fill');
 
 
         // wrapper UPDATE
@@ -119,7 +109,7 @@ export function svgLanes(projection, context) {
 
         lanes
             .attr('transform', function (d, i) {
-                var transform = 'translate(' + [iconWidth / 2 + i * iconWidth -  metadata.count * iconWidth / (2) , (iconWidth / 2)] + ')';
+                var transform = 'translate(' + [iconWidth / 2 + i * iconWidth - metadata.count * iconWidth / (2), (iconWidth / 2)] + ')';
                 transform += d.turnLanes.indexOf('right') > -1 ? ' scale(-1, 1)' : '';
                 if (d.dir === 'backward') { transform += ' rotate(180)'; }
                 return transform;
@@ -168,8 +158,14 @@ export function svgLanes(projection, context) {
             return entity;
         }
 
+        function trimmedExtent() {
+            var headerY = 60, footerY = 30, pad = 90;
+            return new geoExtent(projection.invert([pad, dimensions[1] - footerY - pad]),
+                projection.invert([dimensions[0] - pad, headerY + pad]));
 
+        }
         function findPosition() {
+            var extent = trimmedExtent();
             var loc;
             if (!entity) return;
 
@@ -180,7 +176,7 @@ export function svgLanes(projection, context) {
                 var a = nodes[j - 1];
                 var b = nodes[j];
                 if (geoEuclideanDistance(projection(a.loc), projection(b.loc)) > 40) {
-                    var point = geoInterp(a.loc, b.loc, 0.75);
+                    var point = geoInterp(a.loc, b.loc, 0.77);
                     if (extent.intersects(point)) {
                         loc = point;
                     } else {
@@ -206,3 +202,4 @@ export function svgLanes(projection, context) {
     };
 
 }
+

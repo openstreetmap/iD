@@ -697,6 +697,20 @@
                 "start": "Start mapping!"
             }
         },
+        "lanes": {
+            "turn": {
+                "left": "Left",
+                "right": "Right",
+                "slight_left": "Slight left",
+                "slight_right": "Slight right",
+                "sharp_left": "Sharp left",
+                "sharp_right": "Sharp right",
+                "merge_to_left": "Merge left",
+                "merge_to_right": "Merge right",
+                "reverse": "Reverse",
+                "through": "Through"
+            }
+        },
         "presets": {
             "categories": {
                 "category-barrier": {

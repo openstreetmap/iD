@@ -11,11 +11,6 @@ export function geoInterp(p1, p2, t) {
             p1[1] + (p2[1] - p1[1]) * t];
 }
 
-// returns a point which divides the line joining p1, p2
-// in the ratio m:n
-export function geoDivideSegment(p1, p2, m, n) {
-    return [(p2[0]*n + p2[0]*m)/(m+n), (p2[1]*n + p2[1]*m)/(m+n)];
-}
 
 // 2D cross product of OA and OB vectors, i.e. z-component of their 3D cross product.
 // Returns a positive value, if OAB makes a counter-clockwise turn,
@@ -107,6 +102,7 @@ export function geoAngle(a, b, projection) {
     b = projection(b.loc);
     return Math.atan2(b[1] - a[1], b[0] - a[0]);
 }
+
 
 // Rotate all points counterclockwise around a pivot point by given angle
 export function geoRotate(points, angle, around) {
