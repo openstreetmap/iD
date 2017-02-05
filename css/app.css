@@ -1229,6 +1229,9 @@ button.save.has-count .count::before {
 
 .form-field-lanes .lanes-info input {
     min-height: 30px;
+    padding: 5px 10px;
+    width: 100%;
+    border: 0;
 }
  /*.form-field-lanes input {
     border: 1px solid #ccc;

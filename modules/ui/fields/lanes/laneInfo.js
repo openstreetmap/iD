@@ -11,7 +11,6 @@ export function uiLaneInfo() {
     function laneInfo(selection, metadata, curDirection, curLane) {
         // TODO: make this thing dynamic and show keysConsidered
         // wrt to oneway.
-        var keysConsidered = ['count', 'forward', 'backward', 'reverse'];
         var wrapper = selection
             .selectAll('.lanes-info')
             .data([0]);
@@ -20,47 +19,67 @@ export function uiLaneInfo() {
             .append('div')
             .attr('class', 'lanes-info lanes-wrap preset-input-wrap');
 
-        var input = enter
+        wrapper = wrapper
+            .merge(enter);
+
+        var input = wrapper.selectAll('.lanes-info')
+            .data([0]);
+    
+        input.exit()
+            .remove();
+    
+        input = input.enter()
             .append('input')
             .attr('class', 'lanes-info')
             .attr('type', 'lane-count')
-            .attr('id', '23231')
-            .attr('placeholder', 'Lane count'); 
-
+            .attr('placeholder', 'Lane count')
+            .merge(input); 
+        
         input
-            .on('input', change(true))
-            .on('blur', change())
-            .on('change', change());
+            .on('input', change)
+            .on('blur', change)
+            .on('change', change);
+            // .each(() => this.value = metadata.count);
 
-        var spinControl = enter
+        input.node().value = metadata.count;
+
+        var spinControl = wrapper.selectAll('.spin-control')
+            .data([0]);
+
+
+        var senter = spinControl.enter()
             .append('div')
             .attr('class', 'spin-control');
-    
+
+        // console.log(wrapper.selectAll('input').node().value(metadata.count));
+        // utilGetSetValue(wrapper.selectAll('input'), metadata.count || '');
         // var enter = spinControl.enter()
         //     .append('div')
         //     .attr('class', 'spin-control');
 
-        spinControl
+        senter
             .append('button')
             .datum(1)
             .attr('class', 'increment')
             .attr('tabindex', -1);
 
-        spinControl
+        senter
             .append('button')
             .datum(-1)
             .attr('class', 'decrement')
             .attr('tabindex', -1);
 
-        // spinControl = spinControl
-        //     .merge(enter);
+        spinControl = spinControl
+            .merge(senter);
 
         spinControl.selectAll('button')
             .on('click', function (d) {
                 d3.event.preventDefault();
+                console.log(input.node().value);
                 var num = parseInt(input.node().value || 0, 10);
                 if (!isNaN(num)) input.node().value = num + d;
-                change()();
+                
+                change();
             });
 
         // var items = list.selectAll('li')
@@ -103,6 +122,8 @@ export function uiLaneInfo() {
 
         function change(d) {
             var tag = {};
+            metadata.count = utilGetSetValue(selection.selectAll('input'));
+            
             if (metadata.oneway) {
                 if (d === 'count') {
                     var count = utilGetSetValue(d3.select(this));
