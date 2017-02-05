@@ -1,0 +1,15 @@
+{
+    "icon": "roadblock",
+    "geometry": [
+        "vertex"
+    ],
+    "terms": [
+        "no exit",
+        "road end",
+        "dead end"
+    ],
+    "tags": {
+        "noexit": "yes"
+    },
+    "name": "No Exit"
+}

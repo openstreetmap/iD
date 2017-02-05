@@ -8160,6 +8160,21 @@
             ],
             "name": "Wood"
         },
+        "noexit/yes": {
+            "icon": "roadblock",
+            "geometry": [
+                "vertex"
+            ],
+            "terms": [
+                "no exit",
+                "road end",
+                "dead end"
+            ],
+            "tags": {
+                "noexit": "yes"
+            },
+            "name": "No Exit"
+        },
         "office": {
             "icon": "commercial",
             "fields": [

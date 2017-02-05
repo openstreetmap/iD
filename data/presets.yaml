@@ -3280,6 +3280,11 @@ en:
         name: Wood
         # 'terms: tree'
         terms: '<translate with synonyms or related terms for ''Wood'', separated by commas>'
+      noexit/yes:
+        # noexit=yes
+        name: No Exit
+        # 'terms: no exit,road end,dead end'
+        terms: '<translate with synonyms or related terms for ''No Exit'', separated by commas>'
       office:
         # office=*
         name: Office

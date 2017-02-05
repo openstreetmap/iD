@@ -3632,6 +3632,10 @@
                     "name": "Wood",
                     "terms": "tree"
                 },
+                "noexit/yes": {
+                    "name": "No Exit",
+                    "terms": "no exit,road end,dead end"
+                },
                 "office": {
                     "name": "Office",
                     "terms": ""
