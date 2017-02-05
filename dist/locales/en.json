@@ -4344,6 +4344,10 @@
                     "name": "Video Store",
                     "terms": "DVD"
                 },
+                "shop/watches": {
+                    "name": "Watches Shop",
+                    "terms": ""
+                },
                 "shop/water_sports": {
                     "name": "Watersport/Swim Shop",
                     "terms": ""

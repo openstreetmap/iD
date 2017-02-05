@@ -4067,6 +4067,10 @@ en:
         # shop=video_games
         name: Video Game Store
         terms: '<translate with synonyms or related terms for ''Video Game Store'', separated by commas>'
+      shop/watches:
+        # shop=watches
+        name: Watches Shop
+        terms: '<translate with synonyms or related terms for ''Watches Shop'', separated by commas>'
       shop/water_sports:
         # shop=water_sports
         name: Watersport/Swim Shop
