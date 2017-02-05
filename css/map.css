@@ -791,16 +791,16 @@ path.casing.tag-road {
 }
 
 .preset-icon .icon.highway-living-street {
-    color: #ccc;
-    fill: #fff;
+    color: #bbb;
+    fill: #ddd;
 }
 path.stroke.tag-highway-living_street,
 path.stroke.tag-living_street {
-    stroke:#ccc;
+    stroke: #ccc;
 }
 path.casing.tag-highway-living_street,
 path.casing.tag-living_street {
-    stroke:#fff;
+    stroke: #fff;
 }
 
 .preset-icon .icon.highway-footway.tag-highway-corridor,
