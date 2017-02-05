@@ -1303,7 +1303,7 @@ button.save.has-count .count::before {
 }
 
 .lane-selector .lane-index.has-data {
-   color: #7092ff;
+    font-weight: bold;
 }
 
 .lane-selector .lane-index:last-child {
@@ -1347,39 +1347,16 @@ button.save.has-count .count::before {
     border-bottom-right-radius: 4px;
 }
 
-
-/*
-.lane-tags > label:hover {
-    background-color: #ececec;
+.lanes-svg-wrapper .lanes-circle {
+    stroke-width: 2;
+    stroke: #000;
+    fill-opacity: 0.75;
+    fill: #fff;
 }
 
-.lane-tags > label:not(:last-child) {
-    border-bottom: 1px solid #ccc;
+.lanes-svg-wrapper .lanes-circle.backward {
+    stroke-dasharray: 3 5;
 }
-
-.lane-tags > label:last-child {
-    border-radius: 0 0 3px 3px;
-}
-
-.lane-tags label > span {
-    display: block;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-}
-
-.lane-tags > label.active {
-    background: #E8EBFF;
-}*/
-
-/*lane-visualizer*/
-
-.lane-visualizer-background {
-    fill: #000;
-    fill-opacity: 0.5;
-}
-
-
 /* preset form multicombo */
 
 .form-field-multicombo {

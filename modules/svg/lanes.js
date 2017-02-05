@@ -23,7 +23,7 @@ export function svgLanes(projection, context) {
         var driveLeft;
         var layoutSeq = [];
         var iconWidth = 40;
-        var zoomLimit = zoom >= 18;
+        var zoomLimit = zoom >= 19.5;
 
         // TODO: on removing map features svgLanes stays there
         if (entity) {
@@ -40,7 +40,7 @@ export function svgLanes(projection, context) {
         // Each DOM node bound to data will have a special __data__ property
         // you can see it in Chrome developer tools
         var wrapper = selection.selectAll('.layer-hit')
-            .selectAll('.lanes-wrapper')
+            .selectAll('.lanes-svg-wrapper')
             .data(wrapperData && zoomLimit ? [wrapperData] : []);
 
         // wrapper EXIT
@@ -54,11 +54,9 @@ export function svgLanes(projection, context) {
         // the normal thing to do here is create the missing DOM nodes
         var enter = wrapper.enter()
             .insert('g', ':first-child')
-            .attr('class', 'lanes-wrapper');
+            .attr('class', 'lanes-svg-wrapper');
 
-        enter
-            .append('rect')
-            .attr('class', 'lanes-background');
+
 
         // enter.append('polygon')
         //     .attr('points', '-3,4 5,0 -3,-4')
@@ -82,12 +80,12 @@ export function svgLanes(projection, context) {
                 return 'translate(' + p[0] + ',' + p[1] + ') rotate(' + ang + ')';
             });
 
-        wrapper.selectAll('.lanes-background')
-            .attr('transform', function () {
-                return 'translate(' + metadata.count * iconWidth / (-2) + ', 0)';
-            })
-            .attr('width', function () { return metadata.count * iconWidth; })
-            .attr('height', function () { return iconWidth; });
+        // wrapper.selectAll('.lanes-background')
+        //     .attr('transform', function () {
+        //         return 'translate(' + metadata.count * iconWidth / (-2) + ', 0)';
+        //     })
+        //     .attr('width', function () { return metadata.count * iconWidth; })
+        //     .attr('height', function () { return iconWidth; });
 
 
 
@@ -136,15 +134,16 @@ export function svgLanes(projection, context) {
         // situation, it's the behavior we want, so we can style the circle based on `d.dir`.
         // `select` propagates __data__ to children, `selectAll` does not.
         lanes.select('.lanes-circle')
-            .style('fill', function (d) {
-                switch (d.dir) {
-                    case 'forward':
-                        return '#dfffdf';
-                    case 'backward':
-                        return '#ffd8d8';
-                    default:
-                        return '#d8d8d8';
-                }
+            .classed('backward', function (d) {
+                return d.dir === 'backward';
+                // switch (d.dir) {
+                //     case 'forward':
+                //         return '#dfffdf';
+                //     case 'backward':
+                //         return '#ffd8d8';
+                //     default:
+                //         return '#d8d8d8';
+                // }
             });
 
 
