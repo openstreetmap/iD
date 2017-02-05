@@ -19,12 +19,11 @@ export function uiFieldLanes(field, context) {
 
     var lanesInfo = uiLaneInfo(field, context)
         .on('change', change);
-    // var lanes 
 
     function lanes(selection) {
         lanesData = context.entity(wayID).lanes();
         metadata = lanesData.metadata;
-        
+
         if (!d3.select('.inspector-wrap.inspector-hidden').empty() || !selection.node().parentNode) {
             selection.call(lanes.off);
             return;
@@ -38,7 +37,7 @@ export function uiFieldLanes(field, context) {
             .append('div')
             .attr('class', 'lane-selector localized-wrap')
             .merge(laneSelector);
-        
+
         laneSelector.call(laneSelectorUI);
 
         selection.call(turnLanes, metadata, curDir, curLane);
@@ -60,11 +59,7 @@ export function uiFieldLanes(field, context) {
         function laneSelectorUI(selection) {
             var items;
             var metadata = lanesData.metadata;
-            var oneway = metadata.oneway;
             var len = metadata.count;
-            // TODO: clean up this mess of vvvvv
-            if (oneway) len = metadata.count;
-            else len = metadata.forward + metadata.backward;
 
             selection.selectAll('.form-label')
                 .data([0])
@@ -88,20 +83,20 @@ export function uiFieldLanes(field, context) {
                 .append('ul')
                 .merge(list);
 
-            items = list.selectAll('.lane-item')
+            items = list.selectAll('.lane-index')
                 .data(_.fill(Array(len), 0).map(function (n, i) {
                     return i;
                 }));
 
             items.enter()
                 .append('div')
-                .attr('class', 'lane-item')
+                .attr('class', 'lane-index')
                 .attr('id', function (d) {
                     return 'lane-' + d;
                 })
                 .append('span');
 
-            var input = selection.selectAll('.lane-item');
+            var input = selection.selectAll('.lane-index');
 
             input.selectAll('span')
                 .text(function (d) {
@@ -112,13 +107,24 @@ export function uiFieldLanes(field, context) {
                     return (d - metadata.forward + 1) + '▼';
                 });
 
-            input.classed('active', function (d) {
-                if (metadata.oneway) return d === curLane;
-                if (curDir === 'forward') {
-                    return d === curLane;
-                }
-                return curLane + metadata.forward === d;
-            });
+            input
+                .classed('active', function (d) {
+                    if (metadata.oneway) return d === curLane;
+                    if (curDir === 'forward') {
+                        return d === curLane;
+                    }
+                    return curLane + metadata.forward === d;
+                })
+                .classed('has-data', function (d) {
+                    if (metadata.oneway) {
+                        return hasData('unspecified', d);
+                    }
+                    if (d < metadata.forward) {
+                        return hasData('forward', d);
+                    }
+                    return hasData('backward', d - metadata.forward);
+                });
+
             input.on('click', function (d) {
                 if (metadata.oneway) {
                     curLane = d;
@@ -140,6 +146,12 @@ export function uiFieldLanes(field, context) {
         }
     }
 
+    function hasData(direction, lane) {
+        var data = metadata.turnLanes[direction][lane];
+        if (data) {
+            return data.indexOf('none') === -1;
+        }
+    }
     function change(t, onInput) {
         var tag = {};
 
@@ -157,7 +169,7 @@ export function uiFieldLanes(field, context) {
             tag['turn:lanes:backward'] = undefined;
         } else {
             curLane = curLane >= metadata[curDir] ? 0 : curLane;
-    
+
             tag.lanes = metadata.forward + metadata.backward + metadata.bothways + '';
             tag['lanes:forward'] = metadata.forward + '';
             tag['lanes:backward'] = metadata.backward + '';
@@ -202,7 +214,6 @@ export function formPipes(data, len, nullKey) {
     }
 
     var isEmpty = _.every(piped, function (i) {
-        if (!_.isArray(i)) throw new exception('I is not array');
         return i.indexOf(nullKey) > -1;
     });
 

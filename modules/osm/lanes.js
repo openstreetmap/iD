@@ -1,8 +1,8 @@
 import _ from 'lodash';
 
 export var validTurnLanes = [
-    'left', 'slight_left', 'sharp_left', 'through', 'right', 'slight_right',
-    'sharp_right', 'reverse', 'merge_to_left', 'merge_to_right', 'none'
+    'left',  'right', 'slight_left', 'slight_right',  'sharp_left',
+    'sharp_right', 'merge_to_left', 'merge_to_right','reverse', 'through', 'none'
 ];
 
 export function osmLanes(entity) {

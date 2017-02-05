@@ -1,23 +1,28 @@
 import * as d3 from 'd3';
-import { validTurnLanes } from '../../../osm/lanes';
 import { utilRebind } from '../../../util/rebind';
-import { formPipes } from '../lanes';
 import _ from 'lodash';
+import { svgIcon } from '../../../svg/index';
 
-export function uiTurnLanes(field) {
+var validTurnLanes = [
+    'left', 'right', 'slight_left', 'slight_right', 'sharp_left',
+    'sharp_right', 'merge_to_left', 'merge_to_right', 'reverse', 'through'
+];
+
+export function uiTurnLanes() {
     var dispatch = d3.dispatch('change');
 
     function turnLanes(selection, metadata, curDirection, curLane) {
         var turnLanesData = metadata.turnLanes;
-        var valid = validTurnLanes.map(function (t) {
-            var dir = turnLanesData[curDirection][curLane];
-            if (!dir) return false;
-            return dir.indexOf(t) > -1;
-        }); 
-
+        var valid = validTurnLanes.map(function (d) {
+            var directions = turnLanesData[curDirection][curLane];
+            return {
+                dir: d,
+                active: directions && directions.indexOf(d) > -1
+            };
+        });
         var wrapper = selection
             .selectAll('.turn-lanes')
-            .data([0]);
+            .data([curLane]);
 
         wrapper.exit().remove();
 
@@ -25,72 +30,76 @@ export function uiTurnLanes(field) {
             .append('div')
             .attr('class', 'turn-lanes localized-wrap');
 
-        enter
+        var label = enter
             .append('label')
             .attr('class', 'form-label entry')
             .text('Turn Lanes');
 
-        enter
+        var buttonWrap = label
             .append('div')
-            .attr('class', 'lane-tags preset-input-wrap checkselect');
+            .attr('class', 'form-label-button-wrap');
+
+        buttonWrap.append('button')
+            .attr('class', 'remove-icon')
+            .attr('tabindex', -1)
+            .call(svgIcon('#operation-delete'));
+
+        enter
+            .append('ul')
+            .attr('class', 'turn-lane-tags preset-input-wrap checkselect');
 
         wrapper = wrapper
             .merge(enter);
 
-        var label = wrapper
-            .selectAll('.lane-tags')
-            .selectAll('label')
+
+        // Updatoe
+        // wrapper
+        //     .selectAll('.form-label')
+        //     .text(function (d) {
+        //         return 'Turn Lane  #' + (curLane + 1);
+        //     });
+    
+        wrapper.selectAll('.remove-icon')
+            .on('click', remove);
+
+        var dirWrapper = wrapper.selectAll('ul')
+            .selectAll('.turn-lanes-direction')
             .data(valid);
 
-        label.exit()
-            .remove();
+        dirWrapper.exit().remove();
 
-        var labelEnter = label.enter()
-            .append('label');
+        var row = dirWrapper
+            .enter()
+            .append('li')
+            .attr('class', 'label col6 turn-lanes-direction')
+            .text(function (d, i) { return d.dir; });
 
-        labelEnter
-            .append('input')
-            .property('direction', function (d, i) { return validTurnLanes[i]; })
-            .property('indeterminate', field.type === 'check')
-            .attr('type', 'checkbox')
-            .attr('id', 'preset-input-' + field.id);
+        dirWrapper = dirWrapper
+            .merge(row);
 
-
-        labelEnter
-            .append('span')
-            .text(function (d, i) { return validTurnLanes[i]; })
-            .attr('class', 'value');
-
-        label = label
-            .merge(labelEnter)
-            .select('input')
-            .property('checked', function (d) {
-                return d;
+        // Update
+        dirWrapper
+            .classed('active', function (d) { return d.active; })
+             .classed('left-border', function(d, i) {
+                return i%2 === 1; 
             })
             .on('click', change);
 
-        function change() {
+        function remove() {
             d3.event.stopPropagation();
-            var input = selection.selectAll('input');
-            var direction = d3.select(this).property('direction');
+            turnLanesData[curDirection][curLane] = ['none'];
+            dispatch.call('change', this);
+        }
+        function change(d) {
+            d3.event.stopPropagation();
             var newDirs = [];
-
-            input.each(function (d, i) {
-                var value = d3.select(this).property('checked');
-                var direction = d3.select(this).property('direction');
-                if (value) {
-                    newDirs.push(direction);
-                }
+            d.active = !d.active;
+            valid.forEach(function (v) {
+                if (v.active) newDirs.push(v.dir);
             });
 
-            if (direction === 'none' || newDirs.length === 0) {
-                newDirs = ['none'];
-            } else {
-                _.pull(newDirs, 'none');
-            }
-
+            if (newDirs.length === 0) newDirs = ['none'];
             turnLanesData[curDirection][curLane] = newDirs;
-
             dispatch.call('change', this);
         }
     }
