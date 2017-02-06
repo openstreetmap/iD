@@ -571,11 +571,13 @@
             "untagged_point": "Ponto sem etiquetas",
             "untagged_line": "Linha sem etiquetas",
             "untagged_area": "Área sem etiquetas",
+            "untagged_relation": "Relação sem etiquetas",
             "many_deletions": "Você está excluindo {n} elementos.  Você tem certeza de que quer fazer isso?  Isso irá excluí-los do mapa que todo mundo vê no openstreetmap.org.",
             "tag_suggests_area": "A etiqueta {tag} sugere que seja utilizada numa área, mas essa linha não é uma área",
             "untagged_point_tooltip": "Selecionar um tipo de elemento que descreva o que este ponto é.",
             "untagged_line_tooltip": "Selecionar um tipo de elemento que descreva o que esta linha é.",
             "untagged_area_tooltip": "Selecionar um tipo de elemento que descreva o que esta área é.",
+            "untagged_relation_tooltip": "Selecionar um tipo de elemento que descreva o que esta relação é.",
             "deprecated_tags": "Etiquetas obsoletas: {tags}"
         },
         "zoom": {
@@ -584,6 +586,12 @@
         },
         "cannot_zoom": "Não é possível afastar mais no modo atual.",
         "full_screen": "Alterar para Tela Cheia",
+        "gpx": {
+            "local_layer": "Arquivo local",
+            "drag_drop": "Arraste e solte um arquivo .gpx, .geojson ou .kml na página, ou clique o botão à direita para procurar",
+            "zoom": "Aproximar a camada",
+            "browse": "Procurar um arquivo"
+        },
         "mapillary_images": {
             "tooltip": "Fotos a nível de rua do Mapillary",
             "title": "Camada de Fotos (Mapillary)"
@@ -788,15 +796,18 @@
                         "block_number": "Número do Bloco",
                         "block_number!jp": "Num. do Bloco",
                         "city": "Município",
+                        "city!vn": "Cidade/Vila",
                         "conscriptionnumber": "123",
                         "country": "País",
                         "county": "Condado",
                         "county!jp": "Distrito",
                         "district": "Distrito",
+                        "district!vn": "Arrondissement/Vila/Distrito",
                         "floor": "Andar/piso",
                         "hamlet": "Lugarejo",
                         "housename": "Nome da casa",
                         "housenumber": "123",
+                        "housenumber!jp": "Nº Edifício/Nº Lote",
                         "neighbourhood": "Bairro",
                         "place": "Local",
                         "postcode": "CEP",
@@ -3610,6 +3621,10 @@
                     "name": "Escritório de Advocacia",
                     "terms": "advocacia, advogado, justiça, Direito"
                 },
+                "office/lawyer/notary": {
+                    "name": "Notário",
+                    "terms": "Notário, Cartório"
+                },
                 "office/newspaper": {
                     "name": "Escritório de Jornal",
                     "terms": "jornal, notícia"
@@ -3677,7 +3692,8 @@
                     "terms": "Vizinhança, Bairro"
                 },
                 "place/square": {
-                    "name": "Praça"
+                    "name": "Praça",
+                    "terms": "Quadra"
                 },
                 "place/suburb": {
                     "name": "Bairro",
@@ -4259,6 +4275,10 @@
                 "shop/video_games": {
                     "name": "Loja de Vídeogames",
                     "terms": "Loja de Jogos, Vídeogames, Jogos Eletrônicos"
+                },
+                "shop/watches": {
+                    "name": "Relojoaria",
+                    "terms": "Relojoaria, Loja de Relógios, Joalheria"
                 },
                 "shop/water_sports": {
                     "name": "Loja de Esportes Aquáticos",

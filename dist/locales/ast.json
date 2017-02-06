@@ -4,27 +4,27 @@
             "add_area": {
                 "title": "Área",
                 "description": "Amiesta parques, edificios, llagos o otres árees al mapa.",
-                "tail": "Calque nel mapa pa empezar a dibuxar un área, como un parque, llagu o edificiu."
+                "tail": "Fai click nel mapa pa empezar a dibuxar un área, como un parque, llagu o edificiu."
             },
             "add_line": {
                 "title": "Llinia",
                 "description": "Amiesta al mapa carreteres, cais, caminos, canales y otres llinies.",
-                "tail": "Calque nel mapa pa empezar a dibuxar una carretera, camín o ruta."
+                "tail": "Fai click nel mapa pa empezar a dibuxar una carretera, camín o ruta."
             },
             "add_point": {
                 "title": "Puntu",
-                "description": "Amieste al mapa restaurantes, monumentos, buzones o otros puntos.",
-                "tail": "Calque nel mapa p'amestar un puntu."
+                "description": "Amiesta al mapa restaurantes, monumentos, buzones o otros puntos.",
+                "tail": "Fai click nel mapa p'amestar un puntu."
             },
             "browse": {
                 "title": "Navegar",
                 "description": "Mover y ampliar el mapa."
             },
             "draw_area": {
-                "tail": "Calca p'amestar noyos al área. Calca nel primeru p'acabar el área."
+                "tail": "Fai click p'amestar noyos al área. Fai click nel primeru p'acabar l'área."
             },
             "draw_line": {
-                "tail": "Calca p'amestar más noyos a la llinia. Calca n'otres llinies pa coneutar con elles, y fai doble clic p'acabar la llinia."
+                "tail": "Fai click p'amestar más noyos a la llinia. Fai click n'otres llinies pa coneutar con elles, y fai doble clic p'acabar la llinia."
             }
         },
         "operations": {
@@ -101,12 +101,29 @@
             },
             "delete": {
                 "title": "Desaniciar",
+                "description": {
+                    "single": "Desaniciar permanentemente esti oxetu.",
+                    "multiple": "Desaniciar permanentemente estos oxetos"
+                },
                 "annotation": {
                     "point": "Desaniciáu un puntu.",
                     "vertex": "Desaniciáu un nuedu d'una vía.",
                     "line": "Desaniciada una llinia.",
                     "area": "Dresaniciáu un área.",
-                    "relation": "Desaniciada una rellación."
+                    "relation": "Desaniciada una rellación.",
+                    "multiple": "Desaniciáronse {n} oxetos"
+                },
+                "incomplete_relation": {
+                    "single": "Esti oxetu nun pué desaniciase porque nun se descargó completamente.",
+                    "multiple": "Estos oxetos nun pueden desaniciase porque nun se descargaron completamente."
+                },
+                "part_of_relation": {
+                    "single": "Esti oxetu nun pué desaniciase porque ye parte d'una rellación mayor. Primero tienes de quitalu de la rellación.",
+                    "multiple": "Estos oxetos nun pueden desaniciase porque son parte de rellaciones mayores. Primero tienes de quitalos de les rellaciones."
+                },
+                "connected_to_hidden": {
+                    "single": "Esti oxetu nun pué desaniciase porque ta coneutáu con un elementu tapecíu.",
+                    "multiple": "Estos oxetos nun pueden desaniciase porque tán coneutaos con elementos tapecíos."
                 }
             },
             "add_member": {
@@ -145,6 +162,10 @@
             },
             "move": {
                 "title": "Mover",
+                "description": {
+                    "single": "Mover esti oxetu a un llugar distintu.",
+                    "multiple": "Mover estos oxetos a un llugar distintu."
+                },
                 "key": "M",
                 "annotation": {
                     "point": "Movíu un puntu.",
@@ -230,9 +251,12 @@
             "rateLimit": "La API tien llendaes les conexones anónimes.  Puedes igualo aniciando sesión."
         },
         "commit": {
+            "title": "Xubir a OpenStreetMap",
             "description_placeholder": "Descripción curtia de les collaboraciones (riquío)",
+            "message_label": "Comentariu del conxuntu de cambios",
             "upload_explanation": "Los cambios que xuba tarán visibles en tolos mapes qu'usen los datos d'OpenStreetMap.",
             "upload_explanation_with_user": "Los cambios que xubas como {user} tarán visibles en tolos mapes qu'usen datos d'OpenStreetMap.",
+            "save": "Xubir",
             "cancel": "Encaboxar",
             "changes": "{count} cambios",
             "warnings": "Avisos",
@@ -476,6 +500,15 @@
             "help": "# Ayuda\n\nEsti ye un editor pa [OpenStreetMap](http://www.openstreetmap.org/), el\nmapamundi llibre y editable. Pues usalu p'amestar y anovar los datos\nde la to fastera, pa facer un mapamundi de códigu y datos abiertos\nmeyor pa tol mundu.\n\nLes ediciones que faigas nesti mapa sedrán visibles pa cualquiera qu'use\nOpenStreetMap. Pa facer una edición, necesites\n[aniciar sesión](https://www.openstreetmap.org/login).\n\nEl [editor iD](http://ideditor.com/) ye un proyeutu collaborativu col  [códigu\nfonte disponible'n GitHub](https://github.com/openstreetmap/iD).\n"
         },
         "intro": {
+            "done": "fecho",
+            "graph": {
+                "city_hall": "Casa del conceyu de Three Rivers",
+                "fire_department": "Bomberos de Three Rivers",
+                "memory_isle_park": "Parque Memory Isle",
+                "riverwalk_trail": "Camín Riverwalk",
+                "w_michigan_ave": "Avenida West Michigan",
+                "e_michigan_ave": "Avenida East Michigan"
+            },
             "navigation": {
                 "title": "Navegacion",
                 "drag": "L'área principal del mapa presenta los datos d'OpenStreetMap enriba d'un fondu. Pue navegar arrastrando y moviendo, igual que cualquier mapa web. **¡Arrastre'l mapa!**",

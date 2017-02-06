@@ -320,9 +320,12 @@
             "rateLimit": "API ограничивает анонимные подключения. Вы можете исправить это выполнив вход."
         },
         "commit": {
+            "title": "Загрузить в OpenStreetMap",
             "description_placeholder": "Короткое описание к вашим изменениям (обязательно)",
+            "message_label": "Описание изменений",
             "upload_explanation": "Сделанные вами изменения появятся на всех картах, использующих данные OpenStreetMap.",
             "upload_explanation_with_user": "Изменения, сделанные вами под именем {user}, появятся на всех картах, использующих данные OpenStreetMap.",
+            "save": "Сохранить",
             "cancel": "Отменить",
             "changes": "Правок: {count}",
             "warnings": "Предупреждения",
@@ -563,14 +566,18 @@
             "used_with": "ставится на {type}"
         },
         "validations": {
+            "disconnected_highway": "Несоединенные дороги",
+            "disconnected_highway_tooltip": "Дороги должны быть присоеденены к другим дорогам.",
             "untagged_point": "Точка без тегов",
             "untagged_line": "Линия без тегов",
             "untagged_area": "Полигон без тегов",
+            "untagged_relation": "Отношение без тегов",
             "many_deletions": "Вы удаляете {n} объектов. В результате они пропадут с карты, которую весь мир может видеть на openstreetmap.org. Уверены в своём решении?",
             "tag_suggests_area": "Тег {tag} обычно ставится на полигоны, но это не полигон",
             "untagged_point_tooltip": "Выберите тип объекта, который описывает, чем является эта точка.",
             "untagged_line_tooltip": "Выберите тип объекта, который описывает, чем является эта линия.",
             "untagged_area_tooltip": "Выберите тип объекта, который описывает, чем является эта область.",
+            "untagged_relation_tooltip": "Выберите тип объекта, который описывает, чем является это отношение.",
             "deprecated_tags": "Теги устарели: {tags}"
         },
         "zoom": {
@@ -579,6 +586,12 @@
         },
         "cannot_zoom": "В текущем режиме дальнейшее отдаление невозможно.",
         "full_screen": "Во весь экран",
+        "gpx": {
+            "local_layer": "Локальный файл",
+            "drag_drop": "Перетащите .gpx, .geojson или .kml файл на страницу или нажмите кнопку справа для его выбора",
+            "zoom": "Приблизиться к слою",
+            "browse": "Выбрать файл"
+        },
         "mapillary_images": {
             "tooltip": "Уличные фото и панорамы от Mapillary",
             "title": "Фотографии с Mapillary"
@@ -780,15 +793,22 @@
                 "address": {
                     "label": "Адресная информация",
                     "placeholders": {
+                        "block_number": "Номер квартала",
+                        "block_number!jp": "Квартал №",
                         "city": "Город",
+                        "city!jp": "Город/Поселок/Деревня/Специальный округ Токио",
+                        "city!vn": "Город/Поселок",
                         "conscriptionnumber": "123",
                         "country": "Страна",
                         "county": "Округ",
+                        "county!jp": "Район",
                         "district": "Район",
+                        "district!vn": "Округ/Город/Район",
                         "floor": "Этаж",
                         "hamlet": "Деревушка",
                         "housename": "Имя дома",
                         "housenumber": "Номер",
+                        "housenumber!jp": "Дом №/Участок №",
                         "neighbourhood": "Микрорайон",
                         "place": "Населённый пункт",
                         "postcode": "Почтовый индекс",

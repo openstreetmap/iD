@@ -320,9 +320,12 @@
             "rateLimit": "该接口是限制匿名连接的。您可以通过登录来解决这个问题。"
         },
         "commit": {
+            "title": "上传到OpenStreetMap",
             "description_placeholder": "简单说明您的贡献(必填)",
+            "message_label": "修改集说明",
             "upload_explanation": "您上传的修改将会在所有使用OpenStreetMap数据的地图上可见。",
             "upload_explanation_with_user": "{user}，您上传的修改将会在所有使用OpenStreetMap数据的地图上可见。",
+            "save": "上传",
             "cancel": "取消",
             "changes": "{count}个变更",
             "warnings": "警告",
@@ -563,14 +566,18 @@
             "used_with": "使用 {type}"
         },
         "validations": {
+            "disconnected_highway": "断开的道路",
+            "disconnected_highway_tooltip": "道路应该连接到其他道路。",
             "untagged_point": "未标记的点",
             "untagged_line": "未标记的线",
             "untagged_area": "未标记的面",
+            "untagged_relation": "未标记的关系",
             "many_deletions": "您正在删除 {n} 个特征。您确定要这么做吗？这些特征将会在任何人所见的 openstreetmap.org 地图上被删除。",
             "tag_suggests_area": "标签{tag}表明线应该为面要素，但它不是面",
             "untagged_point_tooltip": "选择该点的要素类型。",
             "untagged_line_tooltip": "选择描述这条线的要素类型。",
             "untagged_area_tooltip": "选择描述这个面的要素类型。",
+            "untagged_relation_tooltip": "选择描述这个关系的要素类型。",
             "deprecated_tags": "弃用标签：{tags}"
         },
         "zoom": {
@@ -579,6 +586,12 @@
         },
         "cannot_zoom": "在此模式下不能再缩小",
         "full_screen": "切换全屏",
+        "gpx": {
+            "local_layer": "本地文件",
+            "drag_drop": "将.gpx、.geojson或.kml文件拖放到页面上，或单击右侧的按钮浏览",
+            "zoom": "缩放到图层",
+            "browse": "浏览文件"
+        },
         "mapillary_images": {
             "tooltip": "来自Mapillary的街景照片",
             "title": "照片叠加层 (Mapillary)"

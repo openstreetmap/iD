@@ -320,9 +320,12 @@
             "rateLimit": "API  обмежує використання анонімних з'єднань. Ви можете виправити зареєструвавшись."
         },
         "commit": {
+            "title": "Завантажити до OpenStreetMap",
             "description_placeholder": "Стислий опис ваших дій (обовʼязково)",
+            "message_label": "Пояснення до набору змін",
             "upload_explanation": "Зміни, зроблені вами, з’являться на всіх мапах, що використовують дані OpenStreetMap.",
             "upload_explanation_with_user": "Зміни, зроблені вами під іменем {user}, з’являться на всіх мапах, що використовують дані OpenStreetMap.",
+            "save": "Зберегти",
             "cancel": "Скасувати",
             "changes": "{count} Змін",
             "warnings": "Попередження",
@@ -563,14 +566,18 @@
             "used_with": "використовується з {type}"
         },
         "validations": {
+            "disconnected_highway": "Не зʼєднані шляхи",
+            "disconnected_highway_tooltip": "Шляхи повинні бути приєднані до інших доріг.",
             "untagged_point": "Точка без теґів",
             "untagged_line": "Лінія без теґів",
             "untagged_area": "Полігон без  теґів",
+            "untagged_relation": "Звʼязок без теґів",
             "many_deletions": "Ви збираєтесь вилучити {n} об’єктів. Ви дійсно бажаєте це зробити? Таке вилучення призведе до їх зникнення з мапи openstreetmap.org.",
             "tag_suggests_area": "Теґ {tag} зазвичай ставиться на полігони, але об’єкт не є полігоном",
             "untagged_point_tooltip": "Виберіть тип об’єкта, що відповідає цій точці.",
             "untagged_line_tooltip": "Виберіть тип об’єкта, що відповідає цій лінії.",
             "untagged_area_tooltip": "Виберіть тип об’єкта, що відповідає цьому полігону.",
+            "untagged_relation_tooltip": "Оберіть тип об’єкту, що описує чим є звʼязок.",
             "deprecated_tags": "Застарілі теґи: {tags}"
         },
         "zoom": {
@@ -579,6 +586,12 @@
         },
         "cannot_zoom": "Не можливо зменшити масштаб в поточному режимі.",
         "full_screen": "Розвернути на весь екран",
+        "gpx": {
+            "local_layer": "Локальний файл",
+            "drag_drop": "Перетягніть файл .gpx, .geojson або .kml на сторінку чи натисніть кнопку праворуч для вибору файлу",
+            "zoom": "Масштабувати до шару",
+            "browse": "Вибрати файл"
+        },
         "mapillary_images": {
             "tooltip": "Знімки з вулиць від Mapillary",
             "title": "Фото-шар (Mapillary)"
@@ -698,6 +711,15 @@
                 "category-landuse": {
                     "name": "Землекористування"
                 },
+                "category-natural-area": {
+                    "name": "Природні обʼєкти"
+                },
+                "category-natural-line": {
+                    "name": "Природні обʼєкти"
+                },
+                "category-natural-point": {
+                    "name": "Природні обʼєкти"
+                },
                 "category-path": {
                     "name": "Стежки"
                 },
@@ -771,24 +793,36 @@
                 "address": {
                     "label": "Адреса",
                     "placeholders": {
+                        "block_number": "Квартал",
+                        "block_number!jp": "Квартал №",
                         "city": "Місто",
+                        "city!jp": "Місто/Містечко/Село/Район Токіо",
+                        "city!vn": "Місто/Містечко",
                         "conscriptionnumber": "123",
                         "country": "Країна",
                         "county": "Округ",
+                        "county!jp": "Район",
                         "district": "Район",
+                        "district!vn": "Округ/Місто/Район",
                         "floor": "Поверх",
                         "hamlet": "Хутір",
                         "housename": "Назва будинку",
                         "housenumber": "123",
+                        "housenumber!jp": "Дім №/Діянка №",
                         "neighbourhood": "Микрорайон",
+                        "neighbourhood!jp": "Тьоме/Адза/Коадза",
                         "place": "Місцевість",
                         "postcode": "Поштовий індекс",
                         "province": "Провінція",
+                        "province!jp": "Префектура",
                         "quarter": "Квартал",
+                        "quarter!jp": "Оадза/Маті",
                         "state": "Штат",
                         "street": "Вулиця",
                         "subdistrict": "Підрайон",
-                        "suburb": "Передмістя"
+                        "subdistrict!vn": "Округ/Комуна/Селище",
+                        "suburb": "Передмістя",
+                        "suburb!jp": "Округ"
                     }
                 },
                 "admin_level": {
@@ -1072,6 +1106,10 @@
                 },
                 "elevation": {
                     "label": "Висота над р.м."
+                },
+                "email": {
+                    "label": "Е-пошта",
+                    "placeholder": "example@example.com"
                 },
                 "emergency": {
                     "label": "Аварійні служби"
@@ -1630,6 +1668,9 @@
                 "stars": {
                     "label": "Кількість зірок"
                 },
+                "step_count": {
+                    "label": "Кількість сходинок"
+                },
                 "stop": {
                     "label": "STOP для…",
                     "options": {
@@ -1806,13 +1847,25 @@
                     "name": "Крісельний підйомник",
                     "terms": "Chair lift, rhsctkmybq gslqjvybr, крісельний підйомник"
                 },
+                "aerialway/drag_lift": {
+                    "name": "Бугельний підйомник",
+                    "terms": "витяг,бугель,підйомник,лижі,сніг,гори,відпочинок,дозвілля,спорт,сноуборд"
+                },
                 "aerialway/gondola": {
                     "name": "Гондоли",
                     "terms": "Gondola, Ujyljkb, гондола"
                 },
+                "aerialway/goods": {
+                    "name": "Вантажна канатна дорога",
+                    "terms": "витяг,підйомник,вантаж,канат,дорога"
+                },
                 "aerialway/magic_carpet": {
                     "name": "Стрічковий транспортер",
                     "terms": "стрічковий транспортер, стрічковий підйомник, конвеєрний підйомник, cnhsxrjdbq nhfcgjhnth, cnhsxrjdbq gslqkvybr, rjydt'hybq gslqjvybr, magic carpet lift"
+                },
+                "aerialway/mixed_lift": {
+                    "name": "Змішаний підйомник",
+                    "terms": "витяг,бугель,підйомник,лижі,сніг,гори,відпочинок,дозвілля,спорт,сноуборд"
                 },
                 "aerialway/platter": {
                     "name": "Платерний підйомник",
@@ -1845,6 +1898,10 @@
                     "name": "Перон",
                     "terms": "Apron, перон, gthjy"
                 },
+                "aeroway/gate": {
+                    "name": "Вихід на посадку",
+                    "terms": "аеропорт,гейт,вихід,посадка,літак,трап,тунель"
+                },
                 "aeroway/hangar": {
                     "name": "Ангар",
                     "terms": "Hangar, fyufh, ангар"
@@ -1860,6 +1917,10 @@
                 "aeroway/taxiway": {
                     "name": "Руліжна доріжка",
                     "terms": "taxiway,heks;yf ljhs;rf,руліжна доріжка"
+                },
+                "aeroway/terminal": {
+                    "name": "Термінал",
+                    "terms": "аеропорт,термінал,літак,очікування,duty-free,дьюті-фрі,зала"
                 },
                 "amenity": {
                     "name": "Зручності"
@@ -3528,6 +3589,10 @@
                     "name": "Дерева",
                     "terms": "Wood, lthtdf, дерева, ліс"
                 },
+                "noexit/yes": {
+                    "name": "Глухий кут",
+                    "terms": "тупик,глухий,кут"
+                },
                 "office": {
                     "name": "Офіс",
                     "terms": "Office, jasc, офіс"
@@ -3587,6 +3652,10 @@
                 "office/lawyer": {
                     "name": "Адвокатське бюро",
                     "terms": "адвокатура, адвокат "
+                },
+                "office/lawyer/notary": {
+                    "name": "Нотаріус",
+                    "terms": "нотаріус,контора,офіс"
                 },
                 "office/newspaper": {
                     "name": "Газета",
@@ -4239,6 +4308,10 @@
                 "shop/video_games": {
                     "name": "Комп’ютерні ігри",
                     "terms": "ігри, приставка, денді, комп’ютер, сега, икс-бокс, плейстейшен, x-box, playstation, dende, sega, atari"
+                },
+                "shop/watches": {
+                    "name": "Годинники",
+                    "terms": "годинник,магазин,салон,прикраси,чоловічі,жіночі,спортивні"
                 },
                 "shop/water_sports": {
                     "name": "Водный спорт/Спорттовари",

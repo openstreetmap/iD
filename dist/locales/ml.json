@@ -11,11 +11,17 @@
             },
             "add_point": {
                 "title": "ബിന്ദു"
+            },
+            "browse": {
+                "title": "ബ്രൗസ് ചെയ്യുക"
             }
         },
         "operations": {
             "continue": {
                 "title": "തുടരുക"
+            },
+            "orthogonalize": {
+                "title": "ചതുരം"
             }
         },
         "presets": {

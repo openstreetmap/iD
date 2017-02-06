@@ -785,26 +785,36 @@
                 "address": {
                     "label": "Morada",
                     "placeholders": {
+                        "block_number": "Número do bloco",
+                        "block_number!jp": "Bloco nº",
                         "city": "Localidade",
+                        "city!jp": "Cidade/Vila/Aldeia/Tokyo Special Ward",
+                        "city!vn": "Cidade/Vila",
                         "conscriptionnumber": "123",
                         "country": "País",
                         "county": "Condado",
                         "county!jp": "Distrito",
                         "district": "Distrito",
+                        "district!vn": "Arrondissement/Vila/Distrito",
                         "floor": "Chão",
                         "hamlet": "Aldeia",
                         "housename": "Nome da habitação",
                         "housenumber": "Nº de porta",
+                        "housenumber!jp": "Nº Edifício / Loteamento",
                         "neighbourhood": "Bairro",
+                        "neighbourhood!jp": "Chōme/Aza/Koaza",
                         "place": "Local / lugar",
                         "postcode": "Código postal",
                         "province": "Província",
                         "province!jp": "Prefeitura",
                         "quarter": "Quarteirão",
+                        "quarter!jp": "Ōaza/Machi",
                         "state": "Estado",
                         "street": "Rua",
                         "subdistrict": "Subdistrito",
-                        "suburb": "Subúrbio "
+                        "subdistrict!vn": "Ward/Commune/Townlet",
+                        "suburb": "Subúrbio ",
+                        "suburb!jp": "Ward"
                     }
                 },
                 "admin_level": {
@@ -3630,6 +3640,10 @@
                 "office/lawyer": {
                     "name": "Escritório de advogados",
                     "terms": "Law Office, Agência de Advocacia, Advogados, Advogado, Advogadas, Advogada, Advocacia"
+                },
+                "office/lawyer/notary": {
+                    "name": "Notário",
+                    "terms": "Notary Office"
                 },
                 "office/newspaper": {
                     "name": "Sede/filial de Jornal",

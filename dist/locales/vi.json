@@ -3649,6 +3649,10 @@
                     "name": "Văn phòng Luật sư",
                     "terms": "văn phòng luật sư, van phong luat su"
                 },
+                "office/lawyer/notary": {
+                    "name": "Văn phòng Công chứng",
+                    "terms": "văn phòng công chứng, công chứng viên, di chúc, chứng thư, van phong cong chung, cong chung vien, di chuc, chung thu"
+                },
                 "office/newspaper": {
                     "name": "Tờ báo",
                     "terms": "tờ báo, nhật báo, tuần báo, tạp chí, to bao, nhat bao, tuan bao, tap chi"

@@ -1999,8 +1999,8 @@
                     "terms": "università,accademia"
                 },
                 "amenity/community_centre": {
-                    "name": "Centro sociale",
-                    "terms": "evento,sala comune"
+                    "name": "Centro sociale (pubblico)",
+                    "terms": "evento,sala,sala comune,salone,polivalente"
                 },
                 "amenity/compressed_air": {
                     "name": "Aria Compressa",

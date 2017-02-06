@@ -3589,6 +3589,10 @@
                     "name": "樹林",
                     "terms": "樹林"
                 },
+                "noexit/yes": {
+                    "name": "死路",
+                    "terms": "死路"
+                },
                 "office": {
                     "name": "辦公室",
                     "terms": "辦公室"
@@ -4304,6 +4308,10 @@
                 "shop/video_games": {
                     "name": "電子遊戲店",
                     "terms": "電子遊戲商店,電玩店"
+                },
+                "shop/watches": {
+                    "name": "手錶店",
+                    "terms": "手錶店"
                 },
                 "shop/water_sports": {
                     "name": "水上活動/泳具店",

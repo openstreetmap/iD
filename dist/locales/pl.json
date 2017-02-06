@@ -571,11 +571,13 @@
             "untagged_point": "Nieoznaczony punkt",
             "untagged_line": "Nieoznaczona linia",
             "untagged_area": "Nieoznaczony obszar",
+            "untagged_relation": "Nieoznaczona relacja",
             "many_deletions": "Usuwasz aż {n} obiektów! Czy na pewno chcesz to zrobić? Tym sposobem trwale usuniesz je z mapy, który wszyscy mogą zobaczyć na openstreetmap.org.",
             "tag_suggests_area": "Znacznik {tag} sugeruje, że linia powinna być obszarem, ale nim nie jest.",
             "untagged_point_tooltip": "Wybierz typ obiektu, który opisuje czym jest ten punkt.",
             "untagged_line_tooltip": "Wybierz typ obiektu, który opisuje czym jest ta linia.",
             "untagged_area_tooltip": "Wybierz typ obiektu, który opisuje czym jest ten obszar.",
+            "untagged_relation_tooltip": "Wybierz typ obiektu, który opisuje czym jest ta relacja.",
             "deprecated_tags": "Przestarzałe znaczniki: {tags}"
         },
         "zoom": {
@@ -584,6 +586,12 @@
         },
         "cannot_zoom": "Nie można bardziej oddalić widoku w obecnym trybie.",
         "full_screen": "Tryb pełnoekranowy",
+        "gpx": {
+            "local_layer": "Lokalny plik",
+            "drag_drop": "Przeciągnij i upuść plik .gpx, .geojson lub .kml na stronę lub kliknij przycisk po prawej by go wybrać",
+            "zoom": "Przybliż do warstwy",
+            "browse": "Zlokalizuj plik"
+        },
         "mapillary_images": {
             "tooltip": "Zdjęcia z serwisu Mapillary",
             "title": "Nakładka zdjęć (Mapillary)"
@@ -3640,6 +3648,10 @@
                 "office/lawyer": {
                     "name": "Biuro prawnicze",
                     "terms": "prawnik, kancelaria, adwokat, radca"
+                },
+                "office/lawyer/notary": {
+                    "name": "Notariusz",
+                    "terms": "sekretarz,akt,majątek"
                 },
                 "office/newspaper": {
                     "name": "Gazeta",

@@ -8,12 +8,12 @@
             },
             "add_line": {
                 "title": "Ligne",
-                "description": "Les lignes peuvent être des autoroutes, des routes, des chemins ou encore des canaux.",
+                "description": "Ajouter des routes, des rues, des chemins, des canaux ou d'autres lignes à la carte.",
                 "tail": "Cliquez sur la carte pour ajouter une nouvelle ligne telle qu'une route ou un chemin."
             },
             "add_point": {
                 "title": "Point",
-                "description": "Les points peuvent être des restaurants, des monuments, ou encore des boîtes aux lettres.",
+                "description": "Ajouter des restaurants, des monuments, des boîtes aux lettres ou d'autres points à la carte.",
                 "tail": "Cliquez sur la carte pour ajouter un point tel qu'un restaurant ou un monument."
             },
             "browse": {
@@ -43,8 +43,8 @@
             },
             "continue": {
                 "key": "A",
-                "title": "Poursuivre,Reprendre",
-                "description": "Continuer cette ligne.",
+                "title": "Poursuivre",
+                "description": "Poursuivre cette ligne.",
                 "not_eligible": "Aucune ligne ne peut être poursuivie ici.",
                 "multiple": "Plusieurs lignes peuvent être poursuivies ici. Pour choisir une ligne, appuiez sur la touche Shift/Majuscule du clavier et appuiez sur la ligne voulue pour la sélectionner.",
                 "annotation": {
@@ -288,12 +288,12 @@
             }
         },
         "undo": {
-            "tooltip": "Annuler action: {action}",
+            "tooltip": "Annuler : {action}",
             "nothing": "Rien à annuler."
         },
         "redo": {
-            "tooltip": "Recréer: {action}",
-            "nothing": "Rien à refaire."
+            "tooltip": "Rétablir : {action}",
+            "nothing": "Rien à rétablir."
         },
         "tooltip_keyhint": "Raccourci :",
         "browser_notice": "Cet éditeur est supporté sous Firefox, Chrome, safari, Opera, et Internet  Explorer 11 et supérieur. Veuillez s'il vous plaît mettre à jour votre navigateur ou utiliser Potlach 2 pour éditer la carte.",
@@ -325,7 +325,7 @@
             "message_label": "Commentaire du groupe de modifications",
             "upload_explanation": "Les modifications envoyées seront visibles sur toutes les cartes qui utilisent les données d'OpenStreetMap.",
             "upload_explanation_with_user": "Les modifications envoyées en tant que {user} seront visibles sur toutes les cartes qui utilisent les données d'OpenStreetMap.",
-            "save": "Chargement",
+            "save": "Envoyer",
             "cancel": "Annuler",
             "changes": "{count} changements",
             "warnings": "Attention",
@@ -567,14 +567,17 @@
         },
         "validations": {
             "disconnected_highway": "Route déconnectée",
+            "disconnected_highway_tooltip": "Les routes devraient être reliées à d’autres routes.",
             "untagged_point": "Point sans attribut",
             "untagged_line": "Ligne sans aucun attribut",
             "untagged_area": "Polygone sans aucun attribut",
+            "untagged_relation": "Relation sans attributs",
             "many_deletions": "Vous êtes en train de supprimer {n} éléments. En êtes-vous sûr ? Ils seront supprimés de la carte que tout le monde voit sur openstreetmap.org.",
             "tag_suggests_area": "Cet attribut {tag} suppose que cette ligne devrait être un polygone, or ce n'est pas le cas",
             "untagged_point_tooltip": "Sélectionnez un type d'élément pour décrire ce point.",
             "untagged_line_tooltip": "Sélectionnez un type d'élément pour décrire cette ligne.",
             "untagged_area_tooltip": "Sélectionnez un type d'élément pour décrire cette surface.",
+            "untagged_relation_tooltip": "Sélectionnez un type d’entité décrivant ce qu’est cette relation.",
             "deprecated_tags": "Attributs obsolètes : {tags}"
         },
         "zoom": {
@@ -583,6 +586,12 @@
         },
         "cannot_zoom": "Impossible de zoomer plus en arrière dans ce mode.",
         "full_screen": "Basculer en plein écran",
+        "gpx": {
+            "local_layer": "Fichier local",
+            "drag_drop": "Glissez-déposez un fichier .gpx, .geojson ou .kml sur la page, ou cliquez sur le bouton de droite pour le rechercher dans votre ordinateur.",
+            "zoom": "Zoomer sur la couche",
+            "browse": "Sélectionner un fichier"
+        },
         "mapillary_images": {
             "tooltip": "Photos de rue depuis Mapillary",
             "title": "Surcouche Photo (Mapillary)"
