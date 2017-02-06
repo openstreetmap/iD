@@ -203,6 +203,8 @@ export function svgGpx(projection, context, dispatch) {
             viewport = map.trimmedExtent().polygon(),
             coords = _.reduce(geojson.features, function(coords, feature) {
                 var c = feature.geometry.coordinates;
+
+                /* eslint-disable no-fallthrough */
                 switch (feature.geometry.type) {
                     case 'Point':
                         c = [c];
@@ -217,6 +219,8 @@ export function svgGpx(projection, context, dispatch) {
                         c = _.flatten(c);
                         break;
                 }
+                /* eslint-enable no-fallthrough */
+
                 return _.union(coords, c);
             }, []);
 
