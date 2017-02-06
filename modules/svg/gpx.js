@@ -106,29 +106,32 @@ export function svgGpx(projection, context, dispatch) {
     }
 
 
-    function getExtension(file) {
-        if (_.isUndefined(file)) {
+    function getExtension(fileName) {
+        if (_.isUndefined(fileName)) {
             return '';
         }
 
-        var lastDotIndex = file.name.lastIndexOf('.');
+        var lastDotIndex = fileName.lastIndexOf('.');
         if (lastDotIndex < 0) {
             return '';
         }
 
-        return file.name.substr(lastDotIndex);
+        return fileName.substr(lastDotIndex);
     }
 
 
     function parseSaveAndZoom(extension, data) {
-        if (extension === '.gpx') {
-            drawGpx.geojson(toGeoJSON.gpx(toDom(data))).fitZoom();
-        }
-        else if (extension === '.kml') {
-            drawGpx.geojson(toGeoJSON.kml(toDom(data))).fitZoom();
-        }
-        else if (extension === '.geojson' || extension === '.json') {
-            drawGpx.geojson(JSON.parse(data)).fitZoom();
+        switch (extension) {
+            default:
+                drawGpx.geojson(toGeoJSON.gpx(toDom(data))).fitZoom();
+                break;
+            case '.kml':
+                drawGpx.geojson(toGeoJSON.kml(toDom(data))).fitZoom();
+                break;
+            case '.geojson':
+            case '.json':
+                drawGpx.geojson(JSON.parse(data)).fitZoom();
+                break;
         }
     }
 
@@ -180,7 +183,7 @@ export function svgGpx(projection, context, dispatch) {
             reader = new FileReader();
 
         reader.onload = (function(file) {
-            var extension = getExtension(file);
+            var extension = getExtension(file.name);
 
             return function (e) {
                 parseSaveAndZoom(extension, e.target.result);
