@@ -1,5 +1,14 @@
 :warning: = Breaking change, may affect downstream projects or sites that embed iD.
 
+## 2.1.1
+##### Feb 6, 2017
+* Bugfixes:
+  * Fix issues with dragging sibling nodes of a selected way (#3824)
+  * Fix map centering for custom KML and GeoJSON layers (#3826, thanks @tyrasd)
+  * Fix regression in GPX layer loading from URL (#3820, thanks @tyrasd)
+* Presets:
+  * Add presets NoExit, Watch Shop, add Living Street to Road category (#3821, thanks @willemarcel)
+
 ## 2.1.0
 ##### Feb 4, 2017
 * Bugfixes:
@@ -29,7 +38,7 @@
   * Use 'pt' wiki pages in 'pt-BR' iD localization (#3776)
   * User must select nodes before dragging them (#3739, thanks @edpop)
 * New Features:
-  * Add kml and geojson support to gpx layer (#3811, thanks @mertemin)
+  * Add KML and GeoJSON support to GPX layer (#3811, thanks @mertemin)
   * Add language debugging mode that shows translation keys (#3755)
   * Upgrade to MapillaryJS viewer v2.4
   * Add ability to restart ui and change locale on the fly (#3764, thanks @kepta)

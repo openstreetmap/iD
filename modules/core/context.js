@@ -380,7 +380,7 @@ export function coreContext() {
 
 
     /* Init */
-    context.version = '2.1.0';
+    context.version = '2.1.1';
 
     context.projection = geoRawMercator();
 
