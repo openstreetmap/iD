@@ -203,11 +203,25 @@ export function svgGpx(projection, context, dispatch) {
             viewport = map.trimmedExtent().polygon(),
             coords = _.reduce(geojson.features, function(coords, feature) {
                 var c = feature.geometry.coordinates;
-                return _.union(coords, feature.geometry.type === 'Point' ? [c] : c);
+                switch (feature.geometry.type) {
+                    case 'Point':
+                        c = [c];
+                    case 'MultiPoint':
+                    case 'LineString':
+                        break;
+
+                    case 'MultiPolygon':
+                        c = _.flatten(c);
+                    case 'Polygon':
+                    case 'MultiLineString':
+                        c = _.flatten(c);
+                        break;
+                }
+                return _.union(coords, c);
             }, []);
 
         if (!geoPolygonIntersectsPolygon(viewport, coords, true)) {
-            var extent = geoExtent(d3.geoBounds(geojson));
+            var extent = geoExtent(d3.geoBounds({ type: 'LineString', coordinates: coords }));
             map.centerZoom(extent.center(), map.trimmedExtentZoom(extent));
         }
 
