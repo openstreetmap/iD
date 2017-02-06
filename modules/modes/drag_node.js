@@ -102,7 +102,7 @@ export function modeDragNode(context) {
         // vertices classed "sibling" include:  (see svg/vertices.js)
         // - children of selected ways or multipolygons
         // - vertices sharing a way with selected vertices
-        var selection = d3.selectAll('g.' + entity.id),
+        var selection = d3.selectAll('g.vertex-persistent.' + entity.id),
             isSelected = !selection.empty() &&
                 (selection.classed('selected') || selection.classed('sibling'));
 
