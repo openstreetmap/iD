@@ -1,5 +1,10 @@
 :warning: = Breaking change, may affect downstream projects or sites that embed iD.
 
+## 2.1.2
+##### Feb 7, 2017
+* Bugfixes:
+  * Fix point dragging regression (#3829)
+
 ## 2.1.1
 ##### Feb 6, 2017
 * Bugfixes:
