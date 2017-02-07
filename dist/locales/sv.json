@@ -3589,6 +3589,10 @@
                     "name": "Skog (utan skogsbruk)",
                     "terms": "skog, Urskog, djungel, bush, regnskog, vildmark, träd"
                 },
+                "noexit/yes": {
+                    "name": "Återvändsgata",
+                    "terms": "Återvändsgränd, blindgata återvändsgata, vägslut"
+                },
                 "office": {
                     "name": "Kontor",
                     "terms": "Kontor, tjänster, tjänsteman, tjänstemän, byrå, expedition"
@@ -3648,6 +3652,10 @@
                 "office/lawyer": {
                     "name": "Advokatkontor",
                     "terms": "Advokatkontor, advokat, jurist, juridiskt ombud, rättsombud, ombud, jurist, försvarare, lagman"
+                },
+                "office/lawyer/notary": {
+                    "name": "Notariekontor",
+                    "terms": "Notariekontor, Notarie, Notarius, Notarius publicus, signatur, fullmakt, namnteckning, påskrift, underskrift, bevittna, testamente, arv, handlingar, kontrakt, avtal, egendom, dödsbo, värdehandlningar"
                 },
                 "office/newspaper": {
                     "name": "Tidningsredaktion",
@@ -4300,6 +4308,10 @@
                 "shop/video_games": {
                     "name": "TV-spel",
                     "terms": "TV-spel, videospel, konsolspel, spelkonsoler, datorspel, dataspel, tvspel"
+                },
+                "shop/watches": {
+                    "name": "Klockaffär",
+                    "terms": "Klockaffär, klockbutik, urbutik, uraffär, ur, klocka , klockor"
                 },
                 "shop/water_sports": {
                     "name": "Vattensport/simning ",

@@ -3589,6 +3589,10 @@
                     "name": "Rừng",
                     "terms": "rừng, cây cối, rung, cay coi"
                 },
+                "noexit/yes": {
+                    "name": "Không có Lối ra",
+                    "terms": "không có lối ra, không ra được, đường cùng, ngõ cụt, cuối đường, khong co loi ra, khong ra duoc, duong cung, ngo cut, cuoi duong"
+                },
                 "office": {
                     "name": "Văn phòng",
                     "terms": "văn phòng, sở, van phong, so"
@@ -4304,6 +4308,10 @@
                 "shop/video_games": {
                     "name": "Tiệm Video Game",
                     "terms": "tiệm video game, tiệm trò chơi video, tiệm trò chơi điện tử, tiệm game, cửa hàng video game, cửa hàng trò chơi video, cửa hàng trò chơi điện tử, cửa hàng game, cửa hiệu video game, cửa hiệu trò chơi video, cửa hiệu trò chơi điện tử, cửa hiệu game, tiem video game, tiem tro choi video, tiem tro choi dien tu, tiem game, cua hang video game, cua hang tro choi video, cua hang tro choi dien tu, cua hang game, cua hieu video game, cua hieu tro choi video, cua hieu tro choi dien tu, cua hieu game"
+                },
+                "shop/watches": {
+                    "name": "Tiệm Đồng hồ Đeo tay",
+                    "terms": "tiệm đồng hồ đeo tay, cửa hàng đồng hồ đeo tay, tiem dong ho deo tay, cua hang dong ho deo tay"
                 },
                 "shop/water_sports": {
                     "name": "Tiệm Dụng cụ Bơi lội",

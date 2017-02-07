@@ -191,12 +191,12 @@
                 "title": "비추기",
                 "description": {
                     "long": {
-                        "single": "이것을 장축을 가로질러 반영합니다.",
-                        "multiple": "이것들을 장축을 가로질러 반영합니다."
+                        "single": "긴 축으로 회전",
+                        "multiple": "이들을 긴 축으로 회전"
                     },
                     "short": {
                         "single": "짧은 축으로 회전",
-                        "multiple": "이것들을 단축을 가로질러 표시합니다."
+                        "multiple": "이들을 짧을 축으로 회전"
                     }
                 },
                 "key": {
@@ -206,11 +206,11 @@
                 "annotation": {
                     "long": {
                         "single": "긴 축으로 회전",
-                        "multiple": "이것들을 장축을 가로질러 표시합니다."
+                        "multiple": "이들을 긴 축으로 회전"
                     },
                     "short": {
-                        "single": "이것을 단축을 가로질러 표시합니다.",
-                        "multiple": "이것들을 단축을 가로질러 표시합니다."
+                        "single": "짧은 축으로 회전",
+                        "multiple": "이들을 짧은 축으로 회전"
                     }
                 },
                 "incomplete_relation": {

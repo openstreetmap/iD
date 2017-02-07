@@ -1850,6 +1850,10 @@
                     "name": "Gôndola",
                     "terms": "Gôndola, Bondinho"
                 },
+                "aerialway/goods": {
+                    "name": "Teleférico de transporte de mercadorias",
+                    "terms": "Teleférico de transporte de produtos, teleférico, mercadorias, bens, produtos"
+                },
                 "aerialway/magic_carpet": {
                     "name": "Esteira de Ski",
                     "terms": "Esteira, Esteira de Ski"
@@ -1908,6 +1912,10 @@
                     "name": "Pista de taxiamento",
                     "terms": "Taxiway"
                 },
+                "aeroway/terminal": {
+                    "name": "Terminal de Aeroporto",
+                    "terms": "aeroporto, edifício, terminal aeroportuário, embarque, desembarque, viagem, turismo, avião, helicóptero"
+                },
                 "amenity": {
                     "name": "Serviço"
                 },
@@ -1924,8 +1932,8 @@
                     "terms": "Banco"
                 },
                 "amenity/bar": {
-                    "name": "Drinqueria",
-                    "terms": "Drinqueria, Drinkeria"
+                    "name": "Bar requintado / Drinqueria",
+                    "terms": "Drinqueria, Drinkeria, pub, bar, casa de drinques, casa de drinks, marguerita, caipirinha"
                 },
                 "amenity/bbq": {
                     "name": "Churrasqueira",
@@ -2171,8 +2179,8 @@
                     "terms": "Cela, Cadeia"
                 },
                 "amenity/pub": {
-                    "name": "Bar",
-                    "terms": "Pub, botequim, boteco, buteco"
+                    "name": "Bar / Boteco",
+                    "terms": "Pub, botequim, boteco, buteco, bar, butequim, chopperia, choperia,"
                 },
                 "amenity/public_bath": {
                     "name": "Banho Público",
@@ -2341,7 +2349,8 @@
                     "terms": "Pilar, Poste, Cabeço, Pedestal, Estaca, frade"
                 },
                 "barrier/border_control": {
-                    "name": "Controle de fronteira"
+                    "name": "Controle de fronteira",
+                    "terms": "Fronteira, Alfândega, Imigração, Passaporte, divisa"
                 },
                 "barrier/cattle_grid": {
                     "name": "Mata-burro",
@@ -3236,6 +3245,10 @@
                     "name": "Campo de Golfe",
                     "terms": "Campo de Golfe"
                 },
+                "leisure/horse_riding": {
+                    "name": "Centro de Hipismo",
+                    "terms": "hipismo, equitação, centro de equitação, cavalos, galopamento, "
+                },
                 "leisure/ice_rink": {
                     "name": "Pista de Patinação no Gelo",
                     "terms": "Rinque de Patinação no Gelo"
@@ -3456,7 +3469,8 @@
                     "terms": "Tratamento de Água"
                 },
                 "man_made/works": {
-                    "name": "Fábrica"
+                    "name": "Fábrica",
+                    "terms": "Fábrica, Planta de produção, chão de fábrica,"
                 },
                 "natural": {
                     "name": "Natural",
@@ -3511,7 +3525,8 @@
                     "terms": "<translate with synonyms or related terms for 'Saddle', separated by commas>"
                 },
                 "natural/sand": {
-                    "name": "Areia"
+                    "name": "Areia",
+                    "terms": "areia, dunas, duna, deserto"
                 },
                 "natural/scree": {
                     "name": "Pedregulhos",
@@ -3560,6 +3575,10 @@
                 "natural/wood": {
                     "name": "Mata Nativa",
                     "terms": "Floresta, Bosque"
+                },
+                "noexit/yes": {
+                    "name": "Rua sem Saída",
+                    "terms": "sem saída, rua fechada, beco sem saída, bloqueio"
                 },
                 "office": {
                     "name": "Escritório",
