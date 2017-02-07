@@ -48,7 +48,7 @@
     "eslint": "~3.15.0",
     "glob": "~7.1.0",
     "happen": "~0.3.1",
-    "js-yaml": "~3.7.0",
+    "js-yaml": "~3.8.0",
     "jsonschema": "~1.1.0",
     "json-stable-stringify": "~1.0.1",
     "mapillary-js": "2.4.0",
