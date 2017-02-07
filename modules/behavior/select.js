@@ -23,6 +23,11 @@ export function behaviorSelect(context) {
 
 
     function click() {
+
+        if (d3.event.type === 'contextmenu') {
+          d3.event.preventDefault();
+        }
+
         var datum = d3.event.target.__data__,
             lasso = d3.select('#surface .lasso').node(),
             mode = context.mode();
@@ -56,6 +61,7 @@ export function behaviorSelect(context) {
             .on('keyup.select', keyup);
 
         selection.on('click.select', click);
+        selection.on('contextmenu.select', click);
 
         keydown();
     };

@@ -28,7 +28,7 @@ import {
 import { modeBrowse } from './browse';
 import { modeDragNode } from './drag_node';
 import * as Operations from '../operations/index';
-import { uiRadialMenu, uiSelectionList } from '../ui/index';
+import { uiEditMenu, uiSelectionList } from '../ui/index';
 import { uiCmd } from '../ui/cmd';
 import { utilEntityOrMemberSelector, utilEntitySelector } from '../util/index';
 
@@ -54,7 +54,7 @@ export function modeSelect(context, selectedIDs) {
             modeDragNode(context).selectedIDs(selectedIDs).behavior
         ],
         inspector,
-        radialMenu,
+        editMenu,
         newFeature = false,
         suppressMenu = false,
         follow = false;
@@ -139,36 +139,30 @@ export function modeSelect(context, selectedIDs) {
 
 
     function closeMenu() {
-        if (radialMenu) {
-            context.surface().call(radialMenu.close);
+        if (editMenu) {
+            context.surface().call(editMenu.close);
         }
     }
 
 
     function positionMenu() {
-        if (suppressMenu || !radialMenu) { return; }
+        if (!editMenu) { return; }
+        var point = context.mouse(),
+            viewport = geoExtent(context.projection.clipExtent()).polygon(),
+            offset = (viewport[1][1] - 30) - point[1]; // 30 to account for the infoblock
 
-        var entity = singular();
-        if (entity && context.geometry(entity.id) === 'relation') {
-            suppressMenu = true;
-        } else if (entity && entity.type === 'node') {
-            radialMenu.center(context.projection(entity.loc));
-        } else {
-            var point = context.mouse(),
-                viewport = geoExtent(context.projection.clipExtent()).polygon();
-            if (geoPointInPolygon(point, viewport)) {
-                radialMenu.center(point);
-            } else {
-                suppressMenu = true;
-            }
+        if (geoPointInPolygon(point, viewport)) {
+            editMenu
+                .center(point)
+                .offset(offset);
         }
     }
 
 
     function showMenu() {
         closeMenu();
-        if (!suppressMenu && radialMenu) {
-            context.surface().call(radialMenu);
+        if (editMenu) {
+            context.surface().call(editMenu);
         }
     }
 
@@ -196,7 +190,9 @@ export function modeSelect(context, selectedIDs) {
         }
 
         positionMenu();
-        showMenu();
+        if (d3.event && d3.event.type === 'contextmenu') {
+            showMenu();
+        }
     };
 
 
@@ -425,7 +421,7 @@ export function modeSelect(context, selectedIDs) {
         d3.select(document)
             .call(keybinding);
 
-        radialMenu = uiRadialMenu(context, operations);
+        editMenu = uiEditMenu(context, operations);
 
         context.ui().sidebar
             .select(singular() ? singular().id : null, newFeature);
@@ -440,8 +436,9 @@ export function modeSelect(context, selectedIDs) {
 
         selectElements();
 
-        var show = d3.event && !suppressMenu;
-
+        var show = d3.event;
+        var rtClick = d3.event && d3.event.type === 'contextmenu';   
+    
         if (show) {
             positionMenu();
         }
@@ -459,7 +456,7 @@ export function modeSelect(context, selectedIDs) {
         }
 
         timeout = window.setTimeout(function() {
-            if (show) {
+            if (rtClick) {
                 showMenu();
             }
 
@@ -485,7 +482,7 @@ export function modeSelect(context, selectedIDs) {
 
         keybinding.off();
         closeMenu();
-        radialMenu = undefined;
+        editMenu = undefined;
 
         context.history()
             .on('undone.select', null)

@@ -3167,9 +3167,7 @@ img.tile-removing {
 }
 
 .radial-menu-background {
-    fill: none;
-    stroke: black;
-    stroke-opacity: 0.5;
+    fill: black;
 }
 
 .radial-menu-item circle {
