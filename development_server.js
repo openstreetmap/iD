@@ -10,8 +10,7 @@ var gaze = require('gaze');
 var ecstatic = require('ecstatic');
 
 var building = false;
-
-
+var cache;
 if (process.argv[2] === 'develop') {
     build();
 
@@ -56,8 +55,8 @@ function build() {
             }),
             commonjs(),
             json()
-        ]
-
+        ],
+        cache: cache
     }).then(function (bundle) {
         bundle.write({
             format: 'iife',
@@ -66,10 +65,11 @@ function build() {
             useStrict: false
         });
         building = false;
+        cache = bundle;
         console.timeEnd('Rebuilt');
-
     }, function(err) {
         building = false;
+        cache = undefined;
         console.error(err);
     });
 }
