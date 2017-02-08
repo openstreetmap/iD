@@ -2,7 +2,7 @@ import * as d3 from 'd3';
 import { uiCmd } from './cmd';
 import { uiModal } from './modal';
 import { d3keybinding } from '../lib/d3.keybinding.js';
-import { dataShortcuts } from '../../data/shortcuts.json';
+import shortcuts from '../../data/shortcuts.json';
 
 export function uiShortcuts(context) {
     var key = uiCmd('⇧/');
@@ -29,7 +29,7 @@ export function uiShortcuts(context) {
 
             var section = shortcutsModal
                 .selectAll('section')
-                .data(dataShortcuts)
+                .data(shortcuts)
                 .enter().append('section')
                 .attr('class', 'modal-section modal-shortcuts cf');
 
@@ -48,14 +48,14 @@ export function uiShortcuts(context) {
 
             shortcuts
                 .selectAll('kbd')
-                .data(function(d) { return d.keys; })
+                .data(function(d) { return d.shortcut; })
                 .enter().append('kbd')
                 .text(function(d) { return uiCmd(d); });
 
             var description  = p
                 .append('span')
                 .attr('class', 'col8')
-                .text(function(d) { return d.desc; });
+                .text(function(d) { return t('shortcuts.' });
         }
 
         var keybinding = d3keybinding('shortcuts')
