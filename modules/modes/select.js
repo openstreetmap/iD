@@ -149,7 +149,7 @@ export function modeSelect(context, selectedIDs) {
         if (!editMenu) { return; }
         var point = context.mouse(),
             viewport = geoExtent(context.projection.clipExtent()).polygon(),
-            offset = (viewport[1][1] - 30) - point[1]; // 30 to account for the infoblock
+            offset = [viewport[2][0] - point[0],  (viewport[1][1] - 30) - point[1]]; // 30 to account for the infoblock
 
         if (geoPointInPolygon(point, viewport)) {
             editMenu

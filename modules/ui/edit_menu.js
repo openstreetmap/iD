@@ -7,13 +7,15 @@ export function uiEditMenu(context, operations) {
     var rect,
         menu,
         center = [0, 0],
-        offset = 0,
+        offset = [0, 0],
         tooltip;
 
-    var p = 5,
+    var p = 8,  // top padding
         l = 10, // left padding
-        a = 30,
-        a1 = (operations.length) * (a + p) + p;
+        h = 15, // height of icon
+        m = 4, // top margin 
+        a1 = 2 * m + operations.length * (2 * p + h);
+        
 
     var editMenu = function(selection) {
         if (!operations.length) return;
@@ -42,22 +44,16 @@ export function uiEditMenu(context, operations) {
             .attr('class', 'radial-menu-rectangle')
             .attr('transform', function() {
                 var pos = [0, 0];
-                if (offset <= a1) {
-                    pos = [0, offset - a1];
+                if (offset[1] <= a1) {
+                    pos = [0, offset[1] - a1];
                 }
                 return 'translate(' + pos + ')';
             });
 
-        menu
-            .append('path')
-            .attr('class', 'radial-menu-background')
-            .attr('transform', 'translate(1, 1)')
-            .attr('d', 'M0 8 L8 14 L8 8 L8 2 Z');
-
         rect
             .append('rect')
             .attr('class', 'radial-menu-background')
-            .attr('x', 8)
+            .attr('x', 4)
             .attr('rx', 4)
             .attr('ry', 4)
             .attr('width', 44)
@@ -73,13 +69,16 @@ export function uiEditMenu(context, operations) {
             .classed('disabled', function(d) { return d.disabled(); })
             .attr('transform', function(d, i) {
                 return 'translate(' +geoRoundCoords([
-                        a/2 + l + p,
-                        a/2 + p * (i + 1) + i * a]).join(',') + ')';
+                        0,
+                        m + i*(2*p + h)]).join(',') + ')';
             });
 
         button
-            .append('circle')
-            .attr('r', 15)
+            .append('rect')
+            // .attr('r', 15)
+            .attr('x', 4)
+            .attr('width', 44)
+            .attr('height', 2*p + h)
             .on('click', click)
             .on('mousedown', mousedown)
             .on('mouseover', mouseover)
@@ -87,9 +86,11 @@ export function uiEditMenu(context, operations) {
 
         button
             .append('use')
-            .attr('transform', 'translate(-10,-10)')
             .attr('width', '20')
             .attr('height', '20')
+            .attr('transform', function () {
+                return 'translate(' + [2*p, 5] + ')';
+            })
             .attr('xlink:href', function(d) { return '#operation-' + d.id; });
 
         tooltip = d3.select(document.body)
@@ -101,10 +102,14 @@ export function uiEditMenu(context, operations) {
         }
 
         function mouseover(d, i) {
+            var width = 260;
             var rect = context.surfaceRect(),
-                pos = [center[0], offset <= a1 ? center[1] - (a1 - offset) : center[1]],
-                top = rect.top + i * (p + a)+ pos[1] + 'px',
-                left = rect.left + (65) + pos[0] + 'px';
+                pos = [
+                    offset[0] < width?center[0] - 255 :center[0], 
+                    offset[1] <= a1 ? center[1] - (a1 - offset[1]) : center[1]
+                ],
+                top = rect.top + m + i * (2 * p + h)+ pos[1] + 'px',
+                left = rect.left + (64) + pos[0] + 'px';
 
             tooltip
                 .style('top', top)
@@ -142,6 +147,7 @@ export function uiEditMenu(context, operations) {
 
     editMenu.offset = function(_) {
         if (!arguments.length) return offset;
+        console.log(offset);
         offset = _;
         return editMenu;
     };
