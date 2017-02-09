@@ -507,7 +507,7 @@
                 "area"
             ],
             "tags": {
-                "office": "coworking"
+                "amenity": "coworking_space"
             },
             "name": "Coworking Space",
             "searchable": false
