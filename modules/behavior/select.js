@@ -23,8 +23,9 @@ export function behaviorSelect(context) {
 
 
     function click() {
-
-        if (d3.event.type === 'contextmenu') {
+        var rtClick = d3.event.type === 'contextmenu';   
+        
+        if (rtClick) {
           d3.event.preventDefault();
         }
 
@@ -39,16 +40,25 @@ export function behaviorSelect(context) {
                 context.enter(modeBrowse(context));
 
         } else if (!d3.event.shiftKey && !lasso) {
-            // Avoid re-entering Select mode with same entity.
-            if (context.selectedIDs().length !== 1 || context.selectedIDs()[0] !== datum.id) {
-                context.enter(modeSelect(context, [datum.id]));
-            } else {
+            // Reselect when 'rtClick on one of the selectedIDs' 
+            // OR 'leftClick on the same singular selected entity'
+            // Explanation: leftClick should discard any multiple
+            //  selection of entities and make the selection singlular.
+            // Whereas rtClick should preserve multiple selection of 
+            // entities  if and only if it clicks on one of the selectedIDs.
+            if (context.selectedIDs().indexOf(datum.id) >= 0 
+                && (rtClick || context.selectedIDs().length === 1)) {
                 mode.suppressMenu(false).reselect();
+            } else {
+                context.enter(modeSelect(context, [datum.id]));
             }
         } else if (context.selectedIDs().indexOf(datum.id) >= 0) {
-            var selectedIDs = _.without(context.selectedIDs(), datum.id);
-            context.enter(selectedIDs.length ? modeSelect(context, selectedIDs) : modeBrowse(context));
-
+            if (rtClick) { // To prevent datum.id from being removed when rtClick
+                mode.suppressMenu(false).reselect(); 
+            } else {
+                var selectedIDs = _.without(context.selectedIDs(), datum.id);
+                context.enter(selectedIDs.length ? modeSelect(context, selectedIDs) : modeBrowse(context));
+            }
         } else {
             context.enter(modeSelect(context, context.selectedIDs().concat([datum.id])));
         }
