@@ -31,7 +31,7 @@ export function uiEditMenu(context, operations) {
 
         menu = selection
             .append('g')
-            .attr('class', 'radial-menu')
+            .attr('class', 'edit-menu')
             .attr('transform', 'translate(' + [center[0] + l, center[1]] + ')')
             .attr('opacity', 0);
 
@@ -41,7 +41,7 @@ export function uiEditMenu(context, operations) {
 
         rect = menu
             .append('g')
-            .attr('class', 'radial-menu-rectangle')
+            .attr('class', 'edit-menu-rectangle')
             .attr('transform', function () {
                 var pos = [0, 0];
                 if (offset[1] <= a1) {
@@ -52,7 +52,7 @@ export function uiEditMenu(context, operations) {
 
         rect
             .append('rect')
-            .attr('class', 'radial-menu-background')
+            .attr('class', 'edit-menu-background')
             .attr('x', 4)
             .attr('rx', 4)
             .attr('ry', 4)
@@ -65,7 +65,7 @@ export function uiEditMenu(context, operations) {
             .data(operations)
             .enter()
             .append('g')
-            .attr('class', function (d) { return 'radial-menu-item radial-menu-item-' + d.id; })
+            .attr('class', function (d) { return 'edit-menu-item edit-menu-item-' + d.id; })
             .classed('disabled', function (d) { return d.disabled(); })
             .attr('transform', function (d, i) {
                 return 'translate(' + geoRoundCoords([
@@ -95,7 +95,7 @@ export function uiEditMenu(context, operations) {
 
         tooltip = d3.select(document.body)
             .append('div')
-            .attr('class', 'tooltip-inner radial-menu-tooltip');
+            .attr('class', 'tooltip-inner edit-menu-tooltip');
 
         function mousedown() {
             d3.event.stopPropagation(); // https://github.com/openstreetmap/iD/issues/1869
@@ -151,7 +151,6 @@ export function uiEditMenu(context, operations) {
 
     editMenu.offset = function (_) {
         if (!arguments.length) return offset;
-        console.log(offset);
         offset = _;
         return editMenu;
     };

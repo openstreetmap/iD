@@ -3160,32 +3160,31 @@ img.tile-removing {
 }
 
 .radial-menu-tooltip {
+    opacity: 0.8;
     display: none;
     position: absolute;
     width: 200px;
 }
 
 .radial-menu-background {
+    fill: none;
+    stroke: black;
+    stroke-opacity: 0.5;
+}
+
+.radial-menu-item circle {
     fill: #eee;
 }
 
-.radial-menu-item rect {
-    fill: #eee;
+.radial-menu-item circle:active,
+.radial-menu-item circle:hover {
+    fill: #fff;
 }
 
-.radial-menu-item rect:active,
-.radial-menu-item rect:hover {
-    fill: #ccc;
+.radial-menu-item.disabled circle {
+    cursor: auto;
+    fill: rgba(255,255,255,.5);
 }
-
-.radial-menu-item.disabled rect {
-    cursor: not-allowed;
-}
-.radial-menu-item.disabled rect:hover {
-    cursor: not-allowed;
-    fill: #eee;
-}
-
 
 .radial-menu-item use {
     fill: #222;
@@ -3193,9 +3192,50 @@ img.tile-removing {
 }
 
 .radial-menu-item.disabled use {
+    fill: rgba(32,32,32,.5);
+    color: rgba(40,40,40,.5);
+}
+
+/* edit menu*/
+
+.edit-menu-tooltip {
+    display: none;
+    position: absolute;
+    width: 200px;
+}
+
+.edit-menu-background {
+    fill: #eee;
+}
+
+.edit-menu-item rect {
+    fill: #eee;
+}
+
+.edit-menu-item rect:active,
+.edit-menu-item rect:hover {
+    fill: #ccc;
+}
+
+.edit-menu-item.disabled rect {
+    cursor: not-allowed;
+}
+.edit-menu-item.disabled rect:hover {
+    cursor: not-allowed;
+    fill: #eee;
+}
+
+
+.edit-menu-item use {
+    fill: #222;
+    color: #79f;
+}
+
+.edit-menu-item.disabled use {
     fill: rgba(32,32,32,.2);
     color: rgba(40,40,40,.2);
 }
+
 
 .lasso-path {
     fill-opacity:0.3;

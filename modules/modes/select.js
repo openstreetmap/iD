@@ -146,15 +146,24 @@ export function modeSelect(context, selectedIDs) {
 
 
     function positionMenu() {
-        if (!editMenu) { return; }
-        var point = context.mouse(),
-            viewport = geoExtent(context.projection.clipExtent()).polygon(),
-            offset = [viewport[2][0] - point[0],  (viewport[1][1] - 30) - point[1]]; // 30 to account for the infoblock
+        if (suppressMenu || !editMenu) { return; }
 
-        if (geoPointInPolygon(point, viewport)) {
-            editMenu
-                .center(point)
-                .offset(offset);
+        var entity = singular();
+        if (entity && context.geometry(entity.id) === 'relation') {
+            suppressMenu = true;
+        } else {
+            var point = context.mouse(),
+                viewport = geoExtent(context.projection.clipExtent()).polygon(),
+                offset = [
+                    viewport[2][0] - point[0], 
+                    (viewport[1][1] - 30) - point[1] // 30 to account for the infoblock
+                ];
+
+            if (geoPointInPolygon(point, viewport)) {
+                editMenu
+                    .center(point)
+                    .offset(offset);
+            }
         }
     }
 
@@ -168,7 +177,7 @@ export function modeSelect(context, selectedIDs) {
 
 
     function toggleMenu() {
-        if (d3.select('.radial-menu').empty()) {
+        if (d3.select('.edit-menu').empty()) {
             showMenu();
         } else {
             closeMenu();
@@ -456,7 +465,7 @@ export function modeSelect(context, selectedIDs) {
         }
 
         timeout = window.setTimeout(function() {
-            if (rtClick) {
+            if (!suppressMenu && rtClick) {
                 showMenu();
             }
 

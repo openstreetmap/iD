@@ -311,7 +311,7 @@ export function rendererMap(context) {
     function resetTransform() {
         if (!transformed) return false;
 
-        surface.selectAll('.radial-menu').interrupt().remove();
+        surface.selectAll('.edit-menu').interrupt().remove();
         utilSetTransform(supersurface, 0, 0);
         transformed = false;
         return true;

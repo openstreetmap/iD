@@ -143,7 +143,7 @@ export function uiIntroPoint(context, reveal) {
             context.history().on('change.intro', deleted);
 
             setTimeout(function() {
-                var node = d3.select('.radial-menu-item-delete').node();
+                var node = d3.select('.edit-menu-item-delete').node();
                 var pointBox = pad(node.getBoundingClientRect(), 50, context);
                 reveal(pointBox,
                     t('intro.points.delete', { button: icon('#operation-delete', 'pre-text') }));
