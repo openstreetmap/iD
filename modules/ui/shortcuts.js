@@ -102,18 +102,18 @@ export function uiShortcuts() {
 
             var shortcutsRow = row
                 .append('div')
-                .attr('class', 'kbd-row col6');
+                .attr('class', 'kbd-row');
 
             shortcutsRow
                 .selectAll('kbd')
                 .data(function (d) { return d.shortcut; })
                 .enter()
                 .append('kbd')
-                .text(function (d) { return d; });
+                .text(function (d) { return uiCmd(d); });
 
             row
                 .append('div')
-                .attr('class', 'shortcut-desc ')
+                .attr('class', 'shortcut-desc')
                 .text(function (d) { return t(d.key); });
 
             shortcuts = shortcuts
@@ -122,7 +122,7 @@ export function uiShortcuts() {
             // Update
             wrapper.selectAll('.shortcut-tab')
                 .style('display', function (d, i) {
-                    return i === activeTab ? 'block' : 'none';
+                    return i === activeTab ? 'flex' : 'none';
                 });
         }
 

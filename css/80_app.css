@@ -3109,6 +3109,12 @@ img.tile-removing {
     border-radius: 4px;
 }
 
+.modal-shortcuts .shortcut-tab {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
 .modal-shortcuts .tab:hover {
     background-color: #ccc;
 }
@@ -3117,19 +3123,25 @@ img.tile-removing {
     color: #7092FF;
 }
 
+.modal-shortcuts .shortcut-row {
+    display: flex;
+    flex-direction: row;
+}
+
 .modal-shortcuts .kbd-row {
-    display: inline-block;
     padding-right: 10px;
     color: #767676;
     text-align: right;
     white-space: nowrap;
-    padding-bottom: 3px;
+    padding-bottom: 5px;
+    width: 50%;
     
 } 
 .modal-shortcuts .shortcut-desc {
-    display: inline-block;
-    padding-bottom: 3px;
+    padding-bottom: 5px;
+    width: 50%;
 }
+
 .modal-shortcuts kbd {
     display: inline-block;
     text-align: right;    
