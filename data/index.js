@@ -6,7 +6,7 @@ export { dataDeprecated } from './deprecated.json';
 export { dataDiscarded } from './discarded.json';
 export { dataLocales } from './locales.json';
 export { dataPhoneFormats } from './phone-formats.json';
-export { dataShortcuts } from './shortcuts.json';
+export { shortcuts } from './shortcuts.json';
 
 export { default as dataImperial } from './imperial.json';
 export { default as dataDriveLeft } from './drive-left.json';

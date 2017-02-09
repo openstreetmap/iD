@@ -3087,11 +3087,61 @@ img.tile-removing {
 .modal-shortcuts {
     padding-bottom: 20px;
 }
+.modal-shortcuts .modal-section {
+    margin-bottom: 10px;
+}
+.modal-shortcuts .wrapper {
+    padding: 0 20px;
+}
 
+.modal-shortcuts .tabs-bar {
+    text-align: center;
+    padding-bottom: 20px;
+}
+
+.modal-shortcuts .tab {
+    display: inline-block;
+    padding: 0 10px;
+    margin: 0 5px;
+    cursor: pointer;
+    border: 1px solid #ccc;
+    background-color: #eee;
+    border-radius: 4px;
+}
+
+.modal-shortcuts .tab:hover {
+    background-color: #ccc;
+}
+.modal-shortcuts .tab.active {
+    background-color: #E8EBFF;
+    color: #7092FF;
+}
+
+.modal-shortcuts .kbd-row {
+    padding-right: 10px;
+    color: #767676;
+    text-align: right;
+    white-space: nowrap;
+    padding-bottom: 3px;
+} 
+.modal-shortcuts .shorctut-desc {
+    padding-bottom: 3px;
+}
 .modal-shortcuts kbd {
-    padding: 2px 4px;
-    background: #eee;
-    margin-right: 4px;
+    display: inline-block;
+    text-align: right;    
+    padding: 3px 5px;
+    font: 11px;
+    line-height: 10px;
+    letter-spacing: 1px;
+    color: #555;
+    vertical-align: middle;
+    background-color: #fcfcfc;
+    border: solid 1px #ccc;
+    margin: 0 2px;
+    border-bottom-color: #bbb;
+    border-radius: 3px;
+    box-shadow: inset 0 -1px 0 #bbb;
 }
 
 /* Save Mode

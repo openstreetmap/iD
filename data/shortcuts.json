@@ -1,7 +1,7 @@
-[
+{ "shortcuts": [
     {
         "key": "display",
-        "desc": "Changing the display",
+        "desc": "shortcuts.display.desc",
         "shortcuts": [
             {
                 "shortcut": [
@@ -10,7 +10,7 @@
                     "←",
                     "→"
                 ],
-                "key": "pan_map"
+                "key": "shortcuts.display.pan_map"
             },
             {
                 "shortcut": [
@@ -19,119 +19,119 @@
                     "⇧←",
                     "⇧→"
                 ],
-                "key": "pan_map_screen"
+                "key": "shortcuts.display.pan_map_screen"
             },
             {
                 "shortcut": [
                     "+",
                     "-"
                 ],
-                "key": "zoom"
+                "key": "shortcuts.display.zoom"
             },
             {
                 "shortcut": [
                     "⌘+",
                     "⌘-"
                 ],
-                "key": "zoom_large"
+                "key": "shortcuts.display.zoom_large"
             },
             {
                 "shortcut": [
                     "B"
                 ],
-                "key": "bg_switcher"
+                "key": "shortcuts.display.bg_switcher"
             },
             {
                 "shortcut": [
                     "⌘B"
                 ],
-                "key": "bg"
+                "key": "shortcuts.display.bg"
             },
             {
                 "shortcut": [
                     "W"
                 ],
-                "key": "wireframe"
+                "key": "shortcuts.display.wireframe"
             },
             {
                 "shortcut": [
                     "H"
                 ],
-                "key": "help"
+                "key": "shortcuts.display.help"
             },
             {
                 "shortcut": [
                     "/"
                 ],
-                "key": "minimap"
+                "key": "shortcuts.display.minimap"
             },
             {
                 "shortcut": [
                     "⌘I"
                 ],
-                "key": "infobox"
+                "key": "shortcuts.display.infobox"
             },
             {
                 "shortcut": [
-                    "Spacebar"
+                    "Space"
                 ],
-                "key": "radial_menu"
+                "key": "shortcuts.display.radial_menu"
             }
         ]
     },
     {
         "key": "edit",
-        "desc": "Editing mode",
+        "desc": "shortcuts.edit.desc",
         "shortcuts": [
             {
                 "shortcut": [
                     "1"
                 ],
-                "key": "add_point"
+                "key": "shortcuts.edit.add_point"
             },
             {
                 "shortcut": [
                     "2"
                 ],
-                "desc": "add_line"
+                "key": "shortcuts.edit.add_line"
             },
             {
                 "shortcut": [
                     "3"
                 ],
-                "key": "add_area"
+                "key": "shortcuts.edit.add_area"
             },
             {
                 "shortcut": [
                     "A"
                 ],
-                "key": "continue_line"
+                "key": "shortcuts.edit.continue_line"
             },
             {
                 "shortcut": [
                     "↵ Enter",
                     "Esc"
                 ],
-                "key": "stop_line"
+                "key": "shortcuts.edit.stop_line"
             },
             {
                 "shortcut": [
                     "⌘Z"
                 ],
-                "key": "undo"
+                "key": "shortcuts.edit.undo"
             },
             {
                 "shortcut": [
                     "⌘⇧Z"
                 ],
-                "key": "redo"
+                "key": "shortcuts.edit.redo"
             },
             {
                 "shortcut": [
                     "⌘S"
                 ],
-                "save": "save"
+                "key": "shortcuts.edit.save"
             }
         ]
     }
-]
+]}
