@@ -1,18 +1,21 @@
 {
-    "icon": "town-hall",
+    "icon": "wheelchair",
     "fields": [
+        "operator",
         "address",
         "building_area",
+        "social_facility",
+        "social_facility_for",
         "opening_hours",
-        "operator"
+        "wheelchair"
     ],
     "geometry": [
         "point",
         "area"
     ],
     "tags": {
-        "amenity": "register_office"
+        "amenity": "nursing_home"
     },
-    "name": "Register Office",
+    "name": "Nursing Home",
     "searchable": false
 }

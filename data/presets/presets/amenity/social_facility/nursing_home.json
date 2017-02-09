@@ -1,0 +1,29 @@
+{
+    "icon": "wheelchair",
+    "fields": [
+        "operator",
+        "address",
+        "building_area",
+        "social_facility",
+        "social_facility_for",
+        "opening_hours",
+        "wheelchair"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "elderly",
+        "living",
+        "nursing",
+        "old",
+        "senior"
+    ],
+    "tags": {
+        "amenity": "social_facility",
+        "social_facility": "nursing_home",
+        "social_facility:for": "senior"
+    },
+    "name": "Nursing Home"
+}

@@ -512,6 +512,27 @@
             "name": "Coworking Space",
             "searchable": false
         },
+        "amenity/nursing_home": {
+            "icon": "wheelchair",
+            "fields": [
+                "operator",
+                "address",
+                "building_area",
+                "social_facility",
+                "social_facility_for",
+                "opening_hours",
+                "wheelchair"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "tags": {
+                "amenity": "nursing_home"
+            },
+            "name": "Nursing Home",
+            "searchable": false
+        },
         "amenity/register_office": {
             "icon": "town-hall",
             "fields": [
@@ -524,7 +545,6 @@
                 "point",
                 "area"
             ],
-            "terms": [],
             "tags": {
                 "amenity": "register_office"
             },
@@ -1365,11 +1385,9 @@
                 "clinic",
                 "doctor",
                 "emergency room",
-                "health service",
-                "hospice",
+                "health",
                 "infirmary",
                 "institution",
-                "nursing home",
                 "sanatorium",
                 "sanitarium",
                 "sick",
@@ -2244,6 +2262,35 @@
                 "social_facility:for": "homeless"
             },
             "name": "Homeless Shelter"
+        },
+        "amenity/social_facility/nursing_home": {
+            "icon": "wheelchair",
+            "fields": [
+                "operator",
+                "address",
+                "building_area",
+                "social_facility",
+                "social_facility_for",
+                "opening_hours",
+                "wheelchair"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "terms": [
+                "elderly",
+                "living",
+                "nursing",
+                "old",
+                "senior"
+            ],
+            "tags": {
+                "amenity": "social_facility",
+                "social_facility": "nursing_home",
+                "social_facility:for": "senior"
+            },
+            "name": "Nursing Home"
         },
         "amenity/studio": {
             "icon": "karaoke",
