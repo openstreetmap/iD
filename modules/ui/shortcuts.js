@@ -5,12 +5,34 @@ import { d3keybinding } from '../lib/d3.keybinding.js';
 import { t } from '../util/locale';
 import { shortcuts as shortcutsData } from '../../data';
 
-export function uiShortcuts(context) {
+export function uiShortcuts() {
     var key = uiCmd('⇧/');
     var activeTab = 0;
+
     function shortcuts(selection) {
-        if (!d3.selectAll('.modal').empty()) return;
         var modalSelection;
+
+        function show() {
+            modalSelection = uiModal(selection);
+
+            modalSelection.select('.modal')
+                .attr('class', 'modal fillL col6');
+
+            var shortcutsModal = modalSelection.select('.content');
+
+            shortcutsModal
+                .attr('class', 'cf modal-shortcuts');
+
+            shortcutsModal
+                .append('div')
+                .attr('class', 'modal-section')
+                .append('h3')
+                .text('Keyboard shortcuts');
+
+            shortcutsModal
+                .call(render);
+        }
+
         function render(selection) {
             var wrapper = selection
                 .selectAll('.wrapper')
@@ -57,6 +79,7 @@ export function uiShortcuts(context) {
                     return i === activeTab;
                 });
 
+
             var shortcuts = shortcutsList
                 .selectAll('.shortcut-tab')
                 .data(shortcutsData);
@@ -84,81 +107,34 @@ export function uiShortcuts(context) {
             shortcutsRow
                 .selectAll('kbd')
                 .data(function (d) { return d.shortcut; })
-                .enter().append('kbd')
-                .text(function (d) { return uiCmd(d); });
+                .enter()
+                .append('kbd')
+                .text(function (d) { return d; });
 
-            var description = row
+            row
                 .append('div')
-                .attr('class', 'shorctut-desc col6')
+                .attr('class', 'shortcut-desc ')
                 .text(function (d) { return t(d.key); });
 
             shortcuts = shortcuts
                 .merge(shortcutsEnter);
 
+            // Update
             wrapper.selectAll('.shortcut-tab')
                 .style('display', function (d, i) {
                     return i === activeTab ? 'block' : 'none';
                 });
-            
-        }
-        function show() {
-            if (!d3.selectAll('.modal').empty()) return;
-
-            modalSelection = uiModal(selection);
-
-            modalSelection.select('.modal')
-                .attr('class', 'modal fillL col6');
-
-            var shortcutsModal = modalSelection.select('.content');
-
-            shortcutsModal
-                .attr('class', 'cf modal-shortcuts');
-
-            shortcutsModal
-                .append('div')
-                .attr('class', 'modal-section')
-                .append('h3')
-                .text('Keyboard shortcuts');
-
-            // var wrap = shortcutsModal.selectAll('.wrapper')
-            //     -            .data([0]);
-
-            // wrap = wrap.enter()
-            //         .append('div')
-            //             .attr('class', 'preset-input-wrap')
-            //                 .merge(wrap);
-            shortcutsModal.call(render);
-
-
-            // section
-            //     .append('h4')
-            //     .text(function(d) { return t(d.desc); });
-
-            // var row = section
-            //     .selectAll('.shortcut-row')
-            //     .data(function(d) { return d.shortcuts; })
-            //     .enter()
-            //     .append('div')
-            //     .attr('class', 'shortcut-row');
-
-            // var shortcuts = row
-            //     .append('div')
-            //     .attr('class', 'kbd-row col4');
-
-            // shortcuts
-            //     .selectAll('kbd')
-            //     .data(function(d) { return d.shortcut; })
-            //     .enter().append('kbd')
-            //     .text(function(d) { return uiCmd(d); });
-
-            // var description  = row
-            //     .append('div')
-            //     .attr('class', 'shorctut-desc col6')
-            //     .text(function(d) { return t(d.key); });
         }
 
         var keybinding = d3keybinding('shortcuts')
-            .on(key, show);
+            .on(key, function () {
+                if (modalSelection) {
+                    modalSelection.close();
+                    modalSelection = null;
+                    return;
+                }
+                show();
+            });
 
         d3.select(document)
             .call(keybinding);

@@ -3096,7 +3096,7 @@ img.tile-removing {
 
 .modal-shortcuts .tabs-bar {
     text-align: center;
-    padding-bottom: 20px;
+    padding-bottom: 10px;
 }
 
 .modal-shortcuts .tab {
@@ -3118,20 +3118,23 @@ img.tile-removing {
 }
 
 .modal-shortcuts .kbd-row {
+    display: inline-block;
     padding-right: 10px;
     color: #767676;
     text-align: right;
     white-space: nowrap;
     padding-bottom: 3px;
+    
 } 
-.modal-shortcuts .shorctut-desc {
+.modal-shortcuts .shortcut-desc {
+    display: inline-block;
     padding-bottom: 3px;
 }
 .modal-shortcuts kbd {
     display: inline-block;
     text-align: right;    
     padding: 3px 5px;
-    font: 11px;
+    font-size: 11px;
     line-height: 10px;
     letter-spacing: 1px;
     color: #555;
