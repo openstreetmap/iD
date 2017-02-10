@@ -402,8 +402,8 @@ en:
     restore: Restore
     reset: Reset
   save:
-    title: Save
-    help: "Save changes to OpenStreetMap, making them visible to other users."
+    title: Save...
+    help: "Review your changes and save them to OpenStreetMap, making them visible to other users."
     no_changes: No changes to save.
     error: Errors occurred while trying to save
     status_code: "Server returned status code {code}"
@@ -529,7 +529,7 @@ en:
       a mistake - you can undo changes by clicking the undo button, and redo
       changes by clicking the redo button.
 
-      Click 'Save' to finish a group of edits - for instance, if you've completed
+      Click 'Save...' to finish a group of edits - for instance, if you've completed
       an area of town and would like to start on a new area. You'll have a chance
       to review what you've done, and the editor supplies helpful suggestions
       and warnings if something doesn't seem right about the changes.
