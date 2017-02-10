@@ -1541,7 +1541,7 @@ en:
         name: Courthouse
         terms: '<translate with synonyms or related terms for ''Courthouse'', separated by commas>'
       amenity/coworking_space:
-        # office=coworking
+        # amenity=coworking_space
         name: Coworking Space
       amenity/crematorium:
         # amenity=crematorium
@@ -1611,7 +1611,7 @@ en:
       amenity/hospital:
         # amenity=hospital
         name: Hospital Grounds
-        # 'terms: clinic,doctor,emergency room,health service,hospice,infirmary,institution,nursing home,sanatorium,sanitarium,sick,surgery,ward'
+        # 'terms: clinic,doctor,emergency room,health,infirmary,institution,sanatorium,sanitarium,sick,surgery,ward'
         terms: '<translate with synonyms or related terms for ''Hospital Grounds'', separated by commas>'
       amenity/hunting_stand:
         # amenity=hunting_stand
@@ -1651,6 +1651,9 @@ en:
         name: Nightclub
         # 'terms: disco*,night club,dancing,dance club'
         terms: '<translate with synonyms or related terms for ''Nightclub'', separated by commas>'
+      amenity/nursing_home:
+        # amenity=nursing_home
+        name: Nursing Home
       amenity/parking:
         # amenity=parking
         name: Car Parking
@@ -1789,6 +1792,11 @@ en:
         name: Homeless Shelter
         # 'terms: houseless,unhoused,displaced'
         terms: '<translate with synonyms or related terms for ''Homeless Shelter'', separated by commas>'
+      amenity/social_facility/nursing_home:
+        # 'amenity=social_facility, social_facility=nursing_home, social_facility:for=senior'
+        name: Nursing Home
+        # 'terms: elderly,living,nursing,old,senior'
+        terms: '<translate with synonyms or related terms for ''Nursing Home'', separated by commas>'
       amenity/studio:
         # amenity=studio
         name: Studio

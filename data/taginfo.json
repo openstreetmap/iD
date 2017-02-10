@@ -128,8 +128,12 @@
             "value": "terminal"
         },
         {
-            "key": "office",
-            "value": "coworking"
+            "key": "amenity",
+            "value": "coworking_space"
+        },
+        {
+            "key": "amenity",
+            "value": "nursing_home"
         },
         {
             "key": "amenity",
@@ -450,6 +454,10 @@
         {
             "key": "social_facility:for",
             "value": "homeless"
+        },
+        {
+            "key": "social_facility:for",
+            "value": "senior"
         },
         {
             "key": "amenity",

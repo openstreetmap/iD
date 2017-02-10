@@ -1,20 +1,21 @@
 {
-    "icon": "commercial",
+    "icon": "wheelchair",
     "fields": [
+        "operator",
         "address",
         "building_area",
+        "social_facility",
+        "social_facility_for",
         "opening_hours",
-        "internet_access",
-        "internet_access/fee",
-        "internet_access/ssid"
+        "wheelchair"
     ],
     "geometry": [
         "point",
         "area"
     ],
     "tags": {
-        "amenity": "coworking_space"
+        "amenity": "nursing_home"
     },
-    "name": "Coworking Space",
+    "name": "Nursing Home",
     "searchable": false
 }

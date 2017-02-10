@@ -1956,6 +1956,10 @@
                     "name": "Coworking Space",
                     "terms": ""
                 },
+                "amenity/nursing_home": {
+                    "name": "Nursing Home",
+                    "terms": ""
+                },
                 "amenity/register_office": {
                     "name": "Register Office",
                     "terms": ""
@@ -2130,7 +2134,7 @@
                 },
                 "amenity/hospital": {
                     "name": "Hospital Grounds",
-                    "terms": "clinic,doctor,emergency room,health service,hospice,infirmary,institution,nursing home,sanatorium,sanitarium,sick,surgery,ward"
+                    "terms": "clinic,doctor,emergency room,health,infirmary,institution,sanatorium,sanitarium,sick,surgery,ward"
                 },
                 "amenity/hunting_stand": {
                     "name": "Hunting Stand",
@@ -2275,6 +2279,10 @@
                 "amenity/social_facility/homeless_shelter": {
                     "name": "Homeless Shelter",
                     "terms": "houseless,unhoused,displaced"
+                },
+                "amenity/social_facility/nursing_home": {
+                    "name": "Nursing Home",
+                    "terms": "elderly,living,nursing,old,senior"
                 },
                 "amenity/studio": {
                     "name": "Studio",
