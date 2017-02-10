@@ -285,9 +285,7 @@ export function rendererMap(context) {
 
         if (ktoz(eventTransform.k * 2 * Math.PI) < minzoom) {
             surface.interrupt();
-            uiFlash(context.container())
-                .select('.content')
-                .text(t('cannot_zoom'));
+            uiFlash().text(t('cannot_zoom'));
             setZoom(context.minEditableZoom(), true);
             queueRedraw();
             dispatch.call('move', this, map);
@@ -569,9 +567,7 @@ export function rendererMap(context) {
 
         if (z2 < minzoom) {
             surface.interrupt();
-            uiFlash(context.container())
-                .select('.content')
-                .text(t('cannot_zoom'));
+            uiFlash().text(t('cannot_zoom'));
             z2 = context.minEditableZoom();
         }
 

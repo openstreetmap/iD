@@ -1,5 +1,6 @@
 import * as d3 from 'd3';
 import { d3keybinding } from '../lib/d3.keybinding.js';
+import { uiFlash } from '../ui/index';
 
 
 /* Creates a keybinding behavior for an operation */
@@ -15,6 +16,7 @@ export function behaviorOperation(context) {
                 if (which.available() && !which.disabled() && !context.inIntro()) {
                     which();
                 }
+                uiFlash().text('you did ' + which.title);
             });
             d3.select(document).call(keybinding);
         }

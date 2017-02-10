@@ -1,26 +1,36 @@
+import * as d3 from 'd3';
 import { uiModal } from './modal';
 
+var timeout;
 
-export function uiFlash(selection) {
-    var modalSelection = uiModal(selection);
 
-    modalSelection.select('.modal')
-        .classed('modal-flash', true);
+export function uiFlash() {
+    var content = d3.select('#flash').selectAll('.content')
+        .data([0]);
 
-    modalSelection.select('.content')
-        .classed('modal-section', true)
+    content = content.enter()
         .append('div')
-        .attr('class', 'description');
+        .attr('class', 'content')
+        .merge(content);
 
-    modalSelection.on('click.flash', function() {
-        modalSelection.remove();
-    });
+    if (timeout) {
+        window.clearTimeout(timeout);
+    }
 
-    setTimeout(function() {
-        modalSelection.remove();
+    timeout = window.setTimeout(function() {
+        content
+            .transition()
+            .duration(250)
+            .style('opacity', 0)
+            .style('transform', 'scaleY(.25)')
+            .on('end', function() {
+                content.remove();
+                timeout = null;
+            });
+
         return true;
     }, 1500);
 
 
-    return modalSelection;
+    return content;
 }

@@ -564,6 +564,17 @@ button.save.has-count .count::before {
     min-width: 768px;
 }
 
+#flash {
+    position: absolute;
+    left: 300px;
+    top: 65px;
+    z-index: 1;
+}
+
+#flash .content {
+    padding: 10px;
+}
+
 /* Header for modals / panes
 ------------------------------------------------------- */
 

@@ -73,6 +73,11 @@ export function uiInit(context) {
 
         content
             .append('div')
+            .attr('id', 'flash')
+            .attr('class', 'fillD');
+
+        content
+            .append('div')
             .attr('id', 'map')
             .attr('dir', 'ltr')
             .call(map);
