@@ -10,7 +10,7 @@ export function uiFlash() {
 
     content = content.enter()
         .append('div')
-        .attr('class', 'content')
+        .attr('class', 'content fillD')
         .merge(content);
 
     if (timeout) {
@@ -22,7 +22,7 @@ export function uiFlash() {
             .transition()
             .duration(250)
             .style('opacity', 0)
-            .style('transform', 'scaleY(.25)')
+            .style('transform', 'scaleY(.1)')
             .on('end', function() {
                 content.remove();
                 timeout = null;

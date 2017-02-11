@@ -566,13 +566,18 @@ button.save.has-count .count::before {
 
 #flash {
     position: absolute;
-    left: 300px;
     top: 65px;
     z-index: 1;
+    width: 100%;
+    display: flex;
+    flex-flow: column wrap;
 }
 
 #flash .content {
+    margin: 0 auto;
     padding: 10px;
+    max-width: 50%;
+    border-radius: 3px;
 }
 
 /* Header for modals / panes

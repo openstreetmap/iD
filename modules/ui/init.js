@@ -73,8 +73,7 @@ export function uiInit(context) {
 
         content
             .append('div')
-            .attr('id', 'flash')
-            .attr('class', 'fillD');
+            .attr('id', 'flash');
 
         content
             .append('div')
