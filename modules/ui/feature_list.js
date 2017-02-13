@@ -1,5 +1,5 @@
 import * as d3 from 'd3';
-import * as sexagesimal from 'sexagesimal';
+import * as sexagesimal from '@mapbox/sexagesimal';
 import { t } from '../util/locale';
 import { geoExtent, geoChooseEdge } from '../geo/index';
 import { modeSelect } from '../modes/index';
