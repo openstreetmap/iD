@@ -10,7 +10,8 @@ import { services } from '../services/index';
 import {
     utilDisplayName,
     utilDisplayType,
-    utilEntityOrMemberSelector
+    utilEntityOrMemberSelector,
+    utilNoAuto
 } from '../util/index';
 
 
@@ -19,28 +20,34 @@ export function uiFeatureList(context) {
 
 
     function featureList(selection) {
-        var header = selection.append('div')
+        var header = selection
+            .append('div')
             .attr('class', 'header fillL cf');
 
         header.append('h3')
             .text(t('inspector.feature_list'));
 
-        var searchWrap = selection.append('div')
+        var searchWrap = selection
+            .append('div')
             .attr('class', 'search-header');
 
-        var search = searchWrap.append('input')
+        var search = searchWrap
+            .append('input')
             .attr('placeholder', t('inspector.search'))
             .attr('type', 'search')
+            .call(utilNoAuto)
             .on('keypress', keypress)
             .on('input', inputevent);
 
         searchWrap
             .call(svgIcon('#icon-search', 'pre-text'));
 
-        var listWrap = selection.append('div')
+        var listWrap = selection
+            .append('div')
             .attr('class', 'inspector-body');
 
-        var list = listWrap.append('div')
+        var list = listWrap
+            .append('div')
             .attr('class', 'feature-list cf');
 
         context

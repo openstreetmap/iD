@@ -11,7 +11,8 @@ import { uiRawMembershipEditor } from './raw_membership_editor';
 import { uiRawTagEditor } from './raw_tag_editor';
 import { uiTagReference } from './tag_reference';
 import { uiPreset } from './preset';
-import { utilRebind } from '../util/rebind';
+import { utilRebind } from '../util';
+
 
 export function uiEntityEditor(context) {
     var dispatch = d3.dispatch('choose'),

@@ -1,13 +1,17 @@
 import * as d3 from 'd3';
 import { d3combobox } from '../lib/d3.combobox.js';
 import { t } from '../util/locale';
-import { actionChangeMember, actionDeleteMember } from '../actions/index';
-import { modeBrowse, modeSelect } from '../modes/index';
-import { osmEntity } from '../osm/index';
-import { svgIcon } from '../svg/index';
-import { services } from '../services/index';
+import { actionChangeMember, actionDeleteMember } from '../actions';
+import { modeBrowse, modeSelect } from '../modes';
+import { osmEntity } from '../osm';
+import { svgIcon } from '../svg';
+import { services } from '../services';
 import { uiDisclosure } from './disclosure';
-import { utilDisplayName, utilDisplayType } from '../util/index';
+import {
+    utilDisplayName,
+    utilDisplayType,
+    utilNoAuto
+} from '../util';
 
 
 export function uiRawMemberEditor(context) {
@@ -131,6 +135,7 @@ export function uiRawMemberEditor(context) {
                 .property('type', 'text')
                 .attr('maxlength', 255)
                 .attr('placeholder', t('inspector.role'))
+                .call(utilNoAuto)
                 .property('value', function(d) { return d.role; })
                 .on('change', changeRole);
 

@@ -252,3 +252,12 @@ export function utilFunctor(value) {
         return value;
     };
 }
+
+
+export function utilNoAuto(selection) {
+    return selection
+        .attr('autocomplete', 'off')
+        .attr('autocorrect', 'off')
+        .attr('autocapitalize', 'off')
+        .attr('spellcheck', 'false');
+}

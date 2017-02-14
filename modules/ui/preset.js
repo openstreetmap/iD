@@ -7,8 +7,11 @@ import { svgIcon } from '../svg/index';
 import { uiDisclosure } from './disclosure';
 import { uiFields } from './fields/index';
 import { uiTagReference } from './tag_reference';
-import { utilRebind } from '../util/rebind';
-import { utilGetSetValue } from '../util/get_set_value';
+import {
+    utilGetSetValue,
+    utilNoAuto,
+    utilRebind
+} from '../util';
 
 
 export function uiPreset(context) {
@@ -240,6 +243,7 @@ export function uiPreset(context) {
             .append('input')
             .attr('class', 'value')
             .attr('type', 'text')
+            .call(utilNoAuto)
             .merge(input);
 
         input

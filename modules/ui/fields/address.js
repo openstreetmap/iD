@@ -10,8 +10,11 @@ import {
 } from '../../geo/index';
 
 import { services } from '../../services/index';
-import { utilRebind } from '../../util/rebind';
-import { utilGetSetValue } from '../../util/get_set_value';
+import {
+    utilGetSetValue,
+    utilNoAuto,
+    utilRebind
+} from '../../util';
 
 
 export function uiFieldAddress(field, context) {
@@ -155,6 +158,7 @@ export function uiFieldAddress(field, context) {
                 return field.t('placeholders.' + tkey);
             })
             .attr('class', function (d) { return 'addr-' + d.id; })
+            .call(utilNoAuto)
             .style('width', function (d) { return d.width * 100 + '%'; });
 
         // Update

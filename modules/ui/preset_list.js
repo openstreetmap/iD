@@ -1,5 +1,4 @@
 import * as d3 from 'd3';
-import { utilRebind } from '../util/rebind';
 import { d3keybinding } from '../lib/d3.keybinding.js';
 import { t, textDirection } from '../util/locale';
 import { actionChangePreset } from '../actions/index';
@@ -8,6 +7,7 @@ import { modeBrowse } from '../modes/index';
 import { svgIcon } from '../svg/index';
 import { uiPresetIcon } from './preset_icon';
 import { uiTagReference } from './tag_reference';
+import { utilNoAuto, utilRebind } from '../util';
 
 
 export function uiPresetList(context) {
@@ -106,6 +106,7 @@ export function uiPresetList(context) {
             .attr('class', 'preset-search-input')
             .attr('placeholder', t('inspector.search'))
             .attr('type', 'search')
+            .call(utilNoAuto)
             .on('keydown', keydown)
             .on('keypress', keypress)
             .on('input', inputevent);

@@ -3,8 +3,12 @@ import _ from 'lodash';
 import { t } from '../../util/locale';
 import { d3combobox } from '../../lib/d3.combobox.js';
 import { services } from '../../services/index';
-import { utilRebind } from '../../util/rebind';
-import { utilGetSetValue } from '../../util/get_set_value';
+import {
+    utilGetSetValue,
+    utilNoAuto,
+    utilRebind
+} from '../../util';
+
 
 export {
     uiFieldCombo as uiFieldTypeCombo,
@@ -247,6 +251,7 @@ export function uiFieldCombo(field, context) {
             .append('input')
             .attr('type', 'text')
             .attr('id', 'preset-input-' + field.id)
+            .call(utilNoAuto)
             .call(initCombo, selection)
             .merge(input);
 

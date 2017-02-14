@@ -7,8 +7,11 @@ import { dataWikipedia } from '../../../data/index';
 import { services } from '../../services/index';
 import { svgIcon } from '../../svg/index';
 import { utilDetect } from '../../util/detect';
-import { utilGetSetValue } from '../../util/get_set_value';
-import { utilRebind } from '../../util/rebind';
+import {
+    utilGetSetValue,
+    utilNoAuto,
+    utilRebind
+} from '../../util';
 
 
 export function uiFieldWikipedia(field, context) {
@@ -58,6 +61,7 @@ export function uiFieldWikipedia(field, context) {
             .attr('type', 'text')
             .attr('class', 'wiki-lang')
             .attr('placeholder', t('translate.localized_translation_language'))
+            .call(utilNoAuto)
             .merge(lang);
 
         utilGetSetValue(lang, language()[1]);
@@ -76,6 +80,7 @@ export function uiFieldWikipedia(field, context) {
             .attr('type', 'text')
             .attr('class', 'wiki-title')
             .attr('id', 'preset-input-' + field.id)
+            .call(utilNoAuto)
             .merge(title);
 
         title

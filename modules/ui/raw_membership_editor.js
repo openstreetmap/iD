@@ -15,7 +15,7 @@ import { osmEntity, osmRelation } from '../osm/index';
 import { services } from '../services/index';
 import { svgIcon } from '../svg/index';
 import { uiDisclosure } from './disclosure';
-import { utilDisplayName } from '../util/index';
+import { utilDisplayName, utilNoAuto } from '../util/index';
 
 
 export function uiRawMembershipEditor(context) {
@@ -191,6 +191,7 @@ export function uiRawMembershipEditor(context) {
                 .property('type', 'text')
                 .attr('maxlength', 255)
                 .attr('placeholder', t('inspector.role'))
+                .call(utilNoAuto)
                 .property('value', function(d) { return d.member.role; })
                 .on('change', changeRole);
 
@@ -219,7 +220,8 @@ export function uiRawMembershipEditor(context) {
             enter
                 .append('input')
                 .attr('type', 'text')
-                .attr('class', 'member-entity-input');
+                .attr('class', 'member-entity-input')
+                .call(utilNoAuto);
 
             enter
                 .append('input')
@@ -227,6 +229,7 @@ export function uiRawMembershipEditor(context) {
                 .property('type', 'text')
                 .attr('maxlength', 255)
                 .attr('placeholder', t('inspector.role'))
+                .call(utilNoAuto)
                 .on('change', changeRole);
 
             enter

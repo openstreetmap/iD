@@ -1,8 +1,11 @@
 import * as d3 from 'd3';
 import _ from 'lodash';
-import { utilRebind } from '../../util/rebind';
-import { utilGetSetValue } from '../../util/get_set_value';
 import { d3combobox } from '../../lib/d3.combobox.js';
+import {
+    utilGetSetValue,
+    utilNoAuto,
+    utilRebind
+} from '../../util';
 
 
 export function uiFieldAccess(field) {
@@ -48,6 +51,7 @@ export function uiFieldAccess(field) {
             .attr('type', 'text')
             .attr('class', 'preset-input-access')
             .attr('id', function(d) { return 'preset-input-access-' + d; })
+            .call(utilNoAuto)
             .each(function(d) {
                 d3.select(this)
                     .call(d3combobox()

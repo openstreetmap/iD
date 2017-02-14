@@ -7,9 +7,12 @@ import { services } from '../../services/index';
 import { svgIcon } from '../../svg/index';
 import { tooltip } from '../../util/tooltip';
 import { utilDetect } from '../../util/detect';
-import { utilGetSetValue } from '../../util/get_set_value';
-import { utilRebind } from '../../util/rebind';
-import { utilSuggestNames } from '../../util/index';
+import {
+    utilGetSetValue,
+    utilNoAuto,
+    utilRebind,
+    utilSuggestNames
+} from '../../util';
 
 
 export function uiFieldLocalized(field, context) {
@@ -31,6 +34,7 @@ export function uiFieldLocalized(field, context) {
             .attr('id', 'preset-input-' + field.id)
             .attr('class', 'localized-main')
             .attr('placeholder', field.placeholder())
+            .call(utilNoAuto)
             .merge(input);
 
         if (field.id === 'name') {

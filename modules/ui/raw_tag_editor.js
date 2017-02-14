@@ -5,8 +5,11 @@ import { services } from '../services/index';
 import { svgIcon } from '../svg/index';
 import { uiDisclosure } from './disclosure';
 import { uiTagReference } from './tag_reference';
-import { utilGetSetValue } from '../util/get_set_value';
-import { utilRebind } from '../util/rebind';
+import {
+    utilGetSetValue,
+    utilNoAuto,
+    utilRebind
+} from '../util';
 
 
 export function uiRawTagEditor(context) {
@@ -83,6 +86,7 @@ export function uiRawTagEditor(context) {
             .property('type', 'text')
             .attr('class', 'key')
             .attr('maxlength', 255)
+            .call(utilNoAuto)
             .on('blur', keyChange)
             .on('change', keyChange);
 
@@ -93,6 +97,7 @@ export function uiRawTagEditor(context) {
             .property('type', 'text')
             .attr('class', 'value')
             .attr('maxlength', 255)
+            .call(utilNoAuto)
             .on('blur', valueChange)
             .on('change', valueChange)
             .on('keydown.push-more', pushMore);
