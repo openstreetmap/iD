@@ -146,7 +146,9 @@ en:
         single: This feature can't be moved because it is connected to a hidden feature.
         multiple: These features can't be moved because some are connected to hidden features.
     reflect:
-      title: reflect
+      title:
+        long: Reflect Long
+        short: Reflect Short
       description:
         long:
           single: Reflect this feature across its long axis.
@@ -159,10 +161,10 @@ en:
         short: Y
       annotation:
         long:
-          single: Reflected an feature across its long axis.
+          single: Reflected a feature across its long axis.
           multiple: Reflected multiple features across their long axis.
         short:
-          single: Reflected an feature across its short axis.
+          single: Reflected a feature across its short axis.
           multiple: Reflected multiple features across their short axis.
       incomplete_relation:
         single: This feature can't be reflected because it hasn't been fully downloaded.

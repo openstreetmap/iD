@@ -69,7 +69,7 @@ export function operationReflect(selectedIDs, context, axis) {
 
     operation.id = 'reflect-' + axis;
     operation.keys = [t('operations.reflect.key.' + axis)];
-    operation.title = t('operations.reflect.title');
+    operation.title = t('operations.reflect.title.' + axis);
     operation.behavior = behaviorOperation(context).which(operation);
 
     return operation;
