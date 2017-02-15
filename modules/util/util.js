@@ -59,14 +59,20 @@ export function utilGetAllNodes(ids, graph) {
 
 export function utilDisplayName(entity) {
     var localizedNameKey = 'name:' + utilDetect().locale.toLowerCase().split('-')[0],
-        name = entity.tags[localizedNameKey] || entity.tags.name || '',
-        network = entity.tags.cycle_network || entity.tags.network;
+        name = entity.tags[localizedNameKey] || entity.tags.name;
 
-    if (!name && entity.tags.ref) {
+    if (name) {
+        // do nothing
+    } else if (entity.tags.ref) {
         name = entity.tags.ref;
+        var network = entity.tags.cycle_network || entity.tags.network;
         if (network) {
             name = network + ' ' + name;
         }
+    } else if (entity.tags['addr:housenumber']) {
+        name = entity.tags['addr:housenumber'];
+    } else {
+        name = '';
     }
 
     return name;
