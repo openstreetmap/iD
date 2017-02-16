@@ -13,7 +13,7 @@ export function operationCircularize(selectedIDs, context) {
 
 
     var operation = function() {
-        context.perform(action, t('operations.circularize.annotation.' + geometry));
+        context.perform(action, operation.annotation);
     };
 
 
@@ -46,6 +46,7 @@ export function operationCircularize(selectedIDs, context) {
     operation.id = 'circularize';
     operation.keys = [t('operations.circularize.key')];
     operation.title = t('operations.circularize.title');
+    operation.annotation = t('operations.circularize.annotation.' + geometry);
     operation.behavior = behaviorOperation(context).which(operation);
 
     return operation;

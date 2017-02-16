@@ -9,14 +9,18 @@ export function behaviorOperation(context) {
 
 
     var behavior = function () {
-        if (which) {
+        if (which && which.available() && !context.inIntro()) {
             keybinding = d3keybinding('behavior.key.' + which.id);
             keybinding.on(which.keys, function() {
                 d3.event.preventDefault();
-                if (which.available() && !which.disabled() && !context.inIntro()) {
+                var disabled = which.disabled();
+                if (disabled) {
+                    uiFlash().text(which.tooltip);
+                } else {
+                    var annotation = which.annotation || which.title;
+                    uiFlash().text(annotation);
                     which();
                 }
-                uiFlash().text('you did ' + which.title);
             });
             d3.select(document).call(keybinding);
         }

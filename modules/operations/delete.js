@@ -13,20 +13,14 @@ export function operationDelete(selectedIDs, context) {
 
 
     var operation = function() {
-        var annotation,
-            nextSelectedID;
+        var nextSelectedID;
 
-        if (selectedIDs.length > 1) {
-            annotation = t('operations.delete.annotation.multiple', { n: selectedIDs.length });
-
-        } else {
+        if (selectedIDs.length === 1) {
             var id = selectedIDs[0],
                 entity = context.entity(id),
                 geometry = context.geometry(id),
                 parents = context.graph().parentWays(entity),
                 parent = parents[0];
-
-            annotation = t('operations.delete.annotation.' + geometry);
 
             // Select the next closest node in the way.
             if (geometry === 'vertex' && parent.nodes.length > 2) {
@@ -47,7 +41,7 @@ export function operationDelete(selectedIDs, context) {
             }
         }
 
-        context.perform(action, annotation);
+        context.perform(action, operation.annotation);
 
         if (nextSelectedID && context.hasEntity(nextSelectedID)) {
             context.enter(
@@ -111,6 +105,9 @@ export function operationDelete(selectedIDs, context) {
     operation.id = 'delete';
     operation.keys = [uiCmd('⌘⌫'), uiCmd('⌘⌦'), uiCmd('⌦')];
     operation.title = t('operations.delete.title');
+    operation.annotation = selectedIDs.length === 1 ?
+        t('operations.delete.annotation.' + context.geometry(selectedIDs[0])) :
+        t('operations.delete.annotation.multiple', { n: selectedIDs.length });
     operation.behavior = behaviorOperation(context).which(operation);
 
     return operation;
