@@ -575,9 +575,22 @@ button.save.has-count .count::before {
 
 #flash .content {
     margin: 0 auto;
-    padding: 10px;
+    padding: 6px;
     max-width: 50%;
     border-radius: 3px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+#flash svg.operation-icon {
+    width: 36px;
+    height: 36px;
+}
+
+#flash div.operation-tip {
+    margin: 0 10px;
 }
 
 /* Header for modals / panes
@@ -3732,6 +3745,11 @@ img.tile-removing {
   transform: scaleX(-1);
   filter: FlipH;
   -ms-filter: "FlipH";
+}
+
+[dir='rtl'] #flash .content {
+    display: flex;
+    flex-direction: row-reverse;
 }
 
 /* footer */
