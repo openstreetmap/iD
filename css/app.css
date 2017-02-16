@@ -564,34 +564,6 @@ button.save.has-count .count::before {
     min-width: 768px;
 }
 
-#flash {
-    position: absolute;
-    top: 65px;
-    z-index: 1;
-    width: 100%;
-    display: flex;
-    flex-flow: column wrap;
-}
-
-#flash .content {
-    margin: 0 auto;
-    padding: 6px;
-    max-width: 50%;
-    border-radius: 3px;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-}
-
-#flash svg.operation-icon {
-    width: 36px;
-    height: 36px;
-}
-
-#flash div.operation-tip {
-    margin: 0 10px;
-}
 
 /* Header for modals / panes
 ------------------------------------------------------- */
@@ -2528,14 +2500,14 @@ img.tile-removing {
     bottom:0;
     border-radius: 0;
     pointer-events: none;
+    display: flex;
+    flex-direction: column;
 }
 
 #attrib {
     width: 100%;
     height: 20px;
     margin-bottom: 5px;
-    float: left;
-    clear: both;
 }
 
 #attrib * { pointer-events: all; }
@@ -2565,19 +2537,70 @@ img.tile-removing {
 }
 
 #footer {
-    width: 100%;
-    float: left;
-    clear: both;
     pointer-events: all;
+    display: flex;
+    flex-flow: row nowrap;
 }
 
+#flash {
+    display: none;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+    display: flex;
+    flex-flow: column wrap;
+}
+
+#flash .content {
+    margin: 0 auto;
+    padding: 6px;
+    max-width: 50%;
+    border-radius: 3px;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
+}
+
+#flash svg.operation-icon {
+    width: 36px;
+    height: 36px;
+}
+
+#flash div.operation-tip {
+    margin: 0 10px;
+}
+
+#footer-wrap {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    flex: 1 1 auto;
+}
+
+.footer-show {
+    margin-top: 0px;
+    margin-bottom: 0px;
+    transition: margin-bottom 100ms linear, margin-top 100ms linear;
+    -moz-transition: margin-bottom 100ms linear, margin-top 100ms linear;
+    -webkit-transition: margin-bottom 100ms linear, margin-top 100ms linear;
+}
+.footer-hide {
+    margin-top: 30px;
+    margin-bottom: -30px;
+    transition: margin-bottom 100ms linear, margin-top 100ms linear;
+    -moz-transition: margin-bottom 100ms linear, margin-top 100ms linear;
+    -webkit-transition: margin-bottom 100ms linear, margin-top 100ms linear;
+}
+
+
 #scale-block {
-    display: table-cell;
     vertical-align: bottom;
     width: 250px;
     max-height: 30px;
-    float: left;
-    clear: left;
+    flex: 0 0 250px;
     -moz-user-select: none;
     -webkit-user-select: none;
     -ms-user-select: none;
@@ -2586,7 +2609,7 @@ img.tile-removing {
 
 #info-block {
     max-height: 30px;
-    clear: right;
+    flex: 1 1 auto;
 }
 
 #scale {
@@ -2653,12 +2676,10 @@ img.tile-removing {
 }
 
 .api-status {
-    float: right;
-    clear: both;
     text-align: right;
-    width: 100%;
     padding: 0px 10px;
     color: #eee;
+    flex: 1 0 auto;
 }
 
 .api-status.offline,
