@@ -3,7 +3,10 @@ import * as d3 from 'd3';
 var timeout;
 
 
-export function uiFlash() {
+export function uiFlash(showDuration, fadeDuration) {
+    showDuration = showDuration || 1500;
+    fadeDuration = fadeDuration || 250;
+
     var content = d3.select('#flash').selectAll('.content')
         .data([0]);
 
@@ -19,7 +22,7 @@ export function uiFlash() {
     timeout = window.setTimeout(function() {
         content
             .transition()
-            .duration(250)
+            .duration(fadeDuration)
             .style('opacity', 0)
             .style('transform', 'scaleY(.1)')
             .on('end', function() {
@@ -28,7 +31,7 @@ export function uiFlash() {
             });
 
         return true;
-    }, 1500);
+    }, showDuration);
 
 
     return content;
