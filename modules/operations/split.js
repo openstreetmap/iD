@@ -23,7 +23,7 @@ export function operationSplit(selectedIDs, context) {
 
 
     var operation = function() {
-        var difference = context.perform(action, operation.annotation);
+        var difference = context.perform(action, operation.annotation());
         context.enter(modeSelect(context, difference.extantIDs()));
     };
 
@@ -55,12 +55,16 @@ export function operationSplit(selectedIDs, context) {
     };
 
 
+    operation.annotation = function() {
+        return ways.length === 1 ?
+            t('operations.split.annotation.' + context.geometry(ways[0].id)) :
+            t('operations.split.annotation.multiple', { n: ways.length });
+    };
+
+
     operation.id = 'split';
     operation.keys = [t('operations.split.key')];
     operation.title = t('operations.split.title');
-    operation.annotation = ways.length === 1 ?
-        t('operations.split.annotation.' + context.geometry(ways[0].id)) :
-        t('operations.split.annotation.multiple', { n: ways.length });
     operation.behavior = behaviorOperation(context).which(operation);
 
     return operation;

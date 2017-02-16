@@ -25,7 +25,7 @@ export function operationMerge(selectedIDs, context) {
             action = mergePolygon;
         }
 
-        context.perform(action, operation.annotation);
+        context.perform(action, operation.annotation());
         var ids = selectedIDs.filter(function(id) {
             var entity = context.hasEntity(id);
             return entity && entity.type !== 'node';
@@ -68,10 +68,14 @@ export function operationMerge(selectedIDs, context) {
     };
 
 
+    operation.annotation = function() {
+        return t('operations.merge.annotation', { n: selectedIDs.length });
+    };
+
+
     operation.id = 'merge';
     operation.keys = [t('operations.merge.key')];
     operation.title = t('operations.merge.title');
-    operation.annotation = t('operations.merge.annotation', { n: selectedIDs.length });
     operation.behavior = behaviorOperation(context).which(operation);
 
     return operation;

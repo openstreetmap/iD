@@ -10,7 +10,7 @@ export function operationStraighten(selectedIDs, context) {
 
 
     function operation() {
-        context.perform(action, operation.annotation);
+        context.perform(action, operation.annotation());
     }
 
 
@@ -40,11 +40,15 @@ export function operationStraighten(selectedIDs, context) {
     };
 
 
+    operation.annotation = function() {
+        return t('operations.straighten.annotation');
+    };
+
+
     operation.id = 'straighten';
     operation.keys = [t('operations.straighten.key')];
     operation.title = t('operations.straighten.title');
     operation.behavior = behaviorOperation(context).which(operation);
-    operation.annotation = t('operations.straighten.annotation');
 
     return operation;
 }

@@ -13,7 +13,7 @@ export function operationOrthogonalize(selectedIDs, context) {
 
 
     var operation = function() {
-        context.perform(action, operation.annotation);
+        context.perform(action, operation.annotation());
     };
 
 
@@ -44,10 +44,14 @@ export function operationOrthogonalize(selectedIDs, context) {
     };
 
 
+    operation.annotation = function() {
+        return t('operations.orthogonalize.annotation.' + geometry);
+    };
+
+
     operation.id = 'orthogonalize';
     operation.keys = [t('operations.orthogonalize.key')];
     operation.title = t('operations.orthogonalize.title');
-    operation.annotation = t('operations.orthogonalize.annotation.' + geometry);
     operation.behavior = behaviorOperation(context).which(operation);
 
     return operation;

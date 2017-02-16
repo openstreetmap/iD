@@ -53,10 +53,14 @@ export function operationContinue(selectedIDs, context) {
     };
 
 
+    operation.annotation = function() {
+        return t('operations.continue.annotation.line');
+    };
+
+
     operation.id = 'continue';
     operation.keys = [t('operations.continue.key')];
     operation.title = t('operations.continue.title');
-    operation.annotation = t('operations.continue.annotation.line');
     operation.behavior = behaviorOperation(context).which(operation);
 
     return operation;

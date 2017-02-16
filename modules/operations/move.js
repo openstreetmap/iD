@@ -49,12 +49,16 @@ export function operationMove(selectedIDs, context) {
     };
 
 
+    operation.annotation = function() {
+        return selectedIDs.length === 1 ?
+            t('operations.move.annotation.' + context.geometry(selectedIDs[0])) :
+            t('operations.move.annotation.multiple');
+    };
+
+
     operation.id = 'move';
     operation.keys = [t('operations.move.key')];
     operation.title = t('operations.move.title');
-    operation.annotation = selectedIDs.length === 1 ?
-        t('operations.move.annotation.' + context.geometry(selectedIDs[0])) :
-        t('operations.move.annotation.multiple');
     operation.behavior = behaviorOperation(context).which(operation);
 
     return operation;

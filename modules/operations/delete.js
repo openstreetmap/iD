@@ -41,7 +41,7 @@ export function operationDelete(selectedIDs, context) {
             }
         }
 
-        context.perform(action, operation.annotation);
+        context.perform(action, operation.annotation());
 
         if (nextSelectedID && context.hasEntity(nextSelectedID)) {
             context.enter(
@@ -102,12 +102,16 @@ export function operationDelete(selectedIDs, context) {
     };
 
 
+    operation.annotation = function() {
+        return selectedIDs.length === 1 ?
+            t('operations.delete.annotation.' + context.geometry(selectedIDs[0])) :
+            t('operations.delete.annotation.multiple', { n: selectedIDs.length });
+    };
+
+
     operation.id = 'delete';
     operation.keys = [uiCmd('⌘⌫'), uiCmd('⌘⌦'), uiCmd('⌦')];
     operation.title = t('operations.delete.title');
-    operation.annotation = selectedIDs.length === 1 ?
-        t('operations.delete.annotation.' + context.geometry(selectedIDs[0])) :
-        t('operations.delete.annotation.multiple', { n: selectedIDs.length });
     operation.behavior = behaviorOperation(context).which(operation);
 
     return operation;

@@ -18,7 +18,7 @@ export function operationDisconnect(selectedIDs, context) {
 
 
     var operation = function() {
-        context.perform(action, operation.annotation);
+        context.perform(action, operation.annotation());
     };
 
 
@@ -44,10 +44,14 @@ export function operationDisconnect(selectedIDs, context) {
     };
 
 
+    operation.annotation = function() {
+        return t('operations.disconnect.annotation');
+    };
+
+
     operation.id = 'disconnect';
     operation.keys = [t('operations.disconnect.key')];
     operation.title = t('operations.disconnect.title');
-    operation.annotation = t('operations.disconnect.annotation');
     operation.behavior = behaviorOperation(context).which(operation);
 
     return operation;

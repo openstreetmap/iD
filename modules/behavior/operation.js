@@ -15,9 +15,9 @@ export function behaviorOperation(context) {
                 d3.event.preventDefault();
                 var disabled = which.disabled();
                 if (disabled) {
-                    uiFlash(2000, 500).text(which.tooltip);
+                    uiFlash(2500, 500).text(which.tooltip);
                 } else {
-                    var annotation = which.annotation || which.title;
+                    var annotation = which.annotation() || which.title;
                     uiFlash(1500, 250).text(annotation);
                     which();
                 }
