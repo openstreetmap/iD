@@ -1,28 +1,40 @@
 describe('iD.uiFlash', function () {
-    var elem;
 
     beforeEach(function() {
-        elem = d3.select('body')
+        d3.select('body')
             .append('div')
-            .attr('id', 'flash');
+            .attr('id', 'flash-wrap')
+            .append('div')
+            .attr('id', 'footer-wrap');
     });
 
     afterEach(function () {
-        elem.remove();
+        d3.select('body > div').remove();
     });
 
-    it('creates a flash', function () {
-        iD.uiFlash();
-        expect(elem.selectAll('#flash .content').size()).to.eql(1);
+    it('returns a selection', function () {
+        var content = iD.uiFlash(200);
+        expect(content.size()).to.eql(1);
+        expect(content.classed('content')).to.be.ok;
     });
 
-    it.skip('flash goes away', function (done) {
-        // test doesn't work on PhantomJS
-        iD.uiFlash();
+    it('flash is shown', function () {
+        iD.uiFlash(200);
+        var flashWrap = d3.selectAll('#flash-wrap');
+        var footerWrap = d3.selectAll('#footer-wrap');
+        expect(flashWrap.classed('footer-show')).to.be.ok;
+        expect(footerWrap.classed('footer-hide')).to.be.ok;
+    });
+
+    it('flash goes away', function (done) {
+        iD.uiFlash(200);
         window.setTimeout(function() {
-            expect(elem.selectAll('#flash .content').size()).to.eql(0);
+            var flashWrap = d3.selectAll('#flash-wrap');
+            var footerWrap = d3.selectAll('#footer-wrap');
+            expect(flashWrap.classed('footer-hide')).to.be.ok;
+            expect(footerWrap.classed('footer-show')).to.be.ok;
             done();
-        }, 1900);
+        }, 500);
     });
 
 });

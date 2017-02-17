@@ -14,18 +14,18 @@ export function behaviorOperation(context) {
             .attr('class', 'operation-icon')
             .append('g')
             .attr('class', 'radial-menu-item radial-menu-item-' + which.id)
-            .attr('transform', 'translate(18,18)')
+            .attr('transform', 'translate(10,10)')
             .classed('disabled', which.disabled());
 
         button
             .append('circle')
-            .attr('r', 15);
+            .attr('r', 9);
 
         button
             .append('use')
-            .attr('transform', 'translate(-10,-10)')
-            .attr('width', '20')
-            .attr('height', '20')
+            .attr('transform', 'translate(-7,-7)')
+            .attr('width', '14')
+            .attr('height', '14')
             .attr('xlink:href', '#operation-' + which.id);
 
         return selection;
@@ -40,7 +40,7 @@ export function behaviorOperation(context) {
                 var disabled = which.disabled();
 
                 if (disabled) {
-                    uiFlash(2500, 500)
+                    uiFlash(3000)
                         .html('')
                         .call(drawIcon)
                         .append('div')
@@ -48,7 +48,7 @@ export function behaviorOperation(context) {
                         .text(which.tooltip);
 
                 } else {
-                    uiFlash(1500, 250)
+                    uiFlash(1500)
                         .html('')
                         .call(drawIcon)
                         .append('div')

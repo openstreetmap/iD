@@ -2532,67 +2532,70 @@ img.tile-removing {
 }
 
 .source-image {
-    height:20px;
+    height: 20px;
     vertical-align:top;
 }
 
 #footer {
     pointer-events: all;
-    display: flex;
-    flex-flow: row nowrap;
+    display: block;
+    height: 30px;
 }
 
-#flash {
-    display: none;
+#flash-wrap {
+    display: flex;
+    flex: 0 0 100%;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    max-height: 30px;
     position: absolute;
-    left: 0;
     right: 0;
-    bottom: 0;
-    z-index: 1;
-    display: flex;
-    flex-flow: column wrap;
+    left: 0;
 }
 
-#flash .content {
-    margin: 0 auto;
-    padding: 6px;
-    max-width: 50%;
-    border-radius: 3px;
+#flash-wrap .content {
     display: flex;
+    flex: 1 0 auto;
     flex-flow: row nowrap;
-    justify-content: center;
     align-items: center;
+    padding: 2px;
+    height: 30px;
 }
 
-#flash svg.operation-icon {
-    width: 36px;
-    height: 36px;
+#flash-wrap svg.operation-icon {
+    flex: 0 0 auto;
+    width: 20px;
+    height: 20px;
+    margin: 0 8px;
 }
 
-#flash div.operation-tip {
-    margin: 0 10px;
+#flash-wrap div.operation-tip {
+    flex: 1 1 auto;
 }
 
 #footer-wrap {
     display: flex;
+    flex: 0 0 100%;
     flex-flow: row nowrap;
     justify-content: space-between;
-    flex: 1 1 auto;
+    max-height: 30px;
+    position: absolute;
+    right: 0;
+    left: 0;
 }
 
 .footer-show {
-    margin-top: 0px;
-    margin-bottom: 0px;
-    transition: margin-bottom 100ms linear, margin-top 100ms linear;
-    -moz-transition: margin-bottom 100ms linear, margin-top 100ms linear;
-    -webkit-transition: margin-bottom 100ms linear, margin-top 100ms linear;
+    bottom: 0px;
+    transition: bottom 75ms linear;
+    -moz-transition: bottom 75ms linear;
+    -webkit-transition: bottom 75ms linear;
 }
+
 .footer-hide {
-    margin-top: 30px;
-    margin-bottom: -30px;
-    transition: margin-bottom 100ms linear, margin-top 100ms linear;
-    -moz-transition: margin-bottom 100ms linear, margin-top 100ms linear;
-    -webkit-transition: margin-bottom 100ms linear, margin-top 100ms linear;
+    bottom: -35px;
+    transition: bottom 75ms linear;
+    -moz-transition: bottom 75ms linear;
+    -webkit-transition: bottom 75ms linear;
 }
 
 
@@ -2679,7 +2682,7 @@ img.tile-removing {
     text-align: right;
     padding: 0px 10px;
     color: #eee;
-    flex: 1 0 auto;
+    flex: 1 1 auto;
 }
 
 .api-status.offline,
@@ -3768,7 +3771,7 @@ img.tile-removing {
   -ms-filter: "FlipH";
 }
 
-[dir='rtl'] #flash .content {
+[dir='rtl'] #flash-wrap .content {
     display: flex;
     flex-direction: row-reverse;
 }

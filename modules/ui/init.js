@@ -170,7 +170,7 @@ export function uiInit(context) {
 
         footer
             .append('div')
-            .attr('id', 'flash')
+            .attr('id', 'flash-wrap')
             .attr('class', 'footer-hide');
 
         var footerWrap = footer
