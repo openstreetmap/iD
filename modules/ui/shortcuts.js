@@ -6,7 +6,7 @@ import { t } from '../util/locale';
 import { shortcuts as shortcutsData } from '../../data';
 
 export function uiShortcuts() {
-    var key = uiCmd('⇧/');
+    var key = '⇧/';
     var activeTab = 0;
 
     function shortcuts(selection) {
