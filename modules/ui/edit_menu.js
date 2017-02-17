@@ -13,7 +13,7 @@ export function uiEditMenu(context, operations) {
     var p = 8,  // top padding
         l = 10, // left padding
         h = 15, // height of icon
-        m = 4, // top margin 
+        m = 4, // top margin
         a1 = 2 * m + operations.length * (2 * p + h);
 
 
@@ -75,7 +75,6 @@ export function uiEditMenu(context, operations) {
 
         button
             .append('rect')
-            // .attr('r', 15)
             .attr('x', 4)
             .attr('width', 44)
             .attr('height', 2 * p + h)
@@ -119,7 +118,7 @@ export function uiEditMenu(context, operations) {
                 .style('top', top + 'px')
                 .style('left', left+ 'px')
                 .style('display', 'block')
-                .html(uiTooltipHtml(d.tooltip(), d.keys[0]));
+                .html(uiTooltipHtml(d.tooltip(), d.keys[0], d.title));
         }
 
         function mouseout() {

@@ -3148,15 +3148,25 @@ img.tile-removing {
     border-width: 0 5px 5px;
 }
 
+.tooltip-heading {
+    font-weight: bold;
+    background: #F6F6F6;
+    padding: 10px;
+    margin: -10px -10px 10px -10px;
+    border-radius: 3px 3px 0 0;
+    font-size: 14px;
+}
+
 .keyhint-wrap {
     background: #F6F6F6;
     padding: 10px;
-    margin: 10px -10px -10px;
+    margin: 10px -10px -10px -10px;
     border-radius: 0 0 3px 3px;
 }
 
 .tooltip-inner .keyhint {
     font-weight: bold;
+    margin-left: 5px;
 }
 
 /* Exceptions for tooltip layouts */
@@ -3187,6 +3197,7 @@ img.tile-removing {
 }
 
 .map-overlay .tooltip-inner,
+.map-overlay .tooltip-heading,
 .map-overlay .keyhint-wrap,
 .entity-editor-pane .tooltip-inner,
 .warning-section .tooltip-inner {
@@ -3211,6 +3222,8 @@ img.tile-removing {
 .add-point .tooltip .tooltip-arrow {
     left: 60px;
 }
+
+/* radial menu (deprecated) */
 
 .radial-menu-tooltip {
     opacity: 0.8;
@@ -3249,7 +3262,7 @@ img.tile-removing {
     color: rgba(40,40,40,.5);
 }
 
-/* edit menu*/
+/* edit menu */
 
 .edit-menu-tooltip {
     display: none;
@@ -3277,7 +3290,6 @@ img.tile-removing {
     cursor: not-allowed;
     fill: #eee;
 }
-
 
 .edit-menu-item use {
     fill: #222;
