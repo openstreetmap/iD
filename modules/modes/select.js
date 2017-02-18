@@ -153,16 +153,15 @@ export function modeSelect(context, selectedIDs) {
             suppressMenu = true;
         } else {
             var point = context.mouse(),
-                viewport = geoExtent(context.projection.clipExtent()).polygon(),
-                offset = [
-                    viewport[2][0] - point[0], 
-                    (viewport[1][1] - 30) - point[1] // 30 to account for the infoblock
-                ];
+                viewport = geoExtent(context.projection.clipExtent()).polygon();
+                // offset = [
+                //     viewport[2][0] - point[0],
+                //     (viewport[1][1] - 30) - point[1] // 30 to account for the infoblock
+                // ];
 
             if (geoPointInPolygon(point, viewport)) {
-                editMenu
-                    .center(point)
-                    .offset(offset);
+                editMenu.center(point);
+                    // .offset(offset);
             }
         }
     }
@@ -446,8 +445,8 @@ export function modeSelect(context, selectedIDs) {
         selectElements();
 
         var show = d3.event;
-        var rtClick = d3.event && d3.event.type === 'contextmenu';   
-    
+        var rtClick = d3.event && d3.event.type === 'contextmenu';
+
         if (show) {
             positionMenu();
         }
