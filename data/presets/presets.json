@@ -5956,6 +5956,29 @@
             ],
             "name": "Community Garden"
         },
+        "landuse/aquaculture": {
+            "icon": "aquarium",
+            "fields": [
+                "operator"
+            ],
+            "geometry": [
+                "area"
+            ],
+            "tags": {
+                "landuse": "aquaculture"
+            },
+            "terms": [
+                "fish farm",
+                "crustacean",
+                "algae",
+                "aquafarming",
+                "shrimp farm",
+                "oyster farm",
+                "mariculture",
+                "algaculture"
+            ],
+            "name": "Aquaculture"
+        },
         "landuse/basin": {
             "icon": "water",
             "geometry": [

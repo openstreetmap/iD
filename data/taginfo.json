@@ -1294,6 +1294,10 @@
         },
         {
             "key": "landuse",
+            "value": "aquaculture"
+        },
+        {
+            "key": "landuse",
             "value": "basin"
         },
         {
