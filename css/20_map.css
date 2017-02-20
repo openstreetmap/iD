@@ -307,7 +307,7 @@ text.gpx {
     display: none;
 }
 
-.fill-partial path.fill {
+.fill-partial path.area.fill {
     fill-opacity: 0;
     stroke-width: 60px;
     pointer-events: visibleStroke;
