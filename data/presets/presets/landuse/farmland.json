@@ -2,7 +2,8 @@
     "icon": "farm",
     "fields": [
         "operator",
-        "crop"
+        "crop",
+        "produce"
     ],
     "geometry": [
         "area"

@@ -1,7 +1,8 @@
 {
     "icon": "aquarium",
     "fields": [
-        "operator"
+        "operator",
+        "produce"
     ],
     "geometry": [
         "area"

@@ -954,6 +954,9 @@ en:
       power_supply:
         # power_supply=*
         label: Power Supply
+      produce:
+        # produce=*
+        label: Produce
       product:
         # product=*
         label: Product
