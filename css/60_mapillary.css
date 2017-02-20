@@ -1,0 +1,77 @@
+/* Mapillary Image Layer */
+
+.layer-mapillary-images {
+    pointer-events: none;
+}
+
+.layer-mapillary-images .viewfield-group {
+    pointer-events: visible;
+    cursor: pointer; /* Opera */
+    cursor: url(img/cursor-select-mapillary.png) 6 1, pointer; /* FF */
+}
+
+.layer-mapillary-images .viewfield-group * {
+    stroke-width: 1;
+    stroke: #444;
+    fill: #ffc600;
+    z-index: 50;
+}
+
+.layer-mapillary-images .viewfield-group:hover * {
+    stroke-width: 1;
+    stroke: #333;
+    fill: #ff9900;
+    z-index: 60;
+}
+
+.layer-mapillary-images .viewfield-group.selected  * {
+    stroke-width: 2;
+    stroke: #222;
+    fill: #ff5800;
+    z-index: 60;
+}
+
+.layer-mapillary-images .viewfield-group:hover path.viewfield,
+.layer-mapillary-images .viewfield-group.selected path.viewfield,
+.layer-mapillary-images .viewfield-group path.viewfield {
+    stroke-width: 0;
+    fill-opacity: 0.6;
+}
+
+/* Mapillary Sign Layer */
+
+.layer-mapillary-signs {
+    pointer-events: none;
+}
+
+.layer-mapillary-signs .icon-sign .icon-sign-body {
+    min-width: 20px;
+    height: 28px;
+    width: 28px;
+    border: 2px solid transparent;
+    pointer-events: visible;
+    cursor: pointer; /* Opera */
+    cursor: url(img/cursor-select-mapillary.png) 6 1, pointer; /* FF */
+    z-index: 70;
+    overflow: visible;
+}
+
+.layer-mapillary-signs .icon-sign:hover .icon-sign-body {
+    border: 2px solid rgba(255,198,0,0.8);
+    z-index: 80;
+ }
+
+.layer-mapillary-signs .icon-sign.selected .icon-sign-body {
+    border: 2px solid rgba(255,0,0,0.8);
+    z-index: 80;
+ }
+
+.layer-mapillary-signs .icon-sign .t {
+    font-size: 28px;
+    z-index: 70;
+}
+
+.layer-mapillary-signs .icon-sign:hover .t,
+.layer-mapillary-signs .icon-sign.selected .t {
+    z-index: 80;
+}
