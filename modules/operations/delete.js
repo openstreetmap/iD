@@ -44,9 +44,7 @@ export function operationDelete(selectedIDs, context) {
         context.perform(action, operation.annotation());
 
         if (nextSelectedID && context.hasEntity(nextSelectedID)) {
-            context.enter(
-                modeSelect(context, [nextSelectedID]).follow(true).suppressMenu(true)
-            );
+            context.enter(modeSelect(context, [nextSelectedID]).follow(true));
         } else {
             context.enter(modeBrowse(context));
         }

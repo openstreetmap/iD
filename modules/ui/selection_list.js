@@ -9,7 +9,7 @@ import { utilDisplayName } from '../util/index';
 export function uiSelectionList(context, selectedIDs) {
 
     function selectEntity(entity) {
-        context.enter(modeSelect(context, [entity.id]).suppressMenu(true));
+        context.enter(modeSelect(context, [entity.id]));
     }
 
 
@@ -19,7 +19,7 @@ export function uiSelectionList(context, selectedIDs) {
         if (index > -1) {
             selectedIDs.splice(index, 1);
         }
-        context.enter(modeSelect(context, selectedIDs).suppressMenu(true));
+        context.enter(modeSelect(context, selectedIDs));
     }
 
 

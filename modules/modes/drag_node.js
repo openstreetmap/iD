@@ -222,7 +222,7 @@ export function modeDragNode(context) {
         });
 
         if (reselection.length) {
-            context.enter(modeSelect(context, reselection).suppressMenu(true));
+            context.enter(modeSelect(context, reselection));
         } else {
             context.enter(modeBrowse(context));
         }

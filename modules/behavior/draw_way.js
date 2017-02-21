@@ -246,9 +246,7 @@ export function behaviorDrawWay(context, wayId, index, mode, baseGraph) {
         }, 1000);
 
         if (context.hasEntity(wayId)) {
-            context.enter(
-                modeSelect(context, [wayId]).suppressMenu(true).newFeature(true)
-            );
+            context.enter(modeSelect(context, [wayId]).newFeature(true));
         } else {
             context.enter(modeBrowse(context));
         }

@@ -92,13 +92,13 @@ export function modeRotate(context, entityIDs) {
 
     function finish() {
         d3.event.stopPropagation();
-        context.enter(modeSelect(context, entityIDs).suppressMenu(true));
+        context.enter(modeSelect(context, entityIDs));
     }
 
 
     function cancel() {
         context.pop();
-        context.enter(modeSelect(context, entityIDs).suppressMenu(true));
+        context.enter(modeSelect(context, entityIDs));
     }
 
 

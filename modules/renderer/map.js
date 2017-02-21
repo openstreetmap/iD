@@ -77,7 +77,7 @@ export function rendererMap(context) {
                 if (Array.isArray(stack.selectedIDs)) {
                     followSelected = (stack.selectedIDs.length === 1 && stack.selectedIDs[0][0] === 'n');
                     context.enter(
-                        modeSelect(context, stack.selectedIDs).suppressMenu(true).follow(followSelected)
+                        modeSelect(context, stack.selectedIDs).follow(followSelected)
                     );
                 }
                 if (!followSelected && stack.transform) {

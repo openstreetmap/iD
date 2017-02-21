@@ -56,7 +56,7 @@ export function modeSelect(context, selectedIDs) {
         inspector,
         editMenu,
         newFeature = false,
-        suppressMenu = false,
+        suppressMenu = true,
         follow = false;
 
 
@@ -154,14 +154,9 @@ export function modeSelect(context, selectedIDs) {
         } else {
             var point = context.mouse(),
                 viewport = geoExtent(context.projection.clipExtent()).polygon();
-                // offset = [
-                //     viewport[2][0] - point[0],
-                //     (viewport[1][1] - 30) - point[1] // 30 to account for the infoblock
-                // ];
 
             if (geoPointInPolygon(point, viewport)) {
                 editMenu.center(point);
-                    // .offset(offset);
             }
         }
     }
@@ -249,6 +244,7 @@ export function modeSelect(context, selectedIDs) {
 
                 d3.event.preventDefault();
                 d3.event.stopPropagation();
+
             } else if (datum.type === 'midpoint') {
                 context.perform(
                     actionAddMidpoint({loc: datum.loc, edge: datum.edge}, osmNode()),
@@ -310,7 +306,7 @@ export function modeSelect(context, selectedIDs) {
             if (parent) {
                 var way = context.entity(parent);
                 context.enter(
-                    modeSelect(context, [way.first()]).follow(true).suppressMenu(true)
+                    modeSelect(context, [way.first()]).follow(true)
                 );
             }
         }
@@ -322,7 +318,7 @@ export function modeSelect(context, selectedIDs) {
             if (parent) {
                 var way = context.entity(parent);
                 context.enter(
-                    modeSelect(context, [way.last()]).follow(true).suppressMenu(true)
+                    modeSelect(context, [way.last()]).follow(true)
                 );
             }
         }
@@ -346,7 +342,7 @@ export function modeSelect(context, selectedIDs) {
 
             if (index !== -1) {
                 context.enter(
-                    modeSelect(context, [way.nodes[index]]).follow(true).suppressMenu(true)
+                    modeSelect(context, [way.nodes[index]]).follow(true)
                 );
             }
         }
@@ -370,7 +366,7 @@ export function modeSelect(context, selectedIDs) {
 
             if (index !== -1) {
                 context.enter(
-                    modeSelect(context, [way.nodes[index]]).follow(true).suppressMenu(true)
+                    modeSelect(context, [way.nodes[index]]).follow(true)
                 );
             }
         }

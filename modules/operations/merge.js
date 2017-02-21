@@ -30,7 +30,7 @@ export function operationMerge(selectedIDs, context) {
             var entity = context.hasEntity(id);
             return entity && entity.type !== 'node';
         });
-        context.enter(modeSelect(context, ids).suppressMenu(true));
+        context.enter(modeSelect(context, ids));
     };
 
 

@@ -17,7 +17,7 @@ export function uiRawMemberEditor(context) {
 
     function selectMember(d) {
         d3.event.preventDefault();
-        context.enter(modeSelect(context, [d.id]).suppressMenu(true));
+        context.enter(modeSelect(context, [d.id]));
     }
 
 
