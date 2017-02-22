@@ -335,22 +335,27 @@ export function svgLabels(projection, context) {
             for (i = 0; i < labelable[k].length; i++) {
                 entity = labelable[k][i];
                 geometry = entity.geometry(graph);
-                if (geometry === 'vertex') { geometry = 'point'; }  // treat vertex like point
 
                 var getName = (geometry === 'line') ? utilDisplayNameForPath : utilDisplayName,
                     name = getName(entity),
                     width = name && textWidth(name, fontSize),
                     p;
 
-                if (geometry === 'point') {
-                    p = getPointLabel(entity, width, fontSize, geometry);
-                } else if (geometry === 'line') {
-                    p = getLineLabel(entity, width, fontSize);
-                } else if (geometry === 'area') {
-                    p = getAreaLabel(entity, width, fontSize);
+                switch (geometry) {
+                    case 'point':
+                    case 'vertex':
+                        p = getPointLabel(entity, width, fontSize, geometry);
+                        break;
+                    case 'line':
+                        p = getLineLabel(entity, width, fontSize);
+                        break;
+                    case 'area':
+                        p = getAreaLabel(entity, width, fontSize);
+                        break;
                 }
 
                 if (p) {
+                    if (geometry === 'vertex') { geometry = 'point'; }  // treat vertex like point
                     p.classes = geometry + ' tag-' + nameLabelStack[k][1];
                     positions[geometry].push(p);
                     labelled[geometry].push(entity);
