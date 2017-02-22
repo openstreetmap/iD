@@ -669,8 +669,8 @@
                 "close": "The feature editor will remember all of your changes automatically.  When you change a feature, the close button will change to a checkmark. **Click the {button} button to close the feature editor**",
                 "reselect": "Often points will already exist, but have mistakes or be incomplete. We can edit existing points. **Click to select the point you just created.**",
                 "fixname": "**Change the name, then click the {button} button to close the feature editor.**",
-                "reselect_delete": "All features on the map can be deleted. **Click to select the point you created.**",
-                "delete": "The menu around the point contains operations that can be performed on it, including delete. **Click on the {button} button to delete the point.**"
+                "rightclick": "You can right-click on features to see the list of operations that can be performed on them. **Right-click to select the point you created.**",
+                "delete": "**Click on the {button} button to delete the point.**"
             },
             "areas": {
                 "title": "Areas",
