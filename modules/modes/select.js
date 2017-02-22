@@ -193,7 +193,7 @@ export function modeSelect(context, selectedIDs) {
         }
 
         positionMenu();
-        if (d3.event && d3.event.type === 'contextmenu') {
+        if (!suppressMenu) {
             showMenu();
         }
     };
@@ -438,13 +438,15 @@ export function modeSelect(context, selectedIDs) {
             .on('move.select', closeMenu)
             .on('drawn.select', selectElements);
 
+        context.surface()
+            .on('dblclick.select', dblclick);
+
+
         selectElements();
 
-        var show = d3.event;
-        var rtClick = d3.event && d3.event.type === 'contextmenu';
-
-        if (show) {
-            positionMenu();
+        if (selectedIDs.length > 1) {
+            var entities = uiSelectionList(context, selectedIDs);
+            context.ui().sidebar.show(entities);
         }
 
         if (follow) {
@@ -460,18 +462,12 @@ export function modeSelect(context, selectedIDs) {
         }
 
         timeout = window.setTimeout(function() {
-            if (!suppressMenu && rtClick) {
+            positionMenu();
+            if (!suppressMenu) {
                 showMenu();
             }
+        }, 270);  /* after any centerEase completes */
 
-            context.surface()
-                .on('dblclick.select', dblclick);
-        }, 200);
-
-        if (selectedIDs.length > 1) {
-            var entities = uiSelectionList(context, selectedIDs);
-            context.ui().sidebar.show(entities);
-        }
     };
 
 

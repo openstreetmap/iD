@@ -1,10 +1,15 @@
 import * as d3 from 'd3';
 import _ from 'lodash';
-import { modeBrowse, modeSelect } from '../modes/index';
-import { osmEntity } from '../osm/index';
+import { geoEuclideanDistance } from '../geo';
+import { modeBrowse, modeSelect } from '../modes';
+import { osmEntity } from '../osm';
 
 
 export function behaviorSelect(context) {
+    var suppressMenu = true,
+        tolerance = 4,
+        p1 = null;
+
 
     function keydown() {
         if (d3.event && d3.event.shiftKey) {
@@ -22,46 +27,92 @@ export function behaviorSelect(context) {
     }
 
 
-    function click() {
-        var rtClick = d3.event.type === 'contextmenu';
+    function point() {
+        return d3.mouse(context.container().node());
+    }
 
-        if (rtClick) {
-          d3.event.preventDefault();
+
+    function contextmenu() {
+        if (!p1) p1 = point();
+        d3.event.preventDefault();
+        suppressMenu = false;
+        click();
+    }
+
+
+    function mousedown() {
+        if (!p1) p1 = point();
+        d3.select(window)
+            .on('mouseup.select', mouseup, true);
+    }
+
+
+    function mouseup() {
+        click();
+    }
+
+
+    function click() {
+        d3.select(window)
+            .on('mouseup.select', null, true);
+
+        if (!p1) return;
+        var p2 = point(),
+            dist = geoEuclideanDistance(p1, p2);
+
+        p1 = null;
+        if (dist > tolerance) {
+            return;
         }
 
         var datum = d3.event.target.__data__,
-            lasso = d3.select('#surface .lasso').node(),
+            isMultiselect = d3.event.shiftKey || d3.select('#surface .lasso').node(),
             mode = context.mode();
 
-        if (datum.type === 'midpoint') {
-            // do nothing
-        } else if (!(datum instanceof osmEntity)) {
-            if (!d3.event.shiftKey && !lasso && mode.id !== 'browse')
-                context.enter(modeBrowse(context));
 
-        } else if (!d3.event.shiftKey && !lasso) {
-            // Reselect when 'rtClick on one of the selectedIDs'
-            // OR 'leftClick on the same singular selected entity'
-            // Explanation: leftClick should discard any multiple
-            //  selection of entities and make the selection singlular.
-            // Whereas rtClick should preserve multiple selection of
-            // entities  if and only if it clicks on one of the selectedIDs.
-            if (context.selectedIDs().indexOf(datum.id) >= 0 &&
-                (rtClick || context.selectedIDs().length === 1)) {
-                mode.suppressMenu(false).reselect();
-            } else {
-                context.enter(modeSelect(context, [datum.id]));
+        if (datum.type === 'midpoint') {
+            // clicked midpoint, do nothing..
+
+        } else if (!(datum instanceof osmEntity)) {
+            // clicked nothing..
+            if (!isMultiselect && mode.id !== 'browse') {
+                context.enter(modeBrowse(context));
             }
-        } else if (context.selectedIDs().indexOf(datum.id) >= 0) {
-            if (rtClick) { // To prevent datum.id from being removed when rtClick
-                mode.suppressMenu(false).reselect();
-            } else {
-                var selectedIDs = _.without(context.selectedIDs(), datum.id);
-                context.enter(selectedIDs.length ? modeSelect(context, selectedIDs) : modeBrowse(context));
-            }
+
         } else {
-            context.enter(modeSelect(context, context.selectedIDs().concat([datum.id])));
+            // clicked an entity..
+            var selectedIDs = context.selectedIDs();
+
+            if (!isMultiselect) {
+                if (selectedIDs.length > 1 && !suppressMenu) {
+                    // multiple things already selected, just show the menu...
+                    mode.suppressMenu(false).reselect();
+                } else {
+                    // select a single thing..
+                    context.enter(modeSelect(context, [datum.id]).suppressMenu(suppressMenu));
+                }
+
+            } else {
+                if (selectedIDs.indexOf(datum.id) !== -1) {
+                    // clicked entity is already in the selectedIDs list..
+                    if (!suppressMenu) {
+                        // don't deselect clicked entity, just show the menu.
+                        mode.suppressMenu(false).reselect();
+                    } else {
+                        // deselect clicked entity, then reenter select mode or return to browse mode..
+                        selectedIDs = _.without(selectedIDs, datum.id);
+                        context.enter(selectedIDs.length ? modeSelect(context, selectedIDs) : modeBrowse(context));
+                    }
+                } else {
+                    // clicked entity is not in the selected list, add it..
+                    selectedIDs = selectedIDs.concat([datum.id]);
+                    context.enter(modeSelect(context, selectedIDs).suppressMenu(suppressMenu));
+                }
+            }
         }
+
+        // reset for next time..
+        suppressMenu = true;
     }
 
 
@@ -70,8 +121,9 @@ export function behaviorSelect(context) {
             .on('keydown.select', keydown)
             .on('keyup.select', keyup);
 
-        selection.on('click.select', click);
-        selection.on('contextmenu.select', click);
+        selection
+            .on('mousedown.select', mousedown)
+            .on('contextmenu.select', contextmenu);
 
         keydown();
     };
@@ -80,9 +132,12 @@ export function behaviorSelect(context) {
     behavior.off = function(selection) {
         d3.select(window)
             .on('keydown.select', null)
-            .on('keyup.select', null);
+            .on('keyup.select', null)
+            .on('mouseup.select', null, true);
 
-        selection.on('click.select', null);
+        selection
+            .on('mousedown.select', null)
+            .on('contextmenu.select', null);
 
         keyup();
     };
