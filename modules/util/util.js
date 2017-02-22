@@ -69,8 +69,6 @@ export function utilDisplayName(entity) {
         if (network) {
             name = network + ' ' + name;
         }
-    } else if (entity.tags['addr:housenumber']) {
-        name = entity.tags['addr:housenumber'];
     } else {
         name = '';
     }
@@ -89,6 +87,13 @@ export function utilDisplayNameForPath(entity) {
     }
 
     return name;
+}
+
+
+export function utilDisplayHousenumber(entity) {
+    return entity.tags['addr:housenumber']
+        || entity.tags['addr:housename']
+        || '';
 }
 
 

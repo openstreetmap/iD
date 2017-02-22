@@ -9,16 +9,17 @@ import {
     geoInterp,
     geoPolygonIntersectsPolygon,
     geoPathLength
-} from '../geo/index';
+} from '../geo';
 
-import { osmEntity } from '../osm/index';
+import { osmEntity } from '../osm';
 import { utilDetect } from '../util/detect';
 
 import {
     utilDisplayName,
     utilDisplayNameForPath,
+    utilDisplayHousenumber,
     utilEntitySelector
-} from '../util/index';
+} from '../util';
 
 
 export function svgLabels(projection, context) {

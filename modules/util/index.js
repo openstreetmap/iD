@@ -1,4 +1,5 @@
 export { utilAsyncMap } from './util';
+export { utilDisplayHousenumber } from './util';
 export { utilDisplayName } from './util';
 export { utilDisplayNameForPath } from './util';
 export { utilDisplayType } from './util';
@@ -15,8 +16,8 @@ export { utilPrefixCSSProperty } from './util';
 export { utilPrefixDOMProperty } from './util';
 export { utilQsString } from './util';
 export { utilRebind } from './rebind';
-export { utilSetTransform } from './util';
 export { utilSessionMutex } from './session_mutex';
+export { utilSetTransform } from './util';
 export { utilStringQs } from './util';
 export { utilSuggestNames } from './suggest_names';
 export { utilTagText } from './util';
