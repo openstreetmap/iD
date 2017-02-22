@@ -31,8 +31,16 @@ export function svgLabels(projection, context) {
         textWidthCache = {},
         entitybboxes = {};
 
-    // Listed from highest to lowest priority
-    var labelStack = [
+    /**
+     * @typedef {Array} LabelProps
+     * @property {String} LabelProps[0] - Match geometry
+     * @property {String} LabelProps[1] - Match tag key
+     * @property {String} LabelProps[2] - Match tag value ('*' - any)
+     * @property {Number} LabelProps[3] - Font size
+     *
+     * @type {Array.<LabelProps>} - Named objects matching list from highest to lowest priority
+     */
+    var nameLabelStack = [
         ['line', 'aeroway', '*', 12],
         ['line', 'highway', 'motorway', 12],
         ['line', 'highway', 'trunk', 12],
@@ -256,7 +264,7 @@ export function svgLabels(projection, context) {
         var lowZoom = context.surface().classed('low-zoom');
 
         var labelable = [], i, j, k, entity, geometry;
-        for (i = 0; i < labelStack.length; i++) {
+        for (i = 0; i < nameLabelStack.length; i++) {
             labelable.push([]);
         }
 
@@ -278,7 +286,7 @@ export function svgLabels(projection, context) {
             }
         }
 
-        // Split entities into groups specified by labelStack
+        // Split entities into groups specified by nameLabelStack
         for (i = 0; i < entities.length; i++) {
             entity = entities[i];
             geometry = entity.geometry(graph);
@@ -290,10 +298,10 @@ export function svgLabels(projection, context) {
             if (!icon && !utilDisplayName(entity))
                 continue;
 
-            for (k = 0; k < labelStack.length; k++) {
-                var matchGeom = labelStack[k][0],
-                    matchKey = labelStack[k][1],
-                    matchVal = labelStack[k][2],
+            for (k = 0; k < nameLabelStack.length; k++) {
+                var matchGeom = nameLabelStack[k][0],
+                    matchKey = nameLabelStack[k][1],
+                    matchVal = nameLabelStack[k][2],
                     hasVal = entity.tags[matchKey];
 
                 if (geometry === matchGeom && hasVal && (matchVal === '*' || matchVal === hasVal)) {
@@ -317,7 +325,7 @@ export function svgLabels(projection, context) {
 
         // Try and find a valid label for labellable entities
         for (k = 0; k < labelable.length; k++) {
-            var fontSize = labelStack[k][3];
+            var fontSize = nameLabelStack[k][3];
             for (i = 0; i < labelable[k].length; i++) {
                 entity = labelable[k][i];
                 geometry = entity.geometry(graph);
@@ -340,7 +348,7 @@ export function svgLabels(projection, context) {
 
                 if (p) {
                     if (geometry === 'vertex') { geometry = 'point'; }  // treat vertex like point
-                    p.classes = geometry + ' tag-' + labelStack[k][1];
+                    p.classes = geometry + ' tag-' + nameLabelStack[k][1];
                     positions[geometry].push(p);
                     labelled[geometry].push(entity);
                 }
