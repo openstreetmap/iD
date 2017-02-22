@@ -28,9 +28,12 @@ import {
 import { modeBrowse } from './browse';
 import { modeDragNode } from './drag_node';
 import * as Operations from '../operations/index';
-import { uiEditMenu, uiSelectionList } from '../ui/index';
+import { uiEditMenu, uiSelectionList } from '../ui';
 import { uiCmd } from '../ui/cmd';
-import { utilEntityOrMemberSelector, utilEntitySelector } from '../util/index';
+import { utilEntityOrMemberSelector, utilEntitySelector } from '../util';
+
+// deprecation warning - Radial Menu to be removed in iD v3
+import { uiRadialMenu } from '../ui';
 
 
 var relatedParent;
@@ -171,7 +174,8 @@ export function modeSelect(context, selectedIDs) {
 
 
     function toggleMenu() {
-        if (d3.select('.edit-menu').empty()) {
+        // deprecation warning - Radial Menu to be removed in iD v3
+        if (d3.select('.edit-menu, .radial-menu').empty()) {
             showMenu();
         } else {
             closeMenu();
@@ -401,7 +405,14 @@ export function modeSelect(context, selectedIDs) {
                 .map(function(o) { return o(selectedIDs, context); })
                 .filter(function(o) { return o.available(); });
 
-        operations.unshift(Operations.operationDelete(selectedIDs, context));
+        // deprecation warning - Radial Menu to be removed in iD v3
+        var isRadialMenu = context.storage('edit-menu-style') === 'radial';
+        if (isRadialMenu) {
+            operations = operations.slice(0,7);
+            operations.unshift(Operations.operationDelete(selectedIDs, context));
+        } else {
+            operations.push(Operations.operationDelete(selectedIDs, context));
+        }
 
         operations.forEach(function(operation) {
             if (operation.behavior) {
@@ -425,7 +436,11 @@ export function modeSelect(context, selectedIDs) {
         d3.select(document)
             .call(keybinding);
 
-        editMenu = uiEditMenu(context, operations);
+
+        // deprecation warning - Radial Menu to be removed in iD v3
+        editMenu = isRadialMenu
+            ? uiRadialMenu(context, operations)
+            : uiEditMenu(context, operations);
 
         context.ui().sidebar
             .select(singular() ? singular().id : null, newFeature);

@@ -44,6 +44,9 @@ export function behaviorSelect(context) {
         if (!p1) p1 = point();
         d3.select(window)
             .on('mouseup.select', mouseup, true);
+
+        var isShowAlways = +context.storage('edit-menu-show-always') === 1;
+        suppressMenu = !isShowAlways;
     }
 
 
@@ -65,8 +68,9 @@ export function behaviorSelect(context) {
             return;
         }
 
-        var datum = d3.event.target.__data__,
-            isMultiselect = d3.event.shiftKey || d3.select('#surface .lasso').node(),
+        var isMultiselect = d3.event.shiftKey || d3.select('#surface .lasso').node(),
+            isShowAlways = +context.storage('edit-menu-show-always') === 1,
+            datum = d3.event.target.__data__,
             mode = context.mode();
 
 
@@ -84,7 +88,7 @@ export function behaviorSelect(context) {
             var selectedIDs = context.selectedIDs();
 
             if (!isMultiselect) {
-                if (selectedIDs.length > 1 && !suppressMenu) {
+                if (selectedIDs.length > 1 && (!suppressMenu && !isShowAlways)) {
                     // multiple things already selected, just show the menu...
                     mode.suppressMenu(false).reselect();
                 } else {
@@ -95,7 +99,7 @@ export function behaviorSelect(context) {
             } else {
                 if (selectedIDs.indexOf(datum.id) !== -1) {
                     // clicked entity is already in the selectedIDs list..
-                    if (!suppressMenu) {
+                    if (!suppressMenu && !isShowAlways) {
                         // don't deselect clicked entity, just show the menu.
                         mode.suppressMenu(false).reselect();
                     } else {

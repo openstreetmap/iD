@@ -31,7 +31,7 @@ export function uiIntroPoint(context, reveal) {
             t('intro.points.add', { button: icon('#icon-point', 'pre-text') }),
             { tooltipClass: 'intro-points-add' });
 
-        var corner = [-85.632481,41.944094];
+        var corner = [-85.632481, 41.944094];
 
         context.on('enter.intro', addPoint);
 
@@ -143,7 +143,8 @@ export function uiIntroPoint(context, reveal) {
             context.history().on('change.intro', deleted);
 
             setTimeout(function() {
-                var node = d3.select('.edit-menu-item-delete').node();
+                // deprecation warning - Radial Menu to be removed in iD v3
+                var node = d3.select('.edit-menu-item-delete, .radial-menu-item-delete').node();
                 var pointBox = pad(node.getBoundingClientRect(), 50, context);
                 reveal(pointBox,
                     t('intro.points.delete', { button: icon('#operation-delete', 'pre-text') }));
