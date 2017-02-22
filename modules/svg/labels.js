@@ -290,7 +290,13 @@ export function svgLabels(projection, context) {
         for (i = 0; i < entities.length; i++) {
             entity = entities[i];
             geometry = entity.geometry(graph);
-            if (geometry === 'vertex') { geometry = 'point'; }  // treat vertex like point
+            if (geometry === 'vertex') {
+                if (lowZoom) {
+                    continue; // don't label vertices at low zoom because they don't have icons
+                } else {
+                    geometry = 'point'; // treat vertex like point
+                }
+            }
 
             var preset = geometry === 'area' && context.presets().match(entity, graph),
                 icon = preset && !blacklisted(preset) && preset.icon;
@@ -329,6 +335,7 @@ export function svgLabels(projection, context) {
             for (i = 0; i < labelable[k].length; i++) {
                 entity = labelable[k][i];
                 geometry = entity.geometry(graph);
+                if (geometry === 'vertex') { geometry = 'point'; }  // treat vertex like point
 
                 var getName = (geometry === 'line') ? utilDisplayNameForPath : utilDisplayName,
                     name = getName(entity),
@@ -337,9 +344,6 @@ export function svgLabels(projection, context) {
 
                 if (geometry === 'point') {
                     p = getPointLabel(entity, width, fontSize, geometry);
-                } else if (geometry === 'vertex' && !lowZoom) {
-                    // don't label vertices at low zoom because they don't have icons
-                    p = getPointLabel(entity, width, fontSize, geometry);
                 } else if (geometry === 'line') {
                     p = getLineLabel(entity, width, fontSize);
                 } else if (geometry === 'area') {
@@ -347,7 +351,6 @@ export function svgLabels(projection, context) {
                 }
 
                 if (p) {
-                    if (geometry === 'vertex') { geometry = 'point'; }  // treat vertex like point
                     p.classes = geometry + ' tag-' + nameLabelStack[k][1];
                     positions[geometry].push(p);
                     labelled[geometry].push(entity);
