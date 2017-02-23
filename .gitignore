@@ -5,7 +5,7 @@
 /dist/*.map
 /dist/img/*.svg
 /dist/mapillary-js/
-node_modules/
+/node_modules/
 npm-debug.log
 transifex.auth
 
