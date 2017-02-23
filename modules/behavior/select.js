@@ -35,7 +35,6 @@ export function behaviorSelect(context) {
     function contextmenu() {
         if (!p1) p1 = point();
         d3.event.preventDefault();
-        context.surface().node().focus();
         suppressMenu = false;
         click();
     }
