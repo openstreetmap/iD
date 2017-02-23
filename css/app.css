@@ -2621,6 +2621,9 @@ img.tile-removing {
     height: 30px;
     width: 100%;
 }
+[dir='rtl'] #scale {
+    transform: scaleX(-1);
+}
 
 #scale:hover {
     cursor: pointer;
@@ -2633,7 +2636,7 @@ img.tile-removing {
     text-anchor: start;
 }
 [dir='rtl'] #scale text {
-    text-anchor: end;
+    transform: scaleX(-1);
 }
 
 #scale path {
