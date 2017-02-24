@@ -37,6 +37,8 @@ export function uiInit(context) {
     var uiInitCounter = 0;
 
 
+    var controls;
+
     function render(container) {
         container
             .attr('dir', textDirection);
@@ -116,7 +118,7 @@ export function uiInit(context) {
             .attr('class', 'spinner')
             .call(uiSpinner(context));
 
-        var controls = bar
+        controls = bar
             .append('div')
             .attr('class', 'map-controls');
 
@@ -323,6 +325,13 @@ export function uiInit(context) {
 
 
     ui.sidebar = uiSidebar(context);
+
+    ui.pluginRegisterControl = function (plugin) {
+        controls
+            .append('div')
+            .attr('class', 'map-control ' + plugin.buttonClass)
+            .call(plugin.handler(context));
+    };
 
     return ui;
 }
