@@ -293,20 +293,19 @@ export function rendererMap(context) {
         // See this for more info:
         //   https://github.com/basilfx/normalize-wheel/blob/master/src/normalizeWheel.js
         if (source && source.type === 'wheel' && source.deltaMode === 1 /* LINE */) {
-
             // pick sensible scroll amount if user scrolling fast or slow..
             var lines = Math.abs(source.deltaY),
                 scroll = lines > 2 ? 40 : lines * 10;
 
             var t0 = transformed ? transformLast : transformStart,
-                p0 = [source.offsetX, source.offsetY],
+                p0 = mouse(source),
                 p1 = t0.invert(p0),
                 k2 = t0.k * Math.pow(2, -source.deltaY * scroll / 500),
                 x2 = p0[0] - p1[0] * k2,
                 y2 = p0[1] - p1[1] * k2;
 
             eventTransform = d3.zoomIdentity.translate(x2,y2).scale(k2);
-            _selection.node().__zoom = transformLast = eventTransform;
+            _selection.node().__zoom = eventTransform;
         }
 
         if (ktoz(eventTransform.k * 2 * Math.PI) < minzoom) {
@@ -325,6 +324,7 @@ export function rendererMap(context) {
             tY = (eventTransform.y / scale - transformStart.y) * scale;
 
         transformed = true;
+        transformLast = eventTransform;
         utilSetTransform(supersurface, tX, tY, scale);
         queueRedraw();
 
