@@ -135,7 +135,7 @@ export function rendererBackground(context) {
             tested = 0,
             regex, i;
 
-        for (i = 0; i < blacklists; i++) {
+        for (i = 0; i < blacklists.length; i++) {
             try {
                 regex = new RegExp(blacklists[i]);
                 fail = regex.test(d.template);
