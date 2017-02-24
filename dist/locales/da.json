@@ -504,12 +504,11 @@
         },
         "save": {
             "title": "Gem",
-            "help": "Gem ændringer til OpenStreetMap og gør dem dermed synlige for andre brugere.",
             "no_changes": "Ingen ændringer at gemme.",
             "error": "Der skete en fejl da du prøvede at gemme",
             "status_code": "Serveren returnerede følgende statuskode {code}",
             "unknown_error_details": "Kontrollér om du har forbindelse til internettet.",
-            "uploading": "Gemmer ændringer til OpenStreetMap.",
+            "uploading": "Uploader ændringer til OpenStreetMap...",
             "unsaved_changes": "Du har ændringer, der endnu ikke er gemt",
             "conflict": {
                 "header": "Løs konfliktredigeringer",
@@ -567,14 +566,17 @@
         },
         "validations": {
             "disconnected_highway": "Ej forbundet vejsegment",
+            "disconnected_highway_tooltip": "Veje bør være forbundet med andre veje.",
             "untagged_point": "Punkt uden tags",
             "untagged_line": "Linje uden tags",
             "untagged_area": "Område uden tags",
+            "untagged_relation": "Ej tagget relation",
             "many_deletions": "Du er ved at slette {n} objekter. Er du sikker på du vil dette? Dette vil slette dem fra kortet som alle andre ser på openstreetmap.org.",
             "tag_suggests_area": "Tagget {tag} antyder at linjen skulle være et område, men den er ikke et område",
             "untagged_point_tooltip": "Vælg en objekttype der beskriver hvad dette punkt er.",
             "untagged_line_tooltip": "Vælg en objekttype der beskriver hvad slags linje dette er.",
             "untagged_area_tooltip": "Vælg en objekttype der beskriver hvad slags område dette er.",
+            "untagged_relation_tooltip": "Vælg en objekttype der beskriver hvad slags relation dette er.",
             "deprecated_tags": "Frarådede tags: {tags}"
         },
         "zoom": {
@@ -583,6 +585,12 @@
         },
         "cannot_zoom": "Kan ikke zoome længere ud i nuværende tilstand.",
         "full_screen": "Skift fuld skærmtilstand",
+        "gpx": {
+            "local_layer": "Lokal fil",
+            "drag_drop": "Træk og slip en .gpx, .geojson eller .kml ind på siden eller klik på knappen til højre for at browse",
+            "zoom": "Zoom til lag",
+            "browse": "Gennemse efter en fil"
+        },
         "mapillary_images": {
             "tooltip": "Gadeniveau billeder fra Mapillary",
             "title": "Billedelag (Mapillary)"
@@ -4279,6 +4287,10 @@
                 "shop/video_games": {
                     "name": "Videospilbutik",
                     "terms": "Videospilbutik, Videospilforretning"
+                },
+                "shop/watches": {
+                    "name": "Urbutik",
+                    "terms": "Urbutik, Urmager"
                 },
                 "shop/water_sports": {
                     "name": "Svømmesport/Svømmeudstyr butik",

@@ -101,12 +101,29 @@
             },
             "delete": {
                 "title": "Ištrinti",
+                "description": {
+                    "single": "Galutinai ištrinti objektą.",
+                    "multiple": "Galutinai ištrinti objektus."
+                },
                 "annotation": {
                     "point": "Taškas ištrintas.",
                     "vertex": "Viršūnė pašalinta iš kelio.",
                     "line": "Linija ištrinta.",
                     "area": "Teritorija ištrinta.",
-                    "relation": "Pašalintas ryšys."
+                    "relation": "Pašalintas ryšys.",
+                    "multiple": "Ištrinti {n} objektai."
+                },
+                "incomplete_relation": {
+                    "single": "Šio objekto negalima ištrinti, nes jis nebuvo pilnai atsiųstas.",
+                    "multiple": "Šių objektų negalima ištrinti, nes jie nebuvo pilnai atsiųsti."
+                },
+                "part_of_relation": {
+                    "single": "Šio objekto negalima ištrinti, nes jis yra didesnio ryšio dalis. Iš pradžių turite išimti jį iš ryšio.",
+                    "multiple": "Šių objektų negalima ištrinti, nes jie yra didesnio ryšio dalis. Jūs turite iš pradžių išimti juos iš ryšio."
+                },
+                "connected_to_hidden": {
+                    "single": "Šio objekto negalima ištrinti, nes jis susietas su paslėptu objektu.",
+                    "multiple": "Šių objektų negalima ištrinti, nes kai kurie iš jų susieti su paslėptais objektais."
                 }
             },
             "add_member": {
@@ -145,20 +162,93 @@
             },
             "move": {
                 "title": "Perkelti",
+                "description": {
+                    "single": "Perkelti šį objektą į kitą vietą.",
+                    "multiple": "Perkelti šiuos objektus į kitą vietą."
+                },
                 "key": "M",
                 "annotation": {
                     "point": "Taškas perkeltas.",
                     "vertex": "Perkeltas taškas kelyje.",
                     "line": "Linija perkelta.",
-                    "area": "Perkeltas plotas."
+                    "area": "Perkeltas plotas.",
+                    "multiple": "Perkelti keli objektai."
+                },
+                "incomplete_relation": {
+                    "single": "Šio objekto negalima perkelti, nes jis nebuvo pilnai atsiųstas.",
+                    "multiple": "Šių objektų perkelti negalima, nes jie nebuvo pilnai atsiųsti."
+                },
+                "too_large": {
+                    "single": "Šio objekto negalima perkelti, nes nepakankama dalis objekto šiuo metu matoma.",
+                    "multiple": "Šių objektų negalima perkelti, nes nepakankama jų dalis šiuo metu matoma."
+                },
+                "connected_to_hidden": {
+                    "single": "Šio objekto negalima perkelti, nes jis susietas su paslėptu objektu.",
+                    "multiple": "Šių objektų negalima perkelti, nes kai kurie iš jų susieti su paslėptais objektais."
+                }
+            },
+            "reflect": {
+                "title": "apsukti",
+                "description": {
+                    "long": {
+                        "single": "Apsukti šį objektą ties ilgąja ašimi.",
+                        "multiple": "Apsukti šiuos objektus ties ilgąja ašimi."
+                    },
+                    "short": {
+                        "single": "Apsukti šį objektą ties trumpąja ašimi.",
+                        "multiple": "Apsukti šiuos objektus ties trumpąja ašimi."
+                    }
+                },
+                "key": {
+                    "long": "T",
+                    "short": "Y"
+                },
+                "annotation": {
+                    "long": {
+                        "single": "Objektas apsuktas ties ilgąja ašimi.",
+                        "multiple": "Keli objektai apsukti ties jų ilgosiomis ašimis."
+                    },
+                    "short": {
+                        "single": "Objektas apsuktas ties trumpąja ašimi.",
+                        "multiple": "Keli objektai apsukti ties jų trumposiomis ašimis."
+                    }
+                },
+                "incomplete_relation": {
+                    "single": "Šio objekto negalima apsukti, nes jis nebuvo pilnai atsiųstas.",
+                    "multiple": "Šių objektų negalima apsukti, nes jie nebuvo pilnai atsiųsti."
+                },
+                "too_large": {
+                    "single": "Šio objekto negalima apsukti, nes nepakankama jo dalis šiuo metu matoma.",
+                    "multiple": "Šių objektų negalima apsukti, nes nepakankama jų dalis šiuo metu matoma."
+                },
+                "connected_to_hidden": {
+                    "single": "Šio objekto negalima apsukti, nes jis susietas su paslėptu objektu.",
+                    "multiple": "Šių objektų negalima apsukti, nes kai kurie iš jų susieti su paslėptais objektais."
                 }
             },
             "rotate": {
                 "title": "Pasukti",
+                "description": {
+                    "single": "Sukti šį objektą apie jo centro tašką.",
+                    "multiple": "Sukti šiuos objektus ties jų centro tašku."
+                },
                 "key": "R",
                 "annotation": {
                     "line": "Linija pasukta.",
-                    "area": "Pasuktas plotas."
+                    "area": "Pasuktas plotas.",
+                    "multiple": "Sukti kelis objektus."
+                },
+                "incomplete_relation": {
+                    "single": "Šio objekto negalima sukti, nes jis nebuvo pilnai atsiųstas.",
+                    "multiple": "Šių objektų negalima siųsti, nes jie nebuvo pilnai atsiųsti."
+                },
+                "too_large": {
+                    "single": "Šio objekto negalima sukti, nes nepakankama jo dalis šiuo metu matoma.",
+                    "multiple": "Šių objektų negalima sukti, nes nepakankama jų dalis šiuo metu matoma."
+                },
+                "connected_to_hidden": {
+                    "single": "Šio objekto negalima sukti, nes jis susietas su paslėptu objektu.",
+                    "multiple": "Šių objektų negalima sukti, nes kai kurie iš jų susieti su paslėptais objektais."
                 }
             },
             "reverse": {
@@ -230,9 +320,12 @@
             "rateLimit": "API riboja anoniminius prisijungimus. Galite tai išspręsti prisijungdami."
         },
         "commit": {
+            "title": "Įkelti į OpenStreetMap",
             "description_placeholder": "Trumpas jūsų indėlio aprašymas (privalomas)",
+            "message_label": "Pakeitimo komentaras",
             "upload_explanation": "Jūsų įkeliami pakeitimai bus matomi visuose žemėlapiuose, naudojančiuose OpenStreetMap duomenis.",
             "upload_explanation_with_user": "Pakeitimai, kuriuos jūs įkeliate kaip naudotojas {user} bus matomi visuose žemėlapiuose, naudojančiuose OpenStreetMap duomenis.",
+            "save": "Įkelti",
             "cancel": "Atšaukti",
             "changes": "{count} Pakeitimai",
             "warnings": "Įspėjimai",
@@ -295,6 +388,7 @@
             "back_tooltip": "Keisti objektą",
             "remove": "Pašalinti",
             "search": "Ieškoti",
+            "multiselect": "Pažymėti objektai",
             "unknown": "Nežinoma",
             "incomplete": "<neatsiųsta>",
             "feature_list": "Ieškoti objektų",
@@ -410,12 +504,12 @@
         },
         "save": {
             "title": "Išsaugoti",
-            "help": "Įrašyti pakeitimus į OpenStreetMap, kad jie būtų matomi kitiems naudotojams.",
+            "help": "Peržiūrėkite jūsų pakeitimus ir įkelkite juos į OpenStreetMap, taip padarydami juos matomais kitiems naudotojams.",
             "no_changes": "Nėra pakeitimų.",
             "error": "Bandant įrašyti įvyko klaidos.",
             "status_code": "Serveris grąžino būsenos kodą {code}",
             "unknown_error_details": "Prašome įsitikinti, kad esate prisijungęs prie interneto.",
-            "uploading": "Pakeitimai įkeliami į OpenStreetMap.",
+            "uploading": "Pakeitimai įkeliami į OpenStreetMap...",
             "unsaved_changes": "Turite neįrašytų pakeitimų",
             "conflict": {
                 "header": "Sutvarkykite konfliktuojančius pakeitimus",
@@ -427,11 +521,14 @@
                 "restore": "Atstatyti",
                 "delete": "Palikti ištrintus",
                 "download_changes": "Arba atsisiųskite jūsų pakeitimus.",
-                "done": "Visi konfliktai išspręsti!"
+                "done": "Visi konfliktai išspręsti!",
+                "help": "Kitas naudotojas pakeitė kai kuriuos iš jūsų pakeistų žemėlapio objektų.\nSpauskite ant kiekvieno objekto žemiau, kad gautumėte daugiau informacijos apie konfliktą, ir parinkite ar palikti\njūsų pakeitimus, ar kito naudotojo pakeitimus.\n"
             }
         },
         "merge_remote_changes": {
             "conflict": {
+                "deleted": "Šį objektą ištrynė naudotojas {user}.",
+                "location": "Šį objektą perkėlėte ir jūs, ir naudotojas {user}.",
                 "nodelist": "Taškus pakeitėte ir jūs, ir {user}.",
                 "memberlist": "Ryšio narius pakeitėte ir jūs, ir {user}.",
                 "tags": "Jūs pakeitėte <b>{tag}</b> žymą į „{local}“, o {user} pakeitė ją į „{remote}“."
@@ -469,13 +566,18 @@
             "used_with": "naudojama su {type}"
         },
         "validations": {
+            "disconnected_highway": "Neprijungtas kelias",
+            "disconnected_highway_tooltip": "Keliai turi būti prijungti prie kitų kelių.",
             "untagged_point": "Taškas be žymų",
             "untagged_line": "Linija be žymų",
             "untagged_area": "Plotas be žymų",
+            "untagged_relation": "Ryšys be žymų",
+            "many_deletions": "Jūs trinate {n} objektus. Ar tikrai norite tai padaryti? Tai ištrins juos iš žemėlapio, kurį visi kiti mato svetainėje openstreetmap.org.",
             "tag_suggests_area": "Žyma {tag} rodo, kad linija turėtų būti plotas, bet ji nėra plotas",
             "untagged_point_tooltip": "Pasirinkite objekto tipą, kuris apibūdina, koks tai taškas yra.",
             "untagged_line_tooltip": "Pasirinkite objekto tipą, kuris apibūdina, kokia tai linija yra.",
             "untagged_area_tooltip": "Pasirinkite objekto tipą, kuris apibūdina, koks tai plotas yra.",
+            "untagged_relation_tooltip": "Parinkite objekto tipą, aprašantį kas yra šis ryšys.",
             "deprecated_tags": "Pasenusios žymos: {tags}"
         },
         "zoom": {
@@ -484,6 +586,12 @@
         },
         "cannot_zoom": "Negalima atitolinti šiame režime.",
         "full_screen": "Perjungti pilną ekraną",
+        "gpx": {
+            "local_layer": "Vietinis failas",
+            "drag_drop": "Tempkite ir numeskite .gpx, .geojson arba .kml failą ant puslapio arba spauskite mygtuką dešinėje, kad naršytumėte",
+            "zoom": "Išdidinti sluoksnį",
+            "browse": "Naršyti failo"
+        },
         "mapillary_images": {
             "tooltip": "Gatvės lygio nuotraukos iš Mapillary",
             "title": "Nuotraukų perdanga (Mapillary)"
@@ -518,7 +626,24 @@
                 "scidmore_park": "Riedučių parkas",
                 "petting_zoo": "Riedučių parko Zooparkas",
                 "n_andrews_st": "Šiaurės Algirdo gatvė",
-                "s_andrews_st": "Pietų Algirdo gatvė"
+                "s_andrews_st": "Pietų Algirdo gatvė",
+                "n_constantine_st": "Šiaurės Ūlos Gatvė",
+                "s_constantine_st": "Pietų Ūlos gatvė",
+                "rocky_river": "Akmenuota upė",
+                "railroad_dr": "Gelžkelio plentas",
+                "conrail_rr": "Vytauto gelžkelis",
+                "st_joseph_river": "Nemunas",
+                "n_main_st": "Šiaurės pagrindinė gatvė",
+                "s_main_st": "Pietų pagrindinė gatvė",
+                "water_st": "Vandens gatvė",
+                "foster_st": "Šaltuko gatvė",
+                "portage_river": "Porterio upė",
+                "flower_st": "Gėlių gatvė",
+                "elm_st": "Guobų gatvė",
+                "walnut_st": "Riešutų gatvė",
+                "morris_ave": "Mindaugo alėja",
+                "east_st": "Rytų gatvė",
+                "portage_ave": "Porterio gatvė"
             },
             "navigation": {
                 "title": "Navigacija",
@@ -543,6 +668,7 @@
                 "finish": "Linijos braižymas gali būti baigiamas antrą kartą paspaudus ant paskutiniojo taško. **Baikite kelio braižymą.**",
                 "road": "**Sąraše parinkite kelią**",
                 "residential": "Yra įvairių kelių tipų, dažniausiai pasitaikantis - „Residential“. **Parinkite kelio tipą „Residential“**",
+                "restart": "Kelias turi kirsti {name}.",
                 "wrong_preset": "Neparinkote gyvenamosios gatvės tipo. **Spauskite čia ir parinkite iš naujo**"
             },
             "startediting": {
@@ -564,6 +690,15 @@
                 },
                 "category-landuse": {
                     "name": "Žemėnaudos objektai"
+                },
+                "category-natural-area": {
+                    "name": "Gamtos objektai"
+                },
+                "category-natural-line": {
+                    "name": "Gamtos objektai"
+                },
+                "category-natural-point": {
+                    "name": "Gamtos objektai"
                 },
                 "category-path": {
                     "name": "Takų objektai"
@@ -639,8 +774,11 @@
                     "label": "Adresas",
                     "placeholders": {
                         "city": "Miestas",
+                        "city!vn": "Didmiestis/miestas",
                         "conscriptionnumber": "123",
                         "country": "Valstybė",
+                        "county": "Valstybė",
+                        "county!jp": "Rajonas",
                         "district": "Rajonas",
                         "floor": "Aukštas",
                         "hamlet": "Viensėdis",
@@ -755,6 +893,15 @@
                 "building_area": {
                     "label": "Pastatas"
                 },
+                "bunker_type": {
+                    "label": "Tipas"
+                },
+                "camera/direction": {
+                    "placeholder": "45, 90, 180, 270"
+                },
+                "camera/type": {
+                    "label": "Kameros tipas"
+                },
                 "capacity": {
                     "label": "Talpumas",
                     "placeholder": "50, 100, 200..."
@@ -780,6 +927,9 @@
                         "WSW": "Vakarų-pietvakarių"
                     }
                 },
+                "castle_type": {
+                    "label": "Tipas"
+                },
                 "clock_direction": {
                     "label": "Kryptis",
                     "options": {
@@ -792,6 +942,9 @@
                 },
                 "construction": {
                     "label": "Tipas"
+                },
+                "contact/webcam": {
+                    "placeholder": "http://pavyzdys.lt/"
                 },
                 "content": {
                     "label": "Turinys"

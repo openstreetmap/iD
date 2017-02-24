@@ -504,12 +504,12 @@
         },
         "save": {
             "title": "Gravar",
-            "help": "Gravar alterações no OpenStreetMap, tornando-as visíveis a outros utilizadores.",
+            "help": "Reveja as suas alterações e envie-as para o OpenStreetMap, tornando-as visíveis a outros utilizadores.",
             "no_changes": "Não há alterações para gravar.",
             "error": "Ocorreram erros ao tentar gravar",
             "status_code": "O servidor devolveu o seguinte código {code}",
             "unknown_error_details": "Por favor certifique-se que está ligado à Internet.",
-            "uploading": "A enviar alterações para o OpenStreetMap.",
+            "uploading": "A enviar as alterações para o OpenStreetMap...",
             "unsaved_changes": "Tem alterações por gravar",
             "conflict": {
                 "header": "Resolver alterações em conflito",
@@ -571,11 +571,13 @@
             "untagged_point": "Ponto sem etiquetas",
             "untagged_line": "Linha sem etiquetas",
             "untagged_area": "Área sem etiquetas",
+            "untagged_relation": "Relação sem etiquetas",
             "many_deletions": "Está a eliminar {n} elementos. Tem a certeza que quer fazer isso? Isto irá eliminá-los do mapa que todas as pessoas Veem em openstreetmap.org.",
             "tag_suggests_area": "A etiqueta {tag} é normalmente usada em áreas e não linhas.",
             "untagged_point_tooltip": "Escolha um elemento que indique o que este ponto representa.",
             "untagged_line_tooltip": "Escolha um elemento que indique o que esta linha representa.",
             "untagged_area_tooltip": "Escolha um elemento que indique o que esta área representa.",
+            "untagged_relation_tooltip": "Selecione um tipo de elemento que descreva o que é esta relação.",
             "deprecated_tags": "Etiquetas obsoletas: {tags}"
         },
         "zoom": {
@@ -584,6 +586,12 @@
         },
         "cannot_zoom": "Não é possível afastar mais no modo atual.",
         "full_screen": "Edição em ecrã inteiro.",
+        "gpx": {
+            "local_layer": "Ficheiro local",
+            "drag_drop": "Arraste e largue um ficheiro .gpx, .geojson ou .kml na página ou clique no botão da direita para selecionar um",
+            "zoom": "Aproximar para a camada",
+            "browse": "Encontrar ficheiro"
+        },
         "mapillary_images": {
             "tooltip": "Fotos ao nível da rua do Mapillary",
             "title": "Camada de Fotos (Mapillary)"
@@ -1518,6 +1526,9 @@
                 },
                 "power_supply": {
                     "label": "Fonte de Energia"
+                },
+                "produce": {
+                    "label": "produz"
                 },
                 "product": {
                     "label": "Produto"
@@ -3063,6 +3074,10 @@
                     "name": "Horta / Jardim comunitário",
                     "terms": "Community Garden, Horta Comunitária, Horta Urbana"
                 },
+                "landuse/aquaculture": {
+                    "name": "Aquacultura",
+                    "terms": "algicultura,aquicultura,carcinicultura,malacocultura,maricultura,mitilicultura,ostreicultura,pectinicultura,piscicultura,ranicultura,viveiro de peixes"
+                },
                 "landuse/basin": {
                     "name": "Bacia hidrográfica",
                     "terms": "Bacia de Drenagem"
@@ -3580,6 +3595,10 @@
                 "natural/wood": {
                     "name": "Bosque",
                     "terms": "Wood"
+                },
+                "noexit/yes": {
+                    "name": "Sem saída",
+                    "terms": "No Exit"
                 },
                 "office": {
                     "name": "Escritório",
@@ -4296,6 +4315,10 @@
                 "shop/video_games": {
                     "name": "Loja de videojogos",
                     "terms": "Video Game Store, Jogos de Computador, Consola"
+                },
+                "shop/watches": {
+                    "name": "Loja de relógios",
+                    "terms": "Watches Shop, Relojoeiro "
                 },
                 "shop/water_sports": {
                     "name": "Loja de material de natação",

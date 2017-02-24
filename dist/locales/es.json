@@ -504,12 +504,12 @@
         },
         "save": {
             "title": "Guardar",
-            "help": "Guardar los cambios en OpenStreetMap haciéndolos visibles a otros usuarios.",
+            "help": "Revise sus cambios y súbalos a OpenStreetMap, haciéndolos visibles a otros usuarios.",
             "no_changes": "No hay cambios que guardar.",
             "error": "Se han producido errores al tratar de guardar",
             "status_code": "El servidor devolvió el código de estado {code}",
             "unknown_error_details": "Asegúrese de que está conectado a Internet.",
-            "uploading": "Subiendo cambios a OpenStreetMap.",
+            "uploading": "Subiendo cambios a OpenStreetMap…",
             "unsaved_changes": "Tiene cambios sin guardar",
             "conflict": {
                 "header": "Resolver las ediciones conflictivas",
@@ -1527,6 +1527,9 @@
                 "power_supply": {
                     "label": "Fuente de energía"
                 },
+                "produce": {
+                    "label": "Produce"
+                },
                 "product": {
                     "label": "Producto"
                 },
@@ -2128,6 +2131,9 @@
                     "name": "Discoteca",
                     "terms": "discoteca, club nocturno, boliche"
                 },
+                "amenity/nursing_home": {
+                    "name": "Residencia de ancianos"
+                },
                 "amenity/parking": {
                     "name": "Aparcamiento de automóviles",
                     "terms": "automóvil, auto, aparcamiento, parking, aparcadero, estacionamiento, garaje, parqueadero, parqueo, parqueadero de automóviles, estacionamiento de automóviles, parqueo de automóviles"
@@ -2242,6 +2248,10 @@
                 "amenity/social_facility/homeless_shelter": {
                     "name": "Refugio para personas sin hogar",
                     "terms": "refugio social, refugio, comedor social, alberge, centro, vagabundo, indigente, homeless"
+                },
+                "amenity/social_facility/nursing_home": {
+                    "name": "Hogar de ancianos",
+                    "terms": "anciano, vejez, adultez, adulto mayor, 3ra edad, tercera edad, asilo, hogar, residencia, geriátrico, reposo, vida asistida, cuidado de ancianos"
                 },
                 "amenity/studio": {
                     "name": "Estudio de grabación",
@@ -2399,7 +2409,7 @@
                 },
                 "barrier/retaining_wall": {
                     "name": "Muro de contención",
-                    "terms": "muro, pared, contención, retención, gavión"
+                    "terms": "muro, pared, contención, retención, prevención, espolón"
                 },
                 "barrier/stile": {
                     "name": "Escalera de paso",
@@ -2411,7 +2421,7 @@
                 },
                 "barrier/wall": {
                     "name": "Muro",
-                    "terms": "muro, murete, tapia, pared, paredón, tabique, valla, muralla, cerca, dique"
+                    "terms": "muro, murete, tapia, pared, paredón, tabique, muralla, piedra seca, pared en seco, pared seca, aparejo, barrera acústica, new jersey, gavión, erosión, muro de mar, dique marino, muro contra riadas, cortina, aparejo"
                 },
                 "boundary/administrative": {
                     "name": "Límite administrativo",
@@ -2884,8 +2894,8 @@
                     "terms": "ceder el paso, dar el paso, señal, signo, cartel, detención"
                 },
                 "highway/living_street": {
-                    "name": "Calle residencial",
-                    "terms": "calle, residencial, urbanización"
+                    "name": "Calle semipeatonal o residencial",
+                    "terms": "calle, residencial, urbanización, calle residencial, semipeatonal, zona residencial, zona 30, vía compartida"
                 },
                 "highway/mini_roundabout": {
                     "name": "Minirotonda",
@@ -3056,7 +3066,7 @@
                     "terms": "crucero, cruz, cruz de término, humilladero"
                 },
                 "historic/wayside_shrine": {
-                    "name": "Humilladero",
+                    "name": "Santuario al borde del camino",
                     "terms": "santuario, sagrario, Ermita, Proskynetarion, proskynetaria, oratorio, lugar de culto, icono, figura, humilladero"
                 },
                 "junction": {
@@ -3070,6 +3080,10 @@
                 "landuse/allotments": {
                     "name": "Huerto comunitario",
                     "terms": "jardín, huerto, huerta, comunitario, comunal, vecindad, huerto urbano"
+                },
+                "landuse/aquaculture": {
+                    "name": "Acuicultura",
+                    "terms": "acuacultura, piscicultura, maricultura, ostricultura, carpicultura, salmonicultura, pez, pescado, crustáceos, algas, granja de peces, cría de peces, cría camarones, granja de ostras, cría de ostras, cultivo de algas"
                 },
                 "landuse/basin": {
                     "name": "Cuenca",
@@ -3589,6 +3603,10 @@
                     "name": "Bosque natural",
                     "terms": "bosque, bosque natural, boscaje, frondosidad"
                 },
+                "noexit/yes": {
+                    "name": "Sin salida",
+                    "terms": "sin salida, fin de camino, fin de calle, callejón sin salida, final de carretera"
+                },
                 "office": {
                     "name": "Oficina",
                     "terms": "oficina, despacho, trabajo, salón"
@@ -3648,6 +3666,10 @@
                 "office/lawyer": {
                     "name": "Despacho de abogados",
                     "terms": "despacho, bufete, abogado, procurador, letrado, jurisconsulto, jurisperito, jurista, legista, oficina jurídica, bufete jurídico, despacho de abogados, oficina de abogados, estudio jurídico"
+                },
+                "office/lawyer/notary": {
+                    "name": "Notaría",
+                    "terms": "notaría pública, notario público, asistente de notario, escribano, notariado, notarial, testamento, firma, escritura, inmueble, protocolo notario"
                 },
                 "office/newspaper": {
                     "name": "Periódico",
@@ -4300,6 +4322,10 @@
                 "shop/video_games": {
                     "name": "Tienda de videojuegos",
                     "terms": "video juego, juegos electrónicos, videojuegos"
+                },
+                "shop/watches": {
+                    "name": "Relojería",
+                    "terms": "tienda de relojes, relojero, taller de relojes, reparación de reloj"
                 },
                 "shop/water_sports": {
                     "name": "Tienda de deportes acuáticos / natación",

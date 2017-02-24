@@ -504,12 +504,12 @@
         },
         "save": {
             "title": "Salvar",
-            "help": "Salvar alterações no OpenStreetMap, tornando-as visíveis para outros usuários.",
+            "help": "Revisar suas alterações e salvá-las no OpenStreetMap, tornando-as visíveis para outros usuários.",
             "no_changes": "Sem alterações para salvar.",
             "error": "Ocorreram erros ao tentar salvar",
             "status_code": "O servidor retornou o status {code}",
             "unknown_error_details": "Por favor, verifique sua conexão com a internet.",
-            "uploading": "Enviando alterações para o OpenStreetMap.",
+            "uploading": "Enviando alterações para o OpenStreetMap...",
             "unsaved_changes": "Você tem alterações não salvas.",
             "conflict": {
                 "header": "Resolver edições conflitantes",
@@ -796,6 +796,7 @@
                         "block_number": "Número do Bloco",
                         "block_number!jp": "Num. do Bloco",
                         "city": "Município",
+                        "city!jp": "City/Town/Village/Tokyo Special Ward",
                         "city!vn": "Cidade/Vila",
                         "conscriptionnumber": "123",
                         "country": "País",
@@ -809,15 +810,19 @@
                         "housenumber": "123",
                         "housenumber!jp": "Nº Edifício/Nº Lote",
                         "neighbourhood": "Bairro",
+                        "neighbourhood!jp": "Chōme/Aza/Koaza",
                         "place": "Local",
                         "postcode": "CEP",
                         "province": "Província",
                         "province!jp": "Prefeitura",
                         "quarter": "Quadra",
+                        "quarter!jp": "Ōaza/Machi",
                         "state": "Estado",
                         "street": "Rua",
                         "subdistrict": "Sub-Bairro",
-                        "suburb": "Bairro"
+                        "subdistrict!vn": "Ward/Commune/Townlet",
+                        "suburb": "Bairro",
+                        "suburb!jp": "Ward"
                     }
                 },
                 "admin_level": {
@@ -1894,7 +1899,8 @@
                     "terms": "Pátio de Aeródromo"
                 },
                 "aeroway/gate": {
-                    "name": "Portão de Embarque"
+                    "name": "Portão de Embarque",
+                    "terms": "Portão de Embarque, Portão de desembarque, embarque, desembarque, aeroporto"
                 },
                 "aeroway/hangar": {
                     "name": "Hangar",
@@ -2598,7 +2604,7 @@
                 },
                 "craft/clockmaker": {
                     "name": "Relojoeiro",
-                    "terms": "Relógios, relojoaria"
+                    "terms": "Relógios, relojoaria, Conserto de relógios, Reparos de relógios"
                 },
                 "craft/confectionery": {
                     "name": "Doceiro",
@@ -2730,7 +2736,7 @@
                 },
                 "craft/watchmaker": {
                     "name": "Relojoeiro",
-                    "terms": "Relógios, Relojoaria"
+                    "terms": "Relógios, Relojoaria, relógio de pulso, Conserto de relógios, Reparos de relógios"
                 },
                 "craft/window_construction": {
                     "name": "Fabricante de Janelas",
@@ -3133,7 +3139,8 @@
                     "terms": "Quartel, Caserna"
                 },
                 "landuse/military/bunker": {
-                    "name": "Bunker Militar"
+                    "name": "Bunker Militar",
+                    "terms": "Bunker, Abrigo militar, guerra, Carvoeira, paiol,"
                 },
                 "landuse/military/checkpoint": {
                     "name": "Posto de Controle",
@@ -3148,14 +3155,16 @@
                     "terms": "Base Naval, Base da Marinha"
                 },
                 "landuse/military/nuclear_explosion_site": {
-                    "name": "Local de Explosão Nuclear"
+                    "name": "Local de Explosão Nuclear",
+                    "terms": "armas nucleares, área de testes nuclear, guerra, armas, explosão,"
                 },
                 "landuse/military/obstacle_course": {
                     "name": "Percurso de Obstáculos",
                     "terms": "Pista de Obstáculos"
                 },
                 "landuse/military/office": {
-                    "name": "Escritório Militar"
+                    "name": "Escritório Militar",
+                    "terms": "Escritório do Exército, Marinha, aeronáutica, administração militar"
                 },
                 "landuse/military/range": {
                     "name": "Estande de Tiro Militar",
@@ -3476,6 +3485,10 @@
                     "name": "Natural",
                     "terms": "Natural"
                 },
+                "natural/bare_rock": {
+                    "name": "Leito Rochoso",
+                    "terms": "Rocha nua, rocha, solo rochoso, rocha exposta"
+                },
                 "natural/bay": {
                     "name": "Baía",
                     "terms": "Baía"
@@ -3746,7 +3759,8 @@
                     "terms": "Linha de Subtransmissão, Linha de Transmissão Secundária"
                 },
                 "power/plant": {
-                    "name": "Área de Usina Elétrica"
+                    "name": "Área de Usina Elétrica",
+                    "terms": "Hidrelétrica, fazenda eólica, eletricidade, energia solar, usina nuclear, termoelétrica, usina de produção de energia, energia elétrica,"
                 },
                 "power/pole": {
                     "name": "Poste de Transmissão",
@@ -4297,7 +4311,7 @@
                 },
                 "shop/watches": {
                     "name": "Relojoaria",
-                    "terms": "Relojoaria, Loja de Relógios, Joalheria"
+                    "terms": "Relojoaria, Loja de Relógios, Joalheria, relógios, venda de relógios, smartwatch,"
                 },
                 "shop/water_sports": {
                     "name": "Loja de Esportes Aquáticos",

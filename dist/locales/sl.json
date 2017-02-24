@@ -216,6 +216,7 @@
             "readonly": "API je na voljo samo za branje. Za shranjevanje vnesenih sprememb boste morali počakati."
         },
         "commit": {
+            "message_label": "Povzetek sprememb",
             "upload_explanation": "Spremembe, ki ji boste naložili, bodo vidne na vseh zemljevidih, ki uporabljajo podatke OpenStreetMap.",
             "upload_explanation_with_user": "Spremembe, ki jih boste naložili kot {user}, bodo vidne na vseh zemljevidih, ki uporabljajo podatke OpenStreetMap.",
             "cancel": "Prekliči",
@@ -372,9 +373,7 @@
         },
         "save": {
             "title": "Shrani",
-            "help": "Shrani spremembe na OpenStreetMap, s čimer bodo vidne tudi ostalim uporabnikom.",
             "no_changes": "Ni sprememb za shranjevanje.",
-            "uploading": "Prenašanje sprememb v OpenStreetMap.",
             "unsaved_changes": "Nekatere spremembe še niso bile shranjene.",
             "conflict": {
                 "previous": "Nazaj",
@@ -387,7 +386,7 @@
         "success": {
             "edited_osm": "OSM urejen!",
             "just_edited": "Pravkar ste uredili OpenStreetMap zemljevid!",
-            "view_on_osm": "Ogled na OSM",
+            "view_on_osm": "Ogled na OSM-u",
             "facebook": "Deli na Facebook-u",
             "twitter": "Deli na Twitter-ju",
             "google": "Deli na Google+",

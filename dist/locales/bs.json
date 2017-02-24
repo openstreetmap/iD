@@ -253,9 +253,7 @@
         },
         "save": {
             "title": "Sačuvajte",
-            "help": "Sačuvajte promjene na OpenStreetMap karti, čineći ih vidljivim drugim korisnicima.",
             "no_changes": "Nema promjena za sačuvati.",
-            "uploading": "Postavljanje promjena na OpenStreetMap.",
             "unsaved_changes": "Imate promjene koje nisu spašene"
         },
         "success": {

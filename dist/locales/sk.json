@@ -405,12 +405,10 @@
         },
         "save": {
             "title": "Ulož",
-            "help": "Ulož zmeny do OpenStreetMap a sprístupni ich ďalším užívateľom.",
             "no_changes": "Žiadne zmeny na uloženie.",
             "error": "Počas ukladania sa vyskyla chyba",
             "status_code": "Server vrátil chybový kód {code}",
             "unknown_error_details": "Uistite sa prosím, že ste pripojený k internetu.",
-            "uploading": "Nahrávam zmeny do OpenStreetMap.",
             "unsaved_changes": "Máte neuložené zmeny",
             "conflict": {
                 "header": "Vyrieš konfliktné úpravy",

@@ -217,9 +217,7 @@
         },
         "save": {
             "title": "Saglabāt",
-            "help": "Saglabā izmaiņas, padarot tās redzamas citiem.",
             "no_changes": "Nav izmaiņu, ko saglabāt.",
-            "uploading": "Augšupielādē izmaiņas",
             "unsaved_changes": "Jums ir nesaglabātas izmaiņas",
             "conflict": {
                 "restore": "Atjaunot"

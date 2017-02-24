@@ -101,12 +101,21 @@
             },
             "delete": {
                 "title": "Poista",
+                "description": {
+                    "single": "Poista tämä karttakohde pysyvästi.",
+                    "multiple": "Poista nämä karttakohteet pysyvästi."
+                },
                 "annotation": {
                     "point": "Paikkapiste poistettiin.",
                     "vertex": "Piste poistettiin viivalta.",
                     "line": "Viiva poistettiin.",
                     "area": "Alue poistettiin.",
-                    "relation": "Relaatio poistettiin."
+                    "relation": "Relaatio poistettiin.",
+                    "multiple": "Poistettiin {n} karttakohdetta."
+                },
+                "incomplete_relation": {
+                    "single": "Tätä karttakohdetta ei voi poistaa, sillä sitä ei ole ladattu kokonaan.",
+                    "multiple": "Näitä karttakohteita ei voi poistaa, sillä niitä ei ole ladattu kokonaan."
                 }
             },
             "add_member": {
@@ -231,9 +240,12 @@
             "rateLimit": "API-sovellusrajapinta rajoittaa tunnistautumattomia yhteyksiä. Poista ongelma kirjautumalla sisään."
         },
         "commit": {
+            "title": "Tallenna OpenStreetMapiin",
             "description_placeholder": "Lyhyt kuvaus karttaan tehdyistä muutoksista (pakollinen)",
+            "message_label": "Muutoskokoelman kommentti",
             "upload_explanation": "Palvelimelle tallennettavat muutokset tulevat pian näkyviin kaikkiin OpenStreetMap-kartta-aineistoa käyttäviin palveluihin.",
             "upload_explanation_with_user": "Muutokset tallennetaan palvelimelle käyttäjätunnisteella {user} ja tulevat pian näkyviin kaikkiin OpenStreetMap-kartta-aineistoa käyttäviin palveluihin.",
+            "save": "Tallenna",
             "cancel": "Takaisin muokkaamaan",
             "changes": "{count} muutosta",
             "warnings": "Varoitukset",
@@ -296,6 +308,7 @@
             "back_tooltip": "Vaihda ominaisuustyyppi",
             "remove": "Poista",
             "search": "Hae",
+            "multiselect": "Valitut karttakohteet",
             "unknown": "Ei tiedossa",
             "incomplete": "<ei ladattu>",
             "feature_list": "Etsi ominaisuuksia",
@@ -411,7 +424,7 @@
         },
         "save": {
             "title": "Tallenna",
-            "help": "Tallenna muutokset OpenStreetMapiin kaikkien käyttöön.",
+            "help": "Tarkista tekemäsi muutokset ja tallenna ne OpenStreetMapiin kaikkien nähtäville.",
             "no_changes": "Ei tallennettavia muutoksia.",
             "error": "Tallentamisen aikana ilmenneet virheet",
             "status_code": "Palvelimen virhekoodi {code}",
@@ -469,9 +482,12 @@
             "used_with": "käytetään tyypin {type} kanssa"
         },
         "validations": {
+            "disconnected_highway_tooltip": "Tiet tulisi yhdistää muuhun tieverkkoon.",
             "untagged_point": "Ominaisuustiedoton piste",
             "untagged_line": "Ominaisuustiedoton viiva",
             "untagged_area": "Ominaisuustiedoton alue",
+            "untagged_relation": "Ominaisuustiedoton relaatio",
+            "many_deletions": "Olet poistamassa {n} karttakohdetta. Haluatko varmasti poistaa ne kaikkien julkisesti käyttämältä OpenStreetMap.org-kartalta?",
             "tag_suggests_area": "Ominaisuustiedon {tag} mukaan viiva on alue, vaikka se ei sitä ole.",
             "untagged_point_tooltip": "Valitse ominaisuustyyppi, joka kuvaa tämän pisteen tarkoitusta.",
             "untagged_line_tooltip": "Valitse ominaisuustyyppi, joka kuvaa tämän viivan tarkoitusta.",
@@ -484,6 +500,11 @@
         },
         "cannot_zoom": "Nykyisessä tilassa ei voi loitontaa enempää.",
         "full_screen": "Koko näytön tila",
+        "gpx": {
+            "local_layer": "Paikallinen tiedosto",
+            "drag_drop": "Vedä ja pudota gpx-, geojson- tai kml-tiedosto tälle sivulle tai selaa tiedostoja napsauttamalla painiketta oikealla.",
+            "browse": "Selaa tiedostoja"
+        },
         "mapillary_images": {
             "tooltip": "Katunäkymäkuvat (Mapillary)",
             "title": "Valokuvat kartalla (Mapillary)"

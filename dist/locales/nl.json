@@ -504,12 +504,12 @@
         },
         "save": {
             "title": "Opslaan",
-            "help": "Sla de aanpassingen bij OpenStreetMap op om deze voor andere gebruikers zichtbaar te maken.",
+            "help": "Inspecteer je wijzigingen en upload ze naar OpenStreetMap, zodat ze zichtbaar worden voor andere gebruikers.",
             "no_changes": "Geen aanpassingen om op te slaan.",
             "error": "Er zijn fouten opgetreden bij het opslaan",
             "status_code": "Server gaf volgende statuscode terug: {code}",
             "unknown_error_details": "Controleer of je bent verbonden met het internet.",
-            "uploading": "De aanpassingen worden naar OpenStreetMap geüpload.",
+            "uploading": "Bezig met uploaden naar OpenStreetMap …",
             "unsaved_changes": "Je hebt niet-opgeslagen aanpassingen",
             "conflict": {
                 "header": "Los bewerkingsconflicten op",
@@ -571,11 +571,13 @@
             "untagged_point": "Punt zonder tags",
             "untagged_line": "Lijn zonder tags",
             "untagged_area": "Vlak zonder tags",
+            "untagged_relation": "Relatie zonder tags",
             "many_deletions": "Je verwijdert {n} objecten. Weet je zeker dat je dit wil doen? Dit zal ze verwijderen van de kaart die iedereen ziet op openstreetmap.org.",
             "tag_suggests_area": "De tag {tag} suggereert dat de lijn een vlak is, maar het is geen vlak",
             "untagged_point_tooltip": "Kies een objecttype dat beschrijft wat dit punt is.",
             "untagged_line_tooltip": "Selecteer een objecttype dat beschrijft wat deze lijn is.",
             "untagged_area_tooltip": "Selecteer een objecttype dat beschrijft wat dit vlak is.",
+            "untagged_relation_tooltip": "Selecteer een objecttype dat beschrijft wat deze relatie is.",
             "deprecated_tags": "Afgeschafte tags: {tags}"
         },
         "zoom": {
@@ -584,6 +586,12 @@
         },
         "cannot_zoom": "Kan niet verder uitzoomen in huidige modus",
         "full_screen": "Volledig scherm aan/uit",
+        "gpx": {
+            "local_layer": "Lokaal bestand",
+            "drag_drop": "Sleep een .gpx-, .geojson- of .kml-bestand naar deze pagina of klik op de knop rechts om te bladeren",
+            "zoom": "Laag in beeld brengen",
+            "browse": "Selecteer een bestand"
+        },
         "mapillary_images": {
             "tooltip": "Foto's op straatniveau van Mapillary",
             "title": "Foto-laag (Mapillary)"
@@ -1519,6 +1527,9 @@
                 "power_supply": {
                     "label": "Stroomvoorziening"
                 },
+                "produce": {
+                    "label": "Gewas"
+                },
                 "product": {
                     "label": "Product"
                 },
@@ -1938,7 +1949,7 @@
                 },
                 "amenity/bench": {
                     "name": "Zitbank",
-                    "terms": "bank,bankje"
+                    "terms": "bank,bankje,picnictafel"
                 },
                 "amenity/bicycle_parking": {
                     "name": "Fietsenstalling",
@@ -2114,6 +2125,9 @@
                     "name": "Nachtclub",
                     "terms": "dancing,bar,uitgaan,disco"
                 },
+                "amenity/nursing_home": {
+                    "name": "Verpleeghuis"
+                },
                 "amenity/parking": {
                     "name": "Autoparking",
                     "terms": "parkeerplaats,garage,parkeergarage,parkeergebouw,autoparking,parkeergelegenheid voor meerdere voertuigen"
@@ -2225,6 +2239,10 @@
                 "amenity/social_facility/homeless_shelter": {
                     "name": "Opvangcentrum voor Daklozen",
                     "terms": "dakloos"
+                },
+                "amenity/social_facility/nursing_home": {
+                    "name": "Verpleeghuis",
+                    "terms": "verpleegtehuis,rust- en verzorgingstehuis,rusttehuis,rusthuis,bejaardentehuis,RVT,VVT"
                 },
                 "amenity/studio": {
                     "name": "Studio",
@@ -2990,6 +3008,10 @@
                     "name": "Volkstuin",
                     "terms": "tuin,moestuin,aparte tuin"
                 },
+                "landuse/aquaculture": {
+                    "name": "Aquacultuur",
+                    "terms": "viskweek,vissenboerderij,visboerderij,oesterkweek,algenkweek,algenboerderij,algenboerderij"
+                },
                 "landuse/basin": {
                     "name": "Waterbekken"
                 },
@@ -3188,7 +3210,8 @@
                     "terms": "park"
                 },
                 "leisure/picnic_table": {
-                    "name": "Picknicktafel"
+                    "name": "Picknicktafel",
+                    "terms": "tafel,bank,zitbank"
                 },
                 "leisure/pitch": {
                     "name": "Sportveld"
@@ -3463,6 +3486,10 @@
                     "name": "Bos",
                     "terms": "bomen,oerbos,oerwoud,woud"
                 },
+                "noexit/yes": {
+                    "name": "Doodlopend einde",
+                    "terms": "geen doorgang,cul-de-sac,doodlopende straat"
+                },
                 "office": {
                     "name": "Kantoor"
                 },
@@ -3512,6 +3539,10 @@
                 "office/lawyer": {
                     "name": "Advocatenkantoor",
                     "terms": "advocatenbureau,wetsgeleerden"
+                },
+                "office/lawyer/notary": {
+                    "name": "Notariaat",
+                    "terms": "notaris,akte"
                 },
                 "office/newspaper": {
                     "name": "Krant"
@@ -4103,6 +4134,10 @@
                 },
                 "shop/video_games": {
                     "name": "videogame winkel"
+                },
+                "shop/watches": {
+                    "name": "Horlogewinkel",
+                    "terms": "uurwerkwinkel,klokkenwinkel"
                 },
                 "shop/water_sports": {
                     "name": "Watersport-/Zwemwinkel"

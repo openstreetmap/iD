@@ -153,6 +153,12 @@
                     "area": "حرك منطقة"
                 }
             },
+            "reflect": {
+                "key": {
+                    "long": "T",
+                    "short": "Y"
+                }
+            },
             "rotate": {
                 "title": "تدوير",
                 "key": "R",
@@ -206,16 +212,17 @@
             "nothing": "لا يوجد شيء للإعادة"
         },
         "tooltip_keyhint": "اﻹختصار:",
-        "browser_notice": "هذا المحرر مدعوم من قِبل \"فيرفكس، وكروم، وسفاري، وأوبرا، وأنترنت إكسبلورر 11 وما بعده\".\nبرجاء تحديث متصفحك أو استخدام \"Potlatch 2\" لتحرير الخريطة.",
+        "browser_notice": "هذا المحرر مدعوم من قِبل \"فايرفكس، وكروم، وسفاري، وأوبرا، وأنترنت إكسبلورر 11 وما بعده\".\nرجاءً قم بتحديث متصفحك أو استخدم \"Potlatch 2\" للتحرير على الخريطة.",
         "translate": {
-            "translate": "ترّجم",
+            "translate": "ترجم",
             "localized_translation_label": "اسم متعدد اللغات",
             "localized_translation_language": "اختر لغة",
             "localized_translation_name": "الاسم"
         },
         "zoom_in_edit": "كبّر للتحرير",
+        "login": "دخول",
         "logout": "تسجيل الخروج",
-        "loading_auth": "يتصل بـ OpenStreetMap ...",
+        "loading_auth": "جاري الإتصال بـ OpenStreetMap ...",
         "report_a_bug": "إبلاغ عن خطأ أو مشكلة",
         "help_translate": "ساعد في الترجمة",
         "feature_info": {
@@ -223,15 +230,18 @@
             "hidden_details": "هذه الميزة مخفية حاليا: {details}"
         },
         "status": {
-            "error": "تعذر اﻹتصال مع واجهة التطبيق البرمجية.",
+            "error": "تعذر اﻹتصال مع واجهة التطبيق البرمجية API.",
             "offline": "حالة API غير متصلة. الرجاء محاولة التحرير لاحقا.",
             "readonly": "حالة API هي للقراءة فقط. سوف تحتاج إلى الإنتظار لحفظ تغييراتك."
         },
         "commit": {
+            "title": "إرفع على OpenStreetMap",
             "description_placeholder": "وصف مختصر لمساهماتك ( مطلوب )",
+            "message_label": "ملخص حول التغييرات التي قمت بها",
             "upload_explanation": "التغييرات التي قمت برفعها سوف تظهر على كل الخرائط التي تستخدم بيانات OpenStreetMap.",
             "upload_explanation_with_user": "التغييرات التي قمت برفعها كـ {user} سوف تظهر على كل الخرائط التي تستخدم بيانات OpenStreetMap.",
-            "cancel": "إلغاء",
+            "save": "إرسل",
+            "cancel": "إلغي",
             "changes": "{count} تغييرات",
             "warnings": "تنبيهات",
             "modified": "عُدل",
@@ -292,6 +302,7 @@
             "back_tooltip": "تغيير الميزة",
             "remove": "إزالة",
             "search": "بحث",
+            "multiselect": "الميزات المختارة",
             "unknown": "غير معروف",
             "feature_list": "ابحث عن ميزات",
             "edit": "حرر ميزة",
@@ -314,7 +325,7 @@
             "none": "لا شيء",
             "best_imagery": "أفضل مصدر صور معروف لهذا الموقع.",
             "switch": "رجوع إلى هذه الخلفية.",
-            "custom": "الجمارك",
+            "custom": "خاص",
             "custom_button": "تحرير خلفية مخصصة",
             "fix_misalignment": "ضبط إزاحة التصوير.",
             "imagery_source_faq": "من أين أتت هذه الصورة؟",
@@ -401,12 +412,11 @@
         },
         "save": {
             "title": "حفظ",
-            "help": "حفظ التغييرات على OpenStreetMap يجعلها ظاهرة للمستخدمين الآخرين.",
             "no_changes": "لا يوجد تعديلات للحفظ.",
             "error": "حدث خطأ أثناء محاولة الحفظ",
             "status_code": "أعاد الخادم رمز الحالة {code}",
             "unknown_error_details": "الرجاء التأكد من أنك متصل بالإنترنت.",
-            "uploading": "يرفع التغييرات إلى OpenStreetMap.",
+            "uploading": "جارٍ رفع التعديلات على OpenStreetMap ...",
             "unsaved_changes": "لديك تغييرات غير محفوظة",
             "conflict": {
                 "header": "حل عمليات التحرير المتعارضة",
@@ -441,9 +451,9 @@
             "cancel": "إلغاء"
         },
         "splash": {
-            "welcome": "مرحبا بك محرر iD لخرائط OpenStreetMap.",
+            "welcome": "مرحبا بك في محرر iD لخريطة الشارع المفتوح OpenStreetMap.",
             "walkthrough": "ابدأ بالتجول",
-            "start": "التحرير الآن"
+            "start": "حرر الآن"
         },
         "source_switch": {
             "live": "حي",
@@ -459,6 +469,7 @@
             "untagged_point": "نقطة غير موسومة",
             "untagged_line": "خط غير موسوم",
             "untagged_area": "منطقة غير موسومة",
+            "untagged_relation": "علاقة غير موسومة",
             "tag_suggests_area": "الوسم {tag} يقترح بأن الخط يجب أن يكون منطقة، ولكنها حاليا ليست منطقة",
             "untagged_point_tooltip": "اختر نوع الميزة التي تصف هذه النقطة.",
             "untagged_line_tooltip": "اختر نوع الميزة التي تصف هذا الخط.",
@@ -470,15 +481,19 @@
             "out": "تصغير"
         },
         "cannot_zoom": "لايمكن التصغير أكثر من ذلك في الوضع الحالي.",
-        "full_screen": "التحول إلى ملئ الشاشة",
+        "full_screen": "حول إلى شاشة مليئة",
+        "gpx": {
+            "local_layer": "ملف محلي"
+        },
         "mapillary_images": {
+            "tooltip": "صور للطرقات من مابي لاري",
             "title": "صورة الخلفية من خدمة (Mapillary)"
         },
         "mapillary_signs": {
             "title": "صورة الخلفية لاشارات المرور من خدمة (Mapillary)"
         },
         "mapillary": {
-            "view_on_mapillary": "عرض الصورة في Mapillary"
+            "view_on_mapillary": "اعرض هذه الصورة في Mapillary"
         },
         "help": {
             "title": "المساعدة",
@@ -487,7 +502,15 @@
         "intro": {
             "done": "تم",
             "graph": {
+                "n_constantine_st": "طريق قسنطينة الشمالي",
+                "s_constantine_st": "طريق قسنطينة الجنوبي",
+                "rocky_river": "نهر الروكي",
+                "st_joseph_river": "نهر سان جوزيف",
+                "s_main_st": "الطريق الأساسي الجنوبي",
+                "foster_st": "طريق فوستر",
                 "portage_river": "نهر",
+                "flower_st": "طريق الأزهار",
+                "east_st": "الطريق الشرقية",
                 "portage_ave": "شارع"
             },
             "navigation": {
@@ -500,7 +523,7 @@
             },
             "points": {
                 "title": "النقاط",
-                "choose": "**إختر الكافتريا من القائمة.**",
+                "choose": "**إختر مقهى من القائمة.**",
                 "describe": "النقطة الآن تم تعليمها كمقهى. باستخدام محرر الميزة، يمكننا إضافة المزيد من المعلومات عن تلك الميزة. **أضف اسما**",
                 "fixname": "**قم بتغيير الاسم, ثم إضغط على {button} الزر لإغلاق المحرر.**",
                 "reselect_delete": "يمكن حذف كل المعالم في الخريطة. **إضغط هنا لاختيار النقطة التي أنشأتها.**",
@@ -510,7 +533,7 @@
                 "title": "المناطق",
                 "search": "**ابحث عن '{name}'.**",
                 "choose": "**إختر ساحة اللعب من القائمة.**",
-                "describe": "**أضف اسماً, ثم اضغط على {button} الزر لإغلاق المحرر**"
+                "describe": "**أضف اسماً, ثم اضغط على زر {button} لإغلاق المحرر**"
             },
             "lines": {
                 "title": "الخطوط",
@@ -522,9 +545,9 @@
                 "wrong_preset": "لم تقم باختيار نوع \"الطريق السكني\". **إضغط هنا للاختيار مرة أُخرى**"
             },
             "startediting": {
-                "title": "ابدأ التعديل",
+                "title": "ابدأ التحرير",
                 "save": "لا تنس حفظ تغييراتك بشكل دوري!",
-                "start": "إبداء رسم الخرائط!"
+                "start": "إبدأ رسم الخرائط !"
             }
         },
         "presets": {
@@ -534,6 +557,9 @@
                 },
                 "category-rail": {
                     "name": "ميزات السكك الحديدية"
+                },
+                "category-road": {
+                    "name": "خصائص الطريق"
                 }
             },
             "fields": {
@@ -660,6 +686,9 @@
                 "barrier": {
                     "label": "نوع"
                 },
+                "beauty": {
+                    "label": "نوع المتجر"
+                },
                 "bench": {
                     "label": "مقعد"
                 },
@@ -785,6 +814,10 @@
                 "elevation": {
                     "label": "ارتفاع"
                 },
+                "email": {
+                    "label": "البريد الإلكتروني",
+                    "placeholder": "example@example.com"
+                },
                 "emergency": {
                     "label": "طوارئ"
                 },
@@ -800,6 +833,9 @@
                 },
                 "fee": {
                     "label": "رسوم"
+                },
+                "fence_type": {
+                    "label": "النوع"
                 },
                 "fire_hydrant/type": {
                     "label": "النوع",
@@ -1065,6 +1101,9 @@
                 },
                 "restriction": {
                     "label": "النوع"
+                },
+                "rooms": {
+                    "label": "الغرف"
                 },
                 "route": {
                     "label": "النوع"
@@ -2547,6 +2586,9 @@
                     "name": "معلومات",
                     "terms": "معلومات"
                 },
+                "tourism/information/map": {
+                    "name": "خريطة"
+                },
                 "tourism/motel": {
                     "name": "فندق رخيص",
                     "terms": "فندق رخيص"
@@ -2570,6 +2612,9 @@
                 "tourism/zoo": {
                     "name": "حديقة حيوانات",
                     "terms": "حديقة الحيوانات"
+                },
+                "traffic_calming": {
+                    "name": "ممهل"
                 },
                 "type/boundary": {
                     "name": "حدود",
@@ -2676,6 +2721,9 @@
                 "waterway/stream": {
                     "name": "مجرى",
                     "terms": "مجرى"
+                },
+                "waterway/waterfall": {
+                    "name": "شلال"
                 },
                 "waterway/weir": {
                     "name": "هدار سد صغير",

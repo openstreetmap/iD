@@ -504,12 +504,12 @@
         },
         "save": {
             "title": "儲存",
-            "help": "儲存修改至OpenStreetMap，讓其他用戶看見。",
+            "help": "審閱您的修改並將它們上傳至 OpenStreetMap，讓其他使用者看見。",
             "no_changes": "沒有修改需要儲存。",
             "error": "嘗試儲存時發生了故障",
             "status_code": "伺服器傳回的狀態碼{code}",
             "unknown_error_details": "請確定你已經連上網路。",
-            "uploading": "正在上載修改至OpenStreetMap。",
+            "uploading": "正在上傳修改至 OpenStreetMap...",
             "unsaved_changes": "你有未儲存的編輯",
             "conflict": {
                 "header": "解決編輯衝突",
@@ -1527,6 +1527,9 @@
                 "power_supply": {
                     "label": "電源供應器"
                 },
+                "produce": {
+                    "label": "生產產品"
+                },
                 "product": {
                     "label": "產品"
                 },
@@ -2128,6 +2131,9 @@
                     "name": "夜總會",
                     "terms": "夜店"
                 },
+                "amenity/nursing_home": {
+                    "name": "養老院"
+                },
                 "amenity/parking": {
                     "name": "停車場",
                     "terms": "汽車停車場"
@@ -2242,6 +2248,10 @@
                 "amenity/social_facility/homeless_shelter": {
                     "name": "遊民收容所",
                     "terms": "露宿者中心,街友中心,遊民收容中心,遊民收容機構,街友收容機構"
+                },
+                "amenity/social_facility/nursing_home": {
+                    "name": "養老院",
+                    "terms": "療養院,老人安養中心,Nursing Home"
                 },
                 "amenity/studio": {
                     "name": "工作室",
@@ -3070,6 +3080,10 @@
                 "landuse/allotments": {
                     "name": "社區農園",
                     "terms": "社區田圃,城市農園,社區園圃,社區農地,都市農園"
+                },
+                "landuse/aquaculture": {
+                    "name": "養殖漁業",
+                    "terms": "養殖漁業,水產養殖,Aquaculture"
                 },
                 "landuse/basin": {
                     "name": "水池",

@@ -235,7 +235,7 @@
                 "key": "R",
                 "annotation": {
                     "line": "Pivoter la ligne.",
-                    "area": "Pivoter un polyone.",
+                    "area": "Pivoter un polygone.",
                     "multiple": "Tourner plusieurs éléments."
                 },
                 "incomplete_relation": {
@@ -503,13 +503,13 @@
             "reset": "Réinitialiser"
         },
         "save": {
-            "title": "Sauvegarder",
-            "help": "Envoi des modifications au serveur OpenStreetMap afin qu'elles soient visibles par les autres contributeurs.",
+            "title": "Sauvegarder...",
+            "help": "Vérifiez vos modifications et envoyez les sur OpenStreetMap afin qu'elles soient visibles par les autres contributeurs.",
             "no_changes": "Aucune modification à sauvegarder",
             "error": "Des erreurs sont survenues en tentant de sauvegarder",
             "status_code": "Le serveur a renvoyé le code de statut {code}",
             "unknown_error_details": "Veuillez vérifier que votre ordinateur est connecté au réseau.",
-            "uploading": "Envoi des modifications vers OpenStreetMap.",
+            "uploading": "En cours de téléversement des modifications sur OpenStreetMap ...",
             "unsaved_changes": "Vous avez des modifications non enregistrées",
             "conflict": {
                 "header": "Résoudre les modifications conflictuelles",
@@ -543,7 +543,7 @@
             "google": "Partager sur Google+",
             "help_html": "Vos changements devraient apparaître dans le calque \"Standard\" d'ici quelques minutes. Pour d'autres calques et certains éléments, cela peut prendre plus de temps.",
             "help_link_text": "Détails",
-            "help_link_url": "https://wiki.openstreetmap.org/wiki/FAQ#I_have_just_made_some_changes_to_the_map._How_do_I_get_to_see_my_changes.3F"
+            "help_link_url": "https://wiki.openstreetmap.org/wiki/FR:FAQ#Je_viens_juste_de_faire_quelques_changements_sur_la_carte._Comment_puis-je_les_voir_.3F"
         },
         "confirm": {
             "okay": "OK",
@@ -2128,6 +2128,9 @@
                     "name": "Boîte de nuit",
                     "terms": "Boîte de nuit, Discothèque"
                 },
+                "amenity/nursing_home": {
+                    "name": "Maison de repos"
+                },
                 "amenity/parking": {
                     "name": "Parking",
                     "terms": "Parc de stationnement, Stationnement"
@@ -2242,6 +2245,10 @@
                 "amenity/social_facility/homeless_shelter": {
                     "name": "Foyer pour sans-abri",
                     "terms": "Foyer pour sans-abri"
+                },
+                "amenity/social_facility/nursing_home": {
+                    "name": "Maison de repos",
+                    "terms": "Maison de repis, Maison de convalescence, Maison de retraite médicalisée"
                 },
                 "amenity/studio": {
                     "name": "Studio",
@@ -3589,6 +3596,9 @@
                     "name": "Bois",
                     "terms": "Bois"
                 },
+                "noexit/yes": {
+                    "name": "Sans issue"
+                },
                 "office": {
                     "name": "Bureau",
                     "terms": "Bureau"
@@ -4304,6 +4314,9 @@
                 "shop/video_games": {
                     "name": "Magasin de location et vente de jeux vidéo",
                     "terms": "Magasin de location et vente de jeux vidéo"
+                },
+                "shop/watches": {
+                    "name": "Magasin de montres"
                 },
                 "shop/water_sports": {
                     "name": "Vente d'équipements et d'articles pour sports nautiques",

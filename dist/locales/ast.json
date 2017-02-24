@@ -432,12 +432,10 @@
         },
         "save": {
             "title": "Guardar",
-            "help": "Guardar cambios a OpenStreetMap, faciendolos visibles a otros usuarios.",
             "no_changes": "Nun hai cambios que guardar.",
             "error": "Hebo errores al intentar guardar",
             "status_code": "El sirvidor devolvió'l códigu d'estáu {code}",
             "unknown_error_details": "Comprueba que tienes conexón a internet.",
-            "uploading": "Xubiendo cambios a OpenStreetMap.",
             "unsaved_changes": "Tien cambios ensin guardar",
             "conflict": {
                 "header": "Iguar conflictos d'edición",
