@@ -36,6 +36,7 @@ export function rendererMap(context) {
         dblclickEnabled = true,
         redrawEnabled = true,
         transformStart = projection.transform(),
+        transformLast,
         transformed = false,
         minzoom = 0,
         drawLayers = svgLayers(projection, context),
@@ -275,12 +276,37 @@ export function rendererMap(context) {
 
 
     function zoomPan(manualEvent) {
-        var eventTransform = (manualEvent || d3.event).transform;
+        var event = (manualEvent || d3.event),
+            source = event.sourceEvent,
+            eventTransform = event.transform;
 
         if (transformStart.x === eventTransform.x &&
             transformStart.y === eventTransform.y &&
             transformStart.k === eventTransform.k) {
             return;  // no change
+        }
+
+        // Normalize mousewheel - #3029
+        // If wheel delta is provided in LINE units, recalculate it in PIXEL units
+        // We are essentially redoing the calculations that occur here:
+        //   https://github.com/d3/d3-zoom/blob/78563a8348aa4133b07cac92e2595c2227ca7cd7/src/zoom.js#L203
+        // See this for more info:
+        //   https://github.com/basilfx/normalize-wheel/blob/master/src/normalizeWheel.js
+        if (source && source.type === 'wheel' && source.deltaMode === 1 /* LINE */) {
+
+            // pick sensible scroll amount if user scrolling fast or slow..
+            var lines = Math.abs(source.deltaY),
+                scroll = lines > 2 ? 40 : lines * 10;
+
+            var t0 = transformed ? transformLast : transformStart,
+                p0 = [source.offsetX, source.offsetY],
+                p1 = t0.invert(p0),
+                k2 = t0.k * Math.pow(2, -source.deltaY * scroll / 500),
+                x2 = p0[0] - p1[0] * k2,
+                y2 = p0[1] - p1[1] * k2;
+
+            eventTransform = d3.zoomIdentity.translate(x2,y2).scale(k2);
+            _selection.node().__zoom = transformLast = eventTransform;
         }
 
         if (ktoz(eventTransform.k * 2 * Math.PI) < minzoom) {
