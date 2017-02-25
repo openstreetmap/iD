@@ -11,7 +11,7 @@ html, body {
 }
 
 body {
-    font: normal 12px/1.6667 -apple-system, BlinkMacSystemFont,
+    font: normal 12px/1.6667 "-apple-system", BlinkMacSystemFont,
         "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell",
         "Fira Sans", "Droid Sans", "Helvetica Neue", "Arial",
         sans-serif;
@@ -563,6 +563,7 @@ button.save.has-count .count::before {
     z-index: 9;
     min-width: 768px;
 }
+
 
 /* Header for modals / panes
 ------------------------------------------------------- */
@@ -2499,14 +2500,14 @@ img.tile-removing {
     bottom:0;
     border-radius: 0;
     pointer-events: none;
+    display: flex;
+    flex-direction: column;
 }
 
 #attrib {
     width: 100%;
     height: 20px;
     margin-bottom: 5px;
-    float: left;
-    clear: both;
 }
 
 #attrib * { pointer-events: all; }
@@ -2531,24 +2532,80 @@ img.tile-removing {
 }
 
 .source-image {
-    height:20px;
+    height: 20px;
     vertical-align:top;
 }
 
 #footer {
-    width: 100%;
-    float: left;
-    clear: both;
     pointer-events: all;
+    display: block;
+    height: 30px;
 }
 
+
+#flash-wrap {
+    display: flex;
+    flex: 0 0 100%;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    max-height: 30px;
+    position: absolute;
+    right: 0;
+    left: 0;
+}
+
+#flash-wrap .content {
+    display: flex;
+    flex: 1 0 auto;
+    flex-flow: row nowrap;
+    align-items: center;
+    padding: 2px;
+    height: 30px;
+}
+
+
+#flash-wrap svg.operation-icon {
+    flex: 0 0 auto;
+    width: 20px;
+    height: 20px;
+    margin: 0 8px;
+}
+
+#flash-wrap div.operation-tip {
+    flex: 1 1 auto;
+}
+
+#footer-wrap {
+    display: flex;
+    flex: 0 0 100%;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    max-height: 30px;
+    position: absolute;
+    right: 0;
+    left: 0;
+}
+
+.footer-show {
+    bottom: 0px;
+    transition: bottom 75ms linear;
+    -moz-transition: bottom 75ms linear;
+    -webkit-transition: bottom 75ms linear;
+}
+
+.footer-hide {
+    bottom: -35px;
+    transition: bottom 75ms linear;
+    -moz-transition: bottom 75ms linear;
+    -webkit-transition: bottom 75ms linear;
+}
+
+
 #scale-block {
-    display: table-cell;
     vertical-align: bottom;
     width: 250px;
     max-height: 30px;
-    float: left;
-    clear: left;
+    flex: 0 0 250px;
     -moz-user-select: none;
     -webkit-user-select: none;
     -ms-user-select: none;
@@ -2557,12 +2614,15 @@ img.tile-removing {
 
 #info-block {
     max-height: 30px;
-    clear: right;
+    flex: 1 1 auto;
 }
 
 #scale {
     height: 30px;
     width: 100%;
+}
+[dir='rtl'] #scale {
+    transform: scaleX(-1);
 }
 
 #scale:hover {
@@ -2575,6 +2635,9 @@ img.tile-removing {
     fill: #ccc;
     text-anchor: start;
 }
+[dir='rtl'] #scale text {
+    transform: scaleX(-1);
+}
 
 #scale path {
     fill: none;
@@ -2583,11 +2646,18 @@ img.tile-removing {
     shape-rendering: crispEdges;
 }
 
+
 #about-list {
     text-align: right;
     margin-right: 10px;
     clear: right;
     overflow: hidden;
+}
+[dir='rtl'] #about-list {
+    text-align: left;
+    clear: left;
+    margin-left: 10px;
+    margin-right: 0;
 }
 
 #about-list li {
@@ -2596,11 +2666,23 @@ img.tile-removing {
     padding: 5px 0 5px 5px;
     margin-left: 5px;
 }
+[dir='rtl'] #about-list li {
+    float: left;
+    border-left: none;
+    border-right: 1px solid rgba(255,255,255,.5);
+    margin-left: 0;
+    margin-right: 5px;
+    padding: 5px 5px 5px 0;
+}
+
 
 #about-list li:last-child {
     border-left: 0;
     margin-left: 0;
     padding-left: 0;
+}
+[dir='rtl'] #about-list li:last-child {
+    border-right: none;
 }
 
 .source-switch a {
@@ -2624,12 +2706,13 @@ img.tile-removing {
 }
 
 .api-status {
-    float: right;
-    clear: both;
     text-align: right;
-    width: 100%;
     padding: 0px 10px;
     color: #eee;
+    flex: 1 1 auto;
+}
+[dir='rtl'] .api-status {
+    text-align: left;
 }
 
 .api-status.offline,
@@ -2644,6 +2727,7 @@ img.tile-removing {
 .api-status-login:hover {
     color: #ccf;
 }
+
 
 /* Modals
 ------------------------------------------------------- */
@@ -3095,15 +3179,25 @@ img.tile-removing {
     border-width: 0 5px 5px;
 }
 
+.tooltip-heading {
+    font-weight: bold;
+    background: #F6F6F6;
+    padding: 10px;
+    margin: -10px -10px 10px -10px;
+    border-radius: 3px 3px 0 0;
+    font-size: 14px;
+}
+
 .keyhint-wrap {
     background: #F6F6F6;
     padding: 10px;
-    margin: 10px -10px -10px;
+    margin: 10px -10px -10px -10px;
     border-radius: 0 0 3px 3px;
 }
 
 .tooltip-inner .keyhint {
     font-weight: bold;
+    margin-left: 5px;
 }
 
 /* Exceptions for tooltip layouts */
@@ -3134,6 +3228,7 @@ img.tile-removing {
 }
 
 .map-overlay .tooltip-inner,
+.map-overlay .tooltip-heading,
 .map-overlay .keyhint-wrap,
 .entity-editor-pane .tooltip-inner,
 .warning-section .tooltip-inner {
@@ -3158,6 +3253,8 @@ img.tile-removing {
 .add-point .tooltip .tooltip-arrow {
     left: 60px;
 }
+
+/* radial menu (deprecated) */
 
 .radial-menu-tooltip {
     opacity: 0.8;
@@ -3195,6 +3292,46 @@ img.tile-removing {
     fill: rgba(32,32,32,.5);
     color: rgba(40,40,40,.5);
 }
+
+/* edit menu */
+
+.edit-menu-tooltip {
+    display: none;
+    position: absolute;
+    width: 200px;
+}
+
+.edit-menu-background {
+    fill: #eee;
+}
+
+.edit-menu-item rect {
+    fill: #eee;
+}
+
+.edit-menu-item rect:active,
+.edit-menu-item rect:hover {
+    fill: #ccc;
+}
+
+.edit-menu-item.disabled rect {
+    cursor: not-allowed;
+}
+.edit-menu-item.disabled rect:hover {
+    cursor: not-allowed;
+    fill: #eee;
+}
+
+.edit-menu-item use {
+    fill: #222;
+    color: #79f;
+}
+
+.edit-menu-item.disabled use {
+    fill: rgba(32,32,32,.2);
+    color: rgba(40,40,40,.2);
+}
+
 
 .lasso-path {
     fill-opacity:0.3;
@@ -3677,39 +3814,6 @@ img.tile-removing {
   -ms-filter: "FlipH";
 }
 
-/* footer */
-[dir='rtl'] #scale-block {
-  float: right;
-  clear: right;
-}
-
-[dir='rtl'] #info-block {
-  clear: left;
-}
-
-[dir='rtl'] #about-list {
-  text-align: left;
-  clear: left;
-  margin-left: 10px;
-  margin-right: 0;
-}
-
-[dir='rtl'] #about-list li {
-  float: left;
-  border-left: none;
-  border-right: 1px solid rgba(255,255,255,.5);
-  margin-left: 0;
-  margin-right: 5px;
-  padding: 5px 5px 5px 0;
-}
-
-[dir='rtl'] #about-list li:last-child {
-  border-right: none;
-}
-
-[dir='rtl'] #scale text {
-  text-anchor: end;
-}
 
 /* increment / decrement control - code by Naoufel Razouane */
 

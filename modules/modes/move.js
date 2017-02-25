@@ -115,7 +115,7 @@ export function modeMove(context, entityIDs, baseGraph) {
 
     function finish() {
         d3.event.stopPropagation();
-        context.enter(modeSelect(context, entityIDs).suppressMenu(true));
+        context.enter(modeSelect(context, entityIDs));
         stopNudge();
     }
 
@@ -126,7 +126,7 @@ export function modeMove(context, entityIDs, baseGraph) {
             context.enter(modeBrowse(context));
         } else {
             context.pop();
-            context.enter(modeSelect(context, entityIDs).suppressMenu(true));
+            context.enter(modeSelect(context, entityIDs));
         }
         stopNudge();
     }

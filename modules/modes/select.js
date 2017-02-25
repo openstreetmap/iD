@@ -28,9 +28,12 @@ import {
 import { modeBrowse } from './browse';
 import { modeDragNode } from './drag_node';
 import * as Operations from '../operations/index';
-import { uiRadialMenu, uiSelectionList } from '../ui/index';
+import { uiEditMenu, uiSelectionList } from '../ui';
 import { uiCmd } from '../ui/cmd';
-import { utilEntityOrMemberSelector, utilEntitySelector } from '../util/index';
+import { utilEntityOrMemberSelector, utilEntitySelector } from '../util';
+
+// deprecation warning - Radial Menu to be removed in iD v3
+import { uiRadialMenu } from '../ui';
 
 
 var relatedParent;
@@ -54,9 +57,9 @@ export function modeSelect(context, selectedIDs) {
             modeDragNode(context).selectedIDs(selectedIDs).behavior
         ],
         inspector,
-        radialMenu,
+        editMenu,
         newFeature = false,
-        suppressMenu = false,
+        suppressMenu = true,
         follow = false;
 
 
@@ -139,27 +142,24 @@ export function modeSelect(context, selectedIDs) {
 
 
     function closeMenu() {
-        if (radialMenu) {
-            context.surface().call(radialMenu.close);
+        if (editMenu) {
+            context.surface().call(editMenu.close);
         }
     }
 
 
     function positionMenu() {
-        if (suppressMenu || !radialMenu) { return; }
+        if (suppressMenu || !editMenu) { return; }
 
         var entity = singular();
         if (entity && context.geometry(entity.id) === 'relation') {
             suppressMenu = true;
-        } else if (entity && entity.type === 'node') {
-            radialMenu.center(context.projection(entity.loc));
         } else {
             var point = context.mouse(),
                 viewport = geoExtent(context.projection.clipExtent()).polygon();
+
             if (geoPointInPolygon(point, viewport)) {
-                radialMenu.center(point);
-            } else {
-                suppressMenu = true;
+                editMenu.center(point);
             }
         }
     }
@@ -167,14 +167,15 @@ export function modeSelect(context, selectedIDs) {
 
     function showMenu() {
         closeMenu();
-        if (!suppressMenu && radialMenu) {
-            context.surface().call(radialMenu);
+        if (editMenu) {
+            context.surface().call(editMenu);
         }
     }
 
 
     function toggleMenu() {
-        if (d3.select('.radial-menu').empty()) {
+        // deprecation warning - Radial Menu to be removed in iD v3
+        if (d3.select('.edit-menu, .radial-menu').empty()) {
             showMenu();
         } else {
             closeMenu();
@@ -196,7 +197,9 @@ export function modeSelect(context, selectedIDs) {
         }
 
         positionMenu();
-        showMenu();
+        if (!suppressMenu) {
+            showMenu();
+        }
     };
 
 
@@ -245,6 +248,7 @@ export function modeSelect(context, selectedIDs) {
 
                 d3.event.preventDefault();
                 d3.event.stopPropagation();
+
             } else if (datum.type === 'midpoint') {
                 context.perform(
                     actionAddMidpoint({loc: datum.loc, edge: datum.edge}, osmNode()),
@@ -306,7 +310,7 @@ export function modeSelect(context, selectedIDs) {
             if (parent) {
                 var way = context.entity(parent);
                 context.enter(
-                    modeSelect(context, [way.first()]).follow(true).suppressMenu(true)
+                    modeSelect(context, [way.first()]).follow(true)
                 );
             }
         }
@@ -318,7 +322,7 @@ export function modeSelect(context, selectedIDs) {
             if (parent) {
                 var way = context.entity(parent);
                 context.enter(
-                    modeSelect(context, [way.last()]).follow(true).suppressMenu(true)
+                    modeSelect(context, [way.last()]).follow(true)
                 );
             }
         }
@@ -342,7 +346,7 @@ export function modeSelect(context, selectedIDs) {
 
             if (index !== -1) {
                 context.enter(
-                    modeSelect(context, [way.nodes[index]]).follow(true).suppressMenu(true)
+                    modeSelect(context, [way.nodes[index]]).follow(true)
                 );
             }
         }
@@ -366,7 +370,7 @@ export function modeSelect(context, selectedIDs) {
 
             if (index !== -1) {
                 context.enter(
-                    modeSelect(context, [way.nodes[index]]).follow(true).suppressMenu(true)
+                    modeSelect(context, [way.nodes[index]]).follow(true)
                 );
             }
         }
@@ -401,7 +405,14 @@ export function modeSelect(context, selectedIDs) {
                 .map(function(o) { return o(selectedIDs, context); })
                 .filter(function(o) { return o.available(); });
 
-        operations.unshift(Operations.operationDelete(selectedIDs, context));
+        // deprecation warning - Radial Menu to be removed in iD v3
+        var isRadialMenu = context.storage('edit-menu-style') === 'radial';
+        if (isRadialMenu) {
+            operations = operations.slice(0,7);
+            operations.unshift(Operations.operationDelete(selectedIDs, context));
+        } else {
+            operations.push(Operations.operationDelete(selectedIDs, context));
+        }
 
         operations.forEach(function(operation) {
             if (operation.behavior) {
@@ -425,7 +436,11 @@ export function modeSelect(context, selectedIDs) {
         d3.select(document)
             .call(keybinding);
 
-        radialMenu = uiRadialMenu(context, operations);
+
+        // deprecation warning - Radial Menu to be removed in iD v3
+        editMenu = isRadialMenu
+            ? uiRadialMenu(context, operations)
+            : uiEditMenu(context, operations);
 
         context.ui().sidebar
             .select(singular() ? singular().id : null, newFeature);
@@ -438,12 +453,15 @@ export function modeSelect(context, selectedIDs) {
             .on('move.select', closeMenu)
             .on('drawn.select', selectElements);
 
+        context.surface()
+            .on('dblclick.select', dblclick);
+
+
         selectElements();
 
-        var show = d3.event && !suppressMenu;
-
-        if (show) {
-            positionMenu();
+        if (selectedIDs.length > 1) {
+            var entities = uiSelectionList(context, selectedIDs);
+            context.ui().sidebar.show(entities);
         }
 
         if (follow) {
@@ -459,18 +477,12 @@ export function modeSelect(context, selectedIDs) {
         }
 
         timeout = window.setTimeout(function() {
-            if (show) {
+            positionMenu();
+            if (!suppressMenu) {
                 showMenu();
             }
+        }, 270);  /* after any centerEase completes */
 
-            context.surface()
-                .on('dblclick.select', dblclick);
-        }, 200);
-
-        if (selectedIDs.length > 1) {
-            var entities = uiSelectionList(context, selectedIDs);
-            context.ui().sidebar.show(entities);
-        }
     };
 
 
@@ -485,7 +497,7 @@ export function modeSelect(context, selectedIDs) {
 
         keybinding.off();
         closeMenu();
-        radialMenu = undefined;
+        editMenu = undefined;
 
         context.history()
             .on('undone.select', null)

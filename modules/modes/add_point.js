@@ -32,7 +32,7 @@ export function modeAddPoint(context) {
         );
 
         context.enter(
-            modeSelect(context, [node.id]).suppressMenu(true).newFeature(true)
+            modeSelect(context, [node.id]).newFeature(true)
         );
     }
 

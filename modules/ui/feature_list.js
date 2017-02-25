@@ -272,7 +272,7 @@ export function uiFeatureList(context) {
                         edge = geoChooseEdge(context.childNodes(d.entity), center, context.projection);
                     context.map().center(edge.loc);
                 }
-                context.enter(modeSelect(context, [d.entity.id]).suppressMenu(true));
+                context.enter(modeSelect(context, [d.entity.id]));
             } else {
                 context.zoomToEntity(d.id);
             }

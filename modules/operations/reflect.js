@@ -26,7 +26,7 @@ export function operationReflect(selectedIDs, context, axis) {
     var operation = function() {
         var action = actionReflect(selectedIDs, context.projection)
             .useLongAxis(Boolean(axis === 'long'));
-        context.perform(action, t('operations.reflect.annotation.' + axis + '.' + multi));
+        context.perform(action, operation.annotation());
     };
 
 
@@ -67,9 +67,14 @@ export function operationReflect(selectedIDs, context, axis) {
     };
 
 
+    operation.annotation = function() {
+        return t('operations.reflect.annotation.' + axis + '.' + multi);
+    };
+
+
     operation.id = 'reflect-' + axis;
     operation.keys = [t('operations.reflect.key.' + axis)];
-    operation.title = t('operations.reflect.title');
+    operation.title = t('operations.reflect.title.' + axis);
     operation.behavior = behaviorOperation(context).which(operation);
 
     return operation;

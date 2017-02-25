@@ -274,9 +274,7 @@ export function uiCommit(context) {
         function warningClick(d) {
             if (d.entity) {
                 context.map().zoomTo(d.entity);
-                context.enter(
-                    modeSelect(context, [d.entity.id]).suppressMenu(true)
-                );
+                context.enter(modeSelect(context, [d.entity.id]));
             }
         }
 
@@ -286,8 +284,7 @@ export function uiCommit(context) {
             if (change.changeType !== 'deleted' &&
                 context.graph().entity(entity.id).geometry(context.graph()) !== 'vertex') {
                 context.map().zoomTo(entity);
-                context.surface().selectAll(
-                    utilEntityOrMemberSelector([entity.id], context.graph()))
+                context.surface().selectAll(utilEntityOrMemberSelector([entity.id], context.graph()))
                     .classed('hover', true);
             }
         }

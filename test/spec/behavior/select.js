@@ -44,37 +44,49 @@ describe('iD.behaviorSelect', function() {
     });
 
     specify('click on entity selects the entity', function() {
-        happen.click(context.surface().selectAll('.' + a.id).node());
+        var el = context.surface().selectAll('.' + a.id).node();
+        happen.mousedown(el);
+        happen.mouseup(el);
         expect(context.selectedIDs()).to.eql([a.id]);
     });
 
     specify('click on empty space clears the selection', function() {
         context.enter(iD.modeSelect(context, [a.id]));
-        happen.click(context.surface().node());
+        var el = context.surface().node();
+        happen.mousedown(el);
+        happen.mouseup(el);
         expect(context.mode().id).to.eql('browse');
     });
 
     specify('shift-click on unselected entity adds it to the selection', function() {
         context.enter(iD.modeSelect(context, [a.id]));
-        happen.click(context.surface().selectAll('.' + b.id).node(), {shiftKey: true});
+        var el = context.surface().selectAll('.' + b.id).node();
+        happen.mousedown(el, { shiftKey: true });
+        happen.mouseup(el, { shiftKey: true });
         expect(context.selectedIDs()).to.eql([a.id, b.id]);
     });
 
     specify('shift-click on selected entity removes it from the selection', function() {
         context.enter(iD.modeSelect(context, [a.id, b.id]));
-        happen.click(context.surface().selectAll('.' + b.id).node(), {shiftKey: true});
+        var el = context.surface().selectAll('.' + b.id).node();
+        happen.mousedown(el, { shiftKey: true });
+        happen.mouseup(el, { shiftKey: true });
         expect(context.selectedIDs()).to.eql([a.id]);
     });
 
     specify('shift-click on last selected entity clears the selection', function() {
         context.enter(iD.modeSelect(context, [a.id]));
-        happen.click(context.surface().selectAll('.' + a.id).node(), {shiftKey: true});
+        var el = context.surface().selectAll('.' + a.id).node();
+        happen.mousedown(el, { shiftKey: true });
+        happen.mouseup(el, { shiftKey: true });
         expect(context.mode().id).to.eql('browse');
     });
 
     specify('shift-click on empty space leaves the selection unchanged', function() {
         context.enter(iD.modeSelect(context, [a.id]));
-        happen.click(context.surface().node(), {shiftKey: true});
+        var el = context.surface().node();
+        happen.mousedown(el, { shiftKey: true });
+        happen.mouseup(el, { shiftKey: true });
         expect(context.selectedIDs()).to.eql([a.id]);
     });
 });

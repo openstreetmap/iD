@@ -116,6 +116,7 @@ export function uiInit(context) {
             .attr('class', 'spinner')
             .call(uiSpinner(context));
 
+
         var controls = bar
             .append('div')
             .attr('class', 'map-controls');
@@ -145,6 +146,7 @@ export function uiInit(context) {
             .attr('class', 'map-control help-control')
             .call(uiHelp(context));
 
+
         var about = content
             .append('div')
             .attr('id', 'about');
@@ -155,6 +157,12 @@ export function uiInit(context) {
             .attr('dir', 'ltr')
             .call(uiAttribution(context));
 
+        about
+            .append('div')
+            .attr('class', 'api-status')
+            .call(uiStatus(context));
+
+
         var footer = about
             .append('div')
             .attr('id', 'footer')
@@ -162,15 +170,20 @@ export function uiInit(context) {
 
         footer
             .append('div')
-            .attr('class', 'api-status')
-            .call(uiStatus(context));
+            .attr('id', 'flash-wrap')
+            .attr('class', 'footer-hide');
 
-        footer
+        var footerWrap = footer
+            .append('div')
+            .attr('id', 'footer-wrap')
+            .attr('class', 'footer-show');
+
+        footerWrap
             .append('div')
             .attr('id', 'scale-block')
             .call(uiScale(context));
 
-        var aboutList = footer
+        var aboutList = footerWrap
             .append('div')
             .attr('id', 'info-block')
             .append('ul')
