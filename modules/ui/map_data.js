@@ -411,6 +411,7 @@ export function uiMapData(context) {
                     window.onOSMreload = function() {
                         window.onOSMreload = null;
                         refreshGeoService(context.storage('geoserviceLayerUrl'), geoserviceDownloadAll);
+                        toggle();
                     };
                 })
                 .attr('class', 'no-float hide')

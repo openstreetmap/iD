@@ -1524,10 +1524,14 @@ text.geoservice {
     font-weight: bold;
 }
 
-.geoservice-pane td:first-child, .geoservice-pane th:first-child {
+.geoservice-pane td, .geoservice-pane th {
     border: 1px solid #ccc;
     padding-left: 7px;
     border-right: none;
+}
+
+.geoservice-pane td:last-child {
+    border-left: none;
 }
 
 .geoservice-pane table input {
@@ -1536,7 +1540,7 @@ text.geoservice {
     border-bottom: none;
 }
 
-.geoservice-pane th:first-child {
+.geoservice-pane th {
     border: none;
 }
 

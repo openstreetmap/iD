@@ -502,13 +502,11 @@ export function svgGeoService(projection, context, dispatch) {
     
     drawGeoService.preset = function(preset) {
         // get / set an individual preset, or reset to null
-        console.log(preset);
+        var presetBox = this.pane().selectAll('.preset');
         if (preset) {
             // console.log(preset)
             // preset.tags { }
             // preset.fields[{ keys: [], strings: { placeholders: { } } }]
-            
-            var presetBox = this.pane().selectAll('.preset');
             if (!preset.icon) {
                 preset.icon = 'marker-stroked';
             }
@@ -643,9 +641,13 @@ export function svgGeoService(projection, context, dispatch) {
                         var suggestedTags = [];
                         if (setPreset) {
                             _.map(setPreset.fields, function(field) {
-                                 suggestedTags = suggestedTags.concat(_.map(field.keys, function(key) {
-                                     return { value: key };
-                                 }));
+                                if (field.keys) {
+                                    suggestedTags = suggestedTags.concat(_.map(field.keys, function(key) {
+                                        return { value: key };
+                                    }));
+                                } else if (field.key) {
+                                    suggestedTags.push({ value: field.key });
+                                }
                             });
                         }
                         cb(suggestedTags.filter(function(d) {
