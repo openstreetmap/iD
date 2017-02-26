@@ -93,6 +93,7 @@ export function uiEntityEditor(context) {
             }.bind(this));
         
         var deleteButton = importApprove.append('button')
+            .text('Reject')
             .on('click', (function() {
                 if (this.focusEntity && this.focusEntity.importOriginal) {
                     // modified object: delete button restores original tags
@@ -111,11 +112,6 @@ export function uiEntityEditor(context) {
         // show import approval section?
         d3.selectAll('.import-approve').classed('hide', entity.approvedForEdit || (d3.select('input[name="approvalProcess"]:checked').property('value') === 'all'));
         
-        // delete button should appear differently when properties were merged
-        deleteButton.text(
-            (this.focusEntity && this.focusEntity.importOriginal) ? 'Undo Changes' : 'Delete'
-        );
-
         enter
             .append('div')
             .attr('class', 'preset-list-item inspector-inner')
