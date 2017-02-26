@@ -1484,27 +1484,27 @@ g.turn circle {
     pointer-events: visibleStroke;
 }
 
-/* Esri layer */
-.layer-esri {
+/* GeoService layer */
+.layer-geoservice {
     pointer-events: none;
 }
 
-path.esri {
+path.geoservice {
     stroke: #FF26D4;
     stroke-width: 2;
     fill: none;
 }
 
-path.esri-polygon, path.esri-multipolygon {
+path.geoservice-polygon, path.geoservice-multipolygon {
     fill: #FF26D4;
     fill-opacity: 0.18;
 }
 
-text.esri {
+text.geoservice {
     fill: #FF26D4;
 }
 
-.esri-pane button {
+.geoservice-pane button {
     float: right;
     background: #ccc;
     padding-left: 14px;
@@ -1512,66 +1512,66 @@ text.esri {
     margin-top: 5px;
 }
 
-.esri-pane button.no-float {
+.geoservice-pane button.no-float {
     float: none;
 }
 
-.esri-pane .inspector-inner {
+.geoservice-pane .inspector-inner {
     padding: 0;
 }
 
-.esri-pane th {
+.geoservice-pane th {
     font-weight: bold;
 }
 
-.esri-pane td:first-child, .esri-pane th:first-child {
+.geoservice-pane td:first-child, .geoservice-pane th:first-child {
     border: 1px solid #ccc;
     padding-left: 7px;
     border-right: none;
 }
 
-.esri-pane table input {
+.geoservice-pane table input {
     border-radius: 0 4px 4px 0;
     padding-left: 2px;
     border-bottom: none;
 }
 
-.esri-pane th:first-child {
+.geoservice-pane th:first-child {
     border: none;
 }
 
-.esri-pane tr:last-child input {
+.geoservice-pane tr:last-child input {
     border-bottom: 1px solid rgb(204, 204, 204);
     margin-bottom: -1px;
     border-radius: 0 4px 0 0;
 }
 
-.esri-pane button.add-tag {
+.geoservice-pane button.add-tag {
     margin-top: 0;
 }
 
-.esri-pane button.url {
+.geoservice-pane button.url {
     border-radius: 0 0 4px 4px;
     margin-top: 0;
 }
 
-.esri-pane .topurl input[type='text'] {
+.geoservice-pane .topurl input[type='text'] {
     margin-top: 10px;
 }
 
-.esri-pane .preset {
+.geoservice-pane .preset {
   margin-top: 50px;
   font-weight: bold;
 }
 
-.esri-pane .import-approval {
+.geoservice-pane .import-approval {
   border: 1px solid #ccc;
   border-radius: 8px;
   padding: 11px;
   margin-top: 10px;
 }
 
-.esri-pane .import-approval label {
+.geoservice-pane .import-approval label {
     display: block;
 }
 
@@ -1603,15 +1603,15 @@ text.esri {
     right: auto !important;
 }
 
-.esri-table.hide, .esri-pane .hide {
+.geoservice-table.hide, .geoservice-pane .hide {
     display: none !important;
 }
 
-.esri-pane.shaded {
+.geoservice-pane.shaded {
     z-index: 9 !important;
 }
 
-.esri-pane .preset-icon-fill, .esri-pane .preset-icon {
+.geoservice-pane .preset-icon-fill, .geoservice-pane .preset-icon {
     display: inline-block;
     margin: 0;
     left: auto;
@@ -1619,20 +1619,20 @@ text.esri {
     position: static;
 }
 
-.esri-pane .preset-icon-fill {
+.geoservice-pane .preset-icon-fill {
     margin-bottom: -20px;
 }
 
-.esri-pane .preset-icon {
+.geoservice-pane .preset-icon {
     margin-left: -36px;
     margin-right: 20px;
 }
 
-.esri-pane .point-in-polygon, .esri-pane .merge-lines {
+.geoservice-pane .point-in-polygon, .geoservice-pane .merge-lines {
     display: none;
 }
 
-.esri-pane .must-show {
+.geoservice-pane .must-show {
     display: block !important;
 }
 

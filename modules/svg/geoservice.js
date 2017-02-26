@@ -23,39 +23,41 @@ window.knownObjectIds = {};
 // keeping track of added OSM entities
 window.importedEntities = [];
 
-export function svgEsri(projection, context, dispatch) {
+export function svgGeoService(projection, context, dispatch) {
     var detected = utilDetect();
 
     function init() {
-        if (svgEsri.initialized) return;  // run once
+        if (svgGeoService.initialized) return;  // run once
 
-        svgEsri.geojson = {};
-        svgEsri.enabled = true;
+        svgGeoService.geojson = {};
+        svgGeoService.enabled = true;
 
         function over() {
             d3.event.stopPropagation();
             d3.event.preventDefault();
             d3.event.dataTransfer.dropEffect = 'copy';
         }
-
+        
+        /*
         d3.select('body')
             .attr('dropzone', 'copy')
-            .on('drop.localesri', function() {
+            .on('drop.localgeoservice', function() {
                 d3.event.stopPropagation();
                 d3.event.preventDefault();
                 if (!detected.filedrop) return;
-                drawEsri.files(d3.event.dataTransfer.files);
+                drawGeoService.files(d3.event.dataTransfer.files);
             })
-            .on('dragenter.localesri', over)
-            .on('dragexit.localesri', over)
-            .on('dragover.localesri', over);
+            .on('dragenter.localgeoservice', over)
+            .on('dragexit.localgeoservice', over)
+            .on('dragover.localgeoservice', over);
+        */
 
-        svgEsri.initialized = true;
+        svgGeoService.initialized = true;
     }
     
-    function drawEsri(selection) {
-        var geojson = svgEsri.geojson,
-            enabled = svgEsri.enabled,
+    function drawGeoService(selection) {
+        var geojson = svgGeoService.geojson,
+            enabled = svgGeoService.enabled,
             gjids = {},
             pointInPolygon = false,
             mergeLines = false;
@@ -221,7 +223,7 @@ export function svgEsri(projection, context, dispatch) {
                     originalProperties[key] = d.properties[key];
                 });
 
-                var adjustedFeature = processGeoFeature({ properties: originalProperties }, esriLayer = context.layers().layer('esri').preset());
+                var adjustedFeature = processGeoFeature({ properties: originalProperties }, gsLayer = context.layers().layer('geoservice').preset());
                 
                 context.perform(
                     actionChangeTags(wayid, adjustedFeature.properties),
@@ -470,36 +472,37 @@ export function svgEsri(projection, context, dispatch) {
     }
 
     
-    drawEsri.pane = function() {
-        if (!this.esripane) {
-            this.esripane = d3.selectAll('.esri-pane');
+    drawGeoService.pane = function() {
+        if (!this.geoservicepane) {
+            this.geoservicepane = d3.selectAll('.geoservice-pane');
         }
-        return this.esripane;
+        return this.geoservicepane;
     };
 
-    drawEsri.enabled = function(_) {
-        if (!arguments.length) return svgEsri.enabled;
-        svgEsri.enabled = _;
+    drawGeoService.enabled = function(_) {
+        if (!arguments.length) return svgGeoService.enabled;
+        svgGeoService.enabled = _;
         dispatch.call('change');
         return this;
     };
 
 
-    drawEsri.hasData = function() {
-        var geojson = svgEsri.geojson;
+    drawGeoService.hasData = function() {
+        var geojson = svgGeoService.geojson;
         return (!(_.isEmpty(geojson) || _.isEmpty(geojson.features)));
     };
     
-    drawEsri.windowOpen = function() {
+    drawGeoService.windowOpen = function() {
         return !this.pane().classed('hide');
     };
     
-    drawEsri.awaitingUrl = function() {
+    drawGeoService.awaitingUrl = function() {
         return this.windowOpen() && (!this.pane().selectAll('.topurl').classed('hide'));
     };
     
-    drawEsri.preset = function(preset) {    
+    drawGeoService.preset = function(preset) {
         // get / set an individual preset, or reset to null
+        console.log(preset);
         if (preset) {
             // console.log(preset)
             // preset.tags { }
@@ -553,15 +556,15 @@ export function svgEsri(projection, context, dispatch) {
                 .property('checked', false);
     };
 
-    drawEsri.geojson = function(gj) {
-        if (!arguments.length) return svgEsri.geojson;
+    drawGeoService.geojson = function(gj) {
+        if (!arguments.length) return svgGeoService.geojson;
         if (_.isEmpty(gj) || _.isEmpty(gj.features)) return this;
-        svgEsri.geojson = gj;
+        svgGeoService.geojson = gj;
         dispatch.call('change');
         return this;
     };
 
-    drawEsri.url = function(true_url, downloadMax) {
+    drawGeoService.url = function(true_url, downloadMax) {
         if (!this.originalURL) {
             this.originalURL = true_url;
         }
@@ -606,7 +609,7 @@ export function svgEsri(projection, context, dispatch) {
         var that = this;
         d3.text(url, function(err, data) {
             if (err) {
-                console.log('Esri service URL did not load');
+                console.log('GeoService URL did not load');
                 console.error(err);
             } else {
                 // convert EsriJSON text to GeoJSON object
@@ -619,7 +622,7 @@ export function svgEsri(projection, context, dispatch) {
                 }
 
                 that.pane().selectAll('h3').text('Set import attributes');
-                var esriTable = d3.selectAll('.esri-table');
+                var geoserviceTable = d3.selectAll('.geoservice-table');
                 
                 var convertedKeys = Object.keys(window.layerImports);
                 
@@ -630,7 +633,7 @@ export function svgEsri(projection, context, dispatch) {
                     // adding text over the sample data makes it into an OSM tag
                     var samplefeature = jsondl.features[0];
                     var keys = Object.keys(samplefeature.properties);
-                    esriTable.html('<thead class="tag-row"><th>Esri Service</th><th>OSM tag</th></thead>');
+                    geoserviceTable.html('<thead class="tag-row"><th>GeoService field</th><th>Sample Value</th><th>OSM tag</th></thead>');
                     
                     
                     // suggested keys
@@ -662,14 +665,15 @@ export function svgEsri(projection, context, dispatch) {
                             return doKey(r + 1);
                         }
         
-                        var row = esriTable.append('tr');
+                        var row = geoserviceTable.append('tr');
                         row.append('td').text(keys[r]); // .attr('class', 'key-wrap');
+                        row.append('td').text(samplefeature.properties[keys[r]] || '');
                         
                         var suggestedKeys = d3combobox().fetcher(fetcher).minItems(0);
                         var outfield = row.append('td').append('input');
                         outfield.attr('type', 'text')
                             .attr('name', keys[r])
-                            .attr('placeholder', (window.layerImports[keys[r]] || samplefeature.properties[keys[r]]))
+                            .attr('placeholder', (window.layerImports[keys[r]] || ''))
                             .call(suggestedKeys)
                             .on('change', function() {
                                 // properties with this.name renamed to this.value
@@ -691,7 +695,7 @@ export function svgEsri(projection, context, dispatch) {
                 }
                 
                 // send the modified geo-features to the draw layer
-                drawEsri.geojson(jsondl);
+                drawGeoService.geojson(jsondl);
             }
         });
 
@@ -712,10 +716,10 @@ export function svgEsri(projection, context, dispatch) {
         return this;
     };
 
-    drawEsri.fitZoom = function() {
+    drawGeoService.fitZoom = function() {
         // todo: implement
         if (!this.hasData()) return this;
-        var geojson = svgEsri.geojson;
+        var geojson = svgGeoService.geojson;
 
         var map = context.map(),
             viewport = map.trimmedExtent().polygon(),
@@ -734,5 +738,5 @@ export function svgEsri(projection, context, dispatch) {
 
 
     init();
-    return drawEsri;
+    return drawGeoService;
 }

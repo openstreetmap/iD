@@ -29,10 +29,10 @@ export function uiPresetList(context) {
         }
 
         var presets = context.presets();
-        var esriLayer = context.layers().layer('esri');
+        var gsLayer = context.layers().layer('geoservice');
         
         // when the import menu is activated, show every kind of preset, regardless of geometry
-        if (!seeAllGeos && (!esriLayer.windowOpen() || !esriLayer.awaitingUrl())) {
+        if (!seeAllGeos && (!gsLayer.windowOpen() || !gsLayer.awaitingUrl())) {
             presets = presets.matchGeometry(geometry);
         }
         window.presetReloadFunction = function(seeAllGeos) {
@@ -260,9 +260,9 @@ export function uiPresetList(context) {
         item.choose = function() {
             context.presets().choose(preset);
             
-            // avoid editing the last-selected option, if we are using preset UI for an Esri import
-            var esriLayer = context.layers().layer('esri');
-            if (!esriLayer.windowOpen() || !esriLayer.awaitingUrl()) {
+            // avoid editing the last-selected option, if we are using preset UI for a GeoService import
+            var gsLayer = context.layers().layer('geoservice');
+            if (!gsLayer.windowOpen() || !gsLayer.awaitingUrl()) {
                 context.perform(
                     actionChangePreset(id, currentPreset, preset),
                     t('operations.change_tags.annotation')

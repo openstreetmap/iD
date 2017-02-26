@@ -9,8 +9,8 @@ import { tooltip } from '../util/tooltip';
 
 export function uiMapData(context) {
     var key = t('map_data.key'),
-        esriLayerUrl = context.storage('esriLayerUrl') || '',
-        esriDownloadAll = true,
+        geoserviceLayerUrl = context.storage('geoserviceLayerUrl') || '',
+        geoserviceDownloadAll = true,
         features = context.features().keys(),
         layers = context.layers(),
         fills = ['wireframe', 'partial', 'full'],
@@ -190,41 +190,41 @@ export function uiMapData(context) {
                 .classed('deemphasize', !showsMapillaryImages);
         }
 
-        function drawEsriItem(selection) {
-            var esriLayer = layers.layer('esri'),
-                hasData = esriLayer && esriLayer.hasData(),
-                showsEsri = hasData && esriLayer.enabled();
+        function drawGeoServiceItem(selection) {
+            var geoserviceLayer = layers.layer('geoservice'),
+                hasData = geoserviceLayer && geoserviceLayer.hasData(),
+                showsGeoService = hasData && geoserviceLayer.enabled();
             
-            var esriLayerItem = selection
-                .selectAll('.layer-list-esri')
-                .data(esriLayer ? [0] : []);
+            var geoserviceLayerItem = selection
+                .selectAll('.layer-list-geoservice')
+                .data(geoserviceLayer ? [0] : []);
 
             // Exit
-            esriLayerItem.exit()
+            geoserviceLayerItem.exit()
                 .remove();
 
             // Enter
             
-            var enter = esriLayerItem.enter()
+            var enter = geoserviceLayerItem.enter()
                 .append('ul')
-                .attr('class', 'layer-list layer-list-esri')
+                .attr('class', 'layer-list layer-list-geoservice')
                 .append('li')
-                .classed('list-item-esri', true);
+                .classed('list-item-geoservice', true);
         
-            var labelEsri = enter
+            var labelGeoService = enter
               .append('label')
-              .call(tooltip().title('Enter an Esri service URL').placement('top'));
+              .call(tooltip().title('Enter a GeoService URL').placement('top'));
 
-            labelEsri.append('button')
+            labelGeoService.append('button')
                 .attr('class', 'layer-browse')
-                .on('click', editEsriLayer)
+                .on('click', editGeoService)
                 .call(svgIcon('#icon-search'));
 
-            labelEsri
+            labelGeoService
                 .append('span')
-                .text('Input Esri layer');
+                .text('Input GeoService layer');
 
-            // create ESRI layer edit pane only once            
+            // create GeoService layer edit pane only once            
             if (this.pane) {
                 return;
             }
@@ -246,12 +246,12 @@ export function uiMapData(context) {
             
             // based on the help pane            
             this.pane = d3.selectAll('#content').append('div')
-                .attr('class', 'shaded hide esri-pane')
+                .attr('class', 'shaded hide geoservice-pane')
                 .append('div').attr('class', 'modal fillL col8')
                 .append('div').attr('class', 'cf')
                 .append('div').attr('class', 'modal-section');
             /*
-                .attr('class', 'help-wrap map-overlay fillL col5 content hide esri-pane');
+                .attr('class', 'help-wrap map-overlay fillL col5 content hide geoservice-pane');
             */
                         
             // exit button
@@ -265,7 +265,7 @@ export function uiMapData(context) {
             
             // title
             content.append('h3')
-                .text('Import an Esri service by URL');
+                .text('Import a GeoService by URL');
             
             var body = content.append('div')
                 .attr('class', 'body');
@@ -275,22 +275,22 @@ export function uiMapData(context) {
                 .attr('class', 'topurl');
             urlEntry.append('input')
                 .attr('type', 'text')
-                .attr('placeholder', 'Esri service URL')
-                .attr('value', context.storage('esriLayerUrl') || '');
+                .attr('placeholder', 'GeoService URL')
+                .attr('value', context.storage('geoserviceLayerUrl') || '');
             urlEntry.append('button')
                 .attr('class', 'url')
-                .text('Download View')
+                .text('Load In View')
                 .on('click', function() {
-                    esriDownloadAll = false;
-                    setEsriLayer(this.parentElement.firstChild.value, esriDownloadAll);
+                    geoserviceDownloadAll = false;
+                    setGeoService(this.parentElement.firstChild.value, geoserviceDownloadAll);
                 });
             urlEntry.append('button')
                 .attr('class', 'url')
                 .attr('style', 'margin-right: 10px')
-                .text('Download All')
+                .text('Load Globally')
                 .on('click', function() {
-                    esriDownloadAll = true;
-                    setEsriLayer(this.parentElement.firstChild.value, esriDownloadAll);
+                    geoserviceDownloadAll = true;
+                    setGeoService(this.parentElement.firstChild.value, geoserviceDownloadAll);
                 });
             
             // known iD presets
@@ -298,7 +298,7 @@ export function uiMapData(context) {
                 .attr('class', 'preset');
             preset.append('label')
                 .attr('class', 'preset-prompt')
-                .text('OpenStreetMap preset (select from left)');
+                .text('OpenStreetMap preset (search in left sidebar)');
             preset.append('div').attr('class', 'preset-icon-fill preset-icon-fill-area hide');
             preset.append('div').attr('class', 'preset-icon preset-icon-32 hide').append('svg');
             preset.append('span').attr('class', 'preset-prompt');
@@ -309,7 +309,7 @@ export function uiMapData(context) {
                 .attr('style', 'float: none !important')
                 .text('x')
                 .on('click', function() {
-                    context.layers().layer('esri').preset(null);
+                    context.layers().layer('geoservice').preset(null);
                 });
             
             // point-in-polygon, merge line options
@@ -363,10 +363,10 @@ export function uiMapData(context) {
             
             body.append('table')
                     .attr('border', '1')
-                    .attr('class', 'esri-table hide') // tag-list
+                    .attr('class', 'geoservice-table hide') // tag-list
                     .append('img').attr('src', 'img/loader-white.gif');
             
-            // this button adds a new field to data brought in from the Esri service
+            // this button adds a new field to data brought in from the GeoService
             // for example you can add addr:state=VA to a city's addresses which otherwise wouldn't have this repeated field
             body.append('div')
                 .attr('class', 'inspector-inner hide')
@@ -374,7 +374,7 @@ export function uiMapData(context) {
                     .attr('class', 'add-tag')
                     .call(svgIcon('#icon-plus', 'icon light'))
                     .on('click', function() {
-                        var row = d3.selectAll('.esri-table').append('tr');
+                        var row = d3.selectAll('.geoservice-table').append('tr');
                         var uniqNum = Math.floor(Math.random() * 10000);
 
                         // the 'key' field, showing the new OSM tag key
@@ -410,7 +410,7 @@ export function uiMapData(context) {
                     window.importedEntities = [];
                     window.onOSMreload = function() {
                         window.onOSMreload = null;
-                        refreshEsriLayer(context.storage('esriLayerUrl'), esriDownloadAll);
+                        refreshGeoService(context.storage('geoserviceLayerUrl'), geoserviceDownloadAll);
                     };
                 })
                 .attr('class', 'no-float hide')
@@ -423,17 +423,17 @@ export function uiMapData(context) {
         }
         
         function toggle() {
-            // show and hide Esri data import pane
-            var esriPane = layers.layer('esri').pane();
-            var hideMe = !esriPane.classed('hide');
-            esriPane.classed('hide', hideMe);
+            // show and hide GeoService data import pane
+            var geoservicePane = layers.layer('geoservice').pane();
+            var hideMe = !geoservicePane.classed('hide');
+            geoservicePane.classed('hide', hideMe);
             
             // show autocomplete of presets
-            var esriLayer = layers.layer('esri');
-            if (!esriLayer.hasData()) {
+            var geoserviceLayer = layers.layer('geoservice');
+            if (!geoserviceLayer.hasData()) {
                 d3.selectAll('.feature-list-pane').classed('inspector-hidden editor-overwrite', !hideMe);
                 if (!hideMe) {
-                    //console.log('show Esri, remove inspector-hidden, add editor-overwrite');
+                    //console.log('show GeoService, remove inspector-hidden, add editor-overwrite');
                     d3.selectAll('.inspector-wrap, .preset-list-pane, .entity-editor-pane')
                         .classed('inspector-hidden', false)
                         .classed('editor-overwrite', true);
@@ -443,14 +443,14 @@ export function uiMapData(context) {
                 }
             }
             if (hideMe) {
-                //console.log('hide Esri, remove editor-overwrite');
+                //console.log('hide GeoService, remove editor-overwrite');
                 // allow normal menu use
                 d3.selectAll('.editor-overwrite').classed('editor-overwrite', false);
             }
         }
         
-        function editEsriLayer() {
-            // window allows user to enter an ArcGIS layer
+        function editGeoService() {
+            // window allows user to enter a GeoService layer
             d3.event.preventDefault();
             toggle();
             
@@ -460,24 +460,24 @@ export function uiMapData(context) {
             }
         }
 
-        function setEsriLayer(template, downloadMax) {
-            // remember Esri service URL for future visits
-            context.storage('esriLayerUrl', template);
+        function setGeoService(template, downloadMax) {
+            // remember GeoService URL for future visits
+            context.storage('geoserviceLayerUrl', template);
             
-            // un-hide Esri pane and buttons
-            var esriLayer = layers.layer('esri');
-            esriLayer.pane()
+            // un-hide GeoService pane and buttons
+            var gsLayer = layers.layer('geoservice');
+            gsLayer.pane()
                 .classed('hide', false)
                 .property('scrollTop', 0)
                 .selectAll('.hide').classed('hide', false);
 
-            // hide Esri Service URL input
-            esriLayer.pane().selectAll('.topurl').classed('hide', true);
+            // hide GeoService URL input
+            gsLayer.pane().selectAll('.topurl').classed('hide', true);
             d3.selectAll('.editor-overwrite').classed('editor-overwrite', false);
             
             // if there is an OSM preset, add it to set tags
             window.layerImports = {};
-            var setPreset = context.layers().layer('esri').preset();
+            var setPreset = context.layers().layer('geoservice').preset();
             if (setPreset) {
                 // set standard tags
                 var tags = Object.keys(setPreset.tags);
@@ -492,15 +492,14 @@ export function uiMapData(context) {
                 });
             }
             
-            refreshEsriLayer(template, downloadMax);
+            refreshGeoService(template, downloadMax);
         }
         
-        function refreshEsriLayer(template, downloadMax) {
+        function refreshGeoService(template, downloadMax) {
             // start loading data onto the map
-            var esriLayer = context.layers().layer('esri');
-            esriLayer.url(template, downloadMax);
-            
-            esriLayer.pane().classed('hide', false);
+            var gsLayer = context.layers().layer('geoservice');
+            gsLayer.url(template, downloadMax);
+            gsLayer.pane().classed('hide', false);
         }
 
         function drawGpxItem(selection) {
@@ -637,7 +636,7 @@ export function uiMapData(context) {
 
         function update() {
             dataLayerContainer.call(drawMapillaryItems);
-            dataLayerContainer.call(drawEsriItem);
+            dataLayerContainer.call(drawGeoServiceItem);
             dataLayerContainer.call(drawGpxItem);
 
             fillList.call(drawList, fills, 'radio', 'area_fill', setFill, showsFill);

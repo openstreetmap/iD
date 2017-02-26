@@ -91,9 +91,9 @@ export function rendererBackground(context) {
             .filter(function (d) { return !d.source().isLocatorOverlay(); })
             .forEach(function (d) { imageryUsed.push(d.source().imageryUsed()); });
 
-        var esriLayer = context.layers().layer('esri');
-        if (esriLayer && esriLayer.enabled() && esriLayer.hasData()) {
-            imageryUsed.push('Esri Service');
+        var gsLayer = context.layers().layer('geoservice');
+        if (gsLayer && gsLayer.enabled() && gsLayer.hasData()) {
+            imageryUsed.push('GeoService');
         }
 
         var gpx = context.layers().layer('gpx');
@@ -273,11 +273,11 @@ export function rendererBackground(context) {
             }
         });
 
-        if (q.esri) {
+        if (q.geoservice) {
             setTimeout(function() {
-                var esriLayer = context.layers().layer('esri');
-                if (esriLayer) {
-                    esriLayer.url(q.esri);
+                var gsLayer = context.layers().layer('geoservice');
+                if (gsLayer) {
+                    gsLayer.url(q.geoservice);
                 }
             }, 500);
         }

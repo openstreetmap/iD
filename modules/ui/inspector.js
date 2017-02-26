@@ -82,10 +82,10 @@ export function uiInspector(context) {
 
 
         function setPreset(preset) {
-            var esriLayer = context.layers().layer('esri');
-            if (!esriLayer.hasData() && esriLayer.windowOpen()) {
+            var gsLayer = context.layers().layer('geoservice');
+            if (!gsLayer.hasData() && gsLayer.windowOpen()) {
                 // appear to be calling for this to be my preset
-                esriLayer.preset(preset);
+                gsLayer.preset(preset);
             } else {
                 // standard preset behavior
                 wrap.transition()

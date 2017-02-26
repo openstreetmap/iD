@@ -52,12 +52,10 @@ export function behaviorHash(context) {
             '/' + center[1].toFixed(precision) +
             '/' + center[0].toFixed(precision);
         
-        /*
-        var esriLayer = context.layers().layer('esri').originalURL;
-        if (esriLayer) {
-            q.esri = esriLayer;
+        var gsLayer = context.layers().layer('geoservice').originalURL;
+        if (gsLayer) {
+            q.geoservice = gsLayer;
         }
-        */
 
         return '#' + utilQsString(_.assign(q, newParams), true);
     };
