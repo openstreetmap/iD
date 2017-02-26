@@ -1763,7 +1763,7 @@
                 "trail_visibility": {
                     "label": "Synlighed af spor",
                     "options": {
-                        "bad": "Dårlig: ​​ingen markører, sti til tider usynlig / sporløs",
+                        "bad": "Dårlig: ingen markører, sti til tider usynlig / sporløs",
                         "excellent": "Fremragende: entydig sti eller markører overalt",
                         "good": "God: markører synlige, undertiden kræves søgning",
                         "horrible": "Frygtelig: ofte sporløs, kræver visse orienteringsfærdigheder",
@@ -1824,8 +1824,8 @@
                     "terms": "adresse, adresser"
                 },
                 "advertising/billboard": {
-                    "name": "Billboard",
-                    "terms": "Billboard, Gadeopslagstavle"
+                    "name": "Reklameskilt",
+                    "terms": "Reklameskilt, Gadeopslagstavle"
                 },
                 "aerialway": {
                     "name": "Skiliftbane"
@@ -1922,7 +1922,7 @@
                 },
                 "amenity/bank": {
                     "name": "Bank",
-                    "terms": "Bank, Pengeinstitut,  Sparekasse, Andelskasse"
+                    "terms": "Bank, Pengeinstitut, Sparekasse, Andelskasse"
                 },
                 "amenity/bar": {
                     "name": "Bar",
@@ -2203,8 +2203,8 @@
                     "terms": "Restaurant, Spisested, Spisehus"
                 },
                 "amenity/sanitary_dump_station": {
-                    "name": "Tørcloset-toilet funtionsområde",
-                    "terms": "Tørcloset-toilet funtionsområde"
+                    "name": "Tørcloset-toilet deponering",
+                    "terms": "Tørcloset-toilet deponering"
                 },
                 "amenity/school": {
                     "name": "Skolegrund",
@@ -2238,8 +2238,8 @@
                     "name": "Svømmebassin"
                 },
                 "amenity/taxi": {
-                    "name": "Taxaholdeplads",
-                    "terms": "<oversæt med synonymer eller beslægtet termer for 'Taxaholdeplads', adskilt med kommaer>"
+                    "name": "Taxiholdeplads",
+                    "terms": "<oversæt med synonymer eller beslægtet termer for 'Taxiholdeplads', adskilt med kommaer>"
                 },
                 "amenity/telephone": {
                     "name": "Telefon",
@@ -2817,7 +2817,7 @@
                 },
                 "golf/rough": {
                     "name": "Rough",
-                    "terms": "Rough, Højt gras"
+                    "terms": "Rough, Højt græs"
                 },
                 "golf/tee": {
                     "name": "Tee Box",
@@ -2903,8 +2903,8 @@
                     "terms": "Primærvej"
                 },
                 "highway/primary_link": {
-                    "name": "Link til primær vej",
-                    "terms": "Link til primær vej"
+                    "name": "Link til primærvej",
+                    "terms": "Link til primærvej"
                 },
                 "highway/raceway": {
                     "name": "Racerbane",
@@ -2923,12 +2923,12 @@
                     "terms": "Ukendt vejtype"
                 },
                 "highway/secondary": {
-                    "name": "Sekundær vej",
+                    "name": "Sekundærvej",
                     "terms": "Sekundærvej"
                 },
                 "highway/secondary_link": {
-                    "name": "Link til sekundær vej",
-                    "terms": "Link til sekundær vej"
+                    "name": "Link til sekundærvej",
+                    "terms": "Link til sekundærvej"
                 },
                 "highway/service": {
                     "name": "Servicevej",
@@ -3059,8 +3059,8 @@
                     "terms": "kolonihaveområde, kolonihave, "
                 },
                 "landuse/basin": {
-                    "name": "Basin",
-                    "terms": "Basin"
+                    "name": "Bassin",
+                    "terms": "Bassin"
                 },
                 "landuse/cemetery": {
                     "name": "Gravplads ",
@@ -3609,8 +3609,8 @@
                     "terms": "Arbejdsformidling, Jobcenter"
                 },
                 "office/estate_agent": {
-                    "name": "Ejendomsmælger",
-                    "terms": "Ejendomsmælger"
+                    "name": "Ejendomsmægler",
+                    "terms": "Ejendomsmægler"
                 },
                 "office/financial": {
                     "name": "Finanskontor",
@@ -3805,7 +3805,7 @@
                 },
                 "railway/platform": {
                     "name": "Jernbaneperron",
-                    "terms": "Jernbaneperron, Perron "
+                    "terms": "Jernbaneperron, Perron"
                 },
                 "railway/rail": {
                     "name": "Jernbanespor",
@@ -3892,7 +3892,7 @@
                 },
                 "shop/beverages": {
                     "name": "Vinforhandler",
-                    "terms": "Vinforretning"
+                    "terms": "Vinforhandler, Vinforretning"
                 },
                 "shop/bicycle": {
                     "name": "Cykelbutik",
@@ -4178,8 +4178,8 @@
                     "terms": "Malerforretning, Malerbutik"
                 },
                 "shop/pastry": {
-                    "name": "Pasterbutik",
-                    "terms": "Pasterbutik, Pastaforretning"
+                    "name": "konditori",
+                    "terms": "konditori"
                 },
                 "shop/pawnbroker": {
                     "name": "Panteudlåner",
