@@ -277,28 +277,13 @@ export function uiMapData(context) {
                 .attr('type', 'text')
                 .attr('placeholder', 'GeoService URL')
                 .attr('value', context.storage('geoserviceLayerUrl') || '');
-            urlEntry.append('button')
-                .attr('class', 'url')
-                .text('Load In View')
-                .on('click', function() {
-                    geoserviceDownloadAll = false;
-                    setGeoService(this.parentElement.firstChild.value, geoserviceDownloadAll);
-                });
-            urlEntry.append('button')
-                .attr('class', 'url')
-                .attr('style', 'margin-right: 10px')
-                .text('Load Globally')
-                .on('click', function() {
-                    geoserviceDownloadAll = true;
-                    setGeoService(this.parentElement.firstChild.value, geoserviceDownloadAll);
-                });
-            
+
             // known iD presets
             var preset = urlEntry.append('div')
                 .attr('class', 'preset');
             preset.append('label')
                 .attr('class', 'preset-prompt')
-                .text('OpenStreetMap preset (search in left sidebar)');
+                .text('Optional: preset type (search in left sidebar)');
             preset.append('div').attr('class', 'preset-icon-fill preset-icon-fill-area hide');
             preset.append('div').attr('class', 'preset-icon preset-icon-32 hide').append('svg');
             preset.append('span').attr('class', 'preset-prompt');
@@ -360,6 +345,22 @@ export function uiMapData(context) {
                 .attr('name', 'approvalProcess')
                 .attr('value', 'all');
             allApproval.append('span').text('Import all features by default');
+            
+            urlEntry.append('button')
+                .attr('class', 'url')
+                .text('Load In View')
+                .on('click', function() {
+                    geoserviceDownloadAll = false;
+                    setGeoService(this.parentElement.firstChild.value, geoserviceDownloadAll);
+                });
+            urlEntry.append('button')
+                .attr('class', 'url')
+                .attr('style', 'margin-right: 10px')
+                .text('Load Globally')
+                .on('click', function() {
+                    geoserviceDownloadAll = true;
+                    setGeoService(this.parentElement.firstChild.value, geoserviceDownloadAll);
+                });
             
             body.append('table')
                     .attr('border', '1')

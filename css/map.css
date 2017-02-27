@@ -1555,8 +1555,10 @@ text.geoservice {
 }
 
 .geoservice-pane button.url {
-    border-radius: 0 0 4px 4px;
+    /* border-radius: 0 0 4px 4px; */
+    border-radius: 4px;
     margin-top: 0;
+    margin-bottom: 6px;
 }
 
 .geoservice-pane .topurl input[type='text'] {
