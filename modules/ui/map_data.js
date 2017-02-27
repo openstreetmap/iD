@@ -247,7 +247,7 @@ export function uiMapData(context) {
             // based on the help pane            
             this.pane = d3.selectAll('#content').append('div')
                 .attr('class', 'shaded hide geoservice-pane')
-                .append('div').attr('class', 'modal fillL col8')
+                .append('div').attr('class', 'modal fillL col9')
                 .append('div').attr('class', 'cf')
                 .append('div').attr('class', 'modal-section');
             /*
@@ -341,7 +341,7 @@ export function uiMapData(context) {
             
             // radio buttons to decide how data is finalized on OSM
             var approvalPhase = urlEntry.append('div')
-                .attr('class', 'import-approval');
+                .attr('class', 'import-approval hide');
             approvalPhase.append('h4').text('Review data before importing?');
             
             var individualApproval = approvalPhase.append('label');

@@ -16,6 +16,7 @@ import { d3combobox } from '../lib/d3.combobox.js';
 
 // dictionary matching geo-properties to OpenStreetMap tags 1:1
 window.layerImports = {};
+window.layerUnchecked = {};
 
 // prevent re-downloading and re-adding the same feature
 window.knownObjectIds = {};
@@ -433,8 +434,13 @@ export function svgGeoService(projection, context, dispatch) {
     function processGeoFeature(selectfeature, preset) {
         // when importing an object, accept users' changes to keys
         var convertedKeys = Object.keys(window.layerImports);
-        var presetKeysLength = preset || 0;
-        
+        var additionalKeys = Object.keys(selectfeature.properties);
+        for (var a = 0; a < additionalKeys.length; a++) {
+            if (!window.layerImports[additionalKeys[a]] && additionalKeys[a] !== 'OBJECTID') {
+                convertedKeys.push(additionalKeys[a]);
+            }
+        }
+                
         // keep the OBJECTID to make sure we don't download the same data multiple times
         var outprops = {
             OBJECTID: selectfeature.properties.OBJECTID
@@ -446,28 +452,30 @@ export function svgGeoService(projection, context, dispatch) {
             var osmv = null;
 
             if (convertedKeys[k].indexOf('add_') === 0) {
+                // user or preset has added a key:value pair to all objects
                 osmk = convertedKeys[k].substring(4);
                 osmv = window.layerImports[convertedKeys[k]];
             } else {
-                osmv = selectfeature.properties[convertedKeys[k]];
+                var originalKey = convertedKeys[k];
+                var approval = !window.layerUnchecked[originalKey];
+                if (!approval) {
+                    // user unchecked box, does not want this imported
+                    continue;
+                }
+                
+                // user checked or kept box checked, should be imported
+                osmv = selectfeature.properties[originalKey];
                 if (osmv) {
-                    osmk = window.layerImports[convertedKeys[k]];
+                    osmk = window.layerImports[originalKey] || originalKey;
                 }
             }
                 
             if (osmk) {
-                if (convertedKeys.length > presetKeysLength) {
-                    // user directs any transferred keys
-                    outprops[osmk] = osmv;
-                } else {
-                    // merge keys
-                    selectfeature.properties[osmk] = osmv;
-                }
+                // user directs any transferred keys
+                outprops[osmk] = osmv;
             }
         }
-        if (Object.keys(outprops).length > 1) {
-            selectfeature.properties = outprops;
-        }
+        selectfeature.properties = outprops;
         return selectfeature;
     }
 
@@ -631,8 +639,7 @@ export function svgGeoService(projection, context, dispatch) {
                     // adding text over the sample data makes it into an OSM tag
                     var samplefeature = jsondl.features[0];
                     var keys = Object.keys(samplefeature.properties);
-                    geoserviceTable.html('<thead class="tag-row"><th>GeoService field</th><th>Sample Value</th><th>OSM tag</th></thead>');
-                    
+                    geoserviceTable.html('<thead class="tag-row"><th>Include?</th><th>GeoService field</th><th>Sample Value</th><th>(optional) OSM tag</th></thead>');
                     
                     // suggested keys
                     var setPreset = that.preset();
@@ -668,6 +675,14 @@ export function svgGeoService(projection, context, dispatch) {
                         }
         
                         var row = geoserviceTable.append('tr');
+                        row.append('td')
+                            .append('input')
+                                .attr('class', keys[r].replace(/\s/g, '_'))
+                                .attr('type', 'checkbox')
+                                .property('checked', !window.layerUnchecked[keys[r]])
+                                .on('change', function() {
+                                    window.layerUnchecked[keys[r]] = !this.checked;
+                                });
                         row.append('td').text(keys[r]); // .attr('class', 'key-wrap');
                         row.append('td').text(samplefeature.properties[keys[r]] || '');
                         
@@ -689,12 +704,9 @@ export function svgGeoService(projection, context, dispatch) {
                     console.log('no feature to build table from');
                 }
                                 
-                if (convertedKeys.length > 0) {
-                    // if any import properties were added, make these mods and reject all other properties
-                    _.map(jsondl.features, function(selectfeature) {
-                        return processGeoFeature(selectfeature, that.preset());
-                    });
-                }
+                _.map(jsondl.features, function(selectfeature) {
+                    return processGeoFeature(selectfeature, that.preset());
+                });
                 
                 // send the modified geo-features to the draw layer
                 drawGeoService.geojson(jsondl);
