@@ -62,7 +62,7 @@ g.vertex .stroke {
 }
 
 g.vertex.shared .stroke {
-    fill: #aaa;
+    fill: #bbb;
 }
 
 g.midpoint .fill {

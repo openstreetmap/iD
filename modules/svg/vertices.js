@@ -1,4 +1,5 @@
 import * as d3 from 'd3';
+import { dataFeatureIcons } from '../../data/index';
 import { osmEntity } from '../osm/index';
 import { svgPointTransform } from './index';
 
@@ -130,7 +131,12 @@ export function svgVertices(projection, context) {
         enter.filter(function(d) { return icon(d); })
             .append('use')
             .attr('transform', 'translate(-5, -6)')
-            .attr('xlink:href', function(d) { return '#' + icon(d) + '-11'; })
+            .attr('xlink:href', function(d) {
+                var picon = icon(d),
+                    isPoi = picon.match(/^poi-/) !== null,
+                    isMaki = dataFeatureIcons.indexOf(picon) !== -1;
+                return '#' + picon + (isMaki ? '-11' : '');
+            })
             .attr('width', '11px')
             .attr('height', '11px')
             .each(setClass('icon'));

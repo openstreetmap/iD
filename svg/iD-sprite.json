@@ -261,12 +261,14 @@
     "poi-yield":                { "viewBox": "430 320 15 15" },
     "poi-stop":                 { "viewBox": "445 320 15 15" },
     "poi-warning":              { "viewBox": "460 320 15 15" },
+    "poi-fire-hydrant":         { "viewBox": "475 320 15 15" },
 
     "poi-foot-shape":              { "fill": "currentColor" },
     "poi-traffic-signals-shape":   { "fill": "currentColor" },
     "poi-yield-shape":             { "fill": "currentColor" },
     "poi-stop-shape":              { "fill": "currentColor" },
     "poi-warning-shape":           { "fill": "currentColor" },
+    "poi-fire-hydrant-shape":      { "fill": "currentColor" },
 
     "turn-yes":                 { "viewBox": "200 320 44 24" },
     "turn-no":                  { "viewBox": "244 320 44 24" },
