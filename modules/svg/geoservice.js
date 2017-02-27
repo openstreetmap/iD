@@ -440,6 +440,8 @@ export function svgGeoService(projection, context, dispatch) {
                 convertedKeys.push(additionalKeys[a]);
             }
         }
+        console.log('use these keys');
+        console.log(convertedKeys);
                 
         // keep the OBJECTID to make sure we don't download the same data multiple times
         var outprops = {
@@ -613,6 +615,7 @@ export function svgGeoService(projection, context, dispatch) {
         }
                 
         var that = this;
+        console.log('attempting download from ' + url);
         d3.text(url, function(err, data) {
             if (err) {
                 console.log('GeoService URL did not load');
@@ -632,6 +635,7 @@ export function svgGeoService(projection, context, dispatch) {
                 
                 var convertedKeys = Object.keys(window.layerImports);
                 
+                console.log('downloaded ' + jsondl.features.length + ' features');
                 if (jsondl.features.length) {
                     // make a row for each GeoJSON property
                     // existing name appears as a label

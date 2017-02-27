@@ -411,6 +411,8 @@ export function uiMapData(context) {
                     window.importedEntities = [];
                     window.onOSMreload = function() {
                         window.onOSMreload = null;
+                        console.log('refreshing ' + context.storage('geoserviceLayerUrl'));
+                        console.log('download all? ' + geoserviceDownloadAll);
                         refreshGeoService(context.storage('geoserviceLayerUrl'), geoserviceDownloadAll);
                         toggle();
                     };
@@ -500,6 +502,7 @@ export function uiMapData(context) {
         function refreshGeoService(template, downloadMax) {
             // start loading data onto the map
             var gsLayer = context.layers().layer('geoservice');
+            gsLayer.lastBounds = null;
             gsLayer.url(template, downloadMax);
             gsLayer.pane().classed('hide', false);
         }
