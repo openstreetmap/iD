@@ -30,6 +30,7 @@
     "icon-forward":             { "viewBox": "560 0 20 20" },
     "icon-up":                  { "viewBox": "580 0 20 20" },
     "icon-down":                { "viewBox": "600 0 20 20" },
+    "icon-more":                { "viewBox": "620 0 20 20" },
 
     "icon-alert-shape":               { "fill": "currentColor" },
     "icon-point-shape":               { "fill": "currentColor" },
@@ -66,6 +67,7 @@
     "icon-forward-shape":             { "fill": "currentColor" },
     "icon-up-shape":                  { "fill": "currentColor" },
     "icon-down-shape":                { "fill": "currentColor" },
+    "icon-more-shape":                { "fill": "currentColor" },
 
     "highway-motorway":         { "viewBox": "0 20 60 60" },
     "highway-trunk":            { "viewBox": "60 20 60 60" },
@@ -254,6 +256,18 @@
     "restriction":              { "viewBox": "480 260 60 60" },
     "multipolygon":             { "viewBox": "540 260 60 60" },
 
+    "poi-foot":                 { "viewBox": "400 320 15 15" },
+    "poi-traffic-signals":      { "viewBox": "415 320 15 15" },
+    "poi-yield":                { "viewBox": "430 320 15 15" },
+    "poi-stop":                 { "viewBox": "445 320 15 15" },
+    "poi-warning":              { "viewBox": "460 320 15 15" },
+
+    "poi-foot-shape":              { "fill": "currentColor" },
+    "poi-traffic-signals-shape":   { "fill": "currentColor" },
+    "poi-yield-shape":             { "fill": "currentColor" },
+    "poi-stop-shape":              { "fill": "currentColor" },
+    "poi-warning-shape":           { "fill": "currentColor" },
+
     "turn-yes":                 { "viewBox": "200 320 44 24" },
     "turn-no":                  { "viewBox": "244 320 44 24" },
     "turn-only":                { "viewBox": "288 320 44 24" },
@@ -278,6 +292,9 @@
     "operation-continue":       { "viewBox": "440 380 20 20" },
     "operation-reflect-long":   { "viewBox": "460 380 20 20" },
     "operation-reflect-short":  { "viewBox": "480 380 20 20" },
+    "operation-layers":         { "viewBox": "500 380 20 20" },
+    "operation-copy":           { "viewBox": "520 380 20 20" },
+    "operation-paste":          { "viewBox": "540 380 20 20" },
 
     "operation-delete-shape":         { "fill": "inherit" },
     "operation-circularize-shape":    { "fill": "inherit" },
@@ -305,6 +322,12 @@
     "operation-reflect-long-shape2":  { "fill": "currentColor" },
     "operation-reflect-short-shape":  { "fill": "inherit" },
     "operation-reflect-short-shape2": { "fill": "currentColor" },
+    "operation-layers-shape":         { "fill": "inherit" },
+    "operation-copy-shape":           { "fill": "inherit" },
+    "operation-copy-shape2":          { "fill": "inherit" },
+    "operation-paste-shape":          { "fill": "inherit" },
+    "operation-paste-shape2":         { "fill": "inherit" },
+    "operation-paste-shape3":         { "fill": "inherit" },
 
     "logo-twitter":             { "viewBox": "200 400 60 60" },
     "logo-facebook":            { "viewBox": "260 400 60 60" },
