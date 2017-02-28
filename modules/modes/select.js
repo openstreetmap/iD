@@ -149,7 +149,7 @@ export function modeSelect(context, selectedIDs) {
 
 
     function positionMenu() {
-        if (suppressMenu || !editMenu) { return; }
+        if (!editMenu) { return; }
 
         var entity = singular();
         if (entity && context.geometry(entity.id) === 'relation') {
@@ -176,6 +176,7 @@ export function modeSelect(context, selectedIDs) {
     function toggleMenu() {
         // deprecation warning - Radial Menu to be removed in iD v3
         if (d3.select('.edit-menu, .radial-menu').empty()) {
+            positionMenu();
             showMenu();
         } else {
             closeMenu();
