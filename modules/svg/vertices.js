@@ -133,7 +133,6 @@ export function svgVertices(projection, context) {
             .attr('transform', 'translate(-5, -6)')
             .attr('xlink:href', function(d) {
                 var picon = icon(d),
-                    isPoi = picon.match(/^poi-/) !== null,
                     isMaki = dataFeatureIcons.indexOf(picon) !== -1;
                 return '#' + picon + (isMaki ? '-11' : '');
             })
